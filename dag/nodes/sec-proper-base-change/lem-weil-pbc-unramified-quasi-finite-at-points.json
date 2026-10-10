@@ -2,19 +2,98 @@
  "id": "lem-weil-pbc-unramified-quasi-finite-at-points",
  "kind": "statement",
  "title": "An unramified morphism is quasi-finite at every point",
- "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is unramified [def-weil-unramified-morphism]. Then $f$ is quasi-finite at every point $x\\in X$ in the sense of [pqf-def-quasifinite] (1): there are an affine open $\\operatorname{Spec}A=U\\subseteq X$ containing $x$ and an affine open $\\operatorname{Spec}R=V\\subseteq S$ with $f(U)\\subseteq V$ such that $R\\to A$ is of finite type and $x$, viewed as a prime $\\mathfrak q\\subset A$ over $\\mathfrak p\\subset R$, is an isolated point of $\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))$. In other words, $f$ is locally quasi-finite [pqf-def-quasifinite] (2). (Stacks Project, Morphisms, Lemma 02V5 (lemma-unramified-quasi-finite); proof: Algebra, Lemma 02UR (lemma-unramified-quasi-finite).)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is unramified [def-weil-unramified-morphism]. Then $f$ is quasi-finite at every point $x\\in X$ in the sense of [pqf-def-quasifinite] (1): there are an affine open $\\operatorname{Spec}A=U\\subseteq X$ containing $x$ and an affine open $\\operatorname{Spec}R=V\\subseteq S$ [def-weil-affine-spectrum] with $f(U)\\subseteq V$ such that $R\\to A$ is of finite type and quasi-finite at the prime $\\mathfrak q\\subset A$ corresponding to $x$ [def-weil-pbc-ring-map-quasi-finite-at-prime]: with $\\mathfrak p\\subset R$ the prime below $\\mathfrak q$ and $\\kappa(\\mathfrak p)$ its residue field [def-weil-pbc-localization-at-prime], the point of $\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))$ corresponding to $\\mathfrak q$ is an isolated point. In other words, $f$ is locally quasi-finite [pqf-def-quasifinite] (2).",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 02V5 (lemma-unramified-quasi-finite), lines 7779-7788; its proof is Algebra, Lemma 02UR (algebra.tex, lemma-unramified-quasi-finite, line 41599), which uses Algebra, Lemmas lemma-isolated-point-fibre (2) and lemma-unramified-at-prime"
+  "place": "Morphisms, Lemma 02V5 (lemma-unramified-quasi-finite), lines 7779-7788; its proof is Algebra, Lemma 02UR (algebra.tex, lemma-unramified-quasi-finite, line 41599), which uses Algebra, Lemma 00PK (lemma-isolated-point-fibre, line 30196) part (2) and Lemma 00UW (lemma-unramified-at-prime, line 41568)"
  },
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-unramified-morphism",
+  "pqf-def-quasifinite",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "*Affine charts and an unramified ring map.* Let $x\\in X$ and $s=f(x)$. Since affine opens form a basis of the topology of a scheme [def-pc-scheme], choose an affine open $V\\subseteq S$ containing $s$ and an affine open $U\\subseteq f^{-1}(V)$ containing $x$, with isomorphisms $V\\cong\\operatorname{Spec}R$, $U\\cong\\operatorname{Spec}A$ [def-weil-affine-spectrum]; then $f(U)\\subseteq V$. By clause (2) of [lem-weil-pbc-unramified-base-change-open] the restriction $f|_U:U\\to V$ is unramified. Under the identifications, $f|_U$ is $\\operatorname{Spec}\\varphi$ for a unique ring map $\\varphi:R\\to A$ (every morphism of affine schemes is $\\operatorname{Spec}$ of a unique ring map), and $\\operatorname{Spec}\\varphi$ is unramified, since it differs from $f|_U$ by composition with isomorphisms on both sides and being locally of finite type with open immersion diagonal [def-weil-unramified-morphism] is carried along isomorphisms of schemes. By [lem-weil-pbc-unramified-ring-map-iff-unramified-affine] (direction 'only if'), $A$ is a finitely generated $R$-algebra via $\\varphi$ and $\\Omega_{A/R}=0$ [def-weil-pbc-kahler-differentials]. In particular $R\\to A$ is of finite type. (Stacks, Algebra, Lemma 02UR: 'An unramified ring map is of finite type'; the passage from schemes to rings is Morphisms, Lemma 02V5, whose proof refers to Algebra 02UR.)",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-unramified-base-change-open",
+    "def-weil-unramified-morphism",
+    "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 02V5 (lemma-unramified-quasi-finite, lines 7779-7788) and its proof; Algebra, proof of Lemma 02UR (algebra.tex line 41599), first sentence"
+   }
+  },
+  {
+   "text": "*The fibre ring is unramified over $\\kappa(\\mathfrak p)$.* Let $\\mathfrak q\\subset A$ be the prime corresponding to $x$ and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ (the prime corresponding to $s$), with residue field $\\kappa(\\mathfrak p)$, and let $F=A\\otimes_R\\kappa(\\mathfrak p)$ be the fibre ring [def-weil-pbc-localization-at-prime], a $\\kappa(\\mathfrak p)$-algebra via $\\lambda\\mapsto1\\otimes\\lambda$. If $a_1,\\dots,a_m$ generate $A$ as an $R$-algebra, then $a_1\\otimes1,\\dots,a_m\\otimes1$ generate $F$ as a $\\kappa(\\mathfrak p)$-algebra (every $a\\otimes\\lambda=(a\\otimes1)\\lambda$ and $a$ is a polynomial in the $a_i$ with coefficients from $R$), so $F$ is a finitely generated $\\kappa(\\mathfrak p)$-algebra. By [lem-weil-pbc-kahler-differentials-base-change] applied to $R\\to R'=\\kappa(\\mathfrak p)$ and $R\\to A$, with $A'=\\kappa(\\mathfrak p)\\otimes_RA$, we have $\\Omega_{A'/\\kappa(\\mathfrak p)}\\cong\\kappa(\\mathfrak p)\\otimes_R\\Omega_{A/R}=0$ by step 1; the swap $\\kappa(\\mathfrak p)\\otimes_RA\\to A\\otimes_R\\kappa(\\mathfrak p)$, $\\lambda\\otimes a\\mapsto a\\otimes\\lambda$, is an isomorphism of $\\kappa(\\mathfrak p)$-algebras, so $\\Omega_{F/\\kappa(\\mathfrak p)}=0$ [def-weil-pbc-kahler-differentials]. Thus $\\kappa(\\mathfrak p)\\to F$ is an unramified ring map (Stacks, Algebra, Definition 00UT), and by [lem-weil-pbc-unramified-ring-map-iff-unramified-affine] (direction 'if') the morphism $\\operatorname{Spec}F\\to\\operatorname{Spec}\\kappa(\\mathfrak p)$ induced by the structure map is unramified [def-weil-unramified-morphism]. (Stacks, proof of Algebra, Lemma 00UW: 'The base change $S\\otimes_R\\kappa(\\mathfrak p)$ is unramified over $\\kappa(\\mathfrak p)$ by Lemma 00UV', whose proof is the base change of differentials, Algebra, Lemma 00RV.)",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00UW (lemma-unramified-at-prime, line 41568), lines 41584-41586, with Lemma 00UV (lemma-unramified) and Lemma 00RV (lemma-differentials-base-change)"
+   }
+  },
+  {
+   "text": "*The fibre is a finite discrete space.* By [lem-weil-pbc-unramified-algebra-over-field-product] applied to $k=\\kappa(\\mathfrak p)$ and $C=F$ (step 2), there are $n\\ge0$, finite separable field extensions $L_1,\\dots,L_n$ of $\\kappa(\\mathfrak p)$ and an isomorphism of $\\kappa(\\mathfrak p)$-algebras $F\\cong L_1\\times\\cdots\\times L_n$. By [lem-weil-pbc-spec-finite-product-fields] (2) the space $\\operatorname{Spec}(L_1\\times\\cdots\\times L_n)$ is discrete. A ring isomorphism $\\theta:F\\to L_1\\times\\cdots\\times L_n$ induces the homeomorphism $\\mathfrak Q\\mapsto\\theta^{-1}(\\mathfrak Q)$ of spectra [def-weil-affine-spectrum] (its inverse is induced by $\\theta^{-1}$), so $\\operatorname{Spec}F$ is discrete: every one-point subset of $\\operatorname{Spec}F$ is open. (Stacks, proof of Algebra, Lemma 00UW: 'Hence $F=S\\otimes_R\\kappa(\\mathfrak p)$ is a finite product of finite separable field extensions of $\\kappa(\\mathfrak p)$'.)",
+   "uses": [
+    "lem-weil-pbc-unramified-algebra-over-field-product",
+    "lem-weil-pbc-spec-finite-product-fields",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00UW (lemma-unramified-at-prime, line 41568), lines 41586-41592, with Lemma 00U3 (lemma-etale-over-field)"
+   }
+  },
+  {
+   "text": "*Conclusion.* By [lem-weil-pbc-fibre-ring-primes-bijection] there is a unique prime $\\overline{\\mathfrak q}$ of $F$ with $j^{-1}(\\overline{\\mathfrak q})=\\mathfrak q$, where $j:A\\to F$, $a\\mapsto a\\otimes1$; by step 3 the set $\\{\\overline{\\mathfrak q}\\}$ is open in $\\operatorname{Spec}F$, i.e. $\\overline{\\mathfrak q}$ is an isolated point of $\\operatorname{Spec}(A\\otimes_R\\kappa(\\mathfrak p))$. Since $R\\to A$ is of finite type (step 1), this says by [def-weil-pbc-ring-map-quasi-finite-at-prime] that $R\\to A$ is quasi-finite at $\\mathfrak q$. With the affine opens $U\\ni x$, $V$ of step 1 ($f(U)\\subseteq V$), this is the condition of [pqf-def-quasifinite] (1): $f$ is quasi-finite at $x$. As $x\\in X$ was arbitrary, $f$ is locally quasi-finite [pqf-def-quasifinite] (2). (Stacks, Algebra, Lemma 02UR, proof: 'apply the characterization of Lemma 00PK part (2) using Lemma 00UW'. Stacks deduces from 00UW that $S_{\\mathfrak q}/\\mathfrak pS_{\\mathfrak q}=F_{\\overline{\\mathfrak q}}=\\kappa(\\mathfrak q)$ is finite over $\\kappa(\\mathfrak p)$, condition (2) of 00PK, and then condition (1) by the equivalence of 00PK; here condition (1) of 00PK, the definition [def-weil-pbc-ring-map-quasi-finite-at-prime] uses, is read off directly from the discreteness of the whole fibre $\\operatorname{Spec}F$ shown in the proof of 00UW, which makes the equivalence (2)$\\Leftrightarrow$(1) of 00PK unnecessary.)",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 02UR (lemma-unramified-quasi-finite, line 41599) and its proof, with Lemma 00PK (lemma-isolated-point-fibre, line 30196) and Definition 00PL (definition-quasi-finite)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-unramified-base-change-open",
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-unramified-ring-map-iff-unramified-affine",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-unramified-algebra-over-field-product",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 02UR (lemma-unramified-quasi-finite, line 41599) with the proof of Lemma 00UW (lemma-unramified-at-prime, line 41568), as cited by Morphisms, Lemma 02V5 (lemma-unramified-quasi-finite, morphisms.tex lines 7779-7788)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +122,31 @@
    "results": "algebra-level instance `[EssFiniteType R S] [FormallyUnramified R S] : QuasiFinite R S` (RingTheory/Unramified/LocalStructure.lean:331-333); Mathlib's Algebra.QuasiFinite (RingTheory/QuasiFinite/Basic.lean:67) is 'every fibre kappa(p) (x)_R S is finite over kappa(p)', which its docstring says differs from Stacks 00PL; scheme-level LocallyQuasiFinite (Morphisms/QuasiFinite.lean:73) is the affine-local version of it; no file of AlgebraicGeometry mentions both FormallyUnramified and QuasiFinite",
    "date": "2026-10-10",
    "verdict": "no match: candidate route (algebra instance + HasRingHomProperty for LocallyQuasiFinite + Scheme.Hom.quasiFiniteAt / quasiFiniteAt_iff_isOpen_singleton_asFiber), but Mathlib's quasi-finiteness differs from Stacks' and the agreement is a theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unramified morphism of schemes locally of finite type and formally unramified implies locally quasi-finite",
+   "results": "Algebra.Unramified.mk, AlgebraicGeometry.LocallyQuasiFinite.mk, RingHom.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.recOn/casesOn, instLocallyQuasiFiniteOfIsFinite, instLocallyQuasiFiniteOfIsImmersion (Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite / FormallyUnramified)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an unramified ring map of finite type is quasi-finite at every prime; the fibre is a finite product of finite separable field extensions",
+   "results": "Algebra.Unramified.finiteType, Algebra.IsUnramifiedAt (+ .comp, .of_restrictScalars, .of_liesOver) (RingTheory.Unramified.Locus, NumberTheory.RamificationInertia.Unramified), Algebra.unramifiedLocus",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|lemma\\|theorem' Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; grep -rn 'QuasiFinite' Mathlib/RingTheory/Unramified/*.lean Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; grep -rln LocallyQuasiFinite Mathlib",
+   "results": "LocallyQuasiFinite (QuasiFinite.lean:70, affine-local with Mathlib's RingHom.QuasiFinite), HasRingHomProperty @LocallyQuasiFinite RingHom.QuasiFinite (:76), instances from IsFinite, IsImmersion, IsPreimmersion, UniversallyInjective+LocallyOfFiniteType; Scheme.Hom.QuasiFiniteAt (:340, stalk map quasi-finite), quasiFiniteAt_iff_isOpen_singleton_asFiber; algebra instance [EssFiniteType R S] [FormallyUnramified R S] : Algebra.QuasiFinite R S (RingTheory/Unramified/LocalStructure.lean:331); LocallyQuasiFinite used only in Morphisms/QuasiFinite.lean and ZariskisMainTheorem.lean; no instance FormallyUnramified f -> LocallyQuasiFinite f",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib route LocallyOfFiniteType+FormallyUnramified -> LocallyQuasiFinite via HasRingHomProperty and the LocalStructure instance takes several lines, and Mathlib's quasi-finiteness (finite fibres over kappa(p)) agrees with Stacks 00PL only by a theorem (quasiFiniteAt_iff_isOpen_singleton_asFiber); Lean candidate for stage 2"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +166,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks Morphisms 02V5 and Algebra 02UR: mathematically kept; the trailing tag sentence '(Stacks Project, Morphisms, Lemma 02V5 ...; proof: Algebra, Lemma 02UR ...)' was removed from the statement (it stays in source), and the inline description of 'quasi-finite at x' now cites def-weil-pbc-ring-map-quasi-finite-at-prime for the prime of the fibre ring corresponding to q (stmt_deps gained def-weil-affine-spectrum, def-weil-pbc-ring-map-quasi-finite-at-prime, def-weil-pbc-localization-at-prime). Source place corrected: 00UW (not 00UV) is lemma-unramified-at-prime, 00PK (not 00PJ) is lemma-isolated-point-fibre. Proof in four steps following Algebra 02UR with the proof of 00UW: (1) affine charts, restriction unramified (lem-weil-pbc-unramified-base-change-open (2)) and Spec-to-ring translation (leaf lem-weil-pbc-unramified-ring-map-iff-unramified-affine): R->A finite type with Omega=0; (2) fibre ring F=A(x)kappa(p) finitely generated with Omega=0 by the leaf lem-weil-pbc-kahler-differentials-base-change, hence Spec F -> Spec kappa(p) unramified; (3) F is a finite product of finite separable extensions (lem-weil-pbc-unramified-algebra-over-field-product) so Spec F is discrete (lem-weil-pbc-spec-finite-product-fields (2)); (4) the prime of F over q (lem-weil-pbc-fibre-ring-primes-bijection) is isolated: quasi-finite at q (def-weil-pbc-ring-map-quasi-finite-at-prime), i.e. pqf-def-quasifinite (1), for every x. Deviation from the letter of 02UR: Stacks goes through 00PK (2) (S_q/pS_q = kappa(q) finite) and the equivalence (2)<=>(1) of 00PK; here (1) is read off the discreteness of the whole fibre, which the proof of 00UW establishes, so no node for 00PK or 00PJ is needed. Not used (would close a cycle): lem-weil-pbc-unramified-fibre-point-isolated and lem-weil-pbc-unramified-over-field-discrete (Stacks 02G7, which cites this item). No new nodes. All cited nodes are in unit sk-thm-p1 or are definitions/leaves."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps following Algebra 02UR/00UW with existing nodes only: affine charts and the unramified ring map (finite type, Omega = 0); the fibre ring is unramified over kappa(p) (Kahler base change); it is a finite product of finite separable extensions (existing node) with discrete spectrum (00ED item); the prime over q is isolated, which is the definition of quasi-finite at q. Statement: tag sentence removed, isolated point made precise, stmt_deps completed."
+ }
 }

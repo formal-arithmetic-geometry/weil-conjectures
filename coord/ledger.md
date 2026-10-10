@@ -785,3 +785,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:06 L: reviewed lem-weil-pbc-theorem-formal-functions (7 steps, +02OB node) and lem-weil-pbc-subcategory-right-resolution-05T6 (6 steps, +3 leaves): accepted.
 - 02:09 L: reviewed lem-weil-pbc-universal-thickening-flat-base-change (5 steps, +3: 09ZU, 01R4, 0473 nodes): accepted. Worker's finding for stage 3 / the owner of sec-picard-framework: the imported node lem-pc-closed-imm-base-change says the ideal of a base-changed closed immersion is g^* I_Z; without flatness it is only the image of g^* I_Z -> O (Schemes 01JU (1)).
 - 02:11 L: reviewed lem-weil-pbc-universal-thickening-open-restriction (5 steps, +2 leaves) and lem-weil-pbc-universal-first-order-thickening-exists (7 steps, +5 after removing a duplicate 02HC leaf): accepted.
+- 02:11 L: reviewed lem-weil-pbc-unramified-quasi-finite-at-points (4 steps, 0 new): accepted.
