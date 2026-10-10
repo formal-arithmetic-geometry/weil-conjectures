@@ -25,9 +25,84 @@
   "def-sp-abelian",
   "lem-weil-pbc-site-restriction-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the presheaf construction of [def-weil-pbc-site-extension-by-zero-presheaf]. It is additive, and for a morphism alpha its presheaf-level map is the direct sum, over all maps V \\to W, of the corresponding component maps of alpha.",
+   "uses": [
+    "def-weil-pbc-site-extension-by-zero-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Section 03DH and Lemma 03DJ, proof: construction of j_{U!}"
+   }
+  },
+  {
+   "text": "If alpha:F_1 \\to F_2 is a monomorphism of abelian sheaves on C/W, then its underlying presheaf morphism has sectionwise injective components: the sheaf inclusion preserves kernels, so the kernel is the sectionwise kernel by [lem-weil-pbc-sheafification-exact], and evaluation of presheaves is exact by [lem-weil-pbc-abelian-presheaves-evaluation-exact]. Therefore, at each V, the direct-sum map (j_{W,p!}alpha)_V is injective, since a finite-support element in its kernel has each component in the kernel of an injective alpha_{(V \\to W)}.",
+   "uses": [
+    "def-weil-pbc-site-extension-by-zero-presheaf",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact), proof: the displayed direct-sum map on sections"
+   }
+  },
+  {
+   "text": "The presheaf map in Step 2 has zero kernel. Sheafification preserves finite limits, in particular kernels, by [lem-weil-pbc-sheafification-exact]. Hence its sheafification j_{W!}alpha has zero kernel and is a monomorphism in Ab(C).",
+   "uses": [
+    "def-weil-pbc-site-extension-by-zero-presheaf",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ, proof: sheafification is exact"
+   }
+  },
+  {
+   "text": "For a short exact sequence 0 \\to F_1 \\to F_2 \\to F_3 \\to 0, the last map F_2 \\to F_3 is a cokernel of the first by [lem-weil-pbc-abelian-exact-epi-cokernel]. The functor F \\mapsto (j_{W,p!}F)^\\# of Steps 1-3 is left adjoint to restriction by [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint], so it preserves this cokernel by [lem-weil-pbc-left-adjoint-preserves-colimits]. Thus (j_{W,p!}F_2)^\\# \\to (j_{W,p!}F_3)^\\# is a cokernel of (j_{W,p!}F_1)^\\# \\to (j_{W,p!}F_2)^\\#.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact), proof: right exactness from the adjunction"
+   }
+  },
+  {
+   "text": "The first map (j_{W,p!}F_1)^\\# \\to (j_{W,p!}F_2)^\\# is monic by Steps 2-3, and the second is its cokernel by Step 4. The abelian-category criterion [lem-weil-pbc-abelian-exact-epi-cokernel] therefore gives a short exact sequence 0 \\to (j_{W,p!}F_1)^\\# \\to (j_{W,p!}F_2)^\\# \\to (j_{W,p!}F_3)^\\# \\to 0. By [lem-weil-pbc-site-extension-by-zero-presheaf-adjoint] and [lem-weil-pbc-site-restriction-adjunction], both F \\mapsto (j_{W,p!}F)^\\# and j_{W!} are left adjoint to j_W^*, so they are naturally isomorphic (uniqueness of adjoints); a sequence isomorphic to a short exact sequence is short exact, so 0 \\to j_{W!}F_1 \\to j_{W!}F_2 \\to j_{W!}F_3 \\to 0 is exact.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+    "lem-weil-pbc-site-restriction-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-extension-by-zero-presheaf",
+  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+  "lem-weil-pbc-site-restriction-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03DJ (lemma-extension-by-zero-exact) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +127,49 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-site-restriction-injectives",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-site-extension-by-zero-exact",
+  "worker": "stage1",
+  "summary": "Split the exactness proof into the presheaf direct-sum construction, sectionwise preservation of monomorphisms, exact sheafification, right exactness from the existing adjunction, and the abelian conclusion. Created one definition-only node for the general presheaf extension-by-zero construction; all other dependencies already exist and were checked for their stated content.",
+  "blueprint": "Realizes the ancestor blueprint clause 'exactness of extension by zero' in the proper-case restriction argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+    "why": "Step 2 uses sectionwise exactness of abelian presheaves to show each component map is injective."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-exact",
+    "why": "Step 3 uses preservation of kernels by sheafification."
+   },
+   {
+    "node": "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "why": "Steps 4-5 use the abelian characterization of cokernels and short exact sequences."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Step 4 uses preservation of the cokernel colimit by a left adjoint."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ebz1808",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ebz1808 (reviewer sub-agent of L); spot-checked: Read packet whole; checked steps 1-5 against 03DJ and each cited statement; grep 'extension' in Mathlib Sites/Over.lean (0 hits) and one LeanFinder query (no match). FIX more, RETURN less: (1) C1 gap missed by the second reading: Steps 2-3 prove injectivity for the explicit sheafified direct-sum presheaf (j_{W,p!}F)^#, while Step 4 uses the abstract left adjoint j_{W!} of lem-weil-pbc-site-restriction-adjunction; no cited node identifies them (Stacks 03DI). Repair: new statement-only node lem-weil-pbc-site-extension-by-zero-presheaf-adjoint (unsplit, searches recorded) stating F -> (j_{W,p!}F)^# is left adjoint to j_W^*; Step 4 now cites it, Step 5 transfers to j_{W!} by uniqueness of adjoints; uses/proof_deps updated. New def node kept: def-weil-extension-by-zero-presheaf (smooth-purity, ringed-site module version) covers it only via the constant-Z module bridge, so not counted as a duplicate.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
