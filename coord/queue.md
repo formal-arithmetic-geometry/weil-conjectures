@@ -1,30 +1,30 @@
 # Work queue
 
-912 items; claim with `tools/claim.py next <group> [--stage N]`.
+913 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (317)
+## Stage 1: nodes to split (315)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
-| `lem-weil-pbc-flat-fibres-irreducible` | 2006 | none |
 | `lem-weil-pbc-etale-geometric-fibre-inverse-image-constant` | 2007 | none |
 | `lem-weil-pbc-etale-inverse-image-section-description` | 2007 | none |
 | `lem-weil-pbc-etale-open-fpqc-descent` | 2007 | none |
 | `lem-weil-pbc-etale-sections-equal-open` | 2007 | none |
+| `lem-weil-pbc-fibre-spec-homeomorphism` | 2007 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 2008 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-exact` | 2012 | none |
-| `lem-sc-affine-standard-cover-finite-presentation-flat` | 2014 | none |
 | `lem-sc-ample-finite-affine-cover` | 2014 | none |
 | `lem-sc-ample-proj-local-chart` | 2014 | none |
 | `lem-sc-boundary-cech-compatibility` | 2014 | none |
-| `lem-sc-dvr-tensor-surjective-negative-valuation` | 2014 | none |
 | `lem-sc-dvr-valuation-arithmetic` | 2014 | none |
 | `lem-sc-free-prime-membership` | 2014 | none |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 2014 | none |
 | `lem-sc-semilocal-dedekind-dvr-reduction` | 2014 | none |
 | `lem-sc-semilocal-dim-one-conductor` | 2014 | none |
+| `lem-sc-dvr-nonnegative-valuation-in-ring` | 2015 | none |
+| `lem-sc-dvr-valuation-ring-characterization` | 2015 | none |
 | `lem-sc-zariski-contracted-power-extension` | 2015 | none |
 | `lem-sc-graded-localization-exact` | 2016 | none |
 | `lem-sc-mayer-vietoris-open-cover` | 2016 | none |
@@ -37,7 +37,6 @@
 | `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
-| `lem-sc-rational-point-tangent-derivation-identification` | 3013 | none |
 | `lem-sc-tangent-space-vector-space` | 3013 | none |
 | `lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` | 3014 | none |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
@@ -49,7 +48,6 @@
 | `lem-sc-finite-pushforward-locally-free` | 3014 | none |
 | `lem-sc-global-sections-left-exact` | 3014 | none |
 | `lem-sc-p1-ext-pushout-postcompose` | 3014 | none |
-| `lem-sc-rhom-cohomology-ext-ring` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
@@ -324,7 +322,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (595)
+## Stage 2: nodes to state (598)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -409,6 +407,7 @@
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
+| `lem-sc-affine-standard-cover-finite-presentation-flat` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
@@ -417,6 +416,7 @@
 | `lem-sc-divisible-quotient-torsion` | 1 | state |
 | `lem-sc-divisor-finite-support` | 1 | state |
 | `lem-sc-dvr-saturation-line` | 1 | state |
+| `lem-sc-dvr-tensor-surjective-negative-valuation` | 1 | state |
 | `lem-sc-etale-affine-over-curve` | 1 | state |
 | `lem-sc-etale-coproduct-etale` | 1 | state |
 | `lem-sc-etale-fibre-product-coproduct` | 1 | state |
@@ -599,6 +599,7 @@
 | `lem-weil-pbc-flat-another-variant-local-criterion` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-coproduct` | 1 | state |
+| `lem-weil-pbc-flat-fibres-irreducible` | 1 | state |
 | `lem-weil-pbc-flat-iso-mod-ideal-powers` | 1 | state |
 | `lem-weil-pbc-flat-local-completion-iso` | 1 | state |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1 | state |
@@ -924,7 +925,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 334 nodes that wait for stage 1, 1234 nodes that wait for a statement dependency.
+Not open yet: 332 nodes that wait for stage 1, 1235 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
