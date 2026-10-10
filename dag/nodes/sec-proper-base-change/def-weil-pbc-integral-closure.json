@@ -1,0 +1,67 @@
+{
+ "id": "def-weil-pbc-integral-closure",
+ "kind": "definition",
+ "title": "Integral elements and integral closure",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings. An element $s\\in S$ is *integral over $R$* if it is a root of a monic polynomial with coefficients in $R$ [def-weil-polynomial-ring]: $s^n+\\varphi(r_{n-1})s^{n-1}+\\dots+\\varphi(r_0)=0$ for some $n\\ge1$ and $r_i\\in R$. The set $S'\\subseteq S$ of elements integral over $R$ is a subring of $S$ containing $\\varphi(R)$, the *integral closure of $R$ in $S$*. When $R\\subseteq S$, $R$ is *integrally closed in $S$* if $S'=R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00GP (definition-integral-closure), with Definition Tag 00GI (integral elements) and Lemma Tag 00GO (lemma-integral-closure-is-ring: S' is a ring)"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral closure of R in A: subalgebra of elements of A integral over R (roots of monic polynomials)",
+   "results": "integralClosure (Mathlib.RingTheory.IntegralClosure.Algebra.Basic), integralClosure.isIntegralClosure, integralClosure.AlgebraIsIntegral, integralClosure.isIntegral, mem_integralClosure_iff",
+   "date": "2026-10-10",
+   "verdict": "match: integralClosure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "definition of integral closure of a ring R in an R-algebra A as a subalgebra of integral elements",
+   "results": "integralClosure, integralClosure.isIntegralClosure, instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure, Ring.NormalClosure",
+   "date": "2026-10-10",
+   "verdict": "match: integralClosure"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n \"def integralClosure\" -r ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IntegralClosure/; grep -n \"def IsIntegral\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/IntegralClosure/IsIntegral/Defs.lean",
+   "results": "IntegralClosure/Algebra/Basic.lean:216 def integralClosure : Subalgebra R A (carrier {r | IsIntegral R r}); IsIntegral/Defs.lean:53 def IsIntegral",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "integralClosure, IsIntegral, IsIntegrallyClosedIn",
+  "file": "Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean",
+  "line": 216,
+  "how": "exact: `integralClosure R A : Subalgebra R A` with carrier `{r | IsIntegral R r}` (Basic.lean:216, read with sed -n 210,222p, 2026-10-10); `IsIntegral R x` is `∃ p : R[X], p.Monic ∧ eval₂ (algebraMap R A) p x = 0` (IsIntegral/Defs.lean:53); 'integrally closed in S' is `IsIntegrallyClosedIn R S` (Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: the claim that the integral elements form a subring is part of the Mathlib match (integralClosure is a Subalgebra); no separate statement node."
+}

@@ -2,15 +2,84 @@
  "id": "lem-weil-pbc-finite-type-z-domain-normalization-finite",
  "kind": "statement",
  "title": "The normalization of a domain of finite type over Z is finite",
- "statement": "Let $A$ be an integral domain which is generated as a ring by finitely many elements (i.e. of finite type over $\\mathbf Z$), with field of fractions $K$, and let $A'=\\{x\\in K: x$ is a root of a monic polynomial with coefficients in $A\\}$ be the integral closure of $A$ in $K$. Then $A'$ is a finitely generated $A$-module.",
+ "statement": "Let $A$ be an integral domain which is generated as a ring by finitely many elements, i.e. $\\mathbf Z\\to A$ is of finite type [def-weil-pbc-finite-type-algebra], with field of fractions $K$, and let $A'=\\{x\\in K: x$ is a root of a monic polynomial with coefficients in $A\\}$ be the integral closure of $A$ in $K$ [def-weil-pbc-integral-closure]. Then $A'$ is a finitely generated $A$-module [def-weil-finitely-generated-module].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Proposition Tag 0335 (proposition-ubiquity-nagata), items (3) and (5): Z and rings of finite type over Z are Nagata, in particular universally Japanese; Definition Tag 032R (definition-nagata (1): universally Japanese means every domain of finite type over the ring is N-2) and Definition Tag 032F (definition-N: N-2 with the trivial extension L = K gives N-1, i.e. the integral closure in K is finite). Used in the proof of Lemma Tag 033C (lemma-normal-goes-up): 'As R_0 is a Nagata domain we see that its integral closure R_0' is finite over R_0'"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "*$\\mathbf Z$ is a Nagata ring* [def-weil-pbc-nagata-ring] (Proposition 0335 (3)). $\\mathbf Z$ is Noetherian [def-weil-pbc-noetherian-ring], since every ideal is $n\\mathbf Z$ for some $n\\ge0$ (division with remainder by the least positive element). Its prime ideals are $(p)$ for primes $p$ and $(0)$; we show each $\\mathbf Z/\\mathfrak p$ is N-2 [def-weil-pbc-japanese-domain]. (a) $\\mathfrak p=(p)$: $\\mathbf Z/(p)=\\mathbf F_p$ is a field, its own fraction field. For a finite extension $L/\\mathbf F_p$ [def-pc-field-extension] every $y\\in L$ is algebraic over $\\mathbf F_p$ (the powers $1,y,\\dots,y^{d}$, $d=\\dim L$, are linearly dependent), and dividing a nonzero polynomial relation by its leading coefficient gives a monic one, so $y$ is integral over $\\mathbf F_p$ [def-weil-pbc-integral-closure]; the integral closure of $\\mathbf F_p$ in $L$ is $L$, which is a finitely generated $\\mathbf F_p$-module [def-weil-finitely-generated-module] since $\\dim_{\\mathbf F_p}L<\\infty$. (b) $\\mathfrak p=(0)$: $\\mathbf Z$ is a normal domain [def-weil-pbc-normal-ring]: if $x=a/b\\in\\mathbf Q$ with $\\gcd(a,b)=1$, $b>0$, satisfies $x^n+c_{n-1}x^{n-1}+\\dots+c_0=0$ with $c_i\\in\\mathbf Z$, multiplying by $b^n$ gives $a^n=-b(c_{n-1}a^{n-1}+\\dots+c_0b^{n-1})$, so every prime factor of $b$ divides $a$, hence $b=1$ and $x\\in\\mathbf Z$. Let $L/\\mathbf Q$ be a finite extension. As $\\mathbf Q$ has characteristic $0$, $L/\\mathbf Q$ is separable by [lem-weil-pbc-char-zero-field-extension-separable]; since $L/\\mathbf Q$ is algebraic its transcendence basis is empty, so this says $L/\\mathbf Q$ is separable algebraic [def-weil-pbc-separable-algebraic-extension]. By [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] the integral closure of $\\mathbf Z$ in $L$ is a finitely generated $\\mathbf Z$-module. So $\\mathbf Z$ is N-2. Hence $\\mathbf Z$ is Noetherian and every $\\mathbf Z/\\mathfrak p$ is N-2: $\\mathbf Z$ is a Nagata ring.",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-japanese-domain",
+    "def-pc-field-extension",
+    "def-weil-pbc-integral-closure",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Proposition Tag 0335 (proposition-ubiquity-nagata), item (3) and its proof ('check if R/p is N-2 for every prime ... clear whenever R/p is a field ... for p = (0) Lemma 032M kicks in'); Lemma Tag 032M (lemma-domain-char-zero-N-1-2), whose proof is Lemma Tag 032L"
+   }
+  },
+  {
+   "text": "*$A$ is N-2.* By hypothesis $\\mathbf Z\\to A$ is a ring map of finite type [def-weil-pbc-finite-type-algebra] and $A$ is a domain. By step 1 $\\mathbf Z$ is a Nagata ring, so by Nagata's theorem [lem-weil-pbc-nagata-universally-japanese] $\\mathbf Z$ is universally Japanese [def-weil-pbc-nagata-ring], and therefore $A$ is N-2 [def-weil-pbc-japanese-domain].",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Proposition Tag 0335 (proposition-ubiquity-nagata), item (5) ('finite type ring extensions of any of the above' are Nagata and universally Japanese), via Proposition Tag 0334 (proposition-nagata-universally-japanese) (1) => (3) and Definition Tag 032R"
+   }
+  },
+  {
+   "text": "*Conclusion.* Apply the definition of N-2 [def-weil-pbc-japanese-domain] to the trivial finite extension $L=K$ of the fraction field $K$ of $A$: the integral closure $A'$ of $A$ in $K$ [def-weil-pbc-integral-closure] is a finitely generated $A$-module [def-weil-finitely-generated-module] (an N-2 domain is N-1).",
+   "uses": [
+    "def-weil-pbc-japanese-domain",
+    "def-weil-pbc-integral-closure",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 032F (definition-N): N-2 with L = K is N-1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-japanese-domain",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-nagata-universally-japanese"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition Tag 0335 (proposition-ubiquity-nagata) items (3) and (5) with its proof, Proposition Tag 0334, Lemmas Tag 032M and 032L, Definitions Tag 032F and 032R"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -32,10 +101,24 @@
    "results": "only RingTheory/NoetherNormalization.lean (Nagata's proof of Noether normalization, not Nagata rings); IntegrallyClosed.lean:369 and NormalClosure.lean:109 (isFractionRing_of_finite_extension); no notion of Japanese / Nagata ring and no finiteness of the normalization of a finite type Z-algebra",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite ?A (integralClosure ?A ?L)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Nagata\\|Japanese\\|IsN2\\|IsN1' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'integralClosure\\|IsIntegralClosure' Mathlib | xargs grep -ln FiniteType",
+   "results": "Nagata/Japanese only in NoetherNormalization.lean (Noether normalization over a field) and analysis files; integral closure + FiniteType: NoetherNormalization.lean, ZariskisMainTheorem.lean, IsIntegralClosure/Basic.lean (Algebra.IsIntegral.finite), Etale/QuasiFinite.lean; none gives finiteness of the normalization of a finite type domain (over Z or over a field)",
+   "date": "2026-10-10",
+   "verdict": "no match: not a leaf; split by the Stacks route"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -55,5 +138,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+  "worker": "stage1",
+  "summary": "Mathlib has no Nagata / Japanese ring theory and no finiteness of the normalization of a domain of finite type over Z (or over a field); the only finiteness of integral closure is IsIntegralClosure.finite (Noetherian integrally closed base, finite separable extension). So the item is split along the Stacks route of its source, Proposition 0335 (3),(5): step 1 proves Z is a Nagata ring as in the proof of 0335 (F_p fields trivially N-2; Z normal Noetherian of characteristic 0, so N-2 by 032M/032L, the latter a new Mathlib leaf IsIntegralClosure.finite, separability from the existing leaf lem-weil-pbc-char-zero-field-extension-separable); step 2 applies Nagata's theorem 0334 (1)=>(3) (new unsplit node lem-weil-pbc-nagata-universally-japanese, the hard part: analytically unramified local rings) to get A N-2; step 3 takes L = K. Statement unchanged in content; stmt_deps were empty and now cite the new leaf definitions def-weil-pbc-finite-type-algebra (Algebra.FiniteType) and def-weil-pbc-integral-closure (integralClosure), and def-weil-finitely-generated-module. New definitions def-weil-pbc-japanese-domain (032F, N-1/N-2) and def-weil-pbc-nagata-ring (032R) are unsplit (no Mathlib counterpart). A direct route via Noether normalization was considered and rejected: over Z it only works after inverting an integer, and the points of mixed characteristic need exactly the Nagata machinery."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps along Stacks 0335/0334/032F: Z is Nagata (F_p fields are N-2; Z/(0) by 032M via the new 032L leaf, IsIntegralClosure.finite, DedekindDomain/IntegralClosure.lean:175 verified by L); Nagata's theorem 0334 (new unsplit node, the weight of the item); N-2 with L = K. New definition leaves def-weil-pbc-finite-type-algebra (Algebra.FiniteType, FiniteType.lean:39) and def-weil-pbc-integral-closure (integralClosure, IntegralClosure/Algebra/Basic.lean:216), both verified; new unsplit definitions def-weil-pbc-japanese-domain (032F) and def-weil-pbc-nagata-ring (032R). Statement now cites the definitions (was empty stmt_deps). Mathlib has no Nagata/Japanese rings."
+ }
 }

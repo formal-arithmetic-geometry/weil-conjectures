@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+ "kind": "statement",
+ "title": "Integral closure of a Noetherian normal domain in a finite separable extension is finite",
+ "statement": "Let $R$ be a Noetherian [def-weil-pbc-noetherian-ring] normal domain [def-weil-pbc-normal-ring] with fraction field $K$, and let $L/K$ be a finite field extension [def-pc-field-extension] which is separable algebraic [def-weil-pbc-separable-algebraic-extension]. Then the integral closure of $R$ in $L$ [def-weil-pbc-integral-closure] is a finitely generated $R$-module [def-weil-finitely-generated-module].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032L (lemma-Noetherian-normal-domain-finite-separable-extension), line 45269"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral closure of an integrally closed Noetherian domain in a finite separable extension of its fraction field is a finite module",
+   "results": "IsIntegralClosure.finite (Mathlib.RingTheory.DedekindDomain.IntegralClosure), IsIntegralClosure.of_isIntegrallyClosed, integralClosure.isIntegralClosure, integralClosure.isIntegrallyClosedOfFiniteExtension, Ring.instIsIntegrallyClosedNormalClosure",
+   "date": "2026-10-10",
+   "verdict": "match: IsIntegralClosure.finite"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegralClosure.finite",
+   "results": "IsIntegralClosure.finite (A K) [IsFractionRing A K] (L) [Field L] (C) [IsIntegralClosure C A L] [FiniteDimensional K L] [IsDomain A] [Algebra.IsSeparable K L] [IsIntegrallyClosed A] [IsNoetherianRing A] : Module.Finite A C (Mathlib.RingTheory.DedekindDomain.IntegralClosure)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Japanese ring N-2: integral closure of a domain in every finite extension of its fraction field is a finite module",
+   "results": "IsIntegralClosure.finite, Ring.instFiniteNormalClosure, IsIntegralClosure.isNoetherianRing, IsIntegralClosure.isNoetherian, integralClosure.isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "match: IsIntegralClosure.finite (separable case)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n \"theorem\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean; sed -n 145,182p of that file",
+   "results": "IsIntegralClosure.isNoetherian :152 (trace dual basis argument, as in Stacks), IsIntegralClosure.isNoetherianRing :168, IsIntegralClosure.finite :175, integralClosure.isNoetherianRing :206",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsIntegralClosure.finite",
+  "file": "Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean",
+  "line": 175,
+  "how": "specializes in one line: `IsIntegralClosure.finite A K L C : Module.Finite A C` under [IsFractionRing A K] [FiniteDimensional K L] [IsDomain A] [Algebra.IsSeparable K L] [IsIntegrallyClosed A] [IsNoetherianRing A] (section variables lines 43-57, 87, 110, 147); take C = integralClosure A L, which is IsIntegralClosure by the instance integralClosure.isIntegralClosure (Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean). Normal domain = IsDomain + IsIntegrallyClosed (def-weil-pbc-normal-ring). Source read with sed -n 145,182p, 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
