@@ -1,8 +1,8 @@
 # Work queue
 
-869 items; claim with `tools/claim.py next <group> [--stage N]`.
+867 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (322)
+## Stage 1: nodes to split (320)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-sc-pic-lift-closed-immersion-dim-le-one` | 2010 | none |
 | `lem-sc-affine-cap-section-open` | 2011 | none |
 | `lem-sc-ample-finite-principal-affine` | 2011 | none |
-| `lem-sc-ample-ideal-section` | 2011 | none |
 | `lem-sc-ample-square-zero-thickening` | 2011 | none |
 | `lem-sc-closed-affine-union-affine` | 2011 | none |
 | `lem-sc-component-intersections-finite` | 2011 | none |
@@ -34,9 +33,7 @@
 | `lem-galois-fpqc-refinement-fully-faithful` | 3010 | none |
 | `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
 | `lem-pc-nowhere-dense-dim-zero` | 3010 | none |
-| `lem-pc-zero-support-finite-scheme` | 3010 | none |
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
-| `lem-sc-canonical-degree` | 3010 | rests_on_sorry |
 | `lem-sc-curve-base-change-relative-dimension-one` | 3010 | none |
 | `lem-sc-hilb-dominating-power` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
@@ -46,6 +43,7 @@
 | `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
+| `lem-pc-zero-dimensional-closed-subscheme-finite` | 3011 | none |
 | `lem-sc-regular-curve-torsionfree-free` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
 | `lem-exc-coinduced-homotopy-continuous` | 3012 | none |
@@ -881,7 +879,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 341 nodes that wait for stage 1, 1024 nodes that wait for a statement dependency.
+Not open yet: 339 nodes that wait for stage 1, 1027 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
