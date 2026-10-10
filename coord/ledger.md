@@ -2668,3 +2668,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:27 L: merged deliver/C1/lem-pc-perfect-generation-open-induction-step (reviewer FIX; first push; new nodes: 2)
 - 21:27 L: merged deliver/G1/lem-sp-filtered-homotopy-spectral-sequence (reviewer FIX; first push; new nodes: 0)
 - 21:28 L: merged deliver/F1/lem-sc-numerical-polynomial-leading-term (reviewer FIX; first push; new nodes: 1)
+- 21:28 L: merged deliver/G1/lem-pc-derived-functor-commutes-derived-limit (reviewer FIX; first push; new nodes: 3)
