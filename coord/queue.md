@@ -2,10 +2,11 @@
 
 873 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (77)
+## Stage 1: nodes to split (76)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
+| `lem-weil-pbc-geometric-point-pullback-stalk` | 12 | none |
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
@@ -24,7 +25,7 @@
 | `lem-sc-affine-pseudo-coherent-lift` | 3022 | none |
 | `lem-sc-affine-truncation-kernel-finite-locally-free` | 3022 | none |
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
-| `lem-pc-pseudo-coherent-summand` | 3023 | none |
+| `lem-pc-ring-pseudo-coherent-summand` | 3024 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -56,7 +57,6 @@
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
-| `def-weil-extension-by-zero-presheaf` | - | none |
 | `lem-kun-support-geometric-point-independent` | - | none |
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pur-kinjective-degreewise-existence` | - | none |
@@ -64,7 +64,6 @@
 | `lem-weil-common-extension-fields` | - | none |
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-kun-separable-smooth-colimit` | - | none |
-| `lem-kun-stalk-as-pullback` | - | none |
 | `lem-pc-perfect-locus` | - | sorry_here |
 | `lem-pur-derived-change-of-rings` | - | none |
 | `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
@@ -84,7 +83,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (796)
+## Stage 2: nodes to state (797)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -122,6 +121,7 @@
 | `def-sp-acyclic` | 1 | state |
 | `def-sp-exact-couple` | 1 | state |
 | `def-sp-filtration` | 1 | state |
+| `def-weil-extension-by-zero-presheaf` | 1 | state |
 | `def-weil-pbc-analytically-unramified` | 1 | state |
 | `def-weil-pbc-associated-graded-ring` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
@@ -885,7 +885,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1637 nodes that wait for a statement dependency, 115 nodes that wait for stage 1.
+Not open yet: 1639 nodes that wait for a statement dependency, 114 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
