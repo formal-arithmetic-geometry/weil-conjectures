@@ -1,8 +1,8 @@
 # Work queue
 
-868 items; claim with `tools/claim.py next <group> [--stage N]`.
+865 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (67)
+## Stage 1: nodes to split (64)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -60,16 +60,13 @@
 | `lem-pur-ringed-site-grothendieck-abelian` | - | none |
 | `lem-weil-common-extension-fields` | - | none |
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
-| `lem-kun-separable-smooth-colimit` | - | none |
 | `lem-pur-derived-change-of-rings` | - | none |
-| `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
 | `def-wf-lie-algebra` | - | none |
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
 | `lem-sc-p1-twist-exists` | - | none |
 | `lem-pc-projective-curve-finite-projection` | - | rests_on_sorry |
 | `lem-sc-p1-coherent-finite` | - | rests_on_sorry |
-| `lem-pc-projective-coordinate-model` | - | sorry_here |
 | `def-pur-hom-complex` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 | `lem-pur-rhom-well-defined` | - | none |
@@ -880,7 +877,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1644 nodes that wait for a statement dependency, 106 nodes that wait for stage 1.
+Not open yet: 1646 nodes that wait for a statement dependency, 103 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
