@@ -1,8 +1,8 @@
 # Work queue
 
-887 items; claim with `tools/claim.py next <group> [--stage N]`.
+892 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (320)
+## Stage 1: nodes to split (323)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -30,10 +30,11 @@
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
 | `lem-weil-pbc-geometric-point-cohomology` | 3006 | none |
+| `lem-exc-field-sections-stalk-invariants` | 3007 | none |
 | `lem-sc-etale-standard-cover-cech` | 3008 | none |
 | `lem-weil-pbc-etale-cohomology-over-open` | 3008 | none |
-| `lem-exc-etale-field-gsets` | 3009 | none |
-| `lem-exc-field-sections-stalk-invariants` | 3010 | none |
+| `lem-exc-etale-coproduct-etale` | 3010 | none |
+| `lem-exc-etale-field-galois-classification` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `lem-sc-fibre-dimension-after-base-change` | 3011 | none |
 | `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` | 3011 | none |
@@ -45,10 +46,12 @@
 | `lem-pc-separable-tensor-algebraic-closure` | 3012 | none |
 | `lem-sc-p1-duality-pairing-naturality` | 3012 | none |
 | `lem-sc-p1-ext-coherent-dim-one-vanishing` | 3012 | none |
-| `lem-sc-p1-ext-locally-free-naturality` | 3012 | none |
 | `lem-pc-field-extension-fpqc-cover` | 3013 | none |
 | `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
 | `lem-sc-affine-finite-module-free-locus` | 3013 | none |
+| `lem-sc-cech-comparison-natural` | 3013 | none |
+| `lem-sc-ext-derived-composite-natural` | 3013 | none |
+| `lem-sc-ext-evaluation-first-naturality` | 3013 | none |
 | `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
 | `lem-sc-local-section-quotient-finite-free` | 3013 | none |
 | `lem-sc-product-irreducible-components-bijection` | 3013 | none |
@@ -256,6 +259,7 @@
 | `def-nagata-qc-open-equality-stage` | - | none |
 | `def-nagata-relative-gluing-datum-descent` | - | none |
 | `def-nagata-scheme-theoretically-dense-open` | - | none |
+| `lem-kun-03qu-sep-closed` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-sc-affine-generic-second` | - | sorry_here |
 | `lem-sc-genus-invariant` | - | none |
@@ -306,7 +310,6 @@
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
 | `lem-sc-zariski-filtered-cohomology` | - | none |
 | `def-sc-kahler-differentials` | - | none |
-| `lem-kun-03qu-sep-closed` | - | none |
 | `lem-kun-separable-smooth-colimit` | - | none |
 | `lem-kun-stalk-as-pullback` | - | none |
 | `lem-pc-perfect-locus` | - | sorry_here |
@@ -327,7 +330,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (567)
+## Stage 2: nodes to state (569)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -376,6 +379,7 @@
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `etale-proposition-etale-reduced` | 1 | state |
 | `lem-exc-coinduced-functions-open-stabilizer` | 1 | state |
+| `lem-exc-etale-field-gsets` | 1 | state |
 | `lem-galois-aut-profinite` | 1 | state |
 | `lem-galois-coproduct-copies-morphisms-clopen` | 1 | state |
 | `lem-galois-flat-algebra-descent` | 1 | state |
@@ -485,6 +489,7 @@
 | `lem-weil-pbc-constructible-in-retrocompact-open` | 1 | state |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-is-retrocompact` | 1 | state |
+| `lem-weil-pbc-constructible-stratification-intersection` | 1 | state |
 | `lem-weil-pbc-coskeletal-map-trivial-kan` | 1 | state |
 | `lem-weil-pbc-coskeleton-free-homology-comparison` | 1 | state |
 | `lem-weil-pbc-coskeleton-matching-tuples` | 1 | state |
@@ -899,7 +904,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 339 nodes that wait for stage 1, 1109 nodes that wait for a statement dependency.
+Not open yet: 342 nodes that wait for stage 1, 1111 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
