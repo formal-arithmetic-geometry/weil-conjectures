@@ -2,7 +2,7 @@
 
 879 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (92)
+## Stage 1: nodes to split (91)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -30,7 +30,6 @@
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-etale-at-prime-flat-unramified-criterion` | 4013 | none |
 | `lem-sc-affine-totalquotient-minimal-product` | 5013 | none |
-| `lem-sc-affine-weakass-nonzerodivisors` | 5013 | none |
 | `lem-sc-ass-weakass-fg-stalk` | 5013 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-fp-module-map-descent-affine` | 5015 | none |
@@ -99,7 +98,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (787)
+## Stage 2: nodes to state (788)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -269,6 +268,7 @@
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
 | `lem-sc-affine-unit-quotient` | 1 | state |
+| `lem-sc-affine-weakass-nonzerodivisors` | 1 | state |
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
 | `lem-sc-artin-schreier-k` | 1 | state |
 | `lem-sc-bounded-below-injective-resolution` | 1 | state |
@@ -891,7 +891,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1616 nodes that wait for a statement dependency, 130 nodes that wait for stage 1.
+Not open yet: 1616 nodes that wait for a statement dependency, 129 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
