@@ -1,8 +1,8 @@
 # Work queue
 
-933 items; claim with `tools/claim.py next <group> [--stage N]`.
+931 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (235)
+## Stage 1: nodes to split (233)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,12 +17,11 @@
 | `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
 | `lem-pc-stalk-tensor-complex` | 3013 | none |
 | `def-pc-essentially-constant-ind-diagram` | 3014 | none |
-| `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
-| `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
+| `lem-pc-ringed-spaces-derived-direct-image-composition` | 3015 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
-| `lem-pc-ringed-spaces-derived-adjoint-general` | 3016 | none |
+| `lem-pc-perfect-complexes-compact-set` | 3016 | none |
+| `lem-pc-perfect-object-compact` | 3016 | none |
 | `lem-sc-pseudo-coherent-rhom-qcoherent` | 3016 | none |
-| `lem-pc-perfect-object-compact` | 3017 | none |
 | `lem-pc-perfect-tensor-hom-duality` | 3017 | none |
 | `lem-pc-proper-perfect-direct-image-perfect` | 3017 | none |
 | `lem-sc-finite-free-internal-hom-exact` | 3017 | none |
@@ -68,7 +67,6 @@
 | `lem-pc-rf-base-change-complex` | 5012 | none |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
 | `lem-sp-cartan-eilenberg-exists` | 6005 | none |
-| `thm-sp-double-complex-spectral-sequences` | 6005 | sorry_here |
 | `thm-sp-if-e1` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `pqf-def-coherent` | 6007 | none |
@@ -945,7 +943,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1376 nodes that wait for a statement dependency, 270 nodes that wait for stage 1.
+Not open yet: 1380 nodes that wait for a statement dependency, 268 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
