@@ -13,18 +13,79 @@
  },
  "kind": "statement",
  "title": "Removing embedded primes from a finite module",
- "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $M$ a finite $R$-module [def-weil-finitely-generated-module]. Among submodules $K\\subseteq M$ whose support is nowhere dense in $\\operatorname{Supp}(M)$ there is a maximal one. For $M'=M/K$, one has $\\operatorname{Supp}(M')=\\operatorname{Supp}(M)$, $M'$ has no embedded associated primes, and for every $f\\in R$ contained in all embedded associated primes of $M$ the localization map gives $M_f\\cong M'_f$.",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $M$ a finite $R$-module [def-weil-finitely-generated-module]. For a prime $\\mathfrak p\\subset R$, write $M_{\\mathfrak p}$ for localization [def-weil-pbc-module-localization] and define $\\operatorname{Supp}(M)=\\{\\mathfrak p:M_{\\mathfrak p}\\ne0\\}$. An associated prime is a prime equal to $\\operatorname{Ann}_R(m)$ for some $m\\in M$; an embedded associated prime is an associated prime that is not minimal among the associated primes. Among submodules $K\\subseteq M$ whose support is nowhere dense in $\\operatorname{Supp}(M)$ there is a maximal one. For $M'=M/K$, one has $\\operatorname{Supp}(M')=\\operatorname{Supp}(M)$, $M'$ has no embedded associated primes, and for every $f\\in R$ contained in all embedded associated primes of $M$ the localization map gives $M_f\\cong M'_f$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 02M6 (Lemma 10.63.4, label algebra-lemma-remove-embedded-primes)"
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
-  "def-weil-finitely-generated-module"
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By finiteness of the associated-prime set, write Ass(M) as the finite collection of the minimal primes q_j of Supp(M) and the embedded associated primes p_i. Each q_j is associated by [lem-weil-pbc-minimal-support-prime-associated]. If p=Ann(m) is associated, then m/1 is nonzero in M_p: otherwise some s notin p would satisfy sm=0, forcing s in Ann(m)=p. Thus every associated prime lies in Supp(M).",
+   "uses": [
+    "lem-weil-pbc-noetherian-associated-primes-finite",
+    "lem-weil-pbc-minimal-support-prime-associated",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M6 proof, first paragraph; Tags 00LC and 05BV"
+   }
+  },
+  {
+   "text": "Define K={m in M | Supp(Rm) is contained in union_i V(p_i)}. Closure under addition follows from Supp(R(m+n)) being contained in Supp(Rm) union Supp(Rn), and scalar closure is immediate. By [lem-weil-pbc-noetherian-submodule-finite], K is finite; its support is therefore closed, and it is contained in the finite union union_i V(p_i). Since each p_i is nonminimal in Supp(M), this union contains none of the finitely many generic points q_j of the irreducible components of the Noetherian space Supp(M) (Tag 0052), hence is nowhere dense in Supp(M), so Supp(K) is nowhere dense.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M6 proof, definition of K and the paragraph proving its support is nowhere dense"
+   }
+  },
+  {
+   "text": "If K' has nowhere-dense support, then K'_{q_j}=0 for every minimal support prime q_j: supports are closed under specialization, so q_j in Supp(K') would put the irreducible component V(q_j) of Supp(M) inside Supp(K'), and V(q_j) minus the other finitely many components is a nonempty open of Supp(M) (Tag 0052). For m in K', (Rm)_{q_j}=0, so q_j is not in Supp(Rm). For any prime r in Supp(Rm), choose a prime r_0 minimal in Supp(Rm) with r_0 subseteq r. The minimal-support theorem applied to the finite module Rm makes r_0 an associated prime of Rm; the submodule theorem puts it in Ass(M), hence r_0 is some q_j or p_i. It cannot be q_j, so r_0=p_i and r lies in V(p_i). Thus m lies in K, proving K' subseteq K and maximality.",
+   "uses": [
+    "lem-weil-pbc-associated-prime-submodule",
+    "lem-weil-pbc-minimal-support-prime-associated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M6 proof, maximality paragraph"
+   }
+  },
+  {
+   "text": "Put M'=M/K. Since K_{q_j}=0, M'_{q_j}=M_{q_j}; the closed support of M' therefore contains every minimal q_j of Supp(M), while the quotient map gives Supp(M') subseteq Supp(M), so the two supports are equal. If q=Ann(m-bar) is associated to M', then m is not in K. Hence some prime r in Supp(Rm) lies in no V(p_i); a prime r_0 minimal in Supp(Rm) with r_0 subseteq r is associated to Rm by [lem-weil-pbc-minimal-support-prime-associated], hence lies in Ass(M) by [lem-weil-pbc-associated-prime-submodule], and is not any p_i, so r_0 is some q_j and Supp(Rm) contains q_j, and M'_{q_j}=M_{q_j} shows m-bar remains nonzero there, so q subseteq q_j. As q belongs to Supp(M')=Supp(M) and q_j is minimal in that support, q=q_j; thus M' has no embedded associated primes. Finally, if f lies in every p_i, then D(f) misses Supp(K), so K_f=0 and the localization map M_f to M'_f is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-minimal-support-prime-associated",
+    "lem-weil-pbc-associated-prime-submodule",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M6 proof, quotient and localization paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "lem-weil-pbc-minimal-support-prime-associated",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-associated-prime-submodule",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02M6 (Lemma 10.63.4, label algebra-lemma-remove-embedded-primes)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,12 +110,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-abelian-varieties",
  "unit": "sk-def-av-ample-degree",
  "created": {
   "item": "lem-sc-hilbert-embedded-points",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-hilbert-embedded-points-affine-removal",
+  "worker": "stage1",
+  "summary": "Expanded the Tag 02M6 construction into four proof steps: finite associated-prime decomposition, construction and finiteness of K, maximality, and quotient/support/localization conclusions. Added one Mathlib leaf for finite submodules over Noetherian rings.",
+  "blueprint": "Realizes the affine embedded-prime removal clause used in the induction step of lem-sc-hilbert-polynomial."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-epa2622",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-epa2622 (reviewer sub-agent of L); spot-checked: Read all four steps against Tag 02M6 and cited statements (minimal-support-associated, associated-prime-submodule, associated-primes-finite); statement change (explicit Supp/embedded definitions) named, matches use in lem-sc-hilbert-embedded-points, -affine-localization and -gluing (K finite, maximal, quotient M/K). Mathlib leaf isNoetherian_of_isNoetherianRing_of_finite read at Basic.lean:324. FIX more, RETURN less: (1) B class (b): new node lem-sc-hilbert-finite-submodule-noetherian duplicates existing lem-weil-pbc-noetherian-submodule-finite (same statement, status mathlib); dropped and Step 2 cites the existing node; (2) C1: Step 2 nowhere-density and Step 3 K'_{q_j}=0 now justified via generic points of finitely many components (Tag 0052); (3) C1: Step 4 'Supp(Rm) contains some q_j' made explicit with minimal-support and associated-prime-submodule citations added to its uses.; 1 file(s) fixed by the reviewer"
  }
 }
