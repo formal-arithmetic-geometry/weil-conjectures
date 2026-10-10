@@ -2,7 +2,7 @@
 
 894 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (665)
+## Stage 1: nodes to split (661)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,10 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-integral-extension-dimension` | 1012 | none |
-| `lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite` | 1012 | none |
-| `lem-weil-pbc-kahler-differentials-polynomial-extension` | 1012 | none |
-| `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1012 | none |
 | `lem-weil-pbc-lci-conormal-free-rank-codimension` | 1012 | none |
 | `lem-weil-pbc-local-artinian-basis-when-flat` | 1012 | none |
 | `lem-weil-pbc-local-dimension-zero-henselian` | 1012 | none |
@@ -672,7 +668,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (229)
+## Stage 2: nodes to state (233)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -804,14 +800,18 @@
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 1 | state |
+| `lem-weil-pbc-integral-extension-dimension` | 1 | state |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-base-change` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-residue-finite` | 1 | state |
+| `lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
+| `lem-weil-pbc-kahler-differentials-polynomial-extension` | 1 | state |
+| `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1 | state |
 | `lem-weil-pbc-krull-intersection-localization` | 1 | state |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
@@ -906,7 +906,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 677 nodes that wait for stage 1, 516 nodes that wait for a statement dependency.
+Not open yet: 673 nodes that wait for stage 1, 516 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
