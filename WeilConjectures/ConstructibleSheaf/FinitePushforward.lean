@@ -194,37 +194,6 @@ theorem Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed {Y : Scheme.{u}} [I
   exact ⟨hgen Y hY, fun j ↦
     Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint Λ M hgen hY j⟩
 
-/-- **Presentation of a constructible sheaf by extensions by zero** (Stacks 095N). On a
-quasi-compact quasi-separated scheme `X`, with `Λ` noetherian, a constructible sheaf of
-`Λ`-modules `F` is the cokernel of a map `⨁ⱼ (vⱼ)_! Λ ⟶ ⨁ᵢ (wᵢ)_! Λ` between finite sums of
-extensions by zero of constant sheaves along étale morphisms from affine schemes.
-
-The Stacks proof: sections over affine étale `X`-schemes give an epimorphism from a possibly
-infinite sum `⨁ (wᵢ)_! Λ ⟶ F` (Stacks 093C); the supports of the cokernels of its finite
-subsums are constructible subsets of `X` (they are constructible sheaves, using that `(wᵢ)_! Λ`
-is constructible, Stacks 03SA) with empty intersection since the stalks of `F` are finitely
-generated, so one of them is empty by quasi-compactness of the constructible topology of the
-spectral space `X`. The same applies to the kernel, which is constructible as `Λ` is
-noetherian. -/
-@[stacks 095N]
-theorem Etale.exists_isColimit_cokernelCofork_sigma_etaleLowerShriek [IsNoetherianRing Λ]
-    {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
-    ∃ (m n : ℕ) (V : Fin m → Scheme.{u}) (v : ∀ j, V j ⟶ X) (hv : ∀ j, Etale (v j))
-      (_ : ∀ j, IsAffine (V j)) (U : Fin n → Scheme.{u}) (w : ∀ i, U i ⟶ X)
-      (hw : ∀ i, Etale (w i)) (_ : ∀ i, IsAffine (U i))
-      (φ : (∐ fun j ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (v j) (hv j)).obj
-        ((constantSheaf (V j).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-          (ModuleCat.of Λ Λ))) ⟶
-        ∐ fun i ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (w i) (hw i)).obj
-          ((constantSheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-            (ModuleCat.of Λ Λ)))
-      (π : (∐ fun i ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (w i) (hw i)).obj
-          ((constantSheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
-            (ModuleCat.of Λ Λ))) ⟶ F)
-      (hφπ : φ ≫ π = 0), Nonempty (IsColimit (CokernelCofork.ofπ π hφπ)) :=
-  sorry
-
 attribute [local instance] Cardinal.fact_isRegular_aleph0 in
 /-- A finite sum of extensions by zero of constant sheaves along étale morphisms from affine
 schemes is finitely presentable. -/
@@ -250,9 +219,8 @@ presentable object of the category of sheaves: `Hom(F, -)` commutes with filtere
 (indexed by small categories), i.e. every morphism from `F` to a filtered colimit factors
 through a stage, and two such factorisations agree at a later stage.
 
-By Stacks 095N (`AlgebraicGeometry.Etale.exists_isColimit_cokernelCofork_sigma_etaleLowerShriek`)
-`F` is a cokernel of a map between finite sums of extensions by zero `v_! Λ` along étale maps
-from affine schemes; these are finitely presentable
+By Stacks 095N, `F` is a cokernel of a map between finite sums of extensions by zero `v_! Λ`
+along étale maps from affine schemes; these are finitely presentable
 (`AlgebraicGeometry.Etale.isFinitelyPresentable_etaleLowerShriek_constantSheaf`, by Stacks 0738),
 and finitely presentable objects are closed under finite colimits.
 (blueprint: `lem-weil-pbc-constructible-finitely-presented`) -/
@@ -261,8 +229,25 @@ theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
     IsFinitelyPresentable.{u} F := by
-  obtain ⟨m, n, V, v, hv, hV, U, w, hw, hU, φ, π, hφπ, ⟨hc⟩⟩ :=
-    Etale.exists_isColimit_cokernelCofork_sigma_etaleLowerShriek Λ F
+  -- Stacks 095N: sections over affine étale `X`-schemes give an epimorphism from a possibly
+  -- infinite sum of `v_! Λ` (093C); the supports of the cokernels of its finite subsums are
+  -- constructible (`v_! Λ` is constructible, 03SA) with empty intersection, so one is empty by
+  -- compactness of the constructible topology; likewise for the constructible kernel.
+  obtain ⟨m, n, V, v, hv, hV, U, w, hw, hU, φ, π, hφπ, ⟨hc⟩⟩ :
+      ∃ (m n : ℕ) (V : Fin m → Scheme.{u}) (v : ∀ j, V j ⟶ X) (hv : ∀ j, Etale (v j))
+        (_ : ∀ j, IsAffine (V j)) (U : Fin n → Scheme.{u}) (w : ∀ i, U i ⟶ X)
+        (hw : ∀ i, Etale (w i)) (_ : ∀ i, IsAffine (U i))
+        (φ : (∐ fun j ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (v j) (hv j)).obj
+          ((constantSheaf (V j).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+            (ModuleCat.of Λ Λ))) ⟶
+          ∐ fun i ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (w i) (hw i)).obj
+            ((constantSheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+              (ModuleCat.of Λ Λ)))
+        (π : (∐ fun i ↦ (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) (w i) (hw i)).obj
+            ((constantSheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+              (ModuleCat.of Λ Λ))) ⟶ F)
+        (hφπ : φ ≫ π = 0), Nonempty (IsColimit (CokernelCofork.ofπ π hφπ)) :=
+    sorry
   have := Etale.isFinitelyPresentable_sigma_etaleLowerShriek Λ V v hv hV
   have := Etale.isFinitelyPresentable_sigma_etaleLowerShriek Λ U w hw hU
   have (j : WalkingParallelPair) : IsFinitelyPresentable.{u} ((parallelPair φ 0).obj j) := by
