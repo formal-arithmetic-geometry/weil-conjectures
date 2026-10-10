@@ -11,9 +11,66 @@
   "def-weil-pbc-exact-sequence",
   "def-weil-pbc-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Base degree. Exactness of the target at $N$ [def-weil-pbc-exact-sequence] makes $\\eta:N_0\\to N$ surjective. Since $F_0$ is free, [lem-weil-pbc-free-module-projective] makes it projective. Apply the lifting characterization in [def-weil-pbc-projective-module] to the surjection $\\eta$ and the linear map $\\varphi\\pi:F_0\\to N$. This gives $\\alpha_0:F_0\\to N_0$ with $\\eta\\alpha_0=\\varphi\\pi$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-free-module-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 00LS (lemma-compare-resolutions), proof of (1), lines 17525-17535 in the inspected source."
+   }
+  },
+  {
+   "text": "First differential. Put $g_1=\\alpha_0\\delta_1:F_1\\to N_0$. The calculation $\\eta g_1=\\varphi\\pi\\delta_1=0$ shows that $g_1$ factors as a linear map $\\bar g_1:F_1\\to\\ker\\eta$, explicitly $x\\mapsto g_1(x)$ with its kernel-membership just checked. Exactness at $N_0$ [def-weil-pbc-exact-sequence] says $\\operatorname{im}\\partial_1=\\ker\\eta$, so $q_1:N_1\\to\\ker\\eta$, $y\\mapsto\\partial_1(y)$, is surjective. The projectivity of $F_1$ from [lem-weil-pbc-free-module-projective] and its lifting characterization [def-weil-pbc-projective-module] give $\\alpha_1$ with $q_1\\alpha_1=\\bar g_1$. Composing with the inclusion $\\ker\\eta\\hookrightarrow N_0$ gives $\\partial_1\\alpha_1=\\alpha_0\\delta_1$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-free-module-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 00LS (lemma-compare-resolutions), proof of (1), lines 17525-17535 in the inspected source."
+   }
+  },
+  {
+   "text": "Inductive extension. Suppose $n\\ge1$ and maps $\\alpha_0,\\ldots,\\alpha_n$ have been chosen satisfying the augmentation identity and $\\partial_i\\alpha_i=\\alpha_{i-1}\\delta_i$ for $1\\le i\\le n$. Set $g_{n+1}=\\alpha_n\\delta_{n+1}$. Then $\\partial_n g_{n+1}=\\partial_n\\alpha_n\\delta_{n+1}=\\alpha_{n-1}\\delta_n\\delta_{n+1}=0$. Thus $g_{n+1}$ defines a linear map $\\bar g_{n+1}:F_{n+1}\\to\\ker\\partial_n$ by the same elementwise formula. Exactness at $N_n$ [def-weil-pbc-exact-sequence] makes $q_{n+1}:N_{n+1}\\to\\ker\\partial_n$, $y\\mapsto\\partial_{n+1}(y)$, a surjective linear map. Apply [lem-weil-pbc-free-module-projective] and the lifting characterization [def-weil-pbc-projective-module] to obtain $\\alpha_{n+1}$ with $q_{n+1}\\alpha_{n+1}=\\bar g_{n+1}$. Composing with the kernel inclusion gives precisely $\\partial_{n+1}\\alpha_{n+1}=\\alpha_n\\delta_{n+1}$; the earlier equations are preserved because the earlier maps are retained.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-free-module-projective",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 00LS (lemma-compare-resolutions), proof of (1), lines 17525-17535 in the inspected source."
+   }
+  },
+  {
+   "text": "For each admissible finite tuple of maps choose one extension furnished above, and recursively start with the base map and apply these choices. The first-differential step starts the recursion, and the inductive extension supplies every subsequent degree. The resulting family $(\\alpha_i)_{i\\ge0}$ has the stated augmentation identity and all chain identities. Only the target was required to be exact; for the source the two zero-composite hypotheses were exactly those used in the displayed calculations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 00LS (lemma-compare-resolutions), proof of (1), lines 17525-17535 in the inspected source."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-free-module-projective",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00LS (lemma-compare-resolutions), proof of (1), lines 17525-17535 in the inspected source."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +107,7 @@
   "file": "Mathlib/CategoryTheory/Abelian/Projective/Resolution.lean (lines 55--110); Mathlib/Algebra/Homology/ShortComplex/Exact.lean (line 954); Mathlib/Algebra/Homology/HomologicalComplex.lean (line 1057)",
   "how": "not a leaf: ProjectiveResolution.lift needs the source to be a projective resolution, i.e. exact, while the node's source complex (a Koszul complex in its use) need not be exact; the proof of lift (liftFZero/liftFOne/liftFSucc, lines 55--98, read) uses only the projectivity of the source terms and the exactness of the target, so the node follows by repeating that construction with Exact.liftFromProjective and ChainComplex.mkHom; free modules are projective (Module.Projective.of_free)."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +128,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00LS (1), comparison map from a complex of free modules to a resolution. Unsplit; Mathlib candidate (ProjectiveResolution.lift needs exactness of the source) recorded."
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L read the four steps (00LS (1)): lifts along surjections onto kernels using projectivity of free modules (new leaf Module.Projective.of_free), induction and recursive choice; only target exactness used."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-free-complex-maps-to-resolution",
+  "worker": "stage1",
+  "summary": "Read Stacks 00LS (lemma-compare-resolutions), part (1) and its proof, plus 05CF (lemma-characterize-projective), free-projective implication. Statement unchanged. Wrote the degree-zero lift, first kernel factorization, explicit induction claim and extension, and recursive selection of a compatible infinite family. One genuinely smaller new Mathlib leaf: free modules are projective; the existing projective-module definition supplies its public lifting characterization. No exactness of the source, finiteness, or projectivity of target terms is assumed. Checked zero modules, empty/infinite bases, finite target resolutions padded by zeros. Three search kinds recorded on the new node; official current-head Mathlib source read with exact revision, project-pin limitation recorded."
+ }
 }
