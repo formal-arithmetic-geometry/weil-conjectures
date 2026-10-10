@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-tor-long-exact-first-variable",
+ "kind": "statement",
+ "title": "Low-degree long exact Tor sequence in the first variable, natural in the second",
+ "statement": "Let $R$ be a commutative ring, $0\\to Q\\xrightarrow{u}Q'\\xrightarrow{v}Q''\\to0$ a short exact sequence of $R$-modules and $N$ an $R$-module. Then there is an $R$-linear map $\\delta_N:\\operatorname{Tor}^R_1(Q'',N)\\to Q\\otimes_RN$ such that the sequence $$\\operatorname{Tor}^R_1(Q',N)\\xrightarrow{\\operatorname{Tor}_1(v,N)}\\operatorname{Tor}^R_1(Q'',N)\\xrightarrow{\\delta_N}Q\\otimes_RN\\xrightarrow{u\\otimes1}Q'\\otimes_RN\\xrightarrow{v\\otimes1}Q''\\otimes_RN\\to0$$ is exact (with $\\operatorname{Tor}$ and its functoriality as in [def-weil-pbc-tor-modules]), and $\\delta$ is natural in $N$: for every $R$-linear map $g:N\\to N'$ one has $(1_Q\\otimes g)\\circ\\delta_N=\\delta_{N'}\\circ\\operatorname{Tor}_1(Q'',g)$, so that all maps of the sequence commute with the maps induced by $g$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M0 (lemma-long-exact-sequence-tor, line 18291: the sequence for a short exact sequence in the second variable) together with Lemma Tag 00M3 (lemma-tor-left-right, line 18534: Tor_i(M, N) = Tor_i(N, M)), which give it in the first variable; used in this form in More on Algebra, proof of Lemma 0912 (more-algebra.tex lines 6515--6520). Tags verified in tags/tags: 00M0,algebra-lemma-long-exact-sequence-tor; 00M3,algebra-lemma-tor-left-right"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "long exact sequence of Tor for a short exact sequence of modules",
+   "results": "LinearMap.rTensor_exact_iff_lTensor_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_exact, lTensor_exact (right exactness only), CategoryTheory.Tor",
+   "verdict": "no match (only the right-exact part Q (x) N -> Q' (x) N -> Q'' (x) N -> 0: lTensor_exact/rTensor_exact)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "long exact sequence of left derived functors (Tor) associated to a short exact sequence, connecting homomorphism",
+   "results": "CategoryTheory.ShortComplex.ShortExact.δ, δ_apply, δ_eq (Mathlib.Algebra.Homology.HomologySequence: homology sequence of a short exact sequence of complexes), ShortComplex.ShortExact.singleδ, HomologicalComplex.HomologySequence.composableArrows₅",
+   "verdict": "no match (the homology long exact sequence of a short exact sequence of complexes exists; no long exact sequence for Functor.leftDerived or Tor)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ShortExact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/LeftDerived.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Tor.lean; grep -rln 'leftDerived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "no ShortExact in LeftDerived.lean or Tor.lean; leftDerived used in Monoidal/Tor.lean, Abelian/LeftDerived.lean, Functor/Derived/*, Abelian/Ext.lean, RightDerived.lean, GroupHomology/Basic.lean, none with a long exact sequence",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-limit-flat-modules",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

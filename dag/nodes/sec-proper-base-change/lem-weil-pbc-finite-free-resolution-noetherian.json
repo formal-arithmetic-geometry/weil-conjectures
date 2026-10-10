@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-finite-free-resolution-noetherian",
+ "kind": "statement",
+ "title": "A finite module over a Noetherian ring has a resolution by finite free modules (Stacks 00LP)",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $M$ a finitely generated $R$-module [def-weil-finitely-generated-module]. Then there exist integers $n_0,n_1,n_2,\\ldots\\ge0$ and $R$-linear maps forming an exact complex $$\\cdots\\to R^{\\oplus n_2}\\xrightarrow{d_2}R^{\\oplus n_1}\\xrightarrow{d_1}R^{\\oplus n_0}\\xrightarrow{\\varepsilon}M\\to0,$$ i.e. $\\varepsilon$ is surjective, $\\ker\\varepsilon=\\operatorname{im}d_1$ and $\\ker d_i=\\operatorname{im}d_{i+1}$ for all $i\\ge1$; in particular it is a resolution of $M$ by finite free $R$-modules.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LP (lemma-resolution-by-finite-free, line 17411), part (2), with its proof (lines 17428--17436). Tag verified in tags/tags: 00LP,algebra-lemma-resolution-by-finite-free"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated module over Noetherian ring has a resolution by finite free modules",
+   "results": "Module.finitePresentation_iff_finite, Module.finitePresentation_of_finite (Mathlib.Algebra.Module.FinitePresentation; one step only: a finite presentation), IsNoetherian.mk, isNoetherian_def, Module.IsNoetherian.finite",
+   "verdict": "no match (only the first two terms of the resolution: finite presentation)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exists a free resolution by finitely generated free modules of a finite module over a Noetherian ring",
+   "results": "Module.finitePresentation_of_finite, Module.finitePresentation_iff_finite, FGModuleRepr, Module.FinitePresentation.exists_fin, isNoetherian_of_isNoetherianRing_of_finite",
+   "verdict": "no match (the inductive step R^n -> kernel is available: isNoetherian_of_isNoetherianRing_of_finite gives that the kernel is finitely generated)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ProjectiveResolution.*Finite\\|finite free resolution\\|FreeResolution\\|freeResolution' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-limit-flat-modules",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -9,11 +9,106 @@
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-flat-ring-map"
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Conventions. For $m\\ge n$ write $p_{mn}:M_m\\to M_n$ for the composite transition map and $p_n:M\\to M_n$ for the projections. Let $Q$ be a finitely generated $A$-module [def-weil-finitely-generated-module]. By [lem-weil-pbc-finite-free-resolution-noetherian] ($A$ is Noetherian) choose an exact complex $\\cdots\\to F_2\\xrightarrow{d_2}F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\varepsilon}Q\\to0$ with $F_i\\cong A^{\\oplus t_i}$ finite free. For every $A$-module $N$ the complex $F_\\bullet\\otimes_AN$ computes Tor: $\\operatorname{Tor}^A_1(Q,N)=\\ker(d_1\\otimes1)/\\operatorname{im}(d_2\\otimes1)$, functorially in $N$ [def-weil-pbc-tor-modules]; and by right exactness of $-\\otimes_AN$ applied to $F_1\\to F_0\\to Q\\to0$ [lem-weil-pbc-tensor-right-exact], $\\varepsilon\\otimes1$ induces an isomorphism $\\operatorname{coker}(d_1\\otimes1_N)\\cong Q\\otimes_AN$, natural in $N$. So $F_2\\otimes_AN\\to F_1\\otimes_AN\\to F_0\\otimes_AN$ is a complex with homology $\\operatorname{Tor}^A_1(Q,N)$ in degree 1 and $Q\\otimes_AN$ in degree 0, naturally in $N$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0912, lines 6489--6497 (finite free resolution: Algebra, Lemma 00LP; Tor as in Algebra, Section 00LY)"
+   }
+  },
+  {
+   "text": "Tor of the levels. Fix $n\\ge1$ and write $A_n=A/I^n$. Since $I^nM_n=0$, $M_n$ is an $A_n$-module and $M_n/I^nM_n=M_n$. By [lem-weil-pbc-tensor-over-quotient-ring] (2) (with $J=I^n$, the $A_n$-module $M_n$ in the role of its $A$ and $F$ in the role of its $M$) and (1), there are isomorphisms $M_n\\otimes_AF\\cong M_n\\otimes_{A_n}(F/I^nF)\\cong M_n\\otimes_{A_n}(A_n\\otimes_AF)$, natural in the $A$-module $F$ and in the $A_n$-module $M_n$; hence (after the symmetry of $\\otimes$) an isomorphism of complexes $F_\\bullet\\otimes_AM_n\\cong(F_\\bullet\\otimes_AA_n)\\otimes_{A_n}M_n$, $f\\otimes x\\mapsto(f\\otimes1)\\otimes x$. As $M_n$ is a flat $A_n$-module [def-weil-pbc-flat-ring-map], the functor $-\\otimes_{A_n}M_n$ on $A_n$-modules preserves injections and (by [lem-weil-pbc-tensor-right-exact]) cokernels, so it is exact, and by [lem-weil-pbc-exact-functor-complex-cohomology] it commutes with homology. Therefore $\\operatorname{Tor}^A_1(Q,M_n)\\cong\\operatorname{Tor}^A_1(Q,A/I^n)\\otimes_{A/I^n}M_n$, $[\\sum f_k\\otimes x_k]\\mapsto\\sum[f_k\\otimes1]\\otimes x_k$ on cycles of the form $\\sum_k(f_k\\otimes1)\\otimes x_k$. For $m\\ge n$ these isomorphisms are compatible with the transition maps: the map $\\operatorname{Tor}^A_1(Q,M_m)\\to\\operatorname{Tor}^A_1(Q,M_n)$ induced by $p_{mn}$ corresponds to $\\tau_{mn}\\otimes p_{mn}:[z]\\otimes x\\mapsto\\tau_{mn}([z])\\otimes p_{mn}(x)$, where $\\tau_{mn}:\\operatorname{Tor}^A_1(Q,A/I^m)\\to\\operatorname{Tor}^A_1(Q,A/I^n)$ is induced by $A/I^m\\to A/I^n$ (check on the elements $(f\\otimes\\bar a)\\otimes x$, which generate $(F_1\\otimes_AA_m)\\otimes_{A_m}M_m$).",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0912, lines 6497--6505 ('Tor_1(Q, M_n) = Tor_1(Q, A/I^n) (x)_{A/I^n} M_n as M_n is flat over A/I^n')"
+   }
+  },
+  {
+   "text": "The Tor systems are essentially zero. By [lem-weil-pbc-tor-strictly-pro-zero] (with $p=1$ and the finite module $Q$) there is $c>0$ such that $\\tau_{n,n-c}=0$ for all $n\\ge c$. By Step 2, for $n\\ge1$ the transition map $\\operatorname{Tor}^A_1(Q,M_{n+c})\\to\\operatorname{Tor}^A_1(Q,M_n)$ is $\\tau_{n+c,n}\\otimes p_{n+c,n}=0$. Consequently the inverse system $T_n=\\operatorname{Tor}^A_1(Q,M_n)$ (i) is ML: $\\operatorname{Im}(T_k\\to T_n)=0$ for all $k\\ge n+c$ (take $c(n)=n+c$ in the definition of [lem-weil-pbc-mittag-leffler-complex-limit-homology]); (ii) is essentially constant in the sense of that node, with $X=0$, $i_0=1$: $X\\to T_1\\to X$ is $\\mathrm{id}_0$ and for every $j$ the map $T_{j+c}\\to T_j$ is $0$, the composite through $X=0$; (iii) has $\\varprojlim_nT_n=0$: a compatible sequence $(z_n)$ has $z_n=$ image of $z_{n+c}$, which is $0$.",
+   "uses": [
+    "lem-weil-pbc-tor-strictly-pro-zero",
+    "lem-weil-pbc-mittag-leffler-complex-limit-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0912, lines 6505--6506 ('By Lemma 0911 we see that this system is essentially constant (with value 0)')"
+   }
+  },
+  {
+   "text": "$Q\\otimes_AM\\cong\\varprojlim_nQ\\otimes_AM_n$. Apply [lem-weil-pbc-mittag-leffler-complex-limit-homology] to the inverse system of complexes $A^{-2}_n=F_2\\otimes_AM_n\\to A^{-1}_n=F_1\\otimes_AM_n\\to A^0_n=F_0\\otimes_AM_n\\to A^1_n=0$ with transition maps $1\\otimes p_{n+1,n}$. Its hypotheses hold: under $F_i\\cong A^{\\oplus t_i}$ the map $F_i\\otimes_AM_{n+1}\\to F_i\\otimes_AM_n$ is $p_{n+1,n}^{\\oplus t_i}$, surjective, so $(A^{-2}_n)$ and $(A^{-1}_n)$ are ML with $c(n)=n$ (images of surjective maps are everything; Stacks, Algebra Example 0596); $H^{-1}_n=\\operatorname{Tor}^A_1(Q,M_n)$ (Step 1) is essentially constant (Step 3). Its conclusion: $H^0$ of the limit complex maps isomorphically onto $\\varprojlim_nH^0_n=\\varprojlim_nQ\\otimes_AM_n$ (Step 1). The limit complex is $F_2\\otimes_AM\\to F_1\\otimes_AM\\to F_0\\otimes_AM$: the canonical maps $F_i\\otimes_AM\\to\\varprojlim_nF_i\\otimes_AM_n$, $f\\otimes x\\mapsto(f\\otimes p_n(x))_n$, are isomorphisms since under $F_i\\cong A^{\\oplus t_i}$ they become $M^{\\oplus t_i}\\to\\varprojlim_n M_n^{\\oplus t_i}=(\\varprojlim_n M_n)^{\\oplus t_i}$, the identity, and they commute with $d_i\\otimes1$ (naturality in $F$). So $H^0=\\operatorname{coker}(d_1\\otimes1_M)\\cong Q\\otimes_AM$ (Step 1 with $N=M$), and tracing an element $f\\otimes x$ shows that the resulting isomorphism $Q\\otimes_AM\\to\\varprojlim_nQ\\otimes_AM_n$ is the canonical map $\\gamma_Q:q\\otimes x\\mapsto(q\\otimes p_n(x))_n$. This proves the second assertion; $\\gamma_Q$ is natural in $Q$ (evident on generators $q\\otimes x$).",
+   "uses": [
+    "lem-weil-pbc-mittag-leffler-complex-limit-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0912, lines 6506--6511 (Homology, Lemma 070E; Algebra, Example 0596 for ML of surjective systems)"
+   }
+  },
+  {
+   "text": "Reduction of flatness. By [lem-weil-pbc-flat-fg-ideal-criterion] it suffices to show that $\\mathfrak a\\otimes_AM\\to A\\otimes_AM=M$ is injective for every finitely generated ideal $\\mathfrak a\\subseteq A$; this is the case $Q=\\mathfrak a$, $Q'=A$ of the following claim: for every injective $A$-linear map $u:Q\\to Q'$ of finitely generated $A$-modules, $u\\otimes1_M:Q\\otimes_AM\\to Q'\\otimes_AM$ is injective. By Step 4 and the naturality of $\\gamma$, $\\varprojlim_n(u\\otimes1_{M_n})\\circ\\gamma_Q=\\gamma_{Q'}\\circ(u\\otimes1_M)$ with $\\gamma_Q,\\gamma_{Q'}$ isomorphisms, so $\\ker(u\\otimes1_M)\\cong\\ker\\big(\\varprojlim_nQ\\otimes_AM_n\\to\\varprojlim_nQ'\\otimes_AM_n\\big)$ and it suffices that the latter kernel is $0$.",
+   "uses": [
+    "lem-weil-pbc-flat-fg-ideal-criterion",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0912, lines 6513--6519 (Algebra, Lemma 00HD)"
+   }
+  },
+  {
+   "text": "The limit of $Q\\otimes M_n\\to Q'\\otimes M_n$ is injective. Let $Q''=\\operatorname{coker}u$, a finitely generated $A$-module, so $0\\to Q\\xrightarrow{u}Q'\\xrightarrow{v}Q''\\to0$ is exact. By [lem-weil-pbc-tor-long-exact-first-variable], for each $n$ the sequence $\\operatorname{Tor}^A_1(Q',M_n)\\to\\operatorname{Tor}^A_1(Q'',M_n)\\xrightarrow{\\delta}Q\\otimes_AM_n\\xrightarrow{u\\otimes1}Q'\\otimes_AM_n$ is exact, and by the naturality in $M_n$ its maps commute with the maps induced by $p_{n+1,n}$: it is an inverse system of complexes $A^{-2}_n\\to A^{-1}_n\\to A^0_n\\to A^1_n$. By Step 3 applied to the finitely generated modules $Q'$ and $Q''$, the systems $(A^{-2}_n)=(\\operatorname{Tor}^A_1(Q',M_n))$ and $(A^{-1}_n)=(\\operatorname{Tor}^A_1(Q'',M_n))$ are ML and $\\varprojlim_n\\operatorname{Tor}^A_1(Q'',M_n)=0$; and $H^{-1}_n=0$ by exactness, an essentially constant system (value $X=0$). By [lem-weil-pbc-mittag-leffler-complex-limit-homology], $H^0$ of the limit complex is $\\varprojlim_nH^0_n=0$ (exactness at $A^0_n$), i.e. $\\ker\\big(\\varprojlim_nQ\\otimes_AM_n\\to\\varprojlim_nQ'\\otimes_AM_n\\big)$ equals the image of $\\varprojlim_n\\operatorname{Tor}^A_1(Q'',M_n)=0$. So this kernel is $0$; by Step 5, $u\\otimes1_M$ is injective, and $M$ is a flat $A$-module [def-weil-pbc-flat-ring-map].",
+   "uses": [
+    "lem-weil-pbc-tor-long-exact-first-variable",
+    "lem-weil-pbc-mittag-leffler-complex-limit-homology",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 0912, lines 6514--6526 (exact sequence of Tor's: Algebra, Lemmas 00M0 and 00M3; Homology, Lemma 070E)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-tor-strictly-pro-zero",
+  "lem-weil-pbc-mittag-leffler-complex-limit-homology",
+  "lem-weil-pbc-flat-fg-ideal-criterion",
+  "lem-weil-pbc-tor-long-exact-first-variable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 0912 (lemma-limit-flat, line 6475), proof lines 6489--6526"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +133,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +153,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-limit-flat-modules",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 0912 (tags 0912, 0911, 070E, 00HD, 00LP, 00M0, 00M3, 02N0, 05PU verified in tags/tags); kept, with def-weil-finitely-generated-module added to stmt_deps (the tensor clause is for finitely generated Q). Proof written in six steps following Stacks: a finite free resolution of Q (new node lem-weil-pbc-finite-free-resolution-noetherian, 00LP), Tor_1(Q, M_n) = Tor_1(Q, A/I^n) (x)_{A/I^n} M_n by flatness of M_n over A/I^n (existing tensor-over-quotient-ring, right exactness and exact-functor-complex-cohomology leaves; Tor definition def-weil-pbc-tor-modules created concurrently by another worker), the Tor systems essentially zero by 0911 (new node lem-weil-pbc-tor-strictly-pro-zero), Q (x) M = lim Q (x) M_n by 070E (new node lem-weil-pbc-mittag-leffler-complex-limit-homology), flatness via the f.g.-ideal criterion 00HD (existing leaf lem-weil-pbc-flat-fg-ideal-criterion) and the Tor exact sequence in the first variable (new node lem-weil-pbc-tor-long-exact-first-variable, 00M0 + 00M3) with 070E again. Stacks' application of 070E in the second part needs that an essentially zero system is ML with zero limit; written out in Step 3."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps follow Stacks 0912: finite free resolution (new 00LP node), Tor_1(Q, M_n) = Tor_1(Q, A/I^n) tensor M_n by flatness, essentially-zero Tor systems (new 0911 node), Mittag-Leffler (new 070E node, stated with ML and essentially constant written out), finitely-generated-ideal criterion leaf, Tor long exact sequence in the first variable (new node, 00M0 + 00M3). Tor via the Tor definition leaf. Tags 0912, 0911, 070E, 00HD, 00LP, 00M0, 00M3, 02N0, 05PU verified."
+ }
 }

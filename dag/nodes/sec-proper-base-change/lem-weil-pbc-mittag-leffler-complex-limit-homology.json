@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-mittag-leffler-complex-limit-homology",
+ "kind": "statement",
+ "title": "Limit of an inverse system of complexes with ML terms and essentially constant H^{-1} (Stacks 070E)",
+ "statement": "For an inverse system $(B_i)_{i\\ge1}$ of abelian groups (transition homomorphisms $B_{i+1}\\to B_i$, hence composites $B_k\\to B_i$ for $k\\ge i$) let $\\varprojlim_iB_i=\\{(x_i)\\in\\prod_iB_i: x_{i+1}\\mapsto x_i\\}$. The system is *Mittag-Leffler* (ML) if for every $i$ there is $c(i)\\ge i$ with $\\operatorname{Im}(B_k\\to B_i)=\\operatorname{Im}(B_{c(i)}\\to B_i)$ for all $k\\ge c(i)$. It is *essentially constant* if there are an abelian group $X$ with homomorphisms $X\\to B_i$ compatible with the transition maps, an index $i_0$ and a homomorphism $B_{i_0}\\to X$ such that $X\\to B_{i_0}\\to X$ is the identity and for every $j$ there is $k\\ge\\max(i_0,j)$ such that $B_k\\to B_j$ equals the composite $B_k\\to B_{i_0}\\to X\\to B_j$.\n\nNow let $(A^{-2}_i\\xrightarrow{d^{-2}_i}A^{-1}_i\\xrightarrow{d^{-1}_i}A^0_i\\xrightarrow{d^0_i}A^1_i)_{i\\ge1}$ be an inverse system of complexes of abelian groups ($d^{j+1}_id^j_i=0$; transition maps $A^j_{i+1}\\to A^j_i$ commuting with the $d$'s), let $A^j=\\varprojlim_iA^j_i$ with the induced complex $A^{-2}\\to A^{-1}\\to A^0\\to A^1$, let $H^j_i=\\ker d^j_i/\\operatorname{im}d^{j-1}_i$ ($j=-1,0$) with the induced inverse systems, and let $H^{-1},H^0$ be the corresponding cohomology groups of the limit complex. If $(A^{-2}_i)$ and $(A^{-1}_i)$ are ML and $(H^{-1}_i)$ is essentially constant, then the canonical map $H^0\\to\\varprojlim_iH^0_i$, $[(x_i)_i]\\mapsto([x_i])_i$, is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma Tag 070E (lemma-apply-Mittag-Leffler-again, line 7810), with its proof (lines 7826--7866: uses Lemma 02N1 (lemma-Mittag-Leffler), Lemma 070D (lemma-exact-sequence-ML) and Lemma 070C (lemma-essentially-constant)); ML is Definition 02N0 (definition-Mittag-Leffler, line 7652), essentially constant is Categories, Definition 05PU (definition-essentially-constant-diagram, categories.tex line 2928, part (2) for the cofiltered index category); inverse systems indexed by i >= 1 as in homology.tex lines 7605--7640. Tags verified in tags/tags: 070E,homology-lemma-apply-Mittag-Leffler-again; 02N0; 02N1; 070C; 070D; 05PU,categories-definition-essentially-constant-diagram"
+ },
+ "stmt_deps": [
+  "def-weil-inverse-system"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Mittag-Leffler inverse system of abelian groups, limit of exact sequence is exact, inverse limit commutes with homology",
+   "results": "HomologicalComplex.instHasLimit (Algebra.Homology.HomologicalComplexLimits), InverseSystem.invLimEquiv, CategoryTheory.Abelian.Ext.contravariantSequence_exact, CategoryTheory.Functor.exact_tfae, Functor.preservesHomologyOfExact, InverseSystem.piEquivLim",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse system of complexes of abelian groups with Mittag-Leffler terms and essentially constant homology: homology of the limit equals limit of homology",
+   "results": "HomologicalComplex.isLimitConeOfHasLimitEval, InverseSystem.invLimEquiv, InverseSystem.invLimEquiv_apply_coe, HomologicalComplex.instHasLimit, HomologicalComplex.isLimitOfEval",
+   "verdict": "no match (limits of complexes are computed degreewise; nothing on the homology of a limit)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'MittagLeffler\\|Mittag-Leffler' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'essentially constant\\|EssentiallyConstant\\|ProZero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "CategoryTheory/CofilteredSystem.lean (Functor.IsMittagLeffler for J => Type, eventualRange, surjective_toEventualRanges: set-valued systems only), RingTheory/AdicCompletion/Exactness.lean (comment: proved without ML), Cotangent.lean (unrelated); 'essentially constant' only in a comment of Algebra/Homology/Factorizations/CM5a.lean",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-limit-flat-modules",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
