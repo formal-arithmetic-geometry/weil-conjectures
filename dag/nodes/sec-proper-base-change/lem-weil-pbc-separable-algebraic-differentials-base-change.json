@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-separable-algebraic-differentials-base-change",
+ "kind": "statement",
+ "title": "Kähler differentials extend by scalars across a separable algebraic field extension",
+ "statement": "Let $k\\subseteq F\\subseteq K$ be fields [def-pc-field-extension] and suppose that $K/F$ is finite ($\\dim_F K<\\infty$) and separable algebraic [def-weil-pbc-separable-algebraic-extension]. For the modules of Kähler differentials and universal derivations [def-weil-pbc-kahler-differentials], the canonical $K$-linear map $K\\otimes_F\\Omega_{F/k}\\to\\Omega_{K/k}$, $a\\otimes\\mathrm df\\mapsto a\\,\\mathrm d f$ for $a\\in K$ and $f\\in F$, is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44192-44202: the assertion that Omega_{K/k} is free on dx_i for finite separable K/k(x_i), with the computation omitted; Lemma Tag 090W (lemma-characterize-separable-algebraic-field-extensions), lines 44137-44160, identifies finite separable field extensions as formally étale"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Kähler differentials base change isomorphism for separable algebraic field extension K over F: K tensor F Omega F over k is Omega K over k",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.isBaseChange_of_formallyEtale (Mathlib.RingTheory.Etale.Kaehler); KaehlerDifferential.tensorKaehlerEquivBase concerns pushouts, not this tower",
+   "date": "2026-10-10",
+   "verdict": "match after the separable-field-to-formally-etale instance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite separable field extension does not add Kähler differentials: base change of differentials along a separable algebraic extension is an isomorphism",
+   "results": "Algebra.FormallyEtale.of_isSeparable (Mathlib.RingTheory.Etale.Field), KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale (Mathlib.RingTheory.Etale.Kaehler)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "results": "tensorKaehlerEquivOfFormallyEtale, tensorKaehlerEquivOfFormallyEtale_apply, tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap (Mathlib.RingTheory.Etale.Kaehler)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'tensorKaehlerEquivOfFormallyEtale|of_isSeparable' Mathlib/RingTheory/Etale/Kaehler.lean Mathlib/RingTheory/Etale/Field.lean; sed -n '25,60p' Mathlib/RingTheory/Etale/Kaehler.lean; sed -n '90,105p' Mathlib/RingTheory/Etale/Field.lean",
+   "results": "Etale/Kaehler.lean:38 canonical K-linear equivalence K tensor_F Omega[F/k] to Omega[K/k]; :47 its inverse sends d(f) to 1 tensor d(f). Etale/Field.lean:98 Algebra.FormallyEtale.of_isSeparable provides its hypothesis for fields F,K with Algebra.IsSeparable F K.",
+   "date": "2026-10-10",
+   "verdict": "match; source lines read"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+  "file": "Mathlib/RingTheory/Etale/Kaehler.lean",
+  "line": 38,
+  "how": "specializes in one line with (R,S,T)=(k,F,K): Algebra.FormallyEtale.of_isSeparable F K (Mathlib/RingTheory/Etale/Field.lean:98) supplies the instance from separable algebraicity, which is Algebra.IsSeparable F K (Mathlib/FieldTheory/Separable.lean:549); tensorKaehlerEquivOfFormallyEtale k F K (Etale/Kaehler.lean:38) is the required K-linear isomorphism, and its defining mapBaseChange sends a tensor a tensor df to a d(f) (Etale/Kaehler.lean:38-43, :47-50). Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-separably-generated-differentials-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none"},
+  "slopmaster2": {"state": "none"}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

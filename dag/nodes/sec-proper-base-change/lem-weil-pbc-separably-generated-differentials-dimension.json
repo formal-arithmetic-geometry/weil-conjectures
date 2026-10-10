@@ -15,9 +15,70 @@
   "def-weil-pbc-kahler-differentials",
   "def-kun-transcendence-degree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=k(x_1,\\dots,x_r)\\subseteq K$. By [def-weil-pbc-transcendence-basis], the $x_i$ are algebraically independent over $k$, so evaluation gives an injection $P=k[X_1,\\dots,X_r]\\hookrightarrow K$. Its fraction field maps isomorphically onto $F$: the image consists of the fractions $g(x)/h(x)$ with $g,h\\in P$, $h\\ne0$, and is precisely the smallest subfield of $K$ containing $k$ and all $x_i$.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44189-44197, where the purely transcendental field k(x_1,...,x_r) is introduced; the fraction-field identification is expanded from Definition Tag 030E (definition-transcendence) in literature/stacks-project/fields.tex"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-polynomial-ring-kahler-basis] (Algebra, Tag 00RX), $\\Omega_{P/k}$ is free over $P$ on $\\mathrm dX_1,\\dots,\\mathrm dX_r$. Let $S=P\\setminus\\{0\\}$. The localization is $S^{-1}P=F$ by step 1, and [lem-weil-pbc-kahler-differentials-localization] (Algebra, Tag 00RT) gives $\\Omega_{F/k}\\cong S^{-1}\\Omega_{P/k}$. Localizing the displayed free basis gives the $F$-basis $\\mathrm dx_1,\\dots,\\mathrm dx_r$ of $\\Omega_{F/k}$, since the localization map sends $\\mathrm dX_i$ to $\\mathrm dx_i$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44194-44199 (the direct-sum formula for Omega of k(x_1,...,x_r)); Lemma Tag 00RX (lemma-differentials-polynomial-ring), lines 34310-34345; Lemma Tag 00RT (lemma-differentials-localize), lines 34078-34100"
+   }
+  },
+  {
+   "text": "The hypothesis says that $K/F$ is separable algebraic [def-weil-pbc-separable-algebraic-extension]. It is finite: if $K=k(a_1,\\dots,a_n)$ as in the statement, then $K=F(a_1,\\dots,a_n)$, and adjoining each algebraic $a_i$ has finite degree over the preceding field; multiplying these finitely many degrees gives $[K:F]<\\infty$. Thus [lem-weil-pbc-separable-algebraic-differentials-base-change] applies and makes the canonical $K$-linear map $K\\otimes_F\\Omega_{F/k}\\xrightarrow{\\sim}\\Omega_{K/k}$, $a\\otimes\\mathrm df\\mapsto a\\,\\mathrm df$, an isomorphism.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-separable-algebraic-differentials-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44189-44202: K is finite separable over k(x_1,...,x_r), and the differential computation is omitted; Lemma Tag 090W (lemma-characterize-separable-algebraic-field-extensions), lines 44137-44160"
+   }
+  },
+  {
+   "text": "Tensoring the free $F$-module from step 2 with $K$ gives a free $K$-module with basis $1\\otimes\\mathrm dx_1,\\dots,1\\otimes\\mathrm dx_r$. The isomorphism of step 3 sends these vectors to $\\mathrm dx_1,\\dots,\\mathrm dx_r$ in $\\Omega_{K/k}$, so they form a $K$-basis. It has $r$ elements; by [def-kun-transcendence-degree], a transcendence basis of $K/k$ has cardinality $r=\\operatorname{trdeg}_k K$. Consequently $\\dim_K\\Omega_{K/k}=r=\\operatorname{trdeg}_k K$, including $r=0$.",
+   "uses": [
+    "lem-weil-pbc-separable-algebraic-differentials-base-change",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44194-44202 (the two direct-sum descriptions of the differentials); the dimension equality is stated in the proof of Lemma Tag 00TV (lemma-separable-smooth), line 38765"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-transcendence-basis",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-separable-algebraic-differentials-base-change",
+  "def-kun-transcendence-degree"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44189-44202, with its omitted finite-separable computation supplied by the Mathlib leaf lem-weil-pbc-separable-algebraic-differentials-base-change; Tags 00RX, 00RT and 090W"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,7 +110,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -70,5 +131,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): the differentials of a separating transcendence basis form a basis of Ω_{K/k} (proof of Algebra 031W, 'computation omitted'). Unsplit."
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: 031W/00TV: Omega of k(x) free on dx_i by 00RX and localization 00RT, K/F finite separable, base change iso by the new leaf (tensorKaehlerEquivOfFormallyEtale, Etale/Kaehler.lean:38, with FormallyEtale.of_isSeparable, Etale/Field.lean:98, verified)"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-separably-generated-differentials-dimension",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Algebra 031W (lines 44189-44202) and the dimension assertion in 00TV. The omitted computation splits into the polynomial differential basis (existing Mathlib leaf 00RX), localization to the rational-function field (existing Mathlib leaf 00RT), and the canonical differential base-change isomorphism along finite separable K/k(x_i) (new Mathlib leaf, Mathlib/RingTheory/Etale/Kaehler.lean:38 via Etale/Field.lean:98). The four steps spell out the fraction-field identification, finite-degree reduction, basis transport, and the r=0 case."
+ }
 }
