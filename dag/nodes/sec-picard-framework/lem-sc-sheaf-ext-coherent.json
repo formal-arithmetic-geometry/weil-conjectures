@@ -13,20 +13,91 @@
   "document": "literature/stacks-project/perfect.tex",
   "place": "Derived Categories of Schemes, Lemma lemma-coherent-internal-hom (Tag 0D0C), applied to K = F[0] in D^-_Coh and L = G[0] in D^+_Coh: RHom(F,G) lies in D^+_Coh, so its cohomology sheaves Ext^q(F,G) are coherent"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Coherence, being quasi-coherent of finite type on a locally Noetherian scheme [pqf-lem-coherent-ft-locnoeth], is checked on an affine open cover. Let $x\\in X$ and choose, by [pqf-def-locnoeth], an affine open $U=\\operatorname{Spec}(A)\\ni x$ with $A$ Noetherian. By [pqf-lem-coherent-ft-locnoeth] $\\mathcal F$ and $\\mathcal G$ are quasi-coherent of finite type, so $M=\\mathcal F(U)$ and $N=\\mathcal G(U)$ are finite $A$-modules by [lem-weil-pbc-quasi-coherent-finite-type-affine](a), and the counits give isomorphisms $\\widetilde M\\cong\\mathcal F|_U$, $\\widetilde N\\cong\\mathcal G|_U$ by [lem-weil-pbc-affine-tilde-gamma-adjunction](3) (Tag 01XZ).",
+   "uses": [
+    "pqf-def-locnoeth",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01XZ, affine characterization of coherent modules on a locally Noetherian scheme"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-sheaf-ext], $\\mathcal Ext^q_{\\mathcal O_X}(\\mathcal F,\\mathcal G)|_U=\\mathcal H^q(R\\mathcal Hom_{\\mathcal O_X}(\\mathcal F[0],\\mathcal G[0]))|_U$, and cohomology sheaves commute with restriction to the open $U$ (they are computed termwise). By [lem-sc-derived-internal-hom-restrict-open] (Tag 08DL) this is $\\mathcal H^q(R\\mathcal Hom_{\\mathcal O_U}(\\mathcal F|_U[0],\\mathcal G|_U[0]))$, which through the isomorphisms of Step 1 and the functoriality of $R\\mathcal Hom$ is $\\mathcal H^q(R\\mathcal Hom_U(\\widetilde M[0],\\widetilde N[0]))$. By [lem-sc-affine-rhom-qcoherent] this is $0$ for $q<0$ and $\\widetilde{\\operatorname{Ext}^q_A(M,N)}$ for $q\\ge0$.",
+   "uses": [
+    "def-weil-pbc-sheaf-ext",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-affine-rhom-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DL (lemma-restriction-RHom-to-U), with the affine computation of the cited node"
+   }
+  },
+  {
+   "text": "For $q\\ge0$, $\\operatorname{Ext}^q_A(M,N)$ is a finite $A$-module by [lem-sc-ext-noetherian-finite], so its associated sheaf $\\widetilde{\\operatorname{Ext}^q_A(M,N)}$ is quasi-coherent [pqf-def-coherent] and, its global sections being $\\operatorname{Ext}^q_A(M,N)$ [lem-weil-pbc-affine-tilde-gamma-adjunction](2), of finite type by [lem-weil-pbc-quasi-coherent-finite-type-affine](a); for $q<0$ it is the zero sheaf. Quasi-coherence and finite type are local, and the $U$ cover $X$, so $\\mathcal Ext^q_{\\mathcal O_X}(\\mathcal F,\\mathcal G)$ is quasi-coherent of finite type, hence coherent by [pqf-lem-coherent-ft-locnoeth] (Tag 01XZ).",
+   "uses": [
+    "lem-sc-ext-noetherian-finite",
+    "pqf-def-coherent",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "lemma-ext-noetherian, with Cohomology of Schemes Lemma 01XZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-pbc-sheaf-ext",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-affine-rhom-qcoherent",
+  "lem-sc-ext-noetherian-finite",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0D0C, expanded via the affine calculation and Algebra lemma-ext-noetherian"
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "coherence of sheaf Ext of coherent modules on locally Noetherian scheme",
+   "results": "generic sheaf cohomology and abelian-category declarations only",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ext, Module.Finite, Noetherian",
+   "results": "0 hits; unknown identifier Noetherian",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
-   "query": "grep -rn -i 'Ext' Mathlib/AlgebraicGeometry/Modules (pinned Mathlib of weil-conjectures-slopmaster2)",
-   "results": "no sheaf Ext of O_X-modules and no coherence statement for it",
-   "date": "2026-10-10",
+   "query": "grep -rn 'Ext.*finite|finite.*Ext' Mathlib/Algebra",
+   "results": "no matches",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-esv",
@@ -39,7 +110,7 @@
   "is": null,
   "from": {
    "node": "thm-sc-p1-duality",
-   "place": "parenthetical Ext-vanishing proof, the closedness of the support of SheafExt^q used for the support-dimension bound",
+   "place": "parenthetical Ext-vanishing proof, coherence of SheafExt^q used to make its support closed",
    "via": [
     "lem-sc-ext-support-cohomology-vanishing",
     "lem-sc-p1-ext-coherent-dim-one-vanishing"
@@ -54,5 +125,25 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-sheaf-ext-coherent",
+  "worker": "stage1",
+  "summary": "Repaired the relabelling defect by deleting the derived-internal-Hom restatement and writing the affine proof. Added statement-only inputs for affine RHom computation and finite module Ext over a Noetherian ring.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof in thm-sc-p1-duality: coherence of SheafExt^q used to make its support closed.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sec1820",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sec1820 (reviewer sub-agent of L); spot-checked: Return of 17:30 repaired: restatement node dropped, affine argument written (local reduction, affine RHom node, finite Ext node, 01XZ). New nodes true, not duplicates (same-tag list checked), no Mathlib match (grep Ext finiteness). Tool uses pqf-lem-coherent-ft-locnoeth (01XZ) and lem-weil-pbc-quasi-coherent-finite-type-affine are generic scheme facts (C7/C8 ok). FIX more, RETURN less: (1) C1 Step 2 used 08DL without a node: now cites lem-sc-derived-internal-hom-restrict-open plus def-weil-pbc-sheaf-ext and spells out restriction of H^q; (2) C1 Steps 1/3 used 01XZ with no node: now cite pqf-lem-coherent-ft-locnoeth, lem-weil-pbc-quasi-coherent-finite-type-affine(a), lem-weil-pbc-affine-tilde-gamma-adjunction(2)(3); (3) B3 new nodes: Ext^q_A (def-pc-ext, q>=0) was used for every integer q and stmt_deps missed RHom/H^q/Ext/tilde defs: affine node now states H^q=0 for q<0 and iso for q>=0, deps added; finite-Ext node cites def-pc-ext; item Step 3 treats q<0.; 3 file(s) fixed by the reviewer"
  }
 }

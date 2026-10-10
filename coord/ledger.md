@@ -2234,3 +2234,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:19 L: merged deliver/H1/lem-weil-pbc-open-subscheme-fpqc-descent (reviewer PASS; first push; new nodes: 2)
 - 18:20 L: merged deliver/J1/lem-sc-smooth-proper-diagonal-koszul-dual (reviewer FIX; after a return; new nodes: 1)
 - 18:21 L: returned deliver/M1/thm-pc-hilb-curves (reviewer RETURN: Reviewer R-thc1820 (head f6c014b03). More than three fixable faults, so RETURN. No cycle: thm-pc-hilb-curves is not reac)
+- 18:22 L: merged deliver/K1/lem-sc-sheaf-ext-coherent (reviewer FIX; after a return; new nodes: 2)
