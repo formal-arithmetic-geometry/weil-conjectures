@@ -14,14 +14,14 @@
  ],
  "proof": [
   {
-   "text": "Fix $\\mathfrak p\\subset A$ and a finite purely inseparable extension $k/\\kappa(\\mathfrak p)$. First localize at $\\mathfrak p$: flatness localizes, and the fibre of $A_{\\mathfrak p}\\to B_{\\mathfrak p}$ is the localization of the corresponding fibre of $A\\to B$, so the Noetherian and geometrically regular fibre conditions are unchanged. Thus $A_{\\mathfrak p}\\to B_{\\mathfrak p}$ is regular by the localization-preserves-fibres argument in the proof of [lem-weil-pbc-regular-local-maximal]. The quotient $A_{\\mathfrak p}\\to\\kappa(\\mathfrak p)$ is a finite-type map, so [lem-weil-pbc-regular-base-change] gives a regular map $\\kappa(\\mathfrak p)\\to B_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}\\kappa(\\mathfrak p)$. The finite extension $\\kappa(\\mathfrak p)\\to k$ is again finite type, and a second application gives a regular map $k\\to B_k:=B\\otimes_A k$. Since the base is a field, $B_k$ is Noetherian and regular (take the trivial purely inseparable extension in the definition). The hypothesis says $C\\otimes_A\\kappa(\\mathfrak p)$ is Noetherian; since $k/\\kappa(\\mathfrak p)$ is finite, $C_k:=C\\otimes_A k$ is a finite-type algebra over that fibre and is therefore Noetherian [lem-weil-pbc-finite-type-algebra-noetherian].",
+   "text": "Fix $\\mathfrak p\\subset A$ and a finite purely inseparable extension $k/\\kappa(\\mathfrak p)$. First localize at $\\mathfrak p$: flatness localizes, and the fibre of $A_{\\mathfrak p}\\to B_{\\mathfrak p}$ is the localization of the corresponding fibre of $A\\to B$, so the Noetherian and geometrically regular fibre conditions are unchanged. Precisely: $B_{\\mathfrak p}=B\\otimes_AA_{\\mathfrak p}$ is flat over $A_{\\mathfrak p}$ by flat base change [lem-weil-pbc-flat-module-base-change], and for a prime $\\mathfrak p'A_{\\mathfrak p}$ of $A_{\\mathfrak p}$ the fibre $B_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}\\kappa(\\mathfrak p')=B\\otimes_A\\kappa(\\mathfrak p')$ is the fibre of $A\\to B$ over $\\mathfrak p'$, Noetherian and geometrically regular; so $A_{\\mathfrak p}\\to B_{\\mathfrak p}$ is regular by [def-weil-pbc-g-ring]. The quotient $A_{\\mathfrak p}\\to\\kappa(\\mathfrak p)$ is a finite-type map, so [lem-weil-pbc-regular-base-change] gives a regular map $\\kappa(\\mathfrak p)\\to B_{\\mathfrak p}\\otimes_{A_{\\mathfrak p}}\\kappa(\\mathfrak p)$. The finite extension $\\kappa(\\mathfrak p)\\to k$ is again finite type, and a second application gives a regular map $k\\to B_k:=B\\otimes_A k$. Since the base is a field, $B_k$ is Noetherian and regular (take the trivial purely inseparable extension in the definition). The hypothesis says $C\\otimes_A\\kappa(\\mathfrak p)$ is Noetherian; since $k/\\kappa(\\mathfrak p)$ is finite, $C_k:=C\\otimes_A k$ is a finite-type algebra over that fibre and is therefore Noetherian [lem-weil-pbc-finite-type-algebra-noetherian].",
    "uses": [
     "def-weil-pbc-g-ring",
     "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-regular-local-maximal",
     "lem-weil-pbc-regular-base-change",
     "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-finite-type-algebra-noetherian"
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-flat-module-base-change"
    ],
    "elementary": false,
    "source": {
@@ -65,17 +65,16 @@
  "proof_deps": [
   "def-weil-pbc-g-ring",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-regular-local-maximal",
-  "lem-weil-pbc-regular-base-change",
   "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-flat-module-base-change",
-  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
-  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
-  "lem-weil-pbc-surjective-image-noetherian",
-  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
   "def-weil-regular-scheme",
-  "lem-weil-pbc-flat-ring-map-comp"
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-surjective-image-noetherian"
  ],
  "proof_origin": {
   "by": "document",
@@ -142,5 +141,6 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: second delivery: reduction written out via localization and two finite-type base changes (07C1 node), fibres of B_k -> C_k identified and 0381 node applied, new 031E node correct (tag verified); L reworded the localization justification in step 1 post-merge"
- }
+ },
+ "lead_note": "L 2026-10-10: step 1 cited 'the argument in the proof of' lem-weil-pbc-regular-local-maximal for A_p -> B_p regular; replaced by the direct justification (flat base change, fibres unchanged, definition)."
 }
