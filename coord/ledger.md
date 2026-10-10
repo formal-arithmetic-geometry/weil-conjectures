@@ -1719,3 +1719,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:05 L: returned deliver/E1/lem-pc-grothendieck-edge-cocycle (reviewer RETURN: 1. D1/D3 + C4: step 2 carries the whole content of the item (the left edge map equals the cocycle map H^n(G(F(I^.))) -> )
 - 15:06 L: merged deliver/C1/lem-sc-generic-vanishing-acyclic (reviewer FIX; first push; new nodes: 1)
 - 15:06 L: returned deliver/H1/lem-pc-nowhere-dense-dim-zero (reviewer RETURN: 1. E3/E5: step 2 of lem-pc-nowhere-dense-dim-zero: the step says the chain W_0 < W_1 <= C_i 'would have length at least )
+- 15:06 L: lem-sc-generic-vanishing-kernel-colimit created.by/date filled (maintainer field; reviewer R-gva's retry without it was fine)
