@@ -2,7 +2,12 @@
 """Where each node stands in Lean, read from the compiled project and written into the nodes.
 
 Usage:
-  tools/lean_status.py <branch>=<sorry map> [<branch>=<sorry map> ...]
+  tools/lean_status.py <branch>=<sorry map> [<branch>=<sorry map> ...] [--extra <branch>=dag/lean_names_upstream.json]
+
+--extra (decision of the human, 2026-10-10): for that branch the node's declarations also include the names of
+tools/lean_names_upstream.py: the current blueprint's `lean = [...]` list of the node and the declarations whose docstring
+carries `(blueprint: <node id>)`. When the current blueprint has a list for the node, an old `blueprint_lean` name that is not
+on the branch is recorded under `superseded` (renamed or dropped by the humans) instead of `missing`.
 
 A sorry map is the output of tools/sorry_map.lean for one branch (read plain or gzip-compressed, `.jsonl` or `.jsonl.gz`): every declaration of the project, whether its
 own term contains `sorry`, and the project declarations it uses. Auxiliary declarations are merged into their owner.
@@ -75,6 +80,18 @@ def hand_names(d):
 
 
 def main():
+    extra_by_branch, argv = {}, []
+    a = sys.argv[1:]
+    while a:
+        x = a.pop(0)
+        if x == "--extra" and a:
+            b, f = a.pop(0).split("=", 1)
+            u = json.loads(pathlib.Path(f).read_text())
+            bp = (u.get("blueprint") or {}).get("names", {})
+            ds = (u.get("docstring") or {}).get("names", {})
+            extra_by_branch[b] = {"blueprint": bp, "docstring": ds}
+        else:
+            argv.append(x)
     paths = {p.read_text() and json.loads(p.read_text())["id"]: p for p in (ROOT / "dag/nodes").rglob("*.json")}
     nodes = {i: json.loads(p.read_text()) for i, p in paths.items()}
     extra = tex_names(set(nodes))
@@ -101,8 +118,9 @@ def main():
                "nodes_with_names": sum(1 for v in names.values() if v), "branches": {}}
     for d in nodes.values():
         d["lean_audit"] = {}
-    for arg in sys.argv[1:]:
+    for arg in argv:
         branch, path = arg.split("=", 1)
+        ex = extra_by_branch.get(branch)
         own, deps = load_map(path)
         reach_sorry = {}
 
@@ -123,11 +141,23 @@ def main():
 
         counts = collections.Counter()
         for i, d in nodes.items():
-            found = [n for n in names[i] if n in own]
-            missing = [n for n in names[i] if n not in own]
+            ns, superseded = list(names[i]), []
+            if ex:
+                up = ex["blueprint"].get(i)
+                ns = list(dict.fromkeys(ns + (up or []) + ex["docstring"].get(i, [])))
+                if up is not None:
+                    superseded = [n for n in d.get("blueprint_lean", []) if n not in own and n not in up]
+                    ns = [n for n in ns if n not in superseded]
+                for n in ns:
+                    if i not in node_of[n]:
+                        node_of[n].append(i)
+            found = [n for n in ns if n in own]
+            missing = [n for n in ns if n not in own]
             a = {"state": "none", "decls": [dict(name=n, module=own[n]["module"], lines=[own[n]["l1"], own[n]["l2"]],
                                                    kind=own[n]["kind"], sorry=own[n]["sorry"]) for n in found],
                  "missing": missing}
+            if superseded:
+                a["superseded"] = superseded
             if found:
                 if any(own[n]["sorry"] for n in found):
                     a["state"] = "sorry_here"

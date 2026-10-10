@@ -19,6 +19,8 @@ What exists is material, not a finished split: the proof and dependency lists we
 
 Read also the slopmaster2 blueprint text for the node when it differs (`literature/blueprint/slopmaster2/`); the node's `source.document` is the master copy.
 
+**Rule (decision of the human, 2026-10-10): A node that a sorry-free declaration of slopmaster2 (the done branch, now at 71d63dcf) states exactly is finished and is not split. A worker who finds such a declaration for its item, or for a node it is about to create, attaches it (reports `<declaration> belongs to <node id>`, and for a new node records it in `lean_audit.slopmaster2.decls` with state `closed` left to `tools/lean_status.py`) instead of writing a proof; check the Lean statement against the node statement before attaching, and check for `sorry` with the sorry map. Look for it by the node id (`git -C ~/weil-conjectures-slopmaster2 grep -n "(blueprint: <id>)"`), by the names in the node and in `dag/lean_names_upstream.json`, and by a grep of `~/weil-conjectures-slopmaster2/WeilConjectures` for the key words.**
+
 ## 2. What to write into your item
 
 - `statement`: keep it unless it is wrong against its source; then correct it and say so in the report. A statement introduces its own objects: if it points at the objects another node constructed ("the map of [def-x]"), that is a statement dependency.
