@@ -2,7 +2,7 @@
 
 875 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (84)
+## Stage 1: nodes to split (83)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,7 +19,8 @@
 | `lem-pc-dq-coherator-adjunction` | 3020 | none |
 | `lem-pc-qcqs-sheaf-rhom-adjunction` | 3020 | none |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
-| `lem-sc-affine-perfect-open-represent-cohomology` | 3020 | none |
+| `lem-sc-affine-koszul-cech-derived-comparison` | 3021 | none |
+| `lem-sc-affine-perfect-koszul-principal-unit` | 3021 | none |
 | `lem-sc-affine-perfect-plus-locally-free` | 3021 | none |
 | `lem-pc-pseudo-coherent-summand` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -51,7 +52,6 @@
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
-| `lem-weil-pbc-power-in-base-after-localization` | - | none |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
 | `lemma-nagata-morphism-eq-eventually` | - | none |
@@ -65,7 +65,6 @@
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
 | `lem-weil-common-extension-fields` | - | none |
-| `def-sc-kahler-differentials` | - | none |
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-kun-separable-smooth-colimit` | - | none |
 | `lem-kun-stalk-as-pullback` | - | none |
@@ -91,7 +90,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (791)
+## Stage 2: nodes to state (792)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -668,6 +667,7 @@
 | `lem-weil-pbc-popescu-lift-once` | 1 | state |
 | `lem-weil-pbc-popescu-lift-twice` | 1 | state |
 | `lem-weil-pbc-popescu-product` | 1 | state |
+| `lem-weil-pbc-power-in-base-after-localization` | 1 | state |
 | `lem-weil-pbc-power-series-adic-evaluation` | 1 | state |
 | `lem-weil-pbc-power-series-complete-over-complete-base` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1 | state |
@@ -887,7 +887,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1623 nodes that wait for a statement dependency, 122 nodes that wait for stage 1.
+Not open yet: 1625 nodes that wait for a statement dependency, 121 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
