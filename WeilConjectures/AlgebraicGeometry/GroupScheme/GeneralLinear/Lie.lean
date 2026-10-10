@@ -10,6 +10,7 @@ public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.Mathlib.Algebra.DualNumber
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 /-!
 # The Lie algebra of `GL_n` and rational representations
@@ -327,6 +328,27 @@ theorem points_apply (r : RationalHom G m) [IsMonHom r] {R : Type u} [CommRing R
     (g : AlgebraicGeometry.points G R) : r.points R g = homMulEquiv m k R (g ≫ r) :=
   rfl
 
+/-- The entries of `r(g)` are the values at `g` of the functions `x_ij ∘ r` on `G`: the algebra
+homomorphism `k[GL_m] → R` of the point `g ≫ r` applied to the coordinate functions. -/
+theorem points_apply_apply (r : RationalHom G m) [IsMonHom r] {R : Type u} [CommRing R]
+    [Algebra k R] (g : AlgebraicGeometry.points G R) (i j : m) :
+    (r.points R g : Matrix m m R) i j =
+      (Spec.mapMulEquiv.symm (g ≫ r) : WithConv (CoordinateRing m k →ₐ[k] R)).ofConv
+        (coord m k i j) := by
+  rw [points_apply, ← coe_genericUnit_apply]
+  rfl
+
+/-- The value at a point `g` of `G` of the function `c ∘ r`, for a function `c` on `GL_m`. -/
+theorem appTop_appTop_ΓSpecIso_inv (r : RationalHom G m) [IsMonHom r] {R : Type u} [CommRing R]
+    [Algebra k R] (g : AlgebraicGeometry.points G R) (c : CoordinateRing m k) :
+    g.left.appTop (r.left.appTop ((Scheme.ΓSpecIso (.of (CoordinateRing m k))).inv c)) =
+      (Scheme.ΓSpecIso (.of R)).inv
+        ((Spec.mapMulEquiv.symm (g ≫ r) : WithConv (CoordinateRing m k →ₐ[k] R)).ofConv c) := by
+  have h := congr(($(Scheme.ΓSpecIso_inv_naturality (Spec.preimage (g ≫ r).left))).hom c)
+  rw [Spec.map_preimage] at h
+  simp only [CommRingCat.hom_comp, RingHom.comp_apply, Over.comp_left, Scheme.Hom.comp_appTop] at h
+  exact h.symm
+
 /-- A rational representation commutes with base change of points along `R → S`. -/
 theorem map_points (r : RationalHom G m) [IsMonHom r] {R S : Type u} [CommRing R] [Algebra k R]
     [CommRing S] [Algebra k S] (φ : R →ₐ[k] S) (g : AlgebraicGeometry.points G R) :
@@ -395,7 +417,47 @@ theorem snd_mulVec_mem_of_le_comap [IsAlgClosed k] [IsReduced G.left]
     (hU : ∀ g : AlgebraicGeometry.points G k, U ≤ U.comap (Matrix.toLin' (r.points k g)))
     (g : AlgebraicGeometry.points G (DualNumber k)) {v : m → k} (hv : v ∈ U) :
     snd ∘ ((r.points (DualNumber k) g : Matrix m m (DualNumber k)) *ᵥ (inl ∘ v)) ∈ U := by
-  sorry
+  by_contra hw
+  obtain ⟨l, hl, hUl⟩ := Submodule.exists_le_ker_of_notMem hw
+  set e : m → m → k := fun i j ↦ if i = j then 1 else 0
+  set c : CoordinateRing m k := ∑ i, ∑ j, (l (e i) * v j) • coord m k i j
+  set a := r.left.appTop ((Scheme.ΓSpecIso (.of (CoordinateRing m k))).inv c)
+  have hc {R : Type u} [CommRing R] [Algebra k R] (g : AlgebraicGeometry.points G R) :
+      (Spec.mapMulEquiv.symm (g ≫ r) : WithConv (CoordinateRing m k →ₐ[k] R)).ofConv c =
+        ∑ i, ∑ j, algebraMap k R (l (e i) * v j) * (r.points R g : Matrix m m R) i j := by
+    simp only [c, map_sum, Algebra.smul_def, map_mul, AlgHom.commutes, points_apply_apply]
+  have hl' (w : m → k) : l w = ∑ i, w i * l (e i) := by
+    rw [LinearMap.pi_apply_eq_sum_univ l w]
+    simp [e, smul_eq_mul]
+  have ha : a = 0 := by
+    refine eq_zero_of_forall_appTop_eq_zero G.hom a fun p hp ↦ ?_
+    let g : AlgebraicGeometry.points G k := Over.homMk p (by simpa [specOverSpec_over] using hp)
+    have h := appTop_appTop_ΓSpecIso_inv r g c
+    change p.appTop a = _ at h
+    rw [h, hc, ← map_zero (Scheme.ΓSpecIso (.of k)).inv.hom]
+    congr 1
+    have h0 : l (Matrix.toLin' (r.points k g) v) = 0 := hUl (hU g hv)
+    rw [hl', Matrix.toLin'_apply] at h0
+    rw [← h0]
+    simp only [Matrix.mulVec, dotProduct, Finset.sum_mul, Algebra.algebraMap_self,
+      RingHom.id_apply]
+    refine Finset.sum_congr rfl fun i _ ↦ Finset.sum_congr rfl fun j _ ↦ ?_
+    ring
+  have h := appTop_appTop_ΓSpecIso_inv r g c
+  rw [show r.left.appTop ((Scheme.ΓSpecIso (.of (CoordinateRing m k))).inv c) = a from rfl, ha,
+    map_zero, hc] at h
+  have h1 := congrArg (Scheme.ΓSpecIso (.of (DualNumber k))).hom.hom h
+  simp only [Iso.inv_hom_id_apply, map_zero] at h1
+  have h0 := congrArg snd h1
+  apply hl
+  rw [hl']
+  simp only [snd_zero, TrivSqZeroExt.snd_sum, Matrix.mulVec, dotProduct, Function.comp_apply]
+    at h0 ⊢
+  refine Eq.trans ?_ h0.symm
+  simp only [Finset.sum_mul]
+  refine Finset.sum_congr rfl fun i _ ↦ Finset.sum_congr rfl fun j _ ↦ ?_
+  simp [TrivSqZeroExt.snd_mul, algebraMap_eq_inl]
+  ring
 
 /-- Over an algebraically closed field of characteristic zero, a subspace stable under the
 differential of a rational representation of a connected group scheme `G` locally of finite type
