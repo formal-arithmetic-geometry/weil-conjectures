@@ -1,8 +1,8 @@
 # Work queue
 
-883 items; claim with `tools/claim.py next <group> [--stage N]`.
+885 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (330)
+## Stage 1: nodes to split (331)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -37,19 +37,17 @@
 | `lem-exc-abelian-sheaves-gmodules` | 3009 | none |
 | `lem-exc-etale-field-gsets` | 3009 | none |
 | `lem-exc-etale-sheaves-gsets-point` | 3009 | none |
-| `lem-sc-generic-vanishing-kernel-colimit` | 3009 | none |
-| `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
 | `lem-sc-injective-module-abelian-acyclic-zariski` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `lem-galois-fpqc-pullback-canonical-iso` | 3011 | none |
 | `lem-galois-fpqc-singleton-fully-faithful-0241` | 3011 | none |
+| `lem-pc-affine-nonzerodivisor-complement-dense` | 3011 | none |
 | `lem-pc-algebraic-dim-zero-affine-finite` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
-| `lem-pc-zero-dimensional-closed-subscheme-finite` | 3011 | none |
-| `lem-sc-dimension-locally-algebraic` | 3011 | none |
+| `lem-pc-localization-preserves-nonzerodivisor` | 3011 | none |
+| `lem-pc-quasi-compact-local-on-target` | 3011 | none |
 | `lem-sc-fibre-dimension-after-base-change` | 3011 | none |
 | `lem-exc-coinduced-functions-open-stabilizer` | 3012 | none |
-| `lem-exc-rg-adjoint-transfer-functorial-injectives` | 3012 | none |
 | `lem-exc-rg-group-algebra-functorial-injective-embeddings` | 3012 | none |
 | `lem-exc-rg-open-stabilizer-adjoint` | 3012 | none |
 | `lem-pc-base-change-product` | 3012 | none |
@@ -60,7 +58,6 @@
 | `lem-sc-coherent-free-stalks-locally-free` | 3012 | none |
 | `lem-sc-dvr-fg-torsionfree-free` | 3012 | none |
 | `lem-sc-exterior-top-direct-sum` | 3012 | none |
-| `lem-sc-finite-duality-trace` | 3012 | none |
 | `lem-sc-irreducible-product-over-field` | 3012 | none |
 | `lem-sc-p1-duality-pairing-naturality` | 3012 | none |
 | `lem-sc-p1-ext-coherent-dim-one-vanishing` | 3012 | none |
@@ -68,9 +65,12 @@
 | `lem-sc-ext-derived-composite` | 3013 | none |
 | `lem-sc-ext-evaluation` | 3013 | none |
 | `lem-sc-ext-tensor-exact` | 3013 | none |
+| `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
 | `lem-sc-local-section-quotient-finite-free` | 3013 | none |
 | `lem-sc-p1-graded-syzygy` | 3013 | none |
 | `lem-sc-p1-proj-sheafification-exact` | 3013 | none |
+| `lem-sc-proper-upper-shriek-composition` | 3013 | none |
+| `lem-sc-smooth-proper-curve-dualizing` | 3013 | none |
 | `lem-sc-p1-serre-section-module-comparison` | 3014 | none |
 | `lem-sc-p1-serre-section-module-finite` | 3014 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
@@ -197,6 +197,7 @@
 | `pqf-lem-qf-finitefibres` | 6011 | none |
 | `pqf-lem-serre-criterion` | 6011 | none |
 | `pqf-lem-sheaf-zero-stalks` | 6011 | none |
+| `lem-pc-projective-space-canonical` | 6013 | sorry_here |
 | `pqf-lem-going-up` | 6017 | none |
 | `pqf-lem-incomparability` | 6017 | none |
 | `pqf-def-affine-morphism` | - | none |
@@ -337,7 +338,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (553)
+## Stage 2: nodes to state (554)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -420,6 +421,7 @@
 | `lem-sc-finite-discrete-separated-affine` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
 | `lem-sc-glue-component-line-bundles` | 1 | state |
+| `lem-sc-integral-locally-algebraic-affine-opens-dimension` | 1 | state |
 | `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
 | `lem-sc-pic-proper-decomposition` | 1 | state |
@@ -895,7 +897,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 351 nodes that wait for stage 1, 1063 nodes that wait for a statement dependency.
+Not open yet: 351 nodes that wait for stage 1, 1069 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
