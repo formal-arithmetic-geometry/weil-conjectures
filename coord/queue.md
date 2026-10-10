@@ -1,8 +1,8 @@
 # Work queue
 
-932 items; claim with `tools/claim.py next <group> [--stage N]`.
+930 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (615)
+## Stage 1: nodes to split (613)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,7 +19,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-quasi-finite-at-prime-permanence` | 1012 | none |
 | `lem-weil-pbc-quasi-finite-at-prime-principal-localization` | 1012 | none |
 | `lem-weil-pbc-quasi-finite-four-rings` | 1012 | none |
 | `lem-weil-pbc-quasi-finite-monogenic-integral-closure` | 1012 | none |
@@ -28,7 +27,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1013 | none |
 | `lem-weil-pbc-ringed-space-open-restriction-adjunction` | 1013 | none |
 | `lem-weil-pbc-scheme-modules-enough-injectives` | 1013 | none |
 | `lem-weil-pbc-separable-root-pth-power` | 1013 | none |
@@ -944,7 +942,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 627 nodes that wait for stage 1, 600 nodes that wait for a statement dependency.
+Not open yet: 625 nodes that wait for stage 1, 602 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
