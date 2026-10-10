@@ -2,7 +2,7 @@
 
 913 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (640)
+## Stage 1: nodes to split (639)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-two-term-complex-kernel-base-change` | 1012 | none |
 | `lem-weil-pbc-universal-thickening-affine-case` | 1012 | none |
 | `lem-weil-pbc-universal-thickening-open-pieces` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
@@ -647,7 +646,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (273)
+## Stage 2: nodes to state (274)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -911,6 +910,7 @@
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
+| `lem-weil-pbc-two-term-complex-kernel-base-change` | 1 | state |
 | `lem-weil-pbc-unramified-algebra-over-field-product` | 1 | state |
 | `lem-weil-pbc-unramified-base-change-open` | 1 | state |
 | `lem-weil-pbc-unramified-etale-local-decomposition` | 1 | state |
@@ -925,7 +925,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 652 nodes that wait for stage 1, 551 nodes that wait for a statement dependency.
+Not open yet: 651 nodes that wait for stage 1, 551 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
