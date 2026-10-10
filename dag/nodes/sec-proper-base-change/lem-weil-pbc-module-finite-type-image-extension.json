@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-module-finite-type-image-extension",
+ "kind": "statement",
+ "title": "Finite type modules on a ringed space: stable under epimorphic images and extensions (Stacks 01B7)",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space (for instance a scheme [def-pc-scheme] with its structure sheaf) and $\\mathit{Mod}(\\mathcal O_X)$ the abelian category of sheaves of $\\mathcal O_X$-modules on the open sets of $X$ [def-weil-sheaf-of-modules-category]. An $\\mathcal O_X$-module $\\mathcal F$ is *of finite type* if every point $x\\in X$ has an open neighbourhood $U$ and finitely many sections $s_1,\\dots,s_n\\in\\mathcal F(U)$ such that the associated map $\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$, $e_i\\mapsto s_i$, is an epimorphism of $\\mathcal O_U$-modules (Stacks, Modules, Definition 01B5; the notion of [pqf-def-coherent] (2)). Then: (1) if $p:\\mathcal F\\to\\mathcal G$ is an epimorphism of $\\mathcal O_X$-modules and $\\mathcal F$ is of finite type, then $\\mathcal G$ is of finite type (in particular the image of a morphism whose source is of finite type is of finite type); (2) if $0\\to\\mathcal F_1\\to\\mathcal F_2\\to\\mathcal F_3\\to0$ is a short exact sequence of $\\mathcal O_X$-modules [def-weil-pbc-exact-sequence] and $\\mathcal F_1$ and $\\mathcal F_3$ are of finite type, then $\\mathcal F_2$ is of finite type.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01B7 (label lemma-extension-finite-type, line 855) with its proof ('the statement on images is trivial'; extensions: sections of F_3 locally lift to F_2, and the corresponding result for modules over a ring); Definition 01B5 (definition-finite-type, line 810). Tags verified in stacks-project/tags/tags: 01B7,modules-lemma-extension-finite-type; 01B5,modules-definition-finite-type"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "image of a sheaf of modules of finite type under an epimorphism is of finite type; extension of finite type sheaves of modules is of finite type",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.IsFiniteType.mk, SheafOfModules.LocalGeneratorsData.IsFiniteType (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators), Module.Finite.range, Module.Finite.map (Mathlib.RingTheory.Finiteness.Basic, modules over a ring), CategoryTheory.presheafIsFinite_of_epi (Mathlib.CategoryTheory.Subfunctor.Finite, presheaves of types)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if M -> N is an epimorphism of sheaves of modules and M is of finite type then N is of finite type",
+   "results": "CategoryTheory.presheafIsFinite_of_epi (presheaves of types, not local finite type of modules); SheafOfModules.GeneratingSections.ofEpi (Generators.lean:63: global generating sections pushed along an epi, with the instance at line 100 keeping finiteness of a global family); SheafOfModules.IsFiniteType (definition only)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib pushes a global finite generating family along an epi (GeneratingSections.ofEpi), but has no lemma that SheafOfModules.IsFiniteType (local generators) passes to epimorphic images or to extensions"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteType, CategoryTheory.Epi ; and SheafOfModules.IsFiniteType, CategoryTheory.ShortComplex.ShortExact",
+   "results": "no results for either pattern",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsFiniteType' --include=*.lean . | grep -i 'epi\\|quotient\\|extension\\|kernel\\|ker' (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "Algebra/Category/ModuleCat/Sheaf/Generators.lean:100 (instance (σ.ofEpi p).IsFiniteType for a global generating family), Sheaf/Quasicoherent.lean:142-143 (same, inside a presentation); nothing for IsFiniteType of a module under epi or extension",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-snake-lemma-abelian",
+ "kind": "statement",
+ "title": "Snake lemma in an abelian category (Stacks 010H)",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], with exactness as in [def-weil-pbc-exact-sequence]. Let $$\\begin{array}{ccccccc}A_1&\\xrightarrow{f}&A_2&\\xrightarrow{g}&A_3&\\to&0\\\\ \\downarrow\\alpha&&\\downarrow\\beta&&\\downarrow\\gamma&&\\\\ 0\\to B_1&\\xrightarrow{k}&B_2&\\xrightarrow{l}&B_3&&\\end{array}$$ be a commutative diagram of $\\mathcal A$ ($\\beta f=k\\alpha$, $\\gamma g=l\\beta$) whose rows are exact: $A_1\\to A_2\\to A_3$ is exact at $A_2$ and $g$ is an epimorphism, $B_1\\to B_2\\to B_3$ is exact at $B_2$ and $k$ is a monomorphism. Let $\\operatorname{Ker}\\alpha,\\operatorname{Ker}\\beta,\\operatorname{Ker}\\gamma$ and $\\operatorname{Coker}\\alpha,\\operatorname{Coker}\\beta,\\operatorname{Coker}\\gamma$ be kernels and cokernels in $\\mathcal A$, let $f':\\operatorname{Ker}\\alpha\\to\\operatorname{Ker}\\beta$, $g':\\operatorname{Ker}\\beta\\to\\operatorname{Ker}\\gamma$ be the morphisms induced by $f,g$ and $k':\\operatorname{Coker}\\alpha\\to\\operatorname{Coker}\\beta$, $l':\\operatorname{Coker}\\beta\\to\\operatorname{Coker}\\gamma$ those induced by $k,l$. Then there is a morphism $\\partial:\\operatorname{Ker}\\gamma\\to\\operatorname{Coker}\\alpha$ such that the sequence $$\\operatorname{Ker}\\alpha\\xrightarrow{f'}\\operatorname{Ker}\\beta\\xrightarrow{g'}\\operatorname{Ker}\\gamma\\xrightarrow{\\partial}\\operatorname{Coker}\\alpha\\xrightarrow{k'}\\operatorname{Coker}\\beta\\xrightarrow{l'}\\operatorname{Coker}\\gamma$$ is exact. If moreover $f$ is a monomorphism then $f'$ is a monomorphism, and if $l$ is an epimorphism then $l'$ is an epimorphism.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma 010H (label lemma-snake, lines 1012-1048) with its proof. Tag verified in stacks-project/tags/tags: 010H,homology-lemma-snake"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "snake lemma in an abelian category exact sequence ker ker ker coker coker coker",
+   "results": "CategoryTheory.ShortComplex.SnakeInput.snake_lemma, SnakeInput.mk (Mathlib.Algebra.Homology.ShortComplex.SnakeLemma), CategoryTheory.kernelCokernelCompSequence.snakeInput (Mathlib.CategoryTheory.Abelian.DiagramLemmas.KernelCokernelComp)",
+   "date": "2026-10-10",
+   "verdict": "match: SnakeInput.snake_lemma"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "snake lemma: morphism of short exact sequences in an abelian category gives exact sequence of kernels and cokernels with connecting morphism",
+   "results": "CategoryTheory.ShortComplex.SnakeInput, SnakeInput.snake_lemma, SnakeInput.L₁', SnakeInput.L₂' (Mathlib.Algebra.Homology.ShortComplex.SnakeLemma), kernelCokernelCompSequence.snakeInput",
+   "date": "2026-10-10",
+   "verdict": "match: SnakeInput.snake_lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.SnakeInput.snake_lemma",
+   "results": "CategoryTheory.ShortComplex.SnakeInput.snake_lemma {C} [Category C] [Abelian C] (S : SnakeInput C) : S.composableArrows.Exact (Mathlib.Algebra.Homology.ShortComplex.SnakeLemma)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure SnakeInput\\|snake_lemma\\|epi_L₃_g\\|mono_L₀_f\\|composableArrows' Algebra/Homology/ShortComplex/SnakeLemma.lean (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "structure SnakeInput (line 64: rows L₀..L₃, h₀ kernel of v₁₂, h₃ cokernel of v₁₂, L₁_exact, epi_L₁_g, L₂_exact, mono_L₂_f), instance mono_L₀_f (167), instance epi_L₃_g (204), composableArrows (379), lemma snake_lemma (385)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ShortComplex.SnakeInput.snake_lemma",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/SnakeLemma.lean",
+  "how": "specializes in one line: the diagram is a morphism v₁₂ : L₁ ⟶ L₂ of short complexes with L₁ = (A₁ → A₂ → A₃) exact and L₁.g epi, L₂ = (B₁ → B₂ → B₃) exact and L₂.f mono; with L₀ / L₃ the kernel / cokernel rows (fields h₀, h₃ of SnakeInput, line 64) it is a SnakeInput, and snake_lemma (line 385) is exactness of the six-term sequence S.composableArrows (line 379) with connecting map SnakeInput.δ; the two add-ons are the instances mono_L₀_f (line 167, f mono) and epi_L₃_g (line 204, l epi). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
