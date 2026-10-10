@@ -44,8 +44,7 @@ namespace ProEtale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [(g)^*[A].PreservesFlat]
 
--- the coherence computation in the derived category is slow
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 1600000 in -- the coherence computation in the derived category is slow
 /-- **Retracts from a pulled back coevaluation.** Let `K ⊣ D` be a duality in `D(Y_proét)`,
 with `K ≅ Q(M)` and `D ≅ Q(F)`, whose coevaluation followed by `Q(s)` is `Q(φ)` for a chain map
 `φ` out of the unit and a quasi-isomorphism `s : M ⊗ F ⟶ I`. Suppose `g^* F` is K-flat, and let

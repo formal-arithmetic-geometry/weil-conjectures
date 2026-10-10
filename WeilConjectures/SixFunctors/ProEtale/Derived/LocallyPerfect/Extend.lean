@@ -44,8 +44,7 @@ open _root_.AlgebraicGeometry.Scheme
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
 set_option backward.isDefEq.respectTransparency false in
--- the mapping cone computations are slow
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 1000000 in -- the mapping cone computations are slow
 theorem hasPerfectTop_sub_one {Y : Scheme.{u}} [Nonempty Y] {m b : ℤ}
     (M L' : CochainComplex (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ℤ)
     (E₀ : CochainComplex (ModuleCat.{u + 1} Λ) ℤ)

@@ -161,8 +161,7 @@ lemma Qh_map_quotient_map_eq {C : Type*} [Category C] [Abelian C] [HasDerivedCat
   rw [← cancel_mono ((quotientCompQhIso C).hom.app L), quotientCompQhIso_hom_naturality,
     quotientCompQhIso_hom_naturality, h]
 
--- the elaboration of the chain-level computations on `V.left` is slow
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 1000000 in -- the elaboration of the chain-level computations on `V.left` is slow
 open _root_.DerivedCategory in
 /-- **Local retract, after pullback.** Let `K` have a right dual `D` in `D(X_proét)`, with
 `K ≅ Q(M)` and `D ≅ Q(F)` for a complex `F` of flat sheaves whose pullback along `g : V ⟶ X` is
