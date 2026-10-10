@@ -974,6 +974,123 @@ noncomputable def isLimitApproxOpensCone [CompactSpace S] [QuasiSeparatedSpace S
   exact (opensCone_π_ι (approxDiagram H) (approxCone H) j₀ _ j).symm.trans
     (congrArg _ (approxOpensIso_hom_ι H j₀ U j).symm)
 
+
+/-- The bottom index of the finite approximation. -/
+noncomputable abbrev approxBot : ApproxIndex H := Opposite.op ⊥
+
+/-- **`Spec_S F` is the limit of the stages `Spec_S B_J`.** -/
+noncomputable def isLimitApproxCone [CompactSpace S] [QuasiSeparatedSpace S] :
+    IsLimit (approxCone H) :=
+  isLimitOfIsLimitOpensCone' (approxDiagram H) (approxCone H) (approxBot H)
+    (fun U : S.AffineZariskiSite ↦ approxP H (approxBot H) ⁻¹ᵁ U.1) (by
+      refine eq_top_iff.mpr fun x _ ↦ ?_
+      obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ := S.isBasis_affineOpens.exists_subset_of_mem_open
+        (Set.mem_univ (approxP H (approxBot H) x)) isOpen_univ
+      exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨V, hV⟩, hxV⟩)
+    fun U ↦ isLimitApproxOpensCone H _ U
+
 end Approximation
 
 end AlgebraicGeometry.Scheme.AffineZariskiSite
+
+namespace AlgebraicGeometry
+
+open Scheme.AffineZariskiSite
+
+/-- A **finite approximation** of a morphism `f : X ⟶ S` is a cofiltered system `D` of
+schemes finite over `S` together with a limit cone with point `X` whose projections are
+compatible with `f`: it presents `X` as a cofiltered limit of finite `S`-schemes. The transition
+morphisms are then affine (`Scheme.Hom.FiniteApproximation.isAffineHom_map`).
+
+An integral morphism to a quasi-compact quasi-separated scheme admits one, with stages of
+finite presentation (`Scheme.Hom.exists_finiteApproximation_of_isIntegralHom`, Stacks Project
+Tag 09YZ). This is the "finite approximation tail" of the proof of blueprint
+`thm-pqf-zmt-factorization`. -/
+structure Scheme.Hom.FiniteApproximation {X S : Scheme.{u}} (f : X ⟶ S) where
+  /-- The index category of the inverse system. -/
+  I : Type u
+  /-- The category structure on the index type. -/
+  [smallCategory : SmallCategory I]
+  /-- The index category is cofiltered. -/
+  [isCofiltered : IsCofiltered I]
+  /-- The diagram of finite `S`-schemes. -/
+  D : I ⥤ Scheme.{u}
+  /-- The structure morphisms of the stages to `S`. -/
+  p (i : I) : D.obj i ⟶ S
+  /-- The transition morphisms are `S`-morphisms. -/
+  map_p {i j : I} (g : i ⟶ j) : D.map g ≫ p j = p i
+  /-- Every stage is finite over `S`. -/
+  isFinite_p (i : I) : IsFinite (p i)
+  /-- The morphisms from `X` to the stages. -/
+  π : (Functor.const I).obj X ⟶ D
+  /-- `X` is the limit of the stages. -/
+  isLimit : IsLimit (Cone.mk X π)
+  /-- The morphisms from `X` to the stages are compatible with `f`. -/
+  π_p (i : I) : π.app i ≫ p i = f
+
+namespace Scheme.Hom.FiniteApproximation
+
+attribute [instance] smallCategory isCofiltered isFinite_p
+
+variable {X S : Scheme.{u}} {f : X ⟶ S} (F : f.FiniteApproximation)
+
+/-- The transition morphisms of a finite approximation are affine. -/
+instance isAffineHom_map {i j : F.I} (g : i ⟶ j) : IsAffineHom (F.D.map g) := by
+  have : IsAffineHom (F.D.map g ≫ F.p j) := by rw [F.map_p]; infer_instance
+  exact IsAffineHom.of_comp _ (F.p j)
+
+instance compactSpace_obj [CompactSpace S] (i : F.I) : CompactSpace (F.D.obj i) :=
+  QuasiCompact.compactSpace_of_compactSpace (F.p i)
+
+instance quasiSeparatedSpace_obj [QuasiSeparatedSpace S] (i : F.I) :
+    QuasiSeparatedSpace (F.D.obj i) :=
+  quasiSeparatedSpace_of_quasiSeparated (F.p i)
+
+end Scheme.Hom.FiniteApproximation
+
+/-- **The relative spectrum of an integral quasi-coherent algebra is a limit of finite
+schemes.** Let `F` be a quasi-coherent `𝒪_S`-algebra on a quasi-compact quasi-separated scheme
+`S` which is integral over `𝒪_S`. Then `Spec_S F` is the cofiltered limit of the relative
+spectra of the finite quasi-coherent subalgebras `B_J ⊆ F`, which are finite over `S`. -/
+noncomputable def Scheme.AffineZariskiSite.finiteApproximation {S : Scheme.{u}}
+    {F : S.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u}}
+    {α : (toOpensFunctor S).op ⋙ S.presheaf ⟶ F} (H : α.Coequifibered)
+    (hα : ∀ U, (α.app U).hom.IsIntegral) [CompactSpace S] [QuasiSeparatedSpace S] :
+    (relativeGluingData H).toBase.FiniteApproximation where
+  I := ApproxIndex H
+  D := approxDiagram H
+  p := approxP H
+  map_p := approxDiagram_map_approxP H
+  isFinite_p := isFinite_approxP H hα
+  π := approxπ H
+  isLimit := isLimitApproxCone H
+  π_p := approxπ_approxP H
+
+/-- **An integral morphism is a limit of finite morphisms** (the finite approximation of Stacks
+Project Tag 09YZ, without the finite presentation of the stages). If `f : X ⟶ S` is integral and
+`S` is quasi-compact and quasi-separated, then `X` is a cofiltered limit of schemes finite over
+`S`.
+
+This is Step 2 ("the finite approximation tail") of the proof of blueprint
+`thm-pqf-zmt-factorization`: `f_* 𝒪_X` is the filtered union of its finite quasi-coherent
+subalgebras. -/
+theorem Scheme.Hom.nonempty_finiteApproximation_of_isIntegralHom {X S : Scheme.{u}}
+    (f : X ⟶ S) [IsIntegralHom f] [CompactSpace S] [QuasiSeparatedSpace S] :
+    Nonempty f.FiniteApproximation := by
+  have hα : ∀ U, (f.normalizationDiagramMap.app ((toOpensFunctor S).op.obj U)).hom.IsIntegral := by
+    intro U
+    let := (f.app U.unop.1).hom.toAlgebra
+    change (algebraMap Γ(S, U.unop.1)
+      (integralClosure Γ(S, U.unop.1) Γ(X, f ⁻¹ᵁ U.unop.1))).IsIntegral
+    exact algebraMap_isIntegral_iff.mpr inferInstance
+  let G := finiteApproximation f.coequifibered_normalizationDiagramMap hα
+  let e := asIso f.toNormalization
+  refine ⟨{ G with
+    π := (Functor.const _).map e.hom ≫ G.π
+    isLimit := G.isLimit.ofIsoLimit (Cone.ext e.symm fun i ↦ by simp)
+    π_p i := by
+      change e.hom ≫ G.π.app i ≫ G.p i = f
+      rw [G.π_p]
+      exact f.toNormalization_fromNormalization }⟩
+
+end AlgebraicGeometry
