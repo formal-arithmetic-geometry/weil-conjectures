@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-tor-symmetry",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (normality of the strict henselization in Stacks 09Z5); Tor symmetry is used by the flat-module injectivity input along this branch",
+   "via": [
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-flat-mod-injective",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Symmetry of Tor for modules",
+ "statement": "Let $R$ be a commutative ring, let $M,N$ be $R$-modules, and let $i\\ge0$. There is a natural $R$-linear isomorphism $\\operatorname{Tor}_i^R(M,N)\\cong\\operatorname{Tor}_i^R(N,M)$, where both Tor modules are defined by the homology of a projective resolution tensored with the other module [def-weil-pbc-tor-modules].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M3 (lemma-tor-left-right), lines 18534-18618, including the functoriality paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tor groups of modules over a commutative ring are symmetric in the two module arguments",
+   "results": "ModuleCat.MonoidalCategory.braiding_hom_apply and TensorProduct.comm are symmetry of ordinary tensor products only; no Tor symmetry theorem returned",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism Tor n M N and Tor n N M for modules",
+   "results": "ModuleCat.MonoidalCategory.braiding_hom_apply and TensorProduct.comm_trans_comm concern tensor products, not their derived functors",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'Tor.*symm|tor.*symm|Tor.*comm' Mathlib/CategoryTheory/Monoidal/Tor.lean Mathlib/Algebra/Category/ModuleCat; read Tor.lean:19-54",
+   "results": "Mathlib/CategoryTheory/Monoidal/Tor.lean:19-27 says Tor and Tor' are both defined but their natural isomorphism is not proved; no module Tor symmetry declaration found",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-tor-ideal-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

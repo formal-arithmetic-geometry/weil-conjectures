@@ -11,9 +11,55 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $I\\subseteq R$ be an ideal. Apply the first-variable Tor exact sequence [lem-weil-pbc-tor-long-exact-first-variable] to $0\\to I\\to R\\to R/I\\to0$, tensoring with $C$. Since $R$ is free of rank one, the resolution concentrated in degree zero gives $\\operatorname{Tor}_1^R(R,C)=0$ by [def-weil-pbc-tor-modules]. Exactness therefore identifies $\\operatorname{Tor}_1^R(R/I,C)$ with the kernel of $I\\otimes_RC\\to R\\otimes_RC=C$; the Tor symmetry [lem-weil-pbc-tor-symmetry] identifies this Tor group with $\\operatorname{Tor}_1^R(C,R/I)$. This is the kernel identity of Remark 00M6, with the maps specified by the exact sequence.",
+   "uses": [
+    "lem-weil-pbc-tor-long-exact-first-variable",
+    "lem-weil-pbc-tor-symmetry",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00M5 and Remark Tag 00M6 (remark-Tor-ring-mod-ideal), lines 18670-18696; Tor exact sequence Tag 00M0 and symmetry Tag 00M3"
+   }
+  },
+  {
+   "text": "If $C$ is flat, the inclusion $I\\hookrightarrow R$ stays injective after tensoring with $C$ by [lem-weil-pbc-flat-tensor-exact]. Under $R\\otimes_RC=C$, the resulting map is $I\\otimes_RC\\to C$. Step 1 makes $\\operatorname{Tor}_1^R(C,R/I)=0$. This holds for every ideal, including $I=0$ and $I=R$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00M5 (lemma-characterize-flat), first paragraph, lines 18664-18668, specialized to degree one"
+   }
+  },
+  {
+   "text": "Conversely, suppose $\\operatorname{Tor}_1^R(C,R/I)=0$ for every ideal $I$. Step 1 says that $I\\otimes_RC\\to C$ is injective for each $I$, in particular for every finitely generated ideal. Apply [lem-weil-pbc-flat-fg-ideal-criterion] to conclude that $C$ is flat. For $I=0$ the map is $0\\to C$; for $I=R$ it is the canonical isomorphism $R\\otimes_RC\\to C$, so neither edge case imposes a spurious condition.",
+   "uses": [
+    "lem-weil-pbc-flat-fg-ideal-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00M5 (lemma-characterize-flat), second paragraph, lines 18670-18688; flatness criterion Tag 00HD"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tor-long-exact-first-variable",
+  "lem-weil-pbc-tor-symmetry",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-flat-fg-ideal-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M5 (lemma-characterize-flat), proof lines 18664-18688, with Tags 00M0, 00M3, 00HD and Remark 00M6"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +84,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +121,19 @@
    ]
   },
   "same_as": []
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-flat-tor-ideal-criterion",
+  "worker": "stage1",
+  "summary": "Verified the unchanged statement against Stacks 00M5. Its proof uses the existing first-variable low-degree Tor exact sequence (00M0), an explicit rank-one free resolution of R, and the new unsplit Tor symmetry prerequisite (00M3) to identify Tor_1(C,R/I) with the kernel of I tensor C to C (Remark 00M6). Flatness implies this kernel is zero by tensor exactness; conversely zero Tor for all ideals implies injectivity for finitely generated ideals, hence flatness by the existing Mathlib leaf for 00HD. No exact sorry-free slopmaster2 declaration was found for the item or the new node.",
+  "blueprint": "The steps supply the Tor criterion used by lem-weil-pbc-flat-mod-injective on the chain from step 4 of lem-weil-pbc-normal-constant-generic (normality of the strict henselization in 09Z5). Whole-blueprint searches for flat Tor and 00M3 found no node stating the item or the new symmetry prerequisite."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: 00M5 (1) iff (4) via the Tor sequence of 0 -> I -> R -> R/I -> 0 and the fg-ideal criterion; new node 00M3 Tor symmetry"
  }
 }
