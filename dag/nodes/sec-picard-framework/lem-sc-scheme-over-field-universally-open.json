@@ -14,18 +14,56 @@
  },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "For a field K and a K-scheme X, the structure morphism X to Spec K is universally open",
+   "results": "No direct theorem for arbitrary X; universallyOpen_of_locallyOfFiniteType_spec_field in the project requires LocallyOfFiniteType",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "UniversallyOpen, Spec, Field",
+   "results": "0 hits for arbitrary schemes; only the project lemma with a locally finite type hypothesis",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
    "query": "grep -rn 'UniversallyOpen' Mathlib/AlgebraicGeometry | grep -i 'field\\|Spec'",
-   "results": "only UniversallyOpen.of_flat (Morphisms/UniversallyOpen.lean:147, needs Flat and LocallyOfFinitePresentation) and its internal wlog to Spec of a field; no lemma that X -> Spec K is universally open for an arbitrary X",
-   "date": "2026-10-10",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:147 has UniversallyOpen.of_flat, requiring Flat and LocallyOfFinitePresentation; no arbitrary-scheme-over-field theorem",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any scheme over a field, the structure morphism is universally open",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "lean_run_code",
+   "query": "example (K) [Field K] (X : Scheme) (f : X ⟶ Spec (CommRingCat.of K)) : UniversallyOpen f := by exact?",
+   "results": "exact @instUniversallyOpenOfIsIntegralOfSubsingletonCarrierCarrierCommRingCat X (Spec K) f _ _ (Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean:151)",
+   "date": "2026-10-10",
+   "verdict": "match",
+   "by": "R-suo1740"
   }
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
- "mathlib_match": null,
- "status": "unsplit",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 0383"
+ },
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instUniversallyOpenOfIsIntegralOfSubsingletonCarrierCarrierCommRingCat",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean",
+  "line": 151,
+  "how": "one-line specialization: the instance [IsIntegral Y] [Subsingleton Y] : UniversallyOpen f applied to Y = Spec K (IsIntegral and Subsingleton of Spec K are inferred instances); the projection statement is UniversallyOpen unfolded (UniversallyOpen.snd/fst plus Scheme.Hom.isOpenMap)"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "R-pic",
@@ -38,9 +76,9 @@
   "is": null,
   "from": {
    "node": "thm-sc-jacobian-representability",
-   "place": "proof, step (4) 'Connectedness': the assertion that a product of geometrically irreducible schemes is irreducible",
+   "place": "proof, the universal openness input used in the connectedness/product argument",
    "via": [
-    "lem-sc-irreducible-product-over-field",
+    "lem-sc-scheme-over-field-universally-open",
     "lem-sc-product-irreducible-components-bijection"
    ]
   },
@@ -53,5 +91,22 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-scheme-over-field-universally-open",
+  "worker": "stage1",
+  "summary": "Reviewer R-suo1740: Mathlib states Tag 0383 directly (instance UniversallyOpen f for any f to an integral one-point scheme, Morphisms/UniversallyOpen.lean:151); the item is a Mathlib leaf and the two split nodes were dropped.",
+  "blueprint": [
+   "the universal openness argument used by the product irreducible-components step"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-suo1740",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-suo1740 (reviewer sub-agent of L); spot-checked: Read packet; Mathlib grep of Morphisms/UniversallyOpen.lean and lean_run_code exact? show the item itself is in Mathlib (class c): instance [IsIntegral Y] [Subsingleton Y] : UniversallyOpen f (instUniversallyOpenOfIsIntegralOfSubsingletonCarrierCarrierCommRingCat, line 151) resolves for any X -> Spec K. FIX more, RETURN less: (1) item made a Mathlib leaf (status mathlib, mathlib_match, my search recorded, proof emptied); (2) dropped the now-unneeded new nodes lem-sc-open-map-local-on-source-target (statement-only locality, whose Mathlib search missed IsZariskiLocalAtTarget/Source for topologically IsOpenMap) and lem-sc-affine-tensor-spectrum-open (its leaf PrimeSpectrum.isOpenMap_comap_algebraMap_tensorProduct_of_field was correct up to swapping tensor factors).; 1 file(s) fixed by the reviewer"
  }
 }
