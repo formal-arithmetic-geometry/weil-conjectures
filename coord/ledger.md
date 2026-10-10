@@ -724,3 +724,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:51 L: reviewed lem-weil-pbc-limit-flat-modules (0912; 6 steps; +4 nodes) and lem-weil-pbc-localization-of-regular-ring (4 steps): accepted. Returned C1 z-localizations-dvr (2nd: schema split).
 - 00:52 L: reviewed lem-weil-pbc-localization-prime-residue-field-iso (00E3; 6 steps; statement (1) completed to the bijection): accepted.
 - 00:53 L: reviewed lem-weil-pbc-locally-constant-finite-values-finite-type (093N(1); 3 steps; +1 leaf): accepted.
+- 00:54 L: reviewed lem-weil-pbc-make-separable (030R; 2 steps; +04KM, +030X nodes): accepted.

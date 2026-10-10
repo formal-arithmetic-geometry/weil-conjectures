@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-make-separably-generated",
+ "kind": "statement",
+ "title": "A finitely generated field extension becomes separably generated after finite purely inseparable extensions",
+ "statement": "Let $K/k$ be a finitely generated field extension [def-pc-field-extension] (i.e. $K=k(a_1,\\dots,a_n)$ for finitely many $a_1,\\dots,a_n\\in K$). Then there exist a field $K'$ with a field homomorphism $K\\to K'$, and a subfield $k'\\subseteq K'$ containing the image of $k$ under $k\\to K\\to K'$, such that $k'/k$ and $K'/K$ are finite purely inseparable extensions [def-weil-pbc-finite-purely-inseparable-extension] and $K'$ is separably generated over $k'$ in the sense of [def-weil-pbc-separable-field-extension] (1): there is a transcendence basis $(x_i)_{i\\in I}$ of $K'/k'$ with $K'/k'(x_i;i\\in I)$ separable algebraic. In other words there is a commutative square of field extensions $k\\to k'\\to K'$, $k\\to K\\to K'$ with $k'/k$, $K'/K$ finite purely inseparable and $K'/k'$ separably generated.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 04KM (lemma-make-separably-generated, line 9962) and its proof (induction on $[K:K_{sep}]$ over $k(x_1,\\dots,x_r)$, using Fields, Lemma fields-lemma-separable-first; one step marked 'details omitted')"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated field extension becomes separably generated after a finite purely inseparable base extension",
+   "results": "separableClosure.isPurelyInseparable, IsPurelyInseparable.sepDegree_eq_one, IsPurelyInseparable.mk (FieldTheory/PurelyInseparable/Basic.lean); Field.sepDegree_eq_of_isPurelyInseparable (FieldTheory/PurelyInseparable/Tower.lean); exists_isTranscendenceBasis_and_isSeparable_of_perfectField (FieldTheory/SeparablyGenerated.lean: only over a perfect field); Algebra.FormallyUnramified.iff_isSeparable",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated field extension K/k there exist finite purely inseparable extensions k'/k and K'/K with K'/k' separably generated (has a separating transcendence basis)",
+   "results": "Field.primitive_element_inf_aux, Field.exists_primitive_element (FieldTheory/PrimitiveElement.lean); isPurelyInseparable_iff_fd_isPurelyInseparable, separableClosure.isPurelyInseparable, separableClosure_le (FieldTheory/PurelyInseparable/Basic.lean); perfectClosure.isPurelyInseparable; IntermediateField.sepDegree_adjoin_eq_of_isAlgebraic_of_isPurelyInseparable; none produces k', K'",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, IsTranscendenceBasis",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 030\\|stacks 04KM\\|SeparablyGenerated\\|separably generated' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ ; grep -rln IsTranscendenceBasis /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | xargs grep -ln IsPurelyInseparable",
+   "results": "no 04KM tag; FieldTheory/SeparablyGenerated.lean has 0H71 and 030W '(2) => (1) finitely generated case' (exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType) and the perfect-field case; RingTheory/Smooth/Field.lean (separably generated => smooth); no file uses both IsTranscendenceBasis and IsPurelyInseparable",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-make-separable",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

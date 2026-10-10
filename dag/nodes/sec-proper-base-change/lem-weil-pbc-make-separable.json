@@ -12,9 +12,44 @@
   "def-weil-pbc-finite-purely-inseparable-extension",
   "def-weil-pbc-separable-field-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $K/k$ be finitely generated, $K=k(a_1,\\dots,a_n)$. By [lem-weil-pbc-make-separably-generated] there are a field $K'$ with a field homomorphism $K\\to K'$ and a subfield $k'\\subseteq K'$ containing the image of $k$ under $k\\to K\\to K'$, such that $k'/k$ and $K'/K$ are finite purely inseparable [def-weil-pbc-finite-purely-inseparable-extension] and $K'$ is separably generated over $k'$ [def-weil-pbc-separable-field-extension] (1). Since $k$ maps into $k'$ by the composite $k\\to K\\to K'$, the square $k\\to k'\\subseteq K'$, $k\\to K\\to K'$ commutes.",
+   "uses": [
+    "lem-weil-pbc-make-separably-generated",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030R (lemma-make-separable, line 10513), proof, first two sentences"
+   }
+  },
+  {
+   "text": "The extension $K'/k'$ is separably generated, hence separable over $k'$ in the sense of [def-weil-pbc-separable-field-extension] (2) by [lem-weil-pbc-separably-generated-separable]. Thus $k'$, $K'$ of step 1 satisfy all requirements: $k'/k$, $K'/K$ finite purely inseparable and $K'/k'$ separable.",
+   "uses": [
+    "lem-weil-pbc-separably-generated-separable",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 030R (lemma-make-separable, line 10513), proof, first two sentences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-make-separably-generated",
+  "lem-weil-pbc-separably-generated-separable"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 030R (lemma-make-separable, line 10513), proof (first assertion: Lemma Tag 04KM, then Lemma Tag 030X)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +74,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +94,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-make-separable",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 030R (first assertion only; K'=k'K and K'=(k'⊗K)_red are not part of the node and the citer lem-weil-pbc-geometrically-regular-finitely-generated-extensions does not need them). Separability in def-weil-pbc-separable-field-extension is Stacks 030O verbatim (separably generated = separating transcendence basis; separable = every finitely generated subextension separably generated). Proof follows the first two sentences of the Stacks proof: 04KM gives the square with K'/k' separably generated (new unsplit node lem-weil-pbc-make-separably-generated, statement identical to the item with 'separably generated'), and 030X gives separable (new unsplit node lem-weil-pbc-separably-generated-separable). No existing DAG node states 04KM or 030X. Mathlib: neither 04KM nor 030X nor 030R (searched with LeanSearch, LeanFinder, Loogle, grep); Mathlib has only 030W (2)=>(1) finitely generated case and 0H71 in FieldTheory/SeparablyGenerated.lean. stmt_deps kept."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "2 steps follow Stacks 030R: the square from a new 04KM node (whose statement is exactly Stacks' diagram), separably generated => separable by a new 030X node. Tags 030R, 04KM, 030X verified."
+ }
 }
