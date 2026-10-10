@@ -51,6 +51,7 @@ in the Lean formalization of the Weil conjectures, with emphasis on the
 $\ell$-adic coefficient rings are modelled, how constructibility is defined, and how each
 of the six functors is constructed. It summarizes the work on the branches
 \texttt{ring-objects-for-coefficients}, \texttt{extend-scalars-module-object},
+\texttt{extend-scalars-isLocalization},
 \texttt{bounded-constructible-module-object-of-sheaf} and
 \texttt{module-object-six-functors}, on top of what is already on \texttt{master}.
 \end{abstract}
@@ -75,16 +76,19 @@ The formalization follows Bhatt--Scholze, \emph{The pro-\'etale topology for sch
   \lean{SixFunctors/ProEtale}).
 \item \textbf{Non-finite coefficients: module objects over a coefficient ring sheaf.}
   Sheaves of modules over a sheaf of rings $\mathcal{R}_X$ on $X_\proet$ which genuinely
-  varies with $X$: $\mathbb{Z}_{\ell,X}$, $\mathbb{Q}_{\ell,X}$, $E_X$, $\cO_{E,X}$. These
+  varies with $X$: $\mathbb{Z}_{\ell,X}$, $\mathbb{Q}_{\ell,X}$, $E_X$, $\cO_{E,X}$ and
+  $\Qlbar{}_{,X}$. These
   are modelled as \emph{module objects} over a \emph{ring object} of the category of
   abelian sheaves, and the six functors are obtained from those of layer (A) with
   $\mathcal{A} = \Ab$ by transporting module structures and changing scalars. This is the
-  folder \lean{SixFunctors/ProEtale/ModuleObject}.
+  folder \lean{SixFunctors/ProEtale/ModuleObject}, with the subfolder
+  \lean{FiniteExtension} for the coefficient rings $C(-,T)$ and the sibling subfolder
+  \lean{PAdicAlgCl} for $\Qlbar{}_{,X}$.
 \end{enumerate}
 
 \begin{choice}[Module objects only for non-finite coefficients]
 The module-object setup is used \emph{only} for the non-finite (topological) coefficients
-$\mathbb{Z}_\ell,\mathbb{Q}_\ell,E,\cO_E$. Finite coefficients $\Lambda=\mathbb{Z}/\ell^n$
+$\mathbb{Z}_\ell,\mathbb{Q}_\ell,E,\cO_E,\Qlbar$. Finite coefficients $\Lambda=\mathbb{Z}/\ell^n$
 stay in layer (A), as sheaves with values in $\Mod_\Lambda$.
 \end{choice}
 
@@ -188,8 +192,9 @@ underlying $\mathbb{Z}_{\ell,X}$ is definitionally mathlib's
 No completeness, Noetherianity or inverse-limit presentation of $T$ is used: the same
 construction covers $\mathbb{Z}_\ell$, $\mathbb{Q}_\ell$, $E$ and $\cO_E$ uniformly. In
 particular $\mathbb{Q}_{\ell,X}$ is \emph{not} defined as $\mathbb{Z}_{\ell,X}[1/\ell]$
-and $E_X$ is not defined as $\cO_{E,X}[1/\ell]$; these identifications are theorems to be
-proved, not definitions.
+and $E_X$ is not defined as $\cO_{E,X}[1/\ell]$; these identifications are theorems, not
+definitions. At the level of derived categories, the identification of $E$-coefficients
+with $\cO_E$-coefficients with $\ell$ inverted is stated in \S\ref{sec:rationalization}.
 
 \begin{choice}[$\Qlbar$]
 $\Qlbar{}_{,X}$ is \emph{not} $C(-,\Qlbar)$ for the valuation topology. Over a
@@ -201,9 +206,30 @@ extends to $\beta\mathbb{N}$). Accordingly
   \Qlbar{}_{,X} := \mathrm{sheafify}\Bigl(U\mapsto \{f\in C(U,\Qlbar) \mid
   f(U)\subseteq E \text{ for some finite } E/\mathbb{Q}_\ell\}\Bigr)
 \]
-(\lean{ProEtale.padicAlgClSheaf}), defined directly as a ring object of abelian sheaves.
-This is $\operatorname{colim}_E E_X$ of Bhatt--Scholze \S6.8.
+(\lean{ProEtale.padicAlgClSheaf}), defined directly as a ring object of abelian sheaves:
+it is the sheafification of a presheaf of rings (\lean{ProEtale.padicAlgClRingPresheaf}),
+not a sheaf of rings.
 \end{choice}
+
+\begin{proposition}[$\Qlbar{}_{,X}=\operatorname{colim}_E E_X$]
+Let $\mathcal{E}$ be the set of finite subextensions $E\subseteq\Qlbar$ of $\mathbb{Q}_\ell$,
+ordered by inclusion (\lean{PadicAlgCl.FiniteIntermediateField}); it is directed, the
+compositum of two finite subextensions being finite. The inclusions $E_X\to F_X$ for
+$E\subseteq F$ form a diagram $E\mapsto E_X$ of sheaves of rings
+(\lean{ProEtale.padicSubfieldSheafFunctor}), and the inclusions $E_X\to\Qlbar{}_{,X}$
+form a cocone of abelian sheaves (\lean{ProEtale.padicAlgClSheafCocone}), which is a
+colimit:
+\[
+  \Qlbar{}_{,X}\;\cong\;\operatorname*{colim}_{E\in\mathcal{E}} E_X
+  \quad\text{in }\Sh(X_\proet,\Ab)
+\]
+(\lean{ProEtale.isColimitPadicAlgClSheafCocone}, proved). This is the definition of
+$\Qlbar{}_{,X}$ in Bhatt--Scholze \S6.8.
+\end{proposition}
+The proof works first with presheaves: objectwise, the presheaf of
+finite-subextension-valued maps is the filtered union of the injective maps
+$C(U,E)\to C(U,\Qlbar)$ (\lean{ProEtale.isColimitPadicAlgClPresheafCocone}); sheafification,
+being a left adjoint, then preserves the colimit.
 
 The inclusions $\mathbb{Z}_{\ell,X}\to\mathbb{Q}_{\ell,X}\to E_X\to\Qlbar{}_{,X}$,
 $\mathbb{Z}_{\ell,X}\to\cO_{E,X}\to E_X$ are morphisms of ring objects.
@@ -225,6 +251,23 @@ $\eta$ is compatible with identities and compositions. $\alpha_j$ is an isomorph
 open immersion $j$ (indeed for weakly \'etale $j$), but \emph{not} in general, e.g.\ not
 for closed immersions. This is the reason the module-object pullback below needs an
 extension of scalars.
+
+\paragraph{The case of $\Qlbar$.} Write $P_X$ for the presheaf of rings of
+finite-subextension-valued continuous maps, so that $\Qlbar{}_{,X}=P_X^\#$. The analogous
+morphisms are constructed in \lean{SixFunctors/ProEtale/ModuleObject/PAdicAlgCl/Basic}:
+\begin{itemize}
+\item on presheaves, $P_Y(V)\to P_X(V\times_YX)$, $h\mapsto h\circ p_V$, is a morphism of
+  presheaves of rings $P_Y\to f_*P_X$, since a function with values in a finite subextension
+  still has values in it after pullback (\lean{ProEtale.padicAlgClRingPresheafPushforwardHom});
+\item $\eta_f\colon\Qlbar{}_{,Y}=P_Y^\#\to f_*P_X^\#=f_*\Qlbar{}_{,X}$ corresponds under the
+  sheafification adjunction to $P_Y\to f_*P_X\to f_*P_X^\#$
+  (\lean{ProEtale.padicAlgClPushforwardHom}); it is compatible with identities and
+  compositions;
+\item $\alpha_f\colon f^*\Qlbar{}_{,Y}\to\Qlbar{}_{,X}$ is its mate
+  (\lean{ProEtale.padicAlgClPullbackHom}).
+\end{itemize}
+That $\eta_f$ is a morphism of ring objects, and that $\alpha_j$ is an isomorphism for an
+open immersion $j$, are currently \texttt{sorry}.
 
 %======================================================================
 \section{Module objects and change of scalars}
@@ -344,9 +387,55 @@ $\D_{\mathrm{cons}}(X_\proet,\mathcal{R})$ &
 
 \begin{remark}
 For non-finite coefficients, $E$-coefficients are modules over the ring sheaf
-$E_X=C(-,E)$ itself. They are \emph{not} obtained from $\cO_E$-coefficients by inverting
-$\ell$ in a triangulated category.
+$E_X=C(-,E)$ itself. They are \emph{not defined} by inverting $\ell$ on
+$\cO_E$-coefficients in a triangulated category; that the two agree is a theorem
+(\S\ref{sec:rationalization}).
 \end{remark}
+
+\subsection{$E$-coefficients as $\cO_E$-coefficients with $\ell$ inverted}
+\label{sec:rationalization}
+
+From the branch \texttt{extend-scalars-isLocalization}
+(\lean{CategoryTheory/ModuleObjects/EllAdicRationalization}).
+
+\begin{definition}[Rationalization]
+Let $\mathcal{T}$ be a triangulated category, linear over a commutative ring $R$ with
+$R$-linear shifts, and $M\subseteq R$ a submonoid. An object $K$ is \emph{$M$-torsion} if
+$m\cdot\mathrm{id}_K=0$ for some $m\in M$; these objects form a triangulated subcategory.
+The \emph{rationalization} (\lean{CategoryTheory.Rationalization})
+\[
+  \mathcal{T}[M^{-1}] := \mathcal{T}/(M\text{-torsion objects})
+\]
+is the Verdier quotient, i.e.\ the localization at the class $W_M$
+(\lean{Rationalization.W}) of morphisms whose mapping cone is $M$-torsion. It is
+triangulated, every $m\in M$ acts invertibly on its $\Hom$ groups, and it is linear over
+any localization of $R$ at $M$ (\lean{Rationalization.linear}).
+\end{definition}
+
+\begin{choice}[Comparison via derived extension of scalars]
+For $E\subseteq\Qlbar$ with ring of integers $\cO_E$, let $\varphi\colon\cO_{E,X}\to E_X$
+be the inclusion of ring objects. The comparison functor is the derived extension of
+scalars
+\[
+  E\lotimes_{\cO_E}- = L(\Ext_\varphi)\colon\D(\Mod_{\cO_{E,X}})\to\D(\Mod_{E_X}),
+\]
+and the statement is that it is a localization functor for $W_{\ell^{\mathbb{N}}}$, the
+morphisms whose mapping cone is killed by a power of $\ell$
+(\lean{ProEtale.isLocalization_derivedExtendScalars}, currently \texttt{sorry}).
+\end{choice}
+
+Consequently, by uniqueness of localizations, there is an equivalence
+\[
+  \D(\Mod_{\cO_{E,X}})[\ell^{-1}] \;\simeq\; \D(\Mod_{E_X})
+\]
+(\lean{ProEtale.rationalizationEquivalence}), under which the localization functor
+corresponds to $E\lotimes_{\cO_E}-$
+(\lean{ProEtale.rationalizationQCompEquivalenceIso}). So $E$-coefficients, defined as
+modules over $E_X$, and the Bhatt--Scholze description as ``$\cO_E$-coefficients with
+$\ell$ inverted'' are related by a canonical equivalence; neither is taken as the
+definition of the other. Supporting instances on this branch: $\Ab$ has functorial flat
+resolutions (the unit $\mathbb{Z}$ is a flat separator), and $\Sh(X_\proet,\Ab)$ is
+symmetric monoidal (\lean{ProEtale.sheafSymmetricCategory}).
 
 \paragraph{Monoidal structure.} On $\D(X_\proet,\mathcal{A})$ and on
 $\D(\Mod_{\mathcal{R}})$ the tensor product is the derived tensor product $\lotimes$
@@ -495,7 +584,10 @@ $\{i,\ \text{complement}\}$).
 Let $T$ be a commutative topological ring and write $\mathcal{A}_X=\mathcal{A}_X(T)$. All
 functors are of the form ``transport along the $\Ab$-valued functor, then change scalars
 along $\eta_f$ or $\alpha_f$''. Nothing requires $\alpha_f$ to be invertible except the
-open-immersion statements.
+open-immersion statements. The Lean declarations below are in the namespace
+\lean{ProEtale.ContinuousMapRing}, in the folder
+\lean{SixFunctors/ProEtale/ModuleObject/FiniteExtension}. The same constructions for
+$\Qlbar{}_{,X}$ are described in \S\ref{sec:sixB-Qlbar}.
 
 \subsection{Pushforward and pullback}
 \begin{choice}
@@ -711,6 +803,54 @@ restriction of $Rf_!\dashv Rf^!$ along the fully faithful inclusions
 (\lean{ProEtale.ContinuousMapRing.rightDerivedUpperShriekPlusAdjunction}). So there is no
 ambiguity between ``the right adjoint of $R^+f_!$'' and ``the restriction of $Rf^!$''.
 
+\subsection{$\Qlbar$-coefficients}
+\label{sec:sixB-Qlbar}
+
+\begin{choice}[Same recipe, other coefficient morphisms]
+The six functors on $\Mod_{\Qlbar{}_{,X}}=\Mod(\Sh(X_\proet,\Ab),\Qlbar{}_{,X})$ are built
+by exactly the same constructions as for $\mathcal{A}_X(T)$, with the coefficient morphisms
+$\eta_f\colon\Qlbar{}_{,Y}\to f_*\Qlbar{}_{,X}$ and
+$\alpha_f\colon f^*\Qlbar{}_{,Y}\to\Qlbar{}_{,X}$ of \S\ref{sec:coefficients} in place of
+those of $C(-,T)$ (folder \lean{SixFunctors/ProEtale/ModuleObject/PAdicAlgCl}, namespace
+\lean{ProEtale.PadicAlgClRing}):
+\begin{align*}
+  f_* &:= \Res_{\eta_f}\circ\mathrm{mapMod}(f_*), &
+  f^* &:= \Ext_{\alpha_f}\circ\mathrm{mapMod}(f^*),\\
+  j_! &:= (\text{linear }j_!)\circ\Res_{\alpha_j}, &
+  f_! &:= g_*\circ i_!,\\
+  Rf_* &:= R(f_*),\quad Lf^* := L(f^*), &
+  Rf_! &:= R(g_*)\circ\D(i_!),\\
+  Rf^! &:= \D(i^*)\circ Rg^!, &
+  \lotimes_{\Qlbar},\ \RHom_{\Qlbar}&\text{ as in \S\ref{sec:derived}},
+\end{align*}
+with the same choices as above (total derived functors of the composites for $Rf_*$ and
+$Lf^*$; composites of derived functors for $Rf_!$ and $Rf^!$; $R^+f^!$ by restriction).
+\end{choice}
+
+Nothing in the constructions uses the particular form of the coefficient ring objects, only
+$\eta_f$, $\alpha_f$ and their properties. Accordingly the same results are available:
+$f^*\dashv f_*$ (\lean{ProEtale.PadicAlgClRing.upperStarLowerStarAdjunction}),
+$Lf^*\dashv Rf_*$ (\lean{ProEtale.PadicAlgClRing.derivedUpperStarLowerStarAdjunction}),
+the comparisons $Rf_*\cong\D(\Res_{\eta_f})\circ R\,\mathrm{mapMod}(f_*)$ and
+$Lf^*\cong L(\Ext_{\alpha_f})\circ\D(\mathrm{mapMod}(f^*))$
+(\lean{ProEtale.PadicAlgClRing.rightDerivedLowerStarIso},
+\lean{ProEtale.PadicAlgClRing.leftDerivedUpperStarIso}), $\D(j_!)\dashv\D(j^*)$, and
+$Rf_!\dashv Rf^!$ on $\D$ and $\D^+$
+(\lean{ProEtale.PadicAlgClRing.rightDerivedUpperShriekAdjunction},
+\lean{ProEtale.PadicAlgClRing.rightDerivedUpperShriekPlusAdjunction}). The sorried inputs
+are the same as for $C(-,T)$: $\eta_f$ is a morphism of ring objects, $\alpha_j$ is an
+isomorphism for open immersions, the projection formula for $j_!$, preservation of K-flat
+complexes by $\mathrm{mapMod}(f^*)$, $Rg_*$ is a left adjoint for proper $g$, and $Rf^!$
+preserves bounded below objects.
+
+\begin{remark}
+$\Qlbar$-coefficients are modules over the ring object $\Qlbar{}_{,X}$ itself, not a
+2-colimit of the categories $\D(\Mod_{E_X})$ over finite $E$. The colimit description
+$\Qlbar{}_{,X}=\operatorname{colim}_EE_X$ is a statement about the ring object only;
+comparing $\D(\Mod_{\Qlbar{}_{,X}})$ (or its constructible part) with
+$\operatorname{colim}_E\D(\Mod_{E_X})$ is not addressed yet.
+\end{remark}
+
 %======================================================================
 \section{Summary}
 %======================================================================
@@ -749,23 +889,34 @@ $\RHom$ & right adjoint of $\lotimes$ & right adjoint of $\lotimes_{\mathcal{A}_
 \end{tabularx}
 \medskip
 
+The layer B column applies verbatim to $\Mod_{\Qlbar{}_{,X}}$, with the coefficient
+morphisms $\eta_f,\alpha_f$ of $\Qlbar$ (\S\ref{sec:sixB-Qlbar}).
+
 \paragraph{Main open directions.}
 \begin{itemize}
 \item An explicit construction of $Rg^!$ for proper $g$ on module objects, via the
   projection-formula linearization of the $\Ab$-valued right adjoint and coextension of
   scalars along $\alpha_g$.
-\item Coefficients $\Qlbar{}_{,X}$, which are not of the form $\mathcal{A}_X(T)$.
+\item For $\Qlbar{}_{,X}$: proving the sorried properties of $\eta_f$ and $\alpha_j$, and
+  comparing $\D(\Mod_{\Qlbar{}_{,X}})$ with $\operatorname{colim}_E\D(\Mod_{E_X})$.
 \item Restricting the module-object functors to $\D_{\mathrm{cons}}$, and aligning the
   restriction-to-strata used in constructibility with the module-object pullback.
-\item Identifying $E_X$ with $\cO_{E,X}[1/\ell]$, and comparing layer (B) with layer (A)
-  via reduction modulo $\ell^n$.
+\item Proving that $E\lotimes_{\cO_E}-$ is a localization at the morphisms with
+  $\ell$-power-torsion cone (\S\ref{sec:rationalization}), and comparing layer (B) with
+  layer (A) via reduction modulo $\ell^n$.
 \end{itemize}
 
 \paragraph{Branches.}
 \texttt{ring-objects-for-coefficients} (\S\ref{sec:coefficients}) and
 \texttt{extend-scalars-module-object} (\S\ref{sec:modules}) are merged into
-\texttt{module-object-six-functors} (\S\ref{sec:sixB}, and the move of layer (A) to
-\lean{FiniteCoefficient}). \texttt{bounded-constructible-module-object-of-sheaf}
-(\S\ref{sec:constructible}) is not yet merged with it.
+\texttt{module-object-six-functors} (\S\ref{sec:sixB}, the move of layer (A) to
+\lean{FiniteCoefficient}, and the move of the $C(-,T)$ module-object functors to
+\lean{ModuleObject/FiniteExtension} next to \lean{ModuleObject/PAdicAlgCl}). The latest
+commits on \texttt{ring-objects-for-coefficients} (the colimit description of
+$\Qlbar{}_{,X}$) are not yet merged into \texttt{module-object-six-functors}.
+\texttt{extend-scalars-isLocalization} (\S\ref{sec:rationalization}) builds on
+\texttt{extend-scalars-module-object} and is not yet merged with
+\texttt{module-object-six-functors}. \texttt{bounded-constructible-module-object-of-sheaf}
+(\S\ref{sec:constructible}) is not yet merged with it either.
 
 \end{document}
