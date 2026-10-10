@@ -32,9 +32,102 @@
   "def-weil-pbc-direct-sum-modules",
   "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an extension $0\\to N\\xrightarrow{u}E\\xrightarrow{v}P\\to0$ and an inclusion $\\iota_j:C_j\\to P$, the pullback is $E\\times_P C_j=\\{(e,c)\\mid v(e)=\\iota_j(c)\\}$ with its evident maps from $N$ and to $C_j$. An equivalence of extensions induces an equivalence of these pullbacks, so $\\Phi_A$ is well-defined.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 05EG, lines 24504-24516"
+   }
+  },
+  {
+   "text": "To prove surjectivity, choose representatives $0\\to N\\xrightarrow{u_j}E_j\\xrightarrow{v_j}C_j\\to0$ of a tuple of classes. The direct-sum map $p:\\bigoplus_jE_j\\to P$ is surjective, and its kernel is exactly $\\bigoplus_j u_j(N)$: an element has finite support, and each component lies in $\\ker(v_j)=\\operatorname{im}(u_j)$ precisely when it lies in the kernel. Let $\\Sigma:\\bigoplus_jN\\to N$ be the finite-sum map.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 05EG, lines 24504-24516"
+   }
+  },
+  {
+   "text": "Form $E=(N\\oplus\\bigoplus_jE_j)/R$, where $R$ is the image of $\\bigoplus_jN\\to N\\oplus\\bigoplus_jE_j$, $n\\mapsto(\\Sigma(n),-\\bigoplus_j u_j(n_j))$. The maps $N\\to E$, $a\\mapsto[(a,0)]$, and $E\\to P$, $[(a,e)]\\mapsto p(e)$ are well-defined. The first is injective, the second is surjective, and if $p(e)=0$ then $e=\\bigoplus_j u_j(n_j)$, so $[(0,e)]=[(\\Sigma(n),0)]$; hence their image and kernel agree. Thus $0\\to N\\to E\\to P\\to0$ is short exact by the cited definition.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 05EG, lines 24504-24516"
+   }
+  },
+  {
+   "text": "For each $j$, the map $E_j\\to E\\times_P C_j$, $e\\mapsto([0,\\iota_j(e)],v_j(e))$, is an isomorphism: surjectivity follows by subtracting the finitely supported components away from $j$ and absorbing their kernel parts through the relation defining $R$, and injectivity follows from the same relation with only the $j$-component present. Under this map the copy of $N$ is fixed because $[(0,\\iota_j u_j(n))]=[(n,0)]$, and the map to $C_j$ is fixed. Therefore the constructed extension maps to the prescribed tuple, proving surjectivity of $\\Phi_A$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 05EG, lines 24504-24516"
+   }
+  },
+  {
+   "text": "For injectivity, let $0\\to N\\xrightarrow{u}E\\xrightarrow{v}P\\to0$ and $0\\to N\\xrightarrow{u'}E'\\xrightarrow{v'}P\\to0$ have equivalent pullbacks, with fixed-end-term isomorphisms $h_j:E\\times_P C_j\\to E'\\times_P C_j$. Every $e\\in E$ is in $u(N)+\\sum_j\\operatorname{im}(E\\times_P C_j\\to E)$: write $v(e)$ as the finite sum $\\sum_j\\iota_j(c_j)$, lift each $c_j$ to a pair in the corresponding pullback, and the remaining difference lies in $u(N)$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 05EG, lines 24504-24516"
+   }
+  },
+  {
+   "text": "Define $q:N\\oplus\\bigoplus_j(E\\times_P C_j)\\to E$ by the endpoint inclusion on $N$ and the sum of the pullback inclusions, and define $q'$ analogously using $u'$ and the maps $h_j$. If an element is in $\\ker(q)$, applying $v$ shows that every $C_j$-component is zero because the direct sum has unique components; hence every pullback summand lies in the common copy of $N$, where each $h_j$ is the identity. The relation $q=0$ then gives $q'=0$, so $q'$ factors uniquely through a map $h:E\\to E'$. Applying the same construction to the inverses $h_j^{-1}$ gives an inverse map. Thus $h$ is an isomorphism, fixes $N$, and commutes with the maps to $P$, proving injectivity of $\\Phi_A$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 05EG, lines 24504-24516"
+   }
+  },
+  {
+   "text": "A well-defined map that is both surjective and injective is a bijection, so $\\Phi_A$ has the asserted bijectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 05EG, lines 24504-24516"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-quotient-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "proof of Lemma Tag 05EG, lines 24504-24516; the source leaves the direct-sum details to the reader"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,12 +152,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-direct-sum-extension-assembly",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-ext-one-direct-sum",
+  "worker": "stage1",
+  "summary": "Expanded the omitted direct-sum Ext compatibility details directly in the item: explicit quotient pushout for surjectivity, pullback identifications, and componentwise gluing for injectivity. Deleted the two clause-sized auxiliary nodes.",
+  "blueprint": "The seven steps realize the ancestor blueprint's direct-sum Ext compatibility clause in the essential-surjectivity proof."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ed2",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ed2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:26 return (94aa77654); all three points checked: (1) D1 the two clause-sized nodes are deleted, the delivery touches only the item and its report; (2) D5 the details omitted by Stacks 05EG (more-algebra.tex 24504-24516) are now written as steps: step 1 pullback E x_P C_j is an extension and equivalences pull back (def-weil-pbc-direct-sum-modules, def-weil-pbc-exact-sequence); step 2 kernel of sum map is direct sum of u_j(N) by finite support; step 3 pushout E=(N + sum E_j)/R, checked N->E injective (u_j injective forces n=0), E->P well defined and surjective, kernel = image; step 4 E_j -> E x_P C_j, e -> ([0,i_j e], v_j e) checked injective (relation with single j-component forces e=0) and surjective (components k!=j lie in u_k(N), absorbed via R and (a,0)~(0,i_j u_j a)), N and C_j fixed; step 5 generation E = u(N)+sum im(pullbacks); step 6 glued q' kills ker q (v forces all C_j-components 0, then summands in N where h_j=id, u injective gives a+sum n_j=0), inverse from h_j^{-1}, h fixes N and commutes with maps to P, all checked; step 7 trivial. (3) B4 moot, no new node. Small cases: empty family (P=0, Ext of 0 is a point) and singleton (identity). Statement unchanged and correct for arbitrary families. FIX more, RETURN less: dag/nodes/sec-proper-base-change/lem-weil-pbc-ext-one-direct-sum.json: proof[2].uses, proof[3].uses, proof[5].uses, proof_deps: added the existing def-weil-pbc-quotient-module (steps 3-4 form and compute in the quotient module (N + sum E_j)/R, step 6 factors through the surjection q) (B3/C1). Start 2026-10-10 Sat Oct 10 03:45:15 PM UTC 2026, end Sat Oct 10 03:46:03 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

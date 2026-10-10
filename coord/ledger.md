@@ -1854,3 +1854,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:45 L: returned deliver/J1/lem-sc-finite-flat-duality-evaluation (reviewer RETURN: 1. D1: lem-sc-finite-flat-duality-evaluation, both steps: the split is a relabelling. lem-sc-finite-flat-upper-shriek-ho)
 - 15:45 L: merged deliver/F1/lem-exc-rg-open-stabilizer-adjoint (reviewer PASS; after a return; new nodes: 0)
 - 15:45 L: returned deliver/C1/lem-sc-p1-duality-pairing-naturality (reviewer RETURN: 1. D1: steps 2-3 and the three new nodes: relabelling. lem-sc-p1-duality-pairing-alpha-naturality and -beta-naturality r)
+- 15:46 L: merged deliver/F1/lem-weil-pbc-ext-one-direct-sum (reviewer FIX; after a return; new nodes: 0)
