@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-module-stalk-exact",
+ "kind": "statement",
+ "title": "Stalks of O_X-modules commute with kernels, images and cokernels (Stacks 01AG)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] (more generally a ringed space $(X,\\mathcal O_X)$), $\\textit{Mod}(\\mathcal O_X)$ the abelian category of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] (kernels computed sectionwise, cokernels the sheafifications of the sectionwise cokernels), $x\\in X$, and stalks, germs and stalk maps $\\varphi_x$ as in [def-weil-pbc-module-stalk]. Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of $\\mathcal O_X$-modules, with kernel $k:\\operatorname{Ker}\\varphi\\to\\mathcal F$, cokernel $c:\\mathcal G\\to\\operatorname{Coker}\\varphi$, and image $\\operatorname{Im}\\varphi=\\operatorname{Ker}(c)\\subseteq\\mathcal G$ with inclusion $\\iota$ and the factorization $\\varphi=\\iota\\circ\\bar\\varphi$, $\\bar\\varphi:\\mathcal F\\to\\operatorname{Im}\\varphi$. Then: (1) if $\\varphi_U$ is injective for every open $U$ (e.g. $\\varphi$ a monomorphism, or the inclusion of a sub-$\\mathcal O_X$-module), $\\varphi_x$ is injective; (2) $k_x$ is injective with image $\\operatorname{Ker}(\\varphi_x)$; (3) $c_x$ is surjective with kernel $\\varphi_x(\\mathcal F_x)$, so it induces an isomorphism of $\\mathcal O_{X,x}$-modules $\\mathcal G_x/\\varphi_x(\\mathcal F_x)\\cong(\\operatorname{Coker}\\varphi)_x$; (4) $\\bar\\varphi_x$ is surjective and $\\iota_x$ is injective with image $\\varphi_x(\\mathcal F_x)$, i.e. $(\\operatorname{Im}\\varphi)_x=\\operatorname{Im}(\\varphi_x)$ as submodules of $\\mathcal G_x$; (5) a complex $\\mathcal F\\to\\mathcal G\\to\\mathcal H$ of $\\mathcal O_X$-modules is exact at $\\mathcal G$ if and only if $\\mathcal F_x\\to\\mathcal G_x\\to\\mathcal H_x$ is exact at $\\mathcal G_x$ for every $x\\in X$.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Section 17.3 (lines 102-146: Ker(phi)_x = Ker(phi_x), Coker(phi)_x = Coker(phi_x) since stalks commute with sheafification) and Lemma 01AG (label lemma-abelian, line 149)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk functor on sheaves of modules over a ringed space is exact, stalk of cokernel is cokernel of stalks",
+   "results": "TopCat.Presheaf.stalk_mono_of_mono, TopCat.Presheaf.stalkFunctor_preserves_mono, TopCat.Presheaf.stalkFunctor(_obj, _map_germ_apply) (Mathlib.Topology.Sheaves.Stalks), ModuleCat.Tilde.toOpen_germ_apply: stalks of sheaves valued in a concrete category; nothing for sheaves of O_X-modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a morphism of sheaves of O_X-modules on a topological space, the stalk at x of the kernel, image and cokernel is the kernel, image and cokernel of the stalk map",
+   "results": "ModuleCat.Tilde.toStalk, stalkToFiberLinearMap(_germ), toOpen_germ, toStalk_comp_stalkToFiberLinearMap (Mathlib.AlgebraicGeometry.Modules.Tilde): only stalks of M~ on Spec R",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.toSheaf, CategoryTheory.Limits.PreservesFiniteColimits ; and TopCat.Presheaf.stalkFunctor, CategoryTheory.Limits.PreservesFiniteColimits",
+   "results": "none (both)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stalk' Mathlib/Algebra/Category/ModuleCat/Presheaf/*.lean Mathlib/Topology/Sheaves/Stalks.lean | grep -i 'exact|tensor|iso'; grep -rln stalk Mathlib | xargs grep -ln 'Exact|PreservesFiniteLimits|PreservesFiniteColimits'; grep -rn 'PreservesColimit|PreservesFiniteColimit' Mathlib/Algebra/Category/ModuleCat/{Presheaf,Sheaf}/ Mathlib/AlgebraicGeometry/Modules/",
+   "results": "Mathlib/Topology/Sheaves/Abelian.lean:75 instance PreservesFiniteLimits (forget C X ⋙ stalkFunctor C p₀) and :103 TopCat.Sheaf.exact_iff_stalkFunctor_map_exact (sheaves on X with values in a concrete abelian C such as AddCommGrpCat: exactness on stalks); Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean:118 PreservesFiniteLimits (SheafOfModules.toSheaf R); Presheaf/Colimits.lean:160 PreservesFiniteColimits (PresheafOfModules.toPresheaf R); no statement that SheafOfModules.toSheaf (or Scheme.Modules.toPresheaf composed with sheafification) preserves cokernels, and no stalk exactness for SheafOfModules / X.Modules",
+   "date": "2026-10-10",
+   "verdict": "no match: the abelian-sheaf case exists (Topology/Sheaves/Abelian.lean:75,103), the passage from O_X-modules to their underlying abelian sheaves on the cokernel side is missing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ideal-module-product-stalk",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
