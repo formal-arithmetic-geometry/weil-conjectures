@@ -1,8 +1,8 @@
 # Work queue
 
-930 items; claim with `tools/claim.py next <group> [--stage N]`.
+933 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (233)
+## Stage 1: nodes to split (235)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -42,13 +42,13 @@
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `lem-sc-strict-henselization-dimension` | 4009 | none |
 | `lem-sc-strict-henselization-noetherian` | 4009 | none |
-| `lem-sc-strict-henselization-regular` | 4009 | none |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
-| `lem-pc-hilb-separated` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-sc-product-tangent-space-direct-sum` | 4010 | none |
 | `lem-sc-rational-unramified-cotangent-criterion` | 4010 | none |
+| `lem-sc-strict-henselization-cotangent-dimension` | 4010 | none |
+| `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-pc-derived-filtered-free-resolution` | 4012 | none |
 | `lem-pc-affine-tilde-kflat` | 4013 | none |
 | `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
@@ -66,9 +66,10 @@
 | `lem-pc-noetherian-approximation-data` | 5012 | none |
 | `lem-pc-noetherian-perfect-direct-image` | 5012 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
-| `thm-sp-grothendieck` | 6004 | none |
+| `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
+| `lem-sp-cartan-eilenberg-exists` | 6005 | none |
 | `thm-sp-double-complex-spectral-sequences` | 6005 | sorry_here |
-| `thm-sp-if-e1` | 6005 | none |
+| `thm-sp-if-e1` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `pqf-def-coherent` | 6007 | none |
 | `pqf-def-cohomology` | 6007 | none |
@@ -219,6 +220,7 @@
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-kun-separable-smooth-colimit` | - | none |
 | `lem-kun-stalk-as-pullback` | - | none |
+| `lem-pc-hilb-functorial` | - | none |
 | `lem-pc-perfect-locus` | - | sorry_here |
 | `lem-pur-derived-change-of-rings` | - | none |
 | `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
@@ -240,7 +242,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (697)
+## Stage 2: nodes to state (698)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -427,6 +429,7 @@
 | `lem-sc-semilocal-dim-one-conductor` | 1 | state |
 | `lem-sc-semilocal-dim-one-normalization` | 1 | state |
 | `lem-sc-smooth-algebra-reduced-field` | 1 | state |
+| `lem-sc-strict-henselization-regular` | 1 | state |
 | `lem-sc-zero-dim-noetherian-closed-finite` | 1 | state |
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
@@ -942,7 +945,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1374 nodes that wait for a statement dependency, 269 nodes that wait for stage 1.
+Not open yet: 1376 nodes that wait for a statement dependency, 270 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
