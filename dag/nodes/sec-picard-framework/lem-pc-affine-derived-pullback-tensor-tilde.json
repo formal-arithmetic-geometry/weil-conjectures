@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Affine computation of derived pullback and derived tensor product",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], with derived pullback $Lf^*$ [def-pc-derived-pullback] and derived categories as in [def-pc-derived-category]; for a scheme $Z$ write $K\\otimes^{\\mathbf L}_{\\mathcal O_Z}L$ for the derived tensor product, the total tensor complex [def-pc-tensor-complex-sheaves] of a K-flat resolution of $K$ [def-pc-kflat-complex] with $L$. (1) For opens $U\\subseteq X$, $V\\subseteq Y$ with $f(U)\\subseteq V$ and $E$ in $D(\\mathcal O_Y)$ there is a canonical isomorphism $(Lf^*E)|_U\\cong L(f|_U)^*(E|_V)$ in $D(\\mathcal O_U)$, and for $K,L$ in $D(\\mathcal O_X)$ a canonical isomorphism $(K\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_U\\cong K|_U\\otimes^{\\mathbf L}_{\\mathcal O_U}L|_U$. (2) If $X=\\operatorname{Spec}(B)$, $Y=\\operatorname{Spec}(A)$ and $f$ is given by a ring map $A\\to B$, then for every complex $M^\\bullet$ of $A$-modules $Lf^*\\widetilde{M^\\bullet}\\cong\\widetilde{M^\\bullet\\otimes_A^{\\mathbf L}B}$ in $D(\\mathcal O_X)$, where $\\widetilde{(-)}$ is the termwise associated sheaf and $\\otimes_A^{\\mathbf L}$ the derived tensor product of complexes of modules. (3) If $X=\\operatorname{Spec}(A)$, then for complexes $M^\\bullet,N^\\bullet$ of $A$-modules $\\widetilde{M^\\bullet}\\otimes^{\\mathbf L}_{\\mathcal O_X}\\widetilde{N^\\bullet}\\cong\\widetilde{M^\\bullet\\otimes_A^{\\mathbf L}N^\\bullet}$ in $D(\\mathcal O_X)$.",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], with derived pullback $Lf^*$ [def-pc-derived-pullback] and derived categories as in [def-pc-derived-category]; for a scheme $Z$ write $K\\otimes^{\\mathbf L}_{\\mathcal O_Z}L$ for the derived tensor product, the total tensor complex [def-pc-tensor-complex-sheaves] of a K-flat resolution of $K$ [def-pc-kflat-complex] with $L$. (1) For opens $U\\subseteq X$, $V\\subseteq Y$ with $f(U)\\subseteq V$ and $E$ in $D(\\mathcal O_Y)$ there is a canonical isomorphism $(Lf^*E)|_U\\cong L(f|_U)^*(E|_V)$ in $D(\\mathcal O_U)$, and for $K,L$ in $D(\\mathcal O_X)$ a canonical isomorphism $(K\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_U\\cong K|_U\\otimes^{\\mathbf L}_{\\mathcal O_U}L|_U$. (2) If $X=\\operatorname{Spec}(B)$, $Y=\\operatorname{Spec}(A)$ and $f$ is given by a ring map $A\\to B$, then for every complex $M^\\bullet$ of $A$-modules $Lf^*\\widetilde{M^\\bullet}\\cong\\widetilde{M^\\bullet\\otimes_A^{\\mathbf L}B}$ in $D(\\mathcal O_X)$, where $\\widetilde{(-)}$ is the termwise associated sheaf [lem-weil-pbc-spec-module-tilde-sections] and $\\otimes_A^{\\mathbf L}$ the derived tensor product of complexes of modules. (3) If $X=\\operatorname{Spec}(A)$, then for complexes $M^\\bullet,N^\\bullet$ of $A$-modules $\\widetilde{M^\\bullet}\\otimes^{\\mathbf L}_{\\mathcal O_X}\\widetilde{N^\\bullet}\\cong\\widetilde{M^\\bullet\\otimes_A^{\\mathbf L}N^\\bullet}$ in $D(\\mathcal O_X)$.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Lemma 36.3.8 (Tag 08DW) part (2) and its proof ('Lf^* is compatible with restricting to open subschemes'), Lemma 36.3.9 (Tag 08DX) part (2); both via Lemma 36.3.6 (perfect-lemma-affine-K-flat)"
@@ -23,10 +23,69 @@
   "def-pc-derived-pullback",
   "def-pc-derived-category",
   "def-pc-tensor-complex-sheaves",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-weil-pbc-spec-module-tilde-sections"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Choose a K-flat resolution P^\\bullet\\to E on Y. Restrict it to V; this is pullback along the open immersion V\\hookrightarrow Y, so [lem-pc-kflat-pullback-preservation] makes P^\\bullet|_V K-flat. Pulling this resolution back along f|_U:U\\to V and applying [def-pc-derived-pullback] gives (Lf^*E)|_U\\cong L(f|_U)^*(E|_V). For K,L on X, choose a K-flat resolution Q^\\bullet\\to K. Restriction along U\\hookrightarrow X preserves K-flatness by the same cited lemma, and restriction commutes termwise with the sheaf tensor product and its direct-sum totalization [def-pc-tensor-complex-sheaves]; hence the defining K-flat computation gives (K\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_U\\cong K|_U\\otimes^{\\mathbf L}_{\\mathcal O_U}L|_U.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-pullback-preservation",
+    "def-pc-derived-pullback",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.3.8 (Tag 08DW), proof of compatibility with restriction; Lemma 36.3.9 (Tag 08DX), restriction of the tensor complex"
+   }
+  },
+  {
+   "text": "In the affine case X = Spec(B), Y = Spec(A), choose a K-flat resolution P^\\bullet\\to M^\\bullet of complexes of A-modules ([lem-pc-kflat-resolution] on the one-point space with ring A). By [lem-pc-affine-qcoh-derived-equivalence] the termwise associated sheaf is a functor on D(A), so \\widetilde{P^\\bullet}\\to\\widetilde{M^\\bullet} is a quasi-isomorphism, and \\widetilde{P^\\bullet} is K-flat over \\mathcal O_Y by [lem-pc-affine-tilde-kflat]; thus it is a K-flat resolution of \\widetilde{M^\\bullet}. By [def-pc-derived-pullback], Lf^*\\widetilde{M^\\bullet}\\cong f^*\\widetilde{P^\\bullet}, the termwise module pullback. By [lem-weil-pbc-tilde-pullback-base-change], applied in each degree and natural in the module (so compatible with the differentials), f^*\\widetilde{P^\\bullet}\\cong\\widetilde{P^\\bullet\\otimes_A B}. The module complex P^\\bullet\\otimes_A B represents M^\\bullet\\otimes_A^{\\mathbf L}B because P^\\bullet is K-flat, and the associated-sheaf functor on D(A) [lem-pc-affine-qcoh-derived-equivalence] yields the canonical isomorphism Lf^*\\widetilde{M^\\bullet}\\cong\\widetilde{M^\\bullet\\otimes_A^{\\mathbf L}B}.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-tilde-kflat",
+    "def-pc-derived-pullback",
+    "lem-weil-pbc-tilde-pullback-base-change",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.3.8 (Tag 08DW), part (2), affine computation"
+   }
+  },
+  {
+   "text": "For X = Spec(A), resolve M^\\bullet by a K-flat complex P^\\bullet of A-modules [lem-pc-kflat-resolution]. As in step 2, \\widetilde{P^\\bullet}\\to\\widetilde{M^\\bullet} is a quasi-isomorphism [lem-pc-affine-qcoh-derived-equivalence] and \\widetilde{P^\\bullet} is K-flat [lem-pc-affine-tilde-kflat], so by the definition of the derived tensor product through a K-flat resolution [def-pc-kflat-complex], \\widetilde{M^\\bullet}\\otimes^{\\mathbf L}_{\\mathcal O_X}\\widetilde{N^\\bullet} is the total tensor complex \\widetilde{P^\\bullet}\\otimes_{\\mathcal O_X}\\widetilde{N^\\bullet} [def-pc-tensor-complex-sheaves]. By [lem-weil-pbc-affine-tilde-tensor] in each bidegree, natural in both modules, \\widetilde{P^p}\\otimes_{\\mathcal O_X}\\widetilde{N^q}\\cong\\widetilde{P^p\\otimes_A N^q}; tilde commutes with finite direct sums (it is additive), so the total complexes agree: \\widetilde{P^\\bullet}\\otimes_{\\mathcal O_X}\\widetilde{N^\\bullet}\\cong\\widetilde{P^\\bullet\\otimes_A N^\\bullet}. Since P^\\bullet is K-flat, P^\\bullet\\otimes_A N^\\bullet represents M^\\bullet\\otimes_A^{\\mathbf L}N^\\bullet, giving \\widetilde{M^\\bullet}\\otimes^{\\mathbf L}_{\\mathcal O_X}\\widetilde{N^\\bullet}\\cong\\widetilde{M^\\bullet\\otimes_A^{\\mathbf L}N^\\bullet}.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-tilde-kflat",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-affine-tilde-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.3.9 (Tag 08DX), part (2), affine computation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-pullback-preservation",
+  "def-pc-derived-pullback",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-tilde-kflat",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-affine-tilde-tensor"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
@@ -36,16 +95,64 @@
   {
    "tool": "leanfinder",
    "query": "derived pullback along Spec B -> Spec A of the sheaf associated to a complex of A-modules is the sheaf associated to the derived tensor product with B",
-   "results": "AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, pullbackPushforwardAdjunction, instIsLeftAdjointPullback (underived only)",
-   "date": "2026-10-10",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback; SheafOfModules.pullback; pullbackPushforwardAdjunction; instIsLeftAdjointPullback (underived only)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, Scheme.Modules.pullback, tensorObj",
+   "results": "0 hits; unknown identifier Scheme.Modules.pullback",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*pullback|tensor.*tilde|K-flat in Mathlib/AlgebraicGeometry",
+   "results": "0 matches",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-pullback-tensor-qcoh"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-f-representable"
+ "unit": "sk-thm-picard-f-representable",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-affine-derived-pullback-tensor-tilde",
+  "worker": "stage1",
+  "summary": "Split the affine derived pullback and tensor assertions into restriction, affine pullback, and affine tensor steps. The proof uses the existing K-flat resolution and pullback-preservation statements together with the defining derived constructions; no clause-restating node was created.",
+  "blueprint": "Realizes lem-pc-projection-formula proof steps 1 and 2: the affine-local computation of Lf^* and derived tensor (08DW(2), 08DX(2)) and compatibility with restriction to opens.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "The affine computations require existence of K-flat resolutions, a generic derived-tensor input not supplied by this Picard representability unit."
+   },
+   {
+    "node": "lem-pc-kflat-pullback-preservation",
+    "why": "Restriction compatibility uses preservation of K-flat complexes under pullback along open immersions, a generic ringed-space input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-affine-tilde-tensor",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-pullback-preservation"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-apt1948",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apt1948 (reviewer sub-agent of L); spot-checked: Item vs Stacks 08DW(2), 08DX(2) and restriction clause; all cited statements read (kflat-resolution, kflat-pullback-preservation, derived-pullback, tensor-complex, kflat-complex, affine-qcoh-derived-equivalence). Step 1 correct (restrict to V then pull back along f|_U). Small cases: identity ring map, zero complex. FIX more, RETURN less: (1) C1 steps 2,3: K-flatness of tilde(P) over O_{Spec A} (Stacks 08DV, the lemma both Stacks proofs rest on) was used without citation; added statement-only node lem-pc-affine-tilde-kflat (unsplit, grep search recorded) and cited it, with the quasi-iso tilde(P)->tilde(M) via lem-pc-affine-qcoh-derived-equivalence; (2) C1 steps 2,3: tilde commutes with pullback/tensor (01I9, 01I8) asserted without citation; now cite lem-weil-pbc-tilde-pullback-base-change and lem-weil-pbc-affine-tilde-tensor (generic tool uses); (3) statement (E7, citation only, mathematics unchanged): termwise associated sheaf now cites lem-weil-pbc-spec-module-tilde-sections, added to stmt_deps. The Second reading by M1 missed (1) and (2); its claim that created.item was changed is untrue (value is the parent item, which is correct).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
