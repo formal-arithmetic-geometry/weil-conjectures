@@ -3,27 +3,64 @@
  "blueprint": {
   "is": "def-nagata-morphism-descent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Finite-stage model of a morphism",
- "statement": "Let $X_{\\lambda_0},Y_{\\lambda_0}$ be of finite presentation over\n$S_{\\lambda_0}$, write\n$X_{\\lambda_0,S}=X_{\\lambda_0}\\times_{S_{\\lambda_0}}S$ and\n$Y_{\\lambda_0,S}=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S$, and let\n$\\varphi\\colon X_{\\lambda_0,S}\\to Y_{\\lambda_0,S}$ be an $S$-morphism.\nChoose a finite affine target cover, descend its quasi-compact inverse-image\nopens, choose finite affine covers of those opens, and descend each affine\nring map using its finite generator-and-relation data. Include the finitely\nmany pairwise-overlap equality stages in one selected upper bound\n$\\lambda_\\varphi$, and define\n\n$$\n\\varphi_{\\lambda_\\varphi}\\colon\nX_{\\lambda_\\varphi}\\longrightarrow Y_{\\lambda_\\varphi}\n$$\n\nby gluing the descended affine maps.\nRetain comparison isomorphisms for each descended open, transport every\naffine map through them, and include the finitely many overlap equalities in\nthe common upper bound; the transported maps glue at the selected stage.",
+ "statement": "Let $I$ be a nonempty directed set, let $(S_\\lambda)_{\\lambda\\in I}$ be an inverse system of schemes with affine transition morphisms, and let $S=\\varprojlim_{\\lambda\\in I}S_\\lambda$. Fix $\\lambda_0\\in I$ such that $S_{\\lambda_0}$ is quasi-compact and quasi-separated. Let $X_{\\lambda_0}$ and $Y_{\\lambda_0}$ be schemes of finite presentation over $S_{\\lambda_0}$. Use [def-nagata-basechanged-system] to write $X_\\lambda=X_{\\lambda_0}\\times_{S_{\\lambda_0}}S_\\lambda$, $Y_\\lambda=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S_\\lambda$, and $X=X_{\\lambda_0}\\times_{S_{\\lambda_0}}S$, $Y=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S$. Let $\\varphi:X\\to Y$ be an $S$-morphism.\n\nChoose a finite affine cover $\\{T_j=\\operatorname{Spec}R_j\\}_j$ of $S_{\\lambda_0}$ and a finite affine cover $\\{V_{jk}=\\operatorname{Spec}B_{jk}\\}_{j,k}$ of $Y_{\\lambda_0}$ such that $V_{jk}$ maps into $T_j$. Assume each $B_{jk}$ is a finitely presented $R_j$-algebra; fix a finite set $G_{jk}$ of $R_j$-algebra generators and a finite list of defining relations for it. Put $W_{jk}^\\infty=\\varphi^{-1}(V_{jk}\\times_{S_{\\lambda_0}}S)\\subseteq X$. Each $W_{jk}^\\infty$ is quasi-compact. Use [def-nagata-qc-open-descent] to choose a stage $\\lambda_{jk}\\geq\\lambda_0$ and a descended open $\\widetilde W_{jk,\\lambda_{jk}}\\subseteq X_{\\lambda_{jk}}$ (applied with the qcqs scheme $X_{\\lambda_0}$ in the role of the scheme called $Y_{\\lambda_0}$ there); by [lemma-nagata-qc-open-descends] it is quasi-compact and its inverse image in $X$ is $W_{jk}^\\infty$. Replace it by $W_{jk,\\lambda_{jk}}:=\\widetilde W_{jk,\\lambda_{jk}}\\cap (X_{\\lambda_{jk}}\\times_{S_{\\lambda_{jk}}}T_{j,\\lambda_{jk}})$, where $T_{j,\\lambda_{jk}}$ is the inverse image of $T_j$; this is quasi-compact because $X_{\\lambda_{jk}}\\to S_{\\lambda_{jk}}$ is quasi-compact, and its inverse image in $X$ is still $W_{jk}^\\infty$. Choose a finite affine cover $W_{jk,\\lambda_{jk}}=\\bigcup_lU_{jkl}$, so every $U_{jkl}$ maps into $T_{j,\\lambda_{jk}}$. For each $j,k,l$, lift the images in $\\Gamma(U_{jkl}^\\infty,\\mathcal O)$ of the finite set $G_{jk}$ to a later stage using [lemma-nagata-filtered-colimit-finite-data]. Since $B_{jk}$ has finitely many defining relations over $R_j$, use the injectivity clause of [lem-weil-pbc-limit-global-sections-colimit] (equivalently clause (2) of [lem-pc-filtered-colimit-commrings-elementwise]) to choose a later stage where all lifted relations vanish. Because $U_{jkl}$ lies over $T_{j,\\lambda}$, the resulting maps $B_{jk}\\to\\Gamma(U_{jkl,\\lambda},\\mathcal O)$ are $R_j$-algebra maps and hence define $S_\\lambda$-morphisms $U_{jkl,\\lambda}\\to V_{jk}\\times_{S_{\\lambda_0}}S_\\lambda$.\n\nLet $F_0$ be the finite set of $\\lambda_0$ and all stages just chosen, and put $\\lambda'=u(F_0)$ using [def-nagata-directed-finite-upper-bound]; by [lemma-nagata-directed-finite-upper-bound] every element of $F_0$ is $\\leq\\lambda'$. Rebase the system at $\\lambda'$ using [def-nagata-basechanged-system] and transport all the opens and chart maps by its canonical comparison maps. Apply [def-nagata-qc-open-equality-stage] to this rebased system (base stage $\\lambda'$; $X_{\\lambda'}$ is qcqs, being of finite presentation over the qcqs $S_{\\lambda'}$, which is affine over $S_{\\lambda_0}$) with $W_1=\\bigcup_{j,k}W_{jk,\\lambda'}$ and $W_2=X_{\\lambda'}$, quasi-compact opens whose inverse images in $X$ are both $X=\\bigcup_{j,k}W_{jk}^\\infty$; call the resulting stage $\\lambda_{\\cup}$. For each overlap $O_{jkl,j'k'l'}:=U_{jkl,\\lambda'}\\cap U_{j'k'l',\\lambda'}$ (quasi-compact, as $X_{\\lambda'}$ is quasi-separated), the two induced maps from the quasi-compact open $O_{jkl,j'k'l'}$ to $Y_{\\lambda'}$ have equal base changes to $S$; apply [def-nagata-morphism-equality-stage] to the rebased system (the source open is quasi-compact and of finite presentation over $S_{\\lambda'}$) and call the resulting stage $\\lambda_{jkl,j'k'l'}$. Let $F=F_0\\cup\\{\\lambda',\\lambda_\\cup\\}\\cup\\{\\lambda_{jkl,j'k'l'}\\}$, define $\\lambda_\\varphi=u(F)$ using [def-nagata-directed-finite-upper-bound] (so every element of $F$ is $\\leq\\lambda_\\varphi$ by [lemma-nagata-directed-finite-upper-bound]), and transport the charts and maps to $\\lambda_\\varphi$. By [lemma-nagata-qc-open-eq-eventually] the transported $U_{jkl,\\lambda_\\varphi}$ cover $X_{\\lambda_\\varphi}$, and by [lemma-nagata-morphism-eq-eventually] the transported chart maps agree on every overlap $U_{jkl,\\lambda_\\varphi}\\cap U_{j'k'l',\\lambda_\\varphi}$, so they glue to a morphism $\\varphi_{\\lambda_\\varphi}:X_{\\lambda_\\varphi}\\to Y_{\\lambda_\\varphi}$ whose base change to $S$ is identified with $\\varphi$. The construction and selected stage depend on the displayed covers, generators, lifts, relations, and equality-stage witnesses.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-morphism-descent.md",
   "place": "node def-nagata-morphism-descent, order 353"
  },
  "stmt_deps": [
-  "def-nagata-affine-fp-descent",
+  "def-nagata-basechanged-system",
   "def-nagata-directed-finite-upper-bound",
   "def-nagata-qc-open-descent",
-  "lemma-nagata-filtered-colimit-finite-data"
+  "def-nagata-qc-open-equality-stage",
+  "def-nagata-morphism-equality-stage",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-limit-global-sections-colimit",
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lemma-nagata-directed-finite-upper-bound",
+  "lemma-nagata-qc-open-descends",
+  "lemma-nagata-qc-open-eq-eventually",
+  "lemma-nagata-morphism-eq-eventually"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite-stage model of a morphism descended by finite affine covers and gluing",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.instIsAffineHomMapOverSchemeOpensDiagram (all Mathlib/AlgebraicGeometry/AffineTransitionLimit or Cover/Open)",
+   "date": "2026-10-11",
+   "verdict": "generalization: generic finite-stage morphism and affine-cover APIs, not this construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.exists_isPullback_of_finitePresentation, Scheme.GlueData, Scheme.Cover.RelativeGluingData",
+   "results": "none (unknown identifier Scheme.exists_isPullback_of_finitePresentation)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isPullback_of_finitePresentation|RelativeGluingData|glueMorphisms Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite-stage descent of a morphism between finite-presentation schemes",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -62,5 +99,22 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-nagata-morphism-descent",
+  "worker": "stage1",
+  "summary": "Repaired the definition after the E/C4 return by making every finite choice explicit: a finite affine target cover and generators, descended quasi-compact inverse-image opens and affine refinements, generator lifts and relation-vanishing stages, the finite union-cover equality stage, and all finite overlap-agreement stages. The common stage is the selected upper bound u(F), and the base-changed-system node supplies the descended schemes and comparison isomorphisms. The construction is explicitly choice-dependent; no auxiliary nodes were needed.",
+  "blueprint": "node def-nagata-morphism-descent, order 353",
+  "tool_uses": [],
+  "new_nodes": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nmd2912",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nmd2912 (reviewer sub-agent of L); spot-checked: Typing step by step (E): T_j cover, V_jk over T_j with B_jk fp over R_j, W_jk intersected with the inverse image of T_j (qc, same inverse image W_jk^inf because phi is an S-morphism), U_jkl over T_j,lambda so lifted generators/vanishing relations give R_j-algebra maps B_jk -> Gamma(U_jkl,lambda) and S_lambda-morphisms into V_jk x S_lambda: typechecks; returns 22:28 points (1)-(2) repaired: equality stages applied to the system rebased at lambda' with W1=union, W2=X_lambda' and overlap O (qc open, fp over S_lambda'). Consistent with merged qc-open-descent, qc-open-equality-stage (two opens), morphism-equality-stage, basechanged-system, filtered-colimit-finite-data, upper bound; M1 lemma-nagata-morphism-descends provable (charts base-change to phi|U^inf, U^inf cover X). FIX more, RETURN less: (1) C1: inverse image of the descended open = W_jk^inf, covering at lambda_phi and agreement on overlaps at lambda_phi, and i<=u(F) were used uncited; cited lemma-nagata-qc-open-descends, lemma-nagata-qc-open-eq-eventually, lemma-nagata-morphism-eq-eventually, lemma-nagata-directed-finite-upper-bound (stmt_deps added; qc-open-descent supplies no 'comparison isomorphism', wording corrected); (2) naming/C4: lambda' was 'a common stage', now u(F_0); qc-open-equality-stage applied to the 'finite family' made explicit as W1=union W_jk,lambda', W2=X_lambda'; the unnamed alternative 'or use its elementwise clause' and the unused overlap affine covers removed; witness stages named lambda_cup, lambda_jkl,j'k'l'; literal backslash-n paragraph breaks fixed; (3) uses_not_cited reduced to def-nagata-affine-fp-descent (the only blueprint use still uncited). Second reading missed (1) and (2).; 1 file(s) fixed by the reviewer"
+ }
 }

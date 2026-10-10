@@ -2857,3 +2857,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:41 L: merged deliver/C1/lem-pc-flat-module-descent (reviewer FIX; after a return; new nodes: 1)
 - 22:42 L: merged deliver/K1/lem-sc-effective-cartier-affine-dimension-drop (reviewer FIX; first push; new nodes: 0)
 - 22:42 L: merged deliver/J1/lem-pc-perfect-pseudo-coherent-locally-finite-tor (reviewer PASS; first push; new nodes: 0)
+- 22:42 L: merged deliver/H1/def-nagata-morphism-descent (reviewer FIX; after a return; new nodes: 0)
