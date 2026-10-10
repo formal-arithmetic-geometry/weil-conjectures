@@ -12,9 +12,67 @@
   "def-weil-pbc-etale-site",
   "def-weil-pbc-fpqc-covering"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $(f_i:U_i\\to U)_{i\\in I}$ be a covering family of $T_{\\mathrm{Et}}$. By the definition of the covering families of $T_{\\mathrm{Et}}$ [def-weil-pbc-etale-site], each $f_i$ is an etale morphism, and by the definition of etale [def-weil-etale-morphism] (locally of finite presentation, flat and unramified) each $f_i$ is flat. This is the first clause of [def-weil-pbc-fpqc-covering].",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof, lines 3050-3065 (\"By definition this means that the $f_i$ are flat\")"
+   }
+  },
+  {
+   "text": "Let $V\\subseteq U$ be an affine open, so $V$ with its open subscheme structure is an affine scheme. For $i\\in I$ put $W_i=f_i^{-1}(V)$, an open subscheme of $U_i$, and let $g_i:W_i\\to V$ be the restriction of $f_i$, so that $j_V\\circ g_i=f_i\\circ j_{W_i}$ for the inclusions $j_V:V\\hookrightarrow U$ and $j_{W_i}:W_i\\hookrightarrow U_i$, which are open immersions [def-weil-open-immersion]. By [lem-weil-pbc-etale-composition-cancellation] (1) the open immersions $j_{W_i}$ and $j_V$ are etale, by (2) the composite $f_i\\circ j_{W_i}=j_V\\circ g_i$ is etale, and by (3), applied to $g_i$ followed by the etale $j_V$, each $g_i$ is etale. The family $(g_i)_{i\\in I}$ is jointly surjective onto $V$: for $v\\in V$ the covering family is jointly surjective, so $v=f_i(x)$ for some $i$ and $x\\in U_i$, and then $x\\in f_i^{-1}(V)=W_i$ and $g_i(x)=v$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof, lines 3050-3065 (the restriction of the family over the affine open $V$); Tag 0218 (topologies-lemma-etale-affine)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-covering-affine-refinement] to the affine scheme $V$ and the jointly surjective family of etale morphisms $(g_i:W_i\\to V)_{i\\in I}$ of step 2: there are $m\\ge0$, indices $i(1),\\dots,i(m)\\in I$ and affine open subschemes $V_j\\subseteq W_{i(j)}$ with $V=\\bigcup_{j=1}^m g_{i(j)}(V_j)$. Since $W_{i(j)}$ is open in $U_{i(j)}$, each $V_j$ is an affine open of $U_{i(j)}$, and $f_{i(j)}(V_j)=g_{i(j)}(V_j)$ because $g_{i(j)}$ is the restriction of $f_{i(j)}$. Hence $V=\\bigcup_{j=1}^m f_{i(j)}(V_j)$. (This lemma carries the argument of the source: etale morphisms are open, the images of affine opens covering the $W_i$ form an open covering of $V$, and $V$ is quasi-compact.)",
+   "uses": [
+    "lem-weil-pbc-etale-covering-affine-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof, lines 3050-3065 (each $f_i$ is open, $V=\\bigcup_i\\bigcup_j f_i(V_{ij})$ is an open covering, $V$ quasi-compact gives a finite refinement); Tag 0218 (topologies-lemma-etale-affine)"
+   }
+  },
+  {
+   "text": "Steps 1 and 3 are the two clauses of [def-weil-pbc-fpqc-covering] for the family $(f_i)_{i\\in I}$ over $U$ (with $n=m$, $i_j=i(j)$ and the affine opens $V_j$ of step 3), so $(f_i)_{i\\in I}$ is an fpqc covering of $U$; the explicit form of the conclusion in the statement is the same two clauses.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc), proof, lines 3050-3065 (\"This finishes the proof\"); Definition Tag 022B (topologies-definition-fpqc-covering)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Tag 022C (topologies-lemma-zariski-etale-smooth-syntomic-fppf-fpqc), lines 3043-3065, specialized to etale coverings (the fppf case, an etale covering being fppf); cf. Remark Tag 03O4 (etale-cohomology-remark-fpqc-finest), literature/stacks-project/etale-cohomology.tex lines 1086-1095"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +94,45 @@
    "results": "Mathlib has fppfTopology_le_fpqcTopology but no etaleTopology_le_fpqcTopology; no small-etale analogue",
    "date": "2026-10-10",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale precoverage is coarser than fpqc precoverage on schemes",
+   "results": "AlgebraicGeometry.Scheme.pretopology_monotone, pretopology_le_pretopology (Mathlib.AlgebraicGeometry.Sites.Pretopology), zariskiTopology_le_etaleTopology, smallEtaleTopology (Sites.Etale), smallGrothendieckTopologyOfLE_eq_toGrothendieck_smallPretopology (Sites.Small); no etale-to-fpqc comparison",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.etalePrecoverage ≤ _",
+   "results": "AlgebraicGeometry.Scheme.etalePrecoverage_le_proetalePrecoverage (Mathlib.AlgebraicGeometry.Sites.Proetale) only",
+   "date": "2026-10-10",
+   "verdict": "no single match; candidate by composition: le_trans etalePrecoverage_le_proetalePrecoverage (Sites/Proetale.lean:72) proetalePrecoverage_le_fpqcPrecoverage (Sites/Proetale.lean:61) gives etalePrecoverage ≤ fpqcPrecoverage on the big category of schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every jointly surjective family of étale morphisms of schemes is an fpqc covering",
+   "results": "Scheme.JointlySurjective, jointlySurjectivePrecoverage, Scheme.precoverage (Sites.MorphismProperty), etalePretopology, smallEtalePretopology, etaleTopology (Sites.Etale), QuasiCompactCover.homCover (Cover.QuasiCompact)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "etalePrecoverage_le (project root ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.Scheme.etalePrecoverage_le_proetalePrecoverage (Mathlib/AlgebraicGeometry/Sites/Proetale.lean); index unavailable",
+   "date": "2026-10-10",
+   "verdict": "no etalePrecoverage_le_fpqcPrecoverage found (not proof of absence: index unavailable; the grep below is)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -iE 'fpqc' and -E 'etale.*≤|≤.*fpqc|Precoverage.*≤' in Mathlib/AlgebraicGeometry/Sites/ and Mathlib/AlgebraicGeometry/",
+   "results": "Sites/Fpqc.lean: fppfPrecoverage_le_fpqcPrecoverage (:66), zariskiPrecoverage_le_fpqcPrecoverage (:71), zariskiTopology_le_fpqcTopology (:80), fppfTopology_le_fpqcTopology (:83); Sites/Proetale.lean: proetalePrecoverage_le_fpqcPrecoverage (:61), etalePrecoverage_le_proetalePrecoverage (:72), etaleTopology_le_proetaleTopology (:79), proetaleTopology_le_fpqcTopology (:82); Sites/Etale.lean:32 etalePrecoverage := precoverage @Etale; no etalePrecoverage_le_fpqcPrecoverage",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; the statement is the composite of two (Proetale.lean:72 and :61), stated for presieves on the big category Scheme rather than for covering families of the small etale site T_Et, so the item is split, with this composite recorded as the candidate"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +152,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fpqc-finer-than-etale",
+  "worker": "stage1",
+  "summary": "Read Stacks Topologies Lemma 022C (tag verified in tags/tags; topologies.tex 3043-3065) and Remark 03O4 (etale-cohomology.tex 1086-1095), the definitions def-weil-pbc-etale-site (covering families are jointly surjective families of etale morphisms) and def-weil-pbc-fpqc-covering (flat, and every affine open of the target is a finite union of images of affine opens), and the only citer lem-weil-pbc-small-etale-representable-presheaf-sheaf, whose step uses only that an etale covering family is an fpqc covering; the statement is kept. Proof in four steps following 022C: flatness from the definition of etale; restriction of the family over an affine open V to an etale jointly surjective family g_i: f_i^{-1}(V) -> V (open immersions etale, composition and cancellation: lem-weil-pbc-etale-composition-cancellation); the finite affine refinement over the affine V by the existing Mathlib leaf lem-weil-pbc-etale-covering-affine-refinement (Tag 0218, which carries 022C's openness plus quasi-compactness argument); the two clauses of the fpqc definition. No new node. Mathlib: no single declaration; etalePrecoverage <= fpqcPrecoverage on the big site is le_trans of etalePrecoverage_le_proetalePrecoverage (Sites/Proetale.lean:72) and proetalePrecoverage_le_fpqcPrecoverage (:61), recorded as a candidate in the searches."
+ },
+ "reviewed": "pass (L, 2026-10-10): 4 steps follow 022C for etale coverings: etale is flat; restrict over an affine open V (etale by composition/cancellation); the affine refinement node 0218 gives finitely many affine opens covering V; these are the two clauses of the fpqc definition. No new nodes."
 }
