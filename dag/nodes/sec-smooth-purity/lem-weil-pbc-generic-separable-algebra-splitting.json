@@ -20,9 +20,65 @@
   "def-pc-field-extension",
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] applied with the base field $K$ (a local ring whose only prime is $(0)$) and $B=C$, the ring $C$ has finitely many prime ideals $\\mathfrak m_1,\\dots,\\mathfrak m_r$, each maximal, with $\\mathfrak m_1\\cap\\dots\\cap\\mathfrak m_r=N:=\\sqrt{(0)}$. Distinct maximal ideals are pairwise comaximal, so [lem-pc-crt-ideal-quotient-product] gives $C_{\\mathrm{red}}=C/N\\cong E_1\\times\\cdots\\times E_r$ with $E_i=C/\\mathfrak m_i$, a field which is finite over $K$ as a quotient of the finite-dimensional $C$ ($r=0$ when $C=0$). If $N^m=0$, then the image of $N\\otimes_KK'$ in $C\\otimes_KK'$ has $m$th power zero, and by right exactness of $-\\otimes_KK'$ the quotient by it is $C_{\\mathrm{red}}\\otimes_KK'\\cong\\prod_i E_i\\otimes_KK'$; hence $(C\\otimes_KK')_{\\mathrm{red}}\\cong\\prod_i(E_i\\otimes_KK')_{\\mathrm{red}}$, since an element of a finite product is nilpotent exactly when each component is nilpotent.",
+   "uses": [
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemmas 00KH, 00E0 and 00DT: finite-dimensional algebra has finitely many maximal primes, nilradical their intersection, Chinese remainder"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-separable-split-purely-inseparable-residue-fields] to the finite extensions $E_1,\\dots,E_r$ of $K$. It gives a finite separable field extension $K'/K$ such that every prime of each finite $K'$-algebra $K'\\otimes_KE_i$ has residue field finite purely inseparable over $K'$.",
+   "uses": [
+    "lem-weil-pbc-separable-split-purely-inseparable-residue-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of More on Morphisms, Lemma 02LM, lines 12060-12079"
+   }
+  },
+  {
+   "text": "For each $i$, the finite $K'$-algebra $K'\\otimes_KE_i$ has finitely many maximal ideals and nilradical equal to their intersection, by [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] with the base ring $K'$. The maximal ideals are pairwise comaximal, so [lem-pc-crt-ideal-quotient-product] identifies its reduction with the finite product of its residue fields. Each such residue field is finite purely inseparable over $K'$ by step 2.",
+   "uses": [
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-pc-crt-ideal-quotient-product",
+    "lem-weil-pbc-separable-split-purely-inseparable-residue-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemmas 00E0 and 00DT, nilradical intersection and Chinese remainder theorem"
+   }
+  },
+  {
+   "text": "Taking the product over $i$ and using the last isomorphism of step 1 yields $(C\\otimes_KK')_{\\mathrm{red}}\\cong\\prod_jL_j$, where every $L_j/K'$ is finite purely inseparable. The extension $K'/K$ is finite separable by construction, which proves the statement.",
+   "uses": [
+    "lem-weil-pbc-separable-split-purely-inseparable-residue-fields"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of More on Morphisms, Lemma 02LM, finite-algebra calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separable-split-purely-inseparable-residue-fields",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-pc-crt-ideal-quotient-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Proof of Lemma 02LM, finite-algebra calculation, with Algebra Lemmas 00KH, 00E0 and 00DT"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +110,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-generic-finite-algebra-splitting",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-generic-separable-algebra-splitting",
+  "worker": "stage1",
+  "summary": "Added one smaller statement-only node for the Artinian decomposition of the reduction of a finite-dimensional commutative algebra. The item proof decomposes the reduction, applies the existing finite separable residue-field splitting lemma, uses finite-spectrum plus Chinese remainder to identify the reduced tensor factors, and concludes all factors are finite purely inseparable extensions. Reviewer R-gss2900: the new Artinian-decomposition node was elementary from the existing finite-spectrum and Chinese-remainder nodes (the same argument as step 3), so it is folded into step 1 and dropped.",
+  "blueprint": "The four steps realize the parent blueprint's finite-algebra calculation: generic reduction, separable field extension, residue-field factors, and the product conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separable-split-purely-inseparable-residue-fields",
+    "why": "The finite-algebra calculation needs the general field-theoretic result that one finite separable extension simultaneously makes all residue fields of finitely many finite field extensions purely inseparable; no node in sk-prop-sf-cbc supplies this field tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separable-split-purely-inseparable-residue-fields",
+  "lem-weil-pbc-separable-split-purely-inseparable-residue-fields"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gss2900",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gss2900 (reviewer sub-agent of L); spot-checked: Read packet whole. Math checked: step1 nilpotent ideal N tensor K' stays nilpotent, reduction commutes with finite products; step2 cited node hypotheses (finite list of finite extensions) and conclusion (finite separable L, residue fields of L(x)K_i finite purely inseparable over L) match; step3 finite-spectrum node with base field K' + CRT on distinct maximal ideals gives reduction = product of residue fields; step4 reassembly; statement matches parent's finite-algebra calculation. Separable-split node accepted as generic field tool (C7/C8). FIX more, RETURN less: new node lem-weil-pbc-finite-algebra-reduction-product-fields is class (d), elementary from existing lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum (base K) + lem-pc-crt-ideal-quotient-product, exactly the step-3 argument (Mathlib also has IsArtinianRing.equivPi, RingTheory/Artinian/Module.lean:633); folded into step 1 (elementary, citing both nodes, tags 00KH/00E0/00DT), node dropped, uses/proof_deps updated. Second reading by M1 missed this (d).; 1 file(s) fixed by the reviewer"
+ }
 }
