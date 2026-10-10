@@ -29,6 +29,9 @@ the *Verdier dual* is `𝔻_X = RHom_X(-, ω_X)`.
   (`sk-prop-sf-biduality-general`): `𝔻_X` carries `Dctf(X, Λ)` into itself.
 - `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`
   (`sk-prop-sf-biduality-general`): general Verdier biduality, `𝔻_X 𝔻_X ≅ id` on `Dctf(X, Λ)`.
+- `AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_isSeparated`
+  (`cor-weil-finite-constructible-hom`): `RHom(K, L)` lies in `Dctf(X, Λ)`, with the Tor
+  interval `[r - q - 2d, s - p + 2d]`.
 
 ## Implementation notes
 
@@ -117,6 +120,28 @@ theorem nonempty_iso_verdierDual_verdierDual
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     Nonempty (K ≅ (verdierDual (ModuleCat.{u + 1} Λ) a).obj
       (op ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K)))) :=
+  sorry
+
+include a in
+/-- Blueprint `cor-weil-finite-constructible-hom`: Internal Hom for arbitrary finite-stage
+constructible complexes.
+
+For `X` separated of finite type over a field `k` with `dim X ≤ d`, a finite coefficient ring `Λ`
+whose exponent is invertible on `k`, and `K, L ∈ Dctf(X, Λ)` with Tor intervals `[p, q]` and
+`[r, s]`, the internal hom `RHom(K, L)` is bounded constructible with Tor amplitude in
+`[r - q - 2d, s - p + 2d]`. The blueprint proof writes `RHom(K, L) ≅ 𝔻_X(K ⊗ᴸ 𝔻_X L)` and uses
+that `𝔻_X` carries the Tor interval `[r, s]` into `[-s - 2d, -r]`. -/
+theorem constructibleFiniteTor_derivedHom_of_isSeparated (d : ℕ)
+    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) {p q r s : ℤ}
+    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K)
+    (hKt : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X p q K)
+    (hL : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X L)
+    (hLt : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X r s L) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj L) ∧
+      DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (r - q - 2 * (d : ℤ))
+        (s - p + 2 * (d : ℤ)) ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj L) :=
   sorry
 
 end Field
