@@ -101,4 +101,16 @@ lemma frobeniusPowUpperStarIso_succ (F : WeilSheaf k₀ l X) (m : ℕ) :
   rw [← NatTrans.naturality_assoc]
   rfl
 
+variable {X' : Scheme.{u}} [X'.Over (Spec (CommRingCat.of k₀))]
+
+/-- The Weil structure of the pullback of a pro-étale Weil sheaf. -/
+lemma _root_.AlgebraicGeometry.ProEtaleWeilSheaf.upperStar_obj_str (φ : X' ⟶ X)
+    [φ.IsOver (Spec (CommRingCat.of k₀))] (K : ProEtaleWeilSheaf k₀ l X) :
+    ((ProEtaleWeilSheaf.upperStar k₀ l φ).obj K).str =
+      (ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso l φ
+          (comp_over φ (Spec (CommRingCat.of k₀)))).app K.carrier ≪≫
+        (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))^*ᵃ[l].mapIso
+          K.str :=
+  IsoAlgebra.mapOfNatIso_obj_str _ K
+
 end AlgebraicGeometry.WeilSheaf
