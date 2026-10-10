@@ -1,8 +1,8 @@
 # Work queue
 
-907 items; claim with `tools/claim.py next <group> [--stage N]`.
+909 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (262)
+## Stage 1: nodes to split (263)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,10 +23,12 @@
 | `lem-sc-derived-open-restriction-adjunction-exact` | 3015 | none |
 | `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
-| `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
+| `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
 | `lem-sc-bounded-above-finite-free-hom-acyclic` | 3016 | none |
 | `lem-sc-bounded-below-injective-resolution` | 3016 | none |
 | `lem-sc-p1-ext-resolution-derived-connecting` | 3016 | none |
+| `lem-sc-smooth-proper-tensor-direct-sums` | 3016 | none |
+| `lem-sc-smooth-proper-tensor-perfect-case` | 3016 | none |
 | `def-sc-perfect-closed-immersion` | 3017 | none |
 | `lem-pc-compact-generators-build-objects` | 3017 | none |
 | `lem-pc-compact-hom-hocolim` | 3017 | none |
@@ -79,7 +81,6 @@
 | `lem-sp-kinjective-computes` | 6002 | none |
 | `thm-sp-half-plane-convergence` | 6002 | none |
 | `def-sp-abelian` | 6003 | none |
-| `def-sp-grothendieck-abelian` | 6003 | none |
 | `def-sp-injective-resolutions` | 6003 | none |
 | `def-sp-left-exact-additive` | 6003 | none |
 | `lem-sp-grothendieck-enough-injectives` | 6003 | none |
@@ -269,7 +270,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (645)
+## Stage 2: nodes to state (646)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -687,6 +688,7 @@
 | `lem-weil-pbc-module-finite-type-surjective-on-stalk` | 1 | state |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
+| `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1 | state |
 | `lem-weil-pbc-module-skyscraper-stalk-adjunction` | 1 | state |
 | `lem-weil-pbc-module-stalk-exact` | 1 | state |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1 | state |
@@ -919,7 +921,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1348 nodes that wait for a statement dependency, 293 nodes that wait for stage 1.
+Not open yet: 1348 nodes that wait for a statement dependency, 294 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
