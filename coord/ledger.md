@@ -1871,3 +1871,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:53 L: merged deliver/H1/lem-sc-fibre-dimension-after-base-change (reviewer PASS; after a return; new nodes: 0)
 - 15:53 L: returned deliver/K1/lem-weil-pbc-sets-etale-section-continuity (reviewer RETURN: Points 1(b), 2, 3 and 4 of the 15:35 return are repaired (step 1 cites the affine-site topos, the new comparison node, s)
 - 15:53 L: merged deliver/M1/lem-sc-local-section-quotient-finite-free (reviewer PASS; first push; new nodes: 0)
+- 15:54 L: merged deliver/H1/lem-sc-p1-ext-coherent-dim-one-vanishing (reviewer FIX; first push; new nodes: 5)
