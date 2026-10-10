@@ -29,9 +29,82 @@
   "lem-weil-pbc-scheme-modules-enough-injectives",
   "def-sp-double-complex-total"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$, which exists by the enough-injectives statement. Form the first-quadrant double complex $D^{p,q}=\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I^q)$ and its total complex $T_{\\mathcal F}$. Restriction of global sections gives a cochain map $\\alpha_{\\mathcal F}:\\Gamma(X,\\mathcal I^\\bullet)\\to T_{\\mathcal F}$ in Cech degree zero, while the augmentation gives $\\beta_{\\mathcal F}:\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F)\\to T_{\\mathcal F}$ in resolution degree zero; the Cech functoriality statement supplies the induced cochain maps and their maps on cohomology.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-site-cech-complex",
+    "def-sp-double-complex-total",
+    "def-sc-zariski-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma Tag 01EQ, proof: construction of the double complex and the maps alpha and beta"
+   }
+  },
+  {
+   "text": "For every injective term $\\mathcal I^q$ of $\\Mod(\\mathcal O_X)$, $\\check H^p(\\mathcal U,\\mathcal I^q)=0$ for $p>0$ by the injective Cech-acyclicity statement, and $\\check H^0(\\mathcal U,\\mathcal I^q)=\\ker d^0$ is identified with $\\mathcal I^q(X)$ by restriction, by the gluing and uniqueness axioms of the sheaf $\\mathcal I^q$ on $X_{\\rm Zar}$. Regard $\\Gamma(X,\\mathcal I^\\bullet)$ as the first-quadrant double complex $D'$ concentrated in the column $p=0$ ($D'^{0,q}=\\mathcal I^q(X)$, $d_I=0$); since $d^0$ of the restriction of a global section is $0$, $\\alpha_{\\mathcal F}$ is the map on total complexes of a morphism of double complexes $D'\\to D$. By functoriality of the second spectral sequence (rows first, ${}''E_1^{q,p}=H^p_I(D^{\\bullet,q})$), this morphism induces on ${}''E_1$ the maps $H^p_I(D'^{\\bullet,q})\\to\\check H^p(\\mathcal U,\\mathcal I^q)$, which are isomorphisms for all $p,q$ by the two facts above; hence it is an isomorphism on ${}''E_\\infty$, i.e. on all graded pieces of the finite image filtrations of $H^n(\\operatorname{Tot}D')=H^n(\\Gamma(X,\\mathcal I^\\bullet))$ and $H^n(T_{\\mathcal F})$ given by convergence, and an induction on the filtration degree with the five lemma shows that $H^n(\\alpha_{\\mathcal F})$ is an isomorphism for every $n$.",
+   "uses": [
+    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-double-complex-total",
+    "def-sc-zariski-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma Tag 01EQ, proof; Lemma Tag 01EP for injective Cech acyclicity"
+   }
+  },
+  {
+   "text": "Let $\\iota_{\\mathcal I}^p:H^p(X,\\mathcal F)\\xrightarrow{\\sim}H^p(\\Gamma(X,\\mathcal I^\\bullet))$ be the isomorphism of the derived-map statement for $v=\\Gamma(X,-)$ on $\\Mod(\\mathcal O_X)$, which has enough injectives, $H^p(X,-)$ being its right derived functors. Define $c_{\\mathcal F}=(\\iota^p_{\\mathcal I})^{-1}\\circ H^p(\\alpha_{\\mathcal F})^{-1}\\circ H^p(\\beta_{\\mathcal F})$. Independence of the resolution: for a second resolution $\\mathcal F\\to\\mathcal J^\\bullet$ (with primes for its data), the lift statement gives a morphism of complexes $\\psi:\\mathcal I^\\bullet\\to\\mathcal J^\\bullet$ lifting $\\mathrm{id}_{\\mathcal F}$; by the computation of Step 4 applied to $\\varphi=\\mathrm{id}_{\\mathcal F}$ and the lift $\\psi$, the map $\\tau$ of total complexes induced by $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\psi)$ satisfies $\\tau\\alpha_{\\mathcal F}=\\alpha'_{\\mathcal F}\\Gamma(X,\\psi)$ and $\\tau\\beta_{\\mathcal F}=\\beta'_{\\mathcal F}$, so $H^p(\\alpha'_{\\mathcal F})^{-1}H^p(\\beta'_{\\mathcal F})=H^p(\\Gamma(X,\\psi))\\,H^p(\\alpha_{\\mathcal F})^{-1}H^p(\\beta_{\\mathcal F})$, and the derived-map statement with $h=\\mathrm{id}$ gives $(\\iota^p_{\\mathcal J})^{-1}H^p(\\Gamma(X,\\psi))\\iota^p_{\\mathcal I}=H^p(X,\\mathrm{id})=\\mathrm{id}$. Hence both resolutions give the same $c_{\\mathcal F}$.",
+   "uses": [
+    "pqf-def-cohomology",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma Tag 01EQ, proof: final derived-category paragraph and independence of the injective resolution"
+   }
+  },
+  {
+   "text": "For a morphism $\\varphi:\\mathcal F\\to\\mathcal F'$, choose injective resolutions and a lift $\\widetilde\\varphi:\\mathcal I^\\bullet\\to\\mathcal I'^\\bullet$ with $\\widetilde\\varphi^0\\circ r=r'\\circ\\varphi$. Applying the Cech functor termwise gives a morphism of double complexes and hence a map of total complexes. The squares with the two alpha maps commute because restriction maps commute with each component $\\widetilde\\varphi^q$, and the squares with the beta maps commute by the lifting equation in degree zero. Taking cohomology, using the definition of $c_{\\mathcal F}$ and the lifted-complex formula for $H^p(X,\\varphi)$, yields $c_{\\mathcal F'}\\circ\\check H^p(\\mathcal U,\\varphi)=H^p(X,\\varphi)\\circ c_{\\mathcal F}$.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "def-weil-pbc-site-cech-complex",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma Tag 01EQ, proof: functoriality of the alpha and beta squares (expanded from the source's natural transformation statement)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-site-cech-complex",
+  "def-sp-double-complex-total",
+  "def-sc-zariski-site",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "thm-sp-double-complex-spectral-sequences",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma Tag 01EQ (cohomology-lemma-cech-cohomology), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,12 +129,49 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-cech-comparison-natural",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-cech-comparison-map-naturality",
+  "worker": "stage1",
+  "summary": "Read the item against Stacks Tag 01EQ and split the construction, quasi-isomorphism, resolution independence, and coefficient naturality into four proof steps. Reused existing DAG statements for injective resolutions, Cech functoriality and acyclicity, double-complex spectral-sequence convergence, and lifted derived-functor maps; no new node was needed.",
+  "blueprint": "The four steps realize thm-sc-p1-duality proof Step 1's locally free Ext/cohomology identification and its naturality in the first locally free argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "Provides the existence of injective resolutions in Mod(O_X), needed to construct the double complex."
+   },
+   {
+    "node": "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+    "why": "Provides vanishing of positive Cech cohomology for each injective row of the double complex."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Provides convergence, collapse, and edge-map functoriality for the first-quadrant double complex."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ccn",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccn (reviewer sub-agent of L); spot-checked: Source: Stacks Cohomology Lemma 01EQ (cohomology-lemma-cech-cohomology) and proof read; the item statement (unchanged) agrees with it for X a scheme, Zariski cover, O_X-modules, double complex C^p(U,I^q), alpha, beta, alpha quasi-iso, canonical maps; naturality is the source's 'transformation of functors' whose verification Stacks omits. Steps: 1 construction from enough-injectives, def-sp-injective-resolutions, Cech complex (e) functoriality, total complex; checked beta and alpha are cochain maps (d_II of F->I^0->I^1 is 0; Cech d^0 of a restricted global section is 0). 2 rows H^p_I = Cech of I^q, zero for p>0 by lem-weil-pbc-module-injective-open-cover-cech-acyclic (Mod(O_X)-injective, any cover), H^0 = I^q(X) by the sheaf axiom of def-sc-zariski-site; second spectral sequence of thm-sp-double-complex-spectral-sequences. 3 independence via lift-exists and derived-functor-map-via-lift (mathlib leaves, statements read). 4 naturality: lift, squares tau alpha = alpha' Gamma(lift), tau beta = beta' C(phi), then the derived-map formula; algebra checked. Small case p=0: c_F is Cech H^0 = F(X) -> H^0 = Gamma, identity. No new nodes. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-cech-comparison-map-naturality.json: proof[1].text: the claim that the collapsing edge map is H^p(alpha) is not in the cited spectral-sequence statement (C4); rewritten as alpha = Tot of a morphism of double complexes from Gamma(X,I) in column 0, iso on ''E_1, hence on E_infinity and by finite filtrations and five lemma on H^n, using the stated functoriality and convergence. proof[2].text and uses: lem-sp-derived-well-defined needs a Grothendieck abelian category which no cited node gives for Mod(O_X) (C4) and is redundant; removed from uses, proof_deps and split_report.tool_uses (--drop-tool-uses), added lem-weil-pbc-scheme-modules-enough-injectives; the independence argument written out with iota from lem-weil-pbc-derived-functor-map-via-lift and the lift of id (squares as in Step 4). Tool uses accepted as generic black boxes: enough injectives, injective Cech acyclicity (01EP), double-complex spectral sequences. Start Sat Oct 10 04:57:02 PM UTC 2026, end Sat Oct 10 04:58:41 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

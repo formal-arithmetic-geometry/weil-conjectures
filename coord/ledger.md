@@ -2068,3 +2068,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:57 L: merged deliver/C1/lem-sc-affine-finite-projective-prime-membership (reviewer FIX; after a return; new nodes: 1)
 - 16:58 L: returned deliver/F1/lem-sc-finite-duality-derived-hom (reviewer RETURN: 1. D1: new node lem-sc-finite-derived-hom-right-adjoint and Step 2: the node's statement is the item's first clause verb)
 - 16:58 L: merged deliver/K1/lem-sc-cech-comparison-map-iso-affine (reviewer FIX; first push; new nodes: 0)
+- 16:58 L: merged deliver/K1/lem-sc-cech-comparison-map-naturality (reviewer FIX; first push; new nodes: 0)
