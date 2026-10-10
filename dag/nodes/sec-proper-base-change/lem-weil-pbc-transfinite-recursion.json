@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-transfinite-recursion",
+ "kind": "statement",
+ "title": "Definition by transfinite recursion on a well-ordered set",
+ "statement": "Let $(E,\\le)$ be a well-ordered set (a total order in which every nonempty subset has a least element) and let $\\mathcal V$ be a collection of objects (a set, or a class such as the class of all tuples consisting of a commutative ring and ring maps). Suppose that for every $x\\in E$ a rule $G_x$ is given which assigns to every family $(v_y)_{y<x}$ of members of $\\mathcal V$ indexed by $\\{y\\in E:y<x\\}$ a member $G_x\\big((v_y)_{y<x}\\big)$ of $\\mathcal V$. Then there is a family $(v_x)_{x\\in E}$ of members of $\\mathcal V$ such that $v_x=G_x\\big((v_y)_{y<x}\\big)$ for every $x\\in E$, and it is unique.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "used without statement in the proof of Algebra, Lemma Tag 03C3 (lemma-flat-local-given-residue-field, line 44573), fourth paragraph, lines 44628-44642 ('By transfinite recursion on $x\\in K$ we will produce ring maps $R\\subset R(x)$ ...'); tag verified in stacks-project/tags/tags (03C3,algebra-lemma-flat-local-given-residue-field)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "transfinite recursion on a well-founded order: define a value at x from the values at all y < x, with the unfolding equation",
+   "results": "IsWellOrder.rec, WellOrder.rec, IsWellFounded.recOn, Ordinal.limitRecOn (Mathlib.SetTheory.Ordinal.Arithmetic) (structure recursors and ordinal recursion; not the general well-order recursion)",
+   "date": "2026-10-10",
+   "verdict": "no direct match among the results; see the loogle and grep searches"
+  },
+  {
+   "tool": "loogle",
+   "query": "WellFoundedLT.fix_eq",
+   "results": "WellFoundedLT.fix_eq {α} [LT α] [WellFoundedLT α] {motive : α → Sort u_1} (ind : (x : α) → ((y : α) → y < x → motive y) → motive x) (x : α) : WellFoundedLT.fix ind x = ind x fun y x => WellFoundedLT.fix ind y (Mathlib.Order.RelClasses)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "WellFoundedLT.fix (project ~/weil-conjectures-slopmaster2)",
+   "results": "WellFoundedLT.fix (def), WellFoundedLT.fix_eq (theorem), file .lake/packages/mathlib/Mathlib/Order/RelClasses.lean; index 'unavailable' (the names were found, so they exist)",
+   "date": "2026-10-10",
+   "verdict": "match (existence confirmed)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'fix_eq\\|def fix ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order/RelClasses.lean; sed -n 285,320p of that file; grep -rn transfinite ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Order",
+   "results": "namespace WellFoundedLT (line 285): def fix (line 304), theorem fix_eq (line 310); IsWellFounded.fix / fix_eq (lines 221, 226); Order/TransfiniteIteration.lean (iteration of a self-map only)",
+   "date": "2026-10-10",
+   "verdict": "match: WellFoundedLT.fix with WellFoundedLT.fix_eq"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "WellFoundedLT.fix, WellFoundedLT.fix_eq",
+  "file": "Mathlib/Order/RelClasses.lean",
+  "line": 304,
+  "how": "specializes in one line: for E a type with a linear order whose < is well-founded ([WellFoundedLT E], which is the node's well-ordering) and motive := fun _ => V (V the type of the members of the collection; a class is a type of a higher universe), WellFoundedLT.fix (line 304) with ind x f := G_x (fun y (h : y < x) => f y h) gives the family v, and WellFoundedLT.fix_eq (line 310) is the equation v x = G_x((v_y)_{y<x}); uniqueness: two such families agree at every x by WellFoundedLT.induction (line 291, induction on <, each value being G_x of the previous ones). Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-local-extension-given-residue-field",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): WellFoundedLT.fix (Order/RelClasses.lean:304) with fix_eq (:310) for existence and WellFoundedLT.induction (:291) for uniqueness; checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declarations checked by sed."
+}
