@@ -15,18 +15,64 @@
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "title": "Generic-fibre triviality over a valuation ring",
- "statement": "Let A be a valuation ring with fraction field K, let X_A\\to Spec(A) be flat, proper, and of finite presentation with integral closed fibre, and let L be an invertible module on X_A [def-sc-invertible-module]. If H^0(X_K,O_{X_K})=K and the restriction L|_{X_K} is trivial, then L is trivial on X_A. Flat, proper, finite-presentation, and fibre notions are from [def-weil-scheme-morphism-properties].",
+ "statement": "Let A be a valuation ring with fraction field K, let f:X\\to\\operatorname{Spec}(A) be proper, flat, and of finite presentation [def-weil-scheme-morphism-properties], let X_0 be its integral closed fibre [def-pc-integral-scheme], and let L be an invertible module on X [def-sc-invertible-module]. If H^0(X_K,\\mathcal O_{X_K})=K and the restriction of L to the generic fibre X_K is trivial, then L is trivial on X.",
  "source": {
   "document": "literature/stacks-project/more-on-morphisms.tex",
   "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8"
  },
  "stmt_deps": [
   "def-weil-scheme-morphism-properties",
+  "def-pc-integral-scheme",
   "def-sc-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a general valuation ring, properness and finite presentation make H^0(X,L) a finitely presented A-module. Flatness of X over A makes this module torsion free, so the valuation-ring finite-free lemma gives H^0(X,L) finite free. Flat base change identifies H^0(X,L) tensor_A K with H^0(X_K,L_K), which is K because L_K is trivial and H^0(X_K,O)=K; therefore H^0(X,L) has rank one. Choose a generator s.",
+   "uses": [
+    "lem-sc-valuation-fp-torsionfree-free",
+    "lem-pc-flat-base-change-cohom",
+    "lem-sc-valuation-proper-coherent-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma 0EX8, general valuation-ring case through coherent cohomology and flat base change"
+   }
+  },
+  {
+   "text": "The restriction of s to the integral closed fibre X_0 is nonzero: otherwise the closed-fibre vanishing lemma gives a nonzero pi in the maximal ideal of A with s vanishing on X\\times_{\\operatorname{Spec}(A)}\\operatorname{Spec}(A/\\pi); since L is flat over A, multiplication by pi on L is injective with cokernel L/\\pi L, so s=\\pi t for a global section t, contradicting that s generates the free rank-one module H^0(X,L). By the zero-section relative-Cartier lemma, Z(s) is a relative effective Cartier divisor and is flat over A.",
+   "uses": [
+    "lem-sc-valuation-closed-fibre-section-vanishing",
+    "lem-sc-valuation-zero-section-relative-cartier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma 0EX8, general valuation-ring case"
+   }
+  },
+  {
+   "text": "By the previous step Z(s)\\to\\operatorname{Spec}(A) is flat. If Z(s) were nonempty, generizations lift along the flat morphism Z(s)\\to\\operatorname{Spec}(A), so the generic point of \\operatorname{Spec}(A) would lie in its image and Z(s)_K would be nonempty, contradicting that s restricts to a trivialization on X_K. Thus Z(s) is empty and s is a global trivialization of L.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "More on Morphisms, Lemma 0EX8, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-valuation-fp-torsionfree-free",
+  "lem-pc-flat-base-change-cohom",
+  "lem-sc-valuation-proper-coherent-sections",
+  "lem-sc-valuation-closed-fibre-section-vanishing",
+  "lem-sc-valuation-zero-section-relative-cartier"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "More on Morphisms, Lemma lemma-triviality-generic-fibre-valuation-ring, Tag 0EX8"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,13 +94,45 @@
    "results": "Mathlib/AlgebraicGeometry/ValuativeCriterion.lean and ProjectiveSpectrum/Proper.lean; no triviality theorem",
    "date": "2026-10-11",
    "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper flat finite presentation valuation ring invertible module generic fibre trivial",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-picard-locus-closed",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-picard-locus-closed-valuation-triviality",
+  "worker": "stage1",
+  "summary": "Split Tag 0EX8 into the DVR argument and the general valuation-ring argument, adding statement-only child nodes for valuation-ring finite-freeness and the relative Cartier zero locus.",
+  "blueprint": "Realizes the blueprint ancestor thm-sc-theorem-of-cube proof clause 'over a valuation ring, generic triviality implies triviality (Tag 0EX8)'.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "generic flat cohomology base change is a reusable theorem from another unit"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pvt3154",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pvt3154 (reviewer sub-agent of L); spot-checked: Read Tag 0EX8 proof and Perfect lemma-cohomology-over-coherent-ring (needs G flat over R). FIX more, RETURN less: (1) C1: dropped the DVR step (codim-1 Cartier lemma and pi-divisibility uncited; cited DVR-freeness node unused; general case covers DVRs), removed lem-sc-dvr-fg-torsionfree-free from proof_deps; (2) C4/B3: lem-sc-valuation-proper-coherent-sections lacked the flatness hypothesis the Stacks lemma requires and had a tab for \\to; added flat, fixed TeX and stmt_deps; (3) C1: Step 3 limit argument (Limits lemma-descend-section) was uncited; added statement-only node lem-sc-valuation-closed-fibre-section-vanishing and wrote the pi-divisibility via flatness of L in the step; Step 4 rewritten to use only the flatness from Step 3 (generizations lift). Children checked true; fp-torsionfree-free has no single Mathlib declaration (flat_iff_torsion_eq_bot_of_isBezout + free_of_flat_of_isLocalRing). Citer lem-sc-picard-locus-closed unaffected (statement change expository). Second reading missed faults (1)-(3).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
