@@ -28,9 +28,76 @@
   "thm-sp-if-e1",
   "def-sp-spectral-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose Cartan--Eilenberg resolutions $I_K$ and $J_L$. Put $F=f^{-1}$, which is exact by [prop-weil-pbc-inverse-image-exact], and let $\\phi:F(I_K)\\to J_L$ be the lift of $u$ supplied by [lem-weil-pbc-cartesian-eilenberg-functorial]. The filtered complexes whose spectral sequences occur in [thm-sp-if-e1] are $\\Gamma(X,\\operatorname{Tot} I_K)$ and $\\Gamma(Y,\\operatorname{Tot} J_L)$. The termwise unit from [def-weil-pbc-inverse-image] gives $\\Gamma(X,\\operatorname{Tot} I_K)\\to\\Gamma(X,f_*f^{-1}\\operatorname{Tot} I_K)=\\Gamma(Y,f^{-1}\\operatorname{Tot} I_K)$, and then $\\Gamma(Y,\\operatorname{Tot}\\phi)$ gives a map to $\\Gamma(Y,\\operatorname{Tot}J_L)$. Both maps preserve the filtration by $q$ because they are termwise maps of the double complexes. Applying (c) of [thm-sp-spectral-object-yields] and the identifications of [thm-sp-if-e1] produces the required morphism of spectral sequences.",
+   "uses": [
+    "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "thm-sp-spectral-object-yields",
+    "thm-sp-if-e1",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015J and Remark Tag 015K; filtered-complex functoriality"
+   }
+  },
+  {
+   "text": "For each $q$, the $q$-th row of a Cartan--Eilenberg resolution is an injective resolution of $K^q$ by [thm-sp-if-e1], and a bounded-below complex of injectives is K-injective by [prop-weil-pbc-kinjective-resolutions-exist]. Thus the $q$-graded piece of the global-section map in step 1 is $\\Gamma(X,I^q)\\to\\Gamma(Y,f^{-1}I^q)\\to\\Gamma(Y,J^q)$. In the pullback recipe [def-weil-pbc-cohomology-pullback], choose a K-injective resolution $r:f^{-1}I^q\\to J'$ and a map $\\psi:J'\\to J^q$ such that $\\psi\\circ r$ is homotopic to the row map; this is possible because $J^q$ is K-injective by [def-weil-pbc-kinjective-resolutions]. The map $\\psi$ is a lift of $u^q$ in the sense of $H^p(\\phi)$ in [lem-weil-pbc-cohomology-pullback-functorial]. Therefore the $E_1^{p,q}$ map is $H^p(u^q)\\circ f^*$, with the displayed source and target identified by [thm-sp-if-e1] and [def-weil-pbc-etale-cohomology].",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "thm-sp-if-e1",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "def-weil-pbc-kinjective-resolutions",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0EZM, proof via the two spectral sequences"
+   }
+  },
+  {
+   "text": "By (b) and (c) of [thm-sp-spectral-object-yields] and [def-weil-pbc-etale-cohomology], the abutment is derived global sections, the map is the canonical map on $H^n$, the finite filtration is preserved, and the identifications $E_\\infty^{p,q}\\cong\\operatorname{gr}^qH^{p+q}$ commute. For identity pairs this construction is the identity by the unit identity in [lem-weil-pbc-cohomology-pullback-functorial]. For successive pairs $(f,u)$ and $(g,v)$, the composite of the maps from step 1 is, by naturality of the unit $\\eta_g$ and clause 2 of [lem-weil-pbc-inverse-image-composition], the map constructed for the composite pair using the lift $\\psi\\circ g^{-1}\\phi\\circ c^{-1}$. The abutment map is independent of the chosen lift because two lifts into the K-injective total complex agree up to homotopy after the quasi-isomorphism $f^{-1}K\\to f^{-1}\\operatorname{Tot}I_K$. Finally, a morphism of spectral sequences is determined from its $E_1$ map by $E_{r+1}=H(E_r)$ in [def-sp-spectral-sequence], so identity and composition on every $E_r$ follow from step 2 and clauses 3--4 of [lem-weil-pbc-cohomology-pullback-functorial] applied to the sheaves $K^q$.",
+   "uses": [
+    "thm-sp-if-e1",
+    "def-weil-pbc-etale-cohomology",
+    "thm-sp-spectral-object-yields",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 015J and Remark Tag 015K; filtered-complex functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cartesian-eilenberg-functorial",
+  "thm-sp-spectral-object-yields",
+  "thm-sp-if-e1",
+  "prop-weil-pbc-inverse-image-exact",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 015H, 015I, 015J and Remark 015K; literature/stacks-project/etale-cohomology.tex Tag 0EZM"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,7 +122,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-cohomology-limit-complex-systems",
   "by": "worker",
@@ -70,5 +137,49 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+  "worker": "stage1",
+  "summary": "Read Stacks Tags 015H, 015I, 015J, 015K and 0EZM. Repaired the route so step 1 constructs the global-section filtered map using the inverse-image unit and the lifted Cartan--Eilenberg map, step 2 computes its E1 map through K-injective row lifts, and step 3 handles abutment, filtration, identity, and composition. Corrected the supporting node to state only the double-complex lift and filtered-total-complex map, with no unsupported E1 clause. Small cases checked: identity morphism, zero complex, and a complex concentrated in one degree.",
+  "blueprint": "Realizes the parent blueprint sentence about naturality of the complex-continuity input and its derived bounded-below representative: construction is step 1, E1 identification is step 2, and derived abutment and composition compatibility are step 3.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Step 3 uses its stated identity and composition laws for derived and ordinary pullback maps; the local route has no replacement for these generic pullback laws."
+   },
+   {
+    "node": "thm-sp-spectral-object-yields",
+    "why": "Steps 1 and 3 use the generic functorial filtered-complex spectral-sequence construction; this unit has no local replacement."
+   },
+   {
+    "node": "thm-sp-if-e1",
+    "why": "Steps 1 and 3 use the generic identification of the termwise hypercohomology spectral sequence and its abutment; this unit has no local replacement."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Step 1 uses exactness of inverse image to apply the generic filtered-complex construction; this unit has no local replacement."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Step 2 uses the generic fact that bounded-below complexes of injectives are K-injective; this unit has no local replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "thm-sp-spectral-object-yields",
+  "thm-sp-if-e1",
+  "prop-weil-pbc-inverse-image-exact",
+  "prop-weil-pbc-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hep2",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hep2 (reviewer sub-agent of L); spot-checked: Reviewer R-hep2, head 4c9199b72, re-push after return ea0c40501 (R-hpf), 2026-10-10 16:54:38-16:56:10 UTC by date -u. Return points: 1 repaired (step 1 builds Gamma(X,Tot I_K)->Gamma(Y,f^-1 Tot I_K)->Gamma(Y,Tot J_L) by the unit of def-weil-pbc-inverse-image and Gamma(Tot phi), filtration by q preserved termwise, then thm-sp-if-e1 and thm-sp-spectral-object-yields (c)); 2 repaired (E1 clause dropped from the new node; step 2 identifies gr^q with the row map and psi as lift of u^q as in lem-weil-pbc-cohomology-pullback-functorial, rows are injective resolutions by thm-sp-if-e1, K-injective by prop-weil-pbc-kinjective-resolutions-exist); 3 repaired (step 3 argues composition directly via eta naturality and clause 2 of lem-weil-pbc-inverse-image-composition, lift independence, and E_{r+1}=H(E_r)); 5 repaired (report reads 015H/015I/015J/015K/0EZM, WANTED removed, proof_origin set). Point 4 only partly repaired (source now 015H/015I/015K, correct; but the CE notion still cited by quoting 'Definition Tag 015H' and def-sp-injective-resolutions, a parenthetical proof sketch with tags in the statement, plain-text statement, lean_audit absent). FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-weil-pbc-cartesian-eilenberg-functorial.json: statement: rewritten in TeX with the six Cartan-Eilenberg conditions of Stacks 015H (derived.tex 7105, transposed to the row convention of thm-sp-if-e1) stated inline (B3), the tag-quoting existence parenthetical removed (B4/C1), lift stated as phi:F(I_K)->J_L with phi o F(eps_K)=eps_L o u and row-wise compatibility with u^q, Tot filtered by the second degree ''F of def-sp-double-complex-total; mathematics unchanged; mathlib_searches: my grep of pinned Mathlib for Cartan-Eilenberg (no match) added; lean_audit: none/none added. dag/nodes/sec-curve-estimates/lem-weil-pbc-hypercohomology-e1-pullback-functorial.json: proof[0].uses: def-weil-pbc-cohomology-pullback added (asked in return point 1; already in proof_deps). Checked the cited statements thm-sp-if-e1, thm-sp-spectral-object-yields, lem-weil-pbc-cohomology-pullback-functorial (clauses 2-4), lem-weil-pbc-inverse-image-composition, prop-weil-pbc-kinjective-resolutions-exist, def-weil-pbc-kinjective-resolutions, def-weil-pbc-cohomology-pullback, prop-weil-pbc-inverse-image-exact. New node true: lifting into an injective CE resolution from the exact augmented B/Z/H pieces of F(I_K) (F exact) by the comparison theorem; small case K=L concentrated in one degree, F=id, u=id gives phi=id. blueprint_refs search 'Cartan Eilenberg': only thm-sp-grothendieck, thm-sp-if-e1, neither states the lift; same_as [] stands. Only the item's three files changed; changed item fields are split-owned. Tool uses accepted as generic: thm-sp-spectral-object-yields, thm-sp-if-e1, prop-weil-pbc-inverse-image-exact, lem-weil-pbc-cohomology-pullback-functorial, prop-weil-pbc-kinjective-resolutions-exist.; 2 file(s) fixed by the reviewer"
  }
 }
