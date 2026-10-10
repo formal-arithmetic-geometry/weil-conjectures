@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-irreducible-lisse-strata",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Irreducible lisse strata",
@@ -18,29 +18,72 @@
  ],
  "proof": [
   {
-   "text": "Start with the finite lisse partition supplied by constructibility. A part $S$\nis Noetherian, so [lem-weil-pbc-noetherian-finite-components] lists its\nirreducible components as $C_1,\\ldots,C_r$. Put\n\n$$\n S_i=C_i\\setminus\\bigcup_{j<i}C_j.\n$$",
+   "text": "By constructibility [def-weil-pbc-etale-sheaves], choose a finite stratification $(\\iota_k:Z_k\\to X)_{k<n}$ by locally closed subschemes with each $\\iota_k^{-1}F$ finite locally constant; discard the empty $Z_k$. Each $Z_k$ is Noetherian: the immersion $\\iota_k$ is quasi-compact (Stacks Tag 01OX) and locally of finite type (Tag 01T5), so $Z_k$ is quasi-compact and locally Noetherian (Tag 01T6). Hence [lem-weil-pbc-noetherian-finite-components] gives finitely many irreducible components $C_1,\\ldots,C_r$ of $Z_k$ ($r\\ge1$ as $Z_k\\ne\\emptyset$). For this fixed ordering put\n\n$$\n S_i=C_i\\setminus\\bigcup_{j<i}C_j.\n$$",
    "uses": [
-    "lem-weil-pbc-noetherian-finite-components"
+    "lem-weil-pbc-noetherian-finite-components",
+    "def-weil-pbc-etale-sheaves"
    ],
    "elementary": false
   },
   {
-   "text": "Each $S_i$ is open in $C_i$, and contains its generic point: an irreducible\ncomponent is not contained in the union of the other finitely many\ncomponents. Thus $S_i$ is nonempty and irreducible. These sets are disjoint\nand cover $S$; they are locally closed in $S$, hence in $X$. Give them their\nreduced locally closed scheme structures. Restriction of an etale\ntrivialization shows that $F|_{S_i}$ is still locally constant with finite\nstalks. Performing this construction for the finitely many original parts\ngives the required partition.",
-   "uses": [],
-   "elementary": null
+   "text": "Each $S_i$ is open in $C_i$. The component $C_i$ is not contained in any other component, and irreducibility implies that it is not covered by the finitely many proper closed subsets $C_i\\cap C_j$ for $j\\ne i$; hence $S_i$ contains the generic point of $C_i$ and, as a nonempty open subset of an irreducible space, is nonempty and irreducible. The $S_i$ are pairwise disjoint and cover $Z_k$ (every point lies in some component), and each is locally closed in $Z_k$, hence in $X$ since $\\iota_k$ is a homeomorphism onto a locally closed subset. Equip $S_i$ with the reduced induced subscheme structure of the locally closed subset $S_i\\subseteq Z_k$ (Stacks Tag 01J4, on an open subscheme of $Z_k$ in which $S_i$ is closed), with immersion $g_i:S_i\\to Z_k$; the composite $\\iota_k\\circ g_i:S_i\\to X$ is an immersion with image $S_i$ (Tag 02V0), i.e. a locally closed subscheme in the sense of [def-weil-pbc-scheme-conventions].",
+   "uses": [
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Since $\\iota_k^{-1}F$ is finite locally constant, [lem-weil-pbc-pullback-finite-locally-constant] applied to $g_i:S_i\\to Z_k$ and $\\iota_k:Z_k\\to X$ shows that $F|_{S_i}=(\\iota_k\\circ g_i)^{-1}F$ is finite locally constant, i.e. locally constant with finite geometric stalks [def-weil-pbc-etale-sheaves]. Doing this for the finitely many nonempty $Z_k$ gives finitely many nonempty irreducible locally closed pieces, pairwise disjoint because the $Z_k$ are, and covering $X$: the required finite partition.",
+   "uses": [
+    "lem-weil-pbc-pullback-finite-locally-constant",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-finite-components"
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-pullback-finite-locally-constant"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-irreducible-lisse-strata.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite partition of a Noetherian scheme into irreducible locally closed strata on which a constructible etale sheaf is finite locally constant",
+   "results": "AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian (Mathlib/AlgebraicGeometry/Noetherian); TopologicalSpace.NoetherianSpace.finite_irreducibleComponents (Mathlib/Topology/NoetherianSpace); no exact sheaf-stratification theorem",
+   "date": "2026-10-11",
+   "verdict": "generalization: finite irreducible components only"
+  },
+  {
+   "tool": "loogle",
+   "query": "irreducibleComponents, IsIrreducible, IsOpen, locally constant sheaf, finite stalks",
+   "results": "0 hits; unknown identifier locally",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents|IsIrreducible|locally constant [Mathlib/AlgebraicGeometry Mathlib/Topology]",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian constructible etale sheaf has a finite stratification by irreducible locally closed subschemes with finite locally constant restrictions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -68,5 +111,20 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-irreducible-lisse-strata",
+  "worker": "stage1",
+  "summary": "Checked the imported two-paragraph proof against the constructibility and scheme-convention definitions and the existing Mathlib leaf for finitely many irreducible components. The first step uses the finite lisse partition from constructibility and the finite-components theorem. The second step is elementary topology and restriction of a finite locally constant sheaf, with the relevant definition nodes cited.",
+  "blueprint": "Realizes the proof paragraphs beginning 'Start with the finite lisse partition supplied by constructibility' and 'Each S_i is open in C_i'."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ils2704",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ils2704 (reviewer sub-agent of L); spot-checked: Read the item, the 3 cited statements (def-weil-pbc-etale-sheaves constructible/finite locally constant clauses, scheme conventions, finite-components Mathlib leaf), Stacks 095A/03Q1/01OX text. Topology of S_i=C_i minus earlier components correct (nonempty via generic point, irreducible, disjoint cover, locally closed); empty strata harmless; 'locally constant with finite stalks' = finite locally constant of the definition. FIX more, RETURN less: (1) C1/C4: step 2 (elementary) derived that F|_{S_i} is finite locally constant from the definition node, which does not say pullback along S_i->Z_k->X preserves finite local constancy; added statement-only node lem-weil-pbc-pullback-finite-locally-constant (Stacks 095A, 03Q1(3), 03CB: (f g)^{-1}F = g^{-1}f^{-1}F and it is finite locally constant if f^{-1}F is), cited in a new step 3, proof_deps updated. (2) C1: 'each part is Noetherian' untagged; now Tags 01OX, 01T5, 01T6; reduced induced structure on S_i inside Z_k and the composite immersion tagged 01J4, 02V0. Second reading by C1 missed both. Start Sat Oct 10 09:50:32 PM UTC 2026; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }

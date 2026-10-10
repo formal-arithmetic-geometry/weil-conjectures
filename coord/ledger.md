@@ -2722,3 +2722,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:47 UTC L matched lem-weil-pbc-complex-ses-connecting-formula to Mathlib ShortComplex.ShortExact.δ_eq (R-ccf2658); H1 delivery returned as unneeded
 - 21:48 L: returned deliver/F1/def-nagata-morphism-equality-stage (reviewer RETURN: Reviewer R-nme2702 (re-push e0d098b51). Point 3 of the 21:31 return (C1, def-nagata-basechanged-system cited) is repaire)
 - 21:50 L: merged deliver/H1/lem-sc-supported-factor-through-thick (reviewer FIX; first push; new nodes: 0)
+- 21:50 L: merged deliver/C1/lem-weil-pbc-irreducible-lisse-strata (reviewer FIX+NODE(1); first push; new nodes: 1)
