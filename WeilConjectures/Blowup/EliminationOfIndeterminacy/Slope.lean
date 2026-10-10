@@ -5,21 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib.RingTheory.MvPolynomial.Localization
-public import WeilConjectures.Blowup.AdmissibleBlowup
-public import WeilConjectures.Blowup.Affine.Functoriality
-public import WeilConjectures.Blowup.Density
-public import WeilConjectures.Blowup.Extension
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion
-public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Ideal
+public import WeilConjectures.Blowup.FiniteDegree.ChartProbe
 
 /-!
 # Slopes on the affine blow-up charts

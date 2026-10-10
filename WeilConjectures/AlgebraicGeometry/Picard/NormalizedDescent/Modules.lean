@@ -5,12 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Sites.Descent.DescentDataPrime
-public import WeilConjectures.AlgebraicGeometry.Descent
 public import WeilConjectures.AlgebraicGeometry.Modules.Endomorphism
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Basic
-public import WeilConjectures.AlgebraicGeometry.PicardFunctor
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
 
 /-!
 # Normalization of descent isomorphisms of sheaves of modules

@@ -6,20 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Mathlib.CategoryTheory.Limits.Lattice
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
-public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
-public import WeilConjectures.Topology.Sheaves.CechCohomology
-public import WeilConjectures.Topology.Sheaves.CechComparison
-public import WeilConjectures.Topology.Sheaves.CechCriterion
-public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
+public import WeilConjectures.CategoryTheory.Abelian.DimensionShifting
 
 /-!
 # Sheaves which are Čech-acyclic on affine opens

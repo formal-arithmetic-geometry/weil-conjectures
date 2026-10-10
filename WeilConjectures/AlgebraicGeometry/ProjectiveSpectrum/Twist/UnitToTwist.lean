@@ -5,14 +5,8 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
-public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
-public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Topology
-public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 
 /-!

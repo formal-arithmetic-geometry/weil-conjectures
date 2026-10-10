@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 
 /-!
 # The morphism Hom(M, R) ⊗ P ⟶ Hom(M, P) of presheaves of modules

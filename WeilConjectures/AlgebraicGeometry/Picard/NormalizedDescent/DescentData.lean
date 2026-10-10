@@ -5,12 +5,10 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
 public import Mathlib.CategoryTheory.Sites.Descent.DescentDataPrime
-public import WeilConjectures.AlgebraicGeometry.Descent
-public import WeilConjectures.AlgebraicGeometry.Modules.Endomorphism
 public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Basic
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
 
 /-!
 # The descent datum attached to normalized descent isomorphisms

@@ -12,6 +12,9 @@ public import WeilConjectures.Blowup.FiniteDegree.Generation
 public import WeilConjectures.Blowup.FiniteDegree.LocalAlgebra
 public import WeilConjectures.Blowup.FiniteDegree.Main
 public import WeilConjectures.Blowup.FiniteDegree.UniformNumerator
+public import WeilConjectures.Blowup.Proper
+public import WeilConjectures.Compactification.StrictTransform
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 /-!
 

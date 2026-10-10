@@ -9,7 +9,6 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.FourierTransform.AffineSpace.KernelTransform
 public import WeilConjectures.FourierTransform.AffineSpace.NegProd
 public import WeilConjectures.FourierTransform.Defs
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
 # The Fourier transform on relative affine space

@@ -5,13 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Blowup.Affine.Principalization
-public import WeilConjectures.Blowup.FiniteDegree.LocalAlgebra
-public import WeilConjectures.Blowup.Gluing
-public import WeilConjectures.Blowup.Proper
-public import WeilConjectures.Compactification.FiniteTypeExtension
-public import WeilConjectures.Compactification.StrictTransform
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
+public import WeilConjectures.Blowup.FiniteDegree.Algebra
 import all WeilConjectures.Blowup.FiniteDegree.LocalAlgebra
 
 /-!

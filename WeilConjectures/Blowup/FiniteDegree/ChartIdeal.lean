@@ -5,13 +5,7 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Blowup.Affine.Principalization
 public import WeilConjectures.Blowup.FiniteDegree.ChartProbe
-public import WeilConjectures.Blowup.Gluing
-public import WeilConjectures.Blowup.Proper
-public import WeilConjectures.Compactification.FiniteTypeExtension
-public import WeilConjectures.Compactification.StrictTransform
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 /-!
 # Chart ideals and membership along maps for the finite-degree approximation

@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Lie.Subalgebra
+public import Mathlib.AlgebraicGeometry.Group.Affine
+public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Field
@@ -12,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.PointOfDerivation
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # The Lie algebra of a group scheme

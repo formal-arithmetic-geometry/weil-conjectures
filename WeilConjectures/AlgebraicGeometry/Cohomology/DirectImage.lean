@@ -5,6 +5,11 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.RingTheory.Flat.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
@@ -13,6 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLo
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
 # Higher direct images, and cohomology and base change

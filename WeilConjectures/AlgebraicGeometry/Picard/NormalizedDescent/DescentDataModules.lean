@@ -5,13 +5,8 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Sites.Descent.DescentDataPrime
-public import WeilConjectures.AlgebraicGeometry.Descent
-public import WeilConjectures.AlgebraicGeometry.Modules.Endomorphism
 public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentData
 public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Modules
-public import WeilConjectures.AlgebraicGeometry.PicardFunctor
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
 import all WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.DescentData
 
 /-!

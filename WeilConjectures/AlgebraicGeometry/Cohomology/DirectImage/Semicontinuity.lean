@@ -5,29 +5,12 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Homology.Embedding.CochainComplex
-public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-public import Mathlib.CategoryTheory.Abelian.RightDerived
-public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Topology.Semicontinuity.Basic
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
-public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
-public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.Mathlib.Algebra.BigOperators.Intervals
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-!
 # Upper semicontinuity of fibre cohomology

@@ -5,8 +5,6 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
-public import WeilConjectures.FourierTransform.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!

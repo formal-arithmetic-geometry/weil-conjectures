@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import Mathlib.CategoryTheory.Limits.Shapes.Countable
+public import Mathlib.CategoryTheory.Monoidal.Mon
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Presheaf
 
 /-!

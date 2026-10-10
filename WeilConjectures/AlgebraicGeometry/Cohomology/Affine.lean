@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Limits.Lattice
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic

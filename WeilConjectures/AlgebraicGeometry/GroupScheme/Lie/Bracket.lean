@@ -5,16 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Lie.Abelian
-public import Mathlib.Algebra.Lie.Subalgebra
-public import Mathlib.AlgebraicGeometry.Group.Affine
-public import Mathlib.LinearAlgebra.Dimension.Finrank
-public import WeilConjectures.AlgebraicGeometry.DualNumbers
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
+public import Mathlib.Algebra.Lie.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv
-public import WeilConjectures.AlgebraicGeometry.TangentSpace
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # The bracket on the Lie algebra of a group scheme

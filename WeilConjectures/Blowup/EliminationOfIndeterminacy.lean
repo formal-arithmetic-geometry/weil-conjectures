@@ -5,6 +5,8 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.RingTheory.MvPolynomial.Localization
+public import WeilConjectures.Blowup.Affine.Functoriality
 public import WeilConjectures.Blowup.EliminationOfIndeterminacy.AffineSpace
 public import WeilConjectures.Blowup.EliminationOfIndeterminacy.ChartPreimage
 public import WeilConjectures.Blowup.EliminationOfIndeterminacy.Closedness
@@ -17,6 +19,9 @@ public import WeilConjectures.Blowup.EliminationOfIndeterminacy.QuasiAffine
 public import WeilConjectures.Blowup.EliminationOfIndeterminacy.QuasiAffineHom
 public import WeilConjectures.Blowup.EliminationOfIndeterminacy.Slope
 public import WeilConjectures.Blowup.EliminationOfIndeterminacy.ZeroLocus
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 

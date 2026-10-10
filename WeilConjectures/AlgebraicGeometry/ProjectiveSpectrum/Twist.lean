@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Mul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Sheaf
