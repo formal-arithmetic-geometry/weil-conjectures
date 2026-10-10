@@ -23,9 +23,66 @@
   "def-weil-pbc-proj-twisting-sheaf",
   "lem-weil-pbc-proj-graded-module-sheaf-exists"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every homogeneous f of positive degree, use the identifications in [lem-weil-pbc-proj-graded-module-sheaf-exists] (b) to define a map on standard-open sections by $\\widetilde\\phi_{D_+(f)}(x/f^m)=\\phi(x)/f^m$. The fraction formula is well defined and additive, and it is $S_{(f)}$-linear because $\\phi$ is degree-preserving and S-linear; this is the same localization calculation as the fraction maps and semilinearity in [lem-weil-pbc-graded-module-away-restriction] (i).",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-graded-module-away-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma Tag 01M7 (label lemma-proj-sheaves), (1)-(3), final paragraph on functoriality in the graded module"
+   }
+  },
+  {
+   "text": "If D_+(g) is contained in D_+(f), choose a homogeneous relation $g^e=af$. Restricting the formula of Step 1 along $D_+(f)\\supseteq D_+(g)$ gives $\\phi(a^mx)/g^{em}=a^m\\phi(x)/g^{em}$, so the maps commute with the restriction maps $\\rho_{f,g}$. The identity and composition laws follow pointwise from [lem-weil-pbc-graded-module-away-restriction] (ii), and the same calculation gives $\\widetilde{\\psi\\circ\\phi}=\\widetilde\\psi\\circ\\widetilde\\phi$ and $\\widetilde{\\mathrm{id}_M}=\\mathrm{id}_{\\widetilde M}$ on every standard open.",
+   "uses": [
+    "lem-weil-pbc-graded-module-away-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma Tag 01M4 (label lemma-standard-open), (1)(c),(g),(h), and Lemma Tag 01M7 (label lemma-proj-sheaves), functoriality paragraph"
+   }
+  },
+  {
+   "text": "The standard opens form a basis with finite refinement by [lem-weil-pbc-proj-standard-open-inclusion]. The maps of Step 1 are compatible with restrictions by Step 2. Apply the basis extension statement [lem-weil-pbc-sheaf-of-modules-from-basis] (b) to the two sheaves supplied by [lem-weil-pbc-proj-graded-module-sheaf-exists] (b): it gives a unique morphism of $\\mathcal O_X$-modules $\\widetilde\\phi$ inducing the prescribed maps on all $D_+(f)$.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "lem-weil-pbc-sheaf-of-modules-from-basis",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, text before Definition Tag 01M6 and Lemma Tag 01M7 (label lemma-proj-sheaves), final paragraph ('functorial in the graded S-module M')"
+   }
+  },
+  {
+   "text": "Let x correspond to a homogeneous prime $\\mathfrak p$. Under the stalk identifications in [lem-weil-pbc-proj-graded-module-sheaf-exists] (c), a germ represented by $y/h$ with h homogeneous and $h\\notin\\mathfrak p$ is represented on a standard open by the section $y/h$. By the defining formula of Step 1, its image is represented by $\\phi(y)/h$. Therefore $(\\widetilde\\phi)_x(y/h)=\\phi(y)/h$.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma Tag 01M7 (label lemma-proj-sheaves), (5), stalk computation and functoriality paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-graded-module-away-restriction",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-of-modules-from-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma Tag 01M7 (label lemma-proj-sheaves), final paragraph on functoriality in the graded S-module M"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,12 +114,51 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-proj-sheafification-exact",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-proj-tilde-functorial",
+  "worker": "stage1",
+  "summary": "Expanded the functoriality assertion into four steps: define the fraction maps on standard opens, verify compatibility with localization restrictions and composition, extend the compatible basis maps uniquely to a sheaf morphism, and compute its stalk map. No new nodes were needed because existing Proj sheaf, graded localization, standard-open basis, and basis-extension statements provide the required interfaces.",
+  "blueprint": "Realizes the proof clause 'the graded maps induce maps of associated sheaves' in blueprint node lem-sc-p1-graded-resolution.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "why": "Provides the associated sheaves, standard-open identifications, and stalk identifications consumed by the construction."
+   },
+   {
+    "node": "lem-weil-pbc-graded-module-away-restriction",
+    "why": "Provides homogeneous localization fraction maps and restriction composition laws; this unit has no separate localization development."
+   },
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "Provides the standard-open basis and finite refinement needed for basis extension."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-of-modules-from-basis",
+    "why": "Provides extension and uniqueness of a sheaf morphism from compatible maps on a basis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-graded-module-away-restriction",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-of-modules-from-basis"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ptf",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptf (reviewer sub-agent of L); spot-checked: Source Stacks 01M7 (constructions.tex label lemma-proj-sheaves, (2),(3),(5) and the 'functorial in the graded S-module M' paragraph): the item statement (unique O_X-linear tilde-phi with x/f^m -> phi(x)/f^m on D_+(f), composition and identity, stalk map y/h -> phi(y)/h) agrees with it; N-graded S, Z-graded M,N,L, degree-preserving S-linear phi as in the source. Step 1: sections M_(f) and their S_(f)-structure from lem-weil-pbc-proj-graded-module-sheaf-exists (b), well-definedness and S_(f)-linearity of the fraction map is the elementary localization of an S-linear degree-preserving map (C2), cited alongside lem-weil-pbc-graded-module-away-restriction (i). Step 2: compatibility with rho_{f,g} (x/f^m -> a^m x/g^{em}, sheaf-exists (a)) by S-linearity of phi; identity/composition pointwise. Step 3: basis, intersections D_+(f)cap D_+(g)=D_+(fg) and finite refinement from lem-weil-pbc-proj-standard-open-inclusion (0),(2); unique morphism from lem-weil-pbc-sheaf-of-modules-from-basis (b) (with M~ identified to F^ext by the uniqueness clause), which also gives the global composition/identity laws. Step 4: stalk via sheaf-exists (c); a germ y/h with deg h=0 is rewritten yf/hf with f in S_+ not in p, a one-line point. All four off-unit tool uses (sk-thm-reduction Proj/localization/basis interfaces) accepted as generic black boxes (C8). No new nodes; only the split's fields changed. No slopmaster2 declaration for the graded-module tilde on Proj found by grep (no B10 attachment). Start Sat Oct 10 03:56:20 PM UTC 2026, end Sat Oct 10 03:56:55 PM UTC 2026."
+ }
 }

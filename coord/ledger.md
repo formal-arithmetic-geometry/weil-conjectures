@@ -1882,3 +1882,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:56 L: merged deliver/K1/lem-sc-enough-globally-generated-ample (reviewer FIX; first push; new nodes: 3)
 - 15:56 L: merged deliver/H1/lem-sc-etale-standard-cover-cech (reviewer FIX; after a return; new nodes: 2)
 - 15:57 L: merged deliver/J1/lem-weil-pbc-etale-cohomology-limit-complex-systems (reviewer FIX; after a return; new nodes: 2)
+- 15:57 L: merged deliver/E1/lem-sc-p1-proj-tilde-functorial (reviewer PASS; first push; new nodes: 0)
