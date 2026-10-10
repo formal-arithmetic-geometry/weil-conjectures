@@ -1,0 +1,73 @@
+{
+ "id": "lem-sc-etale-at-prime-formally-etale-cotangent-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-mult-n-etale-kernel",
+   "place": "proof step (a): pointwise affine etale criterion via the cotangent complex",
+   "via": [
+    "lem-sc-etale-local-ring-faithfully-flat-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Formal etaleness at a prime is detected by localized cotangent groups",
+ "statement": "For commutative rings R and S with an R-algebra structure on S [def-weil-pbc-smooth-ring-map], and a prime ideal q of S, the localization S_q [def-weil-pbc-localization-at-prime] is formally etale over R if and only if the localizations (H_1(L_{S/R}))_q and (Omega_{S/R})_q [def-weil-pbc-kahler-differentials] are both zero.",
+ "source": {
+  "document": "Mathlib/RingTheory/Etale/Locus.lean",
+  "place": "Algebra.etaleLocus_eq_compl_support, line 58, specialized at q using mem_etaleLocus_iff and localization of support"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "for any R-algebra S and prime q, S_q is formally etale over R iff H_1(L_{S/R})_q=0 and (Omega_{S/R})_q=0",
+   "results": "Algebra.etaleLocus_eq_compl_support in Mathlib/RingTheory/Etale/Locus; also Algebra.formallyEtale_iff",
+   "date": "2026-10-11",
+   "verdict": "generalization: etaleLocus_eq_compl_support gives the support equality, whose primewise specialization is this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.etaleLocus_eq_compl_support",
+   "results": "Algebra.etaleLocus_eq_compl_support : etaleLocus R A = (Module.support A Omega[A/R])^c intersect (Module.support A (Algebra.H1Cotangent R A))^c",
+   "date": "2026-10-11",
+   "verdict": "generalization: support equality specializes at a prime"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleLocus_eq_compl_support in Mathlib/RingTheory/Etale/Locus.lean",
+   "results": "Mathlib/RingTheory/Etale/Locus.lean:58",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "formal etale localization H_1 cotangent complex Kahler differentials",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.etaleLocus_eq_compl_support",
+  "file": "Mathlib/RingTheory/Etale/Locus.lean",
+  "line": 58,
+  "how": "specializes at q in one line after mem_etaleLocus_iff and the support/localization identification (declaration at line 58)"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-etale-at-prime-flat-unramified-criterion",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-ntorsion-etale"
+}
