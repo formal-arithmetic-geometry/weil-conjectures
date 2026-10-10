@@ -12,9 +12,52 @@
   "def-weil-pbc-adically-complete-ring",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R^\\wedge=\\varprojlim_nR/J^n$ and $\\iota_R:R\\to R^\\wedge$, $a\\mapsto(a\\bmod J^n)_n$. By hypothesis ($R$ is $J$-adically complete [def-weil-pbc-adically-complete-ring]) $\\iota_R$ is bijective; it is a ring map, hence $R$-linear, and so is its inverse $\\iota_R^{-1}$. Base change along the $R$-linear maps $\\iota_R$ and $\\iota_R^{-1}$ [def-weil-module-base-change] gives $R$-linear maps $\\iota_R\\otimes\\mathrm{id}_N:R\\otimes_RN\\to R^\\wedge\\otimes_RN$ and $\\iota_R^{-1}\\otimes\\mathrm{id}_N$ in the other direction, inverse to each other by functoriality of $-\\otimes_RN$ ($(\\iota_R^{-1}\\otimes\\mathrm{id})\\circ(\\iota_R\\otimes\\mathrm{id})=(\\iota_R^{-1}\\iota_R)\\otimes\\mathrm{id}=\\mathrm{id}$ and symmetrically). Hence $\\beta:N\\to R^\\wedge\\otimes_RN$, $x\\mapsto1\\otimes x$, the composite of the isomorphism $N\\cong R\\otimes_RN$, $x\\mapsto1\\otimes x$, with $\\iota_R\\otimes\\mathrm{id}_N$ (note $\\iota_R(1)=1$), is bijective. This is the identification $M=M\\otimes_RR=M\\otimes_RR^\\wedge$ in the proof of Stacks 031B.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 031B (lemma-when-finite-module-complete-over-complete-ring, line 22845): 'the map M = M (x)_R R = M (x)_R R^ -> M^'"
+   }
+  },
+  {
+   "text": "Let $N^\\wedge=\\varprojlim_nN/J^nN$ with $\\iota_N:N\\to N^\\wedge$, $x\\mapsto(x\\bmod J^nN)_n$, and let $c_N:R^\\wedge\\otimes_RN\\to N^\\wedge$ be the map $a\\otimes x\\mapsto a\\cdot\\iota_N(x)$. Since $R$ is Noetherian and $N$ is a finitely generated $R$-module, $c_N$ is bijective by [lem-weil-pbc-completion-finite-module-tensor] (2) (Stacks 00MA (3), with $A=R$, $I=J$, $P=N$).",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00MA (lemma-completion-tensor, line 22901), part (3)"
+   }
+  },
+  {
+   "text": "For $x\\in N$, $c_N(\\beta(x))=c_N(1\\otimes x)=1\\cdot\\iota_N(x)=\\iota_N(x)$, so $\\iota_N=c_N\\circ\\beta$ is a composite of two bijections (steps 1 and 2) and is bijective: the canonical map $N\\to\\varprojlim_nN/J^nN$ is bijective, i.e. $N$ is $J$-adically complete. (In Stacks 031B surjectivity of this map comes from Lemma 0315 and injectivity from $\\bigcap_nJ^nN=0$; over a Noetherian $R$ both are contained in the bijectivity of $c_N$, so neither Lemma 0315 nor the Krull intersection theorem with Lemma 05GI is needed.)",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 031B (line 22845): 'Hence M = M^ and M is complete', with Lemma 00MA (3) in place of Lemma 0315 and hypothesis (c)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-completion-finite-module-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 031B (lemma-when-finite-module-complete-over-complete-ring, line 22845) and its proof (M = M (x)_R R = M (x)_R R^ -> M^), with the map M (x)_R R^ -> M^ bijective by Lemma 00MA (3) (lemma-completion-tensor, line 22901) since R is Noetherian and M finite"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +86,38 @@
    "results": "IsHausdorff.of_le_jacobson (Noetherian.lean:23: Noetherian R, finite M, I <= jacobson ⊥ gives IsHausdorff I M, i.e. the Hausdorff half), IsAdicComplete.le_jacobson_bot (Basic.lean:870), ofTensorProduct_bijective_of_finite_of_isNoetherian (AsTensorProduct.lean:320), of_bijective_iff (Basic.lean:647); no instance or theorem giving IsAdicComplete I M or IsPrecomplete I M for finite M over complete Noetherian R",
    "date": "2026-10-10",
    "verdict": "no match; Lean candidates: IsHausdorff.of_le_jacobson + IsAdicComplete.le_jacobson_bot for injectivity, ofTensorProduct_surjective_of_finite / ofTensorProduct_bijective_of_finite_of_isNoetherian for surjectivity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "IsAdicComplete I M for a finitely generated module M over a Noetherian ring R with IsAdicComplete I R",
+   "results": "IsAdicComplete, IsAdicComplete.mk, isAdicComplete_iff, IsAdicComplete.of_subsingleton, IsAdicComplete.toIsPrecomplete, AdicCompletion.module (Mathlib.RingTheory.AdicCompletion.Basic / Algebra)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete ?I ?R → IsAdicComplete ?I ?M",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite module over an I-adically complete Noetherian ring is I-adically complete",
+   "results": "IsAdicComplete.toIsPrecomplete, IsAdicComplete, isAdicComplete_iff, AdicCompletion.flat_of_isNoetherian, IsAdic.isPrecomplete_iff, IsAdic.isAdicComplete_iff, IsAdicComplete.toIsHausdorff, AdicCompletion.instIsHausdorff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsAdicComplete\\|IsPrecomplete' --include=*.lean Mathlib | grep -i 'finite\\|noetherian\\|fg'; read Mathlib/RingTheory/AdicCompletion/Noetherian.lean whole and the declaration list of AsTensorProduct.lean",
+   "results": "AdicCompletion.isAdicComplete (Completeness.lean:185, completion of any module along an f.g. ideal), LocalRing.lean:63/127 (completion of a Noetherian local ring), Noetherian.lean: IsHausdorff.of_le_jacobson, IsHausdorff.of_isLocalRing, Artinian local instance; AsTensorProduct.lean:320 ofTensorProduct_bijective_of_finite_of_isNoetherian; nothing giving IsAdicComplete I M or IsPrecomplete I M for finite M over complete Noetherian R",
+   "date": "2026-10-10",
+   "verdict": "no match; Lean route: ofTensorProduct_bijective_of_finite_of_isNoetherian composed with the bijection R -> AdicCompletion I R, then AdicCompletion.of_bijective_iff"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +137,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "worker": "stage1",
+  "summary": "Statement kept (it matches Stacks 031B for Noetherian R, where (c) is automatic, and Mathlib's IsAdicComplete I N via AdicCompletion.of_bijective_iff). Mathlib re-searched with LeanSearch, Loogle, LeanFinder and grep: no declaration gives IsAdicComplete/IsPrecomplete for a finite module over a complete Noetherian ring, so not a leaf. Proof written in three steps following the proof of Stacks 031B (M = M (x) R = M (x) R^ -> M^), with the bijectivity of M (x) R^ -> M^ taken from 00MA (3), the existing Mathlib leaf lem-weil-pbc-completion-finite-module-tensor; this makes 0315, the Krull intersection theorem 00IP/00IQ and 05GI unnecessary. No new nodes. stmt_deps unchanged; proof_deps = adically-complete-ring, module-base-change, completion-finite-module-tensor."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps: N = R (x) N = R^ (x) N by completeness of R; R^ (x) N -> N^ bijective by the existing 00MA (3) leaf (completion-finite-module-tensor (2)); composite. Krull intersection and 05GI from the source note are not needed. Not a leaf: Mathlib has no IsAdicComplete instance for finite modules over complete Noetherian rings (only the tensor-product bijection used here)."
+ }
 }
