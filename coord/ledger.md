@@ -2135,3 +2135,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:36 L: merged deliver/M1/lem-weil-pbc-etale-open-fpqc-descent (reviewer PASS; first push; new nodes: 1)
 - 17:36 L: merged deliver/E1/lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable (reviewer PASS; first push; new nodes: 2)
 - 17:36 L: merged deliver/M1/lem-exc-etale-open-subgroup-fixed-field (reviewer FIX; first push; new nodes: 2)
+- 17:36 L: returned deliver/K1/lem-sp-cartan-eilenberg-properties (reviewer RETURN: 1 (E, missing hypothesis): the item's statement takes the Cartan--Eilenberg resolution 'in the convention of [thm-sp-if-)
