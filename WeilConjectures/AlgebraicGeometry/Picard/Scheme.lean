@@ -46,6 +46,9 @@ of the criterion are:
   curve over a separably closed field is representable by a group scheme whose group law is the
   tensor product of invertible modules (blueprint `sk-thm-picard-main`,
   `thm-pc-picard-representable`).
+- `AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctor`: the Picard
+  scheme is smooth of dimension `g`, being covered by translates of an open subscheme of
+  `Hilb^g_{X/k}` (blueprint `thm-sc-theorem-of-the-base`).
 -/
 
 @[expose] public section

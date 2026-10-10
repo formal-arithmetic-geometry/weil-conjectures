@@ -153,6 +153,9 @@ value at an algebraically closed point — are stated separately.
   `AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctorDegree`: the
   theorem of the base, every `Pic^d_{X/k}` is proper and smooth of dimension `g` (blueprint
   `thm-sc-theorem-of-the-base`).
+- `AlgebraicGeometry.exists_surjective_of_representableBy_picardFunctorDegree_genus`: the Abel map
+  `Hilb^g ⟶ Pic^g`, `D ↦ 𝒪_X(D)`, is surjective; with `AlgebraicGeometry.exists_abelClass_eq` (a
+  class of degree `g` is effective) this gives properness and geometric integrality of `Pic^g`.
 - `AlgebraicGeometry.exists_jacobian`: the Jacobian is an abelian variety (blueprint
   `sk-prop-jacobian`, `thm-sc-jacobian-representability`).
 - `AlgebraicGeometry.exists_jacobian_pullback`: the Jacobian over a separable closure (blueprint
