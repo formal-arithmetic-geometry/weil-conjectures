@@ -1862,3 +1862,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:48 L: merged deliver/K1/lem-sc-affine-complement-finite-on-integral-curve (reviewer FIX; first push; new nodes: 0)
 - 15:50 L: merged deliver/J1/lem-sc-closed-immersion-pushforward-exact (reviewer FIX; first push; new nodes: 2)
 - 15:51 L: merged deliver/J1/lem-sc-p1-ext-locally-free-naturality (reviewer FIX+NODE(2); first push; new nodes: 3)
+- 15:51 L: returned deliver/F1/lem-sc-torsor-h1-functoriality (reviewer RETURN: 1. D2/D3 (no split for clause (2)): new node lem-sc-torsor-h1-ext-pushforward ends with 'Thus the natural cohomology iso)
