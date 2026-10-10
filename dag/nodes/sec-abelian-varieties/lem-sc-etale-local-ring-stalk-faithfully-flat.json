@@ -24,46 +24,104 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-faithfully-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The tensor-product map B\\to B_K=B\\otimes_k K is faithfully flat by [lem-weil-pbc-field-extension-base-change-faithfully-flat], applied to the k-algebra B.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "faithful flatness of tensoring an algebra by a field extension, used in Lemma 33.9 (Tag 0C4Y)"
+   }
+  },
+  {
+   "text": "Because q_K contracts to q, q_K lies over q for the faithfully flat map B\\to B_K. Applying [lem-weil-pbc-flat-local-ring-maps] to the underlying flat map gives a flat local homomorphism B_q\\to(B_K)_{q_K}; its hypotheses hold because the contraction of q_K is q.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-flat-local-ring-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 33.9 (Tag 0C4Y, lemma-change-fields-flat): localization of the faithfully flat field-extension map at x and x_K"
+   }
+  },
+  {
+   "text": "The source and target are local rings and the localized homomorphism is local. Therefore the flat local map B_q\\to(B_K)_{q_K} is faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective], whose first clause states that every flat local homomorphism of local rings is faithfully flat.",
+   "uses": [
+    "lem-pc-local-flat-faithful-flat-reflects-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00HR (algebra-lemma-local-flat-ff), applied to the localizations in Lemma 33.9 (Tag 0C4Y)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 33.9 (Tag 0C4Y, lemma-change-fields-flat), using Algebra Lemma 00HR for the localized flat local map"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "localization B_q to (B tensor K)_qK is faithfully flat for field extension",
-   "results": "Module.FaithfullyFlat.instTensorProduct; instFlatAtPrime; no theorem combining localization at a prime with faithful flatness",
+   "query": "localization at a prime of a faithfully flat tensor product field extension is faithfully flat",
+   "results": "instFlatAtPrime (Mathlib/RingTheory/Flat/Localization); Module.FaithfullyFlat.of_flat_of_isLocalHom (Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra); RingHom.Flat.localRingHom (Mathlib/RingTheory/RingHom/Flat); no single combined theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "faithfully flat localization tensor field extension",
-   "results": "unknown identifier faithfully",
+   "query": "Module.FaithfullyFlat localization tensorProduct field extension",
+   "results": "0 hits; unknown identifier localization",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "faithfully.*flat|Localization.*flat in Mathlib/RingTheory",
-   "results": "localization flatness and tensor faithful-flat instances separately; no localized field-extension theorem",
+   "query": "FaithfullyFlat.*localization|localization.*FaithfullyFlat [Mathlib/RingTheory]",
+   "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "localization B_q to (B tensor K)_qK is faithfully flat for field extension",
+   "query": "localized tensor product map at corresponding primes faithfully flat",
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-etale-local-ring-faithfully-flat-descent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-ntorsion-etale"
+ "unit": "sk-prop-av-ntorsion-etale",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-etale-local-ring-stalk-faithfully-flat",
+  "worker": "stage1",
+  "summary": "Split Tag 0C4Y into the tensor field-extension faithful-flatness step, the corresponding-prime localization flatness step, and the flat-local faithful-flatness conclusion. No new nodes were needed; the first step cites the existing field-extension base-change leaf and the last cites the existing flat-local faithful-flatness leaf.",
+  "blueprint": "Realizes proof step (a) of lem-sc-mult-n-etale-kernel: reduction from k to an algebraic closure for etaleness, local affine-ring descent."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-esf2924",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-esf2924 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0C4Y(1) and vs K1 consumer lem-sc-etale-local-ring-faithfully-flat-descent (B over A, q_K over q; reviewer's application to A is B=A, trivially f.p.): matches (C4). Step1 cites lem-weil-pbc-field-extension-base-change-faithfully-flat (D=B as k-algebra, flatness of B->B_K cited, C1 ok). Step2 cites lem-weil-pbc-flat-local-ring-maps (contraction hypothesis = q_K over q; gives flat and local). Step3 cites lem-pc-local-flat-faithful-flat-reflects-surjective first clause = Tag 00HR. Finite presentation hypothesis unused in the proof; harmless extra hypothesis kept for the consumer's setting, not a changed statement (E ok). No new nodes. No faults found beyond those the M1 second reading corrected."
+ }
 }
