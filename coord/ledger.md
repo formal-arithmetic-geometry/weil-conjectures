@@ -3000,3 +3000,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:44 L: returned deliver/E1/lem-pc-derived-tensor-transitivity (reviewer RETURN: 1. E (ill-typed item statement / missing hypothesis): for general R-algebras A,B (neither R-flat) K tensor^L_R B and (E )
 - 23:46 L: merged deliver/C1/lem-pur-hom-kflat-into-kinjective (reviewer FIX; first push; new nodes: 0)
 - 23:46 L: returned deliver/G1/lem-pc-affine-sections-flat-over-base (reviewer RETURN: Not a fault: the node is a Mathlib leaf (Module.flat_of_isLocalized_maximal + Module.flat_iff_of_isLocalization, Mathlib)
+- 23:46 UTC L: lem-pc-affine-sections-flat-over-base set to mathlib (Module.flat_of_isLocalized_maximal + Module.flat_iff_of_isLocalization, Flat/Localization.lean:66/:52) after R-sfb3145's MATHLIB answer on G1 delivery fc687881a; delivery returned as unneeded.
