@@ -2,7 +2,7 @@
 
 865 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (640)
+## Stage 1: nodes to split (639)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -20,7 +20,6 @@
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
 | `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1012 | none |
-| `lem-weil-pbc-flat-normal-fibres-noetherian-normal` | 1012 | none |
 | `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1012 | none |
 | `lem-weil-pbc-flat-under-regular` | 1012 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
@@ -647,7 +646,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (225)
+## Stage 2: nodes to state (226)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -758,6 +757,7 @@
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-flat-module-completion-flat` | 1 | state |
 | `lem-weil-pbc-flat-module-powers` | 1 | state |
+| `lem-weil-pbc-flat-normal-fibres-noetherian-normal` | 1 | state |
 | `lem-weil-pbc-flat-over-regular` | 1 | state |
 | `lem-weil-pbc-flat-over-regular-with-regular-fibre` | 1 | state |
 | `lem-weil-pbc-flat-permanence` | 1 | state |
@@ -877,7 +877,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 652 nodes that wait for stage 1, 505 nodes that wait for a statement dependency.
+Not open yet: 651 nodes that wait for stage 1, 505 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
