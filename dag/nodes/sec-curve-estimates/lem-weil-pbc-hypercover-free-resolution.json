@@ -13,35 +13,94 @@
   "place": "node lem-weil-pbc-hypercover-free-resolution, order 948"
  },
  "stmt_deps": [
-  "def-weil-pbc-finite-split-hypercover"
+  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-sheafification",
+  "def-sp-injective-resolutions"
  ],
  "proof": [
   {
-   "text": "Exactness is a local assertion about the sheaves of\n[def-weil-pbc-etale-sheaves]. A local chain has finite support. Choose\nlocally a vertex in $U_0$, using its covering of $X$. For each of the\nfinitely many simplices in a given chain, including its faces, construct a\ncone to this vertex. Inductively, the cone on the boundary of a simplex has\nalready been specified. The matching-cover condition in\n[def-weil-pbc-finite-split-hypercover] supplies a simplex with exactly those\nfaces after an etale cover. Take a common refinement for the finitely many\nchoices. Denote this cone operation by $h$. The alternating-face formula\ngives $\\partial h+h\\partial=1$ on the augmented finite collection of chains:\nthe faces through the new vertex cancel and the remaining face is the\noriginal simplex. Thus every cycle is locally a boundary. In degree zero the\nsame construction uses the augmentation, and proves its surjectivity as well.",
+   "text": "Apply the representable presheaf $h_-$ to the augmented simplicial etale $X$-scheme $U$. The matching-cover condition in [def-weil-pbc-finite-split-hypercover] says that $h_{U_0}\\to h_X$, $h_{U_1}\\to h_{U_0}\\times_{h_X}h_{U_0}$, and $h_{U_{n+1}}\\to(\\operatorname{cosk}_n\\operatorname{sk}_n h_U)_{n+1}$ for $n\\geq1$ become surjective after sheafification [def-weil-pbc-sheafification]. Indeed a section over $W$ of any matching presheaf is a map $W\\to M_n(U)$; the pullback $W\\times_{M_n(U)}U_n\\to W$ is an etale cover, and its tautological lift is a local preimage. The degree-zero comparison object $K^0$ has degree $m$ equal to the $(m+1)$-fold fibre product of $h_{U_0}$ over $h_X$. Its augmented free-module complex has positive homology zero and degree-zero homology $R[h_X]^\\#$ by [lem-weil-pbc-cech-nerve-free-homology], taking $F=h_{U_0}$ and $G=h_X$.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-finite-split-hypercover"
+    "def-weil-pbc-finite-split-hypercover",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-cech-nerve-free-homology"
    ],
    "elementary": false
   },
   {
-   "text": "The defining free-sheaf adjunction gives $\\operatorname{Hom}(\\mathbb\nZ[V],I)=I(V)$. Applying $\\operatorname{Hom}(-,I)$ to the exact augmented\ncomplex is exact because $I$ is injective, which proves the assertions about\n$C^\\bullet(U,I)$. Replacing free abelian groups by free modules gives the\nidentical proof for a constant coefficient ring.",
-   "uses": [],
-   "elementary": null
+   "text": "For $n\\geq1$ put $K^n=\\operatorname{cosk}_n\\operatorname{sk}_n h_U$. The map $K^n\\to K^{n-1}$ is an isomorphism below degree $n$ and its degree-$n$ map is the $n$th matching map of $U$. The latter is locally surjective by step 1. Both objects are $n$-coskeletal (an $(n-1)$-coskeletal object is also $n$-coskeletal). Thus [lem-weil-pbc-coskeleton-free-homology-comparison] identifies all free-module homology sheaves of $K^n$ and $K^{n-1}$. By induction they are those of $K^0$.",
+   "uses": [
+    "def-weil-pbc-finite-split-hypercover",
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For fixed $i$, the homology in degree $i$ of the alternating-face complex depends only on terms and faces through degree $i+1$. These agree for $h_U$ and $K^{i+1}$. Hence step 2 transfers the vanishing of positive homology and the degree-zero identification from $K^0$ to $h_U$. In degree zero the map is precisely the given augmentation, so the whole augmented free-$R$ complex is exact. The argument applies to every commutative constant coefficient ring $R$, including $R=\\mathbb Z$; it uses the free-$R$ statements of the two preceding lemmas directly, with no tensor-exactness assumption on $R$.",
+   "uses": [
+    "lem-weil-pbc-cech-nerve-free-homology",
+    "lem-weil-pbc-coskeleton-free-homology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an etale $X$-scheme $V$ and an injective abelian sheaf $I$ [def-weil-pbc-etale-sheaves], the sheafification adjunction [def-weil-pbc-sheafification] and the free-presheaf Yoneda equivalence [lem-weil-pbc-free-yoneda-presheaf-module] (with the constant ring $\\mathbb Z$) identify $\\operatorname{Hom}(\\mathbb Z[V],I)$ with $I(V)$. Applying $\\operatorname{Hom}(-,I)$ to the exact augmented complex from step 3 is exact by the defining extension property of an injective object [def-sp-injective-resolutions]. Thus the resulting cochain complex has $H^0=I(X)$ and $H^p=0$ for $p>0$. The same adjunction and injectivity argument in the category of sheaves of modules over a constant commutative ring gives the module assertion.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-finite-split-hypercover"
+  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-cech-nerve-free-homology",
+  "lem-weil-pbc-coskeleton-free-homology-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-weil-pbc-hypercover-free-resolution.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Hypercoverings, Lemmas Tags 01GC, 01GD, 01GE and 01GW (labels lemma-compare-cosk0, lemma-acyclicity, lemma-acyclic-hypercover-sheaves, lemma-injective-trivial-cech)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "hypercover of sheaves augmented free abelian group sheaf chain complex is exact",
+   "results": "HomologicalComplex.Acyclic and ChainComplex.augment are generic constructions; no hypercover acyclicity theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech nerve of a surjective sheaf map has free-module homology concentrated in degree zero",
+   "results": "Rep.standardComplex.quasiIso_forget2_epsilonToSingle0 is for group representations, not sheaf hypercovers",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cosk\" and \"cechNerve\"",
+   "results": "coskeleton and Cech-nerve constructors only; no arbitrary hypercover resolution",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'hypercover|cechNerve|cosk|homology' Mathlib/AlgebraicTopology Mathlib/CategoryTheory/Sites (local Mathlib c32e1ec0)",
+   "results": "CechNerve, SimplicialObject.Coskeletal, and degree-one hypercover files; no arbitrary hypercover free resolution",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -64,5 +123,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-hypercover-free-resolution",
+  "worker": "E1",
+  "summary": "The imported local-cone argument was replaced by the coskeleton argument of Stacks Hypercoverings 01GC, 01GD, 01GE and 01GW. Two smaller generic homology lemmas, for the Cech nerve and the coskeleton comparison, are new unsplit nodes. Degreewise stabilization gives the augmented free-sheaf resolution. The ring-coefficient case uses the same free-module simplicial contractions, so no flatness of the coefficient ring is assumed. No exact Lean declaration was found in slopmaster2.",
+  "blueprint": "The blueprint proof's first paragraph chooses a local vertex, then fills each matching boundary and cancels alternating faces. Step 1 realizes the local-vertex and matching-cover clauses, step 2 realizes the successive filling clause by coskeleton comparison, and step 3 realizes exactness of the augmented complex. Its second paragraph identifies Hom from the free sheaf to an injective with sections and applies injectivity; step 4 realizes it."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: citations of the simplicial/coskeleton nodes and line numbers): 01GC/01GD/01GE/01GW read, 4 steps checked, small cases tested"
+ }
 }
