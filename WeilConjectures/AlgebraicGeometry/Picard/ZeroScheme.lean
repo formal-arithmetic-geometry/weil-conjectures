@@ -154,6 +154,7 @@ lemma isInvertible_pullback_pushforward
   (SheafOfModules.IsInvertible.of_iso.{u, u, u}
     ((Functor.rightDerivedZeroIsoSelf (Modules.pushforward _)).app _)).pullback
 
+omit [GeometricallyIntegral (X ↘ Spec (.of k))] in
 /-- **The adjunction morphism commutes with base change.** For `ℒ ∈ F(T)` and a morphism
 `i : T' ⟶ T` of `k`-schemes, with base change `i' : X_{T'} ⟶ X_T`, the pullback
 `i'^* φ_ℒ : i'^* f_T^* f_{T,*} ℒ ⟶ i'^* ℒ` of the adjunction morphism of `ℒ` is isomorphic, as
@@ -191,8 +192,25 @@ theorem nonempty_arrowIso_pullback_directImageCounit
   -- cohomology and base change for `F`: since `Rf_{T,*} ℒ ≅ 𝒩[0]` with `𝒩` invertible, the base
   -- change morphism `i^* f_{T,*} ℒ ⟶ f_{T',*} i'^* ℒ`, the mate of `α`, is an isomorphism
   have : IsIso ((mateEquiv (Modules.pullbackPushforwardAdjunction sT)
-      (Modules.pullbackPushforwardAdjunction sT') α).app d) :=
-    sorry
+      (Modules.pullbackPushforwardAdjunction sT') α).app d) := by
+    have := ℒ.1.1.isInvertible
+    have : SheafOfModules.IsFiniteLocallyFree.{u, u, u} d :=
+      SheafOfModules.IsInvertible.isFiniteLocallyFree.{u, u, u} _
+    have : d.IsFinitePresentation :=
+      SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+    have hd := Modules.isFlatOver_of_isInvertible sT d
+    have hL' := IsInvertibleDirectImage.map_of_isProper (X ↘ Spec (.of k)) i ℒ.2
+    -- `ℒ_{T'}` satisfies the condition of `F`, so `i` maps into the perfect locus `U_{0,1}`
+    let e (q : ℕ) := ((Modules.pushforward sT').rightDerived q).mapIso
+      (fromSkeletonToSkeletonIso ((Modules.pullback i').obj d))
+    have h := (Modules.isFiniteLocallyFreeInDegree_zero_one_iff
+      fun q ↦ ((Modules.pushforward sT').rightDerived q).obj ((Modules.pullback i').obj d)).2
+      ⟨fun q hq ↦ (hL'.2 q (Nat.pos_of_ne_zero hq)).of_iso (e q).symm,
+        SheafOfModules.IsInvertible.of_iso.{u, u, u} (e 0) (h := hL'.1)⟩
+    have hg := (Modules.range_subset_perfectLocusOfRank_iff sT d hd 0 1 i.left i' sT'
+      (isPullback_baseChangeMap _ i)).2 ⟨h.isZero, h.isFiniteLocallyFreeOfRank⟩
+    exact Modules.isIso_mateEquiv_pullbackComp_app_of_isPullback sT d hd i.left i' sT'
+      (isPullback_baseChangeMap _ i) hg
   -- identify `i'^* ℒ` with the representative of its class
   let e : (Modules.pullback i').obj d ≅ (fromSkeleton _).obj (Pic.map i' ℒ.1.1).val :=
     (fromSkeletonToSkeletonIso _).symm
@@ -201,6 +219,7 @@ theorem nonempty_arrowIso_pullback_directImageCounit
     Arrow.isoMk (((Modules.pullback sT').mapIso ((Modules.pushforward sT').mapIso e)))
       e (adj.counit.naturality e.hom)⟩
 
+omit [GeometricallyIntegral (X ↘ Spec (.of k))] in
 /-- **The zero-scheme dictionary is natural.** For `ℒ ∈ F(T)` and `i : T' ⟶ T`, the zero scheme
 of the adjunction morphism of `ℒ_{T'}` is the base change to `X_{T'}` of the zero scheme of the
 adjunction morphism of `ℒ`: `Z(φ_{ℒ_{T'}}) = Z(φ_ℒ) ×_{X_T} X_{T'}`. -/
@@ -220,6 +239,7 @@ theorem comap_zeroLocus_directImageCounit
   exact Modules.Hom.zeroLocus_eq_of_arrowIso _ _
     (nonempty_arrowIso_pullback_directImageCounit σ hσ i ℒ).some
 
+omit [GeometricallyIntegral (X ↘ Spec (.of k))] in
 /-- **The fibres of the adjunction section are nonzero.** For `ℒ ∈ F(T)` and a point `t` of `T`,
 the zero scheme of the adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ` does not contain the
 fibre `X_t`: the restriction of its ideal to `X_t` is nonzero.
