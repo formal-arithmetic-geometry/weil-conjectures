@@ -26,9 +26,77 @@
   "def-weil-derived-cohomology-sheaves",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The question is local at $x$: for an open $U\\ni x$, [lem-sc-derived-internal-hom-restrict-open] gives $R\\mathcal Hom_{\\mathcal O_X}(\\mathcal F[0],\\mathcal G[0])|_U\\cong R\\mathcal Hom_{\\mathcal O_U}(\\mathcal F|_U[0],\\mathcal G|_U[0])$, and restriction to $U$ commutes with cohomology sheaves and does not change stalks at $x$. Choose an affine open neighbourhood $U=\\operatorname{Spec}(A)$ with $A$ Noetherian. The coherent sheaf $\\mathcal F|_U$ is $\\widetilde M$ for a finite $A$-module $M$, and [lem-sc-coherent-affine-free-resolution] supplies a bounded-above complex $E^\\bullet$ of finite-rank free $\\mathcal O_U$-modules and a quasi-isomorphism $E^\\bullet\\to\\mathcal F|_U[0]$.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-coherent-affine-free-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 01XZ (coherent-lemma-coherent-Noetherian), with Algebra 00LP and the affine quasi-coherent equivalence"
+   }
+  },
+  {
+   "text": "Because $E^\\bullet$ is bounded above and termwise finite free, and $\\mathcal G|_U[0]$ is bounded below, the bounded-above locally free Hom calculation identifies the total complex $\\mathcal H om^\\bullet_{\\mathcal O_U}(E^\\bullet,\\mathcal G|_U[0])$ with a representative of $R\\mathcal H om_{\\mathcal O_U}(\\mathcal F|_U[0],\\mathcal G|_U[0])$.",
+   "uses": [
+    "lem-sc-derived-hom-finite-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "derived internal Hom from bounded-above locally free complexes; Lemma 0GM8 case (2)"
+   }
+  },
+  {
+   "text": "For each degree, finite freeness gives $\\mathcal H om_{\\mathcal O_U}(E^n,\\mathcal G|_U)_x\\cong\\operatorname{Hom}_{\\mathcal O_{X,x}}(E^n_x,\\mathcal G_x)$, and these identifications commute with the differentials. Thus the stalk of the displayed Hom complex is $\\operatorname{Hom}^\\bullet_{\\mathcal O_{X,x}}(E^\\bullet_x,\\mathcal G_x[0])$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 0GM8 case (2), stalks of Hom for finite locally free terms"
+   }
+  },
+  {
+   "text": "Stalks are exact, so $E^\\bullet_x\\to\\mathcal F_x[0]$ is a quasi-isomorphism; each $E^n_x$ is finite free, hence projective, over $\\mathcal O_{X,x}$. Therefore the complex in Step 3 is a projective resolution model of the local derived Hom.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-sc-derived-hom-projective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 0GM8 case (2), exactness of stalks; derived-categories projective-resolution computation"
+   }
+  },
+  {
+   "text": "Taking cohomology in degree $i$: since stalks are exact [lem-weil-pbc-module-stalk-exact], the stalk at $x$ of $\\mathcal H^i$ of the complex of Step 2 is $H^i$ of its stalk complex, which by Steps 3--4 is $H^i(R\\operatorname{Hom}_{\\mathcal O_{X,x}}(\\mathcal F_x[0],\\mathcal G_x[0]))$; with Step 1 this yields $\\mathcal H^i(R\\mathcal Hom_{\\mathcal O_X}(\\mathcal F[0],\\mathcal G[0]))_x\\cong H^i(R\\operatorname{Hom}_{\\mathcal O_{X,x}}(\\mathcal F_x[0],\\mathcal G_x[0]))$. The construction is canonical because the stalk and derived-Hom comparison maps are natural.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-sc-derived-hom-projective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma lemma-stalk-internal-hom (Tag 0GM8), case (2), canonical stalk comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sc-coherent-affine-free-resolution",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-sc-derived-hom-projective-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma lemma-stalk-internal-hom (Tag 0GM8), case (2), expanded through affine finite-free and projective-resolution calculations"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,12 +121,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ext-stalk-localization",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-internal-hom-stalk-localization",
+  "worker": "stage1",
+  "summary": "Repaired the split by deleting the over-general stalk theorem and pseudo-coherence node. The item now gives the local affine argument directly: finite-free resolution of F, bounded-above Hom model, stalkwise Hom identification, exact stalk resolution, and projective-resolution computation of the local derived Hom.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof of thm-sc-p1-duality: identification of the stalk of derived internal Hom with derived internal Hom over the local ring.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Step 4 uses exactness of stalks to preserve the quasi-isomorphism; this generic sheaf-theoretic fact is not supplied by a node in the Picard-duality unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dhs1740",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dhs1740 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:56 return: (1) the argument is now in the item's five steps (affine Noetherian nbhd, finite-free resolution, bounded-above Hom model, stalk Hom calculation, stalk exactness + projective-resolution RHom); stalk-general and pseudo-coherence nodes deleted; no new node restates 0GM8; lem-sc-ext-stalk-localization not cited (no cycle). (2) bounded-below now on G[0], checked in Step 2. (3) no pseudo-coherence terminology remains. New nodes read: affine-free-resolution (01XZ+00LP+tilde, true), finite-free-model (bounded-above finite free E, bounded-below G: degreewise finite products, true), projective-resolution (06XR/0A64 style, true). Tool use lem-weil-pbc-module-stalk-exact accepted. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-derived-internal-hom-stalk-localization.json step 1: 'the question is local' used restriction of RHom to opens (Stacks 08DL) uncited (C1) -> new statement-only node lem-sc-derived-internal-hom-restrict-open (08DL, LeanFinder no match) cited; step 5: stalk of H^i = H^i of stalk complex used exactness of stalks while marked elementary (C1) -> cites lem-weil-pbc-module-stalk-exact, elementary false; proof_deps updated. Start 'Sat Oct 10 05:34:06 PM UTC 2026', end 'Sat Oct 10 05:34:06 PM UTC 2026'.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
