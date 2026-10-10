@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-projective-curve-finite-projection",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A finite map from an integral projective curve to the projective line",
@@ -15,6 +15,7 @@
  "stmt_deps": [
   "def-pc-curve",
   "def-pc-morphism-conventions",
+  "def-pc-projective-morphism",
   "def-sc-p1-standard"
  ],
  "proof": [
@@ -28,7 +29,11 @@
     "lem-pc-linear-pair-morphism-gluing",
     "lem-pc-linear-pair-morphism-finite"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-curve-finite-projection.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
@@ -44,9 +49,38 @@
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-curve-finite-projection.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism from a projective curve over an infinite field to the projective line",
+   "results": "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; WeierstrassCurve.toProjective; WeierstrassCurve.Projective.toAffine; WeierstrassCurve.Projective; WeierstrassCurve.Projective.Point.fromAffine; WeierstrassCurve.Affine.Point.toProjective; WeierstrassCurve.Projective.Point.toAffineLift; AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFinite, ProjectiveLine, Scheme",
+   "results": "none; loogle: unknown identifier 'IsFinite'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*ProjectiveLine|ProjectiveLine.*finite [Mathlib/AlgebraicGeometry]",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projective curve finite morphism to projective line",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -107,5 +141,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-projective-curve-finite-projection",
+  "worker": "stage1",
+  "summary": "The item is split into the coordinate-model, linear-pair, gluing, and finiteness steps already stated by existing DAG nodes. The slopmaster2 theorem AlgebraicGeometry.exists_isFinite_toProjectiveLine is sorry-free but has narrower embedded-scheme hypotheses, so it does not attach to the abstract projective-curve statement.",
+  "blueprint": "The single blueprint proof paragraph: projective embedding and coordinate model; choice of a covering linear pair; construction and gluing of the projection; and finiteness.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pfp3046",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfp3046 (reviewer sub-agent of L); spot-checked: Split cites six existing nodes; def-pc-curve is integral, separated, finite type, dim 1, so coordinate-model and linear-pair hypotheses hold; infinite k used only by linear-pair; linear-pair-morphism-finite holds for any standard graded S with V+(l0,l1) empty (S finite over k[l0,l1]); composing with the Proj iso is routine; citer lem-pc-curve-coherent-finiteness (alg. closed k, projective curve) uses exactly this statement. FIX more, RETURN less: C1/stmt_deps: the statement's word 'projective' now cites def-pc-projective-morphism in stmt_deps (missed by the second reading).; 1 file(s) fixed by the reviewer"
+ }
 }
