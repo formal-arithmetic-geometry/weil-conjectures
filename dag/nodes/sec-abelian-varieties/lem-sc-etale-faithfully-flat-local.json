@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Etaleness at a point descends along a faithfully flat field extension",
- "statement": "Let k be a field, K/k a field extension [def-pc-field-extension], f:X\\to Y a morphism of k-schemes [def-pc-scheme] [def-pc-morphism-conventions], x\\in X, and x_K\\in X_K a point above x. If the base-change morphism f_K:X_K\\to Y_K [def-pc-base-change] is etale at x_K [def-weil-etale-morphism], then f is etale at x. Here etale at a point means etale on some open neighbourhood of that point.",
+ "statement": "Let k be a field, K/k a field extension [def-pc-field-extension], f:X\\to Y a morphism of k-schemes [def-pc-scheme] [def-pc-morphism-conventions], x\\in X, and x_K\\in X_K a point above x. If the base-change morphism f_K:X_K\\to Y_K [def-pc-base-change] is etale at x_K in the standard pointwise sense, then f is etale at x in the same sense. Here etale at a point means that after choosing affine neighbourhoods Spec B of x and Spec A of f(x), with q the prime of B for x, the map A\\to B is finitely presented and its localization at q is flat with zero module of relative differentials; equivalently, some open neighbourhood of x is etale over Y.",
  "source": {
   "document": "literature/stacks-project/descent.tex",
   "place": "pointwise analogue of Descent, Tag 02VN (etale is fpqc local on the base), using Varieties, Tag 0C4Y (\\mathcal{O}_{X,x}\\to\\mathcal{O}_{X_K,x_K} faithfully flat); no Stacks tag states the pointwise version"
@@ -23,9 +23,50 @@
   "def-pc-base-change",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose affine open neighbourhoods Spec B of x in X and Spec A of f(x) in Y with f restricting to Spec(B) \\to Spec(A), and let q be the prime of B corresponding to x. The point x_K determines a prime q_K of B \\otimes_k K over q. Since f_K is etale on an open neighbourhood of x_K, it is locally of finite presentation on that neighbourhood [def-weil-etale-morphism]; the pointwise field-extension descent lemma [lem-sc-lfp-field-extension-pointwise-descent] therefore lets us shrink the chosen affine neighbourhoods so that B is finitely presented over A. The standard affine characterization of etaleness at q_K then gives the child hypothesis Algebra.IsEtaleAt (A \\otimes_k K) q_K.",
+   "uses": [
+    "def-pc-scheme",
+    "def-pc-morphism-conventions",
+    "def-pc-base-change",
+    "def-sbc-locally-finite-presentation",
+    "lem-sc-lfp-field-extension-pointwise-descent",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y setup; affine-local characterization of locally finite presentation and etale morphisms"
+   }
+  },
+  {
+   "text": "By Tag 0C4Y the local map B_q \\to (B \\otimes_k K)_{q_K} is faithfully flat (this is what the cited descent statement rests on; its hypotheses are: B finitely presented over the k-algebra A, q_K a prime of B \\otimes_k K contracting to q, and Algebra.IsEtaleAt (A \\otimes_k K) q_K, all supplied by Step 1). Applying [lem-sc-etale-local-ring-faithfully-flat-descent] to the finitely presented A-algebra B and the prime q_K descends Algebra.IsEtaleAt to q. The standard affine characterization then supplies an etale open neighbourhood of x, so f is etale at x.",
+   "uses": [
+    "lem-sc-etale-local-ring-faithfully-flat-descent",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C4Y and pointwise analogue of Descent Tag 02VN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-base-change",
+  "def-sbc-locally-finite-presentation",
+  "lem-sc-lfp-field-extension-pointwise-descent",
+  "lem-sc-etale-local-ring-faithfully-flat-descent",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C4Y with pointwise affine-local form of Descent Tag 02VN"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +98,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-etale-base-change-geometric",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-ntorsion-etale"
+ "unit": "sk-prop-av-ntorsion-etale",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-etale-faithfully-flat-local",
+  "worker": "stage1",
+  "summary": "Repaired the pointwise descent split by adding a statement-only lemma for descent of local finite presentation along a field extension and by stating the affine child with the standard Algebra.IsEtaleAt condition instead of an ill-posed localized scheme etaleness hypothesis.",
+  "blueprint": "Realizes proof step (a) of lem-sc-mult-n-etale-kernel: reduction from k to an algebraic closure for etaleness.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-efl2620",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-efl2620 (reviewer sub-agent of L); spot-checked: Both 21:06 return points repaired: Step 1 now cites new lem-sc-lfp-field-extension-pointwise-descent (true: cokernel/kernel of a finite-type approximation have support pulled back from Spec B, and X_K->X is open, so vanishing near x_K gives vanishing near x; not a duplicate of 02KY global node or the smooth-over-k node lem-weil-pbc-smooth-at-prime-field-extension-descent; not elementary); child now uses Mathlib Algebra.IsEtaleAt (= FormallyEtale of B_q), true via flat base change of Omega and H1Cotangent and faithful flatness of B_q->(B_K)_{q_K}; Step 2 has every child hypothesis (B fp from Step 1 shrink, q_K over q, IsEtaleAt at q_K). FIX more, RETURN less: (1) C4 Step 2 claimed A_{q cap A}->(B_K)_{q_K} faithfully flat by 0C4Y (false; 0C4Y gives B_q->(B_K)_{q_K}); corrected and listed the child's hypotheses. (2) B child's parenthetical 'after localizing at q_K the map is finitely presented' repeated the ill-posed phrasing of return point 2; reworded to B_K fp, (B_K)_{q_K} flat, localized differentials zero. (3) C1 Step 1 used etale => lfp without citing def-weil-etale-morphism; added. Second reading missed (1) and (2).; 2 file(s) fixed by the reviewer"
+ }
 }
