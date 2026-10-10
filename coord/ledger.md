@@ -1443,3 +1443,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:47 L: accepted lem-weil-pbc-matching-object-proper-faces: 7 steps (0186, injective maps), new Mathlib leaves lem-weil-pbc-simplex-face-factorization, lem-weil-pbc-simplex-face-face-identity
 - 12:47 L: accepted lem-galois-fpqc-descend-etale: 5 steps (02VN), new node lem-galois-fpqc-descend-unramified, tool_uses flat/lfp descent
 - 12:50 L: accepted lem-galois-fpqc-affine-descent-effective: 8 steps (0245), new nodes lem-galois-fpqc-descending-types-morphisms (02W3, unsplit) and lem-galois-flat-algebra-descent (023N, closed by Algebra.DescentDatum.*, verified)
+- 12:51 L: launcher decision (b): the group's review may be written by a separate reviewer agent, never the author; recorded in roles/remote-lead.md (intro, §4) and roles/maintainer.md §7 (content-return rate above ~1 in 5 goes into STATE); packaging tool (a) noted in §4
