@@ -1,8 +1,8 @@
 # Work queue
 
-889 items; claim with `tools/claim.py next <group> [--stage N]`.
+887 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (119)
+## Stage 1: nodes to split (116)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-pc-injective-split-tower-injective` | 3016 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
-| `lem-pc-koszul-affine-detection` | 3019 | none |
 | `lem-pc-global-hom-pullback-adjunction` | 3020 | none |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 3020 | none |
@@ -42,7 +41,6 @@
 | `lem-pc-affine-perfect-hom-colimit` | 5015 | none |
 | `lem-pc-flat-module-descent` | 5015 | none |
 | `lem-pc-fp-module-map-descent-affine` | 5015 | none |
-| `lem-pc-sites-module-sheafification-interface` | 5015 | none |
 | `lem-pc-sites-module-sheafification-tensor` | 5015 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 6007 | none |
@@ -53,7 +51,6 @@
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
-| `lem-pod-adic-tower-reconstruction` | - | none |
 | `lem-pod-etale-stalk-tensor-scalar` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-kummer-base-change-compatibility` | - | none |
@@ -126,7 +123,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (770)
+## Stage 2: nodes to state (771)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -275,6 +272,7 @@
 | `lem-pc-zero-scheme-locally-principal` | 1 | state |
 | `lem-pc-zero-scheme-recd` | 1 | state |
 | `lem-pc-zero-scheme-zero-iff` | 1 | state |
+| `lem-pod-adic-tower-reconstruction` | 1 | state |
 | `lem-pod-equivalence-induces-module-objects` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pqf-finite-spectrum-maximal-primes` | 1 | state |
@@ -901,7 +899,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1591 nodes that wait for a statement dependency, 159 nodes that wait for stage 1.
+Not open yet: 1592 nodes that wait for a statement dependency, 156 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
