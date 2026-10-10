@@ -37,6 +37,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.CategoryTheory.FilteredTwoColimit
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
@@ -51,6 +52,7 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.Basic
 public import WeilConjectures.CategoryTheory.ModuleObjects.Bimod
+public import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
@@ -293,6 +295,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.BaseC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Colimit.CoefficientHom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Colimit.Compatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Colimit.SubfieldSixFunctors
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.LowerShriek
