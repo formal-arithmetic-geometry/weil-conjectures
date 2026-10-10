@@ -11,9 +11,56 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-site-plus-construction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*(a) Injectivity.* The canonical map of a separated presheaf into its plus construction is injective by [lem-weil-pbc-site-plus-injective-separated].",
+   "uses": [
+    "lem-weil-pbc-site-plus-injective-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB (theorem-plus), part (2), proof of item-sheaf (injectivity of F -> F+ for a separated presheaf)"
+   }
+  },
+  {
+   "text": "*(b) Existence of a glued section.* Let \\{U_i\\to U\\} be a covering and let s_i\\in\\mathcal G^+(U_i) have equal restrictions to every U_i\\times_UU_{i'}. By [lem-weil-pbc-site-plus-construction-presheaf] (1), choose for each i a covering \\{U_{ij}\\to U_i\\} and a compatible family t_{ij}\\in\\mathcal G(U_{ij}) representing s_i; [lem-weil-pbc-site-plus-construction-presheaf] (3) identifies the restriction of s_i to U_{ij} with \\theta(t_{ij}). For every i,i',j,j', pull back the assumed equality to U_{ij}\\times_UU_{i'j'}. Naturality of \\theta and the injectivity from step (a), applied to the separated presheaf \\mathcal G on this object, give equality of the two restrictions of t_{ij} and t_{i'j'}. By the transitivity axiom in [def-weil-pbc-sites-and-cohomology], the family \\{U_{ij}\\to U\\} is a covering; the pairwise equalities therefore put (t_{ij}) in H^0(\\{U_{ij}\\to U\\},\\mathcal G) as defined in [def-weil-pbc-site-plus-construction]. Let s be its class in \\mathcal G^+(U). Applying [lem-weil-pbc-site-plus-construction-presheaf] (3) to U_i\\to U and the subcover \\{U_{ij}\\to U_i\\} shows s|_{U_i}=s_i for every i.",
+   "uses": [
+    "lem-weil-pbc-site-plus-construction-presheaf",
+    "lem-weil-pbc-site-plus-injective-separated",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB (theorem-plus), part (2), proof of item-sheaf (local representatives and gluing)"
+   }
+  },
+  {
+   "text": "*(b) Uniqueness.* If s and s' in \\mathcal G^+(U) restrict to the same s_i on the covering \\{U_i\\to U\\}, then [lem-weil-pbc-sheafification-plus-separated] applied to the presheaf \\mathcal G says that \\mathcal G^+ is separated, so s=s'. Thus the glued section is unique.",
+   "uses": [
+    "lem-weil-pbc-sheafification-plus-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB (theorem-plus), part (2), proof of item-sheaf (uniqueness from separatedness of F+)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-plus-injective-separated",
+  "lem-weil-pbc-site-plus-construction-presheaf",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-site-plus-construction",
+  "lem-weil-pbc-sheafification-plus-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Theorem 00WB (theorem-plus), part (2), proof of item-sheaf"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +92,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +112,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-plus-of-separated-is-sheaf",
+  "worker": "F1",
+  "summary": "Split Sites Theorem 00WB(2) into the injectivity clause, local representative construction and compatibility on fibre products, and uniqueness. The injectivity clause is a separate public child node; the parent uses the existing plus-presheaf representation/restriction node and the site transitivity and H^0 definitions."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 3 steps following Sites 00WB (2): injectivity of theta for separated presheaves as a new unsplit node; gluing via local representatives (plus-presheaf (1),(3)), injectivity on the overlaps, transitivity of coverings and H^0; uniqueness by separatedness of G^+ (existing node). Correct."
+ }
 }
