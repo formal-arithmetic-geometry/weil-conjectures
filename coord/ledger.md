@@ -2552,3 +2552,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:43 L: merged deliver/G1/lem-pc-ringed-space-truncation-derived-limit (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 20:44 L: merged deliver/H1/lem-sc-going-down-surjective-dimension (reviewer PASS; first push; new nodes: 0)
 - 20:44 L: merged deliver/G1/lemma-nagata-final-noetherian-base-system (reviewer FIX; first push; new nodes: 0)
+- 20:45 L: merged deliver/H1/lem-pc-sites-modules-coproduct-flat (reviewer PASS; first push; new nodes: 0)

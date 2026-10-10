@@ -21,9 +21,48 @@
  "stmt_deps": [
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the project size convention [def-weil-size-convention], replace the site by its chosen small skeleton. Then [prop-pur-kinjective-resolutions-exist] gives that $\\operatorname{Mod}(\\mathcal O)$ is Grothendieck abelian. By [lem-pc-sheaf-modules-tensor-closed], its sheaf tensor product is symmetric monoidal closed. For each $b$, the exact functor $\\mathcal G\\mapsto\\mathcal G\\otimes_{\\mathcal O}\\mathcal M_b$ in the definition [def-pc-flat-sheaf-modules] is transported by the symmetry isomorphism to $\\mathcal M_b\\otimes_{\\mathcal O}-$, so it preserves finite limits; thus every $\\mathcal M_b$ is flat in the sense of [lem-weil-pbc-flat-coproduct].",
+   "uses": [
+    "def-weil-size-convention",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-flat-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EU, clause (2), together with Definition 03ER, item (3), and Section 03EK"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-coproduct] to the Grothendieck abelian braided closed monoidal category $\\operatorname{Mod}(\\mathcal O)$ and the family $(\\mathcal M_b)_{b\\in B}$. It says that $\\coprod_{b\\in B}\\mathcal M_b$ preserves finite limits after tensoring on the left. The symmetry again identifies this with exactness of $\\mathcal G\\mapsto\\mathcal G\\otimes_{\\mathcal O}(\\coprod_b\\mathcal M_b)$, which is precisely flatness in [def-pc-flat-sheaf-modules].",
+   "uses": [
+    "lem-weil-pbc-flat-coproduct",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EU, clause (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-flat-coproduct"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03EU (Tag 03EU), clause (2), reconstructed from the imported blueprint and existing categorical lemmas"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,12 +87,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-kflat-bounded-flat-replacement",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-sites-modules-coproduct-flat",
+  "worker": "stage1",
+  "summary": "No exact sorry-free Lean declaration states the sheaf-level coproduct theorem. I split the argument into the categorical setup and the application of the existing abstract flat-coproduct theorem; no new child node was needed. The source TeX is absent locally, so the Stacks lemma is recorded as WANTED and the proof is agent-originated from the imported blueprint and checked existing node statements.",
+  "blueprint": "The two steps realize the flat-separator construction used in the bounded-above flat replacement: establish the Grothendieck symmetric monoidal closed structure and transfer the sheaf flatness definition to the abstract flatness notion, then apply coproduct stability.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-coproduct",
+    "why": "It is the established generic coproduct-of-flat-objects theorem; this unit specializes it to sheaves of modules, while no route node restates the generic categorical result."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "It supplies the generic Grothendieck-abelian hypothesis for sheaves of modules, which is a categorical setup fact not proved by this unit's semicontinuity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-coproduct",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-smc2356",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smc2356 (reviewer sub-agent of L); spot-checked: Packet read whole. Statement matches Stacks 03EU(2) (direct sums of flat sheaves of modules), flatness is def-pc-flat-sheaf-modules (exactness of G -> G (x) F), the site definition the F1 citer uses (C4 ok). Step 1: Grothendieck abelian from prop-pur-kinjective-resolutions-exist clause 1 (small site via def-weil-size-convention), symmetric monoidal closed from lem-pc-sheaf-modules-tensor-closed; exact => left exact transfers to the abstract flatness of lem-weil-pbc-flat-coproduct. Step 2: the abstract theorem (slopmaster2 Flat/Basic.lean flat_coproduct, which internally uses tensor commuting with coproducts via closedness and AB4 exactness of coproducts) gives finite-limit preservation; right exactness back comes from the left adjoint in the cited closed-structure node, so exactness follows. No new nodes, no restatement (class b none); tool_uses lem-weil-pbc-flat-coproduct and prop-pur-kinjective-resolutions-exist accepted as generic categorical tools. Second reading's size-convention repair is correct; no fault found that it missed."
+ }
 }
