@@ -1,8 +1,8 @@
 # Work queue
 
-930 items; claim with `tools/claim.py next <group> [--stage N]`.
+928 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (241)
+## Stage 1: nodes to split (239)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -55,13 +55,13 @@
 | `lem-sc-rational-unramified-cotangent-criterion` | 4010 | none |
 | `lem-pc-derived-filtered-free-resolution` | 4012 | none |
 | `lem-pc-derived-module-direct-sums` | 4012 | none |
-| `lem-pc-restrict-derived-direct-image-open` | 4012 | none |
 | `lem-pc-affine-tilde-kflat` | 4013 | none |
 | `lem-pc-base-change-map-cech` | 5009 | none |
 | `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
 | `lem-pc-flat-tensor-complex-cohom` | 5009 | none |
-| `lem-pc-fppf-affine-sheafification-restriction` | 5009 | none |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
+| `lem-pc-dense-subsite-sheafification-compatibility` | 5010 | none |
+| `lem-pc-fppf-affine-site-topos-equivalence` | 5010 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
 | `lem-pc-bounded-above-flat-kflat` | 5011 | none |
 | `lem-pc-proper-support-perfect-direct-image` | 5011 | none |
@@ -74,7 +74,6 @@
 | `thm-sp-double-complex-spectral-sequences` | 6005 | sorry_here |
 | `thm-sp-if-e1` | 6005 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
-| `lem-sp-long-exact-of-triangle` | 6007 | sorry_here |
 | `pqf-def-coherent` | 6007 | none |
 | `pqf-def-cohomology` | 6007 | none |
 | `def-sp-homological-functor` | 6008 | none |
@@ -86,7 +85,6 @@
 | `lem-pc-closed-immersion-coherent-cohomology` | 6010 | rests_on_sorry |
 | `lem-pc-projective-space-cohomology-bound` | 6010 | sorry_here |
 | `lem-pc-serre-vanishing` | 6010 | rests_on_sorry |
-| `pqf-lem-lying-over` | 6010 | none |
 | `thm-pqf-finite-iff-proper-finite-fibres` | 6010 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-affine-morphism-hi` | 6011 | rests_on_sorry |
@@ -942,7 +940,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1360 nodes that wait for a statement dependency, 277 nodes that wait for stage 1.
+Not open yet: 1362 nodes that wait for a statement dependency, 275 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
