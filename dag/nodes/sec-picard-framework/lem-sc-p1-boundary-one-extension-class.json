@@ -22,9 +22,47 @@
   "def-sc-ext-sheaf",
   "lem-sc-ext-locally-free"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take $\\mathcal F=\\mathcal O_X$ in [lem-sc-ext-locally-free], so $\\mathcal F^\\vee\\otimes\\mathcal G=\\mathcal G$. By [def-sc-ext-sheaf] and [pqf-def-cohomology], $\\operatorname{Ext}^i_X(\\mathcal O_X,-)$ and $H^i(X,-)$ are the right derived functors of the left exact functors $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal O_X,-)$ and $\\Gamma(X,-)$, which are identified by $s\\mapsto s(1)$; both are universal $\\delta$-functors by [lem-weil-pbc-right-derived-universal-delta-functor], so the canonical identification $\\operatorname{Ext}^i_X(\\mathcal O_X,-)=H^i(X,-)$, the unique morphism of $\\delta$-functors extending this degree-zero identification, commutes with connecting maps. Hence the cohomology connecting map $H^0(X,\\mathcal O_X)\\to H^1(X,\\mathcal A)$ of $0\\to\\mathcal A\\to\\mathcal E\\to\\mathcal O_X\\to0$ is the Ext connecting map $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal O_X,\\mathcal O_X)\\to\\operatorname{Ext}^1_X(\\mathcal O_X,\\mathcal A)$ of [def-sc-ext-sheaf], and $1\\in H^0(X,\\mathcal O_X)$ corresponds to $\\operatorname{id}_{\\mathcal O_X}$.",
+   "uses": [
+    "lem-sc-ext-locally-free",
+    "def-sc-ext-sheaf",
+    "pqf-def-cohomology",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma Tag 05TE (derived functors form a universal delta-functor); Cohomology Lemma Tag 0B3A (Ext^1(O_X,F) and H^1(X,F))"
+   }
+  },
+  {
+   "text": "By [lem-sc-p1-ext-connecting-yoneda] with $\\mathcal F=\\mathcal O_X$ and $s=\\operatorname{id}_{\\mathcal O_X}$, the Ext connecting map sends $\\operatorname{id}_{\\mathcal O_X}$ to $e\\circ\\operatorname{id}_{\\mathcal O_X}$, which is $\\operatorname{Ext}^1_X(\\operatorname{id}_{\\mathcal O_X},\\mathcal A)(e)=e$ by [lem-sc-p1-ext-yoneda-functoriality]. With Step 1, the cohomology connecting map sends $1$ to $e$.",
+   "uses": [
+    "lem-sc-p1-ext-connecting-yoneda",
+    "lem-sc-p1-ext-yoneda-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology Lemma Tag 0B3A (the extension is sent to the image of 1 in H^1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ext-locally-free",
+  "def-sc-ext-sheaf",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-sc-p1-ext-connecting-yoneda",
+  "lem-sc-p1-ext-yoneda-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Lemma Tag 0B3A, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +94,33 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-boundary-extension-composition",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-boundary-one-extension-class",
+  "worker": "stage1",
+  "summary": "Reviewer repair: the cohomology connecting map is the Ext connecting map of the covariant long exact sequence (both universal delta-functors of Gamma = Hom(O_X,-)), and that connecting map sends id to e by the new node lem-sc-p1-ext-connecting-yoneda.",
+  "blueprint": "proof, Step 2: compatibility of the cohomology connecting map with composition by the boundary class",
+  "tool_uses": [
+   "lem-weil-pbc-right-derived-universal-delta-functor"
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-boe1758",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-boe1758 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: C1/D at Step 2 - the delivered proof built the Stacks 0B3A inverse (bijectivity) and asserted without any cited statement that the pulled-back extension's Yoneda class corresponds to delta(1) under the lem-sc-ext-locally-free identification, which is the item itself; lem-sc-p1-ext-yoneda-functoriality says nothing about connecting maps. Repair: proof rewritten in two steps - (1) Ext^i(O_X,-)=H^i(X,-) as universal delta-functors of Hom(O_X,-)=Gamma (lem-sc-ext-locally-free, def-sc-ext-sheaf, pqf-def-cohomology, tool use lem-weil-pbc-right-derived-universal-delta-functor, generic derived-functor tool as in lem-sc-p1-boundary-connecting-naturality), so connecting maps agree and 1 corresponds to id; (2) new statement-only node lem-sc-p1-ext-connecting-yoneda (resolution-Ext connecting map Hom(F,C)->Ext^1(F,A) is s |-> delta o s; Mathlib has only the derived-category form preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, ExactSequences.lean:49, with no comparison to def-sc-ext-sheaf's resolution delta, so no leaf) gives id |-> e o id = e by lem-sc-p1-ext-yoneda-functoriality. proof_deps updated. The second reading missed this fault; its claimed created.item correction was not made (the value is right anyway).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
