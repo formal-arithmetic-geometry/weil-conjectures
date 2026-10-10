@@ -1,8 +1,8 @@
 # Work queue
 
-853 items; claim with `tools/claim.py next <group> [--stage N]`.
+852 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (375)
+## Stage 1: nodes to split (374)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -57,7 +57,6 @@
 | `def-galois-fibre-functor` | 3005 | none |
 | `lem-weil-pbc-hypercover-refinement` | 3005 | none |
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
-| `thm-weil-pbc-hypercover-cohomology` | 3005 | none |
 | `def-weil-pbc-finite-split-hypercover` | 3006 | none |
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
@@ -69,7 +68,6 @@
 | `lem-galois-axioms` | 3007 | none |
 | `lem-galois-constant-sheaf-sets-representable` | 3007 | none |
 | `lem-galois-descent` | 3007 | none |
-| `lem-galois-object-exists` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-affine-curve-h2-vanishing` | 3007 | rests_on_sorry |
 | `lem-sc-ample-complement-affine` | 3007 | sorry_here |
@@ -88,6 +86,7 @@
 | `def-sc-function-field` | 3008 | none |
 | `def-sc-picard-functor` | 3008 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
+| `lem-galois-coproduct-copies-morphisms-clopen` | 3008 | none |
 | `lem-galois-glue` | 3008 | none |
 | `lem-pc-curves-are-sc` | 3008 | none |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
@@ -865,7 +864,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 393 nodes that wait for stage 1, 884 nodes that wait for a statement dependency.
+Not open yet: 392 nodes that wait for stage 1, 886 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
