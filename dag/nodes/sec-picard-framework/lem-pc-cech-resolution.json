@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-cech-resolution",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The Cech resolution and derived direct image",
@@ -21,34 +21,95 @@
   {
    "text": "Fix a point of $X$ and a covering open $U_i$ containing it.\nRestrict the augmented complex to $U_i$. This restricted cover\ncontains the entire space $U_i$ as one member; insertion of that\nindex gives a contracting homotopy of the augmented Cech complex.\nThus the complex is locally exact, and hence exact as a complex\nof sheaves. This argument does not identify a boundary stalk of\nan open direct image with zero.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+    "place": "Proof, first paragraph"
+   }
   },
   {
-   "text": "The intersections $U_J$ are affine: for two affine opens this follows\nby pulling the closed diagonal of $X/S$ back to their affine\nproduct over $S$, and the general case follows by induction.\nEach $j_J$ is an affine morphism, since its inverse image in every\naffine open of $X$ is again such an affine intersection.\nBy [lem-pc-affine-morphism-hi],\n$R^qj_{J,*}(\\mathcal F|_{U_J})=0$ for $q>0$.\nFor an affine open $V\\subseteq S$, the inverse image\n$U_J\\times_S V$ is affine. The Leray spectral sequence for $j_J$\nrestricted over $V$, together with the preceding vanishing and\n[lem-pc-affine-vanishing], gives\n\n$$\nH^q(f^{-1}V,j_{J,*}(\\mathcal F|_{U_J}))\n=H^q(U_J\\times_S V,\\mathcal F)=0\\quad(q>0).\n$$",
+   "text": "The intersections $U_J$ are affine: $S$ is affine and $f$ is separated, so by [lem-weil-pbc-separated-affine-open-intersection], applied repeatedly, every finite intersection of the affine opens $U_i$ is affine. Each $j_J$ is an affine morphism, since for an affine open $W\\subseteq X$ its inverse image $U_J\\cap W$ is affine by the same node. The composite $f\\circ j_J:U_J\\to S$ is a morphism of affine schemes, hence affine: the inverse image of an affine open $V\\subseteq S$ is $U_J\\times_S V$, a fibre product of affine schemes over the affine $S$. Since $\\mathcal F|_{U_J}$ is quasi-coherent, [lem-pc-affine-morphism-hi] applied to $j_J$ and to $f\\circ j_J$ gives $R^qj_{J,*}(\\mathcal F|_{U_J})=0$ and $R^q(f\\circ j_J)_*(\\mathcal F|_{U_J})=0$ for $q>0$.",
    "uses": [
-    "lem-pc-affine-morphism-hi",
-    "lem-pc-affine-vanishing"
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-pc-affine-morphism-hi"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+    "place": "Proof, second paragraph"
+   }
   },
   {
-   "text": "Affine opens form a basis on $S$, so all higher direct images under\n$f$ of these Cech terms vanish. A finite resolution by acyclic\nobjects computes the right derived functor (apply $f_*$ to an\ninjective double resolution and use its two spectral sequences).\nThis proves the assertion.",
-   "uses": [],
-   "elementary": null
+   "text": "Since $j_J$ is an open immersion, $j_J^*$ is restriction to $U_J$, an exact left adjoint of $j_{J,*}$; hence $j_{J,*}$ sends injective $\\mathcal O_{U_J}$-modules to injective $\\mathcal O_X$-modules, which are $f_*$-acyclic. The categories of $\\mathcal O_{U_J}$-, $\\mathcal O_X$- and $\\mathcal O_S$-modules are Grothendieck abelian by [prop-pur-kinjective-resolutions-exist], and $j_{J,*}$, $f_*$ are left exact additive, so $(j_{J,*},f_*)$ is a composable pair [def-sp-composite-acyclicity] with $j_{J,*}$ sending injectives to $f_*$-acyclics, and $f_*\\circ j_{J,*}=(f\\circ j_J)_*$. [thm-sp-grothendieck] gives a first-quadrant spectral sequence $E_2^{p,q}=R^pf_*\\bigl(R^qj_{J,*}(\\mathcal F|_{U_J})\\bigr)\\Rightarrow R^{p+q}(f\\circ j_J)_*(\\mathcal F|_{U_J})$. By Step 2, $E_2^{p,q}=0$ for $q>0$, so every differential into or out of the row $q=0$ vanishes, the finite abutment filtration has a single nonzero graded piece, and $R^pf_*\\bigl(j_{J,*}(\\mathcal F|_{U_J})\\bigr)\\cong R^p(f\\circ j_J)_*(\\mathcal F|_{U_J})=0$ for $p>0$ by Step 2. As $R^pf_*$ is additive, each finite product $\\prod_{|J|=p+1}j_{J,*}(\\mathcal F|_{U_J})$, i.e. each non-augmented Cech term, is $f_*$-acyclic.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sp-composite-acyclicity",
+    "thm-sp-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+    "place": "Proof, third paragraph"
+   }
+  },
+  {
+   "text": "By Step 1 the augmented alternating Cech complex is an exact augmented complex $0\\to\\mathcal F\\to C^0\\to\\cdots\\to C^{t-1}\\to0$ (alternating terms vanish in degrees $\\geq t$), and by Step 3 every $C^p$ is $f_*$-acyclic. The category of $\\mathcal O_X$-modules has enough injectives [prop-pur-kinjective-resolutions-exist] and $f_*$ is left exact additive, so [lem-pc-derived-acyclic-resolution] identifies the cohomology of $f_*C^\\bullet$ with $R^qf_*\\mathcal F$ in every degree. This proves the assertion.",
+   "uses": [
+    "lem-pc-derived-acyclic-resolution",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
+    "place": "Proof, third paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-separated-affine-open-intersection",
   "lem-pc-affine-morphism-hi",
-  "lem-pc-affine-vanishing"
+  "prop-pur-kinjective-resolutions-exist",
+  "def-sp-composite-acyclicity",
+  "thm-sp-grothendieck",
+  "lem-pc-derived-acyclic-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-cech-resolution.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact augmented Cech complex of sheaves on a finite affine cover and f_* acyclic terms computes Rf_*",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; no full match",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, Cech, DerivedCategory, rightDerived",
+   "results": "0 hits; unknown identifier CategoryTheory",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplex|Cech.*exact|rightDerived|higherDirectImage in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite Cech resolution by f pushforward acyclic sheaves computes derived direct image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -79,5 +140,42 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-cech-resolution",
+  "worker": "stage1",
+  "summary": "Checked the Cech exactness and acyclicity argument against the blueprint. The local contracting homotopy is elementary; affine intersections and affine-open morphism claims use the existing separated-affine-intersection node, and affine higher-direct-image and affine cohomology vanishing nodes supply the acyclicity. Added one statement-only generic acyclic-resolution lemma for the final derived-functor computation.",
+  "blueprint": "Steps realize the three paragraphs of the blueprint proof: local contracting homotopy; affine intersections and vanishing; and computation of the derived direct image from the finite acyclic resolution.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separated-affine-open-intersection",
+    "why": "The route needs the geometric fact that affine opens of a separated morphism over an affine base have affine intersections; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-pc-affine-morphism-hi",
+    "why": "The route needs vanishing of higher direct images for affine morphisms; no node in this unit supplies that theorem."
+   },
+   {
+    "node": "lem-pc-affine-vanishing",
+    "why": "The route needs quasi-coherent cohomology vanishing on affine schemes; no node in this unit supplies that theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-pc-affine-morphism-hi",
+  "thm-sp-grothendieck",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-pc-affine-morphism-hi"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cre1905",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cre1905 (reviewer sub-agent of L); spot-checked: Step 1 local insertion homotopy elementary (Stacks 01X9); no cycle: affine-morphism-hi -> affine-vanishing -> affine-cech-complex, none reaches the item or lem-pc-cech-computes; new node lem-pc-derived-acyclic-resolution is a real generic lemma (05TA), not a duplicate of lem-sp-derived-functor-single-identification or lem-weil-pbc-leray-acyclicity-quasi-iso. FIX more, RETURN less: (1) C1 step 2 used an uncited Leray spectral sequence for j_J; (2) C1 step 3 used the uncited fact that R^q f_* is the sheafification of V -> H^q(f^{-1}V,-) ('affine opens form a basis'). Repair: step 2 now gets U_J affine and j_J, f.j_J affine from lem-weil-pbc-separated-affine-open-intersection and both vanishings from lem-pc-affine-morphism-hi; new step 3 applies thm-sp-grothendieck to (j_J*, f_*) (j_J* preserves injectives: exact left adjoint restriction; Grothendieck abelian by prop-pur-kinjective-resolutions-exist) and collapses the single-row spectral sequence to R^p f_* j_J* = R^p (f j_J)_* = 0; step 4 cites lem-pc-derived-acyclic-resolution. lem-pc-affine-vanishing no longer cited (dropped tool use, moved to uses_not_cited). Second reading by H1 missed both C1 faults.; 1 file(s) fixed by the reviewer"
+ }
 }
