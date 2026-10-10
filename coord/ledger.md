@@ -2625,3 +2625,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:10 L: returned deliver/G1/lem-sc-intersection-effective-cartier (reviewer RETURN: Reviewer R-iec2512 (packet review), head 8474dd2d9. Points 1 (E/C4: d>=1, D nonempty, dim D=d-1 now assumed) and 2 (C1: )
 - 21:11 L: merged deliver/K1/lem-sc-hilbert-denominator-ideal-nowhere-dense (reviewer FIX; first push; new nodes: 0)
 - 21:11 L: merged deliver/J1/lem-sc-hilbert-embedded-points-affine-localization (reviewer FIX; first push; new nodes: 0)
+- 21:11 L: merged deliver/C1/lem-pc-derived-pullback-tor-independent-flat-complex (reviewer FIX; first push; new nodes: 0)

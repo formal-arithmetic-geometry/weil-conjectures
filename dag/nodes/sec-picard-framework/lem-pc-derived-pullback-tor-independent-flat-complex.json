@@ -21,9 +21,53 @@
   "def-pc-base-change",
   "def-pc-derived-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix x' and write R=\\mathcal O_{S,s}, A=\\mathcal O_{X,x}, B=\\mathcal O_{T,t}, and C=\\mathcal O_{X_T,x'}. Each stalk G_x^n is a flat R-module: this is what the hypothesis that G^n is flat over S says at the point x (Stacks, Morphisms, Definition Tag 01U2); note it is flatness over S, not over X, that is used. Thus G_x^\\bullet is a bounded-above complex of flat R-modules, and [lem-pc-module-bounded-flat-kflat] makes it K-flat over R.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A1D, proof of the stalkwise condition (using Tag 0DJ8 condition (1))"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-derived-change-of-rings] to the ring map R\\to B on the one-point site (sheaves of modules are modules). Since G_x^\\bullet is K-flat over R (Step 1), the identity is a K-flat resolution, so G_x^\\bullet\\otimes^L_R B is computed by the ordinary complex G_x^\\bullet\\otimes_R B; hence H^i(G_x^\\bullet\\otimes_R^L B)=H^i(G_x^\\bullet\\otimes_R B) canonically.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A1D, proof of the stalkwise condition (using Tag 0DJ8 condition (1))"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-module-stalk-pullback] applied to g' and each term G^n, naturally in G^n and hence compatibly with the differentials, ((g')^*G^\\bullet)_{x'}\\cong G_x^\\bullet\\otimes_A C. The canonical map A\\otimes_R B\\to C is a localization (on affine opens Spec A_0, Spec B_0 over Spec R_0 the local ring C is a localization of A_0\\otimes_{R_0}B_0, of which A\\otimes_R B is itself a localization, by the affine description of fibre products, Stacks, Schemes, Section on fibre products), so C is flat over A\\otimes_R B by exactness of localization [lem-weil-pbc-localization-module-exact] and tensoring G_x^\\bullet\\otimes_R B with C commutes with taking H^i. Associativity of ordinary tensor products identifies (G_x^\\bullet\\otimes_R B)\\otimes_{A\\otimes_R B}C with G_x^\\bullet\\otimes_A C. Under these identifications and Step 2 the displayed canonical map is the identity, so it is an isomorphism for every i.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A1D, proof of the stalkwise condition (using Tag 0DJ8 condition (1))"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A1D (lemma-base-change-tensor), proof paragraph checking the condition on stalks; Tag 0DJ8 condition (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +99,32 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-rf-base-change-complex",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-pullback-tor-independent-flat-complex",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Tag 0A1D and its stalkwise condition Tag 0DJ8. The proof is split into K-flatness of the localized stalk complex, computation of derived pullback by the ordinary tensor complex using the existing flat-complex pullback lemma, and an elementary exact-localization and tensor-associativity identification with the pulled-back stalk.",
+  "blueprint": "Realizes the ancestor proof clause 'tor-independence of L(g')^*G -> (g')^*G checked on stalks (Tags 0A1D, 0DJ8)'.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dpt2512",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dpt2512 (reviewer sub-agent of L); spot-checked: Read packet; checked cited statements and lem-pc-module-bounded-flat-kflat, lem-pur-derived-change-of-rings, lem-weil-pbc-module-stalk-pullback, lem-weil-pbc-localization-module-exact. Hypothesis used is flatness over S (stalks flat over O_{S,s}), correct. FIX more, RETURN less: (1) C4 Step 1 applied the sheaf lemma on 'one-point ringed space Spec(R)' (Spec R is not a point) -> cite lem-pc-module-bounded-flat-kflat directly; (2) C4 Step 2 applied scheme-level lem-pc-flat-complex-derived-pullback to a ring map R->B -> cite lem-pur-derived-change-of-rings on the one-point site (K-flat representative computes the module derived tensor); (3) C1 Step 3 asserted ((g')^*G)_{x'}=G_x tensor_A C 'by definition' -> cite lem-weil-pbc-module-stalk-pullback, plus lem-weil-pbc-localization-module-exact; fibre-product local-ring localization kept elementary with its affine reason. proof_deps updated. Tool uses lem-pur-derived-change-of-rings (generic derived change of rings, already used by def-pc-derived-pullback) and lem-weil-pbc-module-stalk-pullback (generic stalk of pullback) accepted as generic tools (C7/C8). Stalk lemmas lem-pc-stalk-tensor-complex/flat-sheaf-stalk-flat/kflat-stalk-criterion not needed on this module-level route. Second reading by C1 missed faults (2) and (3).; 1 file(s) fixed by the reviewer"
+ }
 }
