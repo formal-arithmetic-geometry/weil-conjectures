@@ -23,9 +23,53 @@
   "def-sp-left-exact-additive",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because v is exact, it is in particular left exact and additive, so the right derived functors in the statement are defined by choosing an injective resolution M -> I^\\bullet as in [def-sp-left-exact-additive] and [def-sp-injective-resolutions]. The resolution has H^q(I^\\bullet)=0 for every q>0.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015F (derived-lemma-right-derived-exact-functor), proof: choose an injective resolution and use exactness of F"
+   }
+  },
+  {
+   "text": "Apply the natural cohomology isomorphism for an exact functor [lem-weil-pbc-exact-functor-complex-cohomology] to I^\\bullet. For each q>0 it gives H^q(v(I^\\bullet)) \\cong v(H^q(I^\\bullet))=v(0)=0, so H^q(v(I^\\bullet)) is zero.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015F (derived-lemma-right-derived-exact-functor), proof: F transforms quasi-isomorphisms into quasi-isomorphisms because it preserves cohomology"
+   }
+  },
+  {
+   "text": "By the definition of the right derived functors in [def-sp-left-exact-additive], R^qv(M)=H^q(v(I^\\bullet)) for the chosen injective resolution. The vanishing from Step 2 therefore gives R^qv(M)=0 for every integer q>0.",
+   "uses": [
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015F (derived-lemma-right-derived-exact-functor), conclusion (5): R^qF=0 for q>0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015F (derived-lemma-right-derived-exact-functor), proof and conclusion (5)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +94,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-cohomology-closed-immersion-pushforward",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-exact-functor-higher-derived-vanishing",
+  "worker": "stage1",
+  "summary": "Split Stacks Derived Categories Lemma 015F(5) into choosing an injective resolution, transporting its positive-degree cohomology vanishing through the exact functor using the existing exact-functor/cohomology leaf, and identifying the result with the defining right derived functors. No new nodes were needed.",
+  "blueprint": "Realizes the proof of lem-sc-pic-proper-ntorsion at the sentence passing from exactness of i_* to vanishing of its higher derived functors.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-edv",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-edv (reviewer sub-agent of L); spot-checked: Source: Stacks 015F (label lemma-right-derived-exact-functor, derived.tex l.5884), part (5) R^iF=0 for i!=0 for an exact functor of abelian categories; the item's statement agrees (its extra enough-injectives hypothesis is only what def-sp-left-exact-additive needs to define R^q; statement unchanged by the split). Stacks proof: F preserves quasi-isomorphisms/cohomology, details omitted; the split fills them. Step 1: exact => preserves kernels and additive, so left exact additive in the sense of def-sp-left-exact-additive, R^qv(M)=H^q(v(I)) for an injective resolution; def-sp-injective-resolutions states the resolution's cohomology is concentrated in degree 0 (so H^q(I)=0, q>0). Step 2: lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf, exact F, H^r(F(K)) iso F(H^r(K))) gives H^q(v(I)) iso v(0)=0 (additive). Step 3: definition of R^q. Off-unit cited nodes are definitions (def-sp-*) or a Mathlib leaf, so no tool_uses needed. Mathlib: grep of pinned Mathlib Abelian/RightDerived.lean and whole tree for isZero_rightDerived / rightDerived with Exact/PreservesFiniteColimits finds only Functor.isZero_rightDerived_obj_injective_succ (injective objects), no exact-functor vanishing, so no leaf; the node stays split. Small cases: q=1, M=0, M injective (resolution M->M, v(M) in degree 0) consistent. Minor: step 1 lists lem-weil-pbc-exact-functor-complex-cohomology in uses though step 2 is where it is applied; harmless. Start Sat Oct 10 03:57:20 PM UTC 2026, end Sat Oct 10 03:57:53 PM UTC 2026."
+ }
 }
