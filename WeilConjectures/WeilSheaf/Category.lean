@@ -90,6 +90,9 @@ both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperStar`,
   the embedding of Weil sheaves as Weil complexes in degree zero, which is fully faithful, and
   the cohomology sheaves, with `𝓗⁰ ∘ toComplex ≅ 𝟭`
   (`AlgebraicGeometry.WeilSheaf.toComplexCompHomologySheafIso`).
+- `AlgebraicGeometry.WeilComplex.singleComplex`: a Weil sheaf placed in degree `a`, with
+  `𝓗ᵃ` the sheaf itself (`AlgebraicGeometry.WeilComplex.homologySheafSingleComplexIso`) and
+  `𝓗ᵇ = 0` for `b ≠ a`.
 - `AlgebraicGeometry.WeilComplex.forget`: the forgetful functor to the derived category of
   `ℓ`-adic pro-étale sheaves.
 - `AlgebraicGeometry.WeilSheaf.frobeniusPowIso`: the iterated Weil structure
@@ -379,6 +382,55 @@ noncomputable def _root_.AlgebraicGeometry.WeilSheaf.toComplexCompHomologySheafI
       ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app F.obj))
     fun f ↦ ObjectProperty.hom_ext _
       ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).hom.naturality f.hom)
+
+/-- A Weil sheaf placed in degree `a`, as a Weil complex. -/
+noncomputable def singleComplex (a : ℤ) (G : WeilSheaf k₀ l X) : WeilComplex k₀ l X :=
+  ⟨(_root_.DerivedCategory.singleFunctor _ a).obj G.obj, by
+    refine ⟨⟨⟨a, inferInstanceAs (_root_.DerivedCategory.IsGE
+      ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)⟩,
+      ⟨a, inferInstanceAs (_root_.DerivedCategory.IsLE
+        ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)⟩⟩, fun m ↦ ?_⟩
+    obtain hm | rfl | hm := lt_trichotomy m a
+    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
+        ((_root_.DerivedCategory.isGE_iff
+          ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a).1 inferInstance m hm)
+    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_iso
+        ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ m).app G.obj).symm
+          G.property
+    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
+        ((_root_.DerivedCategory.isLE_iff
+          ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a).1 inferInstance m hm)⟩
+
+/-- A Weil sheaf viewed as a complex is the Weil sheaf placed in degree `0`. -/
+theorem _root_.AlgebraicGeometry.WeilSheaf.toComplex_obj (G : WeilSheaf k₀ l X) :
+    WeilSheaf.toComplex.obj G = singleComplex 0 G :=
+  rfl
+
+/-- A cohomology sheaf of a Weil complex vanishes if and only if the underlying cohomology
+object does. -/
+theorem isZero_homologySheaf_obj_iff (a : ℤ) (M : WeilComplex k₀ l X) :
+    IsZero ((homologySheaf a).obj M) ↔
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ a).obj M.obj) :=
+  ⟨fun h ↦ (ObjectProperty.ι _).map_isZero h,
+    fun h ↦ IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _ h⟩
+
+/-- A Weil sheaf placed in degree `a` has vanishing cohomology sheaves in degrees `b ≠ a`. -/
+theorem isZero_homologySheaf_singleComplex {a b : ℤ} (h : b ≠ a) (G : WeilSheaf k₀ l X) :
+    IsZero ((homologySheaf b).obj (singleComplex a G)) := by
+  rw [isZero_homologySheaf_obj_iff]
+  have : (singleComplex a G).obj.IsGE a := inferInstanceAs (_root_.DerivedCategory.IsGE
+    ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)
+  have : (singleComplex a G).obj.IsLE a := inferInstanceAs (_root_.DerivedCategory.IsLE
+    ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)
+  obtain h | h := h.lt_or_gt
+  · exact (_root_.DerivedCategory.isGE_iff _ a).1 inferInstance b h
+  · exact (_root_.DerivedCategory.isLE_iff _ a).1 inferInstance b h
+
+/-- The `a`-th cohomology sheaf of a Weil sheaf placed in degree `a` is the sheaf itself. -/
+noncomputable def homologySheafSingleComplexIso (a : ℤ) (G : WeilSheaf k₀ l X) :
+    (homologySheaf a).obj (singleComplex a G) ≅ G :=
+  ObjectProperty.isoMk _ ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ a).app
+    G.obj)
 
 /-- The forgetful functor `For` from Weil complexes to the derived category of `ℓ`-adic
 pro-étale sheaves on `X̄`, forgetting the Weil structure; the Weil structure of `K` induces the
