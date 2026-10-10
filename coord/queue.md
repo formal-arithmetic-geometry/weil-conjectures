@@ -17,10 +17,11 @@
 | `lem-sc-affine-finite-projective-prime-membership` | 2013 | none |
 | `lem-sc-affine-standard-cover-finite-projective` | 2013 | none |
 | `lem-sc-ample-proj-open` | 2013 | none |
-| `lem-sc-boundary-cech-local-lifts` | 2013 | none |
 | `lem-sc-closed-pushforward-boundary-naturality` | 2013 | none |
 | `lem-sc-jacobson-denominator-function-field` | 2013 | none |
 | `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
+| `lem-sc-boundary-cech-compatibility` | 2014 | none |
+| `lem-sc-cech-h1-injective` | 2014 | none |
 | `lem-sc-tensor-generating-sections` | 2014 | none |
 | `lem-sc-topological-pushforward-injective` | 2014 | none |
 | `lem-sc-zariski-ext-torsor` | 2014 | none |
@@ -75,7 +76,6 @@
 | `lem-sc-p1-twist-multiplication` | 3015 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
-| `prop-pc-xk-integral` | 4007 | rests_on_sorry |
 | `lem-pc-zero-scheme-properties` | 4008 | rests_on_sorry |
 | `lem-sc-isogeny-surjective` | 4008 | rests_on_sorry |
 | `lem-sc-mult-n-etale-kernel` | 4008 | rests_on_sorry |
@@ -927,7 +927,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 347 nodes that wait for stage 1, 1193 nodes that wait for a statement dependency.
+Not open yet: 347 nodes that wait for stage 1, 1195 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
