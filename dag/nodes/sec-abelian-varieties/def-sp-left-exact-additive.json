@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sp-left-exact-additive",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Additive left exact functors and right derived functors",
@@ -19,9 +19,22 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn '^class Additive\\|^class PreservesFiniteLimits\\|def rightDerived \\|additive_of_preserves_binary_products\\|preservesFiniteLimits_of_preservesKernels' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory; sed -n 105,120p .../Abelian/RightDerived.lean",
+   "results": "Functor.Additive (Preadditive/AdditiveFunctor.lean:42), additive_of_preserves_binary_products (:234), PreservesFiniteLimits (Limits/Preserves/Finite.lean:44), preservesFiniteLimits_of_preservesKernels (Preadditive/LeftExact.lean:117), Functor.rightDerived (Abelian/RightDerived.lean:110), InjectiveResolution.isoRightDerivedObj (:114)",
+   "date": "2026-10-10",
+   "verdict": "match (reviewer R-dle1902): one Mathlib declaration per clause of the definition"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.rightDerived",
+  "file": "Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+  "line": 110,
+  "how": "one declaration per clause: additive is `CategoryTheory.Functor.Additive` (Mathlib/CategoryTheory/Preadditive/AdditiveFunctor.lean:42, map_add), equivalent to preserving finite (bi)products by `Functor.additive_of_preserves_binary_products` (same file, line 234); left exact is `Functor.PreservesFiniteLimits` (Mathlib/CategoryTheory/Limits/Preserves/Finite.lean:44), which for a functor between abelian categories is preservation of kernels by `Functor.preservesFiniteLimits_of_preservesKernels` (Mathlib/CategoryTheory/Preadditive/LeftExact.lean:117; PreservesZeroMorphisms is the inferred instance from Additive); R^n v is `F.rightDerived n` (RightDerived.lean:110, defined via the chosen injective resolutions, needing `HasInjectiveResolutions C`, i.e. enough injectives), and its value H^n(v(I^\\bullet)) on an arbitrary injective resolution is `InjectiveResolution.isoRightDerivedObj` (line 114), which is the content deferred to lem-sp-derived-well-defined"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,5 +56,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sp-left-exact-additive",
+  "worker": "stage1",
+  "summary": "Checked the imported definition against its blueprint record (order 501) and the surrounding DAG. It is a definition, so its proof is empty: additivity and left exactness are introduced as terminology, and the displayed right-derived-functor construction is a definition whose independence and degree-zero identification are explicitly deferred to lem-sp-derived-well-defined. The statement dependencies def-sp-abelian and def-sp-injective-resolutions are exactly the notions used in the statement. No Lean declaration tagged for this item exists in slopmaster2, and no subordinate statement is required for this split.",
+  "blueprint": "The blueprint node is a definition without proof; the split realizes its terminology clauses and the injective-resolution formula directly, with well-definedness deferred by name to lem-sp-derived-well-defined."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dle1902",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dle1902 (reviewer sub-agent of L); spot-checked: Statement agrees with blueprint order 501; stmt_deps def-sp-abelian, def-sp-injective-resolutions correct; no cycle (neither dep reaches the item; lem-sp-derived-well-defined depends on it, not conversely). FIX more, RETURN less: B8/(c) the delivery kept a split with no proof though Mathlib has one declaration per clause, sed-verified: Functor.Additive (AdditiveFunctor.lean:42, with additive_of_preserves_binary_products :234), PreservesFiniteLimits (Preserves/Finite.lean:44, with preservesFiniteLimits_of_preservesKernels LeftExact.lean:117), Functor.rightDerived (RightDerived.lean:110; isoRightDerivedObj :114 is the deferred well-definedness); made status mathlib with mathlib_match and the grep recorded in mathlib_searches. The Second reading missed this.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -2318,3 +2318,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:01 L: returned deliver/K1/lem-pc-compact-hom-hocolim (reviewer RETURN: Reviewer R-chh1901. 1 (E, hypothesis/typing): the statement assumes only countable coproducts but cites def-pc-compact-o)
 - 19:01 L: merged deliver/K1/lem-pc-projective-noetherian-rf-perfect (reviewer PASS; first push; new nodes: 1)
 - 19:02 L: returned deliver/K1/lem-pc-base-change-map-cech (reviewer RETURN: Reviewer R-bcm1901, head d32b73d17. 1. D2/C1 (Step 4): the item's only substantive claim is not split: Step 4 asserts th)
+- 19:02 L: merged deliver/G1/def-sp-left-exact-additive (reviewer FIX; first push; new nodes: 0)
