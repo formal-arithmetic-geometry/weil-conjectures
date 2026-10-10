@@ -21,9 +21,51 @@
   "def-pc-morphism-conventions",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply bounded finite-presentation descent to the finite range of terms of G^\\bullet and to all differentials and relations between them. After increasing the stage, obtain a bounded complex H_j^\\bullet of finitely presented \\mathcal{O}_{X_j}-modules with base-change isomorphism H_j^\\bullet\\otimes_{S_j}S\\cong G^\\bullet.",
+   "uses": [
+    "lem-pc-fp-complex-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.10.2, Tag 01ZR; Lemma 32.10.4, Tag 05LY"
+   }
+  },
+  {
+   "text": "For each degree r in the finite bounded range, the term H_j^r is a finitely presented quasi-coherent \\mathcal{O}_{X_j}-module whose pullback to X is isomorphic (step 1) to G^r, hence flat over S; eventual flatness descent applied to H_j^r (with j as the starting stage) gives a stage j_r\\ge j such that the pullback of H_j^r to X_{j'} is flat over S_{j'} for every j'\\ge j_r. A zero term is already flat. There are finitely many degrees, so directedness gives one stage j' above all j_r, at which every pulled-back term is flat over S_{j'}. Base-changing the whole complex H_j^\\bullet from j to j' preserves its differentials, boundedness, finite presentation, and the chosen identification with G^\\bullet.",
+   "uses": [
+    "lem-pc-flat-module-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.10.4, Tag 05LY; filtered-stage enlargement"
+   }
+  },
+  {
+   "text": "Rename the common later stage j' as j and the base-changed complex as G_j^\\bullet. It is bounded, termwise finitely presented and flat over S_j, and its base change to X is isomorphic to G^\\bullet, as required.",
+   "uses": [
+    "lem-pc-fp-complex-descent",
+    "lem-pc-flat-module-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Lemma 32.10.1, Tag 01ZM, filtered-stage enlargement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-complex-descent",
+  "lem-pc-flat-module-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemmas 32.10.2 and 32.10.4, Tags 01ZR and 05LY"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +97,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-finite-flat-proper-support-descent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-flat-bounded-complex-descent",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states this geometric descent assertion. I split the proof into descent of the finite complex data and eventual flatness of its finitely many terms, then used directedness to choose one common later stage while preserving differentials and the base-change identification.",
+  "blueprint": "Realizes the ancestor Noetherian-approximation proof sentence on descent of the bounded finitely presented flat complex (Tags 01ZR and 05LY).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fbd2519",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fbd2519 (reviewer sub-agent of L); spot-checked: Checked step 1 against lem-pc-fp-complex-descent (01ZR termwise plus maps and relations; no geometric 01ZR node exists, not class b/d), hypotheses bounded/fp/flat match citers lem-pc-finite-flat-proper-support-descent and lem-pc-noetherian-approximation-data; no duplicate of lem-weil-pbc-colimit-flat-ring-map (ring maps only). FIX more, RETURN less: C4 in step 2 - lem-pc-flat-module-descent as delivered produced some new F_j with base change iso F, which does not make the already descended terms H_j^r flat (their differentials would be lost); restated it in the Tag 05LY form (given F_i fp with flat pullback to X, its pullback to X_j' is flat over S_j' for j' >= some j) and rewrote step 2 to apply it to H_j^r; added one grep Mathlib search.; 2 file(s) fixed by the reviewer"
+ }
 }

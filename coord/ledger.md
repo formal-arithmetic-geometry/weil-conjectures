@@ -2631,3 +2631,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:12 L: merged deliver/K1/pqf-def-quasifinite (reviewer PASS; first push; new nodes: 0)
 - 21:12 L: returned deliver/F1/lem-pc-sites-modules-sheafification-flat (reviewer RETURN: 1. C4: Steps 1 and 2 cite lem-pc-presheaf-module-sheafification-ring, whose statement is only for presheaves on the open)
 - 21:12 L: merged deliver/M1/def-nagata-relative-gluing-valid-stage (reviewer PASS; first push; new nodes: 0)
+- 21:13 L: merged deliver/E1/lem-pc-flat-bounded-complex-descent (reviewer FIX; first push; new nodes: 2)
