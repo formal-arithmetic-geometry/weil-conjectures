@@ -772,3 +772,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:50 L: reviewed lem-weil-pbc-site-plus-of-sheaf-iso (4 steps, 0 new): accepted.
 - 01:52 L: reviewed lem-weil-pbc-skyscraper-constant-on-point-closure (5 steps, 0 new) and lem-weil-pbc-site-plus-construction-presheaf (6 steps, +00W7 node): accepted.
 - 01:54 L: reviewed lem-weil-pbc-smooth-locally-standard-smooth (5 steps, +00TA leaf): accepted.
+- 01:55 L: reviewed lem-weil-pbc-spec-finite-product-fields (5 steps, 0 new): accepted. Delivery watch fired on the deletion of the two merged G1 branches; nothing new.
