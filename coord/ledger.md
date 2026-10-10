@@ -2295,3 +2295,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:51 L: merged deliver/M1/lem-sc-derived-hom-finite-free-model (reviewer PASS; first push; new nodes: 3)
 - 18:52 L: merged deliver/M1/lem-sc-koszul-regular-closed-immersion-perfect (reviewer PASS; first push; new nodes: 1)
 - 18:53 L: merged deliver/E1/def-weil-pbc-etale-sheaves (reviewer FIX; after a return; new nodes: 0)
+- 18:53 L: merged deliver/J1/lem-sc-koszul-regular-immersion-derived-hom (reviewer FIX; first push; new nodes: 1)
