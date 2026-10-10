@@ -1,0 +1,90 @@
+{
+ "id": "def-weil-pbc-module-double-complex",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "within the proof of Stacks 00M1 (lemma-no-spectral-sequence), reached through Tor symmetry 00M3 as in the item's from.place (step 4 of the split of lem-weil-pbc-normal-constant-generic -> ... -> lem-weil-pbc-double-complex-cokernel-homology-iso): the setting of 00M1, 'Consider a homological double complex of $R$-modules' with the three properties (rows and columns are complexes, all squares commute), and 'It is clear what a morphism $\\Phi:(A_{\\bullet,\\bullet},d,\\delta)\\to(B_{\\bullet,\\bullet},d,\\delta)$ of double complexes is'",
+   "via": [
+    "def-weil-pbc-double-complex-zigzag-module",
+    "lem-weil-pbc-double-complex-cokernel-homology-iso",
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-flat-mod-injective",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": [
+   "def-sp-double-complex-total"
+  ]
+ },
+ "kind": "definition",
+ "title": "Homological first-quadrant double complex of modules and its morphisms",
+ "statement": "Let $R$ be a commutative ring. A *(homological, first-quadrant) double complex of $R$-modules* $A=(A_{p,q},d,\\delta)_{p,q\\ge0}$ consists of $R$-modules $A_{p,q}$ for $p,q\\ge0$ and $R$-linear maps $d_{p,q}:A_{p,q}\\to A_{p-1,q}$ ($p\\ge1$) and $\\delta_{p,q}:A_{p,q}\\to A_{p,q-1}$ ($q\\ge1$) such that $d_{p-1,q}\\circ d_{p,q}=0$ ($p\\ge2$; the rows are complexes), $\\delta_{p,q-1}\\circ\\delta_{p,q}=0$ ($q\\ge2$; the columns are complexes) and $\\delta_{p-1,q}\\circ d_{p,q}=d_{p,q-1}\\circ\\delta_{p,q}$ ($p,q\\ge1$; all squares commute). By convention $A_{p,q}=0$ if $p<0$ or $q<0$, and $d_{0,q}$, $\\delta_{p,0}$ and every map into or out of a zero module are $0$; with this convention the three identities hold for all $p,q$. A *morphism* $\\Phi:A\\to B$ of double complexes of $R$-modules is a family of $R$-linear maps $\\Phi_{p,q}:A_{p,q}\\to B_{p,q}$ ($p,q\\ge0$) with $d_{p,q}\\circ\\Phi_{p,q}=\\Phi_{p-1,q}\\circ d_{p,q}$ and $\\delta_{p,q}\\circ\\Phi_{p,q}=\\Phi_{p,q-1}\\circ\\delta_{p,q}$ whenever defined; morphisms compose componentwise, $(\\Psi\\circ\\Phi)_{p,q}=\\Psi_{p,q}\\circ\\Phi_{p,q}$, and the identity of $A$ is $(\\mathrm{id}_{A_{p,q}})_{p,q}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00LY (section-tor, tag verified in tags/tags: 00LY,algebra-section-tor), the paragraph before Lemma Tag 00M1 (lemma-no-spectral-sequence), lines 18314-18346 ('Consider a homological double complex of $R$-modules ...' with properties (1)-(3)) and lines 18391-18395 ('It is clear what a morphism $\\Phi$ ... of double complexes is')"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "double complex of modules: bicomplex with horizontal and vertical differentials that commute",
+   "results": "HomologicalComplex₂.d_comm, HomologicalComplex₂.d_comm_assoc, HomologicalComplex₂, HomologicalComplex₂.ofGradedObject, HomologicalComplex₂.ofGradedObject_X_d (Mathlib.Algebra.Homology.HomologicalBicomplex), HomologicalComplex.double (Mathlib.Algebra.Homology.Double)",
+   "date": "2026-10-10",
+   "verdict": "match: HomologicalComplex₂ (commuting squares, d_comm)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bicomplex in a category: complex of complexes, morphisms of bicomplexes",
+   "results": "HomologicalComplex₂, HomologicalComplex₂.ofGradedObject, HomologicalComplex₂.toGradedObject (Mathlib.Algebra.Homology.HomologicalBicomplex), HomologicalComplex₂.total, HomologicalComplex₂.HasTotal, HomologicalComplex₂.totalFunctor (Mathlib.Algebra.Homology.TotalComplex)",
+   "date": "2026-10-10",
+   "verdict": "match: HomologicalComplex₂ C c₁ c₂ := HomologicalComplex (HomologicalComplex C c₂) c₁"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂, ModuleCat",
+   "results": "none (no lemma mentions both; the notion is the general HomologicalComplex₂ specialised to C = ModuleCat R)",
+   "date": "2026-10-10",
+   "verdict": "no specialised declaration; generalization HomologicalComplex₂ specializes in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev HomologicalComplex₂\\|d_comm\\|comm_f' Mathlib/Algebra/Homology/HomologicalBicomplex.lean; grep -n 'structure HomologicalComplex\\|abbrev ChainComplex\\|structure Hom' Mathlib/Algebra/Homology/HomologicalComplex.lean; grep -n 'down' Mathlib/Algebra/Homology/ComplexShape.lean (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "HomologicalBicomplex.lean:38 abbrev HomologicalComplex₂ := HomologicalComplex (HomologicalComplex C c₂) c₁; :139 d_comm; :144 comm_f; HomologicalComplex.lean:59 structure HomologicalComplex (X, d, shape, d_comp_d'), :151 abbrev ChainComplex := HomologicalComplex V (ComplexShape.down α), :217 structure Hom (f, comm'); ComplexShape.lean:176-190 down' a with Rel i j := j + a = i, down := down' 1 (generated by to_dual from up)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomologicalComplex₂",
+  "file": "Mathlib/Algebra/Homology/HomologicalBicomplex.lean",
+  "line": 38,
+  "how": "specializes in one line: a double complex of R-modules is K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ) (ComplexShape.down ℕ) (HomologicalBicomplex.lean:38, abbrev for HomologicalComplex (HomologicalComplex (ModuleCat R) (ComplexShape.down ℕ)) (ComplexShape.down ℕ)); A_{p,q} = (K.X p).X q, d_{p,q} = (K.d p (p-1)).f q, δ_{p,q} = (K.X p).d q (q-1); ComplexShape.down ℕ has Rel i j iff j+1 = i (ComplexShape.lean:176-190), so differentials lower the index by one and vanish otherwise (field shape, HomologicalComplex.lean:59-63), which is the zero convention at p=0, q=0; d∘d=0 and δ∘δ=0 are d_comp_d (HomologicalComplex.lean:59-63, d_comp_d') for K and for each column; the squares commute by HomologicalComplex₂.d_comm (HomologicalBicomplex.lean:139), which holds because K.d p p' is a morphism of complexes, the same sign-free convention as here. A morphism Φ is K ⟶ L, i.e. HomologicalComplex.Hom (HomologicalComplex.lean:217) with Φ_{p,q} = (Φ.f p).f q, commuting with d by HomologicalComplex₂.comm_f (HomologicalBicomplex.lean:144) and with δ since each Φ.f p is a morphism of complexes; composition and identities are those of the category HomologicalComplex₂. Lines read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-double-complex-zigzag-module",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

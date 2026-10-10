@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-double-complex-zigzag-module-functorial",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "within the proof of Stacks 00M1 (lemma-no-spectral-sequence), reached through Tor symmetry 00M3 as in the item's from.place (step 4 of the split of lem-weil-pbc-normal-constant-generic -> ... -> lem-weil-pbc-double-complex-cokernel-homology-iso): 'Naturally, we divide out by \"trivial\" zig-zags' (that the trivial zig-zags are zig-zags) and the functoriality of $\\mathbf H_i(A)$ needed for 'The isomorphisms are functorial with respect to morphisms of double complexes' (the source calls the induced maps 'clear', lines 18391-18395)",
+   "via": [
+    "def-weil-pbc-double-complex-zigzag-module",
+    "lem-weil-pbc-double-complex-cokernel-homology-iso",
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-flat-mod-injective",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Trivial zig-zags are zig-zags; functoriality of the zig-zag module",
+ "statement": "Let $R$ be a commutative ring, let $A$, $B$, $C$ be double complexes of $R$-modules and $\\Phi:A\\to B$, $\\Psi:B\\to C$ morphisms of double complexes [def-weil-pbc-module-double-complex]. For $n\\ge0$ let $T_n(-)=\\bigoplus_{p+q=n,\\,p,q\\ge0}(-)_{p,q}$, $D_{n+1}:T_{n+1}(-)\\to T_n(-)$, $D_{n+1}(b)_{p,q}=d_{p+1,q}(b_{p+1,q})+\\delta_{p,q+1}(b_{p,q+1})$, the module of zig-zags $Z_n(-)\\subseteq T_n(-)$, the module of trivial zig-zags $B_n(-)=\\operatorname{im}D_{n+1}$ and the zig-zag module $\\mathbf H_n(-)=Z_n(-)/(Z_n(-)\\cap B_n(-))$ be as in [def-weil-pbc-double-complex-zigzag-module], and let $\\Phi$ act on $T_n(A)$ componentwise, $\\Phi(a)_{p,q}=\\Phi_{p,q}(a_{p,q})$. Then for every $n\\ge0$: (a) $B_n(A)\\subseteq Z_n(A)$, so that $\\mathbf H_n(A)=Z_n(A)/B_n(A)$; (b) $\\Phi(Z_n(A))\\subseteq Z_n(B)$ and $\\Phi\\circ D_{n+1}=D_{n+1}\\circ\\Phi$ as maps $T_{n+1}(A)\\to T_n(B)$, hence $\\Phi(B_n(A))\\subseteq B_n(B)$; (c) there is a unique $R$-linear map $\\mathbf H_n(\\Phi):\\mathbf H_n(A)\\to\\mathbf H_n(B)$ with $\\mathbf H_n(\\Phi)([a])=[\\Phi(a)]$ for all $a\\in Z_n(A)$; (d) $\\mathbf H_n(\\Psi\\circ\\Phi)=\\mathbf H_n(\\Psi)\\circ\\mathbf H_n(\\Phi)$ and $\\mathbf H_n(\\mathrm{id}_A)=\\mathrm{id}_{\\mathbf H_n(A)}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence; tags/tags: 00M1,algebra-lemma-no-spectral-sequence): statement, 'The isomorphisms are functorial with respect to morphisms of double complexes' (lines 18398-18412), and proof, lines 18416-18450 (the quotient $\\mathbf H_i(A)$ of zig-zags by trivial zig-zags, 'Naturally, we divide out by trivial zig-zags'); the paragraph before it, lines 18391-18395 ('it is clear that this induces morphisms'). The source leaves (a)-(d) implicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-double-complex",
+  "def-weil-pbc-double-complex-zigzag-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of double complexes induces map on quotient of submodule of elements of total degree n satisfying d a = δ b",
+   "results": "HomologicalComplex₂.homMk, HomologicalComplex₂.total.forget_map, HomologicalComplex₂.total.map, HomologicalComplex₂.total.mapAux.mapMap_D₂ (Mathlib.Algebra.Homology.HomologicalBicomplex, TotalComplex), HomologicalComplex.cyclesMap, HomologicalComplex.mapBifunctorDesc",
+   "date": "2026-10-10",
+   "verdict": "no match (maps of total complexes, not zig-zag modules)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "linear map sending submodule p into q and p' into q' induces map on quotients, functorial for composition",
+   "results": "Submodule.mapQ, Submodule.mapQ_apply, Submodule.mapQ_mkQ, Submodule.mapQ_comp, Submodule.mapQLinear, Submodule.factor_comp_mk (Mathlib.LinearAlgebra.Quotient.Basic)",
+   "date": "2026-10-10",
+   "verdict": "partial: (c),(d) follow from Submodule.mapQ (Mathlib/LinearAlgebra/Quotient/Basic.lean:174), mapQ_comp (:195), mapQ_id (:204) once (a),(b) are proved; (a),(b) are specific to zig-zags: no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂, ModuleCat",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'zigzag\\|zig-zag\\|Zigzag' Mathlib/Algebra/Homology; grep -n 'def mapQ\\|theorem mapQ_comp\\|theorem mapQ_id' Mathlib/LinearAlgebra/Quotient/Basic.lean (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "only LocalCohomology.lean (zigzag_isConnected, connectedness of categories); Basic.lean:174 mapQ, :195 mapQ_comp, :204 mapQ_id",
+   "date": "2026-10-10",
+   "verdict": "no match for the zig-zag statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-double-complex-zigzag-module",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

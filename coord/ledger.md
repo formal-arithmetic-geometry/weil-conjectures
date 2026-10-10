@@ -1422,3 +1422,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:32 L: merged C1 lem-weil-pbc-openness-of-flatness (00RC, +2 nodes).
 - 12:33 L: accepted thm-av-final (key node of sk-thm-av-final, 4 steps along the Lean conjunction, 0 new; unit realized).
 - 12:33 L: accepted lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map (00M1, 5 steps, 0 new).
+- 12:34 L: accepted def-weil-pbc-double-complex-zigzag-module (definition split; new Mathlib leaf for double complexes, new functoriality node cited by its two users).
