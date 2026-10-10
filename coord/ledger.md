@@ -2661,3 +2661,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:24 L: merged deliver/J1/lem-pc-tower-limit-left-exact (reviewer FIX; first push; new nodes: 0)
 - 21:25 L: returned deliver/E1/lem-pc-tower-abelian (reviewer RETURN: Not a fault: the item is the Mathlib instance CategoryTheory.Abelian.functorCategoryAbelian (Mathlib/CategoryTheory/Abel)
 - 21:25 UTC L matched lem-pc-tower-abelian to Mathlib CategoryTheory.Abelian.functorCategoryAbelian (R-tab2553); E1 delivery returned as unneeded
+- 21:25 L: merged deliver/H1/lem-pc-proper-direct-image-finite-tor (reviewer FIX+NODE(1); first push; new nodes: 1)
