@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-tensor",
-   "place": "the closure argument for cones and countable direct sums in the proof of Lemma 06YS",
+   "place": "the closure argument for cones and countable direct sums in the proof of the K-flat closure lemmas 07A3 and 06YR",
    "via": []
   },
   "same_as": []
@@ -17,11 +17,49 @@
   "place": "Lemma 06YS (closure of K-flat complexes under cones and direct sums)"
  },
  "stmt_deps": [
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any acyclic complex A, tensoring commutes with the countable coproduct: Tot(A tensor (direct sum of K_n)) is the direct sum of Tot(A tensor K_n). The category of sheaves of O-modules is Grothendieck abelian (after replacing an essentially small site by an equivalent small one), so countable coproducts are exact: write the coproduct as the filtered colimit of its finite partial coproducts and use exactness of filtered colimits. Each summand is acyclic by K-flatness, hence the coproduct is acyclic. Since this holds for every acyclic A, the countable direct sum is K-flat by [def-pc-kflat-complex].",
+   "uses": [
+    "def-pc-kflat-complex",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 06YR, closure under filtered colimits, applied to finite partial coproducts"
+   }
+  },
+  {
+   "text": "For a morphism f from K1 to K2 and its mapping cone K3, the tensor construction is additive and carries the cone triangle to the cone triangle of the tensor of f. If K1 and K2 are K-flat, then the first two tensor complexes are acyclic for every acyclic A; the tensor-triangle two-out-of-three statement [lem-pc-kflat-tensor-cone-two-out-of-three] makes the third tensor complex acyclic. Therefore the mapping cone is K-flat by [def-pc-kflat-complex].",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category",
+    "lem-pc-kflat-tensor-cone-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 07A3, closure under cones"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-kflat-tensor-cone-two-out-of-three"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemmas 07A3 and 06YR"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,15 +81,50 @@
    "results": "no hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat complexes closed under cones and countable direct sums",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-kflat-closure",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-kflat-cone-direct-sum",
+  "worker": "stage1",
+  "summary": "Split the closure proof into the direct-sum argument and a tensor-triangle two-out-of-three dependency. The direct-sum step uses exact filtered colimits in the Grothendieck category of sheaves of modules and the tensor-hom structure; the cone step applies the new general tensor-triangle statement. No Lean declaration states the item exactly.",
+  "blueprint": "Realizes the closure argument for cones and countable direct sums supplied by Lemmas 07A3 and 06YR.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Provides the Grothendieck abelian and exact filtered-colimit hypotheses used to prove exactness of countable coproducts of sheaf-module complexes."
+   }
+  ],
+  "blueprint_places": [
+   "the closure argument for cones and countable direct sums supplied by Lemmas 07A3 and 06YR"
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kcd2356",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kcd2356 (reviewer sub-agent of L); spot-checked: No cycle: lem-pc-kflat-closure cites this item for its cone/sum clauses and this item does not cite kflat-closure (not class b). Step 1: tensor commutes with sums via left adjointness [lem-pc-sheaf-modules-tensor-closed], exact countable coproducts via Grothendieck [prop-pur-kinjective-resolutions-exist, generic tool accepted]. Step 2: tensor-of-cone identification and LES two-out-of-three are the statement of the new node, a genuine lemma (true up to the standard sign iso), not a duplicate of any DAG node. FIX more, RETURN less: (1) item source.place still said 06YS although the report claimed it was corrected; now names 07A3 and 06YR (missed by the second reading); (2) B3: new node's recorded grep 'mappingCone: no hits' was false (HomotopyCategory/MappingCone.lean exists); marked superseded and my own grep for tensor/mapBifunctor of mappingCone recorded (no match); (3) dropped unused stmt_dep def-pc-kflat-complex from the new node.; 2 file(s) fixed by the reviewer"
+ }
 }
