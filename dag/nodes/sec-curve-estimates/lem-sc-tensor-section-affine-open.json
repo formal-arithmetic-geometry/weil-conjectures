@@ -24,9 +24,41 @@
   "def-weil-pbc-ample-invertible-module",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At a point $x$ of $X$, each fibre $\\mathcal L_i(x)$ is one-dimensional over $\\kappa(x)$. By [lem-weil-pbc-invertible-pullback-tensor], the tensor product is invertible and the value of $\\tau$ in its fibre is $t_1(x)\\otimes\\cdots\\otimes t_n(x)$. A pure tensor of vectors in one-dimensional vector spaces over a field is nonzero exactly when every factor is nonzero: choose a basis in each fibre and multiply the scalar coordinates. By [lem-weil-pbc-nonvanishing-section-trivializes], nonzero fibre value is exactly membership in the nonvanishing locus. Thus $x\\in X_\\tau$ iff $x\\in X_{t_i}$ for every $i$, proving the equality of opens.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01CT (tensor products of invertible modules), Lemma 01CB (fibre tensor identity), and Lemma 01CY (fibre criterion for nonvanishing)"
+   }
+  },
+  {
+   "text": "Suppose $X_{t_j}$ is affine for some index $j$. Starting with $U=X_{t_j}$, intersect successively with each of the finitely many remaining opens $X_{t_i}$. At every stage $U$ is an affine open of $X$, so [lem-sc-affine-cap-section-open], applied to $\\mathcal L_i$ and $t_i$, says $U\\cap X_{t_i}$ is affine. After the last intersection, the resulting affine open is $\\bigcap_i X_{t_i}=X_\\tau$ by step 1.",
+   "uses": [
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 09NC (lemma-enough-globally-generated-ample), proof, sentence invoking Properties Lemma 01PV (lemma-affine-cap-s-open)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma 09NC proof, sentence invoking Properties Lemma 01PV; fibre calculation from Modules Lemmas 01CT, 01CB and 01CY"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +83,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-enough-globally-generated-ample",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-tensor-section-affine-open",
+  "worker": "stage1",
+  "summary": "Proved the tensor-section nonvanishing equality on one-dimensional fibres, then applied the existing affine-intersection lemma repeatedly. No new nodes were needed.",
+  "blueprint": "The two steps expand the affine-open assertion used in the proof of the blueprint ancestor lem-sc-pic-proper-ntorsion, at the cited 09NC proof sentence invoking Properties Lemma 01PV.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Its general fibre formula and invertibility of tensor products apply to every scheme; no node in this unit gives those identities."
+   },
+   {
+    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
+    "why": "Its general equivalence between a nonzero fibre value and nonvanishing-locus membership is used in step 1; no node in this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tsa",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tsa (reviewer sub-agent of L); spot-checked: Source: Stacks 09NC (varieties-lemma-enough-globally-generated-ample), proof, varieties.tex line 7920 'By Properties, Lemma 01PV the open X_{tau_J} is affine as soon as j_i = 0 for some i'; the item statement (X scheme, L_i invertible, t_i global, tau the tensor section, X_tau = cap X_{t_i}, affine if one X_{t_i} is) agrees with it and with 01PV (affine open U, section of invertible module) hypothesis by hypothesis. Step 1 carried by lem-weil-pbc-invertible-pullback-tensor (1) invertibility of L tensor M and (3) (s tensor t)(y)=s(y) tensor t(y), iterated over n factors (elementary induction), plus the fibre-value description of X_s, which is in def-weil-pbc-ample-invertible-module (n=1) and lem-weil-pbc-nonvanishing-section-trivializes; pure tensor in one-dimensional spaces nonzero iff all factors nonzero is elementary. Step 2 carried by lem-sc-affine-cap-section-open (Y=X, U affine open of X, M=L_i, s=t_i), finite iteration from U=X_{t_j}, then step 1. Tool uses accepted (C8): both sk-thm-reduction nodes are generic statements about invertible modules on any scheme used as black boxes, not steps of this unit's route. No new nodes, no leaves; no slopmaster2 declaration found (grep of WeilConjectures for tensor/nonvanishing/basicOpen). Small cases: n=1 trivial; X=Spec R, L_i=O, t_i=f_i gives D(prod f_i)=cap D(f_i), affine; a zero t_i gives empty. Note: the report says the local Stacks checkout is absent, but literature/stacks-project/varieties.tex is present; the places cited are correct. Start Sat Oct 10 04:10:55 PM UTC 2026, end Sat Oct 10 04:11:12 PM UTC 2026."
+ }
 }
