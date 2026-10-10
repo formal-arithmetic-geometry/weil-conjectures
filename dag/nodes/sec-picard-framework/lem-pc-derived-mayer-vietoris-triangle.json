@@ -24,46 +24,137 @@
   "def-pc-derived-direct-image",
   "lem-pc-derived-direct-image-preserves-qcoh"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-injective resolution E \\to I of a representative complex for E, with every I^n injective, using [prop-pur-kinjective-resolutions-exist]. For each of the open immersions j_U, j_V, and j_{UV}, the termwise restrictions j^{-1}I are K-injective by [lem-sc-derived-k-injective-restrict-open]. By the definition of the derived direct image [def-pc-derived-direct-image], the complexes j_{U*}j_U^{-1}I, j_{V*}j_V^{-1}I, and j_{UV*}j_{UV}^{-1}I represent the three derived direct images in the asserted triangle.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-derived-k-injective-restrict-open",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BV proof via a K-injective resolution and Tag 08BS"
+   }
+  },
+  {
+   "text": "There is a degreewise short exact sequence of complexes 0 \\to I \\to j_{U*}j_U^{-1}I direct-sum j_{V*}j_V^{-1}I \\to j_{UV*}j_{UV}^{-1}I \\to 0. On sections over an open T of W, the first map is restriction to U and V; its kernel is zero and its image is the equalizer by the sheaf gluing axiom. The last map is the difference of restrictions. Put T_U=T intersect U and T_V=T intersect V. Since I^n is injective, [lem-sc-ringed-space-injective-restriction-surjective] gives a surjection I^n(T_U) direct-sum I^n(T_V) \\to I^n(T_U intersect T_V), and T_U intersect T_V=T intersect U intersect V, so the last map is surjective on sections over T. Thus the displayed sequence is exact on every test open T and in every degree.",
+   "uses": [
+    "lem-sc-ringed-space-injective-restriction-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BV proof, exact sequence 0 -> F -> j_{U*}F|_U + j_{V*}F|_V -> j_{UV*}F|_{U cap V} -> 0"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to the preceding degreewise short exact sequence. Its distinguished triangle is I \\to j_{U*}j_U^{-1}I direct-sum j_{V*}j_V^{-1}I \\to j_{UV*}j_{UV}^{-1}I \\to I[1], and the first two arrows are respectively the pair of restriction maps and their difference. Transporting along the quasi-isomorphism E \\to I identifies this with the claimed triangle in D(O_W). This uses the non-split short-exact-sequence triangle, not a degreewise-split construction.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BV, derived triangle obtained from the exact sequence of complexes"
+   }
+  },
+  {
+   "text": "The construction gives a distinguished triangle in the full category D(O_W) for every E. Since U, V, and U intersect V are quasi-compact and the open immersions are quasi-compact and quasi-separated, [lem-pc-derived-direct-image-preserves-qcoh] places each displayed derived direct image in D_QCoh(O_W); restriction preserves quasi-coherent cohomology by exactness and the affine-local definition. Therefore, when E lies in D_QCoh(O_W), the same triangle is a triangle in D_QCoh(O_W), as stated.",
+   "uses": [
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5(1), quasi-coherence of derived direct images"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-derived-k-injective-restrict-open",
+  "def-pc-derived-direct-image",
+  "lem-sc-ringed-space-injective-restriction-surjective",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BV, with the K-injective construction and quasi-coherence specialization from Tag 08D5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "derived Mayer Vietoris triangle for quasi coherent complexes on a scheme covered by two opens",
-   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex and related generic site sheaf results; no derived quasi-coherent scheme triangle",
+   "query": "short exact sequence of complexes gives distinguished triangle in derived category",
+   "results": "DerivedCategory.triangleOfSES_distinguished; DerivedCategory.triangleOfSES and triangleOfSESδ",
    "date": "2026-10-11",
-   "verdict": "no match"
+   "verdict": "generalization: generic abelian-category theorem; the ringed-space exact sequence remains project-specific"
   },
   {
    "tool": "loogle",
-   "query": "DerivedCategory, MayerVietorisSquare, triangle",
-   "results": "0 hits; unknown identifier MayerVietorisSquare",
+   "query": "triangleOfSES_distinguished",
+   "results": "0 hits; unknown identifier",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "Mayer.Vietoris|triangle.*open immersion|Rj [Mathlib/AlgebraicGeometry]",
-   "results": "0 hits",
+   "query": "triangleOfSES_distinguished Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "0 hits from msearch grep",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "derived Mayer Vietoris triangle for two open subschemes",
+   "query": "short exact sequence of complexes gives distinguished triangle",
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-complexes-compact-set",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-mayer-vietoris-triangle",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by deleting the relabelling node for Tag 08BV. The item now constructs the triangle from a K-injective resolution, K-injective restrictions, the exact sheaf sequence with injective restriction surjectivity (01EA), and the existing non-split short-exact-sequence triangle (0152); the final step places it in D_QCoh using qcqs derived direct-image preservation. The triangle is established in D(O_W) for all E, with D_QCoh used only for the subcategory conclusion.",
+  "blueprint": "Realizes the set-of-representatives proof clause 'derived Mayer–Vietoris gluing over a union of two quasi-compact opens'.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of K-injective resolutions for sheaf-module complexes; the item's route has no replacement for this category-level construction."
+   },
+   {
+    "node": "lem-sc-ringed-space-injective-restriction-surjective",
+    "why": "Generic injective-sheaf section surjectivity is the input to the exact Mayer–Vietoris sequence; the item's route has no replacement for this sheaf fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-ringed-space-injective-restriction-surjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-ringed-space-injective-restriction-surjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mvt2856",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mvt2856 (reviewer sub-agent of L); spot-checked: Re-push after R-mvt2744 return: broader node lem-pc-ringed-space-derived-mayer-vietoris gone (no file on branch or sheaf-dag); 08BV argument written in steps citing 079P-type node prop-pur-kinjective-resolutions-exist (injective terms, K-injective), 08BS restrict-open, def-pc-derived-direct-image, 01EA for surjectivity of I(T_U)+I(T_V)->I(T cap U cap V) with left exactness by sheaf axiom, 0152 non-split SES triangle; step 4 cites 08D5 node with qcqs immersions, triangle in D(O_W) for all E; statement matches uses in lem-pc-perfect-complexes-compact-set and lem-pc-perfect-descend-morphisms (C4); tool uses accepted as generic. No repairs needed."
+ }
 }
