@@ -347,6 +347,117 @@ theorem eulerChar_tensorObj_sub_eulerChar_tensorObj_eq {M N : X.Modules}
 
 end EulerChar
 
+/-- A morphism `σ : 𝒪_X ⟶ N` sending `1` to `0` is zero. -/
+lemma eq_zero_of_app_top_one {Y : Scheme.{u}} {N : Y.Modules} (σ : 𝟙_ Y.Modules ⟶ N)
+    (h : σ.app ⊤ (unitSectionsEquiv ⊤ 1) = 0) : σ = 0 := by
+  refine hom_ext _ _ fun U ↦ ?_
+  ext r
+  obtain ⟨a, rfl⟩ := ((isFreeGenerator_one (X := Y) ⊤).map (le_top : U ≤ ⊤)).exists_smul_eq r
+  rw [Hom.app_smul]
+  erw [Hom.app_presheaf_map σ (homOfLE (le_top : U ≤ ⊤)) (1 : Γ(Y, ⊤))]
+  erw [h]
+  simp
+
+section ClearDenominators
+
+variable {S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] [IsAffine S] [CompactSpace X]
+  {L : X.Modules} [L.IsInvertible] (s : 𝟙_ X.Modules ⟶ L)
+
+include f in
+/-- **Clearing denominators for all large powers.** A section `b` of a quasi-coherent `F` over
+the non-vanishing locus `X_s` of `s` satisfies: for all `m ≫ 0`, `b ⊗ s^m` extends to a global
+section of `F ⊗ ℒ^{⊗ m}`, compatibly with restriction to every open `W ⊆ X_s`. -/
+theorem exists_forall_ge_presheaf_map_eq (F : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
+    (b : Γ(F, (Hom.zeroLocus s).support.compl)) :
+    ∃ m₀ : ℕ, ∀ m ≥ m₀, ∃ u : Γ(F ⊗ L.tensorPow m, ⊤), ∀ (W : X.Opens)
+      (hW : W ≤ (Hom.zeroLocus s).support.compl),
+      (F ⊗ L.tensorPow m).presheaf.map (homOfLE le_top).op u =
+        ((ρ_ F).inv ≫ F ◁ tensorPowSection s m).app W (F.presheaf.map (homOfLE hW).op b) := by
+  have := IsInvertible.sheafOfModules_isInvertible L
+  obtain ⟨m₀, u₀, hu₀⟩ := exists_tensorPowSection_eq_restrict f L s F b
+  refine ⟨m₀, fun m hm ↦ ?_⟩
+  have hm' : m₀ + (m - m₀) = m := Nat.add_sub_cancel' hm
+  let g := mulTensorPowSection s F m₀ (m - m₀) ≫ F ◁ eqToHom (congrArg L.tensorPow hm')
+  refine ⟨g.app ⊤ u₀, fun W hW ↦ ?_⟩
+  rw [← Hom.app_presheaf_map, ← presheaf_map_homOfLE_homOfLE (le_top : _ ≤ ⊤) hW, hu₀,
+    ← Hom.app_presheaf_map, rightUnitor_inv_comp_whiskerLeft_app,
+    rightUnitor_inv_comp_whiskerLeft_app, Hom.comp_app, ConcreteCategory.comp_apply,
+    mulTensorPowSection_app_tmulSection]
+  erw [whiskerLeft_app_tmulSection, eqToHom_app_tensorPowSectionOne s hm']
+
+include f in
+/-- **A local basis extends after twisting.** Let `ε` identify the restrictions of a free
+module `𝒪_X^{(I)}`, `I` finite, and of a quasi-coherent `F` to the non-vanishing locus `X_s`.
+Then for some `m` there is a morphism `φ : 𝒪_X^{(I)} ⟶ F ⊗ ℒ^{⊗ m}` which is an isomorphism on
+`X_s`: it is `ε` followed by multiplication by `s^m` there, and it exists by clearing
+denominators. -/
+theorem exists_hom_free_isIso_restrictFunctor_map (F : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F] {I : Type u} [Finite I]
+    (ε : (restrictFunctor (Scheme.Opens.ι (Hom.zeroLocus s).support.compl)).obj
+        (SheafOfModules.free (R := X.ringCatSheaf) I) ≅
+      (restrictFunctor (Scheme.Opens.ι (Hom.zeroLocus s).support.compl)).obj F) :
+    ∃ (m : ℕ) (φ : SheafOfModules.free (R := X.ringCatSheaf) I ⟶ F ⊗ₘ L.tensorPow m),
+      IsIso ((restrictFunctor (Scheme.Opens.ι (Hom.zeroLocus s).support.compl)).map φ) := by
+  classical
+  have := Fintype.ofFinite I
+  have := IsInvertible.sheafOfModules_isInvertible L
+  set V : X.Opens := (Hom.zeroLocus s).support.compl
+  have hle : V ≤ V.ι ''ᵁ ⊤ := by simp
+  have hle' : V.ι ''ᵁ ⊤ ≤ V := by simp
+  let β (i : I) : Γ(F, V.ι ''ᵁ ⊤) := Hom.app ((restrictUnitIso V.ι).inv ≫
+    (restrictFunctor V.ι).map (SheafOfModules.ιFree i) ≫ ε.hom) ⊤ (1 : Γ(V.toScheme, ⊤))
+  choose m₀ hm₀ using fun i ↦ exists_forall_ge_presheaf_map_eq f s F
+    (F.presheaf.map (homOfLE hle).op (β i))
+  set m := max 1 (Finset.univ.sup m₀)
+  choose u hu using fun i ↦ hm₀ i m
+    ((Finset.le_sup (Finset.mem_univ i)).trans (le_max_right _ _))
+  let c : F ⟶ F ⊗ L.tensorPow m := (ρ_ F).inv ≫ F ◁ tensorPowSection s m
+  let φ : SheafOfModules.free (R := X.ringCatSheaf) I ⟶ F ⊗ₘ L.tensorPow m :=
+    Sigma.desc fun i ↦ homOfGlobalSection _ (u i)
+  refine ⟨m, φ, ?_⟩
+  have hc : IsIso ((restrictFunctor V.ι).map c) := by
+    have : SheafOfModules.IsInvertible.{u, u, u} (L.tensorPow m) :=
+      IsInvertible.sheafOfModules_isInvertible _
+    have : IsIso ((restrictFunctor V.ι).map (tensorPowSection s m)) := by
+      refine isIso_restrictFunctor_map_of_le _ ?_
+      rw [compl_support_zeroLocus_tensorPowSection L s (by omega : 0 < m)]
+    have := isIso_restrictFunctor_map_whiskerLeft (tensorPowSection s m) F (U := V)
+    rw [Functor.map_comp]
+    infer_instance
+  suffices h : (restrictFunctor V.ι).map φ = ε.hom ≫ (restrictFunctor V.ι).map c by
+    rw [h]
+    infer_instance
+  refine (isColimitOfPreserves (restrictFunctor V.ι)
+    (SheafOfModules.isColimitFreeCofan I)).hom_ext fun ⟨i⟩ ↦ ?_
+  change (restrictFunctor V.ι).map (SheafOfModules.ιFree i) ≫ _ =
+    (restrictFunctor V.ι).map (SheafOfModules.ιFree i) ≫ _
+  rw [← Functor.map_comp, show SheafOfModules.ιFree i ≫ φ = homOfGlobalSection _ (u i) from
+    Sigma.ι_desc _ _, ← cancel_epi (restrictUnitIso V.ι).inv]
+  rw [← sub_eq_zero, ← Preadditive.comp_sub]
+  refine eq_zero_of_app_top_one _ ?_
+  rw [Preadditive.comp_sub, Hom.sub_app]
+  refine sub_eq_zero.mpr ?_
+  have h₁ := hu i (V.ι ''ᵁ ⊤) hle'
+  have hβ : F.presheaf.map (homOfLE hle').op (F.presheaf.map (homOfLE hle).op (β i)) = β i := by
+    rw [presheaf_map_homOfLE_homOfLE]
+    exact presheaf_map_id_apply _ _
+  rw [hβ] at h₁
+  have hA : Hom.app ((restrictUnitIso V.ι).inv ≫
+      (restrictFunctor V.ι).map (homOfGlobalSection _ (u i))) ⊤ (1 : Γ(V.toScheme, ⊤)) =
+      (F ⊗ L.tensorPow m).presheaf.map (homOfLE le_top).op (u i) := by
+    rw [Hom.comp_app, ConcreteCategory.comp_apply]
+    exact (congrArg (Hom.app (homOfGlobalSection _ (u i)) (V.ι ''ᵁ ⊤))
+      (map_one (V.ι.appIso ⊤).inv.hom)).trans (homOfGlobalSection_app_one _ _ _)
+  have hB : Hom.app ((restrictUnitIso V.ι).inv ≫ (restrictFunctor V.ι).map
+      (SheafOfModules.ιFree i) ≫ ε.hom ≫ (restrictFunctor V.ι).map c) ⊤ (1 : Γ(V.toScheme, ⊤)) =
+      c.app (V.ι ''ᵁ ⊤) (β i) := by
+    rw [← Category.assoc, ← Category.assoc, Hom.comp_app, ConcreteCategory.comp_apply]
+    rfl
+  exact hA.trans (h₁.trans hB.symm)
+
+end ClearDenominators
+
 section Ample
 
 variable {K : Type u} [Field K] (f : X ⟶ Spec (.of K)) {ℒ : X.Modules} (hℒ : IsAmple f ℒ)
@@ -709,17 +820,6 @@ end Polynomial
 section LowerBound
 
 variable (K : Type u) [Field K]
-
-/-- A morphism `σ : 𝒪_X ⟶ N` sending `1` to `0` is zero. -/
-lemma eq_zero_of_app_top_one {Y : Scheme.{u}} {N : Y.Modules} (σ : 𝟙_ Y.Modules ⟶ N)
-    (h : σ.app ⊤ (unitSectionsEquiv ⊤ 1) = 0) : σ = 0 := by
-  refine hom_ext _ _ fun U ↦ ?_
-  ext r
-  obtain ⟨a, rfl⟩ := ((isFreeGenerator_one (X := Y) ⊤).map (le_top : U ≤ ⊤)).exists_smul_eq r
-  rw [Hom.app_smul]
-  erw [Hom.app_presheaf_map σ (homOfLE (le_top : U ≤ ⊤)) (1 : Γ(Y, ⊤))]
-  erw [h]
-  simp
 
 /-- **The Hilbert polynomial of an integral scheme has degree at least its dimension.** Let `Y`
 be an integral scheme proper over `K` and `ℒ` ample. If `P` is the Hilbert polynomial of `ℒ`
