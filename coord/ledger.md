@@ -2156,3 +2156,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:40 L: merged deliver/K1/lem-sc-p1-invertible-section-localization (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 17:41 L: merged deliver/M1/lem-sc-p1-boundary-connecting-naturality (reviewer PASS; first push; new nodes: 0)
 - 17:41 L: merged deliver/M1/lem-sc-dvr-nonnegative-valuation-in-ring (reviewer FIX; first push; new nodes: 0)
+- 17:41 L: merged deliver/F1/lem-sc-isogeny-surjective (reviewer PASS; first push; new nodes: 0)
