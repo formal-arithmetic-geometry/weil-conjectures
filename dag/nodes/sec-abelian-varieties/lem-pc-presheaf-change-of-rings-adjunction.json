@@ -1,0 +1,77 @@
+{
+ "id": "lem-pc-presheaf-change-of-rings-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "statement, module base-change clause: 'the base change of a module F on X_T is F_{T'} = g_X^* F''; the change-of-rings step in the adjunction for that pullback, at the level of presheaves before sheafification (Stacks 008A cites 006R)",
+   "via": [
+    "lem-pc-module-change-of-rings-adjunction",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Change of rings for presheaves of modules is left adjoint to restriction",
+ "statement": "Let $X$ be a topological space, let $a:\\mathcal A\\to\\mathcal B$ be a morphism of sheaves of commutative rings on $X$, let $\\mathcal M$ be a presheaf of $\\mathcal A$-modules and $\\mathcal N$ a presheaf of $\\mathcal B$-modules [def-weil-presheaf-modules-sheafification]. Write $\\operatorname{Res}_a\\mathcal N$ for the presheaf $\\mathcal N$ regarded as a presheaf of $\\mathcal A$-modules, $\\mathcal A(U)$ acting on $\\mathcal N(U)$ through $a_U:\\mathcal A(U)\\to\\mathcal B(U)$. Let $\\mathcal B\\otimes_{p,\\mathcal A}\\mathcal M$ be the presheaf $U\\mapsto\\mathcal B(U)\\otimes_{\\mathcal A(U)}\\mathcal M(U)$ (with $\\mathcal B(U)$ an $\\mathcal A(U)$-module through $a_U$), whose restriction map along $V\\subseteq U$ sends $b\\otimes m$ to $b|_V\\otimes m|_V$, made a presheaf of $\\mathcal B$-modules by $\\mathcal B(U)$ acting on the left factor. Then sending a morphism of presheaves of $\\mathcal B$-modules $v:\\mathcal B\\otimes_{p,\\mathcal A}\\mathcal M\\to\\mathcal N$ to the family $(m\\mapsto v_U(1\\otimes m))_U$ is a bijection $\\operatorname{Hom}_{\\mathcal B}(\\mathcal B\\otimes_{p,\\mathcal A}\\mathcal M,\\mathcal N)\\cong\\operatorname{Hom}_{\\mathcal A}(\\mathcal M,\\operatorname{Res}_a\\mathcal N)$ onto the morphisms of presheaves of $\\mathcal A$-modules, with inverse sending $w$ to the family $b\\otimes m\\mapsto b\\,w_U(m)$; it is natural in $\\mathcal M$ (a morphism $f:\\mathcal M\\to\\mathcal M'$ acting on the left side by precomposition with $\\mathrm{id}\\otimes f$) and in $\\mathcal N$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 006R, lemma-adjointness-tensor-restrict-presheaves (line 475), with the definitions of restriction and of the tensor product presheaf just before it (lines 437-472); its proof: 'for a ring map A -> B the restriction functor and the change of ring functor are adjoint' (Algebra 05DQ)"
+ },
+ "stmt_deps": [
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars of presheaves of modules left adjoint to restriction of scalars",
+   "results": "ModuleCat.extendRestrictScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings: one ring map); PresheafOfModules.restrictScalars (Presheaf.ChangeOfRings); SheafOfModules.restrictScalars; no presheaf extension of scalars",
+   "date": "2026-10-10",
+   "verdict": "no match: only the single-ring adjunction (which is the sectionwise ingredient, node lem-weil-pbc-scalar-extension-hom)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sectionwise tensor product presheaf of modules B(U) ⊗_{A(U)} M(U) left adjoint to restriction of scalars of presheaves of modules",
+   "results": "PresheafOfModules.Monoidal.tensorObj, tensorObjMap, tensorObj_map_tmul, monoidalCategory (Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal): tensor product of two presheaves of modules over the same presheaf of commutative rings; no change of rings",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.restrictScalars",
+   "results": "restrictScalars, restrictScalars_obj, restrictScalars_map_app, restrictScalarsCompToPresheaf, instFaithfulRestrictScalars (Presheaf/ChangeOfRings.lean); restrictHomEquivOfIsLocallySurjective (Sheaf/ChangeOfRings.lean); toSheafify, sheafifyHomEquiv (Presheaf/Sheafify.lean); no left adjoint of restrictScalars",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'extendScalars\\|TensorProduct\\|⊗' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf; sed -n 1,60p Presheaf/Pullback.lean",
+   "results": "only Presheaf/Monoidal.lean (tensor over one ring) and Presheaf/ColimitFunctor.lean; PresheafOfModules.pullback (Presheaf/Pullback.lean:44) is defined as (pushforward φ).leftAdjoint, existence abstract (line 97), with no sectionwise tensor formula",
+   "date": "2026-10-10",
+   "verdict": "no match: the identification of the abstract pullback along 𝟭 with the sectionwise tensor presheaf is not in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-module-change-of-rings-adjunction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian"
+}

@@ -1376,3 +1376,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of C1: lem-pc-module-pullback-adjunction merged from deliver/C1/lem-pc-module-pullback-adjunction (1 commit(s), 2 new node(s), spot-checked by L: L: 0096 as the composite of the inverse-image adjunction (008A) and the change-of-rings adjunction; 2 new nodes); claim closed
 - 12:11 L: merged C1 lem-pc-module-pullback-adjunction (0096, +2 nodes).
 - 12:13 L: accepted lem-sc-artin-schreier-dimension (0A3N route, 7 steps; new node: natural etale/Zariski comparison for quasi-coherent modules 03DW; 7 tool uses).
+- 12:14 L: accepted lem-sc-affine-curve-h2-vanishing (along the Lean, 4 steps; 2 new nodes closed on slopmaster2; 2 tool uses); isTorsion_upperStar attached to lem-weil-pbc-inverse-image-torsion (closed).
