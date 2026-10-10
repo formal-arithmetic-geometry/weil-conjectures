@@ -1,0 +1,91 @@
+{
+ "id": "lem-weil-pbc-zariski-open-restriction-injectives",
+ "kind": "statement",
+ "title": "Restriction of abelian Zariski sheaves to an open is exact and preserves injectives",
+ "statement": "Let $X$ be a scheme, $U\\subseteq X$ an open subscheme, and $X_{\\rm Zar}$, $U_{\\rm Zar}$ the small Zariski sites of $X$ and of $U$ [def-sc-zariski-site] (the objects of $U_{\\rm Zar}$ are the opens $W\\subseteq U$, which are also objects of $X_{\\rm Zar}$, and a family of opens of $U$ is a covering in $U_{\\rm Zar}$ if and only if it is one in $X_{\\rm Zar}$). Let $\\textit{Ab}(X_{\\rm Zar})$ and $\\textit{Ab}(U_{\\rm Zar})$ be the abelian categories of abelian sheaves [def-weil-pbc-sites-and-cohomology]. For $\\mathcal F\\in\\textit{Ab}(X_{\\rm Zar})$ let $\\mathcal F|_U\\in\\textit{Ab}(U_{\\rm Zar})$ be the abelian sheaf $W\\mapsto\\mathcal F(W)$ ($W\\subseteq U$ open) with the restriction maps of $\\mathcal F$, and for a morphism $\\varphi:\\mathcal F\\to\\mathcal G$ let $\\varphi|_U:\\mathcal F|_U\\to\\mathcal G|_U$ have components $(\\varphi|_U)_W=\\varphi_W$. Then: (1) the functor $\\textit{Ab}(X_{\\rm Zar})\\to\\textit{Ab}(U_{\\rm Zar})$, $\\mathcal F\\mapsto\\mathcal F|_U$, is additive and exact (it carries a sequence exact at the middle term [def-weil-pbc-exact-sequence] to one exact at the middle term); (2) if $\\mathcal I$ is an injective object of $\\textit{Ab}(X_{\\rm Zar})$ [def-sp-injective-resolutions], then $\\mathcal I|_U$ is an injective object of $\\textit{Ab}(U_{\\rm Zar})$; (3) consequently, if $\\mathcal F\\to\\mathcal I^\\bullet$ is an injective resolution of $\\mathcal F$ in $\\textit{Ab}(X_{\\rm Zar})$ [def-sp-injective-resolutions], then $\\mathcal F|_U\\to\\mathcal I^\\bullet|_U$ (the complex with terms $\\mathcal I^p|_U$ and differentials $d^p|_U$) is an injective resolution of $\\mathcal F|_U$ in $\\textit{Ab}(U_{\\rm Zar})$, and $\\Gamma(U,\\mathcal I^\\bullet|_U)=\\mathcal I^\\bullet(U)$ as complexes of abelian groups.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma 03F3 (label lemma-cohomology-of-open), line 607, parts (1) and (2) and its proof, applied to the ringed site (X_Zar, Z) (abelian sheaves = sheaves of Z-modules) and the object U, whose localized site X_Zar/U is U_Zar; the topological-space form is Cohomology of Sheaves, Lemma 01E1 (label lemma-cohomology-of-open), literature/stacks-project/cohomology.tex line 495, with O_X the constant sheaf Z. The proof there: restriction j_U^{-1} is right adjoint to the exact extension by zero j_{U!}, so it preserves injectives (Homology, Lemma 015Z adjoint-preserve-injectives)."
+ },
+ "stmt_deps": [
+  "def-sc-zariski-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-exact-sequence",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of an injective sheaf to an open subset is injective",
+   "results": "AlgebraicGeometry.PresheafedSpace.ofRestrict_mono, AlgebraicGeometry.Scheme.Modules.restrict_obj / restrictFunctor (Mathlib.AlgebraicGeometry.Modules.Sheaf), CategoryTheory.Sheaf.ΓRes; nothing about injective objects",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of sheaves to an open subset preserves injective objects (sheafRestrict injective)",
+   "results": "Scheme.Modules.restrict_obj, SheafedSpace.IsOpenImmersion.isoRestrict lemmas, Scheme.Opens.ι_appTop; no injectivity statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction functor from sheaves on a site to sheaves on the slice site over U preserves injective objects",
+   "results": "only CategoryTheory.Sheaf.IsLocallyInjective and related lemmas (Mathlib.CategoryTheory.Sites.LocallyInjective), about locally injective morphisms, not injective objects",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective.injective_of_adjoint",
+   "results": "CategoryTheory.Injective.injective_of_adjoint {L : C ⥤ D} {R : D ⥤ C} [L.PreservesMonomorphisms] (adj : L ⊣ R) (J : D) [Injective J] : Injective (R.obj J) (Mathlib.CategoryTheory.Preadditive.Injective.Basic)",
+   "date": "2026-10-10",
+   "verdict": "generalization, not a one-line specialization: needs a left adjoint of the restriction (extension by zero) that preserves monomorphisms; Mathlib has only the IsRightAdjoint instance for sheafRestrict conditional on one for overPullback (Topology/Sheaves/Over.lean:93-97), no extension-by-zero functor of abelian sheaves and no proof that it is exact"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Injective.*over|over.*Injective|injective_of_adjoint|overPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/Injective* ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves",
+   "results": "Sites/Over.lean:288 J.overPullback A X (restriction to the slice site), Topology/Sheaves/Over.lean:90 overPullbackSheafEquivOver (overPullback = sheafRestrict under Sheaf (J.over U) ≌ Sheaf (Opens.grothendieckTopology U)), Topology/Sheaves/Over.lean:93-97 IsRightAdjoint instance for sheafRestrict assuming one for overPullback; Preadditive/Injective/Basic.lean:195 injective_of_adjoint; Preadditive/Injective/Preserves.lean:30 Functor.PreservesInjectiveObjects (no instance for overPullback/sheafRestrict)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Sheaf.over",
+   "results": "CategoryTheory.Sheaf.over (Mathlib/CategoryTheory/Sites/Over.lean), index unavailable",
+   "date": "2026-10-10",
+   "verdict": "no match (the restriction functor exists; preservation of injectives does not)"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.Injective.injective_of_adjoint, CategoryTheory.GrothendieckTopology.overPullback, TopologicalSpace.Opens.overPullbackSheafEquivOver",
+  "file": "Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/Topology/Sheaves/Over.lean",
+  "line": "Injective/Basic.lean:195; Sites/Over.lean:288; Topology/Sheaves/Over.lean:90",
+  "how": "clause (2) follows from injective_of_adjoint once a mono-preserving left adjoint of restriction (extension by zero j_!) is given; Mathlib does not provide j_! for abelian sheaves or its exactness, so not a one-line specialization (point B8)"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zariski-cohomology-locally-zero",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
