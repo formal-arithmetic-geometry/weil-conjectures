@@ -1,8 +1,8 @@
 # Work queue
 
-808 items; claim with `tools/claim.py next <group> [--stage N]`.
+807 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (659)
+## Stage 1: nodes to split (656)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,10 +12,7 @@
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1011 | none |
 | `lem-weil-pbc-closed-immersion-residue-field-iso` | 1011 | none |
 | `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1011 | none |
-| `lem-weil-pbc-completion-of-dvr-is-dvr` | 1011 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
-| `lem-weil-pbc-flat-over-regular-with-regular-fibre` | 1011 | none |
-| `lem-weil-pbc-formal-functions-complete-base` | 1011 | none |
 | `lem-weil-pbc-formal-system-support-constant` | 1011 | none |
 | `lem-weil-pbc-formal-systems-annihilated-by-power` | 1011 | none |
 | `lem-weil-pbc-formal-systems-surjective` | 1011 | none |
@@ -666,7 +663,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (149)
+## Stage 2: nodes to state (151)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -700,6 +697,7 @@
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
+| `lem-weil-pbc-completion-of-dvr-is-dvr` | 1 | state |
 | `lem-weil-pbc-completion-regular-local` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-derivation-extends` | 1 | state |
@@ -748,6 +746,7 @@
 | `lem-weil-pbc-flat-module-completion-flat` | 1 | state |
 | `lem-weil-pbc-flat-module-powers` | 1 | state |
 | `lem-weil-pbc-flat-over-regular` | 1 | state |
+| `lem-weil-pbc-flat-over-regular-with-regular-fibre` | 1 | state |
 | `lem-weil-pbc-flat-permanence` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
@@ -820,7 +819,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 671 nodes that wait for stage 1, 435 nodes that wait for a statement dependency.
+Not open yet: 668 nodes that wait for stage 1, 436 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
