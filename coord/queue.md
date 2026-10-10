@@ -1,8 +1,8 @@
 # Work queue
 
-895 items; claim with `tools/claim.py next <group> [--stage N]`.
+898 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (326)
+## Stage 1: nodes to split (329)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,7 +18,6 @@
 | `lem-sc-ample-finite-set-affine` | 2012 | none |
 | `lem-sc-boundary-derivation-square-zero` | 2012 | none |
 | `lem-sc-closed-subset-qc-ideal` | 2012 | none |
-| `lem-sc-enough-globally-generated-ample` | 2012 | none |
 | `lem-sc-exact-functor-higher-derived-vanishing` | 2012 | none |
 | `lem-sc-find-globally-generated` | 2012 | none |
 | `lem-sc-graded-prime-avoidance` | 2012 | none |
@@ -27,12 +26,17 @@
 | `lem-sc-torsor-h1-functoriality` | 2012 | none |
 | `lem-sc-abelian-sheaf-short-exact-stalkwise` | 2013 | none |
 | `lem-sc-closed-pushforward-abelian-stalks` | 2013 | none |
+| `lem-sc-finite-sections-cover-qc` | 2013 | none |
 | `lem-sc-invert-s-cohomology` | 2013 | none |
-| `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
+| `lem-sc-tensor-globally-generated` | 2013 | none |
+| `lem-sc-tensor-section-affine-open` | 2013 | none |
+| `lem-weil-pbc-complex-spectral-sequence-comparison` | 3006 | none |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
+| `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
 | `lem-exc-field-sections-stalk-invariants` | 3007 | none |
-| `lem-sc-etale-standard-cover-cech` | 3008 | none |
 | `lem-weil-pbc-etale-cohomology-over-open` | 3008 | none |
+| `lem-sc-etale-coproduct-etale` | 3009 | none |
+| `lem-sc-etale-fibre-product-coproduct` | 3009 | none |
 | `lem-exc-etale-coproduct-etale` | 3010 | none |
 | `lem-exc-etale-field-galois-classification` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
@@ -58,7 +62,6 @@
 | `lem-sc-proper-upper-shriek-composition` | 3013 | none |
 | `lem-sc-regular-local-ext-vanishing` | 3013 | none |
 | `lem-sc-p1-koszul-resolution` | 3014 | none |
-| `lem-sc-p1-proj-tilde-functorial` | 3014 | none |
 | `lem-sc-p1-serre-section-module-comparison` | 3014 | none |
 | `lem-sc-p1-serre-section-module-finite` | 3014 | none |
 | `lem-sc-p1-tor-dimension-shifting` | 3014 | none |
@@ -907,7 +910,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 344 nodes that wait for stage 1, 1122 nodes that wait for a statement dependency.
+Not open yet: 347 nodes that wait for stage 1, 1126 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
