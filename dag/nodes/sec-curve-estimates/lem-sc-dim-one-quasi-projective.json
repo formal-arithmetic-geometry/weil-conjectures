@@ -26,9 +26,55 @@
   "def-weil-open-immersion",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the dimension-one ample-sheaf theorem [lem-sc-dim-one-ample-invertible], the separated finite-type scheme X of dimension at most one carries an ample invertible module $\\mathcal L$ in the absolute sense of Stacks Definition 01PS.",
+   "uses": [
+    "lem-sc-dim-one-ample-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0A25 (Tag 0A25), proof, first sentence: 'By Proposition 33.38.12 the scheme X has an ample invertible sheaf'; the input is Proposition 33.38.12 (Tag 09NZ)"
+   }
+  },
+  {
+   "text": "Apply the affine-base ample-to-immersion lemma [lem-weil-pbc-ample-very-ample-immersion-affine-base] with A=k, f the structure morphism X\\to\\operatorname{Spec}(k), and $\\mathcal L$. Its finite-type hypothesis follows from the given finite-type hypothesis, and its affine-base hypothesis holds for $\\operatorname{Spec}(k)$. We obtain a projective space $\\mathbf P^N_k$ and an immersion i:X\\hookrightarrow\\mathbf P^N_k over k.",
+   "uses": [
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01VS (morphisms-lemma-quasi-projective-finite-type-over-S), implication (1) => (5), specialized to S=Spec(k); the same criterion is the second sentence of Lemma 0A25's proof"
+   }
+  },
+  {
+   "text": "By the definition of an immersion, factor i as a closed immersion X\\hookrightarrow U followed by an open immersion U\\hookrightarrow\\mathbf P^N_k. These maps are over k, so the required locally closed immersion and the stated data are obtained.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Definition 29.41.1 (H-quasi-projective over a base), as invoked at the end of Lemma 0A25"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-dim-one-ample-invertible",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 0A25 proof, reconstructed from the cited ample-sheaf input (Tag 09NZ) and Morphisms Lemma 01VS because the local Stacks source is unavailable"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,10 +106,35 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-dim-one-projective"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-dim-one-quasi-projective",
+  "worker": "stage1",
+  "summary": "Split Lemma 0A25 into the existence of an ample invertible sheaf (new unsplit node lem-sc-dim-one-ample-invertible, sourced to Tag 09NZ as used in 0A25) and the existing affine-base ample-to-immersion criterion (Morphisms Tag 01VS). The item statement and hypotheses are unchanged; the final factorization is the definition of an immersion.",
+  "blueprint": "The three steps realize the blueprint ancestor lem-sc-pic-proper-ntorsion proof sentence requiring the dimension-one quasi-projectivity input: first the ample invertible sheaf, then the projective immersion, then its locally closed factorization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "why": "The item route needs the generic theorem that an ample invertible module over an affine base gives a projective-space immersion; no node in sk-thm-curveestimate supplies this construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+  "lem-weil-pbc-ample-very-ample-immersion-affine-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dim1qp",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dim1qp (reviewer sub-agent of L); spot-checked: Source read locally (present on this machine, contrary to the report's WANTED): Stacks 0A25 varieties.tex 9201-9216 (X separated finite type over k, dim<=1 => H-quasi-projective; proof: Prop 09NZ gives ample L, Morphisms 01VS gives an immersion into P^n_k, Def 29.41.1), 09NZ varieties.tex 8163-8167 (Noetherian separated of dimension 1 has an ample invertible sheaf), 01VS morphisms.tex 9412-9425 (L ample, X->S locally finite type => immersion i:X->P^n_S over S). Item statement unchanged and matches 0A25 hypothesis by hypothesis. New node lem-sc-dim-one-ample-invertible: hypotheses (finite type over a field, hence Noetherian; separated; dim<=1) specialise 09NZ and extend it to dim 0 and empty X, which is true (finite-type dim 0 is affine, O_X ample per def-weil-pbc-ample-invertible-module; empty X vacuous) and is exactly the use 0A25 makes of 09NZ; cited defs def-sc-invertible-module and def-weil-pbc-ample-invertible-module (absolute 01PS) read. Step 1 carried by lem-sc-dim-one-ample-invertible verbatim. Step 2 carried by lem-weil-pbc-ample-very-ample-immersion-affine-base (A=k; locally finite type from def-weil-finite-type-morphism; gives immersion i with q_n o i = f, which that statement already spells as closed immersion into open U followed by inclusion); accepted as C8 generic tool (01VS, unit sk-thm-p1, black box, it is the 0A25 route itself). Step 3: def-weil-closed-immersion's definition of immersion gives X->U closed, U->P^N_k open, over k since q_n o i = f. No slopmaster2 declaration states either node sorry-free (IsCurve.isQuasiProjective is sorry and assumes smoothness; no ample-existence theorem besides abelian varieties), so B10 does not apply; blueprint search 'ample invertible dimension'/'09NZ' found no same node. Fix: dag/nodes/sec-curve-estimates/lem-sc-dim-one-ample-invertible.json: source.place: wrong Stacks label varieties-proposition-one-dimensional-ample corrected to varieties-proposition-dim-1-noetherian-separated-has-ample (line 8164). 14:28-14:29 UTC; 1 file(s) fixed by the reviewer"
+ }
 }
