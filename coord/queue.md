@@ -1,8 +1,8 @@
 # Work queue
 
-834 items; claim with `tools/claim.py next <group> [--stage N]`.
+837 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (659)
+## Stage 1: nodes to split (662)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,9 +13,7 @@
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
-| `lem-weil-pbc-popescu-lifting` | 1011 | none |
 | `lem-weil-pbc-popescu-solution-modulo` | 1011 | none |
-| `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1011 | none |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1011 | none |
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1011 | none |
 | `lem-weil-pbc-regular-local-localization` | 1011 | none |
@@ -85,6 +83,7 @@
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1012 | none |
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
+| `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
 | `lem-weil-pbc-faithfully-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-fibre-product-affine-transition` | 1012 | none |
 | `lem-weil-pbc-finite-free-resolution-noetherian` | 1012 | none |
@@ -98,6 +97,7 @@
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1012 | none |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1012 | none |
 | `lem-weil-pbc-flat-ses-kernel-flat` | 1012 | none |
+| `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1012 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
@@ -110,6 +110,7 @@
 | `lem-weil-pbc-ideal-module-product-stalk` | 1012 | none |
 | `lem-weil-pbc-immersion-fibre-degree-one` | 1012 | none |
 | `lem-weil-pbc-integral-extension-dimension` | 1012 | none |
+| `lem-weil-pbc-kahler-differentials-polynomial-extension` | 1012 | none |
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1012 | none |
 | `lem-weil-pbc-krull-intersection-localization` | 1012 | none |
 | `lem-weil-pbc-local-artinian-basis-when-flat` | 1012 | none |
@@ -147,6 +148,8 @@
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1012 | none |
+| `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1012 | none |
+| `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-smooth-over-product-ring` | 1012 | none |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1012 | none |
 | `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
@@ -846,7 +849,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 671 nodes that wait for stage 1, 465 nodes that wait for a statement dependency.
+Not open yet: 674 nodes that wait for stage 1, 467 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
