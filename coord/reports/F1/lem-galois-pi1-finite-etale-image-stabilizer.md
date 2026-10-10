@@ -1,0 +1,28 @@
+# lem-galois-pi1-finite-etale-image-stabilizer
+
+## Worker report
+
+Files written:
+
+- `dag/nodes/sec-curve-estimates/lem-galois-pi1-finite-etale-image-stabilizer.json`: four-step proof; the image is the marked-point stabilizer, open and of the stated index. No exact Lean attachment exists for the whole item.
+- `dag/nodes/sec-curve-estimates/lem-galois-finite-etale-connected-object.json`: unsplit statement, not a Mathlib leaf; exact sorry-free slopmaster2 declaration reported below for lead attachment. LeanSearch, LeanFinder, Loogle and pinned Mathlib source searches found no Mathlib counterpart. This node supplies the categorical connectedness used in step 4.
+
+Attachment: `AlgebraicGeometry.Scheme.FiniteEtale.isConnected_of_connectedSpace` belongs to `lem-galois-finite-etale-connected-object`, at `WeilConjectures/AlgebraicGeometry/FundamentalGroup/Connected.lean:46-68`; its sorry-map entry has `s=false, ts=false` on slopmaster2 71d63dcf.
+
+WANTED: `literature/sga/SGA1_arXiv-math0206203.pdf` in this clone for `lem-galois-pi1-finite-etale-image-stabilizer`. The PDF is listed in `literature/LIST.md` but its generated copy is absent here. I read the cited primary source through `https://arxiv.org/pdf/math/0206203`, Expose V, Proposition 6.13, printed pp. 114-115 (PDF page 129), and `literature`'s Stacks source equivalent at `/tmp/stacks-project/pione.tex:1217-1269`.
+
+SGA V.6.13 states that the fundamental group of the slice over a connected marked object identifies with the open stabilizer, but says that the proof is left to the reader. The item therefore has `proof_origin.by = agent`. Step 1 uses the diagonal section to show the image fixes the point; steps 2-3 use finite and etale composition and naturality to restrict each stabilizing automorphism to the fibres of covers over `Y'`, then check its image under `f_*`; step 4 gets openness from the evaluation topology and index from transitivity. I checked the definitions and public statements of every cited node. Stacks Tag 0BNB (`pione.tex`, `lemma-finite-etale-connected-galois-category`, proof paragraph 2) proves the connected-scheme/categorical-connected fact; the exact Lean theorem was attached as its own cited node.
+
+The smallest cases behave correctly: for `f` an isomorphism the fibre has one point and the image is all of `G`; for a connected degree-two cover the transitive two-point action makes the stabilizer index two. The connectedness hypothesis is needed for the index assertion; without it the orbit of the marked point need not be the whole fibre.
+
+`python3 tools/review_split.py lem-galois-pi1-finite-etale-image-stabilizer`: PASS, one new node. `python3 tools/check_dag.py`: zero cycles; exits nonzero on seven pre-existing unreachable-node warnings and eleven pre-existing `thm-constructible-serre` route warnings outside this item.
+
+Unfinished: none for this item. The new node's `lean_audit` remains `none`; the lead must verify and attach the reported Lean declaration. Its `proof_origin` is null because it is unsplit.
+
+## Review by F1
+
+I read SGA 1, Expose V, Proposition 6.13, printed pp. 114-115 (the arXiv edition, PDF page 129): it identifies the fundamental group of the slice over a connected marked object with the open stabilizer, and explicitly leaves the proof to the reader. Its §5.3 transitivity gives the index. I also read Stacks `pione.tex`, `lemma-finite-etale-connected-galois-category` (0BNB), for the equivalence between connected finite-etale schemes and connected objects. The item's connected finite-etale hypotheses match the SGA specialization; the degree-one cover gives index one, and a connected degree-two cover gives index two.
+
+In step 1 the public `lem-galois-pi1-functoriality` states the natural fibre bijections and action identity; applying it to the diagonal section of the marked cover shows the image fixes the marked point. Step 2 uses precisely clause (2) of `lem-weil-pbc-etale-composition-cancellation` and `lem-weil-pbc-finite-composition` to regard a cover over Y' as a cover over Y, then naturality restricts an automorphism fixing the marked point to the specified fibre. Step 3 checks those restrictions are natural and uses the fibre-compatible equivalence of `thm-galois-lc-etale` and the defining characterization of functoriality to recover g; it does not assume surjectivity of f_* in advance. Step 4 uses continuity of evaluation in `def-galois-fibre-functor`, the public transitivity statement of `lem-galois-transitive`, and the connected-object input; the coset-to-orbit map gives the exact index. The uncited operations in these steps are the diagonal's universal property, restriction of a bijection to an invariant fibre, and elementary coset algebra.
+
+I inspected the new node against B1-B7: it is an unsplit, self-contained statement with Stacks 0BNB as source, definition citations, blueprint provenance and recorded Mathlib searches; a DAG/blueprint search found no exact existing node. The source declaration `AlgebraicGeometry.Scheme.FiniteEtale.isConnected_of_connectedSpace` in `WeilConjectures/AlgebraicGeometry/FundamentalGroup/Connected.lean:46-68` has the same categorical conclusion under connectedness assumptions and its displayed proof contains no sorry. The worker initially marked the new node Lean-closed, which is L's attachment decision; I sent it back, and its audit is now `none` while the exact attachment is reported above for L to verify against the sorry map. This is the B10 repair. No item statement or target was weakened, no proof was relabelled into a new node, and the no-cycle and route checks pass. The missing local SGA PDF remains WANTED as reported, although I read the cited arXiv source directly for this review.
