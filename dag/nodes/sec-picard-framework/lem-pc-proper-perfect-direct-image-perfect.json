@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Perfect direct image along a perfect proper morphism",
- "statement": "Let f:X\\to Y be a perfect proper morphism of Noetherian schemes [def-pc-scheme] (perfect means finite Tor dimension, equivalently that \\mathcal O_X has finite Tor dimension over Y), and let P be a perfect object of D(\\mathcal O_X) [def-pc-perfect-complex]. Then Rf_*P [def-pc-derived-direct-image] is a perfect object of D(\\mathcal O_Y).",
+ "statement": "Let Y be a Noetherian scheme [def-pc-scheme], let f:X\\to Y be a perfect proper morphism of schemes (perfect means finite Tor dimension, equivalently that \\mathcal O_X has finite Tor dimension over f^{-1}\\mathcal O_Y), and let P be a perfect object of D(\\mathcal O_X) [def-pc-perfect-complex]. Then Rf_*P [def-pc-derived-direct-image] is a perfect object of D(\\mathcal O_Y) [def-pc-perfect-complex].",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
   "place": "Lemma more-morphisms-lemma-perfect-proper-perfect-direct-image (Tag 0B6G)"
@@ -24,9 +24,41 @@
   "def-pc-perfect-complex",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Conditions (1)-(3) of Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV) hold, as in Tag 0B6G where (1),(2) are called immediate and (3) local. Because f is proper [def-weil-proper-morphism], it is of finite type, hence locally of finite type, X is Noetherian, and X is proper over Y; the support of every cohomology sheaf of P is closed in X, hence proper over Y (a closed immersion followed by f). Locally P is represented by a bounded strictly perfect complex [def-pc-perfect-complex]; on the Noetherian scheme X its cohomology sheaves are coherent, and since X is quasi-compact finitely many opens suffice, so P is bounded with coherent cohomology. The perfect-morphism hypothesis says that O_X has finite Tor dimension over f^{-1}O_Y; each term of a local bounded strictly perfect representative of P is a direct summand of a finite free O_U-module, so the representative has finite Tor dimension over f^{-1}O_Y, and by quasi-compactness of X the bound is uniform, so P has finite Tor dimension over f^{-1}O_Y.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 37.61.13 (Tag 0B6G), proof: conditions (1)--(3) for Lemma 36.27.1"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect] with S=Y and E=P. Its hypotheses (Y Noetherian, f locally of finite type, P bounded with coherent cohomology, supports proper over Y, finite Tor dimension over f^{-1}O_Y) are exactly the conclusions of step 1, so Rf_*P is perfect on Y.",
+   "uses": [
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 37.61.13 (Tag 0B6G), final application of Lemma 36.27.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-pc-perfect-complex",
+  "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma 37.61.13 (Tag 0B6G)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +83,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-smooth-proper-tensor-direct-sums",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-proper-perfect-direct-image-perfect",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 0B6G and its cited criterion Tag 08EV. Added the broader statement-only criterion for bounded coherent complexes with proper support and finite Tor dimension, then split the item into checking those hypotheses for a perfect object and applying the criterion.",
+  "blueprint": "The two steps realize Tag 0B6G's conditions check and final application of Lemma 36.27.1.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ppd2217",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ppd2217 (reviewer sub-agent of L); spot-checked: Lead's special-case hypothesis checked and rejected: lem-pc-proper-support-perfect-direct-image (0A1H) and lem-pc-noetherian-perfect-direct-image (0DJQ) need G flat over S; with G=O_X that is f flat, while the item (Tag 0B6G) only assumes f perfect (finite Tor dimension), so it is not a special case and is not class (b). New node = Tag 08EV exactly (D^b_Coh, proper supports, finite Tor dim over f^{-1}O_S, f lft, S Noetherian); no existing node states 08EV; statement true. Item statement = Tag 0B6G (perfect morphism over Noetherian base: pseudo-coherence automatic, X quasi-compact so local = global finite Tor dim). Step 2 hypotheses checked. FIX more, RETURN less: (1) C1 step 1: facts argued only from definitions (closed-in-proper is proper, perfect on Noetherian => D^b_Coh, locality/uniformity of finite Tor dimension) marked elementary with Tags 08EV/0B6G named and quasi-compactness made explicit; (2) step 2 notation slip 'perfect on S' corrected to Y, hypotheses listed with S=Y; (3) B3 new node: cited stmt_dep def-weil-pbc-closed-subset-proper-over-base inline and recorded own grep of Mathlib (no match). Second reading by G1 missed the S/Y slip left in step 2.; 2 file(s) fixed by the reviewer"
+ }
 }
