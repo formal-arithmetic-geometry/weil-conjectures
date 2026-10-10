@@ -1,0 +1,90 @@
+{
+ "id": "lem-weil-pbc-normal-locus-open",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, Lemma 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1: 'Hence by Lemma [0332] the set of primes p' in Spec(R') with R'_{p'} non-normal is closed in Spec(R')'",
+   "via": [
+    "lem-weil-pbc-n1-local-characterization",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The normal locus of a Noetherian domain with a normal principal localization is open (Stacks 0332)",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] which is an integral domain, and suppose there is a nonzero $f\\in R$ such that the localization $R_f$ [def-weil-ring-localization-away] is a normal domain [def-weil-pbc-normal-ring]. Then the set $U=\\{\\mathfrak p\\in\\operatorname{Spec}R:\\ R_{\\mathfrak p}\\text{ is a normal domain}\\}$, where $R_{\\mathfrak p}$ is the localization at the prime $\\mathfrak p$ [def-weil-pbc-localization-at-prime], is open in $\\operatorname{Spec}R$ for the Zariski topology [def-weil-affine-spectrum].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0332 (lemma-openness-normal-locus), lines 45442-45480, and its proof (Serre's criterion 031S, finiteness of associated primes 00LC)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the set of primes p such that the localization R_p is integrally closed is open in Spec R, Noetherian domain",
+   "results": "IsIntegrallyClosed.of_localization_maximal, isIntegrallyClosed_ofLocalizationMaximal, IsIntegrallyClosed.of_isLocalization_maximal, IsIntegrallyClosed.of_localization (Mathlib.RingTheory.LocalProperties.IntegrallyClosed), Algebra.isOpen_unramifiedLocus (Mathlib.RingTheory.Unramified.Locus), isIntegrallyClosed_of_isLocalization",
+   "date": "2026-10-10",
+   "verdict": "no match (local-global criteria for integral closedness, openness only of the unramified locus)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "normal locus of a Noetherian domain is open if some principal localization is normal",
+   "results": "AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, Algebra.isOpen_unramifiedLocus, IsIntegrallyClosed.of_localization, AlgebraicGeometry.isNoetherianRing_of_away, Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton, IsNoetherianRing.of_isLocalization_maximal",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsOpen, IsIntegrallyClosed, PrimeSpectrum",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln IsIntegrallyClosed ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln IsOpen; grep -rnE 'normalLocus|normal_locus' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only RingTheory/ZariskisMainTheorem.lean (IsOpen there concerns a point open in its fibre, lines 744-757; IsIntegrallyClosed not about an open locus); no normalLocus",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-n1-local-characterization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 0332"
+}
