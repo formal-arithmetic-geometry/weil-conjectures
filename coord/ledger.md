@@ -2708,3 +2708,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:41 L: merged deliver/C1/lem-weil-pbc-constructible-subobjects-noetherian (reviewer FIX; first push; new nodes: 1)
 - 21:41 L: returned deliver/J1/lem-sc-affine-perfect-support-extension (reviewer RETURN: 1. E (false new statement) lem-sc-affine-support-iterated-cones: with E|_U = F+F[1], each cone of a map that is zero on )
 - 21:42 L: merged deliver/J1/lem-pur-sheaf-hom-cover-gluing (reviewer FIX; first push; new nodes: 0)
+- 21:42 L: returned deliver/K1/thm-sc-constant-invariance (reviewer RETURN: 1. C4 (step 1): lem-sc-base-change-curve gives C_{k'} smooth separated (proper/affine preserved) but NOT connected, yet )
