@@ -27,7 +27,6 @@
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-pc-ringed-spaces-derived-pullback-composition` | 3015 | none |
 | `lem-sc-derived-hom-finite-free-model` | 3015 | none |
-| `lem-sc-derived-internal-hom-restrict-open` | 3015 | none |
 | `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
 | `lem-sc-finite-sheafhom-affine-adjoint` | 3015 | none |
@@ -41,6 +40,7 @@
 | `lem-pc-derived-adjoint-functors` | 3016 | none |
 | `lem-pc-derived-ambient-direct-sums` | 3016 | none |
 | `lem-pc-derived-direct-image-uniform-truncation-bound` | 3016 | none |
+| `lem-sc-derived-k-injective-restrict-open` | 3016 | none |
 | `lem-sc-p1-section-restriction-s-torsion` | 3016 | none |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 3016 | none |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 3017 | none |
@@ -917,7 +917,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 314 nodes that wait for stage 1, 1295 nodes that wait for a statement dependency.
+Not open yet: 314 nodes that wait for stage 1, 1296 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
