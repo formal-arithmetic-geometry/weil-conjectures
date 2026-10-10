@@ -11,8 +11,6 @@
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1011 | none |
 | `lem-weil-pbc-sheaf-finite-relation-truncations` | 1011 | none |
 | `lem-weil-pbc-sheaf-finite-truncation-colimit` | 1011 | none |
-| `lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer` | 1011 | none |
-| `lem-weil-pbc-singular-ideal-localization-smooth` | 1011 | none |
 | `lem-weil-pbc-site-coverings-common-refinement` | 1011 | none |
 | `lem-weil-pbc-site-module-sheafification-lift-injective` | 1011 | none |
 | `lem-weil-pbc-site-plus-construction-functorial` | 1011 | none |
@@ -62,6 +60,7 @@
 | `lem-weil-pbc-completion-dimension` | 1012 | none |
 | `lem-weil-pbc-completion-finite-extension` | 1012 | none |
 | `lem-weil-pbc-composition-fibre-degree-bound` | 1012 | none |
+| `lem-weil-pbc-constant-sheaf-open-maps-sections` | 1012 | none |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1012 | none |
 | `lem-weil-pbc-constructible-is-retrocompact` | 1012 | none |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1012 | none |
@@ -145,6 +144,7 @@
 | `lem-weil-pbc-sets-extension-by-empty-adjunction` | 1012 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
+| `lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections` | 1012 | none |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1012 | none |
 | `lem-weil-pbc-smooth-at-generic-point-over-field` | 1012 | none |
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1012 | none |
@@ -862,7 +862,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 673 nodes that wait for stage 1, 470 nodes that wait for a statement dependency.
+Not open yet: 673 nodes that wait for stage 1, 472 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
