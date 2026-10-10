@@ -1,8 +1,8 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+856 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (359)
+## Stage 1: nodes to split (355)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -41,7 +41,6 @@
 | `lemma-weil-pbc-fibre-product-limit` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `def-galois-fibre-functor` | 3005 | none |
-| `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
@@ -54,15 +53,11 @@
 | `lem-sc-ga-cohomology` | 3007 | none |
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
 | `lem-sc-local-ring-artin-schreier-kernel` | 3007 | none |
-| `lem-weil-pbc-matching-object-fibre-product` | 3007 | none |
 | `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `lem-weil-pbc-simplicial-set-add-simplices` | 3007 | none |
 | `def-pc-divisor-line-bundle` | 3008 | none |
 | `def-sc-picard-functor` | 3008 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
-| `lem-galois-coproduct-copies-morphisms-clopen` | 3008 | none |
-| `lem-galois-fpqc-morphisms-descend` | 3008 | none |
-| `lem-pc-degree-base-change` | 3008 | rests_on_sorry |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
 | `lem-sc-divisor-finite-support` | 3008 | none |
 | `lem-sc-etale-qcoherent-presheaf-functorial` | 3008 | none |
@@ -84,9 +79,10 @@
 | `def-sc-rational-functions` | 3009 | none |
 | `lem-galois-fpqc-descend-unramified` | 3009 | none |
 | `lem-galois-fpqc-descending-types-morphisms` | 3009 | none |
+| `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
+| `lem-pc-chi-zero-dim-support` | 3009 | none |
 | `lem-pc-closed-imm-base-change` | 3009 | sorry_here |
 | `lem-pc-dimension-affine-open-cover` | 3009 | none |
-| `lem-pc-divisor-line-bundle-agrees-sc` | 3009 | none |
 | `lem-pc-euler-characteristic-well-defined` | 3009 | none |
 | `lem-pc-h0-geom-connected` | 3009 | none |
 | `lem-pc-h0-proper-variety` | 3009 | none |
@@ -366,7 +362,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (499)
+## Stage 2: nodes to state (501)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -408,8 +404,10 @@
 | `def-weil-pbc-strictly-standard-element` | 1 | state |
 | `def-weil-pbc-symmetric-product-morphism` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
+| `lem-galois-coproduct-copies-morphisms-clopen` | 1 | state |
 | `lem-galois-flat-algebra-descent` | 1 | state |
 | `lem-galois-fpqc-descend-etale` | 1 | state |
+| `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
@@ -870,7 +868,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 379 nodes that wait for stage 1, 931 nodes that wait for a statement dependency.
+Not open yet: 375 nodes that wait for stage 1, 934 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
