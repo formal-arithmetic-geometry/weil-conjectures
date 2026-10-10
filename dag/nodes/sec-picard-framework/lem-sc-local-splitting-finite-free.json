@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-riemann-roch",
-   "place": "Proof of (*), determinant paragraph: local splitting of the short exact sequence of locally free modules",
+   "place": "Proof of (*), determinant paragraph: local splitting",
    "via": [
     "lem-sc-determinant-short-exact"
    ]
@@ -22,9 +22,47 @@
   "def-pc-scheme",
   "def-amb-finite-locally-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each point of $X$, apply the local-section statement to the quotient map $q$ and shrink to an open neighbourhood $U_a$ carrying a section $s_a:\\mathcal E_3|_{U_a}\\to\\mathcal E_2|_{U_a}$ with $q\\circ s_a=\\mathrm{id}$.",
+   "uses": [
+    "lem-sc-local-section-quotient-finite-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph: local splitting"
+   }
+  },
+  {
+   "text": "On such a $U_a$, define $\\Phi_a:(\\mathcal E_1|_{U_a})\\oplus(\\mathcal E_3|_{U_a})\\to\\mathcal E_2|_{U_a}$ by $\\Phi_a(e_1,e_3)=u(e_1)+s_a(e_3)$. Define $\\Psi_a:\\mathcal E_2|_{U_a}\\to(\\mathcal E_1|_{U_a})\\oplus(\\mathcal E_3|_{U_a})$ by $\\Psi_a(e)=(e-s_a(q(e)),q(e))$. Exactness gives $q(e-s_a(q(e)))=0$, hence a unique first component in the image of $u$; injectivity of $u$ makes this formula well-defined, and direct substitution using $q\\circ s_a=\\mathrm{id}$ shows $\\Psi_a\\Phi_a=\\mathrm{id}$ and $\\Phi_a\\Psi_a=\\mathrm{id}$. Thus the sequence over $U_a$ is isomorphic to the split sequence.",
+   "uses": [
+    "lem-sc-local-section-quotient-finite-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph: local splitting"
+   }
+  },
+  {
+   "text": "The opens $U_a$ cover $X$ by construction, so the local isomorphisms establish the asserted open-cover local splitting.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), determinant paragraph: local splitting"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-local-section-quotient-finite-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph: local splitting"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +87,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-determinant-short-exact",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-local-splitting-finite-free",
+  "worker": "stage1",
+  "summary": "Added a statement-only local-section node for the quotient of a short exact sequence with finite locally free quotient, then proved the item by constructing inverse maps from a local section and checking them directly.",
+  "blueprint": "Realizes the blueprint determinant paragraph's local splitting step.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-lsf",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lsf (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-riemann-roch.md, proof of (*), determinant paragraph (lines 144-148: 'locally the sequence splits'); the item statement is unchanged and agrees with it (scheme, short exact sequence of finite locally free modules, open cover on which the sequence is the split one). New node lem-sc-local-section-quotient-finite-free (statement-only, unsplit, TeX, cites def-pc-scheme and def-amb-finite-locally-free-module, both read): local right inverse of q near each point when E3 is locally free of constant finite rank; true (trivialise E3 on V ~ O^d, lift the d basis sections locally through the surjective sheaf map q, shrink to the intersection), hypothesis on E1,E2 not needed. Step 1 takes exactly that statement. Step 2 is elementary: Phi=(u,s), Psi=(u^{-1}(e-sq e), q e), well-defined since ker q = im u as subsheaves and u injective; composites identity by substitution; checked ranks (0,0),(1,0),(0,1),(1,1). Step 3 is the cover. proof_deps = union of uses; no tool_uses; item's created untouched; from.place shortened (split-owned). blueprint_refs search 'local section quotient locally free' 0 hits, same_as [] fine; no slopmaster2 declaration states the new node (grep), Mathlib searches 3 kinds recorded, no match. Start Sat Oct 10 03:15:02 PM UTC 2026, end Sat Oct 10 03:15:26 PM UTC 2026."
+ }
 }
