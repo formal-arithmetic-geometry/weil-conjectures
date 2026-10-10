@@ -31,9 +31,62 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian because its only ideals are $0$ and $k$. Applying [lem-weil-pbc-finite-type-algebra-noetherian] to the finite type map $k\\to A$ shows that $A$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite), proof lines 40384-40390: the fibre algebra is finite type over the field and hence Noetherian"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-noetherian-finitely-many-minimal-primes], the Noetherian ring $A$ has a finite set of minimal prime ideals.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite), proof lines 40384-40390, using Lemma Tag 00FR (lemma-Noetherian-irreducible-components)"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q$ be a prime whose singleton is open. By the basic-open basis [lem-weil-pbc-spec-localization-away-basic-open], there is $f\\in A$ with $\\mathfrak q\\in D(f)\\subseteq\\{\\mathfrak q\\}$, so $D(f)=\\{\\mathfrak q\\}$. If $\\mathfrak p\\subseteq\\mathfrak q$ is any prime, then $f\\notin\\mathfrak q$ implies $f\\notin\\mathfrak p$, hence $\\mathfrak p\\in D(f)=\\{\\mathfrak q\\}$ and $\\mathfrak p=\\mathfrak q$. Thus every isolated prime is minimal.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite), proof lines 40362-40368, where isolated points of the finite-type fibre are counted; the minimality argument uses Lemma Tag 00E0 (lemma-Zariski-topology), part (14)"
+   }
+  },
+  {
+   "text": "The set of isolated primes, including the isolated closed primes counted in the source, is therefore a subset of the finite set of minimal primes from step 2, and is finite.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite), proof lines 40384-40404: the finite set of isolated closed points is used as the induction parameter"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite), proof lines 40384-40404; its isolated closed points are a subset of the isolated points counted here, whose finiteness follows from the Noetherian finite-minimal-prime argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +111,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-type-etale-finite-factor-decomposition"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-type-field-finite-isolated-points",
+  "worker": "stage1",
+  "summary": "Checked Algebra Lemma 00UK (proof lines 40384-40404), which counts isolated closed points of the finite-type fibre for induction. This item proves the stronger finiteness of all isolated points. Finite type over the field makes A Noetherian via 00FN; 00FR gives finitely many minimal primes; an open singleton prime is minimal by the basic-open basis (00E0 (14)); hence the isolated-prime set is a subset of a finite set. No new node was needed, and the item's existing Mathlib searches were retained.",
+  "blueprint": "realizes the ancestor blueprint step 7 clause that the finite-type fibre has only finitely many isolated points",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fip",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fip (reviewer sub-agent of L); spot-checked: Source: Stacks Algebra Lemma 00UK (lemma-etale-makes-quasi-finite-finite, algebra.tex 40362-40420), whose proof says the finite-type fibre over the residue field is Noetherian and so has finitely many isolated closed points; the item (unchanged statement) asks the stronger finiteness of all primes with open singleton over a field k, hypotheses k field and A finite type, matching. Step 1 carried by lem-weil-pbc-finite-type-algebra-noetherian (Noetherian base, finite type map) with k Noetherian elementary from def-weil-pbc-noetherian-ring; step 2 by lem-weil-pbc-noetherian-finitely-many-minimal-primes; step 3 by part (i) of lem-weil-pbc-spec-localization-away-basic-open (basis of D(a)) giving D(f)={q}, then any prime p in q lies in D(f), so q is minimal; step 4 a subset of a finite set. proof_deps equal the union of uses; no new nodes, no tool uses; only split-owned fields changed (status, proof, proof_deps, proof_origin, split_report). No sorry-free slopmaster2 declaration states the item (grep for isolated/open-singleton finiteness). Small cases: A=k (one isolated minimal prime), k[x] (none), k x k (two), zero ring (empty). 14:45-14:46 UTC."
+ }
 }
