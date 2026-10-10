@@ -82,6 +82,8 @@ definition `ν_X^* ∘ f^× ∘ Rν_{Y,*}` (`AlgebraicGeometry.ProEtale.rightDer
 
 - `AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint.isLeftAdjoint`: under clause (1),
   `Rf_!` is a left adjoint.
+- `HasUniformCohomologicalDimensionLE.isLeftAdjoint_rightDerivedLowerStar`: under `FullCD`, the
+  proper part `Rp_*` is a left adjoint (Brown representability). The proof is `sorry`.
 - `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar`
 -/
 
@@ -142,15 +144,35 @@ structure HasAmbientExceptionalRightAdjoint (f : X ⟶ Y) [HasCompactification f
   exists_hasUniformCohomologicalDimensionLE :
     ∃ c : ℕ, HasUniformCohomologicalDimensionLE A (HasCompactification.compactification f).g c
 
+/-- Blueprint `sk-prop-sf-existence`(b), the proper part: under the uniform
+cohomological-dimension bound `FullCD(p, A; c)`, the derived pushforward `Rp_*` is a left
+adjoint on the unbounded derived categories of the small pro-étale sites.
+
+The bound makes `Rp_*` preserve coproducts: the cohomology sheaves of `Rp_*` of a coproduct
+are computed by the hypercohomology spectral sequence, which degenerates uniformly in the
+bounded range. Brown representability then gives the right adjoint. -/
+theorem HasUniformCohomologicalDimensionLE.isLeftAdjoint_rightDerivedLowerStar {p : X ⟶ Y}
+    {c : ℕ} (_h : HasUniformCohomologicalDimensionLE A p c) : (R((p)_*[A])).IsLeftAdjoint :=
+  sorry
+
 /-- Blueprint `sk-prop-sf-existence`(b): under the ambient exceptional right adjoint datum, the
 derived lower shriek `Rf_!` is a left adjoint on the unbounded derived categories of the small
 pro-étale sites.
 
 The bound `FullCD` makes `Rp_*` preserve coproducts, hence `Rf_! = Rp_* j_!` preserves
-coproducts, and Brown representability gives the right adjoint. -/
+coproducts, and Brown representability gives the right adjoint. Here `Di_!` is a left adjoint (of
+`Ri^*`), so this is reduced to the proper part
+`AlgebraicGeometry.ProEtale.HasUniformCohomologicalDimensionLE.isLeftAdjoint_rightDerivedLowerStar`.
+-/
 theorem HasAmbientExceptionalRightAdjoint.isLeftAdjoint {f : X ⟶ Y} [HasCompactification f]
     (_h : HasAmbientExceptionalRightAdjoint A f) : (R(f)_![A]).IsLeftAdjoint :=
-  sorry
+  have := HasUniformCohomologicalDimensionLE.isLeftAdjoint_rightDerivedLowerStar A
+    _h.exists_hasUniformCohomologicalDimensionLE.choose_spec
+  have : D(((HasCompactification.compactification f).i)_!open[A]).IsLeftAdjoint :=
+    Adjunction.isLeftAdjoint (Adjunction.mapDerivedCategoryRightDerivedAdjunction
+      (ProEtale.openImmersionAdjunctionTriple A (HasCompactification.compactification f).i).adj₁)
+  inferInstanceAs (D(((HasCompactification.compactification f).i)_!open[A]) ⋙
+    R(((HasCompactification.compactification f).g)_*[A])).IsLeftAdjoint
 
 section Admissibility
 
