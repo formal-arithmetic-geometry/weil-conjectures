@@ -51,6 +51,12 @@ repository the composition law and the base change of `R^!` and the tensor formu
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor`). For this
 reason they are parameters of the definitions here rather than fixed isomorphisms; once the
 canonical isomorphisms are constructed they are the intended values of these parameters.
+Each comparison isomorphism carries the hypotheses of the statement it stands in for; in
+particular the exponent of `Λ` is invertible on the source, without which `Rf^!` of a smooth
+`f` is not a twist of `Lf^*`.
+
+TODO: replace `AlgebraicGeometry.Etale.OrientationComparisonData` by the canonical comparison
+isomorphisms once they are constructed, so that an orientation datum no longer depends on `C`.
 -/
 
 @[expose] public section
@@ -90,18 +96,21 @@ structure OrientationComparisonData where
   `g ≫ f = f' ≫ v` with `f` smooth of relative dimension `d`. -/
   upperShriekBaseChange {X Y X' Y' : Scheme.{u}} {g : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
     {v : Y' ⟶ Y} (sq : IsPullback g f' f v) (d : ℕ) [IsSeparated f]
-    [SmoothOfRelativeDimension d f] [HasCompactification f] [HasCompactification f'] :
+    [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
+    [HasCompactification f'] :
     R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
       L((v)^*[ModuleCat.{u + 1} Λ]) ⋙ R(f')^![ModuleCat.{u + 1} Λ]
   /-- The tensor formula `Rf^!(Λ_Y(e)[2e]) ≅ Λ_X(e)[2e] ⊗ ω_f` for `f` smooth of relative
   dimension `d`. -/
   upperShriekTateShift {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f]
-    [SmoothOfRelativeDimension d f] [HasCompactification f] (e : ℤ) :
+    [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
+    (e : ℤ) :
     (R(f)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ Y e)⟦2 * e⟧) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((tateObject Λ X e)⟦2 * e⟧)).obj
         (dualizingComplex (ModuleCat.{u + 1} Λ) f)
   /-- The canonical orientation `Λ(1)[2] ≅ Rπ^! Λ_Y` of the affine line `π : 𝔸¹_Y ⟶ Y`. -/
-  affineLine (Y : Scheme.{u}) [HasCompactification (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)] :
+  affineLine (Y : Scheme.{u}) [HasCompactification (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)]
+    [HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Y)] :
     (tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) (1 : ℕ))⟦(2 * (1 : ℕ) : ℤ)⟧ ≅
       dualizingComplex (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
 
@@ -119,8 +128,8 @@ composition law. Compatibility of an orientation datum with composition says tha
 `γ_{f ≫ g}` is this composite. -/
 noncomputable def OrientationComparisonData.compIso (C : OrientationComparisonData Λ)
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (d e : ℕ) [IsSeparated f]
-    [SmoothOfRelativeDimension d f] [HasCompactification f] [HasCompactification g]
-    [HasCompactification (f ≫ g)]
+    [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
+    [HasCompactification g] [HasCompactification (f ≫ g)]
     (γf : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f)
     (γg : (tateObject Λ Y e)⟦(2 * e : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) g) :
     (tateObject Λ X (d + e : ℕ))⟦(2 * (d + e : ℕ) : ℤ)⟧ ≅
@@ -142,7 +151,7 @@ Naturality of an orientation datum in the base says that `γ_{f'}` is this compo
 noncomputable def OrientationComparisonData.baseChangeIso (C : OrientationComparisonData Λ)
     {X Y X' Y' : Scheme.{u}} {g : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {v : Y' ⟶ Y}
     (sq : IsPullback g f' f v) (d : ℕ) [IsSeparated f] [SmoothOfRelativeDimension d f]
-    [HasCompactification f] [HasCompactification f']
+    [HasCompactification f] [HasInvertibleExponent Λ X] [HasCompactification f']
     (γf : (tateObject Λ X d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f) :
     (tateObject Λ X' d)⟦(2 * d : ℤ)⟧ ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f' :=
   (leftDerivedUpperStarTateShiftIso Λ g d).symm ≪≫ (L((g)^*[ModuleCat.{u + 1} Λ])).mapIso γf ≪≫
@@ -253,7 +262,7 @@ one, for `f` smooth of relative dimension `d`. -/
 structure ProEtaleRealization where
   /-- The realization of the étale dualizing complex is the pro-étale one. -/
   dualizingComplexIso {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f]
-    [SmoothOfRelativeDimension d f] [HasCompactification f]
+    [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
     [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f] :
     D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj (dualizingComplex (ModuleCat.{u + 1} Λ) f) ≅
       ProEtale.dualizingComplex (ModuleCat.{u + 1} Λ) f
@@ -267,7 +276,8 @@ orientations `γ^{proét}_f : ν^*(Λ_X(d)[2d]) ≅ ω_f^{proét}` are the reali
 étale ones. -/
 def OrientationDatum.IsCompatibleProEtaleRealization {C : OrientationComparisonData Λ}
     (o : OrientationDatum Λ C) (ν : ProEtaleRealization Λ)
-    (γ : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [HasCompactification f]
+    (γ : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) [IsSeparated f] [QuasiCompact f]
+      [SmoothOfRelativeDimension d f] [HasCompactification f] [HasInvertibleExponent Λ X]
       [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f],
       D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) ≅
         ProEtale.dualizingComplex (ModuleCat.{u + 1} Λ) f) : Prop :=

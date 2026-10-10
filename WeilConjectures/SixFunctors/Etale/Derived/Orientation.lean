@@ -16,11 +16,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 Let `Λ` be a finite coefficient ring carrying a Tate twist datum (`HasTateTwist Λ`), with
 twisting objects `Λ_X(d) = tateObject Λ X d`. For a smooth separated morphism `f : X ⟶ Y` of
 finite type and of pure relative dimension `d`, *smooth purity* provides a canonical isomorphism
-`Lf^* Λ_Y (d)[2d] ≅ Rf^! Λ_Y`, that is `Λ_X(d)[2d] ≅ Rf^! Λ_Y`. Its proof belongs to a different
-blueprint block and is not formalised here; what is recorded in this file is the interface it
-produces, packaged as a structure `AlgebraicGeometry.Etale.Orientation`, together with the two
-consequences the six-functor formalism uses: for the structure morphism `a : X ⟶ S` an orientation
-reads
+`Lf^* Λ_Y (d)[2d] ≅ Rf^! Λ_Y`, that is `Λ_X(d)[2d] ≅ Rf^! Λ_Y`. It is
+`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift` (`sk-thm-smooth-purity`),
+which gives orientations through `AlgebraicGeometry.Etale.Orientation.nonempty`. What is
+recorded in this file is the interface it produces, packaged as a structure
+`AlgebraicGeometry.Etale.Orientation`, together with the two consequences the six-functor
+formalism uses: for the structure morphism `a : X ⟶ S` an orientation reads
 `ω_X ≅ Λ_X(d)[2d]`, and substituting that into `𝔻_X = RHom(-, ω_X)` turns the Verdier dual of a
 perfect complex into its coefficient dual, twisted and shifted.
 
