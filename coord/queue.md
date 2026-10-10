@@ -1,8 +1,8 @@
 # Work queue
 
-884 items; claim with `tools/claim.py next <group> [--stage N]`.
+882 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (99)
+## Stage 1: nodes to split (96)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,7 +12,6 @@
 | `lem-pc-affine-pseudo-coherent-criterion` | 3015 | none |
 | `lem-pc-affine-tor-amplitude-criterion` | 3015 | none |
 | `lem-sc-derived-hom-mayer-vietoris` | 3015 | none |
-| `lem-pc-injective-split-tower-injective` | 3016 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-global-hom-adjunction` | 3019 | none |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
@@ -55,7 +54,6 @@
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
-| `lem-pc-projective-coherent-higher-images` | - | sorry_here |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-weil-pbc-power-in-base-after-localization` | - | none |
 | `lemma-nagata-morphism-descends` | - | none |
@@ -68,7 +66,6 @@
 | `lemma-nagata-morphism-eq-eventually` | - | none |
 | `lemma-nagata-qc-open-eq-eventually` | - | none |
 | `prop-pur-kinjective-resolutions-exist` | - | none |
-| `def-pc-derived-category` | - | none |
 | `lem-kun-04ca` | - | none |
 | `lem-kun-fibre-product-limits` | - | none |
 | `lem-kun-finite-closed-subscheme` | - | none |
@@ -106,7 +103,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (785)
+## Stage 2: nodes to state (786)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -225,6 +222,7 @@
 | `lem-pc-h0-geom-connected` | 1 | state |
 | `lem-pc-homotopy-limit-map` | 1 | state |
 | `lem-pc-ideal-sheaf-comap-affine-extension` | 1 | state |
+| `lem-pc-injective-split-tower-injective` | 1 | state |
 | `lem-pc-inseparable-tensor-nilpotent` | 1 | state |
 | `lem-pc-integral-radicial-surjective-universal-homeomorphism` | 1 | state |
 | `lem-pc-invertible-common-free-generator` | 1 | state |
@@ -896,7 +894,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1608 nodes that wait for a statement dependency, 137 nodes that wait for stage 1.
+Not open yet: 1610 nodes that wait for a statement dependency, 134 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
