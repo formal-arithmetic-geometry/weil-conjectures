@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "proof, first step, derived-limit cohomology calculation: the short exact sequence for cohomology over a neighborhood",
+   "place": "proof of lem-sc-finite-duality, first step, derived-limit cohomology calculation: the short exact sequence for cohomology over a neighborhood",
    "via": [
     "lem-pc-ringed-space-pointwise-truncation-limit"
    ]
@@ -15,20 +15,90 @@
  "title": "Cohomology over an open commutes with a derived inverse limit",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
- "statement": "Let $(X,\\mathcal O_X)$ be a ringed space and let $(K_n)$ be an inverse system in the derived category $D(\\mathcal O_X)$ [def-sc-ringed-space-module-cohomology, def-weil-abstract-derived-category, def-weil-derived-limit]. For every open subset $U\\subseteq X$, derived sections $R\\Gamma(U,-)$ commute with the derived inverse limit. For every integer $m$ there is a natural short exact sequence $$0\\to R^1\\varprojlim_n H^{m-1}(U,K_n)\\to H^m(U,R\\varprojlim_n K_n)\\to\\varprojlim_n H^m(U,K_n)\\to0,$$ where the cohomology groups are the derived-functor cohomology of $U$ [pqf-def-cohomology].",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, let $D(\\mathcal O_X)$ be the derived category of $\\mathcal O_X$-modules [def-sc-ringed-space-module-cohomology, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], and let $(K_n,f_n)_{n\\geq1}$ be an inverse system in $D(\\mathcal O_X)$. For an open subset $U\\subseteq X$ let $R\\Gamma(U,-):D(\\mathcal O_X)\\to D(\\operatorname{Ab})$ be the right derived functor of the sections functor $\\Gamma(U,-):\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Ab}$, computed by K-injective resolutions: $R\\Gamma(U,K)$ is represented by $\\Gamma(U,\\mathcal I^\\bullet)$ for any K-injective resolution $K\\to\\mathcal I^\\bullet$ [prop-pur-kinjective-resolutions-exist, def-pur-kinjective-complex], and put $H^m(U,K)=H^m(R\\Gamma(U,K))$. Let $(K,p,\\delta)$ be a derived limit of the system [def-weil-derived-limit], written $K=R\\varprojlim_nK_n$ (any one; derived limits exist but are not unique up to canonical isomorphism), with Roos triangle $K\\xrightarrow{p}\\prod_nK_n\\xrightarrow{1-s}\\prod_nK_n\\xrightarrow{\\delta}K[1]$ and projections $\\mathrm{pr}_n:\\prod_nK_n\\to K_n$. Then: (1) $R\\Gamma(U,-)$ commutes with the derived limit: $R\\Gamma(U,K)$ is a derived limit of the system $(R\\Gamma(U,K_n),R\\Gamma(U,f_n))$ in $D(\\operatorname{Ab})$, the image under $R\\Gamma(U,-)$ of the Roos triangle of $K$, with $R\\Gamma(U,\\prod_nK_n)$ identified with $\\prod_nR\\Gamma(U,K_n)$ through the maps $R\\Gamma(U,\\mathrm{pr}_n)$, being a Roos triangle of that system; that is, $R\\Gamma(U,R\\varprojlim_nK_n)=R\\varprojlim_nR\\Gamma(U,K_n)$ in the sense of [def-weil-derived-limit]. (2) For every integer $m$ there is a short exact sequence $$0\\to R^1\\varprojlim_n H^{m-1}(U,K_n)\\to H^m(U,R\\varprojlim_n K_n)\\to\\varprojlim_n H^m(U,K_n)\\to0,$$ whose right map is $\\gamma\\mapsto\\bigl(H^m(U,\\mathrm{pr}_n\\circ p)(\\gamma)\\bigr)_n$; here $\\varprojlim_n$ and $R^1\\varprojlim_n$ are taken for the inverse systems of abelian groups with transition maps $H^q(U,f_n)$.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 0D60, label lemma-RGamma-commutes-with-Rlim"
  },
  "stmt_deps": [
   "def-sc-ringed-space-module-cohomology",
+  "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "def-weil-derived-limit",
-  "pqf-def-cohomology"
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-kinjective-complex",
+  "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The site of open subsets of $X$ is small and $\\mathcal O_X$ is a sheaf of commutative rings, so $\\operatorname{Mod}(\\mathcal O_X)$ is abelian and every complex of $\\mathcal O_X$-modules has a K-injective resolution [prop-pur-kinjective-resolutions-exist, def-pur-kinjective-complex]; the same holds for $\\operatorname{Ab}$, the modules over the constant ring $\\mathbf Z$ on the one-point space. The functor $\\Gamma(U,-)$ is additive, and it carries every small limit in $\\operatorname{Mod}(\\mathcal O_X)$, in particular every product, to the corresponding limit of abelian groups, because limits of module sheaves are computed sectionwise [lem-weil-pbc-module-sheaves-limits-sectionwise]. By [lem-pc-right-derived-functor-triangulated], $R\\Gamma(U,-):D(\\mathcal O_X)\\to D(\\operatorname{Ab})$ commutes with shifts and carries distinguished triangles to distinguished triangles. Both $D(\\mathcal O_X)$ and $D(\\operatorname{Ab})$ have countable products, by [lem-pc-ringed-space-derived-products] and by part (2) of [lem-weil-derived-limit-existence] together with the exactness of products in $\\operatorname{Ab}$ [lem-pc-abelian-groups-exact-products]; in particular a derived limit $K$ as in the statement exists by part (1) of [lem-weil-derived-limit-existence].",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-kinjective-complex",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-pc-ringed-space-derived-products",
+    "lem-weil-derived-limit-existence",
+    "lem-pc-abelian-groups-exact-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D60, setup for lemma-RGamma-commutes-with-Rlim (Stacks Tags 079P, 08U1)"
+   }
+  },
+  {
+   "text": "$R\\Gamma(U,-)$ preserves the product of every tower. Choose K-injective resolutions $K_n\\to\\mathcal I_n^\\bullet$ [prop-pur-kinjective-resolutions-exist]. The termwise product $\\prod_n\\mathcal I_n^\\bullet$ is K-injective and, with its termwise projections, represents $\\prod_nK_n$ in $D(\\mathcal O_X)$ [lem-pc-ringed-space-product-kinjective]. Hence $R\\Gamma(U,\\prod_nK_n)$ is represented by $\\Gamma(U,\\prod_n\\mathcal I_n^\\bullet)$, which by Step 1 is the termwise product $\\prod_n\\Gamma(U,\\mathcal I_n^\\bullet)$ with the projections $\\Gamma(U,\\mathrm{pr}_n)$; by part (2) of [lem-weil-derived-limit-existence] (products in $\\operatorname{Ab}$ being exact [lem-pc-abelian-groups-exact-products]) this termwise product represents $\\prod_nR\\Gamma(U,K_n)$ in $D(\\operatorname{Ab})$. So the maps $R\\Gamma(U,\\mathrm{pr}_n)$ exhibit $R\\Gamma(U,\\prod_nK_n)$ as the product of the $R\\Gamma(U,K_n)$. By Step 1 the functor $R\\Gamma(U,-)$ satisfies the hypotheses of [lem-pc-homotopy-limit-map], which therefore sends the Roos triangle of $K$ to a homotopy-limit (Roos) cone of the tower $(R\\Gamma(U,K_n))$: under the identification just made, $R\\Gamma(U,1-s)$ is the transition endomorphism $1-s$ of the image tower (Stacks Tag 08U1; the same argument as the node lem-pc-derived-functor-commutes-derived-limit, which is not cited because its statement assumes $X$ a scheme). Thus $(R\\Gamma(U,K),R\\Gamma(U,p),R\\Gamma(U,\\delta))$, after the identification, is a derived limit of $(R\\Gamma(U,K_n))$ [def-weil-derived-limit], which is part (1).",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-ringed-space-product-kinjective",
+    "lem-weil-derived-limit-existence",
+    "lem-pc-abelian-groups-exact-products",
+    "lem-pc-homotopy-limit-map",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D60, proof of lemma-RGamma-commutes-with-Rlim (via Injectives, Tag 08U1)"
+   }
+  },
+  {
+   "text": "Apply the long exact cohomology sequence [lem-sf-derived-homology-long-exact] to the Roos triangle of $(R\\Gamma(U,K_n))$ from Step 2. By part (2) of [lem-weil-derived-limit-existence] and the exactness of products in $\\operatorname{Ab}$ [lem-pc-abelian-groups-exact-products], $H^q(\\prod_nR\\Gamma(U,K_n))=\\prod_nH^q(U,K_n)$ through the maps $H^q(\\mathrm{pr}_n)$ (cohomology of a termwise product of complexes of abelian groups is the product of the cohomologies, via the projections), and under this identification $H^q(1-s)$ is the map $1-s$ of the inverse system $(H^q(U,K_n),H^q(U,f_n))$, since $\\mathrm{pr}_n\\circ(1-s)=\\mathrm{pr}_n-f_n\\circ\\mathrm{pr}_{n+1}$ [def-weil-derived-limit]. The long exact sequence thus contains the exact segment $\\prod_nH^{m-1}(U,K_n)\\xrightarrow{1-s}\\prod_nH^{m-1}(U,K_n)\\to H^m(U,K)\\to\\prod_nH^m(U,K_n)\\xrightarrow{1-s}\\prod_nH^m(U,K_n)$, whose middle-right map is $\\gamma\\mapsto(H^m(U,\\mathrm{pr}_n\\circ p)(\\gamma))_n$. By [lem-pc-derived-limit-roos-abelian-groups], $\\ker(1-s)=\\varprojlim_nH^m(U,K_n)$ and $\\operatorname{coker}(1-s)\\cong R^1\\varprojlim_nH^{m-1}(U,K_n)$, which gives the short exact sequence of part (2) with the stated right map. (This is the sequence of [lem-pc-derived-limit-milnor-sequence] for the tower $(R\\Gamma(U,K_n))$, with its maps named.)",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-derived-limit-existence",
+    "lem-pc-abelian-groups-exact-products",
+    "def-weil-derived-limit",
+    "lem-pc-derived-limit-roos-abelian-groups",
+    "lem-pc-derived-limit-milnor-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D60, conclusion of lemma-RGamma-commutes-with-Rlim (More on Algebra, remark-compare-derived-limit)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-kinjective-complex",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pc-ringed-space-derived-products",
+  "lem-weil-derived-limit-existence",
+  "lem-pc-abelian-groups-exact-products",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-pc-homotopy-limit-map",
+  "def-weil-derived-limit",
+  "lem-sf-derived-homology-long-exact",
+  "lem-pc-derived-limit-roos-abelian-groups",
+  "lem-pc-derived-limit-milnor-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D60, lemma-RGamma-commutes-with-Rlim"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +130,61 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-ringed-space-pointwise-truncation-limit",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ringed-space-rgamma-derived-limit",
+  "worker": "stage1",
+  "summary": "Split Tag 0D60 into the section-functor hypotheses, the Roos-triangle comparison after applying derived sections, and the resulting Milnor short exact sequence. Used the existing unsplit node for termwise products of K-injective complexes; sectionwise products are supplied by the existing sheaf-limits node. No sorry-free Lean declaration states the item.",
+  "blueprint": {
+   "statement": "proof, first step, derived-limit cohomology calculation: the short exact sequence for cohomology over a neighborhood",
+   "steps": {
+    "1": "setup: K-injective resolutions, Gamma(U,-) preserves products, RGamma(U,-) triangulated, products and derived limits exist",
+    "2": "RGamma(U,-) preserves tower products and sends the Roos triangle to a Roos triangle",
+    "3": "long exact sequence of that Roos triangle gives the short exact sequence with right map H^m(U, pr_n o p)"
+   }
+  },
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "generic tool: K-injective resolutions in Mod(O) for a small site; no Picard-duality node states it for ringed spaces"
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "generic tool: limits of module sheaves are sectionwise"
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "generic tool: existence of derived limits and products in D(A) for A with exact countable products"
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "generic tool: long exact cohomology sequence of a distinguished triangle"
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-derived-limit-existence",
+  "lem-sf-derived-homology-long-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-derived-limit-existence",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rdl2706",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rdl2706 (reviewer sub-agent of L); spot-checked: Read all cited statements; G1 node hypothesis is X a scheme (C4 if cited), Milnor node statement does not name its maps. FIX more, RETURN less: (1) statement (C4/E7): RGamma(U,-) and H^m(U,-) defined for complexes via K-injective resolutions (def-sc-ringed-space-module-cohomology covers only modules on X); derived limit (K,p,delta) taken as any one, non-canonical per def-weil-derived-limit; unsupported 'natural in the system' removed; right map named as (H^m(U,pr_n o p))_n as F1's stalk node needs; part (1) states the Roos-triangle form; stmt_deps deduplicated. (2) Step 1-2 (C1): K-injective resolutions from prop-pur-kinjective-resolutions-exist (Tag 079P) not from enough injectives; triangulated structure from lem-pc-right-derived-functor-triangulated; Roos triangle image via lem-pc-homotopy-limit-map; products in D(Ab) via lem-weil-derived-limit-existence(2)+lem-pc-abelian-groups-exact-products; uses now match text. (3) Step 3 (C4): pqf-def-cohomology (schemes) removed; sequence derived from lem-sf-derived-homology-long-exact + lem-pc-derived-limit-roos-abelian-groups with the maps named, Milnor node cited; tool_uses updated, enough-injectives tool use dropped. Milnor sequence cites def-weil-derived-limit and the Roos/lim^1 node; no canonical-limit language.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-rdl2706): Second reading by J1 missed: Step 3 still cited scheme-only pqf-def-cohomology; 'added derived-limit-existence citation' was not done; Step 2 got K-injective resolutions of unbounded complexes from enough injectives. G1 node lem-pc-derived-functor-commutes-derived-limit is stated for schemes only, so it cannot be cited for a ringed space; generalizing G1 to ringed spaces would let Step 2 cite it."
 }
