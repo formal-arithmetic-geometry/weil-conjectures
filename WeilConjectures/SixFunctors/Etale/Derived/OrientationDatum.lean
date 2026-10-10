@@ -34,6 +34,8 @@ relative to the comparison isomorphisms they involve, which are bundled as
 - `AlgebraicGeometry.Etale.OrientationDatum`: an orientation datum, i.e. a family of
   orientations natural in the base (in particular compatible with étale base change),
   compatible with composition and normalized on the affine line.
+- `AlgebraicGeometry.Etale.OrientationDatum.nonempty_iso_dualizingComplex`: for the structure
+  morphism an orientation datum reads `ω_X ≅ Λ_X(d)[2d]`.
 - `AlgebraicGeometry.Etale.OrientationDatum.IsCompatibleCoefficientChange`: compatibility of
   two orientation data with a change of coefficients (finite reduction, scalar extension).
 - `AlgebraicGeometry.Etale.OrientationDatum.IsCompatibleProEtaleRealization`: compatibility of
@@ -194,6 +196,19 @@ structure OrientationDatum (C : OrientationComparisonData Λ) where
     [HasCompactification (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)]
     [HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Y)] :
     (orientation (𝔸(ULift.{u} (Fin 1); Y) ↘ Y) 1).purity = C.affineLine Y
+
+variable {Λ} in
+/-- Blueprint `def-sf-orientation`: Orientation datum.
+
+For the structure morphism `a : X ⟶ S` of a smooth separated `X` of finite type and pure
+relative dimension `d` over `S`, an orientation datum reads `ω_X ≅ Λ_X(d)[2d]`: the dualizing
+complex `ω_X = Ra^! Λ_S` is the shifted Tate twist. -/
+theorem OrientationDatum.nonempty_iso_dualizingComplex {C : OrientationComparisonData Λ}
+    (o : OrientationDatum Λ C) {X S : Scheme.{u}} (a : X ⟶ S) (d : ℕ) [IsSeparated a]
+    [QuasiCompact a] [SmoothOfRelativeDimension d a] [HasCompactification a]
+    [HasInvertibleExponent Λ X] :
+    Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) a ≅ (tateObject Λ X d)⟦(2 * d : ℤ)⟧) :=
+  (o.orientation a d).nonempty_iso_dualizingComplex
 
 variable (Λ' : Type (u + 1)) [CommRing Λ'] [Finite Λ'] [HasTateTwist Λ']
 
