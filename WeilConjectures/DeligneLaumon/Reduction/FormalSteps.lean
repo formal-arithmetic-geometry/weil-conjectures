@@ -125,8 +125,47 @@ theorem WeilSheaf.exists_filtration_higherLowerShriek_comp (F : WeilSheaf k₀ l
         ∀ i : Fin m, ∃ a b : ℕ, a + b = n ∧ ∃ (S : WeilSheaf k₀ l Y)
           (j : S ⟶ (WeilSheaf.higherLowerShriek k₀ l g a).obj
             ((WeilSheaf.higherLowerShriek k₀ l f b).obj F))
-          (p : S ⟶ cokernel (φ i)), Mono j ∧ Epi p :=
-  sorry -- TODO(adic)
+          (p : S ⟶ cokernel (φ i)), Mono j ∧ Epi p := by
+  have := locallyOfFiniteType_over_of_isOver f (S := Spec (CommRingCat.of k₀))
+  let E₂ : ℕ → ℕ → WeilSheaf k₀ l Y := fun a b ↦
+    (WeilSheaf.higherLowerShriek k₀ l g a).obj ((WeilSheaf.higherLowerShriek k₀ l f b).obj F)
+  -- the subquotients of the `E₂`-terms of total degree `m`, and the sheaves filtered by them
+  let Q₀ : ℤ → ObjectProperty (WeilSheaf k₀ l Y) := fun m E ↦
+    ∃ a b : ℕ, (a + b : ℤ) = m ∧ Nonempty (E ≅ E₂ a b)
+  let P : ℤ → ObjectProperty (WeilSheaf k₀ l Y) := fun m ↦
+    (ObjectProperty.subquotientClosure (Q₀ m)).filtrationClosure
+  -- the cohomology sheaves of `Rf₀!F`
+  let Q : ℤ → ObjectProperty (WeilSheaf k₀ l Z) := fun b G ↦
+    IsZero G ∨ ∃ m : ℕ, (m : ℤ) = b ∧ Nonempty (G ≅ (WeilSheaf.higherLowerShriek k₀ l f m).obj F)
+  have hQiso (b : ℤ) : (Q b).IsClosedUnderIsomorphisms := ⟨fun e h ↦ h.elim
+    (fun h ↦ Or.inl (h.of_iso e.symm)) (fun ⟨m, hm, ⟨e'⟩⟩ ↦ Or.inr ⟨m, hm, ⟨e.symm ≪≫ e'⟩⟩)⟩
+  let Rg := WeilComplex.derivedLowerShriek k₀ l g
+  have key := WeilComplex.prop_homologySheaf_obj Rg Q P (fun _ _ hG ↦ Or.inl hG)
+    (fun a b G hG ↦ ?_) ((WeilComplex.derivedLowerShriek k₀ l f).obj (WeilSheaf.toComplex.obj F))
+    (fun b ↦ ?_) n
+  rotate_left
+  · rcases hG with hG | ⟨m, rfl, ⟨e⟩⟩
+    · exact (P _).prop_of_isZero ((WeilComplex.homologySheaf a).map_isZero
+        (Rg.map_isZero (WeilSheaf.toComplex.map_isZero hG)))
+    rcases lt_or_ge a 0 with ha | ha
+    · exact (P _).prop_of_isZero (WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg g G ha)
+    obtain ⟨a, rfl⟩ := Int.eq_ofNat_of_zero_le ha
+    refine ObjectProperty.le_filtrationClosure _ (ObjectProperty.le_subquotientClosure _
+      ⟨a, m, rfl, ⟨?_⟩⟩)
+    exact (WeilComplex.homologySheaf a).mapIso (Rg.mapIso (WeilSheaf.toComplex.mapIso e)) ≪≫
+      ((WeilSheaf.higherLowerShriekIso g a).app _).symm
+  · rcases lt_or_ge b 0 with hb | hb
+    · exact Or.inl (WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg f F hb)
+    obtain ⟨m, rfl⟩ := Int.eq_ofNat_of_zero_le hb
+    exact Or.inr ⟨m, rfl, ⟨((WeilSheaf.higherLowerShriekIso f m).app F).symm⟩⟩
+  obtain ⟨c⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_iso (k₀ := k₀) (l := l) f g
+  have key' : P n ((WeilSheaf.higherLowerShriek k₀ l (f ≫ g) n).obj F) :=
+    (P n).prop_of_iso (((WeilComplex.homologySheaf n).mapIso (c.app _)).symm ≪≫
+      ((WeilSheaf.higherLowerShriekIso (f ≫ g) n).app F).symm) key
+  obtain ⟨m, G, φ, h0, hlast, hmono, hφ⟩ := ObjectProperty.filtrationClosure_iff.1 key'
+  refine ⟨m, G, φ, h0, hlast, hmono, fun i ↦ ?_⟩
+  obtain ⟨Y', S, j, p, ⟨a, b, hab, ⟨e⟩⟩, _, _⟩ := hφ i
+  exact ⟨a, b, by exact_mod_cast hab, S, j ≫ e.hom, p, mono_comp _ _, inferInstance⟩
 
 variable {f g}
 
@@ -196,8 +235,7 @@ theorem WeilSheaf.IsMixedOfWeightsAtMost.upperStar {W X : Scheme.{u}}
     (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (h : W ⟶ X)
     [IsImmersion h] [h.IsOver (Spec (CommRingCat.of k₀))] {w : ℝ} {F : WeilSheaf k₀ l X}
     (hF : F.IsMixedOfWeightsAtMost ι w) :
-    ((WeilSheaf.upperStar h).obj F).IsMixedOfWeightsAtMost ι w :=
-  by
+    ((WeilSheaf.upperStar h).obj F).IsMixedOfWeightsAtMost ι w := by
   rw [WeilSheaf.isMixedOfWeightsAtMost_iff_filtrationClosure] at hF ⊢
   exact ObjectProperty.filtrationClosure_map (WeilSheaf.upperStar h)
     (fun _ ⟨v, hv, hG⟩ ↦ ⟨v, hv, hG.upperStar h⟩) hF
@@ -264,9 +302,9 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.of_openClosed {U X Z : Scheme.{u}}
       ((WeilComplex.upperStar j).obj K)).IsMixedOfWeightsAtMost ι w)
     (hZ : ((WeilComplex.derivedLowerStar i).obj
       ((WeilComplex.upperStar i).obj K)).IsMixedOfWeightsAtMost ι w) :
-    K.IsMixedOfWeightsAtMost ι w :=
-  by
-  obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ := WeilComplex.exists_distTriang_openClosed (k₀ := k₀) (l := l) hij K
+    K.IsMixedOfWeightsAtMost ι w := by
+  obtain ⟨T, hT, ⟨e₁⟩, ⟨e₂⟩, ⟨e₃⟩⟩ :=
+    WeilComplex.exists_distTriang_openClosed (k₀ := k₀) (l := l) hij K
   exact (WeilComplex.IsMixedOfWeightsAtMost.of_distTriang hT (hU.of_iso e₁.symm)
     (hZ.of_iso e₃.symm)).of_iso e₂
 
@@ -311,8 +349,7 @@ theorem WeilSheaf.exists_exact_higherLowerShriek_of_openClosed {U X Z Y : Scheme
         ((WeilSheaf.upperStar j).obj F)) ∧
       Nonempty (S.X₂ ≅ (WeilSheaf.higherLowerShriek k₀ l f r).obj F) ∧
       Nonempty (S.X₃ ≅ (WeilSheaf.higherLowerShriek k₀ l (i ≫ f) r).obj
-        ((WeilSheaf.upperStar i).obj F)) :=
-  by
+        ((WeilSheaf.upperStar i).obj F)) := by
   have := locallyOfFiniteType_over_of_isOver f (S := Spec (CommRingCat.of k₀))
   have := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
   have := locallyOfFiniteType_over_of_isOver i (S := Spec (CommRingCat.of k₀))
@@ -365,8 +402,7 @@ theorem WeilSheaf.nonempty_upperStar_higherLowerShriek_iso {X Y X' Y' : Scheme.{
     [h.IsOver (Spec (CommRingCat.of k₀))] (hH : IsPullback g f' f h) (F : WeilSheaf k₀ l X)
     (r : ℕ) :
     Nonempty ((WeilSheaf.upperStar h).obj ((WeilSheaf.higherLowerShriek k₀ l f r).obj F) ≅
-      (WeilSheaf.higherLowerShriek k₀ l f' r).obj ((WeilSheaf.upperStar g).obj F)) :=
-  by
+      (WeilSheaf.higherLowerShriek k₀ l f' r).obj ((WeilSheaf.upperStar g).obj F)) := by
   obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_upperStar_iso (k₀ := k₀) (l := l) hH
   have E : WeilSheaf.higherLowerShriek k₀ l f r ⋙ WeilSheaf.upperStar h ≅
       WeilSheaf.upperStar g ⋙ WeilSheaf.higherLowerShriek k₀ l f' r := by
@@ -408,8 +444,7 @@ theorem WeilComplex.IsMixedOfWeightsAtMost.upperStar_derivedLowerShriek_of_isPul
     (hK : ((WeilComplex.derivedLowerShriek k₀ l f').obj
       ((WeilComplex.upperStar g).obj K)).IsMixedOfWeightsAtMost ι w) :
     ((WeilComplex.upperStar h).obj
-      ((WeilComplex.derivedLowerShriek k₀ l f).obj K)).IsMixedOfWeightsAtMost ι w :=
-  by
+      ((WeilComplex.derivedLowerShriek k₀ l f).obj K)).IsMixedOfWeightsAtMost ι w := by
   obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_upperStar_iso (k₀ := k₀) (l := l) hH
   exact hK.of_iso (e.app K).symm
 
@@ -490,8 +525,7 @@ theorem HasDirectImageComplexWeightBound.of_openClosed {U X Z Y : Scheme.{u}}
     (hij : IsCompl (Set.range j.base) (Set.range i.base))
     (hU : HasDirectImageComplexWeightBound k₀ ι (j ≫ f))
     (hZ : HasDirectImageComplexWeightBound k₀ ι (i ≫ f)) :
-    HasDirectImageComplexWeightBound k₀ ι f :=
-  by
+    HasDirectImageComplexWeightBound k₀ ι f := by
   have := locallyOfFiniteType_over_of_isOver f (S := Spec (CommRingCat.of k₀))
   have := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
   have := locallyOfFiniteType_over_of_isOver i (S := Spec (CommRingCat.of k₀))
@@ -623,8 +657,7 @@ theorem HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
     (hf : HasDirectImageWeightBound k₀ ι f) {w : ℝ} {K : WeilComplex k₀ l X}
     (hK : K.IsMixedOfWeightsAtMost ι w) :
-    ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w :=
-  by
+    ((WeilComplex.derivedLowerShriek k₀ l f).obj K).IsMixedOfWeightsAtMost ι w := by
   have := locallyOfFiniteType_over_of_isOver f (S := Spec (CommRingCat.of k₀))
   intro n
   rw [WeilSheaf.isMixedOfWeightsAtMost_iff_filtrationClosure]

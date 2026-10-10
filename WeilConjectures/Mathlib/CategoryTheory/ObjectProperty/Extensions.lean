@@ -211,4 +211,24 @@ lemma prop_X₂_of_exact [P.IsClosedUnderSubobjects] [P.IsClosedUnderQuotients]
     (P.prop_of_epi (kernel.lift S.g S.f S.zero) h₁)
     (P.prop_of_mono ((Abelian.coimageIsoImage S.g).hom ≫ Abelian.image.ι S.g) h₃)
 
+variable (P) in
+/-- The property of being a subquotient of an object satisfying `P`: a quotient of a subobject of
+such an object. -/
+def subquotientClosure : ObjectProperty C :=
+  fun X ↦ ∃ (Y : C) (S : C) (j : S ⟶ Y) (p : S ⟶ X), P Y ∧ Mono j ∧ Epi p
+
+omit [Abelian C] in
+lemma le_subquotientClosure : P ≤ P.subquotientClosure :=
+  fun X hX ↦ ⟨X, X, 𝟙 X, 𝟙 X, hX, inferInstance, inferInstance⟩
+
+instance : P.subquotientClosure.IsClosedUnderQuotients where
+  prop_of_epi q _ := fun ⟨Y, S, j, p, hY, _, _⟩ ↦ ⟨Y, S, j, p ≫ q, hY, inferInstance, epi_comp _ _⟩
+
+instance : P.subquotientClosure.IsClosedUnderIsomorphisms where
+  of_iso e h := P.subquotientClosure.prop_of_epi e.hom h
+
+instance : P.subquotientClosure.IsClosedUnderSubobjects where
+  prop_of_mono m _ := fun ⟨Y, _, j, p, hY, _, _⟩ ↦
+    ⟨Y, pullback p m, pullback.fst p m ≫ j, pullback.snd p m, hY, mono_comp _ _, inferInstance⟩
+
 end CategoryTheory.ObjectProperty
