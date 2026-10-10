@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
@@ -31,9 +31,15 @@ perfect complex into its coefficient dual, twisted and shifted.
   Tate twist `Λ_X(d)`.
 - `AlgebraicGeometry.Etale.Orientation.ofDualizingComplexIso`: the orientation given by an
   isomorphism `Λ_X(d)[2d] ≅ ω_X` for a smooth `a` of relative dimension `d`.
+- `AlgebraicGeometry.Etale.Orientation.twistShiftIso` (`rem-ptr-sf-orientation-2`): the purity
+  isomorphism in the twist conventions of `def-coefficient-twists-detailed`,
+  `(twistShift Λ X d).obj Λ_X ≅ Rf^! Λ_Y`.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.Orientation.nonempty` (`rem-sf-orientation-pointer`): orientations
+  are not assumed; smooth purity constructs one for every smooth separated `f` of pure relative
+  dimension `d` over a separated scheme locally of finite type over a field.
 - `AlgebraicGeometry.Etale.Orientation.nonempty_iso_dualizingComplex`
   (`sk-def-sf-orientation`): for the structure morphism the orientation reads
   `ω_X ≅ Λ_X(d)[2d]`.
@@ -89,7 +95,8 @@ consists of the smoothness of `f`, of pure relative dimension `d`, together with
 blueprint's `Lf^* Λ_Y (d)[2d] ≅ Rf^! Λ_Y`.
 
 In the blueprint an orientation is **not** an assumption: it is the smooth purity theorem
-`sk-thm-smooth-purity`, which lives in a different blueprint block and is not formalised here.
+`sk-thm-smooth-purity`, which lives in a different blueprint block; see
+`AlgebraicGeometry.Etale.Orientation.nonempty` (`rem-sf-orientation-pointer`).
 This structure therefore records only the interface that purity produces and that the six
 operations consume; the blueprint's naturality in `Y` and its compatibilities with composition,
 étale base change, finite reduction, scalar extension and the pro-étale realization quantify
@@ -110,6 +117,33 @@ variable {Λ}
 noncomputable abbrev Orientation.twist {f : X ⟶ Y} {d : ℕ} [HasCompactification f]
     (_o : Orientation Λ f d) : DerivedCategoryModule Λ X :=
   tateObject Λ X d
+
+/-- Blueprint `rem-ptr-sf-orientation-2`: Pointer to the properties of [def-sf-orientation].
+
+The purity isomorphism of an orientation, read in the Tate twist conventions of
+`def-coefficient-twists-detailed`: the source `Λ_X(d)[2d]` is the twist-and-shift
+`(twistShift Λ X d).obj Λ_X = (Λ_X ⊗ Λ_X(d))[2d]` of the constant complex, so that `γ` takes
+the form in which smooth purity
+(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`) states it. -/
+noncomputable def Orientation.twistShiftIso {f : X ⟶ Y} {d : ℕ} [HasCompactification f]
+    (o : Orientation Λ f d) :
+    (twistShift Λ X d).obj (constantComplex Λ X) ≅ dualizingComplex (ModuleCat.{u + 1} Λ) f :=
+  twistShiftConstantComplexIso Λ X d ≪≫ o.purity
+
+/-- Blueprint `rem-sf-orientation-pointer`: Where the orientation is constructed.
+
+The orientation datum is not an assumption: for `f : X ⟶ Y` smooth separated of pure relative
+dimension `d`, with `Y` separated and locally of finite type over a field `k` and the exponent
+of `Λ` invertible on `X`, smooth purity (`sk-thm-smooth-purity`,
+`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`) gives
+`Rf^! Λ_Y ≅ Λ_X(d)[2d]`, hence an orientation of `f` of relative dimension `d`. -/
+theorem Orientation.nonempty [HasTateTwist.IsNormalized Λ] {d : ℕ} (f : X ⟶ Y)
+    [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
+    [HasInvertibleExponent Λ X] {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k))
+    [IsSeparated aY] [LocallyOfFiniteType aY] :
+    Nonempty (Orientation Λ f d) := by
+  obtain ⟨e⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) f aY
+  exact ⟨⟨inferInstance, (twistShiftConstantComplexIso Λ X d).symm ≪≫ e.symm⟩⟩
 
 variable {S : Scheme.{u}} {d : ℕ} {a : X ⟶ S} [HasCompactification a]
 
