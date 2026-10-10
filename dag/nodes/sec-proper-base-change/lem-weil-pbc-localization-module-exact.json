@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-localization-module-exact",
+ "kind": "statement",
+ "title": "Localization of modules is exact",
+ "statement": "Let $R$ be a commutative ring and $T\\subseteq R$ a multiplicative subset. For an $R$-module $P$ let $T^{-1}P$ be its localization (fractions $p/t$, $p\\in P$, $t\\in T$, with $p/t=p'/t'$ iff $u(t'p-tp')=0$ for some $u\\in T$) and for an $R$-linear $h:P\\to P'$ let $T^{-1}h:T^{-1}P\\to T^{-1}P'$, $p/t\\mapsto h(p)/t$. If $L\\xrightarrow{u}M\\xrightarrow{v}N$ is an exact sequence of $R$-modules ($\\ker v=\\operatorname{im}u$), then $T^{-1}L\\xrightarrow{T^{-1}u}T^{-1}M\\xrightarrow{T^{-1}v}T^{-1}N$ is exact.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition Tag 00CS (proposition-localization-exact, line 1336)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of modules is an exact functor",
+   "results": "LocalizedModule.map_exact, IsLocalizedModule.map_exact (Mathlib.Algebra.Module.LocalizedModule.Exact), ModuleCat.localizedModule_functor_map_exact, exact_of_isLocalized_maximal, localizedModuleIsLocalizedModule",
+   "verdict": "match: LocalizedModule.map_exact",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule.map_exact",
+   "results": "LocalizedModule.map_exact (Mathlib.Algebra.Module.LocalizedModule.Exact): (g : M₀ →ₗ[R] M₁) (h : M₁ →ₗ[R] M₂) (ex : Function.Exact g h) : Function.Exact (IsLocalizedModule.map S (mkLinearMap S M₀) (mkLinearMap S M₁) g) (IsLocalizedModule.map S (mkLinearMap S M₁) (mkLinearMap S M₂) h)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'map_exact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/LocalizedModule/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/; sed -n 33,60p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/LocalizedModule/Exact.lean",
+   "results": "Algebra/Module/LocalizedModule/Exact.lean:37 LocalizedModule.map_exact, :56 IsLocalizedModule.map_exact; source read",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LocalizedModule.map_exact",
+  "file": "Mathlib/Algebra/Module/LocalizedModule/Exact.lean",
+  "line": 37,
+  "how": "exact: for [CommSemiring R] (S : Submonoid R) and R-linear g : M₀ → M₁, h : M₁ → M₂ with Function.Exact g h, the maps IsLocalizedModule.map S (mkLinearMap S M₀) (mkLinearMap S M₁) g and the same for h (which are T^{-1}u, T^{-1}v: p/t ↦ g(p)/t) form an exact pair; IsLocalizedModule.map_exact (line 56) is the version for arbitrary localization maps. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-module-powers",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

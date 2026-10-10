@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-localization-tensor-over-base",
+ "kind": "statement",
+ "title": "Localization over S commutes with tensoring over R",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings, $T\\subseteq A$ a multiplicative subset, $M$ an $A$-module (an $R$-module via $R\\to A$) and $T^{-1}M$ its localization, with $\\ell:M\\to T^{-1}M$, $m\\mapsto m/1$. For an $R$-module $N$, the tensor product $M\\otimes_RN$ is an $A$-module through $M$, and the $A$-linear map $\\ell\\otimes1_N:M\\otimes_RN\\to T^{-1}M\\otimes_RN$ is a localization of $M\\otimes_RN$ at $T$: it induces an isomorphism of $A$-modules $T^{-1}(M\\otimes_RN)\\xrightarrow{\\sim}T^{-1}M\\otimes_RN$, $(m\\otimes n)/t\\mapsto(m/t)\\otimes n$. It is natural in $N$: for an $R$-linear map $f:N\\to P$, the localization at $T$ of $1_M\\otimes f:M\\otimes_RN\\to M\\otimes_RP$ corresponds under these isomorphisms to $1_{T^{-1}M}\\otimes f:T^{-1}M\\otimes_RN\\to T^{-1}M\\otimes_RP$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00DK (lemma-tensor-localization, line 2088: T^{-1}M = T^{-1}A (x)_A M) combined with Lemma Tag 00D2 (lemma-tensor-with-bimodule, line 1881: T^{-1}A (x)_A (M (x)_R N) = (T^{-1}A (x)_A M) (x)_R N); used implicitly in the proof of Lemma 0523 (lemma-flat-module-powers, line 23827: 'it suffices to check that Tor_1^R(M,R/I) is zero on localization at q')"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of M tensor over R N at submonoid of A equals localized module tensor N, S⁻¹M ⊗[R] N = S⁻¹(M ⊗[R] N)",
+   "results": "IsLocalizedModule.rTensor, IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalizedModule.recOn, IsLocalization.moduleLid, IsLocalizedModule",
+   "verdict": "match: IsLocalizedModule.rTensor",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization over A of M ⊗_R N, with M an A-module and N an R-module, is the localization of M tensored with N",
+   "results": "IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.tensorProduct_isLocalizedModule, IsLocalizedModule.rTensor, IsLocalization.moduleTensorEquiv (Mathlib.RingTheory.Localization.BaseChange)",
+   "verdict": "match: IsLocalizedModule.rTensor",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsLocalizedModule.*[lr]Tensor\\|[lr]Tensor.*IsLocalizedModule' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; sed -n 236,265p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/BaseChange.lean",
+   "results": "RingTheory/Localization/BaseChange.lean:244 instance IsLocalizedModule.rTensor, :256 lemma IsLocalizedModule.map_lTensor; source read",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalizedModule.rTensor, IsLocalizedModule.map_lTensor",
+  "file": "Mathlib/RingTheory/Localization/BaseChange.lean",
+  "line": 244,
+  "how": "exact, one Mathlib declaration per clause: `instance IsLocalizedModule.rTensor (g : M →ₗ[A] M') [IsLocalizedModule S g] : IsLocalizedModule S (AlgebraTensorModule.rTensor R N g)` (line 244; S : Submonoid A, M an A-module with IsScalarTower R A M, N an R-module) is the localization clause, and `IsLocalizedModule.map_lTensor` (line 256: map S (rTensor R N g) (rTensor R P g) (lTensor A M f) = lTensor A M' f for f : N →ₗ[R] P) is the naturality clause. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-module-powers",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

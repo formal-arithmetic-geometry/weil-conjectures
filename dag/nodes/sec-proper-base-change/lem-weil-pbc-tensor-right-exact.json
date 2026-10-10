@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-tensor-right-exact",
+ "kind": "statement",
+ "title": "Tensor product is right exact",
+ "statement": "Let $R$ be a commutative ring, $M_1\\xrightarrow{f}M_2\\xrightarrow{g}M_3\\to0$ an exact sequence of $R$-modules ($\\ker g=\\operatorname{im}f$ and $g$ surjective) and $N$ an $R$-module. Then $M_1\\otimes_RN\\xrightarrow{f\\otimes1}M_2\\otimes_RN\\xrightarrow{g\\otimes1}M_3\\otimes_RN\\to0$ is exact; likewise $N\\otimes_RM_1\\to N\\otimes_RM_2\\to N\\otimes_RM_3\\to0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00DF (lemma-tensor-product-exact, line 1994)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product is right exact: exact sequence N → N' → N'' → 0 tensored with Q stays exact",
+   "results": "rTensor_exact, lTensor_exact, lTensor.toFun (Mathlib.LinearAlgebra.TensorProduct.RightExactness), Module.Flat.rTensor_exact",
+   "verdict": "match: rTensor_exact, lTensor_exact",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right exactness of tensor product: tensoring an exact sequence with surjective second map preserves exactness",
+   "results": "rTensor_exact, lTensor_exact, LinearMap.rTensor_exact_iff_lTensor_exact (Mathlib.LinearAlgebra.TensorProduct.RightExactness), Module.Flat.rTensor_exact",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem rTensor_exact\\|theorem lTensor_exact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; sed -n 280,300p and 395,405p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean",
+   "results": "LinearAlgebra/TensorProduct/RightExactness.lean:294 lTensor_exact, :401 rTensor_exact (surjectivity of g is rTensor_surjective/lTensor_surjective in the same file); source read",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "rTensor_exact, lTensor_exact",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean",
+  "line": 401,
+  "how": "exact, one Mathlib lemma per clause: `rTensor_exact Q (hfg : Exact f g) (hg : Surjective g) : Exact (rTensor Q f) (rTensor Q g)` (line 401) and `lTensor_exact` (line 294); surjectivity of g ⊗ 1 is `LinearMap.rTensor_surjective` / `LinearMap.lTensor_surjective`. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-module-powers",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

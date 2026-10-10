@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-krull-intersection-localization",
+ "kind": "statement",
+ "title": "Intersection of the I-adic filtration of a finite module vanishes near V(I)",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq R$ an ideal, $M$ a finitely generated $R$-module [def-weil-finitely-generated-module] and $N=\\bigcap_{n\\ge0}I^nM$. Then for every prime ideal $\\mathfrak p\\subset R$ with $I\\subseteq\\mathfrak p$ there is $f\\in R$, $f\\notin\\mathfrak p$, with $N_f=0$ [def-weil-pbc-module-localization-away], i.e. every element of $N$ is annihilated by some power of $f$. (Part (2) of the source, $N=0$ when $I$ lies in the Jacobson radical, is not stated here.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00IQ (lemma-intersection-powers-ideal-module, line 12257), part (1); its proof uses Lemma 00FN (lemma-Noetherian-basic) and Lemma 00IP (lemma-intersect-powers-ideal-module-zero)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian ring, finite module, intersection of I^n M vanishes after localizing at an element outside a prime containing I",
+   "results": "Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors, Ideal.exists_pow_inf_eq_pow_smul, IsHausdorff.haus, Ideal.mem_iInf_smul_pow_eq_bot_iff, Ideal.iInf_pow_eq_bot_of_isLocalRing, Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree (Mathlib.RingTheory.Filtration), isNoetherian_of_isNoetherianRing_of_finite",
+   "verdict": "no match; candidate Ideal.mem_iInf_smul_pow_eq_bot_iff",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull intersection theorem: for every prime p containing I there is f not in p with (⋂ I^n M)_f = 0",
+   "results": "Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors, Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree, IsHausdorff.iInf_pow_smul, Ideal.mem_iInf_smul_pow_eq_bot_iff, Ideal.exists_pow_inf_eq_pow_smul, IsHausdorff.of_isTorsionFree, Ideal.iInf_pow_smul_eq_bot_of_le_jacobson",
+   "verdict": "no match; candidate Ideal.mem_iInf_smul_pow_eq_bot_iff",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "⨅ i, _ ^ i • (⊤ : Submodule _ _), LocalizedModule",
+   "results": "none",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Filtration.lean (iInf / Krull); grep -rln 'iInf.*pow.*smul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "RingTheory/Filtration.lean:393 Ideal.mem_iInf_smul_pow_eq_bot_iff [IsNoetherianRing R] [Module.Finite R M] (x : M) : x ∈ ⨅ i, I ^ i • ⊤ ↔ ∃ r : I, (r : R) • x = x; :416 Ideal.iInf_pow_smul_eq_bot_of_le_jacobson (part (2) of 00IQ); :426 ..._of_isLocalRing; also AdicCompletion/Basic.lean, AdicCompletion/Noetherian.lean, Unramified/Basic.lean (unrelated)",
+   "verdict": "no match: no localized form; the Lean candidate is Ideal.mem_iInf_smul_pow_eq_bot_iff (each x in N has (1-r)x=0 with r in I, 1-r not in p), which with N finitely generated (product of the 1-r_i over generators) gives the node in a few lines, not one",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-module-powers",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-tensor-over-quotient-ring",
+ "kind": "statement",
+ "title": "Tensor products over a quotient ring",
+ "statement": "Let $R$ be a commutative ring, $J\\subseteq R$ an ideal and $M$ an $R$-module. (1) The map $(R/J)\\otimes_RM\\to M/JM$, $\\bar r\\otimes x\\mapsto rx\\bmod JM$, is an isomorphism of $R$-modules. (2) For every $R/J$-module $A$ (an $R$-module via $R\\to R/J$) the map $A\\otimes_RM\\to A\\otimes_{R/J}(M/JM)$, $a\\otimes x\\mapsto a\\otimes(x\\bmod JM)$, is a well-defined isomorphism, with inverse $a\\otimes\\bar x\\mapsto a\\otimes x$; it is natural in $A$ and in $M$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 051C (lemma-what-does-it-mean, line 23651), line 23711: 'for such N we have N (x)_{R/I^n} M/I^nM = N (x)_R M' (N annihilated by I^n); (1) is Lemma Tag 00DF (lemma-tensor-product-exact, line 1994) applied to J -> R -> R/J -> 0, and (2) follows from (1) with Lemma Tag 00D2 (lemma-tensor-with-bimodule, line 1881): A (x)_{R/J} ((R/J) (x)_R M) = A (x)_R M"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product over quotient ring R/I with M/IM is the tensor product over R: M ⊗[A] (A ⊗[R] N) ≃ M ⊗[R] N",
+   "results": "TensorProduct.AlgebraTensorModule.cancelBaseChange (Mathlib.LinearAlgebra.TensorProduct.Tower), TensorProduct.lid', TensorProduct.quotTensorEquivQuotSMul, TensorProduct.tensorQuotientEquiv, TensorProduct.tensorQuotientEquiv_apply_mk_tmul (Mathlib.LinearAlgebra.TensorProduct.Quotient)",
+   "verdict": "match: quotTensorEquivQuotSMul and cancelBaseChange, one per clause",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "(R/I) ⊗_R M is isomorphic to M / I M",
+   "results": "TensorProduct.tensorQuotEquivQuotSMul, TensorProduct.quotTensorEquivQuotSMul, TensorProduct.tensorQuotMapSMulEquivTensorQuot, TensorProduct.quotTensorEquivQuotSMul_comp_mk (Mathlib.LinearAlgebra.TensorProduct.Quotient)",
+   "verdict": "match for (1)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cancel base change M ⊗_A (A ⊗_R N) ≃ M ⊗_R N",
+   "results": "TensorProduct.AlgebraTensorModule.cancelBaseChange, cancelBaseChange_tmul, distribBaseChange (Mathlib.LinearAlgebra.TensorProduct.Tower), Algebra.TensorProduct.cancelBaseChange_tmul",
+   "verdict": "match for (2)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def quotTensorEquivQuotSMul\\|def cancelBaseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; sed -n 145,170p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; sed -n 430,440p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "results": "LinearAlgebra/TensorProduct/Quotient.lean:153 quotTensorEquivQuotSMul M I : (R ⧸ I) ⊗[R] M ≃ₗ[R] M ⧸ I • ⊤; LinearAlgebra/TensorProduct/Tower.lean:436 AlgebraTensorModule.cancelBaseChange : M ⊗[A] (A ⊗[R] N) ≃ₗ[B] M ⊗[R] N; source read",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TensorProduct.quotTensorEquivQuotSMul, TensorProduct.AlgebraTensorModule.cancelBaseChange",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+  "line": 153,
+  "how": "one Mathlib declaration per clause: (1) is `TensorProduct.quotTensorEquivQuotSMul M J : (R ⧸ J) ⊗[R] M ≃ₗ[R] M ⧸ J • ⊤` (Quotient.lean line 153; formula quotTensorEquivQuotSMul_mk_tmul); (2) is `TensorProduct.AlgebraTensorModule.cancelBaseChange R (R ⧸ J) (R ⧸ J) A M : A ⊗[R ⧸ J] ((R ⧸ J) ⊗[R] M) ≃ₗ A ⊗[R] M` (Mathlib/LinearAlgebra/TensorProduct/Tower.lean line 436, a ⊗ (r̄ ⊗ x) ↦ r̄a ⊗ x by cancelBaseChange_tmul) composed with `TensorProduct.congr` of the identity and (1) (the same as the existing leaf lem-weil-pbc-module-tensor-cancel-base-change). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-module-powers",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
