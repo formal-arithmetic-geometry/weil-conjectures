@@ -18,13 +18,16 @@ localization map `Γ(X, ⊤) ⟶ Γ(X, ⊤)[1/x]`.
 A morphism `m : X ⟶ Spec R` whose image avoids the zero loci of the elements of a submonoid `M`
 of `R` factors through `Spec R_M ⟶ Spec R`
 (`AlgebraicGeometry.exists_comp_SpecMap_algebraMap_localization`).
+
+For a commutative ring `R`, the presheaf `U ↦ (R ⟶ Γ(U, 𝒪_U))` on schemes is represented by
+`Spec R` (`AlgebraicGeometry.ΓSpec.representableBy`).
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
@@ -84,5 +87,13 @@ theorem Scheme.Hom.appTop_ΓSpecIso_inv {R S : CommRingCat.{u}} (f : Spec S ⟶ 
   have h := congr(($(Scheme.ΓSpecIso_inv_naturality (Spec.preimage f))).hom c)
   rw [Spec.map_preimage] at h
   exact h.symm
+
+/-- For a commutative ring `R`, the presheaf `U ↦ (R ⟶ Γ(U, 𝒪_U))` on schemes is represented
+by `Spec R`: this is the adjunction `Γ ⊣ Spec`. -/
+noncomputable def ΓSpec.representableBy (R : CommRingCat.{u}) :
+    (Scheme.Γ ⋙ coyoneda.obj (op R)).RepresentableBy (Spec R) where
+  homEquiv {U} := (ΓSpec.adjunction.homEquiv U (op R)).symm.trans (opEquiv _ _)
+  homEquiv_comp f g :=
+    congrArg Quiver.Hom.unop (ΓSpec.adjunction.homEquiv_naturality_left_symm (Y := op R) f g)
 
 end AlgebraicGeometry
