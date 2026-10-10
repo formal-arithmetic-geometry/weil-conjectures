@@ -37,6 +37,9 @@ MAIN = "sheaf-dag"
 MAX_AGE = float(li.config().get("SHEAF_DELIVERY_MAX_AGE_HOURS", "48")) * 3600
 
 
+BLUEPRINT_RULE = "28935e1a0b"  # the commit that introduced the blueprint field (2026-10-10)
+
+
 def git(*a, check=True, capture=True):
     r = subprocess.run(["git", *a], cwd=ROOT, text=True, capture_output=capture)
     if check and r.returncode != 0:
@@ -169,10 +172,18 @@ def cmd_merge(group, item, spot_note=None):
         subprocess.run(["git", "cherry-pick", "--abort"], cwd=ROOT, capture_output=True)
         undo(kinds)
         raise RuntimeError(f"cherry-pick conflict on {MAIN} {git('rev-parse', '--short', MAIN)}: the group pulls, rebases and pushes again\n{r.stderr.strip()}")
+    pre_rule = False
     try:
+        # blueprint references (stages/1-dag.md §6): fill the field mechanically on the delivered nodes; a delivery whose
+        # base predates the rule (commit BLUEPRINT_RULE) is accepted when the strict blueprint checks are all that fail
+        subprocess.run([sys.executable, "tools/blueprint_refs.py", "backfill"], cwd=ROOT, capture_output=True)
+        pre_rule = subprocess.run(["git", "merge-base", "--is-ancestor", BLUEPRINT_RULE, base], cwd=ROOT, capture_output=True).returncode != 0
         rs = subprocess.run([sys.executable, "tools/review_split.py", item], cwd=ROOT, text=True, capture_output=True)
+        fails = [l.strip() for l in rs.stdout.splitlines()[1:] if l.startswith("  ")]
         if rs.returncode != 0 or "FAIL" in rs.stdout:
-            raise RuntimeError("review_split.py:\n" + rs.stdout + rs.stderr)
+            if not (pre_rule and fails and all(l.startswith("blueprint:") for l in fails)):
+                raise RuntimeError("review_split.py:\n" + rs.stdout + rs.stderr)
+            print("delivered before the blueprint-refs rule; accepted with the field backfilled (same_as not searched): " + "; ".join(fails))
         cd = subprocess.run([sys.executable, "tools/check_dag.py"], cwd=ROOT, text=True, capture_output=True)
         # "reach:" warnings are not errors of the delivery (new nodes of other workers in progress are unreached until
         # their item is written); check_dag.py exits 1 on them, so only the listed kinds fail the merge
@@ -187,7 +198,8 @@ def cmd_merge(group, item, spot_note=None):
     d = json.loads(p.read_text())
     d["reviewed"] = {"date": datetime.date.today().isoformat(), "by": "L", "group": group, "result": "pass",
                      "note": ("mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of " + group)
-                             + (f"; spot-checked by L: {spot_note}" if spot_note else "")}
+                             + (f"; spot-checked by L: {spot_note}" if spot_note else "")
+                             + ("; delivered before the blueprint-refs rule: blueprint field backfilled by tools/blueprint_refs.py, same_as not yet searched" if pre_rule else "")}
     p.write_text(json.dumps(d, indent=1, ensure_ascii=False) + "\n")
     author = git("show", "-s", "--format=%an <%ae>", commits[-1])
     subject = git("show", "-s", "--format=%s", commits[-1])
