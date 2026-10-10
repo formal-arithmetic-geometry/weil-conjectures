@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Etale triple algebras map flatly to the strict henselization completion",
- "statement": "Let R be a Noetherian local commutative ring with maximal ideal m, let K be a separable closure of its residue field, and let C=R^{\\mathrm{sh}} be the strict henselization defined as the filtered colimit of pointed etale R-algebras with residue embeddings into K [lem-weil-pbc-strict-henselization-triples]. For every algebra S occurring in this filtered triple category, the canonical map S\\to\\widehat C=\\varprojlim_n C/(mC)^n, induced by S\\to C, is flat [def-weil-pbc-flat-ring-map].",
+ "statement": "Let R be a Noetherian local commutative ring with maximal ideal m, let K be a separable closure of its residue field, and let C=R^{\\mathrm{sh}} be the strict henselization defined as the filtered colimit of pointed etale R-algebras with residue embeddings into K [lem-weil-pbc-strict-henselization-triples]. For every triple (S,q,phi) in this filtered triple category, the canonical map S\\to\\widehat C=\\varprojlim_n C/(mC)^n induced by S\\to C is flat [def-weil-pbc-flat-ring-map].",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)'"
@@ -25,9 +25,62 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a triple (S,q,phi) in the filtered category. The per-triple strict-henselization identification [lem-sc-etale-triple-strict-henselization-identification] identifies the colimit C with the strict henselization A^{\\mathrm{sh}} of the local ring A=S_q, carrying the maximal ideal qA to mC. Hence it identifies the completion of A^{\\mathrm{sh}} at qA^{\\mathrm{sh}} with the displayed completion C-hat.",
+   "uses": [
+    "lem-sc-etale-triple-strict-henselization-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ, proof part (c), paragraph beginning 'To finish the proof of (c)'; strict-henselization construction and the preceding henselization-triples identification"
+   }
+  },
+  {
+   "text": "The etale map Spec S \\to Spec R is locally of finite presentation by the definition of etale morphisms [def-weil-etale-morphism], so the affine finite-presentation lemma [lem-weil-pbc-lfp-affine-opens-finite-presentation] makes S a finite-type R-algebra. Thus S is Noetherian because R is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian]. Localizing at q preserves Noetherianity [lem-weil-pbc-localization-noetherian], hence A=S_q is a Noetherian local ring. The strict-henselization completion flatness-over-the-base statement [lem-sc-strict-henselization-completion-flat-over-base] applied to A says that A \\to (A^{\\mathrm{sh}})^\\wedge is flat.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-strict-henselization-completion-flat-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ, proof part (c), paragraph beginning 'To finish the proof of (c)'"
+   }
+  },
+  {
+   "text": "The localization map S \\to A=S_q is flat [lem-weil-pbc-localization-flat]. Composing it with the flat map A \\to (A^{sh})-hat from the previous step is flat by [lem-weil-pbc-flat-ring-map-comp]. Under the completion identification of Step 1, this composite is exactly the canonical map S \\to C-hat, so that map is flat.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-sc-strict-henselization-completion-flat-over-base",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ, proof part (c), paragraph beginning 'To finish the proof of (c)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-triple-strict-henselization-identification",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-strict-henselization-completion-flat-over-base",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-ring-map-comp"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)'"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,12 +112,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-completion-flat",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-etale-triple-to-sh-completion-flat",
+  "worker": "stage1",
+  "summary": "Split the per-triple flatness assertion in Tag 06LJ(c): the triples presentation identifies the strict henselization completion with the completion of S_q, finite-type and localization Noetherianity make S_q eligible for completion flatness, and composition with S \\to S_q gives the required map.",
+  "blueprint": "Realizes the auxiliary per-triple completion-flatness assertion in the proof of the boundary stalk calculation, namely the sentence used by the parent completion-flatness node: each etale triple algebra maps flatly to the completed strict henselization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "The item needs the generic strict-henselization triple presentation and its identification of the colimit with the strict henselization of S_q; this tool lemma belongs to the proper-base-change unit rather than the curve unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shc3157",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shc3157 (reviewer sub-agent of L); spot-checked: Read Tag 06LJ(c): item = reduction of S->C-hat to base flatness A->(A^sh)^ for A=S_q, matching 'by a limit argument it suffices ... flat over R'; citer lem-sc-strict-henselization-completion-flat uses exactly this per-triple statement; no cycle (completion-noetherian and completion-flat both depend on this item, so over-base new node cannot be derived from them: real lemma, Stacks completed-direct-sum-flat); identification node true (S_q^sh = R^sh, mS_q=qS_q by unramifiedness), not a duplicate of the triples node (which is for R_p); no Mathlib strict henselization. FIX more, RETURN less: (1) item stmt_deps restored: statement cites lem-weil-pbc-strict-henselization-triples but stmt_deps had dropped it and listed proof-only deps (identification, lfp-affine); (2) Step 2 cites def-weil-etale-morphism for etale => locally finite presentation (C1).; 1 file(s) fixed by the reviewer"
+ }
 }
