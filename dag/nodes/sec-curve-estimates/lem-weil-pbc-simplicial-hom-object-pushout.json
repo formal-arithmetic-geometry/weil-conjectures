@@ -24,9 +24,71 @@
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-simplicial-hom-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume first that A is admissible. By the finite-limit statement for semi-representable objects, form P = H(B) \\times_{H(A)} H(C) in SR(X), with projections r_B:P\\to H(B) and r_C:P\\to H(C). The maps in the pullback are p^* and q^* from the universal families in the definition of H.",
+   "uses": [
+    "lem-weil-pbc-semi-representable-finite-limits",
+    "def-weil-pbc-simplicial-hom-object",
+    "def-weil-pbc-semi-representable-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017N (lemma-hom-from-coprod), proof: existence of the required Hom objects and the fibre product"
+   }
+  },
+  {
+   "text": "For every W in SR(X), a D-family in K over W restricts along i and j to a B-family and a C-family. These restrictions agree after p and q, because i\\circ p = j\\circ q in the pushout square. Conversely, compatible B- and C-families agreeing after p and q define a unique D-family: in every degree assign a simplex of D its value from either B or C, using the pushout universal property; agreement on A makes this independent of the choice, and the simplicial compatibility equations hold because they hold on B and C. Thus D-families over W are naturally in bijection with pairs of B- and C-families whose restrictions to A agree.",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-simplicial-hom-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017N (lemma-hom-from-coprod), proof, the displayed sequence of functorial equalities and the final term using the pushout term by term"
+   }
+  },
+  {
+   "text": "The representing property of H identifies morphisms W\\to H(S) with S-families over W, naturally in W. Applying this to S=D,B,C,A and the bijection of the previous step gives a natural bijection between Mor(W,H(D)) and Mor(W,H(B)) \\times_{Mor(W,H(A))} Mor(W,H(C)); under it a morphism g is sent to (i^*\\circ g,j^*\\circ g). The universal property of the categorical fibre product P gives the same bijection with Mor(W,P), with the pair (r_B\\circ -,r_C\\circ -). By Yoneda (or directly by the representing universal properties), there is a unique isomorphism H(D)\\cong P carrying its two projections to i^* and j^*. Hence H(D), i^*, j^* is the asserted fibre product.",
+   "uses": [
+    "def-weil-pbc-simplicial-hom-object",
+    "def-weil-pbc-representing-object",
+    "lem-weil-pbc-semi-representable-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017N (lemma-hom-from-coprod), proof, the representing functor equalities and conclusion"
+   }
+  },
+  {
+   "text": "If A is empty, the compatibility condition in the family bijection is vacuous. The pushout D is the coproduct of B and C, so the same argument gives a natural bijection Mor(W,H(D)) \\cong Mor(W,H(B))\\times Mor(W,H(C)). Since SR(X) has a final object e and finite limits, this product is the fibre product H(B)\\times_e H(C); the resulting comparison isomorphism identifies its projections with i^* and j^*. Therefore H(D) is a product of H(B) and H(C).",
+   "uses": [
+    "def-weil-pbc-simplicial-set",
+    "def-weil-pbc-simplicial-hom-object",
+    "lem-weil-pbc-semi-representable-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017N (lemma-hom-from-coprod), statement and proof, with the fibre product over the final object for the empty U case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-semi-representable-finite-limits",
+  "def-weil-pbc-simplicial-hom-object",
+  "def-weil-pbc-semi-representable-object",
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-representing-object"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 017N (lemma-hom-from-coprod), proof, specialized to degree 0; empty-base case by the fibre product over the final object"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,7 +113,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +129,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-simplicial-hom-object-pushout",
+  "worker": "stage1",
+  "summary": "Split the item directly from Stacks Lemma 017N in degree 0. The proof constructs the fibre product in SR(X), identifies D-families with compatible B- and C-families by the pushout universal property in simplicial sets, transports this bijection through the representing universal properties of H(-), and concludes by the fibre-product universal property. The empty-base case is the same argument with a vacuous compatibility condition and the final object, yielding a product. No additional node was needed because all non-elementary categorical structure is supplied by the existing Hom-object, representing-object, simplicial-set, semi-representable, and finite-limits nodes.",
+  "blueprint": "The steps realize the fourth paragraph of lem-weil-pbc-hypercover-refinement's proof ('Previously chosen faces prescribe compatible boundaries'): compatible families on the two pieces of a simplicial pushout are exactly a family on the pushout, and the Hom object therefore is the fibre product."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 017N read, 4 steps checked, small cases tested"
+ }
 }
