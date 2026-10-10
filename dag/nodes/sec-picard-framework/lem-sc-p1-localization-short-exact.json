@@ -1,0 +1,64 @@
+{
+ "id": "lem-sc-p1-localization-short-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, sheafifying the graded free resolution preserves exactness: exactness after localization",
+   "via": [
+    "lem-sc-p1-proj-degreezero-localization-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary localization preserves short exact sequences of modules",
+ "statement": "Let R be a commutative ring, T a multiplicative subset of R, and 0 \\to A \\to B \\to C \\to 0 an exact sequence of R-modules. Using module localization [def-weil-pbc-module-localization], the sequence 0 \\to T^{-1}A \\to T^{-1}B \\to T^{-1}C \\to 0, with maps induced by the given maps, is exact.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00HT (algebra-lemma-flat-localization) together with the exactness of tensoring by a flat module"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of modules is an exact functor",
+   "results": "LocalizedModule.map_exact; IsLocalizedModule.map_exact",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact (map _ _ _ g) (map _ _ _ h)",
+   "results": "IsLocalizedModule.map_exact in Mathlib/Algebra/Module/LocalizedModule/Exact.lean",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsLocalizedModule.map_exact' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/LocalizedModule/Exact.lean",
+   "results": "theorem IsLocalizedModule.map_exact (g) (h) (ex : Function.Exact g h)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalizedModule.map_exact",
+  "file": "Mathlib/Algebra/Module/LocalizedModule/Exact.lean",
+  "how": "specializes in one line by taking the localization maps for T^{-1}A, T^{-1}B, and T^{-1}C; the theorem states exactness of the induced localized maps (declaration lines 55-59); the end clauses (injectivity of T^{-1}A -> T^{-1}B, surjectivity of T^{-1}B -> T^{-1}C) are IsLocalizedModule.map_injective and IsLocalizedModule.map_surjective, Mathlib/Algebra/Module/LocalizedModule/Basic.lean lines 1258 and 1269",
+  "line": 56
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-p1-proj-degreezero-localization-exact",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality"
+}

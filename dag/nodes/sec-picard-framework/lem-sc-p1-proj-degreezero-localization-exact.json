@@ -22,9 +22,48 @@
   "def-sc-p1-standard",
   "def-pc-standard-graded-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-p1-localization-short-exact] to the given exact sequence and the multiplicative set T. This gives an exact sequence of ordinary localized modules 0 \\to T^{-1}M' \\to T^{-1}M \\to T^{-1}M'' \\to 0, with the displayed fraction maps.",
+   "uses": [
+    "lem-sc-p1-localization-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00HT (algebra-lemma-flat-localization) and the exactness of localization"
+   }
+  },
+  {
+   "text": "Because T consists of homogeneous elements, each localized module has the induced Z-grading in which a homogeneous fraction y/h has degree deg(y)-deg(h), and the localized maps preserve this grading. The fraction formulas are compatible with the localization relation, so this is well defined.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section 00JL (section-graded-modules), localization of graded modules at homogeneous elements"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-graded-degree-component-exact] to the induced graded exact sequence in Step 2 at degree zero. Its degree-zero terms are exactly the submodules M'_(p), M_(p), and M''_(p), since degree zero means that the homogeneous numerator and denominator have equal degree. Under these identifications the maps are y/h \\to phi(y)/h, so the resulting sequence is the one asserted.",
+   "uses": [
+    "lem-sc-p1-graded-degree-component-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma 01M7 (lemma-proj-sheaves) (5), degree-zero localization stalk calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-localization-short-exact",
+  "lem-sc-p1-graded-degree-component-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01M7 (lemma-proj-sheaves) (5), with Algebra Section 00JL; the induced grading and degree-zero calculation are written out from the fraction definitions"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +88,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-proj-sheafification-exact",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-proj-degreezero-localization-exact",
+  "worker": "stage1",
+  "summary": "Split the local degree-zero exactness calculation into ordinary localization exactness and exactness on graded components. The proof then equips the localized sequence with its induced grading and identifies its degree-zero components with the explicitly defined modules M'_(p), M_(p), and M''_(p). No exact Lean declaration for the item was found.",
+  "blueprint": "Realizes the local degree-zero localization calculation in the proof of lem-sc-p1-graded-resolution.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dzl",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dzl (reviewer sub-agent of L); spot-checked: Source: Stacks 00JL (algebra-section-graded), 00HT (algebra-lemma-flat-localization), 01M7 (constructions-lemma-proj-sheaves) (5); item statement unchanged from sheaf-dag (hypotheses: k field, S=k[x0,x1] standard grading, exact sequence of Z-graded S-modules with degree-preserving maps, homogeneous prime p not containing S_+, T homogeneous elements outside p, M_(p) defined by fractions with the localization relation). Step 1 carried by lem-sc-p1-localization-short-exact (T multiplicative since p prime and homogeneous). Step 2 elementary: induced Z-grading deg(y/h)=deg y - deg h on T^{-1}M, maps graded. Step 3 carried by lem-sc-p1-graded-degree-component-exact applied over the Z-graded ring T^{-1}S at n=0; degree-zero part of T^{-1}M equals M_(p) (sum of degree-zero homogeneous fractions is one such fraction over the product of denominators). Mathlib leaf verified: IsLocalizedModule.map_exact at Mathlib/Algebra/Module/LocalizedModule/Exact.lean:56, map_injective/map_surjective at Basic.lean:1258/1269. Small cases: zero sequence; 0->S->S->0->0 with p=(0),(x0) gives S_(p)->S_(p)->0 exact. FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-p1-localization-short-exact.json: statement, stmt_deps: cited def-weil-pbc-module-localization-away (powers of one element) replaced by def-weil-pbc-module-localization (general multiplicative subset, C4/B3); mathlib_match.how: added map_injective/map_surjective lines for the end clauses. dag/nodes/sec-picard-framework/lem-sc-p1-graded-degree-component-exact.json: statement, stmt_deps: cited def-weil-pbc-proj-twisting-sheaf defines graded modules only over N-graded S, not over a Z-graded ring R (B3); the notions Z-graded ring, graded module, degree-preserving map are now written out in the statement and the stmt_dep dropped; mathematics unchanged. Start Sat Oct 10 03:53:35 PM UTC 2026, end Sat Oct 10 03:54:39 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
