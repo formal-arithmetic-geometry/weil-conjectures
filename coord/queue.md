@@ -2,16 +2,16 @@
 
 859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (55)
+## Stage 1: nodes to split (54)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 2003 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
-| `lem-pc-module-tor-amplitude-flat-model` | 3016 | none |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
 | `lem-sc-derived-mayer-vietoris-triangle` | 3016 | none |
+| `lem-pc-module-flat-opcycles-tor-criterion` | 3017 | none |
 | `lem-sc-derived-internal-hom-adjunction` | 3019 | none |
 | `lem-pc-kflat-tensor-product` | 3020 | none |
 | `lem-pc-sheaf-rhom-projection-formula` | 3021 | none |
@@ -53,16 +53,15 @@
 | `lem-sc-affine-unit-divisor-base-change` | - | none |
 | `lem-sc-h1-gm-pic-pullback` | - | none |
 | `lem-sc-pic-affine-base-change-compatibility` | - | none |
-| `lem-kun-etale-lfp` | - | none |
 | `lem-pur-kinjective-degreewise-existence` | - | none |
 | `lem-pur-ringed-site-grothendieck-abelian` | - | none |
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
 | `lem-pur-left-derived-from-kflat-class` | - | none |
-| `lem-pur-rhom-well-defined` | - | none |
 | `lem-pur-hom-kflat-into-kinjective` | - | none |
+| `lem-pur-rhom-into-kinjective-local` | - | none |
 
-## Stage 2: nodes to state (804)
+## Stage 2: nodes to state (805)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -837,6 +836,7 @@
 | `lem-fet-galois-category` | 2 | state |
 | `lem-fet-locally-trivial` | 2 | state |
 | `lem-galois-flasque` | 2 | state |
+| `lem-kun-etale-lfp` | 2 | state |
 | `lem-pc-cartier-criterion` | 2 | state |
 | `lem-pc-flat-rf-open` | 2 | state |
 | `lem-pc-hilb-smooth` | 2 | state |
@@ -871,7 +871,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1674 nodes that wait for a statement dependency, 95 nodes that wait for stage 1.
+Not open yet: 1676 nodes that wait for a statement dependency, 94 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
