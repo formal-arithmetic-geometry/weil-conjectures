@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-mult-n-pullback",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pullback of symmetric modules under multiplication by $n$",
@@ -20,20 +20,29 @@
  },
  "stmt_deps": [
   "def-sc-mult-n",
-  "def-sc-abelian-variety"
+  "def-sc-abelian-variety",
+  "def-sc-invertible-module"
  ],
  "proof": [
   {
-   "text": "*Reference: Stacks Project, Groupoid Schemes, Lemma 39.9.7,\n[Tag 0BFF](https://stacks.math.columbia.edu/tag/0BFF).* Pull\nthe relation of [thm-sc-theorem-of-cube] back along\n$x\\mapsto(x,x,-x)$: since $m_{123}(x,x,-x)=x$,\n$m_1(x,x,-x)=m_2(x,x,-x)=x$, $m_3(x,x,-x)=-x$,\n$m_{12}(x,x,-x)=2x$, and\n$m_{13}(x,x,-x)=m_{23}(x,x,-x)=0$, one gets\n$\\mathcal L^{\\otimes3}\\otimes[-1]^*\\mathcal L\\cong[2]^*\\mathcal L$ for every $\\mathcal L$, hence\n$[2]^*\\mathcal N\\cong\\mathcal N^{\\otimes4}$ for symmetric\n$\\mathcal N$. Next pull the relation back along\n$x\\mapsto(x,x,[n-1]x)$: $m_{123}(x,x,[n-1]x)=[n+1]x$,\n$m_1=m_2=\\mathrm{id}$, $m_3=[n-1]$, $m_{12}=[2]$, and\n$m_{13}=m_{23}=[n]$, so\n\n$$\n[n+1]^*\\mathcal N\\otimes\\mathcal N^{\\otimes2}\\otimes\n[n-1]^*\\mathcal N\n\\cong[2]^*\\mathcal N\\otimes[n]^*\\mathcal N^{\\otimes2}.\n$$",
+   "text": "*Reference: Stacks Project, Groupoid Schemes,\n[Tag 0BFF](https://stacks.math.columbia.edu/tag/0BFF).* Pull\nthe relation of [thm-sc-theorem-of-cube] back along\n$x\\mapsto(x,x,-x)$: since $m_{123}(x,x,-x)=x$,\n$m_1(x,x,-x)=m_2(x,x,-x)=x$, $m_3(x,x,-x)=-x$,\n$m_{12}(x,x,-x)=2x$, and\n$m_{13}(x,x,-x)=m_{23}(x,x,-x)=0$, one gets\n$\\mathcal L^{\\otimes3}\\otimes[-1]^*\\mathcal L\\cong[2]^*\\mathcal L$ for every $\\mathcal L$, hence\n$[2]^*\\mathcal N\\cong\\mathcal N^{\\otimes4}$ for symmetric\n$\\mathcal N$. Next pull the relation back along\n$x\\mapsto(x,x,[n-1]x)$: $m_{123}(x,x,[n-1]x)=[n+1]x$,\n$m_1=m_2=\\mathrm{id}$, $m_3=[n-1]$, $m_{12}=[2]$, and\n$m_{13}=m_{23}=[n]$, so\n\n$$\n[n+1]^*\\mathcal N\\otimes\\mathcal N^{\\otimes2}\\otimes\n[n-1]^*\\mathcal N\n\\cong[2]^*\\mathcal N\\otimes[n]^*\\mathcal N^{\\otimes2}.\n$$",
    "uses": [
     "thm-sc-theorem-of-cube"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-n-pullback/_section.md",
+    "place": "step 1, pullbacks along x↦(x,x,-x) and x↦(x,x,[n−1]x)"
+   }
   },
   {
    "text": "By induction on $n$ (the case $n=2$ was just done, and\n$n=1$ is the identity), the induction hypothesis\n$[m]^*\\mathcal N\\cong\\mathcal N^{\\otimes m^2}$ for $m\\leq n$\ngives\n\n$$\n[n+1]^*\\mathcal N\\cong\\mathcal N^{\\otimes(4+2n^2-2-(n-1)^2)}\n=\\mathcal N^{\\otimes(n+1)^2},\n$$\n\nas required.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-n-pullback/_section.md",
+    "place": "step 1, induction conclusion"
+   }
   }
  ],
  "proof_deps": [
@@ -44,9 +53,38 @@
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-n-pullback/lem-sc-mult-n-pullback.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pullback of a symmetric invertible module along multiplication by n on an abelian variety is its tensor power n squared",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, tensorCongr_inv, tensorCongr_refl, pullbackSpecIso_inv_fst', pullbackSpecIso_inv_fst, pullbackSpecIso_inv_snd, pullbackSpecIso_hom_fst', pullbackSpecIso",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory pullback tensor power multiplication map abelian variety",
+   "results": "none; Loogle reported Unknown identifier CategoryTheory",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_iso_overPullback_npow_id|tensorPow|pullback.*npow [Mathlib]",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "symmetric line bundle pullback under multiplication n equals tensor power n squared",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -149,5 +187,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-mult-n-pullback"
+ "unit": "sk-prop-av-mult-n-pullback",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-mult-n-pullback",
+  "worker": "stage1",
+  "summary": "The item is split into the cube pullback calculation and an elementary induction. The existing theorem-of-the-cube node is the sole non-elementary proof dependency; no new nodes are needed.",
+  "blueprint": "Realizes the single proof step of the blueprint unit: the two pullbacks of the cube relation and the induction on n.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mnp1828",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mnp1828 (reviewer sub-agent of L); spot-checked: Checked all seven partial sums at (x,x,-x) and (x,x,[n-1]x), the recurrence and 4+2n^2-2-(n-1)^2=(n+1)^2 with base n=1,2 (step applied for n>=2); symmetry hypothesis used where [-1]^* appears; cube relation cited via node thm-sc-theorem-of-cube (statement, not proof); no cycle (cube -> lem-sc-abelian-variety-characterization -> def only; finite-flat/isogeny-facts/finite-kernel cite the item, not conversely). FIX more, RETURN less: B5 step 1 quoted the number 'Lemma 39.9.7' beside Tag 0BFF; removed the number, kept the tag. Note: second reading claims blueprint.from filled but it is null.; 1 file(s) fixed by the reviewer"
+ }
 }
