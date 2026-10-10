@@ -5,16 +5,48 @@
  "statement": "Let $\\varphi:R\\to S$ be a smooth ring map [def-weil-pbc-smooth-ring-map]. For every prime ideal $\\mathfrak p\\subset R$, the base-change map $\\kappa(\\mathfrak p)\\to S\\otimes_R\\kappa(\\mathfrak p)$ is smooth, and for every prime $\\mathfrak Q$ of the fibre the localization $(S\\otimes_R\\kappa(\\mathfrak p))_{\\mathfrak Q}$ is a regular local ring [def-weil-regular-scheme]. The residue field and fibre are understood as in [def-weil-pbc-localization-at-prime].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00T4 (lemma-base-change-smooth, line 37133), the smooth-ring-map overview (section 00TZ), and Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 41349), whose final assertion gives regularity of the local ring"
+  "place": "Algebra, Lemma Tag 00T4 (lemma-base-change-smooth, line 37133), and Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), whose final assertion gives regularity of the local ring"
  },
  "stmt_deps": [
   "def-weil-pbc-smooth-ring-map",
   "def-weil-pbc-localization-at-prime",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a prime ideal $\\mathfrak p\\subset R$ and put $k=\\kappa(\\mathfrak p)$ and $A=S\\otimes_Rk$. Applying the base-change clause of [lem-weil-pbc-smooth-ring-map-base-change-composition] to the smooth map $R\\to S$ and the residue-field map $R\\to k$ shows that $k\\to A$ is smooth.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00T4 (lemma-base-change-smooth, line 37133), with R' = kappa(p)"
+   }
+  },
+  {
+   "text": "For every prime ideal $\\mathfrak Q\\subset A$, [lem-weil-pbc-smooth-over-field-regular-local] applied to the smooth $k$-algebra $A$ from Step 1 gives that $A_{\\mathfrak Q}=(S\\otimes_R\\kappa(\\mathfrak p))_{\\mathfrak Q}$ is a regular local ring. Since $\\mathfrak p$ and $\\mathfrak Q$ were arbitrary, this proves both assertions.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-field-regular-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 38609), final assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-over-field-regular-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemmas Tag 00T4 (lemma-base-change-smooth, line 37133) and Tag 00TT (lemma-characterize-smooth-over-field, line 38609)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +71,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +92,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": " L 2026-10-10: removed from the statement the claim that the regular-local conclusion is 'recorded in' lem-weil-pbc-smooth-over-field-dimension-differentials (that node gives the dimension, not regularity); the splitter proves regularity of a smooth algebra over a field at every prime from the Stacks source (Algebra 00TT and the lemmas it cites)."
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-smooth-fibre-regular-local",
+  "worker": "stage1",
+  "summary": "Checked the two assertions against Stacks Algebra 00T4 and 00TT. Split the proof into residue-field base change using the existing Mathlib leaf for smooth base change, followed by the final regular-local assertion of 00TT through one strictly smaller statement-only support node. Corrected the stale 00TT source line from 41349 to 38609. No Lean was written or compiled."
+ },
+ "lead_note": " L 2026-10-10: removed from the statement the claim that the regular-local conclusion is 'recorded in' lem-weil-pbc-smooth-over-field-dimension-differentials (that node gives the dimension, not regularity); the splitter proves regularity of a smooth algebra over a field at every prime from the Stacks source (Algebra 00TT and the lemmas it cites).",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read both steps: 00T4 base change via smooth-ring-map-base-change-composition (1), then the new 00TT final-assertion node; new node not a duplicate (regular-ring-smooth-ascent is the general ascent)."
+ }
 }
