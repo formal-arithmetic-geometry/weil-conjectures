@@ -2439,3 +2439,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:47 L: added def-pc-essentially-constant-pro-diagram (dual of the ind definition, Stacks 05PU(2)) and cited it in lem-pc-essentially-constant-pro-hom-colimit (reviewer R-ecp2049)
 - 19:47 L: returned deliver/K1/lem-sc-proper-flat-right-adjoint-affine-basechange (reviewer RETURN: Reviewer R-pfa2055. (1) D2/D1: the new node lem-sc-affine-perfect-generator-rhom-basechange states the whole content of )
 - 19:47 L: merged deliver/G1/lem-pc-left-localization-hom-colimit (reviewer FIX; first push; new nodes: 2)
+- 19:48 L: merged deliver/F1/lem-sc-finite-free-internal-hom-exact (reviewer PASS; first push; new nodes: 0)

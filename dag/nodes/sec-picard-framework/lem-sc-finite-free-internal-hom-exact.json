@@ -13,18 +13,57 @@
  },
  "kind": "statement",
  "title": "Internal Hom from a finite free sheaf is exact",
- "statement": "Let $(U,\\mathcal O_U)$ be a ringed site [def-weil-locally-ringed-space-morphism], let $E$ be an $\\mathcal O_U$-module equipped with an isomorphism $E\\cong\\mathcal O_U^{\\oplus r}$ for some integer $r\\geq0$, and let $0\\to A\\to B\\to C\\to0$ be a short exact sequence of $\\mathcal O_U$-modules [def-weil-sheaf-of-modules-category]. Then $0\\to\\mathcal H om_{\\mathcal O_U}(E,A)\\to\\mathcal H om_{\\mathcal O_U}(E,B)\\to\\mathcal H om_{\\mathcal O_U}(E,C)\\to0$ is exact; under the chosen isomorphism $E\\cong\\mathcal O_U^{\\oplus r}$, each internal Hom is canonically identified with the corresponding direct sum $A^{\\oplus r}$, $B^{\\oplus r}$, or $C^{\\oplus r}$.",
+ "statement": "Let $(U,\\mathcal O_U)$ be a site with a sheaf of commutative rings (a ringed site) [def-pur-sheaf-hom], let $E$ be an $\\mathcal O_U$-module equipped with an isomorphism $E\\cong\\mathcal O_U^{\\oplus r}$ for some integer $r\\geq0$, and let $0\\to A\\to B\\to C\\to0$ be a short exact sequence of $\\mathcal O_U$-modules [def-weil-sheaf-of-modules-category]. Then $0\\to\\mathcal H om_{\\mathcal O_U}(E,A)\\to\\mathcal H om_{\\mathcal O_U}(E,B)\\to\\mathcal H om_{\\mathcal O_U}(E,C)\\to0$ is exact; under the chosen isomorphism $E\\cong\\mathcal O_U^{\\oplus r}$, each internal Hom is canonically identified with the corresponding direct sum $A^{\\oplus r}$, $B^{\\oplus r}$, or $C^{\\oplus r}$.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 0GM8 (Lemma 20.51.4, case (2)), finite locally free Hom calculation in the proof"
  },
  "stmt_deps": [
-  "def-weil-locally-ringed-space-morphism",
+  "def-pur-sheaf-hom",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the chosen isomorphism E|_V \\cong O_V^{\\oplus r} on every object V of the site. By the definition of sheaf Hom, restriction to V gives Hom_{O|_V}(E|_V,A|_V), and precomposition with this isomorphism identifies it naturally with Hom_{O|_V}(O_V^{\\oplus r},A|_V) \\cong A(V)^{\\oplus r}. The same construction applies to B and C and is compatible with restriction maps, so it gives sheaf isomorphisms Hom(E,A) \\cong A^{\\oplus r}, Hom(E,B) \\cong B^{\\oplus r}, and Hom(E,C) \\cong C^{\\oplus r}.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8 (Lemma 20.51.4), case (2), finite locally free Hom calculation"
+   }
+  },
+  {
+   "text": "Under these identifications, the maps induced by A \\to B \\to C are the r-fold direct sums of the given maps, because the sheaf-Hom maps act by postcomposition and the identifications use the r coordinate inclusions and projections. The category of sheaves of O-modules is abelian, so kernels and cokernels are computed in that category; finite direct sums are computed coordinatewise. Therefore the direct-sum sequence 0 \\to A^{\\oplus r} \\to B^{\\oplus r} \\to C^{\\oplus r} \\to 0 is exact, including r = 0.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8 (Lemma 20.51.4), case (2), exactness after finite locally free Hom identification"
+   }
+  },
+  {
+   "text": "The three sheaf isomorphisms constructed in Step 1 form a commutative diagram from the direct-sum sequence in Step 2 to the displayed internal-Hom sequence, because each vertical map is precomposition with the same chosen isomorphism E \\cong O_U^{\\oplus r} and each horizontal map is postcomposition by A \\to B or B \\to C. Thus the internal-Hom sequence has the same sectionwise kernels and locally surjective epimorphism as the exact direct-sum sequence, and the three vertical maps give the claimed identifications.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8 (Lemma 20.51.4), case (2), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0GM8 (Lemma 20.51.4), case (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +95,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-bounded-above-finite-free-hom-acyclic",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-free-internal-hom-exact",
+  "worker": "stage1",
+  "summary": "Split the finite-free internal-Hom exactness assertion using the existing sheaf-Hom definition and the abelian sheaf-of-modules category. The chosen finite-free isomorphism identifies each internal Hom with a finite direct sum, and the short exact sequence remains exact coordinatewise; no new node was needed.",
+  "blueprint": "Realizes the parenthetical finite locally free Hom calculation in the proof of thm-sc-p1-duality, via the bounded-above finite-free Hom route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ffh2059",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffh2059 (reviewer sub-agent of L); spot-checked: C1: Step 1 local identification Hom_{O|_V}(O_V^r,A|_V)=A(V)^r is marked elementary (image of the r basis sections), restriction-compatible via def-pur-sheaf-hom (commutative O, matches statement); C4: def-weil-sheaf-of-modules-category gives the abelian category in which the short exact sequence lives; D: exactness not assumed, obtained from coordinatewise exactness of the r-fold direct sum (r=0 included) transported along the isomorphism of sequences in Step 3; E7: stmt_deps change (locally-ringed-space-morphism -> def-pur-sheaf-hom) named in the second reading; no new nodes, no tool_uses. No repairs needed."
+ }
 }
