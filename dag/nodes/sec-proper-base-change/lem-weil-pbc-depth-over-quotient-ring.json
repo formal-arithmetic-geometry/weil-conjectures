@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-depth-over-quotient-ring",
+ "kind": "statement",
+ "title": "Depth of a module killed by an ideal is the same over the quotient ring",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] (a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$), $I\\subseteq\\mathfrak m$ an ideal, and $M$ a finite $R$-module [def-weil-finitely-generated-module] with $IM=0$, so that $M$ is a finite module over the Noetherian local ring $\\bar R=R/I$, with maximal ideal $\\bar{\\mathfrak m}=\\mathfrak m/I$, by $(r\\bmod I)\\cdot m=rm$. Then the depth of $M$ as an $R$-module equals the depth of $M$ as an $\\bar R$-module: $\\operatorname{depth}_{\\mathfrak m}(M)=\\operatorname{depth}_{\\bar{\\mathfrak m}}(M)$ [def-weil-pbc-depth]. In particular (for $M=R/I$) the depth of the local ring $R/I$ equals the depth of $R/I$ as an $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0AUK (lemma-depth-goes-down-finite, line 18048) applied to the finite ring map $R\\to R/I$, whose only maximal ideal is $\\mathfrak m/I$ and for which $N_{\\mathfrak m/I}=N$ as $R/I$ is local. Tag verified in tags/tags: 0AUK,algebra-lemma-depth-goes-down-finite"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular sequence on a module over quotient ring R/I iff regular sequence over R when I annihilates the module",
+   "results": "RingTheory.Sequence.IsRegular, isRegular_iff, isRegular_cons_iff, IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal, RingTheory.Sequence.isWeaklyRegular_map_algebraMap_iff (Mathlib.RingTheory.Regular.RegularSequence)",
+   "date": "2026-10-10",
+   "verdict": "no match for depth; candidate for the regular-sequence part: isWeaklyRegular_map_algebraMap_iff"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular sequence on a module over R is the same as over an R-algebra S acting compatibly (scalar tower), images under algebraMap",
+   "results": "RingTheory.Sequence.isWeaklyRegular_map_algebraMap_iff, IsWeaklyRegular.of_isLocalizedModule, IsRegular.cons, isRegular_cons_iff, IsRegular.cons', IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem",
+   "date": "2026-10-10",
+   "verdict": "no match for depth (Mathlib has no depth); regular-sequence transfer exists for weakly regular sequences"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'map_algebraMap_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular/RegularSequence.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Depth/",
+   "results": "RegularSequence.lean:217 isWeaklyRegular_map_algebraMap_iff [Algebra R S] [Module S M] [IsScalarTower R S M] (rs : List R) : IsWeaklyRegular M (rs.map (algebraMap R S)) <-> IsWeaklyRegular M rs (read lines 217-221); no IsRegular analogue; no depth definition (Depth/ holds only Rees.lean)",
+   "date": "2026-10-10",
+   "verdict": "no match: depth is absent from the pinned Mathlib"
+  }
+ ],
+ "mathlib_candidate": {
+  "declaration": "RingTheory.Sequence.isWeaklyRegular_map_algebraMap_iff",
+  "file": "Mathlib/RingTheory/Regular/RegularSequence.lean",
+  "line": 217,
+  "how": "transfers weak regularity of a sequence from R to S = R/I for an S-module M; the depth statement itself needs a definition of depth, which the pinned Mathlib lacks"
+ },
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-local-depth-formula",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
