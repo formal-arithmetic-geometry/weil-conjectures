@@ -1,8 +1,8 @@
 # Work queue
 
-920 items; claim with `tools/claim.py next <group> [--stage N]`.
+918 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (192)
+## Stage 1: nodes to split (189)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -48,13 +48,13 @@
 | `lem-sc-regular-meromorphic-section-exists` | 5010 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
-| `lem-pc-sites-modules-j-shriek-flat` | 5013 | none |
 | `lem-pc-sites-modules-quotient-j-shriek` | 5013 | none |
 | `lem-pc-bounded-above-flat-tensor-acyclic` | 5014 | none |
 | `lem-pc-flat-bounded-complex-descent` | 5014 | none |
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 5014 | none |
 | `lem-pc-module-filtered-colimits-tensor` | 5014 | none |
 | `lem-pc-proper-support-descent` | 5014 | none |
+| `lem-pc-sites-modules-sheafification-flat` | 5014 | none |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
@@ -67,15 +67,12 @@
 | `def-weil-t-structure` | - | none |
 | `def-nagata-fixed-base-separated-stage` | - | none |
 | `def-pur-sheaf-tensor-product` | - | none |
-| `def-weil-pbc-C7` | - | none |
 | `def-weil-pbc-constructible-torsion` | - | none |
 | `lem-pc-kbar-pure-insep` | - | none |
 | `lem-weil-pbc-finite-pushforward-constructible-noetherian` | - | none |
 | `pqf-lem-affine-local-target` | - | none |
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `thm-pqf-zmt-factorization` | - | none |
-| `def-nagata-finite-presentation-descent` | - | none |
-| `def-nagata-glued-limit-comparison` | - | none |
 | `def-pc-representable-functor` | - | none |
 | `def-sc-field-extension` | - | none |
 | `def-weil-pbc-C1` | - | none |
@@ -199,7 +196,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (728)
+## Stage 2: nodes to state (729)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -898,6 +895,7 @@
 | `pqf-lem-proper-basic` | 1 | state |
 | `pqf-lem-qf-finitefibres` | 1 | state |
 | `pqf-lem-sheaf-zero-stalks` | 1 | state |
+| `def-nagata-glued-limit-comparison` | 2 | state |
 | `lem-fet-galois-category` | 2 | state |
 | `lem-fet-locally-trivial` | 2 | state |
 | `lem-galois-flasque` | 2 | state |
@@ -932,7 +930,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1452 nodes that wait for a statement dependency, 231 nodes that wait for stage 1.
+Not open yet: 1455 nodes that wait for a statement dependency, 228 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
