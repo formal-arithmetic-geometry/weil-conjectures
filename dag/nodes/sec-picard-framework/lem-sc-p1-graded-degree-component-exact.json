@@ -19,9 +19,41 @@
   "place": "Algebra, Section 00JL (section-graded-modules), the graded-module exactness convention"
  },
  "stmt_deps": [],
- "proof": [],
+ "proof": [
+  {
+   "text": "Let i:A\\to B and p:B\\to C be the maps in the short exact sequence. If a\\in A_n and i(a)=0, exactness of the original sequence gives a=0; since i preserves degrees, its restriction A_n\\to B_n is therefore injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section 00JL (section-graded), the graded-module exactness convention"
+   }
+  },
+  {
+   "text": "Let b\\in B_n satisfy p(b)=0. Exactness gives a\\in A with i(a)=b. Write the finite homogeneous decomposition a=\\sum_j a_j with a_j\\in A_j. Degree preservation gives i(a_j)\\in B_j, while b is homogeneous of degree n. Uniqueness of the direct-sum decomposition of B implies i(a_n)=b (and i(a_j)=0 for j\\ne n), so every element of ker(B_n\\to C_n) lies in the image of A_n\\to B_n.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section 00JL (section-graded), the graded-module exactness convention"
+   }
+  },
+  {
+   "text": "For c\\in C_n, surjectivity of p gives b\\in B with p(b)=c. Write b=\\sum_j b_j with b_j\\in B_j. Since p preserves degrees, p(b_j)\\in C_j, and since c is homogeneous of degree n, uniqueness of the direct-sum decomposition of C gives p(b_n)=c. Thus the restricted map B_n\\to C_n is surjective, completing exactness of 0\\to A_n\\to B_n\\to C_n\\to0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section 00JL (section-graded), the graded-module exactness convention"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 00JL (section-graded), the graded-module exactness convention"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,12 +78,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-proj-degreezero-localization-exact",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-graded-degree-component-exact",
+  "worker": "stage1",
+  "summary": "Split exactness of a short exact sequence of graded modules into injectivity, equality of the middle kernel with the homogeneous image, and surjectivity on each homogeneous component. Each step uses only the exactness hypothesis, degree preservation, and uniqueness of direct-sum decompositions, so no auxiliary DAG nodes are required. No exact Lean declaration was found.",
+  "blueprint": "Realizes the clause in the proof of lem-sc-p1-graded-resolution that sheafifying the graded free resolution preserves exactness by taking degree-zero parts after localization."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gde",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gde (reviewer sub-agent of L); spot-checked: Source: Stacks Algebra 00JL (label section-graded, algebra.tex l.13200ff), which states 'A short exact sequence of graded modules is short exact in every degree' and leaves it to the reader; the item's statement (unchanged) agrees with that convention: graded ring with R_aR_b in R_{a+b} (Z-graded, more general than Stacks' nonnegative grading, harmless), graded modules as direct sums with R_aB_b in B_{a+b}, degree-preserving maps, conclusion exactness of 0->A_n->B_n->C_n->0 for every n. Steps: 1 injectivity on A_n from injectivity of i; 2 exactness at B_n by decomposing a preimage a into homogeneous parts, degree preservation and uniqueness of the decomposition of B give i(a_n)=b (the inclusion im in ker is p.i=0); 3 surjectivity onto C_n by the same argument in C. All three are correctly elementary (direct-sum uniqueness, no cited node needed), no new nodes, no D1 relabelling since the steps carry the argument. No Mathlib leaf; the three searches recorded; grep of slopmaster2 WeilConjectures/Comparator for the id and graded exactness found no declaration (B10). Blueprint: from = lem-sc-p1-graded-resolution via lem-sc-p1-proj-degreezero-localization-exact, same_as [] (my blueprint_refs search 'graded exact component' gave no graded match). Small cases: sequence concentrated in one degree gives ordinary exactness; 0->A->A->0->0. FIX: dag/nodes/sec-picard-framework/lem-sc-p1-graded-degree-component-exact.json: proof[0..2].source.place and proof_origin.place: Stacks label 'section-graded-modules' corrected to 'section-graded' (tag 00JL = algebra-section-graded); the item's own source.place (maintainer's field) carries the same wrong label and is left to the lead. Start Sat Oct 10 04:13:18 PM UTC 2026, end Sat Oct 10 04:13:58 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
