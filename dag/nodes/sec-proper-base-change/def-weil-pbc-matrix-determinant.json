@@ -1,0 +1,74 @@
+{
+ "id": "def-weil-pbc-matrix-determinant",
+ "kind": "definition",
+ "title": "The determinant of a square matrix (Leibniz formula)",
+ "statement": "Let $R$ be a commutative ring, $m\\ge0$ an integer and $M=(M_{ik})_{1\\le i,k\\le m}$ an $m\\times m$ matrix with entries in $R$ [def-weil-matrix]. Let $S_m$ be the group of permutations of $\\{1,\\dots,m\\}$ and $\\operatorname{sgn}:S_m\\to\\{\\pm1\\}$ the sign, the group homomorphism with $\\operatorname{sgn}(\\tau)=-1$ for every transposition $\\tau$. The determinant of $M$ is $$\\det M=\\sum_{\\sigma\\in S_m}\\operatorname{sgn}(\\sigma)\\prod_{k=1}^{m}M_{\\sigma(k),k}\\in R.$$ For $m=0$, $S_0$ has one element and the product is empty, so $\\det M=1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), where $\\det$ of a square matrix over a ring is used as a basic notion; the Leibniz formula is the standard definition"
+ },
+ "stmt_deps": [
+  "def-weil-matrix"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "determinant of a square matrix given by the Leibniz formula sum over permutations of sign times product of entries",
+   "results": "Matrix.det_apply, Matrix.det_apply', Matrix.det, Matrix.coe_det_isEmpty, Matrix.det_eq_detp_sub_detp (Mathlib.LinearAlgebra.Matrix.Determinant.Basic); Matrix.detp (SemiringInverse)",
+   "date": "2026-10-10",
+   "verdict": "match: Matrix.det with Matrix.det_apply"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det, Equiv.Perm.sign, Finset.prod",
+   "results": "Matrix.det_apply', Matrix.det_apply (Mathlib.LinearAlgebra.Matrix.Determinant.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def det \\|theorem det_apply' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean; grep -n '^def sign\\|theorem sign_swap ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/GroupTheory/Perm/Sign.lean",
+   "results": "Determinant/Basic.lean:60 def det (M : Matrix n n R) : R := detRowAlternating M; :63 theorem det_apply : M.det = ∑ σ : Perm n, Equiv.Perm.sign σ • ∏ i, M (σ i) i; Perm/Sign.lean:358 def sign : Perm α →* ℤˣ; :389 sign_swap (h : x ≠ y) : sign (swap x y) = -1",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Matrix.det_apply (project ~/weil-conjectures-slopmaster2)",
+   "results": "index unavailable (not a proof of anything; the grep above read the source)",
+   "date": "2026-10-10",
+   "verdict": "match by grep"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Matrix.det",
+  "file": "Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean",
+  "line": 60,
+  "how": "exact, one declaration per clause: Matrix.det (line 60, `def det (M : Matrix n n R) : R`, R a CommRing, n a Fintype; here n = Fin m) is given by the Leibniz formula in Matrix.det_apply (lines 63-64, read by sed -n 50,70p): `M.det = ∑ σ : Perm n, Equiv.Perm.sign σ • ∏ i, M (σ i) i`, the same index convention $\\prod_k M_{\\sigma(k),k}$ as the statement; the sign is Equiv.Perm.sign (Mathlib/GroupTheory/Perm/Sign.lean line 358, a monoid homomorphism Perm α →* ℤˣ) with Equiv.Perm.sign_swap (line 389) giving -1 on transpositions; for m = 0, Matrix.coe_det_isEmpty gives det = 1"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cauchy-binet",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: Mathlib leaf (Determinant/Basic.lean:60); line verified."
+}

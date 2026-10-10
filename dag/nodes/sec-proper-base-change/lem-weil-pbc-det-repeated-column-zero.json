@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-det-repeated-column-zero",
+ "kind": "statement",
+ "title": "A determinant with two equal columns vanishes",
+ "statement": "Let $R$ be a commutative ring, $m\\ge0$ an integer and $M=(M_{ik})$ an $m\\times m$ matrix with entries in $R$ [def-weil-matrix]. If there are column indices $k\\ne l$ with $M_{ik}=M_{il}$ for all $i=1,\\dots,m$, then $\\det M=0$ [def-weil-pbc-matrix-determinant].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof; the vanishing of a determinant with a repeated column is a basic property of the determinant used in the proof of the item"
+ },
+ "stmt_deps": [
+  "def-weil-matrix",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "determinant is zero if a matrix has two equal columns",
+   "results": "Matrix.det_zero_of_column_eq, Matrix.det_updateCol_eq_zero, Matrix.det_zero_of_row_eq, Matrix.det_eq_zero_of_not_linearIndependent_cols, Matrix.det_updateRow_eq_zero (Mathlib.LinearAlgebra.Matrix.Determinant.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: Matrix.det_zero_of_column_eq"
+  },
+  {
+   "tool": "loogle",
+   "query": "_ ≠ _ → (∀ k, ?M k _ = ?M k _) → Matrix.det ?M = 0",
+   "results": "Matrix.det_zero_of_column_eq (Mathlib.LinearAlgebra.Matrix.Determinant.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'det_zero_of_column_eq\\|det_zero_of_row_eq' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean",
+   "results": "Determinant/Basic.lean:370 det_zero_of_row_eq; :374 theorem det_zero_of_column_eq (i_ne_j : i ≠ j) (hij : ∀ k, M k i = M k j) : M.det = 0",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Matrix.det_zero_of_column_eq",
+  "file": "Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean",
+  "line": 374,
+  "how": "exact: lines 373-376 (read by sed -n 360,376p), `theorem det_zero_of_column_eq (i_ne_j : i ≠ j) (hij : ∀ k, M k i = M k j) : M.det = 0` for M : Matrix n n R, R a CommRing; here n = Fin m and i, j are the two column indices k ≠ l"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cauchy-binet",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: Mathlib leaf (Determinant/Basic.lean:374); line verified."
+}

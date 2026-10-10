@@ -2,18 +2,85 @@
  "id": "lem-weil-pbc-cauchy-binet",
  "kind": "statement",
  "title": "The Cauchy–Binet formula",
- "statement": "Let $R$ be a commutative ring, $m,n\\ge0$ integers, $A$ an $m\\times n$ matrix and $B$ an $n\\times m$ matrix with entries in $R$ [def-weil-matrix]. For a subset $S\\subseteq\\{1,\\dots,n\\}$ with $|S|=m$, let $A^{S}$ be the $m\\times m$ submatrix [def-weil-submatrix] of $A$ formed by the columns with indices in $S$ and $B_S$ the $m\\times m$ submatrix of $B$ formed by the rows with indices in $S$, both taken in increasing order of the indices. Then $$\\det(AB)=\\sum_{S\\subseteq\\{1,\\dots,n\\},\\ |S|=m}\\det(A^{S})\\det(B_S)$$ in $R$. (For $n<m$ the sum is empty and $\\det(AB)=0$; for $m=0$ both sides are $1$.)",
+ "statement": "Let $R$ be a commutative ring, $m,n\\ge0$ integers, $A=(a_{ij})$ an $m\\times n$ matrix and $B=(b_{jk})$ an $n\\times m$ matrix with entries in $R$ [def-weil-matrix], and $AB$ their product, the $m\\times m$ matrix with entries $(AB)_{ik}=\\sum_{j=1}^n a_{ij}b_{jk}$. For a subset $S\\subseteq\\{1,\\dots,n\\}$ with $|S|=m$, let $A^{S}$ be the $m\\times m$ submatrix [def-weil-submatrix] of $A$ formed by the columns with indices in $S$ and $B_S$ the $m\\times m$ submatrix of $B$ formed by the rows with indices in $S$, both taken in increasing order of the indices. Then, with $\\det$ the determinant of a square matrix [def-weil-pbc-matrix-determinant], $$\\det(AB)=\\sum_{S\\subseteq\\{1,\\dots,n\\},\\ |S|=m}\\det(A^{S})\\det(B_S)$$ in $R$. (For $n<m$ the sum is empty and $\\det(AB)=0$; for $m=0$ both sides are $1$.)",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof as a basic fact"
  },
  "stmt_deps": [
   "def-weil-matrix",
-  "def-weil-submatrix"
+  "def-weil-submatrix",
+  "def-weil-pbc-matrix-determinant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Expansion.) Write $[m]=\\{1,\\dots,m\\}$. By the definition of the determinant [def-weil-pbc-matrix-determinant] and of the product, $\\det(AB)=\\sum_{\\sigma\\in S_m}\\operatorname{sgn}(\\sigma)\\prod_{k=1}^m\\sum_{j=1}^n a_{\\sigma(k)j}b_{jk}$. Expanding the product of the $m$ sums by distributivity, $\\prod_{k=1}^m\\sum_{j=1}^n x_{k,j}=\\sum_{f:[m]\\to[n]}\\prod_{k=1}^m x_{k,f(k)}$ (one term for each choice of an index $f(k)$ in the $k$-th factor), so, exchanging the two finite sums and using commutativity of $R$, $$\\det(AB)=\\sum_{f:[m]\\to[n]}\\Big(\\prod_{k=1}^m b_{f(k)k}\\Big)\\sum_{\\sigma\\in S_m}\\operatorname{sgn}(\\sigma)\\prod_{k=1}^m a_{\\sigma(k)f(k)}=\\sum_{f:[m]\\to[n]}\\Big(\\prod_{k=1}^m b_{f(k)k}\\Big)\\det(A_f),$$ where $A_f$ is the $m\\times m$ matrix [def-weil-matrix] with $(A_f)_{ik}=a_{i,f(k)}$ (column $k$ of $A_f$ is column $f(k)$ of $A$), the last equality being the definition of $\\det(A_f)$.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof"
+   }
+  },
+  {
+   "text": "(Non-injective $f$ contribute $0$.) If $f:[m]\\to[n]$ is not injective, there are $k\\ne l$ with $f(k)=f(l)$; then $(A_f)_{ik}=a_{i,f(k)}=a_{i,f(l)}=(A_f)_{il}$ for all $i$, so columns $k$ and $l$ of $A_f$ are equal and $\\det(A_f)=0$ by [lem-weil-pbc-det-repeated-column-zero]. Hence in step 1 the sum may be restricted to the injective maps $f:[m]\\to[n]$.",
+   "uses": [
+    "lem-weil-pbc-det-repeated-column-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof"
+   }
+  },
+  {
+   "text": "(Injective maps by image and permutation.) For $S\\subseteq[n]$ with $|S|=m$ write $S=\\{s_1<\\dots<s_m\\}$. The map $(S,\\tau)\\mapsto f$, $f(k)=s_{\\tau(k)}$, from pairs of such a subset $S$ and a permutation $\\tau\\in S_m$ to injective maps $[m]\\to[n]$ is a bijection: $f$ is injective as a composite of injective maps, with image $S$; conversely an injective $f$ has an image $S=f([m])$ with $|S|=m$, and $\\tau(k)$ is then forced to be the unique $t$ with $s_t=f(k)$, which defines a permutation $\\tau$ of $[m]$ because $f:[m]\\to S$ and $t\\mapsto s_t$, $[m]\\to S$, are bijections. (If $n<m$ there is no such $S$ and no injective $f$.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof"
+   }
+  },
+  {
+   "text": "(The term of $f=s\\circ\\tau$.) Let $S=\\{s_1<\\dots<s_m\\}$ and $f(k)=s_{\\tau(k)}$ as in step 3. By the definition of the submatrices [def-weil-submatrix] taken in increasing order, $(A^S)_{it}=a_{i,s_t}$ and $(B_S)_{tk}=b_{s_t,k}$ for $1\\le i,t,k\\le m$. Hence $(A_f)_{ik}=a_{i,s_{\\tau(k)}}=(A^S)_{i,\\tau(k)}$: $A_f$ is $A^S$ with its columns permuted by $\\tau$, so $\\det(A_f)=\\operatorname{sgn}(\\tau)\\det(A^S)$ by [lem-weil-pbc-det-column-permutation]. And $\\prod_k b_{f(k)k}=\\prod_k b_{s_{\\tau(k)},k}=\\prod_k(B_S)_{\\tau(k),k}$.",
+   "uses": [
+    "def-weil-submatrix",
+    "lem-weil-pbc-det-column-permutation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof"
+   }
+  },
+  {
+   "text": "(Conclusion.) By steps 1–4, $$\\det(AB)=\\sum_{|S|=m}\\sum_{\\tau\\in S_m}\\Big(\\prod_{k=1}^m(B_S)_{\\tau(k),k}\\Big)\\operatorname{sgn}(\\tau)\\det(A^S)=\\sum_{|S|=m}\\det(A^S)\\sum_{\\tau\\in S_m}\\operatorname{sgn}(\\tau)\\prod_{k=1}^m(B_S)_{\\tau(k),k}=\\sum_{|S|=m}\\det(A^S)\\det(B_S),$$ the last equality being the definition of $\\det(B_S)$ [def-weil-pbc-matrix-determinant]. For $n<m$ both the sum over injective $f$ and the sum over $S$ are empty and $\\det(AB)=0$; for $m=0$ the only $f$ is the empty map, the only $S$ is $\\emptyset$, and both sides are $1$.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-matrix",
+  "lem-weil-pbc-det-repeated-column-zero",
+  "def-weil-submatrix",
+  "lem-weil-pbc-det-column-permutation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof; the proof (expansion of det(AB) by distributivity over maps f:[m]->[n], vanishing of the non-injective terms, grouping by image) is written by the agent, as Mathlib's own proof of Matrix.det_mul (Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean lines 138-160) does in the square case"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +116,38 @@
    "results": "none (index unavailable, not a proof of absence; the grep above is)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "determinant of product of m×n and n×m matrices equals sum over m-subsets of products of maximal minors (Cauchy-Binet)",
+   "results": "Matrix.det_kronecker, Matrix.det_kroneckerTMul (Kronecker), Matrix.det_one_sub_mul_comm, Matrix.det_add_mul (SchurComplement), Matrix.det_comm' (LinearAlgebra.Determinant), Matrix.det_eq_sum_mul_adjugate_col (Adjugate), Matrix.det_mul_comm, Matrix.det_mul_aux (Determinant.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cauchy-Binet formula det (A * B) = sum over embeddings Fin m ↪ n of det (A.submatrix id f) * det (B.submatrix f id)",
+   "results": "Matrix.detp_mul (SemiringInverse), Algebra.Norm.Transitivity.det_mul_corner_pow, Algebra.Norm.Transitivity.comp_det_mul_pow (RingTheory.Norm.Transitivity), Matrix.det_mul, Matrix.det_mul_aux (Determinant.Basic), Matrix.det_one_add_mul_comm, Matrix.det_mul_add_one_comm (SchurComplement), Matrix.det_toBlock (Block)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det (_ * _) = ∑ _, Matrix.det (Matrix.submatrix _ _ _) * _",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'binet' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/; grep -rln orderEmbOfFin ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory | xargs grep -ln det; grep -rn 'det_mul_of\\|det_mul_eq_sum\\|cauchy' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/",
+   "results": "Binet only in LinearAlgebra/CrossProduct.lean:111 (scalar quadruple product) and NumberTheory/Real/GoldenRatio.lean (Binet's formula for Fibonacci); no CauchyBinet file; LinearAlgebra/ExteriorPower/Basis.lean:47-51 ιMultiDual_apply_ιMulti (the coordinate of v_1∧...∧v_n on the basis vector of an n-subset s is the determinant of the corresponding minor), from which Cauchy-Binet would follow only by a multi-line argument; no det_mul_eq_sum",
+   "date": "2026-10-10",
+   "verdict": "no match (candidate route only: Mathlib/LinearAlgebra/ExteriorPower/Basis.lean ιMultiDual_apply_ιMulti, not a one-line specialization)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +167,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-cauchy-binet",
+  "worker": "stage1",
+  "summary": "Mathlib has no Cauchy-Binet formula (LeanSearch, LeanFinder, Loogle and grep re-run on 2026-10-10 in addition to the citer's searches; the nearest is ExteriorPower/Basis.lean ιMultiDual_apply_ιMulti, which gives it only by a multi-line argument), so the item is split. Stacks 0F0K (tag checked in tags/tags: algebra-item-cauchy-binet, algebra.tex line 282) states it without proof; the proof is written by the agent in five steps: expansion of det(AB) by the Leibniz formula and distributivity into a sum over maps f:[m]->[n] of (prod_k b_{f(k)k}) det(A_f) (elementary from the new definition node); non-injective f vanish (repeated column, new Mathlib leaf lem-weil-pbc-det-repeated-column-zero = Matrix.det_zero_of_column_eq); injective f correspond bijectively to pairs (S, tau) (elementary); det(A_{s o tau}) = sgn(tau) det(A^S) (new Mathlib leaf lem-weil-pbc-det-column-permutation = Matrix.det_permute'); recombination into det(A^S) det(B_S) by the Leibniz formula (elementary). No DAG node defined the determinant of a square matrix (def-weil-endomorphism-determinant is the determinant of an endomorphism of a free module), so the new Mathlib leaf def-weil-pbc-matrix-determinant (Matrix.det with Matrix.det_apply, same index convention prod_k M_{sigma(k),k}) is created and added to stmt_deps; the statement now also defines the product AB inline, otherwise unchanged. The citer lem-weil-pbc-matrix-left-inverse-minors step 4 applies the statement to (B, A) with B m x n, A n x m, which matches the indexing (columns of the first factor, rows of the second)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps (proof_origin agent; Stacks 0F0K states the formula): Leibniz expansion of det(AB) over maps f: [m] -> [n]; non-injective f give a repeated column (new leaf det_zero_of_column_eq, line 374); injective f = (S, tau); A_f is A^S with columns permuted (new leaf det_permute', line 218); regrouping gives det(B_S) by the new determinant definition leaf (Matrix.det / det_apply, lines 60/63). Lines verified by L. Statement: the product AB defined inline and the determinant definition cited. Not in Mathlib."
+ }
 }

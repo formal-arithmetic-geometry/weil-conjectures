@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-det-column-permutation",
+ "kind": "statement",
+ "title": "Permuting the columns multiplies the determinant by the sign",
+ "statement": "Let $R$ be a commutative ring, $m\\ge0$ an integer, $M=(M_{it})$ an $m\\times m$ matrix with entries in $R$ [def-weil-matrix] and $\\tau$ a permutation of $\\{1,\\dots,m\\}$ with sign $\\operatorname{sgn}(\\tau)\\in\\{\\pm1\\}$. Let $M'$ be the $m\\times m$ matrix with $M'_{ik}=M_{i,\\tau(k)}$ (column $k$ of $M'$ is column $\\tau(k)$ of $M$). Then $\\det M'=\\operatorname{sgn}(\\tau)\\det M$ [def-weil-pbc-matrix-determinant].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00AR (section-rings-basic), list item Tag 0F0K (item-cauchy-binet, line 282), stated there without proof; the behaviour of the determinant under a permutation of the columns is a basic property used in the proof of the item"
+ },
+ "stmt_deps": [
+  "def-weil-matrix",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "permuting the columns of a matrix multiplies the determinant by the sign of the permutation",
+   "results": "Matrix.det_permute', Matrix.det_permute, Matrix.det_reindex, Matrix.det_apply (Mathlib.LinearAlgebra.Matrix.Determinant.Basic); Matrix.det_permutation (Mathlib.LinearAlgebra.Matrix.Permutation); Matrix.permanent_permute_cols",
+   "date": "2026-10-10",
+   "verdict": "match: Matrix.det_permute'"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det (Matrix.submatrix _ id _) = _",
+   "results": "Matrix.det_permute' (Mathlib.LinearAlgebra.Matrix.Determinant.Basic); Matrix.submatrix_succAbove_det_eq_negOnePow_submatrix_succAbove_det' (Determinant.Misc)",
+   "date": "2026-10-10",
+   "verdict": "match: Matrix.det_permute'"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem det_permute' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean",
+   "results": "Determinant/Basic.lean:213 det_permute (M.submatrix σ id, rows); :218 theorem det_permute' (σ : Perm n) (M : Matrix n n R) : (M.submatrix id σ).det = Perm.sign σ * M.det",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Matrix.det_permute'",
+  "file": "Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean",
+  "line": 218,
+  "how": "exact: lines 218-219 (read by sed -n 205,222p), `(M.submatrix id σ).det = Perm.sign σ * M.det`; `(M.submatrix id σ) i k = M i (σ k)`, so with n = Fin m and σ = τ this is M' (the docstring of det_permute' says 'rows', but the reindexing is on the column index)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cauchy-binet",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: Mathlib leaf (Determinant/Basic.lean:218); line verified."
+}
