@@ -2842,3 +2842,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:36 L: merged deliver/C1/lem-weil-pbc-spread-purely-inseparable-factors (reviewer FIX; first push; new nodes: 1)
 - 22:36 L: merged deliver/H1/lem-sc-affine-perfect-derived-tensor-hom (reviewer FIX; first push; new nodes: 1)
 - 22:37 L: merged deliver/M1/lem-weil-pbc-generic-separable-algebra-splitting (reviewer FIX; first push; new nodes: 0)
+- 22:37 L: returned deliver/E1/lem-sc-components-open-injection (reviewer RETURN: Not a fault: the item is Mathlib's preimage_mem_irreducibleComponents (Mathlib/Topology/Irreducible.lean:473) with closu)
