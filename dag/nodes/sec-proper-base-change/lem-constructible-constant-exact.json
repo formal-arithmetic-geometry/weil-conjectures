@@ -20,11 +20,56 @@
   "def-pc-scheme",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of the constant sheaf, each $K_X$, $L_X$, and $N_X$ is the sheafification of the corresponding constant presheaf on the small etale site of $X$, and the maps are the sheafifications of the maps of constant presheaves.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Example sites-example-constant-sheaf (Tag 0H7J)"
+   }
+  },
+  {
+   "text": "The sequence of constant presheaves is sectionwise the given exact sequence $0\\to K\\to L\\to N\\to0$: evaluation at every etale object $U\\to X$ gives exactly the module sequence. Therefore it is exact in the category of presheaves of $\\Lambda$-modules, since kernels and cokernels of presheaves of modules are computed sectionwise.",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section Tag 03CS (section-presheaves-modules)"
+   }
+  },
+  {
+   "text": "Applying the exact sheafification functor to this presheaf exact sequence preserves its kernels and cokernels, so the resulting sequence of sheaves is exact; by Step 1 its terms and maps are precisely $0\\to K_X\\to L_X\\to N_X\\to0$.",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma Tag 03EI (lemma-sheafification-exact)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma Tags 03CS and 03EI"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +94,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lemma-constructible-flc-serre",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-constructible-constant-exact",
+  "worker": "stage1",
+  "summary": "No exact sorry-free declaration exists in slopmaster2. The proof is split into the definition of constant sheaves as sheafified constant presheaves, sectionwise exactness of the constant presheaf sequence, and preservation of exactness by module sheafification. Existing DAG nodes def-weil-pbc-constant-sheaf and lem-weil-pbc-site-r-module-presheaf-sheafification-exact supply every non-elementary fact; no new node was needed.",
+  "blueprint": "Realizes the extension proof clause 'exactness of 0 -> K_U -> Lambda^m_U -> N_U -> 0 after passing to constant sheaves' in lemma-constructible-flc-serre.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cce1709",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cce1709 (reviewer sub-agent of L); spot-checked: Source Stacks 03RX(3) / Modules on Sites 03CS, 03EI; statement unchanged (finite ring Lambda, exact sequence of finite left Lambda-modules, constant sheaves on the small etale site exact), stmt_deps gains def-weil-pbc-constant-sheaf which the statement uses. Step 1 carried by def-weil-pbc-constant-sheaf (constant sheaf = sheafification of the constant presheaf, any value category with sheafification, here Mod_Lambda) and def-weil-pbc-etale-site. Step 2 by clause (1) of lem-weil-pbc-site-r-module-presheaf-sheafification-exact (presheaves of R-modules abelian, kernels/cokernels sectionwise); its Mathlib match is ModuleCat R for any Ring R, so noncommutative finite Lambda is covered (C4 ok). Step 3 by clause (2) of the same node (sheafification exact). No torsor/local-splitting argument is used, so the 15:52/16:17 HUMAN.md issues on lemma-constructible-flc-serre do not touch it. C7/C8: both off-unit citations are Mathlib leaves used as generic tools; the unit's own lem-weil-pbc-sheafification-exact is for abelian groups only, so the R-module version is the right one; no route step replaced. No new nodes. Tested on 0 -> 2Z/4 -> Z/4 -> Z/2 -> 0 (nonsplit, sectionwise exact, stays exact after sheafification). Fixes: : proof[1].text and proof[2].text: unescaped \\to had become TAB characters (9 occurrences) restored to \\\\to; split_report.date: 2026-10-11 -> 2026-10-10 (date -u). Start Sat Oct 10 05:03:13 PM UTC 2026, end Sat Oct 10 05:04:04 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
