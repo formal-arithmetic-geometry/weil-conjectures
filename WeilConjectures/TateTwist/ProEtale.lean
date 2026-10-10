@@ -1,0 +1,157 @@
+/-
+Copyright (c) 2026 Nailin Guan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Nailin Guan
+-/
+module
+
+public import WeilConjectures.CategoryTheory.ModuleObjects.Free
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.UpperLowerStar.Defs
+public import WeilConjectures.TateTwist.RootsOfUnity
+
+/-!
+
+# Tate twists of the `ℚ̄_ℓ`-sheaf on the pro-étale site
+
+Let `ℓ` be a prime and `X` a scheme. This file constructs the Tate twists `ℚ̄_ℓ,X(d)`,
+`d ∈ ℤ`, as module objects over the coefficient ring object `ℚ̄_ℓ,X`
+(`AlgebraicGeometry.ProEtale.padicAlgClSheaf X ℓ`) of abelian sheaves on `X_proét`, following
+Bhatt–Scholze, *The pro-étale topology for schemes*, Section 6.8:
+```
+ℤ_ℓ(1) := lim_n μ_{ℓ^n},     ℚ̄_ℓ(1) := ℚ̄_ℓ ⊗_{ℤ_ℓ} ℤ_ℓ(1),
+```
+where `ℤ_ℓ = ℤ_ℓ,X` is the sheaf of continuous maps `U ↦ C(U, ℤ_ℓ)`.
+
+## The construction
+
+* The `ℤ_ℓ,X`-module `ℤ/ℓ^n(1)` is the free module `ℤ_ℓ,X ⊗ μ_{ℓ^n}` on the sheaf `μ_{ℓ^n}` of
+  `ℓ^n`-th roots of unity (`AlgebraicGeometry.ProEtale.rootsOfUnitySheaf`), the tensor product
+  being the sheafified tensor product of abelian sheaves. Since `μ_{ℓ^n}` is killed by `ℓ^n`, this
+  is `ℤ/ℓ^n ⊗_{ℤ/ℓ^n} μ_{ℓ^n} = μ_{ℓ^n}` as an abelian sheaf, with its natural structure of a
+  module over `ℤ_ℓ,X ⟶ ℤ/ℓ^n` (`AlgebraicGeometry.ProEtale.tateModuleLevel`). Taking the free
+  module avoids defining the action of the continuous functions `C(U, ℤ_ℓ)` on `μ_{ℓ^n}(U)` by
+  hand.
+* `ℤ_ℓ(1)` is the limit, in the category of `ℤ_ℓ,X`-module objects, of the inverse system
+  `ℤ_ℓ ⊗ μ_{ℓ^{n+1}} ⟶ ℤ_ℓ ⊗ μ_{ℓ^n}` induced by the `ℓ`-th power maps
+  (`AlgebraicGeometry.ProEtale.tateModule`).
+* `ℚ̄_ℓ(1)` is the extension of scalars of `ℤ_ℓ(1)` along the morphism of ring objects
+  `ℤ_ℓ,X ⟶ ℚ̄_ℓ,X` (`AlgebraicGeometry.ProEtale.padicIntRingObjToPadicAlgClSheaf`), i.e. the
+  relative tensor product `ℚ̄_ℓ,X ⊗_{ℤ_ℓ,X} ℤ_ℓ(1)` (`AlgebraicGeometry.ProEtale.tateTwistOne`).
+  The tensor product has to be taken over `ℤ_ℓ,X` and not over `ℤ`: `ℚ̄_ℓ ⊗_ℤ μ_{ℓ^n} = 0`, and
+  `ℚ̄_ℓ ⊗_ℤ ℤ_ℓ(1)` is much larger than `ℚ̄_ℓ(1)`.
+* For `d ≥ 0`, `ℚ̄_ℓ(d)` is the `d`-th tensor power of `ℚ̄_ℓ(1)` over `ℚ̄_ℓ,X`, and for `d < 0`
+  it is the dual `Hom_{ℚ̄_ℓ}(ℚ̄_ℓ(-d), ℚ̄_ℓ)` (`AlgebraicGeometry.ProEtale.tateTwist`).
+
+Finally `ℚ̄_ℓ,X(d)` is placed in degree `0` of the derived category `D(Mod_{ℚ̄_ℓ,X})`
+(`AlgebraicGeometry.ProEtale.tateTwistDerived`), and the twist functor `K ↦ K(d)` on
+`D(Mod_{ℚ̄_ℓ,X})` is the derived tensor product with it
+(`AlgebraicGeometry.ProEtale.tateTwistFunctor`).
+
+## Implementation notes
+
+* The construction is functorial in nothing: the comparisons `f^* ℚ̄_ℓ,Y(d) ≅ ℚ̄_ℓ,X(d)`, the
+  invertibility `ℚ̄_ℓ(d) ⊗ ℚ̄_ℓ(e) ≅ ℚ̄_ℓ(d + e)` and the local triviality of `ℚ̄_ℓ(1)` when `ℓ`
+  is invertible on `X` are not stated here.
+* The Galois (Frobenius) action on `ℚ̄_ℓ(1)` for `X` over a finite field, which is what
+  distinguishes `ℚ̄_ℓ(d)` from `ℚ̄_ℓ` over a separably closed field, is part of the Weil sheaf
+  formalism and is not considered.
+
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory MonoidalCategory MonObj Limits
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme
+
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+
+/-! ### The ring object `ℤ_ℓ,X` -/
+
+/-- The ring object `ℤ_ℓ,X` of abelian sheaves on `X_proét`: the abelian sheaf underlying the
+sheaf of rings `U ↦ C(U, ℤ_ℓ)` (`AlgebraicGeometry.ProEtale.padicIntSheaf`). -/
+noncomputable abbrev padicIntRingObj : Sheaf (ProEt.topology X) Ab.{u + 1} :=
+  (sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (padicIntSheaf X ℓ)
+
+/-- The morphism of ring objects `ℤ_ℓ,X ⟶ ℚ̄_ℓ,X` induced by the inclusion `ℤ_ℓ ⊆ ℚ_ℓ ⊆ ℚ̄_ℓ`,
+whose image lies in the finite subextension `ℚ_ℓ`. -/
+noncomputable def padicIntRingObjToPadicAlgClSheaf :
+    padicIntRingObj X ℓ ⟶ padicAlgClSheaf X ℓ :=
+  continuousMapRingSheafToPadicAlgClSheaf X ℓ
+    ((algebraMap ℚ_[ℓ] (PadicAlgCl ℓ)).comp PadicInt.Coe.ringHom)
+    ((continuous_algebraMap ℚ_[ℓ] (PadicAlgCl ℓ)).comp continuous_subtype_val)
+    ⟨⊥, inferInstance, fun _ ↦ IntermediateField.algebraMap_mem ⊥ _⟩
+
+instance : IsMonHom (padicIntRingObjToPadicAlgClSheaf X ℓ) :=
+  inferInstanceAs (IsMonHom (continuousMapRingSheafToPadicAlgClSheaf X ℓ
+    ((algebraMap ℚ_[ℓ] (PadicAlgCl ℓ)).comp PadicInt.Coe.ringHom)
+    ((continuous_algebraMap ℚ_[ℓ] (PadicAlgCl ℓ)).comp continuous_subtype_val)
+    ⟨⊥, inferInstance, fun _ ↦ IntermediateField.algebraMap_mem ⊥ _⟩))
+
+/-! ### The Tate module `ℤ_ℓ(1)` -/
+
+/-- The `ℤ_ℓ,X`-module `ℤ/ℓ^n(1) = ℤ_ℓ,X ⊗ μ_{ℓ^n}`: the free `ℤ_ℓ,X`-module on the sheaf of
+`ℓ^n`-th roots of unity. As an abelian sheaf it is `μ_{ℓ^n}`, since `μ_{ℓ^n}` is killed by
+`ℓ^n`. -/
+noncomputable def tateModuleLevel (n : ℕ) :
+    Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicIntRingObj X ℓ) :=
+  (Mod.freeFunctor (padicIntRingObj X ℓ)).obj (rootsOfUnitySheaf X (ℓ ^ n))
+
+/-- The transition map `ℤ/ℓ^{n+1}(1) ⟶ ℤ/ℓ^n(1)` of the Tate module, induced by the `ℓ`-th
+power map `μ_{ℓ^{n+1}} ⟶ μ_{ℓ^n}`. -/
+noncomputable def tateModuleTransition (n : ℕ) :
+    tateModuleLevel X ℓ (n + 1) ⟶ tateModuleLevel X ℓ n :=
+  (Mod.freeFunctor (padicIntRingObj X ℓ)).map
+    (eqToHom (by rw [pow_succ']) ≫ rootsOfUnitySheafPow X (ℓ ^ n) ℓ)
+
+/-- The inverse system `n ↦ ℤ/ℓ^n(1)` of `ℤ_ℓ,X`-modules. -/
+noncomputable def tateModuleSystem :
+    ℕᵒᵖ ⥤ Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicIntRingObj X ℓ) :=
+  Functor.ofOpSequence (tateModuleTransition X ℓ)
+
+/-- The Tate module `ℤ_ℓ(1) = lim_n μ_{ℓ^n}` on `X_proét`, as a module object over `ℤ_ℓ,X`: the
+limit of the inverse system `n ↦ ℤ/ℓ^n(1)`. -/
+noncomputable def tateModule : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicIntRingObj X ℓ) :=
+  limit (tateModuleSystem X ℓ)
+
+/-! ### The Tate twists `ℚ̄_ℓ(d)` -/
+
+/-- The Tate twist `ℚ̄_ℓ,X(1) = ℚ̄_ℓ,X ⊗_{ℤ_ℓ,X} ℤ_ℓ(1)`: the extension of scalars of the Tate
+module along `ℤ_ℓ,X ⟶ ℚ̄_ℓ,X`. -/
+noncomputable def tateTwistOne :
+    Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClSheaf X ℓ) :=
+  (Mod.extendScalars (padicIntRingObjToPadicAlgClSheaf X ℓ)).obj (tateModule X ℓ)
+
+/-- The non-negative Tate twists `ℚ̄_ℓ,X(d) = ℚ̄_ℓ,X(1)^{⊗ d}`, the tensor powers over `ℚ̄_ℓ,X`,
+with `ℚ̄_ℓ,X(0) = ℚ̄_ℓ,X`. -/
+noncomputable def tateTwistNat :
+    ℕ → Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClSheaf X ℓ)
+  | 0 => 𝟙_ _
+  | d + 1 => tateTwistNat d ⊗ tateTwistOne X ℓ
+
+/-- The Tate twist `ℚ̄_ℓ,X(d)` for `d ∈ ℤ`: the tensor power `ℚ̄_ℓ,X(1)^{⊗ d}` for `d ≥ 0`, and
+the dual `Hom_{ℚ̄_ℓ,X}(ℚ̄_ℓ,X(-d), ℚ̄_ℓ,X)` for `d < 0`. -/
+noncomputable def tateTwist : ℤ → Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClSheaf X ℓ)
+  | (d : ℕ) => tateTwistNat X ℓ d
+  | .negSucc d => (ihom (tateTwistNat X ℓ (d + 1))).obj (𝟙_ _)
+
+lemma tateTwist_natCast (d : ℕ) : tateTwist X ℓ d = tateTwistNat X ℓ d := rfl
+
+/-- The Tate twist `ℚ̄_ℓ,X(d)`, placed in degree `0` of the derived category
+`D(Mod_{ℚ̄_ℓ,X})`. -/
+noncomputable def tateTwistDerived (d : ℤ) :
+    DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClSheaf X ℓ)) :=
+  (DerivedCategory.singleFunctor _ 0).obj (tateTwist X ℓ d)
+
+/-- The Tate twist functor `K ↦ K(d) = K ⊗ᴸ_{ℚ̄_ℓ,X} ℚ̄_ℓ,X(d)` on `D(Mod_{ℚ̄_ℓ,X})`. -/
+noncomputable def tateTwistFunctor (d : ℤ) :
+    DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClSheaf X ℓ)) ⥤
+      DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClSheaf X ℓ)) :=
+  tensorRight (tateTwistDerived X ℓ d)
+
+end AlgebraicGeometry.ProEtale
