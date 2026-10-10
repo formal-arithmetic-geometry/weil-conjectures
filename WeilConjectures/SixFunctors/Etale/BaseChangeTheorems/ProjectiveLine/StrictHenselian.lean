@@ -9,9 +9,12 @@ public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfSections
+public import WeilConjectures.CategoryTheory.Sites.SheafCohomology.InjectiveZMod
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FiniteLowerStarLift
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
@@ -159,7 +162,13 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective_of_one_lt (
 /-- **Acyclicity on the closed projective line.** Let `A` be strictly henselian, `X = ℙ¹_A`,
 `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre and `r` a prime. For every injective sheaf `I` of
 `𝔽_r`-modules on `X`, `Hᵠ(X₀, I₀) = 0` for `q > 0`. Degrees `q ≥ 2` are
-`AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective_of_one_lt`.
+`AlgebraicGeometry.Etale.subsingleton_H_projectiveLine_closedFibre_of_injective_of_one_lt`. In
+degree `1`, write a class as `∑ⱼ ψⱼ(xⱼ)` with `xⱼ ∈ H¹(X₀, ((hⱼ)_* Mⱼ)₀)`
+(`AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine`); each `xⱼ` lifts to
+`H¹(X, (hⱼ)_* Mⱼ)`
+(`AlgebraicGeometry.Etale.surjective_cohomologyMap_one_lowerStar_constantSheaf`),
+and its image in `H¹(X, I)` vanishes since the underlying abelian sheaf of `I` is acyclic
+(`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective`).
 (blueprint: `prop-weil-pbc-p1-acyclicity`) -/
 theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [Fact r.Prime]
     (I : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
@@ -169,7 +178,54 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
         (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[ModuleCat.{u + 1}
           (ULift.{u + 1} (ZMod r))].obj I)) q) := by
   obtain rfl | hq := (Nat.one_le_iff_ne_zero.2 hq.ne').eq_or_lt
-  · sorry
+  · set ι := ProjectiveSpace.map (ULift.{u} (Fin 2))
+      (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
+    let Λ := ULift.{u + 1} (ZMod r)
+    let fo := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
+    let e := upperStarSheafComposeForget₂Iso ι Λ
+    refine ⟨fun c₁ c₂ ↦ ?_⟩
+    suffices ∀ c : Sheaf.H ((sheafCompose _ fo).obj ((ι)^*[ModuleCat.{u + 1} Λ].obj I)) 1,
+        c = 0 by rw [this c₁, this c₂]
+    intro c
+    obtain ⟨n, V, h, hfin, -, M, hM, ψ, x, rfl⟩ :=
+      Etale.exists_sum_eq_of_injective_projectiveLine A r I c
+    refine Finset.sum_eq_zero fun j _ ↦ ?_
+    let G := (h j)_*[ModuleCat.{u + 1} Λ].obj
+      ((constantSheaf (V j).smallEtaleTopology _).obj (M j))
+    let β : (sheafCompose _ fo).obj G ≅ ((h j)_*[AddCommGrpCat.{u + 1}]).obj
+        ((constantSheaf (V j).smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+          (AddCommGrpCat.of (M j))) :=
+      (lowerStarSheafComposeForget₂Iso (h j) Λ).app _ ≪≫
+        ((h j)_*[AddCommGrpCat.{u + 1}]).mapIso
+          ((constantSheafSheafComposeForget₂Iso (Y := V j) Λ).app (M j))
+    have hS := surjective_cohomologyMap_one_lowerStar_constantSheaf
+      (IsLocalRing.maximalIdeal A) (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A)) ι
+      (show _ ⟶ Spec (.of (IsLocalRing.ResidueField A)) from
+        ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘ _)
+      (ProjectiveSpace.isPullback_map _ _) (h j) (pullback.fst (h j) ι)
+      (pullback.snd (h j) ι) (IsPullback.of_hasPullback _ _) (M j)
+    obtain ⟨z, hz⟩ := hS (Sheaf.H.map ((ι)^*[AddCommGrpCat.{u + 1}].map β.hom) 1
+      (Sheaf.H.map ((e.app G).hom) 1 (x j)))
+    have hx : x j = Sheaf.H.map (e.app G).inv 1
+        (cohomologyMap ι ((sheafCompose _ fo).obj G) 1 (Sheaf.H.map β.inv 1 z)) := by
+      rw [cohomologyMap_map, hz, ← Sheaf.H.map_comp_apply, ← Functor.map_comp,
+        Iso.hom_inv_id, CategoryTheory.Functor.map_id, Sheaf.H.map_id_apply,
+        ← Sheaf.H.map_comp_apply, Iso.hom_inv_id, Sheaf.H.map_id_apply]
+    have : (coindZMod.{u + 1} r).IsRightAdjoint := (forget₂CoindZModAdj r).isRightAdjoint
+    have : PreservesLimitsOfSize.{u, u + 1} (coindZMod.{u + 1} r) :=
+      (forget₂CoindZModAdj r).rightAdjoint_preservesLimits
+    have hI := CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective _ r
+      (Fact.out : r.Prime).ne_zero I 0
+    have hψ : (e.app G).inv ≫ (sheafCompose _ fo).map ((ι)^*[ModuleCat.{u + 1} Λ].map (ψ j)) =
+        (ι)^*[AddCommGrpCat.{u + 1}].map ((sheafCompose _ fo).map (ψ j)) ≫ (e.app I).inv :=
+      (e.inv.naturality (ψ j)).symm
+    rw [hx]
+    refine (Sheaf.H.map_comp_apply (f := (e.app G).inv) _ _).symm.trans ?_
+    rw [hψ, Sheaf.H.map_comp_apply]
+    refine (congrArg (Sheaf.H.map (e.app I).inv 1)
+      (cohomologyMap_map ι 1 ((sheafCompose _ fo).map (ψ j)) _).symm).trans ?_
+    rw [Subsingleton.elim (Sheaf.H.map ((sheafCompose _ fo).map (ψ j)) 1 _) 0,
+      map_zero, map_zero]
   exact Etale.subsingleton_H_projectiveLine_closedFibre_of_injective_of_one_lt A r I q hq
 
 /-- **Acyclicity of injectives on `ℙ¹_κ`.** Let `A` be strictly henselian, `X = ℙ¹_A` and
