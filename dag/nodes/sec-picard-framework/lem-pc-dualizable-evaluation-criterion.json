@@ -27,9 +27,38 @@
   "def-pur-derived-internal-hom",
   "lem-sc-derived-internal-hom-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All maps below are morphisms of $D(O_X)$ and all equalities are equalities of global morphisms; the associativity and unit isomorphisms of $\\otimes^L$ (Tag 0FPB, symmetric monoidal structure on $D(O_X)$) are suppressed, as in the statement. Naturality of the bijection of [lem-sc-derived-internal-hom-adjunction] in its first variable says: for $f:A\\to B$ and $g:B\\otimes^L K\\to M$ with adjunct $g^\\flat:B\\to R\\mathcal Hom(K,M)$, the adjunct of $g\\circ(f\\otimes 1_K)$ is $g^\\flat\\circ f$. Take $A=O_X$, $B=K\\otimes^L D$, $f=\\eta$ (which exists and is unique because $\\varphi_K$ is an isomorphism, the hypothesis for $M=K$) and $g=1_K\\otimes e$, whose adjunct is $\\varphi_K$ by definition. Then the adjunct of $(1_K\\otimes e)\\circ(\\eta\\otimes 1_K)$ is $\\varphi_K\\circ\\eta$, which by the definition of $\\eta$ is the adjunct of $\\mathrm{id}_K$. Since the adjunction is a bijection, $(1_K\\otimes e)\\circ(\\eta\\otimes 1_K)=\\mathrm{id}_K$.",
+   "uses": [
+    "lem-sc-derived-internal-hom-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FPC, construction of the coevaluation and first zig-zag identity; Tag 0FPB for the monoidal constraints"
+   }
+  },
+  {
+   "text": "Put $g:=(e\\otimes 1_D)\\circ(1_D\\otimes\\eta):D\\to D$. For $M=O_X$ the map $\\varphi_{O_X}:D=O_X\\otimes^L D\\to R\\mathcal Hom(K,O_X)$ is the adjunct of $e$, and it is an isomorphism by hypothesis. By the naturality of Step 1 (with $A=B=D$, $f=g$, resp. $f=\\mathrm{id}_D$), $\\varphi_{O_X}\\circ g$ is the adjunct of $e\\circ(g\\otimes 1_K)$ and $\\varphi_{O_X}$ is the adjunct of $e$. Compute $e\\circ(g\\otimes1_K)=e\\circ(e\\otimes 1_{D\\otimes K})\\circ(1_D\\otimes\\eta\\otimes 1_K)$. By bifunctoriality of $\\otimes^L$ both $e\\circ(e\\otimes 1_{D\\otimes K})$ and $e\\circ(1_{D\\otimes K}\\otimes e)$ equal $e\\otimes e:(D\\otimes^L K)\\otimes^L(D\\otimes^L K)\\to O_X\\otimes^L O_X=O_X$, so $e\\circ(g\\otimes 1_K)=e\\circ(1_D\\otimes 1_K\\otimes e)\\circ(1_D\\otimes\\eta\\otimes1_K)=e\\circ\\bigl(1_D\\otimes[(1_K\\otimes e)\\circ(\\eta\\otimes 1_K)]\\bigr)=e$ by Step 1. Hence $\\varphi_{O_X}\\circ g$ and $\\varphi_{O_X}$ have the same adjunct, so $\\varphi_{O_X}\\circ g=\\varphi_{O_X}$ by bijectivity of the adjunction, and $g=\\mathrm{id}_D$ because $\\varphi_{O_X}$ is an isomorphism. Only $\\varphi_K$ and $\\varphi_{O_X}$ are used.",
+   "uses": [
+    "lem-sc-derived-internal-hom-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FPC, second zig-zag identity; Tag 0FPB for the monoidal constraints"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-internal-hom-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0FPC, cohomology-example-dual-derived"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +98,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-rhom-tensor-comparison",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-dualizable-evaluation-criterion",
+  "worker": "stage1",
+  "summary": "Split the closed symmetric-monoidal criterion into the adjunction calculation proving the K-triangle and the naturality calculation proving the D-triangle; no new nodes were needed.",
+  "blueprint": "The two steps realize the formal passage from the tensor-Hom evaluation isomorphism to the two zig-zag identities in the ancestor proof."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dec3030",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dec3030 (reviewer sub-agent of L); spot-checked: Statement matches parent Step 3 use (D=K^vee, e=epsilon, all M; eta as defined) and Tag 0FPC; true. FIX more, RETURN less: (1) E/C Step 2 was wrong: it used phi_D and an ill-typed 'adjunct of id_D is the identity of RHom(K,D)'; rewritten as the global calculation via phi_{O_X}: phi_O∘g and phi_O share adjunct e∘(g⊗1_K)=e (interchange e∘(e⊗1)=e⊗e=e∘(1⊗e), then Step 1), so g=id_D since phi_O is iso; (2) Step 1 rewritten: the conclusion follows from bijectivity of the adjunction applied to naturality in the first variable (phi_K invertibility only gives eta); (3) associativity/unit constraints and bifunctoriality cited as Tag 0FPB (elementary), all equalities argued as global morphisms of D(O_X). No new nodes; no helper duplicates the parent's maps.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -2931,3 +2931,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:10 L: returned deliver/G1/thm-sp-spectral-object-yields (reviewer RETURN: 1. E (item statement and new node lem-sp-filtered-complex-ZB-description, 'Equivalently' clause): the image formula is f)
 - 23:11 L: merged deliver/G1/lem-kun-separable-smooth-colimit (reviewer FIX; first push; new nodes: 0)
 - 23:11 L: merged deliver/E1/lem-pc-projective-coordinate-model (reviewer FIX; first push; new nodes: 0)
+- 23:11 L: merged deliver/H1/lem-pc-dualizable-evaluation-criterion (reviewer FIX; first push; new nodes: 0)
