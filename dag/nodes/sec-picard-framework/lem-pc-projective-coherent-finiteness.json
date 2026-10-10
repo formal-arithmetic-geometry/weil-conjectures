@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-projective-coherent-finiteness",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Coherent cohomology of a projective scheme over a Noetherian ring",
@@ -19,9 +19,12 @@
  ],
  "proof": [
   {
-   "text": "Take a closed immersion $i:X\\hookrightarrow\\mathbf P^n_A$ from\n[def-pc-projective-morphism]. Its affine charts are finite\ntype over the Noetherian ring $A$, so $X$ is locally Noetherian.\nBy [lem-pc-closed-immersion-coherent-cohomology],\n$i_*\\mathcal F$ is coherent and has the same cohomology as\n$\\mathcal F$. Apply\n[lem-pc-projective-space-coherent-finiteness], [lem-pc-projective-space-cohomology-bound]\nto $i_*\\mathcal F$ on $\\mathbf P^n_A$.",
+   "text": "By [def-pc-projective-morphism], choose a closed immersion $i:X\\hookrightarrow\\mathbf P^n_A$ over $\\operatorname{Spec}(A)$ whose composite with the structural projection is the given projective morphism. The standard opens of $\\mathbf P^n_A$ are affine polynomial charts by [def-pc-proj], so $\\mathbf P^n_A$ is of finite type over the Noetherian scheme $\\operatorname{Spec}(A)$; [lem-weil-pbc-finite-type-over-noetherian] therefore makes $\\mathbf P^n_A$ Noetherian and hence locally Noetherian. A closed immersion is locally of finite type, so [pqf-lem-locnoeth-lft] makes $X$ locally Noetherian. Thus [lem-pc-closed-immersion-coherent-cohomology] applies: $i_*\\mathcal F$ is coherent on $\\mathbf P^n_A$ and $H^q(\\mathbf P^n_A,i_*\\mathcal F)\\cong H^q(X,\\mathcal F)$ for every $q$. The finiteness statement [lem-pc-projective-space-coherent-finiteness] applied to $i_*\\mathcal F$ gives that $H^q(X,\\mathcal F)$ is a finite $A$-module. For the vanishing clause, let $j:X\\hookrightarrow\\mathbf P^m_A$ be any embedding, i.e. a closed immersion over $\\operatorname{Spec}(A)$ as in [def-pc-projective-morphism] (not necessarily the $i$ chosen above). The same argument with $j$ in place of $i$ ($\\mathbf P^m_A$ is Noetherian by the chart argument, and $X$ is locally Noetherian as shown) lets [lem-pc-closed-immersion-coherent-cohomology] give that $j_*\\mathcal F$ is coherent, hence quasi-coherent, with $H^q(X,\\mathcal F)\\cong H^q(\\mathbf P^m_A,j_*\\mathcal F)$; for $q>m$, [lem-pc-projective-space-cohomology-bound] makes the right side zero, hence $H^q(X,\\mathcal F)=0$ (equivalently, its additive group is subsingleton).",
    "uses": [
     "def-pc-projective-morphism",
+    "def-pc-proj",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-locnoeth-lft",
     "lem-pc-closed-immersion-coherent-cohomology",
     "lem-pc-projective-space-coherent-finiteness",
     "lem-pc-projective-space-cohomology-bound"
@@ -31,6 +34,9 @@
  ],
  "proof_deps": [
   "def-pc-projective-morphism",
+  "def-pc-proj",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-locnoeth-lft",
   "lem-pc-closed-immersion-coherent-cohomology",
   "lem-pc-projective-space-coherent-finiteness",
   "lem-pc-projective-space-cohomology-bound"
@@ -40,9 +46,38 @@
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-pc-projective-coherent-finiteness.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite A-module cohomology of a coherent sheaf on a closed subscheme of projective space and vanishing above projective dimension",
+   "results": "CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; no algebraic-geometry cohomology result.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveSpace.finite_H, Scheme.Modules.subsingleton_H_of_isClosedImmersion",
+   "results": "0 hits; unknown identifier ProjectiveSpace.finite_H",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_H_of_isClosedImmersion|subsingleton_H_of_isClosedImmersion Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent cohomology finite module for projective scheme closed immersion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -97,5 +132,34 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-projective-coherent-finiteness",
+  "worker": "stage1",
+  "summary": "Replaced the imported sketch with one complete reduction: the projective-space charts and finite-type-over-Noetherian lemma establish the locally Noetherian hypotheses for the closed-immersion coherence result, which identifies cohomology; projective-space finiteness and the Cech vanishing bound then give the two conclusions.",
+  "blueprint": "Realizes the blueprint proof paragraph reducing to a closed immersion in projective space and applying the two projective-space results.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "Supplies coherence of the pushforward and identifies cohomology across the closed immersion."
+   },
+   {
+    "node": "lem-pc-projective-space-cohomology-bound",
+    "why": "Supplies the vanishing above the ambient projective dimension."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-projective-space-cohomology-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pcf2930",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcf2930 (reviewer sub-agent of L); spot-checked: Read packet; checked cited statements (closed-immersion coherent cohomology hypotheses supplied by chart/finite-type/locnoeth-lft argument; P^n finiteness node imported, no cycle: its uses do not contain the item; H1 uses the item with a FIXED embedding). FIX more, RETURN less: C4/D vanishing clause only treated the chosen embedding i ('If i embeds into P^d_A'), while the statement and H1 use an arbitrary embedding X->P^n_A; rewrote the last sentence to apply closed-immersion cohomology and the P^m vanishing bound to an arbitrary closed immersion j over Spec A. Missed by C1's second reading. Note: second reading claims blueprint.from was set, but it is still null (metadata only).; 1 file(s) fixed by the reviewer"
+ }
 }
