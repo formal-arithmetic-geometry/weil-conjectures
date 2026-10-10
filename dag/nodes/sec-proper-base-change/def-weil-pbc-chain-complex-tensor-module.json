@@ -1,0 +1,92 @@
+{
+ "id": "def-weil-pbc-chain-complex-tensor-module",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split: essential surjectivity via Stacks 0GS2; the regular-sequence conormal argument needed in its approximation and Popescu smoothing chain, made precise by Stacks 0665; the hypothesis 'image in A/I is H_1-regular' of Stacks 0665, and the Koszul-regularity produced by Stacks 062F; the complex K_•(f_1,...,f_r) ⊗_R M of clauses (1), (2) of Definition 062E",
+   "via": [
+    "def-weil-pbc-koszul-regular-sequence",
+    "lem-weil-pbc-regular-quotient-ideal-intersection",
+    "lem-weil-pbc-conormal-intersection-regular-quotient",
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Tensor product of a chain complex of modules with a module",
+ "statement": "Let $R$ be a commutative ring, $C_\\bullet$ a chain complex of $R$-modules with differentials $d_n:C_n\\to C_{n-1}$ [def-weil-pbc-module-chain-complex-homology] and $M$ an $R$-module. The chain complex $C_\\bullet\\otimes_RM$ has terms $(C_\\bullet\\otimes_RM)_n=C_n\\otimes_RM$ [def-weil-pbc-module-tensor-product] and differentials $d_n\\otimes\\mathrm{id}_M:C_n\\otimes_RM\\to C_{n-1}\\otimes_RM$, $c\\otimes x\\mapsto d_n(c)\\otimes x$; it is a chain complex because $(d_{n-1}\\otimes\\mathrm{id}_M)\\circ(d_n\\otimes\\mathrm{id}_M)=(d_{n-1}\\circ d_n)\\otimes\\mathrm{id}_M=0$. A morphism $f:C_\\bullet\\to D_\\bullet$ induces the morphism $f\\otimes\\mathrm{id}_M$ with components $f_n\\otimes\\mathrm{id}_M$. Its homology modules are written $H_n(C_\\bullet\\otimes_RM)$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Definition Tag 062E (definition-koszul-regular-sequence, line 7217): the complex K_•(f_1,...,f_r) ⊗_R M, used there without definition; the termwise tensor product of a complex with a module as in Algebra, Section 10.12 (section-tensor-product)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor a chain complex of modules with a module, applying a functor degreewise to a homological complex",
+   "results": "HomologicalComplex.asFunctor (Mathlib.Algebra.Homology.Functor), HomologicalComplex.tensorObj, tensorUnit, HasTensor (Mathlib.Algebra.Homology.Monoidal: tensor of two complexes, total complex)",
+   "date": "2026-10-10",
+   "verdict": "generalization: HomologicalComplex.tensorObj with the complex M[0] would also do, but the termwise form is Functor.mapHomologicalComplex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "apply tensorRight with a module degreewise to a chain complex of modules, giving complex C ⊗ M with differentials d ⊗ id",
+   "results": "HomologicalComplex.tensorHom, ιTensorObj, tensorObj, HasTensor, instHasTensorOfHasTensorX (Mathlib.Algebra.Homology.Monoidal)",
+   "date": "2026-10-10",
+   "verdict": "no direct match; see loogle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomologicalComplex",
+   "results": "Functor.mapHomologicalComplex, mapHomologicalComplex_obj_X, mapHomologicalComplex_reflects_iso, instFaithful... (Mathlib.Algebra.Homology.Additive)",
+   "date": "2026-10-10",
+   "verdict": "match with F = tensorRight (ModuleCat.of R M)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def Functor.mapHomologicalComplex' Algebra/Homology/Additive.lean; grep -n 'whiskerRight f M' Algebra/Category/ModuleCat/Monoidal/Basic.lean; grep -n 'tensorRight' CategoryTheory/Monoidal/Preadditive.lean CategoryTheory/Monoidal/Category.lean, in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Functor.mapHomologicalComplex (Additive.lean:103: X i = F.obj (C.X i), d i j = F.map (C.d i j)); ModuleCat MonoidalCategoryStruct (ModuleCat/Monoidal/Basic.lean:299-308: tensorObj M N = of R (M ⊗[R] N), whiskerRight f M = ofHom (f.hom.rTensor M)); MonoidalPreadditive (ModuleCat.lean Basic.lean:449); tensorRight (Category.lean:837), tensorRight_additive (Preadditive.lean:74)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.mapHomologicalComplex",
+  "file": "Mathlib/Algebra/Homology/Additive.lean",
+  "line": 103,
+  "how": "specializes in one line: C_• ⊗_R M is `((MonoidalCategory.tensorRight (ModuleCat.of R M)).mapHomologicalComplex (ComplexShape.down ℤ)).obj C` (Additive.lean:103-110: terms F.obj (C.X i), differentials F.map (C.d i j); the instance PreservesZeroMorphisms comes from `tensorRight_additive`, Mathlib/CategoryTheory/Monoidal/Preadditive.lean:74, for the MonoidalPreadditive ModuleCat R, Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean:449); `tensorRight X` (Mathlib/CategoryTheory/Monoidal/Category.lean:837) sends C_n to `of R (C_n ⊗[R] M)` and d to `ofHom (d.hom.rTensor M)` = d ⊗ id_M (ModuleCat/Monoidal/Basic.lean:299-303); on morphisms `.map f`. Lines read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-koszul-regular-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -23,17 +23,27 @@
  },
  "kind": "definition",
  "title": "Koszul complex of a finite sequence of ring elements",
- "statement": "Let $R$ be a commutative ring, $r\\ge0$, and $f_1,\\dots,f_r\\in R$. Let $E=R^{\\oplus r}$ be the free $R$-module [def-weil-pbc-free-module] with standard basis $e_1,\\dots,e_r$, and $\\varphi:E\\to R$ the $R$-linear map with $\\varphi(e_i)=f_i$. The *Koszul complex* $K_\\bullet(f_1,\\dots,f_r)=K_\\bullet(R,f_1,\\dots,f_r)$ is the chain complex of $R$-modules with $K_n=\\wedge^n_R E$ (the $n$-th exterior power; $K_0=R$, $K_1=E$, $K_n=0$ for $n>r$ and $n<0$) and differential $d_n:K_n\\to K_{n-1}$ the $R$-linear map given on generators by $$d(v_1\\wedge\\dots\\wedge v_n)=\\sum_{i=1}^n(-1)^{i+1}\\varphi(v_i)\\,v_1\\wedge\\dots\\wedge\\widehat{v_i}\\wedge\\dots\\wedge v_n\\qquad(v_1,\\dots,v_n\\in E),$$ which is well defined and satisfies $d_{n-1}\\circ d_n=0$. Explicitly, $K_n$ is free with basis $e_{i_1}\\wedge\\dots\\wedge e_{i_n}$, $1\\le i_1<\\dots<i_n\\le r$; in low degrees $d_1(e_i)=f_i$ and $d_2(e_i\\wedge e_j)=f_ie_j-f_je_i$. For an $R$-module $M$ write $K_\\bullet(f_1,\\dots,f_r)\\otimes_RM$ for the complex with terms $K_n\\otimes_RM$ and differentials $d_n\\otimes\\mathrm{id}_M$, and $H_i(-)=\\ker d_i/\\operatorname{im}d_{i+1}$ for the homology of a complex.",
+ "statement": "Let $R$ be a commutative ring, $r\\ge0$, and $f_1,\\dots,f_r\\in R$. Let $E=R^{\\oplus r}$ be the free $R$-module [def-weil-pbc-free-module] with standard basis $e_1,\\dots,e_r$, and $\\varphi:E\\to R$ the $R$-linear map with $\\varphi(e_i)=f_i$. Let $\\wedge(E)=\\bigoplus_{n\\ge0}\\wedge^n_R(E)$ be the exterior algebra of $E$ with its exterior powers [def-weil-pbc-exterior-algebra], and $D=D_\\varphi:\\wedge(E)\\to\\wedge(E)$ the unique $R$-linear map with $D(1)=0$ and $D(v\\wedge x)=\\varphi(v)x-v\\wedge D(x)$ ($v\\in E$, $x\\in\\wedge(E)$) of [lem-weil-pbc-koszul-differential]; it maps $\\wedge^n_R(E)$ into $\\wedge^{n-1}_R(E)$, is the unique derivation of degree $-1$ with $D|_E=\\varphi$, and is given on generators by $$D(v_1\\wedge\\dots\\wedge v_n)=\\sum_{i=1}^n(-1)^{i+1}\\varphi(v_i)\\,v_1\\wedge\\dots\\wedge\\widehat{v_i}\\wedge\\dots\\wedge v_n\\qquad(v_1,\\dots,v_n\\in E).$$ The *Koszul complex* $K_\\bullet(f_1,\\dots,f_r)=K_\\bullet(R,f_1,\\dots,f_r)$ is the chain complex of $R$-modules [def-weil-pbc-module-chain-complex-homology] with $K_n=\\wedge^n_R(E)$ for $n\\ge0$, $K_n=0$ for $n<0$, and differential $d_n:K_n\\to K_{n-1}$ the restriction of $D$ ($d_n=0$ for $n\\le0$); it is a complex because $d_{n-1}\\circ d_n=0$ [lem-weil-pbc-koszul-differential-square-zero]. (With the product of $\\wedge(E)$ it is the commutative differential graded algebra $K_\\bullet(\\varphi)$ of Stacks 0622.) By [lem-weil-pbc-exterior-power-free-basis], $K_n$ is free with basis $e_{i_1}\\wedge\\dots\\wedge e_{i_n}$, $1\\le i_1<\\dots<i_n\\le r$, so $K_0=R$, $K_1=E$ and $K_n=0$ for $n>r$; in low degrees $d_1(e_i)=f_i$ and $d_2(e_i\\wedge e_j)=f_ie_j-f_je_i$. For an $R$-module $M$ write $K_\\bullet(f_1,\\dots,f_r)\\otimes_RM$ for the chain complex with terms $K_n\\otimes_RM$ and differentials $d_n\\otimes\\mathrm{id}_M$ [def-weil-pbc-module-tensor-product] (a complex since $(d_{n-1}\\otimes\\mathrm{id}_M)\\circ(d_n\\otimes\\mathrm{id}_M)=(d_{n-1}\\circ d_n)\\otimes\\mathrm{id}_M=0$), and $H_i(-)=\\ker d_i/\\operatorname{im}d_{i+1}$ for the homology of a chain complex [def-weil-pbc-module-chain-complex-homology].",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Definition Tag 0622 (definition-koszul, line 6566) with the explicit differential that follows it (lines 6579-6586), and Definition Tag 0623 (definition-koszul-complex, line 6597). Tags verified in tags/tags."
  },
  "stmt_deps": [
-  "def-weil-pbc-free-module"
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-exterior-algebra",
+  "lem-weil-pbc-koszul-differential",
+  "lem-weil-pbc-koszul-differential-square-zero",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-module-tensor-product"
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Definitions Tag 0622 and Tag 0623 (lines 6566-6603)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -62,10 +72,17 @@
    "results": "only RingTheory/Regular/RegularSequence.lean:21 ('TODO: Koszul regular sequences, H_1-regular sequences, quasi-regular sequences, depth.') and a docstring mention in Algebra/Homology/LocalCohomology.lean:45; no Koszul complex and no Koszul- or H_1-regularity in Mathlib. Exterior powers exist (LinearAlgebra/ExteriorPower/Basic.lean, with a basis of the exterior powers of a free module in LinearAlgebra/ExteriorPower/Basis.lean), but no differential on them.",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rni 'koszul' ~/weil-conjectures-slopmaster2/WeilConjectures ~/weil-conjectures-slopmaster2/Comparator; grep -rln 'contractLeft' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "slopmaster2: only AlgebraicGeometry/ProjectiveSpace/Koszul.lean (the Koszul short exact sequence O(m) -> O(m+1)^2 -> O(m+2) on P^1, not this complex); Mathlib: CliffordAlgebra.contractLeft (LinearAlgebra/CliffordAlgebra/Contraction.lean:84) is the Koszul differential on the whole exterior algebra (ExteriorAlgebra = CliffordAlgebra 0), with contractLeft_contractLeft :188, but no complex built from it and no statement of its degree",
+   "date": "2026-10-10",
+   "verdict": "no match for the complex; the pieces are recorded on the new nodes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +98,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-koszul-complex",
+  "worker": "stage1",
+  "summary": "Definition split against Stacks 0622/0623 (More on Algebra, read at lines 6566-6603; tags verified). The definition was kept (same objects, same formula, same degree conventions) and rewritten to cite a node for every notion and every claim it made inside itself: the exterior algebra and exterior powers (new Mathlib leaf def-weil-pbc-exterior-algebra: ExteriorAlgebra, exteriorPower), the basis of the exterior powers of R^r with K_0=R, K_1=E, K_n=0 for n>r (new Mathlib leaf lem-weil-pbc-exterior-power-free-basis: Module.Basis.exteriorPower, zeroEquiv, oneEquiv), the well-definedness of the differential, which the old statement asserted inside the definition and Stacks calls 'straightforward' (new unsplit statement lem-weil-pbc-koszul-differential: unique D with D(1)=0, D(v x)=phi(v)x - v D(x), degree -1, explicit formula, unique derivation; Mathlib candidate CliffordAlgebra.contractLeft, which gives existence only), d o d = 0 (new unsplit statement lem-weil-pbc-koszul-differential-square-zero; candidate CliffordAlgebra.contractLeft_contractLeft, applicable once D = contractLeft phi), the tensor product with M and the functoriality making K tensor M a complex (new Mathlib leaf def-weil-pbc-module-tensor-product), chain complexes and H_i = ker/im (new Mathlib leaf def-weil-pbc-module-chain-complex-homology). The statement now also records Stacks' description of d as the unique derivation and the cdga structure, which the old text omitted. No Koszul complex exists in this Mathlib (only a TODO in RingTheory/Regular/RegularSequence.lean:21) nor in slopmaster2 (only the two-term Koszul sequence on P^1 in WeilConjectures/AlgebraicGeometry/ProjectiveSpace/Koszul.lean, a different object).",
+  "blueprint": "No proof of a blueprint node is realized by steps here (a definition). The item serves thm-weil-pbc-finite-etale-lifting, step 7 of its split (essential surjectivity via Stacks 0GS2, through the regular-sequence / H_1-regularity chain of 0665); its new nodes refine that place: the exterior powers (0622 (1)), the differential and d^2 = 0 (0622 (2) and the formula after it), the basis of the terms (00DM, used for 0623 with E = R^r), and the tensor/homology notions in which H_1-regularity is stated. Blueprint search (koszul, exterior algebra, wedge, interior product, contraction, chain complex, homology module, tensor product of modules, tags 0622/0623/00DM/00CV/00CX/010V) found no blueprint node stating any of them: same_as [] for the item and all new nodes."
+ },
+ "reviewed": "2026-10-10 L: definition split against 0622/0623: exterior algebra and the free basis of exterior powers (Mathlib leaves), the Koszul differential (existence, degree, formula, uniqueness as a derivation: statement node, Mathlib candidate contractLeft) and d^2 = 0 (statement node), tensor product and chain-complex homology leaves; the derivation characterization added from Stacks; 6 new nodes"
 }

@@ -1,0 +1,84 @@
+{
+ "id": "def-weil-pbc-module-chain-complex-homology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split: essential surjectivity via Stacks 0GS2; the regular-sequence conormal argument needed in its approximation and Popescu smoothing chain, made precise by Stacks 0665; the hypothesis 'image in A/I is H_1-regular' of Stacks 0665, and the Koszul-regularity produced by Stacks 062F; the homology modules H_i in which Definition 062E is stated",
+   "via": [
+    "def-weil-pbc-koszul-regular-sequence",
+    "lem-weil-pbc-regular-quotient-ideal-intersection",
+    "lem-weil-pbc-conormal-intersection-regular-quotient",
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": [
+   "def-weil-abstract-derived-category"
+  ]
+ },
+ "kind": "definition",
+ "title": "Chain complexes of modules and their homology",
+ "statement": "Let $R$ be a ring. A *chain complex* $C_\\bullet$ of $R$-modules consists of $R$-modules $C_n$, $n\\in\\mathbf Z$, and $R$-linear maps $d_n:C_n\\to C_{n-1}$ (the differentials) with $d_{n-1}\\circ d_n=0$ for all $n$; a complex given only in degrees $n\\ge0$ (or in a finite range) is extended by $C_n=0$ and $d_n=0$ in the other degrees. A *morphism* $f:C_\\bullet\\to D_\\bullet$ of chain complexes is a family of $R$-linear maps $f_n:C_n\\to D_n$ with $d^D_n\\circ f_n=f_{n-1}\\circ d^C_n$. Since $d_n\\circ d_{n+1}=0$, $\\operatorname{im}d_{n+1}\\subseteq\\ker d_n$, and the *$n$-th homology module* of $C_\\bullet$ is the $R$-module $$H_n(C_\\bullet)=\\ker(d_n:C_n\\to C_{n-1})/\\operatorname{im}(d_{n+1}:C_{n+1}\\to C_n).$$ A morphism $f$ maps $\\ker d^C_n$ into $\\ker d^D_n$ and $\\operatorname{im}d^C_{n+1}$ into $\\operatorname{im}d^D_{n+1}$ and so induces an $R$-linear map $H_n(f):H_n(C_\\bullet)\\to H_n(D_\\bullet)$, compatible with composition and identities.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Section Tag 010V (section-complexes, homology.tex line 2774): chain complexes in an additive category and their morphisms (lines 2784-2809), and the paragraph defining the homology H_i(A_•) = Ker(d_i)/Im(d_{i+1}) and H_i(f) in an abelian category (lines 2917-2933), here for the abelian category of R-modules. Tag verified in tags/tags."
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology of a chain complex of modules is kernel of differential modulo image of previous differential",
+   "results": "CategoryTheory.ShortComplex.moduleCatLeftHomologyData_H, moduleCatLeftHomologyData_K, moduleCatLeftHomologyData (Mathlib.Algebra.Homology.ShortComplex.ModuleCat); HomologicalComplex.homologyIsKernel (Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex); ShortComplex.abHomologyIso",
+   "date": "2026-10-10",
+   "verdict": "match: HomologicalComplex.homology with ShortComplex.moduleCatHomologyIso"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology module H_i of a chain complex of R-modules, ker d_i modulo im d_{i+1}",
+   "results": "groupHomology, groupHomology.cycles (group homology, not general); HomologicalComplex.homology (Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex)",
+   "date": "2026-10-10",
+   "verdict": "match: HomologicalComplex.homology"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev ChainComplex' Algebra/Homology/HomologicalComplex.lean; grep -n 'def homology\\b' Algebra/Homology/ShortComplex/HomologicalComplex.lean; grep -n 'moduleCatHomologyIso\\|moduleCatLeftHomologyData' Algebra/Homology/ShortComplex/ModuleCat.lean, in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "ChainComplex (HomologicalComplex.lean:151, HomologicalComplex V (ComplexShape.down α)); HomologicalComplex.homology (ShortComplex/HomologicalComplex.lean:90, := (K.sc i).homology); ShortComplex.moduleCatLeftHomologyData (ModuleCat.lean:105, K = ker g, H = ker g / range(X1 -> ker g)); ShortComplex.moduleCatHomologyIso (ModuleCat.lean:177)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomologicalComplex.homology",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean",
+  "line": 90,
+  "how": "specializes in one line: a chain complex of R-modules is `C : ChainComplex (ModuleCat R) ℤ` (`ChainComplex`, Mathlib/Algebra/Homology/HomologicalComplex.lean:151: `HomologicalComplex V (ComplexShape.down α)`, so `C.d n (n-1)` is d_n), morphisms are `HomologicalComplex.Hom`; H_n(C) is `C.homology n` (line 90: the homology of the short complex `C.sc n` = C_{n+1} -> C_n -> C_{n-1}), which `ShortComplex.moduleCatHomologyIso` (Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean:177) identifies with `LinearMap.ker d_n ⧸ range` of the map C_{n+1} -> ker d_n induced by d_{n+1} (`moduleCatLeftHomologyData`, ModuleCat.lean:105-113), i.e. ker d_n / im d_{n+1}; H_n(f) is `HomologicalComplex.homologyMap f n`, functorial by `homologyMap_comp`, `homologyMap_id`. Lines read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-koszul-regular-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

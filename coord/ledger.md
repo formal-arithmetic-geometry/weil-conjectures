@@ -1281,3 +1281,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:12 L: accepted lem-weil-pbc-ring-quasi-finite-locus-open (00QA, 6 steps; new lem-weil-pbc-finite-ring-map-quasi-finite, same_as pqf-lem-finite-qf).
 - 11:14 L: accepted lem-weil-pbc-cohomology-filtered-colimit (03Q5 via 0739, 8 steps; new Mathlib leaf for functorial injective embeddings 079H; 10 tool uses; the imported proof cited 09Z1, the relative version: corrected).
 - 11:15 L: accepted lem-weil-pbc-qcqs-cohomology-direct-sum (7 steps; new 01FF node lem-weil-pbc-qs-scheme-cohomology-directed-colimit and Mathlib leaf lem-weil-pbc-scheme-modules-coproduct-finite-subsums).
+- 11:16 L: accepted def-weil-pbc-koszul-complex (0622/0623; new: exterior algebra and exterior-power basis leaves, Koszul differential and d^2 = 0 statement nodes, tensor product and chain-complex homology leaves).

@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-exterior-power-free-basis",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split: essential surjectivity via Stacks 0GS2; the regular-sequence conormal argument needed in its approximation and Popescu smoothing chain, made precise by Stacks 0665; the Koszul complex in whose degree-1 homology the hypothesis of Stacks 0665 (H_1-regularity) is stated; refined: the clause of the item's statement 'K_n is free with basis e_{i_1} wedge ... wedge e_{i_n}; K_0 = R, K_1 = E, K_n = 0 for n > r' (Stacks 0623: E = R^{+r})",
+   "via": [
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-regular-quotient-ideal-intersection",
+    "lem-weil-pbc-conormal-intersection-regular-quotient",
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Basis of the exterior powers of a finite free module",
+ "statement": "Let $R$ be a commutative ring, $r\\ge0$, and $E$ a free $R$-module [def-weil-pbc-free-module] with basis $e_1,\\dots,e_r$. For every $n\\ge0$ the exterior power $\\wedge^n_R(E)$ [def-weil-pbc-exterior-algebra] is a free $R$-module with basis the elements $e_{i_1}\\wedge\\dots\\wedge e_{i_n}$, $1\\le i_1<\\dots<i_n\\le r$; in particular it is free of rank $\\binom rn$, $\\wedge^n_R(E)=0$ for $n>r$, $\\wedge^0_R(E)=R\\cdot1\\cong R$ (via $a\\cdot1\\mapsto a$) and $\\iota:E\\to\\wedge^1_R(E)$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00DM (section-tensor-algebra, lines 2201-2208: 'An example of this is when M = Rx_1 + ... + Rx_n is a finite free module. In this case wedge(M) is free over R with basis the elements x_{i_1} wedge ... wedge x_{i_r} with 1 <= i_1 < ... < i_r <= n'). Tag verified in tags/tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "basis of the exterior power of a free module indexed by subsets of size n",
+   "results": "ExteriorAlgebra.exteriorPower, ModuleCat.exteriorPower, ModuleCat.exteriorPower.iso₀, exteriorPower.ιMulti_family (Mathlib.LinearAlgebra.ExteriorPower.Basic), exteriorPower.ιMulti_span_fixedDegree",
+   "date": "2026-10-10",
+   "verdict": "match (with the loogle result)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis.exteriorPower",
+   "results": "Module.Basis.exteriorPower : Module.Basis I R M → Module.Basis (Set.powersetCard I n) R (⋀[R]^n M); exteriorPower.coe_basis, exteriorPower.basis_apply, exteriorPower.basis_coord, exteriorPower.basis_repr (Mathlib.LinearAlgebra.ExteriorPower.Basis)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def _root_.Module.Basis.exteriorPower\\|lemma coe_basis\\|instance instFree\\|def zeroEquiv\\|def oneEquiv' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/ExteriorPower/{Basis,Basic}.lean",
+   "results": "Module.Basis.exteriorPower Basis.lean:97, coe_basis :103 (the basis vectors are ιMulti_family R n b, the products of the b_i over increasing index sets), instFree :149, finrank_eq :159; exteriorPower.zeroEquiv Basic.lean:414, oneEquiv :432",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Basis.exteriorPower, exteriorPower.coe_basis, exteriorPower.zeroEquiv, exteriorPower.oneEquiv",
+  "file": "Mathlib/LinearAlgebra/ExteriorPower/Basis.lean, Mathlib/LinearAlgebra/ExteriorPower/Basic.lean",
+  "how": "specializes in one line per clause: for b : Basis (Fin r) R E, b.exteriorPower n : Basis (Set.powersetCard (Fin r) n) R (⋀[R]^n E) (Basis.lean:97) with vectors ιMulti_family R n b s = e_{i_1} ∧ ... ∧ e_{i_n} for s = {i_1 < ... < i_n} (coe_basis :103); for n > r the index type Set.powersetCard (Fin r) n is empty (Finset.powersetCard_eq_empty, Data/Finset/Powerset.lean:264), so ⋀^n E = 0 and the rank is the binomial coefficient (finrank_eq :159); ⋀[R]^0 E ≃ R is exteriorPower.zeroEquiv (Basic.lean:414) and ⋀[R]^1 E ≃ E is exteriorPower.oneEquiv (:432). Lines read with sed -n on 2026-10-10.",
+  "line": 97
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-koszul-complex",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

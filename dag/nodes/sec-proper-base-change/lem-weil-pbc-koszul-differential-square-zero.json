@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-koszul-differential-square-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split: essential surjectivity via Stacks 0GS2; the regular-sequence conormal argument needed in its approximation and Popescu smoothing chain, made precise by Stacks 0665; the Koszul complex in whose degree-1 homology the hypothesis of Stacks 0665 (H_1-regularity) is stated; refined: d o d = 0, which makes K_bullet a complex (Stacks 0622: 'commutative differential graded algebra')",
+   "via": [
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-regular-quotient-ideal-intersection",
+    "lem-weil-pbc-conormal-intersection-regular-quotient",
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The Koszul differential squares to zero",
+ "statement": "Let $R$ be a commutative ring, $E$ an $R$-module, $\\varphi:E\\to R$ an $R$-linear map, and $D:\\wedge(E)\\to\\wedge(E)$ the $R$-linear map of [lem-weil-pbc-koszul-differential] (the unique one with $D(1)=0$ and $D(v\\wedge x)=\\varphi(v)x-v\\wedge D(x)$ for $v\\in E$, $x\\in\\wedge(E)$, where $\\wedge(E)$ is the exterior algebra [def-weil-pbc-exterior-algebra]). Then $D\\circ D=0$. In particular, writing $d_n:\\wedge^n_R(E)\\to\\wedge^{n-1}_R(E)$ for the restriction of $D$, one has $d_{n-1}\\circ d_n=0$ for all $n\\ge1$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Definition Tag 0622 (definition-koszul, line 6566): K_bullet(phi) is called a (commutative) differential graded algebra with differential d, which presupposes d o d = 0; Stacks does not write the computation (for the generators: d(d(v wedge x)) = phi(v)d(x) - phi(v)d(x) + v wedge d(d(x)), induction on the degree). Tag verified in tags/tags."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-koszul-differential",
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CliffordAlgebra.contractLeft ?d (CliffordAlgebra.contractLeft ?d ?x) = 0",
+   "results": "CliffordAlgebra.contractLeft_contractLeft (Mathlib.LinearAlgebra.CliffordAlgebra.Contraction)",
+   "date": "2026-10-10",
+   "verdict": "candidate: states d(d x) = 0 for contractLeft d; identifying the D of the statement with contractLeft φ is the uniqueness clause of lem-weil-pbc-koszul-differential"
+  },
+  {
+   "tool": "leansearch",
+   "query": "contraction of exterior algebra by a linear form is a derivation of degree -1 squaring to zero",
+   "results": "CliffordAlgebra.contractLeft, contractLeft_ι_mul, contractLeftAux; extDeriv_extDeriv (differential forms on normed spaces, not this)",
+   "date": "2026-10-10",
+   "verdict": "candidate contractLeft_contractLeft (see loogle)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem contractLeft_contractLeft' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean; grep -rn -i 'koszul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "contractLeft_contractLeft at Contraction.lean:188 (proof by left_induction from contractLeft_ι_mul); no Koszul complex in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "candidate, not a one-line match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CliffordAlgebra.contractLeft_contractLeft",
+  "file": "Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean",
+  "how": "line 188: contractLeft d (contractLeft d x) = 0 on CliffordAlgebra Q, in particular on ExteriorAlgebra R E = CliffordAlgebra 0. It applies once D = contractLeft φ, which is the uniqueness part of lem-weil-pbc-koszul-differential (an induction by CliffordAlgebra.left_induction), so this is not a one-line specialization; the split is two steps (identify D, apply the lemma) or the direct three-line induction."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-koszul-complex",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

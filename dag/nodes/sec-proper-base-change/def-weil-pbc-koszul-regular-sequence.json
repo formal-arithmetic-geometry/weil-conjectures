@@ -23,17 +23,23 @@
  },
  "kind": "definition",
  "title": "Koszul-regular and H_1-regular sequences",
- "statement": "Let $R$ be a commutative ring, $r\\ge0$, $f_1,\\dots,f_r\\in R$, and $M$ an $R$-module. With the Koszul complex $K_\\bullet(f_1,\\dots,f_r)$ of [def-weil-pbc-koszul-complex], the sequence $f_1,\\dots,f_r$ is called (1) *$M$-Koszul-regular* if $H_i(K_\\bullet(f_1,\\dots,f_r)\\otimes_RM)=0$ for all $i\\neq0$; (2) *$M$-$H_1$-regular* if $H_1(K_\\bullet(f_1,\\dots,f_r)\\otimes_RM)=0$; (3) *Koszul-regular* if $H_i(K_\\bullet(f_1,\\dots,f_r))=0$ for all $i\\neq0$; (4) *$H_1$-regular* if $H_1(K_\\bullet(f_1,\\dots,f_r))=0$.",
+ "statement": "Let $R$ be a commutative ring, $r\\ge0$, $f_1,\\dots,f_r\\in R$, and $M$ an $R$-module. Let $K_\\bullet(f_1,\\dots,f_r)$ be the Koszul complex of [def-weil-pbc-koszul-complex], a chain complex of $R$-modules (with $K_n=0$ for $n<0$ and $n>r$), let $K_\\bullet(f_1,\\dots,f_r)\\otimes_RM$ be its tensor product with $M$ [def-weil-pbc-chain-complex-tensor-module] (terms $K_n\\otimes_RM$, differentials $d_n\\otimes\\mathrm{id}_M$), and write $H_i(-)=\\ker d_i/\\operatorname{im}d_{i+1}$ for the $i$-th homology module of a chain complex of $R$-modules [def-weil-pbc-module-chain-complex-homology]. The sequence $f_1,\\dots,f_r$ is called (1) *$M$-Koszul-regular* if $H_i(K_\\bullet(f_1,\\dots,f_r)\\otimes_RM)=0$ for all $i\\neq0$; (2) *$M$-$H_1$-regular* if $H_1(K_\\bullet(f_1,\\dots,f_r)\\otimes_RM)=0$; (3) *Koszul-regular* if $H_i(K_\\bullet(f_1,\\dots,f_r))=0$ for all $i\\neq0$; (4) *$H_1$-regular* if $H_1(K_\\bullet(f_1,\\dots,f_r))=0$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Definition Tag 062E (definition-koszul-regular-sequence, line 7217). Tag verified in tags/tags."
  },
  "stmt_deps": [
-  "def-weil-pbc-koszul-complex"
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-chain-complex-tensor-module",
+  "def-weil-pbc-module-chain-complex-homology"
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Definition Tag 062E (definition-koszul-regular-sequence, line 7217)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -65,7 +71,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +87,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-koszul-regular-sequence",
+  "worker": "stage1",
+  "summary": "Definition split against Stacks More on Algebra 062E (definition-koszul-regular-sequence, more-algebra.tex line 7217; tag verified in tags/tags). The four clauses are kept verbatim; the statement now cites a node for every notion it uses: the Koszul complex [def-weil-pbc-koszul-complex] (cited as it stands; it is being split by another worker), the tensor product of a chain complex with a module [def-weil-pbc-chain-complex-tensor-module] (new Mathlib leaf, Functor.mapHomologicalComplex of tensorRight), which in turn cites the tensor product of modules [def-weil-pbc-module-tensor-product] (new Mathlib leaf, TensorProduct / LinearMap.rTensor), and homology of a chain complex of modules [def-weil-pbc-module-chain-complex-homology] (new Mathlib leaf, HomologicalComplex.homology with ShortComplex.moduleCatHomologyIso). 'Ring' of Stacks is commutative by its convention, written out. The item itself has no Mathlib counterpart (searches recorded: Mathlib's RegularSequence.lean lists Koszul and H_1-regular sequences as TODO). No slopmaster2 declaration states it (grep for the id, 'KoszulRegular', 'H1Regular', 'Koszul' in WeilConjectures: only the Koszul sequence on P^1 and Koszul sign rules). Whole-blueprint search for 062E, 'Koszul-regular', 'H_1-regular': none, so same_as is [].",
+  "blueprint": "The item serves the place recorded in blueprint.from.place of thm-weil-pbc-finite-etale-lifting's split (step 7, the hypothesis 'image in A/I is H_1-regular' of Stacks 0665 and the Koszul-regularity of Stacks 062F); the definition realizes exactly the notions H_1-regular and Koszul-regular named there, with the notions they are built from (homology, tensoring the Koszul complex with a module) now nodes. No proof steps (definition)."
+ }
 }

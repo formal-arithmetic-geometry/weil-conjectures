@@ -1,0 +1,91 @@
+{
+ "id": "lem-weil-pbc-koszul-differential",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split: essential surjectivity via Stacks 0GS2; the regular-sequence conormal argument needed in its approximation and Popescu smoothing chain, made precise by Stacks 0665; the Koszul complex in whose degree-1 homology the hypothesis of Stacks 0665 (H_1-regularity) is stated; refined: the differential of the Koszul complex and its well-definedness (Stacks 0622 (2) and the explicit formula after it: 'well defined derivation on the tensor algebra ... factors through the exterior algebra')",
+   "via": [
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-regular-quotient-ideal-intersection",
+    "lem-weil-pbc-conormal-intersection-regular-quotient",
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existence, uniqueness, degree and formula of the Koszul differential",
+ "statement": "Let $R$ be a commutative ring, $E$ an $R$-module, $\\varphi:E\\to R$ an $R$-linear map, and $\\wedge(E)=\\bigoplus_{n\\ge0}\\wedge^n_R(E)$ the exterior algebra [def-weil-pbc-exterior-algebra]. (i) There is a unique $R$-linear map $D=D_\\varphi:\\wedge(E)\\to\\wedge(E)$ with $D(1)=0$ and $D(v\\wedge x)=\\varphi(v)\\,x-v\\wedge D(x)$ for all $v\\in E$, $x\\in\\wedge(E)$. (ii) $D(v)=\\varphi(v)\\cdot1$ for $v\\in E$, and $D(\\wedge^n_R(E))\\subset\\wedge^{n-1}_R(E)$ for all $n\\ge0$ (with $\\wedge^{-1}_R(E)=0$). (iii) For $n\\ge1$ and $v_1,\\dots,v_n\\in E$, $$D(v_1\\wedge\\dots\\wedge v_n)=\\sum_{i=1}^n(-1)^{i+1}\\varphi(v_i)\\,v_1\\wedge\\dots\\wedge\\widehat{v_i}\\wedge\\dots\\wedge v_n.$$ (iv) $D$ is a derivation of degree $-1$: $D(x\\wedge y)=D(x)\\wedge y+(-1)^m x\\wedge D(y)$ for $x\\in\\wedge^m_R(E)$, $y\\in\\wedge(E)$; and $D$ is the unique $R$-linear map $\\wedge(E)\\to\\wedge(E)$ with this property and $D(v)=\\varphi(v)$ for $v\\in E$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Definition Tag 0622 (definition-koszul, line 6566: 'the differential d is the unique derivation such that d(e) = phi(e)') and the paragraph after it (lines 6579-6590: the explicit formula, 'It is straightforward to see that this gives a well defined derivation on the tensor algebra, which annihilates e tensor e and hence factors through the exterior algebra'). Tag verified in tags/tags."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "contraction of exterior algebra by a linear form is a derivation of degree -1 squaring to zero",
+   "results": "CliffordAlgebra.contractLeft, CliffordAlgebra.contractLeft_ι_mul, CliffordAlgebra.contractLeftAux (Mathlib.LinearAlgebra.CliffordAlgebra.Contraction); extDeriv (differential forms, not relevant)",
+   "date": "2026-10-10",
+   "verdict": "candidate, not a match: contractLeft gives (i) existence; degree, formula (iii) and the derivation property (iv) are not stated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul differential on the exterior algebra: interior product with a linear form phi : E -> R, d(v ∧ x) = phi(v) x - v ∧ d x, lowers degree by one",
+   "results": "extDeriv_apply, extDeriv (Analysis.Calculus.DifferentialForm.Basic), ExteriorAlgebra.liftAlternating_ι_mul (ExteriorAlgebra/OfAlternating), ExteriorAlgebra.ιMulti; nothing on the degree of contractLeft",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CliffordAlgebra.contractLeft, ExteriorAlgebra.exteriorPower",
+   "results": "none (no declaration mentions both, so no statement that contractLeft maps ⋀^n into ⋀^(n-1))",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'koszul' and grep -rln 'contractLeft' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'def contractLeft\\|contractLeft_ι_mul\\|contractLeft_ι\\b\\|contractLeft_one' LinearAlgebra/CliffordAlgebra/Contraction.lean",
+   "results": "no Koszul complex (only a TODO in RingTheory/Regular/RegularSequence.lean:21); contractLeft is used only in CliffordAlgebra/Contraction.lean (def contractLeft :84, contractLeft_ι_mul :125, contractLeft_ι :156, contractLeft_one :178); none of LinearAlgebra/ExteriorAlgebra/* or ExteriorPower/* mentions it, so its degree (ii), the formula (iii) and the derivation property (iv) are absent",
+   "date": "2026-10-10",
+   "verdict": "no match (candidate recorded)"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CliffordAlgebra.contractLeft (with contractLeft_one, contractLeft_ι, contractLeft_ι_mul)",
+  "file": "Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean",
+  "how": "on ExteriorAlgebra R E = CliffordAlgebra 0 (ExteriorAlgebra/Basic.lean:60), contractLeft φ (Contraction.lean:84) is an R-linear map with contractLeft_one (:178: D 1 = 0) and contractLeft_ι_mul (:125: D(ι a * b) = φ a • b - ι a * D b), which is existence in (i); uniqueness follows by CliffordAlgebra.left_induction; the degree statement (ii), the formula (iii) and the derivation property (iv) are not in Mathlib and need an induction on n. Not a leaf (rule B8)."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-koszul-complex",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

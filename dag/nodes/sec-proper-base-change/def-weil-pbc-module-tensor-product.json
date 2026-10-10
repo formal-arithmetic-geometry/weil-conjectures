@@ -1,0 +1,89 @@
+{
+ "id": "def-weil-pbc-module-tensor-product",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split: essential surjectivity via Stacks 0GS2; the regular-sequence conormal argument needed in its approximation and Popescu smoothing chain, made precise by Stacks 0665; the hypothesis 'image in A/I is H_1-regular' of Stacks 0665, and the Koszul-regularity produced by Stacks 062F; the tensor product K_n ⊗_R M in the M-relative clauses (1), (2) of Definition 062E",
+   "via": [
+    "def-weil-pbc-koszul-regular-sequence",
+    "lem-weil-pbc-regular-quotient-ideal-intersection",
+    "lem-weil-pbc-conormal-intersection-regular-quotient",
+    "lem-weil-pbc-jacobi-zariski-regular-sequence-left-injective",
+    "lem-weil-pbc-transitivity-gamma",
+    "lem-weil-pbc-geometrically-regular-over-field-flat",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Tensor product of modules over a commutative ring",
+ "statement": "Let $R$ be a commutative ring and $M,N$ $R$-modules. The *tensor product* $M\\otimes_RN$ is an $R$-module together with an $R$-bilinear map $M\\times N\\to M\\otimes_RN$, $(x,y)\\mapsto x\\otimes y$, such that for every $R$-module $P$ and every $R$-bilinear map $\\beta:M\\times N\\to P$ there is a unique $R$-linear map $\\hat\\beta:M\\otimes_RN\\to P$ with $\\hat\\beta(x\\otimes y)=\\beta(x,y)$; it is constructed as the free $R$-module on $M\\times N$ modulo the bilinearity relations, is unique up to unique isomorphism, and is generated as an $R$-module by the elements $x\\otimes y$. For an $R$-linear map $f:N\\to P$ the $R$-linear map $f\\otimes\\mathrm{id}_M:N\\otimes_RM\\to P\\otimes_RM$ is the one with $y\\otimes x\\mapsto f(y)\\otimes x$; $f\\mapsto f\\otimes\\mathrm{id}_M$ is $R$-linear, sends $0$ to $0$ and is compatible with composition and identities: $(g\\circ f)\\otimes\\mathrm{id}_M=(g\\otimes\\mathrm{id}_M)\\circ(f\\otimes\\mathrm{id}_M)$, $\\mathrm{id}_N\\otimes\\mathrm{id}_M=\\mathrm{id}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00CV (section-tensor-product, algebra.tex line 1703): Definition 00CW of bilinear maps and Lemma Tag 00CX (lemma-tensor-product, line 1716) with the definition of M ⊗_R N after it and its construction in the proof; f ⊗ id_M is the map given by that universal property for the bilinear (y, x) ↦ f(y) ⊗ x. Tags verified in tags/tags."
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product of two modules over a commutative ring",
+   "results": "TensorProduct, TensorProduct.instModule, TensorProduct.tmul (Mathlib.LinearAlgebra.TensorProduct.Basic/Defs); ModuleCat.MonoidalCategory.tensorObj_carrier",
+   "date": "2026-10-10",
+   "verdict": "match: TensorProduct"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product M ⊗_R N of modules with universal property for bilinear maps; f ⊗ id_M linear map",
+   "results": "LinearMap.rTensor, LinearMap.rTensor_def (= TensorProduct.map f id), LinearMap.lTensor, lTensor_def (Mathlib.LinearAlgebra.TensorProduct.Basic); TensorProduct.AlgebraTensorModule.rTensor",
+   "date": "2026-10-10",
+   "verdict": "match: LinearMap.rTensor"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.lift",
+   "results": "TensorProduct.lift, TensorProduct.lift_mk, TensorProduct.lift_mk_compr₂ₛₗ (Mathlib.LinearAlgebra.TensorProduct.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def TensorProduct\\|def mk\\|def tmul' LinearAlgebra/TensorProduct/Defs.lean; grep -n 'def lift\\|lift.tmul\\|ext\\x27' LinearAlgebra/TensorProduct/Basic.lean; grep -n 'def rTensor\\|rTensor_tmul' LinearAlgebra/TensorProduct/Map.lean, in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "TensorProduct (Defs.lean:81), tmul (Defs.lean:107), mk (Defs.lean:376); lift (Basic.lean:123), lift.tmul (Basic.lean:127), ext' (Basic.lean:134); LinearMap.rTensor (Map.lean:331, := TensorProduct.map f id), rTensor_tmul (Map.lean:345)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TensorProduct",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Defs.lean",
+  "line": 81,
+  "how": "exact, one declaration per clause: `M ⊗[R] N` = `TensorProduct R M N` (Defs.lean:81, the quotient of the free additive monoid on M × N by the bilinearity relations) with `TensorProduct.mk R M N` (Defs.lean:376) the bilinear map x ⊗ₜ y; universal property `TensorProduct.lift` (Mathlib/LinearAlgebra/TensorProduct/Basic.lean:123) with `lift.tmul` (Basic.lean:127) and uniqueness `TensorProduct.ext'` (Basic.lean:134); f ⊗ id_M is `LinearMap.rTensor M f` (Mathlib/LinearAlgebra/TensorProduct/Map.lean:331) with `rTensor_tmul` (Map.lean:345), `rTensor_comp`, `rTensor_id`, linear in f by `rTensorHom` (Map.lean:410). Lines read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-koszul-regular-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
