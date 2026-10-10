@@ -108,13 +108,14 @@ theorem derivedComplete_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) (
     (hK : DerivedCategory.derivedComplete X.smallEtaleTopology I K) :
     DerivedCategory.derivedComplete Y.smallEtaleTopology I
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
-  -- For `I = (ϖ)` with `ϖ ≠ 0`, derived completeness is right orthogonality to the objects on
-  -- which `ϖ` acts invertibly (`derivedComplete_iff_rightOrthogonal`), and `Rf_*` preserves it
-  -- by adjunction.
+  -- For `I = 0` every object is derived complete. For `I = (ϖ)` with `ϖ ≠ 0`, derived
+  -- completeness is right orthogonality to the objects on which `ϖ` acts invertibly
+  -- (`derivedComplete_iff_rightOrthogonal`), and `Rf_*` preserves it by adjunction.
   obtain ⟨ϖ, hϖI⟩ := hI.principal
   by_cases h0 : ϖ = 0
-  · -- `I = 0`: every tower `K ⊗ᴸ Λ/Iⁿ` is eventually constant; not yet done
-    sorry
+  · -- `I = 0`: every object is derived complete
+    obtain rfl : I = ⊥ := by rw [hϖI, h0, Ideal.span_singleton_eq_bot]
+    exact _root_.DerivedCategory.derivedComplete_bot _
   have hϖ : ϖ ∈ nonZeroDivisors Λ := mem_nonZeroDivisors_of_ne_zero h0
   rw [_root_.DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hϖI] at hK ⊢
   exact rightOrthogonal_smulInvertible_rightDerivedLowerStar ϖ f K hK
