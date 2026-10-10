@@ -1,60 +1,200 @@
 {
- "id": "lem-weil-pbc-affine-module-finite-type",
- "kind": "statement",
- "title": "Finite type is preserved by affine module correspondence",
- "statement": "Let $u:U\\to X$ be affine [pqf-def-affine-morphism], let $\\mathcal A=u_*\\mathcal O_U$, and let $\\mathcal M$ be a quasi-coherent $\\mathcal A$-module. Then $\\mathcal M$ is of finite type over $\\mathcal A$ if and only if the corresponding quasi-coherent $\\mathcal O_U$-module under [lem-weil-pbc-affine-module-correspondence] is of finite type. Here quasi-coherence and finite type over a sheaf of algebras mean locally a presentation by free modules and locally a surjection from a finite free module, respectively [pqf-def-coherent].",
- "source": {
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Cohomology of Schemes, Lemma 0897 (coherent-lemma-graded-finiteness), proof: finite type in the equivalence of Morphisms Lemma 01SB (morphisms-lemma-affine-equivalence-modules), the details omitted there."
- },
- "stmt_deps": [
-  "lem-weil-pbc-affine-module-correspondence",
-  "pqf-def-coherent",
-  "def-pc-scheme",
-  "pqf-def-affine-morphism"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "finite type module under affine morphism corresponds to finite type sheaf",
-   "results": "No corresponding algebraic-geometry theorem; only generic Mathlib sheaf/module declarations.",
-   "date": "2026-10-10",
-   "verdict": "no match"
+  "id": "lem-weil-pbc-affine-module-finite-type",
+  "kind": "statement",
+  "title": "Finite type is preserved by affine module correspondence",
+  "statement": "Let $u:U\\to X$ be an affine morphism [pqf-def-affine-morphism] of schemes [def-pc-scheme], and let $\\mathcal A=u_*\\mathcal O_U$ [def-pc-module-pullback], the sheaf of rings on $X$ with $\\mathcal A(W)=\\mathcal O_U(u^{-1}W)$. Let $\\mathcal M$ be a sheaf of $\\mathcal A$-modules [def-weil-sheaf-of-modules-category] which is quasi-coherent as an $\\mathcal A$-module (every point of $X$ has an open neighbourhood $W$ with an exact sequence $\\bigoplus_{j\\in J}\\mathcal A|_W\\to\\bigoplus_{i\\in I}\\mathcal A|_W\\to\\mathcal M|_W\\to0$ of $\\mathcal A|_W$-modules), and let $\\mathcal F$ be a quasi-coherent $\\mathcal O_U$-module [pqf-def-coherent] together with an isomorphism of $\\mathcal A$-modules $u_*\\mathcal F\\cong\\mathcal M$, where $u_*\\mathcal F$, $W\\mapsto\\mathcal F(u^{-1}W)$, is an $\\mathcal A$-module through the $\\mathcal O_U(u^{-1}W)$-module structures (such an $\\mathcal F$ exists and is unique up to isomorphism by [lem-weil-pbc-affine-module-correspondence]). Then $\\mathcal M$ is of finite type as an $\\mathcal A$-module if and only if $\\mathcal F$ is of finite type as an $\\mathcal O_U$-module [pqf-def-coherent]. Here $\\mathcal M$ is *of finite type as an $\\mathcal A$-module* if it is of finite type [def-weil-pbc-module-finite-type-presentation](1) over the ringed space $(X,\\mathcal A)$: every point of $X$ has an open neighbourhood $W$ and finitely many sections $s_1,\\dots,s_n\\in\\mathcal M(W)$ such that the $\\mathcal A|_W$-linear map $\\mathcal A|_W^{\\oplus n}\\to\\mathcal M|_W$, $(f_1,\\dots,f_n)\\mapsto\\sum_if_is_i$, is surjective as a map of sheaves.",
+  "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0897 (coherent-lemma-graded-finiteness, coherent.tex line 5247), proof, the sentence 'Since $\\mathcal F$ is finite type as a $\\mathcal B$-module we conclude that $\\mathcal F'$ is a finite type $\\mathcal O_{X'}$-module (details omitted)' (line 5291), for the equivalence of Morphisms, Lemma 01SB (morphisms-lemma-affine-equivalence-modules, morphisms.tex line 1896); the details written out locally on affine opens of the target as in Properties, Lemma 01PB (properties-lemma-finite-type-module, properties.tex line 2093). Tags 0897, 01SB, 01PB verified in tags/tags."
   },
-  {
-   "tool": "leanfinder",
-   "query": "finite type module under affine morphism corresponds to finite type sheaf",
-   "results": "No match. Results only affine scheme equivalence, morphism finiteness, basic pullback properties, or generic sheaf free-module homomorphisms.",
-   "date": "2026-10-10",
-   "verdict": "no match"
+  "stmt_deps": [
+    "pqf-def-affine-morphism",
+    "def-pc-scheme",
+    "def-pc-module-pullback",
+    "def-weil-sheaf-of-modules-category",
+    "pqf-def-coherent",
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-affine-module-correspondence"
+  ],
+  "proof": [
+    {
+      "text": "*Step 1 (setup and reformulation).* For an open $W\\subseteq X$ write $W_U=u^{-1}(W)$, so $\\mathcal A(W)=\\mathcal O_U(W_U)$ and $(u_*\\mathcal F)(W)=\\mathcal F(W_U)$, with the $\\mathcal O_U(W_U)=\\mathcal A(W)$-module structure and the restriction maps of $\\mathcal F$ (the direct image of [def-pc-module-pullback]). The given isomorphism of $\\mathcal A$-modules $\\theta:u_*\\mathcal F\\cong\\mathcal M$ ([lem-weil-pbc-affine-module-correspondence] for its existence) carries sections generating as below to sections generating, in both directions, so $\\mathcal M$ is of finite type over $\\mathcal A$ iff $u_*\\mathcal F$ is; from now on $\\mathcal M=u_*\\mathcal F$, $\\mathcal M(W)=\\mathcal F(W_U)$. For an open $W$ and $s_1,\\dots,s_n\\in\\mathcal M(W)$ let $\\sigma_s:\\mathcal A|_W^{\\oplus n}\\to\\mathcal M|_W$, $(f_i)\\mapsto\\sum_if_is_i|$. An $\\mathcal A|_W$-linear map is an epimorphism in $\\Mod(\\mathcal A|_W)$ iff it is surjective as a map of sheaves, since the cokernel is the sheafification of the sectionwise cokernel [def-weil-sheaf-of-modules-category], which is zero iff every local section is locally in the image. So $\\sigma_s$ is an epimorphism iff for every open $W'\\subseteq W$ and $t\\in\\mathcal M(W')$ there is an open covering $W'=\\bigcup_kW'_k$ with $t|_{W'_k}=\\sum_if_{ik}s_i|_{W'_k}$, $f_{ik}\\in\\mathcal A(W'_k)$; we then say that the $s_i$ *generate $\\mathcal M|_W$ over $\\mathcal A|_W$*. By [def-weil-pbc-module-finite-type-presentation](1) for the ringed space $(X,\\mathcal A)$, $\\mathcal M$ is of finite type over $\\mathcal A$ iff every point of $X$ has an open neighbourhood $W$ with finitely many sections of $\\mathcal M(W)$ generating $\\mathcal M|_W$ over $\\mathcal A|_W$. If the $s_i$ generate $\\mathcal M|_W$ over $\\mathcal A|_W$ and $W_1\\subseteq W$ is open, the restrictions $s_i|_{W_1}$ generate $\\mathcal M|_{W_1}$ over $\\mathcal A|_{W_1}$ (an open $W'\\subseteq W_1$ is an open of $W$). Finally, for an affine open $V\\subseteq X$ the open $V_U$ is affine because $u$ is affine [pqf-def-affine-morphism]; put $B=\\mathcal A(V)=\\mathcal O_U(V_U)$. Every point of an open $W\\subseteq X$ lies in an affine open $V\\subseteq W$, the open subscheme $W$ being a scheme [def-pc-scheme].",
+      "uses": [
+        "def-pc-module-pullback",
+        "lem-weil-pbc-affine-module-correspondence",
+        "def-weil-sheaf-of-modules-category",
+        "def-weil-pbc-module-finite-type-presentation",
+        "pqf-def-affine-morphism",
+        "def-pc-scheme"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291 '(details omitted)'; local argument as in Properties 01PB (properties-lemma-finite-type-module)"
+      }
+    },
+    {
+      "text": "*Step 2 (generation over $\\mathcal A$ on an affine open gives generation of the sections).* Let $V\\subseteq X$ be an affine open, $B$ as in Step 1, and $s_1,\\dots,s_n\\in\\mathcal M(V)=\\mathcal F(V_U)$ generating $\\mathcal M|_V$ over $\\mathcal A|_V$. Then $\\mathcal F(V_U)=\\sum_iBs_i$. Proof: $V_U$ is an affine scheme; $\\mathcal F|_{V_U}$ is quasi-coherent [lem-weil-pbc-module-restriction-open-immersion-colimits](2); and, transported along $V_U\\cong\\operatorname{Spec}B$, $\\mathcal O_{V_U}^{\\oplus n}$ is quasi-coherent with $\\Gamma(V_U,\\mathcal O_{V_U}^{\\oplus n})=B^n$, the basis sections being the standard basis [lem-weil-pbc-spec-tilde-free-module]. Let $\\psi:\\mathcal O_{V_U}^{\\oplus n}\\to\\mathcal F|_{V_U}$, $(g_i)\\mapsto\\sum_ig_is_i|$, an $\\mathcal O_{V_U}$-linear map of quasi-coherent modules with $\\psi_{V_U}(B^n)=\\sum_iBs_i$. Let $t\\in\\mathcal F(V_U)=\\mathcal M(V)$. By generation there is an open covering $V=\\bigcup_kV_k$ with $t|_{V_k}=\\sum_if_{ik}s_i|_{V_k}$ and $f_{ik}\\in\\mathcal A(V_k)=\\mathcal O_U((V_k)_U)$; read in $\\mathcal F$ this says $t|_{(V_k)_U}=\\psi_{(V_k)_U}((f_{ik})_i)$, and the opens $(V_k)_U$ cover $V_U$. So $t$ is locally in the image of $\\psi$, i.e. $t\\in(\\operatorname{Im}\\psi)(V_U)$, and by [lem-weil-pbc-quasi-coherent-module-cokernel-image](3) (for the scheme $V_U$ and its affine open $V_U$) $(\\operatorname{Im}\\psi)(V_U)=\\psi_{V_U}(B^n)=\\sum_iBs_i$.",
+      "uses": [
+        "lem-weil-pbc-module-restriction-open-immersion-colimits",
+        "lem-weil-pbc-spec-tilde-free-module",
+        "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+        "pqf-def-coherent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291 '(details omitted)'; local argument as in Properties 01PB (properties-lemma-finite-type-module)"
+      }
+    },
+    {
+      "text": "*Step 3 (generation of $\\mathcal F$ on $V_U$ gives generation over $\\mathcal A$ on $V$).* Let $V\\subseteq X$ be an affine open and $s_1,\\dots,s_n\\in\\mathcal M(V)=\\mathcal F(V_U)$ sections which generate the $\\mathcal O_{V_U}$-module $\\mathcal F|_{V_U}$ [def-weil-pbc-generating-sections] (on the scheme $V_U$). Then the $s_i$ generate $\\mathcal M|_V$ over $\\mathcal A|_V$. Proof: with $\\psi$ as in Step 2, the hypothesis says that $\\psi$ is surjective as a map of sheaves, i.e. $\\operatorname{Im}\\psi=\\mathcal F|_{V_U}$. Let $W\\subseteq V$ be open and $t\\in\\mathcal M(W)=\\mathcal F(W_U)$. Every $x\\in W$ lies in an affine open $V'\\subseteq W$ (Step 1, [def-pc-scheme]), and $V'_U$ is an affine open of the scheme $V_U$ since $u$ is affine [pqf-def-affine-morphism]. By [lem-weil-pbc-quasi-coherent-module-cokernel-image](3) for the scheme $V_U$ and its affine open $V'_U$, $\\mathcal F(V'_U)=(\\operatorname{Im}\\psi)(V'_U)=\\psi_{V'_U}(\\mathcal O_U(V'_U)^n)$, so $t|_{V'_U}=\\sum_if_is_i|_{V'_U}$ with $f_i\\in\\mathcal O_U(V'_U)=\\mathcal A(V')$, which is the equation $t|_{V'}=\\sum_if_is_i|_{V'}$ in $\\mathcal M(V')$. These $V'$ cover $W$, so the $s_i$ generate $\\mathcal M|_V$ over $\\mathcal A|_V$ (Step 1).",
+      "uses": [
+        "def-weil-pbc-generating-sections",
+        "def-pc-scheme",
+        "pqf-def-affine-morphism",
+        "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291 '(details omitted)'; local argument as in Properties 01PB (properties-lemma-finite-type-module)"
+      }
+    },
+    {
+      "text": "*Step 4 ($\\mathcal M$ of finite type over $\\mathcal A$ implies $\\mathcal F$ of finite type).* Let $y\\in U$ and $x=u(y)$. Choose an open $W\\ni x$ and $s_1,\\dots,s_n\\in\\mathcal M(W)$ generating $\\mathcal M|_W$ over $\\mathcal A|_W$, and an affine open $V$ with $x\\in V\\subseteq W$; the restrictions $s_i|_V$ generate $\\mathcal M|_V$ over $\\mathcal A|_V$ (Step 1). By Step 2, $\\mathcal F(V_U)=\\sum_iB\\,s_i|_V$ is a finitely generated $B$-module [def-weil-finitely-generated-module], with $B=\\mathcal O_U(V_U)$ and $V_U$ an affine open of $U$ containing $y$. As $\\mathcal F$ is quasi-coherent, [lem-weil-pbc-quasi-coherent-finite-type-affine](a) (for the scheme $U$ and its affine open $V_U$) gives that $\\mathcal F|_{V_U}$ is of finite type, so $y$ has an open neighbourhood $V''\\subseteq V_U$ with a surjection $\\mathcal O_{V''}^{\\oplus m}\\to\\mathcal F|_{V''}$, which is the condition of [pqf-def-coherent] for $\\mathcal F$ at $y$. As $y$ was arbitrary, $\\mathcal F$ is of finite type.",
+      "uses": [
+        "def-weil-finitely-generated-module",
+        "lem-weil-pbc-quasi-coherent-finite-type-affine",
+        "pqf-def-coherent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291 '(details omitted)'; local argument as in Properties 01PB (properties-lemma-finite-type-module)"
+      }
+    },
+    {
+      "text": "*Step 5 ($\\mathcal F$ of finite type implies $\\mathcal M$ of finite type over $\\mathcal A$).* Let $x\\in X$ and $V\\ni x$ an affine open (Step 1). Since $\\mathcal F$ is quasi-coherent of finite type and $V_U$ is an affine open of $U$, [lem-weil-pbc-quasi-coherent-finite-type-affine](c) gives that $\\mathcal F(V_U)$ is a finitely generated $B$-module; choose generators $s_1,\\dots,s_n$. The $\\mathcal O_{V_U}$-module $\\mathcal F|_{V_U}$ is quasi-coherent [lem-weil-pbc-module-restriction-open-immersion-colimits](2) and of finite type (the restriction of a surjection $\\mathcal O_{W''}^{\\oplus m}\\to\\mathcal F|_{W''}$ to $W''\\cap V_U$ is still surjective as a map of sheaves), so by [lem-weil-pbc-affine-finite-type-generating-sections] (for the affine scheme $V_U$) the family $s_1,\\dots,s_n$, which generates $\\Gamma(V_U,\\mathcal F)=\\mathcal F(V_U)$, generates $\\mathcal F|_{V_U}$. By Step 3 the sections $s_i\\in\\mathcal M(V)$ generate $\\mathcal M|_V$ over $\\mathcal A|_V$. As $x$ was arbitrary, $\\mathcal M$ is of finite type over $\\mathcal A$ by the reformulation of Step 1.",
+      "uses": [
+        "lem-weil-pbc-quasi-coherent-finite-type-affine",
+        "lem-weil-pbc-module-restriction-open-immersion-colimits",
+        "lem-weil-pbc-affine-finite-type-generating-sections",
+        "def-weil-finitely-generated-module"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/coherent.tex",
+        "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291 '(details omitted)'; local argument as in Properties 01PB (properties-lemma-finite-type-module)"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-affine-module-correspondence",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-finite-type-presentation",
+    "pqf-def-affine-morphism",
+    "def-pc-scheme",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-spec-tilde-free-module",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "pqf-def-coherent",
+    "def-weil-pbc-generating-sections",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-finite-type-generating-sections"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 0897 (coherent-lemma-graded-finiteness), proof, line 5291: the source states the finite-type clause with '(details omitted)'; the details are written by an agent, locally on affine opens of the target as in Properties, Lemma 01PB (properties-lemma-finite-type-module) and the affine-local check of Morphisms, Lemma 01SB."
   },
-  {
-   "tool": "grep",
-   "query": "rg -n 'affine-equivalence-modules|pullback-ample|kill-by-twisting|Serre vanishing' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib; rg -n 'Quasicoherent|projectionFormula' Mathlib/AlgebraicGeometry/Modules Mathlib/Algebra/Category/ModuleCat/Sheaf",
-   "results": "No target theorem. Tilde.lean:842 has isIso_fromTildeΓ_of_isQuasicoherent for Spec R only; it is not the relative affine module correspondence or finite-type preservation. No ample or Serre vanishing theory.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-formal-systems-graded-vanishing",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none"
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "finite type module under affine morphism corresponds to finite type sheaf",
+      "results": "No corresponding algebraic-geometry theorem; only generic Mathlib sheaf/module declarations.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "finite type module under affine morphism corresponds to finite type sheaf",
+      "results": "No match. Results only affine scheme equivalence, morphism finiteness, basic pullback properties, or generic sheaf free-module homomorphisms.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'affine-equivalence-modules|pullback-ample|kill-by-twisting|Serre vanishing' /home/ubuntu/SHEAF/project/lean/.lake/packages/mathlib/Mathlib; rg -n 'Quasicoherent|projectionFormula' Mathlib/AlgebraicGeometry/Modules Mathlib/Algebra/Category/ModuleCat/Sheaf",
+      "results": "No target theorem. Tilde.lean:842 has isIso_fromTildeΓ_of_isQuasicoherent for Spec R only; it is not the relative affine module correspondence or finite-type preservation. No ample or Serre vanishing theory.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "pushforward along an affine morphism of a quasi-coherent sheaf of finite type is of finite type over the pushforward of the structure sheaf",
+      "results": "AlgebraicGeometry.Scheme.Modules.pushforward (Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafOfModules.pushforward, SheafOfModules.pushforwardSections, AlgebraicGeometry.IsFinite.finite_app, LocallyOfFiniteType.finiteType_appLE, Scheme.IdealSheafData.ideal_map_of_isAffineHom; none about finite type modules over u_*O_U",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For an affine morphism of schemes f : X -> S, a quasi-coherent O_X-module is of finite type iff f_* of it is a finite type module over the sheaf of algebras f_* O_X",
+      "results": "Scheme.Hom.finite_app, IsFinite.finite_app, Scheme.Hom.finiteType_appLE, locallyOfFiniteType_iff, locallyQuasiFinite_iff (morphism finiteness only)",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "sheaf of modules of finite type, pushforward along affine morphism, equivalence of quasi-coherent modules with quasi-coherent modules over f_* O_X",
+      "results": "SheafOfModules.IsFiniteType (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators, the definition only), SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, Scheme.Modules.pushforward, QuasicoherentData.IsFinitePresentation; no statement relating IsFiniteType and pushforward along an affine morphism",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "SheafOfModules.IsFiniteType, AlgebraicGeometry.IsAffineHom (and SheafOfModules.IsFiniteType, AlgebraicGeometry.Scheme.Modules.pushforward)",
+      "results": "not answered: rate limit exceeded on three attempts; the LeanFinder searches above are the second kind",
+      "date": "2026-10-10",
+      "verdict": "no result"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'IsFiniteType' Mathlib/ | grep -i 'pushforward|affine|Scheme'; grep -rln IsAffineHom Mathlib/ | grep -i modul; ls Mathlib/AlgebraicGeometry/Modules/ (slopmaster2 Mathlib)",
+      "results": "IsFiniteType occurs only in Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean (class at line 142, local generators) and Sheaf/Quasicoherent.lean; no hit combining it with pushforward, affine morphisms or schemes; AlgebraicGeometry/Modules has only Presheaf.lean, Sheaf.lean, Tilde.lean, no affine module correspondence",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-formal-systems-graded-vanishing",
+    "date": "2026-10-10"
   },
-  "slopmaster2": {
-   "state": "none"
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-weil-pbc-affine-module-finite-type",
+    "worker": "stage1",
+    "summary": "Mathlib leaf decision (B8): not a leaf; Mathlib has SheafOfModules.IsFiniteType and Scheme.Modules.pushforward but no relative affine module correspondence and no finite-type transfer (LeanSearch, LeanFinder twice, grep; Loogle rate-limited). Statement reworded: finite type over the sheaf of algebras A was cited to pqf-def-coherent, which defines finite type only for O_X-modules; it is now defined in the statement and cited to def-weil-pbc-module-finite-type-presentation(1) over the ringed space (X,A); quasi-coherence over A is spelled out; F is introduced with an isomorphism u_*F = M (existence and uniqueness from lem-weil-pbc-affine-module-correspondence) instead of 'the corresponding module'; def-pc-module-pullback (direct image), def-weil-sheaf-of-modules-category added to stmt_deps. Source document corrected from morphisms.tex to coherent.tex (Lemma 0897 is in coherent.tex, line 5247; '(details omitted)' at line 5291). Proof written out (the source omits it), local on X: Step 1 reduces to M = u_*F and reformulates finite type over A as local generation by sections; Step 2 (affine V) generation over A|_V gives F(u^{-1}V)=sum B s_i via the image sheaf of O^n -> F on the affine u^{-1}V; Step 3 the converse via the cokernel-image lemma on affine opens u^{-1}V' (u affine); Steps 4-5 the two implications using lem-weil-pbc-quasi-coherent-finite-type-affine and lem-weil-pbc-affine-finite-type-generating-sections. All cited statements are in unit sk-thm-p1 or are definitions / Mathlib leaves; no new node."
+  },
+  "reviewed": "pass (L, 2026-10-10): 5 steps by agent (the \"details omitted\" of 0897): on an affine open V with affine preimage, generation of M|_V over A|_V and generation of F on the preimage are both the statement that the sections span F(V_U) over B (image sheaf on affines), so finite type over A and finite type of F coincide via the affine finite-type criteria. Statement reworded to define finite type over the sheaf of algebras A on the ringed space (X, A); source document corrected to coherent.tex."
 }
