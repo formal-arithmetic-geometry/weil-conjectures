@@ -1,8 +1,8 @@
 # Work queue
 
-928 items; claim with `tools/claim.py next <group> [--stage N]`.
+926 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (323)
+## Stage 1: nodes to split (321)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-etale-sections-equal-open` | 2007 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 2008 | none |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 2008 | none |
-| `lem-weil-pbc-sets-etale-inverse-image-exact` | 2012 | none |
 | `lem-sc-irreducible-noetherian-constant-acyclic` | 2013 | none |
 | `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
 | `lem-sc-noetherian-open-closed-cohomology-sequence` | 2013 | none |
@@ -36,7 +35,6 @@
 | `lem-sc-p1-boundary-connecting-naturality` | 3014 | none |
 | `lem-sc-p1-boundary-one-extension-class` | 3014 | none |
 | `lem-sc-p1-pullback-extension-class` | 3014 | none |
-| `lem-sc-scheme-over-field-universally-open` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
 | `lem-sc-support-dimension-cohomology-vanishing` | 3014 | none |
 | `lem-sp-cartan-eilenberg-properties` | 3014 | none |
@@ -940,7 +938,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 340 nodes that wait for stage 1, 1254 nodes that wait for a statement dependency.
+Not open yet: 338 nodes that wait for stage 1, 1255 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
