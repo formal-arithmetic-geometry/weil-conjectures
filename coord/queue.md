@@ -1,8 +1,8 @@
 # Work queue
 
-920 items; claim with `tools/claim.py next <group> [--stage N]`.
+919 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (195)
+## Stage 1: nodes to split (193)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -57,13 +57,11 @@
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
-| `pqf-lem-leray-lowdegree` | 6011 | none |
-| `pqf-lem-qf-finitefibres` | 6011 | none |
+| `lem-pqf-leray-five-term` | 6012 | none |
 | `pqf-lem-locqf-fibre-discrete` | 6012 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `def-weil-t-structure` | - | none |
 | `lemma-nagata-final-descended-model` | - | none |
-| `def-nagata-final-noetherian-base-system` | - | none |
 | `def-nagata-fixed-base-separated-stage` | - | none |
 | `def-nagata-separated-descent-stage` | - | none |
 | `def-pur-sheaf-tensor-product` | - | none |
@@ -202,7 +200,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (725)
+## Stage 2: nodes to state (726)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -897,6 +895,7 @@
 | `pqf-lem-finite-qf` | 1 | state |
 | `pqf-lem-image-proper` | 1 | state |
 | `pqf-lem-proper-basic` | 1 | state |
+| `pqf-lem-qf-finitefibres` | 1 | state |
 | `pqf-lem-sheaf-zero-stalks` | 1 | state |
 | `lem-fet-galois-category` | 2 | state |
 | `lem-fet-locally-trivial` | 2 | state |
@@ -932,7 +931,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1434 nodes that wait for a statement dependency, 233 nodes that wait for stage 1.
+Not open yet: 1436 nodes that wait for a statement dependency, 231 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
