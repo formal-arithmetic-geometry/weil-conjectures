@@ -35,9 +35,70 @@
   "def-pur-sheaf-hom",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x\\in X$. By [def-weil-pbc-module-finite-type-presentation](2), choose an open neighbourhood $U$ of $x$, integers $m,n\\ge0$, and $a:\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}$ with cokernel map $b:\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$ (composing the chosen cokernel with its isomorphism to $\\mathcal G|_U$). By [lem-weil-pbc-module-restriction-open-immersion-colimits](2), $\\mathcal F|_U$ is quasi-coherent. For every open $W\\subseteq U$, part (1) of that same node preserves the cokernel diagram, so $b|_W$ is a cokernel of $a|_W$. The free modules restrict to $\\mathcal O_W^{\\oplus m}$ and $\\mathcal O_W^{\\oplus n}$: their sections and restrictions are the same componentwise ones on opens contained in $W$.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules 01CQ, lemma-internal-hom-locally-kernel-direct-sum, first assertion, using its local finite presentation"
+   }
+  },
+  {
+   "text": "Put $\\mathcal E=\\mathcal F|_U$. Every finite sum $\\mathcal E^{\\oplus r}$ is quasi-coherent: for $r=0$, the zero module is the sectionwise kernel of $\\operatorname{id}_{\\mathcal E}$, hence quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel]; for $r+1$, its sectionwise decomposition $\\mathcal E^{\\oplus(r+1)}=\\mathcal E^{\\oplus r}\\oplus\\mathcal E$ and [lem-weil-pbc-quasi-coherent-module-direct-sum] give the induction step. In particular both the $n$-fold and $m$-fold sums are quasi-coherent, including zero ranks.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-direct-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "01LA, section-quasi-coherent, items (3), (5), (10)"
+   }
+  },
+  {
+   "text": "Write $a(e_k)=\\sum_{i=1}^n a_{ik}e_i$, with $a_{ik}\\in\\mathcal O_X(U)$, and define the morphism $A:\\mathcal E^{\\oplus n}\\to\\mathcal E^{\\oplus m}$ on an open $W\\subseteq U$ by $A_W((s_i))=(\\sum_i a_{ik}|_W s_i)_k$. It is linear and commutes with restriction by this formula. An $\\mathcal O_W$-linear morphism $\\chi:\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W$ is uniquely determined by $s_i=\\chi_W(e_i)$, by [def-weil-pbc-module-finite-type-presentation]. It annihilates $a|_W$ exactly when $A_W((s_i))=0$. Since $b|_W$ is a cokernel, such a $\\chi$ factors uniquely as $\\psi\\circ b|_W$, where $\\psi:\\mathcal G|_W\\to\\mathcal F|_W$. Thus $\\psi\\mapsto(\\psi_W(b_W(e_i)))_i$ is a linear bijection from $\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)(W)$ to $\\ker A_W$. Its formula commutes with restriction; the inverse does too by uniqueness of factorization. Hence [def-pur-sheaf-hom] identifies the restriction of the Hom sheaf to $U$ with the sectionwise kernel $\\ker A$. By [lem-weil-pbc-quasi-coherent-module-kernel] and Step 2 this kernel is quasi-coherent.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules 01CQ, lemma-internal-hom-locally-kernel-direct-sum, first assertion (finite presentation calculation); Schemes 01LA, item (10)"
+   }
+  },
+  {
+   "text": "For the arbitrary point $x$, quasi-coherence of the Hom sheaf on $U$ supplies an affine neighbourhood $V\\subseteq U$ of $x$ on which it is $\\widetilde M$ for a module $M$, by [pqf-def-coherent]. Since $U$ is open in $X$, $V$ is also an affine open neighbourhood in $X$ and the restriction of the original Hom sheaf to $V$ is the same sheaf. Every $x$ therefore has the affine neighbourhood required by [pqf-def-coherent], proving the claim.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "01LA, section-quasi-coherent, locality and item (10)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "def-pur-sheaf-hom",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "01LA, section-quasi-coherent, item (10), via Modules 01CQ, lemma-internal-hom-locally-kernel-direct-sum"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,10 +120,31 @@
    "results": "none: Mathlib has no sheaf Hom of sheaves of modules (only the presheaf monoidal structure in ModuleCat/Presheaf/Monoidal.lean)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf Hom finitely presented module quasicoherent kernel finite sums",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation / mk; Scheme.Modules.Hom; SheafOfModules.Hom. None states internal Hom quasi-coherent.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of a morphism of quasi coherent sheaves on a scheme is quasi coherent finite direct sums",
+   "results": "v4.28.0 index: Scheme.Modules.instAbelian; Scheme.Hom.ker_apply; Scheme.kerFunctor. These concern ambient abelian modules or scheme kernel ideals, not this internal Hom.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg SheafHom|internalHom|ihom|MonoidalClosed /tmp/mathlib-f1/Mathlib/Algebra/Category/ModuleCat/Sheaf /tmp/mathlib-f1/Mathlib/AlgebraicGeometry/Modules; rg same concepts /home/ubuntu/weil-src-slopmaster2/WeilConjectures/AlgebraicGeometry/Modules and WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "Mathlib source snapshot /tmp/mathlib-f1 at aa4180fd65f90dd50307a354941dfbee635cf9d2 (read .git/HEAD and refs/heads/master): only Hom.toRingCatSheafHom (map of ring sheaves), no internal Hom quasi-coherence. Source repository has descent presheafHom, not this statement. Its lake-manifest pins mathlib 0df444a360eaa60ab8c11dca51a86af692955474, unavailable as compiled checkout here; searched snapshot differs. No leaf claimed.",
+   "date": "2026-10-10",
+   "verdict": "no matching declaration in searched snapshot; no exact closed source-repository declaration found"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -83,5 +165,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 01LA (10)"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of M1; spot-checked by L: L: 01CQ/01LA (10): Hom out of a finite presentation is a kernel of a map of finite sums of F"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaf-hom-finite-presentation-quasi-coherent",
+  "worker": "stage1",
+  "summary": "Read 01LA(10) and 01CQ. Split via local finite presentation, finite sums and kernels. Restriction-colimits node supplies both restricted quasi-coherence and cokernel preservation. Wrote the coordinate kernel identification directly from the cokernel universal property, handling zero ranks. No new nodes.",
+  "blueprint": "Realizes finite-etale-lifting step 7 through 01YB second proof paragraph, its assertion that SheafHom(G,F) is quasi-coherent (01LA). Whole-blueprint searches for sheaf Hom/internal hom found no equal blueprint statement."
+ }
 }
