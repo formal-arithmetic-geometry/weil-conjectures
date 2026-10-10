@@ -22,9 +22,126 @@
   "def-sc-invertible-module",
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Trivializations, and $\\eta$ in every nonempty open.* By [def-sc-invertible-module] every $x\\in X$ has an open neighbourhood $W$ with an isomorphism of $\\mathcal O_W$-modules $\\varphi:\\mathcal L|_W\\xrightarrow{\\sim}\\mathcal O_W$; by [def-weil-sheaf-of-modules-category] (a morphism of sheaves of modules is $\\mathcal O(V)$-linear on each $V$) this is a family of $\\mathcal O_X(V)$-linear bijections $\\varphi_V:\\mathcal L(V)\\to\\mathcal O_X(V)$, $V\\subseteq W$ open, with $\\varphi_{V'}(\\sigma|_{V'})=\\varphi_V(\\sigma)|_{V'}$ for $V'\\subseteq V$. Call such $(W,\\varphi)$ a trivialization; if $U\\subseteq X$ is open then $(W\\cap U,\\varphi|_{W\\cap U})$ is again one. Every nonempty open $V\\subseteq X$ contains $\\eta$: otherwise $\\eta$ lies in the closed set $X\\setminus V$, so $X=\\overline{\\{\\eta\\}}\\subseteq X\\setminus V$ [def-sc-generic-point], and $V=\\emptyset$. In particular every open neighbourhood of a point $x$ contains $\\eta$, and the intersection of two nonempty opens is a nonempty open (it contains $\\eta$).",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-sheaf-of-modules-category",
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme), part (2), proof 'Omitted': written out here for an invertible $\\mathcal L$; the local triviality of $\\mathcal L$ is its definition [def-sc-invertible-module]"
+   }
+  },
+  {
+   "text": "*$\\lambda_x$ is well defined and semilinear over $\\rho_x$.* By [def-weil-pbc-module-stalk] every element of $\\mathcal L_x$ is a germ $\\sigma_x$, $\\sigma\\in\\mathcal L(V)$, $V\\ni x$ open, and $\\sigma_x=\\sigma'_x$ ($\\sigma'\\in\\mathcal L(V')$) iff $\\sigma|_{V''}=\\sigma'|_{V''}$ for an open $x\\in V''\\subseteq V\\cap V'$; since $\\eta\\in V''$ (step 1) this gives $\\sigma_\\eta=\\sigma'_\\eta$, so $\\lambda_x(\\sigma_x):=\\sigma_\\eta$ is well defined; likewise $\\rho_x(r_x):=r_\\eta$. It is additive, and for $r\\in\\mathcal O_X(V)$, $\\sigma\\in\\mathcal L(V)$ the rule $(r\\sigma)_y=r_y\\sigma_y$ of [def-weil-pbc-module-stalk] at $y=x$ and $y=\\eta$ gives $\\lambda_x(a\\,m)=\\rho_x(a)\\,\\lambda_x(m)$ for $a\\in\\mathcal O_{X,x}$, $m\\in\\mathcal L_x$ (represent $a,m$ on a common neighbourhood). For $x\\in U$ and $\\sigma\\in\\mathcal L(U)$, $\\lambda_x(\\sigma_x)=\\sigma_\\eta=\\lambda_U(\\sigma)$ by definition.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme), part (2), proof 'Omitted': written out here for an invertible $\\mathcal L$: the maps $\\mathcal F_x\\to\\mathcal F_\\eta$ to the constant value"
+   }
+  },
+  {
+   "text": "*Stalks of a trivialization.* Let $(W,\\varphi)$ be a trivialization (step 1) and $y\\in W$. Define $\\varphi_y:\\mathcal L_y\\to\\mathcal O_{X,y}$ by $\\varphi_y(\\sigma_y)=\\varphi_{V\\cap W}(\\sigma|_{V\\cap W})_y$ for $\\sigma\\in\\mathcal L(V)$, $y\\in V$. It is well defined: if $\\sigma_y=\\sigma'_y$, then $\\sigma,\\sigma'$ agree on some open $y\\in V''\\subseteq V\\cap V'\\cap W$ [def-weil-pbc-module-stalk], and by compatibility with restriction $\\varphi_{V\\cap W}(\\sigma|_{V\\cap W})$ and $\\varphi_{V'\\cap W}(\\sigma'|_{V'\\cap W})$ agree on $V''$, so have the same germ at $y$. It is $\\mathcal O_{X,y}$-linear since each $\\varphi_V$ is $\\mathcal O_X(V)$-linear, and the same construction for the inverse family $(\\varphi_V^{-1})$ gives a two-sided inverse; so $\\varphi_y$ is an isomorphism of $\\mathcal O_{X,y}$-modules. Since $\\eta\\in W$ (step 1), $\\varphi_\\eta:\\mathcal L_\\eta\\to k(X)$ is a $k(X)$-linear isomorphism, and for $y\\in W$, $m\\in\\mathcal L_y$: $\\varphi_\\eta(\\lambda_y(m))=\\rho_y(\\varphi_y(m))$ (both sides are $\\varphi_V(\\sigma)_\\eta$ for a representative $\\sigma\\in\\mathcal L(V)$ of $m$ with $V\\subseteq W$). Also $\\varphi_\\eta(\\sigma_\\eta)=\\varphi_V(\\sigma)_\\eta$ for $\\sigma\\in\\mathcal L(V)$, $V\\subseteq W$ nonempty open.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme), part (2), proof 'Omitted': written out here for an invertible $\\mathcal L$; the reduction to $\\mathcal O_X$ on a trivializing open"
+   }
+  },
+  {
+   "text": "*Clause 1.* Let $x\\in X$ and $(W,\\varphi)$ a trivialization with $x\\in W$ (step 1). By step 3, $\\varphi_x:\\mathcal L_x\\to\\mathcal O_{X,x}$ is an isomorphism of $\\mathcal O_{X,x}$-modules, so $\\mathcal L_x$ is free with the basis $\\varphi_x^{-1}(1)$; as $\\mathcal O_{X,x}$ is an integral domain [lem-sc-integral-scheme-stalks-in-function-field] (2), hence a nonzero commutative ring, this basis has one element and the rank is one. For $x=\\eta$: $\\mathcal O_{X,\\eta}=k(X)$ is a field [def-sc-function-field], so $\\mathcal L_\\eta$ is a one-dimensional $k(X)$-vector space.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-sc-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "proof of Tag 02OZ (divisors-lemma-regular-meromorphic-section-exists), case (1): 'Since $\\dim_{\\kappa(\\eta)}\\mathcal L_\\eta=1$'"
+   }
+  },
+  {
+   "text": "*Clause 2.* Let $x\\in X$ and $(W,\\varphi)$ a trivialization with $x\\in W$. By step 3 (with $y=x$), $\\lambda_x=\\varphi_\\eta^{-1}\\circ\\rho_x\\circ\\varphi_x$; $\\varphi_x$ and $\\varphi_\\eta^{-1}$ are bijective (step 3) and $\\rho_x$ is injective [lem-sc-integral-scheme-stalks-in-function-field] (2), so $\\lambda_x$ is injective. Let $e$ generate $\\mathcal L_x$. Then $u:=\\varphi_x(e)$ generates the free rank-one module $\\mathcal O_{X,x}$, so $u$ is a unit, in particular $u\\neq0$ ($\\mathcal O_{X,x}$ is a domain, clause 1); hence $\\rho_x(u)\\neq0$ in the field $k(X)$ by injectivity of $\\rho_x$, so $\\rho_x(u)$ is a $k(X)$-basis of $k(X)$ and $\\lambda_x(e)=\\varphi_\\eta^{-1}(\\rho_x(u))$ is a $k(X)$-basis of $\\mathcal L_\\eta$, $\\varphi_\\eta$ being $k(X)$-linear. Finally $\\mathcal L_x=\\mathcal O_{X,x}e$, and by the semilinearity of step 2, $\\lambda_x(ae)=\\rho_x(a)\\lambda_x(e)$; so $\\lambda_x(\\mathcal L_x)=\\rho_x(\\mathcal O_{X,x})\\cdot\\lambda_x(e)=\\mathcal O_{X,x}\\cdot\\lambda_x(e)$ with $\\mathcal O_{X,x}\\subseteq k(X)$ through $\\rho_x$.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme), part (2), proof 'Omitted': written out here for an invertible $\\mathcal L$: the maps $\\mathcal L_x\\to\\mathcal L_\\eta$; injectivity is the structure-sheaf case transported by the trivialization"
+   }
+  },
+  {
+   "text": "*Clause 3, injectivity of $\\lambda_U$.* Let $U\\neq\\emptyset$ be open and $\\sigma\\in\\mathcal L(U)$ with $\\sigma_\\eta=0$. For every $x\\in U$, $\\lambda_x(\\sigma_x)=\\sigma_\\eta=0$ (step 2), so $\\sigma_x=0$ by clause 2 (step 5). Thus $\\sigma$ and $0$ have the same germ at every point of $U$; the underlying sheaf of sets of the sheaf of abelian groups $\\mathcal L$ [def-weil-sheaf-of-modules-category] is a sheaf on $X$, so $\\sigma=0$ by [lem-weil-pbc-sheaf-sections-determined-by-germs]. As $\\lambda_U$ is additive, it is injective.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-sheaf-sections-determined-by-germs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme), part (2), proof 'Omitted': written out here for an invertible $\\mathcal L$: $\\mathcal L(U)\\to\\mathcal L_\\eta$ injective, i.e. $\\mathcal L\\subseteq$ the constant sheaf $\\mathcal L_\\eta$"
+   }
+  },
+  {
+   "text": "*Clause 3, the image lies in the intersection.* If $\\tau=\\lambda_U(\\sigma)$, $\\sigma\\in\\mathcal L(U)$, then for every $x\\in U$, $\\tau=\\sigma_\\eta=\\lambda_x(\\sigma_x)\\in\\lambda_x(\\mathcal L_x)$ (step 2).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme), part (2), proof 'Omitted': written out here for an invertible $\\mathcal L$"
+   }
+  },
+  {
+   "text": "*Clause 3, local preimages.* Let $\\tau\\in\\mathcal L_\\eta$ with $\\tau\\in\\lambda_x(\\mathcal L_x)$ for all $x\\in U$. For each $x\\in U$ choose a trivialization $(W,\\varphi)$ with $x\\in W$ and put $U_x:=W\\cap U$, a nonempty open containing $x$ and $\\eta$, with the trivialization $\\varphi|_{U_x}$ (step 1); put $g_x:=\\varphi_\\eta(\\tau)\\in k(X)$. For $y\\in U_x$ write $\\tau=\\lambda_y(m)$ with $m\\in\\mathcal L_y$; by step 3, $g_x=\\varphi_\\eta(\\lambda_y(m))=\\rho_y(\\varphi_y(m))\\in\\rho_y(\\mathcal O_{X,y})$. By [lem-sc-function-field-sections-glue] applied to the nonempty open $U_x$ and $g_x$, there is $s_x\\in\\mathcal O_X(U_x)$ with $(s_x)_\\eta=g_x$. Put $\\sigma_x:=\\varphi_{U_x}^{-1}(s_x)\\in\\mathcal L(U_x)$; by step 3, $\\varphi_\\eta((\\sigma_x)_\\eta)=\\varphi_{U_x}(\\sigma_x)_\\eta=(s_x)_\\eta=g_x=\\varphi_\\eta(\\tau)$, so $(\\sigma_x)_\\eta=\\tau$ as $\\varphi_\\eta$ is injective.",
+   "uses": [
+    "lem-sc-function-field-sections-glue"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme), part (2), proof 'Omitted': written out here for an invertible $\\mathcal L$: a section of the constant sheaf $\\mathcal L_\\eta$ lying in every stalk comes from $\\mathcal L$; the case $\\mathcal O_X$ on each trivializing open"
+   }
+  },
+  {
+   "text": "*Clause 3, gluing.* With the notation of step 8, the opens $U_x$ ($x\\in U$) cover $U$. For $x,x'\\in U$, $U_x\\cap U_{x'}$ is a nonempty open (it contains $\\eta$, step 1), and $\\sigma_x|_{U_x\\cap U_{x'}}$, $\\sigma_{x'}|_{U_x\\cap U_{x'}}$ both have germ $\\tau$ at $\\eta$; by the injectivity of $\\lambda_{U_x\\cap U_{x'}}$ (step 6) they are equal. $\\mathcal L$ is a sheaf of abelian groups on the site of opens of $X$ [def-weil-sheaf-of-modules-category], so $\\mathcal L(U)\\to\\prod_x\\mathcal L(U_x)\\rightrightarrows\\prod_{x,x'}\\mathcal L(U_x\\cap U_{x'})$ is an equalizer [def-weil-pbc-sites-and-cohomology] (1), and there is $\\sigma\\in\\mathcal L(U)$ with $\\sigma|_{U_x}=\\sigma_x$ for all $x$. Then $\\lambda_U(\\sigma)=\\sigma_\\eta=(\\sigma_x)_\\eta=\\tau$ for any $x\\in U$ (germs are unchanged by restriction to a neighbourhood of $\\eta$). With steps 6 and 7 this proves clause 3.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme), part (2), proof 'Omitted': written out here for an invertible $\\mathcal L$; gluing as in the proof of lem-sc-function-field-sections-glue"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-generic-point",
+  "def-weil-pbc-module-stalk",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "def-sc-function-field",
+  "lem-weil-pbc-sheaf-sections-determined-by-germs",
+  "lem-sc-function-field-sections-glue",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme) part (2), whose proof is 'Omitted', and the proof of Tag 02OZ (divisors-lemma-regular-meromorphic-section-exists) case (1); the argument (reduction to $\\mathcal O_X$ on trivializing opens, then gluing) is written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +173,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -76,5 +193,13 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-invertible-module-generic-stalk",
+  "worker": "stage1",
+  "summary": "Sources read: Stacks 01X5 (divisors.tex, label divisors-lemma-meromorphic-functions-integral-scheme; proof 'Omitted') and the proof of 02OZ case (1) (only asserts dim L_eta = 1); tags checked in tags/tags. The statement is kept. Proof written by the agent: a trivialization phi: L|_W -> O_W induces O_{X,y}-isomorphisms phi_y on stalks for y in W, compatible with the germ maps to eta (eta lies in every nonempty open), so clauses 1 and 2 reduce to the structure-sheaf case [lem-sc-integral-scheme-stalks-in-function-field] (Mathlib leaf); clause 3: injectivity of lambda_U from clause 2 and the separation of sections by germs [lem-weil-pbc-sheaf-sections-determined-by-germs] (Mathlib leaf); the image by producing local preimages on trivializing opens with [lem-sc-function-field-sections-glue] (Lean-closed in slopmaster2 as Scheme.exists_germToFunctionField_eq) and gluing them by the sheaf property, the overlaps agreeing by the injectivity just proved. No new node. No slopmaster2 declaration states the item (grep of WeilConjectures for the id, IsInvertible together with stalk/genericPoint/germToFunctionField: none; Curve/Divisor.lean and Mathlib/AlgebraicGeometry/FunctionField.lean treat the structure sheaf only).",
+  "blueprint": "Blueprint ancestor lem-sc-line-bundle-rational-section (no blueprint proof text beyond the uses def-sc-curves, def-sc-divisor, def-sc-function-field; places as in this node's blueprint.from.place): step 4 (clause 1) realizes the first sentence 'At the generic point eta, L_eta is a free O_{C,eta}=k(C)-module of rank one'; steps 2, 5-9 (clauses 2 and 3) realize the identification of L with a subsheaf of the constant sheaf L_eta used in 'the set of f in k(C) with fs in L'."
+ },
+ "reviewed": "2026-10-10 L: 9 steps checked (trivializations; lambda_x well defined and semilinear; stalk isomorphisms from a trivialization compatible with the germ maps; clause 1; clause 2; lambda_U injective by sections determined by germs; image inside the intersection of the stalks; local preimages via the O_X gluing node through a trivialization; gluing by the sheaf property). Sources 01X5 (omitted)/02OZ (clearly): proof by agent. Off-unit citations are Lean-closed or Mathlib leaves (tools by themselves); no new nodes."
 }

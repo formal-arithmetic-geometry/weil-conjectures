@@ -1529,3 +1529,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:43 L: returned deliver/H1/lem-weil-pbc-direct-sum-extension-assembly (reviewer RETURN: C4/B3 new node's bijection unspecified and extension classes undefined, E5 flat base change of the class not written, B4)
 - 13:45 L: accepted lem-sc-rational-functions-generic-stalks: 6 steps (01RV), new Mathlib leaf lem-sc-irreducible-components-cover
 - 2026-10-10, delivery of H1: lem-weil-pbc-tor-one-surjective-flat-middle returned (e360e6525): Reviewed in full (reviewer sub-agent of L). C1/C4/E5, step 2: 'since M tensor A is flat over A, tensoring this exact sequence with B preserves exactness' is car
+- 13:45 L: returned deliver/H1/lem-weil-pbc-tor-one-surjective-flat-middle (reviewer RETURN: C1/C4 exactness after tensoring not carried by a cited node, C2 step 3, F report copied from another item)
+- 13:45 L: accepted lem-sc-invertible-module-generic-stalk: 9 steps, no new nodes
