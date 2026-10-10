@@ -60,7 +60,6 @@ lemma upperStarComp_assoc'_app {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z
   rw [this]
   erw [Category.id_comp, Category.id_comp]
 
-set_option maxHeartbeats 0 in
 /-- **Horizontal pasting** of the square isomorphisms of pullbacks: for squares
 `a₁ ≫ v₂ = v₁ ≫ b₁` and `a₂ ≫ v₃ = v₂ ≫ b₂`, the isomorphism of the composite square
 `(a₁ ≫ a₂) ≫ v₃ = v₁ ≫ b₁ ≫ b₂` is obtained by pasting. -/
@@ -72,17 +71,9 @@ lemma upperStarCompIso_hcomp_app {X₁ X₂ X₃ Y₁ Y₂ Y₃ : Scheme.{u}} (a
         (a₁)^*[A].map ((upperStarCompIso A sq₂).hom.app M) ≫
         (upperStarCompIso A sq₁).hom.app ((b₂)^*[A].obj M) =
       (upperStarCompIso A sq).hom.app M ≫ (v₁)^*[A].map ((upperStarComp A b₁ b₂).hom.app M) := by
-  have E1 := upperStarComp_assoc'_app A a₁ a₂ v₃ _ rfl _ rfl _ (Category.assoc _ _ _) rfl M
-  have E2 := upperStarComp_assoc'_app A a₁ v₂ b₂ _ rfl _ sq₂ _ (Category.assoc _ _ _)
-    (by rw [Category.assoc, sq₂, ← Category.assoc]) M
-  have E3 := upperStarComp_assoc'_app A v₁ b₁ b₂ _ sq₁ _ rfl _ sq
-    (by rw [Category.assoc, sq₂, ← Category.assoc]) M
-  simp only [upperStarCongr_rfl', Iso.refl_hom, NatTrans.id_app, Category.id_comp,
-    Functor.comp_obj] at E1 E2 E3
-  rw [← cancel_epi ((upperStarComp A (a₁ ≫ a₂) v₃).hom.app M)]
-  simp only [upperStarCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    Iso.hom_inv_id_app_assoc, Functor.map_comp, Category.assoc]
-  rw [← reassoc_of% E1, ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, ← Functor.map_comp_assoc, reassoc_of% E2, Iso.hom_inv_id_app_assoc, E3]
+  -- TODO: the proof via three instances of `upperStarComp_assoc'_app` and `cancel_epi`
+  -- elaborates but hits a kernel deterministic timeout (the composites `(a ≫ b) ≫ c` and
+  -- `a ≫ b ≫ c` of schemes are defeq, and the kernel unfolds scheme composition).
+  sorry
 
 end AlgebraicGeometry.ProEtale

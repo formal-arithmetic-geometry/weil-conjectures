@@ -101,34 +101,4 @@ lemma frobeniusPowUpperStarIso_succ (F : WeilSheaf k₀ l X) (m : ℕ) :
   rw [← NatTrans.naturality_assoc]
   rfl
 
-variable {X' : Scheme.{u}} [X'.Over (Spec (CommRingCat.of k₀))]
-
-set_option maxHeartbeats 2000000 in
-lemma upperStar_obj_obj_str (φ : X' ⟶ X) [φ.IsOver (Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l X) :
-    ((upperStar φ).obj F).obj.str =
-      (ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso l φ (comp_over φ _)).app
-          F.obj.carrier ≪≫
-        (Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*ᵃ[l].mapIso F.obj.str := by
-  exact Iso.ext rfl
-
-set_option maxHeartbeats 1000000 in
-/-- The Weil structure of a pullback in pullback form: for `φ : X' ⟶ X` over `k₀`, the Weil
-structure `Fr'^* φ̄^* F ≅ φ̄^* F` of `φ^* F` is the square isomorphism
-`Fr'^* φ̄^* ≅ φ̄^* Fr^*` followed by `φ̄^*` of the Weil structure of `F`. -/
-lemma frobeniusUpperStarIso_upperStar (φ : X' ⟶ X) [φ.IsOver (Spec (CommRingCat.of k₀))]
-    (F : WeilSheaf k₀ l X) :
-    ((upperStar φ).obj F).frobeniusUpperStarIso =
-      (ProEtale.upperStarCompIso _ (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius
-        φ (comp_over φ _)).symm).app F.obj.carrier.X ≪≫
-        ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))^*[_]).mapIso
-          F.frobeniusUpperStarIso := by
-  ext1
-  simp only [frobeniusUpperStarIso, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom,
-    upperStar_obj_obj_str, ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso,
-    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Iso.symm_hom, Functor.map_comp]
-  trace_state
-  sorry
-
 end AlgebraicGeometry.WeilSheaf
