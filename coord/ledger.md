@@ -1644,3 +1644,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:41 L: merged deliver/H1/lemma-weil-pbc-fibre-product-limit (reviewer PASS; after a return; new nodes: 0)
 - 14:42 L: merged deliver/C1/lem-galois-inverse-image-representable (reviewer PASS; after a return; new nodes: 1)
 - 14:42 L: merged deliver/E1/lem-sc-generic-cohomology-comparison (reviewer FIX; first push; new nodes: 1)
+- 14:43 L: merged deliver/G1/lem-sc-hilb-geometrically-integral (reviewer FIX; after a return; new nodes: 1)
