@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-endomorphism-finite-module-monic",
+ "kind": "statement",
+ "title": "An endomorphism of a finite module is killed by a monic polynomial",
+ "statement": "Let $R$ be a commutative ring, $M$ a finite (finitely generated) $R$-module [def-weil-finitely-generated-module] and $\\varphi:M\\to M$ an $R$-linear endomorphism. Then there is a monic polynomial $P=T^d+a_{d-1}T^{d-1}+\\cdots+a_0\\in R[T]$ [def-weil-polynomial-ring] ($d\\ge0$, $a_i\\in R$) such that $P(\\varphi)=\\varphi^d+a_{d-1}\\varphi^{d-1}+\\cdots+a_1\\varphi+a_0\\,\\mathrm{id}_M=0$ as an endomorphism of $M$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05BT (lemma-charpoly-module, line 2835); tag verified in tags/tags: 05BT,algebra-lemma-charpoly-module"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "endomorphism of a finitely generated module satisfies a monic polynomial",
+   "results": "Module.End.isIntegral (Mathlib.RingTheory.IntegralClosure.Algebra.Basic), LinearMap.exists_monic_and_aeval_eq_zero (Mathlib.LinearAlgebra.Matrix.Charpoly.LinearMap), LinearMap.charpoly_monic, LinearMap.polyCharpoly_monic, LinearMap.isIntegral (free modules only), LinearMap.exists_monic_and_coeff_mem_pow_and_aeval_eq_zero_of_range_le_smul",
+   "date": "2026-10-10",
+   "verdict": "match: LinearMap.exists_monic_and_aeval_eq_zero"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.exists_monic_and_aeval_eq_zero",
+   "results": "LinearMap.exists_monic_and_aeval_eq_zero {M} [AddCommGroup M] (R) [CommRing R] [Module R M] [Module.Finite R M] (f : Module.End R M) : ∃ p, p.Monic ∧ (Polynomial.aeval f) p = 0 (Mathlib.LinearAlgebra.Matrix.Charpoly.LinearMap)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "LinearMap.exists_monic_and_aeval_eq_zero (project root ~/weil-conjectures-slopmaster2)",
+   "results": "LinearMap.exists_monic_and_aeval_eq_zero, theorem, .lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "match (exists in the pinned Mathlib)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_monic_and_aeval_eq_zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 236,250p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap.lean",
+   "results": "LinearAlgebra/Matrix/Charpoly/LinearMap.lean:241 theorem LinearMap.exists_monic_and_aeval_eq_zero [Module.Finite R M] (f : Module.End R M) : ∃ p : R[X], p.Monic ∧ Polynomial.aeval f p = 0 (variables line 30: [AddCommGroup M] [CommRing R] [Module R M]); used at RingTheory/IntegralClosure/Algebra/Basic.lean:60 for Module.End.isIntegral",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.exists_monic_and_aeval_eq_zero",
+  "file": "Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap.lean",
+  "line": 241,
+  "how": "exact: for [CommRing R] [AddCommGroup M] [Module R M] [Module.Finite R M] and f : Module.End R M, ∃ p : R[X], p.Monic ∧ Polynomial.aeval f p = 0 (lines 241-244, variables line 30); aeval f p is p(φ) in the endomorphism algebra. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-kollar-local-dichotomy",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): LinearMap.exists_monic_and_aeval_eq_zero (LinearAlgebra/Matrix/Charpoly/LinearMap.lean:241), checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}

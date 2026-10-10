@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-kollar-local-dichotomy",
  "kind": "statement",
  "title": "Kollar's lemma: a Noetherian local ring is Artinian, regular of dimension one, of depth at least two, or has a finite birational-type extension",
- "statement": "Let $(R,\\mathfrak m)$ be a Noetherian [def-weil-pbc-noetherian-ring] local ring. Consider the four properties: (1) $R$ is Artinian (every descending chain of ideals of $R$ is stationary); (2) $R$ is a regular local ring [def-weil-regular-scheme] of Krull dimension $1$ [def-weil-pbc-krull-dimension-ring]; (3) $\\operatorname{depth}(R)\\ge2$ [def-weil-pbc-depth]; (4) there is a ring map $\\varphi:R\\to R'$ to a nonzero commutative ring $R'$ such that $R'$ is finitely generated as an $R$-module through $\\varphi$, $\\varphi$ is not an isomorphism, there is an integer $n\\ge1$ with $\\mathfrak m^n\\cdot\\ker(\\varphi)=0$ and $\\mathfrak m^n R'\\subseteq\\varphi(R)$, and $\\mathfrak m$ is not an associated prime of the $R$-module $R'$, i.e. there is no $z\\in R'$ whose annihilator $\\{a\\in R:\\varphi(a)z=0\\}$ equals $\\mathfrak m$. Then (i) at least one of (1)-(4) holds, and (ii) (3) and (4) do not hold together.",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian [def-weil-pbc-noetherian-ring] local ring. Consider the four properties: (1) $R$ is Artinian (every descending chain of ideals of $R$ is stationary); (2) $R$ is a regular local ring [def-weil-regular-scheme] of Krull dimension $1$ [def-weil-pbc-krull-dimension-ring]; (3) $\\operatorname{depth}(R)\\ge2$ [def-weil-pbc-depth]; (4) there is a ring map $\\varphi:R\\to R'$ to a nonzero commutative ring $R'$ such that $R'$ is finitely generated as an $R$-module through $\\varphi$ [def-weil-finitely-generated-module] [def-weil-finitely-generated-module], $\\varphi$ is not an isomorphism, there is an integer $n\\ge1$ with $\\mathfrak m^n\\cdot\\ker(\\varphi)=0$ and $\\mathfrak m^n R'\\subseteq\\varphi(R)$, and $\\mathfrak m$ is not an associated prime of the $R$-module $R'$, i.e. there is no $z\\in R'$ whose annihilator $\\{a\\in R:\\varphi(a)z=0\\}$ equals $\\mathfrak m$. Then (i) at least one of (1)-(4) holds, and (ii) (3) and (4) do not hold together.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 0BHZ (lemma-hart-serre-loc-thm, line 28923; due to Kollar), with its proof: (i) is 'every R falls into one of the 4 cases', (ii) is the final paragraph '(3) excludes (4)'"
@@ -11,11 +11,148 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-regular-scheme",
   "def-weil-pbc-krull-dimension-ring",
-  "def-weil-pbc-depth"
+  "def-weil-pbc-depth",
+  "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Reduction to $R$ not Artinian.* If $R$ is Artinian, (1) holds and (i) is proved. From now on until Step 8 assume $R$ is not Artinian. Then no power of $\\mathfrak m$ is zero: if $\\mathfrak m^N=0$ for some $N\\ge1$, apply [lem-weil-pbc-noetherian-local-quotient-artinian-local] with $C=R$ and $K=0$ (indeed $\\mathfrak m^N\\subseteq0\\subseteq\\mathfrak m$): $R=R/0$ is Artinian, a contradiction. (The source uses for this the equivalent remark that $V(\\mathfrak m)$ is nowhere dense, Proposition 00KJ.)",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BHZ (lemma-hart-serre-loc-thm, line 28923), proof, first paragraph ('Observe that (R, m) is not Artinian if and only if V(m) is nowhere dense ... We assume this from now on'), lines 28942-28945"
+   }
+  },
+  {
+   "text": "*The ideal $J$.* Let $J=\\{r\\in R:\\mathfrak m^kr=0\\text{ for some }k\\ge0\\}$, the union of the increasing chain of ideals $\\operatorname{Ann}_R(\\mathfrak m^k)$, $k\\ge0$; it is an ideal, the largest ideal killed by a power of $\\mathfrak m$. As $R$ is Noetherian [def-weil-pbc-noetherian-ring], the ascending chain $\\operatorname{Ann}_R(\\mathfrak m^k)$ is stationary (an ascending chain of ideals in a ring all of whose ideals are finitely generated stabilizes: its union is finitely generated, and its finitely many generators lie in one member), so $J=\\operatorname{Ann}_R(\\mathfrak m^n)$ for some $n\\ge1$, i.e. $\\mathfrak m^nJ=0$. Moreover $\\mathfrak m$ is not an associated prime of $R/J$: if $\\bar z\\in R/J$, $z\\in R$, has $\\{a\\in R: a\\bar z=0\\}=\\mathfrak m$, then $\\mathfrak mz\\subseteq J$, so $\\mathfrak m^{n+1}z\\subseteq\\mathfrak m^nJ=0$, hence $z\\in J$, $\\bar z=0$, whose annihilator is $R\\ne\\mathfrak m$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BHZ (lemma-hart-serre-loc-thm, line 28923), proof, second paragraph ('Let J be the largest ideal killed by a power of m'), lines 28947-28950"
+   }
+  },
+  {
+   "text": "*Case $J\\ne0$: property (4).* Let $R'=R/J$ and $\\varphi:R\\to R/J$ the quotient map. $R'\\ne0$: otherwise $1\\in J$, so $\\mathfrak m^n=\\mathfrak m^n\\cdot1=0$, which Step 1 excludes. $R'$ is generated as an $R$-module by $1$, so it is finitely generated [def-weil-finitely-generated-module]. $\\varphi$ is not an isomorphism, since $\\ker\\varphi=J\\ne0$. $\\mathfrak m^n\\ker\\varphi=\\mathfrak m^nJ=0$ by Step 2, and $\\mathfrak m^nR'\\subseteq R'=\\varphi(R)$ since $\\varphi$ is surjective. $\\mathfrak m$ is not an associated prime of $R'$ by Step 2. So (4) holds.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BHZ (lemma-hart-serre-loc-thm, line 28923), proof, 'If J != 0 then R -> R/J shows that (R, m) is as in (4)', lines 28947-28950; the checks that R/J != 0 and that m is not associated to R/J are omitted there and written out here"
+   }
+  },
+  {
+   "text": "*Case $J=0$: a nonzerodivisor $x\\in\\mathfrak m$.* Assume $J=0$. Then $\\mathfrak m$ is not an associated prime of $R$: an element $z\\in R$ with $\\operatorname{Ann}_R(z)=\\mathfrak m$ satisfies $\\mathfrak mz=0$, so $z\\in J=0$, and $\\operatorname{Ann}_R(0)=R\\ne\\mathfrak m$. Applying [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] to the finite $R$-module $M=R$ gives $x\\in\\mathfrak m$ that is a nonzerodivisor on $R$.",
+   "uses": [
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BHZ (lemma-hart-serre-loc-thm, line 28923), proof, third paragraph ('Otherwise J = 0. In particular m is not an associated prime of R and we see that there is a nonzerodivisor x in m by Lemma 00LL'), lines 28952-28955"
+   }
+  },
+  {
+   "text": "*If $\\mathfrak m$ is not an associated prime of $R/xR$: property (3).* $R/xR$ is a finite $R$-module (generated by $\\bar1$). If $\\mathfrak m$ is not an associated prime of it, [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] gives $x'\\in\\mathfrak m$ that is a nonzerodivisor on $R/xR$. Then $x,x'$ is an $R$-regular sequence in $\\mathfrak m$ [def-weil-pbc-regular-sequence]: $x$ is a nonzerodivisor on $R$ (Step 4), $x'$ is a nonzerodivisor on $R/xR$, and $R/(x,x')R\\ne0$ because $(x,x')\\subseteq\\mathfrak m\\ne R$. Since $\\mathfrak mR=\\mathfrak m\\ne R$, clause (1) of [def-weil-pbc-depth] applies and $\\operatorname{depth}(R)\\ge2$: (3) holds. Otherwise there is $\\bar y\\in R/xR$, $y\\in R$, with $\\{a\\in R:a\\bar y=0\\}=\\mathfrak m$; then $y\\notin xR$ (else the annihilator is $R$) and $y\\mathfrak m\\subseteq xR$. Steps 6 and 7 treat this case.",
+   "uses": [
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BHZ (lemma-hart-serre-loc-thm, line 28923), proof, 'If m is not an associated prime of R/xR then depth(R) >= 2 by the same lemma. Thus we are left with the case when there is a y in R, y not in xR such that y m in xR', lines 28954-28958"
+   }
+  },
+  {
+   "text": "*Subcase $y\\mathfrak m\\subseteq x\\mathfrak m$: property (4) with $R'=R[y/x]\\subseteq R_x$.* For $f\\in\\mathfrak m$ write $yf=xg$ with $g\\in\\mathfrak m$; $g$ is unique because $x$ is a nonzerodivisor, so $\\psi(f)=g$ defines a map $\\psi:\\mathfrak m\\to\\mathfrak m$, which is $R$-linear by the uniqueness. $\\mathfrak m$ is a finite $R$-module since $R$ is Noetherian [def-weil-pbc-noetherian-ring], so by [lem-weil-pbc-endomorphism-finite-module-monic] there is a monic $P=T^d+a_{d-1}T^{d-1}+\\cdots+a_0\\in R[T]$ [def-weil-polynomial-ring] with $P(\\psi)=0$. Let $R_x$ be the localization of $R$ at $x$ [def-weil-ring-localization-away]. The map $R\\to R_x$, $r\\mapsto r/1$, is injective: $r/1=0$ means $x^kr=0$ for some $k$, so $r=0$. Put $s=y/x\\in R_x$. For $f\\in\\mathfrak m$, $x\\psi(f)=yf$ gives $\\psi(f)/1=s\\cdot(f/1)$, hence $\\psi^i(f)/1=s^i(f/1)$ for all $i\\ge0$ by induction, and $0=P(\\psi)(x)/1=P(s)\\cdot(x/1)$; since $x/1$ is a unit of $R_x$, $P(s)=0$. So $s$ is integral over $R$, and the subring $R'=R[s]\\subseteq R_x$ generated by the image of $R$ and $s$ is a finitely generated $R$-module by [lem-weil-pbc-finite-of-integral-generators] (one generator $b_1=s$). Let $\\varphi:R\\to R'$ be the inclusion. Then: $R'\\ne0$ ($R\\ne0$ embeds); $\\ker\\varphi=0$; $\\varphi$ is not surjective, since $s=r/1$ with $r\\in R$ would give $x^k(y-xr)=0$, so $y=xr\\in xR$, contradicting Step 5; $\\mathfrak mR'\\subseteq\\varphi(R)$: $\\mathfrak m s\\subseteq\\mathfrak m$ (as $fs=\\psi(f)/1$), hence $\\mathfrak m s^i\\subseteq\\mathfrak m$ for all $i$ by induction, and $R'=\\sum_iRs^i$; so (4) holds with $n=1$ (and $\\mathfrak m^1\\ker\\varphi=0$). Finally $\\mathfrak m$ is not an associated prime of $R'$: $x$ is a unit of $R_x$, so $xz\\ne0$ for $0\\ne z\\in R'$, i.e. $x\\notin\\operatorname{Ann}(z)$ while $x\\in\\mathfrak m$; and $\\operatorname{Ann}(0)=R\\ne\\mathfrak m$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-endomorphism-finite-module-monic",
+    "def-weil-polynomial-ring",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-finite-of-integral-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BHZ (lemma-hart-serre-loc-thm, line 28923), proof, fourth paragraph ('If y m in x m then we can consider the map phi : m -> m, f -> yf/x ... determinantal trick of Lemma 05BT ... Thus R is as in (4)'), lines 28960-28969"
+   }
+  },
+  {
+   "text": "*Subcase $y\\mathfrak m\\not\\subseteq x\\mathfrak m$: property (2).* Pick $t_0\\in\\mathfrak m$ with $yt_0\\notin x\\mathfrak m$; as $yt_0\\in xR$, $yt_0=xu$ with $u\\in R$, and $u\\notin\\mathfrak m$, so $u$ is a unit of the local ring $R$. With $t=u^{-1}t_0\\in\\mathfrak m$ we get $yt=x$. Then $y$ is a nonzerodivisor: $yz=0$ gives $xz=tyz=0$, so $z=0$. For $t'\\in\\mathfrak m$ write $yt'=xs$ with $s\\in R$; then $y(t'-st)=xs-sx=0$, so $t'=st$. Hence $\\mathfrak m=tR$ is generated by one element, and $\\dim R\\le1$ by [lem-weil-pbc-noetherian-local-dimension-le-generators]. Also $\\dim R\\ge1$ [def-weil-pbc-krull-dimension-ring]: $R\\ne0$ has the prime $\\mathfrak m$; if $\\dim R=0$, every prime ideal $\\mathfrak p$ satisfies $\\mathfrak p\\subseteq\\mathfrak m$ hence $\\mathfrak p=\\mathfrak m$, so $\\mathfrak m$ is a minimal prime of $R$ and by [lem-weil-pbc-noetherian-minimal-prime-associated] there is $z\\in R$ with $\\operatorname{Ann}_R(z)=\\mathfrak m$, which Step 4 excludes ($J=0$). So $\\dim R=1$ and $\\mathfrak m$ is generated by $\\dim R=1$ element: $R$ is a regular local ring [def-weil-regular-scheme] of dimension $1$, property (2). With Steps 1, 3, 5, 6 this proves (i).",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-dimension-le-generators",
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-noetherian-minimal-prime-associated",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BHZ (lemma-hart-serre-loc-thm, line 28923), proof, fifth paragraph ('Otherwise there is a t in m such that yt = ux ... Thus (R, m) is regular of dimension 1'), lines 28971-28978; the bound dim R = 1 is not written there and is written out here"
+   }
+  },
+  {
+   "text": "*(ii), the kernel.* Suppose $\\operatorname{depth}(R)\\ge2$ and $\\varphi:R\\to R'$, $n$ are as in (4). As $\\mathfrak mR=\\mathfrak m\\ne R$, clause (1) of [def-weil-pbc-depth] says the supremum of the lengths of $R$-regular sequences in $\\mathfrak m$ is $\\ge2$, so there is an $R$-regular sequence $f_1,\\dots,f_r$ in $\\mathfrak m$ with $r\\ge2$ [def-weil-pbc-regular-sequence]; its first element $f_1\\in\\mathfrak m$ is a nonzerodivisor on $R$. Since $f_1^n\\in\\mathfrak m^n$ and $\\mathfrak m^n\\ker\\varphi=0$, $f_1^n\\ker\\varphi=0$, and $f_1^n$ is a nonzerodivisor, so $\\ker\\varphi=0$.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BHZ (lemma-hart-serre-loc-thm, line 28923), proof, last paragraph ('Then R -> R' is necessarily injective (as the kernel would have both depth 0 and depth >= 1)'), lines 28997-29001"
+   }
+  },
+  {
+   "text": "*(ii), the cokernel.* Let $Q=R'/\\varphi(R)$, a finite $R$-module (a quotient of $R'$), and suppose $Q\\ne0$. By Step 8, $0\\to R\\xrightarrow{\\varphi}R'\\to Q\\to0$ is a short exact sequence [def-weil-pbc-exact-sequence] of nonzero finite $R$-modules [def-weil-finitely-generated-module] ($R'\\ne0$ by (4)). $\\operatorname{depth}(R')\\ge1$: by [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated] there is $x'\\in\\mathfrak m$ that is a nonzerodivisor on $R'$; if $\\mathfrak mR'=R'$ the depth is $\\infty$, otherwise $x'R'\\subseteq\\mathfrak mR'\\ne R'$ and $x'$ is an $R'$-regular sequence of length $1$ in $\\mathfrak m$ [def-weil-pbc-regular-sequence] [def-weil-pbc-depth]. By [lem-weil-pbc-depth-in-ses] (2), $\\operatorname{depth}(Q)\\ge\\min\\{\\operatorname{depth}(R'),\\operatorname{depth}(R)-1\\}\\ge1$. Now $\\mathfrak m^nQ=0$ because $\\mathfrak m^nR'\\subseteq\\varphi(R)$. If $\\mathfrak mQ=Q$ then $Q=\\mathfrak m^nQ=0$; otherwise clause (1) of [def-weil-pbc-depth] gives a $Q$-regular sequence of length $\\ge1$ in $\\mathfrak m$, whose first element $g\\in\\mathfrak m$ is a nonzerodivisor on $Q$ with $g^nQ=0$, so again $Q=0$. Both contradict $Q\\ne0$. Hence $Q=0$, $\\varphi$ is a bijective ring map, i.e. an isomorphism, contradicting (4). So (3) and (4) do not hold together, which is (ii).",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-depth-in-ses"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0BHZ (lemma-hart-serre-loc-thm, line 28923), proof, last paragraph ('the cokernel has depth at least 1 (by Lemma 00LX and the fact that R' has depth >= 1 by assumption) whence cannot be supported on {m} unless it is 0 as well'), lines 29001-29005"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-depth",
+  "lem-weil-pbc-endomorphism-finite-module-monic",
+  "def-weil-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-weil-pbc-noetherian-local-dimension-le-generators",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-noetherian-minimal-prime-associated",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-depth-in-ses"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0BHZ (lemma-hart-serre-loc-thm, line 28923), proof lines 28941-29006: the case analysis for (i) and the final paragraph '(3) excludes (4)' for (ii)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +174,24 @@
    "results": "RingTheory/KrullDimension/Regular.lean:182 and Regular/ProjectiveDimension.lean:88 (dimension and projective dimension modulo a regular element, unrelated); Depth/ contains only Rees.lean (Ext characterization of regular sequences)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, IsNoetherianRing, ringKrullDim, IsSMulRegular, Module.Finite",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "LinearMap.exists_monic_and_aeval_eq_zero (the determinantal trick of Step 6, project root ~/weil-conjectures-slopmaster2)",
+   "results": "LinearMap.exists_monic_and_aeval_eq_zero, Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap.lean (recorded on the new node lem-weil-pbc-endomorphism-finite-module-monic); nothing for the dichotomy itself",
+   "date": "2026-10-10",
+   "verdict": "no match for the item (the pinned Mathlib has no depth of modules, see grep record)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +211,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-kollar-local-dichotomy",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Algebra 0BHZ (lemma-hart-serre-loc-thm, line 28923) and its proof; tags 0BHZ, 05BT, 00LL, 00LX, 00KJ verified in tags/tags. Not a Mathlib leaf (pinned Mathlib has no depth; LeanSearch/LeanFinder/Loogle/grep recorded). Proof in 9 steps following the source: Artinian case; J = largest ideal killed by a power of m (Noetherian => J = Ann(m^n)); J != 0 gives (4) with R/J (the checks R/J != 0 and m not associated to R/J, omitted in the source, written out); J = 0 gives a nonzerodivisor x via 00LL; m not associated to R/xR gives depth >= 2; else y with y m in xR: if y m in x m the determinantal trick (new Mathlib leaf for 05BT) makes R[y/x] in R_x a finite extension as in (4) with n = 1; otherwise m = (t) and dim R = 1 (upper bound by 00KQ node, lower bound via minimal primes being associated, J = 0), so (2). (ii): the kernel is killed by f^n for a nonzerodivisor f, and the cokernel has depth >= 1 by the depth lemma 00LX node and is killed by m^n, hence 0. Statement unchanged except that 'finitely generated' now cites def-weil-finitely-generated-module (added to stmt_deps). One new node: lem-weil-pbc-endomorphism-finite-module-monic (05BT), Mathlib leaf LinearMap.exists_monic_and_aeval_eq_zero."
+ },
+ "reviewed": "pass (L, 2026-10-10): 9 steps follow 0BHZ: not Artinian means no power of m vanishes; J = Ann(m^n) is the largest ideal killed by a power of m; J nonzero gives (4) with R/J; J = 0 gives a nonzerodivisor x in m; either m is not associated to R/xR (depth >= 2, (3)) or y with ym in xR exists; ym in xm gives (4) via R[y/x] (determinantal trick, new leaf 05BT) and ym not in xm gives m = (t), regular of dimension 1 ((2)); (ii): the kernel dies and the cokernel has depth >= 1 by 00LX yet is killed by m^n. Source gaps written out."
 }
