@@ -27,7 +27,11 @@
  },
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Remark 00E6 (remark-fundamental-diagram), fibre-square description on spectra"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -37,8 +41,13 @@
    "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.preimageHomeomorphFiber",
+  "file": "Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean",
+  "line": 212,
+  "how": "The declaration gives a homeomorphism from the primes of T lying over p to Spec(κ(p) ⊗[R] T); compose its inverse with the tensor-factor symmetry Algebra.TensorProduct.comm to obtain the node's orientation Spec(T ⊗_R κ(p)) -> f⁻¹(p), with the stated map Q ↦ j⁻¹(Q)."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "R-ffi1706",
@@ -52,5 +61,23 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-fibre-spec-homeomorphism",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf. PrimeSpectrum.preimageHomeomorphFiber (Fiber.lean:212) identifies the topological fibre of Spec(T) over p with the spectrum of the residue-field tensor product; the inverse homeomorphism has the stated prime-contraction map. Mathlib's fibre uses κ(p) ⊗[R] T, and Algebra.TensorProduct.comm supplies the node's T ⊗_R κ(p) order.",
+  "blueprint": {
+   "steps": [],
+   "same_as_search": "Searched the whole DAG and imported blueprint by the item id and by fibre/Spec/tensor/homeomorphism wording; no duplicate blueprint statement was found."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fsh1740",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsh1740 (reviewer sub-agent of L); spot-checked: Leaf: read PrimeSpectrum.preimageHomeomorphFiber at Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean:212 (comap (algebraMap R S) ⁻¹' {p} ≃ₜ PrimeSpectrum (p.asIdeal.Fiber S), Fiber = κ(p) ⊗[R] S abbrev line 66); inverse is comap along includeRight = Q ↦ j⁻¹(Q); node's T ⊗ κ(p) order is a one-line specialization via Algebra.TensorProduct.comm (B8 ok). B10: slopmaster2 only uses/mirrors the Mathlib declaration, no own declaration of this node. No repairs."
  }
 }
