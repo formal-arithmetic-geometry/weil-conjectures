@@ -15,9 +15,95 @@
   "def-pc-quasi-iso-modules",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Setting.* Put $\\mathcal A=\\Mod(\\mathcal O_Y)$, the abelian category of $\\mathcal O_Y$-modules [def-weil-sheaf-of-modules-category], $\\mathcal B$ the abelian category of $\\mathcal O_Y(Y)$-modules, and $F=\\Gamma(Y,-):\\mathcal A\\to\\mathcal B$, $\\mathcal G\\mapsto\\mathcal G(Y)$. $\\mathcal A$ has enough injectives [lem-weil-pbc-scheme-modules-enough-injectives]. $F$ is additive, since the addition of morphisms of $\\mathcal O_Y$-modules is computed on sections. $F$ preserves kernels: the kernel of $u:\\mathcal G\\to\\mathcal G'$ is the limit of the diagram $(u,0):\\mathcal G\\rightrightarrows\\mathcal G'$, and by [lem-weil-pbc-module-sheaves-limits-sectionwise] evaluation at the open $Y$ carries that limit to the limit of the $\\mathcal O_Y(Y)$-modules, i.e. $\\Gamma(Y,\\ker u)=\\ker(u_Y)$. So $F$ is left exact additive [def-sp-left-exact-additive], its right derived functors computed by injective resolutions in $\\Mod(\\mathcal O_Y)$ are the cohomology groups $H^q(Y,-)$ [pqf-def-cohomology], and an $\\mathcal O_Y$-module is $F$-acyclic [def-sp-acyclic] iff $H^q(Y,-)$ of it vanishes for all $q>0$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "def-sp-left-exact-additive",
+    "pqf-def-cohomology",
+    "def-sp-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EZ (lemma-before-Leray, line 2092), proof: the functor $\\Gamma(Y,-)$ on $\\mathcal O_Y$-modules with values in $\\mathcal O_Y(Y)$-modules"
+   }
+  },
+  {
+   "text": "*$h_*\\mathcal I^\\bullet$ is a bounded-below complex of $\\Gamma(Y,-)$-acyclic modules.* The direct image $h_*$ [def-pc-module-pullback] is an additive functor $\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_Y)$ (on sections over $V$ it is the map on sections over $h^{-1}V$), so applied termwise to $\\mathcal I^\\bullet$ it gives a cochain complex $h_*\\mathcal I^\\bullet$ [def-pc-cochain-complex-modules] with differentials $h_*(d^n)$, and $h_*\\mathcal I^n=h_*0=0$ for $n<0$. For each $n$, $\\mathcal I^n$ is an injective $\\mathcal O_X$-module, so by [lem-weil-pbc-module-pushforward-injective-acyclic] (with $V=Y$) $H^q(Y,h_*\\mathcal I^n)=0$ for all $q>0$: $h_*\\mathcal I^n$ is $\\Gamma(Y,-)$-acyclic [def-sp-acyclic] (Step 1).",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pc-cochain-complex-modules",
+    "lem-weil-pbc-module-pushforward-injective-acyclic",
+    "def-sp-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EX (lemma-pushforward-injective, line 1779) (2), as used in the proof of Lemma 01EZ and in Remark 01F0"
+   }
+  },
+  {
+   "text": "*$\\mathcal J'^\\bullet$ is a bounded-below complex of $\\Gamma(Y,-)$-acyclic modules.* $\\mathcal J'^n=0$ for $n<0$, and each $\\mathcal J'^n$ is an injective object of $\\Mod(\\mathcal O_Y)$, which has enough injectives (Step 1); by [lem-weil-pbc-derived-functor-injective-vanishing] (for $v=\\Gamma(Y,-)$) $R^q\\Gamma(Y,\\mathcal J'^n)=H^q(Y,\\mathcal J'^n)=0$ for all $q>0$, i.e. $\\mathcal J'^n$ is $\\Gamma(Y,-)$-acyclic [def-sp-acyclic].",
+   "uses": [
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "def-sp-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015B (lemma-higher-derived-functors) (3): $R^iF(I)=0$ for $i>0$ and $I$ injective"
+   }
+  },
+  {
+   "text": "*Leray acyclicity.* $\\lambda:h_*\\mathcal I^\\bullet\\to\\mathcal J'^\\bullet$ is a quasi-isomorphism of complexes of $\\mathcal O_Y$-modules [def-pc-quasi-iso-modules]: $H^r(\\lambda)$ is an isomorphism of the cohomology objects of $\\Mod(\\mathcal O_Y)$ for every $r$, which is the notion of quasi-isomorphism of complexes of the abelian category $\\mathcal A=\\Mod(\\mathcal O_Y)$ [def-weil-abstract-derived-category]. Apply [lem-weil-pbc-leray-acyclicity-quasi-iso] to $\\mathcal A$, $\\mathcal B$, $F=\\Gamma(Y,-)$ (Step 1), $K^\\bullet=h_*\\mathcal I^\\bullet$, $L^\\bullet=\\mathcal J'^\\bullet$, $a=0$ (all terms $F$-acyclic by Steps 2 and 3) and $\\varphi=\\lambda$: the morphism $\\Gamma(Y,\\lambda):\\Gamma(Y,h_*\\mathcal I^\\bullet)\\to\\Gamma(Y,\\mathcal J'^\\bullet)$, $\\Gamma(Y,\\lambda)^n=\\lambda^n_Y$, is a quasi-isomorphism of complexes of $\\mathcal O_Y(Y)$-modules.",
+   "uses": [
+    "def-pc-quasi-iso-modules",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-leray-acyclicity-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remark 01F0 (remark-elucidate-lemma, line 2147): '$R\\Gamma(Y,Rf_*\\mathcal F)$ is represented by $\\Gamma(Y,f_*\\mathcal I^\\bullet)$ ... from Leray's acyclicity lemma (Derived Categories, Lemma 015E) and Lemma 01EX'; Remark 01FB (line 2391): 'the vertical arrow is a quasi-isomorphism'"
+   }
+  },
+  {
+   "text": "*Conclusion.* By the definition of the direct image, $\\Gamma(Y,h_*\\mathcal I^n)=(h_*\\mathcal I^n)(Y)=\\mathcal I^n(h^{-1}Y)=\\mathcal I^n(X)=\\Gamma(X,\\mathcal I^n)$, with differential $(h_*d^n)_Y=d^n_X$ [def-pc-module-pullback], so $\\Gamma(Y,h_*\\mathcal I^\\bullet)=\\Gamma(X,\\mathcal I^\\bullet)$ as complexes, $\\mathcal O_Y(Y)$ acting through $h^\\sharp:\\mathcal O_Y(Y)\\to\\mathcal O_X(X)$. Kernels, images and cokernels of $\\mathcal O_Y(Y)$-linear maps are those of the underlying abelian groups, so $H^p$ of a complex of $\\mathcal O_Y(Y)$-modules has as underlying group $H^p$ of the underlying complex of abelian groups, and an isomorphism of modules is bijective. By Step 4, $H^p(\\Gamma(Y,\\lambda)):H^p(\\Gamma(X,\\mathcal I^\\bullet))\\to H^p(\\Gamma(Y,\\mathcal J'^\\bullet))$ is bijective for every $p$: $\\Gamma(Y,\\lambda)$ is a quasi-isomorphism of complexes of abelian groups and of $\\mathcal O_Y(Y)$-modules.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remark 01F0 (line 2147): 'the trivial observation that $\\Gamma(X,\\mathcal I^\\bullet)=\\Gamma(Y,f_*\\mathcal I^\\bullet)$'; Remark 01FB (line 2391), the displayed diagram"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "def-sp-left-exact-additive",
+  "pqf-def-cohomology",
+  "def-sp-acyclic",
+  "def-pc-module-pullback",
+  "def-pc-cochain-complex-modules",
+  "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "def-pc-quasi-iso-modules",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 01FB (remark-explain-arrow, line 2391), justified by Lemma 01EZ (lemma-before-Leray, line 2092) as explained in Remark 01F0 (remark-elucidate-lemma, line 2147): Lemma 01EX (lemma-pushforward-injective, line 1779) and Derived Categories Lemma 015E (literature/stacks-project/derived.tex, lemma-leray-acyclicity, line 5717)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,10 +125,17 @@
    "results": "Topology/Sheaves/Flasque.lean only (IsFlasque, pushforward_isFlasque, epi_of_shortExact): no injective-implies-flasque, no flasque-acyclic; no Leray acyclicity lemma; SheafCohomology/ has Basic, Cech, MayerVietoris for abelian sheaves on one site",
    "verdict": "no match",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "global sections functor preserves quasi-isomorphisms between bounded below complexes of acyclic sheaves",
+   "results": "HomologicalComplex.quasiIso_map_of_preservesHomology (exact functors only), CategoryTheory.Sheaf.Γ, HasGlobalSectionsFunctor, hasGlobalSectionsFunctor_of_hasLimitsOfShape (Mathlib.CategoryTheory.Sites.GlobalSections), ShortComplex.quasiIso_map_of_preservesLeftHomology, Functor.PreservesHomology",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has the global sections functor on sheaves but no acyclicity of direct images of injectives and no Leray acyclicity; the general step is the new node lem-weil-pbc-leray-acyclicity-quasi-iso"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +155,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks Remark 01FB (cohomology.tex 2391: 'the vertical arrow is a quasi-isomorphism by Lemma 01EZ') and Remark 01F0 (2147: Gamma(Y,f_*I) represents RGamma(Y,Rf_*F) by Leray's acyclicity lemma 015E and Lemma 01EX, plus Gamma(X,I)=Gamma(Y,f_*I)); statement kept. Proof in 5 steps: setting (Mod(O_Y) has enough injectives, Gamma(Y,-) left exact via the sectionwise-limits leaf), h_*I^n Gamma(Y,-)-acyclic by lem-weil-pbc-module-pushforward-injective-acyclic (01EX (2), V=Y), J'^n acyclic as injectives (leaf lem-weil-pbc-derived-functor-injective-vanishing), Leray acyclicity applied to lambda (new unsplit node lem-weil-pbc-leray-acyclicity-quasi-iso, Derived Categories 015E in the form of complexes, both complexes F-acyclic), and the identification Gamma(Y,h_*I)=Gamma(X,I) (elementary). Searched DAG for 015E/leray/acyclic quasi-iso: lemma-weil-pbc-leray-acyclicity (unit sk-thm-acyclicity, imported) states resolutions of an object and a K-injective version for Grothendieck categories, not this form, so not used. The new node is stated exactly by the sorry-free slopmaster2 theorem CategoryTheory.Functor.quasiIso_map_of_rightAcyclic (WeilConjectures/CategoryTheory/Abelian/RightDerived/Acyclic.lean 208-230), for the lead to attach; not in Mathlib (rightDerivedFunctorPlus unit iso only on injective complexes)."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Cohomology 01FB/01EZ/01F0: Γ(Y,−) left exact additive with derived functors H^q(Y,−) (step 1, limits sectionwise leaf as a tool), h_*I^n acyclic by 01EX (2) (today's node), injectives acyclic (existing leaf), Leray acyclicity 015E (new node, Lean attached by L), the identification Γ(Y,h_*I) = Γ(X,I). No Mathlib match; candidate recorded (B8)."
 }
