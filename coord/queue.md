@@ -43,6 +43,7 @@
 | `lem-weil-pbc-integral-injective-dimension-equal` | 1016 | none |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1016 | none |
 | `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
+| `lem-weil-pbc-qs-scheme-cohomology-directed-colimit` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `def-weil-pbc-koszul-complex` | 1017 | none |
 | `def-weil-pbc-koszul-regular-sequence` | 1017 | none |
@@ -68,13 +69,11 @@
 | `def-pc-module-pullback` | 3003 | none |
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
-| `lem-weil-pbc-cohomology-filtered-colimit` | 3003 | none |
 | `prop-weil-pbc-geometric-stalks-exact` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `def-pc-field-tower` | 3004 | none |
 | `def-sc-constant-sheaves` | 3004 | none |
 | `def-weil-pbc-curve-setting` | 3004 | none |
-| `def-weil-pbc-finite-split-hypercover` | 3004 | none |
 | `def-weil-pbc-pointed-etale-neighbourhoods` | 3004 | none |
 | `lem-pc-homeo-pure-insep` | 3004 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
@@ -82,16 +81,16 @@
 | `lemma-weil-pbc-etale-cohomology-continuity` | 3004 | none |
 | `lemma-weil-pbc-fibre-product-limit` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
-| `thm-weil-pbc-hypercover-cohomology` | 3004 | none |
 | `def-galois-fibre-functor` | 3005 | none |
 | `lem-weil-pbc-etale-section-continuity` | 3005 | sorry_here |
-| `lem-weil-pbc-hypercover-free-resolution` | 3005 | none |
 | `lem-weil-pbc-hypercover-refinement` | 3005 | none |
 | `lem-weil-pbc-universal-homeomorphism-base-change` | 3005 | none |
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
 | `thm-galois-fundamental` | 3005 | none |
 | `thm-galois-lc-etale` | 3005 | rests_on_sorry |
+| `thm-weil-pbc-hypercover-cohomology` | 3005 | none |
 | `thm-weil-pbc-universal-homeomorphism-invariance` | 3005 | none |
+| `def-weil-pbc-finite-split-hypercover` | 3006 | none |
 | `lem-fet-galois-category` | 3006 | none |
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-descent` | 3006 | none |
@@ -101,6 +100,7 @@
 | `lem-sc-cohomological-dimension` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-etale-finite-data-descent` | 3006 | none |
+| `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `thm-galois-abstract-equivalence` | 3006 | none |
 | `def-galois-category` | 3007 | none |
 | `def-sc-divisor` | 3007 | none |
@@ -872,7 +872,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 425 nodes that wait for stage 1, 837 nodes that wait for a statement dependency.
+Not open yet: 425 nodes that wait for stage 1, 838 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
