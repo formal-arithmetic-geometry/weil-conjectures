@@ -1,8 +1,8 @@
 # Work queue
 
-875 items; claim with `tools/claim.py next <group> [--stage N]`.
+873 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (83)
+## Stage 1: nodes to split (80)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -40,7 +40,8 @@
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 6007 | none |
 | `lem-sc-picard-diagonal-locally-closed` | 6012 | none |
-| `lem-sc-picard-product-open` | 6012 | none |
+| `lem-sc-picard-h1-multiple-locus` | 6013 | none |
+| `lem-sc-picard-h1-product-injective` | 6013 | none |
 | `lem-sc-picard-locus-closed-valuation-criterion` | 6013 | none |
 | `lem-sc-picard-locus-closed-valuation-triviality` | 6013 | none |
 | `lem-sc-proper-flat-global-sections-criterion` | 6013 | none |
@@ -55,13 +56,9 @@
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
-| `lemma-nagata-morphism-eq-eventually` | - | none |
 | `lemma-nagata-qc-open-eq-eventually` | - | none |
 | `prop-pur-kinjective-resolutions-exist` | - | none |
 | `lem-kun-04ca` | - | none |
-| `lem-kun-fibre-product-limits` | - | none |
-| `lem-kun-sep-closed-finite-extension-purely-inseparable` | - | none |
-| `lem-kun-sep-closed-finite-extension-sep-closed` | - | none |
 | `lem-kun-support-geometric-point-independent` | - | none |
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
@@ -90,7 +87,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (792)
+## Stage 2: nodes to state (793)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -180,6 +177,7 @@
 | `lem-galois-fpqc-descend-unramified` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-singleton-affine-refinement` | 1 | state |
+| `lem-kun-fibre-product-limits` | 1 | state |
 | `lem-kun-finite-closed-subscheme` | 1 | state |
 | `lem-kun-stalks-commute-colimits` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
@@ -887,7 +885,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1628 nodes that wait for a statement dependency, 121 nodes that wait for stage 1.
+Not open yet: 1630 nodes that wait for a statement dependency, 118 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
