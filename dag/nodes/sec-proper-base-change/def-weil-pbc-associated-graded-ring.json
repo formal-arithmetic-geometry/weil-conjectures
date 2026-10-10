@@ -1,0 +1,59 @@
+{
+ "id": "def-weil-pbc-associated-graded-ring",
+ "kind": "definition",
+ "title": "Associated graded ring of an ideal",
+ "statement": "Let $A$ be a commutative ring and $J\\subseteq A$ an ideal, with $J^0=A$. The *associated graded ring* of $A$ with respect to $J$ is the abelian group $\\operatorname{gr}_J(A)=\\bigoplus_{n\\ge0}J^n/J^{n+1}$, whose elements are the finite sums $\\sum_n\\xi_n$ of homogeneous elements $\\xi_n\\in J^n/J^{n+1}$ of degree $n$, with the multiplication that is biadditive and given on homogeneous elements by $(a\\bmod J^{n+1})\\cdot(b\\bmod J^{m+1})=ab\\bmod J^{n+m+1}$ for $a\\in J^n$, $b\\in J^m$ (independent of the choices of $a,b$ since $J^{n+1}J^m+J^nJ^{m+1}\\subseteq J^{n+m+1}$). It is a commutative ring with unit $1\\bmod J$ in degree $0$, its degree-$0$ part $J^0/J^1=A/J$ is a subring, and it is an $A/J$-algebra through this subring. An ideal $\\mathfrak b\\subseteq\\operatorname{gr}_J(A)$ is *homogeneous* if it contains the homogeneous components $\\xi_n$ of each of its elements $\\sum_n\\xi_n$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 05GH (lemma-completion-Noetherian, line 23011), lines 23032-23035: the ring $\\bigoplus I^n/I^{n+1}$ and the ideal $\\bigoplus J\\cap I^n/J\\cap I^{n+1}$ in it"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "associated graded ring of an ideal, direct sum of I^n / I^(n+1)",
+   "results": "Algebra.directSumGAlgebra (Mathlib.Algebra.DirectSum.Algebra), GradedRing, GradedAlgebra, GradedRing.mk (Mathlib.RingTheory.GradedAlgebra.Basic), SetLike.gring (Mathlib.Algebra.DirectSum.Internal): general graded-ring API only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated graded ring gr_I(R) = ⊕ I^n/I^{n+1} of a ring with respect to an ideal",
+   "results": "IsRingFiltration.toGradedMonoid (Mathlib.RingTheory.FilteredAlgebra.Basic), Ideal.Filtration, Ideal.Filtration.submodule (Mathlib.RingTheory.Filtration), reesAlgebra (Mathlib.RingTheory.ReesAlgebra), HomogeneousIdeal, Ideal.IsHomogeneous: no associated graded ring",
+   "date": "2026-10-10",
+   "verdict": "no match (the Rees algebra exists, not gr)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'AssociatedGraded|associatedGraded|GradedPiece|gradedPiece' --include=*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls RingTheory/FilteredAlgebra/ and grep of its declarations",
+   "results": "no hit; RingTheory/FilteredAlgebra/Basic.lean has only IsFiltration / IsRingFiltration / IsModuleFiltration classes (lines 54-101), no associated graded object",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
