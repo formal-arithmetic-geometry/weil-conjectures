@@ -888,3 +888,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:58 L: reviewed lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections (5 steps, no new node): accepted.
 - 04:59 E1 abandoned lem-weil-pbc-helper-g-ring-char-p: the claim expired at 04:58 after the third return (G4); L took the item over (claim.py next, 04:58; the tool dropped the return entry) and deleted deliver/E1/lem-weil-pbc-helper-g-ring-char-p (3edab980f); L's worker starts from the accepted parts of that delivery.
 - 05:00 L: reviewed lem-weil-pbc-site-covering-morphisms-same-h0-map (3 steps, +001V definition leaf): accepted.
+- 05:00 L: reviewed lem-weil-pbc-sheaf-hom-finite-presentation-kernel (7 steps, no new node; statement made explicit): accepted.
