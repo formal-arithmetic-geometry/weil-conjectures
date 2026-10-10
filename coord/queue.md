@@ -1,12 +1,13 @@
 # Work queue
 
-860 items; claim with `tools/claim.py next <group> [--stage N]`.
+859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (361)
+## Stage 1: nodes to split (360)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `thm-constructible-serre` | 5 | rests_on_sorry |
+| `lem-weil-pbc-dimension-preserved-field-extension` | 1009 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1010 | none |
 | `lem-weil-pbc-fpqc-descend-affine` | 1010 | none |
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1010 | none |
@@ -17,7 +18,6 @@
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
-| `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
@@ -62,10 +62,7 @@
 | `lem-exc-field-discrete-modules` | 3008 | none |
 | `lem-galois-coproduct-copies-morphisms-clopen` | 3008 | none |
 | `lem-galois-fpqc-morphisms-descend` | 3008 | none |
-| `lem-pc-curves-are-sc` | 3008 | none |
 | `lem-pc-degree-base-change` | 3008 | rests_on_sorry |
-| `lem-pc-dim-base-change` | 3008 | none |
-| `lem-pc-proper-base-change` | 3008 | none |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
 | `lem-sc-divisor-finite-support` | 3008 | none |
 | `lem-sc-divisor-module-local` | 3008 | none |
@@ -89,10 +86,12 @@
 | `lem-galois-fpqc-descend-unramified` | 3009 | none |
 | `lem-galois-fpqc-descending-types-morphisms` | 3009 | none |
 | `lem-pc-closed-imm-base-change` | 3009 | sorry_here |
+| `lem-pc-dimension-affine-open-cover` | 3009 | none |
 | `lem-pc-divisor-line-bundle-agrees-sc` | 3009 | none |
 | `lem-pc-euler-characteristic-well-defined` | 3009 | none |
 | `lem-pc-h0-geom-connected` | 3009 | none |
 | `lem-pc-h0-proper-variety` | 3009 | none |
+| `lem-pc-scheme-dimension-local-rings` | 3009 | none |
 | `lem-sc-rational-functions-generic-stalks` | 3009 | none |
 | `lem-sc-riemann-roch` | 3009 | rests_on_sorry |
 | `lem-sc-riemann-roch-large-degree` | 3009 | rests_on_sorry |
@@ -872,7 +871,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 381 nodes that wait for stage 1, 926 nodes that wait for a statement dependency.
+Not open yet: 380 nodes that wait for stage 1, 929 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
