@@ -25,9 +25,68 @@
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-ample-proj-open] there are a nonnegatively graded commutative ring $S$ and an open immersion $X\\hookrightarrow\\operatorname{Proj}(S)$ [def-pc-proj]; identify $X$ with its image, an open subscheme of $\\operatorname{Proj}(S)$. Let $\\overline X$ be the closure of the underlying set of $X$ in $\\operatorname{Proj}(S)$ and put $T=\\overline X\\setminus X$. Since $X$ is open, $T=\\overline X\\cap(\\operatorname{Proj}(S)\\setminus X)$ is closed in $\\operatorname{Proj}(S)$.",
+   "uses": [
+    "lem-sc-ample-proj-open",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 01ZY proof, first paragraph: Proposition 01Q3 gives an open subscheme of Proj"
+   }
+  },
+  {
+   "text": "For each point of the finite set $E$, the basis statement [lem-sc-proj-standard-open-basis] gives a positive-degree homogeneous element $f_i$ such that the corresponding $D_+(f_i)$ contains that point and is disjoint from $T$. Taking the finitely many choices gives $E\\subseteq\\bigcup_iD_+(f_i)\\subseteq\\operatorname{Proj}(S)\\setminus T$.",
+   "uses": [
+    "lem-sc-proj-standard-open-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 01ZY proof, second paragraph: standard opens form a basis and E is finite"
+   }
+  },
+  {
+   "text": "Let $I=(f_1,\\ldots,f_r)$ be the graded ideal they generate. If $E=\\{\\mathfrak p_1,\\ldots,\\mathfrak p_m\\}$ in $\\operatorname{Proj}(S)$, then $I$ is contained in none of the homogeneous primes $\\mathfrak p_j$. The graded prime-avoidance statement [lem-sc-graded-prime-avoidance] therefore gives a positive-degree homogeneous $f\\in I$ outside every $\\mathfrak p_j$, so $E\\subseteq D_+(f)\\subseteq\\bigcup_iD_+(f_i)$.",
+   "uses": [
+    "lem-sc-graded-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 01ZY proof, third paragraph: apply Algebra Lemma 00JS to I and the point primes"
+   }
+  },
+  {
+   "text": "Since $X$ is open in $\\operatorname{Proj}(S)$, $U=X\\cap D_+(f)$ is an open subscheme of $D_+(f)$. Because $D_+(f)\\cap T=\\varnothing$, $U=\\overline X\\cap D_+(f)$ as sets, so $U$ is also closed in $D_+(f)$. The inclusion $j:U\\to D_+(f)$ is then a closed immersion [def-weil-closed-immersion]: it is a homeomorphism onto a closed subset, and $\\mathcal O_{D_+(f)}\\to j_*\\mathcal O_U$ is surjective, being an isomorphism over the open set $U$ and having zero target over the open complement $D_+(f)\\setminus U$. By [lem-sc-proj-standard-open-basis], $D_+(f)$ is affine, and a closed immersion is an affine morphism [pqf-def-affine-morphism], so $U=j^{-1}(D_+(f))$ is affine. Thus $U$ is an affine open of $X$ containing $E$.",
+   "uses": [
+    "lem-sc-proj-standard-open-basis",
+    "def-weil-closed-immersion",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 01ZY proof, final paragraph: D_+(f) affine and X cap D_+(f) closed in it (closedness argued topologically, X being open)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ample-proj-open",
+  "lem-sc-proj-standard-open-basis",
+  "lem-sc-graded-prime-avoidance",
+  "def-pc-proj",
+  "def-weil-closed-immersion",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties Lemma 01ZY (properties-lemma-ample-finite-set-in-affine), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,12 +111,33 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ample-finite-principal-affine",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-ample-finite-set-affine",
+  "worker": "stage1",
+  "summary": "Split Properties Lemma 01ZY by reducing an ample scheme to an open subscheme of Proj, choosing finitely many standard opens around E away from the boundary, applying graded prime avoidance, and observing the resulting intersection is a closed subscheme of an affine standard open.",
+  "blueprint": "Realizes lem-sc-pic-proper-ntorsion proof first sentence: choose powers and sections with affine nonvanishing locus containing a finite set.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ample-proj-open",
+    "why": "The Proj realization of an arbitrary ample scheme is a generic characterization theorem not supplied by this unit's other nodes."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-afs",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-afs (reviewer sub-agent of L); spot-checked: Source Stacks Properties Lemma 01ZY (properties.tex label lemma-ample-finite-set-in-affine), case (3): the item statement (unchanged) agrees: scheme X with ample L (def-weil-pbc-ample-invertible-module includes quasi-compactness, as 01Q3 requires), finite E in X, affine open U containing E. Steps: (1) lem-sc-ample-proj-open = Properties Prop 01Q3 (1)=>(2) with S=Gamma_*(X,L), true; X open in Proj(S), T = closure minus X closed. (2) lem-sc-proj-standard-open-basis (Algebra 00JP(5), Constructions 01MB; true) gives f_i of positive degree with x in D_+(f_i) inside the open complement of T. (3) lem-sc-graded-prime-avoidance: I=(f_1..f_r) graded, inside S_+, not in any point prime p_j (p_j lies in some D_+(f_i)); gives homogeneous positive-degree f in I outside all p_j, and D_+(f) in union D_+(f_i) since a prime missing f misses I. (4) clopen subscheme of affine D_+(f) is affine. Small cases: E empty (r=0, I=0, f=0 in S_1, D_+(0) empty, U empty affine); singleton in Proj k[T0,T1] (one chart). Mathlib (pinned): ProjectiveSpectrum.isTopologicalBasis_basic_opens (Topology.lean:391) uses basicOpen of all r : A, not positive-degree homogeneous f, and Proj.isAffineOpen_basicOpen (Basic.lean:201) is the affine clause only, so the basis node stays unsplit; no ample-to-Proj declaration. Blueprint search (blueprint_refs.py search 'ample Proj open immersion', 'standard open basis Proj'): 0 matches. Tool use lem-sc-ample-proj-open dropped: it is a node of the same unit, not an off-unit tool. FIX more, RETURN less: (a) C1, item step 4 (and step 1): the step used the scheme-theoretic closure and 'X cap D_+(f) = closure cap D_+(f) as schemes' and 'a closed subscheme of an affine is affine' with no node; rewritten with the topological closure (step 1: T closed since X open) and: U = X cap D_+(f) open and closed in D_+(f), so the inclusion is a closed immersion [def-weil-closed-immersion] (surjectivity of O -> j_*O_U checked on U and its open complement), and a closed immersion is affine [pqf-def-affine-morphism], so U = j^{-1}(D_+(f)) is affine; proof_deps += def-pc-proj, def-weil-closed-immersion, pqf-def-affine-morphism (generic definitions). (b) B3, dag/nodes/sec-curve-estimates/lem-sc-ample-proj-open.json: statement: Proj had no definition node; cites [def-pc-proj], 'graded' -> 'nonnegatively graded' (the setting of def-pc-proj and of Gamma_*), stmt_deps += def-pc-proj; source.place (1)=>(4) corrected to (1)=>(2). FIX: dag/nodes/sec-curve-estimates/lem-sc-proj-standard-open-basis.json: source.place: cited Constructions 01ND/01NG (projective space) replaced by Algebra 00JP(5) and Constructions 01MB. Start Sat Oct 10 04:10:51 PM UTC 2026, end Sat Oct 10 04:12:34 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ }
 }
