@@ -1,8 +1,8 @@
 # Work queue
 
-902 items; claim with `tools/claim.py next <group> [--stage N]`.
+901 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (143)
+## Stage 1: nodes to split (142)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-pc-ringed-space-product-kinjective` | 3015 | none |
 | `lem-pc-tor-amplitude-qcoh-test` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
-| `lem-pc-ringed-space-rgamma-derived-limit` | 3016 | none |
 | `lem-pc-tower-injective-embedding` | 3016 | none |
 | `lem-pc-derived-mayer-vietoris-triangle` | 3017 | none |
 | `lem-pc-ringed-space-sheafification-cohomology` | 3017 | none |
@@ -65,7 +64,6 @@
 | `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | - | none |
-| `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `thm-sc-constant-invariance` | - | none |
 | `def-nagata-morphism-equality-stage` | - | none |
 | `def-nagata-qc-open-equality-stage` | - | none |
@@ -78,6 +76,7 @@
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-pic-affine-quotient` | - | none |
 | `lem-weil-pbc-constant-subsheaf-generic` | - | none |
+| `lem-weil-pbc-pullback-finite-locally-constant` | - | none |
 | `lemma-nagata-filtered-colimit-finite-data` | - | none |
 | `cor-pd-pic0-base-change` | - | sorry_here |
 | `def-nagata-affine-fp-descent` | - | none |
@@ -914,7 +913,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1536 nodes that wait for a statement dependency, 183 nodes that wait for stage 1.
+Not open yet: 1538 nodes that wait for a statement dependency, 182 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
