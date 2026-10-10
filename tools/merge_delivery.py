@@ -15,6 +15,7 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
                             maintainer's field, never a file outside the delivery
       --tool-uses a,b,c     added to the item's `tool_uses` before review_split.py runs (the worker's split_report.tool_uses
                             declarations are copied too; --drop-tool-uses a,b leaves out the ones the reviewer rejects)
+      --drop-nodes a,b      delivered NEW nodes not to merge (duplicates of existing nodes); the fixes must drop their citations
       --reviewed NOTE       the `reviewed` note (default: the mechanical-checks note, with the spot check)
       --lead-note TEXT      appended to the item's `lead_note`
       --verdict PASS|FIX    for the ledger line (default FIX with --apply-fixes, else PASS)
@@ -407,6 +408,13 @@ def cmd_merge(o):
         tree = Tree()
         book = {"group": group, "item": item}
         try:
+            # --drop-nodes a,b (16:36 UTC): a delivered NEW node the reviewer found duplicate/unneeded is not merged; the
+            # reviewer's --apply-fixes must have removed every citation of it (check_dag refuses a dangling citation)
+            for nid in [x.strip() for x in (o.drop_nodes or "").split(",") if x.strip()]:
+                hits = [f for f, k in kinds.items() if k == "new" and pathlib.Path(f).stem == nid]
+                if not hits or exists_at("HEAD", hits[0]):
+                    raise Fail(f"--drop-nodes {nid}: not a new node of this delivery")
+                del kinds[hits[0]]
             merge_files(group, item, base, kinds, tree)
             nfix, nadded = apply_fixes(o.apply_fixes, kinds, tree, item, group) if o.apply_fixes else (0, 0)
             item_path = next(f for f, k in kinds.items() if k == "item")
@@ -609,7 +617,7 @@ def main():
     ap = argparse.ArgumentParser(prog="merge_delivery.py", add_help=False)
     ap.add_argument("group"); ap.add_argument("item")
     ap.add_argument("--spot-checked"); ap.add_argument("--reviewer", default="reviewer")
-    ap.add_argument("--apply-fixes"); ap.add_argument("--tool-uses"); ap.add_argument("--drop-tool-uses"); ap.add_argument("--reviewed")
+    ap.add_argument("--apply-fixes"); ap.add_argument("--tool-uses"); ap.add_argument("--drop-tool-uses"); ap.add_argument("--drop-nodes"); ap.add_argument("--reviewed")
     ap.add_argument("--lead-note"); ap.add_argument("--verdict", choices=["PASS", "FIX", "pass", "fix"])
     ap.add_argument("--head")
     try:
