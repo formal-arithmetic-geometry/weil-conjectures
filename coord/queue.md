@@ -28,7 +28,7 @@
 | `lemma-weil-pbc-etale-cohomology-continuity` | 3004 | none |
 | `lemma-weil-pbc-fibre-product-limit` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
-| `def-galois-fibre-functor` | 3005 | none |
+| `lem-galois-flc-set-stalk-finite` | 3006 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-galois-transitive` | 3007 | none |
@@ -864,7 +864,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 338 nodes that wait for stage 1, 973 nodes that wait for a statement dependency.
+Not open yet: 338 nodes that wait for stage 1, 974 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
