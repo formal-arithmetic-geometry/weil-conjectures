@@ -24,9 +24,77 @@
   "def-pc-derived-category",
   "def-pur-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-pseudo-coherent-qcoh], E belongs to D_{\\mathrm{QCoh}}(\\mathcal O_U). The quasi-compact-open lifting lemma [lem-sc-qc-open-derived-lift] gives E' in D_{\\mathrm{QCoh}}(\\mathcal O_X) with E'|_U\\cong E.",
+   "uses": [
+    "lem-sc-pseudo-coherent-qcoh",
+    "lem-sc-qc-open-derived-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE proof, first two sentences"
+   }
+  },
+  {
+   "text": "Write X=\\operatorname{Spec}(A). By the affine derived equivalence [lem-pc-affine-qcoh-derived-equivalence], choose a complex M^\\bullet of A-modules whose associated complex represents E'. Choose f_1,\\ldots,f_r\\in A with U=\\bigcup_jD(f_j). On D(f_j)=\\operatorname{Spec}(A_{f_j}) the object E'|_{D(f_j)}\\cong E|_{D(f_j)} is pseudo-coherent (pseudo-coherence is local [def-pur-pseudo-coherent-complex]) and is represented by \\widetilde{M^\\bullet_{f_j}} (localization is exact). Applying the affine pseudo-coherence criterion [lem-pc-affine-pseudo-coherent-criterion] over A_{f_j}, each M^\\bullet_{f_j} is quasi-isomorphic to a bounded-above complex of finite free A_{f_j}-modules.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-pseudo-coherent-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE proof, X=Spec(A), choice of M and finite principal-open cover"
+   }
+  },
+  {
+   "text": "Construct by descending induction on n a complex F^\\bullet of finite free A-modules, bounded above, and a map of complexes \\alpha:F^\\bullet\\to M^\\bullet. The invariant at stage n: F^i=0 for i<n, and for every j, H^i(\\alpha_{f_j}) is an isomorphism for i>n and surjective for i=n. Start: by step 2 each M^\\bullet_{f_j} has cohomology vanishing in large degrees, so choose n with H^i(M^\\bullet_{f_j})=0 for all i\\ge n and all j, and take F^\\bullet=0. Step: let C^\\bullet=\\operatorname{Cone}(\\alpha); localization is exact and commutes with cones, so the long exact cohomology sequence of F^\\bullet_{f_j}\\to M^\\bullet_{f_j}\\to C^\\bullet_{f_j}\\to F^\\bullet_{f_j}[1] gives H^i(C^\\bullet_{f_j})=0 for i\\ge n. In the sense of [lem-sc-cone-pseudo-coherent], F^\\bullet_{f_j} is a bounded complex of finite free A_{f_j}-modules, hence m-pseudo-coherent for every m (identity map), and M^\\bullet_{f_j} is (n-1)-pseudo-coherent: if P^\\bullet is the bounded-above finite-free model of step 2, the stupid truncation \\sigma_{\\ge n-1}P^\\bullet\\to P^\\bullet\\cong M^\\bullet_{f_j} is an isomorphism on H^i for i>n-1 and surjective on H^{n-1}. Applying [lem-sc-cone-pseudo-coherent] with m=n-1 to this triangle, C^\\bullet_{f_j} is (n-1)-pseudo-coherent, and [lem-sc-finite-cohomology] with m=n-1 gives that H^{n-1}(C^\\bullet_{f_j}) is a finite A_{f_j}-module.",
+   "uses": [
+    "lem-sc-cone-pseudo-coherent",
+    "lem-sc-finite-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE proof, induction setup and cone paragraph"
+   }
+  },
+  {
+   "text": "For each j choose finitely many classes generating H^{n-1}(C^\\bullet_{f_j}), represent them by elements of C^{n-1}_{f_j}, and multiply by a common power of f_j so that all representatives come from C^{n-1}. Take the direct sum of the resulting finite free A-modules over all j. Since each representative is a cocycle after localization, multiply the corresponding basis vector by a further power of f_j so that its composite to C^n is zero in C^n; one common power for all finitely many vectors gives a map \\beta:F^{n-1}\\to C^{n-1} whose composite to C^n is zero and whose localization surjects onto H^{n-1}(C^\\bullet_{f_j}) for every j (the powers are units after localization, and the summands for other indices still land in cocycles). Writing C^{n-1}=M^{n-1}\\oplus F^n, the components of \\beta define the next component \\alpha^{n-1} of \\alpha and the differential F^{n-1}\\to F^n. The zero composite makes these maps a morphism of complexes, and the induced morphism from the triangle (F^{\\ge n})\\to(F^{\\ge n-1})\\to F^{n-1}[1-n] to the cone triangle, with the four and five lemmas, shows that the new map induces isomorphisms on localized cohomology in degrees at least n and a surjection in degree n-1, which is the invariant at stage n-1 (in degree n-1 it need not be injective yet; that is achieved at the next stage). Since the degrees i\\ge n are never changed afterwards, the limit F^\\bullet is bounded above with finite free terms and every \\alpha_{f_j}:F^\\bullet_{f_j}\\to M^\\bullet_{f_j} is a quasi-isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE proof, induction step and denominator-clearing paragraph"
+   }
+  },
+  {
+   "text": "Termwise association gives a bounded-above complex of finite free \\mathcal O_X-modules \\widetilde{F^\\bullet} and a map \\widetilde\\alpha:\\widetilde{F^\\bullet}\\to\\widetilde{M^\\bullet}. Its restriction to each D(f_j) is \\widetilde{\\alpha_{f_j}}, a quasi-isomorphism by step 4 and exactness of localization; being a quasi-isomorphism is local, so \\widetilde\\alpha|_U is a quasi-isomorphism. Therefore \\widetilde{F^\\bullet}|_U\\cong\\widetilde{M^\\bullet}|_U\\cong E'|_U\\cong E in D(\\mathcal O_U).",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EE proof, final sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-pseudo-coherent-qcoh",
+  "lem-sc-qc-open-derived-lift",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-sc-cone-pseudo-coherent",
+  "lem-sc-finite-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EE (Lemma 36.13.6)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +119,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-plus-locally-free",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-pseudo-coherent-lift",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 08EE in the local source checkout and split its proof into the quasi-coherent reduction and lift, affine module model, descending cone induction, denominator-clearing extension step, and final sheafification. Added two statement-only supporting nodes for the preliminary reductions; the induction is written explicitly in the item proof.",
+  "blueprint": "Realizes the proper-flat support proof clause of lem-sc-finite-duality: lift a pseudo-coherent representative from the quasi-compact open to a bounded-above finite-free complex on the affine scheme.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine derived-equivalence tool needed to represent the lifted quasi-coherent object by an A-module complex and to sheafify the final finite-free model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-apl3137",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apl3137 (reviewer sub-agent of L); spot-checked: Read Tag 08EE, 064R, 064S, lemma-lift-quasi-coherent, lemma-pseudo-coherent; children qcoh/qc-open-lift correct specializations; cone/finite-cohomology not duplicates (lem-pc-pseudo-coherent-distinguished-triangle is the scheme version of a different clause); recorded searches dated 2026-10-11, not rerun. FIX more, RETURN less: (1) B3/C4 lem-sc-cone-pseudo-coherent and lem-sc-finite-cohomology used m-pseudo-coherent in D(R) citing def-pur-pseudo-coherent-complex, which defines only pseudo-coherence on schemes: m-pseudo-coherence now defined inline (Tag 064N form), stmt_deps corrected; (2) E/step 4 (missed by the second reading) claimed the new map is a localized cohomology isomorphism in degrees >= n-1, false in degree n-1: corrected to iso in degrees >= n and surjection in n-1, with the stage invariant stated in step 3 and the limit argument made explicit; (3) C1 step 3 and step 2 gaps: M_{f_j} (n-1)-pseudo-coherent via stupid truncation of the step-2 model, F_{f_j} pseudo-coherent, restriction of E' to D(f_j) pseudo-coherent and represented by M_{f_j}; start of induction made F=0 with H^i=0 for i>=n; step 5 rephrased via the global map alpha-tilde being a local quasi-isomorphism.; 3 file(s) fixed by the reviewer"
+ }
 }
