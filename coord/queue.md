@@ -1,8 +1,8 @@
 # Work queue
 
-853 items; claim with `tools/claim.py next <group> [--stage N]`.
+852 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (320)
+## Stage 1: nodes to split (319)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,8 +10,8 @@
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1010 | none |
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1010 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
-| `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
+| `lem-weil-pbc-finite-type-field-finite-isolated-points` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -53,8 +53,6 @@
 | `lem-exc-cochains-derived-invariants` | 3010 | none |
 | `lem-exc-discrete-modules-abelian` | 3010 | none |
 | `lem-pc-ample-positive-degree` | 3010 | rests_on_sorry |
-| `lem-pc-cohomology-sections-affine-base` | 3010 | sorry_here |
-| `lem-pc-genus-base-change` | 3010 | rests_on_sorry |
 | `lem-pc-nonzero-section-integral-cartier` | 3010 | none |
 | `lem-pc-very-ample-ample` | 3010 | sorry_here |
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
@@ -65,6 +63,7 @@
 | `lem-sc-riemann-roch` | 3010 | rests_on_sorry |
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
 | `lem-pc-genus-well-defined` | 3011 | none |
+| `lem-pc-leray-degenerate-sections` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
 | `lem-sc-finite-duality` | 3011 | rests_on_sorry |
 | `lem-sc-group-cd-one` | 3011 | none |
@@ -865,7 +864,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 339 nodes that wait for stage 1, 970 nodes that wait for a statement dependency.
+Not open yet: 338 nodes that wait for stage 1, 973 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
