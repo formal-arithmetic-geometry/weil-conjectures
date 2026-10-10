@@ -23,23 +23,122 @@
   "def-pc-derived-direct-image",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ and fix an affine open $V=\\operatorname{Spec}(A)\\subseteq Y$; put $U=f^{-1}(V)$ and $f_V:U\\to V$, again quasi-compact and quasi-separated (a base change of $f$ along an open immersion). Choose a K-injective resolution $E\\to I$; by [lem-sc-derived-k-injective-restrict-open] $I|_U$ is K-injective, and $(f_*I)|_V=(f_V)_*(I|_U)$ termwise, so $(Rf_*E)|_V\\cong Rf_{V*}(E|_U)$ and, restriction being exact, $\\mathcal H^q(Rf_*E)|_V\\cong\\mathcal H^q(Rf_{V*}(E|_U))$. Also $E|_U\\in D_{\\mathrm{QCoh}}(\\mathcal O_U)$ [def-pc-derived-category]. Fix an integer $q$. Since $V$ is quasi-compact, [lem-pc-derived-direct-image-uniform-truncation-bound] for $f_V$ gives an integer $n$ (depending on $q$) such that $\\mathcal H^q(Rf_{V*}(E|_U))\\to\\mathcal H^q(Rf_{V*}\\tau_{\\geq -n}(E|_U))$ is an isomorphism. The complex $K=\\tau_{\\geq -n}(E|_U)$ is bounded below with $\\mathcal H^j(K)=0$ for $j<-n$, so [thm-sp-truncation-e2] applies to $v=f_{V*}$ with $a=-n$ (its $Rv$ on $D^+$ is $Rf_{V*}$, both computed by K-injective resolutions [def-pc-derived-direct-image]) and gives a spectral sequence with $E_2^{p,j}=R^p(f_V)_*\\mathcal H^j(K)$, where $\\mathcal H^j(K)=\\mathcal H^j(E)|_U$ for $j\\geq -n$ and $0$ for $j<-n$, converging to $\\mathcal H^{p+j}(Rf_{V*}K)$ with a finite filtration (clauses 3, 5, 6). Each $\\mathcal H^j(K)$ is quasi-coherent, so [lem-pc-finite-support-hi](1) for $f_V$ makes every $E_2^{p,j}$ quasi-coherent.",
+   "uses": [
+    "lem-sc-derived-k-injective-restrict-open",
+    "def-pc-derived-category",
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "thm-sp-truncation-e2",
+    "def-pc-derived-direct-image",
+    "lem-pc-finite-support-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5, proof of part (1): canonical truncations and quasi-coherence of the higher direct images"
+   }
+  },
+  {
+   "text": "In total degree $q$, clause 5 of [thm-sp-truncation-e2] gives a finite filtration $0=F^{q+n+1}H^q\\subseteq\\dots\\subseteq F^0H^q=H^q:=\\mathcal H^q(Rf_{V*}K)$ and clause 6 gives $\\operatorname{gr}^pH^q\\cong E_\\infty^{p,q-p}=E_{r_0}^{p,q-p}$, obtained from the quasi-coherent $E_2^{p,q-p}$ by finitely many passages $E_{r+1}=\\ker d_r/\\operatorname{im}d_r$ with $d_r$ maps between quasi-coherent $\\mathcal O_V$-modules. Kernels, images and cokernels of maps of quasi-coherent modules are quasi-coherent ([lem-weil-pbc-quasi-coherent-module-kernel], [lem-weil-pbc-quasi-coherent-module-cokernel-image](2)), so every $E_\\infty^{p,q-p}$, hence every $\\operatorname{gr}^pH^q$, is quasi-coherent; by descending induction on $p$, using [lem-pc-quasi-coherent-extension] on the short exact sequences $0\\to F^{p+1}H^q\\to F^pH^q\\to\\operatorname{gr}^pH^q\\to0$, $H^q$ is quasi-coherent. By Step 1, $\\mathcal H^q(Rf_*E)|_V\\cong H^q$ is quasi-coherent. Since the affine opens $V$ cover $Y$ and quasi-coherence is local, $\\mathcal H^q(Rf_*E)$ is quasi-coherent for every $q$, i.e. $Rf_*E\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [def-pc-derived-category].",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-pc-quasi-coherent-extension",
+    "def-pc-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D5, proof of part (1): finite truncation filtration and closure properties of quasi-coherent modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-k-injective-restrict-open",
+  "def-pc-derived-category",
+  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "thm-sp-truncation-e2",
+  "def-pc-derived-direct-image",
+  "lem-pc-finite-support-hi",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-quasi-coherent-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5 (perfect-lemma-quasi-coherence-direct-image), part (1)"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "grep -rln -i 'DerivedCategory|QCoh' Mathlib/AlgebraicGeometry in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib",
-   "results": "no file: Mathlib/AlgebraicGeometry has no derived category of O_X-modules and no QCoh subcategory",
-   "date": "2026-10-10",
+   "tool": "leanfinder",
+   "query": "derived direct image preserves quasi-coherent cohomology",
+   "results": "CategoryTheory.Functor.sheafPushforwardCocontinuous (Mathlib/CategoryTheory/Sites/CoverLifting), SheafOfModules.pushforwardNatIso (Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous), and general derived-category lifting; none states scheme Rf_* or QCoh cohomology",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme, Rf_*, QuasiCoherent",
+   "results": "no hits; parser rejected the pattern as an invalid term",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep 'quasi-coherent.*direct image|DerivedCategory' Mathlib/AlgebraicGeometry",
+   "results": "no scheme derived-category/QCoh direct-image theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived direct image sends complexes with quasi-coherent cohomology to complexes with quasi-coherent cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-pc-noetherian-derived-direct-image-right-adjoint"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-direct-image-preserves-qcoh",
+  "worker": "stage1",
+  "summary": "Split Tag 08D5 part (1) into the canonical-truncation spectral-sequence input and the finite-filtration closure argument. The existing node lem-pc-finite-support-hi supplies quasi-coherence of every higher direct image of a quasi-coherent sheaf; the new statement-only node lem-pc-derived-qcoh-truncation-filtration supplies the derived spectral sequence and finite filtration.",
+  "blueprint": "The steps realize the ancestor blueprint proof's first-step comparison prerequisite: the derived pushforward of a quasi-coherent complex is again quasi-coherent.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-support-hi",
+    "why": "The derived truncation argument needs the generic qcqs theorem that each higher direct image R^p f_* of a quasi-coherent sheaf is quasi-coherent; no node in the Picard-duality route supplies that sheaf-level fact."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "After the uniform truncation bound reduces to a bounded-below complex, the proof needs the finite truncation spectral sequence and its finite filtration; the Picard-duality unit has no equivalent spectral-sequence statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-pc-finite-support-hi",
+  "thm-sp-truncation-e2"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dpq1826",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dpq1826 (reviewer sub-agent of L); spot-checked: Statement = 08D5(1); no cycle (uniform-truncation-bound is unsplit, created from preserves-direct-sums; 08D4 not used); 08D5 route carried (affine V, bounded-below spectral sequence thm-sp-truncation-e2, unbounded via truncation bound). FIX more, RETURN less: (1) C4 step 1 read the uniform bound as one N for all degrees; the cited node gives n depending on q, rewritten per degree with a=-n and H^j(K)=0 for j<-n; (2) C1 step 1 (Rf_*E)|_V = Rf_{V*}(E|_U) uncited, now via lem-sc-derived-k-injective-restrict-open; (3) C1 step 2 extension/subquotient closure of QCoh was asserted from 'modules associated to A-modules' (extensions need 01IE): kernels/images cite pbc nodes lem-weil-pbc-quasi-coherent-module-kernel/-cokernel-image (tool uses), extensions cite new statement-only node lem-pc-quasi-coherent-extension (Stacks 01IE, leanfinder no match). uses/proof_deps updated.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-10 L (R-dpq1826): Second reading missed faults 1-3."
 }

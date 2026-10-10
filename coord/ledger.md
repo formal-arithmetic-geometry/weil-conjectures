@@ -2245,3 +2245,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:28 L: merged deliver/G1/lem-sc-mult-n-pullback (reviewer FIX; first push; new nodes: 0)
 - 18:29 L: merged deliver/F1/lem-pc-derived-adjoint-functors (reviewer FIX; first push; new nodes: 1)
 - 18:29 L: merged deliver/G1/def-pc-perfect-complex (reviewer FIX; first push; new nodes: 0)
+- 18:29 L: merged deliver/G1/lem-pc-derived-direct-image-preserves-qcoh (reviewer FIX+NODE(1); first push; new nodes: 1)
