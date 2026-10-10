@@ -19,11 +19,11 @@
 | `lem-sc-ample-on-reduction-noetherian` | 2010 | none |
 | `lem-sc-pic-lift-closed-immersion-dim-le-one` | 2010 | none |
 | `lem-sc-reduced-dim-le-one-ample` | 2010 | none |
+| `lem-sc-ample-square-zero-thickening` | 2011 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
-| `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-qcoherent-descent` | 3007 | none |
@@ -870,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 337 nodes that wait for stage 1, 998 nodes that wait for a statement dependency.
+Not open yet: 337 nodes that wait for stage 1, 999 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
