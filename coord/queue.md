@@ -1,19 +1,19 @@
 # Work queue
 
-902 items; claim with `tools/claim.py next <group> [--stage N]`.
+903 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (153)
+## Stage 1: nodes to split (152)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-existence` | 14 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
-| `lem-pc-derived-functor-commutes-derived-limit` | 3014 | none |
 | `lem-pc-coherent-support-proper-higher-direct-image` | 3015 | none |
 | `lem-pc-direct-image-qc-support-reduction` | 3015 | none |
 | `lem-pc-pseudo-coherent-distinguished-triangle` | 3015 | none |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 3015 | none |
+| `lem-pc-ringed-space-product-kinjective` | 3015 | none |
 | `lem-pc-tor-amplitude-qcoh-test` | 3015 | none |
 | `lem-pc-tower-enough-injectives` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
@@ -40,8 +40,8 @@
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-intersection-effective-cartier` | 4010 | none |
 | `lem-sc-etale-faithfully-flat-local` | 4011 | none |
-| `lem-sc-numerical-polynomial-leading-term` | 4011 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
+| `lem-sc-generic-stalk-finite-length` | 4012 | none |
 | `lem-sc-hilbert-embedded-points-affine-removal` | 5011 | none |
 | `lem-sc-hilbert-embedded-points-gluing` | 5011 | none |
 | `lem-sc-meromorphic-sheaf-generic-product` | 5011 | none |
@@ -52,7 +52,6 @@
 | `lem-pc-flat-module-descent` | 5015 | none |
 | `lem-pc-fp-complex-descent` | 5015 | none |
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
-| `lem-sp-filtered-homotopy-spectral-sequence` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sc-general-theorem-of-cube` | 6011 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
@@ -160,7 +159,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (749)
+## Stage 2: nodes to state (751)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -267,6 +266,7 @@
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fpqc-descend-closed-immersion` | 1 | state |
 | `lem-pc-h0-geom-connected` | 1 | state |
+| `lem-pc-homotopy-limit-map` | 1 | state |
 | `lem-pc-ideal-sheaf-comap-affine-extension` | 1 | state |
 | `lem-pc-inseparable-tensor-nilpotent` | 1 | state |
 | `lem-pc-integral-radicial-surjective-universal-homeomorphism` | 1 | state |
@@ -285,6 +285,7 @@
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-principal-open-dense-of-nonzerodivisor` | 1 | state |
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
+| `lem-pc-right-derived-functor-triangulated` | 1 | state |
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
@@ -914,7 +915,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1511 nodes that wait for a statement dependency, 193 nodes that wait for stage 1.
+Not open yet: 1514 nodes that wait for a statement dependency, 192 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
