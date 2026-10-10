@@ -1806,3 +1806,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:34 L: merged deliver/K1/lem-sc-injective-module-abelian-acyclic-zariski (reviewer FIX; first push; new nodes: 2)
 - 15:34 L: returned deliver/F1/lem-exc-rg-open-stabilizer-adjoint (reviewer RETURN: 1. E3/C2: proof step 1, second sentence (v carries monomorphisms to monomorphisms): the justification is invalid. 'If tw)
 - 15:34 L: retired uncited new node lem-weil-pbc-ringed-site-cech-vanishing-criterion (special case of lem-weil-pbc-site-cech-vanishing-criterion; reviewer R-ima)
+- 15:34 L: merged deliver/M1/def-sc-topological-abelian-cohomology (reviewer FIX; first push; new nodes: 0)
