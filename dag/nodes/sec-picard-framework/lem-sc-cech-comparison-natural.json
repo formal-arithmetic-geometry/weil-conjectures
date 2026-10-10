@@ -23,20 +23,67 @@
   "lem-pc-cech-computes",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the canonical comparison-map naturality statement [lem-sc-cech-comparison-map-naturality], the comparison maps from Cech cohomology to sheaf cohomology form a natural transformation in the coefficient quasi-coherent module. Thus for every morphism $\\varphi:\\mathcal F\\to\\mathcal F'$ and every $p$, the square with the induced Cech map and the map $H^p(X,\\varphi)$ commutes.",
+   "uses": [
+    "lem-sc-cech-comparison-map-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma Tag 01EQ (cohomology-lemma-cech-cohomology)"
+   }
+  },
+  {
+   "text": "Under the affine-intersection and quasi-coherence hypotheses, [lem-sc-cech-comparison-map-iso-affine] says that the canonical comparison maps $c_{\\mathcal F}$ and $c_{\\mathcal F'}$ of [lem-sc-cech-comparison-map-naturality] are isomorphisms and are the identifications $\\check H^p(\\mathcal U,\\mathcal F)\\cong H^p(X,\\mathcal F)$ and $\\check H^p(\\mathcal U,\\mathcal F')\\cong H^p(X,\\mathcal F')$ of [lem-pc-cech-computes]. The commuting square of Step 1, $c_{\\mathcal F'}\\circ\\check H^p(\\mathcal U,\\varphi)=H^p(X,\\varphi)\\circ c_{\\mathcal F}$, then gives $c_{\\mathcal F'}\\circ\\check H^p(\\mathcal U,\\varphi)\\circ c_{\\mathcal F}^{-1}=H^p(X,\\varphi)$, which is exactly that the Cech map induced by $\\varphi$ is carried to $H^p(X,\\varphi)$.",
+   "uses": [
+    "lem-sc-cech-comparison-map-iso-affine",
+    "lem-pc-cech-computes",
+    "lem-sc-cech-comparison-map-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma Tag 01XD (coherent-lemma-cech-cohomology-quasi-coherent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-cech-computes",
+  "lem-sc-cech-comparison-map-iso-affine",
+  "lem-sc-cech-comparison-map-naturality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma 01EQ together with Cohomology of Schemes, Lemma 01XD"
+ },
  "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality of the Cech cohomology to sheaf cohomology comparison isomorphism",
+   "results": "LeanSearch returned an HTTP 500 error; no result available",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech comparison map natural in a quasi-coherent sheaf",
+   "results": "No declaration for the requested comparison theorem; only unrelated Mayer-Vietoris results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
   {
    "tool": "grep",
    "query": "grep -n 'label{lemma-cech-cohomology}' literature/stacks-project/cohomology.tex",
-   "results": "Tag 01EQ found; lem-pc-cech-computes (Tag 01XD) states the isomorphism without naturality.",
+   "results": "Tag 01EQ found; lem-pc-cech-computes (Tag 01XD) states the isomorphism without naturality; the new map-naturality node records the missing functoriality.",
    "date": "2026-10-10",
    "verdict": "source located; Mathlib search left to the splitter"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-eln",
@@ -52,5 +99,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-cech-comparison-natural",
+  "worker": "stage1",
+  "summary": "Searched the source checkout and DAG and found no exact declaration for the item's naturality statement. Added the statement-only node lem-sc-cech-comparison-map-naturality for naturality of the canonical comparison maps, then split the item into the naturality step and the affine-intersection specialization using lem-pc-cech-computes.",
+  "blueprint": "The two steps realize thm-sc-p1-duality proof Step 1's naturality of the locally free Ext/cohomology identification used for the Yoneda pairing.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ccn",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccn (reviewer sub-agent of L); spot-checked: Reviewer R-ccn: statement checked against Stacks 01EQ/01XD; C4 at step 2 repaired by the added statement node lem-sc-cech-comparison-map-iso-affine (01XD via 01ET, 01XB, 01EQ: the canonical comparison map is the isomorphism, not just abstract equality); B3 repaired by defining the comparison map in lem-sc-cech-comparison-map-naturality via the 01EQ double complex and citing def-weil-pbc-site-cech-complex; first merge refused for a missing Mathlib search on the reviewer-added node, added by L at 16:16 UTC and rerun; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
