@@ -23,9 +23,98 @@
   "def-pc-module-pullback",
   "def-sc-ample"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Reading of [def-sc-ample], used alike for the hypothesis on each $Y_j$ and for the conclusion on $Y$.* For a nonempty scheme $X$ proper over a field $k$ and an invertible $\\mathcal O_X$-module $\\mathcal L$, '$\\mathcal L$ is very ample' means: $V=H^0(X,\\mathcal L)$ is finite-dimensional, and for some basis $(s_b)_{b\\in B}$ of $V$ ($B$ a finite nonempty set, $|B|=N+1$) the sections generate $\\mathcal L$, i.e. $X=\\bigcup_bX_{s_b}$ with $X_s=\\{x:\\ s_x\\notin\\mathfrak m_x\\mathcal L_x\\}$, and the morphism $\\iota:X\\to\\mathbf P^N_k=\\operatorname{Proj}(k[x_b:b\\in B])$ [def-pc-proj] attached to $(\\mathcal L,(s_b))$ by [lem-weil-pbc-sections-morphism-to-proj-polynomial-ring] (with $A=k$ and $g$ the structure morphism; it satisfies (i) $q\\circ\\iota=g$, (ii) $\\iota^{-1}(D_+(x_b))=X_{s_b}$, (iii) on $D_+(x_b)$ it induces the $k$-algebra map $x_c/x_b\\mapsto s_c/s_b$, (iv) $\\iota^*\\mathcal O(1)\\cong\\mathcal L$) is a closed immersion. This is the morphism $X\\to\\mathbf P(H^0(X,\\mathcal L)^\\vee)\\cong\\mathbf P^N_k$ of the complete linear system of [def-sc-ample] written in the coordinates of the basis (indexing the coordinates by $B$ instead of $\\{0,\\dots,N\\}$ is a choice of bijection). The steps below use only properties (ii) and (iii) of the morphisms involved, so they hold for every morphism the lemma attaches. If $X=\\emptyset$, then $H^0=0$, the complete linear system is the empty projective space and $\\mathcal L$ is very ample trivially; so empty pieces $Y_j$ may be discarded (they change neither $Y$ nor $H^0(Y,\\mathcal M)$), and if $Y=\\emptyset$ there is nothing to prove. From now on every $Y_j$ is nonempty.",
+   "uses": [
+    "def-sc-ample",
+    "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring",
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-ample-positive-degree.md",
+    "place": "proof of lem-pc-ample-positive-degree, part (⇐), the reduction of very ampleness on $X_{\\bar k}$ to its connected components; argument written by an agent (the item's source field)"
+   }
+  },
+  {
+   "text": "*Global sections over the decomposition.* Write $i_j:Y_j\\to Y$ for the inclusions and $\\mathcal M_j=\\mathcal M|_{Y_j}=i_j^*\\mathcal M$. By [lem-weil-pbc-open-immersion-module-pullback-restriction], $i_j^*\\mathcal M$ is isomorphic, compatibly with restriction maps, to the restriction $V\\mapsto\\mathcal M(V)$ ($V\\subseteq Y_j$ open); we identify the two, so $\\Gamma(V,\\mathcal M_j)=\\mathcal M(V)$, $\\mathcal M_{j,y}=\\mathcal M_y$ and $\\mathcal O_{Y_j,y}=\\mathcal O_{Y,y}$ for $y\\in Y_j$. The $Y_j$ are open, pairwise disjoint and cover $Y$, so the sheaf axiom of $\\mathcal M$ [def-weil-sheaf-of-modules-category] for this covering (the agreement conditions on $Y_j\\cap Y_k=\\emptyset$, $j\\neq k$, are vacuous) says that $\\Gamma(Y,\\mathcal M)\\to\\prod_j\\mathcal M(Y_j)$, $s\\mapsto(s|_{Y_j})_j$, is bijective; it is $\\Omega$-linear. Hence $H^0(Y,\\mathcal M)=\\bigoplus_jH^0(Y_j,\\mathcal M_j)$. By the hypothesis read as in step 1, choose for every $j$ a basis $(s_{j,a})_{a\\in B_j}$ of $H^0(Y_j,\\mathcal M_j)$ ($B_j$ finite nonempty) with $Y_j=\\bigcup_a(Y_j)_{s_{j,a}}$ and a closed immersion $\\varphi_j:Y_j\\to P_j=\\operatorname{Proj}(\\Omega[x_{j,a}:a\\in B_j])$ with properties (i)–(iv) of [lem-weil-pbc-sections-morphism-to-proj-polynomial-ring]. Put $B=\\coprod_jB_j$, and for $b=(j,a)\\in B$ let $s_b\\in\\Gamma(Y,\\mathcal M)$ be the section with $s_b|_{Y_j}=s_{j,a}$ and $s_b|_{Y_k}=0$ for $k\\neq j$. Then $(s_b)_{b\\in B}$ is a basis of $H^0(Y,\\mathcal M)$ (the union of the bases of the summands).",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-ample-positive-degree.md",
+    "place": "proof of lem-pc-ample-positive-degree, part (⇐), the reduction of very ampleness on $X_{\\bar k}$ to its connected components; argument written by an agent (the item's source field)"
+   }
+  },
+  {
+   "text": "*The nonvanishing loci and the quotients $s_c/s_b$.* Let $b=(j,a)\\in B$. For $y\\in Y_k$ with $k\\neq j$, $s_b$ vanishes on the open neighbourhood $Y_k$ of $y$, so $(s_b)_y=0\\in\\mathfrak m_y\\mathcal M_y$; for $y\\in Y_j$, $(s_b)_y=(s_{j,a})_y$ in $\\mathcal M_y=\\mathcal M_{j,y}$ (step 2). Hence $Y_{s_b}=(Y_j)_{s_{j,a}}\\subseteq Y_j$, and since $Y_j=\\bigcup_{a}(Y_j)_{s_{j,a}}$ for every $j$, $Y=\\bigcup_{b\\in B}Y_{s_b}$: the $s_b$ generate $\\mathcal M$. For $c=(k,a')\\in B$, on the open $Y_{s_b}\\subseteq Y_j$ we have $s_c|_{Y_{s_b}}=s_{j,a'}|_{Y_{s_b}}$ if $k=j$ and $s_c|_{Y_{s_b}}=0$ if $k\\neq j$; by the uniqueness of quotients in [lem-weil-pbc-nonvanishing-section-trivializes], $s_c/s_b=s_{j,a'}/s_{j,a}$ in $\\Gamma(Y_{s_b},\\mathcal O_Y)$ if $k=j$, and $s_c/s_b=0$ if $k\\neq j$. (This is the source's 'the image of $Y_j$ lies in the linear subspace $\\mathbf P(H^0(Y_j,\\mathcal M_j)^\\vee)$, and these subspaces are pairwise disjoint', in coordinates: the coordinates outside the block $B_j$ vanish on $Y_j$.)",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-ample-positive-degree.md",
+    "place": "proof of lem-pc-ample-positive-degree, part (⇐), the reduction of very ampleness on $X_{\\bar k}$ to its connected components; argument written by an agent (the item's source field)"
+   }
+  },
+  {
+   "text": "*The morphism of the complete linear system of $\\mathcal M$.* Let $P=\\operatorname{Proj}(\\Omega[x_b:b\\in B])=\\mathbf P^N_\\Omega$, $N+1=|B|=\\dim_\\Omega H^0(Y,\\mathcal M)$. By step 3 the hypothesis of [lem-weil-pbc-sections-morphism-to-proj-polynomial-ring] holds for $(\\mathcal M,(s_b)_{b\\in B})$ with $A=\\Omega$ and $g$ the structure morphism of $Y$; let $\\iota:Y\\to P$ be a morphism it attaches, with (i)–(iv). By step 1 (reading of [def-sc-ample]) it remains to show that $\\iota$ is a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring",
+    "def-sc-ample"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-ample-positive-degree.md",
+    "place": "proof of lem-pc-ample-positive-degree, part (⇐), the reduction of very ampleness on $X_{\\bar k}$ to its connected components; argument written by an agent (the item's source field)"
+   }
+  },
+  {
+   "text": "*Surjectivity on each standard chart.* By [lem-weil-pbc-proj-polynomial-twist-chart] the opens $U_b=D_+(x_b)=\\operatorname{Spec}(R_b)$, $R_b=\\Omega[x_c:c\\in B]_{(x_b)}$, $b\\in B$, are affine and cover $P$, and $R_b$ is generated as an $\\Omega$-algebra by the $x_c/x_b$, $c\\in B$; likewise in $P_j$ the opens $U'_{a}=D_+(x_{j,a})=\\operatorname{Spec}(R'_{a})$ are affine and $R'_{a}$ is generated by the $x_{j,a'}/x_{j,a}$, $a'\\in B_j$. Fix $b=(j,a)$. By (ii) for $\\iota$, step 3, and (ii) for $\\varphi_j$: $\\iota^{-1}(U_b)=Y_{s_b}=(Y_j)_{s_{j,a}}=\\varphi_j^{-1}(U'_a)$. Since $\\varphi_j$ is a closed immersion and $U'_a$ is affine, [lem-weil-pbc-closed-immersion-affine-cover-criterion] (1) gives that $Y_{s_b}$ is affine and that $\\varphi^\\sharp_{j,U'_a}:R'_a\\to\\Gamma(Y_{s_b},\\mathcal O_{Y_j})=\\Gamma(Y_{s_b},\\mathcal O_Y)$ is surjective; by (iii) for $\\varphi_j$ it is the $\\Omega$-algebra map with $x_{j,a'}/x_{j,a}\\mapsto s_{j,a'}/s_{j,a}$, so $\\Gamma(Y_{s_b},\\mathcal O_Y)$ is generated as an $\\Omega$-algebra by the $s_{j,a'}/s_{j,a}$, $a'\\in B_j$. By (iii) for $\\iota$, $\\iota^\\sharp_{U_b}:R_b\\to\\Gamma(Y_{s_b},\\mathcal O_Y)$ is the $\\Omega$-algebra map with $x_c/x_b\\mapsto s_c/s_b$, which by step 3 is $s_{j,a'}/s_{j,a}$ for $c=(j,a')$ (and $0$ for $c\\notin B_j$). Its image is an $\\Omega$-subalgebra containing a set of generators, so $\\iota^\\sharp_{U_b}$ is surjective, and $\\iota^{-1}(U_b)$ is affine.",
+   "uses": [
+    "lem-weil-pbc-proj-polynomial-twist-chart",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-ample-positive-degree.md",
+    "place": "proof of lem-pc-ample-positive-degree, part (⇐), the reduction of very ampleness on $X_{\\bar k}$ to its connected components; argument written by an agent (the item's source field)"
+   }
+  },
+  {
+   "text": "*Conclusion.* The $U_b$, $b\\in B$, form a covering of $P$ by affine opens with $\\iota^{-1}(U_b)$ affine and $\\iota^\\sharp_{U_b}$ surjective for every $b$ (step 5), so $\\iota$ is a closed immersion by [lem-weil-pbc-closed-immersion-affine-cover-criterion] (2). By (iv), $\\iota^*\\mathcal O(1)\\cong\\mathcal M$, and $\\iota$ is the morphism of the complete linear system of $\\mathcal M$ in the basis $(s_b)$ (step 4); so $\\mathcal M$ is very ample on $Y$ in the sense of [def-sc-ample] (step 1).",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-proj-polynomial-twist-chart",
+    "def-sc-ample"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-ample-positive-degree.md",
+    "place": "proof of lem-pc-ample-positive-degree, part (⇐), the reduction of very ampleness on $X_{\\bar k}$ to its connected components; argument written by an agent (the item's source field)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ample",
+  "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring",
+  "def-pc-proj",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-ample-positive-degree.md",
+  "place": "proof of lem-pc-ample-positive-degree, part (⇐) (the reduction to connected components of $X_{\\bar k}$); the argument of the item's source field, written out chart by chart"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -64,7 +153,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +169,32 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-very-ample-disjoint-union",
+  "worker": "stage1",
+  "summary": "Rule 0: no slopmaster2 declaration states this (grep of WeilConjectures for the id, IsVeryAmple, coproduct/clopen with IsClosedImmersion: IsVeryAmple there is 'some closed immersion into some P(n;S)', and RiemannRoch avoids several components by GlobalSectionsBijective); Mathlib has no very ample notion (searches already recorded; LeanSearch still HTTP 500 today). Statement kept. Proof written out from the source field's argument: step 1 fixes the reading of def-sc-ample (a basis of H^0, generation, the morphism of lem-weil-pbc-sections-morphism-to-proj-polynomial-ring a closed immersion), with the empty case; step 2 decomposes H^0 by the sheaf axiom and takes the union of bases extended by zero; step 3 computes Y_{s_b} = (Y_j)_{s_{j,a}} and the quotients s_c/s_b (the coordinates outside block j vanish on Y_j, which is the source's disjoint linear subspaces); steps 4-6 build the morphism and prove it a closed immersion by the affine-chart criterion 01QO, the surjectivity on D_+(x_b) coming from that of the closed immersion of Y_j on its chart. The source's gluing of closed immersions along disjoint images is not needed: the chart criterion does it directly. No new node.",
+  "blueprint": "lem-pc-ample-positive-degree, proof part (⇐), the sentence 'by [def-sc-ample] some power L_{k̄}^{⊗m} is very ample' where X_{k̄} has several connected components: steps 2-6 realize the passage from very ampleness of the common power on each component to very ampleness on X_{k̄} (the item's from.place)",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring",
+    "why": "steps 1,2,4,5 take from its statement the morphism Y -> Proj(Omega[x_b]) attached to generating sections with properties (i)-(iv); no node of sk-thm-picard-rr constructs morphisms to projective space by sections"
+   },
+   {
+    "node": "lem-weil-pbc-proj-polynomial-twist-chart",
+    "why": "step 5 takes from its statement that the D_+(x_b) are affine, cover Proj(A[x]) and that S_(x_b) is generated by the x_c/x_b; no node of sk-thm-picard-rr states the standard charts"
+   },
+   {
+    "node": "lem-weil-pbc-nonvanishing-section-trivializes",
+    "why": "step 3 takes the uniqueness of the quotient t/s on Y_s; generic fact on invertible modules, none in sk-thm-picard-rr"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring",
+  "lem-weil-pbc-proj-polynomial-twist-chart",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "reviewed": "2026-10-10 L: 6 steps checked (def-sc-ample read as a closed immersion from some basis of H^0; sections split over the pieces by the sheaf axiom; each section is nonzero only on its piece, the quotients computed by uniqueness; the morphism to P^N from the generating sections; surjectivity on every standard chart by the affine-cover criterion; closed immersion). tool_uses from the declared list (sections-to-Proj, Proj chart, nonvanishing-section trivializes). No new nodes. Worker note: def-sc-ample leaves open whether the immersion comes from some or every basis."
 }

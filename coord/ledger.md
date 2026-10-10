@@ -1599,3 +1599,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:15 L: accepted lem-galois-flc-set-stalk-finite: 5 steps, no new nodes
 - 14:15 L: Stacks 0E8S gap (sections must generate L) recorded in HUMAN.md (reviewer of E1 very-ample separation criterion, returned)
 - 14:17 L: returned deliver/G1/lemma-weil-pbc-finite-refinement-etale-cover (reviewer RETURN: 1. D3/C4: proof steps 2 and 4: the induction is not set up, and as written step 4 cites thm-pqf-zmt-factorization outsid)
+- 14:17 L: accepted lem-pc-very-ample-disjoint-union: 6 steps, tool_uses 3 (declared by the worker in split_report), no new nodes
