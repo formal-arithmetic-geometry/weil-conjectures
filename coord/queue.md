@@ -1,17 +1,14 @@
 # Work queue
 
-849 items; claim with `tools/claim.py next <group> [--stage N]`.
+850 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (662)
+## Stage 1: nodes to split (661)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-z-localizations-dvr` | 1010 | none |
-| `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
-| `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1011 | none |
-| `lem-weil-pbc-sheaf-basis-surjection` | 1011 | none |
 | `lem-weil-pbc-sheaf-finite-relation-truncations` | 1011 | none |
 | `lem-weil-pbc-sheaf-finite-truncation-colimit` | 1011 | none |
 | `lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer` | 1011 | none |
@@ -72,6 +69,7 @@
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
+| `lem-weil-pbc-etale-residue-polynomial-lift` | 1012 | none |
 | `lem-weil-pbc-faithfully-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-fibre-product-affine-transition` | 1012 | none |
 | `lem-weil-pbc-finite-free-resolution-noetherian` | 1012 | none |
@@ -102,6 +100,7 @@
 | `lem-weil-pbc-ideal-module-product-stalk` | 1012 | none |
 | `lem-weil-pbc-immersion-fibre-degree-one` | 1012 | none |
 | `lem-weil-pbc-integral-extension-dimension` | 1012 | none |
+| `lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite` | 1012 | none |
 | `lem-weil-pbc-kahler-differentials-polynomial-extension` | 1012 | none |
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1012 | none |
 | `lem-weil-pbc-krull-intersection-localization` | 1012 | none |
@@ -669,7 +668,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (187)
+## Stage 2: nodes to state (189)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -723,6 +722,7 @@
 | `lem-weil-pbc-etale-over-normal-ring-normal` | 1 | state |
 | `lem-weil-pbc-etale-retraction-finite-product-local` | 1 | state |
 | `lem-weil-pbc-etale-ring-map-conormal-criterion` | 1 | state |
+| `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1 | state |
 | `lem-weil-pbc-etale-section-idempotent-splitting` | 1 | state |
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-factorization-criterion-filtered-colimit` | 1 | state |
@@ -778,6 +778,7 @@
 | `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
+| `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-monic-coprime-factorization-etale` | 1 | state |
@@ -861,7 +862,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 674 nodes that wait for stage 1, 469 nodes that wait for a statement dependency.
+Not open yet: 673 nodes that wait for stage 1, 470 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
