@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
@@ -76,6 +77,8 @@ with `A = ModuleCat.{u + 1} Λ` this is the construction by local free covers
   functorial flat resolutions exist exactly when there is a flat separator.
 - `ModuleCat.hasFunctorialFlatResolution`: `ModuleCat.{u} Λ` admits functorial flat
   resolutions, over a commutative ring `Λ : Type u`.
+- `AddCommGrpCat.hasFunctorialFlatResolution`: abelian groups admit functorial flat
+  resolutions.
 
 ## Sorried results
 
@@ -147,6 +150,22 @@ instance hasFunctorialFlatResolution (Λ : Type u) [CommRing Λ] :
         (ObjectProperty.prop_unit _)⟩
 
 end ModuleCat
+
+namespace AddCommGrpCat
+
+/-- Abelian groups admit functorial flat resolutions: the unit `ULift ℤ` is a flat
+separator. -/
+instance hasFunctorialFlatResolution : Abelian.HasFunctorialFlatResolution AddCommGrpCat.{u} :=
+  (Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator _).mpr
+    ⟨𝟙_ AddCommGrpCat.{u}, fun A B f g h ↦ by
+      ext x
+      simpa [AddEquiv.ulift, Equiv.ulift] using
+        congr($(h _ ((ObjectProperty.singleton_iff _ _).2 rfl)
+          (ofHom ((zmultiplesHom A x).comp (AddEquiv.ulift (α := ℤ)).toAddMonoidHom)))
+          (ULift.up 1)),
+      ObjectProperty.prop_unit _⟩
+
+end AddCommGrpCat
 
 namespace CategoryTheory.GrothendieckTopology
 
