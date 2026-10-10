@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.Stalk
+public import WeilConjectures.WeilSheaf.StalkCharpoly
 
 /-!
 # The local Frobenius and the local alternating trace of a Weil complex
@@ -88,8 +89,13 @@ theorem nonempty_equiv_stalkAtGeometricFiberPoint {K : Type u} [Field K] [Algebr
     (hg : g ≫ (X ↘ Spec (CommRingCat.of k₀)) = Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))
     (m : ℕ) (hK : Nat.card K = Nat.card k₀ ^ m) :
     Nonempty ((F.stalkAtGeometricFiberPoint ι g hg m hK).Equiv
-      (F.stalkAtGeometricFiberPoint ι' g hg m hK)) :=
-  sorry
+      (F.stalkAtGeometricFiberPoint ι' g hg m hK)) := by
+  have hb (κ : K →ₐ[k₀] AlgebraicClosure k₀) :=
+    (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPoint_comp_geometricFiberProj_base κ g hg
+  have hx : g.base (IsLocalRing.closedPoint K) ∈ X.finitePoints := by
+    obtain ⟨φ, -⟩ := Scheme.exists_eq_spec_map_comp_fromSpecResidueField g _ rfl
+    exact Finite.of_injective _ φ.hom.injective
+  exact F.nonempty_equiv_stalkAt _ _ ((hb ι).trans (hb ι').symm) ((hb ι).symm ▸ hx) m _ _
 
 end WeilSheaf
 
