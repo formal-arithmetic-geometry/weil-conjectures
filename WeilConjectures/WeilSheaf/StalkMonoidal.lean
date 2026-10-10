@@ -173,6 +173,50 @@ theorem stalkAt_frobenius_eq_stalkFrobeniusIso (F : WeilSheaf k₀ l X) :
     Iso.trans_assoc, Iso.trans_assoc]
   rfl
 
+variable {P Q R : Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+  (WeilCoefficients.{u} l)}
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- A pairing `e : P ⊗ Q ⟶ R` of sheaves compatible with isomorphisms `(Fr⁻ᵐ)_* P ≅ P`,
+`(Fr⁻ᵐ)_* Q ≅ Q` and `(Fr⁻ᵐ)_* R ≅ R` induces a pairing of stalks compatible with the induced
+automorphisms of the stalks. -/
+theorem stalkPairing_frobenius
+    (φP : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].obj P ⟶ P)
+    (φQ : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].obj Q ⟶ Q)
+    (φR : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].obj R ⟶ R)
+    (e : P ⊗ Q ⟶ R)
+    (h : (φP ⊗ₘ φQ) ≫ e = μ (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
+        m).inv)_*[WeilCoefficients.{u} l] P Q ≫
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].map e ≫ φR) :
+    (((stalkFrobeniusIso k₀ l X s m hs).hom.app P ≫ (stalkSheafFunctor k₀ l X s).map φP) ⊗ₘ
+        ((stalkFrobeniusIso k₀ l X s m hs).hom.app Q ≫ (stalkSheafFunctor k₀ l X s).map φQ)) ≫
+        μ (stalkSheafFunctor k₀ l X s) P Q ≫ (stalkSheafFunctor k₀ l X s).map e =
+      (μ (stalkSheafFunctor k₀ l X s) P Q ≫ (stalkSheafFunctor k₀ l X s).map e) ≫
+        (stalkFrobeniusIso k₀ l X s m hs).hom.app R ≫ (stalkSheafFunctor k₀ l X s).map φR := by
+  rw [← tensorHom_comp_tensorHom_assoc, μ_natural_assoc, ← Functor.map_comp, h,
+    Functor.map_comp, Functor.map_comp, ← Category.assoc (μ _ _ _),
+    ← Functor.LaxMonoidal.comp_μ, ← Category.assoc, ← Category.assoc,
+    ← NatTrans.IsMonoidal.tensor (τ := (stalkFrobeniusIso k₀ l X s m hs).hom)]
+  simp only [Category.assoc]
+  rw [← Functor.comp_map, ← NatTrans.naturality_assoc]
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- A unit `η : 𝟙 ⟶ R` compatible with an isomorphism `(Fr⁻ᵐ)_* R ≅ R` induces an element of
+the stalk fixed by the induced automorphism of the stalk. -/
+theorem stalkUnit_frobenius
+    (φR : (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].obj R ⟶ R)
+    (η : 𝟙_ _ ⟶ R)
+    (h : ε (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^
+        m).inv)_*[WeilCoefficients.{u} l] ≫
+      (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].map η ≫ φR = η) :
+    (ε (stalkSheafFunctor k₀ l X s) ≫ (stalkSheafFunctor k₀ l X s).map η) ≫
+        (stalkFrobeniusIso k₀ l X s m hs).hom.app R ≫ (stalkSheafFunctor k₀ l X s).map φR =
+      ε (stalkSheafFunctor k₀ l X s) ≫ (stalkSheafFunctor k₀ l X s).map η := by
+  rw [Category.assoc, NatTrans.naturality_assoc, ← Category.assoc (ε _),
+    NatTrans.IsMonoidal.unit (τ := (stalkFrobeniusIso k₀ l X s m hs).hom)]
+  conv_rhs => rw [← h]
+  simp only [Functor.LaxMonoidal.comp_ε, Functor.comp_map, Functor.map_comp, Category.assoc]
+
 end Frobenius
 
 end AlgebraicGeometry.WeilSheaf
