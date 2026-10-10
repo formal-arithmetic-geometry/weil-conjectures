@@ -201,7 +201,7 @@ REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `
 | 2026-10-10 09:44 | 60 of 767 | 0 |
 | 2026-10-10 09:52 | 60 of 767 | 1 |
 
-Review lag: no delivery is waiting; the lead's own reviews are within a few minutes of the reports.
+Review lag (10:12 UTC): 11 deliveries waiting, the oldest since 09:36 UTC (about 35 minutes), more than the twenty minutes the human set; the lead missed them while the delivery watch slept (10-minute polling) during the Lean refresh. Working through them now; the watch is now checked at every review.
 
 **Pilot numbers, effort `xhigh` (batches 1–2, 2026-10-09, 05:53–07:20 UTC).** Two accounts hit their 5-hour session limits: the first after about an hour with 10 workers running, the second after 16 minutes (it had been used elsewhere). 11 items were delivered and passed review: 9 with a report, 2 found complete on disk after their worker died; 12 workers died mid-item, 7 of them leaving nothing usable. Per delivered item: 9.5–14 minutes of wall time (563–852 s, median ~720 s) and 119k–268k worker tokens (median ~170k); 0–6 new nodes per item (median 2), about half of them Mathlib leaves. The review rejected nothing mathematically; what it had to correct or note: two workers could not read the PDFs (no `pdftotext`; installed since) and wrote the proof as an agent's; one refused the review script because the brief forbade `git` (brief fixed); one died leaving its item citing nodes it had not written (brief now says new nodes first); one removed a pointer clause from a definition's statement (accepted, the slopmaster2 text has no such clause); claims inside definitions were kept as the source wrote them and reported.
 
