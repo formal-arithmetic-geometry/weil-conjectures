@@ -1,14 +1,13 @@
 # Work queue
 
-917 items; claim with `tools/claim.py next <group> [--stage N]`.
+915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (259)
+## Stage 1: nodes to split (257)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 2009 | none |
-| `lem-sc-constant-subsheaf-finite-filtration` | 2014 | none |
 | `lem-sc-topological-filtered-cohomology` | 2014 | none |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 2016 | none |
 | `def-sc-ringed-space-module-cohomology` | 2018 | none |
@@ -67,7 +66,6 @@
 | `lem-sc-hilbert-polynomial` | 5009 | none |
 | `lem-sc-finite-surjective-dimension` | 5010 | none |
 | `lem-sc-mult-n-finite-kernel` | 5010 | rests_on_sorry |
-| `thm-picard-serre-a` | 5010 | rests_on_sorry |
 | `lem-pc-base-change-map-cech` | 5011 | none |
 | `lem-pc-bounded-above-flat-kflat` | 5011 | none |
 | `lem-pc-cech-resolution` | 5011 | none |
@@ -929,7 +927,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1337 nodes that wait for a statement dependency, 290 nodes that wait for stage 1.
+Not open yet: 1339 nodes that wait for a statement dependency, 289 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
