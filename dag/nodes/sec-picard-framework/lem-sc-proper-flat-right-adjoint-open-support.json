@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Proper flat right adjoints preserve support over complements of quasi-compact opens",
- "statement": "Let Y be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], let f:X\\to Y be proper, flat, and of finite presentation [def-weil-proper-morphism, def-weil-flat-morphism], and let a be the right adjoint to Rf_* on quasi-coherent derived categories [def-pc-derived-category, def-pc-derived-direct-image]. For every quasi-compact open V\\subset Y with inverse image U\\subset X and every Q in D_QCoh^+(Y) supported on Y\\setminus V, the object a(Q) is supported on X\\setminus U.",
+ "statement": "Let Y be a quasi-compact and quasi-separated scheme [def-weil-pbc-scheme-conventions], let f:X\\to Y be proper, flat, and of finite presentation [def-weil-proper-morphism, def-weil-flat-morphism], and let a be the right adjoint to Rf_* on quasi-coherent derived categories [def-pc-derived-category, def-pc-derived-direct-image]. For every quasi-compact open V\\subset Y with inverse image U\\subset X and every Q in D_QCoh(Y) supported on the closed subset Y\\setminus V, the object a(Q) is supported on the closed subset X\\setminus U.",
  "source": {
   "document": "literature/stacks-project/duality.tex",
   "place": "Tag 0E4G (Lemma 48.4.4), case (1) and proof"
@@ -25,9 +25,76 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put T=Y\\setminus V and U=f^{-1}(V); U is quasi-compact and quasi-separated. If a(Q) is not supported on X\\setminus U, then a(Q)|_U\\neq 0, and perfect generation of D_QCoh(\\mathcal O_U) [lem-pc-derived-qcoh-perfect-generation] supplies a perfect complex P_U on U and a nonzero map \\alpha:P_U\\to a(Q)|_U (the objects K with \\mathrm{Hom}(P',K[n])=0 for all perfect P' and all n form a subcategory closed under shifts, cones, retracts and direct sums). The perfect-map lifting lemma [lem-sc-perfect-support-map-lift], applied with the closed subset X (empty complement), gives a perfect P on X and a map \\beta:P\\to a(Q) with P_U a direct summand of P|_U compatibly with \\alpha and \\beta|_U; hence \\beta|_U\\neq 0.",
+   "uses": [
+    "lem-pc-derived-qcoh-perfect-generation",
+    "lem-sc-perfect-support-map-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G (Lemma 48.4.4), proof, first paragraph"
+   }
+  },
+  {
+   "text": "By the adjunction Rf_* \\dashv a, the lifted map is adjoint to a morphism Rf_*P\\to Q.",
+   "uses": [
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G (Lemma 48.4.4), proof, first paragraph"
+   }
+  },
+  {
+   "text": "Since f is proper, flat, and of finite presentation and P is perfect, the perfect-direct-image lemma [lem-pc-proper-support-perfect-direct-image], applied with \\mathcal G^\\bullet=\\mathcal O_X[0] (finitely presented, flat over Y, with support X proper over Y), shows that Rf_*P=Rf_*(P\\otimes^L\\mathcal O_X) is perfect. Since Q is supported on T and Y\\setminus T=V is quasi-compact, case (i) of the support-annihilation lemma [lem-sc-pseudo-coherent-support-annihilation] gives a perfect I and a map I\\to\\mathcal O_Y that is an isomorphism on V and for which I\\otimes^L Rf_*P\\to Rf_*P\\to Q is zero.",
+   "uses": [
+    "lem-pc-proper-support-perfect-direct-image",
+    "lem-sc-pseudo-coherent-support-annihilation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G (Lemma 48.4.4) via Lemmas when-sheafy and proper-flat; perfect.tex Tags 0A1H and 0A9C(1)"
+   }
+  },
+  {
+   "text": "The derived projection/base-change formula identifies I\\otimes^L Rf_*P with Rf_*(Lf^*I\\otimes^L P). By adjunction, the vanishing composite in the preceding step implies that Lf^*I\\otimes^L P\\to P\\to a(Q) is zero.",
+   "uses": [
+    "lem-pc-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G (Lemma 48.4.4), proof, projection-formula paragraph"
+   }
+  },
+  {
+   "text": "On U=f^{-1}(V) the map Lf^*I\\to\\mathcal O_X is an isomorphism, so the composite Lf^*I\\otimes^L P\\to P\\to a(Q) restricts on U to \\beta|_U, which is nonzero; this contradicts its vanishing. Hence a(Q) is supported on X\\setminus U.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E4G (Lemma 48.4.4), proof, final contradiction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-qcoh-perfect-generation",
+  "lem-sc-perfect-support-map-lift",
+  "def-pc-derived-direct-image",
+  "lem-pc-proper-support-perfect-direct-image",
+  "lem-sc-pseudo-coherent-support-annihilation",
+  "lem-pc-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E4G (Lemma 48.4.4), case (1) and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,12 +119,41 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-restriction-open",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-proper-flat-right-adjoint-open-support",
+  "worker": "stage1",
+  "summary": "Split the proper-flat support proof from Stacks Tag 0E4G into five steps: detect non-support by a perfect test, lift the map, use perfectness of the proper flat pushforward of a perfect complex, annihilate the supported target by a perfect complex, and apply projection/base change for the contradiction. Added two statement-only children for the non-elementary Stacks inputs 09IM and 0A9C (reviewer R-pfo2242: the 0CSD pseudo-coherence child was dropped, since case (ii) of 0A9C needs Q bounded below, which the unbounded statement lacks; perfectness of Rf_*P from the existing 0A1H node and case (i) are used instead).",
+  "blueprint": "Realizes the proper-flat support assertion used to prove restriction compatibility in lem-sc-finite-duality.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Step 4 uses the general derived projection formula to identify I tensor Rf_*P with Rf_*(Lf^*I tensor P)."
+   },
+   {
+    "node": "lem-pc-proper-support-perfect-direct-image",
+    "why": "Step 3 uses the general perfect-direct-image statement (Tag 0A1H) with G=O_X[0] to get Rf_*P perfect for f proper, flat, finitely presented."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projection-formula",
+  "lem-pc-proper-support-perfect-direct-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pfo2242",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfo2242 (reviewer sub-agent of L); spot-checked: Item statement vs Stacks 0E4G(1) (unbounded D_QCoh is faithful); Step 3 vs cited nodes; 09IM/0A9C child statements vs perfect.tex; no new node restates restriction-open (citing it would be circular: the item was created from it); projection formula hypotheses. FIX more, RETURN less: (1) C4/E: after the second reading broadened Q to all of D_QCoh, Step 3 still used pseudo-coherence of Rf_*P (0CSD) and so needed case (ii) of 0A9C, which requires Q bounded below; repaired by citing existing lem-pc-proper-support-perfect-direct-image (0A1H, G=O_X[0]) for Rf_*P perfect and using case (i); declared it in tool_uses; dropped the now-unused child lem-sc-proper-flat-pseudo-coherent-direct-image. (2) B4: lem-sc-perfect-support-map-lift rewritten in TeX (\\to, T\\cap U, D_{\\mathrm{QCoh}}) and typed to match 09IM. (3) Steps 1 and 5 made explicit: perfect generation on U, lift with closed subset X, nonvanishing via the direct-summand compatibility.; 2 file(s) fixed by the reviewer"
+ }
 }
