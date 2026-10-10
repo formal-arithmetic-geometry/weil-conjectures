@@ -24,9 +24,59 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Perfectness is local by [def-pc-perfect-complex]. In each of the three cases (K and L perfect, L and M perfect, or K and M perfect), intersect the covers given by the definition for the two perfect terms and refine to a common affine cover; restrictions of strictly perfect complexes to smaller opens remain strictly perfect. Fix a member $U=\\operatorname{Spec}(R)$. Restriction to $U$ is exact on complexes of $\\mathcal O_X$-modules and commutes with mapping cones, so it carries the distinguished triangle to a distinguished triangle $K_U\\to L_U\\to M_U\\to K_U[1]$ of $D(\\mathcal O_U)$ [def-weil-abstract-derived-category]. By the affine clause of [def-pc-perfect-complex] (Tag 08EB), each of the two perfect terms is isomorphic in $D(\\mathcal O_U)$ to $\\widetilde{P^\\bullet}$ for a bounded complex $P^\\bullet$ of finite projective $R$-modules.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR, local reduction to an affine open"
+   }
+  },
+  {
+   "text": "Case K and L perfect: $K_U\\cong\\widetilde{A^\\bullet}$ and $L_U\\cong\\widetilde{B^\\bullet}$ with $A^\\bullet,B^\\bullet$ bounded complexes of finite projective $R$-modules. By [lem-pc-affine-qcoh-derived-equivalence] the morphism $K_U\\to L_U$ is the image of a morphism $A^\\bullet\\to B^\\bullet$ in $D(R)$, and by [lem-sc-affine-projective-complex-derived-hom] (applied to the bounded projective complex $A^\\bullet$ and the bounded complex $B^\\bullet$; $H^0$ of the Hom complex is chain maps modulo homotopy) that morphism is represented by a chain map $\\alpha:A^\\bullet\\to B^\\bullet$. Its cone $C(\\alpha)^r=B^r\\oplus A^{r+1}$ is a bounded complex of finite projective $R$-modules, and $\\widetilde{C(\\alpha)}=C(\\widetilde\\alpha)$ termwise, so the cone triangle $\\widetilde{A^\\bullet}\\to\\widetilde{B^\\bullet}\\to\\widetilde{C(\\alpha)}\\to\\widetilde{A^\\bullet}[1]$ is distinguished in $D(\\mathcal O_U)$ [def-weil-abstract-derived-category]. By (TR3) of [def-weil-triangulated-category] there is a morphism from this triangle to the restricted triangle extending the two isomorphisms, and by [lem-sf-triangle-morphism-iso] the third component $\\widetilde{C(\\alpha)}\\to M_U$ is an isomorphism. Case L and M perfect: by (TR2) of [def-weil-triangulated-category] the rotated triangle $L_U\\to M_U\\to K_U[1]\\to L_U[1]$ is distinguished, and the first case gives $K_U[1]\\cong\\widetilde{C^\\bullet}$ with $C^\\bullet$ bounded finite projective, hence $K_U\\cong\\widetilde{C^\\bullet[-1]}$, a reindexing. Case K and M perfect: applying (TR2) twice in the inverse direction, $M_U[-1]\\to K_U\\to L_U\\to M_U$ is distinguished, and the first case applied to $M_U[-1]$ and $K_U$ gives $L_U\\cong\\widetilde{C^\\bullet}$ with $C^\\bullet$ bounded finite projective. In every case the remaining term restricted to $U$ is isomorphic to $\\widetilde{C^\\bullet}$, which is strictly perfect since each finite projective $R$-module is a direct summand of a finite free module.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-sc-affine-projective-complex-derived-hom",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR, affine mapping-cone construction"
+   }
+  },
+  {
+   "text": "The affine representatives obtained in Step 2 show that whichever term was not assumed perfect restricts to a strictly perfect complex on every member of the common affine cover. By the definition of a perfect complex [def-pc-perfect-complex], that term is perfect on X.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08CR, gluing the local conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-affine-projective-complex-derived-hom",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08CR (lemma-two-out-of-three-perfect)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +101,32 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-thick-closure",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-two-out-of-three",
+  "worker": "stage1",
+  "summary": "Checked the scheme-level statement against the imported Tag 08CR reference and found no exact sorry-free Lean declaration. Split the proof into affine localization, an explicit bounded finite-projective mapping-cone construction, and local gluing; recorded the unavailable source as WANTED in the report and ran the required Mathlib searches.",
+  "blueprint": "The three steps realize the ancestor lem-sc-finite-duality proof place 'proper-flat support proof: the object of the thick closure of the perfect generator and the cone I are perfect'.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ptt2744",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptt2744 (reviewer sub-agent of L); spot-checked: Statement matches Tag 08CR and lem-pc-perfect-thick-closure (1) verbatim (C4 ok). Direct 08CR second-proof route, no Tor-amplitude node needed. FIX more, RETURN less: (1) C1 step 2 'represent the first arrow by a chain map' was uncited: now cites lem-pc-affine-qcoh-derived-equivalence + lem-sc-affine-projective-complex-derived-hom; (2) C1/E step 2 rotation and cone-uniqueness uncited: now cites TR2/TR3 of def-weil-triangulated-category, cone triangles of def-weil-abstract-derived-category, lem-sf-triangle-morphism-iso, all three positions explicit; (3) C4 step 1 lem-pc-perfect-affine-bounded-projective needs E in D_QCoh, unchecked: replaced by the 08EB affine clause of def-pc-perfect-complex; B4 plain arrows rewritten in TeX. Second reading by F1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ }
 }
