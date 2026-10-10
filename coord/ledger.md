@@ -2659,3 +2659,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:24 UTC L attached lem-pc-tensor-mapping-cone-iso to CochainComplex.mapBifunctorMappingCone₂Iso (sorry-free; after reviewer R-ktc2544 replaced a wrong Mathlib leaf)
 - 21:24 L: merged deliver/G1/lem-sc-hilbert-nowhere-dense-dimension-drop (reviewer FIX; first push; new nodes: 1)
 - 21:24 L: merged deliver/J1/lem-pc-tower-limit-left-exact (reviewer FIX; first push; new nodes: 0)
+- 21:25 L: returned deliver/E1/lem-pc-tower-abelian (reviewer RETURN: Not a fault: the item is the Mathlib instance CategoryTheory.Abelian.functorCategoryAbelian (Mathlib/CategoryTheory/Abel)
