@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-open-immersion-etale",
+ "kind": "statement",
+ "title": "An open immersion of schemes is etale",
+ "statement": "Let $j:U\\to X$ be an open immersion of schemes [def-pc-scheme], [def-weil-open-immersion]. Then $j$ is etale [def-weil-etale-morphism]. In particular, for every open subscheme $U\\subseteq X$ the inclusion $U\\hookrightarrow X$ is an object of the small etale site $X_{\\Et}$ [def-weil-pbc-etale-site], and for opens $W\\subseteq U\\subseteq X$ the inclusion $W\\hookrightarrow U$ is a morphism of $X_{\\Et}$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma Tag 02GP (lemma-open-immersion-etale, line 8236): 'Any open immersion is etale.'"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "an open immersion of schemes is étale",
+   "results": "AlgebraicGeometry.IsOpenImmersion (OpenImmersion), AlgebraicGeometry.IsEtale (Morphisms.Etale), Scheme.Hom.isOpenEmbedding, instIsSmoothOfIsOpenImmersion (Morphisms.Smooth), IsPreimmersion.instOfIsOpenImmersion",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; the smooth analogue points to the instance in Morphisms/Etale.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.Etale",
+   "results": "AlgebraicGeometry.Etale.instOfIsOpenImmersion : {X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] : Etale f (Mathlib.AlgebraicGeometry.Morphisms.Etale)",
+   "date": "2026-10-10",
+   "verdict": "match: AlgebraicGeometry.Etale.instOfIsOpenImmersion"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsOpenImmersion' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; sed -n 60,82p of that file",
+   "results": "Etale.lean:77-79 '/-- Open immersions are étale. -/ instance (priority := 900) [IsOpenImmersion f] : Etale f := HasRingHomProperty.of_isOpenImmersion RingHom.Etale.containsIdentities' (f : X ⟶ Y in namespace AlgebraicGeometry.Etale)",
+   "date": "2026-10-10",
+   "verdict": "match: read at the source, exactly the node's first sentence"
+  },
+  {
+   "tool": "local_search",
+   "query": "Etale.instOfIsOpenImmersion (project ~/weil-conjectures-slopmaster2)",
+   "results": "none; index: unavailable (not a proof of absence); the name is confirmed by loogle and the source line",
+   "date": "2026-10-10",
+   "verdict": "inconclusive (index unavailable)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Etale.instOfIsOpenImmersion",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+  "how": "exact: the instance at Etale.lean:78 ('Open immersions are étale', [IsOpenImmersion f] : Etale f), with def-weil-open-immersion matched to IsOpenImmersion (OpenImmersion.lean:38) and def-weil-etale-morphism to AlgebraicGeometry.Etale; the 'in particular' clause is the definition of the objects and morphisms of X_et",
+  "line": 78
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-cohomology-local-ring-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: Mathlib leaf; the anonymous instance at Etale.lean line 78 is AlgebraicGeometry.Etale.instOfIsOpenImmersion (name checked in the .ilean); the 'in particular' clause is the definition of the objects and morphisms of the small etale site."
+}

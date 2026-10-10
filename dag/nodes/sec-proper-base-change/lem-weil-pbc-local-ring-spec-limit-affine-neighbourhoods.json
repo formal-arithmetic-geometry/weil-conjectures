@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+ "kind": "statement",
+ "title": "Spec of a local ring of a scheme is the limit of the affine open neighbourhoods of the point",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $x\\in X$, $\\mathcal O_{X,x}$ its local ring [def-weil-pbc-module-stalk] and $g_x:\\operatorname{Spec}\\mathcal O_{X,x}\\to X$ the canonical morphism [lem-weil-pbc-spec-local-ring-canonical-morphism] ($\\operatorname{Spec}$ as in [def-weil-affine-spectrum]). Let $N_x$ be the set of affine open subschemes $W\\subseteq X$ with $x\\in W$ ([def-weil-pbc-scheme-conventions]: $W$ is isomorphic to the spectrum of a ring), ordered by $W'\\ge W$ if and only if $W'\\subseteq W$; for $W'\\subseteq W$ in $N_x$ let $j_{W'W}:W'\\to W$ be the inclusion, an open immersion [def-weil-open-immersion]. Then: (1) every open subset $U\\subseteq X$ with $x\\in U$ contains some $W\\in N_x$; in particular $N_x$ is nonempty and directed (for $W,W'\\in N_x$ there is $W''\\in N_x$ with $W''\\subseteq W\\cap W'$), and $(W,j_{W'W})$ is an inverse system of schemes over $N_x$. (2) Every $W\\in N_x$ is quasi-compact and quasi-separated, and every $j_{W'W}$ is an affine morphism ([def-weil-pbc-scheme-conventions], [pqf-def-affine-morphism]). (3) For every open $U\\ni x$ there is a unique morphism $g_{x,U}:\\operatorname{Spec}\\mathcal O_{X,x}\\to U$ with $j_U\\circ g_{x,U}=g_x$, $j_U:U\\to X$ the inclusion, and $(\\operatorname{Spec}\\mathcal O_{X,x},(g_{x,W})_{W\\in N_x})$ is a limit of the inverse system $(W,j_{W'W})_{W\\in N_x}$ in the category of schemes ([def-weil-pbc-category-colimit], dually): for every scheme $T$ and morphisms $t_W:T\\to W$ with $j_{W'W}\\circ t_{W'}=t_W$ for all $W'\\subseteq W$ in $N_x$ there is exactly one morphism $t:T\\to\\operatorname{Spec}\\mathcal O_{X,x}$ with $g_{x,W}\\circ t=t_W$ for all $W\\in N_x$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'We have O_{X,x} = colim O_W(W) where W runs over the affine open neighbourhoods of x in X. Hence Spec(O_{X,x}) = lim W where W runs over the affine open neighbourhoods'; the limit of affine schemes is Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-open-immersion",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec of the stalk of a scheme at a point is the limit of the affine open neighbourhoods of the point",
+   "results": "AlgebraicGeometry.Scheme.fromSpecStalk, IsAffineOpen.fromSpecStalk_eq_fromSpecStalk, Scheme.Opens.fromSpecStalkOfMem (Mathlib.AlgebraicGeometry.Stalk), IsAffineOpen.isLocalization_stalk (AffineScheme), Scheme.Spec_fromSpecStalk, over_def",
+   "date": "2026-10-10",
+   "verdict": "no match: the canonical morphism Spec O_{X,x} -> X exists (fromSpecStalk), no limit statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spec O_{X,x} is the inverse limit of the affine open neighbourhoods of x in the category of schemes",
+   "results": "Scheme.fromSpecStalk, IsAffineOpen.fromSpecStalk, IsAffineOpen.fromSpecStalk_closedPoint (Stalk), IsAffineOpen.isoSpec_hom_apply (AffineScheme), Scheme.toSpecΓ_apply (GammaSpecAdjunction), Scheme.Spec_fromSpecStalk",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.fromSpecStalk, CategoryTheory.Limits.IsLimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsLimit\\|isLimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Stalk.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/SpreadingOut.lean; grep -rn 'fromSpecStalk' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "no IsLimit in Stalk.lean or SpreadingOut.lean; fromSpecStalk is defined at Stalk.lean:40 (IsAffineOpen.fromSpecStalk) and :64 (Scheme.fromSpecStalk) and used in SpreadingOut.lean (spreading out of morphisms from Spec O_{X,x}), never as a limit cone",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "fromSpecStalk (project ~/weil-conjectures-slopmaster2)",
+   "results": "IsAffineOpen.fromSpecStalk, Scheme.fromSpecStalk, IsAffineOpen.fromSpecStalk_eq, Spec.fromSpecStalk_eq, Scheme.fromSpecStalk_app, Scheme.Opens.fromSpecStalkOfMem, IsAffineOpen.fromSpecStalk_isPreimmersion, ... (all Mathlib/AlgebraicGeometry/Stalk.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "no match (only the morphism and its basic properties)"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-cohomology-local-ring-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): affine neighbourhoods of x form a directed inverse system of qcqs schemes with affine transitions whose limit is Spec O_{X,x} (Limits 0GWT proof, 01YW); the uniqueness clause (3) follows from the open immersion being a monomorphism. Unsplit."
+}

@@ -947,3 +947,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: reviewed and accepted lem-weil-pbc-exact-sequence-ml (9 steps, +essentially-constant-splitting node from 070C; source's omitted detail written out).
 - 06:07 L: reviewed and accepted lem-weil-pbc-fibre-degree-base-change (8 steps, no new nodes; source 03J5 says dim = n where <= n is meant).
 - 06:07 L: reviewed and accepted lem-weil-pbc-fibre-degree-bound-field-points (6 steps, no new nodes).
+- 06:09 L: reviewed and accepted lem-weil-pbc-etale-cohomology-local-ring-colimit (7 steps; +open-immersion-etale Mathlib leaf 02GP, +local-ring-spec-limit-affine-neighbourhoods node 0GWT/01YW; source gaps on restriction=pullback and the colimit sheaf written out; tool_uses on derived-inverse-image-composition (1)).
