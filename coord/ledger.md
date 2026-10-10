@@ -1999,3 +1999,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:33 L: merged deliver/H1/lemma-constructible-torsor-trivialises (reviewer FIX; after a return; new nodes: 1)
 - 16:33 L: merged deliver/J1/lem-sc-invert-s-cohomology-separated-induction (reviewer PASS; first push; new nodes: 0)
 - 16:33 L: returned deliver/E1/lem-exc-etale-field-galois-classification (reviewer RETURN: 1. C1 (return point 1 not repaired): step 1: openness of Gal(K^sep/sigma(L)) is taken from 'InfiniteGalois.isOpen_iff_fi)
+- 16:33 L: returned deliver/G1/lem-sc-noetherian-topological-cohomology-vanishing (reviewer RETURN: Reviewer R-tc2, read head aa4c432df. Points 1-3 of the 15:55 return are repaired (conditional node deleted, induction on)
