@@ -1,8 +1,8 @@
 # Work queue
 
-912 items; claim with `tools/claim.py next <group> [--stage N]`.
+911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (299)
+## Stage 1: nodes to split (298)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -30,7 +30,6 @@
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-pc-derived-qcoh-direct-sums` | 3015 | none |
 | `lem-pc-finite-inseparable-element` | 3015 | none |
-| `lem-pc-ringed-spaces-derived-adjoint` | 3015 | none |
 | `lem-pc-ringed-spaces-derived-pullback-composition` | 3015 | none |
 | `lem-sc-derived-hom-finite-free-model` | 3015 | none |
 | `lem-sc-derived-internal-hom-restrict-open` | 3015 | none |
@@ -42,6 +41,7 @@
 | `lem-sc-smooth-proper-diagonal-koszul-regular` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
 | `lem-pc-brown-cohomological-representability` | 3016 | none |
+| `lem-pc-derived-adjoint-functors` | 3016 | none |
 | `lem-sc-affine-derived-cohomology` | 3016 | none |
 | `lem-sc-affine-derived-pushforward-conservative` | 3016 | none |
 | `lem-sc-kahler-differentials-diagonal-ideal` | 3016 | none |
@@ -55,7 +55,6 @@
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `prop-pd-picard-degree-decomposition` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
-| `lem-pc-twist` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-pc-zero-scheme-ideal-local` | 4009 | none |
 | `lem-pc-zero-scheme-locally-principal` | 4009 | none |
@@ -924,7 +923,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 323 nodes that wait for stage 1, 1282 nodes that wait for a statement dependency.
+Not open yet: 323 nodes that wait for stage 1, 1283 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
