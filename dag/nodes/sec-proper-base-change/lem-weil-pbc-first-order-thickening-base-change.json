@@ -17,9 +17,110 @@
   "def-nagata-extended-ideal",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(*$j$ is a closed immersion.*) By [lem-weil-pbc-closed-immersion-base-change] applied to the closed immersion $i:W\\to W'$ and the morphism $g=p:Z'\\to W'$, the projection $W\\times_{W'}Z'\\to Z'$ is a closed immersion [def-weil-closed-immersion]. The fibre product is symmetric up to the unique isomorphism over both factors given by the universal property [def-pc-fibre-product], and under it this projection is $j:Z=Z'\\times_{W'}W\\to Z'$; a closed immersion composed with an isomorphism is a closed immersion. So $j$ is a closed immersion, and $p\\circ j=i\\circ q$ by the definition of the fibre product. Let $\\mathcal I_j=\\ker(\\mathcal O_{Z'}\\to j_*\\mathcal O_Z)$ be its ideal sheaf [def-sbc-closed-immersion-ideal-sheaf]; it remains to show $\\mathcal I_j=\\mathcal I\\mathcal O_{Z'}$ and $(\\mathcal I\\mathcal O_{Z'})^2=0$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1), first sentence; Morphisms, Lemma 01QR (literature/stacks-project/morphisms.tex)"
+   }
+  },
+  {
+   "text": "(*Local picture over an affine open of $W'$.*) Let $V\\subseteq W'$ be an affine open, $A=\\mathcal O_{W'}(V)$, $V=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and $K=\\mathcal I(V)\\subseteq A$. By [lem-weil-pbc-closed-immersion-affine-cover-criterion] (1) the open subscheme $i^{-1}(V)$ of $W$ is affine and $i^\\sharp_V:A\\to\\mathcal O_W(i^{-1}V)$ is surjective, with kernel $\\mathcal I(V)=K$ by the definition of the ideal sheaf [def-sbc-closed-immersion-ideal-sheaf]; hence (the parenthetical of that node) $i^{-1}(V)\\to V$ is isomorphic over $V$ to $c_K:\\operatorname{Spec}(A/K)\\to\\operatorname{Spec}A$, Spec of the quotient map. Put $U'=p^{-1}(V)$, an open subscheme of $Z'$. By [lem-weil-pbc-open-preimage-fibre-product] for $j$ and $U'$, the square ($j^{-1}(U')\\to U'$, inclusions into $Z$ and $Z'$, $j$) is cartesian; pasting it [lem-weil-pbc-cartesian-square-pasting] on top of the cartesian square defining $Z$ ($j$, $q$ over $p$, $i$) shows that $j^{-1}(U')$ with $j|:j^{-1}(U')\\to U'$ and $q|$ is a fibre product of $p|_{U'}:U'\\to W'$ and $i$. By [lem-weil-pbc-open-preimage-fibre-product] for $i$ and $V$, $i^{-1}(V)$ is a fibre product $W\\times_{W'}V$; since $p|_{U'}$ factors through $V$, pasting [lem-weil-pbc-cartesian-square-pasting] (the square of $j^{-1}(U')$ over $U'\\to V$, $i^{-1}(V)\\to V$, placed over the cartesian square of $i^{-1}(V)\\subseteq W$ over $V\\subseteq W'$, whose outer rectangle is the cartesian square just found) shows that $j^{-1}(U')$ is a fibre product $U'\\times_V i^{-1}(V)\\cong U'\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/K)$, with $j|$ the first projection [def-pc-fibre-product].",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JU (1) and its proof (the question is local; Lemma 01JR lemma-open-fibre-product for the open pieces); written out by the agent since Stacks argues via Lemma 01HP (lemma-restrict-map-to-closed) in locally ringed spaces"
+   }
+  },
+  {
+   "text": "(*The ideal of $j$ on affine opens.*) Apply [lem-weil-pbc-quotient-base-change-closed-immersion-ideal] (1) with $S=V=\\operatorname{Spec}A$, $X=U'$, $f=p|_{U'}:U'\\to V$ and the ideal $K$: by step 2, $X_K=j^{-1}(U')$ and $j_K=j|_{j^{-1}(U')}$, so for every affine open $U\\subseteq U'$, with $B=\\mathcal O_{Z'}(U)$ an $A$-algebra via $\\rho_{V,U}=(p^\\sharp_V)|_U:A\\to B$, the ideal sheaf of $j|$ has sections $KB$ on $U$. The ideal sheaf of $j|_{j^{-1}(U')}:j^{-1}(U')\\to U'$ is $\\mathcal I_j|_{U'}$: for $U\\subseteq U'$ both are the kernel of the same map $\\mathcal O_{Z'}(U)\\to\\mathcal O_Z(j^{-1}U)$ [def-sbc-closed-immersion-ideal-sheaf]. Hence $\\mathcal I_j(U)=\\rho_{V,U}(\\mathcal I(V))\\,B$ for all affine opens $V\\subseteq W'$ and $U\\subseteq p^{-1}(V)$.",
+   "uses": [
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JU (1): the ideal of X x_S Y -> Y is Im(g^*I -> O_Y); affine form Spec(B/KB), Algebra tensor with a quotient"
+   }
+  },
+  {
+   "text": "(*$\\mathcal I_j=\\mathcal I\\mathcal O_{Z'}$.*) $\\mathcal I$ is a quasi-coherent sheaf of ideals of $\\mathcal O_{W'}$ [def-sbc-closed-immersion-ideal-sheaf]. By [lem-weil-pbc-module-pullback-ideal-quotient] (1) for $f=p$ and $\\mathcal J=\\mathcal I$, the image $\\mathcal I\\mathcal O_{Z'}$ of $p^*\\mathcal I\\to p^*\\mathcal O_{W'}\\to\\mathcal O_{Z'}$ [def-nagata-extended-ideal], [def-pc-module-pullback] is a quasi-coherent sheaf of ideals with $(\\mathcal I\\mathcal O_{Z'})(U)=\\rho_{V,U}(\\mathcal I(V))B$ for affine $V\\subseteq W'$ and affine $U\\subseteq p^{-1}(V)$ (the same map $\\rho_{V,U}$ as in step 3). So the subsheaves $\\mathcal I_j$ and $\\mathcal I\\mathcal O_{Z'}$ of $\\mathcal O_{Z'}$ have the same sections on every $U$ in the set $\\mathfrak B$ of affine opens of $Z'$ mapped by $p$ into an affine open of $W'$, which is a basis of the topology of $Z'$ (for $z\\in Z'$ choose an affine $V\\ni p(z)$, then an affine $U\\ni z$ inside the open $p^{-1}(V)$). Two subsheaves of a sheaf agreeing on a basis are equal: a section of one over an open $O$ restricts on a cover of $O$ by members of $\\mathfrak B$ to sections of the other, and these glue in the other since it is a sheaf and the gluing in $\\mathcal O_{Z'}$ is unique. Hence $\\mathcal I_j=\\mathcal I\\mathcal O_{Z'}$.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "def-nagata-extended-ideal",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JU (1): 'X x_S Y -> Y corresponds to the sheaf of ideals Im(g^*I -> O_Y)'"
+   }
+  },
+  {
+   "text": "(*$(\\mathcal I\\mathcal O_{Z'})^2=0$.*) By [lem-weil-pbc-module-pullback-ideal-quotient] (2) with $n=2$, $(\\mathcal I\\mathcal O_{Z'})^2=\\mathcal I^2\\mathcal O_{Z'}$; the powers there (image of $\\mathcal K\\otimes\\mathcal K'\\to\\mathcal O$) are those of [def-sbc-ideal-sheaf-powers], which gives that description as equivalent. Since $\\mathcal I^2=0$, $\\mathcal I^2\\mathcal O_{Z'}$ is the image of $p^*0=0$ ($p^*$ is additive, a left adjoint [def-pc-module-pullback]), i.e. $0$ [def-nagata-extended-ideal]. (Directly on $U\\in\\mathfrak B$: $(KB)^2$ is generated by products $(k_1b_1)(k_2b_2)=\\rho(k_1k_2)b_1b_2$ with $k_1k_2\\in K^2=\\mathcal I^2(V)=0$, so $(KB)^2=0$.)",
+   "uses": [
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "def-sbc-ideal-sheaf-powers",
+    "def-pc-module-pullback",
+    "def-nagata-extended-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma 09ZU (lemma-base-change-thickening), first order case; proof omitted in the source, written out by the agent"
+   }
+  },
+  {
+   "text": "(*Conclusion.*) By steps 1, 4 and 5, $j:Z\\to Z'$ is a closed immersion whose ideal sheaf $\\mathcal I\\mathcal O_{Z'}$ has square zero, so $Z\\subset Z'$ is a first order thickening [def-sbc-first-order-thickening] (2) (hence a thickening, by the parenthetical of (3) there). As $p\\circ j=i\\circ q$, $p$ maps $Z$ into $W$ and $p|_Z$ factors as $q$ through the closed subscheme $W$, which is the definition of a morphism of thickenings $(q,p):(Z\\subset Z')\\to(W\\subset W')$ (More on Morphisms, Definition 04EX (5)).",
+   "uses": [
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Definition 04EX (more-morphisms-definition-thickening) (2), (5); Lemma 09ZU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-weil-pbc-module-pullback-ideal-quotient",
+  "def-nagata-extended-ideal",
+  "def-pc-module-pullback",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sbc-first-order-thickening"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 09ZU (proof omitted in the source); the ideal sheaf follows Schemes, Lemma 01JU (1) (literature/stacks-project/schemes.tex), written out locally on affines by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +142,38 @@
    "results": "thickening: only a docstring of FormallyUnramified.hom_ext (Morphisms/FormallyUnramified.lean:189); Functorial.lean:39 def comap := (pullback.fst f I.subschemeι).ker, :79 ker_fst_of_isClosedImmersion; IdealSheafData has Mul/Pow (IdealSheaf/Basic.lean:410,417) but no lemma on comap of a product",
    "date": "2026-10-10",
    "verdict": "no match (closed-immersion part is IsClosedImmersion.isStableUnderBaseChange; the ideal description and square-zero are absent)"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsClosedImmersion.isStableUnderBaseChange (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange (instance, Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:382, read with sed -n 380,390p); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "partial: covers only that j is a closed immersion (step 1, node lem-weil-pbc-closed-immersion-base-change); nothing on the ideal sheaf or square zero"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of a closed immersion along any morphism has kernel ideal sheaf whose square is zero if the original ideal has square zero",
+   "results": "Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, isPullback_of_isClosedImmersion, IdealSheafData.map (Mathlib.AlgebraicGeometry.IdealSheaf.Functorial); IdealSheafData.ker_subschemeι; Scheme.ker_ideal_of_isPullback_of_isOpenImmersion; Algebra.Extension.Cotangent.ker_mk",
+   "date": "2026-10-10",
+   "verdict": "no match: ker_fst_of_isClosedImmersion (Functorial.lean:79) is (pullback.fst f i).ker = i.ker.comap f, and comap is defined as that kernel, so no image-of-pullback description and no square-zero statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "square-zero ideal sheaf: the ideal of the base change of a closed subscheme defined by a square-zero ideal also has square zero",
+   "results": "IdealSheafData.map, IdealSheafData.comap (IdealSheaf.Functorial), Ideal.cotangentIdeal_square (RingTheory.Ideal.Cotangent), KaehlerDifferential.ideal, Algebra.Extension.homInfinitesimal",
+   "date": "2026-10-10",
+   "verdict": "no match (only ring-level square-zero facts about I/I^2)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n isStableUnderBaseChange Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; grep -rn 'comap_mul\\|comap_pow\\|map_pow' Mathlib/AlgebraicGeometry/IdealSheaf/; grep -rln 'SquareZero\\|^ 2 = ⊥' Mathlib/AlgebraicGeometry",
+   "results": "ClosedImmersion.lean:382 IsClosedImmersion.isStableUnderBaseChange; IdealSheaf/Basic.lean:417 pow (uses Ideal.map_pow); no comap_mul/comap_pow for IdealSheafData; only Morphisms/FormallyUnramified.lean mentions nilpotent kernels (hom_ext, :189-193, IsNilpotent i.ker)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +193,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-first-order-thickening-base-change",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against More on Morphisms 09ZU and Schemes 01JU (1); it states the ideal as the image of p^*I -> O_{Z'}, which is correct, unlike lem-pc-closed-imm-base-change, not cited). 09ZU's proof is omitted in Stacks, so the proof is written by the agent in 6 steps: closed immersion by lem-weil-pbc-closed-immersion-base-change (Mathlib leaf); local picture over an affine V of W' (affine-cover criterion, open-preimage fibre product, pasting) reducing to V x Spec(A/K); the ideal of j on affines is KB by lem-weil-pbc-quotient-base-change-closed-immersion-ideal (1); it equals I O_{Z'} on the basis of affines over affines by lem-weil-pbc-module-pullback-ideal-quotient (1); square zero by clause (2) of the same node ((I O)^2 = I^2 O = 0); conclusion by def-sbc-first-order-thickening and Stacks Definition 04EX (5) (morphism of thickenings). No new nodes. Mathlib searched with local_search, leansearch, leanfinder and grep (loogle rate-limited): only IsClosedImmersion.isStableUnderBaseChange; no thickening/ideal statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps (agent proof; Stacks 09ZU omits it): base change of a closed immersion (01QR leaf); local picture over affine opens by the affine-cover criterion and pasting; the ideal on affines is KB (today's quotient-base-change node); equality with I.O_{Z'} via module-pullback-ideal-quotient (1); square zero via clause (2); conclusion. Does not cite the false imported node lem-pc-closed-imm-base-change."
+ }
 }
