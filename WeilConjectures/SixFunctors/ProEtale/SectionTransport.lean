@@ -119,17 +119,65 @@ lemma sectionTransport_naturality (V : X.ProEt)
     (x : G.obj.obj (op V)) :
     (sectionTransport V H).hom (φ.hom.app (op V) x) =
       ((V.hom)^*[ModuleCat.{u + 1} Λ].map φ).hom.app (op (terminalProEt V.left))
-        ((sectionTransport V G).hom x) :=
-  ConcreteCategory.congr_hom (((upperStarSectionsMkIdIso _ V).inv.naturality φ)) x
+        ((sectionTransport V G).hom x) := by
+  have := (upperStarSectionsMkIdIso (ModuleCat.{u + 1} Λ) V).inv.naturality φ
+  exact ConcreteCategory.congr_hom this x
 
-example (V : X.ProEt) (G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))
-    (x : G.obj.obj (op (terminalProEt X))) : True := by
+set_option backward.isDefEq.respectTransparency false in
+/-- `sectionTransport` in terms of the restriction `j^*`: it is the inverse of the identification
+`g^* ≅ j^*` applied to the restriction along `map(V) ≅ V`. -/
+lemma upperStarIsoLocalizationRestriction_hom_sectionTransport (V : X.ProEt)
+    (G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) (y : G.obj.obj (op V)) :
+    ((upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) V.hom V.prop).hom.app G).hom.app
+        (op (terminalProEt V.left)) ((sectionTransport V G).hom y) =
+      G.obj.map (Scheme.ProEt.overMapMkIdIso V).hom.op y := by
+  have hST : (sectionTransport V G).hom y =
+      ((upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) V.hom V.prop).inv.app G).hom.app
+        (op (terminalProEt V.left)) (G.obj.map (Scheme.ProEt.overMapMkIdIso V).hom.op y) := rfl
+  rw [hST, ← Sheaf.comp_hom_app_apply, Iso.inv_hom_id_app]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The transport of the restriction to `V` of a global section `x` is the restriction of
+`unit_g(x)` along `V.left ≅ V.left ×_X X`. -/
+lemma sectionTransport_map (V : X.ProEt)
+    (G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))
+    (x : G.obj.obj (op (terminalProEt X))) :
+    (sectionTransport V G).hom (G.obj.map ((Scheme.ProEt.isTerminalMkId X).from V).op x) =
+      ((V.hom)^*[ModuleCat.{u + 1} Λ].obj G).obj.map
+        (overPullbackObjMkIdIso V.hom).inv.op
+        (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) V.hom).unit.app G).hom.app
+          (op (terminalProEt X)) x) := by
+  let iso := upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} Λ) V.hom V.prop
+  apply (ConcreteCategory.bijective_of_isIso ((iso.hom.app G).hom.app _)).1
+  rw [upperStarIsoLocalizationRestriction_hom_sectionTransport]
+  erw [Sheaf.hom_app_map_apply]
   have h := Adjunction.unit_leftAdjointUniq_hom_app (upperStarLowerStarAdjunction
     (ModuleCat.{u + 1} Λ) V.hom) (localizationRestrictionLowerStarAdjunction _ V.hom V.prop) G
   have h' := congrArg (fun φ ↦ φ.hom.app (op (terminalProEt X)) x) h
   dsimp only at h'
-  rw [localizationRestrictionLowerStarAdjunction_unit_app_hom_app] at h'
-  trace_state
-  trivial
+  erw [localizationRestrictionLowerStarAdjunction_unit_app_hom_app] at h'
+  erw [h']
+  rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]
+  erw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]
+  exact congrArg (fun k ↦ (G.obj.map k.op) x) ((Scheme.ProEt.isTerminalMkId X).hom_ext _ _)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The identification `g^* c_X(E) ≅ c_V(E)` sends the transport of a constant section over `V`
+to the constant section. -/
+lemma upperStarConstantSheafIso_hom_sectionTransport (V : X.ProEt) (E : ModuleCat.{u + 1} Λ)
+    (e : E) :
+    ((upperStarConstantSheafIso V.hom).hom.app E).hom.app (op (terminalProEt V.left))
+      ((sectionTransport V ((constantSheaf (Scheme.ProEt.topology X)
+        (ModuleCat.{u + 1} Λ)).obj E)).hom (constSection E V e)) =
+        constSection E (terminalProEt V.left) e := by
+  have h1 := sectionTransport_map V
+    ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj E)
+    (constSection E (terminalProEt X) e)
+  rw [constSection_map] at h1
+  rw [h1]
+  erw [Sheaf.hom_app_map_apply]
+  erw [upperStarConstantSheafIso_hom_app_unit V.hom E e]
+  exact constSection_map E _ e
 
 end AlgebraicGeometry.ProEtale
