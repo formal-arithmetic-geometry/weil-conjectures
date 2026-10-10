@@ -2504,3 +2504,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:22 L: merged deliver/C1/lem-sc-strict-henselization-completion-noetherian (reviewer FIX; first push; new nodes: 1)
 - 20:22 L: merged deliver/F1/lem-sc-finite-length-global-submodule (reviewer PASS; first push; new nodes: 1)
 - 20:22 L: returned deliver/F1/lem-sc-p1-right-derived-triangle-connecting (reviewer RETURN: 1. D2/E (Step 3, wrong argument): universality of a delta-functor gives a unique ISOMORPHISM of delta-functors t extendi)
+- 20:23 L: merged deliver/J1/lem-pc-derived-total-resolution-quasi-iso (reviewer FIX; first push; new nodes: 0)
