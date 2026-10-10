@@ -34,9 +34,80 @@
   "def-weil-pbc-direct-sum-modules",
   "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The map $F\\to A$, $e_i\\mapsto f_i$, kills every $f_ie_j-f_je_i$, so it induces $\\mu:M_f\\to A$ with image $J$. For $x\\in Z_f(P)$, the map $F\\to P$, $e_i\\mapsto x_i$, kills the same relations and induces $\\hat x$. Every element of $K_f$ is represented by $\\sum_i a_i e_i$ with $\\sum_i a_i f_i=0$. Consequently $x$ is admissible exactly when $\\sum_i a_i x_i=0$ for every such relation among the $f_i$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05ED (lemma-naive-Koszul-complex, line 24394) and Lemma 05EE (lemma-explicit-ext, line 24413), proof: the complex N -> Hom(M,N) -> Hom(K,N)"
+   }
+  },
+  {
+   "text": "For admissible $x$, the map $(p,a)\\mapsto a\\bmod J$ kills each generator $(x_i,-f_i)$ of $W_x$, hence gives $\\pi_x$; it is surjective. If $[(p,a)]\\in\\ker\\pi_x$, write $a=\\sum_i b_i f_i$. Adding $\\sum_i b_i(x_i,-f_i)$ shows $[(p,a)]=[(p+\\sum_i b_i x_i,0)]$, so $\\ker\\pi_x=\\operatorname{Im}\\iota_x$. If $\\iota_x(p)=0$, write $(p,0)=\\sum_i b_i(x_i,-f_i)$; then $\\sum_i b_i f_i=0$, and admissibility from step 1 gives $p=\\sum_i b_i x_i=0$. Thus $\\iota_x$ is injective and the sequence in (1) is exact.",
+   "uses": [
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05EE (lemma-explicit-ext, line 24413), the kernel of Hom(M,N) -> Hom(K,N), made explicit as an extension of A/J"
+   }
+  },
+  {
+   "text": "In the extension of (2), $q(f_ie)=f_i(1\\bmod J)=0$, so exactness gives a unique $x_i\\in P$ with $j(x_i)=f_ie$. Applying the injective $j$ to $f_ix_j-f_jx_i$ gives $f_if_je-f_jf_ie=0$, hence $x\\in Z_f(P)$. If $\\sum_i a_i f_i=0$, then $j(\\sum_i a_i x_i)=(\\sum_i a_i f_i)e=0$; injectivity of $j$ and step 1 show that $x$ is admissible.",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05EE (lemma-explicit-ext, line 24413), read on an extension class as in Homology, Section 010I (section-extensions, homology.tex line 1260)"
+   }
+  },
+  {
+   "text": "The map $h:P\\oplus A\\to E$, $(p,a)\\mapsto j(p)+ae$, kills $(x_i,-f_i)$ because $j(x_i)=f_ie$; it therefore induces $\\theta:E_f(P,x)\\to E$. For $y\\in E$, choose $a\\in A$ representing $q(y)\\in A/J$; then $y-ae\\in\\ker q=\\operatorname{Im}j$, proving surjectivity. If $h(p,a)=0$, then $a\\in J$; write $a=\\sum_i b_i f_i$. Injectivity of $j$ gives $p=-\\sum_i b_i x_i$, so $(p,a)=-\\sum_i b_i(x_i,-f_i)\\in W_x$, proving injectivity. The defining formulas give $\\theta\\iota_x=j$ and $q\\theta=\\pi_x$.",
+   "uses": [
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05EE (lemma-explicit-ext, line 24413), the description of Ext_R(R/I,N) by Hom(I,N) modulo N, expressed as isomorphism of extensions"
+   }
+  },
+  {
+   "text": "For $x'_i=x_i-f_im$, one has $f_ix'_j-f_jx'_i=f_ix_j-f_jx_i=0$. For every relation $\\sum_i a_i f_i=0$, also $\\sum_i a_i x'_i=\\sum_i a_i x_i-(\\sum_i a_i f_i)m=0$, so step 1 makes $x'$ admissible. The map $h_m:P\\oplus A\\to P\\oplus A$, $(p,a)\\mapsto(p+am,a)$, sends each generator $(x_i,-f_i)$ of $W_x$ to $(x'_i,-f_i)$ of $W_{x'}$. Its inverse $h_{-m}$ sends each generator back. Thus $h_m$ induces the claimed isomorphism of quotients; its restriction to $(p,0)$ and its second coordinate show compatibility with $\\iota$ and $\\pi$.",
+   "uses": [
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 05EE (lemma-explicit-ext, line 24413), proof: quotienting Hom(M,N) by the image of N"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-quotient-module",
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemmas 05ED (lemma-naive-Koszul-complex) and 05EE (lemma-explicit-ext), made explicit for extensions as defined in Homology, Section 010I"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -68,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -88,5 +159,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-cyclic-extension-cocycle",
+  "worker": "stage1",
+  "summary": "Checked Stacks 05ED and 05EE against the node. The proof writes out the relation criterion for admissibility, exactness of the quotient extension, recovery of an arbitrary extension from a lift of 1, and the isomorphism induced by changing the lift. No new nodes are needed: each operation is a calculation with the cited module definitions.",
+  "blueprint": "The torsion-extension descent used in step (b) of thm-weil-pbc-finite-etale-lifting, through Stacks 05EE's explicit calculation of extensions in the proof of 05EG."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 05ED/05EE made explicit: the extension E_f(P, x) and the converse, change of cycle by a boundary; 0 new"
+ }
 }
