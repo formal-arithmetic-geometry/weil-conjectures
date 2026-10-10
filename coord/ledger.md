@@ -1874,3 +1874,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:54 L: merged deliver/H1/lem-sc-p1-ext-coherent-dim-one-vanishing (reviewer FIX; first push; new nodes: 5)
 - 15:54 L: merged deliver/H1/lem-sc-p1-proj-degreezero-localization-exact (reviewer FIX; first push; new nodes: 2)
 - 15:55 L: merged deliver/C1/lem-weil-pbc-sections-base-field-extension (reviewer FIX; after a return; new nodes: 2)
+- 15:55 L: returned deliver/G1/lem-sc-noetherian-topological-cohomology-vanishing (reviewer RETURN: 1. D1/D2: item step 1 and new node lem-sc-noetherian-cohomology-dimension-induction-step: the whole theorem is moved int)
