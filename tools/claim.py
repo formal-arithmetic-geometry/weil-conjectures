@@ -132,7 +132,37 @@ def node_finished(m: str) -> bool:
         d = json.loads(hits[0].read_text())
     except Exception:
         return False
-    return d.get("status") in ("split", "mathlib", "merged") and bool(d.get("reviewed")) or d.get("status") == "merged"
+    if d.get("status") in ("split", "mathlib", "merged") and bool(d.get("reviewed")) or d.get("status") == "merged":
+        return True
+    # launcher's finding, 2026-10-10 17:30 UTC: a node attached to a sorry-free Lean declaration (lean_audit closed or
+    # attached) stays status unsplit but is finished; groups claimed such nodes eight times each
+    la = d.get("lean_audit") or {}
+    if la.get("state") in ("closed", "attached") or (la.get("slopmaster2") or {}).get("state") in ("closed", "attached"):
+        return True
+    return False
+
+
+def attachment_pending(m: str) -> bool:
+    """A node with an 'abandon: attachment <node>: ...' release in coord/deliveries.log that L has not yet processed:
+    not Lean-closed (node_finished) and no ledger line 'NOT attached' / 'attachment refused' for it after the release.
+    Such a node is not handed out to any group until L verifies the attachment (launcher, 2026-10-10 17:30 UTC)."""
+    p = WORK / "deliveries.log"
+    if not p.exists():
+        return False
+    last = None
+    for line in p.read_text().splitlines():
+        mm = re.match(r"(\S+)Z (\S+) abandoned (\S+): abandon: attachment ", line)
+        if mm and mm.group(3) == m:
+            last = mm.group(1)
+    if last is None:
+        return False
+    led = WORK / "ledger.md"
+    if led.exists():
+        txt = led.read_text()
+        tail = txt[txt.rfind(last[11:16]):] if last[11:16] in txt else ""
+        if re.search(rf"{re.escape(m)} NOT attached|attachment refused.*{re.escape(m)}|{re.escape(m)}.*attachment refused", tail):
+            return False
+    return True
 
 
 def queue(stage: str | None = None):
@@ -186,7 +216,9 @@ def main() -> int:
                 continue
             if sorries(m) == 0:  # finished since the queue was written
                 continue
-            if node_finished(m):  # a DAG node split or matched since the queue was written (stale queue.tsv)
+            if node_finished(m):  # a DAG node split, matched or Lean-attached since the queue was written (stale queue.tsv)
+                continue
+            if attachment_pending(m):  # an attachment release L has not verified yet (launcher, 2026-10-10 17:30 UTC)
                 continue
             r = read(m)
             if (r is None or expired(r)) and take(who, m, quiet=True):
