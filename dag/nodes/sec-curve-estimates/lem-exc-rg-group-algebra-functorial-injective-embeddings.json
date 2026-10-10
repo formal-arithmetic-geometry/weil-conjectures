@@ -21,9 +21,39 @@
  "stmt_deps": [
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The group ring $R[G]$ is a ring, so the category of left $R[G]$-modules is a Grothendieck abelian category by [lem-weil-pbc-ring-modules-grothendieck-abelian], instantiated with the ring $R[G]$. Its generator is the regular module $R[G]$, and exactness of filtered colimits is the usual exactness of filtered colimits of modules.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Section G-modules, paragraph immediately before Tag 04JF, using the module-category Grothendieck conditions"
+   }
+  },
+  {
+   "text": "Apply the functorial injective-embedding theorem for a Grothendieck abelian category [lem-weil-pbc-grothendieck-functorial-injective-embedding] to the category of $R[G]$-modules. It supplies a functor $J$ and a natural transformation $j:\\operatorname{id}\\to J$ whose components are monomorphisms and whose values are injective objects, which is exactly the asserted functorial injective embedding.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Section G-modules, paragraph immediately before Tag 04JF: modules over an algebra have functorial injective embeddings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Section G-modules, paragraph immediately before Tag 04JF, reconstructed from the stated module-category and Grothendieck-category results"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +78,40 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-rg-discrete-modules-functorial-injective-embeddings",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-rg-group-algebra-functorial-injective-embeddings",
+  "worker": "stage1",
+  "summary": "Split the group-ring assertion into the Grothendieck-abelian structure of modules over the ring R[G] and the functorial injective-embedding theorem for Grothendieck abelian categories. No new node was required because both statements already exist in the DAG; the two existing nodes are generic tools from another unit.",
+  "blueprint": "Realizes the def-exc-continuous-cohomology proof clause immediately before Tag 04JF asserting functorial injective embeddings for modules over the group ring R[G].",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "why": "The route needs the generic fact that modules over the ring R[G] are Grothendieck abelian; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "why": "The route needs the generic theorem producing functorial injective embeddings in any Grothendieck abelian category; no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-modules-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gai",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gai (reviewer sub-agent of L); spot-checked: Source: Stacks injectives.tex Section G-modules, remark before Lemma 04JF (label injectives-lemma-G-modules), whose proof begins 'By the remark above the lemma the category Mod_{R[G]} has functorial injective embeddings'; the item's statement (G a group, R a ring, left R[G]-modules have a functor J and natural j: id -> J with monic components and injective values) agrees with that assertion. Step 1 is carried by lem-weil-pbc-ring-modules-grothendieck-abelian (Mathlib leaf instIsGrothendieckAbelianModuleCat, AB.lean line 52, for (R : Type u) [Ring R], so non-commutative R[G] is covered); step 2 by lem-weil-pbc-grothendieck-functorial-injective-embedding, whose statement gives exactly J, j, monic components, injective values. proof_deps is the union of uses; no new nodes; only the item's node and report changed. Tool uses: lem-weil-pbc-ring-modules-grothendieck-abelian (unit sk-thm-p1, generic black box) accepted; lem-weil-pbc-grothendieck-functorial-injective-embedding dropped from tool_uses because it is in the item's own unit sk-prop-h2, not off-unit. Small cases: G trivial gives Mod(R); R[G] for finite G the group algebra. Start Sat Oct 10 03:35:55 PM UTC 2026, end Sat Oct 10 03:36:17 PM UTC 2026."
+ }
 }
