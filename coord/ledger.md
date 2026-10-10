@@ -1646,3 +1646,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:42 L: merged deliver/E1/lem-sc-generic-cohomology-comparison (reviewer FIX; first push; new nodes: 1)
 - 14:43 L: merged deliver/G1/lem-sc-hilb-geometrically-integral (reviewer FIX; after a return; new nodes: 1)
 - 14:43 L: merged deliver/G1/lem-galois-transitive (reviewer FIX; after a return; new nodes: 1)
+- 14:43 L: returned deliver/F1/lem-pc-base-change-closure-components (reviewer RETURN: 1. D1: whole split: the three new nodes lem-pc-global-sections-finite-separable, lem-pc-base-change-component-decomposit)
