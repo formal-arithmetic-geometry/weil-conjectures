@@ -24,9 +24,67 @@
   "def-pc-scheme",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-scheme-dimension-local-rings] the Krull dimension of the underlying topological space of Y [def-kun-topological-krull-dimension] equals $\\sup_{y\\in Y}\\dim\\mathcal O_{Y,y}$, which is $\\dim Y$ in the sense of [def-pc-dimension] (both are $-\\infty$ if Y is empty); so the topological dimension of Y is at most 0. Apply [lem-weil-pbc-finite-type-dim-zero-artinian] to the finite-type morphism Y to Spec k and this topological hypothesis. It gives that the underlying topological space of Y is finite and discrete.",
+   "uses": [
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-weil-pbc-finite-type-dim-zero-artinian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00KH (lemma-Noetherian-dimension-0)"
+   }
+  },
+  {
+   "text": "A scheme with finite discrete underlying space is affine by [lem-weil-pbc-finite-discrete-scheme-affine]. Thus Y is affine; write Y = Spec B with B = Gamma(Y, O_Y).",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-scheme-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03J6 proof, using Properties Lemma 01ZV"
+   }
+  },
+  {
+   "text": "Since the original structure morphism $Y\\to\\operatorname{Spec}k$ is of finite type and Y is affine, [lem-pc-affine-finite-type-algebra] says that the induced k-algebra B is of finite type. If Y is empty then B = 0 has no primes. Otherwise apply [lem-pc-dimension-affine-open-cover] to the one-member cover of Y by Y = Spec B: the Krull dimension of the ring B equals dim Y <= 0, so there is no strict inclusion of primes of B, i.e. every prime of B is maximal.",
+   "uses": [
+    "lem-pc-affine-finite-type-algebra",
+    "lem-pc-dimension-affine-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH, algebraic case"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-algebra-dim-zero-finite] to B. It gives that B is finite-dimensional over k. Therefore the affine structure morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}k$ is finite, since a finite-dimensional k-algebra is a finite k-algebra.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-dim-zero-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0ALW, implication (1) => (5), and Tag 01WH"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-finite-discrete-scheme-affine",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-pc-dimension-affine-open-cover",
+  "lem-weil-pbc-finite-type-algebra-dim-zero-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 06LH (lemma-algebraic-scheme-dim-0), algebraic case"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +109,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-dim-zero-finite-over-field",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-algebraic-dim-zero-affine-finite",
+  "worker": "stage1",
+  "summary": "Split Tag 06LH into finite-discrete, affine, finite-type coordinate algebra, and finite-dimensional algebra steps. Reused existing DAG leaves and created one statement-only child for the affine finite-type coordinate-ring fact after searching the DAG, blueprint, Lean source, and Mathlib.",
+  "blueprint": "Realizes lem-pc-degree-base-change proof part (2), the sentence 'Hence D is finite over k by Lemma 06LH', with the affine coordinate-algebra reduction explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "generic fact that the topological Krull dimension of a scheme is the supremum of the dimensions of its local rings, used to pass from the item's def-pc-dimension hypothesis to the topological dimension hypothesis of lem-weil-pbc-finite-type-dim-zero-artinian"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-adz",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-adz (reviewer sub-agent of L); spot-checked: Source Stacks Tag 06LH (varieties.tex lemma-algebraic-scheme-dim-0), algebraic case: item statement agrees (field k, Y finite type over k, dim Y <= 0; conclusion Y affine and Y -> Spec k finite). Step 1: lem-weil-pbc-finite-type-dim-zero-artinian gives |Y| finite discrete, but its hypothesis is topological Krull dimension (def-kun-topological-krull-dimension) while the item's is def-pc-dimension (sup of local ring dimensions). Step 2: lem-weil-pbc-finite-discrete-scheme-affine gives Y = Spec Gamma(Y,O_Y). Step 3: new node lem-pc-affine-finite-type-algebra (true: Morphisms Tag 01T2 (1)=>(2)); the passage dim Y <= 0 => every prime of B maximal was uncited. Step 4: lem-weil-pbc-finite-type-algebra-dim-zero-finite (every prime maximal, finite type => finite-dimensional), then finite morphism by def-weil-finite-integral-morphism (affine over affine base, R -> A finite) - elementary. Fixes (FIX more, RETURN less): dag/nodes/sec-picard-framework/lem-pc-algebraic-dim-zero-affine-finite.json: proof[0]: C4, cite lem-pc-scheme-dimension-local-rings to pass from def-pc-dimension to the topological dimension hypothesis of the cited leaf (declared in split_report.tool_uses and --tool-uses, generic off-unit tool, same use as already accepted in lem-pc-zero-dimensional-closed-subscheme-finite); proof[2]: C1, cite lem-pc-dimension-affine-open-cover (one-member cover Y = Spec B gives dim B = dim Y <= 0, so every prime maximal; empty case B = 0); proof_deps updated. dag/nodes/sec-picard-framework/lem-pc-affine-finite-type-algebra.json: source: Tag 01PB (about quasi-coherent modules) replaced by morphisms.tex Tag 01T2 (lemma-locally-finite-type-characterize). Small cases: Spec k, Spec k[e]/(e^2), finite disjoint unions of points, empty scheme; A^1_k excluded (dim 1). No Mathlib leaf in the delivery; new node search recorded (three kinds), no exact match. Start Sat Oct 10 03:24:23 PM UTC 2026, end Sat Oct 10 03:25:38 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }

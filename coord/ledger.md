@@ -1783,3 +1783,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:25 L: lem-exc-rg-adjoint-transfer-functorial-injectives accepted (4 steps per 0161; statement generalized E7; 1 new Mathlib leaf Adjunction.map_injective)
 - 15:25 L: merged deliver/M1/lem-sc-generic-vanishing-kernel-colimit (reviewer FIX; first push; new nodes: 0)
 - 15:25 L: merged deliver/C1/lem-sc-glue-component-reduced-cover-sections (reviewer PASS; first push; new nodes: 0)
+- 15:25 L: merged deliver/E1/lem-pc-algebraic-dim-zero-affine-finite (reviewer FIX; first push; new nodes: 1)
