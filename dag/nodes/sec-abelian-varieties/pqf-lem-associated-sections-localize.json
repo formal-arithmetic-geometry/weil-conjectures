@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-associated-sections-localize",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Principal localization of an associated module sheaf",
@@ -12,27 +12,74 @@
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-associated-sections-localize.md",
   "place": "node pqf-lem-associated-sections-localize, order 541"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "pqf-def-coherent",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-localization-base-change"
+ ],
  "proof": [
   {
-   "text": "Write $b$ for the image of $a$ in $B$. The inverse image of\n$D(a)$ is $D(b)=\\operatorname{Spec}B_b$, and the associated sheaf\nof [pqf-def-coherent] has sections $M_b$ on this principal open.\nThe universal properties of localization give\n$B\\otimes_AA_a=B_b$ and $M\\otimes_AA_a=M_b$, compatibly with\nrestriction. These identifications give the formula.",
+   "text": "Write $b$ for the image of $a$ in $B$. By [lem-weil-pbc-localization-base-change], $B\\otimes_A A_a$ is the localization of $B$ at the powers of $b$, hence its spectrum is the principal open $D(b)\\subseteq\\operatorname{Spec}B$; the restriction of $\\widetilde M$ to this open is therefore the sheaf appearing in [lem-weil-pbc-spec-module-tilde-sections].",
    "uses": [
-    "pqf-def-coherent"
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-spec-module-tilde-sections"
    ],
    "elementary": false
+  },
+  {
+   "text": "Applying [lem-weil-pbc-spec-module-tilde-sections] with $R=B$, $N=M$, and $r=b$ gives $\\Gamma(D(b),\\widetilde M)\\cong M_b$ via $m/b^n\\mapsto b^{-n}m$.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The universal properties of the principal localization identify $B\\otimes_A A_a$ with $B_b$ and identify the base-changed module $M\\otimes_A A_a$ with $M_b$, by $m\\otimes(x/a^n)\\mapsto xm/b^n$; these maps respect restriction. Composing these identifications with the isomorphism of Step 2 yields the asserted isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "pqf-def-coherent"
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-spec-module-tilde-sections"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-associated-sections-localize.md",
-  "place": "## Proof"
+  "place": "## Proof: identify the inverse image of the principal open and use sections of a tilde sheaf on a principal open"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sections of associated quasi-coherent sheaf on principal open equal module localization",
+   "results": "ModuleCat.Tilde.const, ModuleCat.Tilde.const_apply, ModuleCat.Tilde.exists_const, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.openToLocalization, ModuleCat.Tilde.isLocallyFraction_pred, ModuleCat.tildeInType, ModuleCat.Tilde.sectionsSubmodule",
+   "date": "2026-10-11",
+   "verdict": "match: AlgebraicGeometry.tilde and its principal-open localization instance (recorded by existing node lem-weil-pbc-spec-module-tilde-sections)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.tilde, IsLocalizedModule.Away, Scheme.ΓSpecIso",
+   "results": "0 hits; unknown identifier Scheme.ΓSpecIso",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tilde|IsLocalizedModule.Away|basicOpen in Mathlib/AlgebraicGeometry/Modules",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean:150 AlgebraicGeometry.tilde; :170 tilde.toOpen; :175 tilde.toOpen_res; :179 IsLocalizedModule.Away instance",
+   "date": "2026-10-11",
+   "verdict": "match: AlgebraicGeometry.tilde and tilde.toOpen"
+  },
+  {
+   "tool": "leansearch",
+   "query": "global sections of the associated sheaf on Spec B over D(b) are M localized at b",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -54,5 +101,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-associated-sections-localize",
+  "worker": "stage1",
+  "summary": "Checked the item against its blueprint proof and found no exact project declaration. The proof is split into the localization base-change identification, the existing principal-open section theorem for a tilde sheaf, and the elementary tensor-localization identification of the module. No new nodes were needed.",
+  "blueprint": "Realizes the blueprint proof paragraph: write b for the image of a, identify B tensor_A A_a and M tensor_A A_a with the principal localizations B_b and M_b, and apply the principal-open sections formula.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-asl2106",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-asl2106 (reviewer sub-agent of L); spot-checked: Not a single Mathlib fact: Mathlib Tilde.lean:179 gives Gamma(D(f)) = M_f for f in R only; the item composes it with B(x)_A A_a = B_b (cited leaf lem-weil-pbc-localization-base-change) and M(x)_A A_a = M_b (Step 3, elementary: M(x)_A A_a = M(x)_B (B(x)_A A_a) = M(x)_B B_b = M_b), so the 3-step split citing both leaves stands; C1/C4/C5 checked (leaf mathlib_match Tilde.lean:150/170/175/179 read), D: steps prove the statement, no cycle; E: hypotheses (M a B-module, b image of a) fine. Second reading missed no mathematical fault; its claim to have filled blueprint.from/same_as is not borne out (both still null/empty), cosmetic only."
+ }
 }
