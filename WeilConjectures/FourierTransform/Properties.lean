@@ -5,16 +5,9 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Compactification.BaseChange
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
-public import WeilConjectures.FourierTransform.Defs
 public import WeilConjectures.FourierTransform.Properties.BaseChange
 public import WeilConjectures.FourierTransform.Properties.BaseLinear
 public import WeilConjectures.FourierTransform.Properties.Stalk
-public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-public import WeilConjectures.SixFunctors.Etale.Derived.Shift
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
 /-!
 
@@ -91,15 +84,17 @@ cohomological dimension and so commutes with the colimits reducing to bounded co
 TODO: upgrade these back to `Iso` constructions once the exchange isomorphisms they are
 built from exist as data.
 
-This module only imports its parts: the stalk formula is in
-`WeilConjectures.FourierTransform.Properties.Stalk`, base change in
-`WeilConjectures.FourierTransform.Properties.BaseChange` and base linearity and the Tate twist
-in `WeilConjectures.FourierTransform.Properties.BaseLinear`.
-
 ## Blueprint
 
 The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
 repository; they are not labels of `blueprint/src` and so are not checked by the build.
+
+## File structure
+
+This module only imports its parts:
+- `WeilConjectures.FourierTransform.Properties.Stalk`: the stalk formula;
+- `WeilConjectures.FourierTransform.Properties.BaseChange`: base change;
+- `WeilConjectures.FourierTransform.Properties.BaseLinear`: base linearity and the Tate twist.
 
 -/
 

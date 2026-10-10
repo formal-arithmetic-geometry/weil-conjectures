@@ -45,6 +45,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 namespace ProEtale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+
 /-- The complexes of pro-étale sheaves on `Y` whose pullback by `g : Z ⟶ Y` is K-flat: the
 inverse image of the K-flat complexes of `K(Z_proét)` under `g^* : K(Y_proét) ⥤ K(Z_proét)`. -/
 abbrev kFlatUpperStar :

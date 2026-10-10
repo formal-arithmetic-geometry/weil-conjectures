@@ -5,16 +5,6 @@ Authors: Joël Riou, Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
-public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
-public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
-public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Tensor
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.KFlat
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Derived
 
 /-!
@@ -47,6 +37,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 namespace ProEtale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+
 section
 
 open DerivedCategory Functor.OplaxMonoidal

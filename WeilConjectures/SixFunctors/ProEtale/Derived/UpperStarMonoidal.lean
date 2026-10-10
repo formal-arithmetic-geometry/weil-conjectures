@@ -5,20 +5,10 @@ Authors: Joël Riou, Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
-public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
-public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
-public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Tensor
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Derived
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.KFlat
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.Vanishing
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.KFlat
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 
 /-!
 # The derived pullback and the derived tensor product
@@ -73,6 +63,9 @@ The results depend on `sorryAx` through `AlgebraicGeometry.ProEtale.derivedTenso
 - The statements here are those of the étale file for a different site; both should be
   deduced from a single statement for an exact functor between abelian monoidal categories with
   functorial flat resolutions preserving flat objects.
+  Each part of this module copies the corresponding part of
+  `WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal` line for line, so every change
+  has to be made in both; see the TODO there.
 
 ## File structure
 

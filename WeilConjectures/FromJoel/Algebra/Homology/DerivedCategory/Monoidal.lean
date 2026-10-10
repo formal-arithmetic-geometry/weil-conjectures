@@ -42,6 +42,16 @@ noncomputable instance : (Qh (C := C)).LaxMonoidal :=
   inferInstanceAs (toDerivedMonoidal Qh
     (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))).LaxMonoidal
 
+/-- The unit comparison `𝟙_ ⟶ Qh (𝟙_)` of `Qh : K(C) ⥤ D(C)` is an isomorphism.
+
+Stated once for a general category `C`, it applies at a concrete category (such as étale
+sheaves on a scheme) as a plain instance. Deriving it there with `inferInstanceAs` instead makes
+the kernel compare the two paths to the lax monoidal structure of `Qh`, which takes about a
+minute. -/
+instance isIso_ε_Qh : IsIso (Functor.LaxMonoidal.ε (Qh (C := C))) :=
+  inferInstanceAs (IsIso (Functor.LaxMonoidal.ε (toDerivedMonoidal Qh
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)))))
+
 instance : (curriedTensor (DerivedCategory C)).IsLeftDerivedFunctor₂
     (Functor.LaxMonoidal.μNatTrans Qh) (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
       (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) :=

@@ -87,14 +87,11 @@ an isomorphism between `- ⊗ᴸ -` and the flipped bifunctor `(K, M) ↦ M ⊗�
 tensor product is symmetric monoidal (blueprint `sk-def-sf-operations`, remark
 `rem-sf-summary`); this is the existence of its symmetry.
 
-It is the braiding of `D(X_ét)` given by `DerivedCategory.nonempty_braidedCategory`. -/
+It is the case `C = Sheaf X.smallEtaleTopology A` of
+`DerivedCategory.nonempty_iso_curriedTensor_flip`. -/
 theorem nonempty_iso_derivedTensor_flip :
-    Nonempty (derivedTensor A X ≅ (derivedTensor A X).flip) := by
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
-    (Sheaf X.smallEtaleTopology A)
-  -- `curriedBraidingNatIso` is generic in the category, so the kernel does not check the
-  -- naturality of the braiding in `D(X_ét)` (which took about 50s).
-  exact ⟨BraidedCategory.curriedBraidingNatIso _⟩
+    Nonempty (derivedTensor A X ≅ (derivedTensor A X).flip) :=
+  _root_.DerivedCategory.nonempty_iso_curriedTensor_flip (Sheaf X.smallEtaleTopology A)
 
 variable {A X}
 

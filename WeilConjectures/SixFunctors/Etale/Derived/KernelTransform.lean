@@ -5,23 +5,10 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Assoc
-public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Finite
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Tensor
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-public import WeilConjectures.SixFunctors.Etale.Derived.Shift
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
-public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 
 /-!
 
@@ -38,9 +25,9 @@ of the kernel transforms of `𝒦` and `𝒦'` is the kernel transform of the co
 `𝒦' ∗ 𝒦`, with the shifts added. The Fourier–Deligne transform of
 `WeilConjectures.FourierTransform.Defs` is the kernel transform of the Fourier kernel.
 
-The constructions are made for any coefficient category `A` on which the étale six functors
-are built: a Grothendieck abelian, closed symmetric monoidal category with functorial flat
-resolutions.
+The constructions of the modules imported here are made for any coefficient category `A` on
+which the étale six functors are built: a Grothendieck abelian, closed symmetric monoidal category
+with functorial flat resolutions.
 
 ## Main definitions
 
@@ -110,10 +97,14 @@ an isomorphism is asserted, the choice does not matter.
 
 TODO: upgrade the statements back to `Iso` constructions once they can be built.
 
-This module only imports its parts: the definitions are in
-`WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Defs`, linearity over the base in
-`WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Tensor`, the composition law in
-`WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Composition` and the statements at
-finite coefficients in `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Finite`.
+## File structure
+
+This module only imports its parts:
+- `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Defs`: the definitions;
+- `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Tensor`: linearity over the base;
+- `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Composition`: the composition law
+  at a general coefficient category;
+- `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Finite`: the statements at finite
+  coefficients.
 
 -/

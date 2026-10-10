@@ -5,20 +5,10 @@ Authors: Joël Riou, Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
-public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.DerivesTwo
-public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
-public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Derived
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.KFlat
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 
 /-!
 # The derived pullback and the derived tensor product
@@ -79,6 +69,12 @@ The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor` 
   comparison `leftDerivedUpperStarTensorComparison`, which only uses the oplax monoidal
   structure of `F`, and `leftDerivedUpperStarTensorNatIso`, which uses that `F` is strong
   monoidal.
+  The pro-étale parts `WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarMonoidal.*` copy
+  the parts of this module line for line, differing only in the site, so every change has to be
+  made twice. The K-flat derivability structure of `kFlatUpperStar`, the vanishing statements
+  and the comparisons should be stated once, under `CategoryTheory/DerivedCategory`, and both
+  modules reduced to instances of them; the only site-specific input is
+  `AlgebraicGeometry.Etale.kFlat_upperStar_mapHomologicalComplex_obj`.
 - The comparison should be the `δ` of an oplax (in fact strong) monoidal structure
   `Functor.OplaxMonoidal L(g^*)`, together with the unit comparison `Lg^*(𝟙_) ⟶ 𝟙_` and the
   coherence axioms, with respect to the monoidal structure on derived categories. This needs

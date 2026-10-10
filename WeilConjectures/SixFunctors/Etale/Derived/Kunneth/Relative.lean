@@ -10,13 +10,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-public import WeilConjectures.SixFunctors.Etale.Derived.Composition
-public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 
 /-!

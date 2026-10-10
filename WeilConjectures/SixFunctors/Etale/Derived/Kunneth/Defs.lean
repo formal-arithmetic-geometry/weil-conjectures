@@ -70,11 +70,12 @@ noncomputable def externalProduct (f : X ⟶ B) (g : Y ⟶ B)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     _root_.DerivedCategory (Sheaf (pullback f g).smallEtaleTopology A) :=
-  -- Written with `derivedTensor A (pullback f g)` rather than `⊗`: the instance proofs of the
-  -- monoidal structure then mention the scheme only through a variable, so they are not
-  -- abstracted into auxiliary lemmas, and unfolding `externalProduct` against `⊗` stays cheap
-  -- in the kernel (about 1s instead of about 2 minutes per unfolding).
-  ((derivedTensor A (pullback f g)).obj ((L((pullback.fst f g)^*[A])).obj K)).obj
+  -- Written with `-⊗ᴸ-(pullback f g)[A]` (that is, `derivedTensor A (pullback f g)`) rather than
+  -- `⊗`, which is defeq to it: the instance proofs of the monoidal structure then mention the
+  -- scheme only through a variable, so they are not abstracted into auxiliary lemmas, and
+  -- unfolding `externalProduct` against `⊗` stays cheap in the kernel (about 1s instead of
+  -- about 2 minutes per unfolding).
+  ((-⊗ᴸ-(pullback f g)[A]).obj ((L((pullback.fst f g)^*[A])).obj K)).obj
     ((L((pullback.snd f g)^*[A])).obj M)
 
 end Etale

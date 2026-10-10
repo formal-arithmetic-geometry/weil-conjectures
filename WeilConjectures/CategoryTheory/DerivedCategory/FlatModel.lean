@@ -221,9 +221,6 @@ variable (C) in
 /-- The monoidal unit of `D(C)` is the unit object of `C` placed in degree `0`. -/
 noncomputable def singleFunctorObjUnitIso :
     (singleFunctor C 0).obj (𝟙_ C) ≅ 𝟙_ (DerivedCategory C) :=
-  have : IsIso (Functor.LaxMonoidal.ε (Qh (C := C))) :=
-    inferInstanceAs (IsIso (Functor.LaxMonoidal.ε (toDerivedMonoidal Qh
-      (HomotopyCategory.quasiIso C (.up ℤ)))))
   (singleFunctorIsoCompQ C 0).app _ ≪≫ (quotientCompQhIso C).symm.app _ ≪≫
     Qh.mapIso ((Functor.Monoidal.εIso (HomotopyCategory.quotient C (.up ℤ))).symm :
         (HomotopyCategory.quotient C (.up ℤ)).obj (𝟙_ (CochainComplex C ℤ)) ≅ _) ≪≫

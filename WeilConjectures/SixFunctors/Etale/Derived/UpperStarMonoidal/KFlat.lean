@@ -45,6 +45,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 namespace Etale
 
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+
 /-- The complexes of étale sheaves on `Y` whose pullback by `g : Z ⟶ Y` is K-flat: the
 inverse image of the K-flat complexes of `K(Z_ét)` under `g^* : K(Y_ét) ⥤ K(Z_ét)`. -/
 abbrev kFlatUpperStar :

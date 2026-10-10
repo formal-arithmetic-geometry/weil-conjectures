@@ -40,10 +40,9 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 namespace ProEtale
 
-variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 section
 
-open DerivedCategory Functor.LaxMonoidal
+open DerivedCategory Functor.LaxMonoidal ZeroObject
 
 variable {A} in
 /-- The lax monoidal structure `Qh K ⊗ᴸ Qh M ⟶ Qh (K ⊗ M)` of `Qh : K(X_proét) ⥤ D(X_proét)` is an
@@ -59,10 +58,6 @@ lemma isIso_μNatTrans_Qh_app_app_of_kFlat {X : Scheme.{u}}
   exact (MorphismProperty.id_prod_kFlat_derives_curriedTensor
     (HomotopyCategory.quasiIso (Sheaf (Scheme.ProEt.topology X) A) (.up ℤ))
       Qh).isIso_of_isLeftDerivabilityStructure (LF := -⊗ᴸ-(X)[A]) (μNatTrans Qh) K ⟨_, hM⟩
-
-section
-
-open DerivedCategory ZeroObject
 
 variable {A} in
 /-- The derived tensor product `K ⊗ᴸ M` vanishes when `K` does. -/
@@ -101,8 +96,6 @@ lemma isZero_derivedTensor_obj_obj_of_isZero_right {X : Scheme.{u}}
     {M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hM : IsZero M) :
     IsZero (((-⊗ᴸ-(X)[A]).obj K).obj M) :=
   MonoidalCategory.isZero_tensorObj_of_isZero_right K hM
-
-end
 
 end
 

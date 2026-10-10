@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
@@ -80,18 +80,13 @@ noncomputable def singleFunctorObjIsoQh (F : Sheaf X.smallEtaleTopology A) :
 
 variable (A X) in
 /-- The monoidal unit of `D(X_ét)` is the unit sheaf placed in degree zero: the unit of the
-derived monoidal structure is `Qh` of the unit complex `𝟙[0]`. -/
+derived monoidal structure is `Qh` of the unit complex `𝟙[0]`.
+
+This is `DerivedCategory.singleFunctorObjUnitIso` at the category of étale sheaves. -/
 noncomputable def singleFunctorObjUnitIso :
     (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj (𝟙_ _) ≅
       𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
-  have := DerivedCategory.isIso_ε_Qh (Sheaf X.smallEtaleTopology A)
-  singleFunctorObjIsoQh (𝟙_ _) ≪≫
-    DerivedCategory.Qh.mapIso
-      ((Functor.Monoidal.εIso (HomotopyCategory.quotient (Sheaf X.smallEtaleTopology A)
-        (.up ℤ))).symm :
-        (HomotopyCategory.quotient (Sheaf X.smallEtaleTopology A) (.up ℤ)).obj
-          (𝟙_ (CochainComplex (Sheaf X.smallEtaleTopology A) ℤ)) ≅ _) ≪≫
-    (asIso (Functor.LaxMonoidal.ε DerivedCategory.Qh)).symm
+  DerivedCategory.singleFunctorObjUnitIso (Sheaf X.smallEtaleTopology A)
 
 open Functor.LaxMonoidal in
 /-- For a flat sheaf `L` and any sheaf `F`, the derived tensor product of `L` and `F` placed in

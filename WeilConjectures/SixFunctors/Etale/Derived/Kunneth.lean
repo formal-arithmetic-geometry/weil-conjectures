@@ -5,22 +5,10 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Mathlib.AlgebraicGeometry.Pullbacks
-public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-public import WeilConjectures.SixFunctors.Etale.Derived.Composition
-public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
 
@@ -32,9 +20,9 @@ of `K ∈ D(X_ét)` and `M ∈ D(Y_ét)` is
 
 `K ⊠ M = Lp^* K ⊗ᴸ Lq^* M ∈ D((X ×_B Y)_ét)`.
 
-This file introduces the external product and states the Künneth package of the six-functor
-formalism: the ordinary Künneth formula with an identity factor, the relative product theorem
-for `Rf_!`, the four product comparison maps, and the Künneth–Verdier isomorphism.
+The modules imported here introduce the external product and state the Künneth package of the
+six-functor formalism: the ordinary Künneth formula with an identity factor, the relative product
+theorem for `Rf_!`, the four product comparison maps, and the Künneth–Verdier isomorphism.
 
 ## Main definitions
 
@@ -85,10 +73,13 @@ blueprint hypothesis "separated of finite type" is spelled `[HasCompactification
 together with `[QuasiCompact f]` wherever `Rf_!` occurs, and as the triple
 `[IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]` otherwise.
 
-This module only imports its parts: `externalProduct` is defined in
-`WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs`, the relative product theorem is in
-`WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative`, the `!`-Künneth isomorphism in
-`WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek` and the comparison maps in
-`WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons`.
+## File structure
+
+This module only imports its parts:
+- `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs`: the external product;
+- `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative`: the ordinary Künneth formula and
+  the relative product theorem;
+- `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek`: the `!`-Künneth isomorphism;
+- `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons`: the comparison maps.
 
 -/

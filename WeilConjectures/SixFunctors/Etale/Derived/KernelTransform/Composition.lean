@@ -5,20 +5,10 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Assoc
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-public import WeilConjectures.SixFunctors.Etale.Derived.Shift
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
-public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-!
 

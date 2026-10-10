@@ -5,14 +5,9 @@ Authors: Weil conjectures project
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-public import WeilConjectures.Compactification.RefinementPullback
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.IdentityLaw
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChange
 
 /-!
 
@@ -20,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseCh
 
 Let `f : X ⟶ Y` be a morphism of schemes, let `c` and `d` be compactifications of `f` and let
 `r : c.Refinement d` be a refinement, i.e. a morphism `q = r.hom : c.Z ⟶ d.Z` with
-`c.i ≫ q = d.i` and `q ≫ d.g = c.g`. This file constructs the comparison
+`c.i ≫ q = d.i` and `q ≫ d.g = c.g`. The modules imported here construct the comparison
 
 `Rf_!(d)[A]+ ⟶ Rf_!(c)[A]+`
 
@@ -103,11 +98,14 @@ composition isomorphisms of the derived pushforwards are associative
 (`Functor.rightDerivedFunctorPlusCompIso'_assoc`, applied through the underived
 associativity `AlgebraicGeometry.Etale.refinementLowerStarComp_comp`).
 
-This module imports its parts: the definitions are in
-`WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.Defs`, the identity law in
-`WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.IdentityLaw` and the composition
-law in `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw`; it
-keeps the axiom census of the three statements.
+## File structure
+
+This module imports its parts and keeps the axiom census of the three statements:
+- `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.Defs`: the definitions;
+- `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.IdentityLaw`: the identity
+  law;
+- `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw`: the
+  composition law.
 
 -/
 

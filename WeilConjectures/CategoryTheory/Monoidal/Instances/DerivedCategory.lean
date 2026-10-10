@@ -73,4 +73,12 @@ theorem nonempty_braidedCategory [Abelian.HasFunctorialFlatResolution C] :
     Nonempty (BraidedCategory (DerivedCategory C)) := by
   exact ⟨DerivedMonoidal.braidedCategory Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))⟩
 
+/-- The derived tensor product is symmetric: `K ⊗ᴸ M ≅ M ⊗ᴸ K`, naturally in `K` and `M`. This is
+the braiding of `DerivedCategory.nonempty_braidedCategory`, as an isomorphism between the
+bifunctor `- ⊗ᴸ -` and its flip. -/
+theorem nonempty_iso_curriedTensor_flip [Abelian.HasFunctorialFlatResolution C] :
+    Nonempty (curriedTensor (DerivedCategory C) ≅ (curriedTensor (DerivedCategory C)).flip) := by
+  obtain ⟨_⟩ := nonempty_braidedCategory C
+  exact ⟨BraidedCategory.curriedBraidingNatIso _⟩
+
 end DerivedCategory

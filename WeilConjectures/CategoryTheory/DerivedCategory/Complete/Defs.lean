@@ -302,9 +302,6 @@ with shifts (`DerivedCategory.commShift₂CurriedTensor`) and triangulatedness
 noncomputable def DerivedCategory.tensorStructure : DerivedCategory.TensorStructure.{v'} A R where
   ε := DerivedCategory.εSingleFunctorZero.{v'} A
   isIso_ε := by
-    have : IsIso (Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := A))) :=
-      inferInstanceAs (IsIso (Functor.LaxMonoidal.ε (toDerivedMonoidal DerivedCategory.Qh
-        (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)))))
     change IsIso ((Functor.LaxMonoidal.ε DerivedCategory.Qh ≫ DerivedCategory.Qh.map
       (Functor.LaxMonoidal.ε (HomotopyCategory.quotient A (ComplexShape.up ℤ)))) ≫
         (DerivedCategory.quotientCompQhIso A).hom.app _)

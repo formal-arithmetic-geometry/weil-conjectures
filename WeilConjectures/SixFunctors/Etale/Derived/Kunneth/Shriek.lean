@@ -5,18 +5,6 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-public import Mathlib.AlgebraicGeometry.Pullbacks
-public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-public import WeilConjectures.SixFunctors.Etale.Derived.Composition
-public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
-public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 
 /-!
@@ -141,8 +129,8 @@ theorem nonempty_iso_leftDerivedUpperStar_mapOverBaseIso_externalProduct
         ((L((pullback.fst f₂ (pullback.snd b₁ b₂))^*[A])).obj M₂) :=
     ((leftDerivedUpperStarComp A e (pullback.snd _ _)).app M₂).symm ≪≫
       (leftDerivedUpperStarComp A _ _ (e ≫ pullback.snd _ _) (by simp [e])).app M₂
-  exact ⟨leftDerivedUpperStarTensorIso A e _ _ ≪≫ ((derivedTensor A _).mapIso pb₁).app _ ≪≫
-    ((derivedTensor A _).obj _).mapIso pb₂⟩
+  exact ⟨leftDerivedUpperStarTensorIso A e _ _ ≪≫ ((-⊗ᴸ-(_)[A]).mapIso pb₁).app _ ≪≫
+    ((-⊗ᴸ-(_)[A]).obj _).mapIso pb₂⟩
 
 /-- The `!`-Künneth isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for
 general coefficients, given compact-support base change of `Rfᵢ_! Mᵢ` along the projections
