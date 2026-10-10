@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-weil-pbc-hypercover-cohomology",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Cohomology is computed after hypercover refinement",
@@ -24,44 +24,137 @@
  ],
  "proof": [
   {
-   "text": "Choose an injective resolution $F\\to I^\\bullet$, in degrees $r\\geq0$, to\ncompute the cohomology of [def-weil-pbc-etale-cohomology]. For each $U$, form\nthe first-quadrant double complex $D^{p,r}=I^r(U_p)$ with total differential\n$\\delta+(-1)^p d_I$. By [lem-weil-pbc-hypercover-free-resolution], its\naugmented rows are exact. Taking horizontal cohomology first therefore shows\nthat\n\n$$\n \\Gamma(X,I^\\bullet)\\longrightarrow\\operatorname{Tot}D\n$$\n\nis a quasi-isomorphism. This uses only finite sums in each total degree. The\ninclusion $F\\to I^\\bullet$ now gives the asserted map from hypercover\ncohomology to derived cohomology.",
+   "text": "The abelian and constant-ring module sheaf categories have enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]. Choose a nonnegative injective resolution $F\\hookrightarrow I^0\\to I^1\\to\\cdots$. It is K-injective by [prop-weil-pbc-kinjective-resolutions-exist], so $H^q(\\Gamma(X,I^\\bullet))$ is the group in [def-weil-pbc-etale-cohomology]. For a finite split hypercover $U$ [def-weil-pbc-finite-split-hypercover], put $D^{p,r}=I^r(U_p)$ and use the total differential $d(x)=\\delta x+(-1)^p d_Ix$ on $D^{p,r}$. Each total degree has only finitely many bidegrees, so its totalization uses a finite direct sum.",
    "uses": [
     "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-hypercover-free-resolution"
+    "def-weil-pbc-finite-split-hypercover",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "prop-weil-pbc-kinjective-resolutions-exist"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Theorem 01H0 (theorem-cohomology-hypercoverings), comparison with injective sheaf cohomology; injective resolutions from Injectives, Theorem 01DU (theorem-sheaves-modules-injectives)"
+   }
   },
   {
-   "text": "We prove its surjectivity without declaring a single hypercover acyclic for\n$F$. Represent a degree-$q$ class by a total cocycle. Its component in\nbidegree $(0,q)$, if $q>0$, is $d_I$-closed. Exactness of the resolution as a\ncomplex of sheaves makes it locally a $d_I$-boundary. By\n[lem-weil-pbc-hypercover-refinement], refine to choose a primitive, and\nsubtract its total coboundary. The component $(0,q)$ is now zero. The cocycle\nequation makes the component $(1,q-1)$ vertically closed. If $q-1>0$, repeat,\nwith the sign $(-1)^1$ in its primitive. After the finitely many positions\n$(p,q-p)$ with $q-p>0$, only $(q,0)$ remains. It is vertically closed, hence\nlies in $F(U_q)$, and its horizontal differential is zero. It is the required\nrepresentative in $C^\\bullet(U,F)$.",
+   "text": "For each injective $I^r$, [lem-weil-pbc-hypercover-free-resolution] identifies the horizontal cohomology of $I^r(U_\\bullet)$ with $I^r(X)$ in degree zero and zero in higher degrees. The horizontal-first spectral sequence of [thm-sp-double-complex-spectral-sequences] therefore has only its degree-zero column; its remaining differential is $d_I$ on $I^\\bullet(X)$. Its finite filtration in each total degree shows that the augmentation $\\Gamma(X,I^\\bullet)\\to\\operatorname{Tot}D$ is a quasi-isomorphism. The maps $F(U_p)\\to I^0(U_p)$ define a cochain map $C^\\bullet(U,F)\\to\\operatorname{Tot}D$: its vertical component vanishes because $F=\\ker(I^0\\to I^1)$. Thus we obtain a map $H^q(C^\\bullet(U,F))\\to H^q(X_{\\Et},F)$, compatible with refinements and maps of sheaves.",
    "uses": [
-    "lem-weil-pbc-hypercover-refinement"
+    "lem-weil-pbc-hypercover-free-resolution",
+    "thm-sp-double-complex-spectral-sequences",
+    "def-weil-pbc-etale-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
+    "place": "Proof, first paragraph: augmented injective double complex; compare Stacks 01H0 (theorem-cohomology-hypercoverings)"
+   }
   },
   {
-   "text": "For injectivity, suppose a degree-$q$ cocycle in this last complex is a total\nboundary. Choose a total primitive of degree $q-1$. Its positive\nvertical-degree components are vertically closed in the same successive\norder, because its differential has only vertical degree zero. After\nrefinement subtract total coboundaries from the primitive to remove these\ncomponents. The remaining primitive lies in $F(U_{q-1})$. Thus the original\ncocycle is already a boundary after refinement. For $q=0$, injectivity\ninstead follows directly from the injectivity of $F\\to I^0$. For two\nrepresentatives first take a common refinement and apply this argument to\ntheir difference. Homotopic refinements induce equal cohomology maps by the\nprism identity in [lem-weil-pbc-hypercover-refinement]. This proves the\ndisplayed isomorphism and its naturality. All operations used only a finite\ntruncation as defined in [def-weil-pbc-finite-split-hypercover]; the cocycle\ncondition uses degree $q+1$. This gives the finite-cover version of\n[Stacks Project, Tag 01H0](https://stacks.math.columbia.edu/tag/01H0). The\ncolimit here is taken on cohomology groups; no colimit of complexes indexed\nby the homotopy category is used. For module coefficients, take an injective\nresolution in the module category and use the free-module version of\n[lem-weil-pbc-hypercover-free-resolution]; every subsequent local lifting and\ndouble-complex calculation is unchanged.",
+   "text": "For surjectivity, let $z=\\sum_{p+r=q}z^{p,r}$ be a total cocycle. If $q>0$, its component $z^{0,q}$ is $d_I$-closed. Exactness of the sheaf resolution says that $I^{q-1}\\to\\ker(d_I:I^q\\to I^{q+1})$ is an epimorphism; by [lem-weil-pbc-abelian-sheaf-epi-locally-surjective] its sections lift on an etale cover of each component of $U_0$. Use [lem-weil-pbc-hypercover-refinement] to make these finitely many local lifts into sections on a refinement and subtract the total boundary of a cochain in bidegree $(0,q-1)$, with the sign chosen to cancel $z^{0,q}$. Inductively, if components $(0,q),\\ldots,(p-1,q-p+1)$ vanish, the bidegree $(p,q-p+1)$ cocycle equation makes $z^{p,q-p}$ vertically closed. When $q-p>0$, lift it locally through $I^{q-p-1}\\to\\ker d_I$, refine, and subtract the total boundary of a cochain in bidegree $(p,q-p-1)$; its horizontal term affects only bidegree $(p+1,q-p-1)$, so earlier zeros persist. After $p=q-1$, only $z^{q,0}$ remains. Its vertical differential is zero, so it is a section of $F(U_q)$, and its horizontal differential is zero, so it is a Cech cocycle. If $q=0$, the original total cocycle is already a section of $F(U_0)$ satisfying the Cech cocycle equation. This proves surjectivity after passage to refinements.",
    "uses": [
     "lem-weil-pbc-hypercover-refinement",
     "def-weil-pbc-finite-split-hypercover",
-    "lem-weil-pbc-hypercover-free-resolution"
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
+    "place": "Proof, second paragraph: successive removal of positive vertical degrees; compare Stacks 01H0 (theorem-cohomology-hypercoverings), first proof, successive killing of obstruction classes"
+   }
+  },
+  {
+   "text": "For injectivity in degree $q>0$, let $a\\in F(U_q)$ be a Cech cocycle whose image in total cohomology vanishes. After a common refinement if needed, choose $b=\\sum_{p+r=q-1}b^{p,r}$ with $db=a$. If $q>1$, $b^{0,q-1}$ is vertically closed because $db$ has no positive vertical component. Lift it locally from $I^{q-2}$, refine using [lem-weil-pbc-hypercover-refinement] and [lem-weil-pbc-abelian-sheaf-epi-locally-surjective], and subtract a total boundary from $b$. Repeat with $(p,q-1-p)$ while its vertical degree is positive; the horizontal part of each correction affects only the next bidegree. At the end $b=b^{q-1,0}$, and the positive-vertical component of $db=a$ says $d_Ib=0$. Hence $b\\in F(U_{q-1})$ and $a=\\delta b$ after refinement. For $q=1$, this final argument applies directly to the sole component $b^{0,0}$. For $q=0$ there are no degree-minus-one boundaries, and $F(U_0)\\hookrightarrow I^0(U_0)$ is injective. Thus a class mapping to zero vanishes in the colimit.",
+   "uses": [
+    "lem-weil-pbc-hypercover-refinement",
+    "lem-weil-pbc-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
+    "place": "Proof, third paragraph: injectivity by successive corrections of a total primitive; compare Stacks 01H0 (theorem-cohomology-hypercoverings), first proof, injectivity paragraph"
+   }
+  },
+  {
+   "text": "The homotopy category of finite split hypercovers is cofiltered by [lem-weil-pbc-hypercover-refinement]. Thus two representatives of the same derived class have a common refinement, where their difference maps to zero, and step 4 makes that difference a boundary after another refinement. The same node's prism identity makes homotopic refinement maps equal on cohomology, so the maps of step 2 define the displayed colimit map. The construction is natural in $F$: a map of sheaves extends to a map between injective resolutions up to chain homotopy [prop-weil-pbc-kinjective-resolutions-exist], and homotopic maps induce the same cohomology map. Each calculation involves only $U_0,\\ldots,U_{q+1}$ (and a primitive through $q-1$), with finite choices at each refinement stage as in [def-weil-pbc-finite-split-hypercover]. For $R$-module sheaves, choose the resolution in that module category [lem-weil-pbc-module-sheaves-enough-injectives] and use the free-module assertion of [lem-weil-pbc-hypercover-free-resolution]. The module epimorphisms used for local lifts remain epimorphisms of underlying abelian sheaves because the forgetful functor is exact [lem-weil-pbc-module-sheaves-colimits-forgetful], then [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] supplies those lifts. The same finite corrections prove the module clause.",
+   "uses": [
+    "lem-weil-pbc-hypercover-refinement",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "def-weil-pbc-finite-split-hypercover",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-hypercover-free-resolution",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Theorem 01H0 (theorem-cohomology-hypercoverings), preamble on cofiltered homotopy category and first proof; finite-refinement and module details as in the blueprint node proof, third paragraph"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-cohomology",
   "lem-weil-pbc-hypercover-free-resolution",
   "lem-weil-pbc-hypercover-refinement",
-  "def-weil-pbc-finite-split-hypercover"
+  "def-weil-pbc-finite-split-hypercover",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/thm-weil-pbc-hypercover-cohomology.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of a sheaf is the colimit of Cech cohomology over hypercoverings",
+   "results": "Sheaf.H (definition, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean); OneHypercoverFamily.isSheaf_iff (Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf.lean, a sheaf-condition theorem). Neither is this comparison.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hypercover\"",
+   "results": "PreZeroHypercover and one-hypercover declarations in Mathlib/CategoryTheory/Sites/Hypercover; no full simplicial-hypercover cohomology comparison.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived sheaf cohomology computed by filtered colimit over finite hypercovers",
+   "results": "Sheaf.cohomologyPresheaf, Sheaf.H, and OneHypercoverFamily.isSheaf_iff; none states the requested comparison.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'hypercover.*cohomology|cohomology.*hypercover' Mathlib/CategoryTheory/Sites/{SheafCohomology,Hypercover}/ (available Mathlib source at /home/ubuntu/SHEAF/project-20261007/lean/.lake/packages/mathlib)",
+   "results": "No theorem relating derived sheaf cohomology to finite simplicial hypercover cochains; Hypercover contains zero- and one-hypercover infrastructure only.",
+   "date": "2026-10-10",
+   "verdict": "no match; configured pinned Mathlib checkout is unavailable in this worktree, so grep used the available source copy"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "thm-weil-pbc-hypercover-cohomology",
+  "worker": "stage1",
+  "summary": "Expanded the imported comparison into its injective-resolution double complex, local finite-refinement corrections for surjectivity and injectivity, degree-zero cases, homotopy independence, and the module-coefficient argument. Existing DAG nodes supply injective resolutions, spectral-sequence convergence, local surjectivity of sheaf epimorphisms, and finite hypercover refinement; no new node is needed.",
+  "blueprint": "Steps 1-2 realize the first proof paragraph (injective double complex and comparison); step 3 realizes the second paragraph (surjectivity by successive removal of positive vertical degrees); steps 4-5 realize the third paragraph (injectivity, common and homotopic refinements, finite truncation, and module coefficients)."
+ },
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -88,5 +181,12 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 01H0 via the double complex of an injective resolution evaluated on the hypercover; 0 new"
+ }
 }
