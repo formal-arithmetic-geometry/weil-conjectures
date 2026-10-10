@@ -1,0 +1,93 @@
+{
+ "id": "lem-weil-pbc-module-tensor-hom-currying",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs), through Cohomology of Schemes Lemma 01YB (lemma-homs-over-open) used by lem-weil-pbc-coherent-generic-point-ideal-inclusion: 'By Modules, Lemma 01CN phi corresponds to a map phi: I^n tensor G -> F' (second part of the proof of 01YB); within Modules Lemma 01CN (whose proof is 'the analogue of Algebra, Lemma 00DE'): the sectionwise correspondence between $\\mathcal O_X(W)$-linear maps $\\mathcal A(W)\\otimes\\mathcal G(W)\\to\\mathcal F(W)$ and $\\mathcal O_X(W)$-linear maps $\\mathcal A(W)\\to\\operatorname{Hom}(\\mathcal G(W),\\mathcal F(W))$",
+   "via": [
+    "lem-weil-pbc-module-tensor-hom-adjunction",
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor-Hom adjunction for modules over a commutative ring",
+ "statement": "Let $R$ be a commutative ring and $M,N,P$ $R$-modules, with $M\\otimes_RN$ their tensor product. For every $R$-linear map $f:M\\to\\operatorname{Hom}_R(N,P)$ there is a unique $R$-linear map $\\hat f:M\\otimes_RN\\to P$ with $\\hat f(x\\otimes y)=f(x)(y)$ for all $x\\in M$, $y\\in N$, and $f\\mapsto\\hat f$ is an isomorphism of $R$-modules $\\operatorname{Hom}_R(M,\\operatorname{Hom}_R(N,P))\\to\\operatorname{Hom}_R(M\\otimes_RN,P)$, with inverse $g\\mapsto(x\\mapsto(y\\mapsto g(x\\otimes y)))$. In particular two $R$-linear maps $M\\otimes_RN\\to P$ that agree on all $x\\otimes y$ are equal.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00DE (label lemma-hom-from-tensor-product, line 1906; tag verified in tags/tags line 494) and its proof; used for Modules, Lemma 01CN (modules.tex line 3534), whose proof is 'the analogue of Algebra, Lemma 00DE'"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "linear maps from tensor product M ⊗ N to P correspond to bilinear maps M → N → P, linear equivalence",
+   "results": "IsTensorProduct.of_equiv (Mathlib.RingTheory.IsTensorProduct), TensorProduct.uncurry, TensorProduct.ext (Mathlib.LinearAlgebra.TensorProduct.Basic), homTensorHomEquiv (Mathlib.LinearAlgebra.Contraction), LinearEquiv.congrRight₂",
+   "date": "2026-10-10",
+   "verdict": "match: TensorProduct.uncurry / lift.equiv"
+  },
+  {
+   "tool": "loogle",
+   "query": "(?M →ₗ[?R] ?N →ₗ[?R] ?P) ≃ₗ[?R] (TensorProduct ?R ?M ?N →ₗ[?R] ?P)",
+   "results": "none (the Mathlib declaration is stated for semilinear maps →ₛₗ[σ₁₂], so the linear pattern does not unify syntactically)",
+   "date": "2026-10-10",
+   "verdict": "no result; see grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom_R(M ⊗_R N, P) is isomorphic to Hom_R(M, Hom_R(N, P)) for modules over a commutative ring (tensor-hom adjunction, currying)",
+   "results": "ModuleCat.monoidalClosedHomEquiv (Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed), rTensorHomEquivHomRTensor, lTensorHomEquivHomLTensor, homTensorHomEquiv (Mathlib.LinearAlgebra.Contraction)",
+   "date": "2026-10-10",
+   "verdict": "match (ModuleCat.monoidalClosedHomEquiv is the categorical form; the elementwise form is TensorProduct.lift.equiv)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def lift.equiv\\|theorem lift.equiv_apply\\|theorem ext\\'\\|def uncurry' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/TensorProduct/Basic.lean",
+   "results": "line 134 theorem ext' (two semilinear maps on M ⊗ N agreeing on all x ⊗ₜ y are equal); line 174 def uncurry; line 188 def lift.equiv : (M →ₛₗ[σ₁₂] N →ₛₗ[σ₁₂] P₂) ≃ₗ[R₂] M ⊗[R] N →ₛₗ[σ₁₂] P₂; line 193 theorem lift.equiv_apply : lift.equiv σ₁₂ M N P₂ f (m ⊗ₜ n) = f m n; line 197 lift.equiv_symm_apply",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TensorProduct.lift.equiv",
+  "file": "Mathlib/LinearAlgebra/TensorProduct/Basic.lean",
+  "how": "specializes in one line: TensorProduct.lift.equiv (line 188) with σ₁₂ = RingHom.id R (R commutative ring, hence CommSemiring) is the R-linear equivalence (M →ₗ[R] N →ₗ[R] P) ≃ₗ[R] (M ⊗[R] N →ₗ[R] P); lift.equiv_apply (line 193) gives f̂(x ⊗ₜ y) = f x y, lift.equiv_symm_apply (line 197) the inverse g ↦ (x ↦ y ↦ g(x ⊗ₜ y)), and TensorProduct.ext' (line 134) the uniqueness / agreement on pure tensors"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-tensor-hom-adjunction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: TensorProduct.lift.equiv (LinearAlgebra/TensorProduct/Basic.lean:188) (00DE)"
+}
