@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-module-pullback-epi-direct-sum",
+ "kind": "statement",
+ "title": "Module pullback preserves epimorphisms and finite direct sums",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $f^*:\\Mod(\\mathcal O_Y)\\to\\Mod(\\mathcal O_X)$ the pullback of modules [def-pc-module-pullback], where $\\Mod(\\mathcal O)$ is the category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. Then: (1) if $\\varphi:\\mathcal G\\to\\mathcal H$ is an epimorphism of $\\Mod(\\mathcal O_Y)$, then $f^*\\varphi:f^*\\mathcal G\\to f^*\\mathcal H$ is an epimorphism of $\\Mod(\\mathcal O_X)$; (2) for $\\mathcal O_Y$-modules $\\mathcal G_1,\\dots,\\mathcal G_n$ ($n\\ge0$) with direct sum $\\bigoplus_i\\mathcal G_i$ and coprojections $\\iota_i:\\mathcal G_i\\to\\bigoplus_i\\mathcal G_i$, the morphism $\\bigoplus_i f^*\\mathcal G_i\\to f^*(\\bigoplus_i\\mathcal G_i)$ whose $i$-th component is $f^*(\\iota_i)$ is an isomorphism of $\\mathcal O_X$-modules.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01AJ (label lemma-exactness-pushforward-pullback), part (2): $f^*$ is right exact and commutes with all colimits, because it is left adjoint to $f_*$ (Sheaves, Lemma 0096, lemma-adjoint-pullback-pushforward-modules); stated there for morphisms of ringed spaces"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of sheaves of modules along a morphism of schemes preserves epimorphisms and coproducts",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback, Scheme.Modules.instAdditivePullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.instIsLeftAdjointPullback (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "match through the left-adjoint instance: Scheme.Modules.pullback f is IsLeftAdjoint, and the generic instances for left adjoints give both clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image functor f^* of sheaves of modules on a ringed space is right exact and commutes with direct sums",
+   "results": "SheafOfModules.pushforward, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.mapFree (Free.lean: a functor preserving Discrete coproducts sends free to free), SheafOfModules.pullback, Scheme.Modules.instAdditivePushforward",
+   "date": "2026-10-10",
+   "verdict": "match through the adjunction (no single named lemma; the generic left-adjoint instances apply)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.PreservesEpimorphisms (AlgebraicGeometry.Scheme.Modules.pullback _); AlgebraicGeometry.Scheme.Modules.pullback, CategoryTheory.Functor.IsLeftAdjoint",
+   "results": "rate limit exceeded (3 requests per 30 s), no result",
+   "date": "2026-10-10",
+   "verdict": "inconclusive (LeanFinder used as the second kind)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsLeftAdjoint\\|Additive' Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; grep -rn 'preservesEpimorphisms_of_isLeftAdjoint' Mathlib/CategoryTheory; grep -n 'IsLeftAdjoint F] : PreservesColimitsOfShape' Mathlib/CategoryTheory/Adjunction/Limits.lean; grep -n 'PreservesCoproduct.iso' Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean",
+   "results": "Sheaf.lean:198 instance (pullback f).IsLeftAdjoint, :202 instance (pullback f).Additive; Functor/EpiMono.lean:153 instance preservesEpimorphisms_of_isLeftAdjoint; Adjunction/Limits.lean:354 instance [IsLeftAdjoint F] : PreservesColimitsOfShape J F; Preserves/Shapes/Products.lean:171 PreservesCoproduct.iso G f : G.obj (∐ f) ≅ ∐ fun j => G.obj (f j), with inverse sigmaComparison (:176), whose components are G.map (Sigma.ι f b) (Limits/Shapes/Products.lean:673 ι_comp_sigmaComparison)",
+   "date": "2026-10-10",
+   "verdict": "match: a few Mathlib declarations, one per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, CategoryTheory.Functor.preservesEpimorphisms_of_isLeftAdjoint, CategoryTheory.Limits.PreservesCoproduct.iso, CategoryTheory.Limits.ι_comp_sigmaComparison",
+  "file": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+  "how": "a few Mathlib declarations, one per clause, for f : X ⟶ Y: Scheme.Modules.pullback f is a left adjoint (instance, Sheaf.lean:198, from pullbackPushforwardAdjunction :189); (1) preservesEpimorphisms_of_isLeftAdjoint (Mathlib/CategoryTheory/Functor/EpiMono.lean:153) gives Epi ((pullback f).map φ) from Epi φ (Functor.map_epi); (2) the instance [IsLeftAdjoint F] : PreservesColimitsOfShape (Discrete (Fin n)) F (Mathlib/CategoryTheory/Adjunction/Limits.lean:354) and PreservesCoproduct.iso (Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean:171), whose inverse is sigmaComparison with components (pullback f).map (Sigma.ι _ i) (PreservesCoproduct.inv_hom :176, ι_comp_sigmaComparison, Mathlib/CategoryTheory/Limits/Shapes/Products.lean:673); finite direct sums in X.Modules are these coproducts (biproducts, the category being preadditive with the functor additive, :202). Mathlib's Scheme.Modules.pullback (:183) is SheafOfModules.pullback, the left adjoint of pushforward, which is def-pc-module-pullback up to the unique isomorphism of left adjoints (the convention of lem-weil-pbc-open-immersion-module-pullback-restriction); both clauses are invariant under that isomorphism.",
+  "line": 198
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-pullback-finite-type",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field set to the left-adjoint instance (AlgebraicGeometry/Modules/Sheaf.lean:198); preservesEpimorphisms_of_isLeftAdjoint EpiMono.lean:153, Adjunction/Limits.lean:354, PreservesCoproduct.iso Products.lean:171 verified with sed. The match composes the adjunction with general category theory (one declaration per clause, up to the identification of the pullback functors)."
+}

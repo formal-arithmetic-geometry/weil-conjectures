@@ -12,9 +12,76 @@
   "pqf-def-coherent",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (set-up and reduction to $V$).* Let $x\\in X$ and $y=f(x)$. Since $\\mathcal G$ is of finite type [pqf-def-coherent] there are an open $V\\ni y$, an $n\\ge0$ and a surjection $\\varphi:\\mathcal O_V^{\\oplus n}\\to\\mathcal G|_V$ of $\\mathcal O_V$-modules. Put $U=f^{-1}V$, an open neighbourhood of $x$, regard $V$ and $U$ as open subschemes [def-pc-scheme] with inclusions $j:V\\to Y$, $j':U\\to X$, which are open immersions [def-weil-open-immersion], and let $f':U\\to V$ be the restriction of $f$, so $f\\circ j'=j\\circ f'$. Restriction of modules to an open subscheme is the restriction along an open immersion of [lem-weil-pbc-module-restriction-open-immersion-colimits], and by [lem-weil-pbc-open-immersion-module-pullback-restriction] it is isomorphic to the module pullback: $\\mathcal M|_V\\cong j^*\\mathcal M$ and $\\mathcal N|_U\\cong j'^*\\mathcal N$, naturally. With the composition isomorphisms of pullbacks [def-pc-module-pullback] we get isomorphisms of $\\mathcal O_U$-modules $$(f^*\\mathcal G)|_U\\cong j'^*f^*\\mathcal G\\cong(f\\circ j')^*\\mathcal G=(j\\circ f')^*\\mathcal G\\cong f'^*j^*\\mathcal G\\cong f'^*(\\mathcal G|_V),$$ the last one being $f'^*$ applied to the inverse of $\\mathcal G|_V\\cong j^*\\mathcal G$. Call the composite $\\theta:f'^*(\\mathcal G|_V)\\xrightarrow{\\sim}(f^*\\mathcal G)|_U$. (This is the reduction in the proof of Stacks 01B3, which uses Sheaves 0097 for the composition isomorphism.)",
+   "uses": [
+    "pqf-def-coherent",
+    "def-pc-scheme",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01B6 (lemma-pullback-finite-type), proof, first sentence ('Arguing as in the proof of Lemma 01B3 we may assume G is globally generated'); Lemma 01B3 (lemma-pullback-locally-generated), proof, first paragraph, with Sheaves, Lemma 0097 (lemma-push-pull-composition-modules)"
+   }
+  },
+  {
+   "text": "*Step 2 (the pullback of the surjection is an epimorphism).* By [lem-weil-pbc-ringed-space-module-exactness-local-lifting](1) on the scheme $V$, the morphism $\\varphi:\\mathcal O_V^{\\oplus n}\\to\\mathcal G|_V$, being surjective as a map of sheaves, is an epimorphism of $\\Mod(\\mathcal O_V)$. By [lem-weil-pbc-module-pullback-epi-direct-sum](1) applied to $f':U\\to V$, $f'^*\\varphi:f'^*(\\mathcal O_V^{\\oplus n})\\to f'^*(\\mathcal G|_V)$ is an epimorphism of $\\Mod(\\mathcal O_U)$.",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "lem-weil-pbc-module-pullback-epi-direct-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01B6, proof ('f^* ... is right exact, see Lemma 01AJ ... upon applying f^* we obtain the surjection'); Lemma 01AJ (lemma-exactness-pushforward-pullback), part (2)"
+   }
+  },
+  {
+   "text": "*Step 3 (the pullback of $\\mathcal O_V^{\\oplus n}$ is $\\mathcal O_U^{\\oplus n}$).* By [lem-weil-pbc-module-pullback-epi-direct-sum](2) for $f'$ and $\\mathcal G_1=\\dots=\\mathcal G_n=\\mathcal O_V$, the map $\\sigma:\\bigoplus_{i=1}^nf'^*\\mathcal O_V\\to f'^*(\\mathcal O_V^{\\oplus n})$ with components $f'^*(\\iota_i)$ is an isomorphism. By [lem-weil-pbc-module-pullback-structure-sheaf] for $f'$, $\\epsilon_{f'}:f'^*\\mathcal O_V\\to\\mathcal O_U$ is an isomorphism, so $\\bigoplus_i\\epsilon_{f'}^{-1}:\\mathcal O_U^{\\oplus n}\\to\\bigoplus_if'^*\\mathcal O_V$ is an isomorphism (a direct sum of isomorphisms). Hence $\\tau=\\sigma\\circ\\bigoplus_i\\epsilon_{f'}^{-1}:\\mathcal O_U^{\\oplus n}\\xrightarrow{\\sim}f'^*(\\mathcal O_V^{\\oplus n})$ is an isomorphism of $\\mathcal O_U$-modules.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-epi-direct-sum",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01B6, proof (the displayed surjection $\\bigoplus_{i=1}^n\\mathcal O_X\\to f^*\\mathcal G\\to0$, which uses that $f^*$ commutes with direct sums, Lemma 01AJ(2), and $f^*\\mathcal O_Y=\\mathcal O_X$, used there without reference)"
+   }
+  },
+  {
+   "text": "*Step 4 (conclusion).* The composite $\\psi=\\theta\\circ f'^*\\varphi\\circ\\tau:\\mathcal O_U^{\\oplus n}\\to(f^*\\mathcal G)|_U$ is an epimorphism of $\\Mod(\\mathcal O_U)$, being an epimorphism (Step 2) composed on both sides with isomorphisms (Steps 1 and 3). By [lem-weil-pbc-ringed-space-module-exactness-local-lifting](1) on $U$, $\\psi$ is surjective as a map of sheaves. Thus every $x\\in X$ has the open neighbourhood $U=f^{-1}V$ with a surjection $\\mathcal O_U^{\\oplus n}\\twoheadrightarrow(f^*\\mathcal G)|_U$, with the same $n$ as for $\\mathcal G$ on $V$; that is, $f^*\\mathcal G$ is of finite type [pqf-def-coherent].",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01B6, proof, last sentence ('This implies the lemma'), with Definition 01B5 (definition-finite-type)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-coherent",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "lem-weil-pbc-module-pullback-epi-direct-sum",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01B6 (lemma-pullback-finite-type) and its proof, with the reduction of Lemma 01B3 (lemma-pullback-locally-generated), Lemma 01AJ(2) (lemma-exactness-pushforward-pullback) and Sheaves, Lemma 0097 (sheaves.tex, lemma-push-pull-composition-modules)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +140,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-pullback-finite-type",
+  "worker": "stage1",
+  "summary": "Split along Stacks 01B6 (tags 01B6, 01B3, 01AJ, 0097, 01B5 checked in stacks-project/tags/tags). Step 1 restricts to U=f^{-1}V via the composition isomorphism of def-pc-module-pullback and the existing Mathlib leaves open-immersion-module-pullback-restriction / module-restriction-open-immersion-colimits (the 01B3 argument); Step 2 turns the surjection into an epimorphism (existing unsplit node ringed-space-module-exactness-local-lifting) and pulls it back; Step 3 identifies f'^*(O_V^n) with O_U^n by direct sums (new node) and the existing Mathlib leaf module-pullback-structure-sheaf (f^*O_Y = O_X, which Stacks uses silently); Step 4 concludes with the same n. One new node: lem-weil-pbc-module-pullback-epi-direct-sum (01AJ(2) restricted to epimorphisms and finite direct sums), a Mathlib leaf through the IsLeftAdjoint instance of Scheme.Modules.pullback. All cited statements are in unit sk-thm-p1 or Mathlib leaves; the stalk route (module-stalk-pullback, unit sk-thm-reduction) was not used. Statement and stmt_deps unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps follow Stacks 01B6: reduction to U = f^{-1}V via the open-immersion pullback leaves, pullback of the surjection is an epimorphism (new leaf: pullback is a left adjoint), f^* O_V^n = O_U^n (new leaf (2) + structure-sheaf leaf), epimorphism = surjective via the exactness node. Tags 01B6, 01AJ, 01B3, 0097 verified; Mathlib lines verified."
+ }
 }
