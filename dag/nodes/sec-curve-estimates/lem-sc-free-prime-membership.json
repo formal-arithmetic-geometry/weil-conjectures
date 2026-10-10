@@ -23,9 +23,29 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=R^n$ with coordinate projections. By the definition of localization of a module [def-weil-pbc-module-localization] and coordinatewise scalar multiplication, a vector belongs to $\\mathfrak pF_{\\mathfrak p}$ exactly when each coordinate belongs to $\\mathfrak pR_{\\mathfrak p}$; the canonical map sends the $i$-th coordinate $s_i$ to $s_i/1$. For a coordinate $a$, membership $a/1\\in\\mathfrak pR_{\\mathfrak p}$ means that some denominator $u\\notin\\mathfrak p$ satisfies $ua\\in\\mathfrak p$; primality of $\\mathfrak p$ then gives $a\\in\\mathfrak p$, and the converse is immediate by taking $u=1$. Thus $s/1\\in\\mathfrak pF_{\\mathfrak p}$ if and only if every $s_i\\in\\mathfrak p$, which is equivalent to $s\\in\\mathfrak pF$ by the coordinate description of the submodule $\\mathfrak pR^n$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00NX (lemma-finite-projective), free-module coordinate calculation in the proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00NX (lemma-finite-projective), free-module coordinate calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,15 +75,59 @@
    "date": "2026-10-10",
    "verdict": "no match",
    "by": "R-pm2"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite free module membership in p after localization at a prime iff each coordinate lies in p",
+   "results": "Ideal.mem_of_localization_maximal; Submodule.mem_of_isLocalized_span; IsLocalization.mk'_mem_iff; IsLocalization.mk'_mem_map_algebraMap_iff; IsLocalization.mem_map_algebraMap_iff; no exact free-module criterion",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.mem_map_algebraMap_iff, Submodule.mem_localized",
+   "results": "0 hits; unknown identifier Submodule.mem_localized",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'mem_map_algebraMap_iff|mem_localized|AtPrime' Mathlib/RingTheory/Localization",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite free module prime ideal membership detected after localization",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-finite-projective-prime-membership",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-free-prime-membership",
+  "worker": "stage1",
+  "summary": "Split the free-module localization criterion into one scalar statement-only node. The proof now explicitly identifies membership in the ideal submodule coordinatewise and applies the scalar prime-localization criterion to each coordinate.",
+  "blueprint": "Realizes the affine section translation in the blueprint ancestor lem-sc-pic-proper-ntorsion: membership of a section in pN is detected after passage to the stalk at p in the free-module coordinate case.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpm1745",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpm1745 (reviewer sub-agent of L); spot-checked: Read packet whole. Single step, no new nodes: F_p = (R_p)^n coordinatewise via def-weil-pbc-module-localization (S^{-1} of maps, finite sums); a/1 in pR_p iff v(ua-x)=0 for some v,u notin p, x in p, so (vu)a in p and primality gives a in p; converse u=1; pR^n is coordinatewise p. Hypotheses (R commutative, p prime, n finite) used where needed; no cycle (cited nodes are definitions, status mathlib). Edge cases n=0, s=0 fine. Report's mention of a 'scalar child' is stale wording: packet shows 0 new nodes, the scalar argument is inline. No repairs."
+ }
 }
