@@ -1,8 +1,8 @@
 # Work queue
 
-865 items; claim with `tools/claim.py next <group> [--stage N]`.
+863 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (63)
+## Stage 1: nodes to split (61)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -35,8 +35,8 @@
 | `lem-sc-ass-weakass-fg-prime` | 5014 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-rf-single-complex-affine-base-change` | 5015 | none |
-| `lem-pc-rf-single-complex-relative-mayer-vietoris` | 5015 | none |
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
+| `lem-pc-rf-mv-triangle-naturality` | 5016 | none |
 | `lem-pc-sites-module-sheafification-bilinear-extension` | 5016 | none |
 | `lem-pc-sites-sheaf-tensor-bilinear-universal` | 5016 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
@@ -55,7 +55,6 @@
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-sc-affine-unit-divisor-base-change` | - | none |
 | `lem-kun-cp-approximation` | - | none |
-| `lem-sc-zariski-flasque-acyclic` | - | none |
 | `lem-pur-kinjective-degreewise-existence` | - | none |
 | `lem-pur-ringed-site-grothendieck-abelian` | - | none |
 | `lem-weil-common-extension-fields` | - | none |
@@ -65,7 +64,6 @@
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
 | `lem-sc-p1-twist-exists` | - | none |
-| `lem-pc-projective-curve-finite-projection` | - | rests_on_sorry |
 | `lem-sc-p1-coherent-finite` | - | rests_on_sorry |
 | `lem-pur-rhom-global-sections` | - | none |
 | `lem-pur-rhom-well-defined` | - | none |
@@ -877,7 +875,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1651 nodes that wait for a statement dependency, 102 nodes that wait for stage 1.
+Not open yet: 1654 nodes that wait for a statement dependency, 100 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
