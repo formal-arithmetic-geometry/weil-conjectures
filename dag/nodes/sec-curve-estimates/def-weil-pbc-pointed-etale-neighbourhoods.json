@@ -3,25 +3,64 @@
  "blueprint": {
   "is": "def-weil-pbc-pointed-etale-neighbourhoods",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-weil-pbc-geometric-stalks"
+  ]
  },
  "kind": "definition",
  "title": "Pointed etale neighbourhood category",
- "statement": "For a geometric point [def-weil-pbc-scheme-conventions] $\\bar\ns:\\operatorname{Spec}\\Omega\\to S$, let $\\mathcal N_{\\bar s}$ be the category\nwhose objects are pairs $(V,\\bar v)$ with $V\\to S$ etale\n[def-weil-pbc-scheme-conventions] and $\\bar v\\to V$ above $\\bar s$. A\nmorphism preserves the chosen geometric points. Stalk colimits are indexed by\n$\\mathcal N_{\\bar s}^{\\mathrm{op}}$.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $\\bar s:\\operatorname{Spec}\\Omega\\to S$ a geometric point [def-weil-geometric-point] ($\\Omega$ an algebraically closed field, $\\operatorname{Spec}\\Omega$ its spectrum [def-weil-affine-spectrum]). The category $\\mathcal N_{\\bar s}$ of *pointed etale neighbourhoods* of $\\bar s$ has as objects the pairs $(V,\\bar v)$ where $V\\to S$ is an etale morphism [def-weil-etale-morphism] (an object of the small etale site $S_{\\Et}$ [def-weil-pbc-etale-site]) and $\\bar v:\\operatorname{Spec}\\Omega\\to V$ is a morphism of schemes over $S$, i.e. $(V\\to S)\\circ\\bar v=\\bar s$. A morphism $(V,\\bar v)\\to(W,\\bar w)$ is a morphism $h:V\\to W$ over $S$ with $h\\circ\\bar v=\\bar w$; composition and identities are those of morphisms of schemes. Its opposite category $\\mathcal N_{\\bar s}^{\\mathrm{op}}$ is the index category of the stalk colimits.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-weil-pbc-pointed-etale-neighbourhoods.md",
   "place": "node def-weil-pbc-pointed-etale-neighbourhoods, order 942"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
   "def-weil-pbc-etale-site"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of pointed etale neighbourhoods of a geometric point Spec Omega of a scheme",
+   "results": "AlgebraicGeometry.Scheme.instCategoryEtale, Scheme.smallEtaleTopology, Scheme.Etale.forget, Scheme.Etale (Mathlib.AlgebraicGeometry.Morphisms.Etale, Mathlib.AlgebraicGeometry.Sites.Etale)",
+   "date": "2026-10-10",
+   "verdict": "no direct match by name; the ambient category S.Etale and Etale.forget are the pieces of the match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category whose objects are etale schemes over S with a lift of a geometric point Spec Omega -> S, morphisms compatible with the points",
+   "results": "Scheme.instCategoryEtale, Scheme.Etale, Scheme.Etale.forget, IsEtale and lemmas on etale morphisms",
+   "date": "2026-10-10",
+   "verdict": "no direct match by name; ambient category only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.pointSmallEtale",
+   "results": "Scheme.pointSmallEtale : S.smallEtaleTopology.Point (needs [Field Ω] [IsSepClosed Ω]); Scheme.pointSmallEtale_fiber : (pointSmallEtale s).fiber = Etale.forget S ⋙ coyoneda.obj (op (Over.mk s)); isConservative_pointSmallEtale; pointSmallEtaleFiberObjToPreimage (Mathlib.AlgebraicGeometry.Sites.EtalePoint)",
+   "date": "2026-10-10",
+   "verdict": "match: the category of elements of (pointSmallEtale s).fiber is N_s"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Neighborhood\\|Neighbourhood\\|Functor.Elements\\|pointSmallEtale' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/{CategoryTheory/Sites/Point,AlgebraicGeometry/Sites,CategoryTheory/Elements.lean}",
+   "results": "no declaration named Neighborhood/Neighbourhood in Sites/Point or AlgebraicGeometry/Sites; CategoryTheory/Elements.lean:48 def Functor.Elements (F : C ⥤ Type w) := Σ c, F.obj c, :64-65 categoryOfElements, Hom p q := {f : p.1 ⟶ q.1 // F.map f p.2 = q.2}; AlgebraicGeometry/Sites/EtalePoint.lean:62-64 pointSmallEtale with fiber := Etale.forget S ⋙ coyoneda.obj (op (Over.mk s)); CategoryTheory/Sites/Point/Basic.lean:69-74 Point.fiber with isCofiltered fiber.Elements, :95-97 presheafFiber = colimit over (CategoryOfElements.π Φ.fiber).op, i.e. indexed by fiber.Elementsᵒᵖ; AlgebraicGeometry/Morphisms/Etale.lean:157 Scheme.Etale X := MorphismProperty.Over @Etale ⊤ X, :172 Etale.forget",
+   "date": "2026-10-10",
+   "verdict": "match (exact, definitional): CategoryTheory.Functor.Elements of (AlgebraicGeometry.Scheme.pointSmallEtale s).fiber"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.Elements (with CategoryTheory.categoryOfElements) applied to (AlgebraicGeometry.Scheme.pointSmallEtale s).fiber",
+  "file": "Mathlib/CategoryTheory/Elements.lean",
+  "how": "specializes in one line: N_s = (pointSmallEtale s).fiber.Elements. Elements.lean:48 defines the objects as pairs (X, x : F.obj X) and :64-65 the morphisms (X,x) ⟶ (Y,y) as f : X ⟶ Y with F.map f x = y; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:62-64 sets fiber := Etale.forget S ⋙ coyoneda.obj (op (Over.mk s)), so an object is X : S.Etale (an etale V → S, Morphisms/Etale.lean:157) with x : Over.mk s ⟶ Over.mk (V → S), i.e. v : Spec Ω ⟶ V over S, and a morphism is an S-morphism h with x ≫ h = y, i.e. h ∘ v = w. pointSmallEtale needs [Field Ω] [IsSepClosed Ω]; an algebraically closed Ω is separably closed by the instance IsSepClosed.of_isAlgClosed (Mathlib/FieldTheory/IsSepClosed.lean:70). The stalk colimit is over Φ.fiber.Elementsᵒᵖ (Mathlib/CategoryTheory/Sites/Point/Basic.lean:95-97). The slopmaster2 abbreviation AlgebraicGeometry.Scheme.Hom.Nbhd y := (pointSmallEtale y).fiber.Elements (WeilConjectures/AlgebraicGeometry/Morphisms/Finite/SplitNeighborhood.lean:54-55, sorry-free) is this same category.",
+  "line": 48
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "detailed_form"
@@ -55,5 +94,17 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-pointed-etale-neighbourhoods",
+  "worker": "stage1",
+  "summary": "Definition split: every notion now cites its node (scheme def-pc-scheme, geometric point def-weil-geometric-point, Spec def-weil-affine-spectrum, etale morphism def-weil-etale-morphism, small etale site def-weil-pbc-etale-site); the statement names the morphisms (S-morphisms carrying the chosen point, h∘v=w) and the composition, as the master blueprint sketch does; the vague reference to def-weil-pbc-scheme-conventions is replaced by the specific nodes. The category is exactly Mathlib's category of elements of the fibre functor of the etale point, (AlgebraicGeometry.Scheme.pointSmallEtale s).fiber.Elements (read in Elements.lean:48,64-65 and EtalePoint.lean:62-64), so the item is a Mathlib leaf. The claims about it are not in the definition: that N_s is cofiltered is the existing Mathlib leaf lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered (which cites this item, so it is not cited back), that the affine neighbourhoods are cofinal is lemma-weil-pbc-affine-neighbourhood-cofinal, and the stalk as colimit over N_s^op is def-weil-pbc-geometric-stalks (Point.presheafFiber, colimit over fiber.Elementsᵒᵖ); the last sentence of the statement only names the index category. slopmaster2 has the sorry-free abbreviation AlgebraicGeometry.Scheme.Hom.Nbhd (SplitNeighborhood.lean:54-55) for the same category.",
+  "blueprint": {
+   "steps": [],
+   "places": "definition, no proof; the statement realizes the whole master-blueprint text of def-weil-pbc-pointed-etale-neighbourhoods (objects, morphisms, opposite indexing of stalk colimits)",
+   "same_as_search": "tools/blueprint_refs.py search 'pointed etale neighbourhood', 'etale neighbourhood geometric point', 'etale neighborhood', 'category of elements'; grep -rl dag/nodes. def-weil-pbc-geometric-stalks defines the same pointed etale neighbourhoods (objects, lifts of the geometric point) inside its stalk definition, so it is recorded in same_as; no other blueprint node defines this category."
+  }
+ },
+ "reviewed": "2026-10-10 L: Mathlib leaf: the category of elements of the fibre functor of the etale point (Elements.lean:48, EtalePoint.lean:62-64), found complete on disk after the 23rd limit; statement made precise (geometric point, etale morphism, the morphisms of the category); 0 new nodes"
 }
