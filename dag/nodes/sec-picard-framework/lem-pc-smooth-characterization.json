@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-smooth-characterization",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Smoothness versus flatness",
@@ -33,29 +33,55 @@
  "stmt_deps": [
   "def-pc-base-change",
   "def-pc-morphism-conventions",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "sbc-lem-smooth-criterion"
  ],
  "proof": [
   {
-   "text": "($\\Leftarrow$) This is Morphisms of Schemes, Lemma 29.35.3 (Tag\n[01V8](https://stacks.math.columbia.edu/tag/01V8)) (the proof of\nwhich is the local algebra criterion Algebra, Lemma 10.137.16, Tag\n[00TF](https://stacks.math.columbia.edu/tag/00TF): after inverting\none element, the ring map is a relative global complete intersection\nwhose Jacobian is invertible, which is the definition of a standard\nsmooth ring map).",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "($\\Rightarrow$) We may work Zariski-locally and assume $S=\\operatorname{Spec}(R)$ and\n$X=\\operatorname{Spec}(A)$ with $R\\to A$ smooth at a prime $\\mathfrak q$; assume\n$A$ is standard smooth over $R$, i.e. $A=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ with the Jacobian\n$\\det(\\partial f_j/\\partial x_i)_{i,j\\le c}$ a unit in $A$ (Algebra,\nLemma 10.137.6, Tag [00T7](https://stacks.math.columbia.edu/tag/00T7),\nwhich also gives the Zariski-locality: smooth ring maps are\nZariski-locally standard smooth). *Finite presentation* holds by\ndefinition. *Flatness:* the elements $f_1,\\dots,f_c$ form a\nregular sequence of $R[x]$: after the invertible linear change of\nvariables $x_i\\mapsto x_i-a_i$ we may assume the Jacobian is invertible\nat $\\mathfrak q$, so the initial forms of the $f_j$ in the graded ring\nare $x_1,\\dots,x_c$, and a sequence whose initial forms in a regular\nsequence, is regular; hence the Koszul complex\n$0\\to\\wedge^cR[x]^c\\to\\cdots\\to R[x]^c\\to R[x]\\to A\\to0$ is exact\n(exactness of the Koszul complex of a regular sequence), a projective\n(hence flat) resolution of $A$; $A$ is flat over $R$.\n*Smooth fibres:* for $\\mathfrak p\\subset R$ the base change\n$A\\otimes_R\\kappa(\\mathfrak p)$ is standard smooth over\n$\\kappa(\\mathfrak p)$ (Algebra, Lemma 10.137.3, Tag\n[00T4](https://stacks.math.columbia.edu/tag/00T4)), hence smooth\n(Lemma 10.137.6, Tag 00T7). The general statement follows by\nZariski-locality.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply the existing smoothness criterion to the morphism f. It states that smoothness is equivalent to flatness, local finite presentation, and smoothness of every fibre over the residue field. Since local finite presentation is an assumption of this item, the middle conjunct is redundant, leaving exactly the stated equivalence.",
+   "uses": [
+    "sbc-lem-smooth-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-f-open/lem-pc-smooth-characterization.md",
+    "place": "## Proof, both implications via the recorded smoothness criterion"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "sbc-lem-smooth-criterion"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-f-open/lem-pc-smooth-characterization.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "morphism locally of finite presentation is smooth iff flat and every fibre is smooth over residue field",
+   "results": "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth; RingHom.smooth_def; AlgebraicGeometry.isSmooth_iff; Algebra.smooth_iff; no scheme-level fibre criterion",
+   "date": "2026-10-11",
+   "verdict": "no match: only local smoothness and ring-level criteria"
+  },
+  {
+   "tool": "loogle",
+   "query": "smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField, Flat, Smooth",
+   "results": "0 hits; unknown identifier smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth_iff_flat|smooth.*fiberToSpecResidueField|01V8 in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -86,5 +112,29 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-lem-picard-f-open"
+ "unit": "sk-lem-picard-f-open",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-smooth-characterization",
+  "worker": "stage1",
+  "summary": "Replaced the imported unsupported local Jacobian sketch with a one-step specialization of the existing general smoothness criterion node.",
+  "blueprint": "Realizes the proof paragraph by applying the recorded criterion and removing the already assumed local-finite-presentation conjunct.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "The unit's proof route records this general smoothness criterion as the classical input; the current item specializes it under an already assumed local finite presentation hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-smc1817",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smc1817 (reviewer sub-agent of L); spot-checked: Step 1 vs sbc-lem-smooth-criterion statement (flat+lfp+smooth fibres <=> smooth, no hypotheses beyond the item's); lfp conjunct redundant under item hypothesis, elementary; no cycle (criterion node created independently, stmt_deps only def-sbc-smooth-morphisms); item statement matches Stacks 01V8 plus 01VE/01VF/01VB converse; grep of Mathlib AlgebraicGeometry and RingTheory/Smooth for smooth_iff flat/fibre: no exact declaration, no leaf; second reading: no missed fault found"
+ }
 }
