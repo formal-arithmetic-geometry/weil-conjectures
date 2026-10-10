@@ -46,7 +46,8 @@ over `ℤ` with affine transition morphisms, together with a limit cone over the
 point `S` (`AlgebraicGeometry.Scheme.NoetherianApproximation`). The stages of such a system
 are Noetherian schemes (`AlgebraicGeometry.Scheme.NoetherianApproximation.isNoetherian_obj`).
 
-Absolute Noetherian approximation (Stacks Project Tag 01ZA), proved in this file as
+Absolute Noetherian approximation (Stacks Project Tag 01ZA), proved in
+`WeilConjectures.AlgebraicGeometry.NoetherianApproximation.Existence` as
 `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, asserts that every quasi-compact
 quasi-separated scheme admits a Noetherian approximation. It is proved by induction over a
 finite affine cover, starting from the affine case: for an affine scheme `S`, the spectra of the
