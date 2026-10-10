@@ -26,9 +26,55 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each i let B'_i be the integral closure of B_i in K. The canonical map A tensor B'_i to K remains surjective because its image contains the image of the already-surjective map A tensor B_i to K. By [lem-sc-semilocal-dim-one-conductor] each B'_i is a semilocal Dedekind domain with fraction field K. It is enough to prove the assertion for the B'_i: suppose x in A is nonzero and x^{-1} lies in the Jacobson radical of every B'_i. Then x^{-1} is a nonzero element of that Jacobson radical, and [lem-sc-semilocal-dim-one-conductor] applied to x^{-1} and y=1 gives n_i>0 with x^{-n_i} in B_i; replacing x by x^N with N=n_1...n_r (which keeps x^{-1} in each Jacobson radical, an ideal) puts x^{-1} in every B_i. Now let m be a maximal ideal of B_i. The inclusion B_i into B'_i is injective and B'_i is integral over B_i, so by lying over [lem-weil-pbc-integral-injective-lying-over] there is a prime q of B'_i with q cap B_i = m; let n be a maximal ideal of B'_i containing q. Then n cap B_i is a proper ideal containing m, hence equals m, and x^{-1} in n cap B_i = m. So x^{-1} lies in the Jacobson radical of B_i. Thus we may assume every B_i is a semilocal Dedekind domain.",
+   "uses": [
+    "lem-sc-semilocal-dim-one-conductor",
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N5 (varieties-lemma-create-globally-generated), proof, paragraphs beginning 'Let B_i' and 'Thus we may assume'"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-semilocal-dedekind-dvr-reduction] to each semilocal Dedekind B_i: it has finitely many maximal ideals m, each localization (B_i)_m is a discrete valuation ring with fraction field K, and an element of K lies in the Jacobson radical of B_i exactly when it lies in the maximal ideal of every (B_i)_m. Since B_i is contained in (B_i)_m, the map A tensor (B_i)_m to K is again surjective. Replacing each B_i by its finitely many localizations therefore reduces the claim to a finite family of discrete valuation rings with fraction field K and surjective maps from A tensor each of them to K: a nonzero f in A whose inverse lies in the maximal ideal of every resulting DVR has f^{-1} in the Jacobson radical of each original B_i.",
+   "uses": [
+    "lem-sc-semilocal-dedekind-dvr-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N5 proof, paragraph 'If B_i is not local'"
+   }
+  },
+  {
+   "text": "For a single resulting DVR B with normalized valuation v, [lem-sc-dvr-tensor-surjective-negative-valuation] supplies a nonzero x in A with v(x)<0. For finitely many valuations v_1,...,v_r, argue by induction on r. The case r=1 is this base case. For r>1, choose by induction a nonzero x in A with v_i(x)<0 for i<r. If v_r(x)<0 we are done. Otherwise use the base case for v_r to choose nonzero y in A with v_r(y)<0. By [lem-sc-dvr-valuation-arithmetic], after replacing x by a sufficiently large positive power we have v_i(x)<v_i(y) for every i<r. Then z=x+y has v_i(z)=v_i(x)<0 for i<r and v_r(z)=v_r(y)<0, again by the unequal-value sum rule. Since v_r(x) is nonnegative and v_r(y) is negative, z is nonzero. For a DVR B with normalized valuation v and maximal ideal m_B, an element z of K^\\times satisfies z^{-1} in m_B exactly when v(z^{-1})=-v(z)>0, i.e. v(z)<0. Thus z is the required element.",
+   "uses": [
+    "lem-sc-dvr-tensor-surjective-negative-valuation",
+    "lem-sc-dvr-valuation-arithmetic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09N5 proof, induction on r"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-semilocal-dim-one-conductor",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-sc-semilocal-dedekind-dvr-reduction",
+  "lem-sc-dvr-tensor-surjective-negative-valuation",
+  "lem-sc-dvr-valuation-arithmetic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09N5 (varieties-lemma-create-globally-generated), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,12 +99,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-find-globally-generated",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-jacobson-denominator-function-field",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 09N5 into the integral-closure/conductor reduction, the semilocal-Dedekind to DVR reduction, and the finite-valuation induction. Added statement-only interfaces for the non-elementary conductor, localization, one-DVR base case, and valuation-arithmetic facts.",
+  "blueprint": "The three proof steps realize the 09N5 proof paragraphs: integral-closure reduction, localization to DVRs, and induction on the number of valuations."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-jdf",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-jdf (reviewer sub-agent of L); spot-checked: Read Stacks 09N5 (varieties-lemma-create-globally-generated) and 09N2 (varieties-lemma-semi-local-dimension-one-conductor) in varieties.tex; item statement unchanged and agrees with 09N5 hypothesis by hypothesis (domain A, B_i Noetherian 1-dim semilocal domains in K with fraction field K, A tensor B_i -> K surjective; conclusion nonzero f). New nodes checked true: conductor node = 09N2 verbatim; dedekind-dvr-reduction true (Jacobson radical of a Dedekind B equals the elements in every m B_m since B = cap B_m); tensor-surjective base case true (else A in B and image of A tensor B is B, not K); valuation arithmetic true. Step 1 carried by the conductor node with x^{-1}, y=1 and common power N = n_1...n_r; step 2 by the reduction node; step 3 by the base case and valuation arithmetic (x^N has v_i(x^N) < v_i(y) for i<r, v_r(x^N) >= 0 > v_r(y), so v_i(x^N+y) < 0 for all i, and x^N+y nonzero). Small cases r=1 and r=2 (A=k[t], B_1=k[t]_(t) style, v_1(x)<0, v_2(x)>=0) checked. FIX more, RETURN less: (1) C1: step 1 used Spec(B'_i)->Spec(B_i) surjective claiming it was part of the conductor node, which does not state it; now cites the existing Mathlib leaf lem-weil-pbc-integral-injective-lying-over (RingHom.IsIntegral.comap_surjective) with the two-line argument q over m, n maximal over q, n cap B_i = m, added to uses and proof_deps; (2) B3: lem-sc-semilocal-dim-one-conductor statement used 'semilocal Dedekind domain', 'integral closure', 'Jacobson radical' without definition; now defined inline with def-weil-pbc-normal-ring and def-weil-pbc-integral-closure added to stmt_deps (and 'with fraction field K' made explicit). FIX: item proof step 2: text now says A tensor (B_i)_m -> K stays surjective (needed by the base case) and states what the reduction node gives; step 3: text adds v(z)<0 iff z^{-1} in m_B; four new nodes: blueprint.from.via corrected to [item] + item's via (was listing sibling new nodes). Blueprint search 'conductor', 'Dedekind': 0 matches. Start Sat Oct 10 04:45:48 PM UTC 2026, end Sat Oct 10 04:47:12 PM UTC 2026; 5 file(s) fixed by the reviewer"
+ }
 }
