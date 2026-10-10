@@ -16,14 +16,50 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "element of fraction field of discrete valuation ring with valuation at most one (nonnegative additive valuation) lies in the ring",
-   "results": "IsDiscreteValuationRing.exists_lift_of_le_one (not in the pinned Mathlib: grep of Mathlib/RingTheory finds no such name); ValuationSubring.valuation_le_one_iff (Mathlib/RingTheory/Valuation/ValuationSubring.lean:183) is for the valuation subring's own value group, not the normalized Z-valuation",
+   "query": "element of fraction field of discrete valuation ring with nonnegative valuation lies in the ring",
+   "results": "IsDiscreteValuationRing.exists_lift_of_le_one (Mathlib/RingTheory/Valuation/Discrete/Basic); ValuationRing.isInteger_or_isInteger (Mathlib/RingTheory/Valuation/ValuationRing); ValuationRing.mem_integer_iff (Mathlib/RingTheory/Valuation/ValuationRing)",
+   "date": "2026-10-11",
+   "verdict": "match (reviewer R-dnv1753 correction): IsDiscreteValuationRing.exists_lift_of_le_one is the statement itself in multiplicative notation"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, valuation ring, nonnegative valuation",
+   "results": "none; loogle reported Unknown identifier `valuation`",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "valuationSubring|valuation.*nonnegative|IsDiscreteValuationRing",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "an element of the fraction field of a discrete valuation ring with nonnegative normalized valuation belongs to the ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 37,70p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean",
+   "results": "IsDiscreteValuationRing.lean:67 theorem exists_lift_of_le_one {x : K} (H : ((maximalIdeal A).valuation K) x ≤ (1 : ℤᵐ⁰)) : ∃ a : A, algebraMap A K a = x, for A a DVR and IsFractionRing A K; maximalIdeal A (line 41) is the maximal ideal as a height-one prime, whose adic valuation is the normalized one (uniformizer ↦ ofAdd (-1))",
    "date": "2026-10-10",
-   "verdict": "generalization only"
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "IsDiscreteValuationRing.exists_lift_of_le_one",
+  "file": "Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean",
+  "lines": [
+   41,
+   67
+  ],
+  "how": "exact match in multiplicative notation: for a DVR A with fraction field K, the normalized valuation of the maximal ideal is (maximalIdeal A).valuation K : K → ℤᵐ⁰ with v_mult = exp(-v), so v(x) ≥ 0 iff v_mult(x) ≤ 1, and the conclusion ∃ a : A, algebraMap A K a = x is x ∈ B"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "R-dtv1706",
@@ -56,5 +92,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-dvr-nonnegative-valuation-in-ring",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Algebra Definition 00IE clause (3). The proof is the definition of the valuation ring: a nonzero element of nonnegative valuation lies in B. No new node is needed; the existing definition node def-sc-discrete-valuation-ring supplies the only non-elementary notion. Required Mathlib searches found only broader multiplicative valuation-ring results, with LeanSearch unavailable.",
+  "blueprint": "The single step realizes the ancestor blueprint proof phrase 'a finite sum of elements of nonnegative valuation lies in the DVR B' by supplying the underlying valuation-ring membership fact used there.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dnv1753",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dnv1753 (reviewer sub-agent of L); spot-checked: Statement vs 00ID/00IE and def-sc-discrete-valuation-ring: correct. FIX more, RETURN less: class (c)/B8 - the worker's own LeanFinder hit IsDiscreteValuationRing.exists_lift_of_le_one (Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean:67, read with sed) states the item exactly in multiplicative notation (normalized adic valuation of the maximal ideal <= 1 implies x in image of A); the 'generalization only' verdict was wrong, missed by the second reading. Made the item a Mathlib leaf: status mathlib, mathlib_match, proof/proof_deps emptied, grep search recorded.; 1 file(s) fixed by the reviewer"
  }
 }
