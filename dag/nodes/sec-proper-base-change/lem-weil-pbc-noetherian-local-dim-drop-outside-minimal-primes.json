@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-noetherian-local-dim-drop-outside-minimal-primes",
+ "kind": "statement",
+ "title": "Dimension drops by one modulo an element outside the minimal primes",
+ "statement": "Let $(S,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] and let $x\\in\\mathfrak m$ be an element that lies in no minimal prime ideal of $S$ (a minimal prime ideal is a prime ideal of $S$ containing no strictly smaller prime ideal). Then the Krull dimensions [def-weil-pbc-krull-dimension-ring] satisfy $\\dim(S/xS)+1=\\dim S$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0B52 (lemma-one-equation-module, line 15297), the equality case ('If f is not in any of the minimal primes of the support of M ... then equality holds for the right inequality'), for the module M = S, whose support is Spec S, so that dim Supp(M) = dim S and dim Supp(M/xM) = dim S/xS"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian local ring, x in maximal ideal not in any minimal prime, then dim R/xR + 1 = dim R",
+   "results": "Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal (Mathlib.RingTheory.KrullDimension.Regular), Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_jacobson, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, Ideal.height_le_one_of_isPrincipal_of_mem_minimalPrimes_of_isLocalRing",
+   "date": "2026-10-10",
+   "verdict": "match: Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, specialized to M = R"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian local ring, element of maximal ideal outside all minimal primes, Krull dimension of quotient is dim - 1",
+   "results": "ringKrullDim_le_ringKrullDim_quotSMulTop_succ, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim (needs IsSMulRegular), ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_le_ringKrullDim_add_card (all Mathlib.RingTheory.KrullDimension.Regular)",
+   "date": "2026-10-10",
+   "verdict": "no ring-level statement with the minimal-prime hypothesis; the module version (leansearch) is the match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim, minimalPrimes, IsLocalRing.maximalIdeal",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no ring-level statement; the module version is stated with Module.supportDim"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/KrullDimension/Regular.lean; sed -n 78,196p of that file; sed -n 50,70p RingTheory/KrullDimension/Module.lean",
+   "results": "Regular.lean:81 supportDim_quotSMulTop_succ_le_of_notMem_minimalPrimes, :104 ..._of_mem_jacobson, :166 supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal (@[stacks 0B52 \"the equality case\"]); Module.lean:54 supportDim_self_eq_ringKrullDim, :65 supportDim_quotient_eq_ringKrullDim",
+   "date": "2026-10-10",
+   "verdict": "match (module version, specialized to M = R as Mathlib itself does at Regular.lean:115-128 for the regular-element case)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal (project ~/weil-conjectures-slopmaster2; index unavailable, file search)",
+   "results": "theorem in .lake/packages/mathlib/Mathlib/RingTheory/KrullDimension/Regular.lean",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal",
+  "file": "Mathlib/RingTheory/KrullDimension/Regular.lean",
+  "line": 166,
+  "how": "specializes in one line: lines 166-171 (namespace Module, variables line 28-29: [CommRing R] [IsNoetherianRing R] {M} [Module.Finite R M], and [IsLocalRing R]), `(hn : ∀ p ∈ (annihilator R M).minimalPrimes, x ∉ p) (hx : x ∈ maximalIdeal R) : supportDim R (QuotSMulTop x M) + 1 = supportDim R M`, tagged @[stacks 0B52 \"the equality case\"], applied to M = R. Translation, by the same rewrites Mathlib uses at Regular.lean:115-128: annihilator R R = ⊥ (Module.annihilator_eq_bot, Mathlib/RingTheory/Ideal/Maps.lean:891, as in Module.lean:55-56), and (⊥ : Ideal R).minimalPrimes = minimalPrimes R by definition (Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean:63, abbrev); supportDim R R = ringKrullDim R (Module.supportDim_self_eq_ringKrullDim, Module.lean:54); QuotSMulTop x R = R ⧸ x • ⊤ (abbrev, Mathlib/RingTheory/QuotSMulTop.lean:36) with supportDim R (R ⧸ I) = ringKrullDim (R ⧸ I) (Module.supportDim_quotient_eq_ringKrullDim, Module.lean:65), and x • ⊤ = span {x} (Regular.lean:125). Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-miracle-flatness",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: Mathlib leaf Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal (KrullDimension/Regular.lean line 166, @[stacks 0B52], read) with M = R; the translation of supportDim/annihilator/QuotSMulTop to the ring statement is by the named Mathlib identities.",
+ "lead_note": "Specialization to M = R: annihilator R R = ⊥ (Module.annihilator_eq_bot), supportDim R R = ringKrullDim R and supportDim R (R/I) = ringKrullDim (R/I) (KrullDimension/Module.lean lines 54, 65), QuotSMulTop x R = R/(x) (Regular.lean line 125); accepted as a leaf by L."
+}

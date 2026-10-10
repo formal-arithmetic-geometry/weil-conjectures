@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-cm-local-quotient-nonzerodivisor-cm",
+ "kind": "statement",
+ "title": "Quotient of a Cohen–Macaulay local ring by a nonzerodivisor is Cohen–Macaulay",
+ "statement": "Let $(S,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] of Krull dimension $d=\\dim S$ [def-weil-pbc-krull-dimension-ring] (finite, as $S$ is Noetherian local), and assume that $S$ is Cohen–Macaulay in the sense that $\\operatorname{depth}(S)\\ge d$ [def-weil-pbc-depth], that is, $\\mathfrak m$ contains an $S$-regular sequence [def-weil-pbc-regular-sequence] of length $d$. Let $x\\in\\mathfrak m$ be a nonzerodivisor on $S$. Then $S/xS$ is a Noetherian local ring of Krull dimension $\\dim(S/xS)=d-1$, and it is Cohen–Macaulay in the same sense: $\\operatorname{depth}(S/xS)\\ge d-1$, i.e. the maximal ideal $\\mathfrak m/xS$ of $S/xS$ contains an $S/xS$-regular sequence of length $d-1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 02JN (lemma-reformulate-CM, line 25319), last assertion with c = 1 ('each quotient R/(x_1,...,x_i) is a Cohen-Macaulay ring of dimension dim(R) - i'), the hypothesis that x_1 is a regular sequence being equivalent there to dim R/x_1R = dim R - 1; a special case of Proposition Tag 00N6 (proposition-CM-module, line 25052) and Lemma lemma-CM-one-g (line 25018)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of Cohen-Macaulay local ring by a nonzerodivisor is Cohen-Macaulay, depth of quotient by regular element",
+   "results": "ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_quotient_le, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_quotient_succ_le_of_nonZeroDivisor, Module.supportDim_quotSMulTop_succ_eq_supportDim (dimension only)",
+   "date": "2026-10-10",
+   "verdict": "no match (only the dimension part dim S/xS = d - 1 is in Mathlib: ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors, Regular.lean:189; no depth, no Cohen-Macaulay)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient of a Cohen-Macaulay local ring by a regular element is Cohen-Macaulay",
+   "results": "ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem",
+   "date": "2026-10-10",
+   "verdict": "no match (dimension only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, ringKrullDim",
+   "results": "ringKrullDim_add_length_eq_ringKrullDim_of_isRegular (Mathlib.RingTheory.KrullDimension.Regular)",
+   "date": "2026-10-10",
+   "verdict": "no match (dimension of the quotient by a regular sequence, nothing on depth)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"depth\"",
+   "results": "only Lean core recursion-depth constants (Lean.defaultMaxRecDepth, ...)",
+   "date": "2026-10-10",
+   "verdict": "no match: no depth of modules in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'CohenMacaulay|Cohen-Macaulay' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rln 'depth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "no Cohen-Macaulay hits; 'depth' only in RingTheory/Depth/Rees.lean (Rees' Ext characterization: exists_isRegular_tfae, line 158), RingTheory/Regular/RegularSequence.lean, Noetherian/OfPrime.lean, Polynomial/ScaleRoots.lean",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-miracle-flatness",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 02JN with c = 1 (quotient of a CM local ring by a nonzerodivisor in m is CM of dimension d − 1). Unsplit."
+}
