@@ -2,7 +2,7 @@
 
 935 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (254)
+## Stage 1: nodes to split (253)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -35,12 +35,10 @@
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 3017 | none |
 | `lem-sc-standard-smooth-affine-diagonal-generators` | 3017 | none |
 | `lem-sc-standard-smooth-local-relative-dimension` | 3017 | none |
-| `def-pc-generators` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 3018 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `lem-sc-strict-henselization-dvr` | 4008 | none |
-| `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 4008 | none |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
@@ -50,13 +48,15 @@
 | `lem-sc-hom-etale-locus-translation` | 4009 | none |
 | `lem-sc-mult-n-tangent-differential` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
+| `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
+| `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 4009 | none |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-pc-affine-qcoh-derived-equivalence` | 4011 | none |
 | `lem-pc-derived-module-free-generation` | 4011 | none |
-| `lem-pc-derived-pullback-tensor-qcoh` | 4011 | none |
 | `lem-pc-projection-locality` | 4011 | none |
 | `lem-pc-zero-scheme-adjunction-base-change` | 4011 | none |
+| `lem-pc-affine-derived-pullback-tensor-tilde` | 4012 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
 | `lem-pc-picard-functor-agrees-sc` | 5008 | none |
 | `lem-sc-deg-pullback-finite` | 5009 | rests_on_sorry |
@@ -74,7 +74,6 @@
 | `lem-pc-kflat-hocolim-truncations` | 5013 | none |
 | `lem-sp-couple-morphism` | 6002 | none |
 | `lem-sp-kinjective-computes` | 6002 | none |
-| `thm-sp-half-plane-convergence` | 6002 | none |
 | `lem-weil-pbc-finite-proper` | 6003 | none |
 | `def-sp-acyclic` | 6004 | none |
 | `lem-sp-derived-well-defined` | 6004 | none |
@@ -261,7 +260,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (681)
+## Stage 2: nodes to state (682)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -276,6 +275,7 @@
 | `def-pc-dimension` | 1 | state |
 | `def-pc-divisor-line-bundle` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
+| `def-pc-generators` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
 | `def-pc-projective-morphism` | 1 | state |
 | `def-pc-standard-graded-algebra` | 1 | state |
@@ -947,7 +947,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1322 nodes that wait for a statement dependency, 286 nodes that wait for stage 1.
+Not open yet: 1325 nodes that wait for a statement dependency, 285 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
