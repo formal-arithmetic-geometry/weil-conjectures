@@ -2,7 +2,7 @@
 
 924 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (610)
+## Stage 1: nodes to split (609)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -24,7 +24,6 @@
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-affine-basic-set-difference` | 1013 | none |
-| `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1013 | none |
 | `lem-weil-pbc-quasi-coherent-extension-qc-open` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-ring-map-integral-closure-open` | 1013 | none |
@@ -617,7 +616,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (314)
+## Stage 2: nodes to state (315)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -845,6 +844,7 @@
 | `lem-weil-pbc-pth-roots-extension-degree` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1 | state |
+| `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
 | `lem-weil-pbc-radicial-prime-unique-degree-p` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
@@ -936,7 +936,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 622 nodes that wait for stage 1, 592 nodes that wait for a statement dependency.
+Not open yet: 621 nodes that wait for stage 1, 592 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
