@@ -16,19 +16,71 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "title": "Cohomology over opens sheafifies to the cohomology sheaf",
- "statement": "Let $(X,\\mathcal O_X)$ be a ringed space and let $K$ be an object of $D(\\mathcal O_X)$ [def-sc-ringed-space-module-cohomology] [def-weil-abstract-derived-category]. For every integer $q$, the presheaf on open subsets of $X$ given by $U\\mapsto H^q(U,K)$ has sheafification canonically isomorphic to the cohomology sheaf $H^q(K)$. Consequently, every element of the stalk $H^q(K)_x$ is represented by some section in $H^q(U,K)$ for an open neighborhood $U$ of $x$, and a representative whose germ is zero becomes zero after restricting to a smaller neighborhood of $x$.",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space and let $D(\\mathcal O_X)$ be the derived category of the abelian category of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] [def-weil-abstract-derived-category]. As in [def-pc-ringed-spaces-derived-direct-image], choose functorially in the complex $K$ of $\\mathcal O_X$-modules a K-injective resolution $K\\to I(K)$ [prop-pur-kinjective-resolutions-exist] [def-pur-kinjective-complex]. For an open $U\\subseteq X$ and $q\\in\\mathbf Z$ let $H^q(U,-):D(\\mathcal O_X)\\to\\operatorname{Ab}$ be the functor with $H^q(U,K)=H^q(\\Gamma(U,I(K)))$ and $H^q(U,f)=H^q(\\Gamma(U,I(f)))$ for a morphism of complexes $f$; it is well defined on $D(\\mathcal O_X)$ by the argument of [def-pc-ringed-spaces-derived-direct-image], since $\\Gamma(U,-)$ is additive and carries homotopies to homotopies, and for $V\\subseteq U$ restriction of sections of $I(K)$ gives restriction maps $H^q(U,K)\\to H^q(V,K)$. Then for every object $K$ of $D(\\mathcal O_X)$ and every integer $q$, the presheaf $U\\mapsto H^q(U,K)$ has sheafification [def-weil-pbc-sheafification] canonically isomorphic to the cohomology sheaf $H^q(K)$, naturally in $K$. Consequently, every element of the stalk $H^q(K)_x$ is the germ of some section in $H^q(U,K)$ for an open neighborhood $U$ of $x$, a section whose germ is zero becomes zero after restricting to a smaller neighborhood of $x$, and for a morphism $f:K\\to L$ of $D(\\mathcal O_X)$ and $s\\in H^q(U,K)$ the germ of $H^q(U,f)(s)$ at $x\\in U$ is $H^q(f)_x(s_x)$.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 0BKJ, label cohomology-lemma-sheafification-cohomology"
  },
  "stmt_deps": [
-  "def-sc-ringed-space-module-cohomology",
+  "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-kinjective-complex",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $I^\\bullet=I(K)$, with its K-injective resolution $K\\to I^\\bullet$ as chosen in [def-pc-ringed-spaces-derived-direct-image]. By the definition in the statement, $H^q(U,K)$ is the degree-$q$ cohomology of the complex of sections $\\Gamma(U,I^\\bullet)$, with restriction maps induced by those of $I^\\bullet$; and since $K\\to I^\\bullet$ is a quasi-isomorphism, the cohomology sheaf $H^q(K)$ is identified with the cohomology object $\\ker(d^q)/\\operatorname{im}(d^{q-1})$ of $I^\\bullet$ [def-weil-abstract-derived-category]. No restriction of K-injectives to $U$ is needed, since sections over $U$ are taken of the resolution on $X$.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0BKJ, proof, reduction to a complex of injectives"
+   }
+  },
+  {
+   "text": "For the complex of presheaves of modules $U\\mapsto\\Gamma(U,I^\\bullet)$, kernels, images, and quotients are computed sectionwise. Applying module sheafification to the cycle and boundary presheaves therefore gives the cycle and boundary sheaves of $I^\\bullet$: sheafification is exact by [lem-weil-pbc-ringed-site-module-sheafification-exact]. Since sheafification also commutes with the displayed quotient, the sheafification of $U\\mapsto H^q(\\Gamma(U,I^\\bullet))$ is canonically $\\ker(d^q)/\\operatorname{im}(d^{q-1})=H^q(K)$. The identification is natural in morphisms of complexes $I^\\bullet\\to J^\\bullet$, which induce compatible maps on the cycle, boundary and cohomology presheaves and sheaves, sheafification being a functor. Applied to $I(f)$ for morphisms of complexes $f$, and since both $K\\mapsto(U\\mapsto H^q(U,K))^\\#$ and $K\\mapsto H^q(K)$ are functors on $D(\\mathcal O_X)$ factoring through the localization, whose morphisms are composites of images of morphisms of complexes and inverses of images of quasi-isomorphisms [def-weil-abstract-derived-category], the isomorphism is natural in $K\\in D(\\mathcal O_X)$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0BKJ, proof, sheafification of cycles and boundaries"
+   }
+  },
+  {
+   "text": "Let $\\theta:\\mathcal P\\to\\mathcal P^\\#\\cong H^q(K)$ be the sheafification map of $\\mathcal P=(U\\mapsto H^q(U,K))$ composed with the isomorphism of Step 2. By [lem-weil-pbc-stalk-sheafification-space] $\\theta_x$ is an isomorphism, and by [def-weil-pbc-module-stalk] $\\mathcal P_x$ is the filtered colimit of the groups $H^q(U,K)$ over open neighborhoods $U$ of $x$. Thus every stalk element is a germ of a section on some neighborhood, and a section whose germ is zero restricts to zero on a smaller neighborhood. For $f:K\\to L$, naturality of $\\theta$ (Step 2) and the definition of the induced map on stalks give $(H^q(U,f)(s))_x=H^q(f)_x(s_x)$. These are the asserted consequences.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-stalk-sheafification-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0BKJ, conclusion from the sheafification description"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-stalk-sheafification-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0BKJ, label cohomology-lemma-sheafification-cohomology"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +112,35 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-ringed-space-derived-limit-stalk-injective",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ringed-space-sheafification-cohomology",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 0BKJ into the injective-complex reduction, the exact sheafification calculation on cycle and boundary presheaves, and the stalk colimit consequences. No new nodes were created; the existing ringed-site sheafification exactness statement is used as a generic tool.",
+  "blueprint": "The steps realize the first step of blueprint ancestor lem-sc-finite-duality, identifying cohomology stalks with germs of cohomology over neighborhoods.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "why": "Step 2 needs exactness of module sheafification on a ringed site, a generic site lemma not supplied by this unit's route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rsc2744",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rsc2744 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0BKJ; cited statements; citer lem-pc-ringed-space-derived-limit-stalk-injective. FIX more, RETURN less: (1) C4: def-sc-ringed-space-module-cohomology defines H^p(X,F) of a single module only, not H^q(U,K) for K in D(O_X); statement now defines H^q(U,-) on D(O_X) via the functorial K-injective resolutions of def-pc-ringed-spaces-derived-direct-image (same unit), stmt_deps updated. (2) C4/E: Step 1 said a complex of injectives is 'equivalently' K-injective, false for unbounded K; now uses the K-injective resolution I(K), sections over U of the resolution on X (no restriction lemma needed). (3) C4 for the citer: derived-limit-stalk-injective applies the clauses to K and K_{n(x)} through pr o p, so it needs naturality in K; statement (E7: strengthened, reason the citer) now says the iso is natural in K and gives the germ compatibility, proved elementarily in Steps 2-3. Tool use lem-weil-pbc-ringed-site-module-sheafification-exact accepted (generic site lemma).; 1 file(s) fixed by the reviewer"
  }
 }
