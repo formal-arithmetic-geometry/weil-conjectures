@@ -47,9 +47,8 @@ under `dr(Lie G)`: the group–Lie comparison for invariant subspaces.
 ## Implementation notes
 
 The bracket on `Matrix n n k` is the commutator bracket `LieRing.ofAssociativeRing`, activated
-locally as in `Mathlib.Algebra.Lie.Matrix`. The missing proofs are recorded as `sorry`, each with
-a proof sketch in its docstring. Following `𝔾𝕃(n; k)`, the base ring is written `k` even when it is
-only a commutative ring.
+locally as in `Mathlib.Algebra.Lie.Matrix`. Following `𝔾𝕃(n; k)`, the base ring is written `k`
+even when it is only a commutative ring.
 
 ## Blueprint
 
@@ -437,8 +436,9 @@ namespace RationalHom
 /-- For a reduced group scheme `G` locally of finite type over an algebraically closed field, a
 subspace stable under `G(k)` is stable under the points of `G` with values in the dual numbers.
 
-Proof sketch (not formalised): the condition `r(g) U ⊆ U` is cut out by equations on `G`; they
-vanish on `G(k)`, which is dense in the reduced `G`, hence they vanish on `G`, so `r(g)` preserves
+The condition `r(g) U ⊆ U` is cut out by the matrix coefficients `g ↦ l(r(g) w)`, `U ≤ ker l`,
+`w ∈ U`, which are functions on `G`. They vanish at the `k`-points, so they vanish on the reduced
+scheme `G` (`AlgebraicGeometry.eq_zero_of_forall_appTop_eq_zero`), and `r(g)` preserves
 `U ⊗ k[ε]` for every `g ∈ G(k[ε])`. (blueprint: `sk-p-comparison`) -/
 theorem snd_mulVec_mem_of_le_comap [IsAlgClosed k] [IsReduced G.left]
     [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k))
@@ -491,12 +491,13 @@ theorem snd_mulVec_mem_of_le_comap [IsAlgClosed k] [IsReduced G.left]
 differential of a rational representation of a connected group scheme `G` locally of finite type
 is stable under `G(k)`.
 
-Proof sketch (not formalised): replacing `G` by its image `r(G) ⊆ GL_m`, which is closed
-(`AlgebraicGeometry.isClosed_range_of_isMonHom`), reduces this to the defining representation,
-using that `dr` is surjective onto `Lie(r(G))` in characteristic zero; the stabiliser of `U` in
-`r(G)` is a closed subgroup scheme whose Lie algebra is all of `Lie(r(G))`, so it has the dimension
-of `r(G)` by `AlgebraicGeometry.GrpObj.finrank_lie_eq_topologicalKrullDim` and is the whole
-connected group `r(G)` by `AlgebraicGeometry.isIso_left_of_topologicalKrullDim_eq`.
+It suffices that the matrix coefficients `f = l(r(·) w)`, `U ≤ ker l`, `w ∈ U`, vanish on `G`.
+On an affine open `Spec A` around the identity `e`, the invariant derivation `D_X` of a tangent
+vector `X` is the infinitesimal right translation by `1 + εX`
+(`AlgebraicGeometry.GrpObj.exists_algHom_specMap_comp_eq_mul`), so
+`D_X l(r(·) w) = l(r(·) dr(X) w)` and these functions form a set stable under all `D_X`, vanishing
+at `e`. By Cartier's lemma (`AlgHom.mem_iInf_pow_ker_of_forall_exists_derivation`) they vanish
+in the local ring at `e`, hence on the irreducible reduced scheme `G`.
 (blueprint: `sk-p-comparison`) -/
 theorem le_comap_toLin'_points [IsAlgClosed k] [CharZero k] [ConnectedSpace G.left]
     [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k))
@@ -557,7 +558,8 @@ theorem le_comap_toLin'_points [IsAlgClosed k] [CharZero k] [ConnectedSpace G.le
   have hSpec_e : Spec.map (CommRingCat.ofHom e.toRingHom) = eS := Spec.map_preimage eS
   have he1 : points.map G e jO = 1 := by
     apply Over.OverMorphism.ext
-    change Spec.map (CommRingCat.ofHom e.toRingHom) ≫ j = (CartesianMonoidalCategory.toUnit ((Spec (.of k)).asOver (Spec (.of k))) ≫ η[G]).left
+    change Spec.map (CommRingCat.ofHom e.toRingHom) ≫ j =
+      (CartesianMonoidalCategory.toUnit ((Spec (.of k)).asOver (Spec (.of k))) ≫ η[G]).left
     have hid : ((Spec (.of k)).asOver (Spec (.of k))).hom = 𝟙 _ := by
       simp only [OverClass.asOver_hom, specOverSpec_over,
         Algebra.algebraMap_self]
@@ -619,7 +621,76 @@ theorem le_comap_toLin'_points [IsAlgClosed k] [CharZero k] [ConnectedSpace G.le
     refine Finset.sum_congr rfl fun l _ ↦ Finset.sum_congr rfl fun j _ ↦ ?_
     simp only [Algebra.smul_def, map_mul]
     ring
-  sorry
+  -- by Cartier's lemma, the matrix coefficient vanishes near the identity
+  have hSpecId : (Spec.map (CommRingCat.ofHom (AlgHom.id k (DualNumber k)).toRingHom)).asOver
+      (Spec (.of k)) = 𝟙 _ := by
+    apply Over.OverMorphism.ext
+    exact Spec.map_id _
+  have hmem : F l w ∈ ⨅ i : ℕ, RingHom.ker e ^ i := by
+    refine AlgHom.mem_iInf_pow_ker_of_forall_exists_derivation (ε := e)
+      (W := {a | ∃ l', U ≤ LinearMap.ker l' ∧ ∃ w' ∈ U, a = F l' w'})
+      (fun a ⟨l', hl', w', hw', ha⟩ ↦ ha ▸ hF0 l' hl' w' hw') (fun φ ↦ ?_) ⟨l, hUl, w, hw, rfl⟩
+    let τ := e.toDualNumber φ
+    let v : AlgebraicGeometry.points G (DualNumber k) :=
+      (Spec.map (CommRingCat.ofHom τ.toRingHom)).asOver (Spec (.of k)) ≫ jO
+    have hv : v ∈ tangentGroup G := by
+      rw [mem_tangentGroup, points.map, ← Category.assoc, specMap_asOver_comp_specMap_asOver,
+        show (fstHom k k k).comp τ = e from AlgHom.ext fun a ↦ AlgHom.fst_toDualNumber _ _]
+      exact he1
+    obtain ⟨ψ, hψ, hDF, hΦ⟩ := hDer v hv
+    refine ⟨DualNumber.derivationOfSection ψ hψ, ?_, fun a ha ↦ ?_⟩
+    · rintro _ ⟨l', hl', w', hw', rfl⟩
+      exact ⟨l', hl', _, hU _ hw', hDF l' w'⟩
+    have h := congrArg ((Spec.map (CommRingCat.ofHom (DualNumber.mapOfAlgHom e).toRingHom)).asOver
+      (Spec (.of k)) ≫ ·) hΦ
+    simp only [MonObj.comp_mul, ← Category.assoc, specMap_asOver_comp_specMap_asOver] at h
+    rw [show (DualNumber.mapOfAlgHom e).comp (inlAlgHom k A A) = (inlAlgHom k k k).comp e from
+        AlgHom.ext fun a ↦ by ext <;> simp,
+      show (DualNumber.mapOfAlgHom e).comp (DualNumber.mapAlgebraMap A) = AlgHom.id k _ from
+        AlgHom.ext fun a ↦ by ext <;> simp, hSpecId, Category.id_comp] at h
+    have he2 : (Spec.map (CommRingCat.ofHom ((inlAlgHom k k k).comp e).toRingHom)).asOver
+        (Spec (.of k)) ≫ jO = 1 := by
+      rw [← specMap_asOver_comp_specMap_asOver, Category.assoc]
+      exact (congrArg _ he1).trans (MonObj.comp_one _)
+    rw [he2, one_mul] at h
+    have h' := congrArg Over.Hom.left h
+    simp only [Over.comp_left] at h'
+    have h'' := Spec.map_injective ((cancel_mono jO.left).1 h')
+    have h2 : DualNumber.mapOfAlgHom e (ψ a) = τ a := congr(($h'').hom a)
+    rw [DualNumber.derivationOfSection_apply, ← DualNumber.snd_mapOfAlgHom, h2,
+      AlgHom.snd_toDualNumber, AlgHom.cotangentDerivation_of_mem]
+  obtain ⟨s, hs, hsF⟩ := AlgHom.mem_iInf_pow_ker_iff.1 hmem
+  -- so it vanishes on a neighbourhood of the identity, hence on the irreducible reduced `G`
+  have hjf : j.appTop (r.left.appTop ((Scheme.ΓSpecIso (.of (CoordinateRing m k))).inv
+      (matrixCoefficient m l w))) = (Scheme.ΓSpecIso A).inv (F l w) := by
+    have h := appTop_appTop_ΓSpecIso_inv r jO (matrixCoefficient m l w)
+    rw [mapMulEquiv_symm_matrixCoefficient] at h
+    refine h.trans (congrArg _ ?_)
+    simp only [F, Algebra.smul_def]
+    rfl
+  by_contra hf
+  rw [← basicOpen_eq_bot_iff] at hf
+  set s' := (Scheme.ΓSpecIso A).inv s
+  have hz0 : eS (IsLocalRing.closedPoint k) ∈ (Spec A).basicOpen s' := by
+    change IsLocalRing.closedPoint k ∈ eS ⁻¹ᵁ (Spec A).basicOpen s'
+    rw [Scheme.preimage_basicOpen]
+    change _ ∈ (Spec (.of k)).basicOpen (eS.appTop s')
+    rw [Scheme.Hom.appTop_ΓSpecIso_inv]
+    change _ ∈ (Spec (.of k)).basicOpen ((Scheme.ΓSpecIso _).inv (e s))
+    rw [hs, map_one, Scheme.basicOpen_of_isUnit _ isUnit_one]
+    trivial
+  obtain ⟨_, ⟨z, hz, rfl⟩, hy⟩ := nonempty_preirreducible_inter
+    (j.isOpenEmbedding.isOpenMap _ ((Spec A).basicOpen s').isOpen) (G.left.basicOpen _).isOpen
+    ⟨_, _, hz0, rfl⟩ (not_not.1 ((TopologicalSpace.Opens.not_nonempty_iff_eq_bot _).not.2 hf))
+  have hz' : z ∈ (Spec A).basicOpen ((Scheme.ΓSpecIso A).inv (F l w)) := by
+    rw [← hjf]
+    change z ∈ j ⁻¹ᵁ G.left.basicOpen _ at hy
+    rwa [Scheme.preimage_basicOpen] at hy
+  have hz'' : z ∈ (Spec A).basicOpen (s' * (Scheme.ΓSpecIso A).inv (F l w)) := by
+    rw [Scheme.basicOpen_mul]
+    exact ⟨hz, hz'⟩
+  rw [← map_mul, hsF, map_zero, Scheme.basicOpen_zero] at hz''
+  exact hz''
 
 /-- The group–Lie comparison for invariant subspaces: over an algebraically closed field of
 characteristic zero, a subspace is stable under a connected group scheme locally of finite type
