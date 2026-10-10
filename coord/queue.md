@@ -2,7 +2,7 @@
 
 858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (646)
+## Stage 1: nodes to split (644)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,14 +15,9 @@
 | `lem-weil-pbc-closed-pushforward-constant-stalks` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-module-kernel` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1012 | none |
-| `lem-weil-pbc-coherent-modules-kernel-cokernel-sum` | 1012 | none |
-| `lem-weil-pbc-completion-at-quasi-finite-prime` | 1012 | none |
-| `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1012 | none |
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
-| `lem-weil-pbc-etale-residue-polynomial-lift` | 1012 | none |
-| `lem-weil-pbc-faithfully-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-fibre-product-affine-transition` | 1012 | none |
 | `lem-weil-pbc-finite-free-resolution-noetherian` | 1012 | none |
 | `lem-weil-pbc-finite-gl-dim-regular-local` | 1012 | none |
@@ -140,10 +135,13 @@
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
 | `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1013 | none |
 | `lem-weil-pbc-cohen-rings-exist` | 1013 | none |
+| `lem-weil-pbc-coherent-finite-type-sub-kernel` | 1013 | none |
 | `lem-weil-pbc-fibre-degree-bound-field-points` | 1013 | none |
 | `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1013 | none |
+| `lem-weil-pbc-module-finite-type-image-extension` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1013 | none |
+| `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1013 | none |
 | `lem-weil-pbc-scheme-modules-enough-injectives` | 1013 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -653,7 +651,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (212)
+## Stage 2: nodes to state (214)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -704,6 +702,7 @@
 | `lem-weil-pbc-constructible-in-retrocompact-open` | 1 | state |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-is-retrocompact` | 1 | state |
+| `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
 | `lem-weil-pbc-derivation-extends` | 1 | state |
@@ -719,6 +718,7 @@
 | `lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing` | 1 | state |
 | `lem-weil-pbc-etale-neighbourhood-prescribed-residue-field` | 1 | state |
 | `lem-weil-pbc-etale-over-normal-ring-normal` | 1 | state |
+| `lem-weil-pbc-etale-residue-polynomial-lift` | 1 | state |
 | `lem-weil-pbc-etale-retraction-finite-product-local` | 1 | state |
 | `lem-weil-pbc-etale-ring-map-conormal-criterion` | 1 | state |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1 | state |
@@ -870,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 658 nodes that wait for stage 1, 500 nodes that wait for a statement dependency.
+Not open yet: 656 nodes that wait for stage 1, 502 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
