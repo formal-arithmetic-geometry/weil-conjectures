@@ -84,7 +84,6 @@ lemma Etale.upperStarCompDerivedPlus_assoc {W X Y Z : Scheme.{u}} (f : W ⟶ X) 
     rw [Category.assoc]
     erw [hL₂]
     erw [reassoc_of% hL₃]
-    exact Category.assoc _ _ _
   -- the right-hand side
   have hR₁ := (upperStarCompDerivedPlus A f g fg hfg).hom.naturality
     (((h)^*[A]).mapDerivedCategoryPlusFactorsh.hom.app K)
@@ -110,7 +109,6 @@ lemma Etale.upperStarCompDerivedPlus_assoc {W X Y Z : Scheme.{u}} (f : W ⟶ X) 
     erw [← reassoc_of% hR₁]
     rw [hR₂]
     erw [reassoc_of% hR₃]
-    exact Category.assoc _ _ _
   simp only [Category.assoc] at hL hR ⊢
   rw [hL, hR]
   congr 1
