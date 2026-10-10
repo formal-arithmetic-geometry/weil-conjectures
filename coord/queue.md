@@ -2,14 +2,13 @@
 
 855 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (315)
+## Stage 1: nodes to split (314)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `thm-constructible-serre` | 5 | rests_on_sorry |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1010 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
-| `lem-weil-pbc-finite-type-field-finite-isolated-points` | 1016 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
@@ -35,7 +34,6 @@
 | `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
 | `lem-pc-dim-zero-finite-over-field` | 3010 | none |
 | `lem-pc-nowhere-dense-dim-zero` | 3010 | none |
-| `lem-pc-very-ample-ample` | 3010 | sorry_here |
 | `lem-pc-zero-support-finite-scheme` | 3010 | none |
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
 | `lem-sc-canonical-degree` | 3010 | rests_on_sorry |
@@ -47,6 +45,7 @@
 | `lem-exc-coinduced-discrete-embedding` | 3011 | none |
 | `lem-exc-discrete-modules-abelian-injective-embeddings` | 3011 | none |
 | `lem-exc-discrete-modules-abelian-structure` | 3011 | none |
+| `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-genus-well-defined` | 3011 | none |
 | `lem-pc-leray-degenerate-sections` | 3011 | none |
@@ -322,7 +321,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (540)
+## Stage 2: nodes to state (541)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -541,6 +540,7 @@
 | `lem-weil-pbc-finite-t0-space-sober` | 1 | state |
 | `lem-weil-pbc-finite-type-domain-dimension-local-ring` | 1 | state |
 | `lem-weil-pbc-finite-type-domain-dimension-trdeg` | 1 | state |
+| `lem-weil-pbc-finite-type-field-finite-isolated-points` | 1 | state |
 | `lem-weil-pbc-finite-type-z-domain-normalization-finite` | 1 | state |
 | `lem-weil-pbc-finite-unramified-etale-local` | 1 | state |
 | `lem-weil-pbc-finite-unramified-one-point-closed` | 1 | state |
@@ -867,7 +867,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 334 nodes that wait for stage 1, 1004 nodes that wait for a statement dependency.
+Not open yet: 333 nodes that wait for stage 1, 1005 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
