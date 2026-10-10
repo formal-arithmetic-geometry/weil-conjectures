@@ -23,9 +23,49 @@
   "def-pc-derived-category",
   "lem-pc-affine-qcoh-derived-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume M^\\bullet has Tor amplitude in [a,b]. By [lem-pc-module-tor-amplitude-flat-model], choose a complex P^\\bullet of flat A-modules concentrated in [a,b] and an isomorphism M^\\bullet\\cong P^\\bullet in D(A). Under [lem-pc-affine-qcoh-derived-equivalence], E is isomorphic to the associated complex \\widetilde{P^\\bullet}. The associated complex is K-flat by [lem-pc-affine-tilde-kflat]. By the convention for the derived tensor product fixed in [lem-pc-affine-derived-pullback-tensor-tilde] (the total tensor complex of a K-flat resolution of the first factor with the second), for every \\mathcal O_X-module \\mathcal G the derived tensor E\\otimes^\\mathbf L\\mathcal G is represented by the ordinary tensor complex \\widetilde{P^\\bullet}\\otimes\\mathcal G. Since P^\\bullet is zero outside [a,b], so is this tensor complex, and its cohomology vanishes there; hence E has Tor amplitude in [a,b].",
+   "uses": [
+    "lem-pc-module-tor-amplitude-flat-model",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-tilde-kflat",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.10.4 (Tag 08E9), proof, first paragraph"
+   }
+  },
+  {
+   "text": "Assume E has Tor amplitude in [a,b] and let N be an A-module. By [lem-pc-affine-qcoh-derived-equivalence], E\\cong\\widetilde{M^\\bullet}, so [lem-pc-affine-derived-pullback-tensor-tilde, part (3)] (with N^\\bullet=N in degree 0) gives E\\otimes^{\\mathbf L}_{\\mathcal O_X}\\widetilde N\\cong\\widetilde{K^\\bullet} in D(\\mathcal O_X), where K^\\bullet is a complex of A-modules representing M^\\bullet\\otimes_A^{\\mathbf L}N. The functor Q\\mapsto\\widetilde Q is exact, since on stalks it is localization [lem-weil-pbc-spec-tilde-stalk-localization] and localization is exact; hence H^i(\\widetilde{K^\\bullet})\\cong\\widetilde{H^i(K^\\bullet)}. An A-module Q with \\widetilde Q=0 is zero, because Q\\cong\\Gamma(X,\\widetilde Q) [lem-weil-pbc-affine-tilde-gamma-adjunction, part (2)]. Taking \\mathcal G=\\widetilde N in (i), for i\\notin[a,b] we get \\widetilde{H^i(K^\\bullet)}=0, so H^i(M^\\bullet\\otimes_A^{\\mathbf L}N)=0. Thus M^\\bullet has Tor amplitude in [a,b].",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 36.10.4 (Tag 08E9), proof, second paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-tor-amplitude-flat-model",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma 36.10.4 (Tag 08E9)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +90,49 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-tor-amplitude-qcoh-test",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-affine-tor-amplitude-criterion",
+  "worker": "stage1",
+  "summary": "Split Tag 08E9 into the bounded-flat-model implication and the converse via a bounded-above free resolution. Existing affine equivalence, K-flat associated-sheaf, and affine derived-tensor comparison nodes supply the sheaf/module translations; two statement-only auxiliary nodes record the substantive ring lemmas. Reviewer R-atc2926: Step 2 now uses the affine tensor comparison (3) directly with M^\\bullet\\otimes^L N (no free resolution needed), with exactness of tilde and Q = Gamma(X, Q~) cited; the bounded-above free-resolution node is dropped.",
+  "blueprint": "Realizes the Tag 08EV/08EA reduction to the affine module Tor-amplitude criterion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic affine derived equivalence translates between module complexes and quasi-coherent sheaf complexes; the unit route does not provide this generic tool."
+   },
+   {
+    "node": "lem-pc-affine-tilde-kflat",
+    "why": "Generic preservation of K-flatness by the affine associated-sheaf functor is needed to compute the forward derived tensor; the unit route does not provide this generic tool."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic affine derived tensor comparison is needed in both directions; the unit route does not provide this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-tilde-kflat",
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-atc2926",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-atc2926 (reviewer sub-agent of L); spot-checked: Item iff vs Tag 08E9; module Tor amplitude defined as in lem-pc-ring-pseudo-coherent-finite-tor-perfect; test class (i) all O_X-modules = what lem-pc-tor-amplitude-qcoh-test step 2 consumes; flat-model node vs Tag 0654 (true, no dup); no duplication of K1's node. FIX more, RETURN less: (1) C1 Step 1: derived-tensor convention now cited via lem-pc-affine-derived-pullback-tensor-tilde; (2) C1/C4 Step 2 (missed by second reading): P free resolution's K-flatness was uncited and exactness/conservativity of tilde was attributed to the equivalence statement, which does not say it; rewrote with part (3) applied to M directly, tilde exact via lem-weil-pbc-spec-tilde-stalk-localization, Q=Gamma(Q~) via lem-weil-pbc-affine-tilde-gamma-adjunction (2); free-resolution node now unused, dropped; (3) source: flat-model node Tag 064L->0654, item label lemma-tor-amplitude-affine->lemma-tor-dimension-affine. Mathlib: searches recorded by delivery accepted (no standard Mathlib statement for module tor amplitude).; 2 file(s) fixed by the reviewer"
+ }
 }

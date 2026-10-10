@@ -2866,3 +2866,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:44 L: merged deliver/H1/lem-pc-projective-coherent-higher-images (reviewer FIX; first push; new nodes: 0)
 - 22:44 L: merged deliver/M1/lem-sc-etale-local-ring-stalk-faithfully-flat (reviewer PASS; first push; new nodes: 0)
 - 22:45 L: merged deliver/C1/lem-pod-etale-stalk-tensor-scalar (reviewer FIX; first push; new nodes: 0)
+- 22:46 L: merged deliver/E1/lem-pc-affine-tor-amplitude-criterion (reviewer FIX; first push; new nodes: 1)
