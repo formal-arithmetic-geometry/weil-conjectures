@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "pqf-lem-affine-vanishing",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-pc-affine-vanishing"
+  ]
  },
  "kind": "statement",
  "title": "Vanishing of higher cohomology on affines",
@@ -22,12 +24,77 @@
   "pqf-def-coherent",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Regard the affine open U as the induced open subscheme U of X. Its structure sheaf is the restriction of the structure sheaf of X, and the restriction of the quasi-coherent module F to U is quasi-coherent. The hypothesis that U is affine gives an affine scheme in the sense of the affine-scheme vanishing theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-affine-vanishing.md",
+    "place": "node pqf-lem-affine-vanishing, reduction from an affine open to its induced affine scheme"
+   }
+  },
+  {
+   "text": "Apply the affine-scheme vanishing theorem to the induced affine scheme U and the restricted quasi-coherent module F|_U. It gives Subsingleton ((F|_U).H (q + 1)) for every natural q, equivalently H^p(U,F|_U)=0 for every p>0.",
+   "uses": [
+    "lem-pc-affine-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-affine-vanishing.md",
+    "place": "Stacks Project, Cohomology of Schemes, Lemma 30.2.2, Tag 01XB"
+   }
+  },
+  {
+   "text": "Cohomology of the induced open subscheme U with the restricted module is, by the definition of restriction to an open subscheme and of the cohomology notation in the statement, the displayed group H^p(U,F). Therefore the vanishing obtained in Step 2 is exactly the conclusion for every p>0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-affine-vanishing.md",
+    "place": "node pqf-lem-affine-vanishing, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-affine-vanishing.md",
+  "place": "node pqf-lem-affine-vanishing; external input Stacks Project Tag 01XB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "higher cohomology of a quasi-coherent sheaf on an affine open subscheme vanishes",
+   "results": "No matching theorem; hits concern affine transition limits and generic sheaf cohomology",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "subsingleton_H_succ_of_isAffine, IsAffineOpen, higher cohomology",
+   "results": "0 hits; unknown identifier in Mathlib search",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "subsingleton_H_succ_of_isAffine|IsAffineOpen.*H|affine.*cohomology in Mathlib/AlgebraicGeometry",
+   "results": "25 hits, none states the requested vanishing; the relevant theorem is project code",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher cohomology of quasi-coherent sheaf on affine open vanishes",
+   "results": "unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -64,5 +131,30 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-affine-vanishing",
+  "worker": "stage1",
+  "summary": "Split the affine-open statement into the elementary identification of an affine open with its induced affine scheme, application of the existing closed affine-scheme theorem lem-pc-affine-vanishing, and the elementary identification of the resulting cohomology group with H^p(U,F). The statement and Stacks Tag 01XB source are unchanged.",
+  "blueprint": "Realizes the sole blueprint proof sentence recording Stacks Tag 01XB: the reduction from an affine open to its induced affine scheme is Step 1, the affine-scheme vanishing input is Step 2, and the identification with the stated cohomology is Step 3.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-vanishing",
+    "why": "Step 2 uses its closed theorem that a quasi-coherent module on an affine scheme has no higher cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-vanishing",
+  "lem-pc-affine-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pav2242",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pav2242 (reviewer sub-agent of L); spot-checked: Packet read whole. Step 2 cites lem-pc-affine-vanishing (Spec A, quasi-coherent, H^p=0 p>0), a generic tool from another unit: accepted (C7/C8). Its declaration subsingleton_H_succ_of_isAffine (slopmaster2 Affine.lean:284) is stated for [IsAffine X] only; grep of slopmaster2 WeilConjectures and Mathlib AlgebraicGeometry found no affine-open (IsAffineOpen U) cohomology vanishing, so no B10 attachment and the item is not a duplicate of lem-pc-affine-vanishing (that node is the U=X special case; class b does not apply, split cites it in one step). Steps 1 and 3 (induced open subscheme, F|_U quasi-coherent, H^p(U,F)=H^p(U,F|_U) per pqf-def-cohomology, Stacks 01E3) are elementary. D: no cycle. No faults; second reading missed none."
+ }
 }
