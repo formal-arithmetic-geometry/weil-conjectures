@@ -186,7 +186,8 @@ noncomputable def Etale.singleLowerStarComparison {T' T₁ : Scheme.{u}} (k : T�
     (N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     (DerivedCategory.Plus.singleFunctor _ 0).obj (((k)_*[ModuleCat.{u + 1} Λ]).obj N) ⟶
       R+((k)_*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj N) :=
-  (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app _ ≫
+  (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj (((k)_*[ModuleCat.{u + 1} Λ]).obj N)) ≫
     R+((k)_*[ModuleCat.{u + 1} Λ]).map
       ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app _ ≫
         (DerivedCategory.Plus.singleFunctor _ 0).map
@@ -221,5 +222,143 @@ lemma Etale.singleFunctor_map_unit_comp_singleLowerStarComparison {T' T₁ : Sch
     (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom F
 
 end DerivedUnit
+
+section Comparison
+
+/-- The comparison `k_* N [0] ⟶ R k_* (N [0])`, precomposed with a morphism `a : A ⟶ k_* N`
+placed in degree `0`, is the derived adjoint of the adjoint of `a`, placed in degree `0`. -/
+lemma Etale.singleFunctor_map_comp_singleLowerStarComparison {T' T₁ : Scheme.{u}}
+    (k : T₁ ⟶ T') (N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    {A : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (a : A ⟶ ((k)_*[ModuleCat.{u + 1} Λ]).obj N) :
+    (DerivedCategory.Plus.singleFunctor _ 0).map a ≫ Etale.singleLowerStarComparison Λ k N =
+      (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj A) ≫
+        R+((k)_*[ModuleCat.{u + 1} Λ]).map
+          ((((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app A ≫
+            (DerivedCategory.Plus.singleFunctor _ 0).map
+              (((k)^*[ModuleCat.{u + 1} Λ]).map a ≫
+                (Etale.upperStarLowerStarAdjunction _ k).counit.app N)) := by
+  have n₁ := (Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) k).unit.naturality
+    ((DerivedCategory.Plus.singleFunctor _ 0).map a)
+  have n₂ := (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.naturality a
+  rw [Functor.id_map, Functor.comp_map] at n₁
+  rw [Functor.comp_map, Functor.comp_map] at n₂
+  rw [Etale.singleLowerStarComparison, reassoc_of% n₁, ← Functor.map_comp,
+    reassoc_of% n₂, Functor.map_comp (DerivedCategory.Plus.singleFunctor _ 0)]
+
+/-- Postcomposition with the comparison `k_* N [0] ⟶ R k_* (N [0])` is bijective on morphisms out
+of a sheaf placed in degree `0`: both sides are identified with `Hom(k^* A, N)` by the
+adjunctions. -/
+lemma Etale.bijective_comp_singleLowerStarComparison {T' T₁ : Scheme.{u}} (k : T₁ ⟶ T')
+    (N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (A : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Function.Bijective (fun φ : (DerivedCategory.Plus.singleFunctor _ 0).obj A ⟶
+        (DerivedCategory.Plus.singleFunctor _ 0).obj (((k)_*[ModuleCat.{u + 1} Λ]).obj N) ↦
+      φ ≫ Etale.singleLowerStarComparison Λ k N) := by
+  have hs : Function.Bijective (fun a : A ⟶ ((k)_*[ModuleCat.{u + 1} Λ]).obj N ↦
+      (DerivedCategory.Plus.singleFunctor (Sheaf T'.smallEtaleTopology
+        (ModuleCat.{u + 1} Λ)) 0).map a) :=
+    ⟨(DerivedCategory.Plus.singleFunctor _ 0).map_injective,
+      (DerivedCategory.Plus.singleFunctor _ 0).map_surjective⟩
+  have hiso : Function.Bijective (fun b : (DerivedCategory.Plus.singleFunctor _ 0).obj
+        (((k)^*[ModuleCat.{u + 1} Λ]).obj A) ⟶ (DerivedCategory.Plus.singleFunctor _ 0).obj N ↦
+      (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app A ≫ b) :=
+    ⟨fun _ _ h ↦ (cancel_epi _).1 h, fun c ↦ ⟨(((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).inv.app A ≫ c,
+      by simp⟩⟩
+  have hs' : Function.Bijective (fun a : ((k)^*[ModuleCat.{u + 1} Λ]).obj A ⟶ N ↦
+      (DerivedCategory.Plus.singleFunctor (Sheaf T₁.smallEtaleTopology
+        (ModuleCat.{u + 1} Λ)) 0).map a) :=
+    ⟨(DerivedCategory.Plus.singleFunctor _ 0).map_injective,
+      (DerivedCategory.Plus.singleFunctor _ 0).map_surjective⟩
+  have h₁ : (fun a : A ⟶ ((k)_*[ModuleCat.{u + 1} Λ]).obj N ↦
+      (DerivedCategory.Plus.singleFunctor _ 0).map a ≫ Etale.singleLowerStarComparison Λ k N) =
+      (Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).homEquiv _ _ ∘
+        (fun b ↦ (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app A ≫
+          b) ∘ (fun a ↦ (DerivedCategory.Plus.singleFunctor _ 0).map a) ∘
+        ((Etale.upperStarLowerStarAdjunction _ k).homEquiv _ _).symm := by
+    funext a
+    simp only [Function.comp_apply, Adjunction.homEquiv_unit, Adjunction.homEquiv_counit,
+      Etale.singleFunctor_map_comp_singleLowerStarComparison]
+  have hb : Function.Bijective (fun a : A ⟶ ((k)_*[ModuleCat.{u + 1} Λ]).obj N ↦
+      (DerivedCategory.Plus.singleFunctor _ 0).map a ≫ Etale.singleLowerStarComparison Λ k N) := by
+    rw [h₁]
+    exact (Equiv.bijective _).comp (hiso.comp (hs'.comp (Equiv.bijective _)))
+  exact (Function.Bijective.of_comp_iff _ hs).1 hb
+
+/-- In degree `0`, the comparison `k_* N [0] ⟶ R k_* (N [0])` is an isomorphism, that is,
+`R⁰ k_* N = k_* N`: by the Yoneda lemma, since postcomposition with it is bijective on
+morphisms out of every sheaf placed in degree `0`, and `H⁰` is bijective on morphisms from an
+object `≤ 0` to an object `≥ 0`. -/
+lemma Etale.isIso_homologyFunctor_zero_map_singleLowerStarComparison {T' T₁ : Scheme.{u}}
+    (k : T₁ ⟶ T') (N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
+      (Etale.singleLowerStarComparison Λ k N)) := by
+  have hR : (DerivedCategory.Plus.ι.obj (R+((k)_*[ModuleCat.{u + 1} Λ]).obj
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj N))).IsGE 0 :=
+    (DerivedCategory.isGE_iff _ 0).2 fun i hi ↦
+      ((k)_*[ModuleCat.{u + 1} Λ]).isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj N) 0 hi
+  have hbij {Y : DerivedCategory.Plus (Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+      (hY : (DerivedCategory.Plus.ι.obj Y).IsGE 0)
+      (A : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+      Function.Bijective (fun φ : (DerivedCategory.Plus.singleFunctor _ 0).obj A ⟶ Y ↦
+        ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso (C := Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).app A).inv ≫
+          (DerivedCategory.Plus.homologyFunctor _ 0).map φ) := by
+    exact Function.Bijective.comp (g := fun ψ ↦
+      ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso (C := Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).app A).inv ≫ ψ)
+      ⟨fun _ _ h ↦ (cancel_epi _).1 h, fun ψ ↦ ⟨_, Iso.inv_hom_id_assoc _ ψ⟩⟩
+      ((DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE 0).comp
+        ((Functor.FullyFaithful.ofFullyFaithful DerivedCategory.Plus.ι).map_bijective _ _))
+  refine isIso_of_yoneda_map_bijective _ fun A ↦ ?_
+  have h₁ := hbij (Y := (DerivedCategory.Plus.singleFunctor _ 0).obj
+    (((k)_*[ModuleCat.{u + 1} Λ]).obj N)) inferInstance A
+  have h₂ := hbij hR A
+  have hc := Etale.bijective_comp_singleLowerStarComparison Λ k N A
+  refine (Function.Bijective.of_comp_iff _ h₁).1 ?_
+  convert h₂.comp hc using 1
+  funext φ
+  simp
+
+/-- The comparison `k_* N [0] ⟶ R k_* (N [0])` is an isomorphism as soon as the higher direct
+images `R^q k_* N`, `q > 0`, vanish. -/
+lemma Etale.isIso_singleLowerStarComparison {T' T₁ : Scheme.{u}} (k : T₁ ⟶ T')
+    (N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hN : ∀ q : ℤ, 0 < q → IsZero ((DerivedCategory.Plus.homologyFunctor _ q).obj
+      (R+((k)_*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj N)))) :
+    IsIso (Etale.singleLowerStarComparison Λ k N) := by
+  rw [DerivedCategory.Plus.isIso_iff]
+  intro q
+  rcases lt_trichotomy q 0 with hq | rfl | hq
+  · refine ⟨0, ?_, ?_⟩
+    · exact (DerivedCategory.Plus.isZero_homology_of_isGE _ 0 q hq).eq_of_src _ _
+    · exact (((k)_*[ModuleCat.{u + 1} Λ]).isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj N) 0 hq).eq_of_src _ _
+  · exact Etale.isIso_homologyFunctor_zero_map_singleLowerStarComparison Λ k N
+  · refine ⟨0, ?_, ?_⟩
+    · exact (DerivedCategory.Plus.isZero_homology_of_isLE _ 0 q hq).eq_of_src _ _
+    · exact (hN q hq).eq_of_src _ _
+
+/-- For an injective sheaf `N`, the comparison `k_* N [0] ⟶ R k_* (N [0])` is an isomorphism. -/
+lemma Etale.isIso_singleLowerStarComparison_of_injective {T' T₁ : Scheme.{u}} (k : T₁ ⟶ T')
+    (N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective N] :
+    IsIso (Etale.singleLowerStarComparison Λ k N) :=
+  Etale.isIso_singleLowerStarComparison Λ k N fun _ hq ↦
+    ((k)_*[ModuleCat.{u + 1} Λ]).isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor N
+      hq.ne'
+
+/-- For a finite morphism `k`, the comparison `k_* N [0] ⟶ R k_* (N [0])` is an isomorphism:
+`k_*` is exact. -/
+lemma Etale.isIso_singleLowerStarComparison_of_isFinite {T' T₁ : Scheme.{u}} (k : T₁ ⟶ T')
+    [IsFinite k] (N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso (Etale.singleLowerStarComparison Λ k N) :=
+  Etale.isIso_singleLowerStarComparison Λ k N fun q hq ↦
+    IsZero.of_iso (DerivedCategory.Plus.isZero_homology_of_isLE
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj (((k)_*[ModuleCat.{u + 1} Λ]).obj N)) 0 q hq)
+      ((DerivedCategory.Plus.homologyFunctor _ q).mapIso
+        (((k)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.app _ ≪≫
+          (((k)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app N))
+
+end Comparison
 
 end AlgebraicGeometry
