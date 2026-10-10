@@ -11,18 +11,67 @@
  },
  "kind": "statement",
  "title": "Exactness of sheafification on Proj",
- "statement": "Let $k$ be a field, $S=k[x_0,x_1]$ with its standard grading, and $P=\\mathbf P^1_k$ as in [def-sc-p1-standard]. If $0\\to M'\\to M\\to M''\\to0$ is an exact sequence of graded $S$-modules with degree-preserving maps, then the associated sequence of $\\mathcal O_P$-modules [def-weil-pbc-proj-twisting-sheaf] (1) $0\\to\\widetilde{M'}\\to\\widetilde M\\to\\widetilde{M''}\\to0$ is exact.",
+ "statement": "Let $k$ be a field, $S=k[x_0,x_1]$ with its standard grading, and $P=\\mathbf P^1_k$ as in [def-sc-p1-standard]. If $0\\to M'\\to M\\to M''\\to0$ is an exact sequence of graded $S$-modules with degree-preserving maps, then the associated sequence of $\\mathcal O_P$-modules [def-weil-pbc-proj-twisting-sheaf] (1) with maps induced by [lem-sc-p1-proj-tilde-functorial], $0\\to\\widetilde{M'}\\to\\widetilde M\\to\\widetilde{M''}\\to0$, is exact.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
   "place": "node proof, sheafifying clause"
  },
  "stmt_deps": [
   "def-sc-p1-standard",
-  "def-weil-pbc-proj-twisting-sheaf"
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-sc-p1-proj-tilde-functorial"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $x\\in P$ correspond to a homogeneous prime $\\mathfrak p$ not containing $S_+$. By [def-weil-pbc-proj-twisting-sheaf] (1), the three associated sheaves have sections $M'_{(f)},M_{(f)},M''_{(f)}$ on $D_+(f)$. By [lem-sc-p1-proj-tilde-functorial], each degree-preserving map induces a unique morphism of $\\mathcal O_P$-modules, on $D_+(f)$ given by $y/f^m\\mapsto\\phi(y)/f^m$, and under the stalk identifications of [lem-weil-pbc-proj-graded-module-sheaf-exists] (c) its map at $x$ is $y/h\\mapsto\\phi(y)/h$. The functorial composition law in [lem-sc-p1-proj-tilde-functorial] makes the two sheaf maps a complex because the composite graded map is zero.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-sc-p1-proj-tilde-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, text before Definition Tag 01M6 (label definition-structure-sheaf), and Lemma Tag 01M7 (label lemma-proj-sheaves) (5): stalks of the associated sheaf"
+   }
+  },
+  {
+   "text": "For this $\\mathfrak p$, [lem-sc-p1-proj-degreezero-localization-exact] applied to the given exact graded sequence gives exactness of $0\\to M'_{(\\mathfrak p)}\\to M_{(\\mathfrak p)}\\to M''_{(\\mathfrak p)}\\to0$. By Step 1 these are precisely the maps on the stalks of the claimed sheaf sequence.",
+   "uses": [
+    "lem-sc-p1-proj-degreezero-localization-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Constructions, Lemma Tag 01M7 (label lemma-proj-sheaves) (5), with the local exactness implicit in the proof of the blueprint node lem-sc-p1-graded-resolution"
+   }
+  },
+  {
+   "text": "Write $F=\\widetilde{M'}$, $G=\\widetilde M$, $H=\\widetilde{M''}$ with maps $i:F\\to G$ and $q:G\\to H$. Step 2 gives exactness of $0\\to F_x\\to G_x\\to H_x\\to0$ at every $x$. For any open $W$ and $t\\in H(W)$, each germ $t_x$ is the image of some germ in $G_x$; by [def-weil-pbc-module-stalk] represent that germ by a section on a neighbourhood of $x$ and shrink the neighbourhood until its image equals $t$ there. Thus $q$ satisfies the local lifting condition of [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1), hence is surjective. If $s\\in G(W)$ and $q_W(s)=0$, exactness at $G_x$ supplies for every $x\\in W$ a germ of $F_x$ mapping to $s_x$; represent it by a local section and shrink until its image is $s$ by the equality-of-germs clause of [def-weil-pbc-module-stalk]. Hence [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (2) makes $F\\to G\\to H$ exact at $G$. Finally apply (2) to $0\\to F\\xrightarrow{i}G$: if $i_W(s)=0$, then $i_x(s_x)=0$ for every $x\\in W$, and stalkwise injectivity gives $s_x=0$; [def-weil-pbc-module-stalk] gives a neighbourhood of each $x$ where $s=0$, so the sheaf axiom gives $s=0$ on $W$. This is exactly the local lifting condition for the zero map $0\\to F$, and (2) gives exactness at $F$, i.e. injectivity of $i$. Together these are the stated short exact sequence.",
+   "uses": [
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, exactness of sequences of sheaves of modules detected on stalks; used in the sheafifying clause of the blueprint proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-sc-p1-proj-tilde-functorial",
+  "lem-sc-p1-proj-degreezero-localization-exact",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "node proof, sheafifying clause, expanded using Stacks 01M7 (5)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,12 +96,46 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-graded-resolution",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-proj-sheafification-exact",
+  "worker": "stage1",
+  "summary": "Expanded the sheafifying clause through a new statement-only functoriality node, exactness of degree-zero homogeneous localization, and the existing local-lifting criterion for sheaf modules. Removed the incorrect Mathlib stalk-exactness leaf and made homogeneous prime localization explicit. No exact Lean declaration for the item was found.",
+  "blueprint": "Steps 1-3 realize the clause 'sheafifying it gives the required exact sequence' in the proof of blueprint lem-sc-p1-graded-resolution.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "why": "Provides the generic associated-sheaf stalk formula on Proj; the present unit defines P1 but has no construction of graded-module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "why": "Its local lifting criterion applies to sheaves over any ringed space; this unit supplies the Proj stalk calculation but no criterion for exactness of sheaf modules."
+   },
+   {
+    "node": "def-weil-pbc-module-stalk",
+    "why": "Its germ representation and equality criterion supply the neighbourhood restrictions needed by the local-lifting criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "def-weil-pbc-module-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ps2b",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ps2b (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:19 return (R-pse2); all three points repaired. (1) C4: new statement-only node lem-sc-p1-proj-tilde-functorial states existence/uniqueness of phi~ with the D_+(f) formula x/f^m -> phi(x)/f^m, composition and identity, and the stalk map y/h -> phi(y)/h under the identification of lem-weil-pbc-proj-graded-module-sheaf-exists (c); checked against Stacks constructions.tex Lemma 01M7 (label lemma-proj-sheaves), items (2),(3),(5) and the final 'functorial in the graded S-module M' paragraph; Step 1 cites it in text, uses and proof_deps; the composite tilde(0)=0 makes the sheaf maps a complex (zero on the D_+(f) basis). (2) B8: the false Mathlib leaf is gone; Step 3 now uses lem-weil-pbc-ringed-space-module-exactness-local-lifting (1) for surjectivity, (2) for exactness at the middle and (2) applied to the complex 0 -> F -> G for injectivity (image of zero = Ker i), with def-weil-pbc-module-stalk for germ representation, the equality-of-germs clause and the stalk map s_x -> phi(s)_x; all modules over the same O_P, hypotheses hold. (3) B3: lem-sc-p1-proj-degreezero-localization-exact now defines T, S_(p), M_(p) and the maps explicitly and cites def-pc-standard-graded-algebra for S_+ (which defines it); statement true (T^{-1} exact, degree-zero part of a graded exact sequence exact); tested on the zero sequence and the primes (0), (x_0) of k[x_0,x_1]. Step 2 identifies its maps with the stalk maps via Step 1. The item's statement gained only the citation 'with maps induced by [lem-sc-p1-proj-tilde-functorial]' (pins down the maps, no mathematical change; the report's 'without changing the item's statement' is inaccurate on this point). Tool uses accepted as generic black boxes: lem-weil-pbc-proj-graded-module-sheaf-exists, lem-weil-pbc-ringed-space-module-exactness-local-lifting, def-weil-pbc-module-stalk. Mathlib searches of the new node recorded (leansearch, leanfinder, loogle, grep), no match, no leaf. Note: the report's WANTED claim that Stacks is absent is wrong, constructions.tex is in literature/stacks-project. Start Sat Oct 10 03:29:36 PM UTC 2026, end Sat Oct 10 03:30:16 PM UTC 2026."
+ }
 }
