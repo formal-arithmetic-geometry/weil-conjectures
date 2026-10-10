@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+ "kind": "statement",
+ "title": "Extension by zero of abelian Zariski sheaves is a left adjoint of restriction to an open",
+ "statement": "Let $X$ be a scheme, $U\\subseteq X$ an open subscheme, and $X_{\\rm Zar}$, $U_{\\rm Zar}$ the small Zariski sites of $X$ and of $U$ [def-sc-zariski-site] (the objects of $U_{\\rm Zar}$ are the opens $W\\subseteq U$, which are also objects of $X_{\\rm Zar}$, and a family of opens of $W$ is a covering of $W$ in $U_{\\rm Zar}$ if and only if it is one in $X_{\\rm Zar}$). Let $\\textit{Ab}(X_{\\rm Zar})$, $\\textit{Ab}(U_{\\rm Zar})$ be the abelian categories of abelian sheaves on these sites [def-weil-pbc-sites-and-cohomology]. For $\\mathcal G\\in\\textit{Ab}(X_{\\rm Zar})$ let $\\mathcal G|_U\\in\\textit{Ab}(U_{\\rm Zar})$ be the abelian sheaf $W\\mapsto\\mathcal G(W)$ ($W\\subseteq U$ open) with the restriction maps of $\\mathcal G$, and for a morphism $\\psi$ of $\\textit{Ab}(X_{\\rm Zar})$ let $(\\psi|_U)_W=\\psi_W$. For $\\mathcal F\\in\\textit{Ab}(U_{\\rm Zar})$ let $j_{p!}\\mathcal F$ be the presheaf of abelian groups on $X_{\\rm Zar}$ with $(j_{p!}\\mathcal F)(V)=\\mathcal F(V)$ if $V\\subseteq U$ and $(j_{p!}\\mathcal F)(V)=0$ if $V\\not\\subseteq U$ ($V\\subseteq X$ open), whose restriction map along $V'\\subseteq V$ is the restriction map of $\\mathcal F$ if $V\\subseteq U$ (then also $V'\\subseteq U$) and $0$ otherwise; a morphism $\\alpha:\\mathcal F\\to\\mathcal F'$ of $\\textit{Ab}(U_{\\rm Zar})$ gives $j_{p!}\\alpha$, equal to $\\alpha_V$ for $V\\subseteq U$ and to $0$ otherwise. Let $\\theta_{\\mathcal F}:j_{p!}\\mathcal F\\to j_!\\mathcal F$ be the sheafification of $j_{p!}\\mathcal F$ as a presheaf of abelian groups on the site $X_{\\rm Zar}$ [def-weil-pbc-sheafification], and $j_!\\alpha:j_!\\mathcal F\\to j_!\\mathcal F'$ the unique morphism with $j_!\\alpha\\circ\\theta_{\\mathcal F}=\\theta_{\\mathcal F'}\\circ j_{p!}\\alpha$; $j_!\\mathcal F$ is the *extension of $\\mathcal F$ by zero*. Then: (1) $\\mathcal F\\mapsto j_!\\mathcal F$, $\\alpha\\mapsto j_!\\alpha$ is an additive functor $j_!:\\textit{Ab}(U_{\\rm Zar})\\to\\textit{Ab}(X_{\\rm Zar})$; (2) $j_!$ is left adjoint to restriction: for every $\\mathcal F\\in\\textit{Ab}(U_{\\rm Zar})$ and every $\\mathcal G\\in\\textit{Ab}(X_{\\rm Zar})$ the map $\\Hom_{\\textit{Ab}(X_{\\rm Zar})}(j_!\\mathcal F,\\mathcal G)\\to\\Hom_{\\textit{Ab}(U_{\\rm Zar})}(\\mathcal F,\\mathcal G|_U)$, $\\psi\\mapsto(\\psi\\circ\\theta_{\\mathcal F})|_U$ (whose component at $W\\subseteq U$ is $\\psi_W\\circ\\theta_{\\mathcal F,W}:\\mathcal F(W)\\to\\mathcal G(W)$), is bijective, and natural in $\\mathcal F$ and in $\\mathcal G$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03DI (label lemma-extension-by-zero, line 2058) and Definition 04IX (label definition-localize-ringed-site, line 2019) (4),(5), for the ringed site (X_Zar, Z) (abelian sheaves) and the object U, whose localization X_Zar/U is U_Zar and for which every V has at most one morphism to U, so the presheaf of 03DI is j_{p!}F; the topological form is Sheaves, Lemma 00A5 (label lemma-j-shriek-abelian, literature/stacks-project/sheaves.tex line 4685) part (2), with Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2). The proof of 00A5 is omitted and that of 03DI omits the verification that the two constructions are inverse."
+ },
+ "stmt_deps": [
+  "def-sc-zariski-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero of abelian sheaves along an open embedding is left adjoint to restriction",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction (restriction ⊣ pushforward, Mathlib.AlgebraicGeometry.Modules.Sheaf), CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Mathlib.CategoryTheory.Sites.Pullback), TopCat.Sheaf.pullbackPushforwardAdjunction (Mathlib.Topology.Sheaves.Functors), stalkSkyscraperSheafAdjunction, constantSheafΓAdj; no extension by zero",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafAdjunctionContinuous",
+   "results": "CategoryTheory.Functor.sheafAdjunctionContinuous : G.sheafPullback A J K ⊣ G.sheafPushforwardContinuous A J K for a continuous G with (G.sheafPushforwardContinuous A J K).IsRightAdjoint (Mathlib.CategoryTheory.Sites.Pullback); Point.sheafFiberComapIso lemmas",
+   "date": "2026-10-10",
+   "verdict": "generalization, not a one-line specialization: for G the inclusion functor of the opens of U into the opens of X (Topology.IsOpenEmbedding.sheafPullback, Topology/Sheaves/Functors.lean:125, is restriction) the left adjoint G.sheafPullback is a left Kan extension followed by sheafification; identifying it with j_! (the Kan extension is j_{p!}) is a computation Mathlib does not contain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left adjoint of the restriction functor of sheaves to an open subset (extension by zero) preserves monomorphisms",
+   "results": "CategoryTheory.Sheaf.Hom.mono_iff_presheaf_mono, presheaf_mono_of_mono (Sites/ConcreteSheafification), Sheaf.mono_of_isLocallyInjective (Sites/LocallyInjective), TopCat.Presheaf.stalkFunctor_preserves_mono, Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects (Preadditive/Injective/Preserves); nothing about extension by zero",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'extensionByZero|extendByZero|jShriek|lowerShriek' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'PreservesMonomorphisms|PreservesFiniteLimits|PreservesInjectiveObjects' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves",
+   "results": "only Function.ExtendByZero (LinearAlgebra/Pi.lean:653, functions, not sheaves); Sites/Pullback.lean:93-99 PreservesFiniteLimits (sheafPullback G A J K) under [RepresentablyFlat G] and PreservesFiniteLimits G.op.lan (not available for the inclusion of the opens of U, which does not preserve the terminal object); Sites/Sheafification.lean:76 presheafToSheaf preserves finite limits; no extension by zero of sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-zariski-open-restriction-injectives",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

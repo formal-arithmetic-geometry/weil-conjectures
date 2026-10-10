@@ -13,9 +13,84 @@
   "def-weil-pbc-exact-sequence",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (restriction is an additive functor $\\textit{Ab}(X_{\\rm Zar})\\to\\textit{Ab}(U_{\\rm Zar})$).* Let $\\mathcal G\\in\\textit{Ab}(X_{\\rm Zar})$. $W\\mapsto\\mathcal G(W)$ ($W\\subseteq U$ open) with the restriction maps of $\\mathcal G$ is a presheaf of abelian groups on $U_{\\rm Zar}$, since the morphisms of $U_{\\rm Zar}$ are inclusions of opens of $U$, which are morphisms of $X_{\\rm Zar}$. It is a sheaf: a covering $\\{W_i\\to W\\}$ of $W\\subseteq U$ in $U_{\\rm Zar}$ is a family of opens of $W$ with union $W$ [def-sc-zariski-site], i.e. a covering of $W$ in $X_{\\rm Zar}$, the fibre products $W_i\\times_WW_k=W_i\\cap W_k$ are the same in both sites, and the equalizer condition of [def-weil-pbc-sites-and-cohomology] (1) for $\\mathcal G|_U$ on this covering is word for word that for $\\mathcal G$. For $\\psi:\\mathcal G\\to\\mathcal H$ the components $\\psi_W$, $W\\subseteq U$, commute with the restriction maps, so $\\psi|_U$ is a morphism; $(\\psi'\\psi)|_U=\\psi'|_U\\psi|_U$ and $\\mathrm{id}|_U=\\mathrm{id}$ componentwise. Morphisms of abelian sheaves are added sectionwise ($\\textit{Ab}$ is a full subcategory of the presheaves of abelian groups [def-weil-pbc-sites-and-cohomology] (1), where $(\\varphi+\\psi)_W=\\varphi_W+\\psi_W$ [lem-weil-pbc-abelian-presheaves-evaluation-exact]), so $(\\varphi+\\psi)|_U=\\varphi|_U+\\psi|_U$ and $0|_U=0$: restriction is additive.",
+   "uses": [
+    "def-sc-zariski-site",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 03F3 (lemma-cohomology-of-open, line 608), the restriction F|_U; Modules on Sites, Definition 04IX (sites-modules.tex line 2019) (4): j_U^*F(X/U) = F(X)"
+   }
+  },
+  {
+   "text": "*Step 2 (proof of (1): restriction is exact).* Let $\\mathcal F\\xrightarrow{\\varphi}\\mathcal G\\xrightarrow{\\psi}\\mathcal H$ be a complex of $\\textit{Ab}(X_{\\rm Zar})$ exact at $\\mathcal G$ [def-weil-pbc-exact-sequence]. Its restriction is a complex, $\\psi|_U\\varphi|_U=(\\psi\\varphi)|_U=0$ (Step 1). By [lem-weil-pbc-sheafification-exact] (1) on the site $X_{\\rm Zar}$, a kernel of $\\psi$ is $k:\\mathcal K\\to\\mathcal G$ with $\\mathcal K(V)=\\operatorname{Ker}(\\psi_V)$ and $k$ the inclusion; let $\\varphi':\\mathcal F\\to\\mathcal K$ be the factorization, $\\varphi'_V(f)=\\varphi_V(f)$. By [lem-weil-pbc-abelian-exact-iff-epi-kernel-lift] (in the abelian category $\\textit{Ab}(X_{\\rm Zar})$ [def-weil-pbc-sites-and-cohomology] (1)) $\\varphi'$ is an epimorphism, so by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] it is locally surjective: for every open $V\\subseteq X$ and $s\\in\\mathcal K(V)$ there are a covering $\\{V_i\\to V\\}$ in $X_{\\rm Zar}$ and $f_i\\in\\mathcal F(V_i)$ with $\\varphi_{V_i}(f_i)=s|_{V_i}$. On $U$: by [lem-weil-pbc-sheafification-exact] (1) on the site $U_{\\rm Zar}$, a kernel of $\\psi|_U$ is the sectionwise kernel $W\\mapsto\\operatorname{Ker}(\\psi_W)$, which is $\\mathcal K|_U$ with $k|_U$ as inclusion, and the factorization of $\\varphi|_U$ through it is $\\varphi'|_U$. It is locally surjective: for $W\\subseteq U$ and $s\\in\\mathcal K|_U(W)=\\mathcal K(W)$ take the covering $\\{V_i\\to W\\}$ and the $f_i$ above; the $V_i$ are opens of $W\\subseteq U$, so this is a covering of $W$ in $U_{\\rm Zar}$ (Step 1) and $(\\varphi|_U)_{V_i}(f_i)=s|_{V_i}$. By [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] on the site $U_{\\rm Zar}$, $\\varphi'|_U$ is an epimorphism of $\\textit{Ab}(U_{\\rm Zar})$, and by [lem-weil-pbc-abelian-exact-iff-epi-kernel-lift] the complex $\\mathcal F|_U\\to\\mathcal G|_U\\to\\mathcal H|_U$ is exact at $\\mathcal G|_U$. With Step 1 this proves (1).",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 03F3 (line 608), proof, second paragraph, which uses without proof that F|_U -> I^bullet|_U is again exact; written out by the agent from Modules on Sites Lemma 03CN (sites-modules.tex, lemma-abelian-abelian: kernels sectionwise, epimorphisms = locally surjective maps)"
+   }
+  },
+  {
+   "text": "*Step 3 (proof of (2): restriction preserves injectives).* Let $j_!:\\textit{Ab}(U_{\\rm Zar})\\to\\textit{Ab}(X_{\\rm Zar})$ be extension by zero. By [lem-weil-pbc-zariski-extension-by-zero-adjunction] (1),(2) it is an additive functor and left adjoint to the restriction functor $\\mathcal G\\mapsto\\mathcal G|_U$ of Step 1, through the natural bijections $\\Hom(j_!\\mathcal F,\\mathcal G)\\cong\\Hom(\\mathcal F,\\mathcal G|_U)$. By [lem-weil-pbc-zariski-extension-by-zero-exact] it is an exact functor between the abelian categories $\\textit{Ab}(U_{\\rm Zar})$ and $\\textit{Ab}(X_{\\rm Zar})$ [def-weil-pbc-sites-and-cohomology] (1). Hence [lem-sp-right-adjoint-preserves-injectives], with $u=j_!$ and $u_*=(-)|_U$, gives: if $\\mathcal I$ is an injective object of $\\textit{Ab}(X_{\\rm Zar})$ [def-sp-injective-resolutions], then $\\mathcal I|_U$ is an injective object of $\\textit{Ab}(U_{\\rm Zar})$.",
+   "uses": [
+    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+    "lem-weil-pbc-zariski-extension-by-zero-exact",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 03F3 (line 608), proof, first paragraph: j_U^{-1} is right adjoint to the exact j_{U!} (Modules on Sites, Section 03DH, Lemmas 03DI and 03DJ), hence (1) by Homology, Lemma 015Z (homology.tex, lemma-adjoint-preserve-injectives, line 7270)"
+   }
+  },
+  {
+   "text": "*Step 4 (proof of (3): restricted injective resolutions).* Let $\\mathcal F\\to\\mathcal I^\\bullet$ be an injective resolution in $\\textit{Ab}(X_{\\rm Zar})$ [def-sp-injective-resolutions]: each $\\mathcal I^p$ is injective, $\\mathcal I^p=0$ for $p<0$ (bounded below, indexed so that the cohomology is $\\mathcal F$ in degree $0$), and the augmented complex $0\\to\\mathcal F\\to\\mathcal I^0\\to\\mathcal I^1\\to\\cdots$ is exact at every term [def-weil-pbc-exact-sequence]. Restriction is an additive functor (Step 1), so it carries this complex to the complex $0\\to\\mathcal F|_U\\to\\mathcal I^0|_U\\to\\mathcal I^1|_U\\to\\cdots$ ($0|_U=0$, $d^{p+1}|_Ud^p|_U=0$), which is exact at every term by Step 2 applied to each three consecutive terms; each $\\mathcal I^p|_U$ is injective by Step 3, and $\\mathcal I^p|_U=0$ for $p<0$. $\\textit{Ab}(U_{\\rm Zar})$ is abelian with enough injectives [def-weil-pbc-sites-and-cohomology] (1), [lem-weil-pbc-site-sheaves-enough-injectives]. Hence $\\mathcal F|_U\\to\\mathcal I^\\bullet|_U$ is an injective resolution of $\\mathcal F|_U$ in $\\textit{Ab}(U_{\\rm Zar})$. Finally $\\Gamma(U,-)$ on $\\textit{Ab}(U_{\\rm Zar})$ is evaluation at the object $U$ [def-weil-pbc-sites-and-cohomology] (2), and $(\\mathcal I^p|_U)(U)=\\mathcal I^p(U)$, $(d^p|_U)_U=d^p_U$ by the definition of restriction, so $\\Gamma(U,\\mathcal I^\\bullet|_U)=\\mathcal I^\\bullet(U)$ as complexes of abelian groups.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 03F3 (line 608), proof, second paragraph: 'F|_U -> I^bullet|_U is an injective resolution in Mod(O_U)' and 'F(U) = F|_U(U)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-zariski-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+  "lem-weil-pbc-zariski-extension-by-zero-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-site-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma 03F3 (label lemma-cohomology-of-open, line 608) (1) and the proof of (2), for the ringed site (X_Zar, Z) and the object U (X_Zar/U = U_Zar); extension by zero from Modules on Sites Lemmas 03DI, 03DJ; the exactness of restriction (Step 2), used but not proved in 03F3, written out by the agent from Modules on Sites Lemma 03CN"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,6 +133,20 @@
    "results": "CategoryTheory.Sheaf.over (Mathlib/CategoryTheory/Sites/Over.lean), index unavailable",
    "date": "2026-10-10",
    "verdict": "no match (the restriction functor exists; preservation of injectives does not)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of an injective sheaf of abelian groups to an open subset is injective",
+   "results": "Sheaf.isLocallyInjective_iff_injective, Sheaf.isLocallyInjective_sheafToPresheaf_map_iff, Presheaf.isLocallyInjective_of_injective (Mathlib.CategoryTheory.Sites.LocallyInjective): locally injective morphisms, not injective objects",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 80,100p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Pullback.lean; sed -n 115,130p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Functors.lean; grep -n injective_of_adjoint ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean",
+   "results": "Sites/Pullback.lean:80-82 IsRightAdjoint instance for sheafPushforwardContinuous, 93-99 PreservesFiniteLimits of sheafPullback only for RepresentablyFlat G; Topology/Sheaves/Functors.lean:125 IsOpenEmbedding.sheafPullback (restriction along an open embedding, as precomposition); Preadditive/Injective/Basic.lean:195 injective_of_adjoint",
+   "date": "2026-10-10",
+   "verdict": "no match: clause (2) would be injective_of_adjoint applied to G.sheafAdjunctionContinuous for the inclusion G of opens, but that its left adjoint preserves monomorphisms (exactness of j_!) is not in Mathlib; a composition of several declarations plus a missing fact, not a leaf (B8)"
   }
  ],
  "mathlib_match": null,
@@ -67,7 +156,7 @@
   "line": "Injective/Basic.lean:195; Sites/Over.lean:288; Topology/Sheaves/Over.lean:90",
   "how": "clause (2) follows from injective_of_adjoint once a mono-preserving left adjoint of restriction (extension by zero j_!) is given; Mathlib does not provide j_! for abelian sheaves or its exactness, so not a one-line specialization (point B8)"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -87,5 +176,15 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-zariski-open-restriction-injectives",
+  "worker": "stage1",
+  "summary": "Checked against Cohomology on Sites 03F3 (statement (1) and proof), Cohomology 01E1, Modules on Sites 03DI/03DJ/04IX, Sheaves 00A4/00A5 and Homology 015Z. The module nodes (lem-weil-pbc-module-open-restriction-injectives, -module-extension-by-zero-adjunction) are stated for a scheme with its structure sheaf O_X, not an arbitrary sheaf of rings, and the DAG has no node identifying abelian sheaves on X_Zar with Z_X-modules, so the abelian case is proved directly following 03F3. Four steps: restriction is an additive functor (elementary, same coverings); exactness of restriction (not proved in 03F3) via sectionwise kernels (lem-weil-pbc-sheafification-exact (1)), the epi/kernel-lift criterion and epi = locally surjective on both sites; preservation of injectives by lem-sp-right-adjoint-preserves-injectives (015Z, tool from unit sk-thm-groth-ss) applied to j_!, using two new unsplit nodes for the abelian Zariski extension by zero (adjunction, 03DI/00A5; exactness, 03DJ); restricted injective resolutions and Gamma(U, I|_U) = I(U), which is clause (3) used by lem-weil-pbc-zariski-cohomology-locally-zero step 3. Statement kept. Mathlib: no match (composition of injective_of_adjoint, sheafAdjunctionContinuous and a missing mono-preservation of j_!)."
+ },
+ "tool_uses": [
+  "lem-sp-right-adjoint-preserves-injectives"
+ ],
+ "reviewed": "pass (L, 2026-10-10): 4 steps follow 03F3 for abelian Zariski sheaves: restriction is additive and exact (kernels sectionwise, epimorphisms locally surjective), extension by zero j_! is an exact left adjoint (two new unsplit nodes 03DI/04IX and 03DJ), so restriction preserves injectives via lem-sp-right-adjoint-preserves-injectives (tool_uses recorded by L), and restricted injective resolutions are injective resolutions."
 }
