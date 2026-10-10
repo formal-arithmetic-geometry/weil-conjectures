@@ -3,38 +3,55 @@
  "blueprint": {
   "is": "lem-weil-pbc-universal-homeomorphism-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change of universal homeomorphisms",
- "statement": "Base changes of universal homeomorphisms\n[def-weil-pbc-scheme-conventions] are universal homeomorphisms.",
+ "statement": "Base changes of universal homeomorphisms\n[def-weil-universal-homeomorphism] are universal homeomorphisms.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-universal-homeomorphism-base-change.md",
   "place": "node lem-weil-pbc-universal-homeomorphism-base-change, order 993"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-universal-homeomorphism"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Stacks Project, Morphisms, Lemma Tag 0CEU (label lemma-base-change-universal-homeomorphism)"
+ },
+ "mathlib_searches": [
   {
-   "text": "By [def-weil-pbc-scheme-conventions], a universal homeomorphism $u$ is a\nmorphism every base change of which is a homeomorphism of underlying\ntopological spaces. If $v$ is a base change of $u$, then every base change of\n$v$ is, by associativity of fibre products, also a base change of $u$, hence\na homeomorphism; so $v$ is a universal homeomorphism.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false
+   "tool": "leansearch",
+   "query": "a morphism property defined to hold for every base change is stable under base change",
+   "results": "CategoryTheory.MorphismProperty.universally_isStableUnderBaseChange (Mathlib.CategoryTheory.MorphismProperty.Limits), along with IsStableUnderBaseChange.mk and mk'",
+   "date": "2026-10-10",
+   "verdict": "match: the universally construction is the node's quantified definition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.universally_isStableUnderBaseChange",
+   "results": "CategoryTheory.MorphismProperty.universally_isStableUnderBaseChange : (P : MorphismProperty C) -> P.universally.IsStableUnderBaseChange (Mathlib.CategoryTheory.MorphismProperty.Limits)",
+   "date": "2026-10-10",
+   "verdict": "match: specializes with P = topologically IsHomeomorph"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def universally|universally_isStableUnderBaseChange' Mathlib/CategoryTheory/MorphismProperty/Limits.lean; rg -n 'def topologically' Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean (pinned Mathlib rev 0df444a360eaa60ab8c11dca51a86af692955474)",
+   "results": "Limits.lean:872 defines P.universally by every pullback of f satisfying P; :889-891 gives universally_isStableUnderBaseChange; Constructors.lean:259-262 defines topologically IsHomeomorph as the underlying-map property",
+   "date": "2026-10-10",
+   "verdict": "match: one-line specialization"
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-universal-homeomorphism-base-change.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MorphismProperty.universally_isStableUnderBaseChange",
+  "file": "Mathlib/CategoryTheory/MorphismProperty/Limits.lean",
+  "line": 889,
+  "how": "specializes in one line: instantiate P with AlgebraicGeometry.topologically IsHomeomorph (Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean:259-262). By the definition of universally (Mathlib/CategoryTheory/MorphismProperty/Limits.lean:872-873), P.universally is exactly the node's quantified notion of a universal homeomorphism; the instance at lines 889-891 says every base change again has that property. No use is made of the distinct slopmaster2 IsUniversalHomeomorphism class."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -56,5 +73,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-universal-homeomorphism-base-change",
+  "worker": "F1",
+  "summary": "The quantified universal-homeomorphism property is a direct instance of Mathlib's universally construction, and universally_isStableUnderBaseChange proves stability under arbitrary base change. The imported agent proof is therefore replaced by an exact Mathlib leaf.",
+  "blueprint": "The sole sentence of the blueprint node's proof, 'If v is a base change of u, then every base change of v is ... also a base change of u,' is the general pullback pasting argument in Mathlib's universally_isStableUnderBaseChange at Limits.lean:889-891."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: Mathlib leaf: 'universally P' is stable under base change (Limits.lean)"
+ }
 }
