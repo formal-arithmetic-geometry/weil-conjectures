@@ -212,6 +212,7 @@ def main() -> int:
         for c in CITE.findall(stmt):
             if c not in all_ids:
                 f(f"new node {nid}: cites [{c}], which is no node")
+        form_checks(f, warns, f"new node {nid}", stmt)
 
     # 5. the item
     d = load_at("HEAD", item_path)
@@ -231,9 +232,17 @@ def main() -> int:
     if not is_def and st == "split":
         if not isinstance(pf, list) or not pf:
             f("the item has no proof steps")
+    form_checks(f, warns, "the item's statement", d.get("statement") or "")
+    for c in CITE.findall(d.get("statement") or ""):
+        if c not in all_ids:
+            f(f"the item's statement cites [{c}], which is no node (B3)")
     for k, s in enumerate(pf or [], 1):
         if not isinstance(s, dict) or not str(s.get("text", "")).strip():
             f(f"step {k}: no text"); continue
+        form_checks(f, warns, f"step {k}", s.get("text") or "")
+        for c in CITE.findall(s.get("text") or ""):
+            if c not in all_ids:
+                f(f"step {k}: cites [{c}] in its text, which is no node (C1)")
         if s.get("elementary") not in (True, False):
             f(f"step {k}: elementary must be true or false")
         uses = [u for u in (s.get("uses") or [])]
@@ -280,6 +289,22 @@ def main() -> int:
 
     print_result(fails, warns)
     return 1 if fails else 0
+
+
+DOUBLED = re.compile(r"\\\\[A-Za-z]")
+SETTING = re.compile(r"\b(in the setting of|as in the item|of the item above|the item's)\b", re.I)
+PLAIN_ARROW = re.compile(r"(?<![\\$])(-->|->|=>)(?![a-z])")
+
+
+def form_checks(f, warns: list[str], where: str, text: str) -> None:
+    """coord/delivery-errors.md B2 and B4: a self-contained statement in TeX, written once."""
+    if DOUBLED.search(text or ""):
+        f(f"{where}: doubled backslashes (\\\\to, \\\\mathrm) in the JSON string; they render as literal backslashes, write one backslash per TeX command (B4)")
+    m = SETTING.search(text or "")
+    if m:
+        f(f"{where}: {m.group(0)!r}: a node is read alone; introduce every object and hypothesis in the node itself (B2)")
+    if PLAIN_ARROW.search(text or ""):
+        warns.append(f"{where}: plain-text arrow ('->'); write TeX (\\to, \\Rightarrow) unless this is inside code (B4)")
 
 
 def print_result(fails: list[str], warns: list[str] | None = None) -> None:
