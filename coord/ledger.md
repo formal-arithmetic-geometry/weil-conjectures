@@ -1304,3 +1304,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:25 L: merged E1 lem-weil-pbc-finite-product-integral-closure (0CY9, 0 new).
 - 11:25 L: accepted lem-weil-pbc-module-cech-vanishing-basis (01EW, 9 steps, 0 new).
 - 2026-10-10, delivery of G1: lemma-weil-pbc-spectral-restriction merged from deliver/G1/lemma-weil-pbc-spectral-restriction (1 commit(s), 3 new node(s), spot-checked by L: L: the detailed-form proof: clopen zero locus, injectivity via irreducible closed subsets, surjectivity via constant pushforwards; 3 new nodes); claim closed
+- 2026-10-10, delivery of K1: lem-weil-pbc-module-injects-localizations-associated-primes merged from deliver/K1/lem-weil-pbc-module-injects-localizations-associated-primes (1 commit(s), 0 new node(s), spot-checked by L: L: zerodivisors are the union of associated primes applied to Rm, and Ass of a submodule); claim closed

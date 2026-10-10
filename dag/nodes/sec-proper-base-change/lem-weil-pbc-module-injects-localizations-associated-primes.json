@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-weil-pbc-normal-constant-generic",
-   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))",
+   "place": "Proof, second paragraph: 'Now the strict henselization is a normal domain'; the chain through analytic unramifiedness supplies its commutative-algebra input",
    "via": [
     "lem-weil-pbc-analytic-unramified-principal-criterion",
     "lem-weil-pbc-normal-nagata-monogenic-n1",
@@ -29,9 +29,53 @@
   "def-weil-pbc-module-localization",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $m\\in M$ map to zero in every $M_{\\mathfrak p}$ for $\\mathfrak p\\in\\operatorname{Ass}(M)$, and suppose $m\\ne0$. The cyclic submodule $N=Rm\\subseteq M$ is nonzero. Since $0\\cdot m=0$, the scalar $0$ is a zerodivisor on $N$; by [lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes], $0$ lies in some associated prime $\\mathfrak p\\in\\operatorname{Ass}(N)$. Thus $\\operatorname{Ass}(N)$ is nonempty, as required in the first sentence of the source proof.",
+   "uses": [
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0311 (lemma-zero-at-ass-zero), proof lines 15506-15511; the nonemptiness consequence of Lemma Tag 00LD (lemma-ass-zero-divisors, line 15278) replaces the final use of Lemma Tag 0587 (lemma-ass-zero)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-associated-prime-submodule] for $N\\subseteq M$, the prime $\\mathfrak p\\in\\operatorname{Ass}(N)$ chosen in Step 1 belongs to $\\operatorname{Ass}(M)$. Hence the kernel assumption gives $m/1=0$ in $M_{\\mathfrak p}$.",
+   "uses": [
+    "lem-weil-pbc-associated-prime-submodule"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0311 (lemma-zero-at-ass-zero), proof lines 15509-15512, citing Lemma Tag 02M3 (lemma-ass, line 15131)"
+   }
+  },
+  {
+   "text": "Because $\\mathfrak p\\in\\operatorname{Ass}(N)$, choose $z\\in N$ with $\\operatorname{Ann}_R(z)=\\mathfrak p$ and write $z=rm$ for some $r\\in R$. By [def-weil-pbc-module-localization] and [def-weil-pbc-localization-at-prime], $m/1=0$ in $M_{\\mathfrak p}$ means that some $s\\in R\\setminus\\mathfrak p$ satisfies $sm=0$. Then $sz=srm=0$, so $s\\in\\operatorname{Ann}_R(z)=\\mathfrak p$, a contradiction. Thus $m=0$; this includes the empty-product case, since a nonzero $m$ would have produced an associated prime in Step 1.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0311 (lemma-zero-at-ass-zero), proof lines 15510-15515, with the localization nonvanishing argument expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "lem-weil-pbc-associated-prime-submodule",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0311 (lemma-zero-at-ass-zero), proof lines 15506-15515; uses Tags 00LD and 02M3"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,7 +107,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -84,5 +128,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 0311; no blueprint node states it (searched)"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: zerodivisors are the union of associated primes applied to Rm, and Ass of a submodule"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "worker": "stage1",
+  "summary": "Read Stacks Algebra 0311 (lemma-zero-at-ass-zero) and its cited 02M3 and 0587. For nonzero m the cyclic submodule Rm has an associated prime by the reviewed 00LD zero-divisor node (0 kills m); the reviewed 02M3 node puts that prime in Ass(M), and the localization denominator criterion contradicts the annihilator of its witness. No new node is needed. The statement agrees with 0311, including arbitrary M and the empty-product case. The item's existing LeanSearch, LeanFinder, Loogle and grep records give no Mathlib match; the available alternate Mathlib checkout was not used to claim a new leaf.",
+  "blueprint": "The steps supply a commutative-algebra input to the normality assertion in the second paragraph of lem-weil-pbc-normal-constant-generic's proof ('Now the strict henselization is a normal domain'), through the existing via chain. Search of the whole blueprint by 'associated primes localization injection', 'zero at associated primes', '0311', and 'module localizations associated' found no blueprint node with this statement."
+ }
 }
