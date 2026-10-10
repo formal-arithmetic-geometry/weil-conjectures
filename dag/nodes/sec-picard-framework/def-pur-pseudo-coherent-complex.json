@@ -13,7 +13,7 @@
  },
  "kind": "definition",
  "title": "Pseudo-coherent complexes",
- "statement": "For a scheme $Y$ [def-pc-scheme], an object $E$ of the derived category [def-pc-derived-category] $D(\\mathcal O_Y)$ is pseudo-coherent if, locally on $Y$, it is quasi-isomorphic to a bounded-above complex of finite free $\\mathcal O_Y$-modules (equivalently, it is pseudo-coherent in the sense of Stacks Tags 08FT and 08G5).",
+ "statement": "For a scheme $Y$ [def-pc-scheme], an object $E$ of the derived category [def-pc-derived-category] $D(\\mathcal O_Y)$ is pseudo-coherent if, locally on $Y$, it is quasi-isomorphic to a bounded-above complex of finite free $\\mathcal O_Y$-modules (equivalently, it is pseudo-coherent in the sense of Stacks Tag 08CB, i.e. $m$-pseudo-coherent for every $m$; on a scheme the two formulations agree by Stacks Tags 08E5 and 08E7).",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tags 08FT and 08G5"
@@ -49,12 +49,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-pushforward-derived-hom-qcoherent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pur-pseudo-coherent-complex",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks Tag 08CB (ringed spaces), with the scheme-level equivalence from Tags 08E5 and 08E7. The statement introduces exactly a scheme, an object of its derived category, and the local bounded-above finite-free characterization; its only dependencies are the existing scheme and derived-category definitions. As a definition there is no proof to split and no subordinate lemma is needed.",
+  "blueprint": "The item realizes the definition of pseudo-coherent complexes; there are no proof steps or additional blueprint clauses.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pcc2006",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcc2006 (reviewer sub-agent of L); spot-checked: Statement (local bounded-above finite-free) matches Stacks 08CB on schemes via 08E5+08E7; no duplicate definition in dag/nodes (grep pseudo-coherent: only this def); consistent with lem-sc-pseudo-coherent-rhom-qcoherent (uses it for a qcoh algebra as O_Y-module); no affine-case node added. FIX more, RETURN less: (1) C4 wrong citation: 08FT is the ringed-site def and 08G5 is the definition of PERFECT, not pseudo-coherent; replaced by 08CB (cohomology.tex, ringed space) with the scheme equivalence Tags 08E5, 08E7, source document corrected from perfect.tex to cohomology.tex; (2) restored blueprint.from.place to the parent's place (it records where lem-sc-finite-duality uses the node, not the Stacks source).; 1 file(s) fixed by the reviewer"
+ }
 }

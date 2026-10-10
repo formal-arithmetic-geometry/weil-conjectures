@@ -2402,3 +2402,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:32 L: merged deliver/C1/lem-pc-fppf-affine-sheafification-restriction (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 19:33 L: merged deliver/F1/lem-sp-long-exact-of-triangle (reviewer FIX; first push; new nodes: 0)
 - 19:33 L: lem-pc-dense-subsite-sheafification-compatibility promoted to a Mathlib leaf (DenseSubsite/Basic.lean:805; reviewer R-fas1959)
+- 19:34 L: merged deliver/H1/def-pur-pseudo-coherent-complex (reviewer FIX; first push; new nodes: 0)
