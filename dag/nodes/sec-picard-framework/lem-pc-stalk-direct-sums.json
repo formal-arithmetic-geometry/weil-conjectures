@@ -22,9 +22,70 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The coproduct as a sheafified presheaf direct sum.* Let $\\mathcal P$ be the presheaf of $\\mathcal O_X$-modules with $\\mathcal P(U)=\\bigoplus_{i\\in I}\\mathcal F_i(U)$, the direct sum of $\\mathcal O_X(U)$-modules (families $(s_i)_i$, $s_i\\in\\mathcal F_i(U)$, with $s_i=0$ for all but finitely many $i$), restriction maps $(s_i)_i\\mapsto(s_i|_V)_i$, and inclusions $\\mathrm{in}_j:\\mathcal F_j\\to\\mathcal P$. By [lem-weil-pbc-presheaf-modules-colimits-sectionwise] (for the discrete diagram on $I$) $(\\mathcal P,(\\mathrm{in}_j)_j)$ is a coproduct of the $\\mathcal F_i$ in presheaves of $\\mathcal O_X$-modules. Let $\\theta:\\mathcal P\\to\\mathcal P^\\#$ be its sheafification as a presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification] on the site of open subsets of $X$. By [lem-weil-pbc-module-sheaves-colimits-forgetful] (2), $\\mathcal P^\\#$ with the maps $\\iota_j=\\theta\\circ\\mathrm{in}_j$ is a coproduct of the $\\mathcal F_i$ in $\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]; since coproducts are unique up to unique isomorphism compatible with the injections, we may take $\\bigoplus_i\\mathcal F_i=\\mathcal P^\\#$ with injections $\\iota_j$. Infinite $I$ is allowed: only sections of $\\mathcal P$, not of $\\mathcal P^\\#$, are finitely supported.",
+   "uses": [
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009E (section-limits-sheaves), items (3) and (5): colimits of sheaves are sheafified presheaf colimits, and stalks commute with colimits"
+   }
+  },
+  {
+   "text": "*Sheafification does not change the stalk.* By [def-weil-presheaf-modules-sheafification] the underlying sheaf of abelian groups of $\\mathcal P^\\#$ is the abelian sheafification of $\\mathcal P$, with $\\theta$ as its unit, and $\\theta$ is $\\mathcal O_X$-linear. By [lem-weil-pbc-stalk-sheafification-space] the map $\\theta_x:\\mathcal P_x\\to\\mathcal P^\\#_x$, $p_x\\mapsto\\theta_U(p)_x$, is an isomorphism of abelian groups. It is $\\mathcal O_{X,x}$-linear: for $a=r_x$, $\\xi=p_x$ with $r\\in\\mathcal O_X(U)$, $p\\in\\mathcal P(U)$ (a common neighbourhood exists since the neighbourhoods of $x$ are directed), $\\theta_x(a\\xi)=\\theta_U(rp)_x=(r\\,\\theta_U(p))_x=a\\,\\theta_x(\\xi)$ [def-weil-pbc-module-stalk]. So $\\theta_x$ is an isomorphism of $\\mathcal O_{X,x}$-modules.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-stalk-sheafification-space",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009E (section-limits-sheaves), items (3) and (5): colimits of sheaves are sheafified presheaf colimits, and stalks commute with colimits"
+   }
+  },
+  {
+   "text": "*Stalks of the presheaf direct sum (filtered colimits commute with direct sums).* Define $\\psi:\\mathcal P_x\\to\\bigoplus_i(\\mathcal F_i)_x$ by $\\psi(((s_i)_i)_x)=((s_i)_x)_i$ for $(s_i)_i\\in\\mathcal P(U)$, $x\\in U$; the right side is finitely supported because $(s_i)_i$ is. It is well defined, additive and $\\mathcal O_{X,x}$-linear, since restriction and multiplication by $r\\in\\mathcal O_X(U)$ act componentwise on $\\mathcal P(U)$ and germs satisfy $(s|_W)_x=s_x$, $(rs)_x=r_xs_x$ [def-weil-pbc-module-stalk]. Surjective: an element of $\\bigoplus_i(\\mathcal F_i)_x$ has finitely many nonzero components $(t_j)_x$, $t_j\\in\\mathcal F_j(U_j)$, $j\\in J$ finite; on $U=\\bigcap_{j\\in J}U_j$ the family with components $t_j|_U$ ($j\\in J$) and $0$ elsewhere lies in $\\mathcal P(U)$ and its germ maps to the element. Injective: if $\\psi(((s_i)_i)_x)=0$, the finitely many nonzero $s_j$ ($j\\in J$) have $(s_j)_x=0$, so $s_j|_{W_j}=0$ for neighbourhoods $W_j$ of $x$ [def-weil-pbc-module-stalk]; on $W=\\bigcap_{j\\in J}W_j$ the family restricts to $0$, so its germ is $0$. Hence $\\psi$ is an isomorphism of $\\mathcal O_{X,x}$-modules.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009E (section-limits-sheaves), items (3) and (5): colimits of sheaves are sheafified presheaf colimits, and stalks commute with colimits"
+   }
+  },
+  {
+   "text": "*Conclusion.* Put $\\Phi=\\psi\\circ\\theta_x^{-1}:(\\bigoplus_i\\mathcal F_i)_x\\to\\bigoplus_i(\\mathcal F_i)_x$, an isomorphism of $\\mathcal O_{X,x}$-modules by the two preceding steps. For $s\\in\\mathcal F_j(U)$, $\\Phi((\\iota_j)_x(s_x))=\\Phi(\\theta_U(\\mathrm{in}_j s)_x)=\\psi((\\mathrm{in}_j s)_x)$, the family with $s_x$ in slot $j$ and $0$ elsewhere; so $\\Phi\\circ(\\iota_j)_x$ is the $j$-th injection of the module coproduct, i.e. $\\Phi$ is the canonical comparison map induced by the $(\\iota_j)_x$ [def-weil-pbc-module-stalk]. Naturality in the family: for morphisms $f_i:\\mathcal F_i\\to\\mathcal G_i$ both $\\theta_x$ and $\\psi$ commute with the induced maps, by the germ formulas.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Section 009E (section-limits-sheaves), items (3) and (5): colimits of sheaves are sheafified presheaf colimits, and stalks commute with colimits"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-stalk",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-stalk-sheafification-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Section 009E (section-limits-sheaves), items (3) and (5)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,15 +114,41 @@
    "results": "Service unavailable: Internal Server Error.",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimits|stalkFunctor in Mathlib/Topology/Sheaves/Stalks.lean and Mathlib/Algebra/Category/ModuleCat/Stalk.lean",
+   "results": "Stalks.lean has no colimit-preservation statement for the stalk functor; ModuleCat/Stalk.lean only builds the R_x-module structure on stalks of a presheaf of modules. No sheaf-of-modules coproduct stalk declaration.",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-stalk-tensor-complex",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-stalk-direct-sums",
+  "worker": "stage1",
+  "summary": "Reviewer R-sds2334 rewrote the proof along Stacks 009E (3),(5): the sheaf coproduct is the sheafification of the sectionwise direct sum, sheafification does not change stalks, and the stalk of the sectionwise direct sum is the direct sum of the stalks (germ-level, finite support of presheaf sections). The unsplit local-support node was dropped.",
+  "blueprint": "The proof realizes the blueprint clause that the tensor-stalk identification requires commuting stalks with total-complex direct sums.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sds2334",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sds2334 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) C1/C4: steps 1 and 3 treated sections of the sheaf coproduct as finitely supported families (false for infinite I; second reading repaired only step 2) -> proof rewritten along Stacks 009E (3),(5): coproduct in Mod(O_X) = sheafification of sectionwise direct sum [lem-weil-pbc-presheaf-modules-colimits-sectionwise, lem-weil-pbc-module-sheaves-colimits-forgetful (2) as generic tool use C7, def-weil-presheaf-modules-sheafification], theta_x iso and O_x-linear [lem-weil-pbc-stalk-sheafification-space], germ-level direct-sum/stalk interchange for the presheaf (elementary), identification with the canonical map; (2) class (b)/(d): new unsplit node lem-pc-stalk-direct-sum-local-support is a consequence of those existing nodes -> dropped; (3) Mathlib grep Stalks.lean/ModuleCat/Stalk.lean: no leaf.; 1 file(s) fixed by the reviewer"
+ }
 }
