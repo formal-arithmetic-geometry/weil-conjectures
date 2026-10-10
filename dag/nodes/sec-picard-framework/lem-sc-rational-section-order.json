@@ -1,0 +1,75 @@
+{
+ "id": "lem-sc-rational-section-order",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-line-bundle-rational-section",
+   "place": "proof, second sentence: 'Writing $D=\\operatorname{div}(s)$ for the divisor of zeros and poles of $s$' (that the orders of $s$ are well defined and only finitely many are nonzero, so that $\\operatorname{div}(s)$ is a divisor)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Orders of a rational section: independence of the generator and finiteness",
+ "statement": "Let $k$ be an algebraically closed field and $C$ a smooth connected curve over $k$ [def-sc-curves]; by [lem-sc-smooth-connected-curve-local-rings] $C$ is a Noetherian integral scheme with generic point $\\eta$ and function field $k(C)=\\mathcal O_{C,\\eta}$ [def-sc-function-field], and for every closed point $P$ the local ring $\\mathcal O_{C,P}\\subseteq k(C)$ is a discrete valuation ring with normalized valuation $v_P:k(C)^*\\to\\mathbf Z$. Let $\\mathcal L$ be an invertible $\\mathcal O_C$-module [def-sc-invertible-module], and for each point $x$ let $\\lambda_x:\\mathcal L_x\\to\\mathcal L_\\eta$ be the germ map of stalks [def-weil-pbc-module-stalk]; by [lem-sc-invertible-module-generic-stalk] $\\mathcal L_x$ is free of rank one over $\\mathcal O_{C,x}$, $\\mathcal L_\\eta$ is a one-dimensional $k(C)$-vector space, and $\\lambda_x$ of a generator of $\\mathcal L_x$ is a basis of $\\mathcal L_\\eta$. Let $s\\in\\mathcal L_\\eta$, $s\\neq0$. Then:\n\n1. for every closed point $P$ and generators $e,e'$ of $\\mathcal L_P$, the elements $g,g'\\in k(C)^*$ with $s=g\\,\\lambda_P(e)=g'\\,\\lambda_P(e')$ satisfy $v_P(g)=v_P(g')$;\n2. there are only finitely many closed points $P$ such that $v_P(g)\\neq0$ for the element $g\\in k(C)^*$ with $s=g\\,\\lambda_P(e)$, $e$ a generator of $\\mathcal L_P$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Section 'The Weil divisor class associated to an invertible module' (section-c1): the paragraph before Tag 02SF (divisors-definition-order-vanishing-meromorphic), 'there exists a unit $u\\in\\mathcal O_{X,\\xi}^*$ such that $s_\\xi=us'_\\xi$ ... $s/s_\\xi$ is independent of the choice of $s_\\xi$ up to multiplication by a unit' (clause 1), and Tag 02SG (divisors-lemma-divisor-meromorphic-locally-finite) with its proof (clause 2: on a nonempty open where $s$ generates $\\mathcal L$ the order is $0$, and only the finitely many components of the complement remain), specialized to the smooth connected curve $C$, whose prime divisors are its closed points."
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "def-sc-function-field",
+  "def-sc-invertible-module",
+  "def-weil-pbc-module-stalk",
+  "lem-sc-invertible-module-generic-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "divisor of a rational section of a line bundle, order of vanishing at a point",
+   "results": "analyticOrderAt, analyticOrderNatAt (Mathlib.Analysis.Analytic.Order), MeromorphicOn.divisor, MeromorphicOn.divisor_apply (Mathlib.Analysis.Meromorphic.Divisor), meromorphicOrderAt: complex-analytic orders of functions on a normed field only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil divisor of a nonzero meromorphic section of an invertible module, finitely many points of nonzero order",
+   "results": "MeromorphicOn.divisor, MeromorphicNFOn.zero_set_eq_divisor_support, MeromorphicOn.extract_zeros_poles, Function.FactorizedRational.divisor: analytic setting only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Divisor\\|divisor' Mathlib/AlgebraicGeometry/; grep -rn 'IsInvertible' Mathlib/AlgebraicGeometry/ (mathlib of ~/weil-conjectures-slopmaster2)",
+   "results": "only zero divisors (FunctionField, SpreadingOut, Properties) and division polynomials of elliptic curves; no Weil divisors, no invertible O_X-modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-line-bundle-rational-section",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

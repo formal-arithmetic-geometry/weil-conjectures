@@ -1,0 +1,80 @@
+{
+ "id": "lem-sc-invertible-module-generic-stalk",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-line-bundle-rational-section",
+   "place": "proof, first sentence: 'At the generic point $\\eta$, $\\mathcal L_\\eta$ is a free $\\mathcal O_{C,\\eta}=k(C)$-module of rank one', and the identification of $\\mathcal L$ with a subsheaf of the constant sheaf $\\mathcal L_\\eta$ used in 'the set of $f\\in k(C)$ with $fs\\in\\mathcal L$'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An invertible module on an integral scheme embeds in its generic stalk",
+ "statement": "Let $X$ be an integral scheme [def-pc-integral-scheme] with generic point $\\eta$ and function field $k(X)=\\mathcal O_{X,\\eta}$, a field [def-sc-function-field], and let $\\mathcal L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. For $x\\in X$ write $\\mathcal L_x$ for the stalk [def-weil-pbc-module-stalk], a module over $\\mathcal O_{X,x}$, and $\\lambda_x:\\mathcal L_x\\to\\mathcal L_\\eta$ for the map sending the germ at $x$ of a section $\\sigma\\in\\mathcal L(W)$ ($W$ an open neighbourhood of $x$, which contains $\\eta$) to its germ $\\sigma_\\eta$; for a nonempty open $U\\subseteq X$ write $\\lambda_U:\\mathcal L(U)\\to\\mathcal L_\\eta$, $\\sigma\\mapsto\\sigma_\\eta$. Regard $\\mathcal O_{X,x}\\subseteq k(X)$ through the injective germ map $\\rho_x:\\mathcal O_{X,x}\\to k(X)$. Then:\n\n1. for every $x\\in X$ the $\\mathcal O_{X,x}$-module $\\mathcal L_x$ is free of rank one; in particular $\\mathcal L_\\eta$ is a $k(X)$-vector space of dimension one;\n2. for every $x\\in X$ the map $\\lambda_x$ is injective, and if $e\\in\\mathcal L_x$ is a generator then $\\lambda_x(e)$ is a $k(X)$-basis of $\\mathcal L_\\eta$ and $\\lambda_x(\\mathcal L_x)=\\mathcal O_{X,x}\\cdot\\lambda_x(e)$;\n3. for every nonempty open $U\\subseteq X$ the map $\\lambda_U$ is injective, and its image is the set of $\\tau\\in\\mathcal L_\\eta$ with $\\tau\\in\\lambda_x(\\mathcal L_x)$ for every $x\\in U$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme), part (2): for a quasi-coherent $\\mathcal F$ on an integral scheme, $\\mathcal K_X(\\mathcal F)$ is the constant sheaf with value $\\mathcal F_\\eta$ (proof omitted there); and the proof of Tag 02OZ (divisors-lemma-regular-meromorphic-section-exists), case (1): '$\\dim_{\\kappa(\\eta)}\\mathcal L_\\eta=1$'. The form stated here (the invertible case, with the sections over $U$ as an intersection of stalks) is the one the proof of lem-sc-line-bundle-rational-section uses; it is the analogue for $\\mathcal L$ of lem-sc-function-field-sections-glue."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-sc-invertible-module",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of an invertible sheaf on an integral scheme injects into stalk at generic point",
+   "results": "AlgebraicGeometry.instIsGermInjectiveOfIsIntegral (Mathlib.AlgebraicGeometry.SpreadingOut), AlgebraicGeometry.germ_injective_of_isIntegral (Mathlib.AlgebraicGeometry.FunctionField), TopCat.Presheaf.stalkToFiber_injective, ModuleCat.Tilde.toStalk: all for the structure sheaf or for presheaves of types, none for an invertible module",
+   "date": "2026-10-10",
+   "verdict": "no match (the structure-sheaf case X.presheaf.germ injective is the special case L = O_X only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invertible sheaf on integral scheme: sections over an open embed into the stalk at the generic point (sheaf of meromorphic sections is constant)",
+   "results": "AlgebraicGeometry.Scheme.germToFunctionField, AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen, instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField (Mathlib.AlgebraicGeometry.FunctionField): structure sheaf only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme.Modules\", \"stalk\"",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, germ_restrictStalkNatIso_inv_app, germ_restrictStalkNatIso_hom_app (Mathlib.AlgebraicGeometry.Modules.Sheaf): stalks of restrictions, nothing on invertible modules or generic points",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'genericPoint' Mathlib/AlgebraicGeometry/Modules/; grep -rn 'IsInvertible' Mathlib/AlgebraicGeometry/ (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "none; Mathlib/AlgebraicGeometry/FunctionField.lean:55 germ_injective_of_isIntegral is for the structure sheaf",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no invertible O_X-modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-line-bundle-rational-section",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

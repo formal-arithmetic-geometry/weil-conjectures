@@ -1,0 +1,77 @@
+{
+ "id": "def-sc-rational-section-divisor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-line-bundle-rational-section",
+   "place": "statement: 'a nonzero rational section $s\\in(\\mathcal L\\otimes k(C))\\setminus\\{0\\}$' and '$\\mathcal O_C(\\operatorname{div}s)$'; proof, second sentence: '$D=\\operatorname{div}(s)$ for the divisor of zeros and poles of $s$'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Rational sections of an invertible module on a smooth curve and their divisors",
+ "statement": "Let $k$ be an algebraically closed field, $C$ a smooth connected curve over $k$ [def-sc-curves] with generic point $\\eta$ and function field $k(C)=\\mathcal O_{C,\\eta}$ [def-sc-function-field] (a field, $C$ being integral by [lem-sc-smooth-connected-curve-local-rings]), and $\\mathcal L$ an invertible $\\mathcal O_C$-module [def-sc-invertible-module]. Put $\\mathcal L\\otimes_{\\mathcal O_C}k(C):=\\mathcal L_\\eta$, the stalk of $\\mathcal L$ at $\\eta$ [def-weil-pbc-module-stalk], a one-dimensional $k(C)$-vector space by [lem-sc-invertible-module-generic-stalk]. A *rational section* of $\\mathcal L$ is an element $s\\in\\mathcal L_\\eta$; it is *nonzero* if $s\\neq0$. For a nonzero rational section $s$ and a closed point $P$ of $C$, choose a generator $e_P$ of the free rank-one $\\mathcal O_{C,P}$-module $\\mathcal L_P$ and let $g_P\\in k(C)^*$ be the element with $s=g_P\\,\\lambda_P(e_P)$, where $\\lambda_P:\\mathcal L_P\\to\\mathcal L_\\eta$ is the germ map; the *order of $s$ at $P$* is $\\operatorname{ord}_P(s):=v_P(g_P)$, with $v_P$ the normalized valuation of the discrete valuation ring $\\mathcal O_{C,P}$ [lem-sc-smooth-connected-curve-local-rings]. It does not depend on the choice of $e_P$, and $\\operatorname{ord}_P(s)\\neq0$ for only finitely many $P$ [lem-sc-rational-section-order]. The *divisor of $s$* is\n$$\\operatorname{div}(s)=\\operatorname{div}_{\\mathcal L}(s):=\\sum_P\\operatorname{ord}_P(s)\\,[P]\\in\\operatorname{Div}(C)$$\n[def-sc-divisor]. For $\\mathcal L=\\mathcal O_C$, $e_P=1$, it is the principal divisor $\\operatorname{div}(s)$ of $s\\in k(C)^*$ of [def-sc-divisor].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02SF (divisors-definition-order-vanishing-meromorphic): $\\operatorname{ord}_{Z,\\mathcal L}(s)=\\operatorname{ord}_{\\mathcal O_{X,\\xi}}(s/s_\\xi)$ with $s_\\xi$ a generator of $\\mathcal L_\\xi$; Tag 0BE6 (divisors-definition-divisor-invertible-sheaf), part (1): $\\operatorname{div}_{\\mathcal L}(s)=\\sum\\operatorname{ord}_{Z,\\mathcal L}(s)[Z]$; meromorphic sections on an integral scheme are the elements of $\\mathcal L_\\eta$ by Tag 01X5 (divisors-lemma-meromorphic-functions-integral-scheme) (2). Specialized to a smooth connected curve over an algebraically closed field, where the prime divisors are the closed points and $\\operatorname{ord}_{\\mathcal O_{C,P}}=v_P$ (Tag 02MD, the local ring being a discrete valuation ring)."
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-function-field",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "def-sc-invertible-module",
+  "def-weil-pbc-module-stalk",
+  "lem-sc-invertible-module-generic-stalk",
+  "lem-sc-rational-section-order",
+  "def-sc-divisor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "divisor of a rational section of a line bundle, order of vanishing at a point",
+   "results": "analyticOrderAt, MeromorphicOn.divisor, meromorphicOrderAt (Mathlib.Analysis.*): analytic setting only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil divisor of a nonzero meromorphic section of an invertible module, finitely many points of nonzero order",
+   "results": "MeromorphicOn.divisor, MeromorphicNFOn.zero_set_eq_divisor_support, MeromorphicOn.extract_zeros_poles: analytic setting only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Divisor\\|divisor' Mathlib/AlgebraicGeometry/; grep -rn 'IsInvertible' Mathlib/AlgebraicGeometry/; grep -rn 'genericPoint' Mathlib/AlgebraicGeometry/Modules/",
+   "results": "no Weil divisors, no invertible O_X-modules, no generic stalks of modules in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match (slopmaster2's Curve/Picard.lean:147 also records that rational sections of line bundles are not available in Lean)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-line-bundle-rational-section",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}
