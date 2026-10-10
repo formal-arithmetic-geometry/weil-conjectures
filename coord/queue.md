@@ -1,8 +1,8 @@
 # Work queue
 
-914 items; claim with `tools/claim.py next <group> [--stage N]`.
+915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (182)
+## Stage 1: nodes to split (183)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -43,11 +43,13 @@
 | `lem-sc-snapper-numerical-polynomial` | 4011 | none |
 | `lem-sc-strict-henselization-completion-flat` | 4011 | none |
 | `lem-pc-affine-containment-ideal` | 4012 | none |
-| `lem-sc-hilbert-difference` | 5010 | none |
 | `lem-sc-regular-meromorphic-section-exists` | 5010 | none |
+| `lem-sc-hilbert-affine-denominator-module` | 5011 | none |
+| `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 5011 | none |
 | `lem-sc-hilbert-embedded-points-affine-localization` | 5011 | none |
 | `lem-sc-hilbert-embedded-points-affine-removal` | 5011 | none |
 | `lem-sc-hilbert-embedded-points-gluing` | 5011 | none |
+| `lem-sc-hilbert-nowhere-dense-dimension-drop` | 5011 | none |
 | `lem-pc-derived-pullback-tor-independent-flat-complex` | 5013 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
@@ -72,7 +74,6 @@
 | `def-pc-representable-functor` | - | none |
 | `def-weil-pbc-C1` | - | none |
 | `def-weil-pbc-C5` | - | none |
-| `def-weil-pbc-C8` | - | none |
 | `lem-fin-dense-normal-open` | - | none |
 | `lem-kun-03sa` | - | none |
 | `lem-kun-stalks-commute-colimits` | - | none |
@@ -926,7 +927,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1463 nodes that wait for a statement dependency, 221 nodes that wait for stage 1.
+Not open yet: 1465 nodes that wait for a statement dependency, 222 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
