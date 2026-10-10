@@ -1323,3 +1323,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of K1: lem-weil-pbc-flat-another-variant-local-criterion merged from deliver/K1/lem-weil-pbc-flat-another-variant-local-criterion (1 commit(s), 3 new node(s), spot-checked by L: L: 00MO via 00MM/00MN: base change of the module, flatness of the quotient, the Tor_1 surjection with the change of rings, localization; 3 new Tor nodes); claim closed
 - 11:39 L: merged K1 lem-weil-pbc-flat-another-variant-local-criterion (00MO, +3 Tor nodes).
 - 11:40 L: accepted thm-galois-fundamental (0BND, 5 steps; 4 new nodes, 2 closed on slopmaster2; lem-fet-galois-category attached and closed; equivalenceContAction recorded as the Lean of clause (1); blueprint base-change clause false, corrected, HUMAN.md).
+- 11:41 L: accepted thm-weil-pbc-universal-homeomorphism-invariance (03SI/04DZ through the closed site/topos nodes, 5 steps, 0 new; 1 tool use).
