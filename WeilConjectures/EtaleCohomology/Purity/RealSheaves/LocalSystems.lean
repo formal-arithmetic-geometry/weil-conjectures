@@ -14,6 +14,7 @@ public import Mathlib.FieldTheory.IntermediateField.Basic
 public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteLocallyConstant
 public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
@@ -137,6 +138,50 @@ noncomputable def Scheme.FiniteEtale.toSheafCompSheafFiberIso {Y : Scheme.{u}} {
       Functor.isoWhiskerRight shrinkYonedaIsoYoneda.symm
         (Scheme.pointSmallEtale s).presheafFiber ≪≫
       (Scheme.pointSmallEtale s).shrinkYonedaCompPresheafFiberIso)
+
+/-- The functor sending a finite étale `Y`-scheme `P` to the étale sheaf of sets
+`Hom_Y(-, P)`, with values in `Type (u + 1)`, as a finite locally constant sheaf of sets
+(`AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso`). -/
+noncomputable def Scheme.FiniteEtale.toFiniteLocallyConstant (Y : Scheme.{u}) :
+    Y.FiniteEtale ⥤ Y.FiniteLocallyConstant :=
+  ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ Y.smallEtaleTopology.uliftYoneda.{u + 1})
+    fun P ↦ by
+      have : IsFinite P.obj.hom := P.property
+      have : Etale P.obj.hom := P.obj.prop
+      obtain ⟨_, h⟩ := (Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso Y).1 _ P.obj.hom
+      exact h
+
+/-- `AlgebraicGeometry.Scheme.FiniteEtale.toFiniteLocallyConstant` is fully faithful: the small
+étale topology is subcanonical. -/
+noncomputable def Scheme.FiniteEtale.fullyFaithfulToFiniteLocallyConstant (Y : Scheme.{u}) :
+    (Scheme.FiniteEtale.toFiniteLocallyConstant Y).FullyFaithful :=
+  Functor.FullyFaithful.ofCompFaithful (G := ObjectProperty.ι _)
+    (((ObjectProperty.fullyFaithfulι _).comp
+      Y.smallEtaleTopology.fullyFaithfulUliftYoneda.{u + 1}) :
+      (ObjectProperty.ι _ ⋙ Y.smallEtaleTopology.uliftYoneda.{u + 1}).FullyFaithful)
+
+instance (Y : Scheme.{u}) : (Scheme.FiniteEtale.toFiniteLocallyConstant Y).Full :=
+  (Scheme.FiniteEtale.fullyFaithfulToFiniteLocallyConstant Y).full
+
+instance (Y : Scheme.{u}) : (Scheme.FiniteEtale.toFiniteLocallyConstant Y).Faithful :=
+  (Scheme.FiniteEtale.fullyFaithfulToFiniteLocallyConstant Y).faithful
+
+/-- Every finite locally constant sheaf of sets is represented by a finite étale `Y`-scheme
+(`AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso`). -/
+instance (Y : Scheme.{u}) : (Scheme.FiniteEtale.toFiniteLocallyConstant Y).EssSurj where
+  mem_essImage E := by
+    obtain ⟨P, π, _, _, ⟨e⟩⟩ := (Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso Y).2 E.obj
+      E.property
+    exact ⟨⟨Scheme.Etale.mk π, ‹IsFinite π›⟩, ⟨(ObjectProperty.fullyFaithfulι _).preimageIso
+      ((fullyFaithfulSheafToPresheaf _ _).preimageIso e.symm)⟩⟩
+
+instance (Y : Scheme.{u}) : (Scheme.FiniteEtale.toFiniteLocallyConstant Y).IsEquivalence where
+
+/-- **Sheaves and covers** (the first step of `sk-i-real-galois`): finite étale `Y`-schemes are
+equivalent to finite locally constant étale sheaves of sets, by `P ↦ Hom_Y(-, P)`. -/
+noncomputable def Scheme.FiniteEtale.equivalenceFiniteLocallyConstant (Y : Scheme.{u}) :
+    Y.FiniteEtale ≌ Y.FiniteLocallyConstant :=
+  (Scheme.FiniteEtale.toFiniteLocallyConstant Y).asEquivalence
 
 /-- **The sheaf of sets underlying a finite locally constant sheaf of `Λ`-modules**, for a
 finite ring `Λ`, is finite locally constant: it is constant on the members of the same étale
