@@ -93,4 +93,29 @@ lemma IsLocally.of_mem_topology {X : Scheme.{u}}
   exact ⟨ι, fun i ↦ (W i).left, fun i ↦ (W i).hom, fun i ↦ (W i).prop, hcov,
     fun i ↦ h (g i) (hS i)⟩
 
+/-- Every property holds locally on the empty scheme, for the empty covering family. -/
+lemma IsLocally.of_isEmpty {X : Scheme.{u}} [IsEmpty X]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) : IsLocally A P K := by
+  refine ⟨PEmpty, PEmpty.elim, fun i ↦ i.elim, fun i ↦ i.elim, ?_, fun i ↦ i.elim⟩
+  have : Presieve.ofArrows (PEmpty.elim : PEmpty.{u + 1} → Scheme.{u}) (fun i ↦ i.elim) = ⊥ := by
+    ext Z f
+    simp only [Presieve.bot_apply, iff_false]
+    rintro ⟨i⟩
+    exact i.elim
+  rw [this]
+  exact bot_mem_propQCPrecoverage X
+
+/-- A property which holds at the pullbacks of `K` to the nonempty members `V` of a covering
+sieve of the terminal object of `X_proét` holds locally at `K`. -/
+lemma IsLocally.of_mem_topology_of_nonempty (hP : IsClosedUnderIsoms P) {X : Scheme.{u}}
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
+    {S : Sieve (terminalProEt X)} (hS : S ∈ Scheme.ProEt.topology X (terminalProEt X))
+    (h : ∀ ⦃V : X.ProEt⦄ (f : V ⟶ terminalProEt X), S f → Nonempty V.left →
+      P V.left (L((V.hom)^*[A]).obj K)) :
+    IsLocally A P K := by
+  refine IsLocally.trans hP (IsLocally.of_mem_topology hS fun V f hf ↦ ?_)
+  rcases isEmpty_or_nonempty V.left with hV | hV
+  · exact IsLocally.of_isEmpty _
+  · exact IsLocally.of_prop hP (h f hf hV)
+
 end AlgebraicGeometry.ProEtale

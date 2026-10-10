@@ -6,12 +6,9 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
-public import WeilConjectures.SixFunctors.ProEtale.Derived.Local
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
-public import WeilConjectures.SixFunctors.ProEtale.Derived.WeaklyEtaleLowerShriek
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
@@ -151,80 +148,6 @@ theorem DerivedCategory.torAmplitudeIn_derivedDual {a b : ℤ}
     (_root_.DerivedCategory.torAmplitudeIn_of_exactPairing (L := Kᘁ) hKt)
 
 end Dualizable
-
-section LocallyPerfect
-
-open scoped CategoryTheory.Functor
-
-variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
-  {X : Scheme.{u}}
-
-/-- Blueprint `def-pod-perfect-complex-on-x`, as used in `sk-def-perfect`: a complex
-`K ∈ D(X_proét)` is *locally perfect* if, locally on the pro-étale site, it is quasi-isomorphic
-to a bounded complex of finite projective `Λ_X`-modules: there are a pro-étale covering family
-`g i : W i ⟶ X` and bounded complexes `P i` on `W i` with `Lg_i^* K ≅ P i`. As elsewhere in this
-file, finite projective modules are rendered as dualizable sheaves. -/
-def IsLocallyPerfect (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) : Prop :=
-  ∃ (ι : Type u) (W : ι → Scheme.{u}) (g : ∀ i, W i ⟶ X) (_ : ∀ i, WeaklyEtale (g i)),
-    Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X ∧
-      ∀ i, ∃ (P : CochainComplex (Sheaf (Scheme.ProEt.topology (W i)) A) ℤ) (a b : ℤ),
-        P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧ (∀ n, IsDualizable (P.X n)) ∧
-          Nonempty (L((g i)^*[A]).obj K ≅ _root_.DerivedCategory.Q.obj P)
-
-variable [∀ M : A, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft M)]
-
-/-- Blueprint `sk-def-perfect`: a locally perfect complex is perfect, that is, dualizable.
-
-Dualizability can be tested after the derived pullbacks `Lg_i^*` along a pro-étale covering
-family: they are monoidal, jointly reflect isomorphisms
-(`AlgebraicGeometry.ProEtale.isIso_of_isIso_leftDerivedUpperStar_map`) and commute with derived
-internal homs (`AlgebraicGeometry.ProEtale.isIso_ihomComparison_leftDerivedUpperStar`), while
-each `Lg_i^* K` is a bounded complex of dualizable sheaves, hence dualizable. So
-`[K, Λ_X] ⊗ K ⟶ [K, K]` is an isomorphism and `[K, Λ_X]` is a dual of `K`. -/
-theorem isDualizable_of_isLocallyPerfect
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : IsLocallyPerfect K) :
-    IsDualizable K := by
-  obtain ⟨ι, W, g, hg, hcov, hloc⟩ := hK
-  let (i : ι) := monoidalLeftDerivedUpperStar A (g i)
-  have := MonoidalClosed.isIso_ihomUnitTensorToIhom_of_jointlyReflectIsomorphisms
-    (fun i ↦ L((g i)^*[A])) (fun _ _ f hf ↦ isIso_of_isIso_leftDerivedUpperStar_map hcov f hf) K
-    (fun i Z ↦ isIso_ihomComparison_leftDerivedUpperStar A (g i) K Z) (fun i ↦ ?_)
-  · obtain ⟨_⟩ :=
-      _root_.DerivedCategory.nonempty_braidedCategory (Sheaf (Scheme.ProEt.topology X) A)
-    let := MonoidalClosed.exactPairingOfIsIso K
-    exact ⟨{ rightDual := (ihom K).obj (𝟙_ _), exact := BraidedCategory.exactPairing_swap _ _ }⟩
-  · obtain ⟨P, a, b, ha, hb, hP, ⟨e⟩⟩ := hloc i
-    obtain ⟨_⟩ := (_root_.DerivedCategory.isDualizable_Q_obj P a b hP).of_iso e.symm
-    obtain ⟨_⟩ :=
-      _root_.DerivedCategory.nonempty_braidedCategory (Sheaf (Scheme.ProEt.topology (W i)) A)
-    exact ⟨_, ⟨BraidedCategory.exactPairing_swap _ (L((g i)^*[A]).obj K)ᘁ⟩⟩
-
-end LocallyPerfect
-
-section LocallyPerfectOfDualizable
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [IsNoetherianRing Λ] {X : Scheme.{u}}
-
-/-- Blueprint `sk-def-perfect` (Stacks, Tag 0FPV): a dualizable complex of pro-étale sheaves of
-modules over a Noetherian ring `Λ` is locally perfect.
-
-Unfinished. -/
-theorem isLocallyPerfect_of_isDualizable
-    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
-    (hK : IsDualizable K) : IsLocallyPerfect K :=
-  sorry
-
-/-- Blueprint `sk-def-perfect`: over a Noetherian coefficient ring `Λ`, a complex of pro-étale
-sheaves of `Λ`-modules is perfect, that is dualizable for the derived tensor product, if and only
-if it is locally quasi-isomorphic to a bounded complex of finite projective `Λ_X`-modules. -/
-theorem isDualizable_iff_isLocallyPerfect
-    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :
-    IsDualizable K ↔ IsLocallyPerfect K :=
-  ⟨isLocallyPerfect_of_isDualizable Λ, isDualizable_of_isLocallyPerfect⟩
-
-end LocallyPerfectOfDualizable
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
 
