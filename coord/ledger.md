@@ -1617,3 +1617,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:27 L: accepted lem-pc-finite-scheme-cohomology-tensor: 6 steps (0AYT), tool_uses 3, no new nodes
 - 14:28 L: merged deliver/H1/lem-weil-pbc-tor-one-surjective-flat-middle (reviewer PASS; after a return; new nodes: 0)
 - 14:28 L: accepted lem-weil-pbc-simplicial-index-finite-initial: 6 steps (017K), 3 new Mathlib leaves (degeneracy factorization, degeneracy injective, initial functor limit 002R)
+- 14:28 L: returned deliver/K1/lem-pc-leray-degenerate-sections (reviewer RETURN: 1. C4: Steps 2 and 3: [pqf-lem-leray] is stated only for a quasi-coherent O_X-module F and only asserts the existence of)
