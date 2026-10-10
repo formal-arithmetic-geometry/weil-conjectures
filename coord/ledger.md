@@ -1647,3 +1647,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:43 L: merged deliver/G1/lem-sc-hilb-geometrically-integral (reviewer FIX; after a return; new nodes: 1)
 - 14:43 L: merged deliver/G1/lem-galois-transitive (reviewer FIX; after a return; new nodes: 1)
 - 14:43 L: returned deliver/F1/lem-pc-base-change-closure-components (reviewer RETURN: 1. D1: whole split: the three new nodes lem-pc-global-sections-finite-separable, lem-pc-base-change-component-decomposit)
+- 14:43 L: lem-sc-ample-on-reduction-noetherian accepted (7 steps per 09MS, 1 new node lem-sc-ample-square-zero-thickening; 5 tool uses copied)

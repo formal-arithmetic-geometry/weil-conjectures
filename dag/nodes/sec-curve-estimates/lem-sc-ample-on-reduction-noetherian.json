@@ -28,9 +28,138 @@
   "def-pc-module-pullback",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($\\mathcal L$ ample $\\Rightarrow$ $i^*\\mathcal L$ ample.) The closed immersion $i$ is finite, in particular affine [lem-weil-pbc-closed-immersion-finite]. The pullback of an ample invertible module along an affine morphism is ample [lem-weil-pbc-pullback-ample-invertible]; so if $\\mathcal L$ is ample on $X$, then $i^*\\mathcal L$ is ample on $Z$. The rest of the proof shows the converse; assume from now on that $i^*\\mathcal L$ is ample.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-pullback-ample-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MS (coherent-lemma-ample-on-reduction, coherent.tex line 4737), proof, first sentence: 'If $\\mathcal L$ is ample, then $i^*\\mathcal L$ is ample for example by Morphisms, Lemma 0892'"
+   }
+  },
+  {
+   "text": "(The ideal sheaf is nilpotent.) Let $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ be the ideal sheaf of $i$, a quasi-coherent sheaf of ideals [def-sbc-closed-immersion-ideal-sheaf]; its powers $\\mathcal I^k$ are the quasi-coherent ideals with $\\mathcal I^k(U)=\\mathcal I(U)^k$ on affine opens $U$ [def-sbc-ideal-sheaf-powers]. The underlying set of the closed subscheme cut out by $\\mathcal I$ is $V(\\mathcal I)=\\{x:\\mathcal I_x\\neq\\mathcal O_{X,x}\\}$ and equals $i(Z)$ [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine]; as $i$ is a homeomorphism onto $X$, $V(\\mathcal I)=X$. The module $\\mathcal O_X$ is quasi-coherent (on an affine open $U=\\operatorname{Spec}A$ [def-weil-affine-spectrum] it is $\\widetilde A$) and of finite type (the identity $\\mathcal O_X\\to\\mathcal O_X$ is a surjection from $\\mathcal O_X^{\\oplus1}$) [pqf-def-coherent], hence coherent since $X$ is locally Noetherian [pqf-lem-coherent-ft-locnoeth]. Its support [def-weil-pbc-closed-subset-proper-over-base] is $X$ (each stalk $\\mathcal O_{X,x}$ is a local ring, so nonzero), which is contained in $V(\\mathcal I)=X$. By [lem-weil-pbc-coherent-support-power-ideal-kills] applied to $\\mathcal F=\\mathcal O_X$ and $\\mathcal K=\\mathcal I$, $\\mathcal I^t\\mathcal O_X=0$ for some $t\\ge0$. Here $\\mathcal I^t\\mathcal O_X$ is the image of $\\mathcal I^t\\otimes_{\\mathcal O_X}\\mathcal O_X\\to\\mathcal O_X$ [def-weil-pbc-coherent-formal-module] (0), which is $\\mathcal I^t$ itself (for $t=0$, $\\mathcal O_X$). If $t=0$ then $\\mathcal O_X=0$ and so $\\mathcal I=0$. In every case $\\mathcal I^m=0$ for all $m\\ge\\max(t,1)$, since $\\mathcal I^m(U)=\\mathcal I(U)^m\\subseteq\\mathcal I(U)^t=0$ on affine opens and a quasi-coherent module vanishing on an affine open cover is zero. Fix $n\\ge2$ with $\\mathcal I^n=0$.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "def-weil-affine-spectrum",
+    "pqf-def-coherent",
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-weil-pbc-closed-subset-proper-over-base",
+    "lem-weil-pbc-coherent-support-power-ideal-kills",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MS (coherent-lemma-ample-on-reduction, coherent.tex line 4737), proof, first paragraph: 'Since $i(Z) = X$ set theoretically we see that $\\mathcal I^n = 0$ for some $n$ by Lemma 01Y9'"
+   }
+  },
+  {
+   "text": "(The chain of closed subschemes.) For $1\\le k\\le n$ let $i_k:Z_k\\to X$ be a closed immersion with ideal sheaf $\\mathcal I^k$ [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme]: for $k=1$ take $Z_1=Z$, $i_1=i$ (ideal sheaf $\\mathcal I$); for $k=n$ take $Z_n=X$, $i_n=\\mathrm{id}_X$ (a closed immersion [def-weil-closed-immersion] with ideal sheaf $\\ker(\\mathrm{id})=0=\\mathcal I^n$); for $1<k<n$ any closed immersion with ideal sheaf $\\mathcal I^k$. For every affine open $U\\subseteq X$ with $R=\\mathcal O_X(U)$ and $I=\\mathcal I(U)$, the open $i_k^{-1}(U)$ is affine and $i_k^{-1}(U)\\to U$ is $\\operatorname{Spec}(R/I^k)\\to\\operatorname{Spec}R$ [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme], [def-sbc-ideal-sheaf-powers] (for $k=1,n$ by the same node together with [lem-weil-pbc-closed-immersions-equal-ideal-isomorphic], which identifies $Z_k$ with the closed subscheme it constructs, over $X$). For $2\\le k\\le n$, $\\mathcal I^k\\subseteq\\mathcal I^{k-1}$ (on affine opens $I^k\\subseteq I^{k-1}$), so there is a closed immersion $j_k:Z_{k-1}\\to Z_k$ with $i_k\\circ j_k=i_{k-1}$ [lem-weil-pbc-closed-immersion-factor-ideal-inclusion].",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+    "def-weil-closed-immersion",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
+    "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MS (coherent-lemma-ample-on-reduction, coherent.tex line 4737), proof, first paragraph: 'Consider the sequence $X = Z_n \\supset Z_{n-1} \\supset \\ldots \\supset Z_1 = Z$ of closed subschemes cut out by $0 = \\mathcal I^n \\subset \\mathcal I^{n-1} \\subset \\ldots \\subset \\mathcal I$'"
+   }
+  },
+  {
+   "text": "(Each $Z_k$ is Noetherian and each $j_k$ is a homeomorphism.) By [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine], $i_k(Z_k)=V(\\mathcal I^k)$, and on an affine open $U$ (notation of step 3) $V(\\mathcal I^k)\\cap U=V(I^k)=V(I)=V(\\mathcal I)\\cap U$, since a prime ideal contains $I^k$ iff it contains $I$. Hence $i_k(Z_k)=V(\\mathcal I)=X$ (step 2), and $i_k$, a homeomorphism onto its closed image [def-weil-closed-immersion], is a homeomorphism $Z_k\\to X$. So $Z_k$ is quasi-compact [def-weil-pbc-quasi-compact-scheme], $X$ being so. Take an affine open covering $X=\\bigcup_aU_a$ with $R_a=\\mathcal O_X(U_a)$ Noetherian [pqf-def-locnoeth]; then $Z_k=\\bigcup_ai_k^{-1}(U_a)$ with $i_k^{-1}(U_a)\\cong\\operatorname{Spec}(R_a/\\mathcal I(U_a)^k)$ (step 3) and $R_a/\\mathcal I(U_a)^k$ Noetherian (an ascending chain of ideals of the quotient pulls back to an ascending chain of ideals of $R_a$) [def-weil-pbc-noetherian-ring]; so $Z_k$ is locally Noetherian, hence Noetherian. Since $i_k\\circ j_k=i_{k-1}$ with $i_k,i_{k-1}$ homeomorphisms onto $X$, $j_k=i_k^{-1}\\circ i_{k-1}$ on underlying spaces is a homeomorphism.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-quasi-compact-scheme",
+    "pqf-def-locnoeth",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MS (coherent-lemma-ample-on-reduction, coherent.tex line 4737), proof, first paragraph: the $Z_k$ are closed subschemes of the Noetherian scheme $X$ with the same underlying space (implicit in the reduction)"
+   }
+  },
+  {
+   "text": "(Each $j_k$ has a square-zero ideal sheaf.) Let $2\\le k\\le n$ and $\\mathcal J_k=\\ker(\\mathcal O_{Z_k}\\to j_{k*}\\mathcal O_{Z_{k-1}})$, the ideal sheaf of $j_k$ [def-sbc-closed-immersion-ideal-sheaf]. The opens $V=i_k^{-1}(U)$, $U\\subseteq X$ affine, are affine and cover $Z_k$, with $V\\cong\\operatorname{Spec}(R/I^k)$ and $j_k^{-1}(V)=i_{k-1}^{-1}(U)\\cong\\operatorname{Spec}(R/I^{k-1})$ (step 3). On global sections over these, $i_k\\circ j_k=i_{k-1}$ says that the composite $R\\to R/I^k\\to\\mathcal O_{Z_{k-1}}(j_k^{-1}V)=R/I^{k-1}$ is the quotient map; since $R\\to R/I^k$ is surjective, the ring map of $j_k$ over $V$ is the canonical surjection $R/I^k\\to R/I^{k-1}$, with kernel $I^{k-1}/I^k$. So $\\mathcal J_k(V)=I^{k-1}/I^k$ [def-sbc-closed-immersion-ideal-sheaf], and $\\mathcal J_k(V)^2=(I^{2k-2}+I^k)/I^k=0$ because $2k-2\\ge k$ for $k\\ge2$. Then $\\mathcal J_k^2|_V=(\\mathcal J_k(V)^2)^\\sim=0$ for every $V$ of this affine open cover [def-sbc-ideal-sheaf-powers], so $\\mathcal J_k^2=0$ (a sheaf zero on an open cover is zero).",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MS (coherent-lemma-ample-on-reduction, coherent.tex line 4737), proof, first paragraph: 'Then each of the closed immersions $Z_{i-1} \\to Z_i$ is defined by a coherent sheaf of ideals of square zero'"
+   }
+  },
+  {
+   "text": "(The pulled back modules.) For $1\\le k\\le n$ put $\\mathcal L_k=i_k^*\\mathcal L$, an invertible $\\mathcal O_{Z_k}$-module [lem-weil-pbc-invertible-pullback-invertible]. Then $\\mathcal L_1=i^*\\mathcal L$, $\\mathcal L_n=\\mathrm{id}_X^*\\mathcal L\\cong\\mathcal L$, and for $2\\le k\\le n$, $j_k^*\\mathcal L_k=j_k^*i_k^*\\mathcal L\\cong(i_k\\circ j_k)^*\\mathcal L=\\mathcal L_{k-1}$ [lem-pc-module-pullback-identity-composition], [def-pc-module-pullback]. Ampleness of an invertible module [def-weil-pbc-ample-invertible-module] depends only on its isomorphism class: an isomorphism $\\varphi:\\mathcal M\\cong\\mathcal N$ induces isomorphisms $\\varphi^{\\otimes m}:\\mathcal M^{\\otimes m}\\cong\\mathcal N^{\\otimes m}$ [def-pur-sheaf-tensor-product] and, on stalks, $s_x\\in\\mathfrak m_x\\mathcal M^{\\otimes m}_x$ iff $\\varphi^{\\otimes m}(s)_x\\in\\mathfrak m_x\\mathcal N^{\\otimes m}_x$, so $X_s=X_{\\varphi^{\\otimes m}(s)}$ for every global section $s$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-invertible",
+    "lem-pc-module-pullback-identity-composition",
+    "def-pc-module-pullback",
+    "def-weil-pbc-ample-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MS (coherent-lemma-ample-on-reduction, coherent.tex line 4737), proof, first paragraph, implicit: the restrictions of $\\mathcal L$ to the $Z_k$ and their compatibility along $Z_{k-1}\\to Z_k$"
+   }
+  },
+  {
+   "text": "(Induction; conclusion.) Claim: for $1\\le k\\le n$, $\\mathcal L_k$ is ample on $Z_k$. Base $k=1$: $\\mathcal L_1=i^*\\mathcal L$ is ample by assumption. Step: let $2\\le k\\le n$ and $\\mathcal L_{k-1}$ ample. Then $j_k^*\\mathcal L_k\\cong\\mathcal L_{k-1}$ is ample (step 6), and $j_k:Z_{k-1}\\to Z_k$ is a closed immersion of Noetherian schemes (steps 3, 4) whose ideal sheaf has square zero (step 5), with $\\mathcal L_k$ invertible (step 6); by [lem-sc-ample-square-zero-thickening], $\\mathcal L_k$ is ample. For $k=n$: $\\mathcal L_n\\cong\\mathcal L$ is ample, so $\\mathcal L$ is ample on $X$ (step 6).",
+   "uses": [
+    "lem-sc-ample-square-zero-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 09MS (coherent-lemma-ample-on-reduction, coherent.tex line 4737), proof, first paragraph, last sentence: 'In this way we reduce to the case that $\\mathcal I^2 = 0$', and the second and third paragraphs, which treat that case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "def-weil-affine-spectrum",
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersions-equal-ideal-isomorphic",
+  "lem-weil-pbc-closed-immersion-factor-ideal-inclusion",
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "lem-pc-module-pullback-identity-composition",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "lem-sc-ample-square-zero-thickening"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 09MS (coherent-lemma-ample-on-reduction, coherent.tex line 4737) and its proof (first paragraph: the forward direction by Morphisms 0892 and the reduction to $\\mathcal I^2=0$ by Lemma 01Y9; second and third paragraphs: the square-zero case, carried by lem-sc-ample-square-zero-thickening)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,7 +184,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +200,47 @@
   "slopmaster2": {
    "state": "none"
   }
- }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-ample-on-reduction-noetherian",
+  "worker": "stage1",
+  "summary": "Split along Stacks 09MS (coherent.tex line 4737, tag verified in tags/tags) and its proof. Step 1: forward direction by 0892 (existing node lem-weil-pbc-pullback-ample-invertible) since a closed immersion is finite hence affine (Mathlib leaf). Steps 2-7: the first paragraph of the proof, written out: the ideal sheaf I is nilpotent by 01Y9 (existing node lem-weil-pbc-coherent-support-power-ideal-kills, applied to F=O_X, coherent by 01XZ, with V(I)=i(Z)=X); the closed subschemes Z_k cut out by I^k (existing Mathlib leaves 01HO/01QO), each Noetherian and homeomorphic to X, the closed immersions Z_{k-1}->Z_k with square-zero ideal I^{k-1}/I^k (computed on affines), the pullbacks L_k=i_k^*L with j_k^*L_k = L_{k-1}, and the induction (base, step, conclusion) which the source compresses into 'In this way we reduce to the case that I^2=0'. The square-zero case (the second and third paragraphs of the proof, using 01QY, 0B8S, 01XR (via 09MR) and 01YQ) is one new unsplit node, lem-sc-ample-square-zero-thickening, strictly weaker in hypotheses than the item's (I^2=0 instead of a homeomorphism). Statement unchanged; it agrees with 09MS hypothesis by hypothesis. No sorry-free slopmaster2 declaration states the item or the new node (grep of WeilConjectures and Comparator for the id, 09MS, ample with thickening/nilpotent/homeomorphism; the only ample-on-reduction Lean is Modules/AmpleReduced.lean, Stacks 0BD4 (3), ample families in characteristic p, another statement). Whole-blueprint search (09MS, ample reduction, ample homeomorphism, ample closed immersion, ample nilpotent, thickening ample, square zero ample): no blueprint node states it.",
+  "blueprint": "The blueprint ancestor lem-sc-pic-proper-ntorsion has no proof text for this input; the steps realize the place inherited through lem-sc-dim-one-ample-invertible and lem-sc-dim-one-quasi-projective, namely 09NZ's last sentence 'Then L is ample by an application of Cohomology of Schemes, Lemma 09MS': step 1 the 'only if' of 09MS, steps 2-7 the 'if' (first paragraph of 09MS's proof, with the square-zero case of paragraphs 2-3 in the new node).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "step 1 takes from its statement that the pullback of an ample invertible module along an affine morphism is ample (Stacks 0892, which 09MS cites); generic fact, no node of sk-thm-curveestimate states it"
+   },
+   {
+    "node": "lem-weil-pbc-coherent-support-power-ideal-kills",
+    "why": "step 2 takes from its statement that on a Noetherian scheme K^t F = 0 for some t when Supp F lies in V(K) (Stacks 01Y9, which 09MS cites); generic fact, no node of sk-thm-curveestimate states it"
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "why": "steps 2 and 4 take from its statement that the closed subscheme cut out by a quasi-coherent ideal K has underlying set V(K), with V(K) on an affine open equal to V(K(U)); generic fact, no node of sk-thm-curveestimate states it"
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "step 2 takes from its statement that a quasi-coherent module of finite type on a locally Noetherian scheme is coherent (Stacks 01XZ), applied to O_X; generic fact, no node of sk-thm-curveestimate states it"
+   },
+   {
+    "node": "lem-pc-module-pullback-identity-composition",
+    "why": "step 6 takes (h o g)^* = g^* h^* from its statement; generic fact about module pullback, no node of sk-thm-curveestimate states it"
+   }
+  ]
+ },
+ "reviewed": {
+  "by": "L",
+  "date": "2026-10-10",
+  "note": "split read in full against 09MS: forward direction by affine pullback (tool use), nilpotence of the ideal sheaf (01Y9 node), chain Z_k by I^k with square-zero steps (written out, the source says \"reduce to I^2=0\"), induction through the new node lem-sc-ample-square-zero-thickening, which carries the cohomological heart of 09MS; 5 declared tool uses accepted as black boxes"
+ },
+ "tool_uses": [
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "lead_note": "The new node lem-sc-ample-square-zero-thickening is the cohomological heart of 09MS (paragraphs 2-3); its split needs the sequence 0 -> I(x)L^n -> L^n -> i_*i^*L^n -> 0, 01QY, 0B8S (boundary is a derivation), 01XR via 09MR, and 01YQ (= lem-weil-pbc-finite-surjective-affine-target-noetherian)."
 }
