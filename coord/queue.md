@@ -46,7 +46,6 @@
 | `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
-| `lem-sc-finite-duality` | 3011 | rests_on_sorry |
 | `lem-sc-regular-curve-torsionfree-free` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
 | `lem-exc-coinduced-homotopy-continuous` | 3012 | none |
@@ -57,6 +56,7 @@
 | `lem-sc-dvr-saturation-line` | 3012 | none |
 | `lem-sc-ext-locally-free` | 3012 | sorry_here |
 | `lem-sc-exterior-top-direct-sum` | 3012 | none |
+| `lem-sc-finite-duality-trace` | 3012 | none |
 | `lem-sc-local-splitting-finite-free` | 3012 | none |
 | `lem-sc-torsion-sections-generic` | 3012 | none |
 | `lem-sc-p1-coherent-proj-representation` | 3013 | none |
@@ -881,7 +881,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 341 nodes that wait for stage 1, 1023 nodes that wait for a statement dependency.
+Not open yet: 341 nodes that wait for stage 1, 1024 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
