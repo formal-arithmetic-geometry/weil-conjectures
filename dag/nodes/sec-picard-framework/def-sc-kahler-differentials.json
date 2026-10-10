@@ -3,24 +3,64 @@
  "blueprint": {
   "is": "def-sc-kahler-differentials",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Kähler differentials and the canonical sheaf of a smooth curve",
- "statement": "Let $C$ be a smooth curve over $k$.\nThe *sheaf of Kähler differentials* of $C$ over $k$ is\n\n$$\n\\Omega^1_{C/k}:=\\Delta^*\\bigl(\\mathcal I/\\mathcal I^2\\bigr),\n$$\n\nwhere $\\Delta:C\\to C\\times_kC$ is the diagonal immersion and\n$\\mathcal I\\subseteq\\mathcal O_{C\\times_kC}$ the ideal sheaf of the\ndiagonal; equivalently, on an affine open\n$U=\\operatorname{Spec}A\\subseteq C$, $\\Omega^1_{C/k}|_U$ is the\nsheaf associated with the $A$-module $\\Omega^1_{A/k}$ of Kähler\ndifferentials of the $k$-algebra $A$ with its universal\nderivation $d:A\\to\\Omega^1_{A/k}$, the standard affine description.\nThe *canonical sheaf* of $C$ is\n\n$$\n\\omega_C:=\\Omega^1_{C/k}.\n$$",
+ "statement": "Let $C$ be a smooth curve over $k$ [def-sc-curves].\nThe *sheaf of Kähler differentials* of $C$ over $k$ is\n\n$$\n\\Omega^1_{C/k}:=\\Delta^*\\bigl(\\mathcal I/\\mathcal I^2\\bigr)\n$$\n\n[def-pc-module-pullback], where $\\Delta:C\\to C\\times_kC$ is the diagonal, a closed immersion\nbecause $C$ is separated over $k$ [def-sc-curves], and\n$\\mathcal I\\subseteq\\mathcal O_{C\\times_kC}$ is the ideal sheaf of the\ndiagonal. By [lem-sc-smooth-proper-diagonal-conormal-differentials] (applied to $C\\to\\operatorname{Spec}k$)\nthis is canonically isomorphic to the sheaf which, on every affine open\n$U=\\operatorname{Spec}A\\subseteq C$, is the\nsheaf associated with the $A$-module $\\Omega_{A/k}$ of Kähler\ndifferentials of the $k$-algebra $A$ with its universal\nderivation $d:A\\to\\Omega_{A/k}$ [def-weil-pbc-kahler-differentials].\nThe *canonical sheaf* of $C$ is\n\n$$\n\\omega_C:=\\Omega^1_{C/k}.\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-coherence/def-sc-kahler-differentials.md",
   "place": "node def-sc-kahler-differentials, order 634"
  },
  "stmt_deps": [
-  "def-sc-curves"
+  "def-sc-curves",
+  "def-pc-module-pullback",
+  "lem-sc-smooth-proper-diagonal-conormal-differentials",
+  "def-weil-pbc-kahler-differentials"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of Kähler differentials of a smooth curve defined by the diagonal conormal sheaf",
+   "results": "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj; CommRingCat.KaehlerDifferential; KaehlerDifferential; KaehlerDifferential.D_apply; no scheme-level diagonal-pullback definition",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "relativeDifferentials KaehlerDifferential diagonal conormal",
+   "results": "Unknown identifier relativeDifferentials; no hit",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|KaehlerDifferential|diagonal [Mathlib/AlgebraicGeometry]",
+   "results": "Mathlib has diagonal morphism declarations but no scheme-level relative Kähler differential sheaf definition; project declaration is in WeilConjectures/AlgebraicGeometry/Modules/Differentials.lean",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf of Kahler differentials of a smooth curve",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentSheaf|Hom\\.Ω|sheafOfKaehler|relativeDifferentials [Mathlib]",
+   "results": "only PresheafOfModules.DifferentialsConstruction.relativeDifferentials' (Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193), an unsheafified presheaf for a morphism of presheaves of rings, not instantiated for schemes",
+   "date": "2026-10-10",
+   "verdict": "no exact match",
+   "by": "R-kdf2944"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -44,5 +84,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-coherence"
+ "unit": "sk-thm-picard-coherence",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sc-kahler-differentials",
+  "worker": "stage1",
+  "summary": "Checked the imported scheme-level definition against the project source and the existing DAG. The source defines relative differentials as the sheafification of the presheaf of ring-level Kähler differentials, while the item records the standard equivalent diagonal conormal description and the canonical sheaf abbreviation. The existing def-sc-curves node supplies the only statement dependency; the existing def-weil-pbc-kahler-differentials and lem-sc-kahler-differentials-diagonal-ideal nodes cover the ring-level construction and affine conormal identification, respectively, but neither restates this scheme-level definition. No new node is needed for a definition.",
+  "blueprint": "Realizes the imported definition node: the diagonal-pullback definition, its affine Kähler differential description, and the notation omega_C := Omega^1_{C/k}.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kdf2944",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kdf2944 (reviewer sub-agent of L); spot-checked: Mathlib grep (cotangentSheaf, Hom.Ω, sheafOfKaehler, relativeDifferentials): only the unsheafified presheaf relativeDifferentials' (ModuleCat/Differentials/Presheaf.lean:193), no scheme-level definition; no duplicate differentials definition in the DAG (lem-sc-smooth-proper-diagonal-conormal-differentials is the comparison lemma, not a definition); citers (lem-sc-canonical-sheaf, lem-sc-finite-duality, lem-sc-canonical-degree) use it for a curve over k; the general-X/S citer already defines Omega inline. Diagonal is a closed immersion since def-sc-curves curves are separated. FIX more, RETURN less: (1) C1: the 'equivalently' affine description is a non-elementary fact stated bare; now cited to existing lem-sc-smooth-proper-diagonal-conormal-differentials (applied to C->Spec k), added to stmt_deps; (2) B3: inline citations [def-sc-curves], [def-pc-module-pullback], [def-weil-pbc-kahler-differentials] added (def-sc-curves was in uses_not_cited; Omega_{A/k} was undefined), stmt_deps updated, closed-immersion remark added; mathlib_searches gains the reviewer grep.; 1 file(s) fixed by the reviewer"
+ }
 }
