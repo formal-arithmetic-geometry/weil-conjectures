@@ -23,9 +23,66 @@
   "def-weil-finite-type-morphism",
   "def-weil-pbc-fpqc-covering"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the field-extension flatness lemma, the ring map $k\\to K$ is flat. The induced morphism on affine spectra $p:\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is therefore flat.",
+   "uses": [
+    "lem-pc-field-extension-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 00HB"
+   }
+  },
+  {
+   "text": "Both Spec K and Spec k have one point, since K and k are fields. The unique point of Spec K maps to the unique point of Spec k, so p is surjective.",
+   "uses": [
+    "lem-pc-field-extension-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "spectra of fields"
+   }
+  },
+  {
+   "text": "The only nonempty affine open of Spec k is Spec k itself, and its inverse image under p is Spec K, which is affine and hence quasi-compact. Thus p is quasi-compact in the morphism convention.",
+   "uses": [
+    "lem-pc-field-extension-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies, Definition Tag 022B"
+   }
+  },
+  {
+   "text": "Apply the definition of an fpqc covering to the one-member family {p}. For the affine open Spec k choose the affine open Spec K in the source; its image is Spec k because p is surjective, and flatness was proved in Step 1. For the empty affine open choose the empty family. Hence {p} is an fpqc covering of Spec k.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-pc-field-extension-flat",
+    "lem-pc-field-extension-surjective",
+    "lem-pc-field-extension-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies, Definition Tag 022B and Lemma Tag 03L7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-field-extension-flat",
+  "lem-pc-field-extension-surjective",
+  "lem-pc-field-extension-quasi-compact",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topologies.tex",
+  "place": "Definition Tag 022B and Lemma Tag 03L7"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +107,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-proper-descends-field",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-field-extension-fpqc-cover",
+  "worker": "stage1",
+  "summary": "Split the field-extension fpqc-cover statement into three statement-only supports for flatness, surjectivity, and quasi-compactness of the spectrum morphism, then checked the singleton fpqc criterion directly from Definition 022B.",
+  "blueprint": "Steps 1-4 realize the preliminary field-extension fpqc covering fact in the ancestor blueprint proof for lem-pc-very-ample-descends.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fec",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fec (reviewer sub-agent of L); spot-checked: Source: Topologies Definition 022B (fpqc covering, read in etale-cohomology.tex/topologies.tex) and Lemma 03L7; the item statement is unchanged and agrees with def-weil-pbc-fpqc-covering (flat members; every affine open V is a finite union of images of affine opens, n>=0). Step 1 carried by lem-pc-field-extension-flat (flatness of Spec K -> Spec k, true: every K-module over field k is free). Step 2 by lem-pc-field-extension-surjective (both spectra are one point). Step 3 by lem-pc-field-extension-quasi-compact against def-weil-finite-type-morphism's quasi-compact clause (Spec K affine). Step 4 by def-weil-pbc-fpqc-covering plus Steps 1-2: affine opens of Spec k are empty (n=0) and Spec k (V_1 = Spec K, image Spec k by surjectivity). New nodes: statement-only, self-contained, cited defs exist (def-pc-field-extension, def-weil-flat-morphism, def-weil-surjective-morphism, def-weil-finite-type-morphism), created.item correct, three searches each, no Mathlib leaf; slopmaster2 sorry map has only sieve-based fpqcTopology declarations, none stating this exactly (B10 n/a). Small case K=k: identity, fpqc cover. Only split-owned fields of the item changed. Fixes: dag/nodes/sec-picard-framework/lem-pc-field-extension-flat.json: source.place: 00HB is Definition (flat ring map), not a lemma 'a field extension is flat'; dag/nodes/sec-picard-framework/lem-pc-field-extension-quasi-compact.json: source: Topologies 022B replaced by Schemes Lemma 01K4 (quasi-compactness via affine opens). Note: report mentions a citations.json not in the delivery (harmless). Start Sat Oct 10 04:09:26 PM UTC 2026, end Sat Oct 10 04:10:16 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }

@@ -1910,3 +1910,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:10 L: merged deliver/C1/lem-sc-proper-upper-shriek-composition (reviewer FIX+NODE(1); first push; new nodes: 4)
 - 16:10 L: thm-sp-grothendieck: construction clause added to the statement (which spectral sequence: the one of the double complex G(I) for a Cartan-Eilenberg resolution, 015N proof); reviewer R-gdc's doubt; J1 told in the return note
 - 16:10 L: merged deliver/E1/def-weil-pbc-sheaf-ext (reviewer PASS; first push; new nodes: 0)
+- 16:10 L: merged deliver/G1/lem-pc-field-extension-fpqc-cover (reviewer FIX; first push; new nodes: 3)
