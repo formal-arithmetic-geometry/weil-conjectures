@@ -1697,3 +1697,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:56 L: returned deliver/G1/lem-weil-pbc-zero-dimensional-cohomology (reviewer RETURN: 1. D1/C5: node lem-weil-pbc-geometric-point-cohomology (new): no step of the item cites it (step 2 uses only lem-weil-pb)
 - 14:56 L: merged deliver/K1/lem-pc-dim-zero-finite-over-field (reviewer PASS; first push; new nodes: 1)
 - 14:57 L: returned deliver/G1/lemma-weil-pbc-finite-refinement-etale-cover (reviewer RETURN: 1. D3: proof steps 2, 4 and 5: the induction still does not close. Step 2 states the claim with conclusion 'a finite, fi)
+- 14:57 L: returned deliver/F1/lem-sc-pic-lift-closed-immersion-dim-le-one (reviewer RETURN: 1. B3/C4: lem-sc-noetherian-cohomology-vanishing-abelian-dim-one, lem-sc-cohomology-closed-immersion-pushforward, steps )
