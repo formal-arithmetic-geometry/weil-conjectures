@@ -44,9 +44,11 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
   (`prop-pod-perfect-local-model`): a bounded complex of finite projective `Λ_X`-modules lies in
   `Dctf(X, Λ)`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_of_isDualizable`
-  (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`. This is still
-  `sorry`: it needs the local description of dualizable objects (Stacks, Tag 0FPV) and the
-  locality of étale origin on the pro-étale site.
+  (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`, reduced to
+  `AlgebraicGeometry.ProEtale.DerivedCategory.bounded_and_homology_of_isDualizable`, which is
+  still `sorry`.
+- `AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_boundedConstructible`:
+  `Dᵇc_proét(X, Λ)` is a triangulated subcategory at a finite coefficient ring.
 - `AlgebraicGeometry.ProEtale.isDualizable_derivedDual` (`lem-pod-coefficient-dual-perfect`):
   the coefficient dual of a perfect complex is perfect.
 - `AlgebraicGeometry.ProEtale.constructibleFiniteTor_derivedDual`
