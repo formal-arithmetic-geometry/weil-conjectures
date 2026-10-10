@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-finite-module-localization-zero-annihilator",
+ "kind": "statement",
+ "title": "A finite module killed elementwise by a multiplicative set is killed by one element of it",
+ "statement": "Let $A$ be a commutative ring, $S\\subseteq A$ a multiplicative subset and $M$ a finitely generated $A$-module [def-weil-finitely-generated-module] such that $S^{-1}M=0$ [def-weil-pbc-module-localization], i.e. for every $m\\in M$ there is $t\\in S$ with $tm=0$. Then there is $s\\in S$ with $sM=0$ (that is, $sm=0$ for all $m\\in M$).",
+ "source": {
+  "document": "literature/stacks-project/exercises.tex",
+  "place": "Exercises, Exercise 076A (exercise-localize-finite-module-zero, line 745: finite M with S^{-1}M=0 has f in S with M_f=0; the form sM=0 is the one used in the proof of Smoothing Ring Maps, Lemma 07FC, smoothing.tex line 2301: 'Hence we can find an s in S such that s annihilates Q'). Tag verified in tags/tags: 076A,exercises-exercise-localize-finite-module-zero"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Module.Finite R M, Subsingleton (LocalizedModule S M) → ∃ r ∈ S, ∀ m : M, r • m = 0",
+   "results": "LocalizedModule.subsingleton_iff (elementwise form only), LocalizedModule.mem_ker_mkLinearMap_iff, IsLocalizedModule.subsingleton_iff (Mathlib.Algebra.Module.LocalizedModule.Basic), LocalizedModule.exists_subsingleton_away (Mathlib.RingTheory.Support, only for S = primeCompl p and conclusion M_f = 0), Module.Finite.of_isLocalizedModule",
+   "date": "2026-10-10",
+   "verdict": "no match (closest: LocalizedModule.exists_subsingleton_away, prime complements only)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finitely generated module whose localization at S is zero is annihilated by an element of S",
+   "results": "IsLocalization.map_eq_zero_iff, Submonoid.LocalizationMap.mk'_eq_zero_iff, LocalizedModule.subsingleton_iff, Module.Finite.instLocalizationLocalizedModule, IsLocalizedModule.mk'_eq_zero'",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "M finite R-module, S submonoid, every element of M is killed by some element of S, then there is s in S with s • M = 0",
+   "results": "Submodule.exists_isTorsionBy (Mathlib.Algebra.Module.Torsion.Basic, powers of p only, conclusion for one generator's order), Submodule.exists_sub_one_mem_and_smul_eq_zero_of_fg_of_le_smul (Nakayama), Submodule.mem_torsion'_iff, Module.IsTorsionBySet, Submodule.isTorsion'_powers_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, Subsingleton (LocalizedModule _ _), Module.annihilator",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE '∃ (r|s|t|a) ∈ (S|M|T), ∀ (m|x|n)[^,]*, .* • .* = 0' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn \"IsTorsion' \" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | grep -E 'theorem|lemma'; sed -n 215,240p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Support.lean",
+   "results": "no uniform-annihilator statement; IsTorsion' lemmas only for Submonoid.powers p (Torsion/Basic.lean:892, :900; PID.lean:172); LocalizedModule.exists_subsingleton_away (Support.lean:222) for p.primeCompl with conclusion Subsingleton (LocalizedModule.Away f M), proved via Module.support_eq_zeroLocus",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ogoma",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

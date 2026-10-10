@@ -2,17 +2,87 @@
  "id": "lem-weil-pbc-ogoma",
  "kind": "statement",
  "title": "Ogoma's lemma",
- "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $M$ a finitely generated $A$-module and $S\\subset A$ a multiplicative subset, with $S^{-1}M$ the localization of $M$. Let $\\pi\\in A$ and suppose $\\operatorname{Ker}(\\pi:S^{-1}M\\to S^{-1}M)=\\operatorname{Ker}(\\pi^2:S^{-1}M\\to S^{-1}M)$. Then there is $s\\in S$ such that for every integer $n>0$, $\\operatorname{Ker}(s^n\\pi:M\\to M)=\\operatorname{Ker}((s^n\\pi)^2:M\\to M)$.",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $M$ a finitely generated $A$-module [def-weil-finitely-generated-module] and $S\\subset A$ a multiplicative subset, with $S^{-1}M$ the localization of $M$ at $S$ [def-weil-pbc-module-localization]. Let $\\pi\\in A$ and suppose $\\operatorname{Ker}(\\pi:S^{-1}M\\to S^{-1}M)=\\operatorname{Ker}(\\pi^2:S^{-1}M\\to S^{-1}M)$. Then there is $s\\in S$ such that for every integer $n>0$, $\\operatorname{Ker}(s^n\\pi:M\\to M)=\\operatorname{Ker}((s^n\\pi)^2:M\\to M)$.",
  "source": {
   "document": "literature/stacks-project/smoothing.tex",
   "place": "Smoothing Ring Maps, Lemma Tag 07FC (lemma-ogoma, line 2287), Section 07FB"
  },
  "stmt_deps": [
-  "def-weil-pbc-noetherian-ring"
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $K=\\operatorname{Ker}(\\pi:M\\to M)$ and $K'=\\{m\\in M:\\ \\pi^2m/1=0\\text{ in }S^{-1}M\\}$, the preimage of $\\operatorname{Ker}(\\pi^2:S^{-1}M\\to S^{-1}M)$ under the $A$-linear localization map $M\\to S^{-1}M$ [def-weil-pbc-module-localization]; both are $A$-submodules of $M$, and $K\\subseteq K'$ since $\\pi m=0$ gives $\\pi^2m/1=0$. Let $Q=K'/K$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma), proof, lines 2296-2303"
+   }
+  },
+  {
+   "text": "Every element of $Q$ is killed by an element of $S$, i.e. $S^{-1}Q=0$ ('by assumption' in Stacks): let $m\\in K'$. Multiplication by $\\pi$ on $S^{-1}M$ sends $x/t$ to $\\pi x/t$ [def-weil-pbc-module-localization], so $\\pi^2(m/1)=\\pi^2m/1=0$, i.e. $m/1\\in\\operatorname{Ker}(\\pi^2)=\\operatorname{Ker}(\\pi)$ on $S^{-1}M$ by hypothesis; hence $\\pi m/1=\\pi(m/1)=0$, so $t\\pi m=0$ for some $t\\in S$ (an element $x/1$ is $0$ iff $ux=0$ for some $u\\in S$). Thus $\\pi(tm)=0$, i.e. $tm\\in K$, and $t$ kills the class of $m$ in $Q$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma), proof, lines 2296-2303"
+   }
+  },
+  {
+   "text": "$Q$ is a finitely generated $A$-module: $K'$ is a submodule of the finitely generated module $M$ over the Noetherian ring $A$, hence finitely generated [lem-weil-pbc-noetherian-submodule-finite], and the images in $Q=K'/K$ of finitely many generators of $K'$ generate $Q$ [def-weil-finitely-generated-module].",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma), proof, lines 2296-2303"
+   }
+  },
+  {
+   "text": "By Steps 2 and 3, $Q$ is a finitely generated $A$-module with $S^{-1}Q=0$, so there is $s\\in S$ with $sQ=0$ [lem-weil-pbc-finite-module-localization-zero-annihilator]; that is, $sm\\in K$, i.e. $\\pi sm=0$, for every $m\\in K'$.",
+   "uses": [
+    "lem-weil-pbc-finite-module-localization-zero-annihilator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma), proof, lines 2296-2303"
+   }
+  },
+  {
+   "text": "This $s$ works ('Then $s$ works' in Stacks; written out): let $n>0$. If $s^n\\pi m=0$ then $(s^n\\pi)^2m=s^n\\pi(s^n\\pi m)=0$, so $\\operatorname{Ker}(s^n\\pi)\\subseteq\\operatorname{Ker}((s^n\\pi)^2)$. Conversely let $(s^n\\pi)^2m=s^{2n}\\pi^2m=0$. Then in $S^{-1}M$, $\\pi^2m/1=s^{2n}\\pi^2m/s^{2n}=0$ [def-weil-pbc-module-localization], so $m\\in K'$, and by Step 4 $\\pi sm=0$; since $n\\ge1$, $s^n\\pi m=s^{n-1}(\\pi sm)=0$. Hence $\\operatorname{Ker}(s^n\\pi:M\\to M)=\\operatorname{Ker}((s^n\\pi)^2:M\\to M)$ for every $n>0$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma), proof, lines 2296-2303"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-finite-module-localization-zero-annihilator"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma 07FC (lemma-ogoma, line 2287), Section 07FB (section-separable); proof lines 2296-2303. Tags verified in tags/tags: 07FB,smoothing-section-separable; 07FC,smoothing-lemma-ogoma"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,7 +107,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +127,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-ogoma",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 07FC (smoothing.tex 2287-2295) and kept; added the citations def-weil-finitely-generated-module and the new definition def-weil-pbc-module-localization (localization of a module at a multiplicative subset, Stacks 07JZ, Mathlib leaf LocalizedModule; the existing def-weil-pbc-module-localization-away covers only S={1,f,f^2,...}). Proof written in five steps following the Stacks proof (K, K', Q=K'/K; S^{-1}Q=0 written out elementwise; Q finite by the new Mathlib leaf lem-weil-pbc-noetherian-submodule-finite (Stacks 00IK, Submodule.FG.of_le); s in S with sQ=0 by the new unsplit node lem-weil-pbc-finite-module-localization-zero-annihilator (Stacks Exercise 076A, absent from Mathlib in this generality); 'then s works' written out). The Stacks proof does not use stabilization of kernels of powers, exactness of localization or Artin-Rees, contrary to the guesses in the brief. The citer lem-weil-pbc-popescu-resolve-char-p uses the case n=1, which the statement covers. Mathlib search of the item itself (three kinds) kept as recorded by its creator."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps follow Stacks 07FC: K, K', Q = K'/K; S^{-1}Q = 0; Q finite (new 00IK leaf, Noetherian/Basic.lean:381); s killing Q (new unsplit node, Exercise 076A); 'then s works' written out. New definition leaf for S^{-1}M (LocalizedModule, Basic.lean:89). Tags 07FC, 07JZ, 00CN, 00IK, 076A verified."
+ }
 }

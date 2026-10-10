@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-noetherian-submodule-finite",
+ "kind": "statement",
+ "title": "Submodules of a finite module over a Noetherian ring are finite",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $M$ a finitely generated $A$-module [def-weil-finitely-generated-module]. Then every $A$-submodule $N\\subseteq M$ is a finitely generated $A$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00IK (lemma-Noetherian-basic, line 12154), second assertion ('Any submodule of a finite R-module is finite'). Tag verified in tags/tags: 00IK,algebra-lemma-Noetherian-basic"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every submodule of a finitely generated module over a Noetherian ring is finitely generated",
+   "results": "Submodule.FG.of_le, Submodule.FG.of_le_of_isNoetherian, isNoetherian_of_isNoetherianRing_of_finite (Mathlib.RingTheory.Noetherian.Basic), IsNoetherian.noetherian, isNoetherian_def (Mathlib.RingTheory.Noetherian.Defs), Module.IsNoetherian.finite",
+   "date": "2026-10-10",
+   "verdict": "match: Submodule.FG.of_le"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "submodule of a finitely generated module over a Noetherian ring is finitely generated",
+   "results": "isNoetherian_of_fg_of_noetherian, Submodule.FG.of_le, Submodule.FG.of_le_of_isNoetherian (Mathlib.RingTheory.Noetherian.Basic), IsNoetherian.noetherian, isNoetherian_submodule (Mathlib.RingTheory.Noetherian.Defs)",
+   "date": "2026-10-10",
+   "verdict": "match: Submodule.FG.of_le"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma FG.of_le' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Noetherian/Basic.lean; grep -n 'Module.Finite R M ↔ (⊤ : Submodule R M).FG' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Finiteness/Defs.lean",
+   "results": "Submodule.FG.of_le (RingTheory/Noetherian/Basic.lean:381: [Ring R] [IsNoetherianRing R] {S T : Submodule R M}, T.FG → S ≤ T → S.FG); Module.finite_def (RingTheory/Finiteness/Defs.lean:129: Module.Finite R M ↔ (⊤ : Submodule R M).FG); read with sed -n",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Submodule.FG.of_le",
+  "file": "Mathlib/RingTheory/Noetherian/Basic.lean",
+  "line": 381,
+  "how": "specializes in one line: take T = ⊤, which is FG by Module.finite_def (Finiteness/Defs.lean:129) since M is Module.Finite (= def-weil-finitely-generated-module), and S = N ≤ ⊤; N.FG is Module.Finite R N by Module.Finite.iff_fg. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ogoma",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
