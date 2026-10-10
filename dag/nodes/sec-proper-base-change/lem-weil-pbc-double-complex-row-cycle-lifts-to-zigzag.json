@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (normality of the strict henselization in Stacks 09Z5); Tor symmetry is used by the flat-module injectivity input along this branch; within the proof of Tor symmetry (Stacks 00M3, lemma-tor-left-right): 'Hence the double complex satisfies the conditions of Lemma lemma-no-spectral-sequence' and the third equality $H_i(U(A)_\\bullet)=H_i(R(A)_\\bullet)$, with the functoriality paragraph; within the proof of Stacks 00M1 (the node lem-weil-pbc-double-complex-cokernel-homology-iso): 'First we show that these maps are surjective ... And so on until a full zig-zag is found. Of course surjectivity of $\\mathbf H_i\\to H_i(U(A))$ is shown similarly.'",
+   "via": [
+    "lem-weil-pbc-double-complex-cokernel-homology-iso",
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-flat-mod-injective",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "In a double complex with exact rows a cycle of the row-cokernel complex lifts to a zig-zag",
+ "statement": "Let $R$ be a commutative ring and let $A=(A_{p,q},d,\\delta)_{p,q\\ge0}$ be a homological double complex of $R$-modules: $R$-modules $A_{p,q}$ ($p,q\\ge0$) and $R$-linear maps $d_{p,q}:A_{p,q}\\to A_{p-1,q}$ ($p\\ge1$) and $\\delta_{p,q}:A_{p,q}\\to A_{p,q-1}$ ($q\\ge1$) with $d_{p-1,q}\\circ d_{p,q}=0$, $\\delta_{p,q-1}\\circ\\delta_{p,q}=0$ and $\\delta_{p-1,q}\\circ d_{p,q}=d_{p,q-1}\\circ\\delta_{p,q}$ whenever defined; put $A_{p,q}=0$ if $p<0$ or $q<0$ and let $d_{0,q}$, $\\delta_{p,0}$ and all maps out of or into a zero module be $0$. A morphism $\\Phi:A\\to B$ of such double complexes is a family of $R$-linear maps $\\Phi_{p,q}:A_{p,q}\\to B_{p,q}$ with $\\Phi d=d\\Phi$ and $\\Phi\\delta=\\delta\\Phi$. Let $A^{\\mathrm{rt}}_q=\\operatorname{Coker}(d_{1,q}:A_{1,q}\\to A_{0,q})$ with projection $\\pi_q:A_{0,q}\\to A^{\\mathrm{rt}}_q$ ($q\\ge0$); since $\\delta_{0,q}(\\operatorname{im}d_{1,q})=d_{1,q-1}(\\delta_{1,q}(A_{1,q}))\\subseteq\\operatorname{im}d_{1,q-1}$, the map $\\delta_{0,q}$ induces $\\delta^{\\mathrm{rt}}_q:A^{\\mathrm{rt}}_q\\to A^{\\mathrm{rt}}_{q-1}$ with $\\delta^{\\mathrm{rt}}_q\\pi_q=\\pi_{q-1}\\delta_{0,q}$ ($q\\ge1$), and $A^{\\mathrm{rt}}_\\bullet$ is a chain complex of $R$-modules concentrated in degrees $\\ge0$ [def-weil-pbc-module-chain-complex-homology]; a morphism $\\Phi$ induces the morphism of complexes $\\Phi^{\\mathrm{rt}}$ with $\\Phi^{\\mathrm{rt}}_q\\pi_q=\\pi_q\\Phi_{0,q}$. Assume that every row of $A$ is exact in positive degrees: for all $q\\ge0$ and $p\\ge1$ the sequence $A_{p+1,q}\\xrightarrow{d_{p+1,q}}A_{p,q}\\xrightarrow{d_{p,q}}A_{p-1,q}$ is exact at $A_{p,q}$ [def-weil-pbc-exact-sequence]. Let $Z_n(A)\\subseteq T_n(A)=\\bigoplus_{p+q=n}A_{p,q}$ and $B_n(A)\\subseteq T_n(A)$ be the modules of zig-zags and of trivial zig-zags of total degree $n$ [def-weil-pbc-double-complex-zigzag-module]. Then for every $n\\ge0$ and every $x\\in A_{0,n}$ such that $\\pi_n(x)$ is a cycle of $A^{\\mathrm{rt}}_\\bullet$ (that is, $n=0$ or $\\delta^{\\mathrm{rt}}_n(\\pi_n(x))=0$) there is a zig-zag $a\\in Z_n(A)$ with $a_{0,n}=x$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), tag verified in tags/tags (00M1,algebra-lemma-no-spectral-sequence); proof, lines 18464-18481: 'First we show that these maps are surjective. ... And so on until a full zig-zag is found.'"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-double-complex-zigzag-module",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bicomplex with exact rows: homology of cokernel of first column map is isomorphic to homology of total complex",
+   "results": "HomologicalComplex₂, HomologicalComplex.homologyIsCokernel, HomologicalComplex₂.total, ShortComplex.homologyIsCokernel, totalAux.d₁_eq, totalAux.d₁_eq' (definitions only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "diagram chase in a double complex of modules with exact rows: every cycle of the cokernel complex lifts to a zig-zag",
+   "results": "HomologicalComplex.cycles_left_exact, HomologySequence.composableArrows₃_exact, SnakeLemma.δ_aux, ShortComplex.Exact.lift_f_assoc, ComposableArrows.Exact.opcyclesIsoCycles_hom_fac, SnakeLemma.exact_δ_left (one complex, snake lemma; nothing on double complexes)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂, CategoryTheory.Limits.cokernel",
+   "results": "none (no Mathlib lemma combines bicomplexes and cokernels)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'HomologicalComplex₂' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'cokernel|Exact|exact'; grep -rn 'zig|Zig' Mathlib/Algebra/Homology Mathlib/CategoryTheory/Abelian",
+   "results": "HomologicalBicomplex.lean, TotalComplex.lean, TotalComplexShift.lean, BifunctorHomotopy.lean match only the tactic word `exact` (no cokernel complex, no exactness of rows); 'zig' only in LocalCohomology.lean:202 (zigzag_isConnected, connectedness of categories)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-double-complex-cokernel-homology-iso",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

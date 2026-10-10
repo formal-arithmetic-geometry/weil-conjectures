@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (normality of the strict henselization in Stacks 09Z5); Tor symmetry is used by the flat-module injectivity input along this branch; within the proof of Tor symmetry (Stacks 00M3, lemma-tor-left-right): 'Hence the double complex satisfies the conditions of Lemma lemma-no-spectral-sequence' and the third equality $H_i(U(A)_\\bullet)=H_i(R(A)_\\bullet)$, with the functoriality paragraph; within the proof of Stacks 00M1 (the node lem-weil-pbc-double-complex-cokernel-homology-iso): the 'canonical homomorphisms' $\\mathbf H_i(A)\\to H_i(R(A)_\\bullet)$ and $\\mathbf H_i(A)\\to H_i(U(A)_\\bullet)$ and the commutative diagram proving functoriality",
+   "via": [
+    "lem-weil-pbc-double-complex-cokernel-homology-iso",
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-flat-mod-injective",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The map from the zig-zag module to the homology of the row-cokernel complex",
+ "statement": "Let $R$ be a commutative ring and let $A=(A_{p,q},d,\\delta)_{p,q\\ge0}$ be a homological double complex of $R$-modules: $R$-modules $A_{p,q}$ ($p,q\\ge0$) and $R$-linear maps $d_{p,q}:A_{p,q}\\to A_{p-1,q}$ ($p\\ge1$) and $\\delta_{p,q}:A_{p,q}\\to A_{p,q-1}$ ($q\\ge1$) with $d_{p-1,q}\\circ d_{p,q}=0$, $\\delta_{p,q-1}\\circ\\delta_{p,q}=0$ and $\\delta_{p-1,q}\\circ d_{p,q}=d_{p,q-1}\\circ\\delta_{p,q}$ whenever defined; put $A_{p,q}=0$ if $p<0$ or $q<0$ and let $d_{0,q}$, $\\delta_{p,0}$ and all maps out of or into a zero module be $0$. A morphism $\\Phi:A\\to B$ of such double complexes is a family of $R$-linear maps $\\Phi_{p,q}:A_{p,q}\\to B_{p,q}$ with $\\Phi d=d\\Phi$ and $\\Phi\\delta=\\delta\\Phi$. Let $A^{\\mathrm{rt}}_q=\\operatorname{Coker}(d_{1,q}:A_{1,q}\\to A_{0,q})$ with projection $\\pi_q:A_{0,q}\\to A^{\\mathrm{rt}}_q$ ($q\\ge0$); since $\\delta_{0,q}(\\operatorname{im}d_{1,q})=d_{1,q-1}(\\delta_{1,q}(A_{1,q}))\\subseteq\\operatorname{im}d_{1,q-1}$, the map $\\delta_{0,q}$ induces $\\delta^{\\mathrm{rt}}_q:A^{\\mathrm{rt}}_q\\to A^{\\mathrm{rt}}_{q-1}$ with $\\delta^{\\mathrm{rt}}_q\\pi_q=\\pi_{q-1}\\delta_{0,q}$ ($q\\ge1$), and $A^{\\mathrm{rt}}_\\bullet$ is a chain complex of $R$-modules concentrated in degrees $\\ge0$ [def-weil-pbc-module-chain-complex-homology]; a morphism $\\Phi$ induces the morphism of complexes $\\Phi^{\\mathrm{rt}}$ with $\\Phi^{\\mathrm{rt}}_q\\pi_q=\\pi_q\\Phi_{0,q}$. Let $Z_n(A)\\subseteq T_n(A)=\\bigoplus_{p+q=n}A_{p,q}$ and $B_n(A)\\subseteq T_n(A)$ be the modules of zig-zags and of trivial zig-zags of total degree $n$ [def-weil-pbc-double-complex-zigzag-module]. Then for every $n\\ge0$: (a) for every $a\\in Z_n(A)$ the element $\\pi_n(a_{0,n})$ is a cycle of $A^{\\mathrm{rt}}_\\bullet$ (i.e. $n=0$ or $\\delta^{\\mathrm{rt}}_n(\\pi_n(a_{0,n}))=0$); (b) for every $a\\in Z_n(A)\\cap B_n(A)$ the class of $\\pi_n(a_{0,n})$ in $H_n(A^{\\mathrm{rt}}_\\bullet)$ is zero. Hence $a\\mapsto[\\pi_n(a_{0,n})]$ induces an $R$-linear map $\\rho^A_n:\\mathbf H_n(A)\\to H_n(A^{\\mathrm{rt}}_\\bullet)$ on the zig-zag module $\\mathbf H_n(A)=Z_n(A)/(Z_n(A)\\cap B_n(A))$. (c) For every morphism $\\Phi:A\\to B$ of double complexes, $H_n(\\Phi^{\\mathrm{rt}})\\circ\\rho^A_n=\\rho^B_n\\circ\\mathbf H_n(\\Phi)$, where $\\mathbf H_n(\\Phi)$ is the map of [def-weil-pbc-double-complex-zigzag-module]. No exactness of rows or columns is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), tag verified in tags/tags (00M1,algebra-lemma-no-spectral-sequence); proof, lines 18449-18461: 'Note that there are canonical homomorphisms $\\mathbf H_i(A)\\to H_i(R(A)_\\bullet)$, $(a_{i,0},\\dots,a_{0,i})\\mapsto$ class of image of $a_{0,i}$' (well-definedness not written in the source), and lines 18506-18521 (the commutative diagram of the functoriality paragraph)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-double-complex-zigzag-module",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "zig-zag in a double complex: elements a_{p,q} with p+q=n and d a_{p,q} = δ a_{p-1,q+1}, modulo trivial zig-zags",
+   "results": "HomologicalComplex.double, HomologicalComplex₂.ofGradedObject, CategoryTheory.Zigzag.setoid, HomologicalComplex₂.D₂_D₂, HomologicalComplex₂.total (Mathlib.Algebra.Homology.*): total complex with signed differentials only, no zig-zag module",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "double complex whose rows are exact in positive degrees: the induced map from the total complex to the complex of cokernels of the first horizontal differential is a quasi-isomorphism",
+   "results": "quasiIsoAt_iff_exactAt', quasiIsoAt_iff_exactAt, exactAt_iff_of_quasiIsoAt, HomologySequence.quasiIso_τ₃, quasiIsoAt_iff', CochainComplex.cm5b.instQuasiIsoIntP (single complexes; no bicomplex statement)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂, CategoryTheory.Limits.cokernel",
+   "results": "none (no Mathlib lemma combines bicomplexes and cokernels)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'HomologicalComplex₂' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'cokernel|Exact|exact'; grep -rn 'zig|Zig' Mathlib/Algebra/Homology Mathlib/CategoryTheory/Abelian",
+   "results": "HomologicalBicomplex.lean, TotalComplex.lean, TotalComplexShift.lean, BifunctorHomotopy.lean match only the tactic word `exact` (no cokernel complex, no exactness of rows); 'zig' only in LocalCohomology.lean:202 (zigzag_isConnected, connectedness of categories)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-double-complex-cokernel-homology-iso",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

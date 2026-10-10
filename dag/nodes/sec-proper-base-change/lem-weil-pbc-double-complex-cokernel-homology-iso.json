@@ -30,9 +30,86 @@
   "def-weil-pbc-module-chain-complex-homology",
   "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Transposition. Let $A^{\\mathsf T}_{p,q}=A_{q,p}$, $d^{\\mathsf T}_{p,q}=\\delta_{q,p}:A^{\\mathsf T}_{p,q}\\to A^{\\mathsf T}_{p-1,q}$, $\\delta^{\\mathsf T}_{p,q}=d_{q,p}:A^{\\mathsf T}_{p,q}\\to A^{\\mathsf T}_{p,q-1}$. Then $d^{\\mathsf T}d^{\\mathsf T}=\\delta\\delta=0$, $\\delta^{\\mathsf T}\\delta^{\\mathsf T}=dd=0$ and $\\delta^{\\mathsf T}_{p-1,q}d^{\\mathsf T}_{p,q}=d_{q,p-1}\\delta_{q,p}=\\delta_{q-1,p}d_{q,p}=d^{\\mathsf T}_{p,q-1}\\delta^{\\mathsf T}_{p,q}$, so $A^{\\mathsf T}$ is a double complex. Row $q$ of $A^{\\mathsf T}$ is column $q$ of $A$, so hypothesis (2) for $A$ says that every row of $A^{\\mathsf T}$ is exact in positive degrees. $(A^{\\mathsf T})^{\\mathrm{rt}}_p=\\operatorname{Coker}(d^{\\mathsf T}_{1,p})=\\operatorname{Coker}(\\delta_{p,1})=A^{\\mathrm{up}}_p$, with differential induced by $\\delta^{\\mathsf T}_{0,p}=d_{p,0}$: $(A^{\\mathsf T})^{\\mathrm{rt}}_\\bullet=A^{\\mathrm{up}}_\\bullet$ as complexes. Identify $T_n(A^{\\mathsf T})=\\bigoplus_{p+q=n}A_{q,p}$ with $T_n(A)$ by $a^{\\mathsf T}_{p,q}=a_{q,p}$. The zig-zag condition for $A^{\\mathsf T}$, $d^{\\mathsf T}(a^{\\mathsf T}_{p,q})=\\delta^{\\mathsf T}(a^{\\mathsf T}_{p-1,q+1})$, reads $\\delta_{q,p}(a_{q,p})=d_{q+1,p-1}(a_{q+1,p-1})$, which is the zig-zag condition for $A$ at the place $(q+1,p-1)$; so $Z_n(A^{\\mathsf T})=Z_n(A)$. Likewise $D^{\\mathsf T}_{n+1}(b)_{p,q}=\\delta_{q,p+1}(b_{q,p+1})+d_{q+1,p}(b_{q+1,p})=D_{n+1}(b)_{q,p}$, so $B_n(A^{\\mathsf T})=B_n(A)$ and $\\mathbf H_n(A^{\\mathsf T})=\\mathbf H_n(A)$ [def-weil-pbc-double-complex-zigzag-module]. A morphism $\\Phi:A\\to B$ gives the morphism $\\Phi^{\\mathsf T}$ ($\\Phi^{\\mathsf T}_{p,q}=\\Phi_{q,p}$) with $(\\Phi^{\\mathsf T})^{\\mathrm{rt}}=\\Phi^{\\mathrm{up}}$ and $\\mathbf H_n(\\Phi^{\\mathsf T})=\\mathbf H_n(\\Phi)$.",
+   "uses": [
+    "def-weil-pbc-double-complex-zigzag-module",
+    "def-weil-pbc-module-chain-complex-homology",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18464-18481, 'Of course surjectivity of $\\mathbf H_i\\to H_i(U(A))$ is shown similarly', and the symmetric definition of $\\mathbf H_i(A)$, lines 18416-18450: the source treats the $U(A)$ side as the mirror image; the transposition makes that precise"
+   }
+  },
+  {
+   "text": "$\\rho^A_n$ is an isomorphism. By [lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map] there is the $R$-linear map $\\rho^A_n:\\mathbf H_n(A)\\to H_n(A^{\\mathrm{rt}}_\\bullet)$, $[a]\\mapsto[\\pi_n(a_{0,n})]$. Surjective: a class in $H_n(A^{\\mathrm{rt}}_\\bullet)$ is represented by a cycle $y\\in A^{\\mathrm{rt}}_n$; as $\\pi_n$ is onto, $y=\\pi_n(x)$ with $x\\in A_{0,n}$; by hypothesis (1) and [lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag] there is $a\\in Z_n(A)$ with $a_{0,n}=x$, and $\\rho^A_n[a]=[y]$. Injective: if $\\rho^A_n[a]=0$ then $\\pi_n(a_{0,n})$ is a boundary, i.e. lies in $\\delta^{\\mathrm{rt}}_{n+1}(A^{\\mathrm{rt}}_{n+1})$ [def-weil-pbc-module-chain-complex-homology]; by hypothesis (1) and [lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary] $a\\in B_n(A)$, so $a\\in Z_n(A)\\cap B_n(A)$ and $[a]=0$. Hence $\\rho^A_n$ is an $R$-linear bijection, an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map",
+    "lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag",
+    "lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18449-18504 (the canonical homomorphisms, surjectivity, injectivity)"
+   }
+  },
+  {
+   "text": "The column side. By step 1, $A^{\\mathsf T}$ is a double complex whose rows are exact in positive degrees, with $(A^{\\mathsf T})^{\\mathrm{rt}}_\\bullet=A^{\\mathrm{up}}_\\bullet$ and $\\mathbf H_n(A^{\\mathsf T})=\\mathbf H_n(A)$. Step 2 applied to $A^{\\mathsf T}$ ([lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map], [lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag], [lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary] for $A^{\\mathsf T}$) gives the $R$-linear isomorphism $\\lambda^A_n:=\\rho^{A^{\\mathsf T}}_n:\\mathbf H_n(A)\\to H_n(A^{\\mathrm{up}}_\\bullet)$, $[a]\\mapsto[\\text{image of }a_{n,0}\\text{ in }A^{\\mathrm{up}}_n]$.",
+   "uses": [
+    "lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map",
+    "lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag",
+    "lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary",
+    "def-weil-pbc-double-complex-zigzag-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18452-18456 (the homomorphism $\\mathbf H_i(A)\\to H_i(U(A)_\\bullet)$, class of image of $a_{i,0}$) and line 18480-18481 ('shown similarly')"
+   }
+  },
+  {
+   "text": "Definition of $\\theta$. Put $\\theta^A_n=\\rho^A_n\\circ(\\lambda^A_n)^{-1}:H_n(A^{\\mathrm{up}}_\\bullet)\\to H_n(A^{\\mathrm{rt}}_\\bullet)$, a composite of $R$-linear isomorphisms (steps 2 and 3), hence an $R$-linear isomorphism. Explicitly: lift a cycle of $A^{\\mathrm{up}}_n$ to $a_{n,0}\\in A_{n,0}$, complete it to a zig-zag $(a_{n,0},\\dots,a_{0,n})$, and take the class of $\\pi_n(a_{0,n})$.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18416-18418 ('$H_i(R(A)_\\bullet)$ and $H_i(U(A)_\\bullet)$ are canonically isomorphic to a third group')"
+   }
+  },
+  {
+   "text": "Functoriality. Let $\\Phi:A\\to B$ with $B$ satisfying (1) and (2). Part (c) of [lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map] for $\\Phi$ gives $H_n(\\Phi^{\\mathrm{rt}})\\rho^A_n=\\rho^B_n\\mathbf H_n(\\Phi)$, and for $\\Phi^{\\mathsf T}:A^{\\mathsf T}\\to B^{\\mathsf T}$, using $(\\Phi^{\\mathsf T})^{\\mathrm{rt}}=\\Phi^{\\mathrm{up}}$ and $\\mathbf H_n(\\Phi^{\\mathsf T})=\\mathbf H_n(\\Phi)$ (step 1), $H_n(\\Phi^{\\mathrm{up}})\\lambda^A_n=\\lambda^B_n\\mathbf H_n(\\Phi)$, i.e. $\\mathbf H_n(\\Phi)(\\lambda^A_n)^{-1}=(\\lambda^B_n)^{-1}H_n(\\Phi^{\\mathrm{up}})$. Hence $H_n(\\Phi^{\\mathrm{rt}})\\theta^A_n=H_n(\\Phi^{\\mathrm{rt}})\\rho^A_n(\\lambda^A_n)^{-1}=\\rho^B_n\\mathbf H_n(\\Phi)(\\lambda^A_n)^{-1}=\\rho^B_n(\\lambda^B_n)^{-1}H_n(\\Phi^{\\mathrm{up}})=\\theta^B_nH_n(\\Phi^{\\mathrm{up}})$.",
+   "uses": [
+    "lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map",
+    "def-weil-pbc-double-complex-zigzag-module",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18506-18521 (the functoriality paragraph and its commutative diagram)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-double-complex-zigzag-module",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map",
+  "lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag",
+  "lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18415-18522"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -78,7 +155,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -98,5 +175,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-double-complex-cokernel-homology-iso",
+  "worker": "stage1",
+  "summary": "Read Stacks 00M1 (lemma-no-spectral-sequence, algebra.tex 18397-18522) and the setup of R(A), U(A) (18352-18395); tag verified in tags/tags. No Mathlib declaration states it (LeanSearch, LeanFinder, Loogle, grep recorded on the node and the new nodes: Mathlib has HomologicalComplex₂ and its total complex but no exactness/quasi-isomorphism statement for bicomplexes); slopmaster2 has no declaration for it (grep by id, 00M1, zig-zag, no-spectral-sequence); its FromJoel/Algebra/Homology/BicomplexColumns.lean has HomologicalComplex₂.total.quasiIso_map_of_isStrictlyGE_of_isStrictlyLE (total of a column-wise quasi-isomorphism of bounded Z-indexed cochain bicomplexes is a quasi-isomorphism), which is a different statement and would replace the source's route, so not attached. Split following the proof of 00M1: the zig-zag module H_n(A) (new definition), the canonical map to H_n(R(A)) with well-definedness and naturality (new, no exactness needed), surjectivity as a lifting lemma and injectivity as a triviality lemma (new, rows exact), and the U(A) side obtained by transposing the double complex (written out in step 1; Z_n and B_n are literally the same for A and its transpose), so only the row side is a node. Statement kept. Source errors (minor): (i) 00M1 describes the trivial zig-zags as generated by $(0,\\dots,0,-\\delta(a),d(a),0,\\dots,0)$; with the source's commuting squares such a tuple is not a zig-zag ($d(-\\delta a)\\ne\\delta(d a)$ in general); the correct generators are $(\\dots,\\delta(b),d(b),\\dots)$, which is what the source's displayed quotient $d(a_{i+1,0})+\\delta(a_{i,1}),\\dots$ gives; the definition node uses the displayed form. (ii) In the injectivity paragraph the source writes $\\operatorname{Coker}(A_{i,1}\\to A_{i,0})$ and $\\delta:\\operatorname{Coker}(A_{i+1,1}\\to A_{i+1,0})\\to\\dots$ where $R(A)_i=\\operatorname{Coker}(A_{1,i}\\to A_{0,i})$ and $R(A)_{i+1}$ are meant (indices transposed). Neither affects the statement.",
+  "blueprint": "The item is not a blueprint node; its ancestor lem-weil-pbc-normal-constant-generic uses it only through Tor symmetry (Stacks 00M3) at the place in blueprint.from.place ('Hence the double complex satisfies the conditions of Lemma lemma-no-spectral-sequence', the equality H_i(U(A))=H_i(R(A)) and the functoriality paragraph); steps 1-5 realize that equality and its functoriality. same_as: blueprint_refs search 'double complex', '00M1', 'zig-zag', 'zigzag', 'cokernel complex' finds only def-sp-double-complex-total and thm-sp-double-complex-spectral-sequences (sec-abelian-varieties), the spectral-sequence route the source avoids, not the same statement: []"
+ },
+ "reviewed": "2026-10-10 L: 5 steps following 00M1 (the zig-zag module as a definition node, the map to the row-cokernel homology, surjectivity and injectivity under row exactness as nodes, the transpose, functoriality); the source's sign slip in the trivial zig-zags noted; 4 new nodes"
 }
