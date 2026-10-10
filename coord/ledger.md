@@ -1023,3 +1023,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:33 L: accepted lem-weil-pbc-separable-root-pth-power (6 steps, no new nodes; worker added P != 0 to hypothesis (b), the statement as written allowed P = 0).
 - 07:34 L: accepted lem-weil-pbc-separated-lqf-base-change (5 steps; new leaf separated-base-change 01KU (3), IsSeparated.instSndScheme).
 - 07:35 L: accepted lem-weil-pbc-domains-strongly-transcendental-not-quasi-finite (10 steps; new leaves polynomial-ring-normal-domain 030A, going-down-normal-integral 00H8). Source gaps written out: strictness of pR[x] in r, x strongly transcendental over the normalization.
+- 07:37 L: accepted lem-weil-pbc-separably-generated-tensor-reduced (4 steps; new unsplit nodes separating-transcendence-basis-finite-subextension and finite-separable-tensor-field-reduced, the latter with a FormallyUnramified chain as mathlib_candidate).
