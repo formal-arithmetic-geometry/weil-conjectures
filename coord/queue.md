@@ -1,8 +1,8 @@
 # Work queue
 
-919 items; claim with `tools/claim.py next <group> [--stage N]`.
+920 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (199)
+## Stage 1: nodes to split (196)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -58,13 +58,10 @@
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
-| `pqf-lem-leray` | 6011 | none |
 | `pqf-lem-leray-lowdegree` | 6011 | none |
 | `pqf-lem-qf-finitefibres` | 6011 | none |
 | `pqf-lem-locqf-fibre-discrete` | 6012 | none |
-| `lem-pc-projective-space-canonical` | 6013 | sorry_here |
 | `pqf-lem-serre-criterion` | 6013 | none |
-| `pqf-def-affine-morphism` | - | none |
 | `def-weil-t-structure` | - | none |
 | `lemma-nagata-final-descended-model` | - | none |
 | `def-nagata-final-noetherian-base-system` | - | none |
@@ -206,11 +203,12 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (720)
+## Stage 2: nodes to state (724)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `cor-pc-dense-points-curves-sections` | 1 | state |
+| `cor-pqf-proper-quasifinite-finite` | 1 | state |
 | `def-galois-category` | 1 | state |
 | `def-kun-topological-dimension-at-point` | 1 | state |
 | `def-nagata-extended-ideal` | 1 | state |
@@ -254,6 +252,7 @@
 | `def-weil-pbc-japanese-domain` | 1 | state |
 | `def-weil-pbc-relative-global-complete-intersection` | 1 | state |
 | `def-weil-pbc-ring-map-quasi-finite-at-prime` | 1 | state |
+| `def-weil-pbc-scheme-conventions` | 1 | state |
 | `def-weil-pbc-separable-field-extension` | 1 | state |
 | `def-weil-pbc-singular-ideal` | 1 | state |
 | `def-weil-pbc-strictly-standard-element` | 1 | state |
@@ -289,6 +288,7 @@
 | `lem-pc-affine-cech-complex` | 1 | state |
 | `lem-pc-affine-finite-type-algebra` | 1 | state |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 1 | state |
+| `lem-pc-affine-surjective-structure-map-closed-immersion` | 1 | state |
 | `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
@@ -525,6 +525,7 @@
 | `lem-weil-pbc-exact-functor-bounded-below` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-factorization-criterion-filtered-colimit` | 1 | state |
+| `lem-weil-pbc-fibre-product-affine-transition` | 1 | state |
 | `lem-weil-pbc-fibre-product-point-residue-field` | 1 | state |
 | `lem-weil-pbc-fibre-ring-local-ring-natural-iso` | 1 | state |
 | `lem-weil-pbc-fibre-ring-noetherian` | 1 | state |
@@ -598,6 +599,7 @@
 | `lem-weil-pbc-formal-glueing-finite-modules` | 1 | state |
 | `lem-weil-pbc-formal-glueing-isogeny` | 1 | state |
 | `lem-weil-pbc-fpqc-affine-standard-refinement` | 1 | state |
+| `lem-weil-pbc-fpqc-descend-affine` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-finite` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-flat` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-integral` | 1 | state |
@@ -896,7 +898,6 @@
 | `pqf-lem-image-proper` | 1 | state |
 | `pqf-lem-proper-basic` | 1 | state |
 | `pqf-lem-sheaf-zero-stalks` | 1 | state |
-| `cor-pqf-proper-quasifinite-finite` | 2 | state |
 | `lem-fet-galois-category` | 2 | state |
 | `lem-fet-locally-trivial` | 2 | state |
 | `lem-galois-flasque` | 2 | state |
@@ -931,7 +932,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1436 nodes that wait for a statement dependency, 237 nodes that wait for stage 1.
+Not open yet: 1434 nodes that wait for a statement dependency, 234 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
