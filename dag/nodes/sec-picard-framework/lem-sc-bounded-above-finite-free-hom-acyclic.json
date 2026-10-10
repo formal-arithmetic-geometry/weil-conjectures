@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Hom from bounded-above finite-free complexes preserves bounded-below acyclicity",
- "statement": "Let $(U,\\mathcal O_U)$ be a ringed site [def-weil-locally-ringed-space-morphism], let $E^\\bullet$ be a bounded-above cochain complex [def-pc-cochain-complex-modules] whose terms are finite-rank free $\\mathcal O_U$-modules, and let $A^\\bullet$ be a bounded-below acyclic cochain complex of $\\mathcal O_U$-modules [def-weil-sheaf-of-modules-category]. Then the total sheaf Hom complex $\\mathcal H om^\\bullet_{\\mathcal O_U}(E^\\bullet,A^\\bullet)$ [def-pur-hom-complex] is acyclic.",
+ "statement": "Let $(U,\\mathcal O_U)$ be a ringed site [def-weil-locally-ringed-space-morphism], let $E^\\bullet$ be a bounded-above cochain complex [def-pc-cochain-complex-modules] whose terms are finite-rank free $\\mathcal O_U$-modules, and let $A^\\bullet$ be a bounded-below acyclic cochain complex of $\\mathcal O_U$-modules [def-weil-sheaf-of-modules-category] [def-pc-acyclic-complex-modules]. Then the total sheaf Hom complex $\\mathcal H om^\\bullet_{\\mathcal O_U}(E^\\bullet,A^\\bullet)$ [def-pur-hom-complex] is acyclic.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 0GM8 (Lemma 20.51.4, lemma-stalk-internal-hom), case (2), bounded-above locally free Hom calculation in the proof route"
@@ -21,11 +21,42 @@
  "stmt_deps": [
   "def-weil-locally-ringed-space-morphism",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-hom-complex"
+  "def-pc-acyclic-complex-modules",
+  "def-pur-hom-complex",
+  "def-pc-cochain-complex-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an upper bound $N$ for the degrees in which $E^\\bullet$ is nonzero. In each bidegree, the component of the total Hom differential is the signed sum of the differential of $A^\\bullet$ and precomposition with the differential of $E^\\bullet$. By [lem-sc-finite-free-internal-hom-exact], applying $\\mathcal H om(E^p,-)$ to every short exact sequence of cycles and boundaries in the acyclic complex $A^\\bullet$ is exact; in coordinates this is the exactness of finite direct sums of sheaves.",
+   "uses": [
+    "lem-sc-finite-free-internal-hom-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8, Lemma 20.51.4, case (2), finite locally free Hom calculation"
+   }
+  },
+  {
+   "text": "Since acyclicity of $\\mathcal H om^\\bullet(E^\\bullet,A^\\bullet)$ concerns its cohomology sheaves [def-pc-acyclic-complex-modules], it suffices to show that every section $z$ of degree $m$ with $d(z)=0$, over an object $V$ of the site, is locally a boundary. Choose a lower bound $M$ with $A^q=0$ for $q<M$. By [def-pur-hom-complex], $z=(z^p)_p$ with $z^p:E^p\\to A^{p+m}$, and $z^p=0$ unless $M-m\\le p\\le N$, so only finitely many components occur. We seek $h=(h^p)_p$ of degree $m-1$, $h^p:E^p\\to A^{p+m-1}$, with $d(h)^p=d_A h^p+(-1)^m h^{p+1}d_E=z^p$ for all $p$. Put $h^p=0$ for $p>N$ and descend. At stage $p$ the obstruction $w^p=z^p-(-1)^m h^{p+1}d_E:E^p\\to A^{p+m}$ satisfies $d_A w^p=0$: this follows from the degree-$p$ component of $d(z)=0$, namely $d_A z^p=(-1)^m z^{p+1}d_E$, together with the equation already achieved at $p+1$. Since $A^\\bullet$ is acyclic, $0\\to B^{p+m-1}\\to A^{p+m-1}\\to B^{p+m}\\to0$ and the identification of cycles with boundaries $Z^{p+m}=B^{p+m}$ are exact; by Step 1, $\\mathcal H om(E^p,-)$ preserves the surjection $A^{p+m-1}\\to B^{p+m}$, so after passing to a covering of $V$ there is $h^p$ with $d_A h^p=w^p$. For $p<M-m+1$ one may take $h^p=0$ (its target vanishes), so only finitely many refinements of the covering are needed. On the final covering, $d(h)=z$. Hence every cocycle section is locally a boundary, so all cohomology sheaves of the total sheaf Hom complex vanish and the complex is acyclic.",
+   "uses": [
+    "lem-sc-finite-free-internal-hom-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8, Lemma 20.51.4, case (2), bounded-above locally free Hom calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-free-internal-hom-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0GM8 (Lemma 20.51.4), case (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +88,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-derived-hom-finite-free-model",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-bounded-above-finite-free-hom-acyclic",
+  "worker": "stage1",
+  "summary": "Split the bounded-above finite-free Hom acyclicity claim into the finite-free internal-Hom exactness input and an explicit descending contracting-homotopy argument for Hom cocycles. The target statement and hypotheses are unchanged.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof of thm-sc-p1-duality, specifically the bounded-above locally free Hom calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bff1930",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bff1930 (reviewer sub-agent of L); spot-checked: Reviewed packet head 564a4ff32; new head ad5775a51 is a rebase onto 41077d70d with the three delivery files byte-identical. Checked item statement against Tag 0GM8 case (2) and def-pur-hom-complex/def-pc-acyclic-complex-modules; new node lem-sc-finite-free-internal-hom-exact is a correct finite-free Hom exactness statement, no same-tag duplicate. FIX more, RETURN less: C4/E Step 2 rewritten: components were mis-indexed (z^p:E^p->A^{m-p}, h^p:E^p->A^{m-1-p}, ill-typed against def-pur-hom-complex where Hom^n=prod Hom(L^p,M^{p+n})) and the sign (-1)^{m-p} was wrong (correct: d(h)^p=d_A h^p+(-1)^m h^{p+1}d_E); also made explicit that lifts exist only locally (sheaf surjectivity, after refining coverings), that only finitely many p (M-m<=p<=N) occur so finitely many refinements suffice, and the cocycle check d_A w^p=0. Second reading missed both (and wrongly speaks of an infinite downward family).; 1 file(s) fixed by the reviewer"
+ }
 }

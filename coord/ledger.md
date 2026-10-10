@@ -2371,3 +2371,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:21 L: merged deliver/G1/lem-sc-finite-pushforward-derived-hom-qcoherent (reviewer FIX; after a return; new nodes: 5)
 - 19:22 L: merged deliver/J1/lem-pc-derived-acyclic-resolution (reviewer PASS; first push; new nodes: 0)
 - 19:22 L: returned deliver/M1/lem-pc-derived-sections-pushforward-comparison (reviewer RETURN: Reviewer R-dsp1928 (head 78df16cf4). 1. E (Step 2, wrong mathematics, missed by the Second reading): the item lives in M)
+- 19:22 L: merged deliver/H1/lem-sc-bounded-above-finite-free-hom-acyclic (reviewer FIX; first push; new nodes: 1)
