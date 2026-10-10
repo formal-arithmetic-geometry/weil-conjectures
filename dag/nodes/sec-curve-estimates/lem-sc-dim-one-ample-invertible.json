@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "A separated finite-type scheme of dimension at most one has an ample invertible sheaf",
- "statement": "Let $k$ be a field and let $X$ be a scheme [def-pc-scheme] over $k$ [def-weil-scheme-over-base] whose structure morphism is separated [def-weil-proper-morphism] and of finite type [def-weil-finite-type-morphism], with topological Krull dimension $\\dim X\\leq1$ [def-pc-dimension]. Then there exists an invertible $\\mathcal O_X$-module $\\mathcal L$ [def-sc-invertible-module] which is ample in the absolute sense of Stacks Definition 01PS [def-weil-pbc-ample-invertible-module].",
+ "statement": "Let $k$ be a field and let $X$ be a scheme [def-pc-scheme] over $k$ [def-weil-scheme-over-base] whose structure morphism is separated [def-weil-proper-morphism] and of finite type [def-weil-finite-type-morphism], with topological Krull dimension $\\dim X\\leq1$ [def-kun-topological-krull-dimension] (the Krull dimension of the underlying topological space; $X=\\varnothing$ allowed). Then there exists an invertible $\\mathcal O_X$-module $\\mathcal L$ [def-sc-invertible-module] which is ample [def-weil-pbc-ample-invertible-module].",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Lemma 0A25 (varieties-lemma-dim-1-quasi-projective), proof: 'By Proposition 33.38.12 the scheme X has an ample invertible sheaf'; the cited input is Proposition 33.38.12, Tag 09NZ (varieties-proposition-dim-1-noetherian-separated-has-ample, varieties.tex line 8164)"
@@ -23,13 +23,111 @@
   "def-weil-scheme-over-base",
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
-  "def-pc-dimension",
+  "def-kun-topological-krull-dimension",
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "$X$ is a Noetherian scheme. The field $k$ is a Noetherian ring [def-weil-pbc-noetherian-ring] (its only ideals are $0$ and $k$), so $\\operatorname{Spec}k$ [def-weil-affine-spectrum] is a one-point space, quasi-compact, covered by the single affine open $\\operatorname{Spec}k$ with Noetherian ring of sections, hence locally Noetherian [pqf-def-locnoeth] and Noetherian. As the structure morphism $X\\to\\operatorname{Spec}k$ is of finite type, $X$ is Noetherian (locally Noetherian and quasi-compact) by [lem-weil-pbc-finite-type-over-noetherian].",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-affine-spectrum",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0A25 (varieties-lemma-dim-1-quasi-projective, line 9202) applies 09NZ, whose hypothesis is 'Noetherian'; the Noetherian property of X is Morphisms Lemma 01T6 (morphisms-lemma-finite-type-noetherian)"
+   }
+  },
+  {
+   "text": "$X$ is separated: its structure morphism $X\\to\\operatorname{Spec}k$ is separated and $\\operatorname{Spec}k$ is affine, so $X\\to\\operatorname{Spec}\\mathbf Z$ is separated by [lem-sc-separated-over-affine-scheme-separated].",
+   "uses": [
+    "lem-sc-separated-over-affine-scheme-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0A25 applies 09NZ, whose hypothesis is 'separated' (absolute); Schemes Lemmas 01KN and 01KU"
+   }
+  },
+  {
+   "text": "Let $Z=X_{\\mathrm{red}}$ be the reduction of $X$ with its closed immersion $i:Z\\to X$ [def-weil-pbc-scheme-reduction]. By [lem-weil-pbc-reduction-universal-homeomorphism], $Z$ is reduced and $i$ is a surjective closed immersion and a universal homeomorphism; taking the base change along $\\mathrm{id}_X$ (for which $Z\\times_XX=Z$), $i$ is a homeomorphism of $Z$ onto $X$. A closed immersion is finite [lem-weil-pbc-closed-immersion-finite], so the composite $Z\\to X\\to\\operatorname{Spec}k$ is separated and of finite type [lem-weil-pbc-finite-over-separated-finite-type]. Steps 1 and 2 applied to this $k$-scheme give that $Z$ is Noetherian and separated. Since $i$ is a homeomorphism and the Krull dimension of a topological space [def-kun-topological-krull-dimension] is defined by chains of irreducible closed subsets, which a homeomorphism matches bijectively, $\\dim Z=\\dim X\\le1$.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-over-separated-finite-type",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Proposition 09NZ (varieties-proposition-dim-1-noetherian-separated-has-ample, line 8164), proof, first sentence: 'Let Z subset X be the reduction of X'"
+   }
+  },
+  {
+   "text": "By [lem-sc-reduced-dim-le-one-ample], applied to the Noetherian reduced separated scheme $Z$ with $\\dim Z\\le1$ (step 3), there is an ample invertible $\\mathcal O_Z$-module $\\mathcal N$.",
+   "uses": [
+    "lem-sc-reduced-dim-le-one-ample"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Proposition 09NZ (varieties-proposition-dim-1-noetherian-separated-has-ample, line 8164), proof, first sentence: 'By Lemma 09NX the scheme Z has an ample invertible sheaf'"
+   }
+  },
+  {
+   "text": "The underlying space of $X$ is Noetherian in the sense of [lem-sc-pic-lift-closed-immersion-dim-le-one]: every nonempty set of closed subsets has a minimal element, by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] since $X$ is a Noetherian scheme (step 1); and $\\dim X\\le1$. By [lem-sc-pic-lift-closed-immersion-dim-le-one] applied to the closed immersion $i:Z\\to X$ and $\\mathcal N$, there is an invertible $\\mathcal O_X$-module $\\mathcal L$ with an isomorphism $\\varphi:i^*\\mathcal L\\cong\\mathcal N$. Then $i^*\\mathcal L$ is ample: the definition [def-weil-pbc-ample-invertible-module] asks that $Z$ be quasi-compact (true, as $\\mathcal N$ is ample) and that every point lie in an affine open $Z_s$ for a section $s$ of a positive tensor power; $\\varphi^{\\otimes n}:(i^*\\mathcal L)^{\\otimes n}\\cong\\mathcal N^{\\otimes n}$ is an isomorphism of $\\mathcal O_Z$-modules, so a section $s$ of $\\mathcal N^{\\otimes n}$ gives the section $t=(\\varphi^{\\otimes n})^{-1}(s)$ of $(i^*\\mathcal L)^{\\otimes n}$, and at each point $z$ the germ $t_z$ lies in $\\mathfrak m_z(i^*\\mathcal L)^{\\otimes n}_z$ exactly when $s_z$ lies in $\\mathfrak m_z\\mathcal N^{\\otimes n}_z$; hence $Z_t=Z_s$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sc-pic-lift-closed-immersion-dim-le-one",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Proposition 09NZ (varieties-proposition-dim-1-noetherian-separated-has-ample, line 8164), proof, second sentence: 'Thus by Lemma 09NY there exists an invertible O_X-module L on X whose restriction to Z is ample'"
+   }
+  },
+  {
+   "text": "$i:Z\\to X$ is a closed immersion of Noetherian schemes (steps 1 and 3) which is a homeomorphism of $Z$ onto $X$ (step 3), and $i^*\\mathcal L$ is ample on $Z$ (step 5). By [lem-sc-ample-on-reduction-noetherian], $\\mathcal L$ is an ample invertible $\\mathcal O_X$-module, which proves the statement.",
+   "uses": [
+    "lem-sc-ample-on-reduction-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Proposition 09NZ (varieties-proposition-dim-1-noetherian-separated-has-ample, line 8164), proof, third sentence: 'Then L is ample by an application of Cohomology of Schemes, Lemma 09MS'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "def-weil-pbc-scheme-reduction",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-over-separated-finite-type",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-reduced-dim-le-one-ample",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sc-pic-lift-closed-immersion-dim-le-one",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-ample-on-reduction-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Proposition 09NZ (varieties-proposition-dim-1-noetherian-separated-has-ample, line 8164) and its proof, as applied in Lemma 0A25 (varieties-lemma-dim-1-quasi-projective, line 9202) to a separated finite-type scheme over a field of dimension at most 1"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,13 +149,49 @@
    "results": "No algebraic-geometric ample or invertible-sheaf API in Mathlib; the only 'ample' hit is the unrelated convex-analysis AmpleSet file",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ample invertible sheaf on a reduced separated Noetherian scheme of dimension one",
+   "results": "LeanSearch service returned HTTP 500 (Internal Server Error) on every call during this session (MCP tool and https://leansearch.net/search both)",
+   "date": "2026-10-10",
+   "verdict": "not available (service error)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ample invertible sheaf on a scheme",
+   "results": "affineness criteria only (AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen, AlgebraicGeometry.IsAffineOpen.basicOpen, AlgebraicGeometry.Scheme.IsQuasiAffine); no ample invertible module",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'ample' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "no hit (only the word example): Mathlib has no ample invertible modules on schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
-  "item": "lem-sc-dim-one-quasi-projective"
+  "by": "worker",
+  "item": "lem-sc-dim-one-quasi-projective",
+  "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-dim-one-ample-invertible",
+  "worker": "stage1",
+  "summary": "Split along Stacks 09NZ (varieties.tex line 8164) as applied in 0A25: X is Noetherian (01T6) and separated (01KN+01KU, new Mathlib leaf); its reduction Z is reduced, Noetherian, separated, homeomorphic to X (reduction node, closed immersion finite, finite over separated finite type); Z has an ample invertible module by 09NX (new node, stated for dim <= 1); 09NY (new node) lifts it to an invertible L on X with ample restriction; 09MS (new node) gives L ample. Statement: the dimension citation changed from def-pc-dimension (sup of dimensions of local rings, defined for nonempty X only) to def-kun-topological-krull-dimension, which is what the words 'topological Krull dimension' say (equal by lem-pc-scheme-dimension-local-rings for nonempty X); the tag reference '01PS' dropped from the meaning, since def-weil-pbc-ample-invertible-module defines ampleness. Source gap: 09NZ, 09NX and 09ND are stated for dimension 1, while 0A25 uses 09NZ for dimension <= 1 and 09NX's proof applies 09ND to irreducible components that may be points; the new 09NX node is stated for dim <= 1 (an integral Noetherian scheme of dimension 0 is the spectrum of a field, affine, with O ample). No sorry-free slopmaster2 declaration states the item or a new node (slopmaster2's IsAmple is the relative very-ample-power notion on K-schemes and needs projectivity).",
+  "blueprint": "The blueprint ancestor lem-sc-pic-proper-ntorsion has no proof text for this input; steps 1-6 realize the place inherited through lem-sc-dim-one-quasi-projective ('## Proof, first sentence: the proper curve C must first be shown projective, using the dimension-one quasi-projectivity input'), namely the ample invertible sheaf that 0A25 takes from 09NZ: steps 1-2 the hypotheses of 09NZ, steps 3-6 the three sentences of 09NZ's proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "step 3 takes from its statement that X_red is reduced and X_red -> X is a surjective closed immersion and a homeomorphism; generic fact about the reduction (Stacks 054M), no node of sk-thm-curveestimate states it"
+   }
+  ]
+ }
 }
