@@ -1,0 +1,81 @@
+{
+ "id": "lem-sc-field-artin-schreier-kernel",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-as-sequence",
+   "place": "proof, first sentence: 'The kernel of $\\wp$ is the constant sheaf $\\mathbf F_p$: its stalk at a geometric point $\\bar x$ is $\\{a\\in\\mathcal O^{sh}_{C,\\bar x}:a^p=a\\}=\\mathbf F_p$' (the residue-field calculation used for the local-ring stalk)",
+   "via": [
+    "lem-sc-local-ring-artin-schreier-kernel"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Frobenius-fixed elements of a field of characteristic $p$",
+ "statement": "Let $p$ be a prime number and $K$ a field [def-weil-field] with $p\\cdot1_K=0$, equivalently of characteristic $p$ [def-pc-field-characteristic]. The canonical field homomorphism $\\mathbf F_p=\\mathbf Z/p\\mathbf Z$ [def-weil-finite-field-q-elements] $\\to K$, $c\\mapsto c\\cdot1_K$, maps $\\mathbf F_p$ bijectively onto $\\{x\\in K:x^p=x\\}$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3J (section-artin-schreier), opening assertion that the Artin-Schreier sequence has kernel the constant $\\mathbf Z/p\\mathbf Z$; the field case also follows from Mathlib.FieldTheory.Finite.Basic.lean, Subfield.mem_bot_iff_pow_eq_self and ZMod.fieldRange_castHom_eq_bot"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-characteristic",
+  "def-weil-finite-field-q-elements"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "field characteristic p element x satisfies x^p = x iff lies in prime subfield image of ZMod p",
+   "results": "Subfield.mem_bot_iff_pow_eq_self, ZMod.fieldRange_castHom_eq_bot, ZMod.pow_card (Mathlib.FieldTheory.Finite.Basic); Subfield.bot_eq_of_zMod_algebra (Mathlib.FieldTheory.PrimeField)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "roots of X^p-X in field of characteristic p are exactly elements of prime field ZMod p",
+   "results": "Subfield.roots_X_pow_char_sub_X_bot and FiniteField.roots_X_pow_card_sub_X (Mathlib.FieldTheory.Finite.Basic); the former identifies roots inside the prime subfield",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subfield.mem_bot_iff_pow_eq_self",
+   "results": "Subfield.mem_bot_iff_pow_eq_self (Mathlib.FieldTheory.Finite.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'mem_bot_iff_pow_eq_self|fieldRange_castHom_eq_bot|pow_card' /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib/Mathlib/FieldTheory/Finite/Basic.lean",
+   "results": "Basic.lean:748-751 Subfield.mem_bot_iff_pow_eq_self; :579-581 ZMod.fieldRange_castHom_eq_bot; :585-586 ZMod.pow_card; :729 ZMod.castHom injective used in prime-subfield finiteness",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Subfield.mem_bot_iff_pow_eq_self",
+  "file": "Mathlib/FieldTheory/Finite/Basic.lean",
+  "line": 748,
+  "how": "specializes in one line: Subfield.mem_bot_iff_pow_eq_self identifies the fixed points with the bottom subfield (lines 748-751), and ZMod.fieldRange_castHom_eq_bot identifies that subfield with the image of ZMod.castHom (lines 579-581); the cast homomorphism is injective because its domain and codomain are fields (used at line 729). ZMod.pow_card supplies the forward power equality at lines 583-586. Source lines read."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-local-ring-artin-schreier-kernel",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

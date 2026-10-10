@@ -25,9 +25,51 @@
   ]
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathfrak m$ be the unique maximal ideal of $R$, let $\\kappa=R/\\mathfrak m$, and write $q:R\\to\\kappa$ for the quotient homomorphism. Maximality makes $\\kappa$ a field. Since $p\\cdot1_R=0$, also $p\\cdot1_\\kappa=0$. If $a^p=a$, then $q(a)^p=q(a)$ because $q$ preserves powers. By [lem-sc-field-artin-schreier-kernel] applied to $\\kappa$, there is a unique $c\\in\\mathbf F_p$ with $q(a)=c\\cdot1_\\kappa=q(c\\cdot1_R)$.",
+   "uses": [
+    "lem-sc-field-artin-schreier-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3J (section-artin-schreier), opening assertion about the kernel; residue-field reduction makes its field calculation applicable to the local ring"
+   }
+  },
+  {
+   "text": "Put $b=a-c\\cdot1_R$. The equality of their images under $q$ gives $b\\in\\mathfrak m$. The binomial theorem in characteristic $p$ gives $b^p=a^p-(c\\cdot1_R)^p=a-c\\cdot1_R=b$: each intermediate binomial coefficient is divisible by the prime $p$, and $(c\\cdot1_R)^p=c\\cdot1_R$ because $c^p=c$ in $\\mathbf F_p$ by [lem-sc-field-artin-schreier-kernel]. Since $p\\ge2$, the ideal property yields $b^{p-1}\\in\\mathfrak m$, whence $1-b^{p-1}\\notin\\mathfrak m$ (otherwise $1$ would lie in the proper ideal $\\mathfrak m$). Thus $1-b^{p-1}$ is a unit by [lem-weil-pbc-local-ring-unit-criterion]. Now $b(1-b^{p-1})=b-b^p=0$, and multiplication by the inverse of this unit gives $b=0$. Therefore $a=c\\cdot1_R$.",
+   "uses": [
+    "lem-sc-field-artin-schreier-kernel",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E9 (lemma-characterize-local-ring), equivalence (1) and (3), for the unit criterion; Tag 0A3J (section-artin-schreier) states the kernel identification without this calculation"
+   }
+  },
+  {
+   "text": "Conversely, for each $c\\in\\mathbf F_p$, [lem-sc-field-artin-schreier-kernel] says $c^p=c$, and the canonical ring map $\\mathbf F_p\\to R$ preserves powers, so $(c\\cdot1_R)^p=c\\cdot1_R$. The map from $\\mathbf F_p$ therefore lands in the stated solution set, and step 2 proves surjectivity. If $c\\cdot1_R=d\\cdot1_R$, applying $q$ gives $c\\cdot1_\\kappa=d\\cdot1_\\kappa$; injectivity of the map $\\mathbf F_p\\to\\kappa$ in [lem-sc-field-artin-schreier-kernel] gives $c=d$. Hence the map is bijective.",
+   "uses": [
+    "lem-sc-field-artin-schreier-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3J (section-artin-schreier), opening assertion that the kernel is the constant $\\mathbf Z/p\\mathbf Z$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-field-artin-schreier-kernel",
+  "lem-weil-pbc-local-ring-unit-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3J (section-artin-schreier) asserts the Artin-Schreier kernel; the local-ring calculation is supplied here, using Stacks Algebra Tag 00E9 (lemma-characterize-local-ring) for units"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,7 +101,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +117,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-local-ring-artin-schreier-kernel",
+  "worker": "stage1",
+  "summary": "Checked the arbitrary local-ring statement against Stacks 0A3J and the parent stalk argument. The residue-field root calculation is a new Mathlib leaf; the lift back to the local ring uses the existing Mathlib leaf for the unit criterion and writes out the Frobenius and unit calculation. The source library has no exact sorry-free declaration. The origin same_as field node has a stronger algebraic-closure hypothesis and an additional surjectivity conclusion; this metadata discrepancy is left for lead review.",
+  "blueprint": "The first sentence of the proof of lem-sc-as-sequence identifies the kernel of x^p-x on a local stalk with F_p; steps 1-3 supply its residue-field calculation, lift, and uniqueness."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 0A3J and 00E9 read, Mathlib leaf Subfield.mem_bot_iff_pow_eq_self line 748 verified, 3 steps checked, small cases tested"
+ }
 }
