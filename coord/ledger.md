@@ -674,3 +674,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:59 L reviewed lem-weil-pbc-flat-permanence (worker, 4 steps, 1 new leaf): pass, committed.
 - 00:00 L reviewed lem-weil-pbc-flat-fp-qf-stratification (worker, 10 steps, 2 new unsplit: 07RY, 06AC; tool_uses pqf-lem-qf-locqf-qc) and lem-weil-pbc-flat-over-regular (worker, 5 steps, 2 new: local criterion mod a nonzerodivisor unsplit, field-flat leaf): pass, committed.
 - 00:02 L: eleventh account limit at ~00:01 UTC; 5 workers died with nothing complete (flat-module-powers left 6 uncommitted new-node files); all 5 relaunched under the same claims. Delivery watch re-armed.
+- 00:07 L: reviewed lem-weil-pbc-flat-surjective-spectrum-faithfully-flat: Mathlib leaf (Module.FaithfullyFlat.of_comap_surjective, line verified); accepted.

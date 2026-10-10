@@ -2,14 +2,15 @@
  "id": "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
  "kind": "statement",
  "title": "A flat map surjective on spectra is faithfully flat",
- "statement": "Let $R\\to S$ be a flat ring map [def-weil-pbc-flat-ring-map]. If the induced map $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is surjective, then $R\\to S$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map].",
+ "statement": "Let $R\\to S$ be a flat ring map [def-weil-pbc-flat-ring-map]. If the induced map $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum], on points the map of prime spectra $\\mathfrak q\\mapsto\\varphi^{-1}(\\mathfrak q)$, is surjective, then $R\\to S$ is faithfully flat [def-weil-pbc-faithfully-flat-ring-map].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 00HQ (lemma-ff-rings), line 9164"
  },
  "stmt_deps": [
   "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-faithfully-flat-ring-map"
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-affine-spectrum"
  ],
  "proof": [],
  "proof_deps": [],
@@ -20,25 +21,58 @@
    "query": "flat ring homomorphism is faithfully flat iff Spec map is surjective",
    "results": "RingHom.FaithfullyFlat and Module.FaithfullyFlat; no spectrum characterization found",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "no match (superseded 2026-10-10 by the searches below, which found Module.FaithfullyFlat.of_comap_surjective)"
   },
   {
    "tool": "leanfinder",
    "query": "RingHom.Flat plus surjective spectrum implies RingHom.FaithfullyFlat",
    "results": "Module.FaithfullyFlat.of_flat_of_nonzero_fiber and RingHom.FaithfullyFlat, but no Spec theorem",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "no match (superseded 2026-10-10 by the searches below, which found Module.FaithfullyFlat.of_comap_surjective)"
   },
   {
    "tool": "grep",
    "query": "rg -n 'surjective.*Spec|FaithfullyFlat.*Spec|ff-rings' Mathlib/RingTheory Mathlib/AlgebraicGeometry",
    "results": "no theorem connecting spectrum surjectivity to faithful flatness",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "no match (superseded 2026-10-10 by the searches below, which found Module.FaithfullyFlat.of_comap_surjective)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat algebra with surjective map on prime spectra is faithfully flat",
+   "results": "Module.FaithfullyFlat.of_comap_surjective (Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra); RingHom.FaithfullyFlat.iff_flat_and_comap_surjective (Mathlib.RingTheory.RingHom.FaithfullyFlat); Module.FaithfullyFlat.of_specComap_surjective (LeanSearch index only; absent from this Mathlib by grep); AlgebraicGeometry.flat_and_surjective_SpecMap_iff (Mathlib.AlgebraicGeometry.Morphisms.Flat)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat, Function.Surjective, PrimeSpectrum.comap",
+   "results": "PrimeSpectrum.comap_surjective_of_faithfullyFlat; Module.FaithfullyFlat.of_comap_surjective (both Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'comap.*Surjective' Mathlib/RingTheory/Flat/ Mathlib/RingTheory/Spectrum/Prime/; sed -n 1,60p Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean; grep -n iff_flat_and_comap_surjective -A4 Mathlib/RingTheory/RingHom/FaithfullyFlat.lean",
+   "results": "Algebra.lean:48-50 `lemma Module.FaithfullyFlat.of_comap_surjective [Flat A B] (h : Function.Surjective (PrimeSpectrum.comap (algebraMap A B))) : Module.FaithfullyFlat A B`; RingHom/FaithfullyFlat.lean:41-42 `lemma iff_flat_and_comap_surjective : f.FaithfullyFlat ↔ f.Flat ∧ Function.Surjective (PrimeSpectrum.comap f)`",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.FaithfullyFlat.of_comap_surjective (project root ~/weil-conjectures-slopmaster2)",
+   "results": "lemma in .lake/packages/mathlib/Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean (index: unavailable; existence confirmed by sed of the file)",
+   "date": "2026-10-10",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "Module.FaithfullyFlat.of_comap_surjective",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean",
+  "line": 48,
+  "how": "exact: `lemma Module.FaithfullyFlat.of_comap_surjective [Flat A B] (h : Function.Surjective (PrimeSpectrum.comap (algebraMap A B))) : Module.FaithfullyFlat A B` (Algebra.lean:48-50, docstring 'If A →+* B is flat and surjective on prime spectra, B is a faithfully flat A-algebra'); PrimeSpectrum.comap φ is the map q ↦ φ⁻¹(q), the map on points of Spec.map of [def-weil-affine-spectrum]. For a bare ring map the same statement is the direction ← of `RingHom.FaithfullyFlat.iff_flat_and_comap_surjective` (Mathlib/RingTheory/RingHom/FaithfullyFlat.lean:41: f.FaithfullyFlat ↔ f.Flat ∧ Function.Surjective (PrimeSpectrum.comap f)). Faithfully flat is matched to Module.FaithfullyFlat / RingHom.FaithfullyFlat on [def-weil-pbc-faithfully-flat-ring-map]. Source read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +92,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Algebra 00HQ (lemma-ff-rings, algebra.tex line 9164; tag verified in stacks-project/tags/tags: 00HQ algebra-lemma-ff-rings, 00HP algebra-lemma-ff), direction (2)⇒(1). The three earlier searches recorded 'no match', which was wrong: Mathlib has exactly this statement as Module.FaithfullyFlat.of_comap_surjective (Algebra.lean:48) and, for ring maps, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective (RingHom/FaithfullyFlat.lean:41); both read with sed. The node is made a Mathlib leaf, no proof steps. The statement now cites def-weil-affine-spectrum for Spec S → Spec R and says the map on points is q ↦ φ⁻¹(q); stmt_deps gained def-weil-affine-spectrum. The proof that would be used otherwise (q over m gives mS ⊆ q ≠ S, then lem-weil-pbc-flat-faithfully-flat-maximal-ideals, Stacks 00HP) is the Mathlib proof itself."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Mathlib leaf: Module.FaithfullyFlat.of_comap_surjective (Flat/FaithfullyFlat/Algebra.lean:48-50) verified with sed; statement clause on the map of points added by the worker is correct and matches PrimeSpectrum.comap. Earlier 'no match' searches superseded."
+ }
 }
