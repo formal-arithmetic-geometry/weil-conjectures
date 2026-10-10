@@ -5,16 +5,54 @@
  "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion], let $z\\in Z$, and put $x=i(z)$. The homomorphism of residue fields $\\kappa(x)\\to\\kappa(z)$ induced by $i$ is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Definition Tag 01HK (definition-closed-immersion-locally-ringed-spaces: the map O_X -> i_*O_Z is surjective), together with the discussion before Lemma Tag 01J9 (lemma-characterize-points), which identifies residue fields as quotients of the local rings"
+  "place": "Schemes, Tag 01HJ-area (stalk maps and residue fields for morphisms of locally ringed spaces), together with Morphisms, Lemma Tag 01QO (closed-immersion affine quotient criterion)"
  },
  "stmt_deps": [
   "def-weil-closed-immersion",
   "def-weil-residue-field",
   "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_{X,x}$ and $B=\\mathcal O_{Z,z}$. The closed immersion gives a surjective sheaf map $i^\\sharp:\\mathcal O_X\\twoheadrightarrow i_*\\mathcal O_Z$ by the closed-immersion criterion [Morphisms, Tag 01QO]. By [lem-weil-pbc-locally-surjective-iff-stalks], its stalk map at $x$, $A\\to(i_*\\mathcal O_Z)_x$, is surjective. The stalk-bijection [lem-weil-pbc-closed-pushforward-stalks](2) gives a bijection $c_z:(i_*\\mathcal O_Z)_x\\xrightarrow{\\sim}B$. Under this bijection, the composite $A\\to(i_*\\mathcal O_Z)_x\\xrightarrow{c_z}B$ is the stalk map $i^\\sharp_z$ (the germ formula for $i^\\sharp$); it is a local homomorphism because $i$ is a morphism of locally ringed spaces [def-weil-locally-ringed-space-morphism]. Hence $i^\\sharp_z:A\\twoheadrightarrow B$ is a surjective local ring homomorphism.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-scheme",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-locally-surjective-iff-stalks",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01QO (closed immersion criterion), with Schemes Tag 01HJ-area for the stalk map of a morphism of locally ringed spaces; the stalk identification is Sheaves, Lemma Tag 00AE as recorded in lem-weil-pbc-closed-pushforward-stalks"
+   }
+  },
+  {
+   "text": "By [def-weil-residue-field], the induced residue-field map is $A/\\mathfrak m_A\\to B/\\mathfrak m_B$. It is surjective because $i^\\sharp_z$ is surjective. Its kernel is zero: locality gives $(i^\\sharp_z)^{-1}(\\mathfrak m_B)=\\mathfrak m_A$, so an element whose image lies in $\\mathfrak m_B$ already lies in $\\mathfrak m_A$. Therefore the homomorphism $\\kappa(x)\\to\\kappa(z)$ is an isomorphism.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Tag 01HJ-area (residue fields are quotients of local rings and the induced map is the quotient of the stalk map)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-locally-surjective-iff-stalks",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes Tag 01HJ-area and Morphisms Lemma Tag 01QO; the stalk and residue-quotient argument is written out using the cited DAG nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +84,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +104,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "worker": "stage1",
+  "summary": "Repaired step 1 using the reviewed stalk route: closed-immersion sheaf surjectivity gives stalk surjectivity via lem-weil-pbc-locally-surjective-iff-stalks, the stalk-bijection lem-weil-pbc-closed-pushforward-stalks identifies (i_* O_Z)_x with O_{Z,z}, and def-weil-locally-ringed-space-morphism supplies locality of the resulting i^sharp_z. The final residue-quotient step is elementary. Source places are corrected to Schemes 01HJ-area and Morphisms 01QO."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: second delivery: stalks node (2) and locally-surjective-iff-stalks cited, locality from the locally-ringed-space definition; L replaced the inline tag 01QO by the definition citation post-merge"
+ }
 }
