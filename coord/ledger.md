@@ -1688,3 +1688,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:54 L: returned deliver/G1/lem-sc-canonical-degree (reviewer RETURN: 1. D (new nodes are what the steps need, no more) and B9: lem-sc-finite-locally-free-dual, lem-sc-finite-locally-free-te)
 - 14:54 L: returned deliver/F1/lem-galois-fpqc-refinement-fully-faithful (reviewer RETURN: 1. C4/E1: Step 2 (proof[1]): [lem-galois-fpqc-morphisms-descend] is about schemes U,W over S and morphisms U\times_SX'\t)
 - 14:55 L: merged deliver/J1/lem-sc-vector-bundle-line-subbundle (reviewer PASS; first push; new nodes: 1)
+- 14:55 L: 39 nodes' imported lean.sorry_free flags set to false (transitively sorried per the sorry map); HUMAN entry; notice to all groups
