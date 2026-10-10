@@ -2240,3 +2240,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:25 L: merged deliver/M1/lem-sc-boundary-cech-injective-middle (reviewer FIX; after a return; new nodes: 0)
 - 18:26 L: lem-sc-boundary-cech-compatibility: sign of the Cech cocycle corrected (E7) to match the child's re-push (R-bim1824)
 - 18:26 L: merged deliver/C1/lem-pc-zero-scheme-pullback (reviewer FIX+NODE(1); first push; new nodes: 2)
+- 18:27 L: merged deliver/H1/lem-sp-cart-eilenberg-left-exact-cohomology (reviewer FIX; first push; new nodes: 0)

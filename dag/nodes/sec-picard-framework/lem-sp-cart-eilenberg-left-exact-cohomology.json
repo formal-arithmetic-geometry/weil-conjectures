@@ -23,46 +23,108 @@
   "def-sp-left-exact-additive",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "leansearch",
-   "query": "left exact additive functor preserves cohomology of a complex with injective cycles and boundaries",
-   "results": "unavailable (service returned Internal Server Error)",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
+   "text": "Fix $q$. In the abelian category $\\mathcal A$ there are short exact sequences $0\\to B^q(C)\\to Z^q(C)\\to H^q(C)\\to 0$ and $0\\to Z^q(C)\\to C^q\\to B^{q+1}(C)\\to 0$. The second sequence splits because its subobject $Z^q(C)$ is injective, and the first splits because its subobject $B^q(C)$ is injective: apply the defining extension property of an injective object to the relevant monomorphism. Thus both sequences are split exact.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015J (lemma-two-ss-complex-functor), proof: computation of the second spectral sequence, where injective cycles, boundaries, and cohomology split the differentials"
+   }
   },
   {
-   "tool": "loogle",
-   "query": "Functor.preservesHomology_of_map_exact, ShortComplex.Exact",
-   "results": "No matching declaration for the stated left-exact and injective-cycle/boundary hypothesis.",
+   "text": "Apply the additive left exact functor $G$ to these split exact sequences. Additivity preserves the chosen retractions and sections, while left exactness identifies $\\ker(G(C^q)\\to G(C^{q+1}))$ with $G(Z^q(C))$, since $d_C^q$ factors as $C^q\\to B^{q+1}(C)\\hookrightarrow C^{q+1}$ with a monomorphism second factor. Consequently, $G(d_C^{q-1})$ factoring as the split epimorphism $G(C^{q-1})\\to G(B^q(C))$ followed by the split monomorphism $G(B^q(C))\\to G(C^q)$, the image of $G(C^{q-1})\\to G(C^q)$ is $G(B^q(C))$, and the sequence $0\\to G(B^q(C))\\to G(Z^q(C))\\to G(H^q(C))\\to 0$ is split exact.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-sp-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015J (lemma-two-ss-complex-functor), proof: computation of the second spectral sequence after applying the left exact functor"
+   }
+  },
+  {
+   "text": "By the identifications in Step 2, $H^q(G(C^\\bullet))$ is the quotient $G(Z^q(C))/G(B^q(C))$, and the split exact sequence there identifies this quotient canonically with $G(H^q(C))$. The resulting map is exactly the comparison induced by the maps on cycles and quotients, so it is an isomorphism for every $q$.",
+   "uses": [
+    "def-sp-left-exact-additive",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015J (lemma-two-ss-complex-functor), proof: identification of the second spectral sequence E1 terms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 015J (lemma-two-ss-complex-functor), proof: computation of the second spectral sequence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left exact additive functor preserves cohomology of a complex with injective cycles and boundaries",
+   "results": "CategoryTheory.Functor.preservesHomology_of_map_exact (Mathlib/CategoryTheory/Abelian/Exact), CategoryTheory.Functor.preservesHomologyOfExact (Mathlib/Algebra/Homology/ShortComplex/PreservesHomology), CategoryTheory.Functor.exact_tfae and related exact-short-complex declarations; none states the injective-cycle/boundary specialization.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
-   "tool": "leanfinder",
-   "query": "For a complex whose cycles and boundaries are injective, a left exact additive functor preserves cohomology",
-   "results": "CategoryTheory.Functor.preservesHomology_of_map_exact and related exact-short-complex lemmas; none states the injective-cycle/boundary specialization.",
+   "tool": "loogle",
+   "query": "CategoryTheory.LeftExactFunctor, CategoryTheory.Functor.preservesHomology",
+   "results": "0 hits; unknown identifier CategoryTheory.Functor.preservesHomology.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "rg -n 'preservesHomology_of_map_exact|preservesHomologyOfExact' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian",
-   "results": "No matching source hits in the requested subdirectory.",
+   "query": "preservesHomology|left.?exact.*cohomology|injective.*cycle in Mathlib/CategoryTheory",
+   "results": "No matching source hits.",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "left exact additive functor preserves cohomology when cycles and boundaries are injective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sp-cartan-eilenberg-properties",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-cart-eilenberg-left-exact-cohomology",
+  "worker": "stage1",
+  "summary": "Added the direct proof from Stacks Lemma 015J: injectivity splits the cycle-boundary and cycle-cohomology short exact sequences, additivity and left exactness preserve the splittings and identify cycles and boundaries after applying G, and the induced quotient comparison is canonical and invertible. No new node was needed; all dependencies are existing definitions.",
+  "blueprint": "lem-pc-euler-characteristic-well-defined proof, first sentence: the Cartan--Eilenberg resolution properties used to identify the first-filtration E2 page",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cel1826",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cel1826 (reviewer sub-agent of L); spot-checked: Statement unchanged vs base (E7 ok); steps 1-3 checked: Z^q, B^q injective split both SESs, G additive keeps splittings, kernel preservation gives G(Z^q) via d^q = C^q->B^{q+1} mono C^{q+1}, image G(B^q) via split epi/split mono factorisation; only three definition deps, no citation of lem-sp-cartan-eilenberg-properties (its creator) or the E1 cartesian node, so no cycle; injectivity is a hypothesis so no 015H (4)-(6) citation needed. FIX more, RETURN less: (1) B4 plain-text arrows/'C^bullet' in steps 1-3 rewritten in TeX, step 2 now names the mono/split factorisations it uses; (2) item source.place still said 015I although the report and second reading claimed it corrected to 015J; set to 015J (lemma-two-ss-complex-functor).; 1 file(s) fixed by the reviewer"
+ }
 }
