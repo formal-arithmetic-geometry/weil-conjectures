@@ -1,8 +1,8 @@
 # Work queue
 
-931 items; claim with `tools/claim.py next <group> [--stage N]`.
+930 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (235)
+## Stage 1: nodes to split (233)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,11 +12,11 @@
 | `lem-sc-krull-akizuki-noetherian` | 2017 | none |
 | `lem-pc-derived-functor-truncation-stabilization` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
-| `lem-pc-essentially-constant-ind-hom-colimit` | 3013 | none |
 | `lem-pc-essentially-constant-pro-hom-colimit` | 3013 | none |
 | `lem-pc-left-localization-hom-colimit` | 3013 | none |
 | `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
 | `lem-pc-stalk-tensor-complex` | 3013 | none |
+| `def-pc-essentially-constant-ind-diagram` | 3014 | none |
 | `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
@@ -50,7 +50,6 @@
 | `lem-sc-product-tangent-space-direct-sum` | 4010 | none |
 | `lem-sc-rational-unramified-cotangent-criterion` | 4010 | none |
 | `lem-pc-derived-filtered-free-resolution` | 4012 | none |
-| `lem-pc-derived-module-direct-sums` | 4012 | none |
 | `lem-pc-affine-tilde-kflat` | 4013 | none |
 | `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
 | `lem-pc-flat-tensor-complex-cohom` | 5009 | none |
@@ -68,7 +67,6 @@
 | `lem-pc-noetherian-perfect-direct-image` | 5012 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
 | `thm-sp-grothendieck` | 6004 | none |
-| `lem-sp-edge-collapse` | 6005 | none |
 | `thm-sp-double-complex-spectral-sequences` | 6005 | sorry_here |
 | `thm-sp-if-e1` | 6005 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
@@ -242,7 +240,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (696)
+## Stage 2: nodes to state (697)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -329,6 +327,7 @@
 | `lem-pc-cech-exact` | 1 | state |
 | `lem-pc-derived-acyclic-resolution` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
+| `lem-pc-derived-module-direct-sums` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
 | `lem-pc-fpqc-descend-closed-immersion` | 1 | state |
@@ -943,7 +942,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1372 nodes that wait for a statement dependency, 271 nodes that wait for stage 1.
+Not open yet: 1374 nodes that wait for a statement dependency, 269 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
