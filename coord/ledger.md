@@ -810,3 +810,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:04 L: merged G1 z-localizations-dvr (4 steps; the item C1 abandoned); L removed the tag references from the statement afterwards. The stale branch deliver/C1/lem-weil-pbc-z-localizations-dvr (abandoned) can be deleted by the human.
 - 03:06 L: reviewed lem-weil-pbc-cohen-coefficient-ring-exists (7 steps, +3: 0322 composed leaf, 0328, 0329): accepted.
 - 03:07 L: reviewed lem-weil-pbc-criterion-flatness-fibre-noetherian (7 steps, +00HP module leaf): accepted.
+- 03:09 L: reviewed lem-weil-pbc-completion-at-quasi-finite-prime (8 steps, +1 node, leaf demoted), lem-weil-pbc-cotangent-complex-symmetric-algebra (statement corrected: Stacks 07EV false, HUMAN.md), lem-weil-pbc-coherent-modules-kernel-cokernel-sum (7 steps, +3), lem-weil-pbc-etale-residue-polynomial-lift (4 steps), lem-weil-pbc-faithfully-flat-base-change (Mathlib leaf): accepted.
