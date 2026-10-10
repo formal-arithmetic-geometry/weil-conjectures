@@ -2235,3 +2235,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:20 L: merged deliver/J1/lem-sc-smooth-proper-diagonal-koszul-dual (reviewer FIX; after a return; new nodes: 1)
 - 18:21 L: returned deliver/M1/thm-pc-hilb-curves (reviewer RETURN: Reviewer R-thc1820 (head f6c014b03). More than three fixable faults, so RETURN. No cycle: thm-pc-hilb-curves is not reac)
 - 18:22 L: merged deliver/K1/lem-sc-sheaf-ext-coherent (reviewer FIX; after a return; new nodes: 2)
+- 18:23 L: returned deliver/K1/lem-pc-sigma-k-points (reviewer RETURN: 1. C1/D (reviewer R-skp1822): the statement and step 1 use the definition of Pic_{X/k,sigma} as Ker(sigma_T^*: Pic(X_T) )
