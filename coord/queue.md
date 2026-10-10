@@ -1,8 +1,8 @@
 # Work queue
 
-918 items; claim with `tools/claim.py next <group> [--stage N]`.
+915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (340)
+## Stage 1: nodes to split (335)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-ample-proj-open` | 2013 | none |
 | `lem-sc-boundary-cech-local-lifts` | 2013 | none |
-| `lem-sc-cech-h1-map-natural` | 2013 | none |
 | `lem-sc-closed-pushforward-boundary-naturality` | 2013 | none |
 | `lem-sc-finite-sections-cover-qc` | 2013 | none |
 | `lem-sc-proj-standard-open-basis` | 2013 | none |
@@ -65,7 +64,6 @@
 | `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
 | `lem-sc-p1-regular-dimension-one` | 3013 | none |
-| `lem-sc-regular-local-ext-vanishing` | 3013 | none |
 | `def-pc-upper-shriek-right-adjoint` | 3014 | none |
 | `lem-pc-field-extension-flat` | 3014 | none |
 | `lem-pc-field-extension-quasi-compact` | 3014 | none |
@@ -75,11 +73,8 @@
 | `lem-sc-open-map-irreducible-fibres-components` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
-| `lem-sc-p1-graded-degree-component-exact` | 3015 | none |
 | `lem-sc-p1-graded-nakayama-generation` | 3015 | none |
-| `lem-sc-p1-graded-submodule-finite` | 3015 | none |
 | `lem-sc-p1-invertible-section-localization` | 3015 | none |
-| `lem-sc-p1-linear-syzygy` | 3015 | none |
 | `lem-sc-p1-minimal-presentation-tor` | 3015 | none |
 | `lem-sc-p1-tor-dimension-shift-natural` | 3015 | none |
 | `lem-sc-p1-twist-multiplication` | 3015 | none |
@@ -347,7 +342,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (578)
+## Stage 2: nodes to state (580)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -447,6 +442,7 @@
 | `lem-sc-irreducible-product-over-field` | 1 | state |
 | `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
+| `lem-sc-p1-graded-degree-component-exact` | 1 | state |
 | `lem-sc-p1-tor-dimension-shifting` | 1 | state |
 | `lem-sc-pic-proper-decomposition` | 1 | state |
 | `lem-sc-pic-proper-ntorsion` | 1 | state |
@@ -456,6 +452,7 @@
 | `lem-sc-reduced-ideals-zero-intersection` | 1 | state |
 | `lem-sc-regular-connected-integral` | 1 | state |
 | `lem-sc-regular-local-domain` | 1 | state |
+| `lem-sc-regular-local-ext-vanishing` | 1 | state |
 | `lem-sc-smooth-algebra-reduced-field` | 1 | state |
 | `lem-sc-zero-dim-noetherian-closed-finite` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
@@ -930,7 +927,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 358 nodes that wait for stage 1, 1147 nodes that wait for a statement dependency.
+Not open yet: 353 nodes that wait for stage 1, 1150 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
