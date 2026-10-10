@@ -1,15 +1,13 @@
 # Work queue
 
-909 items; claim with `tools/claim.py next <group> [--stage N]`.
+905 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (294)
+## Stage 1: nodes to split (289)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-open-subscheme-fpqc-descent` | 2008 | none |
-| `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 2008 | none |
-| `lem-weil-pbc-sets-etale-inverse-image-constant-base-change` | 2009 | none |
 | `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
 | `lem-sc-irreducible-constant-sections` | 2014 | none |
 | `lem-sc-topological-extension-by-zero-stalks` | 2014 | none |
@@ -43,7 +41,6 @@
 | `lem-pc-derived-adjoint-functors` | 3016 | none |
 | `lem-pc-derived-ambient-direct-sums` | 3016 | none |
 | `lem-pc-derived-direct-image-uniform-truncation-bound` | 3016 | none |
-| `lem-sc-kahler-differentials-diagonal-ideal` | 3016 | none |
 | `lem-sc-p1-section-restriction-s-torsion` | 3016 | none |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 3016 | none |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 3017 | none |
@@ -62,11 +59,9 @@
 | `thm-pc-f-representable` | 4009 | rests_on_sorry |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
 | `lem-pc-projection-formula` | 4010 | sorry_here |
-| `lem-pc-smooth-flat` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-pc-zero-scheme-recd` | 4010 | rests_on_sorry |
 | `lem-pc-degree-zero-properties` | 4011 | none |
-| `lem-pc-smooth-characterization` | 4011 | none |
 | `def-weil-pbc-etale-sheaves` | 5002 | none |
 | `def-weil-pbc-etale-site` | 5002 | none |
 | `def-weil-size-convention` | 5003 | none |
@@ -301,7 +296,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (615)
+## Stage 2: nodes to state (616)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -792,6 +787,7 @@
 | `lem-weil-pbc-separated-affine-cover-criterion` | 1 | state |
 | `lem-weil-pbc-separating-transcendence-basis-finite-subextension` | 1 | state |
 | `lem-weil-pbc-set-cech-nerve-free-resolution` | 1 | state |
+| `lem-weil-pbc-sets-etale-inverse-image-constant-base-change` | 1 | state |
 | `lem-weil-pbc-sets-finite-pushforward-stalk` | 1 | state |
 | `lem-weil-pbc-sets-inverse-image-composition` | 1 | state |
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
@@ -921,7 +917,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 319 nodes that wait for stage 1, 1294 nodes that wait for a statement dependency.
+Not open yet: 314 nodes that wait for stage 1, 1295 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
