@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-tor-map-via-resolution-lift",
+ "kind": "statement",
+ "title": "Maps on Tor are computed by lifts to projective resolutions",
+ "statement": "Let $R$ be a commutative ring and $i\\ge0$. For an $R$-module $M$ with a projective resolution $\\cdots\\to P_1\\to P_0\\xrightarrow{\\varepsilon}M\\to0$ (exact, $P_n$ projective) and an $R$-module $N$, let $\\iota_{P,N}:\\operatorname{Tor}^R_i(M,N)\\xrightarrow{\\sim}H_i(P_\\bullet\\otimes_RN)$ be the canonical isomorphism of [def-weil-pbc-tor-modules]. (1) Let $\\varphi:M\\to M'$ be $R$-linear, $\\cdots\\to P'_1\\to P'_0\\xrightarrow{\\varepsilon'}M'\\to0$ a projective resolution of $M'$ and $a:P_\\bullet\\to P'_\\bullet$ a morphism of complexes with $\\varepsilon'a_0=\\varphi\\varepsilon$. Then $\\iota_{P',N}\\circ\\operatorname{Tor}^R_i(\\varphi,N)=H_i(a\\otimes1_N)\\circ\\iota_{P,N}$ for every $R$-module $N$. (2) Let $\\psi:N\\to N'$ be $R$-linear. Then $\\iota_{P,N'}\\circ\\operatorname{Tor}^R_i(M,\\psi)=H_i(1_{P_\\bullet}\\otimes\\psi)\\circ\\iota_{P,N}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LZ (lemma-tor-welldefined, lines 18238--18262: the maps H_i(alpha) for a lift alpha of phi are independent of the lift) and the paragraph after it (lines 18264--18290: this gives the functoriality in the first variable; 'the functoriality in the second variable is evident'), in Section Tag 00LY. Tags verified in tags/tags: 00LZ,algebra-lemma-tor-welldefined; 00LY,algebra-section-tor"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "left derived functor applied to a morphism computed by a chain map between projective resolutions lifting it",
+   "results": "Functor.leftDerived_map_eq, ProjectiveResolution.leftDerived_app_eq, ProjectiveResolution.isoLeftDerivedObj, ProjectiveResolution.isoLeftDerivedObj_hom_naturality, isoLeftDerivedToHomotopyCategoryObj_hom_naturality (Mathlib.CategoryTheory.Abelian.LeftDerived)",
+   "date": "2026-10-10",
+   "verdict": "match: isoLeftDerivedObj_hom_naturality for (1), leftDerived_app_eq for (2)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj",
+   "results": "isoLeftDerivedObj, ProjectiveResolution.leftDerived_app_eq, Functor.leftDerived_map_eq, ProjectiveResolution.fromLeftDerivedZero_eq, isoLeftDerivedObj_hom_naturality(_assoc), isoLeftDerivedObj_inv_naturality(_assoc)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor computed from a projective resolution: map on Tor induced by a module map equals homology of the lifted chain map tensored",
+   "results": "CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_obj_obj (Mathlib.CategoryTheory.Monoidal.Tor), ProjectiveResolution.fromLeftDerivedZero'",
+   "date": "2026-10-10",
+   "verdict": "match: Tor'_map_app / Tor'_obj_map reduce the maps of Tor' to leftDerived maps"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|def ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/LeftDerived.lean; sed -n 105,150p and 236,258p of that file; sed -n 40,60p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Tor.lean",
+   "results": "Functor.leftDerived (107), ProjectiveResolution.isoLeftDerivedObj (111), isoLeftDerivedObj_hom_naturality (123), isoLeftDerivedObj_inv_naturality (138), Functor.leftDerived_map_eq (161), leftDerived_app_eq (240); Tor' (Monoidal/Tor.lean 50, simps obj_obj map_app obj_map)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Tor' (project ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.Tor' in .lake/packages/mathlib/Mathlib/CategoryTheory/Monoidal/Tor.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "name exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality, CategoryTheory.ProjectiveResolution.leftDerived_app_eq",
+  "file": "Mathlib/CategoryTheory/Abelian/LeftDerived.lean",
+  "line": 123,
+  "how": "one Mathlib lemma per clause, in C = ModuleCat R with Tor^R_i(M,N) = ((Tor' (ModuleCat R) i).obj M).obj N = ((tensoringRight N).leftDerived i).obj M and iota_{P,N} = (P.isoLeftDerivedObj (tensoringRight N) i).hom, as in the match of def-weil-pbc-tor-modules (P a Mathlib ProjectiveResolution M, whose complex is P_bullet and P.pi.f 0 = epsilon). (1) Tor_i(phi,N) = ((Tor' _ i).map phi).app N = ((tensoringRight N).leftDerived i).map phi (Tor'_map_app, simps of Tor', Monoidal/Tor.lean line 50); isoLeftDerivedObj_hom_naturality phi P P' a (comm : a.f 0 >> P'.pi.f 0 = P.pi.f 0 >> phi) (tensoringRight N) i (LeftDerived.lean line 123) is the clause, the homology map of (tensoringRight N).mapHomologicalComplex applied to a being H_i(a (x) 1_N). (2) Tor_i(M,psi) = ((Tor' _ i).obj M).map psi = (NatTrans.leftDerived ((tensoringRight _).map psi) i).app M (Tor'_obj_map); leftDerived_app_eq ((tensoringRight _).map psi) P i (line 240) writes it as iota_{P,N}^{-1}-conjugate of the homology map of NatTrans.mapHomologicalComplex, which is H_i(1_P (x) psi). Source read 2026-10-10 (LeftDerived.lean lines 105--150, 236--258; Tor.lean 40--60)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-tor-long-exact-first-variable",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf (isoLeftDerivedObj_hom_naturality LeftDerived.lean:123, leftDerived_app_eq :240, via Tor'_map_app/Tor'_obj_map), under the same identification as def-weil-pbc-tor-modules; lines verified."
+}

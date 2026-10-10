@@ -10,9 +10,87 @@
  "stmt_deps": [
   "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Resolutions. By [lem-weil-pbc-free-resolution-ses-split] choose chain complexes of free $R$-modules $F_\\bullet,F'_\\bullet,F''_\\bullet$ with augmentations $\\varepsilon:F_0\\to Q$, $\\varepsilon':F'_0\\to Q'$, $\\varepsilon'':F''_0\\to Q''$ making them free resolutions of $Q,Q',Q''$, morphisms of complexes $\\alpha:F_\\bullet\\to F'_\\bullet$, $\\beta:F'_\\bullet\\to F''_\\bullet$ with $\\varepsilon'\\alpha_0=u\\varepsilon$, $\\varepsilon''\\beta_0=v\\varepsilon'$, and maps $\\pi_n:F'_n\\to F_n$, $s_n:F''_n\\to F'_n$ with $\\beta_n\\alpha_n=0$, $\\pi_n\\alpha_n=1$, $\\beta_ns_n=1$, $\\alpha_n\\pi_n+s_n\\beta_n=1$. These choices depend only on the short exact sequence, not on $N$; they are fixed for the rest of the proof and for all modules $N$ at once (this is what makes $\\delta$ below natural in $N$).",
+   "uses": [
+    "lem-weil-pbc-free-resolution-ses-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext, lines 17681--17711), transposed from Hom_R(-, N) to - (x)_R N"
+   }
+  },
+  {
+   "text": "Tensoring with $N$. For an $R$-module $N$ put $C_\\bullet=F_\\bullet\\otimes_RN$, $C'_\\bullet=F'_\\bullet\\otimes_RN$, $C''_\\bullet=F''_\\bullet\\otimes_RN$ (differentials $d\\otimes1$ etc.) and $a=\\alpha\\otimes1_N:C_\\bullet\\to C'_\\bullet$, $b=\\beta\\otimes1_N:C'_\\bullet\\to C''_\\bullet$; these are morphisms of complexes since $-\\otimes1_N$ preserves composites. For every $n$ the sequence $0\\to C_n\\xrightarrow{a_n}C'_n\\xrightarrow{b_n}C''_n\\to0$ is exact: applying $-\\otimes1_N$ (which preserves composites, identities and sums of maps) to the identities of Step 1 gives $b_na_n=0$, $(\\pi_n\\otimes1)a_n=1$, $b_n(s_n\\otimes1)=1$ and $a_n(\\pi_n\\otimes1)+(s_n\\otimes1)b_n=1$; so $a_n$ is injective, $b_n$ is surjective, and if $b_n(x)=0$ then $x=a_n((\\pi_n\\otimes1)x)$. For an $R$-linear $g:N\\to N'$ write $C_\\bullet(g)=1_{F_\\bullet}\\otimes g:C_\\bullet\\to F_\\bullet\\otimes_RN'$, and likewise $C'_\\bullet(g)$, $C''_\\bullet(g)$; these are morphisms of complexes commuting with $a$ and $b$, since $(\\alpha_n\\otimes1_{N'})(1\\otimes g)=\\alpha_n\\otimes g=(1\\otimes g)(\\alpha_n\\otimes1_N)$ and likewise for $\\beta$ and the differentials.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext, lines 17681--17711), transposed from Hom_R(-, N) to - (x)_R N"
+   }
+  },
+  {
+   "text": "Identifications. By [def-weil-pbc-tor-modules], applied with the free (hence projective) resolutions of Step 1, there are isomorphisms $\\iota_N:\\operatorname{Tor}^R_1(Q,N)\\to H_1(C_\\bullet)$, $\\iota'_N:\\operatorname{Tor}^R_1(Q',N)\\to H_1(C'_\\bullet)$, $\\iota''_N:\\operatorname{Tor}^R_1(Q'',N)\\to H_1(C''_\\bullet)$, where $H_1=\\ker(d_1\\otimes1)/\\operatorname{im}(d_2\\otimes1)$. By [lem-weil-pbc-tor-map-via-resolution-lift] (1), applied to $\\varphi=v$ and the lift $\\beta$ ($\\varepsilon''\\beta_0=v\\varepsilon'$), $\\iota''_N\\circ\\operatorname{Tor}_1(v,N)=H_1(b)\\circ\\iota'_N$; by [lem-weil-pbc-tor-map-via-resolution-lift] (2), applied to $g:N\\to N'$ and the resolution $F''_\\bullet$, $\\iota''_{N'}\\circ\\operatorname{Tor}_1(Q'',g)=H_1(C''_\\bullet(g))\\circ\\iota''_N$. In degree $0$: $F_1\\xrightarrow{d_1}F_0\\xrightarrow{\\varepsilon}Q\\to0$ is exact, so by [lem-weil-pbc-tensor-right-exact] $F_1\\otimes N\\xrightarrow{d_1\\otimes1}F_0\\otimes N\\xrightarrow{\\varepsilon\\otimes1}Q\\otimes N\\to0$ is exact, and $\\varepsilon\\otimes1$ induces an isomorphism $c_N:H_0(C_\\bullet)=\\operatorname{coker}(d_1\\otimes1_N)\\to Q\\otimes_RN$; likewise $c'_N:H_0(C'_\\bullet)\\to Q'\\otimes_RN$. Since $(\\varepsilon'\\otimes1)(\\alpha_0\\otimes1)=(u\\otimes1)(\\varepsilon\\otimes1)$ one has $c'_N\\circ H_0(a)=(u\\otimes1_N)\\circ c_N$, and since $(\\varepsilon\\otimes1_{N'})(1_{F_0}\\otimes g)=(1_Q\\otimes g)(\\varepsilon\\otimes1_N)$ one has $c_{N'}\\circ H_0(C_\\bullet(g))=(1_Q\\otimes g)\\circ c_N$.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tor-map-via-resolution-lift",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00LY (lines 18205--18290): Tor computed from a free resolution of the first variable, functoriality via Lemma 00LZ; Lemma Tag 00DF (lemma-tensor-product-exact) for degree 0"
+   }
+  },
+  {
+   "text": "The connecting map. Write $Z_1(C)=\\ker(d_1\\otimes1)$, $B_1(C)=\\operatorname{im}(d_2\\otimes1)$ and $\\bar C_1=C_1/B_1(C)$, likewise for $C',C''$. Consider the commutative diagram with rows $\\bar C_1\\xrightarrow{\\bar a_1}\\bar C'_1\\xrightarrow{\\bar b_1}\\bar C''_1\\to0$ and $0\\to C_0\\xrightarrow{a_0}C'_0\\xrightarrow{b_0}C''_0$ and vertical maps $\\bar d_1,\\bar d'_1,\\bar d''_1$ induced by the differentials (well defined as $d_1d_2=0$; the squares commute since $a,b$ are morphisms of complexes). The bottom row is exact by Step 2. The top row is exact: $\\bar b_1$ is surjective as $b_1$ is; $\\bar b_1\\bar a_1=0$ as $b_1a_1=0$; if $y\\in C'_1$ has $b_1(y)\\in B_1(C'')$, say $b_1(y)=d''_2(z'')$, write $z''=b_2(z')$ ($b_2$ surjective), then $b_1(y-d'_2z')=b_1(y)-d''_2b_2(z')=0$, so $y-d'_2z'=a_1(x)$ for some $x\\in C_1$ by Step 2, and the class of $y$ is $\\bar a_1$ of the class of $x$. The kernels of the vertical maps are $\\ker\\bar d_1=Z_1(C)/B_1(C)=H_1(C_\\bullet)$ (and likewise for $C',C''$) and the cokernels are $\\operatorname{coker}\\bar d_1=C_0/\\operatorname{im}d_1=H_0(C_\\bullet)$; the maps induced by $\\bar a_1,\\bar b_1,a_0,b_0$ are $H_1(a),H_1(b),H_0(a),H_0(b)$. By [lem-weil-pbc-snake-lemma-modules] there is an $R$-linear $\\partial_N:H_1(C''_\\bullet)\\to H_0(C_\\bullet)$ with $H_1(C'_\\bullet)\\xrightarrow{H_1(b)}H_1(C''_\\bullet)\\xrightarrow{\\partial_N}H_0(C_\\bullet)\\xrightarrow{H_0(a)}H_0(C'_\\bullet)$ exact, given by: for a cycle $z\\in Z_1(C'')$ choose $y\\in C'_1$ with $b_1(y)=z$ and $w\\in C_0$ with $a_0(w)=d'_1(y)$; then $\\partial_N[z]=[w]$.",
+   "uses": [
+    "lem-weil-pbc-snake-lemma-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma Tag 0111 (lemma-long-exact-sequence-chain, lines 2967--3007): the maps come from the snake lemma (Tag 010H) applied to the diagram of the A_i/Im(d_{i+1}) -> Ker(d_{i-1})"
+   }
+  },
+  {
+   "text": "Exactness. Put $\\delta_N=c_N\\circ\\partial_N\\circ\\iota''_N:\\operatorname{Tor}^R_1(Q'',N)\\to Q\\otimes_RN$, an $R$-linear map. Under the isomorphisms $\\iota'_N,\\iota''_N,c_N,c'_N$ the part $\\operatorname{Tor}_1(Q',N)\\xrightarrow{\\operatorname{Tor}_1(v,N)}\\operatorname{Tor}_1(Q'',N)\\xrightarrow{\\delta_N}Q\\otimes N\\xrightarrow{u\\otimes1}Q'\\otimes N$ of the claimed sequence corresponds, by Step 3 ($\\iota''_N\\operatorname{Tor}_1(v,N)=H_1(b)\\iota'_N$, $c'_NH_0(a)=(u\\otimes1)c_N$, and $\\delta_N\\iota''^{-1}_N=c_N\\partial_N$ by definition), to the exact sequence $H_1(C')\\xrightarrow{H_1(b)}H_1(C'')\\xrightarrow{\\partial_N}H_0(C)\\xrightarrow{H_0(a)}H_0(C')$ of Step 4; a sequence isomorphic to an exact one is exact, so the claimed sequence is exact at $\\operatorname{Tor}_1(Q'',N)$ and at $Q\\otimes N$. Exactness at $Q'\\otimes N$ and surjectivity of $v\\otimes1$: [lem-weil-pbc-tensor-right-exact] applied to $Q\\xrightarrow{u}Q'\\xrightarrow{v}Q''\\to0$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma Tag 0111 (lemma-long-exact-sequence-chain, lines 2967--3007): the maps come from the snake lemma (Tag 010H) applied to the diagram of the A_i/Im(d_{i+1}) -> Ker(d_{i-1})"
+   }
+  },
+  {
+   "text": "Naturality in $N$. Let $g:N\\to N'$ be $R$-linear and $z\\in Z_1(C'')$ (for $N$). Choose $y,w$ as in Step 4, so $b_1(y)=z$, $a_0(w)=d'_1(y)$, $\\partial_N[z]=[w]$. By Step 2 the maps $C(g),C'(g),C''(g)$ commute with $a,b$ and the differentials, so $C''_1(g)z$ is a cycle for $N'$, $b_1(C'_1(g)y)=C''_1(g)z$ and $a_0(C_0(g)w)=d'_1(C'_1(g)y)$; these are admissible choices in the formula of [lem-weil-pbc-snake-lemma-modules] (whose value does not depend on the choices), so $\\partial_{N'}H_1(C''(g))[z]=[C_0(g)w]=H_0(C(g))\\partial_N[z]$. Hence, using Step 3 ($\\iota''_{N'}\\operatorname{Tor}_1(Q'',g)=H_1(C''(g))\\iota''_N$ and $c_{N'}H_0(C(g))=(1_Q\\otimes g)c_N$): $\\delta_{N'}\\circ\\operatorname{Tor}_1(Q'',g)=c_{N'}\\partial_{N'}H_1(C''(g))\\iota''_N=c_{N'}H_0(C(g))\\partial_N\\iota''_N=(1_Q\\otimes g)c_N\\partial_N\\iota''_N=(1_Q\\otimes g)\\circ\\delta_N$. The other squares commute by bifunctoriality: $(1\\otimes g)(u\\otimes1)=(u\\otimes1)(1\\otimes g)$ and $(1\\otimes g)(v\\otimes1)=(v\\otimes1)(1\\otimes g)$ on elements $q\\otimes x$; and $\\operatorname{Tor}_1(Q'',g)\\operatorname{Tor}_1(v,N)=\\operatorname{Tor}_1(v,N')\\operatorname{Tor}_1(Q',g)$ because by Step 3 both sides correspond under $\\iota'_N,\\iota''_{N'}$ to $H_1(\\beta\\otimes g)=H_1(C''(g))H_1(b)=H_1(b)H_1(C'(g))$ (using [lem-weil-pbc-tor-map-via-resolution-lift] (1) for $N'$ and (2) for $F'_\\bullet$).",
+   "uses": [
+    "lem-weil-pbc-snake-lemma-modules",
+    "lem-weil-pbc-tor-map-via-resolution-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma Tag 0111 (lemma-long-exact-sequence-chain, lines 2967--3007): the maps come from the snake lemma (Tag 010H) applied to the diagram of the A_i/Im(d_{i+1}) -> Ker(d_{i-1})"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-resolution-ses-split",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-tor-map-via-resolution-lift",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-snake-lemma-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section Tag 00LY with Lemma Tag 00LZ (Tor via a free resolution of the first variable) and the proof of Lemma Tag 065P (lines 17681--17711: a degreewise split short exact sequence of free resolutions, used there for Ext in the first variable, here tensored with N instead of Hom(-, N)), with Homology Lemma Tag 0111 (homology.tex, lemma-long-exact-sequence-chain, via the snake lemma 010H). The item's source (00M0 with 00M3) proves it through the symmetry Tor_i(M,N) = Tor_i(N,M); since def-weil-pbc-tor-modules resolves the first variable, the direct route avoids 00M3 and its double-complex argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +112,38 @@
    "results": "no ShortExact in LeftDerived.lean or Tor.lean; leftDerived used in Monoidal/Tor.lean, Abelian/LeftDerived.lean, Functor/Derived/*, Abelian/Ext.lean, RightDerived.lean, GroupHomology/Basic.lean, none with a long exact sequence",
    "verdict": "no match",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "long exact sequence of left derived functors for a short exact sequence, connecting morphism Tor first variable",
+   "results": "ShortComplex.ShortExact.δ (Mathlib.Algebra.Homology.HomologySequence), SnakeInput.L1'_exact, L0'_exact (SnakeLemma), ShortExact.singleδ, singleTriangle_mor1 (DerivedCategory.SingleTriangle), CategoryTheory.Tor, CategoryTheory.Tor'",
+   "date": "2026-10-10",
+   "verdict": "no match (homology sequence of complexes and snake lemma only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact sequence Tor_1(M', N) -> Tor_1(M'', N) -> M (x) N -> M' (x) N -> M'' (x) N -> 0 for a short exact sequence of modules",
+   "results": "lTensor_exact, rTensor_exact (Mathlib.LinearAlgebra.TensorProduct.RightExactness), Module.Flat.lTensor_shortComplex_exact, rTensor_shortComplex_exact, LinearMap.rTensor_exact_iff_lTensor_exact, Module.Flat.lTensor_exact",
+   "date": "2026-10-10",
+   "verdict": "no match (right-exact part only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived, CategoryTheory.ShortComplex.ShortExact",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no Mathlib declaration mentions both left derived functors and short exact sequences"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln ShortExact ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | xargs grep -ln 'leftDerived\\|Tor'; grep -rn leftDerived ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ | grep -i 'δ\\|delta\\|exact\\|sequence'; grep -rlni horseshoe ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "only RingTheory/Flat/CategoryTheory.lean (flatness, no Tor sequence); no long exact sequence of leftDerived; no horseshoe lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +163,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-tor-long-exact-first-variable",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 00M0/00M3 and against its use in lem-weil-pbc-limit-flat-modules (exactness at Tor_1(Q'',N) and at Q(x)N, naturality of all maps in N); kept unchanged. Since def-weil-pbc-tor-modules computes Tor from a resolution of the first variable, the proof does not go through the symmetry 00M3 but follows the direct route: a degreewise split short exact sequence of free resolutions (proof of Algebra 065P; new unsplit node lem-weil-pbc-free-resolution-ses-split, not in Mathlib), tensored with N (degreewise split, elementary), the low-degree homology sequence by the snake lemma as in Homology 0111 (existing leaf lem-weil-pbc-snake-lemma-modules, whose explicit formula for the connecting map gives the naturality in N), degree 0 by right exactness (existing leaf lem-weil-pbc-tensor-right-exact), and the identification of Tor_1(v,N) and Tor_1(Q'',g) with homology maps of lifts (new Mathlib leaf lem-weil-pbc-tor-map-via-resolution-lift: isoLeftDerivedObj_hom_naturality, leftDerived_app_eq). Item's Mathlib search completed (leansearch, leanfinder, loogle, grep): no long exact Tor sequence in Mathlib."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps by the direct route (the Tor definition resolves the first variable): split free resolutions of the short exact sequence chosen once (new unsplit node for the construction in the proof of 065P); tensoring keeps degreewise split exactness, maps 1 (x) g commute; identifications of Tor_1 and H_0 (new composed leaf for 00LZ: isoLeftDerivedObj_hom_naturality line 123, leftDerived_app_eq line 240, verified by L; consistent with the Tor definition's match); the connecting map by the snake leaf with an explicit exactness chase; exactness by transport and right exactness; naturality of delta in N from the snake formula. Statement unchanged. Stage-3 note: the citer's split_report describes the route as 00M0 + 00M3."
+ }
 }
