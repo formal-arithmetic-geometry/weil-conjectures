@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-proper-closed-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A proper morphism has closed image",
@@ -15,26 +15,57 @@
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [
-  {
-   "text": "A proper morphism is universally closed, hence closed: by\n[def-weil-pbc-scheme-conventions] every base change of a proper morphism is a\nclosed map, so $f$ itself is a closed map, and the identity base change gives\nthe asserted closedness. Its image is therefore a closed subset of $Y$,\ncarrying the induced closed subscheme structure of the scheme-theoretic\nimage, and $f$ restricted to its image is a proper surjection.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions"
- ],
+ "proof": [],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-weil-pbc-proper-closed-image.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scheme theoretic image of a proper morphism is a closed subscheme and the factor map is proper surjective",
+   "results": "AlgebraicGeometry.Scheme.Hom.image, AlgebraicGeometry.Scheme.Hom.toImage, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.Scheme.Hom.app_surjective, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine",
+   "date": "2026-10-11",
+   "verdict": "no exact match; ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isProper_imageι_comp",
+   "results": "unknown identifier",
+   "date": "2026-10-11",
+   "verdict": "unavailable search endpoint for this declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "isProper_imageι_comp|imageι|toImage in Mathlib/AlgebraicGeometry",
+   "results": "no hits in Mathlib; the declaration is in the project extension WeilConjectures.Mathlib, not Mathlib",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "scheme theoretic image of proper morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma Scheme.Hom.isClosedMap\\|class UniversallyClosed' Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean; grep -n 'class IsProper' Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; grep -n 'theorem isClosed_range' Mathlib/Topology/Maps/Basic.lean (slopmaster2 Mathlib)",
+   "results": "Scheme.Hom.isClosedMap (f : X ⟶ Y) [UniversallyClosed f] : IsClosedMap f (UniversallyClosed.lean:49); class IsProper extends IsSeparated f, UniversallyClosed f, LocallyOfFiniteType f (Proper.lean:42); IsClosedMap.isClosed_range (Basic.lean:567)",
+   "date": "2026-10-10",
+   "verdict": "match (reviewer R-pci1745)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isClosedMap",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean",
+  "line": 49,
+  "how": "one-line specialization: for `f : X ⟶ Y` with `[IsProper f]`, the instance `UniversallyClosed f` is the parent projection of `class IsProper ... extends IsSeparated f, UniversallyClosed f, LocallyOfFiniteType f` (Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:42), so `f.isClosedMap.isClosed_range : IsClosed (Set.range f)` via `IsClosedMap.isClosed_range` (Mathlib/Topology/Maps/Basic.lean:567). The parenthetical 'induced Y-scheme structure' is the explanatory remark that a closed subset carries a closed-subscheme structure, not a further assertion."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -56,5 +87,21 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-proper-closed-image",
+  "worker": "stage1",
+  "summary": "No sorry-free declaration carries this item under its own name. The proof is a direct specialization of the existing closed node lem-weil-pbc-scheme-theoretic-image-proper (attached to the sorry-free declaration AlgebraicGeometry.isProper_imageι_comp): take the base to be Y and the target morphism to be id_Y. The existing statement gives the closed scheme-theoretic image and the proper surjective factor. No new node was needed. Reviewer R-pci1745: made a Mathlib leaf (B8): `f.isClosedMap.isClosed_range` with the IsProper → UniversallyClosed parent instance.",
+  "blueprint": "The single step realizes the whole proof paragraph of the blueprint node lem-weil-pbc-proper-closed-image.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pci1745",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pci1745 (reviewer sub-agent of L); spot-checked: Read item and cited lem-weil-pbc-scheme-theoretic-image-proper statement (specialization S=Y, g=id was correct). FIX more, RETURN less: B8 the statement is Mathlib: sed UniversallyClosed.lean:49 Scheme.Hom.isClosedMap [UniversallyClosed f], Proper.lean:42 IsProper extends UniversallyClosed (inferred instance), Topology/Maps/Basic.lean:567 IsClosedMap.isClosed_range; made the item a mathlib leaf, emptied proof/proof_deps, dropped the cross-unit tool use, recorded the grep search. Second reading by F1 missed this B8.; 1 file(s) fixed by the reviewer"
+ }
 }
