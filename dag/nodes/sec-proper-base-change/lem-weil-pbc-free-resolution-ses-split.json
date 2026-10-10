@@ -7,10 +7,58 @@
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, proof of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext, lines 17659--17711): free modules F' (+) F'' on generators of M' and lifts of generators of M'', the snake lemma for the kernels, 'continue this process indefinitely', 'each of the sequences 0 -> F'_n -> F_n -> F''_n -> 0 is split exact (by construction)'; the abelian-category version is Derived Categories, Lemma Tag 064C (lemma-projective-resolution-ses, derived.tex line 6839). Tags verified in tags/tags: 065P,algebra-lemma-reverse-long-exact-seq-ext; 064C,derived-lemma-projective-resolution-ses"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "One step (Stacks 065P, first half of the proof; the source's $M',M,M''$ are here $A,A',A''$). Claim: for every short exact sequence $0\\to A\\xrightarrow{a}A'\\xrightarrow{b}A''\\to0$ of $R$-modules there are free $R$-modules $P,P',P''$, $R$-linear surjections $\\eta:P\\to A$, $\\eta':P'\\to A'$, $\\eta'':P''\\to A''$ and $R$-linear maps $\\alpha:P\\to P'$, $\\beta:P'\\to P''$, $\\pi:P'\\to P$, $s:P''\\to P'$ with $\\beta\\alpha=0$, $\\pi\\alpha=\\mathrm{id}_P$, $\\beta s=\\mathrm{id}_{P''}$, $\\alpha\\pi+s\\beta=\\mathrm{id}_{P'}$, $\\eta'\\alpha=a\\eta$, $\\eta''\\beta=b\\eta'$, and such that $\\alpha$ maps $K=\\ker\\eta$ into $K'=\\ker\\eta'$, $\\beta$ maps $K'$ into $K''=\\ker\\eta''$, and the restrictions give a short exact sequence $0\\to K\\xrightarrow{\\alpha|_K}K'\\xrightarrow{\\beta|_{K'}}K''\\to0$. Construction: pick generating families $(x_i)_{i\\in I}$ of $A$ and $(z_j)_{j\\in J}$ of $A''$ (for instance all elements), and for each $j$ choose $y_j\\in A'$ with $b(y_j)=z_j$ ($b$ is surjective). Put $P=\\bigoplus_{i\\in I}R$, $P''=\\bigoplus_{j\\in J}R$, $P'=P\\oplus P''$; these are free [def-weil-pbc-free-module], with the standard bases $(e_i)$, $(f_j)$, and $P'$ has the basis $(e_i,0)_{i}\\cup(0,f_j)_{j}$. Let $\\eta(e_i)=x_i$, $\\eta''(f_j)=z_j$, $\\eta'(p,q)=a(\\eta(p))+\\lambda(q)$ where $\\lambda:P''\\to A'$ is the $R$-linear map with $\\lambda(f_j)=y_j$ (a linear map out of $\\bigoplus_JR$ is given by any choice of images of the $f_j$), so $b\\lambda=\\eta''$. $\\eta,\\eta''$ are surjective since their images contain generating families. Let $\\alpha(p)=(p,0)$, $\\beta(p,q)=q$, $\\pi(p,q)=p$, $s(q)=(0,q)$. The identities $\\beta\\alpha=0$, $\\pi\\alpha=\\mathrm{id}$, $\\beta s=\\mathrm{id}$, $\\alpha\\pi+s\\beta=\\mathrm{id}$ are checked on $(p,q)$: $(p,0)+(0,q)=(p,q)$. Also $\\eta'\\alpha(p)=a\\eta(p)$ and $\\eta''\\beta(p,q)=\\eta''(q)=b\\lambda(q)=b(a\\eta(p)+\\lambda(q))=b\\eta'(p,q)$ as $ba=0$. Now apply [lem-weil-pbc-snake-lemma-modules] with $\\Lambda=R$ to the commutative diagram with top row $P\\xrightarrow{\\alpha}P'\\xrightarrow{\\beta}P''\\to0$ (exact: $\\beta$ is surjective and $\\ker\\beta=P\\oplus0=\\operatorname{im}\\alpha$, see [def-weil-pbc-exact-sequence]), bottom row $0\\to A\\xrightarrow{a}A'\\xrightarrow{b}A''$ (exact by hypothesis) and vertical maps $\\eta,\\eta',\\eta''$ (the squares commute by the two identities just shown). It gives that $\\ker\\eta\\xrightarrow{\\alpha|}\\ker\\eta'\\xrightarrow{\\beta|}\\ker\\eta''\\xrightarrow{\\partial}\\operatorname{coker}\\eta\\to\\operatorname{coker}\\eta'\\to\\operatorname{coker}\\eta''$ is exact, with $\\alpha|_K$ injective because $\\alpha$ is. Since $\\eta$ and $\\eta''$ are surjective, $\\operatorname{coker}\\eta=\\operatorname{coker}\\eta''=0$, so $\\beta|_{K'}:K'\\to K''$ is surjective and $\\operatorname{coker}\\eta'=0$, i.e. $\\eta'$ is surjective. Thus $0\\to K\\to K'\\to K''\\to0$ is short exact, which proves the claim (the source: 'By the snake lemma we see that the sequence of kernels $0\\to K'\\to K\\to K''\\to0$ is short exact').",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-snake-lemma-modules",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext), lines 17682-17698"
+   }
+  },
+  {
+   "text": "Iteration (Stacks 065P: 'Hence we can continue this process indefinitely'). Define by recursion on $n\\ge0$ a short exact sequence $E_n:0\\to A_n\\xrightarrow{a_n}A'_n\\xrightarrow{b_n}A''_n\\to0$ and the data of Step 1 for it. Start with $E_0=(0\\to Q\\xrightarrow{u}Q'\\xrightarrow{v}Q''\\to0)$. Given $E_n$, apply Step 1 to $E_n$ and call the result $F_n=P$, $F'_n=P'$, $F''_n=P''$, $\\eta_n:F_n\\to A_n$, $\\eta'_n$, $\\eta''_n$, $\\alpha_n$, $\\beta_n$, $\\pi_n$, $s_n$; then let $E_{n+1}$ be the short exact sequence of kernels $0\\to\\ker\\eta_n\\xrightarrow{\\alpha_n|}\\ker\\eta'_n\\xrightarrow{\\beta_n|}\\ker\\eta''_n\\to0$ given by Step 1, so $A_{n+1}=\\ker\\eta_n\\subseteq F_n$, $A'_{n+1}=\\ker\\eta'_n\\subseteq F'_n$, $A''_{n+1}=\\ker\\eta''_n\\subseteq F''_n$, and $a_{n+1},b_{n+1}$ are the restrictions of $\\alpha_n,\\beta_n$. Write $j_n:A_{n+1}\\to F_n$, $j'_n$, $j''_n$ for the inclusions, so that $\\alpha_nj_n=j'_na_{n+1}$ and $\\beta_nj'_n=j''_nb_{n+1}$. Put $\\varepsilon=\\eta_0$, $\\varepsilon'=\\eta'_0$, $\\varepsilon''=\\eta''_0$ and, for $n\\ge0$, $d_{n+1}=j_n\\eta_{n+1}:F_{n+1}\\to F_n$, $d'_{n+1}=j'_n\\eta'_{n+1}$, $d''_{n+1}=j''_n\\eta''_{n+1}$. (Each stage involves choices; a recursive definition with a choice at each stage is the usual one, by dependent choice.)",
+   "uses": [
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext), lines 17699-17707"
+   }
+  },
+  {
+   "text": "Verification. Each $F_n,F'_n,F''_n$ is free by Step 1 [def-weil-pbc-free-module]. Complexes and exactness [def-weil-pbc-exact-sequence], written for the unprimed sequence (the primed and double-primed ones are identical): $\\varepsilon d_1=\\eta_0j_0\\eta_1=0$ and $d_nd_{n+1}=j_{n-1}\\eta_nj_n\\eta_{n+1}=0$ for $n\\ge1$, since $\\eta_nj_n=0$ ($j_n$ is the inclusion of $\\ker\\eta_n$). $\\varepsilon=\\eta_0$ is surjective. Since $\\eta_{n+1}$ is surjective onto $A_{n+1}=\\ker\\eta_n$, $\\operatorname{im}d_{n+1}=j_n(A_{n+1})=\\ker\\eta_n$; and $\\ker\\eta_0=\\ker\\varepsilon$, while for $n\\ge1$ $\\ker d_n=\\ker(j_{n-1}\\eta_n)=\\ker\\eta_n$ because $j_{n-1}$ is injective. So $\\operatorname{im}d_1=\\ker\\varepsilon$ and $\\operatorname{im}d_{n+1}=\\ker d_n$: the augmented complex $\\cdots\\to F_1\\to F_0\\xrightarrow{\\varepsilon}Q\\to0$ is exact. Morphisms of complexes: by Step 1 for $E_{n+1}$, $\\eta'_{n+1}\\alpha_{n+1}=a_{n+1}\\eta_{n+1}$, hence $d'_{n+1}\\alpha_{n+1}=j'_n\\eta'_{n+1}\\alpha_{n+1}=j'_na_{n+1}\\eta_{n+1}=\\alpha_nj_n\\eta_{n+1}=\\alpha_nd_{n+1}$; likewise $d''_{n+1}\\beta_{n+1}=j''_nb_{n+1}\\eta'_{n+1}=\\beta_nj'_n\\eta'_{n+1}=\\beta_nd'_{n+1}$. The augmentation identities are those of Step 1 for $E_0$: $\\varepsilon'\\alpha_0=u\\varepsilon$, $\\varepsilon''\\beta_0=v\\varepsilon'$. Finally $\\beta_n\\alpha_n=0$, $\\pi_n\\alpha_n=\\mathrm{id}$, $\\beta_ns_n=\\mathrm{id}$, $\\alpha_n\\pi_n+s_n\\beta_n=\\mathrm{id}$ hold by Step 1 for $E_n$; they give that $\\alpha_n$ is injective, $\\beta_n$ surjective and $\\ker\\beta_n=\\operatorname{im}\\alpha_n$ (if $\\beta_n(x)=0$ then $x=\\alpha_n\\pi_n(x)$), i.e. $0\\to F_n\\to F'_n\\to F''_n\\to0$ is split exact, which is the source's 'each of the sequences $0\\to F'_n\\to F_n\\to F''_n\\to0$ is split exact (by construction)'.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext), lines 17708-17709"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-snake-lemma-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext), lines 17682-17709"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -39,10 +87,45 @@
    "results": "no file mentions a horseshoe; Abelian/Projective has Resolution.lean (single resolutions, ProjectiveResolution.of), LeftResolution has Basic/Reduced/Transport (functorial left resolutions of one object)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "horseshoe lemma: given a short exact sequence of modules, there are free resolutions forming a degreewise split short exact sequence of complexes",
+   "results": "HomologicalComplex.shortExact_of_degreewise_shortExact, HomologicalComplex.exact_of_degreewise_exact (Mathlib.Algebra.Homology.HomologicalComplexAbelian), ModuleCat.free_shortExact (Mathlib.Algebra.Category.ModuleCat.Free), ShortComplex.Splitting.shortExact, Splitting.ofExactOfSection, ShortExact.splittingOfProjective, ShortExact.splittingOfInjective, Splitting.exact",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only; no resolution of a short exact sequence)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective resolution of the middle term of a short exact sequence built from projective resolutions of the outer terms (horseshoe lemma)",
+   "results": "ProjectiveResolution.of, of_def, ofComplex, instProjectiveXNatOfComplex, exact0, instHasProjectiveResolution(s) (Mathlib.CategoryTheory.Abelian.Projective.Resolution), ProjectiveResolution.projective (Mathlib.CategoryTheory.Preadditive.Projective.Resolution): resolutions of a single object only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ProjectiveResolution, CategoryTheory.ShortComplex",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rni horseshoe; grep -rn 'FreeResolution|freeResolution|free_resolution'; grep -rn 'ofShortExact|free_shortExact'; grep -rln Splitting in CategoryTheory/Abelian/Projective, CategoryTheory/Preadditive/Projective, Algebra/Homology/LeftResolution (all under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "no horseshoe and no free resolution anywhere; ModuleCat.Basis.ofShortExact / free_shortExact (Algebra/Category/ModuleCat/Free.lean lines 158, 167: middle term of a short exact sequence with free ends is free); the only Splitting in those directories is Abelian/Projective/Dimension.lean line 234 (projective dimension of a biproduct)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "horseshoe (project root ~/weil-conjectures-slopmaster2)",
+   "results": "none, index: unavailable (no language server running), so not a proof of absence",
+   "date": "2026-10-10",
+   "verdict": "no verdict"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +145,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-free-resolution-ses-split",
+  "worker": "stage1",
+  "summary": "Proof written from Stacks 065P (algebra.tex lines 17682-17709; source naming M',M,M'' = DAG Q,Q',Q''): Step 1 the one-step construction with explicit free modules P, P''=free on generators of A, A'', P'=P (+) P'' mapped by the generators and chosen lifts, the explicit alpha, beta, pi, s and all four splitting identities, and the snake lemma [lem-weil-pbc-snake-lemma-modules] (Mathlib leaf) giving the short exact sequence of kernels and the surjectivity of the middle augmentation (which the source leaves implicit); Step 2 the recursion on the sequences of kernels and the definition of the differentials as inclusion o augmentation; Step 3 the verification of the resolutions, the chain-map identities, the augmentation identities and the splitting identities used by the citer lem-weil-pbc-tor-long-exact-first-variable. Statement unchanged; stmt_deps set to the free-module and exact-sequence definitions. No new nodes. Mathlib: no horseshoe lemma and no free resolutions of a short exact sequence (searches recorded); Derived 064C (horseshoe) not used since the module case is explicit."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to the proof of Algebra 065P (module case; 064C not needed): the one-step construction with explicit splittings and the snake lemma (Mathlib leaf) for the kernels, the recursion and the verification of all identities written out; surjectivity of the middle augmentation taken from the snake lemma's cokernel part. No new nodes; no Mathlib match (no horseshoe lemma in Mathlib)."
 }
