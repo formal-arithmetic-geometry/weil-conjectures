@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.Sites.Point.Flat
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
@@ -223,7 +225,95 @@ lemma finite_Γ_of_isConstructibleSheaf [IsNoetherianRing Λ]
     ((injective_toPresheafFiber_etalePoint_of_isSepClosed F _ x).comp
       ((ConcreteCategory.bijective_of_isIso e.hom).1))
 
+/-- Over a separably closed field `k`, the global sections of an étale sheaf of `Λ`-modules on
+`Spec k` are its stalk at the geometric point `𝟙 : Spec k ⟶ Spec k`: the canonical map is
+injective by `AlgebraicGeometry.Etale.injective_toPresheafFiber_etalePoint_of_isSepClosed`,
+and surjective since every étale neighbourhood of this point has a `k`-point through which the
+point factors. -/
+lemma bijective_toPresheafFiber_etalePoint_of_isSepClosed
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (x : (pointSmallEtale (𝟙 (Spec (.of k)))).fiber.obj (etalePoint k)) :
+    Function.Bijective
+      ((pointSmallEtale (𝟙 (Spec (.of k)))).toPresheafFiber (etalePoint k) x F.obj) := by
+  refine ⟨injective_toPresheafFiber_etalePoint_of_isSepClosed F _ x, fun p ↦ ?_⟩
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨V, v, z, rfl⟩ := (pointSmallEtale (𝟙 (Spec (.of k)))).toPresheafFiber_jointly_surjective
+    (P := F.obj) p
+  let σ : etalePoint k ⟶ V := MorphismProperty.Over.homMk (A := etalePoint k) (B := V) v.left
+    ((Over.w v).trans rfl)
+  have hv : (pointSmallEtale (𝟙 (Spec (.of k)))).fiber.map σ x = v := by
+    apply Over.OverMorphism.ext
+    have hx : x.left = 𝟙 _ := by simpa [etalePoint] using Over.w x
+    change x.left ≫ v.left = v.left
+    rw [hx, Category.id_comp]
+  refine ⟨F.obj.map σ.op z, ?_⟩
+  rw [← hv, ← (pointSmallEtale (𝟙 (Spec (.of k)))).toPresheafFiber_w σ x F.obj]
+  rfl
+
+/-- Over a separably closed field `k`, the global sections of an étale sheaf of `Λ`-modules on
+`Spec k` are isomorphic to its stalk at the geometric point `𝟙 : Spec k ⟶ Spec k`. -/
+noncomputable def ΓIsoSheafFiberOfIsSepClosed
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj F ≅
+      (pointSmallEtale (𝟙 (Spec (.of k)))).sheafFiber.obj F :=
+  let x : (pointSmallEtale (𝟙 (Spec (.of k)))).fiber.obj (etalePoint k) :=
+    Over.homMk (𝟙 _) (by simp [etalePoint])
+  (Sheaf.ΓNatIsoSheafSections (Spec (.of k)).smallEtaleTopology
+    (ModuleCat.{u + 1} Λ) isTerminalEtalePoint).app F ≪≫
+    (LinearEquiv.ofBijective
+      ((pointSmallEtale (𝟙 (Spec (.of k)))).toPresheafFiber (etalePoint k) x F.obj).hom
+      (bijective_toPresheafFiber_etalePoint_of_isSepClosed F x)).toModuleIso
+
 end GlobalSections
+
+section Flat
+
+variable {Λ : Type (u + 1)} [CommRing Λ]
+
+/-- The small étale site of a scheme is essentially small. Instance search does not find this
+in the presence of the imports of this file. -/
+local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
+
+/-- Over a separably closed field `k`, the global sections of a flat étale sheaf of
+`Λ`-modules on `Spec k` form a flat `Λ`-module: they are its stalk at a geometric point. -/
+lemma flat_Γ_of_isSepClosed {F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (hF : ObjectProperty.flat F) :
+    ObjectProperty.flat
+      ((Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj F) :=
+  ObjectProperty.prop_of_iso _ ((ΓIsoSheafFiberOfIsSepClosed F) ≪≫
+    ((pointSmallEtale (𝟙 (Spec (.of k)))).uliftSheafFiberIso.{u + 1}
+      (ModuleCat.{u + 1} Λ)).symm.app F).symm
+    (((pointSmallEtale (𝟙 (Spec (.of k)))).ulift.{u + 1}).flat_sheafFiber_obj hF)
+
+/-- Over a separably closed field `k`, an object of `D(Spec(k)_ét, Λ)` of Tor amplitude in
+`[a, b]` has derived global sections of Tor amplitude in `[a, b]`: it is represented by a
+complex of flat sheaves in degrees `[a, b]`, and the global sections functor is exact and
+preserves flatness (`AlgebraicGeometry.Etale.flat_Γ_of_isSepClosed`). -/
+lemma torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed {a b : ℤ}
+    {L : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hL : _root_.DerivedCategory.torAmplitudeIn _ a b L) :
+    _root_.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) a b
+      ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj L) := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := _root_.DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn hL
+  let Γ := Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+  have : CochainComplex.IsStrictlyGE ((Γ.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) a := by
+    rw [CochainComplex.isStrictlyGE_iff]
+    exact fun i hi ↦ Γ.map_isZero (P.isZero_of_isStrictlyGE a i hi)
+  have : CochainComplex.IsStrictlyLE ((Γ.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) b := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    exact fun i hi ↦ Γ.map_isZero (P.isZero_of_isStrictlyLE b i hi)
+  refine (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso ?_
+    (_root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat
+      ((Γ.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) a b
+      fun n ↦ flat_Γ_of_isSepClosed (hP n))
+  exact (Γ.mapDerivedCategoryFactors.app P).symm ≪≫ Γ.mapDerivedCategory.mapIso e ≪≫
+    (Functor.rightDerivedFunctorIsoMapDerivedCategory Γ).symm.app L
+
+end Flat
 
 section Duality
 
