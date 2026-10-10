@@ -1,8 +1,8 @@
 # Work queue
 
-870 items; claim with `tools/claim.py next <group> [--stage N]`.
+873 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (321)
+## Stage 1: nodes to split (324)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,20 +13,23 @@
 | `lem-weil-pbc-affine-source-morphism-separated` | 2007 | none |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 2007 | none |
 | `lem-weil-pbc-radicial-etale-open` | 2007 | none |
-| `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 2008 | none |
+| `lem-weil-pbc-filtered-category-directed-cofinal` | 2009 | none |
+| `lem-weil-pbc-sets-etale-inverse-image-restriction` | 2009 | none |
+| `lem-weil-pbc-sets-etale-section-continuity` | 2009 | none |
 | `lem-sc-pic-lift-closed-immersion-dim-le-one` | 2010 | none |
 | `lem-sc-affine-cap-section-open` | 2011 | none |
 | `lem-sc-ample-finite-principal-affine` | 2011 | none |
 | `lem-sc-ample-square-zero-thickening` | 2011 | none |
 | `lem-sc-component-intersections-finite` | 2011 | none |
-| `lem-sc-conductor-sections` | 2011 | none |
 | `lem-sc-glue-component-line-bundles` | 2011 | none |
 | `lem-sc-integral-dim-one-ample` | 2011 | none |
 | `lem-sc-zero-dim-noetherian-affine` | 2011 | none |
+| `lem-sc-conductor-ideal-restriction` | 2012 | none |
+| `lem-sc-conductor-ideal-zero-intersection` | 2012 | none |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 3004 | none |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 3005 | none |
-| `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
+| `lem-sc-etale-standard-cover-cech` | 3008 | none |
 | `lem-exc-abelian-sheaves-gmodules` | 3009 | none |
 | `lem-exc-etale-field-gsets` | 3009 | none |
 | `lem-exc-etale-sheaves-gsets-point` | 3009 | none |
@@ -166,10 +169,10 @@
 | `pqf-def-coherent` | 6007 | none |
 | `pqf-def-cohomology` | 6007 | none |
 | `def-sp-homological-functor` | 6008 | none |
-| `lem-sc-cech-spectral` | 6008 | sorry_here |
 | `pqf-lem-locnoeth-lft` | 6008 | none |
 | `pqf-lem-pushforward-qcoh` | 6008 | none |
 | `lem-pc-affine-morphism-hi` | 6009 | rests_on_sorry |
+| `lem-sc-cech-spectral` | 6009 | sorry_here |
 | `pqf-lem-associated-sections-localize` | 6009 | none |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `lem-pc-closed-immersion-coherent-cohomology` | 6010 | rests_on_sorry |
@@ -882,7 +885,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 341 nodes that wait for stage 1, 1039 nodes that wait for a statement dependency.
+Not open yet: 344 nodes that wait for stage 1, 1042 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
