@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-fpqc-local-on-base-criterion",
+ "kind": "statement",
+ "title": "Criterion for a property of morphisms to descend along fpqc coverings (Stacks 02KP, fpqc case)",
+ "statement": "Let $\\mathcal P$ be a class of morphisms of schemes [def-pc-scheme] satisfying the following four conditions.\n(0) (Invariance under isomorphism.) If $f:X\\to S$ has $\\mathcal P$ and $\\tilde f:\\tilde X\\to\\tilde S$ is a morphism for which there are isomorphisms of schemes $a:X\\to\\tilde X$, $b:S\\to\\tilde S$ with $\\tilde f\\circ a=b\\circ f$, then $\\tilde f$ has $\\mathcal P$.\n(1) (Stable under flat base change.) If $f:X\\to S$ has $\\mathcal P$ and $g:S'\\to S$ is a flat morphism [def-weil-flat-morphism], then the second projection $X\\times_SS'\\to S'$ of the fibre product [def-pc-fibre-product] has $\\mathcal P$.\n(2) (Zariski local on the base.) If $f:X\\to S$ is a morphism and $S=\\bigcup_{k\\in K}V_k$ is a covering of $S$ by open subschemes such that for every $k$ the restriction $f^{-1}(V_k)\\to V_k$ of $f$ (a morphism from the open subscheme $f^{-1}(V_k)$ of $X$ to the open subscheme $V_k$ of $S$) has $\\mathcal P$, then $f$ has $\\mathcal P$.\n(3) (Descent along faithfully flat morphisms of affine schemes.) If $S$ and $S'$ are affine schemes, $g:S'\\to S$ is a flat and surjective [def-weil-surjective-morphism] morphism, and $f:X\\to S$ is a morphism such that the second projection $X\\times_SS'\\to S'$ has $\\mathcal P$, then $f$ has $\\mathcal P$.\nThen for every morphism of schemes $f:X\\to S$ and every fpqc covering $\\{g_i:S_i\\to S\\}_{i\\in I}$ of $S$ [def-weil-pbc-fpqc-covering] such that for every $i\\in I$ the second projection $f_i:X\\times_SS_i\\to S_i$ has $\\mathcal P$, the morphism $f$ has $\\mathcal P$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02KP (lemma-descending-properties-morphisms, line 5407) with tau = fpqc, the direction 'each base change has P => f has P' of 'fpqc local on the base' (Definition Tag 02KO, definition-property-morphisms-local, line 5310); its proof ('details omitted') goes through Topologies, Definition Tag 022B (topologies-definition-fpqc-covering, topologies.tex line 2888) and Lemma Tag 022E (topologies-lemma-fpqc-affine, topologies.tex line 3151: an fpqc covering of an affine scheme is refined by a finite fpqc covering by affine opens of the members). Condition (0) is the standing convention of Definition 02KO ('we see (or require) that property P holds for X -> Y iff it holds for any arrow isomorphic to it')."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "property of morphisms of schemes local on the target descends along a jointly surjective family of flat quasi-compact morphisms (fpqc covering)",
+   "results": "AlgebraicGeometry.HasRingHomProperty.descendsAlong, IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, IsLocalAtTarget.descendsAlong (Mathlib.AlgebraicGeometry.Morphisms.Descent), instIsLocalAtTargetIsomorphismsZariskiPrecoverage (Gluing), HasAffineProperty.iff_of_openCover, IsZariskiLocalAtTarget.of_iSup_eq_top (Morphisms.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match: all are descent along a single morphism (MorphismProperty.DescendsAlong P Q), not along a covering family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if a property of morphisms is Zariski local on the target and descends along faithfully flat maps of affine schemes then it is local for the fpqc topology on the base",
+   "results": "AlgebraicGeometry instance DescendsAlong P (Surjective ⊓ Flat ⊓ LocallyOfFinitePresentation) from (Surjective ⊓ Flat ⊓ QuasiCompact) (Morphisms.FlatDescent); descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact; IsLocalAtTarget.descendsAlong_inf_quasiCompact, IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, HasAffineProperty.descendsAlong_of_affineAnd (Morphisms.Descent); flat_iff, Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine (Morphisms.Flat)",
+   "date": "2026-10-10",
+   "verdict": "no match for a covering family; generalization only for one morphism: IsZariskiLocalAtTarget.descendsAlong (Mathlib/AlgebraicGeometry/Morphisms/Descent.lean:63) reduces descent along one morphism to an affine base"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.fpqcTopology, CategoryTheory.IsPullback",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'DescendsAlong\\|descendsAlong' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'ofArrows' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/*.lean | grep -i 'descend\\|of_isPullback\\|of_pullback'; grep -n 'lemma\\|theorem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+   "results": "Morphisms/Descent.lean:63 IsZariskiLocalAtTarget.descendsAlong, :134 descendsAlong_inf_quasiCompact, :164 HasRingHomProperty.descendsAlong; Morphisms/FlatDescent.lean (single-morphism instances); uses in ZariskisMainTheorem, FlatMono, Group/Smooth; Sites/Fpqc.lean has only the precoverage/topology comparisons and subcanonicity; nothing for covering families",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "of_isPullback_of_ofArrows_mem (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126, source repository, not Mathlib; read with sed -n); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "not in Mathlib; the source repository has this criterion for P local at the target, stable under base change and descending along Surjective ⊓ Flat ⊓ QuasiCompact (section variables at Fpqc.lean:67)"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Descent.lean",
+  "line": 63,
+  "how": "descent along one morphism, with reduction to an affine base; the passage from a covering family to finitely many affines (Topologies 022E) and to their disjoint union is not in Mathlib (the source repository's Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology does it)"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fpqc-descend-flat",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

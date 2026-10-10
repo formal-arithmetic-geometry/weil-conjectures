@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+ "kind": "statement",
+ "title": "Spec of a ring map is flat iff the ring map is flat",
+ "statement": "Let $\\varphi:R\\to A$ be a homomorphism of commutative rings and $\\operatorname{Spec}\\varphi:\\operatorname{Spec}A\\to\\operatorname{Spec}R$ the induced morphism of affine schemes [def-weil-affine-spectrum]. Then $\\operatorname{Spec}\\varphi$ is flat [def-weil-flat-morphism] if and only if $\\varphi$ is a flat ring map [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 01U5 (lemma-flat-characterize, line 4694): (1) => (2) with U = Spec A, V = Spec R, and (4) => (1) with the one-member coverings {Spec R}, {Spec A}"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec.map f is flat iff the ring homomorphism f is flat",
+   "results": "RingHom.Flat, RingHom.flat_algebraMap_iff (RingTheory.RingHom.Flat), RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat (Morphisms.Flat), RingHom.Flat.generalizingMap_comap, Spec.map",
+   "date": "2026-10-10",
+   "verdict": "generalization: HasRingHomProperty @Flat RingHom.Flat with HasRingHomProperty.Spec_iff; the specialization is Flat.SpecMap_iff (loogle)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat (AlgebraicGeometry.Spec.map _) ↔ _",
+   "results": "AlgebraicGeometry.Flat.SpecMap_iff {R S : CommRingCat} {f : R ⟶ S} : Flat (Spec.map f) ↔ f.hom.Flat (Mathlib.AlgebraicGeometry.Morphisms.Flat)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma\\|instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Flat.lean; sed -n 60,70p same file",
+   "results": "Flat.lean:53 instance HasRingHomProperty @Flat RingHom.Flat; Flat.lean:66-68 @[simp] lemma SpecMap_iff {R S : CommRingCat.{u}} {f : R ⟶ S} : Flat (Spec.map f) ↔ f.hom.Flat := HasRingHomProperty.Spec_iff; :184 flat_and_surjective_SpecMap_iff",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Flat.SpecMap_iff",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+  "line": 67,
+  "how": "exact: Flat (Spec.map f) ↔ f.hom.Flat for f : R ⟶ S in CommRingCat (lines 66-68); AlgebraicGeometry.Flat is [def-weil-flat-morphism] by that node's match, RingHom.Flat f is flatness of S as an R-module through f, the ring-map flatness of [def-weil-pbc-flat-ring-map], and Spec.map is Spec of [def-weil-affine-spectrum]. Source read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fpqc-descend-flat",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): AlgebraicGeometry.Flat.SpecMap_iff (Morphisms/Flat.lean:67), checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}

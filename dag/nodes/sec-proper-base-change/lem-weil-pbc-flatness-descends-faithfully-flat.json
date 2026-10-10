@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-flatness-descends-faithfully-flat",
+ "kind": "statement",
+ "title": "Flatness of a module descends along a faithfully flat ring map (Stacks 00HJ)",
+ "statement": "Let $\\rho:R\\to R'$ be a faithfully flat homomorphism of commutative rings [def-weil-pbc-faithfully-flat-ring-map], let $M$ be an $R$-module and $M'=R'\\otimes_RM$, an $R'$-module through the first factor. Then $M$ is a flat $R$-module if and only if $M'$ is a flat $R'$-module [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00HJ (lemma-flatness-descends, line 8903)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module M over R is flat if its base change S ⊗ M is flat over a faithfully flat R-algebra S",
+   "results": "Module.Flat.of_flat_tensorProduct, Module.Flat.iff_flat_tensorProduct (Mathlib.RingTheory.Flat.FaithfullyFlat.Basic), Module.Flat, Module.FaithfullyFlat.toFlat, Module.Flat.baseChange (RingTheory.Flat.Stability)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FaithfullyFlat, Module.Flat _ (TensorProduct _ _ _) → Module.Flat _ _",
+   "results": "Module.Flat.of_flat_tensorProduct (Mathlib.RingTheory.Flat.FaithfullyFlat.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'of_flat_tensorProduct\\|lemma iff_flat_tensorProduct' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean; sed -n 586,603p same file",
+   "results": "Basic.lean:588 lemma Flat.of_flat_tensorProduct (S) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M (docstring 'Flat descends along faithfully flat ring maps'); Basic.lean:601 lemma Flat.iff_flat_tensorProduct (S) ... [Module.FaithfullyFlat R S] : Module.Flat S (S ⊗[R] M) ↔ Module.Flat R M; both in namespace Module (line 55), R : Type u, M : Type v with [CommRing R] [AddCommGroup M] [Module R M] (line 57)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Flat.iff_flat_tensorProduct",
+  "file": "Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean",
+  "line": 601,
+  "how": "exact: with R := R, S := R' (algebra structure from rho, faithfully flat as a module by [def-weil-pbc-faithfully-flat-ring-map], matched to Module.FaithfullyFlat), M := M: Module.Flat R' (R' ⊗[R] M) ↔ Module.Flat R M (lines 601-603); the direction used for descent is Module.Flat.of_flat_tensorProduct (line 588). Source read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fpqc-descend-flat",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): Module.Flat.iff_flat_tensorProduct (Flat/FaithfullyFlat/Basic.lean:601), checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}
