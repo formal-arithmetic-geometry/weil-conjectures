@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-integral-maximal-contracts-maximal",
+ "kind": "statement",
+ "title": "Under an integral ring map, a maximal ideal contracts to a maximal ideal",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings such that $S$ is integral over $R$ [def-weil-pbc-integral-closure] (every element of $S$ is a root of a monic polynomial with coefficients in $\\varphi(R)$). If $\\mathfrak n\\subset S$ is a maximal ideal, then $\\varphi^{-1}(\\mathfrak n)$ is a maximal ideal of $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00OI (lemma-going-up-maximal-on-top, line 27335), applied to the integral map $R\\to S$, which has the going-up property by Lemma Tag 00GU (lemma-integral-going-up, line 7853)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the contraction of a maximal ideal along an integral ring homomorphism is maximal",
+   "results": "Ideal.IsMaximal.under (instance), Ideal.isMaximal_comap_of_isIntegral_of_isMaximal, Ideal.isMaximal_of_isIntegral_of_isMaximal_comap', Ideal.primesOver.isMaximal (Mathlib.RingTheory.Ideal.GoingUp)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If S is integral over R and I is a maximal ideal of S, then its preimage in R is a maximal ideal",
+   "results": "Ideal.isMaximal_comap_of_isIntegral_of_isMaximal, Ideal.IsMaximal.under, Ideal.isMaximal_comap_of_isIntegral_of_isMaximal' (Mathlib.RingTheory.Ideal.GoingUp)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem isMaximal_comap_of_isIntegral_of_isMaximal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/GoingUp.lean; sed -n 204,215p",
+   "results": "GoingUp.lean:204 isMaximal_comap_of_isIntegral_of_isMaximal [Algebra.IsIntegral R S] (I : Ideal S) [I.IsMaximal] : IsMaximal (I.comap (algebraMap R S)); GoingUp.lean:211 primed version (f : R →+* S) (hf : f.IsIntegral) (I : Ideal S) [I.IsMaximal] : IsMaximal (I.comap f)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.isMaximal_comap_of_isIntegral_of_isMaximal'",
+  "file": "Mathlib/RingTheory/Ideal/GoingUp.lean",
+  "line": 211,
+  "how": "exact: `theorem isMaximal_comap_of_isIntegral_of_isMaximal' (f : R →+* S) (hf : f.IsIntegral) (I : Ideal S) [I.IsMaximal] : IsMaximal (I.comap f)` (GoingUp.lean:211-215, read with sed -n 204,215p, 2026-10-10); algebra form `Ideal.isMaximal_comap_of_isIntegral_of_isMaximal` (line 204)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-extension-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

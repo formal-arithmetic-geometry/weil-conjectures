@@ -2,15 +2,52 @@
  "id": "lem-weil-pbc-integral-extension-dimension",
  "kind": "statement",
  "title": "An integral ring map does not raise Krull dimension",
- "statement": "Let $A\\to B$ be a ring map of commutative rings such that $B$ is integral over $A$ (every element of $B$ is a root of a monic polynomial with coefficients in the image of $A$). Then $\\dim B\\le\\dim A$ (Krull dimensions: suprema of lengths of chains of prime ideals), and every maximal ideal of $B$ lies over a maximal ideal of $A$.",
+ "statement": "Let $A\\to B$ be a ring map of commutative rings such that $B$ is integral over $A$ [def-weil-pbc-integral-closure] (every element of $B$ is a root of a monic polynomial with coefficients in the image of $A$). Then $\\dim B\\le\\dim A$ (Krull dimensions [def-weil-pbc-krull-dimension-ring]: suprema of lengths of chains of prime ideals), and every maximal ideal of $B$ lies over a maximal ideal of $A$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 00OJ (lemma-integral-dim-up, line 27348) and its proof (Lemmas Tag 00GT integral-no-inclusion and 00OI going-up-maximal-on-top); used in the proof of Lemma Tag 032D ('Since $\\dim(R)=\\dim(R_0)$ this implies that $R_0\\to R$ is injective')"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "($\\dim B\\le\\dim A$.) Write $\\varphi:A\\to B$ for the ring map. Let $\\mathfrak q_0\\subsetneq\\mathfrak q_1\\subsetneq\\cdots\\subsetneq\\mathfrak q_n$ be a chain of prime ideals of $B$ of length $n$ [def-weil-pbc-krull-dimension-ring], and put $\\mathfrak p_i=\\varphi^{-1}(\\mathfrak q_i)$. Each $\\mathfrak p_i$ is a prime ideal of $A$: $1\\notin\\mathfrak p_i$ since $\\varphi(1)=1\\notin\\mathfrak q_i$, and $ab\\in\\mathfrak p_i$ gives $\\varphi(a)\\varphi(b)\\in\\mathfrak q_i$, so $\\varphi(a)\\in\\mathfrak q_i$ or $\\varphi(b)\\in\\mathfrak q_i$. Since $B$ is integral over $A$ and $\\mathfrak q_{i-1}$ is a prime with $\\mathfrak q_{i-1}\\subsetneq\\mathfrak q_i$, incomparability [lem-weil-pbc-integral-incomparability] gives $\\mathfrak p_{i-1}\\subsetneq\\mathfrak p_i$ for $i=1,\\dots,n$. So $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ is a chain of prime ideals of $A$ of length $n$, and $n\\le\\dim A$. Taking the supremum over all chains in $B$ gives $\\dim B\\le\\dim A$ (if $B=0$ there is no chain and $\\dim B=-\\infty$).",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-incomparability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00OJ (lemma-integral-dim-up, line 27348), proof: 'Immediate from Lemma 00GT (lemma-integral-no-inclusion) ... and the definitions' (Definition Tag 00KE)"
+   }
+  },
+  {
+   "text": "(Maximal ideals lie over maximal ideals.) Let $\\mathfrak n\\subset B$ be a maximal ideal. Since $B$ is integral over $A$, $\\varphi^{-1}(\\mathfrak n)$ is a maximal ideal of $A$ [lem-weil-pbc-integral-maximal-contracts-maximal]; that is, $\\mathfrak n$ lies over the maximal ideal $\\varphi^{-1}(\\mathfrak n)$ of $A$.",
+   "uses": [
+    "lem-weil-pbc-integral-maximal-contracts-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00OJ (lemma-integral-dim-up, line 27348), proof: 'Immediate from ... Lemma 00OI (lemma-going-up-maximal-on-top)', with going up for integral maps, Lemma Tag 00GU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-integral-maximal-contracts-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00OJ (lemma-integral-dim-up, line 27348) and its proof via Lemmas Tag 00GT and 00OI; the passage from incomparability to the dimension inequality ('the definitions') is written out by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,10 +83,31 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ringKrullDim S ≤ ringKrullDim R for an integral algebra R → S",
+   "results": "ringKrullDim_le_of_surjective, ringKrullDim_quotient_le, RingEquiv.ringKrullDim, ringKrullDim_succ_le_of_surjective, Module.supportDim_le_ringKrullDim (Mathlib.RingTheory.KrullDimension.*)",
+   "date": "2026-10-10",
+   "verdict": "no match (surjective maps only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim, Algebra.IsIntegral",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ringKrullDim\\|krullDim' Mathlib --include=*.lean | xargs grep -ln 'IsIntegral\\|isIntegral'; grep -rn krullDim Mathlib | grep -i integr",
+   "results": "files KrullsHeightTheorem, QuasiFinite/Basic, DiscreteValuationRing/TFAE, Spectrum/Prime/Topology, AlgebraicGeometry/Properties, Artinian, OrderOfVanishing, LocalProperties/Semilocal: none states dim S <= dim R for integral R -> S; the ingredients are Order.krullDim_le_of_strictMono (Order/KrullDimension.lean:753) and Ideal.IsIntegral.comap_lt_comap (RingTheory/Ideal/GoingUp.lean:221)",
+   "date": "2026-10-10",
+   "verdict": "no match for the dimension clause as one declaration (two-lemma composition); the maximal-ideal clause is Ideal.isMaximal_comap_of_isIntegral_of_isMaximal' (GoingUp.lean:211)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +127,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-integral-extension-dimension",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 00OJ and kept (inline citations of the two definitions added, meaning unchanged); stmt_deps were empty and now cite def-weil-pbc-integral-closure and the new def-weil-pbc-krull-dimension-ring (Mathlib leaf ringKrullDim; no ring Krull dimension node existed, only the topological and scheme ones). Mathlib has no single declaration for dim B <= dim A under an integral map (LeanSearch, Loogle, grep), so the item is split, following the proof of 00OJ: step 1 maps a chain of primes of B to a chain of contractions, strict by incomparability (new leaf lem-weil-pbc-integral-incomparability, 00GT, Ideal.IsIntegral.comap_lt_comap), the definition of Krull dimension giving the inequality; step 2 is the new leaf lem-weil-pbc-integral-maximal-contracts-maximal (00OI with 00GU, Ideal.isMaximal_comap_of_isIntegral_of_isMaximal'). The imported pqf-lem-incomparability (sec-abelian-varieties, unit sk-prop-av-pqf-finite, unsplit, no search) states the same fact as the new incomparability leaf; it was not cited because it is another unit's non-leaf node. The citer lem-weil-pbc-complete-local-domain-finite-over-regular uses only the dimension clause."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "2 steps following Stacks 00OJ: chains of primes contract to strict chains by incomparability (new leaf, Ideal.IsIntegral.comap_lt_comap, GoingUp.lean:221 verified by L); maximal contracts to maximal (new leaf, GoingUp.lean:211 verified). New definition leaf def-weil-pbc-krull-dimension-ring (ringKrullDim, KrullDimension/Basic.lean:30 verified). Statement now cites the definitions (was empty stmt_deps). Stage 3: the imported pqf-lem-incomparability (unit sk-prop-av-pqf-finite) states the same fact as the new 00GT leaf."
+ }
 }

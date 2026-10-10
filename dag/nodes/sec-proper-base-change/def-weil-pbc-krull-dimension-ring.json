@@ -1,0 +1,64 @@
+{
+ "id": "def-weil-pbc-krull-dimension-ring",
+ "kind": "definition",
+ "title": "Krull dimension of a commutative ring",
+ "statement": "Let $R$ be a commutative ring. A *chain of prime ideals of length $n$* in $R$ ($n\\ge0$ an integer) is a sequence $\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ of prime ideals of $R$. The *Krull dimension* of $R$ is\n\n$$\n\\dim R=\\sup\\{n:\\ R \\text{ has a chain of prime ideals of length } n\\}\\in\\{-\\infty,0,1,2,\\ldots,\\infty\\},\n$$\n\nwith $\\dim R=-\\infty$ exactly when $R$ has no prime ideal, i.e. $R=0$, and $\\dim R=\\infty$ when the lengths are unbounded. It equals the Krull dimension of the topological space $\\operatorname{Spec}R$ (prime ideals correspond, reversing inclusions, to the irreducible closed subsets $V(\\mathfrak p)$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00KE (definition-Krull, line 14326)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of a commutative ring as supremum of lengths of chains of prime ideals",
+   "results": "Ideal.sup_primeHeight_eq_ringKrullDim, Ideal.sup_primeHeight_of_maximal_eq_ringKrullDim (Mathlib.RingTheory.Ideal.Height), ringKrullDim, Ring.KrullDimLE (Mathlib.RingTheory.KrullDimension.Basic), Ideal.primeHeight_le_ringKrullDim",
+   "date": "2026-10-10",
+   "verdict": "match: ringKrullDim"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim",
+   "results": "ringKrullDim (R : Type u_1) [CommSemiring R] : WithBot ℕ∞, ringKrullDim_eq_bot_of_subsingleton, ringKrullDim_eq_bot_iff_subsingleton, ringKrullDim_ne_bot, ringKrullDim_ne_top (Mathlib.RingTheory.KrullDimension.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: ringKrullDim"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def ringKrullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 26,32p RingTheory/KrullDimension/Basic.lean; sed -n 70,79p Order/KrullDimension.lean",
+   "results": "RingTheory/KrullDimension/Basic.lean:30 noncomputable def ringKrullDim (R) [CommSemiring R] : WithBot ℕ∞ := krullDim (PrimeSpectrum R); Order/KrullDimension.lean:78 krullDim α := ⨆ (p : LTSeries α), p.length",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ringKrullDim",
+  "file": "Mathlib/RingTheory/KrullDimension/Basic.lean",
+  "line": 30,
+  "how": "exact: `ringKrullDim R : WithBot ℕ∞ := krullDim (PrimeSpectrum R)` (Basic.lean:30, read with sed -n 26,32p, 2026-10-10), where `Order.krullDim α := ⨆ (p : LTSeries α), p.length` (Mathlib/Order/KrullDimension.lean:78, read with sed -n 70,79p): the supremum of the lengths of strict chains of prime ideals ordered by inclusion, ⊥ = -∞ for the zero ring (`ringKrullDim_eq_bot_iff_subsingleton`), ⊤ = ∞ for unbounded lengths."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-extension-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

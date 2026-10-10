@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-integral-incomparability",
+ "kind": "statement",
+ "title": "Incomparability for an integral ring map",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings such that $S$ is integral over $R$ [def-weil-pbc-integral-closure] (every element of $S$ is a root of a monic polynomial with coefficients in $\\varphi(R)$). Let $\\mathfrak q\\subsetneq\\mathfrak q'$ be ideals of $S$ with $\\mathfrak q$ prime. Then $\\varphi^{-1}(\\mathfrak q)\\subsetneq\\varphi^{-1}(\\mathfrak q')$. Equivalently: two distinct prime ideals of $S$ with the same inverse image in $R$ are incomparable (neither contains the other).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00GT (lemma-integral-no-inclusion, line 7813)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral extension: strictly contained prime ideals have strictly contained contractions (incomparability)",
+   "results": "Ideal.IntegralClosure.comap_lt_comap, Ideal.IsIntegralClosure.comap_lt_comap, Ideal.isMaximal_comap_of_isIntegral_of_isMaximal, Ideal.isMaximal_of_isIntegral_of_isMaximal_comap (Mathlib.RingTheory.Ideal.GoingUp)",
+   "date": "2026-10-10",
+   "verdict": "match (comap_lt_comap family)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.comap _ _ < Ideal.comap _ _",
+   "results": "Ideal.comap_lt_comap_of_root_mem_sdiff (Mathlib.RingTheory.Ideal.GoingUp)",
+   "date": "2026-10-10",
+   "verdict": "ingredient; the integral form is in the same file"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'comap_lt_comap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/GoingUp.lean; sed -n 158,166p and 219,225p",
+   "results": "GoingUp.lean:160 Ideal.comap_lt_comap_of_integral_mem_sdiff [Algebra R S] [I.IsPrime] (hIJ : I ≤ J) {x} (mem : x ∈ J \\ I) (integral : IsIntegral R x) : I.comap (algebraMap R S) < J.comap (algebraMap R S); GoingUp.lean:221 Ideal.IsIntegral.comap_lt_comap [Algebra R A] [Algebra.IsIntegral R A] {I J : Ideal A} [I.IsPrime] (I_lt_J : I < J) : I.comap (algebraMap R A) < J.comap (algebraMap R A)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.IsIntegral.comap_lt_comap",
+  "file": "Mathlib/RingTheory/Ideal/GoingUp.lean",
+  "line": 221,
+  "how": "specializes in one line: `Ideal.IsIntegral.comap_lt_comap [Algebra R A] [Algebra.IsIntegral R A] {I J : Ideal A} [I.IsPrime] (I_lt_J : I < J) : I.comap (algebraMap R A) < J.comap (algebraMap R A)` (GoingUp.lean:221-224, read with sed -n 219,225p, 2026-10-10), applied with the algebra structure `φ.toAlgebra` and `Algebra.IsIntegral R S := ⟨hφ⟩`; elementwise form `Ideal.comap_lt_comap_of_integral_mem_sdiff` (line 160). The 'incomparable' form of Stacks 00GT is the contrapositive."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-integral-extension-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
