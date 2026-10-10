@@ -10,8 +10,8 @@ public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
-public import WeilConjectures.CategoryTheory.ModuleObjects.Functor
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Monoidal
 
 /-!
 
@@ -69,7 +69,7 @@ cover `{Uᵢ ⟶ X}` such that each `M|_{Uᵢ}` is the cokernel of a morphism
 def IsLocallyFinitelyPresented (M : Mod (Sheaf (Scheme.ProEt.topology X) A) R) : Prop :=
   ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
     Mod.IsFinitelyPresented ((ProEtale.upperStar A (𝒰.f i)).obj R)
-      (((ProEtale.upperStar A (𝒰.f i)).mapMod R).obj M)
+      (((ProEtale.upperStar A (𝒰.f i)).mapMod (R := R)).obj M)
 
 end Local
 
@@ -87,7 +87,7 @@ stratification are lisse. -/
 def IsConstructible (M : Mod (Sheaf (Scheme.ProEt.topology X) A) R) : Prop :=
   ∃ S : Scheme.Stratification X, ∀ a : Fin S.n,
     IsLocallyFinitelyPresented ((ProEtale.upperStar A (S.immersion a)).obj R)
-      (((ProEtale.upperStar A (S.immersion a)).mapMod R).obj M)
+      (((ProEtale.upperStar A (S.immersion a)).mapMod (R := R)).obj M)
 
 end Constructible
 

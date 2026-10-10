@@ -55,7 +55,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
-public import WeilConjectures.CategoryTheory.ModuleObjects.Functor
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal

@@ -32,11 +32,10 @@ module-object six functors need in order to transport ring objects and module ob
 * `ProEtale.laxBraided_upperStar`: `g^*` is moreover (lax) braided, which is deduced from the
   lax braidedness of `g_*` by the mate correspondence. In particular `g^*` sends commutative
   ring objects to commutative ring objects (`Functor.isCommMonObj_obj`).
-* `ProEtale.sheafSymmetricCategory`: the symmetric structure on `A`-valued pro-étale sheaves,
-  transported from `A` (the braided structure is already available from
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`; it is needed as a
-  symmetric structure by the module-object formalism, whose relative tensor product is only
-  defined over a symmetric category).
+
+The symmetric structure `ProEtale.sheafSymmetricCategory` on `A`-valued pro-étale sheaves, needed
+by the module-object formalism, is provided by
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs`.
 
 ## Sorried input
 
@@ -62,28 +61,6 @@ open CategoryTheory Limits MonoidalCategory Functor.LaxMonoidal Functor.OplaxMon
 namespace AlgebraicGeometry
 
 open Scheme ProEtale
-
-/-! ### The symmetric structure on pro-étale sheaves -/
-
-section Symmetric
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A]
-
-variable (Y : Scheme.{u})
-
-/-- The symmetric structure on `A`-valued pro-étale sheaves, induced by the symmetric structure
-of the coefficient category `A`. Its underlying braided structure is the global instance
-`ProEtale.sheafBraidedCategory`. -/
-noncomputable instance ProEtale.sheafSymmetricCategory :
-    SymmetricCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
-  Sheaf.symmetricCategory _ _
-
-/-- The symmetric structure on pro-étale sheaves refines the braided one. -/
-example : (ProEtale.sheafSymmetricCategory A Y).toBraidedCategory =
-    ProEtale.sheafBraidedCategory A Y := rfl
-
-end Symmetric
 
 /-! ### The strong monoidal structure on the pullback -/
 
