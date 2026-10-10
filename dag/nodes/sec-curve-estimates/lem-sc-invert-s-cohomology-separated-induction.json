@@ -25,9 +25,42 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let W be a separated quasi-compact open subscheme of X. By the finite-affine-cover statement, choose a finite affine open cover W = U_1 \\cup \\cdots \\cup U_n. Induct on n. For n > 1 set U = U_1 \\cup \\cdots \\cup U_{n-1} and V = U_n. Since W is separated over Spec Z, the affine-intersection statement applied with A = Z shows that each U_i \\cap V is affine; hence U \\cap V is a finite union of affine opens and is quasi-compact. The inclusions U \\hookrightarrow W and U \\cap V \\hookrightarrow W are open immersions and therefore separated by separated cancellation, while W \\to Spec Z is separated; separatedness of composites makes U and U \\cap V separated.",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 08DR (coherent-lemma-induction-principle), proof, first paragraph (separated quasi-compact opens)"
+   }
+  },
+  {
+   "text": "The case n = 1 is the affine hypothesis. For n > 1, the induction hypothesis applies to the separated quasi-compact opens U and U \\cap V, and the affine hypothesis applies to V. The assumed gluing implication for U and V therefore gives P(U \\cup V) = P(W). This proves P(W) for every separated quasi-compact open W.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 08DR (coherent-lemma-induction-principle), proof, first paragraph (separated quasi-compact opens)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 08DR (coherent-lemma-induction-principle), proof, first paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,10 +85,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-invert-s-cohomology-induction",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-invert-s-cohomology-separated-induction",
+  "worker": "stage1",
+  "summary": "Split the separated-open paragraph of Stacks Lemma 08DR into the finite affine cover and geometric properties, followed by finite induction using the affine base case and the assumed two-open gluing implication. All supporting facts were cited from existing DAG nodes.",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion route at the 09MR invocation of 08DR: the first induction for separated quasi-compact opens using a finite affine cover and affine intersections.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-isd",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-isd (reviewer sub-agent of L); spot-checked: Source: Stacks 08DR (coherent.tex lemma-induction-principle, l.555-586), proof first paragraph; the item statement (unchanged) agrees with the lemma hypothesis by hypothesis (X qcqs, P on qc opens, affine case, gluing for U qc / V affine) with the conclusion restricted to separated qc opens W, exactly what that paragraph proves. Step 1: finite affine cover of W from lem-weil-pbc-qcqs-finite-affine-open-cover (T quasi-compact); U_i cap V affine from lem-weil-pbc-separated-affine-open-intersection with Y=W, A=Z (W separated over Spec Z), so U cap V is covered by n-1 affines and is qc; U and U cap V separated by lem-weil-pbc-separated-cancellation (a) (open immersion separated) and lem-weil-pbc-proper-fp-permanence (e) (composite of separated). Step 2: the induction on n (over all separated qc W with an n-affine cover) using the IH on U and U cap V (each covered by n-1 affines), the affine premise on V and the gluing premise; elementary and checkable. Only proof fields, status and split_report changed; no new nodes, no leaves, no tool_uses. Small cases n=1 (affine W) and n=2 (two affines, affine overlap) checked. Minor: the report mentions a citations.json that is not in the commit (harmless). Start Sat Oct 10 04:33:02 PM UTC 2026, end Sat Oct 10 04:33:29 PM UTC 2026."
  }
 }
