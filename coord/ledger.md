@@ -2058,3 +2058,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:55 L: merged deliver/M1/lem-sc-open-map-irreducible-fibres-components (reviewer PASS; first push; new nodes: 0)
 - 16:55 L: merged deliver/J1/lem-pc-grothendieck-ss-double-complex-model (reviewer FIX; after a return; new nodes: 1)
 - 16:56 L: returned deliver/H1/lem-sc-derived-internal-hom-stalk-localization (reviewer RETURN: 1. D2/D1: proof of the item: the whole content is moved into the new node lem-sc-derived-internal-hom-stalk-general, whi)
+- 16:56 L: NEW NODE AUDIT 17/9/5/9/0 (coord/audit-new-nodes.md, commit a4cabc7ba); REMOTE SEARCHES NOT RUN (launcher 16:51): coord/research-remote-nodes.txt with 79 nodes, brief and delivery-errors B8 updated; attachment lem-weil-pbc-perfect-reduced-tensor closed (F1/M1 releases 16:49/16:53, isReduced_tensorProduct_of_perfectField, sorry-free); lem-sc-p1-polynomial-noetherian source.place corrected 00EN -> 00FN
