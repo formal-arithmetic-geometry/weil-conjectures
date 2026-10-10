@@ -2639,3 +2639,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:14 L: merged deliver/J1/lem-sc-affine-projective-complex-derived-hom (reviewer PASS; first push; new nodes: 0)
 - 21:15 L: merged deliver/F1/lem-pc-ringed-space-pointwise-truncation-limit (reviewer FIX; first push; new nodes: 2)
 - 21:15 L: merged deliver/C1/lem-pur-sheaf-hom-is-sheaf (reviewer FIX; first push; new nodes: 1)
+- 21:15 L: merged deliver/J1/lem-pc-affine-containment-ideal (reviewer PASS; first push; new nodes: 0)
