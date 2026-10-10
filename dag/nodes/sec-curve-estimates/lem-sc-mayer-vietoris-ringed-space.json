@@ -22,11 +22,64 @@
   "place": "Cohomology of Sheaves, Lemma 01EB (cohomology-lemma-mayer-vietoris), statement and proof; restriction naturality follows from the proof's restriction of an injective resolution to an open"
  },
  "stmt_deps": [
-  "def-weil-locally-ringed-space-morphism"
+  "def-weil-locally-ringed-space-morphism",
+  "def-sc-ringed-space-module-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an injective resolution $F\\to I^\\bullet$ on X using [def-sc-ringed-space-module-cohomology]. For each open T, [lem-sc-ringed-space-restrict-injective-resolution] identifies H^p(T,F|_T) with the cohomology of Gamma(T,I^\\bullet|_T). The sheaf condition gives exactness of Gamma(X,I^n) $\\to$ Gamma(U,I^n) \\oplus Gamma(V,I^n) $\\to$ Gamma(U\\cap V,I^n), and [lem-sc-ringed-space-injective-restriction-surjective] gives surjectivity of the last map. Thus these groups form a degreewise short exact sequence of cochain complexes. Applying [lem-weil-pbc-complex-ses-homology-long-exact] gives the displayed long exact sequence; its maps are restrictions and their difference by the definitions of the section maps.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology",
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "lem-sc-ringed-space-injective-restriction-surjective",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma 01EB (cohomology-lemma-mayer-vietoris), statement and proof"
+   }
+  },
+  {
+   "text": "For a morphism $F\\to F'$ choose a lift to a morphism of injective resolutions as in [lem-weil-pbc-derived-functor-map-via-lift]. Restricting the two resolutions to U, V, and U\\cap V remains an injective resolution by [lem-sc-ringed-space-restrict-injective-resolution]. These cochain maps form a morphism of the two degreewise short exact sequences from Step 1; [lem-weil-pbc-complex-ses-long-exact-naturality] gives a morphism of the resulting long exact sequences, including connecting maps. The cited derived-functor lift statement identifies the induced cohomology maps with the canonical functorial maps, so the result is independent of the chosen lift.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma 01EB, naturality in the module"
+   }
+  },
+  {
+   "text": "For an open W' subseteq X, restrict the chosen resolution to W'. By [lem-sc-ringed-space-restrict-injective-resolution], I^bullet|_{W'} is an injective resolution of F|_{W'}. Restricting sections gives a morphism from the short exact complex for X,U,V to the short exact complex for W', U\\cap W', V\\cap W'. The complexes on the latter opens are the same ones used to compute the cohomology groups in the restricted cover, and [lem-weil-pbc-complex-ses-long-exact-naturality] supplies compatibility of all connecting maps.",
+   "uses": [
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma 01EB, proof: restriction of an injective resolution to an open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-sc-ringed-space-injective-restriction-surjective",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-complex-ses-long-exact-naturality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma 01EB (cohomology-lemma-mayer-vietoris)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +125,47 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-mayer-vietoris-open-cover",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-mayer-vietoris-ringed-space",
+  "worker": "stage1",
+  "summary": "Repaired the Mayer–Vietoris proof following Stacks 01EB: choose an injective resolution, restrict it to opens, use injective flasqueness for surjectivity on U∩V, form the short exact sequence of section complexes, and apply the long exact cohomology sequence. Naturality in the module and in restriction to W' is proved by lifted maps of injective resolutions and naturality of the complex long exact sequence.",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion 09MR Mayer–Vietoris paragraph and its citation of Cohomology of Sheaves Lemma 01EB.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complex-ses-homology-long-exact",
+    "why": "The route needs the generic long exact cohomology sequence for a degreewise short exact sequence of complexes."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "why": "The route needs naturality of connecting maps for morphisms of short exact complex sequences."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-map-via-lift",
+    "why": "The route needs the standard lift of a module morphism to injective resolutions, unique up to homotopy."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-complex-ses-long-exact-naturality",
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mvr1856",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mvr1856 (reviewer sub-agent of L); spot-checked: Return of 18:18 repaired: step 1 now follows Stacks 01EB (injective resolution on X; 01E1 node: I|_U injective so Gamma(U,I.) computes H^p(U,F|_U); 01EA node: (1,-1) I(U)+I(V)->I(U∩V) surjective; sheaf condition gives left exactness; degreewise SES of section complexes; complex LES node). Steps 2/3 argued on the complex-level SES: lift of F->F' to resolutions restricted to U,V,U∩V,W' via 01E1 node, derived-functor-lift node removes lift dependence, complex LES naturality node gives connecting maps. Direct-image misidentification removed; item deps no longer cite the sheaf-SES node. New nodes 01DZ/01E1/01EA/01DI ringed-space versions are true, self-contained generalizations of scheme-only nodes (not duplicates). Tool uses accepted: generic homological algebra lemmas."
  }
 }
