@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-affine-constant-second",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Second cohomology of a constant sheaf on an affine curve",
@@ -18,30 +18,73 @@
  ],
  "proof": [
   {
-   "text": "If $\\ell$ is invertible in the field, choosing a primitive\n$\\ell$-th root identifies $\\mathbf F_\\ell$ with $\\mu_\\ell$.\nThen [lem-sc-second-kummer-divisors] identifies the group with\n$\\operatorname{Pic}(C)/\\ell=0$, by [lem-sc-pic-affine].\nIn characteristic $\\ell$, use the long exact sequence of\n[lem-sc-as-sequence]; the adjacent groups\n$H^1(C,\\mathbf G_a)$ and $H^2(C,\\mathbf G_a)$ vanish by\n[lem-sc-etale-affine-qcoherent].",
+   "text": "If $(\\ell:k)\\ne0$, a primitive root identifies the constant sheaf with $\\mu_\\ell$ by [def-sc-mu-trivialization]. Transporting cohomology across this isomorphism and applying [lem-sc-second-kummer-divisors] identifies $H^2(C,\\mathbf F_\\ell)$ with $\\operatorname{Pic}(C)/\\ell$, which is zero because [lem-sc-pic-affine] says multiplication by $\\ell$ on $\\operatorname{Pic}(C)$ is surjective.",
    "uses": [
+    "def-sc-mu-trivialization",
     "lem-sc-second-kummer-divisors",
-    "lem-sc-pic-affine",
-    "lem-sc-as-sequence",
-    "lem-sc-etale-affine-qcoherent"
+    "lem-sc-pic-affine"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Kummer sequence and affine curve case"
+   }
+  },
+  {
+   "text": "If $(\\ell:k)=0$, then $k$ has characteristic $p=\\ell>0$, and $C$, being affine, is separated; so $C$ is a smooth separated connected curve over the algebraically closed field $k$ of characteristic $\\ell$, and [lem-sc-artin-schreier-dimension] (with $q=2>1$) gives $H^2(C,\\mathbf F_\\ell)=0$.",
+   "uses": [
+    "lem-sc-artin-schreier-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3J, lemma-vanishing-affine-char-p-p (1), affine case of the Artin–Schreier vanishing"
+   }
   }
  ],
  "proof_deps": [
+  "def-sc-mu-trivialization",
   "lem-sc-second-kummer-divisors",
   "lem-sc-pic-affine",
-  "lem-sc-as-sequence",
-  "lem-sc-etale-affine-qcoherent"
+  "lem-sc-artin-schreier-dimension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-affine-constant-second.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "affine curve second etale cohomology constant Z/l vanishes",
+   "results": "unrelated formally etale/cotangent declarations",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "subsingleton Sheaf.H constantZMod",
+   "results": "none; Unknown identifier Sheaf.H",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'constantZMod|ArtinSchreier|Sheaf.H' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "vanishing of etale cohomology of constant Z/l sheaf on affine curve",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -232,5 +275,23 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd-affine"
+ "unit": "sk-prop-cd-affine",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-constant-second",
+  "worker": "stage1",
+  "summary": "The proposed Lean attachment reaches sorry declarations, so the item was split into the prime-to-characteristic Kummer argument and the characteristic branch. The characteristic branch cites the existing node lem-sc-artin-schreier-dimension (reviewer R-acs3036 dropped the delivery's new node lem-sc-affine-charp-constant-second, whose needed case that node already states).",
+  "blueprint": "The two proof steps realize the blueprint proof's invertible-ell/Kummer paragraph and characteristic-ell/Artin–Schreier paragraph."
+ },
+ "tool_uses": [
+  "lem-sc-artin-schreier-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-acs3036",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-acs3036 (reviewer sub-agent of L); spot-checked: Step 1: mu-trivialization (primitive root exists, ell != char), second-kummer-divisors (n invertible), pic-affine (n prime to char, n-divisible) - correct. Step 2: FIX more, RETURN less: new node lem-sc-affine-charp-constant-second (Stacks 0A3J (1), true) is class (b) for this use: existing split node lem-sc-artin-schreier-dimension states H^q(C,F_p)=0, q>1, for smooth separated connected curves over alg. closed char p (affine C is separated); step 2 now cites it (tool use), new node dropped, proof_deps updated; transitive deps of the cited node checked cycle-free. Citer lem-sc-affine-generic-second uses the statement as the base case on smooth affine connected C' - matches (C4). Second reading by J1 missed the existing node.; 1 file(s) fixed by the reviewer"
+ }
 }
