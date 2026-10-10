@@ -27,9 +27,41 @@
   "def-weil-pbc-finitely-presented-algebra",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By flatness and finite presentation, the induced map $\\operatorname{Spec}(T)\\to\\operatorname{Spec}(R)$ is open, by [lem-weil-pbc-flat-finite-presentation-open].",
+   "uses": [
+    "lem-weil-pbc-flat-finite-presentation-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Proposition 00I1 (proposition-fppf-open), as invoked in the proof of Lemma 00I6"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-irreducible-on-top] to this open map $f:\\operatorname{Spec}(T)\\to\\operatorname{Spec}(R)$: the target $\\operatorname{Spec}(R)$ is irreducible by hypothesis, and for each prime $\\mathfrak p$ of $R$ the fibre $f^{-1}(\\mathfrak p)$, with the subspace topology, is homeomorphic to $\\operatorname{Spec}(T\\otimes_R\\kappa(\\mathfrak p))$ by [lem-weil-pbc-fibre-spec-homeomorphism]; irreducibility is preserved by homeomorphisms, so $f^{-1}(\\mathfrak p)$ is irreducible for every $\\mathfrak p$ in the given dense set of primes. The conclusion is that $\\operatorname{Spec}(T)$ is irreducible.",
+   "uses": [
+    "lem-weil-pbc-irreducible-on-top",
+    "lem-weil-pbc-fibre-spec-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma 00I6 (algebra-lemma-flat-fibres-irreducible), invoking Topology Lemma 004Z"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-finite-presentation-open",
+  "lem-weil-pbc-irreducible-on-top",
+  "lem-weil-pbc-fibre-spec-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma 00I6 (algebra-lemma-flat-fibres-irreducible)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,10 +86,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-field-tensor-irreducible",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-flat-fibres-irreducible",
+  "worker": "stage1",
+  "summary": "Split the 00I6 proof into the open-spectrum consequence of flat finite presentation and the topological dense-irreducible-fibre criterion. The first is a Mathlib leaf; the second is a new statement-only node because no exact Mathlib theorem was found.",
+  "blueprint": "Realizes the blueprint ancestor's clause 'apply the flat finite-presentation irreducible-fibres criterion' via the two proof steps invoking 00I1 and 004Z."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ffi1706",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffi1706 (reviewer sub-agent of L); spot-checked: Source Stacks Algebra Lemma 00I6 (algebra.tex 11083): item statement agrees hypothesis by hypothesis ((a) Spec R irreducible, (b) flat, (c) finite presentation, (d) dense set of primes with irreducible fibre-ring spectra); proof follows 00I6 exactly (00I1 then Topology 004Z). Step 1 carried by lem-weil-pbc-flat-finite-presentation-open = Algebra 00I1 (algebra.tex 9708), statement checked. Step 2 carried by lem-weil-pbc-irreducible-on-top = Topology 004Z (topology.tex 1115), statement checked hypothesis by hypothesis; the irreducibility notion def-weil-irreducible-components includes nonemptiness. Mathlib lines verified with sed: Chevalley.lean:59 isOpenMap_comap_of_hasGoingDown_of_finitePresentation (@[stacks 00I1]) with GoingDown.lean:155 instance HasGoingDown.of_flat; Topology/Irreducible.lean:413 IsPreirreducible.preimage_of_dense_isPreirreducible_fiber (@[stacks 004Z]). Small cases: identity map of an irreducible spectrum; k[t] -> k[t,x]/(x^2-t) (flat fp, fibres over t != 0 two points over kbar, item gives no conclusion, Spec T irreducible anyway, no contradiction); k[t] -> k[t] x k[t] (fibres two points, Spec T reducible, hypothesis (d) fails as required). FIX more, RETURN less: (1) C1 in step 2: the identification of the fibre f^{-1}(p) with Spec(T (x)_R kappa(p)) as topological spaces had no node; added statement-only node lem-weil-pbc-fibre-spec-homeomorphism (Stacks Remark 00E6; my LeanFinder query found PrimeSpectrum.preimageHomeomorphFiber, Fiber.lean:212, recorded as match for the splitter), cited in step 2 uses and item proof_deps; step 2 text now says the homeomorphism preserves irreducibility. (2) dag/nodes/sec-proper-base-change/lem-weil-pbc-flat-finite-presentation-open.json: mathlib_match: file/line was UniversallyOpen.lean:129 (a use inside a proof), corrected to Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean:59 with the of_flat instance in how. (3) dag/nodes/sec-proper-base-change/lem-weil-pbc-irreducible-on-top.json: status unsplit -> mathlib, mathlib_match IsPreirreducible.preimage_of_dense_isPreirreducible_fiber Topology/Irreducible.lean:413 (V = univ, nonemptiness from the dense set), my LeanFinder query added to mathlib_searches (the worker's searches had reported no match). Start 2026-10-10 Sat Oct 10 05:06:33 PM UTC 2026, end Sat Oct 10 05:08:20 PM UTC 2026.; 4 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

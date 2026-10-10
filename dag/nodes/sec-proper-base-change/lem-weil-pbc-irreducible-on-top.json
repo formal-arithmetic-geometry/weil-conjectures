@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-irreducible-on-top",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "proof of the tensor irreducibility lemma: apply the flat finite-presentation irreducible-fibres criterion",
+   "via": [
+    "lem-weil-pbc-flat-fibres-irreducible",
+    "lem-weil-pbc-field-tensor-irreducible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An open map with dense irreducible fibres has irreducible source",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces. Assume that $Y$ is irreducible [def-weil-irreducible-components], that $f$ is open, and that there is a dense set of points $y\\in Y$ for which the fibre $f^{-1}(y)$ is irreducible [def-weil-irreducible-components]. Then $X$ is irreducible [def-weil-irreducible-components].",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma 004Z (lemma-irreducible-on-top)"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous open map with irreducible target and dense irreducible fibres has irreducible source",
+   "results": "No exact declaration returned; only IsOpen.dense and IsOpenMap.denseRange_of_isPreirreducibleSpace",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "irreducible source from open map and dense irreducible fibres",
+   "results": "No exact declaration returned",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'dense.*irreducible|irreducible.*fibr|IsOpenMap.*IsIrreducible' /home/ubuntu/weil-conjectures-sheaf-slopmaster2/.lake/packages/mathlib/Mathlib/Topology",
+   "results": "No declaration combining an open map, dense irreducible fibres, and an irreducible source",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open continuous map to irreducible space with irreducible fibers over a dense set of points has irreducible domain",
+   "results": "IsPreirreducible.preimage_of_dense_isPreirreducible_fiber (Mathlib/Topology/Irreducible.lean line 413, @[stacks 004Z]); run by reviewer R-ffi1706",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsPreirreducible.preimage_of_dense_isPreirreducible_fiber",
+  "file": "Mathlib/Topology/Irreducible.lean",
+  "line": 413,
+  "how": "specializes in one line: take V = univ (IsPreirreducible univ since Y is irreducible; the dense set D satisfies univ \\subseteq closure(D) \\subseteq closure({y | IsPreirreducible (f^{-1}{y})}) as irreducible fibres are preirreducible); the conclusion IsPreirreducible (f^{-1} univ) = univ gives X preirreducible, and X is nonempty because D is dense in the nonempty space Y, hence nonempty, and its fibres are irreducible, hence nonempty. Tagged @[stacks 004Z]; line verified by reviewer R-ffi1706 with sed, 2026-10-10."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-flat-fibres-irreducible",
+  "by": "worker",
+  "date": "2026-10-10"
+ }
+}

@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-flat-finite-presentation-open",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "proof of the tensor irreducibility lemma: apply the flat finite-presentation irreducible-fibres criterion",
+   "via": [
+    "lem-weil-pbc-flat-fibres-irreducible",
+    "lem-weil-pbc-field-tensor-irreducible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Flat finite-presentation ring maps induce open maps on spectra",
+ "statement": "Let $R\\to S$ be a flat ring map [def-weil-pbc-flat-ring-map] of finite presentation [def-weil-pbc-finitely-presented-algebra]. Then the induced map $\\operatorname{Spec}(S)\\to\\operatorname{Spec}(R)$ [def-weil-affine-spectrum] is open: the image of every open subset is open.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition 00I1 (proposition-fppf-open)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat finitely presented ring map induces an open map on prime spectra",
+   "results": "PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation; AlgebraicGeometry.UniversallyOpen.of_flat",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open map on spectra from flat finite presentation",
+   "results": "PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation; AlgebraicGeometry.Scheme.Hom.isOpenMap",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isOpenMap_comap_of_hasGoingDown_of_finitePresentation\\|UniversallyOpen.of_flat' /home/ubuntu/weil-conjectures-sheaf-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean",
+   "results": "UniversallyOpen.lean:129 PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation; lines 145-149 UniversallyOpen.of_flat for flat and locally finite presentation morphisms",
+   "date": "2026-10-11",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.isOpenMap_comap_of_hasGoingDown_of_finitePresentation",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean",
+  "line": 59,
+  "how": "specializes in one line: with [Algebra R S] [Algebra.HasGoingDown R S] [Algebra.FinitePresentation R S] it gives IsOpenMap (comap (algebraMap R S)) (line 59, @[stacks 00I1]); going down is supplied for a flat algebra by the instance Algebra.HasGoingDown.of_flat (Mathlib/RingTheory/Ideal/GoingDown.lean line 155). (UniversallyOpen.lean line 129, recorded before, is only a use of this lemma.) Lines verified by reviewer R-ffi1706 with sed, 2026-10-10."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-flat-fibres-irreducible",
+  "by": "worker",
+  "date": "2026-10-10"
+ }
+}
