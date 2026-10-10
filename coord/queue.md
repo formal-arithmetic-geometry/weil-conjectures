@@ -1,8 +1,8 @@
 # Work queue
 
-898 items; claim with `tools/claim.py next <group> [--stage N]`.
+897 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (660)
+## Stage 1: nodes to split (658)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,9 +22,7 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-module-cohomology-fmap-functorial` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-extension` | 1012 | none |
-| `lem-weil-pbc-module-finite-presentation-representatives` | 1012 | none |
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1012 | none |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1012 | none |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1012 | none |
@@ -667,7 +665,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (238)
+## Stage 2: nodes to state (239)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -830,6 +828,7 @@
 | `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-cokernel` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-direct-sum` | 1 | state |
+| `lem-weil-pbc-module-finite-presentation-representatives` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
 | `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
@@ -910,7 +909,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 672 nodes that wait for stage 1, 524 nodes that wait for a statement dependency.
+Not open yet: 670 nodes that wait for stage 1, 525 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
