@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-sc-mult-n-etale-kernel",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Multiplication by $d$ prime to the characteristic is etale",
- "statement": "Let $A$ be an abelian variety of dimension $g$ over a field $k$\nand let $d\\geq1$. If $\\operatorname{char}k\\nmid d$, the\nkernel $A[d]$ of $[d]:A\\to A$ of [def-sc-mult-n] is etale\n(equivalently $[d]$ is etale), and $A[d]$ is\netale-covering of the constant group scheme $(\\mathbf Z/d\\mathbf Z)^{2g}$\n([lem-sc-fg-order-prime-etale]).\n(*Stacks Project, Groupoid Schemes,\nLemma 39.9.9, [Tag 0BFH](https://stacks.math.columbia.edu/tag/0BFH)*.)",
+ "statement": "Let $A$ be an abelian variety of dimension $g$ over a field $k$\nand let $d\\geq1$. If $\\operatorname{char}k\\nmid d$, then the\nmultiplication morphism $[d]:A\\to A$ of [def-sc-mult-n] is etale,\nand its kernel $A[d]$ is a finite etale group scheme of rank\n$d^{2g}$ (equivalently, it has order $d^{2g}$).\n(*Stacks Project, Groupoid Schemes, [Tag 0BFH](https://stacks.math.columbia.edu/tag/0BFH)*.)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-ntorsion-etale/lem-sc-mult-n-etale-kernel.md",
   "place": "node lem-sc-mult-n-etale-kernel, order 588",
@@ -20,31 +20,102 @@
  },
  "stmt_deps": [
   "def-sc-mult-n",
-  "lem-sc-fg-order-prime-etale",
   "def-sc-abelian-variety"
  ],
  "proof": [
   {
-   "text": "By [lem-sc-mult-n-finite-flat], $[d]$ is finite flat with kernel of\norder $d^{2g}$. The etaleness of the kernel when $\\operatorname{char}k\\nmid d$,\nand its description as an etale covering of the constant group scheme\n$(\\mathbf Z/d\\mathbf Z)^{2g}$, are Lemma 39.9.9\n([Tag 0BFH](https://stacks.math.columbia.edu/tag/0BFH)) together\nwith [lem-sc-fg-order-prime-etale]; no separate\nproof is given.",
+   "text": "The morphism [d] is a homomorphism of group schemes. By translation invariance of the etale locus for a homomorphism [lem-sc-hom-etale-locus-translation], it is enough to check etaleness at the identity e.",
+   "uses": [
+    "lem-sc-hom-etale-locus-translation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BFH, proof: translation invariance"
+   }
+  },
+  {
+   "text": "The finite-flat input [lem-sc-mult-n-finite-flat] makes [d] finite locally free. The finite-flat tangent criterion [lem-sc-finite-flat-unramified-tangent-criterion] identifies etaleness at e with injectivity of the tangent map d[d] on T_{A/k,e}.",
    "uses": [
     "lem-sc-mult-n-finite-flat",
-    "lem-sc-fg-order-prime-etale"
+    "lem-sc-finite-flat-unramified-tangent-criterion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "lemma-injective-tangent-spaces-unramified, combined with Tag 0BFH"
+   }
+  },
+  {
+   "text": "The differential of the group addition is additive on tangent vectors [lem-sc-group-addition-tangent-differential], and hence the differential of [d] is scalar multiplication v↦d·v [lem-sc-mult-n-tangent-differential]. Since char(k) does not divide d, this scalar map is injective. Thus [d] is etale.",
+   "uses": [
+    "lem-sc-group-addition-tangent-differential",
+    "lem-sc-mult-n-tangent-differential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0BFH, differential at the identity"
+   }
+  },
+  {
+   "text": "The kernel A[d] is the base change of [d] along the identity section e:Spec(k)→A. The one-member family ([d]) is etale and surjective (a finite locally free morphism of rank d^{2g}≥1 is surjective), so by [lem-weil-pbc-etale-covering-base-change] applied with g=e its base change A[d]→Spec(k) is etale; thus A[d] is etale; [lem-sc-mult-n-finite-flat] gives that it is finite and has rank d^{2g}.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-sc-mult-n-finite-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GO, base change of etale morphisms"
+   }
   }
  ],
  "proof_deps": [
+  "lem-sc-hom-etale-locus-translation",
   "lem-sc-mult-n-finite-flat",
-  "lem-sc-fg-order-prime-etale"
+  "lem-sc-finite-flat-unramified-tangent-criterion",
+  "lem-sc-group-addition-tangent-differential",
+  "lem-sc-mult-n-tangent-differential",
+  "lem-weil-pbc-etale-covering-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-ntorsion-etale/lem-sc-mult-n-etale-kernel.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "abelian variety torsion subgroup scheme etale and constant group scheme",
+   "results": "Etale-related declarations, no theorem for abelian-variety torsion",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Etale (torsionSubgroupScheme A n).hom",
+   "results": "Unknown identifier Etale; no match",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsionSubgroupScheme|etale_npow_id Mathlib/",
+   "results": "no Mathlib matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "n-torsion points of abelian variety",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -209,5 +280,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-ntorsion-etale"
+ "unit": "sk-prop-av-ntorsion-etale",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-mult-n-etale-kernel",
+  "worker": "stage1",
+  "summary": "Corrected the imported statement by removing the false constant-group clause and split Tag 0BFH into translation invariance, the finite-flat tangent criterion, the differential computation, and base change for the kernel.",
+  "blueprint": "The single proof paragraph of the blueprint node is realized by steps 1-4: translation invariance, finite-flat tangent criterion, differential multiplication by d, and base change of the kernel.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mek1856",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mek1856 (reviewer sub-agent of L); spot-checked: Repairs of the 18:19 return all made: step 1 translation node (true: k-point translations, dichotomy via field-extension points), step 2 lem-sc-mult-n-finite-flat + new finite-flat tangent criterion (true: Omega_{X/Y} tensor kappa(x)=0 iff cotangent surjective at rational points; flat+unramified+lfp=etale), step 3 two new differential nodes (standard, true; not duplicates of lem-sc-tangent-map-linear), step 4 base change; 'Lemma 39.9.9' dropped; no cycle: neither item nor new nodes cite lem-sc-ntorsion-etale. FIX more, RETURN less: C4 in step 4, the cited covering node needs joint surjectivity; added that [d] is surjective (finite locally free of rank d^{2g}>=1) and that the base change is along g=e.; 1 file(s) fixed by the reviewer"
+ }
 }
