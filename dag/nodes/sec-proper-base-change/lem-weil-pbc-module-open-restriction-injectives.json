@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-module-open-restriction-injectives",
  "kind": "statement",
  "title": "Restriction of modules to an open subscheme is exact and preserves injectives; direct image along the open immersion preserves injectives",
- "statement": "Let $X$ be a scheme [def-pc-scheme], $U\\subseteq X$ an open subscheme with inclusion $j:U\\to X$, and for an $\\mathcal O_X$-module $\\mathcal G$ [def-weil-sheaf-of-modules-category] let $\\mathcal G|_U$ be the restricted $\\mathcal O_U$-module, $(\\mathcal G|_U)(W)=\\mathcal G(W)$ for $W\\subseteq U$ open [lem-weil-pbc-module-restriction-open-immersion-colimits]; let $j_*:\\Mod(\\mathcal O_U)\\to\\Mod(\\mathcal O_X)$ be the direct image, $(j_*\\mathcal H)(W)=\\mathcal H(W\\cap U)$. Then: (1) the functor $\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_U)$, $\\mathcal G\\mapsto\\mathcal G|_U$, is exact; (2) if $\\mathcal I$ is an injective $\\mathcal O_X$-module [def-sp-injective-resolutions], then $\\mathcal I|_U$ is an injective $\\mathcal O_U$-module; (3) if $\\mathcal J$ is an injective $\\mathcal O_U$-module, then $j_*\\mathcal J$ is an injective $\\mathcal O_X$-module. Consequently, if $\\mathcal F\\to\\mathcal I^\\bullet$ is an injective resolution of an $\\mathcal O_X$-module $\\mathcal F$ in $\\Mod(\\mathcal O_X)$, then $\\mathcal F|_U\\to\\mathcal I^\\bullet|_U$ is an injective resolution of $\\mathcal F|_U$ in $\\Mod(\\mathcal O_U)$.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U\\subseteq X$ an open subscheme with inclusion $j:U\\to X$, and for an $\\mathcal O_X$-module $\\mathcal G$ [def-weil-sheaf-of-modules-category] let $\\mathcal G|_U$ be the restricted $\\mathcal O_U$-module, $(\\mathcal G|_U)(W)=\\mathcal G(W)$ for $W\\subseteq U$ open [lem-weil-pbc-module-restriction-open-immersion-colimits]; let $j_*:\\Mod(\\mathcal O_U)\\to\\Mod(\\mathcal O_X)$ be the direct image, $(j_*\\mathcal H)(W)=\\mathcal H(W\\cap U)$. Then: (1) the functor $\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_U)$, $\\mathcal G\\mapsto\\mathcal G|_U$, is exact [def-weil-pbc-exact-sequence]: it is additive and carries a sequence of $\\mathcal O_X$-modules exact at the middle term to one exact at the middle term; (2) if $\\mathcal I$ is an injective $\\mathcal O_X$-module [def-sp-injective-resolutions], then $\\mathcal I|_U$ is an injective $\\mathcal O_U$-module; (3) if $\\mathcal J$ is an injective $\\mathcal O_U$-module, then $j_*\\mathcal J$ is an injective $\\mathcal O_X$-module. Consequently, if $\\mathcal F\\to\\mathcal I^\\bullet$ is an injective resolution of an $\\mathcal O_X$-module $\\mathcal F$ in $\\Mod(\\mathcal O_X)$, then $\\mathcal F|_U\\to\\mathcal I^\\bullet|_U$ is an injective resolution of $\\mathcal F|_U$ in $\\Mod(\\mathcal O_U)$.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Cohomology of Sheaves, Lemma 01E1 (lemma-cohomology-of-open, line 495) part (1) and its proof (restriction is right adjoint to the exact extension by zero j_!, Sheaves Lemma 00A7 (sheaves-lemma-j-shriek-modules), so Homology Lemma 015Z (homology-lemma-adjoint-preserve-injectives) applies; 'F|_U -> I^bullet|_U is an injective resolution'); for (3) Cohomology Lemma 02N5 (lemma-pushforward-injective-flat, line 1820: f_* of an injective is injective for flat f, an open immersion being flat), equivalently 015Z for the adjunction (-)|_U -| j_* with (-)|_U exact"
@@ -11,11 +11,84 @@
   "def-pc-scheme",
   "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "def-sp-injective-resolutions"
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Proof of (1): restriction is exact, checked on stalks.) Restriction is a functor $\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_U)$ [lem-weil-pbc-module-restriction-open-immersion-colimits] with $(\\psi|_U)_W=\\psi_W$; hence it is additive ($(\\psi+\\psi')|_U=\\psi|_U+\\psi'|_U$, $0|_U=0$, sums of sections being computed sectionwise [def-weil-sheaf-of-modules-category]) and carries complexes to complexes. Stalks: let $x\\in U$ and $\\mathcal G$ an $\\mathcal O_X$-module. Define $c_x:(\\mathcal G|_U)_x\\to\\mathcal G_x$ by sending the germ at $x$ of $s\\in(\\mathcal G|_U)(W)=\\mathcal G(W)$ ($x\\in W\\subseteq U$) to the germ $s_x\\in\\mathcal G_x$ [def-weil-pbc-module-stalk]. It is well defined and injective: by the description of equality of germs in [def-weil-pbc-module-stalk], $s,s'$ (over $W,W'\\subseteq U$) have the same germ in $\\mathcal G_x$ iff they agree on some open $x\\in W''\\subseteq W\\cap W'$, and such $W''$ lies in $U$, which is also the condition for equality in $(\\mathcal G|_U)_x$. It is surjective: every element of $\\mathcal G_x$ is a germ $t_x$ with $t\\in\\mathcal G(V)$, $x\\in V$, and $t_x$ is the image of the germ of $t|_{V\\cap U}$. It is $\\mathcal O_{X,x}$-linear (the ring stalks $\\mathcal O_{U,x}\\to\\mathcal O_{X,x}$ are identified by the same argument) and natural: $c_x\\circ(\\psi|_U)_x=\\psi_x\\circ c_x$, both sending the germ of $s$ to $\\psi_W(s)_x$. Now let $\\mathcal F\\xrightarrow{\\varphi}\\mathcal G\\xrightarrow{\\psi}\\mathcal H$ be a complex of $\\mathcal O_X$-modules exact at $\\mathcal G$ [def-weil-pbc-exact-sequence]. By [lem-weil-pbc-module-stalk-exact] (5) on $X$, $\\mathcal F_x\\to\\mathcal G_x\\to\\mathcal H_x$ is exact at $\\mathcal G_x$ for every $x\\in X$. For $x\\in U$ the isomorphisms $c_x$ identify $(\\mathcal F|_U)_x\\to(\\mathcal G|_U)_x\\to(\\mathcal H|_U)_x$ with this sequence (naturality), so it is exact at $(\\mathcal G|_U)_x$. $U$ is a scheme, so [lem-weil-pbc-module-stalk-exact] (5) on $U$ shows that $\\mathcal F|_U\\to\\mathcal G|_U\\to\\mathcal H|_U$ is exact at $\\mathcal G|_U$. Hence restriction is exact; in particular it carries short exact sequences to short exact sequences and monomorphisms to monomorphisms.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AJ (label lemma-exactness-pushforward-pullback, line 253) part (3) and its proof (exactness checked on stalks, Lemma 01AG, label lemma-abelian, line 149; stalks of the pullback, Sheaves Lemma 008O, label lemma-pullback-abelian-stalk), applied to j^{-1} = restriction (Sheaves, Lemma 00A0, label lemma-j-pullback)"
+   }
+  },
+  {
+   "text": "(Proof of (2): restriction preserves injectives.) Let $j_!:\\Mod(\\mathcal O_U)\\to\\Mod(\\mathcal O_X)$ be extension by zero [lem-weil-pbc-module-extension-by-zero-adjunction]; it is an additive functor (ibid. (1)) and left adjoint to $\\mathcal G\\mapsto\\mathcal G|_U$ (ibid. (2)). It is exact: let $\\mathcal F'\\xrightarrow{\\alpha}\\mathcal F\\xrightarrow{\\beta}\\mathcal F''$ be a complex of $\\mathcal O_U$-modules exact at $\\mathcal F$; then $j_!\\mathcal F'\\to j_!\\mathcal F\\to j_!\\mathcal F''$ is a complex ($j_!\\beta\\circ j_!\\alpha=j_!(\\beta\\alpha)=0$). For $x\\in X\\setminus U$ its stalks are $0\\to0\\to0$ (ibid. (3)), exact. For $x\\in U$ the natural isomorphisms of ibid. (3) identify its stalk sequence with $\\mathcal F'_x\\to\\mathcal F_x\\to\\mathcal F''_x$, which is exact at $\\mathcal F_x$ by [lem-weil-pbc-module-stalk-exact] (5) on the scheme $U$. By [lem-weil-pbc-module-stalk-exact] (5) on $X$, $j_!\\mathcal F'\\to j_!\\mathcal F\\to j_!\\mathcal F''$ is exact at $j_!\\mathcal F$. So $j_!$ is an exact functor between the abelian categories $\\Mod(\\mathcal O_U)$, $\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category] with right adjoint the restriction, and [lem-sp-right-adjoint-preserves-injectives] (with $u=j_!$, $u_*=(-)|_U$) gives: if $\\mathcal I$ is an injective $\\mathcal O_X$-module [def-sp-injective-resolutions], then $\\mathcal I|_U$ is an injective $\\mathcal O_U$-module.",
+   "uses": [
+    "lem-weil-pbc-module-extension-by-zero-adjunction",
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01E1 (label lemma-cohomology-of-open, line 495), proof of (1): restriction is right adjoint to j_! (Sheaves, Lemma 00A7, label lemma-j-shriek-modules), j_! is exact (Modules, Lemma 01AK, label lemma-j-shriek-exact, modules.tex line 281: from the description of the stalks), hence Homology, Lemma 015Z (label lemma-adjoint-preserve-injectives, homology.tex line 7270)"
+   }
+  },
+  {
+   "text": "(Proof of (3): $j_*$ preserves injectives.) By [lem-weil-pbc-module-restriction-open-immersion-colimits] (1), applied to the open immersion $j:U\\to X$, restriction $\\mathcal G\\mapsto\\mathcal G|_U$ is left adjoint to the direct image $j_*$, $(j_*\\mathcal H)(W)=\\mathcal H(j^{-1}W)=\\mathcal H(W\\cap U)$. By Step 1 restriction is an exact functor between the abelian categories $\\Mod(\\mathcal O_X)$ and $\\Mod(\\mathcal O_U)$ [def-weil-sheaf-of-modules-category]. So [lem-sp-right-adjoint-preserves-injectives] (with $u=(-)|_U$, $u_*=j_*$) gives: if $\\mathcal J$ is an injective $\\mathcal O_U$-module [def-sp-injective-resolutions], then $j_*\\mathcal J$ is an injective $\\mathcal O_X$-module.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 02N5 (label lemma-pushforward-injective-flat, line 1824) and its proof (f^* transforms injections into injections, so Homology Lemma 015Z applies to f^* ⊣ f_*), for f = j, where f^* = restriction is exact by Step 1"
+   }
+  },
+  {
+   "text": "(Consequence: restrictions of injective resolutions.) Let $\\mathcal F\\to\\mathcal I^\\bullet$ be an injective resolution in $\\Mod(\\mathcal O_X)$ [def-sp-injective-resolutions]: each $\\mathcal I^p$ is injective, $\\mathcal I^p=0$ for $p$ small, and the augmented complex $0\\to\\mathcal F\\to\\mathcal I^0\\to\\mathcal I^1\\to\\cdots$ (indexing so that the cohomology of $\\mathcal I^\\bullet$ is $\\mathcal F$ in degree $0$ and zero elsewhere) is exact at every term [def-weil-pbc-exact-sequence]. Restriction carries this complex to the complex $0\\to\\mathcal F|_U\\to\\mathcal I^0|_U\\to\\mathcal I^1|_U\\to\\cdots$ ($0|_U=0$), which is exact at every term by Step 1; each $\\mathcal I^p|_U$ is injective by Step 2, and $\\mathcal I^p|_U=0$ whenever $\\mathcal I^p=0$. $\\Mod(\\mathcal O_U)$ is abelian with enough injectives, $U$ being a scheme [lem-weil-pbc-scheme-modules-enough-injectives]. Hence $\\mathcal F|_U\\to\\mathcal I^\\bullet|_U$ is an injective resolution of $\\mathcal F|_U$ in $\\Mod(\\mathcal O_U)$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-scheme-modules-enough-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 01E1 (label lemma-cohomology-of-open, line 495), proof of (2): 'By the above we see that F|_U -> I^bullet|_U is an injective resolution in Mod(O_U)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-extension-by-zero-adjunction",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-scheme-modules-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma 01E1 (lemma-cohomology-of-open, line 495) and its proof for (2) and the consequence; Lemma 02N5 (lemma-pushforward-injective-flat, line 1824) for (3); (1) and the exactness of j_! from Modules, Lemmas 01AJ (3) and 01AK (literature/stacks-project/modules.tex lines 253, 281) with Lemma 01AG (line 149)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +124,38 @@
    "results": "restrictFunctor used only in Modules/Tilde.lean (quasi-coherence, colimits); no extension by zero j_! for modules; Modules/Sheaf.lean has pullbackPushforwardAdjunction (189), restrictAdjunction (425), restrictFunctorIsoPullback (453), no exactness or mono-preservation of restrictFunctor; Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms in CategoryTheory/Preadditive/Injective/Preserves.lean:50",
    "date": "2026-10-10",
    "verdict": "no match: (2) needs j_! (absent), (1) and (3) need exactness of restriction (absent); the abstract 015Z is Adjunction.map_injective"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of sheaves of modules to an open subscheme is an exact functor",
+   "results": "Scheme.Modules.restrict, restrict_obj, restrictFunctor, restrictFunctorId_hom_app_app (Mathlib.AlgebraicGeometry.Modules.Sheaf); SheafOfModules.restrictScalars; Scheme.restrictFunctor (Mathlib.AlgebraicGeometry.Restrict)",
+   "date": "2026-10-10",
+   "verdict": "no match: no exactness of restrictFunctor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction functor of sheaves of modules to an open subset preserves finite limits / is exact",
+   "results": "SheafOfModules.instPreservesFiniteLimits...toSheaf, Finite.evaluationPreservesFiniteLimits, Finite.forgetPreservesFiniteLimits (Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits); PresheafOfModules sheafification preserves finite limits (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification)",
+   "date": "2026-10-10",
+   "verdict": "no match: nothing for restrictFunctor"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.restrictFunctor, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'restrictStalkNatIso|PreservesFiniteLimits|PreservesMono|Exact|Injective' Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; grep -rn 'PreservesInjectiveObjects|map_injective|injective_of_adjoint' Mathlib/CategoryTheory/Preadditive/Injective/",
+   "results": "Scheme.Modules.restrictStalkNatIso (Sheaf.lean:510, read with sed -n 500,540p: (M|_X)_x ≅ M_{f x} as abelian groups, natural in M) and germ lemmas (:519, :530); no exactness, mono-preservation or injectivity lemma for restrictFunctor. Adjunction.map_injective (Injective/Basic.lean:279, needs F.PreservesMonomorphisms; read with sed -n 270,285p), Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms (Injective/Preserves.lean:50, read with sed -n 47,53p)",
+   "date": "2026-10-10",
+   "verdict": "no match for the item: (1) would follow from restrictStalkNatIso plus a stalkwise exactness criterion for X.Modules (absent), (3) from restrictAdjunction and Adjunction.map_injective once restrictFunctor preserves monomorphisms (absent), (2) needs j_! (absent); not a one-line specialization, no mathlib_candidate"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,5 +175,15 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-open-restriction-injectives",
+  "worker": "stage1",
+  "summary": "Checked against Cohomology 01E1 (statement and proof), Sheaves 00A4/00A7, Modules 01AG/01AJ/01AK, Homology 015Z and Cohomology 02N5. Four steps: (1) exactness of restriction on stalks (Modules 01AJ (3): (G|_U)_x = G_x from the germ description, plus stalkwise exactness lem-weil-pbc-module-stalk-exact (5)); (2) j_! for modules (new unsplit node lem-weil-pbc-module-extension-by-zero-adjunction, Sheaves 00A7 (2),(3)) is exact by its stalks (Modules 01AK) and left adjoint to restriction, so lem-sp-right-adjoint-preserves-injectives (015Z) applies; (3) restriction is left adjoint to j_* (Mathlib leaf lem-weil-pbc-module-restriction-open-immersion-colimits) and exact by (1), so 015Z again (Cohomology 02N5's proof); consequence: restricted injective resolutions, with enough injectives on U. Statement kept; 'exact' made explicit with [def-weil-pbc-exact-sequence] added to stmt_deps. Mathlib: no match (four more searches recorded; restrictStalkNatIso and Adjunction.map_injective exist but exactness of restriction and j_! do not)."
+ },
+ "tool_uses": [
+  "lem-sp-right-adjoint-preserves-injectives"
+ ],
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Cohomology 01E1 and 02N5: restriction exact on stalks (step 1, via lem-weil-pbc-module-stalk-exact (5)), injectives preserved by the adjunctions j_! ⊣ (-)|_U (00A7, new unsplit node) and (-)|_U ⊣ j_* with Homology 015Z, used as a tool from unit sk-thm-groth-ss (tool_uses recorded, same precedent as colimit-of-sites-injective-system); exactness of j_! for modules written out on stalks (source gap). No Mathlib match."
 }

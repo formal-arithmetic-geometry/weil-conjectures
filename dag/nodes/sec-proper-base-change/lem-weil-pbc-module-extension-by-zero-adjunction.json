@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-module-extension-by-zero-adjunction",
+ "kind": "statement",
+ "title": "Extension by zero of modules along the inclusion of an open subscheme: left adjoint to restriction, with stalks",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U\\subseteq X$ an open subscheme with inclusion $j:U\\to X$, so that $\\mathcal O_U(W)=\\mathcal O_X(W)$ for $W\\subseteq U$ open. For an $\\mathcal O_X$-module $\\mathcal G$ [def-weil-sheaf-of-modules-category] let $\\mathcal G|_U$ be the $\\mathcal O_U$-module $W\\mapsto\\mathcal G(W)$ ($W\\subseteq U$ open) with the restriction maps of $\\mathcal G$, and for a morphism $\\psi$ of $\\mathcal O_X$-modules let $\\psi|_U=(\\psi_W)_{W\\subseteq U}$ [lem-weil-pbc-module-restriction-open-immersion-colimits]. For an $\\mathcal O_U$-module $\\mathcal F$ let $j_{p!}\\mathcal F$ be the presheaf of $\\mathcal O_X$-modules on $X$ with $(j_{p!}\\mathcal F)(V)=\\mathcal F(V)$ if $V\\subseteq U$ and $(j_{p!}\\mathcal F)(V)=0$ if $V\\not\\subseteq U$ ($V\\subseteq X$ open), $\\mathcal O_X(V)$ acting on $\\mathcal F(V)=\\mathcal F(V)$ through $\\mathcal O_X(V)=\\mathcal O_U(V)$ when $V\\subseteq U$; the restriction map along $V'\\subseteq V$ is the restriction map of $\\mathcal F$ if $V\\subseteq U$ and $0$ otherwise. A morphism $\\alpha:\\mathcal F\\to\\mathcal F'$ gives $j_{p!}\\alpha$, equal to $\\alpha_V$ for $V\\subseteq U$ and $0$ otherwise. Let $\\theta_{\\mathcal F}:j_{p!}\\mathcal F\\to j_!\\mathcal F$ be the sheafification of $j_{p!}\\mathcal F$ as a presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification], and $j_!\\alpha$ the morphism induced by $j_{p!}\\alpha$; $j_!\\mathcal F$ is the *extension of $\\mathcal F$ by zero*. Then: (1) $j_!:\\Mod(\\mathcal O_U)\\to\\Mod(\\mathcal O_X)$ is an additive functor; (2) $j_!$ is left adjoint to restriction: for every $\\mathcal O_U$-module $\\mathcal F$ and every $\\mathcal O_X$-module $\\mathcal G$ the map $\\Hom_{\\mathcal O_X}(j_!\\mathcal F,\\mathcal G)\\to\\Hom_{\\mathcal O_U}(\\mathcal F,\\mathcal G|_U)$, $\\psi\\mapsto(\\psi\\circ\\theta_{\\mathcal F})|_U$, is bijective, and natural in $\\mathcal F$ and $\\mathcal G$; (3) for $x\\in X$ with stalks as in [def-weil-pbc-module-stalk]: if $x\\notin U$ then $(j_!\\mathcal F)_x=0$; if $x\\in U$ then the map $\\mathcal F_x\\to(j_!\\mathcal F)_x$, $s_x\\mapsto(\\theta_{\\mathcal F,V}(s))_x$ ($V\\subseteq U$ an open neighbourhood of $x$, $s\\in\\mathcal F(V)$), is well defined and an isomorphism of $\\mathcal O_{X,x}$-modules, natural in $\\mathcal F$ (for $\\alpha:\\mathcal F\\to\\mathcal F'$ it carries $\\alpha_x$ to $(j_!\\alpha)_x$).",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 00A7 (label lemma-j-shriek-modules, line 4771) parts (2) and (3), with the definition of extension by zero for modules in Definition 00A4 (label definition-j-shriek-structures, line 4612) parts (1), (2), (5), (6), in Section 009Z (label section-open-immersions); the abelian case is Lemma 00A5 (label lemma-j-shriek-abelian, line 4685). The proofs there are 'Omitted'; the set-valued analogue is Lemma 00A3 (label lemma-j-shriek)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero of a sheaf of modules along an open immersion is left adjoint to restriction",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction (restrictFunctor f ⊣ pushforward f), instIsLeftAdjointRestrictFunctor, pullbackPushforwardAdjunction, restrict_obj (Mathlib.AlgebraicGeometry.Modules.Sheaf); SheafOfModules.PullbackConstruction.adjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous); stalkSkyscraperSheafAdjunction (Mathlib.Topology.Sheaves.Skyscraper)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the adjunction restriction ⊣ pushforward (restriction as a left adjoint); no left adjoint j_! of restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero j_! of sheaves along an open embedding, left adjoint to restriction, stalks zero outside the open",
+   "results": "stalkSkyscraperSheafAdjunction, instIsLeftAdjointPresheafStalkFunctor, skyscraperPresheafStalkAdjunction (Mathlib.Topology.Sheaves.Skyscraper); PresheafedSpace.restrictStalkIso (Mathlib.Geometry.RingedSpace.Stalks); Scheme.Modules.restrictStalkNatIso (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"; \"lowerShriek\"",
+   "results": "none; none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "extendByZero (project ~/weil-conjectures-slopmaster2)",
+   "results": "only AlgebraicGeometry.Scheme.extendByZero and lemmas in WeilConjectures/AlgebraicGeometry/Sites/PointFunctions.lean (functions on points, not sheaves; source repository, not Mathlib); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlni 'extensionByZero|extendByZero|ExtendByZero|lowerShriek|jShriek' and grep -rni 'extension by zero|extend by zero' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only unrelated hits (LinearAlgebra/Pi.lean, Algebra/Group/Pi/Lemmas.lean: Pi.single-type extension; NumberTheory/MulChar/Basic.lean:144 for Dirichlet characters); nothing on sheaves",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no extension by zero of sheaves of modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-open-restriction-injectives",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Sheaves 00A7 for modules (extension by zero defined explicitly as the sheafification of j_{p!}; additivity, adjunction with restriction, stalks). Unsplit; the source's proof is omitted."
+}
