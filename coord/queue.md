@@ -1,8 +1,8 @@
 # Work queue
 
-889 items; claim with `tools/claim.py next <group> [--stage N]`.
+886 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (328)
+## Stage 1: nodes to split (324)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -35,7 +35,6 @@
 | `lem-exc-field-sections-stalk-invariants` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 3011 | none |
-| `lem-pc-quasi-compact-local-on-target` | 3011 | none |
 | `lem-sc-fibre-dimension-after-base-change` | 3011 | none |
 | `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` | 3011 | none |
 | `lem-exc-rg-open-stabilizer-adjoint` | 3012 | none |
@@ -49,16 +48,13 @@
 | `lem-pc-proper-descends-field` | 3012 | none |
 | `lem-pc-separable-tensor-algebraic-closure` | 3012 | none |
 | `lem-sc-coherent-free-stalks-locally-free` | 3012 | none |
-| `lem-sc-dvr-fg-torsionfree-free` | 3012 | none |
-| `lem-sc-irreducible-product-over-field` | 3012 | none |
 | `lem-sc-p1-duality-pairing-naturality` | 3012 | none |
 | `lem-sc-p1-ext-coherent-dim-one-vanishing` | 3012 | none |
 | `lem-sc-p1-ext-locally-free-naturality` | 3012 | none |
-| `lem-sc-ext-derived-composite` | 3013 | none |
 | `lem-sc-ext-evaluation` | 3013 | none |
-| `lem-sc-ext-tensor-exact` | 3013 | none |
 | `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
 | `lem-sc-local-section-quotient-finite-free` | 3013 | none |
+| `lem-sc-product-irreducible-components-bijection` | 3013 | none |
 | `lem-sc-proper-upper-shriek-composition` | 3013 | none |
 | `lem-sc-smooth-proper-curve-dualizing` | 3013 | none |
 | `lem-sc-p1-finite-homogeneous-generators` | 3014 | none |
@@ -335,7 +331,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (561)
+## Stage 2: nodes to state (562)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -423,6 +419,7 @@
 | `lem-sc-glue-component-reduced-cover-sections` | 1 | state |
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
 | `lem-sc-integral-locally-algebraic-affine-opens-dimension` | 1 | state |
+| `lem-sc-irreducible-product-over-field` | 1 | state |
 | `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
 | `lem-sc-pic-proper-decomposition` | 1 | state |
@@ -901,7 +898,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 347 nodes that wait for stage 1, 1089 nodes that wait for a statement dependency.
+Not open yet: 343 nodes that wait for stage 1, 1091 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
