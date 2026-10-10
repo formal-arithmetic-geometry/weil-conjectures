@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-finite-presentation-base-change-composition",
+ "kind": "statement",
+ "title": "Finite presentation: base change and composition",
+ "statement": "(1) Let $R\\to S$ be a ring map of finite presentation [def-weil-pbc-finitely-presented-algebra] and $R\\to R'$ any homomorphism of commutative rings. Then $R'\\to R'\\otimes_RS$, $r'\\mapsto r'\\otimes1$, is of finite presentation. (2) Let $R\\to S$ and $S\\to T$ be ring maps of finite presentation. Then the composite $R\\to T$ is of finite presentation.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05G5 (lemma-base-change-finiteness, line 2428), item (4), for (1); Lemma Tag 00F4 (lemma-compose-finite-type, line 540), item (2), for (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of a finitely presented algebra is finitely presented; composition of finitely presented algebras",
+   "results": "Algebra.FinitePresentation.baseChange (Mathlib.RingTheory.FiniteStability), FinitePresentation.of_isBaseChange (modules), Algebra.Presentation.comp, Algebra.Presentation.baseChange, RingHom.finitePresentation_isStableUnderBaseChange, RingHom.FinitePresentation",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.FinitePresentation.baseChange"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation, TensorProduct",
+   "results": "Algebra.FinitePresentation.baseChange (Mathlib.RingTheory.FiniteStability), Algebra.FormallySmooth.of_formallySmooth_residueField_tensor, Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat",
+   "date": "2026-10-10",
+   "verdict": "match for (1)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem trans' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/FinitePresentation.lean; sed -n 45,62p RingTheory/FiniteStability.lean",
+   "results": "FinitePresentation.lean:181 theorem Algebra.FinitePresentation.trans [Algebra A B] [IsScalarTower R A B] [FinitePresentation R A] [FinitePresentation A B] : FinitePresentation R B; FiniteStability.lean:55 instance baseChange [FinitePresentation R A] : FinitePresentation B (B ⊗[R] A)",
+   "date": "2026-10-10",
+   "verdict": "match for (1) and (2)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FinitePresentation.baseChange, Algebra.FinitePresentation.trans",
+  "file": "Mathlib/RingTheory/FiniteStability.lean",
+  "line": 55,
+  "how": "one Mathlib lemma per clause: (1) is the instance Algebra.FinitePresentation.baseChange (FiniteStability.lean:55) with B := R', A := S, giving FinitePresentation R' (R' ⊗[R] S); (2) is Algebra.FinitePresentation.trans (Mathlib/RingTheory/FinitePresentation.lean:181) with A := S, B := T. Mathlib's Algebra.FinitePresentation is the node's definition by the match of def-weil-pbc-finitely-presented-algebra. Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-desingularize-strictly-standard",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-smooth-ring-map-flat",
+ "kind": "statement",
+ "title": "Smooth ring maps are flat",
+ "statement": "Let $R\\to S$ be a smooth ring map of commutative rings [def-weil-pbc-smooth-ring-map]. Then $R\\to S$ is flat [def-weil-pbc-flat-ring-map]: $S$ is a flat $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00TA (lemma-smooth-syntomic, line 37438: a smooth ring map is syntomic) with Definition Tag 00SL (definition-lci, line 36437: a syntomic ring map is flat, of finite presentation, with lci fibres)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "smooth algebra is flat",
+   "results": "Algebra.Smooth.flat (Mathlib.RingTheory.Smooth.Flat), Algebra.Smooth.flat_of_isNoetherianRing, RingHom.flat_algebraMap_iff, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, RingHom.Smooth.toAlgebra",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.Smooth.flat"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth ?R ?A → Module.Flat ?R ?A",
+   "results": "Algebra.Smooth.flat, Algebra.Smooth.flat_of_isNoetherianRing (Mathlib.RingTheory.Smooth.Flat)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Smooth.*Flat\\|Flat.*Smooth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory --include=*.lean | grep -E 'instance|theorem|lemma'; read RingTheory/Smooth/Flat.lean:40-70",
+   "results": "Mathlib/RingTheory/Smooth/Flat.lean:58 instance Smooth.flat [Smooth R A] : Module.Flat R A; line 66 RingHom.Smooth.flat (f.Smooth -> f.Flat)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Smooth.flat",
+  "file": "Mathlib/RingTheory/Smooth/Flat.lean",
+  "line": 58,
+  "how": "exact: instance Algebra.Smooth.flat (R A) [CommRing R] [CommRing A] [Algebra R A] [Algebra.Smooth R A] : Module.Flat R A; ring-hom form RingHom.Smooth.flat (line 66); smooth ring map = Algebra.Smooth by the match of def-weil-pbc-smooth-ring-map, flat = Module.Flat by def-weil-pbc-flat-ring-map. Source read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-desingularize-strictly-standard",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
