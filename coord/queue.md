@@ -1,8 +1,8 @@
 # Work queue
 
-906 items; claim with `tools/claim.py next <group> [--stage N]`.
+905 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (290)
+## Stage 1: nodes to split (289)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -57,12 +57,11 @@
 | `lem-pc-zero-scheme-pullback` | 4009 | none |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
-| `thm-pc-f-representable` | 4009 | rests_on_sorry |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
+| `lem-pc-arrow-iso-pullback-counit` | 4010 | none |
 | `lem-pc-projection-formula` | 4010 | sorry_here |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-pc-zero-scheme-recd` | 4010 | rests_on_sorry |
-| `lem-pc-degree-zero-properties` | 4011 | none |
 | `def-weil-pbc-etale-sheaves` | 5002 | none |
 | `def-weil-pbc-etale-site` | 5002 | none |
 | `def-weil-size-convention` | 5003 | none |
@@ -918,7 +917,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 315 nodes that wait for stage 1, 1297 nodes that wait for a statement dependency.
+Not open yet: 315 nodes that wait for stage 1, 1298 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
