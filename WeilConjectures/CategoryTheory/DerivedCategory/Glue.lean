@@ -34,6 +34,31 @@ variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
 
 open DerivedCategory HomComplex
 
+/-- A morphism of complexes induces an isomorphism on `H^i` in the derived category if and only
+if it induces an isomorphism on the `i`-th homology. -/
+lemma isIso_homologyFunctor_map_Q_map_iff {K L : CochainComplex C ℤ} (f : K ⟶ L) (i : ℤ) :
+    IsIso ((homologyFunctor C i).map (Q.map f)) ↔
+      IsIso (HomologicalComplex.homologyMap f i) :=
+  NatIso.isIso_map_iff (homologyFunctorFactors C i) f
+
+/-- A morphism of complexes induces an epimorphism on `H^i` in the derived category if and only
+if it induces an epimorphism on the `i`-th homology. -/
+lemma epi_homologyFunctor_map_Q_map_iff {K L : CochainComplex C ℤ} (f : K ⟶ L) (i : ℤ) :
+    Epi ((homologyFunctor C i).map (Q.map f)) ↔
+      Epi (HomologicalComplex.homologyMap f i) := by
+  have h₁ := NatIso.naturality_1 (homologyFunctorFactors C i) f
+  have h₂ := NatIso.naturality_2 (homologyFunctorFactors C i) f
+  constructor
+  · intro h
+    have : Epi ((Q ⋙ homologyFunctor C i).map f) := h
+    change Epi ((HomologicalComplex.homologyFunctor C (.up ℤ) i).map f)
+    rw [← h₁]
+    infer_instance
+  · intro (_ : Epi ((HomologicalComplex.homologyFunctor C (.up ℤ) i).map f))
+    change Epi ((Q ⋙ homologyFunctor C i).map f)
+    rw [← h₂]
+    infer_instance
+
 /-- If `α : P ⟶ M` induces epimorphisms in cohomology in degrees `≥ k` and monomorphisms in
 degrees `> k`, then its mapping cone is acyclic in degrees `≥ k`. -/
 lemma isLE_mappingCone_of_homologyMap {P M : CochainComplex C ℤ} (α : P ⟶ M) (k : ℤ)
