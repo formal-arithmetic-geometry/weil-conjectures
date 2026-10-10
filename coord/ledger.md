@@ -1674,3 +1674,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:50 L: merged deliver/K1/lem-sc-torsion-subsheaf-quotient (reviewer FIX; first push; new nodes: 1)
 - 14:50 L: merged deliver/J1/lem-sc-etale-qcoherent-descent (reviewer FIX; first push; new nodes: 1)
 - 14:51 L: merged deliver/E1/lem-sc-noetherian-cohomology-above-dimension (reviewer PASS; first push; new nodes: 1)
+- 14:51 L: returned deliver/C1/lem-sc-etale-affine-qcoherent (reviewer RETURN: 1. C4/C3: lem-sc-etale-affine-qcoherent step 3 (and the q=1 case it covers): the step uses that the edge map H^q(X_et,F_)
