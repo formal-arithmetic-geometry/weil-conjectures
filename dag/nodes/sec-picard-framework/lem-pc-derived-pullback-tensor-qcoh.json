@@ -21,23 +21,113 @@
   "def-pc-derived-pullback",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $E$ be an object of $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$. Quasi-coherence of the cohomology sheaves of $Lf^*E$ is local on $X$, so it suffices to treat affine opens $U=\\operatorname{Spec}(B)\\subseteq X$ with $f(U)\\subseteq V=\\operatorname{Spec}(A)\\subseteq Y$ affine open; these cover $X$. By clause (1) of [lem-pc-affine-derived-pullback-tensor-tilde], $(Lf^*E)|_U\\cong L(f|_U)^*(E|_V)$. As $E|_V$ lies in $D_{\\mathrm{QCoh}}(\\mathcal O_V)$, the affine derived equivalence [lem-pc-affine-qcoh-derived-equivalence] gives $E|_V\\cong\\widetilde{M^\\bullet}$ for a complex $M^\\bullet$ of $A$-modules. By clause (2) of [lem-pc-affine-derived-pullback-tensor-tilde], $L(f|_U)^*\\widetilde{M^\\bullet}\\cong\\widetilde{M^\\bullet\\otimes_A^{\\mathbf L}B}$, which lies in $D_{\\mathrm{QCoh}}(\\mathcal O_U)$ because the functor of [lem-pc-affine-qcoh-derived-equivalence] (for $B$) lands there. Hence $Lf^*E$ has quasi-coherent cohomology sheaves.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.3.8 (Tag 08DW), part (1)"
+   }
+  },
+  {
+   "text": "Let $K,L$ be objects of $D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Quasi-coherence of the cohomology sheaves is local on $X$, so it suffices to treat an affine open $U=\\operatorname{Spec}(A)\\subseteq X$. By clause (1) of [lem-pc-affine-derived-pullback-tensor-tilde], $(K\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_U\\cong K|_U\\otimes^{\\mathbf L}_{\\mathcal O_U}L|_U$. By [lem-pc-affine-qcoh-derived-equivalence], $K|_U\\cong\\widetilde{M^\\bullet}$ and $L|_U\\cong\\widetilde{N^\\bullet}$ for complexes of $A$-modules $M^\\bullet,N^\\bullet$. By clause (3) of [lem-pc-affine-derived-pullback-tensor-tilde], $\\widetilde{M^\\bullet}\\otimes^{\\mathbf L}_{\\mathcal O_U}\\widetilde{N^\\bullet}\\cong\\widetilde{M^\\bullet\\otimes_A^{\\mathbf L}N^\\bullet}$, which lies in $D_{\\mathrm{QCoh}}(\\mathcal O_U)$ by [lem-pc-affine-qcoh-derived-equivalence]. Since such $U$ cover $X$, $K\\otimes^{\\mathbf L}_{\\mathcal O_X}L$ is in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.3.9 (Tag 08DX), part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemmas 36.3.8 and 36.3.9; source packet unavailable locally"
+ },
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "derived pullback and derived tensor product preserve quasi-coherent complexes on schemes",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback; pullbackComp; instAdditivePullback; pullbackPushforwardAdjunction; instIsLeftAdjointPullback (Mathlib/AlgebraicGeometry/Modules/Sheaf)",
+   "date": "2026-10-11",
+   "verdict": "no exact derived D_QCoh match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, QuasiCoherent, tensor",
+   "results": "0 hits; unknown identifier QuasiCoherent",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
-   "query": "quasi-coherence-pullback|quasi-coherence-tensor-product|08DW|08DX in dag/nodes and Mathlib/AlgebraicGeometry",
-   "results": "no DAG node and no Mathlib declaration for D_QCoh stability under Lf^* or derived tensor",
-   "date": "2026-10-10",
+   "query": "quasi.?coherent.*tensor|derived.*pullback in Mathlib/AlgebraicGeometry",
+   "results": "0 matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback and derived tensor preserve quasi-coherent complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-coherent sheaves closed under tensor product and pullback",
+   "results": "SheafOfModules.isQuasicoherent and related generic site declarations; no scheme D_QCoh theorem",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Modules.pullback, tensorObj",
+   "results": "0 hits; unknown identifier Scheme.Modules.pullback",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObj|pullback.*quasi in Mathlib/AlgebraicGeometry",
+   "results": "0 matches",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-projection-formula"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-f-representable"
+ "unit": "sk-thm-picard-f-representable",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-pullback-tensor-qcoh",
+  "worker": "stage1",
+  "summary": "Split the two preservation assertions into pullback and tensor proof steps. The steps use existing K-flat resolution, termwise derived pullback, affine pullback sections, and quasi-coherent tensor-product nodes; no duplicate lower node was created.",
+  "blueprint": "Realizes the ancestor proof step stating that E tensor^L Lf^*K remains in D_QCoh(O_X), needed for the projection formula.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dpt1907",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dpt1907 (reviewer sub-agent of L); spot-checked: Steps 1-2 against Stacks 08DW/08DX proofs and 06Z0; no cycle with parent lem-pc-projection-formula (cited lem-pc-affine-qcoh-derived-equivalence has no proof deps; new node depends only on definitions). FIX more, RETURN less: (1) C1 step 1: the affine identification Lf^*(M~)=(M tensor^L_A B)~ (08DW(2)) was asserted as 'the definition of derived pullback on affine charts' and restriction compatibility of Lf^* was uncited; (2) C1/C4 step 2: 08DX(2) uncited, and the underived tensor node lem-weil-pbc-quasi-coherent-tensor-product-affine-sections does not supply it (tool_use dropped); repair: new statement-only node lem-pc-affine-derived-pullback-tensor-tilde (08DW(2), 08DX(2), restriction to opens; LeanFinder no match), steps rewritten to cite it, proof_deps updated. Second reading missed faults (1)-(2).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
