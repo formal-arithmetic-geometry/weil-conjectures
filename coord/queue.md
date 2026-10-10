@@ -2,7 +2,7 @@
 
 859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (51)
+## Stage 1: nodes to split (49)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,11 +17,10 @@
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
-| `lem-sc-cone-pseudo-coherent` | 3023 | none |
 | `lem-sc-finite-cohomology` | 3023 | none |
 | `lem-sc-pseudo-coherent-qcoh` | 3023 | none |
 | `lem-sc-qc-open-derived-lift` | 3023 | none |
-| `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3025 | none |
+| `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3024 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -29,7 +28,6 @@
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
-| `lem-sc-associated-localization-fg` | 5015 | none |
 | `lem-pc-affine-derived-base-change-comparison-map` | 5016 | none |
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
 | `lem-pc-rf-mv-triangle-naturality` | 5016 | none |
@@ -58,7 +56,7 @@
 | `lem-wf-lie-algebra-derivation-bracket` | - | none |
 | `lem-pur-rhom-into-kinjective-local` | - | none |
 
-## Stage 2: nodes to state (808)
+## Stage 2: nodes to state (810)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -239,8 +237,10 @@
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
 | `lem-sc-artin-schreier-k` | 1 | state |
 | `lem-sc-ass-weakass-fg-prime` | 1 | state |
+| `lem-sc-associated-localization-fg` | 1 | state |
 | `lem-sc-bounded-below-injective-resolution` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
+| `lem-sc-cone-pseudo-coherent` | 1 | state |
 | `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
 | `lem-sc-dim-one-point-outside-open-closed` | 1 | state |
@@ -871,7 +871,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1694 nodes that wait for a statement dependency, 92 nodes that wait for stage 1.
+Not open yet: 1694 nodes that wait for a statement dependency, 90 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
