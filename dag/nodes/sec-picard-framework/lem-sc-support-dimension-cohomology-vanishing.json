@@ -27,9 +27,62 @@
   "def-kun-topological-krull-dimension",
   "def-sc-topological-abelian-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let i:Z\\to X be the inclusion of the closed subset Z and consider the adjunction unit F\\to i_*i^{-1}F. It is an isomorphism on stalks, hence an isomorphism of abelian sheaves: at x\\notin Z both stalks are 0 (F_x=0 because Supp(F)\\subseteq Z, and (i_*G)_x=0 since x has a neighbourhood missing Z), and at z\\in Z the stalk of i_*i^{-1}F is (i^{-1}F)_z=F_z (Stacks 00AE). So F\\cong i_*i^{-1}F.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 00AE and the stalkwise support argument"
+   }
+  },
+  {
+   "text": "The underlying space of the Noetherian scheme X is a Noetherian topological space [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. Hence the closed subspace Z is Noetherian: a nonempty set of closed subsets of Z is a nonempty set of closed subsets of X (Z being closed), so it has a minimal element (Stacks 0051; Mathlib TopologicalSpace.NoetherianSpace.set). Its topological Krull dimension [def-kun-topological-krull-dimension] is at most r by hypothesis.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Proposition 02UZ, applied to the closed subspace Z"
+   }
+  },
+  {
+   "text": "Apply the Noetherian topological cohomology vanishing theorem [lem-sc-noetherian-topological-cohomology-vanishing] to the abelian sheaf i^{-1}F on Z and the integer r. It gives H^p(Z,i^{-1}F)=0 for every p>r.",
+   "uses": [
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Proposition 02UZ"
+   }
+  },
+  {
+   "text": "The closed-immersion cohomology comparison [lem-sc-cohomology-closed-immersion-pushforward] identifies H^p(Z,i^{-1}F) with H^p(X,i_*i^{-1}F), and the isomorphism from Step 1 identifies the latter with H^p(X,F). Therefore H^p(X,F)=0 for every p>r.",
+   "uses": [
+    "lem-sc-cohomology-closed-immersion-pushforward"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 02UV, applied to the closed support"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-noetherian-topological-cohomology-vanishing",
+  "lem-sc-cohomology-closed-immersion-pushforward"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Proposition 02UZ and Lemma 02UV"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,12 +107,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-sc-ext-support-cohomology-vanishing",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-support-dimension-cohomology-vanishing",
+  "worker": "stage1",
+  "summary": "Split the support-dimension vanishing into the elementary stalkwise isomorphism F = i_*i^{-1}F for the closed support (Stacks 00AE), the elementary Noetherianity of the closed subspace, Stacks 02UZ applied to i^{-1}F on Z, and the closed-immersion comparison Stacks 02UV.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof in thm-sc-p1-duality, specifically the clause asserting cohomology vanishing above the dimension of a closed support.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-noetherian-topological-cohomology-vanishing",
+    "why": "Generic Grothendieck vanishing for arbitrary abelian sheaves on Noetherian topological spaces; the Picard route uses it as the support-dimension input."
+   },
+   {
+    "node": "lem-sc-cohomology-closed-immersion-pushforward",
+    "why": "Generic closed-immersion cohomology comparison needed to transfer vanishing from Z to X."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-noetherian-topological-cohomology-vanishing",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-sc-noetherian-topological-cohomology-vanishing",
+  "lem-sc-cohomology-closed-immersion-pushforward"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sdv1752",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sdv1752 (reviewer sub-agent of L); spot-checked: Steps 3-4 match 02UZ node (Noetherian space, d>=0, empty allowed) and 02UV node (closed embedding, i_*); hypotheses hold for Z with i^{-1}F. FIX more, RETURN less: (1) B class d: lem-sc-support-factor-closed-pushforward folded into Step 1 as elementary stalkwise argument (00AE); its statement also had the canonical map reversed (canonical map is the unit F -> i_*i^{-1}F); dropped. (2) B class c/d: lem-sc-closed-subset-noetherian-space (Mathlib NoetherianSpace.set) folded into Step 2 as elementary, citing existing lem-weil-pbc-noetherian-scheme-closed-subsets-minimal; dropped. uses/proof_deps updated.; 1 file(s) fixed by the reviewer"
  }
 }
