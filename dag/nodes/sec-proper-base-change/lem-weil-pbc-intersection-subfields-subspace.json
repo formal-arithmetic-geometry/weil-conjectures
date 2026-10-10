@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-intersection-subfields-subspace",
+ "kind": "statement",
+ "title": "A subspace meeting K_alpha^n for a directed family with intersection k meets k^n",
+ "statement": "Let $K/k$ be a field extension [def-pc-field-extension], $k$ regarded as a subfield of $K$. Let $(K_\\alpha)_{\\alpha\\in\\mathcal A}$ be a family of subfields of $K$, indexed by a nonempty set $\\mathcal A$, such that (1) $k\\subseteq K_\\alpha$ for all $\\alpha\\in\\mathcal A$; (2) $k=\\bigcap_{\\alpha\\in\\mathcal A}K_\\alpha$; (3) for $\\alpha,\\alpha'\\in\\mathcal A$ there is $\\alpha''\\in\\mathcal A$ with $K_{\\alpha''}\\subseteq K_\\alpha\\cap K_{\\alpha'}$. For a subfield $F\\subseteq K$ and $n\\ge1$ write $F^{\\oplus n}\\subseteq K^{\\oplus n}$ for the set of vectors all of whose coordinates lie in $F$. Then for every $n\\ge1$ and every $K$-linear subspace $V\\subseteq K^{\\oplus n}$ we have $V\\cap k^{\\oplus n}\\ne0$ if and only if $V\\cap K_\\alpha^{\\oplus n}\\ne0$ for every $\\alpha\\in\\mathcal A$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07P3 (lemma-intersection-subfields-subspace, line 11418) and its proof (induction on n); the nonemptiness of the index set, implicit in the source, is stated (for an empty index set and V = 0 the 'if' direction fails); tag verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "directed family of intermediate fields with intersection k, subspace V of K^n meets k^n nontrivially iff it meets each K_alpha^n",
+   "results": "Subfield.mem_sInf, Subfield.coe_iSup_of_directed, Subfield.mem_iInf (Mathlib.Algebra.Field.Subfield.Basic), IntermediateField instances (inf, Galois)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "downward directed family of subfields K_alpha with intersection k; a K-subspace V of K^n intersecting K_alpha^n nontrivially for all alpha intersects k^n nontrivially",
+   "results": "Submodule.exists_forall_notMem_of_forall_ne_top, Module.Dual.exists_forall_mem_ne_zero_of_forall_exists (Mathlib.Algebra.Module.Submodule.Union), AffineSubspace.inter_nonempty_of_nonempty_of_sup_direction_eq_top, Projectivization.Subspace.instInfSet, Subspace.biUnion_ne_univ_of_top_notMem: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Directed, Subfield, iInf",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Directed.*Subfield\\|Directed.*IntermediateField\\|iInf.*Subfield' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Subfield.coe_iInf, Subfield.mem_iInf, Subfield.map_iInf (Algebra/Field/Subfield/Basic.lean:262-388), IntermediateField.iInf_toSubfield (IntermediateField/Adjoin/Defs.lean:195): only the definition of the intersection",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-intersection-subfields-differentials",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): More on Algebra 07P3 with the index set required nonempty (the source omits this; the 'if' direction fails for an empty family). Unsplit."
+}

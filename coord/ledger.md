@@ -970,3 +970,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:33 L: reviewed and accepted lem-weil-pbc-glue-sheaves-of-modules (7 steps, no new nodes; 04TN/00AL/00AM written out).
 - 06:34 L: reviewed and accepted lem-weil-pbc-henselian-finite-type-product-decomposition (4 steps; +etale-retraction-finite-type-splitting node 04GG (8)=>(11); source misprints in 04GG's proof noted by the worker).
 - 06:34 L: reviewed and accepted lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs (6 steps, no new nodes).
+- 06:37 L: reviewed and accepted lem-weil-pbc-intersection-subfields-differentials (5 steps; +p-independent-differentials-independent 07P2, +intersection-subfields-subspace 07P3 nodes, +simple-algebraic-extension-power-basis leaf). Source error in the proof of 07P4 (direct sum fails when t in K_alpha) recorded in HUMAN.md; the split proves the lemma anyway.
