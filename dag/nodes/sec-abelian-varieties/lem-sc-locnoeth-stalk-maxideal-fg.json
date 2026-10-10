@@ -1,0 +1,73 @@
+{
+ "id": "lem-sc-locnoeth-stalk-maxideal-fg",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hilbert-polynomial",
+   "place": "proof, induction step: verify Tag 0EMF hypothesis (a) from the no-embedded-points assumption via Tag 05AR",
+   "via": [
+    "lem-sc-ass-weakass-locally-noetherian",
+    "lem-sc-regular-meromorphic-section-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Stalk maximal ideals are finitely generated on locally Noetherian schemes",
+ "statement": "Let X be a locally Noetherian scheme [pqf-def-locnoeth] and x a point of the scheme [def-pc-scheme]. Then the maximal ideal m_x of the local ring O_{X,x} is a finitely generated ideal.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05AR (Lemma 31.5.8), the passage from the first assertion to the locally Noetherian case: stalks of a locally Noetherian scheme are Noetherian local rings, so m_x is finitely generated"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "maximal ideal of a stalk of a locally Noetherian scheme is finitely generated",
+   "results": "AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian; AlgebraicGeometry.isLocallyNoetherian_Spec; no direct weak-association result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "fg_of_isNoetherianRing maximalIdeal",
+   "results": "Unknown identifier fg_of_isNoetherianRing",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'maximalIdeal.*fg|fg_of_isNoetherianRing|locally Noetherian.*stalk' Mathlib/RingTheory Mathlib/AlgebraicGeometry",
+   "results": "12 hits, including Mathlib/RingTheory/Noetherian/Defs.lean:207 Ideal.fg_of_isNoetherianRing; no scheme-stalk weak-association result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'weakly ?associated|WeakAss|weaklyAssociated' Mathlib; grep -rn 'IsNoetherianRing (X.presheaf.stalk' Mathlib/AlgebraicGeometry (~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "date": "2026-10-11",
+   "results": "Ideal.fg_of_isNoetherianRing (Noetherian/Defs.lean:207); instance IsNoetherianRing (X.presheaf.stalk x) for IsLocallyNoetherian X (Noetherian.lean:349)",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.fg_of_isNoetherianRing",
+  "file": "Mathlib/RingTheory/Noetherian/Defs.lean",
+  "line": 207,
+  "how": "specialization: `(IsLocalRing.maximalIdeal (X.presheaf.stalk x)).fg_of_isNoetherianRing`, the Noetherian-ring hypothesis being the inferred instance `[IsLocallyNoetherian X] : IsNoetherianRing (X.presheaf.stalk x)` (Mathlib/AlgebraicGeometry/Noetherian.lean:349)"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-ass-weakass-locally-noetherian",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-ample-degree"
+}
