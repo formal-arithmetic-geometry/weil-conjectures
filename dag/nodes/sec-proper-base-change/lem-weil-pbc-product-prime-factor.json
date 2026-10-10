@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-product-prime-factor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "proof, second paragraph: the normality of the strict henselization in Stacks Tag 06DI; the finite-product normality argument requires identifying primes of a product",
+   "via": [
+    "lem-weil-pbc-finite-product-normal",
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Every prime of a finite product comes from one factor",
+ "statement": "Let $I$ be a finite index set, let $(R_i)_{i\\in I}$ be commutative rings, and put $R=\\prod_{i\\in I}R_i$. For every point $\\mathfrak p$ of $\\operatorname{Spec}R$ [def-weil-affine-spectrum], that is, every prime ideal of $R$, there are $i\\in I$ and a prime ideal $\\mathfrak q$ of $R_i$ such that $\\mathfrak p=\\pi_i^{-1}(\\mathfrak q)$, where $\\pi_i:R\\to R_i$ is the coordinate projection. In particular, when $I$ is empty, $R$ has no prime ideals.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00ED (lemma-spec-product, lines 3822-3848), iterated over a finite index set; used in Lemma Tag 0CYA (lemma-finite-product-normal, proof, lines 8263-8272)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "prime ideals of a finite product of commutative rings correspond to prime ideals of one factor",
+   "results": "PrimeSpectrum.exists_comap_evalRingHom_eq (Mathlib.RingTheory.Spectrum.Prime.RingHom)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every prime ideal of a finite indexed product of commutative rings is the inverse image of a prime ideal in one coordinate under the evaluation homomorphism",
+   "results": "PrimeSpectrum.exists_comap_evalRingHom_eq; PrimeSpectrum.primeSpectrumProd; PrimeSpectrum.sigmaToPi_asIdeal; Ideal.ideal_prod_prime",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'exists_comap_evalRingHom_eq|primeSpectrumProd' Mathlib/RingTheory/Spectrum/Prime",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/RingHom.lean:164-187 states and proves finite-index existence directly; Basic.lean:99-119 gives the binary decomposition",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.exists_comap_evalRingHom_eq",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/RingHom.lean",
+  "line": 164,
+  "how": "specializes in one line: lines 164-187 assert that every prime of a finite product is the comap of a prime along one evaluation homomorphism; the empty-index conclusion follows because the existential index cannot be supplied"
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-product-normal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

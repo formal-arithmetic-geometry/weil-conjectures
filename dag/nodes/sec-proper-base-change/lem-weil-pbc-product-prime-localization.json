@@ -1,0 +1,89 @@
+{
+ "id": "lem-weil-pbc-product-prime-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "proof, second paragraph: the normality of the strict henselization in Stacks Tag 06DI; the finite-product normality argument localizes a product at a prime of one factor",
+   "via": [
+    "lem-weil-pbc-finite-product-normal",
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Localization of a product at a factor prime",
+ "statement": "Let $I$ be a finite index set, let $(R_i)_{i\\in I}$ be commutative rings, fix $i\\in I$ and a prime ideal $\\mathfrak q\\subset R_i$, and write $R=\\prod_{j\\in I}R_j$ with evaluation $\\pi_i:R\\to R_i$. Then evaluation induces an isomorphism of local rings $R_{\\pi_i^{-1}(\\mathfrak q)}\\simeq(R_i)_{\\mathfrak q}$, with both localizations taken at the displayed primes [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0CYA (lemma-finite-product-normal, proof, lines 8263-8272): localization of the product at a prime of a factor is the corresponding factor localization; Lemma Tag 00ED (lemma-spec-product, lines 3822-3848) identifies the factor via an idempotent"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a product ring at the inverse image of a factor prime is isomorphic to localization of that factor",
+   "results": "Localization.AtPrime.mapPiEvalRingHom_bijective (Mathlib.RingTheory.Localization.AtPrime.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the localization of a finite product of rings at a prime ideal is isomorphic to the localization of one component at a prime",
+   "results": "Localization.AtPrime.mapPiEvalRingHom_bijective; its mapPiEvalRingHom is the evaluation-induced local ring homomorphism",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.AtPrime.mapPiEvalRingHom_bijective",
+   "results": "the theorem states bijectivity of the map from the product localization at the comap prime to the factor localization",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'mapPiEvalRingHom_bijective' Mathlib/RingTheory/Localization/AtPrime/Basic.lean",
+   "results": "Mathlib/RingTheory/Localization/AtPrime/Basic.lean:405-411 defines the evaluation-induced homomorphism and proves it bijective",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Localization.AtPrime.mapPiEvalRingHom_bijective",
+  "file": "Mathlib/RingTheory/Localization/AtPrime/Basic.lean",
+  "line": 410,
+  "how": "specializes in one line: lines 405-411 define the evaluation-induced ring homomorphism and prove it bijective for an arbitrary index set; restrict to finite I and turn the bijective ring homomorphism into an isomorphism"
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-product-normal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

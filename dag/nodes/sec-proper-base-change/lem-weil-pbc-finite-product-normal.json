@@ -26,9 +26,54 @@
  "stmt_deps": [
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $I$ be the finite index set of factors and let $\\mathfrak p$ be any prime ideal of $R=\\prod_{i\\in I}R_i$. By [lem-weil-pbc-product-prime-factor] there are an index $i\\in I$ and a prime ideal $\\mathfrak q\\subset R_i$ for which $\\mathfrak p=\\pi_i^{-1}(\\mathfrak q)$. This also deals with $I=\\varnothing$: the asserted existence of $i$ contradicts emptiness, so the zero product ring has no primes and the normal-ring condition is vacuous.",
+   "uses": [
+    "lem-weil-pbc-product-prime-factor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0CYA (lemma-finite-product-normal), proof, lines 8263-8269; product-spectrum classification is Lemma Tag 00ED (lemma-spec-product), lines 3822-3848"
+   }
+  },
+  {
+   "text": "For the index and prime just obtained, [lem-weil-pbc-product-prime-localization] identifies $R_{\\mathfrak p}$ with $(R_i)_{\\mathfrak q}$ through the map induced by the coordinate projection. The hypothesis that $R_i$ is a normal ring means precisely, by [def-weil-pbc-normal-ring], that $(R_i)_{\\mathfrak q}$ is a normal domain.",
+   "uses": [
+    "lem-weil-pbc-product-prime-localization",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0CYA (lemma-finite-product-normal), proof, lines 8269-8272; normal-ring definition Tag 00GV"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-normal-domain-ring-equivalence] to the isomorphism of step 2. It makes $R_{\\mathfrak p}$ a normal domain. Since $\\mathfrak p$ was arbitrary, the defining condition [def-weil-pbc-normal-ring] holds for $R$.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-ring-equivalence",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0CYA (lemma-finite-product-normal), final sentence of proof, lines 8270-8272"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-product-prime-factor",
+  "lem-weil-pbc-product-prime-localization",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-normal-domain-ring-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0CYA (lemma-finite-product-normal), proof, with the cited product-spectrum lemma Tag 00ED"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +125,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-product-normal",
+  "worker": "stage1",
+  "summary": "Expanded Stacks Tag 0CYA into prime classification, evaluation-induced localization, and transport of normal-domain structure. The three ingredients are separate Mathlib leaves. The empty product is the zero ring and has no prime ideals. No matching declaration was found in the read-only slopmaster2 source.",
+  "blueprint": "The item descends from the second paragraph of lem-weil-pbc-normal-constant-generic, where Tag 06DI supplies normality of the strict henselization; this split supplies the finite-product normality fact used along that created-node route. No imported blueprint node states the item or the three factors."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 0CYA/00ED read, 3 steps and 3 new Mathlib leaves checked, lines verified, small cases tested"
+ }
 }

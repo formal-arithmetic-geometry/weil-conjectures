@@ -1,0 +1,89 @@
+{
+ "id": "lem-weil-pbc-normal-domain-ring-equivalence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "proof, second paragraph: normality of the strict henselization in Stacks Tag 06DI; the finite-product normality argument transports normality across a localization isomorphism",
+   "via": [
+    "lem-weil-pbc-finite-product-normal",
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "lem-weil-pbc-serre-criterion-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normal-domain property is invariant under ring isomorphism",
+ "statement": "Let $A$ and $B$ be commutative rings and $e:A\\simeq B$ a ring isomorphism. If $A$ is a normal domain [def-weil-pbc-normal-ring], then $B$ is a normal domain: it is a domain, and every element of its fraction field integral over $B$ lies in $B$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0CYA (lemma-finite-product-normal, proof, lines 8263-8272), final inference from the localization isomorphism and normality of a factor localization; normal-domain definition in Tags 0309 and 00GV"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integrally closed domain preserved under ring equivalence",
+   "results": "IsIntegrallyClosed.of_equiv (Mathlib.RingTheory.IntegralClosure.IntegrallyClosed)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ring equivalence transports integral domain and integrally closed property",
+   "results": "IsIntegrallyClosed.of_equiv; the domain transfer was separately verified as MulEquiv.isDomain_iff in Mathlib/Algebra/Ring/Equiv.lean:970-973",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed.of_equiv",
+   "results": "theorem taking a ring equivalence and IsIntegrallyClosed source to IsIntegrallyClosed target",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'theorem of_equiv|isDomain_iff' Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean Mathlib/Algebra/Ring/Equiv.lean",
+   "results": "Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean:261-268 IsIntegrallyClosed.of_equiv; Mathlib/Algebra/Ring/Equiv.lean:970-973 MulEquiv.isDomain_iff transports the domain condition",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsIntegrallyClosed.of_equiv; MulEquiv.isDomain_iff",
+  "file": "Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean",
+  "line": 261,
+  "how": "one declaration per clause: IsIntegrallyClosed.of_equiv at this file:261-268 transfers integral closedness; MulEquiv.isDomain_iff at Mathlib/Algebra/Ring/Equiv.lean:970-973 transfers the domain property along the underlying multiplicative equivalence of the ring isomorphism"
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-product-normal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
