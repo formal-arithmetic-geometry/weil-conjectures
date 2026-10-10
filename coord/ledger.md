@@ -1586,3 +1586,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:08 L: TOOL USES DECLARABLE (split_report.tool_uses accepted by review_split/preflight, copied into tool_uses at merge, --drop-tool-uses); claim gate on open returns removed (cap 10 stays); return entries must say exactly what to change (reviewer brief); roles/remote-lead.md 3a, SETUP.md, coord/brief-stage1.md, README, notices to all groups
 - 14:08 L: accepted lem-pc-genus-base-change: 5 steps, statement made conditional on X_K being a curve, no new nodes
 - 14:09 L: returned deliver/E1/lem-weil-pbc-coskeleton-matching-tuples (reviewer RETURN: 1. C3: Step 1 (and through it Step 2): the identity eps_k = p_{k,id} (the counit of the coskeleton is the projection at )
+- 14:10 L: accepted lem-pc-cohomology-sections-affine-base: 5 steps (01XK), new leaf lem-pc-separated-quasi-separated, new node lem-pc-leray-degenerate-sections (01F4 (2)), tool_uses lem-pc-finite-support-hi

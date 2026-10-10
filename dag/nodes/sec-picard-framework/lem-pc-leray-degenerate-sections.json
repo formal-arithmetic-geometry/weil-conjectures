@@ -1,0 +1,79 @@
+{
+ "id": "lem-pc-leray-degenerate-sections",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "proof, first sentence ('a consequence of proper coherent-finiteness over a Noetherian base ... [lem-pc-coherent-hi]'), the passage over the affine base Spec k from R^if_*F to H^i(X,F) (Stacks 01XK): the Leray spectral sequence H^p(S,R^qf_*F) => H^{p+q}(X,F) degenerates when its columns p>0 vanish (Stacks 01F4 (2))",
+   "via": [
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Degenerate Leray: H^q(X,F) = Gamma(Y, R^q f_* F) when the higher cohomology of the R^q f_* F vanishes",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $\\mathcal F$ an $\\mathcal O_X$-module, an object of the abelian category $\\mathrm{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]. Let $H^p(X,-)$ and $H^p(Y,-)$ be the cohomology of $\\mathcal O_X$-modules and of $\\mathcal O_Y$-modules, and $R^qf_*$ the higher direct images, the right derived functors of the direct image $f_*:\\mathrm{Mod}(\\mathcal O_X)\\to\\mathrm{Mod}(\\mathcal O_Y)$, $(f_*\\mathcal G)(V)=\\mathcal G(f^{-1}V)$ [def-pc-module-pullback] [pqf-def-cohomology]. For $q\\geq0$ let\n$$\n\\varepsilon^q_{\\mathcal F}:H^q(X,\\mathcal F)\\longrightarrow\\Gamma\\bigl(Y,R^qf_*\\mathcal F\\bigr)\n$$\nbe the following map. Choose an injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$ in $\\mathrm{Mod}(\\mathcal O_X)$ [def-sp-injective-resolutions], so that $H^q(X,\\mathcal F)=H^q(\\Gamma(X,\\mathcal I^\\bullet))$ and $R^qf_*\\mathcal F=\\mathcal H^q(f_*\\mathcal I^\\bullet)=\\ker(f_*\\mathcal I^q\\to f_*\\mathcal I^{q+1})/\\operatorname{im}(f_*\\mathcal I^{q-1}\\to f_*\\mathcal I^q)$, the quotient taken in $\\mathrm{Mod}(\\mathcal O_Y)$. A cocycle $s\\in\\Gamma(X,\\mathcal I^q)=\\Gamma(Y,f_*\\mathcal I^q)$ is a global section of $\\ker(f_*\\mathcal I^q\\to f_*\\mathcal I^{q+1})$, and $\\varepsilon^q_{\\mathcal F}$ sends the class of $s$ to the image of $s$ in $\\Gamma(Y,\\mathcal H^q(f_*\\mathcal I^\\bullet))$. Then: (1) $\\varepsilon^q_{\\mathcal F}$ is a well-defined homomorphism of abelian groups, independent of the injective resolution, and natural in $\\mathcal F$: for every morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of $\\mathcal O_X$-modules, $\\Gamma(Y,R^qf_*\\varphi)\\circ\\varepsilon^q_{\\mathcal F}=\\varepsilon^q_{\\mathcal G}\\circ H^q(X,\\varphi)$. (2) If $H^p(Y,R^qf_*\\mathcal F)=0$ for all $q\\geq0$ and all $p>0$, then $\\varepsilon^q_{\\mathcal F}$ is an isomorphism for every $q\\geq0$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01F4 (cohomology-lemma-apply-Leray), part (2); its proof: the Leray spectral sequence of Lemma 01F2 (cohomology-lemma-Leray), the Grothendieck spectral sequence of Gamma(Y,-) o f_* (Derived Categories 015N, with Lemma 01EX cohomology-lemma-pushforward-injective for the acyclicity), degenerates at E_2; varepsilon is its edge map"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck spectral sequence degenerates: derived functor of composition equals G applied to derived functor of F when G-higher derived functors vanish",
+   "results": "service error (HTTP 500 from leansearch.net via lean-lsp); no result",
+   "date": "2026-10-10",
+   "verdict": "no result (service down); verdict rests on the other kinds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if higher cohomology of the higher direct images vanishes then H^q(X,F) equals global sections of R^q f_* F (degenerate Leray spectral sequence)",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic), groupCohomologyIso, CochainComplex.HomComplex.homologyAddEquiv; no direct images, no Leray",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", CategoryTheory.Functor.comp",
+   "results": "CategoryTheory.Functor.IsRightDerivedFunctor, totalRightDerivedUnit, HasRightDerivedFunctor.mk', rightDerivedDesc, rightDerivedUnique (Mathlib.CategoryTheory.Functor.Derived.RightDerived): localization-theoretic derived functors, nothing on the derived functors of a composite",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlniE 'Leray|SpectralSequence|spectral sequence' Mathlib; grep -rn 'rightDerived.*comp' Mathlib",
+   "results": "Algebra/Homology/SpectralSequence/{Basic,ComplexShape}.lean, Algebra/Homology/SpectralObject/*.lean, CategoryTheory/Triangulated/SpectralObject.lean (general spectral sequences and spectral objects; no Grothendieck or Leray spectral sequence, no higher direct images of O_X-modules); rightDerivedNatTrans_comp, NatTrans.rightDerivedToHomotopyCategory_comp (composition of natural transformations only)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no Leray spectral sequence and no higher direct images of O_X-modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-cohomology-sections-affine-base",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

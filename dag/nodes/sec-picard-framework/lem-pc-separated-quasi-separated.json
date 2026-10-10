@@ -1,0 +1,82 @@
+{
+ "id": "lem-pc-separated-quasi-separated",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "proof, first sentence ('a consequence of proper coherent-finiteness over a Noetherian base ... [lem-pc-coherent-hi]'), the passage over the affine base Spec k from R^if_*F to H^i(X,F) (Stacks 01XK, which needs f quasi-compact and quasi-separated): the structure morphism is proper, hence separated, and a separated morphism is quasi-separated",
+   "via": [
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A separated morphism of schemes is quasi-separated",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] which is separated [def-weil-proper-morphism], i.e. whose diagonal $\\Delta_f:X\\to X\\times_YX$ is a closed immersion. Then $f$ is quasi-separated [def-weil-quasi-separated-morphism], i.e. $\\Delta_f$ is quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Section 01KH (schemes-section-separation-axioms), the paragraph after Definition 01KK (schemes-definition-separated): 'by Lemma 01K7 (schemes-lemma-closed-immersion-quasi-compact) we see that a separated morphism is quasi-separated'"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a separated morphism of schemes is quasi-separated",
+   "results": "service error (HTTP 500 from leansearch.net via lean-lsp); no result",
+   "date": "2026-10-10",
+   "verdict": "no result (service down); verdict rests on the other kinds"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, AlgebraicGeometry.QuasiSeparated",
+   "results": "AlgebraicGeometry.IsSeparated.instQuasiSeparated : [IsSeparated f] : QuasiSeparated f (Mathlib.AlgebraicGeometry.Morphisms.Separated); IsSeparated.of_valuativeCriterion; IsSeparated.eq_valuativeCriterion (Mathlib.AlgebraicGeometry.ValuativeCriterion)",
+   "date": "2026-10-10",
+   "verdict": "match: AlgebraicGeometry.IsSeparated.instQuasiSeparated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "separated morphism of schemes is quasi-separated",
+   "results": "AlgebraicGeometry.IsSeparated.instQuasiSeparated (Mathlib.AlgebraicGeometry.Morphisms.Separated), Scheme.instQuasiSeparatedSpace...OfIsSeparated, QuasiSeparated.of_quasiSeparatedSpace",
+   "date": "2026-10-10",
+   "verdict": "match: AlgebraicGeometry.IsSeparated.instQuasiSeparated"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'QuasiSeparated' Mathlib/AlgebraicGeometry/Morphisms/Separated.lean; grep -n 'class QuasiSeparated' Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+   "results": "Separated.lean:44 'class IsSeparated' (diagonal is a closed immersion), Separated.lean:68 'instance (priority := 900) [IsSeparated f] : QuasiSeparated f where' (namespace IsSeparated); QuasiSeparated.lean:50 'class QuasiSeparated' (diagonal quasi-compact)",
+   "date": "2026-10-10",
+   "verdict": "match (line 68 read with sed -n)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsSeparated.instQuasiSeparated",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+  "line": 68,
+  "how": "exact: line 68, instance [IsSeparated f] : QuasiSeparated f, with IsSeparated (line 44: diagonal a closed immersion) and QuasiSeparated (Morphisms/QuasiSeparated.lean line 50: diagonal quasi-compact) the definitions of the node"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-cohomology-sections-affine-base",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}
