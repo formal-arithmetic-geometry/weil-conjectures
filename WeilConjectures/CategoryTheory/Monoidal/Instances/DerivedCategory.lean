@@ -10,6 +10,8 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
+public import WeilConjectures.CategoryTheory.Monoidal.DerivedBraided
 
 /-!
 
@@ -64,10 +66,11 @@ noncomputable instance monoidalClosed_of_hasFunctorialFlatResolution
 complexes, descends along K-flat resolutions.
 
 Only the existence of some braiding is recorded, as a `Prop`, so that statements which hold in
-any braided monoidal category can be applied to `DerivedCategory C`. The construction of the
-Koszul braiding is not yet formalised. -/
+any braided monoidal category can be applied to `DerivedCategory C`. The braiding is
+`CategoryTheory.DerivedMonoidal.braidedCategory`, induced by the Koszul braiding of the homotopy
+category `HomotopyCategory.braidedCategory`. -/
 theorem nonempty_braidedCategory [Abelian.HasFunctorialFlatResolution C] :
-    Nonempty (BraidedCategory (DerivedCategory C)) :=
-  sorry
+    Nonempty (BraidedCategory (DerivedCategory C)) := by
+  exact ⟨DerivedMonoidal.braidedCategory Qh (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))⟩
 
 end DerivedCategory
