@@ -1158,3 +1158,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:19 L: accepted lem-weil-pbc-associated-prime-power-quotient (6 steps; new leaves lem-weil-pbc-associated-prime-submodule (02M3) and lem-weil-pbc-minimal-support-prime-associated (05BV)).
 - 09:20 L: accepted lem-weil-pbc-cm-local-associated-prime-minimal (2 steps; new lem-weil-pbc-depth-le-dim-associated-prime, 0BK4).
 - 09:21 L: twentieth account limit (~09:20). The five running workers (formal-glueing-equivalence, def-pc-ext, cm-module-good-sequence-element-nonzerodivisor, coherent-filtration-integral-subschemes; coherent-generic-point-ideal-inclusion claimed, not yet launched) left nothing on disk; all five relaunched under L's existing claims.
+- 09:26 L: accepted lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor (8 steps, 0 new). Source error 00N4 at d = 0 (HUMAN.md); hypothesis d >= 1 added, citer unaffected.

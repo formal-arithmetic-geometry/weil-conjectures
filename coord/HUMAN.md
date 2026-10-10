@@ -71,3 +71,6 @@ In the proof of part (2), case L = K(theta) with theta^p = t in K, the source wr
 ## Source error: Stacks 01YM (lemma-property-higher-rank-cohomological) and 01YL — 2026-10-10 08:07 UTC
 
 The lemmas are false for the zero module as stated. The property "F is nonzero" on X = Spec k satisfies hypotheses (1), (2) and (3) (the sheaf G' of (3) has G'_xi = G_xi nonzero), yet fails at F = 0. The proof breaks at the empty filtration and, in 01YL, at the case I'' = 0. The DAG node lem-weil-pbc-coherent-property-devissage-integral-subschemes adds hypothesis (0) "P holds for the zero module"; its only citer (H^1 = 0 for finite surjective covers of a Noetherian scheme, 01YQ) checks (0) trivially. Found by a stage-1 worker on 2026-10-10.
+
+## Source error: Stacks 00N4 (lemma-good-element) for d = 0 — 2026-10-10 09:26 UTC
+The proof says "If d = 0 ... there is no case to which the lemma applies". For d = 0 the goodness condition (i = 0, ..., d-1) is empty, so every g in m is good, and (a) fails: R = k[x]_(x), M = R/(x), g = x kills M. The node lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor now assumes d >= 1; its only citer uses it for d >= 1, so nothing else changes. No action needed.
