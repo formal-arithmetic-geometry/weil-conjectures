@@ -1902,3 +1902,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:08 L: merged deliver/M1/lem-weil-pbc-ringed-site-injective-module-cech-acyclic (reviewer FIX; first push; new nodes: 2)
 - 16:08 L: merged deliver/F1/lem-sc-invert-s-cohomology (reviewer FIX; first push; new nodes: 3)
 - 16:08 L: merged deliver/M1/lem-sc-closed-pushforward-abelian-stalks (reviewer PASS; first push; new nodes: 0)
+- 16:09 L: returned deliver/J1/lem-pc-grothendieck-ss-double-complex-model (reviewer RETURN: 1. D2/C3: step 2 (and hence the first sentence of the item): 'Thus the two spectral sequences agree from E_2 onward, wit)
