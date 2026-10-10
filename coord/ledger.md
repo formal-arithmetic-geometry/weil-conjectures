@@ -2506,3 +2506,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:22 L: returned deliver/F1/lem-sc-p1-right-derived-triangle-connecting (reviewer RETURN: 1. D2/E (Step 3, wrong argument): universality of a delta-functor gives a unique ISOMORPHISM of delta-functors t extendi)
 - 20:23 L: merged deliver/J1/lem-pc-derived-total-resolution-quasi-iso (reviewer FIX; first push; new nodes: 0)
 - 20:23 L: returned deliver/H1/lem-pc-perfect-tensor-hom-duality (reviewer RETURN: Reviewer R-pth2256. 1 (E, wrong argument; missed by the Second reading, which introduced it). Step 1 asserts that the zi)
+- 20:24 L: returned deliver/C1/lem-pc-hilb-containment-locus (reviewer RETURN: 1. E (wrong reduction, Step 1): localizing on X_T is invalid: for an affine open Spec A of X_T, Z cap Spec A = Spec(A/I))
