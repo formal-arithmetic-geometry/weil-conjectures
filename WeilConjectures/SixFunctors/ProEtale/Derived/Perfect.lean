@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
 
 /-!
 
@@ -31,6 +33,9 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
   `AlgebraicGeometry.ProEtale.derivedDualEval_eq_uncurry` (`rem-ptr-pod-perfect-complex-on-x-5`):
   the coefficient dual and its evaluation `AlgebraicGeometry.ProEtale.derivedDualEval` are
   formed with the derived internal hom.
+- `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible_of_isDualizable`
+  (`prop-pod-perfect-local-model`): a perfect complex is of étale origin and bounded
+  constructible. The proof is `sorry`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTorAmplitudeIn_single_of_isDualizable`
   (`prop-pod-perfect-local-model`): a finite projective `Λ_X`-module is flat and constructible.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_of_isDualizable`
@@ -49,6 +54,11 @@ in a braided monoidal closed category the internal dual `[K, 𝟙]` of a dualiza
 right dual `Kᘁ`, hence dualizable (`CategoryTheory.IsDualizable.ihom_unit`). It is applied to
 some braiding of `D(X_proét)` (`DerivedCategory.nonempty_braidedCategory`); the conclusion
 does not depend on which one.
+
+Flatness and Tor amplitude of a perfect complex are formal consequences of dualizability
+(`CategoryTheory.ObjectProperty.flat_of_isDualizable`,
+`DerivedCategory.torAmplitudeIn_of_exactPairing_of_isLE`) once it is known to be bounded, which
+`boundedConstructible_of_isDualizable` provides.
 
 The statements about `Dctf(X, Λ)` are made at a finite coefficient ring `Λ` and a Noetherian
 scheme `X`, as in the blueprint's setting: bounded constructibility is étale origin
@@ -115,6 +125,20 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}} [IsNoeth
 
 namespace DerivedCategory
 
+/-- Blueprint `prop-pod-perfect-local-model`, the constructibility half: a perfect complex of
+pro-étale `Λ`-sheaves (rendered as a dualizable object of `D(X_proét)`) is of étale origin and
+bounded constructible.
+
+Locally on the pro-étale site it is a bounded complex of finite projective `Λ_X`-modules, so
+its cohomology sheaves are locally constant with finite stalks; on the quasi-compact `X`
+finitely many such neighbourhoods suffice, so it is bounded, and its cohomology sheaves
+descend to constructible étale sheaves. -/
+theorem boundedConstructible_of_isDualizable
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : IsDualizable K) :
+    boundedConstructible (ModuleCat.{u + 1} Λ) X K :=
+  sorry
+
 /-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
 
 A finite projective `Λ_X`-module `P` on the small pro-étale site (rendered as a dualizable
@@ -124,7 +148,17 @@ theorem constructibleTorAmplitudeIn_single_of_isDualizable
     {P : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} (hP : IsDualizable P) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X 0 0
       ((_root_.DerivedCategory.singleFunctor _ 0).obj P) :=
-  sorry
+  -- `P[0]` is dualizable in `D(X_proét)`, as a bounded complex of dualizable objects
+  have hP' : IsDualizable ((_root_.DerivedCategory.singleFunctor _ 0).obj P) :=
+    (_root_.DerivedCategory.isDualizable_Q_obj ((HomologicalComplex.single _ _ 0).obj P) 0 0
+      fun n ↦ by
+        by_cases hn : n = 0
+        · subst hn
+          exact hP.of_iso (HomologicalComplex.singleObjXSelf _ 0 P).symm
+        · exact isDualizable_of_isZero (HomologicalComplex.isZero_single_obj_X _ 0 P n hn)).of_iso
+      ((_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app P).symm
+  ⟨⟨boundedConstructible_of_isDualizable Λ hP', inferInstance, inferInstance⟩,
+    _root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_isDualizable hP⟩
 
 /-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
 
@@ -135,8 +169,19 @@ in `Dctf(X, Λ)`. -/
 theorem constructibleFiniteTor_of_isDualizable
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : IsDualizable K) :
-    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K :=
-  sorry
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K := by
+  -- `K` and its right dual are bounded constructible, hence bounded above, which bounds the
+  -- Tor amplitude of `K`
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
+    (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))
+  have hK' := boundedConstructible_of_isDualizable Λ hK
+  obtain ⟨_⟩ := hK
+  have hL := boundedConstructible_of_isDualizable Λ
+    ((IsDualizable.ihom_unit ⟨inferInstance⟩).of_iso (ihomUnitIsoRightDual K))
+  obtain ⟨b, _⟩ := hK'.bounded.2
+  obtain ⟨b', _⟩ := hL.bounded.2
+  exact ⟨hK', -b', b,
+    _root_.DerivedCategory.torAmplitudeIn_of_exactPairing_of_isLE (L := Kᘁ) b b'⟩
 
 end DerivedCategory
 

@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.LeftResolution.Reduced
 public import Mathlib.CategoryTheory.Abelian.Refinements
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
@@ -144,6 +145,18 @@ lemma flat_opcycles_of_exactAt (P : CochainComplex C ℤ) (a : ℤ)
   simp only [Category.assoc]
   rw [hy, ← reassoc_of% hvy, ← comp_whiskerRight, hdp,
     MonoidalPreadditive.zero_whiskerRight, comp_zero]
+
+omit [Abelian C] [MonoidalClosed C] [MonoidalPreadditive C] in
+/-- A dualizable object is flat: tensoring with it has adjoints on both sides. -/
+lemma flat_of_isDualizable {P : C} (hP : IsDualizable P) : flat P := by
+  obtain ⟨h⟩ := hP
+  have : (tensorLeft P).IsRightAdjoint := (tensorLeftAdjunction P Pᘁ).isRightAdjoint
+  have : (tensorRight P).IsLeftAdjoint := (tensorRightAdjunction P Pᘁ).isLeftAdjoint
+  let e : tensorLeft P ≅ tensorRight P := NatIso.ofComponents (fun X ↦ β_ P X) (by simp)
+  have : (tensorLeft P).IsLeftAdjoint := Functor.isLeftAdjoint_of_iso e.symm
+  have : (tensorRight P).IsRightAdjoint := Functor.isRightAdjoint_of_iso e
+  exact ⟨(exactFunctor_iff _).2 ⟨inferInstance, inferInstance⟩,
+    (exactFunctor_iff _).2 ⟨inferInstance, inferInstance⟩⟩
 
 end CategoryTheory.ObjectProperty
 
@@ -468,4 +481,16 @@ lemma torAmplitudeIn_of_exactPairing {a b : ℤ} {K L : DerivedCategory C} [Exac
     rw [← (tensorLeftHomEquiv ((singleFunctor C 0).obj F) K L Y).symm_apply_apply f, h]
     simp [tensorLeftHomEquiv]
 
+
+/-- A dualizable object `P`, placed in degree `0`, has Tor amplitude in `[0, 0]`: it is flat
+(`CategoryTheory.ObjectProperty.flat_of_isDualizable`). -/
+lemma torAmplitudeIn_singleFunctor_obj_of_isDualizable {P : C} (hP : IsDualizable P) :
+    torAmplitudeIn C 0 0 ((singleFunctor C 0).obj P) := by
+  refine (torAmplitudeIn C 0 0).prop_of_iso ((singleFunctorIsoCompQ C 0).app P).symm ?_
+  refine torAmplitudeIn_Q_obj_of_flat _ 0 0 fun n ↦ ?_
+  by_cases hn : n = 0
+  · subst hn
+    exact ObjectProperty.flat.prop_of_iso (HomologicalComplex.singleObjXSelf _ 0 P).symm
+      (ObjectProperty.flat_of_isDualizable hP)
+  · exact ObjectProperty.prop_of_isZero _ (HomologicalComplex.isZero_single_obj_X _ 0 P n hn)
 end DerivedCategory

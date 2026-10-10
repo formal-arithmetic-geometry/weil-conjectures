@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Category
@@ -148,6 +149,16 @@ theorem IsInvertible.isDualizable {X : C} (hX : IsInvertible X) : IsDualizable X
 theorem tensorLeftAdjunction_counit_app (Y X : C) [ExactPairing Y X] (Z : C) :
     (tensorLeftAdjunction Y X).counit.app Z = (α_ _ _ _).inv ≫ ε_ Y X ▷ Z ≫ (λ_ Z).hom := by
   simp [tensorLeftAdjunction, tensorLeftHomEquiv]
+
+/-- A zero object is dualizable, with itself as a right dual. -/
+theorem isDualizable_of_isZero [Limits.HasZeroMorphisms C] {X : C} (hX : Limits.IsZero X) :
+    IsDualizable X :=
+  ⟨{ rightDual := X
+     exact :=
+      { coevaluation' := 0
+        evaluation' := 0
+        coevaluation_evaluation' := (hX.of_iso (ρ_ X)).eq_of_src _ _
+        evaluation_coevaluation' := (hX.of_iso (λ_ X)).eq_of_src _ _ } }⟩
 
 namespace MonoidalClosed
 
