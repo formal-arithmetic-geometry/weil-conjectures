@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-coherent-artin-rees",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs), through Cohomology of Schemes Lemma 01YB (lemma-homs-over-open) used by lem-weil-pbc-coherent-generic-point-ideal-inclusion: 'By Artin-Rees (Lemma 01YA) there exists an c >= 0 such that I^mF cap H subset I^{m-c}H' and 'By Artin-Rees again we see that K cap I^m(I^n tensor G) = 0' (both parts of the proof of 01YB)",
+   "via": [
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Artin-Rees for coherent modules on a Noetherian scheme",
+ "statement": "Let $X$ be a Noetherian scheme, i.e. a locally Noetherian scheme [pqf-def-locnoeth] whose underlying space is quasi-compact [def-weil-pbc-scheme-conventions]. Let $\\mathcal F$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent], $\\mathcal G\\subseteq\\mathcal F$ a quasi-coherent sub-$\\mathcal O_X$-module [def-weil-sheaf-of-modules-category] and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals. For a sub-$\\mathcal O_X$-module $\\mathcal M\\subseteq\\mathcal F$ and $t\\ge1$ let $\\mathcal I^t\\mathcal M\\subseteq\\mathcal M$ be as in [def-weil-pbc-coherent-formal-module](0) (the image of the multiplication map $\\mathcal I^t\\otimes_{\\mathcal O_X}\\mathcal M\\to\\mathcal M$), $\\mathcal I^0\\mathcal M=\\mathcal M$, and for two sub-$\\mathcal O_X$-modules $\\mathcal M,\\mathcal M'\\subseteq\\mathcal F$ let $\\mathcal M\\cap\\mathcal M'$ be the sectionwise intersection, $(\\mathcal M\\cap\\mathcal M')(W)=\\mathcal M(W)\\cap\\mathcal M'(W)$. Then there is an integer $c\\ge0$ such that $\\mathcal I^{n-c}(\\mathcal I^c\\mathcal F\\cap\\mathcal G)=\\mathcal I^n\\mathcal F\\cap\\mathcal G$ for all $n\\ge c$; in particular $\\mathcal I^n\\mathcal F\\cap\\mathcal G\\subseteq\\mathcal I^{n-c}\\mathcal G$ for all $n\\ge c$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YA (label lemma-Artin-Rees, line 2585; tag verified in tags/tags line 2549); proof: Algebra, Lemma 00IN (algebra-lemma-Artin-Rees) on a finite covering by spectra of Noetherian rings"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Artin-Rees lemma for quasi-coherent sheaves on a Noetherian scheme",
+   "results": "Ideal.exists_pow_inf_eq_pow_smul (Mathlib.RingTheory.Filtration: the module version, already the leaf lem-weil-pbc-artin-rees), SheafOfModules.IsQuasicoherent and constructors (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent)",
+   "date": "2026-10-10",
+   "verdict": "no match (module version only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin-Rees for coherent sheaves: I^n F ∩ G = I^(n-c)(I^c F ∩ G) for subsheaf G of coherent sheaf F on Noetherian scheme",
+   "results": "Ideal.exists_pow_inf_eq_pow_smul, Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge (Mathlib.RingTheory.Filtration), localCohomology.ideal_powers_initial",
+   "date": "2026-10-10",
+   "verdict": "no match (rings and modules only)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ln 'pow_inf|ArtinRees|Artin-Rees' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; rg -n 'ArtinRees|exists_pow_inf_eq_pow_smul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "nothing in AlgebraicGeometry; only Mathlib/RingTheory/Filtration.lean:389 (Ideal.exists_pow_inf_eq_pow_smul) and its use in RingTheory/AdicCompletion/Exactness.lean",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-homs-over-open",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 01YA"
+}

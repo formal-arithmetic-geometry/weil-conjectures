@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-module-tensor-hom-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs), through Cohomology of Schemes Lemma 01YB (lemma-homs-over-open) used by lem-weil-pbc-coherent-generic-point-ideal-inclusion: 'By Modules, Lemma 01CN phi corresponds to a map phi: I^n tensor G -> F' (second part of the proof of 01YB)",
+   "via": [
+    "lem-weil-pbc-coherent-homs-over-open",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor-Hom adjunction for modules over a ringed space",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space (a topological space with a sheaf of commutative rings on its opens) and $\\mathcal A,\\mathcal G,\\mathcal F$ $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Let $\\mathcal A\\otimes_{\\mathcal O_X}\\mathcal G$ be the tensor product [def-pur-sheaf-tensor-product], with $t_W:\\mathcal A(W)\\otimes_{\\mathcal O_X(W)}\\mathcal G(W)\\to(\\mathcal A\\otimes_{\\mathcal O_X}\\mathcal G)(W)$ the components of the sheafification map, and $\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)$ the sheaf Hom [def-pur-sheaf-hom]; for $\\eta\\in\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)(W)=\\operatorname{Hom}_{\\mathcal O_W}(\\mathcal G|_W,\\mathcal F|_W)$ write $\\eta_{W'}:\\mathcal G(W')\\to\\mathcal F(W')$ ($W'\\subseteq W$ open) for its components. Then for every $\\mathcal O_X$-linear $\\varphi:\\mathcal A\\to\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)$ there is a unique $\\mathcal O_X$-linear $\\tilde\\varphi:\\mathcal A\\otimes_{\\mathcal O_X}\\mathcal G\\to\\mathcal F$ with $\\tilde\\varphi_W(t_W(a\\otimes g))=(\\varphi_W(a))_W(g)$ for all opens $W$, $a\\in\\mathcal A(W)$, $g\\in\\mathcal G(W)$, and $\\varphi\\mapsto\\tilde\\varphi$ is a bijection $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal A,\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F))\\to\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal A\\otimes_{\\mathcal O_X}\\mathcal G,\\mathcal F)$ of $\\mathcal O_X(X)$-modules, natural in $\\mathcal A$ (for $\\alpha:\\mathcal A'\\to\\mathcal A$: $\\widetilde{\\varphi\\circ\\alpha}=\\tilde\\varphi\\circ(\\alpha\\otimes\\mathrm{id}_{\\mathcal G})$).",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01CN (label lemma-internal-hom, line 3534; tag verified in tags/tags line 1768), the 'in particular' clause; its proof ('the analogue of Algebra, Lemma 00DE (algebra-lemma-hom-from-tensor-product); the proof is the same, and is omitted'); cited as 'Modules, Lemma 01CN' in the proof of Cohomology of Schemes, Lemma 01YB"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor-hom adjunction for sheaves of modules over a sheaf of rings, Hom(F ⊗ G, H) ≃ Hom(F, internal Hom(G, H))",
+   "results": "CategoryTheory.ihom.adjunction, CategoryTheory.MonoidalClosed.internalHomAdjunction₂ (Mathlib.CategoryTheory.Monoidal.Closed.Basic), ModuleCat.monoidalClosedHomEquiv (ModuleCat.Monoidal.Closed), CategoryTheory.FunctorToTypes.adj, lTensorHomEquivHomLTensor",
+   "date": "2026-10-10",
+   "verdict": "no match (abstract monoidal closed categories and modules over a ring; no instance for sheaves of modules over a sheaf of rings)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal hom of sheaves of modules adjoint to tensor product, monoidal closed SheafOfModules",
+   "results": "LightCondensed.instMonoidalClosedLightCondMod, instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat (Mathlib.Condensed.Light.Monoidal: sheaves valued in ModuleCat R for a fixed ring), instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite (CategoryTheory.Sites.CartesianClosed: cartesian case), LightCondensed.ihomPoints",
+   "date": "2026-10-10",
+   "verdict": "no match (constant coefficient ring or cartesian structure only)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'ihom|internalHom|MonoidalClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules; grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+   "results": "none in Sheaf/ or AlgebraicGeometry/Modules; Presheaf/Monoidal.lean has monoidalCategory and symmetricCategory for presheaves of modules, no closed structure",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-homs-over-open",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 01CN"
+}
