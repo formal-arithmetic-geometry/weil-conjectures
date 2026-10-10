@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-homotopic-maps-equal-cohomology",
+ "kind": "statement",
+ "title": "Homotopic maps induce equal maps on cohomology, also after an additive functor",
+ "statement": "Let $\\mathcal A$, $\\mathcal B$ be abelian categories [def-sp-abelian] and $F:\\mathcal A\\to\\mathcal B$ an additive functor. Let $K^\\bullet$, $L^\\bullet$ be cochain complexes of $\\mathcal A$ (indexed by $\\mathbf Z$) and $f,g:K^\\bullet\\to L^\\bullet$ morphisms of complexes which are chain-homotopic: there are morphisms $k^n:K^n\\to L^{n-1}$ with $f^n-g^n=d_L^{n-1}k^n+k^{n+1}d_K^n$ for all $n$. Then (a) the morphisms $F(f),F(g):F(K^\\bullet)\\to F(L^\\bullet)$ between the complexes obtained by applying $F$ termwise are chain-homotopic, by the morphisms $F(k^n)$; (b) $H^n(f)=H^n(g):H^n(K^\\bullet)\\to H^n(L^\\bullet)$ for every $n$; in particular $H^n(F(f))=H^n(F(g))$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Lemma 0116 (lemma-map-cohomology-homotopy-cochain) part (1) for (b); for (a) literature/stacks-project/derived.tex Lemma 014X (lemma-additive-exact-homotopy-category: an additive functor induces a functor K(A) -> K(B), i.e. carries homotopic maps to homotopic maps)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homotopic morphisms of complexes induce the same map on homology",
+   "results": "Homotopy.homologyMap_eq (Mathlib.Algebra.Homology.Homotopy), ShortComplex.Homotopy.homologyMap_congr, leftHomologyMap'_congr, homologyMap'_congr, rightHomologyMap_congr (Mathlib.Algebra.Homology.ShortComplex.Preadditive)",
+   "date": "2026-10-10",
+   "verdict": "match: Homotopy.homologyMap_eq for (b)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapHomotopy",
+   "results": "Functor.mapHomotopy (F : V ⥤ W) [F.Additive] {f g : C ⟶ D} (h : Homotopy f g) : Homotopy ((F.mapHomologicalComplex c).map f) ((F.mapHomologicalComplex c).map g), Functor.mapHomotopy_hom (hom i j = F.map (h.hom i j)), Functor.mapHomotopyEquiv (Mathlib.Algebra.Homology.Homotopy)",
+   "date": "2026-10-10",
+   "verdict": "match: Functor.mapHomotopy for (a)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Homotopy.homologyMap_eq (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Homotopy.homologyMap_eq, lemma, .lake/packages/mathlib/Mathlib/Algebra/Homology/Homotopy.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "match (existence of the name)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'lemma Homotopy.homologyMap_eq\\|def Functor.mapHomotopy ' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/; sed -n 810,830p and 892,897p /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Homotopy.lean",
+   "results": "Homotopy.lean:818 def Functor.mapHomotopy (F : V ⥤ W) [F.Additive] {f g : C ⟶ D} (h : Homotopy f g) : Homotopy (...map f) (...map g), hom i j := F.map (h.hom i j); Homotopy.lean:894 lemma Homotopy.homologyMap_eq (ho : Homotopy f g) (i : ι) [K.HasHomology i] [L.HasHomology i] : homologyMap f i = homologyMap g i",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Homotopy.homologyMap_eq; CategoryTheory.Functor.mapHomotopy",
+  "file": "Mathlib/Algebra/Homology/Homotopy.lean",
+  "how": "specializes in one line per clause: (a) is Functor.mapHomotopy (Homotopy.lean line 818, read 810-827: its homotopy has components F.map (h.hom i j)) for c = ComplexShape.up ℤ, a Homotopy f g in Mathlib being exactly a family k with f^n = g^n + d k^n + k^{n+1} d (dNext/prevD); (b) is Homotopy.homologyMap_eq (Homotopy.lean line 894, read 892-896: homologyMap f i = homologyMap g i), the abelian categories having homology; the 'in particular' is (b) applied to the homotopy of (a)",
+  "line": 894
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf, one declaration per clause; lines 818, 894 verified."
+}
