@@ -23,9 +23,45 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each i, C_i is perfect by induction. C_0=E is perfect. C_i sits in a distinguished triangle C_{i-1}\\xrightarrow{g_i}C_{i-1}\\to C_i\\to C_{i-1}[1] whose first two terms are perfect, so [lem-pc-perfect-two-out-of-three] implies C_i is perfect.",
+   "uses": [
+    "lem-pc-perfect-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EK (Lemma 36.13.10), proof, cone construction"
+   }
+  },
+  {
+   "text": "Restriction to an open is a triangulated functor, so each C_j|_{D(g_i)} is a cone of multiplication by g_j on C_{j-1}|_{D(g_i)}. Since g_i is a unit on D(g_i), multiplication by g_i on C_{i-1}|_{D(g_i)} is an isomorphism, so C_i|_{D(g_i)}=0 (cone of an isomorphism is zero, Stacks Tag 05QR). For j>i, by induction C_j|_{D(g_i)} is a cone of an endomorphism of the zero object, hence zero (Tag 05QR again). Thus C_s|_{D(g_i)}=0 for every i, and since X\\setminus T=\\bigcup_i D(g_i), all cohomology sheaves of C_s vanish on X\\setminus T.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EK (Lemma 36.13.10), proof, cone construction"
+   }
+  },
+  {
+   "text": "We show by induction on i that C_i|_U\\cong\\bigoplus_{j=0}^{i+1}F[j]^{\\oplus\\binom{i+1}{j}}; i=0 is the hypothesis E|_U\\cong F\\oplus F[1]. Multiplication by g_i is a natural endomorphism of the identity functor of D(\\mathcal O_U), so it commutes with isomorphisms, shifts and finite direct sums; since it is zero on F, it is zero on C_{i-1}|_U\\cong\\bigoplus_j F[j]^{\\oplus\\binom{i}{j}}. Restriction to U preserves distinguished triangles, so C_i|_U is a cone of the zero endomorphism of K=C_{i-1}|_U. The triangle K\\xrightarrow{0}K\\to K\\oplus K[1]\\to K[1] is distinguished, being the direct sum (Stacks Tag 05QS) of the rotated triangles K\\to0\\to K[1]\\to K[1] and 0\\to K\\to K\\to0 (Tag 05QR), so C_i|_U\\cong K\\oplus K[1] by uniqueness of cones. Pascal's rule \\binom{i}{j}+\\binom{i}{j-1}=\\binom{i+1}{j} gives the multiplicities. For i=s this is C_s|_U\\cong\\bigoplus_{j=0}^{s+1}F[j]^{\\oplus\\binom{s+1}{j}}.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EK (Lemma 36.13.10), proof, cone construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-two-out-of-three"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EK (Lemma 36.13.10), proof, cone construction"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +93,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-support-extension",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-support-iterated-cones",
+  "worker": "stage1",
+  "summary": "Split the iterated-cone construction into the single-cone principal-open support fact and the zero-map binomial decomposition. The item proof then checks perfection inductively, propagates vanishing across later cones and the principal-open cover of X\\setminus T, and applies the binomial decomposition on U.",
+  "blueprint": "Realizes the proper-flat support proof clause of lem-sc-finite-duality: successive cones of multiplication by generators of T produce a perfect complex supported on T, with the stated direct-sum restriction on U.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sic2834",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sic2834 (reviewer sub-agent of L); spot-checked: Statement identical to sheaf-dag (binom(s+1,j), hypotheses-first form of R-pse2710; no revert). J1 step 3 uses exactly this statement (C4 ok). Math checked: cone of zero map doubles, (1+t)^{s+1}; support via D(g_i). FIX more, RETURN less: (1) E/C1 gap missed by second reading: step 3 asserted g_i zero on C_{i-1}|_U only from zero on F+F[1]; repaired by induction using naturality of multiplication by g_i on the decomposition C_{i-1}|_U, cone of zero map = K+K[1] (Tags 05QS, 05QR), Pascal. (2) class (d): lem-sc-single-cone-principal-support folded into step 2 (g_i unit on D(g_i), cone of iso zero, Tag 05QR) and dropped. (3) class (d): lem-sc-zero-cone-binomial folded into step 3 and dropped. proof_deps now lem-pc-perfect-two-out-of-three only. Note: created.item on the item still names lem-sc-affine-perfect-support-extension (correct: it was created there); second reading's claimed change did not land and is not needed.; 1 file(s) fixed by the reviewer"
+ }
 }
