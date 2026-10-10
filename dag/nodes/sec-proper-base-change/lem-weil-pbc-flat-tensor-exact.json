@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-flat-tensor-exact",
+ "kind": "statement",
+ "title": "Tensoring with a flat module preserves exact sequences",
+ "statement": "Let $R$ be a commutative ring and $M$ a flat $R$-module [def-weil-pbc-flat-ring-map]. If $N_1\\xrightarrow{f}N_2\\xrightarrow{g}N_3$ is an exact sequence of $R$-modules ($\\ker g=\\operatorname{im}f$), then $N_1\\otimes_RM\\xrightarrow{f\\otimes1}N_2\\otimes_RM\\xrightarrow{g\\otimes1}N_3\\otimes_RM$ is exact; likewise $M\\otimes_RN_1\\to M\\otimes_RN_2\\to M\\otimes_RN_3$ is exact. In particular, if $0\\to N_1\\xrightarrow{f}N_2\\xrightarrow{g}N_3$ is exact, so is $0\\to N_1\\otimes_RM\\to N_2\\otimes_RM\\to N_3\\otimes_RM$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00HD (lemma-flat), (2) implies (1), with Definition Tag 00HB (definition-flat) item (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensoring with a flat module preserves exact sequences",
+   "results": "Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, Module.Flat.iff_lTensor_exact' (Mathlib.RingTheory.Flat.Basic); Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact (Mathlib.RingTheory.Flat.CategoryTheory)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If M is a flat R-module and N1 -> N2 -> N3 is exact then M ⊗ N1 -> M ⊗ N2 -> M ⊗ N3 is exact",
+   "results": "Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact (Mathlib.RingTheory.Flat.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'lemma.*lTensor_exact\\|theorem.*rTensor_exact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/; sed -n 315,345p Mathlib/RingTheory/Flat/Basic.lean",
+   "results": "Module.Flat.lTensor_exact (Mathlib/RingTheory/Flat/Basic.lean:323), Module.Flat.rTensor_exact (:340), iff_lTensor_exact (:371), iff_rTensor_exact (:393); source read: [Flat R M] (exact : Function.Exact f g) : Function.Exact (f.lTensor M) (g.lTensor M), resp. rTensor",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.Flat.lTensor_exact (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Module.Flat.lTensor_exact, Mathlib/RingTheory/Flat/Basic.lean (index unavailable; existence confirmed by grep)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Flat.rTensor_exact, Module.Flat.lTensor_exact",
+  "file": "Mathlib/RingTheory/Flat/Basic.lean",
+  "line": 323,
+  "how": "exact, one Mathlib lemma per clause: `lemma Module.Flat.lTensor_exact (M) [Flat R M] ⦃f : N →ₗ[R] N'⦄ ⦃g : N' →ₗ[R] N''⦄ (exact : Function.Exact f g) : Function.Exact (f.lTensor M) (g.lTensor M)` (line 323) and `rTensor_exact` (line 340) for N ⊗ M; the 'in particular' clause adds the injectivity of f ⊗ 1, which is Function.Exact for 0 → N1 → N2 tensored (or Module.Flat.lTensor_preserves_injective_linearMap). Over CommRing R, as in the node. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-annihilator-element-flat-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

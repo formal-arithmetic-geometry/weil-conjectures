@@ -13,9 +13,76 @@
   "def-pc-fibre-product",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the pieces $W_{e,e'}$; part (a)).* By [lem-weil-pbc-scheme-coproduct-family] applied to the family $(T)_{e\\in E}$, each $V_e=\\iota_e(T)$ is open and closed in $T_E$, $V_e\\cap V_d=\\varnothing$ for $e\\ne d$, and $T_E=\\bigcup_{e\\in E}V_e$. The projections $p,q:P\\to T_E$ of the fibre product [def-pc-fibre-product] are morphisms of schemes, hence continuous, so $p^{-1}(V_e)$ and $q^{-1}(V_{e'})$ are open and closed in $P$, and so is their intersection $W_{e,e'}$. Disjointness: $W_{e,e'}\\cap W_{d,d'}=p^{-1}(V_e\\cap V_d)\\cap q^{-1}(V_{e'}\\cap V_{d'})$, and if $(e,e')\\ne(d,d')$ then $e\\ne d$ or $e'\\ne d'$, so one of the two preimages is the preimage of $\\varnothing$, hence empty. Covering: for $x\\in P$ choose $e$ with $p(x)\\in V_e$ and $e'$ with $q(x)\\in V_{e'}$ (the $V$'s cover $T_E$); then $x\\in W_{e,e'}$. This proves (a). Moreover $\\pi\\circ p=\\pi\\circ q$ by the definition of the fibre product of $\\pi$ with itself, so $\\rho$ is well defined.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoids, Example 39.5.6 (Tag 03YW, example-constant-group): 'the component corresponding to the pair (g,g')' of $G\\times G$; the decomposition of the fibre product into these components is not written out there and is written here"
+   }
+  },
+  {
+   "text": "*Step 2 (the local morphisms and their compatibility).* Regard each $W_{e,e'}$ as an open subscheme of $P$ with inclusion $j_{e,e'}:W_{e,e'}\\to P$, an open immersion [def-weil-open-immersion], and put $\\rho|_{W_{e,e'}}=\\rho\\circ j_{e,e'}$ and $m_{e,e'}=\\iota_{e+e'}\\circ\\rho|_{W_{e,e'}}:W_{e,e'}\\to T_E$. By (a) the $W_{e,e'}$ form an open cover of $P$. The compatibility condition of [lem-weil-pbc-scheme-morphism-gluing] holds: for $(e,e')=(d,d')$ both restrictions are the same morphism; for $(e,e')\\ne(d,d')$ the overlap $W_{e,e'}\\cap W_{d,d'}$ is empty by (a), so it is the empty scheme, which is an initial object of the category of schemes (a morphism from $\\varnothing$ is the empty map of spaces with the unique map of sheaves into the zero sheaf on $\\varnothing$), and any two morphisms $\\varnothing\\to T_E$, in particular $m_{e,e'}|_{\\varnothing}$ and $m_{d,d'}|_{\\varnothing}$, are equal.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Section 26.14 (Tag 01JA, glueing schemes) and Lemma 26.14.1 (Tag 01JB, lemma-glue) with $U_{ij}=\\varnothing$ for $i\\ne j$"
+   }
+  },
+  {
+   "text": "*Step 3 (existence and uniqueness of $m$; part (b)).* By Step 2 and the gluing lemma [lem-weil-pbc-scheme-morphism-gluing] applied to the open cover $P=\\bigcup_{(e,e')\\in E\\times E}W_{e,e'}$ and the morphisms $m_{e,e'}$, there is a unique morphism of schemes $m:P\\to T_E$ with $m|_{W_{e,e'}}=m_{e,e'}=\\iota_{e+e'}\\circ\\rho|_{W_{e,e'}}$ for all $(e,e')\\in E\\times E$. This is (b).",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Section 26.14 (Tag 01JA, glueing schemes), Lemma 26.14.1 (Tag 01JB, lemma-glue), mapping property $\\mathrm{Mor}(X,Y)$ of a glued scheme, here for the disjoint cover by the $W_{e,e'}$; applied to the multiplication of Groupoids, Example 39.5.6 (Tag 03YW)"
+   }
+  },
+  {
+   "text": "*Step 4 ($\\pi\\circ m=\\rho$ and $m(W_{e,e'})\\subseteq V_{e+e'}$).* For every $(e,e')$, $(\\pi\\circ m)|_{W_{e,e'}}=\\pi\\circ m\\circ j_{e,e'}=\\pi\\circ\\iota_{e+e'}\\circ\\rho\\circ j_{e,e'}=\\rho\\circ j_{e,e'}=\\rho|_{W_{e,e'}}$, using $\\pi\\circ\\iota_{e+e'}=\\mathrm{id}_T$. So $\\pi\\circ m$ and $\\rho$ are two morphisms $P\\to T$ whose restrictions to every member of the open cover $(W_{e,e'})$ agree, hence $\\pi\\circ m=\\rho$ by the uniqueness clause of [lem-weil-pbc-scheme-morphism-gluing]. On points, $m(W_{e,e'})=(m\\circ j_{e,e'})(W_{e,e'})=\\iota_{e+e'}(\\rho(W_{e,e'}))\\subseteq\\iota_{e+e'}(T)=V_{e+e'}$.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoids, Example 39.5.6 (Tag 03YW): the multiplication 'maps the component corresponding to the pair (g,g') to the component corresponding to gg''; with Schemes, Lemma 26.14.1 (Tag 01JB) for the uniqueness of glued morphisms"
+   }
+  },
+  {
+   "text": "*Step 5 ($m^{-1}(V_d)$; end of part (c)).* Let $d\\in E$. If $e+e'=d$ then $m(W_{e,e'})\\subseteq V_d$ by Step 4, so $\\bigcup_{e+e'=d}W_{e,e'}\\subseteq m^{-1}(V_d)$. Conversely, let $x\\in m^{-1}(V_d)$. By (a) there is $(e,e')$ with $x\\in W_{e,e'}$, and then $m(x)\\in V_{e+e'}\\cap V_d$ by Step 4; since $V_{e+e'}\\cap V_d=\\varnothing$ unless $e+e'=d$ (Step 1, from [lem-weil-pbc-scheme-coproduct-family]), we get $e+e'=d$ and $x\\in\\bigcup_{e+e'=d}W_{e,e'}$. Hence $m^{-1}(V_d)=\\bigcup_{e+e'=d}W_{e,e'}$, which with Step 4 proves (c).",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoids, Example 39.5.6 (Tag 03YW, example-constant-group)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Groupoids, Example 39.5.6 (Tag 03YW, example-constant-group) states the componentwise multiplication without proof; the decomposition of the fibre product into the clopen pieces $W_{e,e'}$ and the gluing (Schemes, Section 26.14, Tag 01JA; Lemma 26.14.1, Tag 01JB) are written out by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +111,31 @@
    "results": "Limits.lean:219 isEmpty_pullback_sigmaι_of_ne, Limits.lean:456 instance FinitaryExtensive Scheme (finite coproducts only), Limits.lean:202 disjoint_opensRange_sigmaι, sigmaOpenCover; Gluing.lean:448 Scheme.Cover.glueMorphisms, :471 ι_glueMorphisms; no constant group scheme, no statement that the pullback of infinite coproducts decomposes; Sites/ConstantSheaf.lean has continuousMapPresheafAb (U -> C(U,A)) but no representing scheme",
    "date": "2026-10-10",
    "verdict": "no match (Lean candidate: the W's as the open cover of P from sigmaOpenCover pulled back along p and q, m := glueMorphisms with compatibility from isEmpty of the overlaps)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism of schemes glued from morphisms on a cover by pairwise disjoint open and closed subschemes",
+   "results": "AlgebraicGeometry.Scheme.Cover.glueMorphisms, ι_glueMorphisms, glueMorphisms.congr_simp, fromGlued_isOpenEmbedding, Scheme.GlueData (Mathlib.AlgebraicGeometry.Gluing); OpenCover.glueMorphismsOfLocallyDirected, glueMorphismsOverOfLocallyDirected (Mathlib.AlgebraicGeometry.Cover.Directed); LocalRepresentability.glueData_openCover_map",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredient: glueMorphisms for part (b), already the leaf lem-weil-pbc-scheme-morphism-gluing)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "constant group scheme: multiplication morphism on the fibre product of coproducts of copies of a scheme, adding indices of components",
+   "results": "AlgebraicGeometry.Scheme.GrpObjAsOverPullback, monObjAsOverPullback_mul, isMonHom_fst_id_right (Mathlib.AlgebraicGeometry.Pullbacks); instCartesianMonoidalCategoryScheme, instBraidedCategoryScheme (Mathlib.AlgebraicGeometry.Limits); Preadditive.commGrpEquivalence_functor_obj_grp_mul; Over.grpObjMkPullbackSnd_mul; pointsPi",
+   "date": "2026-10-10",
+   "verdict": "no match (no constant group scheme in Mathlib)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def glueMorphisms|theorem ι_glueMorphisms|theorem hom_ext' Mathlib/AlgebraicGeometry/Gluing.lean; grep -n 'isEmpty_pullback_sigmaι_of_ne|disjoint_opensRange_sigmaι|def sigmaOpenCover' Mathlib/AlgebraicGeometry/Limits.lean",
+   "results": "Gluing.lean:448 Scheme.Cover.glueMorphisms, :460 Cover.hom_ext, :471 ι_glueMorphisms; Limits.lean:202 disjoint_opensRange_sigmaι, :219 isEmpty_pullback_sigmaι_of_ne, :241 sigmaOpenCover",
+   "date": "2026-10-10",
+   "verdict": "no match for the item (ingredients confirmed present)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +156,17 @@
  },
  "import_flags": [],
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constant-group-scheme-multiplication",
+  "worker": "stage1",
+  "summary": "Split into 5 steps, proof written by the worker (Stacks Groupoids 03YW states the componentwise multiplication without proof; gluing from Schemes 01JA/01JB). (a) from the clopen, disjoint, covering components V_e of lem-weil-pbc-scheme-coproduct-family and continuity of the projections of the fibre product; (b) from the gluing leaf lem-weil-pbc-scheme-morphism-gluing on the open cover by the W_{e,e'}, the compatibility being vacuous on the empty overlaps (the empty scheme is initial, written out in Step 2); (c) pi o m = rho by the uniqueness clause of the gluing lemma, m(W_{e,e'}) in V_{e+e'} on points, and m^{-1}(V_d) by the disjointness of the V's. No new node needed; statement and stmt_deps kept (def-pc-scheme, coproduct family, fibre product, open immersion all used). lem-weil-pbc-open-fibre-product and lem-weil-pbc-open-preimage-fibre-product are not needed (the W_{e,e'} are only used as open subschemes of P, not identified with T). Mathlib re-searched three ways (leansearch, leanfinder, grep): no constant group scheme; ingredients glueMorphisms, isEmpty_pullback_sigmaι_of_ne, disjoint_opensRange_sigmaι, sigmaOpenCover exist."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps (agent proof of the facts Stacks 03YW states without proof): the W_{e,e'} clopen, disjoint and covering P from the coproduct leaf; the componentwise morphisms glue uniquely since the overlaps are empty (gluing leaf, sk-thm-reduction, a tool); pi m = rho by uniqueness; m(W_{e,e'}) in V_{e+e'}; preimages of V_d. No new nodes."
+ }
 }
