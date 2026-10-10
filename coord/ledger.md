@@ -1013,3 +1013,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:21 L: reviewed and accepted lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian (8 steps; +relative-global-complete-intersection-conormal-free 00SV node).
 - 07:22 L: reviewed and accepted lem-weil-pbc-residue-field-pd-ge-embedding-dimension (9 steps; +minimal-finite-free-resolution-local, +free-complex-maps-to-resolution nodes).
 - 07:23 L: reviewed and accepted lem-weil-pbc-residue-field-pd-le-krull-dimension (5 steps; +exact-free-complex-last-minors-regular-sequence 00N1 node; the unjustified clause 'in particular dim R is finite' removed from the statement, citers unaffected).
+- 07:23 L: reviewed and accepted lem-weil-pbc-quasi-finite-at-prime-permanence (4 steps by agent, no new nodes; 0C6H).

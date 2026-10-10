@@ -11,9 +11,65 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$B\\to C$ is of finite type.* Write $\\psi:A\\to B$, $\\chi:B\\to C$ and $\\varphi=\\chi\\circ\\psi:A\\to C$. Since $A\\to C$ is of finite type [def-weil-pbc-finite-type-algebra], there are $c_1,\\dots,c_n\\in C$ such that every element of $C$ is a polynomial in $c_1,\\dots,c_n$ with coefficients in $\\varphi(A)$. As $\\varphi(A)=\\chi(\\psi(A))\\subseteq\\chi(B)$, every element of $C$ is a polynomial in $c_1,\\dots,c_n$ with coefficients in $\\chi(B)$, i.e. the $B$-algebra map $B[x_1,\\dots,x_n]\\to C$, $x_i\\mapsto c_i$, is surjective: $B\\to C$ is of finite type. So the statement makes sense.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0C6H (lemma-quasi-finite-permanence, line 30393), proof, first sentence (citing Lemma Tag 00F4, lemma-compose-finite-type, line 540)"
+   }
+  },
+  {
+   "text": "*The comparison map of fibre rings.* Put $\\mathfrak q=\\chi^{-1}(\\mathfrak r)\\subset B$ and $\\mathfrak p=\\varphi^{-1}(\\mathfrak r)=\\psi^{-1}(\\mathfrak q)\\subset A$, prime ideals. For $s\\in A\\setminus\\mathfrak p$ we have $\\psi(s)\\notin\\mathfrak q$, so $A_{\\mathfrak p}\\to B_{\\mathfrak q}$, $a/s\\mapsto\\psi(a)/\\psi(s)$, is a well-defined ring homomorphism [def-weil-pbc-localization-at-prime]; it maps $\\mathfrak pA_{\\mathfrak p}$ into $\\mathfrak qB_{\\mathfrak q}$ (as $\\psi(\\mathfrak p)\\subseteq\\mathfrak q$), hence induces a ring homomorphism $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$, $\\lambda\\mapsto\\bar\\lambda$, with $\\overline{a\\cdot\\lambda}=\\psi(a)\\cdot\\bar\\lambda$ for $a\\in A$. Let $F_A=C\\otimes_A\\kappa(\\mathfrak p)$ and $F_B=C\\otimes_B\\kappa(\\mathfrak q)$ be the fibre rings of $A\\to C$ over $\\mathfrak p$ and of $B\\to C$ over $\\mathfrak q$ [def-weil-pbc-localization-at-prime], with $j_A:C\\to F_A$, $c\\mapsto c\\otimes1$, and $j_B:C\\to F_B$, $c\\mapsto c\\otimes1$. The map $C\\times\\kappa(\\mathfrak p)\\to F_B$, $(c,\\lambda)\\mapsto c\\otimes\\bar\\lambda$, is biadditive and $A$-balanced: for $a\\in A$, $(\\varphi(a)c)\\otimes\\bar\\lambda=(\\chi(\\psi(a))c)\\otimes\\bar\\lambda=c\\otimes\\psi(a)\\bar\\lambda=c\\otimes\\overline{a\\lambda}$. Hence it induces an additive map $\\theta:F_A\\to F_B$ with $\\theta(c\\otimes\\lambda)=c\\otimes\\bar\\lambda$; it is multiplicative on pure tensors and sends $1\\otimes1$ to $1\\otimes1$, so it is a ring homomorphism, and $\\theta\\circ j_A=j_B$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0C6H (lemma-quasi-finite-permanence, line 30393), proof: 'the primes lying over q form a subset of the primes lying over p', realized by the map of fibre rings; fibre rings as in Remark Tag 00E6 (remark-fundamental-diagram, line 3422)"
+   }
+  },
+  {
+   "text": "*The point $\\mathfrak r$ in both fibres.* By [lem-weil-pbc-fibre-ring-primes-bijection] applied to $\\varphi:A\\to C$ and $\\mathfrak p$, there is a unique prime $\\overline{\\mathfrak r}_A$ of $F_A$ with $j_A^{-1}(\\overline{\\mathfrak r}_A)=\\mathfrak r$ (as $\\varphi^{-1}(\\mathfrak r)=\\mathfrak p$); by the same lemma applied to $\\chi:B\\to C$ and $\\mathfrak q$, there is a unique prime $\\overline{\\mathfrak r}_B$ of $F_B$ with $j_B^{-1}(\\overline{\\mathfrak r}_B)=\\mathfrak r$ (as $\\chi^{-1}(\\mathfrak r)=\\mathfrak q$). Claim: for a prime $\\mathfrak Q$ of $F_B$, $\\theta^{-1}(\\mathfrak Q)=\\overline{\\mathfrak r}_A$ if and only if $\\mathfrak Q=\\overline{\\mathfrak r}_B$. Indeed $\\theta^{-1}(\\mathfrak Q)$ is a prime of $F_A$ and, by step 2, $j_A^{-1}(\\theta^{-1}(\\mathfrak Q))=(\\theta\\circ j_A)^{-1}(\\mathfrak Q)=j_B^{-1}(\\mathfrak Q)$. If $\\mathfrak Q=\\overline{\\mathfrak r}_B$, then $j_A^{-1}(\\theta^{-1}(\\mathfrak Q))=\\mathfrak r$, so $\\theta^{-1}(\\mathfrak Q)=\\overline{\\mathfrak r}_A$ by the uniqueness for $\\varphi$. If $\\theta^{-1}(\\mathfrak Q)=\\overline{\\mathfrak r}_A$, then $j_B^{-1}(\\mathfrak Q)=j_A^{-1}(\\overline{\\mathfrak r}_A)=\\mathfrak r$, so $\\mathfrak Q=\\overline{\\mathfrak r}_B$ by the uniqueness for $\\chi$. Thus the map $\\theta^*:\\operatorname{Spec}F_B\\to\\operatorname{Spec}F_A$, $\\mathfrak Q\\mapsto\\theta^{-1}(\\mathfrak Q)$, satisfies $(\\theta^*)^{-1}(\\{\\overline{\\mathfrak r}_A\\})=\\{\\overline{\\mathfrak r}_B\\}$.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0C6H (lemma-quasi-finite-permanence, line 30393), proof: the primes of C over q are among those over p; the identification of the primes of a fibre ring with the primes over p is Remark Tag 00E6 (remark-fundamental-diagram, line 3422)"
+   }
+  },
+  {
+   "text": "*Conclusion.* The map $\\theta^*$ is continuous for the Zariski topologies [def-weil-affine-spectrum]: for an ideal $I\\subseteq F_A$ and a prime $\\mathfrak Q$ of $F_B$, $\\theta^*(\\mathfrak Q)\\in V(I)$ iff $I\\subseteq\\theta^{-1}(\\mathfrak Q)$ iff $\\theta(I)\\subseteq\\mathfrak Q$ iff $\\mathfrak Q\\in V(\\theta(I)F_B)$, so the preimage of a closed set is closed. Since $A\\to C$ is of finite type and quasi-finite at $\\mathfrak r$ [def-weil-pbc-ring-map-quasi-finite-at-prime], $\\{\\overline{\\mathfrak r}_A\\}$ is open in $\\operatorname{Spec}F_A$; hence its preimage $\\{\\overline{\\mathfrak r}_B\\}$ (step 3) is open in $\\operatorname{Spec}F_B=\\operatorname{Spec}(C\\otimes_B\\kappa(\\mathfrak q))$. As $B\\to C$ is of finite type (step 1) and $\\overline{\\mathfrak r}_B$ is the prime of $F_B$ corresponding to $\\mathfrak r$, this says by [def-weil-pbc-ring-map-quasi-finite-at-prime] that $B\\to C$ is quasi-finite at $\\mathfrak r$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0C6H (lemma-quasi-finite-permanence, line 30393), proof, last sentence (an isolated point of the fibre over p that lies over q is isolated in the fibre over q); the source argues with characterization (3) of Lemma Tag 00PK (lemma-isolated-point-fibre, line 30196)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0C6H (lemma-quasi-finite-permanence, line 30393) and its proof; the source's use of characterization (3) of Lemma Tag 00PK (D(c) meets the primes over p only in r) is replaced by the comparison map C⊗_Aκ(p) → C⊗_Bκ(q) and continuity of Spec, since the DAG's notion [def-weil-pbc-ring-map-quasi-finite-at-prime] is characterization (1) (isolated point of the fibre ring's spectrum) and no node states 00PK (1)⇔(3); same idea: the fibre over q sits inside the fibre over p. Tags verified in literature/stacks-project/tags/tags"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +91,38 @@
    "results": "Basic.lean:233 Algebra.QuasiFinite.of_restrictScalars [QuasiFinite R T] : QuasiFinite S T; Weakly.lean:211 WeaklyQuasiFiniteAt.of_restrictScalars",
    "date": "2026-10-10",
    "verdict": "candidate with Mathlib's QuasiFiniteAt (B8)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.QuasiFinite.of_restrictScalars (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.QuasiFinite.of_restrictScalars, lemma, Mathlib/RingTheory/QuasiFinite/Basic.lean (index: unavailable; found by name)",
+   "date": "2026-10-10",
+   "verdict": "candidate exists (for Mathlib's QuasiFinite/QuasiFiniteAt, B8); not a leaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "prime isolated in fiber of A → C is isolated in fiber of B → C for tower A → B → C",
+   "results": "Ideal.ncard_primesOver_mul_ncard_primesOver, Algebra.IsEtaleAt.comp, Algebra.IsUnramifiedAt.comp, Ideal.LiesOver.tower_bot, Ideal.IsPrime.under, Ideal.ramificationIdx_tower",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFiniteAt, IsScalarTower",
+   "results": "Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Ideal.Fiber.lift_residueField_surjective (Mathlib.RingTheory.QuasiFinite.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no pointwise tower-descent lemma for QuasiFiniteAt; candidate stays Algebra.QuasiFinite.of_restrictScalars (B8)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'QuasiFiniteAt.of_' Mathlib/RingTheory/",
+   "results": "ZariskisMainTheorem.lean:727 of_weaklyQuasiFiniteAt, :732 of_quasiFiniteAt_residueField, :742 of_isOpen_singleton_fiber; QuasiFinite/Basic.lean:381 of_surjectiveOnStalks, :390 of_surjectiveOnStalks_of_liesOver, :401 of_le, :481 of_isOpen_singleton",
+   "date": "2026-10-10",
+   "verdict": "no QuasiFiniteAt version of the tower descent; candidate Algebra.QuasiFinite.of_restrictScalars (Basic.lean:232-233) kept (B8)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +148,11 @@
   "file": "Mathlib/RingTheory/QuasiFinite/Basic.lean",
   "how": "Basic.lean:232-233: applied to T = Localization.AtPrime r (IsScalarTower A B C_r) it gives the node for Mathlib's QuasiFiniteAt in one line. Not a leaf (coord/delivery-errors.md B8): Mathlib's `Algebra.QuasiFiniteAt R p` is `QuasiFinite R (Localization.AtPrime p)` (Mathlib/RingTheory/QuasiFinite/Basic.lean:358), which agrees with the DAG's isolated-point notion [def-weil-pbc-ring-map-quasi-finite-at-prime] only through `Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber` (ZariskisMainTheorem.lean:754) and the fibre homeomorphism, a theorem with no node."
  },
- "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 0C6H, stated with the DAG's quasi-finite-at-prime notion. Unsplit; Mathlib candidates, if any, are for Mathlib's QuasiFiniteAt (B8)."
+ "reviewed": "Reviewed by L 2026-10-10: proof by agent (the source argues via 00PK (3)): the comparison map θ: C⊗_A κ(p) → C⊗_B κ(q) of fibre rings, under which the unique prime over r pulls back to the unique prime over r (fibre-ring bijection leaf), and continuity of Spec θ carries the isolated point. No new nodes; Mathlib candidate for the other notion kept (B8).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-finite-at-prime-permanence",
+  "worker": "stage1",
+  "summary": "Split along Stacks Algebra 0C6H in 4 steps: (1) B → C of finite type from the generators of C over A (00F4, elementary); (2) the ring map θ: C⊗_Aκ(p) → C⊗_Bκ(q), c⊗λ ↦ c⊗λ̄, with θ∘j_A = j_B, written out from the A-balanced map (elementary, def-weil-pbc-localization-at-prime); (3) by lem-weil-pbc-fibre-ring-primes-bijection (Mathlib leaf) applied to A → C and to B → C, Q ↦ θ^{-1}(Q) pulls the point r̄_A back to exactly {r̄_B}; (4) Spec θ is continuous, so {r̄_B} is open, which is the DAG's definition of quasi-finite at r. The source argues with 00PK (3) (D(c) ∩ primes over p = {r}); since the DAG's definition is 00PK (1) and no node states (1)⇔(3) or that Spec of the fibre ring is homeomorphic to the fibre, the subset argument is realized by θ, needing no new node (proof_origin agent, document 0C6H). Statement unchanged. Searches added: local_search, leansearch, loogle, grep; Mathlib candidate Algebra.QuasiFinite.of_restrictScalars kept, not a leaf (B8). No new nodes."
+ }
 }
