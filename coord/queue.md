@@ -1,8 +1,8 @@
 # Work queue
 
-899 items; claim with `tools/claim.py next <group> [--stage N]`.
+897 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (135)
+## Stage 1: nodes to split (133)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -60,8 +60,6 @@
 | `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
 | `lem-sc-base-change-curve` | - | none |
 | `thm-sc-constant-invariance` | - | none |
-| `def-nagata-morphism-equality-stage` | - | none |
-| `def-nagata-relative-gluing-datum-descent` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-pic-affine-quotient` | - | none |
@@ -911,7 +909,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1557 nodes that wait for a statement dependency, 175 nodes that wait for stage 1.
+Not open yet: 1559 nodes that wait for a statement dependency, 173 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
