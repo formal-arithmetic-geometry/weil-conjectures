@@ -280,6 +280,12 @@ lemma isZero_zeroObj : IsZero (zeroObj : Mod C R) :=
 
 instance : HasZeroObject (Mod C R) := ⟨⟨_, isZero_zeroObj⟩⟩
 
+instance [HasBinaryBiproducts C] : HasFiniteProducts (Mod C R) :=
+  hasFiniteProducts_of_has_binary_and_terminal
+
+instance [HasBinaryBiproducts C] : HasFiniteBiproducts (Mod C R) :=
+  HasFiniteBiproducts.of_hasFiniteProducts
+
 end ZeroObject
 
 end CategoryTheory.Mod
@@ -303,7 +309,6 @@ instance {M N : Mod C R} (f : M ⟶ N) : IsIso (Abelian.coimageImageComparison f
 /-- If `C` is abelian and `R ⊗ -` is right exact, the category of left `R`-module objects is
 abelian. -/
 noncomputable instance : Abelian (Mod C R) :=
-  letI : HasFiniteProducts (Mod C R) := hasFiniteProducts_of_has_binary_and_terminal
   Abelian.ofCoimageImageComparisonIsIso
 
 /-- The forgetful functor from module objects is left exact: it preserves kernels. -/
