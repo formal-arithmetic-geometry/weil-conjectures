@@ -1,0 +1,87 @@
+{
+ "id": "lem-sc-separated-over-affine-scheme-separated",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "## Proof, first sentence: the proper curve C must first be shown projective, using the dimension-one quasi-projectivity input; via Stacks 09NZ as used in 0A25: the separated finite-type k-scheme X is a separated scheme, as 09NZ requires",
+   "via": [
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A scheme separated over an affine scheme is separated",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] with $S$ affine (isomorphic to $\\operatorname{Spec}A$ for a commutative ring $A$ [def-weil-affine-spectrum]), for instance $S=\\operatorname{Spec}k$ for a field $k$. If $f$ is separated [def-weil-proper-morphism], then $X$ is separated, i.e. its structure morphism $X\\to\\operatorname{Spec}\\mathbf Z$ is separated [def-weil-proper-morphism].",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01KN (schemes-lemma-affine-separated: a morphism of affine schemes, in particular S -> Spec Z, is separated) and Lemma 01KU (schemes-lemma-separated-permanence, part (1): a composition of separated morphisms is separated), applied to X -> S -> Spec Z"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "separated morphism to an affine scheme implies the source scheme is separated",
+   "results": "LeanSearch service returned HTTP 500 (Internal Server Error) on every call during this session (MCP tool and https://leansearch.net/search both)",
+   "date": "2026-10-10",
+   "verdict": "not available (service error); the two other kinds decide"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if f : X ⟶ S is separated and S is affine then the scheme X is separated",
+   "results": "AlgebraicGeometry.IsSeparated.hasAffineProperty (Mathlib.AlgebraicGeometry.Morphisms.Separated), AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated, AlgebraicGeometry.IsSeparated.of_isAffineHom",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IsSeparated, AlgebraicGeometry.IsAffine",
+   "results": "AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine; AlgebraicGeometry.IsSeparated.hasAffineProperty (both Mathlib.AlgebraicGeometry.Morphisms.Separated)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance.*IsSeparated\\|IsSeparated.comp\\|iff_of_isAffine' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Separated.lean /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+   "results": "Separated.lean:75 instance [IsSeparated f] [IsSeparated g] : IsSeparated (f ≫ g); :338 class Scheme.IsSeparated (separated over ⊤_ Scheme = Spec ℤ); :354 instance [IsAffine X] : X.IsSeparated; :370 instance IsSeparated.hasAffineProperty : HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated; Basic.lean:579 HasAffineProperty.iff_of_isAffine [IsAffine Y] : P f ↔ Q f",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsSeparated.hasAffineProperty",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+  "how": "specializes in one line: Separated.lean line 370 (instance IsSeparated.hasAffineProperty : HasAffineProperty @IsSeparated fun X _ _ _ ↦ X.IsSeparated) with Mathlib/AlgebraicGeometry/Morphisms/Basic.lean line 579 (AlgebraicGeometry.HasAffineProperty.iff_of_isAffine [IsAffine Y] : P f ↔ Q f) gives, for S affine, IsSeparated f ↔ X.IsSeparated; X.IsSeparated is the class Scheme.IsSeparated (Separated.lean line 338), separatedness of X → ⊤_ Scheme = Spec ℤ. Equivalently, the composition instance at Separated.lean line 75 with the instance for affine S at line 354."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-dim-one-ample-invertible",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "by": "L",
+  "date": "2026-10-10",
+  "note": "Mathlib leaf: Separated.lean 370 hasAffineProperty with Basic.lean 579 iff_of_isAffine, read by L; equivalently composition (line 75) with the affine instance (line 354)"
+ }
+}
