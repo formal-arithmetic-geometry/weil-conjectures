@@ -1,23 +1,25 @@
 # Work queue
 
-928 items; claim with `tools/claim.py next <group> [--stage N]`.
+929 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (239)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
+| `def-weil-tower-transition-endomorphism` | 15 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-sc-topological-filtered-cohomology` | 2014 | none |
 | `lem-sc-krull-akizuki-noetherian` | 2017 | none |
 | `lem-sc-ringed-space-module-sheaves-enough-injectives` | 2019 | none |
-| `lem-pc-unbounded-derived-functor-cohomological-bound` | 3012 | none |
+| `lem-pc-derived-functor-truncation-stabilization` | 3013 | none |
+| `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
+| `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
 | `lem-pc-skyscraper-complex` | 3013 | none |
 | `lem-pc-stalk-tensor-complex` | 3013 | none |
 | `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `def-pc-derived-category-qcoh-algebra` | 3016 | none |
 | `def-pc-derived-rhom-algebra-module` | 3016 | none |
-| `def-pur-pseudo-coherent-complex` | 3016 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
 | `lem-pc-ringed-spaces-derived-adjoint-general` | 3016 | none |
 | `lem-sc-coherent-pseudo-coherent` | 3016 | none |
@@ -31,7 +33,6 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 3018 | none |
 | `lem-pc-left-localization-hom-colimit` | 3018 | none |
 | `lem-pc-right-localization-hom-colimit` | 3018 | none |
-| `lem-sc-affine-regular-immersion-kernel-criterion` | 3018 | none |
 | `lem-sc-etale-polynomial-diagonal-kernel-clearance` | 3018 | none |
 | `lem-sc-flat-polynomial-diagonal-differences-weakly-regular` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
@@ -60,7 +61,6 @@
 | `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
 | `lem-pc-flat-tensor-complex-cohom` | 5009 | none |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
-| `lem-pc-dense-subsite-sheafification-compatibility` | 5010 | none |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 5010 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
 | `lem-pc-bounded-above-flat-kflat` | 5011 | none |
@@ -246,7 +246,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (689)
+## Stage 2: nodes to state (690)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -364,6 +364,7 @@
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
 | `lem-sc-affine-maximal-points-closed-in-lft-scheme` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
+| `lem-sc-affine-regular-immersion-kernel-criterion` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
@@ -940,7 +941,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1362 nodes that wait for a statement dependency, 275 nodes that wait for stage 1.
+Not open yet: 1365 nodes that wait for a statement dependency, 275 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
