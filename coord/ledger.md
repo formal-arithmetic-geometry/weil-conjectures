@@ -2891,3 +2891,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:56 L: merged deliver/H1/def-sc-kahler-differentials (reviewer FIX; first push; new nodes: 0)
 - 22:56 L: merged deliver/E1/lem-weil-pbc-power-in-base-after-localization (reviewer FIX; first push; new nodes: 0)
 - 22:57 L: merged deliver/C1/lem-sc-affine-perfect-open-represent-cohomology (reviewer FIX; first push; new nodes: 2)
+- 22:57 L: merged deliver/G1/lem-sc-proper-flat-global-sections (reviewer FIX; first push; new nodes: 1)

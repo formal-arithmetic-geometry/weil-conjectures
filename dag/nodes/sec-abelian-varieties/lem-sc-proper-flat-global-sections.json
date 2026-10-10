@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Proper flat geometrically reduced connected fibres have universal structure-sheaf pushforward",
- "statement": "Let $f:X\\to S$ be a proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] morphism of schemes [def-weil-scheme-over-base] of finite presentation [def-sbc-locally-finite-presentation]. If every geometric fibre of $f$ is reduced and connected [def-weil-connected-scheme], then $f_*\\mathcal O_X\\cong\\mathcal O_S$, and this isomorphism remains true after every base change $T\\to S$ [def-pc-base-change].",
+ "statement": "Let $f:X\\to S$ be a proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] morphism of schemes [def-weil-scheme-over-base] of finite presentation [def-sbc-locally-finite-presentation]. If for every point $s\\in S$, with residue field $\\kappa(s)$ [def-weil-residue-field], the fibre $X_s$ is geometrically reduced and geometrically connected over $\\kappa(s)$ [def-pc-geometrically-irreducible] (that is, the geometric fibres of $f$ are reduced and connected), then $f_*\\mathcal O_X\\cong\\mathcal O_S$, and this isomorphism remains true after every base change $T\\to S$ [def-pc-base-change].",
  "source": {
   "document": "Stacks Project",
   "place": "Derived Categories of Schemes, Lemma 36.32.1, Tag 0E0L"
@@ -23,12 +23,46 @@
   "def-weil-flat-morphism",
   "def-weil-scheme-over-base",
   "def-sbc-locally-finite-presentation",
-  "def-weil-connected-scheme",
+  "def-weil-residue-field",
+  "def-pc-geometrically-irreducible",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the fibrewise criterion [lem-sc-proper-flat-global-sections-criterion] to $f$. Its proper, flat and finite-presentation hypotheses are exactly those in the statement. For each $s\\in S$, the fibre $X_s$ is proper over $\\kappa(s)$ (properness is stable under base change), and by hypothesis it is geometrically reduced and geometrically connected over $\\kappa(s)$ [def-pc-geometrically-irreducible]. Therefore [lem-pc-h0-geom-connected], applied over the field $\\kappa(s)$, identifies the canonical map $\\kappa(s)\\to H^0(X_s,\\mathcal O_{X_s})$ with an isomorphism.",
+   "uses": [
+    "lem-sc-proper-flat-global-sections-criterion",
+    "def-pc-geometrically-irreducible",
+    "lem-pc-h0-geom-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0E0L, label perfect-lemma-proper-flat-geom-red-connected, proof: reduction to Tag 0E62 and Varieties Tag 0BUG"
+   }
+  },
+  {
+   "text": "The criterion now gives $f_*\\mathcal O_X\\cong\\mathcal O_S$, and its universal base-change clause gives the same isomorphism after every morphism $T\\to S$.",
+   "uses": [
+    "lem-sc-proper-flat-global-sections-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0E0L, label perfect-lemma-proper-flat-geom-red-connected, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-proper-flat-global-sections-criterion",
+  "def-pc-geometrically-irreducible",
+  "lem-pc-h0-geom-connected"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 0E0L, label perfect-lemma-proper-flat-geom-red-connected"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,12 +94,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-general-theorem-of-cube",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-proper-flat-global-sections",
+  "worker": "stage1",
+  "summary": "Split Tag 0E0L into its precise preceding criterion (Tag 36.32.5/0E0K) and the fibre verification. The criterion is stated as a separate unsplit node; the item proof applies it and uses the existing proper geometrically connected/reduced global-sections node on each residue-field fibre. No exact sorry-free Lean declaration exists.",
+  "blueprint": "The two steps realize the theorem-of-the-cube ancestor's pushforward-of-structure-sheaf argument: apply Tag 0E0L to the product morphism and use its universal base-change conclusion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-h0-geom-connected",
+    "why": "The Tag 0E0L route needs the field theorem that proper geometrically connected and reduced fibres have H^0 equal to the residue field; no node in the theorem-of-the-cube unit provides this generic fibre calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-h0-geom-connected",
+  "lem-pc-h0-geom-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pfg2946",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pfg2946 (reviewer sub-agent of L); spot-checked: Criterion vs Tag 0E62 (clause (a) only, hypotheses match; no existing 0E62 node, no duplicate); Step 1 hypotheses of lem-pc-h0-geom-connected (proper over kappa(s), geometrically reduced, geometrically connected); citer lem-sc-general-theorem-of-cube step 2 supplies geometrically reduced+connected fibres over k; tool use lem-pc-h0-geom-connected accepted. FIX more, RETURN less: (1) C4/C1: statement said 'every geometric fibre reduced and connected' but cited def-pc-geometrically-irreducible (every-extension form) and Step 1 claimed the definition alone converts geometric fibres to geometrically reduced/connected X_s (needs Tags 0387/035X-type lemmas); restated hypothesis as fibres X_s geometrically reduced and connected over kappa(s), Step 1 now uses it by hypothesis; (2) B3: stmt_deps listed def-weil-connected-scheme though statement cites def-pc-geometrically-irreducible; replaced, added def-weil-residue-field.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-pfg2946): Item hypothesis restated as 'every fibre X_s geometrically reduced and geometrically connected over kappa(s)' (Stacks-equivalent to geometric fibres reduced and connected; exactly what lem-sc-general-theorem-of-cube supplies); later citers must supply that form."
 }
