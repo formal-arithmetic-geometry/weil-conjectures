@@ -50,15 +50,42 @@
    "results": "Generic valuation arithmetic declarations, but no exact Stacks-form statement",
    "date": "2026-10-11",
    "verdict": "generalization only"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem map_mul|theorem map_pow|map_add_of_distinct_val in namespace AddValuation, Mathlib/RingTheory/Valuation/Basic.lean",
+   "results": "AddValuation.map_mul line 1161, AddValuation.map_pow line 1193, AddValuation.map_add_of_distinct_val line 1262",
+   "date": "2026-10-10",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AddValuation.map_mul; AddValuation.map_pow; AddValuation.map_add_of_distinct_val",
+  "file": "Mathlib/RingTheory/Valuation/Basic.lean",
+  "line": 1161,
+  "how": "one declaration per clause, specialized to the normalized valuation of the DVR viewed as an AddValuation K (WithTop Z) on nonzero elements: map_mul (line 1161) gives v(ab)=v(a)+v(b); map_pow (line 1193) gives v(a^N)=N • v(a)=N v(a); map_add_of_distinct_val (line 1262) gives v(a+b)=min(v(a),v(b)) when v(a)≠v(b)"
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-sc-jacobson-denominator-function-field",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-dvr-valuation-arithmetic",
+  "worker": "stage1",
+  "summary": "Reviewer R-dva1730: the delivered leaf lem-sc-add-valuation-laws restated the item verbatim; the item itself is made the Mathlib leaf (one AddValuation declaration per clause) and the duplicate is dropped.",
+  "blueprint": "The steps realize the 09N5 induction sentence invoking valuation identities after replacing x by a power and forming x+y."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dva1730",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dva1730 (reviewer sub-agent of L); spot-checked: Read AddValuation.map_mul/map_pow/map_add_of_distinct_val at Mathlib Valuation/Basic.lean 1161/1193/1262. FIX more, RETURN less: (1) D2/B(b): new leaf lem-sc-add-valuation-laws restated the item verbatim (same DVR, K, w, three clauses), so the three steps cited the item itself; dropped it. (2) B(c): the item is itself a Mathlib fact, made a leaf (status mathlib, one declaration per clause, proof emptied); the leaf's 'how' also cited Valuation (not AddValuation) lines 156/195, corrected to 1161/1193/1262.; 1 file(s) fixed by the reviewer"
+ }
 }
