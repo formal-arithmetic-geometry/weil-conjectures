@@ -2565,3 +2565,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:48 L: merged deliver/C1/def-sc-field-extension (reviewer FIX; first push; new nodes: 0)
 - 20:49 L: merged deliver/M1/pqf-lem-coherent-ft-locnoeth (reviewer FIX; first push; new nodes: 0)
 - 20:49 L: attached AlgebraicGeometry.IsCurve.VanishingAboveOneOfIsAffine to def-weil-pbc-C2 (Assertions.lean:91-95, sorry-free; reviewer R-dc22410)
+- 20:49 L: returned deliver/C1/def-weil-pbc-C2 (reviewer RETURN: Reviewer R-dc22410 (packet review, 20:49 UTC), head 3f1d6620c. B10: nothing to split; the sorry-free declaration Algebra)
