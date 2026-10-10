@@ -3009,3 +3009,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:48 L: merged deliver/H1/lem-sc-affine-truncation-kernel-flat (reviewer FIX; first push; new nodes: 0)
 - 23:48 L: returned deliver/M1/lem-pc-coherent-property-devissage (reviewer RETURN: 1. D1/E (step 3, wrong mathematics): 'hypothesis (2)(a)-(d) gives P(i_*I)' misreads hypothesis (2) of Tag 01YI, which on)
 - 23:48 UTC L: reviewed under the lock since 23:48: C1 relative-kill-by-twisting PASS 21aee2fdf (R-rkt3147), H1 affine-truncation-kernel-flat FIX 6d2949824 (R-tkl3147; Tags 09U8/00HM cited); returned: M1 coherent-property-devissage b178f0d09 (R-cpd3148: step 3 misreads hypothesis (2) of Tag 01YI as holding for every G; needs lemma-property-irreducible, coherent.tex line 3179). Second readings missed a fault in 2 of 3.
+- 23:50 UTC L: deleted stale branch deliver/G1/lem-pc-affine-sections-flat-over-base (noclaim, node is a Mathlib leaf); notice in coord/returns/G1.md.
