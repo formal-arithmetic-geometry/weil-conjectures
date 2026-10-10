@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 public import Mathlib.CategoryTheory.Limits.Constructions.FiniteProductsOfBinaryProducts
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+public import Mathlib.CategoryTheory.Preadditive.LeftExact
 public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 
 /-!
@@ -26,6 +27,9 @@ objects of `C`: the forgetful functor `Mod C R ⥤ C` preserves them.
 * Cokernels use that `R ◁ cokernel.π f` is a cokernel of `R ◁ f`, which is where right
   exactness of `R ⊗ -` enters.
 * Binary biproducts and the zero object are computed in `C` as well.
+
+Consequently the forgetful functor `Mod C R ⥤ C` is exact: it preserves finite limits and finite
+colimits.
 
 -/
 
@@ -301,5 +305,13 @@ abelian. -/
 noncomputable instance : Abelian (Mod C R) :=
   letI : HasFiniteProducts (Mod C R) := hasFiniteProducts_of_has_binary_and_terminal
   Abelian.ofCoimageImageComparisonIsIso
+
+/-- The forgetful functor from module objects is left exact: it preserves kernels. -/
+instance : PreservesFiniteLimits (forget R : Mod C R ⥤ C) :=
+  Functor.preservesFiniteLimits_of_preservesKernels _
+
+/-- The forgetful functor from module objects is right exact: it preserves cokernels. -/
+instance : PreservesFiniteColimits (forget R : Mod C R ⥤ C) :=
+  Functor.preservesFiniteColimits_of_preservesCokernels _
 
 end CategoryTheory.Mod
