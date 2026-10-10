@@ -355,8 +355,9 @@ def apply_fixes(fixdir, kinds, tree, item=None, group=None):
             continue
         cur = json.loads((ROOT / rel).read_text())
         if kinds[rel] == "new" and not exists_at("HEAD", rel):
-            if fx.get("id") != cur.get("id") or fx.get("created") != cur.get("created"):
-                raise Fail(f"fix {rel}: id or created differ from the delivered new node")
+            if fx.get("id") != cur.get("id") or (fx.get("created") or {}).get("item") != (cur.get("created") or {}).get("item"):
+                raise Fail(f"fix {rel}: id or created.item differ from the delivered new node")
+            fx["created"] = cur.get("created")   # the maintainer's stamp (by/date filled at merge) wins
             tree.write(rel, dump(fx))
         elif kinds[rel] == "unit":
             tree.write(rel, dump(set_owned(cur, fx, UNIT_OWNS)))
