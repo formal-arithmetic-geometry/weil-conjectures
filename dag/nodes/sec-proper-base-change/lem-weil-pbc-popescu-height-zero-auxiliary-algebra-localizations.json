@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations",
+ "kind": "statement",
+ "title": "Localizations of the auxiliary algebra of the height-zero delocalization",
+ "statement": "Let $A$ be a commutative ring, $n,m\\ge0$, $r\\ge1$, $P=A[x_1,\\dots,x_n]$ the polynomial ring [def-weil-pbc-mv-polynomial-ring], $f_1,\\dots,f_m\\in P$ and $C=P/(f_1,\\dots,f_m)$, with $\\bar x_k$ the class of $x_k$. Let $$B=A[x_1,\\dots,x_n,y_1,\\dots,y_r,z,t_{ij}\\,(1\\le i\\le r,\\ 1\\le j\\le m)]\\big/\\big(f_j-\\textstyle\\sum_{i=1}^ry_it_{ij}\\ (1\\le j\\le m),\\ zy_i\\ (1\\le i\\le r)\\big),$$ an $A$-algebra; write $x_k,y_i,z,t_{ij}$ also for their classes in $B$, and for $g\\in B$ let $B_g$ be the localization of $B$ at $\\{1,g,g^2,\\dots\\}$. (1) The homomorphism of $A$-algebras $B\\to C[t_{ij},z]_z$ (polynomial ring over $C$ in the $rm+1$ variables $t_{ij},z$, localized at $z$) with $x_k\\mapsto\\bar x_k$, $y_i\\mapsto0$, $z\\mapsto z$, $t_{ij}\\mapsto t_{ij}$ is well defined and induces an isomorphism of $A$-algebras $B_z\\cong C[t_{ij},z]_z$. (2) For each $\\ell\\in\\{1,\\dots,r\\}$ let $Q_\\ell=A[x_1,\\dots,x_n,y_1,\\dots,y_r,t_{ij}\\,(i\\ne\\ell)]$ be the polynomial ring in the variables other than $z$ and the $t_{\\ell j}$. The homomorphism of $A$-algebras $Q_\\ell\\to B$ sending each variable to its class induces an isomorphism of $A$-algebras $(Q_\\ell)_{y_\\ell}\\cong B_{y_\\ell}$; its inverse sends $z\\mapsto0$ and $t_{\\ell j}\\mapsto y_\\ell^{-1}\\big(f_j-\\sum_{i\\ne\\ell}y_it_{ij}\\big)$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FA (lemma-delocalize-height-zero), lines 2266-2275 (the claims 'B_z is isomorphic to C[y_1,...,y_r,z,z^{-1}]' and 'B_{y_l} = A[x_i,y_i,y_l^{-1},t_ij, i != l]'); Stacks' C[y_1,...,y_r,z,z^{-1}] is a misprint for C[t_ij,z,z^{-1}] (the y_i die in B_z since z y_i = 0)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of quotient of polynomial ring away from a variable is isomorphic to polynomial ring with variable eliminated",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv (MvPolynomial.Localization: R[X]/(rX-1) = R_r), Localization.awayEquivAdjoin, IsLocalization.adjoin_inv (Localization.Away.AdjoinRoot), Polynomial.quotientSpanXSubCAlgEquiv (Polynomial.Quotient): only the presentation of R_r and the quotient by X - c, not this elimination",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization.Away of MvPolynomial quotient by relation z * y = 0 isomorphic to quotient with y = 0, eliminate variable solving linear relation after inverting coefficient",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv(_apply), Algebra.Generators.compLocalizationAwayAlgHom_X_inl / _relation_eq_zero (Extension.Cotangent.LocalizationAway), Algebra.Generators.toAlgHom_ofComp_localizationAway, Algebra.Presentation.relation_comp_localizationAway_inl: presentations of localizations, not this isomorphism",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, MvPolynomial, HasQuotient.Quotient",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv, IsLocalization.Away.mvPolynomialQuotientEquiv_apply, Algebra.Generators.compLocalizationAwayAlgHom_relation_eq_zero",
+   "date": "2026-10-10",
+   "verdict": "no match (the building block R[X]/(rX-1) = R_r is there; the isomorphisms of the node must be assembled from it, from Ideal.quotientEquiv-type lemmas and IsLocalization.Away API)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'quotientSpan.*Away\\|away.*quotient.*X' Mathlib/RingTheory/MvPolynomial/Localization.lean and grep -rln 'Ideal.span {.*X .* \\* .*X' Mathlib/RingTheory",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-delocalize-height-zero",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-popescu-delocalize-height-zero",
  "kind": "statement",
  "title": "Delocalizing a resolution at a prime of height zero",
- "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $A$ an $R$-algebra of finite presentation, $A\\to\\Lambda$ a homomorphism of $R$-algebras and $\\mathfrak q\\subset\\Lambda$ a prime ideal, with $\\mathfrak h_A=\\sqrt{H_{A/R}\\Lambda}$ as in [def-weil-pbc-popescu-resolution]. Let $\\mathfrak p\\subset R$ be the inverse image of $\\mathfrak q$, $R_{\\mathfrak p}$ and $\\Lambda_{\\mathfrak q}$ the localizations [def-weil-pbc-localization-at-prime] and $A_{\\mathfrak p}=A\\otimes_RR_{\\mathfrak p}$ (of finite presentation over $R_{\\mathfrak p}$, with the induced map $A_{\\mathfrak p}\\to\\Lambda_{\\mathfrak q}$). Assume (1) $\\mathfrak q$ is minimal over $\\mathfrak h_A$; (2) $R_{\\mathfrak p}\\to A_{\\mathfrak p}\\to\\Lambda_{\\mathfrak q}\\supset\\mathfrak q\\Lambda_{\\mathfrak q}$ can be resolved [def-weil-pbc-popescu-resolution]; (3) $\\dim\\Lambda_{\\mathfrak q}=0$. Then $R\\to A\\to\\Lambda\\supset\\mathfrak q$ can be resolved.",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $A$ an $R$-algebra of finite presentation, $A\\to\\Lambda$ a homomorphism of $R$-algebras and $\\mathfrak q\\subset\\Lambda$ a prime ideal, with $\\mathfrak h_A=\\sqrt{H_{A/R}\\Lambda}$ as in [def-weil-pbc-popescu-resolution]. Let $\\mathfrak p\\subset R$ be the inverse image of $\\mathfrak q$, $R_{\\mathfrak p}$ and $\\Lambda_{\\mathfrak q}$ the localizations [def-weil-pbc-localization-at-prime] and $A_{\\mathfrak p}=A\\otimes_RR_{\\mathfrak p}$ (of finite presentation over $R_{\\mathfrak p}$, with the induced map $A_{\\mathfrak p}\\to\\Lambda_{\\mathfrak q}$). Assume (1) $\\mathfrak q$ is minimal over $\\mathfrak h_A$; (2) $R_{\\mathfrak p}\\to A_{\\mathfrak p}\\to\\Lambda_{\\mathfrak q}\\supset\\mathfrak q\\Lambda_{\\mathfrak q}$ can be resolved [def-weil-pbc-popescu-resolution]; (3) $\\dim\\Lambda_{\\mathfrak q}=0$ (Krull dimension: every prime ideal of $\\Lambda_{\\mathfrak q}$ is maximal, i.e. $\\mathfrak q\\Lambda_{\\mathfrak q}$ is its only prime). Then $R\\to A\\to\\Lambda\\supset\\mathfrak q$ can be resolved.",
  "source": {
   "document": "literature/stacks-project/smoothing.tex",
   "place": "Smoothing Ring Maps, Lemma Tag 07FA (lemma-delocalize-height-zero, line 2230), Section 07F6 (section-local)"
@@ -10,11 +10,133 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-popescu-resolution",
-  "def-weil-pbc-localization-at-prime"
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-singular-ideal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Generators of $H_{A/R}$.) $A$ is of finite presentation, in particular of finite type, over the Noetherian ring $R$, hence $A$ is Noetherian [lem-weil-pbc-finite-type-algebra-noetherian], so the ideal $H_{A/R}\\subset A$ [def-weil-pbc-singular-ideal] is finitely generated [def-weil-pbc-noetherian-ring]: $H_{A/R}=(a_1,\\dots,a_r)$ with $r\\ge0$ (if $r=0$ read the constructions below with no $y_i$, $t_{ij}$).",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-singular-ideal",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FA (lemma-delocalize-height-zero), line 2252 ('Say H_{A/R} = (a_1, ..., a_r)')"
+   }
+  },
+  {
+   "text": "(The element $\\lambda$ and the exponent $N$.) By (1), $\\mathfrak h_A\\subset\\mathfrak q$ [def-weil-pbc-popescu-resolution], so $\\alpha(a_i)\\in\\mathfrak q$ for all $i$. $\\Lambda_{\\mathfrak q}$ is local with maximal ideal $\\mathfrak q\\Lambda_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime]; by (3) every prime of $\\Lambda_{\\mathfrak q}$ is maximal, so $\\mathfrak q\\Lambda_{\\mathfrak q}$ is its only prime ideal, and $\\sqrt{0}=\\bigcap_{\\mathfrak P\\in V(0)}\\mathfrak P=\\mathfrak q\\Lambda_{\\mathfrak q}$ in $\\Lambda_{\\mathfrak q}$ [lem-weil-pbc-zero-locus-eq-iff-radical-eq]. Hence each $\\alpha(a_i)/1$ is nilpotent; take $N\\ge1$ with $(\\alpha(a_i)/1)^N=0$ for all $i$. By the definition of the localization there are $\\lambda_i\\in\\Lambda\\setminus\\mathfrak q$ with $\\lambda_i\\alpha(a_i)^N=0$ in $\\Lambda$; $\\lambda=\\lambda_1\\cdots\\lambda_r\\notin\\mathfrak q$ ($\\mathfrak q$ prime; $\\lambda=1$ if $r=0$) satisfies $\\lambda\\alpha(a_i)^N=0$ for all $i$. (Stacks says $\\Lambda_{\\mathfrak q}$ is Artinian, hence $\\mathfrak q\\Lambda_{\\mathfrak q}$ nilpotent and $\\lambda(\\mathfrak h_A)^N=0$; $\\Lambda$ is not assumed Noetherian, so only the elementwise nilpotence written here holds, and it is all the proof uses.)",
+   "uses": [
+    "def-weil-pbc-popescu-resolution",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FA (lemma-delocalize-height-zero), lines 2245-2253"
+   }
+  },
+  {
+   "text": "(The intermediate algebra $C$.) By (1), (2) and [lem-weil-pbc-popescu-delocalize-weak] (Stacks 07F9) there is a factorization $A\\xrightarrow{\\beta}C\\xrightarrow{\\gamma}\\Lambda$ of $\\alpha$ by $R$-algebra maps, $C$ of finite presentation over $R$, with $H_{C/R}\\Lambda\\not\\subset\\mathfrak q$; since this ideal is generated by $\\gamma(H_{C/R})$, there is $c\\in H_{C/R}$ [def-weil-pbc-singular-ideal] with $\\gamma(c)\\notin\\mathfrak q$. $C$ is generated as an $A$-algebra by the images of finitely many $R$-algebra generators, so it is of finite type over the Noetherian ring $A$ (Step 1), hence of finite presentation over $A$ [lem-weil-pbc-finite-type-noetherian-finite-presentation]: fix $C=A[x_1,\\dots,x_n]/(f_1,\\dots,f_m)$ [def-weil-pbc-mv-polynomial-ring] with $\\beta$ the structure map, and choose $p_c\\in A[x_1,\\dots,x_n]$ with class $c$.",
+   "uses": [
+    "lem-weil-pbc-popescu-delocalize-weak",
+    "def-weil-pbc-singular-ideal",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FA (lemma-delocalize-height-zero), lines 2254-2256"
+   }
+  },
+  {
+   "text": "(The algebra $B$ and the map $B\\to\\Lambda$.) Put $B=A[x_1,\\dots,x_n,y_1,\\dots,y_r,z,t_{ij}]/(f_j-\\sum_iy_it_{ij},\\ zy_i)$, $t_{ij}$ being $rm$ variables ($1\\le i\\le r$, $1\\le j\\le m$) [def-weil-pbc-mv-polynomial-ring]. $B$ is generated as an $R$-algebra by the images of finitely many $R$-algebra generators of $A$ and the classes of the variables, so it is of finite type over the Noetherian ring $R$, hence of finite presentation over $R$ [lem-weil-pbc-finite-type-noetherian-finite-presentation]. Define the $A$-algebra map $\\delta:B\\to\\Lambda$ by $x_k\\mapsto\\gamma(\\bar x_k)$, $y_i\\mapsto\\alpha(a_i)^N$, $z\\mapsto\\lambda$, $t_{ij}\\mapsto0$ (with $A\\to\\Lambda$ equal to $\\alpha=\\gamma\\beta$): it is well defined because $f_j-\\sum_iy_it_{ij}\\mapsto\\gamma(\\bar f_j)=0$ and $zy_i\\mapsto\\lambda\\alpha(a_i)^N=0$ (Step 2). (This is Stacks' composite $B\\to C[y_i,z]/(y_iz)\\to\\Lambda$, $t_{ij}\\mapsto0$.) Thus $A\\to B\\xrightarrow{\\delta}\\Lambda$ is a factorization of $\\alpha$ by $R$-algebra maps, and, writing $c'\\in B$ for the class of $p_c$, $\\delta(c')=\\gamma(c)$, $\\delta(zc')=\\lambda\\gamma(c)\\notin\\mathfrak q$ and $\\delta(a_\\ell y_\\ell)=\\alpha(a_\\ell)^{N+1}$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FA (lemma-delocalize-height-zero), lines 2256-2264"
+   }
+  },
+  {
+   "text": "($zc'$ lies in $H_{B/R}$.) By [lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations] (1), $B_z\\cong C[t_{ij},z]_z$ as $A$-algebras, with $c'\\mapsto c$. $C\\to C[t_{ij},z]$ is smooth [lem-weil-pbc-polynomial-ring-smooth], and so is $C\\to C[t_{ij},z]_z$ [lem-weil-pbc-smooth-ring-map-principal-localization]. Base change along $C\\to C_c$ gives that $C_c\\to C_c\\otimes_CB_z\\cong(B_z)_c$ [lem-weil-pbc-localization-tensor] is smooth, and $R\\to C_c$ is smooth because $c\\in H_{C/R}$ [lem-weil-pbc-singular-ideal-localization-smooth]; so the composite $R\\to(B_z)_c$ is smooth [lem-weil-pbc-smooth-ring-map-base-change-composition]. Finally $(B_z)_{c'}\\cong B_{zc'}$ as $B$-algebras [lem-weil-pbc-localization-of-localization], so $B_{zc'}$ is a smooth $R$-algebra and $zc'\\in H_{B/R}$ [def-weil-pbc-singular-ideal]. (Stacks writes $B_z\\cong C[y_1,\\dots,y_r,z,z^{-1}]$ 'hence smooth', and concludes $z\\in H_{B/R}$; but $C$ is not smooth over $R$, and the correct statement is $zc'\\in H_{B/R}$ for $c\\in H_{C/R}$, which is what the conclusion needs.)",
+   "uses": [
+    "lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "lem-weil-pbc-localization-tensor",
+    "lem-weil-pbc-singular-ideal-localization-smooth",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-localization-of-localization",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FA (lemma-delocalize-height-zero), lines 2266-2268, 2271-2273"
+   }
+  },
+  {
+   "text": "($a_\\ell y_\\ell$ lies in $H_{B/R}$.) Fix $\\ell$. By [lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations] (2), $B_{y_\\ell}\\cong(Q_\\ell)_{y_\\ell}$ with $Q_\\ell=A[x_k,y_i,t_{ij}\\,(i\\ne\\ell)]$ as $A$-algebras; $A\\to Q_\\ell$ is smooth [lem-weil-pbc-polynomial-ring-smooth] and so is $A\\to(Q_\\ell)_{y_\\ell}$ [lem-weil-pbc-smooth-ring-map-principal-localization]. Base change along $A\\to A_{a_\\ell}$: $A_{a_\\ell}\\to A_{a_\\ell}\\otimes_AB_{y_\\ell}\\cong(B_{y_\\ell})_{a_\\ell}$ [lem-weil-pbc-localization-tensor] is smooth; $R\\to A_{a_\\ell}$ is smooth as $a_\\ell\\in H_{A/R}$ [lem-weil-pbc-singular-ideal-localization-smooth]; so $R\\to(B_{y_\\ell})_{a_\\ell}$ is smooth [lem-weil-pbc-smooth-ring-map-base-change-composition] ('compositions of smooth maps are smooth'). As $(B_{y_\\ell})_{a_\\ell}\\cong B_{a_\\ell y_\\ell}$ [lem-weil-pbc-localization-of-localization], $a_\\ell y_\\ell\\in H_{B/R}$ [def-weil-pbc-singular-ideal].",
+   "uses": [
+    "lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "lem-weil-pbc-localization-tensor",
+    "lem-weil-pbc-singular-ideal-localization-smooth",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-localization-of-localization",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FA (lemma-delocalize-height-zero), lines 2269-2273"
+   }
+  },
+  {
+   "text": "(Conclusion.) With $\\mathfrak h_B=\\sqrt{H_{B/R}\\Lambda}$ formed with $\\delta$ [def-weil-pbc-popescu-resolution]: $\\delta(zc')=\\lambda\\gamma(c)\\in H_{B/R}\\Lambda\\setminus\\mathfrak q$ (Steps 4, 5), so $\\mathfrak h_B\\not\\subset\\mathfrak q$; and $\\alpha(a_\\ell)^{N+1}=\\delta(a_\\ell y_\\ell)\\in H_{B/R}\\Lambda$ (Steps 4, 6), so $\\alpha(a_\\ell)\\in\\mathfrak h_B$ for every $\\ell$, hence $H_{A/R}\\Lambda=(\\alpha(a_1),\\dots,\\alpha(a_r))\\subset\\mathfrak h_B$ and, $\\mathfrak h_B$ being radical, $\\mathfrak h_A\\subset\\mathfrak h_B$. With $B$ of finite presentation over $R$ (Step 4), $A\\to B\\xrightarrow{\\delta}\\Lambda$ is a resolution of $R\\to A\\to\\Lambda\\supset\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-popescu-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07FA (lemma-delocalize-height-zero), lines 2264-2275 ('We claim that B is a solution ... This proves the lemma')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-popescu-delocalize-weak",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-ring-map-principal-localization",
+  "lem-weil-pbc-localization-tensor",
+  "lem-weil-pbc-singular-ideal-localization-smooth",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-localization-of-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07FA (lemma-delocalize-height-zero), proof lines 2245-2275; corrections: elementwise nilpotence instead of 'Lambda_q Artinian' (Lambda not Noetherian), zc' (c in H_{C/R}) instead of z in H_{B/R}, B_z = C[t_ij,z,z^{-1}] instead of C[y_i,z,z^{-1}], inclusion h_A in h_B written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,7 +161,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +181,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-popescu-delocalize-height-zero",
+  "worker": "stage1",
+  "summary": "Wrote the proof of Stacks 07FA (smoothing.tex 2245-2275) in 7 steps. The proof cites only Lemma 07F9 (lemma-delocalize-weak), not 07F4 (delocalize-base), 07CT (desingularize-strictly-standard), Ogoma or strictly standard elements as the brief guessed; new unsplit nodes: lem-weil-pbc-popescu-delocalize-weak (07F9) and lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations (the two isomorphisms B_z = C[t,z]_z and B_{y_l} = A[...]_{y_l} that Stacks asserts). Existing tools used: finite-type-algebra-noetherian, finite-type-noetherian-finite-presentation, zero-locus-eq-iff-radical-eq, singular-ideal-localization-smooth, polynomial-ring-smooth, smooth-ring-map-principal-localization, smooth-ring-map-base-change-composition, localization-tensor, localization-of-localization. Corrections to Stacks: (a) Lambda_q is only zero-dimensional local, not Artinian (Lambda arbitrary), so only each a_i^N dies, which suffices; (b) B_z is C[t_ij,z,z^{-1}], not C[y_i,z,z^{-1}], and it is smooth over C, not over R: z is not shown to be in H_{B/R}; z c' with c in H_{C/R}, gamma(c) not in q, is, and maps outside q; (c) the inclusion h_A in h_B (part of 'resolved') is derived from a_l y_l -> alpha(a_l)^{N+1}. Statement unchanged except that dim = 0 is spelled out; def-weil-pbc-singular-ideal added to stmt_deps (H_{A/R} is in the statement)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "7 steps follow Stacks 07FA with three corrections written into the steps: Lambda_q need not be Artinian (only elementwise nilpotence of the alpha(a_i) is used), B_z = C[t_ij, z]_z (Stacks' C[y, z, z^{-1}] is a misprint) so the element in H_{B/R} is zc' with c in H_{C/R} rather than z, and h_A subset h_B derived from a_l y_l. New nodes: 07F9 (delocalize-weak) and the two localization isomorphisms of B. L checked the isomorphisms and the smoothness chains. Tags 07FA, 07F9 verified."
+ }
 }
