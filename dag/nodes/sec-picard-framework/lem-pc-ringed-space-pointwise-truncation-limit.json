@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "proof, first step, truncation tower (via Stacks 08D3): the pointwise truncation criterion used to establish the tower",
+   "place": "proof of lem-sc-finite-duality, first step, truncation tower (via Stacks 08D3): the pointwise truncation criterion used to establish the tower",
    "via": []
   },
   "same_as": []
@@ -26,9 +26,68 @@
   "pqf-def-cohomology",
   "def-sc-ringed-space-module-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K_n=\\tau_{\\geq-n}E$ and let $(K,p,\\delta)$ be the chosen derived limit. The canonical maps $c_n:E\\to K_n$ are compatible with the transitions $f_n:K_{n+1}\\to K_n$, i.e. $c_n=f_n\\circ c_{n+1}$; let $a:E\\to\\prod_nK_n$ be the morphism with $\\mathrm{pr}_n\\circ a=c_n$ [def-weil-derived-limit]. Then $\\mathrm{pr}_n\\circ(1-s)\\circ a=c_n-f_n\\circ c_{n+1}=0$ for every $n$, so $(1-s)\\circ a=0$, and exactness of $\\mathrm{Hom}(E,K)\\to\\mathrm{Hom}(E,\\prod_nK_n)\\to\\mathrm{Hom}(E,\\prod_nK_n)$ on the Roos triangle [lem-weil-pbc-hom-into-triangle-exact] gives $c:E\\to K$ with $p\\circ c=a$, i.e. $\\mathrm{pr}_n\\circ p\\circ c=c_n$ for every $n$ (this is Derived Categories Remark Tag 0H72). For a fixed integer $m$ and every $n\\geq-m$, the truncation map induces an isomorphism $H^m(E)\\to H^m(K_n)$ by the defining property of the standard truncation [def-sbc-standard-tstructure-derived-category].",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-derived-limit",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D62, proof, first paragraph; derived.tex Tag 0H72"
+   }
+  },
+  {
+   "text": "Fix $x$ and $m$, and set $n(x)=\\max\\{0,\\ 1+\\max\\{-m,\\ p(x,m-1)-m,\\ -1+p(x,m)-m,\\ -2+p(x,m+1)-m\\}\\}$ (Tag 0D62's bound, raised to $0$ so that $K_{n(x)}$ is a member of the system indexed by $n\\geq0$). Then $n(x)\\geq-m$ and $n(x)\\geq0$. For every $n\\geq n(x)$, the three integers $m+n$, $m+n+1$, and $m+n+2$ are respectively larger than $p(x,m-1)$, $p(x,m)$, and $p(x,m+1)$. Since the cohomology sheaf in the truncation triangle is $H^{-n-1}(E)$, the pointwise hypothesis therefore gives $H^{m+n+i}(U,H^{-n-1}(E))=0$ for $i=0,1,2$ and every $U\\in\\mathfrak U_x$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D62, proof, choice of n(x) and final vanishing"
+   }
+  },
+  {
+   "text": "The distinguished triangle $H^{-n-1}(E)[n+1]\\to K_{n+1}\\to K_n\\to H^{-n-1}(E)[n+2]$ is the successive-truncation triangle [lem-pc-derived-lower-truncation-step-triangle]. Its long exact cohomology sequence, together with the three vanishings from the preceding step, shows that for $n\\geq n(x)$ and $U\\in\\mathfrak U_x$ both transition maps $H^{m-1}(U,K_{n+1})\\to H^{m-1}(U,K_n)$ and $H^m(U,K_{n+1})\\to H^m(U,K_n)$ are isomorphisms.",
+   "uses": [
+    "lem-pc-derived-lower-truncation-step-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D62, proof, truncation triangle and long exact sequence"
+   }
+  },
+  {
+   "text": "Write $A_n=H^{m-1}(U,K_n)$ with transitions $g_n:A_{n+1}\\to A_n$, which are isomorphisms for $n\\geq n(x)$ by the preceding step. By [lem-pc-derived-limit-roos-abelian-groups], $R^1\\varprojlim_nA_n\\cong\\operatorname{coker}(1-s)$, and $1-s$ is surjective: given $(a_n)_n$, put $b_{n(x)}=0$, $b_{n+1}=g_n^{-1}(b_n-a_n)$ for $n\\geq n(x)$ and $b_n=a_n+g_n(b_{n+1})$ for $n<n(x)$ (descending); then $b_n-g_n(b_{n+1})=a_n$ for all $n$. Hence $R^1\\varprojlim_n H^{m-1}(U,K_n)=0$; and the composites of the isomorphisms in degree $m$ give injections (indeed isomorphisms) $H^m(U,K_n)\\to H^m(U,K_{n(x)})$ for all $n\\geq n(x)$. Applying [lem-pc-ringed-space-derived-limit-stalk-injective], whose short exact sequence input is [lem-pc-ringed-space-rgamma-derived-limit], gives that $H^m(K)_x\\to H^m(K_{n(x)})_x$, the map induced by $\\mathrm{pr}_{n(x)}\\circ p$, is injective. For any morphism $c:E\\to K$ with $\\mathrm{pr}_n\\circ p\\circ c=c_n$ for all $n$, its composite $H^m(E)_x\\to H^m(K)_x\\to H^m(K_{n(x)})_x$ is $H^m(c_{n(x)})_x$, the truncation isomorphism from Step 1 (as $n(x)\\geq-m$), hence $H^m(E)_x\\to H^m(K)_x$ is surjective, and injective since the composite is; so it is an isomorphism. This holds for every $x$ and $m$, so $H^m(c)$ is an isomorphism of sheaves for every $m$ and every such $c$ is an isomorphism in the derived category.",
+   "uses": [
+    "lem-pc-derived-limit-roos-abelian-groups",
+    "lem-pc-ringed-space-derived-limit-stalk-injective",
+    "lem-pc-ringed-space-rgamma-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D62, proof, application of Tag 0D61"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-derived-limit",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-pc-ringed-space-derived-limit-stalk-injective",
+  "lem-pc-ringed-space-rgamma-derived-limit",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-pc-derived-limit-roos-abelian-groups"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D62, label lemma-is-limit-per-point"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,5 +124,21 @@
   "by": "worker",
   "date": "2026-10-10"
  },
- "status": "unsplit"
+ "status": "split",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ringed-space-pointwise-truncation-limit",
+  "worker": "stage1",
+  "summary": "Split Tag 0D62 into the local derived-sections exact-sequence lemma (Tag 0D60) and the stalk-injectivity criterion (Tag 0D61). The four parent steps explicitly choose the bound n(x), prove stabilization through the successive truncation triangle, apply the criterion, and conclude stalkwise quasi-isomorphism.",
+  "blueprint": "The steps realize the truncation-tower argument in the first step of blueprint ancestor lem-sc-finite-duality (via Stacks 08D3).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ptl2526",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptl2526 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0D62+0H72 (existence and every-c iso both stated); n(x) bounds checked for m<0,=0,>0; Step 3 LES vanishings match Step 2; new nodes = Tags 0D60/0D61 exact, not duplicates (lem-pc-derived-functor-commutes-derived-limit is scheme-only, Milnor node is D(Ab)), real lemmas. FIX more, RETURN less: (1) C1 Step 4: R^1 lim H^{m-1}(U,K_n)=0 from eventual isomorphisms was uncited; now cites lem-pc-derived-limit-roos-abelian-groups (R^1 lim = coker(1-s)) with explicit surjectivity of 1-s; (2) C1 Step 1: 0H72 lift written out via Roos triangle and lem-weil-pbc-hom-into-triangle-exact (generic tool); (3) E Step 2: n(x) raised to max(0,...) since the tower is indexed by n>=0 and Tag 0D62's n(x) can be negative for m>0; Step 4 now says why the composite is H^m(c_{n(x)}) for every compatible c.; 1 file(s) fixed by the reviewer"
+ }
 }
