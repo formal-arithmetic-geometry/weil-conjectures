@@ -54,7 +54,7 @@
 | `lem-sc-kummer-base-change-compatibility` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-sc-affine-unit-divisor-base-change` | - | none |
-| `lem-kun-cp-approximation` | - | none |
+| `lem-kun-etale-lfp` | - | none |
 | `lem-pur-kinjective-degreewise-existence` | - | none |
 | `lem-pur-ringed-site-grothendieck-abelian` | - | none |
 | `lem-weil-common-extension-fields` | - | none |
@@ -875,7 +875,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1654 nodes that wait for a statement dependency, 100 nodes that wait for stage 1.
+Not open yet: 1655 nodes that wait for a statement dependency, 100 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
