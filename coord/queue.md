@@ -64,7 +64,6 @@
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-galois-pi1-finite-etale-image-stabilizer` | 3006 | none |
 | `lem-sc-artin-schreier-dimension` | 3006 | none |
-| `lem-sc-as-sequence` | 3006 | none |
 | `lem-sc-cohomological-dimension` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-etale-finite-data-descent` | 3006 | none |
@@ -72,6 +71,7 @@
 | `thm-galois-abstract-equivalence` | 3006 | none |
 | `def-galois-category` | 3007 | none |
 | `def-sc-divisor` | 3007 | none |
+| `def-sc-etale-qcoherent-module` | 3007 | none |
 | `lem-galois-action-continuous` | 3007 | none |
 | `lem-galois-axioms` | 3007 | none |
 | `lem-galois-constant-sheaf-sets-representable` | 3007 | none |
@@ -81,16 +81,17 @@
 | `lem-sc-ample-complement-affine` | 3007 | sorry_here |
 | `lem-sc-divisor-class-curve` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
+| `lem-sc-etale-qcoherent-descent` | 3007 | none |
 | `lem-sc-function-field-cd-one` | 3007 | none |
 | `lem-sc-ga-cohomology` | 3007 | none |
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
+| `lem-sc-local-ring-artin-schreier-kernel` | 3007 | none |
 | `lem-sc-pic-proper-decomposition` | 3007 | none |
 | `lem-sc-positive-degree-ample` | 3007 | rests_on_sorry |
 | `lem-sc-zero-generic-acyclic` | 3007 | rests_on_sorry |
 | `thm-av-final` | 3007 | rests_on_sorry |
 | `thm-sc-jacobian-representability` | 3007 | rests_on_sorry |
 | `def-pc-smooth-projective-curve` | 3008 | none |
-| `def-sc-etale-qcoherent-module` | 3008 | none |
 | `def-sc-function-field` | 3008 | none |
 | `def-sc-picard-functor` | 3008 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
@@ -108,7 +109,6 @@
 | `def-pc-morphism-conventions` | 3009 | none |
 | `def-pc-projective-morphism` | 3009 | none |
 | `lem-pc-degree-base-change` | 3009 | rests_on_sorry |
-| `lem-sc-etale-qcoherent-descent` | 3009 | none |
 | `lem-sc-riemann-roch` | 3009 | rests_on_sorry |
 | `lem-sc-riemann-roch-large-degree` | 3009 | rests_on_sorry |
 | `lem-sc-second-kummer-divisors` | 3009 | none |
@@ -866,7 +866,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 397 nodes that wait for stage 1, 872 nodes that wait for a statement dependency.
+Not open yet: 397 nodes that wait for stage 1, 873 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
