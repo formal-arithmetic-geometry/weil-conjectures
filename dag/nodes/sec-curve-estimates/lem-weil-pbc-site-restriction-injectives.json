@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-site-restriction-injectives",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proof, proper case: restriction to the localized site preserves injective resolutions",
+   "via": [
+    "lem-weil-pbc-cohomology-over-object-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Extension by zero and restriction on a localized site",
+ "statement": "Let $\\mathcal C$ be a Grothendieck site [def-weil-pbc-sites-and-cohomology] and let $W$ be an object. Give the slice $\\mathcal C/W$ the localized topology, with coverings those whose underlying families cover in $\\mathcal C$. The restriction functor $j_W^*:\\operatorname{Ab}(\\mathcal C)\\to\\operatorname{Ab}(\\mathcal C/W)$, $G\\mapsto G|_W$, has a left adjoint $j_{W!}$ (extension by zero), and $j_{W!}$ is exact. The restriction functor $j_W^*$ is exact as well [def-sp-abelian].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Section 03DH and Lemmas 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact), specialized to abelian sheaves"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "for a Grothendieck site, extension by zero from the slice site is an exact left adjoint to restriction of abelian sheaves",
+   "results": "No declaration for extension by zero or exact restriction on arbitrary slice sites; only general sheaf-over and adjunction infrastructure",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact left adjoint extension by zero and exact restriction for sheaves on a localized site",
+   "results": "CategoryTheory.Sheaf.over and sheafPullback adjunctions occur, but no theorem gives the exact extension-by-zero functor for an arbitrary slice site",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'extension.?by.?zero|extensionByZero|j_W|over.*exact|PreservesInjective' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Preadditive/Injective",
+   "results": "Mathlib contains GrothendieckTopology.over, Sheaf.over, and generic adjunction/injective-preservation lemmas, but no arbitrary-site extension-by-zero or exact restriction theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of abelian sheaves to the slice site Over X has an exact left adjoint (extension by zero)",
+   "results": "Functor.sheafAdjunctionCocontinuous, sheafPullbackConstruction.sheafAdjunctionContinuous, Sheaf.adjunction (generic adjunctions; with grep of Mathlib/CategoryTheory/Sites/Over.lean for overPullback: no exactness of the left adjoint of J.overPullback stated)",
+   "date": "2026-10-10",
+   "verdict": "no match",
+   "by": "R-col2"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-weil-pbc-cohomology-over-object-localization",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd"
+}

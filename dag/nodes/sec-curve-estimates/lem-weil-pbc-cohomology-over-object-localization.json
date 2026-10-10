@@ -21,9 +21,75 @@
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The slice category has the stated Grothendieck topology by definition, and $\\mathrm{id}_W:W\\to W$ is final because every object $V\\to W$ has its unique structure morphism to $\\mathrm{id}_W$. The assignment $(V\\to W)\\mapsto G(V)$ with the inherited restriction maps is the restriction sheaf on the slice.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Section 00XZ (section-localize), definition of the localized site"
+   }
+  },
+  {
+   "text": "The extension-by-zero statement gives a left adjoint $j_{W!}$ to restriction, and says that both $j_{W!}$ and restriction are exact.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Section 03DH and Lemmas 03DI-03DJ"
+   }
+  },
+  {
+   "text": "Since restriction is the right adjoint of the exact functor $j_{W!}$, the right-adjoint-preserves-injectives lemma implies that restriction sends injective abelian sheaves on $\\mathcal C$ to injective abelian sheaves on $\\mathcal C/W$. Together with exactness of restriction from step 2, an injective resolution $G\\to I^\\bullet$ restricts to an injective resolution $G|_W\\to I^\\bullet|_W$.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-injectives",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemmas 03DI-03DJ; Homology, Lemma 015Z"
+   }
+  },
+  {
+   "text": "By the definition of restriction, evaluation at the final object is degreewise $\\Gamma(\\mathrm{id}_W,I^\\bullet|_W)=I^\\bullet(W)$. The cohomology definition computes $H^q(W,G)$ from $I^\\bullet(W)$ and computes $H^q(\\mathrm{id}_W,G|_W)$ from $\\Gamma(\\mathrm{id}_W,I^\\bullet|_W)$, so the identity of complexes induces the claimed canonical isomorphism.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 03F3 (lemma-cohomology-of-open), parts (1)-(2)"
+   }
+  },
+  {
+   "text": "For a morphism $G\\to G'$ the induced maps of injective resolutions can be chosen as chain maps; any two choices are chain-homotopic by the injective-resolution lifting lemma, and restriction carries the homotopy to the slice, so the cohomology isomorphism is natural in $G$. For a morphism $W'\\to W$, the relocalization identification $\\mathcal C/W'=(\\mathcal C/W)/(W'/W)$ and the sectionwise definition of restriction identify the two comparison complexes; hence the same construction is natural in $W'\\to W$.",
+   "uses": [
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma 03F3 (lemma-cohomology-of-open), naturality in the sheaf and in a map of objects"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-restriction-injectives",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma 03F3 (lemma-cohomology-of-open), parts (1) and (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +114,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-cohomology-over-open",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-cohomology-over-object-localization",
+  "worker": "stage1",
+  "summary": "Repaired the split along Stacks 03F3. The new statement-only node now gives only the general extension-by-zero adjunction and exactness of extension and restriction; the item derives preservation of injectives via the exact-left-adjoint lemma, compares the two section complexes, and spells out naturality in the sheaf and in relocalization.",
+  "blueprint": "Realizes the ancestor blueprint clause that cohomology over an object is first computed on its localized site.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "The naturality argument needs uniqueness up to homotopy of maps between injective resolutions, which is not supplied by this unit's route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-col2",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-col2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:28 return; checked each point. Source Stacks 03F3 (sites-cohomology.tex lemma-cohomology-of-open), whose proof uses j_U^{-1} right adjoint to exact j_{U!} (03DH, 03DI, 03DJ lemma-extension-by-zero-exact) and Homology 015Z; the item statement agrees with 03F3 (1)-(2) specialized to abelian sheaves, plus naturality. Point 1 (D1/D2) repaired: the new node lem-weil-pbc-site-restriction-injectives now states only that restriction Ab(C)->Ab(C/W) has an exact left adjoint j_{W!} and is itself exact (03DH/03DI/03DJ with O=Z), strictly smaller than the item, no injective preservation or cohomology. Point 2 (D3/E5) repaired along (a)-(e): step 1 elementary slice/final object (00XZ); step 2 cites the new node; step 3 derives injective preservation from the new node's exact-left-adjoint clause via the Mathlib leaf lem-sp-right-adjoint-preserves-injectives (hypotheses: Ab(C), Ab(C/W) abelian by def-weil-pbc-sites-and-cohomology (1), j_{W!} exact with right adjoint restriction) and the resolution from exactness of restriction; step 4 uses def-weil-pbc-sites-and-cohomology (2) H^p(U,F)=H^p(Gamma(U,I^bullet)) and Gamma(id_W, I|_W)=I(W) from the definition of restriction (def-pur-localized-ringed-site); step 5 naturality in G via lem-weil-pbc-lift-to-injective-unique-up-to-homotopy (generic homological tool, off-unit sk-thm-p1, accepted as tool use) and in W'->W via the relocalization clause of def-pur-localized-ringed-site (C/W'=(C/W)/(W'/W), F|_U restricted gives F|_V sectionwise). Small cases: W terminal, G=0, q=0 give the identity. Point 3: created fields are the maintainer's (not counted); the report still names a citations.json that is not in the commit (unrepaired, cosmetic; lead note). Remote search before 17:00 UTC: ran LeanFinder myself for the new node (generic sheafPullback/cocontinuous adjunctions found, no exactness of the left adjoint of J.overPullback; grep of Sites/Over.lean likewise): no match, node stays unsplit. FIX: dag/nodes/sec-curve-estimates/lem-weil-pbc-site-restriction-injectives.json: mathlib_searches: added the reviewer LeanFinder query and verdict. Start Sat Oct 10 04:51:59 PM UTC 2026, end Sat Oct 10 04:53:02 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-col2): Report still claims a citations.json file that is not in the commit (return point 3, report part, unrepaired; cosmetic only)."
 }
