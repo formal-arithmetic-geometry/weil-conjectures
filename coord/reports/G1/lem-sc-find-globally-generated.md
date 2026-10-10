@@ -1,0 +1,25 @@
+Files written:
+
+- dag/nodes/sec-curve-estimates/lem-sc-find-globally-generated.json: item, split into five proof steps.
+- dag/nodes/sec-curve-estimates/lem-sc-separated-affine-function-field-surjective.json: statement-only node, Mathlib no match.
+- dag/nodes/sec-curve-estimates/lem-sc-jacobson-denominator-function-field.json: statement-only node, Mathlib no match.
+
+Attachments: none.
+
+WANTED: none. The repository's literature/stacks-project/ directory is absent in this read-only clone although literature/LIST.md lists it. I read varieties.tex from the pinned Stacks commit a04446e57ec1fbc252a871afcec7752fb2807b14 through its raw GitHub URL, at the source path recorded in the nodes.
+
+The item is a stronger-hypothesis specialization of Varieties Lemma 09NB (varieties-lemma-find-globally-generated): the source requires the complement's local rings to be Noetherian of dimension one, while the item assumes the whole scheme Noetherian and one-dimensional. The finite complement, nonempty affine open, integrality, and separatedness agree. The source's proof follows the item's five steps. Varieties Lemma 09N5 (varieties-lemma-create-globally-generated) states the common-denominator result for Noetherian one-dimensional semilocal subdomains of K with fraction field K and surjective tensor maps. The corrected denominator node reproduces those hypotheses; its nonzero conclusion makes explicit the requirement implicit in x^{-1}. I searched DAG statements, blueprint references, Lean source and Mathlib when creating these nodes; no duplicate or closed Lean declaration was found.
+
+The returned delivery had a false tensor-surjectivity node: integrality alone does not make the local pullback the generic point. I added the Noetherian dimension-one condition to that statement. The item now proves it in step 1, before claiming the pullback is Spec(K). The two source places now name the correct Stacks tags and labels. The denominator node defines an abstract fraction field inline, cites the ring-dimension definition, and places every B_i inside K. Both new nodes retain complete created.by and created.date fields.
+
+The small-case checks are decisive. For X=Spec(k[x,y]), U=D(x), and the origin x_0, B=k[x,y]_(x,y) has dimension two; A tensor B maps into B[1/x], so 1/y is missing. The repaired new node's dimension-one hypothesis fails, and the item likewise excludes this X. For X=P^1_k, U=A^1_k, and the point at infinity, B is a one-dimensional Noetherian local domain, K=k(t), and the images of k[t] and B generate K because t is invertible in k[t] while 1/t is in B. Thus the repaired claim applies. For an empty complement, the denominator lemma's finite family is empty and the construction gives the trivial bundle and section 1.
+
+## Review by G1
+
+I read the item against the proof of Stacks 09NB and the denominator node against Stacks 09N5 in the pinned varieties.tex. I checked the two new statements independently: 09NB's local dimension-one assumption is now explicit in the separated node, and 09N5's subring, Noetherian, dimension-one, semilocal, common-fraction-field, and tensor-surjectivity assumptions appear in the denominator node. They are statement-only, introduce their own objects, cite the actual definitions they use, and their Mathlib search records and blueprint ancestry remain present.
+
+Step 1 takes k(X) from def-sc-function-field; local Noetherianity from pqf-def-locnoeth; dimensions from def-kun-topological-krull-dimension, def-weil-pbc-krull-dimension-ring and lem-sc-scheme-stalk-dimension-generalization-chains; embeddings into K from lem-sc-integral-scheme-stalks-in-function-field; and precisely the tensor-map conclusion from lem-sc-separated-affine-function-field-surjective. The hypothesis x_i outside nonempty U makes x_i non-generic. A one-dimensional local domain has only its zero and maximal primes, so the pullback is Spec(K). The dimension argument now precedes the pullback assertion, as 09NB requires.
+
+Step 2 uses lem-sc-integral-scheme-stalks-in-function-field for B_i as subdomains of K with fraction field K, lem-sc-integral-function-field-affine-fraction for A's fraction field, and lem-sc-jacobson-denominator-function-field for a single nonzero f whose inverse belongs to every local maximal ideal. Step 1 established that the B_i are Noetherian and one-dimensional; locality supplies semilocality. Step 3 is the stalk definition applied to f^{-1}, followed by the finite-cover check. Step 4 uses lem-sc-glue-component-transition-cocycle, whose statement gives an invertible module for the stated unit cocycle; the local section representatives are written in the step. Step 5 checks s at every point and t on each U_i, giving X_s=U and global generation. I checked that the cited node statements contain the quoted facts and that their hypotheses hold at the point of use.
+
+The repair corrected the two false dimension inferences, source labels, and the denominator node's abstract-field dependency. The A^2 counterexample and P^1 positive case above test the exact change. The citation manifest is a delivery input in the sandbox; it is not listed as a node file.
