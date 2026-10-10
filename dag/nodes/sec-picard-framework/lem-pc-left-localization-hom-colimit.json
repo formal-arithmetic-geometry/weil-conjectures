@@ -21,9 +21,57 @@
  "stmt_deps": [
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each denominator s:X⟶I in S, send f:Y⟶I to Q(f)≫Q(s)⁻¹:Q(Y)⟶Q(X). A commuting triangle of denominators gives the same composite after applying Q and cancelling the invertible image of the later denominator, so these maps are compatible with the transition maps. (By Stacks Tag 05Q0 the index category X/S is filtered, so this colimit is a filtered colimit; the argument below does not use this.) They therefore induce the canonical map from the colimit of Hom_C(Y,I) over X/S to Hom_{S⁻¹C}(Q(Y),Q(X)).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories Tag 05Q0, label categories-remark-left-localization-morphisms-colimit, definition of X/S, its filteredness, and displayed formula"
+   }
+  },
+  {
+   "text": "Given g:Q(Y)⟶Q(X), apply the left-fraction representation statement with its source object instantiated as Y and its target object as X. It supplies f:Y⟶I and s:X⟶I in S with g=Q(f)≫Q(s)⁻¹, so g is the image of the colimit class represented by f at s. Thus the canonical map is surjective.",
+   "uses": [
+    "lem-pc-left-localization-fraction-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories Tag 04VE, label categories-lemma-morphisms-left-localization; Tag 05Q0 formula"
+   }
+  },
+  {
+   "text": "If f₁:Y⟶I₁ and f₂:Y⟶I₂ over denominators s₁:X⟶I₁ and s₂:X⟶I₂ have equal images, the left-fraction equality statement supplies a common refinement with arrows t₁:I₁⟶J and t₂:I₂⟶J such that s₁≫t₁=s₂≫t₂∈S and f₁≫t₁=f₂≫t₂. This is exactly the relation identifying the two representatives in the colimit over X/S, so the canonical map is injective.",
+   "uses": [
+    "lem-pc-left-localization-fraction-equality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories Tag 04VF, label categories-lemma-equality-morphisms-left-localization; Tag 05Q0 formula"
+   }
+  },
+  {
+   "text": "The canonical map is both surjective and injective by the preceding two steps, hence it is a bijection. If S consists only of identity arrows, X/S has the identity denominator as a terminal object and the map reduces to the identity Hom-bijection, as a check on the construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories Tag 05Q0, displayed equation categories-equation-left-localization-morphisms-colimit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-left-localization-fraction-representation",
+  "lem-pc-left-localization-fraction-equality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories Lemma 0FND proof line 9515, fifth equality; Categories Tag 05Q0"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +103,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-pre-derived-adjoint-functors-general",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-left-localization-hom-colimit",
+  "worker": "stage1",
+  "summary": "Checked that no sorry-free project declaration states this item. Split the localization colimit identification into the Mathlib-backed left-fraction representation and common-refinement equality, then used those ingredients for surjectivity and injectivity of the canonical colimit map.",
+  "blueprint": "Realizes the fifth equality in the blueprint ancestor lem-sc-finite-duality, where morphisms in the left localization are replaced by the colimit over arrows in the multiplicative system.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-llh2055",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-llh2055 (reviewer sub-agent of L); spot-checked: Read exists_leftFraction (CalculusOfFractions.lean:743), LeftFractionRel (:246), LeftFraction.map_eq_iff (:757), homMk_eq_iff_leftFractionRel (:522). Representation leaf exact; orientation of steps 2-3 correct; right-fraction nodes not restated. FIX more, RETURN less: (1) C4/B leaf: lem-pc-left-localization-fraction-equality cited homMk_eq_iff_leftFractionRel, which is about the constructed Localization W, while step 3 compares Q(f)≫Q(s)⁻¹ under the localization functor, and its 'equivalently' clause dropped s1≫t1=s2≫t2; restated for an arbitrary localization L with the relation explicit, leaf now LeftFraction.map_eq_iff line 757, grep recorded. (2) C1: step 1 now cites Stacks 05Q0 for filteredness of X/S (noted as unused), mirroring the right-fraction fix.; 2 file(s) fixed by the reviewer"
+ }
 }

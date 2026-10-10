@@ -1,0 +1,79 @@
+{
+ "id": "lem-pc-left-localization-fraction-equality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the fifth equality, identifying fractions after passage to a later denominator",
+   "via": [
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Equality of left fractions is equality after a common refinement",
+ "statement": "Let C and D be categories, let W be a class of morphisms of C satisfying the left calculus-of-fractions axioms, and let L : C ⥤ D be a functor that inverts W and has the universal property of the localization at W [def-weil-abstract-derived-category]. Let (f_1 : X ⟶ Y_1, s_1 : Y ⟶ Y_1) and (f_2 : X ⟶ Y_2, s_2 : Y ⟶ Y_2) be left fractions with s_1, s_2 in W. Then L.map f_1 ≫ inv (L.map s_1) = L.map f_2 ≫ inv (L.map s_2) if and only if there exist an object Z and morphisms t_1 : Y_1 ⟶ Z, t_2 : Y_2 ⟶ Z with s_1 ≫ t_1 = s_2 ≫ t_2, f_1 ≫ t_1 = f_2 ≫ t_2, and s_1 ≫ t_1 in W.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories Tag 04VF, label categories-lemma-equality-morphisms-left-localization; identification relation in the left localization"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "left fraction equality in localization",
+   "results": "CategoryTheory.MorphismProperty.LeftFraction.Localization.homMk_eq_iff_leftFractionRel",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.exists_leftFraction",
+   "results": "CategoryTheory.Localization.exists_leftFraction; fraction relation declarations in CalculusOfFractions",
+   "date": "2026-10-11",
+   "verdict": "generalization: fraction equality API"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_leftFraction|homMk_eq_iff_leftFractionRel Mathlib/CategoryTheory/Localization",
+   "results": "Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean lines 517, 522",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "common refinement criterion for equality of left fractions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "LeftFraction.map_eq_iff|def LeftFractionRel in Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean",
+   "results": "line 757 MorphismProperty.LeftFraction.map_eq_iff (any localization functor L); line 246 LeftFractionRel; line 522 homMk_eq_iff_leftFractionRel is only for the constructed Localization W",
+   "date": "2026-10-10",
+   "verdict": "match: map_eq_iff",
+   "by": "R-llh2055"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.MorphismProperty.LeftFraction.map_eq_iff",
+  "file": "Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean",
+  "line": 757,
+  "how": "exact (LeftFractionRel unfolded, definition at line 246)"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-pc-left-localization-hom-colimit",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality"
+}
