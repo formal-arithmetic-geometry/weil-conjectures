@@ -24,9 +24,61 @@
   "def-pd-descent-datum",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $(V,\\varphi)$ and $(W,\\psi)$ be descent data over $X/S$, put $T=X'$, $V'=T\\times_XV$, $W'=T\\times_XW$, $\\varphi'=(r\\times r)^*\\varphi$, $\\psi'=(r\\times r)^*\\psi$, and let $\\beta:V'\\to W'$ be a morphism over $T$ with $\\psi'\\circ\\mathrm{pr}_0^*\\beta=\\mathrm{pr}_1^*\\beta\\circ\\varphi'$ over $T\\times_ST$. Let $j:T\\times_XT\\to T\\times_ST$ be the morphism induced by the identities of $T$ [def-pc-fibre-product], and $\\rho=r\\circ\\mathrm{pr}_0:T\\times_XT\\to X$. Then $\\mathrm{pr}_k\\circ j$ are the two projections of $T\\times_XT$, so $j^*\\mathrm{pr}_k^*\\beta=\\mathrm{pr}_k^*\\beta$ for $k=0,1$; and $(r\\times r)\\circ j=\\Delta\\circ\\rho$ with $\\Delta:X\\to X\\times_SX$ the diagonal, so $j^*\\varphi'=\\rho^*\\Delta^*\\varphi$ up to the canonical identifications of fibre products. By [lem-galois-descent-datum-diagonal-identity], $\\Delta^*\\varphi=\\mathrm{id}_V$ and $\\Delta^*\\psi=\\mathrm{id}_W$, so $j^*\\varphi'$ and $j^*\\psi'$ are the canonical isomorphisms $\\mathrm{can}_V$, $\\mathrm{can}_W$ of $V\\times_XT$, $W\\times_XT$ over $T\\times_XT$. Pulling the compatibility equation of $\\beta$ back along $j$ therefore gives $\\mathrm{can}_W\\circ\\mathrm{pr}_0^*\\beta=\\mathrm{pr}_1^*\\beta\\circ\\mathrm{can}_V$ over $T\\times_XT$, which is the overlap equation of [lem-galois-fpqc-morphisms-descend] for the base $X$ and the cover $\\{r:T\\to X\\}$ (identifying $T\\times_XV$ with $V\\times_XT$ by the symmetry of fibre products).",
+   "uses": [
+    "def-pd-descent-datum",
+    "def-pc-fibre-product",
+    "lem-galois-descent-datum-diagonal-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 0241, proof: compatibility of a morphism of pulled-back descent data on the double overlap"
+   }
+  },
+  {
+   "text": "Apply [lem-galois-fpqc-morphisms-descend] with base scheme $S=X$, fpqc singleton cover $\\{r:X'\\to X\\}$, and schemes $V,W$ over $X$. The overlap equality of Step 1 gives a unique morphism $\\alpha:V\\to W$ over $X$ whose pullback $\\mathrm{id}_{X'}\\times_X\\alpha$ is $\\beta$.",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend",
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 0241, proof via Lemma Tag 02W0 (fpqc descent of morphisms)"
+   }
+  },
+  {
+   "text": "The morphism $\\alpha$ is a morphism of descent data, i.e. the two morphisms $\\psi\\circ\\mathrm{pr}_0^*\\alpha$ and $\\mathrm{pr}_1^*\\alpha\\circ\\varphi$ from $\\mathrm{pr}_0^*V$ to $\\mathrm{pr}_1^*W$ over $X_2=X\\times_SX$ agree. The morphism $r\\times r:T\\times_ST\\to X_2$ is the composite of $u=\\mathrm{id}_X\\times_Sr:X\\times_ST\\to X_2$ and $v=r\\times_S\\mathrm{id}_T:T\\times_ST\\to X\\times_ST$ [def-pc-fibre-product]. $u$ is the base change of $r$ along $\\mathrm{pr}_1:X_2\\to X$ and $v$ is the base change of $r$ along the first projection $X\\times_ST\\to X$, so $\\{u\\}$ and $\\{v\\}$ are fpqc coverings by [lem-galois-fpqc-covering-base-change] applied to the singleton covering $\\{r\\}$. Pulled back along $r\\times r$ (by functoriality of fibre products and the definitions of $\\varphi',\\psi'$, and since $\\mathrm{id}_T\\times_X\\alpha=\\beta$ by Step 2), the two morphisms become $\\psi'\\circ\\mathrm{pr}_0^*\\beta$ and $\\mathrm{pr}_1^*\\beta\\circ\\varphi'$, which are equal by the compatibility of $\\beta$. The injectivity clause of [lem-galois-fpqc-morphisms-descend], applied first with base $X\\times_ST$ and cover $\\{v\\}$ and then with base $X_2$ and cover $\\{u\\}$, shows that the two morphisms already agree over $X_2$. Hence every compatible $\\beta$ is the pullback of a morphism $\\alpha$ of descent data (fullness). Finally, if two morphisms $\\alpha,\\alpha'$ of descent data have $\\mathrm{id}_T\\times_X\\alpha=\\mathrm{id}_T\\times_X\\alpha'$, then $\\alpha=\\alpha'$ by the injectivity clause of [lem-galois-fpqc-morphisms-descend] with base $X$ and cover $\\{r\\}$ (faithfulness).",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend",
+    "lem-galois-fpqc-covering-base-change",
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 0241, conclusion (full faithfulness)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-descent-datum",
+  "def-pc-fibre-product",
+  "lem-galois-descent-datum-diagonal-identity",
+  "lem-galois-fpqc-morphisms-descend",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-covering-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 0241 (lemma-fully-faithful), proof and conclusion"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +103,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-galois-fpqc-refinement-fully-faithful",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-fpqc-singleton-fully-faithful-0241",
+  "worker": "stage1",
+  "summary": "Split Stacks Lemma 0241 into the overlap-compatibility step, representable fpqc descent of the underlying morphism using the existing lem-galois-fpqc-morphisms-descend node, and the final descent-data compatibility and uniqueness step. The item statement and dependencies were checked against the source and no new nodes were needed. Reviewer R-sff (FIX more, RETURN less) rewrote Step 1 to restrict along $T\\times_XT\\to T\\times_ST$ using the new node lem-galois-descent-datum-diagonal-identity and Step 3 to factor $r\\times r$ into two base changes of $r$.",
+  "blueprint": "lem-galois-descent, Step 2 full-faithfulness input: the pullback functor along an fpqc refinement is fully faithful (Stacks Tag 02W0, proved through Tag 0241).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sff",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sff (reviewer sub-agent of L); spot-checked: Source: Stacks descent.tex Lemma 0241 (lemma-fully-faithful, line 8561) in the situation of lemma-pullback with S=S' and {f:X'->X} fpqc; the item statement (unchanged) agrees hypothesis by hypothesis (singleton fpqc cover r, X' over S via a.r, DD and pullback as in Remark remark-easier). The route (descend beta by lem-galois-fpqc-morphisms-descend over base X, then check the descent-data equation after pullback) differs from Stacks' pointwise claim on V' x_V V' but is sound. Step 2: lem-galois-fpqc-morphisms-descend with base X, cover {r}, U=V, W=W gives the bijection onto overlap-compatible beta (statement read). FIX more, RETURN less: (1) Step 1 as delivered worked on the wrong overlap T x_S T and did not justify the overlap equation over T x_X T (C1/C4); rewrote it to pull the compatibility of beta back along j:T x_X T->T x_S T, with (r x r).j = Delta.rho, and added the statement-only node lem-galois-descent-datum-diagonal-identity (Delta^*phi = id_V for a descent datum; Stacks descent.tex line 8143 after Definition 023V) which Step 1 now cites; tested on X=Y: phi=phi.phi by the cocycle forces phi=id. (2) Step 3 pulled back along r x r: T x_S T -> X x_S X while lem-galois-fpqc-covering-base-change only gives base changes, not composites (C4); rewrote it to factor r x r = (id_X x r).(r x id_T), each a base change of r (cover fpqc by the base-change node), and apply the injectivity clause of lem-galois-fpqc-morphisms-descend twice; faithfulness via the same injectivity with base X. proof_deps recomputed as the union of uses (adds lem-galois-descent-datum-diagonal-identity); split_report.summary notes the repair. Small cases: r=id_X gives the identity functor; X empty trivial. No Mathlib leaf; no tool_uses (all cited nodes in unit sk-prop-h2 or definitions). Report's mention of citations.json refers to a file not in the delivery (harmless). Start Sat Oct 10 03:34:08 PM UTC 2026, end Sat Oct 10 03:35:50 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
