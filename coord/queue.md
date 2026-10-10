@@ -1,6 +1,6 @@
 # Work queue
 
-864 items; claim with `tools/claim.py next <group> [--stage N]`.
+865 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (63)
 
@@ -9,9 +9,10 @@
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change` | 2003 | none |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
-| `lem-sc-derived-hom-mayer-vietoris` | 3015 | none |
 | `lem-pc-module-tor-amplitude-flat-model` | 3016 | none |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
+| `lem-sc-derived-mayer-vietoris-triangle` | 3016 | none |
+| `lem-sc-derived-open-shriek-derived-adjunction` | 3016 | none |
 | `lem-pc-derived-pullback-tensor-product` | 3019 | none |
 | `lem-pc-rhom-strict-perfect-hom` | 3019 | none |
 | `lem-sc-derived-internal-hom-adjunction` | 3019 | none |
@@ -35,8 +36,9 @@
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-rf-single-complex-affine-base-change` | 5015 | none |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 5015 | none |
-| `lem-pc-sites-module-sheafification-tensor` | 5015 | none |
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
+| `lem-pc-sites-module-sheafification-bilinear-extension` | 5016 | none |
+| `lem-pc-sites-sheaf-tensor-bilinear-universal` | 5016 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 6007 | none |
 | `lem-sc-perfect-h0-locally-closed` | 6013 | none |
@@ -51,7 +53,6 @@
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-kummer-base-change-compatibility` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
-| `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-sc-affine-unit-divisor-base-change` | - | none |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
@@ -66,11 +67,10 @@
 | `lem-sc-p1-twist-exists` | - | none |
 | `lem-pc-projective-curve-finite-projection` | - | rests_on_sorry |
 | `lem-sc-p1-coherent-finite` | - | rests_on_sorry |
-| `def-pur-hom-complex` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 | `lem-pur-rhom-well-defined` | - | none |
 
-## Stage 2: nodes to state (801)
+## Stage 2: nodes to state (802)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -252,6 +252,7 @@
 | `lem-sc-artin-schreier-k` | 1 | state |
 | `lem-sc-bounded-below-injective-resolution` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
+| `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
 | `lem-sc-dim-one-point-outside-open-closed` | 1 | state |
 | `lem-sc-dim0-finite` | 1 | state |
@@ -876,7 +877,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1648 nodes that wait for a statement dependency, 102 nodes that wait for stage 1.
+Not open yet: 1651 nodes that wait for a statement dependency, 102 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
