@@ -2,19 +2,42 @@
  "id": "def-weil-pbc-ring-map-quasi-finite-at-prime",
  "kind": "definition",
  "title": "Ring map quasi-finite at a prime (affine notion)",
- "statement": "Let $\\varphi:R\\to S$ be a ring map of finite type ($S$ a finitely generated $R$-algebra), let $\\mathfrak q\\subset S$ be a prime ideal and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, with residue field $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime]. Let $F=S\\otimes_R\\kappa(\\mathfrak p)$ be the fibre ring, $j:S\\to F$, $s\\mapsto s\\otimes1$, and let $\\overline{\\mathfrak q}\\subset F$ be the prime ideal of $F$ corresponding to $\\mathfrak q$, i.e. the unique prime ideal of $F$ with $j^{-1}(\\overline{\\mathfrak q})=\\mathfrak q$ (it exists and is unique by [lem-weil-pbc-fibre-ring-primes-bijection]). We say that $R\\to S$ is *quasi-finite at $\\mathfrak q$* if $\\overline{\\mathfrak q}$ is an isolated point of $\\operatorname{Spec}(F)$ [def-weil-affine-spectrum], that is, the singleton $\\{\\overline{\\mathfrak q}\\}$ is open in $\\operatorname{Spec}(S\\otimes_R\\kappa(\\mathfrak p))$. (Stacks Project, Algebra, Definition 10.122.3 (1), Tag 00PL (definition-quasi-finite), which takes any of the equivalent conditions of Algebra, Lemma 10.122.2, Tag 00PK (lemma-isolated-point-fibre); this is condition (1) of 00PK. A ring map $R\\to S$ is *quasi-finite* if it is of finite type and quasi-finite at every prime of $S$ (00PL (2)). This is the affine notion that the scheme definition [pqf-def-quasifinite] (1) refers to.)",
+ "statement": "Let $\\varphi:R\\to S$ be a ring map of finite type, i.e. $S$ is finitely generated as an $R$-algebra: there are $n\\ge0$ and $s_1,\\dots,s_n\\in S$ such that the $R$-algebra homomorphism $R[x_1,\\dots,x_n]\\to S$, $x_i\\mapsto s_i$ [def-weil-pbc-mv-polynomial-ring], is surjective. Let $\\mathfrak q\\subset S$ be a prime ideal and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$, with residue field $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$, and let $F=S\\otimes_R\\kappa(\\mathfrak p)$ be the fibre ring of $S$ over $\\mathfrak p$ [def-weil-pbc-localization-at-prime], with $j:S\\to F$, $s\\mapsto s\\otimes1$. Let $\\overline{\\mathfrak q}\\subset F$ be the prime ideal of $F$ corresponding to $\\mathfrak q$, i.e. the unique prime ideal of $F$ with $j^{-1}(\\overline{\\mathfrak q})=\\mathfrak q$ (it exists and is unique by [lem-weil-pbc-fibre-ring-primes-bijection], since $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$). We say that $R\\to S$ is *quasi-finite at $\\mathfrak q$* if $\\overline{\\mathfrak q}$ is an isolated point of $\\operatorname{Spec}(F)$ [def-weil-affine-spectrum], that is, the singleton $\\{\\overline{\\mathfrak q}\\}$ is open in the Zariski topology of $\\operatorname{Spec}(S\\otimes_R\\kappa(\\mathfrak p))$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "algebra.tex:30232-30241, Definition Tag 00PL (definition-quasi-finite), with Lemma Tag 00PK (lemma-isolated-point-fibre, lines 30195-30230), condition (1)"
+  "place": "algebra.tex:30232-30241, Definition 10.122.3 (1), Tag 00PL (definition-quasi-finite), which takes any of the equivalent conditions of Lemma 10.122.2, Tag 00PK (lemma-isolated-point-fibre, lines 30195-30230); this node takes condition (1). Part (2) of 00PL (a quasi-finite ring map = of finite type and quasi-finite at every prime) is not used by any citer and is not stated here. Tags verified in literature/stacks-project/tags/tags (00PK algebra-lemma-isolated-point-fibre, 00PL algebra-definition-quasi-finite)."
  },
  "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-localization-at-prime",
   "def-weil-affine-spectrum",
   "lem-weil-pbc-fibre-ring-primes-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The definition is well formed.* $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ is a prime ideal of $R$ (the preimage of a prime ideal under a ring map), so $R_{\\mathfrak p}$, its maximal ideal $\\mathfrak pR_{\\mathfrak p}$, the field $\\kappa(\\mathfrak p)$ and the fibre ring $F=S\\otimes_R\\kappa(\\mathfrak p)$ with $j$ are defined [def-weil-pbc-localization-at-prime]. Since $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$, [lem-weil-pbc-fibre-ring-primes-bijection] (applied to $A=R$, $B=S$) says that $\\mathfrak Q\\mapsto j^{-1}(\\mathfrak Q)$ is a bijection from the primes of $F$ onto the primes of $S$ lying over $\\mathfrak p$, so there is exactly one prime $\\overline{\\mathfrak q}$ of $F$ with $j^{-1}(\\overline{\\mathfrak q})=\\mathfrak q$ (namely $\\ker\\psi_{\\mathfrak q}$); no choice is made. $\\overline{\\mathfrak q}$ is a point of the topological space $\\operatorname{Spec}(F)$ [def-weil-affine-spectrum], and 'isolated' means that $\\{\\overline{\\mathfrak q}\\}$ is open. So 'quasi-finite at $\\mathfrak q$' is a property of the pair $(\\varphi,\\mathfrak q)$; the finite-type hypothesis only restricts the ring maps for which it is used (Stacks states it there because the equivalent conditions of 00PK need it).",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "algebra.tex:30195-30230, Lemma Tag 00PK (lemma-isolated-point-fibre): the point $\\overline{\\mathfrak q}\\in F=\\Spec(S\\otimes_R\\kappa(\\mathfrak p))$ corresponding to $\\mathfrak q$ (via Remark remark-fundamental-diagram), condition (1); Definition Tag 00PL (definition-quasi-finite, lines 30232-30241), (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Definition Tag 00PL (1) (definition-quasi-finite, lines 30232-30241) with condition (1) of Lemma Tag 00PK (lemma-isolated-point-fibre, lines 30195-30230); the well-formedness check, which Stacks leaves implicit, written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +73,38 @@
    "results": "found via loogle in Mathlib.RingTheory.ZariskisMainTheorem (source read at lines 742-765)",
    "date": "2026-10-10",
    "verdict": "exists; equivalence lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "prime ideal is an isolated point of the spectrum of the fiber ring S ⊗ κ(p), quasi-finite at a prime",
+   "results": "Algebra.QuasiFiniteAt, Algebra.QuasiFinite.iff_finite_comap_preimage_singleton, Algebra.QuasiFinite.iff_finite_primesOver, Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver, Algebra.QuasiFiniteAt.baseChange, Algebra.quasiFinite_iff (all Mathlib.RingTheory.QuasiFinite.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match as a definition: Algebra.QuasiFiniteAt R p := QuasiFinite R (Localization.AtPrime p) (Basic.lean:358), defined through the localization S_q, not through isolatedness in the fibre"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFiniteAt, Algebra.FiniteType",
+   "results": "Algebra.QuasiFiniteAt.isClopen_singleton, Algebra.QuasiFiniteAt.of_isOpen_singleton (artinian base; QuasiFinite/Basic.lean), Ideal.Fiber.lift_residueField_surjective, Algebra.ZariskisMainProperty.of_finiteType, Algebra.QuasiFiniteAt.of_weaklyQuasiFiniteAt, Algebra.QuasiFiniteAt.of_isOpen_singleton_fiber (ZariskisMainTheorem.lean:742), Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber (ZariskisMainTheorem.lean:754)",
+   "date": "2026-10-10",
+   "verdict": "equivalence theorem, not the definition: quasiFiniteAt_iff_isOpen_singleton_fiber [Algebra.FiniteType R S] (q : PrimeSpectrum S) : Algebra.QuasiFiniteAt R q.asIdeal ↔ IsOpen {⟨q, _⟩} in the subspace comap(algebraMap R S)⁻¹'{q.comap} (source read)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "definition: a finite type algebra S over R is quasi-finite at prime q if q is an isolated point of its fibre",
+   "results": "Algebra.QuasiFiniteAt, Algebra.quasiFinite_iff, Algebra.QuasiFinite.iff_finite_primesOver, Algebra.QuasiFinite.iff_finite_comap_preimage_singleton, Algebra.QuasiFinite.finite_primeSpectrum, Polynomial.not_quasiFiniteAt",
+   "date": "2026-10-10",
+   "verdict": "no match as a definition (same localization-based Algebra.QuasiFiniteAt)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'QuasiFinite\\|quasiFiniteAt' Mathlib/RingTheory/*.lean Mathlib/RingTheory/RingHom/*.lean Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; grep -n 'class Algebra.FiniteType\\|iff_quotient_mvPolynomial' Mathlib/RingTheory/FiniteType.lean; grep -n 'preimageHomeomorphFiber' Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean",
+   "results": "RingTheory/*.lean: only ZariskisMainTheorem.lean (WeaklyQuasiFiniteAt, quasiFiniteAt lemmas); RingTheory/RingHom/*.lean: none; AlgebraicGeometry/Morphisms/QuasiFinite.lean:71 class LocallyQuasiFinite, :389 Scheme.Hom.quasiFiniteAt_iff (Scheme.Hom.QuasiFiniteAt is via stalk maps), :395 Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber (an iff, scheme level); FiniteType.lean:39 class Algebra.FiniteType (⊤ : Subalgebra R A).FG, :174 iff_quotient_mvPolynomial'' (quotient of MvPolynomial (Fin n) R); Fiber.lean:212 PrimeSpectrum.preimageHomeomorphFiber (fibre subspace ≃ₜ Spec(κ(p) ⊗[R] S))",
+   "date": "2026-10-10",
+   "verdict": "no definition of quasi-finiteness at a prime by an isolated point of the fibre, neither for algebras nor for schemes; the agreement of Mathlib's Algebra.QuasiFiniteAt with this node is the theorem Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber transported along PrimeSpectrum.preimageHomeomorphFiber, so not a leaf (convention of 2026-10-09). Lean candidate for stage 2: [Algebra.FiniteType R S] and IsOpen ({PrimeSpectrum.preimageHomeomorphFiber R S p ⟨q, rfl⟩} : Set (PrimeSpectrum (p.asIdeal.Fiber S))) with p = q.comap (algebraMap R S) (literal), or Algebra.QuasiFiniteAt R q.asIdeal via the iff above"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +124,33 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "pointers": [
+  {
+   "to": "pqf-def-quasifinite",
+   "was": [
+    "stmt"
+   ],
+   "reason": "forward pointer in the text, not a dependency: the removed remark 'this is the affine notion that the scheme definition [pqf-def-quasifinite] (1) refers to'; the scheme definition uses this notion, not conversely",
+   "date": "2026-10-10"
+  },
+  {
+   "to": "lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite",
+   "was": [],
+   "reason": "pointer for the removed claim 'this is condition (1) of 00PK' (the equivalence with the other conditions of Stacks 00PK): the implication (1) => kappa(q)/kappa(p) finite is that lemma applied to the finitely generated kappa(p)-algebra F; no citer of this node uses another condition of 00PK, so no node for the full equivalence was created",
+   "date": "2026-10-10"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Algebra 00PL (algebra.tex 30232-30241) and 00PK (30195-30230); tags verified in tags/tags. The data (00PL (1) with condition (1) of 00PK) is unchanged. 'Of finite type' is now written out (surjection from R[x_1..x_n], def-weil-pbc-mv-polynomial-ring added to stmt_deps; the DAG has no ring-level finite-type definition node, def-weil-finite-type-morphism is the scheme notion); the fibre ring is cited from def-weil-pbc-localization-at-prime, which defines it. The tag sentence was moved to `source`. Removed from the statement: the definition of a quasi-finite ring map (00PL (2)), which none of the three citers (quasi-finite-at-point-isolated, unramified-quasi-finite-at-points, integral-closure-finite-fibre-quasi-finite) uses; the claim 'this is condition (1) of 00PK' (pointer to lem-weil-pbc-isolated-prime-finite-type-algebra-residue-finite, which states (1) => residue extension finite for F over kappa(p)); and the remark about [pqf-def-quasifinite] (forward pointer; it was cited in the text but not in stmt_deps). All three citers use only condition (1) (isolated point of Spec F), so no 00PK equivalence node was needed. lem-weil-pbc-fibre-ring-primes-bijection stays a stmt_dep: it gives existence and uniqueness of q-bar, used to define the object, not a lemma about this definition. One elementary well-formedness step. Mathlib: searched with LeanSearch, Loogle, LeanFinder and grep (earlier searches of the creating worker kept): Algebra.QuasiFiniteAt is defined via the localization S_q (QuasiFinite/Basic.lean:358), Scheme.Hom.QuasiFiniteAt via stalks; the agreement is the theorem Algebra.quasiFiniteAt_iff_isOpen_singleton_fiber (ZariskisMainTheorem.lean:754) with PrimeSpectrum.preimageHomeomorphFiber (Fiber.lean:212), so not a leaf; Lean candidate recorded in the grep search. No new node."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition node (Stacks 00PL (1), condition (1) of 00PK): finite type written out, fibre ring and the prime over q from existing nodes, tag sentence moved to source, the unused 00PL (2) removed, pointers to the finite-residue-field consequence and to the scheme definition pqf-def-quasifinite. Not a Mathlib leaf: Algebra.QuasiFiniteAt is defined through the localization; the agreement is a theorem (quasiFiniteAt_iff_isOpen_singleton_fiber)."
+ }
 }
