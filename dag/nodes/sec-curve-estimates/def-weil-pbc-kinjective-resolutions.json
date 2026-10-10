@@ -3,24 +3,54 @@
  "blueprint": {
   "is": "def-weil-pbc-kinjective-resolutions",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "K-injective resolutions",
- "statement": "A complex $I$ of sheaves on an etale site is *K-injective* if for every\nacyclic complex $A$ the complex $\\operatorname{Hom}(A,I)$ is acyclic. A\n*K-injective resolution* of a complex $K$ is a quasi-isomorphism $K\\to I$\nwith $I$ K-injective.",
+ "statement": "Let $T$ be a scheme, $R$ a commutative ring, and $\\Mod(T_{\\Et},R)$ the abelian category of sheaves of modules over the constant ring sheaf $R_T$ on the small etale site [def-weil-pbc-derived-categories]. Let $A^\\bullet,I^\\bullet,K^\\bullet$ be cochain complexes in this category [def-pc-cochain-complex-modules]. Write $\\operatorname{Hom}^\\bullet(A,I)$ for the cochain complex of abelian groups whose degree-$n$ group is $\\prod_{p\\in\\mathbf Z}\\operatorname{Hom}_{\\Mod(T_{\\Et},R)}(A^p,I^{p+n})$ and whose differential on a degree-$n$ family $f$ is $d_I\\circ f-(-1)^n f\\circ d_A$. The complex $I^\\bullet$ is *K-injective* if $\\operatorname{Hom}^\\bullet(A,I)$ is acyclic for every acyclic $A^\\bullet$ [def-pc-acyclic-complex-modules]. A *K-injective resolution* of $K^\\bullet$ is a quasi-isomorphism $K^\\bullet\\to I^\\bullet$ [def-pc-quasi-iso-modules] with $I^\\bullet$ K-injective. For etale abelian sheaves, take $R=\\mathbf Z$.",
  "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-weil-pbc-kinjective-resolutions.md",
-  "place": "node def-weil-pbc-kinjective-resolutions, order 934"
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 070H (definition-K-injective) and Lemma 070K (lemma-enough-K-injectives-implies), applied to the abelian category Mod(T_et,R); the equivalent Hom-complex formulation is the one in literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/def-weil-pbc-kinjective-resolutions.md, node order 934"
  },
  "stmt_deps": [
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-derived-categories",
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-quasi-iso-modules"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "K-injective cochain complex hom complex of every acyclic complex is acyclic",
+   "results": "CochainComplex.IsKInjective and its constructor (Mathlib.Algebra.Homology.HomotopyCategory.KInjective): every map from an acyclic complex is null-homotopic; no full Hom-complex criterion",
+   "date": "2026-10-10",
+   "verdict": "candidate only: equivalence requires all shifts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\"",
+   "results": "CochainComplex.IsKInjective, isKInjective_of_injective, HomotopyEquiv.isKInjective; no Hom-complex equivalence",
+   "date": "2026-10-10",
+   "verdict": "candidate only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'IsKInjective|HomComplex|acyclic' Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean Mathlib/Algebra/Homology/HomotopyCategory/HomComplex.lean",
+   "results": "KInjective.lean:35-43 defines IsKInjective by null homotopies and says the equivalence to HomComplex acyclicity is TODO; HomComplex.lean:566-570 defines CochainComplex.HomComplex",
+   "date": "2026-10-10",
+   "verdict": "candidate only: not a one-line specialization"
+  }
+ ],
+ "mathlib_candidate": {
+  "declaration": "CochainComplex.IsKInjective",
+  "file": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+  "reason": "Its definition requires null homotopies from acyclic complexes; the equivalence with acyclicity of HomComplex(A,I) for every acyclic A uses shifts and is not in Mathlib (TODO at lines 35-39)."
+ },
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -43,6 +73,20 @@
    "missing": []
   }
  },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-kinjective-resolutions",
+  "worker": "stage1",
+  "summary": "Specified the abelian category Mod(T_et,R), its external Hom complex and differential, and dependencies for cochain complexes, acyclicity and quasi-isomorphisms. Stacks Definition 070H uses the equivalent vanishing of Hom in the homotopy category. Mathlib IsKInjective formalizes that latter condition; its source leaves the equivalence with full Hom-complex acyclicity as a TODO, so this node is split rather than a Mathlib leaf. The definition is the only content of this blueprint node; it has no proof steps and creates no new statements.",
+  "blueprint": "The definition's two clauses: Hom-complex acyclicity defines K-injectivity, and a quasi-isomorphism into a K-injective complex defines a resolution."
+ },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 070H/070K definition checked, 0 new"
+ }
 }
