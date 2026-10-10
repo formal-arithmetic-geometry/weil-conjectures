@@ -3,38 +3,104 @@
  "blueprint": {
   "is": "lem-weil-pbc-closed-immersion-products",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Closure of the closed-immersion and finite-type properties",
- "statement": "The composite of closed immersions [def-weil-pbc-scheme-conventions] is a\nclosed immersion, and a product (over a common base) of closed immersions is\na closed immersion. An open immersion is of finite type.",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to Z$ be closed immersions of schemes [def-pc-scheme] [def-weil-closed-immersion]. Then $g\\circ f:X\\to Z$ is a closed immersion. Let $Z_1\\to W_1$ and $Z_2\\to W_2$ be closed immersions of schemes over a common base scheme $S$; then the induced morphism $Z_1\\times_S Z_2\\to W_1\\times_S W_2$ is a closed immersion [def-pc-fibre-product]. Finally, every quasi-compact open immersion $j:U\\to Y$ of schemes is of finite type [def-weil-open-immersion] [def-weil-finite-type-morphism].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-weil-pbc-closed-immersion-products.md",
   "place": "node lem-weil-pbc-closed-immersion-products, order 904"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism"
  ],
  "proof": [
   {
-   "text": "A composite of closed immersions is affine and is induced locally by a\ncomposite of surjective ring homomorphisms, hence a closed immersion. The\nbase change of a closed immersion is a closed immersion, since tensoring a\nsurjective ring homomorphism is surjective (right exactness of tensor), and\nthe product over a common base of closed immersions $Z_i\\hookrightarrow W_i$\nis the composite of two such base changes (the closed subscheme\n$Z_1\\times_YZ_2\\subseteq W_1\\times_YW_2$ is the intersection of the two\nbase-changed subschemes). An open immersion $j:U\\hookrightarrow Y$ is locally\nof finite type: around $x\\in U$ choose an affine $V\\subseteq Y$ and a\nprincipal affine $D(f)\\subseteq U\\cap V$ containing $x$, which is affine of\nfinite type over $V$; with quasi-compact source it is therefore of finite\ntype by [def-weil-pbc-scheme-conventions], which is the case used in this\nblueprint (the open subschemes in question are quasi-compact).",
+   "text": "The composite of the two closed immersions is a closed immersion by the existing Mathlib leaf [lem-weil-pbc-closed-immersion-comp].",
    "uses": [
-    "def-weil-pbc-scheme-conventions"
+    "lem-weil-pbc-closed-immersion-comp"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01QS (composition of closed immersions)"
+   }
+  },
+  {
+   "text": "Each projection $Z_1\\times_S Z_2\\to W_1\\times_S Z_2$ and $W_1\\times_S Z_2\\to W_1\\times_S W_2$ is a base change of one of the given closed immersions, hence is a closed immersion by [lem-weil-pbc-closed-immersion-base-change].",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01QR (base change of a closed immersion)"
+   }
+  },
+  {
+   "text": "The product morphism is the composite of the two closed immersions in the preceding step, so it is a closed immersion by [lem-weil-pbc-closed-immersion-comp].",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01QR, product as two successive base changes"
+   }
+  },
+  {
+   "text": "An open immersion is locally of finite type, and a quasi-compact open immersion is therefore of finite type by [lem-weil-pbc-qc-open-immersion-finite-type].",
+   "uses": [
+    "lem-weil-pbc-qc-open-immersion-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Section 29.15, Tags 01T0 and 01T2"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-qc-open-immersion-finite-type"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-weil-pbc-closed-immersion-products.md",
-  "place": "## Proof"
+  "place": "## Proof, corrected final clause"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition and fibre product of closed immersions; quasi-compact open immersion finite type",
+   "results": "IsClosedImmersion.comp; IsClosedImmersion.isStableUnderBaseChange; LocallyOfFiniteType and QuasiCompact",
+   "date": "2026-10-10",
+   "verdict": "all clauses covered by existing leaves or the new finite-type leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "IsClosedImmersion.comp; IsClosedImmersion.isStableUnderBaseChange; LocallyOfFiniteType instance for IsImmersion",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsClosedImmersion.*comp\\|IsStableUnderBaseChange @IsClosedImmersion\\|instance.*LocallyOfFiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "ClosedImmersion.lean:86, 382; Immersion.lean:190; FiniteType.lean:43; QuasiCompact.lean:43",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -56,5 +122,21 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-closed-immersion-products",
+  "worker": "stage1",
+  "summary": "The first two assertions are carried by existing Mathlib leaves for composition and base change of closed immersions. The product is factored as two successive base changes followed by composition. The imported unqualified assertion that every open immersion is of finite type is false for non-quasi-compact opens, so the statement and proof were corrected to the quasi-compact form; the new finite-type consequence is a Mathlib leaf.",
+  "blueprint": "Steps 1-3 realize the closed-immersion and product paragraph; step 4 realizes the final sentence after adding the necessary quasi-compactness hypothesis.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cip",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cip (reviewer sub-agent of L); spot-checked: Source: blueprint master sk-thm-br/lem-weil-pbc-closed-immersion-products.md (order 904) and Stacks 01QS/01QR/01T0/01T2. The imported final clause 'an open immersion is of finite type' is false without quasi-compactness (the blueprint proof itself restricts to quasi-compact source); the corrected statement adds that hypothesis and the report names the change (E7); the imported dependents (lem-chow-graph etc.) will be split later against the corrected statement. Step 1 is exactly lem-weil-pbc-closed-immersion-comp (IsClosedImmersion.comp). Step 2: Z1xZ2->W1xZ2 and W1xZ2->W1xW2 are base changes of Z1->W1 along W1xZ2->W1 and of Z2->W2 along W1xW2->W2, carried by lem-weil-pbc-closed-immersion-base-change (projection Z x_X X' -> X', any g) up to the elementary pullback-pasting identification; step 3 composes via lem-weil-pbc-closed-immersion-comp. Step 4 is the new leaf lem-weil-pbc-qc-open-immersion-finite-type, whose finite-type notion is def-weil-finite-type-morphism (LFT + QC). Mathlib verified: Immersion.lean:190 instance [IsImmersion f] : LocallyOfFiniteType f, Immersion.lean:132 open immersion is immersion, FiniteType.lean:60 locallyOfFiniteType_of_isOpenImmersion, FiniteType.lean:21 docstring finite type = LFT + QC. Small cases: empty open and D(f) in Spec A (qc, finite type), infinite union of D(f_i) in Spec k[x_1,x_2,...] (not qc, not finite type). FIXES: dag/nodes/sec-curve-estimates/lem-weil-pbc-qc-open-immersion-finite-type.json: statement: JSON escape '\\to' had been written as '\\t'+'o' (a TAB character), restored to TeX \\to; same file: mathlib_match: pointed at the direct named instance AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, FiniteType.lean:60, instead of the class names with Immersion.lean:190. The report mentions a citations.json not in the delivery (harmless). Start Sat Oct 10 03:36:07 PM UTC 2026, end Sat Oct 10 03:36:48 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

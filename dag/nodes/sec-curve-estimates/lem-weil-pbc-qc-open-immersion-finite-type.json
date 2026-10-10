@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-qc-open-immersion-finite-type",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-closed-immersion-products",
+   "place": "the proof's final clause: the open subschemes in question are quasi-compact, so the open immersion is of finite type",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A quasi-compact open immersion is of finite type",
+ "statement": "Let $j:U\\to Y$ be a quasi-compact open immersion of schemes [def-pc-scheme] [def-weil-open-immersion]. Then $j$ is of finite type [def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Stacks Project, Section 29.15, Tags 01T0 and 01T2: an open immersion is locally of finite type, and finite type is locally of finite type plus quasi-compact"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a quasi-compact open immersion of schemes is of finite type",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType instance for IsImmersion; AlgebraicGeometry.QuasiCompact",
+   "date": "2026-10-10",
+   "verdict": "match: IsImmersion gives LocallyOfFiniteType and the quasi-compact hypothesis gives QuasiCompact, which are exactly the two clauses of finite type"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion -> AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "AlgebraicGeometry.LocallyOfFiniteType instance (Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean:190)",
+   "date": "2026-10-10",
+   "verdict": "match: IsOpenImmersion implies IsImmersion, then the instance supplies LocallyOfFiniteType"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'instance.*LocallyOfFiniteType|class LocallyOfFiniteType|class QuasiCompact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms",
+   "results": "Immersion.lean:190 instance [IsImmersion f] : LocallyOfFiniteType f; FiniteType.lean:43 class LocallyOfFiniteType; QuasiCompact.lean:43 class QuasiCompact",
+   "date": "2026-10-10",
+   "verdict": "match: the two Mathlib properties are the definition of finite type"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion",
+  "line": 60,
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+  "how": "specializes in one line: the instance locallyOfFiniteType_of_isOpenImmersion (FiniteType.lean:60) gives LocallyOfFiniteType j for an open immersion j; with the assumed QuasiCompact j (QuasiCompact.lean:43) this is LocallyOfFiniteType j and QuasiCompact j, which is finite type in the sense of [def-weil-finite-type-morphism] (Mathlib has no bundled name; FiniteType.lean module docstring line 21)"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-closed-immersion-products",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br"
+}
