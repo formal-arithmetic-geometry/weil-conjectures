@@ -2731,3 +2731,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:53 L: returned deliver/G1/lem-pc-coherent-hi (reviewer RETURN: 1. D2 (circular, no real split of the main clause): step 3 takes the coherence of R^if_*F for general proper f and the a)
 - 21:53 L: returned deliver/E1/lem-weil-derived-limit-existence (reviewer RETURN: Reviewer R-dle2714 (head 169f0d1fe). 1. D2 (clause 3 not split): step 4 cites the new node lem-weil-derived-limit-tower-)
 - 21:53 L: returned deliver/M1/lem-pod-adic-limit-finite-modules (reviewer RETURN: 1. E (false new statement), B: new node lem-pod-adic-tower-reconstruction states Stacks 09B8 for an arbitrary ideal I, d)
+- 21:54 L: merged deliver/G1/lem-sc-rhom-supported-qcoherent (reviewer FIX; first push; new nodes: 0)
