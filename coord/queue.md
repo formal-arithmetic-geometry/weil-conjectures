@@ -1,8 +1,8 @@
 # Work queue
 
-902 items; claim with `tools/claim.py next <group> [--stage N]`.
+904 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (259)
+## Stage 1: nodes to split (261)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,8 +13,8 @@
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 2016 | none |
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
+| `lem-pc-kflat-stalk-criterion` | 3013 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
-| `lem-sc-affine-rhom-qcoherent` | 3015 | none |
 | `lem-sc-derived-hom-finite-free-model` | 3015 | none |
 | `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
@@ -26,7 +26,6 @@
 | `lem-sc-koszul-regular-closed-immersion-perfect` | 3016 | none |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 3016 | none |
 | `lem-sc-smooth-diagonal-regular-immersion` | 3016 | none |
-| `lem-pc-kflat-stalk-criterion` | 3017 | none |
 | `lem-pc-pre-derived-adjoint-functors-general` | 3017 | none |
 | `lem-sc-derived-open-restriction-adjunction-exact` | 3017 | none |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 3017 | none |
@@ -43,21 +42,23 @@
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
 | `lem-pc-ideal-sheaf-comap-affine-extension` | 4010 | none |
-| `lem-pc-projection-formula` | 4010 | sorry_here |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-pc-zero-scheme-pullback-local-coefficient` | 4010 | none |
 | `lem-pc-zero-scheme-recd` | 4010 | rests_on_sorry |
+| `lem-pc-affine-qcoh-derived-equivalence` | 4011 | none |
+| `lem-pc-derived-direct-image-direct-sums` | 4011 | none |
+| `lem-pc-derived-module-free-generation` | 4011 | none |
+| `lem-pc-derived-pullback-tensor-qcoh` | 4011 | none |
+| `lem-pc-projection-locality` | 4011 | none |
 | `def-weil-pbc-etale-sheaves` | 5002 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
 | `lem-pc-picard-functor-agrees-sc` | 5008 | none |
-| `lem-pc-zariski-coverings-are-fppf` | 5009 | none |
 | `lem-sc-deg-pullback-finite` | 5009 | rests_on_sorry |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
 | `lem-sc-mult-n-isogeny` | 5009 | rests_on_sorry |
 | `lem-pc-flat-complex-derived-pullback` | 5010 | none |
 | `lem-sc-mult-n-finite-kernel` | 5010 | rests_on_sorry |
 | `thm-picard-serre-a` | 5010 | rests_on_sorry |
-| `def-pc-derived-pullback` | 5011 | none |
 | `lem-pc-base-change-map-cech` | 5011 | none |
 | `lem-pc-cech-resolution` | 5011 | none |
 | `lem-pc-proper-support-perfect-direct-image` | 5011 | none |
@@ -250,6 +251,7 @@
 | `lem-kun-fg-separable-smooth` | - | none |
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
+| `lem-pur-derived-change-of-rings` | - | none |
 | `lem-sc-p1-twist-exists` | - | none |
 | `prop-pur-kinjective-resolutions-exist` | - | none |
 | `def-weil-extension-by-zero-presheaf` | - | none |
@@ -914,7 +916,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1322 nodes that wait for a statement dependency, 288 nodes that wait for stage 1.
+Not open yet: 1325 nodes that wait for a statement dependency, 290 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
