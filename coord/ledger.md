@@ -2774,3 +2774,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:07 L: returned deliver/E1/lem-pc-derived-mayer-vietoris-triangle (reviewer RETURN: 1. D1 (relabelling) / class (b): the new node lem-pc-ringed-space-derived-mayer-vietoris is Tag 08BV itself, the item's )
 - 22:08 L: merged deliver/G1/lem-weil-pbc-constant-subsheaf-generic (reviewer PASS; first push; new nodes: 0)
 - 22:08 L: merged deliver/E1/lem-sc-lfp-field-extension-pointwise-descent (reviewer FIX; first push; new nodes: 0)
+- 22:09 L: merged deliver/M1/def-pc-global-derived-rhom (reviewer FIX; first push; new nodes: 0)

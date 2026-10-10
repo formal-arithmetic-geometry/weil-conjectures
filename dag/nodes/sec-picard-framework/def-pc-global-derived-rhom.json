@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "Tag 0AA8 case (1): global R Hom complexes used in the generator comparison",
+   "place": "Tag 0B6A (global derived hom section), with Tag 0B6I (duality Lemma 48.6.2) as the later adjunction use",
    "via": [
     "lem-sc-proper-flat-right-adjoint-affine-basechange"
    ]
@@ -13,13 +13,16 @@
  },
  "kind": "definition",
  "title": "Global derived Hom complex",
- "statement": "For a scheme X and P,Q in D(\\mathcal O_X), define the global derived Hom complex R\\operatorname{Hom}_X(P,Q) to be the derived global sections of the derived internal Hom R\\mathcal H om_{\\mathcal O_X}(P,Q), viewed as an object of the derived category of abelian groups (and, when X=\\operatorname{Spec}(R), as an object of D(R)). The construction uses the derived internal Hom [def-pur-derived-internal-hom] and derived global sections, and is functorial in P and Q.",
+ "statement": "Let X be a scheme [def-pc-scheme] and let D(\\mathcal O_X) be its derived category of \\mathcal O_X-modules [def-pc-derived-category]. Put A=\\Gamma(X,\\mathcal O_X) and let p:(X,\\mathcal O_X)\\to(\\{\\mathrm{pt}\\},A) be the morphism of ringed spaces to the one-point space with structure ring A, with p^\\sharp the identity of A=\\mathcal O_X(X); modules over (\\{\\mathrm{pt}\\},A) are A-modules, so its derived category is D(A). Define the derived global sections R\\Gamma(X,-):=Rp_*:D(\\mathcal O_X)\\to D(A), the derived direct image of [def-pc-ringed-spaces-derived-direct-image]; it is represented by \\Gamma(X,\\mathcal I^\\bullet) for any K-injective resolution K\\to\\mathcal I^\\bullet. For P,Q\\in D(\\mathcal O_X), define the global derived Hom complex $$R\\operatorname{Hom}_X(P,Q):=R\\Gamma\\bigl(X,R\\mathcal Hom_{\\mathcal O_X}(P,Q)\\bigr)\\in D(\\Gamma(X,\\mathcal O_X)),$$ with R\\mathcal Hom_{\\mathcal O_X} the derived internal Hom [def-pur-derived-internal-hom]. It is functorial in P (contravariantly) and Q (covariantly); when X=\\operatorname{Spec}(R) it is an object of D(R), and after forgetting the A-module structure it is an object of the derived category of abelian groups.",
  "source": {
   "document": "literature/stacks-project/duality.tex",
   "place": "Tag 0AA8, equation (48.6.2) and Cohomology Section global-RHom"
  },
  "stmt_deps": [
-  "def-pur-derived-internal-hom"
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-ringed-spaces-derived-direct-image"
  ],
  "proof": [],
  "proof_deps": [],
@@ -48,12 +51,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-affine-basechange",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-global-derived-rhom",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks duality.tex, Tag 0AA8 equation (48.6.2) and the global-RHom discussion. No exact sorry-free project declaration or blueprint duplicate exists. The item is now split with explicit dependencies on the scheme and derived-category notions, the existing derived internal Hom definition, and a new statement-only definition of derived global sections as derived direct image to the one-point ringed space. Mathlib searches found only generic Ext/right-derived primitives and no scheme-level global RHom. Reviewer R-gdr2744: the separate derived-global-sections child was a special case of def-pc-ringed-spaces-derived-direct-image and is folded into the statement as Rp_* to (pt, Gamma(X,O_X)); the complex is placed in D(Gamma(X,O_X)) as its citer lem-pc-global-hom-pullback-adjunction uses it; source corrected to Tag 0B6A.",
+  "blueprint": "The item realizes the ancestor proof clause 'global R Hom complexes used in the generator comparison'; derived global sections are the derived direct image to the one-point ringed space.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gdr2744",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gdr2744 (reviewer sub-agent of L); spot-checked: Read item, child, Tag 0B6A, def-pur-derived-internal-hom, def-pc-ringed-spaces-derived-direct-image, lem-pur-rhom-global-sections and all five citers (lem-pc-global-hom-pullback-adjunction, lem-pc-global-hom-adjunction, lem-pc-affine-morphism-hom-out-of-perfect, lem-sc-flat-precompose-pus steps, lem-sc-proper-flat-right-adjoint-affine-basechange via blueprint). No smuggled H^0=Hom claim (that is lem-pur-rhom-global-sections, not duplicated). FIX more, RETURN less: (1) B class (b): child def-pc-derived-global-sections is the special case Rp_* of def-pc-ringed-spaces-derived-direct-image (and wrote the one-point space as Spec Z); dropped and folded into the item as Rp_* to (pt, Gamma(X,O_X)), citing the existing node. (2) C4: citer lem-pc-global-hom-pullback-adjunction uses RHom_S in D(Gamma(S,O_S)) for non-affine S while the item gave only D(Ab) and D(R) for affine; item now lands in D(Gamma(X,O_X)). (3) source metadata still Tag 0AA8 despite second reading; corrected to cohomology Tag 0B6A; stmt_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-gdr2744): Second reading by M1 claimed the item source was corrected from 0AA8 to 0B6A/0B6I, but the delivered file still carried 0AA8; also missed the D(Gamma) mismatch with lem-pc-global-hom-pullback-adjunction and the Spec Z 'one-point' error."
 }
