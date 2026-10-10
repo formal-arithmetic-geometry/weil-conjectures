@@ -24,8 +24,42 @@
   "lem-exc-coinduced-discrete-embedding",
   "lem-exc-coinduced-homotopy-continuous"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Fix n>=1, F, and (g_1,...,g_n) in G^n. Evaluate both cochains at x in G. Substituting the definition of h_n into d^{n-1} (including the n=1 formula d^0) and using the coinduced action gives the first term as the alternating sum whose leading term is F(xg_1,g_2,...,g_n)(1), whose interior terms are -F(x,g_1g_2,...,g_n)(1), ..., and whose final term is (-1)^nF(x,g_1,...,g_{n-1})(1). The cited continuity lemma ensures that h_nF is an allowed continuous cochain, while the coinduced-action formula justifies the translation in the leading term.",
+   "uses": [
+    "lem-exc-coinduced-homotopy-continuous",
+    "lem-exc-coinduced-discrete-embedding"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology; direct expansion of the inhomogeneous differential"
+   }
+  },
+  {
+   "text": "With the same tuple and x, expand h_{n+1}(d^nF)(g_1,...,g_n)(x) by first applying d^nF to (x,g_1,...,g_n) and then evaluating the resulting D(M)-valued cochain at 1. The first summand is F(g_1,...,g_n)(x), the next n summands are the negatives and alternating products that match the interior terms from the preceding expansion, and the last summand is (-1)^{n+1}F(x,g_1,...,g_{n-1})(1). This is a direct substitution into the displayed definitions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology; direct expansion of the inhomogeneous differential"
+   }
+  },
+  {
+   "text": "Add the two displayed expansions. Every term involving F with an inserted product g_jg_{j+1}, and every endpoint term F(x,g_1,...,g_{n-1})(1), occurs twice with opposite signs; the sole uncancelled term is F(g_1,...,g_n)(x). Since this equality holds for every x and every (g_1,...,g_n), it is the equality of continuous cochains d^{n-1}h_nF+h_{n+1}d^nF=F.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, label section-continuous-group-cohomology; direct cancellation in the coinduced contraction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-coinduced-homotopy-continuous",
+  "lem-exc-coinduced-discrete-embedding"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
@@ -55,12 +89,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-coinduced-continuous-acyclic",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-coinduced-homotopy-identity",
+  "worker": "stage1",
+  "summary": "Split the coinduced contraction identity into pointwise expansion of d^{n-1}h_n, pointwise expansion of h_{n+1}d^n, and the alternating-sign cancellation. The existing continuity and coinduced-action statements are cited exactly where used; the remaining algebra is elementary.",
+  "blueprint": "Realizes the final continuous-cochain comparison clause of def-exc-continuous-cohomology: the three steps are the direct evaluation, expansion, and cancellation establishing the contraction identity.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-chi",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chi (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 0DVG (etale-cohomology-section-continuous-group-cohomology); the item statement is unchanged, and its differentials, coinduced action (h.f)(x)=f(xh) and h_n formula agree with the cited nodes lem-exc-coinduced-discrete-embedding (action) and lem-exc-coinduced-homotopy-continuous (h_n is an A-linear map into continuous cochains), which carry exactly what step 1 takes from them. I recomputed by hand: d^{n-1}(h_nF)(g)(x)=F(xg_1,g_2..)(1)+sum_{j=1}^{n-1}(-1)^jF(x,..,g_jg_{j+1},..)(1)+(-1)^nF(x,g_1..g_{n-1})(1); h_{n+1}(d^nF)(g)(x)=F(g)(x)-F(xg_1,..)(1)+sum_{j=2}^n(-1)^jF(x,g_1,..,g_{j-1}g_j,..)(1)+(-1)^{n+1}F(x,g_1..g_{n-1})(1); the sum is F(g)(x). Small case n=1: d^0h_1F(g_1)(x)=F(xg_1)(1)-F(x)(1), h_2d^1F(g_1)(x)=F(g_1)(x)-F(xg_1)(1)+F(x)(1), so the sum is F(g_1)(x). Steps 2-3 are elementary substitution and cancellation (C2). No new nodes, no Mathlib leaf, tool_uses empty. Fix: dag/nodes/sec-curve-estimates/lem-exc-coinduced-homotopy-identity.json: proof[0].text: the sign of the final term of d^{n-1}h_nF was the typo (-1)^{n-1}; corrected to (-1)^n (needed for the endpoint cancellation in step 3 against step 2's (-1)^{n+1}). Times: start Sat Oct 10 03:17:09 PM UTC 2026, end Sat Oct 10 03:17:43 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

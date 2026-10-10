@@ -1759,3 +1759,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:16 L: merged deliver/J1/lem-sc-p1-coherent-proj-representation (reviewer FIX; after a return; new nodes: 2)
 - 15:17 L: merged deliver/C1/lem-sc-curve-base-change-relative-dimension-one (reviewer PASS; after a return; new nodes: 2)
 - 15:17 L: merged deliver/K1/lem-pc-ample-affine-loci-criterion (reviewer FIX; first push; new nodes: 1)
+- 15:17 L: merged deliver/G1/lem-exc-coinduced-homotopy-identity (reviewer FIX; first push; new nodes: 0)
