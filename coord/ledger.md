@@ -2583,3 +2583,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:54 L: attached AlgebraicGeometry.IsCurve.SurjectiveRestrictionTwo to def-weil-pbc-C8 (Assertions.lean:140-145, sorry-free; reviewer R-dc82425)
 - 20:54 L: returned deliver/M1/def-weil-pbc-C8 (reviewer RETURN: Reviewer R-dc82425 (packet review, 20:54 UTC), head e7729ac06. B10: nothing to split; the sorry-free declaration Algebra)
 - 20:55 L: merged deliver/F1/lem-sc-hilbert-difference (reviewer FIX; first push; new nodes: 3)
+- 20:56 L: merged deliver/K1/lem-pc-universal-adjoint-section (reviewer FIX+NODE(1); after a return; new nodes: 1)
