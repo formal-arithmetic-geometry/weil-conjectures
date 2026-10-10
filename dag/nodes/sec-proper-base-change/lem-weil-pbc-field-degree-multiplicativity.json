@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-field-degree-multiplicativity",
+ "kind": "statement",
+ "title": "Multiplicativity of degrees in a tower of finite field extensions",
+ "statement": "Let $k\\subseteq E\\subseteq F$ be fields [def-pc-field-extension] with $E/k$ and $F/E$ finite (finite-dimensional as vector spaces). Then $F/k$ is finite and $[F:k]=[F:E]\\,[E:k]$, where $[E:k]$ denotes the dimension of $E$ as a $k$-vector space.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09G9 (lemma-multiplicativity-degrees, line 542)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tower law finrank F K times finrank K A equals finrank F A",
+   "results": "Module.finrank_mul_finrank, rank_mul_rank (Mathlib.LinearAlgebra.Dimension.Free); Subfield.relfinrank_mul_finrank_top, IntermediateField.relrank_mul_rank_top, IntermediateField.relrank_mul_relrank (Mathlib.FieldTheory.Relrank)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.finrank_mul_finrank"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tower law: degree of F ⊆ K ⊆ A is product of degrees, finrank F K * finrank K A = finrank F A",
+   "results": "IntermediateField.relfinrank_mul_relfinrank, IntermediateField.relfinrank_mul_finrank_top, IntermediateField.finrank_bot_mul_relfinrank, Subfield.relfinrank_mul_relfinrank (Mathlib.FieldTheory.Relrank)",
+   "date": "2026-10-10",
+   "verdict": "generalization (relative ranks of intermediate fields); the plain form is Module.finrank_mul_finrank"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 09G9\\|theorem Module.finrank_mul_finrank' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -n '^theorem trans' RingTheory/Finiteness/Basic.lean",
+   "results": "LinearAlgebra/Dimension/Free.lean:57 (@[stacks 09G9] rank_mul_rank), :68 (Module.finrank_mul_finrank); RingTheory/Finiteness/Basic.lean:369 (Module.Finite.trans)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.finrank_mul_finrank",
+  "file": "Mathlib/LinearAlgebra/Dimension/Free.lean",
+  "line": 68,
+  "how": "one declaration per clause: finiteness of F/k is Module.Finite.trans E F (Mathlib/RingTheory/Finiteness/Basic.lean:369); the equality is Module.finrank_mul_finrank k E F (LinearAlgebra/Dimension/Free.lean:68; vector spaces over a field are free, fields satisfy StrongRankCondition). Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-make-separably-generated",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

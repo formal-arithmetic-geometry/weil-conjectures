@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-finite-purely-inseparable-transitive",
+ "kind": "statement",
+ "title": "Finite purely inseparable extensions compose",
+ "statement": "Let $k\\subseteq E\\subseteq F$ be fields [def-pc-field-extension] such that $E/k$ and $F/E$ are finite purely inseparable extensions [def-weil-pbc-finite-purely-inseparable-extension]. Then $F/k$ is a finite purely inseparable extension.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09HG (lemma-purely-inseparable-permanence, line 1640) for purely inseparable, with Lemma Tag 09G9 (lemma-multiplicativity-degrees, line 542) for finiteness"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of purely inseparable extensions is purely inseparable; finite over finite is finite",
+   "results": "IsPurelyInseparable, IsPurelyInseparable.trans, isPurelyInseparable_iff, isPurelyInseparable_iff_fd_isPurelyInseparable, isPurelyInseparable_iff_natSepDegree_eq_one, IsPurelyInseparable.mk (Mathlib.FieldTheory.PurelyInseparable.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: IsPurelyInseparable.trans"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable ?F ?E → IsPurelyInseparable ?E ?K → IsPurelyInseparable ?F ?K",
+   "results": "IsPurelyInseparable.trans (Mathlib.FieldTheory.PurelyInseparable.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem IsPurelyInseparable.trans\\|stacks 09HG' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; sed -n 255,268p FieldTheory/PurelyInseparable/Basic.lean; grep -n '^theorem trans' RingTheory/Finiteness/Basic.lean",
+   "results": "FieldTheory/PurelyInseparable/Basic.lean:260 (IsPurelyInseparable.trans, tagged stacks 02JJ); no 09HG tag; RingTheory/Finiteness/Basic.lean:369 (Module.Finite.trans)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsPurelyInseparable.trans",
+  "file": "Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+  "line": 260,
+  "how": "one declaration per clause: purely inseparable is IsPurelyInseparable.trans k E F (FieldTheory/PurelyInseparable/Basic.lean:260, any characteristic), finite is Module.Finite.trans E F (Mathlib/RingTheory/Finiteness/Basic.lean:369); the node's notion is `IsPurelyInseparable ∧ Module.Finite` by the match recorded on def-weil-pbc-finite-purely-inseparable-extension. Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-make-separably-generated",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

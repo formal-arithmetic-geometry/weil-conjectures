@@ -1,0 +1,62 @@
+{
+ "id": "lem-weil-pbc-separable-root-pth-power",
+ "kind": "statement",
+ "title": "A separable root of a polynomial with p-th power coefficients is a p-th power",
+ "statement": "Let $p$ be a prime, $E$ a field of characteristic $p$ and $L/E$ a separable algebraic extension [def-weil-pbc-separable-algebraic-extension]. Let $\\alpha\\in L$ and let $P\\in E[T]$ be a polynomial such that (a) $P(\\alpha)=0$, (b) $P$ has pairwise distinct roots in an algebraic closure of $E$ [def-weil-algebraic-closure], and (c) every coefficient of $P$ is a $p$-th power of an element of $E$. Then $\\alpha=\\alpha'^p$ for some $\\alpha'\\in L$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 031V (lemma-pth-root, line 3747), part (2), and its proof (uses Lemma lemma-take-pth-root)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if alpha is separable over K, root of polynomial with distinct roots whose coefficients are p-th powers, then alpha is a p-th power",
+   "results": "IsSeparable, Polynomial.Separable.of_pow, Polynomial.separable_or, Polynomial.rootMultiplicity_le_one_of_separable (Mathlib.FieldTheory.Separable); IsPurelyInseparable.instOfHasExponent; IsPurelyInseparable.isPRadical; IntermediateField.isSeparable_adjoin_pair_of_isSeparable",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In characteristic p, if L/K is separable algebraic and α in L is a root of a polynomial with distinct roots whose coefficients are p-th powers in K, then α is a p-th power in L",
+   "results": "IsSepClosed.exists_root_C_mul_X_pow_add_C_mul_X_add_C', IsSepClosed.exists_pow_nat_eq (Mathlib.FieldTheory.IsSepClosed); Polynomial.roots_X_pow_char_pow_sub_C(_pow), roots_X_pow_char_sub_C(_pow) (Mathlib.FieldTheory.Perfect); minpoly.natSepDegree_eq_one_iff_pow_mem; IsPurelyInseparable.pow_mem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'p-th power\\|pth power\\|p-th root' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory; grep -rn 'frobenius.*Separable\\|Separable.*frobenius' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory",
+   "results": "FieldTheory/PurelyInseparable/AdjoinPthRoots.lean (adjoining p-th roots, not this); FieldTheory/PurelyInseparable/PerfectClosure.lean:383,403 (minpoly.iterateFrobenius_of_isSeparable, minpoly.frobenius_of_isSeparable: minimal polynomial of a^q is the Frobenius twist of that of a) and IntermediateField.adjoin_simple_eq_adjoin_pow_expChar_pow_of_isSeparable (F(a) = F(a^q) for separable a): related, but none states that a separable root of a polynomial with p-th power coefficients is a p-th power",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-make-separably-generated",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

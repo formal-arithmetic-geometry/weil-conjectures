@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+ "kind": "statement",
+ "title": "A finitely generated field extension has a finite transcendence basis",
+ "statement": "Let $K/k$ be a finitely generated field extension [def-pc-field-extension], i.e. $K=k(a_1,\\dots,a_n)$ for finitely many $a_1,\\dots,a_n\\in K$. Then $K/k$ has a finite transcendence basis [def-weil-pbc-transcendence-basis]: there are $r\\ge0$ and $x_1,\\dots,x_r\\in K$ algebraically independent over $k$ such that $K$ is algebraic over $k(x_1,\\dots,x_r)$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 030F (lemma-transcendence-degree, line 3398), existence part and its proof (a transcendence basis B with B contained in any generating set G; G = {a_1,...,a_n} finite gives B finite)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-transcendence-basis"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated field extension has a finite transcendence basis contained in the generating set",
+   "results": "Algebra.IsAlgebraic.isTranscendenceBasis_of_le_trdeg, exists_isTranscendenceBasis_subset, exists_isTranscendenceBasis_between, trdeg_lt_aleph0, isTranscendenceBasis_iff_algebraicIndependent_isAlgebraic (Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis); exists_isTranscendenceBasis_and_isSeparable_of_perfectField (Mathlib.FieldTheory.SeparablyGenerated)",
+   "date": "2026-10-10",
+   "verdict": "match: exists_isTranscendenceBasis_subset is the proof of 030F; the finite form is exists_finset_isTranscendenceBasis (see loogle)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsTranscendenceBasis, Finset",
+   "results": "exists_finset_isTranscendenceBasis (Mathlib.FieldTheory.FinTrdeg); IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure (Mathlib.FieldTheory.SeparableClosure); exists_isTranscendenceBasis_and_isSeparable_of_* (Mathlib.FieldTheory.SeparablyGenerated)",
+   "date": "2026-10-10",
+   "verdict": "match: exists_finset_isTranscendenceBasis"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem exists_isTranscendenceBasis\\|stacks 030F' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/ ; sed -n 30,37p,84,92p FieldTheory/FinTrdeg.lean; sed -n 90,96p FieldTheory/IntermediateField/Adjoin/Algebra.lean",
+   "results": "RingTheory/AlgebraicIndependent/TranscendenceBasis.lean:51,58,64,385,397 (exists_isTranscendenceBasis_superset/_/'/_between/_subset), :429,435 (@[stacks 030F] cardinality); FieldTheory/FinTrdeg.lean:36 (instance FinTrdeg of Algebra.EssFiniteType), :86 (exists_finset_isTranscendenceBasis); IntermediateField.fg_top_iff (Adjoin/Algebra.lean:92)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_finset_isTranscendenceBasis",
+   "results": "exists_finset_isTranscendenceBasis in .lake/packages/mathlib/Mathlib/FieldTheory/FinTrdeg.lean (index: unavailable, found by name)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "exists_finset_isTranscendenceBasis",
+  "file": "Mathlib/FieldTheory/FinTrdeg.lean",
+  "line": 86,
+  "how": "specializes in one line: K = k(a_1,...,a_n) says (⊤ : IntermediateField k K).FG, which is Algebra.EssFiniteType k K by IntermediateField.fg_top_iff (Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean:92); the instance at FinTrdeg.lean:36 gives FinTrdeg k K, and exists_finset_isTranscendenceBasis k K (FinTrdeg.lean:86) gives a Finset s with IsTranscendenceBasis k ((↑) : s → K), which is the node's transcendence basis by the match recorded on def-weil-pbc-transcendence-basis. Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-make-separably-generated",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
