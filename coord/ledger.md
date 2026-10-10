@@ -1585,3 +1585,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:04 L: returned deliver/G1/lem-galois-transitive (reviewer RETURN: The split now follows Stacks 0BN3 and no longer uses the Mathlib Galois-category leaf, so the B8 return is answered. Ste)
 - 14:08 L: TOOL USES DECLARABLE (split_report.tool_uses accepted by review_split/preflight, copied into tool_uses at merge, --drop-tool-uses); claim gate on open returns removed (cap 10 stays); return entries must say exactly what to change (reviewer brief); roles/remote-lead.md 3a, SETUP.md, coord/brief-stage1.md, README, notices to all groups
 - 14:08 L: accepted lem-pc-genus-base-change: 5 steps, statement made conditional on X_K being a curve, no new nodes
+- 14:09 L: returned deliver/E1/lem-weil-pbc-coskeleton-matching-tuples (reviewer RETURN: 1. C3: Step 1 (and through it Step 2): the identity eps_k = p_{k,id} (the counit of the coskeleton is the projection at )
