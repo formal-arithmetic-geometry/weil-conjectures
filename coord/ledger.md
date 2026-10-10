@@ -1880,3 +1880,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:55 L: merged deliver/H1/lem-weil-pbc-etale-fibre-specialization-bound (reviewer FIX; after a return; new nodes: 0)
 - 15:56 L: merged deliver/E1/lem-galois-descent-datum-diagonal-identity (reviewer FIX; first push; new nodes: 0)
 - 15:56 L: merged deliver/K1/lem-sc-enough-globally-generated-ample (reviewer FIX; first push; new nodes: 3)
+- 15:56 L: merged deliver/H1/lem-sc-etale-standard-cover-cech (reviewer FIX; after a return; new nodes: 2)
