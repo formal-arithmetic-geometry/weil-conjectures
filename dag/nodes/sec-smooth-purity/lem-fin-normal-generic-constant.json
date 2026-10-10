@@ -3,25 +3,34 @@
  "blueprint": {
   "is": "lem-fin-normal-generic-constant",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-weil-pbc-normal-constant-generic"
+  ]
  },
  "kind": "statement",
  "title": "A generic constant sheaf on a normal Noetherian scheme",
- "statement": "Let $V$ be Noetherian, normal and integral in the sense of\n[def-sbc-normal-dominant-galois], with generic inclusion\n$e:\\operatorname{Spec}K\\to V$. For a finite abelian group $M$,\nthe natural map of etale sheaves\n$\\underline M_V\\to e_*\\underline M_K$ is an isomorphism, where\n$e_*$ is the direct image.",
+ "statement": "Let $V$ be a Noetherian scheme [def-weil-pbc-scheme-conventions], normal and integral [def-pc-integral-scheme] in the sense of [def-sbc-normal-dominant-galois], with generic point $\\eta$, function field $K=\\kappa(\\eta)$ [def-weil-residue-field], and generic inclusion $e:\\operatorname{Spec}K\\to V$. For a finite abelian group $M$, let $\\underline M_V$ and $\\underline M_K$ be the constant sheaves on the etale sites [def-weil-pbc-constant-sheaf], [def-weil-pbc-abelian-etale-sheaves]. Then the natural map of etale sheaves $\\underline M_V\\to e_*\\underline M_K$ is an isomorphism, where $e_*$ is the direct image [def-weil-pbc-direct-image].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-normal-generic-constant.md",
   "place": "node lem-fin-normal-generic-constant, order 1606"
  },
  "stmt_deps": [
-  "def-sbc-normal-dominant-galois"
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-integral-scheme",
+  "def-sbc-normal-dominant-galois",
+  "def-weil-residue-field",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image"
  ],
  "proof": [
   {
-   "text": "Evaluate on an affine etale $W\\to V$.\nBy [lem-fin-etale-normal-components], $W$ has finitely many\nnormal integral open-and-closed components $W_a$.\nEvery nonempty $W_a$ dominates $V$, since its image is a nonempty\nopen by [lem-weil-pbc-flat-lfp-open].\nIts generic fibre is the spectrum of one finite separable field\nextension of $K$: it is integral and etale of finite type over $K$,\nso its coordinate algebra is a zero-dimensional finite-type domain,\nhence a finite separable field. Thus $W$ and $W_K$ have the\nsame finite set of connected components.\nThe sections of a constant sheaf $M$ on a connected scheme are\n$M$, by [def-weil-pbc-etale-sheaves]; equivalently a section is\na locally constant function to the finite discrete set $M$.\nBoth groups of sections here are therefore $\\prod_aM$, and\nrestriction is the identity on each factor.\nBy [def-weil-pbc-direct-image] these are precisely the maps\ndefining the asserted isomorphism, on a covering basis of the site.",
+   "text": "Since a morphism of sheaves is an isomorphism once it is one on the objects of a basis of the site, it suffices to evaluate on an etale $W\\to V$ with $W=\\operatorname{Spec}C$ affine and mapping into an affine open $V_0=\\operatorname{Spec}A\\subseteq V$; such $W$ cover every object of $V_{\\Et}$. Then $A$ is a Noetherian domain with fraction field $K$, and $C$ is of finite type over $A$, hence Noetherian, so $W$ is Noetherian.\nBy [lem-fin-etale-normal-components], $W$ has finitely many\nnormal integral open-and-closed components $W_a=\\operatorname{Spec}C_a$, each affine and etale over $V_0$.\nEvery nonempty $W_a$ dominates $V$, since its image is a nonempty\nopen by [lem-weil-pbc-flat-lfp-open], and a nonempty open of the irreducible $V$ contains $\\eta$. Moreover $A\\to C_a$ is flat and $C_a$ is a domain, so every nonzero $a\\in A$ (a nonzerodivisor) has nonzero image in $C_a$.\nIts generic fibre $W_a\\times_V\\operatorname{Spec}K=\\operatorname{Spec}(K\\otimes_AC_a)$ is therefore nonempty and connected by [lem-weil-pbc-generic-fibre-localization-domain-irreducible]. Thus $W$ and $W_K=W\\times_V\\operatorname{Spec}K$ have the\nsame finite set of connected components, $W_a$ and $(W_a)_K$.\nThe sections of a constant sheaf $M$ on a connected scheme are\n$M$, by [lem-weil-pbc-constant-sheaf-sections-connected].\nBoth groups of sections here are therefore $\\prod_aM$, and\nrestriction along $W_K\\to W$ sends constant sections to constant sections, so it is the identity on each factor.\nBy [def-weil-pbc-direct-image], $(e_*\\underline M_K)(W)=\\underline M_K(W_K)$, and these restriction maps are precisely the components of the natural map, which is therefore an isomorphism on this basis of the site.",
    "uses": [
     "lem-fin-etale-normal-components",
     "lem-weil-pbc-flat-lfp-open",
-    "def-weil-pbc-etale-sheaves",
+    "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+    "lem-weil-pbc-constant-sheaf-sections-connected",
     "def-weil-pbc-direct-image"
    ],
    "elementary": false
@@ -30,7 +39,8 @@
  "proof_deps": [
   "lem-fin-etale-normal-components",
   "lem-weil-pbc-flat-lfp-open",
-  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+  "lem-weil-pbc-constant-sheaf-sections-connected",
   "def-weil-pbc-direct-image"
  ],
  "proof_origin": {
@@ -38,9 +48,38 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-normal-generic-constant.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "direct image of finite constant etale sheaf from generic point of normal integral scheme",
+   "results": "AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.germToFunctionField; Algebra.mem_etaleLocus_iff; Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField; Algebra.etaleLocus; AlgebraicGeometry.Scheme.functionField; no constant-sheaf direct-image declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "constantSheaf, lowerStar, genericPoint, IsIntegral",
+   "results": "0 hits; loogle: unknown identifier 'constantSheaf'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "genericPoint|constantSheaf|lowerStar in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf pushed forward from the generic point of a normal integral scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -66,5 +105,34 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-fin-normal-generic-constant",
+  "worker": "stage1",
+  "summary": "Checked the componentwise proof against the imported blueprint and the existing Stacks 09Z5 node. The generic-point statement is proved by evaluating on affine etale objects, identifying normal integral components and their generic fibres, and comparing constant-sheaf sections via the direct-image definition. No new node was needed; the stronger existing node lem-weil-pbc-normal-constant-generic is recorded as the same mathematical result in another blueprint unit.",
+  "blueprint": "The single imported proof paragraph is realized by the sole proof step: its component decomposition, dominance, generic-fibre field calculation, constant-section calculation, and direct-image identification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-connected",
+    "why": "The connected-component section calculation is a generic constant-sheaf tool already proved in another unit; the imported route requires exactly its statement."
+   },
+   {
+    "node": "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
+    "why": "Generic commutative-algebra tool (localization of a domain at the nonzero elements of a base domain is a domain with irreducible spectrum), added by reviewer R-ngc2842 to justify connectedness of the generic fibre of each component."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "lem-weil-pbc-generic-fibre-localization-domain-irreducible"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ngc2842",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ngc2842 (reviewer sub-agent of L); spot-checked: def-sbc-normal-dominant-galois does define integral (via def-pc-integral-scheme) and normal; statement matches citers (lem-fin-finite-type-pushforward-embedding, lem-sc-affine-generic-second) and existing 09Z5 node lem-weil-pbc-normal-constant-generic part 1; direct image sections (e_*F)(W)=F(W x_V Spec K) per def-weil-pbc-direct-image; connected-etale-over-normal decomposition via existing lem-fin-etale-normal-components. FIX more, RETURN less: (1) C1: integrality/connectedness of the generic fibre of each component was asserted without citation; now restricted to affine W over an affine open Spec A, flatness gives A\\{0} -> C_a injective, and the generic fibre Spec(K (x)_A C_a) is nonempty and connected by existing lem-weil-pbc-generic-fibre-localization-domain-irreducible (added to uses/proof_deps/tool_uses); (2) E: Noetherianity of W (hypothesis of lem-fin-etale-normal-components) and the basis-of-site reduction now stated; (3) dropped declared tool_use lem-weil-pbc-normal-constant-generic, which no step uses.; 1 file(s) fixed by the reviewer"
+ }
 }
