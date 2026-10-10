@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "proof interprets RHom as an object of the derived category of modules over f_*O_X",
+   "place": "proof interprets RHom as an object of the derived category of modules over f_*O_X; the definition of D(B) and D^+_QCoh(B) used there",
    "via": [
     "lem-sc-finite-pushforward-derived-hom-qcoherent"
    ]
@@ -20,7 +20,9 @@
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-pc-derived-category"
+  "def-pc-derived-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof": [],
  "proof_deps": [],
@@ -49,12 +51,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-pushforward-derived-hom-qcoherent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-derived-category-qcoh-algebra",
+  "worker": "stage1",
+  "summary": "Split the imported definition without creating helper nodes: its construction uses the generic derived-category construction and the category of sheaves of modules, while D^+_QCoh(B) and the meaning of quasi-coherent B-module are clauses of the definition itself. No project Lean declaration matches the item.",
+  "blueprint": "The item is imported from the proof context of lem-sc-finite-duality, where RHom is interpreted in D(B) and D^+_QCoh(B); no separate blueprint node states this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dqa2014",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dqa2014 (reviewer sub-agent of L); spot-checked: Diff vs base touches only blueprint.place, stmt_deps (+def-weil-abstract-derived-category, +def-weil-sheaf-of-modules-category, both generic mathlib-status definitions: D(A) of an abelian category, Mod(O) for any sheaf of rings, so D(B) is well defined), status split, split_report. Source field unchanged from sheaf-dag (0BV0/0AX2, set at G1 merge 3f07d4810), so the G1 source correction is kept (B3); checked against duality.tex section-duality-finite, where Mod(f_*O_Y) and D(f_*O_Y), D^+_QCoh(f_*O_Y) are used. Consistent with sibling def-pc-derived-rhom-algebra-module: D(B) = derived category of Mod(B), with forgetful image in D(O_Y). Definition node, no proof steps; no repairs. Second reading's claims of having changed created.item/source are not in the diff and it mislabels 0BV0 as lemma-sheafhom-affine-ext (that is 0BV1); no mathematical fault."
+ }
 }
