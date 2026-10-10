@@ -208,13 +208,6 @@ noncomputable def linearEquivOfIso {M N : WeilCoefficients.{u} l} (e : M ≅ N) 
     (toModuleCat l).obj M ≃ₗ[PadicAlgCl l] (toModuleCat l).obj N :=
   ((toModuleCat l).mapIso e).toLinearEquiv
 
-/-- The linear isomorphism of a composite of isomorphisms is the composite of the linear
-isomorphisms. -/
-lemma linearEquivOfIso_trans {M N P : WeilCoefficients.{u} l} (e : M ≅ N) (f : N ≅ P) :
-    (linearEquivOfIso e).trans (linearEquivOfIso f) = linearEquivOfIso (e ≪≫ f) := by
-  ext x
-  rfl
-
 /-- A `ℚ̄_ℓ`-linear map, lifted to a `ULift ℚ̄_ℓ`-linear map of the universe lifts. -/
 noncomputable def uliftLinearMap {M N : Type*} [AddCommGroup M] [Module (PadicAlgCl l) M]
     [AddCommGroup N] [Module (PadicAlgCl l) N] (φ : M →ₗ[PadicAlgCl l] N) :

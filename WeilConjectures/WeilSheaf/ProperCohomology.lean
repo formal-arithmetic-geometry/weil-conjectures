@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.OpenImmersion
+public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
+public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
 
 /-!
 # Compactly supported and ordinary cohomology of a proper scheme
@@ -24,107 +26,10 @@ is its ordinary cohomology, Frobenius-equivariantly.
 
 - `AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoOfIsProper`: `Ra_! K ≅ Ra_* K` for `X`
   proper.
+
+This module only imports its parts, so that `import`s of
+`WeilConjectures.WeilSheaf.ProperCohomology` keep working:
+
+- `WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek`
+- `WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion`
 -/
-
-@[expose] public section
-
-universe u
-
-open CategoryTheory Limits Opposite
-
-namespace AlgebraicGeometry
-
-open ProEtale Endofunctor
-
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
-variable {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-  [X.Over (Spec (CommRingCat.of k₀))]
-
-omit [Finite k₀] in
-/-- The base change `ī` of a universally closed open immersion `i` has clopen range. -/
-lemma isClosed_range_geometricFiberMap (i : U ⟶ X) [IsOpenImmersion i] [UniversallyClosed i]
-    [i.IsOver (Spec (CommRingCat.of k₀))] :
-    IsClosed (Set.range (Scheme.Hom.geometricFiberMap i (comp_over i
-      (Spec (CommRingCat.of k₀)))).base) :=
-  have : UniversallyClosed (Scheme.Hom.geometricFiberMap i
-      (comp_over i (Spec (CommRingCat.of k₀)))) :=
-    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @UniversallyClosed) i
-      (comp_over i (Spec (CommRingCat.of k₀))) inferInstance
-  (Scheme.Hom.isClopen_range _).isClosed
-
-/-- For a universally closed open immersion `i`, the comparison `i_! ⟶ i_*` of pro-étale Weil
-sheaves is an isomorphism. -/
-instance ProEtaleWeilSheaf.isIso_extensionByZeroToLowerStar (i : U ⟶ X) [IsOpenImmersion i]
-    [UniversallyClosed i] [i.IsOver (Spec (CommRingCat.of k₀))] :
-    IsIso (ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l i) := by
-  have := isIso_adicOpenImmersionLowerShriekToLowerStar_of_isClosed_range l _
-    (isClosed_range_geometricFiberMap (k₀ := k₀) i)
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro K
-  have : IsIso ((IsoAlgebra.forget _).map
-      ((ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l i).app K)) :=
-    inferInstanceAs (IsIso ((adicOpenImmersionLowerShriekToLowerStar l
-      (Scheme.Hom.geometricFiberMap i (comp_over i (Spec (CommRingCat.of k₀))))).app K.carrier))
-  exact isIso_of_reflects_iso _ (IsoAlgebra.forget _)
-
-attribute [local instance] Compactification.over
-
-variable (k₀ l) in
-/-- Pushforwards of pro-étale Weil sheaves along equal morphisms are isomorphic. -/
-noncomputable def ProEtaleWeilSheaf.lowerStarCongr {Y : Scheme.{u}}
-    [Y.Over (Spec (CommRingCat.of k₀))] {φ φ' : X ⟶ Y} [φ.IsOver (Spec (CommRingCat.of k₀))]
-    [φ'.IsOver (Spec (CommRingCat.of k₀))] (h : φ = φ') :
-    ProEtaleWeilSheaf.lowerStar k₀ l φ ≅ ProEtaleWeilSheaf.lowerStar k₀ l φ' := by
-  subst h
-  exact Iso.refl _
-
-variable [Fact (ringChar k₀ ≠ l)]
-
-instance (i : U ⟶ X) [IsOpenImmersion i] [UniversallyClosed i]
-    [i.IsOver (Spec (CommRingCat.of k₀))] :
-    (Scheme.Hom.geometricFiberMap i
-      (comp_over i (Spec (CommRingCat.of k₀))))_!ᵃ[l].PreservesKInjectiveComplexes :=
-  have := isIso_adicOpenImmersionLowerShriekToLowerStar_of_isClosed_range l _
-    (isClosed_range_geometricFiberMap (k₀ := k₀) i)
-  Functor.preservesKInjectiveComplexes_of_iso
-    (asIso (adicOpenImmersionLowerShriekToLowerStar l _)).symm
-
-/-- **For a proper `k₀`-scheme, compactly supported direct image is direct image**: for the
-chosen compactification `X ⟶[i] Z ⟶[g] Spec k₀` of the proper structure morphism `a`, the open
-immersion `i` is universally closed, so that `Ra_! K = Rg_*(i_! K) ≅ Rg_*(i_* K) ≅ Ra_* K`. -/
-noncomputable def WeilComplex.derivedLowerShriekObjIsoOfIsProper
-    [IsProper (X ↘ Spec (CommRingCat.of k₀))] (K : WeilComplex k₀ l X) :
-    (WeilComplex.derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj K ≅
-      (WeilComplex.derivedLowerStar (X ↘ Spec (CommRingCat.of k₀))).obj K := by
-  let c := HasCompactification.compactification (X ↘ Spec (CommRingCat.of k₀))
-    (hf := hasCompactification_of_over (k₀ := k₀) _)
-  have : IsProper c.i := c.isProper_openImmersion inferInstance
-  have : IsOpenImmersion c.i := c.isOpenImmersion
-  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
-  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
-  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-    (ProEtale.AdicSheaf l (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
-  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
-    (ProEtale.AdicSheaf l (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
-  refine ObjectProperty.isoMk _ ?_
-  change (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor.obj
-    ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory.obj K.obj) ≅ _
-  exact (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor.mapIso
-      ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).rightDerivedFunctorIsoMapDerivedCategory.app
-        K.obj).symm ≪≫
-    (IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompIso
-      (ProEtale.adicOpenImmersionLowerShriekGeometricFiberMapCompFrobeniusIso l c.i
-        (comp_over c.i _))
-      (ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso l c.g (comp_over c.g _))).symm.app
-        K.obj ≪≫
-    (Functor.rightDerivedFunctorNatIso (Functor.isoWhiskerRight
-      (asIso (ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l c.i))
-      (ProEtaleWeilSheaf.lowerStar k₀ l c.g))).app K.obj ≪≫
-    (Functor.rightDerivedFunctorNatIso (ProEtaleWeilSheaf.lowerStarCompIso k₀ l c.i c.g)).app
-      K.obj ≪≫
-    (Functor.rightDerivedFunctorNatIso (ProEtaleWeilSheaf.lowerStarCongr k₀ l c.comm.symm)).app
-      K.obj
-
-end AlgebraicGeometry
