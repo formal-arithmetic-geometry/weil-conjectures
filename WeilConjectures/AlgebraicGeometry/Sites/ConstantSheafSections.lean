@@ -139,3 +139,76 @@ theorem bijective_toSheafify_app_terminal [ConnectedSpace X] :
     exact hloc.apply_eq_of_preconnectedSpace x₀ x
 
 end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+
+variable (X : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ]
+
+/-- **Global sections of a constant étale sheaf of `Λ`-modules on a connected scheme.** For a
+connected scheme `X` and a `Λ`-module `M`, the map from `M` to the sections over `X` of the
+constant étale sheaf `M` is bijective. This is
+`AlgebraicGeometry.Scheme.bijective_toSheafify_app_terminal` transported along the forgetful
+functor to abelian groups, which commutes with sheafification. -/
+theorem bijective_toSheafify_app_terminal_moduleCat [ConnectedSpace X]
+    (M : ModuleCat.{u + 1} Λ) :
+    Function.Bijective
+      ((CategoryTheory.toSheafify X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).obj M)).app
+        (op (Etale.mk (𝟙 X)))) := by
+  have : X.smallEtaleTopology.PreservesSheafification
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
+    GrothendieckTopology.instPreservesSheafification _ _
+  let U := forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
+  let P := (Functor.const X.Etaleᵒᵖ).obj M
+  let T : X.Etaleᵒᵖ := op (Etale.mk (𝟙 X))
+  have key := congr_app (sheafComposeIso_hom_fac X.smallEtaleTopology U P) T
+  have hnat := congr_app
+    (toSheafify_naturality X.smallEtaleTopology (Functor.constComp X.Etaleᵒᵖ M U).hom) T
+  have h₁ := bijective_toSheafify_app_terminal X (U.obj M)
+  have h₂ : Function.Bijective
+      ((CategoryTheory.toSheafify X.smallEtaleTopology (P ⋙ U)).app T) := by
+    have e₁ : Function.Bijective ((Functor.constComp X.Etaleᵒᵖ M U).hom.app T) :=
+      ConcreteCategory.bijective_of_isIso _
+    have e₂ : Function.Bijective ((sheafifyMap X.smallEtaleTopology
+        (Functor.constComp X.Etaleᵒᵖ M U).hom).app T) :=
+      ConcreteCategory.bijective_of_isIso _
+    have h₃ : Function.Bijective ((CategoryTheory.toSheafify X.smallEtaleTopology (P ⋙ U) ≫
+        sheafifyMap X.smallEtaleTopology (Functor.constComp X.Etaleᵒᵖ M U).hom).app T) := by
+      rw [← hnat, NatTrans.comp_app, ConcreteCategory.coe_comp]
+      exact h₁.comp e₁
+    rw [NatTrans.comp_app, ConcreteCategory.coe_comp] at h₃
+    exact (Function.Bijective.of_comp_iff' e₂ _).1 h₃
+  have e₃ : Function.Bijective ((sheafifyComposeIso X.smallEtaleTopology U P).hom.app T) :=
+    ConcreteCategory.bijective_of_isIso _
+  have h₄ := e₃.comp h₂
+  rw [← ConcreteCategory.coe_comp, ← NatTrans.comp_app, key] at h₄
+  exact h₄
+
+/-- The unit `M ⟶ Γ(X, M_X)` of the adjunction between the constant sheaf functor and global
+sections is the component at the terminal object of the sheafification map of the constant
+presheaf. -/
+theorem constantSheafAdj_unit_app {T : X.Etale} (hT : IsTerminal T) (M : ModuleCat.{u + 1} Λ) :
+    (constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ) hT).unit.app M =
+      (CategoryTheory.toSheafify X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).obj M)).app
+        (op T) := by
+  simp only [constantSheafAdj, constantPresheafAdj, sheafificationAdjunction, toSheafify]
+  erw [Adjunction.comp_unit_app]
+
+/-- For a connected scheme `X`, the unit `M ⟶ Γ(X, M_X)` of the adjunction between the constant
+étale sheaf functor and global sections is an isomorphism: the global sections of the constant
+sheaf `M` are `M`. -/
+theorem isIso_constantSheafAdj_unit_app [ConnectedSpace X] {T : X.Etale} (hT : IsTerminal T)
+    (M : ModuleCat.{u + 1} Λ) :
+    IsIso ((constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ) hT).unit.app M) := by
+  refine (ConcreteCategory.isIso_iff_bijective _).2 ?_
+  erw [constantSheafAdj_unit_app]
+  have hT₀ : IsTerminal (Etale.mk (𝟙 X)) :=
+    MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale _
+  have h := (CategoryTheory.toSheafify X.smallEtaleTopology
+    ((Functor.const X.Etaleᵒᵖ).obj M)).naturality (hT.uniqueUpToIso hT₀).hom.op
+  simp only [Functor.const_obj_map] at h
+  erw [Category.id_comp] at h
+  erw [h, ConcreteCategory.coe_comp]
+  exact (ConcreteCategory.bijective_of_isIso _).comp
+    (bijective_toSheafify_app_terminal_moduleCat X M)
+
+end AlgebraicGeometry.Scheme
