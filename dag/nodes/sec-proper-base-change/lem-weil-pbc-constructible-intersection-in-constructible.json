@@ -10,9 +10,62 @@
  "stmt_deps": [
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$E$ is retrocompact in $X$.* By [lem-weil-pbc-constructible-is-retrocompact] (Stacks 09YH) the constructible subset $E$ of $X$ is retrocompact in $X$ [def-weil-constructible-subset]: $E\\cap W$ is quasi-compact for every quasi-compact open $W\\subseteq X$. This is hypothesis (1) of Stacks 09YF for $T=E$; hypothesis (2) is the assumption on $X$. (Throughout, a subset of $E$ is quasi-compact in the subspace $E$ if and only if it is quasi-compact in $X$, since the topology of $E$ is induced from $X$.)",
+   "uses": [
+    "lem-weil-pbc-constructible-is-retrocompact",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 09YI (lemma-intersect-constructible-with-constructible, line 2750), proof ('Combine Lemmas 09YF and 09YH'); Lemma Tag 09YH (lemma-constructible-is-retrocompact)"
+   }
+  },
+  {
+   "text": "*Quasi-compact opens of $E$ come from quasi-compact opens of $X$ (the 'details omitted' of 09YF).* Let $W\\subseteq E$ be open in $E$ and quasi-compact. Then $W=E\\cap O$ for an open $O\\subseteq X$, and $O=\\bigcup_j B_j$ with $B_j\\subseteq X$ quasi-compact open, since these form a basis of $X$. The sets $E\\cap B_j$ are open in $E$ and cover $W$, so finitely many of them, $E\\cap B_1,\\dots,E\\cap B_m$, cover $W$; as each is contained in $W$, $W=E\\cap W'$ with $W'=B_1\\cup\\dots\\cup B_m$, which is open and quasi-compact in $X$ (a finite union of quasi-compact subsets is quasi-compact).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 09YF (lemma-intersect-constructible-with-retrocompact, line 2676), proof, applied with T = E ('we can find a quasi-compact open $W'\\subset X$ such that $W=T\\cap W'$ (details omitted)'); the details are written out here by the agent"
+   }
+  },
+  {
+   "text": "*Retrocompact opens of $X$ restrict to retrocompact opens of $E$.* Let $V\\subseteq X$ be open and retrocompact in $X$ [def-weil-constructible-subset]. Then $V\\cap E$ is open in $E$. Let $W\\subseteq E$ be a quasi-compact open of $E$ and write $W=E\\cap W'$ with $W'\\subseteq X$ quasi-compact open (step 2). Then $(V\\cap E)\\cap W=E\\cap(V\\cap W')$. Here $V\\cap W'$ is open, and quasi-compact because $V$ is retrocompact in $X$; hence $E\\cap(V\\cap W')$ is quasi-compact because $E$ is retrocompact in $X$ (step 1). So $V\\cap E$ is retrocompact in $E$.",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 09YF (lemma-intersect-constructible-with-retrocompact, line 2676), proof, applied with T = E ('Hence $V\\cap T\\cap W=V\\cap T\\cap W'$ is the intersection of $T$ with the quasi-compact open $V\\cap W'$ ... Thus $V\\cap T\\cap W$ is quasi-compact')"
+   }
+  },
+  {
+   "text": "*Conclusion.* Let $\\iota:E\\to X$ be the inclusion of the subspace $E$; it is continuous, and by step 3 the inverse image $\\iota^{-1}(V)=V\\cap E$ of every retrocompact open $V\\subseteq X$ is retrocompact in $E$. By [lem-weil-pbc-constructible-preimage] (Stacks 005I) the inverse image $\\iota^{-1}(E')=E\\cap E'$ of the constructible subset $E'$ of $X$ is constructible in $E$ [def-weil-constructible-subset]. (Explicitly: if $E'=\\bigcup_{i=1}^n U_i\\cap(X\\setminus V_i)$ with $U_i,V_i$ retrocompact open in $X$, then $E\\cap E'=\\bigcup_{i=1}^n(U_i\\cap E)\\cap(E\\setminus(V_i\\cap E))$ with $U_i\\cap E$, $V_i\\cap E$ retrocompact open in $E$ by step 3.)",
+   "uses": [
+    "lem-weil-pbc-constructible-preimage",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 09YF (lemma-intersect-constructible-with-retrocompact, line 2676), proof, applied with T = E ('It suffices to show that $V\\cap T$ is retrocompact in $T$ by Lemma 005I'); Lemma Tag 005I (lemma-inverse-images-constructibles, line 2591)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constructible-is-retrocompact",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-constructible-preimage"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 09YI (Lemma 5.15.11), proof: combination of Lemma Tag 09YF (proof, with its omitted details written out) and Lemma Tag 09YH; Lemma Tag 005I"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +94,38 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match: the induced-topology case for a retrocompact (non-open, non-closed) subspace is absent; IsConstructible.preimage (005I) is the tool the Stacks proof of 09YF uses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "retrocompact subset T, constructible set E, intersection E ∩ T constructible in subspace T, basis of compact opens",
+   "results": "IsRetrocompact, IsRetrocompact.isConstructible, Topology.IsConstructible, Topology.IsConstructible.inter, Topology.IsConstructible.induction_of_isTopologicalBasis, PrespectralSpace.isBasis_opens, IsRetrocompact.inter, Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover",
+   "date": "2026-10-10",
+   "verdict": "no match for 09YF/09YI (the induced topology on a retrocompact, not open or closed, subset)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inclusion of a retrocompact subset into a space with a basis of compact open sets is a spectral map; preimage of constructible set under subtype val is constructible",
+   "results": "IsRetrocompact_iff_isSpectralMap_subtypeVal (Mathlib.Topology.Constructible), Topology.IsOpenEmbedding.spectralSpace, IsOpenMap.exists_opens_image_eq_of_prespectralSpace, Topology.IsOpenEmbedding.prespectralSpace, PrespectralSpace.of_isInducing, IsCompact.preimage_of_isOpen",
+   "date": "2026-10-10",
+   "verdict": "no match; IsRetrocompact_iff_isSpectralMap_subtypeVal (Constructible.lean:134) gives that compact opens of X pull back to compact sets of E, a part of step 3, not the statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible (Subtype.val ⁻¹' _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsRetrocompact.*preimage\\|isRetrocompact_preimage\\|PrespectralSpace.*IsRetrocompact\\|IsRetrocompact.*Subtype\\|IsConstructible.*↓∩' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Topology/Constructible.lean:135 IsRetrocompact_iff_isSpectralMap_subtypeVal, :152 IsRetrocompact.preimage_of_isOpenEmbedding (005J), :159 IsRetrocompact.preimage_of_isClosedEmbedding (09YE), :378 IsLocallyConstructible",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib pulls back retrocompact opens only along open embeddings and closed embeddings with compact complement; the step-3 statement for a retrocompact subspace is absent, so the item is not a leaf; its last step is the Mathlib leaf IsConstructible.preimage (005I)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +145,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constructible-intersection-in-constructible",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks Topology Lemma 09YI (topology.tex line 2750) and kept. Its Stacks proof ('Combine 09YF and 09YH') written out in four steps: (1) E is retrocompact by 09YH [lem-weil-pbc-constructible-is-retrocompact, unsplit, cited as it is]; (2)-(3) the proof of 09YF for T = E, with its 'details omitted' (every quasi-compact open of E is E ∩ W' with W' quasi-compact open in X, by the basis and compactness) written out, giving that V ∩ E is retrocompact open in E for every retrocompact open V of X; (4) Stacks 005I applied to the inclusion E → X, a new Mathlib leaf lem-weil-pbc-constructible-preimage (Topology.IsConstructible.preimage, Constructible.lean:244, tagged 005I, exact). No separate node for 09YF was created: its argument is elementary topology and is carried in steps 2-3 (only this item needs it). Tags 09YI, 09YF, 09YH, 005I verified in tags/tags. Mathlib has no version of 09YF or 09YI (searches recorded)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps following Topology 09YI (09YF + 09YH): E retrocompact (09YH node); quasi-compact opens of E come from quasi-compact opens of X (the omitted details of 09YF, written out); retrocompact opens restrict; 005I (new exact Mathlib leaf, Constructible.lean:244 verified by L)."
+ }
 }

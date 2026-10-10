@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-constructible-preimage",
+ "kind": "statement",
+ "title": "Inverse images of constructible sets under maps pulling back retrocompact opens",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces such that for every open subset $V\\subseteq Y$ which is retrocompact in $Y$ [def-weil-constructible-subset] the inverse image $f^{-1}(V)$ is retrocompact in $X$. Then for every constructible subset $C\\subseteq Y$ [def-weil-constructible-subset] the inverse image $f^{-1}(C)$ is a constructible subset of $X$ (Stacks Topology, Lemma 005I).",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 005I (lemma-inverse-images-constructibles, line 2591)"
+ },
+ "stmt_deps": [
+  "def-weil-constructible-subset"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "preimage of a constructible set under a continuous map pulling back retrocompact open sets to retrocompact sets is constructible",
+   "results": "Topology.IsConstructible.preimage, Topology.isConstructible_preimage_iff_of_isOpenEmbedding, Topology.IsConstructible.preimage_of_isOpenEmbedding, Topology.IsConstructible.image_of_isOpenEmbedding (Mathlib.Topology.Constructible); AlgebraicGeometry.Scheme.Hom.isConstructible_preimage (Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation); Continuous.isOpen_preimage",
+   "date": "2026-10-10",
+   "verdict": "match: Topology.IsConstructible.preimage"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If f : X → Y is continuous and preimages of open retrocompact subsets are retrocompact, then preimages of constructible subsets are constructible",
+   "results": "Topology.IsConstructible.preimage, Topology.isConstructible_preimage_iff_of_isOpenEmbedding, Topology.IsConstructible.preimage_of_isClosedEmbedding, .image_of_isOpenEmbedding, .image_of_isClosedEmbedding (Mathlib.Topology.Constructible)",
+   "date": "2026-10-10",
+   "verdict": "match: Topology.IsConstructible.preimage"
+  },
+  {
+   "tool": "loogle",
+   "query": "Topology.IsConstructible.preimage",
+   "results": "Topology.IsConstructible.preimage (Mathlib.Topology.Constructible): (hfcont : Continuous f) (hf : ∀ s, IsOpen s → IsRetrocompact s → IsRetrocompact (f ⁻¹' s)) (hs : IsConstructible s) : IsConstructible (f ⁻¹' s)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn '005I' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 240,252p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Constructible.lean",
+   "results": "Topology/Constructible.lean:243 @[stacks 005I], line 244 lemma IsConstructible.preimage (namespace Topology); proof by IsConstructible.empty_union_induction",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Topology.IsConstructible.preimage",
+  "file": "Mathlib/Topology/Constructible.lean",
+  "line": 244,
+  "how": "exact: hypotheses Continuous f and ∀ s, IsOpen s → IsRetrocompact s → IsRetrocompact (f ⁻¹' s), conclusion IsConstructible s → IsConstructible (f ⁻¹' s); IsRetrocompact (line 52: s ∩ U compact for every compact open U, Mathlib's compact being quasi-compact) and IsConstructible (line 178) are the node's notions [def-weil-constructible-subset]. Tagged @[stacks 005I]. Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-constructible-intersection-in-constructible",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
