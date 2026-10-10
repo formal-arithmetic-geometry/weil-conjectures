@@ -1,8 +1,8 @@
 # Work queue
 
-851 items; claim with `tools/claim.py next <group> [--stage N]`.
+850 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (389)
+## Stage 1: nodes to split (388)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -43,7 +43,6 @@
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
 | `lem-sc-pic-proper-ntorsion` | 2006 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-composition-units` | 2006 | none |
-| `lem-weil-pbc-sets-finite-surjective-descent` | 2006 | none |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
 | `lem-weil-pbc-sets-etale-inverse-image-stalk-germ` | 2007 | none |
 | `lem-weil-pbc-sets-finite-pushforward-stalk` | 2007 | none |
@@ -863,7 +862,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 406 nodes that wait for stage 1, 855 nodes that wait for a statement dependency.
+Not open yet: 405 nodes that wait for stage 1, 856 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
