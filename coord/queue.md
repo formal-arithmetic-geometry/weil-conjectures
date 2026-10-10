@@ -28,7 +28,6 @@
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
 | `lem-sc-p1-ext-connecting-yoneda` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
-| `lem-sp-cart-eilenberg-left-exact-cohomology` | 3015 | none |
 | `lem-pc-brown-cohomological-representability` | 3016 | none |
 | `lem-pc-derived-adjoint-functors` | 3016 | none |
 | `lem-pc-derived-ambient-direct-sums` | 3016 | none |
@@ -48,15 +47,16 @@
 | `prop-pd-picard-degree-decomposition` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
-| `lem-pc-zero-scheme-pullback` | 4009 | none |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
 | `lem-pc-arrow-iso-pullback-counit` | 4010 | none |
+| `lem-pc-ideal-sheaf-comap-affine-extension` | 4010 | none |
 | `lem-pc-invertible-common-free-generator` | 4010 | none |
 | `lem-pc-invertible-sheaf-instance` | 4010 | none |
 | `lem-pc-projection-formula` | 4010 | sorry_here |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
+| `lem-pc-zero-scheme-pullback-local-coefficient` | 4010 | none |
 | `lem-pc-zero-scheme-recd` | 4010 | rests_on_sorry |
 | `def-weil-pbc-etale-sheaves` | 5002 | none |
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
@@ -924,7 +924,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1301 nodes that wait for a statement dependency, 304 nodes that wait for stage 1.
+Not open yet: 1303 nodes that wait for a statement dependency, 304 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
