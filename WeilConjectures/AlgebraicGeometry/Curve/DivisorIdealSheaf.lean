@@ -800,4 +800,326 @@ theorem exists_ord_eq_of_nonempty_iso {E₁ E₂ : closedPoints C →₀ ℕ}
 
 end Divisor
 
+/-! ### Invertible ideal sheaves are ideal sheaves of effective divisors -/
+
+section Curve
+
+variable {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
+  [SmoothOfRelativeDimension 1 f] [IsIntegral C] [IsNoetherian C]
+
+/-- The order of an invertible ideal sheaf on a Noetherian integral scheme is nonzero at only
+finitely many points: near each point of a finite affine cover it is the order of a single
+nonzero function. -/
+lemma IdealSheafData.IsInvertible.finite_setOf_ordAt_ne_zero {I : C.IdealSheafData}
+    (hI : I.IsInvertible) : {y : C | I.ordAt y ≠ 0}.Finite := by
+  choose U hyU _hUO b hb using fun y : C ↦
+    hI.isLocallyPrincipal.exists_ideal_eq_span (O := ⊤) (y := y) trivial
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun y ↦ ((U y).1 : Set C))
+    (fun y ↦ (U y).1.2) fun y _ ↦ Set.mem_iUnion.2 ⟨y, hyU y⟩
+  let S (y : C) : Set C := haveI : Nonempty (U y).1 := ⟨⟨y, hyU y⟩⟩
+    {z | C.ord (C.germToFunctionField (U y).1 (b y)) z ≠ 0}
+  have hS (y : C) : (S y).Finite := by
+    have : Nonempty (U y).1 := ⟨⟨y, hyU y⟩⟩
+    exact finite_setOf_ord_ne_zero (hI.germToFunctionField_ne_zero (hb y))
+  refine (t.finite_toSet.biUnion fun y _ ↦ hS y).subset fun z hz ↦ ?_
+  obtain ⟨y, hyt, hzy⟩ : ∃ y ∈ t, z ∈ (U y).1 := by simpa using ht (Set.mem_univ z)
+  have : Nonempty (U y).1 := ⟨⟨y, hyU y⟩⟩
+  refine Set.mem_biUnion hyt ?_
+  change C.ord (C.germToFunctionField (U y).1 (b y)) z ≠ 0
+  rwa [← I.ordAt_eq hzy (hb y)]
+
+include f in
+/-- **Every effective Cartier divisor on a smooth curve is a sum of closed points.** An
+invertible ideal sheaf `I` on a smooth integral curve is the ideal sheaf `𝒪_C(-E)` of the
+effective divisor `E = ∑_P ord_P(I) [P]`: near every point, local generators of `I` and of
+`𝒪_C(-E)` have the same orders everywhere, so they differ by a unit. -/
+theorem IdealSheafData.IsInvertible.exists_eq_idealSheaf {I : C.IdealSheafData}
+    (hI : I.IsInvertible) : ∃ E : closedPoints C →₀ ℕ, I = Divisor.idealSheaf E := by
+  have hfin : {P : closedPoints C | (I.ordAt P.1).toNat ≠ 0}.Finite :=
+    (hI.finite_setOf_ordAt_ne_zero.preimage Subtype.val_injective.injOn).subset fun P hP ↦ by
+      change (I.ordAt P.1).toNat ≠ 0 at hP
+      change I.ordAt P.1 ≠ 0
+      omega
+  let E : closedPoints C →₀ ℕ := Finsupp.ofSupportFinite (fun P ↦ (I.ordAt P.1).toNat) hfin
+  refine ⟨E, ?_⟩
+  have hJ := Divisor.isInvertible_idealSheaf f E
+  have hord (y : C) : I.ordAt y = (Divisor.idealSheaf E).ordAt y := by
+    by_cases hy : IsClosed {y}
+    · rw [Divisor.ordAt_idealSheaf f E ⟨y, hy⟩]
+      simp only [E]
+      exact (Int.toNat_of_nonneg (I.ordAt_nonneg y)).symm
+    · rw [Divisor.ordAt_idealSheaf_of_not_isClosed f E hy]
+      obtain ⟨U, hyU, -, b, hb⟩ :=
+        hI.isLocallyPrincipal.exists_ideal_eq_span (O := ⊤) (y := y) trivial
+      have : Nonempty U.1 := ⟨⟨y, hyU⟩⟩
+      rw [I.ordAt_eq hyU hb]
+      exact ord_eq_zero_of_coheight_neq_one (fun h ↦ hy (isClosed_of_coheight_eq_one f h)) _
+  have key (x : C) : ∃ W : C.affineOpens, x ∈ W.1 ∧
+      I.ideal W = (Divisor.idealSheaf E).ideal W := by
+    obtain ⟨W, hxW, -, ⟨a, ha⟩, b, hb⟩ :=
+      hI.isLocallyPrincipal.exists_ideal_eq_span₂ hJ.isLocallyPrincipal (O := ⊤) (y := x) trivial
+    have : Nonempty W.1 := ⟨⟨x, hxW⟩⟩
+    have ha0 := hI.germToFunctionField_ne_zero ha
+    have hb0 := hJ.germToFunctionField_ne_zero hb
+    obtain ⟨u, hu, hgu⟩ := exists_isUnit_germToFunctionField_eq_of_ord_eq_zero f (V := W.1)
+      (div_ne_zero ha0 hb0) fun z hz ↦ by
+        rw [ord_div ha0 hb0, ← I.ordAt_eq hz ha, ← (Divisor.idealSheaf E).ordAt_eq hz hb, hord,
+          sub_self]
+    have hab : a = u * b :=
+      C.germToFunctionField_injective W.1 (by rw [map_mul, hgu, div_mul_cancel₀ _ hb0])
+    refine ⟨W, hxW, ?_⟩
+    rw [ha, hb, hab, Ideal.span_singleton_mul_left_unit hu]
+  choose W hxW hW using key
+  exact IdealSheafData.ext_of_iSup_eq_top W
+    (eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxW x⟩) hW
+
+end Curve
+
+/-! ### Rational coordinates of sections of invertible modules -/
+
+section RationalCoordinate
+
+variable {M : X.Modules}
+
+/-- Sections of a sheaf of modules over an empty open are all equal. -/
+lemma Modules.eq_of_isEmpty {W : X.Opens} (hW : IsEmpty W) (m m' : Γ(M, W)) : m = m' :=
+  TopCat.Sheaf.eq_of_locally_eq' ⟨M.presheaf, M.isSheaf⟩ (fun _ : W ↦ W) W (fun _ ↦ 𝟙 W)
+    (fun x hx ↦ (hW.false ⟨x, hx⟩).elim) m m' fun i ↦ (hW.false i).elim
+
+variable [IsIntegral X]
+
+/-- **Restriction of sections of an invertible module on an integral scheme is injective.**
+Locally the module is trivial, and restriction of functions to a nonempty open is injective. -/
+lemma Modules.presheaf_map_injective [SheafOfModules.IsInvertible.{u, u, u} M] {W W' : X.Opens}
+    (h : W' ≤ W) [Nonempty W'] : Function.Injective (M.presheaf.map (homOfLE h).op) := by
+  rw [injective_iff_map_eq_zero]
+  intro m hm
+  obtain ⟨⟨y, hyW'⟩⟩ := ‹Nonempty W'›
+  have key (x : W) : ∃ (V : X.Opens) (hV : V ≤ W), x.1 ∈ V ∧
+      M.presheaf.map (homOfLE hV).op m = 0 := by
+    obtain ⟨U, hxU, hUW, e, he⟩ := Modules.exists_isFreeGenerator M x.2
+    obtain ⟨r, hr⟩ := he.exists_smul_eq (M.presheaf.map (homOfLE hUW).op m)
+    refine ⟨U.1, hUW, hxU, ?_⟩
+    obtain ⟨z, hzU, hzW'⟩ : ((U.1 : Set X) ∩ W').Nonempty :=
+      nonempty_preirreducible_inter U.1.2 W'.2 ⟨x, hxU⟩ ⟨y, hyW'⟩
+    have hle₁ : U.1 ⊓ W' ≤ U.1 := inf_le_left
+    have hle₂ : U.1 ⊓ W' ≤ W' := inf_le_right
+    have : Nonempty (U.1 ⊓ W' : X.Opens) := ⟨⟨z, hzU, hzW'⟩⟩
+    have : Nonempty U.1 := ⟨⟨_, hxU⟩⟩
+    have h1 : X.presheaf.map (homOfLE hle₁).op r • M.presheaf.map (homOfLE hle₁).op e = 0 := by
+      rw [← Modules.map_smul, hr, Modules.presheaf_map_homOfLE_map_homOfLE,
+        ← Modules.presheaf_map_homOfLE_map_homOfLE h hle₂, hm, map_zero]
+    have h2 : X.presheaf.map (homOfLE hle₁).op r = 0 :=
+      (he.map hle₁).smul_left_injective (h1.trans (zero_smul _ _).symm)
+    have h3 : r = 0 := eq_of_germToFunctionField_eq fun _ ↦ by
+      rw [← germToFunctionField_map hle₁, h2, map_zero, map_zero]
+    rw [← hr, h3, zero_smul]
+  choose V hV hxV hm0 using key
+  exact TopCat.Sheaf.eq_of_locally_eq' ⟨M.presheaf, M.isSheaf⟩ (fun x : W ↦ V x) W
+    (fun x ↦ homOfLE (hV x)) (fun x hx ↦ TopologicalSpace.Opens.mem_iSup.2 ⟨⟨x, hx⟩, hxV _⟩)
+    m 0 fun x ↦ (hm0 x).trans (map_zero _).symm
+
+omit [IsIntegral X] in
+lemma Modules.IsFreeGenerator.ne_zero {U : X.Opens} [Nonempty U] {e : Γ(M, U)}
+    (he : Modules.IsFreeGenerator e) : e ≠ 0 := by
+  intro h0
+  have : (1 : Γ(X, U)) = 0 := he.smul_left_injective (by simp only [h0, smul_zero])
+  exact one_ne_zero this
+
+namespace Modules.IsFreeGenerator
+
+variable {U : X.Opens} {e : Γ(M, U)} (he : Modules.IsFreeGenerator e)
+
+/-- The *rational coordinate* of a section `m` of `M` over `W` with respect to a free generator
+`e` of `M` over `U`, on an integral scheme: the image in the function field of the coefficient
+of `m` along `e` on `W ⊓ U`. -/
+noncomputable def ratCoord {W : X.Opens} [Nonempty (W ⊓ U : X.Opens)] (m : Γ(M, W)) :
+    X.functionField :=
+  X.germToFunctionField (W ⊓ U)
+    ((he.map inf_le_right).coeff (M.presheaf.map (homOfLE inf_le_left).op m))
+
+include he in
+lemma ratCoord_smul {W : X.Opens} [Nonempty (W ⊓ U : X.Opens)] [Nonempty W] (a : Γ(X, W))
+    (m : Γ(M, W)) : he.ratCoord (a • m) = X.germToFunctionField W a * he.ratCoord m := by
+  rw [ratCoord, ratCoord, Modules.map_smul, coeff_smul_left, map_mul, germToFunctionField_map]
+
+lemma ratCoord_zero {W : X.Opens} [Nonempty (W ⊓ U : X.Opens)] :
+    he.ratCoord (0 : Γ(M, W)) = 0 := by
+  rw [ratCoord, map_zero, coeff_zero, map_zero]
+
+lemma ratCoord_map {W W' : X.Opens} (h : W' ≤ W) [Nonempty (W' ⊓ U : X.Opens)]
+    [Nonempty (W ⊓ U : X.Opens)] (m : Γ(M, W)) :
+    he.ratCoord (M.presheaf.map (homOfLE h).op m) = he.ratCoord m := by
+  have hle : W' ⊓ U ≤ W ⊓ U := inf_le_inf_right U h
+  rw [ratCoord, ratCoord, ← germToFunctionField_map hle]
+  congr 1
+  rw [coeff_eq_iff, ← Modules.presheaf_map_homOfLE_map_homOfLE (inf_le_right : W ⊓ U ≤ U) hle,
+    ← Modules.map_smul, coeff_smul, Modules.presheaf_map_homOfLE_map_homOfLE,
+    Modules.presheaf_map_homOfLE_map_homOfLE]
+
+lemma ratCoord_injective [SheafOfModules.IsInvertible.{u, u, u} M] {W : X.Opens}
+    [Nonempty (W ⊓ U : X.Opens)] : Function.Injective (he.ratCoord (W := W)) := by
+  intro m m' hmm
+  have h1 := X.germToFunctionField_injective (W ⊓ U) hmm
+  have h2 : M.presheaf.map (homOfLE (inf_le_left : W ⊓ U ≤ W)).op m =
+      M.presheaf.map (homOfLE (inf_le_left : W ⊓ U ≤ W)).op m' := by
+    rw [← (he.map inf_le_right).coeff_smul (M.presheaf.map _ m), h1,
+      (he.map inf_le_right).coeff_smul]
+  exact Modules.presheaf_map_injective inf_le_left h2
+
+end Modules.IsFreeGenerator
+
+end RationalCoordinate
+
+/-! ### Every invertible module is a quotient of ideal sheaves of effective divisors -/
+
+section Curve
+
+open Limits MonoidalCategory
+
+open scoped AlgebraicGeometry.Scheme.Modules
+
+variable {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
+  [SmoothOfRelativeDimension 1 f] [IsIntegral C] [IsNoetherian C]
+
+include f in
+/-- **Every invertible module on a smooth curve comes from divisors.** For an invertible module
+`ℒ` on a smooth integral curve there are effective divisors `E₁` and `E₂` with
+`ℒ ≅ 𝒪_C(E₁) ⊗ 𝒪_C(-E₂)`, where `𝒪_C(E₁) = 𝒪_C(-E₁)ᵛ`.
+
+Fix a trivialization `e₀` of `ℒ` on a nonempty open `U₀`, and trivializations `eᵢ` on a finite
+open cover. The rational functions `gᵢ = e₀ / eᵢ` have finitely many zeros and poles; let `E₂`
+be a large multiple of the sum of these points. Near every point, with a local generator `b` of
+`𝒪_C(-E₂)`, the function `b gᵢ` is regular, and `b ↦ b gᵢ eᵢ = b e₀` glues to a nonzero morphism
+`ψ : 𝒪_C(-E₂) ⟶ ℒ` (which is "multiplication by `e₀`"). Its zero scheme is an effective
+Cartier divisor `E₁`, so `ℒ ≅ 𝒪_C(E₁) ⊗ 𝒪_C(-E₂)`. -/
+theorem Modules.exists_nonempty_iso_dual_toModules_idealSheaf_tensorObj (ℒ : C.Modules)
+    [ℒ.IsInvertible] : ∃ E₁ E₂ : closedPoints C →₀ ℕ,
+      Nonempty (ℒ ≅ (Divisor.idealSheaf E₁).toModulesᵛ ⊗ (Divisor.idealSheaf E₂).toModules) := by
+  classical
+  have := Modules.IsInvertible.sheafOfModules_isInvertible ℒ
+  -- a reference trivialization `e₀` of `ℒ` on a nonempty open `U₀`
+  obtain ⟨U₀, hU₀, -, e₀, he₀⟩ :=
+    Modules.exists_isFreeGenerator ℒ (W := ⊤) (x := genericPoint C) trivial
+  have hmeet (W : C.Opens) (y : C) (hy : y ∈ W) : Nonempty (W ⊓ U₀.1 : C.Opens) := by
+    obtain ⟨z, hzW, hzU⟩ := nonempty_preirreducible_inter W.2 U₀.1.2 ⟨y, hy⟩ ⟨_, hU₀⟩
+    exact ⟨⟨z, hzW, hzU⟩⟩
+  -- trivializations `e i` on a finite cover
+  choose V hxV _hV e he using fun x : C ↦
+    Modules.exists_isFreeGenerator ℒ (W := ⊤) (x := x) trivial
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun x ↦ ((V x).1 : Set C))
+    (fun x ↦ (V x).1.2) fun x _ ↦ Set.mem_iUnion.2 ⟨x, hxV x⟩
+  have hne (i : C) : (e i) ≠ 0 := by
+    have : Nonempty (V i).1 := ⟨⟨i, hxV i⟩⟩
+    exact (he i).ne_zero
+  -- the rational functions `g i = e₀ / e i`
+  let g (i : C) : C.functionField :=
+    haveI := hmeet (V i).1 i (hxV i)
+    (he₀.ratCoord (e i))⁻¹
+  have hg (i : C) : g i ≠ 0 := by
+    have := hmeet (V i).1 i (hxV i)
+    refine inv_ne_zero fun h0 ↦ hne i (he₀.ratCoord_injective ?_)
+    rw [h0, he₀.ratCoord_zero]
+  -- the finitely many zeros and poles of the `g i`, and the divisor `E`
+  let S (i : C) : Set (closedPoints C) := {P | C.ord (g i) P.1 ≠ 0}
+  have hS (i : C) : (S i).Finite :=
+    (finite_setOf_ord_ne_zero (hg i)).preimage Subtype.val_injective.injOn
+  let T : Finset (closedPoints C) := t.biUnion fun i ↦ (hS i).toFinset
+  let N : ℕ := t.sup fun i ↦ (hS i).toFinset.sup fun P ↦ (-C.ord (g i) P.1).toNat
+  let E : closedPoints C →₀ ℕ := ∑ P ∈ T, Finsupp.single P N
+  have hE (i : C) (hi : i ∈ t) (P : closedPoints C) : 0 ≤ C.ord (g i) P.1 + E P := by
+    by_cases hP : C.ord (g i) P.1 = 0
+    · rw [hP, zero_add]
+      exact Nat.cast_nonneg _
+    have hPS : P ∈ (hS i).toFinset := (hS i).mem_toFinset.2 hP
+    have hPT : P ∈ T := Finset.mem_biUnion.2 ⟨i, hi, hPS⟩
+    have hEP : E P = N := by
+      simp only [E, Finsupp.finsetSum_apply, Finsupp.single_apply, Finset.sum_ite_eq', hPT,
+        if_true]
+    have h1 : (-C.ord (g i) P.1).toNat ≤ N :=
+      (Finset.le_sup (f := fun P ↦ (-C.ord (g i) P.1).toNat) hPS).trans
+        (Finset.le_sup (f := fun i ↦ (hS i).toFinset.sup fun P ↦ (-C.ord (g i) P.1).toNat) hi)
+    rw [hEP]
+    have h2 := Int.self_le_toNat (-C.ord (g i) P.1)
+    omega
+  -- the ideal sheaf `J = 𝒪_C(-E)` and the local data of `ψ : J ⟶ ℒ`
+  set J := Divisor.idealSheaf E
+  have hJ := Divisor.isInvertible_idealSheaf f E
+  have := hJ.isInvertible_toModules
+  have := Modules.IsInvertible.sheafOfModules_isInvertible J.toModules
+  have key (x : C) : ∃ (W : C.affineOpens) (_ : x ∈ W.1) (s : Γ(J.toModules, W.1))
+      (σ : Γ(ℒ, W.1)), Modules.IsFreeGenerator s ∧
+      ∀ [Nonempty W.1] [Nonempty (W.1 ⊓ U₀.1 : C.Opens)],
+        he₀.ratCoord σ = C.germToFunctionField W.1 (J.sectionsι W.1 s) := by
+    obtain ⟨i, hit, hxi⟩ : ∃ i ∈ t, x ∈ (V i).1 := by simpa using ht (Set.mem_univ x)
+    obtain ⟨W, hxW, hWV, b, hb⟩ := hJ.isLocallyPrincipal.exists_ideal_eq_span hxi
+    have : Nonempty W.1 := ⟨⟨x, hxW⟩⟩
+    have hb0 := hJ.germToFunctionField_ne_zero hb
+    obtain ⟨c, hc⟩ := exists_germToFunctionField_eq_of_ord_nonneg f (V := W.1)
+      (x := C.germToFunctionField W.1 b * g i) fun z hz ↦ by
+        by_cases hz1 : coheight z = 1
+        · have hzc := isClosed_of_coheight_eq_one f hz1
+          rw [ord_mul hb0 (hg i), ← J.ordAt_eq hz hb, Divisor.ordAt_idealSheaf f E ⟨z, hzc⟩,
+            add_comm]
+          exact hE i hit ⟨z, hzc⟩
+        · rw [ord_eq_zero_of_coheight_neq_one hz1]
+    obtain ⟨s, hs, hsf⟩ := hJ.exists_isFreeGenerator hb
+    refine ⟨W, hxW, s, c • ℒ.presheaf.map (homOfLE hWV).op (e i), hsf, ?_⟩
+    intro _ _
+    have := hmeet (V i).1 i (hxV i)
+    rw [he₀.ratCoord_smul, he₀.ratCoord_map, hc, hs, mul_assoc]
+    simp only [g]
+    rw [inv_mul_cancel₀, mul_one]
+    intro h0
+    exact hne i (he₀.ratCoord_injective (h0.trans he₀.ratCoord_zero.symm))
+  choose W hxW s σ hs hσ using key
+  have hcov : ⨆ x, (W x).1 = ⊤ :=
+    eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxW x⟩
+  have hc : ∀ i j (W' : C.Opens) (hi : W' ≤ (W i).1) (hj : W' ≤ (W j).1) (a b : Γ(C, W')),
+      a • J.toModules.presheaf.map (homOfLE hi).op (s i) =
+        b • J.toModules.presheaf.map (homOfLE hj).op (s j) →
+      a • ℒ.presheaf.map (homOfLE hi).op (σ i) = b • ℒ.presheaf.map (homOfLE hj).op (σ j) := by
+    intro i j W' hi hj a b hab
+    rcases isEmpty_or_nonempty W' with hW' | ⟨⟨y, hy⟩⟩
+    · exact Modules.eq_of_isEmpty hW' _ _
+    have : Nonempty W' := ⟨⟨y, hy⟩⟩
+    have : Nonempty (W i).1 := ⟨⟨y, hi hy⟩⟩
+    have : Nonempty (W j).1 := ⟨⟨y, hj hy⟩⟩
+    have := hmeet W' y hy
+    have := hmeet (W i).1 y (hi hy)
+    have := hmeet (W j).1 y (hj hy)
+    refine he₀.ratCoord_injective ?_
+    have hab' := congrArg (fun m ↦ C.germToFunctionField W' (J.sectionsι W' m)) hab
+    dsimp only at hab'
+    rw [J.germToFunctionField_sectionsι_smul_map, J.germToFunctionField_sectionsι_smul_map]
+      at hab'
+    rw [he₀.ratCoord_smul, he₀.ratCoord_smul, he₀.ratCoord_map, he₀.ratCoord_map, hσ, hσ, hab']
+  let ψ : J.toModules ⟶ ℒ := Modules.glueHom hcov hs hc
+  -- `ψ` is nonzero
+  have hψ : ψ ≠ 0 := by
+    intro h0
+    set x := genericPoint C
+    have : Nonempty (W x).1 := ⟨⟨x, hxW x⟩⟩
+    have := hmeet (W x).1 x (hxW x)
+    have h1 := Modules.isGlueValue_glueHom_app hcov hs hc (s x) x (W x).1 le_rfl le_rfl 1
+      (by rw [one_smul])
+    rw [Modules.presheaf_map_id_apply, Modules.presheaf_map_id_apply, one_smul] at h1
+    have h2 : σ x = 0 := by
+      rw [← h1, show Modules.glueHom hcov hs hc = 0 from h0]
+      rfl
+    have h3 := hσ x
+    rw [h2, he₀.ratCoord_zero] at h3
+    have h4 : J.sectionsι (W x).1 (s x) = J.sectionsι (W x).1 0 := by
+      rw [map_zero]
+      exact C.germToFunctionField_injective _ (h3.symm.trans (map_zero _).symm)
+    exact (hs x).ne_zero (J.sectionsι_injective _ h4)
+  have hZ : (Modules.Hom.zeroLocus ψ).IsInvertible :=
+    (Modules.Hom.isLocallyPrincipal_zeroLocus ψ).isInvertible fun h ↦
+      hψ ((Modules.Hom.zeroLocus_eq_bot_iff ψ).mp h)
+  obtain ⟨E₁, hE₁⟩ := hZ.exists_eq_idealSheaf f
+  obtain ⟨iso⟩ := Modules.Hom.nonempty_iso_dual_toModules_tensorObj ψ hZ
+  exact ⟨E₁, E, ⟨iso ≪≫ eqToIso (by rw [hE₁])⟩⟩
+
+end Curve
+
 end AlgebraicGeometry.Scheme
