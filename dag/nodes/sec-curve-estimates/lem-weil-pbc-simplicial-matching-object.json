@@ -23,9 +23,52 @@
   "def-galois-finite-limits-colimits",
   "def-weil-pbc-simplicial-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each n, D_n(K) is a finite diagram: for n=0 it is empty, for n=1 it has two objects and no arrows, and for n≥2 it has finitely many indexed objects and arrows because the index sets 0≤i≤n and 0≤i<j≤n are finite. Since C has finite limits [def-galois-finite-limits-colimits], D_n(K) has a limit M_n(K). The empty limit is a final object and the two-object limit for n=1 is a product; the universal property gives uniqueness up to unique isomorphism preserving the projections.",
+   "uses": [
+    "def-galois-finite-limits-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Categories, Section 4.18, tag 04AS, together with Lemma 002O (lemma-finite-limits-exist); simplicial.tex Lemma 0186 (lemma-formula-limit), construction of the finite boundary diagram"
+   }
+  },
+  {
+   "text": "For n≥1, the universal property of the limit M_n(K) identifies a morphism g:W→M_n(K) with its projections x_i=pr_i∘g. Each cone gives a tuple satisfying d_{j-1}∘x_i=d_i∘x_j, because the two arrows from K_{n-1}^{(i)} and K_{n-1}^{(j)} to K_{n-2}^{(i,j)} are part of D_n(K). Conversely, a tuple satisfying these equations is a cone on D_n(K): for n=1 there are no compatibility equations, and for n≥2 the component at K_{n-2}^{(i,j)} is the common composite d_{j-1}∘x_i=d_i∘x_j; the limit property gives a unique g. Precomposition with a morphism W'→W commutes with all projections, so the bijection is natural in W.",
+   "uses": [
+    "def-galois-finite-limits-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0186 (lemma-formula-limit), statement and proof: the functor T ↦ {(f_0,…,f_{n+1}) : d_{j-1}f_i=d_if_j}"
+   }
+  },
+  {
+   "text": "For n≥2, the simplicial face identity δ^{n}_j∘δ^{n-1}_i=δ^{n}_i∘δ^{n-1}_{j-1} for 0≤i<j≤n [lem-weil-pbc-simplex-face-face-identity] (applied with n-1≥1), transported by the contravariant functor K with d_i=K(δ_i) [def-weil-pbc-simplicial-object], gives d_{j-1}∘d_i=d_i∘d_j:K_n→K_{n-2} for every i<j, so the tuple (d_0,…,d_n) of maps K_n→K_{n-1} satisfies the compatibility equations of step 2. Hence there is a unique morphism μ_n:K_n→M_n(K) with pr_i∘μ_n=d_i. For n=1 the same conclusion follows from the absence of compatibility equations, and for n=0 the unique map K_0→M_0(K) exists because M_0(K) is final. This is the matching morphism in every degree.",
+   "uses": [
+    "lem-weil-pbc-simplex-face-face-identity",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 0167 (lemma-relations-face-degeneracy), item (1), and Lemma 0186 (lemma-formula-limit), paragraph constructing the unique map to the limit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-finite-limits-colimits",
+  "lem-weil-pbc-simplex-face-face-identity",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 0186 (lemma-formula-limit), with the face relations of Lemma 0167; finite-limit existence from categories.tex tag 04AS and Lemma 002O"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +93,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +109,20 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-simplicial-matching-object",
+  "worker": "stage1",
+  "summary": "Split the statement into finite-limit existence for the finite boundary diagrams, the universal-property bijection between maps to the limit and compatible face tuples, and construction of the matching map from the simplicial face identity. No new DAG nodes were needed because the face identity already exists as lem-weil-pbc-simplex-face-face-identity; the finite-limit and simplicial-object notions are existing dependencies.",
+  "blueprint": "Realizes the fourth proof paragraph of lem-weil-pbc-hypercover-refinement: the finite-limit construction supplies the matching objects and the tuple description supplies the matching covers' boundary data; the final step supplies the matching morphism used to lift those boundaries."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-smo",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smo (reviewer sub-agent of L); spot-checked: Source: Stacks 0186 (simplicial lemma-formula-limit, simplicial.tex l.2337) read: the functor T -> {(f_0..f_{n+1}) : d_{j-1}f_i = d_if_j, i<j} agrees with the item's D_n(K) arrows d_{j-1}:K^(i)->K^(i,j), d_i:K^(j)->K^(i,j) and clause (2); tags 0167, 04AS, 002O verified in tags file. Statement unchanged by the split. Step 1: D_n(K) is indexed by a finite category (finite graph with no composable pairs), so def-galois-finite-limits-colimits (has finite limits) gives M_n(K); n=0 empty limit = final, n=1 = product, definitional. Step 2: cones on D_n(K) = tuples with d_{j-1}x_i=d_ix_j (component at (i,j) forced as the common composite), universal property of limit gives the bijection, naturality by precomposition; elementary. Step 3: lem-weil-pbc-simplex-face-face-identity says delta^{n+1}_j delta^n_i = delta^{n+1}_i delta^n_{j-1} for 0<=i<j<=n+1, n>=1; reindexed n->n-1 and applied through contravariant K it gives d_i d_j = d_{j-1} d_i on K_n, exactly the compatibility, then Step 2 gives mu_n; n=1, n=0 cases checked. All cited nodes in unit sk-prop-h2, no off-unit tools. B10: grep of slopmaster2 WeilConjectures for matching finds no declaration. No new nodes; blueprint from.place/same_as present, split_report.blueprint present. Small cases n=0,1,2 checked. Fix: dag/nodes/sec-curve-estimates/lem-weil-pbc-simplicial-matching-object.json: proof[2].text, proof[2].uses, proof_deps: cite def-weil-pbc-simplicial-object for transporting the Delta identity to d_{j-1}d_i=d_id_j through the contravariant functor K, with the reindexing n->n-1 written out. Times: start Sat Oct 10 02:51:12 PM UTC 2026, end Sat Oct 10 02:51:59 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
