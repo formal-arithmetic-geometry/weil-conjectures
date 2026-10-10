@@ -1,48 +1,144 @@
 {
-  "id": "lem-pc-perfect-affine-bounded-projective",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-sc-finite-duality",
-      "place": "set-of-representatives proof, affine case: a perfect object on Spec A comes from a bounded complex of finite projective A-modules",
-      "via": [
-        "lem-pc-perfect-complexes-compact-set"
-      ]
-    },
-    "same_as": []
+ "id": "lem-pc-perfect-affine-bounded-projective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "set-of-representatives proof, affine case: a perfect object on Spec A comes from a bounded complex of finite projective A-modules",
+   "via": [
+    "lem-pc-perfect-complexes-compact-set"
+   ]
   },
-  "kind": "statement",
-  "title": "Perfect objects on an affine scheme are bounded finite projective complexes",
-  "statement": "Let $A$ be a ring and $Y=\\operatorname{Spec}(A)$ [def-pc-scheme]. An object $E$ of $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [def-pc-derived-category] is perfect [def-pc-perfect-complex] if and only if $E$ is isomorphic in $D(\\mathcal O_Y)$ to $\\widetilde{P^\\bullet}$ for a bounded complex $P^\\bullet$ of finite projective $A$-modules.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Perfect objects on an affine scheme are bounded finite projective complexes",
+ "statement": "Let $A$ be a ring and $Y=\\operatorname{Spec}(A)$ [def-pc-scheme]. An object $E$ of $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [def-pc-derived-category] is perfect [def-pc-perfect-complex] if and only if $E$ is isomorphic in $D(\\mathcal O_Y)$ to $\\widetilde{P^\\bullet}$ for a bounded complex $P^\\bullet$ of finite projective $A$-modules.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma perfect-lemma-perfect-affine (Tag 08EB), with More on Algebra, Definition 0656 (a perfect object of D(A) is one isomorphic to a bounded complex of finite projective A-modules)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine derived equivalence [lem-pc-affine-qcoh-derived-equivalence] to write E as the object associated to a complex M of A-modules, i.e. E ≅ tilde(M) in D(O_Y) with M = RΓ(Y,E) in D(A).",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/perfect.tex",
-    "place": "Derived Categories of Schemes, Lemma perfect-lemma-perfect-affine (Tag 08EB), with More on Algebra, Definition 0656 (a perfect object of D(A) is one isomorphic to a bounded complex of finite projective A-modules)"
+    "place": "Tag 08EB proof, reduction to the affine module description"
+   }
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-pc-derived-category",
+  {
+   "text": "Forward implication. Assume E perfect. By [lem-pc-perfect-pseudo-coherent-locally-finite-tor], E is pseudo-coherent [def-pur-pseudo-coherent-complex] and every point of Y has an open neighbourhood U with integers a_U<=b_U such that H^i(E|_U ⊗^L G)=0 for all O_U-modules G and i outside [a_U,b_U]. Y=Spec(A) is quasi-compact, so finitely many such U cover Y; put a=min a_U, b=max b_U. For any O_Y-module G, (E⊗^L G)|_U = E|_U ⊗^L G|_U, and a sheaf zero on each member of an open cover is zero, so E has Tor amplitude in [a,b]. By [lem-pc-affine-tor-amplitude-criterion], M has Tor amplitude in [a,b]; by [lem-pc-affine-pseudo-coherent-criterion], M is quasi-isomorphic to a bounded-above complex of finite free, hence finite projective, A-modules. The ring criterion [lem-pc-ring-pseudo-coherent-finite-tor-perfect] gives a bounded complex P of finite projective A-modules with M ≅ P in D(A); applying the functor of [lem-pc-affine-qcoh-derived-equivalence] gives E ≅ tilde(M) ≅ tilde(P) in D(O_Y).",
+   "uses": [
+    "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+    "def-pur-pseudo-coherent-complex",
+    "lem-pc-affine-tor-amplitude-criterion",
+    "lem-pc-affine-pseudo-coherent-criterion",
+    "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma 08EB proof: Lemmas 08E7 and 08E9, Cohomology Lemma 08CQ, More on Algebra Lemma 0658"
+   }
+  },
+  {
+   "text": "Conversely, if E is isomorphic to $\\widetilde{P^\\bullet}$ for a bounded complex P of finite projective A-modules, choose for each degree a finite free module A^{n_i} and an idempotent whose image is P^i. Applying the associated-sheaf functor gives each \\widetilde{P^i} as a direct summand of \\mathcal O_Y^{n_i}; the bounded complex \\widetilde{P^\\bullet} is therefore strictly perfect. The defining condition in [def-pc-perfect-complex] makes E perfect.",
+   "uses": [
     "def-pc-perfect-complex"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "perfect.*(complex|derived) [Mathlib/Algebra/Homology Mathlib/AlgebraicGeometry] in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib",
-      "results": "0 hits",
-      "date": "2026-10-10",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "created": {
-    "item": "lem-pc-perfect-complexes-compact-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma perfect-lemma-perfect-affine (Tag 08EB), reverse implication"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-perfect-pseudo-coherent-locally-finite-tor",
+  "def-pur-pseudo-coherent-complex",
+  "lem-pc-affine-tor-amplitude-criterion",
+  "lem-pc-affine-pseudo-coherent-criterion",
+  "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+  "def-pc-perfect-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma perfect-lemma-perfect-affine (Tag 08EB)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "perfect object on affine scheme is bounded complex finite projective modules",
+   "results": "CochainComplex.isKProjective_of_projective; no scheme-level affine perfectness declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-duality",
-  "lead_notes": [
-    "2026-10-10 21:40 UTC L: lem-pc-perfect-affine-model (R-pcd2624, 21:39, the 'only if' direction for E in D(O_X) perfect) was a duplicate of this node and was deleted; its citer lem-pc-perfect-complex-descent now cites this node. A perfect object of D(O_Y) on affine Y lies in D_QCoh (Tag 08E8), so the hypothesis here covers it."
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsPerfect, bounded complex finite projective",
+   "results": "0 hits; unknown identifier DerivedCategory.IsPerfect",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect-lemma-perfect-affine|IsPerfect|finite projective in Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "perfect object on affine scheme represented by bounded finite projective complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-pc-perfect-complexes-compact-set"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lead_notes": [
+  "2026-10-10 21:40 UTC L: lem-pc-perfect-affine-model (R-pcd2624, 21:39, the 'only if' direction for E in D(O_X) perfect) was a duplicate of this node and was deleted; its citer lem-pc-perfect-complex-descent now cites this node. A perfect object of D(O_Y) on affine Y lies in D_QCoh (Tag 08E8), so the hypothesis here covers it."
+ ],
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-affine-bounded-projective",
+  "worker": "stage1",
+  "summary": "Split the affine perfectness equivalence into the affine derived-category identification, the forward application of Stacks Tag 08EB, and the elementary converse from strict perfectness. No child node was created because any affine-model statement would duplicate this item.",
+  "blueprint": "Realizes the ancestor set-of-representatives proof clause: on an affine Spec A, perfect objects are represented by bounded complexes of finite projective A-modules.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "The affine D(A)-to-D_QCoh equivalence is a generic comparison tool needed to transport the Tag 08EB affine module criterion; no node on this unit states that comparison."
+   }
   ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pab2756",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pab2756 (reviewer sub-agent of L); spot-checked: Statement text identical to sheaf-dag (E7 ok). Step 3 converse and ring criterion 0658 citation ok; no duplicate of perfect-two-out-of-three/summand. FIX more, RETURN less: (1) E7: delivery added lem-pc-affine-qcoh-derived-equivalence to stmt_deps though the statement does not mention it; reverted stmt_deps to sheaf-dag. (2) C1: Step 2 asserted 'perfect gives pseudo-coherence and finite Tor amplitude' without a node; added statement-only lem-pc-perfect-pseudo-coherent-locally-finite-tor (Cohomology 08CQ (1)=>(2)) and folded the quasi-compactness bound (finite cover, min/max, locality of tensor) into Step 2 as text. (3) C1: transport of pseudo-coherence from E to M in D(A) (Tag 08E7, nontrivial) was uncited; added statement-only lem-pc-affine-pseudo-coherent-criterion (08E7) and cited it before the ring criterion. Step 1 trimmed to the identification it actually uses. One LeanFinder query recorded on both new nodes: no match. The E1 second reading missed (2) and (3).; 3 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
