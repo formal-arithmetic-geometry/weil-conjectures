@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-sc-divisor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Divisors, principal divisors, class group",
- "statement": "Let $C$ be a connected curve over $k$. A\n*divisor* on $C$ is a finite formal sum\n$D=\\sum_Pn_P[P]$ of closed points $P$ of $C$ with integer\ncoefficients; $\\operatorname{Div}(C)$ is the free abelian group on\nthe closed points of $C$. For $f\\in k(C)^*$\n([def-sc-function-field]), its *divisor* is\n\n$$\n\\operatorname{div}(f)=\\sum_P v_P(f)\\,[P],\n$$\n\nwhere $v_P$ is the normalized valuation of the local ring\n$\\mathcal O_{C,P}$; such divisors are *principal*. That\n$\\mathcal O_{C,P}$ is a discrete valuation ring when $C$ is\nsmooth, so that $v_P$ is defined, is\n[lem-sc-smooth-regular] together with\n[lem-sc-regular-dim1-dvr], and it is not part of the\ndefinition.\nThe *divisor class group* is\n\n$$\n\\operatorname{Cl}(C):=\\operatorname{Div}(C)/\\{\\operatorname{div}(f):f\\in k(C)^*\\}.\n$$\n\nFor $D=\\sum n_P[P]$ the associated sub-$\\mathcal O_C$-module of\nthe constant sheaf $k(C)$ is\n\n$$\n\\mathcal O_C(D)(U):=\\{f\\in k(C):\\operatorname{div}(f)|_U+D|_U\\geq0\\};\n$$\n\nthat it is invertible for $C$ smooth, i.e. that\n$D\\mapsto[\\mathcal O_C(D)]$ identifies\n$\\operatorname{Cl}(C)$ with $\\operatorname{Pic}(C)$, is\nrecorded with the other properties of this construction, and it is not part of the\ndefinition. The\n*degree* of $D$ is\n\n$$\n\\deg D:=\\sum_Pn_P.\n$$\n\n(For reducible $C$ all objects above are defined componentwise.)",
+ "statement": "Let $k$ be algebraically closed and $C$ a smooth connected curve over $k$ ([def-sc-curves]). A *divisor* on $C$ is a finite formal sum $D=\\sum_P n_P[P]$ of closed points with integer coefficients; $\\operatorname{Div}(C)$ is the free abelian group on those points. For $f\\in k(C)^*$ ([def-sc-function-field]), its *principal divisor* is $\\operatorname{div}(f)=\\sum_Pv_P(f)[P]$, where $v_P$ is the normalized valuation of $\\mathcal O_{C,P}$. Its finite support follows from the finite-zero-and-pole theorem for rational functions. The local rings are discrete valuation rings by [lem-sc-smooth-regular] and [lem-sc-regular-dim1-dvr]. The *divisor class group* is $\\operatorname{Cl}(C):=\\operatorname{Div}(C)/\\operatorname{im}(\\operatorname{div})$. For a nonempty open $U\\subseteq C$, the associated sub-$\\mathcal O_C$-module of the constant sheaf $k(C)$ ([def-weil-pbc-constant-sheaf]) has sections $\\mathcal O_C(D)(U):=\\{0\\}\\cup\\{f\\in k(C)^*:v_P(f)+n_P\\geq0\\text{ for every closed }P\\in U\\}$; over the empty open its section module is zero. The assertion that $\\mathcal O_C(D)$ is invertible and that $D\\mapsto[\\mathcal O_C(D)]$ identifies $\\operatorname{Cl}(C)$ with $\\operatorname{Pic}(C)$ is a separate theorem. The *degree* is $\\deg D:=\\sum_Pn_P$. For a disconnected smooth curve, these definitions apply componentwise.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-def-av-pic/def-sc-divisor.md",
   "place": "node def-sc-divisor, order 444"
@@ -16,14 +16,38 @@
   "def-sc-function-field",
   "lem-sc-smooth-regular",
   "lem-sc-regular-dim1-dvr",
-  "def-sc-curves"
+  "def-sc-curves",
+  "def-weil-pbc-constant-sheaf",
+  "lem-sc-divisor-finite-support"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "divisor class group of an algebraic curve, formal sums of closed points quotient by principal divisors",
+   "results": "ClassGroup (ring fractional ideals), MeromorphicOn.divisor (analytic), and elliptic-curve class group facts; no divisor group on closed points of a scheme",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DivisorClassGroup\"",
+   "results": "no declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'DivisorClassGroup|principalDivisors|divisor.*sheaf' Mathlib/AlgebraicGeometry Mathlib/RingTheory/ClassGroup",
+   "results": "no scheme divisor class group; Mathlib/RingTheory/ClassGroup treats fractional ideals of a domain",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -49,6 +73,20 @@
    "missing": []
   }
  },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-sc-divisor",
+  "worker": "stage1",
+  "summary": "The definition cites existing nodes for the curve, function field, DVR valuations and constant sheaf, and a new unsplit node for finite divisor support whose exact Lean theorem is reported for L to verify. Five sorry-free slopmaster2 definitions cover the divisor group, degree, principal divisors and class group, but not the subsheaf O_C(D). Corrected the domain and edge cases needed to make the imported definition meaningful.",
+  "blueprint": "Definition clauses on divisors, principal divisors, class group, associated module and degree; the imported node has no proof steps."
+ },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-pic"
+ "unit": "sk-def-av-pic",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: definition split (divisors, principal divisors via the DVR valuations of a smooth curve, Cl); new node for the finiteness of the support"
+ }
 }
