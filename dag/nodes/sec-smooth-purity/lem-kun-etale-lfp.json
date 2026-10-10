@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-etale-lfp",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Etale morphisms are locally of finite presentation",
@@ -15,11 +15,15 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "By [def-weil-pbc-scheme-conventions], étale means locally of\nfinite presentation, flat and unramified; with $X$ finite type over\n$K$ and $U\\to X$ quasi-compact, $U\\to K$ is quasi-compact and\nlocally of finite type, hence of finite type.",
+   "text": "By [def-weil-pbc-scheme-conventions], an étale morphism $U\\to X$ is locally of finite presentation, hence locally of finite type (over affine opens a finitely presented algebra is finitely generated). Since $X$ is of finite type over $K$, the structure morphism $X\\to\\operatorname{Spec}K$ is quasi-compact and locally of finite type by the finite-type clause of [def-weil-pbc-scheme-conventions]. The composite $U\\to X\\to\\operatorname{Spec}K$ is quasi-compact, because a composite of quasi-compact morphisms is quasi-compact (the preimage of an affine open is quasi-compact, hence a finite union of affine opens, each with quasi-compact preimage; Mathlib AlgebraicGeometry.quasiCompact_comp, Morphisms/QuasiCompact.lean:69), and it is locally of finite type, because a composite of morphisms locally of finite type is locally of finite type (on affine opens, a finitely generated algebra over a finitely generated algebra is finitely generated; Mathlib AlgebraicGeometry.locallyOfFiniteType_comp, Morphisms/FiniteType.lean:68). Therefore the composite is of finite type by the clause of [def-weil-pbc-scheme-conventions] identifying finite type with quasi-compact and locally of finite type.",
    "uses": [
     "def-weil-pbc-scheme-conventions"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-etale-lfp.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
@@ -30,9 +34,52 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-etale-lfp.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "an etale morphism of schemes is locally of finite presentation; a quasi-compact etale morphism over a finite type scheme over a field is finite type",
+   "results": "AlgebraicGeometry.IsEtale.instIsSmooth (Mathlib/AlgebraicGeometry/Morphisms/Etale); AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth (Mathlib/AlgebraicGeometry/Morphisms/Smooth); AlgebraicGeometry.LocallyOfFinitePresentation (Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation)",
+   "date": "2026-10-11",
+   "verdict": "no exact match: only general étale/smooth/LFP declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "Etale, LocallyOfFinitePresentation, QuasiCompact, finite type",
+   "results": "0 hits; unknown identifier 'Etale'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale morphism locally of finite presentation quasi-compact finite type over a field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "étale scheme morphism is locally of finite presentation",
+   "results": "AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; Algebra.Etale.finitePresentation; RingHom.Etale.toAlgebra",
+   "date": "2026-10-11",
+   "verdict": "no exact match: ring-level finite presentation and smooth-to-LFP generalizations only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "0 hits; unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'LocallyOfFinitePresentation\\|quasiCompact_comp\\|locallyOfFiniteType_comp' Mathlib/AlgebraicGeometry/Morphisms/{Etale,Smooth,QuasiCompact,FiniteType,FinitePresentation}.lean",
+   "results": "Etale.lean:141 AlgebraicGeometry.Etale.iff_flat_and_formallyUnramified (Etale f <-> Flat f /\\ FormallyUnramified f /\\ LocallyOfFinitePresentation f); Smooth.lean:241 instance Smooth f -> LocallyOfFinitePresentation f; FinitePresentation.lean:108 instance LocallyOfFinitePresentation f -> LocallyOfFiniteType f; QuasiCompact.lean:69 quasiCompact_comp; FiniteType.lean:68 locallyOfFiniteType_comp",
+   "date": "2026-10-10",
+   "verdict": "clause (a) is Etale.iff_flat_and_formallyUnramified; clause (b) needs four declarations and Mathlib has no finite-type morphism class, so no exact match; recorded by reviewer R-elf3133, replacing two grep records that wrongly reported 0 hits"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -54,5 +101,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-kun-etale-lfp",
+  "worker": "stage1",
+  "summary": "No project declaration states this item. The proof is one elementary step from the existing scheme-conventions node: étale includes locally finite presentation (hence locally finite type), and composition with the finite-type structure morphism preserves quasi-compactness and local finite type, yielding finite type.",
+  "blueprint": "The single step realizes the ## Proof paragraph of the blueprint node lem-kun-etale-lfp.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-elf3133",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-elf3133 (reviewer sub-agent of L); spot-checked: Statement vs blueprint; step 1 vs def-weil-pbc-scheme-conventions (etale = lfp + flat + unramified matches Mathlib Etale.iff_flat_and_formallyUnramified Etale.lean:141, C4 ok; finite type = qc + lft); not a <=3-decl Mathlib composite (needs Etale->LFP, LFP->LFT, quasiCompact_comp, locallyOfFiniteType_comp; no finite-type class). FIX more, RETURN less: (1) C1: the composition facts for quasi-compact and locally-finite-type morphisms were asserted without justification; folded into the elementary step with one-line arguments and Mathlib quasiCompact_comp QuasiCompact.lean:69, locallyOfFiniteType_comp FiniteType.lean:68; (2) B3 mathlib_searches: two grep records claimed 0 hits for Etale/LocallyOfFinitePresentation in Morphisms/ (false, missed by the second reading); replaced by an accurate grep record with lines.; 1 file(s) fixed by the reviewer"
+ }
 }
