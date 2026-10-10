@@ -39,9 +39,145 @@
   "def-sc-zariski-site",
   "def-weil-pbc-site-cech-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (the induction).** Call an $\\mathcal O_X$-module $\\mathcal G$ *$\\mathrm{Cov}$-acyclic* if $\\check H^p(\\mathcal U,\\mathcal G)=0$ for every $\\mathcal U\\in\\mathrm{Cov}$ and every $p>0$, i.e. if $\\mathcal G$ satisfies hypothesis (3) of the lemma ($\\mathcal B$ and $\\mathrm{Cov}$ are fixed and satisfy (1) and (2)). For $p\\ge1$ let $P(p)$ be the assertion: for every $\\mathrm{Cov}$-acyclic $\\mathcal O_X$-module $\\mathcal G$ and every $U\\in\\mathcal B$, $H^p(U,\\mathcal G|_U)=0$. We prove $P(p)$ for all $p\\ge1$ by induction on $p$, quantified over all $\\mathrm{Cov}$-acyclic $\\mathcal G$ at once (Steps 2-8 for a fixed $\\mathcal G$, Step 9 the induction); the lemma is $P(p)$ for $\\mathcal G=\\mathcal F$, which is $\\mathrm{Cov}$-acyclic by (3).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EW (lemma-cech-vanish-basis, line 1696), proof (\"We will indicate this by saying F has vanishing higher Cech cohomology for any U in Cov\"; \"Since F was an arbitrary O_X-module with vanishing higher Cech cohomology for all U in Cov ... And so on and so forth\")"
+   }
+  },
+  {
+   "text": "**Step 2 (embedding into an injective).** Let $\\mathcal G$ be $\\mathrm{Cov}$-acyclic. Since $\\Mod(\\mathcal O_X)$ has enough injectives [lem-weil-pbc-scheme-modules-enough-injectives], choose a monomorphism $\\iota:\\mathcal G\\to\\mathcal I$ with $\\mathcal I$ an injective object of $\\Mod(\\mathcal O_X)$ [def-sp-injective-resolutions], and let $\\pi:\\mathcal I\\to\\mathcal Q=\\mathcal I/\\mathcal G$ be its cokernel in the abelian category $\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]. Then $0\\to\\mathcal G\\xrightarrow{\\iota}\\mathcal I\\xrightarrow{\\pi}\\mathcal Q\\to0$ is a short exact sequence of $\\mathcal O_X$-modules [def-weil-pbc-exact-sequence] (in an abelian category a monomorphism is the kernel of its cokernel, and a cokernel is an epimorphism).",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "def-sp-injective-resolutions",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EW (lemma-cech-vanish-basis, line 1696), proof, first paragraph (\"Choose an embedding F -> I into an injective O_X-module ... Let Q = I/F so that we have a short exact sequence\")"
+   }
+  },
+  {
+   "text": "**Step 3 ($\\mathcal I$ is $\\mathrm{Cov}$-acyclic).** Every $\\mathcal U\\in\\mathrm{Cov}$, $\\mathcal U:U=\\bigcup_{j\\in J}U_j$, is a family of opens of $X$ covering the open $U$, i.e. a covering of $X_{\\rm Zar}$ of the kind considered in [lem-weil-pbc-module-injective-open-cover-cech-acyclic] (Stacks 01EP). Applied to the injective $\\mathcal O_X$-module $\\mathcal I$ and to $\\mathcal U$, that lemma gives $\\check H^p(\\mathcal U,\\mathcal I)=0$ for every $p>0$. So $\\mathcal I$ is $\\mathrm{Cov}$-acyclic.",
+   "uses": [
+    "lem-weil-pbc-module-injective-open-cover-cech-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EW (lemma-cech-vanish-basis, line 1696), proof (\"By Lemma 01EP I has vanishing higher Cech cohomology for any U in Cov\")"
+   }
+  },
+  {
+   "text": "**Step 4 (the sequence is exact on sections over every member of $\\mathcal B$).** Let $W\\in\\mathcal B$. The sequence $0\\to\\mathcal G(W)\\xrightarrow{\\iota_W}\\mathcal I(W)\\xrightarrow{\\pi_W}\\mathcal Q(W)\\to0$ of abelian groups is exact. Exactness at $\\mathcal G(W)$ and $\\mathcal I(W)$ (this holds for every open $W$): by Step 2, $\\iota$ is a kernel of $\\pi$ in $\\Mod(\\mathcal O_X)$ [def-weil-pbc-exact-sequence], and kernels in $\\Mod(\\mathcal O_X)$ are computed sectionwise [def-weil-sheaf-of-modules-category], so $\\iota_W$ is injective with image $\\ker\\pi_W$. Surjectivity of $\\pi_W$: let $\\Sigma_W$ be the set of the coverings of $W$ that occur in $\\mathrm{Cov}$ (the $\\mathcal U:U=\\bigcup_jU_j$ in $\\mathrm{Cov}$ with $U=W$). By hypothesis (2), since $W\\in\\mathcal B$, $\\Sigma_W$ is cofinal among the open coverings of $W$: every open covering of $W$ is refined by a member of $\\Sigma_W$. Since $\\mathcal G$ is $\\mathrm{Cov}$-acyclic, $\\check H^1(\\mathcal U,\\mathcal G)=0$ for every $\\mathcal U\\in\\Sigma_W$. So [lem-weil-pbc-module-ses-cech-h1-surjective] (Stacks 01EU), applied to $0\\to\\mathcal G\\to\\mathcal I\\to\\mathcal Q\\to0$, the open $W$ and $\\Sigma=\\Sigma_W$, gives that $\\pi_W:\\mathcal I(W)\\to\\mathcal Q(W)$ is surjective.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-ses-cech-h1-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EW (lemma-cech-vanish-basis, line 1696), proof (\"By Lemma 01EU and our assumption (2) this sequence gives rise to an exact sequence 0 -> F(U) -> I(U) -> Q(U) -> 0 for every U in B\")"
+   }
+  },
+  {
+   "text": "**Step 5 (short exact sequence of Cech complexes for $\\mathcal U\\in\\mathrm{Cov}$).** Let $\\mathcal U:U=\\bigcup_{j\\in J}U_j$ be in $\\mathrm{Cov}$, a covering of $X_{\\rm Zar}$ [def-sc-zariski-site] whose fibre products are the intersections $U_{j_0\\ldots j_p}$. The morphisms $\\iota,\\pi$ of $\\mathcal O_X$-modules are in particular morphisms of the underlying presheaves of abelian groups on $X_{\\rm Zar}$, so they induce morphisms of Cech complexes $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal Q)$ (functoriality, part (e) of [def-weil-pbc-site-cech-complex]), with composite $0$. In degree $p\\ge0$ this sequence is the product over $(j_0,\\ldots,j_p)\\in J^{p+1}$ of the sequences $0\\to\\mathcal G(U_{j_0\\ldots j_p})\\to\\mathcal I(U_{j_0\\ldots j_p})\\to\\mathcal Q(U_{j_0\\ldots j_p})\\to0$. By hypothesis (1) every $U_{j_0\\ldots j_p}$ lies in $\\mathcal B$, so each of these sequences is short exact by Step 4 (with $W=U_{j_0\\ldots j_p}$); a product of short exact sequences of abelian groups is short exact (kernel and image of a product of homomorphisms are the products of the kernels and images); in degrees $p<0$ all terms are $0$. Hence $0\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal G)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)\\to\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal Q)\\to0$ is a short exact sequence of cochain complexes of abelian groups, short exactness of complexes being degreewise [lem-weil-pbc-cochain-complexes-degreewise-exact].",
+   "uses": [
+    "def-sc-zariski-site",
+    "def-weil-pbc-site-cech-complex",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EW (lemma-cech-vanish-basis, line 1696), proof (\"Hence for any U in Cov we get a short exact sequence of Cech complexes ... since each term in the Cech complex is made up out of a product of values over elements of B by assumption (1)\")"
+   }
+  },
+  {
+   "text": "**Step 6 ($\\mathcal Q$ is $\\mathrm{Cov}$-acyclic).** For every $\\mathcal U\\in\\mathrm{Cov}$, the long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] of the short exact sequence of complexes of Step 5 contains, for each $p\\ge1$, the exact piece $\\check H^p(\\mathcal U,\\mathcal I)\\to\\check H^p(\\mathcal U,\\mathcal Q)\\xrightarrow{\\delta^p}\\check H^{p+1}(\\mathcal U,\\mathcal G)$. The left term is $0$ by Step 3 and the right term is $0$ because $\\mathcal G$ is $\\mathrm{Cov}$-acyclic and $p+1>0$; so $\\check H^p(\\mathcal U,\\mathcal Q)=0$. Thus $\\mathcal Q$ is again a $\\mathrm{Cov}$-acyclic $\\mathcal O_X$-module.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EW (lemma-cech-vanish-basis, line 1696), proof (\"In particular we have a long exact sequence of Cech cohomology groups for any open covering U in Cov. This implies that Q is also an O_X-module with vanishing higher Cech cohomology for all U in Cov\")"
+   }
+  },
+  {
+   "text": "**Step 7 (restriction to $U\\in\\mathcal B$).** Let $U\\in\\mathcal B$ (an open subset of $X$). By [lem-weil-pbc-module-open-restriction-injectives] (1), restriction $\\mathcal A\\mapsto\\mathcal A|_U$, $\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_U)$, is additive and exact; applied to the short exact sequence of Step 2 it gives a short exact sequence $0\\to\\mathcal G|_U\\xrightarrow{\\iota|_U}\\mathcal I|_U\\xrightarrow{\\pi|_U}\\mathcal Q|_U\\to0$ of $\\mathcal O_U$-modules [def-weil-pbc-exact-sequence]. By part (2) of the same lemma, $\\mathcal I|_U$ is an injective $\\mathcal O_U$-module. Moreover $\\Gamma(U,\\mathcal A|_U)=(\\mathcal A|_U)(U)=\\mathcal A(U)$ and $(\\pi|_U)_U=\\pi_U$ by the definition of the restricted module [lem-weil-pbc-module-restriction-open-immersion-colimits].",
+   "uses": [
+    "lem-weil-pbc-module-open-restriction-injectives",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01E1 (lemma-cohomology-of-open, line 496) (2), H^p(U,F) = H^p(U,F|_U), used to pass from the derived functors of Gamma(U,-) on Mod(O_X) in 01EW to cohomology of the scheme U"
+   }
+  },
+  {
+   "text": "**Step 8 (cohomology of $U$ as derived functors).** For $U\\in\\mathcal B$ the open subscheme $U$ is a scheme [def-pc-scheme], and $H^n(U,-)=R^nv$ ($n\\ge0$) are the right derived functors of the global sections functor $v=\\Gamma(U,-):\\Mod(\\mathcal O_U)\\to\\textit{Ab}$, $\\mathcal A\\mapsto\\mathcal A(U)$ [pqf-def-cohomology], computed by injective resolutions [def-sp-left-exact-additive]; this makes sense because $\\Mod(\\mathcal O_U)$ is an abelian category with enough injectives [def-weil-sheaf-of-modules-category], [lem-weil-pbc-scheme-modules-enough-injectives] (applied to the scheme $U$), and $v$ is additive and left exact, since kernels in $\\Mod(\\mathcal O_U)$ are computed sectionwise [def-weil-sheaf-of-modules-category]. (Whether $v$ takes values in abelian groups or in $\\mathcal O_U(U)$-modules does not change the underlying groups $R^nv(\\mathcal A)$, hence not their vanishing.)",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-cohomology",
+    "def-sp-left-exact-additive",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-scheme-modules-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EW (lemma-cech-vanish-basis, line 1696), proof, second paragraph (\"Next, we look at the long exact cohomology sequence ... for any U in B\")"
+   }
+  },
+  {
+   "text": "**Step 9 (dimension shifting).** Let $U\\in\\mathcal B$ and apply the long exact sequence of the right derived functors $H^n(U,-)=R^nv$ of Step 8 [lem-weil-pbc-derived-functor-long-exact] to the short exact sequence $0\\to\\mathcal G|_U\\to\\mathcal I|_U\\to\\mathcal Q|_U\\to0$ of Step 7; since $\\mathcal I|_U$ is injective in $\\Mod(\\mathcal O_U)$ (Step 7), $H^n(U,\\mathcal I|_U)=0$ for $n>0$ [lem-weil-pbc-derived-functor-injective-vanishing] (Stacks 015B). Case $p=1$: the piece $H^0(U,\\mathcal I|_U)\\to H^0(U,\\mathcal Q|_U)\\to H^1(U,\\mathcal G|_U)\\to H^1(U,\\mathcal I|_U)=0$ is exact, and under the natural isomorphism $R^0v\\cong v$ [lem-weil-pbc-right-derived-universal-delta-functor] its first map is $v(\\pi|_U)=\\pi_U:\\mathcal I(U)\\to\\mathcal Q(U)$ (Step 7), which is surjective by Step 4 with $W=U\\in\\mathcal B$; hence $H^1(U,\\mathcal G|_U)=0$. This holds for every $\\mathrm{Cov}$-acyclic $\\mathcal G$ and every $U\\in\\mathcal B$, which is $P(1)$. Case $p\\ge2$, assuming $P(p-1)$: the piece $H^{p-1}(U,\\mathcal Q|_U)\\to H^p(U,\\mathcal G|_U)\\to H^p(U,\\mathcal I|_U)=0$ is exact, and $H^{p-1}(U,\\mathcal Q|_U)=0$ by $P(p-1)$ applied to $\\mathcal Q$, which is $\\mathrm{Cov}$-acyclic by Step 6, and to $U\\in\\mathcal B$; hence $H^p(U,\\mathcal G|_U)=0$, which is $P(p)$. By induction $P(p)$ holds for all $p\\ge1$; with $\\mathcal G=\\mathcal F$ (Step 1) this is the lemma.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01EW (lemma-cech-vanish-basis, line 1696), proof, second paragraph (\"Since I is injective we have H^n(U,I) = 0 for n > 0 (Derived Categories Lemma 015B). By the above we see that H^0(U,I) -> H^0(U,Q) is surjective and hence H^1(U,F) = 0 ... also H^1(U,Q) = 0 since Q is another of these sheaves ... H^2(U,F) = 0. And so on and so forth.\")"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
+  "lem-weil-pbc-module-ses-cech-h1-surjective",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-module-open-restriction-injectives",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-scheme",
+  "pqf-def-cohomology",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-derived-functor-injective-vanishing",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma 01EW (lemma-cech-vanish-basis, line 1696), proof; Lemma 01E1 (lemma-cohomology-of-open, line 496) (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -73,7 +209,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -89,5 +225,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-cech-vanishing-basis",
+  "worker": "stage1",
+  "summary": "Split following the proof of Stacks 01EW line by line (read cohomology.tex lines 1696-1776, with 01EP line 1408, 01EU line 1593 and 01EV line 1631; tags 01EW, 01EU, 01EP verified in tags/tags). Nine steps, parallel to the split of the sibling lem-weil-pbc-module-cech-vanishing-criterion (01EV), with every assertion restricted to the members of B and the coverings in Cov: the induction is quantified over all Cov-acyclic modules (Step 1); embedding into an injective (enough injectives node); the injective is Cov-acyclic by 01EP; the sequence 0->G->I->Q->0 is exact on sections over every W in B by 01EU applied to the coverings of W in Cov, cofinal by hypothesis (2) (Step 4); for U in Cov the Cech complexes form a short exact sequence because every U_{j0..jp} lies in B by hypothesis (1) (Step 5); hence Q is Cov-acyclic (Step 6); restriction to U in B is exact and preserves injectives, and dimension shifting in H^*(U,-) finishes the induction (Steps 7-9). No new nodes were needed: every fact the proof uses is an existing node. The passage from Stacks' H^p(U,F) (derived functors on Mod(O_X)) to H^p(U,F|_U) (cohomology of the scheme U) is made by Steps 7-8 as in the sibling. Statement, stmt_deps and Mathlib searches kept (statement checked against the source: it is Stacks 01EW specialized to schemes). Rule 0: no sorry-free slopmaster2 declaration states this node; WeilConjectures/Topology/Sheaves/CechCriterion.lean, TopCat.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex (@[stacks 01EV], line 324) is a related basis variant for abelian sheaves on a topological space with finite families, concluding only H^{q+1}(X,F)=0 for X itself (hypothesis B X), so it does not state this node (O_X-modules, H^p(U) for every U in B) exactly and was not attached.",
+  "blueprint": "No blueprint node is this item; its blueprint ancestor thm-weil-pbc-finite-etale-lifting is reached through the via chain, and the place served is the one in from.place: the sentence of the proof of Stacks 01FF 'Thus the assumptions of Lemma 01EW are satisfied and the claim follows', which the item's statement is; Steps 1-9 realize the whole proof of 01EW that this sentence invokes. same_as kept: lem-weil-pbc-cech-criterion (sk-thm-properbasechange), which states the same criterion for a site with a basis closed under fibre products and finite basis coverings, with cohomology as derived sections; search 'tools/blueprint_refs.py search 01EW' found no node, 'Cech vanishing basis' found only that node."
+ },
+ "reviewed": "2026-10-10 L: 9 steps following 01EW with every claim on B and Cov (injective embedding, 01EP, exactness on sections of members of B by 01EU with the cofinal coverings, the short exact sequence of Cech complexes by (1), Q acyclic, restriction to U via 01E1 (2), dimension shifting); parallel to the 01EV node; 0 new nodes"
 }

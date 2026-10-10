@@ -1302,3 +1302,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:25 L: accepted def-pc-field-tower (definition split to Mathlib-leaf definitions; new def-pc-field-characteristic and lem-pc-algebraic-closure-exists-unique, the latter unreachable).
 - 2026-10-10, delivery of E1: lem-weil-pbc-finite-product-integral-closure merged from deliver/E1/lem-weil-pbc-finite-product-integral-closure (1 commit(s), 0 new node(s), spot-checked by L: L: 0CY9 by the componentwise monic polynomials, padded to a common degree; 0 new); claim closed
 - 11:25 L: merged E1 lem-weil-pbc-finite-product-integral-closure (0CY9, 0 new).
+- 11:25 L: accepted lem-weil-pbc-module-cech-vanishing-basis (01EW, 9 steps, 0 new).
