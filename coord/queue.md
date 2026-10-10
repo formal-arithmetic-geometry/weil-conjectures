@@ -1,8 +1,8 @@
 # Work queue
 
-853 items; claim with `tools/claim.py next <group> [--stage N]`.
+852 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (370)
+## Stage 1: nodes to split (369)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -24,7 +24,6 @@
 | `lem-weil-pbc-valuation-ring-normal` | 1015 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
-| `lem-weil-pbc-projective-dimension-ext-characterization` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
 | `lem-weil-pbc-torsion-hom-flat-comparison` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
@@ -59,7 +58,6 @@
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-finite-simplex-lifting` | 3006 | none |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
-| `lem-weil-pbc-hypercover-product` | 3006 | none |
 | `def-sc-divisor` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
@@ -71,6 +69,7 @@
 | `lem-sc-pic-proper-decomposition` | 3007 | none |
 | `lem-sc-positive-degree-ample` | 3007 | rests_on_sorry |
 | `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 3007 | none |
+| `lem-weil-pbc-matching-object-fibre-product` | 3007 | none |
 | `thm-av-final` | 3007 | rests_on_sorry |
 | `thm-sc-jacobian-representability` | 3007 | rests_on_sorry |
 | `def-pc-divisor-line-bundle` | 3008 | none |
@@ -865,7 +864,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 388 nodes that wait for stage 1, 902 nodes that wait for a statement dependency.
+Not open yet: 387 nodes that wait for stage 1, 904 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
