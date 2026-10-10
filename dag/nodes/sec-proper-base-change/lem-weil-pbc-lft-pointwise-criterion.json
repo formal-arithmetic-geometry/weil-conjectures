@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-lft-pointwise-criterion",
+ "kind": "statement",
+ "title": "Locally of finite type is checked on one affine pair around each point (Stacks 01T1 and 01T2)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. Then $f$ is locally of finite type [def-weil-finite-type-morphism] if and only if for every $x\\in X$ there exist an affine open $U\\subseteq X$ with $x\\in U$ and an affine open $V\\subseteq S$ with $f(U)\\subseteq V$ [def-weil-affine-spectrum] such that the ring map $\\mathcal O_S(V)\\to\\mathcal O_X(U)$ induced by $f$ is of finite type [def-weil-pbc-finite-type-algebra], i.e. $\\mathcal O_X(U)$ is a finitely generated $\\mathcal O_S(V)$-algebra.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Definition Tag 01T1 (definition-finite-type, line 2657), parts (1)-(2): the pointwise condition is Stacks' definition of 'locally of finite type'; Lemma Tag 01T2 (lemma-locally-finite-type-characterize, line 2673), equivalences (1)<=>(2)<=>(4), identifies it with the all-affine-pairs form [lem-weil-pbc-lft-affine-pairs] and the affine-cover form of [def-weil-finite-type-morphism]"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism locally of finite type iff every point has affine open neighbourhoods with finite type ring map",
+   "results": "LocallyOfFiniteType.mk, locallyOfFiniteType_iff, LocallyOfFiniteType, Scheme.Hom.finiteType_appLE, instHasRingHomPropertyLocallyOfFiniteTypeFiniteType (Morphisms.FiniteType); RingHom.finiteType_isLocal (RingTheory.RingHom.FiniteType); IsFinite.instLocallyOfFiniteType",
+   "date": "2026-10-10",
+   "verdict": "no direct match (all-affine-pairs form only); the HasRingHomProperty instance points to the generic pointwise criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of schemes is locally of finite type if each point of the source has an affine open neighbourhood mapping into an affine open of the target with finitely generated ring map",
+   "results": "locallyOfFiniteType_iff, LocallyOfFiniteType, isFinite_iff, IsFinite.instLocallyOfFiniteType, instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, locallyQuasiFinite_iff",
+   "date": "2026-10-10",
+   "verdict": "no direct match; instHasRingHomPropertyLocallyOfFiniteTypeFiniteType makes the generic lemma below apply"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.HasRingHomProperty, AlgebraicGeometry.Scheme.Hom.appLE, RingHom.StableUnderCompositionWithLocalizationAwaySource",
+   "results": "AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE, AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE_locally (Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties)",
+   "date": "2026-10-10",
+   "verdict": "match: HasRingHomProperty.iff_exists_appLE, specialized to P = LocallyOfFiniteType, Q = RingHom.FiniteType"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'iff_exists_appLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; sed -n 600,668p of that file; sed -n 30,60p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean; sed -n 41,95p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RingHom/FiniteType.lean; sed -n 150,152p and 295,302p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/Basic.lean",
+   "results": "RingHomProperties.lean:651 lemma iff_exists_appLE (hQ : StableUnderCompositionWithLocalizationAwaySource Q) : P f <-> forall x : X, exists (U : Y.affineOpens) (V : X.affineOpens) (_ : x in V.1) (e : V.1 <= f^-1 U.1), Q (f.appLE U V e).hom; FiniteType.lean:43 class LocallyOfFiniteType, :54 instance HasRingHomProperty @LocallyOfFiniteType RingHom.FiniteType; RingHom/FiniteType.lean:41 finiteType_stableUnderComposition, :75 finiteType_holdsForLocalizationAway; LocalProperties/Basic.lean:150 StableUnderCompositionWithLocalizationAway := Source and Target, :297 StableUnderComposition.stableUnderCompositionWithLocalizationAway",
+   "date": "2026-10-10",
+   "verdict": "match (read)"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE (project root ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE, ...iff_exists_appLE_locally (.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean); index: unavailable (names found, so existence confirmed)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean",
+  "how": "specializes in one line: HasRingHomProperty.iff_exists_appLE (P := @LocallyOfFiniteType) (Q := RingHom.FiniteType) (RingHomProperties.lean:651-654) with the instance HasRingHomProperty @LocallyOfFiniteType RingHom.FiniteType (FiniteType.lean:54) and hQ := (RingHom.finiteType_stableUnderComposition.stableUnderCompositionWithLocalizationAway RingHom.finiteType_holdsForLocalizationAway).left (RingTheory/RingHom/FiniteType.lean:41, :75; RingTheory/LocalProperties/Basic.lean:150, :297); the right side is: for every x there are affine opens U of S, V of X with x in V, V <= f^-1 U and f.appLE U V e of finite type, which is the node's condition with the roles of the letters U, V exchanged; the agreement of LocallyOfFiniteType with the cover form of [def-weil-finite-type-morphism] is the one recorded on that leaf",
+  "line": 651
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lqf-locally-finite-type",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "One-line specialization of AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE (RingHomProperties.lean line 651) with P = LocallyOfFiniteType, Q = RingHom.FiniteType and hQ from the stability lemmas named in 'how'; lines read by L.",
+ "reviewed": "Reviewed by L 2026-10-10: Mathlib leaf, one-line specialization; lines read."
+}

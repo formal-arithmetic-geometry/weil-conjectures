@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-lqf-locally-finite-type",
  "kind": "statement",
  "title": "A locally quasi-finite morphism is locally of finite type (Stacks, remark after 01TD)",
- "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally quasi-finite [pqf-def-quasifinite]: every $x\\in X$ has an affine open neighbourhood $\\operatorname{Spec}A=U\\subseteq X$ and an affine open $\\operatorname{Spec}R=V\\subseteq S$ with $f(U)\\subseteq V$ such that $R\\to A$ is of finite type and quasi-finite at the prime of $A$ corresponding to $x$. Then $f$ is locally of finite type [def-weil-finite-type-morphism].",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally quasi-finite [pqf-def-quasifinite]: every $x\\in X$ has an affine open neighbourhood $\\operatorname{Spec}A=U\\subseteq X$ and an affine open $\\operatorname{Spec}R=V\\subseteq S$ with $f(U)\\subseteq V$ [def-weil-affine-spectrum] such that the ring map $R=\\mathcal O_S(V)\\to A=\\mathcal O_X(U)$ induced by $f$ is of finite type [def-weil-pbc-finite-type-algebra] and quasi-finite at the prime of $A$ corresponding to $x$ [def-weil-pbc-ring-map-quasi-finite-at-prime]. Then $f$ is locally of finite type [def-weil-finite-type-morphism].",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Morphisms, Section Tag 01TC (section-quasi-finite), remark after Definition Tag 01TD, line 3558 ('Trivially, a locally quasi-finite morphism is locally of finite type'); the locality of finite type it rests on is Lemma Tag 01T2 (lemma-locally-finite-type-characterize), line 2673"
@@ -10,11 +10,48 @@
  "stmt_deps": [
   "def-pc-scheme",
   "pqf-def-quasifinite",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Each point has a finite type affine pair.* Let $x\\in X$. By [pqf-def-quasifinite] (2), $f$ is quasi-finite at $x$, so by [pqf-def-quasifinite] (1) there are an affine open $U=\\operatorname{Spec}A\\subseteq X$ with $x\\in U$ and an affine open $V=\\operatorname{Spec}R\\subseteq S$ with $f(U)\\subseteq V$ such that the ring map $R=\\mathcal O_S(V)\\to A=\\mathcal O_X(U)$ induced by $f$ is of finite type [def-weil-pbc-finite-type-algebra] (and quasi-finite at the prime of $x$, which is not used below). Hence every $x\\in X$ lies in an affine open $U$ mapped by $f$ into an affine open $V$ with $\\mathcal O_S(V)\\to\\mathcal O_X(U)$ of finite type.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, remark after Definition Tag 01TD (definition-quasi-finite, line 3538), line 3558 ('Trivially, a locally quasi-finite morphism is locally of finite type')"
+   }
+  },
+  {
+   "text": "*Conclusion.* The condition obtained in step 1 for every $x\\in X$ is exactly the right-hand side of [lem-weil-pbc-lft-pointwise-criterion] (Stacks Definition 01T1 with Lemma 01T2, (1) $\\Leftrightarrow$ (2) $\\Leftrightarrow$ (4)); by its implication from right to left, $f$ is locally of finite type in the sense of [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-weil-pbc-lft-pointwise-criterion",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Definition Tag 01T1 (definition-finite-type, line 2657) and Lemma Tag 01T2 (lemma-locally-finite-type-characterize, line 2673)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-quasifinite",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, remark after Definition Tag 01TD, line 3558, with Definition Tag 01T1 (line 2657) and Lemma Tag 01T2 (line 2673)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +73,31 @@
    "results": "only Morphisms/QuasiFinite.lean and ZariskisMainTheorem.lean use LocallyQuasiFinite; QuasiFinite.lean:23 and :57 docstrings: 'this does not require f to be quasi-compact nor locally of finite type'",
    "date": "2026-10-10",
    "verdict": "no match: Mathlib's LocallyQuasiFinite (QuasiFinite.lean:71, RingHom.QuasiFinite on affine pairs) omits finite type, so the statement is not expressible as a Mathlib fact about LocallyQuasiFinite; with pqf-def-quasifinite matched to LocallyQuasiFinite and LocallyOfFiniteType it would become a projection, but that matching is itself a theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "locally quasi-finite morphism of schemes is locally of finite type",
+   "results": "instLocallyQuasiFiniteOfIsFinite, instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, LocallyQuasiFinite, locallyQuasiFinite_iff (Morphisms.QuasiFinite), IsFinite.instLocallyOfFiniteType, LocallyOfFiniteType, instLocallyQuasiFiniteOfIsImmersion, instHasRingHomPropertyLocallyOfFiniteTypeFiniteType",
+   "date": "2026-10-10",
+   "verdict": "no match: nothing derives LocallyOfFiniteType from LocallyQuasiFinite"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 50,80p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; grep -n LocallyOfFiniteType QuasiFinite.lean; grep -rn 'QuasiFinite.*finiteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "QuasiFinite.lean:66 class LocallyQuasiFinite (RingHom.QuasiFinite on all affine pairs; docstring :57 'does not require f to be ... locally of finite type'); every LocallyOfFiniteType occurrence in QuasiFinite.lean (:277, :304, :326, :330, :334, :396, :443) is a hypothesis; RingHom/QuasiFinite.lean:119 QuasiFinite.of_isIntegral_of_finiteType goes the other way",
+   "date": "2026-10-10",
+   "verdict": "no match; Mathlib's LocallyQuasiFinite is not pqf-def-quasifinite (B8): that matching is itself a theorem (Stacks 01TH/00PL), so no leaf"
+  },
+  {
+   "tool": "local_search",
+   "query": "LocallyQuasiFinite.locallyOfFiniteType (project root ~/weil-conjectures-slopmaster2)",
+   "results": "none; index: unavailable (not proof of absence; the grep above is)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +117,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-lqf-locally-finite-type",
+  "worker": "stage1",
+  "summary": "Two steps following the remark after Stacks 01TD ('Trivially...'): unpack pqf-def-quasifinite (1)-(2) to get, around every point, an affine pair with a finite type ring map (the quasi-finiteness is dropped); then the pointwise criterion for local finite type. In Stacks this criterion is the definition 01T1; in the DAG locally of finite type is the affine-cover form of def-weil-finite-type-morphism, so the agreement (01T1 with 01T2) is cited as the new Mathlib leaf lem-weil-pbc-lft-pointwise-criterion = HasRingHomProperty.iff_exists_appLE for LocallyOfFiniteType / RingHom.FiniteType (RingHomProperties.lean:651, read). The existing lem-weil-pbc-lft-affine-pairs (all affine pairs, 01T2 (1)<=>(2)) does not give the pointwise direction. Statement kept; stmt_deps completed with def-weil-affine-spectrum, def-weil-pbc-finite-type-algebra, def-weil-pbc-ring-map-quasi-finite-at-prime (notions the statement uses). Mathlib: no LocallyQuasiFinite => LocallyOfFiniteType (Mathlib's LocallyQuasiFinite omits finite type, QuasiFinite.lean:57), so the item is not a leaf."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: 'trivially' in the source rests on Stacks' pointwise definition 01T1; the DAG's cover definition needs the pointwise criterion of 01T2, now a Mathlib leaf (HasRingHomProperty.iff_exists_appLE). Statement gained citations only. Not a leaf itself (Mathlib's LocallyQuasiFinite is a different notion, B8)."
 }

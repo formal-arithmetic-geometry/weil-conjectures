@@ -974,3 +974,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:39 L: reviewed and accepted lem-weil-pbc-jacobi-zariski-connecting-map-naturality (5 steps by agent, no new nodes). L amended lem-weil-pbc-jacobi-zariski-homology-sequence: its statement now gives the explicit formula for the connecting map (exactness alone did not determine it) and step 10 derives it from the snake construction; citers (geometrically-regular-h1-injective steps 1, 6) are consistent with this.
 - 06:40 L: reviewed and accepted lem-weil-pbc-lci-field-change (5 steps; +lci-conormal-generators-global-complete-intersection 00SC (3)=>(1), +dimension-at-point-field-extension 00P4 nodes).
 - 06:40 L: reviewed and accepted lem-weil-pbc-lift-to-injective-unique-up-to-homotopy (7 steps; +complex-mapping-cylinder-split-factorization 013N node; 013S misprint noted).
+- 06:42 L: reviewed and accepted lem-weil-pbc-lqf-locally-finite-type (2 steps; +lft-pointwise-criterion Mathlib leaf 01T1/01T2).
+- 06:42 L: reviewed and accepted lem-weil-pbc-lci-regular-sequence-global-complete-intersection (10 steps; +polynomial-quotient-dimension-at-point-height-difference node 00P2).
