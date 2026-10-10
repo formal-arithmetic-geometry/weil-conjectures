@@ -13,9 +13,87 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-normal-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The fibre rings are Noetherian.* Let $\\mathfrak p\\subset R$ be a prime ideal. Since $S$ is Noetherian (hypothesis (2)), the fibre ring $S\\otimes_R\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime] is Noetherian by [lem-weil-pbc-fibre-ring-noetherian]. So every fibre ring is a Noetherian ring which is normal by hypothesis (4), and the conditions $(R_k)$, $(S_k)$ [def-weil-pbc-serre-conditions-rk-sk], defined for Noetherian rings, make sense for it.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-serre-conditions-rk-sk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0C22 (lemma-normal-goes-up-noetherian, line 46541), proof ('Thus we know $R$ and the fibre rings have these properties'; Stacks leaves implicit that the fibre rings are Noetherian, which Serre's criterion requires)"
+   }
+  },
+  {
+   "text": "*$R$ and the fibre rings have $(R_1)$ and $(S_2)$.* By Serre's criterion [lem-weil-pbc-serre-criterion-normal], direction normal $\\Rightarrow$ $(R_1)+(S_2)$, applied to the Noetherian normal ring $R$ (hypotheses (1) and (5)) [def-weil-pbc-normal-ring], $R$ has properties $(R_1)$ and $(S_2)$ [def-weil-pbc-serre-conditions-rk-sk]. Applied to each fibre ring $S\\otimes_R\\kappa(\\mathfrak p)$, which is Noetherian (step 1) and normal (hypothesis (4)), it shows that every fibre ring has $(R_1)$ and $(S_2)$.",
+   "uses": [
+    "lem-weil-pbc-serre-criterion-normal",
+    "def-weil-pbc-normal-ring",
+    "def-weil-pbc-serre-conditions-rk-sk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0C22 (lemma-normal-goes-up-noetherian, line 46541), proof, first two sentences, with Lemma Tag 031S (lemma-criterion-normal)"
+   }
+  },
+  {
+   "text": "*$S$ has $(S_2)$.* The ring map $\\varphi:R\\to S$ is flat [def-weil-pbc-flat-ring-map], $R$ and $S$ are Noetherian [def-weil-pbc-noetherian-ring], the fibre rings have $(S_2)$ and $R$ has $(S_2)$ (step 2). By [lem-weil-pbc-serre-sk-goes-up] with $k=2$, $S$ has property $(S_2)$.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-serre-sk-goes-up"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0C22 (lemma-normal-goes-up-noetherian, line 46541), proof, third sentence, with Lemma Tag 0339 (lemma-Sk-goes-up)"
+   }
+  },
+  {
+   "text": "*$S$ has $(R_1)$.* Under the same hypotheses, the fibre rings have $(R_1)$ and $R$ has $(R_1)$ (step 2); here $(R_1)$ of [def-weil-pbc-serre-conditions-rk-sk] is the property stated in [lem-weil-pbc-regularity-rk-goes-up] (every localization at a prime of height $\\le1$ is a regular local ring). By [lem-weil-pbc-regularity-rk-goes-up] with $k=1$, $S$ has property $(R_1)$.",
+   "uses": [
+    "def-weil-pbc-serre-conditions-rk-sk",
+    "lem-weil-pbc-regularity-rk-goes-up"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0C22 (lemma-normal-goes-up-noetherian, line 46541), proof, third sentence, with Lemma Tag 033A (lemma-Rk-goes-up)"
+   }
+  },
+  {
+   "text": "*Conclusion.* $S$ is a Noetherian ring (hypothesis (2)) with properties $(R_1)$ (step 4) and $(S_2)$ (step 3). By Serre's criterion [lem-weil-pbc-serre-criterion-normal], direction $(R_1)+(S_2)\\Rightarrow$ normal, $S$ is a normal ring [def-weil-pbc-normal-ring].",
+   "uses": [
+    "lem-weil-pbc-serre-criterion-normal",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0C22 (lemma-normal-goes-up-noetherian, line 46541), proof, last sentence ('in other words normal by Lemma 031S again')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-serre-conditions-rk-sk",
+  "lem-weil-pbc-serre-criterion-normal",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-serre-sk-goes-up",
+  "lem-weil-pbc-regularity-rk-goes-up"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 0C22 (lemma-normal-goes-up-noetherian, line 46541) and its proof, with Lemmas Tag 031S, 0339, 033A; the Noetherianity of the fibre rings (step 1), implicit in Stacks, is written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +115,17 @@
    "results": "none; Mathlib has no Serre criterion for normality, no (R_k)/(S_k) conditions and no normality ascent along flat maps",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, Module.Flat",
+   "results": "none (no declaration mentions both)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +145,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "worker": "stage1",
+  "summary": "Statement kept (matches Stacks 0C22 with the node definitions of Noetherian ring, flat ring map, fibre ring and normal ring). Proof written in 5 steps following the Stacks proof of 0C22: fibre rings are Noetherian (existing lem-weil-pbc-fibre-ring-noetherian; Stacks leaves this implicit though Serre's criterion needs it); Serre's criterion 031S (new unsplit node lem-weil-pbc-serre-criterion-normal) gives (R_1)+(S_2) for R and the fibres; (S_k) goes up, 0339 (new unsplit node lem-weil-pbc-serre-sk-goes-up) with k=2; (R_k) goes up, 033A (existing lem-weil-pbc-regularity-rk-goes-up, whose inline (R_k) agrees with the new definition) with k=1; 031S again. New definition nodes: def-weil-pbc-serre-conditions-rk-sk (031P) and def-weil-pbc-depth (00LI; Mathlib has no depth, only the Rees theorem in RingTheory/Depth/Rees.lean). All four new nodes searched with leansearch, leanfinder (or loogle) and grep: none in Mathlib. Item search: one loogle query added (IsIntegrallyClosed, Module.Flat: no result)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 0C22: fibre rings Noetherian (existing node); Serre's criterion 031S both ways (new unsplit node); (S_2) goes up (new unsplit 0339 node); (R_1) goes up (existing 033A node from F1's regular-ring-smooth-ascent). New unsplit definitions def-weil-pbc-depth (00LI) and def-weil-pbc-serre-conditions-rk-sk (031P); Mathlib has neither depth nor the Serre conditions. Stage 3: lem-weil-pbc-regularity-rk-goes-up should cite def-weil-pbc-serre-conditions-rk-sk instead of its inline (R_k), and its source line is 46460, not 49612."
+ }
 }

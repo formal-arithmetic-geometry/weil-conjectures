@@ -1,0 +1,71 @@
+{
+ "id": "def-weil-pbc-serre-conditions-rk-sk",
+ "kind": "definition",
+ "title": "Serre's conditions (R_k) and (S_k)",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $k\\ge0$ an integer. For a prime $\\mathfrak p\\subset R$ let $R_{\\mathfrak p}$ be the localization [def-weil-pbc-localization-at-prime], $\\dim(R_{\\mathfrak p})$ its Krull dimension (the height of $\\mathfrak p$) and $\\operatorname{depth}(R_{\\mathfrak p})$ its depth as a module over itself [def-weil-pbc-depth]. (1) $R$ has property *$(R_k)$* (is regular in codimension $\\le k$) if for every prime $\\mathfrak p$ of height $\\le k$ the local ring $R_{\\mathfrak p}$ is a regular local ring [def-weil-regular-scheme]. (2) $R$ has property *$(S_k)$* if for every prime $\\mathfrak p$ the local ring $R_{\\mathfrak p}$ has $\\operatorname{depth}(R_{\\mathfrak p})\\ge\\min\\{k,\\dim(R_{\\mathfrak p})\\}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 031P (definition-conditions, line 43872), Section Tag 031O (section-serre-criterion); parts (1) and (2) (part (3), for finite modules, is not needed here)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-depth",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Serre condition S_k depth of localization at least min(k, dim)",
+   "results": "IsLocalization.AtPrime.ringKrullDim_eq_height, Ring.krullDimLE_of_isLocalization_maximal, CategoryTheory.ObjectProperty.IsSerreClass.mk (Serre classes, unrelated), ringKrullDim, Module.supportDim; no (R_k)/(S_k)",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre's conditions R_k and S_k on a Noetherian ring: localizations at primes of height at most k are regular; depth at least min(k, dim)",
+   "results": "IsNoetherianRing.of_isLocalization_maximal, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing; no Serre conditions",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Serre\\|S_k\\b\\|IsCohenMacaulay\\|CohenMacaulay\\|RegularInCodim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory (and ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib for CohenMacaulay)",
+   "results": "only Serre's Local Fields / Galois theory citations (DiscreteValuationRing/Basic.lean:26, Valuation/Discrete/Basic.lean:454, Polynomial/Morse.lean:36); no (R_k), (S_k), Cohen-Macaulay or depth; regular local rings exist (IsRegularLocalRing, RingTheory/RegularLocalRing/Defs.lean) and heights/Krull dimension (Ideal.height, ringKrullDim)",
+   "verdict": "no match: (R_k) could be written from IsRegularLocalRing and Ideal.height, but (S_k) needs depth, absent",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsSerre (project ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.ObjectProperty.IsSerreClass only (index unavailable, so not a proof of absence; grep above is)",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
