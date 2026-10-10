@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeSections
+public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Finiteness
@@ -61,6 +62,51 @@ lemma pullbackTopSection_map (m : Γ(M, ⊤)) {V : Y.Opens} :
 lemma pullbackSection_sub {U : Y.Opens} (m m' : Γ(M, U)) :
     pullbackSection g (m - m') = pullbackSection g m - pullbackSection g m' :=
   map_sub _ _ _
+
+/-- The pullback of a global section generates the pullback module wherever the section
+generates the module. -/
+lemma preimage_generatingLocus_le (m : Γ(M, ⊤)) :
+    g ⁻¹ᵁ generatingLocus m ≤ generatingLocus (pullbackTopSection g m) := fun _ hx ↦
+  ⟨g ⁻¹ᵁ generatingLocus m, hx, by
+    rw [pullbackTopSection_map]
+    exact (isFreeGenerator_generatingLocus m).pullback_unit_app g⟩
+
+/-- **Linear combinations of pullbacks of sections.** If a linear combination
+`∑ r, a r • g^* (σ r)` of pullbacks of global sections of an invertible module `M` generates
+`g^* M` at `y`, then some `σ r` generates `M` at `g y`. -/
+lemma exists_generatesAt_of_generatesAt_sum [SheafOfModules.IsInvertible.{u, u, u} M]
+    {ι : Type*} (s : Finset ι) (a : ι → Γ(X, ⊤)) (σ : ι → Γ(M, ⊤)) {y : X}
+    (h : GeneratesAt (∑ r ∈ s, a r • pullbackTopSection g (σ r)) y) :
+    ∃ r ∈ s, GeneratesAt (σ r) (g y) := by
+  classical
+  by_contra hne
+  simp only [not_exists, not_and] at hne
+  obtain ⟨W, hxW, -, e, he⟩ := exists_isFreeGenerator M (x := g y) (W := ⊤) trivial
+  set f : ι → Γ(Y, W.1) := fun r ↦ he.coeff (M.presheaf.map (homOfLE le_top).op (σ r))
+  have hf (r : ι) : M.presheaf.map (homOfLE le_top).op (σ r) = f r • e := (he.coeff_smul _).symm
+  have hgen : IsFreeGenerator (pullbackSection g e) := he.pullback_unit_app g
+  have hsum : ((pullback g).obj M).presheaf.map (homOfLE (le_top : g ⁻¹ᵁ W.1 ≤ ⊤)).op
+      (∑ r ∈ s, a r • pullbackTopSection g (σ r)) =
+      (∑ r ∈ s, X.presheaf.map (homOfLE le_top).op (a r) * g.app W.1 (f r)) •
+        pullbackSection g e := by
+    rw [map_sum, Finset.sum_smul]
+    refine Finset.sum_congr rfl fun r _ ↦ ?_
+    rw [Scheme.Modules.map_smul, pullbackTopSection_map, hf, pullbackSection_smul, smul_smul]
+  have hy := mem_basicOpen_of_generatesAt hgen hsum hxW h
+  have hle (t : Finset ι) : X.basicOpen (∑ r ∈ t, X.presheaf.map (homOfLE le_top).op (a r) *
+      g.app W.1 (f r)) ≤ ⨆ r ∈ t, X.basicOpen (g.app W.1 (f r)) := by
+    induction t using Finset.induction_on with
+    | empty => simp
+    | insert r s hr ih =>
+      rw [Finset.sum_insert hr]
+      refine (X.basicOpen_add_le _ _).trans (sup_le ?_ (ih.trans ?_))
+      · rw [X.basicOpen_mul]
+        exact inf_le_right.trans (le_iSup₂_of_le r (Finset.mem_insert_self r s) le_rfl)
+      · exact iSup₂_le fun r' hr' ↦ le_iSup₂_of_le r' (Finset.mem_insert_of_mem hr') le_rfl
+  obtain ⟨r, hr, hyr⟩ : ∃ r ∈ s, y ∈ X.basicOpen (g.app W.1 (f r)) := by
+    simpa only [TopologicalSpace.Opens.mem_iSup, exists_prop] using hle s hy
+  rw [← Scheme.preimage_basicOpen] at hyr
+  exact hne r hr (generatesAt_of_mem_basicOpen he (hf r) hyr)
 
 end PullbackTop
 

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Modules.FieldBaseChange
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartSections
 
@@ -247,5 +248,74 @@ theorem mono_of_eq_sum_smul [IsAffine S] (hχ : χ ≫ ℙ(n; S) ↘ S = g) [Mon
   exact hunit.mul_right_cancel (ha.trans hb.symm)
 
 end Mono
+
+section BaseChange
+
+attribute [local instance] MvPolynomial.gradedAlgebra
+
+variable {S S' W X : Scheme.{u}} {m : Type u} (gS : S' ⟶ S) (φ : W ⟶ X) {M : X.Modules}
+  {u : m → Γ(M, ⊤)} {j : X ⟶ ℙ(m; S)} (εj : twistRestrict j 1 ⟶ M) [IsIso εj]
+  (hεj : ∀ q, εj.app _ (pullbackSection j (twistOneSection m S q)) =
+    M.presheaf.map (homOfLE (le_top : j ⁻¹ᵁ ⊤ ≤ ⊤)).op (u q))
+  {ψ : W ⟶ ℙ(m; S')} (εψ : twistRestrict ψ 1 ⟶ (Scheme.Modules.pullback φ).obj M) [IsIso εψ]
+  (hεψ : ∀ q, εψ.app _ (pullbackSection ψ (twistOneSection m S' q)) =
+    ((Scheme.Modules.pullback φ).obj M).presheaf.map (homOfLE (le_top : ψ ⁻¹ᵁ ⊤ ≤ ⊤)).op
+      (pullbackTopSection φ (u q)))
+include hεj hεψ
+
+/-- **Base change of a morphism given by sections.** Let `j : X ⟶ ℙ(m; S)` be given by global
+sections `u` of a module `M`, and `ψ : W ⟶ ℙ(m; S')` by their pullbacks along `φ : W ⟶ X`. If
+`ψ` and `φ ≫ j` agree over `S`, for a morphism `S' ⟶ S` to an affine scheme, then `ψ` is a
+lift of `φ ≫ j` along the base change morphism `ℙ(m; S') ⟶ ℙ(m; S)`. -/
+theorem map_comp_eq_of_pullbackTopSection [IsAffine S]
+    (h : ψ ≫ ℙ(m; S') ↘ S' ≫ gS = φ ≫ j ≫ ℙ(m; S) ↘ S) : ψ ≫ map m gS = φ ≫ j := by
+  let O (q : m) : W.Opens := φ ⁻¹ᵁ (j ⁻¹ᵁ standardOpen m S q)
+  have hO : ⨆ q, O q = ⊤ := eq_top_iff.mpr fun x _ ↦ by
+    obtain ⟨q, hq⟩ := Opens.mem_iSup.mp ((iSup_standardOpen m S).ge (Set.mem_univ (j (φ x))))
+    exact Opens.mem_iSup.mpr ⟨q, hq⟩
+  refine Scheme.Opens.hom_ext_of_iSup_eq_top O hO _ _ fun q ↦ ?_
+  have hOψ : O q ≤ ψ ⁻¹ᵁ standardOpen m S' q := by
+    rw [← generatingLocus_eq_preimage_standardOpen εψ hεψ q]
+    refine le_trans (le_of_eq ?_) (preimage_generatingLocus_le φ (u q))
+    rw [generatingLocus_eq_preimage_standardOpen εj hεj q]
+  have hpre : map m gS ⁻¹ᵁ standardOpen m S q = standardOpen m S' q := by
+    have := Scheme.Hom.comp_preimage (map m gS) (toProjInt m S)
+      (Proj.basicOpen (MvPolynomial.homogeneousSubmodule m (ULift.{u} ℤ)) (MvPolynomial.X q))
+    rw [map_toProjInt] at this
+    exact this.symm
+  have hOι : ⊤ ≤ (O q).ι ⁻¹ᵁ O q := fun x _ ↦ x.2
+  -- the ratios `Tᵣ / T_q` pulled back to `O q` along both morphisms agree
+  have key (r : m) : ψ.appLE (standardOpen m S' q) (O q) hOψ (coordRatio m S' q r) =
+      φ.appLE (j ⁻¹ᵁ standardOpen m S q) (O q) le_rfl
+        (j.app (standardOpen m S q) (coordRatio m S q r)) := by
+    refine ((isFreeGenerator_of_twistRestrict_iso εψ hεψ q).map hOψ).smul_left_injective ?_
+    dsimp only
+    conv_lhs => rw [appLE_eq_map_app, ← Scheme.Modules.map_smul,
+      ← map_eq_coordRatio_smul_of_twistRestrict_iso εψ hεψ q r, presheaf_map_homOfLE_map_homOfLE]
+    rw [presheaf_map_homOfLE_map_homOfLE, ← Scheme.Hom.app_eq_appLE,
+      pullbackTopSection_map (V := j ⁻¹ᵁ standardOpen m S q),
+      pullbackTopSection_map (V := j ⁻¹ᵁ standardOpen m S q), ← pullbackSection_smul,
+      ← map_eq_coordRatio_smul_of_twistRestrict_iso εj hεj q r]
+  have hD : ⊤ ≤ ((O q).ι ≫ φ ≫ j) ⁻¹ᵁ standardOpen m S q := fun x _ ↦ x.2
+  refine hom_ext_of_preimage_standardOpen_eq_top q ?_ (eq_top_iff.mpr hD) ?_ fun r ↦ ?_
+  · refine eq_top_iff.mpr fun x _ ↦ ?_
+    change ψ x.1 ∈ map m gS ⁻¹ᵁ standardOpen m S q
+    rw [hpre]
+    exact hOψ x.2
+  · simp only [Category.assoc, map_over]
+    rw [h]
+  · have e₁ (e) : ((O q).ι ≫ ψ ≫ map m gS).appLE (standardOpen m S q) ⊤ e
+        (coordRatio m S q r) = (O q).ι.appLE (O q) ⊤ hOι
+          (ψ.appLE (standardOpen m S' q) (O q) hOψ (coordRatio m S' q r)) := by
+      rw [← map_appLE_coordRatio gS q r hpre.ge]
+      simp only [← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]
+    have e₂ (e) : ((O q).ι ≫ φ ≫ j).appLE (standardOpen m S q) ⊤ e (coordRatio m S q r) =
+        (O q).ι.appLE (O q) ⊤ hOι (φ.appLE (j ⁻¹ᵁ standardOpen m S q) (O q) le_rfl
+          (j.app (standardOpen m S q) (coordRatio m S q r))) := by
+      rw [Scheme.Hom.app_eq_appLE]
+      simp only [← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE]
+    rw [e₁, e₂, key r]
+
+end BaseChange
 
 end AlgebraicGeometry.ProjectiveSpace
