@@ -2453,3 +2453,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:53 L: merged deliver/H1/lem-pc-affine-tilde-kflat (reviewer FIX; first push; new nodes: 0)
 - 19:53 L: merged deliver/F1/lem-sc-mult-n-locally-quasi-finite (reviewer FIX; first push; new nodes: 1)
 - 19:54 L: merged deliver/M1/lem-pc-stalk-tensor-complex (reviewer PASS; first push; new nodes: 2)
+- 19:54 L: returned deliver/G1/lem-sc-generic-rank-leading-degree (reviewer RETURN: 1. E (wrong step, Step 1): 'the quotient of E by a copy of O_Y^{⊕r}' presumes an injection O_Y^{⊕r} -> E, which need not)
