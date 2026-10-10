@@ -2182,3 +2182,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:55 L: returned deliver/J1/lem-sc-smooth-proper-diagonal-koszul-dual (reviewer RETURN: 1. E (false new statement): lem-sc-closed-immersion-derived-pushforward-fully-faithful is false. Ri_*: D_QCoh(O_Z) -> D_)
 - 17:55 L: merged deliver/K1/lem-sc-derived-hom-projective-resolution (reviewer PASS; first push; new nodes: 1)
 - 17:56 L: merged deliver/J1/lem-weil-pbc-site-restriction-exact (reviewer FIX; first push; new nodes: 0)
+- 17:56 L: merged deliver/H1/lem-sc-coherent-affine-free-resolution (reviewer PASS; first push; new nodes: 0)

@@ -26,9 +26,61 @@
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "lem-weil-pbc-quasi-coherent-finite-type-affine"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $X$ is Noetherian, its quasi-compact and locally Noetherian hypotheses give an affine open neighbourhood $U=\\operatorname{Spec}(A)$ of $x$ with $A$ Noetherian: choose an affine member of the locally Noetherian affine cover containing $x$.",
+   "uses": [
+    "def-weil-pbc-quasi-compact-scheme",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma Tag 01XZ, local affine reduction"
+   }
+  },
+  {
+   "text": "By [pqf-lem-coherent-ft-locnoeth], $\\mathcal F|_U$ is quasi-coherent of finite type. Hence [lem-weil-pbc-quasi-coherent-finite-type-affine](a) gives that $M=\\Gamma(U,\\mathcal F)$ is a finite $A$-module, and [lem-weil-pbc-affine-tilde-gamma-adjunction](3) gives the counit isomorphism $\\widetilde M\\cong\\mathcal F|_U$.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma Tag 01XZ, coherent sheaf on an affine Noetherian open"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-free-resolution-noetherian] to $M$ and write its exact augmented resolution as $\\cdots\\to A^{\\oplus n_2}\\to A^{\\oplus n_1}\\to A^{\\oplus n_0}\\to M\\to0$. Apply the tilde functor termwise and place $\\widetilde{A^{\\oplus n_i}}$ in cochain degree $-i$, with the augmentation in degree $0$. Each term is a finite-rank free $\\mathcal O_U$-module. For every $y\\in U$ corresponding to $\\mathfrak p\\subset A$, [lem-weil-pbc-spec-tilde-stalk-localization] identifies its stalk with the localization at $\\mathfrak p$; localization is exact, so the stalk of this augmented sheaf complex is the localized exact module resolution. By [lem-weil-pbc-module-stalk-exact](5), exactness is detected on stalks. Thus the resulting bounded-above complex $E^\\bullet$ is quasi-isomorphic to $\\widetilde M[0]\\cong\\mathcal F|_U[0]$.",
+   "uses": [
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00LP, together with Schemes Tag 01HV and Modules Tag 01AG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-quasi-compact-scheme",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma Tag 01XZ, with Algebra Tag 00LP and affine tilde/Gamma equivalence Tags 01IA, 01IB"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,12 +112,55 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-derived-internal-hom-stalk-localization",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-coherent-affine-free-resolution",
+  "worker": "stage1",
+  "summary": "Expanded the imported statement into the affine reduction, coherent-to-quasi-coherent finite-module identification, and termwise sheafification of the finite-free module resolution. Exactness of the sheaf complex is checked stalkwise using localization and the existing generic stalk exactness criterion; no new node was needed.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof of thm-sc-p1-duality: resolve the coherent sheaf on a Noetherian affine neighbourhood by finite free sheaves.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Step 2 uses the generic coherence characterization to obtain quasi-coherence and finite type; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Step 2 uses the generic affine sections criterion to obtain a finite module of sections; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Step 3 uses the generic Noetherian module free-resolution theorem; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Step 3 uses the generic theorem that exactness of a complex of sheaves of modules is equivalent to exactness on every stalk; the Picard-duality unit has no such sheaf-theoretic criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-module-stalk-exact",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cfr1756",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cfr1756 (reviewer sub-agent of L); spot-checked: Read packet whole. Step 1: affine Noetherian nbhd from pqf-def-locnoeth. Step 2: 01XZ char on locally Noetherian U, affine finite-type sections criterion (a), counit iso (3); hypotheses hold. Step 3: 00LP resolution, tilde termwise (free finite rank via colimit preservation), stalks = localizations naturally (tilde u compatible with tau), stalkwise exactness (5) gives quasi-iso; proof_deps match citations. Tool uses are generic, accepted. Mathlib grep (AlgebraicGeometry, ModuleCat) for free resolution: no scheme-level finite-free statement, so no leaf. No fault beyond the second reading."
+ }
 }
