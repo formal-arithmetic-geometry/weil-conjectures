@@ -820,3 +820,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:22 L: reviewed lem-weil-pbc-finite-projective-prime-local-free (3 steps, +2 leaves): accepted.
 - 03:23 L: reviewed lem-weil-pbc-finite-surjective-affine-target (9 steps, +01YQ node, tool_uses thm-pd-spreading-out), lem-weil-pbc-first-order-thickening-base-change (6 steps, 0 new): accepted.
 - 03:24 L: reviewed lem-weil-pbc-finite-type-z-domain-normalization-finite (3 steps, +6: finite-type and integral-closure definition leaves, 032L leaf, Japanese/Nagata definitions, 0334 node), lem-weil-pbc-flat-local-criterion-nonzerodivisor (2 steps, 0 new): accepted.
+- 03:26 L: reviewed lem-weil-pbc-flat-ses-kernel-flat (4 steps, 0 new; attached Module.Flat.of_exact_of_flat_of_flat_right, closed on slopmaster2): accepted.
