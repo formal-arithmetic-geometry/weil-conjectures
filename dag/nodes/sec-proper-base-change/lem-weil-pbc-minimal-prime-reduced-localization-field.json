@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-minimal-prime-reduced-localization-field",
+ "kind": "statement",
+ "title": "The localization of a ring at a minimal prime has nilpotent maximal ideal; a field if the ring is reduced",
+ "statement": "Let $R$ be a commutative ring and $\\mathfrak p\\subset R$ a minimal prime ideal (a prime ideal containing no strictly smaller prime ideal). Then every element of the maximal ideal $\\mathfrak pR_{\\mathfrak p}$ of the localization $R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] is nilpotent (equivalently, $\\mathfrak pR_{\\mathfrak p}$ is the only prime ideal of $R_{\\mathfrak p}$). If moreover $R$ is reduced (has no nonzero nilpotent elements), then $\\mathfrak pR_{\\mathfrak p}=0$ and $R_{\\mathfrak p}$ is a field.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00EU (lemma-minimal-prime-reduced-ring, line 4543)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a reduced ring at a minimal prime ideal is a field",
+   "results": "IsLocalization.AtPrime.not_isField (DedekindDomain.Dvr), Localization.AtPrime, IsLocalization.isDomain_of_atPrime, isReduced_localizationPreserves (RingTheory.LocalProperties.Reduced)",
+   "verdict": "ingredients",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if R is reduced and p is a minimal prime then the localization R_p is a field",
+   "results": "IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes (RingTheory.Localization.AtPrime.Basic), IsLocalization.isDomain_of_atPrime, isReduced_ofLocalizationMaximal",
+   "verdict": "ingredient: Spec R_p is a point",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ring.KrullDimLE.isField_of_isReduced",
+   "results": "Ring.KrullDimLE.isField_of_isReduced : [Ring.KrullDimLE 0 R] [IsReduced R] [IsLocalRing R] : IsField R (Mathlib.RingTheory.KrullDimension.Zero)",
+   "verdict": "match (with Ring.KrullDimLE.of_isLocalization)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isField_of_isReduced\\|of_isLocalization\\|nilradical_eq_maximalIdeal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/KrullDimension/Zero.lean; grep -rn 'instance.*IsReduced (Localization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/Reduced.lean; grep -rn 'KrullDimLE.isField_of_isReduced.toField' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "Ring.KrullDimLE.of_isLocalization (Zero.lean:168: localization at a minimal prime has Krull dimension 0), Ring.KrullDimLE.nilradical_eq_maximalIdeal (:151), Ring.KrullDimLE.isField_of_isReduced (:174), instance IsReduced (Localization M) (Reduced.lean:47); the combination is used verbatim in RingTheory/Algebraic/StronglyTranscendental.lean:130-131",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ring.KrullDimLE.of_isLocalization, Ring.KrullDimLE.nilradical_eq_maximalIdeal, Ring.KrullDimLE.isField_of_isReduced",
+  "file": "Mathlib/RingTheory/KrullDimension/Zero.lean",
+  "how": "a few Mathlib lemmas, one per clause: for p ∈ minimalPrimes R, Ring.KrullDimLE.of_isLocalization p hp (Localization.AtPrime p) (Zero.lean:168) gives Ring.KrullDimLE 0 R_p; with the instance Localization.AtPrime.isLocalRing, Ring.KrullDimLE.nilradical_eq_maximalIdeal (:151) says the maximal ideal is the nilradical (first clause); for [IsReduced R], R_p is reduced (instance, LocalProperties/Reduced.lean:47) and Ring.KrullDimLE.isField_of_isReduced (:174) gives IsField R_p (second clause; exactly as in RingTheory/Algebraic/StronglyTranscendental.lean:130-131). Sources read 2026-10-10",
+  "line": 168
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib match (three declarations of Mathlib/RingTheory/KrullDimension/Zero.lean, lines 168, 151, 174, plus the IsReduced localization instance of LocalProperties/Reduced.lean:47); lines verified by L; line field set to the first declaration; stage 3 derives the leaf from the three."
+}

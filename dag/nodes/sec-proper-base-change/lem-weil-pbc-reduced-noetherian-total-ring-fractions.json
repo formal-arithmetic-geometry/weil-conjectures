@@ -12,9 +12,83 @@
   "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Proof of (1). Each $\\mathfrak q_i$ is a minimal prime of the reduced ring $R$, so $R_{\\mathfrak q_i}$ is a field and its maximal ideal $\\mathfrak q_iR_{\\mathfrak q_i}$ is $0$ [lem-weil-pbc-minimal-prime-reduced-localization-field]. Hence $\\kappa(\\mathfrak q_i)=R_{\\mathfrak q_i}/\\mathfrak q_iR_{\\mathfrak q_i}=R_{\\mathfrak q_i}/0=R_{\\mathfrak q_i}$ [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00EU (lemma-minimal-prime-reduced-ring) and its proof"
+   }
+  },
+  {
+   "text": "$S\\subseteq R\\setminus\\mathfrak q_i$ and the maps $Q(R)\\to R_{\\mathfrak q_i}$. Since $R$ is reduced, every element of a minimal prime $\\mathfrak q_i$ is a zerodivisor, and conversely every zerodivisor lies in $\\mathfrak q_1\\cup\\dots\\cup\\mathfrak q_t$ [lem-weil-pbc-reduced-zerodivisors-union-minimal-primes] (the $\\mathfrak q_i$ are all the minimal primes); so $R\\setminus S=\\mathfrak q_1\\cup\\dots\\cup\\mathfrak q_t$ and in particular $S\\cap\\mathfrak q_i=\\emptyset$, i.e. $S\\subseteq R\\setminus\\mathfrak q_i$. Hence every $s\\in S$ maps to a unit $s/1$ of $R_{\\mathfrak q_i}$, and $\\phi_i:Q(R)\\to R_{\\mathfrak q_i}$, $r/s\\mapsto (r/1)(s/1)^{-1}$, is a well-defined ring map compatible with the maps from $R$ (if $u(rs'-r's)=0$ with $u\\in S$ then $u/1$ is a unit, so $(r/1)(s/1)^{-1}=(r'/1)(s'/1)^{-1}$) [def-weil-pbc-module-localization]. It is the only such ring map: a ring map $\\psi$ out of $Q(R)$ is determined by $r\\mapsto\\psi(r/1)$, since $r/s=(r/1)(s/1)^{-1}$. Let $\\phi=(\\phi_1,\\dots,\\phi_t):Q(R)\\to R_{\\mathfrak q_1}\\times\\dots\\times R_{\\mathfrak q_t}$.",
+   "uses": [
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00EW (lemma-reduced-ring-sub-product-fields) (3), and Algebra, Lemma Tag 02LX (lemma-total-ring-fractions-no-embedded-points), proof, first two sentences"
+   }
+  },
+  {
+   "text": "The prime ideals of $Q(R)$. Let $\\lambda:R\\to Q(R)$, $r\\mapsto r/1$, a localization of $R$ at $S$. By [lem-weil-pbc-localization-prime-residue-field-iso] (1), $\\mathfrak q'\\mapsto\\lambda^{-1}(\\mathfrak q')$ is a bijection from the primes of $Q(R)$ onto the primes $\\mathfrak p$ of $R$ with $\\mathfrak p\\cap S=\\emptyset$, with inverse $\\mathfrak p\\mapsto\\mathfrak pQ(R)$; it preserves inclusions in both directions ($\\mathfrak q'=\\lambda(\\lambda^{-1}\\mathfrak q')Q(R)$). Let $\\mathfrak p$ be such a prime. Then $\\mathfrak p\\subseteq R\\setminus S=\\mathfrak q_1\\cup\\dots\\cup\\mathfrak q_t$ (Step 2), so by prime avoidance [lem-weil-pbc-prime-avoidance] (all $\\mathfrak q_i$ prime) $\\mathfrak p\\subseteq\\mathfrak q_j$ for some $j$, and $\\mathfrak p=\\mathfrak q_j$ by minimality of $\\mathfrak q_j$. Conversely each $\\mathfrak q_i$ is disjoint from $S$ (Step 2). Hence the prime ideals of $Q(R)$ are exactly $\\mathfrak m_i=\\mathfrak q_iQ(R)$, $i=1,\\dots,t$, pairwise distinct (as $\\lambda^{-1}(\\mathfrak m_i)=\\mathfrak q_i$), with no inclusion $\\mathfrak m_i\\subsetneq\\mathfrak m_j$ (it would give $\\mathfrak q_i\\subsetneq\\mathfrak q_j$, against minimality of $\\mathfrak q_j$). Every $\\mathfrak m_i$ lies in a maximal ideal, which is prime, hence is some $\\mathfrak m_j$, hence equals $\\mathfrak m_i$: so $\\mathfrak m_1,\\dots,\\mathfrak m_t$ are all maximal, and they are all the maximal ideals of $Q(R)$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 02LX (lemma-total-ring-fractions-no-embedded-points), proof, third and fourth sentences (Lemma Tag 00DS lemma-silly, Lemma Tag 00E3 lemma-spec-localization)"
+   }
+  },
+  {
+   "text": "$Q(R)$ is the product of its localizations at the $\\mathfrak m_i$. The intersection $\\mathfrak m_1\\cap\\dots\\cap\\mathfrak m_t$ is the intersection of all prime ideals of $Q(R)$ (Step 3), which is the nilradical $\\sqrt{(0)}$ of $Q(R)$ [lem-weil-pbc-zero-locus-eq-iff-radical-eq] (with $I=0$); so every element of the Jacobson radical of $Q(R)$ is nilpotent. As $Q(R)$ has the finitely many maximal ideals $\\mathfrak m_1,\\dots,\\mathfrak m_t$, the canonical map $Q(R)\\to\\prod_{i=1}^tQ(R)_{\\mathfrak m_i}$, $x\\mapsto(x/1)_i$, is an isomorphism of $Q(R)$-algebras, hence of $R$-algebras [lem-weil-pbc-product-of-localizations-at-maximal]. (For $t=0$, $R=0$, $Q(R)=0$ and both sides are the zero ring.)",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-product-of-localizations-at-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 02LX (lemma-total-ring-fractions-no-embedded-points), proof, fifth sentence: Spec Q(R) finite discrete gives Q(R) = A_1 x ... x A_t (Lemma Tag 00EM lemma-disjoint-implies-product, here in the form of Lemma Tag 00JA)"
+   }
+  },
+  {
+   "text": "Identification of the factors and conclusion. By [lem-weil-pbc-localization-prime-residue-field-iso] (2), applied to $\\lambda:R\\to Q(R)$ and $\\mathfrak q'=\\mathfrak m_i$ (with $\\lambda^{-1}(\\mathfrak m_i)=\\mathfrak q_i$), the map $R_{\\mathfrak q_i}\\to Q(R)_{\\mathfrak m_i}$, $a/s\\mapsto\\lambda(a)/\\lambda(s)$, is an isomorphism of $R$-algebras. Composing the inverses of these with the isomorphism of Step 4 gives an isomorphism of $R$-algebras $Q(R)\\to R_{\\mathfrak q_1}\\times\\dots\\times R_{\\mathfrak q_t}$ whose $i$-th component is a ring map $Q(R)\\to R_{\\mathfrak q_i}$ compatible with the maps from $R$; by the uniqueness in Step 2 it is $\\phi_i$. Hence $\\phi$ is this isomorphism, proving (2).",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 02LX (lemma-total-ring-fractions-no-embedded-points), proof, last two sentences ('A_i is a local ring, which is a localization of R. Hence A_i = R_{q_i}')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-product-of-localizations-at-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 02LX (lemma-total-ring-fractions-no-embedded-points, line 4612) with its hypothesis from Lemma Tag 00EW (3) (line 4560) and Lemma Tag 00EU (line 4543); the product decomposition of Step 4 via the node of Lemma Tag 00JA in place of 00EM"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +140,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 02LX, 00EW(3), 00EU; stmt_deps kept). Proof written in five steps following the proof of 02LX: (1) from 00EU; S avoids every q_i and the maps Q(R) -> R_{q_i} from 00EW(3); Spec Q(R) = {q_i Q(R)} by the localization prime correspondence (00E3, existing node) and prime avoidance (00DS); Q(R) = product of its localizations at the maximal ideals q_i Q(R) via the existing Mathlib-leaf node lem-weil-pbc-product-of-localizations-at-maximal (Stacks 00JA form of 02LX's use of 00EM: Jacobson radical = nilradical since all primes are maximal); factors identified with R_{q_i} by 00E3 part (2) and uniqueness of maps out of a localization. Three new Mathlib-leaf nodes: 00EU (Ring.KrullDimLE.of_isLocalization + isField_of_isReduced), 00EW(3) (Ideal.iUnion_minimalPrimes at I = bot), 00DS (Ideal.subset_union_prime). Noetherianity enters only through finiteness of the minimal primes (statement). The item itself has no single Mathlib declaration (searches recorded at creation)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 02LX: (1) by the new 00EU leaf; (2) nonzerodivisors avoid the minimal primes (new 00EW(3) leaf) and the maps out of Q(R); (3) primes of Q(R) are the q_i Q(R), all maximal, by the 00E3 node and the new prime-avoidance leaf (00DS); (4) product decomposition by the existing product-of-localizations-at-maximal leaf with the nil Jacobson radical from zero-locus-eq-iff-radical-eq; (5) factors identified by 00E3 (2). 3 new Mathlib leaves (lines verified by L; the 00EU leaf is a composed match, line field added)."
+ }
 }

@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+ "kind": "statement",
+ "title": "In a reduced ring the zerodivisors are the union of the minimal primes",
+ "statement": "Let $R$ be a reduced commutative ring (no nonzero nilpotent elements). Call $x\\in R$ a zerodivisor if $xy=0$ for some $y\\in R$, $y\\neq0$. Then the set of zerodivisors of $R$ equals the union $\\bigcup_{\\mathfrak p}\\mathfrak p$ of all minimal prime ideals $\\mathfrak p$ of $R$ (prime ideals containing no strictly smaller prime ideal). In particular a nonzerodivisor of $R$ lies in no minimal prime, and an element lying in no minimal prime is a nonzerodivisor.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00EW (lemma-reduced-ring-sub-product-fields, line 4560), part (3)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in a reduced ring the union of the minimal primes is the set of zero divisors",
+   "results": "biUnion_associatedPrimes_eq_zero_divisors, biUnion_associatedPrimes_eq_compl_nonZeroDivisors (RingTheory.Ideal.AssociatedPrime.Basic, Noetherian, associated primes), Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes, Ideal.iUnion_minimalPrimes (RingTheory.Ideal.MinimalPrime.Localization)",
+   "verdict": "match: Ideal.iUnion_minimalPrimes with I = ⊥",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every zero divisor of a reduced commutative ring lies in some minimal prime ideal",
+   "results": "Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes, biUnion_associatedPrimes_eq_compl_nonZeroDivisors, IsDomain.minimalPrimes_eq_singleton_bot, minimalPrimes",
+   "verdict": "one direction only",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.iUnion_minimalPrimes",
+   "results": "Ideal.iUnion_minimalPrimes : ⋃ p ∈ I.minimalPrimes, ↑p = {x | ∃ y ∉ I.radical, x * y ∈ I.radical} (Mathlib.RingTheory.Ideal.MinimalPrime.Localization)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'iUnion_minimalPrimes\\|disjoint_nonZeroDivisors' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean; grep -n 'radical_bot_of_isReduced' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/Operations.lean; grep -n 'abbrev IsMinimalPrime\\|abbrev minimalPrimes' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean",
+   "results": "Ideal.iUnion_minimalPrimes (Localization.lean:41), Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes (:91), Ideal.radical_bot_of_isReduced (Operations.lean:973), minimalPrimes R = {p | (⊥ : Ideal R).IsMinimalPrime p} (Basic.lean:49,63)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.iUnion_minimalPrimes",
+  "file": "Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean",
+  "line": 41,
+  "how": "specializes in one line: with I = ⊥ (whose minimal primes are minimalPrimes R, Basic.lean:49,63) and Ideal.radical_bot_of_isReduced (Operations.lean:973: radical ⊥ = ⊥ for [IsReduced R]) the right side becomes {x | ∃ y ≠ 0, x * y = 0}, the zerodivisors; the 'in particular' is Ideal.disjoint_nonZeroDivisors_of_mem_minimalPrimes (:91) for one direction. Sources read 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
