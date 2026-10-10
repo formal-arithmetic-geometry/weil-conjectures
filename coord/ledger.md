@@ -2620,3 +2620,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:08 L: returned deliver/J1/def-weil-pbc-C1 (reviewer RETURN: Reviewer R-dc12509 (packet review, 21:08 UTC), head 412951ea9. B10: nothing to split; the sorry-free declaration Algebra)
 - 21:08 L: merged deliver/E1/lem-sc-strict-henselization-completion-flat (reviewer FIX; first push; new nodes: 1)
 - 21:09 L: merged deliver/E1/lem-pc-ringed-space-derived-products (reviewer FIX; first push; new nodes: 0)
+- 21:09 L: attached AlgebraicGeometry.IsCurve.FiniteOfIsProper to def-weil-pbc-C5 (Assertions.lean:111-115, sorry-free); K1's claim released with abandon (not counted)
