@@ -47,7 +47,7 @@
 | `lem-pc-flat-module-descent` | 5015 | none |
 | `lem-pc-sites-module-sheafification-interface` | 5015 | none |
 | `lem-pc-sites-module-sheafification-tensor` | 5015 | none |
-| `lem-pc-fp-module-map-descent` | 5016 | none |
+| `lem-pc-fp-module-map-descent-affine` | 5017 | none |
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sc-picard-diagonal-locally-closed` | 6012 | none |
@@ -903,7 +903,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1581 nodes that wait for a statement dependency, 163 nodes that wait for stage 1.
+Not open yet: 1582 nodes that wait for a statement dependency, 163 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
