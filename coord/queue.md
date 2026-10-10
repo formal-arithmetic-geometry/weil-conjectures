@@ -1,14 +1,14 @@
 # Work queue
 
-930 items; claim with `tools/claim.py next <group> [--stage N]`.
+932 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (222)
+## Stage 1: nodes to split (223)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-sc-topological-filtered-injective-cech-acyclic` | 2015 | none |
-| `lem-sc-krull-akizuki-noetherian` | 2017 | none |
+| `lem-sc-finite-length-global-submodule` | 2018 | none |
 | `lem-pc-derived-functor-truncation-stabilization` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
 | `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
@@ -50,16 +50,17 @@
 | `lem-pc-derived-total-resolution-quasi-iso` | 4013 | none |
 | `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
-| `lem-pc-derived-direct-image-composition` | 5010 | none |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 5010 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
 | `lem-pc-flat-sheaf-stalk-flat` | 5012 | none |
 | `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
-| `lem-pc-kflat-closure` | 5012 | none |
 | `lem-pc-noetherian-approximation-data` | 5012 | none |
 | `lem-pc-noetherian-perfect-direct-image` | 5012 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
+| `lem-pc-bounded-above-flat-kflat-site` | 5013 | none |
 | `lem-pc-complex-hocolim-colimit` | 5013 | none |
+| `lem-pc-kflat-cone-direct-sum` | 5013 | none |
+| `lem-pc-sheaf-modules-tensor-closed` | 5013 | none |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
 | `lem-sp-cartan-eilenberg-exists` | 6005 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
@@ -229,7 +230,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (708)
+## Stage 2: nodes to state (709)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -397,6 +398,7 @@
 | `lem-sc-integral-overring-jacobson-power` | 1 | state |
 | `lem-sc-irreducible-product-over-field` | 1 | state |
 | `lem-sc-jacobson-denominator-function-field` | 1 | state |
+| `lem-sc-krull-akizuki-noetherian` | 1 | state |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
 | `lem-sc-mult-n-dim-one-closed-subscheme` | 1 | state |
@@ -942,7 +944,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1393 nodes that wait for a statement dependency, 258 nodes that wait for stage 1.
+Not open yet: 1395 nodes that wait for a statement dependency, 259 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
