@@ -3,41 +3,87 @@
  "blueprint": {
   "is": "lem-sp-edge-collapse",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Edge collapse and edge maps",
- "statement": "Let $(D,E,\\alpha,f,g)$ be an exact couple [def-sp-exact-couple] whose\nspectral sequence converges [def-sp-convergence] to a filtration of an object\n$A$ with a finite, exhaustive, separated filtration, and suppose that for\nsome $r_0$ all entries $E_{r_0}^{p,q}$, $p\\ne0$, vanish. Then every\ndifferential $d_r$ with $r\\geq r_0$ vanishes, all pages equal $E_{r_0}$,\n$E_\\infty=E_{r_0}$, and the edge map\n\n$$\n A^n\\longrightarrow E_{r_0}^{0,n}\n$$\n\nis an isomorphism in each degree $n$.",
+ "statement": "Let $(D,E,\\alpha,f,g)$ be an exact couple [def-sp-exact-couple] whose\nspectral sequence converges [def-sp-convergence] to a filtration of an object\n$A$ with a finite, exhaustive, separated filtration [def-sp-filtration], and suppose that for\nsome $r_0$ all entries $E_{r_0}^{p,q}$, $p\\ne0$, vanish. Then every\ndifferential $d_r$ with $r\\geq r_0$ vanishes, all pages equal $E_{r_0}$,\n$E_\\infty=E_{r_0}$, and the edge map\n\n$$\n A^n\\longrightarrow E_{r_0}^{0,n}\n$$\n\nis an isomorphism in each degree $n$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-edge-collapse.md",
   "place": "node lem-sp-edge-collapse, order 514"
  },
  "stmt_deps": [
   "def-sp-exact-couple",
-  "def-sp-convergence"
+  "def-sp-convergence",
+  "def-sp-filtration"
  ],
  "proof": [
   {
    "text": "By [def-sp-exact-couple], the differentials are $d_r=g_r\\circ f_r$, of\nbidegree $(r,1-r)$, so every differential out of an entry of the $p=0$ column\nhas target in a bidegree with positive first index and every incoming\ndifferential has source with negative first index. Both vanish by hypothesis,\nso each $d_r$, $r\\geq r_0$, vanishes; hence every page equals $E_{r_0}$ and\nthe intersection/union formulas of [def-sp-convergence] give\n$E_\\infty=E_{r_0}$. The convergence identifies $\\operatorname{gr}^0A^n\\cong\nE_\\infty^{0,n}$; only $p=0$ survives, and the canonical map $A^n\\to\n\\operatorname{gr}^0A^n=E_\\infty^{0,n}$ is an isomorphism: the vanishing of\nall other graded pieces, with the finite exhaustive separated filtration,\ngives $F^0A^n=A^n$ and $F^1A^n=0$.",
    "uses": [
     "def-sp-exact-couple",
-    "def-sp-convergence"
+    "def-sp-convergence",
+    "def-sp-filtration"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sp-exact-couple",
-  "def-sp-convergence"
+  "def-sp-convergence",
+  "def-sp-filtration"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-edge-collapse.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence edge map collapse vanishing off zero column",
+   "results": "HomologicalComplex differential-zero lemmas; no exact-couple edge-collapse declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralObject, edge map, differential",
+   "results": "0 hits; unknown identifier SpectralObject",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "edge|differential|SpectralObject Mathlib/Algebra/Homology/SpectralObject",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If all spectral sequence terms off one column vanish, all differentials vanish and the edge map is an isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "SpectralSequence|SpectralObject|differential Mathlib/Algebra/Homology/SpectralObject",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence differential vanishes when terms outside one column vanish",
+   "results": "HomologicalComplex differential-shape lemmas; no exact-couple edge-collapse declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +106,20 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-edge-collapse",
+  "worker": "stage1",
+  "summary": "Checked the imported edge-collapse argument against the exact-couple and convergence definitions. No child nodes are needed: the bidegree calculation, vanishing of incoming and outgoing differentials, page stabilization, and the final filtration argument are all direct consequences of those two statements and elementary filtration reasoning.",
+  "blueprint": "Realizes the sole proof paragraph of the blueprint node: vanishing of all differentials from the one surviving column, identification of E_infinity with the stabilized page, and the edge isomorphism from the finite exhaustive separated filtration."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-edc2030",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-edc2030 (reviewer sub-agent of L); spot-checked: Step 1 against def-sp-exact-couple (d_r bidegree (r,1-r), r>=2, so all differentials leave column 0; subquotient pages keep off-column zeros), def-sp-convergence (Z_r,B_r constant from r0 so E_inf=E_r0 elementary from the recursive definition; weak convergence gives E_inf^{0,n}=gr^0A^n; edge map built from the F^p of def-sp-convergence), def-sp-filtration (finite + vanishing gr^p, p!=0 gives F^0=A^n, F^1=0). Page stabilisation is not lem-sp-page-induction (that lemma is about morphisms of spectral sequences) and is not a restated node; it is elementary from the definition. Statement change only adds the def-sp-filtration citation. No new nodes. Second reading: no missed fault found."
+ }
 }

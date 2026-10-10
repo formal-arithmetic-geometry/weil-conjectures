@@ -2417,3 +2417,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:39 L: merged deliver/K1/lem-sc-coherent-pseudo-coherent (reviewer PASS; first push; new nodes: 0)
 - 19:40 L: merged deliver/G1/lem-pc-skyscraper-complex (reviewer FIX; first push; new nodes: 0)
 - 19:40 L: merged deliver/E1/lem-pc-right-localization-hom-colimit (reviewer FIX; first push; new nodes: 2)
+- 19:41 L: merged deliver/K1/lem-sp-edge-collapse (reviewer PASS; first push; new nodes: 0)
