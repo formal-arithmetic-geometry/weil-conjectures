@@ -23,9 +23,43 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Affine case, X=Spec(A), f in A. By the affine equivalence D(A)=D_QCoh(X) [lem-pc-affine-qcoh-derived-equivalence] and [lem-pc-perfect-affine-bounded-projective], E is represented by a bounded complex P^bullet of finite projective A-modules and E' by a complex M^bullet of A-modules. Induct on the number of nonzero terms of P^bullet, for all alpha and all E' at once (a shift E'[k] of E' is again in D_QCoh and supported on T). If t is the largest index with P^t nonzero, the stupid-truncation triangle P^t[-t] \\to P^bullet \\to sigma_{<=t-1}P^bullet \\to P^t[-t+1] gives an exact sequence Hom(sigma_{<=t-1}P^bullet,E') \\to Hom(P^bullet,E') \\to Hom(P^t[-t],E') of A-modules (Hom(-,E') is cohomological, and the maps are A-linear). If f^a kills the image of alpha in the right-hand group, then f^a alpha comes from some beta in the left-hand group, and f^b beta=0 by induction, so f^{a+b} alpha=0. This reduces to P^bullet a single finite projective module P in degree 0 (after shifting E'). Then Hom_{D(A)}(P,M^bullet)=H^0(Hom_A(P,M^bullet))=Hom_A(P,H^0(M^bullet)) because Hom_A(P,-) is exact. The cohomology sheaf H^0(E') is the sheaf associated with H^0(M^bullet) and vanishes on D(f) by hypothesis, so H^0(M^bullet)_f=0, i.e. every element of H^0(M^bullet) is killed by a power of f. The images of finitely many generators of P are killed by one power f^n, hence f^n alpha=0.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-perfect-affine-bounded-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EJ, affine proof using perfect-affine and stupid truncations"
+   }
+  },
+  {
+   "text": "Globalization. For a quasi-compact open W of X let P(W) be the statement of the lemma on W (all morphisms alpha:E\\to E' in D_QCoh(O_W) with E perfect and E' supported on T intersect W, with f|_W). P holds for affine W by the previous step. Let W=U union V with U quasi-compact open, V affine open, and P true on U, V and U intersect V (the overlap is quasi-compact because X is quasi-separated). Given alpha on W, restrictions of perfect objects are perfect and of objects supported on T are supported on T, so there is an a with f^a alpha|_U=0 and f^a alpha|_V=0. The Mayer–Vietoris long exact sequence for Hom [lem-sc-derived-hom-mayer-vietoris] gives exactness of Hom(E|_{U\\cap V},E'|_{U\\cap V}[-1]) \\to Hom(E,E') \\to Hom(E|_U,E'|_U)\\oplus Hom(E|_V,E'|_V), with Gamma(W,O_W)-linear maps; hence f^a alpha is the image of some beta:E|_{U\\cap V}\\to E'[-1]|_{U\\cap V}. Since E'[-1] is supported on T, P(U intersect V) gives f^b beta=0, so f^{a+b} alpha=0. Thus P holds on U union V, and the induction principle on the quasi-compact quasi-separated scheme X [lem-sc-invert-s-cohomology-induction] gives P(X).",
+   "uses": [
+    "lem-sc-derived-hom-mayer-vietoris",
+    "lem-sc-invert-s-cohomology-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EJ, proof, Mayer–Vietoris and induction-principle reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-sc-derived-hom-mayer-vietoris",
+  "lem-sc-invert-s-cohomology-induction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EJ (Lemma 36.13.9)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -36,14 +70,14 @@
   },
   {
    "tool": "loogle",
-   "query": "Supported",
-   "results": "0 hits; unknown identifier 'Supported'",
+   "query": "PerfectObject, IsSupported, annihilated by power",
+   "results": "0 hits; parser expected end of input",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "perfect.*support|annihilat",
+   "query": "perfect.*support|annihilat [Mathlib]",
    "results": "0 hits in Mathlib source",
    "date": "2026-10-11",
    "verdict": "no match"
@@ -57,12 +91,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-support-extension",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-into-support-on-T",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by replacing the false local-conservativity step with Tag 08DJ/08GL Mayer–Vietoris induction, and by spelling out the affine bounded finite-projective and stupid-truncation argument from Tag 08EJ. Added statement-only nodes for the two non-elementary generic inputs.",
+  "blueprint": "Realizes the proper-flat support proof place: powers of affine equations annihilate maps from perfect complexes into objects supported on their vanishing loci.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "The affine D(A)-to-D_QCoh equivalence is a generic comparison tool needed in the Tag 08EJ affine reduction and is not supplied by a node on this unit."
+   },
+   {
+    "node": "lem-sc-invert-s-cohomology-induction",
+    "why": "The qcqs affine induction principle is the exact induction lemma invoked by Tag 08EJ and no equivalent induction node exists in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-invert-s-cohomology-induction"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pst2936",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pst2936 (reviewer sub-agent of L); spot-checked: Return points of 22:14 repaired: MV-for-Hom (lem-sc-derived-hom-mayer-vietoris, Tag 08BW, C4 ok: LES with preceding Ext^-1 term) and qcqs induction (lem-sc-invert-s-cohomology-induction, Tag 08DR) replace the false local-vanishing step; qcqs now used; affine case via finite projective model + stupid truncation is honest; C4 use in lem-sc-affine-perfect-support-extension (f^n alpha=0 on qc open U of affine, alpha=id_F) ok. FIX more, RETURN less: (1) E5/C5 globalization step rewritten explicitly (f^a alpha|_U=f^a alpha|_V=0 => f^a alpha=image of beta in Hom(E|UV,E'[-1]|UV), f^b beta=0 by P(U cap V), so f^{a+b} alpha=0; induction property P stated on qc opens); (2) affine step spelled out (Hom(P,M)=Hom_A(P,H^0 M) by projectivity; H^0(M)_f=0; truncation exponents add); (3) dropped unused Step 1 (RHom/adjunction, uncited Tag 08DH identification) and lem-sc-rhom-supported-qcoherent from proof_deps; steps reordered affine-then-glue. Second reading by C1 missed that Step 1 was dead and that Step 2 did not state the factorization through the U cap V term.; 1 file(s) fixed by the reviewer"
+ }
 }
