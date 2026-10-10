@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-fg-field-zero-differentials-separable",
+ "kind": "statement",
+ "title": "A finitely generated field extension with zero differentials is finite separable",
+ "statement": "Let $K/k$ be a field extension [def-pc-field-extension] which is finitely generated ($K=k(a_1,\\dots,a_n)$ for finitely many $a_i\\in K$) and whose module of K\\\"ahler differentials vanishes, $\\Omega_{K/k}=0$ [def-weil-pbc-kahler-differentials]. Then $K/k$ is finite ($\\dim_kK<\\infty$) and separable algebraic [def-weil-pbc-separable-algebraic-extension].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 090W (lemma-characterize-separable-algebraic-field-extensions, line 44137), implication (2) => (1); the proof of Smoothing Lemma 07FH cites More on Algebra, Lemma 07E1 (Cartier equality) for this step"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated field extension with zero Kähler differentials is finite separable",
+   "results": "Algebra.FormallyUnramified.iff_isSeparable (RingTheory.Unramified.Field), Algebra.FormallyUnramified.isSeparable, KaehlerDifferential.finite, Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.FormallyUnramified.iff_isSeparable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely generated field extension with vanishing Kähler differentials is finite and separable",
+   "results": "Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyEtale.iff_isSeparable, Algebra.FormallyUnramified.isSeparable, Algebra.FormallyUnramified.iff_isSeparable",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn on ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Unramified/{Field,Finite,Basic}.lean -n 'iff_isSeparable|finite_of_free|class FormallyUnramified'; FieldTheory/IntermediateField/Adjoin/Algebra.lean fg_top_iff",
+   "results": "Algebra.FormallyUnramified (class, field subsingleton_kaehlerDifferential, Unramified/Basic.lean:58), Algebra.FormallyUnramified.iff_isSeparable (Unramified/Field.lean:217), Algebra.FormallyUnramified.finite_of_free (Unramified/Finite.lean:158), IntermediateField.fg_top_iff ((top).FG <-> EssFiniteType, Adjoin/Algebra.lean:92)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FormallyUnramified.iff_isSeparable",
+  "file": "Mathlib/RingTheory/Unramified/Field.lean",
+  "how": "specializes in a few lines, one Mathlib lemma per clause: 'finitely generated' is (⊤ : IntermediateField k K).FG, which gives Algebra.EssFiniteType k K by IntermediateField.fg_top_iff; Omega = 0 is Subsingleton Ω[K⁄k], i.e. Algebra.FormallyUnramified k K by the constructor of the class; separability by Algebra.FormallyUnramified.iff_isSeparable; finiteness by Algebra.FormallyUnramified.finite_of_free (Mathlib/RingTheory/Unramified/Finite.lean, K free over the field k)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-solution-modulo",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

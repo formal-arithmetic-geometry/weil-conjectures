@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-popescu-solution-modulo-choose",
+ "kind": "statement",
+ "title": "Choosing a flat Artinian subalgebra and elements of Lambda landing in it (the choice in the proof of Stacks 07FH)",
+ "statement": "Let $k$ be a field of characteristic $p>0$, $\\Lambda$ a Noetherian $k$-algebra [def-weil-pbc-noetherian-ring] geometrically regular over $k$ [def-weil-pbc-g-ring], $\\mathfrak q\\subset\\Lambda$ a prime ideal, $n\\ge1$, and $\\bar\\Lambda=\\Lambda_{\\mathfrak q}/\\mathfrak q^n\\Lambda_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime], a local ring with maximal ideal $\\bar{\\mathfrak m}=\\mathfrak q\\bar\\Lambda$ and residue field $K=\\kappa(\\mathfrak q)$. Call a $k$-subalgebra $A\\subseteq\\bar\\Lambda$ *admissible* if $A$ is an Artinian local ring, essentially of finite type over $k$ (isomorphic as a $k$-algebra to a localization $S^{-1}B$ [def-weil-pbc-localization-at-prime] of a finitely generated $k$-algebra $B$ at a multiplicative subset $S\\subseteq B$), the inclusion $A\\to\\bar\\Lambda$ is flat [def-weil-pbc-flat-ring-map], and $\\mathfrak m_A\\bar\\Lambda=\\bar{\\mathfrak m}$; then $\\mathfrak m_A=A\\cap\\bar{\\mathfrak m}$ and the residue field $F=A/\\mathfrak m_A$ is a subfield of $K$ containing $k$. Let $A_0\\subseteq\\bar\\Lambda$ be admissible. Then there are an admissible $A\\subseteq\\bar\\Lambda$ with $A_0\\subseteq A$, with residue field $F$, and elements $\\lambda_1,\\dots,\\lambda_t\\in\\Lambda$ and $\\lambda'_1,\\dots,\\lambda'_r\\in\\mathfrak q$ ($t,r\\ge0$) such that: (a) the images of all $\\lambda_j$ and $\\lambda'_i$ in $\\bar\\Lambda$ lie in $A$ (so the residues $\\bar\\lambda_j\\in K$ lie in $F$); (b) $\\mathrm d\\bar\\lambda_1,\\dots,\\mathrm d\\bar\\lambda_t$ form a basis of the $F$-vector space $\\Omega_{F/k}$ [def-weil-pbc-kahler-differentials]; (c) the images of $\\lambda'_1,\\dots,\\lambda'_r$ in $\\Lambda_{\\mathfrak q}$ generate the ideal $\\mathfrak q\\Lambda_{\\mathfrak q}$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07FH (lemma-solution-modulo), lines 2580-2603: 'Pick A ... see Lemma 07FG. ... Pick lambda_1,...,lambda_t in Lambda which map to elements of A in Lambda-bar such that moreover the images of d lambda_1,...,d lambda_t form a basis of Omega_{F/k}' and 'choose further elements lambda_{t+1},...,lambda_m in Lambda which map into A'. Stacks asserts these choices without argument, and for an arbitrary A they are impossible: Lambda=k[x,y], q=0, n=1, A=k(x/y) is admissible, but k[x,y] meets k(x/y) only in k, while Omega_{A/k} is nonzero; so A must be enlarged. Suggested proof (agent): take a_j in A_0 with d of their residues a basis of Omega_{F_0/k}, and generators b_i of m_{A_0} (n>=2; for n=1 take generators of q), write them as mu/s with a common s in Lambda minus q, and enlarge A_0 according to the residue alpha of s exactly as in the three cases of the proof of Lemma 07FI (alpha transcendental over F_0: A=A_0[s-bar] localized, add s to the lambda's; alpha algebraic: Q=p^e >= n with alpha^Q separable over F_0, a finite etale A over A_0 with residue field F_0(alpha^Q) containing s-bar^N, N a power of p, and use mu s^(N-1), whose differentials are alpha^N d(residue))"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "elements of a Noetherian ring mapping into a flat Artinian subalgebra of the quotient of the localization whose differentials form a basis of the residue field differentials",
+   "results": "RingHom.Flat.holdsForLocalizationAway, IsArtinianRing.localization_artinian, instIsNoetherianRingOfIsArtinianRing, Algebra.Smooth.flat_of_isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "choose elements of ring whose residues give a p-basis / basis of differentials of a finitely generated subfield of the residue field",
+   "results": "Algebra.Generators.basisCotangentAway, Algebra.SubmersivePresentation.basisKaehler, Algebra.Generators.cotangentSpaceBasis",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn on ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib -rn 'pBasis|p-basis|GeometricallyRegular|stacks 07FH'",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-solution-modulo",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: this node closes a gap in the Stacks proof of 07FH (see the source field for the counterexample). Its proof is NOT written: only the worker's sketch (enlarge A_0 as in the three cases of the proof of 07FI). The splitter of this node must prove it or report that it is false; if false, lem-weil-pbc-popescu-solution-modulo needs another route (e.g. through 07FI applied repeatedly). Recorded in coord/HUMAN.md."
+}

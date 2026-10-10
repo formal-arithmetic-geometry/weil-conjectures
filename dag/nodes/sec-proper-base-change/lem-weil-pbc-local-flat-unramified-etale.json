@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-local-flat-unramified-etale",
+ "kind": "statement",
+ "title": "A flat finitely presented local homomorphism with m_R S = m_S and finite separable residue extension is etale",
+ "statement": "Let $R\\to S$ be a local homomorphism of local rings $(R,\\mathfrak m_R,\\kappa_R)$, $(S,\\mathfrak m_S,\\kappa_S)$ such that (1) $S$ is a finitely presented $R$-algebra [def-weil-pbc-finitely-presented-algebra]; (2) $R\\to S$ is flat [def-weil-pbc-flat-ring-map]; (3) $\\mathfrak m_RS=\\mathfrak m_S$; (4) the field extension $\\kappa_S/\\kappa_R$ is finite and separable algebraic [def-weil-pbc-separable-algebraic-extension]. Then $R\\to S$ is an étale ring map, that is, $H_1(L_{S/R})=0$ [def-weil-pbc-smooth-ring-map] and $\\Omega_{S/R}=0$ [def-weil-pbc-kahler-differentials] (equivalently [lem-weil-pbc-etale-ring-map-iff-etale-affine], $\\operatorname{Spec}S\\to\\operatorname{Spec}R$ is étale).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00U6 (lemma-characterize-etale, line 39470), the case of a local homomorphism of local rings with q = m_S: then R_p -> S_q is R -> S, and 'etale at q' (S_g etale over R for some g not in q) gives S etale over R since g is a unit of S"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "flat finitely presented local map with maximal ideal generating and separable residue field extension is étale",
+   "results": "Algebra.Etale.finitePresentation, RingHom.Etale, Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq (RingTheory.Unramified.LocalRing), Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth",
+   "date": "2026-10-10",
+   "verdict": "partial: FormallyUnramified.iff_map_maximalIdeal_eq gives unramified"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat and unramified finitely presented algebra is étale",
+   "results": "RingHom.etale_iff_formallyUnramified_and_smooth, Algebra.FormallyEtale.of_unramified_and_smooth, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-10",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn on ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib -rn 'Etale.*of_flat|of_flat.*Etale'; sed RingTheory/Unramified/LocalRing.lean 40-120",
+   "results": "Algebra.Etale.of_formallyUnramified_of_flat (RingTheory/Smooth/Fiber.lean:247, stacks 08WD (3)=>(1): FinitePresentation + Module.Flat + FormallyUnramified => Etale); Algebra.FormallyUnramified.of_map_maximalIdeal (RingTheory/Unramified/LocalRing.lean:95, stacks 02FM: local, IsLocalHom, EssFiniteType, IsSeparable residue fields, map of maximal ideal = maximal ideal => FormallyUnramified)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Etale.of_formallyUnramified_of_flat",
+  "file": "Mathlib/RingTheory/Smooth/Fiber.lean",
+  "how": "specializes in two lines: Algebra.FormallyUnramified.of_map_maximalIdeal (Mathlib/RingTheory/Unramified/LocalRing.lean; EssFiniteType from FinitePresentation, IsSeparable of residue fields from (4), hypothesis (3)) gives FormallyUnramified R S, then Algebra.Etale.of_formallyUnramified_of_flat with (1),(2); Algebra.Etale gives Omega = 0 (FormallyUnramified) and H_1 = 0 (Algebra.formallySmooth_iff, Subsingleton H1Cotangent)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-solution-modulo",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: removed the tag reference from the statement (the definition of étale ring map is written out: H_1 = 0 and Omega = 0; Stacks Algebra Definition 00U1 is in the source)."
+}

@@ -40,3 +40,9 @@ Closed (2026-10-09 23:57 UTC): C1 pushed a real repair of lem-weil-pbc-z-g-ring 
 ## Open (01:09 UTC): F1 re-pushed lem-weil-pbc-etale-stratification-local-gluing unchanged after the third return
 
 Branch head 3db8c764 is the returned head 3a7d53e6 rebased on the current tip with no change to the item, the new node or the report (the same false factorization claim in step 3; the 09YJ node still lacks its basis hypothesis). Not merged; a notice was added to coord/returns/F1.md. Three returns of this item so far (23:57, 00:34, 01:03 UTC).
+
+## Open (2026-10-10 01:32 UTC): gap in the Stacks proof of Smoothing Lemma 07FH (lem-weil-pbc-popescu-solution-modulo)
+The proof picks A from Lemma 07FG and then "lambda_1..lambda_t in Lambda which map to elements of A such that d lambda_j form a basis of Omega_{F/k}". For an arbitrary admissible A this is impossible (Lambda = k[x,y], q = 0, n = 1, A = k(x/y): k[x,y] meets k(x/y) in k). The worker isolated the needed choice as the new node lem-weil-pbc-popescu-solution-modulo-choose (A may be enlarged beyond the A_0 containing E), with a proof sketch following the three cases of 07FI but no written proof. L accepted the split with this node flagged; its truth is to be settled when it is split. If a human knows the intended argument (or a reference), a note in coord/returns is enough.
+
+## Resolved (2026-10-10 01:32 UTC): F1 lem-weil-pbc-etale-stratification-local-gluing
+The fifth push was merged at 173064278 (01:19 UTC). A sixth push (fed55877b) arrived after the merge with the same content rebased, without L's post-merge citations and the reviewed field; it is not merged and the branch can be deleted.
