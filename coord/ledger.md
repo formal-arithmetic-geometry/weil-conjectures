@@ -1956,3 +1956,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:21 L: merged deliver/G1/lem-sc-etale-fibre-product-coproduct (reviewer FIX; first push; new nodes: 1)
 - 16:21 L: merged deliver/G1/lem-sc-ext-derived-composite-natural (reviewer FIX; first push; new nodes: 1)
 - 16:21 L: returned deliver/E1/lem-sc-closed-pushforward-boundary-naturality (reviewer RETURN: 1. E2/B2: new node lem-sc-cohomology-comparison-delta-naturality: the statement is ill-typed and lacks its hypotheses. ')
+- 16:21 L: lead notes on lem-sc-cohomology-closed-immersion-pushforward and lem-sc-ext-derived-composite (statements should name their canonical isomorphisms; reviewers R-cbn, R-edn)
