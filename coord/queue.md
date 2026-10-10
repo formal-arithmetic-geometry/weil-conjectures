@@ -1,8 +1,8 @@
 # Work queue
 
-878 items; claim with `tools/claim.py next <group> [--stage N]`.
+879 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (91)
+## Stage 1: nodes to split (92)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,13 +13,14 @@
 | `lem-sc-derived-hom-mayer-vietoris` | 3015 | none |
 | `lem-pc-module-tor-amplitude-flat-model` | 3016 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
-| `lem-pc-global-hom-adjunction` | 3019 | none |
+| `lem-pc-dq-coherator-adjunction` | 3020 | none |
+| `lem-pc-qcqs-sheaf-rhom-adjunction` | 3020 | none |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
 | `lem-sc-affine-perfect-open-represent-cohomology` | 3020 | none |
 | `lem-sc-perfect-into-support-on-T` | 3020 | none |
-| `lem-pc-derived-internal-hom-pullback-adjunction` | 3021 | none |
 | `lem-sc-affine-perfect-plus-locally-free` | 3021 | none |
 | `lem-sc-derived-internal-hom-adjunction` | 3021 | none |
+| `lem-pc-derived-pullback-tensor-product` | 3022 | none |
 | `lem-pc-pseudo-coherent-summand` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -890,7 +891,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1614 nodes that wait for a statement dependency, 129 nodes that wait for stage 1.
+Not open yet: 1616 nodes that wait for a statement dependency, 130 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
