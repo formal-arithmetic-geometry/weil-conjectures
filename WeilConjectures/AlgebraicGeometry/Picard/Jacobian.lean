@@ -2128,6 +2128,23 @@ theorem exists_finiteSubext_isPullback_overTransport {ks : Type u} [Field ks] [A
     · simp only [ψ, χ, Category.assoc, pullback.lift_fst, u]
       rw [← Category.assoc, ← h₁, Category.assoc]
     · simp only [ψ, χ, Category.assoc, pullback.lift_snd]
+  -- hence they agree over some `Spec (k_s ⊗_L k_s)` (Stacks 01ZM)
+  have : ∀ {i j : (FiniteSubext k ks)ᵒᵖ} (f : i ⟶ j),
+      IsAffineHom (((diagonalDiagram k ks).op ⋙ Scheme.Spec).map f) := fun f ↦
+    isAffineHom_of_isAffine (X := Spec _) (Y := Spec _) _
+  have : ∀ i : (FiniteSubext k ks)ᵒᵖ,
+      CompactSpace (((diagonalDiagram k ks).op ⋙ Scheme.Spec).obj i) := fun i ↦
+    have : IsAffine (((diagonalDiagram k ks).op ⋙ Scheme.Spec).obj i) :=
+      inferInstanceAs (IsAffine (Spec _))
+    inferInstance
+  have : ∀ i : (FiniteSubext k ks)ᵒᵖ,
+      QuasiSeparatedSpace (((diagonalDiagram k ks).op ⋙ Scheme.Spec).obj i) := fun i ↦
+    have : IsAffine (((diagonalDiagram k ks).op ⋙ Scheme.Spec).obj i) :=
+      inferInstanceAs (IsAffine (Spec _))
+    inferInstance
+  obtain ⟨⟨L⟩, f, hL⟩ := Scheme.exists_pullback_fst_comp_eq_of_isLimit
+    (isLimitDiagonalSpecCone k ks) (i := .op K') pV pW ψ χ (pullback.lift_snd _ _ _)
+    (pullback.lift_snd _ _ _) hdiag
   sorry
 
 /-- **`Pic^0_{C/k}` is represented at a finite separable level by a descent of `J_s`.** Let `J_s`
