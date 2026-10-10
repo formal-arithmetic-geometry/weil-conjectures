@@ -11,9 +11,43 @@
   "def-weil-pbc-relative-global-complete-intersection",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a prime $\\mathfrak q\\subset S$ and let $\\mathfrak q'$ be its inverse image in $P=R[x_1,\\dots,x_n]$. Part (2) of [lem-weil-pbc-relative-global-complete-intersection-partial-local-flat], with $i=c$, says that $P_{\\mathfrak q'}/(f_1,\\dots,f_c)P_{\\mathfrak q'}$ is flat over $R$. The prime-localization isomorphism [lem-weil-pbc-localization-at-prime-of-quotient], applied to the ideal $(f_1,\\dots,f_c)\\subset P$, identifies this ring with $S_{\\mathfrak q}$ over $R$. Thus $S_{\\mathfrak q}$ is flat as an $R$-module.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-partial-local-flat",
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00SW (lemma-relative-global-complete-intersection), invoking Lemma Tag 00SV (lemma-relative-global-complete-intersection-conormal), part (2); localization of a quotient is Proposition Tag 00CT (proposition-localize-quotient)"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p\\subset R$ be the inverse image of $\\mathfrak q$. Since $S_{\\mathfrak q}$ is an $R_{\\mathfrak p}$-module and is flat over $R$ by the preceding step, [lem-weil-pbc-flat-over-localization] (the direction from flatness over $R$ to flatness over $R_{\\mathfrak p}$) makes $R_{\\mathfrak p}\\to S_{\\mathfrak q}$ flat. This holds for every prime $\\mathfrak q$ of $S$, so [lem-weil-pbc-flat-map-local-criterion] gives flatness of $R\\to S$. If $S=0$, there are no prime ideals, and the same local criterion applies vacuously.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-flat-map-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00SW (lemma-relative-global-complete-intersection), conclusion from Lemma Tag 00SV (2), with Lemma Tag 00HT (lemma-flat-localization), parts (2) and (6)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-relative-global-complete-intersection-partial-local-flat",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-flat-map-local-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00SW (lemma-relative-global-complete-intersection), via Tag 00SV (2) and Tag 00HT (2), (6)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -38,7 +72,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +92,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-relative-global-complete-intersection-flat",
+  "worker": "stage1",
+  "summary": "Followed Stacks 00SW: its sole substantial input is part (2) of 00SV, recorded as a new unsplit node. At each prime of S, that result with i=c gives the flat local quotient; 00CT identifies it with S localized at that prime, and 00HT (2), (6) passes to flatness of R -> S. Verified the zero ring and c=0 cases."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L read the two steps (00SW): 00SV (2) at i = c (new unsplit node) gives S_q flat over R, then the local criterion."
+ }
 }
