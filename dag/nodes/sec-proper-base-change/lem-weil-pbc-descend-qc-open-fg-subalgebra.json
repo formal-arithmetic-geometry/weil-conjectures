@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-descend-qc-open-fg-subalgebra",
+ "kind": "statement",
+ "title": "A quasi-compact open of a base change X_A is defined over a finitely generated subalgebra",
+ "statement": "Let $k$ be a field, let $X$ be a scheme over $k$ [def-weil-scheme-over-base] and let $A$ be a commutative $k$-algebra. For a $k$-subalgebra $A'\\subseteq A$ write $X_{A'}=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}A'$ and $X_A=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}A$ for the base changes [def-pc-base-change], and $\\pi:X_A\\to X_{A'}$ for the morphism $\\mathrm{id}_X\\times\\operatorname{Spec}(A'\\hookrightarrow A)$ induced by the inclusion [def-weil-affine-spectrum]. Let $V\\subseteq X_A$ be a quasi-compact open subset. Then there are a $k$-subalgebra $A'\\subseteq A$ that is finitely generated as a $k$-algebra and a quasi-compact open subset $V'\\subseteq X_{A'}$ such that $V=\\pi^{-1}(V')$. (No separatedness or quasi-separatedness of $X$ is assumed.)",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma Tag 0388 (lemma-descend-open), lines 811--848"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi-compact open subset of base change of scheme to a k-algebra A descends to finitely generated subalgebra",
+   "results": "AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, HasAffineProperty.descendsAlong_of_affineAnd (Morphisms/Descent), isCompact_iff_exists, isCompact_iff_finite_and_eq_biUnion_affineOpens, QuasiCompact.isCompact_preimage, quasiCompact_iff (Morphisms/QuasiCompact), Algebra.Etale.exists_subalgebra_fg (RingTheory/Smooth/NoetherianDescent): none descends an open of X_A to X_{A'} for a finitely generated subalgebra",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-compact open of X ×_k Spec A is the preimage of a quasi-compact open of X ×_k Spec A' for a finitely generated subalgebra A' of A",
+   "results": "Proj.instQuasiCompactToSpecZero..., instQuasiCompactToSpecΓ..., Fiber compactness instance, quasiCompact_of_compactSpace, quasiCompact_over_affine_iff, QuasiCompact.isCompact_preimage_singleton, quasiCompact_iff_compactSpace: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE '^(theorem|lemma)' Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean | grep -iE 'open|compact|preimage'; grep -rniE 'descend.*open|exists.*preimage_eq' Mathlib/AlgebraicGeometry/*.lean Mathlib/AlgebraicGeometry/Morphisms/*.lean (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "AlgebraicGeometry.exists_preimage_eq (AffineTransitionLimit.lean l.341, @[stacks 01Z4 \"(1)\"]): for a cofiltered diagram D of schemes with affine transition maps and a limit cone c, every quasi-compact open U of c.pt is c.π.app i ⁻¹ᵁ V for some i and quasi-compact open V of D.obj i (read: no qcqs hypothesis); also exists_map_preimage_eq_map_preimage (l.294, 01Z4(2)), isBasis_preimage_isAffineOpen (l.312). These give the node once X_A is identified with the cofiltered limit of the X_{A'} over the finitely generated subalgebras A' (transition maps affine as base changes of morphisms of affine schemes); that identification (base change commutes with this limit) is not stated in Mathlib in this form, so it is not a one-line specialization",
+   "date": "2026-10-10",
+   "verdict": "generalization: AlgebraicGeometry.exists_preimage_eq after identifying X_A with lim X_{A'}; not one line, no match recorded"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-galois-base-change-qc-open-descends",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

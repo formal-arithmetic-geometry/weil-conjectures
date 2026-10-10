@@ -14,9 +14,80 @@
   "def-pc-base-change",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The automorphisms $\\sigma_X$. For $\\sigma\\in\\operatorname{Aut}(\\bar k/k)$, $\\operatorname{Spec}(\\sigma)$ is a morphism of schemes over $\\operatorname{Spec}k$ because $\\sigma$ is a $k$-algebra map, and by functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum] $\\operatorname{Spec}(\\sigma)\\circ\\operatorname{Spec}(\\tau)=\\operatorname{Spec}(\\tau\\circ\\sigma)$ and $\\operatorname{Spec}(\\mathrm{id})=\\mathrm{id}$. The base change $g\\mapsto g_X=\\mathrm{id}_X\\times_{\\operatorname{Spec}k}g$ [def-pc-base-change] is functorial ($ (g\\circ h)_X=g_X\\circ h_X$, $(\\mathrm{id})_X=\\mathrm{id}$, by the uniqueness in the universal property of the fibre product). Hence $(\\sigma\\circ\\tau)_X=\\tau_X\\circ\\sigma_X$, and $\\sigma_X$ is an automorphism of $X_{\\bar k}$ with inverse $(\\sigma^{-1})_X$; in particular $\\sigma_X$ is a bijection of the underlying set.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, text before Lemma Tag 04KU, lines 850--874 (equation-galois-action-base-change-kbar)"
+   }
+  },
+  {
+   "text": "Descent to a finitely generated subalgebra. Apply [lem-weil-pbc-descend-qc-open-fg-subalgebra] to $X$ and the $k$-algebra $A=\\bar k$: there are a $k$-subalgebra $A'\\subseteq\\bar k$, finitely generated as a $k$-algebra, say by $a_1,\\dots,a_n$, and a quasi-compact open $V'\\subseteq X_{A'}$ with $V=\\pi^{-1}(V')$, where $\\pi=\\mathrm{id}_X\\times\\operatorname{Spec}(A'\\hookrightarrow\\bar k)$.",
+   "uses": [
+    "lem-weil-pbc-descend-qc-open-fg-subalgebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 04KU, proof, line 893 (By Lemma 0388 ...), with Lemma Tag 0388 (lemma-descend-open, lines 811--821)"
+   }
+  },
+  {
+   "text": "$A'$ is a finite subextension; proof of (1). Since $\\bar k/k$ is Galois it is algebraic [def-weil-pbc-separable-algebraic-extension], so each $a_i$ is a root of a nonzero $P_i\\in k[T]$ [def-weil-algebraic-element]; dividing $P_i$ by its leading coefficient (a unit of the field $k$) gives a monic polynomial over $k$ vanishing at $a_i$, so $a_i$ is integral over $k$. By [lem-weil-pbc-finite-of-integral-generators] $A'=k[a_1,\\dots,a_n]$ is a finitely generated $k$-module, i.e. $\\dim_kA'<\\infty$. As a subring of the field $\\bar k$, $A'$ is an integral domain (with $1\\neq0$), so by [lem-weil-pbc-finite-dimensional-domain-is-field] $A'$ is a field. Thus $k':=A'$ is a subfield with $k\\subseteq k'\\subseteq\\bar k$ and $\\dim_kk'<\\infty$, $X_{A'}=X_{k'}$, $\\pi=p$, and $V'\\subseteq X_{k'}$ is a quasi-compact open with $V=p^{-1}(V')$. This is (1).",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-weil-algebraic-element",
+    "lem-weil-pbc-finite-of-integral-generators",
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 04KU, proof, lines 893--895 ('there exists a finite subextension k'/k'); the source leaves implicit why a finitely generated k-subalgebra of the algebraic extension is a finite field extension, written out here"
+   }
+  },
+  {
+   "text": "$p\\circ\\sigma_X=p$ for $\\sigma$ fixing $k'$. Let $\\iota:k'\\hookrightarrow\\bar k$ be the inclusion and $\\sigma\\in\\operatorname{Aut}(\\bar k/k)$ with $\\sigma|_{k'}=\\mathrm{id}$, i.e. $\\sigma\\circ\\iota=\\iota$. By functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum], $\\operatorname{Spec}(\\iota)\\circ\\operatorname{Spec}(\\sigma)=\\operatorname{Spec}(\\sigma\\circ\\iota)=\\operatorname{Spec}(\\iota)$, and by functoriality of base change [def-pc-base-change] (step 1) $p\\circ\\sigma_X=(\\operatorname{Spec}(\\iota))_X\\circ(\\operatorname{Spec}(\\sigma))_X=(\\operatorname{Spec}(\\iota)\\circ\\operatorname{Spec}(\\sigma))_X=(\\operatorname{Spec}(\\iota))_X=p$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 04KU, proof, lines 895--896 ('Since Gal(k-bar/k') is open ... part (2) is clear'); the invariance under Gal(k-bar/k') is written out here"
+   }
+  },
+  {
+   "text": "Proof of (2). For $\\sigma$ fixing $k'$ pointwise, by step 4 and (1), $\\sigma_X^{-1}(V)=\\sigma_X^{-1}(p^{-1}(V'))=(p\\circ\\sigma_X)^{-1}(V')=p^{-1}(V')=V$. Since $\\sigma_X$ is a bijection (step 1), $\\sigma_X(V)=\\sigma_X(\\sigma_X^{-1}(V))=V$. (The subgroup of such $\\sigma$ is $\\operatorname{Gal}(\\bar k/k')$, open in $\\operatorname{Gal}(\\bar k/k)$, which is Stacks' form of (2).)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 04KU, proof, lines 895--896"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-base-change",
+  "lem-weil-pbc-descend-qc-open-fg-subalgebra",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-algebraic-element",
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-weil-pbc-finite-dimensional-domain-is-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma Tag 04KU (lemma-Galois-action-quasi-compact-open), proof, lines 892--897, using Lemma Tag 0388 (lemma-descend-open, lines 811--848)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,7 +112,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +132,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-galois-base-change-qc-open-descends",
+  "worker": "stage1",
+  "summary": "Tags verified in stacks-project/tags/tags: 04KU = varieties-lemma-Galois-action-quasi-compact-open, 0388 = varieties-lemma-descend-open. Statement checked against varieties.tex lines 850--897 and kept (it states (2) for the subgroup fixing k', which is the open subgroup Gal(k-bar/k') of Stacks' proof; the citer lem-weil-pbc-geometrically-connected-finite-separable-test uses clause (2) in exactly this form). Proof in 5 steps following Stacks' two-sentence proof: (1) the Galois action sigma_X and its contravariance from functoriality of Spec and of base change; (2) Lemma 0388 with A = k-bar, for which a new unsplit node lem-weil-pbc-descend-qc-open-fg-subalgebra was created (no existing node covers it: pqf-lem-limit-qc-open-descends is Limits 01Z4 for qcqs limits in unit sk-prop-nagata-sketch-zmt, lemma-nagata-qc-open-descends is a different construction); (3) the finitely generated k-subalgebra of the algebraic extension k-bar is a finite field, written out (Stacks leaves it implicit) via the Mathlib leaves lem-weil-pbc-finite-of-integral-generators and lem-weil-pbc-finite-dimensional-domain-is-field; (4) p o sigma_X = p for sigma fixing k'; (5) sigma_X(V) = V. stmt_deps kept."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps follow Stacks 04KU with 0388 as a new unsplit node (no quasi-separatedness assumed, as in Stacks); finitely generated k-subalgebra of an algebraic extension is a finite field via two Mathlib leaves (one of unit sk-thm-reduction, a leaf hence a tool); p o sigma_X = p by functoriality. Tags 04KU, 0388 verified."
+ }
 }
