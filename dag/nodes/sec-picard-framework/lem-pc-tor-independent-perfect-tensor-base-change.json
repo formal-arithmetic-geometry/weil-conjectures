@@ -25,9 +25,67 @@
   "def-pc-derived-direct-image",
   "def-weil-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the stalk comparison [lem-pc-tor-independent-perfect-pullback-comparison] to P. The Tor-independence hypothesis gives, at every x' over x, the required stalkwise isomorphism for the canonical identity map Lg_X^*P\\to Lg_X^*P, so this map satisfies the stalkwise base-change condition of the single-complex criterion.",
+   "uses": [
+    "lem-pc-tor-independent-perfect-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, lemma-compare-base-change proof: local affine reduction and Tor-independent comparison of derived tensors"
+   }
+  },
+  {
+   "text": "Use tensor inheritance [lem-pc-rf-single-complex-inherited-tensor-condition] with K=P, K'=Lg_X^*P and the identity map Lg_X^*P\\to Lg_X^*P, and E=K (the given quasi-coherent derived object). It gives the stalkwise condition for the induced map Lg_X^*(K\\otimes^L P)\\to Lg_X^*K\\otimes^L Lg_X^*P.",
+   "uses": [
+    "lem-pc-rf-single-complex-inherited-tensor-condition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJA, part (1), tensor inheritance of the single-complex base-change condition"
+   }
+  },
+  {
+   "text": "Apply the qcqs single-complex base-change theorem [lem-pc-rf-single-complex-qcqs-induction] to the map from Step 2. Its objects lie in the quasi-coherent derived categories, as that theorem requires: P is perfect, hence has quasi-coherent cohomology (Stacks Tag 08DB), so P and K\\otimes^L P lie in D_{\\mathrm{QCoh}}(X), and Lg_X^*P and Lg_X^*K\\otimes^L Lg_X^*P lie in D_{\\mathrm{QCoh}}(X') [lem-pc-derived-pullback-tensor-qcoh]. Since f is quasi-compact and quasi-separated, it yields an isomorphism Lg^*Rf_*(K\\otimes^L P)\\to Rf'_*\\bigl(Lg_X^*K\\otimes^L Lg_X^*P\\bigr).",
+   "uses": [
+    "lem-pc-rf-single-complex-qcqs-induction",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ9, lemma-single-complex-base-change"
+   }
+  },
+  {
+   "text": "The derived-pullback tensor-product comparison [lem-pc-derived-pullback-tensor-product] identifies Lg_X^*(K\\otimes^L P) with Lg_X^*K\\otimes^L Lg_X^*P. Transporting the isomorphism of Step 3 across this canonical identification and the symmetry of derived tensor gives exactly the displayed base-change morphism.",
+   "uses": [
+    "lem-pc-derived-pullback-tensor-product",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 079U, lemma-pullback-tensor-product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tor-independent-perfect-pullback-comparison",
+  "lem-pc-rf-single-complex-inherited-tensor-condition",
+  "lem-pc-rf-single-complex-qcqs-induction",
+  "lem-pc-derived-pullback-tensor-product",
+  "def-weil-derived-tensor",
+  "lem-pc-derived-pullback-tensor-qcoh"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW proof, case (1), via Tags 0DJA and 0DJ9"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,12 +110,44 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-affine-morphism-hom-out-of-perfect",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-tor-independent-perfect-tensor-base-change",
+  "worker": "stage1",
+  "summary": "Split the Tor-independent perfect-tensor base-change statement into the local stalk comparison supplied by Tor independence and the existing Stacks single-complex criterion. The proof applies tensor inheritance to the perfect factor and transports the resulting qcqs pushforward isomorphism across the canonical derived-pullback and tensor identifications.",
+  "blueprint": "Realizes Tag 0AVW case (1) proof after the internal-Hom/tensor identification: Tor-independent stalk comparison, tensor inheritance, and the qcqs single-complex base-change theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-single-complex-inherited-tensor-condition",
+    "why": "Generic tensor inheritance from the single-complex base-change theory is required to pass the perfect-factor stalk comparison to K tensor P."
+   },
+   {
+    "node": "lem-pc-rf-single-complex-qcqs-induction",
+    "why": "Generic qcqs single-complex base change is the theorem that turns the inherited stalk condition into the global pushforward isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-single-complex-inherited-tensor-condition",
+  "lem-pc-rf-single-complex-qcqs-induction",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-rf-single-complex-inherited-tensor-condition",
+  "lem-pc-rf-single-complex-qcqs-induction"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tpb3026",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tpb3026 (reviewer sub-agent of L); spot-checked: Return point 1 (E) repaired: child now targets Lg_X^*P and is true (P_x bounded finite free over O_{X,x}; Tor independence makes P_x(x)^L_{O_S,s}O_{S',s'} termwise; O_{X',x'} a flat localization), not a duplicate of lem-pc-derived-pullback-tor-independent-flat-complex (S-flat terms) nor lem-pc-base-change-map-cech; no sorry-free attachment (B10). Point 2 repaired: Step 2 K'=Lg_X^*P with identity, Step 4 only the 079U monoidal identification plus symmetry. Steps 2-3 cite merged 0DJA(1)/0DJ9 nodes without restating the induction; Tor independence inline as in J1; statement is exactly what lem-pc-affine-morphism-hom-out-of-perfect Step 2 uses (P=M^vee, qcqs over affine S). FIX more, RETURN less: C4 in Step 3, the qcqs criterion needs K and K' in D_QCoh; added that P perfect has quasi-coherent cohomology (Tag 08DB, inline) and cited lem-pc-derived-pullback-tensor-qcoh (generic tool: derived pullback and derived tensor preserve D_QCoh) for K(x)^L P and Lg_X^*K(x)^L Lg_X^*P, with uses/proof_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }
