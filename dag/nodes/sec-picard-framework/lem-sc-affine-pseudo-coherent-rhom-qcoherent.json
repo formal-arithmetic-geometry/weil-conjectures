@@ -12,7 +12,7 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "title": "Affine RHom of a pseudo-coherent complex is quasi-coherent",
- "statement": "Let $R$ be a ring, $U=\\operatorname{Spec}(R)$ [lem-weil-pbc-spec-module-tilde-sections], let $P$ be an object of $D(R)$ [def-pc-derived-category] represented by a bounded-above complex of finite projective $R$-modules, and let $L$ be an object of $D(R)$ represented by a complex whose cohomology vanishes in all sufficiently negative degrees. Then $R\\mathcal H om_U(\\widetilde P,\\widetilde L)$ [def-pur-derived-internal-hom] $\\cong\\widetilde{R\\operatorname{Hom}_R(P,L)}$. Its cohomology sheaves are quasi-coherent and vanish in all sufficiently negative degrees.",
+ "statement": "Let $R$ be a ring, $U=\\operatorname{Spec}(R)$ [lem-weil-pbc-spec-module-tilde-sections], let $P$ be an object of $D(R)$ [def-pc-derived-category] represented by a bounded-above complex of finite projective $R$-modules, and let $L$ be an object of $D(R)$ represented by a complex whose cohomology vanishes in all sufficiently negative degrees. For chosen representatives, write $\\widetilde P$ and $\\widetilde L$ for the cochain complexes of associated $\\mathcal O_U$-modules obtained by applying the module construction [lem-weil-pbc-spec-module-tilde-sections] termwise. Then $R\\mathcal H om_U(\\widetilde P,\\widetilde L)$ [def-pur-derived-internal-hom] $\\cong\\widetilde{R\\operatorname{Hom}_R(P,L)}$, where the right side is formed termwise in the same way. Its cohomology sheaves are quasi-coherent and vanish in all sufficiently negative degrees.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, clauses (1) and (3)(a), using Tags 08FT and 08G5"
@@ -21,10 +21,74 @@
   "def-pur-pseudo-coherent-complex",
   "def-pur-derived-internal-hom",
   "def-pc-derived-category",
-  "lem-weil-pbc-spec-module-tilde-sections"
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Choose a bounded-above complex representing $P$ with finite projective terms, say zero above degree $b$. As in Stacks Tag 064U (proof of (3)$\\Rightarrow$(1)), choose finite projective $C^n$ with $F^{b}=P^{b}\\oplus C^{b}$ finite free and inductively $F^{n-1}=P^{n-1}\\oplus C^{n}\\oplus C^{n-1}$ finite free for $n\\le b$, with differential $F^{n-1}\\to F^n$ equal to $d_P$ on $P^{n-1}$, the identity $C^n\\to C^n$, and zero on $C^{n-1}$. The projection $E^\\bullet:=F^\\bullet\\to P^\\bullet$ is a map of complexes whose kernel is a direct sum of complexes $C^n\\xrightarrow{\\mathrm{id}}C^n$, so it is a homotopy equivalence; $E^\\bullet$ is a bounded-above complex of finite free $R$-modules, zero above degree $b$. (A single principal open on which every term of $P$ is free need not exist when $P$ has infinitely many nonzero terms, so this global finite-free replacement is used instead of a localization.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064U, lemma-pseudo-coherent, proof of (3) implies (1)"
+   }
+  },
+  {
+   "text": "Choose a representative of $L$ bounded below, say zero below degree $a$, by applying the standard truncation construction in [def-sbc-standard-tstructure-derived-category] to a representative with cohomology zero below $a$. By [lem-sc-affine-projective-complex-derived-hom] applied to the bounded-above complex $E^\\bullet$ of (finite free, hence) projective modules and this bounded-below $L$, the module Hom complex $C^\\bullet=\\operatorname{Hom}_R^\\bullet(E,L)$ represents $R\\operatorname{Hom}_R(E,L)\\cong R\\operatorname{Hom}_R(P,L)$, the isomorphism induced by the quasi-isomorphism $E\\to P$ of Step 1. Here $C^n=\\prod_{p}\\operatorname{Hom}_R(E^p,L^{p+n})$ is a finite product over $a-n\\le p\\le b$, and $C^n=0$ for $n<a-b$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sc-affine-projective-complex-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8, lemma-stalk-internal-hom, case (2), affine derived-Hom computation"
+   }
+  },
+  {
+   "text": "Applying the module construction [lem-weil-pbc-spec-module-tilde-sections] termwise is an additive functor, so it carries the homotopy equivalence $E\\to P$ of Step 1 to a homotopy equivalence, in particular a quasi-isomorphism, $\\widetilde E\\to\\widetilde P$; and $\\widetilde{R^{\\oplus r}}=\\mathcal O_U^{\\oplus r}$, so $\\widetilde E$ is a bounded-above complex of finite-rank free $\\mathcal O_U$-modules, while $\\widetilde L$ is bounded below. By [lem-sc-derived-hom-finite-free-model], $\\mathcal Hom^\\bullet_{\\mathcal O_U}(\\widetilde E,\\widetilde L)$ represents $R\\mathcal Hom_U(\\widetilde P,\\widetilde L)$ on all of $U$. Its degree-$n$ term is the finite product $\\prod_{a-n\\le p\\le b}\\mathcal Hom(\\mathcal O_U^{\\oplus r_p},\\widetilde{L^{p+n}})=\\prod_p(\\widetilde{L^{p+n}})^{\\oplus r_p}=\\widetilde{C^n}$, and the matrix formulas for the differentials (matrices over $R=\\Gamma(U,\\mathcal O_U)$) show these identifications commute with the differentials. Hence $R\\mathcal Hom_U(\\widetilde P,\\widetilde L)\\cong\\widetilde{C^\\bullet}$, the termwise associated complex of a representative of $R\\operatorname{Hom}_R(P,L)$.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-sc-derived-hom-finite-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, clause (3)(a), affine calculation"
+   }
+  },
+  {
+   "text": "Localization of $R$-modules is exact [lem-weil-pbc-localization-module-exact], so by the description of sections over principal opens in [lem-weil-pbc-spec-module-tilde-sections], kernels, images and cohomology of $\\widetilde{C^\\bullet}$ are computed on every $D(f)$ by localizing those of $C^\\bullet$; this gives canonical isomorphisms $\\mathcal H^i(R\\mathcal Hom_U(\\widetilde P,\\widetilde L))\\cong\\widetilde{H^i(C^\\bullet)}$ for every $i$.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, clause (3)(a), localization of the affine Hom complex"
+   }
+  },
+  {
+   "text": "Each sheaf $\\widetilde{H^i(C^\\bullet)}$ is quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections], and it is zero for $i<a-b$ by Step 2. Combining this with Steps 3 and 4 proves the asserted isomorphism, quasi-coherence and vanishing in all sufficiently negative degrees.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, clause (3)(a), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sc-affine-projective-complex-derived-hom",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-weil-pbc-localization-module-exact"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
@@ -61,10 +125,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-pseudo-coherent-rhom-qcoherent",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "worker": "stage1",
+  "summary": "Split the affine RHom assertion into the projective-complex derived-Hom computation, a global finite-free replacement (Tag 064U) and the finite-free Hom identification on Spec R, exact localization of cohomology, and the quasi-coherence and lower-bound conclusion. Added one statement-only dependency for the bounded-above projective-complex computation.",
+  "blueprint": "Realizes Tag 0A6H clause (3)(a): affine reduction and computation of RHom from a bounded-above finite-projective model against a bounded-below complex."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-apr2425",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apr2425 (reviewer sub-agent of L); spot-checked: Checked all 4 steps against cited statements; C4 vs citing lem-sc-pseudo-coherent-rhom-qcoherent (supplies bounded-above finite-free P_i and H^q(L_i)=0 for q<a: matches); new node lem-sc-affine-projective-complex-derived-hom not a duplicate (generalizes lem-sc-derived-hom-projective-resolution to complex targets). FIX more, RETURN less: (1) C1/false step: old Step 2 claimed that on a principal open, after refining, every finite projective term of P is free; with infinitely many terms no single open need work (e.g. R=prod_N F_2, P^{-n}=e_{S_n}R with S_n = {k: bit n of k is 1}), and the item's local pieces were never glued. Repaired by a global finite-free replacement E->P (Stacks 064U construction, homotopy equivalence, elementary step), then lem-sc-derived-hom-finite-free-model applied on all of Spec R to E~ -> P~ with finite-product termwise identification Hom^n(E~,L~)=C^n~; C:=Hom_R(E,L) via the new node; proof_deps resynchronized.; 1 file(s) fixed by the reviewer"
  }
 }
