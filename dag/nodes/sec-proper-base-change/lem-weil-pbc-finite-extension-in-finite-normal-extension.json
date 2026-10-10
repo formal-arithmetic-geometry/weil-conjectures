@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-finite-extension-in-finite-normal-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)): the N-2 property used there, through the criterion 032N; 032N proof, 'Choose a finite normal field extension M/K containing L'",
+   "via": [
+    "lem-weil-pbc-n2-char-p-purely-inseparable-criterion",
+    "lem-weil-pbc-polynomial-ring-n2",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A finite field extension lies in a finite normal extension (Stacks 09DT)",
+ "statement": "Let $K$ be a field and $L/K$ a finite field extension [def-pc-field-extension] ($\\dim_KL<\\infty$). Then there is a field extension $M/L$ such that $M/K$ (via $K\\to L\\to M$) is finite and normal: every $\\beta\\in M$ is algebraic over $K$ [def-weil-algebraic-element] and its minimal polynomial over $K$ is a product of polynomials of degree one in $M[T]$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09DT (lemma-normal-closure, line 2086), existence part; tag verified in literature/stacks-project/tags/tags (09DT,fields-lemma-normal-closure)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-element"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite extension is contained in a finite normal extension (normal closure)",
+   "results": "IsNormalClosure, normalClosure.normal, isNormalClosure_normalClosure, IntermediateField.normalClosure, IntermediateField.normalClosure_def', normalClosure_def, Algebra.IsAlgebraic.isNormalClosure_normalClosure (Mathlib.FieldTheory.Normal.Closure)",
+   "date": "2026-10-10",
+   "verdict": "match: IntermediateField.normalClosure with normalClosure.normal, normalClosure.is_finiteDimensional"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "every finite field extension is contained in a finite normal extension of the base field",
+   "results": "FiniteGaloisIntermediateField.adjoin (separable case), finiteExts, normalClosure.is_finiteDimensional (Mathlib.FieldTheory.Normal.Closure), FiniteGaloisIntermediateField, Field.isAlgebraic_of_finite_intermediateField",
+   "date": "2026-10-10",
+   "verdict": "match: normalClosure.is_finiteDimensional"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^instance\\|^lemma\\|^noncomputable' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Normal/Closure.lean; grep -n IsAlgClosure ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean; grep -n 'IsAlgClosure.normal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsAlgClosed/Basic.lean",
+   "results": "IntermediateField.normalClosure (Closure.lean:48, @[stacks 0BMF]), normalClosure.normal (Closure.lean:167, @[stacks 0BMG]), normalClosure.is_finiteDimensional (Closure.lean:173), normalClosure.algebra (Closure.lean:181), IsScalarTower F K (normalClosure F K L) (Closure.lean:186); instance IsAlgClosure k (AlgebraicClosure L) for L algebraic over k (AlgebraicClosure.lean:211); IsAlgClosure.normal (IsAlgClosed/Basic.lean:275)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IntermediateField.normalClosure, normalClosure.normal, normalClosure.is_finiteDimensional, normalClosure.algebra",
+  "file": "Mathlib/FieldTheory/Normal/Closure.lean",
+  "line": 48,
+  "how": "one declaration per clause: M = normalClosure K L (AlgebraicClosure L) (Closure.lean:48); it is an L-algebra by normalClosure.algebra (line 181) compatibly with K (IsScalarTower, line 186); finite over K by normalClosure.is_finiteDimensional (line 173); normal over K by normalClosure.normal (line 167), whose hypothesis Normal K (AlgebraicClosure L) is IsAlgClosure.normal (Mathlib/FieldTheory/IsAlgClosed/Basic.lean:275) applied to the instance IsAlgClosure K (AlgebraicClosure L) (Mathlib/FieldTheory/IsAlgClosed/AlgebraicClosure.lean:211, L algebraic over K as it is finite). Sources read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-n2-char-p-purely-inseparable-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: composed Mathlib leaf checked (normalClosure in AlgebraicClosure L; Normal/Closure.lean:48,167,173,181,186; IsAlgClosure.normal) (09DT)"
+}

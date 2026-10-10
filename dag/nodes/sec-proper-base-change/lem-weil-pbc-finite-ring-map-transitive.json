@@ -1,0 +1,91 @@
+{
+ "id": "lem-weil-pbc-finite-ring-map-transitive",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)): the N-2 property used there, through the criterion 032N; 032N proof, 'Then R'' is finite over R by Lemma 00GL'",
+   "via": [
+    "lem-weil-pbc-n2-char-p-purely-inseparable-criterion",
+    "lem-weil-pbc-polynomial-ring-n2",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Composite of finite ring maps is finite (Stacks 00GL)",
+ "statement": "Let $R\\to S$ and $S\\to T$ be homomorphisms of commutative rings such that $S$ is a finitely generated $R$-module [def-weil-finitely-generated-module] and $T$ is a finitely generated $S$-module. Then $T$ is a finitely generated $R$-module via the composite $R\\to S\\to T$: if $s_1,\\dots,s_m$ generate $S$ over $R$ and $t_1,\\dots,t_n$ generate $T$ over $S$, the products $s_it_j$ generate $T$ over $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00GL (lemma-finite-transitive, line 659); tag verified in literature/stacks-project/tags/tags (00GL,algebra-lemma-finite-transitive)"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if A is finite over R and B finite over A then B is finite over R",
+   "results": "Module.Finite.trans (Mathlib.RingTheory.Finiteness.Basic), Algebra.FinitePresentation.trans, Algebra.fg_trans', RingHom.finiteType_stableUnderComposition, Algebra.QuasiFinite.trans",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Finite.trans"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite.trans",
+   "results": "Module.Finite.trans {R} (A M) [Semiring R] [Semiring A] [Module R A] [AddCommMonoid M] [Module R M] [Module A M] [IsScalarTower R A M] [Module.Finite R A] [Module.Finite A M] : Module.Finite R M (Mathlib.RingTheory.Finiteness.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "composition of finite ring homomorphisms is finite: A finite R-algebra, B finite A-algebra, then B finite over R",
+   "results": "AlgHom.Finite.comp, AlgHom.Finite.of_comp_finite (Mathlib.RingTheory.Finiteness.Basic), AlgHom.FiniteType.comp, RingHom.FiniteType.comp",
+   "date": "2026-10-10",
+   "verdict": "match (RingHom.Finite.comp / Module.Finite.trans)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem trans\\|theorem comp' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Finiteness/Basic.lean; sed -n 365,375p",
+   "results": "Module.Finite.trans (Basic.lean:369), RingHom.Finite.comp (Basic.lean:473), AlgHom.Finite.comp (Basic.lean:500)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Finite.trans",
+  "file": "Mathlib/RingTheory/Finiteness/Basic.lean",
+  "line": 369,
+  "how": "exact, with A = S, M = T, the R-module structure on T through R→S→T (IsScalarTower R S T); the ring-hom form is RingHom.Finite.comp (same file, line 473). Source read with sed -n 365,375p on 2026-10-10."
+ },
+ "status": "merged",
+ "merged_into": "lem-weil-pbc-finite-module-over-finite-algebra",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-n2-char-p-purely-inseparable-criterion",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: duplicate of lem-weil-pbc-finite-module-over-finite-algebra (same statement, same Mathlib declaration Module.Finite.trans); merged"
+}

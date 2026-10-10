@@ -14,7 +14,7 @@
     "lem-weil-pbc-etale-colimit-normal-local-domain"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "In characteristic p, N-2 is tested on finite purely inseparable extensions",
@@ -31,9 +31,105 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-japanese-domain"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $L/K$ be a finite field extension; write $A_L\\subseteq L$ for the integral closure of $R$ in $L$ [def-weil-pbc-integral-closure]. By [lem-weil-pbc-finite-extension-in-finite-normal-extension] there is a field extension $M/L$ with $M/K$ finite and normal; let $\\iota:L\\to M$ be the inclusion and $A_M\\subseteq M$ the integral closure of $R$ in $M$. If $x\\in A_L$ satisfies $x^n+r_{n-1}x^{n-1}+\\dots+r_0=0$ with $r_i\\in R$, applying the ring homomorphism $\\iota$ (which is the identity on the image of $R$, since $R\\to M$ factors as $R\\to K\\to L\\to M$) gives the same equation for $\\iota(x)$, so $\\iota(A_L)\\subseteq A_M$. As $\\iota$ is injective and $R$-linear, $A_L\\cong\\iota(A_L)$ is isomorphic to an $R$-submodule of $A_M$. Hence, $R$ being Noetherian, if $A_M$ is a finitely generated $R$-module then so is $A_L$ by [lem-weil-pbc-noetherian-submodule-finite]. It therefore suffices to show that $A_M$ is a finitely generated $R$-module.",
+   "uses": [
+    "lem-weil-pbc-finite-extension-in-finite-normal-extension",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 032N (lemma-domain-char-p-N-1-2, lines 45389-45407), 'Choose a finite normal field extension M/K containing L. As R is Noetherian it suffices to show that the integral closure of R in M is finite over R'"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-normal-extension-purely-inseparable-then-galois] to the normal algebraic extension $M/K$ ($M/K$ is finite, so every element of $M$ is algebraic over $K$): the subfield $M_{insep}=M^{\\mathrm{Aut}(M/K)}$ satisfies $K\\subseteq M_{insep}\\subseteq M$, $M_{insep}/K$ is purely inseparable, and $M/M_{insep}$ is separable algebraic. Moreover $M_{insep}/K$ is finite, being a $K$-subspace of the finite-dimensional $K$-vector space $M$, and $M/M_{insep}$ is finite, since a $K$-basis of $M$ spans $M$ over $M_{insep}\\supseteq K$. By the hypothesis applied to the finite purely inseparable extension $M_{insep}/K$ [def-weil-pbc-finite-purely-inseparable-extension], the integral closure $R'$ of $R$ in $M_{insep}$ is a finitely generated $R$-module.",
+   "uses": [
+    "lem-weil-pbc-normal-extension-purely-inseparable-then-galois",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 032N (lemma-domain-char-p-N-1-2, lines 45389-45407), 'By Fields, Lemma 030M there exists a subextension M/M_insep/K such that M_insep/K is purely inseparable, and M/M_insep is separable. By assumption the integral closure R' of R in M_insep is finite over R'"
+   }
+  },
+  {
+   "text": "The ring $R'$ is Noetherian by [lem-weil-pbc-finite-algebra-noetherian] ($R$ is Noetherian and $R'$ is a finitely generated $R$-module by step 2). By [lem-weil-pbc-integral-closure-finite-extension-normal], applied to the domain $R$ with fraction field $K$ and the finite extension $M_{insep}/K$, $R'$ is a normal domain [def-weil-pbc-normal-ring] and the inclusion $R'\\subseteq M_{insep}$ identifies $M_{insep}$ with the fraction field of $R'$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 032N (lemma-domain-char-p-N-1-2, lines 45389-45407), the hypotheses of Lemma 032L for R' (Noetherian normal domain with fraction field M_insep), which the source uses without comment"
+   }
+  },
+  {
+   "text": "By steps 2 and 3, $R'$ is a Noetherian normal domain with fraction field $M_{insep}$ and $M/M_{insep}$ is a finite separable algebraic extension [def-weil-pbc-separable-algebraic-extension]. By [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] the integral closure $R''$ of $R'$ in $M$ is a finitely generated $R'$-module. By [lem-weil-pbc-finite-module-over-finite-algebra], applied to $R\\to R'\\to R''$, $R''$ is a finitely generated $R$-module.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "lem-weil-pbc-finite-module-over-finite-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 032N (lemma-domain-char-p-N-1-2, lines 45389-45407), 'By Lemma 032L the integral closure R'' of R' in M is finite over R'. Then R'' is finite over R by Lemma 00GL'"
+   }
+  },
+  {
+   "text": "$R''=A_M$ as subrings of $M$ (the special case of Algebra, Lemma 0308 needed here). If $y\\in R''$, then $y$ is integral over $R'$, and $R'$ is integral over $R$ by definition; by [lem-weil-pbc-integral-transitive] applied to $R\\to R'\\to R'[y]$ (the subring $R'[y]\\subseteq M$ is integral over $R'$, since the integral closure of $R'$ in $M$ is a subring [def-weil-pbc-integral-closure] containing $R'$ and $y$), $y$ is integral over $R$, so $y\\in A_M$. Conversely, if $y\\in M$ satisfies $y^n+r_{n-1}y^{n-1}+\\dots+r_0=0$ with $r_i\\in R$, then since the map $R\\to M$ factors through $R\\to R'\\subseteq M$ the same equation has coefficients in $R'$, so $y$ is integral over $R'$ and $y\\in R''$. The $R$-module structures agree, both coming from $R\\to M$. Hence $A_M=R''$ is a finitely generated $R$-module by step 4.",
+   "uses": [
+    "lem-weil-pbc-integral-transitive",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 032N (lemma-domain-char-p-N-1-2, lines 45389-45407), 'Since R'' is also the integral closure of R in M (see Lemma 0308) we win'"
+   }
+  },
+  {
+   "text": "By steps 1 and 5, for every finite field extension $L/K$ the integral closure of $R$ in $L$ is a finitely generated $R$-module; this is the definition of $R$ being N-2 [def-weil-pbc-japanese-domain].",
+   "uses": [
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 032N (lemma-domain-char-p-N-1-2, lines 45389-45407), conclusion 'we win'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-extension-in-finite-normal-extension",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-normal-extension-purely-inseparable-then-galois",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-weil-pbc-finite-module-over-finite-algebra",
+  "lem-weil-pbc-integral-transitive",
+  "def-weil-pbc-japanese-domain"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032N (lemma-domain-char-p-N-1-2, line 45382), proof ('Assume the integral closure ... we win')"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -72,7 +168,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -93,6 +189,13 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 032N (\"if\" direction) at algebra.tex line 45382",
- "lead_note": "split following the 032N proof (finite normal extension M containing L, the purely inseparable subfield of M over K, then 032L for the separable top)"
+ "reviewed": "2026-10-10 L: 6 steps checked against the 032N proof: reduction to a finite normal M (09DT leaf) via 00IK, M_insep from 030M (2) (new node), finiteness of M_insep/K and M/M_insep written out, R' Noetherian normal with fraction field M_insep, 032L for the separable top, transitivity of finiteness (repointed by L to the existing lem-weil-pbc-finite-module-over-finite-algebra; the new duplicate leaf is merged into it), R'' = integral closure of R in M; citer polynomial-ring-n2 matches",
+ "lead_note": "split following the 032N proof (finite normal extension M containing L, the purely inseparable subfield of M over K, then 032L for the separable top)",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-n2-char-p-purely-inseparable-criterion",
+  "worker": "stage1",
+  "summary": "Split following the proof of Stacks 032N (algebra.tex 45389-45407), read with every lemma it cites (Fields 030M, Algebra 032L, 00GL, 0308; tags verified in tags/tags). Steps: (1) finite normal M containing L (Fields 09DT, new Mathlib leaf) and reduction from L to M by the Noetherian submodule lemma 00IK, the injection of the integral closure in L into that in M written out; (2) M_insep from 030M (2) (new unsplit node; Mathlib lacks the purely inseparable half), finiteness of M_insep/K and M/M_insep written out, hypothesis gives R' finite; (3) R' Noetherian (00FN node) and a normal domain with fraction field M_insep (034L node) -- hypotheses of 032L the source leaves implicit; (4) 032L node gives R'' finite over R', 00GL (new Mathlib leaf Module.Finite.trans) gives finite over R; (5) R'' equals the integral closure of R in M (the case of 0308 needed, argued from the 00GN node and the definition, both inclusions); (6) conclusion by the definition of N-2. Statement unchanged ('if' direction only, as reviewed).",
+  "blueprint": "The item serves step 4 of the split of lem-weil-pbc-normal-constant-generic (Tag 09Z5, proof of (1)) through the N-2 property; all six steps realize the use of the criterion 032N there (that N-2 is tested on finite purely inseparable extensions); no blueprint node states 032N (blueprint_refs search 'Japanese', 'N-2', '032N', 'purely inseparable', 'integral closure finite': none), so same_as = []."
+ }
 }
