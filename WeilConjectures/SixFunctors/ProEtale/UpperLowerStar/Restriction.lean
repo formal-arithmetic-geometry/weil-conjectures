@@ -169,41 +169,32 @@ end Restriction
 
 section Transport
 
-variable {P Y : Scheme.{u}}
+variable {P P' P'' Y Y' Y'' : Scheme.{u}}
 
-/-- The pasting law for the isomorphisms `b^* ⋙ a^* ≅ d^* ⋙ c^*` attached to commutative
-squares `a ≫ b = c ≫ d` (`AlgebraicGeometry.ProEtale.upperStarCompIso`): the isomorphisms of two
-squares `τ ≫ t = t' ≫ g` and `τ' ≫ t' = t'' ≫ g'` paste to the isomorphism of the composite
-square `(τ' ≫ τ) ≫ t = t'' ≫ (g' ≫ g)`. -/
-lemma upperStarCompIso_hom_app_paste {τ τ' : P ⟶ P} {t t' t'' : P ⟶ Y} {g g' : Y ⟶ Y}
-    (h : τ ≫ t = t' ≫ g) (h' : τ' ≫ t' = t'' ≫ g') (h'' : (τ' ≫ τ) ≫ t = t'' ≫ (g' ≫ g))
-    (M : Sheaf (ProEt.topology Y) A) :
-    (upperStarComp A τ' τ).hom.app ((t)^*[A].obj M) ≫
-        (τ')^*[A].map ((upperStarCompIso A h).hom.app M) ≫
-        (upperStarCompIso A h').hom.app ((g)^*[A].obj M) =
-      (upperStarCompIso A h'').hom.app M ≫ (t'')^*[A].map ((upperStarComp A g' g).hom.app M) := by
-  sorry
-
-/-- The transport `Γ(P, t^* F) ⟶ Γ(P, t'^* F)` along a commutative square `τ ≫ t = t' ≫ g` and
-a morphism `ψ : g^* F ⟶ F`: the restriction along `τ`, followed by
+/-- The transport `Γ(P, t^* F) ⟶ Γ(P', t'^* F')` along a commutative square `τ ≫ t = t' ≫ g`
+and a morphism `ψ : g^* F ⟶ F'`: the restriction along `τ`, followed by
 `τ^* t^* F ≅ (τ ≫ t)^* F = (t' ≫ g)^* F ≅ t'^* g^* F` and by `t'^* ψ`. For a Weil sheaf, a
 geometric point `s` and the Weil structure `ψ`, this is the Frobenius of the stalk at `s`. -/
-noncomputable def globalSectionsTransport {τ : P ⟶ P} {t t' : P ⟶ Y} {g : Y ⟶ Y}
-    (h : τ ≫ t = t' ≫ g) {F : Sheaf (ProEt.topology Y) A} (ψ : (g)^*[A].obj F ⟶ F) :
-    (Sheaf.Γ _ A).obj ((t)^*[A].obj F) ⟶ (Sheaf.Γ _ A).obj ((t')^*[A].obj F) :=
+noncomputable def globalSectionsTransport {τ : P' ⟶ P} {t : P ⟶ Y} {t' : P' ⟶ Y'} {g : Y' ⟶ Y}
+    (h : τ ≫ t = t' ≫ g) {F : Sheaf (ProEt.topology Y) A} {F' : Sheaf (ProEt.topology Y') A}
+    (ψ : (g)^*[A].obj F ⟶ F') :
+    (Sheaf.Γ _ A).obj ((t)^*[A].obj F) ⟶ (Sheaf.Γ _ A).obj ((t')^*[A].obj F') :=
   (globalSectionsToUpperStar A τ).app _ ≫
     (Sheaf.Γ _ A).map ((upperStarCompIso A h).hom.app F ≫ (t')^*[A].map ψ)
 
 /-- The transports compose: transporting along `τ ≫ t = t' ≫ g` with `ψ` and then along
 `τ' ≫ t' = t'' ≫ g'` with `ψ'` is transporting along the composite square with
-`(g' ≫ g)^* F ≅ g'^* g^* F ⟶ g'^* F ⟶ F`. -/
-lemma globalSectionsTransport_comp {τ τ' : P ⟶ P} {t t' t'' : P ⟶ Y} {g g' : Y ⟶ Y}
+`(g' ≫ g)^* F ≅ g'^* g^* F ⟶ g'^* F' ⟶ F''`. -/
+lemma globalSectionsTransport_comp {τ : P' ⟶ P} {τ' : P'' ⟶ P'} {t : P ⟶ Y} {t' : P' ⟶ Y'}
+    {t'' : P'' ⟶ Y''} {g : Y' ⟶ Y} {g' : Y'' ⟶ Y'}
     (h : τ ≫ t = t' ≫ g) (h' : τ' ≫ t' = t'' ≫ g') (h'' : (τ' ≫ τ) ≫ t = t'' ≫ (g' ≫ g))
-    {F : Sheaf (ProEt.topology Y) A} (ψ : (g)^*[A].obj F ⟶ F) (ψ' : (g')^*[A].obj F ⟶ F) :
+    {F : Sheaf (ProEt.topology Y) A} {F' : Sheaf (ProEt.topology Y') A}
+    {F'' : Sheaf (ProEt.topology Y'') A} (ψ : (g)^*[A].obj F ⟶ F')
+    (ψ' : (g')^*[A].obj F' ⟶ F'') :
     globalSectionsTransport A h ψ ≫ globalSectionsTransport A h' ψ' =
       globalSectionsTransport A h''
         ((upperStarComp A g' g).hom.app F ≫ (g')^*[A].map ψ ≫ ψ') := by
-  have hn {G G' : Sheaf (ProEt.topology P) A} (f : G ⟶ G') :
+  have hn {G G' : Sheaf (ProEt.topology P') A} (f : G ⟶ G') :
       (Sheaf.Γ _ A).map f ≫ (globalSectionsToUpperStar A τ').app G' =
         (globalSectionsToUpperStar A τ').app G ≫ (Sheaf.Γ _ A).map ((τ')^*[A].map f) :=
     (globalSectionsToUpperStar A τ').naturality f
@@ -213,24 +204,24 @@ lemma globalSectionsTransport_comp {τ τ' : P ⟶ P} {t t' t'' : P ⟶ Y} {g g'
   congr 2
   have e := upperStarCompIso_hom_app_paste A h h' h'' F
   simp only [Functor.map_comp, Category.assoc]
-  have hψ : (τ')^*[A].map ((t')^*[A].map ψ) ≫ (upperStarCompIso A h').hom.app F =
+  have hψ : (τ')^*[A].map ((t')^*[A].map ψ) ≫ (upperStarCompIso A h').hom.app F' =
       (upperStarCompIso A h').hom.app _ ≫ (t'')^*[A].map ((g')^*[A].map ψ) :=
     (upperStarCompIso A h').hom.naturality ψ
   rw [reassoc_of% hψ, reassoc_of% e]
 
 /-- Transports along equal morphisms `g = g'` with corresponding morphisms `ψ` and `ψ'` agree. -/
-lemma globalSectionsTransport_congr {τ : P ⟶ P} {t t' : P ⟶ Y} {g g' : Y ⟶ Y}
+lemma globalSectionsTransport_congr {τ : P' ⟶ P} {t : P ⟶ Y} {t' : P' ⟶ Y'} {g g' : Y' ⟶ Y}
     (h : τ ≫ t = t' ≫ g) (hg : g = g') {F : Sheaf (ProEt.topology Y) A}
-    (ψ : (g)^*[A].obj F ⟶ F) (ψ' : (g')^*[A].obj F ⟶ F)
+    {F' : Sheaf (ProEt.topology Y') A} (ψ : (g)^*[A].obj F ⟶ F') (ψ' : (g')^*[A].obj F ⟶ F')
     (hψ : ψ = (upperStarCongr A hg).hom.app F ≫ ψ') :
     globalSectionsTransport A h ψ = globalSectionsTransport A (h.trans (by rw [hg])) ψ' := by
   subst hg hψ
   simp [upperStarCongr]
 
 /-- Transports along equal morphisms `τ = τ'` agree. -/
-lemma globalSectionsTransport_congr_left {τ τ' : P ⟶ P} {t t' : P ⟶ Y} {g : Y ⟶ Y}
-    (h : τ ≫ t = t' ≫ g) (hτ : τ = τ') {F : Sheaf (ProEt.topology Y) A}
-    (ψ : (g)^*[A].obj F ⟶ F) :
+lemma globalSectionsTransport_congr_left {τ τ' : P' ⟶ P} {t : P ⟶ Y} {t' : P' ⟶ Y'}
+    {g : Y' ⟶ Y} (h : τ ≫ t = t' ≫ g) (hτ : τ = τ') {F : Sheaf (ProEt.topology Y) A}
+    {F' : Sheaf (ProEt.topology Y') A} (ψ : (g)^*[A].obj F ⟶ F') :
     globalSectionsTransport A h ψ = globalSectionsTransport A (hτ ▸ h) ψ := by
   subst hτ
   rfl

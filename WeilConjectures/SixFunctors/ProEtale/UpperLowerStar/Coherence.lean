@@ -129,7 +129,8 @@ lemma upperStarComp_assoc :
   simp only [conjugateIsoEquiv_upperStarComp, conjugateIsoEquiv_isoWhiskerRight,
     conjugateIsoEquiv_isoWhiskerLeft, conjugateIsoEquiv_associator,
     conjugateIsoEquiv_upperStarCongr, Iso.trans_assoc]
-  sorry
+  rw [lowerStarComp_assoc]
+  congr 2
 
 /-- The associativity law for the composition isomorphisms of the pullbacks, evaluated at a
 sheaf. -/
@@ -145,6 +146,91 @@ lemma upperStarComp_hom_app_comp_upperStarComp_hom_app (M : Sheaf (ProEt.topolog
   simp [upperStarCongr]
 
 end Assoc
+
+
+section Paste
+
+variable {P P' P'' Y Y' Y'' Z : Scheme.{u}}
+
+/-- The composition isomorphism `a^* ≅ c^* ⋙ b^*` of pullbacks along a factorisation
+`b ≫ c = a`. -/
+noncomputable def upperStarFactor {a : P ⟶ Y} {b : P ⟶ Z} {c : Z ⟶ Y} (e : b ≫ c = a) :
+    (a)^*[A] ≅ (c)^*[A] ⋙ (b)^*[A] :=
+  upperStarCongr A e.symm ≪≫ upperStarComp A b c
+
+/-- The factorisation isomorphism of the trivial factorisation is the composition isomorphism. -/
+lemma upperStarFactor_rfl (b : P ⟶ Z) (c : Z ⟶ Y) :
+    upperStarFactor A (rfl : b ≫ c = b ≫ c) = upperStarComp A b c := by
+  simp only [upperStarFactor, upperStarCongr, eqToIso_refl, Iso.refl_trans]
+
+/-- The isomorphism of a commutative square `a ≫ b = c ≫ d` in terms of factorisations of a
+common composite `k`. -/
+lemma upperStarCompIso_eq_upperStarFactor {Z₁ Z₂ : Scheme.{u}} {a : P ⟶ Z₁} {b : Z₁ ⟶ Y}
+    {c : P ⟶ Z₂} {d : Z₂ ⟶ Y} (h : a ≫ b = c ≫ d) {k : P ⟶ Y} (e₁ : a ≫ b = k)
+    (e₂ : c ≫ d = k) :
+    upperStarCompIso A h = (upperStarFactor A e₁).symm ≪≫ upperStarFactor A e₂ := by
+  subst e₁
+  rw [upperStarFactor_rfl]
+  rfl
+
+/-- The associativity law for the factorisation isomorphisms. -/
+lemma upperStarFactor_hom_app_assoc {a : P'' ⟶ Y} {x : P'' ⟶ P'} {y : P' ⟶ Z} {z : Z ⟶ Y}
+    {b : P' ⟶ Y} {c : P'' ⟶ Z} (e_b : y ≫ z = b) (e_a : x ≫ b = a) (e_c : x ≫ y = c)
+    (e_a' : c ≫ z = a) (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarFactor A e_a).hom.app M ≫ (x)^*[A].map ((upperStarFactor A e_b).hom.app M) =
+      (upperStarFactor A e_a').hom.app M ≫ (upperStarFactor A e_c).hom.app ((z)^*[A].obj M) := by
+  subst e_b e_c e_a
+  simp only [upperStarFactor, upperStarCongr, Iso.trans_hom, eqToIso.hom, eqToHom_refl,
+    Category.id_comp]
+  rw [upperStarComp_hom_app_comp_upperStarComp_hom_app]
+  simp only [upperStarCongr, eqToIso.hom, eqToHom_refl, NatTrans.id_app, Category.id_comp]
+
+/-- Factorisations through equal morphisms give the same isomorphism. -/
+lemma upperStarFactor_hom_app_comp_congr {a : P'' ⟶ Y} {g : Y' ⟶ Y} {c₁ c₂ : P'' ⟶ Y'}
+    {t'' : P'' ⟶ Y''} {g' : Y'' ⟶ Y'} (p : c₁ = c₂) (e₁ : c₁ ≫ g = a) (e₂ : c₂ ≫ g = a)
+    (f₁ : t'' ≫ g' = c₁) (f₂ : t'' ≫ g' = c₂) (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarFactor A e₁).hom.app M ≫ (upperStarFactor A f₁).hom.app ((g)^*[A].obj M) =
+      (upperStarFactor A e₂).hom.app M ≫ (upperStarFactor A f₂).hom.app ((g)^*[A].obj M) := by
+  subst p
+  have : e₁ = e₂ := rfl
+  have : f₁ = f₂ := rfl
+  subst_vars
+  rfl
+
+/-- The pasting law for the isomorphisms `b^* ⋙ a^* ≅ d^* ⋙ c^*` attached to commutative
+squares: the isomorphisms of two squares `τ ≫ t = t' ≫ g` and `τ' ≫ t' = t'' ≫ g'` paste to the
+isomorphism of the composite square `(τ' ≫ τ) ≫ t = t'' ≫ (g' ≫ g)`. -/
+lemma upperStarCompIso_hom_app_paste {τ : P' ⟶ P} {τ' : P'' ⟶ P'} {t : P ⟶ Y} {t' : P' ⟶ Y'}
+    {t'' : P'' ⟶ Y''} {g : Y' ⟶ Y} {g' : Y'' ⟶ Y'}
+    (h : τ ≫ t = t' ≫ g) (h' : τ' ≫ t' = t'' ≫ g') (h'' : (τ' ≫ τ) ≫ t = t'' ≫ (g' ≫ g))
+    (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarComp A τ' τ).hom.app ((t)^*[A].obj M) ≫
+        (τ')^*[A].map ((upperStarCompIso A h).hom.app M) ≫
+        (upperStarCompIso A h').hom.app ((g)^*[A].obj M) =
+      (upperStarCompIso A h'').hom.app M ≫ (t'')^*[A].map ((upperStarComp A g' g).hom.app M) := by
+  have ea : (τ' ≫ t') ≫ g = (τ' ≫ τ) ≫ t := by simp only [Category.assoc, h]
+  have ea' : (t'' ≫ g') ≫ g = (τ' ≫ τ) ≫ t := by simp only [Category.assoc, h'']
+  have e₁ := upperStarFactor_hom_app_assoc A (rfl : τ ≫ t = τ ≫ t)
+    (Category.assoc τ' τ t).symm (rfl : τ' ≫ τ = τ' ≫ τ) (rfl : (τ' ≫ τ) ≫ t = (τ' ≫ τ) ≫ t) M
+  have e₂ := upperStarFactor_hom_app_assoc A h.symm (Category.assoc τ' τ t).symm
+    (rfl : τ' ≫ t' = τ' ≫ t') ea M
+  have e₃ := upperStarFactor_hom_app_assoc A (rfl : g' ≫ g = g' ≫ g) h''.symm
+    (rfl : t'' ≫ g' = t'' ≫ g') ea' M
+  have e₄ := upperStarFactor_hom_app_comp_congr A h' ea ea' h'.symm rfl M
+  rw [upperStarCompIso_eq_upperStarFactor A h rfl h.symm,
+    upperStarCompIso_eq_upperStarFactor A h' rfl h'.symm,
+    upperStarCompIso_eq_upperStarFactor A h'' rfl h''.symm,
+    ← upperStarFactor_rfl A τ' τ, ← upperStarFactor_rfl A g' g,
+    ← cancel_epi ((upperStarFactor A (rfl : (τ' ≫ τ) ≫ t = (τ' ≫ τ) ≫ t)).hom.app M)]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp]
+  rw [reassoc_of% e₁.symm]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app_assoc]
+  rw [reassoc_of% e₂, e₃]
+  simp only [Iso.hom_inv_id_app_assoc]
+  exact e₄
+
+end Paste
+
 
 section Congr
 
