@@ -1,8 +1,8 @@
 # Work queue
 
-814 items; claim with `tools/claim.py next <group> [--stage N]`.
+819 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (654)
+## Stage 1: nodes to split (659)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
-| `lem-weil-pbc-integral-closure-finite-fibre-quasi-finite` | 1011 | none |
 | `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1011 | none |
 | `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1011 | none |
 | `lem-weil-pbc-jacobi-zariski-surjection-h1` | 1011 | none |
@@ -99,9 +98,11 @@
 | `def-weil-pbc-ample-invertible-module` | 1012 | none |
 | `def-weil-pbc-constant-group-scheme` | 1012 | none |
 | `def-weil-pbc-formally-smooth-adic` | 1012 | none |
+| `def-weil-pbc-module-cohomology-fmap` | 1012 | none |
 | `def-weil-pbc-ring-map-quasi-finite-at-prime` | 1012 | none |
 | `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1012 | none |
 | `lem-weil-pbc-affine-finite-type-generating-sections` | 1012 | none |
+| `lem-weil-pbc-affine-morphism-cohomology-edge` | 1012 | none |
 | `lem-weil-pbc-ample-scheme-separated` | 1012 | none |
 | `lem-weil-pbc-artinian-ring-self-finite-length` | 1012 | none |
 | `lem-weil-pbc-closed-pushforward-constant-stalks` | 1012 | none |
@@ -119,6 +120,7 @@
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1012 | none |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1012 | none |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1012 | none |
+| `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1012 | none |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1012 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
@@ -127,11 +129,13 @@
 | `lem-weil-pbc-formally-smooth-complete-local-regular` | 1012 | none |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1012 | none |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1012 | none |
+| `lem-weil-pbc-higher-direct-image-presheaf` | 1012 | none |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1012 | none |
 | `lem-weil-pbc-integral-extension-dimension` | 1012 | none |
 | `lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal` | 1012 | none |
 | `lem-weil-pbc-krull-intersection-localization` | 1012 | none |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1012 | none |
+| `lem-weil-pbc-module-cohomology-fmap-functorial` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-cokernel` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-direct-sum` | 1012 | none |
 | `lem-weil-pbc-module-finite-presentation-extension` | 1012 | none |
@@ -150,6 +154,7 @@
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1012 | none |
+| `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
 | `lem-weil-pbc-symmetric-degree-exact` | 1012 | none |
 | `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1012 | none |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1012 | none |
@@ -826,7 +831,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 666 nodes that wait for stage 1, 445 nodes that wait for a statement dependency.
+Not open yet: 671 nodes that wait for stage 1, 446 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
