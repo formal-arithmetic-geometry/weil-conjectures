@@ -23,9 +23,49 @@
   "def-pc-scheme",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-scheme-modules-grothendieck-abelian], the category of sheaves of $\\mathcal O_X$-modules is Grothendieck abelian. Therefore it has the required set-indexed coproducts and these coproducts are exact.",
+   "uses": [
+    "lem-pc-scheme-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage.lean",
+    "place": "theorem AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian, lines 155-161"
+   }
+  },
+  {
+   "text": "Choose representative complexes $E_i^\\bullet$ for the objects $E_i$. In the category of complexes, coproducts are computed degreewise, so the complex $E^\\bullet=\\bigoplus_iE_i^\\bullet$ has the termwise direct-sum coprojections. Exact coproducts preserve quasi-isomorphisms and the localization defining the derived category, so the image of $E^\\bullet$ in $D(\\mathcal O_X)$ satisfies the coproduct universal property. This remains valid for the empty and singleton families.",
+   "uses": [
+    "lem-pc-scheme-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma 07D9 (lemma-derived-products), clauses (1)-(2)"
+   }
+  },
+  {
+   "text": "For each degree $q$, exactness of set-indexed direct sums in the abelian category of sheaves of modules gives $H^q(\\bigoplus_iE_i^\\bullet)\\cong\\bigoplus_iH^q(E_i^\\bullet)$: kernels and images of the termwise differential commute with the direct sum, and the quotient of cycles by boundaries is therefore the direct sum of the corresponding quotients. The isomorphism is canonical and is induced by the coprojection maps.",
+   "uses": [
+    "lem-pc-scheme-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 08DT (lemma-quasi-coherence-direct-sums), first three sentences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-modules-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma 07D9 and perfect.tex, proof of Lemma 08DT"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -78,12 +118,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-qcoh-direct-sums",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-ambient-direct-sums",
+  "worker": "stage1",
+  "summary": "Checked the item against the Stacks direct-sums lemmas and the slopmaster2 source. Added the prerequisite statement that sheaves of O_X-modules form a Grothendieck abelian category, attached to the sorry-free AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian declaration. The item proof then records the termwise coproduct construction in the derived category and the canonical cohomology direct-sum identity; no clause of the item was restated as a separate node.",
+  "blueprint": "The steps realize the direct-sum construction used before restricting to quasi-coherent cohomology in the ancestor lem-sc-finite-duality route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-das1832",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-das1832 (reviewer sub-agent of L); spot-checked: Packet read whole. Steps 1-3 follow Stacks 07D9 (1)-(2) and 08DT proof; each step cites only lem-pc-scheme-modules-grothendieck-abelian, whose statement (abelian, small colimits, exact filtered colimits) is what IsGrothendieckAbelian gives. No cycle: item cites neither lem-pc-derived-qcoh-direct-sums nor anything created from it. New node attached to sorry-free AlgebraicGeometry.Scheme.Modules.isGrothendieckAbelian (sorryfree.py OK, DirectImage.lean 155-161, via project SheafOfModules.isGrothendieckAbelian, not Mathlib). grep HasCoproducts|hasCoproducts in Mathlib/Algebra/Homology/ and grep coproduct in DerivedCategory/: only HasCoproductsOfShape in GrothendieckAbelian.lean:72, no derived-category or complex coproduct theorem: no leaf possible (verdict no match). Second reading by G1: no fault missed."
+ }
 }
