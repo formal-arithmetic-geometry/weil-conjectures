@@ -25,9 +25,60 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First prove the assertion for separated quasi-compact opens W. Choose a finite affine open cover W = U_1 union ... union U_n using the finite-affine-cover lemma. Induct on n. The case n = 1 is the affine hypothesis. For n > 1 put U = U_1 union ... union U_{n-1} and V = U_n. The open U is quasi-compact, and U intersect V is the union of the n-1 affine opens U_i intersect V: each intersection is affine because W is separated, by the affine-intersection lemma. The opens U and U intersect V of W are separated: the inclusion of an open subscheme is an open immersion, hence separated by [lem-weil-pbc-separated-cancellation](a), and its composite with the separated structure morphism W -> Spec Z is separated by [lem-weil-pbc-proper-fp-permanence](e). The induction hypothesis applies to U and to U intersect V, while the affine hypothesis applies to V; the assumed gluing implication therefore gives P(W).",
+   "uses": [
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 08DR proof, first paragraph (separated quasi-compact opens); Tags 01IT and 01KP"
+   }
+  },
+  {
+   "text": "Now prove the assertion for an arbitrary quasi-compact open W by induction on the number n of affine opens in a finite affine cover W = U_1 union ... union U_n. The case n = 1 is the affine hypothesis. For n > 1 put U = U_1 union ... union U_{n-1} and V = U_n. The open U is quasi-compact. The overlap U intersect V is a quasi-compact open because X is quasi-separated and U is a finite union of affine opens; it is separated because it is an open subscheme of the affine scheme V: the inclusion U intersect V -> V is an open immersion, hence separated by [lem-weil-pbc-separated-cancellation](a), and V is affine, so U intersect V is separated by [lem-sc-separated-over-affine-scheme-separated]. By the separated-open result, P(U intersect V) holds. The induction hypothesis gives P(U), and P(V) is the affine case, so the assumed gluing implication gives P(W).",
+   "uses": [
+    "lem-sc-invert-s-cohomology-separated-induction",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-sc-separated-over-affine-scheme-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 08DR proof, second paragraph (arbitrary quasi-compact opens); Tags 01IT and 01KO"
+   }
+  },
+  {
+   "text": "Applying the preceding conclusion to the quasi-compact open W = X yields P(X), as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 08DR conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-invert-s-cohomology-separated-induction",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sc-separated-over-affine-scheme-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 08DR (coherent-lemma-induction-principle), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,10 +103,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-invert-s-cohomology",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-invert-s-cohomology-induction",
+  "worker": "stage1",
+  "summary": "Split Stacks Lemma 08DR into the separated-open finite-affine-cover induction and the general quasi-compact-open induction. The separated subargument is recorded as the new statement node lem-sc-invert-s-cohomology-separated-induction; the item then applies it to the overlap inside the last affine member of a finite cover and concludes at X.",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion route at the 09MR invocation of 08DR: separated-open induction, then arbitrary quasi-compact-open induction, then the case W = X.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-isi",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-isi (reviewer sub-agent of L); spot-checked: Source: Stacks coherent.tex Lemma 08DR (coherent-lemma-induction-principle), statement and proof read; item statement agrees hypothesis by hypothesis (X qcqs, P on qc opens, affine base, gluing for U qc and V affine, conclusion for all qc opens and X). New node lem-sc-invert-s-cohomology-separated-induction is the first paragraph of the proof with the same hypotheses, restricted to separated qc opens; Mathlib compact_open_induction_on (QuasiCompact.lean:241) is a different statement (no intersection hypothesis), no slopmaster2 declaration found, so not B10. Step 1: finite cover by lem-weil-pbc-qcqs-finite-affine-open-cover, U_i cap V affine by lem-weil-pbc-separated-affine-open-intersection with A = Z. Step 2: qc of U cap V by lem-weil-pbc-quasi-separated-affine-cover-criterion(1) plus finite union; separated-open node applied to the overlap. Step 3 elementary. Small cases: n=1 affine; affine line with doubled origin (qcqs, non-separated), n=2, overlap A^1 minus 0 affine. FIX more, RETURN less (C1, two places, separatedness used with no node): dag/nodes/sec-curve-estimates/lem-sc-invert-s-cohomology-induction.json: proof[0].text/uses: U and U cap V separated as opens of separated W, now cites lem-weil-pbc-separated-cancellation(a) and lem-weil-pbc-proper-fp-permanence(e); proof[1].text/uses: U cap V separated as open of affine V, now cites lem-weil-pbc-separated-cancellation(a) and lem-sc-separated-over-affine-scheme-separated; proof_deps: the three nodes added. Start Sat Oct 10 04:19:39 PM UTC 2026, end Sat Oct 10 04:20:44 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  }
 }
