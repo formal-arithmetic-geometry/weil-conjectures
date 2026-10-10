@@ -21,9 +21,81 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Exactness of $M\\mapsto\\widetilde M$ as a functor $\\mathrm{Mod}_A\\to\\Mod(\\mathcal O_Y)$, and $\\widetilde A\\cong\\mathcal O_Y$. By clause (4) of [lem-weil-pbc-affine-tilde-gamma-adjunction] the functor preserves cokernels, so it is right exact. Let $u:M\\to N$ be injective and $\\mathcal K=\\ker\\widetilde u$; $\\mathcal K$ is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-kernel] ($\\widetilde M,\\widetilde N$ are quasi-coherent by definition, taking $U=Y$). Since kernels in $\\Mod(\\mathcal O_Y)$ are sectionwise, $\\Gamma(Y,\\mathcal K)=\\ker(\\Gamma(Y,\\widetilde u))$, which under the unit isomorphisms of clause (2) is $\\ker u=0$; by clause (3), $\\mathcal K\\cong\\widetilde{\\Gamma(Y,\\mathcal K)}=0$. A right exact functor preserving monomorphisms preserves short exact sequences, hence is exact. Finally clause (1) gives $\\operatorname{Hom}(\\widetilde A,\\mathcal F)\\cong\\Gamma(Y,\\mathcal F)\\cong\\operatorname{Hom}(\\mathcal O_Y,\\mathcal F)$ naturally in $\\mathcal F$, so $\\widetilde A\\cong\\mathcal O_Y$ by Yoneda. (The abelian adjunction is not an equivalence onto $\\Mod(\\mathcal O_Y)$, only onto quasi-coherent modules, so left exactness needs the kernel statement: Stacks, Schemes, Lemma 26.7.5, schemes-lemma-spec-sheaves, as used in the proof of Tag 06Z0.)",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0, proof ('we use that ~ is an exact functor (Schemes, Lemma schemes-lemma-spec-sheaves)')"
+   }
+  },
+  {
+   "text": "The functors and the comparison maps. By Step 1, termwise $\\widetilde{\\ }$ preserves quasi-isomorphisms and cones, so it induces a triangulated functor $D(A)\\to D(\\mathcal O_Y)$ with $H^i(\\widetilde{M^\\bullet})\\cong\\widetilde{H^i(M^\\bullet)}$, which is quasi-coherent; so it lands in $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [def-pc-derived-category]. $R\\Gamma(Y,-)$ [def-pc-derived-direct-image] is computed by $R\\Gamma(Y,E)=\\Gamma(Y,I^\\bullet)$ for a K-injective complex $I^\\bullet$ quasi-isomorphic to $E$, and is triangulated. Define $a_E:\\widetilde{\\Gamma(Y,I^\\bullet)}\\to I^\\bullet\\cong E$ as the termwise counit of clause (1) of [lem-weil-pbc-affine-tilde-gamma-adjunction], and $b_M:M^\\bullet\\to\\Gamma(Y,\\widetilde{M^\\bullet})\\to\\Gamma(Y,I^\\bullet)=R\\Gamma(Y,\\widetilde{M^\\bullet})$ as the termwise unit followed by $\\Gamma$ of a K-injective resolution $\\widetilde{M^\\bullet}\\to I^\\bullet$. Both are natural in the derived categories (homotopy-uniqueness of K-injective resolutions). It remains to show that $a_E$ ($E\\in D_{\\mathrm{QCoh}}$) and $b_M$ are quasi-isomorphisms; then the two triangulated functors are quasi-inverse.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-pc-derived-category",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0, proof (elucidation: adjunction mappings a and b)"
+   }
+  },
+  {
+   "text": "For $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ and every $i$, $H^i(R\\Gamma(Y,E))\\cong\\Gamma(Y,H^i(E))$ naturally. By shifting, take $i=0$. The functor $F=\\Gamma(Y,-)$ commutes with products, and $R^pF(\\mathcal F)=H^p(Y,\\mathcal F)=0$ for quasi-coherent $\\mathcal F$ and $p\\ge1$ by [lem-pc-affine-vanishing]; so [lem-pc-unbounded-derived-functor-cohomological-bound] applies with $N=1$. Take the truncation triangle $\\tau_{\\le-1}E\\to E\\to\\tau_{\\ge0}E\\to$; both truncations lie in $D_{\\mathrm{QCoh}}$ (their cohomology sheaves are among those of $E$). With $b=-1$ the cited bound gives $H^j(R\\Gamma(Y,\\tau_{\\le-1}E))=0$ for $j\\ge0$, so the long exact sequence gives $H^0(R\\Gamma(Y,E))\\cong H^0(R\\Gamma(Y,\\tau_{\\ge0}E))$. The bounded-below $\\tau_{\\ge0}E$ has an injective resolution $I^\\bullet$ in degrees $\\ge0$, and left exactness of $\\Gamma$ gives $H^0(\\Gamma(Y,I^\\bullet))=\\Gamma(Y,\\ker(I^0\\to I^1))=\\Gamma(Y,H^0(E))$. (This replaces the earlier detour through $Y\\to\\operatorname{Spec}\\mathbf Z$, where identifying $\\Gamma(\\operatorname{Spec}\\mathbf Z,H^i(Rf_*E))$ with $H^i(R\\Gamma(Y,E))$ for unbounded $E$ is the same unproved statement.)",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0, proof (Tag 08D4 with F=Gamma(X,-), N=1: H^0(RGamma(X,E))=H^0(RGamma(X,tau_{>=0}E))=Gamma(X,H^0(E)))"
+   }
+  },
+  {
+   "text": "The counit $a_E$ is a quasi-isomorphism for $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$: by exactness (Step 1) and Step 3, $H^i(\\widetilde{R\\Gamma(Y,E)})\\cong\\widetilde{H^i(R\\Gamma(Y,E))}\\cong\\widetilde{\\Gamma(Y,H^i(E))}$, and $H^i(a_E)$ is the counit $\\widetilde{\\Gamma(Y,H^i(E))}\\to H^i(E)$, an isomorphism by clause (3) of [lem-weil-pbc-affine-tilde-gamma-adjunction] since $H^i(E)$ is quasi-coherent. In particular every object of $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ is isomorphic to $\\widetilde{R\\Gamma(Y,E)}$ (essential surjectivity). The unit $b_M$ is a quasi-isomorphism: by Step 3 applied to $\\widetilde{M^\\bullet}\\in D_{\\mathrm{QCoh}}$ and Step 2, $H^i(R\\Gamma(Y,\\widetilde{M^\\bullet}))\\cong\\Gamma(Y,\\widetilde{H^i(M^\\bullet)})$, and $H^i(b_M)$ is the unit $H^i(M^\\bullet)\\to\\Gamma(Y,\\widetilde{H^i(M^\\bullet)})$, an isomorphism by clause (2). Hence the functors are quasi-inverse equivalences of triangulated categories.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0, proof (H^0(a) and H^0(b) are isomorphisms)"
+   }
+  },
+  {
+   "text": "$A[k]$ is $A$ in degree $-k$ and $0$ elsewhere; termwise $\\widetilde{\\ }$ gives $\\widetilde A\\cong\\mathcal O_Y$ (Step 1) in degree $-k$, i.e. $\\mathcal O_Y[k]$, for every $k\\in\\mathbf Z$.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0, affine tilde construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-pc-affine-vanishing",
+  "lem-pc-unbounded-derived-functor-cohomological-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section 36.3, Lemma 36.3.5 (Tag 06Z0), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,12 +120,54 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-projection-formula",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-f-representable"
+ "unit": "sk-thm-picard-f-representable",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-affine-qcoh-derived-equivalence",
+  "worker": "stage1",
+  "summary": "Checked Tag 06Z0 against the imported statement and split its proof into the ordinary affine tilde/global-sections adjunction, the derived cohomology comparison and counit/unit quasi-isomorphisms, and the shift normalization. All required ingredients already exist as DAG nodes, so no duplicate child node was created.",
+  "blueprint": "Realizes the affine identification in the projection-formula proof step: ordinary module/sheaf adjunction, affine acyclicity for derived global sections, and the unit/counit quasi-isomorphism argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Provides the ordinary affine module-to-quasi-coherent-sheaf adjunction and its unit/counit isomorphisms used to identify every cohomology sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "Kernel of a map of quasi-coherent modules is quasi-coherent; gives left exactness of the affine tilde functor."
+   },
+   {
+    "node": "lem-pc-affine-vanishing",
+    "why": "Vanishing of higher cohomology of quasi-coherent modules on an affine scheme (hypothesis N=1 of the unbounded bound)."
+   },
+   {
+    "node": "lem-pc-unbounded-derived-functor-cohomological-bound",
+    "why": "Tag 08D4 cohomological bound for unbounded objects of D_QCoh, applied to Gamma(Y,-) with N=1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-pc-affine-vanishing",
+  "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-pc-affine-vanishing",
+  "lem-pc-unbounded-derived-functor-cohomological-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-aqd1909",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aqd1909 (reviewer sub-agent of L); spot-checked: Item is the C1 'affine-equivalence node' (created from lem-pc-projection-formula, Tag 06Z0); no duplicate, no cycle (cited nodes are imported/unsplit/mathlib with no path to the item). FIX more, RETURN less: (1) C1 old Step 2 identified Gamma(Spec Z,H^i(Rf_*E)) with H^i(RGamma(Y,E)) for unbounded E, which is the unproved statement itself; replaced by Stacks' own route: Tag 08D4 bound [lem-pc-unbounded-derived-functor-cohomological-bound] with F=Gamma(Y,-), N=1 via [lem-pc-affine-vanishing], truncation triangle and left exactness; dropped lem-pc-affine-morphism-hi and lem-sc-qcoh-acyclic-derived-pushforward-cohomology. (2) C1/C4 exactness of tilde into Mod(O_Y) is not a clause of the adjunction node (equivalence only onto QCoh); proved from clauses (2)-(4) plus [lem-weil-pbc-quasi-coherent-module-kernel], and O_Y = A~ by Yoneda from clause (1). (3) Step 1 made explicit: derived functors, landing in D_QCoh, maps a and b via K-injective resolutions. Essential surjectivity carried by the counit quasi-isomorphism for all E in D_QCoh.; 1 file(s) fixed by the reviewer"
+ }
 }
