@@ -24,9 +24,61 @@
   "def-sp-filtration",
   "thm-sp-spectral-object-yields"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the functorial filtered-complex spectral-sequence construction [thm-sp-spectral-object-yields] to the filtered complexes C and C\\otimes_A B; the filtration F^pC\\otimes_A B is a filtration of C\\otimes_A B by subcomplexes because tensoring with the flat A-module B preserves the injections F^{p+1}C\\to F^pC\\to C [lem-weil-pbc-flat-tensor-exact], and it is again finite. By right exactness of the tensor product, gr^p(C\\otimes_A B)=(gr^pC)\\otimes_A B. The canonical map H^{p+q}(gr^pC)\\otimes_A B\\to H^{p+q}((gr^pC)\\otimes_A B) is an isomorphism by [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$); it is compatible with the boundary maps d_1 by naturality. Thus the E_1-page of C\\otimes_A B is canonically E_1(C)\\otimes_A B, compatibly with d_1.",
+   "uses": [
+    "thm-sp-spectral-object-yields",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-pc-flat-tensor-complex-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0BDU, definition-spectral-sequence, and the filtered-complex construction; flat tensor exactness in the proof of Tag 02KH"
+   }
+  },
+  {
+   "text": "Induct on r. Suppose the canonical map E_r(C)\\otimes_A B\\to E_r(C\\otimes_A B) is an isomorphism and commutes with d_r. By [thm-sp-spectral-object-yields] (a), E_{r+1} is naturally the cohomology of the page complex (E_r,d_r). Since the filtration is finite, each page complex through a given bidegree has only finitely many nonzero terms, and [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$) gives E_{r+1}(C)\\otimes_A B\\cong H(E_r(C)\\otimes_A B,d_r\\otimes1)\\cong E_{r+1}(C\\otimes_A B), compatibly with the page identifications. This proves the asserted canonical identification on every page. The filtered map u gives a morphism of these spectral sequences by the functoriality clause (c) of [thm-sp-spectral-object-yields]. Its E_2 map is an isomorphism by hypothesis, so by [lem-sp-page-induction] it is an isomorphism on every page E_r, r\\geq2, and on E_\\infty (for the finite filtration the pages stabilize, and E_\\infty is the one of [def-sp-convergence] appearing in clause (b) of [thm-sp-spectral-object-yields]).",
+   "uses": [
+    "thm-sp-spectral-object-yields",
+    "lem-pc-flat-tensor-complex-cohom",
+    "lem-sp-page-induction",
+    "def-sp-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma-spectral-sequence-filtered-complex-functorial and the page-by-page comparison argument following Tag 0BDU"
+   }
+  },
+  {
+   "text": "For each total degree n, the convergence clause (b) of [thm-sp-spectral-object-yields] identifies E_\\infty^{p,n-p} with the graded piece of the finite induced filtration on H^n(C\\otimes_A B) and on H^n(D), and H^n(u):H^n(C\\otimes_A B)\\to H^n(D) is a filtered map on these abutments inducing the E_\\infty map. Step 2 gives an isomorphism on every graded piece. Apply [lem-sp-finite-filtration-induction] to this filtered map; its finite-filtration hypothesis holds by clause (b). Hence H^n(C\\otimes_A B)\\to H^n(D) is an isomorphism. Composing with the canonical isomorphism H^n(C)\\otimes_A B\\cong H^n(C\\otimes_A B) of [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$), H^n(u):H^n(C)\\otimes_A B\\to H^n(D) is an isomorphism for every n.",
+   "uses": [
+    "thm-sp-spectral-object-yields",
+    "lem-sp-finite-filtration-induction",
+    "lem-pc-flat-tensor-complex-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0BDU convergence of a filtered complex and Lemma 0127 (finite-filtration induction)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-sp-spectral-object-yields",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-flat-tensor-complex-cohom",
+  "lem-sp-page-induction",
+  "lem-sp-finite-filtration-induction",
+  "def-sp-convergence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0BDU filtered-complex spectral sequence and functoriality, with finite-filtration comparison as in Lemma 0127; applied in Cohomology Tag 02KH"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +124,40 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-flat-base-change-cohom",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-flat-filtered-complex-comparison",
+  "worker": "stage1",
+  "summary": "Split the flat filtered-complex comparison into (1) the E_1 identification after flat tensoring, using the filtered-complex spectral-sequence construction and exactness of tensor with a flat module, (2) induction through all pages and the functorial comparison map, and (3) passage from E_infinity to cohomology by finite-filtration induction. No new nodes were needed; all non-elementary inputs are existing nodes whose statements were checked verbatim.",
+  "blueprint": "Realizes Step 2 of lem-pc-flat-base-change-cohom: flatness passes the filtered Cech spectral-sequence page comparison to the abutment.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-spectral-object-yields",
+    "why": "Generic filtered-complex spectral-sequence construction and functorial page identifications are required by the item's comparison argument."
+   },
+   {
+    "node": "lem-sp-finite-filtration-induction",
+    "why": "The final passage from isomorphisms on E_infinity graded pieces to the abutment is the generic finite-filtration induction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-page-induction",
+  "thm-sp-spectral-object-yields",
+  "lem-sp-finite-filtration-induction"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ffc2226",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffc2226 (reviewer sub-agent of L); spot-checked: Checked steps against thm-sp-spectral-object-yields (a)-(c), lem-sp-finite-filtration-induction, lem-pc-flat-tensor-complex-cohom, lem-sp-page-induction. FIX more, RETURN less: (1) C1 Step 2: E_2-iso to E_r/E_infty-iso of the morphism of spectral sequences re-derived inline; now cites lem-sp-page-induction (+def-sp-convergence for E_infty), added as tool use. (2) C1/class b Steps 1-2: flat tensor commuting with cohomology of gr^p C and of page complexes was restated inline from lem-weil-pbc-flat-tensor-exact; now cites lem-pc-flat-tensor-complex-cohom, with elementary stupid-truncation remark since that node assumes a bounded complex (gr^pC is only bounded below). (3) C1 Step 3: spectral argument gives H^n(C(x)B)->H^n(D); the identification H^n(C)(x)B = H^n(C(x)B) needed for the stated conclusion was missing; now cited from lem-pc-flat-tensor-complex-cohom. Second reading by G1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
  }
 }
