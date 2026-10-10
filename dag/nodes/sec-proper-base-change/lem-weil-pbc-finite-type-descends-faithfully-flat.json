@@ -1,0 +1,95 @@
+{
+ "id": "lem-weil-pbc-finite-type-descends-faithfully-flat",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "proof, second paragraph: 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules' (step 2 of its split, I as a colimit of constructible sheaves, through the chain in via down to [lem-weil-pbc-fpqc-descend-finite]); made precise here: the affine case, condition (3) of Descent 02KP, in the proof of Descent 02KX ('We have to show that R -> A is of finite type. This is the result of Algebra, Lemma 00QP'), descent of finite type along the faithfully flat ring map R -> R'",
+   "via": [
+    "lem-weil-pbc-fpqc-descend-locally-finite-type",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-weil-pbc-finite-locally-free-degree-etale-descent",
+    "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "lem-weil-pbc-flat-fp-qf-stratification",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite type descends along faithfully flat ring maps (Stacks 00QP)",
+ "statement": "Let $\\rho:R\\to R'$ be a faithfully flat homomorphism of commutative rings [def-weil-pbc-faithfully-flat-ring-map], let $\\alpha:R\\to A$ be a homomorphism of commutative rings, and let $A'=R'\\otimes_RA$, an $R'$-algebra through $r'\\mapsto r'\\otimes1$. Then $A$ is a finite type $R$-algebra [def-weil-pbc-finite-type-algebra] if and only if $A'$ is a finite type $R'$-algebra.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00QP (lemma-finite-type-descends, line 31443)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if R' is faithfully flat over R and R' ⊗ A is a finite type R'-algebra then A is a finite type R-algebra",
+   "results": "Module.Flat.of_flat_tensorProduct, Module.FaithfullyFlat.instTensorProduct, Module.Flat.iff_flat_tensorProduct, Module.FaithfullyFlat.surjective_of_tensorProduct (RingTheory.Flat.FaithfullyFlat.*), RingHom.finiteType_isStableUnderBaseChange (RingTheory.RingHom.FiniteType), Algebra.FiniteType.trans, Algebra.FinitePresentation.baseChange, Module.Finite.finiteType",
+   "date": "2026-10-10",
+   "verdict": "base-change direction (RingHom.finiteType_isStableUnderBaseChange) only; descent direction not in the top 8"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, Module.FaithfullyFlat, TensorProduct",
+   "results": "Algebra.FiniteType.of_finiteType_tensorProduct_of_faithfullyFlat (Mathlib.RingTheory.Finiteness.Descent)",
+   "date": "2026-10-10",
+   "verdict": "match (descent direction)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite type algebra descends along faithfully flat base change of rings",
+   "results": "RingHom.FaithfullyFlat.isStableUnderBaseChange, RingHom.FaithfullyFlat, RingHom.FaithfullyFlat.codescendsAlong_injective, RingHom.faithfullyFlat_algebraMap_iff, RingHom.FaithfullyFlat.codescendsAlong_bijective, RingHom.EssFiniteType.isStableUnderBaseChange",
+   "date": "2026-10-10",
+   "verdict": "no match in the top 6 (neighbouring codescent lemmas only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'FiniteType' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Finiteness/Descent.lean; grep -n 'baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/FiniteStability.lean (read with sed -n 30-31,76-91,119-123 and 25-50)",
+   "results": "Finiteness/Descent.lean:79-81 lemma Algebra.FiniteType.of_finiteType_tensorProduct_of_faithfullyFlat (T) [Module.FaithfullyFlat R T] [Algebra.FiniteType T (T ⊗[R] S)] : Algebra.FiniteType R S (variables :30-31 {R S} [Algebra R S] (T) [Algebra R T]); :119-120 RingHom.FiniteType.codescendsAlong_faithfullyFlat; FiniteStability.lean:42 instance Algebra.FiniteType.baseChange [FiniteType R A] : Algebra.FiniteType B (B ⊗[R] A)",
+   "date": "2026-10-10",
+   "verdict": "match: one declaration per direction"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.FiniteType.of_finiteType_tensorProduct_of_faithfullyFlat, Algebra.FiniteType.baseChange",
+  "file": "Mathlib/RingTheory/Finiteness/Descent.lean",
+  "line": 79,
+  "how": "one declaration per direction. 'If': Algebra.FiniteType.of_finiteType_tensorProduct_of_faithfullyFlat (Mathlib/RingTheory/Finiteness/Descent.lean:79-81, variables :30-31) with its R := R, S := A (algebra via alpha), T := R' (algebra via rho; Module.FaithfullyFlat R R' is [def-weil-pbc-faithfully-flat-ring-map]): Algebra.FiniteType R' (R' ⊗[R] A) -> Algebra.FiniteType R A; the R'-algebra structure of R' ⊗[R] A is the left one, r' ↦ r' ⊗ 1. 'Only if': the instance Algebra.FiniteType.baseChange (Mathlib/RingTheory/FiniteStability.lean:42) with B := R'. Algebra.FiniteType is [def-weil-pbc-finite-type-algebra] by that node's match. Source read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: Algebra.FiniteType.of_finiteType_tensorProduct_of_faithfullyFlat (Finiteness/Descent.lean:79) and Algebra.FiniteType.baseChange (FiniteStability.lean:42), one per direction (00QP)"
+}
