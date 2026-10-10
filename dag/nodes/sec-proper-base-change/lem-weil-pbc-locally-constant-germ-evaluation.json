@@ -1,107 +1,114 @@
 {
- "id": "lem-weil-pbc-locally-constant-germ-evaluation",
- "kind": "statement",
- "title": "Evaluation identifies germs of locally constant maps with the fibre",
- "statement": "Let U be a topological space, x a point of U, and R a set. A map from an open subset V of U to R is locally constant if every point of V has an open neighbourhood in V on which the map is constant. For each open neighbourhood V of x let L_R(V) be the set of such maps. Let L_R,x be their colimit [def-weil-pbc-category-colimit] over the open neighbourhoods of x ordered by reverse inclusion, with coprojections sending g to its germ g_x. There is a unique evaluation map from L_R,x to R sending g_x to g(x), and it is bijective.",
- "source": {
-  "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Example Tag 007B, line 995, together with Definition Tag 006W"
- },
- "stmt_deps": [
-  "def-weil-pbc-category-colimit"
- ],
- "proof": [
-  {
-   "text": "For every open neighbourhood V of x, evaluation at x defines a map L_R(V) to R. If W is a smaller open neighbourhood of x, then restricting a locally constant map g from V to W does not change g(x). Thus these evaluation maps are compatible with all transition maps. By the universal property of the colimit they induce a unique map ev_x:L_R,x to R satisfying ev_x(g_x)=g(x) for every representative g. This property determines ev_x uniquely because every element of the filtered colimit L_R,x is represented by some g_x.",
-   "uses": [
+  "id": "lem-weil-pbc-locally-constant-germ-evaluation",
+  "kind": "statement",
+  "title": "Evaluation identifies germs of locally constant maps with the fibre",
+  "statement": "Let U be a topological space, x a point of U, and R a set. A map from an open subset V of U to R is locally constant if every point of V has an open neighbourhood in V on which the map is constant. For each open neighbourhood V of x let L_R(V) be the set of such maps. Let L_R,x be their colimit [def-weil-pbc-category-colimit] over the open neighbourhoods of x ordered by reverse inclusion, with coprojections sending g to its germ g_x. There is a unique evaluation map from L_R,x to R sending g_x to g(x), and it is bijective.",
+  "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Example Tag 007B, line 995, together with Definition Tag 006W"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-category-colimit"
+  ],
+  "proof": [
+    {
+      "text": "For every open neighbourhood V of x, evaluation at x defines a map L_R(V) to R. If W is a smaller open neighbourhood of x, then restricting a locally constant map g from V to W does not change g(x). Thus these evaluation maps are compatible with all transition maps. By the universal property of the colimit they induce a unique map ev_x:L_R,x to R satisfying ev_x(g_x)=g(x) for every representative g. This property determines ev_x uniquely because every element of the filtered colimit L_R,x is represented by some g_x.",
+      "uses": [
+        "def-weil-pbc-category-colimit",
+        "lem-weil-pbc-filtered-colimit-sets-elementwise"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sheaves.tex",
+        "place": "Definition Tag 006W (definition-constant-sheaf), lines 575-594, and Example Tag 007B (example-stalk-constant-presheaf), lines 994-1005"
+      }
+    },
+    {
+      "text": "The map ev_x is surjective: for each r in R, the constant map U to R with value r is locally constant, and the germ of this map at x is sent by ev_x to r.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sheaves.tex",
+        "place": "Example Tag 007B (example-stalk-constant-presheaf), lines 994-1005, using the description of the constant sheaf in Definition Tag 006W"
+      }
+    },
+    {
+      "text": "The map ev_x is injective. Let g_x and h_x be germs represented by locally constant maps g:V to R and h:W to R, and suppose g(x)=h(x). By local constancy, there are open neighbourhoods V' of x in V and W' of x in W on which g and h are respectively constant. On the open neighbourhood N=V' intersect W' of x, both restrictions are the constant map with value g(x)=h(x), so they agree. The elementwise equality criterion for the filtered colimit therefore gives g_x=h_x. Hence ev_x is bijective.",
+      "uses": [
+        "lem-weil-pbc-filtered-colimit-sets-elementwise"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sheaves.tex",
+        "place": "Definition Tag 006W (definition-constant-sheaf), lines 575-594, and Example Tag 007B (example-stalk-constant-presheaf), lines 994-1005; the germ injectivity argument is written out"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-category-colimit",
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Definition Tag 006W (definition-constant-sheaf), lines 575-594, and Example Tag 007B (example-stalk-constant-presheaf), lines 994-1005"
-   }
+    "place": "Definition Tag 006W (definition-constant-sheaf), lines 575-594, and Example Tag 007B (example-stalk-constant-presheaf), lines 994-1005; the evaluation, surjectivity and injectivity arguments are written out"
   },
-  {
-   "text": "The map ev_x is surjective: for each r in R, the constant map U to R with value r is locally constant, and the germ of this map at x is sent by ev_x to r.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Example Tag 007B (example-stalk-constant-presheaf), lines 994-1005, using the description of the constant sheaf in Definition Tag 006W"
-   }
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "stalk of locally constant maps to a set evaluates bijectively to the set",
+      "results": "TopCat.Presheaf.Γgerm and germ_exist, but no theorem for locally constant maps",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "germ of a locally constant function determined by its value at a point",
+      "results": "Topology.LocallyConstant.Basic has local constancy operations but no stalk evaluation theorem",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'LocallyConstant.*stalk|stalk.*LocallyConstant|locally constant.*germ' Mathlib",
+      "results": "no declaration found",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-closed-pushforward-constant-stalks",
+    "date": "2026-10-10"
   },
-  {
-   "text": "The map ev_x is injective. Let g_x and h_x be germs represented by locally constant maps g:V to R and h:W to R, and suppose g(x)=h(x). By local constancy, there are open neighbourhoods V' of x in V and W' of x in W on which g and h are respectively constant. On the open neighbourhood N=V' intersect W' of x, both restrictions are the constant map with value g(x)=h(x), so they agree. The elementwise equality criterion for the filtered colimit therefore gives g_x=h_x. Hence ev_x is bijective.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Definition Tag 006W (definition-constant-sheaf), lines 575-594, and Example Tag 007B (example-stalk-constant-presheaf), lines 994-1005; the germ injectivity argument is written out"
-   }
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-weil-pbc-locally-constant-germ-evaluation",
+    "worker": "E1",
+    "summary": "Checked the statement against Stacks Definition 006W and Example 007B and split the proof into construction and uniqueness of evaluation, surjectivity by constant maps, and injectivity by restricting two locally constant representatives to a common neighbourhood on which both are constant. The representation and eventual-equality facts for germs are supplied by the existing Mathlib leaf lem-weil-pbc-filtered-colimit-sets-elementwise. Rechecked the three recorded Mathlib search kinds; no theorem identifies this stalk with the fibre for arbitrary topological spaces and sets. No new nodes were needed."
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "group": "F1",
+    "result": "pass",
+    "note": "L read the three steps (007B): evaluation induced on the colimit, surjective via constant maps, injective via a common constancy neighbourhood and the elementwise criterion."
   }
- ],
- "proof_deps": [
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sheaves.tex",
-  "place": "Definition Tag 006W (definition-constant-sheaf), lines 575-594, and Example Tag 007B (example-stalk-constant-presheaf), lines 994-1005; the evaluation, surjectivity and injectivity arguments are written out"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "stalk of locally constant maps to a set evaluates bijectively to the set",
-   "results": "TopCat.Presheaf.Γgerm and germ_exist, but no theorem for locally constant maps",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "germ of a locally constant function determined by its value at a point",
-   "results": "Topology.LocallyConstant.Basic has local constancy operations but no stalk evaluation theorem",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'LocallyConstant.*stalk|stalk.*LocallyConstant|locally constant.*germ' Mathlib",
-   "results": "no declaration found",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-closed-pushforward-constant-stalks",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-weil-pbc-locally-constant-germ-evaluation",
-  "worker": "E1",
-  "summary": "Checked the statement against Stacks Definition 006W and Example 007B and split the proof into construction and uniqueness of evaluation, surjectivity by constant maps, and injectivity by restricting two locally constant representatives to a common neighbourhood on which both are constant. The representation and eventual-equality facts for germs are supplied by the existing Mathlib leaf lem-weil-pbc-filtered-colimit-sets-elementwise. Rechecked the three recorded Mathlib search kinds; no theorem identifies this stalk with the fibre for arbitrary topological spaces and sets. No new nodes were needed."
- }
 }
