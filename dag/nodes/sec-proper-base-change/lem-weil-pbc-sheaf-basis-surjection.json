@@ -2,17 +2,85 @@
  "id": "lem-weil-pbc-sheaf-basis-surjection",
  "kind": "statement",
  "title": "A sheaf of sets is covered by extensions of finite constant sheaves on basis opens",
- "statement": "Let $X$ be a topological space, $\\mathcal B$ a basis of its topology, and $\\mathcal F$ a sheaf of sets on $X$ [def-weil-pbc-sites-and-cohomology]. Then there are a set $I$, opens $U_i\\in\\mathcal B$, finite sets $S_i$, and an epimorphism of sheaves $\\coprod_{i\\in I}j_{U_i!}\\underline{S_i}\\to\\mathcal F$, where $j_{U_i!}$ is extension by the empty set [def-weil-pbc-sets-extension-by-empty].",
+ "statement": "Let $X$ be a topological space, $\\mathcal B$ a basis of its topology, and $\\mathcal F$ a sheaf of sets on $X$ [def-weil-pbc-sites-and-cohomology]. Then there are a set $I$, opens $U_i\\in\\mathcal B$, finite sets $S_i$ ($i\\in I$), and a morphism $\\coprod_{i\\in I}j_{U_i!}\\underline{S_i}\\to\\mathcal F$ which is an epimorphism in the category of sheaves of sets on $X$, where $j_{U_i!}\\underline{S_i}$ is the extension by the empty set of the sheaf of locally constant $S_i$-valued maps on $U_i$ [def-weil-pbc-sets-extension-by-empty] and $\\coprod$ is a coproduct in the category of sheaves of sets on $X$ [def-weil-pbc-category-colimit]. (One may take every $S_i$ to be a one-point set.)",
  "source": {
   "document": "literature/stacks-project/modules.tex",
   "place": "Modules, Lemma Tag 0CAH (lemma-surjection), line 2992 and proof: choose basis neighbourhoods of germs and use the adjunction for j_! (00A3)"
  },
  "stmt_deps": [
-  "def-weil-pbc-sets-extension-by-empty"
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sets-extension-by-empty",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (a basis section for every germ).* For $x\\in X$ let $\\mathcal F_x=\\varinjlim_{W\\ni x}\\mathcal F(W)$ be the stalk, the colimit of sets over the open neighbourhoods of $x$ [def-weil-pbc-category-colimit], with germs $t\\mapsto t_x$. Let $I$ be the set of pairs $i=(x,\\sigma)$ with $x\\in X$ and $\\sigma\\in\\mathcal F_x$. For each $i=(x,\\sigma)$ choose an open $W\\ni x$ and $t\\in\\mathcal F(W)$ with $t_x=\\sigma$ (every element of a colimit of sets is the image of an element of some term), then $U_i\\in\\mathcal B$ with $x\\in U_i\\subseteq W$ ($\\mathcal B$ is a basis), and put $s_i=t|_{U_i}\\in\\mathcal F(U_i)$; then $(s_i)_x=t_x=\\sigma$, since the germ of a restriction is the germ. Let $S=\\{*\\}$ be a one-point set and $S_i=S$ for all $i$; it is finite.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAH (label lemma-surjection, line 2992), proof, first two sentences"
+   }
+  },
+  {
+   "text": "*Step 2 (a section is a map from $j_{U!}\\underline S$).* Let $U\\subseteq X$ be open and $s\\in\\mathcal F(U)$. The sheaf $\\underline S_U$ of [def-weil-pbc-sets-extension-by-empty] has $\\underline S_U(V)=\\{c_V\\}$, the single (constant) map $V\\to\\{*\\}$, for every open $V\\subseteq U$, restrictions sending $c_V$ to $c_{V'}$. Setting $\\alpha_V(c_V)=s|_V$ defines a morphism $\\alpha:\\underline S_U\\to\\mathcal F|_U$ of sheaves on $U$ (naturality is $(s|_V)|_{V'}=s|_{V'}$). By part (2) of [lem-weil-pbc-sets-extension-by-empty-adjunction] there is a unique morphism $\\psi:j_{U!}\\underline S\\to\\mathcal F$ with $\\psi\\circ\\theta=\\tilde\\alpha$, where $\\theta:j_{U,p!}\\underline S_U\\to j_{U!}\\underline S$ is the sheafification map and $\\tilde\\alpha_V=\\alpha_V$ for $V\\subseteq U$. Put $e_U=\\theta_U(c_U)\\in(j_{U!}\\underline S)(U)$ (note $(j_{U,p!}\\underline S_U)(U)=\\underline S_U(U)$ as $U\\subseteq U$). Then $\\psi_U(e_U)=\\tilde\\alpha_U(c_U)=\\alpha_U(c_U)=s$. Apply this to each $i\\in I$: we get $\\psi_i:j_{U_i!}\\underline S\\to\\mathcal F$ and $e_i\\in(j_{U_i!}\\underline S)(U_i)$ with $\\psi_{i,U_i}(e_i)=s_i$.",
+   "uses": [
+    "def-weil-pbc-sets-extension-by-empty",
+    "lem-weil-pbc-sets-extension-by-empty-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAH (label lemma-surjection, line 2992), proof, third sentence, citing Sheaves, Lemma Tag 00A3 (sheaves.tex label lemma-j-shriek, line 4549), part (2)"
+   }
+  },
+  {
+   "text": "*Step 3 (the coproduct and the total map).* The family $(j_{U_i!}\\underline S)_{i\\in I}$ is a diagram of sheaves of sets indexed by the discrete category $I$; by [lem-weil-pbc-sheaves-colimit-sheafification] it has a colimit in the category of sheaves of sets on $X$, i.e. a coproduct $\\mathcal C=\\coprod_{i\\in I}j_{U_i!}\\underline S$ with coprojections $\\iota_i:j_{U_i!}\\underline S\\to\\mathcal C$ [def-weil-pbc-category-colimit] (concretely the sheafification of $V\\mapsto\\coprod_i(j_{U_i!}\\underline S)(V)$). By its universal property there is a unique morphism $\\Phi:\\mathcal C\\to\\mathcal F$ with $\\Phi\\circ\\iota_i=\\psi_i$ for all $i\\in I$.",
+   "uses": [
+    "lem-weil-pbc-sheaves-colimit-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAH (label lemma-surjection, line 2992), proof, display: the map from the coproduct over all (x, s)"
+   }
+  },
+  {
+   "text": "*Step 4 ($\\Phi$ is surjective on stalks).* Let $x\\in X$ and $\\sigma\\in\\mathcal F_x$, and let $i=(x,\\sigma)\\in I$; then $x\\in U_i$. The section $c=\\iota_{i,U_i}(e_i)\\in\\mathcal C(U_i)$ satisfies $\\Phi_{U_i}(c)=(\\Phi\\circ\\iota_i)_{U_i}(e_i)=\\psi_{i,U_i}(e_i)=s_i$ by Steps 2 and 3, so the stalk map $\\Phi_x:\\mathcal C_x\\to\\mathcal F_x$, $\\Phi_x(c'_x)=(\\Phi_V(c'))_x$, sends $c_x$ to $(s_i)_x=\\sigma$ (Step 1). Hence $\\Phi_x$ is surjective for every $x\\in X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAH (label lemma-surjection, line 2992), proof, last sentence: 'is surjective on stalks'"
+   }
+  },
+  {
+   "text": "*Step 5 (epimorphism).* By [lem-weil-pbc-sets-sheaf-epi-iff-stalks], a morphism of sheaves of sets on $X$ that is surjective on all stalks is an epimorphism in the category of sheaves of sets on $X$; so $\\Phi:\\coprod_{i\\in I}j_{U_i!}\\underline{S_i}\\to\\mathcal F$ (with $U_i\\in\\mathcal B$ and $S_i=\\{*\\}$ finite) is the required epimorphism.",
+   "uses": [
+    "lem-weil-pbc-sets-sheaf-epi-iff-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma Tag 0CAH (label lemma-surjection, line 2992), proof, last sentence: 'and hence surjective', via Sheaves, Lemma Tag 007T (label lemma-points-exactness), part (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sets-extension-by-empty",
+  "lem-weil-pbc-sets-extension-by-empty-adjunction",
+  "lem-weil-pbc-sets-sheaf-epi-iff-stalks",
+  "lem-weil-pbc-sheaves-colimit-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma Tag 0CAH (label lemma-surjection, line 2992), proof; Sheaves, Lemmas Tag 00A3 (lemma-j-shriek) and Tag 007T (lemma-points-exactness)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +102,31 @@
    "results": "No explicit basis-open j_! finite-constant surjection; only abstract freeYoneda/isSeparator declarations.",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every sheaf of sets is a quotient of a coproduct of extensions by empty of constant sheaves on basic opens",
+   "results": "CategoryTheory.Sheaf.instHasFiniteCoproducts (Sites.Limits), SheafOfTypes.finitary_extensive, instIsRegularEpiCategorySheafType, constantSheaf, TopCat.Sheaf; no extension-by-empty or basis-generated epimorphism",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "epimorphism from a coproduct of representable sheaves of basis opens onto a sheaf of types on a topological space",
+   "results": "PresheafIsGeneratedBy.of_epi, PresheafOfModules.instEpiFromFreeYonedaCoproduct, SheafOfModules.GeneratingSections.epi, Sheaf.toImage epi; none for sheaves of types with j_! of constant sheaves on basis opens",
+   "date": "2026-10-10",
+   "verdict": "no match (the presheaf-of-modules free-Yoneda epimorphism is the analogue for modules on all opens, not this)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'extendByEmpty\\|extension by the empty\\|ExtendByEmpty' Mathlib/; grep -rn 'fromFreeYonedaCoproduct' Mathlib/CategoryTheory/Sites Mathlib/Topology/Sheaves",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no extension by the empty set for sheaves of sets"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +147,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "L (2026-10-10): removed a proof-hint sentence from the statement (and its germ calculation is [lem-weil-pbc-sets-extension-by-empty-adjunction])."
+ "lead_note": "L (2026-10-10): removed a proof-hint sentence from the statement (and its germ calculation is [lem-weil-pbc-sets-extension-by-empty-adjunction]).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sheaf-basis-surjection",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Modules 0CAH (modules.tex line 2992) and its proof; wrote it in five steps: basis representatives of all germs (S_i a one-point set), the adjunction of lem-weil-pbc-sets-extension-by-empty-adjunction (2) turning each section into a map j_{U!}{*} -> F hitting it (computed through theta, so the stalk part (3) is not needed), the coproduct from lem-weil-pbc-sheaves-colimit-sheafification (Sheaves 009E) and the induced map, surjectivity on stalks by composition, and epimorphism from the new Mathlib leaf lem-weil-pbc-sets-sheaf-epi-iff-stalks (Sheaves 007T(2)/0H7H(2); CategoryTheory.Sheaf.isLocallySurjective_iff_epi + TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks). Statement made precise: 'epimorphism in the category of sheaves of sets on X' (the categorical sense used by the citer through lem-weil-pbc-sheaf-surjection-kernel-pair-coequalizer) and the coproduct in that category; stmt_deps gained def-weil-pbc-sites-and-cohomology (cited in the text, missing) and def-weil-pbc-category-colimit. Item searched again with leansearch, leanfinder and grep: no Mathlib match (Mathlib has no j_! for sheaves of sets)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 0CAH: a basis section for every germ, a section as a map from j_{U!}{*} by the adjunction node (2), the coproduct via the colimit-sheafification node, surjectivity on stalks, epimorphism by the new leaf (epi in sheaves of sets iff surjective on stalks; Mathlib lines verified by L). Statement sharpened (epimorphism in the category of sheaves of sets; S_i may be singletons)."
+ }
 }
