@@ -1,0 +1,84 @@
+{
+ "id": "lem-sc-p1-derived-connecting-extclass",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 2: compatibility of the cohomology connecting map with composition by the boundary class",
+   "via": [
+    "lem-sc-p1-duality-pairing-naturality",
+    "lem-sc-p1-boundary-one-extension-class"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived-category connecting morphism is composition with the extension class",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian] with a derived category and Ext as in [def-pc-ext], let $S:0\\to X_1\\to X_2\\to X_3\\to0$ be short exact, let $Y$ be an object, and let $x\\in\\operatorname{Ext}^n_{\\mathcal C}(Y,X_3)$ with $n+1=m$. Under the derived-category identification of Ext with morphisms from $Y[0]$, the connecting morphism at degree $n$ in the long exact homology sequence of the distinguished triangle associated to $S$ sends the morphism representing $x$ to the morphism representing the Yoneda composite $[S]\\circ x\\in\\operatorname{Ext}^{m}_{\\mathcal C}(Y,X_1)$ (first $x$, then $[S]$; Mathlib's x.comp [S]), where $[S]\\in\\operatorname{Ext}^1_{\\mathcal C}(X_3,X_1)$ is the extension class.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Ext long exact sequence, compared with Mathlib's preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply (Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean:49-56)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-pc-ext"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Ext long exact sequence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "in an abelian category the covariant Ext connecting morphism for a short exact sequence is composition with its extension class",
+   "results": "CategoryTheory.Abelian.Ext.covariant_sequence_exact₃ (Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences), CategoryTheory.ShortComplex.ShortExact.extClass_hom (Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass); declaration preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply gives the connecting morphism as x.comp hS.extClass",
+   "date": "2026-10-11",
+   "verdict": "match: preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply"
+  },
+  {
+   "tool": "loogle",
+   "query": "preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, extClass_hom",
+   "results": "0 hits; unknown identifier preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply",
+   "date": "2026-10-11",
+   "verdict": "no match (Loogle unavailable for this declaration)"
+  },
+  {
+   "tool": "grep",
+   "query": "preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply",
+   "results": "0 hits from msearch grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homologySequenceδ|extClass_hom|covariant_sequence_exact",
+   "results": "0 hits from msearch grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply in slopmaster2 mathlib",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean:49-56, conclusion (x.comp hS.extClass h).hom",
+   "date": "2026-10-11",
+   "verdict": "match (reviewer R-ecy1902)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean",
+  "line": 49,
+  "how": "exact at lines 49-56: identifies the derived-category connecting morphism with x.comp hS.extClass"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-p1-ext-connecting-yoneda",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality"
+}

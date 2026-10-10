@@ -23,8 +23,40 @@
   "def-sc-ext-sheaf",
   "lem-sc-p1-ext-yoneda-functoriality"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Choose an injective-resolution model for the Ext groups in [def-sc-ext-sheaf]. Its long exact sequence in the second variable supplies the connecting map in the statement. By [lem-sc-p1-ext-resolution-derived-connecting], the canonical comparison with the derived-category Ext model identifies this resolution connecting map with the homology connecting morphism of the distinguished triangle attached to the short exact sequence; the degree-zero identification of a morphism s with its Ext^0 class is the one in [def-sc-ext-sheaf].",
+   "uses": [
+    "def-sc-ext-sheaf",
+    "lem-sc-p1-ext-resolution-derived-connecting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XQ, 06XR and 05TE: injective-resolution Ext, derived Ext, and the long exact sequence of a right derived functor"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-derived-connecting-extclass] in the abelian category of $\\mathcal O_X$-modules to the distinguished triangle attached to $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$, with $Y=\\mathcal F$, $n=0$, and the Ext^0 class represented by $s$. It identifies the connecting morphism with the derived composite $\\delta\\circ s$. By [lem-sc-ext-yoneda-composition-derived] this derived composite is precisely the Yoneda composite $\\delta\\circ s$ under the convention of the statement. Transporting across Step 1 gives the asserted value of the resolution-Ext connecting map.",
+   "uses": [
+    "lem-sc-p1-derived-connecting-extclass",
+    "lem-sc-ext-yoneda-composition-derived",
+    "lem-sc-p1-ext-yoneda-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XP, composition of Ext classes and the connecting morphism of the triangle"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ext-sheaf",
+  "lem-sc-p1-ext-resolution-derived-connecting",
+  "lem-sc-ext-yoneda-composition-derived",
+  "lem-sc-p1-derived-connecting-extclass",
+  "lem-sc-p1-ext-yoneda-functoriality"
+ ],
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -32,15 +64,71 @@
    "results": "CategoryTheory.Abelian.Ext.covariant_sequence_exact₃, covariant_sequence_exact₁, ShortComplex.ShortExact.extClass_hom; Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean:49 preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply gives the derived-category connecting map as x.comp hS.extClass, but nothing compares it with the injective-resolution connecting map of def-sc-ext-sheaf",
    "date": "2026-10-11",
    "verdict": "partial: derived-category form only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.covariant_sequence_exact, ShortComplex.ShortExact.extClass_hom, connecting morphism",
+   "results": "0 hits; Loogle under load",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "extClass|homologySequence.*connecting|covariant_sequence_exact Mathlib/Algebra/Homology/DerivedCategory/Ext",
+   "results": "0 hits from msearch grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "connecting|extClass|covariant_sequence Mathlib/CategoryTheory/ Mathlib/Algebra/Homology/DerivedCategory/",
+   "results": "0 hits from msearch grep",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext connecting homomorphism is Yoneda composition with the extension class",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-boundary-one-extension-class",
   "by": "reviewer",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XP and 05TE, connecting morphism in the Ext long exact sequence"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-ext-connecting-yoneda",
+  "worker": "stage1",
+  "summary": "Split the resolution-Ext connecting formula into (1) transport from the injective-resolution long exact sequence to the derived-category triangle and (2) application of the generic derived connecting identity followed by the Yoneda/derived composition identification. Added the generic derived identity as a Mathlib leaf after the required searches.",
+  "blueprint": [
+   "thm-sc-p1-duality proof, Step 2: compatibility of the cohomology connecting map with composition by the boundary class"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Step 1 uses the generic right-derived delta-functor construction to identify the resolution connecting map with the derived-triangle connecting morphism."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ecy1902",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecy1902 (reviewer sub-agent of L); spot-checked: Leaf lem-sc-p1-derived-connecting-extclass read at Mathlib ExactSequences.lean:49-56 (exact, one declaration; x.comp hS.extClass). Step 1 new unsplit comparison node is a real lemma, not a duplicate of the 05TE/06XR nodes; no cycle with F1 parent (new nodes depend only on generic defs). FIX more, RETURN less: (1) B3/E leaf statement wrote x∘[S], ill-typed in the project's classical Yoneda order (lem-sc-ext-yoneda-composition-derived); corrected to [S]∘x with Mathlib's diagrammatic x.comp [S] named, search record added; (2) C7 declared tool_use lem-weil-pbc-right-derived-universal-delta-functor is cited in no step: dropped.; 1 file(s) fixed by the reviewer"
+ }
 }
