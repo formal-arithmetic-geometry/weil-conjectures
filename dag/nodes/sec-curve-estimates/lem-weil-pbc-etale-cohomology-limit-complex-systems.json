@@ -25,9 +25,63 @@
   "def-weil-pbc-etale-cohomology",
   "lem-weil-pbc-inverse-image-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal F^\\bullet=\\varinjlim_i f_i^{-1}\\mathcal F_i^\\bullet$ termwise. For every pair of integers $(p,n)$, apply the sheaf continuity theorem [lem-weil-pbc-etale-cohomology-limit-of-schemes] to the system of sheaves $\\mathcal F_i^n$ and its compatible transition maps. Its hypotheses are exactly the quasi-compact quasi-separated stages, affine transitions, and the colimit sheaf $\\mathcal F^n$, so it gives a canonical isomorphism $\\varinjlim_i H^p((X_i)_{\\Et},\\mathcal F_i^n)\\cong H^p(X_{\\Et},\\mathcal F^n)$.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0EZM, proof lines 7794-7802, invoking Theorem Tag 09YQ"
+   }
+  },
+  {
+   "text": "Use [thm-sp-if-e1] with the global-sections functor, as identified for etale sheaves by [def-sp-etale-dictionary] and for complexes by [def-sp-kinjective-bridge]. Its indexing is $E_{1,i}^{p,q}=H^p((X_i)_{\\Et},\\mathcal F_i^q)$ and $E_1^{p,q}=H^p(X_{\\Et},\\mathcal F^q)$: $p$ is the cohomological degree and $q$ is the filtration degree. The comparison [lem-weil-pbc-complex-spectral-sequence-comparison] has four hypotheses. (i) Step 1 gives $\\varinjlim_i E_{1,i}^{p,q}\\cong E_1^{p,q}$ for every $p,q$, and [lem-weil-pbc-hypercohomology-e1-pullback-functorial] identifies this with the map of $E_1$ pages. (ii) Each row resolution starts in cohomological degree $p=0$, while $\\mathcal F_i^q=\\mathcal F^q=0$ for $q<a$, so all $E_1$ terms vanish for $p<0$ or $q<a$. (iii) In total degree $n$, only $a\\leq q\\leq n$ and $p=n-q\\geq0$ occur, uniformly in $i$; these bounds force stabilization of each page entry. (iv) The filtration by the second degree in [thm-sp-if-e1] and its finite-filtration convergence [thm-sp-spectral-object-yields] give $F^qA_i^n=A_i^n$ and $F^qA^n=A^n$ for $q\\leq a$, zero for $q>n$, and $E_\\infty^{p,q}=\\operatorname{gr}^q A^{p+q}$ (similarly at each stage). The functoriality node supplies the compatible spectral-sequence maps, filtered abutment maps, and graded compatibility. Thus the comparison node gives $\\varinjlim_i A_i^n\\cong A^n$.",
+   "uses": [
+    "thm-sp-if-e1",
+    "def-sp-etale-dictionary",
+    "def-sp-kinjective-bridge",
+    "thm-sp-spectral-object-yields",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+    "lem-weil-pbc-complex-spectral-sequence-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0EZM, proof lines 7803-7823; Derived Categories Lemma Tag 015J"
+   }
+  },
+  {
+   "text": "By [def-sp-kinjective-bridge] and [def-weil-pbc-etale-cohomology], the abutments $A_i^n$ and $A^n$ of Step 2 are $H^n((X_i)_{\\Et},\\mathcal F_i^\\bullet)$ and $H^n(X_{\\Et},\\mathcal F^\\bullet)$ defined by derived global sections. For a transition $f_{i'i}$ use the pair $(f_{i'i},\\varphi_{i'i})$ in [lem-weil-pbc-hypercohomology-e1-pullback-functorial]; for the map to $X$ use $(f_i,\\iota_i)$, where $\\iota_i:f_i^{-1}\\mathcal F_i^\\bullet\\to\\mathcal F^\\bullet$ is the colimit coprojection. The identity and composition clauses of that node, together with the cocycle condition in the statement, show that these give the compatible transition and target maps required in Step 2. Its abutment clause identifies each $b_i^n$ with the canonical derived pullback map, so the isomorphism from Step 2 is exactly the displayed one.",
+   "uses": [
+    "def-sp-kinjective-bridge",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-hypercohomology-e1-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0EZM, proof lines 7823-7828"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "thm-sp-if-e1",
+  "def-sp-etale-dictionary",
+  "def-sp-kinjective-bridge",
+  "thm-sp-spectral-object-yields",
+  "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
+  "lem-weil-pbc-complex-spectral-sequence-comparison",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), lines 7783-7828"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,12 +113,46 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-derived-etale-cohomology-limit",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 0EZM into termwise sheaf continuity, a bounded hypercohomology spectral-sequence comparison over abelian groups, and functorial identification of the canonical abutment map. Created statement-only comparison and pullback-functoriality nodes after searching the DAG, blueprint, Lean source, and Mathlib.",
+  "blueprint": "The ancestor proof sentence requiring complex continuity is realized by Step 1's termwise 09YQ input, Step 2's E1 spectral-sequence comparison, and Step 3's canonical-map identification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+    "why": "The item route needs the generic sheaf continuity theorem 09YQ for every complex degree; the local unit has no replacement for this theorem."
+   },
+   {
+    "node": "thm-sp-if-e1",
+    "why": "The item needs the standard hypercohomology spectral sequences with E1 terms given by sheaf cohomology; this is not supplied by the local unit route."
+   },
+   {
+    "node": "thm-sp-spectral-object-yields",
+    "why": "The generic filtered-complex theorem supplies the finite image filtration and convergence used to compare abutments; the local unit has no spectral-sequence convergence node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "thm-sp-if-e1",
+  "thm-sp-spectral-object-yields"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ecs2",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecs2 (reviewer sub-agent of L); spot-checked: Repaired re-push after return 15:44 (1dedc4992). Return points: (1) lem-weil-pbc-complex-spectral-sequence-comparison now in Ab with directed transitions u_{i'i}, targets v_i, filtered abutment maps compatible with E_infty=gr^q, uniform vanishing region p<0 or q<a and uniform filtration bounds; checked true: colimits exact in Ab give colim E_{r,i}=E_r for all r, the region p>=0,q>=a with d_r of bidegree (1-r,r) forces stabilization uniformly in i, then induction on the finite filtration a<=q<=n with the five lemma gives colim A_i^n=A^n; (2) indexing fixed to that of thm-sp-if-e1 (E_1^{p,q}=R^p v(K^q), filtration by the second degree q), step 2 checks (i)-(iv) one by one; (iv) via thm-sp-spectral-object-yields (b) applied to the filtration by the second degree, a renaming of indices; F^q Tot^n=Tot^n for q<=a and 0 for q>n since rows start at p=0; (3) new node lem-weil-pbc-hypercohomology-e1-pullback-functorial (pair (f,u) induces a morphism of the thm-sp-if-e1 spectral sequences, E_1 map = H^p(u^q) o f^*, abutment map the canonical derived pullback, filtered and compatible with gr, identity/composition laws) - true by functoriality of Cartan-Eilenberg resolutions under exact f^{-1}; cited in steps 2 and 3, with (f_{i'i},phi_{i'i}) and (f_i, coprojection) giving the transition and target maps, cocycle condition giving the composition laws; def-sp-etale-dictionary, def-sp-kinjective-bridge, def-weil-pbc-etale-cohomology identify the abutment; (4) false created.item claim and citations.json mention removed. Step 1 (lem-weil-pbc-etale-cohomology-limit-of-schemes degreewise, its maps pullback+phi+coprojection = the E_1 map of (f_i,iota_i)) unchanged and right; item statement unchanged against 0EZM. tool_uses lem-weil-pbc-etale-cohomology-limit-of-schemes, thm-sp-if-e1, thm-sp-spectral-object-yields accepted as generic tools. Small cases: constant system, zero complexes, complex concentrated in degree a (reduces to 09YQ). FIX: dag/nodes/sec-curve-estimates/lem-weil-pbc-complex-spectral-sequence-comparison.json and lem-weil-pbc-hypercohomology-e1-pullback-functorial.json: lean_audit: added {master: none, slopmaster2: none} (point 4 of the return left unrepaired; created.by/date are filled by the merge); the report's sentence claiming these fields are present was inaccurate. Start 15:55:50 UTC Sat Oct 10 2026, end Sat Oct 10 03:57:01 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
