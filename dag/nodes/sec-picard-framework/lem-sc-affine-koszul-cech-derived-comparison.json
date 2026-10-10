@@ -21,11 +21,51 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-derived-category",
-  "def-weil-pbc-koszul-complex"
+  "def-weil-pbc-koszul-complex",
+  "def-pur-hom-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the affine module/sheaf identification, write $M^\\bullet=\\Gamma(X,\\mathcal F^\\bullet)$. For each $e$, the shifted Koszul complex $I^\\bullet(f_1^e,\\ldots,f_r^e)$ is bounded and finite free. The transition $I^\\bullet(f_1^{e+1},\\ldots,f_r^{e+1})\\to I^\\bullet(f_1^e,\\ldots,f_r^e)$ multiplies the basis vector indexed by a subset $J$ by $\\prod_{j\\in J}f_j$; precomposition gives the filtered system of Hom complexes. The Koszul-to-alternating-Cech map sends a cochain to the corresponding localized cochains, and this multiplication makes these maps commute with the transition maps and with the Koszul and Cech differentials. By [lem-sc-affine-koszul-hom-alternating-cech], the induced map from $\\varinjlim_e\\operatorname{Hom}_A^\\bullet(I^\\bullet(f_1^e,\\ldots,f_r^e),M^\\bullet)$ to the alternating Cech total complex with $p$-th row $\\prod_{i_0<\\cdots<i_p}M^\\bullet_{f_{i_0}\\cdots f_{i_p}}$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-affine-koszul-hom-alternating-cech"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D1, Koszul-to-alternating-Cech comparison"
+   }
+  },
+  {
+   "text": "Let $\\mathcal U:U=\\bigcup_{i=1}^rD(f_i)$. It is a finite open covering, and $D(f_{i_0})\\cap\\cdots\\cap D(f_{i_p})=D(f_{i_0}\\cdots f_{i_p})$ is affine, isomorphic to $\\operatorname{Spec}(A_{f_{i_0}\\cdots f_{i_p}})$ (Stacks Tag 01HS). The restriction $\\mathcal F^\\bullet|_U$ is a complex of quasi-coherent $\\mathcal O_U$-modules, with no boundedness assumption. Hence [lem-sc-qcoh-complex-alternating-cech-derived-sections] applies to $U$, $\\mathcal U$ and $\\mathcal F^\\bullet|_U$: the canonical map $\\operatorname{Tot}(\\check{\\mathcal C}^\\bullet_{\\mathrm{alt}}(\\mathcal U,\\mathcal F^\\bullet|_U))\\to R\\Gamma(U,\\mathcal F^\\bullet)$ is an isomorphism in $D(\\Gamma(U,\\mathcal O_U))$, hence in $D(A)$ via $A\\to\\Gamma(U,\\mathcal O_U)$, functorially in $\\mathcal F^\\bullet$.",
+   "uses": [
+    "lem-sc-qcoh-complex-alternating-cech-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D2, alternating-Cech complex computes cohomology (via Cohomology, Lemma 08C2 and Cohomology of Schemes, Lemma 01XB)"
+   }
+  },
+  {
+   "text": "For each $i_0<\\cdots<i_p$, since $\\mathcal F^q\\cong\\widetilde{M^q}$ on the affine scheme $X$ (Stacks Tag 01IA), the sections over $D(f_{i_0}\\cdots f_{i_p})$ are $\\Gamma(D(f_{i_0}\\cdots f_{i_p}),\\widetilde{M^q})=M^q_{f_{i_0}\\cdots f_{i_p}}$ (Stacks Tag 01HV). Restriction from a larger principal intersection is the canonical localization map, so these identifications commute term by term with every Cech face map and with the differentials of $M^\\bullet$, hence identify $\\operatorname{Tot}(\\check{\\mathcal C}^\\bullet_{\\mathrm{alt}}(\\mathcal U,\\mathcal F^\\bullet|_U))$ with the module total complex of step 1. Composing the quasi-isomorphism of step 1 with the isomorphism of step 2 gives the canonical map of the item, which is therefore a quasi-isomorphism (an isomorphism in $D(A)$). With the empty-cover convention, $r=0$ gives the zero alternating Cech complex and the corresponding colimit is zero; if $\\mathcal F^\\bullet=0$, both complexes are zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D2, identification of affine sections with localizations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-koszul-hom-alternating-cech",
+  "lem-sc-qcoh-complex-alternating-cech-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Reconstruction of the arguments referenced by Tags 08D1 and 08D2; source packet unavailable locally"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +90,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-open-represent-cohomology",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-koszul-cech-derived-comparison",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states this comparison. I created the module-level Koszul Hom to alternating-Cech quasi-isomorphism as the sole new non-elementary node, then used the existing alternating Cech resolution, derived acyclic-resolution theorem, K-injective resolutions, and affine derived equivalence to identify the resulting total complex with derived sections. The empty-cover and zero-complex edge cases are recorded explicitly. Reviewer R-kcd3129: the complex-level Cech-to-derived comparison (unbounded complexes, Stacks 08D2/08C2) is now the statement-only node lem-sc-qcoh-complex-alternating-cech-derived-sections instead of the single-module Cech-resolution and bounded acyclic-resolution nodes.",
+  "blueprint": "Realizes lem-sc-finite-duality's proof clause ‘compare the Koszul Hom complexes with the alternating Cech complex and derived sections on the principal-open cover’ through the new module comparison and the existing Cech-resolution machinery.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kcd3129",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kcd3129 (reviewer sub-agent of L); spot-checked: Item = Perfect 08D1 + 08D2 (Koszul colimit vs alternating Cech, then Cech vs RGamma), both claimed and composed (C4 ok). New node lem-sc-affine-koszul-hom-alternating-cech read against 08D1 (Stacks gives an isomorphism of complexes; quasi-iso is weaker, true); no existing node states it (grep of Koszul/I^bullet nodes; lem-sc-affine-perfect-koszul-principal-unit only defines I_e and u_e), not (b)/(c)/(d). Cases r=0, F=0 checked. FIX more, RETURN less: (1) step 2, C1/C4/E7: lem-pc-cech-resolution and lem-pc-derived-acyclic-resolution are single-module/bounded statements and lem-weil-pbc-leray-acyclicity-quasi-iso is bounded below, while F^bullet representing E in D_QCoh is unbounded; the 'K-injective degreewise' sentence was an unsupported step and affine vanishing (01XB) was uncited; replaced by new statement-only node lem-sc-qcoh-complex-alternating-cech-derived-sections (Cohomology 08C2 with B=affine opens, hypothesis (3) by 01XB; finite cover, affine intersections, unbounded quasi-coherent complex), affine D(f_J) by Tag 01HS; dropped the four tool uses no longer cited; Mathlib grep recorded, no match. (2) step 1, B4: plain-text arrow and names rewritten in TeX, citation made inline. (3) step 3, C4: lem-pc-affine-qcoh-derived-equivalence does not state Gamma(D(g),M~)=M_g; elementary step now names Tags 01IA/01HV and composes steps 1-2. Second reading by E1 missed (1).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }

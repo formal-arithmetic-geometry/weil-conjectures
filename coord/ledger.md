@@ -2968,3 +2968,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:28 L: merged deliver/F1/lem-pc-finite-support-hi (reviewer FIX; after a return; new nodes: 0)
 - 23:28 L: merged deliver/K1/lem-pc-sites-sheaf-tensor-bilinear-universal (reviewer PASS; first push; new nodes: 0)
 - 23:29 L: merged deliver/F1/lem-sc-affine-truncation-kernel-finite-locally-free (reviewer FIX; first push; new nodes: 1)
+- 23:30 L: merged deliver/E1/lem-sc-affine-koszul-cech-derived-comparison (reviewer FIX+NODE(1); first push; new nodes: 2)
