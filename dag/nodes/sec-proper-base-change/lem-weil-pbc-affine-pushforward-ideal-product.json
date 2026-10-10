@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-affine-pushforward-ideal-product",
+ "kind": "statement",
+ "title": "For an affine morphism, an ideal times a direct image is the direct image of the pulled-back ideal times the module",
+ "statement": "Let $f:Y\\to X$ be an affine morphism of schemes [pqf-def-affine-morphism], $\\mathcal F$ a quasi-coherent $\\mathcal O_Y$-module and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals [pqf-def-coherent]. Let $f_*$ and $f^*$ be the direct image and pullback of modules [def-pc-module-pullback], and $\\epsilon_f:f^*\\mathcal O_X\\to\\mathcal O_Y$ the morphism adjoint to $f^\\sharp$ [lem-weil-pbc-module-pullback-structure-sheaf]. Define $f^{-1}\\mathcal I\\cdot\\mathcal F\\subseteq\\mathcal F$ as the image of the composite $f^*\\mathcal I\\otimes_{\\mathcal O_Y}\\mathcal F\\to f^*\\mathcal O_X\\otimes_{\\mathcal O_Y}\\mathcal F\\to\\mathcal O_Y\\otimes_{\\mathcal O_Y}\\mathcal F\\to\\mathcal F$ (pullback of the inclusion $\\mathcal I\\subseteq\\mathcal O_X$, then $\\epsilon_f\\otimes\\mathrm{id}$, then multiplication; tensor products as in [def-pur-sheaf-tensor-product]), and $\\mathcal I\\cdot f_*\\mathcal F\\subseteq f_*\\mathcal F$ as the image of the multiplication map $\\mathcal I\\otimes_{\\mathcal O_X}f_*\\mathcal F\\to f_*\\mathcal F$. Then (1) $f^{-1}\\mathcal I\\cdot\\mathcal F$ is a quasi-coherent sub-$\\mathcal O_Y$-module of $\\mathcal F$; (2) $\\mathcal I\\cdot f_*\\mathcal F=f_*(f^{-1}\\mathcal I\\cdot\\mathcal F)$ as sub-$\\mathcal O_X$-modules of $f_*\\mathcal F$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YP (label lemma-affine-morphism-projection-ideal, coherent.tex line 3523): clause (2) is the statement; clause (1) is said in the first paragraph of its proof and is used as a fact by Lemma 01YQ ('as pointed out in the proof of Lemma ...'), so it is stated here"
+ },
+ "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine morphism pushforward of ideal times quasi-coherent module equals pushforward of inverse image ideal times module",
+   "results": "IsAffineHom.mk, isAffineHom_isStableUnderBaseChange (Morphisms.Affine), Scheme.IdealSheafData.ideal_map_of_isAffineHom, IdealSheafData.map_mono, IdealSheafData.ideal_map (IdealSheaf.Functorial), Scheme.Modules.pushforward, pushforward_map_app (Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine morphism f : Y -> X, a quasi-coherent ideal I on X and quasi-coherent F on Y, I * f_* F = f_*(f^{-1}I * F)",
+   "results": "Scheme.IdealSheafData.ideal_map, ideal_map_of_isAffineHom, ideal_comap_of_isOpenImmersion, comap_map_le (IdealSheaf.Functorial), IdealSheafData.map_ideal, map_ideal' (IdealSheaf.Basic): ideal sheaves only, no product of an ideal sheaf with a module",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.IsAffineHom",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Submodule\\|smul\\|ideal' Mathlib/AlgebraicGeometry/Modules/*.lean; sed -n 566,567p Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "results": "no product of an ideal sheaf and a module; Tilde.lean:566-567 records as a TODO that even quasi-coherence of the direct image along an affine morphism is not in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Cohomology of Schemes 01YP; clause (1) (quasi-coherence of f^{-1}I.F) is from the proof of 01YP and is used as a fact by 01YQ, so it is part of the statement. Unsplit."
+}

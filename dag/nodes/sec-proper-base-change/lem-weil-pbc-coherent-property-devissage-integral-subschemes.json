@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+ "kind": "statement",
+ "title": "Devissage of a property of coherent sheaves over the integral closed subschemes of a Noetherian scheme",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], i.e. locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions], and let $\\mathcal P$ be a property of coherent $\\mathcal O_X$-modules [pqf-def-coherent]. For a sheaf of ideals $\\mathcal J\\subseteq\\mathcal O_X$ and an $\\mathcal O_X$-module $\\mathcal G$ [def-weil-sheaf-of-modules-category] let $\\mathcal J\\mathcal G\\subseteq\\mathcal G$ be the image of the multiplication map $\\mathcal J\\otimes_{\\mathcal O_X}\\mathcal G\\to\\mathcal G$ [def-pur-sheaf-tensor-product]; stalks $\\mathcal G_x$ are as in [def-weil-pbc-module-stalk], $\\mathfrak m_x\\subset\\mathcal O_{X,x}$ is the maximal ideal of the local ring [def-weil-residue-field], and $\\operatorname{Supp}(\\mathcal G)=\\{x\\in X:\\mathcal G_x\\neq0\\}$ [def-weil-pbc-closed-subset-proper-over-base](2). Assume: (1) for every short exact sequence $0\\to\\mathcal F_1\\to\\mathcal F\\to\\mathcal F_2\\to0$ of coherent $\\mathcal O_X$-modules, if $\\mathcal F_1$ and $\\mathcal F_2$ have $\\mathcal P$ then so has $\\mathcal F$; (2) if $\\mathcal F$ is coherent and $\\mathcal P$ holds for $\\mathcal F^{\\oplus r}$ for some $r\\ge1$, then $\\mathcal P$ holds for $\\mathcal F$; (3) for every closed immersion $i:Z\\to X$ [def-weil-closed-immersion] with $Z$ an integral scheme [def-pc-integral-scheme] and every point $\\xi\\in X$ whose closure $\\overline{\\{\\xi\\}}$ is $i(Z)$ (the generic point of $Z$), there is a coherent $\\mathcal O_X$-module $\\mathcal G$ such that (a) $\\operatorname{Supp}(\\mathcal G)=i(Z)$, (b) $\\mathfrak m_\\xi\\mathcal G_\\xi=0$, and (c) for every quasi-coherent sheaf of ideals $\\mathcal J\\subseteq\\mathcal O_X$ with $\\mathcal J_\\xi=\\mathcal O_{X,\\xi}$ there is a coherent sub-$\\mathcal O_X$-module $\\mathcal G'\\subseteq\\mathcal J\\mathcal G$ with $\\mathcal G'_\\xi=\\mathcal G_\\xi$ (as submodules of $\\mathcal G_\\xi$) such that $\\mathcal P$ holds for $\\mathcal G'$. Then $\\mathcal P$ holds for every coherent $\\mathcal O_X$-module.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YM (label lemma-property-higher-rank-cohomological, coherent.tex line 3425); Stacks writes 'quasi-coherent subsheaf G' of JG' in (3)(c), which on the Noetherian X is the same as a coherent one"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "property of coherent sheaves on Noetherian scheme holds for all coherent sheaves by devissage over integral closed subschemes",
+   "results": "IsLocallyNoetherian.rec, IsLocallyArtinian.rec, IsNoetherian.toIsLocallyNoetherian, IsNoetherian.noetherianSpace (Mathlib.AlgebraicGeometry.Noetherian), SheafOfModules.IsQuasicoherent.casesOn, SheafOfModules.IsFinitePresentation.mk (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent), IsIntegralHom.casesOn",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a property of coherent sheaves on a Noetherian scheme is closed under extensions, direct summands, and holds for suitable sheaves supported on each integral closed subscheme, then it holds for all coherent sheaves",
+   "results": "IsLocallyNoetherian, IsNoetherian, isNoetherian_iff_of_finite_iSup_eq_top, IsLocallyNoetherian.component_noetherian, isLocallyNoetherian_iff_of_iSup_eq_top (Mathlib.AlgebraicGeometry.Noetherian), SheafOfModules.IsFiniteType (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlniE 'serre|cohomolog' Mathlib/AlgebraicGeometry; grep -rniE 'devissage|coherent' Mathlib/AlgebraicGeometry; grep -rln 'IsQuasicoherent|IsCoherent' Mathlib",
+   "results": "only Sites/BigZariski.lean and Sites/ElladicCohomology.lean mention cohomology (no cohomology of O_X-modules); no coherent sheaves on schemes (only SheafOfModules.IsQuasicoherent in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean and Modules/Tilde.lean); no devissage",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Cohomology of Schemes 01YM stated in full; 'quasi-coherent subsheaf G' of JG' rendered as coherent, the same on a Noetherian scheme since P is a property of coherent modules. Unsplit."
+}

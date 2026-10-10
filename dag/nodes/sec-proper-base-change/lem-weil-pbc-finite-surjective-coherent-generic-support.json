@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-finite-surjective-coherent-generic-support",
+ "kind": "statement",
+ "title": "A finite surjective morphism to a locally Noetherian scheme gives a coherent sheaf whose pushforward is supported on a given integral closed subscheme",
+ "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-pc-scheme] which is finite [def-weil-finite-integral-morphism] and surjective [def-weil-surjective-morphism], with $X$ locally Noetherian [pqf-def-locnoeth]. Let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion] with $Z$ an integral scheme [def-pc-integral-scheme], and let $\\xi\\in X$ be the point whose closure $\\overline{\\{\\xi\\}}$ is $i(Z)$ (the generic point of $Z$). Then there is a coherent $\\mathcal O_Y$-module $\\mathcal F$ [pqf-def-coherent] such that the direct image $f_*\\mathcal F$, $(f_*\\mathcal F)(U)=\\mathcal F(f^{-1}U)$ [def-pc-module-pullback], satisfies $\\operatorname{Supp}(f_*\\mathcal F)=\\{x\\in X:(f_*\\mathcal F)_x\\neq0\\}=i(Z)$ [def-weil-pbc-closed-subset-proper-over-base](2), with stalks as in [def-weil-pbc-module-stalk], and $\\mathfrak m_\\xi\\,(f_*\\mathcal F)_\\xi=0$, where $\\mathfrak m_\\xi$ is the maximal ideal of $\\mathcal O_{X,\\xi}$ [def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 01YO (label lemma-finite-morphism-Noetherian, coherent.tex line 3479)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite surjective morphism, coherent sheaf whose pushforward has support an integral closed subscheme",
+   "results": "IsFinite.recOn, IsFinite, IsFinite.toIsAffineHom (Mathlib.AlgebraicGeometry.Morphisms.Finite), Surjective, Surjective.mk (Morphisms.UnderlyingMap), IsIntegralHom, isClosedImmersion_iff, Scheme.Modules.instFullPushforward (Mathlib.AlgebraicGeometry.Modules.Sheaf)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a finite surjective morphism Y -> X with X locally Noetherian and an integral closed subscheme Z of X with generic point xi, there is a coherent sheaf on Y whose pushforward has support Z and stalk at xi killed by the maximal ideal",
+   "results": "Scheme.Hom.normalizationDiagram, Scheme.Hom.instIsIntegralNormalization, instIsDominantToNormalization (Mathlib.AlgebraicGeometry.Normalization), instIsDomainCarrierStalk...OfIsIntegral (FunctionField), instIsGermInjectiveOfIsIntegral (SpreadingOut), IsIntegral.component_integral (Properties)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Supp\\|support' Mathlib/AlgebraicGeometry/Modules; grep -rnE 'IsCoherent|coherent' Mathlib/AlgebraicGeometry",
+   "results": "no support of O_X-modules and no coherent O_X-modules in Mathlib/AlgebraicGeometry (Modules/Tilde.lean has only quasi-coherence of tilde)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Cohomology of Schemes 01YO stated in full. Unsplit."
+}
