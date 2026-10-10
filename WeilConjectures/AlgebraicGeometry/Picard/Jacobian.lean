@@ -19,6 +19,8 @@ public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentRepresentable
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
 public import WeilConjectures.AlgebraicGeometry.Regular
@@ -1741,6 +1743,46 @@ lemma specMap_algebraMap_comp_specMap_algebraMap (k K L : Type u) [CommRing k] [
       Spec.map (CommRingCat.ofHom (algebraMap k L)) := by
   rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← IsScalarTower.algebraMap_eq]
 
+/-- Two composites of morphisms which agree induce the same map on sections of a presheaf. -/
+lemma map_map_eq_map_map_of_comp_eq {D : Type*} [Category D] (P : Dᵒᵖ ⥤ Type*)
+    {A B B' E : D} (u : A ⟶ B) (v : B ⟶ E) (u' : A ⟶ B') (v' : B' ⟶ E) (h : u ≫ v = u' ≫ v')
+    (x : P.obj (.op E)) : P.map u.op (P.map v.op x) = P.map u'.op (P.map v'.op x) := by
+  rw [← FunctorToTypes.map_comp_apply, ← FunctorToTypes.map_comp_apply, ← op_comp, ← op_comp, h]
+
+/-- **`Pic^0_{C/k}` is represented at a finite separable level by a descent of `J_s`.** Let `J_s`
+represent the restriction of `Pic^0_{C/k}` to schemes over a separable closure `k_s`. Then there are
+a finite separable subextension `K` of `k_s/k` and a `K`-scheme `J_K` with `J_K ×_K k_s ≅ J_s`,
+through a projection `q : J_s ⟶ J_K`, such that `J_K` represents the restriction of
+`Pic^0_{C/k}` to schemes over `K` compatibly with `q`: a point `a` of `J_s` and the point `q ∘ a`
+of `J_K` classify the same section of `Pic^0_{C/k}`.
+
+This is the content of `cor-pd-finite-level` and Step 7 at the finite level: `J_s` and its
+canonical descent datum, being of finite presentation, are defined over a finite separable
+subextension (Stacks 01ZM), and the descended scheme represents `Pic^0_{C/k}` over `K`. -/
+theorem exists_intermediateField_representableBy {ks : Type u} [Field ks] [Algebra k ks]
+    [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (Js : Over (Spec (.of ks)))
+    (rs : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy Js) :
+    ∃ (K : IntermediateField k ks), FiniteDimensional k K ∧ Algebra.IsSeparable k K ∧
+      ∃ (JK : Over (Spec (.of K))) (q : Js.left ⟶ JK.left)
+        (hq : IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks))))
+        (rK : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).op ⋙
+          (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy JK),
+        ∀ {T : Scheme.{u}} (f : T ⟶ Spec (.of ks)) (a : Over.mk f ⟶ Js),
+          rK.homEquiv (Over.homMk (a.left ≫ q) (by
+            rw [Category.assoc, hq.w, ← Category.assoc, Over.w a]; rfl) :
+              Over.mk (f ≫ Spec.map (CommRingCat.ofHom (algebraMap K ks))) ⟶ JK) =
+            (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+              (Over.homMk (𝟙 T) (by
+                simp [specMap_algebraMap_comp_specMap_algebraMap k K ks]) :
+                (Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj
+                  (Over.mk (f ≫ Spec.map (CommRingCat.ofHom (algebraMap K ks)))) ⟶
+                Over.mk (f ≫ Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op
+              (rs.homEquiv a) :=
+  sorry
+
 /-- **The descent datum is defined at a finite separable level.** Let `C` be a smooth projective
 geometrically integral curve over `k`, let `k_s` be a separable closure of `k` and let `J_s`
 represent the restriction of `Pic^0_{C/k}` to schemes over `k_s`, so that `J_s` carries the
@@ -1769,8 +1811,54 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
         (D : Over.DescentDatum (Spec.map (CommRingCat.ofHom (algebraMap k K))) JK),
         D.IsBaseChange (specMap_algebraMap_comp_specMap_algebraMap k K ks) hq.w
             rs.overDescentDatum ∧
-          ∀ s : Set JK.left, s.Finite → ∃ U : JK.left.Opens, IsAffineOpen U ∧ s ⊆ U :=
-  sorry
+          ∀ s : Set JK.left, s.Finite → ∃ U : JK.left.Opens, IsAffineOpen U ∧ s ⊆ U := by
+  obtain ⟨K, hfin, hsep, JK, q, hq, rK, hc⟩ := exists_intermediateField_representableBy C Js rs
+  refine ⟨K, hfin, hsep, JK, q, hq, rK.overDescentDatum, fun T f₁ f₂ h a ↦ ?_, ?_⟩
+  · -- the canonical datum of `J_K` base changes to that of `J_s`, both being induced by
+    -- `Pic^0_{C/k}`
+    let ιK := Spec.map (CommRingCat.ofHom (algebraMap K ks))
+    have hιK : ιK ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+        Spec.map (CommRingCat.ofHom (algebraMap k ks)) :=
+      specMap_algebraMap_comp_specMap_algebraMap k K ks
+    have h' : (f₁ ≫ ιK) ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) =
+        (f₂ ≫ ιK) ≫ Spec.map (CommRingCat.ofHom (algebraMap k K)) := by
+      rw [Category.assoc, Category.assoc, hιK]
+      exact h
+    let c := rs.overTransport f₁ f₂ h a
+    let a₁ : Over.mk (f₁ ≫ ιK) ⟶ JK := Over.homMk (a.left ≫ q) (by
+      rw [Category.assoc, hq.w, ← Category.assoc, Over.w a]; rfl)
+    let c₁ : Over.mk (f₂ ≫ ιK) ⟶ JK := Over.homMk (c.left ≫ q) (by
+      rw [Category.assoc, hq.w, ← Category.assoc, Over.w c]; rfl)
+    have key : rK.overTransport (f₁ ≫ ιK) (f₂ ≫ ιK) h' a₁ = c₁ := by
+      apply rK.homEquiv.injective
+      rw [Functor.RepresentableBy.homEquiv_overTransport]
+      erw [hc f₁ a, hc f₂ c]
+      simp only [c]
+      rw [Functor.RepresentableBy.homEquiv_overTransport]
+      exact map_map_eq_map_map_of_comp_eq _ _ _ _ _ (by ext; simp) _
+    exact congrArg (·.left) key
+  · -- `J_K` is quasi-projective, since `J_s` is a group scheme of finite type
+    have : IsSepClosed ks := IsSepClosure.sep_closed k
+    have : SmoothOfRelativeDimension 1 (pullback (C ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+      inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd _ _))
+    have : IsProper (pullback (C ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+      inferInstanceAs (IsProper (pullback.snd _ _))
+    have : GeometricallyIntegral (pullback (C ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+      inferInstanceAs (GeometricallyIntegral (pullback.snd _ _))
+    obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
+      (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
+      (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
+    have hP : IsProper Js.hom := isProper_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+    obtain ⟨hG, -⟩ := exists_commGrpObj_isPicardZeroMul _ (rs.ofIso e)
+    obtain ⟨α, _, j, hj, hjf⟩ := GrpObj.exists_isImmersion_projectiveSpace Js
+    have : IsImmersion j := hj
+    obtain ⟨β, _, i, hi, -⟩ := exists_isImmersion_projectiveSpace_of_pullback (k := K) (K := ks)
+      JK.hom (hq.isoPullback.inv ≫ j) (by rw [Category.assoc, hjf, hq.isoPullback_inv_snd])
+    have : IsImmersion i := hi
+    exact fun s hs ↦ exists_isAffineOpen_superset_of_isImmersion i s hs
 
 open Functor.RepresentableBy in
 /-- **`Pic^0_{C/k}` satisfies descent along a field extension.** Let `K/k` be a field extension and

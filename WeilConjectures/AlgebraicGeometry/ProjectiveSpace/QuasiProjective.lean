@@ -110,4 +110,17 @@ theorem exists_isImmersion_projectiveSpace_of_pullback {X : Scheme.{u}} (f : X �
   obtain ⟨ι, hι, 𝒟, h𝒟⟩ := exists_coordinateCover_of_isPullback H ψ' hψ'
   exact 𝒟.exists_isImmersion f h𝒟
 
+/-- **Finite sets of points of a quasi-projective scheme lie in an affine open.** Let `X` be a
+scheme over a field `k` with an immersion `X ⟶ ℙ(α; Spec k)` into a projective space. Then every
+finite set of points of `X` is contained in an affine open subscheme: there is a homogeneous form
+vanishing on the boundary of `X` in its closure but at none of the given points (graded prime
+avoidance), and its non-vanishing locus in `X` is affine.
+
+(Stacks 01ZY) -/
+@[stacks 01ZY]
+theorem exists_isAffineOpen_superset_of_isImmersion {X : Scheme.{u}} {α : Type u} [Finite α]
+    (i : X ⟶ ℙ(α; Spec (.of k))) [IsImmersion i] (s : Set X) (hs : s.Finite) :
+    ∃ U : X.Opens, IsAffineOpen U ∧ s ⊆ U :=
+  sorry
+
 end AlgebraicGeometry
