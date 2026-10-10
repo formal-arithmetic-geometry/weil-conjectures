@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-finite-fp-locnoeth",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite over a locally Noetherian base is finitely presented",
@@ -12,31 +12,88 @@
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/pqf-lem-finite-fp-locnoeth.md",
   "place": "node pqf-lem-finite-fp-locnoeth, order 198"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation"
+ ],
  "proof": [
   {
-   "text": "Let $\\operatorname{Spec}A\\subset S$ be an affine open; $S$ is\nlocally Noetherian in the sense of [pqf-def-locnoeth]. By\n[pqf-lem-affine-open-locnoeth] the ring $A$ is Noetherian, and by\nthe definition of finiteness in\n[def-weil-pbc-scheme-conventions] the preimage\n$p^{-1}(\\operatorname{Spec}A)=\\operatorname{Spec}B$ is affine with\n$B$ a finite $A$-module, in particular a finitely generated\n$A$-algebra. A finitely generated module over a Noetherian ring is\nfinitely presented: choosing a surjection $A^n\\to B$, its kernel is a\nsubmodule of the Noetherian module $A^n$, hence is finitely generated,\nand a finitely generated module with a finite free presentation of\nfinite rank is finitely presented. So $B$ is a finitely presented\n$A$-algebra. Hence every affine open of $S$ is covered by the\nsingle affine open $p^{-1}(\\operatorname{Spec}A)$ of $T$ whose\ncoordinate ring is finitely presented over the coordinate ring of that\naffine open of $S$, and $p$ is quasi-compact because it is affine;\nby [def-weil-pbc-scheme-conventions] the morphism $p$ is of\nfinite presentation.",
+   "text": "By [lem-weil-pbc-finite-iff-integral-lft], finiteness implies that $p$ is locally of finite type. A finite morphism is affine by the finite-morphism convention in [def-weil-pbc-scheme-conventions], hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence](3).",
    "uses": [
-    "pqf-def-locnoeth",
-    "pqf-lem-affine-open-locnoeth",
-    "def-weil-pbc-scheme-conventions"
+    "lem-weil-pbc-finite-iff-integral-lft",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-affine-morphism-permanence"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 29.45.4, Tag 01WJ, and Definition 29.15.1, Tag 01T1"
+   }
+  },
+  {
+   "text": "Apply [pqf-lem-lft-fp-locnoeth] to the locally finite type morphism $p$ and the locally Noetherian target $S$ to obtain that $p$ is locally of finite presentation.",
+   "uses": [
+    "pqf-lem-lft-fp-locnoeth",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicGeometry/Noetherian.lean",
+    "place": "theorem LocallyOfFinitePresentation.iff_locallyOfFiniteType, lines 274--276"
+   }
+  },
+  {
+   "text": "A morphism that is locally of finite presentation, quasi-compact, and quasi-separated is of finite presentation by [def-weil-pbc-scheme-conventions]. Combining Steps 1 and 2 proves the claim.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Definition 29.21.1, Tag 01TP"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-iff-integral-lft",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "pqf-lem-lft-fp-locnoeth",
   "pqf-def-locnoeth",
-  "pqf-lem-affine-open-locnoeth",
-  "def-weil-pbc-scheme-conventions"
+  "def-sbc-locally-finite-presentation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/pqf-lem-finite-fp-locnoeth.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism over locally Noetherian scheme is of finite presentation",
+   "results": "AlgebraicGeometry.LocallyOfFinitePresentation.iff_locallyOfFiniteType (Mathlib/AlgebraicGeometry/Noetherian.lean:275); AlgebraicGeometry.IsFinite.instLocallyOfFiniteType (Mathlib/AlgebraicGeometry/Morphisms/Finite.lean)",
+   "date": "2026-10-11",
+   "verdict": "generalization: together with finite implies locally of finite type and affine implies quasi-compact/quasi-separated"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFinite LocallyOfFinitePresentation",
+   "results": "unknown identifier IsFinite (service returned no hits)",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*presentation in Mathlib/AlgebraicGeometry/Morphisms",
+   "results": "Mathlib/AlgebraicGeometry/Noetherian.lean:275-276; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:100-101",
+   "date": "2026-10-11",
+   "verdict": "generalization: the two declarations supply the locally finite type and Noetherian conversion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +117,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-zmt"
+ "unit": "sk-prop-nagata-sketch-zmt",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-finite-fp-locnoeth",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration states the item. The imported affine chart argument was replaced by a three-step proof: finiteness gives locally finite type and quasi-compact/quasi-separatedness, Mathlib's Noetherian-target equivalence gives locally finite presentation, and the convention for finite presentation combines these properties. One new Mathlib leaf records the Noetherian-target conversion; the existing finite iff integral plus locally finite type leaf supplies the first implication.",
+  "blueprint": "The item is the blueprint node itself; the new leaf realizes the locally finite type to locally finite presentation conversion used in its proof.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ffl2656",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffl2656 (reviewer sub-agent of L); spot-checked: Read packet; no single Mathlib declaration states finite => finite presentation (LFP+qc+qs), so split reviewed. New leaf pqf-lem-lft-fp-locnoeth checked by sed at Mathlib/AlgebraicGeometry/Noetherian.lean:274-276 (LocallyOfFinitePresentation.iff_locallyOfFiniteType, one-line specialization); not a duplicate of ring-level lem-weil-pbc-finite-type-noetherian-finite-presentation. Citers thm-pqf-immersion-descent and lem-weil-pbc-constructible-module-finite-pushforward-embedding use the statement as stated (C4 ok). FIX more, RETURN less: C1 in Step 1 - 'affine implies quasi-compact and quasi-separated' was attributed to def-weil-pbc-scheme-conventions, which only says finite morphisms are affine; now cites existing lem-weil-pbc-affine-morphism-permanence(3), uses/proof_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }

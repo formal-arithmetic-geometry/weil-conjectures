@@ -2715,3 +2715,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:44 L: merged deliver/M1/pqf-lem-qs-intersection-qc (reviewer FIX; first push; new nodes: 1)
 - 21:45 L: merged deliver/E1/lem-pc-fp-complex-descent (reviewer FIX; first push; new nodes: 2)
 - 21:45 L: merged deliver/C1/lem-pc-perfect-thick-closure (reviewer PASS; first push; new nodes: 2)
+- 21:46 L: merged deliver/J1/pqf-lem-finite-fp-locnoeth (reviewer FIX; first push; new nodes: 1)
