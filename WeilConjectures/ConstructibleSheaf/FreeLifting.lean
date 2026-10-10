@@ -215,6 +215,39 @@ theorem flat_freeYoneda (W : X.Etale) :
   exact ObjectProperty.prop_of_iso _ (Sigma.whiskerEquiv Equiv.ulift (fun _ ↦ Iso.refl _))
     (ObjectProperty.flat_coproduct f fun _ ↦ hunit)
 
+/-- **Base change of free sheaves.** For a morphism `g : Y ⟶ X` and an étale `X`-scheme `W`,
+the pullback `g^* Λ[W]` is the free sheaf `Λ[W ×_X Y]` on the base change of `W`: both
+corepresent `F ↦ F(W ×_X Y) = (g_* F)(W)`. -/
+noncomputable def upperStarFreeYonedaIso {Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Etale) :
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj
+        (Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of Λ Λ)) ≅
+      Sheaf.freeYoneda Y.smallEtaleTopology (g.Etale.obj W) (ModuleCat.of Λ Λ) :=
+  let e (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj
+        (Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of Λ Λ)) ⟶ F) ≃
+      (Sheaf.freeYoneda Y.smallEtaleTopology (g.Etale.obj W) (ModuleCat.of Λ Λ) ⟶ F) :=
+    let e₁ := (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).homEquiv
+      (Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of Λ Λ)) F
+    let e₂ := Sheaf.freeYonedaHomEquiv (J := X.smallEtaleTopology) (X := W)
+      (M := ModuleCat.of Λ Λ) (F := (Etale.lowerStar (ModuleCat.{u + 1} Λ) g).obj F)
+    let e₃ := Sheaf.freeYonedaHomEquiv (J := Y.smallEtaleTopology) (X := g.Etale.obj W)
+      (M := ModuleCat.of Λ Λ) (F := F)
+    { toFun f := e₃.symm (e₂ (e₁ f))
+      invFun f := e₁.symm (e₂.symm (e₃ f))
+      left_inv f := by simp
+      right_inv f := by simp }
+  have he {F F' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : _ ⟶ F) (h : F ⟶ F') :
+      e F' (f ≫ h) = e F f ≫ h := by
+    apply Sheaf.freeYonedaHomEquiv.injective
+    dsimp only [e, Equiv.coe_fn_mk]
+    rw [Equiv.apply_symm_apply, freeYonedaHomEquiv_comp, Equiv.apply_symm_apply,
+      Adjunction.homEquiv_naturality_right, freeYonedaHomEquiv_comp]
+    rfl
+  Coyoneda.ext _ _ (fun f ↦ e _ f) (fun f ↦ (e _).symm f) (fun f ↦ by simp)
+    (fun f ↦ by simp) (fun f h ↦ by
+      apply (e _).injective
+      rw [he, Equiv.apply_symm_apply, Equiv.apply_symm_apply])
+
 /-- **Free sheaves on affine étale schemes are constructible** [Stacks 03SA, 095M]. Let `X` be
 Noetherian and `Λ` finite. The free étale sheaf `Λ[W] = j_{W!} Λ_W` on an affine étale
 `X`-scheme `W` is constructible: over a stratification of `X` on whose strata `W` becomes finite
