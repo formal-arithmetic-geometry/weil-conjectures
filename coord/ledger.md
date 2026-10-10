@@ -898,3 +898,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:09 L: reviewed lem-weil-pbc-spectral-directed-limit-finite-sober (5 steps, +finite-T0-sober node): accepted.
 - 05:11 L: reviewed lem-weil-pbc-completion-finite-quotient (6 steps, no new node): accepted. Stage-3 note: helper-g-ring-char-p step 3 leaves a tensor cancellation implicit.
 - 05:13 L: reviewed lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate (3 steps, no new node): accepted. Stage-3 note: duplicates the 'in particular' clause of the p-th-root tower node.
+- 05:14 L: reviewed lem-weil-pbc-spec-local-ring-canonical-morphism (8 steps, +4 composed leaves for 01HV, 01J6, 008M, Spec stalk maps; tool_uses lem-weil-pbc-module-stalk-pullback recorded): accepted.

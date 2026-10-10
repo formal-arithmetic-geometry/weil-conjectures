@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-spec-map-stalk-localization",
+ "kind": "statement",
+ "title": "The stalk maps of Spec of a ring map are the induced maps of localizations",
+ "statement": "Let $\\psi:R\\to R'$ be a homomorphism of commutative rings and $\\operatorname{Spec}\\psi:\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ the induced morphism of schemes [def-weil-affine-spectrum]. Let $Q\\subset R'$ be a prime ideal and $\\mathfrak q=\\psi^{-1}(Q)$, the image of the point $Q$ under $\\operatorname{Spec}\\psi$. Let $\\lambda_{\\mathfrak q}:R=\\Gamma(\\operatorname{Spec}R,\\mathcal O)\\to\\mathcal O_{\\operatorname{Spec}R,\\mathfrak q}$ and $\\lambda'_Q:R'=\\Gamma(\\operatorname{Spec}R',\\mathcal O)\\to\\mathcal O_{\\operatorname{Spec}R',Q}$ be the germ maps of global sections [def-weil-pbc-module-stalk]; they are localizations at $R\\setminus\\mathfrak q$, resp. $R'\\setminus Q$, giving $\\mathcal O_{\\operatorname{Spec}R,\\mathfrak q}\\cong R_{\\mathfrak q}$ and $\\mathcal O_{\\operatorname{Spec}R',Q}\\cong R'_Q$ [lem-weil-pbc-spec-domain-stalks-function-field] (1). Let $(\\operatorname{Spec}\\psi)^\\sharp_Q:\\mathcal O_{\\operatorname{Spec}R,\\mathfrak q}\\to\\mathcal O_{\\operatorname{Spec}R',Q}$ be the stalk map [def-weil-locally-ringed-space-morphism]. Then $(\\operatorname{Spec}\\psi)^\\sharp_Q\\circ\\lambda_{\\mathfrak q}=\\lambda'_Q\\circ\\psi$; equivalently, under the two identifications, $(\\operatorname{Spec}\\psi)^\\sharp_Q$ is the ring map $\\psi_Q:R_{\\mathfrak q}\\to R'_Q$, $r/s\\mapsto\\psi(r)/\\psi(s)$ [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01HV (lemma-spec-sheaves) part (6) for the identifications, and the construction of the morphism from a ring map in the proof of Lemma 01I1 (lemma-morphism-into-affine), whose map on sections over $D(g)$ is the canonical map $R_g\\to R'_{\\psi(g)}$ extending $\\psi$, with the commutative square of the proof of Lemma 01HY (lemma-morphism-into-affine-where-point-goes)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the stalk map of Spec.map f at a prime p sends the germ of r to the germ of f r; corresponds to Localization.localRingHom",
+   "results": "AlgebraicGeometry.stalkMap_toStalk_apply, localRingHom_comp_stalkIso_apply', localRingHom_comp_stalkIso_apply (Mathlib.AlgebraicGeometry.Spec), LocallyRingedSpace.Hom.stalkMap, Scheme.Hom.stalkMap",
+   "date": "2026-10-10",
+   "verdict": "match: stalkMap_toStalk / localRingHom_comp_stalkIso"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk map of Spec of a ring homomorphism at a prime is the induced map of localizations",
+   "results": "AlgebraicGeometry.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply (Mathlib.AlgebraicGeometry.AffineScheme), localRingHom_comp_stalkIso_apply', stalkMap_toStalk_apply, localRingHom_comp_stalkIso (Mathlib.AlgebraicGeometry.Spec), Scheme.localRingHom_comp_stalkIso",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.localRingHom_comp_stalkIso (for Scheme.Hom.stalkMap of Spec.map f)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalk maps of the canonical morphism Spec O_{X,x} → X are isomorphisms",
+   "results": "Scheme.fromSpecStalk, localRingHom_comp_stalkIso_apply, LocallyRingedSpace.Hom.stalkMap, Scheme.arrowStalkMapSpecIso (Mathlib.AlgebraicGeometry.AffineScheme), isIso_SpecMap_stakMap_localization (Mathlib.AlgebraicGeometry.Spec), LocallyRingedSpace.ofRestrict_stalkMap_isIso",
+   "date": "2026-10-10",
+   "verdict": "Scheme.arrowStalkMapSpecIso / Scheme.localRingHom_comp_stalkIso describe the stalk map of Spec.map f"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'localRingHom_comp_stalkIso\\|arrowStalkMapSpecIso\\|algebraMap_stalkIso_inv\\|germ_stalkMapIso_hom\\|def Spec.stalkIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean; grep -n 'theorem stalkMap_toStalk\\|theorem localRingHom_comp_stalkIso' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Spec.lean",
+   "results": "AffineScheme.lean:1293 Spec.stalkIso, :1297 Spec.algebraMap_stalkIso_inv, :1304 Spec.germ_stalkMapIso_hom, :1314 Scheme.localRingHom_comp_stalkIso, :1324 Scheme.arrowStalkMapSpecIso; Spec.lean:211 stalkMap_toStalk, :227 localRingHom_comp_stalkIso",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso",
+   "results": "AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso (lemma, .lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean); index: unavailable (name found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso, AlgebraicGeometry.Spec.algebraMap_stalkIso_inv",
+  "file": "Mathlib/AlgebraicGeometry/AffineScheme.lean",
+  "line": 1314,
+  "how": "lines: AffineScheme.lean:1314 (Scheme.localRingHom_comp_stalkIso), :1297 (Spec.algebraMap_stalkIso_inv), :1293 (Spec.stalkIso). exact, with the identification of the stalk with the localization made explicit: Scheme.localRingHom_comp_stalkIso (AffineScheme.lean:1314) says (Spec.stalkIso R (p.comap f)).hom ≫ Localization.localRingHom (p.comap f) p f ≫ (Spec.stalkIso S p).inv = (Spec.map f).stalkMap p, i.e. the stalk map is psi_Q under the isomorphisms Spec.stalkIso (:1293); Spec.algebraMap_stalkIso_inv (:1297: algebraMap R R_p ≫ (stalkIso R x).inv = (ΓSpecIso R).inv ≫ germ ⊤ x) identifies these isomorphisms with the germ maps of global sections, which gives the germ form (Spec psi)^♯_Q ∘ lambda_q = lambda'_Q ∘ psi (also Spec.lean:211, stalkMap_toStalk, for the underlying sheafed-space map). Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf: localRingHom_comp_stalkIso 1314, algebraMap_stalkIso_inv 1297 (AffineScheme.lean); lines verified."
+}

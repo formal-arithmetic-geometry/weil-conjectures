@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-morphism-from-spec-local-ring",
+ "kind": "statement",
+ "title": "Morphisms from the spectrum of a local ring (Stacks 01J6)",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $B$ a local ring with maximal ideal $\\mathfrak n$; let $z$ be the closed point $\\mathfrak n$ of $\\operatorname{Spec}B$ [def-weil-affine-spectrum]. (a) The germ map $\\varepsilon_B:B=\\Gamma(\\operatorname{Spec}B,\\mathcal O_{\\operatorname{Spec}B})\\to\\mathcal O_{\\operatorname{Spec}B,z}$ [def-weil-pbc-module-stalk] is an isomorphism of rings. (b) For a morphism of schemes $f:\\operatorname{Spec}B\\to X$ put $x_f=f(z)$ and $\\varphi_f=\\varepsilon_B^{-1}\\circ f^\\sharp_z:\\mathcal O_{X,x_f}\\to B$, where $f^\\sharp_z:\\mathcal O_{X,f(z)}\\to\\mathcal O_{\\operatorname{Spec}B,z}$ is the local homomorphism induced by $f$ on stalks [def-weil-locally-ringed-space-morphism]. Then $\\varphi_f$ is a local homomorphism of local rings, and $f\\mapsto(x_f,\\varphi_f)$ is a bijection from the set of morphisms of schemes $\\operatorname{Spec}B\\to X$ onto the set of pairs $(x,\\varphi)$ consisting of a point $x\\in X$ and a local homomorphism of local rings $\\varphi:\\mathcal O_{X,x}\\to B$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01J6 (lemma-morphism-from-spec-local-ring) and the construction stated just before it in Section 01J5 (section-points), where $\\mathcal O_{\\operatorname{Spec}(R),\\mathfrak m}=R$"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-stalk",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphisms from Spec of a local ring R to a scheme X correspond to points x with local homomorphisms O_{X,x} → R",
+   "results": "AlgebraicGeometry.SpecToEquivOfLocalRing, SpecToEquivOfLocalRing_apply_snd_coe, SpecToEquivOfLocalRing_apply_fst (Mathlib.AlgebraicGeometry.Stalk), Scheme.SpecToEquivOfField (Mathlib.AlgebraicGeometry.ResidueField), Spec.locallyRingedSpaceMap",
+   "date": "2026-10-10",
+   "verdict": "match: SpecToEquivOfLocalRing"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SpecToEquivOfLocalRing",
+   "results": "SpecToEquivOfLocalRing : (Spec R ⟶ X) ≃ Σ x, {f : X.presheaf.stalk x ⟶ R // IsLocalHom f.hom}; SpecToEquivOfLocalRing_apply_fst (= f (closedPoint R)), SpecToEquivOfLocalRing_apply_snd_coe (= stalkClosedPointTo f), SpecToEquivOfLocalRing_symm_apply (Mathlib.AlgebraicGeometry.Stalk)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def SpecToEquivOfLocalRing\\|def stalkClosedPointIso\\|def stalkClosedPointTo\\|lemma stalkClosedPointIso_inv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Stalk.lean",
+   "results": "Stalk.lean:236 stalkClosedPointIso, :242 stalkClosedPointIso_inv, :280 stalkClosedPointTo, :395 SpecToEquivOfLocalRing",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.SpecToEquivOfLocalRing",
+   "results": "AlgebraicGeometry.SpecToEquivOfLocalRing (def), SpecToEquivOfLocalRing_eq_iff (.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Stalk.lean); index: unavailable (names found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.SpecToEquivOfLocalRing, AlgebraicGeometry.Scheme.stalkClosedPointTo, AlgebraicGeometry.stalkClosedPointIso, AlgebraicGeometry.stalkClosedPointIso_inv",
+  "file": "Mathlib/AlgebraicGeometry/Stalk.lean",
+  "line": 395,
+  "how": "lines: Stalk.lean:236 (stalkClosedPointIso), :242 (stalkClosedPointIso_inv), :280 (stalkClosedPointTo), :395 (SpecToEquivOfLocalRing). exact: (a) stalkClosedPointIso R : (Spec R).presheaf.stalk (closedPoint R) ≅ R (Stalk.lean:236), whose inverse is StructureSheaf.toStalk R _, the germ of global sections (stalkClosedPointIso_inv, :242); (b) SpecToEquivOfLocalRing X R (Stalk.lean:395) is an equivalence (Spec R ⟶ X) ≃ Σ x, {f : O_{X,x} ⟶ R // IsLocalHom f}, with toFun f = ⟨f (closedPoint R), stalkClosedPointTo f⟩ and stalkClosedPointTo f = f.stalkMap (closedPoint R) ≫ (stalkClosedPointIso R).hom (:280), i.e. (x_f, phi_f) of the statement. Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf: SpecToEquivOfLocalRing 395, stalkClosedPointTo 280, stalkClosedPointIso 236, stalkClosedPointIso_inv 242 (Stalk.lean); lines verified."
+}

@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-affine-open-stalk-localization",
+ "kind": "statement",
+ "title": "Stalk of a scheme at a point of an affine open: the canonical open immersion and the localization",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $U\\subseteq X$ an affine open, $R=\\mathcal O_X(U)$, and $\\iota_U:\\operatorname{Spec}R\\to X$ the canonical open immersion with image $U$ [lem-weil-pbc-affine-open-spec-points], [def-weil-open-immersion]; for $x\\in U$ let $\\mathfrak p_x\\subset R$ be the prime with $\\iota_U(\\mathfrak p_x)=x$ (unique, $\\iota_U$ being injective). Identify $\\Gamma(\\operatorname{Spec}R,\\mathcal O_{\\operatorname{Spec}R})$ with $R$ [def-weil-affine-spectrum]. Then: (a) the ring map $\\iota_U^\\sharp:\\mathcal O_X(U)\\to\\mathcal O_{\\operatorname{Spec}R}(\\iota_U^{-1}(U))=\\Gamma(\\operatorname{Spec}R,\\mathcal O_{\\operatorname{Spec}R})=R$ is the identity of $R$; (b) for every $x\\in U$ the stalk map $\\iota^\\sharp_{U,\\mathfrak p_x}:\\mathcal O_{X,x}\\to\\mathcal O_{\\operatorname{Spec}R,\\mathfrak p_x}$ [def-weil-locally-ringed-space-morphism] is an isomorphism of rings, and it sends the germ $r_x$ of $r\\in R=\\mathcal O_X(U)$ to the germ at $\\mathfrak p_x$ of the global section $r$ of $\\operatorname{Spec}R$ (germs as in [def-weil-pbc-module-stalk]); (c) for every $x\\in U$ the germ map $R\\to\\mathcal O_{X,x}$, $r\\mapsto r_x$, is a localization of $R$ at $R\\setminus\\mathfrak p_x$: $s_x$ is a unit for every $s\\in R\\setminus\\mathfrak p_x$, every element of $\\mathcal O_{X,x}$ is $r_xs_x^{-1}$ with $r\\in R$, $s\\in R\\setminus\\mathfrak p_x$, and $r_x=0$ implies $tr=0$ for some $t\\in R\\setminus\\mathfrak p_x$; hence $R_{\\mathfrak p_x}\\to\\mathcal O_{X,x}$, $r/s\\mapsto r_xs_x^{-1}$, is an isomorphism of rings [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01HV (lemma-spec-sheaves) parts (1) and (6) ($\\Gamma(\\operatorname{Spec}R,\\mathcal O)=R$, $\\mathcal O_{\\operatorname{Spec}R,\\mathfrak p}=R_{\\mathfrak p}$), transported along the open immersion of Definition 01HE (definition-immersion-locally-ringed-spaces) and Example 01HF (example-open-subspace: the stalk of an open subspace is the stalk of the ambient space)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "for an affine open U of a scheme X and x in U, the stalk of X at x is the localization of Γ(X, U) at the prime corresponding to x",
+   "results": "AlgebraicGeometry.IsAffineOpen.isLocalization_stalk, IsAffineOpen.isLocalization_stalk' (Mathlib.AlgebraicGeometry.AffineScheme), StructureSheaf.IsLocalization.to_stalk (Mathlib.AlgebraicGeometry.StructureSheaf), IsAffineOpen.isLocalization_of_eq_basicOpen",
+   "date": "2026-10-10",
+   "verdict": "match for (c): IsAffineOpen.isLocalization_stalk"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen.isLocalization_stalk",
+   "results": "AlgebraicGeometry.IsAffineOpen.isLocalization_stalk : IsLocalization.AtPrime (X.presheaf.stalk x) (hU.primeIdealOf x).asIdeal (Mathlib.AlgebraicGeometry.AffineScheme)",
+   "date": "2026-10-10",
+   "verdict": "match for (c)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open immersion induces isomorphisms on stalks of the structure sheaf",
+   "results": "AlgebraicGeometry.IsOpenImmersion.instIsIsoCommRingCatStalkMap (Mathlib.AlgebraicGeometry.OpenImmersion), LocallyRingedSpace.IsOpenImmersion.stalk_iso, SheafedSpace.IsOpenImmersion.stalk_iso, PresheafedSpace.IsOpenImmersion.stalk_iso (Mathlib.Geometry.RingedSpace.OpenImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match for the isomorphism in (b): IsOpenImmersion.instIsIsoCommRingCatStalkMap with IsAffineOpen.isOpenImmersion_fromSpec"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isLocalization_stalk\\|fromSpec_app_self\\|isOpenImmersion_fromSpec\\|fromSpec_primeIdealOf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean; grep -n 'IsIso (f.stalkMap x)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/OpenImmersion.lean; grep -n 'lemma germ_stalkMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean",
+   "results": "AffineScheme.lean:432 isOpenImmersion_fromSpec, :578 fromSpec_app_self, :780 fromSpec_primeIdealOf, :818 isLocalization_stalk', :834 isLocalization_stalk; OpenImmersion.lean:496-498 instance IsIso (f.stalkMap x) for IsOpenImmersion f; Scheme.lean:976 germ_stalkMap",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.IsAffineOpen.isLocalization_stalk",
+   "results": "AlgebraicGeometry.IsAffineOpen.isLocalization_stalk, isLocalization_stalk' (theorems, .lake/packages/mathlib/Mathlib/AlgebraicGeometry/AffineScheme.lean); index: unavailable (names found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsAffineOpen.fromSpec_app_self, AlgebraicGeometry.IsOpenImmersion.instIsIsoCommRingCatStalkMap, AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec, AlgebraicGeometry.Scheme.Hom.germ_stalkMap, AlgebraicGeometry.IsAffineOpen.fromSpec_primeIdealOf, AlgebraicGeometry.IsAffineOpen.isLocalization_stalk",
+  "file": "Mathlib/AlgebraicGeometry/AffineScheme.lean",
+  "line": 578,
+  "how": "lines: AffineScheme.lean:432, 578, 780, 834; OpenImmersion.lean:496; Scheme.lean:976. one Mathlib declaration per clause, for hU : IsAffineOpen U, iota_U = hU.fromSpec (an open immersion by the instance isOpenImmersion_fromSpec, AffineScheme.lean:432) and p_x = hU.primeIdealOf x (hU.fromSpec p_x = x by fromSpec_primeIdealOf, :780): (a) fromSpec_app_self (:578): hU.fromSpec.app U = (ΓSpecIso Γ(X,U)).inv ≫ (restriction to hU.fromSpec⁻¹ U = ⊤), i.e. the identity of R after the identification Γ(Spec R) ≅ R; (b) the instance IsIso (f.stalkMap x) for an open immersion f (OpenImmersion.lean:496), and germ_stalkMap (Scheme.lean:976: germ_U ≫ f.stalkMap x = f.app U ≫ germ) with (a) for the germ formula; (c) isLocalization_stalk (:834): IsLocalization.AtPrime (X.presheaf.stalk x) (hU.primeIdealOf x).asIdeal for the Γ(X,U)-algebra structure given by the germ (TopCat.Presheaf.algebra_section_stalk). Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf: fromSpec_app_self 578, isOpenImmersion_fromSpec 432, isLocalization_stalk 834 (AffineScheme.lean); IsOpenImmersion stalkMap iso instance OpenImmersion.lean:496; germ_stalkMap Scheme.lean:976; lines verified."
+}

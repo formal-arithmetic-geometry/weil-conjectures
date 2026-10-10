@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-scheme-stalk-map-composition",
+ "kind": "statement",
+ "title": "Stalk maps of morphisms of schemes: germs and composition",
+ "statement": "Let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms of schemes [def-pc-scheme] and $x\\in X$; for a morphism $h$ and a point $w$ write $h^\\sharp_w$ for the induced map of local rings $\\mathcal O_{\\cdot,h(w)}\\to\\mathcal O_{\\cdot,w}$ [def-weil-locally-ringed-space-morphism], and $f^\\sharp_W:\\mathcal O_Y(W)\\to\\mathcal O_X(f^{-1}W)$ for the map on sections over an open $W\\subseteq Y$. (a) For every open $W\\subseteq Y$ with $f(x)\\in W$ and every $t\\in\\mathcal O_Y(W)$, $f^\\sharp_x(t_{f(x)})=\\bigl(f^\\sharp_W(t)\\bigr)_x$ (germs as in [def-weil-pbc-module-stalk]). (b) $(g\\circ f)^\\sharp_x=f^\\sharp_x\\circ g^\\sharp_{f(x)}:\\mathcal O_{Z,g(f(x))}\\to\\mathcal O_{X,x}$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma 008M (lemma-compose-f-maps-stalks), with the definition of the map on stalks of an $f$-map given just before it (after Definition 008J, definition-f-map: the germ of $t$ goes to the germ of $f^\\sharp_W(t)$); applied to the $f$-maps $f^\\sharp:\\mathcal O_Y\\to f_*\\mathcal O_X$ of morphisms of schemes"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk map of a composition of morphisms of schemes is the composition of stalk maps",
+   "results": "AlgebraicGeometry.Scheme.Hom.stalkMap_comp, Scheme.stalkMap_comp (Mathlib.AlgebraicGeometry.Scheme), Scheme.stalkClosedPointTo_comp (Mathlib.AlgebraicGeometry.Stalk), LocallyRingedSpace.stalkMap_comp (Mathlib.Geometry.RingedSpace.LocallyRingedSpace)",
+   "date": "2026-10-10",
+   "verdict": "match for (b): Scheme.Hom.stalkMap_comp"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap (CategoryTheory.CategoryStruct.comp _ _) _",
+   "results": "AlgebraicGeometry.Scheme.Hom.stalkMap_comp (Mathlib.AlgebraicGeometry.Scheme)",
+   "date": "2026-10-10",
+   "verdict": "match for (b)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'lemma stalkMap_comp\\|lemma germ_stalkMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Geometry/RingedSpace/",
+   "results": "Scheme.lean:919 stalkMap_comp, Scheme.lean:976 germ_stalkMap; LocallyRingedSpace.lean:374 stalkMap_comp",
+   "date": "2026-10-10",
+   "verdict": "match: germ_stalkMap for (a), stalkMap_comp for (b)"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap_comp",
+   "results": "AlgebraicGeometry.Scheme.Hom.stalkMap_comp (lemma, .lake/packages/mathlib/Mathlib/AlgebraicGeometry/Scheme.lean); index: unavailable (name found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.germ_stalkMap, AlgebraicGeometry.Scheme.Hom.stalkMap_comp",
+  "file": "Mathlib/AlgebraicGeometry/Scheme.lean",
+  "line": 976,
+  "how": "lines: Scheme.lean:976 (germ_stalkMap), Scheme.lean:919 (stalkMap_comp). one declaration per clause: (a) germ_stalkMap (Scheme.lean:976): Y.presheaf.germ U (f x) hx ≫ f.stalkMap x = f.app U ≫ X.presheaf.germ (f ⁻¹ᵁ U) x hx; (b) stalkMap_comp (Scheme.lean:919): (f ≫ g).stalkMap x = g.stalkMap (f x) ≫ f.stalkMap x (diagrammatic order, i.e. f^♯_x ∘ g^♯_{f(x)}). Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf: germ_stalkMap 976, stalkMap_comp 919 (Scheme.lean); lines verified."
+}
