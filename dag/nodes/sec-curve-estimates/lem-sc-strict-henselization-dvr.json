@@ -27,9 +27,90 @@
   "def-weil-locally-ringed-space-morphism",
   "def-sc-discrete-valuation-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open U=Spec A containing y, with corresponding prime p, so O_{Y,y}=A_p. By [lem-weil-pbc-etale-local-ring-triples], the pointed affine etale-neighbourhood colimit defining O^sh_{Y,xbar} [def-weil-pbc-strict-henselization-limit] is the colimit over etale triples (B,q,phi). By [lem-weil-pbc-strict-henselization-triples], this colimit is the ring strict henselization R^sh of R=A_p, with the same structural map iota and a local maximal ideal over the maximal ideal of R. This is the identification of Stacks 04HX; it respects the canonical maps from each neighbourhood ring.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 04HX (lemma-describe-etale-local-ring), proof: affine chart and colimit of etale triples"
+   }
+  },
+  {
+   "text": "The triples of Step 1 form a filtered index category and every ring B in their diagram is etale over A (not over R=A_p) [lem-weil-pbc-strict-henselization-triples], applied to the ring A and its prime p. Each such B is a flat A-module by [lem-weil-pbc-etale-algebra-flat]. The underlying A-module of the ring colimit C=R^sh is the filtered colimit of these modules, so [lem-weil-pbc-filtered-colimit-flat-modules] makes R^sh a flat A-module. By the maximal-ideal assertion of [lem-weil-pbc-strict-henselization-triples], C is local with maximal ideal m_C whose preimage in A is p; hence every element of A outside p maps to a unit of C, A -> C factors uniquely through iota: A_p -> C, and iota is local (the preimage of m_C in A_p is pA_p). For an A_p-module M one has C (x)_{A_p} M = C (x)_A M, since A -> A_p is an epimorphism of rings; so tensoring with C over A_p is exact on A_p-modules and iota is flat. Thus iota is a flat local homomorphism of local rings, hence faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective], and the I=0 case of [lem-weil-pbc-faithfully-flat-ideal-contraction] makes it injective.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-filtered-colimit-flat-modules",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07QM (lemma-henselization-properties), proof of (1); Algebra Tags 00U2, 05UT and 05CK"
+   }
+  },
+  {
+   "text": "Assume R is a DVR. It has dimension one by [lem-sc-dvr-dimension-one]. Since R is Noetherian, [lem-sc-strict-henselization-noetherian] makes R^sh Noetherian. By [lem-sc-strict-henselization-dimension], dim R^sh=1. Since a DVR has a principal maximal ideal, it is regular local of dimension one by [def-sc-discrete-valuation-ring] and [def-weil-regular-scheme]; [lem-sc-strict-henselization-regular] makes R^sh regular local. Apply [lem-sc-regular-dim1-dvr] to conclude that R^sh is a DVR.",
+   "uses": [
+    "lem-sc-dvr-dimension-one",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-dimension",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-regular-scheme",
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-regular-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AP3 (lemma-henselization-dvr), proof via Tags 06LJ, 06LK, 06LN and Algebra Tag 00PD"
+   }
+  },
+  {
+   "text": "Conversely assume R^sh is a DVR. By [lem-sc-dvr-dimension-one], it has dimension one. [lem-sc-strict-henselization-dimension] gives dim R=1; [lem-sc-strict-henselization-regular] reflects regularity from R^sh to R. Here R^sh is regular local because its maximal ideal is principal [def-sc-discrete-valuation-ring] and its dimension is one [def-weil-regular-scheme]. Since R is Noetherian by hypothesis, [lem-sc-regular-dim1-dvr] now makes R a DVR. The identification in Step 1 converts these two implications into the asserted equivalence for the scheme local rings.",
+   "uses": [
+    "lem-sc-dvr-dimension-one",
+    "lem-sc-strict-henselization-dimension",
+    "lem-sc-strict-henselization-regular",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-regular-scheme",
+    "lem-sc-regular-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0AP3 (lemma-henselization-dvr), proof via Tags 06LK, 06LN and Algebra Tag 00PD"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-sc-dvr-dimension-one",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-dimension",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-regular-scheme",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-regular-dim1-dvr"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tags 0AP3, 07QM, 06LJ, 06LK, 06LN, with etale-cohomology.tex Lemma 04HX and Algebra Lemma 00PD"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,12 +142,51 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-open-curve-boundary-higher-direct-image-vanishing",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-strict-henselization-dvr",
+  "worker": "stage1",
+  "summary": "Identified the geometric stalk with the ring strict henselization using existing triple-category nodes, proved flatness and injectivity from the etale filtered colimit and faithful flatness nodes, and reduced the DVR equivalence to Noetherianity, dimension, and regularity permanence plus the existing dimension-one regular-local DVR criterion.",
+  "blueprint": "The boundary stalk calculation in the proof of lem-sc-brauer-zero, as reached through lem-sc-open-curve-boundary-higher-direct-image-vanishing: the strict henselization at a missing closed point is a DVR; Step 1 identifies the scheme and ring constructions, Step 2 records the flat local injection, and Steps 3-4 give the two DVR implications.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "It identifies affine pointed neighbourhoods with ring triples; the curve unit has no such structural statement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "It supplies filteredness, locality, and the ring strict henselization used in Stacks 04HX."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-flat-modules",
+    "why": "It supplies the generic filtered-colimit flatness used by Stacks 07QM."
+   },
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "It supplies the generic one-dimensional regular-local DVR criterion from Algebra Tag 00PD."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-sc-regular-dim1-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shd1911",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shd1911 (reviewer sub-agent of L); spot-checked: Steps 1-4 against 04HX/07QM/0AP3/06LJ/06LK/06LN/00PD and every cited statement; leaf IsDiscreteValuationRing.ringKrullDim_eq_one read at TFAE.lean:244 (exact; project DVR def = IsDomain+IsDiscreteValuationRing); grep Henseliz in Mathlib/RingTheory: no henselization in Mathlib, so the three 06LJ/06LK/06LN nodes are real unsplit lemmas, not duplicates; no cycle with J1 parent (only lem-sc-open-curve-boundary-higher-direct-image-vanishing cites the item, cited nodes are older); four declared tool_uses accepted as generic. FIX more, RETURN less: (1) C4 Step 2: strict-henselization-triples applied to (A,p) gives a filtered colimit of etale A-algebras, not etale A_p-algebras, so the step only gave flatness over A; rewritten to obtain flatness over A, the factorization through A_p and locality from the maximal-ideal clause, and flatness over A_p by C(x)_{A_p}M = C(x)_A M (elementary). Second reading by K1 missed this.; 1 file(s) fixed by the reviewer"
+ }
 }
