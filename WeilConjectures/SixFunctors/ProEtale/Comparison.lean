@@ -104,7 +104,6 @@ theorem nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar {U V : Schem
   ⟨asIso (Functor.rightDerivedFunctorPlusBaseChange
     (lowerStarComparisonUpperStarBaseChange u A))⟩
 
-
 section Unit
 
 open MonoidalCategory Functor.OplaxMonoidal
@@ -128,6 +127,7 @@ noncomputable def comparisonUpperStarUnitIso :
     X.smallEtaleTopology (Scheme.ProEt.topology X)))
 
 end Unit
+
 end ProEtale
 
 end AlgebraicGeometry

@@ -46,10 +46,18 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_Q_obj_of_retract`
   (`prop-pod-perfect-local-model`): a bounded complex of finite projective `Λ_X`-modules lies in
   `Dctf(X, Λ)`.
+- `AlgebraicGeometry.ProEtale.DerivedCategory.isFiniteLocallyConstant_homology_of_retract`:
+  the cohomology sheaves of a complex of finite projective `Λ_X`-modules are locally constant
+  with finite stalks.
+- `AlgebraicGeometry.ProEtale.DerivedCategory.bounded_of_isLocallyPerfect`: a complex which is
+  locally quasi-isomorphic to bounded complexes of finite projective modules is bounded, on a
+  quasi-compact quasi-separated scheme.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_of_isDualizable`
-  (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`, reduced to
-  `AlgebraicGeometry.ProEtale.DerivedCategory.bounded_and_homology_of_isDualizable`, which is
-  still `sorry`.
+  (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`. It is locally a
+  bounded complex of finite projective modules
+  (`AlgebraicGeometry.ProEtale.DerivedCategory.isLocallyPerfect_of_isDualizable`, which states
+  part of `sk-def-perfect` and is `sorry` there), so its cohomology sheaves are locally constant
+  with finite stalks, hence of étale origin (`lem-sf-proetale-constructible-origin`).
 - `AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_boundedConstructible`:
   `Dᵇc_proét(X, Λ)` is a triangulated subcategory at a finite coefficient ring.
 - `AlgebraicGeometry.ProEtale.isDualizable_derivedDual` (`lem-pod-coefficient-dual-perfect`):
@@ -72,7 +80,8 @@ blueprint's setting: bounded constructibility is étale origin
 (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`), which is the right notion
 only at the finite coefficient stages. A finite projective `Λ_X`-module is of étale origin
 since `Λ_Xʳ = ν^* Λ_{X_ét}ʳ` and `ν^*` is full and exact; so is a bounded complex of them, as
-`ν^*` is fully faithful.
+`ν^*` is fully faithful. The same lift, to finite locally constant étale sheaves, shows that the
+cohomology sheaves of such a complex are locally constant with finite stalks.
 
 As in the blueprint (`def-pod-perfect-complex-on-x`), the coefficient dual is shown to lie in
 `Dctf(X, Λ)` for perfect complexes which already lie in `Dctf(X, Λ)`, in the Poincaré duality
@@ -240,7 +249,7 @@ theorem exists_iso_comparisonUpperStar_mapHomologicalComplex_obj_of_retract
       d_comp_d' i j k _ _ := N.map_injective (by simp) }
   let eP : (N.mapHomologicalComplex _).obj P' ≅ P :=
     HomologicalComplex.Hom.isoOfComponents e (fun i j _ ↦ by
-      show (e i).hom ≫ P.d i j = N.map (N.preimage ((e i).hom ≫ P.d i j ≫ (e j).inv)) ≫ (e j).hom
+      change (e i).hom ≫ P.d i j = N.map (N.preimage ((e i).hom ≫ P.d i j ≫ (e j).inv)) ≫ (e j).hom
       rw [Functor.map_preimage]
       simp)
   exact ⟨P', hQ, ⟨eP⟩⟩
@@ -248,7 +257,7 @@ theorem exists_iso_comparisonUpperStar_mapHomologicalComplex_obj_of_retract
 omit [Finite Λ] in
 /-- A finite projective `Λ_X`-module `P`, that is, a direct summand of a finite free module
 `Λ_Xʳ` on the small pro-étale site, is flat, as a retract of the flat module `Λ_Xʳ`. -/
-theorem flat_of_retract
+theorem flat_of_retract_biproduct_unit
     (hP : Retract P (⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology X)
       (ModuleCat.{u + 1} Λ)))) :
     ObjectProperty.flat P := by
@@ -285,7 +294,8 @@ theorem torAmplitudeIn_single_of_retract
       (ModuleCat.{u + 1} Λ)))) :
     torAmplitudeIn (ModuleCat.{u + 1} Λ) X 0 0
       ((_root_.DerivedCategory.singleFunctor _ 0).obj P) :=
-  _root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat (flat_of_retract hP)
+  _root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
+    (flat_of_retract_biproduct_unit hP)
 
 /-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
 
@@ -300,7 +310,6 @@ theorem constructibleTorAmplitudeIn_single_of_retract
   have h := torAmplitudeIn_single_of_retract hP
   ⟨⟨boundedConstructible_single_of_retract hP,
     _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn h⟩, h⟩
-
 
 /-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
 
@@ -319,7 +328,7 @@ theorem constructibleFiniteTor_Q_obj_of_retract
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (_root_.DerivedCategory.Q.obj P) := by
   refine ⟨?_, a, b, _root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat P a b fun n ↦ by
     obtain ⟨r, ⟨h⟩⟩ := hP n
-    exact flat_of_retract h⟩
+    exact flat_of_retract_biproduct_unit h⟩
   let N := ν^*(X)[ModuleCat.{u + 1} Λ]
   -- the étale complex `P'` with `ν^* P' ≅ P`
   obtain ⟨P', hQ, ⟨eP⟩⟩ := exists_iso_comparisonUpperStar_mapHomologicalComplex_obj_of_retract P hP
@@ -537,9 +546,9 @@ theorem bounded_of_isLocallyPerfect [CompactSpace X] [QuasiSeparatedSpace X]
       (Finset.mem_univ j)
     linarith [le_abs_self (b (k j))]
 
-variable [IsNoetherian X] in
-/-- A perfect complex of pro-étale `Λ`-sheaves on a Noetherian scheme is bounded, and each of its
-cohomology sheaves is `ν^*` of a constructible étale sheaf.
+variable [CompactSpace X] [QuasiSeparatedSpace X] in
+/-- A perfect complex of pro-étale `Λ`-sheaves on a quasi-compact quasi-separated scheme is
+bounded, and each of its cohomology sheaves is `ν^*` of a constructible étale sheaf.
 
 It is locally quasi-isomorphic to a bounded complex `P` of finite projective modules
 (`sk-def-perfect`), so it is bounded (`bounded_of_isLocallyPerfect`) and its cohomology sheaves
@@ -566,18 +575,12 @@ theorem bounded_and_homology_of_isDualizable
         (_root_.DerivedCategory.homologyFunctorFactors _ n).app P).symm ≪≫
         ((leftDerivedUpperStarHomologyFunctorIso _ (g i) n).app K).symm)
       (isFiniteLocallyConstant_homology_of_retract P hr n)
-  -- the trivial stratification of `X`
-  let S : Stratification X := Stratification.ofNoetherianSpace 1 (fun _ ↦ Set.univ)
-    (fun _ ↦ isOpen_univ.isLocallyClosed) (Set.iUnion_const _)
-    (fun i j h ↦ (h (Subsingleton.elim i j)).elim)
-    (fun _ ↦ X) (fun _ ↦ 𝟙 X) (fun _ ↦ inferInstance) (fun _ ↦ by simp)
   obtain ⟨F, hF, e⟩ := exists_isConstructibleSheaf_iso_comparisonUpperStar_obj Λ
-    (F := (_root_.DerivedCategory.homologyFunctor _ n).obj K) ⟨S, fun _ ↦
+    (F := (_root_.DerivedCategory.homologyFunctor _ n).obj K) ⟨Stratification.trivial X, fun _ ↦
       isFiniteLocallyConstant_of_iso ((upperStarId _ X).app _).symm hloc⟩
   exact ⟨F, hF, e⟩
 
 end Local
-
 
 variable [IsNoetherian X] in
 /-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
