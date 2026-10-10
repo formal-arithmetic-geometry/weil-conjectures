@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+ "kind": "statement",
+ "title": "An Artinian local ring is Noetherian with nilpotent maximal ideal",
+ "statement": "Let $(B,\\mathfrak m_B)$ be an Artinian local ring (every descending chain of ideals of $B$ is eventually constant). Then $B$ is Noetherian [def-weil-pbc-noetherian-ring] and $\\mathfrak m_B$ is nilpotent: $\\mathfrak m_B^N=0$ for some $N\\ge1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00KH (lemma-Noetherian-dimension-0, line 14364: any Artinian ring is Noetherian of dimension zero) and Lemma Tag 00J8 (lemma-artinian-radical-nilpotent, line 12739: the Jacobson radical of an Artinian ring is nilpotent; for a local ring it is the maximal ideal)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Artinian commutative local ring is Noetherian and its maximal ideal is nilpotent",
+   "results": "isArtinianRing_iff_isNilpotent_maximalIdeal, instIsNoetherianRingOfIsArtinianRing, isArtinianRing_iff_isNoetherianRing_krullDimLE_zero, isNoetherian_of_finite_isArtinian, IsNoetherianRing.isArtinianRing_of_krullDimLE_zero (Mathlib.RingTheory.HopkinsLevitzki), Ring.KrullDimLE.isNilpotent_iff_mem_maximalIdeal",
+   "date": "2026-10-10",
+   "verdict": "match: instIsNoetherianRingOfIsArtinianRing and isArtinianRing_iff_isNilpotent_maximalIdeal"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsArtinianRing ?R ↔ IsNilpotent (IsLocalRing.maximalIdeal ?R)",
+   "results": "isArtinianRing_iff_isNilpotent_maximalIdeal (Mathlib.RingTheory.HopkinsLevitzki)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance \\[IsArtinianRing R\\] : IsNoetherianRing R' and 'isArtinianRing_iff_isNilpotent_maximalIdeal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/HopkinsLevitzki.lean",
+   "results": "HopkinsLevitzki.lean:141 instance [IsArtinianRing R] : IsNoetherianRing R; HopkinsLevitzki.lean:184 lemma isArtinianRing_iff_isNilpotent_maximalIdeal (R) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] : IsArtinianRing R ↔ IsNilpotent (IsLocalRing.maximalIdeal R)",
+   "date": "2026-10-10",
+   "verdict": "match (read in source)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instIsNoetherianRingOfIsArtinianRing, isArtinianRing_iff_isNilpotent_maximalIdeal",
+  "file": "Mathlib/RingTheory/HopkinsLevitzki.lean",
+  "how": "specializes in one line: B is Noetherian by the instance instIsNoetherianRingOfIsArtinianRing (HopkinsLevitzki.lean:141), and then isArtinianRing_iff_isNilpotent_maximalIdeal (HopkinsLevitzki.lean:184), direction mp, gives IsNilpotent (IsLocalRing.maximalIdeal B)",
+  "line": 141
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-enlarge-solution-modulo",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field added (instIsNoetherianRingOfIsArtinianRing, HopkinsLevitzki.lean:141; isArtinianRing_iff_isNilpotent_maximalIdeal :184 verified with sed)."
+}
