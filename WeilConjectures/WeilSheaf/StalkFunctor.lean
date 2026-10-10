@@ -113,6 +113,17 @@ instance preservesEpimorphisms_stalkFunctor : (stalkFunctor k₀ l s).PreservesE
   unfold stalkFunctor
   infer_instance
 
+/-- The stalk functor is additive. -/
+instance additive_stalkFunctor
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
+    (stalkFunctor k₀ l s).Additive := by
+  have : (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of (AlgebraicClosure k₀))))
+      (WeilCoefficients.{u} l)).Additive := Functor.additive_of_preserves_binary_products _
+  have : (sheafFunctor k₀ l X).Additive := inferInstanceAs
+    (ObjectProperty.ι _ ⋙ IsoAlgebra.forget _ ⋙ ProEtale.AdicSheaf.forget _).Additive
+  unfold stalkFunctor
+  infer_instance
+
 end Functor
 
 variable {F G : WeilSheaf k₀ l X}
@@ -329,6 +340,54 @@ theorem stalkAtMap_frobenius (f : F ⟶ G) (x : (F.stalkAt s m hs).carrier) :
   (stalkAtMap_apply s m hs f _).trans ((stalkAt_frobenius_map s f m hs x).trans
     (congrArg (G.stalkAt s m hs).frobenius (stalkAtMap_apply s m hs f x).symm))
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+theorem stalkAtMap_comp {F G H : WeilSheaf k₀ l X} (f : F ⟶ G) (g : G ⟶ H)
+    (x : (F.stalkAt s m hs).carrier) :
+    stalkAtMap s m hs (f ≫ g) x = stalkAtMap s m hs g (stalkAtMap s m hs f x) := by
+  simp only [stalkAtMap, stalkMap, Functor.map_comp]
+  rfl
+
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+theorem stalkAtMap_id (F : WeilSheaf k₀ l X) (x : (F.stalkAt s m hs).carrier) :
+    stalkAtMap s m hs (𝟙 F) x = x := by
+  rw [stalkAtMap, stalkMap, (stalkFunctor k₀ l s).map_id F]
+  rfl
+
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+theorem stalkAtMap_add {F G : WeilSheaf k₀ l X} (f g : F ⟶ G)
+    (x : (F.stalkAt s m hs).carrier) :
+    stalkAtMap s m hs (f + g) x = stalkAtMap s m hs f x + stalkAtMap s m hs g x := by
+  simp only [stalkAtMap, stalkMap, Functor.map_add]
+  rfl
+
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+theorem stalkAtMap_zero {F G : WeilSheaf k₀ l X} (x : (F.stalkAt s m hs).carrier) :
+    stalkAtMap s m hs (0 : F ⟶ G) x = 0 := by
+  rw [stalkAtMap, stalkMap, (stalkFunctor k₀ l s).map_zero]
+  rfl
+
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+/-- The stalk of a direct sum is the direct sum of the stalks, with the diagonal Frobenius. -/
+theorem nonempty_equiv_stalkAt_biprod (F G : WeilSheaf k₀ l X) :
+    Nonempty (((F ⊞ G).stalkAt s m hs).Equiv ((F.stalkAt s m hs).prod (G.stalkAt s m hs))) := by
+  refine ⟨⟨LinearEquiv.ofLinearMap
+    ((stalkAtMap s m hs biprod.fst).prod (stalkAtMap s m hs biprod.snd))
+    ((stalkAtMap s m hs biprod.inl).coprod (stalkAtMap s m hs biprod.inr)) ?_ ?_, fun x ↦ ?_⟩⟩
+  · refine LinearMap.ext fun ⟨a, b⟩ ↦ Prod.ext ?_ ?_
+    · change stalkAtMap s m hs biprod.fst
+        (stalkAtMap s m hs biprod.inl a + stalkAtMap s m hs biprod.inr b) = a
+      rw [map_add, ← stalkAtMap_comp, ← stalkAtMap_comp, biprod.inl_fst, biprod.inr_fst,
+        stalkAtMap_id, stalkAtMap_zero, add_zero]
+    · change stalkAtMap s m hs biprod.snd
+        (stalkAtMap s m hs biprod.inl a + stalkAtMap s m hs biprod.inr b) = b
+      rw [map_add, ← stalkAtMap_comp, ← stalkAtMap_comp, biprod.inl_snd, biprod.inr_snd,
+        stalkAtMap_id, stalkAtMap_zero, zero_add]
+  · refine LinearMap.ext fun y ↦ ?_
+    change stalkAtMap s m hs biprod.inl (stalkAtMap s m hs biprod.fst y) +
+      stalkAtMap s m hs biprod.inr (stalkAtMap s m hs biprod.snd y) = y
+    rw [← stalkAtMap_comp, ← stalkAtMap_comp, ← stalkAtMap_add, biprod.total, stalkAtMap_id]
+  · exact Prod.ext (stalkAtMap_frobenius s m hs _ x) (stalkAtMap_frobenius s m hs _ x)
+
 theorem injective_stalkAtMap (f : F ⟶ G) [Mono f] : Function.Injective (stalkAtMap s m hs f) :=
   fun a b h ↦ injective_stalkMap s f
     ((stalkAtMap_apply s m hs f a).symm.trans (h.trans (stalkAtMap_apply s m hs f b)))
@@ -367,6 +426,12 @@ weight `w`: its stalks are Frobenius-equivariant quotients. -/
 theorem IsPunctuallyPureOfWeight.of_epi {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (f : F ⟶ G) [Epi f]
     (h : F.IsPunctuallyPureOfWeight ι w) : G.IsPunctuallyPureOfWeight ι w := fun x ↦
   stalkAt_isPureOfWeight_of_epi _ _ _ f (h x)
+
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
+/-- The stalk of a direct sum is the direct sum of the stalks, with the diagonal Frobenius. -/
+theorem nonempty_equiv_stalk_biprod (F G : WeilSheaf k₀ l X) (x : X.finitePoints) :
+    Nonempty (((F ⊞ G).stalk x).Equiv ((F.stalk x).prod (G.stalk x))) :=
+  nonempty_equiv_stalkAt_biprod _ _ _ F G
 
 /-- The support of a quotient of `F` is contained in the support of `F`: the stalks of the
 quotient are quotients of the stalks of `F`. -/

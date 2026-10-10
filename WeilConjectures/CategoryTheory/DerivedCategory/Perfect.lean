@@ -8,8 +8,15 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.HomotopyCategory.Plus
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.Finiteness.Cardinality
+public import Mathlib.RingTheory.Flat.EquationalCriterion
+public import WeilConjectures.Mathlib.RingTheory.Flat.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.RingTheory.SimpleModule.InjectiveProjective
+public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
@@ -18,6 +25,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
@@ -234,17 +242,189 @@ lemma isPerfect_obj₂_of_distTriang
   exact ((hcone.of_iso (Pretriangulated.Triangle.π₃.mapIso f)).shift (-1)).of_iso
     ((shiftFunctorCompIsoId _ (1 : ℤ) (-1) (by omega)).app _)
 
+section FiniteTorAmplitude
+
+variable [IsNoetherianRing R]
+
+/-- A complex of flat modules concentrated in degree `b`, whose cohomology in degree `b` is
+finitely generated, has a perfect image in `D(R)`: its term in degree `b` is its cohomology, a
+finitely presented flat module, hence projective. -/
+private lemma isPerfect_Q_obj_of_flat (P : CochainComplex (ModuleCat.{u} R) ℤ) (b : ℤ)
+    [P.IsStrictlyGE b] [P.IsStrictlyLE b] (hP : ∀ n, ObjectProperty.flat (P.X n))
+    (hb : Module.Finite R (P.homology b)) :
+    (Q.obj P).IsPerfect := by
+  refine isPerfect_Q_obj P b b fun i ↦ ?_
+  have : Module.Flat R (P.X i) := (ModuleCat.flat_iff_flat _).1 (hP i)
+  have : Module.Finite R (P.X i) := by
+    by_cases hi : i = b
+    · subst hi
+      have := P.isIso_homologyπ (i - 1) i (by simp)
+        ((P.isZero_of_isStrictlyGE i (i - 1) (by omega)).eq_of_src _ _)
+      have := P.isIso_iCycles i (i + 1) (by simp)
+        ((P.isZero_of_isStrictlyLE i (i + 1) (by omega)).eq_of_tgt _ _)
+      exact Module.Finite.equiv
+        ((asIso (P.homologyπ i)).symm ≪≫ asIso (P.iCycles i)).toLinearEquiv
+    · have : Subsingleton (P.X i) := ModuleCat.isZero_iff_subsingleton.1 <| by
+        rcases lt_or_gt_of_ne hi with hi | hi
+        · exact P.isZero_of_isStrictlyGE b i hi
+        · exact P.isZero_of_isStrictlyLE b i hi
+      infer_instance
+  have := Module.finitePresentation_of_finite R (P.X i)
+  exact ⟨Module.Flat.projective_of_finitePresentation, inferInstance⟩
+
+/-- The base case of `DerivedCategory.isPerfect_of_finiteTorAmplitude`: an object of Tor
+amplitude in `[c, b]` with `b ≤ c` and finitely generated cohomology is perfect. It is
+represented by a complex of flat modules concentrated in degree `b`. -/
+private lemma isPerfect_of_torAmplitudeIn_of_le {c b : ℤ} (hbc : b ≤ c)
+    {C : DerivedCategory (ModuleCat.{u} R)} (hC : torAmplitudeIn _ c b C)
+    (hfin : ∀ i, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C)) :
+    C.IsPerfect := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := exists_iso_Q_obj_flat_of_torAmplitudeIn hC
+  have : P.IsStrictlyGE b := CochainComplex.isStrictlyGE_of_ge P b c hbc
+  refine (isPerfect_Q_obj_of_flat P b hP ?_).of_iso e
+  have := hfin b
+  exact Module.Finite.equiv
+    ((homologyFunctor _ b).mapIso e.symm ≪≫ (homologyFunctorFactors _ b).app P).toLinearEquiv
+
+/-- The induction step of `DerivedCategory.isPerfect_of_finiteTorAmplitude`. Let `C` have Tor
+amplitude in `[c, b]` with `c < b` and finitely generated cohomology. Represent `C` by a complex
+`P` of flat modules in degrees `[c, b]`, choose a finite free module `F` mapping onto
+`H^b(C) = P^b / d(P^{b-1})` and lift it to a map `φ : F[-b] ⟶ P`. Its mapping cone `C'` is a
+complex of flat modules in degrees `[c, b]` with `H^b(C') = 0`, so it has Tor amplitude in
+`[c, b - 1]`, and its cohomology is finitely generated. If `C'` is perfect, so is `C`, as an
+extension of `C'` by the perfect complex `F[-b]`. -/
+private lemma exists_isPerfect_imp_of_torAmplitudeIn {c b : ℤ} (hcb : c < b)
+    {C : DerivedCategory (ModuleCat.{u} R)} (hC : torAmplitudeIn _ c b C)
+    (hfin : ∀ i, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C)) :
+    ∃ C' : DerivedCategory (ModuleCat.{u} R), torAmplitudeIn _ c (b - 1) C' ∧
+      (∀ i, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C')) ∧
+      (C'.IsPerfect → C.IsPerfect) := by
+  obtain ⟨P, _, _, hP, ⟨e⟩⟩ := exists_iso_Q_obj_flat_of_torAmplitudeIn hC
+  let H (i : ℤ) := homologyFunctor (ModuleCat.{u} R) i
+  let eH (L : CochainComplex (ModuleCat.{u} R) ℤ) (i : ℤ) :
+      (H i).obj (Q.obj L) ≅ L.homology i :=
+    (homologyFunctorFactors _ i).app L
+  have hPfin (i : ℤ) : Module.Finite R (P.homology i) := by
+    have := hfin i
+    exact Module.Finite.equiv ((H i).mapIso e.symm ≪≫ eH P i).toLinearEquiv
+  -- a finite free module `F` mapping onto `H^b(P)`, lifted to the cycles of `P` in degree `b`
+  obtain ⟨n, g, hg⟩ := Module.Finite.exists_fin' R (P.homology b)
+  have hπ : Function.Surjective (P.homologyπ b).hom :=
+    (ModuleCat.epi_iff_surjective _).1 inferInstance
+  obtain ⟨h, hh⟩ := Module.projective_lifting_property (P.homologyπ b).hom g hπ
+  let F := ModuleCat.of R (Fin n → R)
+  let S : CochainComplex (ModuleCat.{u} R) ℤ :=
+    (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) b).obj F
+  let φ : S ⟶ P := HomologicalComplex.mkHomFromSingle (ModuleCat.ofHom h ≫ P.iCycles b)
+    (by rintro k (rfl : b + 1 = k); simp)
+  let K := CochainComplex.mappingCone φ
+  let T := CochainComplex.mappingCone.triangle φ
+  have hT : Q.mapTriangle.obj T ∈ distTriang _ := mappingCone_triangle_distinguished φ
+  have hSX (i : ℤ) (hi : i ≠ b) : IsZero (S.X i) :=
+    HomologicalComplex.isZero_single_obj_X _ _ _ _ hi
+  have hS : (Q.obj S).IsPerfect := isPerfect_Q_obj S b b fun i ↦ by
+    by_cases hi : i = b
+    · subst hi
+      let e' := (HomologicalComplex.singleObjXSelf (.up ℤ) i F).toLinearEquiv
+      exact ⟨Module.Projective.of_equiv e'.symm, Module.Finite.equiv e'.symm⟩
+    · have : Subsingleton (S.X i) := ModuleCat.isZero_iff_subsingleton.1 (hSX i hi)
+      have : Module.Flat R (S.X i) :=
+        (ModuleCat.flat_iff_flat _).1 (ObjectProperty.flat_of_isZero (hSX i hi))
+      have := Module.finitePresentation_of_finite R (S.X i)
+      exact ⟨Module.Flat.projective_of_finitePresentation, inferInstance⟩
+  -- the mapping cone is a complex of flat modules in degrees `[c, b]`
+  have hSflat (i : ℤ) : Module.Flat R (S.X i) := by
+    by_cases hi : i = b
+    · subst hi
+      exact Module.Flat.of_linearEquiv
+        (HomologicalComplex.singleObjXSelf (.up ℤ) i F).toLinearEquiv
+    · exact (ModuleCat.flat_iff_flat _).1 (ObjectProperty.flat_of_isZero (hSX i hi))
+  have hKflat (i : ℤ) : ObjectProperty.flat (K.X i) := by
+    have := hSflat (i + 1)
+    have := (ModuleCat.flat_iff_flat _).1 (hP i)
+    exact (ModuleCat.flat_iff_flat _).2 (Module.Flat.of_linearEquiv
+      (HomologicalComplex.homotopyCofiber.XIsoBiprod φ i (i + 1) rfl ≪≫
+        ModuleCat.biprodIsoProd (S.X (i + 1)) (P.X i)).toLinearEquiv)
+  have : K.IsStrictlyGE c := CochainComplex.isStrictlyGE_mappingCone φ b c c
+  have : K.IsStrictlyLE b := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    intro i hi
+    rw [CochainComplex.mappingCone.isZero_X_iff]
+    exact ⟨S.isZero_of_isStrictlyLE b _ (by omega), P.isZero_of_isStrictlyLE b _ (by omega)⟩
+  -- `H^b(φ)` is surjective, so `H^b(K) = 0`
+  have hepi : Epi (HomologicalComplex.homologyMap φ b) := by
+    have : IsIso (S.iCycles b) := S.isIso_iCycles b (b + 1) (by simp)
+      ((hSX (b + 1) (by omega)).eq_of_tgt _ _)
+    have hc : HomologicalComplex.cyclesMap φ b = S.iCycles b ≫
+        (HomologicalComplex.singleObjXSelf (.up ℤ) b F).hom ≫ ModuleCat.ofHom h := by
+      rw [← cancel_mono (P.iCycles b), HomologicalComplex.cyclesMap_i]
+      simp [φ, HomologicalComplex.mkHomFromSingle_f]
+    have : Epi (ModuleCat.ofHom h ≫ P.homologyπ b) := by
+      rw [ModuleCat.epi_iff_surjective]
+      change Function.Surjective ((P.homologyπ b).hom ∘ₗ h)
+      rw [hh]
+      exact hg
+    have : Epi (S.homologyπ b ≫ HomologicalComplex.homologyMap φ b) := by
+      rw [HomologicalComplex.homologyπ_naturality, hc]
+      simp only [Category.assoc]
+      infer_instance
+    exact epi_of_epi (S.homologyπ b) _
+  have hKb : IsZero (K.homology b) :=
+    (CochainComplex.homologyMap_exact₃_of_distTriang T hT b (b + 1)).isZero_X₂
+      ((CochainComplex.homologyMap_exact₂_of_distTriang T hT b).epi_f_iff.1 hepi)
+      (((S.exactAt_of_isLE b (b + 1) (by omega)).isZero_homology).eq_of_tgt _ _)
+  have hKle : (Q.obj K).IsLE (b - 1) := by
+    rw [isLE_Q_obj_iff, CochainComplex.isLE_iff]
+    intro i hi
+    obtain rfl | hi := eq_or_lt_of_le (show b ≤ i by omega)
+    · exact (HomologicalComplex.exactAt_iff_isZero_homology _ _).2 hKb
+    · exact K.exactAt_of_isLE b i hi
+  have hK' : torAmplitudeIn _ c (b - 1) (Q.obj K) := fun N ↦ by
+    refine ⟨(torAmplitudeIn_Q_obj_of_flat K c b hKflat N).1, ?_⟩
+    have := isLE_tensor (Q.obj K) ((singleFunctor _ 0).obj N) (b - 1) 0
+    rwa [add_zero] at this
+  -- the cohomology of `K` is finitely generated
+  have hKfin (i : ℤ) : Module.Finite R ((H i).obj (Q.obj K)) := by
+    have : Module.Finite R (T.obj₂.homology i) := hPfin i
+    have : Module.Finite R (T.obj₁.homology (i + 1)) := by
+      have := hS.finite_homology (i + 1)
+      exact Module.Finite.equiv (eH S (i + 1)).toLinearEquiv
+    have : Module.Finite R (K.homology i) :=
+      (CochainComplex.homologyMap_exact₃_of_distTriang T hT i (i + 1)).moduleFinite_X₂
+    exact Module.Finite.equiv (eH K i).toLinearEquiv.symm
+  exact ⟨Q.obj K, hK', hKfin, fun hK ↦ (isPerfect_obj₂_of_distTriang _ hT hS hK).of_iso e⟩
+
+/-- Induction on the length `b - c` of the Tor amplitude: an object of Tor amplitude in `[c, b]`
+with finitely generated cohomology is perfect. -/
+private lemma isPerfect_of_torAmplitudeIn (n : ℕ) {c b : ℤ} (hn : b - c ≤ n)
+    {C : DerivedCategory (ModuleCat.{u} R)} (hC : torAmplitudeIn _ c b C)
+    (hfin : ∀ i, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C)) :
+    C.IsPerfect := by
+  induction n generalizing b C with
+  | zero => exact isPerfect_of_torAmplitudeIn_of_le (by omega) hC hfin
+  | succ n ih =>
+    by_cases hbc : b ≤ c
+    · exact isPerfect_of_torAmplitudeIn_of_le hbc hC hfin
+    · obtain ⟨C', hC', hfin', himp⟩ := exists_isPerfect_imp_of_torAmplitudeIn (by omega) hC hfin
+      exact himp (ih (by omega) hC' hfin')
+
+end FiniteTorAmplitude
+
 /-- Blueprint `sk-lem-finite` (Step 2 of its proof): perfectness over a Noetherian ring.
 
 Over a Noetherian ring `R`, a bounded complex `C` with finitely generated cohomology modules and
-finite Tor amplitude is perfect. Take a bounded above resolution of `C` by finitely generated
-free modules and truncate it in the lowest degree `a` of the Tor amplitude: the cokernel in
-degree `a` is finitely presented of Tor dimension zero, hence flat, hence projective. -/
+finite Tor amplitude is perfect. The proof is by induction on the length of the Tor amplitude
+`[c, b]`. If `b ≤ c`, then `C` is represented by a complex of flat modules concentrated in
+degree `b`, whose term is finitely presented and flat, hence projective. Otherwise a finite free
+module `F` maps onto `H^b(C)`, and the cone of the lifted map `F[-b] ⟶ C` has Tor amplitude in
+`[c, b - 1]` and finitely generated cohomology; `C` is an extension of it by `F[-b]`. The
+boundedness hypothesis is implied by the finite Tor amplitude. -/
 theorem isPerfect_of_finiteTorAmplitude [IsNoetherianRing R]
-    {C : DerivedCategory (ModuleCat.{u} R)} (hC : TStructure.t.bounded C)
+    {C : DerivedCategory (ModuleCat.{u} R)} (_hC : TStructure.t.bounded C)
     (hfin : ∀ i, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C))
-    (hTor : finiteTorAmplitude (ModuleCat.{u} R) C) : C.IsPerfect :=
-  sorry
+    (hTor : finiteTorAmplitude (ModuleCat.{u} R) C) : C.IsPerfect := by
+  obtain ⟨c, d, hcd⟩ := hTor
+  exact isPerfect_of_torAmplitudeIn (d - c).toNat (by omega) hcd hfin
 
 /-- Blueprint `sk-lem-finite` (Step 3 of its proof): the dual of a perfect point complex.
 
