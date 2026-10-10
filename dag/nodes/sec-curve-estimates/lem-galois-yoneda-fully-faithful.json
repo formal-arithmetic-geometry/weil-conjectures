@@ -1,0 +1,74 @@
+{
+ "id": "lem-galois-yoneda-fully-faithful",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-lc-etale",
+   "place": "proof, Step 2 ('full faithfulness'): the comparison map $\\operatorname{Hom}_Y(P,Q)\\to\\operatorname{Hom}(\\underline{\\operatorname{Hom}}(-,P),\\underline{\\operatorname{Hom}}(-,Q))$",
+   "via": []
+  },
+  "same_as": [
+   "lem-pc-yoneda"
+  ]
+ },
+ "kind": "statement",
+ "title": "Yoneda: morphisms of representable presheaves",
+ "statement": "Let $\\mathcal C$ be a category and for an object $A$ let $h_A$ be the presheaf of sets $X\\mapsto\\operatorname{Mor}_{\\mathcal C}(X,A)$ on $\\mathcal C$. For objects $A,B$ of $\\mathcal C$ the map\n\n$$\n\\operatorname{Mor}_{\\mathcal C}(A,B)\\longrightarrow\\operatorname{Hom}(h_A,h_B),\\qquad g\\longmapsto(g\\circ-),\n$$\n\nto the set of natural transformations $h_A\\to h_B$ is a bijection, with inverse $\\tau\\mapsto\\tau_A(\\mathrm{id}_A)$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Lemma Tag 001P (lemma-yoneda), line 541"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Yoneda embedding is fully faithful",
+   "results": "CategoryTheory.Yoneda.fullyFaithful, CategoryTheory.Yoneda.yoneda_full, Ind.yoneda.fullyFaithful, Functor.RepresentableBy.isRepresentable (Mathlib.CategoryTheory.Yoneda)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural transformations between representable presheaves correspond to morphisms (Yoneda embedding fully faithful)",
+   "results": "Functor.RepresentableBy.homEquiv, Functor.IsRepresentedBy.representableBy_homEquiv_apply, CategoryTheory.yonedaEquiv, RepresentableBy.homEquiv_eq, CategoryTheory.Yoneda.fullyFaithful (Mathlib.CategoryTheory.Yoneda)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def fullyFaithful\\|yoneda_full\\|yoneda_faithful\\|fullyFaithful_preimage' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Yoneda.lean",
+   "results": "line 134 def fullyFaithful : (yoneda (C := C)).FullyFaithful (namespace CategoryTheory.Yoneda), preimage f := f.app _ (𝟙 _); line 141 fullyFaithful_preimage; lines 147,152 yoneda_full, yoneda_faithful @[stacks 001P]",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Yoneda.fullyFaithful",
+  "file": "Mathlib/CategoryTheory/Yoneda.lean",
+  "how": "exact: Yoneda.fullyFaithful (line 134) is the full faithfulness of yoneda : C ⥤ (Cᵒᵖ ⥤ Type), whose map is g ↦ (g ∘ -) and whose preimage is τ ↦ τ.app (op A) (𝟙 A) (fullyFaithful_preimage, line 141); read with sed -n 128,156p."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-galois-lc-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

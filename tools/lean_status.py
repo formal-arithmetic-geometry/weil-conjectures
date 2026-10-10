@@ -206,7 +206,12 @@ def main():
             "with_sorry_and_no_node": sum(1 for s in sorries if not s["nodes"]),
             "node_states": dict(counts), "sorries": sorries}
     for i, d in nodes.items():
-        paths[i].write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n")
+        # re-read the file and change only lean_audit, so that a worker writing its item meanwhile loses nothing
+        cur = json.loads(paths[i].read_text())
+        if cur.get("lean_audit") == d["lean_audit"]:
+            continue
+        cur["lean_audit"] = d["lean_audit"]
+        paths[i].write_text(json.dumps(cur, ensure_ascii=False, indent=1) + "\n")
     (ROOT / "dag/lean_audit.json").write_text(json.dumps(summary, ensure_ascii=False, indent=1) + "\n")
     for b, s in summary["branches"].items():
         print(b, {k: v for k, v in s.items() if k != "sorries"})

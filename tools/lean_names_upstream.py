@@ -26,7 +26,7 @@ import collections, gzip, json, pathlib, re, subprocess, sys, tomllib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "dag" / "lean_names_upstream.json"
 REPO = pathlib.Path.home() / "weil-conjectures-slopmaster2"
-SEG = re.compile(r"blueprint:([^)]*)")             # the text after "blueprint:" up to ")" (or the end of the line); the
+SEG = re.compile(r"blueprint:([^)]*)", re.I)             # the text after "blueprint:" up to ")" (or the end of the line); the
                                                    # tag may follow other text in its parenthesis: "(Stacks, Tag 0B9G; blueprint: `id`)"
 ID = re.compile(r"`?([a-z][a-z0-9]*(?:[-:][a-z0-9.]+)+)`?")
 
@@ -96,7 +96,7 @@ def cmd_docstrings(args) -> int:
     ids = node_ids()
     names, unknown, tags, matched = collections.defaultdict(list), set(), 0, set()
     partial = collections.defaultdict(list)
-    out_grep = subprocess.run(["git", "grep", "-n", "-E", r"blueprint:", ref, "--", "*.lean"], cwd=repo,
+    out_grep = subprocess.run(["git", "grep", "-n", "-i", "-E", r"blueprint:", ref, "--", "*.lean"], cwd=repo,
                               capture_output=True, text=True).stdout
     files: dict[str, list[str]] = {}
     unattached = 0

@@ -1,8 +1,8 @@
 # Work queue
 
-852 items; claim with `tools/claim.py next <group> [--stage N]`.
+855 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (388)
+## Stage 1: nodes to split (390)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,10 +22,11 @@
 | `lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1015 | none |
-| `lem-weil-pbc-torsion-extension-flat-descent` | 1015 | none |
 | `lem-weil-pbc-valuation-ring-normal` | 1015 | none |
+| `lem-weil-pbc-cyclic-extension-flat-descent` | 1016 | none |
 | `lem-weil-pbc-dimension-inequality-quasi-finite` | 1016 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
+| `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-flat-tor-ideal-criterion` | 1016 | none |
 | `lem-weil-pbc-fpqc-descend-affine` | 1016 | none |
 | `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
@@ -34,6 +35,8 @@
 | `lem-weil-pbc-tor-ideal-kernel-naturality` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-change-rings` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
+| `lem-weil-pbc-torsion-cyclic-presentation` | 1016 | none |
+| `lem-weil-pbc-torsion-hom-flat-comparison` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-finite-ring-map-quasi-finite` | 1017 | none |
 | `lem-weil-pbc-regular-sequence-koszul-regular` | 1017 | none |
@@ -69,7 +72,6 @@
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
 | `thm-galois-lc-etale` | 3005 | rests_on_sorry |
 | `thm-weil-pbc-hypercover-cohomology` | 3005 | none |
-| `thm-weil-pbc-universal-homeomorphism-invariance` | 3005 | none |
 | `def-weil-pbc-finite-split-hypercover` | 3006 | none |
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-descent` | 3006 | none |
@@ -395,7 +397,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (464)
+## Stage 2: nodes to state (465)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -815,6 +817,7 @@
 | `lem-weil-pbc-tor-dimension-shift-free` | 1 | state |
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1 | state |
 | `lem-weil-pbc-tor-strictly-pro-zero` | 1 | state |
+| `lem-weil-pbc-torsion-extension-flat-descent` | 1 | state |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1 | state |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1 | state |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1 | state |
@@ -864,7 +867,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 406 nodes that wait for stage 1, 859 nodes that wait for a statement dependency.
+Not open yet: 408 nodes that wait for stage 1, 860 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 

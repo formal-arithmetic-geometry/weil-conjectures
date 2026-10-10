@@ -1,0 +1,85 @@
+{
+ "id": "lem-galois-stalk-representable",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-lc-etale",
+   "place": "proof, Step 4: 'the fibre of the sheaf of morphisms is $\\operatorname{Hom}_{\\bar y}(\\bar y,P)=|P_{\\bar y}|$'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Stalk of a representable etale sheaf at a geometric point",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ a geometric point [def-weil-geometric-point] and $P\\to Y$ an etale morphism, so that $P$ is an object of $Y_{\\Et}$ [def-weil-pbc-etale-site]. Let $h_P$ be the presheaf $U\\mapsto\\operatorname{Mor}_Y(U,P)$ on $Y_{\\Et}$ and $|P_{\\bar y}|$ the geometric fibre of $P\\to Y$ over $\\bar y$, the set of morphisms $\\bar p:\\operatorname{Spec}\\Omega\\to P$ over $Y$ [def-weil-pbc-geometric-fibre]. Then the map from the stalk [def-weil-pbc-geometric-stalks]\n\n$$\n(h_P)_{\\bar y}=\\varinjlim_{(U,\\bar u)}\\operatorname{Mor}_Y(U,P)\\longrightarrow|P_{\\bar y}|,\\qquad [(U,\\bar u),\\varphi]\\longmapsto\\varphi\\circ\\bar u,\n$$\n\nis well defined and bijective, with inverse $\\bar p\\mapsto[(P,\\bar p),\\mathrm{id}_P]$, and it is natural in $P$ for $Y$-morphisms $P\\to P'$ between etale $Y$-schemes.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma Tag 00Y6 (lemma-points-recover), lines 7918-7942, applied to the point of $Y_{\\Et}$ of Etale Cohomology, Lemma Tag 04FM (lemma-stalk-gives-point), etale-cohomology.tex lines 3369-3410, whose functor is $u(U)=|U_{\\bar y}|$"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-fibre",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of representable sheaf at a point equals value of the point functor",
+   "results": "TopCat.Presheaf.stalkFunctor_obj, TopCat.Presheaf.stalk, Scheme.Modules.restrictStalkNatIso, TopCat.Presheaf.germ (topological stalks only)",
+   "date": "2026-10-10",
+   "verdict": "no match for the topological search; see leanfinder/loogle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of the Yoneda sheaf h_U at a point of a site given by fiber functor u is u(U)",
+   "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiber, Point.toPresheafFiber_w_apply, Point.presheafFiber (Mathlib.CategoryTheory.Sites.Point.Basic)",
+   "date": "2026-10-10",
+   "verdict": "candidate: the Point API"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shrinkYonedaCompPresheafFiberIso\"",
+   "results": "CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso : shrinkYoneda ⋙ Φ.presheafFiber ≅ Φ.fiber; ..._inv_app_toPresheafFiber (inverse is x ↦ class of (X, x, id)); presheafFiber_map_shrinkYoneda_map_... (Mathlib.CategoryTheory.Sites.Point.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'yoneda\\|Yoneda' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/; sed -n 60,66p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean",
+   "results": "Point/Basic.lean:150 shrinkYonedaCompPresheafFiberIso; EtalePoint.lean:64-65 pointSmallEtale s with fiber := Etale.forget S ⋙ coyoneda.obj (op (Over.mk s)), i.e. Y-morphisms Spec Ω → U",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso",
+  "file": "Mathlib/CategoryTheory/Sites/Point/Basic.lean",
+  "how": "specializes in one line: for the point Φ = AlgebraicGeometry.Scheme.pointSmallEtale ȳ (Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:64-65, fiber U ↦ Y-morphisms Spec Ω → U, i.e. |U_ȳ|; Ω algebraically closed is separably closed), Φ.shrinkYonedaCompPresheafFiberIso (Point/Basic.lean:150-152) is a natural isomorphism (h_P)_ȳ = Φ.presheafFiber (h_P) ≅ Φ.fiber P = |P_ȳ|, natural in P; its inverse sends x to the class of (P, x, id_P) (shrinkYonedaCompPresheafFiberIso_inv_app_toPresheafFiber, lines 154-160), which is the inverse in the statement; the stalk of [def-weil-pbc-geometric-stalks] is Φ.presheafFiber by that node's own match. Lines read with sed -n 140,160p and EtalePoint.lean 60-75."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "thm-galois-lc-etale",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
