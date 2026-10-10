@@ -12,9 +12,68 @@
   "def-weil-presheaf-modules-sheafification",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $t\\in\\mathcal P^\\#(W)$ satisfy $f^\\#_W(t)=0$. By the local-sections description of sheafification [lem-weil-pbc-site-sheafification-sections-local], there is a covering $\\{W_i\\to W\\}_i$ and sections $x_i\\in\\mathcal P(W_i)$ with $t|_{W_i}=\\eta_{W_i}(x_i)$. The equality $f^\\#\\circ\\eta=f$ and restriction functoriality give $f_{W_i}(x_i)=f^\\#_{W_i}(t|_{W_i})=(f^\\#_W(t))|_{W_i}=0$.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma 00WK (lemma-sections-sheafification), first paragraph, together with the defining equation for the sheafification lift in Modules on Sites, Lemma 03CY"
+   }
+  },
+  {
+   "text": "For each $i$, local injectivity of $f$ applied to $x_i$ supplies a covering $\\{W_{ij}\\to W_i\\}_j$ on which every restriction of $x_i$ is zero. Pulling these coverings back along $W_i\\to W$ and composing with $\\{W_i\\to W\\}_i$ gives a covering of $W$ by the site axioms [def-weil-pbc-sites-and-cohomology]. On every member $W_{ij}$, the restriction of $t$ is the restriction of $\\eta(x_i)=t|_{W_i}$ and is therefore $\\eta(0)=0$.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Lemma 00WK (lemma-sections-sheafification), local-refinement argument, and Modules on Sites, Lemma 03CY"
+   }
+  },
+  {
+   "text": "The underlying sheaf of sets of the module sheafification is the sheafification of the underlying presheaf of sets [lem-weil-pbc-module-sheafification-underlying-sets]. Thus the zero restrictions in the preceding step are equalities in the underlying sheaf of sets, not merely in a module presentation; the same conclusion also follows directly from the underlying map of the module sheafification unit.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-underlying-sets",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03CY (lemma-sheafification-presheaf-modules), with Sites Section 00YR and Sheaves Lemma 0087(1)"
+   }
+  },
+  {
+   "text": "Since $\\mathcal P^\\#$ is a sheaf, its underlying presheaf of sets is separated: a section whose restrictions to a covering are all zero is itself zero by the equalizer sheaf condition [def-weil-pbc-sites-and-cohomology, part (1)]. Hence $t=0$. This proves that every section map $f^\\#_W$ is injective. A morphism of sheaves of modules is a monomorphism exactly when all its section maps are injective, so $f^\\#$ is a monomorphism.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Definitions 00VM/00VR (sheaf equalizer condition), and Modules on Sites, Lemma 03CY; the final monomorphism criterion is the sectionwise definition in the sheaf category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lem-weil-pbc-module-sheafification-underlying-sets",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex and literature/stacks-project/sites-modules.tex",
+  "place": "Sites Lemma 00WK and Theorem 00WB, with Modules on Sites Lemma 03CY; application pattern in etale-cohomology.tex Lemma 0F4L"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +105,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +125,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-module-sheafification-lift-injective",
+  "worker": "site-module-sheafification-lift",
+  "summary": "Split the locally-injective sheafification lift into local representation, refinement by the local-injectivity coverings, identification of the module sheafification with the underlying sheafification of sets, and the final sheaf-separatedness argument. All reusable ingredients are public DAG nodes; no Lean was written or compiled."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 4 steps: local representatives of a section of P^# killed by f^#, local injectivity on each piece and composition of coverings, module sheafification vs underlying sets, separatedness of the sheaf P^#. Correct. L removed the proof sketch from the statement post-merge."
+ }
 }
