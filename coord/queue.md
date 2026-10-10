@@ -1,8 +1,8 @@
 # Work queue
 
-931 items; claim with `tools/claim.py next <group> [--stage N]`.
+934 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (614)
+## Stage 1: nodes to split (617)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -28,7 +28,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1013 | none |
 | `lem-weil-pbc-ringed-space-open-restriction-adjunction` | 1013 | none |
@@ -53,6 +52,7 @@
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
 | `lem-weil-pbc-zariski-open-restriction-injectives` | 1013 | none |
 | `def-weil-pbc-formal-glueing-data` | 1014 | none |
+| `lem-weil-pbc-add-trivial-complex` | 1014 | none |
 | `lem-weil-pbc-affine-pushforward-ideal-product` | 1014 | none |
 | `lem-weil-pbc-cm-local-dimension-drop-regular-sequence` | 1014 | none |
 | `lem-weil-pbc-cm-local-maximal-chain-length` | 1014 | none |
@@ -71,6 +71,7 @@
 | `lem-weil-pbc-essentially-constant-splitting` | 1014 | none |
 | `lem-weil-pbc-etale-retraction-finite-type-splitting` | 1014 | none |
 | `lem-weil-pbc-etale-splits-off-isolated-points-technical` | 1014 | none |
+| `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1014 | none |
 | `lem-weil-pbc-finite-over-nagata-nagata` | 1014 | none |
 | `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1014 | none |
 | `lem-weil-pbc-finite-type-domain-dimension-local-ring` | 1014 | none |
@@ -79,6 +80,7 @@
 | `lem-weil-pbc-fpqc-descend-finite` | 1014 | none |
 | `lem-weil-pbc-fpqc-descend-flat` | 1014 | none |
 | `lem-weil-pbc-fpqc-descend-locally-finite-presentation` | 1014 | none |
+| `lem-weil-pbc-free-complex-maps-to-resolution` | 1014 | none |
 | `lem-weil-pbc-fs-adic-field-geometrically-regular` | 1014 | none |
 | `lem-weil-pbc-fs-adic-lift-from-residue-field` | 1014 | none |
 | `lem-weil-pbc-fs-adic-lift-into-complete` | 1014 | none |
@@ -87,6 +89,7 @@
 | `lem-weil-pbc-lci-conormal-generators-global-complete-intersection` | 1014 | none |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1014 | none |
 | `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1014 | none |
+| `lem-weil-pbc-minimal-finite-free-resolution-local` | 1014 | none |
 | `lem-weil-pbc-ml-sets-tower-limit-nonempty` | 1014 | none |
 | `lem-weil-pbc-module-cech-vanishing-criterion` | 1014 | none |
 | `lem-weil-pbc-module-extension-by-zero-adjunction` | 1014 | none |
@@ -943,7 +946,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 626 nodes that wait for stage 1, 598 nodes that wait for a statement dependency.
+Not open yet: 629 nodes that wait for stage 1, 599 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
