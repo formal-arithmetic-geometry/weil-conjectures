@@ -1374,3 +1374,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:10 L: accepted lem-galois-axioms (0BN0, 7 steps; 4 Mathlib leaves and 1 node).
 - 12:11 L: accepted lem-galois-descent (fpqc descent route, 6 steps; new nodes 02W0, 0245, 02VN; the imported Zariski-gluing proof was wrong; lem-galois-glue flagged unreachable again; lem-pd-morphisms-descend noted false as stated, HUMAN.md).
 - 2026-10-10, delivery of C1: lem-pc-module-pullback-adjunction merged from deliver/C1/lem-pc-module-pullback-adjunction (1 commit(s), 2 new node(s), spot-checked by L: L: 0096 as the composite of the inverse-image adjunction (008A) and the change-of-rings adjunction; 2 new nodes); claim closed
+- 12:11 L: merged C1 lem-pc-module-pullback-adjunction (0096, +2 nodes).
