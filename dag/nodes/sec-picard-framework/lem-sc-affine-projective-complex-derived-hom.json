@@ -15,7 +15,7 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "title": "Derived Hom from a bounded-above projective complex",
- "statement": "Let R be a ring, let P^\\bullet be a bounded-above cochain complex [def-pc-cochain-complex-modules] of projective R-modules [lem-sc-bounded-above-projective-kprojective], and let L^\\bullet be a bounded-below cochain complex of R-modules. Then the ordinary Hom complex Hom_R^\\bullet(P^\\bullet,L^\\bullet) represents the derived Hom R Hom_R(P^\\bullet,L^\\bullet) [def-pur-derived-internal-hom]. In particular its cohomology vanishes in all sufficiently negative degrees.",
+ "statement": "Let R be a ring and regard it as the structure ring of the one-point ringed site, with derived category D(R) defined by [def-weil-abstract-derived-category]. Let P^\\bullet be a bounded-above cochain complex [def-pc-cochain-complex-modules] of projective R-modules [lem-sc-bounded-above-projective-kprojective], and let L^\\bullet be a bounded-below cochain complex of R-modules. Then the ordinary Hom complex Hom_R^\\bullet(P^\\bullet,L^\\bullet), whose degree-n term is \\prod_p Hom_R(P^p,L^{p+n}), represents the derived Hom R Hom_R(P^\\bullet,L^\\bullet) obtained by specializing [def-pur-derived-internal-hom] to this one-point ringed site. In particular its cohomology vanishes in all sufficiently negative degrees.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 0GM8, lemma-stalk-internal-hom, case (2), together with the K-projective construction of derived Hom"
@@ -23,11 +23,43 @@
  "stmt_deps": [
   "def-pc-cochain-complex-modules",
   "lem-sc-bounded-above-projective-kprojective",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-injective resolution L^\\bullet\\to I^\\bullet of the bounded-below complex L^\\bullet in the one-point specialization of [def-pur-derived-internal-hom]. Since P^\\bullet is bounded above with projective terms, [lem-sc-bounded-above-projective-kprojective] says that Hom_R^\\bullet(P^\\bullet,-) sends quasi-isomorphisms to quasi-isomorphisms (apply its acyclicity assertion to the mapping cone). Hence Hom_R^\\bullet(P^\\bullet,L^\\bullet)\\to Hom_R^\\bullet(P^\\bullet,I^\\bullet) is a quasi-isomorphism, and the latter is the representative used by [def-pur-derived-internal-hom]; therefore the ordinary Hom complex represents the derived Hom in D(R).",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sc-bounded-above-projective-kprojective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8, lemma-stalk-internal-hom, case (2), using the K-projective replacement construction of Derived Categories Tag 06XR"
+   }
+  },
+  {
+   "text": "For the vanishing assertion, choose integers b and a with P^p=0 for p>b and L^q=0 for q<a. By the Hom-complex formula in the one-point specialization of [def-pur-derived-internal-hom], its degree-n term is the product over p of Hom_R(P^p,L^{p+n}). A nonzero factor requires p\\le b and p+n\\ge a, so no factor exists when n<a-b; the product is then zero. Thus the cohomology vanishes in all sufficiently negative degrees.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0GM8, lemma-stalk-internal-hom, case (2), boundedness estimate in the affine Hom-complex calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-sc-bounded-above-projective-kprojective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0GM8, lemma-stalk-internal-hom, case (2), together with the K-projective construction of derived Hom (Tag 06XR)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +91,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-projective-complex-derived-hom",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Tag 0GM8, case (2), and the K-projective derived-Hom construction of Tag 06XR. No Lean declaration states this arbitrary bounded-above/bounded-below complex result, and no subordinate node is needed: the existing K-projectivity Mathlib leaf and derived internal-Hom definition carry the proof. Step 1 uses K-projectivity to replace the bounded-below target by a K-injective resolution and identify ordinary Hom with derived Hom; Step 2 gives the explicit degree bound n<a-b. The existing module-in-degree-zero resolution lemma is a specialization and was not duplicated.",
+  "blueprint": "Realizes lem-sc-finite-duality proof, Tag 0A6H clause (3)(a): compute RHom from the bounded-above finite-projective model against a bounded-below complex.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-apd2528",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apd2528 (reviewer sub-agent of L); spot-checked: Not a restatement: lem-sc-derived-hom-finite-free-model is the sheaf version on a ringed space with finite-free terms; merged lem-sc-affine-pseudo-coherent-rhom-qcoherent cites this node in Step 2 for finite free E (projective) and bounded-below L, hypotheses match (C4). Step 1: K-projectivity cited via Mathlib leaf lem-sc-bounded-above-projective-kprojective (isKProjective_of_projective, 064U/0A5J content) plus cone argument against K-injective representative of def-pur-derived-internal-hom on the one-point site (C1 ok). Step 2 degree bound n<a-b elementary. Statement change (one-point ringed site, D(R) via def-weil-abstract-derived-category, degree-n formula) named with reason in second reading (E7); claim not weakened. created.item left as lem-sc-affine-pseudo-coherent-rhom-qcoherent (the creating item; second reading's claimed edit of it is not in the diff and not needed). No repairs."
  }
 }
