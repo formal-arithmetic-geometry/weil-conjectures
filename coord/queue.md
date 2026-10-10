@@ -1,13 +1,13 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+860 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (314)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `thm-constructible-serre` | 5 | rests_on_sorry |
-| `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
+| `lem-weil-pbc-ext-one-direct-sum` | 1017 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
@@ -321,7 +321,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (545)
+## Stage 2: nodes to state (546)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -479,6 +479,7 @@
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1 | state |
 | `lem-weil-pbc-dim-one-submodule-quotient-finite-length` | 1 | state |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1 | state |
+| `lem-weil-pbc-direct-sum-extension-assembly` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-directed-union-subrings-flat-module` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
