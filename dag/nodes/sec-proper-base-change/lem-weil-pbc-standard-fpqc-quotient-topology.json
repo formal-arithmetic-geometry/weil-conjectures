@@ -24,9 +24,71 @@
   "def-pc-scheme",
   "def-weil-pbc-faithfully-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=\\prod_{j\\in J}A_j$ and $V=\\operatorname{Spec}(B)$. The finite coproduct $\\coprod_{j\\in J}V_j$ is identified with $V$ by the canonical finite-product spectrum isomorphism [lem-weil-pbc-finite-affine-coproduct-spectrum]; its coprojections are open, pairwise disjoint, and cover $V$ [lem-weil-pbc-affine-morphism-permanence] (4), [lem-weil-pbc-scheme-coproduct-family]. Let $g:V\\to T$ be the morphism induced by $R\\to B$; under this identification $g$ restricts to $f_j$ on the $j$-th summand.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Lemma Tag 03N0 proof, affine reduction and finite standard covering; Morphisms Lemma Tag 02JY setup"
+   }
+  },
+  {
+   "text": "The morphism $g$ is flat because the faithfully flat map $R\\to B$ is flat [def-weil-pbc-faithfully-flat-ring-map] and flatness of an affine spectrum morphism is equivalent to flatness of its ring map [lem-weil-pbc-flat-ring-map-iff-flat-affine]. It is quasi-compact because it is affine and affine morphisms are quasi-compact [lem-weil-pbc-affine-morphism-permanence] (3). Finally $g$ is surjective because the faithfully flat map $R\\to B$ induces a surjection $\\operatorname{Spec}(B)\\to\\operatorname{Spec}(R)$ [lem-weil-pbc-faithfully-flat-surjective-spectrum].",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 02JY proof, affine case, with Algebra Lemma Tag 00HQ for faithful-flat surjectivity"
+   }
+  },
+  {
+   "text": "Apply the quotient-map statement [lem-weil-pbc-flat-qc-surjective-quotient-map] to $g$. It gives that $W$ is open in $T$ if and only if $g^{-1}(W)$ is open in $V$.",
+   "uses": [
+    "lem-weil-pbc-flat-qc-surjective-quotient-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 02JY (label lemma-fpqc-quotient-topology)"
+   }
+  },
+  {
+   "text": "Because the coprojection images are open and cover $V$, the inverse image $g^{-1}(W)$ is open exactly when its intersection with every summand is open; these intersections are the inverse images $f_j^{-1}(W)$. The hypothesis therefore makes $g^{-1}(W)$ open, and Step 3 yields that $W$ is open in $T$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma Tag 02JY proof, quotient-topology criterion applied to the finite coproduct"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-flat-qc-surjective-quotient-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma Tag 02JY (label lemma-fpqc-quotient-topology), affine coproduct specialization"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +113,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-open-subscheme-fpqc-descent",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-standard-fpqc-quotient-topology",
+  "worker": "stage1",
+  "summary": "Split the finite-family statement by packaging the affine members as the spectrum of their product, verifying that the induced morphism is flat, quasi-compact, and surjective, applying the Mathlib quotient-map theorem, and unpacking openness on the coproduct summands. Added one Mathlib leaf for the general flat quasi-compact surjective quotient-map result; reused existing DAG nodes for coproduct topology, affine quasi-compactness, flatness, and faithful-flat surjectivity.",
+  "blueprint": "Realizes the Tag 03N0 proof sentence that the union is open by the fpqc quotient-topology lemma, specifically the finite standard affine coproduct specialization of Tag 02JY",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sfq1916",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sfq1916 (reviewer sub-agent of L); spot-checked: Steps 1-4 checked against cited statements and Tag 02JY; leaves read: Flat.lean:124-126 isQuotientMap_of_surjective (Flat, QuasiCompact, Surjective -> IsQuotientMap) exact; Limits.lean:604-613 sigmaSpec/ι_sigmaSpec and 641 Finite-index IsIso instance exact, one declaration per clause; no cycle: both new nodes are Mathlib leaves with no dependence on lem-weil-pbc-open-subscheme-fpqc-descent or lem-weil-pbc-fpqc-affine-standard-refinement. FIX more, RETURN less: B3 item source.document still read more-morphisms.tex (second reading claimed it corrected); set to literature/stacks-project/morphisms.tex where Tag 02JY lives.; 1 file(s) fixed by the reviewer"
  }
 }
