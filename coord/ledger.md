@@ -2748,3 +2748,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:59 L: merged deliver/H1/lem-sc-meromorphic-sheaf-generic-product (reviewer FIX; after a return; new nodes: 2)
 - 22:00 L: merged deliver/C1/lem-pc-perfect-generator-exists (reviewer FIX; first push; new nodes: 0)
 - 22:00 L: merged deliver/G1/cor-pd-pic0-base-change (reviewer FIX; first push; new nodes: 0)
+- 22:00 L: merged deliver/H1/def-sc-duality-equation-base-change-map (reviewer FIX; first push; new nodes: 0)

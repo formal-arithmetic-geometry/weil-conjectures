@@ -23,11 +23,94 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
-  "lem-pc-qcqs-derived-direct-image-right-adjoint"
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "def-weil-pbc-adjunction-conjugate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The fibre product node supplies X'=X\\times_Y Y' and its projections g_X and f'; the displayed commutative square is therefore cartesian. The quasi-compact and quasi-separated hypotheses allow the derived categories and derived direct images in the statement to be formed.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-derived-category",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8, setup preceding Lemma 48.6.2"
+   }
+  },
+  {
+   "text": "By [lem-pc-qcqs-derived-direct-image-right-adjoint], Rf_* and Rf'_* preserve D_{\\mathrm{QCoh}} and the restricted functors have right adjoints a and a'; its hypothesis holds because f, f', g, g_X are morphisms between quasi-compact and quasi-separated schemes, hence quasi-compact and quasi-separated morphisms. By [lem-pc-ringed-spaces-derived-adjoint], Lg^*\\dashv Rg_* and Lg_X^*\\dashv Rg_{X,*} on D(\\mathcal O), with units and counits used below. These adjunctions restrict to the full subcategories D_{\\mathrm{QCoh}}: Rg_* and Rg_{X,*} preserve D_{\\mathrm{QCoh}} by [lem-pc-qcqs-derived-direct-image-right-adjoint], and Lg^*, Lg_X^* preserve D_{\\mathrm{QCoh}} by [lem-pc-derived-pullback-tensor-qcoh]. Composing adjunctions, Lg^*Rf_*\\dashv aRg_* and Rf'_*Lg_X^*\\dashv Rg_{X,*}a' as functors D_{\\mathrm{QCoh}}(X)\\to D_{\\mathrm{QCoh}}(Y').",
+   "uses": [
+    "lem-pc-qcqs-derived-direct-image-right-adjoint",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-derived-pullback",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8, definition of the base-change map and adjunctions"
+   }
+  },
+  {
+   "text": "The unit \\eta of Lg_X^*\\dashv Rg_{X,*} gives Rf_*(\\eta):Rf_*\\to Rf_*Rg_{X,*}Lg_X^*. Since f\\circ g_X=g\\circ f' (the square commutes), [lem-pc-derived-direct-image-composition] gives Rf_*Rg_{X,*}\\cong R(f\\circ g_X)_*=R(g\\circ f')_*\\cong Rg_*Rf'_*, so the adjunction Lg^*\\dashv Rg_* transposes this map to the canonical natural transformation \\beta:Lg^*Rf_*\\to Rf'_*Lg_X^*.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "def-pc-fibre-product",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8, equation-base-change-map preceding equation (1)"
+   }
+  },
+  {
+   "text": "The conjugate [def-weil-pbc-adjunction-conjugate] of \\beta:Lg^*Rf_*\\to Rf'_*Lg_X^* with respect to the two composite adjunctions of Step 2 is a transformation \\theta:Rg_{X,*}a'\\to aRg_*. The conjugate bijection preserves isomorphisms, so the hypothesis that \\beta is an isomorphism implies that \\theta is an isomorphism and \\theta^{-1} is defined.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-pc-ringed-spaces-derived-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8, equation-base-change-map and case (1)"
+   }
+  },
+  {
+   "text": "For K\\in D_{\\mathrm{QCoh}}(Y), the unit \\eta'_K:K\\to Rg_*Lg^*K, the component (\\theta_{Lg^*K})^{-1}:aRg_*Lg^*K\\to Rg_{X,*}a'(Lg^*K) and the counit \\epsilon:Lg_X^*Rg_{X,*}\\to\\mathrm{id} exist by Steps 2 and 4. Applying Lg_X^*a to the first and Lg_X^* to the second, then composing with \\epsilon at a'(Lg^*K), gives exactly the displayed composite Lg_X^*a(K)\\to a'(Lg^*K), which is therefore well defined.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8, equation-base-change-map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-derived-direct-image-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8, equation-base-change-map and Lemma 48.6.2 case (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,12 +135,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-affine-basechange",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sc-duality-equation-base-change-map",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks duality.tex Tag 0AA8, equation-base-change-map and the setup of Lemma 48.6.2. The split records five well-formedness steps: the cartesian square and derived categories, existence of the right adjoints and pullback adjunctions, construction of beta by adjunction, conjugation to theta and its invertibility, and the displayed composite using the unit and counit. The existing generic conjugate definition is cited; no new node was needed.",
+  "blueprint": "Realizes lem-sc-finite-duality Tag 0AA8 case (1), canonical map from the mate of the comparison transformation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dbm2730",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dbm2730 (reviewer sub-agent of L); spot-checked: Statement identical to sheaf-dag (K1 7dc9b5d70, R-pfa2620): no revert (E7 ok). Users K1 and M1 (lem-sc-flat-precompose-pus) use it as unit, theta^{-1}, counit: consistent (C4). No RHom identity asserted. FIX more, RETURN less: (1) C1 step 3: Rf_*Rg_{X,*}=Rg_*Rf'_* now cites lem-pc-derived-direct-image-composition; (2) C1/C4 step 2: qcqs right-adjoint node needs qcqs morphisms, noted f,f',g,g_X are such (maps between qcqs schemes); restriction of Lg^*-|Rg_* to D_QCoh cites lem-pc-derived-pullback-tensor-qcoh and the qcqs node, composite adjunctions for the conjugate stated; (3) B4 steps 3-5 arrows in TeX, and step 5 corrected (Lg_X^* is applied to the first two arrows only, not the counit). Second reading by H1 missed (1) and (2).; 1 file(s) fixed by the reviewer"
+ }
 }
