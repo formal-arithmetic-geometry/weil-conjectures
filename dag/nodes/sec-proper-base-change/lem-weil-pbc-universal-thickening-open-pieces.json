@@ -13,9 +13,127 @@
   "def-weil-open-immersion",
   "def-weil-pbc-universal-first-order-thickening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*(0), the restriction is a first order thickening over $X$.* Write $j_{W'}:W'\\to T'$ and $j_W:W\\to T$ for the inclusions (open immersions [def-weil-open-immersion]) and $i_W:=i_T|_W:W\\to W'$ for the unique morphism with $j_{W'}\\circ i_W=i_T\\circ j_W$ [lem-weil-pbc-morphism-factors-through-open-subscheme] (it exists since $i_T(W)\\subseteq W'$, $W$ being $i_T^{-1}(W')$). Apply [lem-weil-pbc-thickening-open-restriction] to the closed immersion $i_T$, the open $W'\\subseteq T'$, the structure morphism $b:T'\\to X$ and the open $U:=X$ of $X$ (so $b(W')\\subseteq X$ trivially and $b|_{W'}=b\\circ j_{W'}$ is the factorization it names): $i_W$ is a closed immersion, its ideal sheaf is the restriction $\\mathcal I|_{W'}$ of the ideal sheaf $\\mathcal I$ of $i_T$, $(\\mathcal I|_{W'})^2=0$ since $\\mathcal I^2=0$, and $W\\subset W'$ with $b|_{W'}$ is a first order thickening over $X$ [def-sbc-first-order-thickening] (4), $W$ being over $X$ through $b|_{W'}\\circ i_W=b\\circ j_{W'}\\circ i_W=b\\circ i_T\\circ j_W$, i.e. through the restriction of the structure morphism $b\\circ i_T$ of $T$ [def-weil-scheme-over-base].",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-thickening-open-restriction",
+    "def-sbc-first-order-thickening",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 04F3 (lemma-universal-thickening), second paragraph ('We begin with some general remarks'): 'Let V' \\subset Z' be the open subscheme such that V = Z \\cap V''' (used implicitly); Lemma 09ZU (lemma-base-change-thickening) for the base change of a thickening along an open immersion"
+   }
+  },
+  {
+   "text": "*(0), existence and uniqueness of the open over a given open.* Since $T\\subset T'$ is a first order thickening, it is a thickening, so the map of underlying spaces of $i_T$ is a bijective homeomorphism $|T|\\to|T'|$ [def-sbc-first-order-thickening] (1)-(3). Hence for every open $W\\subseteq T$ the set $i_T(W)$ is open in $T'$ and is the unique open subset $W'$ with $i_T^{-1}(W')=W$: if $i_T^{-1}(W'_1)=i_T^{-1}(W'_2)$ then $W'_1=i_T(i_T^{-1}(W'_1))=i_T(i_T^{-1}(W'_2))=W'_2$ by surjectivity of $i_T$. An open subscheme of $T'$ is the open subset with the restricted structure sheaf [def-weil-open-immersion], so $W'$ is unique as an open subscheme. In particular, in (1), for $V\\subseteq Z$ open there is exactly one open subscheme $V'\\subseteq Z'$ with $i^{-1}(V')=V$, namely $V'=i(V)$ as a set, $Z\\subset Z'$ being a first order thickening by [def-weil-pbc-universal-first-order-thickening].",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-open-immersion",
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 04F3 (lemma-universal-thickening), second paragraph ('We begin with some general remarks'): 'Let V' \\subset Z' be the open subscheme such that V = Z \\cap V''; Definition 04EX (definition-thickening)"
+   }
+  },
+  {
+   "text": "*(1), $V\\subset V'$ is a first order thickening over $U$, compatible with $h|_V$.* Write $j_V:V\\to Z$, $j_{V'}:V'\\to Z'$, $j_U:U\\to X$ for the inclusions, $h|_V:V\\to U$ for the unique morphism with $j_U\\circ h|_V=h\\circ j_V$ [lem-weil-pbc-morphism-factors-through-open-subscheme], and recall $h'\\circ i=h$ [def-weil-pbc-universal-first-order-thickening]. By Step 2 every point of $V'$ is $i(v)$ with $v\\in V$, and $h'(i(v))=h(v)\\in U$; so $h'(V')\\subseteq U$, and there is a unique $h'_{V'}:V'\\to U$ with $j_U\\circ h'_{V'}=h'\\circ j_{V'}$ [lem-weil-pbc-morphism-factors-through-open-subscheme]; this is the morphism $h'|_{V'}:V'\\to U$ of the statement. By [lem-weil-pbc-thickening-open-restriction], applied to $i$, $V'$, $h':Z'\\to X$ and $U$, the morphism $i_V:=i|_V:V\\to V'$ (the unique one with $j_{V'}\\circ i_V=i\\circ j_V$) is a closed immersion with square-zero ideal sheaf $\\mathcal I|_{V'}$ and $V\\subset V'$ is a first order thickening over $U$ through $h'_{V'}$ [def-sbc-first-order-thickening]. It is a thickening of $V$ over $U$ for the given $h|_V$: $j_U\\circ h'_{V'}\\circ i_V=h'\\circ j_{V'}\\circ i_V=h'\\circ i\\circ j_V=h\\circ j_V=j_U\\circ h|_V$, so $h'_{V'}\\circ i_V=h|_V$ by the uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme] (applied to the morphism $h\\circ j_V:V\\to X$, whose image lies in $U$).",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-pbc-universal-first-order-thickening",
+    "lem-weil-pbc-thickening-open-restriction",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 04F3 (lemma-universal-thickening), second paragraph ('We begin with some general remarks'): 'Let V' \\subset Z' be the open subscheme such that V = Z \\cap V'. Then we claim that V \\subset V' is the universal first order thickening of V over U'"
+   }
+  },
+  {
+   "text": "*(1), existence of the morphism of thickenings.* Let $T\\subset T'$ be a first order thickening over $U$, with closed immersion $i_T:T\\to T'$ and structure morphism $b:T'\\to U$, and let $a:T\\to V$ with $h|_V\\circ a=b\\circ i_T$. Then $T\\subset T'$ with $j_U\\circ b:T'\\to X$ is a first order thickening over $X$ (the closed immersion and its ideal sheaf are unchanged; $T$ is over $X$ through $j_U\\circ b\\circ i_T$) [def-sbc-first-order-thickening], [def-weil-scheme-over-base], and $j_V\\circ a:T\\to Z$ satisfies $h\\circ j_V\\circ a=j_U\\circ h|_V\\circ a=(j_U\\circ b)\\circ i_T$. By the universal property of $Z\\subset Z'$ over $X$ [def-weil-pbc-universal-first-order-thickening] there is a unique $a'':T'\\to Z'$ with $h'\\circ a''=j_U\\circ b$ and $a''\\circ i_T=i\\circ j_V\\circ a$. The map $i_T$ is surjective on underlying spaces ($T\\subset T'$ is a thickening, [def-sbc-first-order-thickening] (1)-(3)), so every point of $T'$ is $i_T(t)$, and $a''(i_T(t))=i(j_V(a(t)))\\in i(V)=V'$ (Step 2); hence $a''(T')\\subseteq V'$ and there is a unique $a':T'\\to V'$ with $j_{V'}\\circ a'=a''$ [lem-weil-pbc-morphism-factors-through-open-subscheme]. It is a morphism of thickenings over $U$: $j_U\\circ h'_{V'}\\circ a'=h'\\circ j_{V'}\\circ a'=h'\\circ a''=j_U\\circ b$, so $h'_{V'}\\circ a'=b$; and $j_{V'}\\circ a'\\circ i_T=a''\\circ i_T=i\\circ j_V\\circ a=j_{V'}\\circ i_V\\circ a$, so $a'\\circ i_T=i_V\\circ a$; both cancellations of $j_U$, resp. $j_{V'}$, are the uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme] (two morphisms into the open subscheme whose composites with the inclusion agree are both the unique factorization of that composite).",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-scheme-over-base",
+    "def-weil-pbc-universal-first-order-thickening",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 04F3 (lemma-universal-thickening), second paragraph ('We begin with some general remarks'): 'By the universal property of Z' we obtain (a, a') : (T \\subset T') \\to (Z \\subset Z'). But since we have equality |T| = |T'| of underlying topological spaces we see that a'(T') \\subset V'. Hence we may think of (a, a') as a morphism of thickenings (a, a') : (T \\subset T') \\to (V \\subset V') over U'"
+   }
+  },
+  {
+   "text": "*(1), uniqueness; conclusion of (1).* In the situation of Step 4, let $a'_1,a'_2:T'\\to V'$ both satisfy $h'_{V'}\\circ a'_k=b$ and $a'_k\\circ i_T=i_V\\circ a$. Then $j_{V'}\\circ a'_k:T'\\to Z'$ satisfies $h'\\circ j_{V'}\\circ a'_k=j_U\\circ h'_{V'}\\circ a'_k=j_U\\circ b$ and $j_{V'}\\circ a'_k\\circ i_T=j_{V'}\\circ i_V\\circ a=i\\circ j_V\\circ a$, so $j_{V'}\\circ a'_1=j_{V'}\\circ a'_2$ by the uniqueness in the universal property of $Z\\subset Z'$ over $X$ applied as in Step 4 [def-weil-pbc-universal-first-order-thickening], and $a'_1=a'_2$ by the uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme]. With Steps 3 and 4, $V\\subset V'$ with $i_V$ and $h'_{V'}$ is a universal first order thickening of $V$ over $U$ for $h|_V$ [def-weil-pbc-universal-first-order-thickening].",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 04F3 (lemma-universal-thickening), second paragraph ('We begin with some general remarks'): 'Uniqueness is clear also'"
+   }
+  },
+  {
+   "text": "*(2), $Z\\subset Z'$ is a first order thickening over $X$.* The closed immersion $i:Z\\to Z'$ and its square-zero ideal sheaf do not depend on the base; $Z'$ is over $X$ through $j\\circ h'_U$, and $(j\\circ h'_U)\\circ i=j\\circ h_U=h$ since $h'_U\\circ i=h_U$ [def-weil-pbc-universal-first-order-thickening]. So $Z\\subset Z'$ is a first order thickening of $Z$ over $X$ for $h$ [def-sbc-first-order-thickening] (4), [def-weil-scheme-over-base].",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-sbc-first-order-thickening",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 04F3 (lemma-universal-thickening), second paragraph ('We begin with some general remarks'): 'In a completely similar manner one proves that if h(Z) \\subset U and Z \\subset Z' is a universal first order thickening over U, then Z \\subset Z' is a universal first order thickening over X'"
+   }
+  },
+  {
+   "text": "*(2), existence.* Let $T\\subset T'$ be a first order thickening over $X$, with closed immersion $i_T$ and structure morphism $b:T'\\to X$, and $a:T\\to Z$ with $h\\circ a=b\\circ i_T$. Every point of $T'$ is $i_T(t)$ with $t\\in T$ ($i_T$ is surjective, [def-sbc-first-order-thickening] (1)-(3)), and $b(i_T(t))=h(a(t))\\in h(Z)\\subseteq U$; so $b(T')\\subseteq U$ and there is a unique $b_U:T'\\to U$ with $j\\circ b_U=b$ [lem-weil-pbc-morphism-factors-through-open-subscheme]. Thus $T\\subset T'$ with $b_U$ is a first order thickening over $U$ [def-sbc-first-order-thickening] (4), and $h_U\\circ a=b_U\\circ i_T$, because $j\\circ h_U\\circ a=h\\circ a=b\\circ i_T=j\\circ b_U\\circ i_T$ and both $h_U\\circ a$ and $b_U\\circ i_T$ are then the unique factorization of $h\\circ a$ through $U$ [lem-weil-pbc-morphism-factors-through-open-subscheme]. By the universal property of $Z\\subset Z'$ over $U$ [def-weil-pbc-universal-first-order-thickening] there is a (unique) $a':T'\\to Z'$ with $h'_U\\circ a'=b_U$ and $a'\\circ i_T=i\\circ a$; then $(j\\circ h'_U)\\circ a'=j\\circ b_U=b$, so $a'$ is a morphism of thickenings over $X$ as required.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 04F3 (lemma-universal-thickening), second paragraph ('We begin with some general remarks'): 'In a completely similar manner one proves ...' (the argument of the first claim, with |T| = |T'| used to see that T' maps into U)"
+   }
+  },
+  {
+   "text": "*(2), uniqueness; conclusion of (2).* In the situation of Step 7, if $a'':T'\\to Z'$ satisfies $j\\circ h'_U\\circ a''=b$ and $a''\\circ i_T=i\\circ a$, then $h'_U\\circ a''$ and $b_U$ are both morphisms $T'\\to U$ whose composite with $j$ is $b$, so $h'_U\\circ a''=b_U$ by the uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme], and $a''=a'$ by the uniqueness in the universal property of $Z\\subset Z'$ over $U$ [def-weil-pbc-universal-first-order-thickening]. With Steps 6 and 7, $Z\\subset Z'$ with $i$ and $j\\circ h'_U$ is a universal first order thickening of $Z$ over $X$ for $h$ [def-weil-pbc-universal-first-order-thickening].",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 04F3 (lemma-universal-thickening), second paragraph ('We begin with some general remarks'): 'In a completely similar manner ...'; uniqueness as 'Uniqueness is clear also'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-thickening-open-restriction",
+  "def-sbc-first-order-thickening",
+  "def-weil-scheme-over-base",
+  "def-weil-pbc-universal-first-order-thickening"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, proof of Lemma 04F3 (lemma-universal-thickening), second paragraph ('We begin with some general remarks'), for (1) and, 'in a completely similar manner', (2); part (0) is used there implicitly ('Let V' \\subset Z' be the open subscheme such that V = Z \\cap V''), with Definition 04EX (definition-thickening) and Lemma 09ZU (lemma-base-change-thickening)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +155,52 @@
    "results": "only the docstring Morphisms/FormallyUnramified.lean:189",
    "date": "2026-10-10",
    "verdict": "no match: Mathlib has no universal first order thickening, hence nothing on its restriction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "square-zero closed immersion over an open subscheme U of X is a square-zero thickening over X; morphism of schemes factors through open subscheme containing its image",
+   "results": "IsOpenImmersion.le_monomorphisms, IsClosedImmersion, IsClosedImmersion.mk, Scheme.Hom.image_le_opensRange, Scheme.Opens.ι, IsImmersion.isImmersion_iff_exists, instIsSmoothOfRelativeDimension...OfIsOpenImmersion (Mathlib.AlgebraicGeometry.*)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the tools used by the cited leaves (open immersions are monomorphisms), nothing on (universal) thickenings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universal first order thickening of a formally unramified morphism of schemes, restriction to open subschemes",
+   "results": "Scheme.Hom.formallyUnramified_appLE, FormallyUnramified.formallyUnramified_appLE, formallyUnramified_of_affine_subset, formallyUnramified_iff, FormallyUnramified, FormallyUnramified.instOfIsOpenImmersionDiagonalScheme (Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Thickening\"",
+   "results": "only Metric.thickening, Metric.cthickening and Disjoint.exists_uniform_thickening* (Mathlib.Topology.*)",
+   "date": "2026-10-10",
+   "verdict": "no match: no scheme-theoretic thickening in Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.Scheme.Hom.ker",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i -E 'thickening|squarezero|square_zero|SquareZero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "only the docstring Morphisms/FormallyUnramified.lean:189",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Thickening (project root ~/weil-conjectures-slopmaster2)",
+   "results": "none; index: unavailable (not a proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive; absence rests on the grep and the services above"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +220,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-universal-thickening-open-pieces",
+  "worker": "stage1",
+  "summary": "Split along the second paragraph of the proof of Stacks 04F3 (more-morphisms.tex, lemma-universal-thickening). Eight steps: (0) restriction of a first order thickening to an open W' of T' via the existing Mathlib leaf lem-weil-pbc-thickening-open-restriction (with U = X), and existence/uniqueness of the open W' over a given open of T from the homeomorphism |T| = |T'| of def-sbc-first-order-thickening; (1) h'(V') in U from the points of V' being i(V), V in V' a first order thickening over U compatible with h|_V (thickening-open-restriction, morphism-factors-through-open-subscheme), existence of the dotted arrow from the universal property of Z' over X and |T| = |T'|, uniqueness by cancelling the open immersion j_{V'} (uniqueness clause of lem-weil-pbc-morphism-factors-through-open-subscheme); (2) T' maps into U since |T| = |T'| and h(Z) in U, so the thickening is over U and the universal property over U applies, uniqueness by cancelling j. No new node: every non-elementary fact is an existing node (the two Mathlib leaves above, the definitions). Statement and stmt_deps kept. The proof is the general (not formally unramified) form of Steps 2-4 of lem-weil-pbc-universal-thickening-open-restriction; formal unramifiedness of h is used nowhere."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "8 steps following the second paragraph of the proof of 04F3: (0) by the thickening-open-restriction leaf with U = X and the uniqueness of the open over a given open (i_T a homeomorphism); (1) h'(V') in U on points, V in V' a thickening over U by the same leaf, existence through the universal property over X and factorization through V' (points) and through U (cancelling open immersions by the factoring leaf), uniqueness likewise; (2) the base change from U to X: b factors through U on points, then the universal property over U. Statement unchanged. Stage-3 note: lem-weil-pbc-universal-thickening-open-restriction (04FA) proves (1) again under a superfluous formally-unramified hypothesis."
+ }
 }
