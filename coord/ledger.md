@@ -935,3 +935,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:52 L: reviewed lem-weil-pbc-cohen-rings-exist (10 steps, +03C3 node, +05GH node): accepted.
 - 05:52 L: reviewed lem-weil-pbc-cohen-ring-mod-pn-formally-smooth (6 steps, +031L leaf, +0AUW leaf): accepted.
 - 05:53 L: reviewed lem-weil-pbc-closed-point-dimension-local-ring (6 steps, +3 leaves, +00OS node): accepted.
+- 05:54 L: reviewed lem-weil-pbc-colimit-standard-smooth-algebras (4 steps, no new node): accepted.
