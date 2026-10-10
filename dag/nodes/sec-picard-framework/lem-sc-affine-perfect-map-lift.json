@@ -24,9 +24,68 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since A is perfect and E' lies in D_QCoh(O_X), the object R:=R\\mathcal Hom_{O_X}(A,E') lies in D_QCoh(O_X) [lem-sc-rhom-supported-qcoherent] (no boundedness of E' is needed for a perfect source). Its restriction to U is canonically R|_U\\cong R\\mathcal Hom_{O_U}(A|_U,E'|_U) [lem-sc-derived-internal-hom-restrict-open], and applying the global-sections statement [lem-pur-rhom-global-sections] to the ringed space (U,O_U) (the site of opens of U) gives H^0(U,R|_U)\\cong Hom_{D(O_U)}(A|_U,E'|_U). Let s\\in H^0(U,R|_U) be the element corresponding to \\alpha.",
+   "uses": [
+    "lem-sc-rhom-supported-qcoherent",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EH, proof (alpha determines a section of RHom(E,E') over U, via cohomology-lemma-section-RHom-over-U)"
+   }
+  },
+  {
+   "text": "Since U is quasi-compact and the principal opens form a basis of X, write U=D(f_1)\\cup\\cdots\\cup D(f_r). Apply the representability proposition [lem-sc-affine-perfect-open-represent-cohomology] to E=R, which lies in D_QCoh(O_X) by Step 1: there are e\\ge1 and a morphism \\xi:I_e\\to R whose image in H^0(U,R|_U) is s, i.e. \\xi|_U\\circ(u_e|_U)^{-1}=s under Hom_{D(O_U)}(O_U,R|_U)=H^0(U,R|_U); moreover I_e is perfect and u_e|_U is an isomorphism.",
+   "uses": [
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Proposition proposition-represent-cohomology-class-on-open, applied to RHom(A,E')"
+   }
+  },
+  {
+   "text": "Put I=I_e, u=u_e and A'=A\\otimes^L I; A' is perfect because A and I are [lem-sc-perfect-derived-tensor-perfect]. Let \\gamma:A'\\to E' correspond to \\xi under the derived tensor-Hom adjunction [lem-sc-affine-perfect-derived-tensor-hom], and let \\beta=\\mathrm{id}_A\\otimes u:A'\\to A. Restriction to U commutes with \\otimes^L and with R\\mathcal Hom [lem-sc-derived-internal-hom-restrict-open], so \\beta|_U=\\mathrm{id}\\otimes(u|_U) is an isomorphism, and by naturality of the adjunction in I (applied to (u|_U)^{-1}:O_U\\to I|_U) the morphism \\gamma|_U\\circ(\\beta|_U)^{-1}:A|_U\\to E'|_U corresponds to \\xi|_U\\circ(u|_U)^{-1}=s, hence equals \\alpha by the choice of s in Step 1.",
+   "uses": [
+    "lem-sc-perfect-derived-tensor-perfect",
+    "lem-sc-affine-perfect-derived-tensor-hom",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EH, proof (E_1 = Tot(I(f^e) tensor M), maps to E and E')"
+   }
+  },
+  {
+   "text": "By construction A'=A\\otimes^L I with I perfect and \\beta induced by u:I\\to O_X. If A is supported on a closed subset T, then A|_{X\\setminus T}=0, so A'|_{X\\setminus T}=A|_{X\\setminus T}\\otimes^L I|_{X\\setminus T}=0 (restriction to an open commutes with \\otimes^L), i.e. A' is supported on T.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08EH (Lemma 36.13.7), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-rhom-supported-qcoherent",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pur-rhom-global-sections",
+  "lem-sc-affine-perfect-open-represent-cohomology",
+  "lem-sc-perfect-derived-tensor-perfect",
+  "lem-sc-affine-perfect-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08EH (Lemma 36.13.7); affine proof reconstructed from the stated Koszul argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +117,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-perfect-support-map-lift",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-perfect-map-lift",
+  "worker": "stage1",
+  "summary": "Tag 08EH split: RHom(A,E') is in D_QCoh for perfect A and arbitrary E' in D_QCoh, alpha is a section of it over U (restriction of RHom and sections of RHom), the Koszul representability proposition gives xi:I_e->RHom(A,E') representing it, derived tensor-Hom gives gamma, id_A tensor u_e gives beta, tensor of perfects is perfect, support is elementary. Reviewer R-apl2724 rewrote the proof onto existing RHom nodes and dropped three unused or duplicate new nodes.",
+  "blueprint": "Realizes the affine map-lifting clause in the proper-flat support proof of lem-sc-finite-duality.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic tool: H^0 of derived internal Hom equals Hom in the derived category, for any ringed site; applied to the ringed space (U,O_U)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-rhom-global-sections",
+  "lem-pur-rhom-global-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-apl2724",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apl2724 (reviewer sub-agent of L); spot-checked: 21:26 return points 1-4 repaired in substance (represent-cohomology node applied to RHom(A,E'); no bounded-below target; section-RHom cited; affine model no longer needed). Item statement unchanged (J1 support-extension cites it as 08EH). FIX more, RETURN less: (1) C1/C4 Step 1: the D(A) strict-RHom node says nothing about sheaf RHom(A,E') lying in D_QCoh(O_X), which Step 2 needs, nor about its restriction to U; now cites lem-sc-rhom-supported-qcoherent (perfect source, any E' in D_QCoh) and lem-sc-derived-internal-hom-restrict-open (08DL); strict-rhom-arbitrary, affine-equivalence and perfect-affine model dropped as unused. (2) class (b): lem-sc-affine-perfect-section-rhom-open is the special case U-site of existing lem-pur-rhom-global-sections (08JA); cited as tool use, new node dropped. (3) C4 Step 4: lem-sc-affine-perfect-open-koszul is existential in I, so says nothing about the I_e of Step 2; dropped, new statement-only node lem-sc-perfect-derived-tensor-perfect (cohomology 09J5) for perfectness of A tensor I_e, support and beta|_U iso made elementary. Also made the represent-cohomology node precise (I_e = Stacks I(f^e), canonical map phi|_U o u_e|_U^{-1}) so Step 3's equation follows; Second reading by G1 missed (1)-(3).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }

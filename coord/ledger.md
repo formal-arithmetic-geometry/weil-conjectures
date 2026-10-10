@@ -2743,3 +2743,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:57 L: returned deliver/C1/lem-pc-global-hom-adjunction (reviewer RETURN: R-gha2726: (1) E/B false new statement: lem-pc-qcqs-sheaf-rhom-adjunction asserts Rf_*RSheafHom(L,a(K)) = RSheafHom(Rf_*)
 - 21:58 L: merged deliver/F1/lem-pc-direct-image-qc-support-reduction (reviewer FIX; first push; new nodes: 0)
 - 21:58 L: merged deliver/J1/lem-pc-ring-pseudo-coherent-finite-tor-perfect (reviewer FIX; first push; new nodes: 1)
+- 21:59 L: merged deliver/G1/lem-sc-affine-perfect-map-lift (reviewer FIX+NODE(1); after a return; new nodes: 3)
