@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-field-char-p-nilpotent-lifting",
+ "kind": "statement",
+ "title": "Ring maps out of a field of characteristic p lift along nilpotent ideals of F_p-algebras",
+ "statement": "Let $K$ be a field of characteristic $p>0$. Let $D$ be a commutative ring with $p\\cdot1_D=0$, let $J\\subseteq D$ be an ideal with $J^N=0$ for some integer $N\\ge1$, let $\\pi:D\\to D/J$ be the quotient map, and let $g:K\\to D/J$ be a ring homomorphism. Then there is a ring homomorphism $f:K\\to D$ with $\\pi\\circ f=g$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0320 (lemma-formally-smooth-extensions-easy, line 44409), part (3): a separable field extension is formally smooth (Definition Tag 00TI, definition-formally-smooth, line 37805: lifting along square-zero ideals), applied to K over F_p, which is separable because F_p is perfect (Definition Tag 030Y, definition-perfect, line 10489; Lemma Tag 030Z, lemma-perfect, line 10495: every element of F_p is a p-th power); the passage from J^2=0 to J^N=0 by lifting successively along D/J^{i+1} -> D/J^i, as in the proof of Algebra Lemma Tag 07K4 (lemma-smooth-strong-lift, line 38291). Used in Smoothing Ring Maps, proof of Lemma Tag 07FG (smoothing.tex lines 2468-2470, 2489-2490, 2496-2497). Tags verified in literature/stacks-project/tags/tags"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a ring homomorphism from a field of characteristic p lifts along a nilpotent ideal of an F_p-algebra",
+   "results": "Algebra.FormallySmooth.liftOfSurjective(_apply), Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_lift (Mathlib.RingTheory.Smooth.Basic: nilpotent lifting for a FormallySmooth algebra), PerfectionMap.lift_apply, PerfectClosure.lift",
+   "date": "2026-10-10",
+   "verdict": "no match: exists_lift (Smooth/Basic.lean line 126) gives the nilpotent lifting once Algebra.FormallySmooth (ZMod p) K is known, which Mathlib does not have for an arbitrary field K"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every field extension of a perfect field is formally smooth",
+   "results": "Algebra.FormallySmooth.of_perfectField (Mathlib.RingTheory.Smooth.Field, requires Algebra.EssFiniteType K L), Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable (requires EssFiniteType), Algebra.FormallySmooth.of_algebraicIndependent (purely transcendental)",
+   "date": "2026-10-10",
+   "verdict": "no match: only for essentially finite type extensions"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth (ZMod _) _",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'FormallySmooth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -i 'perfect|field|separable|charP|ZMod'; sed -n 1,60p RingTheory/Smooth/Field.lean",
+   "results": "Smooth/Field.lean lines 25-58 only: adjoin_of_algebraicIndependent, of_algebraicIndependent, of_algebraicIndependent_of_isSeparable, instance of_perfectField [PerfectField K] [Algebra.EssFiniteType K L] (line 53-54); nothing for a field extension that is not essentially of finite type",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-artinian-flat-subalgebras",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

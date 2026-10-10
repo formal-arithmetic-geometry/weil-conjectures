@@ -1,0 +1,67 @@
+{
+ "id": "def-weil-pbc-essentially-finite-type-algebra",
+ "kind": "definition",
+ "title": "Essentially of finite type ring maps",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings. For a commutative $R$-algebra $B$ and a multiplicative subset $W\\subseteq B$ ($1\\in W$, $st\\in W$ for $s,t\\in W$) let $W^{-1}B$ be the ring of fractions $b/w$ ($b\\in B$, $w\\in W$; $b/w=b'/w'$ iff $u(bw'-b'w)=0$ for some $u\\in W$), an $R$-algebra through $R\\to B\\to W^{-1}B$, $b\\mapsto b/1$. The ring map $\\varphi$ is *essentially of finite type*, or $S$ is an $R$-algebra *essentially of finite type*, if there are an $R$-algebra $B$ of finite type [def-weil-pbc-finite-type-algebra], a multiplicative subset $W\\subseteq B$ and an isomorphism of $R$-algebras $S\\cong W^{-1}B$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00QM (definition-essentially-finite-p-t, line 12836), item (1): 'R -> S is essentially of finite type if S is the localization of an R-algebra of finite type'; tag verified in literature/stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "algebra essentially of finite type: localization of a finitely generated algebra",
+   "results": "Algebra.EssFiniteType.mk, Algebra.instEssFiniteTypeLocalization, Algebra.essFiniteType_iff_exists_subalgebra, Algebra.EssFiniteType.of_isLocalization (Mathlib.RingTheory.EssentialFiniteness)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.EssFiniteType"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.EssFiniteType",
+   "results": "Algebra.EssFiniteType, .of_id, .finset, .of_finiteType, .subalgebra, RingHom.essFiniteType_algebraMap, .of_isLocalization, .iff_of_algEquiv, instEssFiniteTypeLocalization (Mathlib.RingTheory.EssentialFiniteness)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.EssFiniteType"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^class\\|^lemma\\|^instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/EssentialFiniteness.lean; sed -n 25,110p and 136,170p and 229,233p",
+   "results": "class EssFiniteType (line 40), of_finiteType (95), of_isLocalization (101), comp (140), essFiniteType_iff_exists_subalgebra (161), iff_of_algEquiv (231), RingHom.EssFiniteType (261)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.EssFiniteType",
+  "file": "Mathlib/RingTheory/EssentialFiniteness.lean",
+  "line": 40,
+  "how": "specializes in a few lines, one Mathlib lemma per direction (file read with sed -n 25,110p, 136,170p, 229,233p, 2026-10-10): the class (lines 40-42, docstring 'the localization of an algebra of finite type') says S is the localization of the finite type subalgebra R[s] (s a finite set) at the elements that become units; (=>) essFiniteType_iff_exists_subalgebra (line 161) gives a finite type subalgebra S_0 and a submonoid M of S_0 with IsLocalization M S, i.e. S = M^{-1}S_0 as R-algebras, which is the node's condition; (<=) for S = W^{-1}B with B of finite type: EssFiniteType.of_finiteType (line 95) for R -> B, EssFiniteType.of_isLocalization (line 101) for B -> W^{-1}B, EssFiniteType.comp (line 140) for R -> W^{-1}B, and EssFiniteType.iff_of_algEquiv (line 231) to transport along S = W^{-1}B. For a ring map phi, RingHom.EssFiniteType (line 261) is Algebra.EssFiniteType for phi.toAlgebra."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-artinian-flat-subalgebras",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf (the class plus one lemma per direction of the agreement); lines 40, 161, 95, 101, 140, 231 as recorded, 40 and 161 verified."
+}
