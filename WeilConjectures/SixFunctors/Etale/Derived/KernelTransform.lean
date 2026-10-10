@@ -94,13 +94,11 @@ with a chosen compactification, the last two steps use independence of the compa
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), which needs `π` quasi-compact and
 torsion coefficients.
 
-TODO: prove `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift`. It is formal once the
-shift isomorphism of the derived tensor product in its second variable is natural in the first,
-`derivedTensorRight A X (𝒦⟦a⟧) ≅ derivedTensorRight A X 𝒦 ⋙ shiftFunctor _ a`. The instances
-`AlgebraicGeometry.Etale.commShiftDerivedTensorObj` and
-`AlgebraicGeometry.Etale.commShiftDerivedTensorFlipObj`, and
-`AlgebraicGeometry.Etale.derivedTensorShiftIso` built from them, only give naturality in the
-shifted variable.
+`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift` is formal: the shift isomorphism
+of the derived tensor product in its second variable is natural in the first,
+`derivedTensorRight A X (𝒦⟦a⟧) ≅ derivedTensorRight A X 𝒦 ⋙ shiftFunctor _ a`
+(`AlgebraicGeometry.Etale.derivedTensorRightShiftIso`), because the derived tensor product
+commutes with shifts as a bifunctor.
 
 `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor` moves the shift into the kernel
 before applying the projection formula, so that it never has to commute a shift with
