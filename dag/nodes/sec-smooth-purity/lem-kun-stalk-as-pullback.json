@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-stalk-as-pullback",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A stalk is inverse image to a geometric point",
@@ -14,31 +14,67 @@
  },
  "stmt_deps": [
   "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-geometric-point",
+  "def-weil-pbc-derived-categories",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-pointed-etale-neighbourhoods"
+  "def-weil-pbc-geometric-stalks"
  ],
  "proof": [
   {
-   "text": "Inverse image along $\\bar t:\\Spec(\\Omega)\\to T$ restricts a sheaf to\nthe site of $\\Spec(\\Omega)$; the sections over $\\Spec(\\Omega)$ of\nthat restriction are the colimit over the pointed etale\nneighbourhoods of $\\Cref{def-weil-pbc-pointed-etale-neighbourhoods}$,\nwhich is the stalk of [def-weil-pbc-geometric-stalks]. For\nderived objects, exactness of\n[prop-weil-pbc-geometric-stalks-exact] passes the statement to\ncomplexes.",
+   "text": "Let $F$ be an abelian sheaf on $T_{\\Et}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves] and put $P=\\Spec(\\Omega)$. By [lem-weil-pbc-geometric-point-pullback-stalk](1), global sections $\\Gamma(P,-)$ is an equivalence from abelian (or $\\Lambda$-module) sheaves on $P_{\\Et}$ to abelian groups (or $\\Lambda$-modules); by [lem-weil-pbc-geometric-point-pullback-stalk](2), $\\Gamma(P,\\bar t^{-1}F)\\cong F_{\\bar t}$ naturally in $F$, with $\\bar t^{-1}$ the inverse image of [def-weil-pbc-inverse-image] and $F_{\\bar t}$ the stalk of [def-weil-pbc-geometric-stalks]. Hence, under the identification of sheaves on $P_{\\Et}$ with groups, $\\bar t^{-1}\\cong(-)_{\\bar t}$ as functors. For a derived object, represent it by a complex $F^\\bullet$ [def-weil-pbc-derived-categories]. The stalk functor is exact [prop-weil-pbc-geometric-stalks-exact], so by the natural isomorphism just obtained $\\bar t^{-1}$ is exact as well; both therefore act on complexes termwise, preserve quasi-isomorphisms and pass to derived categories without deriving, and the termwise natural isomorphism identifies $\\bar t^{-1}F^\\bullet$ with $F^\\bullet_{\\bar t}$, compatibly with $H^q(F^\\bullet_{\\bar t})\\cong(\\mathcal H^qF^\\bullet)_{\\bar t}$.",
    "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "prop-weil-pbc-geometric-stalks-exact"
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-geometric-stalks"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-geometric-stalks",
-  "prop-weil-pbc-geometric-stalks-exact"
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-geometric-stalks"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalk-as-pullback.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "stalk of a sheaf at a geometric point is inverse image along Spec Omega to T",
+   "results": "AlgebraicGeometry.Scheme.fromSpecStalk_appTop and related scheme-stalk declarations; no etale sheaf stalk identity",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "GrothendieckTopology.Point.sheafFiber, pointSmallEtale, sheaf pullback",
+   "results": "unknown identifier for the combined pattern; Point.sheafFiber is present in Mathlib.CategoryTheory.Sites.Point.Basic",
+   "date": "2026-10-11",
+   "verdict": "generalization: Point.sheafFiber gives the point-fibre colimit used by the statement"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber|pointSmallEtale|presheafFiber in CategoryTheory/Sites/Point",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Basic.lean:28-31,95-97,277-291 define presheafFiber and sheafFiber as the opposite-category colimit and restriction; Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean:62-65 defines pointSmallEtale from etale lifts",
+   "date": "2026-10-11",
+   "verdict": "generalization: the Mathlib point-fibre construction is the inverse-image stalk"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalk of sheaf on etale site at geometric point equals inverse image to Spec Omega",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -69,5 +105,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-kun-stalk-as-pullback",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration or duplicate blueprint node states this item. The imported argument was made explicit: the inverse image at a geometric point has sections given by the point-fibre colimit over pointed etale neighbourhoods, which is the existing geometric-stalk definition; exactness of the stalk functor extends the identification termwise to complexes and their cohomology.",
+  "blueprint": "The single proof paragraph of the blueprint node: inverse image restricts to the point site and its sections are the pointed-neighbourhood colimit; exactness passes the sheaf identification to derived objects.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sap3016",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sap3016 (reviewer sub-agent of L); spot-checked: Statement matches citers (lem-kun-stalks-of-cohomology, -stalk-faithful-derived, -pullback-constant, -sep-closure-conservative, -support-geometric-point-independent: stalk = inverse image, degreewise for complexes). FIX more, RETURN less: C1 - step derived Gamma(Spec Omega, t^{-1}F) = neighbourhood colimit directly from def-weil-pbc-inverse-image (ignores sheafification) and never cited the equivalence Sh(Spec Omega_et) = Ab via Gamma that makes 'stalk is inverse image' meaningful; both are the two clauses of existing node lem-weil-pbc-geometric-point-pullback-stalk, now cited (pointed-neighbourhoods use dropped). E derived clause rewritten honestly: t^{-1} exact via the natural iso with the exact stalk functor (prop-weil-pbc-geometric-stalks-exact), so it acts termwise on D without deriving. Missed by the Second reading.; 1 file(s) fixed by the reviewer"
+ }
 }

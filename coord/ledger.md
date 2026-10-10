@@ -2915,3 +2915,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:06 UTC L deleted three abandoned delivery branches of leaves (F1 sep-closed-finite-extension-sep-closed, E1 sep-closed-finite-extension-purely-inseparable, M1 separably-closed-geometrically-connected); notices
 - 23:06 L: merged deliver/G1/def-weil-extension-by-zero-presheaf (reviewer PASS; first push; new nodes: 0)
 - 23:06 L: merged deliver/C1/lem-pc-pseudo-coherent-summand (reviewer FIX; first push; new nodes: 1)
+- 23:07 L: merged deliver/E1/lem-kun-stalk-as-pullback (reviewer FIX; first push; new nodes: 0)
