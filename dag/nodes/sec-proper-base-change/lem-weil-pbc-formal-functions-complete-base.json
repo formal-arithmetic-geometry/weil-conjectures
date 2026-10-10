@@ -16,9 +16,65 @@
   "def-weil-pbc-coherent-formal-module",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Finiteness.) Fix $p\\ge0$ and put $H=H^p(X,\\mathcal F)$, an $A$-module. Since $A$ is Noetherian, $f:X\\to\\operatorname{Spec}A$ is proper and $\\mathcal F$ is coherent, $H$ is a finite (finitely generated) $A$-module [lem-pc-coherent-hi] (Stacks 02O6, the case $S=\\operatorname{Spec}A$ of that node).",
+   "uses": [
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 087U (lemma-spell-out-theorem-formal-functions, line 5698): 'the A-module H^p(X,F) is finite (Lemma 02O6, lemma-proper-over-affine-cohomology-finite, line 5227)'"
+   }
+  },
+  {
+   "text": "(Completeness of $H$.) $A$ is Noetherian and $I$-adically complete and $H$ is a finite $A$-module (step 1), so $H$ is $I$-adically complete [lem-weil-pbc-finite-module-complete-over-complete-noetherian]: the canonical map $c:H\\to H^\\wedge=\\varprojlim_nH/I^nH$ [def-weil-pbc-adic-completion], $x\\mapsto(x\\bmod I^nH)_n$, is an $A$-linear bijection.",
+   "uses": [
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 087U (lemma-spell-out-theorem-formal-functions, line 5698): 'hence I-adically complete (Algebra, Lemma 00MA, lemma-completion-tensor)'; 00MA(3) with A -> A^ bijective"
+   }
+  },
+  {
+   "text": "(Theorem on formal functions.) By the theorem on formal functions [lem-weil-pbc-theorem-formal-functions] for the same $A$, $I$, $f$, $\\mathcal F$, $\\mathcal I=I\\mathcal O_X$ and $p$ (its hypotheses are among ours: $A$ Noetherian, $f$ proper, $\\mathcal F$ coherent), the maps $\\theta_n:H/I^nH\\to H^p(X,\\mathcal F/\\mathcal I^n\\mathcal F)$, $x\\bmod I^nH\\mapsto$ the image of $x$ under the map induced by $\\mathcal F\\to\\mathcal F/\\mathcal I^n\\mathcal F$, induce an isomorphism of $A$-modules $\\theta=\\varprojlim_n\\theta_n:H^\\wedge\\to\\varprojlim_nH^p(X,\\mathcal F/\\mathcal I^n\\mathcal F)$.",
+   "uses": [
+    "lem-weil-pbc-theorem-formal-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Theorem 02OC (theorem-formal-functions, line 5648), cited in the proof of Lemma 087U as 'a reformulation of the theorem on formal functions'"
+   }
+  },
+  {
+   "text": "(The map of the statement is $\\theta\\circ c$.) Let $\\rho:H\\to\\varprojlim_nH^p(X,\\mathcal F/\\mathcal I^n\\mathcal F)$ be the map of the statement, $\\rho(x)=(\\rho_n(x))_n$ with $\\rho_n:H\\to H^p(X,\\mathcal F/\\mathcal I^n\\mathcal F)$ induced by the quotient map. For $x\\in H$, $\\theta(c(x))=(\\theta_n(x\\bmod I^nH))_n=(\\rho_n(x))_n=\\rho(x)$ by the definition of $\\theta_n$ in step 3. So $\\rho=\\theta\\circ c$ is a composite of two $A$-linear bijections (steps 2 and 3), hence an isomorphism of $A$-modules. This holds for every $p\\ge0$; for $p=0$, $H^0(X,-)=\\Gamma(X,-)$ [pqf-def-cohomology], which gives the last assertion.",
+   "uses": [
+    "pqf-def-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 087U (lemma-spell-out-theorem-formal-functions, line 5698): 'we see that completion on the left hand side is not necessary'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "lem-weil-pbc-theorem-formal-functions",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 087U (lemma-spell-out-theorem-formal-functions, line 5698) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,7 +99,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -63,5 +119,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-functions-complete-base",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks 087U (coherent.tex line 5698): (1) H^p(X,F) finite over A by 02O6, carried by lem-pc-coherent-hi (unit sk-thm-picard-coherence, outside the route of sk-thm-p1: a generic tool use, as the lead's review of the fully-faithful item anticipated); (2) finite modules over a Noetherian I-adically complete ring are I-adically complete (00MA), carried by the existing unsplit node lem-weil-pbc-finite-module-complete-over-complete-noetherian; (3) theorem on formal functions 02OC, the existing unsplit node lem-weil-pbc-theorem-formal-functions (same setting: I O_X via def-nagata-extended-ideal, I^n F via def-weil-pbc-coherent-formal-module); (4) the map of the statement is the composite of the completion map and the 02OC isomorphism (written out, elementary). No new nodes. Statement and stmt_deps unchanged (def-weil-pbc-adic-completion enters only the proof). Tags verified in tags/tags: 087U, 02OC, 02O6, 00MA."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps follow Stacks 087U: finiteness (02O6 via lem-pc-coherent-hi, recorded as a tool use), completeness of finite modules over a complete Noetherian ring (existing 00MA node), theorem on formal functions node, composite identified. Tags 087U, 02OC, 02O6, 00MA verified."
+ },
+ "tool_uses": [
+  "lem-pc-coherent-hi"
+ ],
+ "lead_note": "L 2026-10-10: tool_uses lem-pc-coherent-hi (unit sk-thm-picard-coherence; the 02O6 clause, generic). Stage 3: lem-pc-coherent-hi states cohomology via def-pc-morphism-conventions while this unit uses pqf-def-cohomology; check they agree."
 }
