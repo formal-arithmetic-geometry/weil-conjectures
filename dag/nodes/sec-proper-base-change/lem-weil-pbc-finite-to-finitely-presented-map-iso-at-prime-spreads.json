@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-finite-to-finitely-presented-map-iso-at-prime-spreads",
+ "kind": "statement",
+ "title": "A map from a finite to a finitely presented module that is bijective at a prime is bijective after inverting one element",
+ "statement": "Let $A$ be a commutative ring, $\\mathfrak p\\subset A$ a prime ideal, $M$ a finitely generated $A$-module [def-weil-finitely-generated-module], $N$ a finitely presented $A$-module (there is an exact sequence $A^{\\oplus u}\\to A^{\\oplus v}\\to N\\to0$ for some $u,v\\ge0$) and $\\varphi:M\\to N$ an $A$-linear map. Suppose that the localized map $\\varphi_{\\mathfrak p}:M_{\\mathfrak p}\\to N_{\\mathfrak p}$, $m/s\\mapsto\\varphi(m)/s$, between the localizations at $A\\setminus\\mathfrak p$ [def-weil-pbc-module-localization] [def-weil-pbc-localization-at-prime], is bijective. Then there is $g\\in A\\setminus\\mathfrak p$ such that the localized map $\\varphi_g:M_g\\to N_g$, $m/g^k\\mapsto\\varphi(m)/g^k$, between the localizations at the powers of $g$ [def-weil-pbc-module-localization-away], is bijective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05GF (lemma-map-between-finitely-presented: the set of primes q with phi_q an isomorphism is open in Spec A) combined with Lemma Tag 00HN (lemma-characterize-zero-local: a module whose localizations at all primes vanish is zero), exactly as the two are combined in the proof of Lemma Tag 0GWM (lemma-finitely-presented-localization-free)"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "linear map from finite module to finitely presented module bijective after localization at a prime is bijective after localizing at some element not in the prime",
+   "results": "Module.FinitePresentation.exists_notMem_bijective (Mathlib.Algebra.Module.FinitePresentation), exists_bijective_map_powers (same module), bijective_of_localized_maximal (Mathlib.RingTheory.LocalProperties.Exactness), IsLocalizedModule.map_bijective_iff_localizedModuleMap_bijective (Mathlib.RingTheory.Localization.Module)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.FinitePresentation.exists_notMem_bijective"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation.exists_notMem_bijective",
+   "results": "Module.FinitePresentation.exists_notMem_bijective [Module.Finite R M] [Module.FinitePresentation R N] (f : M →ₗ[R] N) (p : Ideal R) [p.IsPrime] (fM : M →ₗ[R] Mₚ) (fN : N →ₗ[R] Nₚ) [IsLocalizedModule p.primeCompl fM] [IsLocalizedModule p.primeCompl fN] (hf : Function.Bijective (IsLocalizedModule.map p.primeCompl fM fN f)) : ∃ g ∉ p, Function.Bijective (LocalizedModule.map (Submonoid.powers g) f)",
+   "date": "2026-10-10",
+   "verdict": "match (type read)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if a map of modules, source finitely generated and target finitely presented, is an isomorphism at a prime p, then it is an isomorphism on a basic open neighbourhood D(g) of p",
+   "results": "Module.FinitePresentation.exists_notMem_bijective (Mathlib.Algebra.Module.FinitePresentation), AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen, Module.basicOpen_subset_freeLocus_iff, RingHom.locally_iff_exists",
+   "date": "2026-10-10",
+   "verdict": "match: Module.FinitePresentation.exists_notMem_bijective"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'exists_notMem_bijective|exists_bijective_map_powers' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/Algebra/Module/FinitePresentation.lean:452 exists_bijective_map_powers (any submonoid S, conclusion for every t divisible by some r in S), :510 Module.FinitePresentation.exists_notMem_bijective (the prime case, proved from it at :517); used at Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean:140 for exactly this spreading of a basis of Kaehler differentials",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.FinitePresentation.exists_notMem_bijective (project root ~/weil-conjectures-slopmaster2)",
+   "results": "lemma in .lake/packages/mathlib/Mathlib/Algebra/Module/FinitePresentation.lean (index: unavailable, existence confirmed by the hit and by sed -n 505,520p)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.FinitePresentation.exists_notMem_bijective",
+  "file": "Mathlib/Algebra/Module/FinitePresentation.lean",
+  "line": 510,
+  "how": "exact: take Mₚ = LocalizedModule p.primeCompl M, Nₚ = LocalizedModule p.primeCompl N with fM, fN the maps LocalizedModule.mkLinearMap (instances IsLocalizedModule), so IsLocalizedModule.map p.primeCompl fM fN f is phi_p; the conclusion LocalizedModule.map (Submonoid.powers g) f is phi_g on M_g -> N_g, with g not in p. Hypotheses [Module.Finite R M], [Module.FinitePresentation R N], R a commutative ring. Source read 2026-10-10 (sed -n 446,520p: statement lines 505-513, proof from exists_bijective_map_powers at line 452)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-prescribed-residue-basis-spreads",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): Module.FinitePresentation.exists_notMem_bijective (Algebra/Module/FinitePresentation.lean:510), checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed."
+}
