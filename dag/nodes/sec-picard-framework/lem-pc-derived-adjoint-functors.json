@@ -23,8 +23,33 @@
   "def-sp-abelian",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-pre-derived-adjoint-functors-general] to each complex $K$ of $\\mathcal A$ and $M$ of $\\mathcal B$. Its hypotheses are exactly the assumed adjunction $G\\dashv F$ and the definitions of $RF$ at $K$ and $LG$ at $M$; it gives a canonical isomorphism in the reverse direction, whose inverse is the bijection $\\operatorname{Hom}_{D(\\mathcal A)}(LG(M),K)\\cong\\operatorname{Hom}_{D(\\mathcal B)}(M,RF(K))$.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 09T5 proof (line 9604), immediate from Lemma 0DVC"
+   }
+  },
+  {
+   "text": "Because the derived functors are defined at every complex, the pointwise constructions assemble into functors $RF:D(\\mathcal A)\\to D(\\mathcal B)$ and $LG:D(\\mathcal B)\\to D(\\mathcal A)$; the functoriality in both variables supplied by [lem-pc-pre-derived-adjoint-functors-general] makes the displayed bijections the natural Hom bijection defining the adjunction $LG\\dashv RF$.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 09T5 statement and proof (lines 9596--9605)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
@@ -37,15 +62,59 @@
    "results": "CategoryTheory.Adjunction.derived (line 144): G ⊣ F induces G' ⊣ F' for a left derived G' and right derived F' w.r.t. localizations, under the extra instance hypotheses that G' ⋙ F' and F' ⋙ G' are again left/right derived functors (absolute derived functors); no instance supplies these for pointwise (Stacks 'defined everywhere') derived functors",
    "date": "2026-10-10",
    "verdict": "no exact match: extra absoluteness hypotheses, not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived functors of adjoint functors are adjoint on unbounded derived categories",
+   "results": "CategoryTheory.Adjunction.derived and related declarations in Mathlib/CategoryTheory/Functor/Derived/Adjunction; extra absolute-derived hypotheses",
+   "date": "2026-10-11",
+   "verdict": "no exact match: extra absoluteness hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived, DerivedCategory",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedAdjunction|derived adjunction in Mathlib/CategoryTheory/Functor/Derived",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean lines 12, 95, 117",
+   "date": "2026-10-11",
+   "verdict": "no exact match: only localization-based absolute derived adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived functors of an adjoint pair induce an adjunction when both derived functors exist",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pc-ringed-spaces-derived-adjoint",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-adjoint-functors",
+  "worker": "stage1",
+  "summary": "Split the Stacks Lemma 09T5 item into its one genuine prerequisite, the statement-only general pre-derived adjunction Lemma 0FND, and two proof steps: specialization to each complex and assembly into the adjunction from bifunctoriality. No Lean declaration with this blueprint tag exists in the source checkout.",
+  "blueprint": "Realizes the blueprint clause that the derived direct-image composition proof uses the adjunction between derived pullback and derived direct image, with Stacks Lemma 09T5 proved immediately from Lemma 0DVC.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-daf1828",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-daf1828 (reviewer sub-agent of L); spot-checked: Item vs 09T5 and new node vs 0DVC/0FND (Stacks text in packet); steps 1-2 cite the node's Hom bijection and bifunctoriality, hypotheses match (adjoints between abelian categories are additive). Compared with leaf lem-sc-derived-adjunction-from-underived (Mathlib Adjunction.derived line 144 / derivedε_fac_app line 125): not the same statement -- the leaf needs absolute Mathlib derived functors with comparison maps, the item has Stacks everywhere-defined essentially-constant derived functors; bridging is not a one-line specialization, so no class b/c; no cycle (new node is pointwise 0DVC, does not cite the item or lem-pc-ringed-spaces-derived-adjoint). FIX more, RETURN less: new node's source corrected from 0FND to 0DVC (its statement is the abelian-category 0DVC form, not the general multiplicative-system 0FND); reviewer Mathlib grep recorded.; 1 file(s) fixed by the reviewer"
+ }
 }

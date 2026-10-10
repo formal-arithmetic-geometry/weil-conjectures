@@ -2243,3 +2243,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:27 L: merged deliver/H1/lem-sp-cart-eilenberg-left-exact-cohomology (reviewer FIX; first push; new nodes: 0)
 - 18:27 L: merged deliver/E1/lem-sc-finite-integral-conductor (reviewer FIX; first push; new nodes: 0)
 - 18:28 L: merged deliver/G1/lem-sc-mult-n-pullback (reviewer FIX; first push; new nodes: 0)
+- 18:29 L: merged deliver/F1/lem-pc-derived-adjoint-functors (reviewer FIX; first push; new nodes: 1)
