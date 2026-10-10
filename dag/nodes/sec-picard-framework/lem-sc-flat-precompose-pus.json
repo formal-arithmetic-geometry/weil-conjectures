@@ -27,9 +27,56 @@
   "def-pc-global-derived-rhom",
   "lem-pc-global-hom-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Expand c using the definition of the canonical right-adjoint base-change map [def-sc-duality-equation-base-change-map]. Its three factors are the pullback of the unit for Lg^* ⊣ Rg_*, the inverse of the conjugate theta of beta, and the counit for Lg_X^* ⊣ Rg_{X,*}. Applying the natural global Hom adjunction isomorphisms for a and a' [lem-pc-global-hom-adjunction] and the global Hom adjunction (M,Rg_{X,*}E)_X\\cong(Lg_X^*M,E)_{X'} for Lg_X^* ⊣ Rg_{X,*} [lem-pc-global-hom-pullback-adjunction] (whose H^0 is the adjunction bijection, so it is given by applying Lg_X^* and then the counit) to the first composite identifies the resulting map with postcomposition by this displayed representative of c.",
+   "uses": [
+    "def-sc-duality-equation-base-change-map",
+    "lem-pc-global-hom-adjunction",
+    "lem-pc-global-hom-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8 (Lemma 48.6.2), equation-base-change-map and final compatibility sentence in case (1)"
+   }
+  },
+  {
+   "text": "The mate defining theta is the conjugate of beta, so the triangle identities for the two pullback/direct-image adjunctions, transported to global Hom complexes by [lem-pc-global-hom-pullback-adjunction] (for g_X; its isomorphism is applying Lg_X^* followed by the counit), identify the middle two factors above with the map obtained by first applying the pullback comparison to M and then applying the RHom map induced by c. Extending A'-linearly (the comparison is the A'-linear extension of the map induced by derived pullback, and postcomposition by a map in D(A') commutes with this extension), this is precisely the first displayed morphism in the statement.",
+   "uses": [
+    "def-sc-duality-equation-base-change-map",
+    "lem-pc-global-hom-adjunction",
+    "lem-pc-global-hom-pullback-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8 (Lemma 48.6.2), final compatibility sentence in case (1)"
+   }
+  },
+  {
+   "text": "By definition, the algebraic RHom base-change morphism is adjoint to the map induced by Lg^*. Transporting it through the adjunction isomorphism for a, the inverse of beta_M, and the adjunction isomorphism for a' gives exactly the same composite as in Steps 1--2. Hence the pullback-then-c map and the adjunction/RHom-base-change/beta_M^{-1}/adjunction composite are equal.",
+   "uses": [
+    "def-sc-duality-equation-base-change-map",
+    "lem-pc-global-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AA8 (Lemma 48.6.2), final compatibility sentence in case (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-duality-equation-base-change-map",
+  "lem-pc-global-hom-adjunction",
+  "lem-pc-global-hom-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AA8 (Lemma 48.6.2), case (1), final compatibility sentence"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +101,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-affine-basechange",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-flat-precompose-pus",
+  "worker": "stage1",
+  "summary": "Checked the Tag 0AA8 compatibility assertion against the canonical mate definition and the existing global RHom adjunction node. The proof is a formal three-step mate calculation: expand c, use the triangle identities to identify the pullback comparison composite, and identify the algebraic RHom base-change composite by its defining adjoint. No smaller independent mathematical lemma exists here, so no new node was created.",
+  "blueprint": "Realizes the compatibility of the transformation Rg'_*a' -> aRg_* with the adjunction mate in Tag 0AA8 case (1): expansion of the base-change mate, triangle-identity comparison, and the RHom-base-change adjoint calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpp2728",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpp2728 (reviewer sub-agent of L); spot-checked: Read packet whole; item statement unchanged vs Tag 0AA8 case (1) final compatibility; c is exactly def-sc-duality-equation-base-change-map as on sheaf-dag (unit/theta^{-1}/counit), no duplicate definition; all schemes qcqs so right adjoints exist per lem-pc-qcqs-derived-direct-image-right-adjoint (C4 ok); beta assumed iso so no Tor/flatness input needed; lem-pc-global-hom-adjunction is the global RHom_X(P,a(K))=RHom_Y(Rf_*P,K), not sheafified, no RHom identity in D(O_Y) (E ok). FIX more, RETURN less: steps 1-2 and proof_deps: the global Hom adjunction (M,Rg_{X,*}E)_X=(Lg_X^*M,E)_{X'} for Lg_X^* -| Rg_{X,*} (Stacks' identification (M,g'_*a'(g^*K))_X=((g')^*M,a'(g^*K))_{X'} and the map mu) was used without citation; lem-pc-global-hom-adjunction covers only Rf_* -| a (C1); added statement-only node lem-pc-global-hom-pullback-adjunction (unsplit, leanfinder search recorded: underived only) and cited it; step 2 text now states the A'-linear extension compatibility. The second reading missed this; also its claimed created.item change is not in the diff.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
