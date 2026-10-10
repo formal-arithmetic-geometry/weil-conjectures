@@ -29,15 +29,15 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 - **Imported statement false in general (2026-10-09 15:05):** lem-fet-locally-trivial (sec-curve-estimates, imported, unit of the finite-etale points) asks for one surjective etale Y' → Y and one finite set S trivializing a finite etale P → Y; false for disconnected Y (Y = pt ⊔ pt, P one point over one component), true for connected Y. Found by the worker of lem-weil-pbc-finite-etale-trace-degree, which used Stacks 04HN instead. To be corrected at its own split (add 'Y connected' or allow S to vary with the component).
 - **Gap in a reviewed proof (node level, 2026-10-09 14:45):** prop-weil-pbc-algebraically-closed-extension step 10 feeds step 9 (constructibility in the curve sense, def-weil-pbc-constructible-torsion) into lem-weil-pbc-curve-constructible-reduction, whose hypothesis is constructibility as a sheaf of Z/r-modules (def-weil-pbc-etale-constructible-sheaf); the bridge is the new node lem-weil-pbc-constructible-torsion-modules-agree (unsplit): to be cited at step 10 when that node is split (the lead will add the pointer then). RESOLVED 2026-10-09 15:45: lem-weil-pbc-constructible-torsion-modules-agree split and reviewed; step 10 cites it.
 
-**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 06:57 UTC):
+**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 07:01 UTC):
 | group | merged | returned | abandoned | claims held (age, h) |
 |---|---|---|---|---|
 | C | 19 | 20 | 0 | 0: none |
-| C1 | 15 | 24 | 1 | 4: lem-weil-pbc-affine-basic-sets-disjoint-refinement (2.0), lem-weil-pbc-closed-immersion-conormal-flat-base-change (2.0), lem-weil-pbc-closed-immersion-conormal-functorial (2.0), lem-weil-pbc-closed-pushforward-constant-stalks (2.0) |
+| C1 | 15 | 24 | 1 | 4: lem-weil-pbc-affine-basic-sets-disjoint-refinement (2.1), lem-weil-pbc-closed-immersion-conormal-flat-base-change (2.1), lem-weil-pbc-closed-immersion-conormal-functorial (2.1), lem-weil-pbc-closed-pushforward-constant-stalks (2.1) |
 | D | 2 | 8 | 0 | 0: none |
 | D1 | 3 | 4 | 2 | 0: none |
 | E | 1 | 5 | 0 | 0: none |
-| E1 | 20 | 24 | 1 | 5: lem-weil-pbc-smooth-at-generic-point-over-field (1.2), lem-weil-pbc-smooth-at-prime-free-conormal-basis (1.2), lem-weil-pbc-smooth-fibre-regular-local (1.2), lem-weil-pbc-smooth-localization-conormal-split (1.2), lem-weil-pbc-smooth-over-field-dimension-differentials (1.2) |
+| E1 | 20 | 24 | 1 | 5: lem-weil-pbc-smooth-at-generic-point-over-field (1.3), lem-weil-pbc-smooth-at-prime-free-conormal-basis (1.3), lem-weil-pbc-smooth-fibre-regular-local (1.3), lem-weil-pbc-smooth-localization-conormal-split (1.3), lem-weil-pbc-smooth-over-field-dimension-differentials (1.3) |
 | F | 1 | 4 | 0 | 0: none |
 | F1 | 23 | 25 | 9 | 5: lem-weil-pbc-coherent-formal-module-kernel (2.0), lem-weil-pbc-coherent-formal-modules-local-exactness (2.0), lem-weil-pbc-descend-finite-locally-free (2.0), lem-weil-pbc-flat-base-change-map-sections (2.0), lem-weil-pbc-small-etale-representable-presheaf-sheaf (2.0) |
 | G | 0 | 2 | 0 | 0: none |
@@ -153,6 +153,7 @@ REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `
 | 2026-10-10 06:46 | 921 | 1271 | 742 | 335 | 3 more splits since 06:42 (01B7, 02N1 +1, 00R4 +3 incl. 0B52 leaf); 5 workers running |
 | 2026-10-10 06:50 | 921 | 1275 | 742 | 335 | 5 more splits since 06:46 (01E1 +1 with tool use 015Z, 01EX +2, 01FB +1 with Lean attached to the 015E node (closed), 01AG); 5 workers running |
 | 2026-10-10 06:57 | 921 | 1281 | 744 | 335 | seventeenth account limit ~06:54: 5 workers died, 2 items complete on disk reviewed and committed (05 power-series complete, 07F9 smooth), 2 relaunched, 1 launched; 5 more splits since 06:50 (07NA +1 leaf, 07P2 +1 leaf, and the two above); F1 delivery flat-base-change-map-sections (06:38) returned (B7, C1, D3/E5, F); 3 workers running, 2 to claim |
+| 2026-10-10 07:01 | 923 | 1284 | 746 | 335 | 3 more splits since 06:57 (032C quotient-variables, 0334 +3, 00O4/00O6 minima); 5 workers running |
 
 **Pilot numbers, effort `xhigh` (batches 1–2, 2026-10-09, 05:53–07:20 UTC).** Two accounts hit their 5-hour session limits: the first after about an hour with 10 workers running, the second after 16 minutes (it had been used elsewhere). 11 items were delivered and passed review: 9 with a report, 2 found complete on disk after their worker died; 12 workers died mid-item, 7 of them leaving nothing usable. Per delivered item: 9.5–14 minutes of wall time (563–852 s, median ~720 s) and 119k–268k worker tokens (median ~170k); 0–6 new nodes per item (median 2), about half of them Mathlib leaves. The review rejected nothing mathematically; what it had to correct or note: two workers could not read the PDFs (no `pdftotext`; installed since) and wrote the proof as an agent's; one refused the review script because the brief forbade `git` (brief fixed); one died leaving its item citing nodes it had not written (brief now says new nodes first); one removed a pointer clause from a definition's statement (accepted, the slopmaster2 text has no such clause); claims inside definitions were kept as the source wrote them and reported.
 
