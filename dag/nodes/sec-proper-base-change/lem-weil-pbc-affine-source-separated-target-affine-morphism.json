@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+ "kind": "statement",
+ "title": "A morphism from an affine scheme to a separated scheme is affine",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. If $X$ is an affine scheme [def-pc-scheme] and $S$ is separated, i.e. its structure morphism $S\\to\\operatorname{Spec}\\mathbf Z$ is separated [def-weil-proper-morphism], then $f$ is an affine morphism [pqf-def-affine-morphism].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01SG (label lemma-affine-permanence, morphisms.tex line 2025), part (4)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "pqf-def-affine-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism from an affine scheme to a separated scheme is affine",
+   "results": "IsSeparated.of_isAffineHom, IsAffineHom, IsAffineHom.of_comp (Mathlib.AlgebraicGeometry.Morphisms.Separated), IsSeparated.hasAffineProperty, IsIntegralHom.toIsAffineHom, IsAffineHom.mk, IsFinite.toIsAffineHom",
+   "date": "2026-10-10",
+   "verdict": "match: IsAffineHom.of_comp (with g = terminal.from S)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of schemes from affine scheme to separated scheme is an affine morphism",
+   "results": "IsSeparated.of_isAffineHom, IsSeparated.hasAffineProperty, Scheme.instIsSeparatedOfIsAffine, IsAffineHom.of_comp, instHasOfPostcompPropertySchemeIsAffineHomIsSeparated (Mathlib.AlgebraicGeometry.Morphisms.Separated), Scheme.instIsSeparatedOfIsQuasiAffine",
+   "date": "2026-10-10",
+   "verdict": "match: IsAffineHom.of_comp"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'IsAffineHom' Mathlib/AlgebraicGeometry/Morphisms/Affine.lean Mathlib/AlgebraicGeometry/Morphisms/Separated.lean; grep -rn 'stacks 01SG' Mathlib",
+   "results": "Separated.lean:272 lemma IsAffineHom.of_comp [IsAffineHom (f ≫ g)] [IsSeparated g] : IsAffineHom f; Separated.lean:338 class Scheme.IsSeparated (IsSeparated (terminal.from X)); Affine.lean:181 instance isAffineHom_of_isAffine [IsAffine X] [IsAffine Y]; Limits.lean:62 instance IsAffine (⊤_ Scheme); no @[stacks 01SG] tag",
+   "date": "2026-10-10",
+   "verdict": "match: IsAffineHom.of_comp specializes in one line"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsAffineHom.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+  "how": "specializes in one line: apply IsAffineHom.of_comp (Separated.lean:272) to f and g = terminal.from S, which is separated by the instance Scheme.IsSeparated.isSeparated_terminal_from (Separated.lean:338-342; S separated is Scheme.IsSeparated S); f ≫ terminal.from S is a morphism between the affine schemes X and ⊤_ Scheme (instance IsAffine (⊤_ Scheme), Limits.lean:62), hence affine by the instance isAffineHom_of_isAffine (Affine.lean:181). Source read 2026-10-10.",
+  "line": 272
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-surjective-universally-closed-affine-target",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match (IsAffineHom.of_comp Separated.lean:272 with g = terminal.from S, isAffineHom_of_isAffine, IsAffine of the terminal scheme); line verified by L."
+}

@@ -10,11 +10,135 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-surjective-morphism",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($X$ is separated.) Since $X$ is affine, its structure morphism $X\\to\\operatorname{Spec}\\mathbf Z$ is a morphism between affine schemes, hence affine [pqf-def-affine-morphism], hence separated [lem-weil-pbc-affine-morphism-permanence] (3). So $X$ is a separated scheme in the sense of [def-weil-proper-morphism].",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Proposition 05YU (proposition-affine), first sentence (hypothesis of Morphisms 09MQ (2) that X is separated); the agent writes out why an affine scheme is separated (Morphisms 01S7)"
+   }
+  },
+  {
+   "text": "($S$ is separated.) Let $p:X\\to\\operatorname{Spec}\\mathbf Z$ and $q:S\\to\\operatorname{Spec}\\mathbf Z$ be the structure morphisms. Since $\\operatorname{Spec}\\mathbf Z$ is a final object (a morphism into $\\operatorname{Spec}\\mathbf Z$ is a ring map $\\mathbf Z\\to\\Gamma$, which is unique [lem-weil-pbc-morphism-into-affine-scheme]), $q\\circ f=p$. Now $f$ is surjective and universally closed and $p$ is separated by step 1, so [lem-weil-pbc-surjective-universally-closed-separated] (Morphisms 09MQ (4) over the base $\\operatorname{Spec}\\mathbf Z$, which is 09MQ (2)) gives that $q$ is separated, i.e. $S$ is separated.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-surjective-universally-closed-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Proposition 05YU, first sentence ('By Morphisms, Lemma 09MQ the scheme S is separated'); Morphisms 09MQ proof, parts (1), (2) from (3), (4) with S = Spec Z"
+   }
+  },
+  {
+   "text": "($f$ is affine, hence integral.) $X$ is affine and $S$ is separated (step 2), so $f$ is an affine morphism by [lem-weil-pbc-affine-source-separated-target-affine-morphism] (Morphisms 01SG (4)). Since $f$ is affine and universally closed, $f$ is integral by [pqf-lem-integral-univclosed] (Morphisms 01WM, (2) $\\Rightarrow$ (1)).",
+   "uses": [
+    "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+    "pqf-lem-integral-univclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Proposition 05YU, first paragraph (Morphisms lemma-affine-permanence, then lemma-integral-universally-closed)"
+   }
+  },
+  {
+   "text": "($S$ is quasi-compact and quasi-separated.) The structure morphism $X\\to\\operatorname{Spec}\\mathbf Z$ is affine (step 1), hence quasi-compact and quasi-separated [lem-weil-pbc-affine-morphism-permanence] (3); as $\\operatorname{Spec}\\mathbf Z$ is affine, $X$ is quasi-compact [lem-weil-pbc-qcqs-over-affine]. Since $f$ is surjective [def-weil-surjective-morphism], $|S|=f(|X|)$ is the image of a quasi-compact space under a continuous map, hence quasi-compact. The diagonal $S\\to S\\times_{\\mathbf Z}S$ is a closed immersion (step 2), hence affine [lem-weil-pbc-closed-immersion-integral-separated-uc] (b), hence quasi-compact [lem-weil-pbc-affine-morphism-permanence] (3); so $S$ is quasi-separated [def-weil-pbc-scheme-conventions].",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Proposition 05YU, second paragraph ('Since f is surjective and X is quasi-compact we also deduce that S is quasi-compact'); quasi-separatedness of the separated S (needed for Limits 09YZ) is written out by the agent"
+   }
+  },
+  {
+   "text": "(Approximation by finite morphisms.) By steps 3 and 4, $f$ is integral and $S$ is quasi-compact and quasi-separated, so by [lem-weil-pbc-integral-morphism-limit-of-finite] (Limits 09YZ) there are a directed set $I$, $S$-schemes $\\nu_i:X_i\\to S$ that are finite (and of finite presentation) [def-weil-finite-integral-morphism], affine transition morphisms $X_{i'}\\to X_i$ over $S$ for $i'\\ge i$, and morphisms $p_i:X\\to X_i$ over $S$ (so $f=\\nu_i\\circ p_i$) making $X=\\varprojlim_iX_i$ in the category of schemes.",
+   "uses": [
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Proposition 05YU, third paragraph, first sentence (Lemma 09YZ, lemma-integral-limit-finite-and-finite-presentation)"
+   }
+  },
+  {
+   "text": "(Some $X_i$ is affine.) Each $\\nu_i$ is finite, hence affine [def-weil-finite-integral-morphism], hence quasi-compact and quasi-separated [lem-weil-pbc-affine-morphism-permanence] (3); since $S$ is quasi-compact and quasi-separated (step 4), every $X_i$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (2). So $(X_i)_{i\\in I}$ is a directed inverse system of quasi-compact quasi-separated schemes with affine transition morphisms whose limit $X$ is affine; by [lem-weil-pbc-limit-affine-stage] (Limits 01Z6) there is $i_0\\in I$ with $X_{i_0}$ affine.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-limit-affine-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Proposition 05YU, third paragraph, second sentence (Lemma 01Z6, lemma-limit-affine, in Situation 086P, whose hypotheses (X_i qcqs, affine transitions) the agent checks)"
+   }
+  },
+  {
+   "text": "($\\nu_{i_0}$ is surjective.) $f=\\nu_{i_0}\\circ p_{i_0}$ is surjective on underlying sets [def-weil-surjective-morphism], so $\\nu_{i_0}$ is surjective: every $s\\in S$ is $f(x)=\\nu_{i_0}(p_{i_0}(x))$ for some $x\\in X$.",
+   "uses": [
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Proposition 05YU, third paragraph ('since X -> S factors through each X_i we see that X_i -> S is surjective')"
+   }
+  },
+  {
+   "text": "(Conclusion.) $\\nu_{i_0}:X_{i_0}\\to S$ is finite (step 5) and surjective (step 7) with $X_{i_0}$ affine (step 6), so $S$ is affine by [lem-weil-pbc-finite-surjective-affine-target] (Limits 01ZT, Chevalley's theorem). For the parenthetical remark: an integral morphism is affine and universally closed [pqf-lem-integral-univclosed] (Morphisms 01WM, (1) $\\Rightarrow$ (2)), so the statement applies to a surjective integral $f$.",
+   "uses": [
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "pqf-lem-integral-univclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, proof of Proposition 05YU, last sentence (Lemma 01ZT, lemma-affine); the remark is the footnote of 05YU (Morphisms, Lemma 01WM)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-surjective-universally-closed-separated",
+  "lem-weil-pbc-affine-source-separated-target-affine-morphism",
+  "pqf-lem-integral-univclosed",
+  "lem-weil-pbc-qcqs-over-affine",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-limit-affine-stage",
+  "lem-weil-pbc-finite-surjective-affine-target"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Proposition 05YU (proposition-affine, limits.tex line 2875) and its proof; the separatedness of an affine scheme, the quasi-separatedness of S and the qcqs hypotheses of Lemma 01Z6 on the X_i are written out by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -64,10 +188,17 @@
    "results": "EffectiveEpi.lean:121 (both affine), Proper.lean:91-138 (IsFinite = IsProper ⊓ IsAffineHom, isIntegral_appTop_of_universallyClosed), Finite.lean, ClosedImmersion.lean:121,320 (source affine), Integral.lean:136,160, Descent.lean:50; conclusions IsAffine only in Limits.lean:135,156,700 (empty, subsingleton, finite discrete), AffineScheme.lean:113-125,258 (iso, affine opens), Affine.lean:185 isAffine_of_isAffineHom (source of an affine morphism to an affine scheme); no 'Serre' file. Nothing concludes the target of a surjective universally closed / integral / finite morphism is affine",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isAffine_of_isIntegral|IsAffine.of_surjective|isAffine_of_surjective|IsAffine.of_isIntegral|stacks 05YU|stacks 01ZT' Mathlib/",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -92,6 +223,15 @@
   "date": "2026-10-10",
   "by": "L",
   "result": "accepted",
-  "note": "Statement is Limits, Proposition 05YU (limits.tex:2876), self-contained; correct; unsplit; source records the lemmas of its proof (09MQ, 09YZ, 01Z6, 01ZT)."
- }
+  "note": "8 steps following Stacks 05YU: X separated, S separated by the 09MQ node, f affine (new 01SG Mathlib leaf, composed, verified by L) hence integral (pqf-lem-integral-univclosed, tool use, unit sk-prop-av-pqf-finite), S qcqs (written out, missing in Stacks), X = lim of finite X_i (09YZ node), some X_i affine (01Z6 leaf; qcqs hypotheses checked), nu_i0 surjective, Chevalley (new unsplit 01ZT node). Tags verified."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-surjective-universally-closed-affine-target",
+  "worker": "stage1",
+  "summary": "Read Stacks Limits 05YU and its proof, and the lemmas it uses: Morphisms 09MQ, 01SG (lemma-affine-permanence; the brief's '01S5-type' is tag 01SG), 01WM, Limits 09YZ, 01Z6 (Situation 086P), 01ZT. Statement kept; stmt_deps gains def-weil-finite-integral-morphism for the parenthetical 'integral'. Proof in eight steps following 05YU: X separated; S separated by the existing node for 09MQ (lem-weil-pbc-surjective-universally-closed-separated, over Spec Z); f affine by the new Mathlib leaf lem-weil-pbc-affine-source-separated-target-affine-morphism (01SG (4), IsAffineHom.of_comp) and integral by pqf-lem-integral-univclosed (01WM; another unit, accepted as tool use on lem-weil-pbc-thickening-integral, = IsIntegralHom.iff_universallyClosed_and_isAffineHom); S qcqs (quasi-separatedness, needed for 09YZ, written out); X = lim X_i finite over S by the existing node lem-weil-pbc-integral-morphism-limit-of-finite (09YZ); X_i qcqs written out and X_{i0} affine by the existing leaf lem-weil-pbc-limit-affine-stage (01Z6); X_{i0} -> S surjective; S affine by the new unsplit node lem-weil-pbc-finite-surjective-affine-target (01ZT, Chevalley; not in Mathlib after leansearch, leanfinder and grep). Item re-searched by grep for the names the brief proposed: none exist."
+ },
+ "tool_uses": [
+  "pqf-lem-integral-univclosed"
+ ]
 }
