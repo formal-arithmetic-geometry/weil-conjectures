@@ -11,7 +11,6 @@
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1011 | none |
-| `lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra` | 1011 | none |
 | `lem-weil-pbc-separated-affine-cover-criterion` | 1011 | none |
 | `lem-weil-pbc-sheaf-basis-surjection` | 1011 | none |
 | `lem-weil-pbc-sheaf-finite-relation-truncations` | 1011 | none |
@@ -149,6 +148,7 @@
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1012 | none |
+| `lem-weil-pbc-smooth-at-generic-point-over-field` | 1012 | none |
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-smooth-over-product-ring` | 1012 | none |
@@ -861,7 +861,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 675 nodes that wait for stage 1, 468 nodes that wait for a statement dependency.
+Not open yet: 675 nodes that wait for stage 1, 469 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
