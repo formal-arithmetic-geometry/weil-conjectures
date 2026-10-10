@@ -1,8 +1,8 @@
 # Work queue
 
-856 items; claim with `tools/claim.py next <group> [--stage N]`.
+857 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (653)
+## Stage 1: nodes to split (654)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,9 +14,6 @@
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `def-weil-pbc-module-cohomology-fmap` | 1012 | none |
 | `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1012 | none |
-| `lem-weil-pbc-affine-finite-type-generating-sections` | 1012 | none |
-| `lem-weil-pbc-affine-morphism-cohomology-edge` | 1012 | none |
-| `lem-weil-pbc-ample-scheme-separated` | 1012 | none |
 | `lem-weil-pbc-annihilator-element-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-artinian-ring-self-finite-length` | 1012 | none |
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1012 | none |
@@ -152,6 +149,10 @@
 | `lem-weil-pbc-universal-thickening-affine-case` | 1012 | none |
 | `lem-weil-pbc-universal-thickening-open-pieces` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
+| `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1013 | none |
+| `lem-weil-pbc-module-pushforward-injective-acyclic` | 1013 | none |
+| `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1013 | none |
+| `lem-weil-pbc-scheme-modules-enough-injectives` | 1013 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -868,7 +869,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 665 nodes that wait for stage 1, 491 nodes that wait for a statement dependency.
+Not open yet: 666 nodes that wait for stage 1, 494 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
