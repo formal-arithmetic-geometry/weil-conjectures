@@ -31,9 +31,90 @@
   "def-weil-pbc-finite-global-dimension",
   "def-pc-ext"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First prove (1) implies (2) by induction on the bound $n$. At $n=0$, exactness of $0\\to P_0\\to X\\to0$ makes $X$ isomorphic to the projective module $P_0$ [def-weil-pbc-finite-global-dimension, def-weil-pbc-exact-sequence]; projectivity is invariant under isomorphism by its lifting definition [def-weil-pbc-projective-module]. Then [lem-weil-pbc-projective-ext-criterion] gives $\\operatorname{Ext}^i_R(X,Y)=0$ for every $Y$ and every $i\\ge1$.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-projective-ext-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 065R (lemma-projective-dimension-ext), proof of (1) implies (2), with the projective case from Lemma Tag 05CF (lemma-characterize-projective)"
+   }
+  },
+  {
+   "text": "For the induction step, suppose (1) holds with bound $n+1$. In an exact resolution $0\\to P_{n+1}\\to\\cdots\\to P_1\\to P_0\\xrightarrow{q}X\\to0$, put $K=\\ker q$. Exactness [def-weil-pbc-exact-sequence] yields $0\\to P_{n+1}\\to\\cdots\\to P_1\\to K\\to0$, a projective resolution of $K$ of length $\\le n$ [def-weil-pbc-finite-global-dimension]. For every $Y$ and $i\\ge n+2$, the induction hypothesis gives $\\operatorname{Ext}^{i-1}_R(K,Y)=0$ since $i-1\\ge n+1$. Also $\\operatorname{Ext}^{i}_R(P_0,Y)=0$ by [lem-weil-pbc-projective-ext-criterion]. The short exact sequence $0\\to K\\to P_0\\to X\\to0$ and [lem-weil-pbc-ext-long-exact-first-variable] give the exact segment $\\operatorname{Ext}^{i-1}_R(K,Y)\\to\\operatorname{Ext}^{i}_R(X,Y)\\to\\operatorname{Ext}^{i}_R(P_0,Y)$; its outer groups are zero, so the middle group is zero. This finishes (1) implies (2) for every $n$.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-projective-ext-criterion",
+    "lem-weil-pbc-ext-long-exact-first-variable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 065R (lemma-projective-dimension-ext), proof of (1) implies (2), using the long exact Ext sequence of Lemma Tag 065P (lemma-reverse-long-exact-seq-ext) for the induction step"
+   }
+  },
+  {
+   "text": "Condition (2) implies (3) by taking $i=n+1$; $n+1\\ge n+1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 065R (lemma-projective-dimension-ext), proof of (2) implies (3)"
+   }
+  },
+  {
+   "text": "Prove (3) implies (1) by induction on $n$. For $n=0$, the hypothesis says $\\operatorname{Ext}^{1}_R(X,Y)=0$ for all $Y$ [def-pc-ext]. By [lem-weil-pbc-projective-ext-criterion], $X$ is projective [def-weil-pbc-projective-module], and its identity map gives the length-zero exact projective resolution $0\\to X\\xrightarrow{\\mathrm{id}}X\\to0$ [def-weil-pbc-finite-global-dimension].",
+   "uses": [
+    "def-pc-ext",
+    "lem-weil-pbc-projective-ext-criterion",
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 065R (lemma-projective-dimension-ext), proof of (3) implies (1), n = 0, invoking Lemma Tag 05CF (lemma-characterize-projective)"
+   }
+  },
+  {
+   "text": "For the induction step from $n$ to $n+1$, let $F=\\bigoplus_{x\\in X}R$ [def-weil-pbc-free-module] and send its basis vector $e_x$ to $x$; this defines a surjection $q:F\\twoheadrightarrow X$, since every $x$ is the image of $e_x$. It is projective by [lem-weil-pbc-free-module-projective]. Put $K=\\ker q$. Assume $\\operatorname{Ext}^{n+2}_R(X,Y)=0$ for every $Y$. The short exact sequence $0\\to K\\to F\\xrightarrow{q}X\\to0$ [def-weil-pbc-exact-sequence] and [lem-weil-pbc-ext-long-exact-first-variable] give, for every $Y$, the exact segment $\\operatorname{Ext}^{n+1}_R(F,Y)\\to\\operatorname{Ext}^{n+1}_R(K,Y)\\to\\operatorname{Ext}^{n+2}_R(X,Y)$. Its left group is zero by [lem-weil-pbc-projective-ext-criterion], because $n+1\\ge1$; its right group is zero by hypothesis. Thus $\\operatorname{Ext}^{n+1}_R(K,Y)=0$ for every $Y$. The induction hypothesis gives a projective resolution $0\\to Q_n\\to\\cdots\\to Q_0\\to K\\to0$. Compose $Q_0\\to K$ with $K\\hookrightarrow F$ and append $F\\xrightarrow{q}X$: $0\\to Q_n\\to\\cdots\\to Q_0\\to F\\to X\\to0$ is exact at $Q_0$ because $K\\hookrightarrow F$ is injective, and at $F$ because $\\operatorname{im}(Q_0\\to F)=K=\\ker q$; all its terms are projective. Hence it is a projective resolution of $X$ of length $\\le n+1$ [def-weil-pbc-finite-global-dimension]. This completes (3) implies (1).",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-free-module-projective",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-ext-long-exact-first-variable",
+    "lem-weil-pbc-projective-ext-criterion",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 065R (lemma-projective-dimension-ext), proof of (3) implies (1), n > 0, invoking Lemma Tag 065P (lemma-reverse-long-exact-seq-ext)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-projective-module",
+  "def-pc-ext",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-free-module-projective",
+  "lem-weil-pbc-projective-ext-criterion",
+  "lem-weil-pbc-ext-long-exact-first-variable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 065R (lemma-projective-dimension-ext), proof of (1)--(3); the forward implication is rewritten as induction using Lemma Tag 065P rather than the source's calculation on a free resolution"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,7 +139,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -78,5 +159,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-projective-dimension-ext-characterization",
+  "worker": "stage1",
+  "summary": "Checked Stacks 065R against the resolution and Ext definitions. Both directions follow by induction from the existing contravariant long exact Ext sequence and a new Mathlib leaf for projectivity versus Ext-one vanishing and positive Ext vanishing. The free surjection in the reverse induction is the free module on the underlying set of X. No project Lean declaration states the bounded-resolution equivalence.",
+  "blueprint": "The steps serve step 7 of thm-weil-pbc-finite-etale-lifting through the recorded chain of projective-dimension lemmas; the new Mathlib leaf serves the projective base case of the 065R characterization. Whole-blueprint searches for projective dimension, Ext projective, 065R and Ext^1 found no matching blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 065R by induction with the Ext long exact sequence and the Ext^1 criterion for projectivity (new Mathlib leaf projective_iff_subsingleton_ext_one)"
+ }
 }

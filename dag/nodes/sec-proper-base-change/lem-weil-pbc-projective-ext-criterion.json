@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-projective-ext-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split, through the proof of Stacks 065S(1): Stacks 065R, the projective base case and vanishing of Ext of projectives from 05CF",
+   "via": [
+    "lem-weil-pbc-projective-dimension-ext-characterization",
+    "lem-weil-pbc-projective-dimension-ses-kernel",
+    "lem-weil-pbc-well-ordered-union-projective-dimension",
+    "lem-weil-pbc-global-dimension-finite-modules-suffice",
+    "lem-weil-pbc-regular-local-finite-gl-dim",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Projective modules and vanishing of their Ext groups",
+ "statement": "Let $R$ be a commutative ring and $P$ an $R$-module. Then $P$ is projective [def-weil-pbc-projective-module] if and only if $\\operatorname{Ext}^1_R(P,Y)=0$ [def-pc-ext] for every $R$-module $Y$. If $P$ is projective, then $\\operatorname{Ext}^i_R(P,Y)=0$ for every $R$-module $Y$ and every integer $i\\ge1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05CF (lemma-characterize-projective, line 18795), equivalence (1) and (3), and proof of (2) implies (3): the Hom complex of a split free resolution is exact in every positive degree"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-pc-ext"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module is projective iff Ext one vanishes for all modules",
+   "results": "CategoryTheory.projective_iff_subsingleton_ext_one (Mathlib.CategoryTheory.Abelian.Projective.Dimension); IsProjective.iff_projective (Mathlib.Algebra.Category.ModuleCat.Projective)",
+   "date": "2026-10-10",
+   "verdict": "match: projective iff Ext one vanishes after the ModuleCat equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective module if and only if Ext 1 with all modules vanishes",
+   "results": "CategoryTheory.projective_iff_subsingleton_ext_one; isZero_Ext_succ_of_projective; CategoryTheory.hasProjectiveDimensionLT_iff",
+   "date": "2026-10-10",
+   "verdict": "match: first equivalence; positive-degree vanishing also has Abelian.Ext.eq_zero_of_projective"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.projective_iff_subsingleton_ext_one",
+   "results": "CategoryTheory.projective_iff_subsingleton_ext_one in Mathlib.CategoryTheory.Abelian.Projective.Dimension",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'projective_iff_subsingleton_ext_one|eq_zero_of_projective|IsProjective.iff_projective' Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean Mathlib/Algebra/Category/ModuleCat/Projective.lean",
+   "results": "Dimension.lean:140-149 has projective_iff_subsingleton_ext_one; EnoughProjectives.lean:100-106 has Ext.eq_zero_of_projective for degree n+1; ModuleCat/Projective.lean:41-44 has IsProjective.iff_projective. All three declarations and their statements were read.",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.projective_iff_subsingleton_ext_one; CategoryTheory.Abelian.Ext.eq_zero_of_projective; IsProjective.iff_projective",
+  "file": "Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean",
+  "line": 140,
+  "how": "The first equivalence is projective_iff_subsingleton_ext_one (Dimension.lean:140-149) for C = ModuleCat R, with Module.Projective R P equivalent to CategoryTheory.Projective (ModuleCat.of R P) by IsProjective.iff_projective (Mathlib/Algebra/Category/ModuleCat/Projective.lean:41-44); a subsingleton Ext group is the zero group. For the second clause use Abelian.Ext.eq_zero_of_projective (Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean:100-106), writing i = n+1 for i>=1. These are exactly the node's two clauses."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-projective-dimension-ext-characterization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none", "decls": [], "missing": []},
+  "slopmaster2": {"state": "none", "decls": [], "missing": []}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
