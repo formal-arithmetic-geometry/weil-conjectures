@@ -456,6 +456,7 @@ public import WeilConjectures.CategoryTheory.Sites.Point.Torsion
 public import WeilConjectures.CategoryTheory.Sites.PullbackIsoOfLocallyGenerated
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomology.InjectiveTorsion
+public import WeilConjectures.CategoryTheory.Sites.SheafCohomology.InjectiveZMod
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyBijective
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyTorsion
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
