@@ -13,9 +13,103 @@
   "def-weil-open-immersion",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Affine charts.* Put $R=\\mathcal O_X(X)$, $S=\\mathcal O_Y(Y)$ and let $\\varphi:R\\to S$ be the ring map induced by $f$ (the map $f^\\sharp_X:\\mathcal O_X(X)\\to\\mathcal O_Y(f^{-1}(X))=\\mathcal O_Y(Y)$; the restriction map is the identity). As $X$ and $Y$ are affine, $X\\subseteq X$ and $Y\\subseteq Y$ are affine opens with $f(Y)\\subseteq X$, so [lem-weil-pbc-affine-open-spec-points] gives open immersions $\\iota_X:\\operatorname{Spec}R\\to X$ and $\\iota_Y:\\operatorname{Spec}S\\to Y$ with images $X$ and $Y$, and for every $y\\in Y$ a prime $\\mathfrak q_y\\subset S$ with $\\iota_Y(\\mathfrak q_y)=y$. An open immersion whose image is all of the target is an isomorphism: by [def-weil-open-immersion] it induces an isomorphism onto the open subscheme $(Y,\\mathcal O_Y|_Y)=Y$. So $\\iota_X$, $\\iota_Y$ are isomorphisms [def-pc-scheme], $\\mathfrak q_y=\\iota_Y^{-1}(y)$, and every prime $\\mathfrak q$ of $S$ is $\\mathfrak q_y$ for $y=\\iota_Y(\\mathfrak q)$. By [lem-weil-pbc-affine-opens-induced-ring-map-spec-square] (with $U=Y$, $V=X$, whose induced ring map is $\\varphi$) we have $\\iota_X\\circ\\operatorname{Spec}\\varphi=f\\circ\\iota_Y$ [def-weil-affine-spectrum], that is, $f=\\iota_X\\circ\\operatorname{Spec}\\varphi\\circ\\iota_Y^{-1}$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "def-weil-open-immersion",
+    "def-pc-scheme",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03GU, lines 15249-15250 ('Algebra, Lemma 00QB reformulated in the language of schemes'): the passage from the affine schemes X, Y to the ring map R -> S"
+   }
+  },
+  {
+   "text": "*The ring map is of finite type and quasi-finite.* By [pqf-def-quasifinite] (3), $f$ is of finite type, hence locally of finite type [def-weil-finite-type-morphism] (finite type is locally of finite type and quasi-compact), and every $y\\in Y$ is an isolated point of its fibre. With $x=f(y)$ and $Y_x=Y\\times_X\\operatorname{Spec}\\kappa(x)$ the fibre, whose first projection $p:Y_x\\to Y$ is a homeomorphism onto the subspace $f^{-1}(x)$ [def-pc-scheme-fibre], there is a unique point $\\xi\\in Y_x$ with $p(\\xi)=y$, and $\\{\\xi\\}$ is open in $Y_x$ (by that homeomorphism, $y$ isolated in $f^{-1}(x)$ and $\\xi$ isolated in $Y_x$ say the same). Let $\\mathfrak q\\subset S$ be a prime and $y=\\iota_Y(\\mathfrak q)$, so $\\mathfrak q=\\mathfrak q_y$ by step 1. Apply [lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs] to the morphism $f:Y\\to X$, which is locally of finite type, the point $y$, and the affine opens $U=Y\\ni y$, $V=X$ with $f(U)\\subseteq V$, $\\mathcal O_Y(U)=S$, $\\mathcal O_X(V)=R$, induced ring map $\\varphi$ and prime $\\mathfrak q_y=\\mathfrak q$ corresponding to $y$: it gives that $\\varphi$ is of finite type and that $R\\to S$ is quasi-finite at $\\mathfrak q$ [def-weil-pbc-ring-map-quasi-finite-at-prime]. As $\\mathfrak q$ was arbitrary, $\\varphi$ is of finite type and quasi-finite at every prime ideal of $S$.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "def-weil-finite-type-morphism",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03GU, lines 15249-15250: the hypothesis 'R -> S of finite type and quasi-finite' of Algebra 00QB obtained from 'f quasi-finite' (Definition Tag 01TD, definition-quasi-finite)"
+   }
+  },
+  {
+   "text": "*Zariski's main theorem.* By [lem-weil-pbc-quasi-finite-ring-map-integral-closure-open] (3) (Algebra 00QB), applied to $\\varphi$ by step 2, there is a subring $S''$ of the integral closure $S'$ of $R$ in $S$ [def-weil-pbc-integral-closure], containing $\\varphi(R)$ and finitely generated as an $R$-module via $\\varphi$ [def-weil-finitely-generated-module], such that the morphism $\\operatorname{Spec}e:\\operatorname{Spec}S\\to\\operatorname{Spec}S''$ induced by the inclusion $e:S''\\to S$ is an open immersion [def-weil-open-immersion]. Let $\\psi:R\\to S''$, $r\\mapsto\\varphi(r)$, be the corestriction of $\\varphi$ (defined since $\\varphi(R)\\subseteq S''$). Then $\\varphi=e\\circ\\psi$, and $\\psi$ is finite: $S''$ is a finitely generated $R$-module via $\\psi$.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-ring-map-integral-closure-open",
+    "def-weil-pbc-integral-closure",
+    "def-weil-finitely-generated-module",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00QB (lemma-quasi-finite-open-integral-closure), line 30905, part (3), as invoked in the proof of Morphisms Lemma Tag 03GU"
+   }
+  },
+  {
+   "text": "*The factorization.* Put $Z=\\operatorname{Spec}S''$, an affine scheme [def-weil-affine-spectrum] [def-pc-scheme], $j=\\operatorname{Spec}e\\circ\\iota_Y^{-1}:Y\\to Z$ and $\\pi=\\iota_X\\circ\\operatorname{Spec}\\psi:Z\\to X$. The morphism $j$ is an open immersion [def-weil-open-immersion]: $\\iota_Y^{-1}$ is an isomorphism (step 1) and $\\operatorname{Spec}e$ an open immersion (step 3), and precomposing with an isomorphism keeps $j$ a homeomorphism onto the same open subset $\\operatorname{Spec}e(\\operatorname{Spec}S)$ of $Z$ and keeps $j^{-1}\\mathcal O_Z\\to\\mathcal O_Y$ an isomorphism (it is the isomorphism of $\\operatorname{Spec}e$ transported along the isomorphism $\\iota_Y$). By functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum] and step 1, $\\pi\\circ j=\\iota_X\\circ\\operatorname{Spec}\\psi\\circ\\operatorname{Spec}e\\circ\\iota_Y^{-1}=\\iota_X\\circ\\operatorname{Spec}(e\\circ\\psi)\\circ\\iota_Y^{-1}=\\iota_X\\circ\\operatorname{Spec}\\varphi\\circ\\iota_Y^{-1}=f$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-scheme",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 03GU, the diagram of the statement (lines 15237-15244) and the proof, lines 15249-15250"
+   }
+  },
+  {
+   "text": "*$\\pi$ is finite.* Since $\\psi$ is finite (step 3), $\\operatorname{Spec}\\psi:Z\\to\\operatorname{Spec}R$ is a finite morphism by [lem-weil-pbc-spec-finite-ring-map-finite]. The commutative square with top $\\mathrm{id}_Z$, left $\\pi:Z\\to X$, right $\\operatorname{Spec}\\psi$ and bottom $\\iota_X^{-1}:X\\to\\operatorname{Spec}R$ (it commutes: $\\iota_X^{-1}\\circ\\pi=\\operatorname{Spec}\\psi$) is cartesian: given a scheme $T$ and $a:T\\to Z$, $b:T\\to X$ with $\\operatorname{Spec}\\psi\\circ a=\\iota_X^{-1}\\circ b$, one has $b=\\iota_X\\circ\\operatorname{Spec}\\psi\\circ a=\\pi\\circ a$, so $a$ is the unique morphism $c:T\\to Z$ with $\\mathrm{id}_Z\\circ c=a$ and $\\pi\\circ c=b$. Hence there is an isomorphism $Z\\cong Z\\times_{\\operatorname{Spec}R}X$ [def-pc-base-change] over $X$ carrying $\\pi$ to the second projection, the base change of $\\operatorname{Spec}\\psi$ along $\\iota_X^{-1}$, which is finite by [lem-weil-pbc-finite-morphism-permanence] (a). Finiteness [def-weil-finite-integral-morphism] is preserved by an isomorphism of sources over $X$: for an affine open $V\\subseteq X$ the isomorphism identifies $\\pi^{-1}(V)$ with the inverse image of $V$ under the projection (so it is affine) and the ring map $\\mathcal O_X(V)\\to\\mathcal O_Z(\\pi^{-1}(V))$ with the corresponding ring map of the projection followed by a ring isomorphism (so it is finite). Thus $\\pi$ is finite, and $Z$, $j$, $\\pi$ are as required.",
+   "uses": [
+    "lem-weil-pbc-spec-finite-ring-map-finite",
+    "def-pc-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 03GU (pi finite), with Lemma Tag 01WI (lemma-finite-local), line 11001, and Lemma Tag 01WL (lemma-base-change-finite), line 11044"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-spec-points",
+  "def-weil-open-immersion",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "def-weil-affine-spectrum",
+  "pqf-def-quasifinite",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "lem-weil-pbc-quasi-finite-ring-map-integral-closure-open",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-spec-finite-ring-map-finite",
+  "def-pc-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 03GU (lemma-quasi-finite-affine), line 15230, and its proof (lines 15249-15250: 'Algebra, Lemma 00QB reformulated in the language of schemes'); the reformulation, which the source leaves to the reader, is written out in steps 1, 2, 4 and 5; Algebra Lemma Tag 00QB (algebra.tex line 30905) is the new node lem-weil-pbc-quasi-finite-ring-map-integral-closure-open"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +138,17 @@
    "results": "ZariskisMainTheorem.lean:76-100 (zariskisMainProperty_iff: local form at one prime, r in the integral closure with S'_r = S_r), QuasiFiniteAt.exists_fg_and_exists_notMem_and_awayMap_bijective (line 703, local); no global factorization through a finite algebra",
    "date": "2026-10-10",
    "verdict": "no match (local ingredient: Algebra.ZariskisMainProperty, QuasiFiniteAt.exists_fg_and_exists_notMem_and_awayMap_bijective)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/ZariskisMainTheorem.lean; grep -n 'theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; grep -rln 'ZariskisMain\\|zariski' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; rg -n 'stacks 00QB|stacks 03GU' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "ZariskisMainTheorem.lean has only the pointwise forms (ZariskisMainProperty.of_finiteType line 660, QuasiFiniteAt.exists_fg_and_exists_notMem_and_awayMap_bijective line 703, quasiFiniteAt_iff_isOpen_singleton_fiber line 754); Morphisms/QuasiFinite.lean (LocallyQuasiFinite, finite_preimage, quasiFiniteAt_iff_isOpen_singleton_asFiber line 395) has no factorization through a finite morphism; the AlgebraicGeometry hits for 'zariski' are the Zariski topology/site; no 00QB or 03GU tag",
+   "date": "2026-10-10",
+   "verdict": "no match (re-checked 2026-10-10 by the splitting worker)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +168,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-finite-affine-open-in-finite",
+  "worker": "stage1",
+  "summary": "Statement checked against Morphisms 03GU (morphisms.tex 15230; tag verified in tags/tags) and kept: X, Y affine, f quasi-finite, Z affine, j open immersion, pi finite, f = pi o j. Mathlib checked first: ZariskisMainTheorem.lean has only the pointwise ZMT (lines 660, 703), and no scheme or global ring version exists, so the item is split, not a leaf. The source proof is one line ('00QB reformulated in the language of schemes'); the reformulation is written out in five steps: (1) affine charts iota_X, iota_Y are isomorphisms and f = iota_X o Spec(phi) o iota_Y^{-1} (lem-weil-pbc-affine-open-spec-points, lem-weil-pbc-affine-opens-induced-ring-map-spec-square); (2) phi is of finite type and quasi-finite at every prime, from pqf-def-quasifinite (3) through lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs with U = Y, V = X (isolated in f^{-1}(x) and in the fibre scheme agree by def-pc-scheme-fibre); (3) Algebra 00QB as the new unsplit node lem-weil-pbc-quasi-finite-ring-map-integral-closure-open (Stacks' clauses (1)-(3) for S' and S'', plus the open-immersion form of (3) used by 03GU), giving S'' finite with Spec S -> Spec S'' an open immersion; (4) Z = Spec S'', j = Spec(e) o iota_Y^{-1}, pi = iota_X o Spec(psi), pi o j = f by functoriality (elementary); (5) pi finite: Spec(psi) finite by the new Mathlib leaf lem-weil-pbc-spec-finite-ring-map-finite (AlgebraicGeometry.IsFinite.SpecMap_iff, Finite.lean:73), and pi is its base change along the isomorphism iota_X^{-1} (lem-weil-pbc-finite-morphism-permanence (a)). No error found in the source; the only gap is the omitted reformulation itself."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps writing out Stacks 03GU as the scheme reformulation of 00QB: affine charts; the ring map is of finite type and quasi-finite at every prime (01TH (2)=>(4) node); Zariski's main theorem as a new unsplit node (00QB (1)-(3) with the open-immersion form); the factorization; pi finite by the new exact leaf IsFinite.SpecMap_iff (Finite.lean:73 verified by L) and base change along an isomorphism. Stage 3: the leaf lem-weil-pbc-integral-closure-zariski-main-away matches pqf-def-quasifinite's notion to Algebra.QuasiFiniteAt without the agreement line (B8 candidate for demotion)."
+ }
 }

@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-quasi-finite-ring-map-integral-closure-open",
+ "kind": "statement",
+ "title": "Zariski's main theorem, global affine form: a quasi-finite finite type algebra is open in a finite subalgebra of its integral closure (Stacks 00QB)",
+ "statement": "Let $\\varphi:R\\to S$ be a ring map of finite type such that $R\\to S$ is quasi-finite at every prime ideal $\\mathfrak q\\subset S$ [def-weil-pbc-ring-map-quasi-finite-at-prime], and let $S'\\subseteq S$ be the integral closure of $R$ in $S$ [def-weil-pbc-integral-closure]. For a subring $T\\subseteq S$ containing $\\varphi(R)$ write $\\operatorname{Spec}S\\to\\operatorname{Spec}T$ for the morphism of affine schemes [def-weil-affine-spectrum] induced by the inclusion $T\\subseteq S$ (on points $\\mathfrak q\\mapsto\\mathfrak q\\cap T$); for $g\\in T$ write $D(g)=\\{\\mathfrak p\\in\\operatorname{Spec}T:\\ g\\notin\\mathfrak p\\}$, and $T_g\\to S_g$, $t/g^n\\mapsto t/g^n$, for the map between the localizations of $T$ and of $S$ at the powers of $g$ [def-weil-ring-localization-away] induced by the inclusion. Then: (1) $\\operatorname{Spec}S\\to\\operatorname{Spec}S'$ is a homeomorphism onto an open subset of $\\operatorname{Spec}S'$; (2) if $g\\in S'$ and $D(g)\\subseteq\\operatorname{Spec}S'$ is contained in the image of $\\operatorname{Spec}S\\to\\operatorname{Spec}S'$, then $S'_g\\to S_g$ is an isomorphism; (3) there is a subring $S''\\subseteq S'$ containing $\\varphi(R)$ which is a finitely generated $R$-module via $\\varphi$ [def-weil-finitely-generated-module] such that (1) and (2) hold with $S''$ in place of $S'$, and such that the morphism $\\operatorname{Spec}S\\to\\operatorname{Spec}S''$ is an open immersion [def-weil-open-immersion].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00QB (lemma-quasi-finite-open-integral-closure), line 30905, with its proof (lines 30920-30950); the open-immersion clause of (3) is the reformulation of (1) and (2) for $S''$ made in the proof of Morphisms, Lemma Tag 03GU (lemma-quasi-finite-affine), morphisms.tex line 15230"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-pbc-integral-closure",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away",
+  "def-weil-finitely-generated-module",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type quasi-finite algebra: there is a finite subalgebra S' such that Spec S → Spec S' is an open immersion",
+   "results": "Algebra.QuasiFinite, Algebra.QuasiFiniteAt, RingHom.QuasiFinite, RingHom.QuasiFinite.of_finite, Algebra.QuasiFinite.iff_finite_primesOver (Mathlib.RingTheory.QuasiFinite.Basic, Mathlib.RingTheory.RingHom.QuasiFinite): definitions and fibre criteria, none gives a global finite subalgebra",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral closure of R in a quasi-finite finite type R-algebra S: Spec S → Spec of integral closure is homeomorphism onto open subset",
+   "results": "integralClosure, completeIntegralClosure, IsLocalization.Away.integralClosure, integralClosure.AlgebraIsIntegral (Mathlib.RingTheory.IntegralClosure.*, Mathlib.RingTheory.Localization.Integral): no open-embedding statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Zariski main theorem global: quasi-finite finite type R-algebra S has finite R-subalgebra S'' of the integral closure such that Spec S is open in Spec S''",
+   "results": "Algebra.ZariskisMainProperty, Algebra.zariskisMainProperty_iff, Algebra.ZariskisMainProperty.of_isIntegral (Mathlib.RingTheory.ZariskisMainTheorem), Algebra.QuasiFinite.of_isIntegral_of_finiteType, RingHom.QuasiFinite.of_isIntegral_of_finiteType (the converse direction), Algebra.QuasiFinite.iff_finite_comap_preimage_singleton",
+   "date": "2026-10-10",
+   "verdict": "no match (pointwise ingredient only: Algebra.ZariskisMainProperty at one prime)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, Algebra.QuasiFinite, Subalgebra, Module.Finite ; and Algebra.QuasiFiniteAt, Subalgebra, Localization.awayMap",
+   "results": "no results (both queries)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/ZariskisMainTheorem.lean (read lines 1-100, 630-770); rg -n 'stacks 00QB|stacks 03GU|stacks 00QA' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; rg -n 'toSubmodule.FG|IsOpenEmbedding|IsOpenImmersion' in RingTheory/QuasiFinite, RingTheory/RingHom/QuasiFinite.lean, RingTheory/Etale/QuasiFinite.lean; grep -rln integralClosure ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "ZariskisMainTheorem.lean: only pointwise forms, Algebra.ZariskisMainProperty.of_finiteType (line 660, @[stacks 00Q9]) and Algebra.QuasiFiniteAt.exists_fg_and_exists_notMem_and_awayMap_bijective (line 703: for one prime p a finite subalgebra S' and r in S' not in p with S'_r = S_r); no 00QB/03GU tag anywhere; AlgebraicGeometry/Normalization.lean uses integralClosure for the relative normalization but states no open immersion of a quasi-finite source",
+   "date": "2026-10-10",
+   "verdict": "no match (the existing node lem-weil-pbc-quasi-finite-at-finite-subalgebra-away records the line-703 candidate, the pointwise ingredient of this node's proof)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-finite-affine-open-in-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

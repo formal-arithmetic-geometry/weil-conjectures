@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-spec-finite-ring-map-finite",
+ "kind": "statement",
+ "title": "The spectrum of a finite ring map is a finite morphism",
+ "statement": "Let $\\varphi:A\\to B$ be a homomorphism of commutative rings which is finite, i.e. $B$ is a finitely generated $A$-module via $\\varphi$ [def-weil-finitely-generated-module]. Then the induced morphism of schemes $\\operatorname{Spec}\\varphi:\\operatorname{Spec}B\\to\\operatorname{Spec}A$ [def-weil-affine-spectrum] is finite [def-weil-finite-integral-morphism] (and conversely, if $\\operatorname{Spec}\\varphi$ is finite then $\\varphi$ is finite).",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 01WI (lemma-finite-local), line 11001, (2) implies (1) with the affine open covering of Spec A by itself; the converse is Definition Tag 01WH (definition-integral), line 10957, (2), with V = Spec A"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spec of a finite ring homomorphism is a finite morphism of schemes",
+   "results": "AlgebraicGeometry.IsFinite.SpecMap_iff, AlgebraicGeometry.IsFinite, IsFinite.mk (Mathlib.AlgebraicGeometry.Morphisms.Finite), Spec.map",
+   "date": "2026-10-10",
+   "verdict": "match: AlgebraicGeometry.IsFinite.SpecMap_iff"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite (AlgebraicGeometry.Spec.map _)",
+   "results": "AlgebraicGeometry.IsFinite.SpecMap_iff : IsFinite (Spec.map f) ↔ (CommRingCat.Hom.hom f).Finite (Mathlib.AlgebraicGeometry.Morphisms.Finite)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the morphism Spec B → Spec A induced by a ring homomorphism A → B that makes B a finitely generated A-module is a finite morphism of schemes",
+   "results": "AlgebraicGeometry.IsFinite.SpecMap_iff, HasRingHomProperty LocallyOfFiniteType, IsFinite.toIsAffineHom, IsFinite.finite_app (Mathlib.AlgebraicGeometry.Morphisms.Finite)",
+   "date": "2026-10-10",
+   "verdict": "match: AlgebraicGeometry.IsFinite.SpecMap_iff"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n SpecMap_iff ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; sed -n 44,80p (namespace IsFinite opens at line 44)",
+   "results": "Finite.lean:73-76 `lemma SpecMap_iff {R S : CommRingCat.{u}} (f : R ⟶ S) : IsFinite (Spec.map f) ↔ f.hom.Finite` inside `namespace IsFinite` (line 44), i.e. AlgebraicGeometry.IsFinite.SpecMap_iff; local_search confirms the name",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsFinite.SpecMap_iff",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+  "line": 73,
+  "how": "exact (lines 73-76, read with sed -n 65,80p on 2026-10-10): `IsFinite (Spec.map f) ↔ f.hom.Finite` for f : R ⟶ S in CommRingCat; `RingHom.Finite` is 'S is a finite R-module via f' (Module.Finite, the match of def-weil-finitely-generated-module) and `IsFinite` is the match of def-weil-finite-integral-morphism; the forward clause of the node is `.mpr`, the converse `.mp` (for a map of types use CommRingCat.ofHom φ)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-finite-affine-open-in-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

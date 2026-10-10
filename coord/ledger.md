@@ -869,3 +869,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:36 L: reviewed lem-weil-pbc-quasi-coherent-ideal-zero-set-affine (5 steps, 0 new): accepted.
 - 04:37 L: reviewed lem-weil-pbc-quotient-henselian-pair (3 steps, 0 new; source tag 05WS corrected to 09XK): accepted.
 - 04:38 L: reviewed lem-weil-pbc-quotient-local-structure (Mathlib leaf, one declaration per clause; source corrected): accepted.
+- 04:39 L: reviewed lem-weil-pbc-quasi-finite-affine-open-in-finite (5 steps, +00QB node, +01WI leaf; stage 3: integral-closure-zariski-main-away leaf is a B8 demotion candidate): accepted.
