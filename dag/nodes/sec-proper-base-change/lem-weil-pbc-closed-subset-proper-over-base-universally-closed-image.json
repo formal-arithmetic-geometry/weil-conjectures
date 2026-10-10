@@ -37,17 +37,102 @@
   },
   {
    "tool": "grep",
-   "query": "grep -rniE 'proper over|properOver|isProperOver' and grep -rn 'IsProper\\|UniversallyClosed' | grep -i 'image' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "query": "grep for proper-over-base and universally-closed image declarations in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
    "results": "only the docstring 'Proj 𝒜 is proper over Spec 𝒜₀' (ProjectiveSpectrum/Proper.lean:16) and UniversallyClosed f.toImage (Morphisms/Proper.lean:119, the scheme-theoretic image of the whole source); no closed subsets proper over a base",
    "date": "2026-10-10",
    "verdict": "no match"
   }
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Give $Z$ and $Z'=f(Z)$ their reduced induced closed subscheme structures [lem-weil-pbc-reduced-induced-closed-subscheme]. The inclusion of the underlying image gives a morphism $Z\\to Z'$ over $S$. Let $Z''=X\\times_Y Z'$ be the scheme-theoretic inverse image of $Z'$ in $X$ [def-pc-fibre-product]. Since $Z$ is reduced and its image is contained in the closed subscheme $Z''\\to X$, [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] (Stacks Schemes 0356) gives the factorization $Z\\to Z''$. The map $Z''\\to Z'$ is the base change of $f$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYQ (lemma-functoriality-closed-proper-over-base), proof of (2), first two sentences"
+   }
+  },
+  {
+   "text": "The base-change projection $Z''\\to Z'$ is universally closed by [lem-weil-pbc-universally-closed-base-change] (Stacks Morphisms 01W4). The map $Z\\to Z''$ is a closed immersion by [lem-weil-pbc-closed-immersion-cancellation] (Stacks Morphisms 07RK): $Z\\to X$ is a closed immersion and $Z''\\to X$ is separated, being a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. Hence $Z\\to Z'$ is universally closed, using [lem-weil-pbc-closed-immersion-integral-separated-uc] (f) for composition. It is surjective because its underlying image is $f(Z)=Z'$.",
+   "uses": [
+    "lem-weil-pbc-universally-closed-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-cancellation",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYQ, proof of (2): scheme-theoretic inverse image Z'' of Z', base change of universal closedness, and composition with the closed immersion Z into Z''"
+   }
+  },
+  {
+   "text": "The structure morphism $Z\\to S$ is proper by the hypothesis that $Z$ is proper over $S$, hence separated and universally closed [def-weil-proper-morphism]. Since $Z\\to Z'$ is surjective and universally closed, [lem-weil-pbc-surjective-universally-closed-separated] implies that $Z'\\to S$ is separated.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-surjective-universally-closed-separated",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYQ, proof of (2), sentences beginning 'We conclude that $Z' \\to S$ is separated'"
+   }
+  },
+  {
+   "text": "The map $Z'\\to S$ is locally of finite type: the closed immersion Z' into Y is proper and therefore locally of finite type [lem-weil-pbc-proper-fp-permanence] (c), while $Y\\to S$ is locally of finite type by hypothesis, so the composite is locally of finite type by [lem-weil-pbc-proper-fp-permanence] (e).",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYQ, proof of (2), sentences beginning 'Since $Z' \\to S$ is the composition'"
+   }
+  },
+  {
+   "text": "The proper morphism $Z\\to S$ is universally closed, and $Z\\to Z'$ is surjective. Applying [lem-weil-pbc-image-universally-closed] (Stacks Morphisms 03GN) to this factorization shows that $Z'\\to S$ is universally closed; together with the separatedness and local finite type from the preceding steps, it is proper. Its underlying image in $Y$ is the closed subset $Z'$, so $f(Z)$ is closed and proper over $S$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-image-universally-closed",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 0CYQ, proof of (2), final sentences (03GN)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-universally-closed-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-cancellation",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "def-weil-surjective-morphism",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-surjective-universally-closed-separated",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-image-universally-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0CYQ (lemma-functoriality-closed-proper-over-base), proof of part (2)"
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +152,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image",
+  "worker": "F1",
+  "summary": "Split the proof of Stacks Cohomology of Schemes Lemma 0CYQ (tag 0CYQ), part (2), into five steps. The reduced structures on Z and f(Z), the scheme-theoretic inverse image Z'' and the factorization Z -> Z'' follow the fibre-product and reduced-closed-subscheme nodes, with the reduced-source factorization cited explicitly as Schemes 0356. Z'' -> Z' uses the new Mathlib leaf for base-change stability of universal closedness (Stacks Morphisms 01W4, Mathlib AlgebraicGeometry.universallyClosed_isStableUnderBaseChange at UniversallyClosed.lean:65). The closed immersion Z -> Z'' is now cited through the exact closed-immersion cancellation node for Stacks Morphisms 07RK and Mathlib IsClosedImmersion.of_comp. Composition with the closed immersion gives a surjective universally closed Z -> Z', then existing 09MQ separatedness descent and 03GN image-universally-closed yield that Z' -> S is separated, locally of finite type, universally closed, hence proper. The target image is therefore the closed subset f(Z)=Z' proper over S. Three Mathlib search kinds were recorded for each new node; no duplicate statement or tag-carrying node suitable for these exact source routes was reused."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: second delivery: 0356 node and 07RK leaf (Separated.lean:242 verified) added as asked; the 07RK leaf duplicates lem-weil-pbc-closed-immersion-from-composite of another unit (unsplit); L cross-referenced both with lead_notes"
+ }
 }
