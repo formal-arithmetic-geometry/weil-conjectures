@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-sepclosed-finite-sep-trivial",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Separably closed fields: finite separable extensions are trivial",
@@ -13,24 +13,75 @@
   "place": "node lem-pc-sepclosed-finite-sep-trivial, order 748"
  },
  "stmt_deps": [
-  "def-pc-separably-closed"
+  "def-pc-separably-closed",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [
-  {
-   "text": "The extension is finite and separable, hence simple: $K=k[\\alpha]$ for some\n$\\alpha$ (primitive element theorem, classical). Let $m_\\alpha\\in k[T]$ be\nthe minimal polynomial of $\\alpha$; it is nonconstant and separable, hence\nall its roots lie in $k$ (by separably closedness: a separable polynomial\nhas a root in $k$, and then the quotient $k[T]/(m_\\alpha)$ is a field only\nif $m_\\alpha$ has degree $1$ —indeed $m_\\alpha$ being irreducible and\nsplitting over $k$ forces $\\deg m_\\alpha=1$). Therefore $\\alpha\\in k$ and\n$K=k$.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
-  "by": "agent",
+  "by": "document",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-dense-points/lem-pc-sepclosed-finite-sep-trivial.md",
-  "place": "## Proof"
+  "place": "node lem-pc-sepclosed-finite-sep-trivial, order 748"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite separable field extension over a separably closed field is trivial",
+   "results": "IsSepClosed.separableClosure_eq_bot_iff; IsSepClosed; SeparableClosure.isSepClosed; Algebra.IsAlgebraic.isSepClosed; isSepClosure_iff; Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed; isSepClosed_iff_isPurelyInseparable_algebraicClosure; IsSepClosure.separable",
+   "date": "2026-10-11",
+   "verdict": "match (direct map-bijectivity declaration confirmed by source grep)"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, eq_bot_of_isSepClosed_of_isSeparable, algebraMap_surjective",
+   "results": "none (unknown identifier in pattern)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed.algebraMap_surjective, IsSepClosed.algebraMap_bijective, Algebra.IsSeparable",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- Function.Bijective (algebraMap k K)",
+   "results": "none (unknown identifier k in pattern)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eq_bot_of_isSepClosed_of_isSeparable|algebraMap_surjective|IsSepClosed [Mathlib/FieldTheory]",
+   "results": "Mathlib/FieldTheory/IsSepClosed.lean:198 IsSepClosed.algebraMap_surjective; :211 IsSepClosed.algebraMap_bijective; :219 IntermediateField.eq_bot_of_isSepClosed_of_isSeparable",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraMap_bijective [Mathlib/FieldTheory/IsSepClosed.lean]",
+   "results": "Mathlib/FieldTheory/IsSepClosed.lean:211 lemma IsSepClosed.algebraMap_bijective [IsSepClosed k] [Algebra k K] [Algebra.IsSeparable k K]",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a separably closed field has no nontrivial finite separable field extension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsSepClosed.algebraMap_bijective",
+  "file": "Mathlib/FieldTheory/IsSepClosed.lean",
+  "line": 211,
+  "how": "specializes in one line: a finite separable field extension supplies [Field k], [Field K], [Algebra k K], [FiniteDimensional k K], and [Algebra.IsSeparable k K]. The declaration's [IsSepClosed k], [Algebra k K], and [Algebra.IsSeparable k K] hypotheses give Function.Bijective (algebraMap k K) (line 211); injectivity identifies k with its image and surjectivity says every element of K lies in that image, exactly K = k. The finite-dimensional hypothesis is unused because Mathlib proves the stronger statement for every separable algebraic extension."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -55,5 +106,26 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-picard-dense-points"
+ "unit": "sk-prop-picard-dense-points",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-sepclosed-finite-sep-trivial",
+  "worker": "stage1",
+  "summary": "No project declaration with this blueprint tag exists in slopmaster2. The imported primitive-element proof is replaced by the Mathlib leaf IsSepClosed.algebraMap_bijective (Mathlib/FieldTheory/IsSepClosed.lean:211). Its IsSepClosed and Algebra.IsSeparable hypotheses encode a separably closed base and finite separable extension; bijectivity of the algebra map is exactly triviality of K/k.",
+  "blueprint": {
+   "from": {
+    "node": "lem-pc-sepclosed-finite-sep-trivial",
+    "place": "the sole conclusion of the blueprint proof: a finite separable extension of a separably closed field is trivial"
+   },
+   "same_as": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sft2445",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sft2445 (reviewer sub-agent of L); spot-checked: Mathlib leaf IsSepClosed.algebraMap_bijective read at Mathlib/FieldTheory/IsSepClosed.lean:211 (sed 195-215): hypotheses [IsSepClosed k][Algebra k K][Algebra.IsSeparable k K], bijectivity = K=k, one-line specialization, finiteness unused (B8 ok); no sorry-free slopmaster2 decl (B10 ok); no new nodes, no restatement of lem-pc-kbar-pure-insep; stmt_deps fine. FIX more, RETURN less: no repair needed. Second reading: no missed fault."
+ }
 }
