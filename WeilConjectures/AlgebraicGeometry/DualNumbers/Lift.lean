@@ -157,7 +157,7 @@ theorem Hom.map_appLE_apply (f : X ⟶ Y) {U U' : Y.Opens} {V : X.Opens} (e : V 
       f.appLE U' V (e.trans ((Opens.map f.base).map i.unop).le) a := by
   rw [← CommRingCat.comp_apply, Hom.map_appLE]
 
-theorem presheaf_map_map_apply (X : Scheme.{u}) {U V W : X.Opens} (i : op U ⟶ op V)
+theorem presheaf_map_map_apply_of_comp (X : Scheme.{u}) {U V W : X.Opens} (i : op U ⟶ op V)
     (j : op V ⟶ op W) (k : op U ⟶ op W) (a : Γ(X, U)) :
     X.presheaf.map j (X.presheaf.map i a) = X.presheaf.map k a := by
   rw [← CommRingCat.comp_apply, ← Functor.map_comp]
@@ -233,7 +233,7 @@ theorem dualNumbersLift_comp_proj : X.dualNumbersLift t ht ≫ X.dualNumbersProj
   rw [Hom.appLE_comp_apply (X.dualNumbersLift t ht) X.dualNumbersProj U U V le_rfl e₁,
     dualNumbersProj_appLE, dualNumbersLift_appLE]
   simp only [fst_inl, snd_inl, map_zero, mul_zero, add_zero]
-  exact presheaf_map_map_apply _ _ _ _ a
+  exact presheaf_map_map_apply_of_comp _ _ _ _ a
 
 /-- The square-zero function `h^♯(ε)` on `T` attached to a morphism `h : T ⟶ S[ε]`. -/
 noncomputable def Hom.dualNumbersParam (h : X ⟶ Y.dualNumbers) : Γ(X, ⊤) :=
@@ -315,6 +315,11 @@ theorem Hom.appLE_apply_eq_of_eq {f g : X ⟶ Y} (h : f = g) (U : Y.Opens) (V : 
     (e₁ : V ≤ f ⁻¹ᵁ U) (e₂ : V ≤ g ⁻¹ᵁ U) (a : Γ(Y, U)) : f.appLE U V e₁ a = g.appLE U V e₂ a := by
   subst h
   rfl
+
+theorem Hom.appLE_heq_app (f : X ⟶ Y) (U : Y.Opens) {W : X.Opens} (hW : W = f ⁻¹ᵁ U)
+    (e : W ≤ f ⁻¹ᵁ U) (x : Γ(Y, U)) : f.appLE U W e x ≍ f.app U x := by
+  subst hW
+  rw [Hom.app_eq_appLE]
 
 @[simp]
 theorem presheaf_map_self_apply (X : Scheme.{u}) {U : X.Opens} (i : op U ⟶ op U) (a : Γ(X, U)) :

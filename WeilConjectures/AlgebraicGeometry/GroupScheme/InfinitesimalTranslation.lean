@@ -192,6 +192,34 @@ theorem overDualNumbers₂ι_comp_overDualNumbers₂Proj :
   ext1
   simp [overDualNumbers₂ι, overDualNumbers₂Proj]
 
+variable (S) in
+@[reassoc (attr := simp)]
+theorem dualNumbersιεOver_comp_dualNumbersProjεOver :
+    dualNumbersιεOver S ≫ dualNumbersProjεOver S = 𝟙 _ := by
+  ext1
+  simp [dualNumbersιεOver, dualNumbersProjεOver]
+
+variable (S) in
+@[reassoc]
+theorem dualNumbersιεOver_comp_dualNumbersProjδOver :
+    dualNumbersιεOver S ≫ dualNumbersProjδOver S = toUnit _ ≫ dualNumbersιOver S := by
+  ext1
+  simp [dualNumbersιεOver, dualNumbersProjδOver, Over.toUnit_left]
+
+variable (S) in
+@[reassoc]
+theorem dualNumbersιδOver_comp_dualNumbersProjεOver :
+    dualNumbersιδOver S ≫ dualNumbersProjεOver S = toUnit _ ≫ dualNumbersιOver S := by
+  ext1
+  simp [dualNumbersιδOver, dualNumbersProjεOver, Over.toUnit_left]
+
+variable (S) in
+@[reassoc (attr := simp)]
+theorem dualNumbersιδOver_comp_dualNumbersProjδOver :
+    dualNumbersιδOver S ≫ dualNumbersProjδOver S = 𝟙 _ := by
+  ext1
+  simp [dualNumbersιδOver, dualNumbersProjδOver, ← Hom.dualNumbers_comp, Hom.dualNumbers_id]
+
 end Thickening
 
 /-- An endomorphism of `Y[ε]` over `S[ε]` fixes the function `ε`. -/
@@ -379,6 +407,12 @@ theorem rightTranslationDeriv_one (h1 : Scheme.dualNumbersιOver S ≫ (1 : _ �
     (congrArg CommaMorphism.left rightTranslation_one) U U e le_rfl a)).trans
     ((congrArg TrivSqZeroExt.snd (Scheme.dualNumbersProj_appLE_self (X := G.left) U le_rfl a)).trans
       (TrivSqZeroExt.snd_inl _ a))
+
+theorem rightTranslationDeriv_congr {x y : Scheme.dualNumbersOver S ⟶ G}
+    (hx : Scheme.dualNumbersιOver S ≫ x = 1) (hy : Scheme.dualNumbersιOver S ≫ y = 1) (h : x = y)
+    (U : G.left.Opens) : rightTranslationDeriv hx U = rightTranslationDeriv hy U := by
+  subst h
+  rfl
 
 theorem rightTranslationDeriv_apply {x : Scheme.dualNumbersOver S ⟶ G}
     (hx : Scheme.dualNumbersιOver S ≫ x = 1) (U : G.left.Opens)

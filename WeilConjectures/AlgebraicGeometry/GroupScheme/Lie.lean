@@ -8,9 +8,13 @@ module
 public import Mathlib.Algebra.Lie.Abelian
 public import Mathlib.Algebra.Lie.Subalgebra
 public import Mathlib.AlgebraicGeometry.Group.Affine
+public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.Tactic.NoncommRing
 public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.InfinitesimalTranslation
+public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -171,8 +175,8 @@ noncomputable instance : Module Γ(S, ⊤) (Lie G) :=
   inferInstanceAs (Module Γ(S, ⊤) (omega G ⟶ Scheme.Modules.unitModule S))
 
 /-- The Lie algebra is the module of global sections of the Lie algebra sheaf. -/
-theorem nonempty_lie_equiv_sections : Nonempty (Lie G ≃+ Γ(lieAlgebraSheaf G, ⊤)) := by
-  sorry
+theorem nonempty_lie_equiv_sections : Nonempty (Lie G ≃+ Γ(lieAlgebraSheaf G, ⊤)) :=
+  ⟨(Scheme.Modules.ΓHomObjAddEquiv _ _).symm⟩
 
 end GrpObj
 
@@ -209,11 +213,6 @@ theorem mem_infPoints {v : Scheme.dualNumbersOver S ⟶ G} :
 
 instance : (infPoints G).Normal :=
   MonoidHom.normal_ker _
-
-/-- The infinitesimal points form a commutative group: their group law is the addition of tangent
-vectors. -/
-theorem isMulCommutative_infPoints : IsMulCommutative (infPoints G) := by
-  sorry
 
 /-- The identity point, as a morphism of schemes, is the identity section. -/
 theorem one_left : (1 : Over.mk (𝟙 S) ⟶ G).left = unitSection G := by
@@ -524,6 +523,55 @@ theorem heq_of_pullbackCongr_inv_comp_homOfDerivation_eq {g₁ g₂ : S ⟶ G.le
   obtain rfl := (homOfDerivation_bijective G _).1 ((cancel_epi _).1 h)
   rfl
 
+omit [GrpObj G] in
+theorem eqRec_d_heq {g₁ g₂ : S ⟶ G.left} (h : g₁ = g₂)
+    (D : ((Scheme.Modules.pushforward g₁).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)) :
+    (h ▸ D).d a ≍ D.d a := by
+  subst h
+  rfl
+
+omit [GrpObj G] in
+/-- The morphism attached to a sum of derivations is the sum of the morphisms. -/
+theorem homOfDerivation_add (g : S ⟶ G.left)
+    (D₁ D₂ D₃ : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom)
+    (h : ∀ {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)),
+      D₃.d a = D₁.d a + D₂.d a) :
+    homOfDerivation G g D₃ = homOfDerivation G g D₁ + homOfDerivation G g D₂ := by
+  have h1 : (PresheafOfModules.DifferentialsConstruction.isUniversal'
+        G.hom.pullbackPresheafHom).desc D₃ =
+      (PresheafOfModules.DifferentialsConstruction.isUniversal'
+        G.hom.pullbackPresheafHom).desc D₁ +
+      (PresheafOfModules.DifferentialsConstruction.isUniversal'
+        G.hom.pullbackPresheafHom).desc D₂ := by
+    apply (PresheafOfModules.DifferentialsConstruction.isUniversal'
+      G.hom.pullbackPresheafHom).postcomp_injective
+    rw [PresheafOfModules.Derivation.Universal.fac]
+    ext X a
+    have f1 := congrArg (fun D ↦ PresheafOfModules.Derivation.d D (X := X) a)
+      ((PresheafOfModules.DifferentialsConstruction.isUniversal' G.hom.pullbackPresheafHom).fac D₁)
+    have f2 := congrArg (fun D ↦ PresheafOfModules.Derivation.d D (X := X) a)
+      ((PresheafOfModules.DifferentialsConstruction.isUniversal' G.hom.pullbackPresheafHom).fac D₂)
+    simp only [PresheafOfModules.Derivation.postcomp_d_apply] at f1 f2
+    rw [PresheafOfModules.Derivation.postcomp_d_apply, h, ← f1, ← f2]
+    rfl
+  have hS := (PresheafOfModules.sheafificationAdjunction
+    (J := Opens.grothendieckTopology G.left) (𝟙 G.left.ringCatSheaf.obj)).left_adjoint_additive
+  rw [homOfDerivation, homOfDerivation, homOfDerivation, h1]
+  rw [← Adjunction.homAddEquiv_symm_add]
+  congr 1
+  have := ((PresheafOfModules.sheafificationAdjunction (J := Opens.grothendieckTopology G.left)
+    (𝟙 G.left.ringCatSheaf.obj)).homAddEquiv
+      (PresheafOfModules.DifferentialsConstruction.relativeDifferentials' G.hom.pullbackPresheafHom)
+      ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S))).symm.map_add
+    ((PresheafOfModules.DifferentialsConstruction.isUniversal' G.hom.pullbackPresheafHom).desc D₁)
+    ((PresheafOfModules.DifferentialsConstruction.isUniversal' G.hom.pullbackPresheafHom).desc D₂)
+  simp only [Adjunction.homAddEquiv_symm_apply, PresheafOfModules.sheafificationAdjunction,
+    Adjunction.mkOfHomEquiv_homEquiv] at this
+  exact this
+
+
 /-- The bridge is a bijection: a morphism `ω_{G/S} ⟶ 𝒪_S` is a derivation `d : 𝒪_G → e_*𝒪_S`, and
 `a ↦ e^♯(a) + ε d(a)` is a morphism of schemes `S[ε] ⟶ G` over `S` reducing to the identity, since
 its stalk maps are local, their reductions modulo `ε` being the local maps `e^♯`. -/
@@ -553,91 +601,82 @@ theorem toLie_bijective : Function.Bijective (toLie G) := by
 noncomputable def lieEquiv : infPoints G ≃ Lie G :=
   Equiv.ofBijective _ (toLie_bijective G)
 
-/-- The bridge turns the group law of the infinitesimal points into the addition of `Lie(G)`. -/
+/-- The derivation `d_v` of an infinitesimal point, transported to the identity section. -/
+noncomputable def infDerivationAtUnit (v : infPoints G) :
+    ((Scheme.Modules.pushforward (unitSection G)).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom :=
+  (ι_comp_left_eq G v.2) ▸ infDerivation G v.1
+
+theorem toLie_eq_homOfDerivation (v : infPoints G) :
+    toLie G v = (Scheme.Modules.pullbackCongr (rfl : unitSection G = unitSection G)).inv.app
+      G.hom.cotangentSheaf ≫ homOfDerivation G (unitSection G) (infDerivationAtUnit G v) :=
+  pullbackCongr_inv_comp_homOfDerivation G (ι_comp_left_eq G v.2) rfl _ _
+    (fun a ↦ (eqRec_d_heq G _ _ a).symm)
+
+theorem infDerivationAtUnit_d (v : infPoints G) {V : (TopologicalSpace.Opens G.left)ᵒᵖ}
+    (a : Γ(G.left, V.unop)) :
+    (infDerivationAtUnit G v).d a = (unitSection G).app V.unop
+      (rightTranslationDeriv ((mem_infPoints G).1 v.2) V.unop a) := by
+  have hv := ι_comp_left_eq G v.2
+  have hW : v.1.left ⁻¹ᵁ V.unop = (unitSection G) ⁻¹ᵁ V.unop := by
+    rw [← hv]
+    rfl
+  refine eq_of_heq ((eqRec_d_heq G _ _ a).trans ?_)
+  change (v.1.left.app V.unop a).snd ≍ _
+  rw [Scheme.Hom.app_eq_appLE, snd_appLE_eq ((mem_infPoints G).1 v.2) V.unop _ le_rfl hW.le]
+  exact Scheme.Hom.appLE_heq_app η[G].left V.unop hW hW.le
+    (rightTranslationDeriv ((mem_infPoints G).1 v.2) V.unop a)
+
+
+/-- The bridge turns the group law of the infinitesimal points into the addition of `Lie(G)`: the
+operator `D_{vw}` of the right translation by `vw` is `D_v + D_w`, and `d_v = e^♯ ∘ D_v`. -/
 theorem lieEquiv_mul (v w : infPoints G) : lieEquiv G (v * w) = lieEquiv G v + lieEquiv G w := by
-  sorry
+  change toLie G (v * w) = toLie G v + toLie G w
+  rw [toLie_eq_homOfDerivation, toLie_eq_homOfDerivation, toLie_eq_homOfDerivation,
+    ← Preadditive.comp_add, homOfDerivation_add G _ _ _ _ (fun a ↦ ?_)]
+  rw [infDerivationAtUnit_d, infDerivationAtUnit_d, infDerivationAtUnit_d]
+  rename_i V
+  have hD : rightTranslationDeriv ((mem_infPoints G).1 (v * w).2) V.unop a =
+      rightTranslationDeriv ((mem_infPoints G).1 v.2) V.unop a +
+        rightTranslationDeriv ((mem_infPoints G).1 w.2) V.unop a := by
+    rw [rightTranslationDeriv_mul ((mem_infPoints G).1 v.2) ((mem_infPoints G).1 w.2)]
+    rfl
+  rw [hD]
+  exact map_add _ _ _
 
 theorem lieEquiv_one : lieEquiv G 1 = 0 := by
-  sorry
+  have := lieEquiv_mul G 1 1
+  rw [mul_one] at this
+  exact left_eq_add.1 this
+
+/-- The infinitesimal points form a commutative group: their group law is the addition of tangent
+vectors. -/
+theorem isMulCommutative_infPoints : IsMulCommutative (infPoints G) :=
+  ⟨⟨fun v w ↦ (lieEquiv G).injective (by rw [lieEquiv_mul, lieEquiv_mul, add_comm])⟩⟩
+
+/-- An infinitesimal point is determined by the operator `D_v` of its right translation. -/
+theorem eq_of_rightTranslationDeriv_eq {v w : infPoints G}
+    (h : ∀ U, rightTranslationDeriv ((mem_infPoints G).1 v.2) U =
+      rightTranslationDeriv ((mem_infPoints G).1 w.2) U) : v = w := by
+  have hW (u : infPoints G) (U : G.left.Opens) : u.1.left ⁻¹ᵁ U = (unitSection G) ⁻¹ᵁ U := by
+    rw [← ι_comp_left_eq G u.2]
+    rfl
+  have hb (u : infPoints G) : u.1.left.base = (unitSection G).base := by
+    rw [← ι_comp_left_eq G u.2]
+    rfl
+  refine Subtype.ext (Over.OverMorphism.ext (Scheme.Hom.ext_appLE ((hb v).trans (hb w).symm)
+    fun U V e₁ e₂ ↦ ?_))
+  ext a
+  refine TrivSqZeroExt.ext ?_ ?_
+  · exact (fst_appLE_eq ((mem_infPoints G).1 v.2) U V e₁ (e₁.trans (hW v U).le) a).trans
+      (fst_appLE_eq ((mem_infPoints G).1 w.2) U V e₂ (e₁.trans (hW v U).le) a).symm
+  · rw [snd_appLE_eq ((mem_infPoints G).1 v.2) U V e₁ (e₁.trans (hW v U).le) a,
+      snd_appLE_eq ((mem_infPoints G).1 w.2) U V e₂ (e₁.trans (hW v U).le) a, h U]
+
 
 theorem lieEquiv_symm_add (x y : Lie G) :
     (lieEquiv G).symm (x + y) = (lieEquiv G).symm x * (lieEquiv G).symm y :=
   (lieEquiv G).injective (by simp [lieEquiv_mul])
-
-/-! ### The bracket as the mixed term of the commutator -/
-
-/-- The points of `G` over `S[ε][δ]` reducing to the identity both for `ε = 0` and for `δ = 0`. -/
-noncomputable def mixedPoints : Subgroup (Scheme.dualNumbers₂Over S ⟶ G) :=
-  (pointsPrecomp G (Scheme.dualNumbersιεOver S)).ker ⊓
-    (pointsPrecomp G (Scheme.dualNumbersιδOver S)).ker
-
-theorem mem_mixedPoints {z : Scheme.dualNumbers₂Over S ⟶ G} :
-    z ∈ mixedPoints G ↔ Scheme.dualNumbersιεOver S ≫ z = 1 ∧ Scheme.dualNumbersιδOver S ≫ z = 1 :=
-  Iff.rfl
-
-/-- The map `μ : infPoints G → mixedPoints G` induced by `η ↦ εδ`. -/
-noncomputable def toMixed (v : infPoints G) : mixedPoints G :=
-  ⟨Scheme.dualNumbersMulOver S ≫ v.1, by
-    have hv := (mem_infPoints G).1 v.2
-    rw [mem_mixedPoints, Scheme.dualNumbersιεOver_comp_dualNumbersMulOver_assoc,
-      Scheme.dualNumbersιδOver_comp_dualNumbersMulOver_assoc, hv, MonObj.comp_one]
-    exact ⟨rfl, rfl⟩⟩
-
-@[simp]
-theorem coe_toMixed (v : infPoints G) :
-    (toMixed G v : Scheme.dualNumbers₂Over S ⟶ G) = Scheme.dualNumbersMulOver S ≫ v.1 :=
-  rfl
-
-/-- `η ↦ εδ` identifies the infinitesimal points with the points over `S[ε][δ]` trivial for
-`ε = 0` and for `δ = 0`: such a point has `z^♯(a) = e^♯(a) + εδ d(a)` for a derivation `d`. -/
-theorem toMixed_bijective : Function.Bijective (toMixed G) := by
-  sorry
-
-/-- The infinitesimal points are the mixed points, through `η ↦ εδ`. -/
-noncomputable def mixedEquiv : infPoints G ≃ mixedPoints G :=
-  Equiv.ofBijective _ (toMixed_bijective G)
-
-/-- The point `v_ε : S[ε][δ] ⟶ G` of an infinitesimal point `v`, through the projection
-forgetting `δ`. -/
-noncomputable def toε (v : infPoints G) : Scheme.dualNumbers₂Over S ⟶ G :=
-  Scheme.dualNumbersProjεOver S ≫ v.1
-
-/-- The point `v_δ : S[ε][δ] ⟶ G` of an infinitesimal point `v`, through the projection
-forgetting `ε`. -/
-noncomputable def toδ (v : infPoints G) : Scheme.dualNumbers₂Over S ⟶ G :=
-  Scheme.dualNumbersProjδOver S ≫ v.1
-
-/-- The commutator `v_ε w_δ v_ε⁻¹ w_δ⁻¹` of two infinitesimal points reduces to the identity both
-for `ε = 0` and for `δ = 0`. -/
-theorem commutator_mem_mixedPoints (v w : infPoints G) :
-    toε G v * toδ G w * (toε G v)⁻¹ * (toδ G w)⁻¹ ∈ mixedPoints G := by
-  sorry
-
-/-- The bracket of two infinitesimal points: the mixed term `εδ` of their group commutator
-`v_ε w_δ v_ε⁻¹ w_δ⁻¹` over `S[ε][δ]`. It is the restriction to the identity of the commutator
-`[ṽ, w̃]` of the left-invariant vector fields extending `v` and `w`. (blueprint: `sk-d-tangent`) -/
-noncomputable def infBracket (v w : infPoints G) : infPoints G :=
-  (mixedEquiv G).symm ⟨_, commutator_mem_mixedPoints G v w⟩
-
-/-- The Lie bracket on `Lie(G)`, transported from the infinitesimal points. -/
-noncomputable instance : Bracket (Lie G) (Lie G) where
-  bracket x y := lieEquiv G (infBracket G ((lieEquiv G).symm x) ((lieEquiv G).symm y))
-
-theorem lie_def (x y : Lie G) :
-    ⁅x, y⁆ = lieEquiv G (infBracket G ((lieEquiv G).symm x) ((lieEquiv G).symm y)) :=
-  rfl
-
-/-- `Lie(G)` is a Lie ring: the bracket is biadditive, alternating and satisfies the Jacobi
-identity, as the commutator of derivations of `𝒪_G`. (blueprint: `sk-d-tangent`) -/
-noncomputable instance : LieRing (Lie G) where
-  add_lie := by sorry
-  lie_add := by sorry
-  lie_self := by sorry
-  leibniz_lie := by sorry
-
-/-- `Lie(G)` is a Lie algebra over `Γ(S, 𝒪_S)`. (blueprint: `sk-d-tangent`) -/
-noncomputable instance : LieAlgebra Γ(S, ⊤) (Lie G) where
-  lie_smul := by sorry
 
 /-! ### Rescaling infinitesimal points -/
 
@@ -682,6 +721,320 @@ theorem lieEquiv_symm_smul (r : Γ(S, ⊤)) (x : Lie G) :
   rw [toLie_infPointsScale]
   exact congrArg (r • ·) ((lieEquiv G).apply_symm_apply x).symm
 
+/-! ### The bracket as the mixed term of the commutator -/
+
+/-- The points of `G` over `S[ε][δ]` reducing to the identity both for `ε = 0` and for `δ = 0`. -/
+noncomputable def mixedPoints : Subgroup (Scheme.dualNumbers₂Over S ⟶ G) :=
+  (pointsPrecomp G (Scheme.dualNumbersιεOver S)).ker ⊓
+    (pointsPrecomp G (Scheme.dualNumbersιδOver S)).ker
+
+theorem mem_mixedPoints {z : Scheme.dualNumbers₂Over S ⟶ G} :
+    z ∈ mixedPoints G ↔ Scheme.dualNumbersιεOver S ≫ z = 1 ∧ Scheme.dualNumbersιδOver S ≫ z = 1 :=
+  Iff.rfl
+
+/-- The map `μ : infPoints G → mixedPoints G` induced by `η ↦ εδ`. -/
+noncomputable def toMixed (v : infPoints G) : mixedPoints G :=
+  ⟨Scheme.dualNumbersMulOver S ≫ v.1, by
+    have hv := (mem_infPoints G).1 v.2
+    rw [mem_mixedPoints, Scheme.dualNumbersιεOver_comp_dualNumbersMulOver_assoc,
+      Scheme.dualNumbersιδOver_comp_dualNumbersMulOver_assoc, hv, MonObj.comp_one]
+    exact ⟨rfl, rfl⟩⟩
+
+@[simp]
+theorem coe_toMixed (v : infPoints G) :
+    (toMixed G v : Scheme.dualNumbers₂Over S ⟶ G) = Scheme.dualNumbersMulOver S ≫ v.1 :=
+  rfl
+
+theorem dualNumbersι_comp_mixedPoints_left (z : mixedPoints G) :
+    S.dualNumbers.dualNumbersι ≫ z.1.left = S.dualNumbersProj ≫ η[G].left := by
+  have := congrArg CommaMorphism.left ((mem_mixedPoints G).1 z.2).1
+  simpa [Hom.one_def, Over.toUnit_left, Scheme.dualNumbersιεOver] using this
+
+theorem dualNumbers_dualNumbersι_comp_mixedPoints_left (z : mixedPoints G) :
+    S.dualNumbersι.dualNumbers ≫ z.1.left = S.dualNumbersProj ≫ η[G].left := by
+  have := congrArg CommaMorphism.left ((mem_mixedPoints G).1 z.2).2
+  simpa [Hom.one_def, Over.toUnit_left, Scheme.dualNumbersιδOver] using this
+
+theorem fst_snd_mixedPoints_app (z : mixedPoints G) (V : G.left.Opens) (a : Γ(G.left, V)) :
+    (z.1.left.app V a).fst.snd = 0 := by
+  have hz := dualNumbersι_comp_mixedPoints_left G z
+  have hW : (S.dualNumbersProj ≫ η[G].left) ⁻¹ᵁ V = z.1.left ⁻¹ᵁ V := by
+    rw [← hz]
+    rfl
+  have h := Scheme.Hom.appLE_apply_eq_of_eq hz V (z.1.left ⁻¹ᵁ V) le_rfl hW.ge a
+  have h1 := Scheme.Hom.appLE_comp_apply S.dualNumbers.dualNumbersι z.1.left V (z.1.left ⁻¹ᵁ V)
+    (z.1.left ⁻¹ᵁ V) le_rfl le_rfl le_rfl a
+  have h2 := Scheme.Hom.appLE_comp_apply S.dualNumbersProj η[G].left V (z.1.left ⁻¹ᵁ V)
+    (z.1.left ⁻¹ᵁ V) hW.ge le_rfl hW.ge a
+  have h3 := h1.symm.trans (h.trans h2)
+  rw [Scheme.dualNumbersι_appLE_self (X := S.dualNumbers)] at h3
+  rw [← Scheme.Hom.appLE_eq_app]
+  exact (congrArg TrivSqZeroExt.snd h3).trans ((congrArg TrivSqZeroExt.snd
+    (Scheme.dualNumbersProj_appLE_self _ _ _)).trans (TrivSqZeroExt.snd_inl _ _))
+
+theorem snd_fst_mixedPoints_app (z : mixedPoints G) (V : G.left.Opens) (a : Γ(G.left, V)) :
+    (z.1.left.app V a).snd.fst = 0 := by
+  have hz := dualNumbers_dualNumbersι_comp_mixedPoints_left G z
+  have hW : (S.dualNumbersProj ≫ η[G].left) ⁻¹ᵁ V = z.1.left ⁻¹ᵁ V := by
+    rw [← hz]
+    rfl
+  have h := Scheme.Hom.appLE_apply_eq_of_eq hz V (z.1.left ⁻¹ᵁ V) le_rfl hW.ge a
+  have h1 := Scheme.Hom.appLE_comp_apply S.dualNumbersι.dualNumbers z.1.left V (z.1.left ⁻¹ᵁ V)
+    (z.1.left ⁻¹ᵁ V) le_rfl le_rfl le_rfl a
+  have h2 := Scheme.Hom.appLE_comp_apply S.dualNumbersProj η[G].left V (z.1.left ⁻¹ᵁ V)
+    (z.1.left ⁻¹ᵁ V) hW.ge le_rfl hW.ge a
+  have h3 := congrArg TrivSqZeroExt.snd (h1.symm.trans (h.trans h2))
+  rw [Scheme.Hom.dualNumbers_appLE, DualNumber.snd_mapRingHom,
+    Scheme.dualNumbersι_appLE_self] at h3
+  rw [← Scheme.Hom.appLE_eq_app]
+  exact h3.trans ((congrArg TrivSqZeroExt.snd
+    (Scheme.dualNumbersProj_appLE_self _ _ _)).trans (TrivSqZeroExt.snd_inl _ _))
+
+/-- The `εδ`-coefficient `d_z` of a point `z : S[ε][δ] ⟶ G` with no `ε`- and no `δ`-part:
+`z^♯(a) = e^♯(a) + εδ d_z(a)`; it is a derivation `𝒪_G → e_*𝒪_S` over `f⁻¹𝒪_S`. -/
+noncomputable def mixedDerivation (z : mixedPoints G) :
+    ((Scheme.Modules.pushforward (S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ z.1.left)).obj
+      (Scheme.Modules.unitModule S)).val.Derivation' G.hom.pullbackPresheafHom where
+  d {V} :=
+    { toFun := fun a ↦ (z.1.left.app V.unop a).snd.snd
+      map_zero' := by rw [map_zero]; rfl
+      map_add' x y := by rw [map_add]; rfl }
+  d_mul {V} a b := by
+    change (z.1.left.app V.unop (a * b)).snd.snd =
+      (z.1.left.app V.unop a).fst.fst * (z.1.left.app V.unop b).snd.snd +
+        (z.1.left.app V.unop b).fst.fst * (z.1.left.app V.unop a).snd.snd
+    let φ : Γ(G.left, V.unop) →+* DualNumber (DualNumber Γ(S, z.1.left ⁻¹ᵁ V.unop)) :=
+      (z.1.left.app V.unop).hom
+    change (φ (a * b)).snd.snd = (φ a).fst.fst * (φ b).snd.snd + (φ b).fst.fst * (φ a).snd.snd
+    have h1 (c : Γ(G.left, V.unop)) : (φ c).fst.snd = 0 := fst_snd_mixedPoints_app G z V.unop c
+    have h2 (c : Γ(G.left, V.unop)) : (φ c).snd.fst = 0 := snd_fst_mixedPoints_app G z V.unop c
+    rw [map_mul]
+    simp only [snd_mul, smul_eq_mul, op_smul_eq_mul, snd_add, h1, h2, mul_zero, add_zero,
+      zero_add]
+    ring
+  d_map {X Y} f x := by
+    have h := ConcreteCategory.congr_hom (z.1.left.c.naturality f) x
+    exact (congr_arg (fun y ↦ TrivSqZeroExt.snd (TrivSqZeroExt.snd y)) h).trans
+      ((congrArg TrivSqZeroExt.snd (DualNumber.snd_mapRingHom _ _)).trans
+        (DualNumber.snd_mapRingHom _ _))
+  d_app {X} a := by
+    let ε₀ : (TopCat.Presheaf.pushforward CommRingCat z.1.left.base).obj
+        (Scheme.dualNumbers₂Over S).left.presheaf ⟶
+        (TopCat.Presheaf.pushforward CommRingCat z.1.left.base).obj
+          (Scheme.dualNumbers₂Over S).left.presheaf :=
+      Functor.whiskerLeft ((TopologicalSpace.Opens.map z.1.left.base).op ⋙ S.dualNumbers.presheaf)
+        (CommRingCat.dualNumberFst ≫ CommRingCat.dualNumberInl)
+    have key : (G.hom.pullbackPresheafHom ≫ z.1.left.c) ≫ ε₀ =
+        G.hom.pullbackPresheafHom ≫ z.1.left.c := by
+      simp only [Scheme.Hom.pullbackPresheafHom, ← Adjunction.homEquiv_naturality_right_symm]
+      congr 1
+      ext U b
+      have hb : ((z.1.left ≫ G.hom).app U b).snd = 0 := by
+        rw [Scheme.Hom.congr_app (Over.w z.1) U]
+        exact (DualNumber.snd_mapRingHom _ _).trans (map_zero _)
+      exact TrivSqZeroExt.ext rfl hb.symm
+    have h := ConcreteCategory.congr_hom (congr_app key X) a
+    exact (congr_arg (fun y ↦ TrivSqZeroExt.snd (TrivSqZeroExt.snd y)) h).symm.trans rfl
+
+
+theorem toMixed_surjective : Function.Surjective (toMixed G) := by
+  intro z
+  let g := S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ z.1.left
+  have hg : g = unitSection G := by
+    simp only [g, dualNumbersι_comp_mixedPoints_left, Scheme.dualNumbersι_comp_proj_assoc]
+    rfl
+  have hgS : g ≫ G.hom = 𝟙 S := hg ▸ unitSection_comp_hom G
+  let v : Scheme.dualNumbersOver S ⟶ G := Over.homMk (pointOfDerivation G g (mixedDerivation G z))
+    (pointOfDerivation_comp_hom G g _ hgS)
+  have hv : v ∈ infPoints G := by
+    rw [mem_infPoints]
+    apply Over.OverMorphism.ext
+    exact (ι_comp_pointOfDerivation G _ _).trans (hg.trans (one_left G).symm)
+  refine ⟨⟨v, hv⟩, Subtype.ext (Over.OverMorphism.ext ?_)⟩
+  refine Scheme.Hom.ext' (LocallyRingedSpace.Hom.ext' (PresheafedSpace.ext _ _ rfl ?_))
+  ext U a
+  simp only [Functor.comp_obj, Functor.op_obj, eqToHom_refl, Functor.whiskerRight_id',
+    TopCat.Presheaf.comp_app, TopCat.Presheaf.pushforward_obj_obj, NatTrans.id_app,
+    Category.comp_id]
+  change DualNumber.mulRingHom (pointOfDerivationRingHom G g (mixedDerivation G z) U a) =
+    z.1.left.app U a
+  refine TrivSqZeroExt.ext (TrivSqZeroExt.ext ?_ ?_) (TrivSqZeroExt.ext ?_ ?_)
+  · simp only [DualNumber.fst_mulRingHom, fst_inl, pointOfDerivationRingHom, RingHom.coe_mk,
+      MonoidHom.coe_mk, OneHom.coe_mk, fst_add, fst_inr, add_zero]
+    rfl
+  · simp only [DualNumber.fst_mulRingHom, snd_inl]
+    exact (fst_snd_mixedPoints_app G z U a).symm
+  · simp only [DualNumber.snd_mulRingHom, fst_inr]
+    exact (snd_fst_mixedPoints_app G z U a).symm
+  · simp only [DualNumber.snd_mulRingHom, snd_inr, pointOfDerivationRingHom, RingHom.coe_mk,
+      MonoidHom.coe_mk, OneHom.coe_mk, snd_add, snd_inl, snd_inr, zero_add]
+    rfl
+
+
+theorem toMixed_injective : Function.Injective (toMixed G) := by
+  intro v w h
+  have h' : Scheme.dualNumbersMulOver S ≫ v.1 = Scheme.dualNumbersMulOver S ≫ w.1 :=
+    congrArg Subtype.val h
+  have hv := (mem_infPoints G).1 v.2
+  have hw := (mem_infPoints G).1 w.2
+  have hιμ : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      Scheme.dualNumbersMulOver S = Scheme.dualNumbersιOver S := by
+    rw [Scheme.dualNumbersιεOver_comp_dualNumbersMulOver, ← Category.assoc]
+    congr 1
+  have hz : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      (Scheme.dualNumbersMulOver S ≫ v.1) = 1 := by
+    rw [reassoc_of% hιμ, hv]
+  have hz' : Scheme.dualNumbersιOver S ≫ Scheme.dualNumbersιεOver S ≫
+      (Scheme.dualNumbersMulOver S ≫ w.1) = 1 := by
+    rw [reassoc_of% hιμ, hw]
+  refine eq_of_rightTranslationDeriv_eq G fun U ↦ ?_
+  have hT : rightTranslationOp₂ hz U = rightTranslationOp₂ hz' U :=
+    Scheme.Hom.dualNumbers₂Op_congr _ _ (by rw [h']) U
+  rw [rightTranslationOp₂_mul_over hv, rightTranslationOp₂_mul_over hw] at hT
+  simpa using congrArg (fun y : DualNumber (DualNumber (AddMonoid.End Γ(G.left, U))) ↦
+    y.snd.snd) hT
+
+
+/-- `η ↦ εδ` identifies the infinitesimal points with the points over `S[ε][δ]` trivial for
+`ε = 0` and for `δ = 0`: such a point has `z^♯(a) = e^♯(a) + εδ d(a)` for a derivation `d`. -/
+theorem toMixed_bijective : Function.Bijective (toMixed G) :=
+  ⟨toMixed_injective G, toMixed_surjective G⟩
+
+/-- The infinitesimal points are the mixed points, through `η ↦ εδ`. -/
+noncomputable def mixedEquiv : infPoints G ≃ mixedPoints G :=
+  Equiv.ofBijective _ (toMixed_bijective G)
+
+/-- The point `v_ε : S[ε][δ] ⟶ G` of an infinitesimal point `v`, through the projection
+forgetting `δ`. -/
+noncomputable def toε (v : infPoints G) : Scheme.dualNumbers₂Over S ⟶ G :=
+  Scheme.dualNumbersProjεOver S ≫ v.1
+
+/-- The point `v_δ : S[ε][δ] ⟶ G` of an infinitesimal point `v`, through the projection
+forgetting `ε`. -/
+noncomputable def toδ (v : infPoints G) : Scheme.dualNumbers₂Over S ⟶ G :=
+  Scheme.dualNumbersProjδOver S ≫ v.1
+
+/-- The commutator `v_ε w_δ v_ε⁻¹ w_δ⁻¹` of two infinitesimal points reduces to the identity both
+for `ε = 0` and for `δ = 0`. -/
+theorem commutator_mem_mixedPoints (v w : infPoints G) :
+    toε G v * toδ G w * (toε G v)⁻¹ * (toδ G w)⁻¹ ∈ mixedPoints G := by
+  have hv := (mem_infPoints G).1 v.2
+  have hw := (mem_infPoints G).1 w.2
+  rw [mem_mixedPoints]
+  simp only [MonObj.comp_mul, GrpObj.comp_inv, toε, toδ]
+  refine ⟨?_, ?_⟩
+  · rw [Scheme.dualNumbersιεOver_comp_dualNumbersProjεOver_assoc,
+      Scheme.dualNumbersιεOver_comp_dualNumbersProjδOver_assoc, hw, MonObj.comp_one]
+    group
+  · rw [Scheme.dualNumbersιδOver_comp_dualNumbersProjεOver_assoc,
+      Scheme.dualNumbersιδOver_comp_dualNumbersProjδOver_assoc, hv, MonObj.comp_one]
+    group
+
+/-- The bracket of two infinitesimal points: the mixed term `εδ` of their group commutator
+`v_ε w_δ v_ε⁻¹ w_δ⁻¹` over `S[ε][δ]`. It is the restriction to the identity of the commutator
+`[ṽ, w̃]` of the left-invariant vector fields extending `v` and `w`. (blueprint: `sk-d-tangent`) -/
+noncomputable def infBracket (v w : infPoints G) : infPoints G :=
+  (mixedEquiv G).symm ⟨_, commutator_mem_mixedPoints G v w⟩
+
+/-- The Lie bracket on `Lie(G)`, transported from the infinitesimal points. -/
+noncomputable instance : Bracket (Lie G) (Lie G) where
+  bracket x y := lieEquiv G (infBracket G ((lieEquiv G).symm x) ((lieEquiv G).symm y))
+
+theorem lie_def (x y : Lie G) :
+    ⁅x, y⁆ = lieEquiv G (infBracket G ((lieEquiv G).symm x) ((lieEquiv G).symm y)) :=
+  rfl
+
+theorem toMixed_infBracket (v w : infPoints G) :
+    (toMixed G (infBracket G v w) : Scheme.dualNumbers₂Over S ⟶ G) =
+      toε G v * toδ G w * (toε G v)⁻¹ * (toδ G w)⁻¹ :=
+  congrArg Subtype.val ((mixedEquiv G).apply_symm_apply ⟨_, commutator_mem_mixedPoints G v w⟩)
+
+/-! ### The Lie algebra structure through left-invariant operators -/
+
+/-- The left-invariant operators of the tangent vectors: `x ↦ D_x` on all sections of `𝒪_G`.
+It is injective and turns brackets into commutators. -/
+noncomputable def lieOp (x : Lie G) : ∀ U : G.left.Opens, AddMonoid.End Γ(G.left, U) :=
+  fun U ↦ rightTranslationDeriv ((mem_infPoints G).1 ((lieEquiv G).symm x).2) U
+
+theorem lieOp_injective : Function.Injective (lieOp G) := fun _ _ h ↦
+  (lieEquiv G).symm.injective (eq_of_rightTranslationDeriv_eq G fun U ↦ congrFun h U)
+
+theorem lieOp_add (x y : Lie G) : lieOp G (x + y) = lieOp G x + lieOp G y := by
+  funext U
+  rw [lieOp, rightTranslationDeriv_congr _ ((mem_infPoints G).1
+    ((lieEquiv G).symm x * (lieEquiv G).symm y).2) (congrArg Subtype.val (lieEquiv_symm_add G x y)),
+    rightTranslationDeriv_mul ((mem_infPoints G).1 ((lieEquiv G).symm x).2)
+      ((mem_infPoints G).1 ((lieEquiv G).symm y).2)]
+  rfl
+
+theorem lieOp_lie (x y : Lie G) :
+    lieOp G ⁅x, y⁆ = lieOp G x * lieOp G y - lieOp G y * lieOp G x := by
+  funext U
+  set v := (lieEquiv G).symm x
+  set w := (lieEquiv G).symm y
+  have hu : (lieEquiv G).symm ⁅x, y⁆ = infBracket G v w := by
+    rw [lie_def, Equiv.symm_apply_apply]
+  have hμ : Scheme.dualNumbersMulOver S ≫ (infBracket G v w).1 =
+      toε G v * toδ G w * (toε G v)⁻¹ * (toδ G w)⁻¹ := by
+    have := (mixedEquiv G).apply_symm_apply ⟨_, commutator_mem_mixedPoints G v w⟩
+    exact congrArg Subtype.val this
+  rw [lieOp, rightTranslationDeriv_congr _ ((mem_infPoints G).1 (infBracket G v w).2)
+    (congrArg Subtype.val hu)]
+  exact rightTranslationDeriv_eq_of_mul_eq_commutator _ _ _ hμ U
+
+
+theorem lieOp_zero : lieOp G 0 = 0 := by
+  have := lieOp_add G 0 0
+  rw [add_zero] at this
+  exact left_eq_add.1 this
+
+/-- Multiplication by the pullback of a global function `r` of the base, on all sections of
+`𝒪_G`. -/
+noncomputable def mulOp (r : Γ(S, ⊤)) : ∀ U : G.left.Opens, AddMonoid.End Γ(G.left, U) :=
+  fun U ↦ AddMonoidHom.mulLeft (G.left.presheaf.map (homOfLE le_top : U ⟶ ⊤).op (G.hom.appTop r))
+
+theorem lieOp_smul (r : Γ(S, ⊤)) (y : Lie G) : lieOp G (r • y) = mulOp G r * lieOp G y := by
+  funext U
+  ext b
+  rw [lieOp, rightTranslationDeriv_congr _ ((mem_infPoints G).1
+    (infPointsScale G r ((lieEquiv G).symm y)).2)
+    (congrArg Subtype.val (lieEquiv_symm_smul G r y)),
+    rightTranslationDeriv_scale ((mem_infPoints G).1 ((lieEquiv G).symm y).2)]
+  rfl
+
+theorem lieOp_mul_mulOp (x : Lie G) (r : Γ(S, ⊤)) :
+    lieOp G x * mulOp G r = mulOp G r * lieOp G x := by
+  funext U
+  ext b
+  exact rightTranslationDeriv_appLE_mul ((mem_infPoints G).1 ((lieEquiv G).symm x).2) U ⊤
+    le_top r b
+
+/-- `Lie(G)` is a Lie ring: the bracket is biadditive, alternating and satisfies the Jacobi
+identity, as the commutator of derivations of `𝒪_G`. (blueprint: `sk-d-tangent`) -/
+noncomputable instance : LieRing (Lie G) where
+  add_lie x y z := by
+    apply lieOp_injective
+    simp only [lieOp_lie, lieOp_add]
+    noncomm_ring
+  lie_add x y z := by
+    apply lieOp_injective
+    simp only [lieOp_lie, lieOp_add]
+    noncomm_ring
+  lie_self x := by
+    apply lieOp_injective
+    rw [lieOp_lie, lieOp_zero, sub_self]
+  leibniz_lie x y z := by
+    apply lieOp_injective
+    simp only [lieOp_lie, lieOp_add]
+    noncomm_ring
+
+/-- `Lie(G)` is a Lie algebra over `Γ(S, 𝒪_S)`. (blueprint: `sk-d-tangent`) -/
+noncomputable instance : LieAlgebra Γ(S, ⊤) (Lie G) where
+  lie_smul r x y := by
+    apply lieOp_injective
+    rw [lieOp_lie, lieOp_smul, lieOp_smul, lieOp_lie, ← mul_assoc, lieOp_mul_mulOp, mul_assoc,
+      mul_assoc, mul_sub]
+
 /-! ### Functoriality -/
 
 variable {G} {H : Over S} [GrpObj H]
@@ -706,7 +1059,12 @@ theorem coe_infPointsMap_apply (f : G ⟶ H) [IsMonHom f] (v : infPoints G) :
 group commutators and commutes with `η ↦ εδ`. -/
 theorem infPointsMap_infBracket (f : G ⟶ H) [IsMonHom f] (v w : infPoints G) :
     infPointsMap f (infBracket G v w) = infBracket H (infPointsMap f v) (infPointsMap f w) := by
-  sorry
+  apply toMixed_injective H
+  apply Subtype.ext
+  rw [toMixed_infBracket, coe_toMixed, coe_infPointsMap_apply, ← Category.assoc, ← coe_toMixed,
+    toMixed_infBracket]
+  simp only [MonObj.mul_comp, GrpObj.inv_comp, toε, toδ, coe_infPointsMap_apply, Category.assoc]
+
 
 /-- Let `f : G ⟶ H` be a monomorphism of group schemes, a subgroup scheme of `H`. If the
 commutators of the points of `H` over `S[ε][δ]` factor through `G`, then the bracket of two
@@ -717,7 +1075,22 @@ its preimage under `η ↦ εδ` is an infinitesimal point of `G` mapping to `[v
 theorem infBracket_mem_range_infPointsMap (f : G ⟶ H) [IsMonHom f] [Mono f]
     (hf : ∀ a b : Scheme.dualNumbers₂Over S ⟶ H, a * b * a⁻¹ * b⁻¹ ∈ (IsMonHom.monoidHom f _).range)
     (v w : infPoints H) : infBracket H v w ∈ (infPointsMap f).range := by
-  sorry
+  obtain ⟨c, hc⟩ := hf (toε H v) (toδ H w)
+  change c ≫ f = _ at hc
+  have hc' : c ∈ mixedPoints G := by
+    have h := commutator_mem_mixedPoints H v w
+    rw [mem_mixedPoints] at h ⊢
+    rw [← hc, ← MonObj.one_comp (X := Scheme.dualNumbersOver S) f] at h
+    exact ⟨(cancel_mono f).1 ((Category.assoc _ _ _).trans h.1),
+      (cancel_mono f).1 ((Category.assoc _ _ _).trans h.2)⟩
+  refine ⟨(mixedEquiv G).symm ⟨c, hc'⟩, ?_⟩
+  apply toMixed_injective H
+  apply Subtype.ext
+  rw [toMixed_infBracket, coe_toMixed, coe_infPointsMap_apply, ← Category.assoc, ← coe_toMixed]
+  change ((mixedEquiv G) ((mixedEquiv G).symm ⟨c, hc'⟩)).1 ≫ f = _
+  rw [Equiv.apply_symm_apply]
+  exact hc
+
 
 end GrpObj
 
@@ -740,9 +1113,18 @@ noncomputable instance : Module R (Lie G) :=
 
 /-- `Lie(G)` is a Lie algebra over `R`. (blueprint: `sk-d-tangent`) -/
 noncomputable instance : LieAlgebra R (Lie G) where
-  lie_smul := by sorry
+  lie_smul c x y := lie_smul ((Scheme.ΓSpecIso (.of R)).inv.hom c) x y
 
 variable {G} {H : Over (Spec (.of R))} [GrpObj H]
+
+theorem infPointsMap_id : infPointsMap (𝟙 G) = MonoidHom.id _ := by
+  ext v
+  exact Category.comp_id _
+
+theorem infPointsMap_comp {K : Over (Spec (.of R))} [GrpObj K] (f : G ⟶ H) (g : H ⟶ K)
+    [IsMonHom f] [IsMonHom g] : infPointsMap (f ≫ g) = (infPointsMap g).comp (infPointsMap f) := by
+  ext v
+  exact (Category.assoc _ _ _).symm
 
 /-- The differential `df : Lie(G) → Lie(H)` of a homomorphism of group schemes `f : G ⟶ H` over
 `R`: on infinitesimal points, `v ↦ v ≫ f`. It is a homomorphism of Lie algebras.
@@ -770,17 +1152,27 @@ theorem differential_congr {f g : G ⟶ H} [IsMonHom f] [IsMonHom g] (e : f = g)
   subst e; rfl
 
 theorem differential_id : differential (𝟙 G) = LieHom.id := by
-  sorry
+  ext x
+  rw [differential_apply, infPointsMap_id, MonoidHom.id_apply, Equiv.apply_symm_apply]
+  rfl
 
 theorem differential_comp {K : Over (Spec (.of R))} [GrpObj K] (f : G ⟶ H) (g : H ⟶ K)
     [IsMonHom f] [IsMonHom g] : differential (f ≫ g) = (differential g).comp (differential f) := by
-  sorry
+  ext x
+  rw [LieHom.comp_apply, differential_apply, differential_apply, differential_apply,
+    Equiv.symm_apply_apply, infPointsMap_comp, MonoidHom.comp_apply]
+
+theorem infPointsMap_injective (f : G ⟶ H) [IsMonHom f] [Mono f] :
+    Function.Injective (infPointsMap f) := fun _ _ h ↦
+  Subtype.ext ((cancel_mono f).1 (congrArg Subtype.val h))
 
 /-- The differential of a monomorphism of group schemes, for instance of a closed immersion, is
 injective. -/
 theorem differential_injective (f : G ⟶ H) [IsMonHom f] [Mono f] :
     Function.Injective (differential f) := by
-  sorry
+  intro x y h
+  rw [differential_apply, differential_apply] at h
+  exact (lieEquiv G).symm.injective (infPointsMap_injective f ((lieEquiv H).injective h))
 
 /-- If the commutators of the points of `H` over `Spec R[ε, δ]/(ε², δ²)` factor through the
 subgroup scheme `f : G ⟶ H`, then the brackets of tangent vectors of `H` are tangent to `G`: the
@@ -808,14 +1200,59 @@ so the mixed term `⁅df(x), y⁆` of their commutator vanishes. (blueprint: `sk
 theorem range_differential_le_center (f : G ⟶ H) [IsMonHom f]
     (hf : ∀ (X : Over (Spec (.of R))) (a : X ⟶ G) (b : X ⟶ H), (a ≫ f) * b = b * (a ≫ f)) :
     (differential f).range ≤ (LieAlgebra.center R (Lie H) : LieSubalgebra R (Lie H)) := by
-  sorry
+  rintro _ ⟨x, rfl⟩
+  change differential f x ∈ LieModule.maxTrivSubmodule R (Lie H) (Lie H)
+  rw [LieModule.mem_maxTrivSubmodule]
+  intro y
+  rw [lie_def, differential_apply, Equiv.symm_apply_apply]
+  set u := infPointsMap f ((lieEquiv G).symm x)
+  set w := (lieEquiv H).symm y
+  have h1 : infBracket H w u = 1 := by
+    apply toMixed_injective H
+    apply Subtype.ext
+    rw [toMixed_infBracket]
+    have hc := hf _ (Scheme.dualNumbersProjδOver _ ≫ ((lieEquiv G).symm x).1) (toε H w)
+    have hb : toδ H u = (Scheme.dualNumbersProjδOver _ ≫ ((lieEquiv G).symm x).1) ≫ f :=
+      (Category.assoc _ _ _).symm
+    rw [hb, ← hc]
+    simp only [coe_toMixed, OneMemClass.coe_one, MonObj.comp_one]
+    group
+  rw [h1, lieEquiv_one]
 
 /-- The differential of an open immersion of group schemes `f : G ⟶ H` is bijective: every
 infinitesimal point of `H` has the same underlying map as the identity section, hence factors
 through the open subscheme `G`. -/
 theorem differential_bijective_of_isOpenImmersion (f : G ⟶ H) [IsMonHom f]
     [IsOpenImmersion f.left] : Function.Bijective (differential f) := by
-  sorry
+  have : Mono f := Over.mono_of_mono_left f
+  refine ⟨differential_injective f, fun y ↦ ?_⟩
+  suffices h : Function.Surjective (infPointsMap f) by
+    obtain ⟨u, hu⟩ := h ((lieEquiv H).symm y)
+    exact ⟨lieEquiv G u, by rw [differential_apply, Equiv.symm_apply_apply, hu,
+      Equiv.apply_symm_apply]⟩
+  intro v
+  have he : unitSection G ≫ f.left = unitSection H := by
+    exact congrArg CommaMorphism.left (IsMonHom.one_hom (f := f))
+  have hrange : Set.range v.1.left.base ⊆ Set.range f.left.base := by
+    rintro _ ⟨x, rfl⟩
+    refine ⟨(unitSection G).base x, ?_⟩
+    have h1 := ι_comp_left_eq H v.2
+    rw [← he] at h1
+    exact (congrArg (fun φ : Spec (.of R) ⟶ H.left ↦ φ.base x) h1).symm
+  let u' : (Scheme.dualNumbersOver (Spec (.of R))).left ⟶ G.left :=
+    IsOpenImmersion.lift f.left v.1.left hrange
+  have hu' : u' ≫ f.left = v.1.left := IsOpenImmersion.lift_fac _ _ _
+  let u : Scheme.dualNumbersOver (Spec (.of R)) ⟶ G := Over.homMk u' (by
+    rw [← Over.w f, ← Category.assoc, hu']
+    exact Over.w v.1)
+  have hu : u ∈ infPoints G := by
+    rw [mem_infPoints]
+    apply (cancel_mono f).1
+    rw [Category.assoc, MonObj.one_comp]
+    have : u ≫ f = v.1 := Over.OverMorphism.ext hu'
+    rw [this]
+    exact (mem_infPoints H).1 v.2
+  exact ⟨⟨u, hu⟩, Subtype.ext (Over.OverMorphism.ext hu')⟩
 
 /-- An open immersion of group schemes `G ⟶ H` identifies `Lie(G)` with `Lie(H)`. -/
 noncomputable def lieEquivOfIsOpenImmersion (f : G ⟶ H) [IsMonHom f] [IsOpenImmersion f.left] :
