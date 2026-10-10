@@ -1,17 +1,15 @@
 # Work queue
 
-936 items; claim with `tools/claim.py next <group> [--stage N]`.
+934 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (252)
+## Stage 1: nodes to split (249)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
-| `lem-weil-pbc-standard-fpqc-quotient-topology` | 2009 | none |
 | `lem-sc-topological-filtered-cohomology` | 2014 | none |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 2016 | none |
 | `lem-sc-ringed-space-injective-restriction-surjective` | 2018 | none |
-| `lem-sc-ringed-space-restrict-injective-resolution` | 2018 | none |
 | `lem-sc-ringed-space-module-sheaves-enough-injectives` | 2019 | none |
 | `lem-pc-unbounded-derived-functor-cohomological-bound` | 3012 | none |
 | `lem-pc-kflat-stalk-criterion` | 3013 | none |
@@ -28,16 +26,15 @@
 | `lem-sc-smooth-proper-tensor-perfect-case` | 3016 | none |
 | `lem-pc-compact-hom-hocolim` | 3017 | none |
 | `lem-sc-koszul-regular-sequence-dual-complex` | 3017 | none |
-| `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 3017 | none |
 | `lem-sc-standard-smooth-affine-diagonal-generators` | 3017 | none |
 | `lem-sc-standard-smooth-local-relative-dimension` | 3017 | none |
 | `lem-pc-essentially-constant-ind-hom-colimit` | 3018 | none |
 | `lem-pc-essentially-constant-pro-hom-colimit` | 3018 | none |
 | `lem-pc-left-localization-hom-colimit` | 3018 | none |
-| `lem-pc-quasi-isomorphisms-multiplicative-system` | 3018 | none |
 | `lem-pc-right-localization-hom-colimit` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 3018 | none |
+| `lem-sc-qcoh-acyclic-derived-sections-comparison` | 3018 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -259,7 +256,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (684)
+## Stage 2: nodes to state (685)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -860,6 +857,7 @@
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state |
 | `lem-weil-pbc-split-extension-free-presentation` | 1 | state |
 | `lem-weil-pbc-split-injection-after-completion` | 1 | state |
+| `lem-weil-pbc-standard-fpqc-quotient-topology` | 1 | state |
 | `lem-weil-pbc-standard-smooth-include-generators` | 1 | state |
 | `lem-weil-pbc-stein-fibre-idempotent-image` | 1 | state |
 | `lem-weil-pbc-stein-flat-base-change-global-sections` | 1 | state |
@@ -948,7 +946,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1339 nodes that wait for a statement dependency, 286 nodes that wait for stage 1.
+Not open yet: 1341 nodes that wait for a statement dependency, 283 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
