@@ -21,9 +21,55 @@
   "def-kun-topological-krull-dimension",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a point $x\\in X$, the Krull dimension of the stalk $\\mathcal O_{X,x}$ is the supremum of the lengths of chains of generalizations $x=x_0,\\ldots,x_n$ with $x_{i-1}\\in\\overline{\\{x_i\\}}$ and $x_{i-1}\\ne x_i$ [lem-sc-scheme-stalk-dimension-generalization-chains].",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma Tag 02IZ (properties-lemma-codimension-local-ring), applied to the closure of the point x"
+   }
+  },
+  {
+   "text": "The assignments $x\\mapsto\\overline{\\{x\\}}$ and $Z\\mapsto\\xi_Z$, where $\\xi_Z$ is the unique generic point of an irreducible closed subset $Z$ [lem-sc-scheme-sober], identify points of $X$ with irreducible closed subsets. A singleton is irreducible, and the closure of an irreducible subset is irreducible [lem-weil-pbc-irreducible-closure]. Under this identification, $x_{i-1}\\in\\overline{\\{x_i\\}}$ with $x_{i-1}\\ne x_i$ is equivalent to the strict inclusion $\\overline{\\{x_{i-1}\\}}\\subsetneq\\overline{\\{x_i\\}}$: inclusion follows by monotonicity of closure, and equality would contradict the uniqueness of generic points. Conversely, if $Z_{i-1}\\subsetneq Z_i$ is a chain of irreducible closed subsets, then their generic points satisfy $\\xi_{Z_{i-1}}\\in Z_i=\\overline{\\{\\xi_{Z_i}\\}}$ and are distinct. Thus chains of generalizations based at any point correspond exactly to chains of irreducible closed subsets of the same length whose first member is the closure of that point.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-irreducible-closure",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma Tag 04MU (properties-lemma-dimension), equality of (1) and (2), using the generic-point correspondence of Schemes Lemma Tag 01IS"
+   }
+  },
+  {
+   "text": "By the definition of topological Krull dimension [def-kun-topological-krull-dimension], its value is the supremum of lengths of all chains of irreducible closed subsets. By step 2, every such chain is counted by the generalization-chain supremum for its first generic point, while every generalization chain gives such a closed-subset chain. Step 1 therefore identifies this supremum with $\\sup_{x\\in X}\\dim\\mathcal O_{X,x}$. If $X$ is empty, both suprema are $-\\infty$ by the stated conventions; otherwise the same chain correspondence applies, so the equality holds in all cases.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma Tag 04MU (properties-lemma-dimension), equality of (1) and (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-irreducible-closure",
+  "def-weil-irreducible-components",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma Tag 04MU (lemma-dimension), equality of (1) and (2), with the chain correspondence written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +102,7 @@
  ],
  "mathlib_match": null,
  "mathlib_candidate": "AlgebraicGeometry.ringKrullDim_stalk_eq_coheight (Mathlib/AlgebraicGeometry/Properties.lean:376) with Order.krullDim_eq_iSup_coheight (Mathlib/Order/KrullDimension.lean:860) and irreducibleSetEquivPoints (Mathlib/Topology/Sober.lean:161, to identify topologicalKrullDim X with the Krull dimension of X in its specialization order)",
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +118,19 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-jacobian"
+ "unit": "sk-def-av-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-scheme-dimension-local-rings",
+  "worker": "stage1",
+  "summary": "Checked the statement against Properties Lemma Tag 04MU: it is unchanged. No sorry-free slopmaster2 declaration states the equality. The proof is split into (1) the local-ring dimension as the supremum of generalization-chain lengths (existing Mathlib leaf lem-sc-scheme-stalk-dimension-generalization-chains, Properties 02IZ), (2) the sober generic-point correspondence and its preservation of strict chains (lem-sc-scheme-sober, lem-weil-pbc-irreducible-closure and def-weil-irreducible-components), and (3) taking the supremum, including the empty scheme. The Stacks TeX source is not present in this clone; the proof is written out from the cited result.",
+  "blueprint": "The blueprint proof sentence for this node: 'the dimension of [def-pc-dimension] (supremum of the dimensions of the local rings) compared with the dimension of the underlying space used by [def-sc-curves]'."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 04MU read, 3 steps checked via 02IZ and sober, small cases (Spec k, Spec Z, empty)"
+ }
 }
