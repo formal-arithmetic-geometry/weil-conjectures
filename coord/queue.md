@@ -2,7 +2,7 @@
 
 866 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (348)
+## Stage 1: nodes to split (345)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1015 | none |
-| `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
@@ -44,7 +43,6 @@
 | `lem-sc-etale-qcoherent-descent` | 3007 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
-| `lem-weil-pbc-coskeleton-free-homology-comparison` | 3007 | none |
 | `lem-weil-pbc-matching-object-coskeleton` | 3007 | none |
 | `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `def-sc-picard-functor` | 3008 | none |
@@ -59,7 +57,6 @@
 | `lem-weil-pbc-image-presheaf-sheafification-iso` | 3008 | none |
 | `lem-weil-pbc-set-cech-nerve-free-resolution` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
-| `lem-weil-pbc-simplicial-hom-object-standard-simplex` | 3008 | none |
 | `lem-weil-pbc-trivial-kan-homotopy-equivalence` | 3008 | none |
 | `lem-weil-pbc-truncated-coskeleton-finite-limits` | 3008 | none |
 | `thm-sc-theorem-of-the-base` | 3008 | rests_on_sorry |
@@ -355,7 +352,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (518)
+## Stage 2: nodes to state (521)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -485,6 +482,7 @@
 | `lem-weil-pbc-constructible-in-retrocompact-open` | 1 | state |
 | `lem-weil-pbc-constructible-intersection-in-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-is-retrocompact` | 1 | state |
+| `lem-weil-pbc-coskeleton-free-homology-comparison` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre` | 1 | state |
@@ -733,6 +731,8 @@
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1 | state |
 | `lem-weil-pbc-regular-local-hypersurface-criterion` | 1 | state |
 | `lem-weil-pbc-regular-local-localization` | 1 | state |
+| `lem-weil-pbc-regular-local-quotient-independent-generators` | 1 | state |
+| `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1 | state |
 | `lem-weil-pbc-regular-quotient-ideal-intersection` | 1 | state |
 | `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1 | state |
 | `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
@@ -878,7 +878,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 368 nodes that wait for stage 1, 948 nodes that wait for a statement dependency.
+Not open yet: 365 nodes that wait for stage 1, 949 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
