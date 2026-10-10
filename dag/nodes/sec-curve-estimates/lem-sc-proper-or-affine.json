@@ -20,9 +20,40 @@
   "def-weil-field",
   "def-sc-curves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sc-compactification], there are a proper smooth connected curve $\\overline C$ over $k$ and an open immersion $j:C\\hookrightarrow\\overline C$ whose complement $S=\\overline C\\setminus C$ is a finite set of closed points. The hypothesis that $k$ is algebraically closed is part of [def-sc-curves], which is the curve notion used in the statement.",
+   "uses": [
+    "lem-sc-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-sc-compactification.md",
+    "place": "node lem-sc-compactification, order 923"
+   }
+  },
+  {
+   "text": "If $S$ is empty, the open immersion $j$ has all of $\\overline C$ as its image and is therefore an isomorphism, so $C$ is proper over $k$ because $\\overline C$ is proper. If $S$ is nonempty, the existing affine-open lemma [lem-sc-affine-open-proper] applies to $j$ and gives that $C$ is affine. These two cases exhaust the possibilities.",
+   "uses": [
+    "lem-sc-compactification",
+    "lem-sc-affine-open-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0A28 (varieties-lemma-dim-1-nonproper-affine), together with the compactification dichotomy"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-compactification",
+  "lem-sc-affine-open-proper"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 0A28 (varieties-lemma-dim-1-nonproper-affine), with compactification supplied by the blueprint route"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +85,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-sc-constant-invariance",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-ext-invariance"
+ "unit": "sk-prop-ext-invariance",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-proper-or-affine",
+  "worker": "stage1",
+  "summary": "Split the proper-or-affine dichotomy into compactification and empty/nonempty boundary cases. The first step invokes the existing compactification statement; the second transfers properness across the isomorphism in the empty-boundary case and invokes the existing affine-open lemma in the nonempty-boundary case. No new nodes were needed.",
+  "blueprint": "The two steps realize the affine-case reduction sentence in thm-sc-constant-invariance: compactify the curve and distinguish empty from nonempty complement; the nonempty case is the existing affine-open-proper result."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-poa2908",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-poa2908 (reviewer sub-agent of L); spot-checked: Step 1 = lem-sc-compactification statement exactly (alg. closed k supplied by def-sc-curves, which the unchanged item statement uses); Step 2 empty case: surjective open immersion is an iso, properness transfers (elementary); nonempty case meets lem-sc-affine-open-proper hypotheses exactly; case split exhaustive; statement matches the proper/affine dichotomy used in thm-sc-constant-invariance; no new nodes, no cycle (affine-open-proper proof_deps do not contain the item). Note: second reading claims created.item was repaired to the delivered item, but created.item is still thm-sc-constant-invariance, which is correct; claim inaccurate, harmless. No repairs."
+ }
 }
