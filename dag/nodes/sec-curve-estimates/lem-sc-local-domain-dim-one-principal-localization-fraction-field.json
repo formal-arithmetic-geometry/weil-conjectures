@@ -22,9 +22,52 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathfrak m$ be the unique maximal ideal of the local ring $B$. Since $B$ is a domain, $(0)$ is prime. If a prime $\\mathfrak q$ is nonzero, then $(0)\\subsetneq\\mathfrak q$; the dimension-one hypothesis, interpreted through the definition of Krull dimension, rules out any further strict prime inclusion above $\\mathfrak q$, so $\\mathfrak q$ is maximal. Locality then gives $\\mathfrak q=\\mathfrak m$. Thus the only primes of $B$ are $(0)$ and $\\mathfrak m$.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemmas Tags 00CM and 00C8; the prime-chain argument specializes the definition of Krull dimension"
+   }
+  },
+  {
+   "text": "Apply the prime correspondence for localization [lem-weil-pbc-primes-of-localization](2) with $R=B$, $\\mathfrak p=\\mathfrak m$ and $t=f$: since $B$ is local, every element outside $\\mathfrak m$ is a unit, so the localization map $B\\to B_{\\mathfrak m}$ is an isomorphism and $A=B_{\\mathfrak m}$ is $B$ itself, with $A[1/f]=B_f$. Thus the primes of $B_f$ correspond, by contraction, to the primes of $B$ not containing $f$. The maximal ideal $\\mathfrak m$ is excluded because $f\\in\\mathfrak m$, while $(0)$ is allowed because $f\\ne0$ and $B$ is a domain. Hence $(0)$ is the only prime of $B_f$.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00C8 (prime correspondence for a localization), with the powers of $f$"
+   }
+  },
+  {
+   "text": "The localization $B_f$ is a domain because $B$ is a domain and $f\\ne0$, and its only prime is $(0)$. If a nonzero element of $B_f$ were not a unit, it would lie in a maximal ideal, which would be a nonzero prime; therefore every nonzero element is a unit and $B_f$ is a field. The localization map into $K=\\operatorname{Frac}(B)$ is injective (a power of the nonzero element $f$ cannot annihilate a nonzero numerator). Since $B_f$ is a field containing the image of $B$, every fraction $a/b$ with $0\\ne b\\in B$ belongs to $B_f$ because the image of $b$ is nonzero and hence invertible. Thus the injective localization map $B_f\\to K$ is surjective and is an isomorphism.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemmas Tags 00CM and 00C8; the remaining field and fraction-field identifications are the standard localization calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-primes-of-localization",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemmas Tags 00CM and 00C8"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,15 +96,37 @@
    "results": "IsFractionRing.instAtPrimeFractionRing, IsLocalization.AtPrime.not_isField, DVR/Dedekind localization results; none states B_f = Frac(B) for a one-dimensional local domain (run by reviewer R-sfs1704)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local domain of Krull dimension one, localization away from nonzero element of maximal ideal is the fraction field",
+   "results": "Ring.DimensionLEOne.localization, IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain, IsLocalization.AtPrime.isLocalRing; none states B_f = Frac(B) (run by reviewer R-ldo1730)",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-curveestimate",
  "created": {
   "item": "lem-sc-separated-affine-function-field-surjective",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-local-domain-dim-one-principal-localization-fraction-field",
+  "worker": "stage1",
+  "summary": "Split the one-dimensional local-domain localization argument into the prime-chain reduction, the localization prime correspondence, and the field/fraction-field identification. No new nodes were needed: the existing Krull-dimension definition, localization definition, and prime-correspondence statement supply the non-elementary interfaces.",
+  "blueprint": "The three steps realize the opening sentence of the 09NB proof recorded under lem-sc-pic-proper-ntorsion: the pullback in Spec(B_i) has only one point and is Spec(K)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ldo1730",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ldo1730 (reviewer sub-agent of L); spot-checked: Steps 1-3 sound; checked lem-weil-pbc-primes-of-localization(2) hypotheses (stated for A=R_p); one LeanFinder query, no Mathlib match. FIX more, RETURN less: C4 step 2 applied clause (2), stated for A=R_p, directly to B; added the specialization R=B, p=m, A=B_m=B (B local) in the step text; recorded reviewer LeanFinder search.; 1 file(s) fixed by the reviewer"
  }
 }
