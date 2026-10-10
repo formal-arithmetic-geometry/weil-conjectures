@@ -24,7 +24,11 @@
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03KG (Morphisms of Spaces, Lemma quasi-compact-local), clause (6), specialized to schemes"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,13 +52,33 @@
    "verdict": "no match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsZariskiLocalAtTarget.of_iSup_eq_top",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "how": "specializes in one line with P = @QuasiCompact: `IsZariskiLocalAtTarget.of_iSup_eq_top` (Basic.lean:146-147; the iff form `iff_of_iSup_eq_top` at lines 156-158) gives P f from P (f ∣_ U i) for every i, for an open family U with iSup U = ⊤, under [IsZariskiLocalAtTarget P]. The instance IsZariskiLocalAtTarget @QuasiCompact comes from the instance `HasAffineProperty @QuasiCompact (fun X _ _ _ ↦ CompactSpace X)` (Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:117) through the generic instance HasAffineProperty P Q → IsZariskiLocalAtTarget P (Basic.lean:588). The restriction f ∣_ Y_i is the morphism f^{-1}(Y_i) -> Y_i, and Y = union_i Y_i is iSup Y_i = ⊤."
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-pc-cartier-divisor-nowhere-dense",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-quasi-compact-local-on-target",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf. Mathlib's HasAffineProperty instance for QuasiCompact and the induced IsZariskiLocalAtTarget instance give the exact open-cover local criterion through IsZariskiLocalAtTarget.iff_of_iSup_eq_top. No new DAG nodes are needed.",
+  "blueprint": "The item realizes the blueprint ancestor lem-pc-degree-base-change proof, part (2), sentence 'the complement immersion is quasi-compact because it is affine', by supplying the target-locality theorem used to pass affine-chart quasi-compactness to the global morphism.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qcl",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qcl (reviewer sub-agent of L); spot-checked: Source: Stacks 03KG (spaces-morphisms lemma-quasi-compact-local) clause (6), specialized to schemes: f:X->Y, Zariski cover Y = union Y_i, each f^{-1}(Y_i)->Y_i quasi-compact => f quasi-compact; the node's statement agrees hypothesis by hypothesis (statement unchanged by the delivery). Mathlib leaf verified in the pinned Mathlib: IsZariskiLocalAtTarget.of_iSup_eq_top (Morphisms/Basic.lean:146-147, iff form iff_of_iSup_eq_top 156-158) with P = @QuasiCompact; instance HasAffineProperty @QuasiCompact at Morphisms/QuasiCompact.lean:117 and the generic instance HasAffineProperty -> IsZariskiLocalAtTarget at Basic.lean:588; f ∣_ U i is f^{-1}(U_i)->U_i, iSup U = top is the cover. A one-line specialization (A8), so a leaf, consistent with R-cn2's remark. Small cases: one-member cover (trivial), empty cover only for empty Y (vacuous). FIX: dag/nodes/sec-picard-framework/lem-pc-quasi-compact-local-on-target.json: mathlib_match: declaration listed HasAffineProperty.of_isZariskiLocalAtTarget (Basic.lean:501), which goes the other direction (IsZariskiLocalAtTarget -> HasAffineProperty) and is not used; replaced by IsZariskiLocalAtTarget.of_iSup_eq_top with the instance chain via Basic.lean:588 and lines corrected in how. Start 2026-10-10 15:37:42 UTC, end Sat Oct 10 03:38:12 PM UTC 2026 (date -u before merge).; 1 file(s) fixed by the reviewer"
+ }
 }
