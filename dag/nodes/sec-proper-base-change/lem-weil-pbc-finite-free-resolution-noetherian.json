@@ -11,9 +11,60 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Base step. Since $M$ is finitely generated [def-weil-finitely-generated-module], choose generators $m_1,\\ldots,m_{n_0}\\in M$ and let $\\varepsilon:R^{\\oplus n_0}\\to M$ be the $R$-linear map sending the $j$-th standard basis vector $e_j$ to $m_j$. Every element of $M$ is an $R$-linear combination $\\sum_j a_jm_j=\\varepsilon(\\sum_j a_je_j)$, so $\\varepsilon$ is surjective. (Put $F_{-1}=M$, $d_0=\\varepsilon$.)",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LP (lemma-resolution-by-finite-free), proof of part (2), lines 17428--17436 ('As a first step choose a surjection $R^{n_0}\\to M$')"
+   }
+  },
+  {
+   "text": "Inductive step. Suppose for some $e\\ge0$ an $R$-linear map $d_e:R^{\\oplus n_e}\\to F_{e-1}$ has been constructed (with $F_{e-1}=R^{\\oplus n_{e-1}}$ for $e\\ge1$ and $F_{-1}=M$). Let $K_e=\\ker d_e\\subseteq R^{\\oplus n_e}$. The module $R^{\\oplus n_e}$ is finitely generated (by $e_1,\\ldots,e_{n_e}$) [def-weil-finitely-generated-module] and $R$ is Noetherian [def-weil-pbc-noetherian-ring], so its submodule $K_e$ is finitely generated [lem-weil-pbc-noetherian-submodule-finite]. As in the base step choose generators $k_1,\\ldots,k_{n_{e+1}}$ of $K_e$ and let $d_{e+1}:R^{\\oplus n_{e+1}}\\to R^{\\oplus n_e}$ send $e_j\\mapsto k_j$; then $\\operatorname{im}d_{e+1}=K_e=\\ker d_e$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LP (lemma-resolution-by-finite-free), proof of part (2), lines 17428--17436 ('choose a surjection $R^{n_{e+1}}\\to\\Ker(R^{n_e}\\to R^{n_{e-1}})$ which is possible because $R$ is Noetherian'); the finiteness of the kernel is Algebra, Lemma 00IK (lemma-Noetherian-basic), second assertion"
+   }
+  },
+  {
+   "text": "Iteration. Applying the inductive step for $e=0,1,2,\\ldots$ (definition by recursion on $e$, choosing at each stage generators of $K_e$) gives integers $n_0,n_1,n_2,\\ldots\\ge0$ and maps $\\varepsilon=d_0$, $d_1,d_2,\\ldots$ with $\\operatorname{im}d_{e+1}=\\ker d_e$ for every $e\\ge0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LP (lemma-resolution-by-finite-free), proof of part (2), lines 17428--17436 ('having constructed an exact complex of length $e$ we simply choose ...')"
+   }
+  },
+  {
+   "text": "Exactness. By the base step $\\varepsilon$ is surjective, i.e. the sequence is exact at $M$; by the iteration $\\operatorname{im}d_1=\\ker\\varepsilon$ and $\\operatorname{im}d_{i+1}=\\ker d_i$ for all $i\\ge1$. In particular $d_i\\circ d_{i+1}=0$ and $\\varepsilon\\circ d_1=0$, so $\\cdots\\to R^{\\oplus n_1}\\to R^{\\oplus n_0}\\to M\\to0$ is an exact complex of finite free $R$-modules, as claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LP (lemma-resolution-by-finite-free), proof of part (2), lines 17428--17436"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00LP (lemma-resolution-by-finite-free), proof, lines 17428--17436; with Lemma 00IK (lemma-Noetherian-basic) for the finiteness of the kernel"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +86,38 @@
    "results": "none",
    "verdict": "no match",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "every finitely generated module over a Noetherian ring has a free resolution by finitely generated free modules",
+   "results": "IsNoetherian (RingTheory.Noetherian.Defs), Module.finitePresentation_of_finite, Module.finitePresentation_iff_finite (Algebra.Module.FinitePresentation), Module.IsNoetherian.finite, Module.Finite.exists_fin_quot_equiv (RingTheory.Finiteness.Cardinality), IsNoetherianRing.of_finite",
+   "date": "2026-10-10",
+   "verdict": "no match (finite presentation only: the first two terms of the resolution)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact complex ... → R^n2 → R^n1 → R^n0 → M → 0 for M finite module over Noetherian ring R",
+   "results": "Module.Finite.of_exact (RingTheory.Finiteness.Finsupp), Module.finitePresentation_of_split_exact, Module.finitePresentation_of_projective_of_exact (Algebra.Module.FinitePresentation), IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime, isNoetherian_of_range_eq_ker, AdicCompletion.map_exact",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite.exists_fin'",
+   "results": "Module.Finite.exists_fin' (RingTheory/Finiteness/Cardinality.lean:60: [Module.Finite R M] : ∃ n (f : (Fin n → R) →ₗ[R] M), Surjective f), Module.Finite.kerRepr, Module.Finite.reprEquiv",
+   "date": "2026-10-10",
+   "verdict": "no match for the resolution; Module.Finite.exists_fin' is the base step (step 1), read with grep"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'free resolution|finite free|FreeResolution|resolution by finite' and grep -rlE 'ProjectiveResolution' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "no finite free resolution; ProjectiveResolution only in CategoryTheory/Preadditive/Projective/Resolution.lean, CategoryTheory/Abelian/{LeftDerived,Ext}.lean, CategoryTheory/Monoidal/Tor.lean and RepresentationTheory/Homological (no finiteness of the terms); 'finite free' hits are RingTheory/Finiteness/Cardinality.lean:59 (exists_fin'), Flat/EquationalCriterion.lean (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +137,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-free-resolution-noetherian",
+  "worker": "stage1",
+  "summary": "Checked against Stacks algebra.tex Lemma 00LP (2) and its proof (lines 17411-17436); statement kept (it matches part (2)). Mathlib re-searched (LeanSearch, LeanFinder, Loogle, grep): no finite free resolution; only finite presentation (Module.finitePresentation_of_finite) and the base step (Module.Finite.exists_fin'), so not a leaf. Proof written in four steps following the Stacks proof: surjection from R^{n_0} (instance of the definition of finite generation), the inductive step whose hidden argument 'possible because R is Noetherian' is the existing Mathlib leaf lem-weil-pbc-noetherian-submodule-finite (Stacks 00IK; Submodule.FG.of_le), the recursion, and exactness. No new nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps following Stacks 00LP (2): surjection from R^{n_0}; kernel finitely generated by the Noetherian leaf (00IK) and the next surjection; recursion; exactness. No new nodes; Mathlib has no finite free resolution (only finite presentation), so not a leaf."
+ }
 }
