@@ -13,9 +13,63 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The etale-local decomposition (Stacks 00UK).* Apply [lem-weil-pbc-finite-type-etale-finite-factor-decomposition] to the finite type map $R \\to S$ and the prime $\\mathfrak m$. We obtain an etale ring map $R \\to R'$, a prime $\\mathfrak m' \\subset R'$ over $\\mathfrak m$ with $\\kappa \\cong \\kappa(\\mathfrak m')$, and an $R'$-algebra isomorphism $R' \\otimes_R S \\cong A' \\times B'$, where $A'$ is finite as an $R'$-module and $R' \\to B'$ is not quasi-finite at any prime over $\\mathfrak m'$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-etale-finite-factor-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 04GG, proof of 8 => 11, first two sentences, applying Lemma Tag 00UK"
+   }
+  },
+  {
+   "text": "*Retract the elementary etale extension.* The data $(R', \\mathfrak m')$ from step 1 satisfy the hypothesis of the statement, so there is an $R$-algebra homomorphism $\\tau : R' \\to R$ with $\\tau^{-1}(\\mathfrak m) = \\mathfrak m'$. (This corrects the reversed expression $\\mathfrak m = \\tau^{-1}(\\mathfrak m')$ printed in the source, which is ill-typed.)",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 04GG, proof of 8 => 11, sentence 'Apply (8) to get a retraction'"
+   }
+  },
+  {
+   "text": "*Base change the product decomposition along the retraction.* Put $A = A' \\otimes_{R',\\tau} R$ and $B = B' \\otimes_{R',\\tau} R$. Tensor cancellation gives $S \\cong (R' \\otimes_R S) \\otimes_{R',\\tau} R$, and tensor product preserves the finite product $A' \\times B'$ (for two factors it is their direct sum as an $R'$-module, and the orthogonal idempotents $(1,0),(0,1)$ give the ring product after tensoring). Thus $S \\cong A \\times B$ as $R$-algebras. If $a'_1,\\ldots,a'_n$ generate $A'$ as an $R'$-module, then $a'_1 \\otimes 1,\\ldots,a'_n \\otimes 1$ generate $A$ as an $R$-module, so $A$ is finite. The projection $S \\to B$ induced by the displayed product is surjective, hence $B$ is a quotient of the finite type $R$-algebra $S$ and is finite type over $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 04GG, proof of 8 => 11, displayed tensor-product calculation; finiteness and finite type written out"
+   }
+  },
+  {
+   "text": "*The remaining factor has no quasi-finite point over $\\mathfrak m$.* The composite $R' \\xrightarrow{\\tau} R \\to \\kappa$ has kernel $\\mathfrak m' = \\tau^{-1}(\\mathfrak m)$, and the induced map $\\kappa(\\mathfrak m') \\to \\kappa$ is inverse to the isomorphism $\\kappa \\to \\kappa(\\mathfrak m')$ of step 1 (both composites are induced by the identity on $R$, hence are the identity). Tensor cancellation therefore gives an isomorphism of closed-fibre rings $B \\otimes_R \\kappa \\cong B' \\otimes_{R'} \\kappa(\\mathfrak m')$. Under the standard bijection between primes over the base prime and primes of the fibre ring, this isomorphism bijects primes of $B$ over $\\mathfrak m$ with primes of $B'$ over $\\mathfrak m'$ and is a homeomorphism on their fibre spectra. By [def-weil-pbc-ring-map-quasi-finite-at-prime], a finite type ring map is quasi-finite at such a prime exactly when its corresponding point of the fibre spectrum is isolated. Step 1 says no point on the right is isolated; hence $R \\to B$ is not quasi-finite at any prime over $\\mathfrak m$, as required.",
+   "uses": [
+    "def-weil-pbc-ring-map-quasi-finite-at-prime",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 04GG, proof of 8 => 11, final sentence 'which gives a decomposition as in (11)'; the omitted closed-fibre verification is written out, using the fibre-ring argument from the proof of Lemma Tag 00UK"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-etale-finite-factor-decomposition",
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 04GG, proof of 8 => 11, using Lemma Tag 00UK; the preservation of the non-quasi-finite condition under the retraction base change is the source's omitted verification and is written out via the closed-fibre isomorphism"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +101,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +122,17 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 04GG (8)=>(11) stated with the retraction hypothesis spelled out. Unsplit; the splitter needs 00UK in the finite type case and must repair the source's reversed retraction condition."
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the four steps (04GG (8)=>(11)): 00UK decomposition after an elementary etale extension (new unsplit node), the retraction tau with tau^{-1}(m) = m' (source typo corrected), base change of the product along tau, closed fibres identified so non-quasi-finiteness transfers."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-retraction-finite-type-splitting",
+  "worker": "stage1",
+  "summary": "Split along Stacks 04GG (8)=>(11): apply the finite type form of 00UK (new unsplit node lem-weil-pbc-finite-type-etale-finite-factor-decomposition), retract the elementary etale extension, tensor the product decomposition back to R, and write out the source's omitted verification that the bad factor remains non-quasi-finite by identifying its closed fibre with the original bad factor's closed fibre. The source's ill-typed reversed retraction condition is corrected in the proof. No statement change."
+ }
 }
