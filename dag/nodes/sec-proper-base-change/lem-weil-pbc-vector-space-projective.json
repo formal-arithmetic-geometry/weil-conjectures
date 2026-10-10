@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-vector-space-projective",
+ "kind": "statement",
+ "title": "Every vector space is a projective module",
+ "statement": "Let $k$ be a field and $V$ a $k$-module (a $k$-vector space). Then $V$ is a projective $k$-module [def-weil-pbc-projective-module]: $V$ has a basis, so it is a free $k$-module, and a free module is projective.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09FN (lemma-vector-space-is-free, line 155: every vector space has a basis); 'a vector space is free (hence projective)' in the proof of Algebra, Lemma Tag 031Z (lemma-characterize-formally-smooth-field-extension, algebra.tex line 44397)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every vector space over a field is a projective module",
+   "results": "ModuleCat.projective_of_free, IsProjective.iff_projective (Mathlib.Algebra.Category.ModuleCat.Projective), Module.Projective.of_free (Mathlib.Algebra.Module.Projective), Module.Invertible.instProjective, Module.projective_def', Module.Projective.iff_split'",
+   "date": "2026-10-10",
+   "verdict": "match with Module.Free.of_divisionRing: Module.Projective.of_free"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, DivisionRing",
+   "results": "none (no single declaration; the two instances below compose)",
+   "date": "2026-10-10",
+   "verdict": "no single declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'of_divisionRing\\|Projective.of_free' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module; sed -n 150,157p LinearAlgebra/Basis/VectorSpace.lean; sed -n 161,162p Algebra/Module/Projective.lean",
+   "results": "Mathlib/LinearAlgebra/Basis/VectorSpace.lean:155-157 instance Module.Free.of_divisionRing : Module.Free K V (@[stacks 09FN], basis ofVectorSpace); Mathlib/Algebra/Module/Projective.lean:161-162 instance Projective.of_free [Module.Free R P] : Module.Projective R P",
+   "date": "2026-10-10",
+   "verdict": "match: one declaration per clause"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.Free.of_divisionRing (project ~/weil-conjectures-slopmaster2)",
+   "results": "index: unavailable at the time of the search; declarations read in the files by sed -n instead",
+   "date": "2026-10-10",
+   "verdict": "see grep"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Projective.of_free",
+  "file": "Mathlib/Algebra/Module/Projective.lean",
+  "how": "one declaration per clause: Module.Free.of_divisionRing (Mathlib/LinearAlgebra/Basis/VectorSpace.lean:155-157, @[stacks 09FN]) makes every vector space V over a division ring K free, and Module.Projective.of_free (Mathlib/Algebra/Module/Projective.lean:161-162) makes a free module projective; Module.Projective is the def-weil-pbc-projective-module notion (lifting along surjections / direct summand of a free module, Module.Projective.iff_split). Lines read with sed -n 2026-10-10",
+  "line": 161
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-field-char-p-nilpotent-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf: Module.Free.of_divisionRing (Mathlib/LinearAlgebra/Basis/VectorSpace.lean line 155, @[stacks 09FN]) gives freeness, Module.Projective.of_free (Mathlib/Algebra/Module/Projective.lean line 161) gives projectivity; one declaration per clause, lines read by L.",
+ "reviewed": "Reviewed by L 2026-10-10: composed Mathlib leaf (free by 09FN, projective since free); lines read."
+}

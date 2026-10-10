@@ -8,9 +8,53 @@
   "place": "Algebra, Lemma Tag 0320 (lemma-formally-smooth-extensions-easy, line 44409), part (3): a separable field extension is formally smooth (Definition Tag 00TI, definition-formally-smooth, line 37805: lifting along square-zero ideals), applied to K over F_p, which is separable because F_p is perfect (Definition Tag 030Y, definition-perfect, line 10489; Lemma Tag 030Z, lemma-perfect, line 10495: every element of F_p is a p-th power); the passage from J^2=0 to J^N=0 by lifting successively along D/J^{i+1} -> D/J^i, as in the proof of Algebra Lemma Tag 07K4 (lemma-smooth-strong-lift, line 38291). Used in Smoothing Ring Maps, proof of Lemma Tag 07FG (smoothing.tex lines 2468-2470, 2489-2490, 2496-2497). Tags verified in literature/stacks-project/tags/tags"
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Algebra structures.* Since $K$ has characteristic $p$, its prime subfield is $\\mathbf F_p=\\mathbf Z/p\\mathbf Z\\subseteq K$, and $K$ is an $\\mathbf F_p$-algebra in a unique way. Every ring $E$ with $p\\cdot1_E=0$ (here $D$ and its quotients $D/J^i$, $i\\ge1$) has exactly one ring map $\\mathbf F_p\\to E$, namely $n\\bmod p\\mapsto n\\cdot1_E$, so it is an $\\mathbf F_p$-algebra in exactly one way, and a quotient map $E\\to E/I$ is a map of $\\mathbf F_p$-algebras. A ring homomorphism from $K$ or from such an $E$ to such a ring sends $n\\cdot1$ to $n\\cdot1$, hence is a homomorphism of $\\mathbf F_p$-algebras; conversely every $\\mathbf F_p$-algebra homomorphism is a ring homomorphism. So below 'ring homomorphism' and '$\\mathbf F_p$-algebra homomorphism' between these rings are the same thing.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0320 (lemma-formally-smooth-extensions-easy, line 44409) applied to K over F_p (the identification of ring maps with F_p-algebra maps is implicit in the citers, Smoothing Ring Maps proof of Lemma Tag 07FG, and Algebra Lemma Tag 0329)"
+   }
+  },
+  {
+   "text": "*Square-zero case.* By [lem-weil-pbc-field-char-p-h1-cotangent-vanishing], $H_1(L_{K/\\mathbf F_p})=0$ (naive cotangent complex of the canonical presentation $\\mathbf F_p[K]\\to K$). The module of differentials $\\Omega_{K/\\mathbf F_p}$ is a $K$-module, i.e. a $K$-vector space, hence a projective $K$-module by [lem-weil-pbc-vector-space-projective]. So the ring map $\\mathbf F_p\\to K$ satisfies both hypotheses of [lem-weil-pbc-smooth-ring-map-square-zero-lifting] (with $A=\\mathbf F_p$, $B=K$), which gives, with step 1: (*) for every commutative ring $D'$ with $p\\cdot1_{D'}=0$, every ideal $J'\\subseteq D'$ with $J'^2=0$, with quotient map $q':D'\\to D'/J'$, and every ring homomorphism $g':K\\to D'/J'$, there is a ring homomorphism $f':K\\to D'$ with $q'\\circ f'=g'$. (This is the last line of the proof of 0320 (3), '$K/k$ is formally smooth by Lemma 031Z', for $k=\\mathbf F_p$, with 031Z proved as in its source: Proposition 031J and 'a vector space is free (hence projective)'; the vanishing of $H_1$ is the part of the proof of 0320 (3) carried by the cited node, which uses that $K/\\mathbf F_p$ is separable as $\\mathbf F_p$ is perfect, 030Y/030Z.)",
+   "uses": [
+    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+    "lem-weil-pbc-vector-space-projective",
+    "lem-weil-pbc-smooth-ring-map-square-zero-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 0320 (lemma-formally-smooth-extensions-easy, line 44409) part (3), last sentence; Lemma Tag 031Z (lemma-characterize-formally-smooth-field-extension, line 44397) and its proof (Proposition Tag 031J, proposition-characterize-formally-smooth, line 37986, (6) => (1)); Definition Tag 00TI (definition-formally-smooth, line 37805)"
+   }
+  },
+  {
+   "text": "*Induction from $J^2=0$ to $J^N=0$.* For $1\\le i\\le N$ let $\\rho_i:D/J^i\\to D/J$ be the canonical surjection ($J^i\\subseteq J$). Claim $P(i)$: there is a ring homomorphism $f_i:K\\to D/J^i$ with $\\rho_i\\circ f_i=g$. $P(1)$ holds with $f_1=g$. Let $1\\le i<N$ and assume $P(i)$. Put $D'=D/J^{i+1}$ and $J'=J^i/J^{i+1}\\subseteq D'$. Then $p\\cdot1_{D'}=0$, and $J'^2$ is the image of $J^{2i}\\subseteq J^{i+1}$ (as $2i\\ge i+1$), so $J'^2=0$. By the third isomorphism theorem $D'/J'\\cong D/J^i$, and under this isomorphism the quotient map $q':D'\\to D'/J'$ becomes the canonical surjection $\\sigma_i:D/J^{i+1}\\to D/J^i$. Applying (*) of step 2 to $g'=f_i$ (composed with this isomorphism) gives a ring homomorphism $f_{i+1}:K\\to D/J^{i+1}$ with $\\sigma_i\\circ f_{i+1}=f_i$; then $\\rho_{i+1}\\circ f_{i+1}=\\rho_i\\circ\\sigma_i\\circ f_{i+1}=\\rho_i\\circ f_i=g$, which is $P(i+1)$. Hence $P(N)$ holds. Since $J^N=0$, $D/J^N=D$ and $\\rho_N=\\pi$, so $f=f_N:K\\to D$ is a ring homomorphism with $\\pi\\circ f=g$ (for $N=1$, $J=0$ and $f=g$).",
+   "uses": [
+    "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+    "lem-weil-pbc-vector-space-projective",
+    "lem-weil-pbc-smooth-ring-map-square-zero-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07K4 (lemma-smooth-strong-lift, line 38291): 'we can successively lift' along A_0/I_0^{i+1} -> A_0/I_0^i, whose kernels have square zero"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-char-p-h1-cotangent-vanishing",
+  "lem-weil-pbc-smooth-ring-map-square-zero-lifting",
+  "lem-weil-pbc-vector-space-projective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 0320 (lemma-formally-smooth-extensions-easy, line 44409) part (3) for K/F_p (H_1(L_{K/F_p}) = 0, then formally smooth by Lemma Tag 031Z, line 44397, i.e. Proposition Tag 031J and vector spaces are free); induction along D/J^{i+1} -> D/J^i as in the proof of Lemma Tag 07K4 (lemma-smooth-strong-lift, line 38291)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -39,10 +83,38 @@
    "results": "Smooth/Field.lean lines 25-58 only: adjoin_of_algebraicIndependent, of_algebraicIndependent, of_algebraicIndependent_of_isSeparable, instance of_perfectField [PerfectField K] [Algebra.EssFiniteType K L] (line 53-54); nothing for a field extension that is not essentially of finite type",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A field K of characteristic p is formally smooth over the prime field F_p; ring homomorphisms from K lift along nilpotent ideals",
+   "results": "Algebra.FormallySmooth.of_perfectField (EssFiniteType), IsAlgClosed.perfectRing, PerfectClosure.instPerfectRing, PerfectField.toPerfectRing, PerfectClosure.lift, PerfectRing.liftAux",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, PerfectField",
+   "results": "Algebra.FormallySmooth.of_perfectField (Mathlib.RingTheory.Smooth.Field, [Algebra.EssFiniteType K L])",
+   "date": "2026-10-10",
+   "verdict": "no match: only for essentially finite type K"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 60,92p, 120,160p, 340,375p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/Basic.lean; sed -n 40,60p RingTheory/Smooth/Field.lean; sed -n 306,312p FieldTheory/Perfect.lean",
+   "results": "Basic.lean:70-72 class FormallySmooth (Omega projective and H1Cotangent = 0, @[stacks 00TI]); :80 comp_surjective (square-zero lift); :126-129 exists_lift (lift along a nilpotent ideal, by Ideal.IsNilpotent.induction_on); :371 iff_comp_surjective; Field.lean:53-54 of_perfectField [PerfectField K] [EssFiniteType K L]; Perfect.lean:308 PerfectField.ofFinite",
+   "date": "2026-10-10",
+   "verdict": "no match: exists_lift gives the item from Algebra.FormallySmooth (ZMod p) K, which Mathlib proves only for K essentially of finite type over ZMod p"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_lift (project ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.FormallySmooth.exists_lift (Mathlib/RingTheory/Smooth/Basic.lean) and unrelated exists_lift lemmas; index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "exists_lift exists; it is the induction of step 3, not the item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +134,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": "Algebra.FormallySmooth.exists_lift (Mathlib/RingTheory/Smooth/Basic.lean:126-129, read with sed -n), with R = ZMod p, A = K, B = D, gives the item from the instance Algebra.FormallySmooth (ZMod p) K (class at Basic.lean:70-72: Omega projective and H1Cotangent = 0, exactly step 2); Mathlib has that instance only under Algebra.EssFiniteType (Algebra.FormallySmooth.of_perfectField, Mathlib/RingTheory/Smooth/Field.lean:53-54, with PerfectField.ofFinite, Mathlib/FieldTheory/Perfect.lean:308). For an arbitrary field K of characteristic p the missing piece is H1Cotangent (ZMod p) K = 0, the node lem-weil-pbc-field-char-p-h1-cotangent-vanishing; once that is in Lean, the item is exists_lift. Not a leaf now (B8).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-field-char-p-nilpotent-lifting",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against both citers: lem-weil-pbc-cohen-ring-mod-pn-formally-smooth uses it with N = 2, lem-weil-pbc-popescu-artinian-flat-subalgebras with D = Lambda, J = m^{n-1} and with D = F'[x]/(x)^n and a nilpotent kernel; both take exactly the statement). Proof in three steps following the proof of Stacks 0320 (3) for k = F_p and the induction of 07K4: (1) ring maps between rings with p = 0 are the F_p-algebra maps (elementary); (2) square-zero lifting: H_1(L_{K/F_p}) = 0 by the existing node lem-weil-pbc-field-char-p-h1-cotangent-vanishing (split today, it carries the separability of K/F_p from F_p perfect and the colimit argument of 0320 (3)), Omega_{K/F_p} projective by a new Mathlib leaf lem-weil-pbc-vector-space-projective (09FN; Module.Free.of_divisionRing + Module.Projective.of_free), and the existing Mathlib leaf lem-weil-pbc-smooth-ring-map-square-zero-lifting (031J (6) => (1), comp_surjective) gives lifting along square-zero ideals; this is 031Z with its source proof; (3) the induction P(i) along D/J^{i+1} -> D/J^i, kernel J^i/J^{i+1} of square zero, written out. One new node (a Mathlib leaf); route chosen over new nodes for 0320 (3) and 030Z since the H_1 node already carries them. Mathlib: exists_lift gives step 3 but Algebra.FormallySmooth (ZMod p) K exists only for K essentially of finite type (of_perfectField); recorded as mathlib_candidate (B8)."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 0320 (3) + 031Z + the induction of 07K4; the square-zero case comes from the split node lem-weil-pbc-field-char-p-h1-cotangent-vanishing (reviewed today), the new Mathlib leaf (vector spaces projective) and the leaf lem-weil-pbc-smooth-ring-map-square-zero-lifting (031J); the ring-map/F_p-algebra identification is written out (step 1). Mathlib candidate recorded (FormallySmooth.exists_lift needs the FormallySmooth instance, which Mathlib has only for essentially finite type extensions; B8)."
 }
