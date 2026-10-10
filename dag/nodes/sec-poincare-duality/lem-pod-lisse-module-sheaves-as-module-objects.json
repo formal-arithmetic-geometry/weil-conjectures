@@ -7,7 +7,7 @@
    "place": "step 1 of its split (source: Lemma 0DV5 (Section 59.65 'Locally constant sheaves and the fundamental group', lemma-locally-constant-on-connected), part (3) and its proof; also Milne LEC, Proposition 6.16, p. 49)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Lisse sheaves of modules are module objects in finite locally constant sheaves of sets",
@@ -17,12 +17,55 @@
   "place": "Lemma 0DV5 (etale-cohomology, Section 59.65, lemma-locally-constant-on-connected), proof of parts (2)-(3): 'by endowing the underlying (sheaves of) sets with additional structure'; the converse in (1) uses Lemma 093S (1) (sites-modules, lemma-morphism-locally-constant: a map from a finite locally constant sheaf of sets is locally the map of constant sheaves of a map of sets, proof omitted in Stacks)"
  },
  "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "If $\\mathcal F$ is lisse, choose an etale covering on which it is isomorphic, as a sheaf of $\\Lambda$-modules, to the constant sheaf of a finite left $\\Lambda$-module $M_i$. Forgetting the module structure gives an isomorphism of sheaves of sets with the constant finite sheaf underlying $M_i$, so the underlying sheaf lies in $\\mathrm{FLC}(Y)$.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0DV5, proof of (1) in the locally constant case"
+   }
+  },
+  {
+   "text": "Conversely, suppose the underlying sheaf of sets of a sheaf of left $\\Lambda$-modules $\\mathcal F$ is finite locally constant. Trivialize the underlying sheaf on an etale cover, and also trivialize the finite products that occur as operation sources. For any one of the finitely many operations, each element of its finite constant source has an image section of the finite constant target; after an etale refinement that image is a specified constant section, and refining simultaneously over the finite source makes the operation a map of finite constant sets. Since there are only finitely many operations (because $\\Lambda$ is finite), one common refinement makes all of them constant maps. The module axioms already hold as sheaf-map equalities, so the induced finite maps satisfy them; the local constant finite set is therefore a finite left $\\Lambda$-module and the local identification is an isomorphism of sheaves of $\\Lambda$-modules, proving that $\\mathcal F$ is lisse.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0DV5, proof of (1)-(3), using Lemma 093S(1)"
+   }
+  },
+  {
+   "text": "The construction from a lisse sheaf to its underlying sheaf with its given operations is inverse to the construction in the preceding step: forgetting and then restoring the operations leaves every operation unchanged, while a module object of $\\mathrm{FLC}(Y)$ already has exactly the corresponding sheaf-of-modules structure. A morphism is preserved and recovered precisely when it commutes with addition, zero, negation, and scalar multiplication. Hence the two categories and their morphisms are identified, so the functor in (2) is an isomorphism (and therefore an equivalence).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0DV5, proof of (2)-(3): endowing the underlying sheaves of sets with additional structure"
+   }
+  }
+ ],
+ "proof_deps": [
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-etale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0DV5, proof of parts (1)-(3), with Lemma 093S(1)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -40,7 +83,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +103,21 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-lem-finite"
+ "unit": "sk-lem-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pod-lisse-module-sheaves-as-module-objects",
+  "worker": "stage1",
+  "summary": "Split the proof into the two local trivialization implications and the inverse-on-objects-and-morphisms argument; the finite-section local-constancy argument is written directly as an elementary step.",
+  "blueprint": "Realizes step 1 of cor-galois-lisse-representations: the underlying-sheaf/module-object identification used before the fundamental-group equivalence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-lmo2654",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lmo2654 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0DV5/093S and vs its only citer cor-galois-lisse-representations step 1 (uses exactly (2), with the citer's parenthetical 'etale locally isomorphic to the constant sheaf of a finite Lambda-module' = the item's lisse): C4 OK. Module-object notion is the same inline definition as lem-pod-equivalence-induces-module-objects (which has no def node, stmt_deps []), so no def node to cite. Inline 'lisse' for left Lambda-module sheaves: def-weil-pbc-etale-sheaves defines lisse only for sheaves of sets (=FLC) and Mod only for commutative R; lem-weil-pbc-finite-locally-constant-module-values is commutative-only; the item's (1) proves agreement with the set-level def, so no clash, no class b. Noncommutative Lambda: left modules throughout, no tensor over Lambda. Steps 1-3 checked: step 2's local constancy of image sections is the elementary sheafification fact (093S(1)), common refinement finite because Lambda finite; step 3 inverse on objects and morphisms. No fault found beyond the second reading."
+ }
 }
