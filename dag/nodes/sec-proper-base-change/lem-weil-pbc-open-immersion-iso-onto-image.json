@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-open-immersion-iso-onto-image",
+ "kind": "statement",
+ "title": "An open immersion is an isomorphism onto the open subscheme on its image",
+ "statement": "Let $f:X\\to Y$ be an open immersion of schemes [def-pc-scheme], [def-weil-open-immersion], let $U=f(X)$, which is an open subset of $Y$, and let $j_U:U\\to Y$ be the inclusion of the open subscheme $(U,\\mathcal O_Y|_U)$ of $Y$. Then there is an isomorphism of schemes $\\varphi:X\\to U$ with $j_U\\circ\\varphi=f$; equivalently $f\\circ\\varphi^{-1}=j_U$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Lemma 01HH (label lemma-open-immersion, line 241): an open immersion of locally ringed spaces f:X->Y induces a unique isomorphism f':X->V onto the open subspace V=f(X) with f=j o f'; for schemes the open subspace on f(X) is the open subscheme and morphisms of schemes are morphisms of locally ringed spaces"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open immersion of schemes is an isomorphism onto its image open subscheme",
+   "results": "AlgebraicGeometry.Scheme.Hom.isoOpensRange, Scheme.Hom.isoOpensRange_inv_comp(_assoc), Scheme.Hom.isoOpensRange_hom_ι(_assoc) (Mathlib.AlgebraicGeometry.Restrict); isIso_of_isOpenImmersion_of_opensRange_eq_top, IsOpenImmersion (Mathlib.AlgebraicGeometry.OpenImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match: AlgebraicGeometry.Scheme.Hom.isoOpensRange with isoOpensRange_hom_ι"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if f : X ⟶ Y is an open immersion then X is isomorphic to the open subscheme f.opensRange",
+   "results": "AlgebraicGeometry.Scheme.Hom.isoOpensRange, Scheme.Hom.isoImage (Mathlib.AlgebraicGeometry.Restrict); IsOpenImmersion.isoRestrict, IsOpenImmersion.isoOfRangeEq, Scheme.Hom.isIso_app (Mathlib.AlgebraicGeometry.OpenImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.Hom.isoOpensRange"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.isoOpensRange",
+   "results": "isoOpensRange : X ≅ ↑f.opensRange; isoOpensRange_hom_ι : isoOpensRange.hom ≫ f.opensRange.ι = f; isoOpensRange_inv_comp : isoOpensRange.inv ≫ f = f.opensRange.ι (+ _assoc forms) (Mathlib.AlgebraicGeometry.Restrict); uses in Gluing.lean",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def isoOpensRange|isoOpensRange_hom_ι|isoOpensRange_inv_comp' Mathlib/AlgebraicGeometry; sed -n 415,440p Mathlib/AlgebraicGeometry/Restrict.lean",
+   "results": "Restrict.lean:423 `def Scheme.Hom.isoOpensRange {X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] : X ≅ f.opensRange`; :428 `isoOpensRange_hom_ι : f.isoOpensRange.hom ≫ f.opensRange.ι = f`; :433 `isoOpensRange_inv_comp : f.isoOpensRange.inv ≫ f = f.opensRange.ι`; OpenImmersion.lean:80 `def opensRange`, :727 `def isoOfRangeEq`",
+   "date": "2026-10-10",
+   "verdict": "match: read at the source, exactly the node's statement"
+  },
+  {
+   "tool": "local_search",
+   "query": "isoOpensRange (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.Scheme.Hom.isoOpensRange (def), Scheme.Hom.isoOpensRange_inv_comp (lemma), file .lake/packages/mathlib/Mathlib/AlgebraicGeometry/Restrict.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "match: the name exists in the pinned Mathlib"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isoOpensRange, AlgebraicGeometry.Scheme.Hom.isoOpensRange_hom_ι, AlgebraicGeometry.Scheme.Hom.isoOpensRange_inv_comp",
+  "file": "Mathlib/AlgebraicGeometry/Restrict.lean",
+  "how": "exact: for f : X ⟶ Y with [IsOpenImmersion f], `isoOpensRange f : X ≅ f.opensRange` (Restrict.lean:423) is φ, where f.opensRange (OpenImmersion.lean:80) is the open U=f(X) and f.opensRange.ι is j_U; `isoOpensRange_hom_ι` (line 428) is j_U ∘ φ = f and `isoOpensRange_inv_comp` (line 433) is f ∘ φ⁻¹ = j_U. Read with sed -n 415,440p",
+  "line": 423
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-clopen-open-cover-section",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf (isoOpensRange 423, isoOpensRange_hom_iota 428, isoOpensRange_inv_comp 433 in Restrict.lean); lines verified."
+}

@@ -13,9 +13,68 @@
   "def-weil-surjective-morphism",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The images are open, closed and cover $Z$ (Stacks: 'As $V\\to Z$ is finite we see that $V_i\\to Z$ is also closed. Let $U_i\\subset Z$ be the image').* For $i=1,\\dots,n$ let $k_i:V_i\\to V$ be the inclusion of the open subscheme $V_i$, so that $p_i=p\\circ k_i$, and let $U_i=p(V_i)=p_i(V_i)\\subseteq Z$. Since $p_i$ is an open immersion, $U_i$ is open in $Z$ [def-weil-open-immersion]. Since $p$ is finite it is a closed map (part (1) of [lem-weil-pbc-finite-closed-map-finite-fibres]), and $V_i$ is closed in $V$, so $U_i=p(V_i)$ is closed in $Z$. Since $p$ is surjective [def-weil-surjective-morphism], every $z\\in Z$ is $p(v)$ for some $v\\in V=\\bigcup_iV_i$, say $v\\in V_i$, and then $z\\in U_i$; so $Z=U_1\\cup\\dots\\cup U_n$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, second paragraph"
+   }
+  },
+  {
+   "text": "*The strata (Stacks: the decomposition $Z=\\coprod_{(A,B)}\\bigcap_{i\\in A}U_i\\cap\\bigcap_{i\\in B}U_i^c$ over $\\{1,\\dots,n\\}=A\\amalg B$ with $A\\neq\\emptyset$; 'each of the strata is contained in a single $U_i$').* For a nonempty subset $A\\subseteq\\{1,\\dots,n\\}$ put $Z_A=\\bigcap_{i\\in A}U_i\\cap\\bigcap_{i\\notin A}(Z\\setminus U_i)$. Each $U_i$ and each $Z\\setminus U_i$ is open and closed in $Z$ (step 1), so $Z_A$, a finite intersection of open and closed subsets, is open and closed. For $z\\in Z$ let $A(z)=\\{i: z\\in U_i\\}$, which is nonempty by step 1; by definition $z\\in Z_A$ if and only if $A=A(z)$. Hence the $Z_A$ ($A\\neq\\emptyset$) are pairwise disjoint and cover $Z$. Put $i(A)=\\min A$; then $Z_A\\subseteq U_{i(A)}$. (Some $Z_A$ may be empty; nothing below needs them nonempty.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, second paragraph"
+   }
+  },
+  {
+   "text": "*The section on one stratum (Stacks: 'we find our section').* Fix $A\\neq\\emptyset$, write $i=i(A)$, and let $j_{Z_A}:Z_A\\to Z$ and $j_{U_i}:U_i\\to Z$ be the inclusions of the open subschemes on $Z_A$ and $U_i$ (step 1, step 2) [def-pc-scheme]. By [lem-weil-pbc-open-immersion-iso-onto-image] applied to the open immersion $p_i:V_i\\to Z$, whose image is $U_i$, there is an isomorphism $\\varphi_i:V_i\\to U_i$ with $j_{U_i}\\circ\\varphi_i=p_i$. Since $j_{Z_A}(Z_A)=Z_A\\subseteq U_i$, [lem-weil-pbc-morphism-factors-through-open-subscheme] gives a morphism $\\iota_A:Z_A\\to U_i$ with $j_{U_i}\\circ\\iota_A=j_{Z_A}$. Put $s_A=k_i\\circ\\varphi_i^{-1}\\circ\\iota_A:Z_A\\to V$. Then $p\\circ s_A=p_i\\circ\\varphi_i^{-1}\\circ\\iota_A=j_{U_i}\\circ\\varphi_i\\circ\\varphi_i^{-1}\\circ\\iota_A=j_{U_i}\\circ\\iota_A=j_{Z_A}$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-open-immersion-iso-onto-image",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, second paragraph"
+   }
+  },
+  {
+   "text": "*Gluing the local sections.* By step 2 the open subschemes $Z_A$, $A$ running over the nonempty subsets of $\\{1,\\dots,n\\}$, form an open covering of $Z$. The morphisms $s_A:Z_A\\to V$ of step 3 agree on overlaps: for $A\\neq B$ the overlap $Z_A\\cap Z_B$ is empty (step 2), and a scheme with empty underlying space has exactly one morphism to $V$ (the empty map of spaces, and on structure sheaves the map to $\\mathcal O_{\\emptyset}(\\emptyset)=0$, the zero ring), so $s_A$ and $s_B$ restrict to the same morphism there; for $A=B$ there is nothing to check. By [lem-weil-pbc-scheme-morphism-gluing] there is a morphism $s:Z\\to V$ with $s\\circ j_{Z_A}=s_A$ for every $A$. Then for every $A$, $(p\\circ s)\\circ j_{Z_A}=p\\circ s_A=j_{Z_A}=\\mathrm{id}_Z\\circ j_{Z_A}$ (step 3), so $p\\circ s$ and $\\mathrm{id}_Z$ have the same restriction to every member of the covering, and by the uniqueness clause of [lem-weil-pbc-scheme-morphism-gluing] $p\\circ s=\\mathrm{id}_Z$: $s$ is a section of $p$.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, second paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-weil-surjective-morphism",
+  "def-pc-scheme",
+  "lem-weil-pbc-open-immersion-iso-onto-image",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, second paragraph ('The final statement is a consequence of the first ...')"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +103,38 @@
    "results": "No declaration combines a finite clopen cover by open immersions with construction of a section",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite surjective morphism of schemes which is a disjoint union of open immersions has a section",
+   "results": "IsOpenImmersion.isIso, Surjective, isomorphisms_eq_isOpenImmersion_inf_surjective, Surjective.sigmaDesc_of_union_range_eq_univ, isIso_iff_isOpenImmersion_and_surjective, instIsOpenImmersionMapScheme (Mathlib.AlgebraicGeometry.*)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a surjective morphism of schemes from a coproduct of open subschemes (open immersions) admits a section",
+   "results": "Surjective.sigmaDesc_of_union_range_eq_univ (Morphisms.UnderlyingMap), GlueData.ι_jointly_surjective (Gluing), nonempty_isColimit_binaryCofanMk_of_isCompl and nonempty_isColimit_cofanMk_of (Mathlib.AlgebraicGeometry.Limits: covering pairwise disjoint open subschemes make S their coproduct), sigmaOpenCover_f, instIsOpenImmersionSigmaSpec",
+   "date": "2026-10-10",
+   "verdict": "no match; nonempty_isColimit_cofanMk_of is a building block (see mathlib_candidate)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Surjective, AlgebraicGeometry.IsOpenImmersion, CategoryTheory.IsSplitEpi",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -E 'IsSplitEpi|hasSection|exists_section|section_of' Mathlib/AlgebraicGeometry | grep -iE 'open|finite|clopen'; grep -n nonempty_isColimit_cofanMk_of Mathlib/AlgebraicGeometry/Limits.lean; sed -n 308,320p Limits.lean",
+   "results": "no section statement; Limits.lean:313 `nonempty_isColimit_cofanMk_of` (S is the coproduct of covering pairwise disjoint open subschemes X_i --> S)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +155,22 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": " L 2026-10-10: unreachable flag cleared; now cited by lem-weil-pbc-gabber-finite-etale-section step 5."
+ "lead_note": " L 2026-10-10: unreachable flag cleared; now cited by lem-weil-pbc-gabber-finite-etale-section step 5.",
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.nonempty_isColimit_cofanMk_of, AlgebraicGeometry.Scheme.Hom.isoOpensRange, AlgebraicGeometry.Scheme.Hom.isClosedMap, AlgebraicGeometry.Scheme.Cover.glueMorphisms",
+  "file": "Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/AlgebraicGeometry/Restrict.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean; Mathlib/AlgebraicGeometry/Gluing.lean",
+  "how": "not a leaf: no single declaration. A Lean proof would use Scheme.Hom.isClosedMap (UniversallyClosed.lean:49, with IsProper from IsFinite) for the closed images, isoOpensRange (Restrict.lean:423) for the inverses on the strata, and either nonempty_isColimit_cofanMk_of (Limits.lean:313, read sed -n 308,320p: Z is the coproduct of the covering pairwise disjoint open strata, so Cofan.IsColimit.desc gives s) or glueMorphisms for the gluing."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-clopen-open-cover-section",
+  "worker": "stage1",
+  "summary": "Split along the second paragraph of the proof of Stacks 09ZA (etale-cohomology.tex line 14390, label checked in tags/tags). Four steps: (1) the images U_i=p(V_i) are open (open immersion), closed (p finite hence a closed map, existing leaf lem-weil-pbc-finite-closed-map-finite-fibres (1)) and cover Z (p surjective); (2) the Stacks strata Z_A = ∩_{i∈A}U_i ∩ ∩_{i∉A}U_i^c, A nonempty, are open and closed, pairwise disjoint, cover Z, and Z_A ⊆ U_{min A} (elementary); (3) on Z_A the section k_i∘φ_i^{-1}∘ι_A with φ_i: V_i ≅ U_i from the new Mathlib leaf lem-weil-pbc-open-immersion-iso-onto-image (Stacks 01HH; Scheme.Hom.isoOpensRange) and ι_A from lem-weil-pbc-morphism-factors-through-open-subscheme; (4) gluing over the open cover {Z_A} (overlaps empty) by the leaf lem-weil-pbc-scheme-morphism-gluing (unit sk-thm-reduction, a Mathlib leaf hence a tool), whose uniqueness clause gives p∘s=id_Z. Statement unchanged; finiteness is used only for closedness of the images. Mathlib searched (leansearch, leanfinder, loogle, grep): no whole match; candidate building blocks recorded in mathlib_candidate."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps following the proof of Etale Cohomology 09ZA: the images U_i open (open immersions), closed (finite maps are closed, existing leaf) and covering Z; the clopen strata Z_A of the source; the section on a stratum through the inverse of the open immersion (new composed leaf isoOpensRange, Restrict.lean:423/428/433 verified by L) and the factorization through U_i; gluing by the gluing leaf of sk-thm-reduction (a tool), the empty overlaps handled. Statement unchanged."
+ }
 }
