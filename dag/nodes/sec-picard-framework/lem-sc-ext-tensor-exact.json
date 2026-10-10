@@ -21,9 +21,52 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x\\in X$ and choose $V_a$ containing $x$ with $\\mathcal P|_{V_a}\\cong\\mathcal O_{V_a}^{\\oplus d_a}$. Taking germs of the $d_a$ basis sections and their inverse coordinate maps gives $\\mathcal P_x\\cong\\mathcal O_{X,x}^{\\oplus d_a}$ as $\\mathcal O_{X,x}$-modules [def-weil-pbc-module-stalk]. The integer may vary with $x$; only this one neighbourhood is used.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Definition 17.14.1 (finite locally free), and Lemma 17.17.2 (Tag 05NE), proof of the forward local-free case"
+   }
+  },
+  {
+   "text": "For any $\\mathcal O_X$-module $\\mathcal G$, naturality of the stalk-tensor isomorphism [lem-weil-pbc-module-stalk-tensor] identifies $(\\mathcal P\\otimes\\mathcal G)_x$ with $\\mathcal P_x\\otimes_{\\mathcal O_{X,x}}\\mathcal G_x$ and the stalk of a tensor map with $1_{\\mathcal P_x}\\otimes g_x$. Under the basis of step 1, the map $\\mathcal O_{X,x}^{\\oplus d_a}\\otimes\\mathcal G_x\\to\\mathcal G_x^{\\oplus d_a}$ sends $e_i\\otimes m$ to the tuple with $m$ in coordinate $i$ and zero elsewhere; its inverse sends $(m_i)_i$ to $\\sum_i e_i\\otimes m_i$. Thus tensoring on the stalk is the finite direct-sum functor $\\mathcal G_x\\mapsto\\mathcal G_x^{\\oplus d_a}$, including $d_a=0$.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 17.16.1 (Tag 01CB, lemma-stalk-tensor-product) and Lemma 17.17.2 (Tag 05NE)"
+   }
+  },
+  {
+   "text": "Take a short exact sequence $0\\to\\mathcal G_1\\xrightarrow{u}\\mathcal G_2\\xrightarrow{v}\\mathcal G_3\\to0$. By [lem-weil-pbc-module-stalk-exact] its sequence of stalks is exact at each $x$ (including injectivity and surjectivity). Under step 2, tensoring its stalk sequence with $\\mathcal P_x$ is the direct sum of $d_a$ copies of that sequence. Kernels, images, and surjectivity of maps between finite tuples are computed coordinatewise, so this direct sum is short exact, also when $d_a=0$. By [lem-weil-pbc-module-stalk-exact] in the reverse direction, $0\\to\\mathcal P\\otimes\\mathcal G_1\\to\\mathcal P\\otimes\\mathcal G_2\\to\\mathcal P\\otimes\\mathcal G_3\\to0$ is exact as a sequence of sheaves. The identifications in step 2 are natural, so these are the actual tensor maps.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-module-stalk-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 17.17.2 (Tag 05NE, lemma-flat-stalks-flat), first implication, using Lemma 17.16.1 (Tag 01CB); Modules, Lemma 17.3.1 (Tag 01AG)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-module-stalk-tensor",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemmas Tags 01CB, 05NE, 01AG, specialized to locally free stalks"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +91,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ext-locally-free",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-ext-tensor-exact",
+  "worker": "stage1",
+  "summary": "At each point a local trivialization makes the stalk of P finite free. The natural tensor-stalk comparison turns the tensor functor there into a finite direct sum, which preserves short exact sequences coordinatewise; stalkwise exactness then gives exactness of the sheaf sequence. No new nodes were needed.",
+  "blueprint": "Realizes the exactness sentence in the proof of lem-sc-ext-locally-free, namely that tensoring with a locally free module is exact.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-tensor",
+    "why": "Its Stacks 01CB tensor-stalk comparison is a generic ringed-space tool; this Picard-duality unit has no statement for it."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Its Stacks 01AG stalkwise criterion is a generic ringed-space tool; this Picard-duality unit has no statement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-tensor",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-module-stalk-tensor",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ete",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ete (reviewer sub-agent of L); spot-checked: Source: Stacks Modules Tag 05NE (modules-lemma-flat-stalks-flat), first implication, with 01CB (stalk of tensor) and 01AG (abelian, stalkwise exactness); the item statement (scheme X, P finite locally free with ranks d_a varying on a cover, P tensor - preserves short exact sequences) is the specialization of 05NE to finite free stalks; it involves no Ext, so the ill-posed def-sc-ext-sheaf does not affect it and it is true. Only proof, proof_deps, proof_origin, status, split_report changed against sheaf-dag (diffed). Step 1: def-weil-pbc-module-stalk gives the O_{X,x}-module structure on stalks and stalk maps; P_x = O_{X,x}^{d_a} from the local trivialization is elementary. Step 2: lem-weil-pbc-module-stalk-tensor states the stalk-tensor isomorphism natural in both variables, so the stalk of 1 tensor g is 1 tensor g_x; finite free tensor = direct sum is elementary. Step 3: lem-weil-pbc-module-stalk-exact clause (5) both directions (end positions via zero terms) plus coordinatewise exactness of finite sums. Tool uses lem-weil-pbc-module-stalk-tensor and lem-weil-pbc-module-stalk-exact accepted as generic ringed-space black boxes (C8). No new nodes, no leaves. Small cases: d=0, d=1, two components of different rank, nonsplit sequence. FIX: dag/nodes/sec-picard-framework/lem-sc-ext-tensor-exact.json: proof[2].source.place: label lemma-flat-stalks corrected to lemma-flat-stalks-flat. Start Sat Oct 10 03:38:52 PM UTC 2026, end Sat Oct 10 03:39:09 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

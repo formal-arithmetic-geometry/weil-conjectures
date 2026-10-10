@@ -1828,3 +1828,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:39 L: merged deliver/M1/lem-sc-ext-derived-composite (reviewer FIX; first push; new nodes: 0)
 - 15:39 L: merged deliver/C1/lem-sc-dvr-fg-torsionfree-free (reviewer FIX; first push; new nodes: 0)
 - 15:39 L: lemma-weil-pbc-leray-acyclicity lead_note: enough injectives needed on the source only (reviewer R-edc)
+- 15:39 L: merged deliver/G1/lem-sc-ext-tensor-exact (reviewer FIX; first push; new nodes: 0)
