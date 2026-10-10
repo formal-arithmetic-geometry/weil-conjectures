@@ -1,8 +1,8 @@
 # Work queue
 
-900 items; claim with `tools/claim.py next <group> [--stage N]`.
+899 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (655)
+## Stage 1: nodes to split (654)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-popescu-solution-modulo-choose` | 1012 | none |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1012 | none |
 | `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1012 | none |
 | `lem-weil-pbc-quasi-finite-affine-open-in-finite` | 1012 | none |
@@ -912,7 +911,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 667 nodes that wait for stage 1, 533 nodes that wait for a statement dependency.
+Not open yet: 666 nodes that wait for stage 1, 534 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
