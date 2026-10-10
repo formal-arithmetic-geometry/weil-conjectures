@@ -15,6 +15,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
+public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
+public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 
 /-!
 
@@ -375,22 +377,117 @@ theorem boundedConstructible_of_homology
 
 end Triangulated
 
+section Local
+
+attribute [local instance] Abelian.hasFiniteBiproducts
+
+/-- Blueprint `def-pod-perfect-complex-on-x`: a complex `K` of pro-étale `Λ`-sheaves on `X` is
+*locally perfect* if there is a pro-étale covering family `g i : W i ⟶ X` such that every
+derived pullback `Lg_i^* K` is quasi-isomorphic to a bounded complex of finite projective
+`Λ_{W_i}`-modules, that is, of direct summands of finite free modules. -/
+def IsLocallyPerfect (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X)
+    (ModuleCat.{u + 1} Λ))) : Prop :=
+  ∃ (ι : Type (u + 1)) (W : ι → Scheme.{u}) (g : ∀ i, W i ⟶ X),
+    Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X ∧
+      ∀ i, ∃ (P : CochainComplex (Sheaf (Scheme.ProEt.topology (W i))
+          (ModuleCat.{u + 1} Λ)) ℤ) (a b : ℤ), P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
+        (∀ n, ∃ r : ℕ, Nonempty (Retract (P.X n) (⨁ fun _ : Fin r ↦
+          𝟙_ (Sheaf (Scheme.ProEt.topology (W i)) (ModuleCat.{u + 1} Λ))))) ∧
+        Nonempty ((L((g i)^*[ModuleCat.{u + 1} Λ])).obj K ≅ _root_.DerivedCategory.Q.obj P)
+
+omit [Finite Λ] in
+/-- Blueprint `sk-def-perfect`: Perfectness at the point and on `X`.
+
+An object `K ∈ D(X_proét, Λ)` which is perfect over `Λ_X`, that is dualizable, is locally
+quasi-isomorphic to a bounded complex of finite projective `Λ_X`-modules. -/
+theorem isLocallyPerfect_of_isDualizable
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : IsDualizable K) : IsLocallyPerfect Λ K :=
+  sorry
+
+variable {Λ}
+
+omit [Finite Λ] in
+/-- Being locally constant with finite stalks is invariant under isomorphism. -/
+theorem isFiniteLocallyConstant_of_iso
+    {F G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} (e : F ≅ G)
+    (hF : IsFiniteLocallyConstant Λ F) : IsFiniteLocallyConstant Λ G := by
+  obtain ⟨ι, W, g, hg, h⟩ := hF
+  refine ⟨ι, W, g, hg, fun i ↦ ?_⟩
+  obtain ⟨M, hM, ⟨e'⟩⟩ := h i
+  exact ⟨M, hM, ⟨((g i)^*[ModuleCat.{u + 1} Λ]).mapIso e.symm ≪≫ e'⟩⟩
+
+omit [Finite Λ] in
+/-- Being locally constant with finite stalks is local for the pro-étale topology. -/
+theorem isFiniteLocallyConstant_of_cover
+    {F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} {ι : Type (u + 1)}
+    {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ X)
+    (hg : Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X)
+    (h : ∀ i, IsFiniteLocallyConstant Λ (((g i)^*[ModuleCat.{u + 1} Λ]).obj F)) :
+    IsFiniteLocallyConstant Λ F := by
+  choose σ V f hf hc using h
+  refine ⟨Σ i, σ i, fun p ↦ V p.1 p.2, fun p ↦ f p.1 p.2 ≫ g p.1,
+    Precoverage.IsStableUnderComposition.comp_mem_coverings g hg f hf, fun ⟨i, j⟩ ↦ ?_⟩
+  obtain ⟨M, hM, ⟨e⟩⟩ := hc i j
+  exact ⟨M, hM, ⟨(upperStarComp _ (f i j) (g i)).app F ≪≫ e⟩⟩
+
+omit [Finite Λ] in
+/-- The cohomology sheaves of a bounded complex of finite projective `Λ_W`-modules on the small
+pro-étale site of `W` are locally constant with finite stalks. -/
+theorem isFiniteLocallyConstant_homology_of_retract [Finite Λ] {W : Scheme.{u}}
+    (P : CochainComplex (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} Λ)) ℤ)
+    (hP : ∀ n, ∃ r : ℕ, Nonempty (Retract (P.X n) (⨁ fun _ : Fin r ↦
+      𝟙_ (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} Λ))))) (n : ℤ) :
+    IsFiniteLocallyConstant Λ (P.homology n) :=
+  sorry
+
+omit [Finite Λ] in
+/-- A locally perfect complex on a quasi-compact scheme is bounded. -/
+theorem bounded_of_isLocallyPerfect [CompactSpace X]
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : IsLocallyPerfect Λ K) : _root_.DerivedCategory.TStructure.t.bounded K :=
+  sorry
+
 variable [IsNoetherian X] in
 /-- A perfect complex of pro-étale `Λ`-sheaves on a Noetherian scheme is bounded, and each of its
 cohomology sheaves is `ν^*` of a constructible étale sheaf.
 
-This is the part of `prop-pod-perfect-local-model` which is not formalised: it needs the local
-description of perfect complexes (`sk-def-perfect`, Stacks, Tag 0FPV), the local constancy of the
-cohomology of a bounded complex of finite projective `Λ_W`-modules, and the comparison between
-pro-étale and étale constructibility (`lem-sf-proetale-constructible-origin`). -/
+It is locally quasi-isomorphic to a bounded complex `P` of finite projective modules
+(`sk-def-perfect`), so it is bounded (`bounded_of_isLocallyPerfect`) and its cohomology sheaves
+are locally those of `P`, hence locally constant with finite stalks
+(`isFiniteLocallyConstant_homology_of_retract`, `isFiniteLocallyConstant_of_cover`). They are
+then constructible for the trivial stratification, hence of étale origin
+(`lem-sf-proetale-constructible-origin`). -/
 theorem bounded_and_homology_of_isDualizable
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : IsDualizable K) :
     _root_.DerivedCategory.TStructure.t.bounded K ∧
       ∀ n, ∃ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf F ∧
         Nonempty ((ν^*(X)[ModuleCat.{u + 1} Λ]).obj F ≅
-          (_root_.DerivedCategory.homologyFunctor _ n).obj K) :=
-  sorry
+          (_root_.DerivedCategory.homologyFunctor _ n).obj K) := by
+  have hK' := isLocallyPerfect_of_isDualizable Λ hK
+  refine ⟨bounded_of_isLocallyPerfect hK', fun n ↦ ?_⟩
+  obtain ⟨ι, W, g, hg, hP⟩ := hK'
+  have hloc : IsFiniteLocallyConstant Λ
+      ((_root_.DerivedCategory.homologyFunctor _ n).obj K) := by
+    refine isFiniteLocallyConstant_of_cover g hg fun i ↦ ?_
+    obtain ⟨P, a, b, _, _, hr, ⟨e⟩⟩ := hP i
+    exact isFiniteLocallyConstant_of_iso
+      (((_root_.DerivedCategory.homologyFunctor _ n).mapIso e ≪≫
+        (_root_.DerivedCategory.homologyFunctorFactors _ n).app P).symm ≪≫
+        ((leftDerivedUpperStarHomologyFunctorIso _ (g i) n).app K).symm)
+      (isFiniteLocallyConstant_homology_of_retract P hr n)
+  -- the trivial stratification of `X`
+  let S : Stratification X := Stratification.ofNoetherianSpace 1 (fun _ ↦ Set.univ)
+    (fun _ ↦ isOpen_univ.isLocallyClosed) (Set.iUnion_const _) (fun i j h ↦ (h (Subsingleton.elim i j)).elim)
+    (fun _ ↦ X) (fun _ ↦ 𝟙 X) (fun _ ↦ inferInstance) (fun _ ↦ by simp)
+  obtain ⟨F, hF, e⟩ := exists_isConstructibleSheaf_iso_comparisonUpperStar_obj Λ
+    (F := (_root_.DerivedCategory.homologyFunctor _ n).obj K) ⟨S, fun _ ↦
+      isFiniteLocallyConstant_of_iso ((upperStarId _ X).app _).symm hloc⟩
+  exact ⟨F, hF, e⟩
+
+end Local
+
 
 variable [IsNoetherian X] in
 /-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
@@ -409,7 +506,7 @@ theorem constructibleFiniteTor_of_isDualizable
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K := by
   have hbc {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
       (hL : IsDualizable L) : boundedConstructible (ModuleCat.{u + 1} Λ) X L :=
-    have h := bounded_and_homology_of_isDualizable Λ hL
+    have h := bounded_and_homology_of_isDualizable hL
     boundedConstructible_of_homology Λ h.1 h.2
   refine ⟨hbc hK, ?_⟩
   obtain ⟨_⟩ := hK
