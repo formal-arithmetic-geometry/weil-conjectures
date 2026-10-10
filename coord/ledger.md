@@ -2479,3 +2479,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:08 L: merged deliver/K1/lem-sc-positive-ample-hilbert-degree (reviewer FIX; after a return; new nodes: 4)
 - 20:08 L: merged deliver/G1/lem-pc-proper-perfect-direct-image-perfect (reviewer FIX; first push; new nodes: 1)
 - 20:08 L: merged deliver/F1/thm-pqf-finite-iff-proper-finite-fibres (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 20:08 L: merged deliver/J1/lem-pc-fppf-affine-site-topos-equivalence (reviewer FIX; first push; new nodes: 3)
