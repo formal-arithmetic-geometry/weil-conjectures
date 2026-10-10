@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "place": "Step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
    "via": [
     "lem-weil-pbc-depth-in-ses",
     "lem-weil-pbc-cm-local-free-resolution-to-mcm",
@@ -17,7 +17,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Depth of a finite module over a Noetherian local ring via Ext from the residue field",
@@ -32,9 +32,90 @@
   "def-pc-ext",
   "def-weil-pbc-depth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $d=\\operatorname{depth}(M)$. Since $R$ is local, $\\mathfrak m$ is its Jacobson radical. If $\\mathfrak mM=M$, Nakayama [lem-weil-pbc-nakayama-jacobson] gives $M=0$, contrary to hypothesis. Thus $d$ is the supremum of lengths of $M$-regular sequences in $\\mathfrak m$ [def-weil-pbc-depth]. By [lem-weil-pbc-depth-le-support-dimension], $d\\le\\dim\\operatorname{Supp}(M)$; every chain in $\\operatorname{Supp}(M)$ is a chain in $\\operatorname{Spec}(R)$, so $\\dim\\operatorname{Supp}(M)\\le\\dim R$. The latter is finite by [lem-weil-pbc-noetherian-local-finite-krull-dimension]. Hence $d$ is a finite nonnegative integer. We induct on $d$, keeping the statement for every nonzero finite module over a Noetherian local ring.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson",
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-depth-le-support-dimension",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LW (lemma-depth-ext), opening and induction; Definition Tag 00LI (definition-depth); Lemma Tag 00LK (lemma-bound-depth); Proposition Tag 00KQ (proposition-dimension)"
+   }
+  },
+  {
+   "text": "An $R$-linear map $\\kappa=R/\\mathfrak m\\to M$ is determined by the image $z$ of $1$; it is nonzero exactly when $z\\neq0$, and it is well defined exactly when $\\mathfrak m z=0$. For nonzero $z$, its annihilator is then precisely $\\mathfrak m$ because $\\mathfrak m$ is maximal. By [lem-weil-pbc-ext-zero-hom], $\\operatorname{Ext}^0_R(\\kappa,M)\\neq0$ exactly when $\\mathfrak m$ is an associated prime of $M$. By [lem-weil-pbc-nonzerodivisor-if-maximal-not-associated], if $\\mathfrak m$ is not associated, it contains a nonzerodivisor on $M$, so $d\\ge1$. Conversely, if $\\mathfrak m$ is associated, every $x\\in\\mathfrak m$ kills the associated nonzero element, so there is no $M$-regular sequence of positive length in $\\mathfrak m$; the empty sequence gives $d=0$. Consequently $d=0$ if and only if $\\operatorname{Ext}^0_R(\\kappa,M)\\neq0$, proving the base case and giving, when $d>0$, both $\\operatorname{Ext}^0_R(\\kappa,M)=0$ and a nonzerodivisor $x\\in\\mathfrak m$ on $M$.",
+   "uses": [
+    "def-pc-ext",
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-ext-zero-hom",
+    "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LW (lemma-depth-ext), proof paragraph beginning 'By Lemma lemma-ideal-nonzerodivisor'; Lemma Tag 00LL (lemma-ideal-nonzerodivisor), for I = m"
+   }
+  },
+  {
+   "text": "Suppose $d>0$. Since the finite supremum of regular-sequence lengths is $d$, a sequence $x,f_2,\\ldots,f_d$ of length $d$ exists. Choose this $x$, which is a nonzerodivisor on $M$, and put $Q=M/xM$. The tail is $Q$-regular: the successive quotients $Q/(f_2,\\ldots,f_j)Q$ equal $M/(x,f_2,\\ldots,f_j)M$, and the last quotient is nonzero. Thus $Q$ is nonzero and finite, and its depth is at least $d-1$. Conversely every $Q$-regular sequence $g_1,\\ldots,g_r$ in $\\mathfrak m$ prepends with $x$ to an $M$-regular sequence: injectivity at the first position is the choice of $x$, and at all subsequent positions and for the last nonzero quotient the same quotient identification applies. Hence $r+1\\le d$ for every such sequence, so $\\operatorname{depth}(Q)=d-1$. The induction hypothesis gives $\\operatorname{Ext}^j_R(\\kappa,Q)=0$ for $j<d-1$ and $\\operatorname{Ext}^{d-1}_R(\\kappa,Q)\\ne0$.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00LW (lemma-depth-ext), choice of x with depth(M/xM) = depth(M)-1; the choice is justified directly from the maximal-length regular sequence and its quotient identifications, without invoking the later depth-drop lemma."
+   }
+  },
+  {
+   "text": "Multiplication by $x$ is injective on $M$, so $0\\to M\\xrightarrow{x}M\\to Q\\to0$ is a short exact sequence. Apply [lem-weil-pbc-ext-long-exact-second-variable] to it with first argument $\\kappa$. Since $x\\in\\mathfrak m$, $x\\kappa=0$, and [lem-weil-pbc-ext-annihilated-by-first-argument] says each map $\\operatorname{Ext}^j_R(\\kappa,M)\\xrightarrow{x}\\operatorname{Ext}^j_R(\\kappa,M)$ in the long exact sequence is zero. Step 2 already gives $\\operatorname{Ext}^0_R(\\kappa,M)=0$ because $d>0$. For every $j\\ge0$, exactness and the zero scalar maps give a short exact sequence $0\\to\\operatorname{Ext}^j_R(\\kappa,M)\\to\\operatorname{Ext}^j_R(\\kappa,Q)\\to\\operatorname{Ext}^{j+1}_R(\\kappa,M)\\to0$.",
+   "uses": [
+    "lem-weil-pbc-ext-long-exact-second-variable",
+    "lem-weil-pbc-ext-annihilated-by-first-argument"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LW (lemma-depth-ext), displayed long exact Ext sequence and following sentence; Lemma Tag 00LU (lemma-long-exact-seq-ext); Lemma Tag 00LV (lemma-annihilate-ext)"
+   }
+  },
+  {
+   "text": "For $j<d-1$, the middle group $\\operatorname{Ext}^j_R(\\kappa,Q)$ in the short exact sequence of Step 4 is zero by Step 3, so both $\\operatorname{Ext}^j_R(\\kappa,M)$ and $\\operatorname{Ext}^{j+1}_R(\\kappa,M)$ are zero. Together with $\\operatorname{Ext}^0_R(\\kappa,M)=0$ from Step 2, this gives vanishing for all $j<d$. At $j=d-1$, the first group $\\operatorname{Ext}^{d-1}_R(\\kappa,M)$ is zero (from Step 2 when $d=1$, or from the preceding vanishing when $d>1$), while $\\operatorname{Ext}^{d-1}_R(\\kappa,Q)$ is nonzero by Step 3. The short exact sequence therefore identifies it with $\\operatorname{Ext}^{d}_R(\\kappa,M)$, which is nonzero. Thus $d$ is the least degree of nonzero Ext, completing the induction and giving existence of that degree.",
+   "uses": [
+    "lem-weil-pbc-ext-long-exact-second-variable",
+    "lem-weil-pbc-ext-annihilated-by-first-argument"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LW (lemma-depth-ext), final sentence 'Thus it is clear that i(M/xM) = i(M) - 1. Induction on delta(M) finishes the proof', with the vanishing induction written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nakayama-jacobson",
+  "def-weil-pbc-depth",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "def-pc-ext",
+  "lem-weil-pbc-ext-zero-hom",
+  "lem-weil-pbc-nonzerodivisor-if-maximal-not-associated",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-ext-long-exact-second-variable",
+  "lem-weil-pbc-ext-annihilated-by-first-argument"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00LW (lemma-depth-ext), with finite depth from the support-dimension bound and finite local dimension; its chosen element is taken as the first element of a maximal-length regular sequence, avoiding the later depth-drop theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -79,7 +160,7 @@
   "line": 158,
   "how": "Rees' theorem (read by sed -n 130,175p): for R Noetherian, M finite with IM < M and n : ℕ, Ext^i(R/I, M) = 0 for all i < n iff there is an M-regular sequence of length n in I. With I = m this gives: depth(M) ≥ n iff Ext^i(κ,M) = 0 for i < n, once one adds (a) Nakayama (mM ≠ M for M nonzero finite over a local ring), (b) the agreement of Mathlib's RingTheory.Sequence.IsRegular with the regular sequences of [def-weil-pbc-depth] and that a regular sequence of length ≥ n has an initial piece of length n which is regular, (c) Shrink (R ⧸ I) ≅ R/I and Mathlib's Ext against [def-pc-ext], and (d) finiteness of depth(M) (Stacks 00LR/00LK) for the existence of a nonzero Ext. Several lines, not one: candidate, not a leaf (B8). Upstream Mathlib (not pinned) has IsLocalRing.depth_eq_sSup_length_isRegular in RingTheory/Depth/Basic.lean."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -99,5 +180,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-depth-ext",
+  "worker": "stage1",
+  "summary": "Checked 00LW against algebra.tex and cited node statements. Preserved the theorem, normalized TeX escaping, and repaired the prior split: choose the first element of a maximal-length regular sequence and prove quotient depth d-1 by prepending/tail quotient identifications. This removes the potentially circular depth-drop edge. Wrote the exact-sequence induction including d=1 and existence of nonzero Ext; added exact Mathlib leaves for zeroth Ext and Ext annihilation.",
+  "blueprint": "The split realizes Step 7 of the split of [thm-weil-pbc-finite-etale-lifting] (Stacks Lemma 0GS2, essential-surjectivity paragraphs) through the recorded chain of finite-etale lifting, G-ring, regular-local, Cohen-Macaulay, and depth-in-short-exact-sequence nodes. In particular, [lem-weil-pbc-depth-in-ses] uses the 00LW depth-by-Ext characterization supplied here. Steps 1-5 expand 00LW: finite depth, the degree-zero case, quotient by the first element of a maximal regular sequence, the long exact Ext sequence and scalar annihilation, and induction including depth one."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 00LW checked (Nakayama, Ext^0 = Hom and associated primes, induction on depth via the nonzerodivisor sequence); Mathlib Ext/Basic.lean:317 and ModuleCat/Ext/Basic.lean:35 read; the new annihilator leaf duplicates lem-weil-pbc-ext-annihilator-first-variable, merged by L"
+ }
 }
