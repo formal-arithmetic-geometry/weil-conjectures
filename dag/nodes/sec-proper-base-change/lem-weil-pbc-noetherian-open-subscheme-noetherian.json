@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); via Stacks 01YD (proof: 'Note that $X\\setminus Z'$ is a Noetherian scheme')",
+   "via": [
+    "lem-weil-pbc-coherent-support-union-exact-sequence",
+    "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An open subscheme of a Noetherian scheme is Noetherian",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], i.e. locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-scheme-conventions], and let $V\\subseteq X$ be an open subset, regarded as the open subscheme $(V,\\mathcal O_X|_V)$. Then $V$ is a Noetherian scheme: it is locally Noetherian and its underlying topological space is quasi-compact.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01OW (label lemma-locally-Noetherian, properties.tex line 436, last sentence: every open subscheme of a locally Noetherian scheme is locally Noetherian); Properties, Lemma 01OZ (lemma-Noetherian-topology, line 496: a Noetherian scheme has a Noetherian underlying space); Topology, Lemma 0052 (lemma-Noetherian (1): a subspace of a Noetherian space is Noetherian) and Lemma 04ZA (lemma-Noetherian-quasi-compact (1): a Noetherian space is quasi-compact). Used in Cohomology of Schemes 01YD, proof ('Note that $X\\setminus Z'$ is a Noetherian scheme'). Tags verified in literature/stacks-project/tags/tags."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open subscheme of a Noetherian scheme is Noetherian",
+   "results": "AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion, IsNoetherian, IsLocallyNoetherian.component_noetherian, noetherianSpace_of_isAffineOpen, instIsLocallyNoetherianXScheme, IsNoetherian.noetherianSpace (all Mathlib.AlgebraicGeometry.Noetherian)",
+   "date": "2026-10-10",
+   "verdict": "match by clauses: locally Noetherian (instance for X.Opens) and compactness (via NoetherianSpace)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsOpenImmersion",
+   "results": "isNoetherian_iff_of_finite_affine_openCover (Mathlib.AlgebraicGeometry.Noetherian) only",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; see clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an open subset of a Noetherian scheme, as an open subscheme, is a Noetherian scheme (locally Noetherian and quasi-compact)",
+   "results": "AlgebraicGeometry.instIsLocallyNoetherianToScheme ({U : X.Opens} [IsLocallyNoetherian X] : IsLocallyNoetherian U), noetherianSpace_of_isAffineOpen, instIsLocallyNoetherianXScheme, IsNoetherian.noetherianSpace, IsNoetherian.toIsLocallyNoetherian (Mathlib.AlgebraicGeometry.Noetherian)",
+   "date": "2026-10-10",
+   "verdict": "match by clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|theorem\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Noetherian.lean; grep -rn 'NoetherianSpace.isCompact' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/NoetherianSpace.lean; grep -rn 'theorem isCompact_iff_compactSpace' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology",
+   "results": "Noetherian.lean:158 instance {U : X.Opens} [IsLocallyNoetherian X] : IsLocallyNoetherian U; Noetherian.lean:280 class IsNoetherian extends IsLocallyNoetherian X, CompactSpace X; Noetherian.lean:320 instance IsNoetherian.noetherianSpace; Topology/NoetherianSpace.lean:65 NoetherianSpace.isCompact (s : Set α) : IsCompact s; Topology/Compactness/Compact.lean:1057 isCompact_iff_compactSpace; no direct instance IsNoetherian U",
+   "date": "2026-10-10",
+   "verdict": "match by clauses (one declaration per clause)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instIsLocallyNoetherianToScheme; AlgebraicGeometry.IsNoetherian.noetherianSpace; TopologicalSpace.NoetherianSpace.isCompact; isCompact_iff_compactSpace",
+  "file": "Mathlib/AlgebraicGeometry/Noetherian.lean",
+  "how": "one declaration per clause: IsNoetherian X is the class at Mathlib/AlgebraicGeometry/Noetherian.lean line 280 (extends IsLocallyNoetherian X, CompactSpace X); locally Noetherian: the instance `instance {U : X.Opens} [IsLocallyNoetherian X] : IsLocallyNoetherian U` at Noetherian.lean line 158; quasi-compact: IsNoetherian.noetherianSpace (Noetherian.lean line 320) gives NoetherianSpace X, NoetherianSpace.isCompact (Mathlib/Topology/NoetherianSpace.lean line 65) gives IsCompact (U : Set X), and isCompact_iff_compactSpace (Mathlib/Topology/Compactness/Compact.lean line 1057) turns it into CompactSpace U; together IsNoetherian U by the constructor of the class."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-support-union-exact-sequence",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: composed Mathlib leaf checked (IsNoetherian Noetherian.lean:280, locally Noetherian open instance :158, NoetherianSpace.isCompact) (01OZ, 0052)"
+}
