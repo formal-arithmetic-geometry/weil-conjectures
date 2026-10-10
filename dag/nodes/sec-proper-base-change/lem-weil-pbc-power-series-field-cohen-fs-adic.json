@@ -32,9 +32,88 @@
   "def-weil-pbc-cohen-ring",
   "def-weil-pbc-formally-smooth-adic"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Clauses (1) and (3).* Let $K$ be a field of characteristic $0$ and $S=K[[X_1,\\ldots,X_n]]$ [def-weil-pbc-multivariate-power-series]. By [lem-weil-pbc-power-series-local-ring] for the local ring $K$ (maximal ideal $0$), $S$ is local with maximal ideal $\\mathfrak m_S=\\{F:F(0)=0\\}$; this is the ideal $(X_1,\\ldots,X_n)$, since a series with zero constant term is $\\sum_iX_iF_i$ where $F_i$ collects (divided by $X_i$) the monomials whose first variable with positive exponent is $X_i$, and conversely every $X_iF$ has zero constant term. So $S$ and $\\mathfrak m_S$ are $C$ and $\\mathfrak m_C=(x_1,\\ldots,x_n)$ of part (1) of [lem-weil-pbc-power-series-cohen-formally-smooth-adic] (with $x_i=X_i$), which says that $S$ is formally smooth over $\\mathbf Q$ for the $\\mathfrak m_S$-adic topology [def-weil-pbc-formally-smooth-adic]. Let $\\Lambda$ be a Cohen ring with maximal ideal $p\\Lambda$ [def-weil-pbc-cohen-ring] (so of residue characteristic $p$) and $S=\\Lambda[[X_1,\\ldots,X_n]]$. By [lem-weil-pbc-power-series-local-ring] for the local ring $\\Lambda$, $\\mathfrak m_S=\\{F:F(0)\\in p\\Lambda\\}$, which is $(p,X_1,\\ldots,X_n)$ by the same decomposition $F=F(0)+\\sum_iX_iF_i$. Part (2) of [lem-weil-pbc-power-series-cohen-formally-smooth-adic] says that $S$ is formally smooth over $\\mathbf Z$ for this $\\mathfrak m_S$-adic topology. This proves the first and third assertions. (Source: 07NL, clauses (1) and (3), reduced in the source to $\\mathbf Q\\to K$ formally smooth, Proposition 0322, and $\\mathbf Z\\to\\Lambda$ formally smooth for the $p$-adic topology, Lemma 0329; both are carried in the cited node.)",
+   "uses": [
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-cohen-formally-smooth-adic",
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-cohen-ring",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NL, clauses (1) and (3) and the proof (lines 9718-9731)"
+   }
+  },
+  {
+   "text": "*Clause (2): the test datum.* Let $K$ be a field of characteristic $p>0$ and $S=K[[X_1,\\ldots,X_n]]$ [def-weil-pbc-multivariate-power-series], an $\\mathbf F_p$-algebra through $\\mathbf F_p\\subseteq K\\subseteq S$; as in Step 1 ([lem-weil-pbc-power-series-local-ring] for the local ring $K$), $\\mathfrak m_S=(X_1,\\ldots,X_n)$. By [def-weil-pbc-formally-smooth-adic] we must show: given a commutative ring $D$ with a ring map $\\mathbf F_p\\to D$, an ideal $J\\subseteq D$ with $J^2=0$, the quotient map $q:D\\to D/J$ [def-weil-pbc-algebra-hom-quotient], and a homomorphism of $\\mathbf F_p$-algebras $g:S\\to D/J$ with $g(\\mathfrak m_S^k)=0$ for some $k\\ge1$, there is a homomorphism of $\\mathbf F_p$-algebras $f:S\\to D$ with $q\\circ f=g$. Fix such data. Since $\\mathbf F_p\\to D$ is a ring map, $p\\cdot1_D=0$; and every ring homomorphism between rings $E,E'$ with $p\\cdot1_E=0=p\\cdot1_{E'}$ is a homomorphism of $\\mathbf F_p$-algebras, because there is only one ring map $\\mathbf F_p\\to E'$ ($n\\bmod p\\mapsto n\\cdot1_{E'}$). Since $q$ is surjective choose $d_i\\in D$ with $q(d_i)=g(X_i)$, $i=1,\\ldots,n$. As $X_i^k\\in\\mathfrak m_S^k$, $q(d_i^k)=g(X_i^k)=0$, so $d_i^k\\in J$ and $d_i^{2k}\\in J^2=0$. Let $\\mathfrak a=(d_1,\\ldots,d_n)\\subseteq D$ and $M=n(2k-1)+1$. A product of $M$ of the generators $d_1,\\ldots,d_n$ contains some $d_i$ at least $2k$ times (pigeonhole), hence is $0$; so $\\mathfrak a^M=0$, and $\\bar{\\mathfrak a}^M=q(\\mathfrak a^M)=0$ for $\\bar{\\mathfrak a}=q(\\mathfrak a)\\subseteq D/J$ (for $n=0$, $\\mathfrak a=0$ and $M=1$). A ring $T$ with an ideal $\\mathfrak b$ such that $\\mathfrak b^M=0$ is $\\mathfrak b$-adically complete [def-weil-pbc-adically-complete-ring]: for $m\\ge M$, $T/\\mathfrak b^m=T$ and the transition maps are the identity, so $T\\to\\varprojlim_mT/\\mathfrak b^m$ is injective and every compatible family is the image of its component in $T/\\mathfrak b^M=T$. Hence $D$ is $\\mathfrak a$-adically complete, $D/J$ is $\\bar{\\mathfrak a}$-adically complete, $d_i\\in\\mathfrak a$ and $g(X_i)=q(d_i)\\in\\bar{\\mathfrak a}$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-local-ring",
+    "def-weil-pbc-formally-smooth-adic",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NL clause (2); the reduction 'by the universal property of power series rings' (line 9719), written out"
+   }
+  },
+  {
+   "text": "*Clause (2): lifting on the coefficients.* The restriction $g|_K:K\\to D/J$ is a ring homomorphism, $D$ satisfies $p\\cdot1_D=0$ (Step 2) and $J^2=0$. By [lem-weil-pbc-field-char-p-nilpotent-lifting] for the field $K$ of characteristic $p$, with $N=2$, applied to $D$, $J$, $\\pi=q$ and $g|_K$, there is a ring homomorphism $h:K\\to D$ with $q\\circ h=g|_K$. (This is the formal smoothness of $\\mathbf F_p\\to K$, which the source takes from Algebra, Proposition Tag 0322: $\\mathbf F_p$ is perfect, so $K/\\mathbf F_p$ is separable, hence formally smooth.)",
+   "uses": [
+    "lem-weil-pbc-field-char-p-nilpotent-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07NL, item (2) of the reduction: 'F_p -> L is formally smooth' and 'The first two are Algebra, Proposition 0322' (lines 9722, 9727-9729)"
+   }
+  },
+  {
+   "text": "*Clause (2): extension to the power series ring.* Apply [lem-weil-pbc-power-series-universal-property-complete] to $\\Lambda=K$, $T=D$ (which is $\\mathfrak a$-adically complete by Step 2), $\\alpha=h$ (Step 3) and $t_i=d_i\\in\\mathfrak a$: there is a ring homomorphism $f:S\\to D$ with $f|_K=h$ and $f(X_i)=d_i$. The two ring homomorphisms $q\\circ f$ and $g$ from $S$ to $D/J$ agree on $K$ ($q\\circ h=g|_K$) and send each $X_i$ to $q(d_i)=g(X_i)\\in\\bar{\\mathfrak a}$; by the uniqueness clause of [lem-weil-pbc-power-series-universal-property-complete] for $\\Lambda=K$, $T=D/J$ (which is $\\bar{\\mathfrak a}$-adically complete by Step 2), $\\alpha=g|_K$ and $t_i=g(X_i)$, we get $q\\circ f=g$. By Step 2 ($p\\cdot1_S=0$, $p\\cdot1_D=0$) the ring homomorphism $f$ is a homomorphism of $\\mathbf F_p$-algebras [def-weil-pbc-algebra-hom-quotient].",
+   "uses": [
+    "lem-weil-pbc-power-series-universal-property-complete",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, proof of Lemma Tag 07NL: 'By the universal property of power series rings it suffices to prove' (line 9719)"
+   }
+  },
+  {
+   "text": "*Conclusion.* For every test datum $(D,J,g,k)$ of [def-weil-pbc-formally-smooth-adic] for $\\mathbf F_p\\to S=K[[X_1,\\ldots,X_n]]$ and the ideal $\\mathfrak m_S$, Steps 2-4 give a homomorphism of $\\mathbf F_p$-algebras $f:S\\to D$ with $q\\circ f=g$; so $S$ is formally smooth over $\\mathbf F_p$ for the $\\mathfrak m_S$-adic topology. With Step 1 this proves all three assertions.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NL"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-cohen-formally-smooth-adic",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-field-char-p-nilpotent-lifting",
+  "lem-weil-pbc-power-series-universal-property-complete"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NL (lemma-power-series-ring-over-Cohen-fs, line 9704), proof lines 9718-9731, with Algebra, Proposition Tag 0322 (algebra.tex line 44475) for F_p -> K"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -66,7 +145,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -83,5 +162,13 @@
    "state": "none"
   }
  },
- "lead_note": "2026-10-10 L: near lem-weil-pbc-power-series-cohen-formally-smooth-adic (07NL, split; cases over Q and over Z) and lem-weil-pbc-field-cohen-power-series-formally-smooth (split; over Z): new here is only K[[X]] over F_p for a field K of characteristic p. Its split should cite those nodes for the other two cases."
+ "lead_note": "2026-10-10 L: near lem-weil-pbc-power-series-cohen-formally-smooth-adic (07NL, split; cases over Q and over Z) and lem-weil-pbc-field-cohen-power-series-formally-smooth (split; over Z): new here is only K[[X]] over F_p for a field K of characteristic p. Its split should cite those nodes for the other two cases.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-power-series-field-cohen-fs-adic",
+  "worker": "stage1",
+  "summary": "Read Stacks 07NL (more-algebra.tex 9704-9731), 0322 (algebra.tex 44475) and 0329; tags verified in tags/tags. As the lead note says, clauses (1) (char 0 field over Q) and (3) (Cohen ring over Z) are parts (1),(2) of lem-weil-pbc-power-series-cohen-formally-smooth-adic; Step 1 cites it, identifying the maximal ideal of K[[X]] resp. Lambda[[X]] as (X) resp. (p,X) via lem-weil-pbc-power-series-local-ring. The new clause (2), K[[X]] over F_p for a field K of characteristic p, follows the source's reduction: test datum with nilpotent ideal generated by lifts of the g(X_i) (D and D/J adically complete), coefficient lift F_p -> K by lem-weil-pbc-field-char-p-nilpotent-lifting with N=2 (which carries 0322/0320(3) for K over the perfect field F_p), extension and uniqueness by lem-weil-pbc-power-series-universal-property-complete. No new node was needed; statement unchanged. Note: the lead note's tags 07NK, 07EK and 031U are section tags (power series; regular and formally smooth; p-bases), the source proof uses 0322 directly.",
+  "blueprint": "The item serves thm-weil-pbc-finite-etale-lifting at its from.place (power-series lifting in the 07NQ formal-smoothness input of the essential-surjectivity step); Steps 1-5 realize the whole of that place for all three coefficient types (char 0 field, char p field, Cohen ring). The blueprint node's proof text does not itself spell out 07NL."
+ },
+ "reviewed": "2026-10-10 L: 5 steps: clauses (1) and (3) from the 07NL node (maximal ideals identified by the power-series local-ring leaf), clause (2) by the nilpotent lifting node for fields of characteristic p (0322) and the universal property of power series; 0 new nodes"
 }

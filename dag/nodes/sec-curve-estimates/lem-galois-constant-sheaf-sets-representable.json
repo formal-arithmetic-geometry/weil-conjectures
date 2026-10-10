@@ -1,0 +1,79 @@
+{
+ "id": "lem-galois-constant-sheaf-sets-representable",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-lc-etale",
+   "place": "proof, Step 1 ('the sheaf is finite locally constant') and Step 3 ('essential surjectivity'): the identification, implicit in Stacks 03RV's proof ('a finite etale morphism is locally isomorphic to a disjoint union of isomorphisms'), of a constant sheaf with finite value with the sheaf of sections of a finite disjoint union of copies of the base",
+   "via": [
+    "lem-galois-flc-representable"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The constant sheaf of sets with value E is represented by the disjoint union of E copies of the base",
+ "statement": "Let $U$ be a scheme [def-pc-scheme] and $E$ a set. Let $U_E=\\coprod_{e\\in E}U$ be the coproduct of copies of $U$ indexed by $E$ [lem-weil-pbc-scheme-coproduct-family], with coprojections $\\iota_e:U\\to U_E$, and let $\\pi:U_E\\to U$ be the codiagonal, the morphism with $\\pi\\circ\\iota_e=\\mathrm{id}_U$ for all $e\\in E$; regard $U_E$ as a $U$-scheme through $\\pi$. Let $h_{U_E}$ be the presheaf of sets on the small etale site $U_{\\Et}$ [def-weil-pbc-etale-site] given by $h_{U_E}(s:W\\to U)=\\operatorname{Mor}_U(W,U_E)$, restriction being composition, and let $\\underline E$ be the constant sheaf of sets on $U_{\\Et}$ with value $E$ [def-weil-pbc-constant-sheaf], with its canonical map $\\eta$ from the constant presheaf $W\\mapsto E$. Then $h_{U_E}$ is a sheaf of sets on $U_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets], and the morphism of presheaves $c$ from the constant presheaf $W\\mapsto E$ to $h_{U_E}$, $c_{(W,s)}(e)=\\iota_e\\circ s$, factors as $c=\\varphi\\circ\\eta$ for a unique morphism of sheaves $\\varphi:\\underline E\\to h_{U_E}$, and $\\varphi$ is an isomorphism. (For $E=\\varnothing$, $U_\\varnothing$ is the empty scheme.)",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Remark Tag 03P5 (remark-constant-locally-constant-maps, lines 2437-2456), stated there for an abstract group $G$, the group structure playing no role; with Groupoids, Example Tag 03YW (groupoids-example-constant-group) and Lemma Tag 03O3 (lemma-representable-sheaf-fpqc). Used in the proof of Lemma Tag 03RV (lemma-characterize-finite-locally-constant, lines 9993-10023)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf on small etale site is represented by disjoint union of copies of the scheme",
+   "results": "CategoryTheory.Sheaf.isConstant_of_iso, Sheaf.isConstant_iff_mem_essImage, Sheaf.isConstant_iff_isIso_counit_app, Sheaf.IsConstant.mk (Mathlib.CategoryTheory.Sites.ConstantSheaf); AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall (Mathlib.AlgebraicGeometry.Limits); nothing identifying a constant sheaf with a representable one",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the constant sheaf with value a set E is representable by the coproduct of copies of the base scheme indexed by E",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.representableBy / isRepresentable / yonedaIsoSheaf (Mathlib.AlgebraicGeometry.Sites.Representability, Zariski gluing), Presheaf.freeYoneda_obj, Scheme.coprodPresheafObjIso, Sheaf.isSheaf_of_isRepresentable (canonical topology)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "results": "no declarations",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln 'sigma\\|Sigma' .../Mathlib/AlgebraicGeometry/Sites",
+   "results": "no constantSheaf in AlgebraicGeometry; Sites/BigZariski.lean, Sites/Representability.lean, Sites/SheafQuasiCompact.lean use Sigma for Zariski representability only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-flc-representable",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
