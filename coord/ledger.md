@@ -1621,3 +1621,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:29 L: merged deliver/F1/lem-sc-dim-one-quasi-projective (reviewer FIX; first push; new nodes: 1)
 - 14:29 L: accepted lem-sc-zero-generic-acyclic: 6 steps (0F1F), new node lem-sc-dim-one-point-outside-open-closed attached and closed, tool_uses 5
 - 14:29 L: merged deliver/G1/lem-weil-pbc-pullback-ample-invertible (reviewer FIX; first push; new nodes: 0)
+- 14:29 L: lem-sc-dim-one-quasi-projective proof_origin set to document (0A25; reviewer's doubt)
