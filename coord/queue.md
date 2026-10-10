@@ -1,6 +1,6 @@
 # Work queue
 
-909 items; claim with `tools/claim.py next <group> [--stage N]`.
+910 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (627)
 
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-cartier-equality` | 1013 | none |
 | `lem-weil-pbc-closed-point-dimension-local-ring` | 1013 | none |
 | `lem-weil-pbc-cm-local-free-resolution-to-mcm` | 1013 | none |
 | `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1013 | none |
@@ -122,6 +121,7 @@
 | `lem-weil-pbc-transitivity-gamma` | 1013 | none |
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
 | `lem-weil-pbc-zariski-open-restriction-injectives` | 1013 | none |
+| `lem-weil-pbc-finitely-generated-field-complete-intersection-model` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -634,7 +634,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (282)
+## Stage 2: nodes to state (283)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -669,6 +669,7 @@
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-cofinal-coverings` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
+| `lem-weil-pbc-cartier-equality` | 1 | state |
 | `lem-weil-pbc-cauchy-binet` | 1 | state |
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-existence` | 1 | state |
