@@ -1205,3 +1205,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:03 L: accepted lem-weil-pbc-power-series-universal-property-complete (agent proof, 6 steps, 0 new).
 - 10:03 L: accepted lem-weil-pbc-associated-primes-exact-sequence (02M3 any ring, 3 elementary steps).
 - 10:06 L: accepted lem-weil-pbc-n2-ascends-finite-domain-extension (032I finite case, 6 steps, 0 new). Note for stage 3: lem-weil-pbc-finite-over-nagata-nagata step 3 applies integral-transitive loosely (needs the ring map B -> T_B).
+- 10:06 L: accepted lem-weil-pbc-power-series-n2 (032Q; new 032K N-2 clause and 0BI0 nodes).

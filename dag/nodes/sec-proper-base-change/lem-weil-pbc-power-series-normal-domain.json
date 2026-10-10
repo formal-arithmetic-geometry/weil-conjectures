@@ -1,0 +1,90 @@
+{
+ "id": "lem-weil-pbc-power-series-normal-domain",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, 'In the case k[[X_1,...,X_d]] we reduce to the statement that a field is N-2 by Lemma lemma-power-series-over-N-2' and the same reduction in the case Lambda[[X_1,...,X_d]], proof of Algebra 032W (via lem-weil-pbc-complete-local-nagata); within it, the proof of Algebra 032Q (lemma-power-series-over-N-2): 'By Lemma lemma-power-series-over-Noetherian-normal-domain we see that $R'[[x]]$ is a normal domain' (third sentence)",
+   "via": [
+    "lem-weil-pbc-power-series-n2",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A power series ring over a Noetherian normal domain is a Noetherian normal domain",
+ "statement": "Let $R$ be a Noetherian [def-weil-pbc-noetherian-ring] normal domain [def-weil-pbc-normal-ring], and let $R[[x]]$ be the ring of formal power series in one variable $x$ over $R$ [def-weil-pbc-multivariate-power-series] (the case $n=1$). Then $R[[x]]$ is a Noetherian normal domain: it is Noetherian, an integral domain, and every element of its fraction field which is a root of a monic polynomial with coefficients in $R[[x]]$ lies in $R[[x]]$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0BI0 (lemma-power-series-over-Noetherian-normal-domain), lines 8149-8174, statement and proof (Laurent series over the fraction field, Lemma almost-integral)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "power series ring over a Noetherian integrally closed domain is integrally closed",
+   "results": "instIsIntegrallyClosedPolynomialOfIsDomain (Mathlib.RingTheory.Polynomial.IsIntegral, polynomial ring only), IsIntegrallyClosed, PowerSeries.instIsDomain (Mathlib.RingTheory.PowerSeries.NoZeroDivisors), PowerSeries.isNoetherianRing; nothing on IsIntegrallyClosed R[[X]]",
+   "date": "2026-10-10",
+   "verdict": "no match (only the Noetherian and domain clauses: PowerSeries.instIsNoetherianRing, PowerSeries.instIsDomain)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "R[[X]] is integrally closed (normal) when R is a Noetherian normal domain",
+   "results": "PowerSeries.isNoetherianRing, PowerSeries.instIsNoetherianRing, instIsIntegrallyClosedPolynomialOfIsDomain, completeIntegralClosure_eq_integralClosure, isAlmostIntegral_iff_isIntegral (Mathlib.RingTheory.IntegralClosure.IsIntegral.AlmostIntegral, the tool of the source proof), integralClosure.isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed (PowerSeries _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn IsIntegrallyClosed Mathlib/RingTheory/PowerSeries Mathlib/RingTheory/MvPowerSeries; grep -rln PowerSeries Mathlib | xargs grep -ln 'IsIntegrallyClosed\\|integralClosure' (slopmaster2 Mathlib)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-power-series-n2",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 0BI0"
+}

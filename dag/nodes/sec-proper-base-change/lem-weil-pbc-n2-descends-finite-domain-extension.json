@@ -1,0 +1,92 @@
+{
+ "id": "lem-weil-pbc-n2-descends-finite-domain-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, 'In the case k[[X_1,...,X_d]] we reduce to the statement that a field is N-2 by Lemma lemma-power-series-over-N-2' and the same reduction in the case Lambda[[X_1,...,X_d]], proof of Algebra 032W (via lem-weil-pbc-complete-local-nagata); within it, the proof of Algebra 032Q (lemma-power-series-over-N-2): 'Then Lemma lemma-finite-extension-N-2 shows that $R[[x]]$ is N-2' (last sentence)",
+   "via": [
+    "lem-weil-pbc-power-series-n2",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "N-2 descends along a finite extension of Noetherian domains",
+ "statement": "Let $A\\subseteq B$ be integral domains such that $A$ is Noetherian [def-weil-pbc-noetherian-ring] and $B$ is a finitely generated $A$-module [def-weil-finitely-generated-module]. If $B$ is N-2 [def-weil-pbc-japanese-domain], then $A$ is N-2: for every finite field extension $L$ [def-pc-field-extension] of the fraction field $K$ of $A$, the integral closure of $A$ in $L$ [def-weil-pbc-integral-closure] is a finitely generated $A$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2), lines 45256-45266, N-2 clause ('If $S$ is N-2, then so is $R$'); the proof is 'Omitted. (Hint: Integral closures of $R$ in extension fields are contained in integral closures of $S$ in extension fields.)'"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-japanese-domain",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite extension of domains, integral closure of the smaller ring in a finite field extension is finite if it holds for the larger ring",
+   "results": "integralClosure.isIntegrallyClosedOfFiniteExtension (Mathlib.RingTheory.IntegralClosure.IntegrallyClosed), IsIntegralClosure.finite (Mathlib.RingTheory.DedekindDomain.IntegralClosure, separable case over a normal base), Ring.instIsIntegrallyClosedNormalClosure, integralClosure.isFractionRing_of_finite_extension; no N-2 descent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian domain R contained in finite extension domain S; if integral closure of S in every finite extension of its fraction field is finite then the same for R",
+   "results": "IsIntegralClosure.isNoetherianRing, IsIntegralClosure.isNoetherian, integralClosure.isNoetherianRing, IsIntegralClosure.finite (all separable, integrally closed base), Ring.instFiniteNormalClosure; no N-2 notion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite _ (integralClosure _ _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'japanese\\|universally japanese\\|N-2' Mathlib/RingTheory (slopmaster2 Mathlib)",
+   "results": "none: Mathlib has no N-1/N-2 (Japanese) predicate",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-power-series-n2",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 032K (N-2 clause)"
+}
