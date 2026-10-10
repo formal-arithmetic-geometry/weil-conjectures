@@ -1,0 +1,77 @@
+{
+ "id": "lem-weil-pbc-finite-over-field-affine-finite-dim",
+ "kind": "statement",
+ "title": "A scheme finite over a field is affine, the spectrum of a finite-dimensional algebra",
+ "statement": "Let $k$ be a field and let $T$ be a scheme [def-pc-scheme] with a morphism $t:T\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum] which is finite [def-weil-finite-integral-morphism]. Make $B=\\Gamma(T,\\mathcal O_T)$ a $k$-algebra through the ring map $k=\\Gamma(\\operatorname{Spec}k,\\mathcal O)\\to\\Gamma(T,\\mathcal O_T)$ induced by $t$. Then $T$ is affine, the canonical morphism $T\\to\\operatorname{Spec}B$ (corresponding to the identity of $B=\\Gamma(T,\\mathcal O_T)$) is an isomorphism of schemes over $\\operatorname{Spec}k$, and $B$ is finite-dimensional as a $k$-vector space.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Section 03J3 (section-universally-bounded), the paragraph before Definition Tag 03J4, lines 15292-15299 ('If X is finite over k, then X = Spec(A) where A is a finite k-algebra'); it unfolds Morphisms, Definition Tag 01WH (definition-integral, lines 10957-10969: finite = affine, and R -> A finite for every affine open Spec R of the target with inverse image Spec A), applied to the one affine open Spec k of Spec k"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a scheme finite over a field is affine and its global sections are a finite-dimensional algebra",
+   "results": "AlgebraicGeometry.IsFinite.toIsAffineHom, IsFinite.instHasAffineProperty...(IsAffine X ∧ (appTop f).Finite) (Mathlib.AlgebraicGeometry.Morphisms.Finite); AlgebraicGeometry.finite_appTop_of_universallyClosed (Morphisms.Proper); instIsAffineOfFiniteOfDiscreteTopology (Limits)",
+   "date": "2026-10-10",
+   "verdict": "match (one Mathlib lemma per clause, see mathlib_match)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism of schemes to the spectrum of a field: source is affine, isomorphic to Spec of its global sections, which form a finite dimensional vector space",
+   "results": "IsFinite HasAffineProperty instance (affine source and finite appTop), IsFinite.toIsAffineHom, isFinite_iff, IsFinite.SpecMap_iff (Mathlib.AlgebraicGeometry.Morphisms.Finite)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsAffine, AlgebraicGeometry.Scheme.Hom.appTop",
+   "results": "AlgebraicGeometry.Scheme.Hom.finite_appTop : [IsAffine Y] [IsFinite f] : (appTop f).hom.Finite; the HasAffineProperty instance of IsFinite (Mathlib.AlgebraicGeometry.Morphisms.Finite)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isAffine_of_isAffineHom\\|def isoSpec\\|finite_appTop\\|lemma finite_algebraMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Finiteness",
+   "results": "Morphisms/Affine.lean:185 isAffine_of_isAffineHom [IsAffineHom f] [IsAffine Y] : IsAffine X; AffineScheme.lean:68 Scheme.isoSpec (X) [IsAffine X] : X ≅ Spec Γ(X, ⊤); Morphisms/Finite.lean:170 Scheme.Hom.finite_appTop; RingTheory/Finiteness/Defs.lean:175 RingHom.finite_algebraMap : (algebraMap A B).Finite ↔ Module.Finite A B",
+   "date": "2026-10-10",
+   "verdict": "match (read in the source)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.isAffine_of_isAffineHom, AlgebraicGeometry.Scheme.isoSpec, AlgebraicGeometry.Scheme.Hom.finite_appTop, RingHom.finite_algebraMap",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/RingTheory/Finiteness/Defs.lean",
+  "how": "specializes in one line per clause, for t : T ⟶ Spec k (Spec k affine): IsFinite t extends IsAffineHom t, so isAffine_of_isAffineHom t gives IsAffine T; Scheme.isoSpec T : T ≅ Spec Γ(T, ⊤) is the canonical isomorphism (its hom is T.toSpecΓ, and Scheme.isoSpec_hom_naturality makes it compatible with t and Spec of t.appTop, i.e. over Spec k up to Γ(Spec k) ≅ k, Scheme.ΓSpecIso); Scheme.Hom.finite_appTop t : (t.appTop).hom.Finite, i.e. Module.Finite Γ(Spec k) Γ(T) (RingHom.Finite is Module.Finite for the induced algebra, RingHom.finite_algebraMap), which over the field k is FiniteDimensional",
+  "line": 185
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-fibre-degree-bound",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "import_flags": [],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match, one declaration per clause (Affine.lean:185, AffineScheme.lean:68, Finite.lean:170, Finiteness/Defs.lean:175); accepted as a leaf; stage 3 verifies the lines."
+}

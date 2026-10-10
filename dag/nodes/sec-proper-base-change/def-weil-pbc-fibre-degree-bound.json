@@ -2,10 +2,10 @@
  "id": "def-weil-pbc-fibre-degree-bound",
  "kind": "definition",
  "title": "Integers bounding the degrees of the fibres; universally bounded fibres (Stacks 03J4)",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme]. For $y\\in Y$ let $\\kappa(y)$ be the residue field [def-weil-residue-field] and $X_y=X\\times_Y\\operatorname{Spec}\\kappa(y)$ the fibre of $f$ at $y$ [def-pc-scheme-fibre] (fibre product [def-pc-fibre-product], $\\operatorname{Spec}$ as in [def-weil-affine-spectrum]), a scheme over $\\kappa(y)$ through its second projection. A scheme $T$ over a field $k$ is *finite over $k$* if its structure morphism $T\\to\\operatorname{Spec}k$ is finite [def-weil-finite-integral-morphism]; then $T$ is affine, $T\\cong\\operatorname{Spec}B$ with $B=\\Gamma(T,\\mathcal O_T)$ a $k$-algebra of finite dimension as a $k$-vector space, and the *degree* of $T$ over $k$ is $\\dim_k\\Gamma(T,\\mathcal O_T)$. (1) An integer $n\\ge0$ *bounds the degrees of the fibres of $f$* if for every $y\\in Y$ the fibre $X_y$ is finite over $\\kappa(y)$ of degree $\\dim_{\\kappa(y)}\\Gamma(X_y,\\mathcal O_{X_y})\\le n$. (2) The *fibres of $f$ are universally bounded* if there is an integer $n\\ge0$ which bounds the degrees of the fibres of $f$. (Stacks Project, Morphisms, Definition Tag 03J4, with the definition of the degree of a finite scheme over a field in the paragraph before it.)",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme]. For $y\\in Y$ let $\\kappa(y)$ be the residue field [def-weil-residue-field] and $X_y=X\\times_Y\\operatorname{Spec}\\kappa(y)$ the fibre of $f$ at $y$ [def-pc-scheme-fibre] (fibre product [def-pc-fibre-product], $\\operatorname{Spec}$ as in [def-weil-affine-spectrum]), a scheme over $\\kappa(y)$ through its second projection. A scheme $T$ over a field $k$, with structure morphism $t:T\\to\\operatorname{Spec}k$, is *finite over $k$* if $t$ is finite [def-weil-finite-integral-morphism]. For such $T$, $\\Gamma(T,\\mathcal O_T)$ is a $k$-algebra through the ring map $k=\\Gamma(\\operatorname{Spec}k,\\mathcal O)\\to\\Gamma(T,\\mathcal O_T)$ induced by $t$, of finite dimension as a $k$-vector space, and the *degree* of $T$ over $k$ is the integer $\\dim_k\\Gamma(T,\\mathcal O_T)\\ge0$. (1) An integer $n\\ge0$ *bounds the degrees of the fibres of $f$* if for every $y\\in Y$ the fibre $X_y$ is finite over $\\kappa(y)$ and its degree satisfies $\\dim_{\\kappa(y)}\\Gamma(X_y,\\mathcal O_{X_y})\\le n$. (2) The *fibres of $f$ are universally bounded* if there is an integer $n\\ge0$ which bounds the degrees of the fibres of $f$.",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Definition Tag 03J4 (definition-universally-bounded), line 15302, and the paragraph before it (lines 15292-15299: degree of a finite scheme over a field)"
+  "place": "Stacks Project, Morphisms, Definition Tag 03J4 (definition-universally-bounded), line 15302, with the definition of the degree of a finite scheme over a field in the paragraph before it (Section 03J3, section-universally-bounded, lines 15292-15299)"
  },
  "stmt_deps": [
   "def-pc-scheme",
@@ -39,10 +39,31 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree of a finite scheme over a field; fibres of a morphism have degree bounded by n (universally bounded fibres)",
+   "results": "instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, IsFinite.finite_preimage_singleton, Scheme.Hom.discrete_fiber (Mathlib.AlgebraicGeometry.Fiber); finite_appTop_of_universallyClosed (Morphisms.Proper); ChevalleyThm.degBound (unrelated); no degree bound on fibres",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.finrank, AlgebraicGeometry.Scheme.Hom.fiber",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'universallyBounded\\|UniversallyBounded\\|fibre.*degree\\|fiber.*degree\\|Hom.degree\\|finrank' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/",
+   "results": "no universally-bounded notion and no Hom.degree; finrank only in ResidueField.lean:149 (degree of the residue field extension at a point) and Morphisms/FlatRank.lean: Scheme.Hom.finrank f s (rank of a finite flat morphism at s, Stacks 02KA, 'sometimes also called the degree'), defined for any f via an affine chart and meaningful when f is finite flat; for t : T -> Spec k finite (automatically flat) Scheme.Hom.finrank t pt is the degree of this node through Scheme.Hom.finrank_SpecMap_eq_finrank and RingHom.finrank at the zero prime, but that agreement is itself a theorem, and the bound over all fibres is absent",
+   "date": "2026-10-10",
+   "verdict": "no match (Scheme.Hom.finrank of FlatRank.lean is a Lean candidate for the degree)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +83,25 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "pointers": [
+  {
+   "to": "lem-weil-pbc-finite-over-field-affine-finite-dim",
+   "was": [],
+   "reason": "well-definedness of the degree, not a dependency: the claim of the definition text that a scheme finite over a field is affine, the spectrum of its global sections, which are a finite-dimensional algebra (Stacks, paragraph before 03J4), moved to this statement node (a Mathlib leaf)",
+   "date": "2026-10-10"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-fibre-degree-bound",
+  "worker": "stage1",
+  "summary": "Checked against Stacks Morphisms Definition 03J4 (morphisms.tex 15301-15314) and the paragraph before it (15292-15299), and Definition 01WH (finite = affine plus finite ring maps on affines); tags verified in tags/tags (03J4 definition-universally-bounded, 01WH definition-integral). stmt_deps checked complete and unchanged (scheme, residue field, fibre, fibre product, affine spectrum, finite morphism; dimension of a vector space is linear algebra). The claim inside the definition ('then T is affine, T = Spec B with B = Gamma(T,O_T) a finite-dimensional k-algebra') is moved to the new statement node lem-weil-pbc-finite-over-field-affine-finite-dim, a Mathlib leaf (isAffine_of_isAffineHom, Scheme.isoSpec, Scheme.Hom.finite_appTop, RingHom.finite_algebraMap, one per clause), recorded in pointers and flagged unreachable since no citer cites it yet; the definition keeps the data: the k-algebra structure on Gamma(T,O_T) is now said explicitly (through t), and the degree is dim_k Gamma(T,O_T). The tag sentence was removed from the statement and kept in source. Kept n >= 0 (Stacks says 'an integer n'; a negative n would only bound the empty-fibred morphisms, so (2) is unchanged). The citers lem-weil-pbc-immersion-fibre-degree-one, -composition-fibre-degree-bound and -lqf-qc-source-bounded-fibres use exactly 'X_y finite over kappa(y) with dim Gamma(X_y,O) <= n', which is clause (1). Mathlib: no universally-bounded notion; Scheme.Hom.finrank (Morphisms/FlatRank.lean, rank of a finite flat morphism, Stacks 02KA) is a Lean candidate for the degree, agreement being a theorem; searches recorded (LeanSearch, LeanFinder, Loogle x2, grep)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "Definition node (Stacks 03J4): tag sentence removed, the claim 'finite over a field => affine with finite-dimensional Gamma' moved to the new composed Mathlib leaf finite-over-field-affine-finite-dim (pointer); n >= 0 kept. L made lqf-qc-source-bounded-fibres cite the new leaf."
+ }
 }
