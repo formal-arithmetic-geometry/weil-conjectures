@@ -11,9 +11,63 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-smooth-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*A model over a finitely generated subring (Stacks: 'Follows from Lemma 00TP').* By [lem-weil-pbc-smooth-algebra-finite-type-model] applied to the smooth ring map $A\\to B$ there are a subring $A_0\\subseteq A$ generated as a ring by finitely many elements, with inclusion $j:A_0\\to A$, a smooth ring map $A_0\\to B_0$ [def-weil-pbc-smooth-ring-map], and an isomorphism of $A$-algebras $\\varphi:B\\xrightarrow{\\sim}A\\otimes_{A_0}B_0$, where $A$ is an $A_0$-algebra via $j$.",
+   "uses": [
+    "lem-weil-pbc-smooth-algebra-finite-type-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00TP (lemma-finite-presentation-fs-Noetherian), as used in the proof of Lemma Tag 0CAQ"
+   }
+  },
+  {
+   "text": "*The model ring factors through a stage (Stacks: '$R_0\\to A$ will factor through $A_i$ for some $i$ by Lemma 00QO').* $A_0$ is generated as a ring by finitely many elements (step 1), i.e. of finite type over $\\mathbf Z$. By [lem-weil-pbc-finite-type-ring-map-factors-filtered-colimit] (1), applied to the filtered colimit $A=\\varinjlim_IA_i$ with coprojections $\\iota_i$ and the ring map $h=j:A_0\\to A$, there are $i\\in I$ and a ring map $g:A_0\\to A_i$ with $\\iota_i\\circ g=j$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-ring-map-factors-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0CAQ (lemma-smooth-descends-through-colimit), proof: 'Follows from Lemma 00TP since $R_0\\to A$ will factor through $A_i$ for some $i$ by Lemma 00QO'"
+   }
+  },
+  {
+   "text": "*The smooth algebra over the stage (Stacks: implicit).* Regard $A_i$ as an $A_0$-algebra via $g$ and put $B_i=A_i\\otimes_{A_0}B_0$, an $A_i$-algebra via $a\\mapsto a\\otimes1$. By [lem-weil-pbc-smooth-ring-map-base-change-composition] (1) (with $R=A_0$, $S=B_0$, $R'=A_i$), the ring map $A_i\\to B_i$ is smooth.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 00T4 (lemma-base-change-smooth), implicit in the proof of Lemma Tag 0CAQ"
+   }
+  },
+  {
+   "text": "*The isomorphism $B\\cong A\\otimes_{A_i}B_i$ (Stacks: implicit in 'such that $B=B_i\\otimes_{A_i}A$').* Regard $A$ as an $A_i$-algebra via $\\iota_i$. The $A_0$-algebra structure of $A$ through $A_i$ is $\\iota_i\\circ g=j$ (step 2), the structure used in step 1. Hence [lem-weil-pbc-tensor-cancel-base-change] (with $R=A_0$, $S=A_i$, the $S$-algebra $A$ and the $R$-algebra $B_0$) gives an isomorphism of $A$-algebras $\\psi:A\\otimes_{A_i}B_i=A\\otimes_{A_i}(A_i\\otimes_{A_0}B_0)\\xrightarrow{\\sim}A\\otimes_{A_0}B_0$, $a\\otimes(s\\otimes b)\\mapsto\\iota_i(s)a\\otimes b$. Then $\\psi^{-1}\\circ\\varphi:B\\xrightarrow{\\sim}A\\otimes_{A_i}B_i$ is an isomorphism of $A$-algebras (a composite of two), and $i$ with the smooth ring map $A_i\\to B_i$ of step 3 satisfies the statement.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 0CAQ (lemma-smooth-descends-through-colimit), proof: 'Follows from Lemma 00TP since $R_0\\to A$ will factor through $A_i$ for some $i$ by Lemma 00QO'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-ring-map-factors-filtered-colimit",
+  "lem-weil-pbc-smooth-algebra-finite-type-model",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 0CAQ (lemma-smooth-descends-through-colimit, line 38230), proof, from Lemma Tag 00TP (lemma-finite-presentation-fs-Noetherian) and Lemma Tag 00QO (lemma-characterize-finite-presentation)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +96,45 @@
    "results": "AlgebraicGeometry/Normalization.lean, Geometry/Manifold/Sheaf/Smooth.lean (unrelated); NoetherianDescent.lean has exists_subalgebra_fg (line 214), exists_finiteType (line 268, 00TP), no colimit statement",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth algebra over colimit of commutative rings is base change of smooth algebra over some ring of the diagram",
+   "results": "Algebra.Smooth.baseChange, Algebra.Smooth.comp, Algebra.Smooth.mk (Mathlib.RingTheory.Smooth.Basic), AlgebraicGeometry.isSmooth_isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, Algebra.IsStandardSmoothOfRelativeDimension.baseChange",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, CategoryTheory.Limits.IsColimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stacks 0CAQ: smooth ring map descends through a filtered colimit of rings A = colim A_i, B = B_i tensor_{A_i} A",
+   "results": "RingHom.FormallySmooth.isStableUnderBaseChange, RingHom.smooth_def, RingHom.CodescendsAlong.mk, Algebra.Smooth.comp, RingHom.Smooth.isStableUnderBaseChange, Algebra.Smooth.exists_finiteType (RingTheory.Smooth.NoetherianDescent, 00TP), Algebra.FormallySmooth.instTensorProduct, RingHom.Smooth.toAlgebra",
+   "date": "2026-10-10",
+   "verdict": "no match (only the ingredients 00TP and base change)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 0CAQ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rlE Smooth Mathlib/RingTheory Mathlib/Algebra/Category/Ring | xargs grep -lE 'IsColimit|DirectLimit|IsFiltered'",
+   "results": "none; none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_subalgebra_fg (project ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.Smooth.exists_subalgebra_fg, Algebra.Etale.exists_subalgebra_fg, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg (RingTheory/Smooth/NoetherianDescent.lean; index unavailable)",
+   "date": "2026-10-10",
+   "verdict": "no match for the item: the item is the combination of the four Mathlib leaves of steps 1-4"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +154,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+  "worker": "stage1",
+  "summary": "Split along the Stacks proof of 0CAQ, in the same shape as the reviewed etale analogue lem-weil-pbc-etale-algebra-filtered-colimit-descent: (1) 00TP gives a model A_0 -> B_0 over a finitely generated subring A_0 of A (existing leaf lem-weil-pbc-smooth-algebra-finite-type-model, Algebra.Smooth.exists_subalgebra_fg); (2) 00QO factors A_0 -> A through some A_i (existing reviewed leaf lem-weil-pbc-finite-type-ring-map-factors-filtered-colimit); (3) base change of smooth is smooth, which Stacks leaves implicit (existing leaf lem-weil-pbc-smooth-ring-map-base-change-composition (1), 00T4); (4) B = A (x)_{A_i} (A_i (x)_{A_0} B_0) by tensor cancellation (existing reviewed leaf lem-weil-pbc-tensor-cancel-base-change). No new node. Statement kept (agrees with 0CAQ; the citer lem-weil-pbc-essentially-smooth-composition uses exactly it). Item re-searched with leansearch, loogle, leanfinder, grep, local_search: not in Mathlib as one declaration. All branches end in Mathlib leaves."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps following Stacks 0CAQ: the 00TP model (leaf exists_subalgebra_fg, line 214 verified by L), factorization through a stage by the 00QO leaf, base change of smooth is smooth (leaf baseChange, line 573 verified by L), transitivity of base change (cancelBaseChange leaf). Statement unchanged; same shape as the accepted etale version."
+ }
 }
