@@ -1,17 +1,17 @@
 # Work queue
 
-808 items; claim with `tools/claim.py next <group> [--stage N]`.
+813 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (655)
+## Stage 1: nodes to split (657)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-etale-stratification-local-gluing` | 1010 | none |
-| `lem-weil-pbc-stein-fibre-idempotent-image` | 1010 | none |
 | `lem-weil-pbc-z-localizations-dvr` | 1010 | none |
-| `lem-weil-pbc-closed-immersion-residue-field-iso` | 1011 | none |
+| `lem-weil-pbc-base-change-nilpotent-thickening-idempotents` | 1011 | none |
 | `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1011 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
+| `lem-weil-pbc-formal-functions-stalk` | 1011 | none |
 | `lem-weil-pbc-galois-invariant-closed-subset-descends` | 1011 | none |
 | `lem-weil-pbc-geometrically-regular-descent` | 1011 | none |
 | `lem-weil-pbc-grothendieck-existence-devissage` | 1011 | none |
@@ -22,7 +22,6 @@
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-immersion-affine-constructible-pieces` | 1011 | none |
 | `lem-weil-pbc-improve-presentation` | 1011 | none |
-| `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1011 | none |
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1011 | none |
 | `lem-weil-pbc-integral-closure-finite-fibre-quasi-finite` | 1011 | none |
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1011 | none |
@@ -33,7 +32,9 @@
 | `lem-weil-pbc-jacobi-zariski-surjection-h1` | 1011 | none |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
+| `lem-weil-pbc-limit-fibre-products` | 1011 | none |
 | `lem-weil-pbc-limit-flat-modules` | 1011 | none |
+| `lem-weil-pbc-limit-residue-field` | 1011 | none |
 | `lem-weil-pbc-linear-equation-localization-polynomial` | 1011 | none |
 | `lem-weil-pbc-local-completion-quotient` | 1011 | none |
 | `lem-weil-pbc-localization-of-regular-ring` | 1011 | none |
@@ -153,6 +154,7 @@
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1012 | none |
 | `lem-weil-pbc-symmetric-degree-exact` | 1012 | none |
+| `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1012 | none |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
@@ -662,7 +664,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (153)
+## Stage 2: nodes to state (156)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -688,6 +690,7 @@
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-existence` | 1 | state |
 | `lem-weil-pbc-chow-noetherian` | 1 | state |
+| `lem-weil-pbc-closed-immersion-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
 | `lem-weil-pbc-colimit-etale-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-finite-ring-map` | 1 | state |
@@ -753,6 +756,7 @@
 | `lem-weil-pbc-henselization-finite-separable-fibres` | 1 | state |
 | `lem-weil-pbc-idempotent-splitting-monic-factorization` | 1 | state |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
+| `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 1 | state |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-base-change` | 1 | state |
@@ -794,6 +798,7 @@
 | `lem-weil-pbc-spectral-generalizations-of-quasi-compact` | 1 | state |
 | `lem-weil-pbc-spectral-proconstructible-closure-specialization` | 1 | state |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state |
+| `lem-weil-pbc-stein-fibre-idempotent-image` | 1 | state |
 | `lem-weil-pbc-stein-flat-base-change-global-sections` | 1 | state |
 | `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state |
 | `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1 | state |
@@ -820,7 +825,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 667 nodes that wait for stage 1, 441 nodes that wait for a statement dependency.
+Not open yet: 669 nodes that wait for stage 1, 441 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
