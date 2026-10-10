@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "proof, first step: the trace identification by finite-morphism duality and its evaluation map",
+   "place": "proof, finite-flat duality, degree-zero identification, counit evaluation, and the module-linearity formula",
    "via": [
     "lem-sc-finite-duality-trace"
    ]
@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Finite flat duality with an invertible target",
- "statement": "Let $f:X\\to Y$ be a finite [def-weil-finite-integral-morphism] flat [def-weil-flat-morphism] morphism of Noetherian schemes and let $L$ be an invertible $\\mathcal O_Y$-module [def-sc-invertible-module]. Write $f^!L$ for the right adjoint image of $L$ under $Rf_*$ [def-pc-derived-direct-image]; it is a sheaf in degree zero. There is an $f_*\\mathcal O_X$-linear isomorphism $f_*f^!L\\cong\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,L)$, where $f_*\\mathcal O_X$ acts on the right by precomposition with multiplication. Under this isomorphism the adjunction counit $f_*f^!L\\to L$ is evaluation at $1$, and evaluation at $a$ of the image of $\\omega$ equals evaluation at $1$ of the image of $a\\omega$ for every local section $a$ of $f_*\\mathcal O_X$ and $\\omega$ of $f_*f^!L$.",
+ "statement": "Let $f:X\\to Y$ be a finite [def-weil-finite-integral-morphism] flat [def-weil-flat-morphism] morphism of Noetherian schemes and let $L$ be an invertible $\\mathcal O_Y$-module [def-sc-invertible-module]. Write $f^!L$ for the right adjoint image of $L$ under $Rf_*$ [def-pc-derived-direct-image]; it is a sheaf in degree zero. There is a canonical $f_*\\mathcal O_X$-linear isomorphism $\\Phi:f_*f^!L\\cong\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,L)$, where $f_*\\mathcal O_X$ acts on the right by precomposition with multiplication. Under this isomorphism the adjunction counit $f_*f^!L\\to L$ is evaluation at $1$, and for every local section $a$ of $f_*\\mathcal O_X$ and $\\omega$ of $f_*f^!L$ one has $\\Phi(\\omega)(a)=\\Phi(a\\omega)(1)$.",
  "source": {
   "document": "literature/stacks-project/discriminant.tex",
   "place": "Tag 0BVI, Lemma 49.15.2 (finite flat case), and Tag 0FKW, Section 49.5 (evaluation and invertible target)"
@@ -24,46 +24,125 @@
   "def-sc-invertible-module",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a finite morphism of Noetherian schemes, finite duality gives the canonical $f_*\\mathcal O_X$-linear identification $Rf_*f^!L\\simeq R\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,L)$, and its adjunction counit is induced by evaluation at the unit section $1$.",
+   "uses": [
+    "lem-sc-finite-duality-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AX2, lemma-finite-twisted, and Tag 0AX3, remark-trace-map-finite"
+   }
+  },
+  {
+   "text": "Because $f$ is finite over the Noetherian scheme $Y$, its affine chart algebras are finite type over Noetherian rings and hence finitely presented by [lem-weil-pbc-finite-type-noetherian-finite-presentation]. With flatness, [lem-sc-finite-pushforward-locally-free] gives that $f_*\\mathcal O_X$ is locally isomorphic to a finite free module, with locally constant rank. Thus [lem-sc-finite-locally-free-derived-hom] gives $R\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,L)\\simeq\\mathcal H om_{\\mathcal O_Y}(f_*\\mathcal O_X,L)$ in degree zero.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-sc-finite-pushforward-locally-free",
+    "lem-sc-finite-locally-free-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB, lemma-finite-flat, and Tag 04MH, lemma-finite-locally-free"
+   }
+  },
+  {
+   "text": "Since $f$ is finite, it is affine. Applying [lem-sc-affine-derived-concentration] to the finite-duality object shows that $f^!L$ itself is represented by a sheaf in degree zero whenever its derived pushforward is; the degree-zero identification from the previous step therefore yields the asserted sheaf $f^!L$ and the displayed Hom isomorphism.",
+   "uses": [
+    "lem-sc-affine-derived-concentration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, and the affine derived pushforward discussion in Derived Categories of Schemes"
+   }
+  },
+  {
+   "text": "The module-linearity formula is elementary: for the precomposition action, $(a\\cdot\\Phi(\\omega))(1)=\\Phi(\\omega)(a\\cdot1)=\\Phi(\\omega)(a)$, while $a\\cdot\\Phi(\\omega)=\\Phi(a\\omega)$ by $f_*\\mathcal O_X$-linearity. Thus $\\Phi(\\omega)(a)=\\Phi(a\\omega)(1)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/discriminant.tex",
+    "place": "Tag 0FKW, module-linearity remark"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-duality-derived-hom",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-sc-finite-locally-free-derived-hom",
+  "lem-sc-affine-derived-concentration"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0AX2 and 0AX3, with Tag 0FKW for evaluation"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "finite flat morphism upper shriek Hom of pushforward of structure sheaf",
-   "results": "HTTP 500; no usable candidates",
+   "query": "finite flat Grothendieck duality f^! invertible sheaf Hom pushforward",
+   "results": "No usable candidate",
    "date": "2026-10-10",
-   "verdict": "no usable match"
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "finite flat morphism duality Hom pushforward",
-   "results": "flat_appLE and flat morphism instances; no finite duality",
+   "query": "finite flat morphism duality internal Hom and counit",
+   "results": "Only flat morphism and rank APIs; no derived coherent duality",
    "date": "2026-10-10",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "pushforwardHomObjComparison",
-   "results": "unknown identifier in Mathlib; no candidate",
+   "query": "Scheme.Hom.isLocallyConstant_finrank finite flat",
+   "results": "Scheme.Hom.isLocallyConstant_finrank and related rank lemmas",
    "date": "2026-10-10",
-   "verdict": "no match"
+   "verdict": "partial: rank criterion only"
   },
   {
    "tool": "grep",
-   "query": "rg -n 'dualizing|upperShriek|upper shriek|trace.*Differential' .lake/packages/mathlib/Mathlib/AlgebraicGeometry .lake/packages/mathlib/Mathlib/RingTheory",
-   "results": "none",
+   "query": "rg -n 'upperShriek|finite.*duality|evaluation.*one|RHom' .lake/packages/mathlib/Mathlib/AlgebraicGeometry .lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "No coherent finite duality theorem; only generic adjunction and module APIs",
    "date": "2026-10-10",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-duality-trace",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-finite-flat-duality-evaluation",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by deleting the two relabelling nodes and creating one canonical finite-duality statement that includes the counit evaluation at the unit. Added separate statement-only nodes for affine derived concentration and derived Hom from a finite locally free sheaf. The proof now derives finite-flat local freeness, degree-zero Hom, affine concentration, and the elementary module-linearity identity without treating an arbitrary isomorphism as canonical.",
+  "blueprint": "Realizes the finite-flat duality proof dependency of lem-sc-finite-duality, including the degree-zero, counit, and evaluation clauses.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "The affine algebra fact that finite type over a Noetherian ring is finitely presented supplies the local finite presentation needed in the finite-flat criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ffd4",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffd4 (reviewer sub-agent of L); spot-checked: Fourth push, after L's G4 decision (16:25). Compared the delivery's five files against the returned head 38a431445: the mathematics is unchanged (no step text, uses, statement other than the added definition citations changed); the mathematics of steps 1-4 was judged right by R-ffd3 and is not re-litigated. Return points of 16:24 checked one by one: (1) report no longer lists citations.json and the Review by J1 section states only what the commit contains and goes through the return points, says created is left for the maintainer; (2) lem-sc-finite-pushforward-locally-free cites def-weil-finite-integral-morphism (defines finite: affine with R->A finite), def-weil-flat-morphism, def-sbc-locally-finite-presentation in text and stmt_deps, all three exist; (3) lem-sc-finite-locally-free-derived-hom source is cohomology.tex Tag 08DQ (tags file: cohomology-lemma-dual-perfect-complex); (4) lem-sc-affine-derived-concentration source perfect.tex Tags 0AVW, 08I8 (perfect-lemma-affine-morphism), 01XC (coherent-lemma-relative-affine-vanishing); (5) item step 1 source.place and proof_origin.place now Tags 0AX2 and 0AX3 (0AX3 = duality-remark-trace-map-finite); (6) split_report.tool_uses keeps only lem-weil-pbc-finite-type-noetherian-finite-presentation (Mathlib-leaf generic tool, accepted), the stale rank entry removed. No other field changed. Start Sat Oct 10 04:34:36 PM UTC 2026, end Sat Oct 10 04:35:00 PM UTC 2026."
+ }
 }

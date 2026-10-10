@@ -2002,3 +2002,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:33 L: returned deliver/G1/lem-sc-noetherian-topological-cohomology-vanishing (reviewer RETURN: Reviewer R-tc2, read head aa4c432df. Points 1-3 of the 15:55 return are repaired (conditional node deleted, induction on)
 - 16:34 L: returned deliver/G1/lem-weil-pbc-etale-sheaf-clopen-product (reviewer RETURN: 1. D1/D2: new node lem-weil-pbc-etale-sheaf-clopen-gluing and step 2: the new node restates the item's own first clause )
 - 16:34 L: merged deliver/M1/lem-exc-field-sections-stalk-invariants (reviewer FIX; after a return; new nodes: 1)
+- 16:35 L: merged deliver/J1/lem-sc-finite-flat-duality-evaluation (reviewer PASS; after a return; new nodes: 4)
