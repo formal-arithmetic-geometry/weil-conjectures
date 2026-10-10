@@ -1543,3 +1543,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:48 L: C1 lem-sc-flat-base-change-coherent re-push reviewed: byte-identical to the returned version, return stands
 - 13:49 L: K1 lem-weil-pbc-matching-object-coskeleton re-push reviewed: one line changed, return stands
 - 13:49 L: accepted lem-sc-hilb-to-pic-surjective: 7 steps (0BA0 (5)), new nodes lem-pc-nonzero-section-integral-cartier (unsplit) and lem-pc-zero-scheme-divisor-iso (closed, verified)
+- 2026-10-10, delivery of C1: def-galois-fibre-functor returned (4e0217e4f): Reviewed in full (reviewer sub-agent of L). B3/C4: the statement says F_ybar : FLC(Y) -> (finite sets), i.e. that every geometric stalk of a finite locally cons
