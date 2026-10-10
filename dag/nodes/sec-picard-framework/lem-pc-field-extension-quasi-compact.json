@@ -46,15 +46,43 @@
    "results": "Generic quasi-compact morphism infrastructure only; no exact field-extension theorem",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'QuasiCompact' Mathlib/AlgebraicGeometry/Morphisms/Affine.lean; lean_run_code: example (k K) [Field k] [Field K] [Algebra k K] : QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap k K))) := inferInstance; #check @AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+   "results": "Affine.lean:58 instance [IsAffineHom f] : QuasiCompact f (instQuasiCompactOfIsAffineHom : {X Y : Scheme} (f : X ⟶ Y) [IsAffineHom f], QuasiCompact f); Affine.lean:181 isAffineHom_of_isAffine; example compiles",
+   "date": "2026-10-10",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Affine.lean",
+  "line": 58,
+  "how": "exact, by two instances: `instance (priority := 900) [IsAffineHom f] : QuasiCompact f` (Affine.lean:58, auto-named AlgebraicGeometry.instQuasiCompactOfIsAffineHom) with `isAffineHom_of_isAffine [IsAffine X] [IsAffine Y] : IsAffineHom f` (Affine.lean:181) and `isAffine_Spec` (Mathlib/AlgebraicGeometry/AffineScheme.lean:119); `QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap k K)))` closes by inferInstance (checked with lean_run_code)"
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-pc-field-extension-fpqc-cover",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-field-extension-quasi-compact",
+  "worker": "stage1",
+  "summary": "Reviewer R-feq: made a Mathlib leaf (B8): any morphism of affine schemes is quasi-compact in Mathlib (Affine.lean:58 with :181); the worker's one-step proof via lem-weil-pbc-affine-scheme-qcqs was correct but superseded.",
+  "blueprint": "The step realizes the preliminary quasi-compactness fact in the proof of the ancestor lem-pc-very-ample-descends.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-feq",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-feq (reviewer sub-agent of L); spot-checked: Read the report and the item on the branch (one commit, two files, review section present). Source Schemes Tag 01K4 (quasi-compact iff inverse images of affine opens quasi-compact); statement unchanged, cites def-pc-field-extension and def-weil-finite-type-morphism (whose statement defines quasi-compact morphism). The worker's single step (Spec K affine hence quasi-compact by lem-weil-pbc-affine-scheme-qcqs; Spec k is one point so its opens are empty and whole, preimages empty and Spec K) is correct, but the statement is a special case of a Mathlib fact, so made it a leaf (B8). FIX: dag/nodes/sec-picard-framework/lem-pc-field-extension-quasi-compact.json: status split -> mathlib; proof, proof_deps emptied, proof_origin null; mathlib_match = AlgebraicGeometry.instQuasiCompactOfIsAffineHom, Mathlib/AlgebraicGeometry/Morphisms/Affine.lean line 58 ([IsAffineHom f] : QuasiCompact f), with isAffineHom_of_isAffine line 181 and isAffine_Spec AffineScheme.lean:119, lines verified with sed; mathlib_searches: added my grep plus a lean_run_code check that QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap k K))) closes by inferInstance; split_report.summary notes the change. Small cases K=k, K=k(t) trivially consistent. Start Sat Oct 10 04:55:51 PM UTC 2026, end Sat Oct 10 04:56:29 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

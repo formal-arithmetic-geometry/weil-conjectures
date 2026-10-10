@@ -2062,3 +2062,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:56 L: merged deliver/G1/lem-weil-pbc-hypercohomology-e1-pullback-functorial (reviewer FIX; after a return; new nodes: 1)
 - 16:56 L: merged deliver/M1/lem-sc-positive-dimensional-locally-algebraic-closed-points (reviewer FIX; first push; new nodes: 2)
 - 16:56 L: merged deliver/M1/lem-sc-p1-ext-yoneda-associativity (reviewer FIX; first push; new nodes: 2)
+- 16:56 L: merged deliver/C1/lem-pc-field-extension-quasi-compact (reviewer FIX; first push; new nodes: 0)
