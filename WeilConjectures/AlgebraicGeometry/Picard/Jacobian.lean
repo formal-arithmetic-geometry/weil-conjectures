@@ -2131,6 +2131,66 @@ lemma surjective_specMap_algebraMap (k K : Type u) [Field k] [Field K] [Algebra 
     Surjective (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
   ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
 
+open Functor.RepresentableBy in
+/-- **`Pic^0_{C/k}` satisfies descent along a finite field extension.** For `K/k` finite,
+`T_K ⟶ T` is an fppf covering, and the descent property of
+`AlgebraicGeometry.picardFunctorDegree_zero_descent` is the fppf sheaf property of
+`Pic^0_{C/k}` for this covering. -/
+theorem picardFunctorDegree_zero_descent_of_finiteDimensional {K : Type u} [Field K]
+    [Algebra k K] [FiniteDimensional k K] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    (T : Over (Spec (.of k))) :
+    (∀ x₁ x₂ : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.obj (.op T),
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x₁ =
+        (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x₂ → x₁ = x₂) ∧
+    ∀ y : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.obj
+        (.op (descentCover (Spec.map (CommRingCat.ofHom (algebraMap k K))) T)),
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverPr₁ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op y =
+        (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverPr₂ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op y →
+      ∃ x, (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.map
+          (descentCoverπ (Spec.map (CommRingCat.ofHom (algebraMap k K))) T).op x = y := by
+  let g := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  let F := (picardFunctorDegree (C ↘ Spec (.of k)) 0)
+  let π' := descentCoverπ g T
+  have := flat_specMap_algebraMap k K
+  have := locallyOfFinitePresentation_specMap_algebraMap k K
+  have := surjective_specMap_algebraMap k K
+  have : Flat π'.left := by change Flat (pullback.fst T.hom g); infer_instance
+  have : Surjective π'.left := by change Surjective (pullback.fst T.hom g); infer_instance
+  have : LocallyOfFinitePresentation π'.left := by change LocallyOfFinitePresentation (pullback.fst T.hom g); infer_instance
+  have hcov : Sieve.generate (Presieve.singleton π') ∈ (fppfTopology.over (Spec (.of k))) T := by
+    rw [GrothendieckTopology.mem_over_iff, Sieve.overEquiv_generate]
+    refine fppfTopology.superset_covering ?_
+      (Precoverage.generate_mem_toGrothendieck (Hom.singleton_mem_fppfPrecoverage π'.left))
+    rw [Sieve.generate_le_iff]
+    rintro _ _ ⟨⟩
+    have hπ : Presieve.functorPushforward (Over.forget _) (Presieve.singleton π') π'.left :=
+      ⟨_, π', 𝟙 _, Presieve.singleton_self _, (Category.id_comp _).symm⟩
+    exact Sieve.le_generate _ _ _ hπ
+  have hsh : Presieve.IsSheafFor F.obj (Presieve.singleton π') := by
+    have h := F.property
+    rw [isSheaf_iff_isSheaf_of_type] at h
+    exact (Presieve.isSheafFor_iff_generate _).2 (h _ hcov)
+  rw [Presieve.isSheafFor_singleton] at hsh
+  refine ⟨fun x₁ x₂ h ↦ ?_, fun y hy ↦ ?_⟩
+  · obtain ⟨z, -, huniq⟩ := hsh (F.obj.map π'.op x₁) fun p₁ p₂ hp ↦ by
+      rw [← Functor.map_comp_apply, ← Functor.map_comp_apply, ← op_comp, ← op_comp,
+        hp]
+    exact (huniq x₁ rfl).trans (huniq x₂ h.symm).symm
+  · obtain ⟨x, hx, -⟩ := hsh y fun {Z} p₁ p₂ hp ↦ by
+      let ℓ : Z ⟶ descentCover₂ g T := Over.homMk
+        (pullback.lift p₁.left p₂.left congr($(hp).left)) (by
+          simp only [Over.mk_hom, pullback.lift_fst_assoc]
+          exact Over.w (p₁ ≫ π'))
+      have h₁ : p₁ = ℓ ≫ descentCoverPr₁ g T := by ext; simp [ℓ]
+      have h₂ : p₂ = ℓ ≫ descentCoverPr₂ g T := by ext; simp [ℓ]
+      rw [h₁, h₂, op_comp, op_comp, Functor.map_comp_apply, Functor.map_comp_apply,
+        hy]
+    exact ⟨x, hx⟩
+
 /-- **The Jacobian over an arbitrary ground field, as a representing object.** Let `C` be a smooth
 projective geometrically integral curve of genus `g` over a field `k`. Then `Pic^0_{C/k}` is
 represented, compatibly with the group laws, by an abelian variety of dimension `g` over `k`. No
