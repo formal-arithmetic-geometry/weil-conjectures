@@ -11,9 +11,64 @@
   "def-weil-pbc-henselian-terminology",
   "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(04GG (8) holds for $R$.) Let $R\\to R'$ be a ring map with $\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ etale and $\\mathfrak m'\\subset R'$ a prime lying over $\\mathfrak m$ with $\\kappa\\to\\kappa(\\mathfrak m')$ an isomorphism. Since $R$ is henselian [def-weil-pbc-henselian-terminology], [lem-weil-pbc-henselian-etale-retraction] (Stacks 04GG (1)$\\Rightarrow$(8)), applied with $S=R$, $B=R'$, $\\mathfrak q'=\\mathfrak m'$, gives an $R$-algebra homomorphism $\\tau:R'\\to R$ with $\\tau^{-1}(\\mathfrak m)=\\mathfrak m'$ (even a unique one). So $R$ satisfies the common hypothesis of [lem-weil-pbc-etale-retraction-finite-type-splitting] and [lem-weil-pbc-etale-retraction-finite-product-local].",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-henselian-etale-retraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GG (lemma-characterize-henselian), proof of 1$\\Rightarrow$8 (line 42184); the definition of henselian in this DAG is idempotent lifting, which [lem-weil-pbc-henselian-etale-retraction] takes as its hypothesis"
+   }
+  },
+  {
+   "text": "(04GG (11): split off a finite factor.) By step 1 and [lem-weil-pbc-etale-retraction-finite-type-splitting] applied to the finite type ring map $R\\to S$, there are $R$-algebras $A$, $B$ and an $R$-algebra isomorphism $\\alpha:S\\xrightarrow{\\sim}A\\times B$ such that $A$ is a finitely generated $R$-module and $R\\to B$ is not quasi-finite [def-weil-pbc-ring-map-quasi-finite-at-prime] at any prime ideal of $B$ lying over $\\mathfrak m$.",
+   "uses": [
+    "lem-weil-pbc-etale-retraction-finite-type-splitting",
+    "def-weil-pbc-ring-map-quasi-finite-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GJ (lemma-mop-up, line 42418), proof: 'part (11) of Lemma 04GG'"
+   }
+  },
+  {
+   "text": "(04GG (10): the finite factor is a product of local rings.) $A$ is a finite $R$-algebra, so by step 1 and [lem-weil-pbc-etale-retraction-finite-product-local] there are $n\\ge0$, local rings $A_1,\\dots,A_n$ (which are $R$-algebras) and an $R$-algebra isomorphism $\\beta:A\\xrightarrow{\\sim}A_1\\times\\cdots\\times A_n$ ($n=0$ when $A=0$). Each $A_i$ is a finitely generated $R$-module: the composite of $\\beta$ with the $i$-th projection is a surjective $R$-linear map $A\\to A_i$, so the images of finitely many $R$-module generators of $A$ generate $A_i$.",
+   "uses": [
+    "lem-weil-pbc-etale-retraction-finite-product-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GJ (lemma-mop-up), proof: 'part (10) of Lemma 04GG'"
+   }
+  },
+  {
+   "text": "(Assembling.) The composite $S\\xrightarrow{\\alpha}A\\times B\\xrightarrow{\\beta\\times\\mathrm{id}_B}(A_1\\times\\cdots\\times A_n)\\times B=A_1\\times\\cdots\\times A_n\\times B$ is an isomorphism of $R$-algebras (a product of $R$-algebra isomorphisms followed by the canonical regrouping of factors). The $A_i$ are local and finitely generated $R$-modules (step 3), and $B$ is the same $R$-algebra as in step 2, so $R\\to B$ is not quasi-finite at any prime of $B$ over $\\mathfrak m$. This is the statement (with $B=0$ allowed, in which case the condition on $B$ is empty).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GJ (lemma-mop-up), proof: 'a combination of parts (11) and (10)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-etale-retraction-finite-type-splitting",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "lem-weil-pbc-etale-retraction-finite-product-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 04GJ (lemma-mop-up, line 42418), proof (line 42427): combination of parts (11) and (10) of Lemma Tag 04GG (lemma-characterize-henselian, line 42115); (1)$\\Rightarrow$(8) of 04GG supplies the hypothesis of the existing nodes for (8)$\\Rightarrow$(10) and the new node for (8)$\\Rightarrow$(11), since the DAG defines henselian by idempotent lifting"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +90,38 @@
    "results": "HenselianLocalRing appears only in RingTheory/Henselian.lean (isLocalHom_of_le_jacobson_bot, HenselianLocalRing.TFAE, IsAdicComplete.henselianRing, IsLocalRing.eq_of_eval_eq_zero_of_not_isUnit_sub); no product decomposition of finite type or finite algebras over a henselian ring; QuasiFinite/Polynomial.lean only proves R[X] is not quasi-finite at any prime",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Algebra.FiniteType",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "HenselianLocalRing (project ~/weil-conjectures-slopmaster2; index: unavailable)",
+   "results": "HenselianLocalRing, HenselianLocalRing.TFAE (Mathlib/RingTheory/Henselian.lean); HenselianLocalRing.of_isSepClosed_fractionRing, HenselianLocalRing.of_exists_algHom_comap_maximalIdeal_eq (WeilConjectures/Mathlib, source repository, not Mathlib); HenselianLocalRing.of_ringEquiv, HenselianLocalRing.localization_atPrime_of_forall_retraction (proetale package); none is a product decomposition",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite type algebra S over a local ring R decomposes as A × B with A finite over R and B not quasi-finite at any prime over the maximal ideal",
+   "results": "Algebra.quasiFinite_iff, Algebra.QuasiFiniteAt, Polynomial.not_quasiFiniteAt, Algebra.QuasiFinite.iff_finite_primesOver, Algebra.QuasiFinite.finite_primeSpectrum, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFinite.instResidueField, Algebra.QuasiFinite.finite_primesOver (Mathlib.RingTheory.QuasiFinite.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00U[IJKL]\\|stacks 04G[EFGJ]' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'HenselianLocalRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n '^theorem\\|^lemma' ~/weil-conjectures-slopmaster2/WeilConjectures/Mathlib/RingTheory/Etale/{QuasiFinite,FiniteSplitting}.lean",
+   "results": "only @[stacks 00UI], 00UJ, 00UL in RingTheory/Etale/QuasiFinite.lean (00UL for Module.Finite only); HenselianLocalRing only in RingTheory/Henselian.lean; the source repository's Etale/QuasiFinite.lean and FiniteSplitting.lean have no finite type decomposition either",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -58,5 +141,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "worker": "stage1",
+  "summary": "Split along Stacks 04GJ (algebra.tex 42418, proof 'a combination of parts (11) and (10) of Lemma 04GG'), with 04GG (42115) read in full. Since the DAG defines henselian by idempotent lifting, step 1 gets 04GG (8) (etale retractions through rational points) from the existing node lem-weil-pbc-henselian-etale-retraction (04GG 1=>8); step 2 is 04GG (11) for that hypothesis, the new unsplit node lem-weil-pbc-etale-retraction-finite-type-splitting (source: 04GG proof of 8=>11, via 00UK for finite type algebras, which neither the DAG nor Mathlib has: Mathlib's 00UL is for finite algebras only); step 3 is 04GG (10), the existing reviewed node lem-weil-pbc-etale-retraction-finite-product-local (8=>10), applied to the finite factor, with finiteness of each local factor written out; step 4 assembles the isomorphism (elementary). Statement unchanged; stmt_deps unchanged. Mathlib: no finite type decomposition over henselian rings (searches recorded). Source remarks: 04GG's proof of 8=>11 writes the retraction condition reversed ('m = tau^{-1}(m')' for tau^{-1}(m) = m') and does not justify that B' tensor_{R',tau} R is not quasi-finite over m (it follows from kappa(m') = kappa through tau, so the fibres agree); 8=>10 writes A'_1 for A'_n in the last factor."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 04GJ = 04GG (11) + (10), routed through the etale-retraction property (8) which the DAG's definition gives (existing node 04GG 1=>8); (8)=>(11) is a new unsplit node, (8)=>(10) an existing split node; finiteness of the local factors written out. No Mathlib match."
 }

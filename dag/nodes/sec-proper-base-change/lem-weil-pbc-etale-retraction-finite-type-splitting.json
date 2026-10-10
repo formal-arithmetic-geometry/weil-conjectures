@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-etale-retraction-finite-type-splitting",
+ "kind": "statement",
+ "title": "Over a local ring whose etale algebras retract through rational points, a finite type algebra splits off a finite factor (Stacks 04GG (8)$\\Rightarrow$(11))",
+ "statement": "Let $(R,\\mathfrak m,\\kappa)$ be a local ring such that for every ring map $R\\to R'$ with $\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ etale [def-weil-etale-morphism] and every prime ideal $\\mathfrak m'\\subset R'$ lying over $\\mathfrak m$ with $\\kappa\\to\\kappa(\\mathfrak m')$ an isomorphism [def-weil-residue-field] there is an $R$-algebra homomorphism $\\tau:R'\\to R$ with $\\tau^{-1}(\\mathfrak m)=\\mathfrak m'$. Let $R\\to S$ be a ring map of finite type [def-weil-pbc-finite-type-algebra]. Then there are $R$-algebras $A$ and $B$ (either of which may be $0$) and an isomorphism of $R$-algebras $S\\cong A\\times B$ such that $A$ is a finitely generated $R$-module and $R\\to B$ (of finite type, $B$ being a quotient of $S$) is not quasi-finite [def-weil-pbc-ring-map-quasi-finite-at-prime] at any prime ideal of $B$ lying over $\\mathfrak m$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 04GG (lemma-characterize-henselian, line 42115), proof of 8$\\Rightarrow$11 (line 42224), using Lemma Tag 00UK (lemma-etale-makes-quasi-finite-finite, line 40362)"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "local ring such that every etale algebra with a rational point over the closed point has a retraction; finite type algebra is product of finite algebra and algebra not quasi-finite over maximal ideal",
+   "results": "Algebra.QuasiFinite.recOn/casesOn, Algebra.QuasiFinite.of_isIntegral_of_finiteType (Mathlib.RingTheory.QuasiFinite.Basic), Algebra.Etale.of_isLocalizationAway, Algebra.Etale.finitePresentation (Mathlib.RingTheory.Etale.Basic), RingHom.Etale.propertyIsLocal, Algebra.Etale.iff_exists_algEquiv_prod (Mathlib.RingTheory.Etale.Field, over a field only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, Algebra.QuasiFiniteAt, IsLocalRing",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi-finite points of a finite type algebra over a henselian local ring split off as a finite direct factor",
+   "results": "Algebra.quasiFinite_iff, Algebra.QuasiFiniteAt, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.QuasiFinite.instResidueField, Polynomial.not_quasiFiniteAt, Algebra.QuasiFinite.finite_fiber, Algebra.QuasiFinite.iff_finite_primesOver, Algebra.QuasiFinite.instFiniteResidueField (Mathlib.RingTheory.QuasiFinite.Basic); none decomposes an algebra",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00U[IJKL]\\|stacks 04GG\\|stacks 04GJ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n '^lemma\\|^theorem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/QuasiFinite.lean; grep -rln 'QuasiFiniteAt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Etale/QuasiFinite.lean has only @[stacks 00UI] Localization.exists_finite_awayMapₐ_of_surjective_awayMapₐ (line 92), @[stacks 00UJ] Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (line 378, one quasi-finite prime) and @[stacks 00UL] Algebra.exists_etale_completeOrthogonalIdempotents_forall_liesOver_eq (line 612, Module.Finite R S only; its docstring says the quasi-finite form is not stated); no 00UK for finite type algebras, no 04GG/04GJ; the QuasiFiniteAt files (QuasiFinite/Basic, Weakly, Polynomial, RingHom/QuasiFinite, ZariskisMainTheorem, AlgebraicGeometry/Morphisms/QuasiFinite) contain no product decomposition; RingTheory/Henselian.lean has only HenselianLocalRing.TFAE (root lifting forms)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-henselian-finite-type-product-decomposition",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 04GG (8)=>(11) stated with the retraction hypothesis spelled out. Unsplit; the splitter needs 00UK in the finite type case and must repair the source's reversed retraction condition."
+}
