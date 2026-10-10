@@ -23,9 +23,63 @@
   "def-pur-sheaf-modules-hom-module",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let P be the presheaf tensor product F^vee tensor_{p,O} G and Q = Hom_O(F,G), a sheaf of O-modules by [def-pur-sheaf-hom]. For every open U define e_U: F^vee(U) tensor_{O(U)} G(U) -> Hom_{O|_U}(F|_U,G|_U) by phi tensor g |-> (x in F(W) |-> phi_W(x) g|_W for W subset U open); it is O(U)-bilinear and compatible with restriction, so e: P -> Q is a morphism of presheaves of O-modules. Now let U be contained in some V_a, so F|_U is identified with O_U^{+d_a} [def-amb-finite-locally-free-module, applied with the open cover of the statement]. An O|_U-linear map O_U^{+d} -> G|_U is determined by the images of the d standard basis sections in G(U), and every d-tuple occurs (sectionwise definition of morphisms in Mod(O) [def-weil-sheaf-of-modules-category]); hence F^vee(U) = O(U)^{+d_a}, Q(U) = G(U)^{+d_a}, P(U) = O(U)^{+d_a} tensor_{O(U)} G(U) = G(U)^{+d_a}, and under these identifications e_U is the identity of G(U)^{+d_a} ((g_1,...,g_{d_a}) |-> the map (x_1,...,x_{d_a}) |-> sum_i x_i g_i). So e_U is bijective for every open U contained in some V_a.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+    "place": "Proof, first sentence"
+   }
+  },
+  {
+   "text": "The open sets U contained in some V_a cover every open of X. Hence e is locally injective and locally surjective in the sense of [lem-weil-pbc-site-sheafification-iso-locally-bijective] (site of open subsets of X): if e_U(s)=e_U(t), then s and t agree on the cover (U cap V_a)_a, and every t in Q(U) has preimages on the members of that cover, by Step 1. By that lemma the sheafification e^#: P^# -> Q^# is an isomorphism of abelian sheaves; since Q is a sheaf, Q -> Q^# is an isomorphism, so the morphism e-bar: F^vee tensor_O G = P^# -> Q through which e factors (the O-linear factorization of [def-weil-presheaf-modules-sheafification]) is a bijective O-linear map of sheaves, whose inverse is again O-linear: e-bar is the evaluation isomorphism of O_X-modules.",
+   "uses": [
+    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+    "place": "Proof, first sentence"
+   }
+  },
+  {
+   "text": "For a morphism G to G' of O_X-modules, the evaluation formula commutes with applying that morphism to each coefficient g_i. Hence the global evaluation isomorphism and its inverse commute with G to G', proving naturality in G; the O-module structure and bilinearity are those of the sheaf tensor, sheaf Hom, and module Hom definitions.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-modules-hom-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+    "place": "Proof, first sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-modules-hom-module",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md",
+  "place": "Proof, first sentence"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +104,30 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ext-locally-free",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-ext-evaluation",
+  "worker": "stage1",
+  "summary": "Split the evaluation lemma into the local finite-free calculation, gluing of the canonical local inverses, and naturality in the second module. No new nodes were needed because the item dependencies define the local trivialization, tensor, sheaf Hom, module Hom, and sectionwise module category operations.",
+  "blueprint": [
+   "Proof, first sentence: local finite-free evaluation and its canonical global map"
+  ],
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-exv",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-exv (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-ext-locally-free.md, Proof first sentence (evaluation F^vee tensor - -> Hom(F,-) iso for finite locally free F); the item statement says exactly that, for F locally free of locally finite (not necessarily constant) rank and arbitrary O_X-module G, natural in G; it involves no Ext, so it is unaffected by the ill-posed def-sc-ext-sheaf and remains what the correct route needs (Ext^i = R^i Hom(F,-)(G) with Hom(F,-) = Gamma o (F^vee tensor -)). Read the five cited definition nodes (def-amb-finite-locally-free-module, def-pur-sheaf-tensor-product, def-pur-sheaf-hom incl. its sheaf property, def-pur-sheaf-modules-hom-module, def-weil-sheaf-of-modules-category). FIX more, RETURN less (C1): dag/nodes/sec-picard-framework/lem-sc-ext-evaluation.json: proof steps 1-2: the delivered step 1 identified (F^vee tensor G)|_{V_a} with a finite sum of G|_{V_a} via the presheaf tensor, which needs sheafification to commute with restriction to opens (no node cited), and the global evaluation morphism needs the O-linear universal property of sheafification (not cited); rewrote step 1 as the presheaf-level map e: F^vee tensor_p G -> Hom(F,G), bijective on every open inside some V_a (direct computation from the cited definitions), and step 2 as: e locally injective and locally surjective, hence e^# iso by the existing leaf lem-weil-pbc-site-sheafification-iso-locally-bijective (Mathlib W_iff_isLocallyBijective / W_iff), with the O-linear factorization from leaf def-weil-presheaf-modules-sheafification; added both to uses and proof_deps; step 3 (naturality) unchanged. Small cases: rank 0 (both sides 0), rank 1 (O tensor G = G = Hom(O,G)), disconnected X with ranks 0 and 2, non-quasi-coherent G (argument is sectionwise on U subset V_a, no quasi-coherence used). Report item 1 mentions a citations.json not in the delivery (harmless). Start 'Sat Oct 10 03:41:13 PM UTC 2026', end 'Sat Oct 10 03:42:55 PM UTC 2026'.; 1 file(s) fixed by the reviewer"
+ }
 }

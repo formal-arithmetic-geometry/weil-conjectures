@@ -1843,3 +1843,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:42 L: merged deliver/F1/lem-sc-zero-dim-noetherian-finite-discrete (reviewer FIX; first push; new nodes: 1)
 - 15:42 L: lem-sc-smooth-proper-curve-dualizing lead_note: existence of g^! assumed, no node states it (reviewer R-spd)
 - 15:42 L: merged deliver/F1/lem-pc-base-change-product (reviewer FIX; first push; new nodes: 0)
+- 15:43 L: merged deliver/H1/lem-sc-ext-evaluation (reviewer FIX; first push; new nodes: 0)

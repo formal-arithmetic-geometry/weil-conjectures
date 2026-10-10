@@ -1,0 +1,13 @@
+1. Files written: `dag/nodes/sec-picard-framework/lem-sc-ext-evaluation.json` (item, split; no new nodes); `citations.json` records verbatim statement excerpts for every cited step.
+
+2. Attachments: none. No sorry-free declaration matching `lem-sc-ext-evaluation` was found in `WeilConjectures/` or `Comparator/`.
+
+3. WANTED: the blueprint source named by the imported node, `literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-ext-locally-free.md`, is not present in this checkout. The split follows the node's recorded place, “Proof, first sentence”.
+
+4. The imported item had an empty proof despite being the dependency used by `lem-sc-ext-locally-free`. I checked the item statement against that ancestor and retained all five existing statement dependencies. The proof now has three steps: on each trivializing open, finite-free evaluation is an explicit inverse pair; these local inverses agree on overlaps and glue, with equality checked sectionwise in the sheaf-module category; and the coordinate formula proves naturality in the second module. The finite locally free definition supplies the open cover, the tensor and sheaf-Hom definitions supply the local formulas, and the module-Hom definition supplies bilinearity. I tested the argument on rank zero, rank one, arbitrary finite rank, and a disconnected scheme with different local ranks; no hypothesis beyond finite local freeness is used. I searched the DAG and blueprint before making any node and found no existing evaluation lemma, so no new node was necessary.
+
+## Review by H1
+
+I read the imported item, its unit `sk-thm-picard-duality`, the chapter record, and the ancestor `lem-sc-ext-locally-free`. I searched the full Lean source for the item id and for evaluation/tensor-Hom declarations; the source has no exact declaration without sorry. I read each of the five cited definition nodes in the DAG. Step 1 uses exactly the open-cover clause, the tensor-product construction, the sheaf-Hom construction, and the sectionwise module category; its finite direct-sum calculation is the only local algebra. Step 2 uses the sheafification and sheaf-Hom facts to glue, and the cited category statement explicitly says kernels are computed sectionwise, which is the equality check used. Step 3 uses the restriction behavior of tensor, the sheaf-Hom action, and the module-Hom bilinearity clause; these are precisely the facts needed for naturality. I recorded a quote for every citation in `citations.json`, repaired the initially too-short paraphrases by copying statement text, and confirmed the JSON parses. No new node or Mathlib leaf was introduced.
+
+5. What remains: the delivery preflight is the final mechanical check.
