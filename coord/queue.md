@@ -1,8 +1,8 @@
 # Work queue
 
-835 items; claim with `tools/claim.py next <group> [--stage N]`.
+836 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (662)
+## Stage 1: nodes to split (663)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
-| `lem-weil-pbc-popescu-lift-solution` | 1011 | none |
 | `lem-weil-pbc-popescu-lifting` | 1011 | none |
 | `lem-weil-pbc-popescu-product` | 1011 | none |
 | `lem-weil-pbc-popescu-solution-modulo` | 1011 | none |
@@ -134,6 +133,7 @@
 | `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1012 | none |
 | `lem-weil-pbc-popescu-delocalize-weak` | 1012 | none |
 | `lem-weil-pbc-popescu-desingularize` | 1012 | none |
+| `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1012 | none |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1012 | none |
 | `lem-weil-pbc-popescu-lift-once` | 1012 | none |
 | `lem-weil-pbc-popescu-lift-twice` | 1012 | none |
@@ -151,6 +151,7 @@
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1012 | none |
+| `lem-weil-pbc-smooth-over-product-ring` | 1012 | none |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1012 | none |
 | `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
 | `lem-weil-pbc-standard-smooth-include-generators` | 1012 | none |
@@ -847,7 +848,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 674 nodes that wait for stage 1, 461 nodes that wait for a statement dependency.
+Not open yet: 675 nodes that wait for stage 1, 462 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
