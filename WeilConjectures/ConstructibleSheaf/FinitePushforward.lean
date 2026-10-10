@@ -64,6 +64,120 @@ noncomputable instance Etale.hasFiniteBiproducts_sheaf_moduleCat (X : Scheme.{u}
     HasFiniteBiproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   HasFiniteBiproducts.of_hasFiniteProducts
 
+section UnitComp
+
+universe u'
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
+/-- The unit of `(h₁ ≫ h₂)^* ⊣ (h₁ ≫ h₂)_*` is the composite of the units of `h₂` and `h₁`, up to
+the composition isomorphisms. -/
+theorem Etale.unit_app_comp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (F : Sheaf R.smallEtaleTopology A) :
+    (upperStarLowerStarAdjunction A (h₁ ≫ h₂)).unit.app F ≫ (lowerStarComp A h₁ h₂).inv.app _ =
+      ((upperStarLowerStarAdjunction A h₂).unit.app F ≫
+        (h₂)_*[A].map ((upperStarLowerStarAdjunction A h₁).unit.app ((h₂)^*[A].obj F))) ≫
+        (h₂)_*[A].map ((h₁)_*[A].map
+          (((conjugateEquiv (upperStarLowerStarAdjunction A (h₁ ≫ h₂))
+            ((upperStarLowerStarAdjunction A h₂).comp (upperStarLowerStarAdjunction A h₁))).symm
+              (lowerStarComp A h₁ h₂).inv).app F)) := by
+  rw [unit_conjugateEquiv_symm, Adjunction.comp_unit_app]
+  rfl
+
+/-- If the units of `h₁ ≫ h₂` at `F` and of `h₁` at `h₂^* F` are isomorphisms, so is the unit of
+`h₂` at `F`. -/
+theorem Etale.isIso_unit_app_of_comp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (F : Sheaf R.smallEtaleTopology A)
+    [IsIso ((upperStarLowerStarAdjunction A (h₁ ≫ h₂)).unit.app F)]
+    [IsIso ((upperStarLowerStarAdjunction A h₁).unit.app ((h₂)^*[A].obj F))] :
+    IsIso ((upperStarLowerStarAdjunction A h₂).unit.app F) := by
+  have h := Etale.unit_app_comp A h₁ h₂ F
+  have : IsIso ((upperStarLowerStarAdjunction A (h₁ ≫ h₂)).unit.app F ≫
+      (lowerStarComp A h₁ h₂).inv.app _) := inferInstance
+  rw [h] at this
+  simpa only [isIso_comp_right_iff] using this
+
+/-- If the units of `h₂` at `F` and of `h₁` at `h₂^* F` are isomorphisms, so is the unit of
+`h₁ ≫ h₂` at `F`. -/
+theorem Etale.isIso_unit_app_comp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (F : Sheaf R.smallEtaleTopology A)
+    [IsIso ((upperStarLowerStarAdjunction A h₂).unit.app F)]
+    [IsIso ((upperStarLowerStarAdjunction A h₁).unit.app ((h₂)^*[A].obj F))] :
+    IsIso ((upperStarLowerStarAdjunction A (h₁ ≫ h₂)).unit.app F) := by
+  have h := Etale.unit_app_comp A h₁ h₂ F
+  have : IsIso ((upperStarLowerStarAdjunction A (h₁ ≫ h₂)).unit.app F ≫
+      (lowerStarComp A h₁ h₂ (h₁ ≫ h₂) rfl).inv.app _) := by
+    rw [h]; infer_instance
+  exact IsIso.of_isIso_comp_right _ ((lowerStarComp A h₁ h₂ (h₁ ≫ h₂) rfl).inv.app _)
+
+
+
+/-- The unit of `g^* ⊣ g_*` along an isomorphism `g` is an isomorphism. -/
+instance Etale.isIso_unit_app_of_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (F : Sheaf Y.smallEtaleTopology A) :
+    IsIso ((upperStarLowerStarAdjunction A g).unit.app F) := by
+  have := (upperStarLowerStarAdjunction A g).isEquivalence_left_of_isEquivalence_right
+  infer_instance
+
+end UnitComp
+
+/-- **Constant sheaves at the generic point of a normal scheme.** Let `Y` be an integral scheme all
+of whose local rings are integrally closed and `g : Spec K ⟶ Y` the inclusion of its generic
+point. Then the unit `M_Y ⟶ g_* g^* M_Y = g_* M_{Spec K}` is an isomorphism for every
+`Λ`-module `M`.
+
+This is the first half of `AlgebraicGeometry.Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed`;
+the second half follows from it by
+`AlgebraicGeometry.Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint`. On stalks at
+a geometric point `ȳ`, the unit is `M ⟶ M^{π₀(Spec 𝒪ˢʰ_{Y,ȳ} ×_Y Spec K)}`, and the generic fibre of
+`Spec 𝒪ˢʰ_{Y,ȳ}` is connected since the strict henselisation of a normal local domain is a normal
+domain (Stacks 06DI). -/
+theorem Etale.isIso_unit_constantSheaf_fromSpecStalk_genericPoint {Y : Scheme.{u}} [IsIntegral Y]
+    (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) (M : ModuleCat.{u + 1} Λ) :
+    IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (Y.fromSpecStalk (genericPoint Y))).unit.app
+          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
+  sorry
+
+/-- **The open-immersion half of 09Z5 from the generic-point half.** Let `Y` be a normal integral
+scheme and `j : U ⟶ Y` the inclusion of a nonempty open subscheme. If the unit
+`M_Z ⟶ g_* g^* M_Z` along the generic point `g` is an isomorphism for every normal integral `Z`,
+then the unit `M_Y ⟶ j_* j^* M_Y` is an isomorphism: the generic point of `Y` factors as the
+generic point of `U` followed by `j`, up to the isomorphism of stalks at the generic point. -/
+theorem Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint
+    (M : ModuleCat.{u + 1} Λ)
+    (hgen : ∀ (Z : Scheme.{u}) [IsIntegral Z], (∀ z : Z, IsIntegrallyClosed (Z.presheaf.stalk z)) →
+      IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+        (Z.fromSpecStalk (genericPoint Z))).unit.app
+          ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))
+    {Y : Scheme.{u}} [IsIntegral Y] (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y))
+    {U : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] [Nonempty U] :
+    IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app
+      ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) := by
+  have : IsIntegral U := isIntegral_of_isOpenImmersion j
+  have hU : ∀ x : U, IsIntegrallyClosed (U.presheaf.stalk x) := fun x ↦
+    have := hY (j x)
+    IsIntegrallyClosed.of_equiv (asIso (j.stalkMap x)).commRingCatIsoToRingEquiv
+  let MY := (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M
+  let gU := U.fromSpecStalk (genericPoint U)
+  -- the unit of the generic point of `U` at `j^* M_Y ≅ M_U`
+  have : IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) gU).unit.app
+      ((j)^*[ModuleCat.{u + 1} Λ].obj MY)) :=
+    (NatTrans.isIso_app_iff_of_iso _
+      ((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) j).app M)).2 (hgen U hU)
+  -- the unit of the generic point of `Y`, through the point `j η_U = η_Y`
+  have hη : j (genericPoint U) = genericPoint Y := genericPoint_eq_of_isOpenImmersion j
+  have hY' : IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+      (Y.fromSpecStalk (j (genericPoint U)))).unit.app MY) := by
+    rw [hη]
+    exact hgen Y hY
+  have : IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+      (Spec.map (j.stalkMap (genericPoint U)) ≫ Y.fromSpecStalk (j (genericPoint U)))).unit.app
+        MY) :=
+    Etale.isIso_unit_app_comp _ _ _ _
+  rw [Scheme.SpecMap_stalkMap_fromSpecStalk] at this
+  exact Etale.isIso_unit_app_of_comp _ gU j MY
+
 /-- **Constant sheaves on a normal scheme.** Let `Y` be an integral scheme all of whose local
 rings are integrally closed, `g : Spec K ⟶ Y` the inclusion of its generic point and `M` a
 `Λ`-module. Then the unit `M_Y ⟶ g_* g^* M_Y = g_* M_{Spec K}` is an isomorphism; the same
@@ -82,7 +196,9 @@ theorem Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed {Y : Scheme.{u}} [I
       ∀ {U : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] [Nonempty U],
         IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app
           ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
-  sorry
+  ⟨Etale.isIso_unit_constantSheaf_fromSpecStalk_genericPoint Λ hY M, fun j ↦
+    Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint Λ M
+      (fun _ _ hZ ↦ Etale.isIso_unit_constantSheaf_fromSpecStalk_genericPoint Λ hZ M) hY j⟩
 
 /-- **Constructible sheaves are finitely presentable.** On a quasi-compact quasi-separated
 scheme `X`, with `Λ` Noetherian, a constructible sheaf of `Λ`-modules `F` is a finitely
