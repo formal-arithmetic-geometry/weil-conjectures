@@ -2,13 +2,12 @@
 
 852 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (319)
+## Stage 1: nodes to split (318)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `thm-constructible-serre` | 5 | rests_on_sorry |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1010 | none |
-| `lem-weil-pbc-fpqc-descend-universally-closed` | 1010 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-finite-type-field-finite-isolated-points` | 1016 | none |
@@ -41,7 +40,6 @@
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
 | `lem-weil-pbc-coskeleton-matching-tuples` | 3008 | none |
-| `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
 | `lem-galois-fpqc-descend-unramified` | 3009 | none |
 | `lem-galois-fpqc-descending-types-morphisms` | 3009 | none |
 | `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
@@ -49,6 +47,7 @@
 | `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
 | `lem-sc-second-kummer-divisors` | 3009 | none |
 | `lem-sc-very-ample-separation-criterion` | 3009 | none |
+| `lem-weil-pbc-simplicial-index-finite-initial` | 3009 | none |
 | `lem-exc-cochains-derived-invariants` | 3010 | none |
 | `lem-exc-discrete-modules-abelian` | 3010 | none |
 | `lem-pc-nonzero-section-integral-cartier` | 3010 | none |
@@ -326,7 +325,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (533)
+## Stage 2: nodes to state (534)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -574,6 +573,7 @@
 | `lem-weil-pbc-fpqc-descend-locally-finite-type` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-quasi-compact` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-separated` | 1 | state |
+| `lem-weil-pbc-fpqc-descend-universally-closed` | 1 | state |
 | `lem-weil-pbc-fpqc-local-on-base-criterion` | 1 | state |
 | `lem-weil-pbc-free-complex-maps-to-resolution` | 1 | state |
 | `lem-weil-pbc-free-complex-mod-nonzerodivisor-exact` | 1 | state |
@@ -864,7 +864,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 338 nodes that wait for stage 1, 976 nodes that wait for a statement dependency.
+Not open yet: 337 nodes that wait for stage 1, 977 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
