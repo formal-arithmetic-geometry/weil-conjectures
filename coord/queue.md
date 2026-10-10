@@ -1,8 +1,8 @@
 # Work queue
 
-861 items; claim with `tools/claim.py next <group> [--stage N]`.
+860 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (321)
+## Stage 1: nodes to split (320)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lemma-weil-pbc-fibre-product-limit` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
-| `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-qcoherent-descent` | 3007 | none |
@@ -168,11 +167,11 @@
 | `thm-sp-double-complex-spectral-sequences` | 6005 | sorry_here |
 | `thm-sp-if-e1` | 6005 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
-| `lem-sc-cech-spectral` | 6007 | sorry_here |
 | `lem-sp-long-exact-of-triangle` | 6007 | sorry_here |
 | `pqf-def-coherent` | 6007 | none |
 | `pqf-def-cohomology` | 6007 | none |
 | `def-sp-homological-functor` | 6008 | none |
+| `lem-sc-cech-spectral` | 6008 | sorry_here |
 | `pqf-lem-locnoeth-lft` | 6008 | none |
 | `pqf-lem-pushforward-qcoh` | 6008 | none |
 | `lem-pc-affine-morphism-hi` | 6009 | rests_on_sorry |
@@ -873,7 +872,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 340 nodes that wait for stage 1, 995 nodes that wait for a statement dependency.
+Not open yet: 339 nodes that wait for stage 1, 996 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
