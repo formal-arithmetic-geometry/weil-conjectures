@@ -1,0 +1,73 @@
+{
+ "id": "def-weil-pbc-simplicial-object",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement'; the simplicial objects of semi-representable objects whose matching covers are meant, used through [def-weil-pbc-semi-representable-object] clause (4)",
+   "via": [
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Simplicial objects of a category, face and degeneracy maps",
+ "statement": "Let $\\Delta$ be the category of the finite totally ordered sets $[n]=\\{0<1<\\dots<n\\}$, $n\\geq0$, and order-preserving maps [def-weil-pbc-simplicial-set], and let $\\mathcal C$ be a category. A *simplicial object* $K$ of $\\mathcal C$ is a functor $K:\\Delta^{\\mathrm{op}}\\to\\mathcal C$. Its *term of degree $n$* is $K_n=K([n])$; for an order-preserving $\\varphi:[m]\\to[n]$ the morphism $K(\\varphi):K_n\\to K_m$ is its *simplicial operator*; the *face maps* are $d_i=K(\\delta_i):K_n\\to K_{n-1}$ ($n\\geq1$, $0\\leq i\\leq n$, $\\delta_i:[n-1]\\to[n]$ the increasing injection omitting $i$) and the *degeneracy maps* are $s_i=K(\\sigma_i):K_n\\to K_{n+1}$ ($0\\leq i\\leq n$, $\\sigma_i:[n+1]\\to[n]$ the nondecreasing surjection taking the value $i$ twice). A *morphism of simplicial objects* $K\\to K'$ is a natural transformation, i.e. morphisms $K_n\\to K'_n$ commuting with all simplicial operators.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Definition 016A (definition-simplicial-object), parts (1), (4); face and degeneracy maps as in Lemma 0167 (lemma-relations-face-degeneracy) and the definitions of delta^n_j, sigma^n_j before it"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "simplicial object in a category, face maps and the simplicial identity δ j.succ ≫ δ i = δ i.castSucc ≫ δ j",
+   "results": "CategoryTheory.SimplicialObject.δ_comp_δ, δ_comp_δ_self', δ_comp_δ_assoc (Mathlib.AlgebraicTopology.SimplicialObject.Basic); SSet.δ_comp_δ_apply",
+   "date": "2026-10-10",
+   "verdict": "match (SimplicialObject C with δ, σ)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.δ_comp_δ",
+   "results": "CategoryTheory.SimplicialObject.δ_comp_δ (Mathlib.AlgebraicTopology.SimplicialObject.Basic), stated for X : SimplicialObject C with X.δ",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^abbrev SimplicialObject\\|^def δ\\|^def σ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean",
+   "results": "abbrev SimplicialObject (line 52) := SimplexCategoryᵒᵖ ⥤ C; def δ (line 91) := X.map (SimplexCategory.δ i).op; def σ (line 97) := X.map (SimplexCategory.σ i).op",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.SimplicialObject; CategoryTheory.SimplicialObject.δ; CategoryTheory.SimplicialObject.σ",
+  "file": "Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean",
+  "how": "exact: SimplicialObject C (line 52) is the functor category SimplexCategoryᵒᵖ ⥤ C, whose morphisms are natural transformations; X _⦋n⦌ is K_n; X.map φ.op is K(φ); face maps X.δ i (line 91) = X.map (SimplexCategory.δ i).op with SimplexCategory.δ i the injection omitting i; degeneracies X.σ i (line 97) = X.map (SimplexCategory.σ i).op with SimplexCategory.σ i the surjection repeating i. SimplexCategory is the category of the [n] and order-preserving maps of [def-weil-pbc-simplicial-set]"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-semi-representable-object",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

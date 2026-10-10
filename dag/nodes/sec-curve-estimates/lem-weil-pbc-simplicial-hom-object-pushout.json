@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-simplicial-hom-object-pushout",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries': a family on V is a family on U and one on the new simplex agreeing on its boundary, i.e. Hom(V,K)_0 = Hom(U,K)_0 x_{Hom(boundary,K)_0} Hom(Delta[n],K)_0 (Stacks 01GM proof via 017N)",
+   "via": [
+    "lem-weil-pbc-hypercover-one-more-simplex",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Hom objects into a simplicial semi-representable object turn pushouts of finite simplicial sets into fibre products",
+ "statement": "Let $X$ be a scheme and $K$ a simplicial object of the category $\\mathrm{SR}(X)$ of semi-representable objects over $X$ [def-weil-pbc-semi-representable-object]. Call a simplicial set $S$ [def-weil-pbc-simplicial-set] *admissible* if $S_m$ is finite and nonempty for every $m\\geq0$ and $S$ has finitely many nondegenerate simplices. For admissible $S$ write $H(S)=\\operatorname{Hom}(S,K)_0$ with its universal family $(u^S_s)$ [def-weil-pbc-simplicial-hom-object], and for a morphism $f:S\\to S'$ of admissible simplicial sets let $f^*:H(S')\\to H(S)$ be the unique morphism with $u^S_s\\circ f^*=u^{S'}_{f(s)}$ for all simplices $s$ of $S$ (for an inclusion of a simplicial subset this is the restriction morphism). Let $p:A\\to B$, $q:A\\to C$ be morphisms of simplicial sets and let $D$ with $i:B\\to D$, $j:C\\to D$ be a pushout of $p$ and $q$ in simplicial sets, with $B$, $C$, $D$ admissible. (a) If $A$ is admissible, then $H(D)$ with $i^*$ and $j^*$ is a fibre product of $p^*:H(B)\\to H(A)$ and $q^*:H(C)\\to H(A)$ in $\\mathrm{SR}(X)$. (b) If $A$ is empty, then $H(D)$ with $i^*$ and $j^*$ is a product of $H(B)$ and $H(C)$ in $\\mathrm{SR}(X)$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 017N (lemma-hom-from-coprod), in degree 0, with the Hom objects of Lemma 017L (lemma-exists-hom-from-simplicial-set-finite); case (b) is the same argument with the fibre product over the final object; used in hypercovering.tex Lemma 01GM (lemma-one-more-simplex), proof, first and second paragraphs ('Hom(V,K)_0 = Hom(U,K)_0 x K_0'; 'is a fibre product square')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-semi-representable-object",
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-simplicial-hom-object"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hom from a pushout of simplicial sets into a simplicial object is the fibre product of the Hom objects",
+   "results": "CategoryTheory.SimplicialCategory.sHomFunctor/sHom/homEquiv', CategoryTheory.Limits.PreservesPushout.iso_hom, CategoryTheory.Limits.pushoutObjIso, CategoryTheory.IsPushout.desc",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal hom from a simplicial set into a simplicial object sends pushouts of simplicial sets to pullbacks",
+   "results": "SSet.instFinitePullback, SSet.instMonoidalClosed, SSet.finite_of_isPullback, SSet.horn₂₂.isPushout, SSet.Subcomplex.BicartSq.isPushout, CategoryTheory.Arrow.cechConerve_map",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ln 'simplicialHom|HomFromSimplicialSet|Hom\\(S, *K\\)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; rg -n 'IsPullback' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology/SimplicialObject",
+   "results": "only SimplicialSet/Homology/HomotopyInvariance.lean (unrelated); no Hom object Hom(S,K)_0 of a simplicial object of a category by a finite simplicial set",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-one-more-simplex",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

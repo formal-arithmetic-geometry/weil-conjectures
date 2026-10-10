@@ -23,9 +23,113 @@
   "def-weil-pbc-simplicial-set",
   "def-weil-pbc-simplicial-hom-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Gluing the new simplex.* Let $\\Delta[n]$ be the simplicial set of order-preserving maps $\\varphi:[m]\\to[n]$, $\\partial\\Delta[n]\\subseteq\\Delta[n]$ the simplicial subset of the non-surjective ones, and $a:\\Delta[n]\\to V$, $a(\\varphi)=V(\\varphi)(x)$. Conditions (1)-(3) of the statement are those of [lem-weil-pbc-simplicial-set-glue-simplex], so $a$ maps $\\partial\\Delta[n]$ into $U$, and with $b:\\partial\\Delta[n]\\to U$ the restriction of $a$ the square ($b$, $a$, $\\partial\\Delta[n]\\subseteq\\Delta[n]$, $U\\subseteq V$) is a pushout of simplicial sets [def-weil-pbc-simplicial-set]. For $n=0$, $\\partial\\Delta[0]$ is empty (every map $[m]\\to[0]$ is surjective) and $V$ with the inclusion of $U$ and $a$ is a coproduct $U\\amalg\\Delta[0]$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-glue-simplex",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GM (lemma-one-more-simplex), proof, first sentence ('V = U amalg Delta[0]') and second paragraph ('By Simplicial, Lemma 018R we have V = U amalg_{boundary Delta[n]} Delta[n]')"
+   }
+  },
+  {
+   "text": "*Notation and the Hom objects involved.* Call a simplicial set admissible if all its sets of $m$-simplices are finite and nonempty and it has finitely many nondegenerate simplices; $U$ and $V$ are admissible by hypothesis, $\\Delta[n]$ is admissible for every $n\\geq0$ and $\\partial\\Delta[n]$ for $n\\geq1$ by [lem-weil-pbc-simplicial-hom-object-standard-simplex](a),(b). Write $H(S)=\\operatorname{Hom}(S,K)_0$ [def-weil-pbc-simplicial-hom-object] and, for a morphism $f:S\\to S'$ of admissible simplicial sets, $f^*:H(S')\\to H(S)$ as in [lem-weil-pbc-simplicial-hom-object-pushout]; the morphism to be shown a covering is $\\rho=\\iota^*:H(V)\\to H(U)$, $\\iota:U\\subseteq V$. By [lem-weil-pbc-simplicial-hom-object-standard-simplex](a) there is a unique isomorphism $\\varepsilon:K_n\\to H(\\Delta[n])$ with $u^{\\Delta[n]}_\\varphi\\circ\\varepsilon=K(\\varphi)$ for all $\\varphi$ (both are $\\operatorname{Hom}(\\Delta[n],K)_0$, unique up to unique isomorphism).",
+   "uses": [
+    "lem-weil-pbc-simplicial-hom-object-standard-simplex",
+    "def-weil-pbc-simplicial-hom-object",
+    "lem-weil-pbc-simplicial-hom-object-pushout"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GM, proof, second paragraph (the objects Hom(Delta[n],K)_0, Hom(boundary Delta[n],K)_0)"
+   }
+  },
+  {
+   "text": "*Isomorphisms are coverings.* If $(\\alpha,(f_i)):\\{U_i\\}_{i\\in I}\\to\\{V_j\\}_{j\\in J}$ is an isomorphism of $\\mathrm{SR}(X)$ with inverse $(\\beta,(g_j))$, then $\\beta\\circ\\alpha=\\mathrm{id}_I$, $\\alpha\\circ\\beta=\\mathrm{id}_J$, $g_{\\alpha(i)}\\circ f_i=\\mathrm{id}$ and $f_{\\beta(j)}\\circ g_j=\\mathrm{id}$ [def-weil-pbc-semi-representable-object], so $\\alpha$ is bijective and each $f_i$ is an isomorphism; hence for each $j$ the family $\\{f_i:\\alpha(i)=j\\}$ consists of the single isomorphism $f_{\\beta(j)}$, which is etale and surjective, a covering family of $X_{\\Et}$ [def-weil-pbc-etale-site]. So every isomorphism of $\\mathrm{SR}(X)$ is a covering, and by [lem-weil-pbc-semi-representable-covering-permanence](1) a composite $\\sigma\\circ c\\circ\\tau$ of a covering $c$ with isomorphisms $\\sigma,\\tau$ is a covering.",
+   "uses": [
+    "def-weil-pbc-semi-representable-object",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-semi-representable-covering-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GM, proof, second paragraph ('this arrow is identified with K_n -> (cosk_{n-1} sk_{n-1} K)_n and hence is a covering'): the identification is by isomorphisms, which preserve coverings"
+   }
+  },
+  {
+   "text": "*Case $n\\geq1$: the fibre square.* By step 1 and [lem-weil-pbc-simplicial-hom-object-pushout](a), applied to $A=\\partial\\Delta[n]$, $B=U$, $C=\\Delta[n]$, $D=V$ with $p=b$, $q$ the inclusion $j:\\partial\\Delta[n]\\subseteq\\Delta[n]$ (all four admissible by step 2), $H(V)$ with $\\rho$ and $a^*$ is a fibre product of $b^*:H(U)\\to H(\\partial\\Delta[n])$ and $j^*:H(\\Delta[n])\\to H(\\partial\\Delta[n])$ in $\\mathrm{SR}(X)$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-hom-object-pushout",
+    "lem-weil-pbc-simplicial-set-glue-simplex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GM, proof, second paragraph ('By Simplicial, Lemma 017N we get that ... is a fibre product square')"
+   }
+  },
+  {
+   "text": "*Case $n\\geq1$: the bottom arrow is a covering.* Let $\\theta:H(\\partial\\Delta[n])\\to M_n(K)$ be the isomorphism of [lem-weil-pbc-simplicial-hom-object-standard-simplex](b) and $\\rho_n:K_n\\to H(\\partial\\Delta[n])$ the morphism of (c) there, so $\\theta\\circ\\rho_n=\\mu_n$. The morphism $j^*\\circ\\varepsilon$ satisfies $u^{\\partial\\Delta[n]}_\\varphi\\circ j^*\\circ\\varepsilon=u^{\\Delta[n]}_\\varphi\\circ\\varepsilon=K(\\varphi)$ for every simplex $\\varphi$ of $\\partial\\Delta[n]$, hence equals $\\rho_n$ by the uniqueness in the universal property of $H(\\partial\\Delta[n])$ [def-weil-pbc-simplicial-hom-object]. Thus $j^*=\\theta^{-1}\\circ\\mu_n\\circ\\varepsilon^{-1}$. Since $K$ is a hypercover, $\\mu_n:K_n\\to M_n(K)$ is a covering [def-weil-pbc-semi-representable-object](5), so $j^*$ is a covering by step 3.",
+   "uses": [
+    "lem-weil-pbc-simplicial-hom-object-standard-simplex",
+    "def-weil-pbc-simplicial-hom-object",
+    "def-weil-pbc-semi-representable-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GM, proof, last two sentences ('By Simplicial, Lemma 018V this arrow is identified with K_n -> (cosk_{n-1} sk_{n-1} K)_n and hence is a covering by definition of a hypercovering')"
+   }
+  },
+  {
+   "text": "*Case $n\\geq1$: base change.* Let $P=H(U)\\times_{H(\\partial\\Delta[n])}H(\\Delta[n])$ be the fibre product of $b^*$ and $j^*$ constructed in [lem-weil-pbc-semi-representable-finite-limits](2), with first projection $\\mathrm{pr}_1:P\\to H(U)$. By step 5 and [lem-weil-pbc-semi-representable-covering-permanence](2) (the covering $j^*$, base changed along $b^*$), $\\mathrm{pr}_1$ is a covering. By step 4, $H(V)$ is also a fibre product of $b^*$ and $j^*$, so the unique morphism $\\tau:H(V)\\to P$ with $\\mathrm{pr}_1\\circ\\tau=\\rho$ and $\\mathrm{pr}_2\\circ\\tau=a^*$ is an isomorphism. Hence $\\rho=\\mathrm{pr}_1\\circ\\tau$ is a covering by step 3.",
+   "uses": [
+    "lem-weil-pbc-semi-representable-finite-limits",
+    "lem-weil-pbc-semi-representable-covering-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GM, proof, second paragraph ('Thus it suffices to show that the bottom horizontal arrow is a covering'), with hypercovering.tex Lemma 01G4 (lemma-covering-permanence) (2) for the base change"
+   }
+  },
+  {
+   "text": "*Case $n=0$.* By step 1, $V=U\\amalg\\Delta[0]$, so by [lem-weil-pbc-simplicial-hom-object-pushout](b) (with $A$ empty, $B=U$, $C=\\Delta[0]$, $D=V$, admissible by step 2) $H(V)$ with $\\rho$ and $a^*$ is a product of $H(U)$ and $H(\\Delta[0])$. A product in $\\mathrm{SR}(X)$ is a fibre product over the final object $e=\\{\\mathrm{id}_X\\}$ [lem-weil-pbc-semi-representable-finite-limits](1),(2), and $M_0(K)=e$ with $\\mu_0:K_0\\to e$ a covering since $K$ is a hypercover [def-weil-pbc-semi-representable-object](5). The unique morphism $H(\\Delta[0])\\to e$ is $\\mu_0\\circ\\varepsilon^{-1}$, a covering by step 3. Let $P=H(U)\\times_eH(\\Delta[0])$ be the fibre product of [lem-weil-pbc-semi-representable-finite-limits](2); its projection $\\mathrm{pr}_1:P\\to H(U)$ is a covering by [lem-weil-pbc-semi-representable-covering-permanence](2), and as in step 6 $\\rho=\\mathrm{pr}_1\\circ\\tau$ for the isomorphism $\\tau:H(V)\\to P$ comparing the two products, so $\\rho$ is a covering by step 3.",
+   "uses": [
+    "lem-weil-pbc-simplicial-hom-object-pushout",
+    "lem-weil-pbc-semi-representable-finite-limits",
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-semi-representable-covering-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GM, proof, first paragraph ('If n = 0 ... V = U amalg Delta[0]. In this case Hom(V,K)_0 = Hom(U,K)_0 x K_0. The result, in this case, then follows from Lemma 01G4')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-simplicial-set-glue-simplex",
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-simplicial-hom-object-standard-simplex",
+  "def-weil-pbc-simplicial-hom-object",
+  "lem-weil-pbc-simplicial-hom-object-pushout",
+  "def-weil-pbc-semi-representable-object",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-semi-representable-covering-permanence",
+  "lem-weil-pbc-semi-representable-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Lemma 01GM (lemma-one-more-simplex), proof; with simplicial.tex Lemmas 018R, 017N, 018V, 0177"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,7 +154,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +170,13 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-hypercover-one-more-simplex",
+  "worker": "stage1",
+  "summary": "Proof written from Stacks 01GM. The source's three citations became nodes: 018R (glue one simplex: V = U amalg_{boundary} Delta[n]) -> lem-weil-pbc-simplicial-set-glue-simplex; 017N (Hom(-,K)_0 turns the pushout into a fibre product, plus the product case over an empty A needed for n = 0) -> lem-weil-pbc-simplicial-hom-object-pushout; 018V with 0177 (Hom(Delta[n],K)_0 = K_n, Hom(boundary,K)_0 = M_n(K), restriction = mu_n) -> lem-weil-pbc-simplicial-hom-object-standard-simplex, stated against the explicit matching object M_n(K) of def-weil-pbc-semi-representable-object instead of cosk_{n-1}sk_{n-1}. Written out what the source leaves implicit: that isomorphisms of SR(X) are coverings (so the identifications preserve coverings), the base change through the canonical fibre product of lem-weil-pbc-semi-representable-finite-limits and covering permanence (1),(2), and the n = 0 case through the final object. Statement unchanged (it assumes V also has finitely many nondegenerate simplices, which the source does not need but which follows from (1)-(3)). No Lean on slopmaster2.",
+  "blueprint": "The steps realize the fourth paragraph of lem-weil-pbc-hypercover-refinement's proof ('Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement') for one new simplex: step 1 and 4 the prescribed boundary (gluing along boundary Delta[n]), steps 5-6 the lift along the matching cover K_n -> M_n(K) by base change, step 7 the degree-0 case."
+ },
+ "reviewed": "2026-10-10 L: 7 steps following 01GM (V as a pushout of U and the simplex 018R, the Hom objects, the fibre square 017N, the bottom arrow as the matching map via 018V/0177, base change by permanence, the n = 0 case); 3 new nodes"
 }

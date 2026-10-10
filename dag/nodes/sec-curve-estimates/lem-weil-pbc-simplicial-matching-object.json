@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-simplicial-matching-object",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement'; 'the matching covers' presuppose the matching object M_n and the matching morphism K_n -> M_n of a simplicial object, here in a category with finite limits (applied to SR(X))",
+   "via": [
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Matching objects of a simplicial object in a category with finite limits",
+ "statement": "Let $\\mathcal C$ be a category with finite limits [def-galois-finite-limits-colimits] and a final object $e$, and let $K$ be a simplicial object of $\\mathcal C$ with face maps $d_i$ [def-weil-pbc-simplicial-object]. For $n\\geq2$ let $D_n(K)$ be the finite diagram in $\\mathcal C$ with objects $K^{(i)}_{n-1}=K_{n-1}$ ($0\\leq i\\leq n$) and $K^{(i,j)}_{n-2}=K_{n-2}$ ($0\\leq i<j\\leq n$) and arrows $d_{j-1}:K^{(i)}_{n-1}\\to K^{(i,j)}_{n-2}$ and $d_i:K^{(j)}_{n-1}\\to K^{(i,j)}_{n-2}$ for $0\\leq i<j\\leq n$; let $D_1(K)$ be the diagram with the two objects $K^{(0)}_0=K^{(1)}_0=K_0$ and no arrows; let $D_0(K)$ be the empty diagram. Then: (1) for every $n\\geq0$ the diagram $D_n(K)$ has a limit $M_n(K)$ in $\\mathcal C$ (for $n=0$ this is a final object, for $n=1$ a product $K_0\\times K_0$), unique up to unique isomorphism compatible with the limit projections; for $n\\geq1$ write $\\mathrm{pr}_i:M_n(K)\\to K_{n-1}$ for the projection to $K^{(i)}_{n-1}$, $0\\leq i\\leq n$. (2) For $n\\geq1$ and every object $W$ of $\\mathcal C$, the map $g\\mapsto(\\mathrm{pr}_0\\circ g,\\dots,\\mathrm{pr}_n\\circ g)$ is a bijection, natural in $W$, from the morphisms $W\\to M_n(K)$ onto the tuples $(x_0,\\dots,x_n)$ of morphisms $x_i:W\\to K_{n-1}$ satisfying $d_{j-1}\\circ x_i=d_i\\circ x_j$ for all $0\\leq i<j\\leq n$ (no condition when $n=1$). (3) For $n\\geq2$ the face maps $d_i:K_n\\to K_{n-1}$ satisfy $d_{j-1}\\circ d_i=d_i\\circ d_j:K_n\\to K_{n-2}$ for all $0\\leq i<j\\leq n$; hence for every $n\\geq1$ there is a unique morphism $\\mu_n:K_n\\to M_n(K)$, the *matching morphism*, with $\\mathrm{pr}_i\\circ\\mu_n=d_i$ for $0\\leq i\\leq n$; and $\\mu_0:K_0\\to M_0(K)$ denotes the unique morphism to the final object.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 0186 (lemma-formula-limit): the functor T -> {(f_0,...,f_{n+1}) : d_{j-1} f_i = d_i f_j} of its statement and the relations delta^{n+1}_j delta^n_i = delta^{n+1}_i delta^n_{j-1} recalled before it (Lemma 0167, lemma-relations-face-degeneracy); existence of finite limits as in hypercovering.tex Lemma 01G2 (lemma-coprod-prod-SR) and Categories Lemma 002O (lemma-finite-limits-exist)"
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "matching object of a simplicial object: limit of compatible faces, coskeleton of the truncation in degree n",
+   "results": "SSet.coskAdj, SimplicialObject.Truncated.cosk, SSet.cosk, SimplicialObject.IsCoskeletal (Mathlib.AlgebraicTopology.SimplicialObject.Basic / Coskeletal)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the coskeleton as a right Kan extension, no matching object as a finite limit of faces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "matching object M_n X of a simplicial object: limit over the proper faces of the n-simplex (boundary), the matching map X_n → M_n X",
+   "results": "cechNerveTerminalFrom (Mathlib.AlgebraicTopology.CechNerve); SimplicialObject.Splitting.* (Mathlib.AlgebraicTopology.SimplicialObject.Split); DoldKan.Γ₀.*",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'matching ?object|matchingObj|MatchingObject' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-semi-representable-object",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

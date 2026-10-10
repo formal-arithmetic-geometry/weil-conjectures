@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-sr-matching-object-one-member",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement': the hypercover $U$ there is a simplicial etale $X$-scheme, and the lifting along matching covers is done in SR(X) (lem-weil-pbc-hypercover-finite-simplex-lifting), which needs that a hypercover of single etale $X$-schemes is a hypercover in SR(X) with the same matching schemes",
+   "via": [
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Matching objects in SR(X) of a simplicial etale X-scheme are its matching schemes",
+ "statement": "Let $X$ be a scheme with small etale site $X_{\\Et}$ [def-weil-pbc-etale-site], and let $U_\\bullet\\to X$ be an augmented simplicial $X$-scheme [def-weil-pbc-finite-split-hypercover] with simplicial operators $U(\\varphi)$ [def-weil-pbc-simplicial-object] and with every structure morphism $U_n\\to X$ etale. For $n\\geq0$ let $M_n(U)$ be its matching scheme: $M_0(U)=X$, and for $n\\geq1$ the limit, in schemes over $X$, of the diagram formed by the terms $U_k$, $k<n$, indexed by the injective non-identity order-preserving maps $\\delta:[k]\\to[n]$, with the simplicial operators between them; let $\\mu^U_n:U_n\\to M_n(U)$ be the matching map, whose $\\delta$-component is $U(\\delta)$ (for $n=0$ the augmentation $U_0\\to X$). Let $K$ be the simplicial object of the category $\\mathrm{SR}(X)$ of semi-representable objects over $X$ [def-weil-pbc-semi-representable-object] with $K_n$ the one-member family $\\{U_n\\to X\\}$ and $K(\\varphi)=(\\mathrm{id},(U(\\varphi)))$. Then for every $n\\geq0$: (1) $M_n(U)$ exists and $M_n(U)\\to X$ is etale, so $M_n(U)$ is an object of $X_{\\Et}$; (2) there is an isomorphism in $\\mathrm{SR}(X)$ from the matching object $M_n(K)$ of [def-weil-pbc-semi-representable-object] to the one-member family $\\{M_n(U)\\to X\\}$ under which the matching morphism $K_n\\to M_n(K)$ corresponds to the morphism $\\{U_n\\}\\to\\{M_n(U)\\}$ with component $\\mu^U_n$; (3) $K_n\\to M_n(K)$ is a covering in $\\mathrm{SR}(X)$ if and only if $\\mu^U_n$ is surjective. Consequently $K$ is a hypercover of $X$ in $\\mathrm{SR}(X)$ if and only if $\\mu^U_n$ is an etale covering (a surjective etale morphism) for every $n\\geq0$.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Definition 01G5 (definition-hypercovering) for a simplicial object of one-member families, with the fibre products and final object of Lemma 01G2 (lemma-coprod-prod-SR, proof of the statements on SR(C, X)) and the formula of simplicial.tex Lemma 0186 (lemma-formula-limit); the blueprint's matching schemes of def-weil-pbc-finite-split-hypercover"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-finite-split-hypercover",
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-semi-representable-object"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "FormalCoproduct.incl preserves limits; inclusion of a category into formal coproducts preserves pullbacks and terminal object",
+   "results": "FormalCoproduct.incl, FormalCoproduct.isTerminalIncl, FormalCoproduct.instHasTerminal, FormalCoproduct.fullyFaithfulIncl (Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the final object is preserved (isTerminalIncl); no preservation of fibre products or finite limits, no matching objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.FormalCoproduct.incl, CategoryTheory.Limits.PreservesLimit",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'preserves\\|PreservesLimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/FormalCoproducts/*.lean",
+   "results": "Basic.lean line 31 TODO: 'FormalCoproduct.incl C : C ⥤ FormalCoproduct.{w} C probably preserves every limit?'; lines 391-454 only eval/evalOp preserving (co)products",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-semi-representable-object",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "import_flags": [
+  "unreachable"
+ ]
+}

@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-simplicial-set-glue-simplex",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement': the new simplex x is glued to U along its boundary, V = U amalg_{boundary Delta[n]} Delta[n] (Stacks 01GM proof via 018R)",
+   "via": [
+    "lem-weil-pbc-hypercover-one-more-simplex",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Adding one simplex to a simplicial set is a pushout along the boundary of the standard simplex",
+ "statement": "Let $U\\subseteq V$ be a simplicial subset of a simplicial set [def-weil-pbc-simplicial-set]. For $n\\geq0$ let $\\Delta[n]$ be the simplicial set with $\\Delta[n]_m$ the set of order-preserving maps $\\varphi:[m]\\to[n]$ and $\\Delta[n](\\psi)(\\varphi)=\\varphi\\circ\\psi$, and let $\\partial\\Delta[n]\\subseteq\\Delta[n]$ be the simplicial subset whose $m$-simplices are the non-surjective $\\varphi:[m]\\to[n]$ (so $\\partial\\Delta[0]$ is empty). Suppose $n\\geq0$ and $x\\in V_n$ with $x\\notin U_n$ satisfy (1) $V_i=U_i$ for $i<n$, (2) $V_n=U_n\\cup\\{x\\}$, and (3) every $z\\in V_j$ with $j>n$ and $z\\notin U_j$ is degenerate. Let $a:\\Delta[n]\\to V$ be the morphism of simplicial sets $a(\\varphi)=V(\\varphi)(x)$ for $\\varphi\\in\\Delta[n]_m$. Then $a(\\partial\\Delta[n]_m)\\subseteq U_m$ for every $m$, and, writing $b:\\partial\\Delta[n]\\to U$ for the restriction of $a$, the commutative square formed by $b$, $a$ and the inclusions $\\partial\\Delta[n]\\subseteq\\Delta[n]$, $U\\subseteq V$ is a pushout square of simplicial sets: for every simplicial set $Y$ and morphisms $g:U\\to Y$, $h:\\Delta[n]\\to Y$ with $g\\circ b=h|_{\\partial\\Delta[n]}$ there is a unique morphism $f:V\\to Y$ with $f|_U=g$ and $f\\circ a=h$. (For $n=0$ the compatibility condition is empty, so $V$ with the inclusion of $U$ and $a$ is a coproduct $U\\amalg\\Delta[0]$.)",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 018R (lemma-glue-simplex), statement and proof (its last step is Lemma 017S (lemma-injective-map-simplicial-sets)), with the morphism Delta[n] -> V of Lemma 0177 (lemma-simplex-map); used in hypercovering.tex Lemma 01GM (lemma-one-more-simplex), proof, second paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "attaching a nondegenerate simplex to a simplicial subset is a pushout along the boundary inclusion of the standard simplex",
+   "results": "SSet.modelCategoryQuillen.I, SSet.horn₂₁.isPushout (HornColimits), SSet.Subcomplex.BicartSq.isPushout (SubcomplexColimits), SSet.Subcomplex.N.mk",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial subset U of V with V obtained by adding one nondegenerate n-simplex x: V is the pushout of U and Delta[n] over the boundary of Delta[n]",
+   "results": "SSet.modelCategoryQuillen.I/J, SSet.horn₂₀/₂₁/₂₂.isPushout, SSet.Subcomplex.BicartSq.isPushout, SSet.modelCategoryQuillen.boundary_ι_mem_I",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'lemma isPushout' and rg -ln IsPushout in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology/SimplicialSet",
+   "results": "5 files; SSet.relativeCellComplexOfMono.isPushout (Skeleton.lean:395): for a mono i:X->Y, skeletonOfMono i (d+1) is the pushout of skeletonOfMono i d and a coproduct of copies of Delta[d] along copies of the boundary, one per nondegenerate d-simplex of Y not in the range of i",
+   "date": "2026-10-10",
+   "verdict": "generalization, not one line: identifying U = skeletonOfMono i n and V = skeletonOfMono i (n+1) under (1)-(3) is the argument of 018R itself"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "SSet.relativeCellComplexOfMono.isPushout",
+  "file": "Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean",
+  "line": 395,
+  "why_not_leaf": "attaches all nondegenerate d-simplices outside a mono at once; that conditions (1)-(3) make U and V two consecutive relative skeleta is the content of 018R's proof"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-one-more-simplex",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

@@ -1,0 +1,71 @@
+{
+ "id": "def-weil-pbc-formal-coproduct",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement'; the category in which the matching covers live: Stacks' semi-representable objects, used through [def-weil-pbc-semi-representable-object] clause (1)",
+   "via": [
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The category of formal coproducts (semi-representable objects) of a category",
+ "statement": "Let $\\mathcal C$ be a category. The *category of formal coproducts* (semi-representable objects) $\\mathrm{SR}(\\mathcal C)$ has as objects the families $\\{U_i\\}_{i\\in I}$ of objects of $\\mathcal C$ indexed by a set $I$. A morphism $\\{U_i\\}_{i\\in I}\\to\\{V_j\\}_{j\\in J}$ is a pair $(\\alpha,(f_i)_{i\\in I})$ of a map $\\alpha:I\\to J$ and morphisms $f_i:U_i\\to V_{\\alpha(i)}$ of $\\mathcal C$; the identity of $\\{U_i\\}_{i\\in I}$ is $(\\mathrm{id}_I,(\\mathrm{id}_{U_i})_i)$, and composition is $(\\beta,(g_j)_{j\\in J})\\circ(\\alpha,(f_i)_{i\\in I})=(\\beta\\circ\\alpha,(g_{\\alpha(i)}\\circ f_i)_{i\\in I})$. For an object $T$ of $\\mathcal C$, $\\{T\\}$ denotes the one-member family (indexed by a one-point set), and $T\\mapsto\\{T\\}$, $h\\mapsto(\\mathrm{id},(h))$ is a functor $\\mathcal C\\to\\mathrm{SR}(\\mathcal C)$. A morphism $\\{T\\}\\to\\{V_j\\}_{j\\in J}$ is the same as a pair $(j,t)$ of an index $j\\in J$ and a morphism $t:T\\to V_j$ of $\\mathcal C$.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Definition 01G0 (definition-SR), first part (the category SR(C)); the one-member objects {U} as in the proof of Lemma 01G2 (lemma-coprod-prod-SR), part (2)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of formal coproducts: families of objects indexed by a type, morphisms a map of index sets and componentwise morphisms",
+   "results": "CategoryTheory.Limits.FormalCoproduct, FormalCoproduct.category, FormalCoproduct.mk, FormalCoproduct.Hom.mk (Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.FormalCoproduct.inclHomEquiv",
+   "results": "FormalCoproduct.inclHomEquiv : ((incl C).obj X ⟶ Y) ≃ (i : Y.I) × (X ⟶ Y.obj i) (Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match (last sentence)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure FormalCoproduct\\|structure Hom\\|instance category\\|def incl \\|def inclHomEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean",
+   "results": "lines 50, 61, 69, 104, 132",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.FormalCoproduct; FormalCoproduct.Hom; FormalCoproduct.category; FormalCoproduct.incl; FormalCoproduct.inclHomEquiv",
+  "file": "Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean",
+  "how": "exact, one declaration per clause: objects = structure FormalCoproduct (line 50: index type I in universe w and obj : I -> C); morphisms = structure Hom (line 61: f : X.I -> Y.I and phi i : X.obj i -> Y.obj (f i)); identity and composition = instance category (line 69: id = (id, 1), comp = (beta.f o alpha.f, alpha.phi i >> beta.phi (alpha.f i))); {T} and the functor = incl (line 104, index type PUnit); morphisms {T} -> Y as pairs (j,t) = inclHomEquiv (line 132)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-semi-representable-object",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

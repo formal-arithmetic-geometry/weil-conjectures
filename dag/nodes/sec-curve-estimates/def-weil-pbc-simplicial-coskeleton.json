@@ -1,0 +1,74 @@
+{
+ "id": "def-weil-pbc-simplicial-coskeleton",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement'; the matching object written as Stacks writes it in the hypercover condition, (cosk_{n-1} sk_{n-1} K)_n",
+   "via": [
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Truncated simplicial objects, skeleton and coskeleton",
+ "statement": "Let $\\mathcal C$ be a category and $m\\geq0$. Let $\\Delta_{\\leq m}$ be the full subcategory of $\\Delta$ [def-weil-pbc-simplicial-set] on the objects $[0],\\dots,[m]$. An *$m$-truncated simplicial object* of $\\mathcal C$ is a functor $V:\\Delta_{\\leq m}^{\\mathrm{op}}\\to\\mathcal C$, and a morphism of $m$-truncated simplicial objects is a natural transformation. The *$m$-skeleton* $\\mathrm{sk}_mK$ of a simplicial object $K$ of $\\mathcal C$ [def-weil-pbc-simplicial-object] is its restriction to $\\Delta_{\\leq m}^{\\mathrm{op}}$; with the restriction of morphisms this is a functor $\\mathrm{sk}_m$ from simplicial objects to $m$-truncated simplicial objects. For an $m$-truncated simplicial object $V$, an *$m$-coskeleton of $V$* is a simplicial object $\\mathrm{cosk}_mV$ together with a morphism $\\varepsilon:\\mathrm{sk}_m\\mathrm{cosk}_mV\\to V$ of $m$-truncated simplicial objects such that for every simplicial object $U$ of $\\mathcal C$ the map $h\\mapsto\\varepsilon\\circ\\mathrm{sk}_m(h)$ is a bijection from morphisms $U\\to\\mathrm{cosk}_mV$ of simplicial objects to morphisms $\\mathrm{sk}_mU\\to V$; we say $\\mathrm{cosk}_mV$ *exists* if such a pair exists. For a simplicial object $K$ such that $\\mathrm{cosk}_m\\mathrm{sk}_mK$ exists, the *canonical morphism* $K\\to\\mathrm{cosk}_m\\mathrm{sk}_mK$ is the morphism corresponding to $\\mathrm{id}_{\\mathrm{sk}_mK}$ under this bijection.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Definition 0180 (definition-truncated-simplicial-object) and the skeleton functor after it (Section 017Z, section-skeleton); Section 0AMA (section-coskeleton), equation-cosk and the definition of 'cosk_n V exists'"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "matching object of a simplicial object: limit of compatible faces, coskeleton of the truncation in degree n",
+   "results": "SimplicialObject.Truncated.cosk (Basic.lean), SimplicialObject.coskAdj, SimplicialObject.IsCoskeletal (Coskeletal.lean), SSet.cosk",
+   "date": "2026-10-10",
+   "verdict": "match: Truncated.cosk = right Kan extension along the inclusion, coskAdj : truncation ⊣ Truncated.cosk"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.coskAdj",
+   "results": "SimplicialObject.coskAdj : truncation n ⊣ Truncated.cosk n (given HasRightKanExtension instances); Truncated.cosk_reflective; instIsRightKanExtension...CoskAdj (Mathlib.AlgebraicTopology.SimplicialObject.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'abbrev Truncated\\|def truncation\\|Truncated.cosk\\|def coskAdj' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean",
+   "results": "abbrev Truncated (line 237) := (SimplexCategory.Truncated n)ᵒᵖ ⥤ C; def truncation (line 277); protected abbrev Truncated.cosk (line 297) := ran (SimplexCategory.Truncated.inclusion n).op; def coskAdj (line 330)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.SimplicialObject.Truncated; CategoryTheory.SimplicialObject.truncation; CategoryTheory.Functor.IsRightKanExtension; CategoryTheory.SimplicialObject.Truncated.cosk; CategoryTheory.SimplicialObject.coskAdj",
+  "file": "Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean; Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean",
+  "how": "exact, one declaration per clause: m-truncated simplicial objects = SimplicialObject.Truncated C m (Basic.lean line 237, functors (SimplexCategory.Truncated m)ᵒᵖ ⥤ C, SimplexCategory.Truncated m the full subcategory on [0..m]); sk_m = truncation m (line 277, whiskering with the inclusion); an m-coskeleton (cosk_m V, ε) of V is exactly a right Kan extension of V along (SimplexCategory.Truncated.inclusion m).op with counit ε (Functor.IsRightKanExtension, KanExtension/Basic.lean line 77: precomposition with ε gives the bijection Hom(U, cosk_m V) = Hom(sk_m U, V)); cosk_m V exists = HasRightKanExtension (KanExtension/Basic.lean line 257), and then it is Truncated.cosk m (line 297, ran) with coskAdj (line 330: truncation m ⊣ Truncated.cosk m); the canonical morphism K -> cosk_m sk_m K is (coskAdj m).unit.app K"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-semi-representable-object",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

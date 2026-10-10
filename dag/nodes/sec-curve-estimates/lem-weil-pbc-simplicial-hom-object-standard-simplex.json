@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-simplicial-hom-object-standard-simplex",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'the matching covers of U lift those boundaries': the restriction from the new simplex to its boundary is the matching map K_n -> M_n(K) (Stacks 01GM proof via 018V)",
+   "via": [
+    "lem-weil-pbc-hypercover-one-more-simplex",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Hom objects from the standard simplex and its boundary are the term and the matching object",
+ "statement": "Let $X$ be a scheme and $K$ a simplicial object of $\\mathrm{SR}(X)$, with matching objects $M_n(K)$, canonical morphisms $\\mu_n:K_n\\to M_n(K)$ (components $d_0,\\dots,d_n$) and, for $n\\geq1$, projections $\\mathrm{pr}_i:M_n(K)\\to K_{n-1}$ onto the $i$-th factor ($0\\leq i\\leq n$) [def-weil-pbc-semi-representable-object]. For $n\\geq0$ let $\\Delta[n]$ be the simplicial set with $\\Delta[n]_m$ the set of order-preserving maps $\\varphi:[m]\\to[n]$ and $\\Delta[n](\\psi)(\\varphi)=\\varphi\\circ\\psi$, and let $\\partial\\Delta[n]\\subseteq\\Delta[n]$ be the simplicial subset whose $m$-simplices are the non-surjective $\\varphi:[m]\\to[n]$ (so $\\partial\\Delta[0]$ is empty). For $0\\leq i\\leq n$ let $\\delta_i:[n-1]\\to[n]$ be the injection omitting $i$, an $(n-1)$-simplex of $\\partial\\Delta[n]$. Then: (a) $\\Delta[n]_m$ is finite and nonempty for all $m$ and $\\Delta[n]$ has finitely many nondegenerate simplices (the injective $\\varphi$), and $K_n$ with the family $(K(\\varphi):K_n\\to K_m)_{\\varphi\\in\\Delta[n]_m}$ is $\\operatorname{Hom}(\\Delta[n],K)_0$ [def-weil-pbc-simplicial-hom-object]: this family is a $\\Delta[n]$-family over $K_n$ and every $\\Delta[n]$-family $(f_\\varphi)$ over an object $W$ is $(K(\\varphi)\\circ f_{\\mathrm{id}_{[n]}})_\\varphi$ for the unique morphism $f_{\\mathrm{id}_{[n]}}:W\\to K_n$. (b) For $n\\geq1$, $\\partial\\Delta[n]_m$ is finite and nonempty for all $m$ and $\\partial\\Delta[n]$ has finitely many nondegenerate simplices, and there is a unique isomorphism $\\theta:\\operatorname{Hom}(\\partial\\Delta[n],K)_0\\to M_n(K)$ with $\\mathrm{pr}_i\\circ\\theta=u_{\\delta_i}$ for $0\\leq i\\leq n$, where $(u_s)$ is the universal $\\partial\\Delta[n]$-family. (c) For $n\\geq1$, if $\\rho:K_n\\to\\operatorname{Hom}(\\partial\\Delta[n],K)_0$ is the unique morphism with $u_\\varphi\\circ\\rho=K(\\varphi)$ for every simplex $\\varphi$ of $\\partial\\Delta[n]$ (the restriction morphism along $\\partial\\Delta[n]\\subseteq\\Delta[n]$ under the identification (a)), then $\\theta\\circ\\rho=\\mu_n$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 018V (lemma-cosk-shriek) for (b), (c), with the matching object (cosk_{n-1} sk_{n-1} K)_n written as the limit of Lemma 0186 (lemma-formula-limit) as in def-weil-pbc-semi-representable-object; Lemma 0177 (lemma-simplex-map) for (a); used in hypercovering.tex Lemma 01GM (lemma-one-more-simplex), proof, last paragraph ('By Simplicial, Lemma 018V this arrow is identified with K_n -> (cosk_{n-1} sk_{n-1} K)_n')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-semi-representable-object",
+  "def-weil-pbc-simplicial-hom-object"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphisms from the boundary of the standard simplex to a simplicial object correspond to compatible families of faces (matching object)",
+   "results": "SSet.modelCategoryQuillen.I, AlgebraicTopology.DoldKan.MorphComponents, SSet.boundary (Boundary), SSet.PtSimplex",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "boundary of standard simplex is a colimit (multicoequalizer) of its faces; maps from boundary ∂Δ[n] to X are compatible tuples of (n-1)-simplices",
+   "results": "SSet.horn.isColimit, SSet.horn.multicoequalizerDiagram (HornColimits; horns only), SSet.boundary_eq_iSup, SSet.boundary, SSet.S1",
+   "date": "2026-10-10",
+   "verdict": "no match: only the horn is presented as a multicoequalizer"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'def yonedaEquiv' StdSimplex.lean; rg -n 'lemma hom_ext|def boundary|boundary_zero' Boundary.lean; rg -ln 'matchingObject|MatchingObject' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "SSet.yonedaEquiv (StdSimplex.lean:157, maps Delta[n] -> X for X a simplicial SET), SSet.boundary (Boundary.lean:37), SSet.boundary_zero (Boundary.lean:92), SSet.boundary.hom_ext (Boundary.lean:195, uniqueness only); no matching object in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match: Yoneda for simplicial sets only, boundary maps characterised only up to uniqueness"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "SSet.yonedaEquiv; SSet.boundary.hom_ext",
+  "file": "Mathlib/AlgebraicTopology/SimplicialSet/StdSimplex.lean; Mathlib/AlgebraicTopology/SimplicialSet/Boundary.lean",
+  "line": "157; 195",
+  "why_not_leaf": "these are for maps into simplicial sets, not Hom objects into a simplicial object of SR(X); the existence half of (b) is not in Mathlib"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-one-more-simplex",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

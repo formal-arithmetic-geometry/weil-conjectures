@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-matching-object-coskeleton",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of $U$ lift those boundaries after finite refinement'; the matching object M_n(U) of the blueprint is Stacks' (cosk_{n-1} sk_{n-1} U)_n of Definition 01G5",
+   "via": [
+    "def-weil-pbc-semi-representable-object",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The matching object is the degree-n term of the (n-1)-coskeleton",
+ "statement": "Let $\\mathcal C$ be a category with finite limits [def-galois-finite-limits-colimits], let $K$ be a simplicial object of $\\mathcal C$ [def-weil-pbc-simplicial-object] and let $n\\geq1$. Let $M_n(K)$, with projections $\\mathrm{pr}_i:M_n(K)\\to K_{n-1}$ ($0\\leq i\\leq n$), and $\\mu_n:K_n\\to M_n(K)$ be the matching object and the matching morphism of [lem-weil-pbc-simplicial-matching-object]. Then the $(n-1)$-coskeleton $L=\\mathrm{cosk}_{n-1}\\mathrm{sk}_{n-1}K$ of $\\mathrm{sk}_{n-1}K$ exists [def-weil-pbc-simplicial-coskeleton], with counit $\\varepsilon:\\mathrm{sk}_{n-1}L\\to\\mathrm{sk}_{n-1}K$ and canonical morphism $c:K\\to L$, and there is a unique morphism $\\theta:L_n\\to M_n(K)$ with $\\mathrm{pr}_i\\circ\\theta=\\varepsilon_{n-1}\\circ d^L_i$ for $0\\leq i\\leq n$ (where $d^L_i:L_n\\to L_{n-1}$ are the face maps of $L$ and $\\varepsilon_{n-1}:L_{n-1}\\to K_{n-1}$ is the degree-$(n-1)$ component of $\\varepsilon$); $\\theta$ is an isomorphism, and $\\theta\\circ c_n=\\mu_n$, where $c_n:K_n\\to L_n$ is the degree-$n$ component of $c$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 0183 (lemma-existence-cosk: existence of cosk_m and the formula (cosk_m U)_n = lim over (Delta/[n])_{<=m}^{opp} of U(n)) and Lemma 0186 (lemma-formula-limit: that limit, for n = m+1, represents the functor of tuples (f_0,...,f_{m+1}) with d_{j-1} f_i = d_i f_j); used in hypercovering.tex Definition 01G5 (definition-hypercovering), condition (2)"
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-weil-pbc-simplicial-object",
+  "lem-weil-pbc-simplicial-matching-object",
+  "def-weil-pbc-simplicial-coskeleton"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "matching object of a simplicial object: limit of compatible faces, coskeleton of the truncation in degree n",
+   "results": "SSet.coskAdj, SimplicialObject.Truncated.cosk, SimplicialObject.IsCoskeletal, isCoskeletal_iff_isIso",
+   "date": "2026-10-10",
+   "verdict": "no match: cosk exists only under HasRightKanExtension hypotheses, no formula for its degree-n term"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.cosk, CategoryTheory.Limits.HasFiniteLimits",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'HasRightKanExtension\\|HasPointwiseRightKanExtension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology; grep -rn 'FinCategory (StructuredArrow\\|FinCategory.*Truncated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only the hypotheses of Truncated.cosk/coskAdj (SimplicialObject/Basic.lean lines 298, 309, 321, 350; Coskeletal.lean line 68); no instance deriving them from HasFiniteLimits and no finiteness instance for the comma categories of the truncated inclusion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-semi-representable-object",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
