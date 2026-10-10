@@ -4,12 +4,14 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-tensor",
-   "place": "the homotopy-colimit construction used before the final comparison",
+   "place": "the homotopy-colimit construction used before the final comparison: identify the cone of 1-shift with the termwise filtered colimit",
    "via": [
     "lem-pc-kflat-hocolim-truncations"
    ]
   },
-  "same_as": []
+  "same_as": [
+   "lem-kun-complex-colimit-hocolim"
+  ]
  },
  "kind": "statement",
  "title": "Telescope homotopy colimits are termwise filtered colimits",
@@ -22,9 +24,43 @@
   "def-pc-cochain-complex-modules",
   "def-pc-quasi-iso-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A^\\bullet=\\bigoplus_n E_n^\\bullet$ and let $u=1-\\operatorname{shift}:A^\\bullet\\to A^\\bullet$. In each degree, an element of the direct sum has finite support; if $u(x)=0$, its first nonzero component cannot cancel with an earlier component, so the least component is zero, and induction gives $x=0$. Thus $u$ is termwise injective. The cokernel in degree $i$ is the quotient of $\\bigoplus_n E_n^i$ by the relations identifying each element with its image in the next summand, which is exactly the filtered colimit $\\varinjlim_n E_n^i$. These identifications commute with the differentials, so $\\operatorname{coker}(u)$ is the termwise filtered-colimit complex.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 0949 (derived-lemma-colim-hocolim), proof"
+   }
+  },
+  {
+   "text": "With the cone convention of [def-weil-abstract-derived-category], the cone of $u$ is $C(u)^r=A^r\\oplus A^{r+1}$ with differential $(l,k)\\mapsto(d(l)+u(k),-d(k))$. The map $\\pi:C(u)\\to\\operatorname{coker}(u)$, $(l,k)\\mapsto[l]$, is a termwise surjective chain map, since $[d(l)+u(k)]=[d(l)]$; this is the canonical map from $\\operatorname{hocolim}_n E_n^\\bullet=C(u)$ to $\\varinjlim_n E_n^\\bullet$ (Step 1). Its kernel $K^\\bullet$ consists of the pairs $(u(c),k)$, with $c$ unique because $u$ is termwise injective (Step 1). $K^\\bullet$ is contractible: $h(u(c),k)=(0,c)$, of degree $-1$, satisfies $dh+hd=1$, because $d(0,c)=(u(c),-d(c))$ and $h(d(u(c),k))=h(u(d(c)+k),-d(k))=(0,d(c)+k)$. Hence $H^i(K^\\bullet)=0$ for all $i$. The degreewise short exact sequence $0\\to K^\\bullet\\to C(u)\\xrightarrow{\\pi}\\operatorname{coker}(u)\\to0$ of complexes of $\\mathcal O$-modules has the long exact cohomology sequence $\\cdots\\to H^i(K^\\bullet)\\to H^i(C(u))\\xrightarrow{H^i(\\pi)}H^i(\\operatorname{coker}(u))\\to H^{i+1}(K^\\bullet)\\to\\cdots$ (snake lemma in the abelian category $\\Mod(\\mathcal O)$, Stacks Lemma 0117), so every $H^i(\\pi)$ is an isomorphism. Thus $\\pi$ is a quasi-isomorphism in the sense of [def-pc-quasi-iso-modules]. (Equivalently, [lem-weil-pbc-complex-ses-triangle] applied to $0\\to A^\\bullet\\xrightarrow{u}A^\\bullet\\to\\operatorname{coker}(u)\\to0$ exhibits $\\varinjlim_n E_n^\\bullet$ as a cone of $Q(u)$ in $D(\\Mod(\\mathcal O))$; the explicit $\\pi$ above is what makes the comparison map canonical.)",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-abstract-derived-category",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 0949 (derived-lemma-colim-hocolim), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-abstract-derived-category",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 0949 (derived-lemma-colim-hocolim), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -35,33 +71,49 @@
   },
   {
    "tool": "loogle",
-   "query": "HomologicalComplex hocolim colimit",
-   "results": "no matching declaration; unknown identifier hocolim",
+   "query": "DerivedCategory.triangleOfSES_distinguished, CochainComplex mapping cone, filtered colimit",
+   "results": "no matching declaration; loogle reported unknown identifier mapping",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "homotopy.*colimit|mapping.*telescope",
+   "query": "mappingCone|triangleOfSES_distinguished|filtered.*colimit [Mathlib/Algebra/Homology]",
    "results": "no matches",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "homotopy colimit of complexes",
+   "query": "homotopy colimit telescope cone 1-shift termwise filtered colimit of complexes",
    "results": "service unavailable",
    "date": "2026-10-11",
    "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-kflat-hocolim-truncations",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-complex-hocolim-colimit",
+  "worker": "stage1",
+  "summary": "Split the telescope comparison into the direct-sum injectivity and cokernel computation, followed by the distinguished triangle from the resulting short exact sequence of complexes. No new nodes were needed; the existing short-exact-complex triangle node and the cochain/quasi-isomorphism definitions are cited.",
+  "blueprint": "Realizes the homotopy-colimit construction used before the final comparison in the def-weil-derived-tensor route: the cone of 1-shift is compared with the termwise filtered colimit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-chc2244",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chc2244 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 0949 (derived.tex 10352): agrees; no hocolim definition node exists, so the inline definition restates nothing (no class b). Step 1 injectivity of 1-shift and cokernel = termwise colimit: elementary, correct (C1 ok). FIX more, RETURN less: (1) C1/E: Step 2 contracting homotopy (a,b)->(0,a) was ill-degreed and wrong (missed by the Second reading); replaced by h(u(c),k)=(0,c) with dh+hd=1 verified. (2) C4: cone rewritten in the convention of def-weil-abstract-derived-category, C(u)^r=A^r+A^{r+1}, d=(d_L, u; 0, -d); quasi-iso concluded by the long exact cohomology sequence (Stacks 0117, elementary) of 0->K->C(u)->coker->0; step marked elementary, uses/proof_deps add def-weil-abstract-derived-category. (3) source/proof_origin still named 06YS (K-flat resolution) despite the Second reading's claim; corrected to derived.tex Lemma 0949.; 1 file(s) fixed by the reviewer"
+ }
 }
