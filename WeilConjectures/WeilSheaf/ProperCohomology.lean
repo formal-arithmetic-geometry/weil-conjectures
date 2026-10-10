@@ -88,6 +88,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 variable {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [X.Over (Spec (CommRingCat.of k₀))]
 
+omit [Finite k₀] in
 /-- The base change `ī` of a universally closed open immersion `i` has clopen range. -/
 lemma isClosed_range_geometricFiberMap (i : U ⟶ X) [IsOpenImmersion i] [UniversallyClosed i]
     [i.IsOver (Spec (CommRingCat.of k₀))] :

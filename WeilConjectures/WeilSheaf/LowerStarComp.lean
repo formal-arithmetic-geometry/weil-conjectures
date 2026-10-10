@@ -59,6 +59,7 @@ lemma lowerStarCongr_hom_app_lowerStar_obj_hom_app {Z Y W : Scheme.{u}} (g : W �
         ((MorphismProperty.Over.pullbackCongr e).inv.app V.unop)).op :=
   lowerStarCongr_hom_app_hom_app A e _ V
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The exchange isomorphisms `p_* ⋙ a₂_* ≅ a₁_* ⋙ p_*` of pushforwards along commutative
 squares `p ≫ a₂ = a₁ ≫ p` are compatible with composition of pushforwards. -/
 lemma lowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T₂) (q : T₂ ⟶ T₃)
@@ -95,6 +96,7 @@ lemma lowerStarComp_exchange {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T₂) (
   · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
       MorphismProperty.Over.mk]
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- `AlgebraicGeometry.ProEtale.lowerStarComp_exchange` for a morphism `r` equal to `p ≫ q`. -/
 lemma lowerStarComp_exchange' {T₁ T₂ T₃ : Scheme.{u}} (p : T₁ ⟶ T₂) (q : T₂ ⟶ T₃)
     (r : T₁ ⟶ T₃) (hr : p ≫ q = r)
