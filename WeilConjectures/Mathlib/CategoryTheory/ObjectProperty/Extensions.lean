@@ -182,4 +182,29 @@ theorem filtrationClosure_iff [P.IsClosedUnderIsomorphisms] {X : C} :
         exact .of_mono (φ ⟨i, _⟩) (ih _) (hP ⟨i, _⟩)
     exact P.filtrationClosure.prop_of_iso e (key n (by omega))
 
+/-- An additive functor preserving monomorphisms and cokernels carries finite filtrations with
+quotients in `P` to finite filtrations with quotients in `Q`, if it carries `P` into `Q`. -/
+lemma filtrationClosure_map {D : Type*} [Category* D] [Abelian D] {Q : ObjectProperty D}
+    [Q.IsClosedUnderIsomorphisms] (F : C ⥤ D) [F.PreservesZeroMorphisms]
+    [F.PreservesMonomorphisms] [PreservesColimitsOfShape WalkingParallelPair F]
+    (hF : ∀ X, P X → Q (F.obj X)) {X : C} (hX : P.filtrationClosure X) :
+    Q.filtrationClosure (F.obj X) := by
+  induction hX with
+  | of_isZero hX => exact .of_isZero (F.map_isZero hX)
+  | of_mono i _ hi ih =>
+    exact .of_mono (F.map i) ih (Q.prop_of_iso (PreservesCokernel.iso F i) (hF _ hi))
+
+/-- If `P` is closed under subobjects, quotients and extensions, then in an exact sequence
+`X₁ ⟶ X₂ ⟶ X₃` whose outer terms satisfy `P`, so does the middle term: the image of `X₁` is a
+quotient of `X₁`, and the cokernel of its inclusion is a subobject of `X₃`. -/
+lemma prop_X₂_of_exact [P.IsClosedUnderSubobjects] [P.IsClosedUnderQuotients]
+    [P.IsClosedUnderExtensions] {S : ShortComplex C} (hS : S.Exact) (h₁ : P S.X₁)
+    (h₃ : P S.X₃) : P S.X₂ := by
+  have := hS.epi_kernelLift
+  exact P.prop_X₂_of_shortExact (S := ShortComplex.mk (kernel.ι S.g) (cokernel.π _)
+      (cokernel.condition _))
+    (ShortComplex.ShortExact.mk' (exact_cokernel (kernel.ι S.g)) inferInstance inferInstance)
+    (P.prop_of_epi (kernel.lift S.g S.f S.zero) h₁)
+    (P.prop_of_mono ((Abelian.coimageIsoImage S.g).hom ≫ Abelian.image.ι S.g) h₃)
+
 end CategoryTheory.ObjectProperty
