@@ -7,6 +7,9 @@ module
 
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Limits.IsLimit
 
 /-!
 # The diagonal of `E ⊗_F E` for an algebraic extension
@@ -25,9 +28,13 @@ diagonally.
 
 @[expose] public section
 
+universe u
+
 open TensorProduct
 
 namespace IntermediateField
+
+section Kernel
 
 variable {F E : Type*} [Field F] [Field E] [Algebra F E]
 
@@ -60,5 +67,116 @@ theorem exists_finiteDimensional_mapOfCompatibleSMul_eq_zero [Algebra.IsAlgebrai
   refine Finset.sum_eq_zero fun s hs ↦ ?_
   rw [map_smul, map_sub, mapOfCompatibleSMul_tmul, mapOfCompatibleSMul_tmul,
     one_tmul_eq_tmul_one L (IntermediateField.subset_adjoin F _ hs), sub_self, smul_zero]
+
+
+end Kernel
+
+section Colimit
+
+open CategoryTheory Limits
+
+variable (F E : Type u) [Field F] [Field E] [Algebra F E]
+
+/-- The intermediate fields of `E/F` which are finite over `F`, ordered by inclusion. -/
+abbrev FiniteSubext : Type u := {L : IntermediateField F E // FiniteDimensional F L}
+
+instance FiniteSubext.instNonempty : Nonempty (FiniteSubext F E) := ⟨⟨⊥, inferInstance⟩⟩
+
+instance FiniteSubext.instIsDirected : IsDirected (FiniteSubext F E) (· ≤ ·) where
+  directed L₁ L₂ := by
+    have := L₁.2
+    have := L₂.2
+    exact ⟨⟨L₁.1 ⊔ L₂.1, IntermediateField.finiteDimensional_sup _ _⟩, le_sup_left (a := L₁.1),
+      le_sup_right (a := L₁.1)⟩
+
+instance FiniteSubext.instIsFiltered : IsFiltered (FiniteSubext F E) :=
+  @isFiltered_of_directed_le_nonempty _ _ (FiniteSubext.instIsDirected F E) _
+
+/-- The diagram `L ↦ E ⊗_L E` over the finite subextensions of `E/F`. -/
+noncomputable def diagonalDiagram : FiniteSubext F E ⥤ CommRingCat.{u} where
+  obj L := .of (E ⊗[L.1] E)
+  map {L L'} f :=
+    letI : Algebra L.1 L'.1 := (IntermediateField.inclusion (leOfHom f)).toRingHom.toAlgebra
+    haveI : IsScalarTower L.1 L'.1 E := IsScalarTower.of_algebraMap_eq (fun _ ↦ rfl)
+    CommRingCat.ofHom
+      (Algebra.TensorProduct.mapOfCompatibleSMul L'.1 L.1 E E E).toRingHom
+  map_id L := by
+    refine CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_)
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a b => rfl
+    | add x y hx hy => simp_all
+  map_comp f g := by
+    refine CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_)
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a b => rfl
+    | add x y hx hy => simp_all
+
+/-- `E` as a cocone over the diagram `L ↦ E ⊗_L E`, through the multiplication maps. -/
+noncomputable def diagonalCocone : Cocone (diagonalDiagram F E) where
+  pt := .of E
+  ι :=
+    { app L := CommRingCat.ofHom (Algebra.TensorProduct.lmul' L.1 (S := E)).toRingHom
+      naturality L L' f := by
+        refine CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_)
+        induction x using TensorProduct.induction_on with
+        | zero => simp
+        | tmul a b => rfl
+        | add x y hx hy => simp_all }
+
+variable {F E} [Algebra.IsAlgebraic F E]
+
+/-- The finite subextension `F(x)` of `E/F`. -/
+noncomputable def FiniteSubext.adjoin (x : E) : FiniteSubext F E :=
+  ⟨IntermediateField.adjoin F {x},
+    IntermediateField.adjoin.finiteDimensional (Algebra.IsIntegral.isIntegral x)⟩
+
+/-- In a cocone over `L ↦ E ⊗_L E`, the images of `c ⊗ 1` and `1 ⊗ c` do not depend on `L` and
+agree. -/
+lemma diagonalCocone_aux (s : Cocone (diagonalDiagram F E)) (L : FiniteSubext F E) (c : E) :
+    (s.ι.app L).hom (c ⊗ₜ 1) = (s.ι.app ⟨⊥, inferInstance⟩).hom (c ⊗ₜ 1) ∧
+      (s.ι.app L).hom (1 ⊗ₜ c) = (s.ι.app ⟨⊥, inferInstance⟩).hom (c ⊗ₜ 1) := by
+  have h₀ (M : FiniteSubext F E) (d : E) :
+      (s.ι.app M).hom (d ⊗ₜ 1) = (s.ι.app ⟨⊥, inferInstance⟩).hom (d ⊗ₜ 1) :=
+    ConcreteCategory.congr_hom (s.w (homOfLE (show (⟨⊥, inferInstance⟩ : FiniteSubext F E) ≤ M from
+      (bot_le : (⊥ : IntermediateField F E) ≤ M.1)))) (d ⊗ₜ 1)
+  refine ⟨h₀ L c, ?_⟩
+  obtain ⟨M, hLM, hcM⟩ :=
+    @directed_of (FiniteSubext F E) (· ≤ ·) (FiniteSubext.instIsDirected F E) L
+    (FiniteSubext.adjoin (F := F) c)
+  have hc : c ∈ M.1 := hcM (IntermediateField.mem_adjoin_simple_self F c)
+  have h1 := ConcreteCategory.congr_hom (s.w (homOfLE hLM))
+    (show (diagonalDiagram F E).obj L from (1 : E) ⊗ₜ c)
+  refine h1.symm.trans ((congrArg (s.ι.app M).hom (one_tmul_eq_tmul_one M.1 hc)).trans ?_)
+  exact h₀ M c
+
+/-- **`E` is the filtered colimit of the rings `E ⊗_L E`** over the finite subextensions `L` of
+an algebraic extension `E/F`. -/
+noncomputable def isColimitDiagonalCocone : IsColimit (diagonalCocone F E) where
+  desc s := CommRingCat.ofHom ((s.ι.app ⟨⊥, inferInstance⟩).hom.comp
+    Algebra.TensorProduct.includeLeftRingHom)
+  fac s L := by
+    refine CommRingCat.hom_ext (RingHom.ext fun x ↦ ?_)
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a b =>
+      have hab : (a ⊗ₜ[L.1] b : E ⊗[L.1] E) = (a ⊗ₜ 1) * (1 ⊗ₜ b) := by
+        rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
+      change (s.ι.app ⟨⊥, inferInstance⟩).hom ((a * b) ⊗ₜ 1) = (s.ι.app L).hom (a ⊗ₜ b)
+      rw [hab, map_mul, (diagonalCocone_aux s L a).1, (diagonalCocone_aux s L b).2]
+      erw [← map_mul]
+      rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one]
+      rfl
+    | add x y hx hy => simp_all
+  uniq s m hm := by
+    ext e
+    have h := ConcreteCategory.congr_hom (hm ⟨⊥, inferInstance⟩)
+      (show (diagonalDiagram F E).obj ⟨⊥, inferInstance⟩ from e ⊗ₜ (1 : E))
+    change m.hom (e * 1) = _ at h
+    rw [mul_one] at h
+    exact h
+
+end Colimit
 
 end IntermediateField
