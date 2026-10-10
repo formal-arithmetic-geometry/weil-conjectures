@@ -13,9 +13,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Colim
 
 # The six functors on module objects over `E_X`, for a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
 
-Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` (`PadicAlgCl.FiniteSubext ℓ`),
-with the topology restricted from `ℚ̄_ℓ`. The coefficient ring object `E_X = C(-, E)` on a scheme
-`X` is the ring object `A_X(E)` of
+Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`
+(`PadicAlgCl.FiniteIntermediateField ℓ`), with the topology restricted from `ℚ̄_ℓ`. The coefficient
+ring object `E_X = C(-, E)` on a scheme `X` is the ring object `A_X(E)` of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.ContinuousMap`, and the six
 functors on module objects over `E_X` are those of the folder
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension`, for the topological ring
@@ -59,7 +59,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 section UpperLowerStar
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) (E : FiniteSubext ℓ)
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) (E : FiniteIntermediateField ℓ)
 
 /-- The pushforward `f_* : Mod_{E_X} ⥤ Mod_{E_Y}` on module objects over the coefficient ring
 object `E_X = C(-, E)` of a finite subextension `E`: the pushforward
@@ -157,7 +157,7 @@ end UpperLowerStar
 
 section OpenImmersion
 
-variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (E : FiniteSubext ℓ)
+variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (E : FiniteIntermediateField ℓ)
 
 /-- The extension by zero `j_! : Mod_{E_U} ⥤ Mod_{E_X}` along an open immersion `j : U ⟶ X` on
 module objects over `E_X`: `ProEtale.ContinuousMapRing.openImmersionLowerShriek` for `T = E`,
@@ -220,7 +220,7 @@ end OpenImmersion
 
 section LowerShriek
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (E : FiniteSubext ℓ)
+variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (E : FiniteIntermediateField ℓ)
 
 /-- The derived lower shriek `Rf_! : D(Mod_{E_X}) ⥤ D(Mod_{E_Y})` on module objects over `E_X`,
 for the chosen compactification `X ⟶[i] Z ⟶[g] Y` of `f`:
