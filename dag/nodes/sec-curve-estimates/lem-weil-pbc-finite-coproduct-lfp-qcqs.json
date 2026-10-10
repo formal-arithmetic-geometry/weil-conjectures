@@ -22,9 +22,53 @@
   "def-weil-pbc-scheme-conventions",
   "def-sbc-locally-finite-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-scheme-coproduct-family], the coprojections identify each $V_a$ with an open and closed subscheme $W_a$ of $V$; the $W_a$ are pairwise disjoint and cover $V$. If every $V_a$ is quasi-compact, each $W_a$ is a quasi-compact subset of $V$, since its inclusion is a homeomorphism onto its image. Their finite union is quasi-compact: an open cover of $V$ restricts to one of each $W_a$, so choose finitely many opens for each $a$ and take the union of these finite choices. For $A=\\varnothing$ the union is empty and is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, coproduct gluing Lemmas 01JB and 01JC (open summands); finite-union compactness is the open-cover definition"
+   }
+  },
+  {
+   "text": "Suppose now each $V_a$ is quasi-separated. For every $a$, choose all affine opens $U_{a,t}$ of $V_a$; their images under the open immersion $\\iota_a$ are affine opens of $V$ and together cover $W_a$, hence all of $V$ [lem-weil-pbc-scheme-coproduct-family]. For two images from different summands the intersection is empty, thus quasi-compact. For two images from the same summand $a$, their intersection is homeomorphic to $U_{a,t}\\cap U_{a,t'}$, which is quasi-compact by part (1) of [lem-weil-pbc-quasi-separated-affine-cover-criterion] applied to $V_a$. Therefore the displayed affine open cover of $V$ has quasi-compact pairwise intersections; part (2) of that criterion makes $V$ quasi-separated. The argument also covers $A=\\varnothing$, when the empty affine family covers the empty scheme and its pairwise condition is vacuous.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma Tag 01KO (lemma-characterize-quasi-separated, lines 4125-4155), (1) implies (2) on each summand and (3) implies (1) on their coproduct"
+   }
+  },
+  {
+   "text": "Suppose every $g_a$ is locally of finite presentation. Given $x\\in V$, choose its unique summand $W_a$ and its preimage $x_a\\in V_a$ [lem-weil-pbc-scheme-coproduct-family]. By the pointwise definition [def-sbc-locally-finite-presentation], there are affine open neighbourhoods $U_a\\subset V_a$ of $x_a$ and $T\\subset S$ of $g_a(x_a)$, with $g_a(U_a)\\subset T$, for which $\\mathcal O_S(T)\\to\\mathcal O_{V_a}(U_a)$ is a finitely presented ring map. The open immersion $\\iota_a$ identifies $U_a$ with an affine open neighbourhood $\\iota_a(U_a)$ of $x$ in $V$, and $g\\circ\\iota_a=g_a$ by the coproduct mapping property. Thus the induced ring map $\\mathcal O_S(T)\\to\\mathcal O_V(\\iota_a(U_a))$ is isomorphic to the finitely presented map just chosen. As this holds for every $x$, the same pointwise definition says $g$ is locally of finite presentation. If $A=\\varnothing$, there are no points to check.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 01TQ (lemma-locally-finite-presentation-characterize, lines 4096-4133), locality on the source; written pointwise using Definition Tag 01TP"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex and literature/stacks-project/morphisms.tex",
+  "place": "Schemes, Lemma Tag 01KO (affine-cover criterion), and Morphisms, Lemma Tag 01TQ (local finite presentation); finite coproduct topology from Schemes, Lemmas 01JB and 01JC"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -61,7 +105,7 @@
   "file": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
   "reason": "Line 305 gives (2) with P = LocallyOfFinitePresentation (local at source by HasRingHomProperty, FinitePresentation.lean:56); Scheme.OpenCover.compactSpace (Mathlib/AlgebraicGeometry/Cover/Open.lean:104) gives the quasi-compact part of (1); quasi-separatedness of a finite coproduct is in neither, so the node is not a leaf."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -77,5 +121,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+  "worker": "F1",
+  "summary": "Finite coproducts are disjoint unions by the existing scheme-coproduct Mathlib leaf. Quasi-compactness is finite-union compactness. The quasi-separated clause uses the affine-cover criterion of Stacks 01KO, recorded in a new Mathlib leaf matching two Mathlib declarations; the affine opens of the summands give the requisite cover and intersections. Local finite presentation is checked pointwise through the open summand inclusions, following Stacks 01TQ. The empty index set is covered in each step.",
+  "blueprint": "The quasi-compact and quasi-separated clauses supply the finite coproduct used in the covering assertion of lem-weil-pbc-etale-finite-data-descent, proof third paragraph; local finite presentation supplies the hypothesis for descend-surjective at the same place."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 3 steps (qc, qs via the affine-cover criterion leaf, lfp pointwise) checked; new Mathlib leaf lines verified"
+ }
 }

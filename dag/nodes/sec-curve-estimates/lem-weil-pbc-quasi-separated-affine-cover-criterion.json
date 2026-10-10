@@ -1,0 +1,65 @@
+{
+ "id": "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-finite-data-descent",
+   "place": "proof, third paragraph: the finite family is packaged into its coproduct; to show that coproduct is quasi-separated, use the affine-cover criterion on affine opens in each summand",
+   "via": ["lem-weil-pbc-finite-coproduct-lfp-qcqs"]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quasi-separatedness from affine-open intersections",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. (1) If $X$ is quasi-separated, meaning that $X\\to\\operatorname{Spec}\\mathbf Z$ has quasi-compact diagonal [def-weil-quasi-separated-morphism], then the intersection of any two affine open subschemes of $X$ is quasi-compact. (2) Conversely, if $X$ has an open covering $(U_i)_{i\\in I}$ by affine open subschemes such that $U_i\\cap U_j$ is quasi-compact for every $i,j\\in I$, then $X$ is quasi-separated.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma Tag 01KO (lemma-characterize-quasi-separated, lines 4125-4155), (1) implies (2) and (3) implies (1), with base Spec Z"
+ },
+ "stmt_deps": ["def-pc-scheme", "def-weil-quasi-separated-morphism"],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scheme quasi separated iff intersections of affine opens compact",
+   "results": "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens and AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated)",
+   "date": "2026-10-10",
+   "verdict": "match: one declaration per implication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine open cover of scheme with compact intersections quasi separated",
+   "results": "AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover (Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated)",
+   "date": "2026-10-10",
+   "verdict": "match: converse implication"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiSeparatedSpace ?X iff affine open intersections compact",
+   "results": "none with this syntax; LeanSearch gave both declarations",
+   "date": "2026-10-10",
+   "verdict": "no match by this query"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'quasiSeparatedSpace_iff_forall_affineOpens|quasiSeparatedSpace_of_isOpenCover|quasiSeparatedSpace_iff_quasiSeparated' Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+   "results": "lines 56-76: quasiSeparatedSpace_iff_forall_affineOpens; lines 181-194: Scheme.quasiSeparatedSpace_of_isOpenCover; lines 133-135: quasiSeparatedSpace_iff_quasiSeparated relates the topological and scheme notions",
+   "date": "2026-10-10",
+   "verdict": "match: source read at the cited lines"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+  "how": "Clause (1) is quasiSeparatedSpace_iff_forall_affineOpens at lines 56-76, using quasiSeparatedSpace_iff_quasiSeparated at lines 133-135 to identify the absolute scheme notion. Clause (2) is Scheme.quasiSeparatedSpace_of_isOpenCover at lines 181-194, with the same identification. Both statements use IsCompact for the underlying set of the intersection, exactly quasi-compactness of that open subscheme.",
+  "line": 56
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {"by": "worker", "item": "lem-weil-pbc-finite-coproduct-lfp-qcqs", "date": "2026-10-10"},
+ "lean_audit": {"master": {"state": "none"}, "slopmaster2": {"state": "none"}},
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
