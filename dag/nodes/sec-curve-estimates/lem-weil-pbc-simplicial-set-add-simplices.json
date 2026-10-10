@@ -21,9 +21,60 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every simplex $y\\in V_j$ is a repeated degeneracy of a nondegenerate simplex: if $y$ is degenerate, write $y=V(f)(y')$ with $y'\\in V_{j'}$ and $j'<j$ as in [def-weil-pbc-simplicial-set], and repeat on $y'$; the strictly decreasing nonnegative dimensions force termination. Consequently, if all nondegenerate simplices of $V$ lie in a simplicial subset $T$, then $T=V$, since $T$ contains every degeneracy of each of its simplices.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018S (lemma-add-simplices), proof, induction parameter and base case, expanded using Definition 0175 (definition-terminology-simplicial-sets)"
+   }
+  },
+  {
+   "text": "Let $N$ be the number of nondegenerate simplices of $V$ outside $U$; it is finite. If $N=0$, step 1 gives $U=V$ and the chain has $r=0$. Otherwise choose the least dimension $n$ of such a simplex and one $x\\in V_n\\setminus U_n$ that is nondegenerate. For every $i<n$ and $y\\in V_i$, its nondegenerate ancestor from step 1 has dimension at most $i$ and hence belongs to $U$; thus $y\\in U_i$ and $V_i=U_i$. In particular every proper face of $x$ belongs to $U$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018S (lemma-add-simplices), proof, choice of the lowest-dimensional missing nondegenerate simplex"
+   }
+  },
+  {
+   "text": "Let $W_j$ consist of $U_j$ and the images $V(q)(x)$ for surjective order-preserving $q:[j]\\twoheadrightarrow[n]$. To check that $W$ is a simplicial subset [def-weil-pbc-simplicial-set], take any $f:[m]\\to[j]$. The image of a member of $U_j$ lies in $U_m$. For a member $V(q)(x)$, factor $q\\circ f$ as a surjection $p:[m]\\twoheadrightarrow[k]$ followed by an injection $i:[k]\\hookrightarrow[n]$. If $k<n$, then $V(i)(x)\\in V_k=U_k$ by step 2, so $V(q\\circ f)(x)=V(p)(V(i)(x))\\in U_m$. If $k=n$, then $i$ is the identity of $[n]$ and the image is $V(p)(x)\\in W_m$. Thus $U\\subseteq W\\subseteq V$. In degrees below $n$ nothing was added, because no surjection $[j]\\twoheadrightarrow[n]$ exists for $j<n$; in degree $n$ the sole surjection is the identity, so $W_n=U_n\\cup\\{x\\}$; and each new simplex in degree $j>n$ is a degeneracy of $x$, hence degenerate. Also $U_j\\subseteq W_j\\subseteq V_j$ preserves finite nonempty degree sets. If $y\\in W_j$ is degenerate in $V$, factor a degeneracy witnessing this through a surjection $p:[j]\\twoheadrightarrow[k]$ with $k<j$; an order-preserving section $s$ of $p$ gives its ancestor $z=V(s)(y)\\in W_k$, and $y=W(p)(z)$, so $y$ is degenerate in $W$. Thus $W$ has at most the finitely many nondegenerate simplices of $V$. Among the nondegenerate simplices of $V$, exactly $x$ was added: all other new simplices are degeneracies of $x$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018S (lemma-add-simplices), proof, construction of W and the omitted closure/finiteness details; Lemma 018R (lemma-glue-simplex), conditions (1)-(3)"
+   }
+  },
+  {
+   "text": "Induct on the finite number $N$ from step 2. The base case is the length-zero chain there. For $N>0$, step 3 gives a first inclusion $U\\subseteq W$ with the three stated properties, while $V$ has $N-1$ nondegenerate simplices outside $W$. The induction hypothesis applies to $W\\subseteq V$ because step 3 checked finiteness and nonemptiness in each degree and finiteness of the nondegenerate simplices of $W$. Prepend $U\\subseteq W$ to its chain; its first link has conditions (1)-(3) by step 3 and all later links by induction.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018S (lemma-add-simplices), proof, final induction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 018S (lemma-add-simplices), proof; Lemma 018R (lemma-glue-simplex), conditions (1)-(3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +99,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +115,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-simplicial-set-add-simplices",
+  "worker": "E1",
+  "summary": "Stacks 018S inducts on the number of nondegenerate simplices of V outside U. Four steps write the nondegenerate-ancestor argument, choose the least missing dimension, verify that adjoining every degeneracy of one simplex really defines a simplicial subset and preserves the induction hypotheses, and complete the induction. No new nodes are required: the omitted details are finite ordinal factorization and simplicial identities from the cited definition. The refreshed slopmaster2 audit is none; searches by id, blueprint tag and key notions in the read-only WeilConjectures/ and Comparator/ found no exact declaration.",
+  "blueprint": "The item is the combinatorial subclaim used by lem-weil-pbc-hypercover-finite-simplex-lifting, itself making precise the fourth paragraph of lem-weil-pbc-hypercover-refinement's proof: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement'. Steps 1-4 give the one-simplex-at-a-time chain cited by the lifting argument."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 018S/018R read, 4 steps checked, small cases tested"
+ }
 }
