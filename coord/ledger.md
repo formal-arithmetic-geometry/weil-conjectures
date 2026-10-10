@@ -2989,3 +2989,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:39 L: merged deliver/J1/lem-sc-picard-h1-product-injective (reviewer FIX; first push; new nodes: 1)
 - 23:41 L: merged deliver/H1/lem-sc-derived-mayer-vietoris-triangle (reviewer FIX; first push; new nodes: 1)
 - 23:41 L: merged deliver/G1/def-wf-lie-algebra-derivation (reviewer FIX+NODE(1); after a return; new nodes: 1)
+- 23:41 L: merged deliver/C1/lem-pur-ringed-site-grothendieck-abelian (reviewer FIX; first push; new nodes: 1)

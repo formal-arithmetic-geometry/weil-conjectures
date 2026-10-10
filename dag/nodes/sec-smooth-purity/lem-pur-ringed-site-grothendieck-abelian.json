@@ -25,9 +25,83 @@
   "def-weil-presheaf-modules-sheafification",
   "def-weil-extension-by-zero-presheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The category $\\Mod(\\mathcal O)$ is abelian by [lem-pur-ringed-site-module-category-abelian], applied to the small site $\\mathcal C$ and the sheaf of commutative rings $\\mathcal O$.",
+   "uses": [
+    "lem-pur-ringed-site-module-category-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+    "place": "instance SheafOfModules.instAbelian, lines 40-42"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-module-sheaves-colimits-forgetful], all small colimits in $\\Mod(\\mathcal O)$ exist and are computed by sheafifying sectionwise colimits; the forgetful functor to abelian sheaves is faithful, exact, and commutes with these colimits.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemmas 03DA and 03DB"
+   }
+  },
+  {
+   "text": "For a filtered diagram of short exact sequences in $\\Mod(\\mathcal O)$, exactness of the forgetful functor and its commutation with colimits reduce exactness to filtered colimits in $\\Ab(\\mathcal C)$, which are exact by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact]. Thus filtered colimits in $\\Mod(\\mathcal O)$ are exact.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03DB, exact filtered colimits clause"
+   }
+  },
+  {
+   "text": "Let $G=\\bigoplus_{U\\in\\operatorname{Ob}\\mathcal C}j_{U!}\\mathcal O_U$, which exists by step 2. If $q:\\mathcal M\\to\\mathcal Q$ is a nonzero quotient, the epimorphism supplied by [lem-pc-sites-modules-quotient-j-shriek] for $\\mathcal M$ implies that some component $h_{U,s}:j_{U!}\\mathcal O_U\\to\\mathcal M$ has $q h_{U,s}\\ne0$ (otherwise $q$ would vanish on the coproduct and hence be zero). Extend $h_{U,s}$ by zero on the other summands to a map $G\\to\\mathcal M$; its composite with $q$ is nonzero. Thus $G$ is a generator.",
+   "uses": [
+    "lem-pc-sites-modules-quotient-j-shriek",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EW, clause (3), generator construction"
+   }
+  },
+  {
+   "text": "The abelian category $\\Mod(\\mathcal O)$ has all small colimits, exact filtered colimits, and the generator $G$ from step 4, so it is Grothendieck abelian by [def-sp-grothendieck-abelian]. The descriptions of $\\mathcal O_U$ and $j_{U!}\\mathcal O_U$ are exactly the localized-site restriction and sheafified extension-by-zero presheaf in the statement.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "def-pur-localized-ringed-site",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 07A5, first paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-module-category-abelian",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-pc-sites-modules-quotient-j-shriek",
+  "def-sp-grothendieck-abelian",
+  "def-pur-localized-ringed-site",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-extension-by-zero-presheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemmas 03DA, 03DB, 03EW, together with Cohomology on Sites Section 07A5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,12 +133,30 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "prop-pur-kinjective-resolutions-exist",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-ringed-site-grothendieck-abelian",
+  "worker": "stage1",
+  "summary": "Split the assertion into abelianness, colimits and forgetful exactness, exactness of filtered colimits, and the fixed generator. The only new node is the Mathlib leaf SheafOfModules.instAbelian; existing generic DAG nodes supply the colimit and generator ingredients.",
+  "blueprint": [
+   "the statement's assertion that Mod(O) is Grothendieck abelian on a small ringed site"
+  ],
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rga3140",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rga3140 (reviewer sub-agent of L); spot-checked: No Mathlib IsGrothendieckAbelian instance for SheafOfModules (grep ModuleCat/Sheaf, CategoryTheory/Sites); read SheafOfModules.instAbelian at Abelian.lean:40; steps 2-4 against colimits-forgetful, filtered-colimits-exact, quotient-j-shriek (small site used for the set-indexed sum); generator argument and def-sp-grothendieck-abelian; no duplicate general-site node (lem-weil-pbc-module-sheaves-grothendieck-abelian is the T_et special case). FIX more, RETURN less: C4 step 1 applied the new leaf to 'given sheafification hypotheses' that the item does not state; specialized the leaf to small sites (HasSheafify and WEqualsLocallyBijective are inferred instances there, Abelian.lean docstring 19-21), how = one-line specialization, search recorded, step 1 text updated.; 2 file(s) fixed by the reviewer"
+ }
 }
