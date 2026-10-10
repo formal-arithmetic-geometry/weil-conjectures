@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-sp-injective-resolutions",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Injective objects and injective resolutions",
@@ -13,14 +13,27 @@
   "place": "node def-sp-injective-resolutions, order 500"
  },
  "stmt_deps": [
-  "def-sp-grothendieck-abelian"
+  "def-sp-enough-injectives"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "class Injective|structure InjectiveResolution in pinned Mathlib CategoryTheory/Preadditive/Injective",
+   "results": "Basic.lean:32 class Injective; Resolution.lean:43 structure InjectiveResolution (read with sed -n)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.InjectiveResolution",
+  "file": "Mathlib/CategoryTheory/Preadditive/Injective/Resolution.lean",
+  "line": 43,
+  "how": "one declaration per clause (B8): clause 1 is CategoryTheory.Injective (Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean:32, field factors: every X -> I extends along every mono X -> Y, i.e. Hom(N,I) -> Hom(M,I) surjective), exact; clause 2 is CategoryTheory.InjectiveResolution (Resolution.lean:43-55: N-indexed cochain complex of injectives with a quasi-isomorphism from Z in degree 0), the one-line specialization of 'bounded-below, cohomology concentrated in degree 0 equal to X' (bounded below = N-indexed after shift); the enough-injectives hypothesis is the separate leaf def-sp-enough-injectives (CategoryTheory.EnoughInjectives)"
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -45,5 +58,21 @@
  },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",
- "lead_note": "14:52 UTC (reviewer R-die of G1): no node defines \"enough injectives\"; this node defines injective objects and assumes the notion. A later split should define it here or in a new node (stage 3 note)."
+ "lead_note": "14:52 UTC (reviewer R-die of G1): no node defines \"enough injectives\"; this node defines injective objects and assumes the notion. A later split should define it here or in a new node (stage 3 note).",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sp-injective-resolutions",
+  "worker": "stage1",
+  "summary": "Added the missing definition dependency for \"enough injectives\" as a Mathlib leaf. The parent remains the project definition of injective objects and bounded-below injective resolutions; it has no proof steps.",
+  "blueprint": "The parent statement is the blueprint node itself; the child realizes the clause \"an abelian category with enough injectives\" in the injective-resolution sentence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dir1906",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dir1906 (reviewer sub-agent of L); spot-checked: Read Mathlib Injective (Basic.lean:32), EnoughInjectives (Basic.lean:64), InjectiveResolution (Resolution.lean:43) with sed; child def-sp-enough-injectives is an exact leaf, no duplicate (lem-sp-grothendieck-enough-injectives is the existence theorem), no cycle (child depends only on def-sp-abelian); removal of unused Grothendieck stmt_dep correct. FIX more, RETURN less: B8, parent was left status split though each clause is one Mathlib declaration (Injective; InjectiveResolution, N-indexed quasi-iso from single0 = bounded-below with cohomology X in degree 0); made it a mathlib leaf with mathlib_match and a grep search record, stmt_deps kept as [def-sp-enough-injectives].; 1 file(s) fixed by the reviewer"
+ }
 }
