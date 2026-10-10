@@ -1,8 +1,8 @@
 # Work queue
 
-900 items; claim with `tools/claim.py next <group> [--stage N]`.
+908 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (146)
+## Stage 1: nodes to split (153)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,12 +23,20 @@
 | `lem-pc-perfect-generation-koszul-orthogonal` | 3018 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
 | `lem-pc-supported-open-pushforward` | 3018 | none |
-| `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-weil-pbc-complex-ses-connecting-formula` | 3018 | none |
 | `lem-weil-pbc-degreewise-split-derived-triangle` | 3018 | none |
+| `def-sc-duality-equation-base-change-map` | 3019 | none |
+| `lem-pc-affine-morphism-hom-out-of-perfect` | 3019 | none |
+| `lem-pc-base-change-rhom-perfect` | 3019 | none |
+| `lem-pc-global-hom-adjunction` | 3019 | none |
+| `lem-pc-perfect-generator-exists` | 3019 | none |
+| `lem-pc-perfect-generator-pullback` | 3019 | none |
 | `lem-sc-affine-perfect-map-lift` | 3019 | none |
 | `lem-sc-affine-perfect-support-extension` | 3019 | none |
 | `lem-sc-derived-open-gluing` | 3019 | none |
+| `lem-sc-flat-precompose-pus` | 3019 | none |
+| `def-pc-global-derived-rhom` | 3020 | none |
+| `lem-pc-qcqs-derived-direct-image-right-adjoint` | 3020 | none |
 | `lem-pc-perfect-thick-closure` | 3021 | none |
 | `lem-sc-rhom-supported-qcoherent` | 3021 | none |
 | `lem-sc-supported-factor-through-thick` | 3021 | none |
@@ -42,7 +50,6 @@
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-generic-stalk-finite-length` | 4012 | none |
 | `lem-sc-lfp-field-extension-pointwise-descent` | 4012 | none |
-| `lem-sc-hilbert-embedded-points-affine-removal` | 5011 | none |
 | `lem-sc-meromorphic-sheaf-generic-product` | 5011 | none |
 | `lem-sc-locnoeth-components-locally-finite` | 5012 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
@@ -153,7 +160,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (754)
+## Stage 2: nodes to state (755)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -347,6 +354,7 @@
 | `lem-sc-graded-prime-avoidance` | 1 | state |
 | `lem-sc-hilbert-affine-denominator-module` | 1 | state |
 | `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
+| `lem-sc-hilbert-embedded-points-affine-removal` | 1 | state |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 1 | state |
 | `lem-sc-integral-locally-algebraic-affine-opens-dimension` | 1 | state |
 | `lem-sc-integral-overring-jacobson-power` | 1 | state |
@@ -912,7 +920,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1520 nodes that wait for a statement dependency, 186 nodes that wait for stage 1.
+Not open yet: 1521 nodes that wait for a statement dependency, 193 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
