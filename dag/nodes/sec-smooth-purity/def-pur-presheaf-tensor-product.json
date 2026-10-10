@@ -1,0 +1,69 @@
+{
+ "id": "def-pur-presheaf-tensor-product",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "place": "the tensor-product clause: the presheaf tensor product is defined sectionwise by F(U) tensor_{O(U)} G(U) with restriction maps induced by the factor restrictions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Presheaf tensor product of modules",
+ "statement": "Let $\\mathcal C$ be a site, let $\\mathcal O$ be a sheaf of commutative rings on $\\mathcal C$, and let $\\mathcal F,\\mathcal G$ be presheaves of $\\mathcal O$-modules [def-weil-presheaf-modules-sheafification]. Their presheaf tensor product $\\mathcal F\\otimes_{p,\\mathcal O}\\mathcal G$ is the presheaf of modules whose value on each object $U$ is $\\mathcal F(U)\\otimes_{\\mathcal O(U)}\\mathcal G(U)$ and whose restriction along a morphism $V\\to U$ is the map induced by the restriction maps of $\\mathcal F$, $\\mathcal G$, and $\\mathcal O$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK (sites-modules-section-tensor-product), displayed definition of F \\otimes_{p,O} G"
+ },
+ "stmt_deps": [
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "presheaf tensor product evaluated sectionwise",
+   "results": "PresheafOfModules.Monoidal.tensorObj; PresheafOfModules.Monoidal.tensorObj_obj; PresheafOfModules.Monoidal.tensorObjMap; PresheafOfModules.Monoidal.tensorObj_map_tmul in Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_obj",
+   "results": "0 hits; loogle reports unknown identifier 'PresheafOfModules.Monoidal.tensorObj'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n tensorObj Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean (local Mathlib, reviewer R-stp2420; replaces the stage-1 record '0 hits from msearch grep service', which was wrong)",
+   "results": "17 hits; `noncomputable def tensorObj : PresheafOfModules (R ⋙ forget₂ _ _)` at line 63, with R : Cᵒᵖ ⥤ CommRingCat at line 32",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sectionwise tensor product presheaves modules",
+   "results": "service unavailable (Internal Server Error)",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PresheafOfModules.Monoidal.tensorObj",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+  "how": "one-line specialization: take R := the underlying presheaf of commutative rings of the sheaf O (modules in the rings' universe); tensorObj (line 63) has obj X := M₁.obj X ⊗ M₂.obj X (tensorObj_obj via @[simps obj]) and map f := tensorObjMap M₁ M₂ f (line 45), the map m₁ ⊗ m₂ ↦ M₁.map f m₁ ⊗ M₂.map f m₂ (tensorObj_map_tmul)",
+  "line": 63
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "def-pur-sheaf-tensor-product",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible"
+}

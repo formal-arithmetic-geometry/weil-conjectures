@@ -4,10 +4,10 @@
   "is": null,
   "from": {
    "node": "def-coefficient-twists-detailed",
-   "place": "its statement (a notion the statement uses)",
+   "place": "the tensor-product clause: the presheaf tensor product is defined sectionwise by F(U) tensor_{O(U)} G(U), and the sheaf tensor product is its sheafification",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Tensor product of sheaves of modules on a site",
@@ -16,7 +16,10 @@
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Section 03EK (sites-modules-section-tensor-product), the displayed definitions of F ⊗_{p,O} G and F ⊗_O G = (F ⊗_{p,O} G)^#, and the associativity formula stated there"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pur-presheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
@@ -65,7 +68,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -91,5 +94,21 @@
   "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
   "how": "specializes in one line: `F ⊗_O G := (PresheafOfModules.sheafification (𝟙 O.val)).obj (F.val ⊗ G.val)`, the sheafification (line 54, with `α` the identity of the sheaf of rings `O` regarded as a presheaf) of the sectionwise tensor product of `PresheafOfModules.Monoidal.monoidalCategory` (Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean:125); change of rings is the same with `O₁ → O₂`, and the tensor power is the iterate",
   "reason": "re-check 2026-10-09 (group L, list D): the tensor-product clause is one line (PresheafOfModules.sheafification (𝟙 _) applied to the sectionwise PresheafOfModules.Monoidal.tensorObj, which needs a presheaf of commutative rings and modules in the rings' universe), but the change-of-rings clause F ⊗_{O1} O2 has no Mathlib definition of that form: Mathlib's extension of scalars of (pre)sheaves of modules (PresheafOfModules.pullback, SheafOfModules.pullback) is defined as the left adjoint of the pushforward/restriction, and its agreement with the sheafified sectionwise tensor product is a theorem; the old 'how' ('change of rings is the same with O1 → O2') does not give an O2-module structure"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pur-sheaf-tensor-product",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks Section 03EK. The only independent construction used by the statement is the sectionwise presheaf tensor product, which is split out as the Mathlib leaf def-pur-presheaf-tensor-product; the existing Mathlib leaf def-weil-presheaf-modules-sheafification supplies the sheafification as a sheaf of modules. Change of rings and tensor powers are definitional clauses of this item and do not require separate nodes.",
+  "blueprint": "Realizes the parent blueprint ancestor's tensor-product notion by the sectionwise presheaf tensor clause and its sheafification; the change-of-rings and recursive tensor-power clauses remain in the item statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-stp2420",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-stp2420 (reviewer sub-agent of L); spot-checked: Item statement unchanged (diff: only blueprint place, stmt_deps, status, split_report), so citers unaffected (E7/C4); matches Stacks 03EK; no proof steps. New leaf def-pur-presheaf-tensor-product read at Monoidal.lean:63 (tensorObj, R : Cop => CommRingCat): one-line specialization to R = O. FIX more, RETURN less: (1) B3 the grep search record '0 hits' for tensorObj was false (17 hits locally); replaced with reviewer grep, verdict match; (2) mathlib_match.file carried a line range and 'how' said exact; file made a path, how restated as one-line specialization with lines 63/45. Second reading by J1 missed (1).; 1 file(s) fixed by the reviewer"
  }
 }
