@@ -2,11 +2,11 @@
 
 885 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (102)
+## Stage 1: nodes to split (101)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lem-weil-derived-limit-existence` | 14 | none |
+| `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-affine-pseudo-coherent-criterion` | 3015 | none |
@@ -36,10 +36,10 @@
 | `lem-sc-affine-weakass-nonzerodivisors` | 5013 | none |
 | `lem-sc-ass-weakass-fg-stalk` | 5013 | none |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 5014 | none |
-| `lem-pc-rf-single-complex-qcqs-induction` | 5014 | none |
-| `lem-pc-affine-perfect-hom-colimit` | 5015 | none |
 | `lem-pc-flat-module-descent` | 5015 | none |
 | `lem-pc-fp-module-map-descent-affine` | 5015 | none |
+| `lem-pc-rf-single-complex-affine-base-change` | 5015 | none |
+| `lem-pc-rf-single-complex-relative-mayer-vietoris` | 5015 | none |
 | `lem-pc-sites-module-sheafification-tensor` | 5015 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 6007 | none |
@@ -65,7 +65,6 @@
 | `lem-kun-closed-point-field` | - | none |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-pc-projective-coherent-finiteness` | - | sorry_here |
-| `lem-pd-picard-base-change` | - | sorry_here |
 | `lem-sc-zariski-dimension-bound` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
 | `lem-weil-geometrically-connected-check-after-extension` | - | none |
@@ -105,11 +104,11 @@
 | `lem-pc-projective-coordinate-model` | - | sorry_here |
 | `def-exc-jacobian-presentation` | - | none |
 | `def-pur-hom-complex` | - | none |
+| `lem-pur-rhom-global-sections` | - | none |
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
-| `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (783)
+## Stage 2: nodes to state (784)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -264,6 +263,7 @@
 | `lem-pc-zero-scheme-locally-principal` | 1 | state |
 | `lem-pc-zero-scheme-recd` | 1 | state |
 | `lem-pc-zero-scheme-zero-iff` | 1 | state |
+| `lem-pd-picard-base-change` | 1 | state |
 | `lem-pod-adic-tower-reconstruction` | 1 | state |
 | `lem-pod-equivalence-induces-module-objects` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
@@ -897,7 +897,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1600 nodes that wait for a statement dependency, 142 nodes that wait for stage 1.
+Not open yet: 1603 nodes that wait for a statement dependency, 141 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
