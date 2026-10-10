@@ -1,8 +1,8 @@
 # Work queue
 
-860 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (320)
+## Stage 1: nodes to split (318)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 3004 | none |
-| `lemma-weil-pbc-fibre-product-limit` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-galois-transitive` | 3007 | none |
@@ -49,7 +48,6 @@
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
 | `lem-exc-coinduced-continuous-acyclic` | 3011 | none |
 | `lem-exc-coinduced-discrete-embedding` | 3011 | none |
-| `lem-exc-continuous-cochains-short-exact` | 3011 | none |
 | `lem-exc-discrete-modules-abelian-injective-embeddings` | 3011 | none |
 | `lem-exc-discrete-modules-abelian-structure` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
@@ -872,7 +870,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 339 nodes that wait for stage 1, 996 nodes that wait for a statement dependency.
+Not open yet: 337 nodes that wait for stage 1, 998 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
