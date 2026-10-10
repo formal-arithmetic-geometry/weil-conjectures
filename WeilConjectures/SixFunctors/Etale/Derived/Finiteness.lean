@@ -15,6 +15,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
@@ -248,6 +249,7 @@ variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
   (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX] [HasCompactification aX]
   [HasInvertibleExponent Λ X]
 
+omit [IsSeparated aX] in
 /-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
 geometric stalks
 
@@ -260,9 +262,16 @@ theorem isZero_compactlySupportedCohomology_of_lt
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
     ∃ a b : ℤ, ∀ q : ℤ, q < a ∨ b < q →
-      IsZero ((H_c(aX)[ModuleCat.{u + 1} Λ](q)).obj K) :=
-  sorry
+      IsZero ((H_c(aX)[ModuleCat.{u + 1} Λ](q)).obj K) := by
+  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, -⟩ := boundedConstructible_rightDerivedLowerShriek Λ aX aX (𝟙 _)
+    (Category.comp_id aX) K hK.1
+  refine ⟨a, b, fun q hq ↦ IsZero.of_iso ((Sheaf.Γ _ _).map_isZero ?_)
+    ((homologyRightDerivedGlobalSectionsIsoOfIsSepClosed q).app _)⟩
+  rcases hq with hq | hq
+  · exact (_root_.DerivedCategory.isGE_iff _ a).1 ha q hq
+  · exact (_root_.DerivedCategory.isLE_iff _ b).1 hb q hq
 
+omit [IsSeparated aX] in
 /-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
 geometric stalks
 
@@ -273,8 +282,16 @@ Tor amplitude these are exactly perfectness over the Artinian local ring `A_{E,n
 theorem finite_compactlySupportedCohomology
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) (q : ℤ) :
-    Module.Finite Λ ((H_c(aX)[ModuleCat.{u + 1} Λ](q)).obj K) :=
-  sorry
+    Module.Finite Λ ((H_c(aX)[ModuleCat.{u + 1} Λ](q)).obj K) := by
+  let L := (_root_.DerivedCategory.homologyFunctor _ q).obj ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)
+  have : IsConstructibleSheaf L := (boundedConstructible_rightDerivedLowerShriek Λ aX aX (𝟙 _)
+    (Category.comp_id aX) K hK.1).2 q
+  have := finite_Γ_of_isConstructibleSheaf L
+  have : Module.Finite Λ ((_root_.DerivedCategory.homologyFunctor _ q ⋙
+      Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)) := this
+  exact Module.Finite.equiv ((homologyRightDerivedGlobalSectionsIsoOfIsSepClosed q).app
+    ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)).symm.toLinearEquiv
 
 /-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
 geometric stalks

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
+public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
@@ -137,6 +138,92 @@ theorem isIso_iff_bijective_comp_of_isSepClosed
         ((Functor.map_isZero _ (isZero_zero _)).isoZero)
     exact IsZero.of_iso (isZero_zero _) (asIso (0 : C ⟶ 0))
   exact (Triangle.isZero₃_iff_isIso₁ _ hT).1 hC
+
+section GlobalSections
+
+/-- Over a separably closed field `k`, the global sections functor on étale sheaves of
+`Λ`-modules on `Spec k` preserves epimorphisms: an epimorphism of sheaves is surjective on
+sections over the terminal object, every covering sieve of which is maximal. -/
+instance preservesEpimorphisms_Γ_of_isSepClosed :
+    (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).PreservesEpimorphisms where
+  preserves {F G} φ _ := by
+    let e := Sheaf.ΓNatIsoSheafSections (Spec (.of k)).smallEtaleTopology
+      (ModuleCat.{u + 1} Λ) isTerminalEtalePoint
+    have h : (Sheaf.Γ _ _).map φ =
+        e.hom.app F ≫ ((sheafSections _ _).obj _).map φ ≫ e.inv.app G := by
+      rw [← reassoc_of% (e.hom.naturality φ)]
+      simp
+    have : Epi (((sheafSections (Spec (.of k)).smallEtaleTopology
+        (ModuleCat.{u + 1} Λ)).obj (op (etalePoint k))).map φ) :=
+      (ModuleCat.epi_iff_surjective _).2 (surjective_app_of_epi_of_isSepClosed k φ)
+    rw [h]
+    infer_instance
+
+/-- Over a separably closed field `k`, the global sections functor on étale sheaves of
+`Λ`-modules on `Spec k` is exact. -/
+instance preservesFiniteColimits_Γ_of_isSepClosed :
+    PreservesFiniteColimits (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) := by
+  have h := (Functor.preservesFiniteLimits_tfae
+    (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 3 0
+  have h' := (Functor.preservesFiniteColimits_tfae
+    (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))).out 0 3
+  exact h'.1 fun S hS ↦ ⟨(h.1 inferInstance S hS).1, by have := hS.epi_g; infer_instance⟩
+
+/-- Over a separably closed field `k`, the cohomology of the derived global sections of an
+object `L` of `D(Spec(k)_ét, Λ)` is the global sections of its cohomology sheaves:
+`Hⁿ(RΓ(Spec k, L)) ≅ Γ(Spec k, Hⁿ(L))`, the global sections functor being exact. -/
+noncomputable def homologyRightDerivedGlobalSectionsIsoOfIsSepClosed (n : ℤ) :
+    rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k)) ⋙
+        DerivedCategory.homologyFunctor _ n ≅
+      DerivedCategory.homologyFunctor _ n ⋙
+        Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  (Functor.rightDerivedFunctorHomologyFunctorIso _ n).symm
+
+/-- Over a separably closed field `k`, the global sections of an étale sheaf of `Λ`-modules on
+`Spec k` inject into its stalk at any geometric point: a section vanishing on an étale
+neighbourhood of the point vanishes, as that neighbourhood has a `k`-point. -/
+lemma injective_toPresheafFiber_etalePoint_of_isSepClosed
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of k))
+    (x : (pointSmallEtale s).fiber.obj (etalePoint k)) :
+    Function.Injective ((pointSmallEtale s).toPresheafFiber (etalePoint k) x F.obj) := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  intro z₁ z₂ h
+  obtain ⟨Y, f, y, -, hy⟩ := ((pointSmallEtale s).toPresheafFiber_eq_iff' _ x z₁ z₂).1 h
+  have : AlgebraicGeometry.Etale Y.hom := Y.prop
+  obtain ⟨l, hl, -⟩ := exists_fac_of_etale_of_isSepClosed Y.hom (𝟙 _)
+    ((y.left : Spec (.of Ω) ⟶ Y.left) (default : Spec (.of Ω)))
+    (Subsingleton.elim (α := Spec (.of k)) _ _)
+  let σ : etalePoint k ⟶ Y := MorphismProperty.Over.homMk (A := etalePoint k) (B := Y) l
+    (hl.trans rfl)
+  have hσ : σ ≫ f = 𝟙 _ := isTerminalEtalePoint.hom_ext _ _
+  have := congrArg (F.obj.map σ.op) hy
+  simpa only [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, hσ, op_id,
+    CategoryTheory.Functor.map_id, ConcreteCategory.id_apply] using this
+
+/-- Over a separably closed field `k`, the global sections of a constructible étale sheaf of
+modules over a noetherian ring `Λ` on `Spec k` form a finite `Λ`-module: they inject into the
+stalk at the geometric point `𝟙 : Spec k ⟶ Spec k`, which is finite. -/
+lemma finite_Γ_of_isConstructibleSheaf [IsNoetherianRing Λ]
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsConstructibleSheaf F] :
+    Module.Finite Λ ((Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj F) := by
+  have hfin := (IsConstructibleSheaf.isFiniteSheaf (F := F)
+    inferInstance).isFinitelyGenerated_sheafFiber k (𝟙 _)
+  rw [ModuleCat.isFinitelyGenerated_iff] at hfin
+  have : Module.Finite Λ (((pointSmallEtale (𝟙 (Spec (.of k)))).presheafFiber
+    (A := ModuleCat.{u + 1} Λ)).obj F.obj) := hfin
+  let x : (pointSmallEtale (𝟙 (Spec (.of k)))).fiber.obj (etalePoint k) :=
+    Over.homMk (𝟙 _) (by simp [etalePoint])
+  let e := (Sheaf.ΓNatIsoSheafSections (Spec (.of k)).smallEtaleTopology
+    (ModuleCat.{u + 1} Λ) isTerminalEtalePoint).app F
+  exact Module.Finite.of_injective
+    (e.hom ≫ (pointSmallEtale (𝟙 (Spec (.of k)))).toPresheafFiber (etalePoint k) x F.obj).hom
+    ((injective_toPresheafFiber_etalePoint_of_isSepClosed F _ x).comp
+      ((ConcreteCategory.bijective_of_isIso e.hom).1))
+
+end GlobalSections
 
 section Duality
 
