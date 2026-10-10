@@ -2070,28 +2070,28 @@ theorem exists_finiteSubext_isPullback_overTransport {ks : Type u} [Field ks] [A
   have : Smooth Js.hom := hsm.smooth
   -- `J_s` descends to a finite subextension `K'`
   obtain ⟨K', Y, p, _, _, _, q', hq'⟩ := exists_finiteSubext_isPullback (F := k) Js.hom
-  set gs := Spec.map (CommRingCat.ofHom (algebraMap k ks))
-  set ι' := Spec.map (CommRingCat.ofHom (algebraMap K'.1 ks))
+  let gs := Spec.map (CommRingCat.ofHom (algebraMap k ks))
+  let ι' := Spec.map (CommRingCat.ofHom (algebraMap K'.1 ks))
   have hgs (L : FiniteSubext k ks) : Spec.map (CommRingCat.ofHom (algebraMap L.1 ks)) ≫
       Spec.map (CommRingCat.ofHom (algebraMap k L.1)) = gs :=
     specMap_algebraMap_comp_specMap_algebraMap k L.1 ks
   -- the two projections of `Spec (k_s ⊗_{K'} k_s)`
-  set pr₁ := tensorSpecPr₁ K'
-  set pr₂ := tensorSpecPr₂ K'
+  let pr₁ := tensorSpecPr₁ K'
+  let pr₂ := tensorSpecPr₂ K'
   have hpr : pr₁ ≫ ι' = pr₂ ≫ ι' := (isPullback_tensorSpecPr K').w
   have hprg : pr₁ ≫ gs = pr₂ ≫ gs := by
     rw [← hgs K', ← Category.assoc, hpr, Category.assoc]
   -- the universal pair of points over `Spec (k_s ⊗_{K'} k_s)`
-  set pV := pullback.snd Js.hom pr₁
-  set f₁V := pullback.fst Js.hom pr₁ ≫ Js.hom
-  set f₂V := pV ≫ pr₂
+  let pV := pullback.snd Js.hom pr₁
+  let f₁V := pullback.fst Js.hom pr₁ ≫ Js.hom
+  let f₂V := pV ≫ pr₂
   have hf₁V : f₁V = pV ≫ pr₁ := pullback.condition
   have hfV : f₁V ≫ gs = f₂V ≫ gs := by
     rw [hf₁V, Category.assoc, hprg, Category.assoc]
   let a₀ : Over.mk f₁V ⟶ Js := Over.homMk (pullback.fst Js.hom pr₁) rfl
   -- the two morphisms to `J_{K'}`: the projection, and the transport followed by it
-  set u := (rs.overTransport f₁V f₂V hfV a₀).left ≫ q'
-  set pW := pullback.snd p (pr₁ ≫ ι')
+  let u := (rs.overTransport f₁V f₂V hfV a₀).left ≫ q'
+  let pW := pullback.snd p (pr₁ ≫ ι')
   have hψ : (pullback.fst Js.hom pr₁ ≫ q') ≫ p = pV ≫ pr₁ ≫ ι' := by
     rw [Category.assoc, hq'.w, ← Category.assoc, pullback.condition, Category.assoc]
   have hχ : u ≫ p = pV ≫ pr₁ ≫ ι' := by
@@ -2101,6 +2101,33 @@ theorem exists_finiteSubext_isPullback_overTransport {ks : Type u} [Field ks] [A
     rfl
   let ψ := pullback.lift _ _ hψ
   let χ := pullback.lift _ _ hχ
+  -- on the diagonal the two morphisms agree, the transport being trivial there
+  let δ : Spec (.of ks) ⟶ Spec (.of (TensorProduct K'.1 ks ks)) :=
+    (diagonalSpecCone k ks).π.app (.op K')
+  have hdiag : pullback.fst pV δ ≫ ψ = pullback.fst pV δ ≫ χ := by
+    let z := pullback.fst pV δ
+    have hz : z ≫ f₂V = z ≫ f₁V := by
+      rw [hf₁V]
+      simp only [f₂V, ← Category.assoc, z, pullback.condition]
+      rw [Category.assoc, Category.assoc]
+      exact (congrArg _ (diagonalSpecCone_π_comp_tensorSpecPr₂ K')).trans
+        (congrArg _ (diagonalSpecCone_π_comp_tensorSpecPr₁ K')).symm
+    have hkey := congrArg CommaMorphism.left
+      (rs.overDescentDatum.transport_homMk_comp z f₁V f₂V hfV a₀)
+    have hself : (rs.overDescentDatum.transport (z ≫ f₁V) (z ≫ f₂V)
+        (by simp only [Category.assoc]; rw [hfV])
+        ((Over.homMk z : Over.mk (z ≫ f₁V) ⟶ Over.mk f₁V) ≫ a₀)).left =
+          z ≫ pullback.fst Js.hom pr₁ := by
+      rw [rs.overDescentDatum.transport_left_congr _ rfl
+        ((Over.homMk z : Over.mk (z ≫ f₁V) ⟶ Over.mk f₁V) ≫ a₀)
+        ((Over.homMk z : Over.mk (z ≫ f₁V) ⟶ Over.mk f₁V) ≫ a₀) rfl hz rfl, Over.DescentDatum.transport_self]
+      rfl
+    have h₁ : z ≫ (rs.overTransport f₁V f₂V hfV a₀).left = z ≫ pullback.fst Js.hom pr₁ :=
+      hkey.symm.trans hself
+    apply pullback.hom_ext
+    · simp only [ψ, χ, Category.assoc, pullback.lift_fst, u]
+      rw [← Category.assoc, ← h₁, Category.assoc]
+    · simp only [ψ, χ, Category.assoc, pullback.lift_snd]
   sorry
 
 /-- **`Pic^0_{C/k}` is represented at a finite separable level by a descent of `J_s`.** Let `J_s`
