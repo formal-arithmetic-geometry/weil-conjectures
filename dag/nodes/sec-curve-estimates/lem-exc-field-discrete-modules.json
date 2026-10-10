@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-exc-field-discrete-modules",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Etale modules on a field and discrete Galois modules",
@@ -12,42 +12,76 @@
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-exc-field-discrete-modules.md",
   "place": "node lem-exc-field-discrete-modules, order 977"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-exc-continuous-cohomology",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves"
+ ],
  "proof": [
   {
-   "text": "Finite etale field objects are finite disjoint unions of\nfinite separable extensions. They form a covering basis\nfor [def-weil-pbc-etale-site]. By finite Galois theory,\nas included in [thm-galois-fundamental], they correspond\nto finite continuous $G$-sets. For a module sheaf $F$,\nits geometric fibre is\n\n$$\nM=\\varinjlim_{L/K\\ \\mathrm{finite\\ Galois}} F(\\operatorname{Spec}L),\n\\qquad L\\subset K^{\\rm sep}.\n$$",
+   "text": "The finite etale objects and their covering families are described by the G-set equivalence [lem-exc-etale-field-gsets]. Its abelian enhancement says that taking the geometric stalk at $\\operatorname{Spec}K^{\\rm sep}$, as defined in [def-weil-pbc-geometric-stalks], is an equivalence between abelian sheaves on the small etale site [def-weil-pbc-etale-site] and discrete $G$-modules, by [lem-exc-abelian-sheaves-gmodules]. Thus the geometric fibre of an etale abelian sheaf is the corresponding discrete $G$-module.",
    "uses": [
+    "lem-exc-etale-field-gsets",
     "def-weil-pbc-etale-site",
-    "thm-galois-fundamental"
+    "def-weil-pbc-geometric-stalks",
+    "lem-exc-abelian-sheaves-gmodules"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-exc-field-discrete-modules.md",
+    "place": "proof, first paragraph"
+   }
   },
   {
-   "text": "Field automorphisms give a $G$-action. A section defined\nover $L$ is fixed by $\\operatorname{Gal}(K^{\\rm sep}/L)$,\nso this module is discrete continuous in the sense of\n[def-exc-continuous-cohomology].",
+   "text": "An $A$-module sheaf is an abelian sheaf together with a ring map $A\\to\\operatorname{End}(F)$. The additive, fully faithful equivalence [lem-exc-abelian-sheaves-gmodules] transports this structure to a ring map $A\\to\\operatorname{End}_G(M)$ and hence to a discrete continuous $A[G]$-module in the sense of [def-exc-continuous-cohomology]; the inverse construction transports it back.",
    "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
     "def-exc-continuous-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-exc-field-discrete-modules.md",
+    "place": "proof, second paragraph"
+   }
   },
   {
-   "text": "For a finite separable extension $L/K$, put\n$H=\\operatorname{Gal}(K^{\\rm sep}/L)$. The natural map\n$F(L)\\to M^H$ is injective: equality in the colimit holds\nafter a finite extension, which is an etale cover, and the\nseparated sheaf axiom gives equality over $L$.\nFor surjectivity, represent $m\\in M^H$ by a section $s$\nover a finite Galois $E/K$ containing $L$.\nThere are only finitely many cosets of\n$\\operatorname{Gal}(K^{\\rm sep}/E)$ in $H$.\nFor representatives of these cosets, the equalities\n$h\\cdot m=m$ hold after finitely many further extensions.\nChoose a common finite Galois extension $E'/K$.\nThe pullback of $s$ to $E'$ is invariant under\n$\\operatorname{Gal}(E'/L)$: elements fixing $E$\nalready fix a section pulled back from $E$, and the\nchosen representatives give the remaining equalities.\nGalois descent for the cover $\\operatorname{Spec}E'\\to \\operatorname{Spec}L$, which is the sheaf equalizer axiom,\ntherefore descends this section to $F(L)$.",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "Conversely, from a discrete continuous module $M$ assign\nto a finite etale object with finite $G$-set $S$ the\nmodule $\\operatorname{Hom}_G(S,M)$. A covering is a\njointly surjective family of finite $G$-sets; compatible\nfunctions on its members glue uniquely. This defines a\nmodule sheaf in [def-weil-pbc-etale-sheaves], and its\ngeometric fibre is $M$, since each element is fixed by\nan open subgroup. The preceding computation of $F(L)$\nshows the two constructions are inverse on all basis\nobjects, including their restriction maps. The fibre\nfunctor is exact by [prop-weil-pbc-geometric-stalks-exact];\nthus this is an exact equivalence. At $L=K$ the formula\nfor sections is exactly $M^G$. Consequently it also\nidentifies their right derived section functors, since an\nexact equivalence takes injective resolutions to injective\nresolutions. No finiteness of $M$ is required.",
+   "text": "For a finite separable extension $L/K$, let $H=\\operatorname{Gal}(K^{\\rm sep}/L)$. By the Yoneda lemma, $F(\\operatorname{Spec}L)=\\operatorname{Hom}(h_{\\operatorname{Spec}L},F)$, naturally in $L$, where $h_{\\operatorname{Spec}L}$ is the sheaf of sets represented by $\\operatorname{Spec}L$. By [lem-exc-etale-sheaves-gsets-point], taking geometric stalks is an equivalence from sheaves of sets on $(\\operatorname{Spec}K)_{\\rm et}$ to discrete $G$-sets, and the stalk of $h_{\\operatorname{Spec}L}$ is the $G$-set $\\operatorname{Hom}_K(\\operatorname{Spec}K^{\\rm sep},\\operatorname{Spec}L)$, which is the $G$-set attached to $\\operatorname{Spec}L$ by [lem-exc-etale-field-gsets]; it is the set of $K$-embeddings $L\\to K^{\\rm sep}$, transitive with stabilizer $H$ of the given inclusion, i.e. $G/H$. The underlying $G$-set of the stalk of $F$ is $M$ ([lem-exc-abelian-sheaves-gmodules] is compatible with the sheaf-of-sets/$G$-set equivalence). Full faithfulness therefore identifies sections with equivariant maps $G/H\\to M$, and evaluation at the identity coset identifies these maps with $M^H$. Hence $F(\\operatorname{Spec}L)=M^{\\operatorname{Gal}(K^{\\rm sep}/L)}$, compatibly with restriction maps (naturality in $L$).",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "prop-weil-pbc-geometric-stalks-exact"
+    "lem-exc-etale-sheaves-gsets-point",
+    "lem-exc-etale-field-gsets",
+    "lem-exc-abelian-sheaves-gmodules"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-exc-field-discrete-modules.md",
+    "place": "proof, third paragraph"
+   }
+  },
+  {
+   "text": "The equivalence [lem-exc-abelian-sheaves-gmodules] is an equivalence of abelian categories; the target abelian structure and enough injectives are supplied by [lem-exc-discrete-modules-abelian]. Therefore it is exact, and its section formula at $L=K$ is $F(\\operatorname{Spec}K)=M^G$ by the preceding G-set calculation. The right derived section functors consequently agree with continuous cohomology [def-exc-continuous-cohomology], because an exact equivalence transports injective resolutions. The stalk functor itself is exact as recorded in [prop-weil-pbc-geometric-stalks-exact].",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-exc-discrete-modules-abelian",
+    "def-exc-continuous-cohomology",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-exc-etale-field-gsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-exc-field-discrete-modules.md",
+    "place": "proof, fourth paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "lem-exc-etale-sheaves-gsets-point",
+  "lem-exc-etale-field-gsets",
   "def-weil-pbc-etale-site",
-  "thm-galois-fundamental",
+  "def-weil-pbc-geometric-stalks",
+  "lem-exc-abelian-sheaves-gmodules",
   "def-exc-continuous-cohomology",
-  "def-weil-pbc-etale-sheaves",
+  "lem-exc-discrete-modules-abelian",
   "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_origin": {
@@ -57,7 +91,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -83,5 +117,32 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-field-discrete-modules",
+  "worker": "M1",
+  "summary": "Rewrote the proof so each step explicitly applies the cited G-set and abelian-sheaf equivalence statements. The geometric stalk gives the discrete G-module, the additive equivalence transports the finite-ring action, the discrete-module node supplies the exact abelian target and injectives, and the G-set equivalence computes sections as invariants. Removed unused descent, pi_1, basis, and affine-site citations.",
+  "blueprint": [
+   "proof, first paragraph: finite etale field objects and the filtered geometric fibre construction",
+   "proof, second paragraph: the Galois action and continuity/discreteness",
+   "proof, third paragraph: the identification of sections over L with H-invariants",
+   "proof, fourth paragraph: inverse Hom_G(S,M) sheaf construction, exactness, and invariants"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-exc-discrete-modules-abelian",
+    "why": "supplies the abelian-category structure and injective resolutions for discrete continuous A[G]-modules"
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fd4",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fd4 (reviewer sub-agent of L); spot-checked: Review of head 755c33c3e against the 14:52 return (R-fd2) and the 13:52 return. Return points: 1 repaired (all four steps rewritten, each non-elementary sentence names its node; thm-galois-fundamental, descent, Hom_G-gluing, basis, affine-site nodes dropped from uses/proof_deps); 2 repaired (step 1 cites lem-exc-etale-field-gsets, stated with Gal(K^sep/K); pi_1 node no longer used); 3 repaired (stmt_deps: def-weil-pbc-geometric-stalks replaces def-galois-fibre-functor, no lemma in stmt_deps); 4 and 5 made moot by route (d): step 3 now computes sections by full faithfulness, step 4 by exactness of an equivalence; 6 repaired (sources now 03QR lemma-sheaves-point, 03QS remark-covering-surjective; checked in tags/tags). Sources read: Stacks etale-cohomology.tex Theorem theorem-equivalence-sheaves-point (03QT), Lemma lemma-global-sections-point, Lemma lemma-equivalence-abelian-sheaves-point (04JQ); lem-exc-abelian-sheaves-gmodules agrees with 04JQ hypothesis by hypothesis (K field, geometric point Spec K^sep, G absolute Galois group). Steps: 1 by lem-exc-abelian-sheaves-gmodules with def-weil-pbc-geometric-stalks; 2 elementary transport of A -> End(F) through an additive fully faithful equivalence, target as in def-exc-continuous-cohomology; 4 by lem-exc-discrete-modules-abelian (abelian, enough injectives) and def-exc-continuous-cohomology (H^q = derived invariants). FIX more, RETURN less: C4 at step 3: 'full faithfulness' was applied to lem-exc-etale-field-gsets, an equivalence of etale K-schemes with G-sets, which says nothing about sections of a sheaf; the needed fact is the sheaf-of-sets equivalence 03QT with stalk of h_X = Hom_K(Spec K^sep, X). Added statement-only node lem-exc-etale-sheaves-gsets-point (Tag 03QT, (i) stalk equivalence Sh((Spec K)_et) -> discrete G-sets, (ii) stalk of h_X), and rewrote step 3 of dag/nodes/sec-curve-estimates/lem-exc-field-discrete-modules.json: proof[2].text (Yoneda F(Spec L)=Hom(h_{Spec L},F), then the new node, stalk of h_{Spec L} = K-embeddings L -> K^sep = G/H, underlying G-set of the stalk of F is M by lem-exc-abelian-sheaves-gmodules), proof[2].uses and proof_deps (+lem-exc-etale-sheaves-gsets-point). Dropped the declared tool use lem-exc-discrete-modules-abelian: it is a node of the item's own unit sk-prop-h2, so no tool_uses entry is needed. Small cases: K separably closed (G trivial, F(Spec K)=M), L=K (M^G), L/K finite Galois (G/H with H normal, sections M^H). Not attached: no slopmaster2 declaration found for the stalk/G-set equivalence (sorry map grep). Three new nodes (pi_1 identification, Galois-descent equalizer, G-set coverings) are no longer cited by any step; recorded in lead_note. Start Sat Oct 10 03:08:48 PM UTC 2026, end Sat Oct 10 03:10:30 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-10 L (R-fd4): Merged by R-fd4 with FIX+NODE(1). Three new nodes of this delivery are cited by no step after the repair (lem-exc-pi1-galois-identification, lem-exc-galois-descent-equalizer, lem-exc-etale-site-gset-coverings); they are off the item's route and can be retired by the maintainer."
 }

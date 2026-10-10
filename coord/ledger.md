@@ -1732,3 +1732,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:08 L: merge tool fills created.by/date on delivered new nodes; existing nodes with created.item but no by/date filled
 - 15:09 L: merged deliver/C1/lem-sc-brauer-zero-all-curves (reviewer FIX; after a return; new nodes: 1)
 - 15:10 L: etale-proposition-etale-reduced (new node of C1's brauer-zero-all-curves) attached to isReduced_of_etale (sorry-free)
+- 15:10 L: merged deliver/M1/lem-exc-field-discrete-modules (reviewer FIX+NODE(1); after a return; new nodes: 6)
