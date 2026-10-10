@@ -696,3 +696,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:22 L: reviewed lem-weil-pbc-formal-systems-annihilated-by-power (0888; 7 steps; +commutative-algebra node; tool_uses pqf-lem-affine-open-locnoeth): accepted.
 - 2026-10-10, delivery of F1: lem-weil-pbc-closed-immersion-residue-field-iso merged from deliver/F1/lem-weil-pbc-closed-immersion-residue-field-iso (1 commit(s), 0 new node(s), spot-checked by L: second delivery: stalks node (2) and locally-surjective-iff-stalks cited, locality from the locally-ringed-space definition; L replaced the inline tag 01QO by the definition citation post-merge); claim closed
 - 00:24 L: merged F1 closed-immersion-residue-field-iso (2nd delivery); L replaced an inline tag citation by the definition node.
+- 00:27 L: reviewed lem-weil-pbc-stein-fibre-idempotent-image (0G7X; 9 steps; +5 nodes incl. 02OD and the 01Z0 leaf; tool_uses lem-weil-pbc-proper-base-change, pqf-lem-proper-basic): accepted.
+- 00:27 L: reviewed lem-weil-pbc-integral-closure-finite-fibre-choose-g (09XH final step; 5 steps; no new nodes): accepted.

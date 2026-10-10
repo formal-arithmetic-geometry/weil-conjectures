@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-integral-closure-finite-fibre-choose-g",
  "kind": "statement",
  "title": "A lift of the fibre idempotent gives the localization isomorphism",
- "statement": "Let $A$ be a commutative ring, let $I\\subseteq A$ be an ideal, and let $A\\to B$ be a finite-type ring map with $B/IB=C_1\\times C_2$ and $C_1$ finite over $A/I$. Let $B'\\subseteq B$ be the integral closure of $A$ in $B$, and let $\\phi:\\operatorname{Spec}(B)\\to\\operatorname{Spec}(B')$ be induced by the inclusion. Suppose $B'/IB'=C'_1\\times C'_2$ is a product of $A/I$-algebras whose factors map to $C_1,C_2$ respectively (with $C'_1\\to C_1$ an isomorphism), and write $\\varepsilon'=(1,0)\\in B'/IB'$. Let $U\\subseteq\\operatorname{Spec}(B')$ be an open neighbourhood of $\\operatorname{Spec}(C'_1)\\subseteq\\operatorname{Spec}(B'/IB')$, and suppose the induced morphism $\\phi^{-1}(U)=\\operatorname{Spec}(B)\\times_{\\operatorname{Spec}(B')}U\\to U$ is an isomorphism of locally ringed spaces. Then there is $g\\in B'$ whose image modulo $IB'$ is $\\varepsilon'$ and whose principal open $D(g)$ is contained in $U$. For this $g$, the induced localization map $B'_g\\to B_g$ is an isomorphism.",
+ "statement": "Let $A$ be a commutative ring, let $I\\subseteq A$ be an ideal, and let $A\\to B$ be a finite-type ring map with $B/IB=C_1\\times C_2$ and $C_1$ finite over $A/I$. Let $B'\\subseteq B$ be the integral closure of $A$ in $B$, and let $\\phi:\\operatorname{Spec}(B)\\to\\operatorname{Spec}(B')$ be induced by the inclusion. Suppose $B'/IB'=C'_1\\times C'_2$ is a product of $A/I$-algebras whose factors map to $C_1,C_2$ respectively (with $C'_1\\to C_1$ an isomorphism), and write $\\varepsilon'=(1,0)\\in B'/IB'$. Let $U\\subseteq\\operatorname{Spec}(B')$ be an open neighbourhood of $\\operatorname{Spec}(C'_1)\\subseteq\\operatorname{Spec}(B'/IB')\\subseteq\\operatorname{Spec}(B')$ (the subsets of primes of $B'$ that are inverse images of primes under the surjections $B'\\to B'/IB'\\to C'_1$, the second being the projection onto the first factor), and suppose the induced morphism $\\phi^{-1}(U)=\\operatorname{Spec}(B)\\times_{\\operatorname{Spec}(B')}U\\to U$ is an isomorphism of locally ringed spaces. Then there is $g\\in B'$ whose image modulo $IB'$ is $\\varepsilon'$ and whose principal open $D(g)$ is contained in $U$. For this $g$, the induced localization map $B'_g\\to B_g$ is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "literature/stacks-project/more-algebra.tex:2542-2549, proof of Lemma Tag 09XH (lemma-helper-finite-type): choose g lifting (1,0) with D(g) subset U and conclude B'_g -> B_g is an isomorphism from the homeomorphism and local-ring isomorphisms; the product step is Algebra Tag 00EE and the final local criterion is Tag 00E9"
@@ -13,9 +13,77 @@
   "lem-weil-pbc-integral-spec-closed-map",
   "lem-weil-pbc-spec-integral-ring-map-integral"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose any $g_0\\in B'$ whose image in $B'/IB'$ is $\\varepsilon'$. Since $\\varepsilon'^2=\\varepsilon'$, we have $g_0(1-g_0)\\in IB'$. The projection $B'/IB'\\to C'_1$ is surjective with kernel $(1-\\varepsilon')(B'/IB')$, so the composite $B'\\to C'_1$ is surjective with kernel $K:=IB'+(1-g_0)B'$. By the correspondence between the primes of a quotient $B'/K$ and the primes of $B'$ containing $K$, the subset $\\operatorname{Spec}(C'_1)\\subseteq\\operatorname{Spec}(B')$ of the statement is $V(K)=\\{\\mathfrak p:K\\subseteq\\mathfrak p\\}$, a closed subset of $\\operatorname{Spec}(B')$ for the Zariski topology.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "more-algebra.tex:2543-2546, proof of Lemma Tag 09XH ('Spec(C'_1) ... closed in Spec(B')'); the product/idempotent dictionary is Algebra Tag 00EE (lemma-disjoint-decomposition)"
+   }
+  },
+  {
+   "text": "The complement $Z=\\operatorname{Spec}(B')\\setminus U$ is closed, so by definition of the Zariski topology $Z=V(J)$ for some ideal $J\\subseteq B'$. Since $V(K)=\\operatorname{Spec}(C'_1)\\subseteq U$ (step 1 and the hypothesis on $U$), $V(J)\\cap V(K)=\\emptyset$. A prime contains $J+K$ if and only if it contains $J$ and $K$, so $V(J+K)=V(J)\\cap V(K)=\\emptyset$; as $V(J+K)$ is the complement of $\\bigcup_{r\\in J+K}D(r)$, part (i) of [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] applied to the family of all elements of $J+K$ gives $J+K=B'$. Write $1=j+k$ with $j\\in J$ and $k\\in K$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma Tag 00E0 (lemma-Zariski-topology), items (8) V(I)=emptyset iff I=R and (9)/(10) intersections of V's; used at more-algebra.tex:2543-2546 ('this is possible because Spec(C'_1) and Spec(C'_2) are disjoint and closed in Spec(B') and Spec(C'_1) is contained in U')"
+   }
+  },
+  {
+   "text": "Put $g=g_0j\\in B'$. Then $g-g_0=-g_0k\\in g_0IB'+g_0(1-g_0)B'\\subseteq IB'$, because $g_0(1-g_0)\\in IB'$ (step 1); so the image of $g$ in $B'/IB'$ is $\\varepsilon'$. Moreover $g\\in J$, so every prime of $Z=V(J)$ contains $g$, i.e. $D(g)\\cap Z=\\emptyset$, i.e. $D(g)\\subseteq U$. This proves the first assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "more-algebra.tex:2542-2546, proof of Lemma Tag 09XH ('Pick a g in B' mapping to (1,0) in C'_1 x C'_2 such that D(g) subset U'); the explicit choice g=g_0 j is written by the agent"
+   }
+  },
+  {
+   "text": "Let $\\iota:B'\\to B$ be the inclusion, so $\\phi=\\operatorname{Spec}\\iota$, whose map on global sections is $\\iota$ under $\\Gamma(\\operatorname{Spec}B',\\mathcal O)=B'$, $\\Gamma(\\operatorname{Spec}B,\\mathcal O)=B$ ([def-weil-affine-spectrum]; $\\operatorname{Spec}\\iota$ is the morphism corresponding to $\\iota$ under the bijection of [lem-weil-pbc-morphism-into-affine-scheme] for $X=\\operatorname{Spec}B$). By the second clause of [lem-weil-pbc-morphism-into-affine-scheme], $\\phi^{-1}(D(g))$ is the principal open of $\\iota(g)=g$ in $\\operatorname{Spec}B$, which we also write $D(g)$. By [lem-weil-pbc-affine-ideals-closed-subscheme](0) (with $X=U=\\operatorname{Spec}B'$, resp. $X=U=\\operatorname{Spec}B$), the restriction maps $B'\\to\\mathcal O_{\\operatorname{Spec}B'}(D(g))$ and $B\\to\\mathcal O_{\\operatorname{Spec}B}(D(g))$ are localizations at $g$ [def-weil-ring-localization-away], so we may identify these section rings with $B'_g$ and $B_g$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes Lemma Tag 01I1 (lemma-morphism-into-affine) with Tag 01HY (preimage of D(g)) and Lemma Tag 01HV (lemma-spec-sheaves: O(D(f))=R_f); used at more-algebra.tex:2546-2548"
+   }
+  },
+  {
+   "text": "The hypothesis says that $\\phi$ restricts to an isomorphism of locally ringed spaces $\\phi^{-1}(U)\\to U$; in particular, for every open $W\\subseteq U$ the sheaf map $\\phi^\\sharp_W:\\mathcal O_{\\operatorname{Spec}B'}(W)\\to\\mathcal O_{\\operatorname{Spec}B}(\\phi^{-1}(W))$ is a ring isomorphism. Take $W=D(g)\\subseteq U$ (step 3). The map $\\phi^\\sharp_{D(g)}$ commutes with the restrictions from global sections, and on global sections $\\phi^\\sharp$ is $\\iota$ (step 4); so under the identifications of step 4, $\\phi^\\sharp_{D(g)}:B'_g\\to B_g$ is a ring map whose composite with $B'\\to B'_g$ is $B'\\xrightarrow{\\iota}B\\to B_g$. Since every element of $B'_g$ is $b/g^n$, such a map is unique, hence it is the induced localization map $b/g^n\\mapsto\\iota(b)/g^n$. Therefore $B'_g\\to B_g$ is an isomorphism.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "more-algebra.tex:2546-2549, proof of Lemma Tag 09XH ('Then B'_g -> B_g defines a homeomorphism on spectra and an isomorphism on local rings (by our choice of U above). Hence it is an isomorphism'); Stacks concludes 'for example' by Algebra Tag 00E9; here the hypothesis is an isomorphism of locally ringed spaces over U, and the agent takes sections over D(g) instead"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "more-algebra.tex:2542-2549, proof of Lemma Tag 09XH (lemma-helper-finite-type), choice of g and conclusion; the explicit construction g=g_0 j (step 3) and the sections argument of step 5 (instead of Algebra Tag 00E9, which Stacks names 'for example') are filled in by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -44,10 +112,24 @@
    "results": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean has the clopen/idempotent theorem; no theorem for this simultaneous g-choice and localization conclusion",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "isomorphism of schemes restricted to basic open gives isomorphism of localizations Away",
+   "results": "AlgebraicGeometry.SpecMapRestrictBasicOpenIso (Mathlib.AlgebraicGeometry.AffineScheme:984, Arrow.mk (Spec.map f |_ basicOpen r) iso Arrow.mk (Spec.map (Localization.awayMap f r))), AlgebraicGeometry.basicOpenIsoSpecAway, instIsIsoSchemeMorphismRestrict, StructureSheaf.basicOpenIso; ingredients of step 5 only",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'zeroLocus_empty_iff_eq_top|zeroLocus_sup' Mathlib/RingTheory/Spectrum/Prime/Basic.lean; grep -rn 'Spec.fullyFaithful|SpecMapRestrictBasicOpenIso' Mathlib/AlgebraicGeometry",
+   "results": "PrimeSpectrum.zeroLocus_empty_iff_eq_top (Basic.lean:284), PrimeSpectrum.zeroLocus_sup (Basic.lean:306), Spec.fullyFaithfulToLocallyRingedSpace (GammaSpecAdjunction.lean:520), SpecMapRestrictBasicOpenIso (AffineScheme.lean:984); ingredients for steps 2 and 5, no combined statement",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +149,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-integral-closure-finite-fibre-choose-g",
+  "worker": "stage1",
+  "summary": "Split along more-algebra.tex:2542-2549 (proof of Stacks 09XH). Five steps: (1) a lift g_0 of the idempotent; Spec(C'_1)=V(IB'+(1-g_0)) is closed; (2) Z=Spec B' minus U is V(J), disjoint from V(K), so J+K=B' (Mathlib leaf lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact (i)); (3) g=g_0 j lifts the idempotent and lies in J, so D(g) is in U (explicit construction written by the agent; Stacks only says 'this is possible'); (4) phi^{-1}(D(g))=D(g) and the sections over D(g) are B'_g, B_g (Mathlib leaves lem-weil-pbc-morphism-into-affine-scheme, lem-weil-pbc-affine-ideals-closed-subscheme (0)); (5) sections over D(g) of the isomorphism of locally ringed spaces over U give B'_g -> B_g bijective, identified with the localization map by its universal property (Stacks uses Algebra 00E9 'for example'; the statement's hypothesis makes the sections argument direct). No new nodes. Statement clarified: Spec(C'_1) in Spec(B'/IB') in Spec(B') via the surjections. stmt_deps kept as given (lem-weil-pbc-spec-clopen-idempotent, lem-weil-pbc-integral-spec-closed-map, lem-weil-pbc-spec-integral-ring-map-integral are not used by the statement text). The hypotheses on B, C_1, C_2 are not used by the proof."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps: the choice g = g_0 j with 1 = j + k from J + K = B' (00E0 leaf), D(g) in U, phi^{-1}(D(g)) = D(g) via the morphism-into-affine leaf, sections over D(g) are the localizations, the isomorphism of locally ringed spaces restricted to D(g). No new nodes. Tag 09XH verified. Stage-3 note (worker): stmt_deps lists three nodes the statement text does not use; the hypotheses on B, C_1, C_2 are unused."
+ }
 }
