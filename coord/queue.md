@@ -49,7 +49,6 @@
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
 | `lemma-weil-pbc-etale-degree-zero` | 2004 | sorry_here |
-| `lem-weil-pbc-gabber-h0-etale-criterion` | 2005 | none |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2005 | sorry_here |
 | `lemma-weil-pbc-spectral-restriction` | 2005 | sorry_here |
 | `lemma-weil-pbc-stein-connectedness` | 2005 | rests_on_sorry |
@@ -62,7 +61,6 @@
 | `def-weil-pbc-direct-image` | 3002 | none |
 | `def-weil-pbc-inverse-image` | 3002 | none |
 | `def-weil-pbc-kinjective-resolutions` | 3002 | none |
-| `def-pc-module-pullback` | 3003 | none |
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
@@ -71,6 +69,8 @@
 | `def-weil-pbc-curve-setting` | 3004 | none |
 | `def-weil-pbc-pointed-etale-neighbourhoods` | 3004 | none |
 | `lem-pc-homeo-pure-insep` | 3004 | none |
+| `lem-pc-module-pullback-adjunction` | 3004 | none |
+| `lem-pc-module-pullback-identity-composition` | 3004 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
 | `lemma-weil-pbc-affine-neighbourhood-cofinal` | 3004 | none |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 3004 | none |
@@ -299,6 +299,7 @@
 | `def-nagata-final-noetherian-base-system` | - | none |
 | `def-nagata-fixed-base-separated-stage` | - | none |
 | `def-nagata-separated-descent-stage` | - | none |
+| `def-pur-sheaf-tensor-product` | - | none |
 | `def-weil-pbc-C7` | - | none |
 | `def-weil-pbc-constructible-torsion` | - | none |
 | `lem-pc-kbar-pure-insep` | - | none |
@@ -309,7 +310,6 @@
 | `def-nagata-finite-presentation-descent` | - | none |
 | `def-nagata-glued-limit-comparison` | - | none |
 | `def-pc-representable-functor` | - | none |
-| `def-pur-sheaf-tensor-product` | - | none |
 | `def-sc-field-extension` | - | none |
 | `def-weil-pbc-C1` | - | none |
 | `def-weil-pbc-C2` | - | none |
@@ -874,7 +874,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 420 nodes that wait for stage 1, 844 nodes that wait for a statement dependency.
+Not open yet: 420 nodes that wait for stage 1, 846 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
