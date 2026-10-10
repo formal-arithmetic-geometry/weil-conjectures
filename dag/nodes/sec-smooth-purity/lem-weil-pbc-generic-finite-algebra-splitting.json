@@ -21,12 +21,62 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-universal-homeomorphism"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Pass to the generic fibre C=B tensor_A K. By [lem-weil-pbc-generic-separable-algebra-splitting], after a finite separable extension K'/K the reduction of C tensor_K K' is a finite product of fields L_j, each purely inseparable over K'.",
+   "uses": [
+    "lem-weil-pbc-generic-separable-algebra-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "proof, finite-algebra calculation, generic fibre"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spread-finite-separable-extension], after inverting a nonzero c in A the extension K'/K is the fraction-field extension of a finite etale A[c^{-1}]-algebra A'; the resulting morphism Spec(A') to Spec(A[c^{-1}]) is finite etale and surjective.",
+   "uses": [
+    "lem-weil-pbc-spread-finite-separable-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "proof, finite-algebra calculation, spreading out the separable extension"
+   }
+  },
+  {
+   "text": "For each purely inseparable field factor L_j, let D_j be the corresponding factor of (B tensor_A A')_red after the generic idempotents have been spread. After enlarging the localization once for the finitely many factors, each D_j is a finite A'-algebra domain with fraction field L_j, so [lem-weil-pbc-spread-purely-inseparable-factors] gives that Spec(D_j) to Spec(A') is surjective and radicial, hence a universal homeomorphism.",
+   "uses": [
+    "lem-weil-pbc-spread-purely-inseparable-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "proof, finite-algebra calculation, purely inseparable factors"
+   }
+  },
+  {
+   "text": "Let e_j be the orthogonal generic idempotents giving the product decomposition in [lem-weil-pbc-generic-separable-algebra-splitting]. Since B tensor_A A' is finite over A', clear the finitely many denominators in the e_j and in the equations e_j^2=e_j, e_je_{j'}=0 (j not equal to j'), and sum_j e_j=1; after one principal localization these equations hold in the reduction of B tensor_A A'. The corresponding finite factors D_j have generic fraction fields L_j. After a further principal localization, make the reduced finite A'-module torsion free and clear generators and relations for the D_j; the spread idempotents then split (B tensor_A A')_red as the product of these domains D_j, each embedded in its generic field L_j. Applying [lem-weil-pbc-spread-purely-inseparable-factors] to each D_j supplies the finite, surjective, radicial, and universal-homeomorphism properties. This avoids any assertion about integral closures or equality with integral closures.",
+   "uses": [
+    "lem-weil-pbc-generic-separable-algebra-splitting",
+    "lem-weil-pbc-spread-purely-inseparable-factors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+    "place": "proof, finite-algebra calculation, spreading the product idempotents"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-generic-separable-algebra-splitting",
+  "lem-weil-pbc-spread-finite-separable-extension",
+  "lem-weil-pbc-spread-purely-inseparable-factors"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "## Proof, steps 4--9"
+  "place": "## Proof, finite-algebra calculation"
  },
  "mathlib_searches": [
   {
@@ -59,12 +109,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-pushforward-generic-constructible",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-generic-finite-algebra-splitting",
+  "worker": "stage1",
+  "summary": "Split the finite-algebra calculation into three substantive statement-only children: generic separable splitting, spreading the finite separable extension as an etale cover, and spreading purely inseparable factors as finite radicial universal-homeomorphism covers. The item proof then spreads the generic idempotents after one localization.",
+  "blueprint": "Steps 1--4 realize the finite-algebra calculation in the parent blueprint proof, covering its generic-fibre, separable-spreading, purely-inseparable, and idempotent-spreading clauses.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gfs2738",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gfs2738 (reviewer sub-agent of L); spot-checked: Re-push after R-gfs2656 return. Point 1 (E) repaired: spread-purely-inseparable-factors now takes a finite domain E over A' with Frac L purely inseparable over K'; true (after localizing, finitely many generators x with x^{p^n} in A' (or E=A' if L=K'), so A'->E injective integral, surjective by 00GQ, radicial; finite+surjective+radicial = universal homeo); substitution L=K', A'=A now says only E=A[1/c] after localizing, true. Point 2 (C4/D) repaired: Step 4 takes D_j as factors of (B tensor A')_red after torsion-free localization, generic fibre is (C tensor K')_red = prod L_j since reduction commutes with localization, D_j finite domains with Frac L_j, matches child hypotheses; no integral closure. Children 1 and 2 byte-unchanged since baf297894 and true. Item statement unchanged vs base; citer lem-weil-pbc-finite-pushforward-generic-constructible uses it as stated (C4 ok). No fault beyond the two Second readings (stale 'integral closure' wording in a search query only)."
+ }
 }
