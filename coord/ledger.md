@@ -2173,3 +2173,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:51 L: merged deliver/F1/lem-sc-mult-n-finite-flat (reviewer PASS; first push; new nodes: 1)
 - 17:52 L: merged deliver/G1/lem-sc-ntorsion-etale (reviewer FIX; first push; new nodes: 1)
 - 17:52 L: merged deliver/C1/lem-pc-zero-scheme-properties (reviewer FIX; first push; new nodes: 4)
+- 17:53 L: merged deliver/J1/lem-sc-dual-number-scheme-pushout (reviewer PASS; first push; new nodes: 0)

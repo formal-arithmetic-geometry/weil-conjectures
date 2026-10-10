@@ -23,10 +23,100 @@
   "def-sc-dual-numbers",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $D=K[\\epsilon]$ and $A_n=K[\\epsilon_1,\\dots,\\epsilon_n]$. Every element of $A_n$ has a unique expression $a+\\sum_i b_i\\epsilon_i$. The maps defining $j_i$ identify $A_n$ with the ring of tuples $(a_i+b_i\\epsilon)_i\\in D^n$ whose constant terms $a_i$ all agree: the inverse sends such a tuple to $a+\\sum_i b_i\\epsilon_i$, and both multiplication laws give constant coefficient $aa'$ and $i$th infinitesimal coefficient $ab_i'+a'b_i$. Thus $A_n$ is the finite fibre product of the quotient maps $D\\to K$. In each ring $D$ and $A_n$, the ideal of infinitesimals is square-zero and the quotient is the field $K$; consequently each is local, with its unique closed point given by that ideal. This is the ring calculation invoked in Stacks Tag 0B2B, extended from two factors to finite $n$.",
+   "uses": [
+    "def-sc-dual-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2B, varieties-lemma-tangent-space, ring fibre-product calculation"
+   }
+  },
+  {
+   "text": "Let $z$ be the common morphism $\\theta_i\\circ c:\\operatorname{Spec}K\\to X$. Under [lem-weil-pbc-morphism-from-spec-local-ring], write $z$ as a point $x\\in X$ and a local ring map $\\psi:\\mathcal O_{X,x}\\to K$. The same correspondence writes each $\\theta_i$ as $(x_i,\\varphi_i)$ with $\\varphi_i:\\mathcal O_{X,x_i}\\to D$. Since the closed point of $\\operatorname{Spec}K$ maps under $c$ to the closed point of $\\operatorname{Spec}D$, equality $\\theta_i\\circ c=z$ gives $x_i=x$; compatibility of stalk maps under composition gives $D\\to K$ composed with $\\varphi_i$ equal to $\\psi$. By step 1, the tuple $(\\varphi_i)_i$ therefore defines a unique ring map $\\varphi:\\mathcal O_{X,x}\\to A_n$ whose $i$th projection is $\\varphi_i$. Its residue map is $\\psi$, so it is local. Apply the correspondence again to $(x,\\varphi)$ to obtain $\\Theta:\\operatorname{Spec}A_n\\to X$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2B, varieties-lemma-tangent-space, via Schemes Lemma 01J6"
+   }
+  },
+  {
+   "text": "For each $i$, both $\\Theta\\circ j_i$ and $\\theta_i$ correspond under [lem-weil-pbc-morphism-from-spec-local-ring] to $(x,\\varphi_i)$, because the map on the closed-point local rings induced by $j_i$ is the $i$th projection $A_n\\to D$; hence they are equal. Conversely, any $\\Theta'$ with these restrictions corresponds to a point $x'$ and a local map $\\varphi':\\mathcal O_{X,x'}\\to A_n$. Restricting along one $j_i$ gives $x'=x$, and restricting along all of them gives the projections of $\\varphi'$ equal to the $\\varphi_i$. The coefficient description in step 1 makes the projections jointly injective, so $\\varphi'=\\varphi$ and the correspondence yields $\\Theta'=\\Theta$. For $n=1$ the calculation is the identity $A_1=D$, and for $n=2$ it is precisely the pushout asserted in Tag 0B2B.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2B, varieties-lemma-tangent-space, pushout assertion and uniqueness via Schemes Lemma 01J6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-dual-numbers",
+  "lem-weil-pbc-morphism-from-spec-local-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B2B, varieties-lemma-tangent-space; finite-copy extension of its two-copy calculation"
+ },
  "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Spec of a finite fiber product of dual number rings over a field is the pushout of the dual number schemes at their common closed point",
+   "results": "8 hits headed by AlgebraicGeometry.isPullback_Spec_map_pushout and isPullback_SpecMap_pushout (Mathlib/AlgebraicGeometry/Pullbacks); these concern pushouts of rings and pullbacks of schemes.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SpecToEquivOfLocalRing, CategoryTheory.IsPushout",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SpecToEquivOfLocalRing|isPushout.*Spec|pushout.*dualNumber AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Stalk.lean:395 has SpecToEquivOfLocalRing; no pushout-of-dual-numbers declaration among the 6 hits.",
+   "date": "2026-10-11",
+   "verdict": "ingredient only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushout of spectra of dual numbers along their common field point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphisms from a square zero thickening with n tangent directions to a scheme correspond to n morphisms from dual numbers with the same base point",
+   "results": "8 hits headed by AlgebraicGeometry.FormallyUnramified and Algebra.Extension.homInfinitesimal; none states the finite gluing property.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DualNumber, TrivSqZeroExt, Pullback",
+   "results": "0 hits; unknown identifier Pullback",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "DualNumber|TrivSqZeroExt|fiberProduct|pullback AlgebraicGeometry",
+   "results": "25 hits on scheme pullbacks, mostly Mathlib/AlgebraicGeometry/Restrict.lean and ProjectiveSpectrum; none on dual-number pushouts.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
   {
    "tool": "leanfinder",
    "query": "the spectrum of k[epsilon1 epsilon2] is the pushout of two spectra of dual numbers over Spec k",
@@ -64,12 +154,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-tangent-space-vector-space",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-dual-number-scheme-pushout",
+  "worker": "stage1",
+  "summary": "Used the coordinatewise fibre-product calculation for the square-zero algebra and the existing Mathlib leaf for Stacks 01J6 to prove the finite-copy universal property. No new node is needed: the ring calculation is explicit and elementary, while 01J6 already states the scheme-morphism correspondence.",
+  "blueprint": "Realizes the tangent-vector separation argument in the third paragraph of lem-sc-degree-2g1-very-ample, through the pushout used by lem-sc-tangent-space-vector-space; Tag 0B2B supplies its two-copy case.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dsp1753",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dsp1753 (reviewer sub-agent of L); spot-checked: Statement is the n-fold wide pushout of n copies of c: Spec K -> Spec K[eps] (n>=1), as requested by R-tsv1745. Proof argues via local rings exactly as Stacks 0B2B does (A_n local, 01J6 bijection) rather than 0B7M/0E25; valid since Spec A_n is Spec of a local ring. Step 1 fibre-product identification checked as rings (needed since phi_i are ring maps, not K-algebra maps); residue map of phi is psi, so phi local. Steps 2-3: existence and uniqueness via 01J6 plus naturality of the correspondence under precomposition with Spec of local maps (definitional from phi_f = eps^-1 o f^#_z). No new nodes, no tool_uses. PASS, no repairs."
+ }
 }
