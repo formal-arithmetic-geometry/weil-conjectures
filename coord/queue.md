@@ -8,7 +8,6 @@
 |---|---|---|
 | `lem-weil-pbc-etale-stratification-local-gluing` | 1010 | none |
 | `lem-weil-pbc-z-localizations-dvr` | 1010 | none |
-| `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1011 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
 | `lem-weil-pbc-formal-functions-stalk` | 1011 | none |
 | `lem-weil-pbc-geometrically-regular-descent` | 1011 | none |
@@ -21,7 +20,6 @@
 | `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1011 | none |
 | `lem-weil-pbc-integral-closure-finite-fibre-quasi-finite` | 1011 | none |
 | `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1011 | none |
-| `lem-weil-pbc-inverse-image-composition-module-linear` | 1011 | none |
 | `lem-weil-pbc-jacobi-zariski-differential-maps` | 1011 | none |
 | `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1011 | none |
 | `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1011 | none |
@@ -108,6 +106,7 @@
 | `lem-weil-pbc-affine-finite-type-generating-sections` | 1012 | none |
 | `lem-weil-pbc-ample-scheme-separated` | 1012 | none |
 | `lem-weil-pbc-artinian-ring-self-finite-length` | 1012 | none |
+| `lem-weil-pbc-closed-pushforward-constant-stalks` | 1012 | none |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-module-kernel` | 1012 | none |
 | `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1012 | none |
@@ -147,6 +146,7 @@
 | `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1012 | none |
 | `lem-weil-pbc-quotient-henselian-pair` | 1012 | none |
 | `lem-weil-pbc-quotient-local-structure` | 1012 | none |
+| `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1012 | none |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1012 | none |
 | `lem-weil-pbc-sets-extension-by-empty-adjunction` | 1012 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
@@ -826,7 +826,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 668 nodes that wait for stage 1, 443 nodes that wait for a statement dependency.
+Not open yet: 668 nodes that wait for stage 1, 445 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
