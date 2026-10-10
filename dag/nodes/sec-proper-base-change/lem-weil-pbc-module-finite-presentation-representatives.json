@@ -2,17 +2,99 @@
  "id": "lem-weil-pbc-module-finite-presentation-representatives",
  "kind": "statement",
  "title": "Finite-presentation modules on a ringed space have a set of isomorphism representatives",
- "statement": "Let $X$ be a topological space, $\\mathcal O_X$ a sheaf of commutative rings, and $\\Mod(\\mathcal O_X)$ the category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Say that $\\mathcal G\\in\\Mod(\\mathcal O_X)$ is of finite presentation if every $x\\in X$ has an open neighbourhood $U$ admitting an exact sequence $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U\\to0$ with $m,n$ finite. Then there are a set $I$ and finite-presentation modules $(\\mathcal G_i)_{i\\in I}$ such that every finite-presentation $\\mathcal O_X$-module is isomorphic to some $\\mathcal G_i$.",
+ "statement": "Let $X$ be a topological space, $\\mathcal O_X$ a sheaf of commutative rings, and $\\Mod(\\mathcal O_X)$ the category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. Say that $\\mathcal G\\in\\Mod(\\mathcal O_X)$ is of finite presentation if every $x\\in X$ has an open neighbourhood $U$ admitting an exact sequence $\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U\\to0$ with $m,n$ finite [def-weil-pbc-module-finite-type-presentation]. Then there are a set $I$ and finite-presentation modules $(\\mathcal G_i)_{i\\in I}$ such that every finite-presentation $\\mathcal O_X$-module is isomorphic to some $\\mathcal G_i$.",
  "source": {
   "document": "literature/stacks-project/modules.tex",
   "place": "Modules, Lemma 01BC (lemma-set-isomorphism-classes-finite-type-modules), lines 957-984; apply it because a module of finite presentation is of finite type by Modules, Definition 01BN"
  },
  "stmt_deps": [
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Two facts from the definitions [def-weil-pbc-module-finite-type-presentation]. (i) A module $\\mathcal G$ of finite presentation is of finite type: given $x$, an open $U\\ni x$ and an isomorphism $\\mathcal G|_U\\cong\\operatorname{Coker}(\\alpha:\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n})$, the composite of the cokernel map $\\mathcal O_U^{\\oplus n}\\to\\operatorname{Coker}(\\alpha)$ (an epimorphism) with this isomorphism is an epimorphism $\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$, which is of the form $e_i\\mapsto s_i$ for the sections $s_i\\in\\mathcal G(U)$ that are the images of the $e_i$. (ii) Finite presentation is invariant under isomorphism: if $\\mathcal G\\cong\\mathcal G'$ and $\\mathcal G'$ is of finite presentation, restrict the isomorphism to the open $U$ of a local presentation of $\\mathcal G'|_U$ and compose.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Definition 01B5 (definition-finite-type, line 810) and Definition 01BN (definition-finite-presentation, line 1378)"
+   }
+  },
+  {
+   "text": "The set of data. For an open $U\\subseteq X$ write $\\mathcal O_U=\\mathcal O_X|_U$; $(U,\\mathcal O_U)$ is a ringed space, so $\\Mod(\\mathcal O_U)$ is an abelian category in which kernels are computed sectionwise [def-weil-sheaf-of-modules-category]. Let $T$ be the collection of triples $(U,r,\\mathcal K)$ with $U\\subseteq X$ open, $r\\ge0$ an integer and $\\mathcal K\\subseteq\\mathcal O_U^{\\oplus r}$ a sub-$\\mathcal O_U$-module, i.e. a family of submodules $\\mathcal K(W)\\subseteq\\mathcal O_X(W)^{\\oplus r}$ ($W\\subseteq U$ open) stable under restriction and forming a sheaf. $T$ is a set: it is a subset of $\\mathcal P(\\operatorname{Op}(X))\\times\\mathbb N\\times\\prod_{W\\in\\operatorname{Op}(X)}\\mathcal P(\\mathcal O_X(W)^{\\oplus r})$ (over each $r$). Using the axiom of choice, fix for each $t=(U,r,\\mathcal K)\\in T$ a cokernel $\\pi_t:\\mathcal O_U^{\\oplus r}\\to Q_t$ of the inclusion $\\mathcal K\\to\\mathcal O_U^{\\oplus r}$ in $\\Mod(\\mathcal O_U)$ (it exists since $\\Mod(\\mathcal O_U)$ is abelian). Let $D$ be the collection of tuples $d=(\\mathcal U,(r_U,\\mathcal K_U)_{U\\in\\mathcal U},(\\varphi_{UV})_{U,V\\in\\mathcal U})$ where $\\mathcal U\\subseteq\\operatorname{Op}(X)$ is a set of opens covering $X$ (the covering indexed by itself, as Stacks indexes it by an injection $J\\to\\mathcal P(X)$), $t_U=(U,r_U,\\mathcal K_U)\\in T$, and $\\varphi_{UV}:Q_{t_U}|_{U\\cap V}\\to Q_{t_V}|_{U\\cap V}$ are $\\mathcal O_{U\\cap V}$-linear isomorphisms satisfying the cocycle condition $\\varphi_{UW}=\\varphi_{VW}\\circ\\varphi_{UV}$ on $U\\cap V\\cap W$. $D$ is a set: a morphism $Q|_{U\\cap V}\\to Q'|_{U\\cap V}$ is a family of maps $Q(W)\\to Q'(W)$ ($W\\subseteq U\\cap V$ open), an element of the set $\\prod_W\\operatorname{Map}(Q(W),Q'(W))$, so $D$ is a subset of $\\coprod_{\\mathcal U}\\prod_{U\\in\\mathcal U}T\\times\\prod_{U,V\\in\\mathcal U}\\prod_W\\operatorname{Map}(Q_{t_U}(W),Q_{t_V}(W))$, built from sets by products, power sets and disjoint unions indexed by sets.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BC (lemma-set-isomorphism-classes-finite-type-modules), proof, lines 966-984"
+   }
+  },
+  {
+   "text": "Glueing. For each $d\\in D$ the modules $Q_{t_U}$ ($U\\in\\mathcal U$) on the covering $X=\\bigcup_{U\\in\\mathcal U}U$ with the isomorphisms $\\varphi_{UV}$ satisfy the hypotheses of [lem-weil-pbc-glue-sheaves-of-modules] (2), which gives an $\\mathcal O_X$-module and $\\mathcal O_U$-linear isomorphisms $\\theta_U$ from its restriction to $U$ onto $Q_{t_U}$ with $\\varphi_{UV}\\circ\\theta_U|_{U\\cap V}=\\theta_V|_{U\\cap V}$. By choice (over the set $D$) fix one such module $\\Phi(d)$ with isomorphisms $\\theta^d_U:\\Phi(d)|_U\\to Q_{t_U}$. Then $\\{\\Phi(d):d\\in D\\}$ is a set of $\\mathcal O_X$-modules indexed by $D$.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 00AK (section-glueing-sheaves), Lemmas 00AL, 00AM; used in Modules, Lemma 01BC, proof, lines 976-981"
+   }
+  },
+  {
+   "text": "A datum for a finite type module. Let $\\mathcal F$ be an $\\mathcal O_X$-module of finite type [def-weil-pbc-module-finite-type-presentation]. For each $x\\in X$ there are an open $U_x\\ni x$, an integer $n_x$ and an epimorphism $\\mathcal O_{U_x}^{\\oplus n_x}\\to\\mathcal F|_{U_x}$. Let $\\mathcal U=\\{U_x:x\\in X\\}\\subseteq\\operatorname{Op}(X)$, a set of opens covering $X$, and for each $U\\in\\mathcal U$ choose one epimorphism $p_U:\\mathcal O_U^{\\oplus r_U}\\to\\mathcal F|_U$ among these. Let $\\mathcal K_U=\\operatorname{Ker}(p_U)$, $\\mathcal K_U(W)=\\ker(p_U(W))$, a sub-$\\mathcal O_U$-module of $\\mathcal O_U^{\\oplus r_U}$ which is the kernel of $p_U$ in $\\Mod(\\mathcal O_U)$ [def-weil-sheaf-of-modules-category]. The complex $\\mathcal K_U\\to\\mathcal O_U^{\\oplus r_U}\\xrightarrow{p_U}\\mathcal F|_U$ is exact at $\\mathcal O_U^{\\oplus r_U}$ [def-weil-pbc-exact-sequence] (the image of the inclusion of the kernel is the kernel) and $p_U$ is an epimorphism, so $p_U$ is a cokernel of $\\mathcal K_U\\to\\mathcal O_U^{\\oplus r_U}$ by [lem-weil-pbc-abelian-exact-epi-cokernel] (a). As $\\pi_{t_U}$ is also a cokernel of that map ($t_U=(U,r_U,\\mathcal K_U)\\in T$), the universal properties give a unique isomorphism $\\psi_U:Q_{t_U}\\to\\mathcal F|_U$ with $\\psi_U\\circ\\pi_{t_U}=p_U$. Put $\\varphi_{UV}=(\\psi_V|_{U\\cap V})^{-1}\\circ\\psi_U|_{U\\cap V}$, an isomorphism $Q_{t_U}|_{U\\cap V}\\to Q_{t_V}|_{U\\cap V}$; on $U\\cap V\\cap W$, $\\varphi_{VW}\\circ\\varphi_{UV}=\\psi_W^{-1}\\psi_V\\psi_V^{-1}\\psi_U=\\psi_W^{-1}\\psi_U=\\varphi_{UW}$ (restrictions understood, restriction being compatible with composition), so the cocycle condition holds and $d_{\\mathcal F}=(\\mathcal U,(r_U,\\mathcal K_U),(\\varphi_{UV}))\\in D$.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BC (lemma-set-isomorphism-classes-finite-type-modules), proof, lines 966-984"
+   }
+  },
+  {
+   "text": "Every finite type module is some $\\Phi(d)$ up to isomorphism. With $d=d_{\\mathcal F}$ of Step 4 and $\\theta_U=\\theta^d_U$ of Step 3, put $\\chi_U=\\psi_U\\circ\\theta_U:\\Phi(d)|_U\\to\\mathcal F|_U$, an isomorphism. On $U\\cap V$: $\\chi_V=\\psi_V\\theta_V=\\psi_V\\varphi_{UV}\\theta_U=\\psi_V\\psi_V^{-1}\\psi_U\\theta_U=\\chi_U$ (restrictions understood). By [lem-weil-pbc-glue-sheaves-of-modules] (1) the $\\chi_U$ glue to $\\chi:\\Phi(d)\\to\\mathcal F$ with $\\chi|_U=\\chi_U$, and likewise the inverses $\\chi_U^{-1}$, which also agree on overlaps, glue to $\\chi':\\mathcal F\\to\\Phi(d)$. Then $(\\chi'\\chi)|_U=\\chi_U^{-1}\\chi_U=\\mathrm{id}$ and $(\\chi\\chi')|_U=\\mathrm{id}$ for every $U\\in\\mathcal U$, so by the uniqueness in [lem-weil-pbc-glue-sheaves-of-modules] (1) $\\chi'\\chi=\\mathrm{id}$ and $\\chi\\chi'=\\mathrm{id}$: $\\mathcal F\\cong\\Phi(d_{\\mathcal F})$.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BC, proof, lines 980-982 ('By definition every finite type O_X-module is isomorphic to an element of I'), written out"
+   }
+  },
+  {
+   "text": "Conclusion. Let $I=\\{d\\in D:\\Phi(d)\\text{ is of finite presentation}\\}$, a subset of the set $D$ (Step 2), and $\\mathcal G_d=\\Phi(d)$ for $d\\in I$. If $\\mathcal G$ is any $\\mathcal O_X$-module of finite presentation, it is of finite type by Step 1 (i), so $\\mathcal G\\cong\\Phi(d_{\\mathcal G})$ by Steps 4 and 5, and then $\\Phi(d_{\\mathcal G})$ is of finite presentation by Step 1 (ii); hence $d_{\\mathcal G}\\in I$ and $\\mathcal G\\cong\\mathcal G_{d_{\\mathcal G}}$. (Stacks further picks one element per isomorphism class to get 'exactly one'; the statement here does not need it.)",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01BC, proof, lines 980-984, restricted to finite presentation via Definition 01BN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-abelian-exact-epi-cokernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BC (lemma-set-isomorphism-classes-finite-type-modules), lines 957-984, with Sheaves Section 00AK for glueing; tag 01BC verified in literature/stacks-project/tags/tags"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +116,38 @@
    "results": "No representative-set theorem; only IsFinitePresentation definitions and implications",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finitely presented sheaves of modules form an essentially small category",
+   "results": "SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, IsFinitePresentation.mk, Presentation.IsFinite (Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent); CategoryTheory.IsFinitelyAccessibleCategory.instEssentiallySmallIsFinitelyPresentable (Mathlib.CategoryTheory.Presentable.Dense: categorical finitely presentable objects of a finitely accessible category)",
+   "date": "2026-10-10",
+   "verdict": "no match: no smallness statement for sheaf-theoretic finite presentation; the accessible-category instance is about categorical finite presentability and needs an IsFinitelyAccessibleCategory instance that SheafOfModules lacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the isomorphism classes of finite type sheaves of modules on a ringed space form a set (essentially small full subcategory)",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, GeneratingSections.IsFiniteType, Presentation.IsFinite, instIsFiniteTypeOfIsFinitePresentation, LocalGeneratorsData.IsFiniteType, QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-10",
+   "verdict": "no match (definitions only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.EssentiallySmall, SheafOfModules",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'EssentiallySmall\\|essentiallySmall\\|Small' Mathlib/Algebra/Category/ModuleCat/Sheaf/*.lean; grep -rn 'IsFinitelyAccessibleCategory\\|IsLocallyPresentable' Mathlib | grep instance",
+   "results": "only Small.{v} hypotheses on sections in Sheaf/Limits.lean:35-91; accessible/locally presentable instances only for Type u, presheaves (Presentable/Presheaf.lean:90) and generic consequences (Presentable/LocallyPresentable.lean:93, Dense.lean:78-89); nothing for SheafOfModules",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +167,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-finite-presentation-representatives",
+  "worker": "stage1",
+  "summary": "Read Stacks Modules Lemma 01BC and its proof (modules.tex 957-984; tag verified), and the citing step of lem-weil-pbc-module-filtered-colimit-finite-presentation (step 1 uses only that finite-presentation modules have a set of isomorphism representatives). Wrote the proof in six steps following 01BC: fp implies finite type and fp is isomorphism-invariant (from def-weil-pbc-module-finite-type-presentation, created today by the cokernel worker, a Mathlib leaf); the data (cover by a set of opens, r_U, sub-modules K_U of O_U^{r_U}, glueing isomorphisms with cocycle) form a set D, with a chosen cokernel Q for each (U,r,K); glueing each datum by lem-weil-pbc-glue-sheaves-of-modules (2); for a finite type module the kernels of local surjections give a datum, the surjection being a cokernel of its kernel by lem-weil-pbc-abelian-exact-epi-cokernel (a); the glued module is isomorphic to the given one by glueing the local isomorphisms and their inverses with lem-weil-pbc-glue-sheaves-of-modules (1); conclusion restricted to finite presentation. Statement kept; def-weil-pbc-module-finite-type-presentation added to stmt_deps and cited in the statement. No new nodes. Mathlib re-searched with LeanSearch, LeanFinder, Loogle and grep (EssentiallySmall/IsFinitelyAccessibleCategory): no match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following Stacks 01BC: finite presentation implies finite type; the set of data (cover, ranks, kernel subsheaves, gluing isomorphisms with the cocycle condition, one chosen cokernel per triple); gluing (existing node); a datum for every finite type module; the glued module is isomorphic to it; restriction to the finitely presented data. No new nodes; statement cites the new finite-type/presentation definition."
+ }
 }
