@@ -3020,3 +3020,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:53 UTC L: reviewed under the lock since 23:52: G1 associated-localization-fg PASS f863931c5 (R-alf3152), F1 pseudo-coherent-qcoh FIX 138e815c2 (R-pcq3151; head rebased by F1 to 3581bde94, merged); returned: F1 kinjective-degreewise-existence ec6dfa95b second return (R-kde3151: undefined notions in the kappa hypothesis, two Stacks lemmas without nodes, objects-small too weak). Second readings missed a fault in 2 of 3.
 - 23:53 L: merged deliver/K1/lem-sp-filtered-complex-ZB-description (reviewer FIX; first push; new nodes: 1)
 - 23:53 L: merged deliver/K1/lem-sc-qc-open-derived-lift (reviewer FIX; first push; new nodes: 0)
+- 23:54 L: merged deliver/J1/lem-pc-module-flat-opcycles-tor-criterion (reviewer PASS; first push; new nodes: 1)

@@ -13,19 +13,61 @@
  },
  "kind": "statement",
  "title": "Tor criterion for flatness of the opcycles of a flat complex",
- "statement": "Let A be a commutative ring, let P^\\bullet be a cochain complex [def-pc-cochain-complex-modules] of flat A-modules [def-pc-flat-sheaf-modules], and let a be an integer. If for every A-module N the tensor complex P^\\bullet\\otimes_A N [def-pc-tensor-complex-sheaves] is exact in degree a-1, then the cokernel P^a/\\operatorname{im}(d^{a-1}) is a flat A-module [def-pc-flat-sheaf-modules].",
+ "statement": "Let A be a commutative ring, viewed as the structure ring on the one-point site. Let P^\\bullet be a cochain complex of A-modules [def-pc-cochain-complex-modules] whose terms are flat A-modules [def-weil-pbc-flat-ring-map], and let a be an integer. If for every A-module N the ordinary tensor complex P^\\bullet\\otimes_A N [def-pc-tensor-complex-sheaves] is exact in degree a-1 (equivalently, H^{a-1}(P^\\bullet\\otimes_A N)=0 [def-pc-acyclic-complex-modules]), then the A-module Q=P^a/\\operatorname{im}(d^{a-1}) is flat [def-weil-pbc-flat-ring-map].",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma 15.59.2 (Tag 0653; label more-algebra-lemma-last-one-flat), the Tor_1 argument of its proof"
  },
  "stmt_deps": [
   "def-pc-cochain-complex-modules",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-acyclic-complex-modules",
+  "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put Q = P^a/\\operatorname{im}(d^{a-1}). The homological Tor argument for the short exact sequence defining this cokernel, using that every P^i is flat, gives a natural surjection H^{a-1}(P^\\bullet\\otimes_A N) \\twoheadrightarrow \\operatorname{Tor}_1^A(Q,N) for every A-module N [lem-pc-module-opcycles-tor-surjection].",
+   "uses": [
+    "lem-pc-module-opcycles-tor-surjection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
+   }
+  },
+  {
+   "text": "By the hypothesis, H^{a-1}(P^\\bullet\\otimes_A N)=0 for every N, so Step 1 gives Tor_1^A(Q,N)=0 for every N; in particular Tor_1^A(Q,A/I)=0 for every ideal I of A.",
+   "uses": [
+    "lem-pc-module-opcycles-tor-surjection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
+   }
+  },
+  {
+   "text": "Apply the flatness criterion [lem-weil-pbc-flat-tor-ideal-criterion] to Q. The vanishing from Step 2 is exactly its Tor_1 hypothesis for every ideal quotient, hence Q is flat over A.",
+   "uses": [
+    "lem-weil-pbc-flat-tor-ideal-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M5 (flatness characterized by Tor_1 of ideal quotients)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-opcycles-tor-surjection",
+  "lem-weil-pbc-flat-tor-ideal-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.59.2 (Tag 0653), Tor_1 argument in the proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +99,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-module-tor-amplitude-flat-model",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-module-flat-opcycles-tor-criterion",
+  "worker": "stage1",
+  "summary": "Checked the Tor criterion against the Tag 0653 argument. Added one genuine intermediate statement: Tor_1 of the degree-a cokernel is a quotient of preceding tensor homology. The item then obtains Tor vanishing from exactness and applies the existing ideal-quotient flatness criterion. The Stacks source text is absent from this checkout, so the proof is marked agent-written and requested as WANTED.",
+  "blueprint": "Realizes the Tag 0654/0653 truncation clause that the degree-a opcycle term is flat by the Tor_1 argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-tor-ideal-criterion",
+    "why": "The generic ideal-quotient Tor criterion is used to turn Tor_1 vanishing into flatness; the Picard duality unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-tor-ideal-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fot3153",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fot3153 (reviewer sub-agent of L); spot-checked: E by hand: with K=im d^{a-1}, P^a flat gives Tor_1(Q,N)=ker(K(x)N->P^a(x)N); P^{a-1}(x)N->>K(x)N and P^{a-2}->K is zero, so H^{a-1}(P(x)N)->>Tor_1(Q,N) holds for any complex (no boundedness needed; only P^a flat); then ideal Tor criterion gives Q flat. Statement repair to module flatness def-weil-pbc-flat-ring-map with one-point-site reading of def-pc-tensor-complex-sheaves is correct (E7 named). C4: citers lem-pc-module-tor-amplitude-flat-model steps and lem-sc-affine-truncation-kernel-flat use exactly this form. New surjection node is a real lemma (Tor via flat SES), no duplicate found by grep; no faults, second reading missed nothing."
+ }
 }
