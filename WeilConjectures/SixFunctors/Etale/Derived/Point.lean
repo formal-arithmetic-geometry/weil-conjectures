@@ -205,9 +205,10 @@ constant étale sheaf functor on `Spec k` and global sections is an isomorphism:
 `Spec k` is the constant sheaf on its global sections. -/
 instance isIso_constantSheafAdj_counit_app_of_isSepClosed
     (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    IsIso ((constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ) (isTerminalEtalePoint (k := k))).counit.app
-      F) := by
-  set adj := constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ) (isTerminalEtalePoint (k := k))
+    IsIso ((constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+      (isTerminalEtalePoint (k := k))).counit.app F) := by
+  set adj := constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+    (isTerminalEtalePoint (k := k))
   have := Scheme.isIso_constantSheafAdj_unit_app (Spec (.of k)) (isTerminalEtalePoint (k := k))
     (((sheafSections _ _).obj (op (etalePoint k))).obj F)
   have h : IsIso (((sheafSections _ _).obj (op (etalePoint k))).map (adj.counit.app F)) := by
@@ -226,7 +227,8 @@ theorem injective_constantSheaf_of_isSepClosed (M : ModuleCat.{u + 1} Λ) [Injec
   have := Scheme.isIso_constantSheafAdj_unit_app (Spec (.of k)) (isTerminalEtalePoint (k := k))
     (Λ := Λ)
   exact Injective.injective_of_adjoint
-    ((constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ) isTerminalEtalePoint).toEquivalence.symm.toAdjunction) M
+    ((constantSheafAdj (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
+      isTerminalEtalePoint).toEquivalence.symm.toAdjunction) M
 
 end ConstantSheaf
 

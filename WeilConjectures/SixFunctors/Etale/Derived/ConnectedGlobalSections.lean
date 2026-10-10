@@ -191,6 +191,51 @@ theorem isIso_homologyFunctor_map_unit_singleConstantSheaf [ConnectedSpace X] :
   exact (Function.Bijective.of_comp_iff' (bijective_homOfGlobalSection _) _).1
     (this ▸ h₃.comp (bijective_homOfGlobalSection _))
 
+/-- The constant sheaf `Λ` placed in degree `0` is the monoidal unit `Λ_Z` of `D(Z_ét, Λ)`. -/
+noncomputable def singleConstantSheafIsoUnit (Z : Scheme.{u}) :
+    singleConstantSheaf Z (ModuleCat.of Λ Λ) ≅ 𝟙_ (DerivedCategoryModule Λ Z) :=
+  singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ) Z
+
+/-- **`Hom(RΓ(X, Λ), Λ) = Λ`.** Let `k` be separably closed, `a : X ⟶ Spec k` with `X` connected,
+and `Λ` self-injective. Then precomposition with the unit `Λ_k ⟶ Ra_* La^* Λ_k` of
+`La^* ⊣ Ra_*` is a bijection `Hom(Ra_* La^* Λ_k, Λ_k) ≃ Hom(Λ_k, Λ_k)`: the unit is an
+isomorphism on `H⁰` (`isIso_homologyFunctor_map_unit_singleConstantSheaf`), the target lies in
+degrees `≥ 0`, and `Λ_k` is an injective sheaf on `Spec k` placed in degree `0`. -/
+theorem bijective_unit_app_comp [ConnectedSpace X] [Module.Injective Λ Λ] :
+    Function.Bijective (fun h : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
+        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))))) ⟶
+          𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ↦
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a).unit.app (𝟙_ _) ≫ h) := by
+  set S := singleConstantSheaf (Spec (.of k)) (ModuleCat.of Λ Λ) (Λ := Λ)
+  set adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a
+  set G := L((a)^*[ModuleCat.{u + 1} Λ]) ⋙ R((a)_*[ModuleCat.{u + 1} Λ])
+  let φ : S ≅ 𝟙_ _ := singleConstantSheafIsoUnit (Spec (.of k))
+  have := isIso_homologyFunctor_map_unit_singleConstantSheaf a (Λ := Λ)
+  have := Module.injective_object_of_injective_module Λ Λ
+  have : Injective ((constantSheaf (Spec (.of k)).smallEtaleTopology
+      (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)) :=
+    injective_constantSheaf_of_isSepClosed (ModuleCat.of Λ Λ)
+  have := Functor.isGE_rightDerivedFunctor_obj_singleFunctor ((a)_*[ModuleCat.{u + 1} Λ])
+    ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))
+  have : (G.obj S).IsGE 0 :=
+    DerivedCategory.TStructure.t.isGE_of_iso
+      ((R((a)_*[ModuleCat.{u + 1} Λ])).mapIso
+        (leftDerivedUpperStarSingleConstantSheafIso a (ModuleCat.of Λ Λ))).symm 0
+  have hb := DerivedCategory.bijective_comp_of_isIso_homologyMap (adj.unit.app S)
+    (I := (constantSheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+      (ModuleCat.of Λ Λ))
+  have hnat : adj.unit.app (𝟙_ _) = φ.inv ≫ adj.unit.app S ≫ G.map φ.hom := by
+    rw [← adj.unit.naturality φ.hom, Functor.id_map, Iso.inv_hom_id_assoc]
+  have hcomp := ((φ.homCongr φ).bijective.comp hb).comp
+    ((G.mapIso φ).symm.homCongr φ.symm).bijective
+  have heq : (fun h : G.obj (𝟙_ _) ⟶ 𝟙_ _ ↦ adj.unit.app (𝟙_ _) ≫ h) =
+      ((φ.homCongr φ) ∘ fun h ↦ adj.unit.app S ≫ h) ∘
+        ((G.mapIso φ).symm.homCongr φ.symm) := by
+    funext h
+    simp only [Function.comp_apply, Iso.homCongr_apply, Iso.symm_inv, Iso.symm_hom, hnat,
+      Functor.mapIso_hom, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  exact heq ▸ hcomp
+
 end Point
 
 end AlgebraicGeometry.Etale
