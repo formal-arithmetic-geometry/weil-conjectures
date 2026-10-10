@@ -499,7 +499,7 @@ theorem exists_idealSheafData_le_ker_iff_comap_le {d : ℕ} {T : Over S}
       obtain ⟨w, rfl⟩ := hz
       refine TopologicalSpace.Opens.mem_iSup.mpr ⟨p, (hpb p).isoPullback.inv w, ?_⟩
       rw [← Scheme.Hom.comp_apply, IsPullback.isoPullback_inv_fst]
-    · have := (hloc T' φ p.1.1 p.1.2 p.2).mp (h.trans (Scheme.Hom.ker_le_ker_comp _ _))
+    · have := (hloc T' φ p.1.1 p.1.2 p.2).mp (h.trans (Scheme.Hom.le_ker_comp _ _))
       simpa only [P, baseChangeMap_comp, Scheme.IdealSheafData.comap_comp] using this
   · -- conversely, `K₀` is contained in the kernel of `φ` over the affine opens of `T'`
     refine Scheme.IdealSheafData.le_ker_of_comap_eq_bot _

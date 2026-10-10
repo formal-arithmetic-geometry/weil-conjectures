@@ -433,13 +433,6 @@ end Pullback
 
 section Kernel
 
-/-- The kernel of a morphism is contained in the kernel of its precomposition with any other
-morphism. -/
-lemma _root_.AlgebraicGeometry.Scheme.Hom.ker_le_ker_comp {W : Scheme.{u}} (a : W ⟶ X)
-    (f : X ⟶ Y) : f.ker ≤ (a ≫ f).ker := by
-  rw [Scheme.Hom.ker_comp, ← map_bot]
-  exact map_mono f bot_le
-
 /-- The pullback of `K` along `h` is contained in the kernel of `a` if and only if `K` is
 contained in the kernel of `a ≫ h`. -/
 lemma comap_le_ker_iff {W : Scheme.{u}} (K : Y.IdealSheafData) (h : X ⟶ Y) (a : W ⟶ X) :
