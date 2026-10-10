@@ -11,9 +11,85 @@
   "def-weil-regular-scheme",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "$R_{\\mathfrak p}$ is a Noetherian local ring. The regular local ring $R$ is Noetherian by definition [def-weil-regular-scheme]. The map $R\\to R_{\\mathfrak p}=S^{-1}R$, $S=R\\setminus\\mathfrak p$ (a multiplicative subset since $\\mathfrak p$ is prime), is the localization of [def-weil-pbc-localization-at-prime], so it satisfies (a), (b), (c) of [lem-weil-pbc-localization-noetherian] for $S$, and $R_{\\mathfrak p}$ is Noetherian [def-weil-pbc-noetherian-ring]. By [def-weil-pbc-localization-at-prime], $R_{\\mathfrak p}$ is local with maximal ideal $\\mathfrak pR_{\\mathfrak p}$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0AFS (lemma-localization-of-regular-local-is-regular, line 27126), proof ('any localization $R_{\\mathfrak p}$', a Noetherian local ring as needed to apply Proposition 00OC); Lemma Tag 00FN (lemma-Noetherian-permanence) for Noetherianity"
+   }
+  },
+  {
+   "text": "$R$ has finite global dimension: with $d=\\dim R$, every $R$-module has a projective resolution of length $\\le d$, by [lem-weil-pbc-regular-local-finite-gl-dim] applied to the regular local ring $R$ [def-weil-pbc-finite-global-dimension].",
+   "uses": [
+    "lem-weil-pbc-regular-local-finite-gl-dim",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0AFS (lemma-localization-of-regular-local-is-regular, line 27126), proof, first sentence (direction 'regular local implies finite global dimension' via Proposition Tag 00O7)"
+   }
+  },
+  {
+   "text": "$R_{\\mathfrak p}$ has finite global dimension. Apply [lem-weil-pbc-localization-finite-gl-dim], part (2), with the multiplicative subset $S=R\\setminus\\mathfrak p$ and $n=d$: since $R$ has global dimension $\\le d$ (Step 2), $S^{-1}R=R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] has global dimension $\\le d$, in particular finite global dimension [def-weil-pbc-finite-global-dimension].",
+   "uses": [
+    "lem-weil-pbc-localization-finite-gl-dim",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0AFS (lemma-localization-of-regular-local-is-regular, line 27126), proof, second sentence ('any localization $R_{\\mathfrak p}$ has finite global dimension, see Lemma 00O8')"
+   }
+  },
+  {
+   "text": "$R_{\\mathfrak p}$ is a regular local ring: it is a Noetherian local ring (Step 1) of finite global dimension (Step 3), so [lem-weil-pbc-finite-gl-dim-regular-local] applies and gives that $R_{\\mathfrak p}$ is a regular local ring [def-weil-regular-scheme]. This is the first assertion.",
+   "uses": [
+    "lem-weil-pbc-finite-gl-dim-regular-local",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0AFS (lemma-localization-of-regular-local-is-regular, line 27126), proof, end ('and hence is a regular local ring', via Proposition Tag 00OC)"
+   }
+  },
+  {
+   "text": "Consequence. $R$ is Noetherian [def-weil-regular-scheme] and, by Steps 1-4 applied to each prime ideal $\\mathfrak p$ of $R$, every localization $R_{\\mathfrak p}$ at a prime is a regular local ring; this is the definition of a regular ring in [def-weil-regular-scheme]. (For $\\mathfrak p=\\mathfrak m$ the localization $R_{\\mathfrak m}$ is isomorphic to $R$, so the two notions do not conflict.)",
+   "uses": [
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, the remark after Lemma Tag 0AFS and Definition Tag 00OD (definition-regular, line 27149)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-regular-local-finite-gl-dim",
+  "def-weil-pbc-finite-global-dimension",
+  "lem-weil-pbc-localization-finite-gl-dim",
+  "lem-weil-pbc-finite-gl-dim-regular-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0AFS (lemma-localization-of-regular-local-is-regular) with its proof, and Definition Tag 00OD"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +118,31 @@
    "results": "only RegularLocalRing/Defs.lean (definitions, isRegularLocalRing_iff, of_spanFinrank_maximalIdeal_le, of_ringEquiv, iff_finrank_cotangentSpace, PID instance, IsRegularLocalRing.of_isRegularRing_of_isLocalRing at line 114, the converse direction) and RegularLocalRing/Polynomial.lean; no localization theorem",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of a regular local ring at a prime ideal is a regular local ring",
+   "results": "IsLocalization.AtPrime.isLocalRing, Localization.AtPrime.isLocalRing, IsLocalization.isDomain_of_atPrime, RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem, StructureSheaf.localRingLocalizations: none on regular local rings",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing",
+   "results": "15 declarations, all in Mathlib/RingTheory/RegularLocalRing/Defs.lean and Polynomial.lean; the only localization statements are the field IsRegularRing.isRegularLocalRing_localization (needs IsRegularRing, which is what is to be proved) and Polynomial.isRegularLocalRing_localization_atPrime_of_comap_eq_maximalIdeal (R[X] at primes over m); no instance IsRegularLocalRing R -> IsRegularRing R",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rni 'global dimension\\|globalDim\\|Auslander.*Buchsbaum\\|Serre.*regular' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 45,120p RingTheory/RegularLocalRing/Defs.lean",
+   "results": "no global dimension and no Serre theorem in Mathlib; Defs.lean has IsRegularLocalRing.of_isRegularRing_of_isLocalRing (line 114, the converse of the consequence) but not IsRegularRing of a regular local ring",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +162,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-regular-local-localization",
+  "worker": "stage1",
+  "summary": "Statement kept (it is Stacks 0AFS, second sentence, plus Definition 00OD). Proof written in five steps following the proof of Stacks 0AFS: R_p Noetherian local (existing nodes lem-weil-pbc-localization-noetherian, def-weil-pbc-localization-at-prime); gl.dim R <= dim R (new node lem-weil-pbc-regular-local-finite-gl-dim, Stacks 00O7); gl.dim R_p <= gl.dim R (new node lem-weil-pbc-localization-finite-gl-dim, Stacks 00O8); Noetherian local of finite global dimension is regular (new node lem-weil-pbc-finite-gl-dim-regular-local, Stacks 00OC (2)=>(3)); the consequence is the definition of a regular ring. The DAG had no node on projective or global dimension, so the definition node def-weil-pbc-finite-global-dimension (Stacks 00O4, 00O6) was created. No cycle: lem-weil-pbc-localization-of-regular-ring assumes a regular ring and is not used. Mathlib (RingTheory/RegularLocalRing/Defs.lean) has neither the localization statement nor Serre's theorem nor a global dimension; it has projective dimension via Ext (HasProjectiveDimensionLE) and its localization ModuleCat.localizedModule_hasProjectiveDimensionLE, recorded as candidates on the new nodes. All four new nodes are unsplit."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 0AFS through Serre's theorem: R_p Noetherian local; gl.dim R <= dim R (new 00O7 node); localization preserves global dimension <= n (new 00O8 node); Noetherian local of finite global dimension is regular (new 00OC node); consequence by the definition. New definition node for projective/global dimension (00O4, 00O6). No Mathlib matches (Mathlib has no global dimension). Tags verified. Stage 3: the 00O7 and 00OC nodes are heavy (MCM modules, Koszul)."
+ }
 }

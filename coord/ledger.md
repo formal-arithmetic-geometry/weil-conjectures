@@ -756,3 +756,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of C1: lem-weil-pbc-z-localizations-dvr returned (87c9550b3): statement refers to Stacks tags; step 3 prime correspondence and step 4 DVR characterization are facts used without node citations; step 1 integrally closed wit
 - 01:37 L: reviewed lem-weil-pbc-regular-local-generators-regular-sequence (6 steps, 0 new; tool_uses lem-sc-regular-local-domain): accepted.
 - 01:38 L: reviewed lem-weil-pbc-regular-ring-faithfully-flat-descent (5 steps, +00HQ leaf, +00OF node): accepted.
+- 01:38 L: reviewed lem-weil-pbc-regular-local-localization (5 steps, +4: global-dimension definition, 00O7, 00OC, 00O8): accepted.

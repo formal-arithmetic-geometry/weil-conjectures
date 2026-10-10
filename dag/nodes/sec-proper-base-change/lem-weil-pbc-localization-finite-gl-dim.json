@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-localization-finite-gl-dim",
+ "kind": "statement",
+ "title": "Localization preserves projective dimension and finite global dimension",
+ "statement": "Let $R$ be a commutative ring, $S\\subseteq R$ a multiplicative subset, $S^{-1}R$ the ring of fractions and, for an $R$-module $M$, $S^{-1}M$ the $S^{-1}R$-module of fractions $m/s$; let $n\\ge0$. (1) If $M$ has a projective resolution of length $\\le n$ over $R$ [def-weil-pbc-finite-global-dimension], then $S^{-1}M$ has a projective resolution of length $\\le n$ over $S^{-1}R$. (2) If $R$ has global dimension $\\le n$ [def-weil-pbc-finite-global-dimension], then $S^{-1}R$ has global dimension $\\le n$; in particular, if $R$ has finite global dimension then so has $S^{-1}R$, with $\\operatorname{gl.dim}S^{-1}R\\le\\operatorname{gl.dim}R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00O8 (lemma-localize-finite-gl-dim, line 26881), with its proof (localization is exact, Proposition 00CS; $S^{-1}P$ projective for $P$ projective, Lemma 05A3 ascend-properties-modules; $M'=S^{-1}M'$ for an $S^{-1}R$-module $M'$)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-global-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a ring of finite global dimension has finite global dimension",
+   "results": "Ring.DimensionLEOne.localization, Module.Finite.of_isLocalizedModule, RingHom.finiteType_localizationPreserves, Ring.krullDimLE_of_isLocalization_maximal: no global dimension",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective dimension of localized module is at most projective dimension of module",
+   "results": "CategoryTheory.hasProjectiveDimensionLT_of_ge, instHasProjectiveDimensionLTSucc, projectiveDimension_le_iff, Module.projective_of_isLocalizedModule (RingTheory/LocalProperties/Projective): projectivity ascends to localizations",
+   "date": "2026-10-10",
+   "verdict": "no match for the statement; Module.projective_of_isLocalizedModule is the case n=0 of (1)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 18,160p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean; sed -n 36,46p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Localization.lean",
+   "results": "ModuleCat.localizedModule_hasProjectiveDimensionLE (line 43): [Small.{v,u} R] (n : ℕ) (S : Submonoid R) (M : ModuleCat.{v} R) [HasProjectiveDimensionLE M n] : HasProjectiveDimensionLE (M.localizedModule S) n, where M.localizedModule S : ModuleCat.{v} (Localization S) is Shrink (LocalizedModule S M); also projectiveDimension_le_projectiveDimension_of_isLocalizedModule (line 63), and the maximal/prime-spectrum criteria for finite modules over Noetherian rings (lines 82-160)",
+   "date": "2026-10-10",
+   "verdict": "generalization: part (1) for Mathlib's Ext-defined projective dimension (agreement with the node's resolution-length definition is Stacks 065R, not in Mathlib); part (2) is absent (Mathlib has no global dimension, and the step M' = S^{-1}M' with transport along hasProjectiveDimensionLE_of_semiLinearEquiv is several lines): no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rni 'global dimension\\|globalDim\\|Auslander.*Buchsbaum\\|Serre.*regular' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'globalDimension\\|GlobalDimension\\|projectiveDimension\\|ProjectiveDimension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no hit for global dimension, Auslander-Buchsbaum or Serre's regularity theorem; projective dimension files: CategoryTheory/Abelian/Projective/Dimension.lean (HasProjectiveDimensionLT/LE via Ext vanishing, projectiveDimension : WithBot ℕ∞), Algebra/Category/ModuleCat/ProjectiveDimension.lean (transport along (semi)linear equivalences), RingTheory/LocalProperties/ProjectiveDimension.lean (localization of modules), RingTheory/Regular/ProjectiveDimension.lean (quotients by regular sequences)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-local-localization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
