@@ -22,9 +22,61 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-constant-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If U is nonempty and open in the irreducible space X, then U is irreducible: two nonempty open subsets of U are also nonempty open subsets of X and therefore meet. Thus irreducibility is inherited by every nonempty open.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Definition 004V and the irreducible-open-subspace observation used in Proposition 02UZ"
+   }
+  },
+  {
+   "text": "Let L_A be the presheaf of locally constant A-valued maps on the open subsets of X, an abelian group under pointwise addition with restriction of maps. By [lem-weil-pbc-locally-constant-maps-sheaf], L_A is a sheaf (the sheaf condition concerns the underlying sets, and glued maps of sums are sums of glued maps). Let P be the constant presheaf U \\mapsto A and c: P \\to L_A the morphism sending a \\in A to the constant map with value a. We check that (L_A, c) has the universal property of the sheafification in [def-weil-pbc-constant-sheaf]. Let G be an abelian sheaf and phi: P \\to G a morphism. Existence: for f in L_A(U), choose an open cover U = \\bigcup U_i with f constant of value a_i on U_i; the sections phi_{U_i}(a_i) agree on each U_i \\cap U_j because f has a single value there (or the overlap is empty) and phi commutes with restriction, so they glue to a unique section psi_U(f) of G(U), independent of the cover (compare on a common refinement); psi is additive and commutes with restriction, and psi \\circ c = phi. Uniqueness: two morphisms L_A \\to G that agree after composing with c agree on constant maps, hence on every f in L_A(U) locally on a cover where f is constant, hence on f since G is a sheaf. Therefore (L_A, c) is a sheafification of P, and the unique isomorphism of universal objects identifies A_X with L_A compatibly with the maps from P. Thus A_X(U) is canonically the group of locally constant maps U \\to A, and restriction to V \\subseteq U is restriction of maps.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-maps-sheaf",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Definition 006W and Example 0081 (sheafification of the constant presheaf)"
+   }
+  },
+  {
+   "text": "By [lem-pc-irreducible-space-connected], irreducibility of U implies that U is connected; since U is nonempty, [lem-weil-pbc-connected-locally-constant-map] says every locally constant map U \\to A is constant. Hence evaluation at any point of U identifies A_X(U) canonically with A.",
+   "uses": [
+    "lem-pc-irreducible-space-connected",
+    "lem-weil-pbc-connected-locally-constant-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Definition 004V and the irreducible d=0 argument in cohomology Proposition 02UZ"
+   }
+  },
+  {
+   "text": "For nonempty opens V subseteq U, the restriction of a constant map with value a is the same constant map with value a. Therefore the canonical identifications A_X(U) = A and A_X(V) = A carry the restriction map to the identity of A.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Definition 006W and Example 0081 (restriction of locally constant maps)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-locally-constant-maps-sheaf",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pc-irreducible-space-connected",
+  "lem-weil-pbc-connected-locally-constant-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Definition 006W and Example 0081, with cohomology Proposition 02UZ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,12 +108,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-irreducible-noetherian-constant-acyclic",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-irreducible-constant-sections",
+  "worker": "stage1",
+  "summary": "Split the irreducible-space constant-section claim into inherited irreducibility of nonempty opens, an explicit sheafification comparison with the existing sheaf of locally constant maps, connectedness, and the restriction calculation. No new node was needed; no exact Lean declaration exists.",
+  "blueprint": "The four steps realize the d=0 irreducible case in the 02UZ induction identified in ancestor blueprint node lem-sc-pic-proper-ntorsion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-locally-constant-maps-sheaf",
+    "why": "The open-site sheaf of locally constant maps is a generic tool needed to identify the constant sheaf's sheafification with its concrete sections; the curve-estimate unit has no replacement node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-locally-constant-maps-sheaf",
+  "lem-weil-pbc-locally-constant-maps-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ics1834",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ics1834 (reviewer sub-agent of L); spot-checked: Steps 1,3,4 against cited statements (irreducible opens elementary; IrreducibleSpace.connectedSpace leaf; locally constant on connected nonempty is constant); no cycle: no cited node created from the item or its parent lem-sc-irreducible-noetherian-constant-acyclic; tool_use lem-weil-pbc-locally-constant-maps-sheaf accepted as generic; grep 'constant' in Mathlib/Topology/Sheaves: 0 hits. FIX more, RETURN less: C1 in Step 2 - the asserted inverse A_X <- L_A was unjustified (needs local surjectivity of sheafification, not in the cited definition); rewrote Step 2 to verify that (L_A, constant maps) satisfies the universal property of sheafification from def-weil-pbc-constant-sheaf/def-weil-pbc-sheafification, so A_X = L_A by uniqueness of universal objects. Missed by the second reading.; 1 file(s) fixed by the reviewer"
+ }
 }
