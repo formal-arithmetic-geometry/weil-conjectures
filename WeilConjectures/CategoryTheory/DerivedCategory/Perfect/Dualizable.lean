@@ -110,6 +110,34 @@ lemma QObjTensorQObjIsoOfKFlatRight_hom_naturality {L L' : CochainComplex C ℤ}
   rw [reassoc_of% key, reassoc_of% h₁, ← h₃, Functor.Monoidal.μIso_hom, ← Qh.map_comp_assoc,
     h₂, Qh.map_comp_assoc, Functor.Monoidal.μIso_hom]
 
+/-- The derived tensor product of an object vanishing above `b` and one vanishing above `d`
+vanishes above `b + d`: represent the first by a bounded above complex of flat objects. -/
+lemma isLE_tensor (K N : DerivedCategory C) (b d : ℤ) [K.IsLE b] [N.IsLE d] :
+    (K ⊗ N).IsLE (b + d) := by
+  obtain ⟨L, _, ⟨e⟩⟩ := K.exists_iso_Q_obj_of_isLE b
+  obtain ⟨P, _, π, _, hP⟩ := L.exists_quasiIso_flat_of_isStrictlyLE b
+  have : IsIso (Q.map π) := by rwa [isIso_Q_map_iff_quasiIso]
+  obtain ⟨M, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isLE d
+  have := CochainComplex.isStrictlyLE_tensorObj P M b d
+  exact TStructure.t.isLE_of_iso (tensorIso (e ≪≫ (asIso (Q.map π)).symm) e' ≪≫
+    QObjTensorQObjIsoOfKFlatLeft P M (CochainComplex.kFlat_of_isStrictlyLE_of_flat P b hP)).symm _
+
+/-- If `K` and its right dual `L` vanish above `b` and `b'` respectively, then `K` has Tor
+amplitude in `[-b', b]`: maps `Y ⟶ K ⊗ᴸ F[0]` correspond to maps `L ⊗ᴸ Y ⟶ F[0]`, which
+vanish for `Y` above `-b' - 1`. -/
+lemma torAmplitudeIn_of_exactPairing_of_isLE {K L : DerivedCategory C} [ExactPairing K L]
+    (b b' : ℤ) [K.IsLE b] [L.IsLE b'] : torAmplitudeIn C (-b') b K := by
+  intro F
+  refine ⟨(TStructure.t.isGE_iff_orthogonal (-b' - 1) (-b') (by omega) _).2 fun Y f hY ↦ ?_,
+    ?_⟩
+  · have : Y.IsLE (-b' - 1) := hY
+    have := isLE_tensor L Y b' (-b' - 1)
+    obtain ⟨g, rfl⟩ := (tensorLeftHomEquiv Y K L ((singleFunctor C 0).obj F)).surjective f
+    rw [TStructure.t.zero g (b' + (-b' - 1)) 0 (by omega)]
+    simp [tensorLeftHomEquiv]
+  · have := isLE_tensor K ((singleFunctor C 0).obj F) b 0
+    rwa [add_zero] at this
+
 end General
 
 end DerivedCategory
@@ -224,6 +252,77 @@ theorem exists_retract_of_exactPairing (C D : DerivedCategory (ModuleCat.{u} R))
     rw [← tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight (Y' := D), ← hu, Equiv.eq_symm_apply,
       tensorRightHomEquiv_naturality, Equiv.apply_symm_apply]
   exact ⟨N, hN, _, by rw [Category.assoc, key, Iso.inv_hom_id_assoc]⟩
+
+/-- Over a Noetherian ring, an object of `D(R)` with a right dual is bounded and has finitely
+generated cohomology: it is a retract of a bounded complex of finitely generated modules. -/
+theorem exists_homologyConcentratedIn_and_finite_of_exactPairing [IsNoetherianRing R]
+    (C D : DerivedCategory (ModuleCat.{u} R)) [ExactPairing C D] :
+    (∃ a b : ℤ, homologyConcentratedIn a b C) ∧
+      ∀ i, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj C) := by
+  obtain ⟨N, hN, w, hw⟩ :=
+    exists_retract_of_exactPairing C D (Q.objPreimage C) (Q.objObjPreimageIso C).symm
+  obtain ⟨a, b, hab⟩ := hN.2
+  let L' := CochainComplex.subcomplex N
+  let r := Q.map (CochainComplex.subcomplexι N) ≫ (Q.objObjPreimageIso C).hom
+  have hwr : w ≫ r = 𝟙 C := by simp [r, reassoc_of% hw]
+  have : L'.IsStrictlyGE a := CochainComplex.isStrictlyGE_subcomplex fun n hn ↦ hab n (Or.inl hn)
+  have : L'.IsStrictlyLE b := CochainComplex.isStrictlyLE_subcomplex fun n hn ↦ hab n (Or.inr hn)
+  let H (i : ℤ) := homologyFunctor (ModuleCat.{u} R) i
+  let eH (i : ℤ) : (H i).obj (Q.obj L') ≅ L'.homology i := (homologyFunctorFactors _ i).app L'
+  have hret (i : ℤ) : (H i).map w ≫ (H i).map r = 𝟙 _ := by
+    rw [← Functor.map_comp, hwr, CategoryTheory.Functor.map_id]
+  have (i : ℤ) : Mono ((H i).map w) := (IsSplitMono.mk' ⟨_, hret i⟩).mono
+  have (i : ℤ) : Epi ((H i).map r) := (IsSplitEpi.mk' ⟨_, hret i⟩).epi
+  refine ⟨⟨a, b, ?_, ?_⟩, fun i ↦ ?_⟩
+  · change C.IsGE a
+    rw [isGE_iff]
+    intro i hi
+    exact IsZero.of_mono ((H i).map w) ((L'.exactAt_of_isGE a i hi).isZero_homology.of_iso (eH i))
+  · change C.IsLE b
+    rw [isLE_iff]
+    intro i hi
+    exact IsZero.of_mono ((H i).map w) ((L'.exactAt_of_isLE b i hi).isZero_homology.of_iso (eH i))
+  · have := hN.finite i
+    have : Module.Finite R (L'.cycles i) :=
+      Module.Finite.of_injective (L'.iCycles i).hom
+        ((ModuleCat.mono_iff_injective _).1 inferInstance)
+    have : Module.Finite R (L'.homology i) :=
+      Module.Finite.of_surjective (L'.homologyπ i).hom
+        ((ModuleCat.epi_iff_surjective _).1 inferInstance)
+    have : Module.Finite R ((H i).obj (Q.obj L')) := Module.Finite.equiv (eH i).toLinearEquiv.symm
+    exact Module.Finite.of_surjective ((H i).map r).hom
+      ((ModuleCat.epi_iff_surjective _).1 inferInstance)
+
+/-- Blueprint `sk-def-perfect`: a dualizable point complex is perfect.
+
+Over a Noetherian ring `R`, an object `C` of `D(R)` which is dualizable for the derived tensor
+product is quasi-isomorphic to a bounded complex of finitely generated projective modules. `C`
+and its dual are retracts of bounded complexes of finitely generated modules
+(`DerivedCategory.exists_retract_of_exactPairing`), so they are bounded with finitely generated
+cohomology, and `C` has finite Tor amplitude
+(`DerivedCategory.torAmplitudeIn_of_exactPairing_of_isLE`); such a complex is perfect
+(`DerivedCategory.isPerfect_of_finiteTorAmplitude`). -/
+theorem isPerfect_of_isDualizable [IsNoetherianRing R] {C : DerivedCategory (ModuleCat.{u} R)}
+    (hC : IsDualizable C) : C.IsPerfect := by
+  obtain ⟨_⟩ := hC
+  obtain ⟨_⟩ := nonempty_braidedCategory (ModuleCat.{u} R)
+  let := BraidedCategory.exactPairing_swap C Cᘁ
+  obtain ⟨⟨a, b, hC₁, hC₂⟩, hfin⟩ := exists_homologyConcentratedIn_and_finite_of_exactPairing C Cᘁ
+  obtain ⟨⟨-, b', -, hD₂⟩, -⟩ := exists_homologyConcentratedIn_and_finite_of_exactPairing Cᘁ C
+  have : C.IsLE b := hC₂
+  have : (Cᘁ).IsLE b' := hD₂
+  exact isPerfect_of_finiteTorAmplitude
+    ((exists_homologyConcentratedIn_iff_bounded C).1 ⟨a, b, hC₁, hC₂⟩) hfin
+    ⟨-b', b, torAmplitudeIn_of_exactPairing_of_isLE (L := Cᘁ) b b'⟩
+
+/-- Blueprint `sk-def-perfect`: perfect point complexes are the dualizable objects.
+
+Over a Noetherian ring `R`, an object of `D(R)` is quasi-isomorphic to a bounded complex of
+finitely generated projective modules if and only if it is dualizable for the derived tensor
+product. -/
+theorem isPerfect_iff_isDualizable [IsNoetherianRing R] (C : DerivedCategory (ModuleCat.{u} R)) :
+    C.IsPerfect ↔ IsDualizable C :=
+  ⟨IsPerfect.isDualizable, isPerfect_of_isDualizable⟩
 
 end ModuleCat
 
