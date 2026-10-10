@@ -2,7 +2,7 @@
 
 876 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (88)
+## Stage 1: nodes to split (86)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,14 +12,15 @@
 | `lem-pc-affine-pseudo-coherent-criterion` | 3015 | none |
 | `lem-sc-derived-hom-mayer-vietoris` | 3015 | none |
 | `lem-pc-module-tor-amplitude-flat-model` | 3016 | none |
-| `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
+| `lem-pc-derived-pullback-tensor-product` | 3019 | none |
+| `lem-pc-dualizable-evaluation-criterion` | 3019 | none |
+| `lem-pc-rhom-strict-perfect-hom` | 3019 | none |
+| `lem-sc-derived-internal-hom-adjunction` | 3019 | none |
 | `lem-pc-dq-coherator-adjunction` | 3020 | none |
 | `lem-pc-qcqs-sheaf-rhom-adjunction` | 3020 | none |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 3020 | none |
 | `lem-sc-affine-perfect-open-represent-cohomology` | 3020 | none |
 | `lem-sc-affine-perfect-plus-locally-free` | 3021 | none |
-| `lem-sc-derived-internal-hom-adjunction` | 3021 | none |
-| `lem-pc-derived-pullback-tensor-product` | 3022 | none |
 | `lem-pc-pseudo-coherent-summand` | 3023 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -49,26 +50,23 @@
 | `lem-sc-kummer-base-change-compatibility` | - | none |
 | `lem-sc-units-quotient-base-change` | - | none |
 | `lem-weil-pbc-spread-finite-separable-extension` | - | none |
-| `lem-weil-separably-closed-geometrically-connected` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-weil-pbc-power-in-base-after-localization` | - | none |
 | `lemma-nagata-morphism-descends` | - | none |
 | `lem-kun-cp-approximation` | - | none |
 | `lem-sc-zariski-flasque-acyclic` | - | none |
-| `lem-weil-geometrically-connected-check-after-extension` | - | none |
 | `lemma-nagata-morphism-eq-eventually` | - | none |
 | `lemma-nagata-qc-open-eq-eventually` | - | none |
 | `prop-pur-kinjective-resolutions-exist` | - | none |
 | `lem-kun-04ca` | - | none |
 | `lem-kun-fibre-product-limits` | - | none |
-| `lem-kun-finite-closed-subscheme` | - | none |
 | `lem-kun-sep-closed-finite-extension-purely-inseparable` | - | none |
 | `lem-kun-sep-closed-finite-extension-sep-closed` | - | none |
 | `lem-kun-support-geometric-point-independent` | - | none |
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
-| `def-amb-finite-locally-free-module` | - | none |
+| `lem-weil-common-extension-fields` | - | none |
 | `def-sc-kahler-differentials` | - | none |
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-kun-separable-smooth-colimit` | - | none |
@@ -95,7 +93,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (788)
+## Stage 2: nodes to state (790)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -185,6 +183,7 @@
 | `lem-galois-fpqc-descend-unramified` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-galois-fpqc-singleton-affine-refinement` | 1 | state |
+| `lem-kun-finite-closed-subscheme` | 1 | state |
 | `lem-kun-stalks-commute-colimits` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
 | `lem-pc-affine-containment-ideal` | 1 | state |
@@ -833,6 +832,7 @@
 | `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1 | state |
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state |
+| `lem-weil-separably-closed-geometrically-connected` | 1 | state |
 | `lemma-nagata-diagonal-base-change` | 1 | state |
 | `lemma-nagata-filtered-colimit-finite-data` | 1 | state |
 | `lemma-nagata-projective-target-local` | 1 | state |
@@ -888,7 +888,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1619 nodes that wait for a statement dependency, 126 nodes that wait for stage 1.
+Not open yet: 1622 nodes that wait for a statement dependency, 124 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
