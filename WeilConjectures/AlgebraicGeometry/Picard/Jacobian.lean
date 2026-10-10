@@ -2162,7 +2162,49 @@ theorem exists_finiteSubext_isPullback_overTransport {ks : Type u} [Field ks] [A
   refine ⟨L, JL, q, hq, fun {T} f₁ f₂ h hL' a ↦ ?_⟩
   apply pullback.hom_ext
   · simp only [Category.assoc, q, pullback.lift_fst]
-    sorry
+    -- factor the pair `(f₁, f₂)` through the universal pair
+    let t : T ⟶ Spec (.of (TensorProduct L.1 ks ks)) := (isPullback_tensorSpecPr L).lift f₁ f₂ hL'
+    let tm := t ≫ ((diagonalDiagram k ks).op ⋙ Scheme.Spec).map f
+    have htm₁ : tm ≫ pr₁ = f₁ := by
+      simp only [tm, Category.assoc, pr₁]
+      rw [map_comp_tensorSpecPr₁ f]
+      exact (isPullback_tensorSpecPr L).lift_fst _ _ _
+    have htm₂ : tm ≫ pr₂ = f₂ := by
+      simp only [tm, Category.assoc, pr₂]
+      rw [map_comp_tensorSpecPr₂ f]
+      exact (isPullback_tensorSpecPr L).lift_snd _ _ _
+    have ha : a.left ≫ Js.hom = f₁ := Over.w a
+    let v : T ⟶ pullback Js.hom pr₁ := pullback.lift a.left tm (by rw [ha, htm₁])
+    have hv₁ : v ≫ pullback.fst Js.hom pr₁ = a.left := pullback.lift_fst _ _ _
+    have hv₂ : v ≫ pV = tm := pullback.lift_snd _ _ _
+    let g : T ⟶ pullback pV (((diagonalDiagram k ks).op ⋙ Scheme.Spec).map f) :=
+      pullback.lift v t hv₂
+    have hg : v ≫ u = v ≫ pullback.fst Js.hom pr₁ ≫ q' := by
+      have e₀ : g ≫ pullback.fst pV (((diagonalDiagram k ks).op ⋙ Scheme.Spec).map f) = v :=
+        pullback.lift_fst _ _ _
+      have := congrArg (fun φ ↦ g ≫ φ ≫ pullback.fst p (pr₁ ≫ ι')) hL
+      simp only [ψ, χ, Category.assoc, pullback.lift_fst] at this
+      erw [pullback.lift_fst_assoc, pullback.lift_fst_assoc] at this
+      rw [← Category.assoc v (pullback.fst Js.hom pr₁) q', hv₁]
+      refine (congrArg (· ≫ u) e₀).symm.trans ?_
+      simpa only [Category.assoc] using this.symm
+    have hkey := congrArg CommaMorphism.left
+      (rs.overDescentDatum.transport_homMk_comp v f₁V f₂V hfV a₀)
+    have e₁ : f₁ = v ≫ f₁V := by
+      simp only [f₁V]
+      rw [← Category.assoc, hv₁, ha]
+    have e₂ : f₂ = v ≫ f₂V := by
+      simp only [f₂V]
+      rw [← Category.assoc, hv₂, htm₂]
+    have hcongr := rs.overDescentDatum.transport_left_congr h
+      (by simp only [Category.assoc]; rw [hfV])
+      a ((Over.homMk v : Over.mk (v ≫ f₁V) ⟶ Over.mk f₁V) ≫ a₀) e₁ e₂ hv₁.symm
+    change (rs.overDescentDatum.transport f₁ f₂ h a).left ≫ q' = _
+    rw [hcongr]
+    refine (congrArg (· ≫ q') hkey).trans ?_
+    change (v ≫ (rs.overTransport f₁V f₂V hfV a₀).left) ≫ q' = _
+    rw [Category.assoc, ← hv₁, Category.assoc]
+    exact hg
   · simp only [Category.assoc, q, pullback.lift_snd]
     have h₁ := Over.w a
     have h₂ := Over.w (rs.overTransport f₁ f₂ h a)
