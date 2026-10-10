@@ -18,11 +18,52 @@
  },
  "stmt_deps": [
   "def-pc-projective-morphism",
-  "def-pc-dimension"
+  "def-pc-dimension",
+  "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The proper structure morphism $X\\to\\operatorname{Spec}(k)$ is separated and of finite type by the definition of properness. Since $\\dim X\\leq1$, the dimension-one quasi-projectivity lemma [lem-sc-dim-one-quasi-projective] gives an integer $N$ and an immersion $i:X\\hookrightarrow\\mathbf P^N_k$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sc-dim-one-quasi-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0A26 proof, first sentence, invoking Lemma 0A25 (lines 9217-9222)"
+   }
+  },
+  {
+   "text": "The structure morphism $\\mathbf P^N_k\\to\\operatorname{Spec}(k)$ is separated [lem-weil-pbc-projective-space-proj-separated]. Thus $i$ is proper by the proper-over-separated lemma [lem-weil-pbc-proper-over-separated], because its composite with the structure morphism is the proper morphism $X\\to\\operatorname{Spec}(k)$. The image $i(X)$ is therefore closed by [lem-weil-pbc-proper-closed-image]. Finally, an immersion with closed image is a closed immersion by [lem-weil-pbc-immersion-closed-image-closed-immersion], so $X\\hookrightarrow\\mathbf P^N_k$ is a closed immersion and hence projective by [def-pc-projective-morphism].",
+   "uses": [
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-closed-image",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "def-pc-projective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 0A26 proof, second sentence, invoking Morphisms Lemma 01W6 (lines 9223-9231)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-sc-dim-one-quasi-projective",
+  "lem-weil-pbc-projective-space-proj-separated",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "def-pc-projective-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 0A26 (varieties-lemma-dim-1-proper-projective), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,7 +95,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sc-pic-proper-ntorsion",
@@ -69,5 +110,22 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-proper-dim-one-projective",
+  "worker": "stage1",
+  "summary": "Split Stacks Lemma 0A26 into its two arguments: dimension-one quasi-projectivity (the new unsplit node lem-sc-dim-one-quasi-projective), then properness of the resulting immersion into projective space, closedness of its image, and the closed-immersion criterion using existing accepted Mathlib leaves.",
+  "blueprint": [
+   "Lemma 0A26 proof, first sentence: invoke the dimension-one quasi-projectivity lemma",
+   "Lemma 0A26 proof, second sentence: properness forces the locally closed image to be closed"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of J1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 0A26/0A25 read, 2 steps checked, new node lem-sc-dim-one-quasi-projective (0A25) checked"
+ }
 }
