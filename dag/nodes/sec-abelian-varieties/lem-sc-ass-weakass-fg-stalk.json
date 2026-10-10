@@ -24,9 +24,48 @@
   "pqf-def-coherent",
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definitions of associated and weakly associated point, both predicates at x are exactly the corresponding predicates for the maximal ideal m_x on the local ring O_{X,x} and the module F_x. The stalk and local ring are the objects specified in [def-weil-pbc-module-stalk].",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05AR, setup of Lemma 31.5.8"
+   }
+  },
+  {
+   "text": "If m_x = Ann(s) for some s in F_x, then m_x is minimal among the prime ideals containing Ann(s), because it is itself that prime ideal. Thus an associated point is weakly associated; this is the easy implication in Tag 05AR.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05AR, Lemma 31.5.8 (associated implies weakly associated)"
+   }
+  },
+  {
+   "text": "For the converse, set R = O_{X,x}, M = F_x, and p = m_x. The hypothesis that x is weakly associated says that p is weakly associated to M. Since p is finitely generated, apply [lem-sc-ass-weakass-fg-prime], the ring/module statement of Algebra Lemma 10.66.9 (Tag 058A), to conclude that p is the annihilator of an element of M. By the definition in step 1, x is associated to F. This uses exactly the local ring, stalk module, and finite generation already present in the item; no Noetherian hypothesis is added.",
+   "uses": [
+    "lem-sc-ass-weakass-fg-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05AR (Lemma 31.5.8, first assertion), proof via Algebra Lemma 10.66.9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-stalk",
+  "lem-sc-ass-weakass-fg-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05AR (Lemma 31.5.8), with the algebra argument from Algebra Lemma 10.66.9"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +97,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ass-weakass-locally-noetherian",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ass-weakass-fg-stalk",
+  "worker": "stage1",
+  "summary": "Split Tag 05AR into the definitions, the elementary associated-implies-weakly-associated direction, and an application of the statement-only finite-generator prime lemma (Tag 058A) for the converse at the local stalk.",
+  "blueprint": "Realizes the induction-step clause of lem-sc-hilbert-polynomial verifying the no-embedded-points hypothesis via Tag 05AR.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-awf3022",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-awf3022 (reviewer sub-agent of L); spot-checked: Item use in H1 step 2 matches the statement (C4 ok); step 2's 05AR is the item's own source, a cross-reference only (preflight note fine); step 3 cites new node lem-sc-ass-weakass-fg-prime = Tag 058A, a real lemma (localization + exponent-descent argument, not elementary), no DAG duplicate (grep 058A/lemma-ass-weakly-ass/weakly associated), Mathlib has no weakly-associated notion (recorded searches); new node's inline definitions match the item's. FIX more, RETURN less: E7 the delivery silently dropped '(Stacks Tag 02OJ)' and '(Stacks Tag 0546)' from the item statement with no reason named; restored the pre-delivery statement verbatim. Note: report section is stale (says no new node); new node's stmt_dep def-weil-pbc-module-stalk is only a loose cite for 'R-module'.; 1 file(s) fixed by the reviewer"
+ }
 }
