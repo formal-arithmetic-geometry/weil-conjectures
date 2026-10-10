@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-rees-algebra-noetherian",
+ "kind": "statement",
+ "title": "The Rees algebra of an ideal of a Noetherian ring is Noetherian",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $I\\subseteq A$ an ideal. Then the Rees algebra $\\mathcal R_A(I)=\\bigoplus_{n\\ge0}I^nt^n\\subseteq A[t]$ [def-nagata-rees-algebra], the subring of $A[t]$ consisting of the polynomials whose coefficient of $t^n$ lies in $I^n$ for every $n\\ge0$, is a Noetherian ring.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, proof of Lemma 02OA (lemma-cohomology-powers-ideal-application), line 5502 ('As B is Noetherian'); the Rees algebra is Algebra, Definition 052Q (definition-blow-up, algebra.tex line 17143); it is generated over A by the degree-one elements f_it for generators f_1,...,f_r of I, hence Noetherian by Algebra, Lemma 00FN (lemma-Noetherian-permanence, algebra.tex line 5991). Tags verified in tags/tags: 02OA, 052Q, 00FN."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-nagata-rees-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rees algebra of an ideal in a Noetherian ring is Noetherian",
+   "results": "instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra, reesAlgebra, reesAlgebra.fg (Mathlib.RingTheory.ReesAlgebra), Algebra.FiniteType.isNoetherianRing (Mathlib.RingTheory.FiniteType), Polynomial.isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "match: instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing ↥(reesAlgebra _)",
+   "results": "instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra : {R : Type u} [CommRing R] {I : Ideal R} [IsNoetherianRing R] : IsNoetherianRing ↥(reesAlgebra I) (Mathlib.RingTheory.ReesAlgebra)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsNoetherianRing (reesAlgebra' Mathlib; sed -n 30,70p and 105,125p Mathlib/RingTheory/ReesAlgebra.lean",
+   "results": "Mathlib/RingTheory/ReesAlgebra.lean:122 instance [IsNoetherianRing R] : IsNoetherianRing (reesAlgebra I) := Algebra.FiniteType.isNoetherianRing R _; line 39 def reesAlgebra : Subalgebra R R[X] with carrier { f | ∀ i, f.coeff i ∈ I ^ i }; line 119 instance Algebra.FiniteType R (reesAlgebra I)",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  },
+  {
+   "tool": "local_search",
+   "query": "instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra (project root ~/weil-conjectures-slopmaster2)",
+   "results": "index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "inconclusive (index not consulted); the grep above read the declaration"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra",
+  "file": "Mathlib/RingTheory/ReesAlgebra.lean",
+  "line": 122,
+  "how": "exact: the anonymous instance `instance [IsNoetherianRing R] : IsNoetherianRing (reesAlgebra I)` (line 122); `reesAlgebra I` (line 39) is the subalgebra of R[X] with carrier { f | ∀ i, f.coeff i ∈ I ^ i }, the node's ring. Source read 2026-10-10 with sed -n 30,70p and 105,125p."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-powers-ideal-application",
+  "date": "2026-10-10"
+ },
+ "lead_note": "L 2026-10-10: Mathlib leaf (the IsNoetherianRing instance on reesAlgebra I, ReesAlgebra.lean:122); line verified."
+}

@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+ "kind": "statement",
+ "title": "The cohomology of the I^nF is a finite module over the Rees algebra",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal, $B=\\mathcal R_A(I)=\\bigoplus_{n\\ge0}I^nt^n\\subseteq A[t]$ the Rees algebra of $I$ [def-nagata-rees-algebra] (the subring of $A[t]$ of the polynomials whose coefficient of $t^n$ lies in $I^n$ for every $n$), $f:X\\to\\operatorname{Spec}A$ a proper morphism [def-weil-proper-morphism], $\\mathcal I=I\\mathcal O_X\\subseteq\\mathcal O_X$ the image of $f^*\\widetilde I\\to f^*\\mathcal O_{\\operatorname{Spec}A}\\to\\mathcal O_X$ [def-nagata-extended-ideal], and $\\mathcal F$ a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Put $\\mathcal I^0\\mathcal F=\\mathcal F$ and, for $n\\ge1$, let $\\mathcal I^n\\mathcal F\\subseteq\\mathcal F$ be as in [def-weil-pbc-coherent-formal-module] (0). Fix $q\\ge0$ and write $M_n=H^q(X,\\mathcal I^n\\mathcal F)$ for $n\\ge0$ (sheaf cohomology [pqf-def-cohomology]; an $A$-module, $a\\in A$ acting through its image $f^\\sharp(a)\\in\\Gamma(X,\\mathcal O_X)$). For $k,m\\ge0$ and $a\\in I^k$, multiplication by $f^\\sharp(a)$ maps $\\mathcal I^m\\mathcal F$ into $\\mathcal I^{m+k}\\mathcal F$ (on every open $U$, $f^\\sharp(a)|_U$ is a section of $\\mathcal I^k$); let $\\lambda^{(m)}_a:\\mathcal I^m\\mathcal F\\to\\mathcal I^{m+k}\\mathcal F$ be this $\\mathcal O_X$-linear map and, for $x\\in M_m$, put $a\\star x=H^q(X,\\lambda^{(m)}_a)(x)\\in M_{m+k}$. Then: (1) $M=\\bigoplus_{n\\ge0}M_n$ is a $B$-module under $\\big(\\sum_ka_kt^k\\big)\\cdot(x_m)_{m\\ge0}=\\big(\\sum_{k+m=n}a_k\\star x_m\\big)_{n\\ge0}$ ($a_k\\in I^k$, $x_m\\in M_m$, almost all zero), and for $a\\in A=I^0$ and $x\\in M_m$ the element $a\\star x$ is the product $ax$ of the $A$-module structure of $M_m$; (2) $M$ is a finitely generated $B$-module [def-weil-finitely-generated-module].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 02O8 (lemma-cohomology-powers-ideal-times-F, line 5380; reference EGA III Cor 3.3.2) and the paragraph before it (lines 5370-5376), which gives M = (+)_n H^p(X, I^n F) its structure of graded S = (+)_n I^n-module; Stacks' proof applies Lemma 0897 (lemma-graded-finiteness) part (1) to the finite type graded f^*B~-module (+)_n I^n F. Stacks writes I^nF for the image of f^*(I^n)~ (x) F -> F, which equals (I O_X)^n F as used here. Tags verified in tags/tags: 02O8, 0897."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-nagata-rees-algebra",
+  "def-weil-proper-morphism",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-cohomology",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf cohomology of I^n F is a finitely generated graded module over the Rees algebra for a proper morphism",
+   "results": "reesAlgebra, reesAlgebra.fg, instFiniteType...reesAlgebra (Mathlib.RingTheory.ReesAlgebra), Ideal.Filtration.submodule, Ideal.Filtration.submodule_fg_iff_stable, Ideal.Filtration.submodule_span_single (Mathlib.RingTheory.Filtration): ring- and module-level Rees algebra only, no cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "direct sum of cohomology groups H^p(X, I^n F) finite module over Rees algebra, proper morphism to affine Noetherian scheme, coherent sheaf",
+   "results": "SheafOfModules.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators), FGModuleCat limits: finite type sheaves of modules only, no cohomology, no Rees algebra",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite ↥(reesAlgebra _) _",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'reesAlgebra' Mathlib; grep -rln 'Sheaf.H' Mathlib/AlgebraicGeometry (~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "reesAlgebra only in RingTheory/ReesAlgebra.lean and RingTheory/Filtration.lean (Ideal.Filtration.submodule over reesAlgebra, Artin-Rees); no file of AlgebraicGeometry uses sheaf cohomology Sheaf.H",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "reesAlgebra (project root ~/weil-conjectures-slopmaster2)",
+   "results": "index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "inconclusive (index not consulted); the grep above is the source check"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-powers-ideal-application",
+  "date": "2026-10-10"
+ }
+}
