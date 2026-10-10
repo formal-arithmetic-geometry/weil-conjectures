@@ -2812,3 +2812,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:24 L: merged deliver/K1/lem-pc-affine-perfect-colimit-descent (reviewer FIX; first push; new nodes: 0)
 - 22:24 L: merged deliver/F1/lem-pc-pseudo-coherent-bounded-finite-free-model (reviewer FIX; first push; new nodes: 0)
 - 22:24 L: merged deliver/G1/lem-pc-supported-open-pushforward (reviewer FIX; after a return; new nodes: 0)
+- 22:24 L: merged deliver/F1/lem-sc-perfect-derived-tensor-perfect (reviewer FIX; first push; new nodes: 0)

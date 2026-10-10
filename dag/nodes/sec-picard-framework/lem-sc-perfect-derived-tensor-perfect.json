@@ -23,23 +23,128 @@
   "def-pc-perfect-complex",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-pc-perfect-complex] there are open coverings $X=\\bigcup_iU_i$ and $X=\\bigcup_jV_j$ with $K|_{U_i}$ and $L|_{V_j}$ isomorphic in the derived categories to strictly perfect complexes. Restriction to an open is an exact functor on modules and the restriction of a strictly perfect complex to a smaller open is strictly perfect (restrict the finite free modules and the summand decompositions), so on each $W=U_i\\cap V_j$ of the covering $X=\\bigcup_{i,j}W$ there are strictly perfect complexes $\\mathcal E^\\bullet,\\mathcal F^\\bullet$ of $\\mathcal O_W$-modules with $K|_W\\cong\\mathcal E^\\bullet$ and $L|_W\\cong\\mathcal F^\\bullet$ in $D(\\mathcal O_W)$. By [lem-pc-affine-derived-pullback-tensor-tilde] (1), applied to $f=\\mathrm{id}_X$ and the open $W$, $(K\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_W\\cong K|_W\\otimes^{\\mathbf L}_{\\mathcal O_W}L|_W\\cong\\mathcal E^\\bullet\\otimes^{\\mathbf L}_{\\mathcal O_W}\\mathcal F^\\bullet$.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma lemma-tensor-perfect (Tag 09J5), local reduction to strictly perfect models"
+   }
+  },
+  {
+   "text": "Each term $\\mathcal E^i$ is a direct summand of a finite free $\\mathcal O_W$-module $\\mathcal O_W^{\\oplus r}$, hence flat (a direct summand of a flat module is flat), and $\\mathcal E^\\bullet$ is bounded, in particular bounded above. Hence $\\mathcal E^\\bullet$ is K-flat by [lem-pc-bounded-above-flat-kflat], so the identity is a K-flat resolution [def-pc-kflat-complex] and, with the description of $\\otimes^{\\mathbf L}$ in [lem-pc-affine-derived-pullback-tensor-tilde], $\\mathcal E^\\bullet\\otimes^{\\mathbf L}_{\\mathcal O_W}\\mathcal F^\\bullet$ is represented by the total tensor complex $\\operatorname{Tot}(\\mathcal E^\\bullet\\otimes_{\\mathcal O_W}\\mathcal F^\\bullet)$.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat",
+    "def-pc-kflat-complex",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma lemma-tensor-perfect (Tag 09J5), K-flat strictly perfect models"
+   }
+  },
+  {
+   "text": "Since $\\mathcal E^\\bullet$ and $\\mathcal F^\\bullet$ are bounded, $\\operatorname{Tot}(\\mathcal E^\\bullet\\otimes_{\\mathcal O_W}\\mathcal F^\\bullet)$ is bounded, and its degree-$n$ term is the finite direct sum $\\bigoplus_{i+j=n}\\mathcal E^i\\otimes_{\\mathcal O_W}\\mathcal F^j$. If $\\mathcal E^i\\oplus\\mathcal E'\\cong\\mathcal O_W^{\\oplus r}$ and $\\mathcal F^j\\oplus\\mathcal F'\\cong\\mathcal O_W^{\\oplus s}$, then $\\mathcal E^i\\otimes\\mathcal F^j$ is a direct summand of $\\mathcal O_W^{\\oplus r}\\otimes\\mathcal O_W^{\\oplus s}\\cong\\mathcal O_W^{\\oplus rs}$, and a finite direct sum of direct summands of finite free modules is again one. So the total complex is strictly perfect, $(K\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_W$ is isomorphic to a strictly perfect complex for every member $W$ of the covering, and $K\\otimes^{\\mathbf L}_{\\mathcal O_X}L$ is perfect by [def-pc-perfect-complex].",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma lemma-tensor-perfect (Tag 09J5), termwise tensor of finite free summands (Stacks, Cohomology of Sheaves, Definition 08C4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-bounded-above-flat-kflat",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma lemma-tensor-perfect (Tag 09J5)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
    "query": "tensor.*perfect|IsPerfect in Mathlib/Algebra/Homology",
-   "results": "0 hits; Mathlib has no perfect complexes on schemes",
-   "date": "2026-10-10",
+   "results": "0 hits; Mathlib has no scheme-level perfect-complex tensor theorem",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor product of perfect complexes on a scheme is perfect",
+   "results": "CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', Algebra.FormallyEtale.instTensorProduct, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, LightCondensed monoidal declarations; no scheme-level perfect-complex theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsPerfect, IsPerfect.tensor, perfect tensor",
+   "results": "0 hits; loogle reports unknown identifier DerivedCategory.IsPerfect",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|perfect.*tensor|tensor.*perfect in Mathlib/Algebra/Homology",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a derived tensor product of two perfect complexes on a scheme is perfect",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-map-lift"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-derived-tensor-perfect",
+  "worker": "stage1",
+  "summary": "Checked the imported Tag 09J5 statement and found no exact sorry-free project declaration. The split uses the existing affine bounded-finite-projective characterization and bounded-above-flat K-flat lemma; locally the derived tensor is represented by the total tensor of the affine models, whose bounded finite-projective terms are verified directly. No new node was needed.",
+  "blueprint": "The item has no matching blueprint node; its proof realizes the imported Stacks Tag 09J5 local affine-model argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat",
+    "why": "The affine tensor computation needs the generic K-flatness theorem for bounded-above flat sheaf complexes, which is supplied by the semicontinuity unit and not by the Picard-duality route."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic tool: part (1), restriction of the derived tensor product to an open, and its description of the derived tensor by a K-flat resolution."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-affine-derived-pullback-tensor-tilde"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ptp2826",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ptp2826 (reviewer sub-agent of L); spot-checked: Statement matches lem-sc-affine-perfect-map-lift step 3 use (A, I perfect on scheme X). FIX more, RETURN less: (1) C4: lem-pc-perfect-affine-bounded-projective needs E in D_QCoh, not shown for K|_U; replaced the affine-model route by strictly perfect models from def-pc-perfect-complex on a common refinement W=U_i cap V_j (sheaf-level, no QCoh needed); (2) C1: restriction of derived tensor to opens was uncited; now cites lem-pc-affine-derived-pullback-tensor-tilde (1), declared as tool use; (3) B4: plain-text 'P tensor_A Q' etc. rewritten in TeX. Step 2 K-flat via lem-pc-bounded-above-flat-kflat checked; step 3 elementary termwise summand argument kept. The Second reading by F1 missed faults (1) and (2).; 1 file(s) fixed by the reviewer"
+ }
 }
