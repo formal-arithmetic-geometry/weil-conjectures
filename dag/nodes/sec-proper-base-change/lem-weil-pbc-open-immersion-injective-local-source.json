@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-open-immersion-injective-local-source",
+ "kind": "statement",
+ "title": "An injective morphism that is an open immersion on the members of an open covering of the source is an open immersion",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] whose map of underlying sets is injective. Assume that every point $x\\in X$ lies in the image of some open immersion $i:U\\to X$ [def-weil-open-immersion] such that the composite $f\\circ i:U\\to Y$ is an open immersion. Then $f$ is an open immersion; in particular $f$ is a homeomorphism of $X$ onto the open subset $f(X)$ of $Y$.",
+ "source": {
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean",
+  "place": "theorem AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists, lines 87-95 (deduced from IsOpenImmersion.of_openCover_source, lines 73-85, which checks the open embedding and the stalk maps); used for the open-immersion clause of Algebra Lemma Tag 00QB (3) as reformulated in the proof of Morphisms, Lemma Tag 03GU (lemma-quasi-finite-affine, morphisms.tex line 15230)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a morphism of schemes whose restrictions over an open cover of an open subset containing the image are isomorphisms is an open immersion",
+   "results": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.Scheme.Hom.isOpenEmbedding, AlgebraicGeometry.IsOpenImmersion.of_openCover_source (Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion), IsImmersion/IsPreimmersion instances, AlgebraicGeometry.isOpenImmersion_eq_inf",
+   "date": "2026-10-10",
+   "verdict": "match: IsOpenImmersion.of_openCover_source (open-cover form of this statement)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "open immersion is local on the target: f is an open immersion if its restriction to the preimage of each open of a cover is an open immersion",
+   "results": "AlgebraicGeometry.isOpenImmersion_isZariskiLocalAtTarget, IsZariskiLocalAtTarget.of_forall_source_exists_preimage, IsLocalAtSource.iff_exists_resLE (Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion, .Basic)",
+   "date": "2026-10-10",
+   "verdict": "no direct match (locality at the target needs a cover of all of Y; the image here is only open)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Injective _ → AlgebraicGeometry.IsOpenImmersion _",
+   "results": "AlgebraicGeometry.IsOpenImmersion.of_openCover_source, AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists (Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion)",
+   "date": "2026-10-10",
+   "verdict": "match: IsOpenImmersion.of_forall_source_exists"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 60-120p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean; grep -rn 'of_openCover_source\\|of_forall_source_exists' Mathlib/AlgebraicGeometry",
+   "results": "IsOpenImmersion.of_openCover_source (lines 73-85): (f : X ⟶ Y) (𝒰 : X.OpenCover) (hf : Function.Injective f) (h𝒰 : ∀ i, IsOpenImmersion (𝒰.f i ≫ f)) : IsOpenImmersion f; IsOpenImmersion.of_forall_source_exists (lines 87-95): (hf : Function.Injective f) (hX : ∀ x, ∃ U (i : U ⟶ X) (_ : IsOpenImmersion i), x ∈ i.opensRange ∧ IsOpenImmersion (i ≫ f)) : IsOpenImmersion f",
+   "date": "2026-10-10",
+   "verdict": "match: of_forall_source_exists states exactly this node"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists, .lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean (index: unavailable, the name was found)",
+   "date": "2026-10-10",
+   "verdict": "the declaration exists in this Mathlib"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion.lean",
+  "how": "exact: lines 87-95, hypotheses `Function.Injective f` (injective on underlying points) and, for every x : X, a scheme U with an open immersion i : U ⟶ X, x ∈ i.opensRange (x in the image of i) and IsOpenImmersion (i ≫ f); conclusion IsOpenImmersion f, which is [def-weil-open-immersion] (Mathlib's IsOpenImmersion: open embedding plus isomorphism onto the open subscheme)",
+  "line": 87
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-quasi-finite-ring-map-integral-closure-open",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: exact Mathlib leaf AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists (OpenImmersion.lean line 87, read)."
+}
