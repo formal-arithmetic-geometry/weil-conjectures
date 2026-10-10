@@ -21,9 +21,10 @@
 | `lem-sc-affine-pseudo-coherent-rhom-qcoherent` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
-| `lem-sc-right-adjoint-open-support-criterion` | 3019 | none |
+| `lem-sc-open-restriction-support-triangle` | 3020 | none |
 | `lem-sc-perfect-support-map-lift` | 3020 | none |
 | `lem-sc-pseudo-coherent-support-annihilation` | 3020 | none |
+| `lem-sc-supported-derived-generated-perfect` | 3020 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -61,7 +62,6 @@
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
 | `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
-| `pqf-lem-fff-vanishing` | 6011 | none |
 | `pqf-lem-leray` | 6011 | none |
 | `pqf-lem-leray-lowdegree` | 6011 | none |
 | `pqf-lem-qf-finitefibres` | 6011 | none |
@@ -938,7 +938,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1428 nodes that wait for a statement dependency, 245 nodes that wait for stage 1.
+Not open yet: 1430 nodes that wait for a statement dependency, 245 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
