@@ -25,9 +25,73 @@
   "def-sp-left-exact-additive",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each n\\ge0 put E_n=\\tau_{\\ge -n}E. The truncation tower reconstruction and the compatibility of the right derived functor with its derived inverse limit give E\\simeq R\\varprojlim_nE_n and RF(E)\\simeq R\\varprojlim_nRF(E_n) by [lem-pc-qcoh-truncation-derived-limit].",
+   "uses": [
+    "lem-pc-qcoh-truncation-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), first paragraph; Tags 08D3 and 08D1"
+   }
+  },
+  {
+   "text": "Applying the Milnor exact sequence [lem-pc-derived-limit-milnor-sequence] to the tower RF(E_n), for every i we obtain $$0\\to R^1\\varprojlim_n H^{i-1}(RF(E_n))\\to H^i(RF(E))\\to\\varprojlim_n H^i(RF(E_n))\\to0.$$",
+   "uses": [
+    "lem-pc-derived-limit-milnor-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), displayed short exact sequence; Tag 07KY"
+   }
+  },
+  {
+   "text": "The shifted truncation triangle and the vanishing hypothesis give the stabilization statement [lem-pc-derived-functor-truncation-stabilization]: H^i(RF(E_n))\\to H^i(RF(E_{n-1})) is an isomorphism whenever n\\ge N-i, because the two endpoint cohomology groups are R^{i+n}F(H^{-n}(E)) and R^{i+n+1}F(H^{-n}(E)).",
+   "uses": [
+    "lem-pc-derived-functor-truncation-stabilization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), truncation triangle and the two shifted derived-functor vanishings"
+   }
+  },
+  {
+   "text": "Fix $i$. By Step 3 (applied in degrees $i$ and $i-1$) the transition maps of the towers $H^{i-1}(RF(E_n))$ and $H^i(RF(E_n))$ are isomorphisms for $n\\ge N-i+1$ and $n\\ge N-i$ respectively. An eventually constant tower of abelian groups is Mittag--Leffler, so its $R^1\\varprojlim$ vanishes, and its limit maps isomorphically to each term past the stabilization index (Stacks Tag 07KW). Hence the left term of the sequence of Step 2 is zero and $H^i(RF(E))\\cong H^i(RF(E_m))$ for every integer $m\\ge\\max(0,N-i-1)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (2), Mittag--Leffler conclusion; More on Algebra Tag 07KW"
+   }
+  },
+  {
+   "text": "Let $i>b+N-1$, i.e. $i\\ge b+N$, and put $m=\\max(0,N-i-1)$; then $m\\ge -b-1$ since $N-i-1\\le -b-1$. Every integer $n$ with $-b\\le n\\le m$ satisfies $n\\ge -b\\ge N-i$, so by [lem-pc-derived-functor-truncation-stabilization] the maps $H^i(RF(E_n))\\to H^i(RF(E_{n-1}))$ for $n=m,m-1,\\dots,-b$ are isomorphisms, and their composite gives $H^i(RF(E_m))\\cong H^i(RF(E_{-b-1}))=H^i(RF(\\tau_{\\ge b+1}E))$. Since $H^j(E)=0$ for $j>b$, $\\tau_{\\ge b+1}E=0$ [def-sbc-standard-tstructure-derived-category], and $RF(0)=0$. With Step 4, $H^i(RF(E))=0$ for every $i>b+N-1$.",
+   "uses": [
+    "lem-pc-derived-functor-truncation-stabilization",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08D4 proof of part (3), final paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-qcoh-truncation-derived-limit",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-derived-functor-truncation-stabilization",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D4, part (3), upper-bound clause and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,12 +123,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-direct-image-uniform-truncation-bound",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-unbounded-derived-functor-cohomological-bound",
+  "worker": "stage1",
+  "summary": "Split the Tag 08D4 upper-bound argument into five explicit steps: truncation reconstruction, the Milnor exact sequence, shifted truncation vanishing, Mittag--Leffler stabilization, and the final application with upper bound b+N. No clause was moved into a new node.",
+  "blueprint": "The single proof step realizes the uniform truncation prerequisite in the first step of lem-sc-finite-duality, via lem-pc-derived-direct-image-uniform-truncation-bound and lem-sc-proper-upper-shriek-composition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-udb2006",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-udb2006 (reviewer sub-agent of L); spot-checked: Checked steps against Stacks 08D4 (2)-(3), 08D3, 07KY; bound direction (H^i(E)=0 for i>b => H^i(RF E)=0 for i>=b+N) matches citing node lem-pc-derived-direct-image-uniform-truncation-bound; truncation triangle/standard truncation cited via def-sbc-standard-tstructure and the stabilization node, not assumed; Milnor node not a duplicate of prop-weil-pbc-roos-triangle (pro-etale towers) or lem-weil-pbc-mittag-leffler (finite groups); grep of Mathlib for Milnor/lim1: verdict no match. FIX more, RETURN less: (1) D2 missed by the second reading: lem-pc-derived-functor-truncation-stabilization's 'Consequently'/'In particular' clauses restated Steps 1-4 and the item itself; trimmed it to the transition-isomorphism claim, now stated for all integers n (needed to reach tau_{>=b+1}E=0). (2) B3: that node referred to 'F as in [lem-pc-qcoh-truncation-derived-limit]' with X undefined; made self-contained, stmt_deps updated. (3) Steps 4-5 rewritten: Step 4 elementary Mittag-Leffler (Tag 07KW) giving H^i(RF E)=H^i(RF E_m), m>=max(0,N-i-1); Step 5 chains the stabilization isomorphisms from E_m down to E_{-b-1}=tau_{>=b+1}E=0.; 2 file(s) fixed by the reviewer"
+ }
 }
