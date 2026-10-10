@@ -2898,3 +2898,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:59 L: returned deliver/F1/lem-kun-sep-closed-finite-extension-sep-closed (reviewer RETURN: Not a fault: the item is Mathlib's Algebra.IsAlgebraic.isSepClosed (Mathlib/FieldTheory/PurelyInseparable/Basic.lean:567)
 - 22:59 L: returned deliver/E1/lem-kun-sep-closed-finite-extension-purely-inseparable (reviewer RETURN: Not a fault: the item is Mathlib's Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed (Mathlib/FieldTheory/PurelyIns)
 - 22:59 UTC L matched lem-kun-sep-closed-finite-extension-sep-closed to Mathlib Algebra.IsAlgebraic.isSepClosed (R-sfs2950) and lem-kun-sep-closed-finite-extension-purely-inseparable to Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed (R-spi2952); F1 and E1 deliveries returned as unneeded
+- 23:01 L: merged deliver/J1/lemma-nagata-morphism-eq-eventually (reviewer FIX; first push; new nodes: 0)

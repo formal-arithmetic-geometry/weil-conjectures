@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-morphism-eq-eventually",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Eventual equality of morphisms, [stacks-project]",
@@ -17,12 +17,45 @@
  ],
  "proof": [
   {
-   "text": "Above the selected stage, the two maps have equal inverse images of every\ntarget chart. On a finite affine cover of each common inverse image, their\nring maps agree on a finite generating set and hence agree. The local\nequalities glue to the asserted global equality and persist at later stages.",
-   "uses": [],
-   "elementary": null
+   "text": "By the construction in [def-nagata-morphism-equality-stage], for each pair $(j,k)$ there are the quasi-compact opens $W_1=\\varphi_{\\lambda_0}^{-1}(V_{jk})$ and $W_2=\\psi_{\\lambda_0}^{-1}(V_{jk})$ of $X_{\\lambda_0}$ with equal inverse images in $X$, the stage $\\lambda_{jk}=\\lambda_{W_1=W_2}$, a finite affine open cover $\\{U_{jkl}\\}_l$ of $W_{1,\\lambda_{jk}}\\cap W_{2,\\lambda_{jk}}$, and for each $l$ and each generator $b\\in G_{jk}$ a stage $\\mu_{jklb}\\geq\\lambda_{jk}$ at which the two pullbacks of $b$ to $\\Gamma(U_{jkl,\\mu_{jklb}},\\mathcal O)$ (through $\\varphi_{\\lambda_0}$ and through $\\psi_{\\lambda_0}$) are equal. By [lemma-nagata-directed-finite-upper-bound], $\\lambda_{\\varphi=\\psi}=u(F)$ satisfies $\\lambda_0\\leq\\lambda_{\\varphi=\\psi}$, $\\lambda_{jk}\\leq\\lambda_{\\varphi=\\psi}$ and $\\mu_{jklb}\\leq\\lambda_{\\varphi=\\psi}$ for all $j,k,l,b$.",
+   "uses": [
+    "def-nagata-morphism-equality-stage",
+    "lemma-nagata-directed-finite-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-morphism-eq-eventually.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "Let $\\lambda\\geq\\lambda_{\\varphi=\\psi}$; then $\\lambda\\geq\\lambda_{jk}=\\lambda_{W_1=W_2}$ for every $(j,k)$. Apply [lemma-nagata-qc-open-eq-eventually] with the qcqs scheme $X_{\\lambda_0}$ in the role of the scheme called $Y_{\\lambda_0}$ there (the opens $W_1,W_2$ are quasi-compact with equal inverse images in $X$, as recorded in [def-nagata-morphism-equality-stage]): the inverse images $W_{1,\\lambda}$ and $W_{2,\\lambda}$ in $X_\\lambda$ are equal, so $W_{1,\\lambda}=W_{1,\\lambda}\\cap W_{2,\\lambda}$, which is the inverse image of $W_{1,\\lambda_{jk}}\\cap W_{2,\\lambda_{jk}}$ and hence is covered by the opens $U_{jkl,\\lambda}$, $l$ varying. Since the $V_{jk}$ cover $Y_{\\lambda_0}$, the $W_1=\\varphi_{\\lambda_0}^{-1}(V_{jk})$ cover $X_{\\lambda_0}$, so the $U_{jkl,\\lambda}$ ($j,k,l$ varying) form an open cover of $X_\\lambda$ with $\\varphi_{\\lambda_0}$ and $\\psi_{\\lambda_0}$ both mapping the image of $U_{jkl,\\lambda}$ in $X_{\\lambda_0}$ into $V_{jk}$.",
+   "uses": [
+    "lemma-nagata-qc-open-eq-eventually",
+    "def-nagata-morphism-equality-stage",
+    "lemma-nagata-directed-finite-upper-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/lemma-nagata-qc-open-eq-eventually.md",
+    "place": "node lemma-nagata-qc-open-eq-eventually, order 350"
+   }
+  },
+  {
+   "text": "Fix $(j,k,l)$ and write $p\\colon U_{jkl,\\lambda}\\to X_{\\lambda_0}$ for the projection. For $b\\in G_{jk}$, the images in $\\Gamma(U_{jkl,\\lambda},\\mathcal O)$ of the two pullbacks of $b$ are the images under the transition map $\\Gamma(U_{jkl,\\mu_{jklb}},\\mathcal O)\\to\\Gamma(U_{jkl,\\lambda},\\mathcal O)$ (as $\\mu_{jklb}\\leq\\lambda$) of elements that are equal at stage $\\mu_{jklb}$, hence equal. The composites $\\varphi_{\\lambda_0}\\circ p,\\ \\psi_{\\lambda_0}\\circ p\\colon U_{jkl,\\lambda}\\to V_{jk}=\\operatorname{Spec}B_{jk}$ (target affine) correspond to ring maps $B_{jk}\\to\\Gamma(U_{jkl,\\lambda},\\mathcal O)$; both composites lie over $T_j$, so these are $R_j$-algebra maps, and as they agree on the $R_j$-algebra generators $G_{jk}$ they are equal. Hence $\\varphi_{\\lambda_0}\\circ p=\\psi_{\\lambda_0}\\circ p$. The base changes $\\varphi_\\lambda,\\psi_\\lambda\\colon X_\\lambda\\to Y_\\lambda=Y_{\\lambda_0}\\times_{S_{\\lambda_0}}S_\\lambda$ restricted to $U_{jkl,\\lambda}$ have the same composite with the projection to $S_\\lambda$ (both are $S_\\lambda$-morphisms) and with the projection to $Y_{\\lambda_0}$ (namely $\\varphi_{\\lambda_0}\\circ p=\\psi_{\\lambda_0}\\circ p$), so they are equal by the universal property of the fibre product. Since the $U_{jkl,\\lambda}$ cover $X_\\lambda$ (step 2) and morphisms of schemes agreeing on each member of an open cover are equal, $\\varphi_\\lambda=\\psi_\\lambda$.",
+   "uses": [
+    "def-nagata-morphism-equality-stage",
+    "lemma-nagata-directed-finite-upper-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/lemma-nagata-morphism-eq-eventually.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
+  "def-nagata-morphism-equality-stage",
   "lemma-nagata-directed-finite-upper-bound",
   "lemma-nagata-qc-open-eq-eventually"
  ],
@@ -31,9 +64,38 @@
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-morphism-eq-eventually.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "eventual equality of two scheme morphisms after base change in a directed inverse system",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; broader inverse-limit results",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom, equal after pullback, directed inverse system",
+   "results": "0 hits; unknown identifier Scheme.Hom",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*equal.*morphism|Scheme.*Hom.*ext in Mathlib/AlgebraicGeometry",
+   "results": "generic Scheme.Hom.ext and hom_ext occurrences; no declaration of eventual equality stage",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "At a sufficiently large stage, two finitely presented scheme morphisms with equal inverse limit base change are equal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -71,5 +133,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lemma-nagata-morphism-eq-eventually",
+  "worker": "stage1",
+  "summary": "Expanded the imported proof into three steps. The definition supplies the finite target and common-inverse-image covers, generator lists, witness stages, and selected upper bound; the finite-upper-bound lemma supplies domination of every required stage; the quasi-compact-open eventual-equality lemma supplies equality of inverse-image opens. The final local ring-map and affine-cover extensionality argument is elementary from these data. No new nodes were needed.",
+  "blueprint": "node lemma-nagata-morphism-eq-eventually, order 356",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nme2954",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nme2954 (reviewer sub-agent of L); spot-checked: Read packet whole; merged def-nagata-morphism-equality-stage on sheaf-dag (data used exactly: W_1,W_2, lambda_jk, U_jkl cover of W_1∩W_2, generator witnesses mu_jklb via clause (2), u(F)); citers def-nagata-morphism-descent (H1, overlap maps agree at lambda_phi) and lemma-nagata-morphism-descends (M1, via H1) use exactly this statement (C4 ok). FIX more, RETURN less: (1) B4/B3 all three steps were plain text (lambda_jk, varphi, '>=', 'X_nu -> X_lambda'): rewritten in TeX. (2) C1 step 3 elementary gap: added transport of witness equalities from mu_jklb to lambda along the Gamma transition map, the identification of chart maps with R_j-algebra maps B_jk -> Gamma(U_jkl,lambda), and the fibre-product universal property passing from phi_lambda0∘p = psi_lambda0∘p to phi_lambda = psi_lambda on U_jkl,lambda; step 2 now states the role substitution for lemma-nagata-qc-open-eq-eventually and derives that the U_jkl,lambda cover X_lambda (uses += def-nagata-morphism-equality-stage). (3) removed the incorrect last sentence of step 3 (base change to S_nu is not composition with X_nu -> X_lambda; also superfluous since lambda is arbitrary). Second reading by J1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ }
 }
