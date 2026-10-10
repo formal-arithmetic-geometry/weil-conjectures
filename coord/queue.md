@@ -1,8 +1,8 @@
 # Work queue
 
-906 items; claim with `tools/claim.py next <group> [--stage N]`.
+904 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (147)
+## Stage 1: nodes to split (145)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -62,13 +62,11 @@
 | `lem-sc-general-theorem-of-cube` | 6011 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-pod-adic-limit-finite-modules` | - | none |
-| `lem-pod-lisse-module-sheaves-as-module-objects` | - | none |
 | `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `pqf-lem-finite-fp-locnoeth` | - | none |
-| `pqf-lem-qs-intersection-qc` | - | none |
 | `thm-sc-affine-cohomology` | - | rests_on_sorry |
 | `thm-sc-constant-invariance` | - | none |
 | `def-nagata-morphism-equality-stage` | - | none |
@@ -918,7 +916,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1529 nodes that wait for a statement dependency, 187 nodes that wait for stage 1.
+Not open yet: 1531 nodes that wait for a statement dependency, 185 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
