@@ -1,0 +1,95 @@
+{
+ "id": "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-dimension-at-point-components",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "lem-weil-pbc-smooth-at-generic-point-over-field",
+    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-geometric-regularity-separable-extension",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Irreducible components of the spectrum of a ring are the zero loci of minimal primes",
+ "statement": "Let $R$ be a commutative ring and $X=\\operatorname{Spec}R$ [def-weil-affine-spectrum], with closed subsets $V(I)=\\{\\mathfrak p\\in X: I\\subseteq\\mathfrak p\\}$ for ideals $I\\subseteq R$. Call a prime ideal $\\mathfrak q\\subset R$ minimal if no prime ideal of $R$ is strictly contained in $\\mathfrak q$. Then the irreducible components of $X$ [def-weil-irreducible-components] are exactly the subsets $V(\\mathfrak q)$ with $\\mathfrak q$ a minimal prime ideal of $R$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00ES (label lemma-irreducible, lines 4665-4695), part (3); tag verified in stacks-project/tags/tags (00ES,algebra-lemma-irreducible)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "irreducible components of the prime spectrum are the zero loci of the minimal primes",
+   "results": "PrimeSpectrum.zeroLocus_minimalPrimes, PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents, PrimeSpectrum.vanishingIdeal_irreducibleComponents, PrimeSpectrum.vanishingIdeal_mem_minimalPrimes (Mathlib.RingTheory.Spectrum.Prime.Topology); minimalPrimes (Mathlib.RingTheory.Ideal.MinimalPrime.Basic); irreducibleComponents (Mathlib.Topology.Irreducible)",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.zeroLocus_minimalPrimes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "irreducible components of Spec R correspond to minimal prime ideals",
+   "results": "PrimeSpectrum.zeroLocus_minimalPrimes, PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents, PrimeSpectrum.vanishingIdeal_irreducibleComponents, PrimeSpectrum.quasiSober, PrimeSpectrum.vanishingIdeal_mem_minimalPrimes (Mathlib.RingTheory.Spectrum.Prime.Topology)",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.zeroLocus_minimalPrimes"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'irreducibleComponents' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/*.lean; sed -n 1234,1290p Topology.lean",
+   "results": "Topology.lean: line 1237 Ideal.minimalPrimes.equivIrreducibleComponents and line 1251 minimalPrimes.equivIrreducibleComponents (both @[stacks 00ES]), line 1260 vanishingIdeal_irreducibleComponents, line 1267 zeroLocus_minimalPrimes, line 1284 zeroLocus_ideal_mem_irreducibleComponents",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "PrimeSpectrum.zeroLocus_minimalPrimes (project root ~/weil-conjectures-slopmaster2)",
+   "results": "PrimeSpectrum.zeroLocus_minimalPrimes, lemma, .lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.zeroLocus_minimalPrimes",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "line": 1267,
+  "how": "exact: `lemma zeroLocus_minimalPrimes : zeroLocus ∘ (↑) '' minimalPrimes R = irreducibleComponents (PrimeSpectrum R)` (lines 1267-1272, for R a commutative semiring, in particular a commutative ring): the image of the set of minimal primes under q ↦ zeroLocus q = V(q) is the set of irreducible components. `minimalPrimes R` (Mathlib/RingTheory/Ideal/MinimalPrime/Basic.lean:63) is the set of primes minimal among all primes (minimal over ⊥), the node's minimal primes; `irreducibleComponents` is the node's notion (def-weil-irreducible-components). Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-dimension-at-point-components",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked (line read)"
+}

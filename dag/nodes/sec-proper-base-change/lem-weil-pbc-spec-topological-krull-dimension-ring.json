@@ -1,0 +1,96 @@
+{
+ "id": "lem-weil-pbc-spec-topological-krull-dimension-ring",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-dimension-at-point-components",
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "lem-weil-pbc-smooth-at-generic-point-over-field",
+    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-geometric-regularity-separable-extension",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The topological Krull dimension of the spectrum is the Krull dimension of the ring",
+ "statement": "Let $R$ be a commutative ring and $\\operatorname{Spec}R$ its set of prime ideals with the Zariski topology [def-weil-affine-spectrum]. Then the Krull dimension of the topological space $\\operatorname{Spec}R$ [def-kun-topological-krull-dimension] (the supremum of the lengths of chains of irreducible closed subsets) equals the Krull dimension of the ring $R$ [def-weil-pbc-krull-dimension-ring] (the supremum of the lengths of chains of prime ideals), as elements of $\\{-\\infty,0,1,2,\\ldots,\\infty\\}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Definition Tag 00KE (label definition-Krull, lines 14325-14343): the Krull dimension of R is defined as that of the topological space Spec(R) and 'in other words' as the supremum of lengths of chains of primes, the two agreeing by the inclusion-reversing bijection of Lemma Tag 00ES (label lemma-irreducible, line 4665) recalled at lines 14320-14323; tags verified in stacks-project/tags/tags (00KE,algebra-definition-Krull; 00ES,algebra-lemma-irreducible)"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "topological Krull dimension of the prime spectrum equals the Krull dimension of the ring",
+   "results": "PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim (Mathlib.RingTheory.Spectrum.Prime.Topology), topologicalKrullDim (Mathlib.Topology.KrullDimension), Ring.KrullDimLE, PrimeSpectrum.discreteTopology_iff_finite_and_krullDimLE_zero, Ideal.primeHeight_le_ringKrullDim",
+   "date": "2026-10-10",
+   "verdict": "match: PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim (PrimeSpectrum _)",
+   "results": "PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim (R) [CommSemiring R] : topologicalKrullDim (PrimeSpectrum R) = ringKrullDim R (Mathlib.RingTheory.Spectrum.Prime.Topology)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'topologicalKrullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean | grep -v Topology/KrullDimension.lean",
+   "results": "RingTheory/Spectrum/Prime/Topology.lean:1361 PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; AlgebraicGeometry/Artinian.lean (uses only)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim (project root ~/weil-conjectures-slopmaster2)",
+   "results": "theorem in .lake/packages/mathlib/Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean",
+  "line": 1361,
+  "how": "exact: `theorem PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim [CommSemiring R] : topologicalKrullDim (PrimeSpectrum R) = ringKrullDim R` (lines 1361-1364, proved from the order isomorphism pointsEquivIrreducibleCloseds); topologicalKrullDim is the Mathlib match of def-kun-topological-krull-dimension and ringKrullDim that of def-weil-pbc-krull-dimension-ring, both in WithBot ℕ∞ = {-∞,0,1,...,∞}. Lines read with sed -n 1355,1366p on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-dimension-at-point-components",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked (line read)"
+}
