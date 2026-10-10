@@ -25,37 +25,88 @@
  ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/",
+  "place": "Tags 00OK and 00OY together with the project Mathlib dimension theorem"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "finite surjective morphism of schemes preserves Krull dimension",
-   "results": "No exact scheme-theoretic statement; hits concern finite ring extensions and unrelated dimension results.",
+   "results": "No exact scheme-theoretic statement; hits concern ring Krull dimension and unrelated dimension results.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "Finite, Function.Surjective, ringKrullDim",
-   "results": "Loogle reported unknown identifier; this query did not test the intended proposition.",
+   "results": "Loogle reported unknown identifier for the project extension declaration.",
    "date": "2026-10-11",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
    "query": "finite.*surjective.*dimension|ringKrullDim.*finite Mathlib",
-   "results": "none",
+   "results": "none in the queried Mathlib subdirectory; the project extension is under WeilConjectures/Mathlib.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite surjective morphism of finite type schemes over a field have equal finite topological Krull dimensions",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "topological Krull dimension finite type scheme over field",
+   "results": "FiniteRingKrullDim and ringKrullDim_ne_top; no exact scheme statement.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim_ne_top_of_compactSpace",
+   "results": "unknown identifier",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim_ne_top_of_compactSpace [Mathlib/AlgebraicGeometry]",
+   "results": "none in Mathlib package; declaration exists in WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:193-195.",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.topologicalKrullDim_eq_of_surjective, AlgebraicGeometry.topologicalKrullDim_ne_top_of_compactSpace",
+  "file": "WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:63-68; WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:193-195",
+  "how": "specializes in one line: the IsFinite instance from the finite morphism supplies UniversallyClosed and LocallyQuasiFinite, while finite type over the field supplies LocallyOfFiniteType and CompactSpace for X and Y; apply Scheme.Hom.topologicalKrullDim_eq_of_surjective (QuasiFinite.lean:63-68) for equality and topologicalKrullDim_ne_top_of_compactSpace (FiniteType.lean:193-195) to each structure morphism for finiteness"
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-sc-mult-n-isogeny",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-mult-surjective"
+ "unit": "sk-prop-av-mult-surjective",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-surjective-dimension",
+  "worker": "stage1",
+  "summary": "Classified the item as a Mathlib leaf. The project Mathlib theorem Scheme.Hom.topologicalKrullDim_eq_of_surjective specializes to finite surjective morphisms and gives equality; topologicalKrullDim_ne_top_of_compactSpace gives finiteness for each finite-type scheme over a field.",
+  "blueprint": "The item realizes the finite-surjective dimension clause in the blueprint proof of lem-sc-mult-n-isogeny: 'Since [n] is finite, its fibres have dimension zero, and the dimension formula for the surjective morphism A to H gives dim H = dim A - dim A[n] = dim A.'"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fsd1926",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsd1926 (reviewer sub-agent of L); spot-checked: Leaf read with sed in slopmaster2: Scheme.Hom.topologicalKrullDim_eq_of_surjective (QuasiFinite.lean:59-67; UniversallyClosed+LocallyQuasiFinite+Surjective, inferred from IsFinite) gives equality; topologicalKrullDim_ne_top_of_compactSpace (FiniteType.lean:191-208; LocallyOfFiniteType+CompactSpace from finite type over k) gives finiteness; one declaration per clause, both sorry-free per sorryfree.py; no single declaration states the whole conjunction, so B10 attach does not apply. Reviewer search: grep IsIntegral/integral in mathlib Mathlib/RingTheory/KrullDimension -> no ringKrullDim_eq_of_isIntegral algebra form in this Mathlib (verdict no match); does not change the leaf. Second reading by G1: no missed fault found."
+ }
 }
