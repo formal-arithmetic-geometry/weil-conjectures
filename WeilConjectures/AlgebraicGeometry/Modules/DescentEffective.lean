@@ -7,12 +7,39 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.AffineDescent
 public import WeilConjectures.AlgebraicGeometry.Modules.DescentGlue
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.DescentData
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.Precoverage
 
 /-!
 # Effectivity of fpqc descent for quasi-coherent modules
+
+Let `g i : T' i ⟶ T` generate an fpqc covering sieve and let `D` be a descent datum for
+`modulesPseudofunctor` relative to `g` with quasi-coherent components. We show that `D` comes
+from a quasi-coherent module on `T`, and that a sheaf of modules on `T` whose descent datum has
+quasi-coherent components is quasi-coherent.
+
+## Main statements
+
+- `AlgebraicGeometry.Scheme.Modules.exists_glueVal_eq_of_subfamily`: compatible sections along a
+  subfamily covering an open extend to sections of `descentGlue D`.
+- `AlgebraicGeometry.Scheme.Modules.isIso_toGlue`: a quasi-coherent module is the module of
+  compatible sections of its descent datum.
+- `AlgebraicGeometry.exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology`: effectivity.
+- `AlgebraicGeometry.isQuasicoherent_of_toDescentData_iso_of_mem_fpqcTopology`: quasi-coherence
+  descends.
+
+## Proof
+
+The covering is refined, over every affine open `U` of `T`, by finitely many flat morphisms from
+affine schemes; for this refinement the module `descentGlue` of compatible sections
+(`DescentGlue.lean`) is the candidate. Over `U` it is the module of compatible sections of the
+restricted descent datum (by the extension lemma), and this one is quasi-coherent with the right
+pullbacks by the affine case (`AffineDescent.lean`) and `isIso_toGlue`. The descent datum is
+transported back to the original covering by
+`CategoryTheory.Pseudofunctor.DescentData.nonempty_iso_of_pullFunctor_obj_iso`.
 -/
 
 @[expose] public section
@@ -21,35 +48,6 @@ universe w u
 
 open CategoryTheory Opposite CategoryTheory.Pseudofunctor.LocallyDiscreteOpToCat Bicategory
 
-namespace CategoryTheory.Pseudofunctor.DescentData
-
-variable {C : Type*} [Category* C] {F : LocallyDiscrete Cᵒᵖ ⥤ᵖ Cat}
-  {ι : Type*} {S : C} {X : ι → C} {f : ∀ i, X i ⟶ S}
-
-/-- The restriction of a descent datum `D` relative to `f` along `p : S' ⟶ S`, to a family
-`f' j : X (β j) ⟶ S'` with `f' j ≫ p = f (β j)`: the objects are those of `D`, and the
-comparison morphisms over `q : Y ⟶ S'` are those of `D` over `q ≫ p`. -/
-@[simps]
-def restrict (D : F.DescentData f) {S' : C} (p : S' ⟶ S) {ι' : Type*} (β : ι' → ι)
-    (f' : ∀ j, X (β j) ⟶ S') (h : ∀ j, f' j ≫ p = f (β j)) : F.DescentData f' where
-  obj j := D.obj (β j)
-  hom Y q j₁ j₂ f₁ f₂ hf₁ hf₂ := D.hom (q ≫ p) f₁ f₂ (by rw [← h, ← hf₁, Category.assoc])
-    (by rw [← h, ← hf₂, Category.assoc])
-  pullHom_hom Y' Y g q q' hq j₁ j₂ f₁ f₂ hf₁ hf₂ gf₁ gf₂ hgf₁ hgf₂ :=
-    D.pullHom_hom g (q ≫ p) (q' ≫ p) (by rw [← hq, Category.assoc]) f₁ f₂
-      (by rw [← h, ← hf₁, Category.assoc]) (by rw [← h, ← hf₂, Category.assoc]) gf₁ gf₂ hgf₁ hgf₂
-  hom_self Y q j g hg := D.hom_self _ _ (by rw [← h, ← hg, Category.assoc])
-  hom_comp Y q j₁ j₂ j₃ f₁ f₂ f₃ hf₁ hf₂ hf₃ := D.hom_comp _ _ _ _
-    (by rw [← h, ← hf₁, Category.assoc]) (by rw [← h, ← hf₂, Category.assoc])
-    (by rw [← h, ← hf₃, Category.assoc])
-
-
-/-- A morphism of descent data whose components are isomorphisms is an isomorphism. -/
-lemma isIso_of_isIso_hom {D₁ D₂ : F.DescentData f} (φ : D₁ ⟶ D₂) [∀ i, IsIso (φ.hom i)] :
-    IsIso φ :=
-  (isoMk (fun i ↦ asIso (φ.hom i)) (fun _ q _ _ f₁ f₂ hf₁ hf₂ ↦ φ.comm q f₁ f₂ hf₁ hf₂)).isIso_hom
-
-end CategoryTheory.Pseudofunctor.DescentData
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -775,5 +773,78 @@ theorem exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology {T : Scheme
     first
     | exact Scheme.Modules.isQuasicoherent_pullback (M := (M' : T.Modules)) _
     | exact hD j
+
+/-- **Quasi-coherence descends along fpqc coverings**, for an arbitrary sheaf of modules `M`
+whose descent datum has quasi-coherent components: comparing `M` with the quasi-coherent module
+effectively descending the same descent datum gives a morphism which becomes an isomorphism after
+pullback along a jointly surjective family of flat morphisms, hence is an isomorphism. -/
+theorem isQuasicoherent_of_toDescentData_iso_of_mem_fpqcTopology {T : Scheme.{u}}
+    {ι : Type w} {T' : ι → Scheme.{u}} (g : ∀ i, T' i ⟶ T)
+    (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
+    (D : modulesPseudofunctor.DescentData g)
+    (M : modulesPseudofunctor.obj (.mk (op T)))
+    (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
+    (hD : ∀ i, (D.obj i : (T' i).Modules).IsQuasicoherent) :
+    (M : T.Modules).IsQuasicoherent := by
+  obtain ⟨M₀, hM₀, ⟨e₀⟩⟩ := exists_isQuasicoherent_toDescentData_iso_of_mem_fpqcTopology g hg D hD
+  obtain ⟨e⟩ := hM
+  choose κ Wf w hfin haff hflat hS hcov using fun U : T.affineOpens ↦
+    Scheme.exists_finite_affine_flat_of_mem_fpqcTopology
+      (Scheme.fpqcTopology.pullback_stable U.2.fromSpec hg)
+  choose i k hk using fun a : Σ U, κ U ↦ (Sieve.mem_ofArrows_iff _ _ _).1 (hS a.1 a.2)
+  let F : ∀ a : Σ U, κ U, Wf a.1 a.2 ⟶ T := fun a ↦ w a.1 a.2 ≫ a.1.2.fromSpec
+  have hF : Sieve.ofArrows _ F ∈ Scheme.fpqcTopology T := by
+    have hZ := ofArrows_mem_fpqcTopology_of_isOpenImmersion (fun U : T.affineOpens ↦ U.2.fromSpec)
+      (by simpa only [IsAffineOpen.opensRange_fromSpec] using iSup_affineOpens_eq_top T)
+    refine Scheme.fpqcTopology.transitive hZ _ fun Y h hh ↦ ?_
+    obtain ⟨U, m, rfl⟩ := (Sieve.mem_ofArrows_iff _ _ _).1 hh
+    refine Scheme.fpqcTopology.superset_covering ?_
+      (Scheme.fpqcTopology.pullback_stable m (hcov U))
+    rintro Z h' hh'
+    obtain ⟨j, n, hn⟩ := (Sieve.mem_ofArrows_iff _ _ _).1 hh'
+    refine (Sieve.mem_ofArrows_iff _ _ _).2 ⟨⟨U, j⟩, n, ?_⟩
+    simp only [F, ← Category.assoc, ← hn]
+  have hsurj (x : T) : ∃ a y, F a y = x := by
+    obtain ⟨Y, h, hh, y, rfl⟩ := Scheme.exists_mem_of_mem_fpqcTopology hF x
+    obtain ⟨a, n, rfl⟩ := (Sieve.mem_ofArrows_iff _ _ _).1 hh
+    exact ⟨a, n y, rfl⟩
+  have hflat' (a : Σ U, κ U) : Flat (F a) := by
+    have := hflat a.1 a.2
+    dsimp only [F]
+    infer_instance
+  let P := Pseudofunctor.DescentData.pullFunctor modulesPseudofunctor (f := g) (p := 𝟙 T)
+    (f' := F) (p' := k) (by cat_disch)
+  let E (N : modulesPseudofunctor.obj (.mk (op T))) :
+      (modulesPseudofunctor.toDescentData F).obj N ≅
+        P.obj ((modulesPseudofunctor.toDescentData g).obj N) :=
+    ((Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso modulesPseudofunctor
+      (f := g) (p := 𝟙 T) (f' := F) (p' := k) (by cat_disch)).app N ≪≫
+      (modulesPseudofunctor.toDescentData F).mapIso
+        ((Cat.Hom.toNatIso (modulesPseudofunctor.mapId _)).app N)).symm
+  let φ := E M ≪≫ P.mapIso (e ≪≫ e₀.symm) ≪≫ (E M₀).symm
+  have := isIso_toGlue hF (Iso.refl ((modulesPseudofunctor.toDescentData F).obj M₀))
+  let α : (M : T.Modules) ⟶ M₀ :=
+    toGlue φ.hom ≫ inv (toGlue (Iso.refl ((modulesPseudofunctor.toDescentData F).obj M₀)).hom)
+  have hα (a : Σ U, κ U) : IsIso ((pullback (F a)).map α) := by
+    have h₀ := pullback_map_toGlue_comp_glueCounit
+      (Iso.refl ((modulesPseudofunctor.toDescentData F).obj M₀)).hom a
+    have h₁ := pullback_map_toGlue_comp_glueCounit φ.hom a
+    have hc : IsIso (glueCounit ((modulesPseudofunctor.toDescentData F).obj M₀) a) := by
+      rw [← IsIso.eq_inv_comp] at h₀
+      rw [h₀]
+      have : IsIso ((Iso.refl ((modulesPseudofunctor.toDescentData F).obj M₀)).hom.hom a) :=
+        (inferInstance : IsIso (𝟙 _))
+      infer_instance
+    have : IsIso (φ.hom.hom a) := ⟨φ.inv.hom a,
+      congrArg (fun ψ ↦ Pseudofunctor.DescentData.Hom.hom ψ a) φ.hom_inv_id,
+      congrArg (fun ψ ↦ Pseudofunctor.DescentData.Hom.hom ψ a) φ.inv_hom_id⟩
+    have : IsIso ((pullback (F a)).map (toGlue φ.hom)) := by
+      rw [← IsIso.eq_comp_inv] at h₁
+      rw [h₁]
+      infer_instance
+    rw [Functor.map_comp]
+    infer_instance
+  have := Scheme.Modules.isIso_of_isIso_pullback_map F hsurj α hα
+  exact isQuasicoherent_of_iso (asIso α).symm
 
 end AlgebraicGeometry

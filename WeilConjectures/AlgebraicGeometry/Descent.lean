@@ -134,7 +134,7 @@ theorem isQuasicoherent_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Schem
     (hM : Nonempty ((modulesPseudofunctor.toDescentData g).obj M ≅ D))
     (hD : ∀ i, (D.obj i : (T' i).Modules).IsQuasicoherent) :
     (M : T.Modules).IsQuasicoherent :=
-  sorry
+  isQuasicoherent_of_toDescentData_iso_of_mem_fpqcTopology g hg D M hM hD
 
 /-- **Finite presentation descends along an fpqc covering.**
 
