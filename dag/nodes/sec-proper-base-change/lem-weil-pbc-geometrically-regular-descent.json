@@ -15,9 +15,35 @@
   "lem-weil-pbc-regular-ring-faithfully-flat-descent",
   "lem-weil-pbc-flat-module-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a finite purely inseparable field extension k'/k [def-weil-pbc-finite-purely-inseparable-extension]. Since A -> B is faithfully flat, the public base-change lemma [lem-weil-pbc-faithfully-flat-base-change] applied to A -> B and k -> k' gives a faithfully flat map A tensor_k k' -> B tensor_k k'. Geometric regularity of B means that B tensor_k k' is a regular ring by [def-weil-pbc-g-ring] and [def-weil-regular-scheme]. Regularity descends along this faithfully flat map by [lem-weil-pbc-regular-ring-faithfully-flat-descent], so A tensor_k k' is regular. As k'/k was arbitrary, [def-weil-pbc-g-ring] gives that A is geometrically regular over k.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "def-weil-pbc-g-ring",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-ring-faithfully-flat-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07NH (lemma-geometrically-regular-descent), line 47166 and its proof: finite purely inseparable base change, faithful flatness after base change (Tags 00HI and 00FI), and descent of regularity (Tag 07NG)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "def-weil-pbc-g-ring",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-ring-faithfully-flat-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07NH (lemma-geometrically-regular-descent), line 47166"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +68,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +88,23 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-geometrically-regular-descent",
+  "worker": "stage1",
+  "summary": "Split the Stacks Project proof of Algebra Lemma Tag 07NH into its finite purely inseparable base-change step. For each finite purely inseparable extension k'/k, faithful flatness of A tensor_k k' -> B tensor_k k' is supplied by the new public node lem-weil-pbc-faithfully-flat-base-change, whose source chain is Tags 00HI, 00FI, and 00HQ. The definition of geometric regularity supplies regularity of B tensor_k k', and Tag 07NG, represented by lem-weil-pbc-regular-ring-faithfully-flat-descent, descends regularity to A tensor_k k'. The arbitrary-extension conclusion is exactly the definition in def-weil-pbc-g-ring. No Mathlib declaration captures the full geometric-regularity descent statement.",
+  "checks": [
+   "The new child is unsplit and statement-only; its created.item is this item.",
+   "Every proof step cites public DAG nodes and the Stacks source tags carried by those nodes.",
+   "Proof dependencies equal the union of the step uses."
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: one step: base change of the faithfully flat map along k -> k' (new unsplit node, 00HI/00HQ), regularity of B tensor k' by definition, descent by the 07NG node; tag 07NH verified"
+ }
 }
