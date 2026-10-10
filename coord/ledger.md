@@ -2336,3 +2336,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:07 L: merged deliver/K1/thm-sp-half-plane-convergence (reviewer FIX; first push; new nodes: 0)
 - 19:07 L: merged deliver/J1/lem-weil-pbc-gm-strict-henselization-stalk-formula (reviewer PASS; first push; new nodes: 2)
 - 19:08 L: merged deliver/G1/lem-pc-derived-pullback-tensor-qcoh (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 19:08 L: merged deliver/G1/lem-sp-couple-morphism (reviewer FIX+NODE(1); first push; new nodes: 2)

@@ -3,44 +3,106 @@
  "blueprint": {
   "is": "lem-sp-couple-morphism",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Morphisms of couples give morphisms of spectral sequences",
- "statement": "A morphism $(t_D,t_E):(D,E,\\alpha,f,g)\\to(D',E',\\alpha',f',g')$ of exact\ncouples [def-sp-exact-couple] (two maps compatible with all structure maps)\ninduces, for every $r$, a morphism $E_r\\to E'_r$ of the spectral sequences,\ncompatible with the differentials. If both couples satisfy the hypotheses of\n[thm-sp-half-plane-convergence], then the map $t_D:D^{0,n}\\to D'^{0,n}$ of\ntheir canonical abutments respects the filtrations\n[def-sp-filtration] constructed there, and induces $t_E$ on the associated\ngraded pieces.",
+ "statement": "Let $(D,E,\\alpha,f,g)$ and $(D',E',\\alpha',f',g')$ be exact couples [def-sp-exact-couple] in the same abelian category. A morphism of exact couples is a pair of maps $t_D:D\\to D'$ and $t_E:E\\to E'$ preserving bidegrees and satisfying $t_D\\alpha=\\alpha't_D$, $t_Df=f't_E$, and $t_Eg=g't_D$. Such a morphism induces, for every $r$, a morphism $E_r\\to E'_r$ of the spectral sequences, compatible with the differentials. If both couples satisfy the hypotheses of [thm-sp-half-plane-convergence], then for every total degree $n$ the map $t_D:D^{0,n}\\to D'^{0,n}$ of their canonical abutments respects the filtrations [def-sp-filtration] constructed there, and the induced map $\\operatorname{gr}^pA^n\\to\\operatorname{gr}^pA'^n$ on the associated graded pieces is, under the identifications $E_\\infty^{p,n-p}\\cong\\operatorname{gr}^pA^n$ of [thm-sp-half-plane-convergence], the map $E_\\infty\\to E'_\\infty$ [def-sp-convergence] induced by $t_E$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-couple-morphism.md",
   "place": "node lem-sp-couple-morphism, order 513"
  },
  "stmt_deps": [
   "def-sp-exact-couple",
+  "def-sp-filtration",
   "thm-sp-half-plane-convergence",
-  "def-sp-filtration"
+  "def-sp-convergence"
  ],
  "proof": [
   {
-   "text": "The derived couple construction is functorial in the couple\n([def-sp-exact-couple]): $t_D$ and $t_E$ induce maps on $D'$ and $E'$\ncommuting with the induced structure maps; iterating gives maps on all $E_r$,\ncompatible with the differentials $d_r=g_r\\circ f_r$. At infinity $t_E$\nrestricts to $Z_\\infty$ and maps $B_\\infty$ into $B'_\\infty$, giving a map on\n$E_\\infty$ by [def-sp-convergence]. Under the hypotheses of\n[thm-sp-half-plane-convergence], the map on abutments is already supplied by\n$t_D^{0,n}$. Commutation with every power of $\\alpha$ sends\n$\\operatorname{im}(D^{n-q,q}\\to D^{0,n})$ into\n$\\operatorname{im}(D'^{n-q,q}\\to D'^{0,n})$, proving that it preserves the\nimage filtration. The associated graded identification is obtained from the\nsame derived-couple exact sequences, so its map is precisely the one induced\nby $t_E$. All these constructions commute with composition of morphisms of\ncouples.",
+   "text": "By [lem-sp-derived-couple-functoriality], the compatible maps on the derived couples iterate to maps on every $E_r$ commuting with $d_r$, and induce a map on $E_\\infty$ through $Z_\\infty/B_\\infty$.",
    "uses": [
-    "def-sp-exact-couple",
-    "def-sp-convergence",
-    "thm-sp-half-plane-convergence"
+    "lem-sp-derived-couple-functoriality"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spectral-sequences.tex",
+    "place": "Tags 011R and 011T"
+   }
+  },
+  {
+   "text": "Under the hypotheses of [thm-sp-half-plane-convergence], the abutment in total degree $n$ is $A^n=D^{0,n}$ and its filtration is $F^pA^n=G_{n-p}A^n=\\operatorname{im}(\\alpha^p:D^{p,n-p}\\to D^{0,n})$ for $0\\leq p\\leq n$ (and $F^pA^n=A^n$ for $p\\leq0$, $F^pA^n=0$ for $p>n-a$ by the vanishing of $D^{p,n-p}$). Commutation with every power of $\\alpha$ gives $t_D^{0,n}(F^pA^n)\\subseteq F'^pA'^n$, so $t_D^{0,n}$ is filtration preserving.",
+   "uses": [
+    "thm-sp-half-plane-convergence",
+    "def-sp-exact-couple"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-couple-morphism.md",
+    "place": "## Proof"
+   }
+  },
+  {
+   "text": "The associated graded map of a filtration-preserving morphism is obtained by restricting to each $F^p$ and passing to the quotient by $F^{p+1}$. By [lem-sp-half-plane-graded-canonical], for $q=n-p$ the identification $E_\\infty^{p,q}\\cong\\operatorname{gr}^pA^n$ of [thm-sp-half-plane-convergence] is induced by the two epimorphisms $\\gamma:D^{p,q}\\to E_\\infty^{p,q}$ (from $g$) and $\\varphi:D^{p,q}\\to\\operatorname{gr}^pA^n$ (from $\\alpha^p$), which have the same kernel; likewise for the primed couple. For $y\\in D^{p,q}$, $t_D\\alpha^py=\\alpha'^pt_Dy$ and $t_Egy=g't_Dy$, so $\\operatorname{gr}(t_D)\\circ\\varphi=\\varphi'\\circ t_D$ and $t_\\infty\\circ\\gamma=\\gamma'\\circ t_D$, where $t_\\infty$ is the map on $E_\\infty=Z_\\infty/B_\\infty$ [def-sp-convergence] from Step 1 [lem-sp-derived-couple-functoriality]. Since $\\varphi$ is an epimorphism, $\\operatorname{gr}(t_D)$ corresponds to $t_\\infty$ under the identifications.",
+   "uses": [
+    "thm-sp-half-plane-convergence",
+    "lem-sp-half-plane-graded-canonical",
+    "lem-sp-derived-couple-functoriality",
+    "def-sp-filtration",
+    "def-sp-convergence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-couple-morphism.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
   "def-sp-exact-couple",
-  "def-sp-convergence",
-  "thm-sp-half-plane-convergence"
+  "def-sp-filtration",
+  "thm-sp-half-plane-convergence",
+  "lem-sp-derived-couple-functoriality",
+  "lem-sp-half-plane-graded-canonical",
+  "def-sp-convergence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-couple-morphism.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "morphisms of exact couples induce morphisms of spectral sequences",
+   "results": "HomologicalComplex.HomologySequence.mapComposableArrows₅ and related homology-sequence maps; no exact-couple declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory spectral sequence morphism exact couple",
+   "results": "0 hits; unknown identifier CategoryTheory",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HomologySequence|SpectralSequence|ExactCouple Mathlib/Algebra/Homology",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism of exact couples induces morphism of spectral sequences",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -65,5 +127,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-couple-morphism",
+  "worker": "stage1",
+  "summary": "Checked that no Lean declaration states this item. Split the imported argument by isolating functoriality of derived exact couples and the induced maps on all pages and E-infinity; filtration preservation and the associated-graded identification are direct quotient arguments using the convergence theorem and exact-couple definitions.",
+  "blueprint": "Realizes the single proof paragraph: derived-couple functoriality, page and E-infinity maps, filtration preservation, and compatibility with associated graded pieces.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cpm1907",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpm1907 (reviewer sub-agent of L); spot-checked: Bidegrees vs merged def-sp-exact-couple (type-s recursion), def-sp-convergence, thm-sp-half-plane-convergence; no cycle (lem-sp-derived-couple-exact deps are def-sp-abelian, def-sp-exact-couple, lem-sp-abelian-refinements); Mathlib SpectralSequence.Hom (Basic.lean:52) only defines the target notion, no exact couples in Mathlib, so no leaf for the page clause. FIX more, RETURN less: (1) C4 Step 2 misquoted the filtration as im(D^{n-p,p}) (that is G_p, increasing); corrected to F^p=G_{n-p}=im(alpha^p:D^{p,n-p}->D^{0,n}); (2) C4 Step 3 used naturality of the E_infty~gr iso, which thm-sp-half-plane-convergence states only abstractly; added statement-only node lem-sp-half-plane-graded-canonical (iso induced by g and alpha^p, Tags 011T/012F; LeanFinder no match) and made the comparison explicit; (3) item statement said the graded map is t_E (a map on E_2); restated as the E_infty map induced by t_E, stmt_deps + def-sp-convergence (E7: type correction). Also closed a missing $ in Step 1. Second reading missed (1)-(3).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
