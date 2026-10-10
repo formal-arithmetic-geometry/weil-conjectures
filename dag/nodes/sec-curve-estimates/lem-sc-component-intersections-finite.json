@@ -27,9 +27,55 @@
   "def-kun-topological-krull-dimension",
   "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The irreducible components of Y form a finite family by [lem-weil-pbc-noetherian-finitely-many-components].",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 0BA8, finiteness of irreducible components"
+   }
+  },
+  {
+   "text": "Fix distinct components $Z_i\\neq Z_j$. By [lem-sc-scheme-sober] $Z_i$ has a generic point $\\eta_i$ with $Z_i=\\overline{\\{\\eta_i\\}}$, and generic points are unique; hence two distinct points of $Y$ have distinct closures, so $Y$ is Kolmogorov, and so is its subspace $Z_i$ (an open of $Z_i$ is the trace of an open of $Y$). The point $\\eta_i$ is not in $Z_j$, since otherwise $Z_i=\\overline{\\{\\eta_i\\}}\\subseteq Z_j$, and maximality of the irreducible subset $Z_i$ would give $Z_i=Z_j$. Thus $U=Z_i\\setminus Z_j$ is a nonempty open subset of $Z_i$, which is irreducible [def-weil-irreducible-components], and $\\dim Z_i\\le\\dim Y\\le1$ because a chain of irreducible closed subsets of the closed subspace $Z_i$ is such a chain in $Y$ [def-kun-topological-krull-dimension]. Every point $x$ of $Z_i\\cap Z_j$ lies outside $U$, so [lem-sc-dim-one-point-outside-open-closed], applied to $Z_i$, says that $\\{x\\}$ is closed in $Z_i$; because $Z_i$ is closed in $Y$, $\\{x\\}$ is closed in $Y$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sc-dim-one-point-outside-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NX proof, first paragraph: distinct components have proper intersections and points in them are closed; the generic-point argument is written out here"
+   }
+  },
+  {
+   "text": "The intersection $Z_i\\cap Z_j$ is a closed subset of $Y$ and all its points are closed in $Y$ by step 2. Therefore [lem-sc-noetherian-closed-points-finite] makes $Z_i\\cap Z_j$ finite. Taking the finite union over the finite family of ordered pairs $i\\neq j$ (step 1) gives a finite set $T$ of closed points. Every point $y\\in Y$ lies on some irreducible component by [lem-sc-irreducible-components-cover]; if $y\\notin T$ lay on two distinct components, it would belong to their intersection and hence to $T$; therefore $y$ lies on exactly one component.",
+   "uses": [
+    "lem-sc-noetherian-closed-points-finite",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09NX proof, first paragraph: T is finite and consists of closed points, and points outside T lie on a unique component"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-scheme-sober",
+  "lem-sc-dim-one-point-outside-open-closed",
+  "lem-sc-noetherian-closed-points-finite",
+  "lem-sc-irreducible-components-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NX (lemma-dim-1-noetherian-reduced-separated-has-ample), proof, first paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -54,12 +100,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-reduced-dim-le-one-ample",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-component-intersections-finite",
+  "worker": "stage1",
+  "summary": "Split the Stacks 09NX first-paragraph argument into finiteness of the component family, closedness of every point in a proper intersection using the existing dimension-one point lemma, and finiteness of a closed subset all of whose points are closed using a new supporting node. The final finite-union and uniqueness argument is written explicitly.",
+  "blueprint": "The three steps realize the blueprint ancestor lem-sc-pic-proper-ntorsion proof place recorded in blueprint.from.place: finite closed intersections and the unique component away from T.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "The Stacks route needs finiteness of the irreducible-component family; this is a generic Noetherian theorem supplied by an existing Mathlib leaf and no node in this curve-estimate unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-dim-one-point-outside-open-closed",
+  "lem-weil-pbc-noetherian-finitely-many-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cif",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cif (reviewer sub-agent of L); spot-checked: Source Varieties 09NX (varieties-lemma-dim-1-noetherian-reduced-separated-has-ample), proof first paragraph: Noetherian, dim 1, finitely many components Z_i, T = union of Z_i cap Z_j (i ne j) finite of closed points, x not in T on a unique Z_i; the item statement agrees hypothesis by hypothesis (dim <= 1 topological). Step 1 carried by lem-weil-pbc-noetherian-finitely-many-components (Mathlib leaf finite_irreducibleComponents_of_isNoetherian, declared tool use, accepted). Step 2 carried by lem-sc-dim-one-point-outside-open-closed (irreducible, Kolmogorov, dim <= 1, point outside nonempty open is closed; checked true; off-unit sk-prop-cd generic topological tool, added via --tool-uses); dim inheritance and closedness transfer elementary from def-kun-topological-krull-dimension. Step 3 carried by the new node lem-sc-noetherian-closed-points-finite (statement checked true: components of the closed subset are finitely many by 0BA8, each irreducible closed with all points closed is a singleton since schemes are T0; TeX, created.item correct, three searches, no slopmaster2 declaration states it, blueprint search found nothing). Small cases: empty scheme, a point, an integral curve, two lines meeting in a point, point disjoint union curve. FIX more, RETURN less: (1) C1 step 2 used existence of generic points and the Kolmogorov property of schemes with no node: cite lem-sc-scheme-sober (existence and uniqueness of generic points, which gives T0) and say why Z_i is Kolmogorov; (2) C1 step 3 used that every point lies on some irreducible component with no node: cite lem-sc-irreducible-components-cover. dag/nodes/sec-curve-estimates/lem-sc-component-intersections-finite.json: proof[1].text, proof[1].uses, proof[2].text, proof[2].uses, proof_deps: the two citations added and the step texts rewritten in TeX (unicode eta, <=, ne removed). Start Sat Oct 10 03:14:15 PM UTC 2026, end Sat Oct 10 03:15:28 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }

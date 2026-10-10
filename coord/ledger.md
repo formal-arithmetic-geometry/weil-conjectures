@@ -1752,3 +1752,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:14 L: merged deliver/H1/lem-exc-rg-discrete-modules-functorial-injective-embeddings (reviewer PASS; first push; new nodes: 3)
 - 15:14 L: merged deliver/E1/lem-sc-glue-component-line-bundles (reviewer FIX; first push; new nodes: 2)
 - 15:15 L: merged deliver/M1/lem-sc-local-splitting-finite-free (reviewer PASS; first push; new nodes: 1)
+- 15:15 L: merged deliver/H1/lem-sc-component-intersections-finite (reviewer FIX; first push; new nodes: 1)
