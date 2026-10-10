@@ -15,9 +15,123 @@
   "def-weil-finite-integral-morphism",
   "def-weil-pbc-fibre-degree-bound"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The fibre of $f_T$ is a base change of the fibre of $f$.* Let $g':X_T\\to X$ be the first projection, $r:\\kappa(s)\\to\\kappa(t)$ the map induced by $g$ on residue fields, $\\pi:X_s\\to\\operatorname{Spec}\\kappa(s)$ and $\\pi':(X_T)_t\\to\\operatorname{Spec}\\kappa(t)$ the structure morphisms of the fibres. By [lem-weil-pbc-fibre-of-base-change] (applied to $f$, $g$, $S'=T$, $s'=t$) there is a morphism $h:(X_T)_t\\to X_s$ with $\\pi\\circ h=\\operatorname{Spec}(r)\\circ\\pi'$ such that $((X_T)_t,h,\\pi')$ is a fibre product $X_s\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(t)$ of $\\pi$ and $\\operatorname{Spec}(r)$. (This is the identity $X_k=\\operatorname{Spec}(k)\\times_{\\operatorname{Spec}\\kappa(y)}X_y$ of the source, for $k=\\kappa(t)$.)",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339"
+   }
+  },
+  {
+   "text": "*The fibre $X_s$ is $\\operatorname{Spec}B$ with $\\dim_{\\kappa(s)}B=d$.* By hypothesis $\\pi$ is finite. By [lem-weil-pbc-finite-over-field-affine-finite-dim] (with $k=\\kappa(s)$, $T=X_s$, $t=\\pi$), $B=\\Gamma(X_s,\\mathcal O_{X_s})$, a $\\kappa(s)$-algebra through $\\alpha:\\kappa(s)=\\Gamma(\\operatorname{Spec}\\kappa(s),\\mathcal O)\\to B$ induced by $\\pi$, is finite-dimensional over $\\kappa(s)$, and the canonical morphism $\\phi:X_s\\to\\operatorname{Spec}B$ is an isomorphism over $\\operatorname{Spec}\\kappa(s)$: $\\operatorname{Spec}(\\alpha)\\circ\\phi=\\pi$. By the definition of the degree [def-weil-pbc-fibre-degree-bound], $d=\\dim_{\\kappa(s)}B$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "def-weil-pbc-fibre-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339"
+   }
+  },
+  {
+   "text": "*Replacing $X_s$ by $\\operatorname{Spec}B$.* The triple $((X_T)_t,\\phi\\circ h,\\pi')$ is a fibre product of $\\operatorname{Spec}(\\alpha):\\operatorname{Spec}B\\to\\operatorname{Spec}\\kappa(s)$ and $\\operatorname{Spec}(r)$ [def-pc-fibre-product]: it commutes, since $\\operatorname{Spec}(\\alpha)\\circ\\phi\\circ h=\\pi\\circ h=\\operatorname{Spec}(r)\\circ\\pi'$ (steps 1, 2); and given a scheme $W$ with $a:W\\to\\operatorname{Spec}B$, $b:W\\to\\operatorname{Spec}\\kappa(t)$ and $\\operatorname{Spec}(\\alpha)\\circ a=\\operatorname{Spec}(r)\\circ b$, the pair $(\\phi^{-1}\\circ a,b)$ satisfies $\\pi\\circ\\phi^{-1}\\circ a=\\operatorname{Spec}(\\alpha)\\circ a=\\operatorname{Spec}(r)\\circ b$, so by step 1 there is exactly one $w:W\\to(X_T)_t$ with $h\\circ w=\\phi^{-1}\\circ a$ and $\\pi'\\circ w=b$, i.e. exactly one with $\\phi\\circ h\\circ w=a$ and $\\pi'\\circ w=b$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339"
+   }
+  },
+  {
+   "text": "*The fibre is $\\operatorname{Spec}(B\\otimes_{\\kappa(s)}\\kappa(t))$ over $\\kappa(t)$.* Let $C=B\\otimes_{\\kappa(s)}\\kappa(t)$, the tensor product over $\\kappa(s)$ for the structure maps $\\alpha$ and $r$, and $\\psi:\\kappa(t)\\to C$, $\\mu\\mapsto1\\otimes\\mu$. By [lem-weil-pbc-fibre-product-affine-spectra] (with $R=\\kappa(s)$, $A=B$, and $\\kappa(t)$ in place of its $B$), $\\operatorname{Spec}C$ with the projections $\\operatorname{Spec}(b\\mapsto b\\otimes1)$ and $\\operatorname{Spec}(\\psi)$ is a fibre product of $\\operatorname{Spec}(\\alpha)$ and $\\operatorname{Spec}(r)$. By step 3 and the uniqueness of fibre products up to a unique isomorphism compatible with the projections [def-pc-fibre-product], there is an isomorphism of schemes $\\theta:(X_T)_t\\to\\operatorname{Spec}C$ with $\\operatorname{Spec}(\\psi)\\circ\\theta=\\pi'$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339"
+   }
+  },
+  {
+   "text": "*$\\dim_{\\kappa(t)}C=d$.* The field homomorphism $r$ makes $\\kappa(t)$ an extension field of $\\kappa(s)$, and $C=B\\otimes_{\\kappa(s)}\\kappa(t)$ with the $\\kappa(t)$-module structure through $\\psi$ ($\\lambda\\cdot(b\\otimes\\mu)=(1\\otimes\\lambda)(b\\otimes\\mu)=b\\otimes\\lambda\\mu$) is the extension of scalars of the $\\kappa(s)$-vector space $B$ to $\\kappa(t)$ [def-weil-vector-space-scalar-extension]. If $b_1,\\ldots,b_d$ is a $\\kappa(s)$-basis of $B$ (step 2), then $b_1\\otimes1,\\ldots,b_d\\otimes1$ is a $\\kappa(t)$-basis of $C$ by that node; so $\\dim_{\\kappa(t)}C=d$, and in particular $C$ is a finitely generated $\\kappa(t)$-module through $\\psi$ [def-weil-finitely-generated-module], i.e. $\\psi$ is finite.",
+   "uses": [
+    "def-weil-vector-space-scalar-extension",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339"
+   }
+  },
+  {
+   "text": "*$(X_T)_t$ is finite over $\\kappa(t)$.* By step 5 and [lem-weil-pbc-spec-finite-ring-map-finite], $\\operatorname{Spec}(\\psi):\\operatorname{Spec}C\\to\\operatorname{Spec}\\kappa(t)$ is finite [def-weil-finite-integral-morphism]; the isomorphism $\\theta$ is finite [lem-weil-pbc-isomorphism-finite]; so $\\pi'=\\operatorname{Spec}(\\psi)\\circ\\theta$ (step 4) is finite [lem-weil-pbc-finite-composition]. Thus $(X_T)_t$ is finite over $\\kappa(t)$ in the sense of [def-weil-pbc-fibre-degree-bound].",
+   "uses": [
+    "lem-weil-pbc-spec-finite-ring-map-finite",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-isomorphism-finite",
+    "lem-weil-pbc-finite-composition",
+    "def-weil-pbc-fibre-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339"
+   }
+  },
+  {
+   "text": "*The degree of $(X_T)_t$ is $d$.* The degree of $(X_T)_t$ over $\\kappa(t)$ [def-weil-pbc-fibre-degree-bound] is the dimension of $\\Gamma((X_T)_t,\\mathcal O)$ as a $\\kappa(t)$-vector space through $\\pi'^\\sharp\\circ\\varepsilon_{\\kappa(t)}$, where $\\varepsilon_R:R\\to\\Gamma(\\operatorname{Spec}R,\\mathcal O)$ is the canonical isomorphism and $u^\\sharp$ the map induced by a morphism $u$ on global sections. Since $\\pi'=\\operatorname{Spec}(\\psi)\\circ\\theta$, $\\pi'^\\sharp=\\theta^\\sharp\\circ\\operatorname{Spec}(\\psi)^\\sharp$, and $\\theta^\\sharp:\\Gamma(\\operatorname{Spec}C,\\mathcal O)\\to\\Gamma((X_T)_t,\\mathcal O)$ is a ring isomorphism ($\\theta$ is an isomorphism, and taking global sections is functorial). By [lem-weil-pbc-spec-map-global-sections], $\\operatorname{Spec}(\\psi)^\\sharp\\circ\\varepsilon_{\\kappa(t)}=\\varepsilon_C\\circ\\psi$. Hence the ring isomorphism $\\theta^\\sharp\\circ\\varepsilon_C:C\\to\\Gamma((X_T)_t,\\mathcal O)$ satisfies $(\\theta^\\sharp\\circ\\varepsilon_C)\\circ\\psi=\\pi'^\\sharp\\circ\\varepsilon_{\\kappa(t)}$, so it is $\\kappa(t)$-linear, and $\\dim_{\\kappa(t)}\\Gamma((X_T)_t,\\mathcal O)=\\dim_{\\kappa(t)}C=d$ by step 5. (Source: 'for $X_y=\\operatorname{Spec}(B)$ the base change is $\\operatorname{Spec}(B\\otimes k)$ with $\\dim_k=\\dim_{\\kappa(y)}B$'.)",
+   "uses": [
+    "def-weil-pbc-fibre-degree-bound",
+    "lem-weil-pbc-spec-map-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15339"
+   }
+  },
+  {
+   "text": "*The bound is preserved.* Suppose $n$ bounds the degrees of the fibres of $f$ [def-weil-pbc-fibre-degree-bound]. Let $t\\in T$ and $s=g(t)$. Then $X_s$ is finite over $\\kappa(s)$ of degree $d\\le n$, so by steps 6 and 7 $(X_T)_t$ is finite over $\\kappa(t)$ of degree $d\\le n$. As $t$ was arbitrary, $n$ bounds the degrees of the fibres of $f_T$. This is Lemma 03J7, whose proof the source gives as 'clear from Lemma 03J5'.",
+   "uses": [
+    "def-weil-pbc-fibre-degree-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma Tag 03J7 (lemma-base-change-universally-bounded) and its proof, line 15422"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "def-weil-pbc-fibre-degree-bound",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-vector-space-scalar-extension",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-spec-finite-ring-map-finite",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-isomorphism-finite",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-spec-map-global-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, proof of Lemma Tag 03J5 (lemma-characterize-universally-bounded, line 15339: 'X_k = Spec(k) x_{Spec(kappa(y))} X_y') and Lemma Tag 03J7 (lemma-base-change-universally-bounded, line 15422); the steps from 'X_s = Spec B' to 'dim_k(B tensor k) = dim B' are written out by the worker, as the source states them in one line"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,10 +160,45 @@
    "results": "AlgebraicGeometry.Scheme.Hom.finrank_pullback_snd (FlatRank.lean:157): for f finite and flat, finrank (pullback.snd f g) y = finrank f (g y); it needs f finite flat globally (here only the fibre X_s is finite) and identifies Hom.finrank with the fibre degree only through FlatRank's own definition; applying it to X_s -> Spec kappa(s) needs the identification (X_T)_t = X_s x_{kappa(s)} kappa(t) (lem-weil-pbc-fibre-of-base-change), so more than one line",
    "date": "2026-10-10",
    "verdict": "no match (generalization in a different setting, not a one-line specialization)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "fiber of the base change of a morphism of schemes is finite over the residue field with the same degree as the original fiber",
+   "results": "IsFinite.instIsStableUnderBaseChangeScheme (Morphisms.Finite), IsFinite.finite_preimage_singleton, instFiniteCarrier...FiberOfIsFinite, Scheme.Hom.fiber, Scheme.Hom.fiberOverSpecResidueField (Fiber), Algebra.QuasiFinite.baseChange, instLocallyQuasiFiniteOfIsFinite: no degree statement for fibres",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finrank of global sections of the fiber of pullback morphism at a point equals finrank of the fiber of original morphism at the image point",
+   "results": "Module.rankAtStalk_eq, Module.rankAtStalk_baseChange, Module.rankAtStalk_eq_finrank_tensorProduct (RingTheory.Spectrum.Prime.FreeLocus; flat finite modules over rings), Scheme.Hom.fiber, Scheme.Pullback.ofPointTensor, Triplet.tensor, Scheme.Hom.asFiber: no scheme statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.IsFinite",
+   "results": "instIsFiniteFiberToSpecResidueFieldOfLocallyQuasiFiniteOfQuasiCompact, locallyQuasiFinite_iff_isFinite_fiber (Morphisms.QuasiFinite): finiteness of fibres, no degree",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.Scheme.Hom.finrank (project ~/weil-conjectures-slopmaster2)",
+   "results": "Mathlib: none of the right shape; source repository (not Mathlib): Scheme.Hom.fiberDegree_of_isPullback (WeilConjectures/AlgebraicGeometry/Morphisms/FiberDegree.lean:330, sorry-free per the sorry map) for g with IsAffineHom globally, and Scheme.Hom.nonempty_algEquiv_tensorProduct_Γ_of_isPullback (line 148); index 'unavailable', so not a proof of absence",
+   "date": "2026-10-10",
+   "verdict": "no Mathlib match; source-repository lemma for globally affine morphisms only (hypothesis stronger than the node's)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn finrank Mathlib/AlgebraicGeometry | grep -iE 'fiber|pullback|baseChange'; grep -rn finrank_baseChange Mathlib/; sed -n 355,380p Mathlib/LinearAlgebra/Dimension/Constructions.lean; sed -n 150,165p Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean: IsAffine.finrank_of_isPullback (61, private), Scheme.Hom.finrank_pullback_snd (157, needs f flat and finite globally); Module.finrank_baseChange (LinearAlgebra/Dimension/Constructions.lean:379, finrank R (R ⊗[S] M') = finrank S M'), the linear-algebra ingredient of step 5",
+   "date": "2026-10-10",
+   "verdict": "no match (ingredients only; no statement for a single finite fibre)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +218,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fibre-degree-base-change",
+  "worker": "stage1",
+  "summary": "Read Stacks Morphisms 03J4 (definition-universally-bounded), 03J5 and its proof (line 15339), 03J7 (line 15422), the definition node def-weil-pbc-fibre-degree-bound, and how the citer lem-weil-pbc-flat-fp-lqf-bounded-stratification uses the item (steps 0, 3, 4, 6, 8, 9: finiteness of (X_T)_t and degree equal to that of X_{g(t)}), which the statement gives. Statement kept. Proof in 8 steps following 03J5: (X_T)_t is the base change of X_s along Spec kappa(t) -> Spec kappa(s) (lem-weil-pbc-fibre-of-base-change); X_s = Spec B, dim B = d (lem-weil-pbc-finite-over-field-affine-finite-dim); corner replacement by the universal property; (X_T)_t = Spec(B tensor kappa(t)) over kappa(t) (lem-weil-pbc-fibre-product-affine-spectra and uniqueness of fibre products); dimension by a basis tensored up (def-weil-vector-space-scalar-extension); finiteness (lem-weil-pbc-spec-finite-ring-map-finite, -isomorphism-finite, -finite-composition); global sections with their kappa(t)-structure (lem-weil-pbc-spec-map-global-sections); the bound (03J7). Every cited node exists; no new node was needed. Mathlib: no match (searches recorded); the source repository has Scheme.Hom.fiberDegree_of_isPullback (FiberDegree.lean:330, sorry-free) but only for morphisms affine globally, so it is not attached."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Morphisms 03J5/03J7; the fibre is identified with Spec(B tensor kappa(t)) through lem-weil-pbc-fibre-of-base-change, lem-weil-pbc-finite-over-field-affine-finite-dim and lem-weil-pbc-fibre-product-affine-spectra, the dimension through def-weil-vector-space-scalar-extension. No new nodes; no Mathlib match (Scheme.Hom.finrank_pullback_snd needs flatness)."
 }
