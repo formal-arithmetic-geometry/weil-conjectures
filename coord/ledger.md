@@ -2827,3 +2827,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:28 L: merged deliver/E1/lem-pc-global-hom-pullback-adjunction (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 22:28 L: returned deliver/H1/def-nagata-morphism-descent (reviewer RETURN: Reviewer R-nmd2840 (re-push c455ebfe7; points (1)-(4) of R-nmd2748 are addressed in form: explicit F, u(F), union-cover )
 - 22:29 UTC L deleted deliver/K1/def-pc-subfunctor (abandoned after the Mathlib match); notice
+- 22:29 L: merged deliver/J1/lem-weil-l-adic-extension-integers-dvr (reviewer PASS; first push; new nodes: 2)
