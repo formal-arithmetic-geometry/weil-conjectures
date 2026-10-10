@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-sp-if-e1",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Hypercohomology spectral sequence via a Cartan--Eilenberg resolution",
- "statement": "Let $v$ be as in [def-sp-truncation-couple] and let $A^{\\bullet,\\bullet}$ be\na Cartan--Eilenberg resolution of a bounded-below complex $K^\\bullet$: the\nrow $A^{\\bullet,s}$ is an injective resolution\n[def-sp-injective-resolutions] of $K^s$, and the column cohomologies are the\n$\\mathcal H^s(K^\\bullet)$. Then the filtration of the total complex by the\n*second* degree gives the spectral sequence\n\n$$\n E_1^{r,s}=R^rv(K^s)\\Longrightarrow\n \\mathcal H^{r+s}(RvK^\\bullet),\n$$\n\n$d_1:E_1^{r,s}\\to E_1^{r,s+1}$, induced by the differential of $K^\\bullet$,\nand the abutment is the cohomology of the derived functor of $K^\\bullet$,\nindependent of the resolution.\n\nIt also formerly asserted that a Cartan--Eilenberg resolution computes the\nderived functor of a complex, attributing that to\n[def-sp-left-exact-additive], which defines derived functors only on objects,\nand then took independence of the resolution from\n[lem-sp-kinjective-computes], whose own proof appealed back to this theorem.\n$Rv$ on complexes is now defined once, in [def-sp-kinjective-bridge], and both\nsteps are readings of that definition. The dependence runs one way: this\ntheorem uses the lemma, the lemma does not use this theorem.",
+ "statement": "Let $v$ be as in [def-sp-truncation-couple] and let $A^{\\bullet,\\bullet}$ be\na Cartan--Eilenberg resolution of a bounded-below complex $K^\\bullet$: the\nrow $A^{\\bullet,s}$ is an injective resolution\n[def-sp-injective-resolutions] of $K^s$, and the column cohomologies are the\n$\\mathcal H^s(K^\\bullet)$. Then the filtration of the total complex by the\n*second* degree gives the spectral sequence\n\n$$\n E_1^{r,s}=R^rv(K^s)\\Longrightarrow\n \\mathcal H^{r+s}(RvK^\\bullet),\n$$\n\n$d_1:E_1^{r,s}\\to E_1^{r,s+1}$, induced by the differential of $K^\\bullet$,\nand the abutment is the cohomology of the derived functor of $K^\\bullet$,\nindependent of the resolution.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-if-e1.md",
   "place": "node thm-sp-if-e1, order 522",
@@ -29,39 +29,64 @@
  ],
  "proof": [
   {
-   "text": "Each row $A^{\\bullet,s}$ is an injective resolution of $K^s$, so the entries\n$R^rv(K^s)$ are the $r$-th cohomology of $v(A^{\\bullet,s})$ by\n[def-sp-injective-resolutions]. Apply [thm-sp-spectral-object-yields] to the\ntotal complex\n$K^\\bullet:=\\operatorname{Tot}\\bigl(v(A^{\\bullet,\\bullet})\\bigr)$ with its\ndecreasing filtration by the second degree,\n$F^sK^\\bullet:=\\bigoplus_{s'\\geq s}v(A^{\\bullet,s'})$. This is a filtration\nby subcomplexes: the total differential preserves the second degree in its\nfirst summand and raises it in its second, so $\\bigoplus_{s'\\geq s}$ is\nstable. It is bounded in each degree, because a total degree receives only\nfinitely many rows, the complex $K^\\bullet$ being bounded below. The graded\npieces are $\\operatorname{gr}^sK^\\bullet=\\operatorname{Tot}\n\\bigl(v(A^{\\bullet,s})\\bigr)$, so item (a) of that theorem gives\n\n$$\n E_1^{r,s}=H^{r+s}\\bigl(\\operatorname{Tot}(v(A^{\\bullet,s}))\\bigr)\n =H^r\\bigl(v(A^{\\bullet,s})\\bigr)=R^rv(K^s),\n$$\n\nthe middle identification being the standard one for a complex concentrated\nin a single degree of the second index, and the differential $d_1$ being the\nboundary homomorphism of the filtration, which is induced by the differential\nof $K^\\bullet$ because the rows are resolutions of the $K^s$ and the maps\nbetween them come from $K^\\bullet$. Item (b) of the same theorem identifies\nthe abutment with the cohomology of the total complex, $\\mathcal\nH^{r+s}(\\operatorname{Tot}(v(A^{\\bullet,\\bullet})))$.",
+   "text": "Each row $A^{\\bullet,s}$ is an injective resolution\n[def-sp-injective-resolutions] of $K^s$, so by the definition of the right\nderived functors in [def-sp-left-exact-additive] the entries $R^rv(K^s)$ are\nthe $r$-th cohomology of $v(A^{\\bullet,s})$. Apply\n[thm-sp-spectral-object-yields] to the total complex\n$T^\\bullet:=\\operatorname{Tot}\\bigl(v(A^{\\bullet,\\bullet})\\bigr)$ with its\ndecreasing filtration by the second degree,\n$F^sT^\\bullet:=\\bigoplus_{s'\\geq s}v(A^{\\bullet,s'})$. This is a filtration\nby subcomplexes: the total differential preserves the second degree in its\nfirst summand and raises it in its second, so $\\bigoplus_{s'\\geq s}$ is\nstable. It is bounded in each degree $n$: $F^sT^n=T^n$ for $s$ below the\nlowest nonzero degree $s_0$ of $K^\\bullet$, and $F^sT^n=0$ for $s>n$ because\n$A^{r,s}=0$ for $r<0$. The graded pieces are\n$\\operatorname{gr}^sT^\\bullet=v(A^{\\bullet,s})[-s]$. Item (a) of that\ntheorem, whose first index $p$ is the filtration index, gives with $p=s$ and\n$q=r$\n\n$$\n E_1^{s,r}=H^{s+r}\\bigl(v(A^{\\bullet,s})[-s]\\bigr)\n =H^r\\bigl(v(A^{\\bullet,s})\\bigr)=R^rv(K^s),\n$$\n\nand $d_1:E_1^{s,r}\\to E_1^{s+1,r}$ is the boundary homomorphism of\n$0\\to\\operatorname{gr}^{s+1}\\to F^s/F^{s+2}\\to\\operatorname{gr}^s\\to0$, which\nis the map induced on $H^r$ by the vertical maps\n$v(A^{\\bullet,s})\\to v(A^{\\bullet,s+1})$; these lift the differential\n$K^s\\to K^{s+1}$, so $d_1=R^rv(d_K)$. The statement writes this term as\n$E_1^{r,s}$, the filtration index $s$ in the second slot; it is the same\nspectral sequence with the two indices listed in the other order. Item (b) of\nthe same theorem identifies the abutment with the cohomology of the total\ncomplex, $\\mathcal H^{r+s}(T^\\bullet)$, in the sense of\n[def-sp-convergence].",
    "uses": [
     "def-sp-injective-resolutions",
-    "thm-sp-spectral-object-yields"
+    "def-sp-left-exact-additive",
+    "thm-sp-spectral-object-yields",
+    "def-sp-convergence"
    ],
    "elementary": false
   },
   {
-   "text": "It remains to identify that with $\\mathcal H^{r+s}(RvK^\\bullet)$, for the\nderived functor on $\\operatorname{Ch}^+$ of [def-sp-kinjective-bridge]. In\ntotal degree $n$,\n\n$$\n \\operatorname{Tot}(A^{\\bullet,\\bullet})^n=\n \\bigoplus_{r+s=n}A^{r,s},\n$$\n\na *finite* direct sum: the rows are resolutions, so $A^{r,s}=0$ for $r<0$, and\n$K^\\bullet$ is bounded below, so $A^{r,s}=0$ for $s$ below some $s_0$. A\nfinite direct sum of injectives is injective, so\n$\\operatorname{Tot}(A^{\\bullet,\\bullet})$ is a bounded-below complex of\ninjectives, hence K-injective by part (2) of [lem-sp-kinjective-computes]. The\naugmentation $K^\\bullet\\to\\operatorname{Tot}(A^{\\bullet,\\bullet})$ of a\nCartan--Eilenberg resolution of a bounded-below complex is a\nquasi-isomorphism, so it is a K-injective resolution of $K^\\bullet$ and\n\n$$\n RvK^\\bullet\\cong v\\bigl(\\operatorname{Tot}(A^{\\bullet,\\bullet})\\bigr)\n =\\operatorname{Tot}\\bigl(v(A^{\\bullet,\\bullet})\\bigr),\n$$\n\nthe second equality because $v$ is additive\n[def-sp-left-exact-additive] and the total complex is a finite direct sum in\neach degree. Independence of the chosen Cartan--Eilenberg resolution is part\n(1) of [lem-sp-kinjective-computes]: any two K-injective resolutions of\n$K^\\bullet$ give canonically isomorphic values.",
+   "text": "It remains to identify $\\mathcal H^{r+s}(T^\\bullet)$ with $\\mathcal H^{r+s}(RvK^\\bullet)$, for the\nderived functor on $\\operatorname{Ch}^+$ of [def-sp-kinjective-bridge]. In\ntotal degree $n$,\n\n$$\n \\operatorname{Tot}(A^{\\bullet,\\bullet})^n=\n \\bigoplus_{r+s=n}A^{r,s},\n$$\n\na *finite* direct sum: the rows are resolutions, so $A^{r,s}=0$ for $r<0$, and\n$K^\\bullet$ is bounded below, so $A^{r,s}=0$ for $s$ below some $s_0$. A\nfinite direct sum of injectives is injective, so\n$\\operatorname{Tot}(A^{\\bullet,\\bullet})$ is a bounded-below complex of\ninjectives, hence K-injective by part (2) of [lem-sp-kinjective-computes]. The\naugmentation $K^\\bullet\\to\\operatorname{Tot}(A^{\\bullet,\\bullet})$ of a\nCartan--Eilenberg resolution of a bounded-below complex is a\nquasi-isomorphism: its cone is, up to shift, the total complex of the\naugmented double complex (the rows $K^s\\to A^{\\bullet,s}$), whose filtration\nby the second degree is bounded as above and has acyclic graded pieces since\neach augmented row is exact; so item (a) of [thm-sp-spectral-object-yields]\ngives $E_1=0$, and item (b) gives that the cone is acyclic. Hence the\naugmentation is a K-injective resolution of $K^\\bullet$ and\n\n$$\n RvK^\\bullet\\cong v\\bigl(\\operatorname{Tot}(A^{\\bullet,\\bullet})\\bigr)\n =\\operatorname{Tot}\\bigl(v(A^{\\bullet,\\bullet})\\bigr),\n$$\n\nthe second equality because $v$ is additive\n[def-sp-left-exact-additive] and the total complex is a finite direct sum in\neach degree. Independence of the chosen Cartan--Eilenberg resolution is part\n(1) of [lem-sp-kinjective-computes]: any two K-injective resolutions of\n$K^\\bullet$ give canonically isomorphic values.",
    "uses": [
     "def-sp-kinjective-bridge",
     "lem-sp-kinjective-computes",
-    "def-sp-left-exact-additive"
+    "def-sp-left-exact-additive",
+    "thm-sp-spectral-object-yields"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sp-injective-resolutions",
-  "thm-sp-spectral-object-yields",
-  "def-sp-kinjective-bridge",
-  "lem-sp-kinjective-computes",
   "def-sp-left-exact-additive",
-  "thm-sp-double-complex-spectral-sequences"
+  "thm-sp-spectral-object-yields",
+  "def-sp-convergence",
+  "def-sp-kinjective-bridge",
+  "lem-sp-kinjective-computes"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-if-e1.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "hypercohomology spectral sequence from a Cartan-Eilenberg resolution and filtration by the second degree",
+   "results": "CategoryTheory.InjectiveResolution.ofCocomplex; CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ; CochainComplex.isKInjective_of_injective_aux; CategoryTheory.InjectiveResolution.descFSucc; CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ; CategoryTheory.InjectiveResolution.hasHomology; CochainComplex.cm5b; CochainComplex.HomComplex.leftHomologyData'",
+   "date": "2026-10-11",
+   "verdict": "no match; only injective-resolution infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpectralObject, SpectralSequence, HomologicalComplex₂.exists_spectralSequence",
+   "results": "none (unknown identifier SpectralObject)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cartan.Eilenberg|exists_spectralSequence|hypercohomology in Mathlib",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -103,5 +128,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-sp-if-e1",
+  "worker": "stage1",
+  "summary": "Checked the imported two-step proof against the existing prerequisite nodes. No new child node is needed: the spectral-object construction, row-derived-functor identification, K-injective computation, and additive-functor comparison are all stated by cited nodes. Removed the unused double-complex spectral-sequence node from proof_deps, completed blueprint metadata, and recorded Mathlib searches.",
+  "blueprint": "Realizes node thm-sp-if-e1, order 522, proof paragraphs 1 and 2.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ife2103",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ife2103 (reviewer sub-agent of L); spot-checked: Read packet whole; checked E_1 construction cites thm-sp-spectral-object-yields (a),(b) and def-sp-convergence, no exact-couple node, no new nodes restating them; Grothendieck hypotheses via def-sp-truncation-couple. FIX more, RETURN less: (1) C4 Step 1 took R^rv(K^s)=H^r(v(A^{.,s})) from def-sp-injective-resolutions, which does not define R^rv; now cites def-sp-left-exact-additive. (2) C4 Step 1 read item (a) as E_1^{r,s}=H^{r+s}(gr^s) although (a) puts the filtration index first; Step 1 now writes E_1^{s,r}, d_1:E_1^{s,r}->E_1^{s+1,r}=R^rv(d_K), states the transposed labelling of the statement, renames the total complex T to stop the clash with K, makes boundedness explicit, cites def-sp-convergence for (b). (3) C1 Step 2 asserted without citation that the CE augmentation is a quasi-isomorphism; folded the argument (cone = Tot of augmented double complex, bounded filtration by second degree with exact rows, items (a),(b) of thm-sp-spectral-object-yields) and added that node to Step 2 uses; proof_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }
