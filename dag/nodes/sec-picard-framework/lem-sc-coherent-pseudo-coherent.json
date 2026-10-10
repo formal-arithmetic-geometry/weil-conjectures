@@ -23,60 +23,82 @@
   "pqf-def-coherent",
   "def-pur-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every point $x\\in Y$, apply [lem-sc-coherent-affine-free-resolution]. It gives an affine neighbourhood $U$ of $x$ and a bounded-above cochain complex of finite-rank free $\\mathcal O_U$-modules with a quasi-isomorphism to $\\mathcal F|_U[0]$. This is exactly the local condition in [def-pur-pseudo-coherent-complex] for the complex $\\mathcal F[0]$; since the construction works at every point, $\\mathcal F[0]$ is pseudo-coherent on $Y$.",
+   "uses": [
+    "lem-sc-coherent-affine-free-resolution",
+    "def-pur-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08E8, lemma-identify-pseudo-coherent-noetherian, proof (locality on Y)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-coherent-affine-free-resolution",
+  "def-pur-pseudo-coherent-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E8, lemma-identify-pseudo-coherent-noetherian"
+ },
  "mathlib_searches": [
   {
-   "tool": "leansearch",
-   "query": "coherent module Noetherian scheme pseudo-coherent complex",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-11",
-   "verdict": "unavailable"
-  },
-  {
    "tool": "leanfinder",
-   "query": "coherent sheaf pseudo-coherent Noetherian scheme",
-   "results": "No declaration connecting coherent sheaves to pseudo-coherent complexes",
+   "query": "coherent module on Noetherian scheme is pseudo-coherent complex",
+   "results": "SheafOfModules.IsFiniteType and SheafOfModules.IsFinitePresentation in Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators and Quasicoherent; no pseudo-coherent complex theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "SheafOfModules.IsQuasicoherent",
-   "results": "Generic quasi-coherence declarations; no pseudo-coherent complex theorem",
-   "date": "2026-10-11",
-   "verdict": "generalization only"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "pseudo-coherent complexes on Noetherian schemes derived Hom preserves quasi-coherence",
-   "results": "Only generic abelian and sheaf cohomology declarations; no pseudo-coherent theorem",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "coherent sheaf pseudo-coherent Noetherian scheme",
-   "results": "No declaration connecting coherent sheaves to pseudo-coherent complexes",
+   "query": "SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation, PseudoCoherent",
+   "results": "No hits; unknown identifier PseudoCoherent",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "pseudo.?coherent|PseudoCoherent AlgebraicGeometry",
-   "results": "No matching Mathlib declaration in Mathlib/AlgebraicGeometry",
+   "query": "pseudo.?coherent|PseudoCoherent (Mathlib/AlgebraicGeometry)",
+   "results": "No matching declaration in Mathlib/AlgebraicGeometry",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent module on Noetherian scheme is pseudo-coherent complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-finite-pushforward-derived-hom-qcoherent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-coherent-pseudo-coherent",
+  "worker": "stage1",
+  "summary": "The item has no matching sorry-free Lean declaration. Its proof is one local step: the existing node lem-sc-coherent-affine-free-resolution supplies, around every point of a Noetherian scheme, a bounded-above finite-free complex quasi-isomorphic to the coherent sheaf in degree zero, which is precisely the definition of pseudo-coherence. No new nodes were needed.",
+  "blueprint": "Realizes the proof clause 'finite pushforward structure sheaf is pseudo-coherent on a Noetherian base' from blueprint node lem-sc-finite-duality by applying the local finite-free resolution criterion to the coherent sheaf.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cpc2024",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpc2024 (reviewer sub-agent of L); spot-checked: Step 1 cites def-pur-pseudo-coherent-complex itself (08CB/08E5/08E7 wording, no restatement) and lem-sc-coherent-affine-free-resolution, whose Noetherian hypothesis matches Y Noetherian and which builds the finite-free bounded-above resolution locally (C1/C4 ok); proof_deps/stmt_deps consistent; no new nodes; no fault beyond K1's second reading. FIX more, RETURN less: none needed."
+ }
 }
