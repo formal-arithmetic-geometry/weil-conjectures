@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+ "kind": "statement",
+ "title": "The canonical morphism Spec O_{Y,y} -> Y is flat and identifies local rings",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $y\\in Y$, $A=\\mathcal O_{Y,y}$ its local ring [def-weil-pbc-module-stalk] with maximal ideal $\\mathfrak m$, and $Y'=\\operatorname{Spec}A$ [def-weil-affine-spectrum] with closed point $y'=\\mathfrak m$. The *canonical morphism* $c:Y'\\to Y$ is the morphism of schemes corresponding to the identity map $\\mathcal O_{Y,y}\\to A$: for any affine open $V=\\operatorname{Spec}R\\subseteq Y$ containing $y$, with $y$ the prime $\\mathfrak p\\subset R$, the natural map $R_{\\mathfrak p}\\to\\mathcal O_{Y,y}$ [def-weil-pbc-localization-at-prime] is an isomorphism and $c$ is $\\operatorname{Spec}(A)\\cong\\operatorname{Spec}(R_{\\mathfrak p})\\to\\operatorname{Spec}R=V\\subseteq Y$, independent of $V$. Then: (1) $c(y')=y$, and the image $c(Y')$ is the set of generalizations of $y$; in particular $c(Y')\\subseteq V$ for every open $V\\ni y$, i.e. $c^{-1}(V)=Y'$. (2) For every $q\\in Y'$ the local homomorphism $c^\\sharp_q:\\mathcal O_{Y,c(q)}\\to\\mathcal O_{Y',q}$ is an isomorphism; for $q=y'$ it is the identity of $A$ under $\\mathcal O_{Y',y'}=A_{\\mathfrak m}=A$. (3) Consequently $c$ is flat [def-weil-flat-morphism]. (4) For every $\\mathcal O_Y$-module $\\mathcal G$ with pullback $c^*\\mathcal G$ [def-pc-module-pullback], the map $\\mathcal G_y\\to(c^*\\mathcal G)_{y'}$ sending the germ of $s\\in\\mathcal G(V)$ to the germ at $y'$ of the image of $s$ under the unit $\\mathcal G\\to c_*c^*\\mathcal G$ (a section of $c^*\\mathcal G$ over $c^{-1}(V)=Y'$) is an isomorphism of $A$-modules (the stalk $(c^*\\mathcal G)_{y'}$ is $\\mathcal G_y\\otimes_{\\mathcal O_{Y,y}}\\mathcal O_{Y',y'}$ and $c^\\sharp_{y'}$ is the identity). (5) For every ideal $J\\subseteq A$, the morphism $\\operatorname{Spec}(A/J)\\to Y$ induced by $\\mathcal O_{Y,y}\\to A/J$ is $c$ composed with the closed immersion $\\operatorname{Spec}(A/J)\\to Y'$ given by the quotient map.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01J6 (lemma-morphism-from-spec-local-ring) and the canonical morphism of Equation 02NA (equation-canonical-morphism) after it, Lemma 01J7 (lemma-specialize-points) for the image; flatness 'as it identifies local rings' is the remark in the proof of Cohomology of Schemes, Lemma 02OD (coherent.tex, line 5770), with the definition Morphisms 01U3 (morphisms-definition-flat); stalk of a pullback: Sheaves, Lemma 0098 (sheaves-lemma-stalk-pullback-modules)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-module-stalk",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-flat-morphism",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the canonical morphism Spec of the stalk O_{X,x} to X is flat",
+   "results": "Scheme.fromSpecStalk, IsAffineOpen.fromSpecStalk (Mathlib.AlgebraicGeometry.Stalk), Flat.stalkMap, Flat.of_stalkMap (Mathlib.AlgebraicGeometry.Morphisms.Flat)",
+   "date": "2026-10-10",
+   "verdict": "no match: the morphism exists (Scheme.fromSpecStalk) with range_fromSpecStalk (image = generalizations), fromSpecStalk_closedPoint and an IsPreimmersion instance, but no flatness statement; Flat.of_stalkMap reduces flatness to the stalk maps, which takes more than one line (stalk maps of fromSpecStalk are isomorphisms is not stated)"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat (AlgebraicGeometry.Scheme.fromSpecStalk _ _)",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Flat.*fromSpecStalk\\|fromSpecStalk.*Flat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -n 'instance\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Stalk.lean",
+   "results": "no flatness lemma for fromSpecStalk; Stalk.lean has fromSpecStalk, IsPreimmersion instance, fromSpecStalk_closedPoint, range_fromSpecStalk",
+   "date": "2026-10-10",
+   "verdict": "no match (Lean candidate for a proof: Flat.of_stalkMap with IsAffineOpen.fromSpecStalk = Spec.map germ followed by the open immersion fromSpec)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-functions-stalk",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

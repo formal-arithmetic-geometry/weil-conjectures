@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-functorial",
+ "kind": "statement",
+ "title": "Functoriality of the maps on cohomology induced by f-maps",
+ "statement": "Maps on cohomology induced by $h$-maps are as in [def-weil-pbc-module-cohomology-fmap]. (1) (Independence.) $\\varphi^*$ does not depend on the choices of resolutions and of $\\beta$. (2) (Composition.) Let $h:X\\to Y$ and $k:Y\\to Z$ be morphisms of schemes [def-pc-scheme], $\\mathcal H$, $\\mathcal G$, $\\mathcal F$ modules on $Z$, $Y$, $X$, and $\\psi:\\mathcal H\\to k_*\\mathcal G$, $\\varphi:\\mathcal G\\to h_*\\mathcal F$ an $k$-map and an $h$-map. Then $k_*(\\varphi)\\circ\\psi:\\mathcal H\\to k_*h_*\\mathcal F=(k\\circ h)_*\\mathcal F$ is a $(k\\circ h)$-map and $(k_*(\\varphi)\\circ\\psi)^*=\\varphi^*\\circ\\psi^*:H^p(Z,\\mathcal H)\\to H^p(X,\\mathcal F)$ for all $p\\ge0$. In particular ($h$ or $k$ the identity) $\\varphi^*\\circ H^p(u)=(\\varphi\\circ u)^*$ and $H^p(v)\\circ\\varphi^*=(h_*(v)\\circ\\varphi)^*$ for morphisms of modules $u$, $v$ on $Y$, $X$; and for the pullbacks of modules [def-pc-module-pullback] $(k\\circ h)^*=H^p(c)\\circ h^*\\circ k^*$ with $c:h^*k^*\\mathcal H\\cong(k\\circ h)^*\\mathcal H$ the canonical isomorphism. (3) (Restriction.) In the situation of (2) with $h$ omitted, for an open $V\\subseteq Z$ and $W=k^{-1}(V)$, restricting to $V$ and $W$ [def-weil-pbc-module-cohomology-fmap] (b) commutes with $\\psi^*$: $\\mathrm{res}_W\\circ\\psi^*=(\\psi|_V)^*\\circ\\mathrm{res}_V$, where $\\psi|_V:\\mathcal H|_V\\to(k|_W)_*(\\mathcal G|_W)$ is the restriction of $\\psi$ (a special case of (2)).",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Lemma 01F8 ('this construction is functorial in the triple') and Remark 01FB (independence of the choices); the composition rule is used without statement in Stacks (statement assembled by the agent)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-pc-scheme",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "functoriality of sheaf cohomology pullback composition of morphisms",
+   "results": "GrothendieckTopology.overMapPullbackComp_hom_app_val_app, SheafOfModules.pullbackComp, Scheme.Modules.pullbackComp (Mathlib.AlgebraicGeometry.Modules.Sheaf): composition of module pullback functors, nothing on cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "induced map on sheaf cohomology is functorial: map of a composite of sheaf morphisms is the composite of the maps",
+   "results": "TopCat.Sheaf.comp_app, Sheaf.comp_val, sheafCompose_comp, sheafCompose_map_val, SheafOfModules.sectionsMap_comp (Mathlib.Algebra.Category.ModuleCat.Sheaf): composition of sheaf morphisms and of global sections only; Sheaf.H.map (SheafCohomology.Basic) is functorial in the sheaf on one site but there are no maps along morphisms of schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlniE 'higher direct image|directImage|Leray|base ?change map' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "no file; SheafCohomology/ has Basic.lean (Sheaf.H F n := Ext of the constant sheaf, Sheaf.H.map for a morphism of sheaves on one site, cohomologyPresheaf), Cech.lean, MayerVietoris.lean: abelian sheaves on a site only, no O_X-modules, no maps along morphisms of schemes, no R^pf_*",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-functions-stalk",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
