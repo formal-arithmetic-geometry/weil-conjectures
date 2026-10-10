@@ -87,3 +87,8 @@ Every node carries `"blueprint": {"is", "from", "same_as"}`: `is` = its own id f
 2. A new node's `from.node` is what `python3 tools/blueprint_refs.py ancestor <your item>` prints; its `via` is the item's own `via` with the item in front when the item is not a blueprint node (`[]` when it is). Write the exact place in the blueprint node's proof text.
 3. Your item: fill `from.place` if it says "unspecified", write `same_as`, and add `blueprint` to the `split_report`.
 4. `tools/review_split.py` fails without these.
+
+
+## Tool uses (decision of the human, 2026-10-10 14:08 UTC)
+
+If a step uses the statement of a node of another unit as a generic tool (a black box that the unit's route does not replace; SETUP.md "Tool lemmas and the unit route"), declare it in the item's `split_report.tool_uses`: a list `[{"node": "<id>", "why": "<one line: what the step takes from its statement and why no node of your unit gives it>"}]`. `tools/review_split.py` and `tools/preflight_delivery.py` accept an off-unit citation declared there (the route line becomes "tool use declared"); the maintainer's reviewer judges it, and the merge copies the accepted ones into the node's `tool_uses`, which a delivery never sets itself. A declaration is not a licence to leave the unit's route: a step of the unit's proof is replaced only on an established error.

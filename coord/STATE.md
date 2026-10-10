@@ -49,6 +49,8 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 
 REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `AGENTS.md` §1, `roles/remote-lead.md`, `SETUP.md`, `roles/maintainer.md` §7, `tools/README.md` tied in; the tools take any group name `C1`, `C2`, …; the old group `C` keeps its claims until the human says its session is stopped).
 
+**TOOL USES DECLARABLE** (2026-10-10, decision of the human relayed by the launcher): a delivery declares off-unit generic tool citations in `split_report.tool_uses` = [{node, why}]; `review_split.py`/the preflight accept them, the reviewer judges, the merge copies the accepted ones into `tool_uses`. Same commit: an open return no longer blocks a remote group's claims (cap 10 stays); return entries say per point exactly what to change.
+
 **Direct delivery** (decision of the human, 2026-10-10 evening; numbers since 13:05 UTC, when L read it; updated 14:04 UTC; content returns = sections C, D, E; the threshold is one content return in four deliveries over an hour, or reviews more than twenty minutes behind):
 
 | group | merged at first push | merged after a return | returned |

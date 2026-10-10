@@ -153,13 +153,8 @@ def main() -> int:
     cmd = a[0]
     if cmd == "next":
         who = a[1]; n = int(a[a.index("--count") + 1]) if "--count" in a else 1
-        if who != "L":
-            opened = open_returns(who)
-            if opened:
-                print(f"{who} has {len(opened)} open return(s) in coord/returns/{who}.md; repair them (push the repaired delivery) or release the item with the reason before claiming new work:")
-                for e in opened:
-                    print("  " + e)
-                return 1
+        # decision of the human, 2026-10-10 evening: an open return no longer blocks new claims (every open return
+        # must have a worker on it first, the remaining slots take new items; the cap of LIMIT claims per group stays)
         stage = a[a.index("--stage") + 1] if "--stage" in a else None
         n = min(n, LIMIT - len(held_by(who)))
         got = 0

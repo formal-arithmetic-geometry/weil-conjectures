@@ -96,6 +96,9 @@ def main() -> int:
                 if cn and not dq.is_def(cn) and not dq.is_leaf(cn) and not dq.finished(cn) and cn.get("unit") and cn.get("unit") not in allowed:
                     if c in (d.get("tool_uses") or []):
                         notes.append(f"tool use accepted: {c}"); continue
+                    declared = {t.get("node") for t in ((d.get("split_report") or {}).get("tool_uses") or []) if isinstance(t, dict)}
+                    if c in declared:        # declared by the worker in split_report.tool_uses (decision of the human, 2026-10-10 evening); the reviewer judges it, the merge copies it into tool_uses
+                        notes.append(f"tool use declared: {c}"); continue
                     errs.append(f"route: proof uses {c} of unit {cn.get('unit')}, which {u} does not cite (a departure from the unit's route needs an established error, SETUP.md)")
         if u and u in units_:
             r = units_[u].get("realized") or {}

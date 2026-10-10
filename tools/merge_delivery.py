@@ -11,7 +11,8 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
       --apply-fixes DIR     the reviewer's corrected files DIR/dag/nodes/<chapter>/<id>.json (whole files): the fields a
                             split owns are taken from them (a new node of the delivery is taken whole); never a
                             maintainer's field, never a file outside the delivery
-      --tool-uses a,b,c     added to the item's `tool_uses` before review_split.py runs
+      --tool-uses a,b,c     added to the item's `tool_uses` before review_split.py runs (the worker's split_report.tool_uses
+                            declarations are copied too; --drop-tool-uses a,b leaves out the ones the reviewer rejects)
       --reviewed NOTE       the `reviewed` note (default: the mechanical-checks note, with the spot check)
       --lead-note TEXT      appended to the item's `lead_note`
       --verdict PASS|FIX    for the ledger line (default FIX with --apply-fixes, else PASS)
@@ -389,8 +390,18 @@ def cmd_merge(o):
             item_path = next(f for f, k in kinds.items() if k == "item")
             ids = {pathlib.Path(f).stem for f, k in kinds.items() if k in ("item", "new")}
             backfill_blueprint(ids)
-            if o.tool_uses:
-                tu = [x.strip() for x in o.tool_uses.split(",") if x.strip()]
+            # tool uses declared by the worker in split_report.tool_uses ([{node, why}]) are copied into tool_uses at merge
+            # (decision of the human, 2026-10-10 evening); --drop-tool-uses a,b leaves out the ones the reviewer rejected
+            declared = []
+            try:
+                dd = json.loads((tree / item_path).read_text())
+                declared = [t.get("node") for t in ((dd.get("split_report") or {}).get("tool_uses") or []) if isinstance(t, dict) and t.get("node")]
+            except Exception:  # noqa: BLE001
+                declared = []
+            drop = [x.strip() for x in (o.drop_tool_uses or "").split(",") if x.strip()]
+            declared = [x for x in declared if x not in drop and node_path(x)]
+            if o.tool_uses or declared:
+                tu = [x.strip() for x in (o.tool_uses or "").split(",") if x.strip()] + [x for x in declared]
                 missing = [x for x in tu if not node_path(x)]
                 if missing:
                     raise Fail(f"--tool-uses: no node {', '.join(missing)}")
@@ -573,7 +584,7 @@ def main():
     ap = argparse.ArgumentParser(prog="merge_delivery.py", add_help=False)
     ap.add_argument("group"); ap.add_argument("item")
     ap.add_argument("--spot-checked"); ap.add_argument("--reviewer", default="reviewer")
-    ap.add_argument("--apply-fixes"); ap.add_argument("--tool-uses"); ap.add_argument("--reviewed")
+    ap.add_argument("--apply-fixes"); ap.add_argument("--tool-uses"); ap.add_argument("--drop-tool-uses"); ap.add_argument("--reviewed")
     ap.add_argument("--lead-note"); ap.add_argument("--verdict", choices=["PASS", "FIX", "pass", "fix"])
     ap.add_argument("--head")
     try:
