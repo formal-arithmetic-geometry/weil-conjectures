@@ -36,7 +36,8 @@ local Frobenius of `F`.
   back `F`.
 
 The stalks and the cohomology of constant twists are computed in
-`WeilConjectures.WeilSheaf.StalkConstantTwist` and `WeilConjectures.WeilSheaf.ConstantTwistCohomology`.
+`WeilConjectures.WeilSheaf.StalkConstantTwist` and
+`WeilConjectures.WeilSheaf.ConstantTwistCohomology`.
 -/
 
 @[expose] public section
