@@ -30,9 +30,117 @@
   "def-weil-pbc-nagata-ring",
   "def-weil-pbc-japanese-domain"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Reduction to complete local domains.* By [def-weil-pbc-nagata-ring] we must show that $R$ is Noetherian, which is a hypothesis, and that $R/\\mathfrak p$ is N-2 for every prime ideal $\\mathfrak p\\subset R$. Fix $\\mathfrak p$; it is a proper ideal, so by [lem-weil-pbc-complete-local-quotient] the ring $R/\\mathfrak p$ is a Noetherian local ring with maximal ideal $\\mathfrak m/\\mathfrak p$ which is $(\\mathfrak m/\\mathfrak p)$-adically complete [def-weil-pbc-adically-complete-ring]; it is an integral domain because $\\mathfrak p$ is prime. Hence it suffices to prove: (*) every Noetherian local domain $(D,\\mathfrak n)$ which is $\\mathfrak n$-adically complete is N-2 [def-weil-pbc-japanese-domain].",
+   "uses": [
+    "def-weil-pbc-nagata-ring",
+    "lem-weil-pbc-complete-local-quotient",
+    "def-weil-pbc-adically-complete-ring",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032W (lemma-Noetherian-complete-local-Nagata), proof, lines 45759-45777, first paragraph: 'Then R/p is also a complete local Noetherian ring, see Lemma quotient-complete-local (0325). Hence it suffices to show that a Noetherian complete local domain R is N-2.'"
+   }
+  },
+  {
+   "text": "*Reduction to power series rings.* Let $(D,\\mathfrak n)$ be as in (*). By [lem-weil-pbc-complete-local-domain-finite-over-regular] there is a subring $D_0\\subseteq D$ such that $D$ is a finitely generated $D_0$-module [def-weil-finitely-generated-module] and $D_0$ is isomorphic, as a ring, to $\\Lambda_0[[X_1,\\ldots,X_d]]$ [def-weil-pbc-multivariate-power-series] for some $d\\ge0$, where $\\Lambda_0$ is either a field or a Cohen ring [def-weil-pbc-cohen-ring]. $D_0$ is an integral domain, being a subring of $D$. Suppose we know (**): for $\\Lambda_0$ a field or a Cohen ring and every $d\\ge0$, the ring $\\Lambda_0[[X_1,\\ldots,X_d]]$ is a Noetherian integral domain which is N-2. Being Noetherian and being N-2 are properties of the abstract ring, preserved by a ring isomorphism $\\sigma:\\Lambda_0[[X_1,\\ldots,X_d]]\\xrightarrow{\\sim}D_0$ ($\\sigma$ carries ideals and their generators to ideals and generators; it extends to an isomorphism of fraction fields, so for a finite extension $L$ of $\\operatorname{Frac}(D_0)$, viewed through $\\sigma$ as a finite extension of $\\operatorname{Frac}(\\Lambda_0[[X]])$, the integral closures of the two rings in $L$ coincide as subsets, the monic equations corresponding under $\\sigma$, and module generators are the same elements). So $D_0$ is Noetherian and N-2, and [lem-weil-pbc-n2-ascends-finite-domain-extension] applied to $A=D_0\\subseteq B=D$ shows that $D$ is N-2. It remains to prove (**).",
+   "uses": [
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-cohen-ring",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-n2-ascends-finite-domain-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032W (lemma-Noetherian-complete-local-Nagata), proof, lines 45759-45777, first paragraph: 'By Lemmas quasi-finite-over-Noetherian-japanese (032I) and complete-local-Noetherian-domain-finite-over-regular (032D) we reduce to the case R = k[[X_1,...,X_d]] where k is a field or R = Lambda[[X_1,...,X_d]] where Lambda is a Cohen ring.'"
+   }
+  },
+  {
+   "text": "*Induction on the number of variables.* Let $\\Lambda_0$ be any Noetherian integral domain which is N-2. We show by induction on $d\\ge0$ that $\\Lambda_0[[X_1,\\ldots,X_d]]$ is a Noetherian integral domain which is N-2. For $d=0$ the ring is $\\Lambda_0$ [def-weil-pbc-multivariate-power-series]. For $d\\ge1$, the map $\\Lambda_0[[X_1,\\ldots,X_d]]\\to(\\Lambda_0[[X_1,\\ldots,X_{d-1}]])[[X_d]]$ sending $\\sum_Ea_EX^E$ to $\\sum_{j\\ge0}\\bigl(\\sum_{E'}a_{(E',j)}X'^{E'}\\bigr)X_d^j$ ($E=(E',j)$, $E'\\in\\mathbf N^{d-1}$) is a bijection, since $\\mathbf N^d=\\mathbf N^{d-1}\\times\\mathbf N$, is additive, and is multiplicative because both products have the coefficient $\\sum_{E+F=G}a_Eb_F$ at $G=(G',j)$, the inner sum being regrouped by the last coordinate; so it is a ring isomorphism. By induction $\\Lambda_0[[X_1,\\ldots,X_{d-1}]]$ is a Noetherian N-2 domain, so by [lem-weil-pbc-power-series-n2] its power series ring in $X_d$ is a Noetherian N-2 domain, and by the isomorphism (as in Step 2) so is $\\Lambda_0[[X_1,\\ldots,X_d]]$. Thus (**) reduces to: a field, and a Cohen ring, is a Noetherian N-2 domain.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-n2",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032W (lemma-Noetherian-complete-local-Nagata), proof, lines 45759-45777, second paragraph: 'In the case k[[X_1,...,X_d]] we reduce to the statement that a field is N-2 by Lemma power-series-over-N-2 (032Q)' and 'In the case Lambda[[X_1,...,X_d]] we reduce to the statement that a Cohen ring Lambda is N-2' (the iteration over the d variables, left implicit there)"
+   }
+  },
+  {
+   "text": "*A field is a Noetherian N-2 domain (the source: 'This is clear').* Let $k$ be a field. Its only ideals are $0$ and $k$, generated by $0$ and $1$, so $k$ is Noetherian [def-weil-pbc-noetherian-ring]; it is a domain and its fraction field is $k$. Let $L/k$ be a finite field extension [def-pc-field-extension], $n=\\dim_kL$. For $\\alpha\\in L$ the $n+1$ elements $1,\\alpha,\\ldots,\\alpha^n$ are $k$-linearly dependent, so $\\sum_{i\\le n}c_i\\alpha^i=0$ with $c_i\\in k$ not all zero; the largest index $m$ with $c_m\\neq0$ satisfies $m\\ge1$ (if $m=0$ then $c_0=c_0\\cdot1=0$), and dividing by $c_m$ gives a monic equation over $k$. So every element of $L$ is integral over $k$, the integral closure of $k$ in $L$ [def-weil-pbc-integral-closure] is $L$, and $L$ is generated as a $k$-module by a $k$-basis of $n$ elements [def-weil-finitely-generated-module]. Hence $k$ is N-2 [def-weil-pbc-japanese-domain].",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-pc-field-extension",
+    "def-weil-pbc-integral-closure",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032W (lemma-Noetherian-complete-local-Nagata), proof, lines 45759-45777, second paragraph: 'we reduce to the statement that a field is N-2 by Lemma power-series-over-N-2. This is clear.'"
+   }
+  },
+  {
+   "text": "*A Cohen ring is a Noetherian N-2 domain.* Let $\\Lambda$ be a Cohen ring with residue characteristic $p$ [def-weil-pbc-cohen-ring]: a discrete valuation ring, in particular a principal ideal domain, whose maximal ideal is $p\\Lambda$ and which is $p\\Lambda$-adically complete. By [lem-weil-pbc-pid-noetherian-normal] $\\Lambda$ is a Noetherian normal domain [def-weil-pbc-normal-ring]; this is hypothesis (1) of [lem-weil-pbc-tate-n2-complete-principal] for $R=\\Lambda$, $x=p$. Since $p\\Lambda$ is a maximal ideal, $\\Lambda/p\\Lambda$ is a field, hence an integral domain which is N-2 by Step 4: hypothesis (2). The $p\\Lambda$-adic completeness in [def-weil-pbc-cohen-ring] is hypothesis (3) ($x^n\\Lambda=p^n\\Lambda$) [def-weil-pbc-adically-complete-ring]. So [lem-weil-pbc-tate-n2-complete-principal] shows that $\\Lambda$ is N-2, and it is Noetherian and a domain.",
+   "uses": [
+    "def-weil-pbc-cohen-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-tate-n2-complete-principal",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032W (lemma-Noetherian-complete-local-Nagata), proof, lines 45759-45777, second paragraph: 'Applying Lemma tate-japanese (032P) once more with x = p in Lambda we reduce yet again to the case of a field. Thus we win.'"
+   }
+  },
+  {
+   "text": "*Conclusion.* By Steps 4 and 5, $\\Lambda_0$ is a Noetherian N-2 domain when it is a field or a Cohen ring; by Step 3, so is $\\Lambda_0[[X_1,\\ldots,X_d]]$ for every $d$, which is (**). By Step 2, (*) holds, and by Step 1 every $R/\\mathfrak p$ is N-2; with $R$ Noetherian, $R$ is a Nagata ring [def-weil-pbc-nagata-ring].",
+   "uses": [
+    "def-weil-pbc-nagata-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032W (lemma-Noetherian-complete-local-Nagata), proof, lines 45759-45777, 'Thus we win.'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-nagata-ring",
+  "lem-weil-pbc-complete-local-quotient",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-n2-ascends-finite-domain-extension",
+  "lem-weil-pbc-power-series-n2",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-tate-n2-complete-principal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032W (lemma-Noetherian-complete-local-Nagata), proof, lines 45759-45777 (Lemma 032W, lemma-Noetherian-complete-local-Nagata)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -64,7 +172,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -85,5 +193,12 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 032W; no blueprint node states it (searched)"
+ "reviewed": "2026-10-10 L: 6 steps checked against 032W: R/p complete local domain (0325), finite over a power series ring over a field or Cohen ring (032D), N-2 ascends along finite extensions (032I, new), power series over an N-2 Noetherian domain is N-2 (032Q, new) by induction, fields N-2, Cohen rings N-2 by Tate (032P, new) with the PID leaf",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-complete-local-nagata",
+  "worker": "stage1",
+  "summary": "Read 032W (algebra.tex 45754-45777) and every lemma its proof cites: 0325 quotient-complete-local (line 44811), 032I quasi-finite-over-Noetherian-japanese (45202), 032D complete-local-Noetherian-domain-finite-over-regular (45065), 032Q power-series-over-N-2 (45593), 032P tate-japanese (45535); tags verified in tags/tags. Steps: (1) quotient by a prime via lem-weil-pbc-complete-local-quotient; (2) Cohen structure 032D (existing node) and N-2 ascent along the finite extension (new node, 032I finite case); (3) induction on the number of variables via 032Q (new node), with the regrouping isomorphism written out; (4) a field is N-2 ('This is clear', written out); (5) a Cohen ring is N-2 by Tate 032P (new node) with x = p, normality from a new Mathlib leaf (PID is Noetherian normal). Statement unchanged. No slopmaster2 Lean for the item or any new node (grep of WeilConjectures for Nagata/Japanese/N2). Blueprint search (032W, 032I, 032Q, 032P, Nagata, N-2, Japanese, power series, Tate, Cohen, integrally closed, principal ideal domain, normal domain, integral closure): nothing states these.",
+  "blueprint": "No blueprint node states 032W; the blueprint ancestor is lem-weil-pbc-normal-constant-generic, whose step 4 (source 09Z5, proof of (1)) needs Nagata-ness/finiteness of normalization; through the via chain this item supplies the fact 'Noetherian complete local rings are Nagata' used by lem-weil-pbc-analytically-unramified-n1. All six steps realize that single place; no step of the ancestor's proof is realized directly."
+ }
 }

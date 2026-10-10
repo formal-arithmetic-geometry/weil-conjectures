@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-power-series-n2",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, 'In the case k[[X_1,...,X_d]] we reduce to the statement that a field is N-2 by Lemma lemma-power-series-over-N-2' and the same reduction in the case Lambda[[X_1,...,X_d]], proof of Algebra 032W (via lem-weil-pbc-complete-local-nagata)",
+   "via": [
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A power series ring over a Noetherian N-2 domain is a Noetherian N-2 domain",
+ "statement": "Let $R$ be a Noetherian [def-weil-pbc-noetherian-ring] integral domain which is N-2 [def-weil-pbc-japanese-domain], and let $R[[x]]$ be the ring of formal power series in one variable $x$ over $R$ [def-weil-pbc-multivariate-power-series] (the case $n=1$). Then $R[[x]]$ is a Noetherian integral domain and $R[[x]]$ is N-2: for every finite field extension $L$ [def-pc-field-extension] of the fraction field of $R[[x]]$, the integral closure of $R[[x]]$ in $L$ [def-weil-pbc-integral-closure] is a finitely generated $R[[x]]$-module [def-weil-finitely-generated-module].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032Q (lemma-power-series-over-N-2, lines 45592-45609), statement ('If R is Noetherian, a domain, and N-2, then so is R[[x]]') and proof (Lemma Noetherian-power-series, Lemma power-series-over-Noetherian-normal-domain, Lemma 032P tate-japanese, Lemma 032K finite-extension-N-2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-multivariate-power-series",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "power series ring over a Noetherian domain whose integral closure in finite extensions is finite has the same property",
+   "results": "IsIntegralClosure.finite, PowerSeries.instIsNoetherianRing (Mathlib.RingTheory.PowerSeries.Ideal), integralClosure.isIntegrallyClosedOfFiniteExtension, PowerSeries.isNoetherianRing, PowerSeries.instIsDomain (Mathlib.RingTheory.PowerSeries.NoZeroDivisors), IsIntegralClosure.isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "no match (only the Noetherian and domain clauses: PowerSeries.instIsNoetherianRing, PowerSeries.instIsDomain)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formal power series ring R[[X]] over Noetherian Japanese domain is Japanese: integral closure in finite field extensions is finite",
+   "results": "PowerSeries.isNoetherianRing, PowerSeries.instIsNoetherianRing, PowerSeries.instIsDiscreteValuationRing, LaurentSeries adic completion instance, PowerSeries.fg_iff_of_isPrime; nothing on integral closures",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'japanese|universally.?japanese|\\bN-2\\b|\\bN-1\\b' Mathlib/ (slopmaster2 Mathlib); rg -n integralClosure Mathlib/RingTheory/PowerSeries",
+   "results": "no Japanese/N-1/N-2 notion anywhere (only unrelated 'n-1' in docstrings); nothing on integral closures in RingTheory/PowerSeries",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-complete-local-nagata",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 032Q (domain clause made explicit)"
+}

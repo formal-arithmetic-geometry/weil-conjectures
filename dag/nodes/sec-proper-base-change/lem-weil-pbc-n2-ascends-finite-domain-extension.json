@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-n2-ascends-finite-domain-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, the reduction 'By Lemmas lemma-quasi-finite-over-Noetherian-japanese and lemma-complete-local-Noetherian-domain-finite-over-regular we reduce to the case R = k[[X_1,...,X_d]] ... or Lambda[[X_1,...,X_d]]' of the proof of Algebra 032W (via lem-weil-pbc-complete-local-nagata)",
+   "via": [
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "N-2 ascends along a finite extension of Noetherian domains",
+ "statement": "Let $A\\subseteq B$ be integral domains such that $B$ is a finitely generated $A$-module [def-weil-finitely-generated-module]. Assume $A$ is Noetherian [def-weil-pbc-noetherian-ring] and N-2 [def-weil-pbc-japanese-domain]. Then $B$ is N-2: for every finite field extension $M$ [def-pc-field-extension] of the fraction field of $B$, the integral closure of $B$ in $M$ [def-weil-pbc-integral-closure] is a finitely generated $B$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032I (lemma-quasi-finite-over-Noetherian-japanese, line 45202), in the case of a finite extension named there ('quasi-finite extension of domains (for example finite)'); its proof, second paragraph ('Assume $R\\subset S$ ... moreover that $S$ is finite over $R$ ... we win by Lemma integral-permanence'), lines 45225-45232"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-japanese-domain",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral closure in finite extension of fraction field finite over finite extension of domains",
+   "results": "integralClosure.isFractionRing_of_finite_extension, IsIntegralClosure.isFractionRing_of_finite_extension (Mathlib.RingTheory.Localization.Integral), integralClosure.isIntegrallyClosedOfFiniteExtension, IsIntegralClosure.of_isIntegrallyClosed, IsIntegralClosure.finite (needs IsIntegrallyClosed A and separable L/K)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite extension of integral domains: if the base is Japanese (integral closure in every finite extension of fraction field is finite) then so is the extension",
+   "results": "IsIntegralClosure.finite, IsIntegralClosure.isFractionRing_of_finite_extension, Ring.instFiniteNormalClosure (Dedekind, perfect fraction field), integralClosure.isFractionRing_of_finite_extension; no Japanese notion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'japanese|universally.?japanese|\\bN-2\\b|\\bN-1\\b' Mathlib/ (slopmaster2 Mathlib); rg -n integralClosure Mathlib/RingTheory/PowerSeries",
+   "results": "no Japanese/N-1/N-2 notion anywhere (only unrelated 'n-1' in docstrings); nothing on integral closures in RingTheory/PowerSeries",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-complete-local-nagata",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 032I (finite case)"
+}
