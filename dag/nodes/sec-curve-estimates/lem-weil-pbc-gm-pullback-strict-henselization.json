@@ -26,9 +26,61 @@
   "def-sc-gm-torsor",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the strict-henselization limit definition, the affine pointed etale-neighbourhood index is small and cofiltered. Apply [lem-weil-pbc-cofiltered-limit-directed-reindex], whose statement supplies a nonempty directed set and the same limit cone, and then base change the resulting inverse system along $f$. Thus $X_V=X\\times_SV$ has affine transition maps (base changes of the affine transition maps $V'\\to V$) and limit $X\\times_SS_{(\\bar x)}$ in the sense of [lem-weil-pbc-limit-affine-transition]; the assertion that these fibre products commute with the limit is the universal property of fibre products (elementary). The base change $X_V\\to V$ of $f$ remains quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence] (3), so each $X_V$ is quasi-compact and quasi-separated by (2) of the same statement, $V$ being affine; likewise $X\\times_SS_{(\\bar x)}$ is quasi-separated. Finally $p$ is the resulting limit projection by the fibre-product construction [def-pc-fibre-product].",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9 proof, passage from affine etale neighbourhoods to the strict henselization limit; Stacks Tag 01YW"
+   }
+  },
+  {
+   "text": "Let $U\\to X\\times_SS_{(\\bar x)}$ be an affine etale test object; it is of finite presentation by [lem-weil-pbc-qcqs-morphism-permanence] (1) ($U$ affine, $X\\times_SS_{(\\bar x)}$ quasi-separated). Clause (1) of [lem-weil-pbc-etale-finite-data-descent], applied to this particular $U$, gives a stage $V_0$ and an etale morphism of finite presentation $U_0\\to X_{V_0}$ with $U\\cong U_0\\times_{X_{V_0}}(X\\times_SS_{(\\bar x)})$; put $U_V=U_0\\times_{X_{V_0}}X_V$ for $V\\ge V_0$, so $U=\\varprojlim_VU_V$ (fibre products commute with the limit, elementary as in Step 1) and $U_0$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence] (2). Sections of $p^{-1}\\mathbf G_{m,X}$: write $q_V:X_V\\to X$ for the etale stage maps and $f_V:X\\times_SS_{(\\bar x)}\\to X_V$, $f_{VV_0}:X_V\\to X_{V_0}$ for the projections. By [lem-weil-pbc-etale-inverse-image-restriction] (1), $q_V^{-1}\\mathbf G_{m,X}\\cong\\mathbf G_{m,X}|_{X_V}=\\mathbf G_{m,X_V}$, the last equality because both have sections $\\Gamma(W,\\mathcal O_W)^\\times$ on $W$ etale over $X_V$ [def-sc-gm-torsor]. With $p=q_{V_0}\\circ f_{V_0}$ and $q_V=q_{V_0}\\circ f_{VV_0}$, [lem-weil-pbc-inverse-image-composition] (2) gives $p^{-1}\\mathbf G_{m,X}\\cong f_{V_0}^{-1}\\mathbf G_{m,X_{V_0}}$ and $f_{VV_0}^{-1}\\mathbf G_{m,X_{V_0}}\\cong\\mathbf G_{m,X_V}$. Now [lem-weil-pbc-etale-section-continuity], with $i=j_0=V_0$, $F_{V_0}=\\mathbf G_{m,X_{V_0}}$ and $W_{V_0}=U_0$, gives $(p^{-1}\\mathbf G_{m,X})(U)\\cong\\varinjlim_V\\mathcal O(U_V)^\\times$. Units: $U\\to S_{(\\bar x)}$ is a morphism of affine schemes, hence affine, and it is the base change to the limit of $U_0\\to V_0$ (over the affine stage $V_0$; $U_0$, $V_0$ quasi-compact and quasi-separated); so by [lem-weil-pbc-descend-affine] $U_{V_1}\\to V_1$ is affine for some $V_1\\ge V_0$, hence $U_V$ is affine for all $V\\ge V_1$ (affine transition maps). By the affine clause of [lem-weil-pbc-limit-affine-transition], $U=\\operatorname{Spec}\\varinjlim_{V\\ge V_1}\\mathcal O(U_V)$, and a unit of a directed colimit of rings together with its inverse comes from a finite stage, so $\\varinjlim_V\\mathcal O(U_V)^\\times\\to\\mathcal O(U)^\\times=\\mathbf G_{m,X\\times_SS_{(\\bar x)}}(U)$ is bijective (elementary). The composite of these bijections is the component on $U$ of the canonical map $p^{-1}\\mathbf G_{m,X}\\to\\mathbf G_{m,X\\times_SS_{(\\bar x)}}$, since both send the class of $s\\in\\mathcal O(U_V)^\\times$ to its pullback along $U\\to U_V$ (the maps $\\rho$ of the section-continuity statement are built from the adjunction units, which correspond to pullback of units). A morphism of etale sheaves that is bijective on all affine etale objects is an isomorphism (affine objects cover every object; sheaf axiom, elementary), so the map adjoint to the pullback-of-units map [def-weil-pbc-inverse-image] is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-finite-data-descent",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-etale-section-continuity",
+    "lem-weil-pbc-descend-affine",
+    "lem-weil-pbc-limit-affine-transition",
+    "def-weil-pbc-inverse-image",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9 proof, identification of units on the qcqs inverse limit (Tags 01ZM and 09YQ)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-finite-data-descent",
+  "lem-weil-pbc-etale-section-continuity",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-inverse-image",
+  "def-sc-gm-torsor",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-descend-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 03Q9 proof; source text is not present in this checkout"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,12 +112,58 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-gm-strict-henselization-stalk-formula",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-gm-pullback-strict-henselization",
+  "worker": "stage1",
+  "summary": "Repaired the strict-henselization units proof. The neighbourhood index is reindexed to a directed set, affine etale test objects descend to a finite stage, inverse-image composition and pullback-sections continuity compute the sections, and the descended test objects are made affine at a finite stage, where the units comparison is elementary.",
+  "blueprint": "Realizes the ancestor proof sentence identifying p^{-1}G_m with G_m on the qcqs inverse limit by Tags 01ZM and 09YQ.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Step 1 needs the general affine-transition inverse-limit construction; this general scheme-limit tool is supplied by the proper-base-change unit and has no replacement in sk-thm-br."
+   },
+   {
+    "node": "lem-weil-pbc-etale-finite-data-descent",
+    "why": "Step 2 needs finite-presentation etale test-object descent, a general limit tool not supplied by sk-thm-br."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-continuity",
+    "why": "Step 2 needs continuity of sections for the descended finite-presentation etale test object; this general limit tool is not supplied by sk-thm-br."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Step 2 (reviewer repair) identifies the inverse image of G_m along the etale stage maps X_V -> X with G_m of X_V; a general etale-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-descend-affine",
+    "why": "Step 2 (reviewer repair) makes the descended test objects U_V affine at a finite stage (Stacks 01ZN); a general limit tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-descend-affine",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-etale-finite-data-descent",
+  "lem-weil-pbc-etale-section-continuity",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-descend-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gps2441",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gps2441 (reviewer sub-agent of L); spot-checked: All four R-gps2124 points repaired: Step 1 reindexes via lem-weil-pbc-cofiltered-limit-directed-reindex and marks fibre-product/limit commutation elementary; Step 2 descends each affine test object U by finite-data-descent (1), uses inverse-image-composition and etale-section-continuity (not 'sectionwise definition'), no units node. FIX more, RETURN less: (1) C1: Step 2 read sections of f_{VV0}^{-1}G_{m,X_V0} on U_V as units 'by definition'; added lem-weil-pbc-etale-inverse-image-restriction (1) for q_V^{-1}G_{m,X} = G_{m,X_V}. (2) C1: colim O(U_V)^x = O(U)^x was asserted with U_V only qcqs (the second reading had dropped affineness); added lem-weil-pbc-descend-affine (U -> S_(x) affine) so U_V affine for V>=V1, then affine clause of lem-weil-pbc-limit-affine-transition and units elementary. (3) C4: qcqs of X_V (permanence (2), V affine), finite presentation of U -> X x_S S_(x) (permanence (1)) and qcqs of U_0 made explicit; comparison with the canonical map spelled out. Both new citations declared as tool_uses (sk-thm-p1 general etale/limit tools).; 1 file(s) fixed by the reviewer"
+ }
 }
