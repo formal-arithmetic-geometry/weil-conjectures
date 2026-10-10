@@ -22,9 +22,38 @@
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix i, write V=U_i, U=f^{-1}(V) and g=f|_U:U\\to V. By [lem-pc-affine-derived-pullback-tensor-tilde] (1) there are canonical isomorphisms (Lf^*K)|_U\\cong Lg^*(K|_V), (E\\otimes^{\\mathbb L}_{\\mathcal O_X}Lf^*K)|_U\\cong E|_U\\otimes^{\\mathbb L}_{\\mathcal O_U}(Lf^*K)|_U and (Rf_*E\\otimes^{\\mathbb L}_{\\mathcal O_Y}K)|_V\\cong (Rf_*E)|_V\\otimes^{\\mathbb L}_{\\mathcal O_V}K|_V; by [lem-pc-restrict-derived-direct-image-open] there are canonical isomorphisms (Rf_*E)|_V\\cong Rg_*(E|_U) and (Rf_*(E\\otimes^{\\mathbb L}Lf^*K))|_V\\cong Rg_*((E\\otimes^{\\mathbb L}Lf^*K)|_U). The canonical map (Cohomology, Equation 20.54.2.1) is adjoint to Lf^*(Rf_*E\\otimes^{\\mathbb L}K)\\cong Lf^*Rf_*E\\otimes^{\\mathbb L}Lf^*K\\to E\\otimes^{\\mathbb L}Lf^*K, built from the counit of Lf^*\\dashv Rf_*; these identifications are natural and compatible with the unit and counit, so under them the restriction of the canonical map for f to V is the canonical map for g applied to E|_U and K|_V (a diagram chase).",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Equation 20.54.2.1 (cohomology-equation-projection-formula-map)"
+   }
+  },
+  {
+   "text": "A morphism \\varphi in D(\\mathcal O_Y) is an isomorphism exactly when H^q(\\varphi) is an isomorphism of sheaves of \\mathcal O_Y-modules for every q (its cone is acyclic). Restriction to an open subscheme is exact, so H^q(\\varphi)|_{U_i}=H^q(\\varphi|_{U_i}). A morphism of sheaves of modules is an isomorphism if and only if its restriction to each member of an open covering is one (its kernel and cokernel are sheaves, zero when zero on a cover). Hence, by step 1, the canonical map for f is an isomorphism exactly when the canonical map for each f^{-1}(U_i)\\to U_i is.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Lemma 36.22.1 (Tag 08EU), locality assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma 36.22.1 (Tag 08EU)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,12 +78,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-projection-formula",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-f-representable"
+ "unit": "sk-thm-picard-f-representable",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-projection-locality",
+  "worker": "stage1",
+  "summary": "Split the locality assertion into the canonical-map restriction step and an explicit cohomology-sheaf locality argument; no redundant child node was created because the locality clause is the item itself.",
+  "blueprint": "Realizes proof step (1) of lem-pc-projection-formula: identify the restricted canonical maps and apply locality of isomorphisms on an open cover."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pjl1910",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pjl1910 (reviewer sub-agent of L); spot-checked: Statement vs 08EU/20.54.2.1 agrees; no cycle: lem-pc-affine-derived-pullback-tensor-tilde (no proof deps) and lem-pc-derived-pullback-tensor-qcoh do not reach the item or lem-pc-projection-formula. FIX more, RETURN less: (1) C1 step 1 marked elementary but used restriction compatibility of Rf_* (Stacks 08FE, a real lemma via K-injective restriction 08BS) and of Lf^*, tensor-L: now cites [lem-pc-affine-derived-pullback-tensor-tilde] (1) for Lf^* and tensor and new unsplit node [lem-pc-restrict-derived-direct-image-open] (statement of 08FE; LeanFinder no match) for Rf_*, elementary false, proof_deps updated; (2) C4 step 2 cited Mathlib Scheme.Modules.Hom.isIso_iff_isIso_app as cover-locality, but it says IsIso phi iff IsIso (phi.app U) for ALL opens U: citation removed, sheaf cover-locality stated as elementary (kernel/cokernel zero on a cover). Second reading by G1 missed both. Mathlib decl read at Modules/Sheaf.lean:147.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
