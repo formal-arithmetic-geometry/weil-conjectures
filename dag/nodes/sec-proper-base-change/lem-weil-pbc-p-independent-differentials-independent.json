@@ -11,9 +11,50 @@
   "def-pc-field-extension",
   "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Extension to a $p$-basis.) By [lem-weil-pbc-p-independent-extends-to-p-basis] applied to the extension $K/k$ of fields of characteristic $p$ and the family $(x_i)_{i\\in I}$, which is $p$-independent over $k$ by hypothesis, there are a set $J$ and a family $(y_j)_{j\\in J}$ in $K$ such that the combined family $(z_l)_{l\\in I\\sqcup J}$ ($z_i=x_i$ for $i\\in I$, $z_j=y_j$ for $j\\in J$) is a $p$-basis of $K$ over $k$: the monomials $z^E=\\prod_lz_l^{e_l}$, $E=(e_l)_{l\\in I\\sqcup J}$ with $0\\le e_l<p$ and almost all $e_l=0$, form a basis of $K$ over $kK^p$.",
+   "uses": [
+    "lem-weil-pbc-p-independent-extends-to-p-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof, third paragraph ('Any p-independent subset can be enlarged to a maximal one ... The claim will imply that (1) implies (2)')"
+   }
+  },
+  {
+   "text": "(The differentials of the $p$-basis form a basis.) The family $(z_l)_{l\\in I\\sqcup J}$ of Step 1 satisfies the hypothesis of [lem-weil-pbc-p-basis-differentials-basis] for the extension $K/k$ (same $p$, same subfield $kK^p$, index set $I\\sqcup J$). Hence $(\\mathrm dz_l)_{l\\in I\\sqcup J}$ is a basis of the $K$-vector space $\\Omega_{K/k}$ [def-weil-pbc-kahler-differentials].",
+   "uses": [
+    "lem-weil-pbc-p-basis-differentials-basis",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof, second paragraph ('(a) implies (b)'), applied as the third paragraph says"
+   }
+  },
+  {
+   "text": "(A subfamily of a basis is linearly independent.) Let $F\\subseteq I$ be finite and $c_i\\in K$ ($i\\in F$) with $\\sum_{i\\in F}c_i\\,\\mathrm dx_i=0$ in $\\Omega_{K/k}$. Since $\\mathrm dx_i=\\mathrm dz_i$ for $i\\in I\\subseteq I\\sqcup J$, putting $c_l=0$ for $l\\in(I\\sqcup J)\\setminus F$ gives $\\sum_{l\\in I\\sqcup J}c_l\\,\\mathrm dz_l=0=\\sum_l0\\cdot\\mathrm dz_l$, and uniqueness of the coordinates in the basis of Step 2 gives $c_l=0$ for all $l$, in particular $c_i=0$ for $i\\in F$. So $(\\mathrm dx_i)_{i\\in I}$ is linearly independent over $K$ in $\\Omega_{K/k}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof, third paragraph ('Any p-independent subset can be enlarged to a maximal one ... The claim will imply that (1) implies (2)')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-p-basis-differentials-basis",
+  "lem-weil-pbc-p-independent-extends-to-p-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07P2 (lemma-p-basis), proof, third paragraph (extension to a maximal p-independent subset, which is a p-basis; 'The claim will imply that (1) implies (2)') combined with the second paragraph ((a) implies (b))"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +83,31 @@
    "results": "only galGroupBasis (FieldTheory/KrullTopology.lean), unrelated; no Kaehler file mentions the characteristic",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "differentials d x_i linearly independent in Kaehler differentials of field extension of characteristic p",
+   "results": "KaehlerDifferential, KaehlerDifferential.D, KaehlerDifferential.DLinearMap (RingTheory.Kaehler.Basic), KaehlerDifferential.mvPolynomialBasis_apply, mvPolynomialBasis_repr_D_X (RingTheory.Kaehler.Polynomial), Algebra.Generators.disjoint_ker_toKaehler_of_linearIndependent (RingTheory.Extension.Cotangent.Free): none about p-independence",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearIndependent, KaehlerDifferential.D",
+   "results": "only Algebra.Generators.disjoint_ker_toKaehler_of_linearIndependent (Mathlib.RingTheory.Extension.Cotangent.Free), which assumes linear independence of differentials",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pBasis\\|PBasis\\|pIndependent\\|KaehlerDifferential.*linearIndependent\\|linearIndependent.*KaehlerDifferential' Mathlib; grep -rn 'theorem.*linearIndependent' Mathlib/RingTheory/Kaehler/",
+   "results": "only galGroupBasis (FieldTheory/KrullTopology.lean), unrelated; nothing in RingTheory/Kaehler",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +128,11 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): More on Algebra 07P2 (1)=>(2) (p-independent family has independent differentials), stated with kK^p. Unsplit."
+ "reviewed": "2026-10-10 L: 3 steps checked (07P2 (1)=>(2) route: extend to a p-basis by the new node, differentials of a p-basis form a basis by lem-weil-pbc-p-basis-differentials-basis, subfamily of a basis is independent); citer intersection-subfields-differentials step 2 uses independence over K as stated",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-p-independent-differentials-independent",
+  "worker": "stage1",
+  "summary": "Read Stacks 07P1 and the whole proof of 07P2 (tags verified in tags/tags). The source proves (1) => (2) exactly by extending a p-independent subset to a maximal one by Zorn, showing it is a p-basis, and applying (a) => (b); the split follows this route in three steps: extension to a p-basis (new unsplit node lem-weil-pbc-p-independent-extends-to-p-basis, the relative version of 07P2's Zorn claim with a given family to extend; the existing lem-weil-pbc-p-basis-exists is only the absolute case F_p -> k with no prescribed family), the existing unsplit lem-weil-pbc-p-basis-differentials-basis ((a) => (b)), and the elementary fact that a subfamily of a basis is independent. The direct comparison Omega_{L/k} (x)_L K -> Omega_{K/k} for L = kK^p(x_i) was not used since that map need not be injective. Statement unchanged; it matches the citer lem-weil-pbc-intersection-subfields-differentials (step 2 applies it to K/K_alpha and a finite subfamily, independence over K). Mathlib: no p-independence or p-basis notion; three kinds of search recorded."
+ }
 }
