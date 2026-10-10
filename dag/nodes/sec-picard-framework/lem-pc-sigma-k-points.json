@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-sigma-k-points",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\operatorname{Pic}_{X/k,\\sigma}$ at $T=\\operatorname{Spec}(k)$",
@@ -13,19 +13,22 @@
   "place": "node lem-pc-sigma-k-points, order 807"
  },
  "stmt_deps": [
+  "def-pc-pic-sigma-functor",
   "def-pc-base-change",
   "def-sc-picard-group"
  ],
  "proof": [
   {
-   "text": "For $T=\\operatorname{Spec}(k)$, the morphism $\\sigma_T$ is the original\n$\\sigma:\\operatorname{Spec}(k)\\to X$ and $\\sigma^*=i_\\sigma^*:\\operatorname{Pic}(X)\\to\\operatorname{Pic}(\\operatorname{Spec} k)$\nsends an invertible module to its fibre (the pullback along the closed\nimmersion $\\sigma$), a $1$-dimensional $k$-vector space, hence trivial\nby [lem-pc-pic-of-field]: the map is the zero map. Therefore the\nkernel of $\\sigma^*$ is all of $\\operatorname{Pic}(X)$.",
+   "text": "For $T=\\operatorname{Spec}(k)$, the canonical base-change identifications give $X_T=X$ and $\\sigma_T=\\sigma:\\operatorname{Spec}(k)\\to X$. By [def-pc-pic-sigma-functor], $\\operatorname{Pic}_{X/k,\\sigma}(k)$ is the kernel of $\\sigma^*: \\operatorname{Pic}(X)\\to\\operatorname{Pic}(\\operatorname{Spec} k)$. For every invertible module $\\mathcal L$ on $X$, $\\sigma^*\\mathcal L$ is an invertible module on $\\operatorname{Spec}(k)$, hence trivial by [lem-pc-pic-of-field]; no closed-immersion hypothesis is needed. Thus the map is zero and its kernel is all of $\\operatorname{Pic}(X)$.",
    "uses": [
+    "def-pc-pic-sigma-functor",
     "lem-pc-pic-of-field"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "def-pc-pic-sigma-functor",
   "lem-pc-pic-of-field"
  ],
  "proof_origin": {
@@ -33,9 +36,38 @@
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-pic/lem-pc-sigma-k-points.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Picard normalized functor at Spec k equals Picard group when X has a k-rational point",
+   "results": "CommRing.relPic (Mathlib/RingTheory/PicardGroup); CommRing.Pic.functor (Mathlib/RingTheory/PicardGroup); CommRing.Pic.mapAlgebra_self_apply; CommRing.relPic_eq_top; CommRing.Pic.mapAlgebra_self; instCommGroupPic (all Mathlib/RingTheory/PicardGroup), plus unrelated normalization and elliptic-curve hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "picardFunctorNormalized, Pic, Spec",
+   "results": "none; unknown identifier 'picardFunctorNormalized'",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "picardFunctorNormalized.*Pic|Pic.*picardFunctorNormalized (subdirectory AlgebraicGeometry)",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Picard normalized functor evaluated at the base field is the Picard group",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +95,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-def-picard-pic"
+ "unit": "sk-def-picard-pic",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-sigma-k-points",
+  "worker": "stage1",
+  "summary": "Checked the imported one-step proof against the Picard definitions and the existing field Picard lemma. No subsidiary node is needed: the sole non-elementary input is that Pic(Spec k) is trivial; the kernel calculation and canonical identification are elementary from the normalized Picard definition.",
+  "blueprint": "Realizes the proof sentence that for T = Spec(k), sigma^* has trivial target and therefore its kernel is all of Pic(X).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-skp1834",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-skp1834 (reviewer sub-agent of L); spot-checked: Repairs of return 18:23 checked: (1) def-pc-pic-sigma-functor now in stmt_deps, proof_deps and step 1 uses, X_{Spec k}=X and sigma_{Spec k}=sigma stated; no cycle (def's stmt_deps on sheaf-dag no longer list the item). (2) 'closed immersion' removed; sigma^*L invertible on Spec k, trivial by lem-pc-pic-of-field, valid for any k-point. (3) report corrected: blueprint.from stays null. C/D/E: step proves statement; kernel of zero map is Pic(X)."
+ }
 }
