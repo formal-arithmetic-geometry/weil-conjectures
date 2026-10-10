@@ -10,26 +10,143 @@
   "same_as": []
  },
  "kind": "statement",
- "title": "A finite simplicial lifting problem for a hypercover is locally solvable",
- "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions] and $K_\\bullet\\to X$ an etale hypercover: its terms are objects of the small etale site [def-weil-pbc-etale-site] and each term covers its matching object. For a simplicial set $S$ with finitely many nondegenerate simplices, $\\operatorname{Hom}(S,K)_0$ denotes the semi-representable object over $X$ characterized by its etale test-scheme points: a point over $T\\to X$ is a compatible family of maps $T\\to K_m$, one for each $m$-simplex of $S$, respecting every face and degeneracy operator (and choosing a component whenever a term of $K$ is a family). Let $A\\subseteq B$ be an inclusion of simplicial sets, both with finitely many nondegenerate simplices and with finite nonempty sets of simplices in each degree. The restriction $\\operatorname{Hom}(B,K)_0\\to\\operatorname{Hom}(A,K)_0$ is an etale covering in the category of semi-representable objects over $X$. Thus compatible $A$-data represented on an etale test scheme extend to $B$ after an etale covering of that test scheme.",
+ "title": "Restriction of Hom objects of a hypercover along an inclusion of finite simplicial sets is a covering",
+ "statement": "Let $X$ be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions] with small etale site $X_{\\Et}$ [def-weil-pbc-etale-site], and let $K$ be a hypercover of $X$ in the category $\\mathrm{SR}(X)$ of semi-representable objects over $X$ [def-weil-pbc-semi-representable-object]: a simplicial object of $\\mathrm{SR}(X)$ each of whose terms $K_n$ covers its matching object $M_n(K)$. Let $A\\subseteq B$ be a simplicial subset of a simplicial set [def-weil-pbc-simplicial-set], with $A_n$ and $B_n$ finite and nonempty for every $n\\geq0$ and with $A$ and $B$ having finitely many nondegenerate simplices. Then the restriction morphism $\\operatorname{Hom}(B,K)_0\\to\\operatorname{Hom}(A,K)_0$ [def-weil-pbc-simplicial-hom-object] is a covering in $\\mathrm{SR}(X)$. Thus for every object $T$ of $X_{\\Et}$ and every $T$-point $a$ of $\\operatorname{Hom}(A,K)_0$ (a compatible family of $T$-points of the $K_n$, one for each simplex of $A$) there are a covering family $\\{T_c\\to T\\}_{c}$ of $X_{\\Et}$ and $T_c$-points $b_c$ of $\\operatorname{Hom}(B,K)_0$ whose restrictions are the restrictions $a|_{T_c}$ of $a$.",
  "source": {
   "document": "literature/stacks-project/hypercovering.tex",
   "place": "Lemma 01GN (lemma-add-simplices), statement and proof using Lemma 01GM (lemma-one-more-simplex); the missing simplex is lifted along the matching cover"
  },
- "stmt_deps": ["def-weil-pbc-scheme-conventions", "def-weil-pbc-etale-site", "def-weil-pbc-finite-split-hypercover"],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-semi-representable-object",
+  "def-weil-pbc-simplicial-set",
+  "def-weil-pbc-simplicial-hom-object"
+ ],
+ "proof": [
+  {
+   "text": "*Chain of one-simplex extensions.* By [lem-weil-pbc-simplicial-set-add-simplices] there is a chain of simplicial subsets $A=W^0\\subseteq W^1\\subseteq\\dots\\subseteq W^r=B$ such that each inclusion $W^k\\subseteq W^{k+1}$ adds one simplex $x_k\\in W^{k+1}_{n_k}$ subject to conditions (1)-(3) there. Each $W^k$ satisfies the hypotheses needed for $\\operatorname{Hom}(W^k,K)_0$ [def-weil-pbc-simplicial-hom-object]: $A_n\\subseteq W^k_n\\subseteq B_n$, so $W^k_n$ is finite and nonempty; and a simplex $y\\in W^k_m$ that is nondegenerate in $W^k$ is nondegenerate in $B$ [def-weil-pbc-simplicial-set]: if $y=B(f)(z)$ with $f:[m]\\to[p]$, $p<m$, $z\\in B_p$, factor $f=\\iota\\circ f'$ with $f':[m]\\to[p']$ surjective and $\\iota:[p']\\to[p]$ injective, $p'\\leq p<m$, so that $y=B(f')(z')$ with $z'=B(\\iota)(z)$; let $g:[p']\\to[m]$, $g(l)=\\min f'^{-1}(l)$, an order-preserving section of $f'$; then $z'=B(f'\\circ g)(z')=B(g)(y)\\in W^k_{p'}$ because $W^k$ is a simplicial subset, and $y=W^k(f')(z')$ is degenerate in $W^k$. Hence the nondegenerate simplices of $W^k$ are among the finitely many nondegenerate simplices of $B$.",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-add-simplices",
+    "def-weil-pbc-simplicial-hom-object",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 018S (lemma-add-simplices), cited in the proof of hypercovering.tex Lemma 01GN"
+   }
+  },
+  {
+   "text": "*Each extension gives a covering.* For $0\\leq k<r$ apply [lem-weil-pbc-hypercover-one-more-simplex] to the hypercover $K$ and the inclusion $U=W^k\\subseteq V=W^{k+1}$ with $n=n_k$, $x=x_k$: by step 1 both have finite nonempty sets of simplices in each degree and finitely many nondegenerate simplices, and conditions (1)-(3) hold by the choice of the chain. Hence the restriction morphism $\\rho_k:\\operatorname{Hom}(W^{k+1},K)_0\\to\\operatorname{Hom}(W^k,K)_0$ [def-weil-pbc-simplicial-hom-object] is a covering in $\\mathrm{SR}(X)$ [def-weil-pbc-semi-representable-object].",
+   "uses": [
+    "lem-weil-pbc-hypercover-one-more-simplex",
+    "def-weil-pbc-simplicial-hom-object",
+    "def-weil-pbc-semi-representable-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GM (lemma-one-more-simplex), cited in the proof of Lemma 01GN"
+   }
+  },
+  {
+   "text": "*Composition.* The restriction morphism $\\rho:\\operatorname{Hom}(B,K)_0\\to\\operatorname{Hom}(A,K)_0$ equals $\\rho_0\\circ\\rho_1\\circ\\dots\\circ\\rho_{r-1}$: both are morphisms $\\rho'$ with $u^A_s\\circ\\rho'=u^B_s$ for every simplex $s$ of $A$ (for the composite, apply the defining equation of each $\\rho_k$ in turn, as $s\\in A\\subseteq W^k$ for all $k$), and such a morphism is unique by the universal property of $\\operatorname{Hom}(A,K)_0$ [def-weil-pbc-simplicial-hom-object]. If $r=0$ then $A=B$ and $\\rho$ is the identity, which is a covering since each one-member family $\\{\\mathrm{id}:V_j\\to V_j\\}$ is a covering family of $X_{\\Et}$ [def-weil-pbc-etale-site]. If $r\\geq1$, induction on $r$ with [lem-weil-pbc-semi-representable-covering-permanence](1) shows that the composite of the coverings $\\rho_k$ of step 2 is a covering.",
+   "uses": [
+    "def-weil-pbc-simplicial-hom-object",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-semi-representable-covering-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Lemma 01GN (lemma-add-simplices), proof (composition of the coverings of Lemma 01GM; Lemma 01G4 (1))"
+   }
+  },
+  {
+   "text": "*Local lifting.* Write $\\operatorname{Hom}(A,K)_0=\\{L_j\\}_{j\\in J}$, $\\operatorname{Hom}(B,K)_0=\\{M_i\\}_{i\\in I}$ and $\\rho=(\\alpha,(g_i))$. A $T$-point $a$ of $\\operatorname{Hom}(A,K)_0$ is a pair $(j,t)$ with $t:T\\to L_j$ an $X$-morphism [def-weil-pbc-semi-representable-object]. Since $\\rho$ is a covering (step 3), $\\{g_i:M_i\\to L_j\\}_{\\alpha(i)=j}$ is a covering family of $X_{\\Et}$, i.e. a jointly surjective family of etale morphisms [def-weil-pbc-etale-site]. Put $T_i=T\\times_{t,L_j,g_i}M_i$ for $\\alpha(i)=j$; these fibre products are objects of $X_{\\Et}$ [def-weil-pbc-etale-site], and by [lem-weil-pbc-etale-covering-base-change] the projections $p_i:T_i\\to T$ are etale and jointly surjective, so $\\{p_i:T_i\\to T\\}_{\\alpha(i)=j}$ is a covering family of $X_{\\Et}$. The $T_i$-point $b_i=(i,q_i)$ of $\\operatorname{Hom}(B,K)_0$, $q_i:T_i\\to M_i$ the second projection, has image $\\rho(b_i)=(j,g_i\\circ q_i)=(j,t\\circ p_i)$, the restriction $a|_{T_i}$ of $a$. By [def-weil-pbc-simplicial-hom-object] these points are the compatible families described in the statement.",
+   "uses": [
+    "def-weil-pbc-semi-representable-object",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-weil-pbc-simplicial-hom-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Definition 01G3 (definition-covering-SR), unpacked"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-simplicial-set-add-simplices",
+  "def-weil-pbc-simplicial-hom-object",
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-hypercover-one-more-simplex",
+  "def-weil-pbc-semi-representable-object",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-semi-representable-covering-permanence",
+  "lem-weil-pbc-etale-covering-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Lemma 01GN (lemma-add-simplices), proof, with Lemma 01GM (lemma-one-more-simplex) and simplicial.tex Lemma 018S (lemma-add-simplices); step 4 unpacks Definition 01G3"
+ },
  "mathlib_searches": [
-  {"tool": "leansearch", "query": "Finite simplicial inclusion mapping to a hypercover extends locally over missing nondegenerate simplices", "results": "SSet.Subcomplex.N.casesOn (Mathlib.AlgebraicTopology.SimplicialSet.NonDegenerateSimplicesSubcomplex), no hypercover extension theorem", "date": "2026-10-10", "verdict": "no match"},
-  {"tool": "leanfinder", "query": "Finite simplicial subset of hypercover mapping object locally lifts to larger finite simplicial set", "results": "OneHypercoverFamily.exists_oneHypercover (Mathlib.CategoryTheory.Sites.Hypercover.IsSheaf), only 1-hypercovers; no finite simplicial lifting theorem", "date": "2026-10-10", "verdict": "no match"},
-  {"tool": "grep", "query": "rg -n 'finite.*simplicial|simplex.*cover' /tmp/mathlib-f1/Mathlib/CategoryTheory/Sites/Hypercover; rg -n 'Hypercover' /tmp/mathlib-f1/Mathlib/CategoryTheory/Sites/Hypercover/One.lean", "results": "Hypercover/One.lean:13-23 concerns 1-hypercovers; no all-degree finite simplex lifting declaration in Hypercover modules", "date": "2026-10-10", "verdict": "no match"}
+  {
+   "tool": "leansearch",
+   "query": "Finite simplicial inclusion mapping to a hypercover extends locally over missing nondegenerate simplices",
+   "results": "SSet.Subcomplex.N.casesOn (Mathlib.AlgebraicTopology.SimplicialSet.NonDegenerateSimplicesSubcomplex), no hypercover extension theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite simplicial subset of hypercover mapping object locally lifts to larger finite simplicial set",
+   "results": "OneHypercoverFamily.exists_oneHypercover (Mathlib.CategoryTheory.Sites.Hypercover.IsSheaf), only 1-hypercovers; no finite simplicial lifting theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'finite.*simplicial|simplex.*cover' /tmp/mathlib-f1/Mathlib/CategoryTheory/Sites/Hypercover; rg -n 'Hypercover' /tmp/mathlib-f1/Mathlib/CategoryTheory/Sites/Hypercover/One.lean",
+   "results": "Hypercover/One.lean:13-23 concerns 1-hypercovers; no all-degree finite simplex lifting declaration in Hypercover modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "hypercovering: adding one nondegenerate simplex gives a covering map of Hom objects; restriction along inclusion of finite simplicial sets is a covering",
+   "results": "OneHypercover.toZeroHypercover, ZeroHypercover.add, Cover.oneHypercover, ZeroHypercover.toOneHypercover (Mathlib.CategoryTheory.Sites.Hypercover.*)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
- "created": {"by": "worker", "item": "lem-weil-pbc-hypercover-refinement", "date": "2026-10-10"},
- "lean_audit": {"master": {"state": "none"}, "slopmaster2": {"state": "none"}},
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-refinement",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-hypercover-finite-simplex-lifting",
+  "worker": "stage1",
+  "summary": "Read Stacks 01GN and its proof, 01GM, 01G0/01G3/01G4/01G5, 01G2, and simplicial 017H-017N, 018R, 018S, 018V. The statement is kept in meaning but now cites definition nodes for SR(X), its coverings and hypercovers, simplicial sets and Hom(S,K)_0 (previously inline); def-weil-pbc-finite-split-hypercover dropped from stmt_deps (unused). Proof in four steps following 01GN: chain of one-simplex extensions (018S, with the finiteness of the intermediate simplicial sets written out), each extension a covering (01GM), composition (01G4(1)) with the r=0 case, and the local-lifting clause unpacked from Definition 01G3 with the etale base-change leaf. No slopmaster2 Lean exists for the item or the new nodes.",
+  "blueprint": "Realizes, in lem-weil-pbc-hypercover-refinement's proof, the fourth paragraph's 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement' (as used in its step 5 for the prism inclusion): steps 1-3 give the covering, step 4 the local lift after an etale covering."
+ },
+ "reviewed": "2026-10-10 L: 4 steps following 01GN (a chain adding one simplex at a time 018S, the one-more-simplex covering 01GM, composition of coverings 01G4, the local lifts unpacked); the hypercover notions given definition nodes (SR(X), simplicial sets as a Mathlib leaf, Hom(S,K)_0, finite limits in SR as a leaf) and the source's omitted claims made nodes; 8 new nodes"
 }

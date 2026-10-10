@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-semi-representable-covering-permanence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement'; the composition of the finitely many one-simplex coverings",
+   "via": [
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coverings of semi-representable objects are stable under composition and base change",
+ "statement": "Let $X$ be a scheme and $\\mathrm{SR}(X)$ the category of semi-representable objects over $X$, with its coverings [def-weil-pbc-semi-representable-object]. (1) If $a:K\\to L$ and $b:L\\to M$ are coverings in $\\mathrm{SR}(X)$, then $b\\circ a:K\\to M$ is a covering. (2) If $a:K\\to L$ is a covering and $c:L'\\to L$ is any morphism of $\\mathrm{SR}(X)$, then the projection $L'\\times_LK\\to L'$ from the fibre product in $\\mathrm{SR}(X)$ is a covering.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Lemma 01G4 (lemma-covering-permanence), parts (1) and (2), for SR(C, X) = SR(C/X) with C = X_et"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-semi-representable-object"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composition of covering families is a covering, base change of a covering family is a covering in a Grothendieck pretopology",
+   "results": "CategoryTheory.Precoverage.IsStableUnderBaseChange.mk, GrothendieckTopology.instIsStableUnderCompositionToPrecoverage, Pretopology.mk, Precoverage.toPretopology, AlgebraicGeometry.Scheme.overPretopology",
+   "date": "2026-10-10",
+   "verdict": "no match for families of families; candidates for the per-component argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage.IsStableUnderComposition",
+   "results": "Precoverage.IsStableUnderComposition, Precoverage.comp_mem_coverings (Mathlib.CategoryTheory.Sites.Precoverage)",
+   "date": "2026-10-10",
+   "verdict": "no match for SR(X); Precoverage.comp_mem_coverings is the per-component composition of covering families (candidate)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n comp_mem_coverings ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Precoverage.lean; rg -n 'SemiRepresentable' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Precoverage.lean:108 and :154 comp_mem_coverings; no semi-representable objects",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-finite-simplex-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

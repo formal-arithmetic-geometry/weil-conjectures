@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-simplicial-set-add-simplices",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement'; the reduction to adding one missing simplex at a time",
+   "via": [
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An inclusion of finite simplicial sets is a chain of one-simplex extensions",
+ "statement": "Let $U\\subseteq V$ be a simplicial subset of a simplicial set [def-weil-pbc-simplicial-set], with $U_n$ and $V_n$ finite and nonempty for all $n\\geq0$, and assume that $U$ and $V$ have finitely many nondegenerate simplices. Then there is a chain of simplicial subsets $U=W^0\\subseteq W^1\\subseteq\\dots\\subseteq W^r=V$ ($r\\geq0$) such that for every $0\\leq k<r$ there are $n\\geq0$ and $x\\in W^{k+1}_n$, $x\\notin W^k_n$, with (1) $W^{k+1}_i=W^k_i$ for all $i<n$, (2) $W^{k+1}_n=W^k_n\\cup\\{x\\}$, and (3) every $z\\in W^{k+1}_j$ with $j>n$ and $z\\notin W^k_j$ is degenerate (as a simplex of $W^{k+1}$).",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 018S (lemma-add-simplices), with the conditions of Lemma 018R (lemma-glue-simplex)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inclusion of finite simplicial sets is obtained by attaching one nondegenerate simplex at a time along its boundary",
+   "results": "SSet.Finite, SSet.modelCategoryQuillen.boundary_ι_mem_I, SSet.Subcomplex.le_iff_contains_nonDegenerate",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monomorphism of simplicial sets is a relative cell complex with cells boundary inclusions of standard simplices for nondegenerate simplices not in the image",
+   "results": "SSet.modelCategoryQuillen.J_le_monomorphisms, I_le_monomorphisms, SSet.Subcomplex.instMonoToRange, SSet.modelCategoryQuillen.cofibration_of_mono",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,30p and 117-132, 425-435 ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology/SimplicialSet/Skeleton.lean",
+   "results": "SSet.skeletonOfMono (line 126: range i joined with Y.skeleton n) and SSet.relativeCellComplexOfMono (line 428): relative cell complex attaching all nondegenerate d-simplices not in the range at once along boundary inclusions",
+   "date": "2026-10-10",
+   "verdict": "generalization in another form, not one line: Mathlib attaches all simplices of one dimension simultaneously (a pushout of a coproduct of boundary inclusions), not one simplex at a time; candidate for the split"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-finite-simplex-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

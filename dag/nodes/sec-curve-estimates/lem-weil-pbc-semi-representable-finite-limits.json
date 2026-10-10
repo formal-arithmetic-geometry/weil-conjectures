@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-pbc-semi-representable-finite-limits",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement'; the finite limits (matching objects, Hom objects, fibre products) formed in the category of semi-representable objects",
+   "via": [
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The category of families of objects has finite limits",
+ "statement": "Let $\\mathcal C$ be a category with a final object $e$ and fibre products (for instance the small etale site $X_{\\Et}$ of a scheme $X$ [def-weil-pbc-etale-site], with final object $\\mathrm{id}_X$). Let $\\mathrm{FC}(\\mathcal C)$ be the category whose objects are families $\\{U_i\\}_{i\\in I}$ of objects of $\\mathcal C$ indexed by sets, whose morphisms $\\{U_i\\}_{i\\in I}\\to\\{V_j\\}_{j\\in J}$ are pairs $(\\alpha,(f_i)_{i\\in I})$ of a map $\\alpha:I\\to J$ and morphisms $f_i:U_i\\to V_{\\alpha(i)}$ of $\\mathcal C$, and whose composition is $(\\beta,(g_j))\\circ(\\alpha,(f_i))=(\\beta\\circ\\alpha,(g_{\\alpha(i)}\\circ f_i))$. Then: (1) the one-member family $\\{e\\}$ is a final object of $\\mathrm{FC}(\\mathcal C)$; (2) for morphisms $(\\alpha,f_i):\\{U_i\\}_{i\\in I}\\to\\{V_j\\}_{j\\in J}$ and $(\\beta,g_k):\\{W_k\\}_{k\\in K}\\to\\{V_j\\}_{j\\in J}$, the family $\\{U_i\\times_{f_i,V_{\\alpha(i)},g_k}W_k\\}_{(i,k)\\in I\\times K,\\ \\alpha(i)=\\beta(k)}$ with its two projections is a fibre product in $\\mathrm{FC}(\\mathcal C)$; (3) consequently $\\mathrm{FC}(\\mathcal C)$ has all finite limits.",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Lemma 01G2 (lemma-coprod-prod-SR), parts (3), (6) and the statement on SR(C, X); Definition 01G0 (definition-SR)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of families of objects (formal coproducts) with morphisms given by a map of index sets and componentwise morphisms",
+   "results": "CategoryTheory.Limits.FormalCoproduct, FormalCoproduct.Hom.mk, FormalCoproduct.category (Mathlib.CategoryTheory.Limits.FormalCoproducts)",
+   "date": "2026-10-10",
+   "verdict": "match (the category)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "category of formal coproducts of objects of C has pullbacks and a terminal object, hence finite limits",
+   "results": "CategoryTheory.Limits.FormalCoproduct.instHasPullbacks (Mathlib.CategoryTheory.Limits.FormalCoproducts)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.HasTerminal (CategoryTheory.Limits.FormalCoproduct _)",
+   "results": "CategoryTheory.Limits.FormalCoproduct.instHasTerminal (Mathlib.CategoryTheory.Limits.FormalCoproducts.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'instance|def pullbackCone|structure' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean; rg -n hasFiniteLimits_of_hasTerminal_and_pullbacks ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Constructions",
+   "results": "Basic.lean:50 structure FormalCoproduct, :61 structure Hom (f, phi), :279 instance HasTerminal from incl of terminal, :295 def pullbackCone indexed by Function.Pullback f.f g.f, :359 instance HasPullbacks; LimitsOfProductsAndEqualizers.lean:270 hasFiniteLimits_of_hasTerminal_and_pullbacks",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.FormalCoproduct; FormalCoproduct.instHasTerminal; FormalCoproduct.pullbackCone; FormalCoproduct.instHasPullbacks; CategoryTheory.Limits.hasFiniteLimits_of_hasTerminal_and_pullbacks",
+  "file": "Mathlib/CategoryTheory/Limits/FormalCoproducts/Basic.lean; Mathlib/CategoryTheory/Limits/Constructions/LimitsOfProductsAndEqualizers.lean",
+  "how": "one declaration per clause: FC(C) = FormalCoproduct C (Basic.lean lines 50 and 61, morphisms (f, phi) as here); (1) instHasTerminal (Basic.lean line 279, via isTerminalIncl at line 275: incl of a terminal object is terminal); (2) pullbackCone (Basic.lean line 295, indexed by Function.Pullback f.f g.f = pairs (i,k) with alpha(i)=beta(k), components the pullbacks in C) with isLimitPullbackCone and instHasPullbacks (line 359, needs HasPullbacks C); (3) hasFiniteLimits_of_hasTerminal_and_pullbacks (LimitsOfProductsAndEqualizers.lean line 270)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-finite-simplex-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

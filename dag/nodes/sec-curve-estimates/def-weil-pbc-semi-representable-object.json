@@ -1,0 +1,77 @@
+{
+ "id": "def-weil-pbc-semi-representable-object",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement'; the 'matching covers' and the semi-representable objects in which the boundaries are lifted",
+   "via": [
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Semi-representable objects over a scheme, their coverings and hypercovers",
+ "statement": "Let $X$ be a scheme with small etale site $X_{\\Et}$ [def-weil-pbc-etale-site]. (1) The category $\\mathrm{SR}(X)$ of *semi-representable objects over $X$*: its objects are families $\\{U_i\\to X\\}_{i\\in I}$ of objects of $X_{\\Et}$ indexed by a set $I$; a morphism $\\{U_i\\to X\\}_{i\\in I}\\to\\{V_j\\to X\\}_{j\\in J}$ is a pair $(\\alpha,(f_i)_{i\\in I})$ of a map $\\alpha:I\\to J$ and $X$-morphisms $f_i:U_i\\to V_{\\alpha(i)}$, composed by composing the index maps and the components. It has finite limits, with final object $\\{\\mathrm{id}_X\\}$ and fibre products as in [lem-weil-pbc-semi-representable-finite-limits] (applied to $\\mathcal C=X_{\\Et}$). (2) For an object $T$ of $X_{\\Et}$, a *$T$-point* of $L=\\{L_j\\to X\\}_{j\\in J}$ is a morphism $\\{T\\}\\to L$, i.e. a pair $(j,t)$ with $j\\in J$ and $t:T\\to L_j$ an $X$-morphism; $L(T)$ denotes the set of $T$-points, and a morphism $L\\to L'$ induces $L(T)\\to L'(T)$ by composition. (3) A morphism $(\\alpha,f_i):\\{U_i\\}_{i\\in I}\\to\\{V_j\\}_{j\\in J}$ of $\\mathrm{SR}(X)$ is a *covering* if for every $j\\in J$ the family $\\{f_i:U_i\\to V_j\\}_{i\\in I,\\ \\alpha(i)=j}$ is a covering family of $X_{\\Et}$. (4) A simplicial object $K$ of $\\mathrm{SR}(X)$ is a functor $K:\\Delta^{\\mathrm{op}}\\to\\mathrm{SR}(X)$, with terms $K_n$, operators $K(\\varphi):K_n\\to K_m$ for $\\varphi:[m]\\to[n]$, face maps $d_i$ and degeneracy maps $s_i$ as in [def-weil-pbc-simplicial-set]. Its *matching objects* are: $M_0(K)=\\{\\mathrm{id}_X\\}$; $M_1(K)=K_0\\times K_0$, the product in $\\mathrm{SR}(X)$ (fibre product over the final object); and for $n\\geq2$, $M_n(K)$ is the limit in $\\mathrm{SR}(X)$ of the finite diagram consisting of copies $K_{n-1}^{(i)}$ of $K_{n-1}$ for $0\\leq i\\leq n$, copies $K_{n-2}^{(i,j)}$ of $K_{n-2}$ for $0\\leq i<j\\leq n$, and the arrows $d_{j-1}:K_{n-1}^{(i)}\\to K_{n-2}^{(i,j)}$ and $d_i:K_{n-1}^{(j)}\\to K_{n-2}^{(i,j)}$; thus its $T$-points are the tuples $(x_0,\\dots,x_n)$ of $T$-points of $K_{n-1}$ with $d_{j-1}x_i=d_ix_j$ for all $0\\leq i<j\\leq n$. The canonical morphism $K_n\\to M_n(K)$ is the one with components $(d_0,\\dots,d_n)$ (for $n=0$ the unique morphism to the final object). (5) A *hypercover of $X$ in $\\mathrm{SR}(X)$* is a simplicial object $K$ of $\\mathrm{SR}(X)$ such that $K_n\\to M_n(K)$ is a covering for every $n\\geq0$ (for $n=0$: the family $K_0$ is a covering family of $X$ in $X_{\\Et}$).",
+ "source": {
+  "document": "literature/stacks-project/hypercovering.tex",
+  "place": "Definition 01G0 (definition-SR), Definition 01G3 (definition-covering-SR), Definition 01G5 (definition-hypercovering), with the matching object (cosk_{n-1} sk_{n-1} K)_n described by simplicial.tex Lemma 0186 (lemma-formula-limit)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-semi-representable-finite-limits",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of families of objects (formal coproducts) with morphisms given by a map of index sets and componentwise morphisms",
+   "results": "CategoryTheory.Limits.FormalCoproduct (Mathlib.CategoryTheory.Limits.FormalCoproducts)",
+   "date": "2026-10-10",
+   "verdict": "partial: clause (1) is FormalCoproduct (Over X restricted to etale objects); coverings, matching objects and hypercovers absent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "hypercover of a site, map from the n-th term to the matching object (coskeleton) is a covering",
+   "results": "CategoryTheory.GrothendieckTopology.OneHypercover, Cover.preOneHypercover (Mathlib.CategoryTheory.Sites.Hypercover.One)",
+   "date": "2026-10-10",
+   "verdict": "no match: only 1-hypercovers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "hypercovering: adding one nondegenerate simplex gives a covering map of Hom objects; restriction along inclusion of finite simplicial sets is a covering",
+   "results": "OneHypercover.toZeroHypercover, ZeroHypercover.add, Cover.oneHypercover (Mathlib.CategoryTheory.Sites.Hypercover.*)",
+   "date": "2026-10-10",
+   "verdict": "no match: only 0- and 1-hypercovers"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'SemiRepresentable|semi-representable' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Hypercover/",
+   "results": "no SemiRepresentable; Hypercover/ has Zero, ZeroFamily, One, Homotopy, IsSheaf, Saturate, SheafOfTypes, Subcanonical: no simplicial hypercover with matching objects",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-finite-simplex-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

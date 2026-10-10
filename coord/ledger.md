@@ -1401,3 +1401,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:23 L: merged J1 lem-weil-pbc-local-nagata-domain-analytically-unramified (0331, re-delivered) and F1 lem-galois-pi1-finite-etale-image-stabilizer (SGA 1 V 6.13, +1 node).
 - 12:23 L: accepted lem-sc-positive-degree-ample (4 steps along the Lean, 0 new).
 - 12:24 L: accepted lem-weil-pbc-tor-symmetry (00M3, 7 steps; new node 00M1 and two Mathlib leaves).
+- 12:24 L: accepted lem-weil-pbc-hypercover-finite-simplex-lifting (01GN, 4 steps; 8 new nodes: SR(X), simplicial sets (leaf), Hom(S,K)_0 and its existence, add-simplices 018S, one-more-simplex 01GM, covering permanence 01G4, finite limits in SR (leaf)) and lem-pc-presheaf-module-inverse-image-adjunction (008T/008U, 8 steps; +1 leaf).

@@ -1,0 +1,70 @@
+{
+ "id": "def-weil-pbc-simplicial-hom-object",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement'; the objects Hom(S, K)_0 of compatible face data on a finite simplicial set S (the 'compatible boundaries' and their lifts)",
+   "via": [
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The semi-representable object of maps from a finite simplicial set",
+ "statement": "Let $X$ be a scheme, $K$ a simplicial object of the category $\\mathrm{SR}(X)$ of semi-representable objects over $X$ [def-weil-pbc-semi-representable-object], and $S$ a simplicial set [def-weil-pbc-simplicial-set] with $S_n$ finite and nonempty for all $n\\geq0$ and with finitely many nondegenerate simplices. For an object $W$ of $\\mathrm{SR}(X)$, an *$S$-family in $K$ over $W$* is a family of morphisms $f_s:W\\to K_n$ of $\\mathrm{SR}(X)$, one for each $n\\geq0$ and $s\\in S_n$, with $K(\\varphi)\\circ f_s=f_{S(\\varphi)(s)}$ for every $\\varphi:[m]\\to[n]$ and $s\\in S_n$ (equivalently, a morphism of simplicial objects $W\\times S\\to K$, where $(W\\times S)_n=\\coprod_{s\\in S_n}W$); composing with a morphism $W'\\to W$ gives an $S$-family over $W'$. The object $\\operatorname{Hom}(S,K)_0$ is an object of $\\mathrm{SR}(X)$ with an $S$-family $(u_s)$ over it which is universal: for every $W$, $g\\mapsto(u_s\\circ g)_s$ is a bijection from morphisms $W\\to\\operatorname{Hom}(S,K)_0$ to $S$-families over $W$. It exists by [lem-weil-pbc-simplicial-hom-object-exists] and is unique up to unique isomorphism compatible with the universal families. In particular, for an object $T$ of $X_{\\Et}$ the $T$-points of $\\operatorname{Hom}(S,K)_0$ are the $S$-families over $\\{T\\}$: compatible families of $T$-points of the $K_n$, one for each simplex of $S$. For a simplicial subset $A\\subseteq S$ satisfying the same hypotheses, restriction $(f_s)_{s\\in S}\\mapsto(f_s)_{s\\in A}$ sends $S$-families to $A$-families compatibly with composition; the *restriction morphism* $\\operatorname{Hom}(S,K)_0\\to\\operatorname{Hom}(A,K)_0$ is the unique morphism $\\rho$ with $u^A_s\\circ\\rho=u^S_s$ for all $s\\in A$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Section 017H (section-hom-from-simplicial-sets), Definition 017I (definition-hom-from-simplicial-set) in degree 0 and the description in the proof of Lemma 017J; used in hypercovering.tex Section 01GG (section-covering) and Section 01GL (section-adding-simplices)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-semi-representable-object",
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-simplicial-hom-object-exists"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "object of a category representing morphisms from a finite simplicial set into a simplicial object (cotensor of simplicial object by simplicial set)",
+   "results": "CategoryTheory.CosimplicialObject, SimplicialCategory.sHom (Mathlib.AlgebraicTopology.SimplicialCategory.Basic)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "limit over the category of simplices of a simplicial set of a simplicial object, representing morphisms from X times U to V",
+   "results": "SSet.hasLimits, SimplicialCategory.sHom, SSet.N",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'cotensor|homFromSSet|Hom\\(U, V\\)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "only the cotensorator of oplax monoidal functors (CategoryTheory/Monoidal/Functor.lean:254)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-finite-simplex-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

@@ -1,0 +1,77 @@
+{
+ "id": "def-weil-pbc-simplicial-set",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries; the matching covers of U lift those boundaries after finite refinement'; the boundaries and finite simplicial sets of the lifting problem",
+   "via": [
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Simplicial sets, nondegenerate simplices, simplicial subsets",
+ "statement": "Let $\\Delta$ be the category whose objects are the finite totally ordered sets $[n]=\\{0<1<\\dots<n\\}$, $n\\geq0$, and whose morphisms are the order-preserving maps. A *simplicial set* $S$ is a functor $S:\\Delta^{\\mathrm{op}}\\to\\mathrm{Sets}$; $S_n=S([n])$ is its set of *$n$-simplices*, and for $\\varphi:[m]\\to[n]$ the map $S(\\varphi):S_n\\to S_m$ is the *simplicial operator* of $\\varphi$ (the face maps $d_i=S(\\delta_i)$, $\\delta_i:[n-1]\\to[n]$ the injection omitting $i$, and the degeneracy maps $s_i=S(\\sigma_i)$, $\\sigma_i:[n+1]\\to[n]$ the surjection repeating $i$). A morphism of simplicial sets is a natural transformation. An $n$-simplex $x\\in S_n$ is *degenerate* if $x=S(f)(y)$ for some order-preserving $f:[n]\\to[m]$ with $m<n$ and some $y\\in S_m$, and *nondegenerate* otherwise. A *simplicial subset* $U\\subseteq S$ is a family of subsets $U_n\\subseteq S_n$ with $S(\\varphi)(U_n)\\subseteq U_m$ for every $\\varphi:[m]\\to[n]$; with the restricted operators it is a simplicial set. $S$ *has finitely many nondegenerate simplices* if the set $\\coprod_{n\\geq0}\\{x\\in S_n: x\\text{ nondegenerate}\\}$ is finite.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Section 0174 (section-simplicial-set) and Definition 0175 (definition-terminology-simplicial-sets), with Definition 016A (definition-simplicial-object); degeneracy is stated in the equivalent form of Mathlib (image under some f:[n]->[m], m<n: such f factors through some sigma_j, and conversely s_j = S(sigma_j))"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "simplicial set, degenerate and nondegenerate simplices, subcomplex, standard simplex and its boundary",
+   "results": "SSet.Subcomplex.N.mk, SSet.Subcomplex.N.mk_surjective, SSet.boundary (Mathlib.AlgebraicTopology.SimplicialSet.*)",
+   "date": "2026-10-10",
+   "verdict": "match (SSet API)"
+  },
+  {
+   "tool": "loogle",
+   "query": "SSet.nonDegenerate",
+   "results": "SSet.nonDegenerate (Mathlib.AlgebraicTopology.SimplicialSet.Degenerate), SSet.mem_nonDegenerate_iff_notMem_degenerate",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inclusion of finite simplicial sets is obtained by attaching one nondegenerate simplex at a time along its boundary",
+   "results": "SSet.Finite (Mathlib.AlgebraicTopology.SimplicialSet.Finite), SSet.Subcomplex.le_iff_contains_nonDegenerate",
+   "date": "2026-10-10",
+   "verdict": "match for the finiteness notion SSet.Finite"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n '^abbrev SSet|^def degenerate|^def nonDegenerate|^abbrev Subcomplex|class Finite' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology/SimplicialSet/{Basic,Degenerate,Subcomplex,Finite}.lean",
+   "results": "Basic.lean:36 abbrev SSet := SimplicialObject (Type u); Degenerate.lean:36 def degenerate (exists m<n, f:[n]->[m], x in range X.map f.op), :42 def nonDegenerate := complement; Subcomplex.lean:45 abbrev Subcomplex := Subfunctor X; Finite.lean:31 class SSet.Finite (finite X.N, the nondegenerate simplices)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SSet; SSet.degenerate; SSet.nonDegenerate; SSet.Subcomplex; SSet.Finite",
+  "file": "Mathlib/AlgebraicTopology/SimplicialSet/Basic.lean; Mathlib/AlgebraicTopology/SimplicialSet/Degenerate.lean; Mathlib/AlgebraicTopology/SimplicialSet/Subcomplex.lean; Mathlib/AlgebraicTopology/SimplicialSet/Finite.lean",
+  "how": "exact, one declaration per clause: simplicial set = SSet (Basic.lean line 36, SimplicialObject (Type u)); degenerate = SSet.degenerate (Degenerate.lean line 36, x in the range of X.map f.op for f:[n]->[m], m<n), nondegenerate = SSet.nonDegenerate (Degenerate.lean line 42); simplicial subset = SSet.Subcomplex (Subcomplex.lean line 45, a subfunctor); finitely many nondegenerate simplices = SSet.Finite (Finite.lean line 31, Finite X.N)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-hypercover-finite-simplex-lifting",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

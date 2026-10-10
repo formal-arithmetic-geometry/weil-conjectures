@@ -1,0 +1,75 @@
+{
+ "id": "lem-pc-filtered-colimit-commrings-elementwise",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "statement, module base-change clause: 'the base change of a module F on X_T is F_{T'} = g_X^* F''; within it the presheaf-level module structure on f_pG (Stacks 008T), whose product is defined on representatives in the filtered colimit f_pO(U) = colim_{V ⊇ f(U)} O(V) of commutative rings and must be independent of them",
+   "via": [
+    "lem-pc-presheaf-module-inverse-image-adjunction",
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-pc-module-pullback-adjunction",
+    "def-pc-module-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Filtered colimits of commutative rings, elementwise",
+ "statement": "Let $\\mathcal I$ be a small filtered category [def-weil-pbc-category-colimit] and $A:\\mathcal I\\to\\mathrm{CRing}$, $i\\mapsto A_i$, a functor to the category of commutative rings, with a colimit $(L,(\\iota_i)_i)$ in the category of commutative rings. Then: (1) every element of $L$ is $\\iota_i(x)$ for some object $i$ and some $x\\in A_i$; (2) for $x\\in A_i$ and $y\\in A_j$ one has $\\iota_i(x)=\\iota_j(y)$ if and only if there are an object $k$ and morphisms $\\phi:i\\to k$, $\\phi':j\\to k$ with $A(\\phi)(x)=A(\\phi')(y)$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008N (section sheaves-section-abelian-presheaves-functorial, lines 2600-2611: the formulas hold in $\\mathcal C$ and 'upon taking underlying sets we get the corresponding formula for presheaves of sets'), used in the proof of Tag 008T; for sets the description is Categories 04AX (categories-section-directed-colimits)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of commutative rings: two elements of the colimit are equal iff they become equal at some later stage",
+   "results": "CategoryTheory.Limits.Types.FilteredColimit.colimit_eq_iff (Mathlib.CategoryTheory.Limits.Types.Filtered, for types), CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.R, RingCat.FilteredColimits.colimitRing (Mathlib.Algebra.Category.Ring.FilteredColimits), Functor.ιColimitType_eq_iff_of_isFiltered",
+   "date": "2026-10-10",
+   "verdict": "match after transfer along the forgetful functor: see grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "elements of a filtered colimit of commutative rings are represented at some stage and equal iff equal at a later stage",
+   "results": "CommRingCat.Colimits.Prequotient.of.inj, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimit, colimitCommRing, colimitCocone (Mathlib.Algebra.Category.Ring.FilteredColimits)",
+   "date": "2026-10-10",
+   "verdict": "constructions of the filtered colimit; the elementwise statements come from the forgetful functor preserving filtered colimits (grep)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'forget_preservesFilteredColimits' Mathlib/Algebra/Category/Ring/FilteredColimits.lean; grep -n 'theorem isColimit_exists_rep\\|theorem isColimit_rep_eq_iff_exists' Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "FilteredColimits.lean:363 instance CommRingCat.FilteredColimits.forget_preservesFilteredColimits : PreservesFilteredColimits (forget CommRingCat.{u}); Basic.lean:130 Concrete.isColimit_exists_rep {D : Cocone F} (hD : IsColimit D) (x) : ∃ j y, D.ι.app j y = x (with PreservesColimit F (forget C)); Basic.lean:175 Concrete.isColimit_rep_eq_iff_exists (hD : IsColimit D) x y : D.ι.app i x = D.ι.app j y ↔ ∃ k f g, F.map f x = F.map g y (with [IsFiltered J], PreservesColimit F (forget C))",
+   "date": "2026-10-10",
+   "verdict": "match: one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.Concrete.isColimit_exists_rep, CategoryTheory.Limits.Concrete.isColimit_rep_eq_iff_exists, CommRingCat.FilteredColimits.forget_preservesFilteredColimits",
+  "file": "Mathlib/CategoryTheory/Limits/ConcreteCategory/Basic.lean",
+  "how": "one Mathlib lemma per clause, for C = CommRingCat.{u}, F : J ⥤ CommRingCat with J small and [IsFiltered J], and any colimit cocone D with hD : IsColimit D; the hypothesis PreservesColimit F (forget CommRingCat) is the instance CommRingCat.FilteredColimits.forget_preservesFilteredColimits (Mathlib/Algebra/Category/Ring/FilteredColimits.lean:363): (1) Concrete.isColimit_exists_rep (Basic.lean:130); (2) Concrete.isColimit_rep_eq_iff_exists (Basic.lean:175). Lines read with sed -n 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-presheaf-module-inverse-image-adjunction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian"
+}
