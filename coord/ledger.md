@@ -2502,3 +2502,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:20 L: merged deliver/J1/lem-weil-pbc-unrestricted-strict-henselization-stalk (reviewer FIX; first push; new nodes: 0)
 - 20:21 L: merged deliver/F1/def-sc-intersection-number (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 20:22 L: merged deliver/C1/lem-sc-strict-henselization-completion-noetherian (reviewer FIX; first push; new nodes: 1)
+- 20:22 L: merged deliver/F1/lem-sc-finite-length-global-submodule (reviewer PASS; first push; new nodes: 1)

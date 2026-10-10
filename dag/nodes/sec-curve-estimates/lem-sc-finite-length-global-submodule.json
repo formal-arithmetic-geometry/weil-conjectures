@@ -47,12 +47,92 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-krull-akizuki-noetherian",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "proof": [
+  {
+   "text": "If x is a unit, then xM=M and M/xM=0, which has finite length. Thus assume x is a nonunit.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.30.9 (Tag 00PF), opening reduction"
+   }
+  },
+  {
+   "text": "Let S be the finite set of maximal ideals containing x, supplied by [lem-sc-finite-maximals-over-element]. For each m in S, localization gives the Noetherian local domain R_m, preserves the fraction field K, and preserves the dimension-one prime-chain bound; M_m is an R_m-submodule of K^{\\oplus r}. The local finite-length theorem [lem-weil-pbc-dim-one-submodule-quotient-finite-length] therefore gives finite length of M_m/xM_m.",
+   "uses": [
+    "lem-sc-finite-maximals-over-element",
+    "lem-weil-pbc-dim-one-submodule-quotient-finite-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00PF (lemma-finite-length-global), algebra.tex lines 29275-29289"
+   }
+  },
+  {
+   "text": "Put Q=M/xM. It is killed by x, so Q_m=0 for every maximal ideal m outside S. If N is a nonzero subquotient of Q, choose a nonzero element of N; its annihilator is proper and is contained in some maximal ideal m, and x in that maximal ideal, so m lies in S. Hence every strict inclusion in a chain of submodules of Q remains strict after localization at at least one m in S.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00PF (lemma-finite-length-global), algebra.tex lines 29289-29302"
+   }
+  },
+  {
+   "text": "For each m in S, localization sends a chain of submodules of Q to a chain in Q_m. Given a strict chain N_0 subsetneq ... subsetneq N_k in Q, step 3 chooses for each index i a maximal ideal m(i) in S where N_{i-1,m(i)} subsetneq N_{i,m(i)} remains strict. For a fixed m, the indices with m(i)=m form a strictly increasing subchain after localization, so their number is at most length_{R_m}(Q_m), finite by step 2. Summing over the finite set S bounds k by the sum of these local lengths. Hence every chain in Q has bounded finite length, so Q=M/xM has finite length.",
+   "uses": [
+    "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00PF (lemma-finite-length-global), algebra.tex lines 29289-29302"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-length",
+  "lem-sc-finite-maximals-over-element",
+  "lem-weil-pbc-dim-one-submodule-quotient-finite-length"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 10.30.9 (Tag 00PF), global localization argument reconstructed from the cited proof"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-finite-length-global-submodule",
+  "worker": "stage1",
+  "summary": "Split the global 00PF finite-length statement into the unit case, localization at the finite set of maximal ideals over (x), detection of strict subquotient inclusions by localization, and the finite sum of local length bounds. Created one statement-only support node for finiteness of those maximal ideals. No sorry-free Lean declaration states the item.",
+  "blueprint": "The steps realize the ancestor lem-sc-pic-proper-ntorsion place 09IG, proof sentence 'By Krull-Akizuki the ring B is Noetherian', through the 00PF finite-length argument used by the intervening Krull-Akizuki node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-dim-one-submodule-quotient-finite-length",
+    "why": "Step 2 and step 4 need the local finite-length theorem for arbitrary submodules of K^{oplus r}; the curve-estimate route has no replacement for this generic commutative-algebra result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dim-one-submodule-quotient-finite-length"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-flg2252",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-flg2252 (reviewer sub-agent of L); spot-checked: C1: step 2/4 cite local 00PE node lem-weil-pbc-dim-one-submodule-quotient-finite-length and reduce by localization at the finite set S of maximal ideals over x (new node lem-sc-finite-maximals-over-element); C4: R_m is a Noetherian local domain of dimension exactly 1 since 0 subsetneq m (x in m), fraction field K, M_m subset K^r, matching the 00PE hypotheses; item hypotheses equal Stacks 00PF and what Krull-Akizuki uses; D: support detection (step 3) plus partition-and-sum (step 4) proves finite length, no cycle; B: new node is a real lemma (needs finiteness of minimal primes over xR plus dim-1 argument), not elementary, no same-tag duplicate, searches recorded; class b: nothing restates the local node. No repairs needed; second reading missed no fault."
+ }
 }
