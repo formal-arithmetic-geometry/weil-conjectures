@@ -1,8 +1,8 @@
 # Work queue
 
-851 items; claim with `tools/claim.py next <group> [--stage N]`.
+846 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (317)
+## Stage 1: nodes to split (312)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -44,7 +44,6 @@
 | `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
 | `lem-pc-chi-zero-dim-support` | 3009 | none |
 | `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
-| `lem-sc-second-kummer-divisors` | 3009 | none |
 | `lem-sc-very-ample-separation-criterion` | 3009 | none |
 | `lem-weil-pbc-simplicial-index-finite-initial` | 3009 | none |
 | `lem-exc-cochains-derived-invariants` | 3010 | none |
@@ -54,17 +53,13 @@
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
 | `lem-sc-canonical-degree` | 3010 | rests_on_sorry |
 | `lem-sc-curve-base-change-relative-dimension-one` | 3010 | none |
-| `lem-sc-function-field-cd-one` | 3010 | none |
-| `lem-sc-generic-kummer-residues` | 3010 | none |
 | `lem-sc-riemann-roch` | 3010 | rests_on_sorry |
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
 | `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-genus-well-defined` | 3011 | none |
 | `lem-pc-leray-degenerate-sections` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
-| `lem-pc-very-ample-disjoint-union` | 3011 | none |
 | `lem-sc-finite-duality` | 3011 | rests_on_sorry |
-| `lem-sc-group-cd-one` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
 | `lem-sc-ext-locally-free` | 3012 | sorry_here |
 | `lem-sc-p1-graded-resolution` | 3012 | sorry_here |
@@ -863,7 +858,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 336 nodes that wait for stage 1, 978 nodes that wait for a statement dependency.
+Not open yet: 331 nodes that wait for stage 1, 980 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
