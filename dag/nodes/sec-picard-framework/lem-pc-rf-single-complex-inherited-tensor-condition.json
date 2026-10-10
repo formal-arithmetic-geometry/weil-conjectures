@@ -21,9 +21,36 @@
   "def-pc-derived-pullback",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix x' and write R = O_{S,s}, A = O_{X,x}, B = O_{S',s'}, and C = O_{X',x'}. The stalk of the map for E tensor^L K is obtained by first forming E_x tensor_A^L K_x, then tensoring over R with B and extending scalars to C.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJA, proof of part (1), local stalk computation"
+   }
+  },
+  {
+   "text": "By the transitivity of derived tensor products [lem-pc-derived-tensor-transitivity], the source and target of this stalk map identify with the complexes obtained by tensoring the assumed stalk map for $K_x\\otimes^L_{R}B$ to $K'_{x'}$ by $E_x$. Since $C$ is a localization of $A\\otimes_R B$ (stalk of $X'=X\\times_S S'$), it is flat over $A\\otimes_R B$, so $H^i(-)\\otimes_{A\\otimes_R B}C=H^i(-\\otimes_{A\\otimes_R B}C)$ (Tag 00HT); hence the hypothesis says that $(K_x\\otimes^L_R B)\\otimes_{A\\otimes_R B}C\\to K'_{x'}$ is a quasi-isomorphism, and the same identification applies to the source for $E\\otimes^L K$. Tensoring an isomorphism by $E_x$ remains an isomorphism, so the induced map on every $H^i$ is an isomorphism. Since $x'$ and $i$ were arbitrary, the inherited stalkwise condition holds everywhere.",
+   "uses": [
+    "lem-pc-derived-tensor-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJA, proof of part (1), computation using the transitive property of tensor product (Tag 0BYJ, more-algebra-lemma-triple-tensor-product)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-tensor-transitivity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJA, proof of part (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +82,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-rf-base-change-single-complex-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-rf-single-complex-inherited-tensor-condition",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration states the item. I split the proof into the stalkwise computation from Stacks Tag 0DJA(1): after fixing x', the assumed base-change map is tensored with E_x, and derived-tensor transitivity identifies that map with the inherited condition. The only non-elementary input is recorded as the unsplit generic node lem-pc-derived-tensor-transitivity.",
+  "blueprint": "Realizes the ancestor proof step 'single-complex base-change criterion (Tags 0DJ8, 0DJ9, 0DJA)' through the Tag 0DJA(1) transitivity computation."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-itc2918",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-itc2918 (reviewer sub-agent of L); spot-checked: Statement byte-identical to sheaf-dag and to Tag 0DJA(1) (E\\otimes K inheritance, not a restriction-to-opens statement), and exactly the form E1 (lem-pc-rf-base-change-single-complex-criterion step 1, K=G, K'=(g')^*G) uses; F1 does not cite it. Proof is the 0DJA(1) transitivity argument via new generic node lem-pc-derived-tensor-transitivity (Tag 0BYJ; true; no DAG duplicate, only defs; Mathlib has no derived tensor). Arbitrary E, x', i handled honestly. FIX more, RETURN less: step 2 silently passed from the H^i-then-tensor-C hypothesis to a quasi-isomorphism of complexes; added the elementary flatness of C=O_{X',x'} as a localization of A\\otimes_R B (Tag 00HT) so H^i commutes with -\\otimes C (missed by the second reading).; 1 file(s) fixed by the reviewer"
+ }
 }
