@@ -15,8 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
 
 The composition isomorphisms `ProEtale.lowerStarComp` and `ProEtale.upperStarComp` satisfy the
 associativity law of a pseudofunctor. For pushforwards this is the associativity of the pullback
-pasting isomorphisms on the sites; it is transported to pullbacks by conjugation along the
-adjunctions `g^* ⊣ g_*`.
+pasting isomorphisms on the sites (`MorphismProperty.Over.pullbackComp_assoc`), transported by
+`CategoryTheory.Functor.sheafPushforwardContinuousComp'_assoc`; it is transported to pullbacks by
+conjugation along the adjunctions `g^* ⊣ g_*`.
 
 ## Main results
 
@@ -26,15 +27,125 @@ adjunctions `g^* ⊣ g_*`.
 
 @[expose] public section
 
-universe u' u
+universe w v₁ v₂ v₃ v₄ u₁ u₂ u₃ u₄ u' u
 
 open CategoryTheory Limits Opposite
+
+namespace CategoryTheory.Functor
+
+variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
+  {E : Type u₃} [Category.{v₃} E] {E' : Type u₄} [Category.{v₄} E']
+  (A : Type u) [Category.{w} A]
+  {J : GrothendieckTopology C} {K : GrothendieckTopology D} {L : GrothendieckTopology E}
+  {M : GrothendieckTopology E'}
+  {F : C ⥤ D} {G : D ⥤ E} {H : E ⥤ E'} {FG : C ⥤ E} {GH : D ⥤ E'} {FGH : C ⥤ E'}
+  [F.IsContinuous J K] [G.IsContinuous K L] [H.IsContinuous L M] [FG.IsContinuous J L]
+  [GH.IsContinuous K M] [FGH.IsContinuous J M]
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The associativity of the composition isomorphisms `sheafPushforwardContinuousComp'`,
+given the associativity of the isomorphisms of functors of sites. -/
+lemma sheafPushforwardContinuousComp'_assoc (e₁ : F ⋙ G ≅ FG) (e₂ : G ⋙ H ≅ GH)
+    (e₃ : FG ⋙ H ≅ FGH) (e₄ : F ⋙ GH ≅ FGH)
+    (h : isoWhiskerRight e₁ H ≪≫ e₃ = associator F G H ≪≫ isoWhiskerLeft F e₂ ≪≫ e₄) :
+    isoWhiskerLeft (H.sheafPushforwardContinuous A L M)
+        (sheafPushforwardContinuousComp' e₁ A J K L) ≪≫
+      sheafPushforwardContinuousComp' e₃ A J L M =
+    ((H.sheafPushforwardContinuous A L M).associator (G.sheafPushforwardContinuous A K L)
+        (F.sheafPushforwardContinuous A J K)).symm ≪≫
+      isoWhiskerRight (sheafPushforwardContinuousComp' e₂ A K L M)
+        (F.sheafPushforwardContinuous A J K) ≪≫
+      sheafPushforwardContinuousComp' e₄ A J K M := by
+  ext P U
+  have := congr_app (congrArg Iso.inv h) U.unop
+  simp only [Iso.trans_inv, NatTrans.comp_app, isoWhiskerRight_inv, whiskerRight_app,
+    isoWhiskerLeft_inv, whiskerLeft_app, associator_inv_app, Category.comp_id] at this
+  simp only [Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom, whiskerLeft_app,
+    ObjectProperty.FullSubcategory.comp_hom, sheafPushforwardContinuousComp'_hom_app_hom_app,
+    Iso.symm_hom, associator_inv_app, isoWhiskerRight_hom, whiskerRight_app,
+    sheafPushforwardContinuous_map_hom_app, Category.id_comp,
+    sheafPushforwardContinuous_obj_obj_map, Quiver.Hom.unop_op]
+  refine ((P.obj.map_comp _ _).symm.trans ?_).trans (P.obj.map_comp _ _)
+  rw [← op_comp, ← op_comp, this]
+
+
+set_option backward.isDefEq.respectTransparency.types false in
+lemma sheafPushforwardContinuousComp'_trans {FG' : C ⥤ E} [FG'.IsContinuous J L]
+    (e : F ⋙ G ≅ FG) (e' : FG ≅ FG') :
+    sheafPushforwardContinuousComp' (e ≪≫ e') A J K L =
+      sheafPushforwardContinuousComp' e A J K L ≪≫ sheafPushforwardContinuousIso e' A J L := by
+  ext P U
+  simp [sheafPushforwardContinuousComp']
+  rfl
+
+end CategoryTheory.Functor
+
+namespace CategoryTheory.MorphismProperty
+
+variable {T : Type*} [Category T] {P Q : MorphismProperty T} [Q.IsMultiplicative]
+  [Q.RespectsIso] [Q.IsStableUnderBaseChange]
+
+lemma Over.pullbackComp_eq_pullbackCongr_trans {X Y Z : T} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [P.IsStableUnderBaseChangeAlong f] [P.IsStableUnderBaseChangeAlong g]
+    [P.HasPullbacksAlong f] [P.HasPullbacksAlong g]
+    (fg : X ⟶ Z) (hfg : fg = f ≫ g) :
+    haveI : P.HasPullbacksAlong fg := by subst hfg; infer_instance
+    haveI : P.IsStableUnderBaseChangeAlong fg := by subst hfg; infer_instance
+    Over.pullbackComp (P := P) (Q := Q) f g fg hfg =
+      Over.pullbackCongr hfg ≪≫ Over.pullbackComp f g := by
+  subst hfg
+  rw [Over.pullbackCongr_refl, Iso.refl_trans]
+
+lemma Over.pullbackCongr_trans_pullbackCongr {X Y : T} {f g : X ⟶ Y}
+    [P.IsStableUnderBaseChangeAlong f] [P.HasPullbacksAlong f] (h : f = g) :
+    haveI : P.HasPullbacksAlong g := by subst h; infer_instance
+    haveI : P.IsStableUnderBaseChangeAlong g := by subst h; infer_instance
+    Over.pullbackCongr (P := P) (Q := Q) h ≪≫ Over.pullbackCongr h.symm = Iso.refl _ := by
+  subst h
+  rw [Over.pullbackCongr_refl, Iso.refl_trans]
+
+/-- The associativity law for `MorphismProperty.Over.pullbackComp`, in the form of inverses
+followed by the congruence `(f ≫ g) ≫ h = f ≫ g ≫ h`. -/
+lemma Over.pullbackComp_symm_assoc {X Y Z W : T} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W)
+    [P.IsStableUnderBaseChangeAlong f] [P.IsStableUnderBaseChangeAlong g]
+    [P.IsStableUnderBaseChangeAlong h] [P.HasPullbacksAlong f] [P.HasPullbacksAlong g]
+    [P.HasPullbacksAlong h] :
+    Functor.isoWhiskerRight (Over.pullbackComp (P := P) (Q := Q) g h).symm (Over.pullback P Q f) ≪≫
+        (Over.pullbackComp f (g ≫ h)).symm =
+      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft (Over.pullback P Q h)
+        (Over.pullbackComp f g).symm ≪≫ (Over.pullbackComp (f ≫ g) h).symm ≪≫
+        Over.pullbackCongr (Category.assoc f g h) := by
+  have := Over.pullbackComp_assoc (P := P) (Q := Q) f g h
+  rw [MorphismProperty.Over.pullbackComp_eq_pullbackCongr_trans (f ≫ g) h] at this
+  simp only [Iso.trans_assoc] at this
+  have h2 : Functor.associator (Over.pullback P Q h) (Over.pullback P Q g) (Over.pullback P Q f) =
+      (Functor.isoWhiskerRight (Over.pullbackComp g h) (Over.pullback P Q f)).symm ≪≫
+        (Over.pullbackComp f (g ≫ h)).symm ≪≫
+        Over.pullbackCongr (Category.assoc f g h).symm ≪≫ Over.pullbackComp (f ≫ g) h ≪≫
+        Functor.isoWhiskerLeft (Over.pullback P Q h) (Over.pullbackComp f g) := by
+    rw [← this]
+    simp only [Iso.symm_self_id_assoc]
+  rw [h2]
+  simp only [Iso.trans_assoc, Functor.isoWhiskerRight_symm, Functor.isoWhiskerLeft_symm]
+  rw [← Functor.isoWhiskerLeft_trans_assoc, Iso.self_symm_id, Functor.isoWhiskerLeft_refl,
+    Iso.refl_trans, Iso.self_symm_id_assoc, MorphismProperty.Over.pullbackCongr_trans_pullbackCongr,
+    Iso.trans_refl]
+
+end CategoryTheory.MorphismProperty
 
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+
+instance isStableUnderBaseChangeAlong_weaklyEtale {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    MorphismProperty.IsStableUnderBaseChangeAlong @WeaklyEtale f :=
+  MorphismProperty.instIsStableUnderBaseChangeAlongOfIsStableUnderBaseChange (P := @WeaklyEtale) f
+
+instance hasPullbacksAlong_weaklyEtale {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    MorphismProperty.HasPullbacksAlong @WeaklyEtale f :=
+  MorphismProperty.instHasPullbacksAlongOfHasPullbacksAlong (P := @WeaklyEtale) f
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The associativity law for `ProEtale.lowerStarComp`. -/
@@ -43,19 +154,32 @@ lemma lowerStarComp_assoc {X Y Z V : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h 
         lowerStarCongr A (Category.assoc f g h) =
       ((f)_*[A]).associator (g)_*[A] (h)_*[A] ≪≫
         Functor.isoWhiskerLeft (f)_*[A] (lowerStarComp A g h) ≪≫ lowerStarComp A f (g ≫ h) := by
-  ext M W
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Category.id_comp, ObjectProperty.FullSubcategory.comp_hom,
-    NatTrans.comp_app, lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app,
-    lowerStar_map_hom_app']
-  simp only [lowerStar, Functor.sheafPushforwardContinuous_obj_obj_map, Quiver.Hom.unop_op,
-    ← Functor.map_comp, ← op_comp]
-  congr 2
-  apply MorphismProperty.Over.Hom.ext
-  repeat' apply pullback.hom_ext
-  all_goals simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
-    MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp]
+  have key := @Functor.sheafPushforwardContinuousComp'_assoc _ _ _ _ _ _ _ _ A _
+    (ProEt.topology V) (ProEt.topology Z) (ProEt.topology Y) (ProEt.topology X) _ _ _ _ _ _
+    (Scheme.ProEt.isContinuous_overPullback h) (Scheme.ProEt.isContinuous_overPullback g)
+    (Scheme.ProEt.isContinuous_overPullback f) (Scheme.ProEt.isContinuous_overPullback (g ≫ h))
+    (Scheme.ProEt.isContinuous_overPullback (f ≫ g))
+    (Scheme.ProEt.isContinuous_overPullback (f ≫ g ≫ h))
+    (MorphismProperty.Over.pullbackComp g h).symm (MorphismProperty.Over.pullbackComp f g).symm
+    (MorphismProperty.Over.pullbackComp f (g ≫ h)).symm
+    ((MorphismProperty.Over.pullbackComp (f ≫ g) h).symm ≪≫
+      MorphismProperty.Over.pullbackCongr (Category.assoc f g h))
+    (MorphismProperty.Over.pullbackComp_symm_assoc f g h)
+  have ht := @Functor.sheafPushforwardContinuousComp'_trans _ _ _ _ _ _ A _
+    (ProEt.topology V) (ProEt.topology Z) (ProEt.topology X) _ _ _
+    (Scheme.ProEt.isContinuous_overPullback h) (Scheme.ProEt.isContinuous_overPullback (f ≫ g))
+    (Scheme.ProEt.isContinuous_overPullback ((f ≫ g) ≫ h)) _
+    (Scheme.ProEt.isContinuous_overPullback (f ≫ g ≫ h))
+    (MorphismProperty.Over.pullbackComp (f ≫ g) h).symm
+    (MorphismProperty.Over.pullbackCongr (Category.assoc f g h))
+  rw [ht] at key
+  have key' : Functor.isoWhiskerLeft (f)_*[A] (lowerStarComp A g h) ≪≫
+      lowerStarComp A f (g ≫ h) = (((f)_*[A]).associator (g)_*[A] (h)_*[A]).symm ≪≫
+      Functor.isoWhiskerRight (lowerStarComp A f g) (h)_*[A] ≪≫ lowerStarComp A (f ≫ g) h ≪≫
+      lowerStarCongr A (Category.assoc f g h) := by
+    rw [lowerStarCongr_eq]
+    exact key
+  rw [key', Iso.self_symm_id_assoc]
 
 /-- Under conjugation, the composition isomorphism of pullbacks corresponds to the composition
 isomorphism of pushforwards. -/
