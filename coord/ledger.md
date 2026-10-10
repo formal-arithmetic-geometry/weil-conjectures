@@ -2861,3 +2861,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:42 L: returned deliver/M1/lem-sc-picard-product-open (reviewer RETURN: 1. E (false/ill-typed new statement), lem-sc-picard-h1-product-injective: pullback along the projections pr_1: X x_k Y -)
 - 22:43 L: merged deliver/J1/lem-pc-rf-single-complex-inherited-tensor-condition (reviewer FIX; first push; new nodes: 1)
 - 22:43 L: merged deliver/F1/lem-kun-closed-point-field (reviewer FIX; first push; new nodes: 0)
+- 22:43 L: merged deliver/K1/lem-pc-injective-split-tower-injective (reviewer FIX; first push; new nodes: 0)

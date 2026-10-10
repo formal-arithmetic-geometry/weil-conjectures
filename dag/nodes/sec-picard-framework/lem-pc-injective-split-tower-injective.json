@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "A tower with injective levels and split transitions is injective",
- "statement": "Let $I=(I_n,p_n)_{n\\geq1}$ be an inverse system [def-weil-inverse-system] of abelian groups in the tower category [lem-pc-tower-abelian]. If every $I_n$ is an injective abelian group [def-sp-injective-resolutions] and every transition map $p_n:I_{n+1}\\to I_n$ is a split surjection, then $I$ is an injective object of the tower category.",
+ "statement": "Let $I=(I_n,p_n)_{n\\geq1}$ be an inverse system [def-weil-inverse-system] of abelian groups in the tower category [lem-pc-tower-abelian]. If every $I_n$ is an injective abelian group [def-sp-injective-resolutions] and every transition map $p_n:I_{n+1}\\to I_n$ is a split surjection, then $I$ is an injective object [def-sp-injective-resolutions] of the abelian tower category [lem-pc-tower-abelian].",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 07KW, Lemma 15.88.1 proof footnote (the compatible lifting argument after the split-tower construction)"
@@ -23,9 +23,44 @@
   "lem-pc-tower-abelian",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "To verify injectivity [def-sp-injective-resolutions], let $\\iota:A\\hookrightarrow B$ be a monomorphism of towers, with transition maps $f_n:A_{n+1}\\to A_n$ and $g_n:B_{n+1}\\to B_n$, and let $\\varphi:A\\to I$ be a tower morphism [def-weil-inverse-system]. Each $\\iota_n:A_n\\to B_n$ is injective: given $a\\in A_n$ with $\\iota_n(a)=0$, let $T$ be the tower with $T_m=\\mathbf Z$ for $m\\leq n$, $T_m=0$ for $m>n$, identity transitions below level $n$ and zero transitions above. A tower morphism $T\\to A$ is the same as an element of $A_n$ (its level-$m$ component for $m\\leq n$ sends $1$ to the image of that element under the composite transition $A_n\\to A_m$), and composition is componentwise, so $\\iota\\circ\\alpha=\\iota\\circ0$ for the morphism $\\alpha$ determined by $a$; as $\\iota$ is a monomorphism, $\\alpha=0$, i.e. $a=0$. Start by extending $\\varphi_1:A_1\\to I_1$ to $\\psi_1:B_1\\to I_1$, using injectivity of the abelian group $I_1$.",
+   "uses": [
+    "def-weil-inverse-system",
+    "lem-pc-tower-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 proof footnote (the compatible lifting argument after the split-tower construction)"
+   }
+  },
+  {
+   "text": "Inductively suppose $\\psi_n:B_n\\to I_n$ extends $\\varphi_n$ and satisfies $p_{n-1}\\psi_n=\\psi_{n-1}g_{n-1}$. Choose a section $s_n:I_n\\to I_{n+1}$ of the split epimorphism $p_n$. On $A_{n+1}$ define $d=\\varphi_{n+1}-s_n\\psi_ng_n$; since $\\psi_n g_n=\\varphi_n f_n$ there, $p_n d=\\varphi_nf_n-\\varphi_nf_n=0$, so $d$ lands in $K=\\ker p_n$. The splitting gives $I_{n+1}\\cong K\\oplus I_n$, hence $K$ is injective: extend a map into $I_{n+1}$ and project to the $K$ summand (equivalently, extend into the direct summand). Extend $d$ along $A_{n+1}\\hookrightarrow B_{n+1}$ to $\\chi:B_{n+1}\\to K$, and put $\\psi_{n+1}=\\chi+s_n\\psi_ng_n$. It extends $\\varphi_{n+1}$ and satisfies $p_n\\psi_{n+1}=\\psi_ng_n$. Induction produces a compatible tower morphism $\\psi:B\\to I$ extending $\\varphi$, which is exactly injectivity of $I$ by [def-sp-injective-resolutions].",
+   "uses": [
+    "def-weil-inverse-system",
+    "lem-pc-tower-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 proof footnote (the compatible lifting argument after the split-tower construction)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-inverse-system",
+  "lem-pc-tower-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,19 +78,43 @@
   },
   {
    "tool": "grep",
-   "query": "split.*surject.*injective.*tower in Mathlib/CategoryTheory",
+   "query": "split.*surject.*injective.*tower (Mathlib/CategoryTheory)",
    "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a tower with injective levels and split transitions is injective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-tower-surjective-lim-acyclic",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-injective-split-tower-injective",
+  "worker": "stage1",
+  "summary": "Split the compatible lifting argument of Stacks Tag 07KW into the initial levelwise extension and the inductive correction through the kernel of each split transition. No new node was needed: levelwise monicity and injectivity of a direct summand are elementary from the cited definitions.",
+  "blueprint": "The two steps realize the ancestor blueprint's first-step clause on injective towers in the cohomology of the derived inverse limit, via lem-pc-derived-limit-roos-abelian-groups.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ist2922",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ist2922 (reviewer sub-agent of L); spot-checked: Checked both steps' algebra (p_n d=0, kernel K a direct summand hence injective, psi_{n+1} extends phi_{n+1} and commutes with p_n); C4: lem-pc-tower-surjective-lim-acyclic step 2 applies it to the tower from lem-pc-tower-injective-embedding, whose hypotheses match exactly. FIX more, RETURN less: (1) C1 Step 1's levelwise-monicity claim rested on 'kernels componentwise by the tower definitions', which no cited statement says (the second reading missed this); replaced by an elementary argument with the tower T (Z at levels <= n, 0 above) whose morphisms to A are elements of A_n; (2) Step 1 now names the transitions f_n, g_n used in Step 2; (3) the statement's 'injective object of the tower category' now cites [def-sp-injective-resolutions] and [lem-pc-tower-abelian] (citation only, mathematics unchanged).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-ist2922): lem-pc-tower-enough-injectives (F1) step 2 duplicates this node's whole lifting argument (class d) and rests on the unsupported 'kernels in the tower category are computed levelwise': it should cite [lem-pc-injective-split-tower-injective] instead."
 }
