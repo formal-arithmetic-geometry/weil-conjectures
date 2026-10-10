@@ -23,9 +23,49 @@
   "def-weil-finitely-generated-module",
   "lem-sc-hilbert-embedded-points-affine-removal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $K\\subseteq M$ be the maximal submodule with nowhere-dense support in $\\operatorname{Supp}(M)$ supplied by [lem-sc-hilbert-embedded-points-affine-removal], so $M'=M/K$. Localization at the powers of $f$ is exact, so $0\\to K\\to M\\to M'\\to0$ gives $0\\to K_f\\to M_f\\to(M')_f\\to0$ and a canonical isomorphism $(M')_f\\cong M_f/K_f$.",
+   "uses": [
+    "lem-sc-hilbert-embedded-points-affine-removal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M7 (proof omitted in the source); localization of the exact sequence defining the quotient"
+   }
+  },
+  {
+   "text": "Characterize $K$. Since $R$ is Noetherian and the modules are finite, supports of submodules of $M$ are closed and $\\operatorname{Supp}(M)$ has finitely many irreducible components, with generic points the minimal primes $\\mathfrak q_1,\\dots,\\mathfrak q_r$ of $\\operatorname{Supp}(M)$ (Tag 0052); so a submodule $N\\subseteq M$ has nowhere-dense support in $\\operatorname{Supp}(M)$ iff $N_{\\mathfrak q_i}=0$ for all $i$. Hence $K\\subseteq E:=\\ker\\bigl(M\\to\\prod_i M_{\\mathfrak q_i}\\bigr)$, and $E$ has nowhere-dense support, so maximality in [lem-sc-hilbert-embedded-points-affine-removal] gives $K=E$. The minimal primes of $\\operatorname{Supp}(M_f)=\\operatorname{Supp}(M)\\cap D(f)$ are the $\\mathfrak q_i$ with $f\\notin\\mathfrak q_i$, and $(M_f)_{\\mathfrak q_i}=M_{\\mathfrak q_i}$ for those; for $f\\in\\mathfrak q_i$, $M_{\\mathfrak q_i}$ is a finite $R_{\\mathfrak q_i}$-module supported only at the closed point, hence killed by a power of $\\mathfrak q_iR_{\\mathfrak q_i}$, hence by a power of $f$, so $(M_{\\mathfrak q_i})_f=0$. Localizing the exact sequence $0\\to K\\to M\\to\\prod_i M_{\\mathfrak q_i}$ (finite product) at $f$ therefore gives $K_f=\\ker\\bigl(M_f\\to\\prod_{f\\notin\\mathfrak q_i}(M_f)_{\\mathfrak q_i}\\bigr)$, which by the same characterization applied to $M_f$ is the maximal submodule of $M_f$ with nowhere-dense support in $\\operatorname{Supp}(M_f)$.",
+   "uses": [
+    "lem-sc-hilbert-embedded-points-affine-removal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052 (finitely many irreducible components); Tag 02M7 proof omitted in algebra.tex"
+   }
+  },
+  {
+   "text": "Applying [lem-sc-hilbert-embedded-points-affine-removal] to the finite $R_f$-module $M_f$ over the Noetherian ring $R_f$, its quotient is $(M_f)'=M_f/K_f$ by Step 2. Combined with Step 1 this gives the canonical isomorphism $(M')_f\\cong(M_f)'$.",
+   "uses": [
+    "lem-sc-hilbert-embedded-points-affine-removal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M7 (label algebra-lemma-remove-embedded-primes-localize)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hilbert-embedded-points-affine-removal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02M7 (source proof marked omitted)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,15 +87,52 @@
    "results": "no hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization commutes with removing embedded associated primes from a finite module",
+   "results": "Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg; Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule; Module.associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule; Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule; no theorem stating the quotient construction",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module localization associatedPrimes quotient",
+   "results": "Unknown identifier localization; 0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPrimes.*localiz|localiz.*associatedPrimes Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-abelian-varieties",
  "unit": "sk-def-av-ample-degree",
  "created": {
   "item": "lem-sc-hilbert-embedded-points",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-hilbert-embedded-points-affine-localization",
+  "worker": "stage1",
+  "summary": "Checked Tag 02M7 and found no project declaration. Since the Stacks proof is omitted, supplied the localization exactness, maximality under clearing denominators, and quotient identification as three explicit steps using the existing affine-removal node.",
+  "blueprint": "Realizes the induction-step clause of blueprint node lem-sc-hilbert-polynomial that removes embedded associated points before the regular-section argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hea2512",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hea2512 (reviewer sub-agent of L); spot-checked: Statement = Stacks 02M7 and = what step 2 of citer lem-sc-hilbert-embedded-points uses (C4 ok); Mathlib AssociatedPrime/Localization.lean has Ass-localization only, no embedded-prime-removal quotient, so no leaf (C1); no new nodes (class b vacuous). FIX more, RETURN less: (1) Step 2 'discard the resulting primary components' was an unsupported, uncited primary-decomposition step (missed by J1 second reading): replaced by K = ker(M -> prod over minimal primes q_i of Supp(M) of M_q_i), derived from maximality in affine-removal + Tag 0052, and (M_q_i)_f = 0 for f in q_i, so K_f is the maximal nowhere-dense submodule of M_f; (2) B4: plain-text arrows and notation in steps 1-3 rewritten in TeX; step 3 notes R_f Noetherian, M_f finite (E hypotheses).; 1 file(s) fixed by the reviewer"
  }
 }
