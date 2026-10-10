@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-weil-size-convention",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Size convention",
@@ -12,13 +12,44 @@
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/def-weil-size-convention.md",
   "place": "node def-weil-size-convention, order 661"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck universes and choosing a small skeleton of a site; derived categories and filtered colimits in a larger universe",
+   "results": "CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall; HasDerivedCategory; HasDerivedCategory.standard; CategoryTheory.IsGrothendieckAbelian.hasExt; DerivedCategory.instEssSurjCochainComplexIntQ; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+   "date": "2026-10-10",
+   "verdict": "no exact match: hits concern essential smallness or derived categories, not a universe-and-skeleton convention"
+  },
+  {
+   "tool": "loogle",
+   "query": "GrothendieckUniverse, EssentiallySmall, Skeleton, DerivedCategory, FilteredColimit",
+   "results": "0 hits; loogle reported unknown identifier 'GrothendieckUniverse'",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Grothendieck universe|V-small|small skeleton|filtered colimits (Mathlib)",
+   "results": "0 hits in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck universes and site skeleton size convention",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -37,5 +68,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-weil-size-convention",
+  "worker": "stage1",
+  "summary": "Checked the imported size convention against its blueprint statement and searched the slopmaster2 WeilConjectures source for the blueprint tag and the universe/skeleton terminology; no project declaration states this convention. The definition has no mathematical proof steps or subordinate nodes: it fixes the universes, skeleton choices, and the universe in which derived categories and filtered colimits are formed.",
+  "blueprint": "The item realizes the complete definition node def-weil-size-convention (order 661); there are no proof steps to further decompose."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dsc1816",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dsc1816 (reviewer sub-agent of L); spot-checked: Definition node, no proof steps, no new nodes: nothing to cite or decompose. stmt_deps def-pc-scheme adequate. Checked no other node restates the convention (git grep universes/skeleton: users are def-weil-abstract-derived-category and the pro-etale site nodes, none restates it; def-weil-pbc-etale-site does not mention size). Mathlib searches recorded; no exact match plausible (Mathlib uses universe levels), so no leaf. Imported statement says 'within the chosen bound' without naming the bound (Stacks 000H/Sets chapter partial universe); left unchanged as imported text."
+ },
+ "lead_note": "2026-10-10 L (R-dsc1816): Imported statement's 'chosen bound' is unnamed; a later pass may add a pointer to Stacks Sets (000H) bound."
 }
