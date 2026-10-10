@@ -1,15 +1,17 @@
 # Work queue
 
-888 items; claim with `tools/claim.py next <group> [--stage N]`.
+896 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (319)
+## Stage 1: nodes to split (327)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lemma-constructible-flc-serre` | 6 | rests_on_sorry |
 | `lemma-constructible-torsor-trivialises` | 7 | none |
+| `def-weil-pbc-sheaf-ext` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
-| `lem-weil-pbc-sections-base-field-extension` | 2004 | none |
+| `lem-weil-pbc-etale-sections-flat-qc-connected-fibres` | 2005 | none |
+| `lem-weil-pbc-field-tensor-irreducible` | 2005 | none |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 2007 | none |
 | `lem-weil-pbc-sets-etale-section-continuity` | 2009 | none |
 | `lem-sc-affine-cap-section-open-algebra` | 2012 | none |
@@ -43,24 +45,28 @@
 | `lem-pc-principal-open-dense-of-nonzerodivisor` | 3012 | none |
 | `lem-pc-separable-tensor-algebraic-closure` | 3012 | none |
 | `lem-sc-p1-duality-pairing-naturality` | 3012 | none |
-| `lem-sc-p1-ext-coherent-dim-one-vanishing` | 3012 | none |
 | `lem-pc-field-extension-fpqc-cover` | 3013 | none |
 | `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
 | `lem-sc-affine-finite-module-free-locus` | 3013 | none |
 | `lem-sc-cech-comparison-natural` | 3013 | none |
 | `lem-sc-ext-derived-composite-natural` | 3013 | none |
 | `lem-sc-ext-evaluation-first-naturality` | 3013 | none |
+| `lem-sc-ext-sheaf-to-global-spectral-sequence` | 3013 | none |
+| `lem-sc-ext-stalk-localization` | 3013 | none |
+| `lem-sc-ext-support-cohomology-vanishing` | 3013 | none |
 | `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
+| `lem-sc-p1-regular-dimension-one` | 3013 | none |
 | `lem-sc-product-irreducible-components-bijection` | 3013 | none |
 | `lem-sc-proper-upper-shriek-composition` | 3013 | none |
+| `lem-sc-regular-local-ext-vanishing` | 3013 | none |
 | `lem-sc-p1-graded-nakayama-free` | 3014 | none |
 | `lem-sc-p1-koszul-resolution` | 3014 | none |
-| `lem-sc-p1-proj-degreezero-localization-exact` | 3014 | none |
 | `lem-sc-p1-proj-tilde-functorial` | 3014 | none |
 | `lem-sc-p1-serre-section-module-comparison` | 3014 | none |
 | `lem-sc-p1-serre-section-module-finite` | 3014 | none |
 | `lem-sc-p1-tor-dimension-shifting` | 3014 | none |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
+| `lem-sc-p1-graded-degree-component-exact` | 3015 | none |
 | `lem-sc-p1-graded-submodule-finite` | 3015 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
 | `lem-sc-affine-open-proper` | 4006 | sorry_here |
@@ -324,6 +330,8 @@
 | `lem-exc-etale-jacobian-presentation` | - | none |
 | `lem-pc-projective-coordinate-model` | - | sorry_here |
 | `def-exc-jacobian-presentation` | - | none |
+| `def-pur-hom-complex` | - | none |
+| `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
 ## Stage 2: nodes to state (569)
@@ -900,7 +908,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 337 nodes that wait for stage 1, 1115 nodes that wait for a statement dependency.
+Not open yet: 345 nodes that wait for stage 1, 1119 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
