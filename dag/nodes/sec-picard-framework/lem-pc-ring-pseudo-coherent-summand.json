@@ -21,9 +21,49 @@
   "place": "Tag 064X (more-algebra-lemma-summands-pseudo-coherent); the last clause through Tag 064T (more-algebra-lemma-pseudo-coherent: pseudo-coherent iff m-pseudo-coherent for every m)"
  },
  "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume $K^\\bullet\\oplus L^\\bullet$ is $m$-pseudo-coherent. Since a witness $E^\\bullet$ is a bounded complex of projective modules, morphisms $E^\\bullet\\to C^\\bullet$ in $D(R)$ are represented by maps of complexes (Stacks, Derived Categories, Tag 064B), so for a complex the definition of the statement agrees with the one in $D(R)$ of the triangle lemma, and it is invariant under isomorphism in $D(R)$. The witness has $H^i(E^\\bullet)=0$ for $i$ large, so $H^i(K^\\bullet\\oplus L^\\bullet)=0$ for $i$ large; as cohomology commutes with finite direct sums, $K^\\bullet$ and $L^\\bullet$ are bounded above. The triangle $(K^\\bullet\\oplus L^\\bullet,\\,K^\\bullet\\oplus L^\\bullet,\\,L^\\bullet\\oplus L^\\bullet[1])$, with first map $\\mathrm{id}\\oplus 0$, is distinguished as the direct sum of the distinguished triangles $(K^\\bullet,K^\\bullet,0)$ and $(L^\\bullet,L^\\bullet,L^\\bullet\\oplus L^\\bullet[1])$ (Stacks, Derived Categories, Tag 05QS). An $m$-pseudo-coherent object is $(m+1)$-pseudo-coherent, since the same witness works. So the first term is $(m+1)$-pseudo-coherent and the second $m$-pseudo-coherent, and the first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] shows that $L^\\bullet\\oplus L^\\bullet[1]$ is $m$-pseudo-coherent.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064X, proof of lemma-summands-pseudo-coherent through the direct-sum distinguished triangle"
+   }
+  },
+  {
+   "text": "If $E^\\bullet\\to C^\\bullet$ witnesses that $C^\\bullet$ is $m$-pseudo-coherent, then $E^\\bullet[1]\\to C^\\bullet[1]$ induces on $H^i$ the map $H^{i+1}(E^\\bullet)\\to H^{i+1}(C^\\bullet)$, an isomorphism for $i\\geq m$; so $C^\\bullet[1]$ is $m$-pseudo-coherent. By induction $L^\\bullet[n]\\oplus L^\\bullet[n+1]$ is $m$-pseudo-coherent for every $n\\geq 0$. As $L^\\bullet$ is bounded above, choose $n\\geq 0$ with $H^i(L^\\bullet[n])=0$ for all $i\\geq m$; then the zero complex with the zero map $0\\to L^\\bullet[n]$ is a witness (isomorphisms $0\\to 0$ for $i>m$, and $0\\to H^m(L^\\bullet[n])=0$ is surjective), so $L^\\bullet[n]$ is $m$-pseudo-coherent (Stacks, More on Algebra, Tag 064W, part (1)). For $k=n,n-1,\\dots,1$ use the split distinguished triangle $(L^\\bullet[k],\\,L^\\bullet[k]\\oplus L^\\bullet[k-1],\\,L^\\bullet[k-1])$ (Tag 05QS): if $L^\\bullet[k]$ is $m$-pseudo-coherent, it is $(m+1)$-pseudo-coherent, and the middle term is $m$-pseudo-coherent by the shifted decomposition, so the first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] makes $L^\\bullet[k-1]$ $m$-pseudo-coherent. At $k=1$ this gives that $L^\\bullet$ is $m$-pseudo-coherent.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064X, induction and backward descent in the proof of lemma-summands-pseudo-coherent"
+   }
+  },
+  {
+   "text": "Exchanging $K^\\bullet$ and $L^\\bullet$, also $K^\\bullet$ is $m$-pseudo-coherent. If $K^\\bullet\\oplus L^\\bullet$ is isomorphic in $D(R)$ to a bounded-above complex $Q^\\bullet$ of finite free modules, then for each $m$ the stupid truncation $\\sigma_{\\geq m}Q^\\bullet$ (the terms of degree $\\geq m$) is bounded and finite free, and $\\sigma_{\\geq m}Q^\\bullet\\to Q^\\bullet\\cong K^\\bullet\\oplus L^\\bullet$ induces isomorphisms on $H^i$ for $i>m$ and a surjection on $H^m$; so $K^\\bullet\\oplus L^\\bullet$, hence $K^\\bullet$ and $L^\\bullet$, are $m$-pseudo-coherent for every $m$. Conversely, let $C^\\bullet$ be $m$-pseudo-coherent for every $m$; the $0$-pseudo-coherent witness gives $b$ with $H^i(C^\\bullet)=0$ for $i>b$. Construct finite free $F^i$ and a map $f\\colon F^\\bullet\\to C^\\bullet$ downward, starting with $F^i=0$ for $i>b$: at stage $n$, $F^\\bullet=F^{\\geq n}$ is finite free with $H^i(f)$ an isomorphism for $i>n$ and surjective for $i=n$. Then the cone $M$ of $f$ has $H^i(M)=0$ for $i\\geq n$ by the long exact sequence, and as $F^{\\geq n}$ is $(n-1)$-pseudo-coherent (identity witness) and $C^\\bullet$ is $(n-1)$-pseudo-coherent, the first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] makes $M$ $(n-1)$-pseudo-coherent. Hence $H^{n-1}(M)$ is a finite module: for a witness $E^\\bullet\\to M$, the bounded finite free complex $E^\\bullet$ is exact in degrees $\\geq n$, so splitting it off from the top shows $\\ker(d_E^{n-1})$ is finite projective, and $H^{n-1}(E^\\bullet)$, a quotient of it, surjects onto $H^{n-1}(M)$ (Stacks, More on Algebra, Tag 064S). By the long exact sequence $H^{n-1}(C^\\bullet)\\to H^{n-1}(M)\\to H^n(F^\\bullet)\\to H^n(C^\\bullet)$, choose a finite free $F^{n-1}$ mapping onto $H^{n-1}(M)$ and lift to degree-$(n-1)$ cocycles of the cone, i.e. maps $F^{n-1}\\to C^{n-1}$ and $F^{n-1}\\to F^n$ compatible with the differentials. Then $H^n(f)$ becomes an isomorphism and $H^{n-1}(f)$ surjective. Iterating gives a bounded-above finite free complex $F^\\bullet$ with a quasi-isomorphism $F^\\bullet\\to C^\\bullet$ (Stacks, More on Algebra, Tag 064U). Applied to $K^\\bullet$ and $L^\\bullet$ this proves the final clause.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064U, proof of lemma-pseudo-coherent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064X, lemma-summands-pseudo-coherent"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,12 +95,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-pseudo-coherent-summand",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ring-pseudo-coherent-summand",
+  "worker": "stage1",
+  "summary": "Split the ring direct-summand lemma into the distinguished-triangle closure, the high-degree vanishing recognition lemma, and the Tag 064T criterion; the item proof follows the exact shift induction and backward descent of Tag 064X.",
+  "blueprint": "The steps realize the proper-flat support proof clause of lem-sc-finite-duality concerning closure of pseudo-coherence under direct summands.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pcs3137",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcs3137 (reviewer sub-agent of L); spot-checked: Checked steps against Stacks 064X/064R/064W/064S/064U (tags/tags); proof correct, triangle node is a real ring-level lemma (scheme node lem-pc-pseudo-coherent-distinguished-triangle is not a duplicate; localization-glue is unrelated); no node defines ring m-pseudo-coherence. FIX more, RETURN less: (1) B/class d: lem-pc-ring-pseudo-coherent-recognize is elementary (zero-complex witness), folded into step 2 and dropped; (2) B3/C4: triangle node did not define m-pseudo-coherent and cited the scheme-level def-pc-derived-category for D(R): rewrote in TeX with the definition inline, stmt_deps def-weil-abstract-derived-category; (3) B4: step 3 plain arrow and all steps rewritten in TeX, step 3 now justifies finiteness of H^{n-1} of the cone (Tag 064S) and step 1 notes D(R) vs complex-map definitions agree (Tag 064B); (4) source tags corrected: cone lemma is 064R not 064W, criterion is 064U not 064T.; 2 file(s) fixed by the reviewer"
+ }
 }
