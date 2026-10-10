@@ -1,8 +1,8 @@
 # Work queue
 
-915 items; claim with `tools/claim.py next <group> [--stage N]`.
+916 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (335)
+## Stage 1: nodes to split (336)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,21 +18,22 @@
 | `lem-sc-ample-proj-open` | 2013 | none |
 | `lem-sc-boundary-cech-local-lifts` | 2013 | none |
 | `lem-sc-closed-pushforward-boundary-naturality` | 2013 | none |
-| `lem-sc-finite-sections-cover-qc` | 2013 | none |
 | `lem-sc-proj-standard-open-basis` | 2013 | none |
-| `lem-sc-tensor-globally-generated` | 2013 | none |
 | `lem-sc-topological-leray-spectral-sequence` | 2013 | none |
 | `lem-sc-torsor-h1-boundary-representative` | 2013 | none |
 | `lem-sc-torsor-h1-ext-pushforward` | 2013 | none |
 | `lem-sc-torsor-h1-ext-pushout` | 2013 | none |
+| `lem-sc-global-generation-nonvanishing-cover` | 2014 | none |
 | `lem-sc-invert-s-cohomology-affine-case` | 2014 | none |
 | `lem-sc-invert-s-cohomology-gluing` | 2014 | none |
 | `lem-sc-invert-s-cohomology-induction` | 2014 | none |
+| `lem-sc-tensor-generating-sections` | 2014 | none |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 3006 | none |
-| `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 3006 | none |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
 | `lem-exc-field-sections-stalk-invariants` | 3007 | none |
 | `lem-pc-divisor-line-bundle-agrees-sc` | 3007 | none |
+| `lem-weil-pbc-derived-finite-product` | 3007 | none |
+| `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
 | `lem-sc-etale-coproduct-etale` | 3009 | none |
 | `lem-sc-etale-fibre-product-coproduct` | 3009 | none |
 | `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
@@ -44,14 +45,14 @@
 | `lem-sc-point-tangent-cotangent-surjective` | 3011 | none |
 | `lem-sc-point-tangent-finite-local-cotangent-surjective` | 3011 | none |
 | `thm-sc-proper-finite-fibre-finite-neighbourhood` | 3011 | none |
-| `lem-pc-global-sections-separable` | 3012 | none |
-| `lem-pc-separable-tensor-algebraic-closure` | 3012 | none |
 | `lem-weil-pbc-ringed-site-free-cech-complex-exact` | 3012 | none |
 | `lem-weil-pbc-ringed-site-injective-module-injective-presheaf` | 3012 | none |
 | `def-sc-sheaf-cohomology-functor` | 3013 | none |
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 3013 | none |
 | `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
 | `lem-pc-local-flat-faithful-flat-reflects-surjective` | 3013 | none |
+| `lem-pc-proper-geometrically-reduced-global-sections-separable` | 3013 | none |
+| `lem-pc-separable-polynomial-alg-closed-quotient-product` | 3013 | none |
 | `lem-sc-affine-finite-module-free-locus` | 3013 | none |
 | `lem-sc-cech-comparison-natural` | 3013 | none |
 | `lem-sc-ext-derived-composite-natural` | 3013 | none |
@@ -927,7 +928,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 353 nodes that wait for stage 1, 1150 nodes that wait for a statement dependency.
+Not open yet: 354 nodes that wait for stage 1, 1155 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
