@@ -12,9 +12,65 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite presentation $A=P/I$, $P=R[x_1,\\dots,x_n]$, $I=(f_1,\\dots,f_m)$: a smooth ring map is finitely presented by [def-weil-pbc-smooth-ring-map] and [def-weil-pbc-finitely-presented-algebra]. Write $M=I/I^2$ and let $q:A^{\\oplus m}\\to M$ take $e_j$ to $f_j\\bmod I^2$. Apply [lem-weil-pbc-smooth-localization-conormal-split] with the smooth algebra $A$ and $a=1$. It gives $M\\oplus\\Omega_{A/R}\\cong A^{\\oplus n}$, so $M$ is finite projective. Because $q$ is surjective and $M$ is projective, choose an $A$-linear section $s:M\\to A^{\\oplus m}$; with $K=\\ker q$, the maps $(k,u)\\mapsto k+s(u)$ and $v\\mapsto(v-s(q(v)),q(v))$ are inverse, hence $K\\oplus M\\cong A^{\\oplus m}$.",
+   "uses": [
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-smooth-localization-conormal-split"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CE (lemma-improve-presentation), lines 357-364 and 404-407. In the smooth case projectivity of I/I^2 also follows from the split conormal sequence, as in proof of Lemma Tag 07CH, lines 606-617."
+   }
+  },
+  {
+   "text": "Set $C=\\operatorname{Sym}_A(M)$ [lem-weil-pbc-symmetric-algebra-universal-property]. Applying its universal property to the zero $A$-linear map $M\\to A$ gives an $A$-algebra homomorphism $\\rho:C\\to A$; since it is an $A$-algebra homomorphism, $\\rho\\circ(A\\to C)=\\mathrm{id}_A$. As $M$ is finite projective by step 1, [lem-weil-pbc-symmetric-algebra-finite-projective-smooth] says $A\\to C$ is smooth. By [lem-weil-pbc-symmetric-algebra-finite-presentation](a), the images of $f_1\\bmod I^2,\\dots,f_m\\bmod I^2$ generate $C$ as an $A$-algebra; with the images of $x_1,\\dots,x_n$ generating $A$ over $R$, they give a surjective $R$-algebra map $Q=R[x_1,\\dots,x_n,y_1,\\dots,y_m]\\to C$, taking $y_j$ to the canonical image of $f_j\\bmod I^2$. Put $J=\\ker(Q\\to C)$.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
+    "lem-weil-pbc-symmetric-algebra-finite-presentation",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CE, lines 357-366 (C = Sym_A(I/I^2), degree-zero retraction, and the polynomial surjection); clause (1), lines 344-350 (C smooth over A)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-symmetric-projective-presentation-conormal] to the presentation and the finite projective module $M$ from step 1 and the map $Q\\to C$ of step 2. Its hypotheses include the projectivity of $M$, which step 1 established; it gives a split exact sequence $0\\to M\\otimes_A C\\to J/J^2\\to K\\otimes_A C\\to0$. Thus $J/J^2\\cong (M\\oplus K)\\otimes_A C\\cong A^{\\oplus m}\\otimes_A C\\cong C^{\\oplus m}$ by the explicit decomposition of step 1, so $J/J^2$ is a free $C$-module [def-weil-pbc-free-module]. Reindexing the $n+m$ variables of $Q$ as $y_1,\\dots,y_{n+m}$ gives the required surjective polynomial presentation. Together with the smooth map and retraction of step 2, this proves the statement.",
+   "uses": [
+    "lem-weil-pbc-symmetric-projective-presentation-conormal",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CE, equation-sequence and its splitting, lines 367-414, specialized to a = 1; the projective hypothesis is verified in step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-smooth-localization-conormal-split",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
+  "lem-weil-pbc-symmetric-algebra-finite-presentation",
+  "lem-weil-pbc-symmetric-projective-presentation-conormal",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, proof of Lemma Tag 07CE (lemma-improve-presentation), lines 357-414, clause (1) at a = 1 for smooth A. Projectivity of I/I^2 follows from the smooth conormal sequence used in Tag 07CH; the conormal calculation is isolated in lem-weil-pbc-symmetric-projective-presentation-conormal, with the projective hypothesis needed to repair the false general form of More on Algebra Tag 07EV."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,7 +102,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +122,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-improve-presentation-smooth-conormal-free",
+  "worker": "stage1",
+  "summary": "Split the smooth case of Stacks 07CE(1) into the smooth presentation and finite-projective conormal M=I/I^2, the construction C=Sym_A(M) with retraction and smooth A-structure, and the free conormal calculation for its R-polynomial presentation. The latter is one new unsplit node with the projective hypothesis explicit: the general 07EV conormal identification is false, as the existing cotangent-complex-symmetric-algebra node records. The existing improve-presentation node proves C smooth over R and Omega free, but its statement does not give C smooth over A or a free conormal presentation, so it cannot replace this item."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: 07CE smooth case (a = 1): M = I/I^2 finite projective via smooth-localization-conormal-split, C = Sym_A(M) smooth over A with the degree-0 retraction, presentation Q = R[x,y] -> C; the new node isolates the split exact conormal sequence 0 -> M (x) C -> J/J^2 -> K (x) C -> 0 under projectivity of M (left exactness is the 07EU-type step the source uses; the general 07EV claim is false as recorded on lem-weil-pbc-cotangent-complex-symmetric-algebra); J/J^2 = (M + K) (x) C = C^m"
+ }
 }
