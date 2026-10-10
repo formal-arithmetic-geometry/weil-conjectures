@@ -21,9 +21,65 @@
  "stmt_deps": [
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $p_n:M=\\varprojlim_jM_j\\to M_n$ for the projections. The quotient hypothesis makes every transition $M_{n+1}\\to M_n$ surjective, and recursively lifting an element gives a compatible element of the inverse limit, so $p_n$ is surjective. Since $I^nM_n=0$, $p_n$ kills $I^nM$ and induces a surjection $q_n:M/I^nM\\to M_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 09B8 (lemma-limit-complete), proof of surjectivity"
+   }
+  },
+  {
+   "text": "($M$ is $I$-adically complete; Stacks 09B7.) Let $M^\\wedge=\\varprojlim_nM/I^nM$ with canonical map $c:M\\to M^\\wedge$ [def-weil-pbc-adic-completion], and let $r:M^\\wedge\\to\\varprojlim_nM_n=M$ be the limit of the $q_n$. Then $r\\circ c=\\mathrm{id}_M$, so $M$ is an $A$-linear retract of $M^\\wedge$. As $I$ is finitely generated, $M^\\wedge$ is $I$-adically complete [lem-weil-pbc-module-completion-complete]. The canonical map to the completion is natural, so $c_M:M\\to\\varprojlim_nM/I^nM$ is a retract (via $c$ and $r$) of the bijection $c_{M^\\wedge}$, hence bijective: $M$ is $I$-adically complete, i.e. $c$ is bijective, and therefore $r=c^{-1}$ is bijective too.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 09B7 (lemma-limit-complete-pre), proof, with Lemma 05GG (lemma-hathat-finitely-generated); invoked in the first sentence of the proof of 09B8"
+   }
+  },
+  {
+   "text": "(Kernels; Stacks 09B8.) Put $N_n=\\ker(p_n)$. The quotient hypothesis gives that $N_{n+1}+I^nM\\to N_n$ is surjective, hence $N_{n+1}/(N_{n+1}\\cap I^{n+1}M)\\to N_n/(N_n\\cap I^nM)$ is surjective. The short exact sequences $0\\to N_n/(N_n\\cap I^nM)\\to M/I^nM\\xrightarrow{q_n}M_n\\to0$ form an inverse system; by left exactness of $\\varprojlim$, $\\varprojlim_nN_n/(N_n\\cap I^nM)=\\ker(r)$, which is $0$ by the previous step. An element of a term of an inverse system with surjective transitions lifts to an element of its limit, so every $N_n/(N_n\\cap I^nM)$ vanishes, i.e. $N_n\\subseteq I^nM$. Since $I^nM\\subseteq N_n$, $\\ker(p_n)=I^nM$ and $q_n$ is injective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 09B8 (lemma-limit-complete), proof using the kernels N_n"
+   }
+  },
+  {
+   "text": "The maps $q_n:M/I^nM\\to M_n$ are therefore isomorphisms for all $n$. $M$ is $I$-adically complete by the second step; an element of $\\bigcap_nI^nM$ maps to zero in every $M_n$ and is therefore zero, so $M$ is separated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 09B8 (lemma-limit-complete), conclusion"
+   }
+  },
+  {
+   "text": "Because each $M_n$ is discrete, the inverse-limit topology on $M$ has the kernels $\\ker(p_n)$ as a neighborhood basis of $0$. These kernels are $I^nM$ by the third step, exactly the basic neighborhoods of $0$ for the $I$-adic topology; the two topologies coincide.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 09B8 (lemma-limit-complete), topology conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-completion-complete",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 09B8 (lemma-limit-complete), statement and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,12 +125,33 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pod-adic-limit-finite-modules",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-lem-finite"
+ "unit": "sk-lem-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pod-adic-tower-reconstruction",
+  "worker": "stage1",
+  "summary": "Split Stacks Lemma 09B8 into explicit projection, injectivity by finite-generator successive approximation, completeness/separatedness, and topology steps. No new nodes were needed: the only external notion is the existing adic-completion definition.",
+  "blueprint": "Realizes step 6 of cor-galois-lisse-representations, reconstructing the fibre from compatible finite coefficient stalks using Lemma 09B8.",
+  "tool_uses": [
+   "lem-weil-pbc-module-completion-complete"
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-completion-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-atr2834",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-atr2834 (reviewer sub-agent of L); spot-checked: Statement unchanged from sheaf-dag and still assumes I finitely generated (E7); matches Stacks 09B8 plus separatedness/topology clauses; M1 Step 1 uses only quotient iso, topology and separatedness with I=(varpi_E) principal (C4 met). Mathlib grep of RingTheory/AdicCompletion (AdicCompletion, IsAdicComplete, of_mk_eq): only AdicCompletion.isAdicComplete (Completeness.lean:185) for the completion itself, no tower theorem. FIX more, RETURN less: (1) C1: old Step 2 used I-adic completeness of M (Stacks 09B7, where I f.g. enters via 05GG) as an uncited elementary fact, and Step 3 then re-derived completeness from it; new Step 2 proves completeness by the 09B7 retract argument citing lem-weil-pbc-module-completion-complete (05GG, generic tool use) and def-weil-pbc-adic-completion; kernel argument is now Step 3 using ker(r)=0; proof_deps updated. (2) B4: plain-text arrows in all steps rewritten in TeX.; 1 file(s) fixed by the reviewer"
+ }
 }
