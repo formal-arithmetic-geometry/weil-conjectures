@@ -2613,3 +2613,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:03 L: merged deliver/M1/lem-pc-monomial-cech-complex-homology (reviewer PASS; first push; new nodes: 0)
 - 21:03 L: merged deliver/H1/lem-pc-bounded-above-flat-tensor-acyclic (reviewer FIX; first push; new nodes: 0)
 - 21:04 L: deleted the second deliver/J1/lem-pc-ringed-space-module-stalk-tensor branch (3254c8202; item split by L, no claim held)
+- 21:05 L: merged deliver/H1/lem-pc-module-filtered-colimits-tensor (reviewer PASS; first push; new nodes: 0)
