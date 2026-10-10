@@ -1995,3 +1995,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:31 L: lem-sc-torsor-h1-zariski-boundary-class attached (classH1_lifts; F1 release); lem-weil-pbc-injective-acyclicity-bounded-below parked again under L (H1's delivery used the false embedding; return withdrawn, branch deleted, notice)
 - 16:32 L: merged deliver/K1/lem-weil-pbc-derived-finite-product (reviewer FIX+NODE(1); first push; new nodes: 3)
 - 16:32 L: merged deliver/C1/lem-weil-pbc-ringed-site-free-cech-complex-exact (reviewer PASS; first push; new nodes: 0)
+- 16:33 L: returned deliver/F1/lem-sc-ample-proj-open (reviewer RETURN: 1. E2/B (ill-typed statement, missing hypothesis): lem-sc-ample-proj-local-chart: its first clause 'let f: X -> Proj(S) )
