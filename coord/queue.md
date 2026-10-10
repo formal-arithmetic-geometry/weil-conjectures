@@ -2,7 +2,7 @@
 
 859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (48)
+## Stage 1: nodes to split (47)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
-| `lem-sc-finite-cohomology` | 3023 | none |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3024 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
@@ -55,7 +54,7 @@
 | `lem-wf-lie-algebra-derivation-bracket` | - | none |
 | `lem-pur-rhom-into-kinjective-local` | - | none |
 
-## Stage 2: nodes to state (811)
+## Stage 2: nodes to state (812)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -266,6 +265,7 @@
 | `lem-sc-faithfully-flat-local-dimension` | 1 | state |
 | `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 1 | state |
 | `lem-sc-filtered-colimit-prime-chain-dimension` | 1 | state |
+| `lem-sc-finite-cohomology` | 1 | state |
 | `lem-sc-finite-discrete-separated-affine` | 1 | state |
 | `lem-sc-finite-integral-conductor` | 1 | state |
 | `lem-sc-finite-length-global-submodule` | 1 | state |
@@ -871,7 +871,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1702 nodes that wait for a statement dependency, 89 nodes that wait for stage 1.
+Not open yet: 1702 nodes that wait for a statement dependency, 88 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
