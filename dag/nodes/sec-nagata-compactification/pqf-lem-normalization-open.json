@@ -1,0 +1,79 @@
+{
+ "id": "pqf-lem-normalization-open",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pqf-zmt-factorization",
+   "place": "Step 1: the canonical branch, the relative normalization N_f and the quasi-compact open immersion X -> N_f",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quasi-finite morphisms embed openly in the relative normalization",
+ "statement": "Let $f:X\\to S$ be a separated morphism of finite type [def-weil-pbc-scheme-conventions] which is everywhere quasi-finite [pqf-def-quasifinite], with $S$ quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Let $\\nu_f:N_f\\to S$ be the relative normalization of $S$ in $X$ [lem-weil-pbc-relative-normalization]. Then $\\nu_f$ is integral [def-weil-finite-integral-morphism], there is a morphism $\\iota_f:X\\to N_f$ with $\\nu_f\\circ\\iota_f=f$, and $\\iota_f$ is a quasi-compact open immersion [def-weil-open-immersion].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Lemma 37.43.2 (Tag 02LR), lemma-quasi-finite-separated-quasi-affine"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-quasifinite",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "relative normalization of a separated finite type quasi-finite morphism is integral and contains source as quasi-compact open",
+   "results": "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization (Mathlib/AlgebraicGeometry/Normalization.lean); AlgebraicGeometry.Scheme.Hom.isOpenImmersion_toNormalization (same file)",
+   "date": "2026-10-11",
+   "verdict": "partial match: the two component declarations exist, but no single theorem states the full Stacks conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "isOpenImmersion toNormalization IsIntegralHom fromNormalization",
+   "results": "0 hits; parser reported Unknown identifier isOpenImmersion",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isOpenImmersion_toNormalization|IsIntegralHom.*fromNormalization in Mathlib/AlgebraicGeometry",
+   "results": "Normalization.lean:55 instance isOpenImmersion_toNormalization; Normalization.lean:200 instance IsIntegralHom fromNormalization",
+   "date": "2026-10-11",
+   "verdict": "partial match: component declarations only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "relative normalization of a separated finite type quasi-finite morphism is integral and contains source as quasi-compact open",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma\\|instance' Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean Mathlib/AlgebraicGeometry/Normalization.lean (slopmaster2 mathlib)",
+   "results": "ZariskisMainTheorem.lean:358 instance [LocallyQuasiFinite f] [LocallyOfFiniteType f] [IsSeparated f] [QuasiCompact f] : IsOpenImmersion f.toNormalization; Normalization.lean:190 toNormalization_fromNormalization, :200 instance IsIntegralHom f.fromNormalization, :314 instance QuasiCompact f.toNormalization. (The earlier entry's 'Normalization.lean:55 isOpenImmersion_toNormalization' does not exist; the open-immersion instance is in ZariskisMainTheorem.lean.)",
+   "date": "2026-10-10",
+   "verdict": "match (clause by clause, see mathlib_match)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, Scheme.Hom.toNormalization_fromNormalization, the instance IsOpenImmersion f.toNormalization (ZariskisMainTheorem.lean:358), the instance QuasiCompact f.toNormalization (Normalization.lean:314)",
+  "file": "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/Normalization.lean",
+  "how": "one Mathlib declaration per clause, with N_f = f.normalization, nu_f = f.fromNormalization, iota_f = f.toNormalization (the relative normalization of lem-weil-pbc-relative-normalization, defined for f quasi-compact and quasi-separated, which holds as f is of finite type and separated): nu_f integral is the instance IsIntegralHom f.fromNormalization (Normalization.lean:200); nu_f o iota_f = f is toNormalization_fromNormalization (Normalization.lean:190); iota_f an open immersion is the instance [LocallyQuasiFinite f] [LocallyOfFiniteType f] [IsSeparated f] [QuasiCompact f] : IsOpenImmersion f.toNormalization (ZariskisMainTheorem.lean:358; 'everywhere quasi-finite' of pqf-def-quasifinite is LocallyQuasiFinite); iota_f quasi-compact is the instance QuasiCompact f.toNormalization (Normalization.lean:314). The hypothesis that S is quasi-compact and quasi-separated is not needed. Source read 2026-10-10 by reviewer R-zmt2535."
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "thm-pqf-zmt-factorization",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-prop-nagata-sketch-zmt"
+}
