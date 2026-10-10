@@ -15,15 +15,15 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-cd",
  "title": "Presheaf extension by zero on a localized site",
- "statement": "Let $\\mathcal C$ be a category and $W$ an object [def-weil-pbc-sites-and-cohomology]. For an abelian presheaf $F$ on the slice category $\\mathcal C/W$ (presheaves of abelian groups as in [def-sp-abelian]), define the presheaf $j_{W,p!}F$ on $\\mathcal C$ by\\n\\n$$\\n(j_{W,p!}F)(V)=\\bigoplus_{\\varphi\\in\\operatorname{Mor}_{\\mathcal C}(V,W)}F(V\\xrightarrow{\\varphi}W),\\n$$\\n\\nwhere the summand indexed by $\\varphi$ is the value of $F$ at the corresponding slice object, and a morphism $g:V'\\to V$ sends the summand indexed by $\\varphi$ to the summand indexed by $\\varphi\\circ g$ using the restriction map of $F$. A morphism of presheaves is sent to the direct sum of its component maps. If $\\mathcal C$ is a site and $F$ is a sheaf on $\\mathcal C/W$, the extension-by-zero sheaf $j_{W!}F$ is the sheafification [def-weil-pbc-sheafification] of $j_{W,p!}F$ for the given topology on $\\mathcal C$.",
+ "statement": "Let $\\mathcal C$ be a category and $W$ an object [def-weil-pbc-sites-and-cohomology]. For a presheaf $F$ of abelian groups on the slice category $\\mathcal C/W$, define the presheaf $j_{W,p!}F$ on $\\mathcal C$ by\n\n$$\n(j_{W,p!}F)(V)=\\bigoplus_{\\varphi\\in\\operatorname{Mor}_{\\mathcal C}(V,W)}F(V\\xrightarrow{\\varphi}W).\n$$\n\nThe summand indexed by $\\varphi$ is the value of $F$ at the corresponding slice object. For a morphism $g:V'\\to V$, restriction sends the summand indexed by $\\varphi$ to the summand indexed by $\\varphi\\circ g$ using the restriction map of $F$. A morphism of presheaves is sent to the direct sum of its component maps. If $\\mathcal C$ is a site, give $\\mathcal C/W$ the localized topology: a family of maps over $W$ covers when its underlying family covers in $\\mathcal C$. For a sheaf $F$ on this localized site, the extension-by-zero sheaf $j_{W!}F$ is the sheafification [def-weil-pbc-sheafification] of $j_{W,p!}F$ for the given topology on $\\mathcal C$. *Relation to the ringed-site version:* when $F$ is a sheaf of abelian groups on $\\mathcal C/W$, regarded as a module over the constant sheaf of rings $\\mathbb Z$ restricted to $\\mathcal C/W$, the presheaf $j_{W,p!}F$ is the underlying abelian presheaf of the extension-by-zero presheaf $P_F$ of [def-weil-extension-by-zero-presheaf] for $\\mathcal O=\\mathbb Z$ and $U=W$; the present node only additionally allows $F$ to be a presheaf.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Modules on Sites, Section 03DH (lemma-extension-by-zero), construction of j_{U!} from the presheaf j_{p!}; Definition 00A4"
  },
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
-  "def-sp-abelian",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "def-weil-extension-by-zero-presheaf"
  ],
  "proof": [],
  "proof_deps": [],
@@ -31,38 +31,54 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "presheaf extension by zero direct sum over morphisms into an object",
-   "results": "PresheafOfModules.freeYonedaCoproduct and related free Yoneda coproduct declarations; no extension-by-zero construction",
+   "query": "presheaf extension by zero direct sum over morphisms into an object of a slice category and sheafification",
+   "results": "CategoryTheory.Sheaf.freeYoneda (Mathlib/CategoryTheory/Generator/Sheaf); PresheafOfModules.freeYonedaCoproduct (Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator); no exact site extension-by-zero declaration",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Presheaf, DirectSum, Over",
-   "results": "0 hits; unknown identifier Presheaf",
+   "query": "Presheaf.freeYoneda, Presheaf.sigmaPresheaf, sheafification",
+   "results": "0 hits; loogle reports unknown identifier Presheaf.freeYoneda",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "extension.?by.?zero|DirectSum.*Over in Mathlib/CategoryTheory/Sites",
-   "results": "no matching extension-by-zero presheaf declaration",
+   "query": "extension.?by.?zero|sigmaPresheaf|freeYoneda in Mathlib/CategoryTheory/Sites",
+   "results": "0 matching lines in Mathlib/CategoryTheory/Sites",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "presheaf extension by zero on a slice site",
+   "query": "presheaf extension by zero on a localized site",
    "results": "unavailable",
    "date": "2026-10-11",
    "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-site-extension-by-zero-exact",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-weil-pbc-site-extension-by-zero-presheaf",
+  "worker": "stage1",
+  "summary": "Checked the presheaf extension-by-zero definition against Modules on Sites, Lemma 03DI and Remark 03EJ, specialized to abelian groups over the constant integer ring. The direct sum over maps V -> W, functorial restriction by composition, morphism-wise direct sums, and sheafification are explicit in the statement and its two definition dependencies; no smaller project node is needed. Mathlib searches found only general free-Yoneda/sheafification APIs, not this definition.",
+  "blueprint": "Realizes the parent blueprint proof sentence describing the sectionwise presheaf j_{W,p!} as a direct sum over morphisms into W and its sheafification."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ezp1829",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ezp1829 (reviewer sub-agent of L); spot-checked: Definition checked against Stacks 03DI/03EJ (direct sum over Mor(V,W), restriction by precomposition, componentwise morphisms, sheafification); no well-definedness claim needs proof. FIX more, RETURN less: (1) B3 source.place still cited Definition 00A4 (topological spaces) despite the second reading's claim; replaced by Lemma 03DI / Remark 03EJ. (2) class (b) relation: added a sentence stating that for an abelian sheaf F the presheaf is the underlying abelian presheaf of P_F of def-weil-extension-by-zero-presheaf with O = constant Z, U = W, and added that node to stmt_deps (this node only additionally allows presheaves, so kept, not dropped).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-ezp1829): Second reading missed: its claimed replacement of the Definition 00A4 citation was not in the committed source.place; repaired."
 }
