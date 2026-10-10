@@ -3029,3 +3029,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:56 UTC L: attached lem-sc-picard-closure-specialization (AlgebraicGeometry.exists_specializes_of_mem_closure_range) and lem-sc-picard-valuation-probe-specializes (AlgebraicGeometry.ValuativeCommSqWithPt.ofSpecializes), both sorry-free in slopmaster2, after R-pvp3154's review of H1 ab6f09155.
 - 23:56 L: merged deliver/J1/lem-sc-picard-locus-closed-valuation-triviality (reviewer FIX+NODE(1); first push; new nodes: 4)
 - 23:58 UTC L: J1 picard-locus-closed-valuation-triviality FIX 03198bf1b (R-pvt3154; DVR step dropped, 'flat' added to lem-sc-valuation-proper-coherent-sections, new node lem-sc-valuation-closed-fibre-section-vanishing).
+- 23:58 L: returned deliver/E1/lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change (reviewer RETURN: Reviewer R-tsb3157 (head 6c9ca56ff). 1. E (false new statement): lem-weil-pbc-torsion-module-injective-resolution is fal)
