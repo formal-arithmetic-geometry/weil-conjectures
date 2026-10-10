@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-normal-extension-conjugate-by-automorphism",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "proof of lem-weil-pbc-normal-extension-purely-inseparable-then-galois (Stacks 030M (2), 'We set $E_{insep}=E^{\\mathrm{Aut}(E/F)}$. Details omitted'), serving step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)): the N-2 property used there, through the criterion 032N; 032N proof, 'By Fields, Lemma 030M there exists a subextension M/M_insep/K such that M_insep/K is purely inseparable, and M/M_insep is separable'; step 2 (the automorphisms act transitively on the roots in E of the minimal polynomial)",
+   "via": [
+    "lem-weil-pbc-normal-extension-purely-inseparable-then-galois",
+    "lem-weil-pbc-n2-char-p-purely-inseparable-criterion",
+    "lem-weil-pbc-polynomial-ring-n2",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "In a normal extension, the roots of a minimal polynomial are conjugate under automorphisms (Stacks 0BME (2))",
+ "statement": "Let $F$ be a field and $E/F$ a field extension [def-pc-field-extension] which is algebraic and normal: every $\\alpha\\in E$ is algebraic over $F$ [def-weil-algebraic-element] and its minimal polynomial over $F$ [def-weil-pbc-separable-algebraic-extension] is a product of polynomials of degree one in $E[T]$. Let $\\alpha\\in E$ with minimal polynomial $P\\in F[T]$ over $F$, and let $\\beta\\in E$ with $P(\\beta)=0$. Then there is an $F$-algebra automorphism $\\sigma$ of $E$ with $\\sigma(\\alpha)=\\beta$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 0BME (fields-lemma-lift-maps, line 1946), part (2), applied to $M=F(\\alpha)$ and the $F$-algebra map $F(\\alpha)=F[x]/(P)\\to E$, $\\alpha\\mapsto\\beta$ (as in the proof of Lemma 09HQ, fields-lemma-characterize-normal, line 1879); tags verified in literature/stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-element",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normal extension: two elements with the same minimal polynomial are conjugate by an automorphism",
+   "results": "isConjRoot_iff_exists_algEquiv, IsConjRoot.exists_algEquiv (Mathlib.FieldTheory.Minpoly.IsConjRoot), Normal.minpoly_eq_iff_mem_orbit, minpoly.exists_algEquiv_of_root' (Mathlib.FieldTheory.Normal.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: minpoly.exists_algEquiv_of_root'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a normal field extension E/F, if y is a root of the minimal polynomial of x then some F-automorphism of E sends x to y",
+   "results": "minpoly.exists_algEquiv_of_root, minpoly.exists_algEquiv_of_root' (Mathlib.FieldTheory.Normal.Basic), IsConjRoot.exists_algEquiv, isConjRoot_iff_exists_algEquiv, Normal.minpoly_eq_iff_mem_orbit",
+   "date": "2026-10-10",
+   "verdict": "match: minpoly.exists_algEquiv_of_root'"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'minpoly_eq_iff_mem_orbit\\|exists_algEquiv_of_root\\|def liftNormal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory",
+   "results": "FieldTheory/Normal/Basic.lean:238 Normal.minpoly_eq_iff_mem_orbit, :269 minpoly.exists_algEquiv_of_root, :279 minpoly.exists_algEquiv_of_root'",
+   "date": "2026-10-10",
+   "verdict": "match: minpoly.exists_algEquiv_of_root' (read with sed -n 265,285p)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "minpoly.exists_algEquiv_of_root'",
+  "file": "Mathlib/FieldTheory/Normal/Basic.lean",
+  "line": 279,
+  "how": "exact: with K := F, L := E, [Normal F E] (Mathlib's Normal = algebraic and every minpoly splits, the node's hypothesis), y := α (IsAlgebraic F α by normality), x := β with (aeval β) (minpoly F α) = 0: gives σ : Gal(E/F) = E ≃ₐ[F] E with σ α = β. Line 279 read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-normal-extension-purely-inseparable-then-galois",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: minpoly.exists_algEquiv_of_root' (Normal/Basic.lean:279) (0BME (2))"
+}

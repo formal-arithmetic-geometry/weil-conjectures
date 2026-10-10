@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-distinct-linear-factors-separable",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "proof of lem-weil-pbc-normal-extension-purely-inseparable-then-galois (Stacks 030M (2), 'We set $E_{insep}=E^{\\mathrm{Aut}(E/F)}$. Details omitted'), serving step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)): the N-2 property used there, through the criterion 032N; 032N proof, 'By Fields, Lemma 030M there exists a subextension M/M_insep/K such that M_insep/K is purely inseparable, and M/M_insep is separable'; step 5 (the minimal polynomial over $E_{insep}$ divides the orbit polynomial $\\prod(T-\\sigma\\alpha)$, hence is separable)",
+   "via": [
+    "lem-weil-pbc-normal-extension-purely-inseparable-then-galois",
+    "lem-weil-pbc-n2-char-p-purely-inseparable-criterion",
+    "lem-weil-pbc-polynomial-ring-n2",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A polynomial splitting into distinct linear factors is separable, and so are its divisors (Stacks 09H3)",
+ "statement": "Let $K\\subseteq L$ be fields [def-pc-field-extension], $K[T]$ the polynomial ring [def-weil-polynomial-ring], and $Q\\in K[T]$ a monic polynomial such that $Q=\\prod_{j=1}^r(T-\\beta_j)$ in $L[T]$ for pairwise distinct $\\beta_1,\\dots,\\beta_r\\in L$. Then $Q$ is separable over $K$ [def-pc-separable-polynomial] (coprime to its derivative in $K[T]$), and every $R\\in K[T]$ dividing $Q$ in $K[T]$ is separable.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 09H3 (fields-lemma-recognize-separable, line 1207) and its proof (a common root of $P$ and $P'$ is a repeated root), in the form used in the proof of Lemma 09I3 (fields-lemma-galois-over-fixed-field, line 2727: 'the minimal polynomial $Q$ ... divides the polynomial $P$ just constructed. Hence $Q$ is separable (by Lemma 09H3)'); tags verified in literature/stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "product of X - C a over distinct roots is separable polynomial",
+   "results": "Polynomial.separable_prod_X_sub_C_iff', Polynomial.separable_X_sub_C, Polynomial.separable_prod_X_sub_C_iff, Polynomial.separable_X_add_C (Mathlib.FieldTheory.Separable)",
+   "date": "2026-10-10",
+   "verdict": "match: separable_prod_X_sub_C_iff' (over L)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Separable (Polynomial.map _ _)",
+   "results": "Polynomial.Separable.map, Polynomial.separable_map (Mathlib.FieldTheory.Separable), IsPrimitiveRoot.separable_minpoly_mod",
+   "date": "2026-10-10",
+   "verdict": "match: Polynomial.separable_map (descends separability from L to K)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem separable_prod_X_sub_C_iff\\|theorem separable_map\\|theorem Separable.of_dvd' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Separable.lean",
+   "results": "Separable.lean:87 Separable.of_dvd, :311 separable_map, :318 separable_prod_X_sub_C_iff', :329 separable_prod_X_sub_C_iff",
+   "date": "2026-10-10",
+   "verdict": "match (one declaration per clause)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Polynomial.separable_prod_X_sub_C_iff', Polynomial.separable_map, Polynomial.Separable.of_dvd",
+  "file": "Mathlib/FieldTheory/Separable.lean",
+  "line": 318,
+  "how": "one declaration per clause: Q.map (algebraMap K L) = ∏ j ∈ Finset.univ, (X - C (β j)) is separable by separable_prod_X_sub_C_iff' (line 318) since j ↦ β_j is injective; separable_map (line 311, for the field hom K →+* L) gives Q.Separable over K; Separable.of_dvd (line 87) gives R.Separable for R ∣ Q. Polynomial.Separable is coprimality with the derivative (def-pc-separable-polynomial). Lines read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-normal-extension-purely-inseparable-then-galois",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: composed Mathlib leaf checked: separable_prod_X_sub_C_iff' (Separable.lean:318), separable_map (:311), Separable.of_dvd (:87) (09H3)"
+}

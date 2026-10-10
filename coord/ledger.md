@@ -1199,3 +1199,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:00 L: accepted lem-weil-pbc-complete-local-nagata (032W; new 032I, 032Q, 032P nodes and a PID leaf). Brief fix: L's shared brief now says plain grep for the slopmaster2 checkout (no git).
 - 10:01 L: accepted lem-weil-pbc-coherent-homs-over-open (01YB, 13 steps; new 01PQ, 01YA, 01LA (10), 01CN nodes; tool_uses [pqf-lem-coherent-ft-locnoeth]; the two omitted arguments written out).
 - 10:02 L: accepted lem-weil-pbc-power-series-cohen-formally-smooth-adic (07NL, 5 steps, 0 new).
+- 10:02 L: accepted lem-weil-pbc-normal-extension-purely-inseparable-then-galois (030M (2), proof omitted in Stacks, written out; 3 new Mathlib leaves for 0BME (2), 09HN, 09H3).
