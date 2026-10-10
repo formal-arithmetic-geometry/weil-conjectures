@@ -2985,3 +2985,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:37 L: merged deliver/E1/lem-sc-affine-pseudo-coherent-lift (reviewer FIX; first push; new nodes: 4)
 - 23:38 L: merged deliver/J1/lem-pc-ring-pseudo-coherent-summand (reviewer FIX; first push; new nodes: 1)
 - 23:38 L: merged deliver/F1/lem-pc-rf-single-complex-affine-base-change (reviewer FIX; after a return; new nodes: 1)
+- 23:38 L: merged deliver/K1/lem-pc-kflat-tensor-product (reviewer PASS; first push; new nodes: 0)

@@ -21,9 +21,40 @@
  "stmt_deps": [
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal M^\\bullet$ be any acyclic complex of $\\mathcal O_X$-modules. Since $\\mathcal K^\\bullet$ is K-flat, the total complex $\\operatorname{Tot}(\\mathcal M^\\bullet\\otimes_{\\mathcal O_X}\\mathcal K^\\bullet)$ is acyclic by the definition of K-flatness [def-pc-kflat-complex].",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 079R (cohomology-lemma-tensor-product-K-flat), proof, lines 5906-5908"
+   }
+  },
+  {
+   "text": "Apply K-flatness of $\\mathcal L^\\bullet$ to the acyclic complex from Step 1. The definition of the total tensor complex [def-pc-tensor-complex-sheaves] gives the canonical associativity isomorphism $\\operatorname{Tot}(\\mathcal M^\\bullet\\otimes_{\\mathcal O_X}\\operatorname{Tot}(\\mathcal K^\\bullet\\otimes_{\\mathcal O_X}\\mathcal L^\\bullet))\\cong\\operatorname{Tot}(\\operatorname{Tot}(\\mathcal M^\\bullet\\otimes_{\\mathcal O_X}\\mathcal K^\\bullet)\\otimes_{\\mathcal O_X}\\mathcal L^\\bullet)$, with the Koszul signs agreeing. The right-hand side is acyclic, so the left-hand side is acyclic. As this holds for every acyclic $\\mathcal M^\\bullet$, the displayed total tensor complex is K-flat by [def-pc-kflat-complex].",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 079R (cohomology-lemma-tensor-product-K-flat), proof, lines 5906-5908"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 079R (cohomology-lemma-tensor-product-K-flat), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,19 +72,42 @@
   },
   {
    "tool": "grep",
-   "query": "K-flat|KFlat|tensor-product-K-flat",
-   "results": "No matches in Algebra/Homology.",
+   "query": "K-flat|KFlat|tensor-product-K-flat Algebra/Homology",
+   "results": "0 hits.",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "tensor product of K-flat complexes is K-flat",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-pullback-tensor-product",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-kflat-tensor-product",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 079R (cohomology-lemma-tensor-product-K-flat) and its proof. The proof has no non-elementary intermediate lemma: for an arbitrary acyclic complex M, K-flatness of K makes Tot(M tensor K) acyclic, K-flatness of L applies to that complex, and the canonical associativity isomorphism of iterated total tensor complexes gives the required acyclicity. Thus no new node is needed; the item now has two elementary proof steps using the existing K-flat and total-tensor definitions.",
+  "blueprint": "The steps realize the tensor-product K-flat lemma used when computing the pullback of the derived tensor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ktp3139",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ktp3139 (reviewer sub-agent of L); spot-checked: Read packet whole. Statement matches Stacks 079R exactly. C4: def-pc-kflat-complex defines K-flat as Tot(F (x) K) acyclic for every acyclic F (acyclic factor on the left, as both steps use it); site-level definition specializes to the ringed space. Step 2 associativity: checked by hand with the convention of def-pc-tensor-complex-sheaves, d=d_F(x)1+(-1)^p 1(x)d_G: on M^a(x)K^b(x)L^c both iterated totals have differential d_M+(-1)^a d_K+(-1)^(a+b) d_L, so the identification is the termwise tensor associativity with no extra signs (tensor commutes with direct sums), elementary from the cited definition; C1 OK. D: Tot(M(x)K) acyclic by K, then L's K-flatness, then associativity, quantified over all M; no cycle. Class (b)/(d): no new nodes; read statements of lem-pc-kflat-closure, lem-pc-kflat-tensor-cone-two-out-of-three, lem-kun-kflat-criteria and listed all *kflat* nodes: none states the tensor product of K-flat complexes. No repairs."
+ }
 }
