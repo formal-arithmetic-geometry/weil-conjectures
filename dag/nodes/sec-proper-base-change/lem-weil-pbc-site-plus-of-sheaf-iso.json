@@ -11,9 +11,65 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-site-plus-construction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The sheaf condition identifies $\\mathcal G(U)$ with every $H^0(\\mathcal U,\\mathcal G)$.* Let $\\mathcal U=\\{\\pi_i:U_i\\to U\\}_{i\\in I}$ be a covering. By [def-weil-pbc-site-plus-construction](a), $H^0(\\mathcal U,\\mathcal G)\\subset\\prod_i\\mathcal G(U_i)$ is the set of families $(s_i)$ with $s_i|_{U_i\\times_UU_j}=s_j|_{U_i\\times_UU_j}$ for all $i,j$, i.e. exactly the equalizer of the two maps $\\prod_i\\mathcal G(U_i)\\rightrightarrows\\prod_{i,j}\\mathcal G(U_i\\times_UU_j)$ given by the two projections, and the canonical map is $c_{\\mathcal U}:a\\mapsto(a|_{U_i})_i$. Since $\\mathcal G$ is a sheaf [def-weil-pbc-sites-and-cohomology](1), $\\mathcal G(U)\\to\\prod_i\\mathcal G(U_i)\\rightrightarrows\\prod_{i,j}\\mathcal G(U_i\\times_UU_j)$ is an equalizer diagram of sets, which says precisely that $c_{\\mathcal U}:\\mathcal G(U)\\to H^0(\\mathcal U,\\mathcal G)$ is bijective: injective (two sections with the same restrictions to all $U_i$ are equal) and surjective (every compatible family $(s_i)$ is $(a|_{U_i})_i$ for some $a\\in\\mathcal G(U)$, unique by injectivity). This is the sentence of the source: 'the sheaf property says exactly that every map $\\mathcal F\\to H^0(\\mathcal U,\\mathcal F)$ is bijective'.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB (theorem-plus), proof of part (3) (item-plus-iso, tag 00WE), with the definitions of H^0 and F^+ in Section 00W1 before Lemma 00W4"
+   }
+  },
+  {
+   "text": "*$\\theta_U$ is injective.* Let $a,b\\in\\mathcal G(U)$ with $\\theta_U(a)=\\theta_U(b)$. By [lem-weil-pbc-site-plus-construction-presheaf](2) (its 'in particular' for $\\theta_U$, applied to the presheaf $\\mathcal G$) there is a covering $\\mathcal V=\\{V_k\\to U\\}_{k\\in K}$ with $a|_{V_k}=b|_{V_k}$ for all $k$, i.e. $c_{\\mathcal V}(a)=c_{\\mathcal V}(b)$. By Step 1, $c_{\\mathcal V}$ is injective, so $a=b$.",
+   "uses": [
+    "lem-weil-pbc-site-plus-construction-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB (theorem-plus), proof of part (3) (item-plus-iso, tag 00WE), with the definitions of H^0 and F^+ in Section 00W1 before Lemma 00W4"
+   }
+  },
+  {
+   "text": "*$\\theta_U$ is surjective.* Let $x\\in\\mathcal G^+(U)$. By [lem-weil-pbc-site-plus-construction-presheaf](1), $x=[\\mathcal U,s]$ for a covering $\\mathcal U=\\{\\pi_i:U_i\\to U\\}_{i\\in I}$ of $U$ and some $s=(s_i)\\in H^0(\\mathcal U,\\mathcal G)$. By Step 1 there is $a\\in\\mathcal G(U)$ with $s=c_{\\mathcal U}(a)=(\\mathcal G(\\pi_i)a)_i$. Let $\\{\\mathrm{id}_U\\}$ be the trivial covering (index set a point $*$), an object of $\\mathcal J_U$ [def-weil-pbc-site-plus-construction](c). The triple $f=(\\chi,\\alpha,(f_i))=(\\mathrm{id}_U,\\ I\\to\\{*\\},\\ (\\pi_i)_{i\\in I})$ is a morphism of coverings $\\mathcal U\\to\\{\\mathrm{id}_U\\}$ over $\\mathrm{id}_U$ in the sense of [def-weil-pbc-site-plus-construction](b): the required identity $\\mathrm{id}_U\\circ f_i=\\chi\\circ\\pi_i$ reads $\\pi_i=\\pi_i$. It is a morphism of $\\mathcal J_U$, and with $H^0(\\{\\mathrm{id}_U\\},\\mathcal G)=\\mathcal G(U)$ (the identification used in the definition of $\\theta_U$) the induced map is $(f^*a)_i=\\mathcal G(f_i)(a)=\\mathcal G(\\pi_i)(a)=a|_{U_i}$, i.e. $f^*a=s$. Since the classes $[-,-]$ form the colimit cocone of the functor $H^0(-,\\mathcal G)$ on $\\mathcal J_U^{opp}$ [def-weil-pbc-site-plus-construction](c) (for a morphism $f:\\mathcal U\\to\\mathcal U'$ in $\\mathcal J_U$ and $t\\in H^0(\\mathcal U',\\mathcal G)$ one has $[\\mathcal U,f^*t]=[\\mathcal U',t]$), we get $x=[\\mathcal U,s]=[\\mathcal U,f^*a]=[\\{\\mathrm{id}_U\\},a]=\\theta_U(a)$, the last equality being the definition of $\\theta_U$.",
+   "uses": [
+    "lem-weil-pbc-site-plus-construction-presheaf",
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB (theorem-plus), proof of part (3) (item-plus-iso, tag 00WE), with the definitions of H^0 and F^+ in Section 00W1 before Lemma 00W4"
+   }
+  },
+  {
+   "text": "*$\\theta$ is an isomorphism of presheaves and $\\mathcal G^+$ is a sheaf.* By [lem-weil-pbc-site-plus-construction-presheaf](4), $\\mathcal G^+$ is a presheaf and $\\theta$ a morphism of presheaves: $\\theta_V\\circ\\mathcal G(h)=\\mathcal G^+(h)\\circ\\theta_U$ for every $h:V\\to U$. By Steps 2 and 3 every $\\theta_U$ is bijective; then $\\theta_V^{-1}\\circ\\mathcal G^+(h)=\\theta_V^{-1}\\circ\\mathcal G^+(h)\\circ\\theta_U\\circ\\theta_U^{-1}=\\theta_V^{-1}\\circ\\theta_V\\circ\\mathcal G(h)\\circ\\theta_U^{-1}=\\mathcal G(h)\\circ\\theta_U^{-1}$, so $(\\theta_U^{-1})_U$ is a morphism of presheaves inverse to $\\theta$. For a covering $\\{U_i\\to U\\}$, the bijections $\\theta_U$, $\\prod_i\\theta_{U_i}$, $\\prod_{i,j}\\theta_{U_i\\times_UU_j}$ commute, by naturality of $\\theta$ for the morphisms $U_i\\to U$ and the two projections $U_i\\times_UU_j\\to U_i,U_j$, with the maps of the diagrams $\\mathcal G(U)\\to\\prod_i\\mathcal G(U_i)\\rightrightarrows\\prod_{i,j}\\mathcal G(U_i\\times_UU_j)$ and $\\mathcal G^+(U)\\to\\prod_i\\mathcal G^+(U_i)\\rightrightarrows\\prod_{i,j}\\mathcal G^+(U_i\\times_UU_j)$; a diagram of sets isomorphic to an equalizer diagram is an equalizer diagram, so $\\mathcal G^+$ satisfies the sheaf condition of [def-weil-pbc-sites-and-cohomology](1).",
+   "uses": [
+    "lem-weil-pbc-site-plus-construction-presheaf",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Theorem 00WB (theorem-plus), proof of part (3) (item-plus-iso, tag 00WE), with the definitions of H^0 and F^+ in Section 00W1 before Lemma 00W4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-plus-construction",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-plus-construction-presheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Theorem 00WB (theorem-plus), proof of part (3) (item-plus-iso, tag 00WE)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +98,17 @@
    "results": "Plus.lean:256 isIso_toPlus_of_isSheaf, :269 isoToPlus",
    "date": "2026-10-10",
    "verdict": "no match (sieve version only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isIso_toPlus_of_isSheaf\\|def plusObj' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Plus.lean; sed -n 250,262p",
+   "results": "CategoryTheory.GrothendieckTopology.isIso_toPlus_of_isSheaf (Plus.lean:256: (hP : Presheaf.IsSheaf J P) : IsIso (J.toPlus P)); plusObj (Plus.lean:110) is the colimit over J.Cover X (covering sieves)",
+   "date": "2026-10-10",
+   "verdict": "generalization in another formalism (re-check by the splitting worker): the declaration exists and states the item for the sieve-based plus construction of a Grothendieck topology, any target category D with the needed limits/colimits; the item's plus construction is over covering families with H^0 as the equalizer over U_i x_U U_j [def-weil-pbc-site-plus-construction], and identifying the two is not one line; consistent with the verdicts of the sibling nodes lem-weil-pbc-site-plus-construction-presheaf and lem-weil-pbc-site-plus-of-separated-is-sheaf; not a leaf"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +128,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-plus-of-sheaf-iso",
+  "worker": "stage1",
+  "summary": "Split following the proof of Stacks Sites Theorem 00WB(3) (tag 00WE), which says only that the sheaf property makes every G(U) -> H^0(U_cov,G) bijective. Written out in 4 steps: (1) the sheaf condition is exactly bijectivity of the canonical map to H^0 of every covering (elementary, from the definitions); (2) injectivity of theta_U from clause (2) of lem-weil-pbc-site-plus-construction-presheaf and separatedness; (3) surjectivity from clause (1) of that node, Step 1, and the morphism of coverings (id_U, I->{*}, (pi_i)) from U_cov to the trivial covering, with the colimit cocone property of the definition; (4) the inverse of theta is natural (clause (4) of the presheaf node) and the sheaf condition transports along the isomorphism, giving the 'in particular G^+ is a sheaf' used by the citer lem-weil-pbc-sheafification-plus-theorem. Statement and stmt_deps kept. No new nodes. Mathlib: isIso_toPlus_of_isSheaf re-verified (Plus.lean:256), sieve formalism, not a leaf, as recorded before and consistent with the sibling plus-construction nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps following Stacks 00WB (3): the sheaf condition makes G(U) -> H^0(U_cov, G) bijective; theta_U injective by clause (2) of the presheaf node; surjective by clause (1) and the cocone identity for the morphism of coverings U_cov -> {id_U}; inverse natural by clause (4), sheaf condition transported. No new nodes."
+ }
 }
