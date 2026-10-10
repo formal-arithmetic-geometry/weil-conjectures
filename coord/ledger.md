@@ -2073,3 +2073,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:59 L: merged deliver/G1/lem-sc-invert-s-cohomology-mayer-vietoris-diagram (reviewer FIX; first push; new nodes: 2)
 - 16:59 L: merged deliver/F1/lem-pc-proper-geometrically-reduced-global-sections-separable (reviewer FIX; after a return; new nodes: 1)
 - 17:00 L: merged deliver/F1/lem-constructible-shortexact-local-lift (reviewer FIX; first push; new nodes: 0)
+- 17:00 L: merged deliver/J1/lem-sc-affine-derived-concentration (reviewer FIX; first push; new nodes: 1)
