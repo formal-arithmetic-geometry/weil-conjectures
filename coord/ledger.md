@@ -1859,3 +1859,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:46 L: returned deliver/H1/lem-sc-fibre-dimension-after-base-change (reviewer RETURN: 1. D (return point 3 not repaired): new node lem-sc-local-dimension-invariant-residue-field-extension: the commit still )
 - 15:47 L: merged deliver/C1/lem-pc-affine-nonzerodivisor-complement-dense (reviewer FIX; first push; new nodes: 2)
 - 15:48 L: lem-sc-zero-dim-noetherian-closed-finite attached (H1 release; sorry-free)
+- 15:48 L: merged deliver/K1/lem-sc-affine-complement-finite-on-integral-curve (reviewer FIX; first push; new nodes: 0)

@@ -28,9 +28,50 @@
   "def-pc-scheme",
   "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $U$ is open, its complement $E:=X\\setminus U$ is closed. Since $U$ is nonempty, the hypotheses of the point-outside-open lemma apply to every $x\\in E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09ND, proof, setup before the sentence 'Since X is Noetherian'"
+   }
+  },
+  {
+   "text": "For each $x\\in E$, [lem-sc-dim-one-point-outside-open-closed] gives that $\\{x\\}$ is closed in $X$. Its hypotheses hold: $X$ is irreducible because it is integral [def-pc-integral-scheme]; $X$ is Kolmogorov, since for $y\\neq z$ in $X$ the closures $\\overline{\\{y\\}}$, $\\overline{\\{z\\}}$ are irreducible closed subsets with generic points $y$ and $z$, hence distinct by the uniqueness of generic points in [lem-sc-scheme-sober], so one of the points, say $z$, is not in the closure of the other and the open set $X\\setminus\\overline{\\{y\\}}$ contains $z$ but not $y$; $X$ has topological Krull dimension $1\\leq1$ [def-kun-topological-krull-dimension]; and $U$ is a nonempty open subset with $x\\notin U$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sc-dim-one-point-outside-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties Lemma 09ND, proof, second sentence and the dimension-one point argument"
+   }
+  },
+  {
+   "text": "Thus every point of the closed subset $E$ is closed in $X$. Applying [lem-sc-noetherian-closed-points-finite] to $E$ shows that $E=X\\setminus U$ is finite.",
+   "uses": [
+    "lem-sc-noetherian-closed-points-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Lemma 0BA8, conclusion that a closed subset all of whose points are closed is finite"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-scheme-sober",
+  "lem-sc-dim-one-point-outside-open-closed",
+  "lem-sc-noetherian-closed-points-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09ND, proof, sentence 'Since X is Noetherian, each of the sets X \\setminus U_i is finite', with Properties Lemma 0BA8"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,12 +96,31 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-integral-dim-one-ample",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-affine-complement-finite-on-integral-curve",
+  "worker": "stage1",
+  "summary": "The complement E of a nonempty affine open U is closed; the dimension-one point-outside-open lemma makes every point of E closed; and the Noetherian closed-points finiteness lemma makes E finite. No new nodes were needed.",
+  "blueprint": "Realizes the ancestor lem-sc-pic-proper-ntorsion proof's 09ND sentence that each complement X \\setminus U_i is finite.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-sc-dim-one-point-outside-open-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-acf",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-acf (reviewer sub-agent of L); spot-checked: Source Stacks 09ND (varieties lemma-dim-1-noetherian-integral-separated-has-ample), proof second sentence 'Since X is Noetherian, each of the sets X minus U_i is finite'; the item (integral Noetherian scheme of topological dimension 1, every nonempty affine open has finite complement) is the general form of that sentence and needs no separatedness; statement true. Step 1 elementary (complement of open is closed). Step 2 carried by lem-sc-dim-one-point-outside-open-closed (irreducible, Kolmogorov, dim <= 1, point outside a nonempty open is closed; checked; off-unit sk-prop-cd generic topological tool, Lean-closed in slopmaster2, added via --tool-uses as in the precedent of lem-sc-component-intersections-finite); irreducibility from def-pc-integral-scheme. Step 3 carried by lem-sc-noetherian-closed-points-finite (Noetherian scheme, closed subset all of whose points are closed is finite), hypotheses met. No new nodes, no Mathlib leaf. Small cases: U = X (empty complement), affine line in P^1 (one point), Spec of a DVR (U = generic point, complement the closed point). FIX more, RETURN less: (1) C1 step 2 used that a scheme is Kolmogorov with no node: cite lem-sc-scheme-sober (uniqueness of generic points gives T0) and spell out the argument. dag/nodes/sec-curve-estimates/lem-sc-affine-complement-finite-on-integral-curve.json: proof[1].text, proof[1].uses, proof_deps: lem-sc-scheme-sober added and the hypothesis check of step 2 written out. Start Sat Oct 10 03:48:08 PM UTC 2026, end Sat Oct 10 03:48:49 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
