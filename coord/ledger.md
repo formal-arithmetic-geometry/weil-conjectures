@@ -1945,3 +1945,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:17 L: HUMAN entry: blueprint torsor argument for extensions of finite locally constant sheaves is false for non-semisimple Lambda (reviewer R-fls); lead notes on lemma-constructible-flc-serre and lemma-constructible-torsor-trivialises
 - 16:17 L: merged deliver/C1/lem-sc-p1-graded-nakayama-generation (reviewer FIX; first push; new nodes: 0)
 - 16:18 L: returned deliver/J1/lem-sc-boundary-cech-local-lifts (reviewer RETURN: 1. D1/D2: new node lem-sc-boundary-local-lift-rep: its statement is the item's statement minus the injectivity clause (t)
+- 16:18 L: merged deliver/J1/lem-weil-pbc-etale-sections-flat-qc-connected-fibres (reviewer FIX; first push; new nodes: 2)

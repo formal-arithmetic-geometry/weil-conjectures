@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-proper-underived-exchange",
-   "place": "proof of the sections extension lemma: apply the flat quasi-compact connected-fibre comparison",
+   "place": "proof, paragraph beginning 'The base Y_(ybar) is strictly henselian local': passage from strict-henselian sections to the geometric fibre over Omega, made precise by the sections comparison used in Tag 0A3I",
    "via": [
     "lem-weil-pbc-sections-base-field-extension"
    ]
@@ -15,22 +15,86 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-iff",
  "title": "Sections are invariant under flat quasi-compact maps with connected geometric fibres",
- "statement": "Let $f:T\\to S$ be a flat [def-weil-flat-morphism] and quasi-compact [def-weil-scheme-morphism-properties] morphism of schemes [def-pc-scheme] whose geometric fibres [def-weil-geometric-fibre] are connected [def-weil-connected-scheme]. For every sheaf of sets $F$ on the small etale site $S_{\\Et}$ [def-weil-pbc-etale-site], pullback induces a bijection $\\Gamma(S,F)\\xrightarrow{\\sim}\\Gamma(T,f^{-1}F)$.",
+ "statement": "Let $f:T\\to S$ be a flat [def-weil-flat-morphism] and quasi-compact [def-weil-finite-type-morphism] morphism of schemes [def-pc-scheme] whose geometric fibres [def-weil-geometric-fibre] are connected [def-weil-connected-scheme]. For every sheaf of sets $F$ [def-weil-pbc-etale-sheaf-of-sets] on the small etale site $S_{\\Et}$ [def-weil-pbc-etale-site], pullback induces a bijection $\\Gamma(S,F)\\xrightarrow{\\sim}\\Gamma(T,f^{-1}F)$, where $f^{-1}F$ is the etale inverse image of sheaves of sets [lem-weil-pbc-sets-etale-inverse-image-composition-units].",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Etale Cohomology, Lemma 0A3H (etale-cohomology-lemma-sections-upstairs)"
  },
  "stmt_deps": [
   "def-weil-flat-morphism",
-  "def-weil-scheme-morphism-properties",
+  "def-weil-finite-type-morphism",
   "def-pc-scheme",
   "def-weil-geometric-fibre",
   "def-weil-connected-scheme",
-  "def-weil-pbc-etale-site"
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every point $s$ of $S$, the assumed connected geometric fibre over a geometric point above $s$ is nonempty [def-weil-connected-scheme], so $f$ has a point above $s$ [def-weil-geometric-fibre]. Thus $f$ is surjective. Together with the given flatness and quasi-compactness, the singleton family $\\{f:T\\to S\\}$ is an fpqc covering by [def-weil-pbc-fpqc-covering]: for an affine open $V\\subseteq S$, $f^{-1}V$ is quasi-compact by [def-weil-finite-type-morphism], so finitely many affine opens in $f^{-1}V$ cover it and their images cover $V$.",
+   "uses": [
+    "def-weil-connected-scheme",
+    "def-weil-geometric-fibre",
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-flat-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 59.39.3 (Tag 0A3H, label lemma-sections-upstairs), proof, first paragraph and second paragraph's fpqc-covering assertion, lines 5042-5051"
+   }
+  },
+  {
+   "text": "Let $\\alpha\\in\\Gamma(T,f^{-1}F)$ and let $s$ be any point of $S$. Choose an algebraic closure $\\Omega$ of $\\kappa(s)$ and its geometric point $\\bar s:\\operatorname{Spec}\\Omega\\to S$ [def-weil-geometric-fibre]. Put $T_{\\bar s}=T\\times_S\\operatorname{Spec}\\Omega$. Let $p:T_{\\bar s}\\to T$ and $h:T_{\\bar s}\\to\\operatorname{Spec}\\Omega$ be the projections, so $f\\circ p=\\bar s\\circ h$. By [lem-weil-pbc-sets-etale-inverse-image-composition-units] the restriction $p^{-1}f^{-1}F$ of $f^{-1}F$ to $T_{\\bar s}$ is canonically $(\\bar s\\circ h)^{-1}F$, compatibly with pullback of sections and associatively under further composition (clauses (1), (2)); by [lem-weil-pbc-etale-geometric-fibre-constant-sections] it is the constant sheaf with value $F_{\\bar s}$; since this fibre is connected and nonempty, $\\alpha|_{T_{\\bar s}}$ is the constant section for a unique $a_{\\bar s}\\in F_{\\bar s}$. The fibre of $T\\times_ST$ over $\\bar s$ is $T_{\\bar s}\\times_{\\operatorname{Spec}\\Omega}T_{\\bar s}$. Using again the composition isomorphisms of [lem-weil-pbc-sets-etale-inverse-image-composition-units] to identify the restriction to this product fibre of the pullback of $\\alpha$ along either projection $T\\times_ST\\to T$ with the pullback of $\\alpha|_{T_{\\bar s}}$ along the corresponding projection $T_{\\bar s}\\times_{\\operatorname{Spec}\\Omega}T_{\\bar s}\\to T_{\\bar s}$, naturality in [lem-weil-pbc-etale-geometric-fibre-constant-sections] says that both projection pullbacks of $\\alpha$ restrict to the constant section with value $a_{\\bar s}$ on this product fibre.",
+   "uses": [
+    "lem-weil-pbc-etale-geometric-fibre-constant-sections",
+    "def-weil-geometric-fibre",
+    "def-weil-connected-scheme",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 59.39.3 (Tag 0A3H, label lemma-sections-upstairs), proof, second paragraph, lines 5051-5067"
+   }
+  },
+  {
+   "text": "A geometric point of $T\\times_ST$ maps to a point $s$ of $S$ and has an algebraically closed residue field containing $\\kappa(s)$ [def-weil-geometric-point]. Choose an embedding of the algebraic closure $\\Omega$ used in Step 2 into this field over $\\kappa(s)$; the point then factors through the product fibre over $\\bar s$. The two projection pullbacks of $\\alpha$ agree on that fibre by Step 2; since the germ of a section at a geometric point equals, via the bijection of [lem-weil-pbc-sets-etale-inverse-image-stalk-germ] for the inclusion $j$ of the product fibre, the germ of its pullback along $j$ at the lifted geometric point, they have equal germs at every geometric point of $T\\times_ST$. Equality of sections follows directly from [def-weil-pbc-geometric-stalks] and the separated part of the sheaf axiom [def-weil-pbc-etale-sheaf-of-sets]: equality of germs supplies an etale neighbourhood of each geometric point on which they agree, these neighbourhoods cover, and the sheaf axiom makes the sections equal. Applying [lem-weil-pbc-etale-sections-fpqc-descent] to the singleton fpqc covering from Step 1 produces a unique section of $F$ on $S$ pulling back to $\\alpha$. The same uniqueness proves injectivity of the canonical map.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-geometric-point",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-weil-pbc-etale-sections-fpqc-descent",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 59.39.3 (Tag 0A3H, label lemma-sections-upstairs), proof, second paragraph and conclusion, lines 5048-5068; Lemma 59.39.2 (Tag 09XN, label lemma-describe-pullback)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-connected-scheme",
+  "def-weil-geometric-fibre",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-etale-geometric-fibre-constant-sections",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-etale-sections-fpqc-descent",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 59.39.3 (Tag 0A3H, label lemma-sections-upstairs), proof, lines 5042-5068"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,10 +119,35 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-sections-base-field-extension",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+  "worker": "stage1",
+  "summary": "Checked the Stacks proof of Tag 0A3H against its hypotheses and split it into the fpqc-covering observation, constancy on every connected geometric fibre, and fpqc descent after checking the two projection pullbacks. Added the Tag 09XN descent fact and the fibrewise constant-section fact as statement-only dependencies.",
+  "blueprint": "The steps make precise the section-comparison used to pass to the common geometric fibre in the paragraph beginning 'The base Y_(ybar) is strictly henselian local' of lemma-weil-pbc-proper-underived-exchange.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-fpqc-covering",
+    "why": "Definition of an fpqc cover, needed to apply the generic Tag 09XN section-descent fact; no sk-thm-iff node defines this notion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-efc",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-efc (reviewer sub-agent of L); spot-checked: Source: Stacks etale-cohomology.tex Lemma 0A3H (lemma-sections-upstairs, l.5030-5068) and 09XN (lemma-describe-pullback, l.4960-5027) read; item statement agrees with 0A3H hypothesis by hypothesis (flat, quasi-compact via def-weil-finite-type-morphism, geometric fibres connected, connected includes nonempty in def-weil-connected-scheme as in Stacks, arbitrary sheaf of sets). Step 1: surjectivity from nonempty geometric fibres, fpqc covering checked against def-weil-pbc-fpqc-covering (flat + finite affine cover of f^{-1}V, images cover V by surjectivity). Step 2: constant-section node (true: inverse image from Spec Omega is the constant sheaf of the stalk, sections on connected nonempty U are the value set, naturality) carries it. Step 3: every geometric point of TxT factors through a product fibre over the chosen algebraic closure; sheaf axiom; singleton case of the 09XN node (true: fpqc sheaf condition of pi_S^{-1}F applied to a covering of S). Tool use def-weil-pbc-fpqc-covering (definition, generic) accepted. Lean: isIso_upperStarSectionsMap is SORRY (sorryfree.py), no B10. Blueprint search 'fpqc descent sections', 'constant sheaf geometric fibre connected': 0 hits. Small cases: T=S identity; disconnected fibre excluded. FIX more, RETURN less: (1) item statement and both new nodes: B3, inverse image f^{-1}F had no defining node: cite lem-weil-pbc-sets-etale-inverse-image-composition-units (stmt_deps added), item statement also cites def-weil-pbc-etale-sheaf-of-sets in text; fpqc-descent node: F|_{T_i x_S T_j} replaced by g_ij^{-1}F with the projection identifications via the composition isomorphisms. (2) Step 2: C1, identification of p^{-1}f^{-1}F with (sbar o h)^{-1}F and of the projection pullbacks restricted to the product fibre used the composition isomorphisms uncited: cite lem-weil-pbc-sets-etale-inverse-image-composition-units. (3) Step 3: C1, equality on the fibre giving equal germs at geometric points of TxT uses stalk of inverse image with germs: cite lem-weil-pbc-sets-etale-inverse-image-stalk-germ. uses/proof_deps updated. Started Sat Oct 10 04:15:10 PM UTC 2026, ended Sat Oct 10 04:18:16 PM UTC 2026.; 3 file(s) fixed by the reviewer"
  }
 }
