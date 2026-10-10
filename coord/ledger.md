@@ -1108,3 +1108,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:43 L: merged C1 closed-immersion-conormal-flat-base-change (+2 leaves: flat-morphism-affine-criterion, ideal-cotangent-flat-base-change-ring), C1 closed-immersion-conormal-functorial (+affine-conormal-sections 01R3 unsplit), F1 free-complex-maps-to-resolution (+free-module-projective leaf), F1 fs-adic-field-geometrically-regular (+fs-adic-field-regular-local 07EI unsplit); all spot-checked.
 - 08:43 L: accepted lem-weil-pbc-completed-module-associated-graded-generators (5 steps; new leaf module-graded-lift-mod-ideal-power).
 - 08:45 L: accepted lem-weil-pbc-colimit-flat-ring-map (9 steps; new unsplit nodes limit-finite-presentation 00R0, openness-of-flatness 00RC, colimit-category-fp-algebras 05N9).
+- 08:46 L: accepted lem-weil-pbc-lci-conormal-generators-global-complete-intersection (8 steps, no new nodes).
