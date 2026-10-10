@@ -1,8 +1,8 @@
 # Work queue
 
-854 items; claim with `tools/claim.py next <group> [--stage N]`.
+853 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (371)
+## Stage 1: nodes to split (370)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -50,7 +50,6 @@
 | `lemma-weil-pbc-fibre-product-limit` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `def-galois-fibre-functor` | 3005 | none |
-| `lem-pc-module-inverse-image-adjunction` | 3005 | none |
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
 | `def-weil-pbc-finite-split-hypercover` | 3006 | none |
 | `lem-galois-aut-profinite` | 3006 | none |
@@ -866,7 +865,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 389 nodes that wait for stage 1, 901 nodes that wait for a statement dependency.
+Not open yet: 388 nodes that wait for stage 1, 902 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
