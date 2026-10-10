@@ -5,15 +5,91 @@
  "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings which is a smooth ring map [def-weil-pbc-smooth-ring-map], and assume $R$ is a regular ring [def-weil-regular-scheme] (Noetherian, with every localization at a prime ideal a regular local ring). Then $S$ is a regular ring.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 07NF (lemma-regular-goes-up, line 46610) and its proof (Lemma Tag 033A lemma-Rk-goes-up applied for all (R_k), with Lemma Tag 00TT lemma-characterize-smooth-over-field)"
+  "place": "Algebra, Lemma Tag 07NF (lemma-regular-goes-up, line 49772) and its proof (Lemma Tag 033A lemma-Rk-goes-up applied for all (R_k), with Lemma Tag 00TT lemma-characterize-smooth-over-field)"
  },
  "stmt_deps": [
   "def-weil-pbc-smooth-ring-map",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $R$ is regular, it is Noetherian. The smooth presentation in [def-weil-pbc-smooth-ring-map] makes $S$ a finitely generated $R$-algebra, so $S$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian].",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00FN (lemma-Noetherian-permanence, line 5991), applied to the finite-presentation clause of smoothness"
+   }
+  },
+  {
+   "text": "The map $R\\to S$ is flat by [lem-weil-pbc-smooth-ring-map-flat], the flatness assertion in the smooth-ring-map overview used by the proof of 07NF.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00TA (lemma-smooth-syntomic, line 37438) and the smooth-ring-map overview"
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak p\\subset R$, the fibre $S\\otimes_R\\kappa(\\mathfrak p)$ is a finite-type smooth algebra over the residue field, and every localization of that fibre at a prime is a regular local ring by [lem-weil-pbc-smooth-fibre-regular-local]. Thus each fibre has property $(R_k)$ for every integer $k\\ge0$.",
+   "uses": [
+    "lem-weil-pbc-smooth-fibre-regular-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00T4 (lemma-base-change-smooth, line 37133), the smooth-ring-map overview, and Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 41349)"
+   }
+  },
+  {
+   "text": "For every integer $k\\ge0$, $R$ has property $(R_k)$ because every localization of the regular ring $R$ at a prime is regular local. Applying [lem-weil-pbc-regularity-rk-goes-up] to the Noetherian rings $R,S$, the flat map from Step 2, the fibre property from Step 3, and the property for $R$, gives property $(R_k)$ for $S$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regularity-rk-goes-up"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07NF (lemma-regular-goes-up, line 49772), by applying Lemma Tag 033A (lemma-Rk-goes-up, line 49612) for every k"
+   }
+  },
+  {
+   "text": "Since $S$ is Noetherian and has property $(R_k)$ for every $k$, every localization $S_{\\mathfrak q}$ at a prime is regular local. Hence $S$ is a regular ring by [def-weil-regular-scheme].",
+   "uses": [
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 00OD (definition-regular), together with the conclusion of Lemma Tag 07NF"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-weil-pbc-regularity-rk-goes-up"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07NF (lemma-regular-goes-up, line 49772) and its proof via Lemma Tag 033A (lemma-Rk-goes-up, line 49612) and Lemma Tag 00TT (lemma-characterize-smooth-over-field, line 41349)"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-regular-ring-smooth-ascent",
+  "worker": "stage1",
+  "summary": "Split Stacks 07NF into five steps: finite-presentation Noetherianity, smooth implies flat, regularity of smooth residue-field fibres via 00T4 and 00TT, application of the public 033A (R_k)-ascent node for every k, and the 00OD regular-ring conclusion. Added two statement-only unsplit support nodes, lem-weil-pbc-smooth-fibre-regular-local and lem-weil-pbc-regularity-rk-goes-up; the former cites the existing 00TT dimension node rather than duplicating it. No Lean was written or compiled."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +121,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +141,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 5 steps following Algebra 07NF: S Noetherian and flat over R; smooth fibres over kappa(p) are regular (new unsplit node); (R_k) ascends along flat maps with (R_k) fibres (new 033A node) for every k; hence all localizations of S regular. Correct. L reworded a misattributed citation inside the new fibre node post-merge."
+ }
 }
