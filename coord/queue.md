@@ -1,6 +1,6 @@
 # Work queue
 
-853 items; claim with `tools/claim.py next <group> [--stage N]`.
+854 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (375)
 
@@ -62,7 +62,6 @@
 | `lem-galois-aut-profinite` | 3006 | none |
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-galois-pi1-finite-etale-image-stabilizer` | 3006 | none |
-| `lem-sc-artin-schreier-dimension` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `def-sc-divisor` | 3007 | none |
@@ -72,6 +71,7 @@
 | `lem-sc-divisor-class-curve` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-qcoherent-descent` | 3007 | none |
+| `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
 | `lem-sc-ga-cohomology` | 3007 | none |
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
 | `lem-sc-local-ring-artin-schreier-kernel` | 3007 | none |
@@ -80,6 +80,7 @@
 | `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 3007 | none |
 | `thm-av-final` | 3007 | rests_on_sorry |
 | `thm-sc-jacobian-representability` | 3007 | rests_on_sorry |
+| `def-pc-morphism-conventions` | 3008 | none |
 | `def-pc-smooth-projective-curve` | 3008 | none |
 | `def-sc-function-field` | 3008 | none |
 | `def-sc-picard-functor` | 3008 | none |
@@ -100,7 +101,6 @@
 | `def-pc-curve` | 3009 | none |
 | `def-pc-dimension` | 3009 | none |
 | `def-pc-divisor-line-bundle` | 3009 | none |
-| `def-pc-morphism-conventions` | 3009 | none |
 | `def-pc-projective-morphism` | 3009 | none |
 | `lem-pc-degree-base-change` | 3009 | rests_on_sorry |
 | `lem-sc-riemann-roch` | 3009 | rests_on_sorry |
@@ -237,6 +237,7 @@
 | `lem-sc-cech-spectral` | 6007 | sorry_here |
 | `lem-sp-long-exact-of-triangle` | 6007 | sorry_here |
 | `pqf-def-coherent` | 6007 | none |
+| `pqf-def-cohomology` | 6007 | none |
 | `def-sp-homological-functor` | 6008 | none |
 | `pqf-lem-locnoeth-lft` | 6008 | none |
 | `pqf-lem-pushforward-qcoh` | 6008 | none |
@@ -246,8 +247,9 @@
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `thm-pqf-finite-iff-proper-finite-fibres` | 6009 | none |
 | `thm-sc-theorem-of-cube` | 6009 | rests_on_sorry |
+| `lem-pc-closed-immersion-coherent-cohomology` | 6010 | rests_on_sorry |
+| `lem-pc-projective-space-cohomology-bound` | 6010 | sorry_here |
 | `lem-pc-serre-vanishing` | 6010 | rests_on_sorry |
-| `pqf-def-cohomology` | 6010 | none |
 | `pqf-lem-affine-vanishing` | 6010 | none |
 | `pqf-lem-fff-vanishing` | 6010 | none |
 | `pqf-lem-finite-qf` | 6010 | none |
@@ -256,10 +258,8 @@
 | `pqf-lem-qf-finitefibres` | 6010 | none |
 | `pqf-lem-serre-criterion` | 6010 | none |
 | `pqf-lem-sheaf-zero-stalks` | 6010 | none |
-| `lem-pc-closed-immersion-coherent-cohomology` | 6011 | rests_on_sorry |
 | `lem-pc-projective-space-serre-vanishing` | 6011 | rests_on_sorry |
-| `lem-pc-projective-space-cohomology-bound` | 6012 | sorry_here |
-| `lem-pc-projective-space-twist-cohomology` | 6012 | rests_on_sorry |
+| `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
 | `pqf-lem-going-up` | 6017 | none |
 | `pqf-lem-incomparability` | 6017 | none |
 | `pqf-def-affine-morphism` | - | none |
@@ -327,6 +327,7 @@
 | `def-nagata-morphism-equality-stage` | - | none |
 | `def-nagata-qc-open-equality-stage` | - | none |
 | `def-nagata-relative-gluing-datum-descent` | - | none |
+| `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-sc-affine-generic-second` | - | sorry_here |
 | `lem-sc-genus-invariant` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
@@ -337,6 +338,8 @@
 | `def-nagata-qc-open-descent` | - | none |
 | `def-nagata-relative-finite-affine-presentation` | - | none |
 | `def-sc-zariski-site` | - | none |
+| `lem-pc-finite-support-hi` | - | sorry_here |
+| `lem-pc-projective-coherent-higher-images` | - | sorry_here |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-weil-l-adic-extension-integers-dvr` | - | none |
 | `lem-weil-pbc-constructible-noetherian-finite-selection` | - | none |
@@ -346,9 +349,10 @@
 | `lemma-nagata-qc-open-descends` | - | none |
 | `sbc-lem-higher-direct-image-limit` | - | none |
 | `def-nagata-basechanged-system` | - | none |
+| `def-pc-derived-direct-image` | - | none |
 | `def-pc-fppf-site` | - | none |
 | `def-pc-subfunctor` | - | none |
-| `lem-pc-finite-support-hi` | - | sorry_here |
+| `lem-pc-projective-coherent-finiteness` | - | sorry_here |
 | `lem-weil-geometrically-connected-check-after-extension` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `lem-weil-pbc-lisse-generic-kernel` | - | none |
@@ -357,10 +361,9 @@
 | `def-pc-derived-category` | - | none |
 | `lem-kun-fibre-product-limits` | - | none |
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
-| `def-pc-derived-direct-image` | - | none |
+| `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
 | `def-sc-kahler-differentials` | - | none |
 | `lem-kun-separable-smooth-colimit` | - | none |
-| `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
 | `lem-pc-perfect-locus` | - | sorry_here |
 | `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
@@ -369,20 +372,17 @@
 | `lem-kun-algebraic-separable-smooth` | - | none |
 | `lem-kun-fg-separable-smooth` | - | none |
 | `lem-pc-flf-properties` | - | none |
-| `lem-pc-projective-coherent-finiteness` | - | sorry_here |
-| `lem-pc-projective-coherent-higher-images` | - | sorry_here |
 | `lem-pc-projective-curve-finite-projection` | - | rests_on_sorry |
 | `lem-sc-p1-coherent-finite` | - | rests_on_sorry |
 | `lem-sc-p1-twist-exists` | - | none |
 | `lem-exc-etale-algebra-lift` | - | none |
 | `lem-pc-projective-coordinate-model` | - | sorry_here |
-| `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
 | `def-exc-etale-algebra-lift` | - | none |
 | `lem-exc-etale-jacobian-presentation` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (478)
+## Stage 2: nodes to state (479)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -439,6 +439,7 @@
 | `lem-sc-normal-dim1-dvr` | 1 | state |
 | `lem-sc-point-z-cohomology` | 1 | state |
 | `lem-sc-principal-ideal-dvr` | 1 | state |
+| `lem-sc-regular-connected-integral` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
 | `lem-weil-pbc-affine-basic-set-difference` | 1 | state |
@@ -865,7 +866,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 393 nodes that wait for stage 1, 891 nodes that wait for a statement dependency.
+Not open yet: 393 nodes that wait for stage 1, 893 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
