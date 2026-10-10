@@ -2028,3 +2028,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:43 L: merged deliver/C1/lem-sc-affine-standard-cover-finite-projective (reviewer FIX; first push; new nodes: 1)
 - 16:43 L: returned deliver/C1/lem-sc-affine-finite-projective-prime-membership (reviewer RETURN: 1. D1/D2 and B1: lem-sc-projective-summand-prime-membership: its conclusion (for N a direct summand of a finite free F, )
 - 16:43 L: merged deliver/K1/lem-sc-affine-section-localization (reviewer PASS; first push; new nodes: 0)
+- 16:44 L: merged deliver/G1/lem-sc-rational-tangent-cotangent-duality (reviewer FIX+NODE(1); first push; new nodes: 1)

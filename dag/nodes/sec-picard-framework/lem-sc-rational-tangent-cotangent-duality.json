@@ -23,9 +23,46 @@
   "def-weil-pbc-scheme-conventions",
   "def-sc-scheme-tangent-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-rational-point-tangent-derivation-identification] to $X$ at $x$ and to $Y$ at $y$; the hypotheses $\\kappa(x)=k$ and $\\kappa(y)=k$ are exactly its rational-point hypotheses. This gives the two canonical $k$-linear isomorphisms of the conclusion, $\\theta\\mapsto\\ell_\\theta$ on $T_{X/k,x}$ and $\\eta\\mapsto\\ell_\\eta$ on $T_{Y/k,y}$, where $\\ell_\\theta(a\\bmod\\mathfrak m_x^2)=D_\\theta(a)$ is read off from $\\theta^\\sharp(a)=\\bar a+D_\\theta(a)\\epsilon$.",
+   "uses": [
+    "lem-sc-rational-point-tangent-derivation-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2E, lemma-tangent-space-rational-point, specialized to S = Spec k"
+   }
+  },
+  {
+   "text": "Let $f^\\sharp_x:\\mathcal O_{Y,y}\\to\\mathcal O_{X,x}$ be the local homomorphism induced by $f$ [def-weil-locally-ringed-space-morphism]; it maps $\\mathfrak m_y$ into $\\mathfrak m_x$ and $\\mathfrak m_y^2$ into $\\mathfrak m_x^2$, so it induces a $k$-linear map $u:\\mathfrak m_y/\\mathfrak m_y^2\\to\\mathfrak m_x/\\mathfrak m_x^2$; and since the induced map $\\kappa(y)\\to\\kappa(x)$ [def-weil-residue-field] is a $k$-algebra map between copies of $k$, it is the identity, i.e. $\\overline{f^\\sharp_x(b)}=\\bar b$. By [def-sc-scheme-tangent-space] the tangent map sends $\\theta\\in T_{X/k,x}$ to $f\\circ\\theta$. By [lem-weil-pbc-scheme-stalk-map-composition](b), $(f\\circ\\theta)^\\sharp=\\theta^\\sharp\\circ f^\\sharp_x$ (the same germ isomorphism of $k[\\epsilon]$ is used on both sides). Hence for $b\\in\\mathcal O_{Y,y}$: $\\bar b+D_{f\\circ\\theta}(b)\\epsilon=\\theta^\\sharp(f^\\sharp_x(b))=\\bar b+D_\\theta(f^\\sharp_x(b))\\epsilon$, so $D_{f\\circ\\theta}=D_\\theta\\circ f^\\sharp_x$, and for $b\\in\\mathfrak m_y$ this reads $\\ell_{f\\circ\\theta}(b\\bmod\\mathfrak m_y^2)=\\ell_\\theta(u(b\\bmod\\mathfrak m_y^2))$, i.e. $\\ell_{f\\circ\\theta}=u^*(\\ell_\\theta)$ with the descriptions of step 1 [lem-sc-rational-point-tangent-derivation-identification]. Thus under the isomorphisms of step 1 the tangent map is the dual $u^*$ of the cotangent map.",
+   "uses": [
+    "def-sc-scheme-tangent-space",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-residue-field",
+    "lem-weil-pbc-scheme-stalk-map-composition",
+    "lem-sc-rational-point-tangent-derivation-identification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2C, dual-number definition and functoriality; Tag 0B2F, varieties-lemma-map-tangent-spaces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-rational-point-tangent-derivation-identification",
+  "def-sc-scheme-tangent-space",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-residue-field",
+  "lem-weil-pbc-scheme-stalk-map-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0B2E, 0B2C and 0B2F"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,12 +94,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-point-tangent-cotangent-surjective",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-rational-tangent-cotangent-duality",
+  "worker": "stage1",
+  "summary": "Read Stacks Tags 0B2E, 0B2C and 0B2F and the existing tangent-space definition. Added one narrower statement node for the rational-point tangent/cotangent identification, then split the item into applying that identification at the two points and checking functoriality under the local-ring map. Reviewer R-rtd2 (FIX more, RETURN less): the delivered node lem-sc-rational-point-tangent-identification asserted only that some canonical isomorphism exists, so step 2 could not be checked from it (C4); it is replaced by lem-sc-rational-point-tangent-derivation-identification, which gives the isomorphism explicitly, and step 2 now computes with lem-weil-pbc-scheme-stalk-map-composition.",
+  "blueprint": "Step 1 realizes the tangent-space identification used in the third paragraph of lem-sc-degree-2g1-very-ample; step 2 realizes the naturality of the tangent-vector separation argument there.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rtd2",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rtd2 (reviewer sub-agent of L); spot-checked: Source Stacks varieties.tex Tags 0B2E (lemma-tangent-space-rational-point; with S=Spec k, m_s=0, so T_{X/k,x}=Hom_k(m_x/m_x^2,k) needs exactly kappa(x)=k, as in the item), 0B2D proof (phi(a)=c(a)+D(a)eps), 0B2C, 0B2F (df dual to cotangent map); item statement unchanged and agrees hypothesis by hypothesis. def-sc-scheme-tangent-space gives T and df(theta)=f o theta when kappa(y)=kappa(x). FIX more, RETURN less (C4): the delivered node lem-sc-rational-point-tangent-identification asserted only that some canonical isomorphism exists, so step 2 ('under the identifications this is precomposition with u') could not be checked from any cited statement; added statement node lem-sc-rational-point-tangent-derivation-identification giving the isomorphism explicitly (theta -> l_theta, l_theta(a mod m_x^2)=D_theta(a) where theta^sharp(a)=abar+D_theta(a)eps), dropped the delivered node (--drop-nodes; the new one contains it). dag/nodes/sec-picard-framework/lem-sc-rational-tangent-cotangent-duality.json: proof[0] cites the new node; proof[1] rewritten as the computation (f o theta)^sharp=theta^sharp o f^sharp_x via lem-weil-pbc-scheme-stalk-map-composition(b) (Mathlib leaf, generic), residue map identity via def-weil-residue-field, giving l_{f o theta}=u^*(l_theta); uses/proof_deps updated; stmt_deps back to the two nodes the statement cites. New statement checked true: D_theta is a k-derivation so vanishes on m_x^2; inverse l -> phi(a)=abar+l(a-abar)eps is a local k-algebra map, giving theta by lem-weil-pbc-morphism-from-spec-local-ring; linearity from the eps->lambda eps and pushout structure. Small cases: Spec k (both zero); A^1 at 0 (theta: t->c eps, l(t)=c); t->t^2 at 0 (u=0, df=0). No slopmaster2 declaration (TangentSpace.lean has only tangent sheaves), no attachment. Start Sat Oct 10 04:42:15 PM UTC 2026, end Sat Oct 10 04:44:27 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
