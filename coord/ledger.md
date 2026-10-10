@@ -1446,3 +1446,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:51 L: launcher decision (b): the group's review may be written by a separate reviewer agent, never the author; recorded in roles/remote-lead.md (intro, §4) and roles/maintainer.md §7 (content-return rate above ~1 in 5 goes into STATE); packaging tool (a) noted in §4
 - 12:52 L: accepted lem-pc-proper-base-change: 6 steps (01W4 and formal smoothness under base change), no new nodes; lem-weil-pbc-proper-base-change duplicate noted
 - 12:52 L: accepted lem-pc-curves-are-sc: 5 steps, new Mathlib leaves lem-pc-integral-scheme-irreducible, lem-pc-irreducible-space-connected, new node lem-pc-scheme-dimension-local-rings (04MU)
+- 12:53 L: accepted lem-pc-dim-base-change: 3 steps, new node lem-pc-dimension-affine-open-cover (04MU), tool_uses lem-weil-pbc-dimension-preserved-field-extension; blueprint tag 00HS wrong (00P3)

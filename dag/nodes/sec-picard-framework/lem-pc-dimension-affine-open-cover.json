@@ -1,0 +1,70 @@
+{
+ "id": "lem-pc-dimension-affine-open-cover",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-dim-base-change",
+   "place": "proof, last paragraph: 'X is a curve, covered by affine opens Spec(A_i) ... (and dim X = max_i dim A_i = 1); the X_K are covered by the Spec(A_i ⊗_k K) of dimension dim A_i, so dim X_K = 1' (the computation of the dimension of a scheme from an affine open cover, used for X and for X_K)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The dimension of a scheme is the supremum of the dimensions of the rings of an affine open cover",
+ "statement": "Let $X$ be a nonempty scheme [def-pc-scheme] and let $(U_i)_{i\\in I}$ be a family of open subschemes of $X$ with $X=\\bigcup_{i\\in I}U_i$, each $U_i$ isomorphic to $\\operatorname{Spec}A_i$ for a commutative ring $A_i$ [def-weil-affine-spectrum]. Let $\\dim X$ be the dimension of $X$ [def-pc-dimension] (the supremum of the Krull dimensions of the local rings $\\mathcal O_{X,x}$, $x\\in X$) and $\\dim A_i\\in\\{-\\infty,0,1,2,\\ldots,\\infty\\}$ the Krull dimension of the ring $A_i$ [def-weil-pbc-krull-dimension-ring]. Then\n$$\n\\dim X=\\sup_{i\\in I}\\dim A_i\n$$\nin $\\{-\\infty,0,1,2,\\ldots,\\infty\\}$ (an empty $U_i$ has $A_i=0$ and contributes $-\\infty$).",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 04MU (properties-lemma-dimension, properties.tex line 1233: dim X = sup of the dimensions of the local rings), together with Schemes, Lemma 01HV (schemes-lemma-spec-sheaves, schemes.tex line 692: the stalk of the structure sheaf of Spec A at p is A_p) and Algebra, Lemma 00KG (algebra-lemma-dimension-height, algebra.tex line 14353: dim R is the supremum of the heights of its primes); tags verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-dimension",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of a scheme is the supremum of the Krull dimensions of its stalks (local rings)",
+   "results": "topologicalKrullDim (Mathlib.Topology.KrullDimension), Ideal.sup_primeHeight_eq_ringKrullDim, Ideal.sup_height_eq_ringKrullDim, Ideal.sup_primeHeight_of_maximal_eq_ringKrullDim, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim (Mathlib.RingTheory.Ideal.Height), Order.krullDim_eq_iSup_coheight, Order.krullDim_eq_iSup_height (Mathlib.Order.KrullDimension)",
+   "date": "2026-10-10",
+   "verdict": "no match: ring-level dim R = sup of heights (Ideal.sup_height_eq_ringKrullDim, Height.lean:489) is one ingredient; no statement on a scheme and an affine open cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dimension of a scheme equals the supremum of the Krull dimensions of the rings of an affine open cover",
+   "results": "AlgebraicGeometry.iSup_affineOpens_eq_top, Scheme.isAffine_affineCover, Scheme.isAffine_affineBasisCover, Scheme.affineOpenCover_X, Scheme.AffineOpenCover.openCover_X (Mathlib.AlgebraicGeometry.AffineScheme, Cover.Open): covers only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ringKrullDim\\|topologicalKrullDim' Mathlib/AlgebraicGeometry; grep -rn 'sup_height_eq_ringKrullDim' Mathlib/RingTheory/Ideal/Height.lean (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib)",
+   "results": "AlgebraicGeometry/Properties.lean:376 ringKrullDim_stalk_eq_coheight (dim O_{X,x} = coheight of x for the specialization order, tag 02IZ); Properties.lean:362 coheight_eq_of_isOpenImmersion; Artinian.lean:66 IsLocallyArtinian.of_topologicalKrullDim_le_zero; RingTheory/Ideal/Height.lean:489 Ideal.sup_height_eq_ringKrullDim; also slopmaster2 WeilConjectures/Mathlib/Topology/KrullDimension.lean:57 topologicalKrullDim_le_of_iSup_eq_top (only the inequality dim X <= common bound on an open cover, topological dimension)",
+   "date": "2026-10-10",
+   "verdict": "no match: ingredients only (ringKrullDim_stalk_eq_coheight, Ideal.sup_height_eq_ringKrullDim); the statement for def-pc-dimension and an affine cover is not in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": "AlgebraicGeometry.ringKrullDim_stalk_eq_coheight (Mathlib/AlgebraicGeometry/Properties.lean:376) with AlgebraicGeometry.coheight_eq_of_isOpenImmersion (Properties.lean:362) and Ideal.sup_height_eq_ringKrullDim (Mathlib/RingTheory/Ideal/Height.lean:489): combined over the cover they give the statement in a few lines, not one",
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-dim-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

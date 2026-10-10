@@ -3,43 +3,113 @@
  "blueprint": {
   "is": "lem-pc-dim-base-change",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-kun-dimension-extension"
+  ]
  },
  "kind": "statement",
  "title": "Dimension is unchanged under base change along field extensions",
- "statement": "Let $k$ be a field, $A$ a $k$-algebra of finite type and $K/k$ a field\nextension. Then $\\dim(A\\otimes_kK)=\\dim A$; hence for a\ncurve $X$ over $k$, the scheme\n$X_K=X\\times_{\\operatorname{Spec} k}\\operatorname{Spec} K$ has dimension $1$.",
+ "statement": "Let $k$ be a field, $A$ a finite type $k$-algebra [def-weil-pbc-finite-type-algebra] and $K/k$ a field extension [def-pc-field-extension]. Then the Krull dimensions [def-weil-pbc-krull-dimension-ring] of the rings $A\\otimes_kK$ and $A$ agree: $\\dim(A\\otimes_kK)=\\dim A$. Hence for a curve $X$ over $k$ [def-pc-curve], the base change [def-pc-base-change] $X_K=X\\times_{\\operatorname{Spec} k}\\operatorname{Spec} K$ has dimension $1$ [def-pc-dimension].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-dim-base-change.md",
   "place": "node lem-pc-dim-base-change, order 733",
   "external": [
    {
     "document": "Stacks Project",
-    "place": "Tag 00HS"
+    "place": "Tag 00P3 (Algebra, Lemma lemma-dimension-preserved-field-extension); the imported Tag 00HS is flat going-down, which the blueprint proof cites for a height argument, not this statement"
    }
   ]
  },
  "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-pc-field-extension",
+  "def-weil-pbc-krull-dimension-ring",
   "def-pc-curve",
-  "def-pc-dimension",
-  "def-pc-field-tower",
-  "def-pc-morphism-conventions"
+  "def-pc-base-change",
+  "def-pc-dimension"
  ],
  "proof": [
   {
-   "text": "Write $A=k[x_1,\\dots,x_n]/I$, so $A\\otimes_kK=K[x_1,\\dots,x_n]/I\\cdot K[x]$. For a Noetherian ring dimension formulas:\n$\\dim k[x]/I=n-\\operatorname{ht}(I)$ (the classical formula for the\ndimension of a quotient of a polynomial ring by the height of the\nideal), and the extension of an ideal under a faithfully flat ring map\npreserves height: the map $k[x]\\to K[x]$ is faithfully flat (base\nchange of the faithfully flat $k\\to K$), and for flat ring maps\n$\\varphi:R\\to R'$ and a prime $\\mathfrak p\\subset R$ one has\n$\\operatorname{ht}(\\mathfrak pR')=\\operatorname{ht}(\\mathfrak p)$:\n$\\mathfrak pR'\\cap R=\\mathfrak p$ (faithful flatness: the tensor\n$R/\\mathfrak p\\to R'/\\mathfrak pR'$ is faithfully flat, hence\ninjective, so the preimage of $\\mathfrak pR'$ is $\\mathfrak p$), and\n$\\operatorname{ht}(\\mathfrak pR')\\ge\\operatorname{ht}(\\mathfrak p)$:\na chain $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_r=\\mathfrak p$\nof primes of $R$ gives, by going-down for flat ring maps (Algebra,\nLemma 10.39.19, Tag [00HS](https://stacks.math.columbia.edu/tag/00HS)\n(flatness implies going down for the map on spectra): the classical\nstatement, which says chains lift,\nhence the height of the extended ideal is at least that of the source\nideal); and $\\operatorname{ht}(\\mathfrak pR')\\le\\operatorname{ht}(\\mathfrak p)$:\na chain of primes in $R'$ above $\\mathfrak pR'$ intersects $R$ in a\nchain of primes all containing $\\mathfrak p$ (again by\n$\\mathfrak q\\cap R\\supseteq\\mathfrak p$ for $\\mathfrak q\\supseteq \\mathfrak pR'$: flatness gives $\\mathfrak q\\cap R\\supseteq\\mathfrak p$\nand the going-down property applied inside), i.e. a chain in $R$ from\n$\\mathfrak p$ down; so the two heights agree. Combining:\n$\\dim(A\\otimes_kK)=n-\\operatorname{ht}(I\\cdot K[x]) =n-\\operatorname{ht}(I)=\\dim A$.\nFor the last assertion: $X$ is a curve, covered by affine opens\n$\\operatorname{Spec}(A_i)$ with $A_i$ finite type over $k$ and $\\dim A_i\\le1$ (and\n$\\dim X=\\max_i\\dim A_i=1$); the $X_K$ are covered by the\n$\\operatorname{Spec}(A_i\\otimes_kK)$ of dimension $\\dim A_i$, so $\\dim X_K=1$.",
-   "uses": [],
-   "elementary": null
+   "text": "*Affine statement.* By [lem-weil-pbc-dimension-preserved-field-extension] (Algebra, Lemma 00P3, applied to $S=A$), the topological spaces $\\operatorname{Spec}(K\\otimes_kA)$ and $\\operatorname{Spec}A$ have the same Krull dimension. By [def-weil-pbc-krull-dimension-ring] the Krull dimension of a ring is the Krull dimension of its spectrum, so $\\dim(K\\otimes_kA)=\\dim A$. Finally $A\\otimes_kK\\cong K\\otimes_kA$ as rings by $a\\otimes c\\mapsto c\\otimes a$, and isomorphic rings have the same Krull dimension (prime ideals correspond, preserving inclusions). Hence $\\dim(A\\otimes_kK)=\\dim A$.",
+   "uses": [
+    "lem-weil-pbc-dimension-preserved-field-extension",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00P3 (lemma-dimension-preserved-field-extension, line 28290)"
+   }
+  },
+  {
+   "text": "*An affine cover of $X$ and of $X_K$.* Let $X$ be a curve over $k$ [def-pc-curve]: an integral (in particular nonempty) scheme whose structure morphism $f:X\\to\\operatorname{Spec}k$ is separated and of finite type, with $\\dim X=1$. Since $f$ is of finite type and $\\operatorname{Spec}k$ is affine with $f^{-1}(\\operatorname{Spec}k)=X$, by [def-weil-finite-type-morphism] $X$ has a finite affine open cover $X=U_1\\cup\\dots\\cup U_m$, $U_i\\cong\\operatorname{Spec}A_i$ with each $A_i$ a finitely generated, i.e. finite type [def-weil-pbc-finite-type-algebra], $k$-algebra. Let $p:X_K\\to X$ and $q:X_K\\to\\operatorname{Spec}K$ be the projections of $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-base-change]. By [lem-weil-pbc-open-fibre-product] (with $S=U=\\operatorname{Spec}k$, $V=U_i$, $W=Y=\\operatorname{Spec}K$) the open subscheme $p^{-1}(U_i)\\subseteq X_K$ is identified with $U_i\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$, which by [lem-weil-pbc-fibre-product-affine-spectra] is $\\cong\\operatorname{Spec}(A_i\\otimes_kK)$. As the $U_i$ cover $X$, the $p^{-1}(U_i)$ cover $X_K$; and $X_K$ is nonempty, since $X$ is nonempty, so some $A_i\\neq0$, and then $\\dim(A_i\\otimes_kK)=\\dim A_i\\ge0$ by step 1, so $A_i\\otimes_kK\\ne0$ and $p^{-1}(U_i)\\neq\\emptyset$.",
+   "uses": [
+    "def-pc-curve",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-finite-type-algebra",
+    "def-pc-base-change",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JR (schemes-lemma-open-fibre-product) and Lemma 01JQ (schemes-lemma-fibre-product-affines); Morphisms, Section 01T0 (finite type)"
+   }
+  },
+  {
+   "text": "*Conclusion.* By [lem-pc-dimension-affine-open-cover] applied to the nonempty scheme $X$ with the cover $(U_i)$, $1=\\dim X=\\max_i\\dim A_i$; applied to the nonempty scheme $X_K$ with the cover $(p^{-1}(U_i))$, and with step 1 for each $A_i$ (a finite type $k$-algebra), $\\dim X_K=\\max_i\\dim(A_i\\otimes_kK)=\\max_i\\dim A_i=1$.",
+   "uses": [
+    "lem-pc-dimension-affine-open-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 04MU (properties-lemma-dimension); Algebra, Lemma 00P3"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-dimension-preserved-field-extension",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-pc-curve",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-finite-type-algebra",
+  "def-pc-base-change",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-pc-dimension-affine-open-cover"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-dim-base-change.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00P3 (lemma-dimension-preserved-field-extension, line 28290) for the affine statement; the curve clause follows the blueprint's last paragraph with Properties, Lemma 04MU (properties.tex line 1233)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of a scheme of finite type over a field is unchanged by base change to a field extension",
+   "results": "topologicalKrullDim, RingEquiv.ringKrullDim, ringKrullDim_eq_of_ringEquiv, ringKrullDim_le_of_surjective (Mathlib.RingTheory.KrullDimension.Basic), isSmoothOfRelativeDimension_isStableUnderBaseChange, locallyOfFiniteType_isStableUnderBaseChange, Polynomial.ringKrullDim_of_isNoetherianRing, ringKrullDim_eq_zero_of_isField",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ringKrullDim (A ⊗[k] K) = ringKrullDim A for a finitely generated algebra A over a field k and field extension K",
+   "results": "Algebra.IsAlgebraic.finrank_of_isFractionRing, lift_rank_of_isFractionRing, rank_of_isFractionRing, rank_fractionRing (Mathlib.RingTheory.Algebraic.Integral), IntermediateField.LinearDisjoint...rank, Ring.DimensionLEOne.isIntegralClosure: module ranks only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ringKrullDim.*⊗\\|krullDim.*TensorProduct\\|krullDim.*baseChange' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'krullDim' ~/weil-conjectures-slopmaster2/WeilConjectures | grep -i 'tensor\\|⊗\\|baseChange\\|extension'",
+   "results": "Mathlib: none. slopmaster2: WeilConjectures/Mathlib/RingTheory/NoetherNormalization.lean:326 ringKrullDim_tensorProduct_eq_of_finite_inj_algHom_mvPolynomial (generic fibre K ⊗_R S of a Noether normalization over a domain R with fraction field K; for R=k a field it forces K=k, so not this statement); Mathlib/AlgebraicGeometry/Fiber.lean:86 topologicalKrullDim_fiber_of_isPullback (fibres of isomorphic pullback squares)",
+   "date": "2026-10-10",
+   "verdict": "no match (rule 0: no slopmaster2 declaration states the item)"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -72,5 +142,16 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-dim-base-change",
+  "worker": "stage1",
+  "summary": "Source located: the affine statement is Stacks Algebra, Lemma 00P3 (lemma-dimension-preserved-field-extension), not 00HS (flat going-down), which the imported source and the blueprint proof cite. The blueprint proof (dim k[x]/I = n - ht(I), and ht(I K[x]) = ht(I) by a going-down argument for primes applied to the non-prime ideal I) is incomplete: its inequality ht(pR') <= ht(p) 'by going-down applied inside' is not an argument (Stacks 00P4 needs the flat local dimension formula 00ON for it). It is replaced by the existing DAG node lem-weil-pbc-dimension-preserved-field-extension (00P3: Noether normalization + finite injective K[y] -> K ⊗ S + 00OK), used as a generic tool of unit sk-thm-p1. The curve clause is written out: finite affine cover of X by finite type algebras (definition of finite type), the induced open cover of X_K by Spec(A_i ⊗_k K) (open fibre products 01JR, fibre product of affines 01JQ, both Mathlib leaves), and a new node computing dim of a scheme (sup of local ring dimensions, as def-pc-dimension defines it) from an affine open cover (04MU + 01HV + 00KG). Statement kept, with citations added; stmt_deps corrected (def-pc-field-tower and def-pc-morphism-conventions are not used; def-pc-field-extension, def-weil-pbc-finite-type-algebra, def-weil-pbc-krull-dimension-ring, def-pc-base-change added). No slopmaster2 declaration states the item.",
+  "blueprint": "Step 1 realizes the first paragraph's claim dim(A ⊗_k K) = dim A (by 00P3 instead of the blueprint's height computation); steps 2-3 realize the last paragraph 'X is a curve, covered by affine opens Spec(A_i) ... the X_K are covered by the Spec(A_i ⊗_k K) of dimension dim A_i, so dim X_K = 1'."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-dimension-preserved-field-extension"
+ ],
+ "reviewed": "2026-10-10 L: 3 steps checked (affine statement by the 00P3 node of sk-thm-p1 used as a tool, with the swap A tensor K = K tensor A; finite affine cover of X and its base change by 01JR/01JQ leaves; conclusion by the new node lem-pc-dimension-affine-open-cover, 04MU with 00KG). tool_uses recorded (the 00P3 node lists this item as same_as; the blueprint proof via going-down 00HS was incomplete, worker). same_as lem-kun-dimension-extension. stmt_deps corrected."
 }
