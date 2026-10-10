@@ -15,6 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.InfinitesimalTranslation
 public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
+public import WeilConjectures.AlgebraicGeometry.PointsOverAlgClosed
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Differentials.Presheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -120,7 +121,7 @@ group scheme over an affine base is written `R`; `k` is reserved for a field.
 
 universe u
 
-open CategoryTheory TrivSqZeroExt
+open CategoryTheory TrivSqZeroExt Limits
 open scoped MonObj
 
 namespace AlgebraicGeometry
@@ -1358,13 +1359,27 @@ variable {k : Type u} [Field k]
 /-- A morphism of schemes locally of finite type over an algebraically closed field `k` which is
 surjective on underlying spaces is surjective on `k`-points.
 
-Proof sketch (not formalised): the fibre of `f` over the closed point `y` is a nonempty scheme
+The fibre of `f` over the closed point `y` is a nonempty scheme
 locally of finite type over `k`; by the Nullstellensatz its closed points have residue field `k`,
 and such a point is a `k`-point of `X` over `y`. -/
 theorem exists_points_comp_eq_of_surjective [IsAlgClosed k] {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] (f : X ⟶ Y) (hf : Function.Surjective f.left.base)
     (y : points Y k) : ∃ x : points X k, x ≫ f = y := by
-  sorry
+  have : LocallyOfFiniteType (f.left ≫ Y.hom) := by rw [Over.w f]; infer_instance
+  have : LocallyOfFiniteType f.left := locallyOfFiniteType_of_comp f.left Y.hom
+  have : Nonempty (Spec (.of k)) := inferInstanceAs (Nonempty (PrimeSpectrum k))
+  let t : Spec (.of k) := Classical.arbitrary _
+  obtain ⟨q, hq⟩ := hf (y.left.base t)
+  obtain ⟨z, -, -⟩ := Scheme.Pullback.exists_preimage_pullback q t hq
+  obtain ⟨σ, hσ⟩ := exists_comp_eq_id_of_locallyOfFiniteType (pullback.snd f.left y.left) z
+  have hc : σ ≫ pullback.fst f.left y.left ≫ f.left = y.left := by
+    rw [pullback.condition, reassoc_of% hσ]
+  refine ⟨Over.homMk (σ ≫ pullback.fst f.left y.left) ?_, ?_⟩
+  · rw [Category.assoc, ← Over.w f, reassoc_of% hc]
+    exact Over.w y
+  · ext1
+    exact hc
+
 
 namespace GrpObj
 
