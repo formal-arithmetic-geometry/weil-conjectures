@@ -1296,3 +1296,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of F1: lem-weil-pbc-principal-maximal-dim-one-regular merged from deliver/F1/lem-weil-pbc-principal-maximal-dim-one-regular (1 commit(s), 0 new node(s), spot-checked by L: L: one step, the definition of regular local ring with dim 1 and m principal); claim closed
 - 11:22 L: merged F1 lem-weil-pbc-principal-maximal-dim-one-regular (one step from the definition, 0 new).
 - 11:23 L: accepted lem-weil-pbc-qs-scheme-cohomology-directed-colimit (01FF, 10 steps; new nodes for 01DI functorial injective embeddings of O_X-modules and 01EW Cech vanishing on a basis).
+- 11:23 L: accepted lem-weil-pbc-normal-domain-principal-quotient-associated-height (031T (1), 6 steps on existing nodes, 0 new; the brief's proof sketch was wrong, corrected by the worker).
