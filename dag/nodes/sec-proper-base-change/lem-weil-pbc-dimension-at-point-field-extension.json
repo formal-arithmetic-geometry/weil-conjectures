@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-dimension-at-point-field-extension",
+ "kind": "statement",
+ "title": "Dimension at a point of a finite type algebra is preserved by extension of the ground field",
+ "statement": "Let $k$ and $K$ be fields, $\\iota:k\\to K$ a ring homomorphism, $S$ a finite type $k$-algebra [def-weil-pbc-finite-type-algebra] and $S_K=S\\otimes_kK$, a $K$-algebra through $\\lambda\\mapsto1\\otimes\\lambda$, with the ring map $j:S\\to S_K$, $s\\mapsto s\\otimes1$. Let $\\mathfrak q_K\\subset S_K$ be a prime ideal and $\\mathfrak q=j^{-1}(\\mathfrak q_K)$, a prime ideal of $S$. Then the Krull dimensions of the topological spaces $\\operatorname{Spec}S$ and $\\operatorname{Spec}S_K$ [def-weil-affine-spectrum] at the points $\\mathfrak q$ and $\\mathfrak q_K$ [def-kun-topological-dimension-at-point] are equal: $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=\\dim_{\\mathfrak q_K}(\\operatorname{Spec}S_K)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00P4 (label lemma-dimension-at-a-point-preserved-field-extension, line 28307), with S_K = K (x)_k S there; this node writes S (x)_k K, isomorphic by the swap"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension of Spec of tensor product of finitely generated algebra with field extension equals dimension",
+   "results": "PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable (Mathlib.RingTheory.Spectrum.Prime.Homeomorph), PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, Module.rankAtStalk_tensorProduct_of_isScalarTower, ringKrullDim",
+   "date": "2026-10-10",
+   "verdict": "no match: only the purely inseparable case gives a homeomorphism; nothing on dimension under arbitrary field extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of finite type algebra over a field is preserved by base change to a field extension",
+   "results": "RingHom.finiteType_isStableUnderBaseChange, ringKrullDim, RingEquiv.ringKrullDim, ringKrullDim_le_of_surjective, Polynomial.ringKrullDim_of_isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local dimension at a prime of a finitely generated algebra over a field is unchanged after extending scalars to a larger field",
+   "results": "IsBaseChange.finrank_eq_of_le_nonZeroDivisors, Algebra.IsAlgebraic.finrank_of_isFractionRing, Algebra.IsAlgebraic.rank_of_isFractionRing, IsLocalizedModule.finrank_eq (ranks of modules, not Krull dimension)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"krullDim\", TensorProduct",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'theorem .*(ringKrullDim|krullDim).*(tensor|Tensor|baseChange)' and grep -rnlE 'dimensionAt|krullDimAt|topologicalKrullDimAt|localDim' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln TensorProduct Mathlib/RingTheory/KrullDimension/ Mathlib/RingTheory/Ideal/Height.lean; ls Mathlib/RingTheory/KrullDimension/ (Basic, Field, LocalRing, Module, NonZeroDivisors, PID, Polynomial, Regular, Zero)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no dimension at a point and no dimension of a base change along a field extension"
+  },
+  {
+   "tool": "local_search",
+   "query": "ringKrullDim (project ~/weil-conjectures-slopmaster2)",
+   "results": "index: unavailable, so no verdict; the grep stands in",
+   "date": "2026-10-10",
+   "verdict": "no verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lci-field-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00P4 (dimension at a point preserved by field extension). Unsplit."
+}
