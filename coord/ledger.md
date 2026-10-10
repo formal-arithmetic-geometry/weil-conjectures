@@ -1925,3 +1925,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:12 L: returned deliver/E1/lem-exc-etale-field-galois-classification (reviewer RETURN: 1. D1 (relabelling), D5: steps 1 and 3 each cite a new node that is exactly a clause of the item: lem-exc-etale-finite-e)
 - 16:13 L: merged deliver/K1/lem-pc-clopen-smooth-proper-curve (reviewer FIX; first push; new nodes: 1)
 - 16:13 L: merged deliver/K1/lem-sc-p1-graded-submodule-finite (reviewer FIX; first push; new nodes: 1)
+- 16:13 L: returned deliver/H1/lem-sc-smooth-proper-relative-dualizing-general (reviewer RETURN: 1. E1: new node lem-sc-smooth-relative-upper-shriek-formula: the statement is false. Without properness, f^! = right adj)
