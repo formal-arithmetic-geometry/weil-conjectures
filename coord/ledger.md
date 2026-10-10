@@ -1914,3 +1914,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:10 L: merged deliver/C1/lem-sc-p1-duality-pairing-naturality (reviewer FIX+NODE(1); after a return; new nodes: 4)
 - 16:11 L: lem-pc-flat-field made a Mathlib leaf (Flat.lean 115 instance; H1 release)
 - 16:11 L: merged deliver/F1/lem-sc-tensor-section-affine-open (reviewer PASS; first push; new nodes: 0)
+- 16:11 L: merged deliver/C1/lem-sc-leray-closed-pushforward-cohomology (reviewer FIX; after a return; new nodes: 1)
