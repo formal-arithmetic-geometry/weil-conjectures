@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-degree-2g1-very-ample",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Line bundles of large degree are very ample",
@@ -22,36 +22,47 @@
   "def-sc-genus",
   "def-sc-pic0",
   "def-sc-ample",
-  "def-sc-curves"
+  "def-sc-curves",
+  "def-sc-invertible-module"
  ],
  "proof": [
   {
-   "text": "Write $d=\\deg\\mathcal M$. By [lem-sc-riemann-roch-large-degree], every\nline bundle $\\mathcal N$ on $C$ of degree at least $2g-1$ satisfies\n$\\dim H^0(C,\\mathcal N)=\\deg\\mathcal N+1-g$. For points $P,Q\\in C$\n(possibly equal), $\\deg$ is a homomorphism with $\\deg\\mathcal O_C(P)=1$\n([def-sc-pic0]), so $\\mathcal M$, $\\mathcal M(-P)$ and $\\mathcal M(-P-Q)$\nhave degrees $d\\geq2g+1$, $d-1\\geq2g$ and $d-2\\geq2g-1$. Hence\n\n$$\n\\dim H^0(C,\\mathcal M(-P))=\\dim H^0(C,\\mathcal M)-1,\\qquad\n\\dim H^0(C,\\mathcal M(-P-Q))=\\dim H^0(C,\\mathcal M)-2.\n$$",
+   "text": "Write $d=\\deg\\mathcal M$. By [lem-sc-riemann-roch-large-degree], every line bundle $\\mathcal N$ on $C$ of degree at least $2g-1$ has $\\dim_k H^0(C,\\mathcal N)=\\deg\\mathcal N+1-g$. For rational points $P,Q$ (possibly equal), [def-sc-pic0] gives $\\deg\\mathcal O_C(P)=1$ and additivity of degree, so $\\mathcal M$, $\\mathcal M(-P)$ and $\\mathcal M(-P-Q)$ have degrees $d\\ge2g+1$, $d-1\\ge2g$ and $d-2\\ge2g-1$. Therefore $\\dim H^0(C,\\mathcal M(-P))=\\dim H^0(C,\\mathcal M)-1$ and $\\dim H^0(C,\\mathcal M(-P-Q))=\\dim H^0(C,\\mathcal M)-2$.",
    "uses": [
     "lem-sc-riemann-roch-large-degree",
     "def-sc-pic0"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-degree-2g1-very-ample.md",
+    "place": "## Proof, first paragraph (degree and Riemann–Roch dimension drops)"
+   }
   },
   {
-   "text": "These\ndimension drops say exactly that the complete linear system\n$|\\mathcal M|$ is base point free and separates points and\ntangent vectors: the drop for $\\mathcal M(-P)$ gives a section\nnot vanishing at $P$; the drop for $\\mathcal M(-P-Q)$ with\n$P\\neq Q$ gives a section vanishing at $P$ but not at $Q$\n(and one vanishing at $Q$ but not at $P$); and with $P=Q$ it\ngives a section vanishing at $P$ to order exactly one.",
+   "text": "The first dimension drop means that, for every point $P$, a global section exists that does not vanish at $P$, so the complete linear system is base-point free. For distinct $P,Q$, the two-point drop gives a section vanishing at one and not the other, hence separates points; for $P=Q$, it gives a section whose vanishing order at $P$ is exactly one, hence separates tangent vectors. Thus the hypotheses of the separation criterion are satisfied.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-degree-2g1-very-ample.md",
+    "place": "## Proof, second paragraph (base points, points, and tangent vectors)"
+   }
   },
   {
-   "text": "We now prove that these properties make the map\n$\\varphi:C\\to\\mathbf P^N$ associated to the complete linear\nsystem $|\\mathcal M|$ a closed immersion. A section vanishing\nat $P$ but not at $Q$ shows $\\varphi(P)\\neq\\varphi(Q)$. A\nsection vanishing at $P$ to order exactly one shows that\n$d\\varphi_P$ is injective (a tangent direction at $P$ is a\nfirst-order deformation of $P$, and such a section separates it\nfrom the trivial deformation), and the injectivity of\n$d\\varphi_P$ for all $P$ is equivalent to\n$\\Omega_{C/\\mathbf P^N}=0$ (the fibre of\n$\\Omega_{C/\\mathbf P^N}$ at $P$ is the dual of the cokernel of\nthe tangent map; *reference: Stacks Project, Morphisms of\nSchemes: unramified morphisms*), i.e. $\\varphi$ is unramified.\nAn unramified morphism has finite fibres (a scheme of finite type\nover a field with vanishing sheaf of differentials is a finite\ndisjoint union of points: its irreducible components have function\nfields with no differentials, hence are algebraic over the base\nfield, so the dimension is zero and\n[lem-sc-dim0-finite] applies). Thus $\\varphi$ is proper\n(a morphism of proper schemes) with finite fibres, hence finite\n([thm-pqf-finite-iff-proper-finite-fibres] of the quasi-finite chapter;\n*reference: Stacks Project, Cohomology of Schemes,\n[Tag 02OG](https://stacks.math.columbia.edu/tag/02OG): proper and quasi-finite implies finite*).\nFinally, $\\varphi$ is finite and injective on closed points: its\nimage $\\varphi(C)\\subset\\mathbf P^N$ is closed, and for\n$y=\\varphi(P)\\in\\varphi(C)$ the fibre is the single point $P$\nwith residue field $k$ ($k$ algebraically closed), so\n$(\\varphi_*\\mathcal O_C)_y\\otimes k(y)=k$; by Nakayama's lemma\n$\\mathcal O_{\\mathbf P^N,y}\\to(\\varphi_*\\mathcal O_C)_y$ is\nsurjective, hence an isomorphism (it is injective because\n$\\varphi$ is dominant onto $\\varphi(C)$), and $\\varphi$ is\nan isomorphism onto $\\varphi(C)$, i.e. a closed immersion.\nHence $\\mathcal M$ is very ample.",
+   "text": "Applying [lem-sc-very-ample-separation-criterion] to the proper smooth connected curve $C$ and the line bundle $\\mathcal M$ gives that $\\mathcal M$ is very ample, which is the claimed conclusion.",
    "uses": [
-    "lem-sc-dim0-finite",
-    "thm-pqf-finite-iff-proper-finite-fibres"
+    "lem-sc-very-ample-separation-criterion"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-degree-2g1-very-ample.md",
+    "place": "## Proof, third paragraph (the complete linear system is a closed immersion)"
+   }
   }
  ],
  "proof_deps": [
   "lem-sc-riemann-roch-large-degree",
   "def-sc-pic0",
-  "lem-sc-dim0-finite",
-  "thm-pqf-finite-iff-proper-finite-fibres"
+  "lem-sc-very-ample-separation-criterion"
  ],
  "proof_origin": {
   "by": "agent",
@@ -60,7 +71,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -217,5 +228,19 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-degree-2g1-very-ample",
+  "worker": "stage1",
+  "summary": "Read the imported statement and the Lean declarations finrankH_zero_eq (RiemannRoch.lean 1392-1403), isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker (1405-1511), and isVeryAmple_of_degree (1513-1542) at slopmaster2 71d63dcf. The item theorem is sorry-free itself but rests on open declarations, so it is not an attachment; the child uses the stronger general Stacks criterion rather than asserting an exact attachment to the Lean theorem. Split the proof into the Riemann–Roch degree calculation, the elementary translation of dimension drops into base-point and point/tangent separation, and the general point-and-tangent separation criterion recorded as the new unsplit child lem-sc-very-ample-separation-criterion. Added the missing statement dependency def-sc-invertible-module and preserved the refreshed lean_audit and blueprint.is fields.",
+  "blueprint": "Step 1 realizes the first proof paragraph (Riemann–Roch dimension drops after subtracting one or two points); step 2 realizes the second paragraph (base-point freeness and separation); step 3 realizes the third paragraph (the complete linear system is a closed immersion), with the new criterion node carrying the non-elementary criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: 'not necessarily distinct' points in the new criterion node): 0H2V read, 3 steps checked, the P = Q case tested on K(2P)"
+ }
 }
