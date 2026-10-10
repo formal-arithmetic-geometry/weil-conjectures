@@ -2663,3 +2663,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:25 UTC L matched lem-pc-tower-abelian to Mathlib CategoryTheory.Abelian.functorCategoryAbelian (R-tab2553); E1 delivery returned as unneeded
 - 21:25 L: merged deliver/H1/lem-pc-proper-direct-image-finite-tor (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 21:26 L: merged deliver/H1/def-sbc-normal-dominant-galois (reviewer FIX; first push; new nodes: 0)
+- 21:26 L: returned deliver/G1/lem-sc-affine-perfect-map-lift (reviewer RETURN: 1 (C1/D, core gap): Step 2's 'the source construction supplies a map from this Koszul complex to the Hom complex represe)
