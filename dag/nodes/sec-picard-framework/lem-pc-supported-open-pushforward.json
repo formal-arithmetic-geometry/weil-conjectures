@@ -22,11 +22,56 @@
   "def-pc-ringed-spaces-derived-direct-image",
   "def-pc-derived-category",
   "def-pc-perfect-complex",
-  "def-pc-derived-direct-image"
+  "def-pc-derived-direct-image",
+  "lem-sc-derived-open-restriction-adjunction-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put V=X\\setminus T, open since T is closed, and W=U\\cap V; since T\\subseteq U, X=U\\cup V is an open cover. Let G be an object of D(O_U) whose cohomology sheaves are supported on T, so G|_W has zero cohomology sheaves and G|_W=0. By [lem-pc-restrict-derived-direct-image-open] applied to j and the open V (with j^{-1}(V)=W), (Rj_*G)|_V is canonically R(j|_W)_*(G|_W)=0; applied to j and the open U (with j^{-1}(U)=U and induced map the identity), (Rj_*G)|_U is canonically G, and under this identification the restriction to U of the unit of j^{-1}\\dashv Rj_* is the identity. Now let E be in D(O_X) with cohomology sheaves supported on T and take G=E|_U, which is again supported on T. The canonical map E\\to Rj_*(E|_U) restricts on U to the identity of E|_U, and on V it is a map between objects with zero cohomology sheaves (E|_V=0 by the support hypothesis, (Rj_*(E|_U))|_V=0 by the above). Hence its cone has cohomology sheaves vanishing on U and on V, so zero cohomology sheaves, so the cone is zero and the map is an isomorphism (an isomorphism of objects is detected on cohomology sheaves, which are local).",
+   "uses": [
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DF (cohomology-lemma-pushforward-restriction), Lemma 33.6(1), using Tag 08FE"
+   }
+  },
+  {
+   "text": "Let F be in D(O_U) with cohomology sheaves supported on T. Extension by zero j_! on modules is exact and left adjoint to restriction [lem-sc-derived-open-restriction-adjunction-exact], so j_!F is computed termwise on any representing complex and j_! commutes with taking cohomology sheaves. Immediately from the construction of extension by zero (Stacks, proof of 08DF), (j_!F)|_U=F and (j_!F)|_V=j_{W!}(F|_W)=0, since F|_W=0 by the support hypothesis. By the preceding step (with G=F), also (Rj_*F)|_U=F and (Rj_*F)|_V=0, and the canonical map j_!F\\to Rj_*F restricts on U to the identity of F. So it is an isomorphism on each member of the cover {U,V}, and the cone argument of the preceding step shows it is an isomorphism.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DF (cohomology-lemma-pushforward-restriction), Lemma 33.6(2), using Tag 08FE"
+   }
+  },
+  {
+   "text": "Perfectness is local: by [def-pc-perfect-complex] an object is perfect when it is, on the members of some open cover, isomorphic to strictly perfect complexes, and covers of the members of a cover combine. Let F be a perfect object of D(O_U) with cohomology sheaves supported on T. On the cover {U,V} of the first step, (Rj_*F)|_U=F is perfect, and (Rj_*F)|_V=0 by the first step, and the zero complex is strictly perfect. Hence Rj_*F is perfect on X.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-pc-restrict-derived-direct-image-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DP (cohomology-lemma-pushforward-perfect), Lemma 49.10"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-pc-perfect-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08DP and 08DF"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +103,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-generation-open-induction-step",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-supported-open-pushforward",
+  "worker": "stage1",
+  "summary": "Removed the two child nodes because they merely restated the item's 08DP and 08DF clauses. The three steps now give the Stacks arguments directly: restriction on the cover U union (X minus T) using 08FE and the cone criterion, extension by zero using exactness of j_!, and local perfectness using the same cover.",
+  "blueprint": "Realizes the blueprint induction-step sentence about the Koszul object's perfect pushforward and recovery of supported objects from restriction.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "The proof uses the generic Tag 08FE compatibility of derived direct image with restriction to an open; the Serre-duality unit's route has no node supplying this ringed-space fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-restrict-derived-direct-image-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sop2826",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sop2826 (reviewer sub-agent of L); spot-checked: Return of R-sop2728 (D1) repaired: both restating children gone; steps now give the 08DF/08DP arguments via 08FE node lem-pc-restrict-derived-direct-image-open (generic tool, accepted) on the cover {U, X minus T}, cone criterion inline as elementary, j_! from lem-sc-derived-open-restriction-adjunction-exact, locality of perfectness from def-pc-perfect-complex. C4: statement unchanged and matches what lem-pc-supported-perfect-generator and lem-pc-perfect-generation-open-induction-step use (perfect Rj_*, Rj_*=j_!, E->Rj_*(E|_U) iso). FIX more, RETURN less: (1) B class (d) and false statement: the Second-reading node def-pc-derived-open-extension-by-zero set V=X minus U (not open, W empty) and only stated restriction formulas that Stacks calls immediate from the definition; dropped, Step 2 now cites lem-sc-derived-open-restriction-adjunction-exact (exactness, termwise j_!) with the restrictions folded in, stmt_deps/proof_deps updated. (2) Preflight D1 note: Step 3 quoted 08DP, the item's own tag, as a conclusion; sentence removed, the step now proves it from locality. (3) C5/clarity: Step 1 computed for F then switched to E; rewritten for a general supported G, applied to G=E|_U, with U, V a cover since T subset U, and the cone argument spelled out.; 1 file(s) fixed by the reviewer"
+ }
 }
