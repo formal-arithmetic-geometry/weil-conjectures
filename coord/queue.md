@@ -2,7 +2,7 @@
 
 855 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (383)
+## Stage 1: nodes to split (382)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1015 | none |
 | `lem-weil-pbc-valuation-ring-normal` | 1015 | none |
-| `lem-weil-pbc-complete-local-map-cohen-presentation` | 1016 | none |
 | `lem-weil-pbc-dimension-inequality-quasi-finite` | 1016 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
@@ -390,7 +389,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (472)
+## Stage 2: nodes to state (473)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -483,6 +482,7 @@
 | `lem-weil-pbc-commshift-nattrans-triangle-morphism` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
 | `lem-weil-pbc-complete-local-flat-presentation` | 1 | state |
+| `lem-weil-pbc-complete-local-map-cohen-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
 | `lem-weil-pbc-completion-dimension` | 1 | state |
@@ -867,7 +867,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 401 nodes that wait for stage 1, 869 nodes that wait for a statement dependency.
+Not open yet: 400 nodes that wait for stage 1, 869 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
