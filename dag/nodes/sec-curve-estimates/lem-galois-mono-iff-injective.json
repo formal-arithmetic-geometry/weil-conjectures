@@ -1,0 +1,93 @@
+{
+ "id": "lem-galois-mono-iff-injective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-axioms",
+   "place": "statement and proof, clause 2, first half: 'X→Y is a monomorphism if and only if F(X)→F(Y) is injective'; proof (2): 'X→Y is a monomorphism iff X→X×_YX is an isomorphism; applying the exact functor F ... and axiom (4) transports the conclusion back'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A conservative functor to sets commuting with fibre products detects monomorphisms",
+ "statement": "Let $\\mathcal C$ be a category which has fibre products (pullbacks of pairs of morphisms with common target; [def-galois-finite-limits-colimits]), and let $F:\\mathcal C\\to\\mathbf{Sets}$ be a functor which commutes with fibre products ([def-galois-exact-functor]) and reflects isomorphisms ([def-galois-reflects-isomorphisms]). Then a morphism $f:X\\to Y$ of $\\mathcal C$ is a monomorphism ([def-galois-initial-mono]) if and only if the map $F(f):F(X)\\to F(Y)$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (2), with Categories Lemma 08LR (label lemma-characterize-mono-epi) (1) and Categories Example 003C (label example-mono-epi-sets)"
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-galois-exact-functor",
+  "def-galois-reflects-isomorphisms",
+  "def-galois-initial-mono"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "functor reflecting isomorphisms and preserving pullbacks reflects monomorphisms",
+   "results": "Functor.reflectsMonomorphisms_of_preserves_of_reflects, Functor.mono_of_mono_map, isIso_iff_of_reflects_iso (Mathlib.CategoryTheory.Functor.EpiMono, ReflectsIso.Basic); PreGaloisCategory.FiberFunctor ReflectsMonomorphisms instance (Galois.Basic)",
+   "date": "2026-10-10",
+   "verdict": "generalization: the pieces exist, see grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a conservative functor to sets preserving pullbacks detects monomorphisms: f mono iff F f injective",
+   "results": "ConcreteCategory.mono_iff_injective_of_preservesPullback, injective_of_mono_of_preservesPullback (Mathlib.CategoryTheory.ConcreteCategory.EpiMono); Functor.ReflectsMonomorphisms",
+   "date": "2026-10-10",
+   "verdict": "generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism f : X → Y is a monomorphism iff the diagonal X → X ×_Y X is an isomorphism",
+   "results": "pullback.isIso_diagonal_iff (Limits.Shapes.Diagonal); MorphismProperty.diagonal_isomorphisms; mono_iff_isIso_fst (Limits.EpiMono)",
+   "date": "2026-10-10",
+   "verdict": "the 08LR(1) step of the source proof is in Mathlib"
+  },
+  {
+   "tool": "local_search",
+   "query": "CategoryTheory.reflects_mono_of_reflectsLimit (project root ~/weil-conjectures-slopmaster2)",
+   "results": "CategoryTheory.reflects_mono_of_reflectsLimit, Mathlib/CategoryTheory/Limits/Constructions/EpiMono.lean (index unavailable; name found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Constructions/EpiMono.lean; sed -n 640,650p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Preserves/Basic.lean; grep -n '^theorem mono_iff_injective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Types/Basic.lean",
+   "results": "Constructions/EpiMono.lean:34 preserves_mono_of_preservesLimit (f) [PreservesLimit (cospan f f) F] [Mono f] : Mono (F.map f); :45 reflects_mono_of_reflectsLimit (f) [ReflectsLimit (cospan f f) F] [Mono (F.map f)] : Mono f; Preserves/Basic.lean:647 reflectsLimitsOfShape_of_reflectsIsomorphisms {G} [G.ReflectsIsomorphisms] [HasLimitsOfShape J C] [PreservesLimitsOfShape J G] : ReflectsLimitsOfShape J G; Types/Basic.lean:365 mono_iff_injective (f : X ⟶ Y) : Mono f ↔ Function.Injective f (stacks 003C)",
+   "date": "2026-10-10",
+   "verdict": "match, one Mathlib lemma per direction"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.preserves_mono_of_preservesLimit; CategoryTheory.reflects_mono_of_reflectsLimit; CategoryTheory.Limits.reflectsLimitsOfShape_of_reflectsIsomorphisms; CategoryTheory.mono_iff_injective",
+  "file": "Mathlib/CategoryTheory/Limits/Constructions/EpiMono.lean; Mathlib/CategoryTheory/Limits/Preserves/Basic.lean; Mathlib/CategoryTheory/Types/Basic.lean",
+  "lines": [
+   34,
+   45,
+   647,
+   365
+  ],
+  "how": "one lemma per direction, with F : C ⥤ Type u: (⇒) preserves_mono_of_preservesLimit (Constructions/EpiMono.lean line 34) gives Mono (F.map f), injective by mono_iff_injective (Types/Basic.lean line 365); (⇐) F.map f injective is Mono by mono_iff_injective, F reflects pullbacks by reflectsLimitsOfShape_of_reflectsIsomorphisms (Preserves/Basic.lean line 647, J = WalkingCospan, C has pullbacks and F preserves them), so reflects_mono_of_reflectsLimit (line 45) gives Mono f. Mathlib's 'preserves limits of shape WalkingCospan' is 'commutes with fibre products' of [def-galois-exact-functor]. No Galois-category notion is involved."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-axioms",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

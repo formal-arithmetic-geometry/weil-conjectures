@@ -1,0 +1,74 @@
+{
+ "id": "lem-galois-fpqc-affine-descent-effective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-descent, proof, Step 2 ('effectivity ... By [lem-galois-glue] the P_i glue to a Y-scheme P'), replaced by Stacks 0245 for the fpqc covering {Y' -> Y} (lem-galois-glue needs a Zariski cover)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Descent data on affine morphisms are effective for an fpqc covering $\\{X\\to S\\}$ (Stacks 0245)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] such that the one-member family $\\{f:X\\to S\\}$ is an fpqc covering of $S$ [def-weil-pbc-fpqc-covering]. Let $V\\to X$ be an affine morphism [pqf-def-affine-morphism] and let $\\varphi$ be a descent datum on $V$ over $X/S$ [def-pd-descent-datum]: an isomorphism $\\varphi:\\mathrm{pr}_0^*V\\to\\mathrm{pr}_1^*V$ of schemes over $X_2=X\\times_SX$ [def-pc-fibre-product], where $\\mathrm{pr}_0,\\mathrm{pr}_1:X_2\\to X$ are the projections, satisfying $\\mathrm{pr}_{02}^*\\varphi=\\mathrm{pr}_{12}^*\\varphi\\circ\\mathrm{pr}_{01}^*\\varphi$ over $X\\times_SX\\times_SX$. Then $(V,\\varphi)$ is effective: there are a scheme $U$ with a morphism $U\\to S$ and an isomorphism $\\psi:U\\times_SX\\to V$ of schemes over $X$ such that $\\varphi\\circ\\mathrm{pr}_0^*\\psi=\\mathrm{pr}_1^*\\psi\\circ\\mathrm{can}_U$, where $\\mathrm{can}_U:\\mathrm{pr}_0^*(U\\times_SX)\\to\\mathrm{pr}_1^*(U\\times_SX)$ is the composite of the canonical isomorphisms of both sides with $U\\times_SX_2$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 0245 (lemma-affine, line 9148), for the one-member fpqc covering {X -> S}; its proof (lines 9161-9205) reduces by Lemma Tag 02W3 (lemma-descending-types-morphisms, line 9028) to S, X affine and descends the algebra by Proposition Tag 023N (proposition-descent-module); descent datum as in Definition Tag 023V (line 8101) and Remark 'remark-easier'"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "pqf-def-affine-morphism",
+  "def-pd-descent-datum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "descent datum on affine scheme over faithfully flat cover is effective",
+   "results": "Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine (Morphisms.Flat), HasAffineProperty.descendsAlong_of_affineAnd (Morphisms.Descent), descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact (Morphisms.FlatDescent), Scheme.AffineCover: descent of properties, no effectivity of descent data",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "schemes affine over the base form a stack for the fpqc topology: descent data for affine morphisms are effective",
+   "results": "ExistsHomHomCompEqCompAux.* (AffineTransitionLimit), HasAffineProperty.descendsAlong_of_affineAnd, instCategoryAffineScheme: unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsStack' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'IsAffineHom' ~/weil-conjectures-slopmaster2/WeilConjectures | grep -i 'descent\\|effective'",
+   "results": "IsStack only in Mathlib/CategoryTheory/Sites/Descent/{IsStack,Precoverage}.lean (abstract), no instance for schemes; slopmaster2 WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:54 IsAffineHom.descendsAlong_surjective_inf_flat_inf_quasicompact (Stacks 02L5: the property 'affine' descends, not effectivity); WeilConjectures/AlgebraicGeometry/Modules/DescentEffective.lean effectivity for quasi-coherent modules only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

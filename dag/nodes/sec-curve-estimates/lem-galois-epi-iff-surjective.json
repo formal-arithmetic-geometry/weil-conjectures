@@ -1,0 +1,86 @@
+{
+ "id": "lem-galois-epi-iff-surjective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-axioms",
+   "place": "statement and proof, clause 2, second half: 'and an epimorphism if and only if F(X)→F(Y) is surjective'; proof (2): 'Dually for epimorphisms, using Y⊔_XY→Y'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A conservative functor to sets commuting with pushouts detects epimorphisms",
+ "statement": "Let $\\mathcal C$ be a category which has pushouts (of pairs of morphisms with common source; [def-galois-finite-limits-colimits]), and let $F:\\mathcal C\\to\\mathbf{Sets}$ be a functor which commutes with pushouts ([def-galois-exact-functor]) and reflects isomorphisms ([def-galois-reflects-isomorphisms]). Then a morphism $f:X\\to Y$ of $\\mathcal C$ is an epimorphism ([def-galois-epi-final]) if and only if the map $F(f):F(X)\\to F(Y)$ is surjective.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (3), with Categories Lemma 08LR (label lemma-characterize-mono-epi) (2) and Categories Example 003C (label example-mono-epi-sets)"
+ },
+ "stmt_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-galois-exact-functor",
+  "def-galois-reflects-isomorphisms",
+  "def-galois-epi-final"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "functor reflecting isomorphisms and preserving pushouts reflects epimorphisms",
+   "results": "ReflectsEpimorphisms.mk, reflectsEpimorphisms_of_reflectsColimitsOfShape (Mathlib.CategoryTheory.Limits.Constructions.EpiMono), Functor.epi_map_iff_epi, reflectsEpimorphisms_of_faithful (Mathlib.CategoryTheory.Functor.EpiMono)",
+   "date": "2026-10-10",
+   "verdict": "generalization: the pieces exist, see grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a conservative functor to sets preserving pushouts detects epimorphisms: f epi iff F f surjective",
+   "results": "ConcreteCategory.epi_iff_surjective_of_preservesPushout, surjective_of_epi_of_preservesPushout (Mathlib.CategoryTheory.ConcreteCategory.EpiMono); Functor.map_epi",
+   "date": "2026-10-10",
+   "verdict": "generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism f : X → Y is an epimorphism iff the codiagonal pushout Y ⊔_X Y → Y is an isomorphism, iff the two pushout inclusions are equal",
+   "results": "isIso_inl_of_epi, isIso_inr_of_epi (Limits.Shapes.Pullback.Mono); epi_iff_isIso_inl (Limits.EpiMono); IsPushout.isIso_inl_iso_of_epi",
+   "date": "2026-10-10",
+   "verdict": "the 08LR(2) step of the source proof is in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Constructions/EpiMono.lean; sed -n 750,758p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Preserves/Basic.lean; grep -n '^theorem epi_iff_surjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Types/Basic.lean",
+   "results": "Constructions/EpiMono.lean:56 preserves_epi_of_preservesColimit (f) [PreservesColimit (span f f) F] [Epi f] : Epi (F.map f); :67 reflects_epi_of_reflectsColimit (f) [ReflectsColimit (span f f) F] [Epi (F.map f)] : Epi f; Preserves/Basic.lean:754 reflectsColimitsOfShape_of_reflectsIsomorphisms {G} [G.ReflectsIsomorphisms] [HasColimitsOfShape J C] [PreservesColimitsOfShape J G] : ReflectsColimitsOfShape J G; Types/Basic.lean:391 epi_iff_surjective (f : X ⟶ Y) : Epi f ↔ Function.Surjective f (stacks 003C)",
+   "date": "2026-10-10",
+   "verdict": "match, one Mathlib lemma per direction"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.preserves_epi_of_preservesColimit; CategoryTheory.reflects_epi_of_reflectsColimit; CategoryTheory.Limits.reflectsColimitsOfShape_of_reflectsIsomorphisms; CategoryTheory.epi_iff_surjective",
+  "file": "Mathlib/CategoryTheory/Limits/Constructions/EpiMono.lean; Mathlib/CategoryTheory/Limits/Preserves/Basic.lean; Mathlib/CategoryTheory/Types/Basic.lean",
+  "lines": [
+   56,
+   67,
+   754,
+   391
+  ],
+  "how": "one lemma per direction, with F : C ⥤ Type u: (⇒) preserves_epi_of_preservesColimit (Constructions/EpiMono.lean line 56) gives Epi (F.map f), surjective by epi_iff_surjective (Types/Basic.lean line 391); (⇐) F.map f surjective is Epi by epi_iff_surjective, F reflects pushouts by reflectsColimitsOfShape_of_reflectsIsomorphisms (Preserves/Basic.lean line 754, J = WalkingSpan, C has pushouts and F preserves them), so reflects_epi_of_reflectsColimit (line 67) gives Epi f. No Galois-category notion is involved."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-axioms",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

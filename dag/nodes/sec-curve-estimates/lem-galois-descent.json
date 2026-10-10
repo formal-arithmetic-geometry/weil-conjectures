@@ -3,40 +3,146 @@
  "blueprint": {
   "is": "lem-galois-descent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Effective etale descent for finite etale morphisms",
- "statement": "Let $Y'\\to Y$ be a surjective etale morphism with $Y'=\\coprod_iY_i$,\nand put $Y''=Y'\\times_YY'$, $Y'''=Y'\\times_YY'\\times_YY'$. Then the\ncategory of finite etale $Y$-schemes is equivalent to the category of\nfinite etale $Y'$-schemes $P'$ endowed with a descent datum, i.e. an\nisomorphism $\\varphi:p_1^*P'\\cong p_2^*P'$ over $Y''$ satisfying\n$p_{13}^*\\varphi=p_{23}^*\\varphi\\circ p_{12}^*\\varphi$ over $Y'''$.",
+ "statement": "Let $g:Y'\\to Y$ be a surjective [def-weil-surjective-morphism] etale [def-weil-etale-morphism] morphism of schemes [def-pc-scheme] (for instance $Y'=\\coprod_iY_i$ for an etale covering $\\{Y_i\\to Y\\}$), and put $Y''=Y'\\times_YY'$, $Y'''=Y'\\times_YY'\\times_YY'$ (fibre products [def-pc-fibre-product]) with projections $p_1,p_2:Y''\\to Y'$ and $p_{12},p_{13},p_{23}:Y'''\\to Y''$. Let $\\mathsf{DD}$ be the category whose objects are pairs $(P',\\varphi)$ of a finite etale $Y'$-scheme $P'$ [def-weil-pbc-finite-etale-category] and a descent datum on $P'$ over $Y'/Y$ [def-pd-descent-datum], i.e. an isomorphism $\\varphi:p_1^*P'\\cong p_2^*P'$ of schemes over $Y''$ satisfying $p_{13}^*\\varphi=p_{23}^*\\varphi\\circ p_{12}^*\\varphi$ over $Y'''$, and whose morphisms $(P',\\varphi)\\to(Q',\\chi)$ are the $Y'$-morphisms $\\beta:P'\\to Q'$ with $\\chi\\circ p_1^*\\beta=p_2^*\\beta\\circ\\varphi$. For a finite etale $Y$-scheme $P$ let $\\mathrm{can}_P:p_1^*(P\\times_YY')\\to p_2^*(P\\times_YY')$ be the composite of the canonical isomorphisms of both sides with $P\\times_YY''$ (they exist since $g\\circ p_1=g\\circ p_2$). Then the functor $\\mathsf{FEt}(Y)\\to\\mathsf{DD}$, $P\\mapsto(P\\times_YY',\\mathrm{can}_P)$, $\\alpha\\mapsto\\alpha\\times_YY'$, is an equivalence of categories: the category of finite etale $Y$-schemes is equivalent to the category of finite etale $Y'$-schemes endowed with a descent datum.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-descent.md",
   "place": "node lem-galois-descent, order 964"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-surjective-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-finite-etale-category",
+  "def-pd-descent-datum"
+ ],
  "proof": [
   {
-   "text": "Step 1: full faithfulness. For objects $P,Q$ of\n$\\mathrm{F\\acute Et}(Y)$ as in [def-galois-categories], i.e. finite etale $Y$-schemes in the conventions of\n[def-weil-pbc-scheme-conventions], the diagram\n\n$$\n\\operatorname{Hom}_Y(P,Q)\\to\\operatorname{Hom}_{Y'}(P',Q')\n\\rightrightarrows\\operatorname{Hom}_{Y''}(P'',Q'')\n$$\n\nis exact: a $Y'$-morphism compatible with the descent data descends,\nbecause its graph $\\Gamma\\subseteq P'\\times_{Y'}Q'$ is a closed subscheme\nwhose two pullbacks to $Y''$ agree and closed subschemes are determined\nby their pullback along the surjective flat $Y''\\to Y'$ — affine-locally\nthis is the exactness of $A\\to A'\\rightrightarrows A''$ for faithfully\nflat $A\\to A'$.\nStep 2: effectivity. Write $P_i=P'\\times_{Y'}Y_i$, finite etale over\n$Y_i$. The datum gives isomorphisms\n$\\varphi_{ij}:P_i\\times_YY_j\\to P_j\\times_YY_i$, and its cocycle condition\nover $Y'''$ implies the cocycle condition over\n$Y_i\\times_YY_j\\times_YY_k$ by Step 1 applied over the relevant double\nintersection. By [lem-galois-glue] the $P_i$ glue to a $Y$-scheme\n$P$ with $P\\times_YY_i\\cong P_i$.\nStep 3: $P\\to Y$ is finite etale. Both properties are Zariski-local on\nthe target and hold after the base change $Y_i\\to Y$; since the $Y_i$\ncover $Y$, the morphism $P\\to Y$ is finite and etale. Step 4: the\nconstruction is inverse to base change by Steps 1–3.",
+   "text": "Step 1 ($\\{g\\}$ is an fpqc covering). Since $g$ is etale, $(Y',g)$ is an object of the small etale site $Y_{\\Et}$ [def-weil-pbc-etale-site]; since $g$ is surjective [def-weil-surjective-morphism], the one-member family $\\{g:Y'\\to Y\\}$ is jointly surjective, hence a covering family of $Y$ in $Y_{\\Et}$. By [lem-weil-pbc-fpqc-finer-than-etale] it is an fpqc covering of $Y$ [def-weil-pbc-fpqc-covering].",
    "uses": [
-    "def-galois-categories",
-    "def-weil-pbc-scheme-conventions",
-    "lem-galois-glue"
+    "def-weil-pbc-etale-site",
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "def-weil-pbc-fpqc-covering"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Topologies, Lemma Tag 022C (lemma-zariski-etale-smooth-syntomic-fppf-fpqc, line 3044): an etale covering is an fpqc covering"
+   }
+  },
+  {
+   "text": "Step 2 (the functor). For $P\\in\\mathsf{FEt}(Y)$, $P'=P\\times_YY'$ is a finite etale $Y'$-scheme and $\\alpha\\mapsto\\alpha\\times_YY'$ is the base change functor $g^*:\\mathsf{FEt}(Y)\\to\\mathsf{FEt}(Y')$ [def-weil-pbc-finite-etale-category]. By the universal property of fibre products [def-pc-fibre-product], $p_k^*P'=(P\\times_YY')\\times_{Y',p_k}Y''$ is canonically isomorphic to $P\\times_YY''$ over $Y''$ for $k=1,2$, because $g\\circ p_1=g\\circ p_2$; so $\\mathrm{can}_P$ is an isomorphism over $Y''$. Pulled back along $p_{12},p_{13},p_{23}$, each of the three isomorphisms becomes the composite of the canonical identifications with $P\\times_YY'''$, so $p_{13}^*\\mathrm{can}_P=p_{23}^*\\mathrm{can}_P\\circ p_{12}^*\\mathrm{can}_P$: $(P',\\mathrm{can}_P)$ is a descent datum [def-pd-descent-datum]. For a $Y$-morphism $\\alpha:P\\to Q$, both $\\mathrm{can}_Q\\circ p_1^*(\\alpha\\times_YY')$ and $p_2^*(\\alpha\\times_YY')\\circ\\mathrm{can}_P$ correspond under these identifications to $\\alpha\\times_YY''$, so $\\alpha\\times_YY'$ is a morphism of $\\mathsf{DD}$; functoriality is that of $g^*$.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category",
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Definition Tag 023V (definition-descent-datum, line 8101) and Remark 'remark-easier' (pr_0^*V -> pr_1^*V, cocycle pr_02^* = pr_12^* o pr_01^*); the canonical datum on a base change"
+   }
+  },
+  {
+   "text": "Step 3 (fully faithful). Morphisms in $\\mathsf{FEt}(Y)$ are all $Y$-morphisms, and morphisms in $\\mathsf{DD}$ are all $Y'$-morphisms compatible with the data. Apply [lem-galois-fpqc-morphisms-descend] to the fpqc covering $\\{g:Y'\\to Y\\}$ of Step 1 (with $S=Y$, $X=Y'$, $X_2=Y''$, $\\mathrm{pr}_0=p_1$, $\\mathrm{pr}_1=p_2$) and to $U=P$, $W=Q$ for $P,Q\\in\\mathsf{FEt}(Y)$: the map $\\alpha\\mapsto\\alpha\\times_YY'$ is a bijection from $\\operatorname{Hom}_Y(P,Q)$ onto the $Y'$-morphisms $\\beta:P\\times_YY'\\to Q\\times_YY'$ with $\\mathrm{can}_Q\\circ p_1^*\\beta=p_2^*\\beta\\circ\\mathrm{can}_P$, which is $\\operatorname{Hom}_{\\mathsf{DD}}((P\\times_YY',\\mathrm{can}_P),(Q\\times_YY',\\mathrm{can}_Q))$. So the functor of Step 2 is fully faithful.",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02W0 (lemma-refine-coverings-fully-faithful, line 8858), last sentence"
+   }
+  },
+  {
+   "text": "Step 4 (effectivity). Let $(P',\\varphi)\\in\\mathsf{DD}$. The morphism $P'\\to Y'$ is finite, hence affine [pqf-def-affine-morphism], since a finite morphism is by definition affine with finite ring maps over affine opens [def-weil-finite-integral-morphism]. By [lem-galois-fpqc-affine-descent-effective], applied to the fpqc covering $\\{g:Y'\\to Y\\}$ of Step 1 and to $V=P'$ with the descent datum $\\varphi$, there are a scheme $P$ with a morphism $P\\to Y$ and an isomorphism $\\psi:P\\times_YY'\\to P'$ of $Y'$-schemes with $\\varphi\\circ p_1^*\\psi=p_2^*\\psi\\circ\\mathrm{can}_P$.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "def-weil-finite-integral-morphism",
+    "lem-galois-fpqc-affine-descent-effective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 0245 (lemma-affine, line 9148)"
+   }
+  },
+  {
+   "text": "Step 5 ($P$ is finite etale over $Y$). The base change $P\\times_YY'\\to Y'$ of $P\\to Y$ along $g$ is the composite of the isomorphism $\\psi$ with the finite etale $P'\\to Y'$. It is finite: the preimage of an affine open $W\\subseteq Y'$ is $\\psi^{-1}$ of its (affine) preimage in $P'$, with the same ring map up to the isomorphism $\\psi^\\sharp$ [def-weil-finite-integral-morphism]; and it is etale, since flatness, unramifiedness and local finite presentation are read on local rings and affine charts, which $\\psi$ identifies [def-weil-etale-morphism]. By [lem-weil-pbc-fpqc-descend-finite] for the fpqc covering $\\{g\\}$ (one index), $P\\to Y$ is finite; by [lem-galois-fpqc-descend-etale] for the same covering, $P\\to Y$ is etale. So $P\\in\\mathsf{FEt}(Y)$ [def-weil-pbc-finite-etale-category], and by Step 4 $\\psi$ is an isomorphism $(P\\times_YY',\\mathrm{can}_P)\\cong(P',\\varphi)$ in $\\mathsf{DD}$ (its inverse is compatible because $\\psi$ is). Hence the functor of Step 2 is essentially surjective.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-galois-fpqc-descend-etale",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02LA (lemma-descending-property-finite, line 6102) and Lemma Tag 02VN (lemma-descending-property-etale, line 6209), direction '<=' of Definition Tag 02KO (line 5310)"
+   }
+  },
+  {
+   "text": "Step 6 (equivalence). A functor that is fully faithful (Step 3) and essentially surjective (Step 5) is an equivalence of categories: choosing for each object $(P',\\varphi)$ of $\\mathsf{DD}$ a $P$ and an isomorphism $\\psi$ as in Steps 4-5 defines on objects a quasi-inverse, which full faithfulness makes a functor with the $\\psi$ as natural isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-descent.md",
+    "place": "## Proof, Step 4 ('the construction is inverse to base change by Steps 1-3')"
+   }
   }
  ],
  "proof_deps": [
-  "def-galois-categories",
-  "def-weil-pbc-scheme-conventions",
-  "lem-galois-glue"
+  "def-weil-pbc-etale-site",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-finite-etale-category",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "lem-galois-fpqc-morphisms-descend",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-galois-fpqc-affine-descent-effective",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-galois-fpqc-descend-etale"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-descent.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent: Lemma Tag 02W0 (line 8858, full faithfulness), Lemma Tag 0245 (line 9148, effectivity for affine morphisms), Lemmas Tag 02LA (line 6102) and 02VN (line 6209, finite and etale descend), with Topologies Lemma Tag 022C (topologies.tex line 3044, etale coverings are fpqc coverings); the route named in the lead_note of 2026-10-10"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite étale schemes descend along surjective étale morphism, equivalence with descent data",
+   "results": "AlgebraicGeometry.IsEtale, Scheme.Etale (Morphisms.Etale), Pseudofunctor.isEquivalence_toDescentData (Sites.Descent.IsStack, abstract: needs IsStack), DescentData.exists_equivalence_of_sieve_eq, isEquivalence_toDescentData_iff_of_sieve_eq",
+   "date": "2026-10-10",
+   "verdict": "no match (abstract framework; no stack instance for (finite etale) schemes)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.Etale",
+   "results": "instDescendsAlongSchemeEtaleMinMorphismPropertySurjectiveFlatQuasiCompact (Morphisms.LocalFlatDescent): descent of the property only",
+   "date": "2026-10-10",
+   "verdict": "no match (property descent, not effectivity)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsStack' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'galois-descent' ~/weil-conjectures-slopmaster2/WeilConjectures ~/weil-conjectures-slopmaster2/Comparator",
+   "results": "IsStack only in CategoryTheory/Sites/Descent/{IsStack,Precoverage}.lean (abstract); no node id in slopmaster2; the scheme descent declarations of slopmaster2 (AlgebraicGeometry/EffectiveDescent.lean: isEffective_of_isFinite, existsUnique_hom_of_isPullback) are bare sorry and for finite locally free / quasi-compact p",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "blueprint_kind": "lemma",
  "blueprint_order": 964,
@@ -67,5 +173,12 @@
  },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
- "lead_note": "2026-10-10 L: unreached from the target since the split of thm-galois-lc-etale (11:44) replaced the blueprint's descent/gluing argument by Yoneda and 03RV; flagged unreachable, leaves the queue; reached again if a citer appears. 2026-10-10 L: reached again at 11:52 through lem-galois-flc-representable; flag removed. Its imported proof glues with lem-galois-glue (Zariski) along an etale cover: wrong; the split should use 0245 (effective descent of affine morphisms), 02LA and 02VN (worker of lem-galois-flc-representable)."
+ "lead_note": "2026-10-10 L: unreached from the target since the split of thm-galois-lc-etale (11:44) replaced the blueprint's descent/gluing argument by Yoneda and 03RV; flagged unreachable, leaves the queue; reached again if a citer appears. 2026-10-10 L: reached again at 11:52 through lem-galois-flc-representable; flag removed. Its imported proof glues with lem-galois-glue (Zariski) along an etale cover: wrong; the split should use 0245 (effective descent of affine morphisms), 02LA and 02VN (worker of lem-galois-flc-representable).",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-descent",
+  "worker": "stage1",
+  "summary": "The imported proof is wrong: Step 2 glues the P_i with lem-galois-glue, whose hypothesis is a Zariski cover, but the Y_i -> Y are only etale (Y = Spec k, Y' = Spec k' for a finite separable k'/k: Y' is not an open of Y and nothing is glued), and Step 3 uses that finite etale is Zariski-local on the target, again for a non-Zariski cover. Re-split along Stacks as the lead_note says (tags 022C, 02W0, 0241, 0245, 02W3, 023N, 02LA, 02VN, 02KO, 023V verified in tags/tags; the lemmas read in descent.tex and topologies.tex): (1) {Y' -> Y} is an fpqc covering (lem-weil-pbc-fpqc-finer-than-etale); (2) the functor P |-> (P x_Y Y', can_P), written out; (3) full faithfulness by 02W0 (new lem-galois-fpqc-morphisms-descend); (4) effectivity by 0245 (new lem-galois-fpqc-affine-descent-effective), finite => affine by definition; (5) P -> Y finite by 02LA (existing lem-weil-pbc-fpqc-descend-finite) and etale by 02VN (new lem-galois-fpqc-descend-etale); (6) fully faithful + essentially surjective => equivalence. Statement made precise without changing its content: it now names the functor (base change with the canonical datum, which the citer lem-galois-flc-representable uses), the morphisms of descent data, and cites its definition nodes (stmt_deps was empty). No slopmaster2 declaration states the item or the new nodes (searched by id, by names, by 'descent'/'Effective'/'IsAffineHom').",
+  "blueprint": "Blueprint proof of lem-galois-descent: its Step 1 (full faithfulness via faithfully flat descent of the graph) is realized by steps 1 and 3 (02W0); its Step 2 (effectivity by gluing with lem-galois-glue) is replaced, the gluing being invalid for an etale cover, by steps 1 and 4 (0245); its Step 3 (finite etale is local on the target) by step 5 (02LA, 02VN for the fpqc covering instead of Zariski locality); its Step 4 (inverse to base change) by steps 2 and 6."
+ }
 }

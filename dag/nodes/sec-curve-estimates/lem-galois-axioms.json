@@ -3,36 +3,186 @@
  "blueprint": {
   "is": "lem-galois-axioms",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Consequences of the axioms",
- "statement": "Let $(\\mathcal C,F)$ be a Galois category. Then:\n\n1. $F$ is faithful;\n1. $X\\to Y$ is a monomorphism if and only if $F(X)\\to F(Y)$ is\ninjective, and an epimorphism if and only if $F(X)\\to F(Y)$ is\nsurjective;\n1. an object is initial if and only if its image under $F$ is empty,\nand final if and only if its image is a singleton;\n1. every morphism between connected objects is an epimorphism;\n1. if $X$ is connected and $a,b:X\\to Y$ agree on one element of\n$F(X)$, then $a=b$;\n1. for connected $X$ and $s\\in F(X)$ the map\n$\\operatorname{Aut}(X)\\to F(X)$, $g\\mapsto F(g)(s)$, is injective, so\n$\\#\\operatorname{Aut}(X)\\le\\#F(X)$; $X$ is *Galois* if equality\nholds, equivalently if $\\operatorname{Aut}(X)$ acts transitively on\n$F(X)$;\n1. if $X=\\coprod_iX_i$ and $Y=\\coprod_jY_j$ with connected $X_i$,\n$Y_j$, then every morphism $X\\to Y$ is given by a map of index sets\n$\\alpha$ with components $X_i\\to Y_{\\alpha(i)}$.",
+ "statement": "Let $(\\mathcal C,F)$ be a Galois category [def-galois-category]. Then:\n\n1. $F$ is faithful;\n1. $X\\to Y$ is a monomorphism [def-galois-initial-mono] if and only if $F(X)\\to F(Y)$ is\ninjective, and an epimorphism [def-galois-epi-final] if and only if $F(X)\\to F(Y)$ is\nsurjective;\n1. an object is initial [def-galois-initial-mono] if and only if its image under $F$ is empty,\nand final [def-galois-epi-final] if and only if its image is a singleton;\n1. every morphism between connected objects [def-galois-connected-object] is an epimorphism;\n1. if $X$ is connected and $a,b:X\\to Y$ agree on one element of\n$F(X)$, then $a=b$;\n1. for connected $X$ and $s\\in F(X)$ the map\n$\\operatorname{Aut}(X)\\to F(X)$, $g\\mapsto F(g)(s)$, is injective, so\n$\\#\\operatorname{Aut}(X)\\le\\#F(X)$; $X$ is *Galois* if equality\nholds, equivalently if $\\operatorname{Aut}(X)$ acts transitively on\n$F(X)$;\n1. if $X=\\coprod_iX_i$ and $Y=\\coprod_jY_j$ are finite coproducts [def-galois-finite-coproduct] with connected $X_i$,\n$Y_j$, then every morphism $X\\to Y$ is given by a map of index sets\n$\\alpha$ with components $X_i\\to Y_{\\alpha(i)}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-axioms.md",
   "place": "node lem-galois-axioms, order 970"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-galois-category",
+  "def-galois-initial-mono",
+  "def-galois-epi-final",
+  "def-galois-connected-object",
+  "def-galois-finite-coproduct"
+ ],
  "proof": [
   {
-   "text": "(1) Throughout, $(\\mathcal C,F)$ is a Galois category in the sense of\n[def-galois-category] and the axioms referred to are those of that\ndefinition. If $F(a)=F(b)$ for $a,b:X\\to Y$, the equalizer $E\\to X$ satisfies\n$F(E)=F(X)$, so $E\\to X$ is an isomorphism by axiom (4) and $a=b$.\n(2) $X\\to Y$ is a monomorphism iff $X\\to X\\times_YX$ is an\nisomorphism; applying the exact functor $F$ turns this into\n$F(X)\\to F(X)\\times_{F(Y)}F(X)$, which is an isomorphism iff\n$F(X)\\to F(Y)$ is injective, and axiom (4) transports the conclusion\nback. Dually for epimorphisms, using $Y\\amalg_XY\\to Y$.\n(3) The initial object has empty image; conversely if $F(X)=\\emptyset$\nthe unique morphism from the initial object induces a bijection under $F$,\nhence is an isomorphism by axiom (4). Dually for the final object.\n(4) For a morphism $X\\to Y$ of connected objects the image $Z\\subseteq Y$, the equalizer of $Y\\rightrightarrows Y\\amalg_XY$, satisfies\n$F(Z)\\neq\\emptyset$ because $F(X)\\to F(Z)$ is surjective and\n$F(X)\\neq\\emptyset$; hence $Z=Y$ by connectedness of $Y$.\n(5) The equalizer $E\\to X$ of $a,b$ is initial or all of $X$ by\nconnectedness, and $F(E)\\subseteq F(X)$ is the set on which $F(a)$ and\n$F(b)$ agree.\n(6) Apply (5) to $a=g$, $b=\\operatorname{id}_X$: if $F(g)(s)=s$ then\n$g=\\operatorname{id}_X$. Hence $g\\mapsto F(g)(s)$ is injective and\n$\\#\\operatorname{Aut}(X)\\le\\#F(X)$; if the action is transitive the map is\nalso surjective, so equality holds.\n(7) For each $i,j$ the projection $E_{ij}=X_i\\times_YY_j\\to X_i$ is a\nmonomorphism, hence an isomorphism for exactly one $j$ (the one whose\n$F(Y_j)$ meets the image of $F(X_i)\\to F(Y)$) and has initial source for\nall others, by connectedness of $X_i$.",
+   "text": "*Clause (1): $F$ is faithful.* Let $a,b:X\\to Y$ with $F(a)=F(b)$. By axiom (1) of [def-galois-category] ([def-galois-finite-limits-colimits]) the equalizer $e:E\\to X$ of $a,b$ exists. By axiom (4) $F$ is exact ([def-galois-exact-functor]), so $F(e):F(E)\\to F(X)$ is an equalizer of $F(a),F(b)$ in $\\mathbf{Sets}$, i.e. a bijection of $F(E)$ onto $\\{t\\in F(X):F(a)(t)=F(b)(t)\\}=F(X)$. As $F$ reflects isomorphisms ([def-galois-reflects-isomorphisms]), $e$ is an isomorphism; then $a\\circ e=b\\circ e$ gives $a=b$ after composing with $e^{-1}$.",
+   "uses": [
+    "def-galois-category",
+    "def-galois-finite-limits-colimits",
+    "def-galois-exact-functor",
+    "def-galois-reflects-isomorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (1)"
+   }
+  },
+  {
+   "text": "*Clause (2): monomorphisms and epimorphisms.* By axiom (1) of [def-galois-category], $\\mathcal C$ has fibre products and pushouts (finite limits and colimits, [def-galois-finite-limits-colimits]); by axiom (4), $F$ commutes with them ($F$ exact, [def-galois-exact-functor]) and reflects isomorphisms ([def-galois-reflects-isomorphisms]). So [lem-galois-mono-iff-injective] applies to $F$ and gives: $f:X\\to Y$ is a monomorphism iff $F(f)$ is injective (Stacks' argument: $F$ carries the diagonal $X\\to X\\times_YX$ to $F(X)\\to F(X)\\times_{F(Y)}F(X)$); and [lem-galois-epi-iff-surjective] applies and gives: $f$ is an epimorphism iff $F(f)$ is surjective (Stacks: $F$ carries $Y\\amalg_XY\\to Y$ to $F(Y)\\amalg_{F(X)}F(Y)\\to F(Y)$).",
+   "uses": [
+    "def-galois-category",
+    "def-galois-finite-limits-colimits",
+    "def-galois-exact-functor",
+    "def-galois-reflects-isomorphisms",
+    "lem-galois-mono-iff-injective",
+    "lem-galois-epi-iff-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proofs of (2) and (3)"
+   }
+  },
+  {
+   "text": "*Clause (3): initial and final objects.* By axiom (1) of [def-galois-category] the empty diagram has a colimit $A$ and a limit $Z$ in $\\mathcal C$ ([def-galois-finite-limits-colimits]); $A$ is initial and $Z$ is final ([def-galois-initial-mono], [def-galois-epi-final]). $F$ is exact ([def-galois-exact-functor]), so $F(A)$ is a colimit of the empty diagram in $\\mathbf{Sets}$, i.e. $F(A)=\\emptyset$, and $F(Z)$ is a limit of the empty diagram, i.e. a singleton. An initial (final) object $X$ is isomorphic to $A$ (to $Z$), so $F(X)$ is empty (a singleton). Conversely, if $F(X)=\\emptyset$, the unique morphism $A\\to X$ is carried to the bijection $\\emptyset\\to\\emptyset$, so it is an isomorphism because $F$ reflects isomorphisms ([def-galois-reflects-isomorphisms]), and $X\\cong A$ is initial. If $F(X)$ is a singleton, the unique morphism $X\\to Z$ is carried to a map between singletons, a bijection, so $X\\to Z$ is an isomorphism and $X$ is final. In particular (used below): an object $W$ with $F(W)\\neq\\emptyset$ is not initial, and a connected object $X$ ([def-galois-connected-object]), being not initial, has $F(X)\\neq\\emptyset$.",
+   "uses": [
+    "def-galois-category",
+    "def-galois-finite-limits-colimits",
+    "def-galois-initial-mono",
+    "def-galois-epi-final",
+    "def-galois-exact-functor",
+    "def-galois-reflects-isomorphisms",
+    "def-galois-connected-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proofs of (4) and (5)"
+   }
+  },
+  {
+   "text": "*Clause (4): a morphism $f:X\\to Y$ between connected objects is an epimorphism.* Let $i_1,i_2:Y\\to Y\\amalg_XY$ be the coprojections of the pushout of $f$ along $f$ and $e:E\\to Y$ the equalizer of $i_1,i_2$ (both exist by axiom (1) of [def-galois-category], [def-galois-finite-limits-colimits]). An equalizer morphism is a monomorphism ([def-galois-initial-mono]): two morphisms $u,v:W\\to E$ with $e\\circ u=e\\circ v$ are both the unique factorization of $e\\circ u$ through $e$. Since $i_1\\circ f=i_2\\circ f$, $f$ factors as $f=e\\circ g$ with $g:X\\to E$. $X$ is connected, so $F(X)\\neq\\emptyset$ (step 3), hence $F(E)\\supseteq F(g)(F(X))$ is nonempty and $E$ is not initial (step 3). As $Y$ is connected ([def-galois-connected-object]) and $e$ is a monomorphism with non-initial source, $e$ is an isomorphism. From $i_1\\circ e=i_2\\circ e$ we get $i_1=i_2$, and [lem-galois-epi-iff-cokernel-pair] gives that $f$ is an epimorphism.",
+   "uses": [
+    "def-galois-category",
+    "def-galois-finite-limits-colimits",
+    "def-galois-initial-mono",
+    "def-galois-connected-object",
+    "lem-galois-epi-iff-cokernel-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (6)"
+   }
+  },
+  {
+   "text": "*Clause (5): if $X$ is connected and $a,b:X\\to Y$ satisfy $F(a)(s)=F(b)(s)$ for one $s\\in F(X)$, then $a=b$.* Let $e:E\\to X$ be the equalizer of $a,b$ (axiom (1) of [def-galois-category], [def-galois-finite-limits-colimits]); it is a monomorphism (as in step 4). $F$ is exact ([def-galois-exact-functor]), so $F(e)$ maps $F(E)$ bijectively onto $\\{t\\in F(X):F(a)(t)=F(b)(t)\\}$, which contains $s$. Hence $F(E)\\neq\\emptyset$ and $E$ is not initial (step 3). As $X$ is connected ([def-galois-connected-object]), $e$ is an isomorphism, and $a\\circ e=b\\circ e$ gives $a=b$.",
+   "uses": [
+    "def-galois-category",
+    "def-galois-finite-limits-colimits",
+    "def-galois-exact-functor",
+    "def-galois-connected-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (7) (label item-one-element)"
+   }
+  },
+  {
+   "text": "*Clause (6): automorphisms of a connected object.* Let $X$ be connected and $s\\in F(X)$ (such $s$ exist, step 3). If $g,h\\in\\operatorname{Aut}(X)$ satisfy $F(g)(s)=F(h)(s)$, then $g=h$ by step 5 applied to $g,h:X\\to X$; so $g\\mapsto F(g)(s)$ is injective and $\\#\\operatorname{Aut}(X)\\le\\#F(X)$, a finite number by axiom (3) of [def-galois-category]. Since $F(X)$ is finite, the injective map $g\\mapsto F(g)(s)$ is bijective iff $\\#\\operatorname{Aut}(X)=\\#F(X)$; it is surjective iff the orbit of $s$ under $\\operatorname{Aut}(X)$ (acting through $g\\mapsto F(g)$) is all of $F(X)$, i.e. iff $\\operatorname{Aut}(X)$ acts transitively on $F(X)$. So equality holds iff the action is transitive, which is the stated equivalence in the definition of a Galois object.",
    "uses": [
     "def-galois-category"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), paragraph after the proof ('By the lemma above we see that ... the automorphism group Aut(X) has order at most |F(X)| ... We say X is Galois if equality holds. Equivalently, X is Galois if it is connected and Aut(X) acts transitively on F(X)')"
+   }
+  },
+  {
+   "text": "*Clause (7): morphisms between coproducts of connected objects* are given by a map of index sets and morphisms of the components: this is [lem-galois-coproduct-morphism-components].",
+   "uses": [
+    "lem-galois-coproduct-morphism-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), item (8) and proof of (8)"
+   }
   }
  ],
  "proof_deps": [
-  "def-galois-category"
+  "def-galois-category",
+  "def-galois-finite-limits-colimits",
+  "def-galois-exact-functor",
+  "def-galois-reflects-isomorphisms",
+  "lem-galois-mono-iff-injective",
+  "lem-galois-epi-iff-surjective",
+  "def-galois-initial-mono",
+  "def-galois-epi-final",
+  "def-galois-connected-object",
+  "lem-galois-epi-iff-cokernel-pair",
+  "lem-galois-coproduct-morphism-components"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-axioms.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono) and its proof, and the paragraph after it (Galois objects); with Categories, Lemma 08LR and Example 003C (literature/stacks-project/categories.tex)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fiber functor of Galois category: morphism is mono iff injective on fibers",
+   "results": "PreGaloisCategory.FiberFunctor ReflectsMonomorphisms instance, FiberFunctor.preservesEpis, FiberFunctor Faithful instance, FiberFunctor.reflectsIsos, surjective_on_fiber_of_epi (Mathlib.CategoryTheory.Galois.Basic); functorToAction ReflectsMonomorphisms (Galois.Action)",
+   "date": "2026-10-10",
+   "verdict": "counterparts for Mathlib's PreGaloisCategory + FiberFunctor only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois category fiber functor faithful, initial iff fiber empty, terminal iff fiber singleton",
+   "results": "FiberFunctor Faithful instance, initial_iff_fiber_empty, not_initial_iff_fiber_nonempty (Galois.Basic); functorToAction Faithful (Galois.Action)",
+   "date": "2026-10-10",
+   "verdict": "counterparts for Mathlib's notion; no terminal-iff-singleton lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "morphism between connected objects in a Galois category is an epimorphism",
+   "results": "PreGaloisCategory.epi_of_nonempty_of_isConnected, IsConnected.noTrivialComponent, surjective_on_fiber_of_epi (Galois.Basic)",
+   "date": "2026-10-10",
+   "verdict": "counterpart for Mathlib's notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "in a Galois category a morphism between coproducts of connected objects is induced by a map of index sets and morphisms of components",
+   "results": "instMonoCoprod (Galois.Basic); has_decomp_connected_components, has_decomp_connected_components' (Galois.Decomposition)",
+   "date": "2026-10-10",
+   "verdict": "no match for clause (7)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem\\|^lemma\\|^instance\\|^class' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Action.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/GaloisObjects.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Decomposition.lean; grep -rn '0BN0\\|0BMY' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois",
+   "results": "Basic.lean:157 FiberFunctor ReflectsMonomorphisms; :168 FiberFunctor Faithful; :221 initial_iff_fiber_empty; :306 evaluation_injective_of_isConnected; :315 evaluation_aut_injective_of_isConnected; :324 epi_of_nonempty_of_isConnected; :330 surjective_on_fiber_of_epi; :400 card_aut_le_card_fiber_of_connected; GaloisObjects.lean:85 isGalois_iff_pretransitive; Decomposition.lean:145 connected_component_unique; no Stacks tag 0BN0/0BMY cited",
+   "date": "2026-10-10",
+   "verdict": "no match for the Stacks notion; per-clause candidates for Mathlib's notion recorded in mathlib_candidate"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'galois-axioms\\|0BN0' ~/weil-conjectures-slopmaster2/WeilConjectures ~/weil-conjectures-slopmaster2/Comparator; grep -rln 'PreGaloisCategory\\|GaloisCategory' ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "no declaration names lem-galois-axioms or 0BN0; FundamentalGroup/*.lean use Mathlib's PreGaloisCategory/GaloisCategory, no Stacks-style Galois category",
+   "date": "2026-10-10",
+   "verdict": "no slopmaster2 declaration states this node"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -54,5 +204,40 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.PreGaloisCategory.FiberFunctor (Faithful instance); CategoryTheory.PreGaloisCategory.FiberFunctor (ReflectsMonomorphisms instance); CategoryTheory.PreGaloisCategory.FiberFunctor.preservesEpis; CategoryTheory.PreGaloisCategory.surjective_on_fiber_of_epi; CategoryTheory.PreGaloisCategory.initial_iff_fiber_empty; CategoryTheory.PreGaloisCategory.epi_of_nonempty_of_isConnected; CategoryTheory.PreGaloisCategory.evaluation_injective_of_isConnected; CategoryTheory.PreGaloisCategory.evaluation_aut_injective_of_isConnected; CategoryTheory.PreGaloisCategory.card_aut_le_card_fiber_of_connected; CategoryTheory.PreGaloisCategory.isGalois_iff_pretransitive",
+  "file": "Mathlib/CategoryTheory/Galois/Basic.lean; Mathlib/CategoryTheory/Galois/GaloisObjects.lean",
+  "lines": [
+   168,
+   157,
+   93,
+   330,
+   221,
+   324,
+   306,
+   315,
+   400,
+   85
+  ],
+  "reason": "Per clause, for Mathlib's PreGaloisCategory C + FiberFunctor F (SGA1/Lenstra G1-G6): (1) Faithful instance, Basic.lean 168; (2) mono: ReflectsMonomorphisms instance 157 with preservation through pullbacks (G4) and ConcreteCategory.mono_iff_injective_of_preservesPullback; epi: preservesEpis 93 (an axiom, G5) and surjective_on_fiber_of_epi 330, reflection through faithfulness (Functor.reflectsEpimorphisms_of_faithful); (3) initial_iff_fiber_empty 221, no terminal-iff-singleton lemma; (4) epi_of_nonempty_of_isConnected 324; (5) evaluation_injective_of_isConnected 306; (6) evaluation_aut_injective_of_isConnected 315, card_aut_le_card_fiber_of_connected 400, and for IsGalois (defined by X / Aut X terminal) isGalois_iff_pretransitive (GaloisObjects.lean 85); (7) none (nearest connected_component_unique, Decomposition.lean 145). These hold for Mathlib's notion; a Stacks Galois category (0BMY) is a Mathlib one only through a comparison theorem (G3 and the fibre functor landing in FintypeCat; see def-galois-category.mathlib_candidate), so the item is not a leaf. Clauses (2) and the epi criterion used in (4) are general facts and are Mathlib leaves as the new nodes lem-galois-mono-iff-injective, lem-galois-epi-iff-surjective, lem-galois-epi-iff-cokernel-pair."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-axioms",
+  "worker": "stage1",
+  "summary": "Split against Stacks 0BN0 (pione.tex, lemma-epi-mono: the brief's '0BMZ' is the tag of item-connected-components of Definition 0BMY, and lemma-galois-category-properties is not a label; 0BN0 is the lemma) and its proof, the paragraph after it defining Galois objects, and Categories 08LR, 003B, 002C, 003C. The blueprint's seven clauses map to Stacks' (1); (2)+(3); (4)+(5); (6); (7); the remark after the proof; (8). The blueprint statement is kept (same numbering, which the citers lem-galois-transitive, thm-galois-abstract-equivalence, sbc-prop-torsors-h1 use); only definition citations were added, with stmt_deps (was []). Steps 1, 3, 5, 6 are written out from the definitions; step 2 uses two general Mathlib-leaf lemmas (a conservative functor to Sets commuting with fibre products / pushouts detects monos / epis: Stacks' diagonal and codiagonal argument, 08LR); step 4 follows Stacks' equalizer-of-the-cokernel-pair argument and uses the Mathlib leaf epi iff the cokernel-pair coprojections agree (08LR(2)); the blueprint's 'image Z' in clause (4) is Stacks' equalizer E, kept as such. Clause (7) (Stacks (8)) is the only one whose proof uses more (coprojections mono, base change of monos, disjointness of F(Y)=⊔F(Y_j), assembling via the coproduct property) and is a new unsplit node. Epimorphism and final object had no definition node; new Mathlib-leaf definition def-galois-epi-final. The item is not a Mathlib leaf: the Mathlib counterparts of every clause (recorded in mathlib_candidate) are for Mathlib's SGA1 notion PreGaloisCategory + FiberFunctor.",
+  "blueprint": "Steps realize the blueprint proof paragraph by clause: (1) -> step 1; (2) 'X→X×_YX ... dually Y⊔_XY→Y' -> step 2 (lem-galois-mono-iff-injective, lem-galois-epi-iff-surjective); (3) -> step 3; (4) 'the image Z ⊆ Y, the equalizer of Y⇉Y⊔_XY' -> step 4 (lem-galois-epi-iff-cokernel-pair); (5) -> step 5; (6) -> step 6; (7) 'E_ij = X_i×_YY_j → X_i is a monomorphism ...' -> step 7 (lem-galois-coproduct-morphism-components). New nodes: def-galois-epi-final (notions in the statement), the three leaves above, and the clause-(7) node.",
+  "mathlib_comparison": [
+   "(1) faithful: Mathlib FiberFunctor Faithful instance (Galois/Basic.lean 168), same equalizer argument; for Mathlib's notion only.",
+   "(2) mono iff injective: general leaf lem-galois-mono-iff-injective (Constructions/EpiMono.lean 34, 45; Preserves/Basic.lean 647; Types/Basic.lean 365) applies to the Stacks notion directly; Mathlib Galois counterpart ReflectsMonomorphisms instance (Basic.lean 157).",
+   "(2) epi iff surjective: general leaf lem-galois-epi-iff-surjective (Constructions/EpiMono.lean 56, 67; Preserves/Basic.lean 754; Types/Basic.lean 391) applies directly; in Mathlib's notion preservation of epis is axiom G5 (Basic.lean 93) and surjectivity is surjective_on_fiber_of_epi (330).",
+   "(3) initial iff empty fibre: Mathlib initial_iff_fiber_empty (Basic.lean 221); final iff singleton: no Mathlib Galois lemma.",
+   "(4) connected morphism epi: Mathlib epi_of_nonempty_of_isConnected (Basic.lean 324), proved through (5), not through the cokernel pair.",
+   "(5) one element: Mathlib evaluation_injective_of_isConnected (Basic.lean 306).",
+   "(6) Aut injective: evaluation_aut_injective_of_isConnected (315), card_aut_le_card_fiber_of_connected (400); Mathlib's IsGalois is 'X / Aut X terminal' (GaloisObjects.lean 46), equivalent to transitivity by isGalois_iff_pretransitive (85).",
+   "(7) coproduct morphisms: no Mathlib lemma; nearest connected_component_unique (Decomposition.lean 145)."
+  ]
+ },
+ "reviewed": "2026-10-10 L: 7 steps following 0BN0, three general facts made Mathlib leaves (monos/epis detected by an exact conservative functor to Sets, epi iff cokernel pair), the epi/final definition leaf, clause (7) a new node; statement kept with its numbering (citers use it); 5 new nodes"
 }

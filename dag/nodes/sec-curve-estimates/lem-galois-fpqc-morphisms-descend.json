@@ -1,0 +1,72 @@
+{
+ "id": "lem-galois-fpqc-morphisms-descend",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-descent, proof, Step 1 ('full faithfulness ... a Y'-morphism compatible with the descent data descends'), realized via Stacks 02W0 for the fpqc covering {Y' -> Y}",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Morphisms of schemes descend along an fpqc covering $\\{X\\to S\\}$ (Stacks 02W0)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] such that the one-member family $\\{f:X\\to S\\}$ is an fpqc covering of $S$ [def-weil-pbc-fpqc-covering]. Put $X_2=X\\times_SX$ (fibre product [def-pc-fibre-product]) with projections $\\mathrm{pr}_0,\\mathrm{pr}_1:X_2\\to X$. For a scheme $U$ with a morphism $U\\to S$ write $U_X=U\\times_SX$, a scheme over $X$ by the second projection, and let $\\mathrm{can}_U:\\mathrm{pr}_0^*U_X=U_X\\times_{X,\\mathrm{pr}_0}X_2\\to U_X\\times_{X,\\mathrm{pr}_1}X_2=\\mathrm{pr}_1^*U_X$ be the isomorphism of schemes over $X_2$ obtained by composing the canonical isomorphisms of both sides with $U\\times_SX_2$ (they exist since $f\\circ\\mathrm{pr}_0=f\\circ\\mathrm{pr}_1$). For a morphism $\\alpha:U\\to W$ of schemes over $S$ write $\\alpha_X=\\alpha\\times_S\\mathrm{id}_X:U_X\\to W_X$. Then for any two schemes $U,W$ over $S$ the map $\\alpha\\mapsto\\alpha_X$ is a bijection from the set of morphisms $U\\to W$ over $S$ onto the set of morphisms $\\beta:U_X\\to W_X$ over $X$ satisfying $\\mathrm{can}_W\\circ\\mathrm{pr}_0^*\\beta=\\mathrm{pr}_1^*\\beta\\circ\\mathrm{can}_U$ (where $\\mathrm{pr}_k^*\\beta=\\beta\\times_{X,\\mathrm{pr}_k}\\mathrm{id}_{X_2}$).",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02W0 (lemma-refine-coverings-fully-faithful, line 8858), its last sentence 'In particular, the category of schemes over S is identified with a full subcategory of the category of descent data relative to any fpqc-covering of S', for the covering {X -> S} refining the trivial covering {id_S}; morphisms of descent data as in Definition Tag 023V (definition-descent-datum, line 8101), part (3); the key input is Lemma Tag 0241 (lemma-fully-faithful, line 8561)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change functor along fpqc cover to descent data of schemes is fully faithful",
+   "results": "CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData, Pseudofunctor.IsPrestackFor.fullyFaithful (Mathlib.CategoryTheory.Sites.Descent.DescentData): abstract, for a pseudofunctor already known to be a prestack; Functor.FullyFaithful",
+   "date": "2026-10-10",
+   "verdict": "no match (abstract framework only; no instance for schemes over a base and the fpqc topology)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the over-category pseudofunctor of schemes is a prestack for the fpqc topology (morphisms of schemes satisfy fpqc descent)",
+   "results": "Pseudofunctor.IsStack.toIsPrestack, Pseudofunctor.isPrestackFor', IsPrestack.isSheaf, IsStackFor.isPrestackFor, IsPrestack.of_isPrestackFor (Mathlib.CategoryTheory.Sites.Descent.*): abstract only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsPrestack\\|IsStack' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'Subcanonical\\|EffectiveEpi' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+   "results": "no IsPrestack/IsStack for schemes; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:87 'instance : fpqcTopology.Subcanonical' and :114 EffectiveEpi of a quasi-compact surjective flat f (Stacks 023Q, the input of 0241, for quasi-compact f only); slopmaster2 WeilConjectures/AlgebraicGeometry/EffectiveDescent.lean:76 CategoryTheory.Over.DescentDatum.existsUnique_hom_of_isPullback (quasi-compact p, effective data only) is a bare sorry",
+   "date": "2026-10-10",
+   "verdict": "no match (Fpqc.lean:87 is the candidate input 023Q, not the statement)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

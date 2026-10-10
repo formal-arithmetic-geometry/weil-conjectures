@@ -1371,3 +1371,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:08 L: merged C1 thm-weil-pbc-hypercover-cohomology (01H0, 0 new). J1 lem-weil-pbc-limit-module-essentially-finite-presentation-over-system NOT merged: review_split fails (proof_origin empty, blueprint.same_as null); returned to J1.
 - 12:08 L: accepted lem-galois-object-exists (0BN2, 4 steps, 0 new).
 - 12:08 L: accepted lem-galois-constant-sheaf-sets-representable (03P5/03YW for sets, 4 steps; new node: U-morphisms into a coproduct of copies of U are clopen decompositions; 1 tool use).
+- 12:10 L: accepted lem-galois-axioms (0BN0, 7 steps; 4 Mathlib leaves and 1 node).

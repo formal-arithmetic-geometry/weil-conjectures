@@ -1,0 +1,89 @@
+{
+ "id": "lem-galois-fpqc-descend-etale",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-descent, proof, Step 3 ('Both properties are Zariski-local on the target and hold after the base change Y_i -> Y'), the property 'etale', replaced by Stacks 02VN for the fpqc covering {Y' -> Y}",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Being etale descends along fpqc coverings (Stacks 02VN)",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $\\{g_i:S_i\\to S\\}_{i\\in I}$ be an fpqc covering of $S$ [def-weil-pbc-fpqc-covering]. For $i\\in I$ let $f_i:X\\times_SS_i\\to S_i$ be the base change of $f$ along $g_i$, the second projection of the fibre product [def-pc-fibre-product]. If $f_i$ is etale [def-weil-etale-morphism] for every $i\\in I$, then $f$ is etale.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02VN (lemma-descending-property-etale, line 6209: 'The property P(f) = \"f is etale\" is fpqc local on the base'), the direction 'each base change has the property => f has it' of Definition Tag 02KO (definition-property-morphisms-local, line 5310); its proof: etale = flat and G-unramified (Morphisms, Lemma Tag 02GV), and both are fpqc local on the base (Lemmas Tag 02L2, 02VM)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "étale morphism of schemes descends along faithfully flat quasi-compact base change",
+   "results": "AlgebraicGeometry.IsEtale, Scheme.Etale, IsEtale.instIsStableUnderBaseChangeScheme (Morphisms.Etale), IsZariskiLocalAtTarget.descendsAlong (Morphisms.Descent), RingHom.Etale",
+   "date": "2026-10-10",
+   "verdict": "no match by itself (see loogle)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.Etale",
+   "results": "AlgebraicGeometry.instDescendsAlongSchemeEtaleMinMorphismPropertySurjectiveFlatQuasiCompact (Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent): DescendsAlong @Etale (@Surjective ⊓ @Flat ⊓ @QuasiCompact)",
+   "date": "2026-10-10",
+   "verdict": "candidate: descent along one surjective flat quasi-compact morphism; an fpqc covering need not be quasi-compact (e.g. a surjective etale non-quasi-compact Y'->Y), so passing to it needs a reduction to the affine opens of the covering, not one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism of schemes is étale if its base change along an fpqc covering is étale",
+   "results": "IsEtale.of_comp, IsEtale.instHasOfPostcompProperty*, IsEtale.instIsStableUnderBaseChangeScheme, Scheme.etalePretopology, Scheme.smallEtalePretopology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'DescendsAlong @Etale\\|DescendsAlong @IsEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean:47 'instance : DescendsAlong @Etale (@Surjective ⊓ @Flat ⊓ @QuasiCompact)' (read with sed -n 40,50p); nothing for fpqc coverings without quasi-compactness",
+   "date": "2026-10-10",
+   "verdict": "candidate only (quasi-compact case)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.instDescendsAlongSchemeEtaleMinMorphismPropertySurjectiveFlatQuasiCompact",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+  "lines": [
+   46,
+   47
+  ],
+  "how": "the case of a single surjective flat quasi-compact morphism"
+ }
+}

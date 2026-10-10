@@ -1,0 +1,74 @@
+{
+ "id": "lem-galois-epi-iff-cokernel-pair",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-axioms",
+   "place": "proof, clause 4: 'the image Z⊆Y, the equalizer of Y⇉Y⊔_XY ... hence Z=Y by connectedness of Y': the step from 'the two maps Y→Y⊔_XY agree' to 'X→Y is an epimorphism'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Epimorphisms via the cokernel pair",
+ "statement": "Let $\\mathcal C$ be a category and $f:X\\to Y$ a morphism of $\\mathcal C$ such that the pushout $Y\\amalg_XY$ of $f$ along $f$ exists, with its two coprojections $i_1,i_2:Y\\to Y\\amalg_XY$ (so $i_1\\circ f=i_2\\circ f$). Then $f$ is an epimorphism ([def-galois-epi-final]) if and only if $i_1=i_2$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Lemma 08LR (label lemma-characterize-mono-epi) (2) and its proof ('f is an epimorphism iff Y is the pushout Y ⊔_X Y'); used in Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (6)"
+ },
+ "stmt_deps": [
+  "def-galois-epi-final",
+  "def-galois-finite-limits-colimits"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "f is epi iff the two inclusions into the pushout of f with itself are equal",
+   "results": "Limits.inl_eq_inr_of_epi_eq (Limits.Shapes.Pullback.Mono); CategoryTheory.epi_iff_inl_eq_inr (Mathlib.CategoryTheory.Limits.EpiMono); PushoutCocone.inl_eq_inr_of_epi_eq; epi_iff_isPushout",
+   "date": "2026-10-10",
+   "verdict": "match: epi_iff_inl_eq_inr"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Epi _ ↔ CategoryTheory.Limits.PushoutCocone.inl _ = CategoryTheory.Limits.PushoutCocone.inr _",
+   "results": "CategoryTheory.epi_iff_inl_eq_inr {f : X ⟶ Y} {c : PushoutCocone f f} (hc : IsColimit c) : Epi f ↔ c.inl = c.inr (Mathlib.CategoryTheory.Limits.EpiMono)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 80,95p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/EpiMono.lean",
+   "results": "EpiMono.lean:83 variable {c : PushoutCocone f f}; :85 lemma epi_iff_inl_eq_inr (hc : IsColimit c) : Epi f ↔ c.inl = c.inr; :95 epi_iff_isIso_inl",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.epi_iff_inl_eq_inr",
+  "file": "Mathlib/CategoryTheory/Limits/EpiMono.lean",
+  "lines": [
+   85
+  ],
+  "how": "exact: for a pushout cocone c of (f, f) which is a colimit (the pushout Y ⊔_X Y with coprojections c.inl = i_1, c.inr = i_2), Epi f ↔ c.inl = c.inr (line 85)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-axioms",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

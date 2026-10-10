@@ -1,0 +1,79 @@
+{
+ "id": "def-galois-epi-final",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-axioms",
+   "place": "statement, clauses 2 and 3 ('an epimorphism if and only if $F(X)\\to F(Y)$ is surjective'; 'final if and only if its image is a singleton') and clause 4 ('is an epimorphism'): the notions epimorphism and final object, which [def-galois-initial-mono] does not define",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Epimorphism and final object",
+ "statement": "Let $\\mathcal C$ be a category. A morphism $f:X\\to Y$ of $\\mathcal C$ is an *epimorphism* if for every object $W$ and every pair of morphisms $a,b:Y\\to W$ with $a\\circ f=b\\circ f$ one has $a=b$. An object $Z$ of $\\mathcal C$ is *final* if for every object $Y$ of $\\mathcal C$ there is exactly one morphism $Y\\to Z$; equivalently, $Z$ is a limit of the empty diagram (the empty product).",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Definition 003B (label definition-mono-epi), item 2 (epimorphism); Definition 002C (label definition-initial-final), item 2 (final object)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "epimorphism definition left cancellation; terminal object unique morphism into it",
+   "results": "CategoryTheory.Epi.mk, CategoryTheory.Epi (Mathlib.CategoryTheory.Category.Basic); CategoryTheory.Limits.IsTerminal.ofUnique (Mathlib.CategoryTheory.Limits.Shapes.IsTerminal)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "final object of a category: for every object there is exactly one morphism to it",
+   "results": "CategoryTheory.Limits.IsTerminal, IsTerminal.ofUniqueHom, IsTerminal.ofUnique (Mathlib.CategoryTheory.Limits.Shapes.IsTerminal)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a morphism f is an epimorphism if g ∘ f = h ∘ f implies g = h",
+   "results": "CategoryTheory.Epi (Mathlib.CategoryTheory.Category.Basic); MorphismProperty.epimorphisms",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^class Epi' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Category/Basic.lean; grep -n '^abbrev IsTerminal\\|def IsTerminal.ofUnique\\|theorem IsTerminal.hom_ext' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean",
+   "results": "Category/Basic.lean:321 class Epi (f : X ⟶ Y) : Prop where left_cancellation : ∀ {Z} (g h : Y ⟶ Z), f ≫ g = f ≫ h → g = h (line 327: to_dual of Mono, stacks 003B); IsTerminal.lean:59 abbrev IsTerminal (X : C) := IsLimit (asEmptyCone X); :83 IsTerminal.ofUnique; :156 IsTerminal.from; :160 IsTerminal.hom_ext",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Epi; CategoryTheory.Limits.IsTerminal",
+  "file": "Mathlib/CategoryTheory/Category/Basic.lean; Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean",
+  "lines": [
+   321,
+   59
+  ],
+  "how": "exact: Epi f (Category/Basic.lean line 321) is right cancellation by f, i.e. Stacks 003B(2); IsTerminal Z (IsTerminal.lean line 59) is 'the empty cone at Z is a limit', which is 'exactly one morphism Y ⟶ Z for every Y' (IsTerminal.ofUnique line 83, IsTerminal.from line 156, IsTerminal.hom_ext line 160)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-axioms",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

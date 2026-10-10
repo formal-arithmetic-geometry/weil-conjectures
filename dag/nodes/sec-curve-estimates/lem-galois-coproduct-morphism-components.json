@@ -1,0 +1,78 @@
+{
+ "id": "lem-galois-coproduct-morphism-components",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-axioms",
+   "place": "statement and proof, clause 7: 'if X=∐X_i and Y=∐Y_j with connected X_i, Y_j, then every morphism X→Y is given by a map of index sets α with components X_i→Y_{α(i)}'; proof (7): 'For each i,j the projection E_ij=X_i×_YY_j→X_i is a monomorphism, hence an isomorphism for exactly one j ...'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Morphisms between finite coproducts of connected objects of a Galois category",
+ "statement": "Let $(\\mathcal C,F)$ be a Galois category ([def-galois-category]). Let $X$ be a coproduct ([def-galois-finite-coproduct]) of objects $X_1,\\dots,X_n$ with coprojections $\\iota_i:X_i\\to X$, and $Y$ a coproduct of objects $Y_1,\\dots,Y_m$ with coprojections $\\kappa_j:Y_j\\to Y$, where all $X_i$ and all $Y_j$ are connected ([def-galois-connected-object]). Then for every morphism $\\varphi:X\\to Y$ there are a map $\\alpha:\\{1,\\dots,n\\}\\to\\{1,\\dots,m\\}$ and morphisms $\\varphi_i:X_i\\to Y_{\\alpha(i)}$, $i=1,\\dots,n$, such that $\\varphi\\circ\\iota_i=\\kappa_{\\alpha(i)}\\circ\\varphi_i$ for every $i$; that is, $\\varphi$ is the morphism induced by the family $(\\kappa_{\\alpha(i)}\\circ\\varphi_i)_i$.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), item (8) and its proof"
+ },
+ "stmt_deps": [
+  "def-galois-category",
+  "def-galois-finite-coproduct",
+  "def-galois-connected-object"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism from a coproduct of connected objects to a coproduct of connected objects factors through components",
+   "results": "Limits.coprod.map, coprod.desc (Limits.Shapes.BinaryProducts); MultispanIndex.fstSigmaMap; Biprod.ofComponents; FormalCoproduct.homOfPiHom",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "in a Galois category a morphism between coproducts of connected objects is induced by a map of index sets and morphisms of components",
+   "results": "PreGaloisCategory.instMonoCoprod (Galois.Basic); has_decomp_connected_components, has_decomp_connected_components' (Galois.Decomposition); FiberFunctor.preservesFiniteCoproducts",
+   "date": "2026-10-10",
+   "verdict": "no match; nearest pieces for Mathlib's (SGA1) notion"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^theorem\\|^lemma\\|^instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Basic.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Decomposition.lean; sed -n 130,160p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Galois/Decomposition.lean",
+   "results": "Decomposition.lean:134 fiber_in_connected_component (every element of F X lies in a connected subobject); :145 connected_component_unique (two connected monos into X meeting in a fibre element are isomorphic over X, via the fibre product); Basic.lean:445 instance MonoCoprod C; no lemma on morphisms between coproducts of connected objects",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.PreGaloisCategory.connected_component_unique; CategoryTheory.PreGaloisCategory.fiber_in_connected_component; CategoryTheory.PreGaloisCategory.instMonoCoprod",
+  "file": "Mathlib/CategoryTheory/Galois/Decomposition.lean; Mathlib/CategoryTheory/Galois/Basic.lean",
+  "lines": [
+   145,
+   134,
+   445
+  ],
+  "reason": "Mathlib has no statement of this clause; the nearest pieces (the same fibre-product argument for connected subobjects) are stated for Mathlib's PreGaloisCategory + FiberFunctor (SGA1/Lenstra axioms), which agree with Stacks 0BMY only through a comparison theorem (see def-galois-category.mathlib_candidate)."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-galois-axioms",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
