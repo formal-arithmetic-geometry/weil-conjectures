@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-weil-derived-limit-existence",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Existence and computation of derived limits",
- "statement": "Let $\\mathcal D$ be a triangulated category and let $(K_n,f_n)$ be an inverse\nsystem of objects of $\\mathcal D$.\n\n1. If $\\prod_nK_n$ exists in $\\mathcal D$, then a derived limit\n   [def-weil-derived-limit] $R\\varprojlim_nK_n$ exists, and any two derived\n   limits of the system are isomorphic, although not canonically so.\n2. Let $\\mathcal A$ be an abelian category with exact countable products and\n   let $\\mathcal D=D(\\mathcal A)$. Then countable products exist in $\\mathcal\n   D$, are represented by termwise products of any representatives, and\n   satisfy $H^p\\bigl(\\prod_iK_i\\bigr)\\cong\\prod_iH^p(K_i)$ for all $p$.\n3. In the situation of (2), assume in addition that $\\mathcal A$ has enough\n   injectives. If $I_\\bullet$ is a K-injective representative, in the abelian\n   category of towers in $\\mathcal A$, of the system $(K_n,f_n)$, then\n   $\\varprojlim_nI_n$ represents $R\\varprojlim_nK_n$. Consequently \"choosing\n   a K-injective replacement of the tower\" and \"taking the first term of the\n   Roos triangle\" [def-weil-derived-limit] produce isomorphic objects.",
+ "statement": "Let $\\mathcal D$ be a triangulated category and let $(K_n,f_n)$ be an inverse system of objects of $\\mathcal D$ [def-weil-inverse-system]. 1. If $\\prod_nK_n$ exists in $\\mathcal D$, then a derived limit [def-weil-derived-limit] $R\\varprojlim_nK_n$ exists, and any two derived limits are isomorphic, although not canonically so. 2. Let $\\mathcal A$ be an abelian category with exact countable products and let $\\mathcal D=D(\\mathcal A)$. Then countable products exist in $\\mathcal D$, are represented by termwise products of any representatives, and satisfy $H^p(\\prod_iK_i)\\cong\\prod_iH^p(K_i)$. 3. In the situation of (2), assume in addition that $\\mathcal A$ has enough injectives. Let $\\operatorname{Tow}(\\mathcal A)$ be the abelian category whose objects are inverse systems in $\\mathcal A$ and whose morphisms are compatible levelwise maps [def-weil-inverse-system]. If $I_\\bullet$ is a K-injective representative in $\\operatorname{Tow}(\\mathcal A)$ of the tower $(K_n,f_n)$, then the termwise inverse-limit complex $\\varprojlim_n I_n$ represents $R\\varprojlim_nK_n$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-derived-limit-existence.md",
   "place": "node lem-weil-derived-limit-existence, order 1208",
@@ -39,19 +39,78 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "def-weil-inverse-system"
  ],
  "proof": [
   {
-   "text": "Assertion (1) is axiom TR1 applied to the defining triangle of\n[def-weil-derived-limit], together with TR3 for the uniqueness of a cone;\nthis is Definition 13.34.1 of the Stacks Project, Tag\n[08TC](https://stacks.math.columbia.edu/tag/08TC) and the remarks following\nit, and it also explains why a derived limit is determined only up to a\nnon-unique isomorphism. Assertion (2) is Lemma 13.34.2 of the Stacks Project,\nTag [07KC](https://stacks.math.columbia.edu/tag/07KC): since countable\nproducts are exact in $\\mathcal A$, the termwise product of representatives\nrepresents the product in $D(\\mathcal A)$, and its cohomology is the product\nof the cohomologies. Assertion (3) is the K-injective presentation of the\nright derived functor of $\\varprojlim$. The Stacks Project form of the model\nstatement is Lemma 13.34.6, Tag\n[070M](https://stacks.math.columbia.edu/tag/070M), which treats the\ntruncation tower $I_n$ built from a single complex $K^\\bullet$ by the\nconstruction of Lemma 13.29.3 and concludes that $\\varprojlim_nI_n$ exists,\nis K-injective, and represents $R\\varprojlim_n\\tau_{\\ge-n}K^\\bullet$; the\ngeneral-tower form used here is the same argument applied to a K-injective\nreplacement of the given tower. Its inputs are that a product of K-injective\ncomplexes is K-injective (Tag\n[0BK6](https://stacks.math.columbia.edu/tag/0BK6), Lemma 13.31.5, stated\nthere without a bounded-below hypothesis, only that the termwise products\nexist) and that every complex of the ambient category admits a K-injective\nresolution: for a Grothendieck abelian category this is Tag\n[079P](https://stacks.math.columbia.edu/tag/079P), Theorem 19.12.6, and the\nambient categories occurring in this blueprint are categories of sheaves of\nmodules, which are Grothendieck; the general form for an abelian category\nwith exact countable products and enough injectives is Spaltenstein's\ntheorem. The existence of the products used is Lemma 13.34.3, Tag\n[0BK7](https://stacks.math.columbia.edu/tag/0BK7).",
+   "text": "For (1), the definition [def-weil-derived-limit] forms the endomorphism $1-s$ of $\\prod_nK_n$ and asks for a distinguished triangle $K\\xrightarrow{p}\\prod_nK_n\\xrightarrow{1-s}\\prod_nK_n\\xrightarrow{\\delta}K[1]$; by TR1 of [def-weil-triangulated-category] the morphism $1-s$ lies in a distinguished triangle $\\prod_nK_n\\xrightarrow{1-s}\\prod_nK_n\\to C\\to\\prod_nK_n[1]$, and rotating it back by TR2 (applied to $K:=C[-1]$, with the sign absorbed by the isomorphism of triangles $(\\mathrm{id},\\mathrm{id},-\\mathrm{id})$ and TR1) gives such a triangle, so a derived limit exists. Given two derived limits $(K,p,\\delta)$ and $(K',p',\\delta')$, rotate both Roos triangles by TR2 so that the two product terms come first; TR3 of [def-weil-triangulated-category] (equivalently [lem-weil-pbc-triangle-morphism-extension]) extends the pair $(\\mathrm{id},\\mathrm{id})$ on the product terms to a morphism of the rotated triangles, whose third component is $\\varphi[1]$ for some $\\varphi:K\\to K'$. Two of its components are identities, so [lem-sf-triangle-morphism-iso] (Tag 014A) makes $\\varphi[1]$, hence $\\varphi$, an isomorphism. The extension supplied by TR3 is not unique, so the isomorphism is not canonical.",
    "uses": [
+    "def-weil-derived-limit",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-triangle-morphism-extension",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 13.34.1 and remarks, Tag 08TC"
+   }
+  },
+  {
+   "text": "For (2), choose complexes $C_i$ representing $K_i$ and let $\\prod_iC_i$ be the termwise product with projections $\\mathrm{pr}_i$. Exactness of countable products makes the products of the short exact sequences $0\\to Z^p\\to C^p\\to B^{p+1}\\to0$ and $0\\to B^p\\to Z^p\\to H^p\\to0$ exact, so $Z^p$, $B^p$ and $H^p$ commute with products: $H^p(\\prod_iC_i)=\\prod_iH^p(C_i)$, and a product of quasi-isomorphisms is a quasi-isomorphism. A chain map into a termwise product, and a chain homotopy, are exactly families of component chain maps and homotopies, so $\\operatorname{Hom}_{K(\\mathcal A)}(L,\\prod_iN_i)=\\prod_i\\operatorname{Hom}_{K(\\mathcal A)}(L,N_i)$. Quasi-isomorphisms form a multiplicative system in $K(\\mathcal A)$ with localization $D(\\mathcal A)$ [lem-pc-quasi-isomorphisms-multiplicative-system, def-weil-abstract-derived-category], so every morphism $Q(X)\\to Q(Y)$ is $Q(s)^{-1}Q(f)$ for a quasi-isomorphism $s:Y\\to M$ and $f:X\\to M$, and $Q(s)^{-1}Q(f)=0$ if and only if $uf\\simeq0$ for some quasi-isomorphism $u:M\\to M'$ [lem-pc-left-localization-hom-colimit]. Existence (the argument of Tag 07KC): given $\\alpha_i=Q(s_i)^{-1}Q(f_i):L\\to C_i$ with $s_i:C_i\\to M_i$, the product $s=\\prod_is_i$ is a quasi-isomorphism and $\\alpha=Q(s)^{-1}Q(\\prod_if_i)$ satisfies $Q(\\mathrm{pr}_i)\\alpha=\\alpha_i$, because $\\mathrm{pr}_i\\circ s=s_i\\circ\\mathrm{pr}_i$. Uniqueness: let $\\alpha=Q(s)^{-1}Q(f):L\\to\\prod_iC_i$, $s:\\prod_iC_i\\to M$, with $Q(\\mathrm{pr}_i)\\alpha=0$ for all $i$. Write $Q(\\mathrm{pr}_i)Q(s)^{-1}=Q(t_i)^{-1}Q(g_i)$ with $t_i:C_i\\to N_i$ a quasi-isomorphism and $g_i:M\\to N_i$; then $Q(g_is)=Q(t_i\\mathrm{pr}_i)$ and $Q(g_if)=0$, so after composing $t_i,g_i$ with a later quasi-isomorphism out of $N_i$ we have $g_is\\simeq t_i\\mathrm{pr}_i$ and $g_if\\simeq0$. With $g=(g_i)_i:M\\to\\prod_iN_i$ and the quasi-isomorphism $t=\\prod_it_i$, componentwise homotopies give $gs\\simeq t$ and $gf\\simeq0$, so $Q(s)^{-1}=Q(t)^{-1}Q(g)$ and $\\alpha=Q(t)^{-1}Q(gf)=0$. As $\\operatorname{Hom}_{D(\\mathcal A)}$ is additive, $\\prod_iC_i$ with the $Q(\\mathrm{pr}_i)$ is the product of the $K_i$ in $D(\\mathcal A)$ [def-weil-category-product], for any choice of representatives.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-left-localization-hom-colimit",
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 13.34.2, Tag 07KC"
+   }
+  },
+  {
+   "text": "For (3), for each $n$ the functor $\\lambda_n:\\mathcal A\\to\\operatorname{Tow}(\\mathcal A)$ sending $X$ to the tower equal to $X$ at levels $m\\le n$ with identity transitions and $0$ at levels $m>n$ is exact and left adjoint to evaluation $\\operatorname{ev}_n$ (a map $\\lambda_nX\\to Y_\\bullet$ is determined by its level-$n$ component $X\\to Y_n$), so [lem-weil-pbc-right-adjoint-preserves-kinjective] makes each $\\operatorname{ev}_n(I_\\bullet)$ K-injective. By [lem-pc-ringed-space-product-kinjective] (a general abelian category, applied to the countable index set of levels, whose termwise products exist by hypothesis) the termwise product $P=\\prod_n\\operatorname{ev}_n(I_\\bullet)$ is K-injective and represents $\\prod_nK_n$ in $D(\\mathcal A)$ with the projections, as also given by Step 2; the chain map $1-s:P\\to P$ satisfies $\\mathrm{pr}_n\\circ(1-s)=\\mathrm{pr}_n-f_n\\circ\\mathrm{pr}_{n+1}$, so it represents the transition endomorphism of [def-weil-derived-limit].",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-pc-ringed-space-product-kinjective",
     "def-weil-derived-limit"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma Tag 08BJ and Lemma 13.31.5, Tag 0BK6"
+   }
+  },
+  {
+   "text": "The mapping cone of the chain map $1-s:P\\to P$ gives the distinguished cone triangle $P\\xrightarrow{1-s}P\\to\\operatorname{Cone}(1-s)\\to P[1]$ of $D(\\mathcal A)$ [def-weil-abstract-derived-category]; rotating it back by TR2 of [def-weil-triangulated-category] gives a distinguished triangle $\\operatorname{Cone}(1-s)[-1]\\to P\\xrightarrow{1-s}P\\to\\operatorname{Cone}(1-s)$, so by Step 3 the object $\\operatorname{Cone}(1-s)[-1]$ is a derived limit of $(K_n,f_n)$ [def-weil-derived-limit]. By [lem-weil-derived-limit-roos-complex] the termwise inverse-limit complex $L=\\varprojlim_nI_n$ is quasi-isomorphic to $\\operatorname{Cone}(1-s)[-1]$, so it represents the same object of $D(\\mathcal A)$, namely $R\\varprojlim_nK_n$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-weil-derived-limit-roos-complex",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemmas 13.34.3 and 13.34.6, Tags 0BK7 and 070M"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "lem-sf-triangle-morphism-iso",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-left-localization-hom-colimit",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-derived-limit-roos-complex"
  ],
  "proof_origin": {
   "by": "agent",
@@ -60,7 +119,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -84,5 +143,22 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-derived-limit-existence",
+  "worker": "stage1",
+  "summary": "Repaired D2 by deriving clause (3) from evaluation and product preservation of K-injectives and a chain-level Roos-complex comparison; removed the clause-restating tower node and folded the exact-product calculation into an elementary step. Added the missing TR1, TR3, and Tag 014A dependencies.",
+  "blueprint": "Realizes Tag 08TC, Tag 07KC, and Tags 0BK6/0BK7/070M.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dle2900",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dle2900 (reviewer sub-agent of L); spot-checked: Earlier return points: (1) D2 repaired: clause (3) now = ev_n preserves K-injectives + product K-injective + new chain-level lem-weil-derived-limit-roos-complex (true, not a restatement, no duplicate among lem-pc-tower-* nodes); (2) C1 step 1 cites TR1/TR3/014A; (3) quasiisomorphism node dropped; (4) no backspace. Downstream users (J1/G1/F1/K1/M1, smooth-purity defs) use only clauses (1),(2), unchanged (C4 ok). FIX more, RETURN less: (a) class (b) lem-weil-derived-limit-product-kinjective is the countable case of lem-pc-ringed-space-product-kinjective (stated for any abelian category, also gives the D(A) product); dropped, step 3 cites it, left adjoint lambda_n of ev_n written out; (b) C1 step 2: the 07KC universal property used left fractions without a node and omitted uniqueness; rewrote existence and uniqueness with lem-pc-quasi-isomorphisms-multiplicative-system, lem-pc-left-localization-hom-colimit, def-weil-category-product, elementary false; (c) C1 steps 1/4: TR2 rotation and the cone triangle of D(A) cited (def-weil-triangulated-category, def-weil-abstract-derived-category); stale 'Step 1 gives the asserted isomorphism' sentence removed.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-dle2900): Head 7184740fe is a rebase of 695913e67 with identical delivery files. Roos node statement checked true: from the termwise-exact sequence 0->I->prod_n R_n ev_n I->prod_n R_{n+1} ev_n I->0 of K-injective complexes of towers (R_n right adjoint to exact ev_n), apply lim to the resulting homotopy equivalence; its source note's 'termwise injective replacement' is not needed and not always available."
 }

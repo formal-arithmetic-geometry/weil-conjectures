@@ -2849,3 +2849,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:39 L: returned deliver/F1/lem-pc-fp-module-map-descent-affine (reviewer RETURN: 1. E3 (false step), Step 3: 'Each difference is a finite A-linear combination of generators of N_i with coefficients tha)
 - 22:39 L: merged deliver/H1/lem-sc-proper-or-affine (reviewer PASS; first push; new nodes: 0)
 - 22:39 L: merged deliver/H1/lem-pc-affine-perfect-hom-colimit (reviewer FIX; first push; new nodes: 0)
+- 22:40 L: merged deliver/E1/lem-weil-derived-limit-existence (reviewer FIX; after a return; new nodes: 1)
