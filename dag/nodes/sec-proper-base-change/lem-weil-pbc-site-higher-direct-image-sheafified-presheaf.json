@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+ "kind": "statement",
+ "title": "Higher direct images along a morphism of sites are sheafified cohomology presheaves",
+ "statement": "Let $f:\\mathcal C\\to\\mathcal D$ be a morphism of sites given by the continuous functor $u:\\mathcal D\\to\\mathcal C$ [def-weil-pbc-sites-and-cohomology] (3), $f_*=u^s$, and let $R^qf_*:\\textit{Ab}(\\mathcal C)\\to\\textit{Ab}(\\mathcal D)$ ($q\\ge0$) be the right derived functors of the left exact functor $f_*$ [def-sp-left-exact-additive], $R^qf_*\\mathcal F=\\mathcal H^q(f_*\\mathcal I^\\bullet)$ (cohomology computed in the abelian category $\\textit{Ab}(\\mathcal D)$) for an injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$ [def-sp-injective-resolutions]. For $\\mathcal F\\in\\textit{Ab}(\\mathcal C)$ and $q\\ge0$ let $\\mathcal P^q_{\\mathcal F}$ be the presheaf of abelian groups on $\\mathcal D$ with $\\mathcal P^q_{\\mathcal F}(V)=H^q(u(V),\\mathcal F)=H^q(\\mathcal I^\\bullet(u(V)))$ ($H^q$ over an object, [def-weil-pbc-sites-and-cohomology] (2)), the restriction along $V'\\to V$ being induced by the restriction maps $\\mathcal I^\\bullet(u(V))\\to\\mathcal I^\\bullet(u(V'))$. Then the canonical map of presheaves $\\mathcal P^q_{\\mathcal F}\\to R^qf_*\\mathcal F$ (sending the class of a cocycle $s\\in\\mathcal I^q(u(V))=(f_*\\mathcal I^q)(V)$ to the section of the cohomology sheaf it defines) identifies $R^qf_*\\mathcal F$ with the sheafification $(\\mathcal P^q_{\\mathcal F})^\\#$ [def-weil-pbc-sheafification]; in particular $R^qf_*\\mathcal F=0$ if and only if $(\\mathcal P^q_{\\mathcal F})^\\#=0$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747) and its proof; used in etale-cohomology.tex Lemma Tag 09AX (line 14213: 'The Zariski sheaf R^p epsilon_* F is the sheaf associated to the presheaf U -> H^p_etale(U, F)')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image is the sheafification of the presheaf of cohomology groups over objects of a site",
+   "results": "Sheaf.cohomologyPresheaf, Sheaf.cohomologyPresheafFunctor (Sites/SheafCohomology/Basic: the presheaf X -> Ext^n), sheafification, presheafToSheaf, GrothendieckTopology.sheafify, TopCat.Presheaf.sheafify",
+   "date": "2026-10-10",
+   "verdict": "no match: the cohomology presheaf exists but no higher direct image and no comparison with its sheafification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image R^i f_* F is the sheaf associated to the presheaf V -> H^i(u(V), F)",
+   "results": "Sheaf.cohomologyPresheaf, Sheaf.cohomologyPresheafFunctor, Sheaf.H, HasGlobalSectionsFunctor, plusPlusSheaf_obj_val",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'higher direct image\\|directImage.*rightDerived\\|pushforward.*rightDerived' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -n 'def\\|abbrev\\|lemma' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "results": "no hits for higher direct images; Basic.lean: Sheaf.H, cohomologyPresheafFunctor, cohomologyPresheaf, H', H.equiv0, H.map, functorH, subsingleton_H_of_isZero",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "CategoryTheory.Sheaf.cohomologyPresheaf",
+   "results": "exists (Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:81): the presheaf X -> Ext^n of the sheafified free abelian presheaf on X and F; only the presheaf, without direct images",
+   "date": "2026-10-10",
+   "verdict": "no match (notion only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-etale-cohomology-local-ring-colimit",
+ "kind": "statement",
+ "title": "Etale cohomology of the local scheme at a point as a colimit over Zariski neighbourhoods",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathcal F$ an abelian sheaf on $X_{\\Et}$ [def-weil-pbc-etale-site], [def-weil-pbc-abelian-etale-sheaves], $x\\in X$, $\\mathcal O_{X,x}$ the local ring and $g_x:\\operatorname{Spec}\\mathcal O_{X,x}\\to X$ [def-weil-affine-spectrum] the canonical morphism; for every open $U\\ni x$ it factors uniquely as $g_x=j_U\\circ g_{x,U}$ with $j_U:U\\hookrightarrow X$ the open immersion [def-weil-open-immersion]. For an open $U\\subseteq X$ write $H^q(U,\\mathcal F)$ for the cohomology of $\\mathcal F$ over the object $U\\hookrightarrow X$ of $X_{\\Et}$ ([def-weil-pbc-sites-and-cohomology] (2)), the restriction $H^q(U,\\mathcal F)\\to H^q(W,\\mathcal F)$ for $W\\subseteq U$ being induced by the restriction maps of an injective resolution of $\\mathcal F$. Then $H^q(U,\\mathcal F)=H^q(U_{\\Et},j_U^{-1}\\mathcal F)$ canonically, and the maps $H^q(U,\\mathcal F)=H^q(U_{\\Et},j_U^{-1}\\mathcal F)\\xrightarrow{g_{x,U}^*}H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{\\Et},g_{x,U}^{-1}j_U^{-1}\\mathcal F)\\cong H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{\\Et},g_x^{-1}\\mathcal F)$ (pullback [def-weil-pbc-cohomology-pullback] followed by the canonical isomorphism $g_{x,U}^{-1}j_U^{-1}\\cong g_x^{-1}$ of inverse images [def-weil-pbc-inverse-image]; etale cohomology [def-weil-pbc-etale-cohomology]) are compatible with the restrictions and induce, for every $q\\ge0$, an isomorphism\n$$\\varinjlim_{U\\ni x\\ \\text{open}}H^q(U,\\mathcal F)\\xrightarrow{\\ \\sim\\ }H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{\\Et},g_x^{-1}\\mathcal F),$$\nthe colimit being over the open neighbourhoods of $x$ ordered by reverse inclusion (a directed set). In particular a class $\\xi\\in H^q(U,\\mathcal F)$ whose image in $H^q((\\operatorname{Spec}\\mathcal O_{X,x})_{\\Et},g_x^{-1}\\mathcal F)$ is zero restricts to zero in $H^q(W,\\mathcal F)$ for some open $x\\in W\\subseteq U$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 09AX (lemma-local-rings-strictly-henselian), proof, line 14214-14218: 'the stalk at x is colim H^p_etale(U, F) = H^p_etale(Spec(O_{X,x}), G_x) ... see Lemma 03Q6' (lemma-directed-colimit-cohomology, line 7464, a special case of Theorem Tag 09YQ, theorem-colimit) applied to the affine open neighbourhoods U = Spec A of x, with O_{X,x} = colim A; the identification H^q(U, F) = H^q(U_etale, F|_U) is sites-cohomology.tex Lemma Tag 03F3 (lemma-cohomology-of-open)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "colimit of etale cohomology over open neighbourhoods of a point equals etale cohomology of Spec of the local ring",
+   "results": "LocallyRingedSpace.coproductCofan, skyscraperPresheafCoconeIsColimitOfSpecializes, TopCat.Presheaf.germ, OpenCover.isColimitCoconeOfLocallyDirected, PresheafedSpace.restrictStalkIso",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology of Spec of local ring O_{X,x} is the colimit of etale cohomology of open neighbourhoods of x",
+   "results": "Algebra.basicOpen_subset_etaleLocus_iff, Algebra.mem_etaleLocus_iff, stalkClosedPointIso, StructureSheaf.toOpen_Gammagerm_apply",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'cohomology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rn 'colimit.*Sheaf.H\\|Sheaf.H.*colimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "AlgebraicGeometry: only Sites/BigZariski.lean and Sites/ElladicCohomology.lean mention cohomology (definitions of l-adic sheaves and groups); no colimit statement for Sheaf.H",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-site-leray-degenerate",
+ "kind": "statement",
+ "title": "Vanishing higher direct images: cohomology of the direct image equals cohomology upstairs",
+ "statement": "Let $f:\\mathcal C\\to\\mathcal D$ be a morphism of sites given by the continuous functor $u:\\mathcal D\\to\\mathcal C$ [def-weil-pbc-sites-and-cohomology] (3), with $f_*=u^s$, $f^{-1}=u_s$, unit $\\eta:\\mathrm{id}\\to f_*f^{-1}$ and counit $\\varepsilon:f^{-1}f_*\\to\\mathrm{id}$ of $f^{-1}\\dashv f_*$ on abelian sheaves. For $\\mathcal F\\in\\textit{Ab}(\\mathcal C)$ let $R^qf_*\\mathcal F$ ($q\\ge0$) be the right derived functors of the left exact functor $f_*:\\textit{Ab}(\\mathcal C)\\to\\textit{Ab}(\\mathcal D)$ [def-sp-left-exact-additive], computed from an injective resolution of $\\mathcal F$ [def-sp-injective-resolutions]. Let $V\\in\\operatorname{Ob}(\\mathcal D)$ and, for $p\\ge0$, let the edge map $e^p_{V,\\mathcal F}:H^p(V,f_*\\mathcal F)\\to H^p(u(V),\\mathcal F)$ be the composite of the pullback $f^*:H^p(V,f_*\\mathcal F)\\to H^p(u(V),f^{-1}f_*\\mathcal F)$ of [lem-weil-pbc-site-cohomology-pullback] with $H^p(u(V),\\varepsilon_{\\mathcal F})$ ($H^p$ over an object as in [def-weil-pbc-sites-and-cohomology] (2)). If $R^qf_*\\mathcal F=0$ for all $q>0$, then $e^p_{V,\\mathcal F}$ is an isomorphism for every $p\\ge0$. (In degree $0$ it is the identity of $(f_*\\mathcal F)(V)=\\mathcal F(u(V))$, by the triangle identity $\\varepsilon_{\\mathcal F}(u(V))\\circ\\eta_{f_*\\mathcal F}(V)=\\mathrm{id}$.)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 0733 (lemma-apply-Leray, line 2347), part (1), via the Leray spectral sequence Lemma Tag 0732 (lemma-Leray, line 2323); direct images of injectives: Lemma Tag 072Z (lemma-direct-image-injective-sheaf)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-site-cohomology-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if higher direct images vanish then sheaf cohomology of the pushforward equals sheaf cohomology (Leray degenerate)",
+   "results": "SheafOfModules.pushforward_map_val, TopCat.Sheaf.pushforward, Scheme.Modules.pushforward_obj_obj, Functor.sheafPushforwardCocontinuous (definitions of pushforward only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray spectral sequence for a morphism of sites: if R^q f_* F = 0 for q > 0 then H^p(D, f_* F) = H^p(C, F)",
+   "results": "InjectiveResolution.isoRightDerivedObj (Abelian/RightDerived), groupCohomology.isIso_delta_of_isZero, CochainComplex.ConnectData.homologyIsoPos",
+   "date": "2026-10-10",
+   "verdict": "no match: no Leray or direct-image comparison for sheaf cohomology on sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Functor.rightDerived",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'leray\\|Grothendieck spectral\\|higher direct image' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "no Leray / higher direct image; SheafCohomology/{Basic,Cech,MayerVietoris}.lean define Sheaf.H via Ext, cohomologyPresheaf, Mayer-Vietoris, nothing on direct images",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
