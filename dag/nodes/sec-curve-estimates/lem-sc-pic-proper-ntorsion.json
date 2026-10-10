@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-pic-proper-ntorsion",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Pic of a proper curve: divisibility, n-torsion, cokernel",
@@ -13,25 +13,83 @@
   "place": "node lem-sc-pic-proper-ntorsion, order 1023"
  },
  "stmt_deps": [
-  "def-sc-curves"
+  "def-sc-curves",
+  "def-sc-picard-group",
+  "def-sc-pic0",
+  "def-sc-genus"
  ],
  "proof": [
   {
-   "text": "By [lem-sc-pic-proper-decomposition],\n$\\operatorname{Pic}(C)=\\mathbf Z\\oplus\\operatorname{Pic}^0(C)$\nwith $\\operatorname{Pic}^0(C)=J_C(k)$\n([def-sc-pic0], [def-sc-jacobian],\n[thm-sc-jacobian-representability]). The\ngroup $J_C(k)$ is $n$-divisible by\n[thm-av-final](d), and its $n$-torsion is\n$J_C[n](k)\\cong(\\mathbf Z/n\\mathbf Z)^{2g}$ by\n[thm-av-final](c), since $\\dim J_C=g$ for the genus of [def-sc-genus] by [lem-pc-genus-agrees-sc] (with\n$J_C(k)[n]=J_C[n](k)$ by the definition of the kernel,\n[def-sc-mult-n]). Hence\n\n$$\n\\operatorname{Pic}(C)[n]=\\operatorname{Pic}^0(C)[n]\n\\cong(\\mathbf Z/n\\mathbf Z)^{2g},\n$$\n\nand\n\n$$\n\\operatorname{coker}(n:\\operatorname{Pic}(C)\\to\n\\operatorname{Pic}(C))=\\mathbf Z/n\\mathbf Z\n\\oplus\\operatorname{coker}\\bigl(n:\\operatorname{Pic}^0(C)\\to\n\\operatorname{Pic}^0(C)\\bigr)=\\mathbf Z/n\\mathbf Z,\n$$\n\nthe second summand being zero by divisibility.",
+   "text": "The proper curve $C$ has dimension one by [def-sc-curves], so it is projective by [lem-sc-proper-dim-one-projective]. By [lem-sc-smooth-regular], all its local rings are domains. Hence distinct irreducible components cannot meet. The field spectrum is Noetherian, so finite type of $C$ over $k$ and [lem-weil-pbc-finite-type-over-noetherian] make $C$ Noetherian. Its finitely many irreducible components are then also open; connectedness leaves exactly one. Thus $C$ is integral and is a curve in the sense of [def-pc-curve], projective and smooth in the sense of [def-pc-smooth-projective-curve]. As $C$ is nonempty and smooth over the separably closed field $k$, [lem-pc-rational-points-dense] gives $P\\in C(k)$; [prop-pc-xk-integral] applied to $(C,P)$ now makes $C$ geometrically integral. Therefore [thm-sc-jacobian-representability] applies and identifies $\\operatorname{Pic}^0(C)$ of [def-sc-pic0] with $J_C(k)$ for an abelian variety $J_C$ of dimension $g$: the genus in its statement agrees with [def-sc-genus] by [lem-pc-genus-agrees-sc].",
    "uses": [
-    "lem-sc-pic-proper-decomposition",
+    "def-sc-curves",
+    "lem-sc-proper-dim-one-projective",
+    "lem-sc-smooth-regular",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-curve",
+    "def-pc-smooth-projective-curve",
+    "lem-pc-rational-points-dense",
+    "prop-pc-xk-integral",
     "def-sc-pic0",
     "def-sc-jacobian",
     "thm-sc-jacobian-representability",
-    "thm-av-final",
     "def-sc-genus",
-    "lem-pc-genus-agrees-sc",
-    "def-sc-mult-n"
+    "lem-pc-genus-agrees-sc"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
+    "place": "## Proof, first sentence; projectivity input Stacks Project Varieties Lemma 0A26 (varieties-lemma-dim-1-proper-projective)"
+   }
+  },
+  {
+   "text": "The degree sequence splits by [lem-sc-pic-proper-decomposition]: $\\operatorname{Pic}(C)\\cong\\mathbf Z\\oplus\\operatorname{Pic}^0(C)$, where the second factor is the kernel of degree [def-sc-pic0]. By the group identification in step 1, clause (d) of [thm-av-final] makes $\\operatorname{Pic}^0(C)$ $n$-divisible. Here $n\\geq1$ is understood in the source's phrase 'n prime to the characteristic'; the case $n=1$ is trivial.",
+   "uses": [
+    "lem-sc-pic-proper-decomposition",
+    "def-sc-pic0",
+    "thm-av-final"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
+    "place": "## Proof, first two sentences"
+   }
+  },
+  {
+   "text": "By [def-sc-mult-n], $J_C(k)[n]$ is the group of $k$-points of $J_C[n]$. Clause (c) of [thm-av-final], applied with $\\dim J_C=g$ from step 1 and $n$ prime to $\\operatorname{char}k$, gives $J_C(k)[n]\\cong(\\mathbf Z/n\\mathbf Z)^{2g}$. Under the decomposition in step 2, multiplication by $n$ is componentwise. Since $\\mathbf Z[n]=0$ for $n\\geq1$, $\\operatorname{Pic}(C)[n]=\\operatorname{Pic}^0(C)[n]\\cong J_C(k)[n]$, proving the torsion clause.",
+   "uses": [
+    "def-sc-mult-n",
+    "thm-av-final",
+    "lem-sc-pic-proper-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
+    "place": "## Proof, sentence beginning 'The group J_C(k)' and first displayed conclusion"
+   }
+  },
+  {
+   "text": "Again use $\\operatorname{Pic}(C)\\cong\\mathbf Z\\oplus\\operatorname{Pic}^0(C)$ from [lem-sc-pic-proper-decomposition]. Multiplication by $n$ has image $n\\mathbf Z\\oplus n\\operatorname{Pic}^0(C)$; step 2 gives $n\\operatorname{Pic}^0(C)=\\operatorname{Pic}^0(C)$. Its cokernel is therefore $(\\mathbf Z/n\\mathbf Z)\\oplus0\\cong\\mathbf Z/n\\mathbf Z$, including when $n=1$.",
+   "uses": [
+    "lem-sc-pic-proper-decomposition",
+    "thm-av-final"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
+    "place": "## Proof, final displayed cokernel calculation"
+   }
   }
  ],
  "proof_deps": [
+  "def-sc-curves",
+  "lem-sc-proper-dim-one-projective",
+  "lem-sc-smooth-regular",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-pc-curve",
+  "def-pc-smooth-projective-curve",
+  "lem-pc-rational-points-dense",
+  "prop-pc-xk-integral",
   "lem-sc-pic-proper-decomposition",
   "def-sc-pic0",
   "def-sc-jacobian",
@@ -46,9 +104,38 @@
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-curveestimate/lem-sc-pic-proper-ntorsion.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Picard group of proper smooth curve torsion n divisible Jacobian",
+   "results": "Only ring Picard-group and elliptic-curve point results; no statement for a general proper smooth curve",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard group of smooth projective curve over algebraically closed field has n torsion of rank 2g and cokernel n is ZMod n",
+   "results": "Weierstrass-curve class-group maps and finite-field function-field class groups, not this theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\"",
+   "results": "No relevant declaration returned",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'pic.*torsion|Pic.*torsion|pic.*divisible|Pic.*divisible' in available WeilConjectures/Mathlib source; installed Mathlib package absent",
+   "results": "No result in available local source; Mathlib-source grep could not be performed",
+   "date": "2026-10-10",
+   "verdict": "no match in available source; Mathlib-source grep unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses"
@@ -82,5 +169,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-pic-proper-ntorsion",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint's one-paragraph proof into the projectivity and integrality bridge needed for Jacobian representability, the Picard decomposition and divisibility, the prime-to-characteristic torsion calculation, and the cokernel calculation. Added the Stacks 0A26 input as an unsplit node.",
+  "blueprint": "The four steps realize the paragraph under ## Proof of lem-sc-pic-proper-ntorsion.md: its first sentence, the Jacobian divisibility and torsion sentence, and its two displayed conclusions."
+ },
+ "tool_uses": [
+  "prop-pc-xk-integral",
+  "lem-pc-rational-points-dense",
+  "lem-sc-smooth-regular",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "reviewed": "2026-10-10 E1 (delivered); L: reviewed in full by a reviewer sub-agent (FIX: same_as null -> [] after search): 0A26 read for the new node lem-sc-proper-dim-one-projective; step 1 passage from def-sc-curves to the Jacobian theorem hypotheses checked node by node; thm-av-final (c),(d) applied with the group identification Pic^0(C) = J_C(k); tool_uses recorded for the four off-unit generic tools."
 }
