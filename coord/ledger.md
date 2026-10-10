@@ -914,3 +914,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:26 L: correction: the previous commit of lem-weil-pbc-spectral-limit-pullback-sections still cited the duplicate 0A2W node (L's repoint script had stopped on a leftover mention in split_report); repointed everywhere and reviewed field written now.
 - 05:28 L: reviewed lem-weil-pbc-tor-strictly-pro-zero (5 steps, no new node): accepted.
 - 05:29 L: reviewed lem-weil-pbc-tor-long-exact-first-variable (6 steps, +split-resolutions node, +00LZ composed leaf): accepted.
+- 05:30 L: reviewed lem-weil-pbc-tower-limit-exact-surjective-kernels (6 steps, no new node): accepted.
