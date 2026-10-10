@@ -26,10 +26,10 @@ morphism of finite type between affine schemes the global sections of the source
 by the image of the global sections of the target together with finitely many elements
 (`AlgebraicGeometry.exists_finset_closure_range_appTop_union_eq_top`). An integral scheme locally
 of finite type over a field has the dimension of any of its nonempty open subschemes
-(`AlgebraicGeometry.topologicalKrullDim_opens_eq`), since all its nonempty affine opens have the
-same dimension (`AlgebraicGeometry.IsAffineOpen.topologicalKrullDim_eq_of_isIntegral`), which is finite
-(`AlgebraicGeometry.topologicalKrullDim_ne_top`). More generally, a quasi-compact scheme locally
-of finite type over a field has finite dimension
+(`AlgebraicGeometry.topologicalKrullDim_opens_eq`), since all its nonempty affine opens have
+the same dimension (`AlgebraicGeometry.IsAffineOpen.topologicalKrullDim_eq_of_isIntegral`); this
+dimension is finite (`AlgebraicGeometry.topologicalKrullDim_ne_top`). More generally, a
+quasi-compact scheme locally of finite type over a field has finite dimension
 (`AlgebraicGeometry.topologicalKrullDim_ne_top_of_compactSpace`).
 
 A `Y`-scheme `X ⟶ Y` is the colimit of its restrictions `X ×_Y U` to the affine opens `U` of `Y`

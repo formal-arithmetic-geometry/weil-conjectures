@@ -143,13 +143,26 @@ theorem isCurvePerverseLower_iff_forall_hom_eq_zero (K : WeilComplex k₀ l X) :
   -- truncation by the largest punctual subsheaf of `𝓗⁰`
   sorry
 
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **Basic objects of the curve perverse heart**: a Weil sheaf of finite support, placed in
 degree zero, is curve perverse; these are the objects `i_{x*}E` of the blueprint and their
 finite sums. (blueprint: `thm-a1-curve-perverse-heart`) -/
 theorem isCurvePerverse_toComplex_obj (G : WeilSheaf k₀ l X) (hG : G.support.Finite) :
-    (WeilSheaf.toComplex.obj G).IsCurvePerverse :=
-  -- TODO(adic): the cohomology sheaves of a sheaf placed in degree zero
-  sorry
+    (WeilSheaf.toComplex.obj G).IsCurvePerverse := by
+  have hz (a : ℤ) (ha : a ≠ 0) : IsZero ((homologySheaf a).obj (WeilSheaf.toComplex.obj G)) := by
+    refine IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _ ?_
+    change IsZero ((_root_.DerivedCategory.homologyFunctor _ a).obj
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj G.obj))
+    obtain ha | ha := ha.lt_or_gt
+    · exact (_root_.DerivedCategory.isGE_iff _ 0).1 inferInstance a ha
+    · exact (_root_.DerivedCategory.isLE_iff _ 0).1 inferInstance a ha
+  refine ⟨⟨fun a ha ↦ hz a ha.ne', ?_⟩,
+    ⟨fun a ha ↦ hz a (by omega), fun G' i _ _ ↦ IsZero.of_mono i (hz (-1) (by norm_num))⟩⟩
+  have e : (homologySheaf 0).obj (WeilSheaf.toComplex.obj G) ≅ G :=
+    WeilSheaf.toComplexCompHomologySheafIso.app G
+  rw [WeilSheaf.support_congr e]
+  exact hG
 
 end Curve
 
