@@ -2422,3 +2422,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:42 L: merged deliver/G1/lem-pc-essentially-constant-ind-hom-colimit (reviewer FIX; first push; new nodes: 1)
 - 19:42 L: lem-pc-derived-module-direct-sums steps 2-3: TeX restored from the reviewer's fixed file (shell-escaping damage in the merge of R-dds2028)
 - 19:42 L: merged deliver/G1/thm-sp-grothendieck (reviewer FIX; first push; new nodes: 2)
+- 19:42 L: returned deliver/J1/lem-sc-hilbert-polynomial (reviewer RETURN: Return points 2 (stronger induction), 4 (support reduction cited), 5 (typed Euler identity, locnoeth in stmt_deps) of 18)
