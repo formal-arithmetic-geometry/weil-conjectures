@@ -1,8 +1,8 @@
 # Work queue
 
-857 items; claim with `tools/claim.py next <group> [--stage N]`.
+854 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (383)
+## Stage 1: nodes to split (380)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -33,7 +33,6 @@
 | `lem-weil-pbc-torsion-hom-flat-comparison` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-cyclic-extension-cocycle` | 1017 | none |
-| `lem-weil-pbc-formally-smooth-differentials-injective` | 1017 | none |
 | `lem-weil-pbc-h1-injective-differentials-injective-char-p` | 1017 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
@@ -46,7 +45,6 @@
 | `lem-weil-pbc-finite-over-henselian-local-product` | 2008 | none |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 2008 | none |
 | `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 2008 | none |
-| `def-sp-etale-dictionary` | 3002 | none |
 | `def-weil-pbc-inverse-image` | 3002 | none |
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
@@ -60,7 +58,6 @@
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `def-galois-fibre-functor` | 3005 | none |
 | `lem-weil-pbc-hypercover-refinement` | 3005 | none |
-| `lem-weil-pbc-universal-homeomorphism-base-change` | 3005 | none |
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
 | `thm-weil-pbc-hypercover-cohomology` | 3005 | none |
 | `def-weil-pbc-finite-split-hypercover` | 3006 | none |
@@ -224,13 +221,13 @@
 | `pqf-lem-proper-basic` | 6002 | none |
 | `thm-sp-half-plane-convergence` | 6002 | none |
 | `def-sp-abelian` | 6003 | none |
+| `def-sp-composite-acyclicity` | 6003 | none |
 | `def-sp-grothendieck-abelian` | 6003 | none |
 | `def-sp-injective-resolutions` | 6003 | none |
 | `def-sp-left-exact-additive` | 6003 | none |
 | `lem-sp-grothendieck-enough-injectives` | 6003 | none |
 | `lem-weil-pbc-finite-proper` | 6003 | none |
 | `def-sp-acyclic` | 6004 | none |
-| `def-sp-composite-acyclicity` | 6004 | none |
 | `lem-sp-derived-well-defined` | 6004 | none |
 | `pqf-lem-finite-integral-lft` | 6004 | none |
 | `pqf-lem-integral-lft-finite` | 6004 | none |
@@ -869,7 +866,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 401 nodes that wait for stage 1, 871 nodes that wait for a statement dependency.
+Not open yet: 398 nodes that wait for stage 1, 872 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
