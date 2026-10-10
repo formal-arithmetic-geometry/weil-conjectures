@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-pqf-finite-iff-proper-finite-fibres",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite = proper with finite fibres; Stacks Lemma 30.21.1",
@@ -24,34 +24,31 @@
  ],
  "proof": [
   {
-   "text": "*(1) $\\Rightarrow$ (2).* If $f$ is finite, then $f$ is proper by\n[lem-weil-pbc-finite-proper] of the ambient-foundations chapter, and $f$ is\nquasi-finite by [pqf-lem-finite-qf]. A quasi-finite morphism has\nfinite fibres by [pqf-lem-qf-finitefibres]. Hence $f$ is proper\nwith finite fibres.",
+   "text": "*(1) $\\Rightarrow$ (2).* If $f$ is finite, then it is proper by [lem-weil-pbc-finite-proper]. It is quasi-finite by [pqf-lem-finite-qf], and a quasi-finite morphism has finite fibres by [pqf-lem-qf-finitefibres]. Thus $f$ is proper with finite fibres.",
    "uses": [
     "lem-weil-pbc-finite-proper",
     "pqf-lem-finite-qf",
     "pqf-lem-qf-finitefibres"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-pqf-finite-iff-proper-finite-fibres.md",
+    "place": "Proof, implication (1) => (2)"
+   }
   },
   {
-   "text": "*(2) $\\Rightarrow$ (1).* Assume $f$ is proper with finite fibres.\nIt suffices to prove that $f$ is affine: if $f$ is affine, then $f$ is\nuniversally closed by [pqf-lem-proper-basic] (it is proper), so\n$f$ is integral by [pqf-lem-integral-univclosed]; since $f$ is\nproper it is of finite type, hence locally of finite type, by\n[def-weil-pbc-scheme-conventions]; therefore $f$ is finite by\n[pqf-lem-integral-lft-finite].\n\nTo prove that $f$ is affine, by\n[pqf-lem-affine-local-target] we may assume that $S$ is affine,\nand our goal is to show that $X$ is affine. Since $f$ is proper, $X$\nis separated and quasi-compact by [pqf-lem-proper-basic], so we\nmay use [pqf-lem-serre-criterion] to prove that $X$ is affine.\nLet $\\mathcal I\\subset\\mathcal O_X$ be a quasi-coherent sheaf of\nideals of finite type. First, $X$ is locally Noetherian: $f$ is of\nfinite type by [def-weil-pbc-scheme-conventions] and $S$ is\nlocally Noetherian, so [pqf-lem-locnoeth-lft] applies. Hence\n$\\mathcal I$, being quasi-coherent of finite type on the locally\nNoetherian scheme $X$, is coherent by\n[pqf-lem-coherent-ft-locnoeth]. By\n[pqf-lem-fff-vanishing] applied to the coherent sheaf\n$\\mathcal I$ we get $(R^1f_*\\mathcal I)_s=0$ for all $s\\in S$\n(the fibre $f^{-1}(\\{s\\})$ is finite by assumption), i.e. the sheaf\n$R^1f_*\\mathcal I$ has vanishing stalks at every point, so\n$R^1f_*\\mathcal I=0$ by [pqf-lem-sheaf-zero-stalks]. From the\nLeray spectral sequence [pqf-lem-leray] of the morphism $f$, more\nprecisely from its low degree terms\n[pqf-lem-leray-lowdegree], we obtain\n\n$$\n\\mathrm H^1(X,\\mathcal I)\\cong\\mathrm H^1(S,f_*\\mathcal I).\n$$\n\nNow $f$ is quasi-compact and quasi-separated by\n[pqf-lem-proper-basic], so $f_*\\mathcal I$ is quasi-coherent by\n[pqf-lem-pushforward-qcoh]. Since $S$ is affine,\n[pqf-lem-affine-vanishing] gives\n$\\mathrm H^1(S,f_*\\mathcal I)=0$. Hence\n$\\mathrm H^1(X,\\mathcal I)=0$ for every quasi-coherent ideal of finite\ntype, and [pqf-lem-serre-criterion] shows that $X$ is affine.\nSince $S$ is affine as well, $f$ is affine by\n[pqf-def-affine-morphism], which finishes the proof.",
+   "text": "*(2) $\\Rightarrow$ (1).* Assume that $f$ is proper with finite fibres. By [pqf-lem-proper-basic], $f$ is of finite type, locally of finite type, and quasi-compact. The converse implication of [pqf-lem-qf-finitefibres] therefore makes $f$ quasi-finite. Applying [pqf-lem-qf-locqf-qc] to this quasi-finite morphism gives that $f$ is locally quasi-finite. Since $f$ is proper and locally quasi-finite, $f$ is finite by [pqf-lem-proper-lqf-finite]. The locally Noetherian hypothesis on $S$ is part of the stated theorem but is not needed for this implication.",
    "uses": [
     "pqf-lem-proper-basic",
-    "pqf-lem-integral-univclosed",
-    "def-weil-pbc-scheme-conventions",
-    "pqf-lem-integral-lft-finite",
-    "pqf-lem-affine-local-target",
-    "pqf-lem-serre-criterion",
-    "pqf-lem-locnoeth-lft",
-    "pqf-lem-coherent-ft-locnoeth",
-    "pqf-lem-fff-vanishing",
-    "pqf-lem-sheaf-zero-stalks",
-    "pqf-lem-leray",
-    "pqf-lem-leray-lowdegree",
-    "pqf-lem-pushforward-qcoh",
-    "pqf-lem-affine-vanishing",
-    "pqf-def-affine-morphism"
+    "pqf-lem-qf-finitefibres",
+    "pqf-lem-qf-locqf-qc",
+    "pqf-lem-proper-lqf-finite"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-pqf-finite-iff-proper-finite-fibres.md",
+    "place": "Proof, implication (2) => (1)"
+   }
   }
  ],
  "proof_deps": [
@@ -59,29 +56,46 @@
   "pqf-lem-finite-qf",
   "pqf-lem-qf-finitefibres",
   "pqf-lem-proper-basic",
-  "pqf-lem-integral-univclosed",
-  "def-weil-pbc-scheme-conventions",
-  "pqf-lem-integral-lft-finite",
-  "pqf-lem-affine-local-target",
-  "pqf-lem-serre-criterion",
-  "pqf-lem-locnoeth-lft",
-  "pqf-lem-coherent-ft-locnoeth",
-  "pqf-lem-fff-vanishing",
-  "pqf-lem-sheaf-zero-stalks",
-  "pqf-lem-leray",
-  "pqf-lem-leray-lowdegree",
-  "pqf-lem-pushforward-qcoh",
-  "pqf-lem-affine-vanishing",
-  "pqf-def-affine-morphism"
+  "pqf-lem-qf-locqf-qc",
+  "pqf-lem-proper-lqf-finite"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-pqf-finite-iff-proper-finite-fibres.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism iff proper with finite fibres",
+   "results": "AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite in Mathlib/AlgebraicGeometry/Morphisms/Proper; IsFinite.of_isProper_of_locallyQuasiFinite in Mathlib/AlgebraicGeometry/ZariskisMainTheorem",
+   "date": "2026-10-11",
+   "verdict": "generalization: proper and locally quasi-finite, with the existing DAG equivalence from quasi-finite finite fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFinite, IsProper, finite fibres",
+   "results": "0 hits; wrapper reported unknown identifier IsFinite",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "of_isProper_of_locallyQuasiFinite Mathlib",
+   "results": "no hits from msearch wrapper",
+   "date": "2026-10-11",
+   "verdict": "no match from wrapper"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite morphism iff proper with finite fibres",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -125,5 +139,30 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-pqf-finite-iff-proper-finite-fibres",
+  "worker": "stage1",
+  "summary": "Replaced the imported formal-functions proof sketch with the unit route. Finite implies proper and quasi-finite, hence finite fibres. Conversely, properness supplies finite type, locally finite type and quasi-compactness; finite fibres then give quasi-finiteness, hence local quasi-finiteness, and Mathlib's proper-plus-locally-quasi-finite theorem gives finiteness. No new DAG nodes were needed.",
+  "blueprint": "The imported node's two implications are realized directly; the reverse implication uses the unit theorem proper and quasi-finite implies finite.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "The reverse implication needs the generic equivalence between quasi-finiteness and local quasi-finiteness plus quasi-compactness; this is not supplied by a node in the proper-finite unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-qf-locqf-qc",
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ffp2215",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffp2215 (reviewer sub-agent of L); spot-checked: Read every cited statement in the packet; step 1 matches Stacks 02OG. Read Mathlib ZariskisMainTheorem.lean:373-385 and QuasiFinite.lean:303-328. The item itself is not a one-declaration leaf (needs IsFinite.iff_isProper_and_locallyQuasiFinite plus locallyQuasiFinite_iff_finite_preimage_singleton), so kept split. FIX more, RETURN less: step 2 used Mathlib's proper+locally-quasi-finite => finite (Zariski main theorem) as an uncited fact (C1); added statement-only node pqf-lem-proper-lqf-finite (Stacks 02LS (3)=>(1); unsplit, exact Mathlib match IsFinite.of_isProper_of_locallyQuasiFinite at ZariskisMainTheorem.lean:373 recorded in mathlib_searches, a leaf candidate) and cited it in step 2 uses and proof_deps. cor-pqf-proper-quasifinite-finite could not be cited (it depends on this item: cycle). Second reading by F1 missed this C1 (it said no uncited geometric fact is used). Finite fibres => quasi-finite cites pqf-lem-qf-finitefibres with finite type and qc from pqf-lem-proper-basic (C4 ok). Tool use pqf-lem-qf-locqf-qc accepted as generic.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
