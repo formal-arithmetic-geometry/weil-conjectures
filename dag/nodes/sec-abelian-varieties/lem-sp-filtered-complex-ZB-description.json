@@ -11,18 +11,75 @@
  },
  "kind": "statement",
  "title": "Cycles and boundaries for a filtered complex",
- "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], let $K^\\bullet$ be a cochain complex, and let $F^\\bullet K^\\bullet$ be a bounded decreasing filtration by subcomplexes [def-sp-filtration]. For every $p,q,r$ with $r\\ge1$, define subobjects of $\\operatorname{gr}^pK^{p+q}$ by $Z_r^{p,q}=((F^pK^{p+q}\\cap d^{-1}(F^{p+r}K^{p+q+1}))+F^{p+1}K^{p+q})/F^{p+1}K^{p+q}$ and $B_r^{p,q}=((F^pK^{p+q}\\cap d(F^{p-r+1}K^{p+q-1}))+F^{p+1}K^{p+q})/F^{p+1}K^{p+q}$. Then $B_r\\subseteq Z_r$ and the filtered-complex spectral sequence has $E_r^{p,q}\\cong Z_r^{p,q}/B_r^{p,q}$. Equivalently, writing $X^{[a,b]}=F^aK^\\bullet/F^bK^\\bullet$, the same object is naturally isomorphic to the image of $H^{p+q}(X^{[p,p+r]})\\to H^{p+q}(X^{[p-r+1,p+1]})$ induced by the map $F^pK^\\bullet/F^{p+r}K^\\bullet\\to F^{p-r+1}K^\\bullet/F^{p+1}K^\\bullet$. For $r=1$, $Z_1$ is the cycles of $\\operatorname{gr}^pK$ and $B_1$ is its boundaries, so $E_1=H(\\operatorname{gr}^pK)$; for sufficiently large $r$ the terms stabilize. This is the filtered-complex description of Stacks Tag 012K.",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], let $K^\\bullet$ be a cochain complex, and let $F^\\bullet K^\\bullet$ be a finite decreasing filtration by subcomplexes [def-sp-filtration]. For every $p,q,r$ with $r\\ge1$, define subobjects of $\\operatorname{gr}^pK^{p+q}$ by $Z_r^{p,q}=((F^pK^{p+q}\\cap d^{-1}(F^{p+r}K^{p+q+1}))+F^{p+1}K^{p+q})/F^{p+1}K^{p+q}$ and $B_r^{p,q}=((F^pK^{p+q}\\cap d(F^{p-r+1}K^{p+q-1}))+F^{p+1}K^{p+q})/F^{p+1}K^{p+q}$. Then $B_r\\subseteq Z_r$ and the filtered-complex spectral sequence has $E_r^{p,q}\\cong Z_r^{p,q}/B_r^{p,q}$. Equivalently, writing $X^{[a,b]}=F^aK^\\bullet/F^bK^\\bullet$, the same object is naturally isomorphic to the image of $H^{p+q}(X^{[p,p+r]})\\to H^{p+q}(X^{[p-r+1,p+1]})$ induced by the map $F^pK^\\bullet/F^{p+r}K^\\bullet\\to F^{p-r+1}K^\\bullet/F^{p+1}K^\\bullet$. For $r=1$, $Z_1$ is the cycles of $\\operatorname{gr}^pK$ and $B_1$ is its boundaries, so $E_1=H(\\operatorname{gr}^pK)$; for sufficiently large $r$ the terms stabilize. This is the filtered-complex description of Stacks Tag 012K.",
  "source": {
   "document": "literature/stacks-project/homology.tex",
   "place": "Homology, Lemma 12.19.2, label lemma-spectral-sequence-filtered-complex, Tag 012K (cycle and boundary description)"
  },
  "stmt_deps": [
   "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Use the filtered-complex construction [lem-sp-filtered-complex-associated-spectral-sequence-construction]. Its graded differential object has component $F^{p+1}K^{p+1+q}$ and its injective shift map is induced by $F^{p+1}K^{p+1+q}\\hookrightarrow F^pK^{p+1+q}$; hence the resulting page differentials have bidegree $(r,1-r)$ and its initial graded object is $\\operatorname{gr}^pK^{p+q}$.",
+   "uses": [
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 12.18.1 and Remark 12.18.2, applied in the proof of Lemma 12.19.2 (Tag 012K)"
+   }
+  },
+  {
+   "text": "Unwinding the kernel and image formulas for the self-map spectral sequence gives, in the component of total degree $p+q$, $Z_r^{p,q}=((F^pK^{p+q}\\cap d^{-1}(F^{p+r}K^{p+q+1}))+F^{p+1}K^{p+q})/F^{p+1}K^{p+q}$ and $B_r^{p,q}=((F^pK^{p+q}\\cap d(F^{p-r+1}K^{p+q-1}))+F^{p+1}K^{p+q})/F^{p+1}K^{p+q}$. The inclusion $B_r^{p,q}\\subseteq Z_r^{p,q}$ follows because $d^2=0$ and $d(F^{p-r+1})\\subseteq F^{p-r+1}$, while the page definition is $E_r^{p,q}=Z_r^{p,q}/B_r^{p,q}$.",
+   "uses": [
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+    "def-sp-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.19.2, proof after Remark 12.18.2, Tag 012K"
+   }
+  },
+  {
+   "text": "For the equivalent cohomology description (working with elements in the abelian category, as in Stacks), write $\\tilde Z=F^pK^{p+q}\\cap d^{-1}(F^{p+r}K^{p+q+1})$. Every class in ^{p+q}(F^pK/F^{p+r}K)$ is represented by some \\in\\tilde Z$, and since \\ge1$ we have \\in F^{p+r}\\subseteq F^{p+1}$, so the same $ is a cocycle of ^{p-r+1}K/F^{p+1}K$ representing the image class. Hence the image is the quotient of $\\tilde Z$ by $\\tilde Z\\cap(d(F^{p-r+1}K^{p+q-1})+F^{p+1}K^{p+q})$. If =dy+f$ with \\in F^{p-r+1}K^{p+q-1}$ and \\in F^{p+1}K^{p+q}$, then =x-f\\in F^pK^{p+q}\\cap d(F^{p-r+1}K^{p+q-1})$; conversely every element of ^pK^{p+q}\\cap d(F^{p-r+1}K^{p+q-1})$ lies in $\\tilde Z$ because ^2=0$. So this kernel is $\\tilde Z\\cap((F^pK^{p+q}\\cap d(F^{p-r+1}K^{p+q-1}))+F^{p+1}K^{p+q})$, and the map $\\tilde Z\\to Z_r^{p,q}/B_r^{p,q}$, which is surjective by the definition of ^{p,q}$, has exactly this kernel. Thus the image is naturally ^{p,q}/B_r^{p,q}$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.19.2, cycle-boundary formulas and quotient-complex interpretation, Tag 012K"
+   }
+  },
+  {
+   "text": "At $r=1$, the condition $d^{-1}(F^{p+1})$ is the kernel of the differential on $\\operatorname{gr}^pK$, and $d(F^p)$ gives its boundaries, so $Z_1$ and $B_1$ are the cycles and boundaries and $E_1=H(\\operatorname{gr}^pK)$. Since the filtration is bounded degreewise, for fixed $p,q$ both tails $F^{p+r}K^{p+q+1}$ and $F^{p-r+1}K^{p+q-1}$ are eventually zero or equal to the relevant endpoint; the displayed subobjects therefore stabilize for sufficiently large $r$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 12.19.2, formulas immediately preceding and following the statement, Tag 012K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+  "def-sp-abelian",
   "def-sp-filtration"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma 12.19.2 (Tag 012K), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +111,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-sp-spectral-object-yields",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-filtered-complex-ZB-description",
+  "worker": "stage1",
+  "summary": "Split the Tag 012K calculation into the graded differential-object construction, the explicit Z_r/B_r formulas, the quotient-complex image identification, and the r=1 and bounded-stabilization checks. Added one generic unsplit construction node; no existing DAG node states that construction.",
+  "blueprint": "The four steps realize Step 3 of thm-sp-spectral-object-yields: the Tag 012K cycle and boundary calculation, its quotient-complex image form, the E_1 identification, and stabilization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zbd3152",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zbd3152 (reviewer sub-agent of L); spot-checked: Z_r,B_r, E_0, bidegree checked verbatim against homology.tex 6013-6105 (Lemma 12.19.2, Tag 012K) and the proof's A=(F^{p+1}K^{p+1+q}), alpha, E_0=Coker(alpha)[0,-1]; statement matches parent thm-sp-spectral-object-yields (target X^[p-r+1,p+1]; bounded->finite is the defined term of def-sp-filtration, named in E7); image formula checked by hand on K=A deg 0 d=0 F^0=F^1=A F^2=0 (p=0: 0=0; p=1: A=A) and on A->A identity with F^1=A in degree 1 (E_1^{0,0}=A, E_2^{0,0}=0, E_2^{1,0}=0, both sides); new construction node is the Stacks proof construction, not a duplicate of any filtered/spectral node on sheaf-dag, not elementary. FIX more, RETURN less: Step 3 (elementary) proved only that coboundary changes stay in B_r; it omitted the kernel direction (x=dy+f gives dy=x-f in F^p cap d(F^{p-r+1})) and the cocycle check dx in F^{p+r} subset F^{p+1}; rewrote Step 3 with both, giving the exact kernel and surjectivity onto Z_r/B_r.; 1 file(s) fixed by the reviewer"
+ }
 }
