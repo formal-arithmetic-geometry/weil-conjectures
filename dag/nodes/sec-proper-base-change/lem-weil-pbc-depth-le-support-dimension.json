@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-depth-le-support-dimension",
+ "kind": "statement",
+ "title": "The depth of a nonzero finite module over a Noetherian local ring is at most the dimension of its support",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring], i.e. a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$, and let $M\\neq0$ be a finite $R$-module [def-weil-finitely-generated-module]. Let $\\operatorname{Supp}(M)$ be the set of prime ideals $\\mathfrak p\\subset R$ with $M_{\\mathfrak p}\\neq0$, where $M_{\\mathfrak p}=S^{-1}M$, $S=R\\setminus\\mathfrak p$, is the localization [def-weil-pbc-module-localization], and let $\\dim\\operatorname{Supp}(M)\\in\\{0,1,2,\\dots\\}\\cup\\{\\infty\\}$ be the supremum of the integers $n\\ge0$ for which there is a chain $\\mathfrak p_0\\subsetneq\\mathfrak p_1\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ of prime ideals of $R$ all lying in $\\operatorname{Supp}(M)$. Then $\\dim\\operatorname{Supp}(M)\\ge\\operatorname{depth}(M)$, where $\\operatorname{depth}(M)=\\operatorname{depth}_{\\mathfrak m}(M)$ is the depth [def-weil-pbc-depth].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LK (lemma-bound-depth, lines 17813-17817), proof lines 17819-17835. Tag verified in tags/tags: 00LK,algebra-lemma-bound-depth"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "depth of a finitely generated module over a Noetherian local ring is at most the dimension of its support",
+   "results": "Module.supportDim_le_ringKrullDim (RingTheory.KrullDimension.Module), Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson (RingTheory.KrullDimension.Regular), Module.supportDim, isNoetherian_of_isNoetherianRing_of_finite: no depth",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "length of a regular sequence on a module is bounded by the Krull dimension of the support of the module",
+   "results": "Module.supportDim_add_length_eq_supportDim_of_isRegular, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Module.supportDim_quotSMulTop_succ_eq_supportDim (RingTheory.KrullDimension.Regular), Module.supportDim_le_ringKrullDim, Module.supportDim_eq_ringKrullDim_quotient_annihilator (RingTheory.KrullDimension.Module)",
+   "date": "2026-10-10",
+   "verdict": "no match for depth; candidate for the bound on each regular sequence (see mathlib_candidate)"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, Module.supportDim",
+   "results": "Module.supportDim_add_length_eq_supportDim_of_isRegular (Mathlib.RingTheory.KrullDimension.Regular) only",
+   "date": "2026-10-10",
+   "verdict": "candidate, not a leaf (no depth)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Ideal.depth\\|IsLocalRing.depth\\|def depth\\|ModuleCat.depth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls RingTheory/Depth RingTheory/Regular; cat RingTheory/Regular/Depth.lean; sed -n 190,216p RingTheory/KrullDimension/Regular.lean",
+   "results": "only Data/W/Basic.lean:113 WType.depth (unrelated); RingTheory/Depth/ holds only Rees.lean; RingTheory/Regular/Depth.lean is a deprecated_module stub with no declaration; RingTheory/Regular/RegularSequence.lean:21 lists depth as TODO; KrullDimension/Regular.lean:197-198 supportDim_add_length_eq_supportDim_of_isRegular",
+   "date": "2026-10-10",
+   "verdict": "no depth in the pinned Mathlib: no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsLocalRing.depth; Ideal.depth (project root ~/weil-conjectures-slopmaster2)",
+   "results": "no items, index: unavailable (not a proof of absence; the grep above is)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "Module.supportDim_add_length_eq_supportDim_of_isRegular",
+  "file": "Mathlib/RingTheory/KrullDimension/Regular.lean",
+  "how": "lines 197-198 (read by sed -n 190,216p): for R Noetherian local, M finite and rs an M-regular sequence (RingTheory.Sequence.IsRegular, RegularSequence.lean:146-147: weakly regular and M != (rs)M), supportDim R (M/(rs)M) + length rs = supportDim R M; since M/(rs)M != 0 its supportDim is >= 0, so every regular sequence has length <= supportDim R M. The pinned Mathlib has no depth, so the supremum over regular sequences and the case mM = M (excluded by Nakayama) are not stated: candidate, not a leaf (B8)."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cm-local-free-resolution-to-mcm",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

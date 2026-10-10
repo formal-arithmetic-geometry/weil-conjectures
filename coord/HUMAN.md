@@ -58,3 +58,6 @@ The choose node lem-weil-pbc-popescu-solution-modulo-choose (created at the spli
 
 ## Source gap: Stacks 00NG (lemma-mcm-resolution) — 2026-10-10 04:45 UTC
 Its conclusion says K is maximal Cohen-Macaulay, but its proof ("immediate from the definition and 00NE") only gives K = 0 or depth(K) = d; by 00NF the zero module is not maximal Cohen-Macaulay (its depth is infinite). The claim is true (Auslander-Buchsbaum: pd(M) = d - e, so the (d-e)-th syzygy is nonzero), but not by the cited argument. The new node lem-weil-pbc-cm-local-free-resolution-to-mcm states the weaker "K = 0 or MCM", which is all the citer lem-weil-pbc-regular-local-finite-gl-dim needs. Found by the opus worker of that item, verified by L.
+
+## Resolved: the gap in Stacks 00NG (K maximal Cohen-Macaulay) — 2026-10-10 05:52 UTC
+The split of lem-weil-pbc-cm-local-free-resolution-to-mcm proves K != 0 directly (a nonzero finite module of depth < d is not free, so each syzygy is nonzero, and 00LX (2), (3) give depth K_1 = depth N + 1 exactly). So the conclusion of 00NG holds as stated; only its proof's citation of 00NE is short. No action needed.

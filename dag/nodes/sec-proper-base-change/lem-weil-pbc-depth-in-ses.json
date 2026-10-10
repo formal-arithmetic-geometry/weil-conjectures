@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-depth-in-ses",
+ "kind": "statement",
+ "title": "Depth in a short exact sequence of nonzero finite modules over a Noetherian local ring",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring], i.e. a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$, and let $0\\to N'\\to N\\to N''\\to0$ be a short exact sequence of $R$-modules [def-weil-pbc-exact-sequence] in which $N'$, $N$, $N''$ are nonzero finite $R$-modules [def-weil-finitely-generated-module]. Write $\\operatorname{depth}$ for the depth $\\operatorname{depth}_{\\mathfrak m}$ [def-weil-pbc-depth], with values in $\\{0,1,2,\\dots\\}\\cup\\{\\infty\\}$, $\\infty-1=\\infty$ and $\\infty+1=\\infty$. Then (1) $\\operatorname{depth}(N)\\ge\\min\\{\\operatorname{depth}(N'),\\operatorname{depth}(N'')\\}$; (2) $\\operatorname{depth}(N'')\\ge\\min\\{\\operatorname{depth}(N),\\operatorname{depth}(N')-1\\}$; (3) $\\operatorname{depth}(N')\\ge\\min\\{\\operatorname{depth}(N),\\operatorname{depth}(N'')+1\\}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LX (lemma-depth-in-ses, lines 17904-17916), proof lines 17918-17936 (Ext characterization of depth, Lemma Tag 00LW lemma-depth-ext line 17863, and the long exact Ext sequence). Tags verified in tags/tags: 00LX,algebra-lemma-depth-in-ses; 00LW,algebra-lemma-depth-ext"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "depth in a short exact sequence of finite modules over a local Noetherian ring, depth of submodule at least min of depth of middle and depth of quotient plus one",
+   "results": "CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₂/X₁/X₃_iff (CategoryTheory.Abelian.Projective.Dimension), hasInjectiveDimensionLT_X₂/X₃ (CategoryTheory.Abelian.Injective.Dimension), Module.support_of_exact (RingTheory.Support), ModuleCat.free_shortExact_finrank_add, Module.length_eq_add_of_exact: projective/injective dimension and length, no depth",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "depth lemma: for a short exact sequence 0 → N' → N → N'' → 0, depth N' ≥ min(depth N, depth N'' + 1)",
+   "results": "Module.length_eq_add_of_exact, ShortExact.hasInjectiveDimensionLT_X₁/X₃/X₂/X₃_iff, ShortExact.hasProjectiveDimensionLT_X₁/X₃, ModuleCat.free_shortExact_rank_add: no depth",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, Function.Exact",
+   "results": "no declaration",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Ideal.depth\\|IsLocalRing.depth\\|def depth\\|ModuleCat.depth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 145,170p RingTheory/Depth/Rees.lean",
+   "results": "no depth declaration (only Data/W/Basic.lean:113 WType.depth); RingTheory/Depth/Rees.lean:158 ModuleCat.exists_isRegular_tfae (Rees theorem: an M-regular sequence of length n in I exists iff Ext^i(R/I, M) = 0 for i < n, R Noetherian, M finite, IM < M), the Ext characterization the source's proof uses, but no depth and no short exact sequence statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsLocalRing.depth; Ideal.depth (project root ~/weil-conjectures-slopmaster2)",
+   "results": "no items, index: unavailable (not a proof of absence; the grep above is)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "ModuleCat.exists_isRegular_tfae",
+  "file": "Mathlib/RingTheory/Depth/Rees.lean",
+  "how": "line 158 (read by sed -n 145,170p): the Rees theorem, equivalence of the existence of an M-regular sequence of length n in I with the vanishing of Ext^i(R/I, M) for i < n (R Noetherian, M finite nontrivial, IM < M). It is the Ext characterization of depth (00LW) on which the proof of 00LX rests; the pinned Mathlib has no depth and no depth inequality for short exact sequences: candidate for the proof, not a leaf (B8)."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cm-local-free-resolution-to-mcm",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
