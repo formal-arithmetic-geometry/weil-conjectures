@@ -1,8 +1,8 @@
 # Work queue
 
-853 items; claim with `tools/claim.py next <group> [--stage N]`.
+852 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (378)
+## Stage 1: nodes to split (376)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -49,7 +49,6 @@
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `lem-pc-module-pullback-adjunction` | 3004 | none |
-| `lem-pc-module-pullback-identity-composition` | 3004 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
 | `lemma-weil-pbc-affine-neighbourhood-cofinal` | 3004 | none |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 3004 | none |
@@ -67,10 +66,8 @@
 | `lem-sc-cohomological-dimension` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
-| `def-galois-category` | 3007 | none |
 | `def-sc-divisor` | 3007 | none |
 | `def-sc-etale-qcoherent-module` | 3007 | none |
-| `lem-galois-action-continuous` | 3007 | none |
 | `lem-galois-axioms` | 3007 | none |
 | `lem-galois-constant-sheaf-sets-representable` | 3007 | none |
 | `lem-galois-descent` | 3007 | none |
@@ -97,6 +94,7 @@
 | `lem-galois-glue` | 3008 | none |
 | `lem-pc-curves-are-sc` | 3008 | none |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
+| `lem-sc-etale-qcoherent-presheaf-functorial` | 3008 | none |
 | `lem-sc-group-cd-one` | 3008 | none |
 | `lem-sc-line-bundle-rational-section` | 3008 | rests_on_sorry |
 | `lem-sc-sylow-module-filtration` | 3008 | none |
@@ -385,11 +383,12 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (475)
+## Stage 2: nodes to state (476)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `cor-pc-dense-points-curves-sections` | 1 | state |
+| `def-galois-category` | 1 | state |
 | `def-kun-topological-dimension-at-point` | 1 | state |
 | `def-nagata-extended-ideal` | 1 | state |
 | `def-nagata-homogeneous-localization-degree-zero` | 1 | state |
@@ -865,7 +864,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 396 nodes that wait for stage 1, 875 nodes that wait for a statement dependency.
+Not open yet: 394 nodes that wait for stage 1, 876 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
