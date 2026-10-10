@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-formally-unramified-open-restriction",
+ "kind": "statement",
+ "title": "Formally unramified morphisms restrict to open subschemes",
+ "statement": "Let $f:X\\to S$ be a formally unramified morphism of schemes [def-weil-pbc-formally-unramified-morphism]. Let $U\\subseteq X$ and $V\\subseteq S$ be open subschemes with inclusions $j_U:U\\to X$, $j_V:V\\to S$ (open immersions [def-weil-open-immersion]) such that $f(U)\\subseteq V$, and let $f|_U:U\\to V$ be the unique morphism with $j_V\\circ f|_U=f\\circ j_U$ [lem-weil-pbc-morphism-factors-through-open-subscheme]. Then $f|_U:U\\to V$ is formally unramified.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02HC (lemma-formally-unramified-on-opens), with Definition 02H8 (definition-formally-unramified)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "formally unramified morphism of schemes restricted to open subschemes is formally unramified",
+   "results": "AlgebraicGeometry.FormallyUnramified.recOn/casesOn, AlgebraicGeometry.morphismRestrict, FormallyUnramified.formallyUnramified_of_affine_subset, Scheme.Hom.resLE, Flat.instResLE (Mathlib.AlgebraicGeometry.Morphisms.Flat), formallyUnramified_appLE",
+   "date": "2026-10-10",
+   "verdict": "generalization: restriction to opens is AlgebraicGeometry.IsZariskiLocalAtSource.resLE for any property local at source and target; FormallyUnramified is one (HasRingHomProperty)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formally unramified morphism of schemes remains formally unramified after restricting source and target to open subsets",
+   "results": "FormallyUnramified.formallyUnramified_of_affine_subset, Scheme.Hom.formallyUnramified_appLE, formallyUnramified_iff, FormallyUnramified.of_comp, IsImmersion.instMorphismRestrict (Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified / Immersion)",
+   "date": "2026-10-10",
+   "verdict": "no direct statement; formallyUnramified_iff (affine-local description) shows FormallyUnramified is affine local, so the generic resLE applies"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsZariskiLocalAtSource.resLE (project ~/weil-conjectures-slopmaster2)",
+   "results": "AlgebraicGeometry.IsZariskiLocalAtSource.resLE in .lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Basic.lean (index unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "match exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|resLE\\|morphismRestrict\\|IsZariskiLocal\\|HasRingHomProperty' Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; grep -rn 'resLE' Mathlib/AlgebraicGeometry/Morphisms/Basic.lean; grep -n 'instance.*IsZariskiLocalAt' Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean",
+   "results": "FormallyUnramified.lean:66 instance HasRingHomProperty @FormallyUnramified RingHom.FormallyUnramified; RingHomProperties.lean:291 instance IsZariskiLocalAtTarget P and :382 instance IsZariskiLocalAtSource P for HasRingHomProperty P; Morphisms/Basic.lean:314 lemma IsZariskiLocalAtSource.resLE [IsZariskiLocalAtTarget P] (e : V ≤ f ⁻¹ᵁ U) (hf : P f) : P (f.resLE U V e)",
+   "date": "2026-10-10",
+   "verdict": "match: IsZariskiLocalAtSource.resLE with P = @FormallyUnramified"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsZariskiLocalAtSource.resLE",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "how": "specializes in one line: with P = @FormallyUnramified, which is local at source and target by its HasRingHomProperty instance (Morphisms/FormallyUnramified.lean:66; RingHomProperties.lean:291, 382), resLE (Basic.lean:314) gives FormallyUnramified (f.resLE V U e) for e : U ≤ f ⁻¹ᵁ V; f.resLE V U e is the node's f|_U (resLE_comp_ι, Restrict.lean, as in the match of lem-weil-pbc-morphism-factors-through-open-subscheme), and Mathlib's FormallyUnramified is the node's notion by the match of def-weil-pbc-formally-unramified-morphism (hom_ext / of_hom_ext)",
+  "line": 314
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-universal-thickening-open-restriction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: match verified (IsZariskiLocalAtSource.resLE Morphisms/Basic.lean:314 with P = FormallyUnramified); a duplicate leaf created in parallel (formally-unramified-on-opens) was removed and its citer redirected here."
+}

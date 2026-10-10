@@ -13,9 +13,94 @@
   "def-weil-open-immersion",
   "def-weil-pbc-conormal-sheaf-formally-unramified"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$h|_V$ is formally unramified.* Write $j_V:V\\to Z$, $j_U:U\\to X$ for the inclusions and $h|_V:V\\to U$ for the unique morphism with $j_U\\circ h|_V=h\\circ j_V$ [lem-weil-pbc-morphism-factors-through-open-subscheme]. Since $h$ is formally unramified and $h(V)\\subseteq U$, $h|_V$ is formally unramified by [lem-weil-pbc-formally-unramified-open-restriction] (Stacks 02HC: two $U$-morphisms $T'\\to V$ extending the same $T\\to V$ give, after composing with $j_V$, two $X$-morphisms $T'\\to Z$ extending the same $T\\to Z$, which agree since $h$ is formally unramified, so they agree because $j_V$ is a monomorphism).",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-formally-unramified-open-restriction",
+    "def-weil-pbc-formally-unramified-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 04FA (lemma-universal-thickening-localize), proof, first sentence: 'The first statement is Lemma 02HC'"
+   }
+  },
+  {
+   "text": "*$V\\subset V'$ is a first order thickening over $U$.* Let $i_Z:Z\\to Z'$ be the closed immersion and $h':Z'\\to X$ the structure morphism, $h'\\circ i_Z=h$ [def-weil-pbc-universal-first-order-thickening]. A first order thickening is a thickening, so $i_Z$ is a homeomorphism of $Z$ onto $Z'$ [def-sbc-first-order-thickening]; hence $V'=i_Z(V)$ is open in $Z'$ and $V=i_Z^{-1}(V')$, i.e. $V'$ exists and $V=Z\\cap V'$. Every point of $V'$ is $i_Z(v)$ with $v\\in V$, and $h'(i_Z(v))=h(v)\\in U$; so $h'(V')\\subseteq U$ and there is a unique $h'_{V'}:V'\\to U$ with $j_U\\circ h'_{V'}=h'\\circ j_{V'}$ [lem-weil-pbc-morphism-factors-through-open-subscheme]. By [lem-weil-pbc-thickening-open-restriction] (applied to $i_Z$, $V'$ and $X\\supseteq U$), the restriction $i_V:V\\to V'$, the unique morphism with $j_{V'}\\circ i_V=i_Z\\circ j_V$, is a closed immersion whose ideal sheaf $\\mathcal I_V$ is the restriction $\\mathcal I|_{V'}$ of the ideal sheaf $\\mathcal I$ of $i_Z$, $\\mathcal I_V^2=0$, and $V\\subset V'$ is a first order thickening over $U$ through $h'_{V'}$. It is compatible with $h|_V$: $j_U\\circ h'_{V'}\\circ i_V=h'\\circ i_Z\\circ j_V=h\\circ j_V=j_U\\circ h|_V$, so $h'_{V'}\\circ i_V=h|_V$ by the uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme].",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-thickening-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 04F3 (lemma-universal-thickening), first paragraph ('general remarks'): 'Let V' \\subset Z' be the open subscheme such that V = Z \\cap V''; Definition 04EX (definition-thickening); Lemma 09ZU (lemma-base-change-thickening)"
+   }
+  },
+  {
+   "text": "*Existence of the dotted arrow.* Let $T\\subset T'$ be a first order thickening over $U$, with closed immersion $i_T:T\\to T'$ and structure morphism $b:T'\\to U$, and let $a:T\\to V$ with $h|_V\\circ a=b\\circ i_T$. Then $T\\subset T'$ is a first order thickening over $X$ through $j_U\\circ b$ [def-sbc-first-order-thickening], and $a_Z:=j_V\\circ a:T\\to Z$ satisfies $h\\circ a_Z=j_U\\circ h|_V\\circ a=(j_U\\circ b)\\circ i_T$. By the universal property of $Z'$ over $X$ [def-weil-pbc-universal-first-order-thickening] there is a unique $a'':T'\\to Z'$ with $h'\\circ a''=j_U\\circ b$ and $a''\\circ i_T=i_Z\\circ j_V\\circ a$. Since $T\\subset T'$ is a thickening, $i_T$ is surjective on underlying spaces [def-sbc-first-order-thickening], so every point of $T'$ is $i_T(t)$ and $a''(i_T(t))=i_Z(j_V(a(t)))\\in i_Z(V)=V'$; hence $a''(T')\\subseteq V'$ and there is a unique $a':T'\\to V'$ with $j_{V'}\\circ a'=a''$ [lem-weil-pbc-morphism-factors-through-open-subscheme]. It is a morphism of thickenings over $U$: $j_U\\circ h'_{V'}\\circ a'=h'\\circ j_{V'}\\circ a'=h'\\circ a''=j_U\\circ b$, so $h'_{V'}\\circ a'=b$; and $j_{V'}\\circ a'\\circ i_T=a''\\circ i_T=i_Z\\circ j_V\\circ a=j_{V'}\\circ i_V\\circ a$, so $a'\\circ i_T=i_V\\circ a$; both by the uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme] ($j_U$, $j_{V'}$ are monomorphisms).",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-pbc-universal-first-order-thickening",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 04F3 (lemma-universal-thickening), first paragraph: 'By the universal property of Z' we obtain (a, a'). But since we have equality |T| = |T'| of underlying topological spaces we see that a'(T') \\subset V'. Hence we may think of (a, a') as a morphism of thickenings (T \\subset T') \\to (V \\subset V') over U'"
+   }
+  },
+  {
+   "text": "*Uniqueness of the dotted arrow; conclusion.* If $a'_1,a'_2:T'\\to V'$ both satisfy $h'_{V'}\\circ a'_k=b$ and $a'_k\\circ i_T=i_V\\circ a$, then $j_{V'}\\circ a'_k:T'\\to Z'$ satisfies $h'\\circ j_{V'}\\circ a'_k=j_U\\circ h'_{V'}\\circ a'_k=j_U\\circ b$ and $j_{V'}\\circ a'_k\\circ i_T=j_{V'}\\circ i_V\\circ a=i_Z\\circ j_V\\circ a$, so $j_{V'}\\circ a'_1=j_{V'}\\circ a'_2$ by the uniqueness in the universal property of $Z'$ [def-weil-pbc-universal-first-order-thickening], and $a'_1=a'_2$ by the uniqueness in [lem-weil-pbc-morphism-factors-through-open-subscheme]. With Steps 2 and 3, $V\\subset V'$ (with $h'_{V'}$) is a universal first order thickening of $V$ over $U$ [def-weil-pbc-universal-first-order-thickening].",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Proof of Lemma 04F3 (lemma-universal-thickening), first paragraph: 'Uniqueness is clear also'"
+   }
+  },
+  {
+   "text": "*Conormal sheaves.* By [def-weil-pbc-conormal-sheaf-formally-unramified] the conormal sheaf $\\mathcal C_{V/U}$ may be computed in the universal first order thickening $V\\subset V'$ of Steps 2-4 (any other choice is isomorphic to it by a unique isomorphism over $U$ compatible with $V$, by the uniqueness in [lem-weil-pbc-universal-first-order-thickening-exists]): $\\mathcal C_{V/U}=i_V^*\\mathcal I_V$, while $\\mathcal C_{Z/X}=i_Z^*\\mathcal I$. The restriction to the open subscheme $V$ is the pullback along $j_V$ [lem-weil-pbc-open-immersion-module-pullback-restriction], and pullbacks compose, $(g\\circ f)^*\\cong f^*g^*$ [def-pc-module-pullback]. Hence, using $i_Z\\circ j_V=j_{V'}\\circ i_V$ and $\\mathcal I|_{V'}=\\mathcal I_V$ (Step 2, [lem-weil-pbc-thickening-open-restriction] (2)): $\\mathcal C_{Z/X}|_V\\cong j_V^*i_Z^*\\mathcal I\\cong(i_Z\\circ j_V)^*\\mathcal I=(j_{V'}\\circ i_V)^*\\mathcal I\\cong i_V^*j_{V'}^*\\mathcal I\\cong i_V^*(\\mathcal I|_{V'})=i_V^*\\mathcal I_V=\\mathcal C_{V/U}$.",
+   "uses": [
+    "def-weil-pbc-conormal-sheaf-formally-unramified",
+    "lem-weil-pbc-universal-first-order-thickening-exists",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-thickening-open-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Lemma 04FA (lemma-universal-thickening-localize), 'In particular, C_{Z/X}|_V = C_{V/U}'; Definition 04F4 (definition-universal-thickening) (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-formally-unramified-open-restriction",
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-thickening-open-restriction",
+  "def-weil-scheme-over-base",
+  "def-weil-pbc-conormal-sheaf-formally-unramified",
+  "lem-weil-pbc-universal-first-order-thickening-exists",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 04FA (lemma-universal-thickening-localize) and its proof, which refers to the proof of Lemma 04F3 (lemma-universal-thickening), first paragraph (the 'general remarks', followed here), and to Lemma 02HC (lemma-formally-unramified-on-opens)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +132,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +152,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-universal-thickening-open-restriction",
+  "worker": "stage1",
+  "summary": "Split along Stacks 04FA, whose proof cites 02HC for formal unramifiedness and the 'general remarks' of the proof of 04F3 for the universality of V \\subset V'; the latter argument is written out in Steps 2-4 (first order thickening over U, existence via the universal property of Z' and |T| = |T'|, uniqueness via j_{V'} monic), Step 5 derives C_{Z/X}|_V = C_{V/U} by pullback composition. Two new Mathlib leaves: lem-weil-pbc-formally-unramified-open-restriction (02HC; IsZariskiLocalAtSource.resLE) and lem-weil-pbc-thickening-open-restriction (closed immersions/first order thickenings restrict to opens; instIsClosedImmersionMorphismRestrict, Scheme.ker_morphismRestrict_ideal, IdealSheafData.ideal_pow). Statement and stmt_deps kept."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 04FA and the general remarks in the proof of 04F3: h|_V formally unramified (new 02HC leaf), V in V' a first order thickening over U (new composed leaf on restricting closed immersions and their ideals to opens), the lift exists and is unique because |T| = |T'| forces it into V', conormal sheaves by restriction = pullback along the open immersion. Tags verified."
+ }
 }

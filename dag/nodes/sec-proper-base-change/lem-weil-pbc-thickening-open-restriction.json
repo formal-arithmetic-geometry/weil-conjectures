@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-thickening-open-restriction",
+ "kind": "statement",
+ "title": "Closed immersions and (first order) thickenings restrict to opens of the ambient scheme",
+ "statement": "Let $i:Z\\to Z'$ be a closed immersion of schemes [def-weil-closed-immersion] with ideal sheaf $\\mathcal I\\subseteq\\mathcal O_{Z'}$ [def-sbc-closed-immersion-ideal-sheaf]. Let $V'\\subseteq Z'$ be an open subscheme with inclusion $j_{V'}:V'\\to Z'$ [def-weil-open-immersion], let $V=i^{-1}(V')\\subseteq Z$ be the corresponding open subscheme of $Z$ with inclusion $j_V$, and let $i_V:V\\to V'$ be the unique morphism with $j_{V'}\\circ i_V=i\\circ j_V$ [lem-weil-pbc-morphism-factors-through-open-subscheme]. Then: (1) $i_V$ is a closed immersion; (2) its ideal sheaf $\\mathcal I_V\\subseteq\\mathcal O_{V'}$ is the restriction of $\\mathcal I$: $\\mathcal I_V(W)=\\mathcal I(W)$ inside $\\mathcal O_{V'}(W)=\\mathcal O_{Z'}(W)$ for every open (equivalently every affine open) $W\\subseteq V'$; (3) if $\\mathcal I^2=0$ then $\\mathcal I_V^2=0$ [def-sbc-ideal-sheaf-powers], and if $i$ is surjective on underlying spaces then so is $i_V$. Consequently, if $Z\\subset Z'$ is a thickening, resp. a first order thickening [def-sbc-first-order-thickening], then so is $V\\subset V'$; and if moreover $Z'$ is a scheme over a scheme $X$ via $h':Z'\\to X$ and $U\\subseteq X$ is an open subscheme with $h'(V')\\subseteq U$, then $V\\subset V'$ is a (first order) thickening over $U$ [def-weil-scheme-over-base], $V'$ being over $U$ through the unique $h'_{V'}:V'\\to U$ with $j_U\\circ h'_{V'}=h'\\circ j_{V'}$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 09ZU (lemma-base-change-thickening; proof omitted in Stacks) for the base change $V=Z\\times_{Z'}V'$ along the open immersion $V'\\to Z'$, with Definition 04EX (definition-thickening); closed immersions are local on the target, Morphisms, Lemma 01QO (literature/stacks-project/morphisms.tex, morphisms-lemma-closed-immersion)"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-sbc-ideal-sheaf-powers",
+  "def-sbc-first-order-thickening",
+  "def-weil-scheme-over-base"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of a closed immersion to an open subscheme of the target is a closed immersion, ideal sheaf restricts",
+   "results": "AlgebraicGeometry.instIsClosedImmersionMorphismRestrict, IsImmersion.instMorphismRestrict, instIsClosedImmersionInclusion, Scheme.ofRestrict_appLE, IdealSheafData.isLocalization_away, IdealSheafData.map_ideal', ideal_le_comap_ideal",
+   "date": "2026-10-10",
+   "verdict": "match for (1): instIsClosedImmersionMorphismRestrict"
+  },
+  {
+   "tool": "leansearch",
+   "query": "kernel ideal sheaf of restriction of morphism to open subscheme equals kernel ideal of the morphism on affine opens",
+   "results": "AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal (Mathlib.AlgebraicGeometry.IdealSheaf.Basic), Scheme.Hom.ker, IdealSheafData.ideal_map, Hom.ideal_ker_le, IdealSheafData.ker_subschemeι_app, Hom.ker_apply",
+   "date": "2026-10-10",
+   "verdict": "match for (2): ker_morphismRestrict_ideal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "first order thickening (square zero closed immersion) of schemes restricted to an open subscheme is again a first order thickening",
+   "results": "IdealSheafData.instIsPreimmersionSubschemeι, instIsPreimmersionGlueDataObjι, isOpenImmersion_glueDataObjMap, subschemeι, glueDataObj, inclusion (Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme)",
+   "date": "2026-10-10",
+   "verdict": "no thickening notion in Mathlib; the clauses are covered one by one by the declarations of the match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.morphismRestrict",
+   "results": "AlgebraicGeometry.instIsClosedImmersionMorphismRestrict (Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion), isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange",
+   "date": "2026-10-10",
+   "verdict": "match for (1)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ker_morphismRestrict\\|ker.*[Rr]estrict' Mathlib/AlgebraicGeometry; grep -n 'morphismRestrict' Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; grep -n 'ideal_pow\\|ideal_mul' Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean; grep -rn -i 'thickening' Mathlib/AlgebraicGeometry",
+   "results": "IdealSheaf/Basic.lean:816 Scheme.ker_morphismRestrict_ideal (f : X.Hom Y) [QuasiCompact f] (U : Y.Opens) (V : U.toScheme.affineOpens) : (f ∣_ U).ker.ideal V = f.ker.ideal ⟨U.ι ''ᵁ V, _⟩, :820 ker_ideal_of_isPullback_of_isOpenImmersion; ClosedImmersion.lean:401 instance IsClosedImmersion (f ∣_ V); IdealSheaf/Basic.lean:422 ideal_mul, :424 ideal_pow ((I ^ n).ideal = I.ideal ^ n); no 'thickening' in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instIsClosedImmersionMorphismRestrict, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.IdealSheafData.ideal_pow",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+  "how": "one Mathlib declaration per clause, for i : Z ⟶ Z' with [IsClosedImmersion i] and V' : Z'.Opens, i_V being i ∣_ V' : i ⁻¹ᵁ V' ⟶ V' (morphismRestrict, with morphismRestrict_ι giving j_{V'} ∘ i_V = i ∘ j_V): (1) instIsClosedImmersionMorphismRestrict (Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:401); (2) Scheme.ker_morphismRestrict_ideal (IdealSheaf/Basic.lean:816; i is quasi-compact, being a closed immersion), the ideal sheaf being Scheme.Hom.ker by the match of def-sbc-closed-immersion-ideal-sheaf and determined by its ideals on affine opens; (3) square zero: (I_V ^ 2).ideal W = (I_V.ideal W)^2 = (I.ideal W)^2 = (I ^ 2).ideal W = 0 by ideal_pow (IdealSheaf/Basic.lean:424) and (2); surjectivity on spaces and the structure over U are immediate from the definitions and lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "line": 816
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-universal-thickening-open-restriction",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match, one declaration per clause (ClosedImmersion.lean:401, IdealSheaf/Basic.lean:816 (needs QuasiCompact, true for closed immersions), ideal_pow :424); lines verified by L; stage 3 checks the square-zero clause."
+}
