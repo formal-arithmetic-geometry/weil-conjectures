@@ -11,24 +11,69 @@
  },
  "kind": "statement",
  "title": "Base change compatibility of the direct-image counit",
- "statement": "Let $k$ be a field, let $X$ be a scheme over $\\operatorname{Spec}(k)$, and let $\\sigma:\\operatorname{Spec}(k)\\to X$ be a rational point with its structure-map compatibility. For every $T\\to\\operatorname{Spec}(k)$ assume the base-changed module category has injective resolutions. Let $T'\\to T$ be a morphism and let $\\mathcal L$ be an object of the normalized Picard subfunctor with invertible direct image [def-pc-picard-functor] [def-pc-pic-sigma-functor]. Then the pullback along the induced base-change map of the adjunction counit $f_T^*f_{T,*}\\mathcal L\\to\\mathcal L$ is isomorphic as an arrow to the counit for the pulled-back object over $T'$. [def-pc-scheme].",
+ "statement": "Let $k$ be a field and let $X$ be a smooth projective curve over $k$ [def-pc-smooth-projective-curve] whose structure morphism is geometrically integral [def-pc-geometrically-irreducible]. Let $\\sigma:\\operatorname{Spec}(k)\\to X$ be a $k$-rational point [def-pc-rational-point]. Assume that for every scheme $T$ over $\\operatorname{Spec}(k)$ the module category on $X_T$ has injective resolutions [def-sp-injective-resolutions]. For a morphism $i:T'\\to T$ over $k$ and an object $\\mathcal L\\in F(T)$ of the invertible-direct-image subfunctor [def-pc-f-subfunctor] of the normalized Picard functor [def-pc-pic-sigma-functor], the pullback along the induced base-change map of the adjunction counit $f_T^*f_{T,*}\\mathcal L\\to\\mathcal L$ is isomorphic as an arrow to the counit $f_{T'}^*f_{T',*}(i_X^*\\mathcal L)\\to i_X^*\\mathcal L$ for the pulled-back object.",
  "source": {
   "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
   "place": "theorem nonempty_arrowIso_pullback_directImageCounit, lines 156-175"
  },
  "stmt_deps": [
   "def-pc-scheme",
+  "def-pc-smooth-projective-curve",
+  "def-pc-geometrically-irreducible",
+  "def-pc-rational-point",
+  "def-sp-injective-resolutions",
+  "def-pc-f-subfunctor",
   "def-pc-picard-functor",
   "def-pc-pic-sigma-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By membership in $F(T)$ [def-pc-f-subfunctor], $Rf_{T,*}\\mathcal L\\cong\\mathcal N[0]$ with $\\mathcal N$ invertible [def-pc-invertible-in-degree-zero]; taking $H^0$, $\\mathcal N\\cong f_{T,*}\\mathcal L$. The module $\\mathcal L$ is quasi-coherent and flat over $T$: it is invertible over $X_T$ [def-sc-invertible-module] and $X_T\\to T$ is flat because $X\\to\\operatorname{Spec}(k)$ is smooth [lem-pc-smooth-flat]. The morphism $f_T:X_T\\to T$ is quasi-compact and separated, being a base change of the projective, hence separated and quasi-compact, morphism $X\\to\\operatorname{Spec}(k)$ (Stacks 01K5, 01K3). Apply the derived flat base-change theorem [lem-pc-rf-base-change-flat-module] to the cartesian square defined by $i:T'\\to T$ and $f_T$: $Li^*Rf_{T,*}\\mathcal L\\cong Rf_{T',*}i_X^*\\mathcal L$. Since $\\mathcal N$ is flat, $Li^*(\\mathcal N[0])=(i^*\\mathcal N)[0]$, so taking $H^0$ shows that the canonical base-change map $\\beta:i^*f_{T,*}\\mathcal L\\to f_{T',*}i_X^*\\mathcal L$ (the map adjoint to $f_{T'}^*i^*f_{T,*}\\mathcal L\\cong i_X^*f_T^*f_{T,*}\\mathcal L\\xrightarrow{i_X^*\\varepsilon}i_X^*\\mathcal L$, of which the derived comparison is the derived version, Stacks 02N6) is an isomorphism.",
+   "uses": [
+    "def-pc-f-subfunctor",
+    "def-pc-invertible-in-degree-zero",
+    "def-sc-invertible-module",
+    "lem-pc-smooth-flat",
+    "lem-pc-rf-base-change-flat-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
+    "place": "theorem nonempty_arrowIso_pullback_directImageCounit docstring, lines 161-164"
+   }
+  },
+  {
+   "text": "Write $c:i_X^*f_T^*\\cong f_{T'}^*i^*$ for the canonical pullback-composition isomorphism [lem-pc-module-pullback-identity-composition], and $\\varepsilon_T,\\varepsilon_{T'}$ for the counits of the pullback/pushforward adjunctions [lem-pc-module-pullback-adjunction]. Since $\\beta$ of Step 1 is by definition the adjoint of $i_X^*\\varepsilon_T\\circ c^{-1}$, the triangle identity of the adjunction for $f_{T'}$ gives $\\varepsilon_{T',i_X^*\\mathcal L}\\circ f_{T'}^*\\beta\\circ c=i_X^*\\varepsilon_{T,\\mathcal L}$. As $f_{T'}^*\\beta\\circ c$ is an isomorphism (Step 1), this commuting square, with the identity of $i_X^*\\mathcal L$ (composed with the chosen isomorphism of $i_X^*\\mathcal L$ with the representative of the pulled-back class) on the target edge, is an isomorphism in `Arrow` from the pullback of the counit for $\\mathcal L$ to the counit for $i_X^*\\mathcal L$, which is the asserted `Nonempty` witness.",
+   "uses": [
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
+    "place": "theorem nonempty_arrowIso_pullback_directImageCounit docstring, lines 162-164"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-f-subfunctor",
+  "def-pc-invertible-in-degree-zero",
+  "def-sc-invertible-module",
+  "lem-pc-smooth-flat",
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
+  "place": "theorem nonempty_arrowIso_pullback_directImageCounit docstring, lines 156-175"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "adjunction morphism direct image counit commutes with base change",
-   "results": "generic pullback adjunction declarations; no Picard direct-image counit theorem",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction and related generic adjunction declarations; no Picard direct-image counit theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -45,15 +90,47 @@
    "results": "no matches",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "base change compatibility of an adjunction counit for a flat proper family",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-pc-f-representable",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-f-representable"
+ "unit": "sk-thm-picard-f-representable",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-arrow-iso-pullback-counit",
+  "worker": "stage1",
+  "summary": "Split the theorem into the derived flat base-change comparison in degree zero and the naturality square for the pullback/pushforward adjunction, which produces the Arrow isomorphism. No new nodes were needed; both dependencies already exist in the DAG.",
+  "blueprint": "The steps realize the naturality of the zero-scheme dictionary under base change in thm-pc-f-representable.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-rf-base-change-flat-module",
+    "why": "The target's naturality step needs the generic derived base-change comparison for the flat Picard family; no node in the representability unit supplies this comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-rf-base-change-flat-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-aic1839",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aic1839 (reviewer sub-agent of L); spot-checked: Statement matches ZeroScheme.lean nonempty_arrowIso_pullback_directImageCounit and the use in thm-pc-f-representable step 3; no cycle (cited nodes generic); not in Mathlib (item is Picard-specific base change of the counit, not an isIso-counit criterion; delivery searches suffice). FIX more, RETURN less: (1) C4/E: step 1 now checks the quasi-compact separated hypothesis of lem-pc-rf-base-change-flat-module (projective base change, Stacks 01K5/01K3) and the degree-zero passage (N flat so Li^*N[0]=i^*N[0]); (2) D/C: step 1 now names the iso as the canonical base-change map beta (mate of the composition iso), and step 2 derives the commuting square from the triangle identity instead of asserting it for an unspecified iso; target edge accounts for the Pic.map representative. Second reading missed (2).; 1 file(s) fixed by the reviewer"
+ }
 }
