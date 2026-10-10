@@ -47,9 +47,11 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
   (`prop-pod-perfect-local-model`): a bounded complex of finite projective `Λ_X`-modules lies in
   `Dctf(X, Λ)`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_of_isDualizable`
-  (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`, reduced to
-  `AlgebraicGeometry.ProEtale.DerivedCategory.bounded_and_homology_of_isDualizable`, which is
-  still `sorry`.
+  (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`. The proof follows
+  the local model: it uses `sk-def-perfect` and `lem-sf-proetale-constructible-origin`, and the
+  local constancy of the cohomology of a bounded complex of finite projective modules
+  (`AlgebraicGeometry.ProEtale.DerivedCategory.isFiniteLocallyConstant_homology_of_retract`),
+  which is still `sorry`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_boundedConstructible`:
   `Dᵇc_proét(X, Λ)` is a triangulated subcategory at a finite coefficient ring.
 - `AlgebraicGeometry.ProEtale.isDualizable_derivedDual` (`lem-pod-coefficient-dual-perfect`):
@@ -434,7 +436,11 @@ theorem isFiniteLocallyConstant_of_cover
 
 omit [Finite Λ] in
 /-- The cohomology sheaves of a bounded complex of finite projective `Λ_W`-modules on the small
-pro-étale site of `W` are locally constant with finite stalks. -/
+pro-étale site of `W` are locally constant with finite stalks.
+
+This is not formalised yet: the differentials are locally constant (sections of a constant sheaf
+are locally constant), but this needs that the pullback of a constant sheaf along a weakly étale
+morphism is constant, and the comparison of morphisms between constant sheaves with sections. -/
 theorem isFiniteLocallyConstant_homology_of_retract [Finite Λ] {W : Scheme.{u}}
     (P : CochainComplex (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} Λ)) ℤ)
     (hP : ∀ n, ∃ r : ℕ, Nonempty (Retract (P.X n) (⨁ fun _ : Fin r ↦
@@ -555,7 +561,8 @@ theorem bounded_and_homology_of_isDualizable
       (isFiniteLocallyConstant_homology_of_retract P hr n)
   -- the trivial stratification of `X`
   let S : Stratification X := Stratification.ofNoetherianSpace 1 (fun _ ↦ Set.univ)
-    (fun _ ↦ isOpen_univ.isLocallyClosed) (Set.iUnion_const _) (fun i j h ↦ (h (Subsingleton.elim i j)).elim)
+    (fun _ ↦ isOpen_univ.isLocallyClosed) (Set.iUnion_const _)
+    (fun i j h ↦ (h (Subsingleton.elim i j)).elim)
     (fun _ ↦ X) (fun _ ↦ 𝟙 X) (fun _ ↦ inferInstance) (fun _ ↦ by simp)
   obtain ⟨F, hF, e⟩ := exists_isConstructibleSheaf_iso_comparisonUpperStar_obj Λ
     (F := (_root_.DerivedCategory.homologyFunctor _ n).obj K) ⟨S, fun _ ↦
