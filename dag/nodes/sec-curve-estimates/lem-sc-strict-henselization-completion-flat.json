@@ -24,9 +24,53 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put C=R^{\\mathrm{sh}} and I=mC. The strict-henselization triples statement identifies C as the filtered colimit of the pointed etale R-algebras S in its triple category, with maximal ideal I and with C/I equal to K.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ, proof part (c), strict-henselization construction"
+   }
+  },
+  {
+   "text": "For every triple algebra S, the canonical map S\\to\\widehat C is flat by the per-triple completion-flatness assertion [lem-sc-etale-triple-to-sh-completion-flat]. This is the auxiliary assertion used in the paragraph beginning 'To finish the proof of (c)' in Tag 06LJ; it already includes the identification of the completed target with \\widehat C.",
+   "uses": [
+    "lem-sc-etale-triple-to-sh-completion-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)'"
+   }
+  },
+  {
+   "text": "The composites S\\to C\\to\\widehat C are flat for every object S of the filtered triple category. Since C is the filtered colimit of these S, the filtered-colimit flatness lemma [lem-weil-pbc-colimit-rings-flat] implies that the canonical map C\\to\\widehat C is flat.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-etale-triple-to-sh-completion-flat",
+    "lem-weil-pbc-colimit-rings-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ, proof part (c), paragraph beginning 'To finish the proof of (c)'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-etale-triple-to-sh-completion-flat",
+  "lem-weil-pbc-colimit-rings-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +102,49 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-completion-noetherian",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-strict-henselization-completion-flat",
+  "worker": "stage1",
+  "summary": "Split Tag 06LJ(c) through the filtered triple construction: each etale triple algebra is Noetherian and maps flatly to the strict-henselization completion, and filtered-colimit flatness gives the completion map from the strict henselization.",
+  "blueprint": "Realizes the boundary-stalk proof clause asserting flatness of the strict-henselization completion map, following the proof of Tag 06LJ(c).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "The curve unit needs the strict henselization's filtered triple construction and its locality/colimit clauses."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "The curve unit needs the generic affine finite-presentation consequence of etaleness."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "The curve unit needs the generic theorem that finite-type algebras over Noetherian rings are Noetherian."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-rings-flat",
+    "why": "The curve unit needs the generic filtered-colimit criterion for flat ring maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-colimit-rings-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shf2509",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shf2509 (reviewer sub-agent of L); spot-checked: Read packet whole. No cycle: item and new node do not cite lem-sc-strict-henselization-noetherian or -completion-noetherian; new node is statement-only (empty proof); sibling completion-noetherian cites the item with identical hypotheses (R Noetherian local, completion at mR^sh) (C4 ok). New node lem-sc-etale-triple-to-sh-completion-flat is true and a real lemma (S->S_q localization flat, (S_q)^sh=R^sh, completion flat over the Noetherian local S_q by the completed-free-module argument of 06LJ(c)); not a duplicate of lem-weil-pbc-noetherian-completion-flat; Mathlib has no strict henselization. Step 4 colimit flatness matches lem-weil-pbc-colimit-rings-flat. FIX more, RETURN less: removed vestigial step 2 (S Noetherian), used by no later step after E1's second-reading rewrite of step 3, and dropped its two proof_deps/tool_uses (lfp-affine-opens, finite-type-noetherian).; 1 file(s) fixed by the reviewer"
+ }
 }
