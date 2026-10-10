@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-nagata-relative-gluing-datum-descent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Finite-stage raw relative gluing datum",
- "statement": "Descend every chart algebra in $\\mathsf R_X$ using\n[lemma-nagata-affine-fp-descends], every quasi-compact overlap open\nusing [lemma-nagata-qc-open-descends], and both directions of every\noverlap isomorphism using [lemma-nagata-morphism-descends]. Define\n$\\lambda_{\\mathrm{raw}}(X/S)$ to be the selected\nupper bound of their finitely many stages, and denote the resulting raw\ndatum over $S_{\\lambda_{\\mathrm{raw}}}$ by\n$\\mathsf R_{X,\\lambda_{\\mathrm{raw}}}^{\\mathrm{raw}}$.\nEach object is transported by the canonical base-change map to the selected\nupper bound. Functoriality supplies the comparison maps and coherence, so\nthe raw datum is well typed.",
+ "statement": "Let $I$ be a nonempty directed poset, let $(S_\\lambda)_{\\lambda\\in I}$ be an inverse system of schemes with affine transition morphisms, and let $S=\\varprojlim_{\\lambda\\in I}S_\\lambda$. Fix $\\lambda_0\\in I$ such that $S_{\\lambda_0}$ is quasi-compact and quasi-separated, and let $f\\colon X\\to S$ be a morphism of finite presentation. Choose the finite relative affine presentation $\\mathsf R_X$ of $f$ from [def-nagata-relative-finite-affine-presentation], taking its base charts to be the inverse images of a fixed finite affine cover of $S_{\\lambda_0}$ (the projection $S\\to S_{\\lambda_0}$ is affine, so $S$ is quasi-compact and quasi-separated as that definition requires, and each base chart $V$ over an affine open $V_{\\lambda_0}\\subseteq S_{\\lambda_0}$ is the spectrum of the colimit of the coordinate rings of the affine inverse images $V_\\lambda\\subseteq S_\\lambda$, which is the affine setting of [def-nagata-affine-fp-descent]). For each chart algebra in $\\mathsf R_X$, use [def-nagata-affine-fp-descent] and [lemma-nagata-affine-fp-descends] to choose a finite stage at which it descends; each such choice is permitted by [lemma-nagata-filtered-colimit-finite-data]. For each quasi-compact overlap open, use [def-nagata-qc-open-descent] and [lemma-nagata-qc-open-descends] to descend it, then transport all descended overlap opens to one common stage $\\lambda_W$ above their stages using [def-nagata-basechanged-system] and [def-nagata-directed-finite-upper-bound]. Above $\\lambda_W$, transport the source and target overlap data and choose one common later stage for both directions of each overlap isomorphism; descend those morphisms using [def-nagata-morphism-descent] and [lemma-nagata-morphism-descends], with each finite-stage choice again supplied by [lemma-nagata-filtered-colimit-finite-data]. Let $F$ be the finite set of all stages so obtained and define $\\lambda_{\\mathrm{raw}}(X/S)=u(F)$ using the selected finite upper-bound operation [def-nagata-directed-finite-upper-bound]. Transport every descended chart, overlap, and overlap morphism to $S_{\\lambda_{\\mathrm{raw}}}$ by the canonical comparison maps of [def-nagata-basechanged-system]. The resulting finite diagram, with its chart, overlap, and comparison data, is by definition the raw relative gluing datum $\\mathsf R^{\\mathrm{raw}}_{X,\\lambda_{\\mathrm{raw}}}$; its comparison maps are the transported maps and its typing is the functoriality of the canonical base-change maps. Like the chart descents of [def-nagata-affine-fp-descent], this datum and $\\lambda_{\\mathrm{raw}}(X/S)$ depend on the chosen presentation, cover, and finite-stage lifts, which are fixed once and for all; citers use it only through these fixed choices.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-relative-gluing-datum-descent.md",
   "place": "node def-nagata-relative-gluing-datum-descent, order 358"
@@ -20,14 +20,16 @@
   "def-nagata-directed-finite-upper-bound",
   "def-nagata-morphism-descent",
   "def-nagata-qc-open-descent",
-  "def-nagata-relative-finite-affine-presentation"
+  "def-nagata-relative-finite-affine-presentation",
+  "def-nagata-basechanged-system",
+  "lemma-nagata-filtered-colimit-finite-data"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -71,5 +73,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-nagata-relative-gluing-datum-descent",
+  "worker": "stage1",
+  "summary": "Checked the imported raw relative gluing datum definition against its blueprint, all eight existing dependency nodes, and the Lean approximation source. The blueprint marks this stage-by-stage bookkeeping as bypassed by the direct finite-presentation and Noetherian approximation theorems, so the definition has no proof steps and requires no new nodes. The Lean source contains the replacement approximation declarations but no declaration of this explicit raw datum.",
+  "blueprint": "The node statement is the imported blueprint node itself (order 358); its status note says that the finite-stage gluing bookkeeping is bypassed by the direct approximation route. The whole blueprint search found no other node stating this definition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rgd2740",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rgd2740 (reviewer sub-agent of L); spot-checked: Third push: head 0b21bf2fe now contains the edits the 21:50 return found absent (diff vs ebbc2cb81): base charts from a finite affine cover of S_lambda0, overlap opens transported to common lambda_W before both overlap-map directions are descended at one later stage, def-nagata-basechanged-system and lemma-nagata-filtered-colimit-finite-data in text and stmt_deps; blueprint.from null is correct for an imported node (B9). Checked against merged def-nagata-affine-fp-descent (22:06), qc-open/morphism descent defs and lemmas, and the citers def-nagata-relative-gluing-valid-stage and lemma-nagata-relative-gluing-datum-descends: lambda_raw and the raw datum are well typed. FIX more, RETURN less: (1) C4: stated that S->S_lambda0 is affine so S is qcqs as def-nagata-relative-finite-affine-presentation requires and each base chart is Spec of the colimit of the affine inverse images, the affine setting of def-nagata-affine-fp-descent; (2) C4: stated that the datum and lambda_raw depend on the fixed presentation, cover and lifts, matching the choice-dependence of the merged def-nagata-affine-fp-descent. Second reading by K1: claimed edits are now in the head; it missed only these two consistency points.; 1 file(s) fixed by the reviewer"
+ }
 }
