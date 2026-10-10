@@ -1,22 +1,18 @@
 # Work queue
 
-840 items; claim with `tools/claim.py next <group> [--stage N]`.
+842 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (664)
+## Stage 1: nodes to split (662)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-z-localizations-dvr` | 1010 | none |
-| `lem-weil-pbc-constructible-in-retrocompact-open` | 1011 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
-| `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
-| `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1011 | none |
 | `lem-weil-pbc-regular-local-localization` | 1011 | none |
 | `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1011 | none |
-| `lem-weil-pbc-regular-ring-local-criterion` | 1011 | none |
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1011 | none |
 | `lem-weil-pbc-regular-sequence-polynomial-variables` | 1011 | none |
 | `lem-weil-pbc-regular-sequence-powers` | 1011 | none |
@@ -77,6 +73,8 @@
 | `lem-weil-pbc-completion-dimension` | 1012 | none |
 | `lem-weil-pbc-completion-finite-extension` | 1012 | none |
 | `lem-weil-pbc-composition-fibre-degree-bound` | 1012 | none |
+| `lem-weil-pbc-constructible-intersection-in-constructible` | 1012 | none |
+| `lem-weil-pbc-constructible-is-retrocompact` | 1012 | none |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1012 | none |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1012 | none |
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
@@ -671,7 +669,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (176)
+## Stage 2: nodes to state (180)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -708,6 +706,7 @@
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
 | `lem-weil-pbc-completion-of-dvr-is-dvr` | 1 | state |
 | `lem-weil-pbc-completion-regular-local` | 1 | state |
+| `lem-weil-pbc-constructible-in-retrocompact-open` | 1 | state |
 | `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-derivation-extends` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
@@ -762,6 +761,8 @@
 | `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
 | `lem-weil-pbc-henselization-finite-separable-fibres` | 1 | state |
 | `lem-weil-pbc-hypersurface-derivation-regular` | 1 | state |
+| `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1 | state |
+| `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1 | state |
 | `lem-weil-pbc-idempotent-splitting-monic-factorization` | 1 | state |
 | `lem-weil-pbc-idempotents-determined-modulo-radical` | 1 | state |
 | `lem-weil-pbc-immersion-affine-constructible-pieces` | 1 | state |
@@ -803,6 +804,7 @@
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
+| `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
 | `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-union` | 1 | state |
@@ -852,7 +854,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 676 nodes that wait for stage 1, 468 nodes that wait for a statement dependency.
+Not open yet: 674 nodes that wait for stage 1, 468 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
