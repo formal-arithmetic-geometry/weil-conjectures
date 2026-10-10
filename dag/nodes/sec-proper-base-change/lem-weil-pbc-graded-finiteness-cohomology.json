@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-graded-finiteness-cohomology",
+ "kind": "statement",
+ "title": "Cohomology of a finite type graded module over f^*B~ is a finite B-module",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $B=\\bigoplus_{k\\ge0}B_k$ a commutative graded $A$-algebra (the $B_k$ are $A$-submodules with $B_kB_l\\subseteq B_{k+l}$ and $1\\in B_0$, the structure map $A\\to B$ landing in $B_0$) which is a finite type $A$-algebra [def-weil-pbc-finite-type-algebra]. Let $f:X\\to\\operatorname{Spec}A$ be a proper morphism [def-weil-proper-morphism], and write $f^\\sharp(a)\\in\\Gamma(X,\\mathcal O_X)$ for the image of $a\\in A$. Let $(\\mathcal G_m)_{m\\ge0}$ be quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent], and for all $k,m\\ge0$ and $b\\in B_k$ let $\\mu^{(m)}_b:\\mathcal G_m\\to\\mathcal G_{m+k}$ be an $\\mathcal O_X$-linear map [def-weil-sheaf-of-modules-category], such that: (i) $\\mu^{(m)}_{b+b'}=\\mu^{(m)}_b+\\mu^{(m)}_{b'}$ for $b,b'\\in B_k$; (ii) $\\mu^{(m+l)}_b\\circ\\mu^{(m)}_{b'}=\\mu^{(m)}_{bb'}$ for $b\\in B_k$, $b'\\in B_l$; (iii) for $a\\in A$ with image $a\\cdot1\\in B_0$, $\\mu^{(m)}_{a\\cdot1}$ is multiplication by $f^\\sharp(a)$ on $\\mathcal G_m$; (iv) (finite type) $X$ is covered by open sets $U$ for each of which there are finitely many integers $d_1,\\dots,d_r\\ge0$ and sections $s_i\\in\\mathcal G_{d_i}(U)$ such that for every $m\\ge0$, every open $V\\subseteq U$ and every $t\\in\\mathcal G_m(V)$, each point of $V$ has an open neighbourhood $W\\subseteq V$ on which $t|_W=\\sum_{i:\\,d_i\\le m}\\sum_jc_{ij}\\,\\mu^{(d_i)}_{b_{ij}}(s_i)|_W$ for finitely many $c_{ij}\\in\\mathcal O_X(W)$ and $b_{ij}\\in B_{m-d_i}$. (These data are the same as a quasi-coherent graded module $\\bigoplus_m\\mathcal G_m$ of finite type over the graded $\\mathcal O_X$-algebra $f^*\\widetilde B$, $b\\in B_k$ acting through its pulled-back global section.) Fix $p\\ge0$ and put $M_m=H^p(X,\\mathcal G_m)$ (sheaf cohomology [pqf-def-cohomology]). Then $M=\\bigoplus_{m\\ge0}M_m$ is a $B$-module under $\\big(\\sum_kb_k\\big)\\cdot(x_m)_{m\\ge0}=\\big(\\sum_{k+m=n}H^p(X,\\mu^{(m)}_{b_k})(x_m)\\big)_{n\\ge0}$ ($b_k\\in B_k$, $x_m\\in M_m$, almost all zero), and $M$ is a finitely generated $B$-module [def-weil-finitely-generated-module].",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0897 (lemma-graded-finiteness), part (1), with the graded f^*B~-module of finite type written out through the action of the homogeneous elements of B (the B-module structure of H^p(X, F) that Stacks calls 'the graded B-module H^p(X, F)', with H^p(X, (+)_m G_m) = (+)_m H^p(X, G_m)). Stacks' proof: X' = Spec(B) x_{Spec A} X -> Spec(B) is proper (Morphisms 01W4), B Noetherian (Algebra 00FN), X' Noetherian (Morphisms 01T6), X' is the relative spectrum of f^*B~ (Constructions 01LX), F = pi_* F' with F' coherent (Morphisms 01SB, Lemma 01XZ), H^p(X, F) = H^p(X', F') (Lemma 089W), and Lemma 02O6. Tags verified in tags/tags: 0897, 01W4, 00FN, 01T6, 01LX, 01SB, 01XZ, 089W, 02O6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of a finite type graded module over a finitely generated graded algebra pulled back to a proper scheme is a finitely generated module",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback, Scheme.Modules.instAdditivePullback, Scheme.Modules.pullbackPushforwardAdjunction (Mathlib.AlgebraicGeometry.Modules.Sheaf), AlgebraicGeometry.finite_appTop_of_universallyClosed, IsProper.toLocallyOfFiniteType (Mathlib.AlgebraicGeometry.Morphisms.Proper), Proj.instIsProperToSpecZero... (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper), RingHom.Finite: no cohomology finiteness statement",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finiteness of sheaf cohomology of coherent sheaves on a proper scheme over a Noetherian ring, graded version over a graded algebra",
+   "results": "Proj.instLocallyOfFiniteTypeToSpecZero..., Proj.instIsProperToSpecZero... (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper), SheafOfModules.IsFiniteType, GeneratingSections.IsFiniteType (Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators), IsFinite.finite_app (Mathlib.AlgebraicGeometry.Morphisms.Finite): no cohomology of modules on schemes",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, Module.Finite",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Sheaf.H\\b|sheafCohomology' Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites; grep -rn 'GradedModule|IsProper.*Module.Finite' Mathlib/AlgebraicGeometry (~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "sheaf cohomology only in CategoryTheory/Sites/SheafCohomology/Basic.lean (Ext-groups of abelian sheaves on a site); nothing in AlgebraicGeometry on cohomology of O_X-modules, no graded modules over sheaves of algebras",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "graded_finiteness (project root ~/weil-conjectures-slopmaster2)",
+   "results": "index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "inconclusive (index not consulted); the grep above is the source check"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
