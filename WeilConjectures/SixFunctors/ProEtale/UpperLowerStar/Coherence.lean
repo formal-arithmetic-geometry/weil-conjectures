@@ -232,6 +232,139 @@ lemma upperStarCompIso_hom_app_paste {τ : P' ⟶ P} {τ' : P'' ⟶ P'} {t : P �
 end Paste
 
 
+section Factor
+
+variable {X Y Z : Scheme.{u}}
+
+/-- The composition isomorphism `b_* ⋙ c_* ≅ a_*` of pushforwards along a factorisation
+`b ≫ c = a`. -/
+noncomputable def lowerStarFactor {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X} (e : b ≫ c = a) :
+    (b)_*[A] ⋙ (c)_*[A] ≅ (a)_*[A] :=
+  Functor.sheafPushforwardContinuousComp'
+    (eFG := (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) b c a e.symm).symm) A
+    (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y) (Scheme.ProEt.topology Z)
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+lemma lowerStarFactor_hom_app_hom_app {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X} (e : b ≫ c = a)
+    (G : Sheaf (ProEt.topology Z) A) (V : X.ProEtᵒᵖ) :
+    ((lowerStarFactor A e).hom.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackComp b c a e.symm).hom.app V.unop).op := by
+  simp only [lowerStarFactor, Functor.sheafPushforwardContinuousComp']
+  exact Category.id_comp _
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+lemma lowerStarFactor_inv_app_hom_app {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X} (e : b ≫ c = a)
+    (G : Sheaf (ProEt.topology Z) A) (V : X.ProEtᵒᵖ) :
+    ((lowerStarFactor A e).inv.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackComp b c a e.symm).inv.app V.unop).op := by
+  simp only [lowerStarFactor, Functor.sheafPushforwardContinuousComp']
+  exact Category.comp_id _
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The composition isomorphism followed by a congruence is a factorisation isomorphism. -/
+lemma lowerStarComp_trans_lowerStarCongr {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y ⟶ X}
+    (e : b ≫ c = a) : lowerStarComp A b c ≪≫ lowerStarCongr A e = lowerStarFactor A e := by
+  subst e
+  rw [lowerStarCongr_rfl, Iso.trans_refl]
+  rfl
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+set_option backward.isDefEq.respectTransparency.types false in
+lemma lowerStarId_inv_app_hom_app (G : Sheaf (ProEt.topology X) A) (V : X.ProEtᵒᵖ) :
+    ((lowerStarId A X).inv.app G).hom.app V =
+      G.obj.map ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).hom.app V.unop).op := by
+  simp [lowerStarId]
+
+/-- The unit `M ⟶ f_* i_* M` of pushforwards along morphisms with `i ≫ f = 𝟙`. -/
+noncomputable def lowerStarUnit {i : X ⟶ Y} {f : Y ⟶ X} (h : i ≫ f = 𝟙 X) :
+    𝟭 (Sheaf (ProEt.topology X) A) ⟶ (i)_*[A] ⋙ (f)_*[A] :=
+  (lowerStarFactor A h ≪≫ lowerStarId A X).inv
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The units of pushforwards along inverse morphisms are compatible with composition. -/
+lemma lowerStarUnit_app_comp_map_lowerStarFactor_inv {W : Scheme.{u}} {a : X ⟶ Y} {ai : Y ⟶ X}
+    {b : Y ⟶ W} {bi : W ⟶ Y} {ab : X ⟶ W} {abi : W ⟶ X} (ha : ai ≫ a = 𝟙 Y)
+    (hb : bi ≫ b = 𝟙 W) (hab : abi ≫ ab = 𝟙 W) (e₁ : a ≫ b = ab) (e₂ : bi ≫ ai = abi)
+    (M : Sheaf (ProEt.topology W) A) :
+    (lowerStarUnit A hab).app M ≫ (ab)_*[A].map ((lowerStarFactor A e₂).inv.app M) =
+      (lowerStarUnit A hb).app M ≫ (b)_*[A].map ((lowerStarUnit A ha).app ((bi)_*[A].obj M)) ≫
+        (lowerStarFactor A e₁).hom.app _ := by
+  ext V
+  simp only [lowerStarUnit, Iso.trans_inv, NatTrans.comp_app,
+    ObjectProperty.FullSubcategory.comp_hom, lowerStarFactor_hom_app_hom_app,
+    lowerStarFactor_inv_app_hom_app, lowerStarId_inv_app_hom_app, lowerStar_map_hom_app',
+    lowerStar_obj_obj_map, ← Functor.map_comp, ← op_comp, Category.assoc]
+  congr 1
+  apply Quiver.Hom.unop_inj
+  apply MorphismProperty.Over.Hom.ext
+  simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+    MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackId]
+
+end Factor
+
+
+section IsoTrans
+
+variable {P X Y Z W : Scheme.{u}}
+
+/-- The adjoint transpose of the identification `e^* ≅ (e⁻¹)_*` is the unit of the
+pushforwards along `e⁻¹` and `e`. -/
+lemma upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv (e : X ≅ Y)
+    (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarLowerStarAdjunction A e.hom).unit.app M ≫
+        (e.hom)_*[A].map ((upperStarIsoLowerStarInv A e).hom.app M) =
+      (lowerStarUnit A e.inv_hom_id).app M := by
+  rw [upperStarIsoLowerStarInv, Adjunction.unit_leftAdjointUniq_hom_app, lowerStarUnit,
+    ← lowerStarComp_trans_lowerStarCongr, Iso.trans_assoc]
+  rfl
+
+/-- The adjoint transpose of a factorisation isomorphism of pullbacks is the corresponding
+factorisation isomorphism of pushforwards, applied to the composite of the units. -/
+lemma upperStarLowerStarAdjunction_unit_app_comp_map_upperStarFactor {a : P ⟶ Y} {b : P ⟶ Z}
+    {c : Z ⟶ Y} (e : b ≫ c = a) (M : Sheaf (ProEt.topology Y) A) :
+    (upperStarLowerStarAdjunction A a).unit.app M ≫
+        (a)_*[A].map ((upperStarFactor A e).hom.app M) =
+      (upperStarLowerStarAdjunction A c).unit.app M ≫
+        (c)_*[A].map ((upperStarLowerStarAdjunction A b).unit.app ((c)^*[A].obj M)) ≫
+        (lowerStarFactor A e).hom.app ((b)^*[A].obj ((c)^*[A].obj M)) := by
+  subst e
+  have h := unit_conjugateEquiv ((upperStarLowerStarAdjunction A c).comp
+    (upperStarLowerStarAdjunction A b)) (upperStarLowerStarAdjunction A (b ≫ c))
+    (upperStarComp A b c).hom M
+  rw [conjugateEquiv_upperStarComp_hom, Adjunction.comp_unit_app] at h
+  rw [upperStarFactor_rfl, ← h, ← lowerStarComp_trans_lowerStarCongr, lowerStarCongr_rfl,
+    Iso.trans_refl, Category.assoc]
+  rfl
+
+/-- The identifications `e^* ≅ (e⁻¹)_*` are compatible with composition of isomorphisms. -/
+lemma upperStarIsoLowerStarInv_hom_app_trans (e₁ : X ≅ Y) (e₂ : Y ≅ W) (E : X ≅ W)
+    (hE : e₁.hom ≫ e₂.hom = E.hom) (hEi : e₂.inv ≫ e₁.inv = E.inv)
+    (M : Sheaf (ProEt.topology W) A) :
+    (upperStarIsoLowerStarInv A E).hom.app M ≫ (lowerStarFactor A hEi).inv.app M =
+      (upperStarFactor A hE).hom.app M ≫
+        (e₁.hom)^*[A].map ((upperStarIsoLowerStarInv A e₂).hom.app M) ≫
+        (upperStarIsoLowerStarInv A e₁).hom.app ((e₂.inv)_*[A].obj M) := by
+  apply ((upperStarLowerStarAdjunction A E.hom).homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  rw [reassoc_of% upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv,
+    reassoc_of% upperStarLowerStarAdjunction_unit_app_comp_map_upperStarFactor,
+    lowerStarUnit_app_comp_map_lowerStarFactor_inv A e₁.inv_hom_id e₂.inv_hom_id E.inv_hom_id hE
+      hEi]
+  have n₁ := (lowerStarFactor A hE).hom.naturality
+    ((e₁.hom)^*[A].map ((upperStarIsoLowerStarInv A e₂).hom.app M) ≫
+      (upperStarIsoLowerStarInv A e₁).hom.app ((e₂.inv)_*[A].obj M))
+  have n₂ := (upperStarLowerStarAdjunction A e₁.hom).unit_naturality
+    ((upperStarIsoLowerStarInv A e₂).hom.app M)
+  simp only [Functor.comp_map] at n₁
+  rw [← Functor.map_comp (E.hom)_*[A], ← n₁, ← Functor.map_comp_assoc,
+    Functor.map_comp (e₁.hom)_*[A], reassoc_of% n₂,
+    upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv, Functor.map_comp,
+    Category.assoc,
+    reassoc_of% upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv]
+
+end IsoTrans
+
+
 section Congr
 
 variable {P Q R : Scheme.{u}}
