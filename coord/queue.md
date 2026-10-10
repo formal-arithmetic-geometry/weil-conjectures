@@ -1,8 +1,8 @@
 # Work queue
 
-895 items; claim with `tools/claim.py next <group> [--stage N]`.
+897 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (660)
+## Stage 1: nodes to split (661)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,9 +22,7 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-lqf-restriction-to-opens` | 1012 | none |
 | `lem-weil-pbc-make-separably-generated` | 1012 | none |
-| `lem-weil-pbc-matrix-left-inverse-minors` | 1012 | none |
 | `lem-weil-pbc-mittag-leffler-complex-limit-homology` | 1012 | none |
 | `lem-weil-pbc-ml-cohomology-powers-ideal` | 1012 | none |
 | `lem-weil-pbc-module-cohomology-fmap-basic-properties` | 1012 | none |
@@ -100,6 +98,7 @@
 | `def-weil-pbc-relative-global-complete-intersection` | 1013 | none |
 | `def-weil-pbc-serre-conditions-rk-sk` | 1013 | none |
 | `lem-weil-pbc-cartier-equality` | 1013 | none |
+| `lem-weil-pbc-cauchy-binet` | 1013 | none |
 | `lem-weil-pbc-clopen-open-cover-section` | 1013 | none |
 | `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1013 | none |
 | `lem-weil-pbc-cohen-rings-exist` | 1013 | none |
@@ -126,8 +125,10 @@
 | `lem-weil-pbc-global-complete-intersection-local-regular-sequence` | 1013 | none |
 | `lem-weil-pbc-glue-sheaves-of-modules` | 1013 | none |
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 1013 | none |
+| `lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs` | 1013 | none |
 | `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1013 | none |
 | `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy` | 1013 | none |
+| `lem-weil-pbc-lqf-locally-finite-type` | 1013 | none |
 | `lem-weil-pbc-module-finite-type-image-extension` | 1013 | none |
 | `lem-weil-pbc-module-open-restriction-injectives` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1013 | none |
@@ -667,7 +668,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (235)
+## Stage 2: nodes to state (236)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -826,6 +827,7 @@
 | `lem-weil-pbc-localization-of-regular-ring` | 1 | state |
 | `lem-weil-pbc-localization-prime-residue-field-iso` | 1 | state |
 | `lem-weil-pbc-mate-whisker` | 1 | state |
+| `lem-weil-pbc-matrix-left-inverse-minors` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1 | state |
 | `lem-weil-pbc-module-sheaves-colimits-forgetful` | 1 | state |
 | `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
@@ -907,7 +909,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 672 nodes that wait for stage 1, 519 nodes that wait for a statement dependency.
+Not open yet: 673 nodes that wait for stage 1, 520 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
