@@ -11,19 +11,72 @@
  },
  "kind": "statement",
  "title": "Removing embedded points lowers the support dimension of the kernel",
- "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth] and $\\mathcal F$ a coherent $\\mathcal O_X$-module [pqf-def-coherent]. There is a coherent subsheaf $\\mathcal K\\subseteq\\mathcal F$ whose support is nowhere dense in $\\operatorname{Supp}(\\mathcal F)$ such that, for $\\mathcal F'=\\mathcal F/\\mathcal K$, the supports of $\\mathcal F$ and $\\mathcal F'$ agree, $\\mathcal F'$ has no embedded associated points, and $\\dim(\\operatorname{Supp}(\\mathcal K))<\\dim(\\operatorname{Supp}(\\mathcal F))$ when the latter dimension is finite and positive.",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth] and $\\mathcal F$ a coherent $\\mathcal O_X$-module [pqf-def-coherent]. Among coherent subsheaves $\\mathcal K\\subseteq\\mathcal F$ whose support is nowhere dense in $\\operatorname{Supp}(\\mathcal F)$ there is a maximal one. For $\\mathcal F'=\\mathcal F/\\mathcal K$, one has $\\operatorname{Supp}(\\mathcal F')=\\operatorname{Supp}(\\mathcal F)$, $\\mathcal F'$ has no embedded associated points, and there is a dense open $U\\subseteq X$ such that $U\\cap\\operatorname{Supp}(\\mathcal F)$ is dense in $\\operatorname{Supp}(\\mathcal F)$ and $\\mathcal F'|_U\\cong\\mathcal F|_U$, and $\\dim(\\operatorname{Supp}(\\mathcal K))<\\dim(\\operatorname{Supp}(\\mathcal F))$ when the latter dimension is finite and positive.",
  "source": {
   "document": "literature/stacks-project/divisors.tex",
   "place": "Tag 02OL (Lemma 31.5.8, label divisors-lemma-remove-embedded-points)"
  },
  "stmt_deps": [
   "pqf-def-locnoeth",
-  "pqf-def-coherent",
-  "def-kun-topological-krull-dimension"
+  "pqf-def-coherent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On an affine open $V=\\operatorname{Spec}(A)$, write $\\mathcal F|_V=\\widetilde M$ with $A$ Noetherian and $M$ finite. Apply the affine removal lemma to obtain a maximal submodule $N\\subseteq M$ with nowhere-dense support; its quotient has the same support, no embedded associated primes, and agrees with $M$ after localizing at an element lying in all embedded associated primes.",
+   "uses": [
+    "lem-sc-hilbert-embedded-points-affine-removal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M6 (lemma-remove-embedded-primes)"
+   }
+  },
+  {
+   "text": "The localization lemma identifies the quotient constructed on every principal affine localization with the construction from the localized module. Thus the affine submodules are compatible on overlaps; the gluing statement produces a coherent subsheaf $\\mathcal K\\subseteq\\mathcal F$ and the quotient sheaf $\\mathcal F'=\\mathcal F/\\mathcal K$.",
+   "uses": [
+    "lem-sc-hilbert-embedded-points-affine-localization",
+    "lem-sc-hilbert-embedded-points-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02M7 (lemma-remove-embedded-primes-localize) and literature/stacks-project/divisors.tex, Tag 02OL"
+   }
+  },
+  {
+   "text": "The affine conclusions localize and therefore glue: maximality is preserved, the quotient has the same support and no embedded associated points, and the complement of the closure of the embedded associated points is a dense open $U$ on which the quotient and the original sheaf agree. This is exactly the three assertions in the statement.",
+   "uses": [
+    "lem-sc-hilbert-embedded-points-affine-removal",
+    "lem-sc-hilbert-embedded-points-affine-localization",
+    "lem-sc-hilbert-embedded-points-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02OL (lemma-remove-embedded-points), proof"
+   }
+  },
+  {
+   "text": "Dimension. Let $d=\\dim\\operatorname{Supp}(\\mathcal F)$ be finite and positive; if $\\mathcal K=0$ there is nothing to show. Let $Z$ be an irreducible component of the closed set $\\operatorname{Supp}(\\mathcal K)\\subseteq\\operatorname{Supp}(\\mathcal F)$; it lies in an irreducible component $W$ of $\\operatorname{Supp}(\\mathcal F)$. Since $X$ is locally Noetherian, the irreducible components of $\\operatorname{Supp}(\\mathcal F)$ are locally finite (an affine Noetherian open has finitely many, Tag 0052), so the union of the components other than $W$ is closed and misses the generic point of $W$; its complement in $W$ is a nonempty open subset of $\\operatorname{Supp}(\\mathcal F)$. As $\\operatorname{Supp}(\\mathcal K)$ is nowhere dense in $\\operatorname{Supp}(\\mathcal F)$, $Z\\neq W$, so $Z\\subsetneq W$ and every chain of irreducible closed subsets of $Z$ extends by $W$: $\\dim Z+1\\le\\dim W\\le d$. Taking the supremum over the components $Z$ gives $\\dim\\operatorname{Supp}(\\mathcal K)\\le d-1<d$. Finiteness of $d$ is used for the strict inequality; positivity covers $\\mathcal K=0$ under any convention for $\\dim\\emptyset\\le0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0052 (Noetherian space has finitely many irreducible components); nowhere-dense argument as in J1's correction of lem-sc-hilbert-polynomial"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hilbert-embedded-points-affine-removal",
+  "lem-sc-hilbert-embedded-points-affine-localization",
+  "lem-sc-hilbert-embedded-points-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 02OL (Lemma 31.5.8)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,12 +101,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-hilbert-polynomial",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-hilbert-embedded-points",
+  "worker": "stage1",
+  "summary": "Second reading corrected the statement to match Stacks Tag 02OL, added the two affine algebra lemmas used by its proof, and retained the localization/gluing helper.",
+  "blueprint": "Realizes the induction-step clause of blueprint node lem-sc-hilbert-polynomial that removes embedded associated points before the regular-section argument."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hep2416",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hep2416 (reviewer sub-agent of L); spot-checked: Statement vs 02OL/02M6/02M7; new nodes match 02M6, 02M7 and the 02OL gluing, none restates lem-sc-hilbert-difference or lem-sc-regular-meromorphic-section-exists, no same-tag duplicate; consumer step in lem-sc-hilbert-polynomial. FIX more, RETURN less: (E7/B3) delivery dropped the clause dim Supp K < dim Supp F when finite and positive, which the consumer's induction on d needs; restored it and added an elementary step 4 (components of Supp K are proper in components of Supp F by nowhere density plus local finiteness of components, Tag 0052).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-hep2416): Second reading by F1 removed the 'finite and positive' dimension clause as unsupported by 02OL; restored because lem-sc-hilbert-polynomial's induction cites 'smaller support for K'."
 }
