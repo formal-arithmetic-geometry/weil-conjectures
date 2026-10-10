@@ -8,9 +8,11 @@ module
 public import Mathlib.Algebra.Lie.Matrix
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Cartier
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
+public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-!
 # The Lie algebra of `GL_n` and rational representations
@@ -349,6 +351,32 @@ theorem appTop_appTop_ΓSpecIso_inv (r : RationalHom G m) [IsMonHom r] {R : Type
   simp only [CommRingCat.hom_comp, RingHom.comp_apply, Over.comp_left, Scheme.Hom.comp_appTop] at h
   exact h.symm
 
+
+variable (m) in
+/-- The matrix coefficient `g ↦ l(g w)` of `GL_m`, for a linear form `l` and a vector `w` on
+`k^m`, as a function on `GL_m`: `∑ᵢⱼ l(eᵢ) wⱼ xᵢⱼ`. -/
+noncomputable def matrixCoefficient (l : Module.Dual k (m → k)) (w : m → k) :
+    CoordinateRing m k :=
+  ∑ i, ∑ j, (l (Pi.single i 1) * w j) • coord m k i j
+
+/-- The value of a matrix coefficient at the point `g ≫ r` of `GL_m`. -/
+theorem mapMulEquiv_symm_matrixCoefficient (r : RationalHom G m) [IsMonHom r] {R : Type u}
+    [CommRing R] [Algebra k R] (g : AlgebraicGeometry.points G R) (l : Module.Dual k (m → k))
+    (w : m → k) :
+    (Spec.mapMulEquiv.symm (g ≫ r) : WithConv (CoordinateRing m k →ₐ[k] R)).ofConv
+        (matrixCoefficient m l w) =
+      ∑ i, ∑ j, algebraMap k R (l (Pi.single i 1) * w j) * (r.points R g : Matrix m m R) i j := by
+  simp only [matrixCoefficient, map_sum, Algebra.smul_def, map_mul, AlgHom.commutes,
+    points_apply_apply]
+
+theorem _root_.Module.Dual.apply_eq_sum_mul (l : Module.Dual k (m → k)) (w : m → k) :
+    l w = ∑ i, w i * l (Pi.single i 1) := by
+  rw [LinearMap.pi_apply_eq_sum_univ l w]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [smul_eq_mul]
+  congr 2
+  ext j
+  simp [Pi.single_apply, eq_comm]
 /-- A rational representation commutes with base change of points along `R → S`. -/
 theorem map_points (r : RationalHom G m) [IsMonHom r] {R S : Type u} [CommRing R] [Algebra k R]
     [CommRing S] [Algebra k S] (φ : R →ₐ[k] S) (g : AlgebraicGeometry.points G R) :
@@ -474,6 +502,123 @@ theorem le_comap_toLin'_points [IsAlgClosed k] [CharZero k] [ConnectedSpace G.le
     [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k))
     (hU : ∀ X : GrpObj.Lie G, U ≤ U.comap (Matrix.toLin' (r.differential X)))
     (g : AlgebraicGeometry.points G k) : U ≤ U.comap (Matrix.toLin' (r.points k g)) := by
+  classical
+  have := GrpObj.isReduced_of_charZero G
+  have := irreducibleSpace_of_connectedSpace G
+  -- it suffices that the matrix coefficients `l(r(·) w)`, `U ≤ ker l`, `w ∈ U`, vanish on `G`
+  suffices H : ∀ l : Module.Dual k (m → k), U ≤ LinearMap.ker l → ∀ w ∈ U,
+      r.left.appTop ((Scheme.ΓSpecIso (.of (CoordinateRing m k))).inv
+        (matrixCoefficient m l w)) = 0 by
+    intro w hw
+    rw [Submodule.mem_comap]
+    by_contra hgw
+    obtain ⟨l, hl, hUl⟩ := Submodule.exists_le_ker_of_notMem hgw
+    have h := appTop_appTop_ΓSpecIso_inv r g (matrixCoefficient m l w)
+    rw [H l hUl w hw, map_zero, mapMulEquiv_symm_matrixCoefficient] at h
+    have h1 := congrArg (Scheme.ΓSpecIso (.of k)).hom.hom h
+    simp only [Iso.inv_hom_id_apply, map_zero] at h1
+    apply hl
+    rw [Module.Dual.apply_eq_sum_mul, Matrix.toLin'_apply, h1]
+    simp only [Matrix.mulVec, dotProduct, Finset.sum_mul, Algebra.algebraMap_self,
+      RingHom.id_apply]
+    refine Finset.sum_congr rfl fun i _ ↦ Finset.sum_congr rfl fun j _ ↦ ?_
+    ring
+  intro l hUl w hw
+  -- an affine open neighbourhood `j : Spec A ⟶ G` of the identity
+  obtain ⟨_, ⟨V, hV, rfl⟩, hxV, -⟩ := G.left.isBasis_affineOpens.exists_subset_of_mem_open
+    (Set.mem_univ (GrpObj.onePoint G)) (⊤ : G.left.Opens).2
+  set A := Γ(G.left, V)
+  let j : Spec A ⟶ G.left := hV.fromSpec
+  let : Algebra k A := (Spec.preimage (j ≫ G.hom)).hom.toAlgebra
+  have hj : j ≫ G.hom = Spec.map (CommRingCat.ofHom (algebraMap k A)) :=
+    (Spec.map_preimage (j ≫ G.hom)).symm
+  have : LocallyOfFiniteType (Spec.map (CommRingCat.ofHom (algebraMap k A))) := by
+    rw [← hj]
+    infer_instance
+  have : Algebra.FiniteType k A := by
+    rw [HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)] at this
+    exact RingHom.finiteType_algebraMap.1 this
+  have := Algebra.FiniteType.isNoetherianRing k A
+  let jO : AlgebraicGeometry.points G A := Over.homMk j (by simpa [specOverSpec_over] using hj)
+  have : IsOpenImmersion jO.left := inferInstanceAs (IsOpenImmersion hV.fromSpec)
+  -- the identity, as a `k`-point `e` of `A`
+  have hrange : Set.range η[G].left ⊆ Set.range j := by
+    rintro _ ⟨p, rfl⟩
+    rw [hV.range_fromSpec]
+    convert hxV
+    exact congrArg η[G].left.base (Subsingleton.elim (α := PrimeSpectrum k) _ _)
+  let eS : Spec (.of k) ⟶ Spec A := IsOpenImmersion.lift j η[G].left hrange
+  have heS : eS ≫ j = η[G].left := IsOpenImmersion.lift_fac _ _ _
+  have he' : CommRingCat.ofHom (algebraMap k A) ≫ Spec.preimage eS = 𝟙 _ := by
+    apply Spec.map_injective
+    rw [Spec.map_comp, Spec.map_preimage, ← hj, ← Category.assoc, heS, Over.w η[G], Spec.map_id]
+    rfl
+  let e : A →ₐ[k] k := { (Spec.preimage eS).hom with commutes' c := congr(($he').hom c) }
+  have hSpec_e : Spec.map (CommRingCat.ofHom e.toRingHom) = eS := Spec.map_preimage eS
+  have he1 : points.map G e jO = 1 := by
+    apply Over.OverMorphism.ext
+    change Spec.map (CommRingCat.ofHom e.toRingHom) ≫ j = (CartesianMonoidalCategory.toUnit ((Spec (.of k)).asOver (Spec (.of k))) ≫ η[G]).left
+    have hid : ((Spec (.of k)).asOver (Spec (.of k))).hom = 𝟙 _ := by
+      simp only [OverClass.asOver_hom, specOverSpec_over,
+        Algebra.algebraMap_self]
+      exact Spec.map_id _
+    rw [hSpec_e, heS, Over.comp_left, Over.toUnit_left]
+    erw [hid, Category.id_comp]
+  set M := r.points A jO
+  have hM1 (i j : m) : e ((M : Matrix m m A) i j) = (1 : Matrix m m k) i j := by
+    have h := map_points r e jO
+    rw [he1, map_one] at h
+    exact congrArg (fun B : GL m k ↦ (B : Matrix m m k) i j) h
+  -- the matrix coefficients `l'(r(·) w')` restricted to `Spec A`
+  let F (l' : Module.Dual k (m → k)) (w' : m → k) : A :=
+    ∑ i, ∑ j, (l' (Pi.single i 1) * w' j) • (M : Matrix m m A) i j
+  have hF0 (l' : Module.Dual k (m → k)) (hl' : U ≤ LinearMap.ker l') (w' : m → k) (hw' : w' ∈ U) :
+      e (F l' w') = 0 := by
+    have h : l' w' = 0 := hl' hw'
+    rw [Module.Dual.apply_eq_sum_mul] at h
+    simp only [F, map_sum, map_smul, hM1, Matrix.one_apply, smul_eq_mul, mul_ite, mul_one,
+      mul_zero, Finset.sum_ite_eq, Finset.mem_univ, if_true]
+    rw [← h]
+    exact Finset.sum_congr rfl fun i _ ↦ mul_comm _ _
+  -- the invariant derivation of a tangent vector `v` acts on the matrix coefficients through `dr`
+  have hDer (v : AlgebraicGeometry.points G (DualNumber k)) (hv : v ∈ tangentGroup G) :
+      ∃ ψ : A →ₐ[k] DualNumber A, ∃ hψ : (fstHom k A A).comp ψ = AlgHom.id k A,
+        (∀ l' w', DualNumber.derivationOfSection ψ hψ (F l' w') = F l' (Matrix.toLin'
+          (r.differential (GrpObj.lieEquiv G ((GrpObj.infPointsEquivTangentGroup G).symm
+            ⟨v, hv⟩))) w')) ∧
+        (Spec.map (CommRingCat.ofHom ψ.toRingHom)).asOver (Spec (.of k)) ≫ jO =
+          ((Spec.map (CommRingCat.ofHom (inlAlgHom k A A).toRingHom)).asOver (Spec (.of k)) ≫
+            jO) * ((Spec.map (CommRingCat.ofHom (DualNumber.mapAlgebraMap A).toRingHom)).asOver
+              (Spec (.of k)) ≫ v) := by
+    obtain ⟨ψ, hψ, hΦ⟩ := GrpObj.exists_algHom_specMap_comp_eq_mul jO v ((mem_tangentGroup G).1 hv)
+    refine ⟨ψ, hψ, fun l' w' ↦ ?_, hΦ⟩
+    set N := r.points (DualNumber k) v
+    have hdr (i : m) : Matrix.toLin' (r.differential (GrpObj.lieEquiv G
+        ((GrpObj.infPointsEquivTangentGroup G).symm ⟨v, hv⟩))) w' i = ∑ j, (N i j).snd * w' j := by
+      rw [toLin'_differential_apply, Equiv.symm_apply_apply, MulEquiv.apply_symm_apply]
+      simp [N, Matrix.mulVec, dotProduct, TrivSqZeroExt.snd_sum]
+    have hM (i j : m) : (ψ ((M : Matrix m m A) i j)).snd =
+        ∑ l, (M : Matrix m m A) i l * algebraMap k A (N l j).snd := by
+      have h := congrArg (fun z ↦ (r.points (DualNumber A) z : Matrix m m (DualNumber A)) i j) hΦ
+      simp only [map_mul, Units.val_mul] at h
+      rw [← points.map, ← points.map, ← points.map, ← map_points, ← map_points, ← map_points] at h
+      change ψ ((M : Matrix m m A) i j) = _ at h
+      rw [h, Matrix.mul_apply, TrivSqZeroExt.snd_sum]
+      refine Finset.sum_congr rfl fun l _ ↦ ?_
+      change (inl ((M : Matrix m m A) i l) * DualNumber.mapAlgebraMap A (N l j)).snd = _
+      simp [TrivSqZeroExt.snd_mul]
+    let D := DualNumber.derivationOfSection ψ hψ
+    have hDM (i j : m) : D ((M : Matrix m m A) i j) =
+        ∑ l, (M : Matrix m m A) i l * algebraMap k A (N l j).snd :=
+      (DualNumber.derivationOfSection_apply ψ hψ _).trans (hM i j)
+    change D (F l' w') = _
+    simp only [F, map_sum, Derivation.map_smul, hDM, hdr]
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    simp only [Finset.smul_sum, Finset.mul_sum, Finset.sum_smul]
+    rw [Finset.sum_comm]
+    refine Finset.sum_congr rfl fun l _ ↦ Finset.sum_congr rfl fun j _ ↦ ?_
+    simp only [Algebra.smul_def, map_mul]
+    ring
   sorry
 
 /-- The group–Lie comparison for invariant subspaces: over an algebraically closed field of

@@ -77,4 +77,12 @@ lemma exists_comp_SpecMap_algebraMap_localization {X : Scheme.{u}} {R : CommRing
   rw [Category.assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp, IsLocalization.lift_comp]
   exact Scheme.toSpecΓ_steinFactorizationBase m
 
+/-- On global sections, a morphism of affine schemes `f : Spec S ⟶ Spec R` is the ring
+homomorphism `R ⟶ S` it comes from, through `Γ(Spec R, ⊤) ≅ R`. -/
+theorem Scheme.Hom.appTop_ΓSpecIso_inv {R S : CommRingCat.{u}} (f : Spec S ⟶ Spec R) (c : R) :
+    f.appTop ((Scheme.ΓSpecIso R).inv c) = (Scheme.ΓSpecIso S).inv ((Spec.preimage f).hom c) := by
+  have h := congr(($(Scheme.ΓSpecIso_inv_naturality (Spec.preimage f))).hom c)
+  rw [Spec.map_preimage] at h
+  exact h.symm
+
 end AlgebraicGeometry
