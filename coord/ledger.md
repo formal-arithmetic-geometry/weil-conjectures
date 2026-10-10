@@ -2392,3 +2392,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:29 L: merged deliver/M1/lem-pc-affine-derived-pullback-tensor-tilde (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 19:29 L: merged deliver/M1/lem-sc-ringed-space-injective-restriction-surjective (reviewer FIX; first push; new nodes: 0)
 - 19:30 L: merged deliver/M1/pqf-lem-integral-univclosed (reviewer FIX; first push; new nodes: 0)
+- 19:30 L: merged deliver/F1/lem-sc-koszul-regular-sequence-dual-complex (reviewer FIX; first push; new nodes: 1)

@@ -23,9 +23,67 @@
   "def-weil-pbc-koszul-regular-sequence",
   "def-weil-pbc-koszul-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write E=A^{\\oplus r} with basis e_1,\\ldots,e_r and let phi:E\\to A send e_i to f_i. By the definition of the Koszul complex [def-weil-pbc-koszul-complex], K_j=\\bigwedge_A^jE, K_j=0 for j>r, and every K_j is finite free. The augmentation K_0=A\\to B is a quasi-isomorphism because Koszul-regularity says H_j(K)=0 for j\\ne0 and d_1(E)=I [def-weil-pbc-koszul-regular-sequence, def-weil-pbc-koszul-complex].",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BQZ, local Koszul-complex computation"
+   }
+  },
+  {
+   "text": "For each j, the determinant pairing identifies Hom_A(\\bigwedge^jE,A) with the corresponding complementary exterior-power dual, using the canonical exterior pairing [lem-sc-exterior-power-dual-pairing]. In the basis e_i this is the map sending a dual wedge and a primal wedge to the determinant of their evaluation matrix. Dualizing the Koszul differential therefore gives the cochain differential obtained by wedging with the covector phi; this equality follows by evaluating both maps on basis wedges and using the alternating determinant formula.",
+   "uses": [
+    "lem-sc-exterior-power-dual-pairing",
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BQZ, local Koszul-complex computation"
+   }
+  },
+  {
+   "text": "Write δ_j for the degree-one dual derivation sending e_i to the Kronecker delta δ_{ij}. Under the determinant pairing of Step 2, Hom_A^i(K,A) is identified with the span of δ_{j_1}\\cdotsδ_{j_i}. Directly from d(e_i)=f_i and the Koszul sign rule, its cochain differential is multiplication by -\\sum_j f_jδ_j. Evaluation on the top wedge e_1\\wedge\\cdots\\wedge e_r therefore gives an isomorphism of graded A-modules Hom_A^\\bullet(K,A)\\cong K_A(f_\\bullet)[-r], which, with the sign conventions of Tag 0BQZ (total Hom differential as in Stacks, and d_{K[n]}=(-1)^nd_K), commutes with differentials when r is odd and anticommutes with them when r is even (for r=1 both complexes are A\\xrightarrow{-f_1}A in degrees 0,1 and the map is the identity); in the anticommuting case composing with (-1)^n in degree n gives an isomorphism of complexes, so in all cases Hom_A^\\bullet(K,A)\\cong K_A(f_\\bullet)[-r] as complexes. Since K has homology B in degree 0 and no other homology by Koszul-regularity, the dual complex has cohomology only in degree r. The degree-r determinant classes identify with the dual conormal module N=Hom_B(I/I^2,B), and their alternating products give H^r\\cong\\bigwedge_B^rN. The same formulas are preserved after localizing A at any g.",
+   "uses": [
+    "def-weil-pbc-koszul-regular-sequence",
+    "def-weil-pbc-koszul-complex",
+    "lem-sc-exterior-power-dual-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BQZ, lemma-regular-immersion-ext, local Koszul-complex computation"
+   }
+  },
+  {
+   "text": "The determinant classes just used are intrinsic: the map from the top exterior power of the dual conormal module to Ext^r_A(B,A) sends a local dual basis to the corresponding determinant class, and the determinant change-of-basis formula shows that it is unchanged when a different Koszul-regular generating sequence of I is chosen. The same determinant formula commutes with localization, so these local identifications glue and depend only on I. Hence the total Hom complex is canonically quasi-isomorphic in D(A) to the restriction of scalars of\\n\\bigwedge_B^rN[-r].",
+   "uses": [
+    "lem-sc-exterior-power-dual-pairing",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BQZ, lemma-regular-immersion-ext, final determinant identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "lem-sc-exterior-power-dual-pairing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, lemma-regular-immersion-ext, local Koszul-complex computation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +115,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-koszul-regular-immersion-derived-hom",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-koszul-regular-sequence-dual-complex",
+  "worker": "stage1",
+  "summary": "Checked that no sorry-free project declaration states the item. The proof is split into the finite-free Koszul resolution, the exterior-power dual pairing, the inductive dual-complex calculation, and localization and generator-independence. Added the Mathlib pairing leaf used to identify dual exterior-power terms.",
+  "blueprint": "Realizes the proof place ‘proof of the diagonal Koszul calculation: the Koszul-complex computation of the derived sheaf Hom’ of lem-sc-finite-duality through its affine Koszul calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-krd1952",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-krd1952 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0BQZ: shift [-r], cohomology only in degree r, H^r=wedge^r N; consistent with citing lem-sc-koszul-regular-immersion-derived-hom (i_*(wedge^r N_i[-r])). Koszul complex and Koszul-regularity cited from def-weil-pbc-koszul-complex / def-weil-pbc-koszul-regular-sequence, not restated. Leaf exteriorPower.pairingDual read at Pairing.lean:64-74, exact; not in slopmaster2 sorry-free. FIX more, RETURN less: (C4/E) Step 3 sign was wrong: delivery said the evaluation map commutes up to (-1)^r, but under Stacks 0BQZ conventions it commutes exactly for r odd and up to sign for r even (checked r=1: both sides A -(-f_1)-> A, identity map); rewrote the sentence with the convention and the (-1)^n degree-wise correction to an honest complex isomorphism.; 1 file(s) fixed by the reviewer"
+ }
 }
