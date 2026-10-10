@@ -22,9 +22,43 @@
   "def-weil-field",
   "def-weil-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Index the factors by Fin n; pairwise distinctness makes i ↦ ρ_i injective, so by [lem-pc-crt-pairwise-linear-ideals] the polynomials T - ρ_i are pairwise coprime. Hence [lem-pc-crt-principal-ideal-product] gives ⋂_i (T - ρ_i) = (Q), and the Chinese remainder isomorphism [lem-pc-crt-ideal-quotient-product] for the pairwise coprime ideals (T - ρ_i) yields a ring isomorphism Ω[T]/(Q) ≅ ∏_i Ω[T]/(T - ρ_i), [f] ↦ ([f] mod (T - ρ_i))_i.",
+   "uses": [
+    "lem-pc-crt-pairwise-linear-ideals",
+    "lem-pc-crt-principal-ideal-product",
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00U3, Chinese-remainder factorization"
+   }
+  },
+  {
+   "text": "Compose with the product of the evaluation isomorphisms Ω[T]/(T - ρ_i) ≅ Ω, [f] ↦ f(ρ_i), of [lem-pc-crt-linear-evaluation]. The composite Ω[T]/(Q) → ∏_i Ω is the ring isomorphism [f] ↦ (f(ρ_i))_i; it sends the class of a constant c to (c, …, c), so it is Ω-linear, i.e. an Ω-algebra isomorphism.",
+   "uses": [
+    "lem-pc-crt-linear-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00U3, Chinese-remainder factorization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-crt-pairwise-linear-ideals",
+  "lem-pc-crt-principal-ideal-product",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-pc-crt-linear-evaluation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00U3 (lemma-etale-over-field), separable polynomial case; Chinese-remainder decomposition into linear factors"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +83,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-separable-polynomial-alg-closed-quotient-product",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-polynomial-quotient-distinct-linear-crt",
+  "worker": "stage1",
+  "summary": "No matching Lean declaration exists. I split the Stacks 00U3 Chinese-remainder argument into pairwise coprimality of distinct linear factors, the ideal product/intersection identities, the indexed CRT quotient isomorphism, and evaluation for each linear quotient, then composed these maps to obtain the evaluation Ω-algebra isomorphism.",
+  "blueprint": "lem-pc-ample-positive-degree proof, part (<=): the Chinese-remainder factorization after splitting the separable polynomial"
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pqc1750",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pqc1750 (reviewer sub-agent of L); spot-checked: Read all four kept leaves with sed in slopmaster2 mathlib: pairwise_coprime_X_sub_C RingDivision:287, iInf_span_singleton Operations:651, quotientInfRingEquivPiQuotient Quotient/Operations:248, quotientSpanXSubCAlgEquiv Polynomial/Quotient:32 (exact); no single Mathlib declaration for the whole item. FIX more, RETURN less: (1) dropped lem-pc-crt-ideal-product-inf (product ideal never needed: iInf_span_singleton gives inf = (Q) directly); (2) B8: lem-pc-crt-ideal-quotient-product restated as one clause (the canonical map [a]->([a] mod I_i) is a ring iso, the definition of the Mathlib equiv), spurious def-weil-field/polynomial-ring refs and stmt_deps removed, reviewer grep recorded; (3) item proof rewritten as two steps citing leaves, Omega-linearity of the composite stated (constants go to diagonal).; 2 file(s) fixed by the reviewer"
+ }
 }

@@ -1,0 +1,70 @@
+{
+ "id": "lem-pc-crt-ideal-quotient-product",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ample-positive-degree",
+   "place": "proof, part (<=): Chinese-remainder decomposition of the quotient by the product",
+   "via": [
+    "lem-pc-polynomial-quotient-distinct-linear-crt",
+    "lem-pc-separable-polynomial-alg-closed-quotient-product"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Chinese remainder quotient product for pairwise coprime ideals",
+ "statement": "For a finite family $(I_i)_{i\\in\\iota}$ of pairwise coprime ideals in a commutative ring $A$, the canonical map $A/\\bigcap_i I_i\\to\\prod_{i\\in\\iota}A/I_i$, $[a]\\mapsto([a]\\bmod I_i)_i$, is a ring isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00U3, Chinese-remainder factorization"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Chinese remainder quotient by pairwise distinct linear polynomial factors evaluation algebra isomorphism",
+   "results": "CRT ingredients including quotientInfRingEquivPiQuotient",
+   "date": "2026-10-11",
+   "verdict": "generalization: ingredients"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientInfRingEquivPiQuotient Polynomial.pairwise_coprime_X_sub_C",
+   "results": "Ideal.quotientInfRingEquivPiQuotient_mk_apply and related CRT declarations",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientInfRingEquivPiQuotient|pairwise_coprime_X_sub_C",
+   "results": "no hit; source declaration confirmed in Mathlib/RingTheory/Ideal/Quotient/Operations.lean:248",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 245,252p Mathlib/RingTheory/Ideal/Quotient/Operations.lean (reviewer R-pqc1750)",
+   "results": "noncomputable def quotientInfRingEquivPiQuotient (f : ι → Ideal R) (hf : Pairwise (IsCoprime on f)) : (R ⧸ ⨅ i, f i) ≃+* ∀ i, R ⧸ f i, built on quotientInfToPiQuotient (componentwise reduction)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Ideal.quotientInfRingEquivPiQuotient",
+  "file": "Mathlib/RingTheory/Ideal/Quotient/Operations.lean",
+  "line": 248,
+  "how": "exact"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-pc-polynomial-quotient-distinct-linear-crt",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}
