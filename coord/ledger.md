@@ -2564,3 +2564,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:48 L: merged deliver/H1/def-nagata-finite-presentation-descent (reviewer FIX; first push; new nodes: 0)
 - 20:48 L: merged deliver/C1/def-sc-field-extension (reviewer FIX; first push; new nodes: 0)
 - 20:49 L: merged deliver/M1/pqf-lem-coherent-ft-locnoeth (reviewer FIX; first push; new nodes: 0)
+- 20:49 L: attached AlgebraicGeometry.IsCurve.VanishingAboveOneOfIsAffine to def-weil-pbc-C2 (Assertions.lean:91-95, sorry-free; reviewer R-dc22410)
