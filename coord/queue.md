@@ -1,8 +1,8 @@
 # Work queue
 
-899 items; claim with `tools/claim.py next <group> [--stage N]`.
+898 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (645)
+## Stage 1: nodes to split (643)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,9 +22,7 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-sets-inverse-image-extension-by-empty-constant` | 1012 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
-| `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
 | `lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections` | 1012 | none |
 | `lem-weil-pbc-site-covering-morphisms-same-h0-map` | 1012 | none |
 | `lem-weil-pbc-site-plus-injective-separated` | 1012 | none |
@@ -652,7 +650,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (254)
+## Stage 2: nodes to state (255)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -863,6 +861,7 @@
 | `lem-weil-pbc-sheaf-algebraic-structures-objects` | 1 | state |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-cokernel-local-image` | 1 | state |
+| `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1 | state |
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
 | `lem-weil-pbc-sheaf-on-basis-extends` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
@@ -911,7 +910,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 657 nodes that wait for stage 1, 541 nodes that wait for a statement dependency.
+Not open yet: 655 nodes that wait for stage 1, 542 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
