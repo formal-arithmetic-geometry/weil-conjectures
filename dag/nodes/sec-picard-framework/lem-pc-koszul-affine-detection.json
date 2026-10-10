@@ -24,14 +24,55 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an integer e\\ge1 and the diagonal tuple (e,...,e); the hypothesis gives Hom(K_{(e,...,e)}[m],E)=0 for every integer m. Since U=X minus V(f_1, ..., f_r)=D(f_1)\\cup\\cdots\\cup D(f_r), the represent-cohomology statement [lem-sc-affine-perfect-open-represent-cohomology] supplies perfect objects I_e with distinguished triangles I_e\\to O_X\\to K_e\\to I_e[1], compatible maps u_e:I_e\\to O_X, and the isomorphism colim_e Hom(I_e,F)\\to H^0(U,F|_U) for every F in D_QCoh(O_X); its K_e is the Koszul complex on f_1^e, ..., f_r^e, which is K_{(e,...,e)} up to a shift of indexing, harmless because the hypothesis holds for every shift. Fix n and apply Hom(-,E[n]) to the triangle: the long exact sequence Hom(K_e,E[n])\\to Hom(O_X,E[n])\\to Hom(I_e,E[n])\\to Hom(K_e,E[n+1]) has vanishing outer terms, so u_e^*:H^n(X,E)=Hom(O_X,E[n])\\to Hom(I_e,E[n]) is an isomorphism for every e, compatibly with the transition maps since the u_e are compatible.",
+   "uses": [
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IR (lemma-orthogonal-koszul-complex), via proposition-represent-cohomology-class-on-open and Tag 06Z0"
+   }
+  },
+  {
+   "text": "Pass to the colimit over e: H^n(X,E)\\to colim_e Hom(I_e,E[n]) is an isomorphism (colimit of a system of isomorphisms out of a constant system). Composing with the isomorphism colim_e Hom(I_e,E[n])\\to H^0(U,E[n]|_U)=H^n(U,E|_U) of [lem-sc-affine-perfect-open-represent-cohomology], applied to F=E[n] in D_QCoh(O_X), shows H^n(X,E)\\cong H^n(U,E|_U)=0, because E restricted to U is zero. Hence H^n(X,E)=0 for every integer n.",
+   "uses": [
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IR (lemma-orthogonal-koszul-complex), via proposition-represent-cohomology-class-on-open and Tag 06Z0"
+   }
+  },
+  {
+   "text": "By the affine quasi-coherent derived equivalence [lem-pc-affine-qcoh-derived-equivalence], E is isomorphic to the associated complex of R\\Gamma(X,E) in D(A), whose cohomology modules are the groups H^n(X,E)=0. So R\\Gamma(X,E)=0 in D(A) and therefore E=0 in D_QCoh(O_X).",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0 (lemma-affine-compare-bounded), applied in Tag 09IR"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-affine-perfect-open-represent-cohomology"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IR (lemma-orthogonal-koszul-complex), proof via proposition-represent-cohomology-class-on-open and Tag 06Z0",
+  "by": "document"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Koszul powers detect zero objects in the derived category of an affine",
-   "results": "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective and generic K-projective orthogonality declarations; no affine-scheme Koszul detection theorem",
+   "query": "Koszul powers detect zero objects in the derived category of an affine scheme",
+   "results": "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CochainComplex.IsKProjective.leftOrthogonal; no affine-scheme Koszul detection theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -44,19 +85,51 @@
   },
   {
    "tool": "grep",
-   "query": "Koszul.*power|Hom.*Koszul",
+   "query": "Koszul.*power|Hom.*Koszul [Mathlib]",
    "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul powers detect zero objects in an affine derived category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-generation-koszul-orthogonal",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-koszul-affine-detection",
+  "worker": "stage1",
+  "summary": "Split through the existing represent-cohomology node (Koszul triangles I_e -> O_X -> K_e and colim_e Hom(I_e,-) = H^0(U,-)) and the affine quasi-coherent derived equivalence: the Hom vanishing makes H^n(X,E) -> colim Hom(I_e,E[n]) = H^n(U,E|_U) = 0 an isomorphism, so RGamma(X,E)=0 and E=0. Reviewer R-kad2826 replaced the delivered ring-level auxiliary node, which is a few-line consequence of the existing represent-cohomology node.",
+  "blueprint": "Realizes the perfect-generation induction sentence in lem-sc-finite-duality stating that powers of the Koszul complex detect a zero object supported on the affine complement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "The unit route has no affine derived-equivalence node; Step 1 needs the standard Spec(A) identification to reduce the sheaf statement to the ring-level auxiliary lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kad2826",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kad2826 (reviewer sub-agent of L); spot-checked: Statement matches Tag 09IR affine input as used by lem-pc-perfect-generation-koszul-orthogonal Step 2 (C4 ok, D_QCoh present). FIX more, RETURN less: (b/d) new node lem-pc-koszul-derived-module-detection is a few-line consequence of existing lem-sc-affine-perfect-open-represent-cohomology (G1): dropped; proof rewritten to cite it: Hom vanishing + triangle I_e->O->K_e gives H^n(X,E)=colim Hom(I_e,E[n])=H^n(U,E|_U)=0, then lem-pc-affine-qcoh-derived-equivalence gives E=0 (Tag 06Z0); proof_deps/source updated. Second reading by J1 missed this duplicate-route.; 1 file(s) fixed by the reviewer"
+ }
 }
