@@ -1091,3 +1091,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:32 L: accepted lem-weil-pbc-fpqc-descend-locally-finite-presentation (6 steps; new leaf finite-presentation-descends-faithfully-flat 00QQ).
 - 08:32 L: accepted lem-weil-pbc-fpqc-finer-than-etale (4 steps, no new nodes). Merged E1 finite-surjective-coherent-generic-support and G1 formal-systems-graded-vanishing (+4 unsplit nodes: affine-module-correspondence 01SB, affine-module-finite-type, pullback-ample-invertible 0892, coherent-serre-vanishing 02O1; lead note linking the last to lem-pc-serre-vanishing).
 - 08:33 L: lem-weil-pbc-fpqc-representable-descent made a Mathlib leaf (fpqcTopology.Subcanonical, Fpqc.lean:87, with the standard sheaf-condition unfolding).
+- 08:34 L: accepted lem-weil-pbc-coherent-formal-modules-isomorphism-local (3 steps by agent, no new nodes). Stage-3 note: coherent-formal-modules-local-exactness step 4 wording (apply to Q -> 0).

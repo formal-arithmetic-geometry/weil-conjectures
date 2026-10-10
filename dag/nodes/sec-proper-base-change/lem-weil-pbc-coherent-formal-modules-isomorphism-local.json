@@ -2,18 +2,62 @@
  "id": "lem-weil-pbc-coherent-formal-modules-isomorphism-local",
  "kind": "statement",
  "title": "Isomorphisms of coherent formal modules are detected on an open cover",
- "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth], $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent ideal, $X=\\bigcup_{j\\in J}U_j$ an open covering, and $\\alpha:(\\mathcal F_n)\\to(\\mathcal G_n)$ a morphism in $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module]. If every component $\\alpha_n|_{U_j}:\\mathcal F_n|_{U_j}\\to\\mathcal G_n|_{U_j}$ is an isomorphism for every $j,n$, then $\\alpha$ is an isomorphism in $\\mathit{Coh}(X,\\mathcal I)$.",
+ "statement": "Let $X$ be a Noetherian scheme (a locally Noetherian scheme [pqf-def-locnoeth] whose underlying space is quasi-compact), $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals, $X=\\bigcup_{j\\in J}U_j$ an open covering, and $\\alpha=(\\alpha_n)_{n\\ge1}:(\\mathcal F_n)\\to(\\mathcal G_n)$ a morphism in $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module]. For an $\\mathcal O_X$-linear map $\\varphi:\\mathcal F\\to\\mathcal G$ of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] and an open $U\\subseteq X$, $\\varphi|_U:\\mathcal F|_U\\to\\mathcal G|_U$ denotes the $\\mathcal O_X|_U$-linear map with components $(\\varphi|_U)_W=\\varphi_W$ for the opens $W\\subseteq U$. If for every $j\\in J$ and every $n\\ge1$ the map $\\alpha_n|_{U_j}:\\mathcal F_n|_{U_j}\\to\\mathcal G_n|_{U_j}$ is an isomorphism of $\\mathcal O_X|_{U_j}$-modules, then $\\alpha$ is an isomorphism in $\\mathit{Coh}(X,\\mathcal I)$: there is a morphism $\\beta:(\\mathcal G_n)\\to(\\mathcal F_n)$ of $\\mathit{Coh}(X,\\mathcal I)$ with $\\beta\\circ\\alpha=\\mathrm{id}$ and $\\alpha\\circ\\beta=\\mathrm{id}$; moreover each $\\alpha_n$ is an isomorphism of $\\mathcal O_X$-modules and $\\beta_n=\\alpha_n^{-1}$.",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
   "place": "Cohomology of Schemes, Lemma 087X (lemma-inverse-systems-abelian), proof after the affine construction: a morphism whose components are isomorphisms is an isomorphism; exactness is checked on an open covering"
  },
  "stmt_deps": [
   "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "(Each $\\alpha_n$ is an isomorphism of $\\mathcal O_X$-modules.) Fix $n$ and write $U_{jk}=U_j\\cap U_k$. Restriction is compatible with composition and identities and with iterated restriction: $(\\psi\\varphi)|_V=\\psi|_V\\varphi|_V$, $\\mathrm{id}|_V=\\mathrm{id}$ and $(\\varphi|_U)|_V=\\varphi|_V$ for opens $V\\subseteq U$, since all three hold on each component $W\\subseteq V$ by the definition $(\\varphi|_V)_W=\\varphi_W$ [lem-weil-pbc-glue-sheaves-of-modules, notation of the statement]. For each $j$ let $\\beta_j:\\mathcal G_n|_{U_j}\\to\\mathcal F_n|_{U_j}$ be the $\\mathcal O_X|_{U_j}$-linear inverse of $\\alpha_n|_{U_j}$ (hypothesis). Restricting the identities $\\beta_j\\,\\alpha_n|_{U_j}=\\mathrm{id}$, $\\alpha_n|_{U_j}\\,\\beta_j=\\mathrm{id}$ to $U_{jk}$ shows that $\\beta_j|_{U_{jk}}$ is a two-sided inverse of $\\alpha_n|_{U_{jk}}$; so is $\\beta_k|_{U_{jk}}$, and a two-sided inverse is unique ($b=b(ab')=(ba)b'=b'$), hence $\\beta_j|_{U_{jk}}=\\beta_k|_{U_{jk}}$ for all $j,k$. By glueing of morphisms [lem-weil-pbc-glue-sheaves-of-modules, (1)] there is a unique $\\mathcal O_X$-linear $\\beta_n:\\mathcal G_n\\to\\mathcal F_n$ with $\\beta_n|_{U_j}=\\beta_j$ for all $j$. Then $(\\alpha_n\\beta_n)|_{U_j}=\\alpha_n|_{U_j}\\beta_j=\\mathrm{id}=\\mathrm{id}|_{U_j}$ and likewise $(\\beta_n\\alpha_n)|_{U_j}=\\mathrm{id}|_{U_j}$ for every $j$, so by the uniqueness clause of [lem-weil-pbc-glue-sheaves-of-modules, (1)] $\\alpha_n\\beta_n=\\mathrm{id}_{\\mathcal G_n}$ and $\\beta_n\\alpha_n=\\mathrm{id}_{\\mathcal F_n}$: $\\alpha_n$ is an isomorphism of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] with inverse $\\beta_n=\\alpha_n^{-1}$.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 087X (label lemma-inverse-systems-abelian, coherent.tex line 6313; tag verified in literature/stacks-project/tags/tags: 087X,coherent-lemma-inverse-systems-abelian), part (3) and the last sentence of its proof (line 6416): 'Parts (2) and (3) of the lemma are immediate from our construction'; glueing of maps: literature/stacks-project/sheaves.tex Lemma 04TN (lemma-glue-maps)"
+   }
+  },
+  {
+   "text": "(The inverses commute with the transition maps.) Let $t^{\\mathcal F}_n:\\mathcal F_{n+1}\\to\\mathcal F_n$ and $t^{\\mathcal G}_n:\\mathcal G_{n+1}\\to\\mathcal G_n$ be the transition maps. As $\\alpha$ is a morphism of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module, (1)], $t^{\\mathcal G}_n\\alpha_{n+1}=\\alpha_nt^{\\mathcal F}_n$. Composing with $\\beta_n$ on the left and $\\beta_{n+1}$ on the right (step 1) gives $\\beta_nt^{\\mathcal G}_n\\alpha_{n+1}\\beta_{n+1}=\\beta_n\\alpha_nt^{\\mathcal F}_n\\beta_{n+1}$, i.e. $\\beta_nt^{\\mathcal G}_n=t^{\\mathcal F}_n\\beta_{n+1}$ for every $n\\ge1$.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 087X (label lemma-inverse-systems-abelian, coherent.tex line 6313; tag verified in literature/stacks-project/tags/tags: 087X,coherent-lemma-inverse-systems-abelian), part (3) and the last sentence of its proof (line 6416): 'Parts (2) and (3) of the lemma are immediate from our construction'"
+   }
+  },
+  {
+   "text": "(Conclusion.) By step 2, $\\beta=(\\beta_n)_{n\\ge1}$ is a family of $\\mathcal O_X$-linear maps $\\mathcal G_n\\to\\mathcal F_n$ commuting with the transition maps, i.e. a morphism $(\\mathcal G_n)\\to(\\mathcal F_n)$ of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module, (1)]. Composition and identities in $\\mathit{Coh}(X,\\mathcal I)$ are componentwise [def-weil-pbc-coherent-formal-module, proof step 4], so step 1 gives $\\beta\\circ\\alpha=(\\beta_n\\alpha_n)=\\mathrm{id}$ and $\\alpha\\circ\\beta=(\\alpha_n\\beta_n)=\\mathrm{id}$. Hence $\\alpha$ is an isomorphism in $\\mathit{Coh}(X,\\mathcal I)$ with inverse $\\beta$.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 087X (label lemma-inverse-systems-abelian, coherent.tex line 6313; tag verified in literature/stacks-project/tags/tags: 087X,coherent-lemma-inverse-systems-abelian), part (3) and the last sentence of its proof (line 6416): 'Parts (2) and (3) of the lemma are immediate from our construction'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-coherent-formal-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 087X (label lemma-inverse-systems-abelian, coherent.tex line 6313; tag verified in literature/stacks-project/tags/tags: 087X,coherent-lemma-inverse-systems-abelian), part (3) and the last sentence of its proof (line 6416): 'Parts (2) and (3) of the lemma are immediate from our construction'; Stacks gives no argument for this remark (it is part of 'immediate from our construction'), so the proof is written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +79,45 @@
    "results": "no category of coherent formal modules and no corresponding locality theorem; only generic IsIso transport and sheaf cover APIs",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a morphism of sheaves of modules is an isomorphism if its restrictions to the members of an open cover are isomorphisms",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app (Mathlib.AlgebraicGeometry.Modules.Sheaf), Scheme.Modules toPresheaf ReflectsIsomorphisms instance, TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso (Mathlib.Topology.Sheaves.Stalks), CategoryTheory.Sheaf.isLocallyBijective_iff_isIso (Mathlib.CategoryTheory.Sites.LocallyBijective); all about a single sheaf morphism, none about inverse systems / Coh(X,I)",
+   "date": "2026-10-10",
+   "verdict": "no match (single-sheaf tools only; the DAG uses lem-weil-pbc-glue-sheaves-of-modules for that part)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "morphism of inverse systems of sheaves which is levelwise an isomorphism locally on an open cover is an isomorphism",
+   "results": "TopCat.Presheaf.SheafCondition.pairwiseDiagramIso, TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.isoOfIso / piOpens.isoOfIso / piInters.isoOfIso, TopCat.Presheaf.whiskerIsoMapGenerateCocone (sheaf-condition plumbing); no inverse systems of coherent modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, CategoryTheory.IsIso, TopologicalSpace.Opens",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, Scheme.Modules.Hom.isIso_iff_isIso_app, Scheme.Modules.inv_app (Mathlib.AlgebraicGeometry.Modules.Sheaf); tilde.isIso_toOpen_top, isIso_fromTildeΓ_iff, isIso_fromTildeΓ_pushforward (Mathlib.AlgebraicGeometry.Modules.Tilde)",
+   "date": "2026-10-10",
+   "verdict": "no match (no Coh(X,I), no cover criterion for isomorphisms)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'InverseSystem|inverse system' Mathlib/AlgebraicGeometry; grep -rln 'Coh\\b|Coherent' Mathlib/AlgebraicGeometry; grep -rnE 'Modules\\.(restrict|Hom\\.isIso)|isIso_of_isOpenCover|isIso_iff_of_cover' Mathlib/AlgebraicGeometry/Modules Mathlib/Topology/Sheaves (slopmaster2 Mathlib)",
+   "results": "inverse systems only of schemes (AlgebraicGeometry/AffineTransitionLimit.lean:983,1037,1103); no coherent-sheaf category; Scheme.Modules.restrict / restrictFunctor / restrictAppIso (Modules/Sheaf.lean) but no 'iso on each member of a cover' lemma",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "isIso_of_isIso_restrict (project ~/weil-conjectures-slopmaster2)",
+   "results": "index: unavailable (not a proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive; absence rests on the three searches above"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -46,9 +125,24 @@
   "date": "2026-10-10"
  },
  "lean_audit": {
-  "master": {"state": "none", "decls": [], "missing": []},
-  "slopmaster2": {"state": "none", "decls": [], "missing": []}
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-coherent-formal-modules-isomorphism-local",
+  "worker": "stage1",
+  "summary": "Read Stacks 087X (coherent.tex line 6313, tag verified) and its proof: the remark that a morphism of Coh(X,I) whose components are isomorphisms is an isomorphism, checked on an open cover, is hidden in 'Parts (2) and (3) are immediate'; the proof is therefore written by the agent. Not a Mathlib leaf (B8): Mathlib has no Coh(X,I) and no inverse systems of coherent modules; LeanSearch, LeanFinder, Loogle and grep recorded (local_search index unavailable). Proof in three steps: (1) each alpha_n is an isomorphism, by glueing the local inverses, which agree on overlaps by uniqueness of inverses, with lem-weil-pbc-glue-sheaves-of-modules (1) (same unit sk-thm-p1), and checking the two composites are the identity by its uniqueness clause; (2) the inverses commute with the transition maps (elementary); (3) they form a morphism of Coh(X,I) inverse to alpha (elementary, componentwise composition from def-weil-pbc-coherent-formal-module). Statement clarified, not changed in content: 'Noetherian' spelled out as in the definition node and the citer, the restriction alpha_n|_{U_j} defined, the conclusion made explicit (inverse beta with beta_n = alpha_n^{-1}); def-weil-sheaf-of-modules-category added to stmt_deps. No new node."
+ },
+ "reviewed": "pass (L, 2026-10-10): 3 steps by agent (the remark in 087X): local inverses glue (glue-sheaves-of-modules), the inverses commute with the transition maps, so (alpha_n^{-1}) is an inverse in Coh(X,I). Statement clarified only. Stage-3 note: the citer coherent-formal-modules-local-exactness step 4 should say it applies this lemma to Q -> 0."
 }
