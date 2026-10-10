@@ -21,11 +21,43 @@
  "stmt_deps": [
   "def-weil-locally-ringed-space-morphism",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-kinjective-complex"
+  "def-pur-kinjective-complex",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the open subspace $U\\subseteq X$, the restriction functor on sheaves of modules is exact and has the exact left adjoint $j_!$ (extension by zero), by [lem-sc-derived-open-restriction-adjunction-exact]. Thus, with $u=j^{-1}$ and $v=j_!$, the hypotheses of the right-adjoint K-injective preservation lemma are satisfied: $u$ is right adjoint to $v$ and $v$ is exact.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma lemma-restrict-K-injective-to-open (Tag 08BS), first sentence of the proof"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to the abelian module categories on $X$ and $U$, with $u=j^{-1}$ and $v=j_!$. For the given K-injective complex $I^\\bullet$, the termwise image $u(I^\\bullet)=j^{-1}I^\\bullet$ is K-injective on $U$, which is the asserted conclusion.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma lemma-restrict-K-injective-to-open (Tag 08BS), proof via Derived Categories Lemma 08BJ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 08BS (lemma-restrict-K-injective-to-open)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,15 +79,37 @@
    "results": "0 hits in Mathlib",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "restriction of a K-injective complex of sheaves to an open subset remains K-injective",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-derived-internal-hom-restrict-open",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-k-injective-restrict-open",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Tag 08BS. The proof is split into the exact extension-by-zero left adjoint and the application of the existing generic K-injective preservation lemma for a right adjoint of an exact functor. The generic dependency is already Lean-closed as CategoryTheory.Adjunction.preservesKInjectiveComplexes; no project declaration states the open-restriction item itself.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof of thm-sc-p1-duality at the clause localizing the derived internal Hom to an affine open: exact extension by zero supplies the adjunction, then Tag 08BJ preserves K-injectivity under restriction."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kir1839",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kir1839 (reviewer sub-agent of L); spot-checked: Item = Stacks 08BS (cohomology.tex, ringed space); step 1 cites new child j_! -| j^{-1}, both exact (00A7+01AK), step 2 instantiates lem-weil-pbc-right-adjoint-preserves-kinjective (08BJ) with u=j^{-1}, v=j_! - orientation and exactness hypothesis match. No cycle: child has only def stmt_deps, 08BJ node does not reach the item; G1 lem-pc-derived-direct-image-preserves-qcoh only consumes the item. Child not a duplicate: K1 lem-weil-pbc-site-restriction-injectives / H1 lem-weil-pbc-site-extension-by-zero-exact and lem-sc-topological-extension-by-zero-stalks are for abelian sheaves (Ab), lem-weil-pbc-module-extension-by-zero-adjunction/open-restriction-injectives are scheme special cases of the child, lem-weil-pbc-ringed-space-open-restriction-adjunction is restriction -| j_*; child is a real ringed-space module lemma, not re-proving them. FIX more, RETURN less: B3/source repair - the second reading changed the source of both proof steps and of the child to sites-cohomology.tex 'cohomology-lemma-restrict-K-injective-to-open', which is the ringed-SITE lemma with a different tag; restored cohomology.tex lemma-restrict-K-injective-to-open (Tag 08BS) in both steps and in the child's source, and named 00A7 for the adjunction and 01AK for exactness.; 2 file(s) fixed by the reviewer"
+ }
 }
