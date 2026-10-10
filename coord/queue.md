@@ -1,13 +1,12 @@
 # Work queue
 
-856 items; claim with `tools/claim.py next <group> [--stage N]`.
+855 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (315)
+## Stage 1: nodes to split (313)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `thm-constructible-serre` | 5 | rests_on_sorry |
-| `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1010 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
@@ -27,7 +26,6 @@
 | `lem-exc-field-discrete-modules` | 3008 | none |
 | `lem-sc-generic-vanishing-acyclic` | 3008 | none |
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
-| `lem-galois-fpqc-descend-open-immersion` | 3010 | none |
 | `lem-galois-fpqc-refinement-fully-faithful` | 3010 | none |
 | `lem-galois-fpqc-singleton-affine-refinement` | 3010 | none |
 | `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
@@ -43,10 +41,8 @@
 | `lem-exc-coinduced-continuous-acyclic` | 3011 | none |
 | `lem-exc-coinduced-discrete-embedding` | 3011 | none |
 | `lem-exc-discrete-modules-abelian-injective-embeddings` | 3011 | none |
-| `lem-exc-discrete-modules-abelian-structure` | 3011 | none |
 | `lem-pc-ample-affine-loci-criterion` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
-| `lem-pc-leray-degenerate-sections` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
 | `lem-sc-determinant-short-exact` | 3011 | none |
 | `lem-sc-finite-duality` | 3011 | rests_on_sorry |
@@ -54,6 +50,7 @@
 | `lem-sc-torsion-subsheaf-quotient` | 3011 | none |
 | `lem-sc-vector-bundle-line-subbundle` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
+| `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
 | `lem-pc-projective-base-change` | 3012 | none |
 | `lem-sc-ext-locally-free` | 3012 | sorry_here |
 | `lem-sc-p1-coherent-proj-representation` | 3013 | none |
@@ -313,6 +310,7 @@
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
 | `lem-sc-p1-twist-exists` | - | none |
+| `prop-pur-kinjective-resolutions-exist` | - | none |
 | `lem-exc-etale-algebra-lift` | - | none |
 | `lem-pc-projective-curve-finite-projection` | - | rests_on_sorry |
 | `lem-sc-p1-coherent-finite` | - | rests_on_sorry |
@@ -322,7 +320,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (541)
+## Stage 2: nodes to state (542)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -372,6 +370,7 @@
 | `lem-galois-coproduct-copies-morphisms-clopen` | 1 | state |
 | `lem-galois-flat-algebra-descent` | 1 | state |
 | `lem-galois-fpqc-descend-etale` | 1 | state |
+| `lem-galois-fpqc-descend-open-immersion` | 1 | state |
 | `lem-galois-fpqc-descend-unramified` | 1 | state |
 | `lem-galois-fpqc-morphisms-descend` | 1 | state |
 | `lem-pc-affine-cech-complex` | 1 | state |
@@ -868,7 +867,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 334 nodes that wait for stage 1, 1008 nodes that wait for a statement dependency.
+Not open yet: 332 nodes that wait for stage 1, 1011 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
