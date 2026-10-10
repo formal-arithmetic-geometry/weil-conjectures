@@ -1502,3 +1502,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of E1: def-pc-dimension merged from deliver/E1/def-pc-dimension (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): definition kept as the supremum of local-ring dimensions, citers checked, 04MT/04MU, Mathlib lines verified); claim closed
 - 13:30 L: merged deliver/E1/def-pc-dimension (reviewer PASS, first push)
 - 2026-10-10, delivery of E1: def-pc-curve merged from deliver/E1/def-pc-curve (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 020D/0A23 read, every cited notion checked, no cycle); claim closed
+- 13:30 L: merged deliver/E1/def-pc-curve (reviewer PASS, first push)
