@@ -1788,3 +1788,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:26 L: returned deliver/F1/lem-weil-pbc-ext-one-direct-sum (reviewer RETURN: 1. D1: steps 2-3 and the two new nodes: lem-weil-pbc-ext-one-direct-sum-assembly is verbatim the surjectivity of Phi_A a)
 - 15:26 L: merged deliver/M1/lem-exc-abelian-sheaves-gmodules (reviewer PASS; first push; new nodes: 0)
 - 15:29 L: merged deliver/G1/lem-sc-p1-graded-syzygy (reviewer FIX; after a return; new nodes: 5)
+- 15:29 L: returned deliver/G1/lem-exc-etale-field-gsets (reviewer RETURN: 1. D1: step 4 / lem-exc-etale-field-cover-detection: the new node is the item's covering clause restated (covering iff j)
