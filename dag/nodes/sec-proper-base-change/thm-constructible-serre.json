@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "thm-constructible-serre",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Constructible sheaves form a weak Serre subcategory",
- "statement": "Let $X$ be a scheme and $\\Lambda$ a finite ring. The category of\nconstructible $\\Lambda$-module sheaves on $X_{\\Et}$ is closed under\nkernels, cokernels, and extensions inside $\\Mod(X_{\\Et},\\Lambda)$.",
+ "statement": "Let $X$ be a scheme and $\\Lambda$ a finite commutative ring, and let $\\Mod(X_{\\Et},\\Lambda)$ be the abelian category of sheaves of $\\Lambda_X$-modules on the small etale site $X_{\\Et}$ [def-weil-pbc-etale-site], [def-weil-pbc-etale-sheaves]. Call an object of $\\Mod(X_{\\Et},\\Lambda)$ constructible if it is constructible in the sense of [def-weil-pbc-etale-constructible-sheaf] (the notion of [def-weil-pbc-constructible-complexes]: a finite partition of $X$ into locally closed constructible strata on whose inverse images the sheaf is finite locally constant). Then the constructible sheaves are closed under kernels, cokernels and extensions in $\\Mod(X_{\\Et},\\Lambda)$: (1) for a morphism $\\varphi\\colon\\mathcal F\\to\\mathcal G$ in $\\Mod(X_{\\Et},\\Lambda)$ between constructible sheaves, $\\operatorname{Ker}(\\varphi)$ and $\\operatorname{Coker}(\\varphi)$ are constructible; (2) for a short exact sequence $0\\to\\mathcal F\\to\\mathcal E\\to\\mathcal G\\to0$ in $\\Mod(X_{\\Et},\\Lambda)$ with $\\mathcal F$ and $\\mathcal G$ constructible, $\\mathcal E$ is constructible.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-constructible-serre.md",
   "place": "node thm-constructible-serre, order 1299",
@@ -26,39 +26,107 @@
   ]
  },
  "stmt_deps": [
-  "def-constructible-constructible",
-  "def-constructible-finite-locally-constant",
-  "def-constructible-refines",
-  "def-constructible-stratification",
-  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-etale-site",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-etale-site"
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-constructible-complexes"
  ],
  "proof": [
   {
-   "text": "This is [thm-constructible-serre] of the proper-base-change chapter,\nrestated in the notation of this chapter.",
-   "uses": [],
-   "elementary": null
+   "text": "*Setting.* In case (1) let $\\varphi\\colon\\mathcal F\\to\\mathcal G$ be the morphism and put $\\mathcal K=\\operatorname{Ker}(\\varphi)$, $\\mathcal Q=\\operatorname{Coker}(\\varphi)$; in case (2) let $0\\to\\mathcal F\\xrightarrow{a}\\mathcal E\\xrightarrow{b}\\mathcal G\\to0$ be the sequence. In both cases $\\mathcal F$ and $\\mathcal G$ are constructible [def-weil-pbc-etale-constructible-sheaf]: there are stratifications $(\\iota_k\\colon Z_k\\to X)_{k<n}$ and $(\\kappa_l\\colon W_l\\to X)_{l<m}$ of the scheme $X$ [def-constructible-stratification], with strata $T_k=\\iota_k(Z_k)$ and $T'_l=\\kappa_l(W_l)$ constructible subsets of $X$, such that every $\\iota_k^{-1}\\mathcal F$ and every $\\kappa_l^{-1}\\mathcal G$ is finite locally constant with finite values (an etale covering on whose members it is isomorphic to a constant sheaf of $\\Lambda$-modules with finite value). Stacks first replaces $X$ by the members of an affine open covering, because its Definition 03RW asks for a partition of every affine open; the notion of [def-weil-pbc-etale-constructible-sheaf] asks for one finite partition of $X$ itself, so that reduction is not needed here, and the second reduction of the proof (to the members of one finite partition on which both sheaves are finite locally constant) is made directly on $X$ in the next steps. (Stacks proves the weak Serre property via the criterion Homology 0754; kernels, cokernels and extensions, the three closure properties of that criterion, are exactly the statement here.)",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-constructible-stratification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03RZ (lemma-constructible-abelian), proof of (3)"
+   }
+  },
+  {
+   "text": "*The common partition.* By [lem-weil-pbc-constructible-stratification-intersection], applied to $(\\iota_k)_k$ and $(\\kappa_l)_l$, the family $(\\mu_{k,l}\\colon V_{k,l}=Z_k\\times_XW_l\\to X)_{(k,l)}$, $\\mu_{k,l}=\\iota_k\\circ\\mathrm{pr}_1$, is a stratification of $X$ with strata $T_k\\cap T'_l$, each a constructible subset of $X$, and it refines both $(\\iota_k)_k$ and $(\\kappa_l)_l$ [def-constructible-refines]. This is Stacks' 'finite partition of $X$ by constructible locally closed subschemes on which $\\mathcal F$ and $\\mathcal G$ are ... locally constant'; the next step checks the last clause.",
+   "uses": [
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "def-constructible-refines"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03RZ (lemma-constructible-abelian), proof of (3)"
+   }
+  },
+  {
+   "text": "*$\\mathcal F$ and $\\mathcal G$ are finite locally constant on every part.* By [lem-weil-pbc-finite-locally-constant-module-values], (1)$\\Rightarrow$(2), each $\\iota_k^{-1}\\mathcal F$ and each $\\kappa_l^{-1}\\mathcal G$ is finite locally constant in the sense of [def-constructible-finite-locally-constant] (locally constant with finite geometric stalks) for the coefficient category of $\\Lambda$-modules. Since $(\\mu_{k,l})$ refines $(\\iota_k)$, [lemma-constructible-of-refines] gives that every $\\mu_{k,l}^{-1}\\mathcal F$ is finite locally constant; since it refines $(\\kappa_l)$, the same lemma gives that every $\\mu_{k,l}^{-1}\\mathcal G$ is finite locally constant. ($\\mu^{-1}$ is the inverse image of [def-weil-pbc-inverse-image], acting on sheaves of $\\Lambda$-modules, which is the pullback $\\mu^*$ of the blueprint lemma.)",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "def-constructible-finite-locally-constant",
+    "lemma-constructible-of-refines",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03RZ (lemma-constructible-abelian), proof of (3)"
+   }
+  },
+  {
+   "text": "*Inverse image to a part is exact.* Fix $(k,l)$ and write $\\mu=\\mu_{k,l}$, $V=V_{k,l}$. By [prop-weil-pbc-inverse-image-modules-exact] (2), (3), with $R=\\Lambda$, $\\mu^{-1}\\colon\\Mod(X_{\\Et},\\Lambda)\\to\\Mod(V_{\\Et},\\Lambda)$ is an additive exact functor (it preserves finite limits and finite colimits). Hence the canonical comparison maps are isomorphisms $\\mu^{-1}\\operatorname{Ker}(\\varphi)\\xrightarrow{\\sim}\\operatorname{Ker}(\\mu^{-1}\\varphi)$ and $\\operatorname{Coker}(\\mu^{-1}\\varphi)\\xrightarrow{\\sim}\\mu^{-1}\\operatorname{Coker}(\\varphi)$, and $0\\to\\mu^{-1}\\mathcal F\\xrightarrow{\\mu^{-1}a}\\mu^{-1}\\mathcal E\\xrightarrow{\\mu^{-1}b}\\mu^{-1}\\mathcal G\\to0$ is a short exact sequence in $\\Mod(V_{\\Et},\\Lambda)$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03RZ (lemma-constructible-abelian), proof of (3)"
+   }
+  },
+  {
+   "text": "*Kernels, cokernels and extensions on a part (Stacks 03RX (3), via Modules on Sites 093U).* By step 3, $\\mu^{-1}\\mathcal F$ and $\\mu^{-1}\\mathcal G$ are finite locally constant sheaves of $\\Lambda$-modules on $V_{\\Et}$, $\\Lambda$ finite. By [lemma-constructible-flc-serre], $\\operatorname{Ker}(\\mu^{-1}\\varphi)$ and $\\operatorname{Coker}(\\mu^{-1}\\varphi)$ are finite locally constant (kernel and cokernel clauses), and the middle term $\\mu^{-1}\\mathcal E$ of the short exact sequence of step 4 is finite locally constant (extension clause). By the isomorphisms of step 4 and [lemma-constructible-iso-invariance], $\\mu^{-1}\\mathcal K$ and $\\mu^{-1}\\mathcal Q$ are finite locally constant. By [lem-weil-pbc-finite-locally-constant-module-values], (2)$\\Rightarrow$(1), $\\mu^{-1}\\mathcal K$, $\\mu^{-1}\\mathcal Q$ and $\\mu^{-1}\\mathcal E$ are finite locally constant with finite values, as [def-weil-pbc-etale-constructible-sheaf] (b) asks.",
+   "uses": [
+    "lemma-constructible-flc-serre",
+    "lemma-constructible-iso-invariance",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03RZ, proof of (3): 'Thus we may apply Lemma 03RX to conclude'; Lemma 03RX (lemma-kernel-finite-locally-constant) (3), proved by Modules on Sites Lemma 093U (sites-modules-lemma-kernel-finite-locally-constant)"
+   }
+  },
+  {
+   "text": "*Conclusion.* The stratification $(\\mu_{k,l})_{(k,l)}$ of step 2 has constructible locally closed strata, and by step 5 the inverse images of $\\mathcal K$, $\\mathcal Q$ (case (1)) and of $\\mathcal E$ (case (2)) to every stratum are finite locally constant with finite values. So $\\mathcal K$, $\\mathcal Q$ and $\\mathcal E$ are constructible by the definition [def-weil-pbc-etale-constructible-sheaf].",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03RZ (lemma-constructible-abelian), proof of (3)"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-constructible-common-refinement",
-  "lemma-constructible-flc-biproduct",
-  "lemma-constructible-flc-serre",
-  "lemma-constructible-iso-invariance",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-constructible-stratification",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "def-constructible-refines",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "def-constructible-finite-locally-constant",
   "lemma-constructible-of-refines",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-constructible-pullback",
-  "prop-weil-pbc-geometric-stalks-exact"
+  "def-weil-pbc-inverse-image",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-constructible-flc-serre",
+  "lemma-constructible-iso-invariance"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-constructible-serre.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03RZ (lemma-constructible-abelian), proof of (3); Lemma 03RX (lemma-kernel-finite-locally-constant) (3)"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -231,5 +299,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "thm-constructible-serre",
+  "worker": "stage1",
+  "summary": "Rule 0 checked: IsConstructibleSheaf.kernel and .cokernel are sorry-free (sorryfree.py OK) but state only clause (1) (kernel for Noetherian Lambda); IsConstructibleSheaf.of_shortExact rests on the sorry of IsFiniteLocallyConstantSheaf.of_shortExact; no sorry-free declaration of slopmaster2 or Mathlib states the whole item, so it is split. Source read: Stacks 03RZ (lemma-constructible-abelian) proof of (3), 03RW, 03RX (3), 093U; tags verified in tags/tags (03RZ, 03RW, 03RX, 093U, 0754, 005H, 09AI). The statement is made precise: Lambda finite commutative (as in every definition it cites), 'constructible' in the sense of def-weil-pbc-etale-constructible-sheaf (global partition, constructible strata: the notion of def-weil-pbc-constructible-complexes, of the Lean IsConstructibleSheaf, and of the sk-thm-p1 citers); stmt_deps reduced to the notions the statement uses (def-constructible-constructible, which lacks constructible strata, and def-constructible-finite-locally-constant/-refines/-stratification removed from stmt_deps; the latter three are used in the proof). Six steps follow the Stacks proof: setting (Stacks' affine reduction not needed for the global-partition notion; said in step 1), common partition (new Lean-closed node lem-weil-pbc-constructible-stratification-intersection, Stratification.inter), finite local constancy on the parts (of-refines + the module-values equivalence), exactness of inverse image, 03RX on the parts via lemma-constructible-flc-serre, conclusion. The 09AI pro-etale counterpart is not used. Open Lean declaration IsFiniteLocallyConstantSheaf.of_shortExact: it is the extension clause of lemma-constructible-flc-serre (its docstring says so), cited in step 5; that node's lean_audit 'closed' omits it.",
+  "blueprint": "Steps realize the blueprint proof of thm-constructible-serre (its sketch): 'refine the finitely many partitions of the given constructible sheaves to one common partition' (steps 2-3); 'Inverse image to a part is exact' (step 4); 'It suffices to prove the assertions for finite locally constant sheaves on each part' with the kernel/cokernel and extension paragraphs, carried by lemma-constructible-flc-serre (step 5); the closing 'Applying this on the common partition proves extension closure' (step 6). 'Work on an affine open of T' is not needed for the global-partition definition (step 1). The blueprint's finite-direct-sum and weak-Serre remarks are not part of this node's statement."
+ },
+ "reviewed": {
+  "by": "L",
+  "date": "2026-10-10",
+  "note": "split read in full against 03RZ (3): common constructible stratification (new node, Lean-closed by Stratification.inter and its two refinement lemmas, sorry-free), finite locally constant on each stratum, inverse image exact, 03RX (3) on each stratum via lemma-constructible-flc-serre, conclusion; statement made precise (Lambda commutative, constructible = def-weil-pbc-etale-constructible-sheaf; E7 recorded); target-unit item"
+ },
+ "lead_note": "15:52 UTC: the extension clause rests on lemma-constructible-flc-serre whose extension part is sorried in Lean (of_shortExact); that node is now rests_on_sorry and an item."
 }
