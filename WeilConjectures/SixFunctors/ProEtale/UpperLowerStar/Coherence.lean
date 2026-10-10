@@ -307,6 +307,32 @@ lemma lowerStarUnit_app_comp_map_lowerStarFactor_inv {W : Scheme.{u}} {a : X ⟶
   simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
     MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackId]
 
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
+/-- The units of the pushforwards along inverse automorphisms `e_U` of `U` and `e_X` of `X`
+are compatible with the pushforward along `j : U ⟶ X` when `j ≫ e_X = e_U ≫ j`. -/
+lemma lowerStar_map_lowerStarUnit_app_comp_lowerStarFactor_hom_app {U X : Scheme.{u}}
+    (j : U ⟶ X) (eU : U ≅ U) (eX : X ≅ X) (e : j ≫ eX.hom = eU.hom ≫ j)
+    (e' : j ≫ eX.inv = eU.inv ≫ j) (M : Sheaf (ProEt.topology U) A) :
+    (j)_*[A].map ((lowerStarUnit A eU.inv_hom_id).app M) ≫
+        (lowerStarFactor A (rfl : eU.hom ≫ j = eU.hom ≫ j)).hom.app ((eU.inv)_*[A].obj M) =
+      (lowerStarUnit A eX.inv_hom_id).app ((j)_*[A].obj M) ≫
+        (eX.hom)_*[A].map ((lowerStarFactor A e').hom.app M ≫
+          (lowerStarFactor A (rfl : eU.inv ≫ j = eU.inv ≫ j)).inv.app M) ≫
+        (lowerStarFactor A e).hom.app ((eU.inv)_*[A].obj M) := by
+  ext V
+  simp only [lowerStarUnit, Iso.trans_inv, NatTrans.comp_app,
+    ObjectProperty.FullSubcategory.comp_hom, lowerStarFactor_hom_app_hom_app,
+    lowerStarFactor_inv_app_hom_app, lowerStarId_inv_app_hom_app, lowerStar_map_hom_app',
+    lowerStar_obj_obj_map', ← Functor.map_comp, ← op_comp, Category.assoc]
+  congr 1
+  apply Quiver.Hom.unop_inj
+  apply MorphismProperty.Over.Hom.ext
+  apply pullback.hom_ext <;>
+    simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
+      MorphismProperty.Over.pullbackComp, MorphismProperty.Over.pullbackId,
+      pullback.condition_assoc]
+
 end Factor
 
 
@@ -369,6 +395,63 @@ lemma upperStarIsoLowerStarInv_hom_app_trans (e₁ : X ≅ Y) (e₂ : Y ≅ W) (
     Category.assoc,
     reassoc_of% upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv]
 
+
+/-- The counit of `j^* ⊣ j_*` is compatible with the identifications `e^* ≅ (e⁻¹)_*` for
+automorphisms `e_U` of `U` and `e_X` of `X` with `j ≫ e_X = e_U ≫ j`: the two ways of going from
+`(e_U ≫ j)^* j_* M` to `(e_U⁻¹)_* M` agree, the second one through
+`(e_X⁻¹)_* j_* ≅ j_* (e_U⁻¹)_*`. -/
+lemma upperStarComp_hom_app_comp_map_counit_comp_upperStarIsoLowerStarInv {U X : Scheme.{u}}
+    (j : U ⟶ X) (eU : U ≅ U) (eX : X ≅ X) (e : j ≫ eX.hom = eU.hom ≫ j)
+    (e' : j ≫ eX.inv = eU.inv ≫ j) (M : Sheaf (ProEt.topology U) A) :
+    (upperStarComp A eU.hom j).hom.app ((j)_*[A].obj M) ≫
+        (eU.hom)^*[A].map ((upperStarLowerStarAdjunction A j).counit.app M) ≫
+        (upperStarIsoLowerStarInv A eU).hom.app M =
+      (upperStarFactor A e).hom.app ((j)_*[A].obj M) ≫
+        (j)^*[A].map ((upperStarIsoLowerStarInv A eX).hom.app ((j)_*[A].obj M) ≫
+          (lowerStarFactor A e').hom.app M ≫
+          (lowerStarFactor A (rfl : eU.inv ≫ j = eU.inv ≫ j)).inv.app M) ≫
+        (upperStarLowerStarAdjunction A j).counit.app ((eU.inv)_*[A].obj M) := by
+  have h₁ := upperStarLowerStarAdjunction_unit_app_comp_map_upperStarFactor A
+    (rfl : eU.hom ≫ j = eU.hom ≫ j) ((j)_*[A].obj M)
+  rw [upperStarFactor_rfl] at h₁
+  have h₂ := upperStarLowerStarAdjunction_unit_app_comp_map_upperStarFactor A e
+    ((j)_*[A].obj M)
+  have n₁ := (lowerStarFactor A (rfl : eU.hom ≫ j = eU.hom ≫ j)).hom.naturality
+    ((eU.hom)^*[A].map ((upperStarLowerStarAdjunction A j).counit.app M) ≫
+      (upperStarIsoLowerStarInv A eU).hom.app M)
+  have n₂ := (lowerStarFactor A e).hom.naturality
+    ((j)^*[A].map ((upperStarIsoLowerStarInv A eX).hom.app ((j)_*[A].obj M) ≫
+      (lowerStarFactor A e').hom.app M ≫
+        (lowerStarFactor A (rfl : eU.inv ≫ j = eU.inv ≫ j)).inv.app M) ≫
+      (upperStarLowerStarAdjunction A j).counit.app ((eU.inv)_*[A].obj M))
+  simp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj, Functor.map_comp,
+    Category.assoc] at n₁ n₂
+  have u₁ := congrArg (j)_*[A].map
+    ((upperStarLowerStarAdjunction A eU.hom).unit_naturality
+      ((upperStarLowerStarAdjunction A j).counit.app M))
+  have i₁ := congrArg (j)_*[A].map
+    (upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv A eU M)
+  have t₁ := (upperStarLowerStarAdjunction A j).right_triangle_components M
+  have t₂ := congrArg (eX.hom)_*[A].map
+    ((upperStarLowerStarAdjunction A j).right_triangle_components ((eU.inv)_*[A].obj M))
+  have w₁ := congrArg (eX.hom)_*[A].map ((upperStarLowerStarAdjunction A j).unit_naturality
+    ((upperStarIsoLowerStarInv A eX).hom.app ((j)_*[A].obj M)))
+  have w₂ := congrArg (eX.hom)_*[A].map ((upperStarLowerStarAdjunction A j).unit_naturality
+    ((lowerStarFactor A e').hom.app M))
+  have w₃ := congrArg (eX.hom)_*[A].map ((upperStarLowerStarAdjunction A j).unit_naturality
+    ((lowerStarFactor A (rfl : eU.inv ≫ j = eU.inv ≫ j)).inv.app M))
+  have i₂ := upperStarLowerStarAdjunction_unit_app_comp_map_upperStarIsoLowerStarInv A eX
+    ((j)_*[A].obj M)
+  have P := lowerStar_map_lowerStarUnit_app_comp_lowerStarFactor_hom_app A j eU eX e e' M
+  simp only [Functor.comp_obj, Functor.id_obj, Functor.map_comp, Category.assoc]
+    at u₁ i₁ t₂ w₁ w₂ w₃ P
+  apply ((upperStarLowerStarAdjunction A (eU.hom ≫ j)).homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% h₁, reassoc_of% h₂, ← n₁, ← n₂, reassoc_of% u₁, reassoc_of% i₁,
+    reassoc_of% t₁, reassoc_of% w₁, reassoc_of% w₂, reassoc_of% w₃, reassoc_of% t₂,
+    reassoc_of% i₂]
+  rw [CategoryTheory.Functor.map_id, Category.id_comp]
+  exact P
 end IsoTrans
 
 
