@@ -778,3 +778,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:58 L: reviewed lem-weil-pbc-smooth-over-normal-ring-normal (7 steps, +4: 00TP leaf, 0C22, 0567, 0335): accepted.
 - 01:58 L: reviewed lem-weil-pbc-spec-surjective-base-change (4 steps, +00E7 leaf): accepted.
 - 01:59 L: reviewed lem-weil-pbc-split-injection-after-completion (5 steps, +2: Krull 00IQ(2) leaf, split-extension-free-presentation): accepted.
+- 02:01 L: reviewed lem-weil-pbc-strictly-standard-base-change (5 steps, +2 Mathlib leaves): accepted.

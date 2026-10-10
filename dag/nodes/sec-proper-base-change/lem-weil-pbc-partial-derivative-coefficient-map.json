@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-partial-derivative-coefficient-map",
+ "kind": "statement",
+ "title": "Partial derivatives commute with coefficient maps",
+ "statement": "Let $\\varphi:R\\to R'$ be a homomorphism of commutative rings, $n\\ge0$, and $\\kappa:R[x_1,\\dots,x_n]\\to R'[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring] the ring homomorphism applying $\\varphi$ to the coefficients ($\\kappa(\\sum_\\alpha c_\\alpha x^\\alpha)=\\sum_\\alpha\\varphi(c_\\alpha)x^\\alpha$). Then for every $f\\in R[x_1,\\dots,x_n]$ and $i=1,\\dots,n$ the formal partial derivatives [def-weil-pbc-polynomial-partial-derivative] satisfy $\\partial\\kappa(f)/\\partial x_i=\\kappa(\\partial f/\\partial x_i)$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma 07CC (lemma-strictly-standard-base-change, line 295), proof ('the result follows from the definitions'): implicit; from the monomial formula of the formal partial derivative, coefficientwise"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "partial derivative of multivariate polynomial commutes with map of coefficients",
+   "results": "MvPolynomial.pderiv_map (Mathlib.Algebra.MvPolynomial.PDeriv), Polynomial.iterate_derivative_map, Polynomial.derivativeFinsupp_map, MvPolynomial.aeval_sumElim_pderiv_inl",
+   "date": "2026-10-10",
+   "verdict": "match: MvPolynomial.pderiv_map"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial.pderiv _ (MvPolynomial.map _ _)",
+   "results": "MvPolynomial.pderiv_map (Mathlib.Algebra.MvPolynomial.PDeriv)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'pderiv_map\\|map_pderiv' Mathlib/",
+   "results": "MvPolynomial.pderiv_map (Mathlib/Algebra/MvPolynomial/PDeriv.lean:136); used in RingTheory/Extension/Presentation/Submersive.lean:413, Core.lean:310, EllipticCurve files",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MvPolynomial.pderiv_map",
+  "file": "Mathlib/Algebra/MvPolynomial/PDeriv.lean",
+  "line": 136,
+  "how": "exact with σ = Fin n, φ := R → R': pderiv i (map φ f) = map φ (pderiv i f); MvPolynomial.map φ is the coefficient map κ and pderiv the formal partial derivative (match of def-weil-pbc-polynomial-partial-derivative). Source read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-strictly-standard-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

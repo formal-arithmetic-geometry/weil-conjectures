@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-presentation-base-change",
+ "kind": "statement",
+ "title": "Base change of a presentation",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings, $n,m\\ge0$, $f_1,\\dots,f_m\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring], and $\\pi:R[x_1,\\dots,x_n]\\to A$ a surjective $R$-algebra homomorphism whose kernel is the ideal $(f_1,\\dots,f_m)$ (a presentation of $A$ over $R$ [def-weil-pbc-finitely-presented-algebra]). Let $R\\to R'$ be a homomorphism of commutative rings, $\\kappa:R[x_1,\\dots,x_n]\\to R'[x_1,\\dots,x_n]$ the ring homomorphism applying $R\\to R'$ to the coefficients ($x_i\\mapsto x_i$), and $f'_j=\\kappa(f_j)$. Let $A'=A\\otimes_RR'$, an $R'$-algebra via $r'\\mapsto1\\otimes r'$. Then the $R'$-algebra homomorphism $\\pi':R'[x_1,\\dots,x_n]\\to A'$ with $\\pi'(x_i)=\\pi(x_i)\\otimes1$ is surjective and its kernel is the ideal $(f'_1,\\dots,f'_m)$; that is, $A'=R'[x_1,\\dots,x_n]/(f'_1,\\dots,f'_m)$ is a presentation of $A'$ over $R'$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Commutative Algebra, Section 05G3 (section-base-change), remark after Definition 05G4, line 2420-2425 ('If S = R[x_i]/(f_j) ... then S ⊗_R R' = R'[x_i]/(f'_j)'); used in the proof of Smoothing Lemma 07CC (smoothing.tex line 305)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "presentation of A over R gives presentation of base change T ⊗ A over T with relations mapped by coefficient map",
+   "results": "Algebra.Presentation.baseChange, Algebra.Presentation.baseChange_relation (Mathlib.RingTheory.Extension.Presentation.Basic), Algebra.Generators.baseChange (Mathlib.RingTheory.Extension.Generators), Algebra.FinitePresentation.baseChange, Algebra.PreSubmersivePresentation.baseChange",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.Presentation.baseChange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "if A = R[x_1..x_n]/(f_1..f_m) then A ⊗_R R' = R'[x_1..x_n]/(f_1'..f_m') with f_j' images of f_j",
+   "results": "Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, tensorModelOfHasCoeffsHom(_tmul), tensorModelOfHasCoeffsInv (Mathlib.RingTheory.Extension.Presentation.Core; descent of coefficients, not this), Algebra.Generators.baseChange, Algebra.PreSubmersivePresentation.baseChange",
+   "date": "2026-10-10",
+   "verdict": "match via Algebra.Generators.baseChange / Algebra.Presentation.baseChange"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def baseChange\\|span_range_relation_eq_ker' Mathlib/RingTheory/Extension/Presentation/Basic.lean Mathlib/RingTheory/Extension/Generators.lean",
+   "results": "Generators.baseChange (Generators.lean:258, @[simps! val], val x = 1 ⊗ₜ P.val x), Presentation.span_range_relation_eq_ker_baseChange and Presentation.baseChange (Basic.lean:294, relation i = map (algebraMap R T) (P.relation i)); structure field span_range_relation_eq_ker (Basic.lean:62)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Presentation.baseChange",
+  "file": "Mathlib/RingTheory/Extension/Presentation/Basic.lean",
+  "line": 294,
+  "how": "specializes in one line: for P : Algebra.Presentation R A (Fin n) (Fin m) with relations f_j, P.baseChange R' : Algebra.Presentation R' (R' ⊗[R] A) (Fin n) (Fin m) has generators x_i ↦ 1 ⊗ₜ P.val x_i (Algebra.Generators.baseChange, Generators.lean:258, simps lemma baseChange_val), relations MvPolynomial.map (algebraMap R R') f_j (baseChange_relation), and the field span_range_relation_eq_ker (Basic.lean:62) says these relations span the kernel of the surjection aeval (val) : R'[x] → R' ⊗[R] A. The node's A ⊗_R R' is R' ⊗_R A after the swap a ⊗ r' ↦ r' ⊗ a (Algebra.TensorProduct.comm, Mathlib/RingTheory/TensorProduct/Maps.lean:380), which is R'-linear for the R'-structures on the two sides and sends π(x_i) ⊗ 1 to 1 ⊗ π(x_i). Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-strictly-standard-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

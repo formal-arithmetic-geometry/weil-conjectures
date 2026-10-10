@@ -10,9 +10,81 @@
  "stmt_deps": [
   "def-weil-pbc-strictly-standard-element"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Setup and the base-changed presentation. Assume $a$ is elementary standard, resp. strictly standard, in $A$ over $R$ [def-weil-pbc-strictly-standard-element]: there are a presentation, i.e. a surjective $R$-algebra map $\\pi:P=R[x_1,\\dots,x_n]\\to A$ with kernel $I=(f_1,\\dots,f_m)$ [def-weil-pbc-finitely-presented-algebra], and $0\\le c\\le\\min(n,m)$ with (i) $a=a'\\pi(\\Delta)$, $\\Delta=\\det(\\partial f_j/\\partial x_i)_{i,j=1,\\dots,c}$, for some $a'\\in A$, resp. $a=\\sum_{|J|=c}a_J\\pi(\\Delta_J)$, $\\Delta_J=\\det(\\partial f_j/\\partial x_i)_{j=1,\\dots,c,\\,i\\in J}$ ($J\\subset\\{1,\\dots,n\\}$), for some $a_J\\in A$; and (ii) $p f_{c+j}\\in(f_1,\\dots,f_c)+I^2$ for $j=1,\\dots,m-c$, where $p\\in P$ is a lift of $a$. Let $\\kappa:P\\to P'=R'[x_1,\\dots,x_n]$ be the coefficient map and $f'_j=\\kappa(f_j)$. By [lem-weil-pbc-presentation-base-change] the $R'$-algebra map $\\pi':P'\\to A'=A\\otimes_RR'$, $x_i\\mapsto\\pi(x_i)\\otimes1$, is surjective with kernel $I'=(f'_1,\\dots,f'_m)$: a presentation of $A'$ over $R'$ with the same $n$ and $m$, so the same $c$ satisfies $0\\le c\\le\\min(n,m)$. Also $R'\\to A'$ is of finite presentation [lem-weil-pbc-finite-presentation-base-change-composition], so the notions of [def-weil-pbc-strictly-standard-element] apply to $a\\otimes1\\in A'$.",
+   "uses": [
+    "def-weil-pbc-strictly-standard-element",
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-presentation-base-change",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma 07CC (lemma-strictly-standard-base-change, line 295) and its proof; Definition 07C7 (definition-strictly-standard, line 192)"
+   }
+  },
+  {
+   "text": "Compatibility of the two presentations. Let $\\beta:A\\to A'$, $b\\mapsto b\\otimes1$, a ring homomorphism. Then $\\pi'\\circ\\kappa=\\beta\\circ\\pi$ as maps $P\\to A'$: both are $R$-algebra homomorphisms ($A'$ an $R$-algebra via $R\\to R'\\to A'$, which equals $r\\mapsto r\\otimes1=1\\otimes r$; $\\kappa$ is $R$-linear for the $R$-structure of $P'$ through $R\\to R'$) and both send $x_i$ to $\\pi(x_i)\\otimes1$, so they are equal by the uniqueness clause of the universal property of the polynomial ring [def-weil-pbc-mv-polynomial-ring]. Consequently, if $p\\in P$ lifts $a$ (i.e. $\\pi(p)=a$), then $\\kappa(p)$ lifts $a\\otimes1$ (i.e. $\\pi'(\\kappa(p))=a\\otimes1$), and for every $g\\in P$ the image of $\\kappa(g)$ in $A'$ is $\\beta$ of the image of $g$ in $A$. Moreover $\\kappa(I)\\subseteq I'$ and $\\kappa((f_1,\\dots,f_c))\\subseteq(f'_1,\\dots,f'_c)$, since $\\kappa$ is a ring homomorphism with $\\kappa(f_j)=f'_j$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma 07CC (lemma-strictly-standard-base-change, line 295) and its proof; Definition 07C7 (definition-strictly-standard, line 192)"
+   }
+  },
+  {
+   "text": "Jacobian minors base change. By [lem-weil-pbc-partial-derivative-coefficient-map], $\\partial f'_j/\\partial x_i=\\kappa(\\partial f_j/\\partial x_i)$ for all $i,j$. A determinant is a polynomial with integer coefficients in the entries (Leibniz formula $\\det(M)=\\sum_{\\sigma}\\mathrm{sgn}(\\sigma)\\prod_kM_{k\\sigma(k)}$), so the ring homomorphism $\\kappa$ commutes with it: $\\Delta'=\\det(\\partial f'_j/\\partial x_i)_{i,j=1,\\dots,c}=\\kappa(\\Delta)$ and $\\Delta'_J=\\det(\\partial f'_j/\\partial x_i)_{j=1,\\dots,c,\\,i\\in J}=\\kappa(\\Delta_J)$ for every $J\\subset\\{1,\\dots,n\\}$ with $|J|=c$. By step 2 their images in $A'$ are $\\pi'(\\Delta')=\\beta(\\pi(\\Delta))$ and $\\pi'(\\Delta'_J)=\\beta(\\pi(\\Delta_J))$.",
+   "uses": [
+    "lem-weil-pbc-partial-derivative-coefficient-map",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma 07CC (lemma-strictly-standard-base-change, line 295) and its proof; Definition 07C7 (definition-strictly-standard, line 192)"
+   }
+  },
+  {
+   "text": "The first condition. Apply the ring homomorphism $\\beta$ to the identity (i) in $A$ and use step 3: in the elementary case $a\\otimes1=\\beta(a')\\beta(\\pi(\\Delta))=(a'\\otimes1)\\,\\pi'(\\Delta')$; in the strictly standard case $a\\otimes1=\\sum_{|J|=c}(a_J\\otimes1)\\,\\pi'(\\Delta'_J)$. This is the first condition of [def-weil-pbc-strictly-standard-element] for $a\\otimes1$ with respect to the presentation $\\pi'$ of step 1, with $a'\\otimes1$, resp. $a_J\\otimes1$, as coefficients.",
+   "uses": [
+    "def-weil-pbc-strictly-standard-element"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma 07CC (lemma-strictly-standard-base-change, line 295) and its proof; Definition 07C7 (definition-strictly-standard, line 192)"
+   }
+  },
+  {
+   "text": "The second condition, and conclusion. By (ii) write $p f_{c+j}=\\sum_{k=1}^cg_kf_k+\\sum_{k,l=1}^mh_{kl}f_kf_l$ with $g_k,h_{kl}\\in P$. Applying the ring homomorphism $\\kappa$ gives $\\kappa(p)f'_{c+j}=\\sum_{k=1}^c\\kappa(g_k)f'_k+\\sum_{k,l}\\kappa(h_{kl})f'_kf'_l\\in(f'_1,\\dots,f'_c)+(f'_1,\\dots,f'_m)^2$ for $j=1,\\dots,m-c$, and $\\kappa(p)$ is a lift of $a\\otimes1$ by step 2 (by [def-weil-pbc-strictly-standard-element] the condition does not depend on the lift). With the presentation $\\pi'$ and the same $c$ (step 1) and step 4, $a\\otimes1$ is elementary standard, resp. strictly standard, in $A'$ over $R'$ [def-weil-pbc-strictly-standard-element].",
+   "uses": [
+    "def-weil-pbc-strictly-standard-element"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Lemma 07CC (lemma-strictly-standard-base-change, line 295) and its proof; Definition 07C7 (definition-strictly-standard, line 192)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strictly-standard-element",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-presentation-base-change",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-partial-derivative-coefficient-map",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma 07CC (lemma-strictly-standard-base-change, line 295), proof; with the base change of a presentation from Commutative Algebra Section 05G3 (algebra.tex line 2420)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +129,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-strictly-standard-base-change",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 07CC and the definition node (both notions, same c); kept. The one-line Stacks proof ('the presentation base changes; the result follows from the definitions') written out in 5 steps: base change of the presentation (new Mathlib leaf lem-weil-pbc-presentation-base-change, Algebra.Presentation.baseChange; source Stacks 05G3 remark) plus finite presentation of A' (existing leaf); compatibility pi' o kappa = beta o pi by uniqueness in the polynomial universal property, so the image of a lift of a is a lift of a⊗1; Jacobian minors base change (new Mathlib leaf lem-weil-pbc-partial-derivative-coefficient-map, MvPolynomial.pderiv_map, plus Leibniz formula for det); condition (1) by applying beta; condition (2) by applying kappa to the ideal relation. Lean state none; existing three Mathlib searches of the item kept (no notion of strictly standard element in Mathlib). stmt_deps unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 07CC: the base-changed presentation (new Mathlib leaf Algebra.Presentation.baseChange, Presentation/Basic.lean:294, verified by L), compatibility pi' kappa = beta pi, Jacobian minors commute with the coefficient map (new leaf MvPolynomial.pderiv_map PDeriv.lean:136, verified) and the Leibniz formula, both conditions of the definition transported."
+ }
 }
