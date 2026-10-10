@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-pic-proper-ntorsion",
-   "place": "## Proof, first sentence: the proper curve C must first be shown projective, using the dimension-one quasi-projectivity input; via Stacks 09NZ, proof, last sentence: 'Then L is ample by an application of Cohomology of Schemes, Lemma 09MS'; within 09MS, proof, second and third paragraphs: the case $\\mathcal I^2=0$ to which the first paragraph reduces ('In this way we reduce to the case that $\\mathcal I^2 = 0$' ... 'we conclude that $\\mathcal L$ is ample')",
+   "place": "Cohomology of Schemes, Lemma 09MS proof, second and third paragraphs: the square-zero case beginning with the tensor exact sequence and ending with affine principal opens; this is the cohomological clause used by the parent reduction node",
    "via": [
     "lem-sc-ample-on-reduction-noetherian",
     "lem-sc-dim-one-ample-invertible",
@@ -31,9 +31,114 @@
   "def-pc-module-pullback",
   "def-weil-pbc-ample-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write M_n=I tensor L^{tensor n}. The closed immersion's ideal sequence is 0 \\to I \\to O_X \\to j_*O_Z \\to 0. Since L^{tensor n} is locally free of rank one, tensoring is exact: I tensor L^{tensor n} \\to L^{tensor n} is injective with image I L^{tensor n}. Apply [lem-weil-pbc-closed-immersion-unit-quotient] with F=L^{tensor n}: L^{tensor n}/I L^{tensor n} is isomorphic to j_*j^*L^{tensor n}. Thus 0 \\to M_n \\to L^{tensor n} \\to j_*j^*L^{tensor n} \\to 0 is exact. The closed-immersion ideal I is quasi-coherent [def-sbc-closed-immersion-ideal-sheaf], and M_n is quasi-coherent locally because L^{tensor n} is free of rank one. For every local a in I and v in M_n, av=0 since I^2=0 [def-sbc-ideal-sheaf-powers]. Apply [lem-weil-pbc-closed-immersion-pushforward-annihilated] (2) with F=M_n: G_n:=j^*M_n is quasi-coherent on Z and j_*G_n is isomorphic to M_n. Since a closed immersion is affine, [lem-weil-pbc-affine-morphism-cohomology-edge] for j and G_n gives H^1(X,M_n) = H^1(X,j_*G_n) isomorphic to H^1(Z,G_n) as O_X(X)-modules.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology Lemma 09MS, square-zero proof, exact sequence (equation-ses) and paragraph identifying I as an O_Z-module"
+   }
+  },
+  {
+   "text": "Fix x in X. As I^2=0, i.e. I(U)^2=0 on every affine open U [def-sbc-ideal-sheaf-powers], the quasi-coherent ideal I [def-sbc-closed-immersion-ideal-sheaf] is contained in every prime of each affine coordinate ring; [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] identifies j(Z)=V(I)=X, so x has a preimage z in Z. Ampleness of j^*L [def-weil-pbc-ample-invertible-module] supplies n>=1 and s in Gamma(Z,j^*L^{tensor n}) with z in the affine principal open Z_s. In the degree-n exact sequence of step 1, the obstruction to lifting s is its connecting class xi=partial(s) in H^1(X,M_n), identified with a class in H^1(Z,G_n) by the edge isomorphism of step 1.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology Lemma 09MS, square-zero proof, paragraph beginning 'Let x in X'"
+   }
+  },
+  {
+   "text": "Set O'=direct sum over m>=0 of L^{tensor m} and O=direct sum over m>=0 of j_*j^*L^{tensor m}, with multiplication by tensor product. These are sheaves of commutative O_X-algebras: locally a frame for the invertible L identifies O' with a polynomial algebra in one generator, so its multiplication is commutative; the quotient O is commutative too. The degreewise surjection from step 1 gives O' \\to O with kernel K=direct sum over m>=0 of I tensor L^{tensor m}; products of two kernel terms land in I^2 tensor L^{tensor (a+b)}=0. Apply [lem-sc-boundary-derivation-square-zero] to O' \\to O. By naturality of the long exact sequence for inclusion of a degree-m summand and projection onto it, projecting the boundary of the summed sequence to degree m is the boundary of the degree-m exact sequence. Thus the image of s in the degree-n summand has boundary xi. Induct on k>=1: for k=1 this is xi; if partial(s^k)=k s^{k-1}xi, the Leibniz rule gives partial(s^{k+1})=s partial(s^k)+s^k partial(s)=(k+1)s^k xi. Taking k=e+1 gives partial(s^{e+1})=(e+1)s^e xi, where s^e acts through O on K.",
+   "uses": [
+    "lem-sc-boundary-derivation-square-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology Lemma 0B8S, boundary derivation"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-section-affine-open-kills-cohomology] on Z to the invertible module j^*L^{tensor n} [lem-weil-pbc-invertible-pullback-invertible], its section s, the quasi-coherent module F=G_n from step 1, p=1, and the class xi transported through the edge isomorphism of step 1. Z is quasi-compact since it is Noetherian, and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]; Z_s is affine by step 2. The node gives e>=0 for which multiplication by s^e kills xi in H^1(Z,G_n tensor (j^*L^{tensor n})^{tensor e}). This multiplication is induced by G_n \\to G_n tensor (j^*L^{tensor n})^{tensor e}, f \\mapsto f tensor s^e. Naturality of the affine-morphism edge isomorphism for this map identifies it with the action s^e xi in step 3. Thus partial(s^{e+1})=(e+1)s^e xi=0, and exactness of the degree-(e+1)n sequence lifts s^{e+1} to s' in Gamma(X,L^{tensor (e+1)n}).",
+   "uses": [
+    "lem-sc-section-affine-open-kills-cohomology",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-invertible-pullback-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology Lemma 09MS, invocation of Lemma 01XR"
+   }
+  },
+  {
+   "text": "By the stalkwise definition of X_{s'} in [def-weil-pbc-ample-invertible-module], j^*s'=s^{e+1}, and a power has the same nonvanishing locus, so j^{-1}(X_{s'})=Z_s. The base change Z_s \\to X_{s'} of j is a closed immersion by [lem-weil-pbc-proper-fp-permanence] (b), hence finite by [lem-weil-pbc-closed-immersion-finite]. Since I^2=0, i.e. I(U)^2=0 on every affine open U [def-sbc-ideal-sheaf-powers], the quasi-coherent ideal I [def-sbc-closed-immersion-ideal-sheaf] lies in every prime of each affine coordinate ring; [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine] identifies j(Z)=V(I)=X, so the restricted map Z_s \\to X_{s'} is surjective. Its source Z_s is affine by step 2. The target X_{s'} is Noetherian in the sense of [def-weil-pbc-scheme-conventions]: it is locally Noetherian as an open subscheme of X, and quasi-compact because any open subset of the Noetherian topological space X is quasi-compact. These four inputs to [lem-weil-pbc-finite-surjective-affine-target-noetherian] show X_{s'} is affine.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology Lemma 09MS, final paragraph, invocation of Lemma 01YQ"
+   }
+  },
+  {
+   "text": "X is quasi-compact by the Noetherian hypothesis, giving clause (1) of [def-weil-pbc-ample-invertible-module]. For every x in X, steps 2-5 produce s' in Gamma(X,L^{tensor (e+1)n}) with x in X_{s'} and X_{s'} affine. Here n>=1 from step 2 and e>=0 from step 4, so (e+1)n>=1. This is clause (2) of the ampleness definition, hence L is ample.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology Lemma 09MS, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-boundary-derivation-square-zero",
+  "lem-sc-section-affine-open-kills-cohomology",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-invertible-pullback-invertible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 09MS, square-zero case"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -65,7 +170,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +186,65 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-ample-square-zero-thickening",
+  "worker": "stage1",
+  "summary": "Repaired the six-step square-zero proof: exact sequence and cohomology comparison, graded boundary derivation, power killing, and finite-surjective affine descent. Added two unsplit supporting nodes for Tags 0B8S and 01XR.",
+  "blueprint": "The six steps realize the square-zero paragraphs of 09MS inherited through lem-sc-pic-proper-ntorsion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-unit-quotient",
+    "why": "Generic closed-immersion quotient identifies L^n/I L^n with j_*j^*L^n; this unit has no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "why": "Generic closed-immersion equivalence gives the quasi-coherent module G_n on Z and j_*G_n=M_n; this unit has no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "Generic affine-morphism cohomology comparison applies to the closed immersion j; this unit has no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic locally Noetherian scheme fact supplies quasi-separatedness of Z; this unit has no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic stability of closed immersions under base change supplies the restricted closed immersion; this unit has no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Generic closed-immersion finiteness gives finiteness of Z_s to X_s; this unit has no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+    "why": "Generic closed-subscheme zero-set result identifies the image j(Z)=V(I); this unit has no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "why": "Generic finite-surjective affine-target theorem 01YQ supplies final affineness; this unit has no such statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
+  "lem-weil-pbc-finite-surjective-affine-target-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-as2",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-as2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:04 return: all seven points checked repaired. (1) step 1 now cites closed-immersion-unit-quotient (F=L^n), pushforward-annihilated (2) (F=M_n quasi-coherent, I M_n=0 from I^2=0) and affine-morphism-cohomology-edge (j affine, G_n quasi-coherent; no homeomorphism claim); (2) step 3 sets up O'=sum L^m, O=sum j_*j^*L^m, kernel sum I tensor L^m of square zero, commutativity, degree naturality of the boundary, Leibniz induction giving partial(s^{e+1})=(e+1)s^e xi; (3) step 4 checks 01XR node hypotheses (Z qc Noetherian, qs by lem-weil-pbc-locally-noetherian-quasi-separated, Z_s affine, G_n qcoh, p=1) and identifies the multiplication by naturality of the edge map; (4) step 5 checks the four inputs of 01YQ node (j^{-1}X_{s'}=Z_s by stalks, closed immersion base change proper-fp-permanence (b), finite, surjective via V(I)=X, X_{s'} Noetherian) and step 6 clause (1) and (e+1)n>=1; (5) 01XR node stmt_deps equal its inline citations, multiplication by s^e defined; (6) 0B8S node restated on a scheme with commutative O_X-algebras, O-module structure on I explained; (7) report names the nodes per step. Sources: Stacks 01XR (coherent.tex lemma-section-affine-open-kills-classes) and 0B8S (cohomology.tex lemma-boundary-derivation-over-cup-product) read against the new statements, hypothesis by hypothesis (0B8S specialised to commutative algebras on a scheme, the case used); 09MS (lemma-ample-on-reduction) paragraphs 2-3 against the steps; item statement unchanged. All 12 cited statements read. Tool uses (8 declared) accepted as generic closed-immersion/scheme facts. Small cases: I=0 gives xi=0 and Z_s=X_s. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-ample-square-zero-thickening.json: proof steps 1,2,5 and proof_deps: quasi-coherence of I and I(U)^2=0 used without citation, now cite [def-sbc-closed-immersion-ideal-sheaf] and [def-sbc-ideal-sheaf-powers] (C1); step 4 and proof_deps: invertibility of j^*L^n now cites [lem-weil-pbc-invertible-pullback-invertible] (C1, added as tool use). Start 'Sat Oct 10 03:17:03 PM UTC 2026', end 'Sat Oct 10 03:18:38 PM UTC 2026'.; 1 file(s) fixed by the reviewer"
  }
 }
