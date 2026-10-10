@@ -2,7 +2,7 @@
 
 907 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (263)
+## Stage 1: nodes to split (262)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,10 +23,10 @@
 | `lem-sc-derived-open-restriction-adjunction-exact` | 3015 | none |
 | `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
-| `lem-sc-p1-ext-connecting-yoneda` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
 | `lem-sc-bounded-above-finite-free-hom-acyclic` | 3016 | none |
 | `lem-sc-bounded-below-injective-resolution` | 3016 | none |
+| `lem-sc-p1-ext-resolution-derived-connecting` | 3016 | none |
 | `def-sc-perfect-closed-immersion` | 3017 | none |
 | `lem-pc-compact-generators-build-objects` | 3017 | none |
 | `lem-pc-compact-hom-hocolim` | 3017 | none |
@@ -64,22 +64,21 @@
 | `lem-pc-picard-functor-agrees-sc` | 5008 | none |
 | `lem-sc-deg-pullback-finite` | 5009 | rests_on_sorry |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
-| `lem-pc-flat-complex-derived-pullback` | 5010 | none |
 | `lem-sc-finite-surjective-dimension` | 5010 | none |
 | `lem-sc-mult-n-finite-kernel` | 5010 | rests_on_sorry |
 | `thm-picard-serre-a` | 5010 | rests_on_sorry |
 | `lem-pc-base-change-map-cech` | 5011 | none |
+| `lem-pc-bounded-above-flat-kflat` | 5011 | none |
 | `lem-pc-cech-resolution` | 5011 | none |
 | `lem-pc-proper-support-perfect-direct-image` | 5011 | none |
 | `thm-pc-semicontinuity-base-change` | 5011 | sorry_here |
+| `def-pc-flat-sheaf-modules` | 5012 | none |
 | `lem-pc-kflat-resolution` | 5012 | none |
 | `def-sp-convergence` | 6002 | none |
 | `lem-sp-couple-morphism` | 6002 | none |
 | `lem-sp-kinjective-computes` | 6002 | none |
-| `pqf-lem-proper-basic` | 6002 | none |
 | `thm-sp-half-plane-convergence` | 6002 | none |
 | `def-sp-abelian` | 6003 | none |
-| `def-sp-composite-acyclicity` | 6003 | none |
 | `def-sp-grothendieck-abelian` | 6003 | none |
 | `def-sp-injective-resolutions` | 6003 | none |
 | `def-sp-left-exact-additive` | 6003 | none |
@@ -270,7 +269,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (644)
+## Stage 2: nodes to state (645)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -886,6 +885,7 @@
 | `lemma-nagata-scheme-image-ideal-qc` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
 | `pqf-lem-image-proper` | 1 | state |
+| `pqf-lem-proper-basic` | 1 | state |
 | `cor-pqf-proper-quasifinite-finite` | 2 | state |
 | `lem-fet-galois-category` | 2 | state |
 | `lem-fet-locally-trivial` | 2 | state |
@@ -919,7 +919,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1346 nodes that wait for a statement dependency, 294 nodes that wait for stage 1.
+Not open yet: 1348 nodes that wait for a statement dependency, 293 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
