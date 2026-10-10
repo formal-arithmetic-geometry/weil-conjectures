@@ -1,8 +1,8 @@
 # Work queue
 
-892 items; claim with `tools/claim.py next <group> [--stage N]`.
+894 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (125)
+## Stage 1: nodes to split (127)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -39,17 +39,21 @@
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-ass-weakass-locally-noetherian` | 5012 | none |
 | `lem-sc-meromorphic-weakass-generic-product` | 5012 | none |
-| `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
 | `lem-sc-components-open-injection` | 5013 | none |
 | `lem-pc-affine-perfect-colimit-descent` | 5014 | none |
 | `lem-pc-perfect-descend-morphisms` | 5014 | none |
+| `lem-pc-rf-single-complex-inherited-tensor-condition` | 5014 | none |
+| `lem-pc-rf-single-complex-qcqs-induction` | 5014 | none |
 | `lem-pc-flat-module-descent` | 5015 | none |
 | `lem-pc-sites-module-sheafification-interface` | 5015 | none |
 | `lem-pc-sites-module-sheafification-tensor` | 5015 | none |
 | `lem-pc-fp-module-map-descent` | 5016 | none |
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
-| `lem-sc-general-theorem-of-cube` | 6011 | none |
+| `lem-sc-picard-diagonal-locally-closed` | 6012 | none |
+| `lem-sc-picard-locus-closed` | 6012 | none |
+| `lem-sc-picard-product-open` | 6012 | none |
+| `lem-sc-proper-flat-global-sections` | 6012 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
 | `lem-sc-base-change-curve` | - | none |
@@ -64,8 +68,6 @@
 | `def-nagata-basechanged-system` | - | none |
 | `def-nagata-morphism-descent` | - | none |
 | `def-nagata-qc-open-descent` | - | none |
-| `def-nagata-relative-finite-affine-presentation` | - | none |
-| `def-sc-zariski-cohomology` | - | none |
 | `def-sc-zariski-site` | - | none |
 | `lem-fin-normal-generic-constant` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
@@ -904,7 +906,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1570 nodes that wait for a statement dependency, 165 nodes that wait for stage 1.
+Not open yet: 1574 nodes that wait for a statement dependency, 167 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
