@@ -686,3 +686,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:14 L: reviewed lem-weil-pbc-flat-over-regular-with-regular-fibre (031E; 4 steps; no new nodes): accepted.
 - 00:14 L: reviewed lem-weil-pbc-completion-of-dvr-is-dvr (0AP1; 6 steps; tool_uses lem-sc-regular-local-domain): accepted. Stage-3 note: lem-sc-regular-local-domain cites tag 00NO instead of 00NP and has empty stmt_deps.
 - 00:17 L: reviewed lem-weil-pbc-formal-system-support-constant (0CYV remark; 3 steps; +stalk-of-JF node): accepted. Stage-3 note: lem-weil-pbc-closed-immersion-unit-quotient uses (JF)_x = J_x F_x without citation; the new node covers it.
+- 2026-10-10, delivery of C1: lem-weil-pbc-z-localizations-dvr returned (65886bf6): steps 1-3 use facts (PID normal, localization preserves normality/Noetherian, dim 1) without nodes; step 4 routes through lem-sc-normal-dim1-dvr of another unit
