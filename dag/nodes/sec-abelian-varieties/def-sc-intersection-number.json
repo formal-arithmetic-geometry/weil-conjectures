@@ -11,7 +11,7 @@
  },
  "kind": "definition",
  "title": "Intersection number as a multivariate Euler-characteristic coefficient",
- "statement": "Let $k$ be a field [def-weil-field], let $X$ be a proper $k$-scheme [def-weil-proper-morphism] of dimension $g$, and let $\\mathcal L$ be an ample invertible $\\mathcal O_X$-module [def-sc-invertible-module] [def-sc-ample]. The top self-intersection number $(\\mathcal L^g\\cdot X)$ is the coefficient of $n_1\\cdots n_g$ in the polynomial $\\chi(X,\\mathcal L^{\\otimes(n_1+\\cdots+n_g)})$ in the variables $n_1,\\ldots,n_g$.",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a proper scheme over $k$ [def-weil-proper-morphism], and let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion] with $Z$ nonempty and $d=\\dim Z$ [def-kun-topological-krull-dimension]. Let $\\mathcal L_1,\\ldots,\\mathcal L_d$ be invertible $\\mathcal O_X$-modules [def-sc-invertible-module]. The intersection number $(\\mathcal L_1\\cdots\\mathcal L_d\\cdot Z)$ is the coefficient of $n_1\\cdots n_d$ in the numerical polynomial $(n_1,\\ldots,n_d)\\mapsto\\chi(X,i_*\\mathcal O_Z\\otimes\\mathcal L_1^{\\otimes n_1}\\otimes\\cdots\\otimes\\mathcal L_d^{\\otimes n_d})$ [def-pc-euler-characteristic]. That this function is a numerical polynomial of total degree at most $\\dim\\operatorname{Supp}(i_*\\mathcal O_Z)=d$, so that the coefficient is well defined, is [lem-sc-snapper-numerical-polynomial] applied to the coherent module $\\mathcal F=i_*\\mathcal O_Z$, and it is not part of the definition. When all $\\mathcal L_j=\\mathcal L$, write $(\\mathcal L^d\\cdot Z)$.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Definition Tag 0BEP (definition-intersection-number)"
@@ -20,7 +20,10 @@
   "def-weil-field",
   "def-weil-proper-morphism",
   "def-sc-invertible-module",
-  "def-sc-ample"
+  "def-weil-closed-immersion",
+  "def-kun-topological-krull-dimension",
+  "def-pc-euler-characteristic",
+  "lem-sc-snapper-numerical-polynomial"
  ],
  "proof": [],
  "proof_deps": [],
@@ -56,12 +59,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-positive-ample-hilbert-degree",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-isogeny"
+ "unit": "sk-prop-av-isogeny",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-sc-intersection-number",
+  "worker": "stage1",
+  "summary": "Checked the definition against Stacks Project, Varieties, Definition Tag 0BEP (definition-intersection-number): field, proper scheme X, nonempty closed subscheme Z of dimension d, invertible modules L_1..L_d, intersection number as the coefficient of n_1...n_d in the numerical polynomial chi(X, i_*O_Z tensor L_1^{n_1} ... L_d^{n_d}), whose existence is cited from lem-sc-snapper-numerical-polynomial (Tag 0BEL). This is a definition, so it has no proof steps. Required Mathlib searches found no intersection-number declaration.",
+  "blueprint": "Realizes the intersection-number convention referenced in the Tag 0BEV proof of lem-sc-mult-n-finite-flat, with the definition itself sourced from Tag 0BEP.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-din2248",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-din2248 (reviewer sub-agent of L); spot-checked: Read the packet whole; statement against Stacks 0BEP (varieties.tex 10388) and 0BEL (10195); citing node lem-sc-positive-ample-hilbert-degree step (Z=X, L_j=L, coefficient of n_1..n_g in Q(n_1+..+n_g)) matches the notation and degree bound; lem-sc-intersection-effective-cartier and lem-sc-top-dimensional-reduction-intersection use (L^d.X) consistently; grep dag/nodes for 'intersection number': no other defining node (class b clear); lem-sc-hilbert-polynomial (0BEM) covers only a single ample M and F=O_X, so does not supply the multivariate polynomial. FIX more, RETURN less: dag/nodes/sec-abelian-varieties/def-sc-intersection-number.json: polynomiality of chi(X, i_*O_Z tensor L_1^{n_1}...L_d^{n_d}) used without a cited node (C1), now cites new statement-only node [lem-sc-snapper-numerical-polynomial] (Tag 0BEL, total degree <= dim Supp F; one grep recorded) as not part of the definition, and chi cites [def-pc-euler-characteristic]; the uncited projection-formula equality with chi(Z, ...|_Z) dropped (C1, not used by any citing node); Z required nonempty so d=dim Z is a natural number; stale split_report summary (ample, dimension g) corrected. Second reading by F1 missed the C1 polynomiality citation. Start 'Sat Oct 10 08:19 PM UTC 2026', end 'Sat Oct 10 08:21:47 PM UTC 2026'.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
