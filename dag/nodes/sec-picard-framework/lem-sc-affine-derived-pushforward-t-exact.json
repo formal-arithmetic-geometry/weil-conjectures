@@ -24,9 +24,53 @@
   "def-pc-derived-direct-image",
   "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $E\\in D_{\\mathrm{QCoh}}(X)$ and every integer $i$, the affine cohomology comparison gives $H^i(Rf_*E)\\cong f_*H^i(E)$, with the right side quasi-coherent.",
+   "uses": [
+    "lem-sc-affine-derived-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, lemma-affine-morphism-equivalence"
+   }
+  },
+  {
+   "text": "The comparison in Step 1 preserves vanishing of cohomology in every degree, so $E\\in D_{\\mathrm{QCoh}}^{\\le n}(X)$ implies $Rf_*E\\in D_{\\mathrm{QCoh}}^{\\le n}(Y)$ and similarly for the lower bound. Conversely, if $Rf_*E$ has either bound, each corresponding $f_*H^i(E)$ vanishes; applying the cohomology comparison [lem-sc-affine-derived-cohomology] to the object $H^i(E)[0]$ of $D_{\\mathrm{QCoh}}(X)$ shows $Rf_*(H^i(E)[0])$ has all cohomology sheaves zero, so $Rf_*$ of the zero morphism $H^i(E)[0]\\to0$ is an isomorphism and the affine conservativity statement [lem-sc-affine-derived-pushforward-conservative] forces $H^i(E)=0$, giving the reverse implications. This is exactly t-exactness for the standard t-structures [def-sbc-standard-tstructure-derived-category].",
+   "uses": [
+    "lem-sc-affine-derived-cohomology",
+    "lem-sc-affine-derived-pushforward-conservative",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, lemma-affine-morphism-equivalence"
+   }
+  },
+  {
+   "text": "If $u:E\\to F$ has $Rf_*u$ an isomorphism, the affine conservativity statement gives that $u$ is an isomorphism. Thus $Rf_*$ reflects isomorphisms on $D_{\\mathrm{QCoh}}$.",
+   "uses": [
+    "lem-sc-affine-derived-pushforward-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08I8, lemma-affine-morphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-derived-cohomology",
+  "lem-sc-affine-derived-pushforward-conservative",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0AVW and 08I8"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,12 +102,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-derived-concentration",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-derived-pushforward-t-exact",
+  "worker": "stage1",
+  "summary": "Split the affine derived pushforward theorem into the cohomology comparison and conservative-pushforward inputs, then used them to prove both standard t-structure bound equivalences and reflection of isomorphisms. The item statement and hypotheses were checked against Stacks Tags 0AVW and 08I8.",
+  "blueprint": "The three steps realize the affine derived passage in the ancestor proof: cohomology identification, t-exactness/conservativity, and the isomorphism-reflection conclusion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-adt1735",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-adt1735 (reviewer sub-agent of L); spot-checked: Item vs Stacks 08I8 (Rf_* reflects isos on D_QCoh, f affine) and 0AVW proof (H^i(Rf_*K)=f_*H^i(K)): hypotheses match. New nodes: cohomology comparison (0AVW proof line) and conservativity (08I8 verbatim) are true, self-contained, strictly smaller than the item; not duplicates of lem-sc-affine-derived-concentration (heart case only, which cites this item; no cycle, no restatement) nor of lem-sc-finite-affine-derived-equivalence. Steps 1-3 cite statements only; t-structure def gives bounds. FIX more, RETURN less: Step 2 converse made explicit (C1/C4 gap: f_*H^i(E)=0 => H^i(E)=0 now derived by applying the cohomology node to H^i(E)[0] and conservativity to H^i(E)[0]->0).; 1 file(s) fixed by the reviewer"
+ }
 }
