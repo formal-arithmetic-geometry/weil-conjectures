@@ -1,8 +1,8 @@
 # Work queue
 
-873 items; claim with `tools/claim.py next <group> [--stage N]`.
+872 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (79)
+## Stage 1: nodes to split (76)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -32,7 +32,6 @@
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-etale-at-prime-flat-unramified-criterion` | 4013 | none |
-| `lem-sc-affine-totalquotient-minimal-product` | 5013 | none |
 | `lem-sc-ass-weakass-fg-stalk` | 5013 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-rf-single-complex-affine-base-change` | 5015 | none |
@@ -53,7 +52,6 @@
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-sc-kummer-base-change-compatibility` | - | none |
 | `lem-sc-units-quotient-base-change` | - | none |
-| `lem-weil-pbc-spread-finite-separable-extension` | - | none |
 | `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-sc-affine-constant-second` | - | rests_on_sorry |
 | `lem-kun-cp-approximation` | - | none |
@@ -61,7 +59,6 @@
 | `prop-pur-kinjective-resolutions-exist` | - | none |
 | `lem-kun-support-geometric-point-independent` | - | none |
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
-| `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
 | `lem-weil-common-extension-fields` | - | none |
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-kun-separable-smooth-colimit` | - | none |
@@ -86,7 +83,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (794)
+## Stage 2: nodes to state (796)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -258,6 +255,7 @@
 | `lem-sc-affine-regular-immersion-kernel-criterion` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 1 | state |
 | `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
+| `lem-sc-affine-totalquotient-minimal-product` | 1 | state |
 | `lem-sc-affine-unit-quotient` | 1 | state |
 | `lem-sc-affine-weakass-nonzerodivisors` | 1 | state |
 | `lem-sc-ample-proj-canonical-map` | 1 | state |
@@ -779,6 +777,7 @@
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state |
 | `lem-weil-pbc-split-extension-free-presentation` | 1 | state |
 | `lem-weil-pbc-split-injection-after-completion` | 1 | state |
+| `lem-weil-pbc-spread-finite-separable-extension` | 1 | state |
 | `lem-weil-pbc-spread-purely-inseparable-factors` | 1 | state |
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 1 | state |
 | `lem-weil-pbc-standard-smooth-include-generators` | 1 | state |
@@ -885,7 +884,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1635 nodes that wait for a statement dependency, 117 nodes that wait for stage 1.
+Not open yet: 1636 nodes that wait for a statement dependency, 114 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
