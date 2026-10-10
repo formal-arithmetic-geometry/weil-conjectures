@@ -734,6 +734,15 @@ theorem isRadical_identityComponent (I : Ideal (CoordinateRing n k)) :
     (identityComponent I).IsRadical :=
   PrimeSpectrum.isRadical_vanishingIdeal _
 
+/-- The closed subset of `Spec k[x_ij, det⁻¹]` cut out by the ideal of the reduced identity
+component of `V(I)` is the connected component of the identity in the closed subset `V(I)`. -/
+theorem zeroLocus_identityComponent_eq_connectedComponentIn (I : Ideal (CoordinateRing n k)) :
+    PrimeSpectrum.zeroLocus (identityComponent I : Set (CoordinateRing n k)) =
+      connectedComponentIn (PrimeSpectrum.zeroLocus (I : Set (CoordinateRing n k)))
+        (toPrimeSpectrum 1) := by
+  rw [identityComponent, PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure,
+    ((PrimeSpectrum.isClosed_zeroLocus _).isClosed_connectedComponentIn _).closure_eq]
+
 /-- The reduced identity component is monotone in the group: if `V(J) ⊆ V(I)` then
 `V(J)° ⊆ V(I)°`. -/
 theorem identityComponent_mono (I : Ideal (CoordinateRing n k)) {J : Ideal (CoordinateRing n k)}
@@ -1083,6 +1092,39 @@ theorem commute_of_mem_zeroLocus_vanishingIdeal {Γ : Subgroup (GL n k)} {z : GL
     rw [evalAlgHom_commutatorEquation, ← Units.val_mul, ← Units.val_mul, hz h hh, sub_self]
   rw [evalAlgHom_commutatorEquation, sub_eq_zero] at h
   exact h.symm
+
+open scoped commutatorElement in
+/-- Over an algebraically closed field, the points of the reduced centre `Z(G)` of a reduced
+`G = V(I)` commute with the points of `G`, with values in any `k`-algebra `R`: the commutator of
+the universal pair of points of `Z(G) × G` is trivial at every pair of `k`-points, hence trivial by
+the schematic density of the `k`-points (`evalAlgHom_map_liftQuotient_eq_zero`).
+(blueprint: `sk-p-comparison`) -/
+theorem commute_of_mem_zeroLocus_center [IsAlgClosed k] {I : Ideal (CoordinateRing n k)}
+    [I.IsHopfIdeal k] (hI : I.IsRadical) {R : Type*} [CommRing R] [Algebra k R] {g h : GL n R}
+    (hg : g ∈ zeroLocus (center I) R) (hh : h ∈ zeroLocus I R) : Commute g h := by
+  have hJ (a : CoordinateRing n k) : a ∈ I ↔ ∀ t : zeroLocus I k, evalAlgHom (t : GL n k) a = 0 :=
+    ⟨fun ha t ↦ t.2 a ha, fun ht ↦ vanishingIdeal_zeroLocus_le_of_isRadical I hI
+      (mem_vanishingIdeal.2 fun t htI ↦ ht ⟨t, htI⟩)⟩
+  have key (i j : n) : evalAlgHom ⁅g, h⁆ (coord n k i j - algebraMap k _ ((1 : Matrix n n k) i j)) =
+      0 := by
+    have := evalAlgHom_map_liftQuotient_eq_zero (fun s : centerPoints I ↦ evalAlgHom (s : GL n k))
+      (fun t : zeroLocus I k ↦ evalAlgHom (t : GL n k)) mem_vanishingIdeal_iff_forall_subtype hJ
+      ⁅inlQuotient _ _ (genericUnit n k), inrQuotient _ _ (genericUnit n k)⁆
+      (coord n k i j - algebraMap k _ ((1 : Matrix n n k) i j)) (fun s t ↦ by
+        rw [map_commutatorElement, map_liftQuotient_inlQuotient, map_liftQuotient_inrQuotient,
+          map_evalAlgHom_genericUnit, map_evalAlgHom_genericUnit,
+          commutatorElement_eq_one_iff_mul_comm.2 (((mem_centerPoints_iff I).1 s.2).2 t t.2)]
+        simp)
+      (evalAlgHom g) (evalAlgHom h) (fun b hb ↦ hg b hb) (fun b hb ↦ hh b hb)
+    rwa [map_commutatorElement, map_liftQuotient_inlQuotient, map_liftQuotient_inrQuotient,
+      map_evalAlgHom_genericUnit, map_evalAlgHom_genericUnit] at this
+  have h1 : ⁅g, h⁆ = 1 := by
+    ext i j
+    have := key i j
+    rw [map_sub, evalAlgHom_coord, AlgHom.commutes, sub_eq_zero] at this
+    rw [this, Units.val_one, Matrix.one_apply, Matrix.one_apply]
+    split_ifs <;> simp
+  exact commutatorElement_eq_one_iff_mul_comm.1 h1
 
 section Map
 
