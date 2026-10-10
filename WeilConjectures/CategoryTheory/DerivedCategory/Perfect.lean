@@ -44,6 +44,8 @@ perfect objects of `D(R)` are the *perfect point complexes*.
   of scalars to a field the cohomology is finite dimensional and bounded.
 - `DerivedCategory.IsPerfect.ihom_unit` (`sk-lem-finite`, Step 3): the dual
   `C^∨ = RHom_R(C, R)` of a perfect complex is perfect.
+- `DerivedCategory.IsPerfect.isDualizable` (`prop-pod-biduality-at-the-point`, Steps 1–3): a
+  perfect complex is dualizable for the derived tensor product.
 - `DerivedCategory.IsPerfect.isIso_toIhomIhomUnit` (`prop-pod-biduality-at-the-point`): for
   any braiding of `D(R)`, the canonical biduality map `C ⟶ C^∨∨` is an isomorphism for a
   perfect `C`, where `C^∨ = RHom_R(C, R)`.
@@ -269,9 +271,12 @@ section Biduality
 /-- Blueprint `prop-pod-biduality-at-the-point` (Steps 1–3 of its proof): a perfect point
 complex is dualizable for the derived tensor product of `D(R)`.
 
-A single finitely generated projective module is dualizable, with dual `Hom_R(P, R)`; a bounded
-complex of such modules is dualizable, with dual the termwise dual complex, by induction on the
-length using the truncation triangles; and dualizability is invariant under isomorphism. -/
+A finitely generated projective module is dualizable, with dual `Hom_R(P, R)`
+(`ModuleCat.isDualizable_of_projective`). A bounded complex `P` of such modules is paired with
+its termwise dual complex for the tensor product of complexes, and `P` and its dual are K-flat,
+so the pairing descends to `D(R)` (`DerivedCategory.isDualizable_Q_obj`). This replaces the
+blueprint's induction along the truncation triangles by a direct chain-level construction of the
+evaluation and coevaluation. Dualizability is invariant under isomorphism. -/
 theorem IsPerfect.isDualizable {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
     IsDualizable C := by
   obtain ⟨P, a, b, _, _, hP, ⟨e⟩⟩ := hC

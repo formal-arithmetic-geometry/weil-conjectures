@@ -11,78 +11,116 @@ public import Mathlib.Data.Int.Interval
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
+/-!
+# The termwise dual of a bounded cochain complex
+
+Let `C` be a preadditive monoidal category and `K` a cochain complex in `C` all of whose terms
+have right duals. The *termwise dual* `K^∨` (`CochainComplex.rightDual`) has terms
+`(K^∨)ⁿ = (K⁻ⁿ)ᘁ` and differential `(-1)ʲ • (d_K^{-j-1})ᘁ : (K^∨)ʲ⁻¹ ⟶ (K^∨)ʲ`.
+
+If `K` is bounded, `K` and `K^∨` form an exact pairing for the tensor product of cochain
+complexes (`CochainComplex.exactPairingRightDual`). The evaluation `K^∨ ⊗ K ⟶ 𝟙_` is given on
+the summand `(K⁻ᵖ)ᘁ ⊗ Kᵖ` of degree `0` by the evaluation of `Kᵖ`, and the coevaluation
+`𝟙_ ⟶ K ⊗ K^∨` is the finite sum of the coevaluations `𝟙_ C ⟶ Kᵖ ⊗ (Kᵖ)ᘁ`. The signs in the
+differential of `K^∨` make both maps of complexes, and the zigzag identities hold summandwise.
+In particular a bounded complex of dualizable objects is dualizable
+(`CochainComplex.isDualizable_of_isStrictlyGE_of_isStrictlyLE`).
+
+## Implementation notes
+
+The summands of the tensor product `K ⊗ L` in degree `n` are indexed by pairs `(p, q)` with
+`p + q = n`. To avoid transporting along equalities such as `-(-p) = p`, the components of the
+evaluation and coevaluation (`CochainComplex.rightDual.evalPQ`, `CochainComplex.rightDual.coevPQ`)
+are defined for all such pairs, using the isomorphisms `HomologicalComplex.XIsoOfEq`, and the
+lemmas about them are proved for indices which are variables.
+-/
+
 @[expose] public section
 
 open CategoryTheory Category Limits MonoidalCategory
 
 namespace CochainComplex
 
-variable {C : Type*} [Category* C] [Preadditive C] [MonoidalCategory C] [HasZeroObject C]
-  [MonoidalPreadditive C]
-
 section
 
-variable {X Y : C} [HasRightDual X] [HasRightDual Y]
+variable {D : Type*} [Category* D] [Preadditive D] (K : CochainComplex D ℤ)
+  (a b : ℤ) [K.IsStrictlyGE a] [K.IsStrictlyLE b]
 
-omit [HasZeroObject C] in
-lemma rightAdjointMate_zero' : (0 : X ⟶ Y)ᘁ = 0 := by
-  simp [rightAdjointMate]
+private lemma isZero_X_of_notMem (p : ℤ) (hp : p ∉ Finset.Icc a b) : IsZero (K.X p) := by
+  simp only [Finset.mem_Icc, not_and_or, not_le] at hp
+  rcases hp with hp | hp
+  · exact K.isZero_of_isStrictlyGE a p hp
+  · exact K.isZero_of_isStrictlyLE b p hp
 
 end
 
-lemma units_smul_smul_add_self {M : Type*} [AddCommGroup M] (u v : ℤˣ) (x : M)
+section
+
+variable {D : Type*} [Category* D] [MonoidalCategory D]
+
+private lemma zigzag_conj {A B : D} [HasRightDual A] (e : A ≅ B) (f : B ⟶ A) (hf : f = e.inv) :
+    (λ_ B).inv ≫ (η_ A Aᘁ ≫ e.hom ▷ Aᘁ) ▷ B ≫ (α_ B Aᘁ B).hom ≫ B ◁ (Aᘁ ◁ f ≫ ε_ A Aᘁ) =
+      (ρ_ B).inv := by
+  subst hf
+  let _ : ExactPairing B Aᘁ := exactPairingCongrLeft e.symm
+  have h := ExactPairing.evaluation_coevaluation B Aᘁ
+  change (η_ A Aᘁ ≫ e.hom ▷ Aᘁ) ▷ B ≫ _ ≫ B ◁ (Aᘁ ◁ e.inv ≫ ε_ A Aᘁ) = _ at h
+  rw [h, Iso.inv_hom_id_assoc]
+
+private lemma zigzag_conj' {A B : D} [HasRightDual A] (e : B ≅ A) (f : A ⟶ B) (hf : f = e.inv) :
+    (ρ_ (Aᘁ)).inv ≫ Aᘁ ◁ (η_ A Aᘁ ≫ f ▷ Aᘁ) ≫ (α_ Aᘁ B Aᘁ).inv ≫
+      (Aᘁ ◁ e.hom ≫ ε_ A Aᘁ) ▷ Aᘁ = (λ_ (Aᘁ)).inv := by
+  subst hf
+  let _ : ExactPairing B Aᘁ := exactPairingCongrLeft e
+  have h := ExactPairing.coevaluation_evaluation B Aᘁ
+  change Aᘁ ◁ (η_ A Aᘁ ≫ e.inv ▷ Aᘁ) ≫ _ ≫ (Aᘁ ◁ e.hom ≫ ε_ A Aᘁ) ▷ Aᘁ = _ at h
+  rw [h, Iso.inv_hom_id_assoc]
+
+end
+
+private lemma units_smul_smul_add_self {M : Type*} [AddCommGroup M] (u v : ℤˣ) (x : M)
     (h : u * v = -1) : u • v • x + x = 0 := by
   rw [smul_smul, h, Units.neg_smul, one_smul, neg_add_cancel]
 
-omit [HasZeroObject C] in
-lemma units_smul_whiskerRight {X Y : C} (u : ℤˣ) (f : X ⟶ Y) (Z : C) :
+variable {C : Type*} [Category* C] [Preadditive C] [MonoidalCategory C] [MonoidalPreadditive C]
+
+private lemma rightAdjointMate_zero {X Y : C} [HasRightDual X] [HasRightDual Y] :
+    (0 : X ⟶ Y)ᘁ = 0 := by
+  simp [rightAdjointMate]
+
+private lemma units_smul_whiskerRight {X Y : C} (u : ℤˣ) (f : X ⟶ Y) (Z : C) :
     (u • f) ▷ Z = u • (f ▷ Z) := by
   rw [Units.smul_def, Units.smul_def]
   exact Functor.map_zsmul (tensorRight Z)
 
-omit [HasZeroObject C] in
-lemma whiskerLeft_units_smul (X : C) {Y Z : C} (u : ℤˣ) (f : Y ⟶ Z) :
+private lemma whiskerLeft_units_smul (X : C) {Y Z : C} (u : ℤˣ) (f : Y ⟶ Z) :
     X ◁ (u • f) = u • (X ◁ f) := by
   rw [Units.smul_def, Units.smul_def]
   exact Functor.map_zsmul (tensorLeft X)
 
 variable (K : CochainComplex C ℤ) [∀ n, HasRightDual (K.X n)]
 
-/-- The termwise right dual of a cochain complex. -/
+/-- The termwise right dual `K^∨` of a cochain complex `K`, with `(K^∨)ⁿ = (K⁻ⁿ)ᘁ` and
+differential `(-1)ʲ • (d_K^{-j-1})ᘁ : (K^∨)ʲ⁻¹ ⟶ (K^∨)ʲ`. -/
 noncomputable def rightDual : CochainComplex C ℤ where
   X n := (K.X (-n))ᘁ
   d i j := j.negOnePow • (K.d (-j) (-i))ᘁ
   shape i j h := by
-    rw [K.shape (-j) (-i) (by simp at h ⊢; omega), rightAdjointMate_zero', smul_zero]
+    rw [K.shape (-j) (-i) (by simp at h ⊢; omega), rightAdjointMate_zero, smul_zero]
   d_comp_d' i j k _ _ := by
     rw [Linear.units_smul_comp, Linear.comp_units_smul, ← comp_rightAdjointMate, K.d_comp_d,
-      rightAdjointMate_zero', smul_zero, smul_zero]
+      rightAdjointMate_zero, smul_zero, smul_zero]
 
 lemma rightDual_X (n : ℤ) : K.rightDual.X n = (K.X (-n))ᘁ := rfl
 
 lemma rightDual_d (i j : ℤ) : K.rightDual.d i j = j.negOnePow • (K.d (-j) (-i))ᘁ := rfl
 
-lemma rightDual.isZero_X (n : ℤ) (hn : IsZero (K.X (-n))) : IsZero (K.rightDual.X n) := by
+namespace rightDual
+
+lemma isZero_X (n : ℤ) (hn : IsZero (K.X (-n))) : IsZero (K.rightDual.X n) := by
   rw [IsZero.iff_id_eq_zero]
   change 𝟙 ((K.X (-n))ᘁ) = 0
-  rw [← rightAdjointMate_id, hn.eq_of_src (𝟙 _) 0, rightAdjointMate_zero']
-
-instance rightDual.isStrictlyGE (b : ℤ) [K.IsStrictlyLE b] : K.rightDual.IsStrictlyGE (-b) := by
-  rw [isStrictlyGE_iff]
-  exact fun n hn ↦ rightDual.isZero_X K n (K.isZero_of_isStrictlyLE b (-n) (by omega))
-
-instance rightDual.isStrictlyLE (a : ℤ) [K.IsStrictlyGE a] : K.rightDual.IsStrictlyLE (-a) := by
-  rw [isStrictlyLE_iff]
-  exact fun n hn ↦ rightDual.isZero_X K n (K.isZero_of_isStrictlyGE a (-n) (by omega))
-
-variable [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
-  [∀ X₁, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).obj X₁)]
-  [∀ X₂, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-
-namespace rightDual
+  rw [← rightAdjointMate_id, hn.eq_of_src (𝟙 _) 0, rightAdjointMate_zero]
 
 /-- The evaluation `K^∨.X q ⊗ K.X p ⟶ 𝟙_ C` on a summand of degree `q + p = 0`. -/
 noncomputable def evalPQ (q p : ℤ) (h : q + p = 0) : K.rightDual.X q ⊗ K.X p ⟶ 𝟙_ C :=
@@ -103,6 +141,37 @@ lemma evalPQ_comm (q p : ℤ) (h : q + p + 1 = 0) :
     Units.neg_smul]
   exact neg_add_cancel _
 
+/-- The coevaluation `𝟙_ C ⟶ K.X p ⊗ K^∨.X q` on a summand of degree `p + q = 0`. -/
+noncomputable def coevPQ (p q : ℤ) (h : p + q = 0) : 𝟙_ C ⟶ K.X p ⊗ K.rightDual.X q :=
+  η_ (K.X (-q)) (K.X (-q))ᘁ ≫ (K.XIsoOfEq (show -q = p by omega)).hom ▷ (K.X (-q))ᘁ
+end rightDual
+
+section
+
+variable [HasZeroObject C]
+
+instance rightDual.isStrictlyGE (b : ℤ) [K.IsStrictlyLE b] : K.rightDual.IsStrictlyGE (-b) := by
+  rw [isStrictlyGE_iff]
+  exact fun n hn ↦ rightDual.isZero_X K n (K.isZero_of_isStrictlyLE b (-n) (by omega))
+
+instance rightDual.isStrictlyLE (a : ℤ) [K.IsStrictlyGE a] : K.rightDual.IsStrictlyLE (-a) := by
+  rw [isStrictlyLE_iff]
+  exact fun n hn ↦ rightDual.isZero_X K n (K.isZero_of_isStrictlyGE a (-n) (by omega))
+
+lemma rightDual.coevPQ_eq_zero (p q : ℤ) (h : p + q = 0) (hp : IsZero (K.X p)) :
+    coevPQ K p q h = 0 :=
+  (((curriedTensor C).map_isZero hp).obj _).eq_of_tgt _ _
+
+end
+
+variable [HasZeroObject C] [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
+  [∀ X₁, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).obj X₁)]
+  [∀ X₂, PreservesColimit (Functor.empty.{0} C) ((curriedTensor C).flip.obj X₂)]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+
+namespace rightDual
+
 /-- The evaluation `K^∨ ⊗ K ⟶ 𝟙_` of the termwise dual. -/
 noncomputable def eval : K.rightDual ⊗ K ⟶ 𝟙_ (CochainComplex C ℤ) :=
   HomologicalComplex.mkHomToSingle
@@ -117,12 +186,6 @@ noncomputable def eval : K.rightDual ⊗ K ⟶ 𝟙_ (CochainComplex C ℤ) :=
       erw [HomologicalComplex.ι_mapBifunctorDesc, HomologicalComplex.ι_mapBifunctorDesc]
       exact evalPQ_comm K q p (by omega))
 
-/-- The coevaluation `𝟙_ C ⟶ K.X p ⊗ K^∨.X q` on a summand of degree `p + q = 0`. -/
-noncomputable def coevPQ (p q : ℤ) (h : p + q = 0) : 𝟙_ C ⟶ K.X p ⊗ K.rightDual.X q :=
-  η_ (K.X (-q)) (K.X (-q))ᘁ ≫ (K.XIsoOfEq (show -q = p by omega)).hom ▷ (K.X (-q))ᘁ
-
-lemma coevPQ_eq_zero (p q : ℤ) (h : p + q = 0) (hp : IsZero (K.X p)) : coevPQ K p q h = 0 :=
-  (((curriedTensor C).map_isZero hp).obj _).eq_of_tgt _ _
 
 /-- The differential of `K ⊗ K^∨` applied to `coevPQ`, first part. -/
 noncomputable def coevD₁ (p q p₁ : ℤ) (h : p + q = 0) (hp : p + 1 = p₁) :
@@ -166,12 +229,6 @@ noncomputable def coevZero : 𝟙_ C ⟶ (K ⊗ K.rightDual).X 0 :=
   ∑ p ∈ Finset.Icc a b,
     coevPQ K p (-p) (by simp) ≫ HomologicalComplex.ιTensorObj K K.rightDual p (-p) 0 (by simp)
 
-lemma isZero_X_of_notMem (p : ℤ) (hp : p ∉ Finset.Icc a b) : IsZero (K.X p) := by
-  simp only [Finset.mem_Icc, not_and_or, not_le] at hp
-  rcases hp with hp | hp
-  · exact K.isZero_of_isStrictlyGE a p hp
-  · exact K.isZero_of_isStrictlyLE b p hp
-
 lemma coevZero_comp_d : coevZero K a b ≫ (K ⊗ K.rightDual).d 0 1 = 0 := by
   let f : ℤ → (𝟙_ C ⟶ (K ⊗ K.rightDual).X 1) := fun p ↦ coevD₁ K p (-p) (p + 1) (by simp) rfl
   have hf : ∀ p ∉ Finset.Icc a b, f p = 0 := fun p hp ↦ by
@@ -197,7 +254,7 @@ lemma coevZero_comp_d : coevZero K a b ≫ (K ⊗ K.rightDual).d 0 1 = 0 := by
   simp only [coevZero, Preadditive.sum_comp, assoc, e, Finset.sum_sub_distrib]
   rw [← finsum_eq_sum_of_support_subset f (s := Finset.Icc a b) ?_,
     ← finsum_eq_sum_of_support_subset (fun p ↦ f (p - 1)) (s := Finset.Icc a b) ?_]
-  · show _ - ∑ᶠ p, f (Equiv.subRight 1 p) = 0
+  · change _ - ∑ᶠ p, f (Equiv.subRight 1 p) = 0
     rw [finsum_comp_equiv (Equiv.subRight 1) (f := f), sub_self]
   · intro p hp
     by_contra hp'
@@ -213,6 +270,17 @@ noncomputable def coev : 𝟙_ (CochainComplex C ℤ) ⟶ K ⊗ K.rightDual :=
     rintro k hk
     obtain rfl : k = 1 := by simpa using hk.symm
     exact coevZero_comp_d K a b)
+
+
+lemma eval_f_eq_zero (k : ℤ) (hk : k ≠ 0) : (eval K).f k = 0 :=
+  (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (𝟙_ C) k hk).eq_of_tgt _ _
+
+lemma ι_eval_f (q p : ℤ) (h : q + p = 0) :
+    HomologicalComplex.ιTensorObj K.rightDual K q p 0 h ≫ (eval K).f 0 =
+      evalPQ K q p h ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ C)).inv := by
+  rw [eval, HomologicalComplex.mkHomToSingle_f]
+  erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
+
 
 end rightDual
 
@@ -234,40 +302,7 @@ lemma rightUnitor_inv_f (n : ℤ) :
 
 end Unitors
 
-section Zigzag
-
-omit [HasZeroObject C] in
-lemma zigzag_conj {A B : C} [HasRightDual A] (e : A ≅ B) (f : B ⟶ A) (hf : f = e.inv) :
-    (λ_ B).inv ≫ (η_ A Aᘁ ≫ e.hom ▷ Aᘁ) ▷ B ≫ (α_ B Aᘁ B).hom ≫ B ◁ (Aᘁ ◁ f ≫ ε_ A Aᘁ) =
-      (ρ_ B).inv := by
-  subst hf
-  letI : ExactPairing B Aᘁ := exactPairingCongrLeft e.symm
-  have h := ExactPairing.evaluation_coevaluation B Aᘁ
-  change (η_ A Aᘁ ≫ e.hom ▷ Aᘁ) ▷ B ≫ _ ≫ B ◁ (Aᘁ ◁ e.inv ≫ ε_ A Aᘁ) = _ at h
-  rw [h, Iso.inv_hom_id_assoc]
-
-omit [HasZeroObject C] in
-lemma zigzag_conj' {A B : C} [HasRightDual A] (e : B ≅ A) (f : A ⟶ B) (hf : f = e.inv) :
-    (ρ_ (Aᘁ)).inv ≫ Aᘁ ◁ (η_ A Aᘁ ≫ f ▷ Aᘁ) ≫ (α_ Aᘁ B Aᘁ).inv ≫
-      (Aᘁ ◁ e.hom ≫ ε_ A Aᘁ) ▷ Aᘁ = (λ_ (Aᘁ)).inv := by
-  subst hf
-  letI : ExactPairing B Aᘁ := exactPairingCongrLeft e
-  have h := ExactPairing.coevaluation_evaluation B Aᘁ
-  change Aᘁ ◁ (η_ A Aᘁ ≫ e.inv ▷ Aᘁ) ≫ _ ≫ (Aᘁ ◁ e.hom ≫ ε_ A Aᘁ) ▷ Aᘁ = _ at h
-  rw [h, Iso.inv_hom_id_assoc]
-
-end Zigzag
-
 namespace rightDual
-
-lemma eval_f_eq_zero (k : ℤ) (hk : k ≠ 0) : (eval K).f k = 0 :=
-  (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 (𝟙_ C) k hk).eq_of_tgt _ _
-
-lemma ι_eval_f (q p : ℤ) (h : q + p = 0) :
-    HomologicalComplex.ιTensorObj K.rightDual K q p 0 h ≫ (eval K).f 0 =
-      evalPQ K q p h ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ C)).inv := by
-  rw [eval, HomologicalComplex.mkHomToSingle_f]
-  erw [HomologicalComplex.ι_mapBifunctorDesc_assoc]
 
 variable (a b : ℤ) [K.IsStrictlyGE a] [K.IsStrictlyLE b]
 
@@ -379,6 +414,8 @@ lemma whiskerLeft_coev_comp :
   · exact (rightDual.isZero_X K n (isZero_X_of_notMem K a b (-n) hn)).eq_of_src _ _
 
 end rightDual
+
+variable [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
 
 variable (a b : ℤ) [K.IsStrictlyGE a] [K.IsStrictlyLE b]
 
