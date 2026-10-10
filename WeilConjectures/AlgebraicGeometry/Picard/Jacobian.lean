@@ -2245,7 +2245,83 @@ theorem exists_intermediateField_representableBy {ks : Type u} [Field ks] [Algeb
                   (Over.mk (f ≫ Spec.map (CommRingCat.ofHom (algebraMap K ks)))) ⟶
                 Over.mk (f ≫ Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op
               (rs.homEquiv a) :=
-  sorry
+  by
+  have : Algebra.IsSeparable k ks := IsSepClosure.separable
+  obtain ⟨L, JL, q, hq, hinv⟩ := exists_finiteSubext_isPullback_overTransport C Js rs
+  let P := (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj
+  let gs := Spec.map (CommRingCat.ofHom (algebraMap k ks))
+  let gL := Spec.map (CommRingCat.ofHom (algebraMap k L.1))
+  let ιL := Spec.map (CommRingCat.ofHom (algebraMap L.1 ks))
+  have hgs : ιL ≫ gL = gs := specMap_algebraMap_comp_specMap_algebraMap k L.1 ks
+  -- the representation of `Pic^0_{C/k}` over `k_s`, viewed through `Spec k_s ⟶ Spec L`
+  let α : Over.map gs ≅ Over.map ιL ⋙ Over.map gL :=
+    Over.mapCongr gs (ιL ≫ gL) hgs.symm ≪≫ Over.mapComp ιL gL
+  let rs' : ((Over.map ιL).op ⋙ (Over.map gL).op ⋙ P).RepresentableBy Js :=
+    rs.ofIso (Functor.isoWhiskerRight (NatIso.op α).symm P)
+  have hrs' {T : Scheme.{u}} (f : T ⟶ Spec (.of ks)) (b : Over.mk f ⟶ Js) :
+      rs'.homEquiv b = P.map (Over.homMk (𝟙 T) (by simp [← hgs]) :
+        (Over.map gL).obj ((Over.map ιL).obj (Over.mk f)) ⟶ (Over.map gs).obj (Over.mk f)).op
+          (rs.homEquiv b) := rfl
+  have htr {T : Scheme.{u}} (f₁ f₂ : T ⟶ Spec (.of ks)) (h : f₁ ≫ ιL = f₂ ≫ ιL)
+      (a : Over.mk f₁ ⟶ Js) :
+      rs'.overTransport f₁ f₂ h a = rs.overTransport f₁ f₂
+        (by have := congrArg (· ≫ gL) h; simp only [Category.assoc, hgs] at this; exact this)
+          a := by
+    apply rs'.homEquiv.injective
+    rw [Functor.RepresentableBy.homEquiv_overTransport, hrs']
+    erw [hrs' f₁ a, Functor.RepresentableBy.homEquiv_overTransport]
+    exact map_map_eq_map_map_of_comp_eq P
+      ((Over.map gL).map (Functor.RepresentableBy.overMapHomMkId f₁ f₂ h)) _ _ _
+      (by ext; simp) _
+  have := flat_specMap_algebraMap L.1 ks
+  have := surjective_specMap_algebraMap L.1 ks
+  obtain ⟨rK, hrK⟩ := Functor.RepresentableBy.exists_representableBy_of_descent
+    (F := (Over.map gL).op ⋙ P) rs' q hq
+    (fun f₁ f₂ h a ↦ by rw [htr]; exact hinv f₁ f₂ _ h a)
+    (fun T ↦ inferInstance)
+    (fun T a ha ↦ ⟨EffectiveEpi.desc _ a fun g₁ g₂ hg ↦ by
+        simpa using congrArg (pullback.lift g₁ g₂ hg ≫ ·) ha,
+      EffectiveEpi.fac _ _ _⟩)
+    fun T ↦
+      have : Flat ((Over.map gL).map (Functor.RepresentableBy.descentCoverπ ιL T)).left :=
+        inferInstanceAs (Flat (pullback.fst _ _))
+      have : Surjective ((Over.map gL).map (Functor.RepresentableBy.descentCoverπ ιL T)).left :=
+        inferInstanceAs (Surjective (pullback.fst _ _))
+      have : QuasiCompact ((Over.map gL).map (Functor.RepresentableBy.descentCoverπ ιL T)).left :=
+        inferInstanceAs (QuasiCompact (pullback.fst _ _))
+      Functor.RepresentableBy.isSheafFor_singleton_overMap gL _
+        (isSheafFor_picardFunctorDegree_singleton C 0 _)
+  refine ⟨L.1, L.2, Algebra.isSeparable_tower_bot_of_isSeparable k L.1 ks, JL, q, hq, rK,
+    fun {T} f a ↦ ?_⟩
+  -- restrict the compatibility of `rK` along the section `T ⟶ T ×_L k_s`
+  let b : (Over.map ιL).obj (Over.mk f) ⟶ JL := Over.homMk (a.left ≫ q) (by
+    rw [Category.assoc, hq.w, ← Category.assoc, Over.w a]; rfl)
+  let s : Over.mk f ⟶ Over.mk (pullback.snd ((Over.map ιL).obj (Over.mk f)).hom ιL) :=
+    Over.homMk (pullback.lift (𝟙 T) f (by simp)) (pullback.lift_snd _ _ _)
+  have hs : (Over.map ιL).map s ≫
+      Functor.RepresentableBy.descentCoverπ ιL ((Over.map ιL).obj (Over.mk f)) = 𝟙 _ := by
+    ext
+    exact pullback.lift_fst _ _ _
+  have h := map_map_eq_map_map_of_comp_eq ((Over.map gL).op ⋙ P) ((Over.map ιL).map s)
+    (Functor.RepresentableBy.descentCoverπ ιL ((Over.map ιL).obj (Over.mk f))) (𝟙 _) (𝟙 _)
+    (by rw [hs, Category.comp_id]) (rK.homEquiv b)
+  erw [hrK] at h
+  have hid (y) : ((Over.map gL).op ⋙ P).map (𝟙 ((Over.map ιL).obj (Over.mk f))).op y = y := by
+    rw [op_id, CategoryTheory.Functor.map_id]
+    rfl
+  rw [hid, hid] at h
+  change rK.homEquiv b = _
+  rw [← h]
+  change ((Over.map ιL).op ⋙ (Over.map gL).op ⋙ P).map s.op (rs'.homEquiv _) = _
+  rw [← rs'.homEquiv_comp, hrs']
+  congr 2
+  refine Over.OverMorphism.ext (hq.hom_ext ?_ ?_)
+  · simp only [s, b, Over.comp_left, Over.homMk_left, Category.assoc, IsPullback.lift_fst]
+    rw [pullback.lift_fst_assoc]
+    exact Category.id_comp _
+  · simp only [s, Over.comp_left, Over.homMk_left, Category.assoc, IsPullback.lift_snd]
+    rw [pullback.lift_snd]
+    exact (Over.w a).symm
 
 /-- A descent `J_K` of the Jacobian `J_s` of `C_{k_s}` to a finite separable level `K` is
 projective over `K`, so every finite set of its points lies in an affine open: `J_s` is a
