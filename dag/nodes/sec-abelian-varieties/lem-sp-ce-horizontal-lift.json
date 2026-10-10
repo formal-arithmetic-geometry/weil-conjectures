@@ -13,19 +13,47 @@
  },
  "kind": "statement",
  "title": "Horizontal comparison homotopy for Cartan--Eilenberg rows",
- "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. Let $K^\\bullet$ and $L^\\bullet$ be cochain complexes in $\\mathcal A$, let $I^{p,q}$ and $J^{p,q}$ be first-quadrant double complexes with augmentations $\\epsilon_I:K^\\bullet\\to I^{\\bullet,0}$ and $\\epsilon_J:L^\\bullet\\to J^{\\bullet,0}$, and let $\\delta:I\\to J$ be a morphism of double complexes. Assume that the augmented boundary, cycle, and horizontal-cohomology rows of $I$ are exact, that the corresponding rows of $J$ are injective resolutions [def-sp-injective-resolutions], and that a cochain map $w:K^\\bullet\\to L^\\bullet$ has a homotopy $s^p:K^p\\to L^{p-1}$ with $w^p=d_L^{p-1}s^p+s^{p+1}d_K^p$ and $\\delta^{p,0}\\epsilon_I^p=\\epsilon_J^p w^p$. Then there are maps $s_1^{p,q}:I^{p,q}\\to J^{p-1,q}$, with $s_1^{p,0}\\epsilon_I^p=\\epsilon_J^{p-1}s^p$, such that each $s_1^{p,\\bullet}$ is a map of column complexes (so $d_v s_1=s_1d_v$), and $R=\\delta-d_hs_1-s_1d_h$ is a morphism of vertical complexes that vanishes on the augmented horizontal row.",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian]. Let $K^\\bullet$ and $L^\\bullet$ be cochain complexes in $\\mathcal A$. Let $I^{p,q}$ and $J^{p,q}$ be first-quadrant double complexes [def-sp-double-complex-total] with augmentations $\\epsilon_I:K^\\bullet\\to I^{\\bullet,0}$ and $\\epsilon_J:L^\\bullet\\to J^{\\bullet,0}$. Assume each augmented column $0\\to K^p\\xrightarrow{\\epsilon_I^p}I^{p,0}\\to I^{p,1}\\to\\cdots$ is exact, each $J^{p,\\bullet}$ is a bounded-below complex of injective objects [def-sp-injective-resolutions], the augmented boundary, cycle, and horizontal-cohomology rows of $I$ are exact, and the corresponding rows of $J$ are injective resolutions [def-sp-injective-resolutions]. Let $\\delta:I\\to J$ be a morphism of double complexes. Suppose a cochain map $w:K^\\bullet\\to L^\\bullet$ has a homotopy $s^p:K^p\\to L^{p-1}$ with $w^p=d_L^{p-1}s^p+s^{p+1}d_K^p$ and $\\delta^{p,0}\\epsilon_I^p=\\epsilon_J^p w^p$. Then there are maps $s_1^{p,q}:I^{p,q}\\to J^{p-1,q}$, with $s_1^{p,0}\\epsilon_I^p=\\epsilon_J^{p-1}s^p$, such that each $s_1^{p,\\bullet}$ is a map of column complexes (so $d_v s_1=s_1d_v$), and $R=\\delta-d_hs_1-s_1d_h$ is a morphism of vertical complexes that vanishes on the augmented horizontal row.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tag 015I, label derived-lemma-cartan-eilenberg, construction by boundary, cycle, and cohomology rows; explicit lift is the comparison-homotopy detail supplied here (Weibel Homological Algebra Lemma 5.7.10)"
  },
  "stmt_deps": [
   "def-sp-abelian",
+  "def-sp-double-complex-total",
   "def-sp-injective-resolutions",
   "lem-sp-cartan-eilenberg-exists"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $p$. Exactness of the augmented source column $0\\to K^p\\xrightarrow{\\epsilon_I^p}I^{p,0}\\to I^{p,1}\\to\\cdots$ makes $\\epsilon_I^p:K^p[0]\\to I^{p,\\bullet}$ a degreewise monic quasi-isomorphism. The target column $J^{p-1,\\bullet}$ is a bounded-below complex of injectives. Apply [lem-weil-pbc-lift-along-injective-quasi-iso] to $\\epsilon_I^p$ and $\\gamma=\\epsilon_J^{p-1}s^p:K^p[0]\\to J^{p-1,\\bullet}$. It yields a column-complex map $s_1^{p,\\bullet}:I^{p,\\bullet}\\to J^{p-1,\\bullet}$ with $s_1^{p,0}\\epsilon_I^p=\\epsilon_J^{p-1}s^p$. For $p\\le0$ the target column $J^{p-1,\\bullet}$ is zero (first quadrant), so $s_1^{p,\\bullet}=0$, and the augmentation equation holds because $\\epsilon_J^{p-1}$ lands in $J^{p-1,0}=0$; no vanishing of $K$ or $L$ in negative degrees is needed.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P, lemma-morphisms-lift, applied to each column augmentation; Tag 015I for the Cartan--Eilenberg column hypotheses"
+   }
+  },
+  {
+   "text": "Set $R=\\delta-d_hs_1-s_1d_h$. Since $\\delta$ and each $s_1^{p,\\bullet}$ commute with $d_v$, and $d_h$ commutes with $d_v$, the map $R$ commutes with $d_v$. On the augmentation, $d_h\\epsilon_I^p=\\epsilon_I^{p+1}d_K^p$ and $d_h\\epsilon_J^{p-1}=\\epsilon_J^p d_L^{p-1}$. Hence $R^{p,0}\\epsilon_I^p=\\epsilon_J^p(w^p-d_L^{p-1}s^p-s^{p+1}d_K^p)=0$ by the given homotopy identity. This proves the vertical-complex and vanishing assertions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015I, final comparison-defect calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lift-along-injective-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 013P comparison lift applied columnwise to the Cartan--Eilenberg data of Tag 015I"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,15 +82,62 @@
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "comparison map from an exact augmented complex to an injective resolution lifting a prescribed map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.descHomotopyZero, ShortExact.splittingOfInjective",
+   "results": "0 hits; unknown identifier InjectiveResolution.descHomotopyZero",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descHomotopyZero|splittingOfInjective in Mathlib/CategoryTheory/Abelian Mathlib/Algebra/Homology",
+   "results": "0 hits from msearch grep service",
+   "date": "2026-10-11",
+   "verdict": "no match (service indexing failure; existing DAG nodes record the declarations)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sp-cartan-eilenberg-double-complex-homotopy",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-ce-horizontal-lift",
+  "worker": "stage1",
+  "summary": "Split the horizontal Cartan--Eilenberg comparison lift into a columnwise application of the existing exact-source injective comparison theorem and an explicit calculation that the residual vertical map vanishes on the augmentation. No new nodes were needed.",
+  "blueprint": "Realizes thm-sp-grothendieck proof, final paragraph: first construct the horizontal comparison homotopy component row by row.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "why": "Its generic comparison theorem extends the prescribed augmentation map along each monic quasi-isomorphism into an injective column; the unit has no separate statement of this standard lifting result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-along-injective-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-chl3146",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-chl3146 (reviewer sub-agent of L); spot-checked: C4: Step 1 cites lem-weil-pbc-lift-along-injective-quasi-iso (status mathlib, = Tag 013P(2): bounded-below source, degreewise monic quasi-iso, bounded-below injective target), hypotheses checked: K^p[0]->I^{p,.} monic qis by augmented column exactness, J^{p-1,.} injective first quadrant; so R-ceh3124's concern is met by an existing node, no new 013P node needed, no duplicate (grepped comparison/resolution-lift/cartan-eilenberg). Lifts commute with d_v only; Step 2 uses d_I d_II = d_II d_I of def-sp-double-complex-total, sign-correct. Conclusion matches what parent steps 1 and 3 use (s1 column maps, augmentation identity, R vertical, R vanishes on augmentation). Tool use accepted (generic comparison theorem). FIX more, RETURN less: (1) dropped the unnecessary added hypothesis K^p=L^p=0 for p<0 (parent does not state it) and reworded the p<=0 case of step 1: J^{p-1,.}=0 so s1=0 and eps_J^{p-1} lands in 0. Report's 'Review by M1' paragraph describes a stale three-step proof; second reading corrected the node but not that text.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-chl3146): Parent lem-sp-cartan-eilenberg-double-complex-homotopy step 1 now invokes the child under exact augmented I-columns and injective J-columns; both follow from the parent's hypotheses in a line (J^{p,q} is an extension of injective B_J^{p+1,q} by Z_J^{p,q}, hence injective; the augmented I-column is an extension of the exact augmented B_I and Z_I rows, hence exact by the long exact sequence) but the parent's step text does not say so. Augmentation convention d_v eps_J = 0 is implicit in both."
 }
