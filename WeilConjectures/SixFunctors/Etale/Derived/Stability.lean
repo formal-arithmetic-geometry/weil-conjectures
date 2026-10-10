@@ -16,6 +16,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
@@ -870,6 +872,60 @@ noncomputable def DerivedCategoryFiniteTor.verdierDual {S : Scheme.{u}} (a : X �
 
 end Functors
 
+/-! ### Tensoring with a shifted flat object -/
+
+omit [HasSmallSiteSheafify A] in
+/-- Shifting moves the Tor amplitude: if `K` has Tor amplitude in `[a, b]`, then `K⟦n⟧` has
+Tor amplitude in `[a - n, b - n]`. -/
+lemma torAmplitudeIn_shift {X : Scheme.{u}}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} {a b : ℤ}
+    (hK : torAmplitudeIn A X a b K) (n : ℤ) : torAmplitudeIn A X (a - n) (b - n) (K⟦n⟧) := by
+  intro F
+  obtain ⟨h₁, h₂⟩ := hK F
+  set F' := (_root_.DerivedCategory.singleFunctor _ 0).obj F
+  let e : ((-⊗ᴸ-(X)[A]).obj (K⟦n⟧)).obj F' ≅ (((-⊗ᴸ-(X)[A]).obj K).obj F')⟦n⟧ :=
+    (((-⊗ᴸ-(X)[A]).flip.obj F').commShiftIso n).app K
+  have : _root_.DerivedCategory.TStructure.t.IsGE (((-⊗ᴸ-(X)[A]).obj K).obj F') a := h₁
+  have : _root_.DerivedCategory.TStructure.t.IsLE (((-⊗ᴸ-(X)[A]).obj K).obj F') b := h₂
+  have := _root_.DerivedCategory.TStructure.t.isGE_shift
+    (((-⊗ᴸ-(X)[A]).obj K).obj F') a n (a - n)
+  have := _root_.DerivedCategory.TStructure.t.isLE_shift
+    (((-⊗ᴸ-(X)[A]).obj K).obj F') b n (b - n)
+  exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e.symm _,
+    _root_.DerivedCategory.TStructure.t.isLE_of_iso e.symm _⟩
+
+omit [HasSmallSiteSheafify A] in
+/-- A flat sheaf placed in degree `0` has Tor amplitude in `[0, 0]`: the single complex is a
+bounded complex of flat objects concentrated in degree `0`. -/
+lemma torAmplitudeIn_singleFunctor_zero_of_flat {X : Scheme.{u}}
+    (L : Sheaf X.smallEtaleTopology A) (hL : ObjectProperty.flat L) :
+    torAmplitudeIn A X 0 0 ((_root_.DerivedCategory.singleFunctor _ 0).obj L) :=
+  (torAmplitudeIn A X 0 0).prop_of_iso
+    ((_root_.DerivedCategory.singleFunctorIsoCompQ _ 0).app L).symm
+    (_root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat _ 0 0 fun q ↦ by
+      by_cases hq : q = 0
+      · subst hq
+        exact ObjectProperty.prop_of_iso _ (HomologicalComplex.singleObjXSelf _ 0 L).symm hL
+      · exact ObjectProperty.flat_of_isZero (HomologicalComplex.isZero_single_obj_X _ _ _ _ hq))
+
+omit [HasSmallSiteSheafify A] in
+/-- If `N ≅ K ⊗ᴸ ω` with `ω ≅ L⟦m⟧`, where `K` has Tor amplitude in `[a, b]`, `L` has Tor
+amplitude in `[0, 0]` and `(K ⊗ᴸ L)⟦m⟧` is bounded constructible, then `N` lies in
+`D_c^[a - m, b - m]` with Tor amplitude in `[a - m, b - m]`. -/
+lemma constructibleTorAmplitudeIn_of_iso_tensor_shift {X : Scheme.{u}}
+    {N K ω L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} {a b m : ℤ}
+    (e₁ : N ≅ ((-⊗ᴸ-(X)[A]).obj K).obj ω) (e₂ : ω ≅ L⟦m⟧) (hK : torAmplitudeIn A X a b K)
+    (hL : torAmplitudeIn A X 0 0 L)
+    (hbc : boundedConstructible A X ((((-⊗ᴸ-(X)[A]).obj K).obj L)⟦m⟧)) :
+    constructibleTorAmplitudeIn A X (a - m) (b - m) N := by
+  let e : N ≅ (((-⊗ᴸ-(X)[A]).obj K).obj L)⟦m⟧ :=
+    e₁ ≪≫ ((-⊗ᴸ-(X)[A]).obj K).mapIso e₂ ≪≫ ((((-⊗ᴸ-(X)[A]).obj K).commShiftIso m).app L)
+  have ht : torAmplitudeIn A X a b (((-⊗ᴸ-(X)[A]).obj K).obj L) := by
+    simpa using torAmplitudeIn_tensor A X a b 0 0 hK hL
+  have ht' := torAmplitudeIn_shift A ht m
+  exact constructibleTorAmplitudeIn_of_iso A e.symm
+    ⟨⟨hbc, _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn ht'⟩, ht'⟩
+
 /-! ### Torsion coefficients with invertible exponent
 
 The statements of this section are the ones of `sk-thm-sf-direct-image-tor-amplitude`,
@@ -1250,20 +1306,69 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion
     (fun L ↦ hasProjectionFormula_of_finite Λ i _ L)
   rwa [show b + 2 * (d : ℤ) + 1 = b + 2 * d + 1 by ring] at this
 
+omit [Finite Λ] in
+/-- A finite locally constant sheaf is constructible, for the stratification with the single
+stratum `X`. -/
+lemma isConstructibleSheaf_of_isFiniteLocallyConstantSheaf {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F] :
+    IsConstructibleSheaf F := by
+  refine ⟨⟨{ n := 1
+             stratum := fun _ ↦ Set.univ
+             isLocallyClosed_stratum := fun _ ↦ isOpen_univ.isLocallyClosed
+             isConstructible_stratum := fun _ ↦ Topology.IsConstructible.univ
+             iUnion_stratum_eq_univ := Set.iUnion_const _
+             pairwise_disjoint_stratum := fun i j h ↦ (h (Subsingleton.elim i j)).elim
+             domain := fun _ ↦ X
+             immersion := fun _ ↦ 𝟙 X
+             range_immersion := fun _ ↦ Set.range_eq_univ.2 fun x ↦ ⟨x, rfl⟩ }, fun _ ↦ ?_⟩⟩
+  have : IsFiniteLocallyConstantSheaf ((𝟭 (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).obj F) :=
+    ‹_›
+  exact IsFiniteLocallyConstantSheaf.of_iso ((Etale.upperStarId (ModuleCat.{u + 1} Λ) X).app F).symm
+
+omit [Finite Λ] in
+/-- A locally constant sheaf of free rank-one `Λ`-modules, for a finite `Λ`, is constructible and
+flat. -/
+lemma isConstructibleSheaf_and_flat_of_sheafFiber_iso {X : Scheme.{u}}
+    (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf L]
+    (hL : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
+      Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) :
+    IsConstructibleSheaf L ∧ ObjectProperty.flat L := by
+  have : IsFiniteSheaf L := ⟨fun Ω _ _ s ↦
+    (ConcreteCategory.isFinitelyGenerated_iff_of_iso (hL Ω s).some).2
+      ((ModuleCat.isFinitelyGenerated_iff _).2 inferInstance)⟩
+  have : IsFiniteLocallyConstantSheaf L := {}
+  refine ⟨isConstructibleSheaf_of_isFiniteLocallyConstantSheaf Λ L,
+    (flat_iff_forall_flat_sheafFiber_obj L).2 fun {Ω} _ _ s ↦ ?_⟩
+  exact ObjectProperty.prop_of_iso _ ((GrothendieckTopology.Point.uliftSheafFiberIso _ _).app L ≪≫
+    (hL Ω s).some).symm (ObjectProperty.prop_unit (ObjectProperty.flat (A := ModuleCat.{u + 1} Λ)))
+
 /-- Blueprint `sk-prop-sf-rf-shriek-preservation`: Preservation for the exceptional inverse
 image.
 
 Clause (iii): for `f` smooth of pure relative dimension `d` and a finite `Λ` whose exponent is
 invertible on `Y`, the exceptional inverse image shifts both intervals by `-2d`,
-`D_c^[a, b] ↦ D_c^[a - 2d, b - 2d]`, by purity `Rf^! ≅ Lf^*(-)(d)[2d]`. -/
+`D_c^[a, b] ↦ D_c^[a - 2d, b - 2d]`, by purity `Rf^! ≅ Lf^*(-)(d)[2d]`. Without choosing an
+orientation, `Rf^! K ≅ Lf^* K ⊗ᴸ L[2d]` for a locally constant sheaf `L` of free rank-one
+`Λ`-modules (`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`,
+`thm-asd-smooth-tensor`), and tensoring with the flat constructible `L` changes neither the
+constructible interval nor the Tor amplitude. -/
 theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_smoothOfRelativeDimension
     {X Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] (d : ℕ)
     [SmoothOfRelativeDimension d f] (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b K) :
     constructibleTorAmplitudeIn (ModuleCat.{u + 1} Λ) X (a - 2 * d) (b - 2 * d)
-      ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) :=
-  sorry
+      ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) := by
+  have : IsNoetherianRing Λ := inferInstance
+  obtain ⟨L, _, hLs, ⟨eω⟩, htens⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  obtain ⟨_, hLf⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L hLs
+  obtain ⟨⟨hbc, -⟩, hta⟩ := hK
+  have hL₀ := torAmplitudeIn_singleFunctor_zero_of_flat _ L hLf
+  have hMbc := boundedConstructible_tensor Λ X (boundedConstructible_leftDerivedUpperStar _ f hbc)
+    (DerivedCategory.boundedConstructible_singleFunctor_obj L 0) ⟨0, 0, hL₀⟩
+  exact constructibleTorAmplitudeIn_of_iso_tensor_shift _ (htens K).some.symm eω
+    (torAmplitudeIn_leftDerivedUpperStar _ f a b hta) hL₀
+    ((boundedConstructible _ X).le_shift _ _ hMbc)
 
 omit [Finite Λ] in
 /-- Membership in `D_c^[a, b]` with Tor amplitude in `[a, b]` is local for a finite open cover
