@@ -2831,3 +2831,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:30 L: merged deliver/F1/lem-fin-normal-generic-constant (reviewer FIX; first push; new nodes: 0)
 - 22:30 L: merged deliver/K1/pqf-lem-qf-locqf-qc (reviewer FIX; first push; new nodes: 0)
 - 22:31 L: returned deliver/J1/lem-sc-picard-locus-closed (reviewer RETURN: 1. D1 (no real split): the sole step applies More on Morphisms Lemma get-a-closed (Tag 0BF0), which is the item's own so)
+- 22:31 L: merged deliver/G1/lem-fin-etale-normal-components (reviewer FIX; first push; new nodes: 0)
