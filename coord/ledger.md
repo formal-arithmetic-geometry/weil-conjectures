@@ -2699,3 +2699,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:38 UTC L deleted lem-pc-perfect-affine-model (R-pcd2624, duplicate of lem-pc-perfect-affine-bounded-projective added by R-pcs2624 three minutes earlier, Tag 08EB); citer lem-pc-perfect-complex-descent redirected, cross-unit tool use declared
 - 21:38 L: merged deliver/F1/lem-pc-ringed-space-derived-limit-stalk-injective (reviewer FIX; first push; new nodes: 1)
 - 21:38 L: merged deliver/F1/lem-pc-tower-enough-injectives (reviewer FIX; first push; new nodes: 1)
+- 21:39 UTC L deleted deliver/C1/lem-pc-representable-unique (abandoned after the Mathlib match); notice in C1 returns
