@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+ "kind": "statement",
+ "title": "A morphism of sheaves of sets on a topological space is an isomorphism iff it is bijective on all stalks",
+ "statement": "Let $X$ be a topological space and $\\varphi:\\mathcal F\\to\\mathcal G$ a morphism of sheaves of sets on $X$. For a presheaf of sets $\\mathcal P$ on $X$ and $x\\in X$ let $\\mathcal P_x=\\varinjlim_{U\\ni x}\\mathcal P(U)$ be its stalk, the colimit of sets [def-weil-pbc-category-colimit] over the open neighbourhoods $U$ of $x$ ordered by reverse inclusion, and $s\\mapsto s_x$ the coprojection $\\mathcal P(U)\\to\\mathcal P_x$ (the germ); let $\\varphi_x:\\mathcal F_x\\to\\mathcal G_x$ be the unique map with $\\varphi_x(s_x)=(\\varphi_U(s))_x$ for every open $U\\ni x$ and every $s\\in\\mathcal F(U)$. Then $\\varphi$ is an isomorphism of sheaves of sets (there is a morphism $\\psi:\\mathcal G\\to\\mathcal F$ with $\\psi\\circ\\varphi=\\mathrm{id}_{\\mathcal F}$ and $\\varphi\\circ\\psi=\\mathrm{id}_{\\mathcal G}$; equivalently $\\varphi_U$ is bijective for every open $U\\subseteq X$) if and only if $\\varphi_x$ is bijective for every $x\\in X$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Lemma Tag 007T (label lemma-points-exactness, line 1340), part (3); stalks and induced maps on stalks as in Section Tag 0078 (section-stalks, line 894)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of sheaves of types is an isomorphism iff all stalk maps are bijective",
+   "results": "TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, isIso_of_stalkFunctor_map_iso, app_bijective_of_stalkFunctor_map_bijective, mono_of_stalk_mono, app_injective_iff_stalkFunctor_map_injective (Mathlib.Topology.Sheaves.Stalks)",
+   "date": "2026-10-10",
+   "verdict": "match: isIso_iff_stalkFunctor_map_iso with C = Type v"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkFunctor, CategoryTheory.IsIso, TopCat.Sheaf",
+   "results": "TopCat.Presheaf.isIso_of_stalkFunctor_map_iso, TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso (Mathlib.Topology.Sheaves.Stalks): C concrete with HasColimits, HasLimits, forget preserving filtered colimits and limits and reflecting isomorphisms",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem isIso_iff_stalkFunctor_map_iso\\|theorem stalkFunctor_map_germ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Stalks.lean; grep -n 'ConcreteCategory\\|theorem isIso_iff_bijective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Types/Basic.lean",
+   "results": "Stalks.lean:686 theorem isIso_iff_stalkFunctor_map_iso {F G : Sheaf C X} (f : F ⟶ G) : IsIso f ↔ ∀ x, IsIso ((stalkFunctor C x).map f.1); Stalks.lean:147 stalkFunctor_map_germ; Types/Basic.lean:111 instance ConcreteCategory.{u} (Type u); Types/Basic.lean:467 isIso_iff_bijective {X Y : Type u} (f : X ⟶ Y) : IsIso f ↔ Function.Bijective f",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso, CategoryTheory.isIso_iff_bijective",
+  "file": "Mathlib/Topology/Sheaves/Stalks.lean",
+  "how": "specializes in one line: take C = Type v for X : TopCat.{v} (Type v has colimits and limits, its forgetful functor is the identity via the ConcreteCategory instance of Mathlib/CategoryTheory/Types/Basic.lean:111, so it preserves (filtered) colimits and limits and reflects isomorphisms); isIso_iff_stalkFunctor_map_iso (Stalks.lean:686) gives IsIso φ ↔ ∀ x, IsIso ((stalkFunctor (Type v) x).map φ.1), the stalk being the colimit of sets over the neighbourhoods of x and the stalk map sending germ s to germ φ_U(s) (stalkFunctor_map_germ, Stalks.lean:147); isIso_iff_bijective (Mathlib/CategoryTheory/Types/Basic.lean:467) turns each IsIso in Type into bijectivity. An isomorphism in Sheaf (Type v) X is a morphism with a two-sided inverse, as in the statement.",
+  "line": 686
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-inverse-image-closed-pushforward-constant",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field added (isIso_iff_stalkFunctor_map_iso, Stalks.lean:686; isIso_iff_bijective Types/Basic.lean:467 verified with sed)."
+}

@@ -11,9 +11,81 @@
   "def-weil-pbc-topological-inverse-image",
   "lem-weil-pbc-sets-inverse-image-colimits-finite-products"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the objects).* By [lem-weil-pbc-closed-pushforward-constant-stalks] (0), applied to $(Y,W,R)$ and to $(X,Z,R)$, $\\mathcal A$ and $\\mathcal B$ are sheaves of sets, hence so is $f_*\\mathcal B$ [def-weil-pbc-topological-inverse-image] (1) (with values in sets). Each $\\alpha_V$ is well defined by the reasons given in the statement, and for opens $V'\\subseteq V$ of $Y$ and $g\\in\\mathcal A(V)$ we have $(g\\circ f|_{f^{-1}(V)\\cap Z})|_{f^{-1}(V')\\cap Z}=g|_{V'\\cap W}\\circ f|_{f^{-1}(V')\\cap Z}$, so $\\alpha$ is a morphism of sheaves $\\mathcal A\\to f_*\\mathcal B$. By the adjunction $f^{-1}\\dashv f_*$ for sheaves of sets [lem-weil-pbc-sets-inverse-image-colimits-finite-products] (a), whose unit is $\\eta_{\\mathcal A,V}=\\theta_{f^{-1}V}\\circ\\iota^{f^{-1}V}_V$ [def-weil-pbc-topological-inverse-image] (3), there is exactly one morphism $\\alpha^\\flat:f^{-1}\\mathcal A\\to\\mathcal B$ with $\\alpha^\\flat_{f^{-1}V}\\circ\\eta_{\\mathcal A,V}=\\alpha_V$ for all open $V\\subseteq Y$.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-constant-stalks",
+    "def-weil-pbc-topological-inverse-image",
+    "lem-weil-pbc-sets-inverse-image-colimits-finite-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Definition Tag 006W and Lemma Tag 00AE (line 4936); adjunction of Section Tag 008C (presheaves-functorial); the compatibility computation is written by the agent"
+   }
+  },
+  {
+   "text": "*Step 2 (the stalk map of $\\alpha^\\flat$ on germs).* Fix $x\\in X$ and put $y=f(x)$. Stalks, germs and induced stalk maps $\\varphi_x(s_x)=(\\varphi_U(s))_x$ are as in [lem-weil-pbc-sets-sheaf-iso-on-stalks]. By [lem-weil-pbc-sets-inverse-image-stalk] (applied to the sheaf of sets $\\mathcal A$ on $Y$) there is a bijection $c:\\mathcal A_y\\to(f^{-1}\\mathcal A)_x$ with $c(g_y)=(\\eta_{\\mathcal A,V}(g))_x$ for every open $V\\ni y$ and $g\\in\\mathcal A(V)$. For such $V,g$ (note $x\\in f^{-1}V$), using the definition of the stalk map and $\\alpha^\\flat_{f^{-1}V}\\circ\\eta_{\\mathcal A,V}=\\alpha_V$ (Step 1): $\\alpha^\\flat_x(c(g_y))=\\alpha^\\flat_x((\\eta_{\\mathcal A,V}(g))_x)=(\\alpha^\\flat_{f^{-1}V}(\\eta_{\\mathcal A,V}(g)))_x=(\\alpha_V(g))_x=(g\\circ f|_{f^{-1}(V)\\cap Z})_x$.",
+   "uses": [
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+    "lem-weil-pbc-sets-inverse-image-stalk",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 008H (lemma-stalk-pullback, line 2197) and Section Tag 0078 (stalks, line 894: the map on stalks induced by a morphism)"
+   }
+  },
+  {
+   "text": "*Step 3 (points of $Z$).* Let $x\\in Z$, so $y=f(x)\\in W$. By [lem-weil-pbc-closed-pushforward-constant-stalks] (a), applied to $(Y,W,R)$ at $y$ and to $(X,Z,R)$ at $x$, the maps $\\mathrm{ev}_y:\\mathcal A_y\\to R$, $g_y\\mapsto g(y)$, and $\\mathrm{ev}_x:\\mathcal B_x\\to R$, $h_x\\mapsto h(x)$, are bijective. By Step 2, for every open $V\\ni y$ and $g\\in\\mathcal A(V)$: $\\mathrm{ev}_x(\\alpha^\\flat_x(c(g_y)))=(g\\circ f)(x)=g(y)=\\mathrm{ev}_y(g_y)$. Two maps out of the colimit $\\mathcal A_y$ that agree after every coprojection are equal [def-weil-pbc-category-colimit], so $\\mathrm{ev}_x\\circ\\alpha^\\flat_x\\circ c=\\mathrm{ev}_y$, i.e. $\\alpha^\\flat_x=\\mathrm{ev}_x^{-1}\\circ\\mathrm{ev}_y\\circ c^{-1}$ is a composite of bijections, hence bijective.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-constant-stalks",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Example Tag 007B (line 995) and Lemma Tag 00AE (line 4936), case x in Z; written out by the agent"
+   }
+  },
+  {
+   "text": "*Step 4 (points outside $Z$).* Let $x\\in X\\setminus Z$, so $y=f(x)\\notin W$ (as $Z=f^{-1}(W)$). By [lem-weil-pbc-closed-pushforward-constant-stalks] (b), applied to $(Y,W,R)$ at $y$, $\\mathcal A_y$ has exactly one element, hence so has $(f^{-1}\\mathcal A)_x$, which is in bijection with it by $c$ (Step 2); by [lem-weil-pbc-closed-pushforward-constant-stalks] (b), applied to $(X,Z,R)$ at $x$, $\\mathcal B_x$ has exactly one element. A map between two one-element sets is bijective, so $\\alpha^\\flat_x$ is bijective.",
+   "uses": [
+    "lem-weil-pbc-closed-pushforward-constant-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 00AE (line 4936), case x not in Z"
+   }
+  },
+  {
+   "text": "*Step 5 (conclusion).* By Steps 3 and 4, $\\alpha^\\flat_x:(f^{-1}\\mathcal A)_x\\to\\mathcal B_x$ is bijective for every $x\\in X$; since $f^{-1}\\mathcal A$ and $\\mathcal B$ are sheaves of sets on $X$, [lem-weil-pbc-sets-sheaf-iso-on-stalks] shows that $\\alpha^\\flat$ is an isomorphism of sheaves of sets, i.e. has an inverse morphism $\\psi$ with $\\psi\\circ\\alpha^\\flat=\\mathrm{id}$ and $\\alpha^\\flat\\circ\\psi=\\mathrm{id}$; evaluating these identities on an open $U\\subseteq X$ shows that $\\alpha^\\flat_U$ is bijective with inverse $\\psi_U$.",
+   "uses": [
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 007T (lemma-points-exactness, line 1340), part (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-closed-pushforward-constant-stalks",
+  "lem-weil-pbc-sets-inverse-image-colimits-finite-products",
+  "lem-weil-pbc-sets-inverse-image-stalk",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Not stated in the Stacks project (used without proof in Modules, proof of Lemma Tag 0CAL, modules.tex line 3133, reduction by Tag 0CAK); proof on stalks written by the agent from Sheaves Lemmas Tag 008H (line 2197), Tag 00AE (line 4936), Tag 007T (line 1340), Definition Tag 006W (line 588) and Example Tag 007B (line 995)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +117,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +137,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-inverse-image-closed-pushforward-constant",
+  "worker": "stage1",
+  "summary": "Statement kept (checked: the morphism alpha, the adjoint alpha^flat and the conclusion are well posed; the claim inside the statement that (i_C)_*R_C is a sheaf is now carried by the new node's part (0)). stmt_deps kept. Proof in 5 steps on stalks, written by the agent since Stacks uses the fact without proof in 0CAL: Step 1 sets up alpha and alpha^flat (adjunction of lem-weil-pbc-sets-inverse-image-colimits-finite-products (a)); Step 2 computes alpha^flat on stalks through the bijection c of 008H (lem-weil-pbc-sets-inverse-image-stalk) and the adjunction identity; Steps 3-4 compare the stalks at points of Z (both R, the composite with evaluation is evaluation) and off Z (both singletons), using the new unsplit node lem-weil-pbc-closed-pushforward-constant-stalks (Stacks 006W, 007B, 00AE for the constant sheaf of sets on a closed subset); Step 5 concludes by the new Mathlib leaf lem-weil-pbc-sets-sheaf-iso-on-stalks (Stacks 007T (3), TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso with C = Type). Tags 0CAL, 0CAK, 008H, 00AE, 007T, 006W, 007B verified in tags/tags and in the tex files."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps on stalks: alpha-flat exists by the sets adjunction; its stalk map on germs via the 008H sets node; at x in Z both stalks evaluate bijectively to R (new unsplit node, 00AE/007B for sets); outside Z both stalks are points; isomorphism by the new 007T leaf (line added by L). Tags 0CAL, 008H, 00AE, 007T, 006W, 007B verified."
+ }
 }

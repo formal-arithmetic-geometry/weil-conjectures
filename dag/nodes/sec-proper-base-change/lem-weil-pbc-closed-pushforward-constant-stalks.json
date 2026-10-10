@@ -1,0 +1,61 @@
+{
+ "id": "lem-weil-pbc-closed-pushforward-constant-stalks",
+ "kind": "statement",
+ "title": "Stalks of the direct image of the constant sheaf of sets on a closed subset",
+ "statement": "Let $T$ be a topological space, $C\\subseteq T$ a closed subset and $R$ a set. Let $\\mathcal L=(i_C)_*\\underline R_C$ be the presheaf of sets on $T$ with $\\mathcal L(V)=\\{$locally constant maps $V\\cap C\\to R\\}$ for $V\\subseteq T$ open ($V\\cap C$ with the subspace topology; a map is locally constant if every point has an open neighbourhood on which it is constant), the restriction maps being restriction of maps. For $x\\in T$ let $\\mathcal L_x=\\varinjlim_{V\\ni x}\\mathcal L(V)$ be its stalk, the colimit of sets [def-weil-pbc-category-colimit] over the open neighbourhoods $V$ of $x$ ordered by reverse inclusion, with germs $g\\mapsto g_x$. Then: (0) $\\mathcal L$ is a sheaf of sets on $T$; (a) for every $x\\in C$ there is exactly one map $\\mathrm{ev}_x:\\mathcal L_x\\to R$ with $\\mathrm{ev}_x(g_x)=g(x)$ for every open $V\\ni x$ and every $g\\in\\mathcal L(V)$, and $\\mathrm{ev}_x$ is bijective; (b) for every $x\\in T\\setminus C$ the stalk $\\mathcal L_x$ has exactly one element.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Definition Tag 006W (definition-constant-sheaf, line 588, with the preceding paragraph: locally constant maps form a sheaf), Example Tag 007B (example-stalk-constant-presheaf, line 995: the stalk of the constant sheaf is A) and Lemma Tag 00AE (lemma-stalks-closed-pushforward, line 4936: stalks of i_*F for the inclusion of a closed subset, {*} off Z and F_x on Z)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of pushforward along closed embedding at point outside the image is terminal / singleton",
+   "results": "TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalk (Mathlib.Topology.Sheaves.Stalks), skyscraperPresheafStalkOfNotSpecializesIsTerminal, skyscraperPresheafStalkOfNotSpecializes (Mathlib.Topology.Sheaves.Skyscraper), PresheafedSpace.restrictStalkIso (open embeddings): skyscrapers and open embeddings only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk of the sheaf of locally constant functions to a set at a point is the set itself, germ maps to value",
+   "results": "TopCat.Presheaf.Γgerm, TopCat.Presheaf.germ_exist (Mathlib.Topology.Sheaves.Stalks), TopCat.stalkToFiber, TopCat.stalkToFiber_germ (Mathlib.Topology.Sheaves.LocalPredicate: sheaf of functions on X itself satisfying a local predicate, not the direct image from a closed subset), TopCat.Presheaf.Sheafify.isGerm",
+   "date": "2026-10-10",
+   "verdict": "no match (stalkToFiber is for sheaves of functions on the whole space; the sheaf V ↦ LC(V ∩ C, R) on T is not of that form)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsLocallyConstant\\|LocallyConstant' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites; grep -rn 'IsClosedEmbedding\\|IsClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/*.lean",
+   "results": "none: no file of Topology/Sheaves or CategoryTheory/Sites mentions locally constant maps or closed embeddings",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-inverse-image-closed-pushforward-constant",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
