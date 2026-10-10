@@ -2,7 +2,7 @@
 
 900 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (147)
+## Stage 1: nodes to split (146)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -37,10 +37,11 @@
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
-| `lem-sc-intersection-effective-cartier` | 4010 | none |
-| `lem-sc-etale-faithfully-flat-local` | 4011 | none |
+| `lem-sc-effective-cartier-dimension-drop` | 4011 | none |
+| `lem-sc-etale-local-ring-faithfully-flat-descent` | 4012 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-generic-stalk-finite-length` | 4012 | none |
+| `lem-sc-lfp-field-extension-pointwise-descent` | 4012 | none |
 | `lem-sc-hilbert-embedded-points-affine-removal` | 5011 | none |
 | `lem-sc-meromorphic-sheaf-generic-product` | 5011 | none |
 | `lem-sc-locnoeth-components-locally-finite` | 5012 | none |
@@ -57,17 +58,13 @@
 | `lem-pod-adic-limit-finite-modules` | - | none |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | - | none |
 | `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
-| `lem-pod-profinite-stable-lattice` | - | none |
 | `lem-pur-sheaf-hom-cover-gluing` | - | none |
-| `lem-sc-affine-cohomological-dimension` | - | rests_on_sorry |
 | `lem-sc-affine-unit-quotient` | - | rests_on_sorry |
 | `lem-sc-artin-schreier-k` | - | none |
 | `lem-sc-base-change-curve` | - | none |
-| `lem-sc-pic-affine` | - | rests_on_sorry |
 | `lem-weil-pbc-constructible-subobjects-noetherian` | - | none |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
-| `pqf-def-locnoeth` | - | none |
 | `pqf-lem-finite-fp-locnoeth` | - | none |
 | `pqf-lem-limit-qc-open-descends` | - | none |
 | `pqf-lem-qs-intersection-qc` | - | none |
@@ -79,9 +76,11 @@
 | `def-nagata-relative-gluing-datum-descent` | - | none |
 | `def-nagata-scheme-theoretically-dense-open` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
+| `lem-pod-lattice-stabilizer-open` | - | none |
 | `lem-sc-affine-generic-second` | - | sorry_here |
 | `lem-sc-genus-invariant` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
+| `lem-sc-pic-affine-quotient` | - | none |
 | `lemma-nagata-filtered-colimit-finite-data` | - | none |
 | `pqf-lem-affine-open-locnoeth` | - | none |
 | `cor-pd-pic0-base-change` | - | sorry_here |
@@ -154,7 +153,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (753)
+## Stage 2: nodes to state (754)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -867,6 +866,7 @@
 | `lemma-nagata-scheme-image-ideal-qc` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
 | `pqf-def-coherent` | 1 | state |
+| `pqf-def-locnoeth` | 1 | state |
 | `pqf-lem-coherent-ft-locnoeth` | 1 | state |
 | `pqf-lem-finite-qf` | 1 | state |
 | `pqf-lem-finite-type-algebra-finite-spectrum` | 1 | state |
@@ -912,7 +912,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1515 nodes that wait for a statement dependency, 187 nodes that wait for stage 1.
+Not open yet: 1520 nodes that wait for a statement dependency, 186 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
