@@ -1,0 +1,80 @@
+{
+ "id": "lem-weil-pbc-cm-module-good-element-nonzerodivisor",
+ "kind": "statement",
+ "title": "An element cutting the support of a Cohen–Macaulay module by one dimension is a nonzerodivisor on it",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] (a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$). For a finite $R$-module $N$ let $\\operatorname{Supp}(N)$ be the set of prime ideals $\\mathfrak p\\subset R$ with $N_{\\mathfrak p}\\neq0$, $N_{\\mathfrak p}$ the localization [def-weil-pbc-module-localization], and let $\\dim\\operatorname{Supp}(N)\\in\\{-\\infty,0,1,2,\\dots\\}$ be the supremum of the integers $n\\ge0$ for which there is a chain $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ of prime ideals all lying in $\\operatorname{Supp}(N)$ ($-\\infty$ when $\\operatorname{Supp}(N)=\\emptyset$, i.e. $N=0$; the same definition for any subset of $\\operatorname{Spec}R$ in place of $\\operatorname{Supp}(N)$). Let $M\\neq0$ be a finite $R$-module [def-weil-finitely-generated-module] which is Cohen–Macaulay, i.e. $\\operatorname{depth}(M)=\\dim\\operatorname{Supp}(M)$, where $\\operatorname{depth}(M)=\\operatorname{depth}_{\\mathfrak m}(M)$ is the depth [def-weil-pbc-depth]. Let $g\\in\\mathfrak m$ and let $V(g)$ be the set of prime ideals of $R$ containing $g$; suppose that $\\dim\\bigl(\\operatorname{Supp}(M)\\cap V(g)\\bigr)=\\dim\\operatorname{Supp}(M)-1$. Then (a) $g$ is a nonzerodivisor on $M$ (multiplication by $g$ on $M$ is injective), and (b) $M/gM$ is Cohen–Macaulay with $\\operatorname{depth}(M/gM)=\\operatorname{depth}(M)-1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00N5 (lemma-CM-one-g, line 25018), with Definition Tag 00N3 (definition-CM, line 24960); used through Proposition Tag 00N6 (proposition-CM-module, line 25052) in the proof of Lemma Tag 00NT"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-module-localization",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohen-Macaulay module, element g with dim(Supp M ∩ V(g)) = dim Supp M - 1 is a nonzerodivisor on M",
+   "results": "ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors, Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal (Mathlib.RingTheory.KrullDimension.Regular), Module.supportDim (KrullDimension.Module), Module.support (RingTheory.Support): the converse direction (regular element drops the support dimension by one), nothing on Cohen-Macaulay modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen-Macaulay module over Noetherian local ring: element cutting down support dimension by one is M-regular and quotient is Cohen-Macaulay of depth one less",
+   "results": "Module.supportDim_add_length_eq_supportDim_of_isRegular, Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_le_supportDim_quotSMulTop_succ (KrullDimension.Regular), IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal (Regular.RegularSequence): regular sequences drop the dimension; the converse for Cohen-Macaulay modules is absent",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohenMacaulay\"",
+   "results": "no declaration",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'CohenMacaulay\\|Cohen-Macaulay\\|Cohen–Macaulay' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rln 'def depth\\|Module.depth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'depth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular/*.lean",
+   "results": "no Cohen-Macaulay notion; no depth (RingTheory/Regular/RegularSequence.lean line 21 lists depth as TODO); only Mathlib/Data/W/Basic.lean matches 'def depth' (W-types, unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has neither depth nor Cohen-Macaulay modules"
+  },
+  {
+   "tool": "local_search",
+   "query": "CohenMacaulay (project ~/weil-conjectures-slopmaster2)",
+   "results": "none (index: unavailable, so not a proof of absence; see grep)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-local-mcm-free",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": null,
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Algebra 00N5 (c = 1 of 00N6 for a module), with Cohen-Macaulay and dim Supp defined inline. Unsplit."
+}

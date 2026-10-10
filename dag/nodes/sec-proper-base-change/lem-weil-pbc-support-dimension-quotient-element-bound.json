@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-support-dimension-quotient-element-bound",
+ "kind": "statement",
+ "title": "Quotienting a finite module by one element lowers the dimension of its support by at most one",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] (a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$). For a finite $R$-module $N$ let $\\operatorname{Supp}(N)$ be the set of prime ideals $\\mathfrak p\\subset R$ with $N_{\\mathfrak p}\\neq0$, $N_{\\mathfrak p}$ the localization [def-weil-pbc-module-localization], and let $\\dim\\operatorname{Supp}(N)\\in\\{-\\infty,0,1,2,\\dots\\}$ be the supremum of the integers $n\\ge0$ for which there is a chain $\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_n$ of prime ideals all lying in $\\operatorname{Supp}(N)$ ($-\\infty$ when $\\operatorname{Supp}(N)=\\emptyset$, i.e. $N=0$; the same definition for any subset of $\\operatorname{Spec}R$ in place of $\\operatorname{Supp}(N)$). Let $M$ be a finite $R$-module [def-weil-finitely-generated-module] and $f\\in\\mathfrak m$. Then $\\dim\\operatorname{Supp}(M)\\le\\dim\\operatorname{Supp}(M/fM)+1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0B52 (lemma-one-equation-module, line 15297), the second (right) inequality"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-module-localization",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension of support of M is at most dimension of support of M/xM plus one for x in maximal ideal",
+   "results": "Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson, ringKrullDim_le_ringKrullDim_quotSMulTop_succ (Mathlib.RingTheory.KrullDimension.Regular)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.supportDim_le_supportDim_quotSMulTop_succ"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite module over Noetherian local ring, x in maximal ideal, supportDim M ≤ supportDim (M/xM) + 1",
+   "results": "Module.supportDim_le_supportDim_quotSMulTop_succ (first), Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal (KrullDimension.Regular)",
+   "date": "2026-10-10",
+   "verdict": "match: Module.supportDim_le_supportDim_quotSMulTop_succ"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.supportDim, QuotSMulTop, IsLocalRing.maximalIdeal",
+   "results": "Module.supportDim_le_supportDim_quotSMulTop_succ : x ∈ maximalIdeal R → supportDim R M ≤ supportDim R (QuotSMulTop x M) + 1; Module.supportDim_quotSMulTop_succ_eq_supportDim; Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal (Mathlib.RingTheory.KrullDimension.Regular)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'supportDim.*quotSMulTop' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 135,180p RingTheory/KrullDimension/Regular.lean; sed -n 25,40p RingTheory/KrullDimension/Module.lean; sed -n 49p RingTheory/Support.lean; sed -n 36p RingTheory/QuotSMulTop.lean",
+   "results": "RingTheory/KrullDimension/Regular.lean:139-145 theorem Module.supportDim_le_supportDim_quotSMulTop_succ, tagged @[stacks 0B52 \"the second inequality\"]; supportDim R M := krullDim (Module.support R M) (Module.lean:31-33); Module.support (Support.lean:49) = primes p with M_p ≠ 0; QuotSMulTop x M := M ⧸ x • ⊤ (QuotSMulTop.lean:36)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "supportDim_le_supportDim_quotSMulTop_succ (project ~/weil-conjectures-slopmaster2)",
+   "results": "Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim_le_supportDim_quotSMulTop_succ_of_mem_jacobson (Mathlib/RingTheory/KrullDimension/Regular.lean)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.supportDim_le_supportDim_quotSMulTop_succ",
+  "file": "Mathlib/RingTheory/KrullDimension/Regular.lean",
+  "line": 142,
+  "how": "exact: lines 139-145 (variables [CommRing R] [IsNoetherianRing R] [Module.Finite R M] line 28 ff., [IsLocalRing R] line 137), @[stacks 0B52 \"the second inequality\"], hx : x ∈ maximalIdeal R ⊢ supportDim R M ≤ supportDim R (QuotSMulTop x M) + 1. Module.supportDim R M = Order.krullDim (Module.support R M) (Mathlib/RingTheory/KrullDimension/Module.lean:31-33), the supremum of lengths of chains of primes in the support (⊥ for empty support), which is the node's dim Supp; QuotSMulTop x M = M ⧸ x • ⊤ = M/xM (Mathlib/RingTheory/QuotSMulTop.lean:36). Lines read with sed -n 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-local-mcm-free",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: exact Mathlib leaf Module.supportDim_le_supportDim_quotSMulTop_succ (KrullDimension/Regular.lean line 142, @[stacks 0B52], read)."
+}

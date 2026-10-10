@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-vector-space-free",
+ "kind": "statement",
+ "title": "Every vector space is a free module",
+ "statement": "Let $k$ be a field and $V$ a $k$-module (a $k$-vector space). Then $V$ is a free $k$-module [def-weil-pbc-free-module], i.e. $V$ has a basis.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma Tag 09FN (lemma-vector-space-is-free, line 155)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every vector space over a field is a free module",
+   "results": "Module.Free.of_divisionRing (Mathlib.LinearAlgebra.Basis.VectorSpace), Module.Free.of_basis, Module.free_iff_set, Module.free_of_finite_type_torsion_free', Module.Free",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Free.of_divisionRing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module over a division ring has a basis, Module.Free",
+   "results": "Module.Free.of_divisionRing, Module.Basis.exists_basis (Mathlib.LinearAlgebra.Basis.VectorSpace), Module.Free.exists_basis, Module.Free.exists_set",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Free.of_divisionRing"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'of_divisionRing' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Basis/VectorSpace.lean; sed -n 150,157p",
+   "results": "LinearAlgebra/Basis/VectorSpace.lean:155-157 @[stacks 09FN \"Generalized from fields to division rings.\"] instance Module.Free.of_divisionRing : Module.Free K V",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Free.of_divisionRing",
+  "file": "Mathlib/LinearAlgebra/Basis/VectorSpace.lean",
+  "line": 156,
+  "how": "specializes in one line: lines 155-157, instance for [DivisionRing K] [AddCommGroup V] [Module K V] : Module.Free K V, tagged @[stacks 09FN]; a field is a division ring. Module.Free is the existence of a basis, the node's notion [def-weil-pbc-free-module]. Lines read with sed -n 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-local-mcm-free",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: exact Mathlib leaf Module.Free.of_divisionRing (Basis/VectorSpace.lean line 156, @[stacks 09FN], read)."
+}

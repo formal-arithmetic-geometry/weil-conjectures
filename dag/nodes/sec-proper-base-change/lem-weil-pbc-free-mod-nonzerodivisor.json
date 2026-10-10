@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-free-mod-nonzerodivisor",
+ "kind": "statement",
+ "title": "A finite module free modulo a nonzerodivisor of the maximal ideal is free",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] (a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$), let $x\\in\\mathfrak m$ and let $M$ be a finite $R$-module [def-weil-finitely-generated-module] such that $x$ is a nonzerodivisor on $M$ (multiplication by $x$ on $M$ is injective) and $M/xM$ is a free $R/xR$-module [def-weil-pbc-free-module]. Then $M$ is a free $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00NS (lemma-free-mod-x, line 25780)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "x nonzerodivisor on M in Jacobson radical, M/xM free over R/(x) implies M free",
+   "results": "Module.free_of_maximalIdeal_rTensor_injective (RingTheory.LocalRing.Module), Module.supportDim_quotSMulTop_succ_eq_supportDim_mem_jacobson, Module.free_iff_isTorsionFree, Submodule.top_ne_pointwise_smul_of_mem_jacobson_annihilator",
+   "date": "2026-10-10",
+   "verdict": "no direct hit; see loogle/grep"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite module over local ring, x regular on M, quotient M/xM free over R/xR then M free",
+   "results": "Module.free_of_maximalIdeal_rTensor_injective, Module.free_of_finite_type_torsion_free', Module.free_of_flat_of_isLocalRing, Module.free_iff_isTorsionFree (the v4.28.0 index of Lean Finder predates RingTheory/Regular/Free.lean)",
+   "date": "2026-10-10",
+   "verdict": "no hit in the index"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.free_quotSMulTop_iff_free",
+   "results": "Module.free_quotSMulTop_iff_free (R) [CommRing R] (M) [Module.FinitePresentation R M] {x : R} (mem : x ∈ ⊥.jacobson) (reg : IsSMulRegular M x) : Module.Free (R ⧸ Ideal.span {x}) (QuotSMulTop x M) ↔ Module.Free R M (Mathlib.RingTheory.Regular.Free)",
+   "date": "2026-10-10",
+   "verdict": "match (generalization)"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,60p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular/Free.lean; sed -n 118,121p Algebra/Module/FinitePresentation.lean; sed -n 97p RingTheory/LocalRing/MaximalIdeal/Basic.lean",
+   "results": "RingTheory/Regular/Free.lean:32-35 lemma Module.free_quotSMulTop_iff_free; Algebra/Module/FinitePresentation.lean:118 Module.finitePresentation_of_finite [IsNoetherianRing R] [Module.Finite R M]; RingTheory/LocalRing/MaximalIdeal/Basic.lean:97 IsLocalRing.maximalIdeal_le_jacobson",
+   "date": "2026-10-10",
+   "verdict": "match (generalization, specializes in one line)"
+  },
+  {
+   "tool": "local_search",
+   "query": "free_quotSMulTop_iff_free (project ~/weil-conjectures-slopmaster2)",
+   "results": "Module.free_quotSMulTop_iff_free (Mathlib/RingTheory/Regular/Free.lean)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.free_quotSMulTop_iff_free",
+  "file": "Mathlib/RingTheory/Regular/Free.lean",
+  "line": 33,
+  "how": "specializes in one line: lines 32-35 state, for a commutative ring R, a finitely presented R-module M, x ∈ (⊥ : Ideal R).jacobson with IsSMulRegular M x, that Module.Free (R ⧸ Ideal.span {x}) (QuotSMulTop x M) ↔ Module.Free R M; use the direction (→). M is finitely presented since it is finite over the Noetherian R (Module.finitePresentation_of_finite, Mathlib/Algebra/Module/FinitePresentation.lean:118), and x ∈ 𝔪 ⊆ jacobson ⊥ (IsLocalRing.maximalIdeal_le_jacobson, Mathlib/RingTheory/LocalRing/MaximalIdeal/Basic.lean:97); QuotSMulTop x M = M/xM (Mathlib/RingTheory/QuotSMulTop.lean:36), R ⧸ Ideal.span {x} = R/xR. Lines read with sed -n 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-regular-local-mcm-free",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: Mathlib leaf Module.free_quotSMulTop_iff_free (Regular/Free.lean line 33, read), one-line specialization (finite over Noetherian ⇒ finitely presented; m ⊆ Jacobson radical)."
+}
