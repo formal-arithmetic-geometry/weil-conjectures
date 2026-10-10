@@ -1487,3 +1487,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:20 L: merged deliver/F1/lem-weil-pbc-simplicial-set-glue-simplex (reviewer PASS, first push; new Mathlib leaf)
 - 13:21 L: accepted lem-weil-pbc-fpqc-descend-affine (8 steps, 02KQ/02KU unsplit, 02L4 and degree-0 flat base change leaves, tool_uses pqf-lem-affine-local-target) and lem-weil-pbc-dim-one-submodule-quotient-finite-length (9 steps, 2 leaves)
 - 13:25 L: accepted lem-weil-pbc-fpqc-descend-quasi-compact: 5 steps (02KQ), new Mathlib leaf lem-weil-pbc-quasi-compact-morphism-preimage-qc-open
+- 13:25 L: accepted lem-weil-pbc-fpqc-descend-separated: 5 steps (02KU via 02KS and 01IQ), tool_uses lemma-nagata-diagonal-base-change

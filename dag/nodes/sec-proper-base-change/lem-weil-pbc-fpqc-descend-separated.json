@@ -36,9 +36,103 @@
   "def-pc-fibre-product",
   "def-weil-proper-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 ($\\Delta_{f'}$ is universally closed).* Write $X'=X\\times_SS'$ for the fibre product [def-pc-fibre-product] of $f$ and $g$, with projections $g':X'\\to X$ and $f':X'\\to S'$, $f\\circ g'=g\\circ f'$. By hypothesis $f'$ is separated, i.e. its diagonal $\\Delta_{f'}:X'\\to X'\\times_{S'}X'$ is a closed immersion [def-weil-proper-morphism]. A closed immersion is universally closed by clause (d) of [lem-weil-pbc-closed-immersion-integral-separated-uc] (Stacks Morphisms, Lemma 01W5); so $\\Delta_{f'}$ is universally closed. (Source: '$\\Delta'$ ... is a closed immersion, hence universally closed.')",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02KU (lemma-descending-property-separated), proof, lines 5585-5602: 'let $S'\\to S$ be a flat surjective morphism ... Assume that the base change $f':X'\\to S'$ is separated. This means that $\\Delta':X'\\to X'\\times_{S'}X'$ is a closed immersion, hence universally closed. Note that $\\Delta'$ is the base change of $\\Delta:X\\to X\\times_SX$ via $S'\\to S$. By Lemma [02KS] this implies $\\Delta$ is universally closed. Since it is an immersion (Schemes, Lemma [01KJ]) we conclude $\\Delta$ is a closed immersion.'"
+   }
+  },
+  {
+   "text": "*Step 2 ($\\Delta_{f'}$ is, up to an isomorphism of its target, the base change of $\\Delta_f$ along a base change $h$ of $g$).* Let $P=X\\times_SX$ with structure morphism $\\pi=f\\circ\\mathrm{pr}_1:P\\to S$, and $\\Delta_f:X\\to P$ the diagonal, so $\\pi\\circ\\Delta_f=f$. Let $P'=P\\times_SS'$ be the fibre product of $\\pi$ and $g$ [def-pc-fibre-product], with projections $h:P'\\to P$ and $\\pi':P'\\to S'$, and let $\\delta=\\Delta_f\\times_S\\mathrm{id}_{S'}:X'=X\\times_SS'\\to P'$ be the induced morphism, so $h\\circ\\delta=\\Delta_f\\circ g'$ and $\\pi'\\circ\\delta=f'$. (a) By [lemma-nagata-diagonal-base-change] (with $X_\\lambda\\to S_\\lambda$ the morphism $f:X\\to S$ and $S\\to S_\\lambda$ the morphism $g:S'\\to S$; its Lean is CategoryTheory.Limits.diagonal_pullback_fst), the base change $\\delta$ of $\\Delta_f$ is canonically identified with $\\Delta_{f'}$: there is an isomorphism $c:X'\\times_{S'}X'\\to P'$ (the canonical identification $(X\\times_SS')\\times_{S'}(X\\times_SS')\\cong(X\\times_SX)\\times_SS'$) with $c\\circ\\Delta_{f'}=\\delta$. (b) The square with top $g':X'\\to X$, left $\\delta$, right $\\Delta_f$ and bottom $h:P'\\to P$ is cartesian: in the diagram whose lower square is the cartesian square $(P',h,\\pi')$ of $\\pi$ and $g$, the outer rectangle consists of $g':X'\\to X$, $\\pi'\\circ\\delta=f':X'\\to S'$, $\\pi\\circ\\Delta_f=f:X\\to S$ and $g$, and is cartesian because $(X',g',f')$ is a fibre product of $f$ and $g$; hence the upper square is cartesian by [lem-weil-pbc-cartesian-square-pasting], i.e. $(X',g',\\delta)$ is a fibre product of $\\Delta_f$ and $h$. (c) $\\delta=c\\circ\\Delta_{f'}$ is universally closed: $\\Delta_{f'}$ is by step 1, the isomorphism $c$ is a closed immersion [def-weil-closed-immersion] (a homeomorphism onto the closed set $P'$ with $\\mathcal O_{P'}\\to c_*\\mathcal O$ an isomorphism), hence universally closed by clause (d) of [lem-weil-pbc-closed-immersion-integral-separated-uc], and a composition of universally closed morphisms is universally closed by clause (f) of the same node. (Source: 'Note that $\\Delta'$ is the base change of $\\Delta$ via $S'\\to S$.')",
+   "uses": [
+    "def-pc-fibre-product",
+    "lemma-nagata-diagonal-base-change",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02KU (lemma-descending-property-separated), proof, lines 5585-5602: 'let $S'\\to S$ be a flat surjective morphism ... Assume that the base change $f':X'\\to S'$ is separated. This means that $\\Delta':X'\\to X'\\times_{S'}X'$ is a closed immersion, hence universally closed. Note that $\\Delta'$ is the base change of $\\Delta:X\\to X\\times_SX$ via $S'\\to S$. By Lemma [02KS] this implies $\\Delta$ is universally closed. Since it is an immersion (Schemes, Lemma [01KJ]) we conclude $\\Delta$ is a closed immersion.'"
+   }
+  },
+  {
+   "text": "*Step 3 ($\\{h:P'\\to P\\}$ is an fpqc covering of $P$).* The morphism $h$ is the base change of $g$ along $\\pi$ (the first projection of the fibre product of $\\pi$ and $g$). Hence $h$ is flat by [lem-weil-pbc-flat-morphism-base-change] ($g$ flat), surjective by [lem-weil-pbc-surjective-base-change] ($g$ surjective) and quasi-compact by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence] ($g$ quasi-compact). Let $V\\subseteq P$ be an affine open. Since $h$ is quasi-compact [def-weil-finite-type-morphism], $h^{-1}(V)$ is quasi-compact; it is covered by affine opens of $P'$ [def-pc-scheme], so by finitely many of them, $V_1,\\dots,V_n$ ($n\\ge0$), with $h^{-1}(V)=\\bigcup_jV_j$. Since $h$ is surjective [def-weil-surjective-morphism], $\\bigcup_jh(V_j)=h(h^{-1}(V))=V$. Together with the flatness of $h$ this is the definition of an fpqc covering [def-weil-pbc-fpqc-covering] for the one-member family $\\{h\\}$. (This is Topologies, Lemma Tag 03L7 (2), lemma-recognize-fpqc-covering, written out; in the source the base $S'\\to S$ is a morphism of affine schemes after the reduction of Lemma 02KP, and quasi-compactness is what that reduction secures; here $g$ is quasi-compact by hypothesis, so no reduction is needed.)",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism",
+    "def-pc-scheme",
+    "def-weil-surjective-morphism",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Topologies, Lemma Tag 03L7 (lemma-recognize-fpqc-covering, topologies.tex line 2904), clause (2); used implicitly in the proof of Descent 02KU at 'By Lemma [02KS] this implies $\\Delta$ is universally closed', which applies 02KS to the covering $\\{X'\\times_{S'}X'\\to X\\times_SX\\}$"
+   }
+  },
+  {
+   "text": "*Step 4 ($\\Delta_f$ is universally closed, by descent of universal closedness, Descent 02KS).* Apply [lem-weil-pbc-fpqc-descend-universally-closed] to the morphism $\\Delta_f:X\\to P$ and the fpqc covering $\\{h:P'\\to P\\}$ of step 3. Its hypothesis is that the second projection $X\\times_PP'\\to P'$ of the (chosen) fibre product of $\\Delta_f$ and $h$ is universally closed. By step 2(b), $(X',g',\\delta)$ is a fibre product of $\\Delta_f$ and $h$, so by the uniqueness of fibre products [def-pc-fibre-product] there is an isomorphism $u:X\\times_PP'\\to X'$ with $\\delta\\circ u$ equal to that second projection; $u$ is universally closed (an isomorphism is a closed immersion [def-weil-closed-immersion], clause (d) of [lem-weil-pbc-closed-immersion-integral-separated-uc]) and $\\delta$ is universally closed by step 2(c), so the second projection is universally closed by clause (f) of the same node. Hence $\\Delta_f$ is universally closed. (Source: 'By Lemma [02KS] this implies $\\Delta$ is universally closed.')",
+   "uses": [
+    "lem-weil-pbc-fpqc-descend-universally-closed",
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02KU (lemma-descending-property-separated), proof, lines 5585-5602: 'let $S'\\to S$ be a flat surjective morphism ... Assume that the base change $f':X'\\to S'$ is separated. This means that $\\Delta':X'\\to X'\\times_{S'}X'$ is a closed immersion, hence universally closed. Note that $\\Delta'$ is the base change of $\\Delta:X\\to X\\times_SX$ via $S'\\to S$. By Lemma [02KS] this implies $\\Delta$ is universally closed. Since it is an immersion (Schemes, Lemma [01KJ]) we conclude $\\Delta$ is a closed immersion.'"
+   }
+  },
+  {
+   "text": "*Step 5 ($\\Delta_f$ is a closed immersion; $f$ is separated).* By step 4 and the definition of universally closed [def-weil-proper-morphism] applied to the base change along $\\mathrm{id}_P$ (the fibre product of $\\Delta_f$ and $\\mathrm{id}_P$ is $X$ itself with second projection $\\Delta_f$), $\\Delta_f$ is a closed map of underlying spaces, so its image $\\Delta_f(X)$ is closed in $P$. The diagonal $\\Delta_f$ is an immersion by [lem-weil-pbc-diagonal-immersion] (Stacks Schemes, Lemma 01KJ). An immersion with closed image is a closed immersion by [lem-weil-pbc-immersion-closed-image-closed-immersion] (Stacks Schemes, Lemma 01IQ). Hence $\\Delta_f:X\\to X\\times_SX$ is a closed immersion, i.e. $f$ is separated [def-weil-proper-morphism]. (Source: 'Since it is an immersion (Schemes, Lemma [01KJ]) we conclude $\\Delta$ is a closed immersion. Hence $f$ is separated.' The step from 'universally closed immersion' to 'closed immersion' is Schemes 01IQ, which the source leaves implicit.)",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-diagonal-immersion",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02KU (lemma-descending-property-separated), proof, lines 5585-5602: 'let $S'\\to S$ be a flat surjective morphism ... Assume that the base change $f':X'\\to S'$ is separated. This means that $\\Delta':X'\\to X'\\times_{S'}X'$ is a closed immersion, hence universally closed. Note that $\\Delta'$ is the base change of $\\Delta:X\\to X\\times_SX$ via $S'\\to S$. By Lemma [02KS] this implies $\\Delta$ is universally closed. Since it is an immersion (Schemes, Lemma [01KJ]) we conclude $\\Delta$ is a closed immersion.'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lemma-nagata-diagonal-base-change",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-descend-universally-closed",
+  "lem-weil-pbc-diagonal-immersion",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02KU (lemma-descending-property-separated, line 5581), proof lines 5585-5602, the descent paragraph (the 'Finally, let S' -> S be a flat surjective morphism of affine schemes' part), applied directly to the quasi-compact $g$; with Topologies Lemma Tag 03L7 (2) for the one-member fpqc covering and Schemes Lemma Tag 01IQ for the implicit last inference"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -67,10 +161,31 @@
    "results": "none; FlatDescent.lean has instances for Surjective, UniversallyClosed (02KS), UniversallyOpen (02KT), UniversallyInjective (02KW), isomorphisms (02L4), IsOpenImmersion (02L3), not IsSeparated (a DescendsAlong for `diagonal P` exists generically, CategoryTheory/MorphismProperty/Descent.lean:92, but no instance for IsClosedImmersion that would feed it)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "separated morphism of schemes descends along faithfully flat quasi-compact morphism",
+   "results": "none: HTTP 500 Internal Server Error again on 2026-10-10 13:2x UTC",
+   "date": "2026-10-10",
+   "verdict": "no result (service error)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.IsClosedImmersion",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match (no closed-immersion descent instance that would feed the generic diagonal descent CategoryTheory/MorphismProperty/Descent.lean:92-94)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|stacks' Mathlib/AlgebraicGeometry/Morphisms/{FlatDescent,LocalFlatDescent,Descent}.lean; grep -rn 'IsSeparated' ~/weil-conjectures-slopmaster2/WeilConjectures | grep -i 'descend\\|flat'",
+   "results": "Mathlib FlatDescent.lean: Surjective (41), UniversallyClosed 02KS (47-49), UniversallyOpen 02KT (65), UniversallyInjective 02KW (84), isomorphisms 02L4 (92), IsOpenImmersion 02L3 (132); LocalFlatDescent.lean: LocallyOfFiniteType, LocallyOfFinitePresentation, Smooth, FormallyUnramified, Etale (35-47); no IsSeparated, no IsClosedImmersion. slopmaster2 WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean: Flat 02L2, IsAffineHom 02L5 (avoids 02KU: quasiSeparatedSpace_of_surjective), IsFinite 02LA; no separatedness descent",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -90,5 +205,16 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fpqc-descend-separated",
+  "worker": "stage1",
+  "summary": "Five steps following the descent paragraph of the proof of Descent 02KU: Delta' closed immersion hence universally closed (01W5 leaf); Delta' is up to the canonical isomorphism the base change of Delta along h: (X x_S X) x_S S' -> X x_S X (closed blueprint node lemma-nagata-diagonal-base-change, Lean diagonal_pullback_fst, plus the pasting leaf for the cartesian square); h is flat, surjective, quasi-compact as a base change of g, so {h} is an fpqc covering (03L7 (2) written out from the definition); 02KS (unsplit node fpqc-descend-universally-closed) gives Delta universally closed; Delta is an immersion (01KJ leaf) with closed image, hence a closed immersion (01IQ leaf, implicit in the source). The source's reduction through 02KP (Zariski locality, base change, affine case) is not taken: it exists to make the covering member quasi-compact, and here g is quasi-compact by hypothesis, so the affine-case argument applies verbatim to g. No new nodes. No Lean in Mathlib or slopmaster2 (LeanSearch returned HTTP 500 again).",
+  "blueprint": "The item serves, in lemma-weil-pbc-h1-constructible-representation's proof (second paragraph, the 03SA/03Q5 step), through the via chain down to fpqc-descend-affine, the clause of Descent 02L5's proof 'By Lemmas 02KQ and 02KU we see that X -> S is separated': steps 1-5 realize that separated half for the flat surjective (quasi-compact) S' -> S."
+ },
+ "tool_uses": [
+  "lemma-nagata-diagonal-base-change"
+ ],
+ "reviewed": "2026-10-10 L: 5 steps along 02KU checked (diagonal of f' a closed immersion hence universally closed; the diagonal of f' is the base change of the diagonal of f along h = (X x_S X) x_S S' -> X x_S X, by the Nagata diagonal node and pasting; h flat surjective quasi-compact, an fpqc covering; universal closedness descends by lem-weil-pbc-fpqc-descend-universally-closed, 02KS; an immersion with closed image is a closed immersion, 01IQ). tool_uses lemma-nagata-diagonal-base-change (closed in Lean; the two Mathlib leaves of other units are tools by themselves). Direct route without the 02KP reduction accepted: g is quasi-compact by hypothesis."
 }
