@@ -1,8 +1,8 @@
 # Work queue
 
-916 items; claim with `tools/claim.py next <group> [--stage N]`.
+918 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (315)
+## Stage 1: nodes to split (317)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -32,7 +32,6 @@
 | `lem-exc-etale-open-subgroup-fixed-field` | 3011 | none |
 | `lem-sc-quasi-finite-points-open` | 3012 | none |
 | `lem-sc-affine-maximal-points-closed-in-lft-scheme` | 3013 | none |
-| `lem-sc-p1-boundary-extension-composition` | 3013 | none |
 | `lem-sc-tangent-space-vector-space` | 3013 | none |
 | `lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` | 3014 | none |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
@@ -42,7 +41,10 @@
 | `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
 | `lem-sc-ext-locally-free-second-naturality` | 3014 | none |
 | `lem-sc-finite-duality-derived-hom` | 3014 | none |
+| `lem-sc-p1-boundary-connecting-naturality` | 3014 | none |
+| `lem-sc-p1-boundary-one-extension-class` | 3014 | none |
 | `lem-sc-p1-ext-pushout-postcompose` | 3014 | none |
+| `lem-sc-p1-pullback-extension-class` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
 | `lem-sc-support-dimension-cohomology-vanishing` | 3014 | none |
@@ -928,7 +930,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 332 nodes that wait for stage 1, 1239 nodes that wait for a statement dependency.
+Not open yet: 334 nodes that wait for stage 1, 1240 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
