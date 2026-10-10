@@ -2666,3 +2666,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:26 L: returned deliver/G1/lem-sc-affine-perfect-map-lift (reviewer RETURN: 1 (C1/D, core gap): Step 2's 'the source construction supplies a map from this Koszul complex to the Hom complex represe)
 - 21:26 L: returned deliver/J1/lem-sp-cartan-eilenberg-comparison-homotopy (reviewer RETURN: (reviewer R-cec2557, head b7a1c9615) 1. D (steps do not prove the statement) / E: Step 3 asserts every component H^{p,q})
 - 21:27 L: merged deliver/C1/lem-pc-perfect-generation-open-induction-step (reviewer FIX; first push; new nodes: 2)
+- 21:27 L: merged deliver/G1/lem-sp-filtered-homotopy-spectral-sequence (reviewer FIX; first push; new nodes: 0)

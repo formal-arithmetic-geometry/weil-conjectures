@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Filtered homotopies agree on spectral sequences from the second page",
- "statement": "Let $C^\\bullet$ and $D^\\bullet$ be cochain complexes in an abelian category, each equipped with a decreasing filtration [def-sp-filtration] such that for every cochain degree $n$ there are integers $p_-$ and $p_+$ with $F^{p_-}C^n=C^n$, $F^{p_+}C^n=0$, and likewise for $D^n$. Let $a,b:C^\\bullet\\to D^\\bullet$ be filtered chain maps, and suppose there are maps $h^n:C^n\\to D^{n-1}$ with $a-b=d_Dh+hd_C$ and $h^n(F^pC^n)\\subseteq F^{p-1}D^{n-1}$ for every $p$. Then the spectral-sequence maps induced by $a$ and $b$ are equal on every page $E_r$ for $r\\ge2$, and their maps on the abutment filtrations and the associated graded pieces [def-sp-convergence] agree.",
+ "statement": "Let $C^\\bullet$ and $D^\\bullet$ be cochain complexes in an abelian category, each equipped with a decreasing filtration [def-sp-filtration] by subcomplexes (so $d(F^pC^n)\\subseteq F^pC^{n+1}$, and likewise for $D^\\bullet$) such that for every cochain degree $n$ there are integers $p_-$ and $p_+$ with $F^{p_-}C^n=C^n$, $F^{p_+}C^n=0$, and likewise for $D^n$. Let $a,b:C^\\bullet\\to D^\\bullet$ be filtered chain maps, and suppose there are maps $h^n:C^n\\to D^{n-1}$ with $a-b=d_Dh+hd_C$ and $h^n(F^pC^n)\\subseteq F^{p-1}D^{n-1}$ for every $p$. Then the spectral-sequence maps induced by $a$ and $b$ are equal on every page $E_r$ for $r\\ge2$, and their maps on the abutment filtrations and the associated graded pieces [def-sp-convergence] agree.",
  "source": {
   "document": "literature/stacks-project/homology.tex",
   "place": "Lemma 012O (homology-lemma-spectral-sequence-filtered-complex-functorial) together with Definition 012U (homology-definition-filtered-complex-ss-converges), applied to the filtered-complex homotopy calculation"
@@ -20,9 +20,49 @@
   "def-sp-filtration",
   "def-sp-convergence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The boundedness hypotheses make the filtrations on both complexes bounded in each cochain degree, so [thm-sp-spectral-object-yields](a) constructs their spectral sequences, while (b) identifies the abutment filtrations and (c) makes every filtered chain map induce a compatible map on every page. The maps a and b therefore induce spectral-sequence morphisms.",
+   "uses": [
+    "thm-sp-spectral-object-yields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 012O and the bounded filtered-complex construction preceding it"
+   }
+  },
+  {
+   "text": "Fix $r\\ge2$ and use the $Z_r/B_r$ description in [thm-sp-spectral-object-yields](a), choosing $N\\ge r$ so large that $F^{p+N}C^{p+q+1}=0$ and $F^{p+N}D^{p+q}=0$ (possible by the degreewise boundedness). Then a class of $Z_r^{p,q}(C)$ is the image of the class of a cocycle $x\\in F^pC^{p+q}$, $d_Cx=0$, and $(a-b)x=d_D(hx)$ with $hx\\in F^{p-1}D^{p+q-1}\\subseteq F^{p-r+1}D^{p+q-1}$. So the class of $(a-b)x$ in $H^{p+q}(F^pD/F^{p+r}D)$ is the coboundary of the class of $hx$ in $F^{p-r+1}D/F^{p}D$, i.e. it lies in $B_r^{p,q}(D)$ and vanishes in $E_r^{p,q}(D)$. Hence $a$ and $b$ induce the same map on $E_r$ for every $r\\ge2$.",
+   "uses": [
+    "thm-sp-spectral-object-yields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 012O, functoriality, with the filtered-complex homotopy calculation (standard one-step filtration-shift argument)"
+   }
+  },
+  {
+   "text": "The induced maps on cohomology of the total complexes are equal because a-b=d_Dh+hd_C is a chain homotopy. By [thm-sp-spectral-object-yields](b), the abutment filtrations are the image filtrations from the filtered complexes and the E_infty identifications with their graded pieces are natural for filtered maps. Hence the common cohomology map preserves the two image filtrations and induces the same maps on every associated graded piece; these are precisely the abutment filtration and graded-piece maps in the statement.",
+   "uses": [
+    "thm-sp-spectral-object-yields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 012O together with Definition 012U and the naturality clause in the filtered-complex spectral sequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-sp-spectral-object-yields"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma 012O (homology-lemma-spectral-sequence-filtered-complex-functorial), combined with the standard filtered homotopy calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,12 +94,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sp-cartan-eilenberg-comparison-independence",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-filtered-homotopy-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Homology Lemma 012O and the convergence convention 012U. No sorry-free Lean declaration states the item. The proof is split into construction and functoriality of the bounded filtered spectral sequences, the explicit one-step filtration-shift homotopy calculation giving equality from E2, and naturality of the induced abutment filtrations and graded pieces. No new node was needed; the existing filtered-complex spectral-sequence theorem supplies the page and convergence interfaces.",
+  "blueprint": "The item realizes the final paragraph of thm-sp-grothendieck: comparison homotopies lower the filtration by one and therefore make the spectral-sequence maps and abutment maps independent from the second page onward.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fhs2601",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fhs2601 (reviewer sub-agent of L); spot-checked: Read whole packet; statement vs 012O/012U and vs citer lem-sp-cartan-eilenberg-comparison-independence (one-step shift h(F^p)<=F^{p-1}, equality from E_2, abutment graded maps: C4 OK); def-sp-filtration and def-sp-convergence cited not restated (class b OK); no new nodes, so no helper overlap with J1 (class d n/a). FIX more, RETURN less: (1) E/C4 Step 2 claimed 'modulo F^{p+1} the equality identifies d(hx) with -h(dx)', which is false (a-b)x need not lie in F^{p+1}) - rewrote Step 2: by boundedness take Z_r representatives as genuine cocycles x in F^p, then (a-b)x=d(hx) with hx in F^{p-1} in F^{p-r+1}, so its class is a coboundary in B_r for every r>=2; the Second reading by G1 missed this. (2) E7 statement: def-sp-filtration is a filtration of an object, so added 'by subcomplexes (d(F^pC^n) in F^pC^{n+1})', needed for the spectral sequence of thm-sp-spectral-object-yields to exist; no change of meaning for the citer, whose filtrations are by subcomplexes.; 1 file(s) fixed by the reviewer"
+ }
 }
