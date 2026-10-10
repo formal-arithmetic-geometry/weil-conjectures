@@ -312,6 +312,63 @@ lemma coev_whiskerRight_comp :
   · rfl
   · exact (isZero_X_of_notMem K a b n hn).eq_of_src _ _
 
+lemma isZero_rightDual_X (n : ℤ) (hn : IsZero (K.X (-n))) : IsZero (K.rightDual.X n) := by
+  rw [IsZero.iff_id_eq_zero]
+  change 𝟙 ((K.X (-n))ᘁ) = 0
+  rw [← rightAdjointMate_id, hn.eq_of_src (𝟙 _) 0, rightAdjointMate_zero']
+
+lemma coevEval_term (n p q k : ℤ) (hpq : p + q = 0) (hk : n + p = k) (hkq : k + q = n) :
+    (ρ_ (K.rightDual.X n)).inv ≫ K.rightDual.X n ◁ coevPQ K p q hpq ≫ (α_ _ _ _).inv ≫
+      (HomologicalComplex.ιTensorObj K.rightDual K n p k hk ≫ (eval K).f k) ▷ K.rightDual.X q ≫
+        HomologicalComplex.ιTensorObj (𝟙_ (CochainComplex C ℤ)) K.rightDual k q n hkq =
+      if p = -n then (λ_ K.rightDual).inv.f n else 0 := by
+  by_cases hk0 : k = 0
+  · subst hk0
+    obtain rfl : p = -n := by omega
+    obtain rfl : n = q := by omega
+    rw [if_pos rfl, leftUnitor_inv_f, ι_eval_f, comp_whiskerRight]
+    have hf : (K.XIsoOfEq (show -n = -n by omega)).hom =
+        (K.XIsoOfEq (show -n = -n by omega)).inv := by
+      rw [HomologicalComplex.XIsoOfEq_rfl]
+      rfl
+    have key : (ρ_ (K.rightDual.X n)).inv ≫ K.rightDual.X n ◁ coevPQ K (-n) n hpq ≫
+        (α_ _ _ _).inv ≫ evalPQ K n (-n) hk ▷ K.rightDual.X n = (λ_ _).inv :=
+      zigzag_conj' (K.XIsoOfEq (show -n = -n by omega)) _ hf
+    simp only [assoc]
+    rw [reassoc_of% key]
+  · rw [if_neg (by omega), eval_f_eq_zero K k hk0]
+    simp
+
+lemma whiskerLeft_coev_comp :
+    K.rightDual ◁ coev K a b ≫ (α_ K.rightDual K K.rightDual).inv ≫ eval K ▷ K.rightDual =
+      (ρ_ K.rightDual).hom ≫ (λ_ K.rightDual).inv := by
+  ext n
+  rw [← cancel_epi ((ρ_ K.rightDual).inv.f n)]
+  conv_rhs => rw [← HomologicalComplex.comp_f, Iso.inv_hom_id_assoc]
+  simp only [HomologicalComplex.comp_f]
+  rw [rightUnitor_inv_f, assoc, assoc]
+  erw [ιTensorObj_whiskerLeft_f_assoc]
+  rw [← whiskerLeft_comp_assoc, singleObjXSelf_inv_coev_f, coevZero, whiskerLeft_sum,
+    Preadditive.sum_comp, Preadditive.comp_sum]
+  have h : ∀ p ∈ Finset.Icc a b, (ρ_ (K.rightDual.X n)).inv ≫
+      K.rightDual.X n ◁ (coevPQ K p (-p) (by simp) ≫
+        HomologicalComplex.ιTensorObj K K.rightDual p (-p) 0 (by simp)) ≫
+      HomologicalComplex.ιTensorObj K.rightDual (K ⊗ K.rightDual) n 0 n (add_zero n) ≫
+        (α_ K.rightDual K K.rightDual).inv.f n ≫ (eval K ▷ K.rightDual).f n =
+      if p = -n then (λ_ K.rightDual).inv.f n else 0 := fun p _ ↦ by
+    rw [whiskerLeft_comp, assoc,
+      ← reassoc_of% (Monoidal.ι₂₃_eq K.rightDual K K.rightDual n p (-p) 0 n (by simp)
+        (add_zero n))]
+    erw [Monoidal.ι₂₃_associator_inv_assoc]
+    rw [Monoidal.ι₁₂_eq K.rightDual K K.rightDual n p (-p) (n + p) n rfl (by omega), assoc]
+    erw [Monoidal.ι_whiskerRight]
+    rw [← comp_whiskerRight_assoc]
+    exact coevEval_term K n p (-p) (n + p) (by simp) rfl (by omega)
+  rw [Finset.sum_congr rfl h, Finset.sum_ite_eq']
+  split_ifs with hn
+  · rfl
+  · exact (isZero_rightDual_X K n (isZero_X_of_notMem K a b (-n) hn)).eq_of_src _ _
+
 end rightDual
 
 end CochainComplex
