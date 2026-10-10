@@ -51,7 +51,7 @@ This file provides the site-theoretic inputs for the pro-étale six functors of 
   pro-étale site has terminal sections over an object whose underlying scheme is empty.
 - `AlgebraicGeometry.Scheme.zariskiPrecoverage_le_proetalePrecoverage`: a Zariski open cover
   is a pro-étale covering family. This is what makes the two-open cover of
-  `WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper` available.
+  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Proper` available.
 
 -/
 

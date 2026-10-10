@@ -5,7 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Defs
 
 /-!
 
@@ -52,7 +52,7 @@ is fully faithful", and none is needed here.
   `j^*` of the counit of `j_! ⊣ j^*` is an isomorphism at every sheaf. This is the form the
   comparison `j_! ⟶ j_*` consumes; see
   `AlgebraicGeometry.ProEtale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar` in
-  `WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison`.
+  `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Comparison`.
 
 -/
 

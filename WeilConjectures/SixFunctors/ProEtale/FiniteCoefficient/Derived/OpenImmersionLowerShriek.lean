@@ -5,7 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 
 /-!
 ## The derived adjunction `j_! ⊣ j^*` along an open immersion
