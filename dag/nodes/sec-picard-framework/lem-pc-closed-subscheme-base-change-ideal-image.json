@@ -1,0 +1,81 @@
+{
+ "id": "lem-pc-closed-subscheme-base-change-ideal-image",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-divisor-line-bundle-properties",
+   "place": "proof, paragraph (2): 'The ideal sheaf of the base change is the pullback of the ideal sheaf ([lem-pc-closed-imm-base-change]: $\\mathcal{I}_{D_Y}=\\operatorname{im}(g^*\\mathcal{I}_D\\to\\mathcal{O}_Y)$'",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ideal sheaf of a base-changed closed subscheme",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $i:Z\\to S$ be a closed immersion [def-weil-closed-immersion] with ideal sheaf $\\mathcal I\\subseteq\\mathcal O_S$ [def-sbc-closed-immersion-ideal-sheaf], and let $g:Y\\to S$ be a morphism of schemes. Then the projection $q:Z\\times_SY\\to Y$ from the fibre product [def-pc-fibre-product] is a closed immersion, and its ideal sheaf $\\ker(\\mathcal O_Y\\to q_*\\mathcal O_{Z\\times_SY})$ is the image of the composite morphism of $\\mathcal O_Y$-modules $$g^*\\mathcal I\\xrightarrow{g^*(\\mathcal I\\hookrightarrow\\mathcal O_S)}g^*\\mathcal O_S\\xrightarrow{\\epsilon_g}\\mathcal O_Y,$$ where $g^*$ is the pullback of modules [def-pc-module-pullback] and $\\epsilon_g$ is the morphism adjoint to $g^\\sharp:\\mathcal O_S\\to g_*\\mathcal O_Y$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01JU (lemma-fibre-product-immersion), part (1), second sentence: '$X\\times_SY\\to Y$ corresponds to the sheaf of ideals $\\Im(g^*\\mathcal{I}\\to\\mathcal{O}_Y)$'"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of closed immersion along a morphism has ideal sheaf the image of pulled back ideal",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.isPullback_of_isClosedImmersion, IdealSheafData.le_map_comap, IdealSheafData.ideal_map (Mathlib.AlgebraicGeometry.IdealSheaf.Functorial)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib defines comap as the kernel of the base-changed immersion, without the image description"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ideal sheaf of the base change of a closed subscheme equals the image of the pullback of the ideal sheaf in the structure sheaf",
+   "results": "IdealSheafData.comap, IdealSheafData.map, comap_map_le, ideal_map_of_isAffineHom, ideal_map (Mathlib.AlgebraicGeometry.IdealSheaf.Functorial)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'ideal_comap_appLE\\|comap.*ideal.*appLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/WeilConjectures/Mathlib",
+   "results": "none in Mathlib; project lemma AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_appLE (WeilConjectures/Mathlib/AlgebraicGeometry/IdealSheaf/Affine.lean:95, sorry-free) gives the affine-local form $(J.comap f)(V)=J(U)\\cdot\\mathcal O(V)$, not the sheaf image of $g^*\\mathcal I\\to\\mathcal O_Y$",
+   "date": "2026-10-10",
+   "verdict": "no match (affine-local candidate in the project only)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-divisor-line-bundle-properties",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-hilb-curves",
+ "lean_candidates": [
+  {
+   "name": "AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_appLE",
+   "module": "WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine",
+   "lines": [
+    92,
+    105
+   ],
+   "note": "sorry-free; states the affine-local form (the ideal of J.comap f on an affine V over an affine U is J(U) extended along f.appLE U V), equivalent to the image description on affines but not the sheaf statement; not attached"
+  }
+ ]
+}
