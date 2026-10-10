@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "Tag 08EV proof: the invocation of Lemma 08EA reduces the affine restriction to the module Tor-amplitude criterion",
+   "place": "Tag 0654 proof: a complex has Tor amplitude in [a,b] iff it has a bounded flat representative in [a,b]",
    "via": [
     "lem-pc-tor-amplitude-qcoh-test"
    ]
@@ -23,9 +23,60 @@
   "def-pc-kflat-complex",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the forward implication, a complex P^\\bullet of flat A-modules concentrated in [a,b] is K-flat by the bounded-above flat-complex theorem [lem-pc-module-bounded-flat-kflat]. Therefore derived tensoring P^\\bullet with any A-module N is represented by the ordinary tensor complex P^\\bullet\\otimes_A N, which is zero outside [a,b]; hence its cohomology vanishes outside [a,b].",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.59.3 (Tag 0654), forward implication"
+   }
+  },
+  {
+   "text": "Conversely, assume M^\\bullet has Tor amplitude in [a,b]. By the standard t-structure truncation description [def-sbc-standard-tstructure-derived-category], replace M^\\bullet by its canonical upper truncation at b; the map from this truncation to M^\\bullet is a quasi-isomorphism because the cohomology above b vanishes, and the representative is zero above b. A bounded-above flat replacement of it, obtained by specializing [lem-pc-kflat-bounded-flat-replacement] to the one-point site of A, gives a quasi-isomorphic bounded-above flat complex P^\\bullet vanishing above b. Since P^\\bullet is K-flat by [lem-pc-module-bounded-flat-kflat], its ordinary tensor with every A-module computes the derived tensor. Testing the Tor-amplitude hypothesis against every A-module N therefore shows that P^\\bullet\\otimes_A N is exact in degree a-1; the Tor criterion [lem-pc-module-flat-opcycles-tor-criterion] makes the cokernel P^a/\\operatorname{im}(d^{a-1}) flat.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-pc-kflat-bounded-flat-replacement",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-module-flat-opcycles-tor-criterion",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.59.3 (Tag 0654), converse implication and truncation"
+   }
+  },
+  {
+   "text": "Let E^\\bullet be the complex with E^i=0 for i<a, E^a=P^a/\\operatorname{im}(d^{a-1}), E^i=P^i for i>a, with differentials induced by those of P^\\bullet, and let P^\\bullet\\to E^\\bullet be the evident surjection (this is the canonical truncation \\tau_{\\ge a}P^\\bullet of Tag 0654). A direct computation gives H^i(E^\\bullet)=H^i(P^\\bullet) for i\\ge a (in degree a both equal \\ker d^a/\\operatorname{im}d^{a-1}) and H^i(E^\\bullet)=0 for i<a; since H^i(P^\\bullet)=H^i(M^\\bullet\\otimes_A^{\\mathbf L}A)=0 for i<a by the Tor-amplitude hypothesis with N=A, the surjection is a quasi-isomorphism, hence an isomorphism in D(A) [def-weil-abstract-derived-category]. Its term E^a is flat by the Tor criterion [lem-pc-module-flat-opcycles-tor-criterion] as shown in the preceding step, and E^i=P^i is flat for i>a. As P^\\bullet is zero above b, E^\\bullet is a complex of flat A-modules concentrated in [a,b] representing M^\\bullet in D(A).",
+   "uses": [
+    "lem-pc-module-flat-opcycles-tor-criterion",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.59.3 (Tag 0654), truncation at degree a"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "def-weil-abstract-derived-category",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.59.3 (Tag 0654)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +108,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-affine-tor-amplitude-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-module-tor-amplitude-flat-model",
+  "worker": "stage1",
+  "summary": "The source item is not stated by an exact sorry-free project declaration. I split Tag 0654 into the bounded-above flat/K-flat forward direction, bounded-above flat replacement and Tor-criterion converse, and the lower truncation argument. I added one genuinely missing statement-only child for the opcycles Tor criterion; all other ingredients are existing DAG nodes.",
+  "blueprint": "Realizes the Tag 0654 proof: bounded flat complexes give the Tor bound; a bounded-above flat replacement is truncated at a using the Tor criterion to prove the new degree-a term flat; the truncation remains quasi-isomorphic and bounded.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic bounded-above flat K-flatness is required to compute derived tensor in the module forward direction; the duality unit has no replacement node."
+   },
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "Generic bounded-above flat replacement is required for the module converse; the duality unit has no replacement node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-kflat-bounded-flat-replacement"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-taf3134",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-taf3134 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0654 (Tor amplitude as H^i(M (x)^L N)=0 for all N, i outside [a,b]) OK; Step 1 bounded flat => K-flat via lem-pc-module-bounded-flat-kflat OK; Step 2 upper truncation, bounded-above flat replacement (one-point site, accepted generic tool), K-flat computes derived tensor, exactness in degree a-1 OK; new node lem-pc-module-flat-opcycles-tor-criterion checked true (Tor_1(coker,N) is a quotient of H^{a-1}(P(x)N) since P^a flat; Tor-flatness criterion) and is Stacks Tag 0653 lemma-last-one-flat, a real lemma; not a duplicate of lem-sc-affine-truncation-kernel-flat / -finite-locally-free (scheme, finite-free, localized special settings); no other tor-amplitude module node. FIX more, RETURN less: (1) C4 Step 3: def-sbc-standard-tstructure-derived-category describes K/tau_{<=a-1}K (nonzero term im d^{a-1} in degree a-1), not the cokernel truncation; rewrote Step 3 to define E with E^a=coker d^{a-1} and verify the quasi-isomorphism by direct cohomology computation (H^i(P)=0 for i<a from N=A), citing only the new criterion and def-weil-abstract-derived-category; (2) new node source corrected to Tag 0653 (more-algebra-lemma-last-one-flat).; 2 file(s) fixed by the reviewer"
+ }
 }

@@ -1,0 +1,20 @@
+1. Files written: `lem-pc-module-tor-amplitude-flat-model.json` (split item); `lem-pc-module-flat-opcycles-tor-criterion.json` (statement-only unsplit node); `citations.json`.
+2. Attachments: none.
+3. WANTED: literature/stacks-project/more-algebra.tex, Lemma 15.59.3 (Tag 0654), because the source packet is not present in this checkout.
+4. The source checkout contains the generic categorical theorem `DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat`, but no exact ring/module declaration for this item; it therefore cannot be attached. The existing DAG supplies bounded-above flat replacement and K-flatness. The only missing non-elementary fact in the truncation proof is the opcycles Tor criterion, recorded as the new statement-only node.
+5. I checked the item and the new node against Tag 0654 as identified in the node source. I read the statements of every cited node: the bounded-above replacement supplies a flat quasi-isomorphic replacement; the module K-flat node supplies K-flatness of bounded-above flat complexes; the abstract derived-category definition says quasi-isomorphisms become isomorphisms. The new criterion states exactly the flatness conclusion used for the degree-a truncation term. The edge cases A=0, M=0, and a=b reduce to the zero complex and the same truncation argument. Mathlib searches were run for both the item and the new criterion; LeanSearch was unavailable and is recorded as such. No duplicate blueprint node or DAG statement was found.
+
+## Review by K1
+
+I read the imported item, its Tag 0654 source reference, and the source declarations in `CategoryTheory/DerivedCategory/FlatModel.lean`. The project declaration there is generic over a monoidal Grothendieck abelian category and is not the exact module statement, so I did not attach it. Step 1 uses the existing bounded-above flat K-flat statement and the K-flat definition to compute derived tensor by the ordinary bounded complex. Step 2 uses the existing bounded-above replacement statement and the new opcycles criterion, with the Tor-amplitude hypothesis supplying exactness in degree a-1 after tensoring with every module. Step 3 uses the abstract derived-category localization statement to pass from the quasi-isomorphic truncation to an isomorphic representative. I verified every quote in `citations.json` verbatim against its node statement and kept the new node statement-only as required.
+
+## Second reading by K1
+
+- Item statement: checked against Stacks More on Algebra, Lemma 15.59.3, Tag 0654 (`lemma-tor-amplitude`); the Tor-amplitude definition, interval hypotheses, and bounded flat representative agree hypothesis by hypothesis.
+- Step 1: checked against `lem-pc-module-bounded-flat-kflat`, `def-pc-kflat-complex`, and the bounded-complex tensor argument in Tag 0654; verdict sound, with the forward model zero outside `[a,b]`.
+- Step 2: checked against Tag 0654's bounded-above replacement and `def-sbc-standard-tstructure-derived-category`; verdict repaired by making the upper truncation and K-flat computation explicit and citing the existing statements.
+- Step 3: checked against Tag 0654's lower truncation and the standard t-structure statement; verdict repaired by citing the canonical lower truncation description and its cohomological quasi-isomorphism criterion.
+- New node `lem-pc-module-flat-opcycles-tor-criterion`: checked against Tag 0654's `lemma-last-one-flat` argument; verdict is the exact smaller Tor criterion used, with all ring, complex, flatness, and exactness notions introduced.
+- New node form: statement-only, TeX notation checked, Stacks tag and label recorded, and Mathlib searches checked in `searches.jsonl`; no exact Mathlib declaration or duplicate DAG node found.
+
+Changes made: added the standard-t-structure dependency and verbatim citations to Steps 2 and 3; added the bounded-flat K-flat citation where Step 2 computes derived tensor; retained the single genuinely auxiliary opcycles criterion node and did not add restatement nodes.
