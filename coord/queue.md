@@ -1,8 +1,8 @@
 # Work queue
 
-855 items; claim with `tools/claim.py next <group> [--stage N]`.
+859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (312)
+## Stage 1: nodes to split (314)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -20,12 +20,11 @@
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
 | `prop-weil-pbc-kinjective-resolutions-exist` | 3004 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
-| `lem-sc-etale-qcoherent-descent` | 3007 | none |
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
-| `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
+| `lem-sc-etale-qcoherent-descent-fpqc-sections` | 3008 | none |
 | `lem-sc-generic-vanishing-acyclic` | 3008 | none |
-| `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
+| `lem-sc-module-abelian-zariski-cohomology` | 3009 | none |
 | `lem-galois-fpqc-refinement-fully-faithful` | 3010 | none |
 | `lem-pc-cartier-divisor-nowhere-dense` | 3010 | none |
 | `lem-pc-dim-zero-finite-over-field` | 3010 | none |
@@ -45,13 +44,13 @@
 | `lem-sc-determinant-short-exact` | 3011 | none |
 | `lem-sc-finite-duality` | 3011 | rests_on_sorry |
 | `lem-sc-regular-curve-torsionfree-free` | 3011 | none |
-| `lem-sc-torsion-subsheaf-quotient` | 3011 | none |
 | `lem-sc-vector-bundle-line-subbundle` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
 | `lem-exc-rg-discrete-modules-functorial-injective-embeddings` | 3012 | none |
 | `lem-pc-grothendieck-edge-cocycle` | 3012 | none |
 | `lem-pc-projective-base-change` | 3012 | none |
 | `lem-sc-ext-locally-free` | 3012 | sorry_here |
+| `lem-sc-torsion-sections-generic` | 3012 | none |
 | `lem-sc-p1-coherent-proj-representation` | 3013 | none |
 | `lem-sc-p1-graded-syzygy` | 3013 | none |
 | `lem-sc-p1-proj-sheafification-exact` | 3013 | none |
@@ -282,12 +281,15 @@
 | `lem-kun-cp-approximation` | - | none |
 | `lem-pc-projective-coherent-finiteness` | - | sorry_here |
 | `lem-pd-picard-base-change` | - | sorry_here |
+| `lem-sc-zariski-dimension-bound` | - | none |
+| `lem-sc-zariski-flasque-acyclic` | - | none |
 | `lem-weil-geometrically-connected-check-after-extension` | - | none |
 | `lem-weil-pbc-irreducible-lisse-strata` | - | none |
 | `lem-weil-pbc-lisse-generic-kernel` | - | none |
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
 | `sbc-lem-smooth-geometrically-reduced` | - | none |
 | `def-pc-derived-category` | - | none |
+| `def-sc-zariski-cohomology` | - | none |
 | `lem-kun-04ca` | - | none |
 | `lem-kun-fibre-product-limits` | - | none |
 | `lem-kun-finite-closed-subscheme` | - | none |
@@ -296,6 +298,7 @@
 | `lem-kun-support-geometric-point-independent` | - | none |
 | `lem-pc-flat-rf-open` | - | rests_on_sorry |
 | `lem-pc-projective-space-coherent-finiteness` | - | sorry_here |
+| `lem-sc-zariski-filtered-cohomology` | - | none |
 | `def-nagata-scheme-theoretically-dense-open` | - | none |
 | `def-sc-kahler-differentials` | - | none |
 | `lem-kun-separable-smooth-colimit` | - | none |
@@ -303,7 +306,6 @@
 | `lem-pc-perfect-locus` | - | sorry_here |
 | `lem-sc-p1-hi-vanishing` | - | rests_on_sorry |
 | `pqf-lem-qf-locqf-qc` | - | none |
-| `def-sc-zariski-cohomology` | - | none |
 | `lem-kun-algebraic-separable-smooth` | - | none |
 | `lem-kun-fg-separable-smooth` | - | none |
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
@@ -319,7 +321,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (543)
+## Stage 2: nodes to state (545)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -342,6 +344,7 @@
 | `def-sc-ext-sheaf` | 1 | state |
 | `def-sc-p1-standard` | 1 | state |
 | `def-sc-rational-functions` | 1 | state |
+| `def-sc-zariski-flasque` | 1 | state |
 | `def-weil-pbc-analytically-unramified` | 1 | state |
 | `def-weil-pbc-associated-graded-ring` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
@@ -753,6 +756,7 @@
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
 | `lem-weil-pbc-simplicial-index-finite-initial` | 1 | state |
+| `lem-weil-pbc-simplicial-matching-object` | 1 | state |
 | `lem-weil-pbc-simplicial-set-add-simplices` | 1 | state |
 | `lem-weil-pbc-simplicial-set-glue-simplex` | 1 | state |
 | `lem-weil-pbc-skyscraper-constant-on-point-closure` | 1 | state |
@@ -867,7 +871,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 331 nodes that wait for stage 1, 1013 nodes that wait for a statement dependency.
+Not open yet: 333 nodes that wait for stage 1, 1016 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
