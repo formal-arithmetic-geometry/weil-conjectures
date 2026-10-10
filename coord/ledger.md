@@ -2940,3 +2940,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:14 L: merged deliver/K1/lem-sc-zariski-flasque-acyclic (reviewer FIX; first push; new nodes: 1)
 - 23:15 L: merged deliver/J1/lem-pc-projective-curve-finite-projection (reviewer FIX; first push; new nodes: 0)
 - 23:15 L: merged deliver/G1/lem-pc-rf-single-complex-relative-mayer-vietoris (reviewer FIX; first push; new nodes: 1)
+- 23:15 L: returned deliver/C1/lem-sc-derived-internal-hom-adjunction (reviewer RETURN: 1. D2 (no real split): the new node lem-sc-derived-category-monoidal-closed is created from the item (created.item = the)
