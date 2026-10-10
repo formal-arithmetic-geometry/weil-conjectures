@@ -1,0 +1,69 @@
+{
+ "id": "lem-weil-pbc-completion-exact-finite-modules",
+ "kind": "statement",
+ "title": "Adic completion is exact on finite modules over a Noetherian ring",
+ "statement": "Let $A$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $I\\subseteq A$ an ideal. For an $A$-module $P$ let $P^\\wedge=\\varprojlim_nP/I^nP$ (compatible sequences $(x_n)_n$, $x_n\\in P/I^nP$, componentwise $A$-module structure; for $P=A$ this is the ring $A^\\wedge$ of [def-weil-pbc-adic-completion]), and for an $A$-linear $u:P\\to Q$ let $u^\\wedge:P^\\wedge\\to Q^\\wedge$, $(x_n)_n\\mapsto(u(x_n))_n$ (with $u(x_n)$ the class of $u$ of a lift). If $0\\to K\\xrightarrow{u}N\\xrightarrow{v}M\\to0$ is an exact sequence of finitely generated $A$-modules [def-weil-finitely-generated-module] ($u$ injective, $\\operatorname{im}u=\\ker v$, $v$ surjective), then $0\\to K^\\wedge\\xrightarrow{u^\\wedge}N^\\wedge\\xrightarrow{v^\\wedge}M^\\wedge\\to0$ is exact: $u^\\wedge$ is injective, $\\operatorname{im}u^\\wedge=\\ker v^\\wedge$ and $v^\\wedge$ is surjective. (The maps $u^\\wedge,v^\\wedge$ are also $A^\\wedge$-linear for the action $(a_n)_n\\cdot(x_n)_n=(a_nx_n)_n$.)",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00MB (lemma-completion-flat, line 22956), part (2) ('the functor M -> M^ is exact on the category of finitely generated R-modules'), which is a reformulation of Lemma 00MA (lemma-completion-tensor, line 22901), part (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adic completion is exact on finitely generated modules over a Noetherian ring",
+   "results": "AdicCompletion.map_exact (Mathlib.RingTheory.AdicCompletion.Exactness), AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian (AsTensorProduct)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact (AdicCompletion.map _ _) (AdicCompletion.map _ _)",
+   "results": "AdicCompletion.map_exact (Mathlib.RingTheory.AdicCompletion.Exactness)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'map_exact\\|map_injective\\|map_surjective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/AdicCompletion/",
+   "results": "Exactness.lean:72 map_surjective, :92 map_injective, :184 map_exact; AsTensorProduct.lean:276 (exactness of the kernel inclusion), :374",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AdicCompletion.map_injective, AdicCompletion.map_exact, AdicCompletion.map_surjective",
+  "file": "Mathlib/RingTheory/AdicCompletion/Exactness.lean",
+  "how": "a few Mathlib declarations, one per clause, with P^ = AdicCompletion I P (lim P/(I^n • ⊤)) and u^ = AdicCompletion.map I u: injectivity of u^ is map_injective (:92; [IsNoetherianRing R] [Module.Finite R N], f injective), exactness in the middle is map_exact (:184; [IsNoetherianRing R] [Module.Finite R N], f injective, Function.Exact f g, g surjective), surjectivity of v^ is map_surjective (:72; any surjective g). Mathlib puts the three modules in the universe of R (M N P : Type u) for map_injective and map_exact, which finite modules can always be moved into.",
+  "line": 184
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-completion-exact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field added (map_exact Exactness.lean:184; map_injective :92, map_surjective :72 verified with sed): one declaration per clause."
+}

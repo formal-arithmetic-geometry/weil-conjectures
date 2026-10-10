@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-coherent-formal-modules-local-exactness",
+ "kind": "statement",
+ "title": "Restriction of formal coherent modules is exact; exactness is local",
+ "statement": "Let $X$ be a Noetherian scheme (a locally Noetherian scheme [pqf-def-locnoeth] whose underlying space is quasi-compact) and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals; $\\mathit{Coh}(X,\\mathcal I)$ is the category of [def-weil-pbc-coherent-formal-module], abelian by [lem-weil-pbc-coherent-formal-modules-abelian], with exactness as in [def-weil-pbc-exact-sequence]. (1) For every open $U\\subseteq X$, $U$ (with $\\mathcal O_X|_U$) is a Noetherian scheme, $\\mathcal I|_U\\subseteq\\mathcal O_U$ is a quasi-coherent sheaf of ideals, and the restriction $\\rho_U:\\mathit{Coh}(X,\\mathcal I)\\to\\mathit{Coh}(U,\\mathcal I|_U)$, $(\\mathcal F_n)\\mapsto(\\mathcal F_n|_U)$, $(\\alpha_n)\\mapsto(\\alpha_n|_U)$, is a well-defined additive functor which is exact: it carries every short exact sequence of $\\mathit{Coh}(X,\\mathcal I)$ to a short exact sequence of $\\mathit{Coh}(U,\\mathcal I|_U)$. (2) Let $X=\\bigcup_{j\\in J}U_j$ be an open covering and $\\mathcal A\\xrightarrow{\\beta}\\mathcal B\\xrightarrow{\\alpha}\\mathcal C$ morphisms of $\\mathit{Coh}(X,\\mathcal I)$ with $\\alpha\\circ\\beta=0$. Then the sequence is exact at $\\mathcal B$ if and only if for every $j$ the sequence $\\rho_{U_j}(\\mathcal A)\\to\\rho_{U_j}(\\mathcal B)\\to\\rho_{U_j}(\\mathcal C)$ is exact at $\\rho_{U_j}(\\mathcal B)$ in $\\mathit{Coh}(U_j,\\mathcal I|_{U_j})$; in particular $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ is a short exact sequence of $\\mathit{Coh}(X,\\mathcal I)$ if and only if $0\\to\\rho_{U_j}(\\mathcal A)\\to\\rho_{U_j}(\\mathcal B)\\to\\rho_{U_j}(\\mathcal C)\\to0$ is a short exact sequence of $\\mathit{Coh}(U_j,\\mathcal I|_{U_j})$ for every $j$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 087X (lemma-inverse-systems-abelian, line 6313), parts (2) and (3), and the last sentence of its proof ('Parts (2) and (3) of the lemma are immediate from our construction of kernels and cokernels'); used in the proof of Lemma 0881 (lemma-exact): 'It suffices to check this locally on X'"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "exactness of a sequence of sheaves can be checked on an open cover, restriction to open subset is exact",
+   "results": "AlgebraicGeometry.Scheme.OpenCover.restrict, CategoryTheory.Sheaf.ΓRes, TopCat.Presheaf.IsSheafOpensLeCover (sheaf conditions only; nothing on inverse systems of coherent modules)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exactness of a short exact sequence of inverse systems of coherent sheaves can be checked locally on an open covering of a Noetherian scheme",
+   "results": "MayerVietorisSquare.shortComplex_exact, HomologicalComplex.exact_of_degreewise_exact, Condensed.hasExactLimitsOfShape (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlni 'formal' and grep -rn 'IsClosedUnderKernels\\|IsCoherent' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "only formally smooth/unramified/etale files; no coherent sheaves, no category Coh(X, I) of inverse systems",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no Coh(X,I), so no locality statement for it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-completion-exact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

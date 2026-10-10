@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-abelian-full-subcategory-exact",
+ "kind": "statement",
+ "title": "A full subcategory closed under kernels, cokernels and sums is abelian with exact inclusion",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and $\\mathcal C\\subseteq\\mathcal A$ a full subcategory such that (i) some zero object of $\\mathcal A$ lies in $\\mathcal C$; (ii) for every morphism $f$ between objects of $\\mathcal C$, every object of $\\mathcal A$ that is a kernel of $f$ in $\\mathcal A$, and every object of $\\mathcal A$ that is a cokernel of $f$ in $\\mathcal A$, lies in $\\mathcal C$; (iii) for objects $A,B$ of $\\mathcal C$ every product $A\\times B=A\\oplus B$ in $\\mathcal A$ lies in $\\mathcal C$. Then $\\mathcal C$, with the addition of morphisms of $\\mathcal A$, is an abelian category; a kernel (resp. cokernel) in $\\mathcal A$ of a morphism of $\\mathcal C$ is a kernel (resp. cokernel) of it in $\\mathcal C$; and a sequence $0\\to A\\xrightarrow{f}B\\xrightarrow{g}C\\to0$ of objects and morphisms of $\\mathcal C$ is a short exact sequence of $\\mathcal C$ if and only if it is a short exact sequence of $\\mathcal A$ [def-weil-pbc-exact-sequence].",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, remark after Definition 02MO (definition-serre-subcategory) and Lemma 0754 (lemma-characterize-weak-serre-subcategory), 'Moreover, a weak Serre subcategory is an abelian category and the inclusion functor is exact' (conditions (1)-(3) of 0754 are what this uses); applied in Modules, Lemma 01BY (lemma-coherent-abelian) (5) and Cohomology of Schemes, Lemma 01Y0 (lemma-coherent-abelian-Noetherian) to coherent modules"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "full subcategory of abelian category closed under kernels and cokernels is abelian",
+   "results": "CategoryTheory.Limits.hasLimitsOfShape_of_closedUnderLimits (Limits/FullSubcategory), NonPreadditiveAbelian.abelian; not the instance itself",
+   "date": "2026-10-10",
+   "verdict": "no match among the first results"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian (CategoryTheory.ObjectProperty.FullSubcategory _)",
+   "results": "CategoryTheory.ObjectProperty.instAbelianFullSubcategoryOfContainsZeroOfIsClosedUnderKernelsOfIsClosedUnderCokernelsOfIsClosedUnderFiniteProducts (Mathlib.CategoryTheory.Abelian.Subcategory)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsClosedUnderKernels' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; read CategoryTheory/Abelian/Subcategory.lean and ObjectProperty/Kernels.lean",
+   "results": "Abelian/Subcategory.lean:60 instance Abelian P.FullSubcategory from [Abelian C] [P.ContainsZero] [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderFiniteProducts]; ObjectProperty/Kernels.lean:110 preservesKernels_ι, :158 preservesCokernels_ι; Abelian/Subcategory.lean:28,44 the inclusion preserves monomorphisms and epimorphisms",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.ObjectProperty.instAbelianFullSubcategoryOfContainsZeroOfIsClosedUnderKernelsOfIsClosedUnderCokernelsOfIsClosedUnderFiniteProducts, CategoryTheory.ObjectProperty.preservesKernels_ι, CategoryTheory.ObjectProperty.preservesCokernels_ι, CategoryTheory.ShortComplex.ShortExact.map, CategoryTheory.ShortComplex.exact_map_iff_of_faithful",
+  "file": "Mathlib/CategoryTheory/Abelian/Subcategory.lean",
+  "how": "a few Mathlib declarations, one per clause, for P : ObjectProperty A with C = P.FullSubcategory: (i)-(iii) are P.ContainsZero (ObjectProperty/ContainsZero.lean:40), P.IsClosedUnderKernels / P.IsClosedUnderCokernels (ObjectProperty/Kernels.lean:77, :125: every kernel/cokernel object of a morphism between P-objects satisfies P) and P.IsClosedUnderFiniteProducts; abelian: the instance at Abelian/Subcategory.lean:60; kernels and cokernels: preservesKernels_ι (Kernels.lean:110), preservesCokernels_ι (:158), i.e. the inclusion P.ι preserves kernels and cokernels (so Functor.PreservesHomology P.ι, ShortComplex/PreservesHomology.lean:39); short exact in C implies short exact in A: ShortComplex.ShortExact.map (ShortComplex/ShortExact.lean:97) with mono and epi preserved (preservesMonomorphisms_ι_of_isNormalEpiCategory, preservesEpimorphisms_ι_of_isNormalMonoCategory, Abelian/Subcategory.lean:28, :44); conversely: ShortComplex.exact_map_iff_of_faithful (ShortComplex/Exact.lean:235) for the faithful P.ι, and the faithful P.ι reflects monomorphisms and epimorphisms (Functor/EpiMono.lean:158 reflectsMonomorphisms_of_faithful and its epi analogue).",
+  "line": 60
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-completion-exact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field added (abelian instance, Abelian/Subcategory.lean:60; preservesKernels_iota Kernels.lean:110, preservesCokernels_iota :158, ShortExact.map ShortExact.lean:97, exact_map_iff_of_faithful Exact.lean:235 verified with sed). The short-exact-iff clause is a composition of three declarations plus mono/epi reflection by the faithful inclusion; stage 3 should treat its Lean proof as that composition."
+}

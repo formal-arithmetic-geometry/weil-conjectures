@@ -2,20 +2,141 @@
  "id": "lem-weil-pbc-formal-completion-exact",
  "kind": "statement",
  "title": "Completion of coherent modules is an exact functor",
- "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth] and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent ideal. The functor $\\mathit{Coh}(\\mathcal O_X)\\to\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module] sending a coherent module $\\mathcal F$ [pqf-def-coherent] to $(\\mathcal F/\\mathcal I^n\\mathcal F)_n$ is exact in the abelian categories [def-sp-abelian].",
+ "statement": "Let $X$ be a Noetherian scheme (a locally Noetherian scheme [pqf-def-locnoeth] whose underlying space is quasi-compact) and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent sheaf of ideals. The category $\\mathit{Coh}(\\mathcal O_X)$ of coherent $\\mathcal O_X$-modules [pqf-def-coherent] and the category $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module] are abelian [def-sp-abelian] ([lem-weil-pbc-abelian-full-subcategory-exact], [lem-weil-pbc-coherent-formal-modules-abelian]), and the completion functor $\\mathit{Coh}(\\mathcal O_X)\\to\\mathit{Coh}(X,\\mathcal I)$ of [def-weil-pbc-coherent-formal-module] (2), $\\mathcal F\\mapsto\\mathcal F^\\wedge=(\\mathcal F/\\mathcal I^n\\mathcal F)_{n\\ge1}$, $u\\mapsto u^\\wedge=(u\\bmod\\mathcal I^n)_n$, is exact: it is additive and carries every short exact sequence $0\\to\\mathcal F'\\to\\mathcal F\\to\\mathcal F''\\to0$ of $\\mathit{Coh}(\\mathcal O_X)$ to a short exact sequence $0\\to\\mathcal F'^\\wedge\\to\\mathcal F^\\wedge\\to\\mathcal F''^\\wedge\\to0$ of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-exact-sequence] (for an additive functor between abelian categories this is Stacks' 'exact', i.e. commuting with finite limits and finite colimits, by Homology, Lemma 010N (4)).",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact), affine reduction to Algebra Lemma 05EN (lemma-completion-flat)"
+  "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact, line 6423), functor (0880) (equation-completion-functor); affine reduction via Lemma 087X (lemma-inverse-systems-abelian) (3) and Lemma 087W (lemma-inverse-systems-affine) to Algebra, Lemma 00MB (lemma-completion-flat) (2)"
  },
  "stmt_deps": [
   "pqf-def-locnoeth",
   "def-weil-pbc-coherent-formal-module",
   "pqf-def-coherent",
-  "def-sp-abelian"
+  "def-sp-abelian",
+  "lem-weil-pbc-abelian-full-subcategory-exact",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The two abelian categories and additivity.) $\\mathit{Coh}(\\mathcal O_X)$ is the full subcategory of the abelian category $\\mathit{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category] of the coherent modules. It contains $0$, and kernels, cokernels and finite direct sums in $\\mathit{Mod}(\\mathcal O_X)$ of maps between coherent modules are coherent ($X$ is locally Noetherian) [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] (1); every object of $\\mathit{Mod}(\\mathcal O_X)$ isomorphic to a coherent module is coherent [lem-weil-pbc-coherent-modules-kernel-cokernel-sum] (3). By [lem-weil-pbc-abelian-full-subcategory-exact], $\\mathit{Coh}(\\mathcal O_X)$ is abelian and a sequence $0\\to\\mathcal F'\\xrightarrow{u}\\mathcal F\\xrightarrow{v}\\mathcal F''\\to0$ of coherent modules is short exact in $\\mathit{Coh}(\\mathcal O_X)$ iff it is short exact in $\\mathit{Mod}(\\mathcal O_X)$ [def-weil-pbc-exact-sequence]. $\\mathit{Coh}(X,\\mathcal I)$ is abelian with termwise addition of morphisms [lem-weil-pbc-coherent-formal-modules-abelian]. The completion functor is a functor [def-weil-pbc-coherent-formal-module] (2), and it is additive: for $u,u':\\mathcal F\\to\\mathcal G$, $(u+u')\\bmod\\mathcal I^n$ and $(u\\bmod\\mathcal I^n)+(u'\\bmod\\mathcal I^n)$ both composed with the epimorphism $\\mathcal F\\to\\mathcal F/\\mathcal I^n\\mathcal F$ give $q^{\\mathcal G}_n\\circ(u+u')$, hence agree, and morphisms of $\\mathit{Coh}(X,\\mathcal I)$ are added termwise. So it remains to show that it carries short exact sequences to short exact sequences; fix $0\\to\\mathcal F'\\xrightarrow{u}\\mathcal F\\xrightarrow{v}\\mathcal F''\\to0$ short exact in $\\mathit{Coh}(\\mathcal O_X)$. Its completion $0\\to\\mathcal F'^\\wedge\\to\\mathcal F^\\wedge\\to\\mathcal F''^\\wedge\\to0$ is a complex ($v^\\wedge u^\\wedge=(vu)^\\wedge=0$).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-abelian-full-subcategory-exact",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 01Y0 (lemma-coherent-abelian-Noetherian) and Modules, Lemma 01BY (5) for Coh(O_X); Lemma 087X (1) for Coh(X, I); the functor (0880) before Lemma 0881"
+   }
+  },
+  {
+   "text": "(Reduction to an affine covering: 'it suffices to check this locally on $X$'.) Since $X$ is locally Noetherian with quasi-compact underlying space, there are finitely many affine opens $U_1,\\dots,U_r$ covering $X$ with $A_j=\\mathcal O_X(U_j)$ Noetherian [pqf-def-locnoeth]. For an open $V\\subseteq X$ and a coherent $\\mathcal F$, $(\\mathcal I^n\\mathcal F)|_V=(\\mathcal I|_V)^n(\\mathcal F|_V)$ by [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (3) (by induction on $n$, applying (3) also to $\\mathcal I\\cdot\\mathcal I^n$), and cokernels of $\\mathcal O_X$-modules commute with restriction to $V$ (sheafification of the sectionwise quotient commutes with restriction) [def-weil-sheaf-of-modules-category]; hence $\\rho_V(\\mathcal F^\\wedge)=(\\mathcal F|_V)^\\wedge$ with the same transition maps and $\\rho_V(u^\\wedge)=(u|_V)^\\wedge$, where $\\rho_V$ is the restriction functor of [lem-weil-pbc-coherent-formal-modules-local-exactness] (1). By [lem-weil-pbc-coherent-formal-modules-local-exactness] (2), applied to the covering $\\{U_j\\}$, the completed sequence is short exact in $\\mathit{Coh}(X,\\mathcal I)$ as soon as, for every $j$, $0\\to(\\mathcal F'|_{U_j})^\\wedge\\to(\\mathcal F|_{U_j})^\\wedge\\to(\\mathcal F''|_{U_j})^\\wedge\\to0$ is short exact in $\\mathit{Coh}(U_j,\\mathcal I|_{U_j})$. Fix $j$ and write $U=U_j$, $A=A_j$, $I=\\mathcal I(U)$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-coherent-formal-modules-local-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0881, first sentence ('It suffices to check this locally on X. Hence we may assume X is affine'), by Lemma 087X (3)"
+   }
+  },
+  {
+   "text": "(Sections over $U$.) By step 1 the sequence is short exact in $\\mathit{Mod}(\\mathcal O_X)$, so $u$ is a kernel of $v$ [lem-weil-pbc-abelian-short-exact-kernel] and $v$ is a cokernel of $u$ [lem-weil-pbc-abelian-exact-epi-cokernel] (a). Kernels in $\\mathit{Mod}(\\mathcal O_X)$ are sectionwise [def-weil-sheaf-of-modules-category], so (comparing the kernel $u$ with the sectionwise kernel of $v$ by the isomorphism of kernels) $u_U:\\mathcal F'(U)\\to\\mathcal F(U)$ is injective with image $\\ker v_U$. Coherent modules are quasi-coherent [pqf-lem-coherent-ft-locnoeth], so by [lem-weil-pbc-quasi-coherent-module-cokernel-image] (3) the cokernel $q:\\mathcal F\\to\\operatorname{Coker}u$ has $q_U$ surjective with kernel $u_U(\\mathcal F'(U))$; $v$ differs from $q$ by an isomorphism $\\operatorname{Coker}u\\cong\\mathcal F''$, so $v_U$ is surjective with kernel $u_U(\\mathcal F'(U))$. Hence with $M'=\\mathcal F'(U)$, $M=\\mathcal F(U)$, $M''=\\mathcal F''(U)$ the sequence $0\\to M'\\xrightarrow{u_U}M\\xrightarrow{v_U}M''\\to0$ of $A$-modules is exact, and $M',M,M''$ are finitely generated $A$-modules, since coherent modules are quasi-coherent of finite type [pqf-lem-coherent-ft-locnoeth] and such a module has finitely generated sections over an affine open [lem-weil-pbc-quasi-coherent-finite-type-affine].",
+   "uses": [
+    "lem-weil-pbc-abelian-short-exact-kernel",
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-weil-sheaf-of-modules-category",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0881 (a coherent module on X = Spec(A) is a finite A-module, Lemma 01XZ); the exactness of sections over an affine open is implicit there"
+   }
+  },
+  {
+   "text": "(The affine description.) Identify $U$ with $\\operatorname{Spec}A$ [def-weil-affine-spectrum]; since $\\mathcal I|_U$ is quasi-coherent, the counit $\\widetilde I\\to\\mathcal I|_U$ is an isomorphism [lem-weil-pbc-affine-tilde-gamma-adjunction] (3), so $\\mathit{Coh}(U,\\mathcal I|_U)$ is the category of [lem-weil-pbc-coherent-formal-modules-affine] for $(A,I)$, and $E:(\\mathcal G_n)\\mapsto\\varprojlim_n\\Gamma(U,\\mathcal G_n)$ is an equivalence of $\\mathit{Coh}(U,\\mathcal I|_U)$ with the category $\\mathrm{Mod}^{fg}_{A^\\wedge}$ of finitely generated $A^\\wedge$-modules, $A^\\wedge$ the $I$-adic completion, with quasi-inverse $G:N\\mapsto((N/I^nN)^\\sim)_n$ [lem-weil-pbc-coherent-formal-modules-affine] (2). By [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (2), $\\Gamma(U,\\mathcal F/\\mathcal I^n\\mathcal F)=M/I^nM$ with the canonical surjections as transition maps and $\\Gamma(U,u\\bmod\\mathcal I^n)=u_U\\bmod I^n$. Hence $E((\\mathcal F|_U)^\\wedge)=\\varprojlim_nM/I^nM=M^\\wedge$ and $E((u|_U)^\\wedge)=(u_U)^\\wedge$, the completions of [lem-weil-pbc-completion-exact-finite-modules] (likewise for $\\mathcal F',\\mathcal F''$, $v$): $E$ carries the restricted completed sequence to $0\\to M'^\\wedge\\to M^\\wedge\\to M''^\\wedge\\to0$. This is the identification of the functor with 'the functor $\\mathrm{Mod}^{fg}_A\\to\\mathrm{Mod}^{fg}_{A^\\wedge}$ which associates to a finite $A$-module $M$ the completion $M^\\wedge$'.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-completion-exact-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0881, second and third sentences, via Lemma 087W (lemma-inverse-systems-affine)"
+   }
+  },
+  {
+   "text": "(Exactness of completion on finite modules.) $A$ is Noetherian and $M',M,M''$ are finitely generated (step 3), so $0\\to M'^\\wedge\\to M^\\wedge\\to M''^\\wedge\\to0$ is an exact sequence of $A$-modules [lem-weil-pbc-completion-exact-finite-modules]; the maps are $A^\\wedge$-linear, so it is an exact sequence of $A^\\wedge$-modules. $A^\\wedge$ is Noetherian [lem-weil-pbc-adic-completion-noetherian], hence $\\mathrm{Mod}^{fg}_{A^\\wedge}$ is abelian and this sequence is a short exact sequence of $\\mathrm{Mod}^{fg}_{A^\\wedge}$ [lem-weil-pbc-finite-modules-noetherian-abelian].",
+   "uses": [
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-finite-modules-noetherian-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0881, last sentence ('Thus the result follows from Algebra, Lemma 00MB'), Algebra Lemma 00MB (2)"
+   }
+  },
+  {
+   "text": "(Back along the equivalence.) $U\\cong\\operatorname{Spec}A$ is a Noetherian scheme, so $\\mathit{Coh}(U,\\mathcal I|_U)$ is abelian [lem-weil-pbc-coherent-formal-modules-abelian]. The quasi-inverse $G$ of step 4 is additive: on morphisms $G(f)=((f\\bmod I^n)^\\sim)_n$, and $f\\mapsto f\\bmod I^n$ and $f\\mapsto\\widetilde f$ are additive ($\\widetilde f$ is determined by $\\widetilde f_U\\circ\\tau=\\tau\\circ f$ [lem-weil-pbc-affine-tilde-gamma-adjunction] (1)); and it is an equivalence between abelian categories. So $G$ carries the short exact sequence of step 5 to a short exact sequence of $\\mathit{Coh}(U,\\mathcal I|_U)$ [lem-weil-pbc-equivalence-injective-resolutions] (2). The natural isomorphism $\\mathrm{id}\\cong G\\circ E$ of [lem-weil-pbc-coherent-formal-modules-affine] (2) gives, by naturality, an isomorphism of complexes from $0\\to(\\mathcal F'|_U)^\\wedge\\to(\\mathcal F|_U)^\\wedge\\to(\\mathcal F''|_U)^\\wedge\\to0$ to $G$ of $0\\to M'^\\wedge\\to M^\\wedge\\to M''^\\wedge\\to0$ (step 4); a complex isomorphic to a short exact sequence is short exact (monomorphisms, epimorphisms, images and kernels are carried along isomorphisms) [def-weil-pbc-exact-sequence]. Hence the restricted completed sequence is short exact in $\\mathit{Coh}(U_j,\\mathcal I|_{U_j})$ for every $j$, and by step 2 the completed sequence is short exact in $\\mathit{Coh}(X,\\mathcal I)$. With step 1, the completion functor is exact.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-equivalence-injective-resolutions",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, proof of Lemma 0881 (the equivalence of Lemma 087W transports exactness; left implicit in the source)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-abelian-full-subcategory-exact",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-coherent-formal-modules-local-exactness",
+  "lem-weil-pbc-abelian-short-exact-kernel",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-modules-noetherian-abelian",
+  "lem-weil-pbc-equivalence-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 0881 (lemma-exact, line 6423), proof; with Lemma 087X (3), Lemma 087W and Algebra, Lemma 00MB (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,7 +161,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "stage1",
   "item": "lem-weil-pbc-grothendieck-existence-projective",
@@ -59,5 +180,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-completion-exact",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks 0881 (tags 0881, 087W, 087X, 00MA, 00MB verified in tags/tags). Six steps: Coh(O_X) abelian with short exact sequences those of Mod(O_X) (new Mathlib leaf: full subcategory closed under kernels, cokernels, sums, Homology 0754 / Abelian/Subcategory.lean) and additivity of the completion functor; reduction to a finite affine covering by 087X (3) (new unsplit node for 087X (2),(3), stated by Stacks without a node in the DAG) with restriction commuting with completion; exactness of sections over an affine open; E of 087W carries the completed sequence to M'^ -> M^ -> M''^; exactness of completion on finite modules over a Noetherian ring (new Mathlib leaf, 00MB (2)/00MA (2): AdicCompletion.map_injective/map_exact/map_surjective) in the abelian category of finite A^-modules (new Mathlib leaf FGModuleCat.instAbelian); back along the additive quasi-inverse G with the equivalence leaf. Statement: 'exact' made explicit (additive, carries short exact sequences to short exact sequences, Homology 010N (4)); stmt_deps gained def-weil-pbc-exact-sequence and the two abelian nodes. Source place corrected: Algebra 05EN is more-algebra-lemma-exact, the cited lemma-completion-flat is 00MB."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps follow Stacks 0881 (087X(3) locality as a new unsplit node, 087W equivalence, 00MB(2) exactness of completion on finite modules as a leaf, back along the additive quasi-inverse). Statement made precise ('exact' = additive and carries short exact sequences to short exact sequences; abelian-ness of Coh(O_X) via a new 0754 leaf). Source corrected (05EN -> 00MB). Tags 0881, 087W, 087X, 00MA, 00MB, 00IK, 0754, 010N verified; Mathlib lines verified and line fields added by L on the three leaves (two of them are compositions of several declarations, noted for stage 3). Clauses of the cited nodes (ideal-times (2),(3); cokernel-image (3); formal-modules-affine (2); equivalence (2); kernel-cokernel-sum (3)) checked."
+ }
 }

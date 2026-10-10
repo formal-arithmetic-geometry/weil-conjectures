@@ -1,0 +1,70 @@
+{
+ "id": "lem-weil-pbc-finite-modules-noetherian-abelian",
+ "kind": "statement",
+ "title": "Finite modules over a Noetherian ring form an abelian category",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $\\mathrm{Mod}^{fg}_R$ the category of finitely generated $R$-modules [def-weil-finitely-generated-module] and $R$-linear maps (with the pointwise addition of maps). Then $\\mathrm{Mod}^{fg}_R$ is an abelian category [def-sp-abelian], and a sequence $0\\to K\\xrightarrow{f}N\\xrightarrow{g}M\\to0$ of $\\mathrm{Mod}^{fg}_R$ is a short exact sequence of $\\mathrm{Mod}^{fg}_R$ [def-weil-pbc-exact-sequence] if and only if $f$ is injective, $\\operatorname{im}f=\\ker g$ and $g$ is surjective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00IK (lemma-Noetherian-basic: submodules of finite modules over a Noetherian ring are finite), with Homology, Lemma 0754 (homology.tex, lemma-characterize-weak-serre-subcategory: the subcategory is abelian with exact inclusion); the category Mod^fg_A is the one used in the proof of Cohomology of Schemes, Lemma 0881 (lemma-exact)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-sp-abelian",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category of finitely generated modules over a Noetherian ring is abelian",
+   "results": "FGModuleCat.instAbelian (Mathlib.Algebra.Category.FGModuleCat.Abelian), ModuleCat.abelian, instIsGrothendieckAbelianModuleCat",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian (FGModuleCat _)",
+   "results": "FGModuleCat.instAbelian : {k : Type u} [Ring k] [IsNoetherianRing k] : Abelian (FGModuleCat k)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PreservesFiniteLimits\\|PreservesFiniteColimits\\|Noetherian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/FGModuleCat/; grep -n 'moduleCat_exact_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean",
+   "results": "FGModuleCat/Abelian.lean:35 instAbelian; Limits.lean:77 PreservesFiniteLimits (forget₂ (FGModuleCat k) (ModuleCat k)) (with [IsNoetherianRing k], :45); Colimits.lean:69 PreservesFiniteColimits forget₂; ShortComplex/ModuleCat.lean:78 ShortExact.moduleCat_exact_iff_function_exact, :68/:72 injective_f/surjective_g",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "FGModuleCat.instAbelian, CategoryTheory.ShortComplex.exact_map_iff_of_faithful, CategoryTheory.ShortComplex.ShortExact.moduleCat_exact_iff_function_exact",
+  "file": "Mathlib/Algebra/Category/FGModuleCat/Abelian.lean",
+  "how": "a few Mathlib declarations, one per clause: Mod^fg_R is FGModuleCat R; abelian: FGModuleCat.instAbelian (Abelian.lean:35, [Ring k] [IsNoetherianRing k]); the forgetful functor forget₂ (FGModuleCat R) (ModuleCat R) is fully faithful and additive (FGModuleCat/Basic.lean:113, :166) and preserves finite limits and colimits (Limits.lean:77, Colimits.lean:69), so a sequence is short exact in FGModuleCat iff its image is short exact in ModuleCat (ShortComplex.ShortExact.map_of_exact, ShortExact.lean:107; ShortComplex.exact_map_iff_of_faithful, Exact.lean:235; monos and epis reflected by the faithful functor, Functor/EpiMono.lean:158); in ModuleCat R short exactness is f injective, Function.Exact f g, g surjective (ShortExact.moduleCat_injective_f, moduleCat_surjective_g, moduleCat_exact_iff_function_exact, ShortComplex/ModuleCat.lean:68, :72, :78; ModuleCat.mono_iff_injective, epi_iff_surjective for the converse).",
+  "line": 35
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-completion-exact",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field added (FGModuleCat.instAbelian Abelian.lean:35; moduleCat_exact_iff_function_exact ModuleCat.lean:78 verified with sed). The short-exact-iff clause composes the forgetful functor's preservation of finite limits/colimits with exact_map_iff_of_faithful and the ModuleCat characterisation; stage 3 should treat its Lean proof as that composition."
+}
