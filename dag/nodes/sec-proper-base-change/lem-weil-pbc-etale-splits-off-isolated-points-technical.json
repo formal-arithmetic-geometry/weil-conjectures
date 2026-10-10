@@ -17,9 +17,91 @@
   "def-pc-fibre-product",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $n=0$, take $U=S$, $u=s$, $\\varphi=\\mathrm{id}_S$, and $W=X$; the identity is etale [def-weil-etale-morphism], its residue-field map is the identity [def-weil-residue-field], and all remaining assertions are vacuous. Assume henceforth $n>0$. Apply [lem-weil-pbc-etale-local-finite-multiple-points-elementary] (Stacks 02LL) to $f$, $s$, and $x_1,\\dots,x_n$. It gives an elementary etale neighbourhood $\\varphi:(U,u)\\to(S,s)$ and open subschemes $V_i\\subseteq X_U=U\\times_SX$ such that $V_i\\to U$ is finite, its fibre over $u$ is the singleton $\\{v_i\\}$, $p(v_i)=x_i$, and $\\kappa(x_i)\\to\\kappa(v_i)$ is an isomorphism.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-residue-field",
+    "lem-weil-pbc-etale-local-finite-multiple-points-elementary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma Tag 02LN, lines 12116-12117; the vacuous case n=0 is written out"
+   }
+  },
+  {
+   "text": "The projection $q:X_U\\to U$ is separated because it is the base change of the separated morphism $f$ [lem-weil-pbc-separated-base-change]. Each $V_i\\to U$ is finite, hence proper [lem-weil-pbc-finite-morphism-permanence] (c), and the inclusion $j_i:V_i\\hookrightarrow X_U$ satisfies $q\\circ j_i:V_i\\to U$ proper with $q$ separated. Thus $j_i$ is proper by [lem-weil-pbc-proper-over-separated]. Since $j_i$ is also an open immersion, hence an immersion [def-weil-open-immersion], it is a closed immersion by [lem-weil-pbc-proper-immersion-closed]. Consequently every $V_i$ is both open and closed in $X_U$.",
+   "uses": [
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-proper-over-separated",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma Tag 02LN, lines 12117-12123; Schemes 01KU, Morphisms 01WN and 01W6"
+   }
+  },
+  {
+   "text": "For $i\\ne j$, the intersection $V_i\\cap V_j$ is closed in $V_i$ by step 2. The finite morphism $V_i\\to U$ is proper [lem-weil-pbc-finite-morphism-permanence] (c), hence universally closed [def-weil-proper-morphism], so its image $C_{ij}\\subseteq U$ is closed. This image does not contain $u$: otherwise a point of $V_i\\cap V_j$ over $u$ would equal both unique fibre points $v_i$ and $v_j$; applying $p$ would give $x_i=x_j$, contrary to pairwise distinctness. Let $U'=U\\setminus\\bigcup_{i<j}C_{ij}$, an open neighbourhood of $u$, and replace $U$ by $U'$. The restricted opens $V_i'=V_i\\times_UU'$ retain finiteness, their unique points over $u$, their images $x_i$, and their residue-field isomorphisms by [lem-weil-pbc-elementary-etale-finite-piece-persistence]; the restricted map $U'\\to S$ remains etale because an open immersion is etale and etale morphisms compose [lem-weil-pbc-etale-composition-cancellation]. By construction $V_i'\\cap V_j'=\\emptyset$ for $i\\ne j$. Rename $U',V_i'$ as $U,V_i$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-elementary-etale-finite-piece-persistence",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma Tag 02LN, lines 12123-12130"
+   }
+  },
+  {
+   "text": "Put $V=V_1\\cup\\cdots\\cup V_n$ and $W=X_U\\setminus V$. Since the $V_i$ are pairwise disjoint and each is open and closed, $W,V_1,\\dots,V_n$ are pairwise disjoint open and closed subschemes covering $X_U$. Properties (i)--(iii) are those retained in step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma Tag 02LN, line 12130: 'This gives the decomposition'"
+   }
+  },
+  {
+   "text": "It remains to verify (iv), which is implicit in the final sentence of Stacks. Suppose $w\\in W$ satisfies $q(w)=u$ and $p(w)=x_i$. By [lem-weil-pbc-fibre-product-points], points of $X_U=X\\times_SU$ mapping to $(x_i,u)$ correspond to primes of $\\kappa(x_i)\\otimes_{\\kappa(s)}\\kappa(u)$. Since the elementary neighbourhood gives an isomorphism $\\kappa(s)\\to\\kappa(u)$, this tensor product is isomorphic to the field $\\kappa(x_i)$ and has exactly one prime. Both $w$ and $v_i$ map to $(x_i,u)$, hence $w=v_i$. But $v_i\\in V_i$ whereas $w\\in W$, contradicting disjointness. Therefore no such $w$ exists.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-points",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Lemma Tag 02LN, conclusion at lines 12111-12114; uniqueness written out using Schemes Lemma Tag 01JT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-residue-field",
+  "lem-weil-pbc-etale-local-finite-multiple-points-elementary",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-proper-over-separated",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-proper-immersion-closed",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-elementary-etale-finite-piece-persistence",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-fibre-product-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma Tag 02LN, proof lines 12116-12131; the n=0 case and the point-uniqueness verification of clause (iv) are written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,7 +145,7 @@
   "file": "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
   "how": "lines 47-53 read: one point only, an etale U->S whose range contains s (not an elementary neighbourhood), V finite over U with a point over x; weaker than this node (its own comment says 'weaker than stacks#02LN')"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -83,5 +165,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-etale-splits-off-isolated-points-technical",
+  "worker": "stage1",
+  "summary": "Checked the statement hypothesis by hypothesis against Stacks 02LN and kept it unchanged. Split its proof into five steps following 02LN: apply the elementary multi-point theorem 02LL; prove each finite open piece is closed using separated base change, finite implies proper, and proper over a separated target; remove the finitely many closed images of pairwise intersections and restrict all pieces; take the complementary open-and-closed W; and write out the source's implicit verification that W has no point over u mapping to any x_i using the fibre-product point description and kappa(s)=kappa(u). The n=0 case is explicit. No new nodes were needed; the item's existing LeanSearch, LeanFinder/Loogle, grep, and local-search records were checked and still show only Mathlib's weaker one-point theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the five steps (02LN via 02LL): finite pieces closed by properness over a separated base, pairwise intersections removed from the base, clause (iv) via fibre-product points with kappa(s) = kappa(u)."
+ }
 }
