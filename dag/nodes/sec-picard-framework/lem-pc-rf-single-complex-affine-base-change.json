@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Affine case of the single-complex derived base-change criterion",
- "statement": "Let X=Spec(A), S=Spec(R), S'=Spec(R') and X'=Spec(A') be a cartesian square of affine schemes [def-pc-scheme, def-pc-base-change], with f:X\\to S and g:S'\\to S, and let K correspond to a complex M^\\bullet of A-modules and K' to a complex N^\\bullet of A'-modules in the quasi-coherent derived categories [def-pc-derived-category]. For a prime x' of A', let x be its image in A and let s' and s be their images in R' and R. If for every such x' and every i the canonical stalk map H^i(M^\\bullet_x\\otimes^L_{R_s}R'_{s'})\\otimes_{A_x\\otimes_{R_s}R'_{s'}}A'_{x'}\\to H^i(N^\\bullet_{x'}) is an isomorphism, then the induced derived pullback/direct-image comparison map [def-pc-derived-pullback, def-pc-derived-direct-image] M^\\bullet\\otimes^L_R R'\\to M^\\bullet\\otimes^L_A A'\\to N^\\bullet is an isomorphism in D(R').",
+ "statement": "Let X=Spec(A), S=Spec(R), S'=Spec(R') and X'=Spec(A') be a cartesian square of affine schemes [def-pc-scheme, def-pc-base-change], with f:X\\to S and g:S'\\to S, and let K correspond to a complex M^\\bullet of A-modules and K' to a complex N^\\bullet of A'-modules in the quasi-coherent derived categories [def-pc-derived-category]. Let L(g')^*K\\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}), equivalently a morphism M^\\bullet\\otimes_A^{\\mathbf L}A'\\to N^\\bullet in D(A') via [lem-pc-affine-derived-pullback-tensor-tilde]. For a prime x' of A', let x be its image in A and let s' and s be their images in R' and R. If for every such x' and every i the canonical stalk map H^i(K_x\\otimes^L_{\\mathcal O_{S,s}}\\mathcal O_{S',s'})\\otimes_{\\mathcal O_{X,x}\\otimes_{\\mathcal O_{S,s}}\\mathcal O_{S',s'}}\\mathcal O_{X',x'}\\to H^i(K'_{x'}) is an isomorphism (equivalently, under the affine identifications, H^i(M^\\bullet_x\\otimes^L_{R_s}R'_{s'})\\otimes_{A_x\\otimes_{R_s}R'_{s'}}A'_{x'}\\to H^i(N^\\bullet_{x'})), then the induced derived pullback/direct-image comparison map [def-pc-derived-pullback, def-pc-derived-direct-image] M^\\bullet\\otimes^L_R R'\\to M^\\bullet\\otimes^L_A A'\\to N^\\bullet is an isomorphism in D(R').",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0DJ8, proof after affine reduction in Lemma single-complex-base-change-condition; Tag 0DJ9 affine case"
@@ -23,11 +23,79 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "lem-pc-affine-derived-pullback-tensor-tilde"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the affine cartesian square as S=Spec(R), X=Spec(A), S'=Spec(R') and X'=Spec(A') with A'=A\\otimes_R R'. Under the affine quasi-coherent derived equivalence, K and K' correspond to complexes M^\\bullet of A-modules and N^\\bullet of A'-modules, and the derived direct images and pullbacks in the comparison map correspond to derived module tensors. Thus the comparison is represented by the composite M^\\bullet\\otimes_R^\\mathbf L R'\\to M^\\bullet\\otimes_A^\\mathbf L A'\\to N^\\bullet in D(R').",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "lem-pc-affine-derived-base-change-comparison-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ8, proof after affine reduction: affine identifications and the displayed module comparison"
+   }
+  },
+  {
+   "text": "The given morphism L(g')^*K\\to K' corresponds to a morphism M^\\bullet\\otimes_A^{\\mathbf L}A'\\to N^\\bullet in D(A'), so its maps on cohomology are A'-linear. Composing it with the comparison morphism c:M^\\bullet\\otimes_R^{\\mathbf L}R'\\to M^\\bullet\\otimes_A^{\\mathbf L}A' [lem-pc-affine-derived-base-change-comparison-map], whose cohomology maps H^i(c) are A'-linear by that statement, and taking cohomology gives an A'-linear map H^i(M^\\bullet\\otimes_R^\\mathbf L R')\\to H^i(N^\\bullet) for every i.",
+   "uses": [
+    "def-pc-derived-category",
+    "lem-pc-affine-derived-base-change-comparison-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ8 affine proof: 'Equivalently, it is that for all i ...'"
+   }
+  },
+  {
+   "text": "At a compatible prime x'=\\mathfrak q' of A', with images x=\\mathfrak q of A and s'=\\mathfrak p' of R', s=\\mathfrak p of R, localize the A'-linear map of Step 2 at \\mathfrak q' (apply -\\otimes_{A'}A'_{\\mathfrak q'}). For the first arrow, the localization identities and compatibility of [lem-pc-affine-derived-base-change-comparison-map] identify H^i(c)\\otimes_{A'}A'_{\\mathfrak q'} with H^i(M^\\bullet_{\\mathfrak q}\\otimes^\\mathbf L_{R_{\\mathfrak p}}R'_{\\mathfrak p'})\\otimes_{A_{\\mathfrak q}\\otimes_{R_{\\mathfrak p}}R'_{\\mathfrak p'}}A'_{\\mathfrak q'}\\to H^i(M^\\bullet_{\\mathfrak q}\\otimes^\\mathbf L_{A_{\\mathfrak q}}A'_{\\mathfrak q'}); no model of M^\\bullet\\otimes_R^{\\mathbf L}R' as a complex of A'-modules is used. For the second arrow, both P^\\bullet\\otimes_A A' (the model of that statement) and N^\\bullet are complexes of A'-modules, and localization at A'\\setminus\\mathfrak q' is exact [lem-weil-pbc-localization-module-exact], so it commutes with kernels and images of differentials and preserves quasi-isomorphisms; hence H^i(C)_{\\mathfrak q'}\\cong H^i(C_{\\mathfrak q'}) for C=P^\\bullet\\otimes_A A',N^\\bullet, and the localized second arrow is H^i of the localization M^\\bullet_{\\mathfrak q}\\otimes^\\mathbf L_{A_{\\mathfrak q}}A'_{\\mathfrak q'}\\to N^\\bullet_{\\mathfrak q'} of the given morphism. Under the affine identifications of stalks with localizations [lem-weil-pbc-spec-tilde-stalk-localization] and of derived pullback with derived tensor [lem-pc-affine-derived-pullback-tensor-tilde], K_x=M^\\bullet_{\\mathfrak q}, K'_{x'}=N^\\bullet_{\\mathfrak q'}, \\mathcal O_{S,s}=R_{\\mathfrak p}, \\mathcal O_{S',s'}=R'_{\\mathfrak p'}, \\mathcal O_{X,x}=A_{\\mathfrak q}, \\mathcal O_{X',x'}=A'_{\\mathfrak q'}, so the localized map is the canonical stalk map of the hypothesis.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-derived-base-change-comparison-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ8 affine proof: localization identity immediately before 'we see that these two conditions are equivalent'"
+   }
+  },
+  {
+   "text": "The stalk hypothesis therefore says that the map H^i(M^\\bullet\\otimes_R^\\mathbf L R')\\to H^i(N^\\bullet) is bijective after localization at every maximal ideal of A' (maximal ideals are primes and are included among the compatible primes). By the module localization criterion [lem-weil-pbc-linear-map-bijective-at-maximal-localizations], this cohomology map is bijective for every i. Hence the displayed map of complexes is a quasi-isomorphism, so the comparison morphism in D(R') is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ8 affine proof: conclusion via Algebra, Lemma 00HN and cohomology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "def-weil-abstract-derived-category",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-derived-base-change-comparison-map",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-weil-pbc-linear-map-bijective-at-maximal-localizations",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ8, proof after affine reduction in Lemma single-complex-base-change-condition"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,12 +120,61 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-rf-single-complex-qcqs-induction",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-rf-single-complex-affine-base-change",
+  "worker": "stage1",
+  "summary": "Expanded the affine Tag 0DJ8 argument into four proof steps: affine derived/module translation, cohomology map, identification of its localizations with the stalk maps, and the maximal-localization criterion yielding a quasi-isomorphism. Added one statement-only support node for the comparison map and its localization; the final criterion is the existing Mathlib-backed node lem-weil-pbc-linear-map-bijective-at-maximal-localizations.",
+  "blueprint": "Realizes the affine case clause in the ancestor lem-pc-rf-perfect-base-change proof: 'affine case, where the stalkwise condition is equivalent to the derived module base-change isomorphism'.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "generic affine derived equivalence used to translate K and K' to module complexes"
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "generic preservation of quasi-coherent derived direct images needed for the affine equivalence on the bases"
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "generic affine computation of derived pullback/tensor and restriction"
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "generic identification of affine tilde stalks with module localizations"
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "generic exactness of module localization, used to commute localization with cohomology"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-sab3138",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sab3138 (reviewer sub-agent of L); spot-checked: Return points 1-2 checked: statement now carries L(g')^*K->K' via lem-pc-affine-derived-pullback-tensor-tilde(2), stalk map as in consumer lem-pc-rf-single-complex-qcqs-induction Step 2 (same hypotheses, C4 ok), E7 named; comparison-map vs More on Algebra comparison-map and 0DJ8 proof; no duplicate comparison/base-change node in sec-picard-framework; tool_uses all generic. FIX more, RETURN less: (1) C4/B: new node lem-pc-affine-derived-base-change-comparison-map placed the comparison in D(A'), but M(x)^L_R R' is not an object of D(A'); restated as the More-on-Algebra map in D(R') via K-flat models E->P [def-pc-kflat-complex], A'-linear on cohomology, with the 0DJ8 localization identities and the compatibility of the localized map; (2) C1/C4: Step 3 again localized 'K-flat module models' termwise at A'\\q' (no A'-module model of M(x)^L_R R' exists); rewritten to use the node's cohomology identity for the first arrow and exact localization only on the A'-complexes P(x)_A A' and N; Step 2 cites the node's A'-linearity; (3) B3: item stmt_deps gains lem-pc-affine-derived-pullback-tensor-tilde, cited in the statement. Second reading by F1 missed (1)-(2).; 2 file(s) fixed by the reviewer"
+ }
 }
