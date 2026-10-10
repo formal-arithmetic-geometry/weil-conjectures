@@ -761,3 +761,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:41 L: reviewed lem-weil-pbc-regular-sequence-powers (6 steps, +0F1T node): accepted.
 - 01:42 L: reviewed lem-weil-pbc-ringed-space-module-exactness-local-lifting (5 steps, +1 abelian leaf): accepted; lem-weil-pbc-separable-purely-inseparable-linear-disjoint: Mathlib leaf (Tower.lean:99), source tags corrected.
 - 01:42 L: reviewed lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra (3 steps, +07ND node): accepted.
+- 01:44 L: reviewed lem-weil-pbc-separated-affine-cover-criterion (5 steps, 0 new): accepted. Delivery watch fired: G1 etale-ring-map-prescribed-residue-field re-pushed (62a9ca845), new G1 lft-over-field-isolated-point-residue-finite (1d0ab7349), F1 local-gluing pushed again (c3325cad8).
