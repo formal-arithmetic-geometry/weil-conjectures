@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-etale-ring-map-prescribed-residue-field",
  "kind": "statement",
  "title": "An etale ring map realizes a prescribed finite separable residue field extension at a prime",
- "statement": "Let $R$ be a commutative ring, $\\mathfrak p\\subset R$ a prime ideal with residue field $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], and let $L$ be a field extension of $\\kappa(\\mathfrak p)$ [def-pc-field-extension], with structure map $\\iota:\\kappa(\\mathfrak p)\\to L$, which is finite ($\\dim_{\\kappa(\\mathfrak p)}L<\\infty$) and separable algebraic [def-weil-pbc-separable-algebraic-extension]. Then there are a homomorphism of commutative rings $\\psi:R\\to R'$ such that the induced morphism $\\operatorname{Spec}\\psi:\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum] is etale [def-weil-etale-morphism] (equivalently, $\\psi$ is an etale ring map in the sense of Stacks, Algebra, Definition 00U1), a prime ideal $\\mathfrak p'\\subset R'$ with $\\psi^{-1}(\\mathfrak p')=\\mathfrak p$, and a field isomorphism $\\lambda:\\kappa(\\mathfrak p')\\to L$ such that $\\lambda\\circ\\kappa(\\psi)=\\iota$, where $\\kappa(\\psi):\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ is the field homomorphism induced by $\\psi$ ($r/t\\bmod\\mathfrak pR_{\\mathfrak p}\\mapsto\\psi(r)/\\psi(t)\\bmod\\mathfrak p'R'_{\\mathfrak p'}$).",
+ "statement": "Let $R$ be a commutative ring, $\\mathfrak p\\subset R$ a prime ideal with residue field $\\kappa(\\mathfrak p)=R_{\\mathfrak p}/\\mathfrak pR_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], and let $L$ be a field extension of $\\kappa(\\mathfrak p)$ [def-pc-field-extension], with structure map $\\iota:\\kappa(\\mathfrak p)\\to L$, which is finite ($\\dim_{\\kappa(\\mathfrak p)}L<\\infty$) and separable algebraic [def-weil-pbc-separable-algebraic-extension]. Then there are a homomorphism of commutative rings $\\psi:R\\to R'$ such that the induced morphism $\\operatorname{Spec}\\psi:\\operatorname{Spec}R'\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum] is etale [def-weil-etale-morphism] (equivalently, $\\psi$ is an etale ring map in the sense of Stacks, Algebra, Definition 00U1 [lem-weil-pbc-etale-ring-map-iff-etale-affine]), a prime ideal $\\mathfrak p'\\subset R'$ with $\\psi^{-1}(\\mathfrak p')=\\mathfrak p$, and a field isomorphism $\\lambda:\\kappa(\\mathfrak p')\\to L$ such that $\\lambda\\circ\\kappa(\\psi)=\\iota$, where $\\kappa(\\psi):\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak p')$ is the field homomorphism induced by $\\psi$ ($r/t\\bmod\\mathfrak pR_{\\mathfrak p}\\mapsto\\psi(r)/\\psi(t)\\bmod\\mathfrak p'R'_{\\mathfrak p'}$).",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma 00UD (algebra-lemma-make-etale-map-prescribed-residue-field, line 39810), proof lines 39819-39845 (primitive element, lift of the minimal polynomial after scaling by c not in p, standard etale algebra R[x,1/f']/(f) of Definition 00UB, Lemma 00UC(1))"
@@ -12,11 +12,54 @@
   "def-pc-field-extension",
   "def-weil-pbc-separable-algebraic-extension",
   "def-weil-affine-spectrum",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the finite separable primitive-element theorem [lem-weil-pbc-finite-separable-extension-primitive-element], choose $\\alpha\\in L$ with $L=\\kappa(\\mathfrak p)(\\alpha)$, and let $\\overline f$ be its monic minimal polynomial. The minimal polynomial is separable by [def-pc-separable-polynomial], so it is coprime to $\\overline f'$; evaluating a Bezout identity at the root $\\alpha$ shows that $\\overline f'(\\alpha)$ is a unit in the field $L$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the denominator-clearing lift [lem-weil-pbc-etale-residue-polynomial-lift] to $R$, $\\mathfrak p$, $L$, and $\\alpha$. It gives $c\\notin\\mathfrak p$ and a monic $f\\in R[T]$ whose reduction is the minimal polynomial of the image of $c\\alpha$ over $\\kappa(\\mathfrak p)$; replacing $\\alpha$ by $c\\alpha$ preserves $L=\\kappa(\\mathfrak p)(\\alpha)$ and the preceding derivative condition.",
+   "uses": [
+    "lem-weil-pbc-etale-residue-polynomial-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set $A=R[T,1/f']/(f)$. The standard-etale node [lem-weil-pbc-standard-etale-monic-derivative] makes $A$ etale over $R$. Sending $T$ to $\\alpha$ and $1/f'$ to the inverse of $f'(\\alpha)$ defines an $R$-algebra map $\\theta:A\\to L$.",
+   "uses": [
+    "lem-weil-pbc-standard-etale-monic-derivative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let $\\mathfrak p'=\\ker(\\theta)$. Since $L$ is a field, $\\mathfrak p'$ is prime. Put $C=A\\otimes_R\\kappa(\\mathfrak p)$; reducing modulo $\\mathfrak p$ identifies $C$ with $\\kappa(\\mathfrak p)[T,1/\\overline f']/ (\\overline f)$, and evaluation at $\\alpha$ identifies this ring with $L$ because $\\overline f$ is the minimal polynomial and $\\overline f'(\\alpha)$ is a unit. Let $\\mathfrak Q$ be the kernel of this evaluation map. By [lem-weil-pbc-fibre-ring-primes-residue-fields], $\\mathfrak Q$ corresponds to $\\mathfrak p'$: its contraction to $R$ is $\\mathfrak p$ and the fibre-ring kernel is the prescribed prime. By [lem-weil-pbc-fibre-ring-residue-field-iso], $\\kappa(\\mathfrak Q)\\cong\\kappa(\\mathfrak p')$; the evaluation isomorphism $C/\\mathfrak Q\\cong L$ therefore identifies $\\kappa(\\mathfrak p')$ with $L$, compatibly with $\\iota$ (the compatibility on the base field follows from the tensor-factor map). Taking $R'=A$ and $\\psi:R\\to A$ gives the claim.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "lem-weil-pbc-fibre-ring-residue-field-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "lem-weil-pbc-etale-residue-polynomial-lift",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "def-pc-separable-polynomial",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-fibre-ring-residue-field-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00UD (algebra-lemma-make-etale-map-prescribed-residue-field), proof lines 39819-39845"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,7 +91,8 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
+ "split_report": "Split the proof into the public primitive-element theorem, the denominator-clearing monic lift used in Tag 00UD, the existing standard-etale construction, and the explicit kernel/residue-field argument. The new lift node is statement-only; the standard-etale node is an existing reviewed Mathlib leaf.",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,5 +112,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: second push: primitive element (Mathlib leaf Field.exists_primitive_element PrimitiveElement.lean:209, verified by L), denominator-clearing lift as a new unsplit node, standard etale A = R[T,1/f']/(f), kernel of A -> L is the prime p' with p' cap R = p and kappa(p') = L via the fibre ring C = A (x) kappa(p) = L (so the prime Q of the text is 0) and the fibre-ring correspondence nodes. Correct."
+ }
 }
