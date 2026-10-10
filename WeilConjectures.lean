@@ -305,6 +305,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.Lower
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PAdicAlgCl.UpperLowerStar.Defs
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
+public import WeilConjectures.TateTwist.ProEtale
+public import WeilConjectures.TateTwist.RootsOfUnity
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.WeilObject.Defs
 public import WeilConjectures.ZetaFunction
