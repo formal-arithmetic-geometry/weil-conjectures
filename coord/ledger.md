@@ -2117,3 +2117,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:29 L: merged deliver/K1/lem-weil-pbc-site-restriction-injectives (reviewer FIX; first push; new nodes: 3)
 - 17:30 L: merged deliver/J1/lem-sc-p1-ext-pushout-postcompose (reviewer FIX; first push; new nodes: 1)
 - 17:30 L: returned deliver/K1/lem-sc-sheaf-ext-coherent (reviewer RETURN: 1. D1/D2 (relabelling): the new node lem-sc-derived-internal-hom-coherent is the item itself with the definition def-wei)
+- 17:30 L: merged deliver/H1/lem-weil-pbc-etale-geometric-fibre-inverse-image-constant (reviewer FIX; first push; new nodes: 1)

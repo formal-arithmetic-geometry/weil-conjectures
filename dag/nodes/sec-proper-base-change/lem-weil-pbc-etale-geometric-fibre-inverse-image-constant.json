@@ -30,9 +30,68 @@
   "lem-weil-pbc-sets-etale-inverse-image-composition-units",
   "def-weil-pbc-etale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $G=\\bar s^{-1}F$, a sheaf of sets on $(\\operatorname{Spec}\\Omega)_{\\Et}$. By [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant], the canonical map from the constant sheaf with value $\\Gamma(\\operatorname{Spec}\\Omega,G)$ to $G$ is an isomorphism, naturally in $G$.",
+   "uses": [
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Remark 59.23.2 (Tag 03P5), applied to the sheaf on Spec Omega"
+   }
+  },
+  {
+   "text": "The identity geometric point of Spec Omega gives, by [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant], a canonical identification $\\Gamma(\\operatorname{Spec}\\Omega,G)\\cong G_{\\mathrm{id}}$. The set-valued inverse-image stalk comparison [lem-weil-pbc-sets-etale-inverse-image-stalk-germ], applied to $\\bar s: \\operatorname{Spec}\\Omega\\to S$, identifies $G_{\\mathrm{id}}$ with $F_{\\bar s}$ and sends the germ of every pulled-back section to the corresponding germ of the original section. Therefore the isomorphism of Step 1 is canonically an isomorphism with the constant sheaf of value $F_{\\bar s}$.",
+   "uses": [
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 59.39.3 (Tag 0A3H), final paragraph, using Lemma 59.39.1 (Tag 03Q1) for the stalk comparison"
+   }
+  },
+  {
+   "text": "Put $E=F_{\\bar s}$ and let $\\alpha:\\underline E_{\\operatorname{Spec}\\Omega}\\xrightarrow{\\sim}G$ be the isomorphism of Steps 1 and 2. By [lem-weil-pbc-sets-etale-inverse-image-composition-units] there is a canonical isomorphism $c_{\\bar s,h,F}:h^{-1}G=h^{-1}\\bar s^{-1}F\\xrightarrow{\\sim}(\\bar s\\circ h)^{-1}F$ on $U_{\\Et}$. By [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf] applied to $h:U\\to\\operatorname{Spec}\\Omega$ and the set $E$, there is a canonical isomorphism $\\gamma_h:h^{-1}\\underline E_{\\operatorname{Spec}\\Omega}\\xrightarrow{\\sim}\\underline E_U$. Hence $\\gamma_h\\circ h^{-1}(\\alpha)^{-1}\\circ c_{\\bar s,h,F}^{-1}:(\\bar s\\circ h)^{-1}F\\xrightarrow{\\sim}\\underline E_U$ is the required isomorphism with the constant sheaf on $U_{\\Et}$ with value $F_{\\bar s}$.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 59.39.3 (Tag 0A3H), final paragraph: 'since F|_{T_sbar} is the pullback of F|_sbar it is a constant sheaf with value F_sbar'"
+   }
+  },
+  {
+   "text": "Naturality. In $F$: $\\alpha$ is natural in $F$ by the naturality clause of [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant] and the uniqueness characterization of the germ comparison in [lem-weil-pbc-sets-etale-inverse-image-stalk-germ]; $c_{\\bar s,h,F}$ is natural in $F$ by [lem-weil-pbc-sets-etale-inverse-image-composition-units]. In pullback along an $\\Omega$-morphism $v:V\\to U$: the composition isomorphisms satisfy associativity (2) of [lem-weil-pbc-sets-etale-inverse-image-composition-units], and $\\gamma_{h\\circ v}$ agrees with $\\gamma_v\\circ v^{-1}(\\gamma_h)$ composed with $c_{h,v}$, since both send $(h\\circ v)^*\\eta(e)$ to $\\eta_V(e)$ (by (1) and (0) of [lem-weil-pbc-sets-etale-inverse-image-composition-units]) and such a morphism is unique by [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf]. Naturality in $U$ is the case of pullback along $\\Omega$-morphisms.",
+   "uses": [
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 59.39.3 (Tag 0A3H), final paragraph and functoriality of inverse image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 59.39.3 (Tag 0A3H), final paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,10 +116,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-geometric-fibre-constant-sections",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+  "worker": "stage1",
+  "summary": "Split the geometric-fibre inverse-image assertion into the algebraically closed-field etale-site constancy statement, the stalk comparison for the inverse image at the identity geometric point, and the naturality check under further pullback. The new intermediate statement is recorded as unsplit after searches found no Mathlib theorem; the existing set-valued stalk-germ node supplies the geometric-stalk identification.",
+  "blueprint": "The three steps realize the blueprint proof paragraph beginning 'The base Y_(ybar) is strictly henselian local', specifically the comparison of the pullback sheaf on the geometric fibre with the constant sheaf of its geometric stalk.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gfc1730",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gfc1730 (reviewer sub-agent of L); spot-checked: No cycle: item no longer cites lem-weil-pbc-etale-geometric-fibre-constant-sections; new node (Spec of alg. closed field: every etale sheaf constant, stalk at id = global sections) is true, not a duplicate of the 03P5/0A3H nodes listed, not elementary. FIX more, RETURN less: C1 - the proof only treated G=sbar^{-1}F on Spec Omega and never passed to U; added step 3 using composition-units c_{sbar,h,F} and existing lem-weil-pbc-sets-etale-inverse-image-constant-sheaf (gamma_h: h^{-1} const = const), and rewrote the naturality step to use its uniqueness clause and associativity; proof_deps updated.; 1 file(s) fixed by the reviewer"
  }
 }
