@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.Frobenius
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
@@ -47,6 +48,9 @@ graph correspondences `c_m = (id, Φ_m)` and the global Frobenius operators.
 - `AlgebraicGeometry.ProEtale.isFinite_relativeFrobenius`,
   `AlgebraicGeometry.ProEtale.isUniversalHomeomorphism_relativeFrobenius`: the relative
   Frobenius is a finite universal homeomorphism.
+- `AlgebraicGeometry.ProEtale.isFinite_and_isUniversalHomeomorphism_relativeFrobenius`: the
+  relative Frobenius for the base changes of the `#k`-power Frobenius of models locally of
+  finite type over a finite field `k` is a finite universal homeomorphism.
 - `AlgebraicGeometry.ProEtale.isEquivalence_leftDerivedUpperStar`,
   `AlgebraicGeometry.ProEtale.ctf_leftDerivedUpperStar_obj_iff`: topological invariance of
   the derived pro-étale category along a finite universal homeomorphism.
@@ -67,8 +71,12 @@ coefficient morphism* that the coefficient continuation of the argument needs.
 `isFinite_relativeFrobenius` and `isUniversalHomeomorphism_relativeFrobenius` follow from
 `r_m ≫ p_m = Φ_X` by the cancellation lemmas `AlgebraicGeometry.IsFinite.of_comp` and
 `AlgebraicGeometry.IsUniversalHomeomorphism.of_comp`, since `p_m` is a base change of `Φ_Y`.
-That the Frobenius morphisms themselves are finite universal homeomorphisms (the absolute
-Frobenius step of the blueprint proof) enters as hypotheses, as explained above.
+These two theorems assume that `Φ_X` and `Φ_Y` are finite universal homeomorphisms. For the
+base changes of the `#k`-power Frobenius of models locally of finite type over `k`, these
+hypotheses hold by `AlgebraicGeometry.Scheme.Hom.IsFrobenius.isFinite_of_isPullback` and
+`AlgebraicGeometry.Scheme.Hom.IsFrobenius.isUniversalHomeomorphism_of_isPullback` (the absolute
+Frobenius step of the blueprint proof), which gives
+`isFinite_and_isUniversalHomeomorphism_relativeFrobenius`.
 
 `isEquivalence_leftDerivedUpperStar` is stated on the whole unbounded `D(Y, A) ⥤ D(X, A)`,
 whereas the blueprint states topological invariance on `Dᵇctf`; the generalisation is the
@@ -182,6 +190,30 @@ lemma IsModelFrobenius.isGeometric {k : Type u} [Field k] [Finite k] {X₀ : Sch
   isSeparated := MorphismProperty.of_isPullback hΦ.isPullback ‹_›
   locallyOfFiniteType := MorphismProperty.of_isPullback hΦ.isPullback ‹_›
   quasiCompact := MorphismProperty.of_isPullback hΦ.isPullback ‹_›
+
+/-- The model Frobenius `Φ₁ = F₀ ×_{Spec k} 𝟙_s` and all its iterates `Φ_m` are universal
+homeomorphisms (blueprint `i-relative-frob`, Step 2). -/
+lemma IsModelFrobenius.isUniversalHomeomorphism_frobeniusIterate {k : Type u} [Field k]
+    [Finite k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k)} {σ : s ⟶ Spec (.of k)}
+    {p : X ⟶ X₀} (hΦ : W.IsModelFrobenius f₀ σ p) (m : ℕ) :
+    IsUniversalHomeomorphism (W.frobeniusIterate m) := by
+  obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
+  have := hF₀.isUniversalHomeomorphism_of_isPullback hΦ.isPullback W.frobenius_comp hp
+  induction m with
+  | zero => rw [frobeniusIterate_zero]; infer_instance
+  | succ n ih => rw [frobeniusIterate_succ]; infer_instance
+
+/-- The model Frobenius `Φ₁ = F₀ ×_{Spec k} 𝟙_s` of a scheme locally of finite type over `k`
+and all its iterates `Φ_m` are finite (blueprint `i-relative-frob`, Step 1). -/
+lemma IsModelFrobenius.isFinite_frobeniusIterate {k : Type u} [Field k] [Finite k]
+    {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k)} {σ : s ⟶ Spec (.of k)} {p : X ⟶ X₀}
+    (hΦ : W.IsModelFrobenius f₀ σ p) [LocallyOfFiniteType f₀] (m : ℕ) :
+    IsFinite (W.frobeniusIterate m) := by
+  obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
+  have := hF₀.isFinite_of_isPullback hΦ.isPullback W.frobenius_comp hp
+  induction m with
+  | zero => rw [frobeniusIterate_zero]; infer_instance
+  | succ n ih => rw [frobeniusIterate_succ]; infer_instance
 
 /-- The iterate `φ_m : Φ_m^* K ⟶ K` of the Frobenius coefficient morphism, obtained by
 composing the pulled back copies of `φ` along the composition isomorphisms for `Φ^*`:
@@ -368,6 +400,40 @@ theorem isUniversalHomeomorphism_relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ 
     rw [relativeFrobenius_comp_snd]
     infer_instance
   exact .of_comp _ (pullback.snd frobY f)
+
+/-- **Relative Frobenius.** Let `X = X₀ ×_{Spec k} s` and `Y = Y₀ ×_{Spec k} s` be base changes
+of schemes `X₀`, `Y₀` locally of finite type over a finite field `k`, and let `Φ_X`, `Φ_Y` be
+the base changes `F ×_{Spec k} 𝟙_s` of their `#k`-power Frobenius morphisms. For a morphism
+`f : X ⟶ Y` with `f ≫ Φ_Y ^ m = Φ_X ^ m ≫ f`, the relative Frobenius
+`r_m = (f, Φ_X ^ m) : X ⟶ Y ×_{Φ_Y ^ m, Y, f} X` is finite and a universal homeomorphism
+(blueprint: `sk-i-relative-frob`, `i-relative-frob`). -/
+theorem isFinite_and_isUniversalHomeomorphism_relativeFrobenius {k : Type u} [Field k]
+    [Finite k] {X₀ Y₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k)} {g₀ : Y₀ ⟶ Spec (.of k)}
+    [LocallyOfFiniteType f₀] [LocallyOfFiniteType g₀] {σ : s ⟶ Spec (.of k)} {aX : X ⟶ s}
+    {aY : Y ⟶ s} {pX : X ⟶ X₀} {pY : Y ⟶ Y₀} (hX : IsPullback pX aX f₀ σ)
+    (hY : IsPullback pY aY g₀ σ) {FX : X₀ ⟶ X₀} {FY : Y₀ ⟶ Y₀}
+    (hFX : FX.IsFrobenius (Nat.card k)) (hFY : FY.IsFrobenius (Nat.card k)) {ΦX : X ⟶ X}
+    {ΦY : Y ⟶ Y} (hΦXa : ΦX ≫ aX = aX) (hΦYa : ΦY ≫ aY = aY) (hΦX : ΦX ≫ pX = pX ≫ FX)
+    (hΦY : ΦY ≫ pY = pY ≫ FY) (f : X ⟶ Y) (m : ℕ)
+    (h : f ≫ End.asHom (End.of ΦY ^ m) = End.asHom (End.of ΦX ^ m) ≫ f) :
+    IsFinite (relativeFrobenius f _ _ h) ∧
+      IsUniversalHomeomorphism (relativeFrobenius f _ _ h) := by
+  have hpow {Z : Scheme.{u}} (Φ : End Z) [IsFinite Φ] [IsUniversalHomeomorphism Φ] (n : ℕ) :
+      IsFinite (End.asHom (Φ ^ n)) ∧ IsUniversalHomeomorphism (End.asHom (Φ ^ n)) := by
+    induction n with
+    | zero =>
+      exact ⟨inferInstanceAs (IsFinite (𝟙 Z)), inferInstanceAs (IsUniversalHomeomorphism (𝟙 Z))⟩
+    | succ n ih =>
+      obtain ⟨_, _⟩ := ih
+      rw [pow_succ, End.mul_def]
+      exact ⟨inferInstance, inferInstance⟩
+  have := hFX.isFinite_of_isPullback hX hΦXa hΦX
+  have := hFY.isFinite_of_isPullback hY hΦYa hΦY
+  have := hFX.isUniversalHomeomorphism_of_isPullback hX hΦXa hΦX
+  have := hFY.isUniversalHomeomorphism_of_isPullback hY hΦYa hΦY
+  obtain ⟨_, _⟩ := hpow (End.of ΦX) m
+  obtain ⟨_, _⟩ := hpow (End.of ΦY) m
+  exact ⟨inferInstance, isUniversalHomeomorphism_relativeFrobenius ..⟩
 
 /-- Topological invariance: for a finite universal homeomorphism `r : X ⟶ Y`, pullback is
 an equivalence `Lr^* : D(Y, A) ≌ D(X, A)`, with inverse `Rr_* = Rr_!` and invertible unit

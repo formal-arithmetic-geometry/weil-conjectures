@@ -178,4 +178,38 @@ theorem isFinite [LocallyOfFiniteType f₀] : IsFinite F := by
 
 end Scheme.Hom.IsFrobenius
 
+namespace Scheme.Hom.IsFrobenius
+
+section BaseChange
+
+variable {s X X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k)} {σ : s ⟶ Spec (.of k)} {p : X ⟶ X₀}
+  {a : X ⟶ s} {F₀ : X₀ ⟶ X₀} {Φ : X ⟶ X}
+
+/-- Let `X = X₀ ×_{Spec k} s` be a base change of a scheme `X₀` over `Spec k`. An
+`s`-endomorphism `Φ` of `X` lifting the `#k`-power Frobenius `F₀` of `X₀`, that is
+`Φ = F₀ ×_{Spec k} 𝟙_s`, is the base change of `F₀` along `p : X ⟶ X₀`. -/
+lemma isPullback_of_isPullback (hF₀ : F₀.IsFrobenius (Nat.card k))
+    (hp : IsPullback p a f₀ σ) (ha : Φ ≫ a = a) (hΦ : Φ ≫ p = p ≫ F₀) :
+    IsPullback Φ p p F₀ :=
+  IsPullback.of_right (by rw [ha, hF₀.comp_eq f₀]; exact hp.flip) hΦ hp.flip
+
+/-- The base change `Φ = F₀ ×_{Spec k} 𝟙_s` of the `#k`-power Frobenius `F₀` of a scheme over
+`Spec k` is a universal homeomorphism. -/
+lemma isUniversalHomeomorphism_of_isPullback (hF₀ : F₀.IsFrobenius (Nat.card k))
+    (hp : IsPullback p a f₀ σ) (ha : Φ ≫ a = a) (hΦ : Φ ≫ p = p ≫ F₀) :
+    IsUniversalHomeomorphism Φ :=
+  MorphismProperty.of_isPullback (P := @IsUniversalHomeomorphism)
+    (hF₀.isPullback_of_isPullback hp ha hΦ).flip (hF₀.isUniversalHomeomorphism f₀)
+
+/-- The base change `Φ = F₀ ×_{Spec k} 𝟙_s` of the `#k`-power Frobenius `F₀` of a scheme
+locally of finite type over `Spec k` is finite. -/
+lemma isFinite_of_isPullback [LocallyOfFiniteType f₀] (hF₀ : F₀.IsFrobenius (Nat.card k))
+    (hp : IsPullback p a f₀ σ) (ha : Φ ≫ a = a) (hΦ : Φ ≫ p = p ≫ F₀) : IsFinite Φ :=
+  MorphismProperty.of_isPullback (P := @IsFinite)
+    (hF₀.isPullback_of_isPullback hp ha hΦ).flip (hF₀.isFinite f₀)
+
+end BaseChange
+
+end Scheme.Hom.IsFrobenius
+
 end AlgebraicGeometry
