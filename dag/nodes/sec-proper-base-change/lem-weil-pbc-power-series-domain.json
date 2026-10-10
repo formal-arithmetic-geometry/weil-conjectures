@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-power-series-domain",
+ "kind": "statement",
+ "title": "Power series over a domain form a domain",
+ "statement": "Let $A$ be an integral domain and $d\\ge0$. Then the formal power series ring $A[[X_1,\\ldots,X_d]]$ [def-weil-pbc-multivariate-power-series] is an integral domain.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "used without statement in Remark Tag 032C (remark-Noetherian-complete-local-ring-universally-catenary, line 45023); agent-formulated"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "multivariate power series over an integral domain is an integral domain",
+   "results": "PowerSeries.instIsDomain, MvPowerSeries.instNoZeroDivisors (Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors), PowerSeries.instNoZeroDivisors",
+   "date": "2026-10-10",
+   "verdict": "match (NoZeroDivisors form)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "multivariate power series over integral domain has no zero divisors",
+   "results": "MvPowerSeries.instNoZeroDivisors, PowerSeries.instIsDomain, MvPowerSeries.monomial_mem_nonzeroDivisors",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsDomain\\|NoZeroDivisors' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/MvPowerSeries/",
+   "results": "NoZeroDivisors.lean:141 instance : NoZeroDivisors (MvPowerSeries σ R) [Semiring R] [NoZeroDivisors R]; no IsDomain instance for MvPowerSeries; Basic.lean:113 Nontrivial instance; Algebra/Ring/Basic.lean:212 NoZeroDivisors.to_isDomain",
+   "date": "2026-10-10",
+   "verdict": "match by one-line specialization"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "MvPowerSeries.instNoZeroDivisors",
+  "file": "Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean",
+  "how": "specializes in one line: `NoZeroDivisors (MvPowerSeries σ R)` (NoZeroDivisors.lean:141, σ = Fin d) together with `Nontrivial (MvPowerSeries σ R)` (MvPowerSeries/Basic.lean:113) gives `IsDomain` by `NoZeroDivisors.to_isDomain` (Mathlib/Algebra/Ring/Basic.lean:212)",
+  "line": 141
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
