@@ -22,9 +22,27 @@
   "def-weil-pbc-finite-type-algebra",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a prime ideal \\$\\mathfrak p\\subset B\\$. By [lem-weil-pbc-finite-type-over-field-prime-intersection-maximal], \\$\\mathfrak p\\$ is the intersection of the maximal ideals containing it. There are only finitely many such maximal ideals because \\$\\operatorname{Spec}B\\$ is finite. If \\$\\mathfrak p\\$ were not maximal, each of these maximal ideals would strictly contain \\$\\mathfrak p\\$; choose \\$x_{\\mathfrak m}\\in\\mathfrak m\\setminus\\mathfrak p\\$ for each one. Their finite product lies in every \\$\\mathfrak m\\$, hence in their intersection \\$\\mathfrak p\\$, while primality of \\$\\mathfrak p\\$ implies that one factor \\$x_{\\mathfrak m}\\$ lies in \\$\\mathfrak p\\$, a contradiction. Thus every prime is maximal. If there are no maximal ideals above \\$\\mathfrak p\\$, the cited intersection is the whole ring, so it cannot equal the proper prime \\$\\mathfrak p\\$; hence the finite family is nonempty. The zero ring has empty spectrum, so the conclusion is vacuous there.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 0ALW (finite type algebra with finitely many prime ideals), equivalence of (1) and (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-field-prime-intersection-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma 0ALW (finite type algebra with finitely many prime ideals), equivalence of (1) and (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +67,25 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "pqf-lem-finite-type-algebra-finite-spectrum",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pqf-finite-spectrum-maximal-primes",
+  "worker": "stage1",
+  "summary": "Split the finite-spectrum implication from Stacks Lemma 0ALW. The proof invokes the existing Mathlib-backed Jacobson intersection node and uses finiteness of the spectrum plus a finite-product/primality argument to show every prime is maximal; the zero ring case is vacuous.",
+  "blueprint": "Realizes the affine fibre algebra sentence in pqf-lem-locqf-fibre-discrete: finite spectrum of a finite-type field algebra forces dimension zero/every prime maximal."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fsm2612",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsm2612 (reviewer sub-agent of L); spot-checked: Mathlib grep: no single declaration (QuasiFinite/Basic.lean:290 derives it via IsJacobsonRing + discreteTopology_iff_finite_and_krullDimLE_zero inferInstance, several steps). Step 1 cites the existing Jacobson leaf lem-weil-pbc-finite-type-over-field-prime-intersection-maximal (class b ok, no restatement, no cycle); finite-product/primality argument correct; nonempty family and B=0 handled; conclusion every prime maximal as stated. No fault missed by the second reading."
  }
 }
