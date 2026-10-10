@@ -1186,3 +1186,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:43 L: accepted lem-weil-pbc-fpqc-descend-locally-finite-type (02KX via 02KP; new leaf for 00QP), lem-weil-pbc-free-complex-mod-nonzerodivisor-exact (00MZ, 0 new), lem-weil-pbc-fs-adic-complete-source-target (07ED, 0 new). All three workers met the blueprint-refs rule (same_as [] after search; split_report blueprint entries).
 - 09:44 L: made lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes a Mathlib leaf (biUnion_associatedPrimes_eq_zero_divisors with isAssociatedPrime_iff, as its M = R sibling); same_as [] after search.
 - 09:46 L: accepted lem-weil-pbc-n1-descends-finite-domain-extension (032K N-1 clause, proof omitted in Stacks, 4 steps, 0 new).
+- 09:47 L: accepted lem-weil-pbc-polynomial-ring-maximal-chain-height-difference (00OR, 6 steps, 0 new; 00NA replaced by 00N9 directly). Brief error: lemma-maximal-chain-CM is 00N9, lemma-CM-dim-formula is 00NA.
