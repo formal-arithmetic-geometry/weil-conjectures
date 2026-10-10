@@ -1,8 +1,8 @@
 # Work queue
 
-852 items; claim with `tools/claim.py next <group> [--stage N]`.
+859 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (657)
+## Stage 1: nodes to split (663)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-spectral-finite-coequalizer-from-finite-space` | 1011 | none |
 | `lem-weil-pbc-subcategory-right-resolution-05T6` | 1011 | none |
-| `lem-weil-pbc-surjective-universally-closed-affine-target` | 1011 | none |
 | `lem-weil-pbc-theorem-formal-functions` | 1011 | none |
 | `lem-weil-pbc-universal-first-order-thickening-exists` | 1011 | none |
 | `lem-weil-pbc-universal-thickening-flat-base-change` | 1011 | none |
@@ -66,6 +65,7 @@
 | `lem-weil-pbc-finite-open-cover-degree-sum` | 1012 | none |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1012 | none |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1012 | none |
+| `lem-weil-pbc-finite-surjective-affine-target` | 1012 | none |
 | `lem-weil-pbc-finite-type-z-domain-normalization-finite` | 1012 | none |
 | `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1012 | none |
@@ -134,6 +134,8 @@
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1012 | none |
 | `lem-weil-pbc-separably-generated-separable` | 1012 | none |
 | `lem-weil-pbc-sets-extension-by-empty-adjunction` | 1012 | none |
+| `lem-weil-pbc-sets-inverse-image-composition` | 1012 | none |
+| `lem-weil-pbc-sets-inverse-image-extension-by-empty-constant` | 1012 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1012 | none |
 | `lem-weil-pbc-sheaves-injective-directed-colimit-qc-sections` | 1012 | none |
@@ -147,6 +149,10 @@
 | `lem-weil-pbc-smooth-over-product-ring` | 1012 | none |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1012 | none |
 | `lem-weil-pbc-spec-local-ring-canonical-morphism` | 1012 | none |
+| `lem-weil-pbc-spectral-directed-limit-finite-sober` | 1012 | none |
+| `lem-weil-pbc-spectral-directed-limit-spectral` | 1012 | none |
+| `lem-weil-pbc-spectral-limit-descend-opens` | 1012 | none |
+| `lem-weil-pbc-spectral-limit-pullback-sections` | 1012 | none |
 | `lem-weil-pbc-split-extension-free-presentation` | 1012 | none |
 | `lem-weil-pbc-standard-smooth-include-generators` | 1012 | none |
 | `lem-weil-pbc-symmetric-degree-exact` | 1012 | none |
@@ -664,7 +670,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (195)
+## Stage 2: nodes to state (196)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -841,6 +847,7 @@
 | `lem-weil-pbc-stein-flat-base-change-global-sections` | 1 | state |
 | `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state |
 | `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1 | state |
+| `lem-weil-pbc-surjective-universally-closed-affine-target` | 1 | state |
 | `lem-weil-pbc-surjective-universally-closed-separated` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-base-change` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-finite-presentation` | 1 | state |
@@ -864,7 +871,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 669 nodes that wait for stage 1, 480 nodes that wait for a statement dependency.
+Not open yet: 675 nodes that wait for stage 1, 480 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
