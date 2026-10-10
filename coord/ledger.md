@@ -1815,3 +1815,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:36 L: merged deliver/H1/lem-galois-fpqc-singleton-fully-faithful-0241 (reviewer FIX+NODE(1); first push; new nodes: 1)
 - 15:36 L: merged deliver/F1/lem-pc-base-change-closure-components (reviewer FIX; after a return; new nodes: 3)
 - 15:36 L: merged deliver/M1/lem-exc-rg-group-algebra-functorial-injective-embeddings (reviewer PASS; first push; new nodes: 0)
+- 15:36 L: merged deliver/F1/lem-sc-noetherian-cohomology-vanishing-abelian-dim-one (reviewer FIX; first push; new nodes: 1)

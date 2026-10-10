@@ -24,9 +24,27 @@
   "def-kun-topological-krull-dimension",
   "def-sc-topological-abelian-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-noetherian-topological-cohomology-vanishing] with d=1 and q=2. Its hypotheses are that X is a Noetherian topological space with topological Krull dimension \\dim X\\leq 1 and F an abelian sheaf on X, which are exactly the hypotheses of this lemma (including the cases \\dim X=0 and X empty); since 2>1, its conclusion gives H^2(X,F)=0.",
+   "uses": [
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Proposition 02UZ (cohomology-proposition-vanishing-Noetherian), specialization to d=1 and q=2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-topological-cohomology-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Proposition 02UZ (cohomology-proposition-vanishing-Noetherian), specialized to d=1 and q=2"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +69,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-pic-lift-closed-immersion-dim-le-one",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-noetherian-cohomology-vanishing-abelian-dim-one",
+  "worker": "stage1",
+  "summary": "Added the unsplit generalized Noetherian topological-space vanishing statement from Stacks Proposition 02UZ and specialized it to d=1 and q=2. The target hypotheses and cohomology notation match the cited theorem exactly.",
+  "blueprint": "The single proof step realizes the proof of Lemma 09NY cited in the blueprint ancestor lem-sc-pic-proper-ntorsion, namely the sentence that dim(X) <= 1 implies H^2(X,F)=0 for every abelian sheaf.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cvd",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cvd (reviewer sub-agent of L); spot-checked: Source: Stacks 02UZ (cohomology.tex, label proposition-vanishing-Noetherian, lines 3666-3674): X Noetherian topological space, dim(X) <= d, H^p(X,F)=0 for p>d and every abelian sheaf F. The item (dim X <= 1, H^2=0) is its specialization d=1, p=2, hypothesis by hypothesis. No topological-space 02UZ node existed: lem-sc-zariski-dimension-bound and lem-sc-noetherian-cohomology-above-dimension are for schemes (Zariski site, quasi-coherent modules), so the new general node is needed and is the source's statement (not D1/D2: the item is a corollary of the cited proposition). Cited nodes read: def-kun-topological-krull-dimension (dim X in {-inf,0,1,..,inf}, -inf iff empty), def-sc-topological-abelian-cohomology (derived functors of Gamma on Ab(X)). Blueprint search (blueprint_refs.py search Noetherian cohomology vanishing dimension): only lem-pc-vanishing-above-dim (smooth projective curves, quasi-coherent) and an unrelated pbc node, so same_as [] is right. Lean: only AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt (EulerChar.lean:70-72), body sorry and scheme-module only, so no B10 attachment. FIX more, RETURN less (C4): the delivered new node required X 'of finite topological Krull dimension d' (dim X = d exactly) while the step applies it with d=1 to every X with dim X <= 1; for dim X = 0 and for X empty (dim -inf) the cited statement did not apply. Fixes: dag/nodes/sec-curve-estimates/lem-sc-noetherian-topological-cohomology-vanishing.json: statement: hypothesis changed to Stacks' own 'an integer d>=0 with dim X <= d (including X empty)', which is exactly 02UZ; dag/nodes/sec-curve-estimates/lem-sc-noetherian-cohomology-vanishing-abelian-dim-one.json: proof[0].text: says the hypotheses dim X <= 1 match, including dim 0 and empty. Small cases: X empty (all sheaves zero, H^2=0), X a point (Gamma exact, H^2=0), X = Spec of a DVR as a two-point space of dim 1 (02UZ gives H^2=0). Start-end UTC: Sat Oct 10 03:35:27 PM UTC 2026 - Sat Oct 10 03:36:25 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
