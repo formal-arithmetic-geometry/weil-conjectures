@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-first-order-thickening-base-change",
+ "kind": "statement",
+ "title": "Base change of a first order thickening, with its ideal sheaf",
+ "statement": "Let $i:W\\to W'$ be a closed immersion of schemes [def-weil-closed-immersion] whose ideal sheaf $\\mathcal I=\\ker(\\mathcal O_{W'}\\to i_*\\mathcal O_W)$ [def-sbc-closed-immersion-ideal-sheaf] satisfies $\\mathcal I^2=0$, i.e. $W\\subset W'$ is a first order thickening [def-sbc-first-order-thickening], [def-sbc-ideal-sheaf-powers]. Let $p:Z'\\to W'$ be any morphism of schemes [def-pc-scheme] and $Z=Z'\\times_{W'}W$ the fibre product [def-pc-fibre-product] of $p$ and $i$, with projections $j:Z\\to Z'$ and $q:Z\\to W$, so that $p\\circ j=i\\circ q$. Then $j$ is a closed immersion whose ideal sheaf is $\\mathcal I\\mathcal O_{Z'}=\\operatorname{Im}(p^*\\mathcal I\\to p^*\\mathcal O_{W'}\\to\\mathcal O_{Z'})$ [def-nagata-extended-ideal], [def-pc-module-pullback], and $(\\mathcal I\\mathcal O_{Z'})^2=0$; that is, $Z\\subset Z'$ is a first order thickening and $(q,p):(Z\\subset Z')\\to(W\\subset W')$ is a morphism of thickenings.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 09ZU (lemma-base-change-thickening; proof omitted in the source), with Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) part (1) for the ideal sheaf Im(g^*I -> O_Y) of a base-changed closed immersion (literature/stacks-project/schemes.tex)"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-first-order-thickening",
+  "def-sbc-ideal-sheaf-powers",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-nagata-extended-ideal",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ideal sheaf of the base change of a closed immersion is the image of the pullback of the ideal sheaf",
+   "results": "AlgebraicGeometry.isPullback_of_isClosedImmersion, Scheme.IdealSheafData.ker_fst_of_isClosedImmersion (Mathlib.AlgebraicGeometry.IdealSheaf.Functorial), IdealSheafData.ker_subschemeι, IdealSheafData.le_map_comap, IdealSheafData.ideal_map_of_isAffineHom, IsClosedImmersion.isStableUnderBaseChange (Morphisms.ClosedImmersion)",
+   "date": "2026-10-10",
+   "verdict": "no match: ker_fst_of_isClosedImmersion says ker(pullback.fst f i) = (ker i).comap f, but IdealSheafData.comap is defined (Functorial.lean:39) as the kernel of that very projection, so it does not identify the ideal with the image Im(p^*I -> O) (IO); no statement about the square of the pulled-back ideal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of a first order thickening of schemes is a first order thickening; square-zero ideal sheaf pulled back",
+   "results": "FormallyUnramified.instIsStableUnderBaseChangeScheme, RingHom.IsStableUnderBaseChange.pullback_fst_appTop, HasRingHomProperty.isStableUnderBaseChange, affineAnd_isStableUnderBaseChange, IsImmersion.isStableUnderBaseChange",
+   "date": "2026-10-10",
+   "verdict": "no match: no notion of (first order) thickening of schemes in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'thickening' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n 'def comap\\|ker_fst' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean",
+   "results": "thickening: only a docstring of FormallyUnramified.hom_ext (Morphisms/FormallyUnramified.lean:189); Functorial.lean:39 def comap := (pullback.fst f I.subschemeι).ker, :79 ker_fst_of_isClosedImmersion; IdealSheafData has Mul/Pow (IdealSheaf/Basic.lean:410,417) but no lemma on comap of a product",
+   "date": "2026-10-10",
+   "verdict": "no match (closed-immersion part is IsClosedImmersion.isStableUnderBaseChange; the ideal description and square-zero are absent)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-universal-thickening-flat-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

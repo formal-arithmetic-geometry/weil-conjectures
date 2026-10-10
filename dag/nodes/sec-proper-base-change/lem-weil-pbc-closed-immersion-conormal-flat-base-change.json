@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+ "kind": "statement",
+ "title": "Conormal sheaf of a closed immersion under (flat) base change",
+ "statement": "Let $i:Z\\to X$, $i':Z'\\to X'$, $g:X\\to X'$, $f:Z\\to Z'$ be as in [lem-weil-pbc-closed-immersion-conormal-functorial] ($i,i'$ closed immersions [def-weil-closed-immersion], $g\\circ i=i'\\circ f$), with canonical map $c:f^*\\mathcal C_{Z'/X'}\\to\\mathcal C_{Z/X}$ of conormal sheaves. Assume the square is cartesian, i.e. $(Z,i,f)$ is a fibre product of $g$ and $i'$ [def-pc-fibre-product]. Then $c$ is surjective; if moreover $g$ is flat [def-weil-flat-morphism], then $c$ is an isomorphism of $\\mathcal O_Z$-modules. (Affine locally: for a ring map $R'\\to R$ and an ideal $I'\\subset R'$ with $I=I'R$, the map $I'/I'^2\\otimes_{R'}R\\to I/I^2$ is surjective, and bijective when $R'\\to R$ is flat.)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "conormal module I/I^2 base change along flat ring map is isomorphism",
+   "results": "KaehlerDifferential.tensorKaehlerEquiv(Base) (RingTheory.Kaehler.TensorProduct), IsSMulRegular.of_flat_of_isBaseChange, Ideal.cotangentEquivIdeal, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Cotangent, Module.Flat",
+   "results": "Ideal.tensorCotangentEquiv : [Module.Flat R T] -> T ⊗[R] I.Cotangent ≃ₗ[T] (I.map includeRight).Cotangent; Ideal.tensorCotangentHom_injective_of_flat; Ideal.tensorCotangentEquiv_tmul (Mathlib.RingTheory.Ideal.CotangentBaseChange)",
+   "date": "2026-10-10",
+   "verdict": "no match for schemes; Ideal.tensorCotangentEquiv is the affine-local computation of the flat case (ring level, base change S -> T ⊗_R S of an R-algebra S along flat R -> T): a Lean candidate for the proof, not a leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a flat ring map R → S and ideal I of R, the cotangent I/I^2 ⊗ S ≅ IS/(IS)^2",
+   "results": "Algebra.Extension.cotangentEquiv, Algebra.Extension.tensorCotangent (RingTheory.Etale.Kaehler; needs a bijectivity hypothesis), Algebra.Extension.tensorCotangentInvFun, KaehlerDifferential.D_tensorProductTo, Algebra.Extension.tensorCotangentSpace",
+   "date": "2026-10-10",
+   "verdict": "no match (ring level only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'conormal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'Cotangent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "no conormal sheaf of schemes; Cotangent appears in AlgebraicGeometry only inside a proof in Morphisms/FormallyUnramified.lean:105",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-universal-thickening-flat-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

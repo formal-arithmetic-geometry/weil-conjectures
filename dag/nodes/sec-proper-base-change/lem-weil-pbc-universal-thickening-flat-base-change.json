@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-universal-thickening-flat-base-change",
  "kind": "statement",
  "title": "Universal first order thickenings and conormal sheaves under flat base change",
- "statement": "Let $h':W\\to Y$ be a formally unramified morphism of schemes [def-weil-pbc-formally-unramified-morphism], $g:X\\to Y$ a flat morphism [def-weil-flat-morphism], and $Z=X\\times_YW$ the fibre product [def-pc-fibre-product] with projections $h:Z\\to X$ and $f:Z\\to W$. Let $W\\subset W'$ be a universal first order thickening of $W$ over $Y$ [def-weil-pbc-universal-first-order-thickening], with closed immersion $i_W:W\\to W'$ and structure morphism $W'\\to Y$. Then: (1) $h$ is formally unramified; (2) the morphism $i_Z:=\\mathrm{id}_X\\times i_W:Z=X\\times_YW\\to Z':=X\\times_YW'$ makes $Z\\subset Z'$, with the projection $Z'\\to X$, a universal first order thickening of $Z$ over $X$; (3) with $f':Z'\\to W'$ the projection, so that $f'\\circ i_Z=i_W\\circ f$, the morphism $f'$ is flat and the canonical map $f^*\\mathcal C_{W/Y}\\to\\mathcal C_{Z/X}$ of conormal sheaves [def-weil-pbc-conormal-sheaf-formally-unramified], [def-pc-module-pullback], induced by $f'^\\sharp$ (which maps $f'^{-1}$ of the ideal sheaf of $i_W$ into the ideal sheaf of $i_Z$, Stacks Morphisms, Lemma 01R4), is an isomorphism of $\\mathcal O_Z$-modules.",
+ "statement": "Let $h':W\\to Y$ be a formally unramified morphism of schemes [def-weil-pbc-formally-unramified-morphism], $g:X\\to Y$ a flat morphism [def-weil-flat-morphism], and $Z=X\\times_YW$ the fibre product [def-pc-fibre-product] with projections $h:Z\\to X$ and $f:Z\\to W$. Let $W\\subset W'$ be a universal first order thickening of $W$ over $Y$ [def-weil-pbc-universal-first-order-thickening], with closed immersion $i_W:W\\to W'$ and structure morphism $W'\\to Y$. Then: (1) $h$ is formally unramified; (2) the morphism $i_Z:=\\mathrm{id}_X\\times i_W:Z=X\\times_YW\\to Z':=X\\times_YW'$ makes $Z\\subset Z'$, with the projection $Z'\\to X$, a universal first order thickening of $Z$ over $X$; (3) with $f':Z'\\to W'$ the projection, so that $f'\\circ i_Z=i_W\\circ f$, the morphism $f'$ is flat and the canonical map $f^*\\mathcal C_{W/Y}\\to\\mathcal C_{Z/X}$ of conormal sheaves [def-weil-pbc-conormal-sheaf-formally-unramified], [def-pc-module-pullback], induced by $f'^\\sharp$ (which maps $f'^{-1}$ of the ideal sheaf of $i_W$ into the ideal sheaf of $i_Z$, Stacks Morphisms, Lemma 01R4 [lem-weil-pbc-closed-immersion-conormal-functorial]), is an isomorphism of $\\mathcal O_Z$-modules.",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
   "place": "More on Morphisms, Lemma 04F8 (lemma-universal-thickening-fibre-product) and Lemma 04F9 (lemma-universal-thickening-fibre-product-flat); the conormal map is Morphisms, Lemma 01R4 (lemma-conormal-functorial), its bijectivity Morphisms, Lemma 0473 (lemma-conormal-functorial-flat)"
@@ -13,11 +13,99 @@
   "def-pc-fibre-product",
   "def-weil-pbc-universal-first-order-thickening",
   "def-weil-pbc-conormal-sheaf-formally-unramified",
-  "def-pc-module-pullback"
+  "def-pc-module-pullback",
+  "lem-weil-pbc-closed-immersion-conormal-functorial"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*(1) $h$ is formally unramified.* The pair of projections $(f,h)$ makes $Z$ a fibre product of $h'$ and $g$ [def-pc-fibre-product]; exchanging the factors (the unique isomorphism $X\\times_YW\\cong W\\times_YX$ compatible with the projections, from the universal property) identifies $h$ with the projection $W\\times_YX\\to X$, i.e. the base change of $h'$ along $g$. By [lem-weil-pbc-formally-unramified-base-change] (applied to the formally unramified $h':W\\to Y$ and $g:X\\to Y$) this projection is formally unramified [def-weil-pbc-formally-unramified-morphism]; and the defining lifting condition is unchanged under composing with an isomorphism over $X$ (lifts $a'$ correspond bijectively), so $h$ is formally unramified.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-formally-unramified-base-change",
+    "def-weil-pbc-formally-unramified-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F8 (lemma-universal-thickening-fibre-product), first sentence, citing Lemma 02HB (lemma-base-change-formally-unramified)"
+   }
+  },
+  {
+   "text": "*$Z\\subset Z'$ is a first order thickening over $X$.* Let $s:W'\\to Y$ be the structure morphism, so $s\\circ i_W=h'$, let $Z'=X\\times_YW'$ be the fibre product of $g$ and $s$ with projections $p_X:Z'\\to X$ and $f':Z'\\to W'$, and $i_Z=\\mathrm{id}_X\\times_Yi_W$ the induced morphism [def-pc-fibre-product], so $p_X\\circ i_Z=h$ and $f'\\circ i_Z=i_W\\circ f$. In the diagram with rows $Z\\xrightarrow{f}W$, $Z'\\xrightarrow{f'}W'$, $X\\xrightarrow{g}Y$ and columns $i_Z,p_X$ resp. $i_W,s$, the lower square is cartesian (definition of $Z'$) and the outer rectangle ($Z\\to W$, $Z\\xrightarrow{p_X\\circ i_Z=h}X$ over $Y$) is cartesian (definition of $Z$); by [lem-weil-pbc-cartesian-square-pasting] the upper square is cartesian: $(Z,i_Z,f)$ is a fibre product of $f'$ and $i_W$. Since $W\\subset W'$ is a first order thickening [def-weil-pbc-universal-first-order-thickening], [def-sbc-first-order-thickening], [lem-weil-pbc-first-order-thickening-base-change] applied to $i=i_W$ and $p=f'$ shows that $i_Z$ is a closed immersion whose ideal sheaf $\\mathcal I_Z=\\mathcal I_W\\mathcal O_{Z'}$ has square zero. So $Z\\subset Z'$ with $p_X:Z'\\to X$, $p_X\\circ i_Z=h$, is a first order thickening of $Z$ over $X$, and $(f,f'):(Z\\subset Z')\\to(W\\subset W')$ is a morphism of thickenings.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-first-order-thickening-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F8: 'It is clear that X x_Y W' is a first order thickening', which is Lemma 09ZU (lemma-base-change-thickening)"
+   }
+  },
+  {
+   "text": "*(2) The universal property.* Let $T\\subset T'$ be a first order thickening over $X$, with closed immersion $i_T:T\\to T'$ (square-zero ideal), structure morphism $b:T'\\to X$, and $a:T\\to Z$ with $h\\circ a=b\\circ i_T$. Regard $T\\subset T'$ as a first order thickening over $Y$ through $g\\circ b$, and $f\\circ a:T\\to W$: then $h'\\circ(f\\circ a)=g\\circ h\\circ a=g\\circ b\\circ i_T$. By the universal property of $W'$ [def-weil-pbc-universal-first-order-thickening] there is exactly one $c:T'\\to W'$ with $s\\circ c=g\\circ b$ and $c\\circ i_T=i_W\\circ f\\circ a$. Existence: put $a'=(b,c):T'\\to Z'$ [def-pc-fibre-product] (defined as $g\\circ b=s\\circ c$); then $p_X\\circ a'=b$, and $a'\\circ i_T=i_Z\\circ a$ because both have first component $b\\circ i_T=h\\circ a=p_X\\circ i_Z\\circ a$ and second component $c\\circ i_T=i_W\\circ f\\circ a=f'\\circ i_Z\\circ a$ (step 2), and a morphism to $Z'$ is determined by its components. Uniqueness: if $a''$ satisfies $p_X\\circ a''=b$ and $a''\\circ i_T=i_Z\\circ a$, then $c''=f'\\circ a''$ satisfies $s\\circ c''=g\\circ p_X\\circ a''=g\\circ b$ and $c''\\circ i_T=f'\\circ i_Z\\circ a=i_W\\circ f\\circ a$, so $c''=c$ by the uniqueness for $W'$, and $a''=(b,c)=a'$. Hence $Z\\subset Z'$ with $p_X$ is a universal first order thickening of $Z$ over $X$. Moreover $f'$ is the morphism of universal thickenings of Stacks Lemma 04F7: it is the unique $c:Z'\\to W'$ with $s\\circ c=g\\circ p_X$ and $c\\circ i_Z=i_W\\circ f$ (the case $T'=Z'$, $a=\\mathrm{id}_Z$).",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F8: 'It is straightforward to check that it has the universal property because W' has the universal property (by mapping properties of fibre products)'; Lemma 04F7 (lemma-universal-thickening-functorial) for the canonical morphism (f,f')"
+   }
+  },
+  {
+   "text": "*(3) $f'$ is flat.* $f':Z'=X\\times_YW'\\to W'$ is the projection of the fibre product of the flat morphism $g:X\\to Y$ with $s:W'\\to Y$, i.e. the base change of $g$ along $s$; by [lem-weil-pbc-flat-morphism-base-change] it is flat [def-weil-flat-morphism].",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F9 (lemma-universal-thickening-fibre-product-flat), first two sentences, citing Morphisms, Lemma 01U9 (morphisms-lemma-base-change-flat)"
+   }
+  },
+  {
+   "text": "*(3) The conormal map is an isomorphism.* By step 1 $h$ is formally unramified and by step 3 $(Z',i_Z,p_X)$ is a universal first order thickening of $Z$ over $X$; universal first order thickenings are unique up to unique isomorphism compatible with $Z$ [lem-weil-pbc-universal-first-order-thickening-exists], so $\\mathcal C_{Z/X}$ may be computed with it: $\\mathcal C_{Z/X}=i_Z^*\\mathcal I_Z$, and likewise $\\mathcal C_{W/Y}=i_W^*\\mathcal I_W$ [def-weil-pbc-conormal-sheaf-formally-unramified], [def-pc-module-pullback]. The canonical map $f^*\\mathcal C_{W/Y}\\to\\mathcal C_{Z/X}$ of the statement is the map $c$ of [lem-weil-pbc-closed-immersion-conormal-functorial] for the commutative square $f'\\circ i_Z=i_W\\circ f$ of closed immersions $i_Z,i_W$. That square is cartesian (step 2) and $f'$ is flat (step 4), so [lem-weil-pbc-closed-immersion-conormal-flat-base-change] shows that $c$ is an isomorphism of $\\mathcal O_Z$-modules.",
+   "uses": [
+    "lem-weil-pbc-universal-first-order-thickening-exists",
+    "def-weil-pbc-conormal-sheaf-formally-unramified",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-closed-immersion-conormal-functorial",
+    "lem-weil-pbc-closed-immersion-conormal-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F9: 'See Morphisms, Lemma 0473 for why this implies that the map of conormal sheaves is an isomorphism' (Morphisms, Lemma 0473, morphisms-lemma-conormal-functorial-flat, literature/stacks-project/morphisms.tex)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-formally-unramified-base-change",
+  "def-weil-pbc-formally-unramified-morphism",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-first-order-thickening-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-universal-first-order-thickening-exists",
+  "def-weil-pbc-conormal-sheaf-formally-unramified",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "lem-weil-pbc-closed-immersion-conormal-flat-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemmas 04F8 (lemma-universal-thickening-fibre-product) and 04F9 (lemma-universal-thickening-fibre-product-flat) with their proofs; Morphisms, Lemmas 01R4 and 0473 (literature/stacks-project/morphisms.tex)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,10 +134,17 @@
    "results": "Morphisms/FormallyUnramified.lean: instance (priority := 900) [IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f (:79), IsStableUnderBaseChange @FormallyUnramified (:120), FormallyUnramified.hom_ext (:193, Stacks 04F1, at most one lift along a closed immersion with nilpotent ideal sheaf), FormallyUnramified.of_hom_ext (:240, lifting uniqueness on affine square-zero thickenings Spec(R/I) -> Spec R implies FormallyUnramified); no 'conormal' and no universal first order thickening anywhere in Mathlib/AlgebraicGeometry; 'thickening' elsewhere only metric (Topology/MetricSpace/Thickening) and a docstring in RingTheory/Smooth/Basic.lean:329",
    "date": "2026-10-10",
    "verdict": "no match: Mathlib has no universal first order thickening and no conormal sheaf of a morphism of schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Cotangent, Module.Flat",
+   "results": "Ideal.tensorCotangentEquiv, Ideal.tensorCotangentHom_injective_of_flat, Ideal.tensorCotangentEquiv_tmul (Mathlib.RingTheory.Ideal.CotangentBaseChange)",
+   "date": "2026-10-10",
+   "verdict": "no match: ring-level flat base change of I/I^2 only (Lean candidate for the affine computation in 0473); no universal thickening or conormal sheaf of schemes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +164,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-universal-thickening-flat-base-change",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 04F8/04F9/01R4/0473 and kept; added the new node for the 01R4 map to stmt_deps and cited it in the statement (the statement uses that canonical map). Proof in 5 steps following 04F8/04F9: (1) h formally unramified by the 02HB leaf; Z c Z' is a first order thickening: the square (i_Z, f, f', i_W) is cartesian by the pasting leaf, then base change of a first order thickening (new node, 09ZU + 01JU(1)); the universal property written out from that of W' via fibre-product mapping properties; f' flat by the 01U9 leaf; the conormal map is the 01R4 map (new node) for that cartesian square and an isomorphism by 0473 (new node), computing C_{Z/X} with Z' through the uniqueness in lem-weil-pbc-universal-first-order-thickening-exists. Tags 04F8, 04F9, 04F7, 01R4, 0473, 01R2, 01R3, 09ZU, 01JU, 02HB, 01U9 verified in tags/tags. Mathlib: no universal thickening or conormal sheaf of schemes; ring-level Ideal.tensorCotangentEquiv (flat) and Ideal.mapCotangent are Lean candidates. No Lean in slopmaster2."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 04F8/04F9: formally unramified base changes (02HB leaf); Z in Z' is a first order thickening by pasting and the new 09ZU node (ideal = I O_{Z'}, square zero); the universal property written out through the fibre product; f' flat by base change; the conormal map is the 01R4 map (new node, closed-immersion case) and an isomorphism by 0473 (new node) for the cartesian square with flat f'. Tags verified."
+ }
 }

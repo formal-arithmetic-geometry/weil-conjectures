@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-conormal-functorial",
+ "kind": "statement",
+ "title": "Functoriality of the conormal sheaf of a closed immersion",
+ "statement": "Let $i:Z\\to X$ and $i':Z'\\to X'$ be closed immersions of schemes [def-weil-closed-immersion] with ideal sheaves $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ and $\\mathcal I'=\\ker(\\mathcal O_{X'}\\to i'_*\\mathcal O_{Z'})$ [def-sbc-closed-immersion-ideal-sheaf], and call $\\mathcal C_{Z/X}:=i^*\\mathcal I\\;(=i^*(\\mathcal I/\\mathcal I^2))$ and $\\mathcal C_{Z'/X'}:=i'^*\\mathcal I'$ their conormal sheaves [def-pc-module-pullback]. Let $g:X\\to X'$ and $f:Z\\to Z'$ be morphisms of schemes [def-pc-scheme] with $g\\circ i=i'\\circ f$. Then (1) the image $\\mathcal I'\\mathcal O_X$ of $g^*\\mathcal I'\\to g^*\\mathcal O_{X'}\\to\\mathcal O_X$ [def-nagata-extended-ideal] is contained in $\\mathcal I$, so $g^\\sharp$ induces an $\\mathcal O_X$-linear map $\\gamma:g^*\\mathcal I'\\to\\mathcal I$; (2) the composite $c:f^*\\mathcal C_{Z'/X'}=f^*i'^*\\mathcal I'\\cong i^*g^*\\mathcal I'\\xrightarrow{i^*\\gamma}i^*\\mathcal I=\\mathcal C_{Z/X}$ is a canonical map of $\\mathcal O_Z$-modules, characterized by: for affine opens $U=\\operatorname{Spec}R\\subset X$, $U'=\\operatorname{Spec}R'\\subset X'$ [def-weil-affine-spectrum] with $g(U)\\subset U'$, $Z\\cap U=\\operatorname{Spec}(R/I)$, $Z'\\cap U'=\\operatorname{Spec}(R'/I')$, the induced map $I'/I'^2=\\Gamma(Z'\\cap U',\\mathcal C_{Z'/X'})\\to\\Gamma(Z\\cap U,\\mathcal C_{Z/X})=I/I^2$ is induced by $g^\\sharp:R'\\to R$, which satisfies $g^\\sharp(I')\\subset I$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01R4 (morphisms-lemma-conormal-functorial), case of closed immersions (second and third paragraphs of its proof); the conormal sheaf of a closed immersion is Morphisms, Definition 01R2 (morphisms-definition-conormal-sheaf) and Lemma 01R3 (morphisms-lemma-affine-conormal)"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-nagata-extended-ideal",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "map of conormal modules induced by a ring homomorphism mapping ideal I into ideal J, I/I^2 to J/J^2",
+   "results": "Ideal.mapCotangent, Ideal.mapCotangent_toCotangent (Mathlib.RingTheory.Ideal.Cotangent), Submodule.mapAlgHom, Ideal.mapHom, Submodule.mapQ, CommRingCat.KaehlerDifferential.map",
+   "date": "2026-10-10",
+   "verdict": "no match for schemes; Ideal.mapCotangent is the affine-local map I'/I'^2 -> I/I^2 (ring level only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "conormal sheaf of a closed immersion of schemes, functoriality, flat base change isomorphism",
+   "results": "Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, IsClosedImmersion.lift, IsClosedImmersion.lift_fac(_assoc), isPullback_of_isClosedImmersion, IsClosedImmersion.isIso_lift",
+   "date": "2026-10-10",
+   "verdict": "no match: ideal sheaves and lifts only, no conormal sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'conormal' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'Cotangent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "conormal: only RingTheory/Extension/Cotangent/Basic.lean (algebra extensions); Cotangent in AlgebraicGeometry: only Morphisms/FormallyUnramified.lean:105-107 (Ideal.toCotangent inside a proof), Morphisms/Etale.lean:11 import",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has no conormal sheaf of a closed immersion of schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-universal-thickening-flat-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
