@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-fff-vanishing",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Formal functions vanishing over finite fibres",
@@ -26,18 +26,159 @@
    }
   ]
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [
+ "stmt_deps": [
   "pqf-def-cohomology",
-  "pqf-lem-leray",
   "pqf-def-locnoeth",
   "pqf-def-coherent"
  ],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Fix p>0 and y, and write A=O_{Y,y}, m=m_y, M=(R^p f_* F)_y. The pointwise theorem on formal functions gives a canonical isomorphism M^ = lim_n H^p(X_n,F_n), where X_n is the n-th infinitesimal neighbourhood of the fibre and M^ is the m-adic completion of M.",
+   "uses": [
+    "lem-weil-pbc-formal-functions-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 30.20.5 (Tag 02OC, theorem-formal-functions) and Lemma 30.20.8 (Tag 02OE, lemma-higher-direct-images-zero-finite-fibre), via Lemma 02OD (lemma-formal-functions-stalk)"
+   }
+  },
+  {
+   "text": "Because f is proper it is of finite type, so its base change X_n -> Spec(O_{Y,y}/m_y^n) is of finite type over the Noetherian (Artinian) ring O_{Y,y}/m_y^n; hence X_n is a Noetherian scheme (quasi-compact, covered by finitely many spectra of finitely generated algebras over a Noetherian ring, Hilbert basis theorem). (X_n need not be a closed subscheme of X, nor X Noetherian, since y need not be closed and Y need only be locally Noetherian.) As f is locally of finite type and f^{-1}({y}) is finite, the fibre X_y is a finite discrete space. Since Spec(O_{Y,y}/m_y^n) is a single point with residue field kappa(y), the closed immersion X_y = X_1 -> X_n (base change of the nilpotent thickening Spec kappa(y) -> Spec(O_{Y,y}/m_y^n)) is a homeomorphism, so X_n is a finite discrete space, of topological Krull dimension 0.",
+   "uses": [
+    "pqf-lem-locqf-fibre-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma 30.20.8 (Tag 02OE) proof, first sentences (via Morphisms, Lemma morphisms-lemma-finite-fibre)"
+   }
+  },
+  {
+   "text": "Apply the Noetherian-space cohomology vanishing theorem to the underlying abelian sheaf of F_n. Since X_n is Noetherian of dimension 0, its cohomology vanishes in every degree p>0; the canonical comparison between module cohomology and underlying abelian-sheaf cohomology identifies this with H^p(X_n,F_n)=0.",
+   "uses": [
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-sc-zariski-module-abelian-cohomology-agree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Proposition 02UZ (cohomology-proposition-vanishing-Noetherian)"
+   }
+  },
+  {
+   "text": "Step 3 makes every term of the inverse limit in Step 1 zero, hence M^=0. By coherence of higher direct images for a proper morphism over a locally Noetherian base, R^p f_*F is coherent; therefore its stalk M is a finitely generated A-module.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "lem-weil-pbc-formal-functions-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Proposition 30.19.1 (Tag 02O5) and Lemma 02OD"
+   }
+  },
+  {
+   "text": "For the Noetherian local ring A, its completion A^ is faithfully flat over A, and the completion of a finitely generated module is A^ tensor_A M. Thus M^=0 implies A^ tensor_A M=0, and faithful flatness forces M=0. This is exactly (R^p f_*F)_y=0.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 00MC (completion faithfully flat) and Lemma 00MA (completion tensor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-functions-stalk",
+  "pqf-lem-locqf-fibre-discrete",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-completion-finite-module-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 30.20.8 (Tag 02OE), proof via Theorem 30.20.5 (Tag 02OC) and Lemma 02OD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "theorem on formal functions proper morphism coherent sheaf completion stalk higher direct image",
+   "results": "TopCat.Presheaf.stalkPushforward and related stalk declarations; no formal-functions theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry formal functions completion higher direct image coherent",
+   "results": "Unknown identifier AlgebraicGeometry; no result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formal functions|theorem_formal|HigherDirectImage|higher direct image in Mathlib/AlgebraicGeometry",
+   "results": "No declaration found",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper morphism finite fibre higher direct image stalk vanishes",
+   "results": "service unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of finite discrete scheme vanishes in positive degree",
+   "results": "AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat and unrelated singular homology declarations; no sheaf cohomology theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H _ _ = 0",
+   "results": "No matching declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flasque.*acyclic|acyclic.*flasque in Mathlib/AlgebraicGeometry",
+   "results": "No declaration found",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finitely generated module tensor completion zero implies module zero Nakayama",
+   "results": "Only tensor-product and adic-completion declarations; no exact Nakayama consequence",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing Nakayama",
+   "results": "Unknown identifier Nakayama; no result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*Nakayama|tensor.*completion.*zero in Mathlib/RingTheory",
+   "results": "No declaration found",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -78,5 +219,54 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-fff-vanishing",
+  "worker": "stage1",
+  "summary": "Split Tag 02OE using the existing pointwise formal-functions theorem, Noetherian cohomology vanishing in dimension zero, coherence of proper higher direct images, and faithful flatness of completion. No new nodes were needed; the imported one-step proof is expanded into five checked steps.",
+  "blueprint": "Realizes the sole blueprint proof step: formal-functions comparison, vanishing on finite infinitesimal thickenings, and descent from zero completion by finite generation and Nakayama/faithful completion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-formal-functions-stalk",
+    "why": "pointwise theorem on formal functions identifies the completed stalk with the inverse limit over infinitesimal neighbourhoods"
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Noetherian dimension-zero cohomology vanishing for the thickenings"
+   },
+   {
+    "node": "lem-sc-zariski-module-abelian-cohomology-agree",
+    "why": "transfers topological abelian-sheaf cohomology vanishing to module cohomology"
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "proper higher direct images of coherent sheaves are coherent, giving finite stalks"
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "faithful flatness of the local completion detects zero finitely generated modules"
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-module-tensor",
+    "why": "identifies completion of the finite stalk with tensor product by the completed local ring"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-formal-functions-stalk",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "lem-pc-coherent-hi",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-completion-finite-module-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ffv2311",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffv2311 (reviewer sub-agent of L); spot-checked: Read packet whole. Steps 1,3,4,5 checked against cited statements (formal-functions-stalk = Tag 02OD form of 02OC, used as Stacks does; Noetherian dim-0 vanishing + module/abelian comparison replace the affine route validly; lem-pc-coherent-hi; completion faithfully flat + completion=tensor for finite modules). No restatement of cited nodes; no new nodes. FIX more, RETURN less: C1/E2 in Step 2 (marked elementary): it asserted X Noetherian and X_n a closed subscheme of X (false: Y only locally Noetherian, y need not be closed) and derived dimension 0 from finiteness alone (a finite scheme need not be discrete); rewrote Step 2: X_n Noetherian as finite type over the Artinian O_{Y,y}/m_y^n, fibre finite discrete by existing same-unit node pqf-lem-locqf-fibre-discrete (checked not downstream of the item), X_1->X_n homeomorphism; step now non-elementary, uses and proof_deps updated. Second reading by E1 missed this.; 1 file(s) fixed by the reviewer"
+ }
 }

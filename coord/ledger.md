@@ -2514,3 +2514,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:26 L: merged deliver/F1/lem-sc-faithfully-flat-local-dimension (reviewer FIX; first push; new nodes: 2)
 - 20:26 L: merged deliver/H1/pqf-lem-finite-qf (reviewer FIX; first push; new nodes: 0)
 - 20:26 L: merged deliver/M1/lem-sc-right-adjoint-open-support-criterion (reviewer FIX; first push; new nodes: 2)
+- 20:27 L: merged deliver/E1/pqf-lem-fff-vanishing (reviewer FIX; first push; new nodes: 0)
