@@ -21,11 +21,46 @@
   "place": "Lemma Tag 03N0 (descent-lemma-open-fpqc-covering), statement"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
   "def-weil-pbc-fpqc-covering"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By stability of fpqc coverings under base change [lem-galois-fpqc-covering-base-change], the family of first projections $T_i\\times_S V\\to V$ is an fpqc covering of $V$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Lemma Tag 022D, part (3), lines 3105-3147"
+   }
+  },
+  {
+   "text": "Apply the compatible-open descent statement [lem-weil-pbc-open-subscheme-fpqc-descent] to this base-changed covering and the opens $W_i\\subset T_i\\times_S V$. The assumed equality of their pullbacks to $T_i\\times_S T_j\\times_S V$ is exactly the compatibility hypothesis after identifying the iterated fibre products, so it yields a unique open $W\\subset V$ with the required pullbacks.",
+   "uses": [
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Lemma Tag 03N0 and its application in Tag 09XN, lines 4978-4985"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Lemma Tag 03N0 (descent-lemma-open-fpqc-covering)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,10 +92,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-sections-fpqc-descent",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-etale-open-fpqc-descent",
+  "worker": "stage1",
+  "summary": "Added the Tag 03N0 compatible-open descent statement as a statement-only dependency. The item proof now first invokes the existing fpqc base-change covering lemma and then applies compatible-open descent to the base-changed family, with the fibre-product compatibility made explicit.",
+  "blueprint": "Realizes the Tag 09XN proof sentence that equal opens on T_i\\times_S T_j\\times_S V descend to a unique open of V by Tag 03N0.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eod1745",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eod1745 (reviewer sub-agent of L); spot-checked: Packet read whole. D: base change of the fpqc covering to V (lem-galois-fpqc-covering-base-change, Mathlib leaf in unit sk-prop-h2, accepted as generic tool and declared via --tool-uses) then Tag 03N0 on the base-changed family; compatibility on (T_i x_S V) x_V (T_j x_S V) = T_i x_S T_j x_S V is correct; the etale hypothesis is unused but harmless. New node lem-weil-pbc-open-subscheme-fpqc-descent matches Tag 03N0 statement exactly (pr0^-1 W_i = pr1^-1 W_j, unique W); it is the general lemma, the item its base-changed special case, not a restatement or cycle. Nearby G1 node lem-weil-pbc-etale-sections-fpqc-descent (09XN) cites the item, does not restate it. Mathlib: leanfinder 'flat quasi-compact surjective morphism of schemes is a quotient map; open subset whose preimage is open descends along fpqc cover' -> Flat.isQuotientMap_of_surjective (single qc morphism) and descendsAlong_isOpenImmersion, no family-level fpqc open descent; verdict no exact match. No repairs."
  }
 }

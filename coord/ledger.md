@@ -2132,3 +2132,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:34 L: returned deliver/C1/lem-exc-finite-galois-tensor-decomposition (reviewer RETURN: 1. D2 (no real split of part (1)): step 1 cites the new node lem-exc-finite-galois-algebra-tensor-decomposition, created)
 - 17:35 L: merged deliver/G1/lem-weil-pbc-sets-etale-inverse-image-exact (reviewer PASS; first push; new nodes: 0)
 - 17:36 L: merged deliver/G1/lem-sc-free-prime-membership (reviewer PASS; first push; new nodes: 0)
+- 17:36 L: merged deliver/M1/lem-weil-pbc-etale-open-fpqc-descent (reviewer PASS; first push; new nodes: 1)
