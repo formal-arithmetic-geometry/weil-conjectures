@@ -150,6 +150,111 @@ lemma transition_comp {π₁ : T₁ ⟶ T} (s₁ : Etale.BaseChangeStage p g e h
   simp only [Functor.map_comp, Category.assoc] at hc ⊢
   exact (Category.assoc _ _ _).trans hc
 
+/-- The transition map of a stage is compatible with the derived base-change maps: the
+base-change map of the base square followed by the transition map is the pullback of the
+transition map `Rg_* K ⟶ Rg'_*(π^* K)` followed by the base-change map of the stage. -/
+lemma baseChange_app_comp_transition (bsq : CommSq e h g p) {π : T₁ ⟶ T}
+    (s : Etale.BaseChangeStage p g e h π)
+    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (Etale.baseChange (ModuleCat.{u + 1} Λ) bsq).app K ≫ s.transition Λ K =
+      D+((p)^*[ModuleCat.{u + 1} Λ]).map (Etale.lowerStarPlusTransition Λ π g s.g' s.wg K) ≫
+        (Etale.baseChange (ModuleCat.{u + 1} Λ) s.isPullback.toCommSq).app
+          (D+((π)^*[ModuleCat.{u + 1} Λ]).obj K) := by
+  obtain ⟨Y', e', h', g', a, hpb, wg, wa, wh⟩ := s
+  subst wg
+  have h₀ := Etale.baseChange_app_comp_lowerStarPlusTransition Λ bsq π hpb.toCommSq a wa wh K
+  have key : (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) a e (a ≫ e) rfl).inv.app K ≫
+      (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) e' π (a ≫ e) wa).hom.app K =
+      (Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) a e).inv.app K ≫ eqToHom (by rw [wa]) ≫
+        (Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) e' π).hom.app K := by
+    rw [Etale.upperStarCompDerivedPlus_eq_eqToIso_trans (ModuleCat.{u + 1} Λ) e' π (a ≫ e) wa,
+      Iso.trans_hom, NatTrans.comp_app, eqToIso.hom, eqToHom_app]
+    rfl
+  dsimp only [transition]
+  rw [key]
+  exact h₀
+
+/-- The transition map of a stage along a universal homeomorphism `a` (for instance an
+isomorphism, or the base change of a thickening) is an isomorphism. -/
+lemma isIso_transition {π : T₁ ⟶ T} (s : Etale.BaseChangeStage p g e h π)
+    [IsUniversalHomeomorphism s.a]
+    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (s.transition Λ K) := by
+  have := Etale.isIso_lowerStarPlusTransition Λ s.a h s.h' s.wh
+    (D+((e)^*[ModuleCat.{u + 1} Λ]).obj K)
+  rw [transition]
+  infer_instance
+
+/-- A stage over `π` is a stage over any `π'` equal to `π`. -/
+@[simps]
+def congr {π π' : T₁ ⟶ T} (hπ : π = π') (s : Etale.BaseChangeStage p g e h π) :
+    Etale.BaseChangeStage p g e h π' where
+  Y' := s.Y'
+  e' := s.e'
+  h' := s.h'
+  g' := s.g'
+  a := s.a
+  isPullback := s.isPullback
+  wg := hπ ▸ s.wg
+  wa := hπ ▸ s.wa
+  wh := s.wh
+
+/-- A stage with the map `a` replaced by an equal one. -/
+@[simps]
+def copyA {π : T₁ ⟶ T} (s : Etale.BaseChangeStage p g e h π) (a : s.Y' ⟶ Y) (ha : a = s.a) :
+    Etale.BaseChangeStage p g e h π where
+  Y' := s.Y'
+  e' := s.e'
+  h' := s.h'
+  g' := s.g'
+  a := a
+  isPullback := s.isPullback
+  wg := s.wg
+  wa := ha ▸ s.wa
+  wh := ha ▸ s.wh
+
+lemma copyA_eq {π : T₁ ⟶ T} (s : Etale.BaseChangeStage p g e h π) (a : s.Y' ⟶ Y)
+    (ha : a = s.a) : s.copyA a ha = s := by
+  subst ha
+  rfl
+
+/-- The canonical stage over `π`, built from the chosen pullback of `p` along `π ≫ g`. -/
+@[simps]
+noncomputable def canonical (bsq : IsPullback e h g p) (π : T₁ ⟶ T) :
+    Etale.BaseChangeStage p g e h π where
+  Y' := pullback (π ≫ g) p
+  e' := pullback.fst (π ≫ g) p
+  h' := pullback.snd (π ≫ g) p
+  g' := π ≫ g
+  a := bsq.lift (pullback.fst (π ≫ g) p ≫ π) (pullback.snd (π ≫ g) p)
+    (by rw [Category.assoc]; exact pullback.condition)
+  isPullback := IsPullback.of_hasPullback (π ≫ g) p
+  wg := rfl
+  wa := bsq.lift_fst _ _ _
+  wh := bsq.lift_snd _ _ _
+
+/-- The comparison stage over `𝟙 T₁` between two stages `s` and `s'` over the same `π`, relative
+to `s`: the identification of the total space of `s'` with the one of `s`. -/
+@[simps]
+noncomputable def comparison {π : T₁ ⟶ T} (s s' : Etale.BaseChangeStage p g e h π) :
+    Etale.BaseChangeStage p s.g' s.e' s.h' (𝟙 T₁) where
+  Y' := s'.Y'
+  e' := s'.e'
+  h' := s'.h'
+  g' := s'.g'
+  a := s.isPullback.lift s'.e' s'.h' (by rw [← s.wg, s'.wg]; exact s'.isPullback.w)
+  isPullback := s'.isPullback
+  wg := by rw [Category.id_comp, ← s.wg, s'.wg]
+  wa := by rw [IsPullback.lift_fst, Category.comp_id]
+  wh := IsPullback.lift_snd _ _ _ _
+
+instance {π : T₁ ⟶ T} (s s' : Etale.BaseChangeStage p g e h π) :
+    IsIso (s.comparison s').a := by
+  dsimp only [comparison]
+  refine ⟨s'.isPullback.lift s.e' s.h' (by rw [← s'.wg, s.wg]; exact s.isPullback.w), ?_, ?_⟩
+  · apply s'.isPullback.hom_ext <;> simp
+  · apply s.isPullback.hom_ext <;> simp
+
 end Etale.BaseChangeStage
 
 end AlgebraicGeometry
