@@ -60,7 +60,8 @@ lemma isSheaf_godement (S : X → Type u) [∀ x, AddCommGroup (S x)] :
 /-- The Godement sheaf of a sheaf of abelian groups, as a sheaf. -/
 noncomputable def godementObj (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X)
     AddCommGrpCat.{u}) : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
-  ⟨_, isSheaf_godement fun x : X ↦ (TopCat.Presheaf.stalk (C := AddCommGrpCat.{u}) F.obj x : Type u)⟩
+  ⟨_, isSheaf_godement fun x : X ↦
+    (TopCat.Presheaf.stalk (C := AddCommGrpCat.{u}) F.obj x : Type u)⟩
 
 /-- The map of Godement sheaves induced by a morphism of sheaves. -/
 noncomputable def godementMap {F G : CategoryTheory.Sheaf (Opens.grothendieckTopology X)
@@ -96,7 +97,8 @@ noncomputable def godement : CategoryTheory.Sheaf (Opens.grothendieckTopology X)
 lemma godement_obj_obj (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X)
     AddCommGrpCat.{u}) :
     (godement.obj F).obj =
-      TopCat.Presheaf.godement fun x : X ↦ (TopCat.Presheaf.stalk (C := AddCommGrpCat.{u}) F.obj x : Type u) :=
+      TopCat.Presheaf.godement fun x : X ↦
+        (TopCat.Presheaf.stalk (C := AddCommGrpCat.{u}) F.obj x : Type u) :=
   rfl
 
 /-- The natural embedding of a sheaf into its Godement sheaf, by the germ maps. -/

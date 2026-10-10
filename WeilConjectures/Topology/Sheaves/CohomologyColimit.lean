@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Data.Fintype.Lattice
 public import Mathlib.Topology.NoetherianSpace
+public import Mathlib.CategoryTheory.Limits.Constructions.Filtered
 public import WeilConjectures.Mathlib.Topology.Sheaves.Flasque
 public import WeilConjectures.Topology.Sheaves.CechCriterion
 public import WeilConjectures.Topology.Sheaves.FilteredColimit
@@ -36,6 +37,8 @@ which is all that is needed for vanishing theorems and for cohomology of direct 
   opens passes to filtered colimits.
 - `TopCat.Sheaf.exists_H_map_colimit_ι_eq`: every class in `H^q(X, colim D)` comes from
   `H^q(X, D j)` for some `j`.
+- `TopCat.Sheaf.H_mem_closure_sigma`: every class in `H^q(X, ∐ᵢ Fᵢ)` is a finite sum of classes
+  coming from the summands.
 -/
 
 @[expose] public section
@@ -215,5 +218,62 @@ theorem exists_H_map_colimit_ι_eq (q : ℕ) :
         comm₁₂ := colimit.ι_map η j
         comm₂₃ := colimit.ι_map (cokernel.π η) j }
     exact ⟨j, Sheaf.H.δSucc hSj q y', Sheaf.H.map_δSucc hSj hSc φ q y'⟩
+
+omit [PrespectralSpace X] [QuasiSeparatedSpace X] [CompactSpace X] in
+lemma _root_.CategoryTheory.Sheaf.H.map_sum_apply {F G : CategoryTheory.Sheaf
+    (Opens.grothendieckTopology X) AddCommGrpCat.{u}} {ι : Type*} (s : Finset ι)
+    (φ : ι → (F ⟶ G)) (q : ℕ) (x : Sheaf.H F q) :
+    Sheaf.H.map (∑ i ∈ s, φ i) q x = ∑ i ∈ s, Sheaf.H.map (φ i) q x := by
+  classical
+  induction s using Finset.induction_on with
+  | empty =>
+    rw [Finset.sum_empty, Finset.sum_empty, Sheaf.H.map_apply, Abelian.Ext.mk₀_zero,
+      Abelian.Ext.comp_zero]
+  | insert i s hi ih => rw [Finset.sum_insert hi, Finset.sum_insert hi, Sheaf.H.map_add_apply, ih]
+
+attribute [local instance] Abelian.hasFiniteBiproducts in
+/-- **Cohomology of a coproduct.** On a quasi-compact space whose quasi-compact opens form a
+basis stable under finite intersections, every cohomology class of a coproduct `∐ᵢ Fᵢ` of
+abelian sheaves is a finite sum of images of cohomology classes of the summands. -/
+theorem H_mem_closure_sigma {B : Type u}
+    (f : B → CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+    [HasCoproduct f] (q : ℕ) (ξ : Sheaf.H (∐ f) q) :
+    ξ ∈ AddSubgroup.closure (⋃ b, Set.range (Sheaf.H.map (Sigma.ι f b) q)) := by
+  classical
+  have : HasColimitsOfShape (Finset (Discrete B))
+      (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :=
+    HasFilteredColimitsOfSize.HasColimitsOfShape _
+  let D := CoproductsFromFiniteFiltered.liftToFinsetObj (Discrete.functor f)
+  let e : colimit D ≅ ∐ f := (colimit.isColimit D).coconePointUniqueUpToIso
+    (CoproductsFromFiniteFiltered.isColimitFiniteSubproductsCocone f)
+  obtain ⟨S, ξ', hξ'⟩ := exists_H_map_colimit_ι_eq q D (Sheaf.H.map e.inv q ξ)
+  let g : S → CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
+    fun s ↦ f s.1.as
+  let ξ'' : Sheaf.H (∐ g) q := ξ'
+  have he : colimit.ι D S ≫ e.hom = Sigma.desc fun s : S ↦ Sigma.ι f s.1.as :=
+    IsColimit.comp_coconePointUniqueUpToIso_hom _ _ S
+  have hξ : ξ = Sheaf.H.map (Sigma.desc fun s : S ↦ Sigma.ι f s.1.as) q ξ'' := by
+    rw [← he, Sheaf.H.map_comp_apply]
+    change ξ = Sheaf.H.map e.hom q (Sheaf.H.map (colimit.ι D S) q ξ')
+    rw [hξ', ← Sheaf.H.map_comp_apply, e.inv_hom_id, Sheaf.H.map_id_apply]
+  let iso := biproduct.isoCoproduct g
+  have htot : 𝟙 (∐ g) = ∑ s, (iso.inv ≫ biproduct.π g s) ≫ Sigma.ι g s := by
+    refine Sigma.hom_ext _ _ fun t ↦ ?_
+    simp only [iso, Preadditive.comp_sum, biproduct.isoCoproduct_inv, Category.comp_id,
+      ← Category.assoc, Sigma.ι_desc]
+    rw [Finset.sum_eq_single t (fun b _ hb ↦ by
+      simp [biproduct.ι_π_ne _ (Ne.symm hb)]) (by simp)]
+    simp
+  have hdec : ξ'' = ∑ s, Sheaf.H.map (Sigma.ι g s) q
+      (Sheaf.H.map (iso.inv ≫ biproduct.π g s) q ξ'') := by
+    conv_lhs => rw [← Sheaf.H.map_id_apply ξ'', htot, Sheaf.H.map_sum_apply]
+    simp only [Sheaf.H.map_comp_apply]
+  rw [hξ, hdec, map_sum]
+  refine AddSubgroup.sum_mem _ fun s _ ↦ AddSubgroup.subset_closure (Set.mem_iUnion.2
+    ⟨s.1.as, ?_⟩)
+  refine ⟨Sheaf.H.map (iso.inv ≫ biproduct.π g s) q ξ'', ?_⟩
+  refine (Sheaf.H.map_comp_apply _ _ _).symm.trans (Eq.trans ?_ (Sheaf.H.map_comp_apply _ _ _))
+  rw [Sigma.ι_desc]
+  exact Sheaf.H.map_comp_apply _ _ _
 
 end TopCat.Sheaf
