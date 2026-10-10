@@ -2,7 +2,7 @@
 
 899 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (647)
+## Stage 1: nodes to split (646)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-ringed-space-colimit-restriction` | 1012 | none |
 | `lem-weil-pbc-sets-inverse-image-composition` | 1012 | none |
 | `lem-weil-pbc-sets-inverse-image-extension-by-empty-constant` | 1012 | none |
 | `lem-weil-pbc-sheaf-hom-finite-presentation-kernel` | 1012 | none |
@@ -654,7 +653,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (252)
+## Stage 2: nodes to state (253)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -852,6 +851,7 @@
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-regular-sequence-swap-two` | 1 | state |
 | `lem-weil-pbc-ring-universal-first-order-thickening` | 1 | state |
+| `lem-weil-pbc-ringed-space-colimit-restriction` | 1 | state |
 | `lem-weil-pbc-ringed-space-module-exactness-local-lifting` | 1 | state |
 | `lem-weil-pbc-root-lifting-etale-retraction` | 1 | state |
 | `lem-weil-pbc-scheme-clopen-idempotent` | 1 | state |
@@ -911,7 +911,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 659 nodes that wait for stage 1, 541 nodes that wait for a statement dependency.
+Not open yet: 658 nodes that wait for stage 1, 541 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
