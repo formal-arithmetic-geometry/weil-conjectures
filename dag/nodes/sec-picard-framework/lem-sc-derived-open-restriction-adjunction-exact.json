@@ -20,11 +20,56 @@
  },
  "stmt_deps": [
   "def-weil-locally-ringed-space-morphism",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-stalk-sheafification-space",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restriction to $U$ is exact. For any short exact sequence of $\\mathcal O_X$-modules, restriction preserves the stalk at every point of $U$ (the neighbourhoods inside $U$ are cofinal among neighbourhoods in $X$). Thus the restricted sequence is exact at every stalk by [lem-weil-pbc-module-stalk-exact] (5), and hence exact as a sequence of $\\mathcal O_U$-modules by the same criterion.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Lemma 01AG (modules-lemma-abelian), stalkwise criterion for exactness, and Lemma 01AJ (restriction to an open)"
+   }
+  },
+  {
+   "text": "Define $j_!\\mathcal F$ as the sheafification of the presheaf that is $\\mathcal F(V)$ on opens $V\\subseteq U$ and zero otherwise. A map from this presheaf to an $\\mathcal O_X$-module $\\mathcal G$ is equivalent, by restriction to opens in $U$, to a map $\\mathcal F\\to j^{-1}\\mathcal G$; the inverse extends a map by zero. The universal property of module sheafification gives natural bijections $\\operatorname{Hom}_X(j_!\\mathcal F,\\mathcal G)\\cong\\operatorname{Hom}_U(\\mathcal F,j^{-1}\\mathcal G)$, hence $j_!\\dashv j^{-1}$. The underlying abelian sheaf of $j_!\\mathcal F$ is the abelian sheafification of this presheaf [def-weil-presheaf-modules-sheafification], so by [lem-sc-topological-extension-by-zero-stalks] its stalk is $\\mathcal F_x$ for $x\\in U$ and zero for $x\\notin U$, naturally in $\\mathcal F$; hence for a morphism $\\varphi$ the stalk map $(j_!\\varphi)_x$ is $\\varphi_x$ on $U$ and zero outside. Applying [lem-weil-pbc-module-stalk-exact] (5) to these stalks shows that $j_!$ carries every short exact sequence to a short exact sequence, so it is exact; the presheaf construction is additive.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-stalk-sheafification-space",
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-pbc-exact-sequence",
+    "lem-sc-topological-extension-by-zero-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex; literature/stacks-project/modules.tex",
+    "place": "Sheaves Lemma 00A7 (lemma-j-shriek-modules), parts (2),(3), and Modules Lemma 01AK (lemma-j-shriek-exact); construction written out from the omitted proofs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-stalk-exact",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-stalk-sheafification-space",
+  "lem-sc-topological-extension-by-zero-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/modules.tex",
+  "place": "Cohomology Lemma 08BS proof, using Sheaves Lemma 00A7, Modules Lemmas 01AG and 01AK"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +101,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-derived-k-injective-restrict-open",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-open-restriction-adjunction-exact",
+  "worker": "stage1",
+  "summary": "The item is proved in two steps. Restriction exactness is checked stalkwise using the existing general ringed-space stalk exactness node. The second step constructs extension by zero by module sheafification, proves its adjunction and stalk formula, and deduces exactness from Stacks 00A7 and 01AK. Existing scheme-only, Zariski-abelian, and localized-site nodes were checked and are not duplicates.",
+  "blueprint": "Realizes the parenthetical Ext-vanishing proof of thm-sc-p1-duality at the clause that restriction to an open has an exact left adjoint extension by zero.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "The proof uses its general ringed-space criterion that exactness of a module complex is equivalent to exactness on all stalks; the Picard-duality route has no more specific stalk-exactness node."
+   }
+  ],
+  "not_duplicates": [
+   "lem-sc-derived-open-restriction-adjunction-exact vs lem-weil-pbc-module-extension-by-zero-adjunction: the existing node assumes a scheme and states the scheme-module construction with stalks; this item is for an arbitrary ringed space and also includes exactness of restriction and extension by zero.",
+   "lem-sc-derived-open-restriction-adjunction-exact vs lem-weil-pbc-module-open-restriction-injectives: the existing node is a scheme-specific injective-resolution consequence, while this item is the underlying arbitrary-ringed-space adjunction and exactness statement.",
+   "lem-sc-derived-open-restriction-adjunction-exact vs lem-weil-pbc-zariski-extension-by-zero-adjunction: the existing node concerns abelian sheaves on the Zariski site, while this item concerns modules over an arbitrary sheaf of rings on a ringed space."
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-sc-topological-extension-by-zero-stalks",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ora1913",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ora1913 (reviewer sub-agent of L); spot-checked: Statement vs 08BS/00A7/01AK; Step 1 stalkwise restriction exactness via lem-weil-pbc-module-stalk-exact(5) (ringed-space, generic tool accepted); Step 2 adjunction via module sheafification universal property; no cycle with F1 parent lem-sc-derived-k-injective-restrict-open (item cites only generic nodes, none created from F1); not a restatement of site nodes lem-weil-pbc-site-extension-by-zero-exact / -restriction-exact (abelian sheaves on a site, not ringed-space modules) nor of scheme-only lem-weil-pbc-module-extension-by-zero-adjunction. FIX more, RETURN less: C1 Step 2 rederived the j_! stalk formula and its naturality inline; now cites existing lem-sc-topological-extension-by-zero-stalks as a generic tool (abelian sheafification underlies module sheafification by def-weil-presheaf-modules-sheafification), added to uses/proof_deps.; 1 file(s) fixed by the reviewer"
+ }
 }
