@@ -20,9 +20,62 @@
   "def-sc-p1-standard",
   "def-weil-pbc-proj-twisting-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The shifts make multiplication by x_1 and x_0 degree-preserving: an element of S(-2) has its internal degree raised by two, while the target copies S(-1) are raised by one, and similarly for the map to S. The composite is (x_1,-x_0) followed by (x_0,x_1), namely x_1x_0-x_0x_1=0 because S is commutative. The final map S\\to k is the quotient map, so its kernel is the ideal (x_0,x_1), exactly the image of (x_0,x_1).",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "statement and proof of the Koszul resolution: checking the displayed maps and their composite"
+   }
+  },
+  {
+   "text": "The ring S is an integral domain, so multiplication by either nonzero variable x_0 or x_1 is injective. Hence if a in S maps to (a x_1,-a x_0)=0, then a x_0=0 and therefore a=0. This proves exactness at S(-2).",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "statement source note: Koszul resolution on the regular sequence x_0,x_1"
+   }
+  },
+  {
+   "text": "If (a,b) in S(-1) direct sum S(-1) lies in the kernel, then a x_0+b x_1=0. By the two-variable syzygy statement [lem-sc-p1-linear-syzygy], there is c with a=c x_1 and b=-c x_0, so (a,b)=c(x_1,-x_0), which is in the image of the first map. Conversely every such image is killed by the second map by Step 1. Thus exactness holds at the middle term.",
+   "uses": [
+    "lem-sc-p1-linear-syzygy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "statement source note: Koszul resolution on the regular sequence x_0,x_1"
+   }
+  },
+  {
+   "text": "The preceding kernel-image computations at S(-2), S(-1) direct sum S(-1), and S, together with the quotient identification at k, give exactness of the full displayed graded complex. The degree shifts are precisely those in the statement, so all maps are homogeneous of degree zero.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "statement source note: graded global dimension two of S=k[x_0,x_1]"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-sc-p1-linear-syzygy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "statement source note and explicit proof of the Koszul exactness"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,12 +100,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-graded-syzygy",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-koszul-resolution",
+  "worker": "stage1",
+  "summary": "Expanded the Koszul statement into four steps: degree and complex checks, injectivity at the left, the explicit two-variable syzygy at the middle, and quotient exactness. Added one statement-only node for the non-elementary linear syzygy and cited the existing polynomial-domain Mathlib leaf for cancellation.",
+  "blueprint": "Realizes the parent proof's Koszul-resolution clause, namely exactness for the regular sequence x_0,x_1.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-polynomial-ring-domain",
+    "why": "Its statement supplies that a polynomial ring over a field is an integral domain, used for cancellation by x_0 and x_1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-polynomial-ring-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pkr",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pkr (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-p1-graded-resolution.md (source note: Koszul resolution of k on the regular sequence x_0,x_1; graded global dimension two); item statement unchanged, agrees with it (field k, S=k[x_0,x_1] standard grading, shifts S(-2), S(-1)^2 via def-weil-pbc-proj-twisting-sheaf (2), k=S/(x_0,x_1), maps homogeneous of degree zero). Step 1 (elementary): degree check from M(d)_n=M_{d+n} of def-weil-pbc-proj-twisting-sheaf, composite x_1x_0-x_0x_1=0, kernel of S->k is (x_0,x_1)=image; checked. Step 2: injectivity at S(-2) from lem-weil-pbc-polynomial-ring-domain (D=k a domain, finite variable set), cancellation of x_0; accepted as a generic off-unit tool (tool_uses declared, C8). Step 3: middle exactness from new node lem-sc-p1-linear-syzygy, whose statement gives exactly a=cx_1, b=-cx_0 from ax_0+bx_1=0; converse by Step 1. Step 4 (elementary) assembles. New node lem-sc-p1-linear-syzygy: true (x_0,x_1 regular sequence / UFD: x_0 | b x_1 so x_0 | b), self-contained, TeX, stmt_deps def-sc-p1-standard and def-pc-standard-graded-algebra exist, statement-only unsplit, created.item = item, three Mathlib searches no match, blueprint from/same_as filled; my blueprint_refs search syzygy/Koszul found no same-statement node. B10: slopmaster2 AlgebraicGeometry/ProjectiveSpace/Koszul.lean koszul_shortExact is the sheaf-level sequence on P^1, not this graded-ring statement, so no attachment. Small cases: a=x_1,b=-x_0 gives c=1; a=b=0 gives c=0; a=x_1^2, b=-x_0x_1 gives c=x_1. Maintainer fields of the item unchanged. Start Sat Oct 10 03:57:09 PM UTC 2026, end Sat Oct 10 03:57:33 PM UTC 2026."
+ }
 }
