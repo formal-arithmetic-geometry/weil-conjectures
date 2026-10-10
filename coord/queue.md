@@ -1,8 +1,8 @@
 # Work queue
 
-915 items; claim with `tools/claim.py next <group> [--stage N]`.
+918 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (330)
+## Stage 1: nodes to split (333)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -41,18 +41,17 @@
 | `def-sc-scheme-tangent-space` | 3012 | none |
 | `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 3012 | none |
 | `lem-sc-rational-tangent-cotangent-duality` | 3012 | none |
-| `lem-weil-pbc-ringed-site-injective-module-injective-presheaf` | 3012 | none |
 | `def-sc-sheaf-cohomology-functor` | 3013 | none |
 | `lem-pc-affine-surjective-structure-map-closed-immersion` | 3013 | none |
 | `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
 | `lem-pc-local-flat-faithful-flat-reflects-surjective` | 3013 | none |
 | `lem-pc-proper-geometrically-reduced-global-sections-separable` | 3013 | none |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 3013 | none |
-| `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
 | `lem-sc-p1-regular-dimension-one` | 3013 | none |
+| `lem-weil-pbc-ringed-site-module-sheafification-exact` | 3013 | none |
 | `def-pc-upper-shriek-right-adjoint` | 3014 | none |
 | `lem-pc-field-extension-flat` | 3014 | none |
 | `lem-pc-field-extension-quasi-compact` | 3014 | none |
@@ -60,10 +59,14 @@
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
 | `lem-pc-proper-derived-direct-image-composition` | 3014 | none |
 | `lem-sc-acyclic-comparison-natural` | 3014 | none |
+| `lem-sc-affine-derived-concentration` | 3014 | none |
 | `lem-sc-cech-comparison-map-iso-affine` | 3014 | none |
 | `lem-sc-cech-comparison-map-naturality` | 3014 | none |
 | `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
 | `lem-sc-ext-coherent-hom-injective-acyclic` | 3014 | none |
+| `lem-sc-finite-duality-derived-hom` | 3014 | none |
+| `lem-sc-finite-locally-free-derived-hom` | 3014 | none |
+| `lem-sc-finite-pushforward-locally-free` | 3014 | none |
 | `lem-sc-open-map-irreducible-fibres-components` | 3014 | none |
 | `lem-sc-rhom-cohomology-ext-ring` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
@@ -927,7 +930,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 347 nodes that wait for stage 1, 1189 nodes that wait for a statement dependency.
+Not open yet: 350 nodes that wait for stage 1, 1191 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
