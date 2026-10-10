@@ -190,6 +190,39 @@ theorem IsConstructibleSheaf.biproduct {J : Type} [Finite J]
     P.prop_product fun j ↦ (inferInstance : IsConstructibleSheaf (F j))
   exact IsConstructibleSheaf.of_iso (biproduct.isoProduct F).symm
 
+variable (X Λ) in
+/-- The constant sheaf `Λ_X`, the monoidal unit, is finite locally constant. -/
+instance isFiniteLocallyConstantSheaf_unit :
+    IsFiniteLocallyConstantSheaf (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) where
+
+attribute [local instance] Abelian.hasFiniteBiproducts in
+/-- **A finite direct sum of finite locally constant sheaves of modules is finite locally
+constant**, by induction from the binary case
+`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.biprod`; for instance the finite free
+sheaf `Λ_Xʳ`. -/
+theorem IsFiniteLocallyConstantSheaf.biproduct {J : Type} [Finite J]
+    (F : J → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [∀ j, IsFiniteLocallyConstantSheaf (F j)] :
+    IsFiniteLocallyConstantSheaf (⨁ F) := by
+  let P : ObjectProperty (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    fun G ↦ IsFiniteLocallyConstantSheaf G
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ by
+    have : IsFiniteLocallyConstantSheaf _ := h
+    exact IsFiniteLocallyConstantSheaf.of_iso e⟩
+  have : P.ContainsZero :=
+    ⟨⟨0, isZero_zero _, IsFiniteLocallyConstantSheaf.of_isZero (isZero_zero _)⟩⟩
+  have : P.IsClosedUnderBinaryProducts := .mk' (by
+    rintro _ ⟨G, hG⟩
+    have : IsFiniteLocallyConstantSheaf (G.obj ⟨.left⟩) := hG _
+    have : IsFiniteLocallyConstantSheaf (G.obj ⟨.right⟩) := hG _
+    have := IsFiniteLocallyConstantSheaf.biprod (G.obj ⟨.left⟩) (G.obj ⟨.right⟩)
+    exact IsFiniteLocallyConstantSheaf.of_iso ((biprod.isoProd _ _) ≪≫
+      (HasLimit.isoOfNatIso (diagramIsoPair G)).symm))
+  have : P.IsClosedUnderFiniteProducts := .mk'
+  have : IsFiniteLocallyConstantSheaf (∏ᶜ F) :=
+    P.prop_product fun j ↦ (inferInstance : IsFiniteLocallyConstantSheaf (F j))
+  exact IsFiniteLocallyConstantSheaf.of_iso (biproduct.isoProduct F).symm
+
 end Modules
 
 end AlgebraicGeometry.Scheme
