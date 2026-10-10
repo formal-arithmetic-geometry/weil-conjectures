@@ -1629,3 +1629,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:33 L: returned deliver/H1/lemma-weil-pbc-fibre-product-limit (reviewer RETURN: Reviewed head 128db40b3 (reviewer R-fpl). The points of the previous return are repaired: the two ill-typed children are)
 - 14:34 L: attached def-galois-fibre-functor (FiniteEtale.fiber, released by H1) and def-weil-pbc-etale-sum-extension (etaleLowerShriek, released by M1); lem-sc-canonical-degree NOT attached (degree_relativeDifferentials sorried transitively), notice to C1, item stays in the queue
 - 14:34 L: merged deliver/E1/lem-weil-pbc-coskeleton-matching-tuples (reviewer PASS; after a return; new nodes: 0)
+- 14:35 L: returned deliver/H1/lem-weil-pbc-direct-sum-extension-assembly (reviewer RETURN: Reviewed head 84e01c1ab (reviewer R-dsa). Repaired: the new node lem-weil-pbc-ext-one-direct-sum now defines the equival)
