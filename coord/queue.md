@@ -1,8 +1,8 @@
 # Work queue
 
-861 items; claim with `tools/claim.py next <group> [--stage N]`.
+865 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (637)
+## Stage 1: nodes to split (640)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1012 | none |
 | `lem-weil-pbc-flat-normal-fibres-noetherian-normal` | 1012 | none |
-| `lem-weil-pbc-flat-ses-kernel-flat` | 1012 | none |
 | `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1012 | none |
 | `lem-weil-pbc-flat-under-regular` | 1012 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
@@ -122,6 +121,7 @@
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
 | `def-weil-pbc-japanese-domain` | 1013 | none |
 | `def-weil-pbc-nagata-ring` | 1013 | none |
+| `def-weil-pbc-serre-conditions-rk-sk` | 1013 | none |
 | `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1013 | none |
 | `lem-weil-pbc-cohen-rings-exist` | 1013 | none |
 | `lem-weil-pbc-coherent-finite-type-sub-kernel` | 1013 | none |
@@ -136,6 +136,9 @@
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1013 | none |
 | `lem-weil-pbc-scheme-modules-enough-injectives` | 1013 | none |
+| `lem-weil-pbc-serre-criterion-normal` | 1013 | none |
+| `lem-weil-pbc-serre-sk-goes-up` | 1013 | none |
+| `def-weil-pbc-depth` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -644,7 +647,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (224)
+## Stage 2: nodes to state (225)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -758,6 +761,7 @@
 | `lem-weil-pbc-flat-over-regular` | 1 | state |
 | `lem-weil-pbc-flat-over-regular-with-regular-fibre` | 1 | state |
 | `lem-weil-pbc-flat-permanence` | 1 | state |
+| `lem-weil-pbc-flat-ses-kernel-flat` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
@@ -873,7 +877,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 649 nodes that wait for stage 1, 505 nodes that wait for a statement dependency.
+Not open yet: 652 nodes that wait for stage 1, 505 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
