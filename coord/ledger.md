@@ -1495,3 +1495,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of F1: def-exc-continuous-cohomology merged from deliver/F1/def-exc-continuous-cohomology (1 commit(s), 2 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: citations of the derived-functor and injectives nodes): 04JF and 0DVG read, the two claims hidden in the definition now statement nodes); claim closed
 - 13:27 L: merged deliver/F1/def-exc-continuous-cohomology (reviewer FIX citations applied; first push; 2 new nodes)
 - 2026-10-10, delivery of C1: lem-galois-inverse-image-representable returned (47f1b5fe0): Reviewed in full (reviewer sub-agent of L). C4: steps 2 and 3 use the general Yoneda lemma Hom(h_A, F) = F(A) for an arbitrary presheaf F, natural in A and F, b
+- 13:28 L: returned deliver/C1/lem-galois-inverse-image-representable (reviewer RETURN: C4 general Yoneda lemma not carried by the cited node, C4 co-Yoneda step)
