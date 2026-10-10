@@ -2367,3 +2367,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:20 L: merged deliver/J1/pqf-lem-finite-integral-lft (reviewer FIX; first push; new nodes: 0)
 - 19:20 L: merged deliver/J1/thm-pc-semicontinuity-base-change (reviewer FIX; first push; new nodes: 0)
 - 19:21 L: merged deliver/G1/lem-sc-finite-surjective-dimension (reviewer PASS; first push; new nodes: 0)
+- 19:21 L: merged deliver/J1/lem-sc-bounded-below-injective-resolution (reviewer FIX; first push; new nodes: 1)

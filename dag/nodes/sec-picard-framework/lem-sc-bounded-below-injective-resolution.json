@@ -23,28 +23,72 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The category $\\Mod(\\mathcal O_U)$ of sheaves of $\\mathcal O_U$-modules on the small ringed site $(U,\\mathcal O_U)$ is a Grothendieck abelian category by [prop-pur-kinjective-resolutions-exist] (its first clause), hence it is abelian and has enough injectives by [lem-sp-grothendieck-enough-injectives].",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/injectives.tex",
+    "place": "Tags 07A5 and 079P"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-bounded-below-injective-resolution-existence] to the bounded-below complex $\\mathcal G^\\bullet$ in this abelian category. It yields a quasi-isomorphism $\\mathcal G^\\bullet\\to\\mathcal I^\\bullet$ with $\\mathcal I^\\bullet$ bounded below and every $\\mathcal I^n$ injective.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
+    "place": "CochainComplex.Plus.exists_quasiIso_injective, lines 61-69"
+   }
+  },
+  {
+   "text": "A bounded-below complex whose terms are injective is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so the resulting $\\mathcal I^\\bullet$ has the required K-injective property.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+    "place": "CochainComplex.isKInjective_of_injective, lines 133-134"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/injectives.tex",
+  "place": "Tag 07A5 using Tag 079P, with the bounded-below replacement supplied by Mathlib"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "bounded-below complex of sheaves admits bounded-below injective resolution",
-   "results": "InjectiveResolution.ofCocomplex and instIsKInjectiveCochainComplex; object-level injective resolutions, not the sheaf-complex statement",
+   "results": "CategoryTheory.InjectiveResolution and instIsKInjectiveCochainComplex hits; no direct sheaf-complex declaration",
    "date": "2026-10-11",
    "verdict": "generalization: objectwise injective-resolution infrastructure"
   },
   {
    "tool": "loogle",
-   "query": "CochainComplex.isKInjective_of_injective, InjectiveResolution",
-   "results": "0 hits; unknown identifier InjectiveResolution",
+   "query": "CochainComplex.Plus.exists_quasiIso_injective, CochainComplex.isKInjective_of_injective",
+   "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "isKInjective_of_injective|bounded.*below",
-   "results": "No matching source declaration for bounded-below sheaf-complex resolution",
+   "query": "exists_quasiIso_injective|isKInjective_of_injective",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean:133 isKInjective_of_injective; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean:61 exists_quasiIso_injective",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -57,12 +101,34 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-derived-hom-finite-free-model",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-bounded-below-injective-resolution",
+  "worker": "stage1",
+  "summary": "Split the resolution existence from the K-injectivity conclusion. The ringed-site module category has enough injectives by the new ringed-site node; Mathlib's CochainComplex.Plus.exists_quasiIso_injective supplies the bounded-below quasi-isomorphism to injective terms; the existing Mathlib leaf for bounded-below injective complexes supplies K-injectivity.",
+  "blueprint": [
+   "parenthetical Ext-vanishing proof, choose an injective resolution of the bounded-below second complex"
+  ],
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bbi1924",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bbi1924 (reviewer sub-agent of L); spot-checked: Item statement unchanged; read CochainComplex.Plus.exists_quasiIso_injective (DerivabilityStructureInjectives.lean:61-69): exact match for the new existence leaf (generic abelian + EnoughInjectives, IsStrictlyGE n, quasiIso to injective terms); step 3 leaf lem-weil-pbc-bounded-below-injectives-kinjective fits; no cycle. Checked dag for existing bounded-below injective-resolution nodes: lem-weil-pbc-dplus-injective-representative gives only an iso in D+, not a chain quasi-iso, so the new leaf is kept. FIX more, RETURN less: (B, class b/d) new node lem-sc-ringed-site-module-sheaves-enough-injectives is the first clause of existing prop-pur-kinjective-resolutions-exist (Mod(O) Grothendieck abelian on a small ringed site) plus existing leaf lem-sp-grothendieck-enough-injectives; dropped it and step 1 now cites those two nodes as generic tools (tool_uses, as already done by lem-sc-ext-sheaf-to-global-spectral-sequence in this unit; neither reaches the item); proof_deps updated. The second reading's Not-duplicates entry vs prop-pur missed this.; 1 file(s) fixed by the reviewer"
+ }
 }
