@@ -1,8 +1,8 @@
 # Work queue
 
-909 items; claim with `tools/claim.py next <group> [--stage N]`.
+908 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (271)
+## Stage 1: nodes to split (269)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-exc-finite-galois-algebra-tensor-decomposition` | 3010 | none |
-| `lem-exc-finite-galois-sheaf-sections-coproduct` | 3010 | none |
 | `lem-weil-pbc-site-extension-by-zero-presheaf-adjoint` | 3012 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-sc-affine-rhom-qcoherent` | 3015 | none |
@@ -26,7 +25,6 @@
 | `lem-sc-p1-ext-connecting-yoneda` | 3015 | none |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
 | `lem-pc-brown-cohomological-representability` | 3016 | none |
-| `lem-pc-derived-ambient-direct-sums` | 3016 | none |
 | `lem-pc-derived-direct-image-uniform-truncation-bound` | 3016 | none |
 | `lem-pc-kflat-pullback-preservation` | 3016 | none |
 | `lem-pc-quasi-coherent-extension` | 3016 | none |
@@ -35,6 +33,7 @@
 | `lem-sc-koszul-regular-immersion-derived-hom` | 3016 | none |
 | `lem-sc-smooth-diagonal-regular-immersion` | 3016 | none |
 | `lem-pc-pre-derived-adjoint-functors-general` | 3017 | none |
+| `lem-pc-scheme-modules-grothendieck-abelian` | 3017 | none |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 3017 | none |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 3017 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -64,12 +63,11 @@
 | `lem-sc-hilbert-polynomial` | 5009 | none |
 | `lem-sc-mult-n-isogeny` | 5009 | rests_on_sorry |
 | `lem-pc-flat-complex-derived-pullback` | 5010 | none |
-| `lem-pc-pic-of-field` | 5010 | none |
-| `lem-pc-rf-base-change-flat-module` | 5010 | none |
 | `lem-pc-rf-perfect-base-change` | 5010 | none |
 | `lem-sc-mult-n-finite-kernel` | 5010 | rests_on_sorry |
 | `thm-picard-serre-a` | 5010 | rests_on_sorry |
 | `def-pc-derived-pullback` | 5011 | none |
+| `lem-pc-base-change-map-cech` | 5011 | none |
 | `lem-pc-cech-resolution` | 5011 | none |
 | `lem-pc-projective-noetherian-rf-perfect` | 5011 | none |
 | `thm-pc-semicontinuity-base-change` | 5011 | sorry_here |
@@ -278,7 +276,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (638)
+## Stage 2: nodes to state (639)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -358,6 +356,7 @@
 | `lem-pc-invertible-sheaf-instance` | 1 | state |
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
+| `lem-pc-pic-of-field` | 1 | state |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 1 | state |
 | `lem-pc-presheaf-change-of-rings-adjunction` | 1 | state |
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
@@ -921,7 +920,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1309 nodes that wait for a statement dependency, 298 nodes that wait for stage 1.
+Not open yet: 1312 nodes that wait for a statement dependency, 296 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
