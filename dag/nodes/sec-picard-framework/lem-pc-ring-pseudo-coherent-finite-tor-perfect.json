@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "Tag 08EV proof: finite Tor dimension together with pseudo-coherence implies perfectness",
+   "place": "Tag 0658 proof: pseudo-coherence supplies a bounded-above finite-projective model, and the truncation argument makes it bounded under finite Tor dimension",
    "via": [
     "lem-pc-pseudo-coherent-finite-tor-perfect"
    ]
@@ -22,9 +22,71 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Taking $M=R$ in the amplitude hypothesis gives $H^i(C)=0$ for $i>b$. Apply [lem-pc-pseudo-coherent-bounded-finite-free-model] to obtain a quasi-isomorphism $P^\\bullet\\to C$ from a complex of finitely generated free $R$-modules with $P^i=0$ for $i>b$. Derived tensor products are invariant under quasi-isomorphism, so $H^i(P^\\bullet\\otimes^{\\mathbf L}_R M)=0$ for every $R$-module $M$ and every $i\\notin[a,b]$; in particular ($M=R$) $H^i(P^\\bullet)=0$ for $i<a$. Since $P^\\bullet$ is a bounded-above complex of flat modules, it is K-flat by [lem-pc-bounded-above-flat-kflat] (applied to the one-point ringed space with ring $R$), so $P^\\bullet\\otimes^{\\mathbf L}_R M$ is computed by the ordinary total tensor complex $P^\\bullet\\otimes_R M$.",
+   "uses": [
+    "lem-pc-pseudo-coherent-bounded-finite-free-model",
+    "lem-pc-bounded-above-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.2 (Tag 0658), definition of pseudo-coherence and first reduction"
+   }
+  },
+  {
+   "text": "Set $E^\\bullet=\\tau_{\\ge a}P^\\bullet$: the complex with $E^i=P^i$ for $i>a$, $E^a=\\operatorname{coker}(d^{a-1}\\colon P^{a-1}\\to P^a)$ and $E^i=0$ for $i<a$, with the canonical surjective map of complexes $P^\\bullet\\to E^\\bullet$. Because $P^i=0$ for $i>b$, $E^\\bullet$ is bounded, and all its terms except $E^a$ are finitely generated free; $E^a$ is finitely presented, being the cokernel of a map $P^{a-1}\\to P^a$ between finite free modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.2 (Tag 0658), truncation argument in the proof"
+   }
+  },
+  {
+   "text": "By Step 1, $H^i(P^\\bullet)=0$ for $i<a$, so $\\cdots\\to P^{a-2}\\to P^{a-1}\\to P^a\\to E^a\\to0$ is a resolution of $E^a$ by free modules. Hence for every $R$-module $M$, $\\operatorname{Tor}_1^R(E^a,M)$ is the homology at $P^{a-1}\\otimes_R M$ of $P^{a-2}\\otimes_R M\\to P^{a-1}\\otimes_R M\\to P^a\\otimes_R M$, which is $H^{a-1}(P^\\bullet\\otimes_R M)=H^{a-1}(P^\\bullet\\otimes^{\\mathbf L}_R M)=0$ by Step 1, since $a-1\\notin[a,b]$. Thus $\\operatorname{Tor}_1^R(E^a,M)=0$ for every $M$, i.e. $E^a$ is flat (More on Algebra, Lemma 15.68.2, used in Tag 0658). Since $E^a$ is also finitely presented (Step 2), [lem-weil-pbc-finitely-presented-flat-module-projective] makes it a finite projective $R$-module.",
+   "uses": [
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.2 (Tag 0658), truncation and Tor-dimension-zero argument"
+   }
+  },
+  {
+   "text": "The canonical map $P^\\bullet\\to E^\\bullet=\\tau_{\\ge a}P^\\bullet$ induces isomorphisms on $H^i$ for $i\\ge a$ by construction, and both sides have $H^i=0$ for $i<a$ (for $P^\\bullet$ by Step 1); hence it is a quasi-isomorphism. With Step 3, every term of $E^\\bullet$ is a finitely generated projective $R$-module, so $C\\cong P^\\bullet\\cong E^\\bullet$ in $D(R)$ with $E^\\bullet$ a bounded complex of finitely generated projective $R$-modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.2 (Tag 0658), conclusion of the truncation argument"
+   }
+  },
+  {
+   "text": "A bounded complex of finitely generated projective $R$-modules is perfect in the affine sense, by the strictly-perfect clause of [def-pc-perfect-complex] on $\\operatorname{Spec}(R)$.",
+   "uses": [
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Definition 15.76.1 (Tag 0657)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-pseudo-coherent-bounded-finite-free-model",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "def-pc-perfect-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.76.2 (Tag 0658)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,15 +108,42 @@
    "results": "0 hits in Mathlib/CategoryTheory/DerivedCategory",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pseudo-coherent finite Tor dimension perfect complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-pseudo-coherent-finite-tor-perfect",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+  "worker": "stage1",
+  "summary": "Checked the ring criterion against Stacks More on Algebra, Lemma 15.76.2 (Tag 0658). Added the strictly smaller truncation lemma for a bounded-above finite-projective complex with finite Tor amplitude, then reduced pseudo-coherence to that lemma and concluded by the affine perfect-complex definition. No sorry-free project declaration states the item exactly.",
+  "blueprint": "The proof realizes the ancestor clause that finite Tor dimension together with pseudo-coherence implies perfectness: pseudo-coherent resolution, truncation at the lower amplitude bound, and the bounded-projective conclusion.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pct2726",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pct2726 (reviewer sub-agent of L); spot-checked: Packet read whole; Tag 0658 text vs steps; citer lem-pc-pseudo-coherent-finite-tor-perfect applies item to a bounded-above finite free P with Tor amplitude [a,b] (C4 ok); leaf Module.Flat.projective_of_finitePresentation read at EquationalCriterion.lean:287 (exact, Stacks 00NX); tor amplitude defined inline in the ring statement (E ok, no O_X tor-amplitude node needed); new node not (b)/(c)/(d): real lemma (Stacks 15.64.5), grep of Mathlib for PseudoCoherent 0 hits recorded. FIX more, RETURN less: (1) C4/E steps 3-4: truncation map direction corrected to the canonical surjection P->tau_{>=a}P, Tor_1(E^a,M)=H^{a-1}(P tensor M) derived from the free resolution P^{<=a}->E^a, garbled 'E^a is flat for every M' rewritten; (2) C1 step 1: P tensor M computing the derived tensor now cited from lem-pc-bounded-above-flat-kflat (tool use), proof_deps updated; (3) B4/B3: all steps and the new node statement rewritten in TeX (\\to, \\tau_{\\ge a}, \\otimes^{\\mathbf L}), new node names b.; 2 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-pct2726): R-pct2726: steps 3-4 had the truncation map backwards (E->P, triangle E->P->P/E); E=tau_{>=a}P is a quotient of P. Second reading missed it. Cited lem-pc-bounded-above-flat-kflat (unit sk-thm-picard-semicon) as generic tool for P tensor M computing the derived tensor."
 }
