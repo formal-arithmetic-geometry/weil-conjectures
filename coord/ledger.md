@@ -2712,3 +2712,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:42 UTC L deleted deliver/F1/lem-pc-tensor-mapping-cone-iso (node attached since 21:25), released F1's claim; notice to H1 on duplicate candidates for lem-pc-perfect-rhom-tensor-comparison
 - 21:43 L: merged deliver/H1/lem-pc-coherent-support-proper-higher-direct-image (reviewer FIX; first push; new nodes: 0)
 - 21:44 L: merged deliver/E1/lem-pod-lisse-module-sheaves-as-module-objects (reviewer PASS; first push; new nodes: 0)
+- 21:44 L: merged deliver/M1/pqf-lem-qs-intersection-qc (reviewer FIX; first push; new nodes: 1)

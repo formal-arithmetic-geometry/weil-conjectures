@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "pqf-lem-qs-intersection-qc",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Intersections of quasi-compact opens",
@@ -12,27 +12,89 @@
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/pqf-lem-qs-intersection-qc.md",
   "place": "node pqf-lem-qs-intersection-qc, order 194"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
  "proof": [
   {
-   "text": "The affine opens form a basis of the topology of a scheme, so the\nquasi-compact opens $U$ and $V$ are finite unions of affine opens,\n$U=U_1\\cup\\dots\\cup U_m$ and $V=V_1\\cup\\dots\\cup V_n$. Then\n$U\\cap V=\\bigcup_{i,j}(U_i\\cap V_j)$ is a finite union, so it suffices\nto treat the case that $U$ and $V$ are affine. In the product\n$X\\times X$ the rectangle $U\\times V$ is affine, hence\nquasi-compact, and the diagonal $\\Delta:X\\to X\\times X$ is a\nquasi-compact morphism, because $X$ is quasi-separated\n([def-weil-pbc-scheme-conventions]). By the definition of a\nquasi-compact morphism in [def-weil-pbc-scheme-conventions] the\npreimage of the affine open $U\\times V$ under $\\Delta$ is\nquasi-compact. The diagonal is the identity on points, so that preimage\nis $U\\cap V$.",
+   "text": "By the finite-affine-cover theorem, each quasi-compact open U and V is a finite union of affine opens, say U = union_i U_i and V = union_j V_j.",
    "uses": [
-    "def-weil-pbc-scheme-conventions"
+    "lem-pqf-finite-affine-cover-qc-open"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+    "place": "theorem isCompact_iff_finite_and_eq_biUnion_affineOpens, lines 85-89"
+   }
+  },
+  {
+   "text": "The intersection U intersect V is the finite union of the opens U_i intersect V_j. Each U_i intersect V_j is quasi-compact by clause (1) of the affine-cover criterion for quasi-separatedness [lem-weil-pbc-quasi-separated-affine-cover-criterion], since X is quasi-separated and U_i, V_j are affine opens; finite unions of quasi-compact subsets are quasi-compact. Therefore U intersect V is quasi-compact; it is open because it is an intersection of opens.",
+   "uses": [
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+    "place": "theorem quasiSeparatedSpace_iff_forall_affineOpens, lines 56-64"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-scheme-conventions"
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/pqf-lem-qs-intersection-qc.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "quasi-separated scheme intersection of two quasi-compact open subschemes is quasi-compact",
+   "results": "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens; isCompact_iff_finite_and_eq_biUnion_affineOpens",
+   "date": "2026-10-11",
+   "verdict": "no exact single declaration; proof uses two matches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite union of affine opens intersection quasi-compact open in quasi-separated scheme",
+   "results": "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens; isCompact_iff_finite_and_eq_biUnion_affineOpens",
+   "date": "2026-10-11",
+   "verdict": "generalization: two declarations jointly provide the result"
+  },
+  {
+   "tool": "loogle",
+   "query": "quasiCompact, QuasiSeparated, Scheme, intersection of quasi-compact opens",
+   "results": "unknown identifier 'quasiCompact'; no hit",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens, IsCompact",
+   "results": "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens",
+   "date": "2026-10-11",
+   "verdict": "generalization: affine-open case only"
+  },
+  {
+   "tool": "grep",
+   "query": "quasi-compact.*intersection|intersection.*quasi-compact [Mathlib/AlgebraicGeometry]",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:20; QuasiCompact.lean:78-86",
+   "date": "2026-10-11",
+   "verdict": "generalization: component declarations found"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiSeparatedSpace_iff_forall_affineOpens [Mathlib/AlgebraicGeometry/Morphisms]",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:56",
+   "date": "2026-10-11",
+   "verdict": "match for affine case"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -54,5 +116,20 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-zmt"
+ "unit": "sk-prop-nagata-sketch-zmt",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-qs-intersection-qc",
+  "worker": "stage1",
+  "summary": "Added exact Mathlib leaves for finite affine decomposition of quasi-compact opens and compactness of affine-open intersections in a quasi-separated scheme. The proof reduces to these leaves and elementary finite-union compactness and openness.",
+  "blueprint": "Realizes the sole proof paragraph of pqf-lem-qs-intersection-qc: finite affine decomposition, affine intersection, and finite-union conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qiq2654",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qiq2654 (reviewer sub-agent of L); spot-checked: Read packet whole. Item not one Mathlib declaration: project quasi-separated scheme is via the diagonal (def-weil-quasi-separated-morphism), so Mathlib needs quasiSeparatedSpace_iff_quasiSeparated + QuasiSeparatedSpace.inter_isCompact; split reviewed. Leaf isCompact_iff_finite_and_eq_biUnion_affineOpens read at QuasiCompact.lean:85, forward implication. C4: citer thm-pqf-immersion-descent Step 3 uses U,W quasi-compact opens in quasi-separated T, matches. FIX more, RETURN less: (1) B class (b): new lem-pqf-affine-intersection-compact duplicates clause (1) of existing lem-weil-pbc-quasi-separated-affine-cover-criterion (same Mathlib decl quasiSeparatedSpace_iff_forall_affineOpens); Step 2 now cites the existing node, duplicate dropped, proof_deps corrected. (2) B8 wording: leaf 'how' exact -> forward implication of the iff.; 2 file(s) fixed by the reviewer"
+ }
 }
