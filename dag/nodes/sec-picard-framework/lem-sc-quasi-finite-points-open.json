@@ -22,9 +22,73 @@
  "stmt_deps": [
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a point x of X at which f is quasi-finite. By [pqf-def-quasifinite] (1), choose affine opens U = Spec(B) containing x and V = Spec(A) containing f(U), such that the induced finite-type ring map A \\to B is quasi-finite at the prime q of B corresponding to x.",
+   "uses": [
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TI, proof using Definition 01TD (1)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ring-quasi-finite-locus-open] to A \\to B and q. It gives an element g in B not contained in q such that A \\to B_g is quasi-finite at every prime of B_g.",
+   "uses": [
+    "lem-weil-pbc-ring-quasi-finite-locus-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QA, lemma-quasi-finite-open"
+   }
+  },
+  {
+   "text": "The basic open D(g) of Spec(B) is an affine open neighbourhood of x, with coordinate ring B_g; viewed as an open subscheme U_g of X, its canonical affine immersion is an open neighbourhood of x by [lem-weil-pbc-affine-open-spec-points], and f(U_g) is contained in V. The induced map on this affine open and V is A \\to B_g, which is of finite type since A \\to B is and B_g = B[1/g]; so every point of U_g is quasi-finite for f by [pqf-def-quasifinite] (1) and step 2.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-ring-quasi-finite-locus-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TI, proof after Tag 00QA"
+   }
+  },
+  {
+   "text": "Every point of the quasi-finite locus has such an open neighbourhood U_g, while each U_g consists entirely of quasi-finite points. Therefore the locus is the union of these open subsets and is open in X.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TI, conclusion of the proof"
+   }
+  },
+  {
+   "text": "Let U be the open locus of step 4 and x a point of U. The affine open U_g of step 3 around x lies in U, so U_g and V, with the finite-type ring map A \\to B_g quasi-finite at the prime of x (step 2), witness [pqf-def-quasifinite] (1) for the induced morphism U \\to S at x. Hence U \\to S is quasi-finite at every point of U, i.e. locally quasi-finite by [pqf-def-quasifinite] (2).",
+   "uses": [
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TI, final assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-ring-quasi-finite-locus-open",
+  "lem-weil-pbc-affine-open-spec-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01TI, lemma-quasi-finite-points-open"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,12 +119,37 @@
   "line": "292-293",
   "why_not_exact": "The declaration requires LocallyOfFiniteType and states openness of the locus defined by Mathlib's QuasiFiniteAt; it does not state the Stacks quasi-finite notion or the induced morphism U -> S is locally quasi-finite."
  },
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-sc-proper-finite-fibre-finite-neighbourhood",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-quasi-finite-points-open",
+  "worker": "stage1",
+  "summary": "Split Tag 01TI using the existing Stacks-definition node, the existing affine ring-level openness theorem (Tag 00QA), affine-open spectrum identification, and the accepted restriction-to-opens lemma. The proof checks a basic open around each quasi-finite point, transports the ring statement to the corresponding affine open of X, takes the union, and obtains local quasi-finiteness of the restriction.",
+  "blueprint": "The item's blueprint ancestor is lem-sc-degree-2g1-very-ample; the steps realize its proof, third paragraph, where finite closed fibres are converted to a finite morphism using the open quasi-finite locus.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-quasi-finite-locus-open",
+    "why": "The ring-level Tag 00QA openness theorem supplies the basic localization used to construct the scheme open neighbourhood."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-quasi-finite-locus-open",
+  "lem-weil-pbc-ring-quasi-finite-locus-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qfo1730",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qfo1730 (reviewer sub-agent of L); spot-checked: Steps 1-4 against pqf-def-quasifinite (1), lem-weil-pbc-ring-quasi-finite-locus-open, lem-weil-pbc-affine-open-spec-points and Tag 01TI; mathlib_candidate Scheme.Hom.isOpen_quasiFiniteAt kept as candidate with why_not_exact recorded (not a leaf, B8 n/a). FIX more, RETURN less: (1) C4 step 5 applied lem-weil-pbc-lqf-restriction-to-opens, whose hypothesis is f locally quasi-finite, to an arbitrary f; rewrote step 5 to witness pqf-def-quasifinite (1)/(2) for U->S with the U_g of step 3, dropped the citation from uses/proof_deps/tool_uses; (2) step 3 now states f(U_g) in V and finite type of A->B_g required by the definition.; 1 file(s) fixed by the reviewer"
+ }
 }

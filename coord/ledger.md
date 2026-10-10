@@ -2111,3 +2111,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:28 L: merged deliver/C1/lem-pc-noetherian-derived-direct-image-right-adjoint (reviewer FIX+NODE(1); first push; new nodes: 5)
 - 17:28 L: merged deliver/F1/lem-sc-finite-duality-derived-hom (reviewer FIX; after a return; new nodes: 4)
 - 17:28 L: merged deliver/J1/lem-sc-affine-maximal-points-closed-in-lft-scheme (reviewer FIX+NODE(1); after a return; new nodes: 1)
+- 17:28 L: merged deliver/H1/lem-sc-quasi-finite-points-open (reviewer FIX; first push; new nodes: 0)
