@@ -373,6 +373,7 @@ public import WeilConjectures.Blowup.QuasiDomination
 public import WeilConjectures.Blowup.QuasiDominationExtension
 public import WeilConjectures.CategoryTheory.Abelian.DimensionShifting
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.Abelian.PrimeFactorDevissage
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
@@ -1093,6 +1094,7 @@ public import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersi
 public import WeilConjectures.Mathlib.RingTheory.Filtration
 public import WeilConjectures.Mathlib.RingTheory.FinitePresentation
 public import WeilConjectures.Mathlib.RingTheory.Finiteness.Descent
+public import WeilConjectures.Mathlib.RingTheory.Flat.Basic
 public import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
 public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
 public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
