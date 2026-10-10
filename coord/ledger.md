@@ -1570,3 +1570,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:57 L: merged deliver/K1/lem-weil-pbc-sections-morphism-to-proj-polynomial-ring (reviewer FIX applied; first push; new node lem-weil-pbc-proj-polynomial-twist-chart)
 - 2026-10-10, delivery of G1: lem-pc-scheme-dimension-local-rings merged from deliver/G1/lem-pc-scheme-dimension-local-rings (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 04MU read, 3 steps checked via 02IZ and sober, small cases (Spec k, Spec Z, empty)); claim closed
 - 13:58 L: merged deliver/G1/lem-pc-scheme-dimension-local-rings (reviewer PASS, first push; the group's WANTED for properties.tex is moot, the file is in the repository)
+- 13:58 L: notice to all groups: the Stacks and blueprint sources are in the repository, WANTED lines for them are moot
