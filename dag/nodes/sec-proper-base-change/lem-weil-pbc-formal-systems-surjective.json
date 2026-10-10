@@ -2,20 +2,100 @@
  "id": "lem-weil-pbc-formal-systems-surjective",
  "kind": "statement",
  "title": "Surjectivity of a coherent formal-system map is detected modulo the ideal",
- "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth] and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent ideal. A morphism $(\\mathcal F_n)\\to(\\mathcal G_n)$ in the category $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module], which is abelian [lem-weil-pbc-coherent-formal-modules-abelian] in the sense of [def-sp-abelian], is an epimorphism if and only if its component $\\mathcal F_1\\to\\mathcal G_1$ is an epimorphism in the category of modules.",
+ "statement": "Let $X$ be a Noetherian scheme [pqf-def-locnoeth] and $\\mathcal I\\subseteq\\mathcal O_X$ a quasi-coherent ideal. A morphism $(\\mathcal F_n)\\to(\\mathcal G_n)$ in the category $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module], which is abelian [lem-weil-pbc-coherent-formal-modules-abelian] in the sense of [def-sp-abelian], is an epimorphism if and only if its component $\\mathcal F_1\\to\\mathcal G_1$ is an epimorphism in the category $\\Mod(\\mathcal O_X)$ of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category].",
  "source": {
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 087Y (lemma-inverse-systems-surjective), with the affine proof indicated there via Lemma 087W (lemma-inverse-systems-affine) and Algebra Lemma 00MB (Nakayama)"
+  "place": "Cohomology of Schemes, Lemma 087Y (lemma-inverse-systems-surjective, line 6396); proof 'Omitted. Hint: Look on affine opens, use Lemma 087W (lemma-inverse-systems-affine) and Algebra, Lemma 00DV (algebra-lemma-NAK, Nakayama's lemma)'. 'Surjective' in an abelian category means Coker = 0 (Homology, Definition 010B), equivalently epimorphism (Lemma 010C (2))."
  },
  "stmt_deps": [
   "pqf-def-locnoeth",
   "def-weil-pbc-coherent-formal-module",
   "lem-weil-pbc-coherent-formal-modules-abelian",
-  "def-sp-abelian"
+  "def-sp-abelian",
+  "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Reduction to the cokernels.) Let $\\alpha=(\\alpha_n):(\\mathcal F_n)\\to(\\mathcal G_n)$ be a morphism of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module] and let $q_n:\\mathcal G_n\\to\\mathcal C_n=\\operatorname{Coker}\\alpha_n$ be the cokernel of $\\alpha_n$ in $\\Mod(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category], as in [lem-weil-pbc-quasi-coherent-module-cokernel-image] (the $\\mathcal F_n,\\mathcal G_n$ are coherent, hence quasi-coherent). By [lem-weil-pbc-coherent-formal-modules-abelian], $\\mathit{Coh}(X,\\mathcal I)$ is abelian, hence preadditive, and $q=(q_n):(\\mathcal G_n)\\to(\\mathcal C_n)$ is a cokernel of $\\alpha$ in $\\mathit{Coh}(X,\\mathcal I)$. By [lem-weil-pbc-preadditive-epi-iff-cokernel-zero] (Stacks 010C (2)) applied in $\\mathit{Coh}(X,\\mathcal I)$, $\\alpha$ is an epimorphism iff $(\\mathcal C_n)$ is a zero object, i.e. iff $\\mathrm{id}_{(\\mathcal C_n)}=0$; as morphisms of $\\mathit{Coh}(X,\\mathcal I)$ are compared componentwise and the zero morphism is $(0)_n$, this holds iff $\\mathrm{id}_{\\mathcal C_n}=0$, i.e. $\\mathcal C_n=0$, for every $n\\ge1$. Applied in the preadditive (abelian) category $\\Mod(\\mathcal O_X)$ to $\\alpha_1$ and its cokernel $q_1$, the same lemma gives: $\\alpha_1$ is an epimorphism of $\\mathcal O_X$-modules iff $\\mathcal C_1=0$. So the statement is: $\\mathcal C_n=0$ for all $n$ $\\Leftrightarrow$ $\\mathcal C_1=0$. The direction $\\Rightarrow$ is the case $n=1$; it remains to show that $\\mathcal C_1=0$ implies $\\mathcal C_n=0$ for every $n$ (steps 2-4).",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-coherent-formal-modules-abelian",
+    "lem-weil-pbc-preadditive-epi-iff-cokernel-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Definition 010B and Lemma 010C (2) (surjective = Coker 0 = epimorphism); Cohomology of Schemes, proof of Lemma 087X (coherent.tex line 6313): the cokernel in Coh(X, I) is the termwise cokernel"
+   }
+  },
+  {
+   "text": "(Affine pieces.) Assume $\\mathcal C_1=0$ and fix $n\\ge1$. As $X$ is Noetherian, in particular locally Noetherian [pqf-def-locnoeth], it is covered by affine opens $U_j$ ($j\\in J$) with $U_j\\cong\\operatorname{Spec}A_j$ and $A_j=\\mathcal O_X(U_j)$ Noetherian [def-weil-pbc-noetherian-ring]. Fix $j$, write $U=U_j$, $A=A_j$, $I=\\mathcal I(U)$. By [lem-weil-pbc-coherent-formal-modules-local-exactness] (1), $U$ is a Noetherian scheme, $\\mathcal I|_U$ a quasi-coherent ideal, and $\\rho_U(\\alpha)=(\\alpha_n|_U):(\\mathcal F_n|_U)\\to(\\mathcal G_n|_U)$ a morphism of $\\mathit{Coh}(U,\\mathcal I|_U)$; under $U\\cong\\operatorname{Spec}A$ the counit $\\widetilde{I}\\to\\mathcal I|_U$ is an isomorphism [lem-weil-pbc-affine-tilde-gamma-adjunction] (3), so $\\mathcal I|_U=\\widetilde I$. Apply [lem-weil-pbc-coherent-formal-modules-affine] to $A$, $I$ ($A^\\wedge$ the $I$-adic completion [def-weil-pbc-adic-completion]): $M=\\varprojlim_n\\mathcal F_n(U)$ and $N=\\varprojlim_n\\mathcal G_n(U)$ are finitely generated $A^\\wedge$-modules, the projections $p_n:M\\to\\mathcal F_n(U)$, $p_n:N\\to\\mathcal G_n(U)$ are surjective with kernels $I^nM$, $I^nN$ (part (1)), and $f=E(\\rho_U\\alpha)=\\varprojlim_n\\alpha_{n,U}:M\\to N$ is $A^\\wedge$-linear with $\\alpha_{n,U}\\circ p_n=p_n\\circ f$ for all $n$ (part (2): $f$ is the limit of the compatible maps $\\alpha_{n,U}=\\Gamma(U,\\alpha_n)$). By [lem-weil-pbc-quasi-coherent-module-cokernel-image] (3), $\\mathcal C_1(U)=\\mathcal G_1(U)/\\alpha_{1,U}(\\mathcal F_1(U))$, so $\\mathcal C_1=0$ gives that $\\alpha_{1,U}$ is surjective. Hence $N=f(M)+IN$: for $y\\in N$ choose $x\\in M$ with $\\alpha_{1,U}(p_1x)=p_1y$ ($p_1$ on $M$ is surjective); then $p_1(y-f(x))=p_1y-\\alpha_{1,U}(p_1x)=0$, so $y-f(x)\\in\\ker p_1=IN$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-coherent-formal-modules-local-exactness",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 087Y (line 6396), hint of the omitted proof: 'Look on affine opens, use Lemma 087W and Algebra, Lemma 00DV'; Lemma 087W (lemma-inverse-systems-affine, line 6272), as used in the proof of Lemma 087X ('By Lemma 087W alpha corresponds to a map f : M -> N of finite A^-modules')"
+   }
+  },
+  {
+   "text": "(Nakayama over $A^\\wedge$.) With the notation of step 2, let $Q=N/f(M)$, a finitely generated $A^\\wedge$-module (a quotient of the finitely generated $N$), and $J=IA^\\wedge\\subseteq A^\\wedge$. Since $I^1N=JN$ (notation of [lem-weil-pbc-coherent-formal-modules-affine]), $N=f(M)+JN$ gives $JQ=Q$. As $A$ is Noetherian, $I$ is finitely generated, so $A^\\wedge$ is $J$-adically complete [lem-weil-pbc-adic-completion-mod-ideal] (1); hence $J$ lies in the Jacobson radical of $A^\\wedge$ [lem-weil-pbc-adic-complete-jacobson-radical]. By Nakayama's lemma [lem-weil-pbc-nakayama-jacobson] (Stacks 00DV (2)), $Q=0$, i.e. $f:M\\to N$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-coherent-formal-modules-affine",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-adic-complete-jacobson-radical",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00DV (lemma-NAK), part (2), as the hint of Cohomology of Schemes, Lemma 087Y (coherent.tex line 6396) prescribes"
+   }
+  },
+  {
+   "text": "(Conclusion.) With $U=U_j$ as in steps 2-3: $\\alpha_{n,U}\\circ p_n=p_n\\circ f$ is surjective ($f$ and $p_n:N\\to\\mathcal G_n(U)$ are), so $\\alpha_{n,U}:\\mathcal F_n(U)\\to\\mathcal G_n(U)$ is surjective and $\\mathcal C_n(U)=\\mathcal G_n(U)/\\alpha_{n,U}(\\mathcal F_n(U))=0$ [lem-weil-pbc-quasi-coherent-module-cokernel-image] (3). The sheaf $\\mathcal C_n$ is quasi-coherent (same node, (2)), hence so is $\\mathcal C_n|_{U_j}$, and under $U_j\\cong\\operatorname{Spec}A_j$ the counit $\\widetilde{\\mathcal C_n(U_j)}\\to\\mathcal C_n|_{U_j}$ is an isomorphism [lem-weil-pbc-affine-tilde-gamma-adjunction] (3); so $\\mathcal C_n|_{U_j}=0$ for every $j$. As the $U_j$ cover $X$, every section of $\\mathcal C_n$ is locally zero, hence zero (sheaf axiom): $\\mathcal C_n=0$. This holds for every $n$, so by step 1 $\\alpha$ is an epimorphism of $\\mathit{Coh}(X,\\mathcal I)$. Together with the direction $\\Rightarrow$ of step 1 this proves the lemma.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Cohomology of Schemes, Lemma 087Y (line 6396), hint of the omitted proof: 'Look on affine opens, use Lemma 087W and Algebra, Lemma 00DV'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "lem-weil-pbc-preadditive-epi-iff-cokernel-zero",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-coherent-formal-modules-local-exactness",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-coherent-formal-modules-affine",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-weil-pbc-nakayama-jacobson"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 087Y (line 6396): proof omitted in the source; steps written by the agent from its hint (affine opens, Lemma 087W, Algebra Lemma 00DV)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,7 +120,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "stage1",
   "item": "lem-weil-pbc-grothendieck-existence-projective",
@@ -59,5 +139,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-systems-surjective",
+  "worker": "stage1",
+  "summary": "Split from the hint of Stacks 087Y (proof omitted there). Step 1 reduces both sides to cokernels: in Coh(X,I) the cokernel is termwise (087X node), and epi iff cokernel zero (new Mathlib leaf lem-weil-pbc-preadditive-epi-iff-cokernel-zero, Stacks 010C(2), Mathlib Preadditive.epi_iff_isZero_cokernel'), so the claim is C_1 = 0 => C_n = 0. Steps 2-4: on a Noetherian affine cover, via 087W (lem-weil-pbc-coherent-formal-modules-affine) alpha becomes f : M -> N of finite A^-modules with alpha_n = f mod I^n; C_1 = 0 gives N = f(M) + IN, and Nakayama (lem-weil-pbc-nakayama-jacobson, 00DV(2)) with IA^ in the Jacobson radical (lem-weil-pbc-adic-completion-mod-ideal (1), lem-weil-pbc-adic-complete-jacobson-radical) gives f surjective, hence C_n(U_j) = 0 and C_n = 0. Source tag corrected: Nakayama is Algebra 00DV (lemma-NAK), not 00MB (completion-flat). Statement unchanged except the citation [def-weil-sheaf-of-modules-category] for the module category, added to stmt_deps. Tags 087Y, 087W, 087X, 00DV, 010B, 010C checked in tags/tags."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps follow Stacks' hint for 087Y: epi iff cokernel zero (new 010C leaf, line added by L), affine pieces via 087X(3)/087W, Nakayama over A^ with IA^ in the Jacobson radical (adic-completion-mod-ideal, adic-complete-jacobson-radical, nakayama-jacobson), cokernel zero on a cover. Source tag corrected (00MB -> 00DV). Tags 087Y, 087W, 00DV, 010B, 010C verified."
+ }
 }

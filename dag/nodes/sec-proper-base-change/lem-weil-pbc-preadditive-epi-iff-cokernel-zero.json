@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-preadditive-epi-iff-cokernel-zero",
+ "kind": "statement",
+ "title": "A morphism is an epimorphism iff its cokernel object is zero",
+ "statement": "Let $\\mathcal C$ be a preadditive category (its Hom sets are abelian groups and composition is bilinear; for instance an abelian category [def-sp-abelian]), $u:X\\to Y$ a morphism of $\\mathcal C$, and $c:Y\\to Q$ a cokernel of $u$ (so $c\\circ u=0$, and every $g:Y\\to W$ with $g\\circ u=0$ factors as $g=h\\circ c$ for a unique $h:Q\\to W$). Then $u$ is an epimorphism if and only if $Q$ is a zero object of $\\mathcal C$ (equivalently $\\mathrm{id}_Q=0$).",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology, Definition 010B (definition-injective-surjective, line 641: f is surjective if Coker(f) = 0) and Lemma 010C (lemma-characterize-injective, line 653), part (2): in an abelian category f is surjective iff f is an epimorphism (proof: Coker(f) represents z -> Ker(Mor(y,z) -> Mor(x,z)), so Coker(f) = 0 iff every such map is injective iff f is epi). Stated here for a preadditive category with a given cokernel, which is what the same argument uses."
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in a preadditive category a morphism is an epimorphism iff its cokernel is zero",
+   "results": "CategoryTheory.Preadditive.epi_iff_isZero_cokernel, epi_iff_isZero_cokernel', epi_of_cokernel_zero, epi_of_isZero_cokernel (Mathlib.CategoryTheory.Preadditive.Basic); CategoryTheory.Limits.cokernel.ofEpi (Mathlib.CategoryTheory.Limits.Shapes.Kernels)",
+   "date": "2026-10-10",
+   "verdict": "match: CategoryTheory.Preadditive.epi_iff_isZero_cokernel'"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Epi _ ↔ CategoryTheory.Limits.IsZero (CategoryTheory.Limits.cokernel _)",
+   "results": "CategoryTheory.Preadditive.epi_iff_isZero_cokernel (Mathlib.CategoryTheory.Preadditive.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'epi_iff_isZero_cokernel\\|epi_of_isZero_cokernel\\|isZero_cokernel_of_epi' Mathlib/",
+   "results": "Mathlib/CategoryTheory/Preadditive/Basic.lean:268-283 (epi_of_isZero_cokernel', epi_iff_isZero_cokernel' with an arbitrary colimit cokernel cofork, epi_iff_isZero_cokernel), Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean:1015 isZero_cokernel_of_epi; source read: variable [Preadditive C] (line 93)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Preadditive.epi_iff_isZero_cokernel'",
+  "file": "Mathlib/CategoryTheory/Preadditive/Basic.lean",
+  "how": "exact: for [Preadditive C], a CokernelCofork c of f with IsColimit c (the cokernel c:Y→Q of the node), Epi f ↔ IsZero c.pt (line 273); IsZero Q ↔ 𝟙 Q = 0 is CategoryTheory.Limits.IsZero.iff_id_eq_zero",
+  "line": 273
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-formal-systems-surjective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: line field added (epi_iff_isZero_cokernel', Preadditive/Basic.lean:273, verified with sed)."
+}
