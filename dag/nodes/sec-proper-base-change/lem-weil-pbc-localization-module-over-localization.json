@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-localization-module-over-localization",
+ "kind": "statement",
+ "title": "A module over S^{-1}R is its own localization at S",
+ "statement": "Let $R$ be a commutative ring, $S\\subseteq R$ a multiplicative subset, $S^{-1}R$ the ring of fractions [def-weil-pbc-module-localization] and $M'$ an $S^{-1}R$-module, regarded as an $R$-module through $R\\to S^{-1}R$, $r\\mapsto r/1$. Let $S^{-1}M'$ be the localization of the $R$-module $M'$ at $S$ [def-weil-pbc-module-localization], an $S^{-1}R$-module. Then the map $S^{-1}M'\\to M'$, $m/s\\mapsto(1/s)\\,m$, is well defined and an isomorphism of $S^{-1}R$-modules; its inverse is $m\\mapsto m/1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00O8 (lemma-localize-finite-gl-dim, line 26881), proof: 'Let $M'$ be an $S^{-1}R$-module. Note that $M' = S^{-1}M'$.' (stated there without proof)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a module over the localization S⁻¹R is its own localization at S, identity map is a localized module",
+   "results": "isLocalizedModule_id (Mathlib.Algebra.Module.LocalizedModule.Basic), localizedModuleIsLocalizedModule, IsLocalizedModule.mk, LocalizedModule.map_id",
+   "date": "2026-10-10",
+   "verdict": "match: isLocalizedModule_id"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule _ LinearMap.id",
+   "results": "isLocalizedModule_id : [CommSemiring R] (S : Submonoid R) (M) [AddCommMonoid M] [Module R M] (R') [CommSemiring R'] [Algebra R R'] [IsLocalization S R'] [Module R' M] [IsScalarTower R R' M] : IsLocalizedModule S LinearMap.id",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "R-linear isomorphism between modules over a localization of R is linear over the localization",
+   "results": "IsLocalizedModule.mapEquiv (RingTheory.Localization.Module), IsLocalizedModule.linearEquiv, IsLocalizedModule.iso (Algebra.Module.LocalizedModule.Basic), IsLocalizedModule.of_linearEquiv; grep then found LinearEquiv.extendScalarsOfIsLocalization (RingTheory/Localization/Module.lean:241)",
+   "date": "2026-10-10",
+   "verdict": "match together with isLocalizedModule_id"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isLocalizedModule_id\\|def iso ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/LocalizedModule/*.lean; grep -rn 'extendScalarsOfIsLocalization' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Module.lean; sed -n 612,618p and 880,892p of Basic.lean, sed -n 205,245p of Module.lean",
+   "results": "isLocalizedModule_id (LocalizedModule/Basic.lean:613), IsLocalizedModule.iso (Basic.lean:886) with iso_apply_mk (:890), LinearMap.extendScalarsOfIsLocalization (Localization/Module.lean:215), LinearEquiv.extendScalarsOfIsLocalization (:241)",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isLocalizedModule_id, IsLocalizedModule.iso, LinearEquiv.extendScalarsOfIsLocalization",
+  "file": "Mathlib/Algebra/Module/LocalizedModule/Basic.lean",
+  "line": 613,
+  "how": "specializes in one line, one declaration per clause: `isLocalizedModule_id S M' (Localization S)` (Algebra/Module/LocalizedModule/Basic.lean:613-618: for an R'-module M with [IsLocalization S R'] [IsScalarTower R R' M], LinearMap.id : M →ₗ[R] M is a localization at S) makes `IsLocalizedModule.iso S LinearMap.id : LocalizedModule S M' ≃ₗ[R] M'` (Basic.lean:886) the map m/s ↦ (1/s)m (iso_apply_mk, line 890: mk m s ↦ (unit of s)⁻¹ • m); `LinearEquiv.extendScalarsOfIsLocalization S (Localization S)` (Mathlib/RingTheory/Localization/Module.lean:241) turns this R-linear isomorphism between S^{-1}R-modules into an S^{-1}R-linear one. Source read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-localization-finite-gl-dim",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed Mathlib leaf, one declaration per clause; lines 613, 886, 890, 241 verified."
+}

@@ -843,3 +843,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:56 L: reviewed lem-weil-pbc-local-dimension-zero-henselian (4 steps, 0 new; stage 3: dimension-zero-local-strictly-henselian could cite it): accepted.
 - 03:57 L: reviewed lem-weil-pbc-local-artinian-basis-when-flat (6 steps, 0 new): accepted.
 - 03:58 L: reviewed lem-weil-pbc-localization-colimit-principal-localizations (7 steps, 0 new; the worker's write script had not run, L applied it): accepted.
+- 03:59 L: reviewed lem-weil-pbc-localization-finite-gl-dim (4 steps, +2 leaves), lem-weil-pbc-lci-conormal-free-rank-codimension (6 steps, +4 unsplit): accepted.

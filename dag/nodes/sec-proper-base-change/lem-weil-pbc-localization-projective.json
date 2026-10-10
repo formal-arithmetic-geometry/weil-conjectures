@@ -1,0 +1,74 @@
+{
+ "id": "lem-weil-pbc-localization-projective",
+ "kind": "statement",
+ "title": "The localization of a projective module is projective",
+ "statement": "Let $R$ be a commutative ring, $S\\subseteq R$ a multiplicative subset and $P$ a projective $R$-module [def-weil-pbc-projective-module]. Then the localization $S^{-1}P$ [def-weil-pbc-module-localization] is a projective $S^{-1}R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05A3 (lemma-ascend-properties-modules, line 22311), part (4) (for a ring map $R\\to S'$, $P\\otimes_RS'$ is projective over $S'$ if $P$ is projective over $R$), applied to $R\\to S^{-1}R$ with $S^{-1}P\\cong P\\otimes_RS^{-1}R$ (Lemma Tag 00DK, lemma-tensor-localization); as used in the proof of Lemma Tag 00O8 (lemma-localize-finite-gl-dim, line 26881)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a projective module is projective over the localized ring",
+   "results": "Module.projective_of_isLocalizedModule (Mathlib.RingTheory.LocalProperties.Projective), Module.projective_of_localization_maximal(') (same file; the converse, for finitely presented M), Module.Flat.of_isLocalizedModule (RingTheory.Flat.Stability), Module.free_of_isLocalizedModule",
+   "date": "2026-10-10",
+   "verdict": "match: Module.projective_of_isLocalizedModule"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective (Localization _) (LocalizedModule _ _)",
+   "results": "instProjectiveLocalizationLocalizedModule (Mathlib.RingTheory.LocalProperties.Projective): [CommRing R] [AddCommGroup M] [Module R M] (S : Submonoid R) [Module.Projective R M] : Module.Projective (Localization S) (LocalizedModule S M)",
+   "date": "2026-10-10",
+   "verdict": "match (exact)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Projective' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/Projective.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/Projective.lean; sed -n 70,77p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/Projective.lean",
+   "results": "Module.projective_of_isLocalizedModule (LocalProperties/Projective.lean:70, proof Projective.of_equiv (IsLocalizedModule.isBaseChange S Rₛ f).equiv), anonymous instance Module.Projective (Localization S) (LocalizedModule S M) (line 76); Module.Projective.tensorProduct (Algebra/Module/Projective.lean:242) is the general base change",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Module.projective_of_isLocalizedModule (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Module.projective_of_isLocalizedModule, theorem, .lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/Projective.lean (index: unavailable; the name was found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instProjectiveLocalizationLocalizedModule",
+  "file": "Mathlib/RingTheory/LocalProperties/Projective.lean",
+  "line": 76,
+  "how": "exact: lines 76-77, `instance [Module.Projective R M] : Module.Projective (Localization S) (LocalizedModule S M)` for [CommRing R] (S : Submonoid R) and an R-module M (line 34-35); `Localization S` is S^{-1}R and `LocalizedModule S M` is S^{-1}M with its S^{-1}R-module structure ([def-weil-pbc-module-localization], LocalizedModule, Algebra/Module/LocalizedModule/Basic.lean:89). The version for an arbitrary localization map is Module.projective_of_isLocalizedModule (lines 70-74). Source read with sed -n 70,77p on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-localization-finite-gl-dim",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

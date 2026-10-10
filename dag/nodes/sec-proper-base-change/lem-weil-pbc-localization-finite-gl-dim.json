@@ -2,17 +2,83 @@
  "id": "lem-weil-pbc-localization-finite-gl-dim",
  "kind": "statement",
  "title": "Localization preserves projective dimension and finite global dimension",
- "statement": "Let $R$ be a commutative ring, $S\\subseteq R$ a multiplicative subset, $S^{-1}R$ the ring of fractions and, for an $R$-module $M$, $S^{-1}M$ the $S^{-1}R$-module of fractions $m/s$; let $n\\ge0$. (1) If $M$ has a projective resolution of length $\\le n$ over $R$ [def-weil-pbc-finite-global-dimension], then $S^{-1}M$ has a projective resolution of length $\\le n$ over $S^{-1}R$. (2) If $R$ has global dimension $\\le n$ [def-weil-pbc-finite-global-dimension], then $S^{-1}R$ has global dimension $\\le n$; in particular, if $R$ has finite global dimension then so has $S^{-1}R$, with $\\operatorname{gl.dim}S^{-1}R\\le\\operatorname{gl.dim}R$.",
+ "statement": "Let $R$ be a commutative ring, $S\\subseteq R$ a multiplicative subset, $S^{-1}R$ the ring of fractions and, for an $R$-module $M$, $S^{-1}M$ the $S^{-1}R$-module of fractions $m/s$ [def-weil-pbc-module-localization]; let $n\\ge0$. (1) If $M$ has a projective resolution of length $\\le n$ over $R$ [def-weil-pbc-finite-global-dimension], that is, an exact sequence $0\\to P_n\\to\\dots\\to P_0\\to M\\to0$ with every $P_i$ a projective $R$-module [def-weil-pbc-projective-module], then $S^{-1}M$ has a projective resolution of length $\\le n$ over $S^{-1}R$. (2) If $R$ has global dimension $\\le n$ [def-weil-pbc-finite-global-dimension], then $S^{-1}R$ has global dimension $\\le n$; in particular, if $R$ has finite global dimension then so has $S^{-1}R$, with $\\operatorname{gl.dim}S^{-1}R\\le\\operatorname{gl.dim}R$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 00O8 (lemma-localize-finite-gl-dim, line 26881), with its proof (localization is exact, Proposition 00CS; $S^{-1}P$ projective for $P$ projective, Lemma 05A3 ascend-properties-modules; $M'=S^{-1}M'$ for an $S^{-1}R$-module $M'$)"
  },
  "stmt_deps": [
-  "def-weil-pbc-finite-global-dimension"
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Localizing the resolution gives an exact sequence. Let $0\\to P_n\\xrightarrow{d_n}P_{n-1}\\to\\dots\\to P_0\\xrightarrow{d_0}M\\to0$ be a projective resolution of $M$ of length $\\le n$ [def-weil-pbc-finite-global-dimension]; it is exact at every inner term [def-weil-pbc-exact-sequence]. Apply $S^{-1}$ [def-weil-pbc-module-localization] to every module and map, obtaining $0\\to S^{-1}P_n\\xrightarrow{S^{-1}d_n}\\dots\\to S^{-1}P_0\\xrightarrow{S^{-1}d_0}S^{-1}M\\to0$; the maps $S^{-1}d_i:p/s\\mapsto d_i(p)/s$ are $S^{-1}R$-linear, since $S^{-1}d_i((a/t)(p/s))=d_i(ap)/(ts)=(a/t)\\,(d_i(p)/s)$, and $S^{-1}0=0$. Each piece of three consecutive terms $X\\xrightarrow{u}Y\\xrightarrow{v}Z$ of the original sequence (including $0\\to P_n\\to P_{n-1}$ and $P_0\\to M\\to0$) is exact, so by [lem-weil-pbc-localization-module-exact] the localized piece $S^{-1}X\\to S^{-1}Y\\to S^{-1}Z$ is exact. Hence the localized sequence is exact at every term: $S^{-1}d_n$ is injective, $S^{-1}d_0$ is surjective, and $\\ker S^{-1}d_{i}=\\operatorname{im}S^{-1}d_{i+1}$ for $0\\le i<n$.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00O8 (lemma-localize-finite-gl-dim, line 26881), proof, first sentence ('As localization is exact, see Proposition 00CS')"
+   }
+  },
+  {
+   "text": "Proof of (1). Each $P_i$ is a projective $R$-module [def-weil-pbc-projective-module], so $S^{-1}P_i$ is a projective $S^{-1}R$-module by [lem-weil-pbc-localization-projective]. Together with Step 1, $0\\to S^{-1}P_n\\to\\dots\\to S^{-1}P_0\\to S^{-1}M\\to0$ is an exact sequence of $S^{-1}R$-modules with projective terms $S^{-1}P_i$, i.e. a projective resolution of $S^{-1}M$ of length $\\le n$ over $S^{-1}R$ [def-weil-pbc-finite-global-dimension]. This is (1).",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-localization-projective",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00O8 (lemma-localize-finite-gl-dim, line 26881), proof, first sentence ('as each $S^{-1}P_i$ is a projective $S^{-1}R$-module, see Lemma 05A3 ... This proves (1)')"
+   }
+  },
+  {
+   "text": "Proof of (2), first assertion. Assume every $R$-module has a projective resolution of length $\\le n$. Let $M'$ be any $S^{-1}R$-module and regard it as an $R$-module through $R\\to S^{-1}R$, $r\\mapsto r/1$. By hypothesis $M'$ has a projective resolution $0\\to P_n\\to\\dots\\to P_0\\xrightarrow{\\varepsilon}M'\\to0$ over $R$, so by (1) (Step 2) $0\\to S^{-1}P_n\\to\\dots\\to S^{-1}P_0\\xrightarrow{S^{-1}\\varepsilon}S^{-1}M'\\to0$ is a projective resolution of length $\\le n$ over $S^{-1}R$. By [lem-weil-pbc-localization-module-over-localization] the map $\\varphi:S^{-1}M'\\to M'$, $m/s\\mapsto(1/s)m$, is an isomorphism of $S^{-1}R$-modules. Replacing the last map $S^{-1}\\varepsilon$ by $\\varphi\\circ S^{-1}\\varepsilon:S^{-1}P_0\\to M'$ keeps the sequence exact (its kernel is $\\ker S^{-1}\\varepsilon$ and it is surjective, as $\\varphi$ is bijective), so $0\\to S^{-1}P_n\\to\\dots\\to S^{-1}P_0\\to M'\\to0$ is a projective resolution of $M'$ of length $\\le n$ over $S^{-1}R$. As $M'$ was arbitrary, $S^{-1}R$ has global dimension $\\le n$ [def-weil-pbc-finite-global-dimension].",
+   "uses": [
+    "lem-weil-pbc-localization-module-over-localization",
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00O8 (lemma-localize-finite-gl-dim, line 26881), proof, second paragraph ('Let $M'$ be an $S^{-1}R$-module. Note that $M' = S^{-1}M'$. Hence we see that (2) follows from (1).')"
+   }
+  },
+  {
+   "text": "Proof of (2), 'in particular'. If $R$ has finite global dimension $d=\\operatorname{gl.dim}R$, then $R$ has global dimension $\\le d$ [def-weil-pbc-finite-global-dimension], so by Step 3 with $n=d$ every $S^{-1}R$-module has a projective resolution of length $\\le d$: $S^{-1}R$ has finite global dimension, and its global dimension, the least $n'$ such that every $S^{-1}R$-module has a projective resolution of length $\\le n'$, is $\\le d$.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00O8 (lemma-localize-finite-gl-dim, line 26881), proof, statement (2) read with Definition Tag 00O6 (global dimension as a minimum)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-localization-projective",
+  "lem-weil-pbc-localization-module-over-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00O8 (lemma-localize-finite-gl-dim, line 26881) with its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +107,24 @@
    "results": "no hit for global dimension, Auslander-Buchsbaum or Serre's regularity theorem; projective dimension files: CategoryTheory/Abelian/Projective/Dimension.lean (HasProjectiveDimensionLT/LE via Ext vanishing, projectiveDimension : WithBot ℕ∞), Algebra/Category/ModuleCat/ProjectiveDimension.lean (transport along (semi)linear equivalences), RingTheory/LocalProperties/ProjectiveDimension.lean (localization of modules), RingTheory/Regular/ProjectiveDimension.lean (quotients by regular sequences)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "LocalizedModule.map_exact; isLocalizedModule_id; Module.projective_of_isLocalizedModule (project root ~/weil-conjectures-slopmaster2)",
+   "results": "all three exist (LocalizedModule/Exact.lean, LocalizedModule/Basic.lean, LocalProperties/Projective.lean); they are the leaves of the split; no global dimension",
+   "date": "2026-10-10",
+   "verdict": "no match for the statement (ingredients only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global dimension of a commutative ring: every module has projective dimension at most n",
+   "results": "CategoryTheory.projectiveDimension_le_iff, projectiveDimension_lt_iff, projectiveDimension_ne_top_iff, projectiveDimension_ge_iff, HasProjectiveDimensionLT (CategoryTheory/Abelian/Projective/Dimension): projective dimension of objects only, no global dimension of rings",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +144,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-localization-finite-gl-dim",
+  "worker": "stage1",
+  "summary": "Statement kept (Stacks 00O8); citations [def-weil-pbc-module-localization] (for S^{-1}R and S^{-1}M) and [def-weil-pbc-projective-module] (with the resolution spelled out in (1)) added to the statement and stmt_deps. Proof written in four steps following the proof of 00O8: (1) exactness of the localized resolution from the existing Mathlib leaf lem-weil-pbc-localization-module-exact (00CS, LocalizedModule.map_exact) applied to each three-term piece; (2) S^{-1}P_i projective, new Mathlib leaf lem-weil-pbc-localization-projective (05A3(4); instance Module.Projective (Localization S) (LocalizedModule S M), LocalProperties/Projective.lean:76); (3) the source's unproved 'M' = S^{-1}M'' as new Mathlib leaf lem-weil-pbc-localization-module-over-localization (isLocalizedModule_id + IsLocalizedModule.iso + LinearEquiv.extendScalarsOfIsLocalization), and the augmentation composed with this isomorphism; (4) the 'in particular' from the definition of gl.dim as a minimum. The only citer, lem-weil-pbc-regular-local-localization, uses part (2) with S = R minus p, which Step 3 gives. Mathlib: no global dimension (searches recorded); ModuleCat.localizedModule_hasProjectiveDimensionLE is part (1) for Ext-defined projective dimension only."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "4 steps following Stacks 00O8: localization is exact (00CS leaf); S^{-1}P projective (new leaf, LocalProperties/Projective.lean:76 verified by L); for an S^{-1}R-module M', S^{-1}M' = M' (new composed leaf: isLocalizedModule_id, IsLocalizedModule.iso, extendScalarsOfIsLocalization; lines 613, 886, 241 verified); the 'in particular'. Statement now cites the localization and projective-module definitions."
+ }
 }
