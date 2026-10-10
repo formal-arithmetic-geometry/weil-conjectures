@@ -12,10 +12,10 @@
 | `lem-sc-krull-akizuki-noetherian` | 2017 | none |
 | `lem-pc-derived-functor-truncation-stabilization` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
-| `lem-pc-left-localization-hom-colimit` | 3013 | none |
 | `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
 | `lem-pc-stalk-tensor-complex` | 3013 | none |
 | `def-pc-essentially-constant-ind-diagram` | 3014 | none |
+| `def-pc-essentially-constant-pro-diagram` | 3014 | none |
 | `lem-pc-ringed-spaces-derived-direct-image-composition` | 3015 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
@@ -326,7 +326,6 @@
 | `lem-pc-derived-acyclic-resolution` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-module-direct-sums` | 1 | state |
-| `lem-pc-essentially-constant-pro-hom-colimit` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
@@ -337,6 +336,7 @@
 | `lem-pc-integral-radicial-surjective-universal-homeomorphism` | 1 | state |
 | `lem-pc-invertible-common-free-generator` | 1 | state |
 | `lem-pc-invertible-sheaf-instance` | 1 | state |
+| `lem-pc-left-localization-hom-colimit` | 1 | state |
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
 | `lem-pc-pic-of-field` | 1 | state |
@@ -944,7 +944,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1381 nodes that wait for a statement dependency, 266 nodes that wait for stage 1.
+Not open yet: 1382 nodes that wait for a statement dependency, 266 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
