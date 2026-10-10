@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-weil-pbc-normal-constant-generic",
-   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))",
+   "place": "step 4 of its proof (normality of the strict-henselian local ring via Lemma 06DI), through the etale-colimit normality, flat-normal-fibre, Serre, and flat-local-depth lemmas in via; this item supplies the quotient-ring depth equality in steps 6 and 8 of lem-weil-pbc-flat-local-depth-formula",
    "via": [
     "lem-weil-pbc-flat-local-depth-formula",
     "lem-weil-pbc-serre-sk-goes-up",
@@ -14,7 +14,7 @@
     "lem-weil-pbc-etale-colimit-normal-local-domain"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Depth of a module killed by an ideal is the same over the quotient ring",
@@ -28,9 +28,56 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-depth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\bar R=R/I$ and let $\\pi:R\\to\\bar R$ be the quotient map. Since $I\\subseteq\\mathfrak m$, [lem-weil-pbc-quotient-local-structure] makes $\\bar R$ local with maximal ideal $\\bar{\\mathfrak m}=\\pi(\\mathfrak m)$, and [lem-weil-pbc-surjective-image-noetherian] makes it Noetherian. If $m_1,\\ldots,m_t$ generate $M$ over $R$ [def-weil-finitely-generated-module], they generate it over $\\bar R$ too: $r m_j=\\pi(r)m_j$ because $IM=0$. Thus both depths in the statement are defined for the same finite module.",
+   "uses": [
+    "lem-weil-pbc-quotient-local-structure",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 07BH (section-local-rings), Lemma Tag 00FN (lemma-Noetherian-permanence), and Lemma Tag 0AUK (lemma-depth-goes-down-finite), quotient-map case"
+   }
+  },
+  {
+   "text": "For any list $f_1,\\ldots,f_r\\in\\mathfrak m$, put $\\bar f_j=\\pi(f_j)\\in\\bar{\\mathfrak m}$. For every $i$, the submodule $(f_1,\\ldots,f_i)M$ equals $(\\bar f_1,\\ldots,\\bar f_i)M$, because each $f_j$ and $\\bar f_j$ act identically on $M$. On the common quotient, multiplication by $f_{i+1}$ is the same endomorphism as multiplication by $\\bar f_{i+1}$. Their injectivity conditions and the condition that the final quotient is nonzero therefore agree. By [def-weil-pbc-regular-sequence], $(f_1,\\ldots,f_r)$ is $M$-regular over $R$ if and only if $(\\bar f_1,\\ldots,\\bar f_r)$ is $M$-regular over $\\bar R$. Conversely every sequence in $\\bar{\\mathfrak m}=\\pi(\\mathfrak m)$ has lifts in $\\mathfrak m$, so the two collections of possible regular-sequence lengths coincide.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-quotient-local-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 00LF (definition-regular-sequence), applied to the quotient map in Lemma Tag 0AUK (lemma-depth-goes-down-finite)"
+   }
+  },
+  {
+   "text": "The submodules $\\mathfrak mM$ and $\\bar{\\mathfrak m}M$ also coincide. If this common submodule is $M$, both depths are $\\infty$ by clause (2) of [def-weil-pbc-depth], including $M=0$. Otherwise clause (1) of that definition expresses each depth as the supremum of the regular-sequence lengths in its maximal ideal; these sets of lengths agree by Step 2. Hence $\\operatorname{depth}_{\\mathfrak m}(M)=\\operatorname{depth}_{\\bar{\\mathfrak m}}(M)$. For $M=R/I$, the $R$-action is the quotient action and the depth of the local ring $\\bar R$ is, by the same definition, the depth of $\\bar R$ as its own module. This gives the final assertion.",
+   "uses": [
+    "def-weil-pbc-depth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 00LI (definition-depth), applied to the quotient-map case of Lemma Tag 0AUK (lemma-depth-goes-down-finite)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-depth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0AUK (lemma-depth-goes-down-finite) gives the conclusion for finite maps; the direct proof for quotient maps is written from Definitions Tags 00LF and 00LI"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,6 +99,27 @@
    "results": "RegularSequence.lean:217 isWeaklyRegular_map_algebraMap_iff [Algebra R S] [Module S M] [IsScalarTower R S M] (rs : List R) : IsWeaklyRegular M (rs.map (algebraMap R S)) <-> IsWeaklyRegular M rs (read lines 217-221); no IsRegular analogue; no depth definition (Depth/ holds only Rees.lean)",
    "date": "2026-10-10",
    "verdict": "no match: depth is absent from the pinned Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Depth of finite module annihilated by ideal is unchanged over quotient ring",
+   "results": "Submodule.annihilator_quotient and Ideal.annihilator_quotient (Mathlib.RingTheory.Ideal.Colon); Module.supportDim_quotient_eq_ringKrullDim (Mathlib.RingTheory.KrullDimension.Module); Module.IsTorsionBySet.module.congr_simp (Mathlib.RingTheory.HopkinsLevitzki). None states depth invariance.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Depth of module over quotient ring equals depth over original ring regular sequences",
+   "results": "Module.supportDim_add_length_eq_supportDim_of_isRegular; ringKrullDim_add_length_eq_ringKrullDim_of_isRegular; Module.supportDim_quotSMulTop_succ_eq_supportDim; Module.supportDim_le_supportDim_quotSMulTop_succ; ringKrullDim_quotSMulTop_succ_eq_ringKrullDim (Mathlib.RingTheory.KrullDimension.Regular). All concern dimension, not depth invariance.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'quotient|surjective|algebraMap|depth.*eq|eq.*depth' /tmp/mathlib-f1/Mathlib/RingTheory/Depth/Basic.lean; rg -n 'map_algebraMap_iff|[dD]epth' /tmp/mathlib-f1/Mathlib/RingTheory/Regular/RegularSequence.lean; read RegularSequence.lean:218-223 and Depth/Basic.lean:316-378",
+   "results": "Available local snapshot /tmp/mathlib-f1 (not asserted to be the pinned source checkout) has upstream Depth/Basic.lean with Ideal.depth_eq_sSup_length_isRegular:337 and IsLocalRing.depth_eq_sSup_length_isRegular:369; no quotient/change-of-scalar depth theorem there. RegularSequence.lean:218-223 has isWeaklyRegular_map_algebraMap_iff, confirming the previously recorded candidate. Pinned checkout path is absent on this machine, so the older pinned-source search record is retained as previous evidence, not represented as a fresh local read.",
+   "date": "2026-10-10",
+   "verdict": "no exact match in available snapshot; upstream depth/regular-sequence tools are candidates only"
   }
  ],
  "mathlib_candidate": {
@@ -61,7 +129,7 @@
   "how": "transfers weak regularity of a sequence from R to S = R/I for an S-module M; the depth statement itself needs a definition of depth, which the pinned Mathlib lacks"
  },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -81,5 +149,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-depth-over-quotient-ring",
+  "worker": "stage1",
+  "summary": "Checked Stacks Algebra 0AUK, 00LF, and 00LI. The quotient-map instance of 0AUK follows directly from the definitions: quotient locality and Noetherianity use existing Mathlib-leaf nodes, the same generators make M finite over R/I, corresponding sequences act identically on each intermediate quotient, and mM=(m/I)M handles both branches of the depth definition, including M=0. No new nodes. The proof is marked agent-written because it is more direct than the induction in 0AUK. Restart review read the available Stacks mirror at /tmp/stacks-project and repeated LeanSearch, LeanFinder, and source grep in /tmp/mathlib-f1; the latter is explicitly not claimed to be the pinned checkout.",
+  "blueprint": "The item supplies the quotient-ring depth identification in steps 6 and 8 of lem-weil-pbc-flat-local-depth-formula; that chain serves step 4 of imported blueprint node lem-weil-pbc-normal-constant-generic, the normality of the strict-henselian local ring. This split's steps realize the supporting quotient-ring depth argument by proving quotient locality/Noetherianity, matching regular sequences, then matching the two depth cases. Search of all blueprint nodes by 'depth', '0AUK', 'depth quotient ring', 'depth finite ring map', and 'depth regular sequence' found no duplicate blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: 0AUK for a quotient map: R/I local Noetherian, regular sequences and m M agree for R and R/I on M, so the depths agree"
+ }
 }
