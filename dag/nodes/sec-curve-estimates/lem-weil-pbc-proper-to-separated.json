@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "lem-weil-pbc-proper-to-separated",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lemma-nagata-proper-to-separated-target"
+  ]
  },
  "kind": "statement",
  "title": "Proper to a separated target",
@@ -15,34 +17,50 @@
  "stmt_deps": [
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+  "place": "lines 124-129"
+ },
+ "mathlib_searches": [
   {
-   "text": "Write $g=\\mathrm{pr}_W\\circ\\Gamma_g$ with $\\Gamma_g=(1,g):X\\to X\\times_YW$\nthe graph. Since $W$ is separated over $Y$, its diagonal is a closed\nimmersion, and the graph is a base change of this diagonal along\n$X\\times_YW\\to W\\times_YW$, hence again a closed immersion (a base change is\na product of the type handled by\n[lem-weil-pbc-closed-immersion-products], in the sense of\n[def-weil-pbc-scheme-conventions]); it is proper by\n[lem-weil-pbc-closed-immersion-proper]. The projection $X\\times_YW\\to W$ is a\nbase change of the proper $f$, hence proper by\n[lem-weil-pbc-proper-base-change], and the composite $g$ is therefore proper\nby [lem-weil-pbc-proper-composition].",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-products",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-closed-immersion-proper",
-    "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-proper-composition"
-   ],
-   "elementary": false
+   "tool": "leansearch",
+   "query": "proper morphism to a separated target, IsProper.of_comp",
+   "results": "AlgebraicGeometry.IsProper.of_comp",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper morphism of schemes over a separated target",
+   "results": "AlgebraicGeometry.IsProper.of_comp",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'lemma IsProper\\.of_comp|IsProper\\.of_comp' .lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124-129, AlgebraicGeometry.IsProper.of_comp",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "AlgebraicGeometry.IsProper.of_comp",
+   "results": "found in Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+   "date": "2026-10-10",
+   "verdict": "match exists"
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-closed-immersion-products",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-proper-composition"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-thm-br/lem-weil-pbc-proper-to-separated.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsProper.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+  "line": 124,
+  "how": "exact: lines 124-129 state that if the composite f followed by g is proper and g is separated, then f is proper; instantiate f with the item's g : X -> W and g with W -> Y, whose composite is the given proper X -> Y."
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -68,5 +86,24 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-proper-to-separated",
+  "worker": "stage1",
+  "summary": "The imported statement is exactly Mathlib's proper-to-separated-target result. Mathlib's AlgebraicGeometry.IsProper.of_comp (Mathlib/AlgebraicGeometry/Morphisms/Proper.lean:124-129) applies to the triangle X -> W -> Y: the composite X -> Y is proper and W -> Y is separated, yielding X -> W proper. The item is therefore converted to a Mathlib leaf with no proof steps. The existing blueprint node lemma-nagata-proper-to-separated-target states the same triangle in another chapter and is recorded in blueprint.same_as.",
+  "blueprint": {
+   "steps": [],
+   "realizes": "The whole imported graph-factorization proof paragraph is replaced by the exact Mathlib declaration AlgebraicGeometry.IsProper.of_comp.",
+   "same_as_search": "tools/blueprint_refs.py search for 'proper separated target' and 'nagata-proper-to-separated-target'; existing equivalent node lemma-nagata-proper-to-separated-target."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pse",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pse (reviewer sub-agent of L); spot-checked: Mathlib leaf. Source: blueprint node lem-weil-pbc-proper-to-separated (statement unchanged: f:X->Y proper, g:X->W a Y-morphism, W separated over Y => g proper). Verified pinned Mathlib Mathlib/AlgebraicGeometry/Morphisms/Proper.lean line 124: lemma IsProper.of_comp [IsProper (f >> g)] [IsSeparated g] : IsProper f (@[stacks 01W6 (2)], variables f:X->Y, g:Y->Z at line 38); instantiating Mathlib f := the item's g:X->W and Mathlib g := W->Y, the composite is the given proper X->Y because g is a Y-morphism; exact match, hypothesis by hypothesis. No proof steps; old graph proof correctly dropped. same_as records lemma-nagata-proper-to-separated-target (same triangle statement, whose slopmaster2 audit is closed by the same Mathlib declaration). Small case: W=Y with identity gives f proper. Only the item node and the report changed; review section present. 2026-10-10 Sat Oct 10 03:11:47 PM UTC 2026 - Sat Oct 10 03:12:01 PM UTC 2026"
+ }
 }
