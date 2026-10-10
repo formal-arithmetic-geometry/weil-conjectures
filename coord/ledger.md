@@ -698,3 +698,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:24 L: merged F1 closed-immersion-residue-field-iso (2nd delivery); L replaced an inline tag citation by the definition node.
 - 00:27 L: reviewed lem-weil-pbc-stein-fibre-idempotent-image (0G7X; 9 steps; +5 nodes incl. 02OD and the 01Z0 leaf; tool_uses lem-weil-pbc-proper-base-change, pqf-lem-proper-basic): accepted.
 - 00:27 L: reviewed lem-weil-pbc-integral-closure-finite-fibre-choose-g (09XH final step; 5 steps; no new nodes): accepted.
+- 00:28 L: reviewed lem-weil-pbc-galois-invariant-closed-subset-descends (038B; 10 steps; +3 nodes): accepted.

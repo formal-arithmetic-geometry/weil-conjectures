@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-normal-subextension-automorphism-extends",
+ "kind": "statement",
+ "title": "Automorphisms of a normal subextension extend to the normal extension",
+ "statement": "Let $k$ be a field and $\\Omega/k$ a field extension [def-pc-field-extension] which is normal: every $\\alpha\\in\\Omega$ is algebraic over $k$ [def-weil-algebraic-element] and its minimal polynomial over $k$ is a product of polynomials of degree one in $\\Omega[T]$. Let $M$ be a subfield with $k\\subseteq M\\subseteq\\Omega$ such that $M/k$ is normal (in the same sense). Then for every $k$-algebra automorphism $\\tau$ of $M$ there is a $k$-algebra automorphism $\\sigma$ of $\\Omega$ with $\\sigma(m)=\\tau(m)$ for all $m\\in M$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 0BME (fields-lemma-lift-maps, line 1946), part (2): if $L/K$ is normal, any $K$-algebra map $M\\to L$ (here $M\\xrightarrow{\\tau}M\\subseteq\\Omega$) extends to an automorphism of $L$; also Lemma 0BMK (fields-lemma-galois-infinite, line 2951: the restriction $\\mathrm{Gal}(L/K)\\to\\mathrm{Gal}(M/K)$ is surjective)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-algebraic-element"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every automorphism of a normal intermediate field extends to an automorphism of the normal extension",
+   "results": "AlgEquiv.liftNormal, AlgEquiv.liftNormal.congr_simp (Mathlib.FieldTheory.Normal.Basic / Galois.Profinite), AlgEquiv.restrictNormalHom_surjective (Mathlib.FieldTheory.Normal.Basic), Normal.of_equiv_equiv, InfiniteGalois.normal_iff_isGalois",
+   "date": "2026-10-10",
+   "verdict": "match: AlgEquiv.restrictNormalHom_surjective"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of automorphisms of a normal extension to a normal intermediate field is surjective onto its automorphism group",
+   "results": "AlgEquiv.restrictNormalHom_surjective (Mathlib.FieldTheory.Normal.Basic), IntermediateField.restrictRestrictAlgEquivMapHom_surjective, Polynomial.Gal.restrict_surjective, AlgEquiv.restrictNormalHom, AlgEquiv.restrictNormalHom_apply (Mathlib.FieldTheory.Normal.Defs)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'restrictNormalHom_surjective\\|def AlgEquiv.restrictNormalHom\\|lemma AlgEquiv.restrictNormalHom_apply' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Normal",
+   "results": "Normal/Basic.lean:233 theorem AlgEquiv.restrictNormalHom_surjective [Normal F K₁] [Normal F E] : Function.Surjective (AlgEquiv.restrictNormalHom K₁ : Gal(E/F) → K₁ ≃ₐ[F] K₁), proof via AlgEquiv.liftNormal; Normal/Defs.lean:195 def restrictNormalHom, :198 restrictNormalHom_apply (L : IntermediateField F K₁) [Normal F L] (σ) (x : L) : restrictNormalHom L σ x = σ x",
+   "date": "2026-10-10",
+   "verdict": "match (sources read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgEquiv.restrictNormalHom_surjective",
+  "file": "Mathlib/FieldTheory/Normal/Basic.lean",
+  "line": 233,
+  "how": "specializes in one line: with F := k, E := Ω, K₁ := M (as an IntermediateField k Ω, [Normal k M], [Normal k Ω]), surjectivity of restrictNormalHom M : Gal(Ω/k) → Gal(M/k) gives σ with restrictNormalHom M σ = τ, and AlgEquiv.restrictNormalHom_apply (Normal/Defs.lean:198) says (restrictNormalHom M σ) m = σ m for m ∈ M. Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-galois-invariant-closed-subset-descends",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

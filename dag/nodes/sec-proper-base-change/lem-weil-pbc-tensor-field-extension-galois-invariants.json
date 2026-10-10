@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-tensor-field-extension-galois-invariants",
+ "kind": "statement",
+ "title": "Invariants of a tensor product with a field extension under a group with fixed field the base",
+ "statement": "Let $k\\subseteq M$ be a field extension [def-pc-field-extension] and $G$ a group of $k$-algebra automorphisms of $M$ whose fixed field is $k$: $\\{y\\in M:\\tau(y)=y\\text{ for all }\\tau\\in G\\}=k$. Let $A$ be a $k$-vector space, and for $\\tau\\in G$ let $\\mathrm{id}_A\\otimes\\tau:A\\otimes_kM\\to A\\otimes_kM$ be the $k$-linear map with $a\\otimes y\\mapsto a\\otimes\\tau(y)$. Then the $k$-linear map $\\iota:A\\to A\\otimes_kM$, $a\\mapsto a\\otimes1$, is injective, and its image is exactly the set of invariants $\\{z\\in A\\otimes_kM:(\\mathrm{id}_A\\otimes\\tau)(z)=z\\text{ for all }\\tau\\in G\\}$. (In particular, for a $k$-algebra $A$, $(A\\otimes_kM)^G=A\\otimes1\\cong A$.)",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, proof of Lemma 038B (lemma-closed-fixed-by-Galois), lines 917-919: '$(A\\otimes_kk')^G[T]=A[T]$ (by basic Galois theory)'; the argument (choose a $k$-basis $(e_i)$ of $A$, so $A\\otimes_kM=\\bigoplus_ie_i\\otimes M$ and $\\mathrm{id}\\otimes\\tau$ acts coordinatewise) is not written in the source"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fixed points of Galois group acting on tensor product A ⊗_K L are A ⊗ 1",
+   "results": "IsGaloisGroup.fixedPoints_top, IsGaloisGroup.fixedPoints_eq_bot, InfiniteGalois.fixedField_bot, IsGalois.mem_bot_iff_fixed (fields only); Algebra.isInvariant_of_isGalois, Algebra.isInvariant_of_isGalois' (Mathlib.RingTheory.Invariant.Basic: invariants of an integral closure, not of a tensor product)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "element of M ⊗[K] L fixed by all automorphisms of L over K lies in the image of M, Galois descent of vectors",
+   "results": "IsGalois.mem_range_algebraMap_iff_fixed, InfiniteGalois.mem_range_algebraMap_iff_fixed, IsGalois.mem_bot_iff_fixed, IsGalois.normalBasis_apply, Algebra.isInvariant_of_isGalois', IsGaloisGroup.fixedPoints_top: only the field case M = K",
+   "date": "2026-10-10",
+   "verdict": "no match (the field case A = k is lem-weil-pbc-finite-galois-fixed-field)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "invariants of the Galois group acting on the second factor of A ⊗_k L equal the image of A, for a Galois extension L/k",
+   "results": "Algebra.isInvariant_of_isGalois, Algebra.isInvariant_of_isGalois', IsGalois.mem_range_algebraMap_iff_fixed, IsGaloisGroup.to_isFractionRing, InfiniteGalois.mem_range_algebraMap_iff_fixed, IsGaloisGroup.iff_isFractionRing, IsGaloisGroup.of_isFractionRing, IsGaloisGroup.isInvariant",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'TensorProduct' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'fixedPoints\\|FixedPoints\\|IsInvariant\\|invariants'; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Galois ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Invariant",
+   "results": "only RepresentationTheory files (Induced, Coinvariants, group homology, Shapiro, FiniteIndex): invariants of representations, no base-change statement; FieldTheory/Galois (Basic, GaloisClosure, Infinite, IsGaloisGroup, NormalBasis, Profinite, Abelian) and RingTheory/Invariant (Basic, Defs, Galois, Profinite) have no invariants of A ⊗_k M",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-galois-invariant-closed-subset-descends",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

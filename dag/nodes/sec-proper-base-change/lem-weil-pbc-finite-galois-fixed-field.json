@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-finite-galois-fixed-field",
+ "kind": "statement",
+ "title": "A finite Galois extension has finitely many automorphisms and fixed field the base",
+ "statement": "Let $M/k$ be a field extension [def-pc-field-extension] with $\\dim_kM<\\infty$ which is Galois: separable algebraic [def-weil-pbc-separable-algebraic-extension] and normal (for every $\\beta\\in M$ the minimal polynomial of $\\beta$ over $k$ is a product of polynomials of degree one in $M[T]$). Let $G=\\operatorname{Aut}(M/k)$ be the group of $k$-algebra automorphisms of $M$. Then $G$ is finite, of order $|G|=\\dim_kM$, and its fixed field is $k$: an element $y\\in M$ satisfies $\\tau(y)=y$ for all $\\tau\\in G$ if and only if $y$ lies in (the image of) $k$.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Fields, Lemma 09I1 (fields-lemma-finite-Galois, line 2664: $|\\mathrm{Aut}(E/F)|=[E:F]$ for finite Galois $E/F$) and Theorem 09DW (fields-theorem-galois-theory, line 2784: $K=L^G$ for a finite Galois extension $L/K$ with group $G$)"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fixed field of the Galois group of a finite Galois extension is the base field",
+   "results": "IsGalois.fixedField_top, IsGalois.mem_bot_iff_fixed, IsGalois.mem_range_algebraMap_iff_fixed (Mathlib.FieldTheory.Galois.Basic); IsGaloisGroup.fixedPoints_top, IsGaloisGroup.fixedPoints_eq_bot, IsGaloisGroup.fixedPoints_fixingSubgroup (Mathlib.FieldTheory.Galois.IsGaloisGroup)",
+   "date": "2026-10-10",
+   "verdict": "match: IsGalois.mem_range_algebraMap_iff_fixed"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Galois extension: number of automorphisms equals degree, and elements fixed by all automorphisms lie in the base field",
+   "results": "IsGaloisGroup.card_eq_finrank, IsGalois.card_fixingSubgroup_eq_finrank, IsGalois.of_card_aut_eq_finrank, IsGalois.card_aut_eq_finrank (Mathlib.FieldTheory.Galois.Basic), IsGaloisGroup.card_fixingSubgroup_eq_finrank",
+   "date": "2026-10-10",
+   "verdict": "match: IsGalois.card_aut_eq_finrank for the order"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem mem_range_algebraMap_iff_fixed\\|theorem card_aut_eq_finrank\\|lemma fixedField_top' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/Galois/Basic.lean; grep -rn 'instance AlgEquiv.fintype' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory",
+   "results": "Galois/Basic.lean:109 IsGalois.card_aut_eq_finrank [FiniteDimensional F E] [IsGalois F E] : Nat.card Gal(E/F) = finrank F E; :327 IsGalois.fixedField_top; :340 IsGalois.mem_range_algebraMap_iff_fixed [IsGalois F E] [FiniteDimensional F E] (x : E) : x ∈ Set.range (algebraMap F E) ↔ ∀ f : Gal(E/F), f x = x; FieldTheory/Fixed.lean:323 instance AlgEquiv.fintype [FiniteDimensional K V] : Fintype (V ≃ₐ[K] V)",
+   "date": "2026-10-10",
+   "verdict": "match (sources read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsGalois.mem_range_algebraMap_iff_fixed",
+  "file": "Mathlib/FieldTheory/Galois/Basic.lean",
+  "line": 340,
+  "how": "one Mathlib declaration per clause: with F := k, E := M ([IsGalois k M] is separable + normal, [FiniteDimensional k M]): the fixed-field clause is IsGalois.mem_range_algebraMap_iff_fixed (Galois/Basic.lean:340); the order is IsGalois.card_aut_eq_finrank (line 109, Nat.card Gal(M/k) = finrank k M); finiteness is the instance AlgEquiv.fintype (FieldTheory/Fixed.lean:323). Sources read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-galois-invariant-closed-subset-descends",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
