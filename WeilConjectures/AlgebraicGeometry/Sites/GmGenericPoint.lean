@@ -324,3 +324,57 @@ lemma injective_stalkComparison_gmSheafToLowerStarGmSheaf :
   rw [← hv', ← (pointSmallEtale (s ≫ i)).toPresheafFiber_w_apply, hδ, map_zero]
 
 end AlgebraicGeometry.Etale
+
+namespace AlgebraicGeometry.Scheme
+
+/-- **Étale schemes over a field are locally standard étale.** Let `U` be étale over the
+spectrum of a field `K` and `y` a point of `U`. Then `y` has an affine open neighbourhood `D`
+whose ring of functions is a standard étale `K`-algebra (`Algebra.IsEtaleAt.exists_isStandardEtale`
+applied to an affine open neighbourhood of `y`). -/
+lemma exists_isStandardEtale_nbhd {K : Type u} [Field K] (U : (Spec (.of K)).Etale) (y : U.left) :
+    ∃ (D : U.left.Opens) (_ : IsAffineOpen D) (_ : y ∈ D),
+      letI : Algebra K Γ((Etale.ofOpens U D).left, ⊤) :=
+        ((Scheme.ΓSpecIso (.of K)).inv ≫ (Etale.ofOpens U D).hom.appTop).hom.toAlgebra
+      Algebra.IsStandardEtale K Γ((Etale.ofOpens U D).left, ⊤) := by
+  obtain ⟨_, ⟨W₀, hW₀, rfl⟩, hyW₀, -⟩ :=
+    U.left.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ y) isOpen_univ
+  let B := Γ(U.left, W₀)
+  let φ : CommRingCat.of K ⟶ B :=
+    (Scheme.ΓSpecIso (.of K)).inv ≫ U.hom.appLE ⊤ W₀ le_top
+  let : Algebra K B := φ.hom.toAlgebra
+  have hφ : φ.hom.Etale := by
+    refine (RingHom.Etale.respectsIso.cancel_left_isIso _ _).2 ?_
+    exact HasRingHomProperty.appLE @Etale U.hom inferInstance
+      ⟨⊤, isAffineOpen_top (Spec (.of K))⟩ ⟨W₀, hW₀⟩ le_top
+  have : Algebra.Etale K B := RingHom.etale_algebraMap.1 hφ
+  let Q := (hW₀.primeIdealOf ⟨y, hyW₀⟩).asIdeal
+  obtain ⟨b, hbQ, hb⟩ := Algebra.IsEtaleAt.exists_isStandardEtale (R := K) Q
+  -- the basic open `D(b)` works
+  have hyD : y ∈ U.left.basicOpen b := by
+    let := U.left.presheaf.algebra_section_stalk ⟨y, hyW₀⟩
+    have := hW₀.isLocalization_stalk ⟨y, hyW₀⟩
+    exact (U.left.mem_basicOpen b y hyW₀).2
+      (IsLocalization.map_units (U.left.presheaf.stalk y) (⟨b, hbQ⟩ : Q.primeCompl))
+  refine ⟨U.left.basicOpen b, hW₀.basicOpen b, hyD, ?_⟩
+  let D := U.left.basicOpen b
+  have := hW₀.isLocalization_basicOpen b
+  let e₁ := IsLocalization.algEquiv (Submonoid.powers b) (Localization.Away b) Γ(U.left, D)
+  let e₂ : Γ(U.left, D) ≃+* Γ((Etale.ofOpens U D).left, ⊤) :=
+    (Scheme.Opens.topIso D).symm.commRingCatIsoToRingEquiv
+  let : Algebra K Γ((Etale.ofOpens U D).left, ⊤) :=
+    ((Scheme.ΓSpecIso (.of K)).inv ≫ (Etale.ofOpens U D).hom.appTop).hom.toAlgebra
+  refine Algebra.IsStandardEtale.of_equiv (AlgEquiv.ofRingEquiv (f := e₁.toRingEquiv.trans e₂)
+    fun k ↦ ?_)
+  rw [IsScalarTower.algebraMap_apply K B (Localization.Away b)]
+  change e₂ (e₁ (algebraMap B _ (φ k))) = _
+  rw [AlgEquiv.commutes]
+  change (Scheme.Opens.topIso D).inv (U.left.presheaf.map (homOfLE (U.left.basicOpen_le b)).op
+    (U.hom.appLE ⊤ W₀ le_top ((Scheme.ΓSpecIso (.of K)).inv k))) =
+      (D.ι ≫ U.hom).appTop ((Scheme.ΓSpecIso (.of K)).inv k)
+  simp only [Scheme.Hom.appLE, Scheme.Opens.topIso_inv, Scheme.Hom.comp_appTop,
+    Scheme.Opens.ι_appTop, CommRingCat.comp_apply]
+  erw [Scheme.presheaf_map_map_apply, Scheme.presheaf_map_map_apply]
+  exact congrArg (fun (h : D.ι ''ᵁ ⊤ ⟶ U.hom ⁻¹ᵁ ⊤) ↦ U.left.presheaf.map h.op _)
+    (Subsingleton.elim _ _)
+
+end AlgebraicGeometry.Scheme
