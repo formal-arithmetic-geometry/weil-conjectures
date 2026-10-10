@@ -16,38 +16,114 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-cd",
  "title": "The sheafified direct-sum presheaf is left adjoint to restriction to a localized site",
- "statement": "Let $\\mathcal C$ be a Grothendieck site [def-weil-pbc-sites-and-cohomology] and let $W$ be an object. Give $\\mathcal C/W$ the localized topology, with coverings whose underlying families cover in $\\mathcal C$, and let $j_W^*:\\operatorname{Ab}(\\mathcal C)\\to\\operatorname{Ab}(\\mathcal C/W)$, $G\\mapsto G|_W$ with $G|_W(V\\xrightarrow{\\varphi}W)=G(V)$, be restriction of abelian sheaves [def-sp-abelian]. For an abelian sheaf $F$ on $\\mathcal C/W$ let $(j_{W,p!}F)^\\#$ be the sheafification [def-weil-pbc-sheafification] of the direct-sum presheaf $j_{W,p!}F$ of [def-weil-pbc-site-extension-by-zero-presheaf]. Then $F\\mapsto(j_{W,p!}F)^\\#$ is a functor $\\operatorname{Ab}(\\mathcal C/W)\\to\\operatorname{Ab}(\\mathcal C)$ left adjoint to $j_W^*$: there are bijections $\\operatorname{Hom}_{\\mathcal C}((j_{W,p!}F)^\\#,G)\\cong\\operatorname{Hom}_{\\mathcal C/W}(F,G|_W)$, natural in $F$ and $G$, under which $\\alpha:F\\to G|_W$ corresponds to the morphism induced, by the universal property of sheafification, by the presheaf map $j_{W,p!}F\\to G$ sending $s$ in the summand $F(V\\xrightarrow{\\varphi}W)$ of $(j_{W,p!}F)(V)$ to $\\alpha_{(V,\\varphi)}(s)\\in G|_W(V\\xrightarrow{\\varphi}W)=G(V)$.",
+ "statement": "Let $\\mathcal C$ be a Grothendieck site [def-weil-pbc-sites-and-cohomology] and let $W$ be an object. Give $\\mathcal C/W$ the localized topology, with coverings whose underlying families cover in $\\mathcal C$, and let $j_W^*:\\operatorname{Ab}(\\mathcal C)\\to\\operatorname{Ab}(\\mathcal C/W)$, $G\\mapsto G|_W$ with $G|_W(V\\xrightarrow{\\varphi}W)=G(V)$, be restriction of abelian sheaves [def-weil-pbc-sites-and-cohomology]. For an abelian sheaf $F$ on $\\mathcal C/W$ let $(j_{W,p!}F)^\\#$ be the sheafification [def-weil-pbc-sheafification] of the direct-sum presheaf $j_{W,p!}F$ of [def-weil-pbc-site-extension-by-zero-presheaf]. Then $F\\mapsto(j_{W,p!}F)^\\#$ is a functor $\\operatorname{Ab}(\\mathcal C/W)\\to\\operatorname{Ab}(\\mathcal C)$ left adjoint to $j_W^*$: there are bijections $\\operatorname{Hom}_{\\mathcal C}((j_{W,p!}F)^\\#,G)\\cong\\operatorname{Hom}_{\\mathcal C/W}(F,G|_W)$, natural in $F$ and $G$, under which $\\alpha:F\\to G|_W$ corresponds to the morphism induced, by the universal property of sheafification, by the presheaf map $j_{W,p!}F\\to G$ sending $s$ in the summand $F(V\\xrightarrow{\\varphi}W)$ of $(j_{W,p!}F)(V)$ to $\\alpha_{(V,\\varphi)}(s)\\in G|_W(V\\xrightarrow{\\varphi}W)=G(V)$.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Modules on Sites, Section 03DH, Lemma 03DI (lemma-extension-by-zero): j_{U!} is the sheafification of j_{p!} and is left adjoint to j_U^*"
  },
  "stmt_deps": [
   "def-weil-pbc-sites-and-cohomology",
-  "def-sp-abelian",
   "def-weil-pbc-sheafification",
   "def-weil-pbc-site-extension-by-zero-presheaf"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Given a morphism $\\alpha:F\\to G|_W$, define a morphism of presheaves $j_{W,p!}F\\to G$ by sending an element $s$ in the summand indexed by $\\varphi:V\\to W$ to $\\alpha_{(V,\\varphi)}(s)\\in G(V)$. The restriction maps agree because $\\alpha$ is a morphism on the slice: for $g:V'\\to V$, the component indexed by $\\varphi$ restricts to the component indexed by $\\varphi\\circ g$, and naturality of $\\alpha$ along $g:(V',\\varphi\\circ g)\\to(V,\\varphi)$ gives the same map. The universal property of the direct sum then gives the unique homomorphism on each section.",
+   "uses": [
+    "def-weil-pbc-site-extension-by-zero-presheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DI, proof lines 32-35"
+   }
+  },
+  {
+   "text": "Since $G$ is a sheaf, the universal property of sheafification gives a unique morphism $(j_{W,p!}F)^\\#\\to G$ whose composite with the canonical presheaf map $j_{W,p!}F\\to(j_{W,p!}F)^\\#$ is the morphism of Step 1. This defines the forward map $\\operatorname{Hom}_{\\mathcal C/W}(F,G|_W)\\to\\operatorname{Hom}_{\\mathcal C}((j_{W,p!}F)^\\#,G)$. For a morphism of $F$ or $G$, the induced presheaf maps commute with the canonical maps, so uniqueness makes the factored sheaf maps commute; hence the construction is functorial.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DI, proof lines 32-35"
+   }
+  },
+  {
+   "text": "Conversely, let $\\beta:(j_{W,p!}F)^\\#\\to G$. Compose $\\beta$ with the canonical map $j_{W,p!}F\\to(j_{W,p!}F)^\\#$ and restrict to the summand indexed by each object $(V\\xrightarrow{\\varphi}W)$. The resulting maps $F(V\\xrightarrow{\\varphi}W)\\to G(V)$ are compatible with every morphism in $\\mathcal C/W$, because the presheaf restriction maps are indexed by composition and $\\beta$ and the canonical map are natural. Thus they define a morphism $\\beta':F\\to G|_W$. Additivity follows from additivity of $\\beta$.",
+   "uses": [
+    "def-weil-pbc-site-extension-by-zero-presheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DI, proof lines 36-39"
+   }
+  },
+  {
+   "text": "The two constructions are inverse: starting with $\\alpha$, the restriction of the induced sheaf morphism to each indexed summand is $\\alpha$ by the defining equality from Step 2; starting with $\\beta$, the sheaf morphism obtained from $\\beta'$ by Steps 1-2 agrees with $\\beta$ after composition with the canonical presheaf map, so they agree by uniqueness in the sheafification universal property. For a morphism $u:F'\\to F$, both routes send a section $s$ in a summand to the corresponding component of $\\alpha\\circ u$; for a morphism $v:G\\to G'$, both routes compose with $v$ componentwise. Thus the bijection is natural in $F$ and $G$, and the displayed formula follows.",
+   "uses": [
+    "def-weil-pbc-site-extension-by-zero-presheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DI, proof line 40"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-extension-by-zero-presheaf",
+  "def-weil-pbc-sheafification"
+ ],
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "left Kan extension along Over.forget of a presheaf is the coproduct over morphisms V to X of values at V over X",
-   "results": "Presheaf Yoneda left Kan extension instances (Mathlib.CategoryTheory.Limits.Presheaf); nothing identifying Lan along Over.forget with a direct sum; Mathlib's left adjoint sheafPullback (Over.forget W) (Sites/Pullback.lean) is an abstract Lan-then-sheafify",
-   "date": "2026-10-10",
+   "tool": "grep",
+   "query": "extension.?by.?zero|sheafPullback",
+   "results": "0 hits for extension-by-zero; no explicit direct-sum construction",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
-   "tool": "grep",
-   "query": "extension in Mathlib/CategoryTheory/Sites/Over.lean",
-   "results": "0 hits",
-   "date": "2026-10-10",
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Sheaf",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; abstract sheaf pullback adjunction only",
+   "date": "2026-10-11",
+   "verdict": "generalization: abstract adjunction, not the explicit direct-sum formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheafified direct-sum presheaf on a slice site is left adjoint to restriction",
+   "results": "PresheafOfModules.sheafificationAdjunction; no explicit direct-sum extension-by-zero adjunction",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-site-extension-by-zero-exact"
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, Lemma 03DI (03DI), proof completed from the displayed constructions"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-site-extension-by-zero-presheaf-adjoint",
+  "worker": "stage1",
+  "summary": "Checked the source statement against Stacks Tag 03DI and split the adjunction into the direct-sum presheaf map, unique factorization through sheafification, construction of the inverse by indexed summands, and the inverse/naturality verification. No new node was needed: every dependency is an existing definition node. The local literature checkout lacks sites-modules.tex, so the proof is marked agent-written and the missing source is reported.",
+  "blueprint": "Realizes the ancestor clause 'j_{U!} is the sheafified direct-sum presheaf and is left adjoint to restriction'."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-epa1835",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-epa1835 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 03DI; adjunction bijection checked on each V summand (alpha -> presheaf map via direct-sum UP, restriction compat via slice naturality along (V',phi g)->(V,phi); beta' = beta o unit on summands; mutual inverse by sheafification uniqueness; naturality in F and G); no cycle: all deps are definitions not depending on this item or its parent; def-sp-abelian -> def-weil-pbc-sites-and-cohomology swap OK (site def defines Ab(C)). FIX more, RETURN less: (1) statement TeX regression missed by second reading: ^# restored to ^\\# (3 places) and missing closing $ after G(V) restored; (2) preflight B4: all four proof steps rewritten in TeX (\\to, \\alpha, \\varphi, \\operatorname{Hom}), no plain-text arrows.; 1 file(s) fixed by the reviewer"
  }
 }
