@@ -3,38 +3,124 @@
  "blueprint": {
   "is": "lem-galois-object-exists",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Galois objects dominate connected objects",
- "statement": "Let $(\\mathcal C,F)$ be a Galois category and $X$ a connected object.\nThen there is a Galois object $Z$ and a morphism $Z\\to X$. (The\nconstruction: the symmetric group acts on the $n$-fold fibre power\n$X^n$, and one takes a connected component whose fibre consists of tuples\nof pairwise distinct elements.)",
+ "statement": "Let $(\\mathcal C,F)$ be a Galois category [def-galois-category] and $X$ a connected object of $\\mathcal C$ [def-galois-connected-object]. Then there are a Galois object $Z$ of $\\mathcal C$ (a connected object such that $\\operatorname{Aut}(Z)$ acts transitively on $F(Z)$, equivalently $\\#\\operatorname{Aut}(Z)=\\#F(Z)$, as in [lem-galois-axioms](6)) and a morphism $Z\\to X$. (The construction: the symmetric group acts on the $n$-fold product $X^n$, $n=\\#F(X)$, and one takes a connected component of $X^n$ whose fibre contains a tuple of pairwise distinct elements.)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-object-exists.md",
-  "place": "node lem-galois-object-exists, order 971"
+  "place": "node lem-galois-object-exists, order 971; literature: literature/stacks-project/pione.tex, Fundamental Groups of Schemes, Lemma 0BN2 (label lemma-galois)"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-galois-category",
+  "def-galois-connected-object",
+  "lem-galois-axioms"
+ ],
  "proof": [
   {
-   "text": "Let $(\\mathcal C,F)$ be a Galois category as in\n[def-galois-category] and let $X$ be connected. Write\n$n=\\#F(X)$ and consider $X^n$ with the action of $S_n$ by\npermutation of the factors. By axiom (2) write\n$X^n=\\coprod_{t\\in T}Z_t$ with $Z_t$ connected. Fix an enumeration\n$s_1,\\dots,s_n$ of $F(X)$; then $(s_1,\\dots,s_n)\\in F(X)^n=F(X^n)$\nlies in $F(Z_t)$ for some $t$.\nClaim 1: every element $(s_1',\\dots,s_n')\\in F(Z_t)$ consists of pairwise\ndistinct elements. Otherwise $s_i'=s_j'$ for some $i\\neq j$, and then\n$Z_t$ is the image of a connected component of $X^{n-1}$ under the\ndiagonal $\\Delta_{ij}$; as a morphism from a connected object,\n$\\Delta_{ij}$ is an epimorphism by [lem-galois-axioms](4) and hence\ninduces a surjection on fibres, giving $s_i=s_j$, a contradiction.\nClaim 2: the stabilizer $G=\\{g\\in S_n:g(Z_t)=Z_t\\}$ acts transitively on\n$F(Z_t)$. Indeed, for $(s_i')\\in F(Z_t)$ the $s_i'$ are pairwise\ndistinct by Claim 1, so there is $g\\in S_n$ with\n$g(s_1,\\dots,s_n)=(s_1',\\dots,s_n')$, and then\n$g(s_1,\\dots,s_n)\\in F(Z_t)$ forces $g(Z_t)=Z_t$.\nStep 3: conclusion. Each $g\\in G$ induces an automorphism of $Z_t$, and\n$G\\to\\operatorname{Aut}(Z_t)$ is injective by\n[lem-galois-axioms](6) applied to $Z_t$ and $(s_1,\\dots,s_n)$.\nHence $\\operatorname{Aut}(Z_t)$ acts transitively on $F(Z_t)$ by\nClaim 2, so $\\#\\operatorname{Aut}(Z_t)\\ge\\#F(Z_t)$, while\n$\\#\\operatorname{Aut}(Z_t)\\le\\#F(Z_t)$ by [lem-galois-axioms](6);\nequality holds and $Z_t$ is Galois. The projection $X^n\\to X$ to the\nfirst factor restricts to $Z_t\\to X$.",
+   "text": "Setup. By axiom (3) of [def-galois-category] $n=\\#F(X)$ is finite, and $n\\ge1$: $X$ is connected, hence not initial [def-galois-connected-object], so $F(X)\\neq\\emptyset$ by [lem-galois-axioms](3). The $n$-fold product $X^n$ with projections $\\mathrm{pr}_1,\\dots,\\mathrm{pr}_n$ exists since $\\mathcal C$ has finite limits [def-galois-finite-limits-colimits]. For $g\\in S_n$ let $\\sigma_g:X^n\\to X^n$ be the morphism with $\\mathrm{pr}_i\\circ\\sigma_g=\\mathrm{pr}_{g^{-1}(i)}$; by the universal property of the product $\\sigma_{gh}=\\sigma_g\\circ\\sigma_h$ and $\\sigma_1=\\mathrm{id}$, so each $\\sigma_g$ is an automorphism. Since $F$ is exact [def-galois-exact-functor] it preserves finite products, so $F(X^n)=F(X)^n$ via the $F(\\mathrm{pr}_i)$, and $F(\\sigma_g)$ is the permutation $(x_i)_i\\mapsto(x_{g^{-1}(i)})_i$ of coordinates. By axiom (2) of [def-galois-category] write $X^n$ as a finite coproduct [def-galois-finite-coproduct] of connected objects, $\\iota_t:Z_t\\to X^n$ ($t\\in T$, $T$ finite). $F$ preserves finite coproducts, so the maps $F(\\iota_t)$ are injective and $F(X^n)$ is the disjoint union of their images; we identify $F(Z_t)$ with its image. Enumerate $F(X)=\\{s_1,\\dots,s_n\\}$ (pairwise distinct) and let $t\\in T$ be the unique index with $s=(s_1,\\dots,s_n)\\in F(Z_t)$.",
+   "uses": [
+    "def-galois-category",
+    "def-galois-connected-object",
+    "def-galois-finite-limits-colimits",
+    "def-galois-exact-functor",
+    "def-galois-finite-coproduct",
+    "lem-galois-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN2 (label lemma-galois), proof, first paragraph, first three sentences"
+   }
+  },
+  {
+   "text": "Claim 1: every $s'=(s'_1,\\dots,s'_n)\\in F(Z_t)$ has pairwise distinct coordinates. Suppose $s'_i=s'_j$ for some $i<j$ (so $n\\ge2$). Let $\\Delta_{ij}:X^{n-1}\\to X^n$ be the morphism whose $k$-th component is the projection to the factor of $X^{n-1}$ indexed by $k$ for $k\\neq j$ and equals the $i$-th of those for $k=j$ (index the factors of $X^{n-1}$ by $\\{1,\\dots,n\\}\\setminus\\{j\\}$). Under $F(X^{m})=F(X)^{m}$ the map $F(\\Delta_{ij})$ is $u\\mapsto$ the $n$-tuple with $j$-th coordinate $u_i$; its image is the set of tuples with equal $i$-th and $j$-th coordinate, so $s'=F(\\Delta_{ij})(u)$ for some $u$. Write $X^{n-1}$ as a finite coproduct of connected objects $\\kappa_w:W_w\\to X^{n-1}$ (axiom (2)); $u$ lies in $F(W_w)$ for some $w$. By [lem-galois-axioms](7) applied to $\\Delta_{ij}$ there are $t'\\in T$ and $\\delta:W_w\\to Z_{t'}$ with $\\Delta_{ij}\\circ\\kappa_w=\\iota_{t'}\\circ\\delta$; since $F(\\Delta_{ij})(u)=s'\\in F(Z_t)$ and the $F(Z_{t''})$ are disjoint, $t'=t$. Now $\\delta$ is a morphism between connected objects, hence an epimorphism by [lem-galois-axioms](4), hence $F(\\delta)$ is surjective by [lem-galois-axioms](2). So $s=F(\\iota_t)(s)=F(\\Delta_{ij})(F(\\kappa_w)(v))$ for some $v\\in F(W_w)$, whence $s_i=s_j$, contradicting the distinctness of the $s_k$.",
    "uses": [
     "def-galois-category",
     "lem-galois-axioms"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN2 (label lemma-galois), proof, first paragraph: 'If $(s'_1,\\ldots,s'_n)\\in F(Z_t)$ is another element ... which is not the case' (the 'image of a connected component of $X^{n-1}$ under $\\Delta_{ij}$' written out via Lemma 0BN0 (6), (3), (8))"
+   }
+  },
+  {
+   "text": "Claim 2: $\\operatorname{Aut}(Z_t)$ acts transitively on $F(Z_t)$, so $Z_t$ is Galois. For $g\\in S_n$, [lem-galois-axioms](7) applied to $\\sigma_g\\circ\\iota_t:Z_t\\to X^n$ (with $Z_t$ the coproduct of the single connected object $Z_t$) gives $t_g\\in T$ and $\\tau:Z_t\\to Z_{t_g}$ with $\\sigma_g\\circ\\iota_t=\\iota_{t_g}\\circ\\tau$; by disjointness of the $F(Z_{t''})$, $t_g=t$ if and only if $F(\\sigma_g)(s)\\in F(Z_t)$. Let $G=\\{g\\in S_n: t_g=t\\}$. For $g\\in G$ the morphism $\\tau_g:Z_t\\to Z_t$ with $\\iota_t\\circ\\tau_g=\\sigma_g\\circ\\iota_t$ is unique because $\\iota_t$ is a monomorphism ($F(\\iota_t)$ is injective, [lem-galois-axioms](2)). If $g,h\\in G$ then $\\sigma_{gh}\\circ\\iota_t=\\iota_t\\circ\\tau_g\\circ\\tau_h$, so $gh\\in G$ and $\\tau_{gh}=\\tau_g\\tau_h$, and $\\tau_1=\\mathrm{id}$; $G$ is a subgroup of the finite group $S_n$, so $g^{-1}\\in G$ and each $\\tau_g$ is an automorphism of $Z_t$ with inverse $\\tau_{g^{-1}}$. Let $s'\\in F(Z_t)$. By Claim 1 its coordinates are pairwise distinct, and as $n=\\#F(X)$ the tuple $s'$ is another enumeration of $F(X)$; hence there is $g\\in S_n$ with $F(\\sigma_g)(s)=s'$. Then $F(\\sigma_g)(s)\\in F(Z_t)$, so $g\\in G$, and $F(\\tau_g)(s)=s'$ in $F(Z_t)$ (apply the injective $F(\\iota_t)$). Thus $\\operatorname{Aut}(Z_t)$ acts transitively on $F(Z_t)$; $Z_t$ is connected, so it is Galois by [lem-galois-axioms](6).",
+   "uses": [
+    "lem-galois-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN2 (label lemma-galois), proof, second paragraph ('Let $G\\subset S_n$ be the subgroup of elements with $g(Z_t)=Z_t$ ... the action of $G$ on $F(Z_t)$ is transitive'), with the definition of Galois object in the paragraph after Lemma 0BN0"
+   }
+  },
+  {
+   "text": "Conclusion. $Z=Z_t$ is Galois by Claim 2, and $\\mathrm{pr}_1\\circ\\iota_t:Z_t\\to X$ is the required morphism.",
+   "uses": [
+    "def-galois-finite-limits-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN2 (label lemma-galois), statement; the morphism $Z_t\\subset X^n\\to X$ is implicit in the proof"
+   }
   }
  ],
  "proof_deps": [
   "def-galois-category",
+  "def-galois-connected-object",
+  "def-galois-finite-limits-colimits",
+  "def-galois-exact-functor",
+  "def-galois-finite-coproduct",
   "lem-galois-axioms"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-object-exists.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups of Schemes, Lemma 0BN2 (label lemma-galois), proof (using Lemma 0BN0, label lemma-epi-mono, = lem-galois-axioms)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in a Galois category every connected object admits a morphism from a Galois object",
+   "results": "CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, exists_hom_from_galois_of_fiber, exists_hom_from_galois_of_fiber_nonempty, exists_galois_representative (Mathlib.CategoryTheory.Galois.Decomposition); IsGalois.toIsConnected (GaloisObjects)",
+   "date": "2026-10-10",
+   "verdict": "generalization for another notion: exists_hom_from_galois_of_connected states it for Mathlib's GaloisCategory + FiberFunctor (SGA1/Lenstra axioms), not for Stacks 0BMY; candidate only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois category: for every connected object X there is a Galois object A and a morphism A → X",
+   "results": "exists_hom_from_galois_of_connected, fiber_in_connected_component, has_decomp_connected_components, has_decomp_connected_components' (Decomposition); IsGalois.toIsConnected; nonempty_fiber_of_isConnected (Basic)",
+   "date": "2026-10-10",
+   "verdict": "same candidate; no statement for a Stacks-style Galois category"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreGaloisCategory.IsGalois, CategoryTheory.PreGaloisCategory.IsConnected",
+   "results": "IsGalois.toIsConnected, autMap, isGalois_iff_pretransitive, autMapHom, comp_autMap, exists_autMap, autMap_unique, autMap_comp (Mathlib.CategoryTheory.Galois.GaloisObjects)",
+   "date": "2026-10-10",
+   "verdict": "no match for Stacks' notion; isGalois_iff_pretransitive shows Mathlib's IsGalois agrees with 'connected and Aut transitive on the fibre' in Mathlib's setting"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'exists_hom_from_galois_of_connected\\|exists_galois_representative' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Mathlib/CategoryTheory/Galois/Decomposition.lean:279 exists_galois_representative, :316 exists_hom_from_galois_of_connected (used in Prorepresentability.lean:435, Topology.lean:209)",
+   "date": "2026-10-10",
+   "verdict": "candidate read at Decomposition.lean 316-319: (X : C) [IsConnected X] : ∃ (A : C) (_ : A ⟶ X), IsGalois A, for [GaloisCategory C] with a FiberFunctor F; Mathlib's axioms differ from 0BMY (coord/HUMAN.md, Galois categories entry), so not a leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'lem-galois-object-exists\\|exists_hom_from_galois\\|PreGaloisCategory' ~/weil-conjectures-slopmaster2/WeilConjectures ~/weil-conjectures-slopmaster2/Comparator",
+   "results": "no declaration for this node; slopmaster2 uses Mathlib's GaloisCategory (FundamentalGroup/*, Mathlib/CategoryTheory/Galois/Prorepresentability.lean uses exists_hom_from_galois_of_fiber)",
+   "date": "2026-10-10",
+   "verdict": "no slopmaster2 declaration states the node for Stacks' notion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -57,5 +143,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected",
+  "file": "Mathlib/CategoryTheory/Galois/Decomposition.lean",
+  "lines": "316-319",
+  "reason": "States the lemma for Mathlib's GaloisCategory + FiberFunctor (SGA1 G1-G6), whose axioms differ from Stacks 0BMY = def-galois-category; it applies only after the two notions are identified (coord/HUMAN.md, Galois-categories entry)."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-object-exists",
+  "worker": "stage1",
+  "summary": "Split against Stacks 0BN2 (pione.tex, lemma-galois) and the lemma its proof uses, 0BN0 (lemma-epi-mono) = lem-galois-axioms, whose clauses (2),(3),(4),(6),(7) match 0BN0 (2)-(3),(4)-(5),(6),(7)+Galois paragraph,(8). The statement was kept, made self-contained (cites def-galois-category, def-galois-connected-object, and lem-galois-axioms(6) where 'Galois object' is defined; stmt_deps was empty). The single imported step became four: setup (n>=1 via lem-galois-axioms(3), X^n and the S_n action from finite limits, F(X^n)=F(X)^n and disjoint fibres of the components from exactness and axiom (2)); Claim 1 written out: Stacks' 'Z_t is the image of a connected component of X^{n-1} under Delta_ij' is made precise by lem-galois-axioms(7) applied to Delta_ij and (4),(2); Claim 2: the stabilizer G, the automorphisms tau_g (uniqueness from iota_t mono), transitivity; conclusion pr_1 o iota_t. The imported step's injectivity of G -> Aut(Z_t) and the counting were unnecessary (Galois = connected + transitive, lem-galois-axioms(6)) and were dropped. No new nodes: everything the proof uses is in lem-galois-axioms and the definition leaves of def-galois-category. lem-galois-transitive (0BN3) was NOT cited: it cites this item (Stacks 0BN3 uses 0BN2), so citing it would make a cycle. Mathlib: exists_hom_from_galois_of_connected (Decomposition.lean 316) is for Mathlib's SGA1 notion; recorded as mathlib_candidate. No slopmaster2 declaration.",
+  "blueprint": "The blueprint node's proof (one paragraph) is realized: 'consider X^n with the action of S_n ... lies in F(Z_t) for some t' -> step 1; 'Claim 1' -> step 2; 'Claim 2' -> step 3; 'Step 3: conclusion' -> steps 3 (Galois via transitivity, lem-galois-axioms(6)) and 4 (the morphism Z_t -> X)."
+ },
+ "reviewed": "2026-10-10 L: 4 steps following 0BN2 (components of X^n, distinct coordinates via the diagonals, the stabilizer acting transitively so Z_t is Galois by 0BN0 (6)); statement made self-contained; Mathlib's exists_hom_from_galois_of_connected recorded as candidate (SGA1 notion); 0 new nodes"
 }
