@@ -2458,3 +2458,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:54 L: merged deliver/M1/lem-sc-strict-henselization-dimension (reviewer FIX; first push; new nodes: 3)
 - 19:55 L: merged deliver/G1/lem-sc-cech-spectral (reviewer FIX; first push; new nodes: 0)
 - 19:56 L: returned deliver/K1/lem-pc-universal-adjoint-section (reviewer RETURN: 1. E7/E: the Second reading says the statement was repaired from H to an open W, but the delivered statement is byte-ide)
+- 19:57 L: split lem-pc-ringed-space-module-stalk-tensor by copying the ringed-space-general proof of lem-weil-pbc-module-stalk-tensor (tool use: lem-weil-pbc-filtered-colimit-tensor-varying-rings); the scheme node is now its special case
