@@ -1,8 +1,8 @@
 # Work queue
 
-958 items; claim with `tools/claim.py next <group> [--stage N]`.
+957 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (591)
+## Stage 1: nodes to split (585)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,12 +11,9 @@
 | `lem-weil-pbc-flat-module-pullback-exact-pushforward-injective` | 1013 | none |
 | `lem-weil-pbc-pullback-ample-invertible` | 1013 | none |
 | `lem-weil-pbc-minimal-finite-free-resolution-local` | 1014 | none |
-| `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1014 | none |
 | `lem-weil-pbc-quasi-coherent-module-direct-sum` | 1014 | none |
 | `lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions` | 1014 | none |
 | `lem-weil-pbc-regular-local-dim-one-iff-normal` | 1014 | none |
-| `lem-weil-pbc-serre-criterion-reduced` | 1014 | none |
-| `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1015 | none |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1015 | none |
 | `lem-weil-pbc-conormal-intersection-regular-quotient` | 1015 | none |
@@ -34,11 +31,6 @@
 | `lem-weil-pbc-flat-mod-injective` | 1015 | none |
 | `lem-weil-pbc-formal-glueing-H0-localization` | 1015 | none |
 | `lem-weil-pbc-formal-glueing-canonical-maps` | 1015 | none |
-| `lem-weil-pbc-fpqc-descend-integral` | 1015 | none |
-| `lem-weil-pbc-fpqc-descend-locally-finite-type` | 1015 | none |
-| `lem-weil-pbc-fpqc-local-on-base-criterion` | 1015 | none |
-| `lem-weil-pbc-free-complex-mod-nonzerodivisor-exact` | 1015 | none |
-| `lem-weil-pbc-fs-adic-complete-source-target` | 1015 | none |
 | `lem-weil-pbc-fs-adic-field-regular-local` | 1015 | none |
 | `lem-weil-pbc-graded-finiteness-cohomology` | 1015 | none |
 | `lem-weil-pbc-grothendieck-regular-sequence-flat` | 1015 | none |
@@ -81,6 +73,8 @@
 | `lem-weil-pbc-complete-local-nagata` | 1016 | none |
 | `lem-weil-pbc-depth-le-dim-associated-prime` | 1016 | none |
 | `lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor` | 1016 | none |
+| `lem-weil-pbc-fpqc-descend-affine` | 1016 | none |
+| `lem-weil-pbc-fpqc-descend-universally-closed` | 1016 | none |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1016 | none |
 | `lem-weil-pbc-power-series-cohen-formally-smooth-adic` | 1016 | none |
 | `lem-weil-pbc-power-series-universal-property-complete` | 1016 | none |
@@ -598,7 +592,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (367)
+## Stage 2: nodes to state (372)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -760,8 +754,12 @@
 | `lem-weil-pbc-formal-glueing-isogeny` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-finite` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-flat` | 1 | state |
+| `lem-weil-pbc-fpqc-descend-integral` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-locally-finite-presentation` | 1 | state |
+| `lem-weil-pbc-fpqc-descend-locally-finite-type` | 1 | state |
+| `lem-weil-pbc-fpqc-local-on-base-criterion` | 1 | state |
 | `lem-weil-pbc-free-complex-maps-to-resolution` | 1 | state |
+| `lem-weil-pbc-free-complex-mod-nonzerodivisor-exact` | 1 | state |
 | `lem-weil-pbc-free-resolution-ses-split` | 1 | state |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
@@ -956,6 +954,7 @@
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
 | `lem-weil-pbc-two-term-complex-kernel-base-change` | 1 | state |
+| `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1 | state |
 | `lem-weil-pbc-unramified-algebra-over-field-product` | 1 | state |
 | `lem-weil-pbc-unramified-base-change-open` | 1 | state |
 | `lem-weil-pbc-unramified-etale-local-decomposition` | 1 | state |
@@ -970,7 +969,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 602 nodes that wait for stage 1, 698 nodes that wait for a statement dependency.
+Not open yet: 596 nodes that wait for stage 1, 701 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
