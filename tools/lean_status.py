@@ -3,6 +3,12 @@
 
 Usage:
   tools/lean_status.py <branch>=<sorry map> [<branch>=<sorry map> ...] [--extra <branch>=dag/lean_names_upstream.json]
+                       [--library <branch>=local/library_names_mathlib.tsv.gz]
+
+--library (2026-10-10): the declarations of the libraries the project imports (Mathlib, Lean core, ...; one line
+`name<TAB>module<TAB>kind`, made by tools/library_names.lean in the checkout). A name of the node that is not in the
+project but is in the library counts as found and sorry-free (`library: true` in decls, lines [0, 0]): a node whose
+names are all library declarations is a Mathlib leaf and closed.
 
 --extra (decision of the human, 2026-10-10): for that branch the node's declarations also include the names of
 tools/lean_names_upstream.py: the current blueprint's `lean = [...]` list of the node and the declarations whose docstring
@@ -80,11 +86,16 @@ def hand_names(d):
 
 
 def main():
-    extra_by_branch, argv = {}, []
+    extra_by_branch, lib_by_branch, argv = {}, {}, []
     a = sys.argv[1:]
     while a:
         x = a.pop(0)
-        if x == "--extra" and a:
+        if x == "--library" and a:
+            b, f = a.pop(0).split("=", 1)
+            import gzip
+            with (gzip.open if f.endswith(".gz") else open)(f, "rt") as fh:
+                lib_by_branch[b] = {r[0]: (r[1], r[2]) for r in (l.rstrip("\n").split("\t") for l in fh) if len(r) == 3}
+        elif x == "--extra" and a:
             b, f = a.pop(0).split("=", 1)
             u = json.loads(pathlib.Path(f).read_text())
             bp = (u.get("blueprint") or {}).get("names", {})
@@ -121,6 +132,7 @@ def main():
     for arg in argv:
         branch, path = arg.split("=", 1)
         ex = extra_by_branch.get(branch)
+        lib = lib_by_branch.get(branch, {})
         own, deps = load_map(path)
         reach_sorry = {}
 
@@ -152,13 +164,15 @@ def main():
                     if i not in node_of[n]:
                         node_of[n].append(i)
             found = [n for n in ns if n in own]
-            missing = [n for n in ns if n not in own]
+            in_lib = [n for n in ns if n not in own and n in lib]       # a library declaration (Mathlib, core): sorry-free
+            missing = [n for n in ns if n not in own and n not in lib]
             a = {"state": "none", "decls": [dict(name=n, module=own[n]["module"], lines=[own[n]["l1"], own[n]["l2"]],
-                                                   kind=own[n]["kind"], sorry=own[n]["sorry"]) for n in found],
+                                                   kind=own[n]["kind"], sorry=own[n]["sorry"]) for n in found]
+                 + [dict(name=n, module=lib[n][0], lines=[0, 0], kind=lib[n][1], sorry=False, library=True) for n in in_lib],
                  "missing": missing}
             if superseded:
                 a["superseded"] = superseded
-            if found:
+            if found or in_lib:
                 if any(own[n]["sorry"] for n in found):
                     a["state"] = "sorry_here"
                 fr = sorted(frontier([n for n in found if not own[n]["sorry"]]) - set(found))
