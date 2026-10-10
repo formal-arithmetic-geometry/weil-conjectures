@@ -13,20 +13,108 @@
  },
  "kind": "statement",
  "title": "Etale cohomology of one geometric point",
- "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and let $C=\\operatorname{Spec}k$. For an abelian etale sheaf $F$ on $C_{\\mathrm{Et}}$ [def-weil-pbc-abelian-etale-sheaves], with its unique geometric point $\\bar c$ and geometric stalk $F_{\\bar c}$ [def-weil-pbc-geometric-stalks], the etale cohomology [def-weil-pbc-etale-cohomology] satisfies $H^q(C,F)=0$ for every $q>0$, and the canonical map $H^0(C,F)\\to F_{\\bar c}$ is an isomorphism.",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure] and let $C=\\operatorname{Spec}k$. Let $\\bar c:\\operatorname{Spec}\\Omega\\to C$ be a geometric point of $C$ [def-weil-geometric-point] ($\\Omega$ any algebraically closed field with a homomorphism $k\\to\\Omega$, for instance $\\bar c=\\mathrm{id}_C$). For an abelian etale sheaf $F$ on $C_{\\mathrm{Et}}$ [def-weil-pbc-abelian-etale-sheaves] with geometric stalk $F_{\\bar c}$ [def-weil-pbc-geometric-stalks], the etale cohomology [def-weil-pbc-etale-cohomology] satisfies $H^q(C,F)=0$ for every $q>0$, and the canonical map $H^0(C,F)\\to F_{\\bar c}$, the inverse of the isomorphism $F(C)\\xrightarrow{\\sim}H^0(C,F)$ induced by a resolution followed by the germ map $t\\mapsto t_{\\bar c}$ at the pointed etale neighbourhood $(C,\\bar c)$, is an isomorphism of abelian groups, natural in $F$.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Theorem 03QT (etale-cohomology-theorem-equivalence-sheaves-point), Lemma 03QU (etale-cohomology-lemma-compare-cohomology-point), and Section 03QQ (section-cohomology-point), specialized to Spec k"
  },
  "stmt_deps": [
   "def-weil-algebraic-closure",
+  "def-weil-geometric-point",
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*$k$ is its own separable closure and the Galois group is trivial.* Let $L/k$ be a finite separable extension and $\\alpha\\in L$. Its minimal polynomial over $k$ is irreducible and, $k$ being algebraically closed [def-weil-algebraic-closure], has a root in $k$, hence has degree $1$; so $\\alpha\\in k$ and $L=k$. Thus $k$ is separably closed [def-kun-separably-closed] and $k^{\\rm sep}=k$ is a separable closure of $k$, with $G=\\operatorname{Gal}(k^{\\rm sep}/k)=\\{1\\}$. The geometric point $\\bar c:\\operatorname{Spec}\\Omega\\to C$ [def-weil-geometric-point] is a field homomorphism $k\\to\\Omega$, i.e. an embedding of $k^{\\rm sep}=k$ in the algebraically closed field $\\Omega$, and $\\bar c$ is the geometric point attached to this embedding in the sense of [lem-exc-field-sections-stalk-invariants].",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-kun-separably-closed",
+    "def-weil-geometric-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03QQ (section-cohomology-point), notation of Theorem 03QT (theorem-equivalence-sheaves-point): $G=\\operatorname{Gal}(K^{sep}/K)$, specialized to $K=k$ algebraically closed"
+   }
+  },
+  {
+   "text": "*Global sections are the geometric stalk (Lemma 04JM with $G$ trivial).* Apply [lem-exc-field-sections-stalk-invariants] with $K=k$, $K^{\\rm sep}=k$, the embedding $k\\to\\Omega$ and $\\bar c$ of step 1, to the underlying sheaf of sets of $F$ [def-weil-pbc-abelian-etale-sheaves], and with $L=K=k$. Then $H_L=\\operatorname{Gal}(k/k)=\\{1\\}$, so $M^{H_L}=M=F_{\\bar c}$, and the bijection of that node is restriction to the chosen lift of $\\bar c$ over $\\operatorname{Spec}L=C$, which is $\\bar c$ itself: it is the germ map $\\gamma_F:F(C)\\to F_{\\bar c}$, $t\\mapsto$ the class of the triple $(C,\\bar c,t)$ in the colimit of [def-weil-pbc-geometric-stalks]. So $\\gamma_F$ is bijective and natural in morphisms of sheaves. For an abelian sheaf the stalk is the colimit of the abelian groups $F(U)$ and $\\gamma_F$ is the coprojection at the index $(C,\\bar c)$, a homomorphism; hence $\\gamma_F$ is an isomorphism of abelian groups, natural in $F\\in\\Ab(C_{\\Et})$. Since $F(C)=\\Gamma(C,F)$ [def-weil-pbc-global-sections-functor] ($C$ is the terminal object of $C_{\\Et}$), $\\gamma$ is a natural isomorphism of functors $\\Gamma(C,-)\\cong(-)_{\\bar c}:\\Ab(C_{\\Et})\\to\\textit{Ab}$.",
+   "uses": [
+    "lem-exc-field-sections-stalk-invariants",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 04JM (lemma-global-sections-point): $\\Gamma(S,\\mathcal F)=(\\mathcal F_{\\bar s})^G$, with $G$ trivial"
+   }
+  },
+  {
+   "text": "*$\\Gamma(C,-)$ is exact.* By [prop-weil-pbc-geometric-stalks-exact] the stalk functor $F\\mapsto F_{\\bar c}$ on $\\Ab(C_{\\Et})$ is exact. Transport along the natural isomorphism $\\gamma$ of step 2: $\\Gamma(C,-)$ is additive (morphisms of abelian sheaves are added sectionwise), and for a short exact sequence $0\\to F'\\xrightarrow{a}F\\xrightarrow{b}F''\\to0$ in $\\Ab(C_{\\Et})$ naturality gives $\\gamma_F\\circ a_C=a_{\\bar c}\\circ\\gamma_{F'}$ and $\\gamma_{F''}\\circ b_C=b_{\\bar c}\\circ\\gamma_F$, so the isomorphisms $\\gamma_{F'},\\gamma_F,\\gamma_{F''}$ carry $0\\to F'(C)\\to F(C)\\to F''(C)\\to0$ onto the exact sequence of stalks, and it is exact. So $\\Gamma(C,-)$ is exact and, by [lem-sp-exact-functor-preserves-homology], commutes with finite limits and finite colimits. (In the language of Lemma 03QU: under the equivalence of $\\Ab(C_{\\Et})$ with discrete $G$-modules, $G=\\{1\\}$, the functor $\\Gamma$ becomes $M\\mapsto M^G=M$, the identity of $\\textit{Ab}$.)",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03QU (lemma-compare-cohomology-point), proof: 'Combine Lemma 04JQ with Lemma 04JM'; here invariants of the trivial group are the identity functor"
+   }
+  },
+  {
+   "text": "*Vanishing in positive degrees.* By step 1, $k$ is separably closed [def-kun-separably-closed], so [lem-kun-03qu-sep-closed], applied to $K=k$ and the abelian sheaf $F$, gives $H^q(C_{\\Et},F)=0$ for every $q>0$, cohomology being that of [def-weil-pbc-etale-cohomology]. (This is Lemma 03QU (3), $H^q(C,F)=H^q(G,F_{\\bar c})$, for the trivial group $G$; directly, it also follows from step 3 exactly as in step 5 below with $p\\ge1$, since $H^p(F[0])=0$ for $p\\neq0$.)",
+   "uses": [
+    "def-kun-separably-closed",
+    "lem-kun-03qu-sep-closed",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03QU (lemma-compare-cohomology-point) (3), $H^q_{et}(S,\\mathcal F)=H^q(G,M)$, with $G$ trivial"
+   }
+  },
+  {
+   "text": "*Degree zero.* By [def-weil-pbc-etale-cohomology], $H^0(C,F)=H^0(\\Gamma(C,I^\\bullet))$ for a K-injective resolution $s:F[0]\\to I^\\bullet$ [def-weil-pbc-kinjective-resolutions], a quasi-isomorphism from $F$ placed in degree $0$; so $H^0(s):F=H^0(F[0])\\to H^0(I^\\bullet)=Z^0(I^\\bullet)/B^0(I^\\bullet)$ is an isomorphism [def-weil-abstract-derived-category], and it is induced by $s^0:F\\to Z^0(I^\\bullet)$ ($d^0s^0=s^1\\circ0=0$). By step 3 $\\Gamma(C,-)$ is exact, so [lem-weil-pbc-exact-functor-complex-cohomology] gives an isomorphism $c^0:H^0(\\Gamma(C,I^\\bullet))\\xrightarrow{\\sim}\\Gamma(C,H^0(I^\\bullet))$ compatible with the inclusion of cycles and the projection onto cohomology. Let $\\epsilon_F:F(C)\\to H^0(C,F)$, $t\\mapsto$ the class of $s^0(t)\\in Z^0(\\Gamma(C,I^\\bullet))$. By that compatibility $c^0(\\epsilon_F(t))$ is the image of $s^0(t)$ under $\\Gamma(C,Z^0(I^\\bullet)\\to H^0(I^\\bullet))$, which is $\\Gamma(C,H^0(s))(t)$; so $\\epsilon_F=(c^0)^{-1}\\circ\\Gamma(C,H^0(s))$ is an isomorphism, natural in $F$ because $s$ (up to the identifications of [def-weil-pbc-etale-cohomology]) and $c^0$ are. The canonical map of the statement is $\\gamma_F\\circ\\epsilon_F^{-1}:H^0(C,F)\\to F_{\\bar c}$, a composite of two isomorphisms (step 2 and this step), hence an isomorphism of abelian groups natural in $F$.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-kinjective-resolutions",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03QU (lemma-compare-cohomology-point) (2), $H^0_{et}(S,\\mathcal F)=M^G$, with $G$ trivial, together with Lemma 04JM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "def-kun-separably-closed",
+  "def-weil-geometric-point",
+  "lem-exc-field-sections-stalk-invariants",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-global-sections-functor",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-kun-03qu-sep-closed",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 03QU (lemma-compare-cohomology-point) and its proof (combine Lemma 04JQ with Lemma 04JM, lemma-global-sections-point), Section 03QQ (section-cohomology-point), notation of Theorem 03QT; specialized to $K=k$ algebraically closed, where $G=\\operatorname{Gal}(k^{sep}/k)$ is trivial"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +139,39 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-geometric-point-cohomology",
+  "worker": "stage1",
+  "summary": "Read Stacks 03QQ, 03QT, 03QU, 04JM, 04JQ (tags verified in tags/tags). The proof follows 03QU (cohomology of Spec K is Galois cohomology; proof: 04JQ + 04JM) with G trivial: step 1 k algebraically closed is separably closed, G=1; step 2 04JM via [lem-exc-field-sections-stalk-invariants] with L=K=k gives Gamma(C,-) = stalk at cbar, naturally; step 3 Gamma is exact (stalk functor exact); step 4 vanishing in positive degrees from [lem-kun-03qu-sep-closed], which states it for every separably closed field (and is stated exactly by the sorry-free slopmaster2 declaration AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed); step 5 degree zero from exactness and the K-injective definition of cohomology. Statement corrected: 'its unique geometric point' replaced by an arbitrary geometric point Spec Omega -> C (Spec k has many geometric points: every algebraically closed Omega with k -> Omega), the canonical map is named, and def-weil-geometric-point added to stmt_deps. No new nodes. Rule 0: no sorry-free slopmaster2 declaration states the whole item (the H^0 = stalk clause is in none); the vanishing clause is Scheme.subsingleton_H_of_isSepClosed (FiniteSupport.lean 43-49, sorry-free).",
+  "blueprint": "Realizes, in lem-weil-pbc-zero-dimensional-cohomology's proof, second paragraph ('global sections on each geometric point are exact and identify H^0 with the geometric stalk'): steps 2-3 give exactness of global sections and the identification with the geometric stalk, step 5 the H^0 identification, step 4 the vanishing of higher cohomology on each point.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-field-sections-stalk-invariants",
+    "why": "Step 2 takes Stacks 04JM (sections over Spec L = invariants of the stalk) at L=K=k; no node of sk-prop-cd or its cited units states sections of a sheaf on Spec of a field via the stalk (it is filed in sk-prop-h2)."
+   },
+   {
+    "node": "lem-kun-03qu-sep-closed",
+    "why": "Step 4 takes H^q(Spec K, F)=0 (q>0) for K separably closed, Stacks 03QU with trivial G; filed in sk-prop-sf-cbc, stated exactly by the sorry-free Lean AlgebraicGeometry.Scheme.subsingleton_H_of_isSepClosed, so it is Lean-closed once attached; no node of sk-prop-cd states it."
+   }
+  ]
+ },
+ "reviewed": {
+  "by": "L",
+  "date": "2026-10-10",
+  "note": "split read in full against 03QU/04JM with G trivial: sections = stalk (tool use lem-exc-field-sections-stalk-invariants), Gamma exact by transport from the exact stalk functor, vanishing by lem-kun-03qu-sep-closed (attached by L to subsingleton_H_of_isSepClosed), degree zero from the K-injective definition; statement corrected (E7: a geometric point, not \"the unique\" one); 0 new nodes; 2 declared tool uses accepted"
+ },
+ "tool_uses": [
+  "lem-exc-field-sections-stalk-invariants",
+  "lem-kun-03qu-sep-closed"
+ ],
+ "lead_note": "Possible duplication: lem-weil-pbc-strictly-henselian-sections-stalk + lem-weil-pbc-strictly-henselian-etale-acyclic (sk-thm-p1) state this item for a field as a strictly henselian local ring (stage-3 merge candidate)."
 }
