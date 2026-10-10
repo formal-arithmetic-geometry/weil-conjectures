@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-h1-cotangent-flat-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof, last paragraph: 'Every finite etale $Y_0$-scheme is the restriction of a finite etale $Y$-scheme, the lifting input of the henselian-pair proper-base-change package'; this supplies a cotangent-complex tool in the descendant chain for that lifting input",
+   "via": [
+    "lem-weil-pbc-smooth-at-prime-field-extension-descent",
+    "lem-weil-pbc-differentials-dimension-bound-smooth-at-prime",
+    "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "lem-weil-pbc-smooth-at-generic-point-over-field",
+    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-geometric-regularity-separable-extension",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "First naive cotangent homology commutes with flat base change",
+ "statement": "Let $R\\to S$ and $R\\to R'$ be homomorphisms of commutative rings with $R'$ flat as an $R$-module [def-weil-pbc-flat-ring-map], and put $S'=R'\\otimes_RS$. For the first homology $H_1(L_{S/R})$ of the naive cotangent complex [def-weil-pbc-smooth-ring-map], the canonical $S'$-linear base-change map $S'\\otimes_SH_1(L_{S/R})\\to H_1(L_{S'/R'})$, induced by $S\\to S'$, is an isomorphism (equivalently, $R'\\otimes_RH_1(L_{S/R})\\cong H_1(L_{S'/R'})$).",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00S4 (lemma-change-base-NL, line 35537), especially the canonical homotopy equivalence in its last sentence; tag verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "first homology of naive cotangent complex commutes with flat base change",
+   "results": "Algebra.tensorH1CotangentOfIsLocalization and Algebra.Extension cotangent base-change maps; exact declaration found with Loogle and source grep",
+   "date": "2026-10-10",
+   "verdict": "match, confirmed by the exact declaration below"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.tensorH1CotangentOfFlat",
+   "results": "Algebra.tensorH1CotangentOfFlat : T ⊗[R] H1Cotangent R S ≃ₗ[T] H1Cotangent T (T ⊗[R] S), Mathlib.RingTheory.Extension.Cotangent.BaseChange",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat base change commutes with H1 cotangent complex of a commutative algebra",
+   "results": "Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex and related declarations; exact isomorphism found with Loogle",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'tensorH1CotangentOfFlat' Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean; sed -n '180,205p' on the pinned Mathlib source",
+   "results": "BaseChange.lean:199-205 Algebra.tensorH1CotangentOfFlat, built from the extension isomorphism at line 186; source read",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.tensorH1CotangentOfFlat",
+  "file": "Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean",
+  "line": 199,
+  "how": "exact: line 199 gives $R'\\otimes_RH_1(L_{S/R})\\cong H_1(L_{R'\\otimes_RS/R'})$ for flat $R'$; the source's $H_1$ agrees with Algebra.H1Cotangent by def-weil-pbc-smooth-ring-map, and $S'\\otimes_S M\\cong R'\\otimes_R M$ is tensor associativity. The isomorphism is the canonical map (line 208 gives its action on pure tensors)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-at-prime-field-extension-descent",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none"},
+  "slopmaster2": {"state": "none"}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
