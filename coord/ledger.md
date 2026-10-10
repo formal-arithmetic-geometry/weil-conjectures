@@ -2161,3 +2161,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:42 L: merged deliver/K1/lem-sc-lft-over-field-jacobson-space (reviewer FIX; first push; new nodes: 0)
 - 17:42 L: merged deliver/E1/lem-sc-ext-locally-free-second-naturality (reviewer FIX; first push; new nodes: 0)
 - 17:42 L: merged deliver/H1/lem-sc-isogeny-facts (reviewer PASS; first push; new nodes: 0)
+- 17:43 L: merged deliver/M1/lem-sc-smooth-proper-diagonal-pushforward-structure (reviewer FIX; first push; new nodes: 1)
