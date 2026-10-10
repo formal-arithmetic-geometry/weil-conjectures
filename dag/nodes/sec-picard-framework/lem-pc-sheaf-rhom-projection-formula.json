@@ -25,9 +25,56 @@
   "def-pur-derived-internal-hom",
   "lem-pc-ringed-spaces-derived-adjoint-general"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The adjunction [lem-pc-ringed-spaces-derived-adjoint-general] supplies the unit and counit of Lf^* ⊣ Rf_*. The tensor-internal-Hom adjunction [lem-sc-derived-internal-hom-adjunction] supplies the evaluation morphism R\\mathcal Hom_{\\mathcal O_X}(L,M)\\otimes^L L\\to M corresponding to the identity of R\\mathcal Hom_{\\mathcal O_X}(L,M).",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-sc-derived-internal-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remark remark-projection-formula-for-internal-hom, construction from the derived adjunction and evaluation"
+   }
+  },
+  {
+   "text": "Test against an arbitrary A in D(O_Y) and a map \\alpha:A\\to Rf_*R\\mathcal Hom_X(L,M). By the adjunction [lem-pc-ringed-spaces-derived-adjoint-general], \\alpha corresponds to Lf^*A\\to R\\mathcal Hom_X(L,M), which by [lem-sc-derived-internal-hom-adjunction] gives an evaluation composite Lf^*A\\otimes^L L\\to M. The adjunction transposes a map A\\otimes^L Rf_*L\\to Rf_*M to a map Lf^*(A\\otimes^L Rf_*L)\\to M. Using [lem-pc-derived-pullback-tensor-product] to identify this source with Lf^*A\\otimes^L Lf^*Rf_*L, compose 1\\otimes the counit Lf^*Rf_*L\\to L with the evaluation composite. This constructs naturally a map A\\otimes^L Rf_*L\\to Rf_*M for every \\alpha, hence by Yoneda a canonical morphism Rf_*R\\mathcal Hom_X(L,M)\\to R\\mathcal Hom_Y(Rf_*L,Rf_*M).",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-sc-derived-internal-hom-adjunction",
+    "lem-pc-derived-pullback-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remark remark-projection-formula-for-internal-hom, projection comparison induced by evaluation"
+   }
+  },
+  {
+   "text": "All arrows in the construction are the natural unit, counit, tensor comparison, and evaluation maps supplied by the cited adjunction and tensor-Hom statements. Their functoriality in L and M therefore makes the resulting morphism natural in both variables; no invertibility is asserted.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-sc-derived-internal-hom-adjunction",
+    "lem-pc-derived-pullback-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Remark remark-projection-formula-for-internal-hom, naturality clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-sc-derived-internal-hom-adjunction",
+  "lem-pc-derived-pullback-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark remark-projection-formula-for-internal-hom (source text unavailable in checkout; construction reconstructed from the cited adjunction and evaluation)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,15 +96,38 @@
    "results": "none",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical derived internal Hom projection comparison induced by pullback direct image adjunction and evaluation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-qcqs-sheaf-rhom-adjunction",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-sheaf-rhom-projection-formula",
+  "worker": "stage1",
+  "summary": "No exact sorry-free Lean declaration exists. The item is split into the construction of evaluation from the derived tensor-internal-Hom adjunction, the mate construction tested against an arbitrary object using the derived pullback/direct-image counit and pullback-tensor comparison, and the resulting naturality check. No child node was created because the intermediate comparison is precisely the item's clause and all external facts are already stated by existing DAG nodes.",
+  "blueprint": "The three steps realize the ancestor lem-sc-finite-duality proof clause at Tag 0B6I: the first arrow in the sheafy trace comparison is constructed from derived adjunction and evaluation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rpf3142",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rpf3142 (reviewer sub-agent of L); spot-checked: Statement (Rf_*RHom(L,M)->RHom(Rf_*L,Rf_*M), no iso claim) matches cohomology.tex remark-projection-formula-for-internal-hom (specialized ringed spaces->schemes) and is the form the citer lem-pc-qcqs-sheaf-rhom-adjunction step 1 uses with M=a(K); def-pur-derived-internal-hom in stmt_deps. Step 2 mate construction checked: alpha:A->Rf_*RHom -> Lf^*A(x)L->M, precomposed with 1(x)counit after Lf^*(A(x)Rf_*L)=Lf^*A(x)Lf^*Rf_*L, transposed to A(x)Rf_*L->Rf_*M, natural in A, then tensor-Hom node on Y + Yoneda; equivalent to Stacks' cup-product route, no K-injective argument needed. Cited statements say what is used (C4 ok, Y scheme for tensor-Hom node). No new nodes; rhom node names grepped, no duplicate of global-hom/qcqs-sheaf-rhom-adjunction/pur-rhom nodes. No fault beyond the second reading. FIX more, RETURN less: no repairs needed."
+ }
 }
