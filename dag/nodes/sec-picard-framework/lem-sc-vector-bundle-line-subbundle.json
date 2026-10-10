@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-riemann-roch",
-   "place": "Proof of (*), rank induction: 'Choose 0 != s in E_eta and let L subseteq E be the kernel of ... E_eta/k(C)s'; the paragraph proves L invertible and E/L locally free of rank r-1",
+   "place": "Proof of (*), rank induction: choose 0 != s in E_eta and let L be the kernel of E to j_* (E_eta/k(C)s); the paragraph proves L invertible and E/L locally free of rank r-1",
    "via": []
   },
   "same_as": []
@@ -21,9 +21,70 @@
   "def-sc-function-field",
   "def-sc-invertible-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The germ map from each stalk $\\mathcal E_x$ to the generic fibre $\\mathcal E_\\eta$ is injective because $X$ is integral and $\\mathcal E_x$ is free over the domain $\\mathcal O_{X,x}$ ([lem-sc-integral-scheme-stalks-in-function-field]). Therefore the stalk of the kernel is exactly $\\mathcal L_x=\\mathcal E_x\\cap Ks$ inside $\\mathcal E_\\eta$, and the generic fibre of $\\mathcal L$ is $Ks$.",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), rank induction, sentence identifying the stalks of the kernel with E_x cap k(C)s"
+   }
+  },
+  {
+   "text": "At the generic point the local ring is the field $K$, and $\\mathcal L_\\eta=Ks$. At a non-generic point $x$, the chain $\\eta<x$ and the dimension-one hypothesis give $\\dim\\mathcal O_{X,x}=1$: a longer prime chain would give a longer specialization chain in $X$. Thus [lem-sc-regular-dim1-dvr] makes $\\mathcal O_{X,x}$ a DVR. Apply [lem-sc-dvr-saturation-line] to the free stalk $\\mathcal E_x$ and nonzero $s$. It gives that $\\mathcal L_x$ is free of rank one and $(\\mathcal E/\\mathcal L)_x$ is free of rank $r-1$.",
+   "uses": [
+    "lem-sc-regular-dim1-dvr",
+    "lem-sc-dvr-saturation-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), rank induction, local DVR calculation after the stalk identification"
+   }
+  },
+  {
+   "text": "The morphism $j:\\operatorname{Spec}K\\to X$ is quasi-compact and quasi-separated because its source has one point and $X$ is Noetherian; [pqf-lem-pushforward-qcoh] makes $j_*(\\mathcal E_\\eta/Ks)$ quasi-coherent. Hence [lem-weil-pbc-quasi-coherent-module-kernel] makes its kernel $\\mathcal L$ quasi-coherent. Since $\\mathcal E$ is coherent on the Noetherian $X$, [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] makes $\\mathcal L$ and $\\mathcal E/\\mathcal L$ coherent. Step 2 shows both have free stalks of the stated ranks, and [lem-sc-regular-curve-torsionfree-free] gives finite local freeness and constant rank. Thus $\\mathcal L$ is invertible by [def-sc-invertible-module].",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-sc-regular-curve-torsionfree-free",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), rank induction, conclusion that L is invertible and E/L is locally free of rank r-1"
+   }
+  },
+  {
+   "text": "The kernel inclusion and quotient map form a short exact sequence by the definitions of kernel and quotient. The generic-fibre description in Step 1 and the constant-rank conclusions in Step 3 give the asserted generic fibre, exact sequence, and ranks.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+    "place": "Proof of (*), rank induction, final exact-sequence conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-dvr-saturation-line",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-sc-regular-curve-torsionfree-free",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), rank induction"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,10 +116,49 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-riemann-roch"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-vector-bundle-line-subbundle",
+  "worker": "stage1",
+  "summary": "Split the rank-induction argument into the stalkwise DVR saturation calculation, coherence of the kernel and quotient, and the regular-curve torsion-free-to-locally-free criterion. The item statement is unchanged; the local algebra node is unsplit and has no Mathlib match.",
+  "blueprint": "Realizes the rank-induction paragraph of lem-sc-riemann-roch: identifying L_x with E_x cap k(C)s, applying the DVR saturation calculation, and concluding that L is invertible and E/L has rank r-1.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-scheme-stalks-in-function-field",
+    "why": "The route needs injectivity of stalks into the function field to identify the kernel stalk with the intersection."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "The route needs coherence of the kernel and quotient on a Noetherian curve."
+   },
+   {
+    "node": "pqf-lem-pushforward-qcoh",
+    "why": "The route needs quasi-coherence of the generic-point pushforward used to define the kernel."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-kernel",
+    "why": "The route needs quasi-coherence of the kernel of the generic-fibre map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-vls",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vls (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-riemann-roch.md lines 120-142, proof of (*) rank induction; the item statement is unchanged and the four steps follow that paragraph sentence by sentence. Step 1: stalk of j_*(E_eta/Ks) at any x is E_eta/Ks (eta in every nonempty open), so L_x = preimage of Ks in E_x; injectivity E_x -> E_eta from clause 2 of lem-sc-integral-scheme-stalks-in-function-field (O_x domain, rho_x injective) plus E_x free. Step 2: x non-generic gives dim O_x = 1 (eta < x and dim X = 1), lem-sc-regular-dim1-dvr (in the unit route via sk-thm-picard-duality) gives a DVR; new node lem-sc-dvr-saturation-line checked true: L = E cap Ks nonzero by clearing denominators, submodule of free over a PID hence free of rank 1, E/L torsion-free (a e in Ks implies e in Ks) hence free of rank r-1; hypotheses r>=1, s!=0 present; tested r=1 (L=E, E/L=0, rank 0) and R^2 with s=(1,0) and s=(1,t)/t. Step 3: j qcqs (one-point source, X Noetherian hence quasi-separated), pqf-lem-pushforward-qcoh, lem-weil-pbc-quasi-coherent-module-kernel, then clause (2) of lem-weil-pbc-coherent-kernel-cokernel-locnoeth for L and E/L coherent; free stalks over domains give torsion-free (elementary), lem-sc-regular-curve-torsionfree-free gives local freeness and constant rank = generic dimension (1 and r-1); def-sc-invertible-module. Step 4 elementary. Declared tool uses (integral-scheme stalks, pushforward qcoh, qcoh kernel, coherent kernel/cokernel) are generic black-box tools, accepted (C8). New node: statement only, unsplit, TeX, stmt_deps def-sc-discrete-valuation-ring, from = lem-sc-riemann-roch with exact place, same_as [] confirmed by my blueprint_refs search (saturation; discrete valuation ring free module): nothing relevant; no Mathlib leaf. Start Sat Oct 10 02:54:07 PM UTC 2026, end Sat Oct 10 02:54:59 PM UTC 2026."
+ }
 }
