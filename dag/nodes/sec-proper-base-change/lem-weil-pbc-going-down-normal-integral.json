@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-going-down-normal-integral",
+ "kind": "statement",
+ "title": "Going down for an integral extension of a normal domain",
+ "statement": "Let $A\\subseteq B$ be a subring of a commutative ring, with $A$ and $B$ integral domains. Assume that $A$ is a normal domain [def-weil-pbc-normal-ring] (integrally closed in its field of fractions) and that $B$ is integral over $A$ [def-weil-pbc-integral-closure] (every element of $B$ is a root of a monic polynomial with coefficients in $A$). Let $\\mathfrak p\\subseteq\\mathfrak p'$ be prime ideals of $A$ and let $\\mathfrak q'$ be a prime ideal of $B$ with $A\\cap\\mathfrak q'=\\mathfrak p'$. Then there is a prime ideal $\\mathfrak q$ of $B$ with $\\mathfrak q\\subseteq\\mathfrak q'$ and $A\\cap\\mathfrak q=\\mathfrak p$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition Tag 00H8 (proposition-going-down-normal-integral, line 8518); tag verified in literature/stacks-project/tags/tags. Stacks says 'R normal' (Definition 00GV, normal ring); for an integral domain this is the same as being a normal domain (lem-weil-pbc-normal-domain-of-local-normal and lem-weil-pbc-localization-normal-domain)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "going down for integral extension of domains with integrally closed base",
+   "results": "instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed (Mathlib.RingTheory.IntegralClosure.GoingDown), Algebra.HasGoingDown.mk, Algebra.HasGoingDown (Mathlib.RingTheory.Ideal.GoingDown), IsIntegralClosure.of_isIntegrallyClosed, integralClosure.isIntegrallyClosedOfFiniteExtension",
+   "date": "2026-10-10",
+   "verdict": "match: the HasGoingDown instance with Ideal.exists_ideal_le_liesOver_of_le"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.HasGoingDown, IsIntegrallyClosed",
+   "results": "instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed [IsDomain S] [FaithfulSMul R S] [Algebra.IsIntegral R S] [IsIntegrallyClosed R] : Algebra.HasGoingDown R S (Mathlib.RingTheory.IntegralClosure.GoingDown), the only result",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral extension of domains over a normal (integrally closed) domain satisfies going down",
+   "results": "instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed (first), Algebra.ZariskisMainProperty.of_isIntegral, Ideal.exists_ideal_over_prime_of_isIntegral, Ideal.exists_ideal_over_prime_of_isIntegral_of_isDomain",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00H8\\|HasGoingDown' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 35,75p RingTheory/IntegralClosure/GoingDown.lean; sed -n 20,70p RingTheory/Ideal/GoingDown.lean",
+   "results": "IntegralClosure/GoingDown.lean:47-49 `@[stacks 00H8] instance [IsDomain S] [FaithfulSMul R S] [Algebra.IsIntegral R S] [IsIntegrallyClosed R] : Algebra.HasGoingDown R S`; Ideal/GoingDown.lean:42-45 class Algebra.HasGoingDown, :50-53 Ideal.exists_ideal_le_liesOver_of_le",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Ideal.exists_ideal_le_liesOver_of_le",
+   "results": "Ideal.exists_ideal_le_liesOver_of_le, lemma, .lake/packages/mathlib/Mathlib/RingTheory/Ideal/GoingDown.lean (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "name exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instHasGoingDownOfIsDomainOfFaithfulSMulOfIsIntegralOfIsIntegrallyClosed",
+  "file": "Mathlib/RingTheory/IntegralClosure/GoingDown.lean",
+  "line": 47,
+  "how": "specializes in one line: the instance at IntegralClosure/GoingDown.lean:47-49 (read with sed -n 35,75p, 2026-10-10) gives `Algebra.HasGoingDown A B` for `[IsDomain B] [FaithfulSMul A B] [Algebra.IsIntegral A B] [IsIntegrallyClosed A]` (A ⊆ B makes the algebra map injective, i.e. FaithfulSMul; A is a domain as a subring of B); then `Ideal.exists_ideal_le_liesOver_of_le` (Mathlib/RingTheory/Ideal/GoingDown.lean:50-53) with p ≤ q := 𝔭 ≤ 𝔭' and Q := 𝔮' lying over 𝔭' gives P ≤ 𝔮' prime lying over 𝔭, i.e. A ∩ P = 𝔭."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-domains-strongly-transcendental-not-quasi-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf accepted by L (2026-10-10): the [stacks 00H8] HasGoingDown instance at IntegralClosure/GoingDown.lean:47 plus Ideal.exists_ideal_le_liesOver_of_le (Ideal/GoingDown.lean:50); both checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, two declarations checked by sed."
+}

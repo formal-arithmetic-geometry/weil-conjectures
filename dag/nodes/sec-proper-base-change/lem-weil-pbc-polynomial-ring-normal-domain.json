@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-polynomial-ring-normal-domain",
+ "kind": "statement",
+ "title": "The polynomial ring over a normal domain is a normal domain",
+ "statement": "Let $R$ be a normal domain [def-weil-pbc-normal-ring], i.e. an integral domain that is integrally closed in its field of fractions, and let $R[X]$ be the polynomial ring in one variable $X$ over $R$ [def-weil-polynomial-ring]. Then $R[X]$ is a normal domain: it is an integral domain, and every element of its field of fractions that is a root of a monic polynomial with coefficients in $R[X]$ lies in $R[X]$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 030A (lemma-polynomial-domain-normal, line 8130); tag verified in literature/stacks-project/tags/tags. (Lemma Tag 00H1, lemma-polynomial-ring-normal, line 8247, cited in the proof of 00Q1, is the normal-ring form and is deduced from 030A.)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "polynomial ring over an integrally closed domain is integrally closed",
+   "results": "instIsIntegrallyClosedPolynomialOfIsDomain (Mathlib.RingTheory.Polynomial.IsIntegral), instIsIntegralPolynomial, Polynomial.isIntegrallyClosed_iff', IsIntegralClosure.of_isIntegrallyClosed, IsIntegrallyClosed",
+   "date": "2026-10-10",
+   "verdict": "match: instIsIntegrallyClosedPolynomialOfIsDomain"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed (Polynomial _)",
+   "results": "instIsIntegrallyClosedPolynomialOfIsDomain {R} [CommRing R] [IsDomain R] [IsIntegrallyClosed R] : IsIntegrallyClosed (Polynomial R) (Mathlib.RingTheory.Polynomial.IsIntegral), the only result",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "polynomial ring in one variable over an integrally closed domain is integrally closed",
+   "results": "instIsIntegrallyClosedPolynomialOfIsDomain (first), instIsIntegralPolynomial, instIsIntegralMvPolynomial, Polynomial.isIntegral_iff_isIntegral_coeff",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 030A\\|IsIntegrallyClosed R\\[X\\]' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 170,185p RingTheory/Polynomial/IsIntegral.lean",
+   "results": "RingTheory/Polynomial/IsIntegral.lean:179-181 `@[stacks 030A] instance {R : Type*} [CommRing R] [IsDomain R] [IsIntegrallyClosed R] : IsIntegrallyClosed R[X]`; the module docstring line 24 announces it",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instIsIntegrallyClosedPolynomialOfIsDomain",
+  "file": "Mathlib/RingTheory/Polynomial/IsIntegral.lean",
+  "line": 179,
+  "how": "exact: the anonymous instance at IsIntegral.lean:179-181 (read with sed -n 170,185p, 2026-10-10), `@[stacks 030A] instance {R : Type*} [CommRing R] [IsDomain R] [IsIntegrallyClosed R] : IsIntegrallyClosed R[X]`, auto-named instIsIntegrallyClosedPolynomialOfIsDomain (LeanSearch/Loogle). `IsIntegrallyClosed R` (Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean:74) is integral closedness in `FractionRing R`, i.e. the DAG's normal domain; R[X] is a domain by Mathlib's instance `Polynomial.instIsDomain`."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-domains-strongly-transcendental-not-quasi-finite",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): the [stacks 030A] instance at Polynomial/IsIntegral.lean:179, checked with sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, instance checked by sed."
+}
