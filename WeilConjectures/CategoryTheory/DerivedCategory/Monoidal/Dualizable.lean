@@ -62,10 +62,11 @@ instance (X Y : (HomotopyCategory.quasiIso A (.up ℤ)).kFlat.FullSubcategory) :
     Category.comp_id]
   exact isIso_μ_Qh_of_kFlat _ _ X.property
 
-/-- A bounded complex of dualizable objects is dualizable in the derived category. -/
-theorem isDualizable_Q_obj (P : CochainComplex A ℤ) (a b : ℤ) [P.IsStrictlyGE a]
-    [P.IsStrictlyLE b] (hP : ∀ n, IsDualizable (P.X n)) : IsDualizable (Q.obj P) := by
-  let _ : ∀ n, HasRightDual (P.X n) := fun n ↦ (hP n).some
+/-- A bounded complex `P` of objects with chosen right duals is paired, in the derived category,
+with the image of its termwise dual complex `P^∨`. -/
+theorem nonempty_exactPairing_Q_obj (P : CochainComplex A ℤ) (a b : ℤ) [P.IsStrictlyGE a]
+    [P.IsStrictlyLE b] [∀ n, HasRightDual (P.X n)] :
+    Nonempty (ExactPairing (Q.obj P) (Q.obj P.rightDual)) := by
   let _ := CochainComplex.exactPairingRightDual P a b
   let H := HomotopyCategory.quotient A (.up ℤ)
   have hP' : ∀ n, IsDualizable (P.rightDual.X n) := fun n ↦
@@ -73,7 +74,8 @@ theorem isDualizable_Q_obj (P : CochainComplex A ℤ) (a b : ℤ) [P.IsStrictlyG
        exact := (BraidedCategory.exactPairing_swap (P.X (-n)) (P.X (-n))ᘁ :) }⟩
   let X : (HomotopyCategory.quasiIso A (.up ℤ)).kFlat.FullSubcategory :=
     ⟨H.obj P, (HomotopyCategory.kFlat_quotient_obj_iff _).2
-      (CochainComplex.kFlat_of_bounded_of_flat P a b (fun n ↦ (hP n).flat))⟩
+      (CochainComplex.kFlat_of_bounded_of_flat P a b
+        (fun n ↦ (isDualizable_of_hasRightDual (P.X n)).flat))⟩
   let Y : (HomotopyCategory.quasiIso A (.up ℤ)).kFlat.FullSubcategory :=
     ⟨H.obj P.rightDual, (HomotopyCategory.kFlat_quotient_obj_iff _).2
       (CochainComplex.kFlat_of_bounded_of_flat P.rightDual (-b) (-a) (fun n ↦ (hP' n).flat))⟩
@@ -81,8 +83,15 @@ theorem isDualizable_Q_obj (P : CochainComplex A ℤ) (a b : ℤ) [P.IsStrictlyG
     ExactPairing.map H P P.rightDual
   let _ : ExactPairing X Y := ExactPairing.ofFullyFaithful (ObjectProperty.ι _) X Y
   let _ := Functor.Monoidal.ofLaxMonoidal (kFlatQh A)
-  have h : IsDualizable ((kFlatQh A).obj X) :=
-    ⟨{ rightDual := (kFlatQh A).obj Y, exact := ExactPairing.map (kFlatQh A) X Y }⟩
-  exact IsDualizable.of_iso ((quotientCompQhIso A).app P) h
+  let _ : ExactPairing ((kFlatQh A).obj X) ((kFlatQh A).obj Y) := ExactPairing.map (kFlatQh A) X Y
+  exact ⟨exactPairingCongr (X' := (kFlatQh A).obj X) (Y' := (kFlatQh A).obj Y)
+    ((quotientCompQhIso A).app P).symm ((quotientCompQhIso A).app P.rightDual).symm⟩
+
+/-- A bounded complex of dualizable objects is dualizable in the derived category. -/
+theorem isDualizable_Q_obj (P : CochainComplex A ℤ) (a b : ℤ) [P.IsStrictlyGE a]
+    [P.IsStrictlyLE b] (hP : ∀ n, IsDualizable (P.X n)) : IsDualizable (Q.obj P) := by
+  let _ : ∀ n, HasRightDual (P.X n) := fun n ↦ (hP n).some
+  obtain ⟨_⟩ := nonempty_exactPairing_Q_obj P a b
+  exact ⟨⟨Q.obj P.rightDual⟩⟩
 
 end DerivedCategory

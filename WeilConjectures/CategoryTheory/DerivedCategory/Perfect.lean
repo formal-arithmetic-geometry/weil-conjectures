@@ -433,8 +433,22 @@ bounded complex `P` of finitely generated projective modules, `C^∨` is represe
 termwise dual complex `Hom_R(P^{-i}, R)`, again bounded with finitely generated projective
 terms. -/
 theorem IsPerfect.ihom_unit {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.IsPerfect) :
-    ((ihom C).obj (𝟙_ _)).IsPerfect :=
-  sorry
+    ((ihom C).obj (𝟙_ _)).IsPerfect := by
+  obtain ⟨P, a, b, _, _, hP, ⟨e⟩⟩ := hC
+  obtain ⟨_⟩ := nonempty_braidedCategory (ModuleCat.{u} R)
+  let _ : ∀ n, HasRightDual (P.X n) := fun n ↦
+    have := (hP n).1
+    have := (hP n).2
+    ModuleCat.hasRightDualOfProjective (P.X n)
+  obtain ⟨_⟩ := nonempty_exactPairing_Q_obj P a b
+  let _ : HasRightDual (Q.obj P) := ⟨Q.obj P.rightDual⟩
+  have hD : (Q.obj P.rightDual).IsPerfect := isPerfect_Q_obj _ (-b) (-a) fun i ↦ by
+    have := (hP (-i)).1
+    have := (hP (-i)).2
+    exact ⟨inferInstanceAs (Module.Projective R (Module.Dual R (P.X (-i)))),
+      inferInstanceAs (Module.Finite R (Module.Dual R (P.X (-i))))⟩
+  exact hD.of_iso ((ihomUnitIsoRightDual (Q.obj P)).symm ≪≫
+    (MonoidalClosed.internalHom.mapIso e.op).app _)
 
 omit [HasDerivedCategory.{u} (ModuleCat.{u} R)] in
 /-- A complex of modules over a semisimple ring (for example a field) is quasi-isomorphic to the

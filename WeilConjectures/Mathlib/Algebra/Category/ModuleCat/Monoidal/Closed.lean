@@ -81,26 +81,40 @@ private lemma contractLeft_zag :
 
 end
 
-/-- A finite projective module is dualizable in `ModuleCat R`. -/
-theorem isDualizable_of_projective (Q : ModuleCat.{u} R) [Module.Finite R Q]
-    [Module.Projective R Q] : IsDualizable Q := by
-  obtain ⟨n, ξ, m, h⟩ := exists_sum_comp_eq_id_of_projective Q
+/-- A finite projective module `Q` has the right dual `Hom_R(Q, R)` in `ModuleCat R`, with the
+contraction `φ ⊗ q ↦ φ(q)` as evaluation. -/
+@[instance_reducible]
+noncomputable def hasRightDualOfProjective (Q : ModuleCat.{u} R) [Module.Finite R Q]
+    [Module.Projective R Q] : HasRightDual Q :=
+  let h := exists_sum_comp_eq_id_of_projective Q
+  let ξ := h.choose_spec.choose
+  let m := h.choose_spec.choose_spec.choose
   have h' (q : Q) : ∑ j, (ξ j).hom q • (m j).hom 1 = q := by
-    have := congr($h q)
+    have := congr($(h.choose_spec.choose_spec.choose_spec) q)
     simp only [hom_sum, LinearMap.sum_apply, hom_comp, LinearMap.comp_apply, hom_id,
       LinearMap.id_apply] at this
     refine Eq.trans (Finset.sum_congr rfl fun j _ ↦ ?_) this
     rw [← map_smul, smul_eq_mul, mul_one]
-  refine ⟨{ rightDual := ModuleCat.of R (Module.Dual R Q)
-            exact := { coevaluation' := ofHom (LinearMap.toSpanSingleton R
-                         (Q ⊗[R] Module.Dual R Q)
-                         (∑ j, (m j).hom 1 ⊗ₜ[R] (ξ j).hom))
-                       evaluation' := ofHom (contractLeft R Q)
-                       coevaluation_evaluation' := ?_
-                       evaluation_coevaluation' := ?_ } }⟩
-  · ext : 1
-    exact contractLeft_zag (fun j ↦ (ξ j).hom) (fun j ↦ (m j).hom 1) h'
-  · ext : 1
-    exact contractLeft_zig (fun j ↦ (ξ j).hom) (fun j ↦ (m j).hom 1) h'
+  { rightDual := ModuleCat.of R (Module.Dual R Q)
+    exact :=
+      { coevaluation' := ofHom (LinearMap.toSpanSingleton R (Q ⊗[R] Module.Dual R Q)
+          (∑ j, (m j).hom 1 ⊗ₜ[R] (ξ j).hom))
+        evaluation' := ofHom (contractLeft R Q)
+        coevaluation_evaluation' := by
+          ext : 1
+          exact contractLeft_zag (fun j ↦ (ξ j).hom) (fun j ↦ (m j).hom 1) h'
+        evaluation_coevaluation' := by
+          ext : 1
+          exact contractLeft_zig (fun j ↦ (ξ j).hom) (fun j ↦ (m j).hom 1) h' } }
+
+lemma hasRightDualOfProjective_rightDual (Q : ModuleCat.{u} R) [Module.Finite R Q]
+    [Module.Projective R Q] :
+    (hasRightDualOfProjective Q).rightDual = ModuleCat.of R (Module.Dual R Q) :=
+  rfl
+
+/-- A finite projective module is dualizable in `ModuleCat R`. -/
+theorem isDualizable_of_projective (Q : ModuleCat.{u} R) [Module.Finite R Q]
+    [Module.Projective R Q] : IsDualizable Q :=
+  ⟨hasRightDualOfProjective Q⟩
 
 end ModuleCat
