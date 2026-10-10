@@ -11,9 +11,53 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-pbc-site-plus-construction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The morphism $\\varphi_i$.* Write $\\mathcal U=\\{\\pi_i:U_i\\to U\\}_{i\\in I}$, $\\mathcal V=\\{\\rho_j:V_j\\to V\\}_{j\\in J}$. Fix $i\\in I$. By the definition of a morphism of coverings [def-weil-pbc-site-plus-construction] (b), applied to $f$ and to $g$, which lie over the same $\\chi$, $\\rho_{\\alpha(i)}\\circ f_i=\\chi\\circ\\pi_i=\\rho_{\\beta(i)}\\circ g_i$. Let $V_{\\alpha(i)}\\times_VV_{\\beta(i)}$ with projections $\\mathrm{pr}_1,\\mathrm{pr}_2$ be the fibre product [def-weil-pbc-category-fibre-product] of $\\rho_{\\alpha(i)}$ and $\\rho_{\\beta(i)}$ that appears in the definition of $H^0(\\mathcal V,\\mathcal F)$ [def-weil-pbc-site-plus-construction] (a) for the pair of indices $(\\alpha(i),\\beta(i))$ (it exists by axiom (iii) of a site [def-weil-pbc-sites-and-cohomology], applied to the covering $\\mathcal V$ and the morphism $\\rho_{\\beta(i)}:V_{\\beta(i)}\\to V$; when $\\alpha(i)=\\beta(i)$ it is $V_{\\alpha(i)}\\times_VV_{\\alpha(i)}$). By its universal property, with $T=U_i$, $x=f_i$, $y=g_i$, there is a (unique) morphism $\\varphi_i:U_i\\to V_{\\alpha(i)}\\times_VV_{\\beta(i)}$ with $\\mathrm{pr}_1\\circ\\varphi_i=f_i$ and $\\mathrm{pr}_2\\circ\\varphi_i=g_i$.",
+   "uses": [
+    "def-weil-pbc-site-plus-construction",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-category-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma 00W7 (lemma-independent-refinement), proof"
+   }
+  },
+  {
+   "text": "*The two components agree.* Let $s=(s_j)_{j\\in J}\\in H^0(\\mathcal V,\\mathcal F)$ and $i\\in I$. Since $\\mathcal F$ is a functor $\\mathcal C^{op}\\to$ sets, $\\mathcal F(u\\circ v)=\\mathcal F(v)\\circ\\mathcal F(u)$ for composable $u,v$. Hence, with $\\varphi_i$ of step 1 and the formula for $f^*$, $g^*$ of [def-weil-pbc-site-plus-construction] (b), $(f^*s)_i=\\mathcal F(f_i)(s_{\\alpha(i)})=\\mathcal F(\\mathrm{pr}_1\\circ\\varphi_i)(s_{\\alpha(i)})=\\mathcal F(\\varphi_i)\\big(\\mathcal F(\\mathrm{pr}_1)(s_{\\alpha(i)})\\big)$ and $(g^*s)_i=\\mathcal F(g_i)(s_{\\beta(i)})=\\mathcal F(\\varphi_i)\\big(\\mathcal F(\\mathrm{pr}_2)(s_{\\beta(i)})\\big)$. The defining condition of $H^0(\\mathcal V,\\mathcal F)$ [def-weil-pbc-site-plus-construction] (a) for the indices $j=\\alpha(i)$, $j'=\\beta(i)$ says $\\mathcal F(\\mathrm{pr}_1)(s_{\\alpha(i)})=s_{\\alpha(i)}|_{V_{\\alpha(i)}\\times_VV_{\\beta(i)}}=s_{\\beta(i)}|_{V_{\\alpha(i)}\\times_VV_{\\beta(i)}}=\\mathcal F(\\mathrm{pr}_2)(s_{\\beta(i)})$ in $\\mathcal F(V_{\\alpha(i)}\\times_VV_{\\beta(i)})$. Applying $\\mathcal F(\\varphi_i)$ gives $(f^*s)_i=(g^*s)_i$.",
+   "uses": [
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma 00W7 (lemma-independent-refinement), proof"
+   }
+  },
+  {
+   "text": "*Conclusion.* $f^*s$ and $g^*s$ are elements of $H^0(\\mathcal U,\\mathcal F)\\subseteq\\prod_{i\\in I}\\mathcal F(U_i)$ [def-weil-pbc-site-plus-construction] (a) whose components agree for every $i\\in I$ by step 2, so $f^*s=g^*s$; as $s\\in H^0(\\mathcal V,\\mathcal F)$ was arbitrary, $f^*=g^*$. The last sentence of the statement is the case $V=U$, $\\chi=\\mathrm{id}_U$: two morphisms of coverings $\\mathcal U\\to\\mathcal V$ over $\\mathrm{id}_U$ lie over the same morphism, so they induce the same map $H^0(\\mathcal V,\\mathcal F)\\to H^0(\\mathcal U,\\mathcal F)$.",
+   "uses": [
+    "def-weil-pbc-site-plus-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma 00W7 (lemma-independent-refinement), proof, last sentence; Remark 00W8 (remark-both-refine-same-H0)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-plus-construction",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites, Lemma 00W7 (lemma-independent-refinement) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +86,45 @@
    "results": "Hypercover/Homotopy.lean:46 structure Homotopy, :64 Homotopy.mapMultiforkOfIsLimit_eq; Hypercover/Zero.lean:268 structure PreZeroHypercover.Hom (refinements over id_S); IsSheafFor.lean, Hypercover/SheafOfTypes.lean (Arrows.Compatible); no statement for two morphisms of zero-hypercovers / families of coverings over a general morphism",
    "date": "2026-10-10",
    "verdict": "no match (see loogle entry)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "two morphisms of covering families over the same base morphism induce equal maps on compatible families of sections of a presheaf",
+   "results": "GrothendieckTopology.OneHypercover.arrowsCompatible (Sites.Hypercover.One), TopCat.Presheaf.IsCompatible, Meq.condition (Sites.ConcreteSheafification), PresheafOfModules.sections_property, Presieve.FamilyOfElements.Compatible, Presieve.natTransEquivCompatibleFamily (Sites.IsSheafFor)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "two refinement maps of covers that lift the same morphism give the same pullback of a compatible family of sections (Cech H^0 independent of refinement)",
+   "results": "Meq.pullback_refine, Meq.pullback_apply, Plus.res_mk_eq_mk_pullback (Sites.ConcreteSheafification), FamilyOfElements.Compatible.pullback, Presieve.pullbackCompatible_iff, Arrows.pullbackCompatible_iff (Sites.IsSheafFor), Presieve.firstMap_eq_secondMap (Sites.Preserves)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's plus construction indexes by covering sieves J.Cover X, where a refinement S ⟶ T is a unique arrow of a preorder, so the statement has no counterpart there"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Meq.refine",
+   "results": "Meq.refine (ConcreteSheafification.lean:72), Meq.pullback_refine (:93), Plus.eq_mk_iff_exists, Meq.refine_apply",
+   "date": "2026-10-10",
+   "verdict": "no match (refinement of sieves is a preorder morphism)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem mapMultiforkOfIsLimit_eq\\|structure Homotopy\\|def refine\\|theorem pullback_refine' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/; sed -n 40,70p CategoryTheory/Sites/Hypercover/Homotopy.lean",
+   "results": "Sites/ConcreteSheafification.lean:72 Meq.refine, :93 Meq.pullback_refine; Sites/Hypercover/Homotopy.lean:47 structure PreOneHypercover.Homotopy (f g : E.Hom F) (maps X_i ⟶ Y_a over (f(i), g(i)) with wl, wr), :64 Homotopy.mapMultiforkOfIsLimit_eq (homotopic refinements of pre-1-hypercovers of one object S induce the same map on multiequalizers)",
+   "date": "2026-10-10",
+   "verdict": "generalization in another formalism, not one line (as recorded above): the morphisms φ_i of step 1 are exactly the data of a Homotopy when the 1-hypercover structure of V is given by the fibre products V_j ×_V V_j'; only coverings of one object, morphisms over id_S"
+  },
+  {
+   "tool": "local_search",
+   "query": "CategoryTheory.PreOneHypercover.Homotopy.mapMultiforkOfIsLimit_eq (project root ~/weil-conjectures-slopmaster2)",
+   "results": "found, lemma, .lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "exists; not a one-line specialization (see grep entry)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +144,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": "CategoryTheory.PreOneHypercover.Homotopy.mapMultiforkOfIsLimit_eq (Mathlib/CategoryTheory/Sites/Hypercover/Homotopy.lean:64, structure Homotopy :47): for coverings of one object S (morphisms over id_S) with the pre-1-hypercover structure given by the fibre products V_j ×_S V_j', the morphisms φ_i : U_i → V_α(i) ×_S V_β(i) of step 1 form a Homotopy f g, and the lemma gives f^* = g^* on multiequalizers (= H^0). Building the PreOneHypercover of a covering, identifying its multiequalizer with H^0 and the case of a general χ : U → V are several lines, so the node is split in elementary steps instead.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-site-covering-morphisms-same-h0-map",
+  "worker": "stage1",
+  "summary": "Proof written in three elementary steps following Stacks Sites 00W7 (sites.tex, lemma-independent-refinement): the morphism φ_i : U_i → V_α(i) ×_V V_β(i) from the universal property of the fibre product (using ρ_α(i) f_i = χ π_i = ρ_β(i) g_i from the definition of morphisms of coverings; existence of the fibre product from the site axiom (iii) and the definition of H^0), the equality (f^*s)_i = F(φ_i)(F(pr_1)s_α(i)) = F(φ_i)(F(pr_2)s_β(i)) = (g^*s)_i from functoriality of F and the defining condition of H^0(V,F), and the conclusion, with the case χ = id_U for the last sentence. Statement unchanged; it agrees with 00W7. New Mathlib leaf def-weil-pbc-category-fibre-product (Categories 001V; CategoryTheory.IsPullback with lift, lift_fst, lift_snd, hom_ext). Mathlib searched again with all three kinds: no match for the item; Homotopy.mapMultiforkOfIsLimit_eq recorded as mathlib_candidate (a generalization in the pre-1-hypercover formalism, not one line). Citer lem-weil-pbc-site-plus-construction-presheaf uses only the case over id_U, which the statement gives."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 elementary steps following Sites 00W7: the morphism U_i -> V_alpha(i) x_V V_beta(i) from the universal property of the fibre product (new definition leaf for Categories 001V: IsPullback, lines 61/106/111/116/125 verified by L), functoriality of F and the H^0 condition for the index pair, equality of components. Statement unchanged. Stage-3 note: def-weil-pbc-site-plus-construction and def-weil-pbc-sites-and-cohomology could cite the new fibre-product definition."
+ }
 }

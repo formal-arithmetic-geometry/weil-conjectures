@@ -1,0 +1,79 @@
+{
+ "id": "def-weil-pbc-category-fibre-product",
+ "kind": "definition",
+ "title": "Fibre product in a category",
+ "statement": "Let $\\mathcal C$ be a category and $a:X\\to S$, $b:Y\\to S$ morphisms of $\\mathcal C$. A *fibre product* of $a$ and $b$ is an object $X\\times_SY$ of $\\mathcal C$ together with morphisms $\\mathrm{pr}_1:X\\times_SY\\to X$ and $\\mathrm{pr}_2:X\\times_SY\\to Y$, the *projections*, with $a\\circ\\mathrm{pr}_1=b\\circ\\mathrm{pr}_2$, such that for every object $T$ and all morphisms $x:T\\to X$, $y:T\\to Y$ with $a\\circ x=b\\circ y$ there is exactly one morphism $\\varphi:T\\to X\\times_SY$ with $\\mathrm{pr}_1\\circ\\varphi=x$ and $\\mathrm{pr}_2\\circ\\varphi=y$. In particular two morphisms $\\varphi,\\psi:T\\to X\\times_SY$ with $\\mathrm{pr}_1\\circ\\varphi=\\mathrm{pr}_1\\circ\\psi$ and $\\mathrm{pr}_2\\circ\\varphi=\\mathrm{pr}_2\\circ\\psi$ are equal. A fibre product need not exist in a general category.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Definition 001V (definition-fibre-products)"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal property of pullback square: lift of two morphisms composed with first projection",
+   "results": "CategoryTheory.Limits.pullback.lift' (Limits.Shapes.Pullback.HasPullback), CategoryTheory.IsPullback, IsPullback.lift_snd, IsPullback.lift_fst_assoc (Limits.Shapes.Pullback.IsPullback.Defs), ChosenPullbacksAlong.isPullback, CompHausLike.pullback.lift_fst",
+   "date": "2026-10-10",
+   "verdict": "match: CategoryTheory.IsPullback with lift, lift_fst, lift_snd, hom_ext"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fibre product in a category: commutative square that is a limit, unique morphism into it with given projections",
+   "results": "CategoryTheory.Limits.pullback, CategoryTheory.Limits.HasPullback (Limits.Shapes.Pullback.HasPullback), CategoryTheory.IsPullback, IsPullback.of_hasPullback (Limits.Shapes.Pullback.IsPullback.Defs), ChosenPullbacksAlong.isPullback",
+   "date": "2026-10-10",
+   "verdict": "match: CategoryTheory.IsPullback (a given square is a fibre product; existence not assumed)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsPullback.hom_ext",
+   "results": "CategoryTheory.IsPullback.hom_ext (Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs): k ≫ fst = l ≫ fst → k ≫ snd = l ≫ snd → k = l",
+   "date": "2026-10-10",
+   "verdict": "match (the uniqueness clause)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n '^structure IsPullback\\|^noncomputable def lift\\|^lemma lift_fst\\|^lemma lift_snd\\|^lemma hom_ext' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Defs.lean; sed -n 55,130p of that file",
+   "results": "structure IsPullback (line 61, extends CommSq fst snd f g, i.e. fst ≫ f = snd ≫ g, with the pullback cone a limit), IsPullback.lift (106), lift_fst (111), lift_snd (116), hom_ext (125)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "CategoryTheory.IsPullback.lift (project root ~/weil-conjectures-slopmaster2)",
+   "results": "no items, index: unavailable (not a proof of absence; the declaration was read in the source by sed -n, lines 106-119)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive; match established by the grep and sed reading"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.IsPullback",
+  "file": "Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Defs.lean",
+  "how": "exact: `(X ×_S Y, pr_1, pr_2)` is a fibre product of `a`, `b` iff `IsPullback pr_1 pr_2 a b` (line 61; its `CommSq` field is a ∘ pr_1 = b ∘ pr_2); the morphism φ is `IsPullback.lift hP x y w` (line 106) with `IsPullback.lift_fst` (line 111) and `IsPullback.lift_snd` (line 116), and the uniqueness is `IsPullback.hom_ext` (line 125)",
+  "line": 61
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-site-covering-morphisms-same-h0-map",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: definition leaf (IsPullback structure line 61; lift 106, lift_fst 111, lift_snd 116, hom_ext 125); lines verified."
+}
