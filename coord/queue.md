@@ -1,8 +1,8 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+858 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (49)
+## Stage 1: nodes to split (48)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,7 +18,6 @@
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
 | `lem-sc-finite-cohomology` | 3023 | none |
-| `lem-sc-pseudo-coherent-qcoh` | 3023 | none |
 | `lem-sc-qc-open-derived-lift` | 3023 | none |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3024 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -32,8 +31,8 @@
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
 | `lem-pc-rf-mv-triangle-naturality` | 5016 | none |
 | `lem-pc-sites-sheafification-underlying-sets` | 5016 | none |
-| `lem-sp-filtered-complex-ZB-description` | 6007 | none |
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
+| `lem-sp-filtered-complex-associated-spectral-sequence-construction` | 6008 | none |
 | `lem-sc-picard-h1-multiple-locus` | 6013 | none |
 | `lem-sc-picard-locus-closed-valuation-triviality` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
@@ -871,7 +870,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1694 nodes that wait for a statement dependency, 90 nodes that wait for stage 1.
+Not open yet: 1696 nodes that wait for a statement dependency, 89 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
