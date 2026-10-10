@@ -2,7 +2,7 @@
 
 912 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (638)
+## Stage 1: nodes to split (637)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,9 +26,7 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-universal-thickening-affine-case` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
-| `def-weil-pbc-cohen-ring` | 1013 | none |
 | `def-weil-pbc-depth` | 1013 | none |
 | `def-weil-pbc-essentially-constant-system` | 1013 | none |
 | `def-weil-pbc-japanese-domain` | 1013 | none |
@@ -133,6 +131,7 @@
 | `lem-weil-pbc-tor-dimension-shift-free` | 1013 | none |
 | `lem-weil-pbc-transitivity-gamma` | 1013 | none |
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
+| `lem-weil-pbc-zariski-open-restriction-injectives` | 1013 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
@@ -645,7 +644,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (274)
+## Stage 2: nodes to state (275)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -827,6 +826,7 @@
 | `lem-weil-pbc-popescu-lift-once` | 1 | state |
 | `lem-weil-pbc-popescu-lift-twice` | 1 | state |
 | `lem-weil-pbc-popescu-product` | 1 | state |
+| `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1 | state |
 | `lem-weil-pbc-power-series-onto-completion` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1 | state |
@@ -924,7 +924,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 650 nodes that wait for stage 1, 552 nodes that wait for a statement dependency.
+Not open yet: 649 nodes that wait for stage 1, 552 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
