@@ -1651,3 +1651,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:44 L: returned deliver/M1/lemma-weil-pbc-proper-underived-exchange (reviewer RETURN: 1. E3/C1: step 2: the claim that 'the two closed geometric fibres' are both identified with X x_Y Spec Omega is false as)
 - 14:44 L: merged deliver/M1/lem-weil-pbc-property-implies-acyclicity (reviewer FIX; first push; new nodes: 0)
 - 14:45 L: merged deliver/C1/lem-pc-very-ample-ample (reviewer PASS; first push; new nodes: 1)
+- 14:45 L: returned deliver/C1/lem-sc-brauer-zero-all-curves (reviewer RETURN: 1. C1: proof steps 2 and 4 (Step 1 and Step 2): the fact 'a scheme etale over a reduced scheme is reduced' is used twice)
