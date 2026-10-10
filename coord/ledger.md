@@ -1431,3 +1431,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:40 L: accepted def-pc-smooth-projective-curve: definition, deps def-pc-curve/def-pc-projective-morphism/def-sbc-smooth-morphisms; def-sc-general-curve flagged (no dimension condition)
 - 2026-10-10, delivery of G1: lem-weil-pbc-triangular-change-of-basis merged from deliver/G1/lem-weil-pbc-triangular-change-of-basis (1 commit(s), 0 new node(s), spot-checked by L: L: 4 elementary steps (coordinate map, triangular solving in both orientations, independence by the unit diagonal) checked against 00MT); claim closed
 - 12:41 L: merged deliver/G1/lem-weil-pbc-triangular-change-of-basis (4 elementary steps, 00MT)
+- 12:41 L: returned deliver/J1/def-weil-pbc-etale-cohomology (no '## Review by J1'; new node's blueprint.is/from malformed)
