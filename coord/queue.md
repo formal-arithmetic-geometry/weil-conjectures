@@ -2,7 +2,7 @@
 
 814 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (656)
+## Stage 1: nodes to split (654)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,10 +17,7 @@
 | `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
-| `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1011 | none |
 | `lem-weil-pbc-integral-closure-finite-fibre-quasi-finite` | 1011 | none |
-| `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1011 | none |
-| `lem-weil-pbc-jacobi-zariski-differential-maps` | 1011 | none |
 | `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1011 | none |
 | `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1011 | none |
 | `lem-weil-pbc-jacobi-zariski-surjection-h1` | 1011 | none |
@@ -102,6 +99,7 @@
 | `def-weil-pbc-ample-invertible-module` | 1012 | none |
 | `def-weil-pbc-constant-group-scheme` | 1012 | none |
 | `def-weil-pbc-formally-smooth-adic` | 1012 | none |
+| `def-weil-pbc-ring-map-quasi-finite-at-prime` | 1012 | none |
 | `lem-weil-pbc-affine-basic-sets-disjoint-refinement` | 1012 | none |
 | `lem-weil-pbc-affine-finite-type-generating-sections` | 1012 | none |
 | `lem-weil-pbc-ample-scheme-separated` | 1012 | none |
@@ -663,7 +661,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (158)
+## Stage 2: nodes to state (160)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -758,8 +756,10 @@
 | `lem-weil-pbc-immersion-affine-constructible-pieces` | 1 | state |
 | `lem-weil-pbc-improve-presentation` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
+| `lem-weil-pbc-integral-closure-finite-fibre-image-clopen` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 1 | state |
 | `lem-weil-pbc-integral-idempotent-annihilating-polynomial` | 1 | state |
+| `lem-weil-pbc-inverse-image-closed-pushforward-constant` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-base-change` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
@@ -826,7 +826,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 668 nodes that wait for stage 1, 445 nodes that wait for a statement dependency.
+Not open yet: 666 nodes that wait for stage 1, 445 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
