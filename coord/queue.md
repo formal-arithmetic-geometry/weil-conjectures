@@ -1,6 +1,6 @@
 # Work queue
 
-911 items; claim with `tools/claim.py next <group> [--stage N]`.
+912 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (641)
 
@@ -27,7 +27,6 @@
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
 | `lem-weil-pbc-tor-long-exact-first-variable` | 1012 | none |
-| `lem-weil-pbc-tor-strictly-pro-zero` | 1012 | none |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1012 | none |
 | `lem-weil-pbc-two-term-complex-kernel-base-change` | 1012 | none |
 | `lem-weil-pbc-universal-thickening-affine-case` | 1012 | none |
@@ -70,6 +69,7 @@
 | `lem-weil-pbc-formal-glueing-complex-exact` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-finite-modules` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-isogeny` | 1013 | none |
+| `lem-weil-pbc-free-resolution-ses-split` | 1013 | none |
 | `lem-weil-pbc-fs-adic-base-change` | 1013 | none |
 | `lem-weil-pbc-fs-adic-completion` | 1013 | none |
 | `lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre` | 1013 | none |
@@ -648,7 +648,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (270)
+## Stage 2: nodes to state (271)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -906,6 +906,7 @@
 | `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state |
+| `lem-weil-pbc-tor-strictly-pro-zero` | 1 | state |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state |
 | `lem-weil-pbc-truncation-descends` | 1 | state |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state |
