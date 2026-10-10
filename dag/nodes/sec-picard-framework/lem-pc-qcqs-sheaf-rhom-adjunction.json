@@ -25,9 +25,74 @@
   "lem-pc-qcqs-derived-direct-image-right-adjoint",
   "lem-pc-dq-coherator-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For L and K, apply the canonical internal-Hom comparison [lem-pc-sheaf-rhom-projection-formula] with M=a(K), then postcompose with the morphism induced by the counit Rf_*a(K)\\to K. This is exactly the canonical map in the statement, and its construction is natural in L and K.",
+   "uses": [
+    "lem-pc-sheaf-rhom-projection-formula",
+    "lem-pc-qcqs-derived-direct-image-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "paragraph before Tag 0A9Q defining equation-sheafy-trace (first arrow: Cohomology, Remark remark-projection-formula-for-internal-hom; second arrow: the counit)"
+   }
+  },
+  {
+   "text": "Because DQ_Y is right adjoint to the inclusion of D_QCoh(O_Y), it suffices by [lem-pc-dq-coherator-adjunction] to test the displayed map after applying Hom from an arbitrary M\\in D_QCoh(O_Y): the induced map must be a bijection Hom_Y(M,Rf_*R\\mathcal Hom_X(L,a(K)))\\to Hom_Y(M,R\\mathcal Hom_Y(Rf_*L,K)).",
+   "uses": [
+    "lem-pc-dq-coherator-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9Q proof, paragraph beginning 'Since DQ_Y is the right adjoint'"
+   }
+  },
+  {
+   "text": "For such M, the required map is identified through the following natural chain of bijections. First, [lem-pc-ringed-spaces-derived-adjoint-general] gives Hom_Y(M,Rf_*R\\mathcal Hom_X(L,a(K))) = Hom_X(Lf^*M,R\\mathcal Hom_X(L,a(K))). Next, [lem-sc-derived-internal-hom-adjunction] gives Hom_X(Lf^*M,R\\mathcal Hom_X(L,a(K))) = Hom_X(Lf^*M\\otimes^L L,a(K)). Since M\\in D_QCoh(O_Y) and L\\in D_QCoh(O_X), the object Lf^*M\\otimes^L L lies in D_QCoh(O_X) by [lem-pc-derived-pullback-tensor-qcoh], so the adjunction Rf_*\\dashv a on D_QCoh from [lem-pc-qcqs-derived-direct-image-right-adjoint] applies and gives Hom_X(Lf^*M\\otimes^L L,a(K)) = Hom_Y(Rf_*(Lf^*M\\otimes^L L),K). The projection formula [lem-pc-projection-formula], together with symmetry of derived tensor, gives Rf_*(Lf^*M\\otimes^L L) = M\\otimes^L Rf_*L. Finally [lem-sc-derived-internal-hom-adjunction] gives Hom_Y(M\\otimes^L Rf_*L,K)=Hom_Y(M,R\\mathcal Hom_Y(Rf_*L,K)).",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-sc-derived-internal-hom-adjunction",
+    "lem-pc-derived-pullback-tensor-qcoh",
+    "lem-pc-qcqs-derived-direct-image-right-adjoint",
+    "lem-pc-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9Q proof, displayed string of five Hom equalities"
+   }
+  },
+  {
+   "text": "The bijections in the chain are natural, and under them the map constructed in Step 1 is the identity on Hom_Y(M\\otimes^L Rf_*L,K), by the triangle identities for Rf_*\\dashv a, naturality of the internal-Hom bijections, and naturality of the projection-formula isomorphism. Yoneda therefore gives a bijection for every quasi-coherent M, so DQ_Y applied to the canonical map is an isomorphism.",
+   "uses": [
+    "lem-pc-dq-coherator-adjunction",
+    "lem-pc-qcqs-derived-direct-image-right-adjoint",
+    "lem-pc-projection-formula",
+    "lem-sc-derived-internal-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9Q proof, conclusion after the five equalities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-rhom-projection-formula",
+  "lem-pc-qcqs-derived-direct-image-right-adjoint",
+  "lem-pc-dq-coherator-adjunction",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-sc-derived-internal-hom-adjunction",
+  "lem-pc-projection-formula",
+  "lem-pc-derived-pullback-tensor-qcoh"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9Q (lemma-iso-on-RSheafHom), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,12 +117,38 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-pc-global-hom-adjunction",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-qcqs-sheaf-rhom-adjunction",
+  "worker": "stage1",
+  "summary": "Split Tag 0A9Q into the canonical internal-Hom comparison and counit construction, the coherator Yoneda reduction, the five Hom bijections, and the naturality/Yoneda conclusion. Added one statement-only child for the source's nontrivial internal-Hom projection comparison; all other ingredients are existing DAG nodes.",
+  "blueprint": "The four steps realize the ancestor blueprint clause 'Tag 0B6I (Lemma 48.1.1): sheaf-level trace comparison after applying the coherator': construct the sheafy trace map, reduce via the coherator adjunction, prove the Hom chain, and conclude by Yoneda.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Step 3 uses the generic derived projection formula to identify Rf_*(Lf^*M tensor^L L) with M tensor^L Rf_*L; the qcqs sheaf-Hom unit has no replacement for this standard tool lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projection-formula",
+  "lem-pc-derived-pullback-tensor-qcoh",
+  "lem-pc-projection-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-qra3124",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qra3124 (reviewer sub-agent of L); spot-checked: Statement is the sheafy 0A9Q version over Y after DQ_Y (no restriction to opens needed; proof goes through the coherator, not 0A9P). Right-adjoint node and def-pc-derived-direct-image are existing statement/def nodes; projection formula node states E in D_QCoh(X), K in D_QCoh(Y), f qcqs, matching the use E=L, K=M (C4 ok). New child is the Cohomology remark-projection-formula-for-internal-hom construction (relative cup product + evaluation), a real lemma, not a duplicate of lem-pc-global-hom-adjunction (global RHom) or class d; no affine-hom-out-of-perfect helper. FIX more, RETURN less: (1) C1/E: Step 3 applied Rf_* -| a (on D_QCoh only) to Lf^*M (x) L without showing it lies in D_QCoh(X); added citation [lem-pc-derived-pullback-tensor-qcoh] to text, uses, proof_deps (declared as generic tool use with the projection formula, both from sk-thm-picard-f-representable). (2) B3 metadata: child source place and Step 1 source place named 'Tag 0B6I equation (48.1.1.1)', which is not where the map is; now cite Cohomology Remark remark-projection-formula-for-internal-hom and duality.tex equation-sheafy-trace. Note: second reading's claimed created.item correction is not in the file (maintainer field, not judged).; 2 file(s) fixed by the reviewer"
  }
 }

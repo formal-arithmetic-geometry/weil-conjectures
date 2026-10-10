@@ -2956,3 +2956,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:23 L: merged deliver/K1/lem-sc-etale-at-prime-flat-unramified-criterion (reviewer FIX; after a return; new nodes: 1)
 - 23:23 L: merged deliver/J1/lem-pc-derived-pullback-tensor-product (reviewer FIX; first push; new nodes: 1)
 - 23:23 L: merged deliver/H1/lem-weil-pbc-geometric-point-pullback-stalk (reviewer FIX; first push; new nodes: 0)
+- 23:23 L: merged deliver/G1/lem-pc-qcqs-sheaf-rhom-adjunction (reviewer FIX; first push; new nodes: 1)
