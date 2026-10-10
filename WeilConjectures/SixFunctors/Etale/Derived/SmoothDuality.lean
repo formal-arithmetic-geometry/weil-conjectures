@@ -48,7 +48,7 @@ open Scheme
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} [HasInvertibleExponent Λ Y]
-  (f : X ⟶ Y) [IsSeparated f] [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
+  (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
 
 include d in
 /-- Blueprint `thm-asd-smooth-tensor`: Smooth cohomological duality without a chosen
