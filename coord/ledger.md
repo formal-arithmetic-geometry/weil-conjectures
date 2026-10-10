@@ -1990,3 +1990,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:31 L: returned deliver/H1/lem-weil-pbc-injective-acyclicity-bounded-below (reviewer RETURN: 1. E2: new node lem-weil-pbc-torsion-complex-injective-devissage is false as stated (it is exactly the embedding that co)
 - 16:31 L: returned deliver/G1/lem-weil-pbc-hypercohomology-e1-pullback-functorial (reviewer RETURN: Reviewer R-hpf (independent review), read head 7350b3107, 2026-10-10 16:28:45-16:30:41 UTC by date -u. The route (CE res)
 - 16:31 L: returned deliver/G1/lem-sc-tensor-generating-sections (reviewer RETURN: 1. D2/D1: lem-sc-tensor-epi-finite-free: the new node is the item itself restated in the language of maps (step 1 is onl)
+- 16:31 L: merged deliver/E1/lem-sc-ext-sheaf-to-global-spectral-sequence (reviewer FIX; first push; new nodes: 1)

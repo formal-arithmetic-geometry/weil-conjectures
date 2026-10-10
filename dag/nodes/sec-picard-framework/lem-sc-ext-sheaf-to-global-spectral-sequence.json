@@ -26,9 +26,70 @@
   "def-weil-pbc-sheaf-ext",
   "def-sc-ext-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the abelian categories of $\\mathcal O_X$-modules and abelian groups, with $T=\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,-)$ and $U=\\Gamma(X,-)$. Both functors are left exact additive [def-sp-left-exact-additive]; $\\Mod(\\mathcal O_X)$ is Grothendieck abelian by [prop-pur-kinjective-resolutions-exist] (the site of open subsets of $X$ is small) and abelian groups $=\\Mod(\\mathbf Z)$ by [lem-weil-pbc-ring-modules-grothendieck-abelian], so $(T,U)$ is a composable pair; the module category has enough injectives [lem-weil-pbc-scheme-modules-enough-injectives], and [lem-sc-ext-coherent-hom-injective-acyclic] supplies that $T$ sends injectives to $U$-acyclic objects. Therefore [thm-sp-grothendieck] gives a functorial first-quadrant spectral sequence $E_2^{p,q}=R^pU(R^qT(\\mathcal G))$ converging to $R^{p+q}(U\\circ T)(\\mathcal G)$.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-sc-ext-coherent-hom-injective-acyclic",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "def-sp-left-exact-additive",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ring-modules-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/equiv.tex",
+    "place": "Lemma 0FZ3, proof of (1), construction of the local-to-global Ext spectral sequence"
+   }
+  },
+  {
+   "text": "For an injective resolution $\\mathcal G\\to\\mathcal I^\\bullet$, the complex $\\mathcal I^\\bullet$ is K-injective [lem-weil-pbc-bounded-below-injectives-kinjective], so by the definition of sheaf Ext [def-weil-pbc-sheaf-ext] $\\mathcal Ext^q_{\\mathcal O_X}(\\mathcal F,\\mathcal G)=\\mathcal H^q(\\mathcal Hom^\\bullet(\\mathcal F[0],\\mathcal I^\\bullet))=\\mathcal H^q(\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal I^\\bullet))=R^qT(\\mathcal G)$, and by [pqf-def-cohomology] $R^pU(-)=H^p(X,-)$. By the injective-resolution computation of Ext [lem-weil-pbc-ext-via-injective-resolution] (using the corrected meaning of the Ext group), since $U\\circ T=\\Gamma(X,\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,-))=\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F,-)$ [def-pur-sheaf-hom], $R^{p+q}(U\\circ T)(\\mathcal G)=\\operatorname{Ext}^{p+q}_X(\\mathcal F,\\mathcal G)$. Substitution gives the displayed $E_2$-page and abutment; first-quadrantness gives vanishing unless $p,q\\geq0$.",
+   "uses": [
+    "def-weil-pbc-sheaf-ext",
+    "pqf-def-cohomology",
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "def-sc-ext-sheaf",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section 0BQP, sheaf Ext and global Ext identifications"
+   }
+  },
+  {
+   "text": "A first-quadrant spectral sequence induces a finite exhaustive filtration on each abutment group in a fixed total degree. If every $E_2^{p,q}$ with $p+q>d$ is zero, all later pages and the associated graded pieces in total degree $n>d$ are zero; the filtration therefore has zero abutment, so $\\operatorname{Ext}^n_X(\\mathcal F,\\mathcal G)=0$ for every $n>d$.",
+   "uses": [
+    "thm-sp-grothendieck"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/equiv.tex",
+    "place": "Lemma 0FZ3, proof of the Ext-vanishing conclusion from the spectral sequence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-sp-grothendieck",
+  "lem-sc-ext-coherent-hom-injective-acyclic",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "def-sp-left-exact-additive",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "def-weil-pbc-sheaf-ext",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "def-sc-ext-sheaf",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/equiv.tex",
+  "place": "Lemma 0FZ3, proof of (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,12 +114,47 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-sc-p1-ext-coherent-dim-one-vanishing",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-ext-sheaf-to-global-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Split the local-to-global Ext spectral sequence into the Grothendieck spectral-sequence construction, identification of sheaf cohomology and Ext terms, and the first-quadrant filtration vanishing argument. Added the statement-only acyclicity input for coherent sheaf Hom of injectives.",
+  "blueprint": [
+   "thm-sc-p1-duality parenthetical Ext-vanishing proof: spectral sequence H^p(X, SheafExt^q(F,G)) => Ext^{p+q}_X(F,G)"
+  ],
+  "tool_uses": [
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "The generic Grothendieck spectral sequence is used as the homological-algebra tool for the sheaf Hom and global-sections composition."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "The sheaf-module category's enough-injectives theorem is a generic category-theoretic tool needed to instantiate the spectral sequence; the Picard unit route does not state it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "thm-sp-grothendieck",
+  "lem-weil-pbc-scheme-modules-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ess",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ess (reviewer sub-agent of L); spot-checked: Start Sat Oct 10 04:29:51 PM UTC 2026. Source Stacks equiv 0FZ3 (lemma-Ext-0-regular) proof of (1), which uses the local-to-global spectral sequence of Cohomology section-ext 0BQP; statement checked true under the corrected Ext^n_X(F,G)=R^n Hom(F,-)(G) (def-sc-ext-sheaf is ill-posed, see lead_note/HUMAN.md); Noetherian/coherent hypotheses superfluous but harmless; vanishing corollary checked from first-quadrant convergence. New node lem-sc-ext-coherent-hom-injective-acyclic: true for any ringed space and any F (Hom(F,I) flasque for I injective via j_!F|_U -> F, Hartshorne III.6), no existing DAG node states it (grep flasque/acyclic Hom). Step 1: thm-sp-grothendieck (composable pair of Grothendieck abelian categories, F sends injectives to G-acyclics) with def-sp-composite-acyclicity, def-sp-acyclic read; step 2: def-weil-pbc-sheaf-ext (RHom via K-injective), pqf-def-cohomology, lem-weil-pbc-ext-via-injective-resolution; step 3: first-quadrant filtration. FIX more, RETURN less: (1) C4 step 1: thm-sp-grothendieck requires Grothendieck abelian categories, not stated by enough-injectives: cited prop-pur-kinjective-resolutions-exist (Mod(O) on small site Grothendieck abelian) and lem-weil-pbc-ring-modules-grothendieck-abelian (Ab=Mod(Z)); (2) C1 step 2: R^qT(G)=SheafExt^q needs the injective resolution K-injective: cited lem-weil-pbc-bounded-below-injectives-kinjective, and Gamma o SheafHom(F,-)=Hom(F,-) cited def-pur-sheaf-hom; proof_deps updated. FIX: dag/nodes/sec-picard-framework/lem-sc-ext-sheaf-to-global-spectral-sequence.json: stmt_deps: duplicate def-weil-pbc-sheaf-ext removed. Tool uses accepted: thm-sp-grothendieck, lem-weil-pbc-scheme-modules-enough-injectives (declared), plus the three generic nodes added. No Mathlib leaf in the delivery. End Sat Oct 10 04:31:34 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-ess): R-ess: abutment cites def-sc-ext-sheaf (ill-posed contravariant Hom(-,G)); the statement is true and proved with Ext^n = R^n Hom_{O_X}(F,-)(G) (Stacks Cohomology 0BQP), the meaning the step uses; when def-sc-ext-sheaf is corrected nothing here changes."
 }
