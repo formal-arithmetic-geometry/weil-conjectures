@@ -8,6 +8,10 @@ module
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.Mathlib.RingTheory.Etale.Pi
 public import WeilConjectures.RingTheory.ProEtale.ProEtaleContraction
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.RingTheory.Etale.Weakly
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Unramified.LocalStructure
 
 /-!
 # Retractions and strictly henselian local rings

@@ -183,6 +183,12 @@ instance : (precoverage X).IsStableUnderComposition := by
 instance : (precoverage X).IsStableUnderBaseChange := by
   dsimp [precoverage]; infer_instance
 
+/-- `X.ProEt` is locally `u + 1`-small. Stated directly so that instance search does not go
+through the slow `HasCardinalFilteredGenerator` route before the low-priority
+`locallySmall_of_univLE`. -/
+instance locallySmall : LocallySmall.{u + 1} X.ProEt :=
+  ⟨fun _ _ ↦ ⟨ULift.{u + 1} _, ⟨Equiv.ulift.symm⟩⟩⟩
+
 variable {X}
 
 /-- A presieve on `V : X.ProEt` is a pro-étale covering exactly when the family of

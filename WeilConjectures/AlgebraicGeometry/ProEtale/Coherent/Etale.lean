@@ -5,7 +5,17 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.AlgebraicGeometry.LimitsOver
+public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+public import Mathlib.CategoryTheory.ExtremalEpi
+public import Mathlib.CategoryTheory.Limits.Shapes.Connected
+public import Mathlib.CategoryTheory.Sites.Coherent.Comparison
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.Order.CompletePartialOrder
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.SimpleRing.Principal
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.CategoryTheory.Limits.Shapes.Countable

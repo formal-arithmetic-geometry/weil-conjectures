@@ -5,7 +5,6 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FromPi1
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.AlgebraicGeometry.Limits
@@ -33,6 +32,7 @@ public import Mathlib.CategoryTheory.Sites.IsSheafFor
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Flat.QuasiCompactCover
 public import Mathlib.CategoryTheory.Extensive
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Etale
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-!
 # Affine étale site

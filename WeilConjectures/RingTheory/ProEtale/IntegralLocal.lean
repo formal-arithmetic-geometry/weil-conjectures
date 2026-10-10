@@ -5,7 +5,13 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.PicardGroup
+public import Mathlib.RingTheory.Polynomial.UniversalFactorizationRing
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.SimpleRing.Principal
+public import Mathlib.RingTheory.Spectrum.Prime.Homeomorph
+public import Mathlib.RingTheory.Unramified.LocalStructure
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!

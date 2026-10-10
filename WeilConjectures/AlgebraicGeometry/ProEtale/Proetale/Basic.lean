@@ -12,7 +12,8 @@ public import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
 public import Mathlib.AlgebraicGeometry.Sites.Pretopology
 public import Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
-public import Mathlib
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 public import Mathlib.CategoryTheory.Limits.Shapes.DisjointCoproduct

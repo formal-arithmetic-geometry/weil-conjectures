@@ -5,7 +5,10 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.CategoryTheory.Sites.CoversTop.Basic
+public import Mathlib.CategoryTheory.Sites.Over
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.Order.CompletePartialOrder
 public import Mathlib.CategoryTheory.NatIso
 
 /-!

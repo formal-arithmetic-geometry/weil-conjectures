@@ -5,7 +5,11 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.CategoryTheory.Limits.Shapes.Connected
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
 public import Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Comma
 

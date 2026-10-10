@@ -5,7 +5,10 @@ Authors: Christian Merten
 -/
 module
 
-public import Mathlib
+public import Mathlib.CategoryTheory.Limits.Shapes.Countable
+public import Mathlib.RingTheory.Etale.Weakly
+public import Mathlib.RingTheory.RingHom.Unramified
+public import Mathlib.RingTheory.Smooth.Fiber
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Pure
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.TensorProduct.Maps

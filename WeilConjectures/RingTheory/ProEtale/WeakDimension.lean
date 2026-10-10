@@ -6,7 +6,18 @@ Authors: Christian Merten, Jingting Wang
 module
 
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtale
-public import Mathlib
+public import Mathlib.Algebra.Category.Ring.Epi
+public import Mathlib.Algebra.Group.Pi.Units
+public import Mathlib.RingTheory.Etale.Weakly
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Ideal.Pure
+public import Mathlib.RingTheory.LocalProperties.Reduced
+public import Mathlib.RingTheory.PicardGroup
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.SimpleRing.Principal
+public import Mathlib.RingTheory.TotallySplit
+public import Mathlib.RingTheory.Valuation.LocalSubring
 
 /-!
 # Weak dimension of a commutative ring

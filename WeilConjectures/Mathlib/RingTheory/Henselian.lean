@@ -8,7 +8,7 @@ module
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
-public import Mathlib
+public import Mathlib.RingTheory.SimpleRing.Principal
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 
 /-!
