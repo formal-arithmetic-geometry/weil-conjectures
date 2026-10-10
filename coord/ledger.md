@@ -2670,3 +2670,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:28 L: merged deliver/F1/lem-sc-numerical-polynomial-leading-term (reviewer FIX; first push; new nodes: 1)
 - 21:28 L: merged deliver/G1/lem-pc-derived-functor-commutes-derived-limit (reviewer FIX; first push; new nodes: 3)
 - 21:29 L: returned deliver/F1/lem-weil-pbc-flat-lfp-open (reviewer RETURN: Not a fault: the item is the Mathlib declaration AlgebraicGeometry.UniversallyOpen.of_flat (UniversallyOpen.lean:147), f)
+- 21:29 UTC L matched lem-weil-pbc-flat-lfp-open to Mathlib AlgebraicGeometry.UniversallyOpen.of_flat (R-flo2608); F1 delivery returned as unneeded
+- 21:29 L: returned deliver/C1/lem-pc-representable-unique (reviewer RETURN: Not a fault: the item is the Mathlib declaration CategoryTheory.Functor.FullyFaithful.isoEquiv+CategoryTheory.Yoneda.ful)
