@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-cohomology-kernel-on-cokernel",
+ "kind": "statement",
+ "title": "Cohomology of a complex as the kernel of the differential on the cokernel of the previous differential",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and $X^\\bullet$ a cochain complex of $\\mathcal A$ with cohomology $H^n(X^\\bullet)=\\operatorname{Ker}(d_X^n)/\\operatorname{Im}(d_X^{n-1})$ [def-weil-abstract-derived-category]. For $n\\in\\mathbf Z$ let $\\pi_X^n:X^n\\to\\operatorname{Coker}(d_X^{n-1})$ be the cokernel and $\\bar d_X^n:\\operatorname{Coker}(d_X^{n-1})\\to X^{n+1}$ the unique morphism with $\\bar d_X^n\\circ\\pi_X^n=d_X^n$. Then the composite $\\operatorname{Ker}(d_X^n)\\hookrightarrow X^n\\xrightarrow{\\pi_X^n}\\operatorname{Coker}(d_X^{n-1})$ induces a monomorphism $\\eta_X^n:H^n(X^\\bullet)\\to\\operatorname{Coker}(d_X^{n-1})$ which is a kernel of $\\bar d_X^n$. This is natural: for a morphism of complexes $\\varphi:X^\\bullet\\to Y^\\bullet$, with $\\bar\\varphi^n:\\operatorname{Coker}(d_X^{n-1})\\to\\operatorname{Coker}(d_Y^{n-1})$ the morphism with $\\bar\\varphi^n\\circ\\pi_X^n=\\pi_Y^n\\circ\\varphi^n$, one has $\\eta_Y^n\\circ H^n(\\varphi)=\\bar\\varphi^n\\circ\\eta_X^n$; hence $H^n(\\varphi)$ is an isomorphism if and only if the morphism $\\operatorname{Ker}(\\bar d_X^n)\\to\\operatorname{Ker}(\\bar d_Y^n)$ induced by $\\bar\\varphi^n$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 0111 (lemma-long-exact-sequence-chain, line 2968), proof: the snake-lemma diagram whose kernel of $A_i/\\Im(d_{A,i+1})\\to\\Ker(d_{A,i-1})$ is $H_i(A_\\bullet)$ (chain-complex numbering; for cochain complexes renumber $i\\mapsto -n$)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology of a homological complex is the kernel of the map from opcycles to the next term",
+   "results": "HomologicalComplex.homologyIsKernel, HomologicalComplex.cyclesIsKernel (Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex), ShortComplex.cyclesIsKernel",
+   "date": "2026-10-10",
+   "verdict": "match: homologyIsKernel"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "homology of a cochain complex in degree i is the kernel of the induced map from the cokernel of the incoming differential to the next term, naturally",
+   "results": "CochainComplex.HomComplex.leftHomologyData and variants (Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology)",
+   "date": "2026-10-10",
+   "verdict": "no match (only Hom complexes); see the leansearch and grep results"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'homologyIsKernel\\|opcyclesIsCokernel\\|homologyι_naturality\\|p_opcyclesMap\\|def fromOpcycles' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean",
+   "results": "homologyIsKernel (line 321), opcyclesIsCokernel (261), fromOpcycles (249), p_fromOpcycles (267), p_opcyclesMap (346), homologyι_naturality (409)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "HomologicalComplex.homologyIsKernel",
+  "file": "Mathlib/Algebra/Homology/ShortComplex/HomologicalComplex.lean",
+  "how": "specializes in one line per clause, for K : CochainComplex C ℤ and c.next n = n+1: K.opcycles n is a cokernel of K.d (n-1) n (opcyclesIsCokernel, line 261) with K.pOpcycles n as pi and K.fromOpcycles n (n+1) as dbar (p_fromOpcycles, line 267); K.homologyIsKernel n (n+1) (line 321) says K.homologyι n : K.homology n ⟶ K.opcycles n is a kernel of fromOpcycles (it is eta, Mathlib's homology agreeing with Ker/Im of the node by the abelian homology data); naturality is homologyι_naturality (line 409) with opcyclesMap characterized by p_opcyclesMap (line 346); the last clause follows since both kernel inclusions are monomorphisms",
+  "line": 321
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-subcategory-right-resolution-05T6",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match (see 'how'); declaration line verified by L; line field set to the first declaration."
+}

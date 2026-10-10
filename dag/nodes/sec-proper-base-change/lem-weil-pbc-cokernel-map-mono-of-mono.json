@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-cokernel-map-mono-of-mono",
+ "kind": "statement",
+ "title": "Composing with a monomorphism gives a monomorphism of cokernels",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], let $v:c\\to p$ be a morphism and $j:p\\to q$ a monomorphism of $\\mathcal A$. Let $\\pi_v:p\\to\\operatorname{Coker}(v)$ and $\\pi_{jv}:q\\to\\operatorname{Coker}(j\\circ v)$ be cokernels. Then the unique morphism $\\bar\\jmath:\\operatorname{Coker}(v)\\to\\operatorname{Coker}(j\\circ v)$ with $\\bar\\jmath\\circ\\pi_v=\\pi_{jv}\\circ j$ (it exists since $\\pi_{jv}\\circ j\\circ v=0$) is a monomorphism.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 05T6 (lemma-subcategory-right-resolution, line 5387), proof by duality with Lemma Tag 05T7 (lemma-subcategory-left-resolution), whose verification of $IH_{n-1}$ is left to the reader; this fact is the dual of the epimorphism $\\operatorname{Ker}(e\\circ w)\\to\\operatorname{Ker}(w)$ used there. Statement written by an agent."
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "composing with a monomorphism induces a monomorphism between cokernels, cokernel of v to cokernel of v ≫ j with j mono",
+   "results": "CategoryTheory.Limits.cokernel.map, isCokernelEpiComp, cokernelCompIsIso (j iso case), kernelSubobject_comp_mono_isIso (Mathlib.CategoryTheory.Limits.Shapes.Kernels, Subobject.Limits)",
+   "date": "2026-10-10",
+   "verdict": "no direct match; cokernel.map is the morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.mono_cokernel_map_of_isPullback",
+   "results": "CategoryTheory.Abelian.mono_cokernel_map_of_isPullback (Mathlib.CategoryTheory.Abelian.CommSq): (sq : IsPullback t l r b) : Mono (cokernel.map t b l r _)",
+   "date": "2026-10-10",
+   "verdict": "match, applied to the cartesian square (v, id, j, j∘v)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'mono_cokernel_map\\|of_vert_isIso_mono' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/CommSq.lean /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean",
+   "results": "Abelian.mono_cokernel_map_of_isPullback (CommSq.lean:137); IsPullback.of_vert_isIso_mono (IsPullback/Basic.lean:293)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.mono_cokernel_map_of_isPullback",
+  "file": "Mathlib/CategoryTheory/Abelian/CommSq.lean",
+  "how": "specializes in one line: the square t=v, l=𝟙 c, r=j, b=v ≫ j commutes and is a pullback by IsPullback.of_vert_isIso_mono (Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Basic.lean:293; snd = 𝟙 is an iso, f = j is mono); then cokernel.map v (v ≫ j) (𝟙 c) j _ : cokernel v ⟶ cokernel (v ≫ j), which is the morphism jbar (cokernel.π v ≫ jbar = j ≫ cokernel.π (v ≫ j)), is Mono by Abelian.mono_cokernel_map_of_isPullback (line 137)",
+  "line": 137
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-subcategory-right-resolution-05T6",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match (see 'how'); declaration line verified by L; line field set to the first declaration."
+}

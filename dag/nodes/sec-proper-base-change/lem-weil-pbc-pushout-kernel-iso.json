@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-pushout-kernel-iso",
+ "kind": "statement",
+ "title": "In a pushout square along a monomorphism the kernels of two parallel sides are isomorphic",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] and let $f:w\\to y$, $g:w\\to x$, $h:y\\to z$, $k:x\\to z$ be morphisms of $\\mathcal A$ with $h\\circ f=k\\circ g$ such that the square is cocartesian, i.e. $(z,h,k)$ is a pushout of $f$ and $g$ [def-weil-pbc-category-colimit], and assume that $g$ is a monomorphism. Let $\\iota_f:\\operatorname{Ker}(f)\\to w$ and $\\iota_k:\\operatorname{Ker}(k)\\to x$ be kernels. Then the unique morphism $\\kappa:\\operatorname{Ker}(f)\\to\\operatorname{Ker}(k)$ with $\\iota_k\\circ\\kappa=g\\circ\\iota_f$ (it exists since $k\\circ g\\circ\\iota_f=h\\circ f\\circ\\iota_f=0$) is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Lemma Tag 08N4 (lemma-cartesian-cocartesian, line 887), part (2): a cocartesian square with $g$ mono is cartesian; then Lemma Tag 08N3 (lemma-cartesian-kernel, line 852), part (1): in a cartesian square the map $\\operatorname{Ker}(f)\\to\\operatorname{Ker}(k)$ induced by $g$ is an isomorphism"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "in a pushout square in an abelian category, if the left map is a monomorphism then the induced map between kernels of the horizontal maps is an isomorphism",
+   "results": "CategoryTheory.Abelian.mono_pushout_of_mono_g, Abelian.mono_inl_of_isColimit, Abelian.mono_inr_of_isColimit (Mathlib.CategoryTheory.Abelian.Basic), CategoryTheory.Limits.kernel.map",
+   "date": "2026-10-10",
+   "verdict": "no direct match; kernel.map is the morphism kappa"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.epi_kernel_map_of_isPushout",
+   "results": "CategoryTheory.Abelian.epi_kernel_map_of_isPushout (Mathlib.CategoryTheory.Abelian.CommSq): (sq : IsPushout t l r b) : Epi (kernel.map t b l r _)",
+   "date": "2026-10-10",
+   "verdict": "match together with the mono part (see mathlib_match)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'IsPushout\\|kernel.map' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/CommSq.lean /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Shapes/Pullback/IsPullback/Kernels.lean",
+   "results": "Abelian.epi_kernel_map_of_isPushout (CommSq.lean:151); isIso_kernel_map_of_isPullback (Kernels.lean:42, cartesian case); isIso_cokernel_map_of_isPushout (Kernels.lean:48)",
+   "date": "2026-10-10",
+   "verdict": "match: epi_kernel_map_of_isPushout + mono of kernel.map when l is mono"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.epi_kernel_map_of_isPushout",
+  "file": "Mathlib/CategoryTheory/Abelian/CommSq.lean",
+  "how": "specializes in one line: with t=f, l=g, r=h, b=k and sq : IsPushout f g h k, kernel.map f k g h sq.w : kernel f ⟶ kernel k is the morphism kappa (kernel.map ≫ kernel.ι k = kernel.ι f ≫ g) and is an epimorphism by Abelian.epi_kernel_map_of_isPushout (line 151); it is a monomorphism because its composite with kernel.ι k equals kernel.ι f ≫ g, a composite of monomorphisms (mono_of_mono); an abelian category is balanced, so it is an isomorphism (isIso_of_mono_of_epi); any other choice of kernels differs by unique isomorphisms",
+  "line": 151
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-subcategory-right-resolution-05T6",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match (see 'how'); declaration line verified by L; line field set to the first declaration."
+}
