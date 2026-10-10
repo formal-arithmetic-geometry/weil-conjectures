@@ -25,9 +25,40 @@
   "def-weil-pbc-scheme-conventions",
   "lem-weil-pbc-scheme-coproduct-family"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-scheme-coproduct-family], each coprojection $j_i$ is an open immersion with pairwise disjoint images whose union is $X$. Open immersions are etale (Stacks Tag 02GP), so the finite family $\\{j_i\\}$ is a jointly surjective family of etale morphisms, hence a covering in the small etale site described by [def-weil-pbc-etale-sheaf-of-sets]. Its fibre products $X_i\\times_X X_k$ for $i\\ne k$ are empty because the images are disjoint; since an open immersion is a monomorphism, the two projections $X_i\\times_X X_i\\to X_i$ coincide (both are the inverse of the diagonal isomorphism).",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03SF, finite Galois descent calculation (the finite disjoint-union covering by the coproduct components)"
+   }
+  },
+  {
+   "text": "Apply the equalizer condition in [def-weil-pbc-etale-sheaf-of-sets] to the covering in Step 1. For $i\\ne k$ the overlap $X_i\\times_X X_k$ is empty and $\\mathcal F(\\emptyset)$ is a singleton (the sheaf condition for the empty covering of the empty object), so the two restrictions to it agree for every family; for $i=k$ the two projections $X_i\\times_X X_i\\to X_i$ coincide by Step 1, so the two restrictions agree as well. Hence compatibility imposes no condition on a family $(s_i)_i$. Thus restriction $\\mathcal F(X)\\to\\prod_i\\mathcal F(X_i)$ is bijective, with inverse the unique glued section; by construction its composite with the $i$-th restriction is the $i$-th projection. The same argument covers the empty finite family, where both sides are singleton sets.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03SF, finite Galois descent calculation (sections on the finite disjoint union)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03SF, finite Galois descent calculation (sections on the finite disjoint union)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,10 +90,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-finite-galois-tensor-decomposition",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-exc-finite-galois-sheaf-sections-coproduct",
+  "worker": "stage1",
+  "summary": "Read Tag 03SF and split the calculation into (1) the coproduct components forming an etale covering with empty pairwise overlaps, and (2) the sheaf equalizer condition yielding the product of section sets and unique gluing. No new nodes were needed because the existing scheme-coproduct-family and set-valued etale-sheaf definition state all non-elementary inputs.",
+  "blueprint": [
+   "proof, third paragraph: passage from the finite Galois disjoint-union decomposition to sections of a sheaf"
+  ],
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gsc1832",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gsc1832 (reviewer sub-agent of L); spot-checked: Packet read whole. No cycle: item deps are pbc nodes only; parent tensor-decomposition and sections-descent cite it, it cites neither. Statement over general S specializes to Spec L used by parent. C1/C4 ok (coproduct-family gives open disjoint covering coprojections; etale-sheaf def gives equalizer). Mathlib grep ExtensiveSheaves.lean: isSheaf_iff_preservesFiniteProducts is for the extensive topology on an abstract extensive category, not the small etale site of a scheme; no leaf. FIX more, RETURN less: (1) proof gap missed by second reading: equalizer includes diagonal terms i=k, which the proof ignored; added that open immersions are monomorphisms so the two projections X_i x_X X_i -> X_i coincide; (2) named Stacks Tag 02GP for open immersions being etale in the elementary Step 1; (3) preflight B4: plain arrows/text math in steps 1-2 rewritten in TeX. created.item left as the maintainer's field.; 1 file(s) fixed by the reviewer"
  }
 }
