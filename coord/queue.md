@@ -1,8 +1,8 @@
 # Work queue
 
-856 items; claim with `tools/claim.py next <group> [--stage N]`.
+855 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (318)
+## Stage 1: nodes to split (317)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,9 +15,9 @@
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
-| `lem-sc-dim-one-quasi-projective` | 2008 | none |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 2008 | none |
 | `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 2008 | none |
+| `lem-sc-dim-one-ample-invertible` | 2009 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 3004 | none |
@@ -33,7 +33,6 @@
 | `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
-| `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
 | `lem-weil-pbc-coskeleton-matching-tuples` | 3008 | none |
 | `lem-galois-fpqc-descending-types-morphisms` | 3009 | none |
 | `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
@@ -868,7 +867,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 338 nodes that wait for stage 1, 987 nodes that wait for a statement dependency.
+Not open yet: 337 nodes that wait for stage 1, 989 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
