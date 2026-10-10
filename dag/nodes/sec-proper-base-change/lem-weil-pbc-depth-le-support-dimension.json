@@ -13,9 +13,81 @@
   "def-weil-pbc-module-localization",
   "def-weil-pbc-depth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "($\\mathfrak mM\\neq M$, so the depth is a supremum over regular sequences.) Since $\\mathfrak m$ is the only maximal ideal of $R$, it is the Jacobson radical of $R$; $M$ is finite and $M\\neq0$, so by [lem-weil-pbc-nakayama-jacobson] (with $I=\\mathfrak m$) $\\mathfrak mM\\neq M$. Hence case (1) of [def-weil-pbc-depth] applies: $\\operatorname{depth}(M)$ is the supremum of the lengths $r$ of the $M$-regular sequences $f_1,\\dots,f_r$ in $\\mathfrak m$ [def-weil-pbc-regular-sequence]. So it suffices to show $r\\le\\dim\\operatorname{Supp}(M)$ for every such sequence; this is the claim $P(r)$ of Step 2 applied to $N=M$. (This is the case $IM\\neq M$ of Lemma 00LJ, lemma-depth-weak-sequence, which the source invokes here.)",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson",
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00LK (lemma-bound-depth), proof lines 17824-17827 ('According to Lemma lemma-depth-weak-sequence it suffices to prove dim(Supp(M)) >= d'), with Lemma 00LJ (lemma-depth-weak-sequence, lines 17796-17811), case IM != M"
+   }
+  },
+  {
+   "text": "(The claim and its base case.) For $r\\ge0$ let $P(r)$ be: for every nonzero finite $R$-module $N$ and every $N$-regular sequence $f_1,\\dots,f_r$ in $\\mathfrak m$ [def-weil-pbc-regular-sequence], $\\dim\\operatorname{Supp}(N)\\ge r$, with $\\dim\\operatorname{Supp}$ the chain-length supremum of the statement. We prove $P(r)$ by induction on $r$. Base $r=0$: $N\\neq0$, so $1\\notin\\operatorname{Ann}_R(N)$ and $\\operatorname{Ann}_R(N)$ is a proper ideal; it lies in a maximal ideal (a maximal element, which exists as $R$ is Noetherian, of the proper ideals containing it), which is $\\mathfrak m$. By [lem-weil-pbc-finite-module-support-annihilator] $\\operatorname{Supp}(N)=V(\\operatorname{Ann}_R(N))\\ni\\mathfrak m$, so the one-term chain $\\mathfrak p_0=\\mathfrak m$ lies in $\\operatorname{Supp}(N)$ and $\\dim\\operatorname{Supp}(N)\\ge0$. (The source: 'We may assume $d>0$ otherwise the lemma holds'.)",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-finite-module-support-annihilator",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00LK (lemma-bound-depth), proof lines 17827-17828 ('We may assume d > 0 otherwise the lemma holds'); the support as V(Ann) is Lemma 00L2 (lemma-support-closed)"
+   }
+  },
+  {
+   "text": "(Passing to $N/f_1N$.) Let $r\\ge1$, $N\\neq0$ finite and $f_1,\\dots,f_r$ an $N$-regular sequence in $\\mathfrak m$. Put $N'=N/f_1N$, a finite $R$-module. For $2\\le i\\le r+1$ the submodule $(f_2,\\dots,f_{i-1})N'$ of $N'$ is the image of $(f_1,\\dots,f_{i-1})N$, so $N'/(f_2,\\dots,f_{i-1})N'\\cong N/(f_1,\\dots,f_{i-1})N$ as $R$-modules (third isomorphism theorem). Hence condition (1) of [def-weil-pbc-regular-sequence] for $f_2,\\dots,f_r$ on $N'$ is condition (1) for $f_2,\\dots,f_r$ on $N$, and $N'/(f_2,\\dots,f_r)N'\\cong N/(f_1,\\dots,f_r)N\\neq0$ is condition (2): $f_2,\\dots,f_r$ is an $N'$-regular sequence in $\\mathfrak m$ of length $r-1$. In particular $N'\\neq0$, since it surjects onto $N/(f_1,\\dots,f_r)N\\neq0$. By the induction hypothesis $P(r-1)$, $\\dim\\operatorname{Supp}(N')\\ge r-1$.",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00LK (lemma-bound-depth), proof lines 17833-17834 ('By induction we conclude dim(Supp(M/f_1M)) >= d - 1'): the sequence f_2, ..., f_d on M/f_1M"
+   }
+  },
+  {
+   "text": "(The dimension drops by exactly one; conclusion of the induction.) By condition (1) of [def-weil-pbc-regular-sequence] for $i=1$, $f_1\\in\\mathfrak m$ is a nonzerodivisor on $N$. By [lem-weil-pbc-support-dimension-quotient-element-equality], clause (2), applied to the finite module $N$ and $f=f_1$: $\\dim\\operatorname{Supp}(N/f_1N)+1=\\dim\\operatorname{Supp}(N)$. With Step 3, $\\dim\\operatorname{Supp}(N)=\\dim\\operatorname{Supp}(N')+1\\ge(r-1)+1=r$ (if $\\dim\\operatorname{Supp}(N')=\\infty$ then $\\dim\\operatorname{Supp}(N)=\\infty\\ge r$). This proves $P(r)$, hence $P(r)$ for all $r$ by induction.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-support-dimension-quotient-element-equality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00LK (lemma-bound-depth), proof lines 17829-17834 ('By Lemma lemma-one-equation-module we have dim(Supp(M/f_1M)) = dim(Supp(M)) - 1'), Lemma 0B52 (lemma-one-equation-module)"
+   }
+  },
+  {
+   "text": "(Conclusion.) By Step 1, $\\operatorname{depth}(M)$ is the supremum of the lengths $r$ of $M$-regular sequences in $\\mathfrak m$; by $P(r)$ (Steps 2-4) with $N=M\\neq0$, each such $r$ satisfies $r\\le\\dim\\operatorname{Supp}(M)$. A supremum of numbers each $\\le\\dim\\operatorname{Supp}(M)$ is $\\le\\dim\\operatorname{Supp}(M)$, so $\\dim\\operatorname{Supp}(M)\\ge\\operatorname{depth}(M)$.",
+   "uses": [
+    "def-weil-pbc-depth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00LK (lemma-bound-depth), proof lines 17824-17835"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nakayama-jacobson",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-finite-module-support-annihilator",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-support-dimension-quotient-element-equality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 00LK (lemma-bound-depth), proof lines 17819-17835, with Lemma 00LJ (lemma-depth-weak-sequence) and Lemma 0B52 (lemma-one-equation-module). Reorganized: the source inducts on dim Supp(M) with base case dim Supp(M) = 0 via Ass(M) = {m} (Lemmas 0586, 0587, 00LD); here the induction is on the length d of the sequence, whose base case d = 0 is the source's remark 'we may assume d > 0' and whose induction step is the source's step verbatim, so the Ass lemmas are not needed."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,15 +123,51 @@
    "results": "no items, index: unavailable (not a proof of absence; the grep above is)",
    "date": "2026-10-10",
    "verdict": "inconclusive"
+  },
+  {
+   "tool": "leansearch",
+   "query": "length of an M-regular sequence is at most the Krull dimension of the support of M over a Noetherian local ring",
+   "results": "Module.supportDim, Module.supportDim_le_ringKrullDim (RingTheory.KrullDimension.Module); Module.supportDim_add_length_eq_supportDim_of_isRegular, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim_quotSMulTop_succ_eq_supportDim (RingTheory.KrullDimension.Regular); Module.length",
+   "date": "2026-10-10",
+   "verdict": "no match for depth; supportDim_add_length_eq_supportDim_of_isRegular confirmed as candidate for the bound on each regular sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "depth of a nonzero finitely generated module over a Noetherian local ring is at most the dimension of its support",
+   "results": "Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, Module.supportDim_quotSMulTop_succ_eq_supportDim (RingTheory.KrullDimension.Regular), Module.supportDim_le_ringKrullDim, Module.supportDim (RingTheory.KrullDimension.Module)",
+   "date": "2026-10-10",
+   "verdict": "no match (no depth in this Mathlib)"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, Module.supportDim, List.length",
+   "results": "Module.supportDim_add_length_eq_supportDim_of_isRegular (Mathlib.RingTheory.KrullDimension.Regular) only",
+   "date": "2026-10-10",
+   "verdict": "candidate (bound per regular sequence), not a leaf"
+  },
+  {
+   "tool": "local_search",
+   "query": "supportDim_add_length_eq_supportDim_of_isRegular (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Module.supportDim_add_length_eq_supportDim_of_isRegular, .lake/packages/mathlib/Mathlib/RingTheory/KrullDimension/Regular.lean (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "candidate exists"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem supportDim_add_length_eq_supportDim_of_isRegular\\|^variable\\|IsLocalRing R\\]' RingTheory/KrullDimension/Regular.lean; grep -rn depth RingTheory/KrullDimension RingTheory/Regular; grep -rln 'def depth\\|Ideal.depth\\|IsLocalRing.depth' Mathlib",
+   "results": "Regular.lean:28 variable [CommRing R] [IsNoetherianRing R], :137 [IsLocalRing R], :197 supportDim_add_length_eq_supportDim_of_isRegular (no hypothesis rs in m: IsRegular forces it); depth only in RegularSequence.lean:21 (TODO) and Data/W/Basic.lean (WType.depth, unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no depth in the pinned Mathlib: no match"
   }
  ],
  "mathlib_match": null,
  "mathlib_candidate": {
   "declaration": "Module.supportDim_add_length_eq_supportDim_of_isRegular",
   "file": "Mathlib/RingTheory/KrullDimension/Regular.lean",
-  "how": "lines 197-198 (read by sed -n 190,216p): for R Noetherian local, M finite and rs an M-regular sequence (RingTheory.Sequence.IsRegular, RegularSequence.lean:146-147: weakly regular and M != (rs)M), supportDim R (M/(rs)M) + length rs = supportDim R M; since M/(rs)M != 0 its supportDim is >= 0, so every regular sequence has length <= supportDim R M. The pinned Mathlib has no depth, so the supremum over regular sequences and the case mM = M (excluded by Nakayama) are not stated: candidate, not a leaf (B8)."
+  "how": "lines 197-198 (read by sed -n 190,216p): for R Noetherian local, M finite and rs an M-regular sequence (RingTheory.Sequence.IsRegular, RegularSequence.lean:146-147: weakly regular and M != (rs)M), supportDim R (M/(rs)M) + length rs = supportDim R M; since M/(rs)M != 0 its supportDim is >= 0, so every regular sequence has length <= supportDim R M. The pinned Mathlib has no depth, so the supremum over regular sequences and the case mM = M (excluded by Nakayama) are not stated: candidate, not a leaf (B8).",
+  "line": 197
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -79,5 +187,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-depth-le-support-dimension",
+  "worker": "stage1",
+  "summary": "Checked statement against Stacks 00LK (lemma-bound-depth, algebra.tex 17813-17817; tag verified): agrees, statement kept. Not a Mathlib leaf (B8): the pinned Mathlib has no depth (grep: only a TODO in RegularSequence.lean), so the passage from depth to the supremum of regular-sequence lengths is not stated; Module.supportDim_add_length_eq_supportDim_of_isRegular (KrullDimension/Regular.lean:197) stays the mathlib_candidate (line added). Agreement of Module.supportDim with the DAG's chain-length dim Supp is already recorded by the reviewed leaves lem-weil-pbc-support-dimension-quotient-element-bound/-equality. Split in 5 steps following the source's proof: Nakayama gives mM != M so depth is the sup over M-regular sequences in m (the IM != M case of 00LJ); claim P(r) by induction on the length r: base r = 0 by Supp(N) = V(Ann N) containing m; step: f_2..f_r is (N/f_1N)-regular and dim Supp drops by exactly one (0B52, existing leaf ...-equality clause (2)). Reorganized from induction on dim Supp to induction on r, which removes the source's base case via Ass(M) = {m}. No new nodes. The six citers use the statement as stated."
+ },
+ "reviewed": "pass (L, 2026-10-10): 5 steps follow 00LK, inducting on the length of a regular sequence instead of on dim Supp (avoids the associated-primes base case): mM != M by Nakayama, nonzero finite modules have dim Supp >= 0, the tail of a regular sequence is regular on N/f_1N, and a nonzerodivisor drops dim Supp by exactly one (0B52 equality leaf). No new nodes."
 }
