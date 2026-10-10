@@ -1,14 +1,15 @@
 # Work queue
 
-927 items; claim with `tools/claim.py next <group> [--stage N]`.
+924 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (217)
+## Stage 1: nodes to split (214)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-sc-topological-filtered-injective-cech-acyclic` | 2015 | none |
 | `lem-sc-finite-length-global-submodule` | 2018 | none |
+| `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 3013 | none |
 | `lem-pc-derived-functor-truncation-stabilization` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
 | `lem-pc-derived-functor-commutes-derived-limit` | 3014 | none |
@@ -20,7 +21,6 @@
 | `lem-sc-pseudo-coherent-rhom-qcoherent` | 3016 | none |
 | `lem-pc-perfect-tensor-hom-duality` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
-| `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-open-support` | 3019 | none |
 | `lem-sc-right-adjoint-open-support-criterion` | 3019 | none |
@@ -43,13 +43,11 @@
 | `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-pc-derived-free-complex-cover` | 4013 | none |
 | `lem-pc-derived-total-resolution-quasi-iso` | 4013 | none |
-| `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
 | `lem-pc-fppf-affine-refinement` | 5011 | none |
 | `lem-pc-flat-sheaf-stalk-flat` | 5012 | none |
 | `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
-| `lem-pc-noetherian-perfect-direct-image` | 5012 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
 | `lem-pc-bounded-above-flat-kflat-site` | 5013 | none |
 | `lem-pc-complex-hocolim-colimit` | 5013 | none |
@@ -63,7 +61,6 @@
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `lem-pc-affine-morphism-hi` | 6010 | rests_on_sorry |
 | `lem-pc-closed-immersion-coherent-cohomology` | 6010 | rests_on_sorry |
-| `lem-pc-serre-vanishing` | 6010 | rests_on_sorry |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-alternating-cech-computes` | 6011 | none |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
@@ -939,7 +936,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1413 nodes that wait for a statement dependency, 253 nodes that wait for stage 1.
+Not open yet: 1415 nodes that wait for a statement dependency, 251 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
