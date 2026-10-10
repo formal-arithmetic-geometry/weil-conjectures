@@ -1,8 +1,8 @@
 # Work queue
 
-896 items; claim with `tools/claim.py next <group> [--stage N]`.
+895 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (327)
+## Stage 1: nodes to split (326)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,7 +12,6 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-etale-sections-flat-qc-connected-fibres` | 2005 | none |
 | `lem-weil-pbc-field-tensor-irreducible` | 2005 | none |
-| `lem-weil-pbc-etale-fibre-specialization-bound` | 2007 | none |
 | `lem-weil-pbc-sets-etale-section-continuity` | 2009 | none |
 | `lem-sc-affine-cap-section-open-algebra` | 2012 | none |
 | `lem-sc-affine-cap-section-open-dictionary` | 2012 | none |
@@ -38,7 +37,6 @@
 | `lem-exc-etale-field-galois-classification` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` | 3011 | none |
-| `lem-galois-descent-datum-diagonal-identity` | 3012 | none |
 | `lem-pc-clopen-smooth-proper-curve` | 3012 | none |
 | `lem-pc-fpqc-descend-closed-immersion` | 3012 | none |
 | `lem-pc-global-sections-separable` | 3012 | none |
@@ -59,7 +57,6 @@
 | `lem-sc-product-irreducible-components-bijection` | 3013 | none |
 | `lem-sc-proper-upper-shriek-composition` | 3013 | none |
 | `lem-sc-regular-local-ext-vanishing` | 3013 | none |
-| `lem-sc-p1-graded-nakayama-free` | 3014 | none |
 | `lem-sc-p1-koszul-resolution` | 3014 | none |
 | `lem-sc-p1-proj-tilde-functorial` | 3014 | none |
 | `lem-sc-p1-serre-section-module-comparison` | 3014 | none |
@@ -67,7 +64,9 @@
 | `lem-sc-p1-tor-dimension-shifting` | 3014 | none |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 3014 | none |
 | `lem-sc-p1-graded-degree-component-exact` | 3015 | none |
+| `lem-sc-p1-graded-nakayama-generation` | 3015 | none |
 | `lem-sc-p1-graded-submodule-finite` | 3015 | none |
+| `lem-sc-p1-minimal-presentation-tor` | 3015 | none |
 | `lem-sc-brauer-zero` | 4005 | rests_on_sorry |
 | `lem-sc-affine-open-proper` | 4006 | sorry_here |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
@@ -908,7 +907,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 345 nodes that wait for stage 1, 1119 nodes that wait for a statement dependency.
+Not open yet: 344 nodes that wait for stage 1, 1122 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
