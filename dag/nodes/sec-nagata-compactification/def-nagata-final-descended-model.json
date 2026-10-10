@@ -22,7 +22,7 @@
  "proof_origin": null,
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -59,5 +59,20 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-cor-nagata-sketch-fp"
+ "unit": "sk-cor-nagata-sketch-fp",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-nagata-final-descended-model",
+  "worker": "stage1",
+  "summary": "Split the project-specific definition against the blueprint's three statement dependencies: the Noetherian base system, the separated descent stage, and the base-system lemma. No subsidiary lemma is needed because this node only introduces the selected index, descended model, and base-change comparison; the blueprint records that the formalized Lean route bypasses these names.",
+  "blueprint": "The definition realizes the node statement at order 373; the imported section proof is explicitly marked bypassed by the direct Nagata compactification route."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nfd2322",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nfd2322 (reviewer sub-agent of L); spot-checked: Statement vs blueprint order 373, stmt_deps vs blueprint uses, dependents lemma-nagata-final-descended-model / def-nagata-final-basechanged-compactification (C4), duplicate search over sec-nagata-compactification (no dup; lemma-nagata-separated-eventually is the comparison property, not a definition), no proof steps. FIX more, RETURN less: (1) B3: second reading rewrote the last clause to 'canonical base-change comparison supplied by the separated-descent existence statement', departing from the blueprint and folding the isomorphism claim of lemma-nagata-final-descended-model into the definition; restored blueprint wording 'constructed base-change comparison'. (2) stmt_deps restored to the blueprint's three uses (dropped added lemma-nagata-separated-descent-stage-exists, already reached through def-nagata-separated-descent-stage). (3) blueprint.same_as reverted [] -> null; split_report date corrected to 2026-10-10 (date -u).; 1 file(s) fixed by the reviewer"
+ }
 }
