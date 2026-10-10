@@ -23,9 +23,39 @@
   "def-pd-separable-closure",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let H be open in G. Since K^sep/K is Galois, the fixed-field correspondence gives L=(K^sep)^H finite-dimensional over K, separable over K, and Gal(K^sep/L)=H. This is exactly the statement of [lem-exc-etale-open-subgroup-fixed-field-galois]. The same node applies to the stabilizer H of any finite transitive discrete continuous G-set, because continuity makes a point stabilizer open.",
+   "uses": [
+    "lem-exc-etale-open-subgroup-fixed-field-galois"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project (Stacks Project)",
+    "place": "Tag 03QR, proof: each point has an open stabilizer; Tag 0BML, Theorem 9.22.4, finite subextensions correspond to open subgroups"
+   }
+  },
+  {
+   "text": "The quotient G/H is finite and discrete: G is a compact topological group in its Krull topology, and H is open, so [lem-exc-etale-open-subgroup-quotient-finite-discrete] gives both assertions. Thus the orbit G/H is a finite discrete continuous G-set.",
+   "uses": [
+    "lem-exc-etale-open-subgroup-quotient-finite-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project (Stacks Project)",
+    "place": "Tag 03QR, proof: an orbit is G/H for an open stabilizer and hence is a finite discrete continuous G-set"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-open-subgroup-fixed-field-galois",
+  "lem-exc-etale-open-subgroup-quotient-finite-discrete"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project (Stacks Project)",
+  "place": "Tags 03QR and 0BML"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,12 +80,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-etale-field-galois-classification",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-exc-etale-open-subgroup-fixed-field",
+  "worker": "M1",
+  "summary": "Split the fixed-field correspondence into two Mathlib leaves: finite separable fixed fields with the inverse fixing subgroup, and finite discrete cosets of an open subgroup. The two item steps apply these leaves to an open subgroup and to a continuous finite transitive G-set stabilizer.",
+  "blueprint": "The steps realize the first paragraph of lem-exc-field-discrete-modules: open stabilizers recover finite separable fixed fields, and the corresponding orbit is the finite discrete quotient G/H.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-osf1745",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-osf1745 (reviewer sub-agent of L); spot-checked: Read Mathlib decls: InfiniteGalois.isOpen_iff_finite (Infinite.lean:241), fixingSubgroup_fixedField (146; open subgroup is closed, inferred), IntermediateField.isSeparable_tower_bot (Separable.lean:713), Subgroup.quotient_finite_of_isOpen (OpenSubgroup.lean:287), QuotientGroup.discreteTopology (Group/Quotient.lean:115): both leaves exact (B8). Steps cover both directions; stabilizer open by continuity. FIX more, RETURN less: (1) B3 quotient leaf stmt_deps was [] though statement cites lem-galois-aut-profinite, added; (2) its mathlib_match named the wrong file for QuotientGroup.discreteTopology, corrected to Group/Quotient.lean:115 and my grep recorded.; 1 file(s) fixed by the reviewer"
+ }
 }
