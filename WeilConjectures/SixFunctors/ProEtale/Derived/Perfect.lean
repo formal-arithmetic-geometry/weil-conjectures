@@ -55,8 +55,8 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_of_isDualizable`
   (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`. It is locally a
   bounded complex of finite projective modules
-  (`AlgebraicGeometry.ProEtale.DerivedCategory.isLocallyPerfect_of_isDualizable`, which states
-  part of `sk-def-perfect` and is `sorry` there), so its cohomology sheaves are locally constant
+  (`AlgebraicGeometry.ProEtale.DerivedCategory.isDualizable_iff_isLocallyPerfect`, the node
+  `sk-def-perfect`, `sorry` there), so its cohomology sheaves are locally constant
   with finite stalks, hence of étale origin (`lem-sf-proetale-constructible-origin`).
 - `AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_boundedConstructible`:
   `Dᵇc_proét(X, Λ)` is a triangulated subcategory at a finite coefficient ring.
@@ -438,12 +438,23 @@ def IsLocallyPerfect (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X
 omit [Finite Λ] in
 /-- Blueprint `sk-def-perfect`: Perfectness at the point and on `X`.
 
-An object `K ∈ D(X_proét, Λ)` which is perfect over `Λ_X`, that is dualizable, is locally
-quasi-isomorphic to a bounded complex of finite projective `Λ_X`-modules. -/
+An object `K ∈ D(X_proét, Λ)` is perfect over `Λ_X`, that is dualizable for the derived tensor
+product, if and only if it is locally quasi-isomorphic to a bounded complex of finite projective
+`Λ_X`-modules (Stacks, Tag 0FPV). The statement at the point is
+`DerivedCategory.isPerfect_iff_isDualizable`, in
+`WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable`. -/
+theorem isDualizable_iff_isLocallyPerfect
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))} :
+    IsDualizable K ↔ IsLocallyPerfect Λ K :=
+  sorry
+
+omit [Finite Λ] in
+/-- A perfect, that is dualizable, object of `D(X_proét, Λ)` is locally quasi-isomorphic to a
+bounded complex of finite projective `Λ_X`-modules (`sk-def-perfect`). -/
 theorem isLocallyPerfect_of_isDualizable
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : IsDualizable K) : IsLocallyPerfect Λ K :=
-  sorry
+  (isDualizable_iff_isLocallyPerfect Λ).1 hK
 
 variable {Λ}
 
