@@ -23,9 +23,38 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an affine morphism, [lem-sc-finite-affine-derived-equivalence] gives an equivalence $\\Phi:D_{\\mathrm{QCoh}}(X)\\simeq D_{\\mathrm{QCoh}}(f_*\\mathcal O_X)$ whose composite with restriction of scalars to $D_{\\mathrm{QCoh}}(Y)$ is $Rf_*$. Restriction of scalars reflects isomorphisms: the cone of a morphism of $f_*\\mathcal O_X$-complexes is acyclic exactly when its underlying $\\mathcal O_Y$-complex is acyclic, since the underlying complexes and cohomology groups are unchanged. Thus, if $Rf_*u$ is an isomorphism, then $\\Phi(u)$ is an isomorphism.",
+   "uses": [
+    "lem-sc-finite-affine-derived-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, lemma-affine-morphism-equivalence"
+   }
+  },
+  {
+   "text": "An equivalence reflects isomorphisms: applying a quasi-inverse to the isomorphism of $\\Phi(u)$ obtained in Step 1, and using the unit and counit isomorphisms, gives an inverse to $u$. Therefore $Rf_*$ reflects isomorphisms on $D_{\\mathrm{QCoh}}(X)$.",
+   "uses": [
+    "lem-sc-finite-affine-derived-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08I8, lemma-affine-morphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-affine-derived-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 0AVW and 08I8"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +86,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-derived-pushforward-t-exact",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-derived-pushforward-conservative",
+  "worker": "stage1",
+  "summary": "No exact Lean declaration exists. The proof uses the existing affine quasi-coherent derived equivalence: restriction of scalars reflects isomorphisms, and the equivalence itself reflects isomorphisms, yielding conservativity of Rf_*.",
+  "blueprint": "The two steps realize the ancestor proof's conservativity passage for an affine morphism, using the affine derived equivalence and the isomorphism-reflection clause of Tag 08I8.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-apc1802",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apc1802 (reviewer sub-agent of L); spot-checked: Statement matches Tag 08I8. Step 1 cites lem-sc-finite-affine-derived-equivalence (Tag 0AVW statement: equivalence Phi with restriction∘Phi = Rf_*), restriction reflects isos elementary; Step 2 equivalence reflects isos elementary. Cited node is unsplit, created from lem-sc-finite-duality-derived-hom, no proof deps: no cycle; item does not cite t-exact node (t-exact cites item), no restatement. No new nodes. Second reading: no missed fault."
+ }
 }
