@@ -2426,3 +2426,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:42 L: merged deliver/K1/lem-sc-strict-henselization-regular (reviewer PASS; first push; new nodes: 1)
 - 19:43 L: merged deliver/C1/lem-pc-hilb-separated (reviewer FIX; first push; new nodes: 1)
 - 19:43 L: merged deliver/C1/lem-pc-derived-qcoh-compact-generation (reviewer FIX; first push; new nodes: 1)
+- 19:44 L: merged deliver/E1/thm-sp-double-complex-spectral-sequences (reviewer FIX; first push; new nodes: 0)
