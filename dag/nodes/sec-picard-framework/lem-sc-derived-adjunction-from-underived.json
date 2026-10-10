@@ -1,0 +1,71 @@
+{
+ "id": "lem-sc-derived-adjunction-from-underived",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, passage from the underived sheaf-Hom adjunction to its derived extension",
+   "via": [
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived functors inherit an adjunction",
+ "statement": "Given an adjunction $G\\dashv F$ between categories, localizations $L_1,L_2$ of the source and target, and absolute left and right derived functors $G'$ and $F'$ with the required derived comparison morphisms $\\alpha$, $\\beta$ [def-pc-derived-category], the derived functors form an adjunction $G'\\dashv F'$. Its counit $\\varepsilon'$ is induced by the underived counit $\\varepsilon$: for every object $X$, $G'(\\beta_X)\\circ\\varepsilon'_{L X}=\\alpha_{F X}\\circ L(\\varepsilon_X)$.",
+ "source": {
+  "document": "literature/stacks-project/derived-categories.tex",
+  "place": "Derived Categories, lemma-derived-adjoint-functors"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived extension of an adjoint pair gives an adjunction on derived categories",
+   "results": "CategoryTheory.Adjunction.derived in Mathlib/CategoryTheory/Functor/Derived/Adjunction",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Derived Adjunction",
+   "results": "0 hits; unknown constant Functor.Derived",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*adjunction|Adjunction.*derived in CategoryTheory/Functor/Derived CategoryTheory/Derived",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:144 defines CategoryTheory.Adjunction.derived",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedε_fac_app in Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "results": "line 125: G'.map (β.app X₂) ≫ (adj.derivedε W₂ α β).app (L₂.obj X₂) = α.app (F.obj X₂) ≫ L₂.map (adj.counit.app X₂)",
+   "date": "2026-10-10",
+   "verdict": "match for the counit clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Adjunction.derived",
+  "file": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+  "line": 144,
+  "how": "generalization: CategoryTheory.Adjunction.derived (line 144) constructs the derived adjunction under the stated absolute-derived-functor hypotheses; its counit is Adjunction.derivedε, whose compatibility with the underived counit is CategoryTheory.Adjunction.derivedε_fac_app (same file, line 125)"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-finite-sheafhom-affine-adjoint",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality"
+}
