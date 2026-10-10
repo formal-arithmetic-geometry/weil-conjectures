@@ -43,8 +43,10 @@ lemma leftUnitor_inv_mapBifunctorShift₂Iso_hom :
   have h := ι_mapBifunctorShift₂Iso_hom_f (𝟙_ (CochainComplex C ℤ)) K (curriedTensor C) n 0 i i
     (zero_add i) (i + n) (i + n) rfl rfl
   erw [assoc, assoc, h]
-  simp [shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq]
-  erw [CategoryTheory.Functor.map_id, id_comp, comp_id]
+  simp only [shiftFunctor_obj_X', curriedTensor_obj_obj, zero_mul, Int.negOnePow_zero,
+    shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, curriedTensor_obj_map,
+    Iso.refl_inv, comp_id, one_smul, Iso.cancel_iso_inv_left]
+  erw [MonoidalCategory.whiskerLeft_id, id_comp]
   rfl
 
 lemma mapBifunctorShift₂Iso_hom_leftUnitor_hom :
@@ -64,8 +66,10 @@ lemma rightUnitor_inv_mapBifunctorShift₁Iso_hom :
   have h := ι_mapBifunctorShift₁Iso_hom_f K (𝟙_ (CochainComplex C ℤ)) (curriedTensor C) n i 0 i
     (add_zero i) (i + n) (i + n) rfl rfl
   erw [assoc, assoc, h]
-  simp [shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq]
-  erw [CategoryTheory.Functor.map_id, NatTrans.id_app, id_comp, comp_id]
+  simp only [shiftFunctor_obj_X', curriedTensor_obj_obj, shiftFunctorObjXIso,
+    HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom, curriedTensor_map_app, Iso.refl_inv, comp_id,
+    Iso.cancel_iso_inv_left]
+  erw [MonoidalCategory.id_whiskerRight, id_comp]
   rfl
 
 lemma mapBifunctorShift₁Iso_hom_rightUnitor_hom :
