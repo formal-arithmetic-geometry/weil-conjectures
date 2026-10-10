@@ -30,9 +30,108 @@
   "def-weil-pbc-kahler-differentials",
   "def-weil-pbc-exterior-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since f is proper it is of finite type [def-weil-proper-morphism], so X is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; the projection \\operatorname{pr}_2:X\\times_S X\\to X is the base change of f, hence proper [lem-weil-pbc-proper-base-change] and of finite type, so X\\times_S X is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] again. Apply the Noetherian derived-direct-image right-adjoint statement [lem-pc-noetherian-derived-direct-image-right-adjoint] to f:X\\to S and to the diagonal \\Delta:X\\to X\\times_S X. It gives right adjoints a to Rf_* and c to R\\Delta_* on quasi-coherent derived categories.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-proper-base-change",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0A9E and 08DW"
+   }
+  },
+  {
+   "text": "Because f is smooth of relative dimension d and has closed diagonal, the diagonal \\Delta is a Koszul-regular immersion of codimension d; in particular \\Delta is perfect, and it is proper because X,S are Noetherian.",
+   "uses": [
+    "lem-sc-smooth-proper-diagonal-koszul-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-on-morphisms.tex",
+    "place": "Tags 067U and 068C"
+   }
+  },
+  {
+   "text": "The morphism f is flat, being smooth [lem-pc-smooth-flat]. The counit/evaluation identity for the diagonal gives \\mathcal O_X = c(L\\operatorname{pr}_1^*a(\\mathcal O_S)) for the flat proper morphism f, by the canonical identity of Tag 0E2Q.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2Q"
+   }
+  },
+  {
+   "text": "For the perfect proper immersion \\Delta, the projection formula identifies c(L\\operatorname{pr}_1^*K) with L\\Delta^*L\\operatorname{pr}_1^*K \\mathbin{\\otimes^L} c(\\mathcal O_{X\\times_S X}) for every quasi-coherent complex K, by Tag 0A9U.",
+   "uses": [
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9U"
+   }
+  },
+  {
+   "text": "For a Koszul-regular immersion of codimension d, the diagonal dualizing object is c(\\mathcal O_{X\\times_S X}) = \\bigwedge^d N_\\Delta[-d], by Tag 0BR0.",
+   "uses": [
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BR0"
+   }
+  },
+  {
+   "text": "The conormal sheaf C_\\Delta of the diagonal is canonically C_\\Delta\\cong\\Omega^1_{X/S}, by Tag 08S2.",
+   "uses": [
+    "lem-sc-smooth-proper-diagonal-conormal-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 08S2"
+   }
+  },
+  {
+   "text": "Set K=\\mathcal O_S in the tensor formula. Using \\operatorname{pr}_1\\circ\\Delta=\\operatorname{id}_X and the Koszul-dual formula gives \\mathcal O_X=c(L\\operatorname{pr}_1^*a(\\mathcal O_S))\\cong a(\\mathcal O_S)\\mathbin{\\otimes^L}\\bigwedge^dN_\\Delta[-d]. By Step 6 and [lem-sc-smooth-omega-finite-locally-free], C_\\Delta\\cong\\Omega^1_{X/S} is locally free of constant rank d, hence so is its dual N_\\Delta, and \\bigwedge^dN_\\Delta is invertible; therefore cancellation yields a(\\mathcal O_S)\\cong(\\bigwedge^dN_\\Delta)^{-1}[d]. The normal sheaf is the dual of the conormal sheaf, so (\\bigwedge^dN_\\Delta)^{-1}\\cong\\bigwedge^dC_\\Delta; by Step 6 this is \\bigwedge^d\\Omega^1_{X/S}=\\Omega^d_{X/S}. Thus f^!\\mathcal O_S=a(\\mathcal O_S)\\cong\\Omega^d_{X/S}[d].",
+   "uses": [
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-diagonal-koszul-dual",
+    "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "lem-sc-smooth-omega-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0BRT, conclusion of the proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proper-base-change",
+  "lem-pc-noetherian-derived-direct-image-right-adjoint",
+  "lem-sc-smooth-proper-diagonal-koszul-regular",
+  "lem-pc-smooth-flat",
+  "lem-sc-smooth-proper-diagonal-pushforward-structure",
+  "lem-sc-smooth-proper-diagonal-tensor-formula",
+  "lem-sc-smooth-proper-diagonal-koszul-dual",
+  "lem-sc-smooth-proper-diagonal-conormal-differentials",
+  "lem-sc-smooth-omega-finite-locally-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BRT, Lemma 48.15.7"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -64,12 +163,31 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-smooth-proper-curve-dualizing",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-smooth-proper-relative-dualizing-general",
+  "worker": "stage1",
+  "summary": "Removed the false nonproper upper-shriek prerequisite and split the proper smooth relative duality proof into adjoint existence, diagonal Koszul regularity/perfectness/properness, the counit identity, the perfect-immersion tensor formula, the Koszul dual, the conormal-differential identification, and the final elementary cancellation.",
+  "blueprint": "The steps realize the proof of the blueprint node lem-sc-finite-duality: the diagonal construction of the smooth proper relative dualizing complex and its identification with top relative differentials.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-smooth-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-srd1706",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-srd1706 (reviewer sub-agent of L); spot-checked: Repaired re-push; the 16:43 return points are repaired: (1) koszul-dual now has the normal sheaf N_i=SheafHom(C_i,O_Z), a Koszul-regular CLOSED immersion of Noetherian schemes, as in Stacks 0BR0 (duality-lemma-regular-immersion: Y qcqs, rank r = d here); (2) step 7 writes out the 0BRT chain O_X = c(Lpr_1^*a(O_S)) = a(O_S) (x)^L wedge^d N[-d], so a(O_S) = (wedge^d N)^{-1}[d] = wedge^d C_Delta[d], with C_Delta = Omega by 08S2 (morphisms-lemma-differentials-diagonal), and step 6 names C_Delta; (3) koszul-regular states 'diagonal is a closed immersion' instead of citing quasi-separated, and Koszul-regular/perfect immersions are defined inline in all three nodes. Source read: duality.tex 0BRT (lemma-smooth-proper) statement and proof, item statement agrees (S Noetherian, f smooth proper rel. dim d, a right adjoint on D_QCoh, iso in D(O_X)); 0E2Q (equation-pre-rigid in lemma-van-den-bergh: proper flat finite presentation over qcqs, implied by the node's Noetherian hypotheses); 0A9U (perfect proper morphism of Noetherian schemes, compare-with-pullback map Lf^*K (x) a(O_Y) -> a(K) iso) matches tensor-formula; 067U/068C for koszul-regular. Steps: 1 by lem-pc-noetherian-derived-direct-image-right-adjoint; 2 koszul-regular (finite type and separated from def-weil-proper-morphism); 3 pushforward-structure; 4 tensor-formula; 5 koszul-dual; 6 conormal-differentials; 7 elementary from 3-6. FIX more, RETURN less (three C1 gaps): step 1 used Noetherianity of X and XxX with no node -> cited leaves lem-weil-pbc-finite-type-over-noetherian and lem-weil-pbc-proper-base-change (pr_2 base change of f); step 3 used flatness of f with no node -> cited lem-pc-smooth-flat (off-unit imported, generic tool, --tool-uses); step 7 used invertibility of wedge^d N_Delta (C_Delta locally free rank d) with no node -> NEW statement-only node lem-sc-smooth-omega-finite-locally-free (Stacks 02G1, my LeanFinder query: only ring-level results, no match). Small fixes: dag/nodes/sec-picard-framework/lem-sc-smooth-proper-relative-dualizing-general.json: proof steps 1,3,7 text/uses and proof_deps as above; lem-sc-smooth-proper-diagonal-koszul-regular.json: stmt_deps add def-pc-scheme, def-pc-base-change (cited in text); lem-sc-smooth-proper-diagonal-pushforward-structure.json: statement 'flat' now cites [def-weil-flat-morphism], stmt_deps = the cited definitions (dropped the lemma lem-pc-noetherian-..., added def-pc-base-change, def-pc-derived-category, def-weil-flat-morphism); lem-sc-smooth-proper-diagonal-conormal-differentials.json: stmt_deps add def-pc-scheme. Small cases: d=0 (finite etale: f^!O_S=O_X), X=P^1_k over k (f^!O=O(-2)[1]=Omega[1], Serre duality). Start Sat Oct 10 05:06:00 PM UTC 2026, end Sat Oct 10 05:11:34 PM UTC 2026.; 5 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
