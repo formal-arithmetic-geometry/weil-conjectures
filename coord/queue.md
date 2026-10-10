@@ -1,8 +1,8 @@
 # Work queue
 
-852 items; claim with `tools/claim.py next <group> [--stage N]`.
+853 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (319)
+## Stage 1: nodes to split (320)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -38,7 +38,6 @@
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
 | `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
-| `lem-pc-h0-proper-variety` | 3008 | none |
 | `lem-sc-noetherian-cohomology-above-dimension` | 3008 | sorry_here |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
 | `lem-weil-pbc-coskeleton-matching-tuples` | 3008 | none |
@@ -62,9 +61,11 @@
 | `lem-sc-generic-kummer-residues` | 3010 | none |
 | `lem-sc-riemann-roch` | 3010 | rests_on_sorry |
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
+| `lem-pc-base-change-closure-components` | 3011 | none |
 | `lem-pc-genus-well-defined` | 3011 | none |
 | `lem-pc-leray-degenerate-sections` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
+| `lem-pc-very-ample-disjoint-union` | 3011 | none |
 | `lem-sc-finite-duality` | 3011 | rests_on_sorry |
 | `lem-sc-group-cd-one` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
@@ -192,6 +193,7 @@
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-projective-space-serre-vanishing` | 6011 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
+| `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
 | `pqf-lem-affine-vanishing` | 6011 | none |
 | `pqf-lem-fff-vanishing` | 6011 | none |
 | `pqf-lem-finite-qf` | 6011 | none |
@@ -200,7 +202,6 @@
 | `pqf-lem-qf-finitefibres` | 6011 | none |
 | `pqf-lem-serre-criterion` | 6011 | none |
 | `pqf-lem-sheaf-zero-stalks` | 6011 | none |
-| `lem-sc-ample-positive-degree` | 6012 | rests_on_sorry |
 | `pqf-lem-going-up` | 6017 | none |
 | `pqf-lem-incomparability` | 6017 | none |
 | `pqf-def-affine-morphism` | - | none |
@@ -864,7 +865,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 338 nodes that wait for stage 1, 974 nodes that wait for a statement dependency.
+Not open yet: 339 nodes that wait for stage 1, 975 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
