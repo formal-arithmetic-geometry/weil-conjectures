@@ -24,9 +24,39 @@
   "def-sc-invertible-module",
   "pqf-def-coherent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For injectivity, suppose a homogeneous fraction $t/s^n$ maps to zero on $X_s$. The numerator $t$ is a global section of $\\mathcal F\\otimes\\mathcal L^{\\otimes n}$ whose restriction to $X_s$ is zero after division by the trivializing section $s^n$. Applying [lem-sc-p1-section-restriction-s-torsion] to this module and section gives $m\\ge0$ for which multiplication by $s^m$ kills $t$. This is exactly the equivalence relation making $t/s^n$ zero in the localization.",
+   "uses": [
+    "lem-sc-p1-section-restriction-s-torsion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PW (label lemma-invert-s-sections), injectivity of the canonical map"
+   }
+  },
+  {
+   "text": "For surjectivity, let $u\\in\\Gamma(X_s,\\mathcal F)$. Apply [lem-sc-p1-section-clearing-denominators-qcqs] to $X$, $\\mathcal L$, $s$, $\\mathcal F$, and $u$; its quasi-compact and quasi-separated hypotheses are those of the statement. It gives $m\\ge0$ and $t\\in\\Gamma(X,\\mathcal F\\otimes\\mathcal L^{\\otimes m})$ with $t|_{X_s}=u\\otimes s^m$. The fraction $t/s^m$ therefore maps to $u$ under the canonical map.",
+   "uses": [
+    "lem-sc-p1-section-clearing-denominators-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties, Lemma 01PW (label lemma-invert-s-sections), surjectivity via clearing denominators"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-section-restriction-s-torsion",
+  "lem-sc-p1-section-clearing-denominators-qcqs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PW (label lemma-invert-s-sections), part (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,12 +88,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-serre-section-module-comparison",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-invertible-section-localization",
+  "worker": "stage1",
+  "summary": "Split into injectivity and surjectivity following Stacks 01PW part (2). Injectivity uses the new statement-only kernel lemma that restriction-zero sections are killed by a power of s; surjectivity uses the existing closed clearing-denominators lemma lem-pc-section-clearing-denominators. The stronger cohomology node was not used because it depends back on this item through its affine case. Reviewer R-isl1752: lem-pc-section-clearing-denominators requires X separated over an affine scheme, which a qcqs X need not be (C4); surjectivity now cites the new statement-only node lem-sc-p1-section-clearing-denominators-qcqs (Stacks 01PW(2) surjectivity, qcqs).",
+  "blueprint": "Realizes the ancestor lem-sc-p1-graded-resolution proof clause comparing graded sections on D_+(x_i): injectivity by power torsion after restriction and surjectivity by clearing denominators.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-isl1752",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-isl1752 (reviewer sub-agent of L); spot-checked: Statement matches Stacks 01PW(2); step 1 cites new lem-sc-p1-section-restriction-s-torsion (01PW(1) kernel, module version not in Mathlib: only structure-sheaf exists_of_res_zero_of_qcqs), sound. FIX more, RETURN less: C4 in step 2 - lem-pc-section-clearing-denominators requires X separated over an affine scheme, which qcqs X need not be (Stacks uses only qcqs via quasi-compact U_j cap U_j'); repaired by adding statement-only node lem-sc-p1-section-clearing-denominators-qcqs (01PW(2) surjectivity, qcqs, LeanFinder query recorded: no match) and citing it in step 2; proof_deps updated. Not a cycle: lem-sc-invert-s-cohomology avoided as the delivery noted.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
