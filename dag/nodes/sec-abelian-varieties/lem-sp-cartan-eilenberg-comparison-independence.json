@@ -23,9 +23,81 @@
   "lem-sp-cartan-eilenberg-exists",
   "def-sp-double-complex-total"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose injective resolutions of $X$ and $Y$ and Cartan--Eilenberg resolutions of their $F$-images as in [lem-sp-cartan-eilenberg-exists]. That node indexes $I^{p,q}$ with columns $I^{p,\\bullet}$ resolving $K^p$, so $p$ is the complex degree and $q$ the resolution degree. [lem-weil-pbc-cartesian-eilenberg-functorial] uses the exchanged convention $C^{p,q}=I^{q,p}$ (rows $C^{\\bullet,q}$ resolve $K^q$, augmentation into $C^{0,\\bullet}$); under this exchange its clauses (1)--(6) are exactly the properties supplied by [lem-sp-cartan-eilenberg-exists], and its first degree is the resolution degree here, while the second-degree filtration in its conclusion is the complex-degree filtration, which is not the one used here. A comparison lift of $f$ is supplied by [lem-weil-pbc-cartesian-eilenberg-functorial] with the identity exact functor on $\\mathcal B$ and $u=F(\\beta)$ for a lift $\\beta:J_X^\\bullet\\to J_Y^\\bullet$ of $f$. Being a morphism of double complexes, it preserves bidegrees, so after applying the additive functor $G$ its total map preserves the resolution-degree filtration ${}''F$ of [def-sp-double-complex-total] (in the indexing $I^{p,q}$); thus it is a filtered chain map.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-exists",
+    "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 015H, Lemma 015I, and Remark 015K"
+   }
+  },
+  {
+   "text": "If two comparison lifts are chosen, their underlying lifts $\\beta,\\beta':J_X^\\bullet\\to J_Y^\\bullet$ of $f$ may differ. Applying [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] with $\\alpha$ the quasi-isomorphism from $X$ (in degree $0$) to $J_X^\\bullet$ gives a homotopy $k$ between $\\beta$ and $\\beta'$, so $F(k)$ is a homotopy between $u=F(\\beta)$ and $u'=F(\\beta')$, $F$ being additive. Apply [lem-sp-cartan-eilenberg-comparison-homotopy] to the identity exact functor on $\\mathcal B$, the complexes $F(J_X^\\bullet)$ and $F(J_Y^\\bullet)$ (zero in negative degrees), their Cartan--Eilenberg resolutions from [lem-sp-cartan-eilenberg-exists], and the homotopic maps $u,u'$. The resulting total homotopy $H$ lowers the resolution-degree filtration by one; since $G$ is additive, $G(H)$ is a homotopy between the two total maps after applying $G$ with the same one-step filtration shift.",
+   "uses": [
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-sp-cartan-eilenberg-comparison-homotopy",
+    "lem-sp-cartan-eilenberg-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 015K, functoriality of Cartan--Eilenberg resolutions"
+   }
+  },
+  {
+   "text": "The Cartan--Eilenberg double complexes are first-quadrant, so the resolution-degree filtrations on their total complexes are bounded in each total degree. Apply [lem-sp-filtered-homotopy-spectral-sequence] with its one-step filtration shift to the homotopy from Step 2. Their maps on every page $E_r$ for $r\\ge2$ coincide, as do the maps on the abutment filtration and its graded pieces [def-sp-convergence]. Thus the comparison maps are independent of all choices from the second page onward.",
+   "uses": [
+    "lem-sp-filtered-homotopy-spectral-sequence",
+    "def-sp-filtration",
+    "def-sp-convergence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "functoriality and homotopy invariance of the spectral sequence of a filtered complex"
+   }
+  },
+  {
+   "text": "Choose the identity lift for an identity map and compare any other lift with it by Steps 2--3; this makes the induced page maps identities. For composable maps, choose comparison lifts whose middle Cartan--Eilenberg resolution is shared. Their composite satisfies the augmentation equation for the composite map, so it can be compared by Steps 2--3 with any independently chosen lift of that composite; [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] handles the possible difference in the underlying injective-resolution lift. Functoriality of [thm-sp-double-complex-spectral-sequences] then identifies the induced page maps with those of the corresponding complex maps. Its first-page and abutment formulas for the second filtration, together with the Cartan--Eilenberg resolution properties in [lem-sp-cartan-eilenberg-exists] (the horizontal cycles and boundaries in each resolution degree are injective), [lem-sp-cart-eilenberg-left-exact-cohomology] (so $H^p_I(G(I^{\\bullet,q}))\\cong G(H^p_I(I^{\\bullet,q}))$ on the first page, naturally in the comparison maps), and the derived-functor computation in [def-sp-left-exact-additive], identify the second page with $R^pG(R^qF(-))$ and the abutment with $H^{p+q}(\\operatorname{Tot}G(I))$; these identifications are induced by the same filtered maps and hence commute with them.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-sp-cartan-eilenberg-exists",
+    "def-sp-left-exact-additive",
+    "lem-sp-filtered-homotopy-spectral-sequence",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-sp-cart-eilenberg-left-exact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Remark 015K and Lemma 015N, functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-cartan-eilenberg-exists",
+  "lem-weil-pbc-cartesian-eilenberg-functorial",
+  "def-sp-double-complex-total",
+  "lem-sp-cartan-eilenberg-comparison-homotopy",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "def-sp-filtration",
+  "def-sp-convergence",
+  "lem-sp-filtered-homotopy-spectral-sequence",
+  "thm-sp-double-complex-spectral-sequences",
+  "def-sp-left-exact-additive",
+  "lem-sp-cart-eilenberg-left-exact-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Remark 015K and Lemma 015N, functoriality"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +129,52 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-sp-grothendieck",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-cartan-eilenberg-comparison-independence",
+  "worker": "stage1",
+  "summary": "Split the independence claim into filtered comparison-map construction, homotopy uniqueness of Cartan--Eilenberg lifts, filtered spectral-sequence homotopy invariance, and identity/composition plus page and abutment compatibility. Added two statement-only helper nodes for the two non-elementary generic facts; no Mathlib declaration states either result.",
+  "blueprint": "Realizes the final functoriality paragraph of thm-sp-grothendieck, namely comparison homotopies and equality from the second page onward, together with identity, composition, and compatibility of the E2 and abutment identifications.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "why": "Its generic Cartan--Eilenberg lift is used to construct the filtered comparison map; the current unit has no replacement."
+   },
+   {
+    "node": "lem-sp-filtered-homotopy-spectral-sequence",
+    "why": "Its generic filtered-complex statement supplies equality of pages and abutment maps under the comparison homotopy."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Its uniqueness statement supplies the homotopy between potentially different lifts of the same map of injective resolutions; the current unit has no replacement."
+   },
+   {
+    "node": "lem-sp-cart-eilenberg-left-exact-cohomology",
+    "why": "Generic statement that a left exact functor commutes with cohomology of a complex with injective cycles and boundaries; identifies the first page of the CE spectral sequence after G. Added by reviewer R-cci2448."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-cart-eilenberg-left-exact-cohomology",
+  "lem-weil-pbc-cartesian-eilenberg-functorial",
+  "lem-sp-filtered-homotopy-spectral-sequence",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-sp-cart-eilenberg-left-exact-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cci2448",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cci2448 (reviewer sub-agent of L); spot-checked: Return points of R-cci2340: (1) homotopy node now lowers resolution degree by one and filtered-SS node has h(F^p) in F^{p-1} with conclusion from E_2 -- both true (dhx is a d_2-boundary, hdx lies in F^{p+1}); (2) Step 2 cites lift-to-injective uniqueness and the node takes homotopic u,u' -- repaired; (B) exists in homotopy node stmt_deps -- repaired. FIX more, RETURN less: (C4) Step 1's transposition sentence was wrong: under C^{p,q}=I^{q,p} the second degree of C is the COMPLEX degree, not the resolution degree; rewrote Step 1 to say so and to get filtration preservation from bidegree preservation of a double-complex morphism (def-sp-double-complex-total); (C1) Step 4's first-page identification H^p_I(G(I^{.,q}))=G(H^p_I(I^{.,q})) needs lem-sp-cart-eilenberg-left-exact-cohomology, now cited as a generic tool; (B) homotopy node cited def-sp-filtration without stmt_deps and used epsilon_K, epsilon_L undefined -- added both; Step 2 now says u=F(beta), homotopy F(k), and G(H) keeps the shift.; 2 file(s) fixed by the reviewer"
+ }
 }
