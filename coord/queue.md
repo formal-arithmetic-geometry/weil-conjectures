@@ -1,8 +1,8 @@
 # Work queue
 
-861 items; claim with `tools/claim.py next <group> [--stage N]`.
+860 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (58)
+## Stage 1: nodes to split (56)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -50,7 +50,6 @@
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pc-chow-relative-ample` | - | none |
 | `lem-pc-coherent-property-devissage` | - | none |
-| `lem-pc-finite-support-hi` | - | sorry_here |
 | `lem-pc-relative-kill-by-twisting` | - | none |
 | `lem-sc-affine-unit-divisor-base-change` | - | none |
 | `lem-sc-h1-gm-pic-pullback` | - | none |
@@ -58,14 +57,13 @@
 | `lem-kun-etale-lfp` | - | none |
 | `lem-pur-kinjective-degreewise-existence` | - | none |
 | `lem-pur-ringed-site-grothendieck-abelian` | - | none |
-| `lem-weil-common-extension-fields` | - | none |
 | `def-wf-lie-algebra-derivation` | - | rests_on_sorry |
 | `lem-pc-flf-properties` | - | none |
 | `lem-pur-left-derived-from-kflat-class` | - | none |
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-pur-hom-kflat-into-kinjective` | - | none |
 
-## Stage 2: nodes to state (803)
+## Stage 2: nodes to state (804)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -334,6 +332,7 @@
 | `lem-sc-zero-dim-noetherian-closed-finite` | 1 | state |
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
 | `lem-sp-horseshoe-prescribed-resolutions` | 1 | state |
+| `lem-weil-common-extension-fields` | 1 | state |
 | `lem-weil-l-adic-extension-integers-dvr` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
 | `lem-weil-pbc-adjunction-lifts-group-ring-objects` | 1 | state |
@@ -873,7 +872,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1668 nodes that wait for a statement dependency, 98 nodes that wait for stage 1.
+Not open yet: 1669 nodes that wait for a statement dependency, 96 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
