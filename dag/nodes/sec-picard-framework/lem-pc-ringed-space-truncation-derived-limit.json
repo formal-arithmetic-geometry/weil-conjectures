@@ -25,21 +25,89 @@
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each point $x\\in X$, let $\\mathfrak U_x=\\{U\\in\\mathcal B\\mid x\\in U\\}$; because $\\mathcal B$ is a basis this is a fundamental system of open neighborhoods. Define $p_x(m)=d+\\max(0,m)$. If $U\\in\\mathfrak U_x$, $p>p_x(m)$, and $m-p<0$, then $p>d$, so the assumed vanishing gives $H^p(U,H^{m-p}(E))=0$. If $m-p\\geq0$, then $p\\leq m\\leq\\max(0,m)+d$ contradicts $p>p_x(m)$ (and when $m<0$ this case is impossible). Thus the hypotheses of [lem-pc-ringed-space-pointwise-truncation-limit] hold (a scheme is a ringed space). The product $\\prod_nE_n$ exists in $D(\\mathcal O_X)$ [lem-pc-ringed-space-derived-products], so the system $(E_n)$ has a derived limit $(K,p_K,\\delta_K)$ [lem-weil-derived-limit-existence, part (1)]. By [lem-pc-ringed-space-pointwise-truncation-limit] there is $c:E\\to K$ with $\\mathrm{pr}_n\\circ p_K\\circ c$ the canonical map $E\\to E_n$ for all $n$, and $c$ is an isomorphism. Put $p=p_K\\circ c:E\\to\\prod_nE_n$, whose components are the canonical maps, and $\\delta=c[1]^{-1}\\circ\\delta_K$. Then $(c,\\mathrm{id},\\mathrm{id})$ is an isomorphism from the triangle $E\\xrightarrow{p}\\prod_nE_n\\xrightarrow{1-s}\\prod_nE_n\\xrightarrow{\\delta}E[1]$ to the Roos triangle of $K$, so the former is distinguished (triangles isomorphic to distinguished ones are distinguished [def-weil-triangulated-category]); hence $(E,p,\\delta)$ is a derived limit of $(E_n)$, and the canonical map $E\\to R\\varprojlim_nE_n$ (namely $c$) is an isomorphism.",
+   "uses": [
+    "lem-pc-ringed-space-pointwise-truncation-limit",
+    "lem-pc-ringed-space-derived-products",
+    "lem-weil-derived-limit-existence",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-derived-limit",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D64, proof via Tag 0D63; Tag 0D62"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-space-pointwise-truncation-limit",
+  "lem-pc-ringed-space-derived-products",
+  "lem-weil-derived-limit-existence",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-derived-limit",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D64, label lemma-is-limit-dimension"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "derivedLimit|homotopyLimit|Rlim|truncGE.*limit in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "no hits",
-   "date": "2026-10-10",
+   "tool": "leanfinder",
+   "query": "derived limit of truncation tower under pointwise cohomology vanishing",
+   "results": "CochainComplex.shortComplexTruncLE_shortExact; CochainComplex.quasiIso_πTruncGE_iff; CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; no derived-limit theorem",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, truncation, inverse limit",
+   "results": "0 hits; unknown identifier truncation",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*limit|truncation in Mathlib/Algebra/Homology",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived inverse limit of standard truncations under bounded local cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-qcoh-truncation-derived-limit"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ringed-space-truncation-derived-limit",
+  "worker": "stage1",
+  "summary": "Split the uniform cohomological-dimension truncation theorem by introducing the strictly more general pointwise criterion of Stacks Tag 0D62 and instantiating it with the constant bound p_x(m)=d+max(0,m) on basis neighborhoods.",
+  "blueprint": "The step realizes the truncation-tower argument in the first step of blueprint ancestor lem-sc-finite-duality (via Stacks 08D3).",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-derived-limit-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rtd2347",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rtd2347 (reviewer sub-agent of L); spot-checked: Step 1 bound p_x(m)=d+max(0,m) verified against 0D62/0D64 (all m,p cases); child matches Tag 0D62. FIX more, RETURN less: (1) C1/C4 products in D(O_X) (08D5 caveat): neither the item nor the child gave existence of prod_n tau_{>=-n}E in D(O_X), which def-weil-derived-limit requires; added statement-only node lem-pc-ringed-space-derived-products (Stacks 07D9 + remark-existence-D 079Q; LeanFinder no match) and cited it with lem-weil-derived-limit-existence (1) as a generic tool (C7/C8: existence of a derived limit once the product exists, triangulated-category generality). (2) C4: child's 'the canonical map E->Rlim' was ill-defined for the non-canonical derived limit; restated it per Stacks 0H72: for every derived limit (K,p,delta) some c with pr_n p c = c_n exists and every such c is an iso; item step now transports the Roos triangle along c (isomorphic triangles, def-weil-triangulated-category) to get (E,p,delta) a derived limit. No Milnor/ML needed here: that argument lives inside the unsplit child (0D62).; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
