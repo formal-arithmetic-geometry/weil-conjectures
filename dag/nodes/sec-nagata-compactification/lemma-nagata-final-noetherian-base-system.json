@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-final-noetherian-base-system",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Properties of the final Noetherian base system",
@@ -17,15 +17,19 @@
  ],
  "proof": [
   {
-   "text": "Apply [prop-nagata-noetherian-inverse-system] to the explicitly\nselected system $\\mathsf N(S)$.",
+   "text": "Here $S$ is the quasi-compact quasi-separated base of the section, so\n[prop-nagata-noetherian-inverse-system] applies to the explicitly selected\nsystem $\\mathsf N(S)$ of [def-nagata-final-noetherian-base-system]: every\n$S_\\lambda$ is of finite type over $\\mathbf Z$, every transition map is\naffine, and $\\kappa_S$ identifies $S$ with $\\varprojlim_\\lambda S_\\lambda$,\nthat is, $\\kappa_S$ is an isomorphism. Each $S_\\lambda$ is Noetherian by\n[def-nagata-noetherian-inverse-system].",
    "uses": [
-    "prop-nagata-noetherian-inverse-system"
+    "prop-nagata-noetherian-inverse-system",
+    "def-nagata-noetherian-inverse-system",
+    "def-nagata-final-noetherian-base-system"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "prop-nagata-noetherian-inverse-system"
+  "prop-nagata-noetherian-inverse-system",
+  "def-nagata-noetherian-inverse-system",
+  "def-nagata-final-noetherian-base-system"
  ],
  "proof_origin": {
   "by": "agent",
@@ -34,7 +38,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -66,5 +70,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-cor-nagata-sketch-fp"
+ "unit": "sk-cor-nagata-sketch-fp",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lemma-nagata-final-noetherian-base-system",
+  "worker": "stage1",
+  "summary": "The item is proved in one step by applying the existing Noetherian approximation proposition to the selected system. The proposition states the affine transitions, finite type over Z, and limit comparison properties; the existing approximation definition explicitly records that each stage is Noetherian. No new nodes were needed.",
+  "blueprint": "Realizes the proof sentence 'Apply [prop-nagata-noetherian-inverse-system] to the explicitly selected system N(S)' in the item's blueprint node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nnb2354",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nnb2354 (reviewer sub-agent of L); spot-checked: Item statement = blueprint order 372 verbatim; step 1 against full statements of prop-nagata-noetherian-inverse-system (finite type over Z, affine transitions, kappa_S identifies S with limit = iso) and def-nagata-noetherian-inverse-system (stages Noetherian); cross-unit use is of sk-prop-nagata-sketch-approximation, which the unit's section lists in uses; no new nodes; no cycle. FIX more, RETURN less: (1) C4: the step did not record the qcqs hypothesis that prop-nagata-noetherian-inverse-system needs; added that S is the qcqs base of the section (sk-cor-nagata-sketch-fp). (2) B3: step text cited only the proposition although uses listed def-nagata-noetherian-inverse-system; text now cites it (Noetherianity) and def-nagata-final-noetherian-base-system (the selected system), uses/proof_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }
