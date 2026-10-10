@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-sylow-module-filtration",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Sylow reduction of a finite torsion module",
@@ -12,27 +12,95 @@
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-sylow-module-filtration.md",
   "place": "node lem-sc-sylow-module-filtration, order 978"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-exc-continuous-cohomology"
+ ],
  "proof": [
   {
-   "text": "The intersection of the stabilizers of the finitely many elements\nof $M$ is open and normal, by\n[def-exc-continuous-cohomology]. Thus the action factors through\na finite quotient $Q$. Choose an $\\ell$-Sylow subgroup $P$\nof $Q$, and let $H$ be its inverse image. The index $[G:H]$\nis prime to $\\ell$. First filter $M$ by its powers of $\\ell$;\nthe quotients are finite-dimensional $\\mathbf F_\\ell[P]$-modules.\nEvery nonzero such module $V$ has a nonzero invariant vector:\nthe nontrivial $P$-orbits in its underlying finite set have\ncardinality divisible by $\\ell$, so\n$\\#V^P\\equiv\\#V=0\\pmod\\ell$. Since $0\\in V^P$, this\nforces $\\#V^P\\geq\\ell$. The line spanned by a nonzero invariant\nvector is a trivial submodule. Induction on $\\dim V$, applied\nto its quotient by this line, gives the required filtration.\nRefining the powers-of-$\\ell$ filtration proves the assertion.",
+   "text": "For every $m\\in M$, continuity for the discrete action means its stabilizer is open [def-exc-continuous-cohomology]. Since $M$ is finite, the intersection $K$ of all these stabilizers is open; it is the kernel of $G\\to\\operatorname{Aut}(M)$ and hence normal. Therefore $Q=G/K$ is finite (the open cosets cover the compact group $G$, so finitely many suffice), and the action factors through $Q$. This includes $M=0$, for which $Q$ is trivial.",
    "uses": [
     "def-exc-continuous-cohomology"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A3R (lemma-pullback-filtered), proof, image of the continuous monodromy action in Aut(V) is finite; the finite-module case is stated again in Lemma 0GJ0 (lemma-pullback-filtered-modules), proof"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-sylow-subgroup-prime-index] to the finite group $Q$ to obtain an $\\ell$-Sylow subgroup $P$. Let $H$ be the inverse image of $P$ under $G\\twoheadrightarrow Q$. It is open, since it is a union of cosets of the open kernel $K$, and $G/H\\cong Q/P$ as finite sets. Thus $[G:H]=[Q:P]$ is prime to $\\ell$; the restricted action of $H$ factors through the finite $\\ell$-group $P$.",
+   "uses": [
+    "lem-weil-pbc-sylow-subgroup-prime-index"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A3R (lemma-pullback-filtered), proof, selection of the Sylow subgroup and prime-to-ell index"
+   }
+  },
+  {
+   "text": "Since $M$ is finite and $\\ell$-primary, some $n\\geq0$ satisfies $\\ell^n M=0$ (take a maximum of the finitely many elementwise exponents; $n=0$ when $M=0$). Put $M_j=\\{m\\in M: \\ell^j m=0\\}$ for $0\\leq j\\leq n$. Then $0=M_0\\subseteq M_1\\subseteq\\cdots\\subseteq M_n=M$ is a finite $P$-stable filtration: $\\ell^j(pm)=p(\\ell^jm)=0$. Every $M_{j+1}/M_j$ is finite and killed by $\\ell$, because $\\ell m\\in M_j$ whenever $m\\in M_{j+1}$. It is therefore a finite-dimensional $\\mathbf F_\\ell[P]$-module. Zero quotients require no further filtration.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0GIZ (lemma-action-l-group), statement for modules killed by a power of ell; explicit exponent filtration supplies the needed finite abelian-group case"
+   }
+  },
+  {
+   "text": "For each nonzero quotient $V_j=M_{j+1}/M_j$, apply [lemma-weil-pbc-finite-l-group-filtration] to its $P$-action. This yields a finite chain of $P$-stable subspaces from $0$ to $V_j$ with trivial one-dimensional $\\mathbf F_\\ell$ quotients. Pull the subspaces back along $M_{j+1}\\twoheadrightarrow V_j$, obtaining a chain from $M_j$ to $M_{j+1}$; the quotient of consecutive inverse images is canonically the corresponding quotient of subspaces, because their common kernel is $M_j$. Concatenate these chains for $j=0,\\ldots,n-1$ and delete repeated terms. The result starts at $0$, ends at $M$, is $H$-stable because $H$ acts through $P$, and has exactly the claimed trivial $\\mathbf F_\\ell$ successive quotients. For $M=0$ it is the one-term chain $0=M$.",
+   "uses": [
+    "lemma-weil-pbc-finite-l-group-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemmas 0A3R (lemma-pullback-filtered), representation-filtration paragraph, and 0GIZ (lemma-action-l-group), filtration conclusion; pullback through ell-power quotients expanded"
+   }
   }
  ],
  "proof_deps": [
-  "def-exc-continuous-cohomology"
+  "def-exc-continuous-cohomology",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "lemma-weil-pbc-finite-l-group-filtration"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-sylow-module-filtration.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemmas 0A3R and 0GIZ, adapted to finite ell-primary abelian groups by the explicit exponent filtration"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite ell-primary abelian group with continuous profinite action, prime-to-ell index open subgroup, filtration by trivial F_ell modules",
+   "results": "ProfiniteGrp.ofFiniteGrp, Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace, AddCommGroup.primaryComponent; no combined reduction or filtration theorem",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite p-primary module group action Sylow subgroup filtration trivial one dimensional quotients",
+   "results": "IsPGroup.to_quotient, CommGroup.primaryComponent.isPGroup, Sylow.exists_subgroup_le_card_le; no theorem combining the Sylow reduction and module filtration",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sylow.not_dvd_index",
+   "results": "Sylow.not_dvd_index in Mathlib.GroupTheory.Sylow, the index clause only",
+   "date": "2026-10-10",
+   "verdict": "partial: index clause only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg for filtration, Sylow index and p-primary module in Mathlib/RepresentationTheory, Mathlib/GroupTheory/Sylow.lean, Mathlib/GroupTheory/Torsion.lean",
+   "results": "Sylow.not_dvd_index at GroupTheory/Sylow.lean:489; no combined reduction theorem or finite p-primary module filtration in the available Mathlib source checkout",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -54,5 +122,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-sylow-module-filtration",
+  "worker": "E1",
+  "summary": "The finite continuous action factors through its finite image. An ell-Sylow subgroup gives an open inverse image of prime-to-ell index by the existing Mathlib leaf. The explicit annihilator-by-ell-power filtration has finite F_ell[P] quotients; the existing Lean-closed finite ell-group representation theorem filters each nonzero quotient. Inverse images and concatenation give the asserted filtration. The zero module and zero intermediate quotients are included. No new node is needed.",
+  "blueprint": "The sole proof paragraph of lem-sc-sylow-module-filtration: its finite-action sentence is step 1, Sylow choice and index are step 2, powers-of-ell reduction is step 3, and invariant-vector induction is supplied by the existing Lean-closed lemma-weil-pbc-finite-l-group-filtration in step 4. The Stacks source is 0A3R/0GIZ."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): blueprint proof and 0A3R/0GIZ/0GJ0 read, 4 steps checked against the cited statements, Sylow.not_dvd_index line 489 and the filtration declaration verified, small cases tested"
+ }
 }
