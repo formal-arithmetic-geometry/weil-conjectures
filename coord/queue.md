@@ -1,6 +1,6 @@
 # Work queue
 
-834 items; claim with `tools/claim.py next <group> [--stage N]`.
+835 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (662)
 
@@ -13,8 +13,6 @@
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
-| `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1011 | none |
-| `lem-weil-pbc-popescu-lift-nilpotent` | 1011 | none |
 | `lem-weil-pbc-popescu-lift-solution` | 1011 | none |
 | `lem-weil-pbc-popescu-lifting` | 1011 | none |
 | `lem-weil-pbc-popescu-product` | 1011 | none |
@@ -137,6 +135,8 @@
 | `lem-weil-pbc-popescu-delocalize-weak` | 1012 | none |
 | `lem-weil-pbc-popescu-desingularize` | 1012 | none |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1012 | none |
+| `lem-weil-pbc-popescu-lift-once` | 1012 | none |
+| `lem-weil-pbc-popescu-lift-twice` | 1012 | none |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1012 | none |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1012 | none |
 | `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1012 | none |
@@ -669,7 +669,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (172)
+## Stage 2: nodes to state (173)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -793,6 +793,7 @@
 | `lem-weil-pbc-ogoma` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
 | `lem-weil-pbc-popescu-find-sequence` | 1 | state |
+| `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
 | `lem-weil-pbc-power-series-onto-completion` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
@@ -846,7 +847,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 674 nodes that wait for stage 1, 460 nodes that wait for a statement dependency.
+Not open yet: 674 nodes that wait for stage 1, 461 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
