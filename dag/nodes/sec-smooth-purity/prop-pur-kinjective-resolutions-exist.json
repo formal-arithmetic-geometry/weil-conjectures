@@ -9,11 +9,11 @@
     "def-pur-derived-internal-hom"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Existence of K-injective resolutions of sheaves of modules",
- "statement": "Let $\\mathcal C$ be a site whose underlying category is small (its objects form a set) and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. Then the abelian category $\\Mod(\\mathcal O)$ of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] is a Grothendieck abelian category [def-sp-grothendieck-abelian] (it has all colimits, filtered colimits are exact, and $\\bigoplus_{U\\in\\operatorname{Ob}\\mathcal C}j_{U!}\\mathcal O_U$ is a generator), and every cochain complex $\\mathcal M^\\bullet$ of $\\mathcal O$-modules [def-pc-cochain-complex-modules] admits a K-injective resolution [def-pur-kinjective-complex] $\\mathcal M^\\bullet\\to\\mathcal I^\\bullet$ which is injective in every degree, and which can be chosen functorially in $\\mathcal M^\\bullet$ (a functor $\\mathcal M^\\bullet\\mapsto\\mathcal I^\\bullet$ on the category of complexes with a natural transformation from the identity whose components are such resolutions).",
+ "statement": "Let $\\mathcal C$ be a site whose underlying category is small (its objects form a set) and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. Then the abelian category $\\Mod(\\mathcal O)$ of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] is a Grothendieck abelian category [def-sp-grothendieck-abelian] (it has all colimits, filtered colimits are exact, and $\\bigoplus_{U\\in\\operatorname{Ob}\\mathcal C}j_{U!}\\mathcal O_U$ is a generator, where $\\mathcal O_U$ is the restriction of $\\mathcal O$ to the localized site $\\mathcal C/U$ [def-pur-localized-ringed-site] and $j_{U!}\\mathcal O_U$ is the sheafification [def-weil-presheaf-modules-sheafification] of the extension-by-zero presheaf of $\\mathcal O$-modules $P_{\\mathcal O_U}$ [def-weil-extension-by-zero-presheaf]), and every cochain complex $\\mathcal M^\\bullet$ of $\\mathcal O$-modules [def-pc-cochain-complex-modules] admits a K-injective resolution [def-pur-kinjective-complex] $\\mathcal M^\\bullet\\to\\mathcal I^\\bullet$ which is injective in every degree [def-sp-injective-resolutions], and which can be chosen functorially in $\\mathcal M^\\bullet$ (a functor $\\mathcal M^\\bullet\\mapsto\\mathcal I^\\bullet$ on the category of complexes with a natural transformation from the identity whose components are such resolutions).",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Section 07A5 (sites-cohomology-section-unbounded), first paragraph: Mod(O) is Grothendieck abelian (Modules on Sites, Section sites-modules-section-kernels, Lemmas sites-modules-lemma-j-shriek-flat, sites-modules-lemma-module-quotient-flat) and literature/stacks-project/injectives.tex Theorem 079P (injectives-theorem-K-injective-embedding-grothendieck)"
@@ -22,11 +22,46 @@
   "def-weil-sheaf-of-modules-category",
   "def-sp-grothendieck-abelian",
   "def-pc-cochain-complex-modules",
-  "def-pur-kinjective-complex"
+  "def-pur-kinjective-complex",
+  "def-sp-injective-resolutions",
+  "def-pur-localized-ringed-site",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-extension-by-zero-presheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The category of sheaves of modules on a small ringed site is Grothendieck abelian, with the stated colimits, exact filtered colimits, and generator, by [lem-pur-ringed-site-grothendieck-abelian].",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 07A5, first paragraph; Modules on Sites, Lemmas 03DA, 03DB, 03EW"
+   }
+  },
+  {
+   "text": "Apply the functorial K-injective resolution theorem [lem-pur-kinjective-degreewise-existence] to the Grothendieck abelian category from Step 1. Its functor I and natural transformation eta give, for every cochain complex M, a quasi-isomorphism M \\to I(M) with K-injective target and injective terms in every degree; the functoriality is exactly naturality of eta and the action of I on chain maps.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pur-kinjective-degreewise-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Theorem 079P (theorem-K-injective-embedding-grothendieck)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-kinjective-degreewise-existence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 07A5 and Injectives Theorem 079P"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -41,10 +76,38 @@
    "results": "`IsGrothendieckAbelian` for `ModuleCat` (ModuleCat/AB.lean), for `Sheaf J A` with A Grothendieck (GrothendieckAxioms/Sheaf.lean:73) and for pro-etale abelian sheaves (ElladicCohomology.lean:53); none for `SheafOfModules R`; `CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean` gives enough injectives only",
    "date": "2026-10-09",
    "verdict": "no match: ingredients only (Grothendieck for sheaves of abelian groups; enough injectives)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functorial K-injective resolutions for complexes of sheaves of modules on a small site",
+   "results": "CategoryTheory.InjectiveResolution.of and instHasInjectiveResolutions for individual objects; no direct unbounded functorial result",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HasKInjectiveResolutions IsGrothendieckAbelian",
+   "results": "unknown identifier HasKInjectiveResolutions",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasKInjectiveResolutions|isGrothendieckAbelian.*Sheaf|kInjectiveResolutionFunctor in CategoryTheory",
+   "results": "Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf.lean:74,83; no K-injective resolution existence theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every complex of sheaves of modules on a small ringed site admits a functorial K-injective resolution",
+   "results": "unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +127,23 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "prop-pur-kinjective-resolutions-exist",
+  "worker": "stage1",
+  "summary": "Split the proposition into the general small ringed-site Grothendieck theorem and the functorial K-injective resolution theorem with injective terms. The proof then applies these two statements to Mod(O), preserving the item's generator, degreewise injectivity, and functoriality clauses.",
+  "blueprint": [
+   "the statement's Grothendieck-abelian clause",
+   "the statement's functorial K-injective-resolution clause"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kre3012",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kre3012 (reviewer sub-agent of L); spot-checked: Item statement vs sheaf-dag: only citations added (E7 ok); small-site hypothesis honest (07A5, 079P); split is real (Grothendieck clause + generic 079P), no cycle; class b checked: lem-weil-pbc-kinjective-functorial-existence lacks injective terms, lem-weil-pbc-module-sheaves-grothendieck-abelian is etale-only, so both new nodes are not duplicates; class c: Mathlib grep IsGrothendieckAbelian/KInjective finds only bounded-below K-injectives, no SheafOfModules Grothendieck instance. FIX more, RETURN less: (1) C4/B3 lem-pur-kinjective-degreewise-existence cited module-only definitions (def-pc-cochain-complex-modules, def-pc-quasi-iso-modules, def-pur-kinjective-complex) for an arbitrary Grothendieck category A: restated with explicit meanings 'as in [..] with A in place of Mod(O)'; (2) C4 item and lem-pur-ringed-site-grothendieck-abelian cited the abelian-group def-weil-pbc-site-extension-by-zero-presheaf for the O-module j_{U!}O_U: now cite def-pur-localized-ringed-site, def-weil-extension-by-zero-presheaf and def-weil-presheaf-modules-sheafification, stmt_deps updated; Mathlib grep recorded on the generic node.; 3 file(s) fixed by the reviewer"
+ }
 }
