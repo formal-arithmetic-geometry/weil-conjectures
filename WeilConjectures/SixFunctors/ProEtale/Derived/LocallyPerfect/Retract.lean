@@ -112,4 +112,110 @@ lemma δ_mapHomologicalComplex_f_sectionTransport (V : X.ProEt)
     h1) _).trans ?_
   exact congrArg _ (δ_upperStar_sectionTransport_tensorSectionMap V _ _ x y)
 
+
+
+/-- A chain map `ψ` out of the unit in degree `0` into `M ⊗ F`, whose cocycle is a finite sum of
+pure tensors `ι(xₖ) ⊗ yₖ` of global sections with `xₖ` in a subcomplex `ι : L ⟶ M`, lifts to
+`L ⊗ F` if `F` has flat terms. -/
+lemma exists_comp_whiskerRight_eq_of_singleUnitHomEquiv {Y : Scheme.{u}}
+    {L M F : CochainComplex (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ℤ}
+    (ι : L ⟶ M) [∀ n, Mono (ι.f n)] (hF : ∀ n, ObjectProperty.flat (F.X n))
+    {m : ℕ} (p : Fin m → ℤ) (x : ∀ k, (L.X (p k)).obj.obj (op (terminalProEt Y)))
+    (y : ∀ k, (F.X (-p k)).obj.obj (op (terminalProEt Y)))
+    (ψ : (HomologicalComplex.single _ (.up ℤ) 0).obj
+      (𝟙_ (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) ⟶ M ⊗ F)
+    (hψ : (singleUnitHomEquiv _ ψ).1 =
+      ∑ k, (HomologicalComplex.ιTensorObj M F (p k) (-p k) 0 (by simp)).hom.app _
+        (tensorSectionMap _ _ _ ((ι.f (p k)).hom.app _ (x k) ⊗ₜ y k))) :
+    ∃ τ, τ ≫ ι ▷ F = ψ := by
+  let z : ((L ⊗ F).X 0).obj.obj (op (terminalProEt Y)) :=
+    ∑ k, (HomologicalComplex.ιTensorObj L F (p k) (-p k) 0 (by simp)).hom.app _
+      (tensorSectionMap _ _ _ (x k ⊗ₜ y k))
+  have hz : ((ι ▷ F).f 0).hom.app _ z = (singleUnitHomEquiv _ ψ).1 := by
+    rw [hψ, map_sum]
+    refine Finset.sum_congr rfl fun k _ ↦ ?_
+    refine (Sheaf.congr_hom_app_apply (CochainComplex.ιTensorObj_comp_whiskerRight_f
+      ι F (p k) (-p k) 0 (by simp)) _).trans ?_
+    exact congrArg ((HomologicalComplex.ιTensorObj M F (p k) (-p k) 0 (by simp)).hom.app _)
+      (whiskerRight_hom_app_tensorSectionMap _ _ _ _ _)
+  have : Mono ((ι ▷ F).f 1) := CochainComplex.mono_whiskerRight_f ι F hF 1
+  have hd : ((L ⊗ F).d 0 1).hom.app _ z = 0 := by
+    apply injective_hom_app_of_mono ((ι ▷ F).f 1)
+    rw [← Sheaf.comp_hom_app_apply, ← HomologicalComplex.Hom.comm, Sheaf.comp_hom_app_apply, hz,
+      (singleUnitHomEquiv _ ψ).2, map_zero]
+  refine ⟨(singleUnitHomEquiv (L ⊗ F)).symm ⟨z, hd⟩, ?_⟩
+  apply (singleUnitHomEquiv (M ⊗ F)).injective
+  refine Subtype.ext ?_
+  refine (singleUnitHomEquiv_comp_coe _ (ι ▷ F)).trans ?_
+  simp only [Equiv.apply_symm_apply]
+  exact hz
+
+open _root_.DerivedCategory in
+/-- Two chain maps whose images in the derived category agree have equal images under
+`Qh ∘ quotient`. -/
+lemma Qh_map_quotient_map_eq {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    {K L : CochainComplex C ℤ} {f g : K ⟶ L} (h : Q.map f = Q.map g) :
+    Qh.map ((HomotopyCategory.quotient _ _).map f) =
+      Qh.map ((HomotopyCategory.quotient _ _).map g) := by
+  rw [← cancel_mono ((quotientCompQhIso C).hom.app L), quotientCompQhIso_hom_naturality,
+    quotientCompQhIso_hom_naturality, h]
+
+open _root_.DerivedCategory in
+/-- **Local retract, after pullback.** Let `K` have a right dual `D` in `D(X_proét)`, with
+`K ≅ Q(M)` and `D ≅ Q(F)` for a complex `F` of flat sheaves whose pullback along `g : V ⟶ X` is
+K-flat, and let the coevaluation followed by `Q(s)` be `Q(φ)`. Suppose that over `V` the
+cocycle of `φ` is cohomologous to `s(∑ₖ xₖ ⊗ yₖ)` for a cocycle `∑ₖ xₖ ⊗ yₖ` of `M ⊗ F`. Then
+`Q(g^* M)` is a retract of `Q(L')` for every subcomplex `L' ⊆ g^* M` containing the transports of
+the `xₖ`. -/
+theorem exists_retract_upperStar (V : X.ProEt)
+    (K D : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
+    [ExactPairing K D]
+    (M F : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ)
+    (e : K ≅ Qh.obj ((HomotopyCategory.quotient _ _).obj M))
+    (eD : D ≅ Qh.obj ((HomotopyCategory.quotient _ _).obj F))
+    (hF : ∀ n, ObjectProperty.flat (F.X n))
+    (hF' : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
+      (((V.hom)^*[ModuleCat.{u + 1} Λ].mapHomologicalComplex (.up ℤ)).obj F))
+    (I : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ)
+    (s : M ⊗ F ⟶ I) [QuasiIso s]
+    (φ : (HomologicalComplex.single _ (.up ℤ) 0).obj
+      (𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) ⟶ I)
+    (v : 𝟙_ _ ⟶ Qh.obj ((HomotopyCategory.quotient _ _).obj
+      ((HomologicalComplex.single _ (.up ℤ) 0).obj
+        (𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))))))
+    (hφ : η_ K D ≫ (e.hom ⊗ₘ eD.hom) ≫ μ Qh _ _ ≫ Qh.map ((HomotopyCategory.quotient _ _).map s) =
+      v ≫ Qh.map ((HomotopyCategory.quotient _ _).map φ))
+    {m : ℕ} (p : Fin m → ℤ) (x : ∀ k, (M.X (p k)).obj.obj (op V))
+    (y : ∀ k, (F.X (-p k)).obj.obj (op V)) (w : (I.X (-1)).obj.obj (op V))
+    (hd : ((M ⊗ F).d 0 1).hom.app _ (∑ k, (HomologicalComplex.ιTensorObj M F (p k) (-p k) 0
+      (by simp)).hom.app _ (tensorSectionMap _ _ _ (x k ⊗ₜ y k))) = 0)
+    (hs : (s.f 0).hom.app _ (∑ k, (HomologicalComplex.ιTensorObj M F (p k) (-p k) 0
+      (by simp)).hom.app _ (tensorSectionMap _ _ _ (x k ⊗ₜ y k))) =
+      (I.X 0).obj.map ((Scheme.ProEt.isTerminalMkId X).from V).op (singleUnitHomEquiv I φ).1 +
+        (I.d (-1) 0).hom.app _ w)
+    {L' : CochainComplex (Sheaf (Scheme.ProEt.topology V.left) (ModuleCat.{u + 1} Λ)) ℤ}
+    (ι : L' ⟶ ((V.hom)^*[ModuleCat.{u + 1} Λ].mapHomologicalComplex (.up ℤ)).obj M)
+    [∀ n, Mono (ι.f n)]
+    (x' : ∀ k, (L'.X (p k)).obj.obj (op (terminalProEt V.left)))
+    (hx' : ∀ k, (ι.f (p k)).hom.app _ (x' k) = (sectionTransport V (M.X (p k))).hom (x k)) :
+    ∃ r : Q.obj (((V.hom)^*[ModuleCat.{u + 1} Λ].mapHomologicalComplex (.up ℤ)).obj M) ⟶
+      Q.obj L', r ≫ Q.map ι = 𝟙 _ := by
+  have : WeaklyEtale V.hom := V.prop
+  let G := L((V.hom)^*[ModuleCat.{u + 1} Λ])
+  let GC := (V.hom)^*[ModuleCat.{u + 1} Λ].mapHomologicalComplex (.up ℤ)
+  let qX := HomotopyCategory.quotient (Sheaf (Scheme.ProEt.topology X)
+    (ModuleCat.{u + 1} Λ)) (.up ℤ)
+  let qV := HomotopyCategory.quotient (Sheaf (Scheme.ProEt.topology V.left)
+    (ModuleCat.{u + 1} Λ)) (.up ℤ)
+  let c' := (V.hom)^*[ModuleCat.{u + 1} Λ].leftDerivedFunctorCounit
+  let _ := monoidalLeftDerivedUpperStar (ModuleCat.{u + 1} Λ) V.hom
+  let _ := ExactPairing.map G K D
+  let F' := GC.obj F
+  let M' := GC.obj M
+  have hF'flat (n : ℤ) : ObjectProperty.flat (F'.X n) :=
+    Functor.PreservesFlat.flat_obj (F := (V.hom)^*[ModuleCat.{u + 1} Λ]) (hF n)
+  have hF'k : (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat (qV.obj F') :=
+    (HomotopyCategory.kFlat_quotient_obj_iff _).2 hF'
+  sorry
+
 end AlgebraicGeometry.ProEtale
