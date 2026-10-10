@@ -15,6 +15,7 @@ public import WeilConjectures.CategoryTheory.Sites.Point.Linear
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
@@ -119,14 +120,15 @@ stalk of `(AS_q)_* Λ` at `t ≫ AS_q` is the product of copies of `Λ` indexed 
 fibre, a `k`-torsor (`AlgebraicGeometry.Etale.exists_eq_comp_artinSchreierTranslation`), and a
 `Ψ`-isotypic germ is determined by its value at `t`. Since `AS_q` is surjective, `AS_q^*`
 reflects isomorphisms, so a morphism into `ℒ_χ` whose adjoint is an isomorphism is itself
-one; this gives `zero`, `one` and `mul`.
+one; this gives `zero`, `one` and `mul`. For `smul`, the scaling `[c]` is an automorphism of
+`𝔸¹_k` commuting with `AS_q`, so `[c]^* ≅ [c⁻¹]_*` carries the splitting of `e_Ψ` to a splitting
+of the conjugate idempotent, which is `e_{Ψ(c ·)}`.
 
 The isomorphisms `zero`, `add`, `one`, `mul` and `smul` are stated as `Nonempty` theorems
-rather than as `def`s. For `add` and `smul` this is because they are not yet constructed, and
-the repository does not allow a data `def` with a `sorry` body; `zero`, `one` and `mul` are
-constructed, and are still `Nonempty` only to keep the statements uniform until `add` and
-`smul` are done. All of them should become `def`s: the Fourier
-inversion and base change arguments need the specific rigidification
+rather than as `def`s. For `add` this is because it is not yet constructed, and the repository
+does not allow a data `def` with a `sorry` body; the others are constructed, and are still
+`Nonempty` only to keep the statements uniform until `add` is done. All of them should
+become `def`s: the Fourier inversion and base change arguments need the specific rigidification
 `ε_Ψ : Λ ≅ 0^* ℒ_Ψ` and the unique `m^* ℒ_Ψ ≅ u₁^* ℒ_Ψ ⊗ u₂^* ℒ_Ψ` restricting to it, with
 their coherences.
 
@@ -192,6 +194,49 @@ lemma artinSchreierTranslation_appTop_coord (a : k) :
       AffineSpace.coord _ PUnit.unit +
         (𝔸¹[k] ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv.hom a) :=
   AffineSpace.translation_appTop_coord _ _
+
+
+variable (k) in
+/-- The scaling `[c] : x ↦ c x` of the affine line `𝔸¹_k` by `c ∈ k`. -/
+def artinSchreierScaling (c : k) : 𝔸¹[k] ⟶ 𝔸¹[k] :=
+  AffineSpace.smul PUnit (Spec (.of k)) ((Scheme.ΓSpecIso (.of k)).inv.hom c)
+
+@[reassoc (attr := simp)]
+lemma artinSchreierScaling_over (c : k) :
+    artinSchreierScaling k c ≫ 𝔸¹[k] ↘ Spec (.of k) = 𝔸¹[k] ↘ Spec (.of k) :=
+  AffineSpace.smul_over _ _ _
+
+lemma artinSchreierScaling_appTop_coord (c : k) (i : PUnit) :
+    (artinSchreierScaling k c).appTop (AffineSpace.coord _ i) =
+      (𝔸¹[k] ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv.hom c) *
+        AffineSpace.coord _ i :=
+  AffineSpace.smul_appTop_coord _ _ _ _
+
+lemma artinSchreierScaling_one : artinSchreierScaling k 1 = 𝟙 _ :=
+  AffineSpace.hom_ext (by simp) fun _ ↦ by
+    simp [artinSchreierScaling_appTop_coord]
+
+/-- Scaling by `a b` is scaling by `a` followed by scaling by `b`. -/
+lemma artinSchreierScaling_mul (a b : k) :
+    artinSchreierScaling k (a * b) = artinSchreierScaling k a ≫ artinSchreierScaling k b := by
+  refine AffineSpace.hom_ext (by simp) fun _ ↦ ?_
+  simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, artinSchreierScaling_appTop_coord,
+    map_mul]
+  rw [← CommRingCat.comp_apply (𝔸¹[k] ↘ Spec (.of k)).appTop, ← Scheme.Hom.comp_appTop,
+    artinSchreierScaling_over]
+  ring
+
+/-- The scaling `[c]` conjugates translations: `σ_a ≫ [c] = [c] ≫ σ_{c a}`. -/
+lemma artinSchreierTranslation_comp_artinSchreierScaling (a c : k) :
+    artinSchreierTranslation k a ≫ artinSchreierScaling k c =
+      artinSchreierScaling k c ≫ artinSchreierTranslation k (c * a) := by
+  refine AffineSpace.hom_ext (by simp [artinSchreierTranslation]) fun _ ↦ ?_
+  simp only [artinSchreierTranslation, artinSchreierScaling, Scheme.Hom.comp_appTop,
+    CommRingCat.comp_apply, AffineSpace.smul_appTop_coord, AffineSpace.translation_appTop_coord,
+    map_mul, map_add]
+  simp only [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, AffineSpace.translation_over,
+    AffineSpace.smul_over]
+  ring
 
 instance (a : k) : IsIso (artinSchreierTranslation k a) :=
   ⟨artinSchreierTranslation k (-a), by
@@ -274,6 +319,23 @@ lemma etale_artinSchreierMap : Etale AS[k] :=
 
 instance : IsFinite AS[k] :=
   AffineSpace.isFinite_artinSchreierMap _ _ Fintype.one_lt_card.ne'
+
+/-- The scaling `[c]` commutes with the Artin–Schreier map, as `c ^ q = c`. -/
+@[reassoc]
+lemma artinSchreierScaling_comp_artinSchreierMap (c : k) :
+    artinSchreierScaling k c ≫ AS[k] = AS[k] ≫ artinSchreierScaling k c := by
+  refine AffineSpace.hom_ext (by simp [AffineSpace.artinSchreierMap_over]) fun _ ↦ ?_
+  simp only [artinSchreierScaling, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+    AffineSpace.smul_appTop_coord, AffineSpace.artinSchreierMap_appTop_coord, map_sub, map_pow,
+    map_mul]
+  simp only [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, AffineSpace.artinSchreierMap_over]
+  rw [mul_pow, ← map_pow, ← map_pow, FiniteField.pow_card]
+  ring
+
+instance (c : kˣ) : IsIso (artinSchreierScaling k c) :=
+  ⟨artinSchreierScaling k ↑c⁻¹, by
+    rw [← artinSchreierScaling_mul, Units.mul_inv, artinSchreierScaling_one],
+    by rw [← artinSchreierScaling_mul, Units.inv_mul, artinSchreierScaling_one]⟩
 
 /-- The origin is fixed by the Artin–Schreier map: `0 ^ q - 0 = 0`. -/
 lemma zeroSection_comp_artinSchreierMap :
@@ -789,17 +851,116 @@ theorem nonempty_iso_artinSchreierSheaf_mul (Ψ Ψ' : AddChar k Λ) :
   have := isIso_of_isIso_upperStar_map_artinSchreierMap Λ v
   exact ⟨asIso v⟩
 
+omit [Invertible (Fintype.card k : Λ)] in
+/-- The pushforward along the scaling `[c⁻¹]` carries the action of `σ_a` on `(AS_q)_* Λ` to that
+of `σ_{c⁻¹ a}`, through the identification `[c⁻¹]_* (AS_q)_* Λ ≅ (AS_q)_* Λ` pulling back
+sections along `[c]`. -/
+lemma lowerStar_map_artinSchreierTranslationAction_comp (c : kˣ) (a : k)
+    (hc : artinSchreierScaling k c ≫ AS[k] ≫ artinSchreierScaling k ↑c⁻¹ = AS[k]) :
+    (artinSchreierScaling k ↑c⁻¹)_*[ModuleCat Λ].map (artinSchreierTranslationAction Λ k a) ≫
+        (lowerStarComp _ AS[k] (artinSchreierScaling k ↑c⁻¹)
+          (AS[k] ≫ artinSchreierScaling k ↑c⁻¹) rfl).hom.app _ ≫
+        lowerStarConstantSheafMapOfOver (AS[k] ≫ artinSchreierScaling k ↑c⁻¹) AS[k]
+          (artinSchreierScaling k c) hc =
+      ((lowerStarComp _ AS[k] (artinSchreierScaling k ↑c⁻¹)
+          (AS[k] ≫ artinSchreierScaling k ↑c⁻¹) rfl).hom.app _ ≫
+        lowerStarConstantSheafMapOfOver (AS[k] ≫ artinSchreierScaling k ↑c⁻¹) AS[k]
+          (artinSchreierScaling k c) hc) ≫
+        artinSchreierTranslationAction Λ k (↑c⁻¹ * a) := by
+  rw [artinSchreierTranslationAction, artinSchreierTranslationAction,
+    lowerStarConstantSheafEndOfOver_eq_mapOfOver, lowerStarConstantSheafEndOfOver_eq_mapOfOver,
+    ← Category.assoc, lowerStar_map_lowerStarConstantSheafMapOfOver, Category.assoc,
+    Category.assoc, ← lowerStarConstantSheafMapOfOver_comp,
+    ← lowerStarConstantSheafMapOfOver_comp]
+  have hg : artinSchreierScaling k c ≫ artinSchreierTranslation k a =
+      artinSchreierTranslation k (↑c⁻¹ * a) ≫ artinSchreierScaling k c := by
+    rw [artinSchreierTranslation_comp_artinSchreierScaling, ← mul_assoc, Units.mul_inv, one_mul]
+  have e := lowerStarConstantSheafMapOfOver_congr (Λ := Λ)
+    (AS[k] ≫ artinSchreierScaling k ↑c⁻¹) AS[k] hg
+    (by rw [Category.assoc, artinSchreierTranslation_comp_artinSchreierMap_assoc, hc])
+    (by rw [Category.assoc, hc, artinSchreierTranslation_comp_artinSchreierMap])
+  rw [e]
+
 /-- The pullback of the Artin–Schreier sheaf along the scaling `[c] : x ↦ c x` by a unit
 `c ∈ kˣ` is the Artin–Schreier sheaf of the character `Ψ(c ·)`: `[c]^* ℒ_Ψ ≅ ℒ_{Ψ(c ·)}`.
 (sketch blueprint: `sk-lem-as-properties`) -/
 theorem nonempty_iso_artinSchreierSheaf_smul (Ψ : AddChar k Λ) (c : kˣ) :
     Nonempty ((AffineSpace.smul PUnit (Spec (.of k))
         ((Scheme.ΓSpecIso (.of k)).inv.hom c))^*[ModuleCat Λ].obj (artinSchreierSheaf Ψ) ≅
-      artinSchreierSheaf (Ψ.mulShift c)) :=
-  -- `[c]` commutes with `AS_q` since `c ^ q = c`, and it conjugates `σ_a` to `σ_{c a}`; so the
-  -- base change of `AS_q` along `[c]` is `AS_q` itself, and base change takes `e_Ψ` to
-  -- `e_{Ψ(c ·)}`
-  sorry
+      artinSchreierSheaf (Ψ.mulShift c)) := by
+  -- `[c]` is an isomorphism with inverse `[c⁻¹] =: n`, so `[c]^* ≅ n_*`; and `n_*` carries the
+  -- action of `σ_a` on `(AS_q)_* Λ` to that of `σ_{c⁻¹ a}`, as `[c]` commutes with `AS_q` and
+  -- conjugates `σ_{c⁻¹ a}` to `σ_a`; hence it carries `e_Ψ` to `e_{Ψ(c ·)}`
+  let n := artinSchreierScaling k ↑c⁻¹
+  let e : 𝔸¹[k] ≅ 𝔸¹[k] :=
+    { hom := n
+      inv := artinSchreierScaling k c
+      hom_inv_id := by rw [← artinSchreierScaling_mul, Units.inv_mul, artinSchreierScaling_one]
+      inv_hom_id := by rw [← artinSchreierScaling_mul, Units.mul_inv, artinSchreierScaling_one] }
+  have hc : artinSchreierScaling k c ≫ AS[k] ≫ n = AS[k] := by
+    rw [artinSchreierScaling_comp_artinSchreierMap_assoc, ← artinSchreierScaling_mul,
+      Units.mul_inv, artinSchreierScaling_one, Category.comp_id]
+  have hn : n ≫ AS[k] = AS[k] ≫ n := artinSchreierScaling_comp_artinSchreierMap _
+  let Φ : (n)_*[ModuleCat Λ].obj 𝒫[Λ, k] ⟶ 𝒫[Λ, k] :=
+    (lowerStarComp _ AS[k] n (AS[k] ≫ n) rfl).hom.app _ ≫
+      lowerStarConstantSheafMapOfOver (AS[k] ≫ n) AS[k] (artinSchreierScaling k c) hc
+  let Φ' : 𝒫[Λ, k] ⟶ (n)_*[ModuleCat Λ].obj 𝒫[Λ, k] :=
+    lowerStarConstantSheafMapOfOver AS[k] (AS[k] ≫ n) n hn ≫
+      (lowerStarComp _ AS[k] n (AS[k] ≫ n) rfl).inv.app _
+  have hΦΦ' : Φ ≫ Φ' = 𝟙 _ := by
+    simp only [Φ, Φ', Category.assoc]
+    rw [← Category.assoc (lowerStarConstantSheafMapOfOver _ _ _ hc),
+      ← lowerStarConstantSheafMapOfOver_comp,
+      lowerStarConstantSheafMapOfOver_of_eq_id _ (by
+        rw [← artinSchreierScaling_mul, Units.inv_mul, artinSchreierScaling_one]),
+      Category.id_comp]
+    exact Iso.hom_inv_id_app _ _
+  have hΦ'Φ : Φ' ≫ Φ = 𝟙 _ := by
+    simp only [Φ, Φ', Category.assoc, Iso.inv_hom_id_app_assoc]
+    rw [← lowerStarConstantSheafMapOfOver_comp,
+      lowerStarConstantSheafMapOfOver_of_eq_id _ (by
+        rw [← artinSchreierScaling_mul, Units.mul_inv, artinSchreierScaling_one])]
+  have hconj (a : k) : (n)_*[ModuleCat Λ].map (artinSchreierTranslationAction Λ k a) ≫ Φ =
+      Φ ≫ artinSchreierTranslationAction Λ k (↑c⁻¹ * a) :=
+    lowerStar_map_artinSchreierTranslationAction_comp c a hc
+  have key : (n)_*[ModuleCat Λ].map (artinSchreierIdempotent Ψ) ≫ Φ =
+      Φ ≫ artinSchreierIdempotent (Ψ.mulShift c) := by
+    simp only [artinSchreierIdempotent, Functor.map_sum, Functor.map_smul, Preadditive.sum_comp,
+      Linear.smul_comp, hconj, Preadditive.comp_sum, Linear.comp_smul]
+    refine Fintype.sum_equiv (Units.mulLeft c⁻¹) _ _ fun a ↦ ?_
+    simp only [Units.mulLeft_apply, AddChar.mulShift_apply]
+    congr 3
+    rw [mul_neg, ← mul_assoc, Units.mul_inv, one_mul]
+  -- the splitting `ℒ_{Ψ(c ·)}` of `e_{Ψ(c ·)}` is `[c⁻¹]_* ℒ_Ψ`
+  let s₁ := (n)_*[ModuleCat Λ].map (image.ι (artinSchreierIdempotent Ψ))
+  let r₁ := (n)_*[ModuleCat Λ].map (factorThruImage (artinSchreierIdempotent Ψ))
+  have hsr₁ : s₁ ≫ r₁ = 𝟙 _ := by
+    rw [← Functor.map_comp, image_ι_comp_factorThruImage_artinSchreierIdempotent,
+      CategoryTheory.Functor.map_id]
+  have hrs₁ : r₁ ≫ s₁ = (n)_*[ModuleCat Λ].map (artinSchreierIdempotent Ψ) := by
+    rw [← Functor.map_comp, image.fac]
+  let s₂ := image.ι (artinSchreierIdempotent (Ψ.mulShift c))
+  let r₂ := factorThruImage (artinSchreierIdempotent (Ψ.mulShift c))
+  have hsr₂ : s₂ ≫ r₂ = 𝟙 _ := image_ι_comp_factorThruImage_artinSchreierIdempotent _
+  have hrs₂ : r₂ ≫ s₂ = artinSchreierIdempotent (Ψ.mulShift c) := image.fac _
+  have key' : Φ ≫ r₂ ≫ s₂ = r₁ ≫ s₁ ≫ Φ := by
+    rw [hrs₂, ← Category.assoc, hrs₁, key]
+  refine ⟨(upperStarInvIsoLowerStarHom _ e).app _ ≪≫
+    { hom := s₁ ≫ Φ ≫ r₂
+      inv := s₂ ≫ Φ' ≫ r₁
+      hom_inv_id := ?_
+      inv_hom_id := ?_ }⟩
+  · have : Φ ≫ r₂ ≫ s₂ ≫ Φ' = r₁ ≫ s₁ := by
+      rw [← Category.assoc r₂, ← Category.assoc, key', Category.assoc, Category.assoc, hΦΦ',
+        Category.comp_id]
+    simp only [Category.assoc]
+    rw [reassoc_of% this, ← Category.assoc, hsr₁]
+    exact Category.comp_id _
+  · have : Φ' ≫ r₁ ≫ s₁ ≫ Φ = r₂ ≫ s₂ := by
+      rw [← key', ← Category.assoc, hΦ'Φ, Category.id_comp]
+    simp only [Category.assoc]
+    rw [reassoc_of% this, ← Category.assoc s₂, hsr₂]
+    rfl
 
 /-- The inverse of `ℒ_Ψ` is `ℒ_{Ψ⁻¹}`.
 (sketch blueprint: `sk-lem-as-properties`) -/

@@ -1223,6 +1223,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
