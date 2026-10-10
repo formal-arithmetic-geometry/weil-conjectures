@@ -23,9 +23,60 @@
   "def-pc-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because X is quasi-compact, choose finitely many affine opens covering X\\setminus U and induct on their number. The induction reduces to X=U\\cup V with V affine; restriction to the smaller overlaps preserves quasi-compactness and all hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IM (Lemma 36.13.11), proof, first paragraph"
+   }
+  },
+  {
+   "text": "On the affine open V, apply the affine support-extension lemma [lem-sc-affine-perfect-support-extension] to P|_{U\\cap V} and T\\cap V. It gives a perfect Q on V supported on T\\cap V and an isomorphism Q|_{U\\cap V}\\simeq(P\\oplus P[1])|_{U\\cap V}. Compose this with projection to P|_{U\\cap V} and the given map \\alpha to obtain a map Q|_{U\\cap V}\\to E|_{U\\cap V}.",
+   "uses": [
+    "lem-sc-affine-perfect-support-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IM (Lemma 36.13.11), proof"
+   }
+  },
+  {
+   "text": "Apply the affine perfect-map lifting lemma [lem-sc-affine-perfect-map-lift] on V to replace Q by Q'=Q\\otimes^L I, still perfect and supported on T\\cap V, so that the map Q'|_{U\\cap V}\\to E|_{U\\cap V} lifts to a morphism Q'\\to E|_V.",
+   "uses": [
+    "lem-sc-affine-perfect-map-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IM (Lemma 36.13.11), proof"
+   }
+  },
+  {
+   "text": "Let a:P\\oplus P[1]\\to E|_U be \\alpha\\circ\\mathrm{pr}_P (zero on P[1]). Compose the isomorphism Q|_{U\\cap V}\\simeq(P\\oplus P[1])|_{U\\cap V} from Step 2 with the inverse of \\beta|_{U\\cap V}:Q'|_{U\\cap V}\\to Q|_{U\\cap V} to identify Q'|_{U\\cap V} with (P\\oplus P[1])|_{U\\cap V}; the map \\gamma|_V from Step 3 is compatible with a on the overlap by its defining lifting equation. Apply [lem-sc-derived-open-gluing] to these two objects, this transition isomorphism, and the maps a and \\gamma. It gives R and \\beta:R\\to E restricting (up to the gluing isomorphisms) to a and \\gamma. Perfectness and support on T are local on U\\cup V, so R is perfect and supported on T because P\\oplus P[1] and Q' are. The inclusion P\\to P\\oplus P[1] and projection P\\oplus P[1]\\to P exhibit P as a direct summand of R|_U, and the definition of a gives the required compatibility with \\alpha and \\beta|_U.",
+   "uses": [
+    "lem-sc-derived-open-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IM (Lemma 36.13.11), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-perfect-support-extension",
+  "lem-sc-affine-perfect-map-lift",
+  "lem-sc-derived-open-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IM (Lemma 36.13.11)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +108,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-proper-flat-right-adjoint-open-support",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-support-map-lift",
+  "worker": "stage1",
+  "summary": "Split Tag 09IM into the finite affine-cover reduction, the affine supported-extension input 08EK, the affine map-lifting input 08EH, and derived gluing input 08DG. The target statement and hypotheses were retained exactly; three statement-only child nodes record the non-elementary inputs.",
+  "blueprint": "Realizes the proper-flat support proof clause of lem-sc-finite-duality through the map-lifting lemma used by lem-sc-proper-flat-right-adjoint-open-support."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-psm2437",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psm2437 (reviewer sub-agent of L); spot-checked: Item statement unchanged vs sheaf-dag and matches 09IM (qc complement = retro-compact on qcqs X); citer lem-sc-proper-flat-right-adjoint-open-support uses T=X, E=a(Q) in D_QCoh: hypotheses match (C4). Steps 1-4 checked vs 09IM proof: 08EK applied on V with T cap V (V minus T qc by quasi-separatedness), 08EH on V with U cap V, A=Q, E'=E|_V, support kept via tensor clause; 08DG gluing transition and compatibility a|=gamma|o c correct; summand/compatibility follow. No Koszul/ideal-power restatement in the item (those live inside 08EK/08EH, cited as statements); no lem-pc-koszul-* nodes exist; no existing node states 08EH/08EK/08DG (git grep of tags, gluing, F oplus F[1]); Mathlib has no perfect complexes/derived gluing (grep slopmaster2 mathlib: no IsPerfect/PerfectComplex). FIX more, RETURN less: B3 lem-sc-affine-perfect-map-lift statement declared an unused object E ('E and E' be objects') and wrote alpha|_U for a map already on U; removed E, wrote alpha=gamma|_U o (beta|_U)^{-1}, and stated beta is induced by I->O_X as in 08EH.; 1 file(s) fixed by the reviewer"
+ }
 }
