@@ -1,0 +1,86 @@
+{
+ "id": "lem-pc-base-change-closure-components",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-ample-positive-degree",
+   "place": "proof, part (⇐): 'and $X_{\\bar k}$ is a smooth projective curve over the algebraically closed field $\\bar k$ (smooth ... integral by [lem-pc-h0-geom-connected] and the regularity (reducedness) argument of [prop-pc-xk-integral] ... so $X_{\\bar k}$ is connected, normal and reduced and hence integral)': the claim that X_{\\bar k} is connected is false unless H^0(X,O_X)=k; this node states what is true (the components of X_{\\bar k} and their degrees)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Components of a smooth projective curve over an algebraic closure",
+ "statement": "Let $k$ be a field [def-weil-field], $X$ a smooth projective curve over $k$ [def-pc-smooth-projective-curve], and $k':=\\Gamma(X,\\mathcal O_X)$, a $k$-algebra through the structure morphism $X\\to\\operatorname{Spec}k$. Let $\\Omega$ be an algebraically closed field [def-weil-algebraic-closure] containing $k$, let $X_\\Omega:=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\Omega$ with projection $p:X_\\Omega\\to X$ [def-pc-base-change]. Then:\n\n1. $k'$ is a field, finite and separable over $k$ [def-pc-field-extension] [def-weil-pbc-separable-field-extension]; put $r:=[k':k]\\geq1$.\n1. $X_\\Omega$ is the disjoint union $X_1\\amalg\\cdots\\amalg X_r$ of $r$ nonempty open and closed subschemes, and each $X_j$ is a proper smooth connected curve over $\\Omega$ in the sense of [def-sc-curves]: separated, of finite type, smooth [def-sbc-smooth-morphisms] and proper [def-weil-proper-morphism] over $\\Omega$, connected [def-weil-connected-scheme] and of dimension one [def-pc-dimension]; moreover $\\Gamma(X_j,\\mathcal O_{X_j})=\\Omega$.\n1. For every invertible $\\mathcal O_X$-module $\\mathcal L$ [def-sc-invertible-module] and every $j$, with $\\mathcal L_j:=(p^*\\mathcal L)|_{X_j}$ [def-pc-module-pullback], one has\n$$r\\cdot\\deg_{X_j}(\\mathcal L_j)=\\deg_X(\\mathcal L),$$\nwhere $\\deg_{X_j}$ and $\\deg_X$ are the degrees $\\chi(\\mathcal L_j)-\\chi(\\mathcal O_{X_j})$ over $\\Omega$ and $\\chi(\\mathcal L)-\\chi(\\mathcal O_X)$ over $k$ of [def-pc-degree-line-bundle].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma 0BUG (lemma-proper-geometrically-reduced-global-sections), parts (1), (3), (4), for (1); Lemma 0FD1 (lemma-baby-stein) and its proof (the factors $\\kappa(s_i)\\otimes_k\\overline k\\to\\overline k$) for (2); (3) is written by an agent: $\\chi$ over $k$ is $r$ times $\\chi$ over $k'$ (same cohomology groups), and each $X_j=X\\times_{k',\\sigma_j}\\Omega$ has the $\\chi$ over $k'$ by flat base change (Cohomology of Schemes, Lemma 02KH)"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-smooth-projective-curve",
+  "def-weil-algebraic-closure",
+  "def-pc-base-change",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-field-extension",
+  "def-sc-curves",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-weil-connected-scheme",
+  "def-pc-dimension",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections of proper geometrically reduced scheme over field separable extension",
+   "results": "service error HTTP 500 (also via https://leansearch.net/search with curl at 14:08 UTC); no result",
+   "date": "2026-10-10",
+   "verdict": "no verdict from this tool (service down); see the other two kinds"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change of a proper scheme over k to algebraic closure decomposes into connected components indexed by embeddings of H^0(X,O_X)",
+   "results": "AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.finite_appTop_of_universallyClosed (Mathlib.AlgebraicGeometry.Morphisms.Proper), AlgebraicGeometry.compactSpace_of_universallyClosed, Scheme.Pullback.Triplet.instNontrivialCarrierTensor, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib has that Gamma of a universally closed integral K-scheme is a field finite over K (part of (1) without separability), nothing on the decomposition of X_Omega or on degrees"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'IsSeparable' Mathlib/AlgebraicGeometry; grep -rn 'GeometricallyConnected' Mathlib/AlgebraicGeometry (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "IsSeparable occurs only in AlgebraicGeometry/Morphisms/FormallyUnramified.lean (unrelated); GeometricallyConnected is defined in AlgebraicGeometry/Geometrically/Connected.lean, no lemma on global sections or components of the base change; no Euler characteristic or degree of invertible modules in Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "slopmaster2 WeilConjectures: grep -rn 'GlobalSectionsBijective\\|GeometricallyConnected\\|IsSeparable' (rule 0)",
+   "results": "GeometricallyConnected.of_universallyClosed_of_section (GeometricallyConnected.lean), GeometricallyIrreducible.of_smooth_of_geometricallyConnected (Regular.lean); nothing stating (1)-(3)",
+   "date": "2026-10-10",
+   "verdict": "no slopmaster2 declaration states this node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-ample-positive-degree",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

@@ -113,3 +113,7 @@ The blueprint node says: for a proper smooth curve $C$ over an algebraically clo
 ## Sorry map: the `ts` flag is unusable (2026-10-10 14:06 UTC)
 
 In `local/sorry_map_slopmaster2_71d63dcf.jsonl.gz` the transitive flag `ts` is false on every one of the 32094 entries (425 have `s` true), so `tools/sorry_map.lean` does not compute it. `tools/lean_status.py` and the lead's attachment check follow the `d` edges themselves and are unaffected; the reviewer brief now says to use that check and not `ts`. To be fixed in sorry_map.lean at the next refresh.
+
+## Blueprint proof error: lem-pc-ample-positive-degree (2026-10-10 14:13 UTC)
+
+The blueprint's proof of "deg > 0 implies ample" for a smooth projective curve $X$ over a field $k$ claims that $X_{\bar k}$ is connected and integral. False without $H^0(X,\mathcal O_X)=k$: $X=\mathbf P^1_{k'}$ viewed over $k$ with $k'/k$ separable of degree 2 becomes two disjoint lines over $\bar k$. The statement itself (Stacks 0B5X) is true; the split proves it in general through the components of $X_{\bar k}$ (new node lem-pc-base-change-closure-components) and very ampleness on a finite clopen decomposition. The blueprint's external tag 01IQ was wrong (0B5X). The Lean isAmple_iff_degree_pos assumes $H^0=k$ (GlobalSectionsBijective) and proper rather than projective.
