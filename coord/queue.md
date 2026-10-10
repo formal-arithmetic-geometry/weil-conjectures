@@ -1,8 +1,8 @@
 # Work queue
 
-912 items; claim with `tools/claim.py next <group> [--stage N]`.
+911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (325)
+## Stage 1: nodes to split (323)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,15 +15,14 @@
 | `lem-weil-pbc-affine-etale-site-base-change` | 2011 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-sc-affine-finite-projective-prime-membership` | 2013 | none |
-| `lem-sc-affine-standard-cover-finite-projective` | 2013 | none |
 | `lem-sc-ample-proj-open` | 2013 | none |
 | `lem-sc-jacobson-denominator-function-field` | 2013 | none |
 | `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
+| `lem-sc-affine-standard-cover-finite-presentation-flat` | 2014 | none |
 | `lem-sc-boundary-cech-compatibility` | 2014 | none |
 | `lem-sc-cech-h1-injective` | 2014 | none |
 | `lem-sc-tensor-generating-sections` | 2014 | none |
 | `lem-sc-zariski-ext-torsor` | 2014 | none |
-| `lem-sc-affine-section-localization` | 2015 | none |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 2015 | none |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
@@ -36,7 +35,6 @@
 | `thm-sc-proper-finite-fibre-finite-neighbourhood` | 3011 | none |
 | `def-sc-scheme-tangent-space` | 3012 | none |
 | `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 3012 | none |
-| `lem-sc-rational-tangent-cotangent-duality` | 3012 | none |
 | `def-sc-sheaf-cohomology-functor` | 3013 | none |
 | `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
 | `lem-pc-proper-geometrically-reduced-global-sections-separable` | 3013 | none |
@@ -45,8 +43,8 @@
 | `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-functoriality` | 3013 | none |
 | `lem-sc-p1-regular-dimension-one` | 3013 | none |
+| `lem-sc-rational-point-tangent-derivation-identification` | 3013 | none |
 | `lem-weil-pbc-ringed-site-module-sheafification-exact` | 3013 | none |
-| `lem-pc-field-extension-flat` | 3014 | none |
 | `lem-pc-field-extension-quasi-compact` | 3014 | none |
 | `lem-pc-field-extension-surjective` | 3014 | none |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
@@ -332,7 +330,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (587)
+## Stage 2: nodes to state (588)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -414,6 +412,7 @@
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-open-finite-complement` | 1 | state |
+| `lem-sc-affine-standard-cover-finite-projective` | 1 | state |
 | `lem-sc-closed-affine-union-affine` | 1 | state |
 | `lem-sc-determinant-short-exact` | 1 | state |
 | `lem-sc-dim-one-point-outside-open-closed` | 1 | state |
@@ -924,7 +923,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 343 nodes that wait for stage 1, 1198 nodes that wait for a statement dependency.
+Not open yet: 341 nodes that wait for stage 1, 1200 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
