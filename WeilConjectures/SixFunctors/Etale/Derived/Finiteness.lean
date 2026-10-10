@@ -7,6 +7,7 @@ module
 
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.NumberTheory.Padics.Complex
+public import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
@@ -335,6 +336,50 @@ theorem isZero_homology_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactificati
 
 end Finiteness
 
+/-- The compactly supported direct image `Rf_!` of a sheaf placed in degree `0` is concentrated in
+degrees `≥ 0`: it is `Rg_*` of the extension by zero `i_! F` placed in degree `0`, for the chosen
+compactification `X ⟶[i] Z ⟶[g] Y` of `f`. -/
+lemma isGE_rightDerivedLowerShriek_obj_singleFunctor (f : X ⟶ Y) [HasCompactification f]
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    ((R(f)_![ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F)).IsGE
+      0 := by
+  let c := HasCompactification.compactification f
+  have : ((R((c.g)_*[ModuleCat.{u + 1} Λ])).obj
+      ((((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙ _root_.DerivedCategory.singleFunctor _ 0).obj
+        F)).IsGE 0 :=
+    ((c.g)_*[ModuleCat.{u + 1} Λ]).isGE_rightDerivedFunctor_obj_singleFunctor
+      (((c.i)_!open[ModuleCat.{u + 1} Λ]).obj F)
+  exact _root_.DerivedCategory.TStructure.t.isGE_of_iso
+    ((R((c.g)_*[ModuleCat.{u + 1} Λ])).mapIso
+      ((((c.i)_!open[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app F).symm) 0
+
+/-- `Rf_!` carries a bounded object concentrated in degrees `≥ a` into degrees `≥ a`. -/
+lemma isGE_rightDerivedLowerShriek_obj (f : X ⟶ Y) [HasCompactification f]
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hM : _root_.DerivedCategory.TStructure.t.bounded M) (a : ℤ) [M.IsGE a] :
+    ((R(f)_![ModuleCat.{u + 1} Λ]).obj M).IsGE a := by
+  simpa using _root_.DerivedCategory.isGE_obj_of_isGE (R(f)_![ModuleCat.{u + 1} Λ]) 0
+    (isGE_rightDerivedLowerShriek_obj_singleFunctor Λ f) M hM a
+
+/-- The projection formula at finite coefficients against a sheaf placed in degree `0`:
+`Rf_! K ⊗ᴸ G ≅ Rf_!(K ⊗ᴸ f^* G)`. -/
+lemma nonempty_iso_tensor_singleFunctor_obj_rightDerivedLowerShriek [Finite Λ] (f : X ⟶ Y)
+    [HasCompactification f]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Nonempty (((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj
+        ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)).obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj G) ≅
+      (R(f)_![ModuleCat.{u + 1} Λ]).obj (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj
+          ((f)^*[ModuleCat.{u + 1} Λ].obj G)))) := by
+  obtain ⟨e⟩ := nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f
+    K (hasProjectionFormula_of_finite Λ f K)
+  exact ⟨e.app _ ≪≫ (R(f)_![ModuleCat.{u + 1} Λ]).mapIso
+    (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso
+      ((leftDerivedUpperStarIsoMapDerivedCategory _ f).app _ ≪≫
+        (((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app G))⟩
+
 section Perfectness
 
 variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
@@ -385,20 +430,52 @@ theorem finite_compactlySupportedCohomology
   exact Module.Finite.equiv ((homologyRightDerivedGlobalSectionsIsoOfIsSepClosed q).app
     ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)).symm.toLinearEquiv
 
+omit [IsSeparated aX] in
 /-- Blueprint `sk-prop-sf-trace-perfectness`: Perfectness of compact cohomology and of
 geometric stalks
 
 **Finite Tor amplitude of compactly supported cohomology.** In the situation of
 `AlgebraicGeometry.Etale.isZero_compactlySupportedCohomology_of_lt`, the complex of
-`Λ`-modules `RΓ_c(X, K)` has finite Tor amplitude: by the projection formula
-`RΓ_c(X, K) ⊗ᴸ M ≅ RΓ_c(X, K ⊗ᴸ M_X)` for a `Λ`-module `M`, and the cohomological amplitude of
-`Ra_{X!}` on complexes of Tor amplitude in a fixed interval. -/
+`Λ`-modules `RΓ_c(X, K)` has finite Tor amplitude. If `K` has Tor amplitude in `[a, b]` and
+the geometric fibres of `a_X` have dimension `≤ d`, then for every sheaf `F` on `Spec k` the
+projection formula gives `Ra_{X!} K ⊗ᴸ F ≅ Ra_{X!}(K ⊗ᴸ a_X^* F)`, which is concentrated in
+degrees `[a, b + 2d]` (`Ra_{X!}` is left t-exact and has cohomological amplitude `2d`). So
+`Ra_{X!} K` has Tor amplitude in `[a, b + 2d]`, and so has `RΓ_c(X, K)`, global sections over
+the separably closed `k` being a stalk. -/
 theorem finiteTorAmplitude_compactlySupportedGlobalSections
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
     _root_.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ)
-      ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K) :=
-  sorry
+      ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K) := by
+  obtain ⟨-, a, b, hab⟩ := hK
+  have := noetherianSpace_of_hasCompactification aX (𝟙 (Spec (.of k)))
+  have : QuasiCompact aX := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le_of_isPullback aX
+  refine ⟨a, b + 2 * d, torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed fun F ↦ ?_⟩
+  obtain ⟨e⟩ := nonempty_iso_tensor_singleFunctor_obj_rightDerivedLowerShriek Λ aX K F
+  -- `M = K ⊗ᴸ a^* F` is concentrated in degrees `[a, b]`
+  let M := ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj
+    ((_root_.DerivedCategory.singleFunctor _ 0).obj ((aX)^*[ModuleCat.{u + 1} Λ].obj F))
+  obtain ⟨hMa, hMb⟩ := hab ((aX)^*[ModuleCat.{u + 1} Λ].obj F)
+  have : M.IsGE a := hMa
+  have : M.IsLE b := hMb
+  have hM : _root_.DerivedCategory.TStructure.t.bounded M := ⟨⟨a, this⟩, ⟨b, hMb⟩⟩
+  have := isGE_rightDerivedLowerShriek_obj Λ aX M hM a
+  -- `Ra_!` sends `M` into degrees `≤ b + 2d`
+  have : ((R(aX)_![ModuleCat.{u + 1} Λ]).obj M).IsLE (b + 2 * d) := by
+    by_cases hX : IsEmpty X
+    · exact _root_.DerivedCategory.TStructure.t.isLE_of_isZero
+        (Functor.map_isZero _ (isZero_derivedCategory_of_isEmpty (ModuleCat.{u + 1} Λ) X M)) _
+    have : Nonempty X := not_isEmpty_iff.1 hX
+    have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
+    refine _root_.DerivedCategory.isLE_obj_of_isLE (R(aX)_![ModuleCat.{u + 1} Λ]) (2 * d)
+      (fun F ↦ ?_) M hM b
+    rw [_root_.DerivedCategory.isLE_iff]
+    exact fun i hi ↦ isZero_homology_rightDerivedLowerShriek_singleFunctor_obj Λ aX aX (𝟙 _)
+      (Category.comp_id _) d (fun Ω _ _ s ↦ hd Ω s _ _ (IsPullback.of_hasPullback aX s)) F i
+      (by lia)
+  exact ⟨_root_.DerivedCategory.TStructure.t.isGE_of_iso e.symm a,
+    _root_.DerivedCategory.TStructure.t.isLE_of_iso e.symm (b + 2 * d)⟩
 
 end Perfectness
 
