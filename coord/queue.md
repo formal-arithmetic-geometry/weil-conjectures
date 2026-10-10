@@ -2,7 +2,7 @@
 
 912 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (646)
+## Stage 1: nodes to split (645)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-spectral-limit-descend-opens` | 1012 | none |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1012 | none |
 | `lem-weil-pbc-split-extension-free-presentation` | 1012 | none |
 | `lem-weil-pbc-standard-smooth-include-generators` | 1012 | none |
@@ -653,7 +652,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (266)
+## Stage 2: nodes to state (267)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -892,6 +891,7 @@
 | `lem-weil-pbc-spectral-directed-limit-finite-sober` | 1 | state |
 | `lem-weil-pbc-spectral-directed-limit-spectral` | 1 | state |
 | `lem-weil-pbc-spectral-generalizations-of-quasi-compact` | 1 | state |
+| `lem-weil-pbc-spectral-limit-descend-opens` | 1 | state |
 | `lem-weil-pbc-spectral-proconstructible-closure-specialization` | 1 | state |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state |
 | `lem-weil-pbc-split-injection-after-completion` | 1 | state |
@@ -924,7 +924,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 658 nodes that wait for stage 1, 549 nodes that wait for a statement dependency.
+Not open yet: 657 nodes that wait for stage 1, 549 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
