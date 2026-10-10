@@ -2461,3 +2461,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:57 L: split lem-pc-ringed-space-module-stalk-tensor by copying the ringed-space-general proof of lem-weil-pbc-module-stalk-tensor (tool use: lem-weil-pbc-filtered-colimit-tensor-varying-rings); the scheme node is now its special case
 - 19:59 L: returned deliver/E1/lem-weil-pbc-gm-pullback-strict-henselization (reviewer RETURN: R-gps2124. 1 (D1/C1): Step 2 applies lem-weil-pbc-units-continuity-qcqs-limit to the system X_V, which identifies only G)
 - 19:59 L: merged deliver/J1/lem-pc-derived-filtered-free-resolution (reviewer FIX; after a return; new nodes: 2)
+- 19:59 L: merged deliver/C1/lem-sc-krull-akizuki-noetherian (reviewer PASS; first push; new nodes: 1)
