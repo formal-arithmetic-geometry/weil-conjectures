@@ -157,6 +157,7 @@ def RingHom.dualSubringMap (α : R →+* A) (α' : R' →+* A') (ρR : R →+* R
     exact (RingHom.congr_fun h r).symm
 
 
+@[simp]
 lemma RingHom.coe_dualSubringMap (α : R →+* A) (α' : R' →+* A') (ρR : R →+* R') (ρ : A →+* A')
     (h : ρ.comp α = α'.comp ρR) (z : α.dualSubring) :
     (RingHom.dualSubringMap α α' ρR ρ h z : DualNumber A') = DualNumber.map ρ z :=
@@ -252,4 +253,81 @@ lemma Subring.isLocalization_away_of_le (ρ : A →+* A') (s : A)
     obtain ⟨n, hn⟩ := IsLocalization.Away.exists_of_eq (S := A') s h1
     exact ⟨n, Subtype.ext (by simpa using hn)⟩
 
+
+/-- If `α : R →+* A` is integral and `s ⊆ A` is finite, then `R →+* closure (α(R) ∪ s)` is
+finite. -/
+lemma RingHom.finite_codRestrict_closure (α : R →+* A) (hα : α.IsIntegral) (B : Subring A)
+    {s : Set A} (hs : s.Finite) (hB : B = Subring.closure (Set.range α ∪ s))
+    (h : ∀ r, α r ∈ B) : (α.codRestrict B h).Finite := by
+  subst hB
+  let := α.toAlgebra
+  have hfin := Algebra.finite_adjoin_of_finite_of_isIntegral hs (fun x _ ↦ hα x)
+  have heq : (Algebra.adjoin R s).toSubring = Subring.closure (Set.range α ∪ s) :=
+    Algebra.adjoin_eq_ring_closure s
+  revert h
+  rw [← heq]
+  intro h
+  exact hfin
 end Ring
+
+namespace AlgebraicGeometry.Scheme.AffineZariskiSite
+
+open TrivSqZeroExt
+
+variable {S : Scheme.{u}} {F : S.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u}}
+  {α : (toOpensFunctor S).op ⋙ S.presheaf ⟶ F}
+
+lemma comp_hom_eq_of_naturality {U V : S.AffineZariskiSiteᵒᵖ} (i : U ⟶ V) :
+    (F.map i).hom.comp (α.app U).hom =
+      (α.app V).hom.comp (S.presheaf.map ((toOpensFunctor S).op.map i)).hom :=
+  congrArg CommRingCat.Hom.hom (α.naturality i).symm
+
+variable (α) in
+/-- The quasi-coherent `𝒪_S`-algebra `𝒪_S + ε F ⊆ F[ε]` attached to a quasi-coherent
+`𝒪_S`-algebra `F`. Its quasi-coherent ideals contained in `ε F` are the quasi-coherent
+`𝒪_S`-submodules of `F`. -/
+@[simps]
+noncomputable def dualAlg : S.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} where
+  obj U := .of (α.app U).hom.dualSubring
+  map {U V} i := CommRingCat.ofHom (RingHom.dualSubringMap (α.app U).hom (α.app V).hom
+    (S.presheaf.map ((toOpensFunctor S).op.map i)).hom (F.map i).hom
+    (comp_hom_eq_of_naturality i))
+  map_id U := by
+    ext z <;> simp [RingHom.coe_dualSubringMap]
+  map_comp {U V W} i j := by
+    ext z <;> simp [RingHom.coe_dualSubringMap]
+
+variable (α) in
+/-- The structure morphism `𝒪_S ⟶ 𝒪_S + ε F`. -/
+@[simps]
+noncomputable def dualAlgMap : (toOpensFunctor S).op ⋙ S.presheaf ⟶ dualAlg α where
+  app U := CommRingCat.ofHom (α.app U).hom.toDualSubring
+  naturality {U V} i := by
+    refine CommRingCat.hom_ext (RingHom.ext fun r ↦ Subtype.ext (TrivSqZeroExt.ext ?_ ?_))
+    · change (α.app V).hom ((S.presheaf.map _).hom r) = (F.map i).hom ((α.app U).hom r) + 0
+      rw [add_zero]
+      exact ConcreteCategory.congr_hom (α.naturality i) r
+    · change (0 : F.obj V) = 0 + (F.map i).hom 0
+      simp
+
+variable (α) in
+/-- The projection `𝒪_S + ε F ⟶ F` onto the first component. -/
+@[simps]
+noncomputable def dualAlgFst : dualAlg α ⟶ F where
+  app U := CommRingCat.ofHom ((fstHom ℤ _ _).toRingHom.comp (α.app U).hom.dualSubring.subtype)
+  naturality {U V} i := by
+    refine CommRingCat.hom_ext (RingHom.ext fun z ↦ ?_)
+    change (DualNumber.map (F.map i).hom z.1).fst = _
+    exact DualNumber.fst_map _ _
+
+lemma dualAlgMap_comp_dualAlgFst : dualAlgMap α ≫ dualAlgFst α = α := by
+  ext U r
+  rfl
+
+lemma coequifibered_dualAlgMap (H : α.Coequifibered) : (dualAlgMap α).Coequifibered := by
+  refine coequifibered_iff_forall_isLocalizationAway.mpr fun U r ↦ ?_
+  have hR : IsLocalization.Away r Γ(S, S.basicOpen r) := U.2.isLocalization_basicOpen r
+  exact RingHom.isLocalization_dualSubringMap _ _ _ _ (comp_hom_eq_of_naturality _) r hR
+    (coequifibered_iff_forall_isLocalizationAway.mp H U r)
+
+end AlgebraicGeometry.Scheme.AffineZariskiSite
