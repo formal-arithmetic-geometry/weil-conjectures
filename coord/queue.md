@@ -1,8 +1,8 @@
 # Work queue
 
-926 items; claim with `tools/claim.py next <group> [--stage N]`.
+928 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (212)
+## Stage 1: nodes to split (214)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -48,13 +48,15 @@
 | `lem-sc-regular-meromorphic-section-exists` | 5010 | none |
 | `lem-pc-fppf-affine-refinement` | 5011 | none |
 | `lem-pc-flat-sheaf-stalk-flat` | 5012 | none |
-| `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
 | `lem-pc-bounded-above-flat-kflat-site` | 5013 | none |
 | `lem-pc-finite-flat-proper-support-descent` | 5013 | none |
 | `lem-pc-kflat-cone-direct-sum` | 5013 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-sheaf-modules-tensor-closed` | 5013 | none |
+| `lem-pc-sites-modules-coproduct-flat` | 5013 | none |
+| `lem-pc-sites-modules-j-shriek-flat` | 5013 | none |
+| `lem-pc-sites-modules-quotient-j-shriek` | 5013 | none |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 6005 | none |
 | `lem-sp-horseshoe-prescribed-resolutions` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
@@ -938,7 +940,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1421 nodes that wait for a statement dependency, 249 nodes that wait for stage 1.
+Not open yet: 1422 nodes that wait for a statement dependency, 251 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
