@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sbc-lem-higher-direct-image-limit",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Higher direct images and limits of schemes",
- "statement": "Let $S$ be a scheme and let\n$X=\\varprojlim_{i\\in I}X_i$ be a limit of a directed system of schemes\nover $S$ with affine transition morphisms, and assume the structure\nmorphisms $g_i:X_i\\to S$ and $g:X\\to S$ are\nquasi-compact and\nquasi-separated. Let $(\\mathcal F_i)$ be a system of abelian sheaves\non $(X_i,f_{i'i})$, with $f_i:X\\to X_i$ the projections, and set\n$\\mathcal F=\\varinjlim_if_i^{-1}\\mathcal F_i$. Then\n\n$$\n\\varinjlim_{i\\in I}R^pg_{i,*}\\mathcal F_i\n\\xrightarrow{\\ \\sim\\ }R^pg_*\\mathcal F\n$$\n\nfor every $p\\geq0$.\n(*Stacks Project, Lemma 59.51.7, [Tag `09Z1`](https://stacks.math.columbia.edu/tag/09Z1).*)",
+ "statement": "Let $S$ be a scheme [def-weil-pbc-scheme-conventions]. Let $X=\\varprojlim_{i\\in I}X_i$ be a limit of a directed system of schemes over $S$ with affine transition morphisms $f_{i'i}:X_{i'}\\to X_i$, and assume the structure morphisms $g_i:X_i\\to S$ and $g:X\\to S$ are quasi-compact and quasi-separated. Let $(\\mathcal F_i,\\varphi_{i'i})$ be a system of abelian etale sheaves [def-weil-pbc-etale-sheaves] on $(X_i,f_{i'i})$, where $\\varphi_{i'i}:f_{i'i}^{-1}\\mathcal F_i\\to\\mathcal F_{i'}$ are compatible transition maps [def-weil-pbc-inverse-image]. Denote by $f_i:X\\to X_i$ the projections and set $\\mathcal F=\\varinjlim_i f_i^{-1}\\mathcal F_i$. Then $\\varinjlim_{i\\in I}R^pg_{i,*}\\mathcal F_i\\xrightarrow{\\sim}R^pg_*\\mathcal F$ for every $p\\geq0$. (*Stacks Project, Lemma 59.51.7, Tag 09Z1.*)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-higher-direct-image-limit.md",
   "place": "node sbc-lem-higher-direct-image-limit, order 1389",
@@ -20,30 +20,105 @@
  },
  "stmt_deps": [
   "def-weil-pbc-direct-image",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image"
  ],
  "proof": [
   {
-   "text": "By [sbc-lem-higher-direct-image-presheaf] both sides are\nsheafifications of the presheaves $U\\mapsto H^p(U\\times_SX_i,\\mathcal F_i)$ and $U\\mapsto H^p(U\\times_SX,\\mathcal F)$ of\n[def-weil-pbc-etale-cohomology]; for $U$ quasi-compact and\nquasi-separated (e.g. affine) the colimit of the former is the latter\nby continuity of etale cohomology under limits with affine transition\nmorphisms, and every object of $S_{\\Et}$ has a covering by\nquasi-compact quasi-separated objects, so the sheafifications agree.",
+   "text": "Fix an object $U\\to S$ of the small etale site. Applying [sbc-lem-higher-direct-image-presheaf] to each $g_i$ and to $g$ identifies $R^pg_{i,*}\\mathcal F_i$ and $R^pg_*\\mathcal F$ with the sheafifications of the presheaves $(U\\to S)\\mapsto H^p(U\\times_SX_i,\\mathcal F_i|_{U\\times_SX_i})$ and $(U\\to S)\\mapsto H^p(U\\times_SX,\\mathcal F|_{U\\times_SX})$, respectively.",
    "uses": [
-    "sbc-lem-higher-direct-image-presheaf",
-    "def-weil-pbc-etale-cohomology"
+    "sbc-lem-higher-direct-image-presheaf"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 59.51.6, Tag 03Q8"
+   }
+  },
+  {
+   "text": "The object $U$ has an affine etale covering. For an affine member $V\\to S$, base change gives quasi-compact quasi-separated schemes $V\\times_SX_i$ and $V\\times_SX$, and the transition maps remain affine; their limit is $V\\times_SX$. Pulling back each $\\varphi_{i'i}$ gives the compatible degree-zero system of sheaves on these schemes, whose colimit is the pullback of $\\mathcal F$. Regard each sheaf as a complex concentrated in degree $0$ (uniform lower bound $a=0$). Hence [lem-weil-pbc-etale-cohomology-limit-complex-systems] gives $\\varinjlim_iH^p(V\\times_SX_i,\\mathcal F_i|)\\cong H^p(V\\times_SX,\\mathcal F|).",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 59.51.7, Tag 09Z1, proof (using Theorem 59.51.3, Tag 09YQ)"
+   }
+  },
+  {
+   "text": "These isomorphisms are induced by the canonical pullback maps and therefore commute with restriction to smaller etale objects. The colimit of the sheaves in the first line is the sheafification of the presheaf colimit, so the affine-cover isomorphisms from the previous step identify the two sheafifications. This is the claimed canonical isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 59.51.7, Tag 09Z1, proof"
+   }
   }
  ],
  "proof_deps": [
   "sbc-lem-higher-direct-image-presheaf",
-  "def-weil-pbc-etale-cohomology"
+  "lem-weil-pbc-etale-cohomology-limit-complex-systems"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-higher-direct-image-limit.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "higher direct images commute with limits of schemes along affine transition morphisms",
+   "results": "related affine-transition limit declarations, no higher direct image theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "higherDirectImage, IsLimit, IsAffineHom",
+   "results": "unknown identifier; 0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage_limit|higher direct image.*limit in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct images and limits of schemes with affine transition maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology sheaves commute with inverse limits of schemes with affine transition maps",
+   "results": "related affine-transition declarations, no cohomology theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.higherDirectImage_limit, IsCofiltered",
+   "results": "unknown identifier; 0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*limit|IsCofiltered.*IsAffineHom in Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -72,5 +147,30 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-lem-failure-field"
+ "unit": "sk-lem-failure-field",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "sbc-lem-higher-direct-image-limit",
+  "worker": "stage1",
+  "summary": "Checked the tagged Lean declaration, which still has a sorry, and expanded the imported proof into presheaf, continuity, and sheafification steps; no new nodes were needed.",
+  "blueprint": "The steps realize the blueprint proof invoking higher-direct-image presheaves, continuity under affine-transition limits, and local sheafification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+    "why": "The unit proof requires continuity of etale cohomology under affine-transition scheme limits, supplied by this established general theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+  "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hdl2904",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hdl2904 (reviewer sub-agent of L); spot-checked: Statement vs Tag 09Z1 (transition maps restored, citers bc-failure-field step (2) and constructible-finite-pushforward p=0 use exactly this form); step 1 vs presheaf node 03Q8 (any morphism, abelian sheaf); step 2 vs continuity node (V affine and g_i qcqs give qcqs V x_S X_i, affine transitions, degree-0 complexes a=0; node created from lem-weil-pbc-derived-etale-cohomology-limit in sk-prop-h2, no cycle, generic tool accepted); step 3 sheafification commutes with colimits and agreement on affine basis, elementary (Tag 00WI area). No repairs. Bookkeeping note: second reading says uses_not_cited empty but file lists def-weil-pbc-direct-image and def-weil-pbc-scheme-conventions; harmless."
+ }
 }

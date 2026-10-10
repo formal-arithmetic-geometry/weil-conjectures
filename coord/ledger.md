@@ -2845,3 +2845,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:37 L: returned deliver/E1/lem-sc-components-open-injection (reviewer RETURN: Not a fault: the item is Mathlib's preimage_mem_irreducibleComponents (Mathlib/Topology/Irreducible.lean:473) with closu)
 - 22:37 UTC L matched lem-sc-components-open-injection to Mathlib preimage_mem_irreducibleComponents + closure_image_preimage_of_isPreirreducible (R-coi2900); E1 delivery returned as unneeded
 - 22:38 L: merged deliver/M1/lem-sc-meromorphic-weakass-generic-product (reviewer FIX; first push; new nodes: 2)
+- 22:38 L: merged deliver/K1/sbc-lem-higher-direct-image-limit (reviewer PASS; first push; new nodes: 0)
