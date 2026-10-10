@@ -2322,3 +2322,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:02 L: merged deliver/E1/lem-pc-ideal-sheaf-comap-affine-extension (reviewer FIX; first push; new nodes: 0)
 - 19:02 L: merged deliver/E1/def-sp-abelian (reviewer PASS; first push; new nodes: 0)
 - 19:02 L: merged deliver/M1/lem-sp-grothendieck-enough-injectives (reviewer PASS; first push; new nodes: 0)
+- 19:02 L: merged deliver/F1/lem-sc-constant-subsheaf-finite-filtration (reviewer FIX; first push; new nodes: 0)
