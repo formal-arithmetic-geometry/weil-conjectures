@@ -11,15 +11,68 @@
  },
  "kind": "statement",
  "title": "Affine descent of a perfect complex along a filtered colimit",
- "statement": "Let $(A_i)_{i\\in I}$ be a filtered system of rings with colimit $A=\\operatorname{colim}_{i\\in I}A_i$. Let $P^\\bullet$ be a bounded complex of finite projective $A$-modules (the affine form of a perfect complex in [def-pc-perfect-complex]). Then, after increasing the index, there is a bounded complex $P_i^\\bullet$ of finite projective $A_i$-modules with an isomorphism $P_i^\\bullet\\otimes_{A_i}A\\cong P^\\bullet$ of complexes.",
+ "statement": "Let $I$ be a directed set and let $(A_i)_{i\\in I}$ be a directed system of commutative rings with colimit $A=\\operatorname{colim}_{i\\in I}A_i$ [def-weil-pbc-category-colimit]. Let $P^\\bullet$ be a bounded complex of finite projective $A$-modules [def-weil-pbc-projective-module] (the affine form of a perfect complex [def-pc-perfect-complex]). Then there are an index $i$ and a bounded complex $P_i^\\bullet$ of finite projective $A_i$-modules with an isomorphism $P_i^\\bullet\\otimes_{A_i}A\\cong P^\\bullet$ of complexes.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma 15.76.18, Tag 0BC7, label more-algebra-lemma-colimit-perfect (the case A = colim A_i)"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-pc-perfect-complex",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Choose integers $a\\le b$ outside which $P^\\bullet$ is zero, and write its finitely many nonzero terms as finite projective modules $P^r$ with differentials $d^r:P^r\\to P^{r+1}$. The finite list of terms and maps is the affine data of the given bounded complex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.76.18 (Tag 0BC7), proof, reduction to a bounded complex and its finitely many module and differential data"
+   }
+  },
+  {
+   "text": "Each $P^r$ is finite projective, hence finitely presented (Algebra, Lemma 00NX; Mathlib `Module.finitePresentation_of_projective`). By [lem-pc-fp-module-map-descent-affine] (modules) there are $i$ and finitely presented $A_i$-modules $M^r$ with isomorphisms $M^r\\otimes_{A_i}A\\cong P^r$; directedness gives one $i$ for the finitely many $r$. Since $P^r$ is finite projective, a surjection $A^{n}\\to P^r$ splits [def-weil-pbc-projective-module], giving $\\iota:P^r\\to A^n$, $\\sigma:A^n\\to P^r$ with $\\sigma\\iota=\\mathrm{id}$; here $A^n=A_i^n\\otimes_{A_i}A$. By [lem-pc-fp-module-map-descent-affine] (maps) $\\iota,\\sigma$ are base changes of maps $\\iota_j,\\sigma_j$ between $M^r\\otimes_{A_i}A_j$ and $A_j^n$ at some $j\\ge i$, and by its third clause (equality) $\\sigma_j\\iota_j=\\mathrm{id}$ after a later stage, since both sides become $\\mathrm{id}_{P^r}$ over $A$. Then $P_j^r:=M^r\\otimes_{A_i}A_j$ is a direct summand of $A_j^n$, hence finite projective, with $P_j^r\\otimes_{A_j}A\\cong P^r$. One common stage $j$ serves all $r$ (directedness); rename it $i$.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.76.18 (Tag 0BC7), proof: finitely presented modules form the colimit category (Algebra 05N7/0G8P) and finite projectives are summands of finite free modules (Algebra 00NX)"
+   }
+  },
+  {
+   "text": "With the term models $P_i^r$ of Step 2 fixed, apply [lem-pc-fp-module-map-descent-affine] (maps) to each of the finitely many differentials $d^r:P^r\\to P^{r+1}$ and pass to one common later index $j$ (directedness): this gives $A_j$-linear maps $d_j^r:P_i^r\\otimes_{A_i}A_j\\to P_i^{r+1}\\otimes_{A_i}A_j$ whose base changes to $A$ are the $d^r$. The composite $d_j^{r+1}d_j^r$ and the zero map both base change to $d^{r+1}d^r=0$, so by the third clause (equality) of [lem-pc-fp-module-map-descent-affine] they agree after a later stage; one stage serves the finitely many $r$. Rename it $i$.",
+   "uses": [
+    "lem-pc-fp-module-map-descent-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.76.18 (Tag 0BC7), proof, descent of the differential matrices and the finitely many relations $d^{r+1}d^r=0$"
+   }
+  },
+  {
+   "text": "The resulting bounded complex $P_i^\\bullet$ has finite projective terms and squares to zero. The chosen termwise base-change isomorphisms carry its differentials to those of $P^\\bullet$, hence assemble to an isomorphism of complexes $P_i^\\bullet\\otimes_{A_i}A\\cong P^\\bullet$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.76.18 (Tag 0BC7), conclusion of the affine complex descent argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-fp-module-map-descent-affine",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.76.18, Tag 0BC7, affine complex case"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,12 +97,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-perfect-complex-descent",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-affine-perfect-colimit-descent",
+  "worker": "stage1",
+  "summary": "Read More on Algebra, Lemma 15.76.18 (Tag 0BC7). The proof cites the merged affine finite-presentation colimit node lem-pc-fp-module-map-descent-affine (modules, maps, equalities) for the descent of the finite projective terms (as summands of finite free modules), the differentials, and the relations d^2=0; no new node is needed. Reviewer R-apc2822 restated the item over a directed set to match the cited node.",
+  "blueprint": "Realizes the blueprint ancestor lem-pc-rf-perfect-base-change place describing affine bounded finite-projective complexes and descent of their terms and differentials.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-apc2822",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apc2822 (reviewer sub-agent of L); spot-checked: Packet, sheaf-dag affine/fp colimit nodes, parent lem-pc-perfect-complex-descent. FIX more, RETURN less: (1) C4 filtered vs directed: item stated filtered but proof uses directedness and directed-set nodes; restated over a directed set. (2) class (b): lem-pc-finite-projective-map-colimit-descent is the special case (finite projective => f.p., 00NX) of clause (maps) of merged lem-pc-fp-module-map-descent-affine; dropped, Step 3 cites it and gets d^2=0 from its equality clause instead of the elementwise argument. (3) class (d): lem-pc-finite-projective-colimit-descent is three lines from the same node (descend P, the splitting maps iota/sigma, and sigma iota = id); folded into Step 2, node dropped; tool_uses dropped (no longer used). Second reading by K1 missed (2) and (3) and the directed/filtered mismatch.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-apc2822): Item restated over a directed set (E7) to match lem-pc-fp-module-map-descent-affine; parent lem-pc-perfect-complex-descent says 'filtered' but already indexes with j>=i and cites directed nodes."
 }
