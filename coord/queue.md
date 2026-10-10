@@ -2,7 +2,7 @@
 
 905 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (644)
+## Stage 1: nodes to split (643)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,7 +18,6 @@
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
-| `lem-weil-pbc-finite-subalgebra-fraction-field` | 1012 | none |
 | `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
@@ -651,7 +650,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (261)
+## Stage 2: nodes to state (262)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -753,6 +752,7 @@
 | `lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate` | 1 | state |
 | `lem-weil-pbc-finite-purely-inseparable-scalar-descent` | 1 | state |
 | `lem-weil-pbc-finite-separable-multiplication-etale` | 1 | state |
+| `lem-weil-pbc-finite-subalgebra-fraction-field` | 1 | state |
 | `lem-weil-pbc-finite-surjective-affine-target` | 1 | state |
 | `lem-weil-pbc-finite-type-z-domain-normalization-finite` | 1 | state |
 | `lem-weil-pbc-finite-unramified-etale-local` | 1 | state |
@@ -917,7 +917,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 656 nodes that wait for stage 1, 549 nodes that wait for a statement dependency.
+Not open yet: 655 nodes that wait for stage 1, 549 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
