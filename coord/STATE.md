@@ -29,19 +29,19 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 - **Imported statement false in general (2026-10-09 15:05):** lem-fet-locally-trivial (sec-curve-estimates, imported, unit of the finite-etale points) asks for one surjective etale Y' → Y and one finite set S trivializing a finite etale P → Y; false for disconnected Y (Y = pt ⊔ pt, P one point over one component), true for connected Y. Found by the worker of lem-weil-pbc-finite-etale-trace-degree, which used Stacks 04HN instead. To be corrected at its own split (add 'Y connected' or allow S to vary with the component).
 - **Gap in a reviewed proof (node level, 2026-10-09 14:45):** prop-weil-pbc-algebraically-closed-extension step 10 feeds step 9 (constructibility in the curve sense, def-weil-pbc-constructible-torsion) into lem-weil-pbc-curve-constructible-reduction, whose hypothesis is constructibility as a sheaf of Z/r-modules (def-weil-pbc-etale-constructible-sheaf); the bridge is the new node lem-weil-pbc-constructible-torsion-modules-agree (unsplit): to be cited at step 10 when that node is split (the lead will add the pointer then). RESOLVED 2026-10-09 15:45: lem-weil-pbc-constructible-torsion-modules-agree split and reviewed; step 10 cites it.
 
-**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 07:15 UTC):
+**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-10 07:21 UTC):
 | group | merged | returned | abandoned | claims held (age, h) |
 |---|---|---|---|---|
 | C | 19 | 20 | 0 | 0: none |
-| C1 | 16 | 24 | 1 | 3: lem-weil-pbc-closed-immersion-conormal-flat-base-change (0.1), lem-weil-pbc-closed-immersion-conormal-functorial (0.1), lem-weil-pbc-closed-pushforward-constant-stalks (0.1) |
+| C1 | 16 | 24 | 1 | 3: lem-weil-pbc-closed-immersion-conormal-flat-base-change (0.2), lem-weil-pbc-closed-immersion-conormal-functorial (0.2), lem-weil-pbc-closed-pushforward-constant-stalks (0.2) |
 | D | 2 | 8 | 0 | 0: none |
 | D1 | 3 | 4 | 2 | 0: none |
 | E | 1 | 5 | 0 | 0: none |
-| E1 | 21 | 24 | 1 | 4: lem-weil-pbc-smooth-at-prime-free-conormal-basis (0.1), lem-weil-pbc-smooth-fibre-regular-local (0.1), lem-weil-pbc-smooth-localization-conormal-split (0.1), lem-weil-pbc-smooth-over-field-dimension-differentials (0.1) |
+| E1 | 21 | 24 | 1 | 4: lem-weil-pbc-smooth-at-prime-free-conormal-basis (0.2), lem-weil-pbc-smooth-fibre-regular-local (0.2), lem-weil-pbc-smooth-localization-conormal-split (0.2), lem-weil-pbc-smooth-over-field-dimension-differentials (0.2) |
 | F | 1 | 4 | 0 | 0: none |
-| F1 | 23 | 25 | 9 | 5: lem-weil-pbc-coherent-formal-module-kernel (2.3), lem-weil-pbc-coherent-formal-modules-local-exactness (2.3), lem-weil-pbc-descend-finite-locally-free (2.3), lem-weil-pbc-flat-base-change-map-sections (2.3), lem-weil-pbc-small-etale-representable-presheaf-sheaf (2.3) |
+| F1 | 23 | 25 | 9 | 5: lem-weil-pbc-coherent-formal-module-kernel (2.4), lem-weil-pbc-coherent-formal-modules-local-exactness (2.4), lem-weil-pbc-descend-finite-locally-free (2.4), lem-weil-pbc-flat-base-change-map-sections (2.4), lem-weil-pbc-small-etale-representable-presheaf-sheaf (2.4) |
 | G | 0 | 2 | 0 | 0: none |
-| G1 | 22 | 9 | 0 | 5: lem-weil-pbc-descend-qc-open-fg-subalgebra (1.0), lem-weil-pbc-equation-count-fibre-dimension-flat (1.0), lem-weil-pbc-flat-variant-local-criterion (1.0), lem-weil-pbc-formal-systems-graded-vanishing (1.0), lem-weil-pbc-formal-systems-kernel-rees-finite (1.0) |
+| G1 | 22 | 9 | 0 | 5: lem-weil-pbc-descend-qc-open-fg-subalgebra (1.1), lem-weil-pbc-equation-count-fibre-dimension-flat (1.1), lem-weil-pbc-flat-variant-local-criterion (1.1), lem-weil-pbc-formal-systems-graded-vanishing (1.1), lem-weil-pbc-formal-systems-kernel-rees-finite (1.1) |
 
 REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `AGENTS.md` §1, `roles/remote-lead.md`, `SETUP.md`, `roles/maintainer.md` §7, `tools/README.md` tied in; the tools take any group name `C1`, `C2`, …; the old group `C` keeps its claims until the human says its session is stopped).
 
@@ -156,6 +156,7 @@ REMOTE LAUNCHER READY (2026-10-09 16:22: `roles/remote-launcher.md` committed; `
 | 2026-10-10 07:01 | 923 | 1284 | 746 | 335 | 3 more splits since 06:57 (032C quotient-variables, 0334 +3, 00O4/00O6 minima); 5 workers running |
 | 2026-10-10 07:08 | 924 | 1297 | 750 | 335 | 6 more splits since 07:01 (07E5 computation, 07DZ, 00O5 +4, 07E5 base change, 09HI +1 leaf); E1 and C1 deliveries merged (00TV node, basic-set difference node; notice to C1 to fetch the literature); 5 workers running |
 | 2026-10-10 07:15 | 923 | 1304 | 750 | 335 | 7 more splits since 07:08 (09HI +1 leaf, 00QA/00QB +1 leaf, 01PE +1 with tool use 01LC, 03S0 difference, 00QB global +1 leaf); ZMT node 00Q9 demoted from leaf to unsplit (B8) and in work; merged C1 refinement node repaired (symmetric-difference error, E3); 5 workers running |
+| 2026-10-10 07:21 | 931 | 1313 | 755 | 335 | 5 more splits since 07:15 (00LN (1), 00NT +4, 00QB global +1, 00TV +4, Zariski's Main Theorem 00Q9 +7 incl. 00PZ/00PY leaves); 5 workers running, 2 of ZMT's new nodes claimed and waiting |
 
 **Pilot numbers, effort `xhigh` (batches 1–2, 2026-10-09, 05:53–07:20 UTC).** Two accounts hit their 5-hour session limits: the first after about an hour with 10 workers running, the second after 16 minutes (it had been used elsewhere). 11 items were delivered and passed review: 9 with a report, 2 found complete on disk after their worker died; 12 workers died mid-item, 7 of them leaving nothing usable. Per delivered item: 9.5–14 minutes of wall time (563–852 s, median ~720 s) and 119k–268k worker tokens (median ~170k); 0–6 new nodes per item (median 2), about half of them Mathlib leaves. The review rejected nothing mathematically; what it had to correct or note: two workers could not read the PDFs (no `pdftotext`; installed since) and wrote the proof as an agent's; one refused the review script because the brief forbade `git` (brief fixed); one died leaving its item citing nodes it had not written (brief now says new nodes first); one removed a pointer clause from a definition's statement (accepted, the slopmaster2 text has no such clause); claims inside definitions were kept as the source wrote them and reported.
 
