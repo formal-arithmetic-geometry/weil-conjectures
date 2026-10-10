@@ -514,6 +514,49 @@ lemma exists_mul_pow_eq_of_mem_subMod (J : (dualGlueData H).glued.IdealSheafData
       simp
       rfl
 
+
+lemma exists_mul_pow_eq_of_mem_subAlg (J : (dualGlueData H).glued.IdealSheafData)
+    (hJ : J ≤ (dualGluedι H).ker) (U : S.AffineZariskiSite) (r : Γ(S, U.1))
+    {b' : F.obj (.op (U.basicOpen r))} (hb' : b' ∈ subAlg J (U.basicOpen r)) :
+    ∃ b ∈ subAlg J U, ∃ n : ℕ, b' * (F.map (homOfLE (U.basicOpen_le r)).op (α.app _ r)) ^ n =
+      F.map (homOfLE (U.basicOpen_le r)).op b := by
+  set ρ := (F.map (homOfLE (U.basicOpen_le r)).op).hom
+  set s := (α.app (.op U)).hom r
+  have hs : s ∈ subAlg J U := algebraMap_mem_subAlg H J U r
+  induction hb' using Subring.closure_induction with
+  | mem x hx =>
+    rcases hx with ⟨t', rfl⟩ | hx
+    · let := (S.presheaf.map (homOfLE (S.basicOpen_le r)).op).hom.toAlgebra
+      have : IsLocalization.Away r Γ(S, S.basicOpen r) := U.2.isLocalization_basicOpen r
+      obtain ⟨n, a, hn⟩ := IsLocalization.Away.surj (S := Γ(S, S.basicOpen r)) r t'
+      refine ⟨(α.app (.op U)).hom a, algebraMap_mem_subAlg H J U a, n, ?_⟩
+      have hnat (t : Γ(S, U.1)) : ρ ((α.app (.op U)).hom t) =
+          (α.app (.op (U.basicOpen r))).hom (S.presheaf.map (homOfLE (S.basicOpen_le r)).op t) :=
+        (ConcreteCategory.congr_hom (α.naturality (homOfLE (U.basicOpen_le r)).op) t).symm
+      change _ * ρ s ^ n = _
+      rw [hnat, hnat, ← map_pow, ← map_mul]
+      exact congrArg _ hn
+    · obtain ⟨m, hm, n, hn⟩ := exists_mul_pow_eq_of_mem_subMod H J hJ U r hx
+      exact ⟨m, subMod_subset_subAlg H J U hm, n, hn⟩
+  | zero => exact ⟨0, zero_mem _, 0, by simp⟩
+  | one => exact ⟨1, one_mem _, 0, by simp⟩
+  | add x y _ _ hx hy =>
+    obtain ⟨b₁, hb₁, n₁, h₁⟩ := hx
+    obtain ⟨b₂, hb₂, n₂, h₂⟩ := hy
+    refine ⟨b₁ * s ^ n₂ + b₂ * s ^ n₁, add_mem (mul_mem hb₁ (pow_mem hs _))
+      (mul_mem hb₂ (pow_mem hs _)), n₁ + n₂, ?_⟩
+    rw [map_add, map_mul, map_mul, map_pow, map_pow, ← h₁, ← h₂]
+    ring
+  | neg x _ hx =>
+    obtain ⟨b, hb, n, h⟩ := hx
+    exact ⟨-b, neg_mem hb, n, by rw [map_neg, ← h, neg_mul]⟩
+  | mul x y _ _ hx hy =>
+    obtain ⟨b₁, hb₁, n₁, h₁⟩ := hx
+    obtain ⟨b₂, hb₂, n₂, h₂⟩ := hy
+    refine ⟨b₁ * b₂, mul_mem hb₁ hb₂, n₁ + n₂, ?_⟩
+    rw [map_mul, ← h₁, ← h₂]
+    ring
+
 end Approximation
 
 end AlgebraicGeometry.Scheme.AffineZariskiSite
