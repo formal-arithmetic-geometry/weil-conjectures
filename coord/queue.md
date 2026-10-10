@@ -1,8 +1,8 @@
 # Work queue
 
-904 items; claim with `tools/claim.py next <group> [--stage N]`.
+905 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (145)
+## Stage 1: nodes to split (146)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -56,7 +56,8 @@
 | `lem-pc-perfect-descend-morphisms` | 5014 | none |
 | `lem-pc-sites-modules-sheafification-flat` | 5014 | none |
 | `lem-pc-flat-module-descent` | 5015 | none |
-| `lem-pc-fp-complex-descent` | 5015 | none |
+| `lem-pc-fp-module-map-descent` | 5016 | none |
+| `lem-pc-fp-relation-descent` | 5016 | none |
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sc-general-theorem-of-cube` | 6011 | none |
@@ -916,7 +917,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1531 nodes that wait for a statement dependency, 185 nodes that wait for stage 1.
+Not open yet: 1532 nodes that wait for a statement dependency, 186 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
