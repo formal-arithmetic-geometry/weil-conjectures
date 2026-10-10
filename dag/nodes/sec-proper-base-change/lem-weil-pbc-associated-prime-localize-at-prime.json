@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-associated-prime-localize-at-prime",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)), through the equality case of Lemma 0312 used there; within 0312: third paragraph: 'First we observe that qS_q ∈ Ass_{S_q}((M ⊗_R N)_q), see Lemma 0310'",
+   "via": [
+    "lem-weil-pbc-associated-primes-flat-base-change",
+    "lem-weil-pbc-analytic-unramified-principal-criterion",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An associated prime stays associated after localizing at it (any ring)",
+ "statement": "Let $T$ be a commutative ring, $P$ a $T$-module and $\\mathfrak q\\subset T$ a prime ideal. For a commutative ring $T$ and a $T$-module $P$ call a prime ideal $\\mathfrak q\\subset T$ an *associated prime* of $P$ if $\\mathfrak q=\\operatorname{Ann}_T(z)=\\{a\\in T:az=0\\}$ for some $z\\in P$, and write $\\operatorname{Ass}_T(P)$ for the set of them. Let $T_{\\mathfrak q}$ be the localization of $T$ at $\\mathfrak q$ [def-weil-pbc-localization-at-prime], a local ring with maximal ideal $\\mathfrak qT_{\\mathfrak q}$, and $P_{\\mathfrak q}$ the localization of $P$ at $T\\setminus\\mathfrak q$ [def-weil-pbc-module-localization], a $T_{\\mathfrak q}$-module. If $\\mathfrak q\\in\\operatorname{Ass}_T(P)$, then $\\mathfrak qT_{\\mathfrak q}\\in\\operatorname{Ass}_{T_{\\mathfrak q}}(P_{\\mathfrak q})$; more precisely, if $\\operatorname{Ann}_T(z)=\\mathfrak q$ then $\\operatorname{Ann}_{T_{\\mathfrak q}}(z/1)=\\mathfrak qT_{\\mathfrak q}$. No Noetherian hypothesis is made.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0310 (lemma-associated-primes-localize), part (1), lines 15393-15410; tag verified in literature/stacks-project/tags/tags: 0310,algebra-lemma-associated-primes-localize"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if p is an associated prime of M then the maximal ideal of R_p is an associated prime of M_p",
+   "results": "Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes, preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule (Mathlib.RingTheory.Ideal.AssociatedPrime.Localization); IsLocalization.AtPrime.map_eq_maximalIdeal",
+   "date": "2026-10-10",
+   "verdict": "candidate mem_associatedPrimes_atPrime_of_mem_associatedPrimes (Localization.lean:70), but for Mathlib's radical notion of associated prime: its hypothesis p = rad(Ann(x)) is weaker and its conclusion only gives maximalIdeal = rad(Ann(x/1)); not the annihilator statement over a non-Noetherian ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associated prime of localized module at a prime, converse when the prime is finitely generated",
+   "results": "mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule (Localization.lean:40, stacks 0310 (1)), comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg (line 80), preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule, mem_associatedPrimes_atPrime_of_mem_associatedPrimes",
+   "date": "2026-10-10",
+   "verdict": "no match for the annihilator notion (all are for the radical notion, read with sed -n 25-125)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'lemma\\|theorem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean; grep -rn 'stacks 0310' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only the four lemmas above (lines 40, 70, 80, 118) and minimalPrimes_annihilator_subset_associatedPrimes (128); all use associatedPrimes = radical notion",
+   "date": "2026-10-10",
+   "verdict": "no match: the radical notion agrees with the annihilator notion only over Noetherian rings (isAssociatedPrime_iff, Basic.lean:114), and this node is applied over an arbitrary ring"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-associated-primes-flat-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 0310 (1) (any ring)"
+}

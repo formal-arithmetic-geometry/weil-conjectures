@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-noetherian-module-prime-filtration",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)), through the equality case of Lemma 0312 used there; within 0312: last paragraph: 'we choose a filtration 0 = M_0 ⊂ ... ⊂ M_n = M such that each quotient M_i/M_{i-1} is isomorphic to R/p_i, see Lemma 00L0'",
+   "via": [
+    "lem-weil-pbc-associated-primes-flat-base-change",
+    "lem-weil-pbc-analytic-unramified-principal-criterion",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A finite module over a Noetherian ring has a filtration with quotients R/p_i",
+ "statement": "Let $R$ be a Noetherian ring [def-weil-pbc-noetherian-ring] and $M$ a finite $R$-module [def-weil-finitely-generated-module]. Then there are an integer $n\\ge0$, $R$-submodules $0=M_0\\subseteq M_1\\subseteq\\cdots\\subseteq M_n=M$ and prime ideals $\\mathfrak p_1,\\ldots,\\mathfrak p_n$ of $R$ such that $M_i/M_{i-1}\\cong R/\\mathfrak p_i$ as $R$-modules for $i=1,\\ldots,n$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00L0 (lemma-filter-Noetherian-module), lines 14915-14925; tag verified in literature/stacks-project/tags/tags: 00L0,algebra-lemma-filter-Noetherian-module"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely generated module over Noetherian ring has a filtration with successive quotients R/p for primes p",
+   "results": "IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime (Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness), IsNoetherian, Ideal.Filtration, IsModuleFiltration",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime",
+   "results": "IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime (A) [CommRing A] (M) [AddCommGroup M] [Module A M] [IsNoetherianRing A] [Module.Finite A M] : ∃ s, s.head = ⊥ ∧ s.last = ⊤ (Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isQuotientEquivQuotientPrime\\|stacks 00L0' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 47-100 of RingTheory/Ideal/AssociatedPrime/Finiteness.lean",
+   "results": "Submodule.IsQuotientEquivQuotientPrime (line 51: N1 ≤ N2 and N2/N1 ≃ A/p for a prime p), @[stacks 00L0] IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime (line 92), IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime (line 119)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime",
+  "file": "Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean",
+  "line": 92,
+  "how": "exact: lines 91-94, `@[stacks 00L0] theorem IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime [IsNoetherianRing A] [Module.Finite A M] : ∃ s : RelSeries {(N₁, N₂) | Submodule.IsQuotientEquivQuotientPrime N₁ N₂}, s.head = ⊥ ∧ s.last = ⊤`, where (lines 49-51) N₁.IsQuotientEquivQuotientPrime N₂ means N₁ ≤ N₂ and N₂/N₁ ≃ₗ[A] A ⧸ p for some p : PrimeSpectrum A; the RelSeries s is the chain M_0 ⊆ ... ⊆ M_n with M_0 = ⊥, M_n = ⊤. Lines read with sed -n on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-associated-primes-flat-base-change",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime (Finiteness.lean:92) (00L0)"
+}
