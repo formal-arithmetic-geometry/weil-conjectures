@@ -25,9 +25,76 @@
   "def-pc-fibre-product",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal P$ be the property of a scheme morphism being an open immersion [def-weil-open-immersion]. It is invariant under isomorphisms of source and target: such isomorphisms transport the open image, the homeomorphism onto it, and the isomorphism of structure sheaves.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L3, proof lines 5866-5868; Definition Tag 02KO, line 5310"
+   }
+  },
+  {
+   "text": "The property $\\mathcal P$ is stable under flat base change, indeed under arbitrary base change: if $j:U\\to T$ is an open immersion, the second projection of $U\\times_TT'\\to T'$ identifies with the inclusion of the inverse image of the open subscheme $j(U)$; it has the required homeomorphism and sheaf isomorphism [def-pc-fibre-product], [def-weil-open-immersion].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L3, proof lines 5866-5867; Schemes, Lemma Tag 01JY"
+   }
+  },
+  {
+   "text": "The property $\\mathcal P$ is Zariski local on the target: if open subschemes $V_k$ cover $T$ and each restriction $f^{-1}(V_k)\\to V_k$ is an open immersion, their open images agree on overlaps as the image of the same restriction of $f$. They glue to an open subset of $T$, and the local inverse maps and sheaf isomorphisms glue to make $f$ an open immersion [def-weil-open-immersion].",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L3, proof line 5868"
+   }
+  },
+  {
+   "text": "For affine schemes $T'$ and $T$, if $g:T'\\to T$ is flat and surjective and the base change of $f:Y\\to T$ along $g$ is an open immersion, then $f$ is an open immersion by [lem-galois-open-immersion-affine-descent]. This verifies the faithfully flat affine condition (3) of [lem-weil-pbc-fpqc-local-on-base-criterion] for $\\mathcal P$.",
+   "uses": [
+    "lem-galois-open-immersion-affine-descent",
+    "lem-weil-pbc-fpqc-local-on-base-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02L3, proof lines 5880-5912; Lemma Tag 02KP, line 5407"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fpqc-local-on-base-criterion] to $\\mathcal P$, the given morphism $\\varphi:Y\\to T$, and the fpqc covering $\\{h_i:T_i\\to T\\}_{i\\in I}$. Steps 1-4 give its four conditions, and the hypothesis says every base change has $\\mathcal P$. The criterion concludes that $\\varphi$ is an open immersion.",
+   "uses": [
+    "lem-weil-pbc-fpqc-local-on-base-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Descent, Lemma Tag 02KP, line 5407, applied as in the final line of the proof of Lemma Tag 02L3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "lem-galois-open-immersion-affine-descent",
+  "lem-weil-pbc-fpqc-local-on-base-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02L3, proof lines 5866-5912, through Lemma Tag 02KP"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,7 +126,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -84,5 +151,29 @@
    134
   ],
   "how": "one-morphism form: IsOpenImmersion descends along a single surjective flat quasi-compact morphism (02L3); with isOpenImmersion_isZariskiLocalAtTarget (Morphisms/OpenImmersion.lean:110), the stability of open immersions under base change, and the slopmaster2 lemma AlgebraicGeometry.Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology (WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean:115-126, for P = IsOpenImmersion) it gives the node for the family, but not in one line"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-fpqc-descend-open-immersion",
+  "worker": "stage1",
+  "summary": "Split Descent 02L3 through the existing fpqc local criterion 02KP. Steps 1-3 verify isomorphism invariance, base-change stability, and Zariski locality from the open-immersion definition; Step 4 uses the new Mathlib leaf for descent along one flat surjective morphism of affine schemes; Step 5 applies 02KP to the family. No source declaration states the family form.",
+  "blueprint": "Realizes the open-immersion clause of lem-galois-descent Step 3 through 02VM: the stability, locality, and affine descent cases of 02L3.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-local-on-base-criterion",
+    "why": "Step 5 uses the generic 02KP reduction from a family to the affine case; no node in sk-prop-h2 supplies that general covering criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-local-on-base-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-doi",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-doi (reviewer sub-agent of L); spot-checked: Source: Stacks Descent 02L3 (descent-lemma-descending-property-open-immersion, descent.tex 5862-5912) read in full, with 02KO (line 5310) and 02KP (line 5407); the item statement is unchanged and is the descent direction of 02L3 for an fpqc covering. Steps 1-3 verify conditions (0)-(2) of lem-weil-pbc-fpqc-local-on-base-criterion from def-weil-open-immersion and def-pc-fibre-product (iso invariance; base change of an open immersion is the preimage open subscheme, Schemes 01JY, elementary from the universal property; Zariski locality, which Stacks calls obvious); Step 4 gives condition (3) exactly from the new leaf lem-galois-open-immersion-affine-descent (affine S, S', g flat surjective, base change open immersion); Step 5 applies the criterion statement, hypotheses (0)-(3) and the fpqc covering, with condition (0) absorbing the choice of fibre product (Y_i,p_i,varphi_i). Tool use lem-weil-pbc-fpqc-local-on-base-criterion (unit sk-thm-p1) accepted: the generic 02KP criterion used as a black box, as in the last line of Stacks' proof. Mathlib leaf verified: FlatDescent.lean line 133 is instance descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact' (@[stacks 02L3] on 132), IsOpenImmersion.DescendsAlong (Surjective inf Flat inf QuasiCompact); a morphism of affine schemes is affine hence quasi-compact, so the node is a one-line specialization; three search kinds recorded. Only split-owned fields of the item changed; new node has created.item = the item, blueprint.from complete, same_as []. Small cases: empty S (affine, f from empty X trivially an open immersion) and g an isomorphism (statement trivial) consistent. Start Sat Oct 10 02:48:20 PM UTC 2026, end Sat Oct 10 02:48:51 PM UTC 2026."
  }
 }

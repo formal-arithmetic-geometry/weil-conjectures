@@ -1,0 +1,66 @@
+{
+ "id": "lem-galois-open-immersion-affine-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-fpqc-descend-open-immersion, the faithfully flat affine case in the proof of Descent 02L3: an open immersion after pullback along a flat surjective morphism of affine schemes descends",
+   "via": [
+    "lem-galois-fpqc-descend-open-immersion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Open immersions descend along flat surjective affine morphisms (Stacks 02L3)",
+ "statement": "Let $S'$ and $S$ be affine schemes [def-pc-scheme], let $g:S'\\to S$ be flat [def-weil-flat-morphism] and surjective [def-weil-surjective-morphism], and let $f:X\\to S$ be a morphism of schemes. If the second projection $f':X\\times_SS'\\to S'$ of a fibre product [def-pc-fibre-product] is an open immersion [def-weil-open-immersion], then $f$ is an open immersion.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Descent, Lemma Tag 02L3 (lemma-descending-property-open-immersion), proof lines 5880-5912, faithfully flat affine case; Mathlib instance @[stacks 02L3] in Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean lines 132-134"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open immersion descends along a surjective flat quasi-compact morphism of schemes",
+   "results": "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact' (Mathlib.AlgebraicGeometry.Morphisms.FlatDescent); affine schemes give the quasi-compact hypothesis",
+   "date": "2026-10-10",
+   "verdict": "match after one-line specialization: a morphism between affine schemes is quasi-compact"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MorphismProperty.DescendsAlong @AlgebraicGeometry.IsOpenImmersion",
+   "results": "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+   "date": "2026-10-10",
+   "verdict": "match after one-line specialization: affine S' -> S is quasi-compact"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'stacks 02L3' Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean:132-134, instance descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+   "date": "2026-10-10",
+   "verdict": "match after one-line specialization"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean",
+  "line": 133,
+  "how": "specializes in one line: the affine morphism S' -> S is quasi-compact, and the fibre-product square is the IsPullback required by DescendsAlong (read lines 130-140)"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-galois-fpqc-descend-open-immersion"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

@@ -1666,3 +1666,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:48 L: merged deliver/K1/lem-pc-leray-degenerate-sections (reviewer FIX; after a return; new nodes: 1)
 - 14:48 L: merged deliver/K1/lem-weil-pbc-descend-qc-open-fg-subalgebra (reviewer FIX; first push; new nodes: 0)
 - 14:48 L: returned deliver/J1/lem-exc-coinduced-discrete-embedding (reviewer RETURN: 1. D1: step 2 / lem-exc-coinduced-functions-open-stabilizer: the new node restates the item's own clause ('this formula )
+- 14:49 L: merged deliver/C1/lem-galois-fpqc-descend-open-immersion (reviewer PASS; first push; new nodes: 1)
