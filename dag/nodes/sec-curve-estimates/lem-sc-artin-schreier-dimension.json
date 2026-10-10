@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "lem-sc-artin-schreier-dimension",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-sc-c3"
+  ]
  },
  "kind": "statement",
  "title": "Artin–Schreier vanishing on a smooth curve",
@@ -19,34 +21,162 @@
  ],
  "proof": [
   {
-   "text": "By\n[lem-sc-compactification] and [lem-sc-affine-open-proper]\nthe curve is either proper or affine. In the affine case,\n[lem-sc-etale-affine-qcoherent] gives $H^q(C,\\mathbf G_a)=0$\nfor $q>0$, so the Artin–Schreier long exact sequence gives\n$H^q(C,\\mathbf F_p)=0$ for $q>1$. We now treat the proper case.\nThe long exact sequence of the Artin–Schreier sequence\n([lem-sc-as-sequence]),\n\n$$\n0\\to H^0(C,\\mathbf F_p)\\to H^0(C,\\mathbf G_a)\\xrightarrow{\\wp}\nH^0(C,\\mathbf G_a)\\to H^1(C,\\mathbf F_p)\\to H^1(C,\\mathbf G_a)\n\\xrightarrow{\\wp}H^1(C,\\mathbf G_a)\\to H^2(C,\\mathbf F_p)\\to 0,\n$$\n\n(the terms $H^q(C,\\mathbf G_a)$ vanish for $q\\geq2$ by\n[lem-sc-ga-cohomology]) identifies\n\n$$\nH^2(C,\\mathbf F_p)=\\operatorname{coker}\\bigl(\\wp:H^1(C,\\mathcal O_C)\\to H^1(C,\\mathcal O_C)\\bigr),\n$$\n\nwhere $\\wp=F-1$ with $F$ the $p$-linear Frobenius\nendomorphism of the finite-dimensional $k$-vector space\n$H^1(C,\\mathcal O_C)$; this cokernel is zero by\n[lem-sc-lang-steinberg]. Hence\n$H^q(C,\\mathbf F_p)=0$ for $q>1$: for $q\\geq3$ the\ntwo adjacent $\\mathbf G_a$ cohomology terms vanish, and the case\n$q=2$ is the surjectivity just proved.",
+   "text": "*Setup and the long exact sequence.* Let $k$ be the algebraically closed field, $\\operatorname{char}k=p>0$, $C$ the smooth separated connected curve [def-sc-curves], $\\mathbf G_a=(\\mathcal O_C)_{\\mathrm{et}}$ the etale sheaf $U\\mapsto\\Gamma(U,\\mathcal O_U)$ [def-sc-etale-qcoherent-module] and $\\mathbf F_p$ the constant sheaf [def-sc-constant-sheaves]. By [lem-sc-as-sequence] $0\\to\\mathbf F_p\\xrightarrow{\\iota}\\mathbf G_a\\xrightarrow{\\wp}\\mathbf G_a\\to0$, $\\wp(x)=x^p-x$, is a short exact sequence of $\\Ab(C_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves]. The category $\\Ab(C_{\\Et})$ is Grothendieck abelian [lem-weil-pbc-abelian-etale-sheaves-grothendieck], hence has enough injectives [lem-sp-grothendieck-enough-injectives], and the etale cohomology $H^q(C_{\\Et},-)$ of [def-weil-pbc-etale-cohomology] (computed by K-injective resolutions) is the right derived functor $R^q\\Gamma(C,-)$ of the left exact additive functor $\\Gamma(C,-)$ computed by injective resolutions [lem-sp-kinjective-computes] (2). By [lem-weil-pbc-right-derived-universal-delta-functor] the $R^q\\Gamma(C,-)$ are additive functors and form a $\\delta$-functor, so the Artin–Schreier sequence gives the exact sequence\n$$\\cdots\\to H^{q-1}(C_{\\Et},\\mathbf G_a)\\xrightarrow{H^{q-1}(\\wp)}H^{q-1}(C_{\\Et},\\mathbf G_a)\\xrightarrow{\\delta}H^q(C_{\\Et},\\mathbf F_p)\\xrightarrow{H^q(\\iota)}H^q(C_{\\Et},\\mathbf G_a)\\to\\cdots\\qquad(q\\geq1).\\qquad(*)$$",
+   "uses": [
+    "def-sc-curves",
+    "def-sc-etale-qcoherent-module",
+    "def-sc-constant-sheaves",
+    "lem-sc-as-sequence",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-weil-pbc-etale-cohomology",
+    "lem-sp-kinjective-computes",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 0A3J (section-artin-schreier), the Artin–Schreier sequence, and Lemma 0A3N (lemma-vanishing-variety-char-p-p), proof: 'the long exact cohomology sequence associated to the Artin-Schreier sequence'"
+   }
+  },
+  {
+   "text": "*Degrees $q\\geq3$.* By [lem-sc-ga-cohomology] ($C$ is a smooth connected curve, $\\mathbf G_a=(\\mathcal O_C)_{\\mathrm{et}}$) $H^j(C_{\\Et},\\mathbf G_a)\\cong H^j(C,\\mathcal O_C)=0$ for all $j\\geq2$. For $q\\geq3$ both $q-1\\geq2$ and $q\\geq2$, so in $(*)$ the group $H^q(C_{\\Et},\\mathbf F_p)$ sits between $H^{q-1}(C_{\\Et},\\mathbf G_a)=0$ and $H^q(C_{\\Et},\\mathbf G_a)=0$; exactness gives $H^q(C_{\\Et},\\mathbf F_p)=0$. For $q=2$ the same vanishing $H^2(C_{\\Et},\\mathbf G_a)=0$ turns $(*)$ into the exact sequence\n$$H^1(C_{\\Et},\\mathbf G_a)\\xrightarrow{H^1(\\wp)}H^1(C_{\\Et},\\mathbf G_a)\\xrightarrow{\\delta}H^2(C_{\\Et},\\mathbf F_p)\\to0,$$\nso $H^2(C_{\\Et},\\mathbf F_p)=\\operatorname{coker}H^1(\\wp)$, and it remains to show that $H^1(\\wp)$ is surjective.",
+   "uses": [
+    "lem-sc-ga-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension.md",
+    "place": "## Proof, proper case: 'the terms $H^q(C,\\mathbf G_a)$ vanish for $q\\geq2$ by [lem-sc-ga-cohomology]' and the last sentence 'for $q\\geq3$ the two adjacent $\\mathbf G_a$ cohomology terms vanish'; Stacks 0A3N proof, first sentence (vanishing in degrees $\\geq d+2$, here $d=1$)"
+   }
+  },
+  {
+   "text": "*Proper or affine.* By [lem-sc-compactification] there are a proper smooth connected curve $\\overline C$ over $k$ and an open immersion $C\\hookrightarrow\\overline C$ whose complement is a finite set of closed points. If the complement is empty, $C\\cong\\overline C$ is proper over $k$. Otherwise $C$ is an open subscheme of $\\overline C$ with $\\overline C\\setminus C\\neq\\emptyset$, hence affine by [lem-sc-affine-open-proper].",
    "uses": [
     "lem-sc-compactification",
-    "lem-sc-affine-open-proper",
-    "lem-sc-etale-affine-qcoherent",
-    "lem-sc-as-sequence",
-    "lem-sc-ga-cohomology",
+    "lem-sc-affine-open-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension.md",
+    "place": "## Proof, first sentence: 'By [lem-sc-compactification] and [lem-sc-affine-open-proper] the curve is either proper or affine'"
+   }
+  },
+  {
+   "text": "*The affine case.* If $C$ is affine, $H^1(C_{\\Et},\\mathbf G_a)=H^1(C_{\\Et},(\\mathcal O_C)_{\\mathrm{et}})=0$ by [lem-sc-etale-affine-qcoherent] (with $\\mathcal F=\\mathcal O_C$). The exact sequence of step 2 then gives $H^2(C_{\\Et},\\mathbf F_p)=0$.",
+   "uses": [
+    "lem-sc-etale-affine-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension.md",
+    "place": "## Proof: 'In the affine case, [lem-sc-etale-affine-qcoherent] gives $H^q(C,\\mathbf G_a)=0$ for $q>0$, so the Artin–Schreier long exact sequence gives $H^q(C,\\mathbf F_p)=0$ for $q>1$'; Stacks Lemma 0A3K (1)"
+   }
+  },
+  {
+   "text": "*The $k$-structure and the Frobenius on $V=H^1(C_{\\Et},\\mathbf G_a)$.* For $U\\to C$ in $C_{\\Et}$ the ring $\\Gamma(U,\\mathcal O_U)$ is a $k$-algebra (via $U\\to C\\to\\operatorname{Spec}k$) and the restriction maps of $\\mathbf G_a$ are $k$-algebra homomorphisms. Hence for $\\lambda\\in k$ multiplication $m_\\lambda(x)=\\lambda x$ and the Frobenius $\\Phi_0(x)=x^p$ are morphisms $\\mathbf G_a\\to\\mathbf G_a$ in $\\Ab(C_{\\Et})$ ($\\Phi_0$ is additive because $\\operatorname{char}=p$), and they satisfy $m_\\lambda m_\\mu=m_{\\lambda\\mu}$, $m_\\lambda+m_\\mu=m_{\\lambda+\\mu}$, $m_1=\\mathrm{id}$, $\\Phi_0m_\\lambda=m_{\\lambda^p}\\Phi_0$ and $\\wp=\\Phi_0-\\mathrm{id}$, all checked sectionwise. Since $H^1(C_{\\Et},-)$ is an additive functor (step 1, [lem-weil-pbc-right-derived-universal-delta-functor]), $\\lambda\\cdot v:=H^1(m_\\lambda)(v)$ makes $V$ a $k$-vector space, $\\Phi:=H^1(\\Phi_0)$ is additive with $\\Phi(\\lambda v)=\\lambda^p\\Phi(v)$, and $H^1(\\wp)=\\Phi-\\mathrm{id}_V$.",
+   "uses": [
+    "def-sc-etale-qcoherent-module",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension.md",
+    "place": "## Proof, proper case: 'where $\\wp=F-1$ with $F$ the $p$-linear Frobenius endomorphism of the ... $k$-vector space $H^1(C,\\mathcal O_C)$'; Stacks 0A3N proof ('the map $F-1$ in this sequence')"
+   }
+  },
+  {
+   "text": "*The proper case: $V$ is finite-dimensional.* Let $C$ be proper over $k$. The structure sheaf $\\mathcal O_C$ is coherent ($C$ is Noetherian) and $\\operatorname{Spec}k$ is Noetherian, so by [lem-pc-coherent-hi] (with $S=\\operatorname{Spec}k$, $A=k$) $H^1(C,\\mathcal O_C)$ is a finite $k$-module; its $k$-module structure is the one through which $\\lambda\\in k$ acts by $H^1(C,m_\\lambda)$, $m_\\lambda$ the $\\mathcal O_C$-linear multiplication by $\\lambda$ on $\\mathcal O_C$ [pqf-def-cohomology]. By [lem-sc-etale-zariski-qcoh-comparison] there is an isomorphism $c^1:H^1(C,\\mathcal O_C)\\to H^1(C_{\\Et},(\\mathcal O_C)_{\\mathrm{et}})=V$ with $c^1\\circ H^1(C,m_\\lambda)=H^1(C_{\\Et},(m_\\lambda)_{\\mathrm{et}})\\circ c^1$; since $u^*\\mathcal O_C=\\mathcal O_U$ and $u^*(m_\\lambda)$ is multiplication by $\\lambda$ on $\\mathcal O_U$, $(m_\\lambda)_{\\mathrm{et}}$ is the morphism $m_\\lambda$ of step 5. So $c^1$ is $k$-linear for the structure of step 5, and $\\dim_kV=\\dim_kH^1(C,\\mathcal O_C)<\\infty$.",
+   "uses": [
+    "lem-pc-coherent-hi",
+    "pqf-def-cohomology",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A3P (lemma-finiteness-proper-variety-char-p-p), proof: 'By Cohomology of Schemes, Lemma 02O6 and the comparison of cohomology of Theorem 03P2 the cohomology groups $H^q_\\etale(X,\\mathbf G_a)=H^q(X,\\mathcal O_X)$ are finite dimensional $k$-vector spaces'; blueprint ## Proof: 'the finite-dimensional $k$-vector space $H^1(C,\\mathcal O_C)$'"
+   }
+  },
+  {
+   "text": "*The proper case: conclusion.* By steps 5 and 6, $V$ is a finite-dimensional $k$-vector space, $k$ is algebraically closed of characteristic $p$, and $\\Phi$ is $p$-linear; by [lem-sc-lang-steinberg] $\\Phi-\\mathrm{id}_V=H^1(\\wp)$ is surjective. By the exact sequence of step 2, $H^2(C_{\\Et},\\mathbf F_p)=\\operatorname{coker}H^1(\\wp)=0$. Together with steps 2 and 4 (the cases are exhaustive by step 3), $H^q(C_{\\Et},\\mathbf F_p)=0$ for all $q>1$.",
+   "uses": [
     "lem-sc-lang-steinberg"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension.md",
+    "place": "## Proof: 'this cokernel is zero by [lem-sc-lang-steinberg]. Hence $H^q(C,\\mathbf F_p)=0$ for $q>1$'; Stacks 0A3N proof: 'By Lemma 0A3L the map $F-1$ in this sequence is surjective'"
+   }
   }
  ],
  "proof_deps": [
+  "def-sc-curves",
+  "def-sc-etale-qcoherent-module",
+  "def-sc-constant-sheaves",
+  "lem-sc-as-sequence",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-weil-pbc-etale-cohomology",
+  "lem-sp-kinjective-computes",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-sc-ga-cohomology",
   "lem-sc-compactification",
   "lem-sc-affine-open-proper",
   "lem-sc-etale-affine-qcoherent",
-  "lem-sc-as-sequence",
-  "lem-sc-ga-cohomology",
+  "lem-pc-coherent-hi",
+  "pqf-def-cohomology",
+  "lem-sc-etale-zariski-qcoh-comparison",
   "lem-sc-lang-steinberg"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-sc-artin-schreier-dimension.md",
-  "place": "## Proof"
+  "place": "## Proof (agent-written blueprint), checked against Stacks Lemma 0A3N (etale-cohomology-lemma-vanishing-variety-char-p-p) for $d=1$ and Lemma 0A3P (finiteness of $H^q(X,\\mathcal O_X)$ through 02O6 and 03P2) in literature/stacks-project/etale-cohomology.tex"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Artin-Schreier cohomology vanishing H^q(X, Z/p) = 0 for q > dim X characteristic p",
+   "results": "DividedPowers.CharP.dpow_of_prime_le, IsLocallyArtinian/IsArtinianScheme lemmas (Mathlib.AlgebraicGeometry.Artinian); nothing on etale cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "p-cohomological dimension of a curve in characteristic p is at most one, Artin-Schreier sequence",
+   "results": "IsLocalRing.finrank_cotangentSpace_eq_zero, finInsepDegree_eq_pow, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, WittVector.isocrystal_classification; unrelated",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ArtinSchreier\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ArtinSchreier\\|artinSchreier' and 'Sheaf.H' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "no ArtinSchreier file; Sheaf.H only in CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "slopmaster2 (71d63dcf) WeilConjectures: 'artin-schreier-dimension', 'ArtinSchreier', 'constantZMod', 'constantModSheaf'",
+   "results": "AlgebraicGeometry.IsCurve.subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP (Curve/SmoothCalculations.lean 124-129, blueprint lem-sc-c3) states this for Λ/pΛ but is itself sorry; AlgebraicGeometry.Scheme.subsingleton_sheafH_constantZMod_of_isAffine (Sites/ArtinSchreier.lean 43-46, affine case) is sorry; AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_two_le_of_isAffine is sorry-free itself but reaches sorry (IsConnectedCurve.subsingleton_sheafH_two_lowerStar, Etale.unitComparison_app_isColimit_of_isLimit, Scheme.H_map_isColimit_of_isFiltered) by the sorry map",
+   "date": "2026-10-10",
+   "verdict": "no sorry-free Lean declaration"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -80,5 +210,22 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-artin-schreier-dimension",
+  "worker": "stage1",
+  "summary": "Rule 0: no sorry-free slopmaster2 declaration states the item (the C3 declaration IsCurve.subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP and the affine Scheme.subsingleton_sheafH_constantZMod_of_isAffine are sorry). Split the blueprint proof into seven steps checked against Stacks 0A3N (d=1) and 0A3P: the long exact sequence of the Artin–Schreier sequence (now citing the Grothendieck/enough-injectives/K-injective/delta-functor nodes the blueprint used silently), vanishing for q>=3 and reduction of q=2 to surjectivity of H^1(wp) by lem-sc-ga-cohomology, the proper/affine dichotomy, the affine case, and in the proper case the k-structure and p-linear Frobenius on H^1(C_et,G_a) (written out: the blueprint applied Lang–Steinberg to H^1(C,O_C) without saying why the etale H^1 is a finite-dimensional k-space with wp_*=F-1). Finite-dimensionality uses lem-pc-coherent-hi (02O5/02O6) and a new node lem-sc-etale-zariski-qcoh-comparison (03DW/03P2 with naturality in the module, needed to transport the k-structure; lem-sc-ga-cohomology states only an abstract isomorphism). Statement unchanged; stmt_deps unchanged.",
+  "blueprint": "Step 1 realizes 'The long exact sequence of the Artin–Schreier sequence ([lem-sc-as-sequence])'; step 2 'the terms H^q(C,G_a) vanish for q>=2 by [lem-sc-ga-cohomology]' and the final 'for q>=3 the two adjacent G_a cohomology terms vanish'; step 3 the first sentence (proper or affine); step 4 'In the affine case, [lem-sc-etale-affine-qcoherent] ...'; steps 5-6 'wp=F-1 with F the p-linear Frobenius endomorphism of the finite-dimensional k-vector space H^1(C,O_C)'; step 7 'this cokernel is zero by [lem-sc-lang-steinberg]' and the conclusion."
+ },
+ "tool_uses": [
+  "lem-pc-coherent-hi",
+  "lem-sc-affine-open-proper",
+  "lem-sc-as-sequence",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sp-kinjective-computes",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": "2026-10-10 L: 7 steps (the long exact sequence of Artin–Schreier, q >= 3 from H^j(G_a) = 0, the affine case, the k-structure on H^1(G_a) with Frobenius p-linear (written out), the proper case by finiteness and the Zariski/etale comparison (new node 03DW (2) with naturality), Lang–Steinberg); 7 tool uses accepted; 1 new node"
 }

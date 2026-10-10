@@ -1,0 +1,90 @@
+{
+ "id": "lem-sc-etale-zariski-qcoh-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proof, proper case: '$\\wp=F-1$ with $F$ the $p$-linear Frobenius endomorphism of the finite-dimensional $k$-vector space $H^1(C,\\mathcal O_C)$' (the identification of $H^1(C,\\mathbf G_a)$ with $H^1(C,\\mathcal O_C)$ as $k$-vector spaces, which needs the comparison isomorphism to be natural in the module)",
+   "via": []
+  },
+  "same_as": [
+   "lem-sc-ga-cohomology"
+  ]
+ },
+ "kind": "statement",
+ "title": "Etale and Zariski cohomology of quasi-coherent modules agree, naturally in the module",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $X_{\\Et}$ its small etale site [def-weil-pbc-etale-site]. For a quasi-coherent $\\mathcal O_X$-module $\\mathcal F$ [pqf-def-coherent] let $\\mathcal F_{\\mathrm{et}}\\in\\Ab(X_{\\Et})$ [def-weil-pbc-abelian-etale-sheaves] be the associated etale sheaf $u\\mapsto\\Gamma(U,u^*\\mathcal F)$ of [def-sc-etale-qcoherent-module], and for an $\\mathcal O_X$-linear morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of quasi-coherent $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] let $\\varphi_{\\mathrm{et}}:\\mathcal F_{\\mathrm{et}}\\to\\mathcal G_{\\mathrm{et}}$ be given on an object $u:U\\to X$ of $X_{\\Et}$ by $\\Gamma(U,u^*\\varphi):\\Gamma(U,u^*\\mathcal F)\\to\\Gamma(U,u^*\\mathcal G)$, where $u^*$ is the pullback of modules [def-pc-module-pullback]. Then $\\varphi_{\\mathrm{et}}$ is a morphism of $\\Ab(X_{\\Et})$, and there are isomorphisms of abelian groups\n$$\nc^q_{\\mathcal F}:H^q(X,\\mathcal F)\\xrightarrow{\\ \\sim\\ }H^q(X_{\\Et},\\mathcal F_{\\mathrm{et}})\\qquad(q\\geq0),\n$$\nthe left side the cohomology of $\\mathcal F$ on $X$ [pqf-def-cohomology], the right side etale cohomology [def-weil-pbc-etale-cohomology], with $c^0_{\\mathcal F}$ the identity of $\\Gamma(X,\\mathcal F)$, such that for every $\\mathcal O_X$-linear $\\varphi:\\mathcal F\\to\\mathcal G$ of quasi-coherent modules and every $q\\geq0$\n$$\nc^q_{\\mathcal G}\\circ H^q(X,\\varphi)=H^q(X_{\\Et},\\varphi_{\\mathrm{et}})\\circ c^q_{\\mathcal F}.\n$$",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Proposition 03DW (descent-proposition-same-cohomology-quasi-coherent), part (2): canonical isomorphisms $H^q(S,\\mathcal F)=H^q(S_\\etale,\\mathcal F^a)$; also Etale Cohomology, Theorem 03P2 (etale-cohomology-theorem-zariski-fpqc-quasi-coherent)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "pqf-def-coherent",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-etale-qcoherent-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of quasi-coherent sheaf equals Zariski cohomology",
+   "results": "AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, Scheme.smallEtaleTopology (Mathlib.AlgebraicGeometry.Sites.Etale), AffineZariskiSite.sheafEquiv (Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski), SheafOfModules.IsQuasicoherent.mk; no cohomology comparison",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "comparison isomorphism between étale and Zariski cohomology of a quasi-coherent module on a scheme, natural in the module",
+   "results": "Scheme.Modules.instIsIsoAbApp, Scheme.Modules.Hom.isIso_iff_isIso_app (Mathlib.AlgebraicGeometry.Modules.Sheaf), KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Scheme.restrictFunctorΓ, PresheafOfModules sheafify lemmas; nothing on cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Sheaf.H\\b' and 'smallEtale' and IsQuasicoherent+cohomology in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Sheaf.H only in CategoryTheory/Sites/SheafCohomology/Basic.lean (general sheaf cohomology on a site); smallEtale only in AlgebraicGeometry/Sites/{Etale,EtalePoint,AffineEtale}.lean (the site, no cohomology); no file combines quasi-coherent modules with cohomology",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "slopmaster2 WeilConjectures for a Lean comparison (zariski|qcoh|quasicoh|ofModules) theorems",
+   "results": "none; WeilConjectures/AlgebraicGeometry/Sites/ArtinSchreier.lean's docstring says the comparison of etale and Zariski cohomology of quasi-coherent sheaves is not yet available",
+   "date": "2026-10-10",
+   "verdict": "no Lean declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-artin-schreier-dimension",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd"
+}
