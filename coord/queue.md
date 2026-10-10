@@ -1,8 +1,8 @@
 # Work queue
 
-905 items; claim with `tools/claim.py next <group> [--stage N]`.
+911 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (643)
+## Stage 1: nodes to split (648)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1012 | none |
 | `lem-weil-pbc-radicial-prime-unique-degree-p` | 1012 | none |
 | `lem-weil-pbc-smooth-at-generic-point-over-field` | 1012 | none |
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1012 | none |
@@ -64,6 +63,8 @@
 | `lem-weil-pbc-conormal-module-principal-localization` | 1013 | none |
 | `lem-weil-pbc-criterion-flatness-fibre` | 1013 | none |
 | `lem-weil-pbc-degree-p-extension-regular` | 1013 | none |
+| `lem-weil-pbc-derivation-extends-finite-type-extension` | 1013 | none |
+| `lem-weil-pbc-differential-zero-iff-pth-power` | 1013 | none |
 | `lem-weil-pbc-etale-cohomology-local-ring-colimit` | 1013 | none |
 | `lem-weil-pbc-etale-ring-map-quasi-finite` | 1013 | none |
 | `lem-weil-pbc-etale-splits-off-quasi-finite-part` | 1013 | none |
@@ -90,6 +91,7 @@
 | `lem-weil-pbc-global-dimension-finite-modules-suffice` | 1013 | none |
 | `lem-weil-pbc-glue-sheaves-of-modules` | 1013 | none |
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 1013 | none |
+| `lem-weil-pbc-intersection-subfields-differentials` | 1013 | none |
 | `lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs` | 1013 | none |
 | `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1013 | none |
 | `lem-weil-pbc-lci-field-change` | 1013 | none |
@@ -104,9 +106,12 @@
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1013 | none |
 | `lem-weil-pbc-module-stalk-exact` | 1013 | none |
 | `lem-weil-pbc-nagata-universally-japanese` | 1013 | none |
+| `lem-weil-pbc-noether-normalization-over-domain` | 1013 | none |
+| `lem-weil-pbc-p-basis-exists` | 1013 | none |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1013 | none |
 | `lem-weil-pbc-power-series-complete-over-complete-base` | 1013 | none |
 | `lem-weil-pbc-power-series-quotient-variables` | 1013 | none |
+| `lem-weil-pbc-power-series-ring-subfields` | 1013 | none |
 | `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1013 | none |
 | `lem-weil-pbc-projective-dimension-well-defined` | 1013 | none |
 | `lem-weil-pbc-projective-resolution-kernel-projective` | 1013 | none |
@@ -650,7 +655,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (262)
+## Stage 2: nodes to state (263)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -835,6 +840,7 @@
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1 | state |
 | `lem-weil-pbc-proper-coproduct` | 1 | state |
+| `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
 | `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1 | state |
@@ -917,7 +923,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 655 nodes that wait for stage 1, 549 nodes that wait for a statement dependency.
+Not open yet: 660 nodes that wait for stage 1, 549 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
