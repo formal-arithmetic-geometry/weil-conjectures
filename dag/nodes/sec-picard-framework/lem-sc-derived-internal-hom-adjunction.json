@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lem-sc-finite-duality",
-   "place": "proper-flat support proof: transpose a map A\\otimes^L I\\to E by the derived tensor-internal-Hom adjunction",
+   "place": "proper-flat support proof: transpose a map A tensor^L I to E by the derived tensor-internal-Hom adjunction",
    "via": [
     "lem-sc-affine-perfect-derived-tensor-hom"
    ]
@@ -26,39 +26,175 @@
   "lem-pc-kflat-resolution",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a K-flat resolution P to K and a K-flat resolution L' to L by [lem-pc-kflat-resolution], and the K-injective resolution M to I fixed in [def-pur-derived-internal-hom], which exists by [prop-pur-kinjective-resolutions-exist]. The category of sheaves of O_X-modules is symmetric monoidal with tensor-Hom adjunction by [lem-pc-sheaf-modules-tensor-closed].",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pur-derived-internal-hom",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DJ proof"
+   }
+  },
+  {
+   "text": "By [lem-pur-rhom-well-defined] (with s the identity of I and t: L' to L), Hom^\\bullet(L,I) to Hom^\\bullet(L',I) is a quasi-isomorphism, and Hom^\\bullet(L',I) is K-injective by [lem-pur-hom-kflat-into-kinjective]; so by [def-pur-derived-internal-hom] Hom^\\bullet(L',I) represents R Hom(L,M), and Hom^\\bullet(P,Hom^\\bullet(L',I)) represents R Hom(K,R Hom(L,M)) and is again K-injective by [lem-pur-hom-kflat-into-kinjective]. By [lem-sc-derived-hom-tensor-total] (Stacks Tag 0A8M) it is isomorphic as a complex to Hom^\\bullet(Tot(P tensor L'),I), which represents R Hom(K tensor^L L,M) by [def-pur-derived-internal-hom], since Tot(P tensor L') represents K tensor^L L ([def-pc-tensor-complex-sheaves], L' representing L). Taking H^0 of global sections of these isomorphic K-injective complexes and applying [lem-pur-rhom-global-sections] on both sides gives Hom_D(K,R Hom(L,M)) congruent to Hom_D(K tensor^L L,M).",
+   "uses": [
+    "lem-pur-rhom-well-defined",
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-pur-derived-internal-hom",
+    "lem-sc-derived-hom-tensor-total",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DJ proof and equation (1), using Tags 0A8M, 0A8T and 08JA"
+   }
+  },
+  {
+   "text": "Independence of the choices and functoriality in K, L, M: different K-flat resolutions of L and K-injective resolutions of M give quasi-isomorphic Hom complexes by [lem-pur-rhom-well-defined], all K-injective by [lem-pur-hom-kflat-into-kinjective], and the isomorphism of [lem-sc-derived-hom-tensor-total] and the identification of [lem-pur-rhom-global-sections] are canonical and functorial; hence the bijection of Step 2 is canonical and functorial in K, L, and M.",
+   "uses": [
+    "lem-pur-rhom-well-defined",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-sc-derived-hom-tensor-total",
+    "lem-pur-rhom-global-sections",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DJ proof (Tag 0A8T comparison)"
+   }
+  },
+  {
+   "text": "The symmetry of [lem-pc-sheaf-modules-tensor-closed] on terms, with the Koszul sign (-1)^{pq} on P^p tensor L'^q, is an isomorphism of total complexes Tot(P tensor L') to Tot(L' tensor P) [def-pc-tensor-complex-sheaves] (a direct check against the total differential). Tot(P tensor L') represents K tensor^L L (P K-flat resolving K, L' representing L) and Tot(L' tensor P) represents L tensor^L K (L' K-flat resolving L, P representing K). Independence of the chosen resolutions: if A to B is a quasi-isomorphism and Q is K-flat, Tot(A tensor Q) to Tot(B tensor Q) is a quasi-isomorphism, since its cone is Tot(cone(A to B) tensor Q), acyclic by [def-pc-kflat-complex] (Stacks Tag 064K); comparing two choices through a common K-flat resolution [lem-pc-kflat-resolution] shows the isomorphism is canonical and functorial in K and L. Substituting it into Step 2 gives the final bijection.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FPB, sign rules; Tag 064K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "def-pur-derived-internal-hom",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sc-derived-hom-tensor-total",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-rhom-global-sections",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Lemmas 08DJ, 0A8M, 0A8T, 08JA and 0FPB"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "derived internal Hom tensor adjunction in a derived category",
-   "results": "Only ordinary ModuleCat closed-Hom declarations; no sheaf-derived internal Hom adjunction.",
+   "results": "Only generic Tor and HomologicalComplex.tensorHom; no sheaf-derived adjunction.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "RHom tensor Hom derived category",
-   "results": "0 hits; no matching declaration.",
+   "results": "0 hits.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "derived internal Hom tensor adjunction",
-   "results": "No matching declaration in Mathlib/ for derived sheaf categories.",
+   "query": "derived internal hom|tensorHomAdjunction (Mathlib/)",
+   "results": "No matching declaration.",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom tensor adjunction on a scheme",
+   "results": "unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-perfect-derived-tensor-hom",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-internal-hom-adjunction",
+  "worker": "stage1",
+  "summary": "Removed the abstract derived-category restatement rejected in the return. The split follows concrete Stacks 08DJ with K-flat and K-injective representatives, the 0A8I Hom-of-total-tensor identity, the K-flat/K-injective RHom comparison, and explicit sheaf-level Koszul-sign symmetry for 0FPB.",
+  "blueprint": "The four steps realize the ancestor clause transposing A tensor^L I to E and the symmetric derived-tensor clause.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "K-flat resolutions and quasi-isomorphism invariance are generic tools required by the Stacks construction."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Existence of K-injective resolutions and the Grothendieck property are generic tools from another unit."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "The sheaf-level symmetric monoidal closed structure is a generic tool from another unit."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Generic K-flat/K-injective Hom complex fact (Stacks 0A8T) from the purity unit."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic quasi-isomorphism invariance of Hom complexes into K-injectives (Stacks 0A95)."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic H^0 of global sections of RHom equals Hom in D (Stacks 08JA)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-rhom-global-sections",
+  "lem-pc-kflat-resolution",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-rhom-global-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dha3142",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dha3142 (reviewer sub-agent of L); spot-checked: Re-push vs 23:15 return: (1) abstract node gone, Stacks 08DJ route followed; (2) Mod(O) hypotheses cited; (3) 0FPB symmetry at Tot level with Koszul sign. FIX more, RETURN less: (a) class (b) duplicate lem-sc-rhom-kflat-kinjective dropped: its first clause is lem-pur-hom-kflat-into-kinjective (M1, 23:19), its second a special case (s=id) of lem-pur-rhom-well-defined; Steps 2-3 now cite both; (b) C1 Step 2: 'H^0 = Hom_K = Hom_D' was uncited; now cites lem-pur-rhom-global-sections (08JA) on both K-injective complexes, as Stacks 08DJ does, and L' as the representative in the item's own tensor convention; (c) B3 lem-sc-derived-hom-tensor-total source tag 0A8I is More-on-Algebra composition, not this lemma: corrected to sites 0A90 / cohomology 0A8M, statement rewritten in TeX with site, ring, functoriality; reviewer Mathlib grep recorded; Step 4 now states the 064K cone argument from def-pc-kflat-complex explicitly. C4: R Hom is def-pur-derived-internal-hom, K-injective convention unchanged. Both Second readings missed (a)-(c).; 2 file(s) fixed by the reviewer"
+ }
 }
