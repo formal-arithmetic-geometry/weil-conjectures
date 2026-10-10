@@ -1,8 +1,8 @@
 # Work queue
 
-920 items; claim with `tools/claim.py next <group> [--stage N]`.
+918 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (193)
+## Stage 1: nodes to split (191)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,8 +15,9 @@
 | `lem-pc-derived-limit-roos-abelian-groups` | 3014 | none |
 | `lem-pc-derived-lower-truncation-step-triangle` | 3014 | none |
 | `lem-pc-ringed-space-truncation-derived-limit` | 3014 | none |
-| `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
+| `lem-pc-perfect-generation-affine-base` | 3017 | none |
+| `lem-pc-perfect-generation-open-induction-step` | 3017 | none |
 | `lem-pc-perfect-tensor-hom-duality` | 3017 | none |
 | `lem-sc-affine-pseudo-coherent-rhom-qcoherent` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
@@ -46,7 +47,6 @@
 | `lem-pc-finite-flat-proper-support-descent` | 5013 | none |
 | `lem-pc-kflat-cone-direct-sum` | 5013 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
-| `lem-pc-sheaf-modules-tensor-closed` | 5013 | none |
 | `lem-pc-sites-modules-coproduct-flat` | 5013 | none |
 | `lem-pc-sites-modules-j-shriek-flat` | 5013 | none |
 | `lem-pc-sites-modules-quotient-j-shriek` | 5013 | none |
@@ -61,7 +61,6 @@
 | `pqf-lem-locqf-fibre-discrete` | 6012 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `def-weil-t-structure` | - | none |
-| `lemma-nagata-final-descended-model` | - | none |
 | `def-nagata-fixed-base-separated-stage` | - | none |
 | `def-nagata-separated-descent-stage` | - | none |
 | `def-pur-sheaf-tensor-product` | - | none |
@@ -79,7 +78,6 @@
 | `def-sc-field-extension` | - | none |
 | `def-weil-pbc-C1` | - | none |
 | `def-weil-pbc-C2` | - | none |
-| `def-weil-pbc-C3` | - | none |
 | `def-weil-pbc-C4` | - | none |
 | `def-weil-pbc-C5` | - | none |
 | `def-weil-pbc-C6` | - | none |
@@ -932,7 +930,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1437 nodes that wait for a statement dependency, 231 nodes that wait for stage 1.
+Not open yet: 1441 nodes that wait for a statement dependency, 229 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
