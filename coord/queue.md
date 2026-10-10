@@ -2,7 +2,7 @@
 
 893 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (660)
+## Stage 1: nodes to split (659)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,7 +23,6 @@
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
 | `lem-weil-pbc-lci-conormal-free-rank-codimension` | 1012 | none |
-| `lem-weil-pbc-local-artinian-basis-when-flat` | 1012 | none |
 | `lem-weil-pbc-localization-colimit-principal-localizations` | 1012 | none |
 | `lem-weil-pbc-localization-finite-gl-dim` | 1012 | none |
 | `lem-weil-pbc-lqf-restriction-to-opens` | 1012 | none |
@@ -667,7 +666,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (233)
+## Stage 2: nodes to state (234)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -819,6 +818,7 @@
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
 | `lem-weil-pbc-limit-flat-modules` | 1 | state |
 | `lem-weil-pbc-linear-equation-localization-polynomial` | 1 | state |
+| `lem-weil-pbc-local-artinian-basis-when-flat` | 1 | state |
 | `lem-weil-pbc-local-completion-quotient` | 1 | state |
 | `lem-weil-pbc-local-ring-idempotent-zero-one` | 1 | state |
 | `lem-weil-pbc-localization-of-regular-ring` | 1 | state |
@@ -905,7 +905,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 672 nodes that wait for stage 1, 517 nodes that wait for a statement dependency.
+Not open yet: 671 nodes that wait for stage 1, 517 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
