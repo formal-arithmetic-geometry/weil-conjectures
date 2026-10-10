@@ -84,7 +84,8 @@ noncomputable def stalkAtGeometricFiberPoint {K : Type u} [Field K] [Algebra k�
   F.stalkAt _ m (Scheme.Hom.geometricFiberPoint_comp_geometricGaloisFrobenius_pow
     (X ↘ Spec (CommRingCat.of k₀)) ι g hg m hK)
 
-lemma frobeniusPowIso_zero_hom_hom :
+/-- The iterated Weil structure `φ_0` on the underlying sheaf is the identification `𝟙_* F ≅ F`. -/
+lemma frobeniusPowIso_zero_hom_hom_eq_eqToHom :
     (F.frobeniusPowIso 0).hom.hom =
       eqToHom (by rw [pow_zero]; rfl) ≫
         (lowerStarId (WeilCoefficients.{u} l) _).hom.app F.obj.carrier.X := by
@@ -95,7 +96,8 @@ lemma frobeniusPowIso_zero_hom_hom :
     Mod.comapId_hom_app_hom, Category.id_comp]
   erw [Category.id_comp, Category.comp_id]
 
-lemma frobeniusPowIso_succ_hom_hom (m : ℕ) :
+/-- The recursion `φ_{m+1} = φ ∘ Fr^* φ_m` on the underlying sheaf. -/
+lemma frobeniusPowIso_succ_hom_hom_eq_eqToHom (m : ℕ) :
     (F.frobeniusPowIso (m + 1)).hom.hom =
       eqToHom (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv]; rfl) ≫
         (lowerStarComp _ (𝒢 ^ m).inv (𝒢).inv).inv.app F.obj.carrier.X ≫
@@ -105,6 +107,8 @@ lemma frobeniusPowIso_succ_hom_hom (m : ℕ) :
     adicLowerStarCongr_hom_app_hom, lowerStarCongr, eqToIso.hom, eqToHom_app]
   rfl
 
+/-- The additivity `φ_{x+y} = φ_y ∘ (Fr^y)^* φ_x` of the iterated Weil structures, on the
+underlying sheaf. -/
 theorem frobeniusPowIso_add_hom_hom (x y : ℕ) :
     (F.frobeniusPowIso (x + y)).hom.hom =
       eqToHom (by rw [pow_add, Aut.Aut_mul_def, Iso.trans_inv]; rfl) ≫
@@ -114,12 +118,12 @@ theorem frobeniusPowIso_add_hom_hom (x y : ℕ) :
   induction y with
   | zero =>
     change (F.frobeniusPowIso x).hom.hom = _
-    rw [frobeniusPowIso_zero_hom_hom]
+    rw [frobeniusPowIso_zero_hom_hom_eq_eqToHom]
     rw [lowerStarComp_inv_app_comp_lowerStarId_hom_app _ _ _ (by rw [pow_zero]; rfl)]
     simp
   | succ y ih =>
     change (F.frobeniusPowIso ((x + y) + 1)).hom.hom = _
-    rw [frobeniusPowIso_succ_hom_hom, ih, frobeniusPowIso_succ_hom_hom]
+    rw [frobeniusPowIso_succ_hom_hom_eq_eqToHom, ih, frobeniusPowIso_succ_hom_hom_eq_eqToHom]
     simp only [Functor.map_comp, Category.assoc]
     rw [eqToHom_lowerStarComp_inv_app_assoc_assoc _ _ _ _ ((𝒢) ^ (x + y)).inv
       (by rw [pow_add, Aut.Aut_mul_def, Iso.trans_inv]) ((𝒢) ^ (y + 1)).inv
@@ -129,6 +133,7 @@ theorem frobeniusPowIso_add_hom_hom (x y : ℕ) :
         (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv])]
 
 
+/-- The isomorphisms `F_{s ≫ Fr^{x+y}} ≅ F_s` compose: `T_{x+y}(s) = T_y(s) ∘ T_x(s ≫ Fr^y)`. -/
 lemma stalkObjFrobeniusPowIso_add_hom (x y : ℕ)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     (F.stalkObjFrobeniusPowIso (x + y) s).hom =
@@ -149,6 +154,7 @@ lemma stalkObjFrobeniusPowIso_add_hom (x y : ℕ)
   exact key
 
 
+/-- The isomorphisms `F_{σ^{x+y} ≫ t} ≅ F_t` compose: `R_{x+y}(t) = R_x(t) ∘ R_y(σ^x ≫ t)`. -/
 lemma stalkObjSpecFrobeniusPowIso_add_hom (x y : ℕ)
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     (F.stalkObjSpecFrobeniusPowIso (x + y) t).hom =
@@ -162,6 +168,8 @@ lemma stalkObjSpecFrobeniusPowIso_add_hom (x y : ℕ)
     _ t (specGeometricFrobenius k₀ ^ x) (specGeometricFrobenius k₀ ^ y)
     (specGeometricFrobenius k₀ ^ (x + y)) (by rw [pow_add, Aut.Aut_mul_def]) _
 
+/-- The reparametrisation isomorphisms `R_a` commute with the isomorphisms `T_b` induced by the
+iterated Weil structure. -/
 lemma stalkObjSpecFrobeniusPowIso_hom_comp_stalkObjFrobeniusPowIso_hom (a b : ℕ)
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
     (F.stalkObjSpecFrobeniusPowIso a (t ≫ ((𝒢) ^ b).hom)).hom ≫
@@ -181,6 +189,7 @@ noncomputable def stalkObjTransport (n : ℕ)
   (F.stalkObjSpecFrobeniusPowIso n s').symm ≪≫ eqToIso (congrArg F.stalkObj h.symm) ≪≫
     F.stalkObjFrobeniusPowIso n s
 
+/-- Naturality of `R_n` in the geometric point, for equal points. -/
 @[reassoc]
 lemma eqToHom_comp_stalkObjSpecFrobeniusPowIso_inv (n : ℕ)
     {p q : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
@@ -190,6 +199,7 @@ lemma eqToHom_comp_stalkObjSpecFrobeniusPowIso_inv (n : ℕ)
   subst h
   simp
 
+/-- Naturality of `T_n` in the geometric point, for equal points. -/
 @[reassoc]
 lemma stalkObjFrobeniusPowIso_hom_comp_eqToHom (n : ℕ)
     {p q : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
@@ -199,6 +209,8 @@ lemma stalkObjFrobeniusPowIso_hom_comp_eqToHom (n : ℕ)
   subst h
   simp
 
+/-- The transport isomorphisms compose additively: transport along `b` followed by transport
+along `a` is transport along `b + a`. -/
 lemma stalkObjTransport_trans (a b : ℕ)
     (s s' s'' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (h₁ : s ≫ ((𝒢) ^ a).hom = (specGeometricFrobenius k₀ ^ a).hom ≫ s')
@@ -223,6 +235,7 @@ lemma stalkObjTransport_trans (a b : ℕ)
     F.stalkObjFrobeniusPowIso_add_hom b a s]
   simp only [Category.assoc, eqToHom_trans_assoc]
 
+/-- The local Frobenius on `F_s` is the transport from `s` to itself. -/
 lemma stalkAt_frobenius
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (m : ℕ) (hs : s ≫ ((𝒢) ^ m).hom = (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
@@ -230,6 +243,7 @@ lemma stalkAt_frobenius
       WeilCoefficients.linearEquivOfIso (F.stalkObjTransport m s s hs) :=
   rfl
 
+/-- The transport isomorphism only depends on `n` up to equality. -/
 lemma stalkObjTransport_congr {n n' : ℕ} (hn : n = n')
     (s s' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (h : s ≫ ((𝒢) ^ n).hom = (specGeometricFrobenius k₀ ^ n).hom ≫ s')
@@ -238,6 +252,7 @@ lemma stalkObjTransport_congr {n n' : ℕ} (hn : n = n')
   subst hn
   rfl
 
+/-- The relations `s ≫ Frᵃ = σᵃ ≫ s'` and `s' ≫ Frᵇ = σᵇ ≫ s''` compose. -/
 lemma comp_geometricGaloisFrobenius_pow_add
     {s s' s'' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     {a b : ℕ} (h₁ : s ≫ ((𝒢) ^ a).hom = (specGeometricFrobenius k₀ ^ a).hom ≫ s')
@@ -246,6 +261,8 @@ lemma comp_geometricGaloisFrobenius_pow_add
   rw [pow_add, Aut.Aut_mul_def, Iso.trans_hom, reassoc_of% h₁, h₂, pow_add, Aut.Aut_mul_def,
     Iso.trans_hom, Category.assoc]
 
+/-- An isomorphism `F_{s'} ≅ F_s` intertwining the local Frobenius operators, stated through the
+transport isomorphisms, gives an isomorphism of Frobenius modules. -/
 lemma nonempty_equiv_stalkAt_of_iso
     (s s' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (m : ℕ) (hs : s ≫ ((𝒢) ^ m).hom = (specGeometricFrobenius k₀ ^ m).hom ≫ s)
