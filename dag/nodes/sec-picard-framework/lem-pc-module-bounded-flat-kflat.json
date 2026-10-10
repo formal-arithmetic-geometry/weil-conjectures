@@ -17,11 +17,34 @@
   "place": "Tag 064K, More on Algebra Lemma 15.59.1 (more-algebra-lemma-derived-tor-quasi-isomorphism)"
  },
  "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-tensor-complex-sheaves",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the first clause of [lem-pc-kflat-closure] to the one-point site whose unique sheaf of rings is R. Sheaves of modules on this site are exactly R-modules, and complexes, tensor products, acyclicity, and K-flatness identify with the corresponding module constructions. Thus a bounded-above complex P^\\bullet of flat R-modules is K-flat, which by [def-pc-kflat-complex] says that Tot(L^\\bullet \\otimes_R P^\\bullet) is acyclic for every acyclic L^\\bullet.",
+   "uses": [
+    "lem-pc-kflat-closure",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K, More on Algebra Lemma 15.59.1 (more-algebra-lemma-derived-tor-quasi-isomorphism)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-closure",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 064K, More on Algebra Lemma 15.59.1 (more-algebra-lemma-derived-tor-quasi-isomorphism)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,12 +76,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-bounded-above-flat-kflat",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-module-bounded-flat-kflat",
+  "worker": "stage1",
+  "summary": "Checked the bounded-above flat module assertion against Stacks Tag 064K. The DAG already contains the strictly more general first clause of lem-pc-kflat-closure for bounded-above flat complexes on an arbitrary ringed site, so no duplicate node was created. The proof specializes that statement to the one-point site with ring R and expands the K-flat definition.",
+  "blueprint": "Realizes the parent proof clause invoking Tag 064K to reduce the stalk complex to the bounded-above flat module result.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mbf2103",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mbf2103 (reviewer sub-agent of L); spot-checked: Single step cites lem-pc-kflat-closure clause 1 (bounded-above flat complexes K-flat on any site) specialised to the one-point site with ring R, then def-pc-kflat-complex; no reproof at length, no colimit/induction step to cite (C1 ok). Hypotheses match Tag 064K (bounded above, termwise flat; conclusion acyclic Tot with every acyclic L). No cycle on sheaf-dag: lem-pc-kflat-closure is unsplit, created from lem-pc-kflat-resolution, not from this item or its parent. stmt_deps additions correct. No new nodes. Second reading missed no mathematical fault; its created.item remark is inaccurate (field unchanged)."
+ },
+ "lead_note": "2026-10-10 L (R-mbf2103): Item now rests on unsplit lem-pc-kflat-closure clause 1; when that node is split, clause 1 must be proved on the site directly (Stacks 06YF-style truncation + flat tensor exactness), never via lem-pc-bounded-above-flat-kflat or this item, else a cycle. Second reading's claim that created.item was changed is inaccurate (it still names lem-pc-bounded-above-flat-kflat, correctly); harmless."
 }
