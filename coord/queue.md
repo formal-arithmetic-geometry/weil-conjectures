@@ -1,6 +1,6 @@
 # Work queue
 
-919 items; claim with `tools/claim.py next <group> [--stage N]`.
+921 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (622)
 
@@ -25,8 +25,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-global-complete-intersection-local-regular-sequence` | 1013 | none |
-| `lem-weil-pbc-glue-sheaves-of-modules` | 1013 | none |
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 1013 | none |
 | `lem-weil-pbc-intersection-subfields-differentials` | 1013 | none |
 | `lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs` | 1013 | none |
@@ -87,6 +85,7 @@
 | `lem-weil-pbc-zariski-open-restriction-injectives` | 1013 | none |
 | `def-weil-pbc-formal-glueing-data` | 1014 | none |
 | `lem-weil-pbc-affine-pushforward-ideal-product` | 1014 | none |
+| `lem-weil-pbc-cm-local-dimension-drop-regular-sequence` | 1014 | none |
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1014 | none |
 | `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1014 | none |
 | `lem-weil-pbc-colimit-eventually-flat` | 1014 | none |
@@ -94,6 +93,7 @@
 | `lem-weil-pbc-depth-in-ses` | 1014 | none |
 | `lem-weil-pbc-depth-le-support-dimension` | 1014 | none |
 | `lem-weil-pbc-essentially-constant-splitting` | 1014 | none |
+| `lem-weil-pbc-etale-retraction-finite-type-splitting` | 1014 | none |
 | `lem-weil-pbc-etale-splits-off-isolated-points-technical` | 1014 | none |
 | `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1014 | none |
 | `lem-weil-pbc-finite-type-domain-dimension-local-ring` | 1014 | none |
@@ -629,7 +629,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (297)
+## Stage 2: nodes to state (299)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -775,6 +775,8 @@
 | `lem-weil-pbc-free-resolution-ses-split` | 1 | state |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1 | state |
 | `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
+| `lem-weil-pbc-global-complete-intersection-local-regular-sequence` | 1 | state |
+| `lem-weil-pbc-glue-sheaves-of-modules` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-henselian-factorization-locally-nilpotent` | 1 | state |
 | `lem-weil-pbc-henselization-finite-separable-fibres` | 1 | state |
