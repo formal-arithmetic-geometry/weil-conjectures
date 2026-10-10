@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Quasi-coherent derived categories have direct sums",
- "statement": "For every quasi-compact and quasi-separated scheme X [def-pc-scheme], the derived category D_QCoh(O_X) [def-pc-derived-category] of complexes of O_X-modules with quasi-coherent cohomology has all set-indexed direct sums.",
+ "statement": "For every scheme $X$ [def-pc-scheme], the full subcategory $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-derived-category] of $D(\\mathcal O_X)$ on complexes with quasi-coherent cohomology has all set-indexed direct sums.",
  "source": {
   "document": "literature/stacks-project/derived-categories-of-schemes.tex",
   "place": "Lemma perfect-lemma-quasi-coherence-direct-sums"
@@ -22,39 +22,121 @@
   "def-pc-scheme",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-pc-derived-ambient-direct-sums], $D(\\mathcal O_X)$ has set-indexed direct sums represented by termwise direct sums of complexes, and their degree-$q$ cohomology sheaf is $\\bigoplus_i H^q(E_i)$ for every integer $q$.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 08DT (lemma-quasi-coherence-direct-sums), first three sentences, citing Injectives, Lemma 07D9 (lemma-derived-products)"
+   }
+  },
+  {
+   "text": "Fix a degree $q$ and a family $(E_i)_{i\\in I}$ in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Each $H^q(E_i)$ is quasi-coherent by [def-pc-derived-category]. The finite subsets $J\\subseteq I$, ordered by inclusion, form a directed set even when $I$ is empty: $\\varnothing$ is a member and $J\\cup K$ is an upper bound. Set $F_J=\\bigoplus_{i\\in J}H^q(E_i)$, with the usual inclusion maps. $F_{\\varnothing}=0$ is quasi-coherent from its affine-local definition, and induction on the size of $J$ using [lem-weil-pbc-quasi-coherent-module-direct-sum] makes every $F_J$ quasi-coherent. For any sheaf $G$, compatible maps $F_J\\to G$ are exactly families of maps $H^q(E_i)\\to G$: restrict to singleton subsets in one direction, and use the finite-sum universal property in the other. Hence the colimit of $(F_J)_J$ in $\\mathcal O_X$-modules is $\\bigoplus_{i\\in I}H^q(E_i)$. It is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections].",
+   "uses": [
+    "def-pc-derived-category",
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 08DT (lemma-quasi-coherence-direct-sums), last sentence; Schemes, Section 01LA (section-quasi-coherent)"
+   }
+  },
+  {
+   "text": "Step 2 applied to the cohomology identity of Step 1 shows that the ambient sum $E=\\bigoplus_i E_i$ has quasi-coherent cohomology in every degree; hence $E$ belongs to $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ by [def-pc-derived-category]. For any $G$ in that full subcategory, the ambient coproduct bijection $\\operatorname{Hom}_{D(\\mathcal O_X)}(E,G)\\cong\\prod_i\\operatorname{Hom}_{D(\\mathcal O_X)}(E_i,G)$ from [lem-pc-derived-ambient-direct-sums] is the same bijection in the full subcategory. Thus $E$ is its coproduct, also for the empty and singleton families.",
+   "uses": [
+    "def-pc-derived-category",
+    "lem-pc-derived-ambient-direct-sums"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 08DT (lemma-quasi-coherence-direct-sums), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-ambient-direct-sums",
+  "def-pc-derived-category",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Lemma 08DT (lemma-quasi-coherence-direct-sums) and its proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "derived category of quasi-coherent sheaves has direct sums",
-   "results": "no declaration",
+   "query": "derived category of O_X-modules has set-indexed direct sums computed termwise and cohomology commutes with direct sums",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived category of sheaves of modules direct sums termwise cohomology",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.IsKInjective; no direct-sum theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "D_QCoh direct sums",
-   "results": "no declaration",
+   "query": "DerivedCategory, HasColimit, direct sum, cohomology",
+   "results": "unknown identifier 'HasColimit'",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "rg -n 'quasi-coherent.*direct sums|D_QCoh' Mathlib/AlgebraicGeometry",
-   "results": "no derived quasi-coherent category direct-sum theorem",
+   "results": "Mathlib/AlgebraicGeometry has no derived quasi-coherent category direct-sum theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-pc-noetherian-derived-direct-image-right-adjoint",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-derived-qcoh-direct-sums",
+  "worker": "stage1",
+  "summary": "Split the Stacks direct-sums lemma into the ambient derived-category direct-sum prerequisite and the quasi-coherence argument. The proof uses termwise direct sums and exact cohomology, then expresses arbitrary quasi-coherent direct sums as filtered colimits of finite sums, citing the existing binary-sum and directed-colimit nodes.",
+  "blueprint": "The imported blueprint metadata points through lem-sc-finite-duality; the steps realize the direct-sum construction and quasi-coherence conclusion of the Stacks lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "why": "Step 2 needs the already-proved closure of quasi-coherent modules under finite binary direct sums; the Picard unit has no replacement for this module-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+    "why": "Step 2 needs the already-proved closure of quasi-coherent modules under directed colimits; the Picard unit has no replacement for this module-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dds1802",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dds1802 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements: ambient termwise sum + cohomology identity (07D9 + exactness of sums, 08DT proof), finite-subset directed system with binary-sum induction and directed-colimit closure, full-subcategory restriction of coproduct bijection; statement change (qcqs dropped) matches 08DT; new ambient node not a duplicate (no 07D9/derived-products node in DAG), not elementary; my grep of mathlib Algebra/Homology/DerivedCategory and HomotopyCategory for HasCoproducts: no match; no cycle with compact-generation/Brown representability (item cites neither); tool_uses of the two weil-pbc quasi-coherent module lemmas accepted as generic tools. No fault beyond second reading."
  }
 }
