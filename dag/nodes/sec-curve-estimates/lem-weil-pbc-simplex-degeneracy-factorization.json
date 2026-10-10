@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-simplex-degeneracy-factorization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries'; the finite initial truncation of the category indexing compatible simplicial boundary data; second paragraph of Stacks 017K's proof: factoring $\\varphi,\\varphi'$ through $\\sigma^{k-1}_i$ to lower the degree $k$ in the descent of the item's step 4",
+   "via": [
+    "lem-weil-pbc-simplicial-index-finite-initial",
+    "lem-weil-pbc-simplicial-hom-object-exists",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An order-preserving map constant on $\\{i,i+1\\}$ factors through $\\sigma_i$",
+ "statement": "Let $\\Delta$ be the category of the ordered sets $[m]=\\{0<1<\\dots<m\\}$ and order-preserving maps [def-weil-pbc-simplicial-set], and for $k\\geq1$ and $0\\leq i\\leq k-1$ let $\\sigma^{k-1}_i:[k]\\to[k-1]$ be the order-preserving surjection repeating $i$, i.e. $\\sigma^{k-1}_i(x)=x$ for $x\\leq i$ and $\\sigma^{k-1}_i(x)=x-1$ for $x>i$. Let $k\\geq1$, $n\\geq0$, let $\\varphi:[k]\\to[n]$ be order-preserving and let $0\\leq i\\leq k-1$ with $\\varphi(i)=\\varphi(i+1)$. Then there is an order-preserving map $\\psi:[k-1]\\to[n]$ with $\\varphi=\\psi\\circ\\sigma^{k-1}_i$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 017K (lemma-exists-hom-0-from-simplicial-set-finite), proof, second paragraph: 'Hence, if $k > 2m_0$, we may write $\\varphi = \\psi \\circ \\sigma^{k-1}_i$ and $\\varphi' = \\psi' \\circ \\sigma^{k-1}_i$'; $\\sigma^n_j$ is Definition 0165 (definition-face-degeneracy)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "order-preserving map [n+1] -> Delta' with theta i = theta (i+1) factors through the degeneracy sigma i",
+   "results": "LeanSearch service (lean_leansearch and https://leansearch.net/search directly) returned HTTP 500 Internal Server Error on every attempt at 14:23-14:24 UTC; no result",
+   "date": "2026-10-10",
+   "verdict": "no result (service error)"
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplexCategory.σ, CategoryTheory.CategoryStruct.comp, SimplexCategory.Hom.toOrderHom",
+   "results": "SimplexCategory.eq_σ_comp_of_not_injective, SimplexCategory.eq_σ_comp_of_not_injective' (Mathlib.AlgebraicTopology.SimplexCategory.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match: eq_σ_comp_of_not_injective'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monotone map from [n+1] taking equal values at i and i+1 factors through the codegeneracy σ_i",
+   "results": "SimplexCategory.factor_δ, factor_δ_spec, SimplexCategory.σ_comp_σ, SimplexCategoryGenRel.σ_comp_σ, σ_comp_σ_nat",
+   "date": "2026-10-10",
+   "verdict": "no direct hit (face factorization and simplicial identities only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem eq_σ_comp_of_not_injective\\|^def σ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean",
+   "results": "def σ (line 235: mkHom i.predAboveOrderHom : ⦋n+1⦌ ⟶ ⦋n⦌), eq_σ_comp_of_not_injective' (line 732), eq_σ_comp_of_not_injective (line 763)",
+   "date": "2026-10-10",
+   "verdict": "match: eq_σ_comp_of_not_injective' (line 732)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "SimplexCategory.eq_σ_comp_of_not_injective'",
+  "file": "Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean",
+  "lines": [
+   732,
+   235
+  ],
+  "how": "exact: eq_σ_comp_of_not_injective' (line 732) takes θ : ⦋n+1⦌ ⟶ Δ' and i : Fin (n+1) with θ(castSucc i) = θ(succ i), i.e. θ(i) = θ(i+1), and gives θ' : ⦋n⦌ ⟶ Δ' with θ = σ i ≫ θ', i.e. θ = θ'∘σ_i in composition order; SimplexCategory.σ i (line 235) is Fin.predAbove i, which is x ↦ x for x ≤ i and x ↦ x-1 for x > i, the node's σ^{k-1}_i (k = n+1)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-simplicial-index-finite-initial",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

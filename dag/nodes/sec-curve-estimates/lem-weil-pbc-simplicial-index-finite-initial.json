@@ -22,9 +22,85 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Setup and finiteness. $\\mathcal I_S$ is a category: the identity of $[n]$ is a morphism $(n,s)\\to(n,s)$, and if $\\varphi:(m,t)\\to(n,s)$ and $\\varphi':(n,s)\\to(p,r)$ then $S(\\varphi'\\circ\\varphi)(r)=S(\\varphi)(S(\\varphi')(r))=S(\\varphi)(s)=t$ by functoriality of $S$, so $\\varphi'\\circ\\varphi:(m,t)\\to(p,r)$. An integer $m_0$ as in the statement exists because $S$ has finitely many nondegenerate simplices (take the largest degree of a nondegenerate simplex, or $0$). The full subcategory $\\mathcal I_{S,\\leq2m_0}$ is finite: its objects form the finite set $\\coprod_{n\\leq2m_0}S_n$ (each $S_n$ is finite), and the morphisms $(m,t)\\to(n,s)$ form a subset of the finite set of order-preserving maps $[m]\\to[n]$.",
+   "uses": [
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017K (lemma-exists-hom-0-from-simplicial-set-finite), proof, first paragraph ('For $m>0$ let $\\mathcal U_{\\leq m}$ denote the full subcategory ...'; 'Let $m_0$ be an integer such that every $n$-simplex ... is degenerate if $n>m_0$') and the category $\\mathcal U$ of the proof of Lemma 017J"
+   }
+  },
+  {
+   "text": "Every object maps to one of degree at most $m_0$; this proves (1). Let $z=(n,s)$. By [lem-weil-pbc-simplicial-set-nondegenerate-decomposition] there are $r\\geq0$, a surjective order-preserving $\\sigma:[n]\\to[r]$ and a nondegenerate $u\\in S_r$ with $s=S(\\sigma)(u)$. Since $u$ is nondegenerate, $r\\leq m_0$ by the choice of $m_0$. Thus $\\sigma$ is a morphism $z\\to(r,u)$ in $\\mathcal I_S$ with $(r,u)$ in $\\mathcal I_{S,\\leq m_0}\\subseteq\\mathcal I_{S,\\leq2m_0}$, which is (1).",
+   "uses": [
+    "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017K (lemma-exists-hom-0-from-simplicial-set-finite), proof, first paragraph: 'For any $m\\geq m_0$ large enough, the subcategory $\\mathcal U_{\\leq m}$ satisfies property (1) of Categories, Definition definition-initial'; third paragraph: 'By our choice of $m_0$ we can find objects $u,u'$ of $\\mathcal U_{\\leq m_0}$ and morphisms'"
+   }
+  },
+  {
+   "text": "Combinatorial claim. Let $k>2m_0$ and let $\\varphi:[k]\\to[n]$, $\\varphi':[k]\\to[n']$ be order-preserving with $n,n'\\leq m_0$. Then there is $0\\leq i\\leq2m_0$ (so $i\\leq k-1$) with $\\varphi(i)=\\varphi(i+1)$ and $\\varphi'(i)=\\varphi'(i+1)$. Indeed, call $i\\in\\{0,\\ldots,k-1\\}$ an ascent of $\\varphi$ if $\\varphi(i)<\\varphi(i+1)$; as $\\varphi$ is order-preserving, $\\varphi(k)-\\varphi(0)$ is at least the number of ascents, so $\\varphi$ has at most $n\\leq m_0$ ascents, and likewise $\\varphi'$ has at most $m_0$. Among the $2m_0+1$ indices $0,1,\\ldots,2m_0$ at most $2m_0$ are ascents of $\\varphi$ or of $\\varphi'$, so one index $i$ is an ascent of neither, i.e. $\\varphi(i)=\\varphi(i+1)$ and $\\varphi'(i)=\\varphi'(i+1)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017K (lemma-exists-hom-0-from-simplicial-set-finite), proof, second paragraph: 'A simple combinatorial argument shows that if $k>2m_0$, then there exists an index $0\\leq i\\leq2m_0$ such that $\\varphi(i)=\\varphi(i+1)$ and $\\varphi'(i)=\\varphi'(i+1)$' (the argument, omitted in the source, written out)"
+   }
+  },
+  {
+   "text": "Descent to degree at most $2m_0$. Claim: for every object $z=(k,w)$ and morphisms $\\varphi:z\\to(n,u)$, $\\varphi':z\\to(n',u')$ of $\\mathcal I_S$ with $n,n'\\leq m_0$, there are an object $a=(k',v)$ with $k'\\leq2m_0$ and morphisms $\\tau:z\\to a$, $\\psi:a\\to(n,u)$, $\\psi':a\\to(n',u')$ with $\\psi\\circ\\tau=\\varphi$ and $\\psi'\\circ\\tau=\\varphi'$. Induction on $k$. If $k\\leq2m_0$ take $a=z$, $\\tau=\\mathrm{id}$, $\\psi=\\varphi$, $\\psi'=\\varphi'$. If $k>2m_0$, step 3 gives $i\\leq k-1$ with $\\varphi(i)=\\varphi(i+1)$, $\\varphi'(i)=\\varphi'(i+1)$, and [lem-weil-pbc-simplex-degeneracy-factorization] gives order-preserving $\\psi_1:[k-1]\\to[n]$, $\\psi_1':[k-1]\\to[n']$ with $\\varphi=\\psi_1\\circ\\sigma^{k-1}_i$, $\\varphi'=\\psi_1'\\circ\\sigma^{k-1}_i$. Put $v_1=S(\\psi_1)(u)$, $v_1'=S(\\psi_1')(u')$. Then $s^{k-1}_i(v_1)=S(\\sigma^{k-1}_i)(S(\\psi_1)(u))=S(\\varphi)(u)=w=S(\\varphi')(u')=s^{k-1}_i(v_1')$, and $s^{k-1}_i:S_{k-1}\\to S_k$ is injective by [lem-weil-pbc-simplicial-degeneracy-injective], so $v_1=v_1'$. Hence $z_1=(k-1,v_1)$ is an object with morphisms $\\sigma^{k-1}_i:z\\to z_1$ (as $S(\\sigma^{k-1}_i)(v_1)=w$), $\\psi_1:z_1\\to(n,u)$ and $\\psi_1':z_1\\to(n',u')$. The induction hypothesis for $z_1$ and $\\psi_1,\\psi_1'$ gives $a$ with $k'\\leq2m_0$, $\\tau_1:z_1\\to a$, $\\psi,\\psi'$ with $\\psi\\circ\\tau_1=\\psi_1$, $\\psi'\\circ\\tau_1=\\psi_1'$; then $\\tau=\\tau_1\\circ\\sigma^{k-1}_i$ satisfies $\\psi\\circ\\tau=\\psi_1\\circ\\sigma^{k-1}_i=\\varphi$ and $\\psi'\\circ\\tau=\\varphi'$.",
+   "uses": [
+    "lem-weil-pbc-simplex-degeneracy-factorization",
+    "lem-weil-pbc-simplicial-degeneracy-injective",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017K (lemma-exists-hom-0-from-simplicial-set-finite), proof, second paragraph: 'Hence, if $k>2m_0$, we may write $\\varphi=\\psi\\circ\\sigma^{k-1}_i$ ... Since $s^{k-1}_i$ is injective, see Lemma 016F, we conclude that $U(\\psi)(u)=U(\\psi')(u')$ also. Continuing in this fashion ... with $a\\in\\mathcal U_{\\leq2m_0}$'"
+   }
+  },
+  {
+   "text": "The zigzag; this proves (2). Let $\\alpha:z\\to y$ and $\\alpha':z\\to y'$ be morphisms with $y,y'$ in $\\mathcal I_{S,\\leq2m_0}$. By step 2 there are morphisms $\\beta:y\\to u$, $\\beta':y'\\to u'$ with $u,u'$ of degree at most $m_0$. Step 4 applied to $\\beta\\circ\\alpha:z\\to u$ and $\\beta'\\circ\\alpha':z\\to u'$ gives $a$ of degree at most $2m_0$ and $\\tau:z\\to a$, $\\psi:a\\to u$, $\\psi':a\\to u'$ with $\\psi\\circ\\tau=\\beta\\circ\\alpha$, $\\psi'\\circ\\tau=\\beta'\\circ\\alpha'$. Take $r=2$ and $y_0=y\\xrightarrow{\\beta}y_1=u\\xleftarrow{\\psi}y_2=a\\xrightarrow{\\psi'}y_3=u'\\xleftarrow{\\beta'}y_4=y'$, all in $\\mathcal I_{S,\\leq2m_0}$ (as $m_0\\leq2m_0$), with $z\\to y_i$ equal to $\\alpha$, $\\beta\\circ\\alpha$, $\\tau$, $\\beta'\\circ\\alpha'$, $\\alpha'$. The compatibilities are $\\beta\\circ\\alpha=(z\\to y_1)$, $\\psi\\circ\\tau=\\beta\\circ\\alpha$, $\\psi'\\circ\\tau=\\beta'\\circ\\alpha'$ and $\\beta'\\circ\\alpha'=(z\\to y_3)$, which hold by construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017K (lemma-exists-hom-0-from-simplicial-set-finite), proof, third paragraph: 'It is easy to deduce from this that the finite subcategory $\\mathcal U_{\\leq2m_0}$ works ... Turning this diagram 90 degrees clockwise we get the desired diagram as in (2) of Categories, Definition definition-initial'"
+   }
+  },
+  {
+   "text": "Limit comparison. Let $H:\\mathcal I_{S,\\leq2m_0}^{\\mathrm{op}}\\to\\mathcal I_S^{\\mathrm{op}}$ be the inclusion. A morphism $H(x)\\to z$ in $\\mathcal I_S^{\\mathrm{op}}$ is a morphism $z\\to x$ in $\\mathcal I_S$, and a sequence $x_0\\leftarrow x_1\\rightarrow x_2\\leftarrow\\cdots\\rightarrow x_{2r}$ in $\\mathcal I_{S,\\leq2m_0}^{\\mathrm{op}}$ with compatible $H(x_i)\\to z$ is a zigzag $x_0\\to x_1\\leftarrow x_2\\to\\cdots\\leftarrow x_{2r}$ in $\\mathcal I_{S,\\leq2m_0}$ with compatible $z\\to x_i$; so (1) and (2), proved in steps 2 and 5, are hypotheses (1) and (2) of [lem-weil-pbc-initial-functor-limit] for $H$. That node, applied to $M=D:\\mathcal I_S^{\\mathrm{op}}\\to\\mathcal C$, gives: $D$ has a limit if and only if $D\\circ H$ (the restriction to the finite category $\\mathcal I_{S,\\leq2m_0}^{\\mathrm{op}}$) has one, every cone on the restriction extends to a cone on $D$ with the same vertex, a cone on $D$ is a limit iff its restriction is, and the canonical morphism $\\varprojlim_{\\mathcal I_S^{\\mathrm{op}}}D\\to\\varprojlim_{\\mathcal I_{S,\\leq2m_0}^{\\mathrm{op}}}D|$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Lemma 017K (lemma-exists-hom-0-from-simplicial-set-finite), proof, first sentences: 'We have to show that the category $\\mathcal U$ ... has a finite subcategory $\\mathcal U'$ such that the limit of $\\mathcal V$ over $\\mathcal U'$ is the same as the limit of $\\mathcal V$ over $\\mathcal U$. We will use Categories, Lemma 002R'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-set",
+  "lem-weil-pbc-simplicial-set-nondegenerate-decomposition",
+  "lem-weil-pbc-simplex-degeneracy-factorization",
+  "lem-weil-pbc-simplicial-degeneracy-injective",
+  "lem-weil-pbc-initial-functor-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 017K (lemma-exists-hom-0-from-simplicial-set-finite), proof; Categories (literature/stacks-project/categories.tex) Definition definition-initial and Lemma 002R (lemma-initial)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,10 +125,30 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
-  "item": "lem-weil-pbc-simplicial-hom-object-exists"
+  "by": "worker",
+  "item": "lem-weil-pbc-simplicial-hom-object-exists",
+  "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-simplicial-index-finite-initial",
+  "worker": "stage1",
+  "summary": "Split following the proof of Stacks Simplicial 017K (paragraphs on $\\mathcal U_{\\leq2m_0}$), with the directions checked against Categories Definition definition-initial for the inclusion $\\mathcal I_{S,\\leq2m_0}^{\\mathrm{op}}\\to\\mathcal I_S^{\\mathrm{op}}$ (the node's (1),(2) are exactly that definition after passing to opposites; the source's text writes the arrows of $\\mathcal U$ the other way round in the second and third paragraphs, the mathematics is the same). Step 1 setup and finiteness; step 2 (1) by the Eilenberg-Zilber existence clause; step 3 the combinatorial claim the source leaves to the reader, written out (count of ascents); step 4 the descent to degree $\\leq2m_0$ by induction with the sigma-factorization and the injectivity of degeneracies (016F); step 5 the zigzag of length 4 giving (2); step 6 the limit comparison via a new Mathlib-leaf node for Categories 002R. Three new nodes, all Mathlib leaves; statement unchanged; created.by/date filled.",
+  "blueprint": "The steps realize the place of lem-weil-pbc-hypercover-refinement recorded in from.place (proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries'): the finite truncation of the indexing category of compatible simplicial boundary data, whose limit comparison (step 6) is what lets the hom object of the finite simplicial set be a finite limit."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": "2026-10-10 L: 6 steps along 017K checked (setup; clause (1) by the nondegenerate decomposition; the pigeonhole step on ascents written out; descent to degree <= 2 m_0 by the new degeneracy-factorization and injectivity leaves; the zigzag; limit comparison by the new initial-functor leaf). Three new Mathlib leaves verified (eq_sigma_comp_of_not_injective 732, delta_comp_sigma_self 156, Functor.Initial 104 / limitIso 712 with isConnected_of_zigzag as the bridge to Stacks explicit zigzags). Stacks 017K writes the arrows of U in the opposite direction (worker note). LeanSearch down."
 }

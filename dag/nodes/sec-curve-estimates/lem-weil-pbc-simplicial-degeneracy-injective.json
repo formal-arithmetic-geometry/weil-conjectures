@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-pbc-simplicial-degeneracy-injective",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries'; the finite initial truncation of the category indexing compatible simplicial boundary data; second paragraph of Stacks 017K's proof: 'Since $s^{k-1}_i$ is injective ... we conclude that $U(\\psi)(u)=U(\\psi')(u')$ also', used in the item's step 4",
+   "via": [
+    "lem-weil-pbc-simplicial-index-finite-initial",
+    "lem-weil-pbc-simplicial-hom-object-exists",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Degeneracy maps of a simplicial set are injective",
+ "statement": "Let $S$ be a simplicial set [def-weil-pbc-simplicial-set], with face maps $d^{n+1}_j=S(\\delta^{n+1}_j):S_{n+1}\\to S_n$ ($\\delta^{n+1}_j:[n]\\to[n+1]$ the increasing injection omitting $j$) and degeneracy maps $s^n_i=S(\\sigma^n_i):S_n\\to S_{n+1}$ ($\\sigma^n_i:[n+1]\\to[n]$ the order-preserving surjection repeating $i$). Then for every $n\\geq0$ and $0\\leq i\\leq n$ one has $d^{n+1}_i\\circ s^n_i=\\mathrm{id}_{S_n}$; in particular $s^n_i:S_n\\to S_{n+1}$ is injective.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Lemma 016F (lemma-si-injective) and its proof ('This is true because $d_i^{n+1}\\circ s^n_i=\\mathrm{id}_{U_n}$'), for simplicial objects of Sets; cited in the proof of Lemma 017K ('Since $s^{k-1}_i : U_{k-1} \\to U_k$ is injective, see Lemma 016F')"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degeneracy map of a simplicial object has a left inverse given by a face map, sigma i then delta i is the identity",
+   "results": "LeanSearch service (lean_leansearch and https://leansearch.net/search directly) returned HTTP 500 Internal Server Error on every attempt at 14:23-14:24 UTC; no result",
+   "date": "2026-10-10",
+   "verdict": "no result (service error)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.σ, CategoryTheory.SimplicialObject.δ, CategoryTheory.CategoryStruct.id",
+   "results": "CategoryTheory.SimplicialObject.δ_comp_σ_self, δ_comp_σ_succ, δ_comp_σ_self', δ_comp_σ_succ' (Mathlib.AlgebraicTopology.SimplicialObject.Basic), SimplicialObject.Augmented.ExtraDegeneracy.mk",
+   "date": "2026-10-10",
+   "verdict": "match: SimplicialObject.δ_comp_σ_self"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degeneracy maps of a simplicial set are injective because a face map is a left inverse",
+   "results": "SimplexCategory.δ_injective, SimplexCategory.σ_injective (injectivity of i ↦ δ i, σ i, not of the maps of a simplicial set), FreeSimplexQuiver.Hom.σ.inj, SSet.StrictSegalCore.injective",
+   "date": "2026-10-10",
+   "verdict": "no direct hit for injectivity of s_i on a simplicial set"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem δ_comp_σ_self\\|^def σ\\|^def δ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean; grep -rn 'theorem LeftInverse.injective' ~/.elan/toolchains/leanprover--lean4---v4.33.1/src/lean/Init",
+   "results": "SimplicialObject.σ (line 97: X.map (SimplexCategory.σ i).op), SimplicialObject.δ_comp_σ_self (line 156: X.σ i ≫ X.δ (Fin.castSucc i) = 𝟙 _); Function.LeftInverse.injective (Lean core Init/Data/Function.lean line 91)",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.SimplicialObject.δ_comp_σ_self; Function.LeftInverse.injective",
+  "file": "Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean",
+  "lines": [
+   156,
+   97
+  ],
+  "how": "one declaration per clause: for X : SSet = SimplicialObject (Type u), δ_comp_σ_self (SimplicialObject/Basic.lean line 156) says X.σ i ≫ X.δ (Fin.castSucc i) = 𝟙, i.e. d_i ∘ s_i = id on X_n (composition in Type is composition of functions; X.σ i = X.map (SimplexCategory.σ i).op, line 97, is the node's s^n_i, X.δ (castSucc i) is d^{n+1}_i); injectivity is Function.LeftInverse.injective (Lean core, Init/Data/Function.lean line 91, available in Mathlib) applied to the left inverse d_i"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-simplicial-index-finite-initial",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

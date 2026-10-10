@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-initial-functor-limit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-hypercover-refinement",
+   "place": "proof, fourth paragraph: 'Previously chosen faces prescribe compatible boundaries'; the finite initial truncation of the category indexing compatible simplicial boundary data; Stacks 017K proof, first sentence: 'We will use Categories, Lemma 002R', the limit comparison conclusion of the item (its step 6)",
+   "via": [
+    "lem-weil-pbc-simplicial-index-finite-initial",
+    "lem-weil-pbc-simplicial-hom-object-exists",
+    "lem-weil-pbc-hypercover-finite-simplex-lifting"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An initial functor induces an isomorphism of limits",
+ "statement": "Let $H:\\mathcal I\\to\\mathcal J$ be a functor between categories which is initial in the following sense: (1) for every object $y$ of $\\mathcal J$ there are an object $x$ of $\\mathcal I$ and a morphism $H(x)\\to y$; (2) for every object $y$ of $\\mathcal J$, all objects $x,x'$ of $\\mathcal I$ and morphisms $a:H(x)\\to y$, $a':H(x')\\to y$ there are a sequence of morphisms $x=x_0\\leftarrow x_1\\rightarrow x_2\\leftarrow x_3\\rightarrow\\cdots\\rightarrow x_{2n}=x'$ in $\\mathcal I$ and morphisms $a_i:H(x_i)\\to y$ with $a_0=a$, $a_{2n}=a'$, such that $a_{2k}\\circ H(x_{2k+1}\\to x_{2k})=a_{2k+1}=a_{2k+2}\\circ H(x_{2k+1}\\to x_{2k+2})$ for $k=0,\\ldots,n-1$. Let $\\mathcal C$ be a category and $M:\\mathcal J\\to\\mathcal C$ a functor. A *cone* on a functor $N:\\mathcal K\\to\\mathcal C$ is an object $L$ with morphisms $p_k:L\\to N(k)$ such that $N(b)\\circ p_k=p_{k'}$ for every $b:k\\to k'$; a *limit* of $N$ is a cone $(\\varprojlim N,(p_k))$ through which every cone $(L',(p'_k))$ factors by exactly one morphism $L'\\to\\varprojlim N$. Then: (a) a cone $(L,(q_y)_y)$ on $M$ is a limit of $M$ if and only if its restriction $(L,(q_{H(x)})_x)$ is a limit of $M\\circ H$; (b) every cone $(L,(p_x)_x)$ on $M\\circ H$ is the restriction of a cone $(L,(q_y)_y)$ on $M$ with the same vertex. Consequently $M$ has a limit if and only if $M\\circ H$ has one, and then the canonical morphism $\\varprojlim_{\\mathcal J}M\\to\\varprojlim_{\\mathcal I}M\\circ H$ (with components $q_{H(x)}$) is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma 002R (categories-lemma-initial: 'Assume I is initial in J. Then for every diagram M : J -> C we have a canonical isomorphism lim_I M∘H = lim_J M if either side exists'), with Definition definition-initial for (1),(2); the source's proof is 'Omitted', the Mathlib match carries it"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "initial functor induces isomorphism of limits, limit over F ⋙ G iso limit over G",
+   "results": "LeanSearch service (lean_leansearch and https://leansearch.net/search directly) returned HTTP 500 Internal Server Error on every attempt at 14:23-14:24 UTC; no result",
+   "date": "2026-10-10",
+   "verdict": "no result (service error)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If H : I → J is initial (every comma category connected), limits of M over J agree with limits of M ∘ H over I",
+   "results": "CategoryTheory.Functor.Initial.limitConeOfComp_isLimit, Functor.Initial.hasLimit_comp_iff, Functor.Initial.limitConeComp_isLimit, Functor.Initial.hasLimit_of_comp, Functor.Initial.limitIso, Functor.Initial.comp_hasLimit (Mathlib.CategoryTheory.Limits.Final)",
+   "date": "2026-10-10",
+   "verdict": "match: Functor.Initial.limitIso, hasLimit_comp_iff, isLimitWhiskerEquiv"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'class Initial\\|def extendCone\\|def conesEquiv\\|def isLimitWhiskerEquiv\\|def limitIso\\|lemma hasLimit_comp_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/Final.lean; grep -n 'theorem isConnected_of_zigzag' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/IsConnected.lean",
+   "results": "class Initial (line 104: every CostructuredArrow F d connected), extendCone (584), conesEquiv (645), isLimitWhiskerEquiv (656), limitIso (712, stacks 04E7 dual), hasLimit_comp_iff (742); isConnected_of_zigzag (IsConnected.lean 461)",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.isConnected_of_zigzag; CategoryTheory.Functor.Initial; CategoryTheory.Functor.Initial.isLimitWhiskerEquiv; CategoryTheory.Functor.Initial.extendCone; CategoryTheory.Functor.Initial.hasLimit_comp_iff; CategoryTheory.Functor.Initial.limitIso",
+  "file": "Mathlib/CategoryTheory/Limits/Final.lean; Mathlib/CategoryTheory/IsConnected.lean",
+  "lines": [
+   104,
+   656,
+   584,
+   645,
+   742,
+   712,
+   461
+  ],
+  "how": "one declaration per clause: hypotheses (1),(2) make each CostructuredArrow H y (objects (x, H(x)→y)) nonempty and give, for any two objects, a list of objects linked by Zag (a morphism in one direction or the other: the arrows x_{2k+1}→x_{2k}, x_{2k+1}→x_{2k+2} with the compatibilities are morphisms of CostructuredArrow H y), which is the hypothesis of isConnected_of_zigzag (IsConnected.lean line 461); so H is Functor.Initial (class Initial, Final.lean line 104). Then (a) is isLimitWhiskerEquiv (line 656: IsLimit (t.whisker F) ≃ IsLimit t); (b) is extendCone (line 584, legs c.π.app (lift F d) ≫ G.map (homToLift F d), same vertex) with conesEquiv (line 645, counit iso with identity components, so the restriction of the extension is the given cone); existence of either limit is hasLimit_comp_iff (line 742) and the canonical isomorphism is limitIso (line 712, (asIso (limit.pre G F)).symm)."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-simplicial-index-finite-initial",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}
