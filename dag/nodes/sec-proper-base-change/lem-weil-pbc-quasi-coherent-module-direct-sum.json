@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "lemma-weil-pbc-h1-constructible-representation",
-   "place": "step 4 of its split (source: Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, third paragraph, 'By Lemma 09Z7 (lemma-constructible-maps-into-constant-general) and the remarks above we may assume F is of the form f_*M where M is a finite Z/lZ-module and f: Y -> X is a finite morphism of finite presentation')",
+   "place": "proof, third paragraph: 'The finite-pushforward lemma gives a monomorphism F into F' = direct sum of finite pushforwards'; this node supports the quasi-coherent extension route below that finite-pushforward input",
    "via": [
     "lem-weil-pbc-quasi-coherent-extension-qc-open",
     "lem-weil-pbc-module-finite-presentation-extension",
@@ -16,23 +16,90 @@
     "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The direct sum of two quasi-coherent modules is quasi-coherent",
- "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\mathcal F_1,\\mathcal F_2$ be quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. Let $\\mathcal F_1\\oplus\\mathcal F_2$ be the $\\mathcal O_X$-module $W\\mapsto\\mathcal F_1(W)\\oplus\\mathcal F_2(W)$ (for $W\\subseteq X$ open), with componentwise $\\mathcal O_X(W)$-module structure and componentwise restriction maps; it is a sheaf, and together with the inclusions and projections of the two summands it is a direct sum (biproduct) of $\\mathcal F_1$ and $\\mathcal F_2$ in $\\Mod(\\mathcal O_X)$. Then $\\mathcal F_1\\oplus\\mathcal F_2$ is a quasi-coherent $\\mathcal O_X$-module.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and let $\\mathcal F_1,\\mathcal F_2$ be quasi-coherent $\\mathcal O_X$-modules [pqf-def-coherent], [def-weil-sheaf-of-modules-category]. Let $\\mathcal F_1\\oplus\\mathcal F_2$ be the $\\mathcal O_X$-module $W\\mapsto\\mathcal F_1(W)\\oplus\\mathcal F_2(W)$ (for $W\\subseteq X$ open), with componentwise $\\mathcal O_X(W)$-module structure and componentwise restriction maps; it is a sheaf, and together with the inclusions and projections of the two summands it is a direct sum (biproduct [def-weil-additive-category]) of $\\mathcal F_1$ and $\\mathcal F_2$ in $\\Mod(\\mathcal O_X)$. Then $\\mathcal F_1\\oplus\\mathcal F_2$ is a quasi-coherent $\\mathcal O_X$-module.",
  "source": {
-  "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 01ID (lemma-colimit-quasi-coherent, line 1434: on $\\operatorname{Spec}R$ the direct sum of the $\\widetilde{M_i}$ is $\\widetilde{\\bigoplus M_i}$) and Section 01LA (section-quasi-coherent, line 4717, item (3): any direct sum of quasi-coherent sheaves is quasi-coherent, the property being local on $X$)"
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01BF (lemma-direct-sum-quasi-coherent, whose proof is omitted); the proof follows Schemes, Lemma 01ID (lemma-colimit-quasi-coherent: on $\\operatorname{Spec}R$ the direct sum of the $\\widetilde{M_i}$ is $\\widetilde{\\bigoplus M_i}$) and Section 01LA (section-quasi-coherent), item (3)"
  },
  "stmt_deps": [
   "def-pc-scheme",
   "pqf-def-coherent",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-additive-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*The sectionwise binary sum is a sheaf and a coproduct.* Put $\\mathcal B(W)=\\mathcal F_1(W)\\oplus\\mathcal F_2(W)$, with componentwise restrictions and $\\mathcal O_X(W)$-action as in the statement. A matching family of pairs over an open cover is exactly a matching family in each $\\mathcal F_i$; the unique gluings in the two sheaves give the unique gluing in $\\mathcal B$. Thus $\\mathcal B$ is an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category]. Its inclusions $j_i$ and projections $p_i$ satisfy $p_i j_i=\\mathrm{id}$, $p_i j_{3-i}=0$, and $j_1p_1+j_2p_2=\\mathrm{id}_{\\mathcal B}$ sectionwise [def-weil-additive-category]. For any two module morphisms $f_i:\\mathcal F_i\\to\\mathcal H$, the map $f_1p_1+f_2p_2:\\mathcal B\\to\\mathcal H$ is the unique map whose composites with the $j_i$ are $f_i$, since any $h$ equals $h(j_1p_1+j_2p_2)$. Hence $\\mathcal B$ is both the stated biproduct and the coproduct, a colimit of the discrete two-object diagram [def-weil-pbc-category-colimit].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-additive-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AH (lemma-limits-colimits), part (4), and the paragraph before it on direct sums as coproducts; Lemma 01BF (lemma-direct-sum-quasi-coherent), proof omitted"
+   }
+  },
+  {
+   "text": "*Choose affine descriptions.* Fix an affine open $U\\subseteq X$ and identify it with $Y=\\operatorname{Spec}R$, $R=\\mathcal O_X(U)$, using the affine chart [def-pc-scheme], [def-weil-affine-spectrum]. The open immersion $j:Y\\to X$ restricts each $\\mathcal F_i$ to a quasi-coherent module $\\mathcal F_i|_Y$ [lem-weil-pbc-module-restriction-open-immersion-colimits], with global sections $M_i=\\mathcal F_i(U)$. By the affine tilde/global-sections equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] (3), the counit $\\varepsilon_i:\\widetilde{M_i}\\to\\mathcal F_i|_Y$ is an isomorphism.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01ID (lemma-colimit-quasi-coherent), proof, first sentence, using Lemma 01IB (lemma-equivalence-quasi-coherent); Section 01LA (section-quasi-coherent), item (1)"
+   }
+  },
+  {
+   "text": "*Identify the sum on $Y$.* Since $(-)|_Y$ preserves colimits [lem-weil-pbc-module-restriction-open-immersion-colimits] (1), Step 1 gives that $\\mathcal B|_Y$ with the restricted inclusions is a coproduct of $\\mathcal F_1|_Y,\\mathcal F_2|_Y$. Put $M=M_1\\oplus M_2$ with its module injections $k_i$; the formula $(m_1,m_2)\\mapsto u_1(m_1)+u_2(m_2)$ shows that $(M,k_1,k_2)$ is a coproduct of $M_1,M_2$ in $\\mathrm{Mod}_R$. By [lem-weil-pbc-affine-tilde-gamma-adjunction] (4), $(\\widetilde M,\\widetilde{k_1},\\widetilde{k_2})$ is therefore a coproduct of $\\widetilde{M_1},\\widetilde{M_2}$. The isomorphisms $\\varepsilon_i$ of Step 2 give the coproduct cocone $\\mathcal B|_Y$ on the $\\widetilde{M_i}$ with legs $j_i|_Y\\circ\\varepsilon_i$. The universal properties [def-weil-pbc-category-colimit] supply mutually inverse morphisms $\\psi:\\widetilde M\\to\\mathcal B|_Y$ and $\\chi:\\mathcal B|_Y\\to\\widetilde M$, characterized by $\\psi\\widetilde{k_i}=j_i|_Y\\varepsilon_i$ and $\\chi j_i|_Y=\\widetilde{k_i}\\varepsilon_i^{-1}$; their composites are identities because they agree with identities after the two coprojections. Thus $\\mathcal B|_U\\cong\\widetilde{M_1\\oplus M_2}$ as $\\mathcal O_U$-modules.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01ID (lemma-colimit-quasi-coherent), proof, the identification of the direct sum on an affine scheme with $\\widetilde{\\bigoplus M_i}$; Section 01LA (section-quasi-coherent), item (3)"
+   }
+  },
+  {
+   "text": "*Quasi-coherence.* Every point of the scheme $X$ has an affine open neighbourhood $U$ [def-pc-scheme]. Step 3 identifies $\\mathcal B|_U$ with $\\widetilde M$ for the $\\mathcal O_X(U)$-module $M=\\mathcal F_1(U)\\oplus\\mathcal F_2(U)$. This is the affine-neighbourhood condition defining quasi-coherence [pqf-def-coherent]. Hence $\\mathcal F_1\\oplus\\mathcal F_2=\\mathcal B$ is quasi-coherent; the empty scheme causes no exception, since the condition is vacuous.",
+   "uses": [
+    "def-pc-scheme",
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Section 01LA (section-quasi-coherent), items (1)-(3); Modules, Lemma 01BF (lemma-direct-sum-quasi-coherent)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-additive-category",
+  "def-weil-pbc-category-colimit",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01ID (lemma-colimit-quasi-coherent), proof, and Section 01LA (section-quasi-coherent), item (3); Modules, Lemma 01BF (lemma-direct-sum-quasi-coherent), proof omitted"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -71,7 +138,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -92,5 +159,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "Reviewed by L 2026-10-10 (statement): direct sum of two quasi-coherent modules is quasi-coherent (Schemes 01ID/01LA (3)). Unsplit; the source repository's isQuasicoherent_sigma (coproducts) is noted by the worker, not attached (coproduct vs biproduct identification needed)."
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 01BF with 01ID: sectionwise binary sum is the coproduct sheaf, on an affine open it is (M1 + M2)~, hence quasi-coherent"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "worker": "stage1",
+  "summary": "Modules 01BF omits the proof. From Schemes 01ID and 01LA, prove the sectionwise binary sum is a sheaf and a coproduct, restrict it to an affine open, identify each summand with the tilde of its global sections, use the tilde adjunction's preservation of coproducts to identify the sum with the tilde of the module direct sum, and apply the affine-local definition of quasi-coherence. No new nodes.",
+  "blueprint": "Serves lemma-weil-pbc-h1-constructible-representation, proof third paragraph ('The finite-pushforward lemma gives a monomorphism F into F' = direct sum of finite pushforwards'), indirectly through the finite-pushforward, integral-limit, finite-presentation, and quasi-coherent-extension lemmas in blueprint.from.via; specifically, its four steps justify the quasi-coherence of the binary sum used in the extension lemma's Step 2. The blueprint does not state this auxiliary result as a node; whole-blueprint title/statement/source searches for quasi-coherent direct sum, quasi-coherent coproduct, quasicoherent biproduct, direct sum modules, and 01BF found no same statement."
+ }
 }
