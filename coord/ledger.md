@@ -1684,3 +1684,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:53 L: thm-sc-serre-duality-curve NOT attached (K1 release; serreDuality rests on sorry), lem-sc-hilb-dominating-power NOT attached (E1 release; rests on sorry); notices to K1 and E1
 - 14:53 L: merged deliver/H1/prop-weil-pbc-kinjective-resolutions-exist (reviewer FIX; first push; new nodes: 2)
 - 14:54 L: lem-weil-pbc-kinjective-functorial-existence attached to 4 sorry-free declarations (KInjectiveResolution.lean 138-164; candidates by reviewer R-kir)
+- 14:54 L: returned deliver/M1/thm-sc-serre-duality-curve (reviewer RETURN: B10 does not apply: AlgebraicGeometry.Scheme.serreDuality is transitively sorried (sorryfree.py: SORRY via subsingleton_)
