@@ -20,9 +20,45 @@
   "def-sc-p1-standard",
   "def-weil-pbc-proj-twisting-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose ordinary S-module generators a_1,...,a_t of M. Since M is a direct sum of its graded pieces, each a_i has a finite expansion a_i=\\sum_d a_{i,d} with a_{i,d} in M_d. Collect these finitely many homogeneous components. Every a_i is in their S-span, so that span contains the given generators and equals M (including the case M=0, when the collection can be empty).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, construction of F_0 from finitely many homogeneous generators of M; elementary expansion of ordinary generators"
+   }
+  },
+  {
+   "text": "List the components from step 1 as homogeneous generators m_j of degree d_j. By the shift convention [def-weil-pbc-proj-twisting-sheaf] (2), the basis vector 1 in S(-d_j) has degree d_j. Thus s in its degree-n piece is a polynomial of degree n-d_j, and s m_j lies in M_n. The maps S(-d_j) \\to M given by s \\mapsto s m_j are therefore graded and S-linear; their finite direct sum is the displayed graded map F_0 \\to M.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, construction of the initial graded free module from homogeneous generators"
+   }
+  },
+  {
+   "text": "The image of F_0 \\to M is the S-span of the m_j, which is M by step 1. Hence the graded map is surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, surjection from the initial graded free module onto M"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "proof, initial graded free module; expanded from the imported ancestor node because the literature file is absent in this checkout"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,12 +83,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-graded-syzygy",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-finite-homogeneous-generators",
+  "worker": "stage1",
+  "summary": "Expanded the initial graded-free-module construction into the finite homogeneous component argument, the degree check for the shifted free summands, and surjectivity. No new facts beyond the cited shift definition are needed. The cited blueprint literature file is absent from this checkout, so the proof is marked agent-written and checked against the imported ancestor node.",
+  "blueprint": "The clause constructing F_0 from finitely many homogeneous generators in the proof of lem-sc-p1-graded-resolution."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-phg",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-phg (reviewer sub-agent of L); spot-checked: Source: blueprint master sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md (the file is present in this checkout, contrary to the report's Wanted note); its proof takes F_0 -> M from the graded syzygy theorem without spelling out the generators, so proof_origin by agent is right. Statement unchanged (only proof, proof_deps, proof_origin, status, split_report changed; one commit, only the item's node and report). Step 1: finite generation plus finite homogeneous expansion of each generator gives a finite homogeneous generating set (elementary, M=0 covered). Step 2: def-weil-pbc-proj-twisting-sheaf (2) states M(d)_n=M_{d+n}; with d=-d_j, S(-d_j)_n=S_{n-d_j}, so 1 sits in degree d_j and s m_j in M_n: the map is graded S-linear, checked also for negative d_j (S_{n-d_j}=0 for n<d_j). Step 3: image is the span, = M by step 1. No new nodes, no leaves, no tool uses. Small cases M=0, M=S, M=S(-1), M=k=S/(x_0,x_1) (generator 1 in degree 0, F_0=S) checked. Start 2026-10-10 15:39:32 UTC, end Sat Oct 10 03:39:44 PM UTC 2026."
+ }
 }
