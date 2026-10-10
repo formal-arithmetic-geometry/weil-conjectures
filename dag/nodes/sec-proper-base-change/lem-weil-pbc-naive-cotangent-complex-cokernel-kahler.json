@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-naive-cotangent-complex-cokernel-kahler",
+ "kind": "statement",
+ "title": "The cokernel of the naive cotangent complex is the module of Kähler differentials",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and let $\\mathrm{NL}_{S/R}=\\bigl(I/I^2\\xrightarrow{\\ \\delta\\ }\\bigoplus_{s\\in S}S\\,\\mathrm d[s]\\bigr)$ be its naive cotangent complex, formed with the canonical presentation $\\gamma:R[S]\\to S$, $I=\\ker\\gamma$, as in [def-weil-pbc-smooth-ring-map]. Then the $S$-linear map $\\pi:\\bigoplus_{s\\in S}S\\,\\mathrm d[s]\\to\\Omega_{S/R}$, $\\mathrm d[s]\\mapsto\\mathrm ds$ ($\\Omega_{S/R}$ and $\\mathrm d$ as in [def-weil-pbc-kahler-differentials]), is surjective with kernel the image of $\\delta$. Hence $$I/I^2\\xrightarrow{\\ \\delta\\ }\\bigoplus_{s\\in S}S\\,\\mathrm d[s]\\xrightarrow{\\ \\pi\\ }\\Omega_{S/R}\\to0$$ is exact, i.e. $H_0(\\mathrm{NL}_{S/R})=\\operatorname{coker}\\delta\\cong\\Omega_{S/R}$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 'The naive cotangent complex' Tag 00S0 (section-netherlander, line 35117), text before Definition Tag 07BN (lines 35130-35141: 'there is a canonical map I/I^2 -> Omega_{R[S]/R} (x) S whose cokernel is canonically isomorphic to Omega_{S/R}'), which applies Lemma Tag 00RU (lemma-differential-seq, line 34103) to R[S] -> S, with Lemma Tag 00RX (lemma-differentials-polynomial-ring, line 34310) for the basis d[s]"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cokernel of the cotangent complex map I/I^2 → S ⊗ Ω[P/R] is Kähler differentials Ω[S/R], exact sequence toKaehler",
+   "results": "Algebra.Extension.exact_cotangentComplex_toKaehler (Mathlib.RingTheory.Extension.Cotangent.Basic), KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange (Mathlib.RingTheory.Kaehler.Basic), Algebra.Extension.cotangentComplex, Algebra.Extension.H1Cotangent",
+   "verdict": "match: exact_cotangentComplex_toKaehler with toKaehler_surjective",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.toKaehler",
+   "results": "Algebra.Extension.toKaehler, Algebra.Extension.toKaehler_surjective, Algebra.Extension.exact_cotangentComplex_toKaehler (Mathlib.RingTheory.Extension.Cotangent.Basic), Algebra.Generators.toKaehler_cotangentSpaceBasis (toKaehler sends the basis vector of variable i to D(val i), i.e. d[s] -> ds)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'toKaehler_surjective\\|exact_cotangentComplex_toKaehler' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "results": "line 327 lemma toKaehler_surjective : Function.Surjective P.toKaehler; line 330 lemma exact_cotangentComplex_toKaehler : Function.Exact P.cotangentComplex P.toKaehler",
+   "verdict": "match (read the source)",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Extension.exact_cotangentComplex_toKaehler",
+  "file": "Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+  "line": 330,
+  "how": "specializes in one line: take P = (Algebra.Generators.self R S).toExtension, the canonical presentation R[S] -> S used for H1Cotangent in [def-weil-pbc-smooth-ring-map]; P.cotangentComplex : P.Cotangent (= I/I^2) -> P.CotangentSpace (= S (x) Omega[R[S]/R], free on d[s]) is delta, P.toKaehler is pi (Generators.toKaehler_cotangentSpaceBasis: basis vector of s maps to D s), exactness is this lemma and surjectivity is Algebra.Extension.toKaehler_surjective (line 327)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-jacobi-zariski-left-term-vanishing",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -717,3 +717,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:42 L: reviewed lem-weil-pbc-formal-functions-stalk (02OD; 9 steps; +6 nodes; tool_uses lem-pc-flat-base-change-cohom, pqf-lem-locnoeth-lft, pqf-lem-coherent-ft-locnoeth): accepted.
 - 00:42 L: reviewed lem-weil-pbc-kahler-differentials-mod-power-ideal (02HQ; 4 steps): accepted. Reviewed lem-weil-pbc-jacobi-zariski-surjection-h1: Mathlib leaf (07BP; lines verified): accepted.
 - 2026-10-10, delivery of G1: lem-weil-pbc-etale-ring-map-prescribed-residue-field returned (8b2dc2f0): step 4 identifies A/pA with the fibre ring and cites nothing for p' over p and kappa(p') = L (use A tensor kappa(p) and the fibre-ring primes bijection); step 1
+- 00:44 L: reviewed lem-weil-pbc-jacobi-zariski-left-term-vanishing (00S2 final assertion; 4 steps; +3 leaves, +00HM node): accepted. Returned G1 etale-ring-map-prescribed-residue-field (step 4 imprecise and uncited).

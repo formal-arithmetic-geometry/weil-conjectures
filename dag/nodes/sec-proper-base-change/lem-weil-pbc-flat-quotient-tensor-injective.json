@@ -1,0 +1,66 @@
+{
+ "id": "lem-weil-pbc-flat-quotient-tensor-injective",
+ "kind": "statement",
+ "title": "Tensoring a short exact sequence with flat last term stays exact",
+ "statement": "Let $R$ be a commutative ring, $0\\to M''\\xrightarrow{\\ g\\ }M'\\xrightarrow{\\ f\\ }M\\to0$ a short exact sequence of $R$-modules with $M$ flat [def-weil-pbc-flat-ring-map], and $N$ any $R$-module. Then $\\mathrm{id}_N\\otimes g:N\\otimes_RM''\\to N\\otimes_RM'$ is injective, so $$0\\to N\\otimes_RM''\\to N\\otimes_RM'\\to N\\otimes_RM\\to0$$ is exact.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00HL (lemma-flat-tor-zero), line 9037"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence 0 → M → N → P → 0 with P flat, tensor M → tensor N injective",
+   "results": "LinearMap.lTensor_injective_of_exact_of_flat (Mathlib.RingTheory.Flat.Equalizer), Module.flat_iff, Module.Flat.lTensor_shortComplex_exact, Module.FaithfullyFlat.lTensor_injective_iff_injective",
+   "verdict": "match: LinearMap.lTensor_injective_of_exact_of_flat",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Function.Exact, Function.Surjective",
+   "results": "LinearMap.lTensor_injective_of_exact_of_flat (Mathlib.RingTheory.Flat.Equalizer)",
+   "verdict": "match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 185,195p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Flat/Equalizer.lean",
+   "results": "line 192 lemma LinearMap.lTensor_injective_of_exact_of_flat [Module.Flat R P] (f : N →ₗ[R] P) (hf : Surjective f) (g : M →ₗ[R] N) (hg : Injective g) (H : Function.Exact g f) (A) : Function.Injective (g.lTensor A); docstring 'Given a short exact sequence 0 → M → N → P → 0 with P flat, then any A ⊗ M → A ⊗ N is injective'",
+   "verdict": "match (read the source)",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.lTensor_injective_of_exact_of_flat",
+  "file": "Mathlib/RingTheory/Flat/Equalizer.lean",
+  "line": 192,
+  "how": "exact (A = N; right exactness of N (x) - gives the rest of the sequence)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-jacobi-zariski-left-term-vanishing",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
