@@ -13,17 +13,108 @@
  },
  "kind": "statement",
  "title": "Cohomology commutes with filtered colimits on quasi-compact spaces",
- "statement": "Let X be a topological space such that the quasi-compact open subsets form a basis and the intersection of two quasi-compact opens is quasi-compact. For every filtered system (F_i) of sheaves of abelian groups on X and every quasi-compact open U of X, the canonical map colim_i H^q(U,F_i) \\to H^q(U,colim_i F_i) is an isomorphism for every q>=0, where H^q is sheaf cohomology as in [def-sc-topological-abelian-cohomology].",
+ "statement": "Let X be a topological space such that the quasi-compact open subsets form a basis and the intersection of two quasi-compact opens is quasi-compact. Let I be a directed set (nonempty, and every two elements have a common upper bound) and (F_i)_{i in I} a system of sheaves of abelian groups on X. For every quasi-compact open U of X and every q>=0, the canonical map colim_i H^q(U,F_i) \\to H^q(U,colim_i F_i) is an isomorphism, where H^q(U,-) means the q-th right derived functor R^q Gamma(U,-) on the abelian category of sheaves of abelian groups on the open site of X, as in [def-weil-pbc-sites-and-cohomology].",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Lemma 01FF (cohomology-lemma-colimit), formerly Section 20.19.1"
  },
  "stmt_deps": [
-  "def-sc-topological-abelian-cohomology"
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard the system as a diagram over the directed set I of the statement. Its colimit F=colim_i F_i in the category of abelian sheaves on X exists by [lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact] (open site of X). Abelian sheaves on X are the sheaves of modules over the constant sheaf of rings Z on X (same objects and morphisms), so by [lem-weil-pbc-module-directed-colimit-underlying-sets] (ringed space (X, Z)) the underlying sheaf of sets of F, with the underlying maps of the c_i, is a colimit of the underlying sheaves of sets of the F_i in sheaves of sets on X. Hypothesis (2) of [lem-weil-pbc-sheaves-directed-colimit-sections] holds for every quasi-compact open V (Topology 0069(3), elementary): given an open covering of V, each point of V lies in a quasi-compact open contained in some member (quasi-compact opens form a basis); finitely many of these cover V since V is quasi-compact, they refine the given covering, and their pairwise intersections are quasi-compact by hypothesis. Hence [lem-weil-pbc-sheaves-directed-colimit-sections] (1),(2), applied to the underlying system of sheaves of sets, show that for every quasi-compact open V the canonical map colim_i F_i(V) \\to F(V) is bijective; it is a homomorphism, so an isomorphism of abelian groups (a directed colimit of abelian groups has as underlying set the directed colimit of the underlying sets). The same applies to any system of abelian sheaves over I, in particular to (I_i) and (Q_i) of Step 2.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "lem-weil-pbc-module-directed-colimit-underlying-sets",
+    "lem-weil-pbc-sheaves-directed-colimit-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Lemma 009F, parts (2) and (4); topology.tex Lemma 0069(3)"
+   }
+  },
+  {
+   "text": "Using functorial injective embeddings in the Grothendieck abelian category of sheaves on X (the Mathlib sheaf Grothendieck instance), choose a natural monomorphism F_i \\to I_i into a filtered diagram of injective sheaves, and let Q_i be the cokernel. The transition maps induce a diagram of short exact sequences 0 \\to F_i \\to I_i \\to Q_i \\to 0.",
+   "uses": [
+    "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01FF proof, lines 3222-3240"
+   }
+  },
+  {
+   "text": "The open-site category of abelian sheaves has colimits and exact filtered colimits. Applying this directly to the short exact sequences in Step 2 gives 0 \\to F \\to I \\to Q \\to 0, where F=colim_i F_i, I=colim_i I_i, and Q=colim_i Q_i.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01FF proof, paragraph beginning 'We claim that the sequence'"
+   }
+  },
+  {
+   "text": "For every finite covering of a quasi-compact open by quasi-compact opens, each Cech term of I is a finite product of sections. Step 1 identifies these terms with filtered colimits of the corresponding terms for I_i; exactness of filtered colimits therefore carries the exact Cech complexes of the injectives I_i to an exact Cech complex for I. The filtered-injective Cech-acyclicity statement and the general Cech-to-derived-cohomology criterion then give H^q(V,I)=0 for q>0.",
+   "uses": [
+    "lem-sc-topological-filtered-injective-cech-acyclic",
+    "lem-weil-pbc-site-cech-vanishing-criterion",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01FF proof, lines 3255-3303; Lemma 01EW"
+   }
+  },
+  {
+   "text": "Induct on q. Degree zero is Step 1 together with H^0(V,G)=G(V). For n=q+1>1, the long exact sequences and the vanishing of positive cohomology of I_i and I identify H^n(V,F_i) and H^n(V,F) with the kernels/cokernels in the natural connecting-map segments H^{n-1}(V,Q_i) \\to H^n(V,F_i) \\to H^n(V,I_i) and H^{n-1}(V,Q) \\to H^n(V,F) \\to H^n(V,I). Given a class in H^n(V,F), exactness first supplies a preimage in H^{n-1}(V,Q); the induction isomorphism for Q lifts that preimage to some stage i, and naturality of the connecting maps gives a class in H^n(V,F_i) mapping to the original class. If a class from H^n(V,F_i) maps to zero, its image in H^{n-1}(V,Q_i) maps to zero in H^{n-1}(V,Q); the induction injectivity makes it zero at a later stage, and exactness then makes the original class zero at that later stage. For n=1, use the exact segments H^0(V,I_i) \\to H^0(V,Q_i) \\to H^1(V,F_i) \\to 0 and the corresponding segment for F; Step 1 identifies the first terms with the filtered colimits of sections, and exactness of filtered colimits of abelian groups gives the same surjectivity and eventual-zero argument. Here H^q(V,-) is R^q Gamma(V,-) on the open-site abelian-sheaf category as specified by [def-weil-pbc-sites-and-cohomology].",
+   "uses": [
+    "def-sc-topological-abelian-cohomology",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-weil-pbc-derived-functor-injective-vanishing",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01FF proof, paragraph beginning 'The result is true for q = 0' and the displayed diagram"
+   }
+  },
+  {
+   "text": "Thus, for every q and every quasi-compact open U, every class in H^q(U,F) comes from some H^q(U,F_i), and a class from H^q(U,F_i) that maps to zero becomes zero at a later index. These are exactly surjectivity and injectivity of the canonical map colim_i H^q(U,F_i) \\to H^q(U,F).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01FF statement and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaves-directed-colimit-sections",
+  "lem-weil-pbc-module-directed-colimit-underlying-sets",
+  "lem-weil-pbc-grothendieck-functorial-injective-embedding",
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-sc-topological-filtered-injective-cech-acyclic",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-derived-functor-injective-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01FF and its proof, with Lemma 01EW"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,15 +136,61 @@
    "results": "no matching declarations",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology of sheaves on a topological space commutes with filtered colimits",
+   "results": "unavailable",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-noetherian-extension-by-zero-reduction",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-topological-filtered-cohomology",
+  "worker": "stage1",
+  "summary": "No sorry-free declaration states the general topological-space lemma; the source declaration H_map_isColimit_of_isFiltered is only the étale qcqs scheme version and is sorry. Split the proof of Stacks Lemma 01FF into sectionwise colimit on quasi-compact opens, functorial injective embeddings, exactness after filtered colimits, Cech acyclicity on the quasi-compact basis, and the long-exact-sequence induction. Added one statement-only node for the 01EW Cech-vanishing ingredient; the functorial-injective ingredient is an existing Mathlib leaf.",
+  "blueprint": "The item serves the cohomology-colimit reduction in Lemma 02UX; the six steps realize Lemma 01FF, including its 01EW Cech-vanishing subargument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaves-directed-colimit-sections",
+    "why": "its sectionwise filtered-colimit result supplies degree-zero calculations on quasi-compact opens"
+   },
+   {
+    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "why": "its general site criterion converts Cech acyclicity on the quasi-compact basis into derived cohomology vanishing"
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "its long exact derived-functor sequence supplies the induction step"
+   },
+   {
+    "node": "lem-weil-pbc-module-directed-colimit-underlying-sets",
+    "why": "its directed-set section colimit calculation supplies the finite-refinement section argument"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaves-directed-colimit-sections",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-module-directed-colimit-underlying-sets"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tfc2112",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tfc2112 (reviewer sub-agent of L); spot-checked: Return of 19:23: points 2 (Step 3 now cites the AB5 mathlib leaf site-abelian-sheaves-filtered-colimits-exact), 3 (Step 5 cites derived-functor-injective-vanishing and defines H^q(V,-)=R^q Gamma(V,-) per def-weil-pbc-sites-and-cohomology) and 4 (duplicate node dropped, Mathlib leaf grothendieck-functorial-injective-embedding cited) repaired; point 1 NOT repaired (the second reading reverted it to the sheaves-of-sets node, with 'its proof supplies' wording). Steps 4-6 and item statement change (directed set, H^q(U,-) made explicit) checked. FIX more, RETURN less: (1) C4/C5 Step 1: cite lem-weil-pbc-module-directed-colimit-underlying-sets (ringed space (X,Z)) to pass from the abelian-sheaf colimit to sheaves of sets, colimit existence from the AB5 leaf, Topology 0069(3) cofinal finite-cover argument written as elementary text, then the sets node (1),(2); proof_deps updated. (2) new node lem-sc-topological-filtered-injective-cech-acyclic: H^q(U,I) referred to def-sc-topological-abelian-cohomology, which defines only H^p(X,-); now R^q Gamma(U,-) per def-weil-pbc-sites-and-cohomology (added to stmt_deps). (3) stale tool_uses for three stalk nodes no longer cited dropped.; 2 file(s) fixed by the reviewer"
+ }
 }
