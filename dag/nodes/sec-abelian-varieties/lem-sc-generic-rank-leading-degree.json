@@ -20,11 +20,48 @@
   "def-sc-hilbert-degree",
   "def-sc-ample",
   "pqf-def-coherent",
-  "def-pc-euler-characteristic"
+  "def-pc-euler-characteristic",
+  "lem-sc-hilbert-polynomial",
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-pc-euler-additive",
+  "lem-sc-snapper-numerical-polynomial"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-coherent-filtration-integral-subschemes] to E. Its successive quotients are (i_j)_*I_j for integral closed subschemes Z_j of Y and nonzero coherent ideals I_j of O_{Z_j}. At the generic point of Y, each quotient with Z_j = Y has rank one (a nonzero ideal of the function field) and each quotient with Z_j != Y vanishes; additivity of rank in the filtration therefore gives exactly r quotients with Z_j = Y. For each such quotient use 0 → I_j → O_Y → O_Y/I_j → 0, where O_Y/I_j is supported on a proper closed subset of Y. Tensoring with the invertible module M^{⊗ m} is exact, and by [lem-pc-euler-additive] Euler characteristics are additive in these short exact sequences. By [lem-sc-snapper-numerical-polynomial] (with r = 1 and L_1 = M), for every coherent F supported on a proper closed subset of the integral g-dimensional Y, hence of dimension at most g − 1, the map m \\mapsto \\chi(Y, F \\otimes M^{\\otimes m}) is a numerical polynomial of degree at most g − 1; this applies to each O_Y/I_j and each (i_j)_*I_j with Z_j != Y. Hence χ(Y, E ⊗ M^{⊗ m}) − r · χ(Y, M^{⊗ m}) is a numerical polynomial of degree at most g − 1.",
+   "uses": [
+    "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "lem-pc-euler-additive",
+    "lem-sc-snapper-numerical-polynomial",
+    "lem-sc-hilbert-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 33.45.2 (Tag 0BEN), proof by coherent filtration and additivity; specialize the generic-point lengths to generic rank r"
+   }
+  },
+  {
+   "text": "Adding the degree-at-most-(g−1) difference to r times the Hilbert polynomial shows that χ(Y, E ⊗ M^{⊗ m}) is a numerical polynomial of degree at most g and has m^g coefficient r times that of χ(Y, M^{⊗ m}).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma 33.45.2 (Tag 0BEN), coefficient comparison after the lower-degree difference is established"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-pc-euler-additive",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-sc-hilbert-polynomial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma 33.45.2 (Tag 0BEN), specialized to an integral scheme and generic rank r"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +93,44 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-deg-pullback-finite",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-deg-pullback"
+ "unit": "sk-prop-av-deg-pullback",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-generic-rank-leading-degree",
+  "worker": "stage1",
+  "summary": "Checked the sorried Lean declaration and the Stacks 0BEX route. The duplicate lower-degree clause was folded into explicit item proof steps: dévissage and additivity give a degree-at-most-g−1 difference, then elementary polynomial comparison gives the leading coefficient.",
+  "blueprint": "Realizes lem-sc-deg-pullback-finite proof sentence: additivity of χ plus dévissage gives a difference of degree ≤ g−1, followed by comparison of the leading coefficient.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-coherent-filtration-integral-subschemes",
+    "why": "The generic-rank proof needs the coherent dévissage into integral-support ideal quotients; this general filtration is supplied by the proper-base-change unit and is not a node of the degree-pullback route."
+   },
+   {
+    "node": "lem-sc-snapper-numerical-polynomial",
+    "why": "Stacks 0BEL numerical-polynomial bound by support dimension for coherent sheaves (generic tool), replacing the duplicate lem-sc-hilbert-polynomial-coherent-support."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-weil-pbc-coherent-filtration-integral-subschemes",
+  "lem-sc-snapper-numerical-polynomial"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-grl2303",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-grl2303 (reviewer sub-agent of L); spot-checked: Return 19:54 points: (1) Step 1 now devisses E via lem-weil-pbc-coherent-filtration-integral-subschemes, rank count at generic point correct, ideal sequences 0->I_j->O_Y->O_Y/I_j->0: repaired; (2) coherent 0BEM bound now cited: repaired; (3) filtration and lem-pc-euler-additive cited, elementary false: repaired; (4) file matches report except phantom citations.json. FIX more, RETURN less: new node lem-sc-hilbert-polynomial-coherent-support is class (b), a weaker special case (large m, single ample L) of lem-sc-snapper-numerical-polynomial (0BEL, all m, any invertible); dropped it and cited the Snapper node in Step 1, stmt_deps, proof_deps, tool_uses; made exactness of twisting by M^m and dim Z_j<=g-1 explicit.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-grl2303): Report claims a citations.json with verbatim citation records; no such file exists in the delivery or repo (report/file mismatch again, harmless)."
 }

@@ -2509,3 +2509,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:24 L: returned deliver/C1/lem-pc-hilb-containment-locus (reviewer RETURN: 1. E (wrong reduction, Step 1): localizing on X_T is invalid: for an affine open Spec A of X_T, Z cap Spec A = Spec(A/I))
 - 20:24 L: returned deliver/J1/pqf-lem-serre-criterion (reviewer RETURN: 1. D1 (no real split; delivery-errors C list 2, a step marked elementary that carries the whole conclusion): the only st)
 - 20:25 L: merged deliver/J1/lem-sc-topological-filtered-injective-cech-acyclic (reviewer FIX; first push; new nodes: 0)
+- 20:25 L: merged deliver/G1/lem-sc-generic-rank-leading-degree (reviewer FIX; after a return; new nodes: 0)
