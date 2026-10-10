@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-genus-well-defined",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Well-definedness of the genus",
@@ -13,19 +13,71 @@
   "place": "node lem-pc-genus-well-defined, order 736"
  },
  "stmt_deps": [
-  "def-pc-morphism-conventions"
+  "def-pc-smooth-projective-curve",
+  "def-pc-geometrically-irreducible",
+  "pqf-def-cohomology",
+  "def-weil-vector-space-dimension"
  ],
  "proof": [
   {
-   "text": "After extending scalars to an algebraic closure $\\bar k/k$, the curve\n$X_{\\bar k}$ is smooth projective and geometrically irreducible. Hence\n[lem-pc-curve-coherent-finiteness], applied to\n$\\mathcal O_{X_{\\bar k}}$, makes $H^1(X_{\\bar k},\\mathcal O)$ finite-dimensional\nover $\\bar k$. The base-change isomorphism of\n[lem-sc-flat-base-change-coherent] identifies this space with\n$H^1(X,\\mathcal O_X)\\otimes_k\\bar k$. A vector space whose scalar extension\nis finite-dimensional is already finite-dimensional: every linearly\nindependent finite subset remains independent after a field extension,\nso its cardinality is bounded by the dimension after extension.\nThis proves the claim over $k$.",
+   "text": "Choose an algebraic closure $\\bar k$ of $k$ using [lem-pc-algebraic-closure-exists-unique], and form $X_{\\bar k}$ by [def-pc-base-change]. Since $X$ is a smooth projective curve [def-pc-smooth-projective-curve], its structure morphism is smooth and projective and $X$ is a curve [def-pc-curve]. Smoothness persists by [lem-pc-proper-base-change](2), and projectivity persists by [lem-pc-projective-base-change]. Its dimension is exactly $1$ by [lem-pc-dim-base-change]. The structure morphism of $X$ is proper by [lem-pc-projective-proper], hence that of $X_{\\bar k}$ is proper by [lem-pc-proper-base-change](1), so it is separated and of finite type by [def-weil-proper-morphism]. Smoothness of $X$ over $k$ gives geometrically reduced fibres by [sbc-lem-smooth-geometrically-reduced]; the fibre over the unique point of $\\operatorname{Spec}k$ is $X$, hence $X_{\\bar k}$ is reduced. Geometric irreducibility [def-pc-geometrically-irreducible] makes $X_{\\bar k}$ irreducible and nonempty; reducedness and irreducibility make it integral by [def-pc-integral-scheme]. Thus it satisfies every condition in [def-pc-curve] and [def-pc-smooth-projective-curve] over $\\bar k$. Apply [lem-pc-curve-coherent-finiteness] to the coherent structure sheaf $\\mathcal O_{X_{\\bar k}}$ at $i=1$ to obtain finite-dimensional $H^1(X_{\\bar k},\\mathcal O_{X_{\\bar k}})$ over $\\bar k$.",
    "uses": [
-    "lem-pc-curve-coherent-finiteness",
+    "lem-pc-algebraic-closure-exists-unique",
+    "def-pc-base-change",
+    "lem-pc-proper-base-change",
+    "lem-pc-projective-base-change",
+    "lem-pc-dim-base-change",
+    "lem-pc-projective-proper",
+    "def-weil-proper-morphism",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-integral-scheme",
+    "def-pc-curve",
+    "def-pc-smooth-projective-curve",
+    "def-pc-geometrically-irreducible",
+    "lem-pc-curve-coherent-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02H2 (smooth base change), 01WF (H-projective base change), 01K5 (quasi-compact base change), and 01W4 (proper base change); dimension: Tag 00P3; geometrically reduced: Tag 056T; integral: Tag 01ON"
+   }
+  },
+  {
+   "text": "Since $X$ is a smooth projective curve [def-pc-smooth-projective-curve], it is proper over $k$ by [lem-pc-projective-proper]. The field extension $k\\to\\bar k$ is flat, and $\\mathcal O_X$ is quasi-coherent; its pullback to $X_{\\bar k}$ is the structure sheaf $\\mathcal O_{X_{\\bar k}}$. Thus [lem-sc-flat-base-change-coherent], applied with $i=1$, $k'=\\bar k$, and $\\mathcal F=\\mathcal O_X$, identifies $H^1(X_{\\bar k},\\mathcal O_{X_{\\bar k}})$ with $H^1(X,\\mathcal O_X)\\otimes_k\\bar k$.",
+   "uses": [
+    "def-pc-smooth-projective-curve",
+    "lem-pc-projective-proper",
     "lem-sc-flat-base-change-coherent"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 02KH (cohomology-and-base-change, flat base change)"
+   }
+  },
+  {
+   "text": "If $H^1(X,\\mathcal O_X)$ were infinite-dimensional, any finite linearly independent subset would remain linearly independent after tensoring with the field extension $\\bar k/k$. The resulting arbitrarily large independent subsets would contradict the finite dimension of $H^1(X_{\\bar k},\\mathcal O_{X_{\\bar k}})$ from step 1. Hence $H^1(X,\\mathcal O_X)$ is finite-dimensional over $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/_section.md",
+    "place": "proof of (RR), finite-dimensional scalar-extension argument"
+   }
   }
  ],
  "proof_deps": [
+  "lem-pc-algebraic-closure-exists-unique",
+  "def-pc-base-change",
+  "lem-pc-proper-base-change",
+  "lem-pc-projective-base-change",
+  "lem-pc-dim-base-change",
+  "lem-pc-projective-proper",
+  "def-weil-proper-morphism",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-pc-integral-scheme",
+  "def-pc-curve",
+  "def-pc-smooth-projective-curve",
+  "def-pc-geometrically-irreducible",
   "lem-pc-curve-coherent-finiteness",
   "lem-sc-flat-base-change-coherent"
  ],
@@ -34,9 +86,31 @@
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-genus-well-defined.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite dimensional first cohomology of the structure sheaf of a smooth projective geometrically irreducible curve over a field",
+   "results": "No exact theorem found; related declaration finiteDimensional_H_of_isProper requires an invertible module and properness.",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteDimensional k (H X 1)",
+   "results": "Related finiteDimensional_H_of_isProper and finiteDimensional_H_of_isCurve declarations, but no declaration with this exact hypotheses and conclusion.",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'finiteDimensional_H_of_isProper|finiteDimensional_H_of_isCurve|arithmeticGenus' /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "finiteDimensional_H_of_isProper and finiteDimensional_H_of_isCurve are present, but no theorem tagged lem-pc-genus-well-defined and no exact statement was found.",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +137,39 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-genus-well-defined",
+  "worker": "stage1",
+  "summary": "Split the scalar-extension proof into geometric base change, flat cohomology base change, and finite-dimensionality descent. Repaired the geometric step by citing dimension, properness, geometric reducedness, and the integral-curve definition; made the properness hypothesis explicit in the cohomology step; and corrected the projectivity-under-base-change source to Stacks Tags 01WF and 01K5.",
+  "blueprint": "The three steps realize the blueprint proof paragraph: extension to an algebraic closure and finiteness over it; flat base-change identification; and descent of finite-dimensionality by preservation of linear independence.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-curve-coherent-finiteness",
+    "why": "The first step needs finite-dimensional coherent cohomology on the algebraically closed base-changed curve; the current unit route does not provide this generic coherence result."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Steps 1 and 2 use the generic fact that a projective curve is proper; no node of sk-thm-picard-rr states this."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Step 1 uses geometric reducedness of smooth fibres to prove the base-changed curve is reduced; no node of sk-thm-picard-rr states this."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-curve-coherent-finiteness",
+  "lem-pc-projective-proper",
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gw2",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gw2 (reviewer sub-agent of L); spot-checked: Re-review after the 14:36 return: all three points repaired. (1) step 1 now cites lem-pc-dim-base-change (dim 1 for curve base change), lem-pc-projective-proper + lem-pc-proper-base-change(1) + def-weil-proper-morphism (separated, finite type), sbc-lem-smooth-geometrically-reduced (fibre X geometrically reduced, so X_kbar reduced), def-pc-integral-scheme (nonempty+reduced+irreducible), with lem-pc-projective-proper and sbc-lem-smooth-geometrically-reduced declared in tool_uses; all conditions of def-pc-curve/def-pc-smooth-projective-curve checked, then lem-pc-curve-coherent-finiteness (alg. closed, smooth projective curve, coherent O) gives finite H^1. (2) step 2 establishes properness by lem-pc-projective-proper and states pullback of O_X is O_{X_kbar}; lem-sc-flat-base-change-coherent hypotheses (X proper over k, k->kbar flat, F quasi-coherent) all met, i=1. (3) lem-pc-projective-base-change source now Tags 01WF (morphisms-lemma-H-projective-base-change) and 01K5 (schemes-lemma-quasi-compact-preserved-base-change), verified in tags file; statement agrees with def-pc-projective-morphism (H-projective + quasi-compact), both preserved by arbitrary base change; true. Step 3 elementary (independence preserved under field extension). Item statement unchanged; only split-owned fields changed. Small cases: P^1_k, H^1(O)=0; identity base change. Tool uses accepted: lem-pc-curve-coherent-finiteness, lem-pc-projective-proper, sbc-lem-smooth-geometrically-reduced (generic black boxes). Minor cosmetic: step 1 source.document is morphisms.tex while several tags lie in other chapters. 14:5x UTC."
+ }
 }
