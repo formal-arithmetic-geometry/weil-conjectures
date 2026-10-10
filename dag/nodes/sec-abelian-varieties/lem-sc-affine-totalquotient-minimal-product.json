@@ -23,9 +23,82 @@
   "def-weil-pbc-module-localization",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $Z$ be the set of zero-divisors of $A$. By [lem-sc-affine-weakass-nonzerodivisors], $Z$ is the union of the weakly associated primes of $A$, and by hypothesis each of these is one of the $\\mathfrak q_i$; hence $Z\\subseteq\\mathfrak q_1\\cup\\dots\\cup\\mathfrak q_t$. Conversely, by [lem-pc-minimal-prime-avoids-nonzerodivisor] no non-zero-divisor lies in a minimal prime, so $\\mathfrak q_i\\subseteq Z$ for every $i$. Hence $Z=\\mathfrak q_1\\cup\\dots\\cup\\mathfrak q_t$, $S=A\\setminus(\\mathfrak q_1\\cup\\dots\\cup\\mathfrak q_t)$, and in particular $S\\cap\\mathfrak q_i=\\emptyset$ for every $i$.",
+   "uses": [
+    "lem-sc-affine-weakass-nonzerodivisors",
+    "lem-pc-minimal-prime-avoids-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.25.4 (tag 02LX), hypothesis that the zerodivisors are the union of the minimal primes, supplied by Lemma 10.66.7 (tag 05C3) with Definition 10.66.1 (tag 0547) and Lemma 10.25.2 (tag 00EU)"
+   }
+  },
+  {
+   "text": "Because every $s\\in S$ lies outside $\\mathfrak q_i$ (Step 1), its image is a unit in $A_{\\mathfrak q_i}$. The localization universal property therefore gives a canonical ring map $\\varphi_i\\colon Q(A)=S^{-1}A\\to A_{\\mathfrak q_i}$, $a/s\\mapsto(a/1)(s/1)^{-1}$; the fraction relation makes this well defined, and it is the unique ring map compatible with $A\\to A_{\\mathfrak q_i}$. Combining the $\\varphi_i$ gives the canonical map $\\varphi\\colon Q(A)\\to\\prod_i A_{\\mathfrak q_i}$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.25.4 (tag 02LX), proof first two sentences"
+   }
+  },
+  {
+   "text": "Apply the prime correspondence for localization [lem-weil-pbc-localization-prime-residue-field-iso] to $A\\to Q(A)$: the primes of $Q(A)$ correspond bijectively, via $\\mathfrak p\\mapsto\\mathfrak pQ(A)$, to the primes $\\mathfrak p$ of $A$ with $\\mathfrak p\\cap S=\\emptyset$. Such a $\\mathfrak p$ is contained in $Z=\\mathfrak q_1\\cup\\dots\\cup\\mathfrak q_t$, so prime avoidance [lem-weil-pbc-prime-avoidance] gives $\\mathfrak p\\subseteq\\mathfrak q_j$ for some $j$, and minimality of $\\mathfrak q_j$ forces $\\mathfrak p=\\mathfrak q_j$. Conversely every $\\mathfrak q_i$ is disjoint from $S$ by Step 1. Hence the primes of $Q(A)$ are exactly the pairwise distinct ideals $\\mathfrak q_iQ(A)$. Each is maximal: it lies in some maximal ideal, which is prime, hence equals some $\\mathfrak q_jQ(A)$; pulling back gives $\\mathfrak q_i\\subseteq\\mathfrak q_j$, so $\\mathfrak q_i=\\mathfrak q_j$ by minimality of $\\mathfrak q_j$.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.25.4 (tag 02LX), proof third and fourth sentences, using Lemma 10.66.2 (tag 0566) localization-prime correspondence and prime avoidance tag 00DS"
+   }
+  },
+  {
+   "text": "The intersection of all primes of Q(A) is its nilradical, by [lem-weil-pbc-zero-locus-eq-iff-radical-eq] with the zero ideal. By Step 3 these primes are the finitely many maximal ideals q_iQ(A), so the Jacobson radical is nilpotent. The product-of-localizations theorem [lem-weil-pbc-product-of-localizations-at-maximal] now identifies Q(A) with the product of its localizations at these maximal ideals.",
+   "uses": [
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "lem-weil-pbc-product-of-localizations-at-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.25.4 (tag 02LX), proof fifth sentence, using Lemma 10.24.1 (tag 00JA)"
+   }
+  },
+  {
+   "text": "For each $i$, part (2) of [lem-weil-pbc-localization-prime-residue-field-iso] applied to $A\\to Q(A)$ and $\\mathfrak q'=\\mathfrak q_iQ(A)$ (with $\\lambda^{-1}(\\mathfrak q')=\\mathfrak q_i$) identifies $A_{\\mathfrak q_i}$ with $Q(A)_{\\mathfrak q_iQ(A)}$, via $a/s\\mapsto(a/1)/(s/1)$, compatibly with the maps from $A$. Under these identifications the $i$-th component of the product isomorphism of Step 4 is a ring map $Q(A)\\to A_{\\mathfrak q_i}$ compatible with $A\\to A_{\\mathfrak q_i}$, hence equals $\\varphi_i$ by the uniqueness in Step 2. Thus the canonical map $\\varphi$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.25.4 (tag 02LX), proof final two sentences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-weakass-nonzerodivisors",
+  "lem-pc-minimal-prime-avoids-nonzerodivisor",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-weil-pbc-product-of-localizations-at-maximal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra Lemma 10.25.4 (tag 02LX), with Lemma 10.66.7 (tag 05C3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +123,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-meromorphic-weakass-generic-product",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-totalquotient-minimal-product",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states this item. I split the total-quotient decomposition into five steps: identify zero-divisors from weakly associated primes, construct the localization maps, classify primes of the total quotient ring, apply the finite-maximal-localization product theorem, and identify the factors with the localizations at the minimal primes. No new child nodes were needed; all non-elementary inputs are existing DAG statements.",
+  "blueprint": "Realizes lem-sc-hilbert-polynomial proof induction step: on an affine open use Algebra Lemma 10.25.4 to identify the total quotient ring with the product of the localizations at the finitely many minimal primes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tqm3006",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tqm3006 (reviewer sub-agent of L); spot-checked: Read all five steps against the seven cited statements and 02LX/05C3/0547; statement matches M1 step 0 use (C4). FIX more, RETURN less: (1) C1 step 1: 'every minimal prime is weakly associated by the standard argument in 02LX' was uncited (02LX assumes it as hypothesis); replaced by the needed fact q_i subset Z via existing mathlib leaf lem-pc-minimal-prime-avoids-nonzerodivisor (Tag 00EU area), added to uses/proof_deps; (2) B4 steps 2,3,5: plain-text arrows and names rewritten in TeX; (3) step 3: maximality of each q_iQ(A) argued explicitly by minimality (the old parenthesis only showed maximal ideals are among them); step 5 names part (2) of the correspondence node.; 1 file(s) fixed by the reviewer"
+ }
 }

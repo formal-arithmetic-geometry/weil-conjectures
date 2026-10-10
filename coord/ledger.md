@@ -2906,3 +2906,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:02 L: returned deliver/G1/def-wf-lie-algebra-derivation (reviewer RETURN: Reviewer R-lad3002. Four fixable faults (more than three), plus a cycle risk in the repair, so RETURN. 1. C1/class (b): )
 - 23:03 L: merged deliver/F1/lem-pc-affine-pseudo-coherent-criterion (reviewer FIX; first push; new nodes: 1)
 - 23:03 L: merged deliver/J1/lem-sc-affine-perfect-plus-locally-free (reviewer FIX; first push; new nodes: 3)
+- 23:03 L: merged deliver/E1/lem-sc-affine-totalquotient-minimal-product (reviewer FIX; first push; new nodes: 0)
