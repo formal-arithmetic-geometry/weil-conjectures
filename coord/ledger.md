@@ -2106,3 +2106,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 17:27 L: merged deliver/F1/lem-sc-p1-boundary-extension-composition (reviewer PASS; after a return; new nodes: 3)
 - 17:27 L: merged deliver/M1/lem-sc-zariski-contracted-power-extension (reviewer FIX; after a return; new nodes: 1)
 - 17:27 L: merged deliver/G1/lem-sc-noetherian-topological-cohomology-vanishing (reviewer FIX; after a return; new nodes: 4)
+- 17:27 L: merged deliver/H1/lem-sc-boundary-cech-compatibility (reviewer PASS; after a return; new nodes: 1)
