@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.Data.ZMod.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
@@ -29,8 +31,7 @@ with the internal hom of bounded constructible complexes at a finite coefficient
   site is bounded constructible of Tor amplitude in `[a, b]` has Tor amplitude in `[a, b]`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom`
   (`thm-sf-hom-comparison-constructible`): `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)` for `K` in
-  `Dctf(X_ét, Λ)` and `M` in `Dᵇc(X_ét, Λ)`, on a finite-type scheme over an algebraically closed
-  field.
+  `Dctf(X_ét, Λ)` and `M` in `Dᵇc(X_ét, Λ)`, on a finite-type scheme over `k = F̄_p`.
 
 ## Implementation notes
 
@@ -84,10 +85,11 @@ theorem torAmplitudeIn_of_mapDerivedCategory {X : Scheme.{u}} [HasInvertibleExpo
 /-- Blueprint `thm-sf-hom-comparison-constructible`: Internal-Hom comparison for finite-Tor
 constructible inputs.
 
-Let `X` be a scheme of finite type over an algebraically closed field `k`, let `Λ` be a finite
+Let `X` be a scheme of finite type over an algebraic closure `k` of `𝔽_p`, let `Λ` be a finite
 ring whose exponent is invertible on `X`, let `K ∈ Dctf(X_ét, Λ)` and `M ∈ Dᵇc(X_ét, Λ)`. Then
 `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)`. -/
-theorem nonempty_iso_mapDerivedCategory_derivedHom {k : Type u} [Field k] [IsAlgClosed k]
+theorem nonempty_iso_mapDerivedCategory_derivedHom {k : Type u} [Field k] {p : ℕ} [Fact p.Prime]
+    [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [HasInvertibleExponent Λ X]
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

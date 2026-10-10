@@ -70,7 +70,7 @@ since `Λ_Xʳ = ν^* Λ_{X_ét}ʳ` and `ν^*` is full and exact; so is a bounded
 
 As in the blueprint (`def-pod-perfect-complex-on-x`), the coefficient dual is shown to lie in
 `Dctf(X, Λ)` for perfect complexes which already lie in `Dctf(X, Λ)`, in the Poincaré duality
-setting of a scheme of finite type over an algebraically closed field and a coefficient ring
+setting of a scheme of finite type over an algebraic closure of `𝔽_p` and a coefficient ring
 whose exponent is invertible on `X`. The proof goes through the étale site rather than through
 the local model: `K = ν^* K'` and `K^∨ ≅ ν^* RHom(K', Λ)`
 (`AlgebraicGeometry.ProEtale.DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom`), which
@@ -358,7 +358,7 @@ end DerivedCategory
 /-- Blueprint `lem-pod-coefficient-dual-perfect`: Perfectness is preserved by coefficient
 duality.
 
-Let `X` be of finite type over an algebraically closed field `k` and `Λ` a finite ring whose
+Let `X` be of finite type over an algebraic closure `k` of `𝔽_p` and `Λ` a finite ring whose
 exponent is invertible on `X`. The coefficient dual `K^∨ = RHom(K, Λ_X)` of a perfect complex
 `K ∈ Dctf(X, Λ)` of pro-étale `Λ`-sheaves lies in `Dctf(X, Λ)`.
 
@@ -368,7 +368,8 @@ As `K` is of étale origin, `K ≅ ν^* K'` with `K' ∈ Dctf(X_ét, Λ)`
 constructible on `X_ét` (`sk-thm-sf-hom-ctf`). As `K` is perfect, `K^∨` is its dual, whose Tor
 amplitude is that of `K` reflected
 (`AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_derivedDual`). -/
-theorem constructibleFiniteTor_derivedDual {k : Type u} [Field k] [IsAlgClosed k]
+theorem constructibleFiniteTor_derivedDual {k : Type u} [Field k] {p : ℕ} [Fact p.Prime]
+    [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [HasInvertibleExponent Λ X]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
@@ -393,7 +394,7 @@ theorem constructibleFiniteTor_derivedDual {k : Type u} [Field k] [IsAlgClosed k
       (_root_.DerivedCategory.singleFunctorObjUnitIso _)
       (_root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
         (ObjectProperty.flat_of_isDualizable isDualizable_unit))
-  obtain ⟨c⟩ := DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom Λ aX
+  obtain ⟨c⟩ := DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom Λ (p := p) aX
     ⟨hK', a, b, hKt'⟩ hU
   exact DerivedCategory.boundedConstructible_derivedDual_of_iso Λ e c
     (Etale.boundedConstructible_derivedHom Λ aX a b 0 0 hK' hKt' hU hUt)
