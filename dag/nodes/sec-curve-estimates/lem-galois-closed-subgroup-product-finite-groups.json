@@ -1,0 +1,65 @@
+{
+ "id": "lem-galois-closed-subgroup-product-finite-groups",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-aut-profinite",
+   "place": "proof, final sentence: the product of finite automorphism groups is profinite and its closed subgroup is profinite",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A closed subgroup of a product of finite groups is profinite",
+ "statement": "Let $I$ be a set, let $(G_i)_{i\\in I}$ be finite groups, each with the discrete topology, and give $G=\\prod_{i\\in I}G_i$ the product topology as in [def-galois-aut-topology]. If $H\\le G$ is a closed subgroup, then $H$ with the subspace topology is a profinite group.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BMR, lemma-aut-inverse-limit, proof, final sentence (the group-theoretic topological fact used there)"
+ },
+ "stmt_deps": [
+  "def-galois-aut-topology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "closed subset of product of finite discrete topological spaces is a profinite space",
+   "results": "Profinite.pi (Mathlib.Topology.Category.Profinite.Basic); no single declaration for the closed subgroup of this product",
+   "date": "2026-10-10",
+   "verdict": "generalization: combine the profinite group constructors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup of a product of finite discrete groups is a profinite group",
+   "results": "ProfiniteGrp.ofFiniteGrp, ProfiniteGrp.pi, ProfiniteGrp.ofClosedSubgroup (Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'def pi|def ofFiniteGrp|def ofClosedSubgroup' Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+   "results": "ProfiniteGrp.pi lines 211-219 (declaration at 214), ofFiniteGrp lines 221-228 (declaration at 224), ofClosedSubgroup lines 247-251 (declaration at 249), in Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ProfiniteGrp.ofClosedSubgroup",
+  "file": "Mathlib/Topology/Algebra/Category/ProfiniteGrp/Basic.lean",
+  "line": 249,
+  "lines": [
+   214,
+   224,
+   249
+  ],
+  "how": "specializes in one line: ProfiniteGrp.ofClosedSubgroup applied to the product ProfiniteGrp.pi (fun i => ProfiniteGrp.ofFiniteGrp G_i), using pi at line 214, ofFiniteGrp at line 224, and ofClosedSubgroup at line 249"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-galois-aut-profinite"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2"
+}

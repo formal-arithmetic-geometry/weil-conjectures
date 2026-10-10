@@ -3,38 +3,80 @@
  "blueprint": {
   "is": "lem-galois-aut-profinite",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "$\\operatorname{Aut}(F)$ is profinite",
- "statement": "Let $\\mathcal C$ be a category and $F:\\mathcal C\\to\\mathbf{Sets}$ a\nfunctor. Then the evaluation embedding identifies\n$\\operatorname{Aut}(F)$ with a closed subgroup of\n$\\prod_X\\operatorname{Aut}(F(X))$. Consequently, if all $F(X)$ are\nfinite, then $\\operatorname{Aut}(F)$ is profinite.",
+ "statement": "Let $\\mathcal C$ be a category with a set of objects and a set of morphisms between each pair of objects, and let $F:\\mathcal C\\to\\mathbf{Sets}$ be a functor. Regard each $F(X)$ as a discrete space, give $\\operatorname{Aut}(F(X))$ the compact-open topology (equivalently, the topology of pointwise convergence), and give $\\operatorname{Aut}(F)$ the topology induced by evaluation into the product. Then evaluation identifies $\\operatorname{Aut}(F)$ with a closed subgroup of $\\prod_X\\operatorname{Aut}(F(X))$. Consequently, if all $F(X)$ are finite, then $\\operatorname{Aut}(F)$ is profinite.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-aut-profinite.md",
   "place": "node lem-galois-aut-profinite, order 969"
  },
- "stmt_deps": [
-  "def-galois-fibre-functor"
- ],
+ "stmt_deps": [],
  "proof": [
   {
-   "text": "Let $\\operatorname{Aut}(F)\\subseteq\\prod_X\\operatorname{Aut}(F(X))$\ncarry the topology induced from the product of the discrete topologies,\nas in [def-galois-category], and let $\\xi=(\\gamma_X)$ be an\nelement of the product not induced by a natural\nautomorphism. Then there are $f:X\\to X'$ and $x\\in F(X)$ with\n$F(f)(\\gamma_X(x))\\neq\\gamma_{X'}(F(f)(x))$. The open subsets\n$U=\\{\\gamma:\\gamma(x)=\\gamma_X(x)\\}\\subseteq\\operatorname{Aut}(F(X))$ and\n$U'=\\{\\gamma':\\gamma'(F(f)(x))=\\gamma_{X'}(F(f)(x))\\} \\subseteq\\operatorname{Aut}(F(X'))$ give the open neighbourhood\n$U\\times U'\\times\\prod_{X''\\neq X,X'}\\operatorname{Aut}(F(X''))$ of\n$\\xi$, which misses $\\operatorname{Aut}(F)$; hence\n$\\operatorname{Aut}(F)$ is closed. If all $F(X)$ are finite the product\nis profinite, and closed subgroups of profinite groups are profinite.",
+   "text": "Evaluation sends a natural automorphism $a$ to the family $(a_X)_X$ of bijections of $F(X)$, and is an injective group homomorphism because a natural transformation is determined by its components. Conversely, a family $(\\gamma_X)_X$ of bijections is in its image exactly when $F(f)\\circ\\gamma_X=\\gamma_{X'}\\circ F(f)$ for every arrow $f:X\\to X'$; these equalities give a natural isomorphism whose inverse has components $\\gamma_X^{-1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMR, lemma-aut-inverse-limit, first two sentences of proof; section-galois, equation-embedding-product"
+   }
+  },
+  {
+   "text": "Suppose $\\xi=(\\gamma_X)_X$ is outside the image. By step 1 there are $f:X\\to X'$ and $x\\in F(X)$ such that $F(f)(\\gamma_X(x))\\ne\\gamma_{X'}(F(f)(x))$. Let $U$ require a permutation of $F(X)$ to send $x$ to $\\gamma_X(x)$, and let $U'$ require a permutation of $F(X')$ to send $F(f)(x)$ to $\\gamma_{X'}(F(f)(x))$. Both are open in the pointwise convergence topology. The intersection of their inverse images under the two product projections is an open neighbourhood of $\\xi$ containing no natural automorphism, by the displayed inequality. This intersection works also when $X=X'$. Thus the image is closed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMR, lemma-aut-inverse-limit, proof, open-neighbourhood argument"
+   }
+  },
+  {
+   "text": "If every $F(X)$ is finite, its pointwise convergence topology on $\\operatorname{Aut}(F(X))$ is discrete: requiring agreement on all elements specifies one permutation. Apply [lem-galois-closed-subgroup-product-finite-groups] to the closed subgroup established in step 2, with $G_X=\\operatorname{Aut}(F(X))$. Its subspace topology is the stipulated topology on $\\operatorname{Aut}(F)$, so this group is profinite.",
    "uses": [
-    "def-galois-category"
+    "lem-galois-closed-subgroup-product-finite-groups"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BMR, lemma-aut-inverse-limit, proof, final sentence"
+   }
   }
  ],
  "proof_deps": [
-  "def-galois-category"
+  "lem-galois-closed-subgroup-product-finite-groups"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-galois-aut-profinite.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BMR, label lemma-aut-inverse-limit, proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "automorphism group of functor to finite sets is profinite closed embedding into product automorphism groups",
+   "results": "PreGaloisCategory.autEmbedding_range_isClosed, autEmbedding_isClosedEmbedding, and CompactSpace/TotallyDisconnectedSpace instances for functors into FintypeCat (Mathlib.CategoryTheory.Galois.Topology)",
+   "date": "2026-10-10",
+   "verdict": "generalization: matches the finite-fibre specialization but not closedness for arbitrary set-valued functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The group of natural automorphisms of a functor to finite sets is a profinite group; evaluation into product of finite permutation groups has closed image",
+   "results": "PreGaloisCategory.autEmbedding_range_isClosed and compact, Hausdorff, totally disconnected, topological-group instances (Mathlib.CategoryTheory.Galois.Topology)",
+   "date": "2026-10-10",
+   "verdict": "generalization: finite-fibre case only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'autEmbedding_range_isClosed|CompactSpace \\(Aut F\\)|TotallyDisconnectedSpace \\(Aut F\\)' Mathlib/CategoryTheory/Galois/Topology.lean",
+   "results": "autEmbedding_range_isClosed lines 102-105; autEmbedding_isClosedEmbedding lines 107-110; compact/totally disconnected instances lines 112-119 (read in available Mathlib source checkout)",
+   "date": "2026-10-10",
+   "verdict": "generalization: Mathlib requires F : C ⥤ FintypeCat"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +102,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-aut-profinite",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0BMR against Section 0BMQ and the slopmaster2 declaration. Added the source's category-size and topology conventions to the statement. Separated the compatibility and closed-image arguments, and cited a Mathlib leaf for profiniteness of a closed subgroup of a product of finite groups. The source Lean theorem marked with this blueprint id has a narrower connected-scheme existence statement and is not an exact attachment.",
+  "blueprint": "Steps 1-2 realize the blueprint proof's naturality witness and open neighbourhood; step 3 realizes its final profiniteness sentence."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: a wrong citation of def-galois-aut-topology removed from the new leaf): 0BMR read, 3 steps checked, ProfiniteGrp lines 214/224/249 verified, small cases"
+ }
 }
