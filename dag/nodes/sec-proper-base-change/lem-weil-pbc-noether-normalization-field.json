@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-noether-normalization-field",
+ "kind": "statement",
+ "title": "Noether normalization over a field",
+ "statement": "Let $k$ be a field and $B$ a commutative $k$-algebra of finite type [def-weil-pbc-finite-type-algebra] with $1\\neq0$ in $B$. Then there are an integer $d\\ge0$ and an injective homomorphism of $k$-algebras $\\psi:k[Y_1,\\ldots,Y_d]\\to B$ from the polynomial ring in $d$ variables [def-weil-pbc-mv-polynomial-ring] such that $B$, regarded as a $k[Y_1,\\ldots,Y_d]$-module through $\\psi$, is finitely generated [def-weil-finitely-generated-module].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00OY (lemma-Noether-normalization), assertions (a) and (b) for $S=k[x_1,\\ldots,x_n]/I$, $I\\neq(1)$; tag verified in stacks-project/tags/tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noether normalization: finitely generated algebra over a field is finite over an injective polynomial subalgebra",
+   "results": "exists_finite_inj_algHom_of_fg, exists_integral_inj_algHom_of_fg (Mathlib.RingTheory.NoetherNormalization); Subalgebra.fg_of_fg_map; Algebra.EssFiniteType.isNoetherianRing; IntermediateField.finite_of_fg_of_isAlgebraic",
+   "date": "2026-10-10",
+   "verdict": "match: exists_finite_inj_algHom_of_fg"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noether normalization lemma: for a nonzero finitely generated algebra A over a field k there is an injective k-algebra map from a polynomial ring k[X_1..X_d] to A making A a finite module",
+   "results": "exists_integral_inj_algHom_of_fg, exists_finite_inj_algHom_of_fg (Mathlib.RingTheory.NoetherNormalization); fg_of_fg_of_fg; finite_of_algHom_finiteType_of_isJacobsonRing; IsIntegralClosure.finite",
+   "date": "2026-10-10",
+   "verdict": "match: exists_finite_inj_algHom_of_fg"
+  },
+  {
+   "tool": "loogle",
+   "query": "exists_finite_inj_algHom_of_fg",
+   "results": "exists_finite_inj_algHom_of_fg (k R) [Field k] [CommRing R] [Nontrivial R] [Algebra k R] [Algebra.FiniteType k R] : ∃ s g, Function.Injective ⇑g ∧ g.Finite (Mathlib.RingTheory.NoetherNormalization)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'noether normali' Mathlib/; grep -n 'theorem exists_finite_inj_algHom_of_fg\\|^variable (k R' Mathlib/RingTheory/NoetherNormalization.lean; sed -n 265,295p Mathlib/RingTheory/NoetherNormalization.lean; sed -n 165,192p Mathlib/RingTheory/Finiteness/Defs.lean (under ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "only RingTheory/NoetherNormalization.lean: variables line 267-268 ([Field k] [CommRing R] [Nontrivial R] [Algebra k R] [Algebra.FiniteType k R]), exists_integral_inj_algHom_of_fg line 276, exists_finite_inj_algHom_of_fg lines 289-290; AlgHom.Finite (Finiteness/Defs.lean line 189) = RingHom.Finite (line 169) = Module.Finite of the target over the source via the map",
+   "date": "2026-10-10",
+   "verdict": "match: exists_finite_inj_algHom_of_fg"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_finite_inj_algHom_of_fg (project ~/weil-conjectures-slopmaster2)",
+   "results": "exists_finite_inj_algHom_of_fg, theorem, .lake/packages/mathlib/Mathlib/RingTheory/NoetherNormalization.lean (index: unavailable, name found by the file scan)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "exists_finite_inj_algHom_of_fg",
+  "file": "Mathlib/RingTheory/NoetherNormalization.lean",
+  "line": 289,
+  "how": "exact: lines 267-268 fix (k R : Type*) [Field k] [CommRing R] [Nontrivial R] [Algebra k R] [Algebra.FiniteType k R] (finite type k-algebra with 1 ≠ 0); lines 289-290 give ∃ s, ∃ g : MvPolynomial (Fin s) k →ₐ[k] R, Function.Injective g ∧ g.Finite, where AlgHom.Finite (Mathlib/RingTheory/Finiteness/Defs.lean line 189) is RingHom.Finite (line 169), i.e. Module.Finite of R over MvPolynomial (Fin s) k through g: d = s, ψ = g. Source read by sed -n 265,295p and 165,192p on 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-noether-normalization-over-domain",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: exact Mathlib leaf exists_finite_inj_algHom_of_fg (NoetherNormalization.lean line 289, read). Same statement as lem-zl-noether-normalization-field (unit sk-i-real-normalization), which L promoted to the same leaf; kept separate because the units differ.",
+ "lead_note": "Duplicate of lem-zl-noether-normalization-field across units; both are the same Mathlib leaf."
+}

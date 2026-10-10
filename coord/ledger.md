@@ -983,3 +983,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:48 L: reviewed and accepted lem-weil-pbc-module-pushforward-injective-acyclic (4 steps; +module-injective-open-cover-cech-acyclic 01EP, +module-cech-vanishing-criterion 01EV nodes).
 - 06:50 L: reviewed and accepted lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso (5 steps; +leray-acyclicity-quasi-iso node 015E with the source repository's quasiIso_map_of_rightAcyclic attached, closed on slopmaster2).
 - 06:50 L: reviewed and accepted lem-weil-pbc-module-stalk-exact (9 steps, no new nodes; 01AF/01AG written out).
+- 06:53 L: reviewed and accepted lem-weil-pbc-noether-normalization-over-domain (7 steps; +noether-normalization-field exact leaf 00OY). The duplicate lem-zl-noether-normalization-field (sk-i-real-normalization) was promoted to the same Mathlib leaf; both kept since the units differ.
