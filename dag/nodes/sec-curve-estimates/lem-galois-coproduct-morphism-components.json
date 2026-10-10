@@ -21,9 +21,105 @@
   "def-galois-finite-coproduct",
   "def-galois-connected-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Coproducts under $F$.* By axiom (1) of [def-galois-category] $\\mathcal C$ has finite limits and finite colimits ([def-galois-finite-limits-colimits]); by axiom (4) $F$ is exact ([def-galois-exact-functor]). A coproduct of finitely many objects ([def-galois-finite-coproduct]) is the colimit of a diagram indexed by a finite discrete category, hence a finite colimit, and $F$ carries it to a coproduct in $\\mathbf{Sets}$, i.e. a disjoint union. So the maps $F(\\kappa_j):F(Y_j)\\to F(Y)$ are injective and $F(Y)$ is the disjoint union of the subsets $F(\\kappa_j)(F(Y_j))$, $j=1,\\dots,m$: every $y\\in F(Y)$ lies in $F(\\kappa_j)(F(Y_j))$ for exactly one $j$. Likewise the empty diagram is finite, so an initial object $A$ of $\\mathcal C$ exists and $F(A)$ is a colimit of the empty diagram in $\\mathbf{Sets}$, i.e. $F(A)=\\emptyset$; since any initial object is isomorphic to $A$ ([def-galois-initial-mono]), $F(Z)=\\emptyset$ for every initial $Z$.",
+   "uses": [
+    "def-galois-category",
+    "def-galois-finite-limits-colimits",
+    "def-galois-exact-functor",
+    "def-galois-finite-coproduct",
+    "def-galois-initial-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (8) ('s maps to an element of F(Y_j) ⊂ F(Y)'), with the proof of (4) for F(A)=∅; Definition 0BMY (label definition-galois-category) (1), (4)"
+   }
+  },
+  {
+   "text": "*Connected objects have nonempty fibre.* Let $Z$ be connected ([def-galois-connected-object]). If $F(Z)=\\emptyset$, the unique morphism $A\\to Z$ from the initial object $A$ of step 1 is carried by $F$ to the bijection $\\emptyset\\to\\emptyset$; as $F$ reflects isomorphisms (axiom (4) of [def-galois-category], [def-galois-reflects-isomorphisms]) it is an isomorphism, so $Z$ is initial ([def-galois-initial-mono]), contradicting connectedness. Hence $F(X_i)\\neq\\emptyset$ for every $i$. (Conversely, by step 1 an object $W$ with $F(W)\\neq\\emptyset$ is not initial.)",
+   "uses": [
+    "def-galois-category",
+    "def-galois-connected-object",
+    "def-galois-reflects-isomorphisms",
+    "def-galois-initial-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (4), used in the proof of (8) ('Picking s ∈ F(X_i)')"
+   }
+  },
+  {
+   "text": "*The coprojections $\\kappa_j$ are monomorphisms.* By axioms (1) and (4) of [def-galois-category], $\\mathcal C$ has fibre products ([def-galois-finite-limits-colimits]), $F$ commutes with them ([def-galois-exact-functor]) and reflects isomorphisms ([def-galois-reflects-isomorphisms]); so [lem-galois-mono-iff-injective] applies, and since $F(\\kappa_j)$ is injective (step 1), $\\kappa_j:Y_j\\to Y$ is a monomorphism ([def-galois-initial-mono]).",
+   "uses": [
+    "def-galois-category",
+    "def-galois-finite-limits-colimits",
+    "def-galois-exact-functor",
+    "def-galois-reflects-isomorphisms",
+    "lem-galois-mono-iff-injective",
+    "def-galois-initial-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (8) ('F(Y_j) ⊂ F(Y)') with item (2)"
+   }
+  },
+  {
+   "text": "*The fibre products $E_{ij}$.* Fix $i$ and $j$, and let $E_{ij}=X_i\\times_YY_j$ be the fibre product of $\\varphi\\circ\\iota_i:X_i\\to Y$ and $\\kappa_j:Y_j\\to Y$ (axiom (1) of [def-galois-category], [def-galois-finite-limits-colimits]), with projections $p_{ij}:E_{ij}\\to X_i$, $q_{ij}:E_{ij}\\to Y_j$, $\\varphi\\circ\\iota_i\\circ p_{ij}=\\kappa_j\\circ q_{ij}$. Then $p_{ij}$ is a monomorphism ([def-galois-initial-mono]): if $a,b:W\\to E_{ij}$ satisfy $p_{ij}a=p_{ij}b$, then $\\kappa_jq_{ij}a=\\varphi\\iota_ip_{ij}a=\\varphi\\iota_ip_{ij}b=\\kappa_jq_{ij}b$, so $q_{ij}a=q_{ij}b$ because $\\kappa_j$ is a monomorphism (step 3), and $a=b$ by the uniqueness in the universal property of the fibre product. As $X_i$ is connected ([def-galois-connected-object]), either $E_{ij}$ is initial or $p_{ij}$ is an isomorphism (Stacks: '$E_{ij}$ is either initial or equal to $X_i$'). Since $F$ commutes with fibre products ([def-galois-exact-functor]), $F(E_{ij})$ is identified via $(F(p_{ij}),F(q_{ij}))$ with $\\{(t,u)\\in F(X_i)\\times F(Y_j): F(\\varphi\\circ\\iota_i)(t)=F(\\kappa_j)(u)\\}$.",
+   "uses": [
+    "def-galois-category",
+    "def-galois-finite-limits-colimits",
+    "def-galois-initial-mono",
+    "def-galois-connected-object",
+    "def-galois-exact-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (8)"
+   }
+  },
+  {
+   "text": "*Choice of $\\alpha$.* For each $i$ pick $s_i\\in F(X_i)$ (step 2). By step 1 the element $F(\\varphi\\circ\\iota_i)(s_i)\\in F(Y)$ lies in $F(\\kappa_j)(F(Y_j))$ for exactly one $j$ (in particular $m\\geq1$ when $n\\geq1$); put $\\alpha(i)=j$. Write $u\\in F(Y_j)$ with $F(\\kappa_j)(u)=F(\\varphi\\circ\\iota_i)(s_i)$. By step 4, $(s_i,u)$ is an element of $F(E_{i\\alpha(i)})$, so $F(E_{i\\alpha(i)})\\neq\\emptyset$ and $E_{i\\alpha(i)}$ is not initial (step 1). By step 4, $p_{i\\alpha(i)}:E_{i\\alpha(i)}\\to X_i$ is an isomorphism. (Conversely, for $j$ with $E_{ij}$ not initial, $p_{ij}$ is an isomorphism by step 4, so $F(p_{ij})$ is surjective and by step 4 the element $F(\\varphi\\circ\\iota_i)(s_i)$ lies in $F(\\kappa_j)(F(Y_j))$, whence $j=\\alpha(i)$ by step 1: this is Stacks' uniqueness of $j=\\alpha(i)$, not needed for the statement.)",
+   "uses": [
+    "def-galois-initial-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (8)"
+   }
+  },
+  {
+   "text": "*The components and the factorization.* Put $\\varphi_i=q_{i\\alpha(i)}\\circ p_{i\\alpha(i)}^{-1}:X_i\\to Y_{\\alpha(i)}$. Then $\\kappa_{\\alpha(i)}\\circ\\varphi_i=\\kappa_{\\alpha(i)}q_{i\\alpha(i)}p_{i\\alpha(i)}^{-1}=\\varphi\\circ\\iota_i\\circ p_{i\\alpha(i)}\\circ p_{i\\alpha(i)}^{-1}=\\varphi\\circ\\iota_i$ by the commutativity of the fibre-product square of step 4. So $\\varphi$ and the morphism induced by the family $(\\kappa_{\\alpha(i)}\\circ\\varphi_i)_i$ agree after composing with every $\\iota_i$, and they are equal by the uniqueness in the universal property of the coproduct $X$ ([def-galois-finite-coproduct]). For $n=0$ the statement holds with $\\alpha$ the empty map.",
+   "uses": [
+    "def-galois-finite-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (8)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-category",
+  "def-galois-finite-limits-colimits",
+  "def-galois-exact-functor",
+  "def-galois-finite-coproduct",
+  "def-galois-initial-mono",
+  "def-galois-connected-object",
+  "def-galois-reflects-isomorphisms",
+  "lem-galois-mono-iff-injective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), item (8) and its proof, with the proofs of items (2) and (4)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,6 +141,27 @@
    "results": "Decomposition.lean:134 fiber_in_connected_component (every element of F X lies in a connected subobject); :145 connected_component_unique (two connected monos into X meeting in a fibre element are isomorphic over X, via the fibre product); Basic.lean:445 instance MonoCoprod C; no lemma on morphisms between coproducts of connected objects",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a morphism from a connected object to a coproduct factors through one of the coprojections",
+   "results": "Limits.coprod.desc', coprod.desc (Limits.Shapes.BinaryProducts); MonoCoprod.mono_ι (Limits.MonoCoprod); FormalCoproduct.Hom.fromIncl (Limits.FormalCoproducts); Sigma.ι (Limits.Shapes.Products)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreGaloisCategory.IsConnected, CategoryTheory.Limits.Sigma.ι",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem\\|lemma' Mathlib/CategoryTheory/Galois/*.lean | grep -i 'sigma\\|coprod\\|factor\\|summand' (in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib)",
+   "results": "Basic.lean:383 card_fiber_coprod_eq_sum only",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -58,7 +175,7 @@
   ],
   "reason": "Mathlib has no statement of this clause; the nearest pieces (the same fibre-product argument for connected subobjects) are stated for Mathlib's PreGaloisCategory + FiberFunctor (SGA1/Lenstra axioms), which agree with Stacks 0BMY only through a comparison theorem (see def-galois-category.mathlib_candidate)."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -74,5 +191,13 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-galois-coproduct-morphism-components",
+  "worker": "stage1",
+  "summary": "Split against Stacks 0BN0 (pione.tex, label lemma-epi-mono; tag verified in tags/tags), item (8) and its four-line proof, with the parts of the proofs of items (2) and (4) it uses without mention, and Definition 0BMY (1), (4). Statement kept (it is the source's (8) with the coprojections and the factorization made explicit; Stacks' uniqueness of alpha(i) is not stated, and is remarked in step 5 as unneeded). The proof is written from the Stacks axioms of def-galois-category only; no Mathlib PreGaloisCategory/FiberFunctor declaration is used (the item's mathlib_candidate is kept as recorded). Steps: (1) F turns finite coproducts into disjoint unions and initial objects into the empty set (exactness); (2) connected objects have nonempty fibre (Stacks (4), written out); (3) the coprojections kappa_j are monomorphisms, via the existing general leaf lem-galois-mono-iff-injective (Stacks (2)); (4) E_ij = X_i x_Y Y_j -> X_i is a monomorphism (base change of a mono, written out), hence by connectedness E_ij is initial or p_ij is an isomorphism, and F(E_ij) is the fibre product of sets; (5) alpha(i) is the unique j with F(phi iota_i)(s_i) in F(Y_j), and then E_{i alpha(i)} is not initial so p is an isomorphism; (6) phi_i = q p^{-1} and the coproduct property. The small facts Stacks uses silently (F of initial is empty, connected implies nonempty fibre, coprojections mono, base change of monos) are written out in steps 1-4 from the definition nodes rather than cited from lem-galois-axioms, which is this item's citer. No new nodes; no slopmaster2 declaration states this (slopmaster2 uses Mathlib's PreGaloisCategory only for the finite etale site, and has no lemma of this form). Searches: blueprint_refs search 'coproduct connected', 'index sets', '0BN0', 'initial empty' found only def-galois-category and lem-galois-axioms (the citer, whose clause (7) is this item).",
+  "blueprint": "lem-galois-axioms, clause 7 of its statement and the Stacks proof of (8) behind it ('E_ij = X_i x_Y Y_j is either initial or equal to X_i ... this happens for a unique j = alpha(i)'): steps 4-5 realize that sentence, steps 1-3 the facts it uses silently (F(Y_j) ⊂ F(Y) disjoint, coprojections mono, F(X_i) nonempty), step 6 the conclusion 'X -> Y comes from a collection of morphisms X_i -> Y_alpha(i)'."
+ },
+ "reviewed": "2026-10-10 L: 6 steps from the Stacks 0BMY axioms checked (F turns finite coproducts into disjoint unions; connected objects have nonempty fibre via reflection of isomorphisms; coprojections mono by lem-galois-mono-iff-injective; E_ij = X_i x_Y Y_j with mono projection, initial or iso by connectedness; alpha(i) from the fibre; factorization by the coproduct property). No Mathlib GaloisCategory declaration used (SGA1 notion); no new nodes. Steps 1-2 repeat the clause-3 step of the citer lem-galois-axioms; a shared node may be split off later."
 }

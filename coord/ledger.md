@@ -1439,3 +1439,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:45 L: merged deliver/F1/lem-weil-pbc-finite-coproduct-lfp-qcqs (3 steps, new Mathlib leaf lem-weil-pbc-quasi-separated-affine-cover-criterion) and deliver/C1/lem-weil-pbc-sets-etale-inverse-image-composition-units (5 steps)
 - 12:45 L: J1 re-pushed def-weil-pbc-etale-cohomology (c7f2cef3c) before the return, same defects; return stands
 - 12:46 L: accepted def-sc-function-field: definition with 5 new nodes (def-sc-generic-point, lem-sc-scheme-sober, lem-sc-integral-function-field-affine-fraction Mathlib leaves; def-sc-rational-functions, lem-sc-rational-functions-generic-stalks unsplit); k(X) for integral X added; tool_uses 2 Noetherian nodes
+- 12:46 L: accepted lem-galois-coproduct-morphism-components: 6 steps from the 0BMY axioms, no new nodes
