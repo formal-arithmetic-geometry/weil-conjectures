@@ -21,9 +21,81 @@
   "def-sc-p1-standard",
   "lem-sc-p1-monomial"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The evaluation isomorphism for a finite locally free first argument is compatible with precomposition: the square identifying $u^\\vee\\otimes1$ with $(-)\\circ u$ commutes by the first-variable naturality statement [lem-sc-ext-evaluation-first-naturality].",
+   "uses": [
+    "lem-sc-ext-evaluation-first-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/thm-sc-p1-duality.md",
+    "place": "proof, Step 1: naturality of the locally free evaluation map"
+   }
+  },
+  {
+   "text": "Read $\\operatorname{Ext}$ as in [lem-weil-pbc-ext-via-injective-resolution] (the corrected form of [def-sc-ext-sheaf]: $\\operatorname{Ext}^i_X(\\mathcal F,\\mathcal G)=R^i\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F,-)(\\mathcal G)$, computed by an injective resolution $\\varepsilon:\\mathcal G\\to I^\\bullet$ in $\\operatorname{Mod}(\\mathcal O_X)$). By that node the class of a cocycle $f:\\mathcal F\\to I^i$ is $\\varepsilon[i]^{-1}\\circ f$, so pullback along $u$ (precomposition with $u$) is induced by the cochain map $f\\mapsto f\\circ u$, i.e. by the natural transformation $\\operatorname{Hom}(u,-):\\operatorname{Hom}(\\mathcal F,-)\\to\\operatorname{Hom}(\\mathcal F',-)$. Put $T=\\mathcal F^\\vee\\otimes-$, $T'=(\\mathcal F')^\\vee\\otimes-$ and $\\alpha=u^\\vee\\otimes1:T\\to T'$. The canonical isomorphism of [lem-sc-ext-locally-free] is (as constructed there) the composite of this identification, the isomorphism $\\operatorname{Hom}(\\mathcal F,-)\\cong\\Gamma(X,T(-))$ given by [lem-sc-ext-evaluation] and the global-sections clause of [def-pur-sheaf-hom], and the isomorphism $R^i(\\Gamma(X,-)\\circ T)(\\mathcal G)\\cong\\mathrm H^i(X,T\\mathcal G)$ of [lem-sc-ext-derived-composite]; the hypotheses of the latter (enough injectives, $T$ exact, $T(I)$ $\\Gamma$-acyclic for injective $I$) are verified in [lem-sc-ext-locally-free] for any finite locally free first argument, so for $\\mathcal F$ and $\\mathcal F'$ alike. Global sections of the commuting square of [lem-sc-ext-evaluation-first-naturality] (taken with $\\mathcal G$ replaced by each $I^n$) show that under the second isomorphism $\\operatorname{Hom}(u,-)$ corresponds to $\\Gamma(X,\\alpha)$. Finally [lem-sc-ext-derived-composite-natural], applied to $\\alpha$ and $U=\\Gamma(X,-)$, carries the map induced by $\\Gamma(X,\\alpha)$ to $\\mathrm H^i(X,\\alpha_{\\mathcal G})=\\mathrm H^i(X,u^\\vee\\otimes1_{\\mathcal G})$. Composing the three squares, pullback along $u$ is the cohomology map induced by $u^\\vee\\otimes1$.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "def-sc-ext-sheaf",
+    "lem-sc-ext-locally-free",
+    "lem-sc-ext-evaluation",
+    "def-pur-sheaf-hom",
+    "lem-sc-ext-derived-composite",
+    "lem-sc-ext-evaluation-first-naturality",
+    "lem-sc-ext-derived-composite-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/thm-sc-p1-duality.md",
+    "place": "proof, Step 1: Ext of a finite locally free sheaf and naturality of the canonical identification"
+   }
+  },
+  {
+   "text": "For $X=\\mathbf P^1_k$, $\\mathcal F=\\mathcal O(d)$, $\\mathcal F'=\\mathcal O$, and $u=s$ given by a global section, write $s|_{U_i}=\\sigma_i g_i$ with the generators $g_0,g_1$ of [def-sc-p1-standard]. The dual $\\mathcal O(d)^\\vee$ is trivialized over $U_i$ by the dual generators $g_i^\\vee$ ($g_i^\\vee(g_i)=1$), and $u^\\vee(g_i^\\vee)=\\sigma_i$, so $u^\\vee\\otimes1:\\mathcal O(d)^\\vee\\otimes\\omega\\to\\mathcal O^\\vee\\otimes\\omega=\\omega$ is, in these trivializations, multiplication by $\\sigma_i$ on $U_i$ (and by $\\sigma_0$ on $U_{01}$), i.e. multiplication by $s$ after $\\mathcal O(d)^\\vee\\cong\\mathcal O(-d)$. Both sheaves are quasi-coherent (locally free of rank one on $U_0,U_1$), and $U_0,U_1,U_{01}$ are affine [def-sc-p1-standard], so by [lem-pc-cech-computes] their cohomology is the Cech cohomology of the standard cover, and by [lem-sc-cech-comparison-natural] the map $\\mathrm H^1(X,u^\\vee\\otimes1)$ is induced by the cochain map applying $u^\\vee\\otimes1$ componentwise; on Laurent cochains on $U_{01}$ this is the product with $s$.",
+   "uses": [
+    "def-sc-p1-standard",
+    "lem-pc-cech-computes",
+    "lem-sc-cech-comparison-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/thm-sc-p1-duality.md",
+    "place": "proof, Step 1: the multiplication pairing on the standard Cech cover"
+   }
+  },
+  {
+   "text": "The resulting composite $\\operatorname{Ext}^1(\\mathcal O(d),\\omega)\\to\\operatorname{Ext}^1(\\mathcal O,\\omega)=H^1(X,\\omega)$ is therefore multiplication by $s$ on Cech cochains. The basis and the identification $\\omega\\cong\\mathcal O(-2)$ are exactly the assertions of [lem-sc-p1-monomial](iii), and the stated basis calculation is [lem-sc-p1-monomial](ii).",
+   "uses": [
+    "lem-sc-p1-monomial",
+    "lem-sc-ext-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/thm-sc-p1-duality.md",
+    "place": "proof, Step 1: the multiplication pairing and monomial basis"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ext-evaluation-first-naturality",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "def-sc-ext-sheaf",
+  "lem-sc-ext-locally-free",
+  "lem-sc-ext-evaluation",
+  "def-pur-sheaf-hom",
+  "lem-sc-ext-derived-composite",
+  "lem-sc-ext-derived-composite-natural",
+  "def-sc-p1-standard",
+  "lem-pc-cech-computes",
+  "lem-sc-cech-comparison-natural",
+  "lem-sc-p1-monomial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/thm-sc-p1-duality.md",
+  "place": "proof, Step 1"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +120,35 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-sc-p1-duality",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-ext-locally-free-naturality",
+  "worker": "stage1",
+  "summary": "Split the naturality claim into the first-variable evaluation square, its derived Ext/cohomology transport, and the projective-line Cech multiplication specialization; added one strictly smaller statement for first-variable evaluation naturality.",
+  "blueprint": [
+   "Step 1: naturality of the locally free evaluation map",
+   "Step 1: Ext of a finite locally free sheaf and naturality of the canonical identification",
+   "Step 1: the multiplication pairing on the standard Cech cover"
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-cech-computes"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eln",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eln (reviewer sub-agent of L); spot-checked: Start Sat Oct 10 03:48:13 PM UTC 2026. Source: blueprint thm-sc-p1-duality.md proof Step 1 (Ext of locally free = H^i(F^vee tensor G), Yoneda pairing); Stacks 06XR (via lem-weil-pbc-ext-via-injective-resolution), 015E, 01EQ, 01XD. Under the corrected Ext (R^i Hom(F,-)(G) by injective resolutions of G, def-sc-ext-sheaf lead_note) the item is true: Hom(F,I) = Gamma(F^vee tensor I) termwise, F^vee tensor I^bullet an acyclic resolution of F^vee tensor G, and u acts by u^vee tensor 1 termwise. Step 1: new node lem-sc-ext-evaluation-first-naturality is a true sheaf-level square; Step 4 cites lem-sc-p1-monomial (ii),(iii) and the H^1 = Ext^1(O,-) clause of lem-sc-ext-locally-free correctly. Small cases d=0 (s constant: identity on H^1(omega)=k), d=1 (H^1(O(-3)) basis [t^-2],[t^-1], multiplication by s=a+bt sends [t^-2] to b[t^-1]) agree. FIX more, RETURN less: (1) C4 dag/nodes/sec-picard-framework/lem-sc-ext-evaluation-first-naturality.json: statement: hypothesis 'finite locally free in the sense of def-amb-finite-locally-free-module' (constant rank) narrower than the item's; replaced by the open-cover notion of lem-sc-ext-evaluation, and the evaluation isomorphisms cited to it. (2) C1 item Step 2: naturality of the derived-composite isomorphism in the exact functor was used uncited ('functoriality of right derived functors'); added statement node lem-sc-ext-derived-composite-natural (Stacks 015E) and rewrote Step 2 through lem-weil-pbc-ext-via-injective-resolution, lem-sc-ext-evaluation, def-pur-sheaf-hom, lem-sc-ext-derived-composite, the new evaluation square and the added node. (3) C1 item Step 3: naturality in the sheaf of the Cech-to-cohomology isomorphism was used uncited and the step was marked elementary; added statement node lem-sc-cech-comparison-natural (Stacks 01EQ, 01XD), Step 3 now cites lem-pc-cech-computes and it, dual-generator computation written out, elementary false; proof_deps updated. lem-pc-cech-computes (unit sk-lem-picard-cech-computes) is a generic tool (C8). End Sat Oct 10 03:51:14 PM UTC 2026.; 4 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lead_note": "2026-10-10 L (R-eln): R-eln: Step 2 identifies the canonical isomorphism of lem-sc-ext-locally-free with its construction (ext-via-injective-resolution + evaluation + lem-sc-ext-derived-composite); if lem-sc-ext-locally-free is later restated, state that construction in its statement. Ext read as R^i Hom(F,-)(G) per the def-sc-ext-sheaf correction; the item is true under that reading."
 }
