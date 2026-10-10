@@ -910,3 +910,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:23 L: reviewed lem-weil-pbc-standard-smooth-include-generators (8 steps, +block-triangular determinant leaf): accepted.
 - 05:25 L: reviewed lem-weil-pbc-tensor-field-extension-galois-invariants (6 steps, no new node): accepted.
 - 05:25 L: reviewed lem-weil-pbc-symmetric-degree-exact (6 steps, +grading node; statement rewritten in TeX): accepted. Stage-3 note: lem-weil-pbc-symmetric-algebra-quotient-module step 3 should cite the grading node.
+- 05:26 L: reviewed lem-weil-pbc-spectral-limit-pullback-sections (12 steps; the worker's duplicate 0A2W node replaced by the existing one): accepted.
