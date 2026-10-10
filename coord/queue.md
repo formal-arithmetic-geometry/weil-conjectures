@@ -1,8 +1,8 @@
 # Work queue
 
-912 items; claim with `tools/claim.py next <group> [--stage N]`.
+910 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (303)
+## Stage 1: nodes to split (301)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-exc-finite-galois-tensor-decomposition` | 3009 | none |
 | `lem-weil-pbc-site-extension-by-zero-exact` | 3011 | none |
-| `lem-weil-pbc-site-restriction-exact` | 3011 | none |
 | `lem-sc-p1-boundary-one-extension-class` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
 | `lem-sp-cartan-eilenberg-properties` | 3014 | none |
@@ -35,7 +34,6 @@
 | `lem-pc-ringed-spaces-derived-pullback-composition` | 3015 | none |
 | `lem-sc-coherent-affine-free-resolution` | 3015 | none |
 | `lem-sc-derived-hom-finite-free-model` | 3015 | none |
-| `lem-sc-derived-hom-projective-resolution` | 3015 | none |
 | `lem-sc-derived-internal-hom-restrict-open` | 3015 | none |
 | `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
@@ -924,7 +922,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 327 nodes that wait for stage 1, 1279 nodes that wait for a statement dependency.
+Not open yet: 325 nodes that wait for stage 1, 1281 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
