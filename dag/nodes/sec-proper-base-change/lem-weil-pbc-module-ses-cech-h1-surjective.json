@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-henselian-idempotent-lifting",
-   "place": "step 2 of its split (source: Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent)",
+   "place": "Step 2 of thm-weil-pbc-henselian-idempotent-lifting: the Zariski H0 henselian-pair comparison, specifically its formal-functions computation via Cech vanishing and module pushforward injective acyclicity.",
    "via": [
     "lem-weil-pbc-module-cech-vanishing-criterion",
     "lem-weil-pbc-module-pushforward-injective-acyclic",
@@ -16,7 +16,7 @@
     "lem-weil-pbc-zariski-h0-proper-henselian-pair"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Vanishing Cech H^1 of the kernel on a cofinal system of open coverings gives surjectivity on sections (O_X-modules)",
@@ -32,9 +32,92 @@
   "def-sc-zariski-site",
   "def-weil-pbc-site-cech-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "**Step 1 (sectionwise kernel).** Short exactness [def-weil-pbc-exact-sequence] gives that $\\iota$ is a monomorphism with image $\\ker\\varphi$, $\\varphi\\iota=0$, and $\\varphi$ is an epimorphism. Thus $\\iota$ identifies $\\mathcal F$ with the kernel of $\\varphi$. Kernels of sheaves of modules are computed sectionwise [def-weil-sheaf-of-modules-category]. Consequently for each open $W$, $\\iota_W$ is injective with image $\\ker\\varphi_W$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EU, label lemma-ses-cech-h1, proof, kernel identification of differences; Modules on Sites 03DA for sectionwise kernels"
+   }
+  },
+  {
+   "text": "**Step 2 (local lifts).** Fix $h\\in\\mathcal H(U)$. Set $P(W)=\\mathcal H(W)/\\varphi_W(\\mathcal G(W))$ and let $q:\\mathcal H\\to P^\\#$ be the map to its sheafification [def-weil-pbc-sheafification]. Cokernels are sheafifications of sectionwise cokernels [def-weil-sheaf-of-modules-category], so $P^\\#=\\operatorname{Coker}\\varphi=0$ since $\\varphi$ is an epimorphism. Therefore $h\\in\\ker q_U$. Apply [lem-weil-pbc-sheaf-cokernel-local-image] to the morphism $\\varphi:\\mathcal G\\to\\mathcal H$ on $(X,\\mathcal O_X)$: its statement identifies $\\ker q$ with sections locally in the image. Hence an open covering $U=\\bigcup_jV_j$ and sections $g'_j\\in\\mathcal G(V_j)$ exist with $\\varphi(g'_j)=h|_{V_j}$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheaf-cokernel-local-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EU, label lemma-ses-cech-h1, proof, choice of local lifts; local-image criterion from the cited module cokernel node"
+   }
+  },
+  {
+   "text": "**Step 3 (refinement).** By cofinality choose $\\mathcal U=(U_i)_{i\\in I}\\in\\Sigma$ refining $(V_j)$. Choose $j(i)$ with $U_i\\subseteq V_{j(i)}$, and let $g_i=g'_{j(i)}|_{U_i}$. Restriction commutes with $\\varphi$ [def-weil-sheaf-of-modules-category], so $\\varphi(g_i)=h|_{U_i}$. By hypothesis $\\check H^1(\\mathcal U,\\mathcal F)=0$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EU, label lemma-ses-cech-h1, proof, choice of covering satisfying (a) and (b)"
+   }
+  },
+  {
+   "text": "**Step 4 (cocycle).** On $U_{ij}=U_i\\cap U_j$ the section $\\gamma_{ij}=g_j|-g_i|$ maps under $\\varphi$ to $h|-h|=0$. Step 1 gives a unique $c_{ij}\\in\\mathcal F(U_{ij})$ with $\\iota(c_{ij})=\\gamma_{ij}$. These form a degree-one cochain [def-weil-pbc-site-cech-complex]. On $U_{ijk}$ its differential is $c_{jk}|-c_{ik}|+c_{ij}|$. Since $\\iota$ commutes with restriction [def-weil-sheaf-of-modules-category], its image equals $(g_k|-g_j|)-(g_k|-g_i|)+(g_j|-g_i|)=0$. Injectivity of $\\iota_{U_{ijk}}$ gives $d^1c=0$. All restrictions in this identity are to the same triple intersection.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EU, label lemma-ses-cech-h1, proof, sections s_{i_0i_1}; implicit cocycle identity written out"
+   }
+  },
+  {
+   "text": "**Step 5 (correction).** By [def-weil-pbc-site-cech-complex], $\\check H^1=\\ker d^1/\\operatorname{im}d^0$. Vanishing of this quotient and Step 4 yield $t=(t_i)\\in\\prod_i\\mathcal F(U_i)$ with $c=d^0t$, so $c_{ij}=t_j|-t_i|$. Put $\\widetilde g_i=g_i-\\iota(t_i)$. On $U_{ij}$ their difference is $\\widetilde g_j|-\\widetilde g_i|=\\gamma_{ij}-\\iota(c_{ij})=0$, using naturality of $\\iota$ [def-weil-sheaf-of-modules-category]. Also $\\varphi(\\widetilde g_i)=h|_{U_i}$ because $\\varphi\\iota=0$.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EU, label lemma-ses-cech-h1, proof, sections t_i and corrected sections s_i-t_i"
+   }
+  },
+  {
+   "text": "**Step 6 (gluing).** The sheaf axiom for $\\mathcal G$ [def-weil-sheaf-of-modules-category] glues the compatible $\\widetilde g_i$ uniquely to $g\\in\\mathcal G(U)$. Naturality gives $\\varphi_U(g)|_{U_i}=h|_{U_i}$ for every $i$. The uniqueness part of the sheaf axiom for $\\mathcal H$ implies $\\varphi_U(g)=h$. Since $h$ was arbitrary, $\\varphi_U$ is surjective. This also covers $U=\\emptyset$: sheaves of modules have only the zero section there, and an empty compatible family glues uniquely.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01EU, label lemma-ses-cech-h1, proof, gluing of the corrected sections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-sheaf-cokernel-local-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01EU, label lemma-ses-cech-h1, proof; implicit cocycle identity and correction/gluing checks written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -63,10 +146,31 @@
    "results": "Cech hits are Stone-Cech compactification files, AlgebraicGeometry/Sites/ElladicCohomology.lean and SheafCohomology/Cech.lean (definitions only, no theorem); in SheafCohomology only subsingleton_H_of_isZero (Basic.lean:161)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "vanishing first Cech cohomology kernel short exact sheaves modules implies surjective global sections",
+   "results": "ShortComplex.exact_of_f_is_kernel, HasGlobalSectionsFunctor, Sheaf.isLocallySurjective_iff_epi', SheafOfModules.sectionsFunctor_obj, SheafOfModules.GeneratingSections.mk.injEq; no Cech lifting criterion.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplex\"",
+   "results": "CategoryTheory.cechComplexFunctor (Mathlib.CategoryTheory.Sites.SheafCohomology.Cech), definition only.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n cechComplex /tmp/mathlib-f1/Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean; read whole file",
+   "results": "Line 65: cechComplexFunctor definition; no lifting theorem.",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -87,6 +191,19 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 01EU (ses of O_X-modules, cofinal set of coverings with Cech H^1 of the kernel zero gives surjectivity on sections); module version of the reviewed site node lem-weil-pbc-site-ses-cech-h1-surjective",
- "lead_note": "split following Stacks 01EU or the site version lem-weil-pbc-site-ses-cech-h1-surjective"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 01EU for modules checked: local lifts, refinement, cocycle in F, correction by the vanishing Cech H^1, gluing"
+ },
+ "lead_note": "split following Stacks 01EU or the site version lem-weil-pbc-site-ses-cech-h1-surjective",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-ses-cech-h1-surjective",
+  "worker": "stage1",
+  "summary": "Statement retained against 01EU. Six steps follow local lifts, cofinal refinement, differences cocycle, coboundary correction, and gluing. Existing module cokernel local-image node supplies local lifts; no new nodes. Signs and empty-open case checked. No exact duplicate in whole-blueprint searches for Cech and cofinal surjective.",
+  "blueprint": "Makes precise the Cech vanishing argument below step 2 of thm-weil-pbc-henselian-idempotent-lifting, through the Zariski H0 comparison and formal-functions computation; unit route unchanged."
+ }
 }
