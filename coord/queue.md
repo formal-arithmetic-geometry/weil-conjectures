@@ -2,7 +2,7 @@
 
 908 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (269)
+## Stage 1: nodes to split (268)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,11 +11,10 @@
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 2009 | none |
 | `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
 | `lem-sc-irreducible-constant-sections` | 2014 | none |
-| `lem-sc-semilocal-dim-one-normalization` | 2015 | none |
+| `lem-sc-integral-closure-dedekind-surjective-fibres` | 2016 | none |
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-exc-finite-galois-algebra-tensor-decomposition` | 3010 | none |
-| `lem-weil-pbc-site-extension-by-zero-presheaf-adjoint` | 3012 | none |
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-sc-affine-rhom-qcoherent` | 3015 | none |
 | `lem-sc-derived-hom-finite-free-model` | 3015 | none |
@@ -276,7 +275,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (639)
+## Stage 2: nodes to state (640)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -427,6 +426,7 @@
 | `lem-sc-regular-local-ext-vanishing` | 1 | state |
 | `lem-sc-semilocal-dedekind-dvr-reduction` | 1 | state |
 | `lem-sc-semilocal-dim-one-conductor` | 1 | state |
+| `lem-sc-semilocal-dim-one-normalization` | 1 | state |
 | `lem-sc-smooth-algebra-reduced-field` | 1 | state |
 | `lem-sc-zero-dim-noetherian-closed-finite` | 1 | state |
 | `lem-weil-pbc-adic-completion-noetherian` | 1 | state |
@@ -920,7 +920,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1312 nodes that wait for a statement dependency, 296 nodes that wait for stage 1.
+Not open yet: 1313 nodes that wait for a statement dependency, 295 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
