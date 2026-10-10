@@ -2490,3 +2490,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:11 L: merged deliver/M1/lem-sc-pseudo-coherent-rhom-qcoherent (reviewer FIX; first push; new nodes: 1)
 - 20:12 L: returned deliver/F1/lem-pc-ringed-space-module-stalk-tensor (reviewer RETURN: Reviewer L (the maintainer), head e054cb867. Nothing to merge: the item was already split by L at 19:58 UTC (commit cc00)
 - 20:13 L: merged deliver/H1/lem-pc-derived-free-complex-cover (reviewer FIX; first push; new nodes: 0)
+- 20:13 L: merged deliver/J1/lem-sc-hilbert-polynomial (reviewer FIX; after a return; new nodes: 3)
