@@ -96,7 +96,7 @@ def cmd_docstrings(args) -> int:
     ids = node_ids()
     names, unknown, tags, matched = collections.defaultdict(list), set(), 0, set()
     partial = collections.defaultdict(list)
-    out_grep = subprocess.run(["git", "grep", "-n", "-E", r"\(blueprint:", ref, "--", "*.lean"], cwd=repo,
+    out_grep = subprocess.run(["git", "grep", "-n", "-E", r"blueprint:", ref, "--", "*.lean"], cwd=repo,
                               capture_output=True, text=True).stdout
     files: dict[str, list[str]] = {}
     unattached = 0
