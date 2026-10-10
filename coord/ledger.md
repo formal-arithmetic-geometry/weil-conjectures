@@ -1738,3 +1738,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:11 L: retired 3 uncited new nodes of M1's lem-exc-field-discrete-modules (lem-exc-pi1-galois-identification, lem-exc-galois-descent-equalizer, lem-exc-etale-site-gset-coverings): no step cites them after the repair (reviewer R-fd4)
 - 15:11 L: merged deliver/E1/lem-sc-conductor-sections (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 15:11 L: merged deliver/H1/lem-weil-pbc-sets-pushforward-stalk-strict-henselization (reviewer FIX+NODE(2); after a return; new nodes: 3)
+- 15:11 L: returned deliver/M1/lem-weil-pbc-derived-etale-cohomology-limit (reviewer RETURN: 1. E3: step 1 (and with it steps 2-4): the claim that H^n(Y_i,K_i) and H^n(Y,K_Y) are the cohomology of Gamma(Y_i,I_i^.))
