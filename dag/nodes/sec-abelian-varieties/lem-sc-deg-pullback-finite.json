@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-deg-pullback-finite",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Degree of the pullback under a finite morphism",
@@ -25,35 +25,75 @@
  "stmt_deps": [
   "def-sc-hilbert-degree",
   "def-sc-ample",
-  "def-sc-function-field"
+  "def-sc-function-field",
+  "lem-weil-pbc-pullback-ample-invertible"
  ],
  "proof": [
   {
-   "text": "*Reference: Stacks Project, Varieties, Lemma 33.45.11,\n[Tag 0BEX](https://stacks.math.columbia.edu/tag/0BEX).* By the\nprojection formula,\n\n$$\n\\chi(X,f^*\\mathcal M^{\\otimes m})\n=\\chi(Y,f_*f^*\\mathcal M^{\\otimes m})\n=\\chi(Y,f_*\\mathcal O_X\\otimes\\mathcal M^{\\otimes m}).\n$$",
-   "uses": [],
-   "elementary": null
+   "text": "First, deg_{f^*\\mathcal M}(X) is well-defined: f is finite and hence affine, so its pullback of the ample invertible module \\mathcal M is ample by [lem-weil-pbc-pullback-ample-invertible] (Stacks Morphisms, Tag 0892). Since f is affine and f^*\\mathcal M^{\\otimes m} is quasi-coherent, [lem-weil-pbc-affine-morphism-cohomology-edge] (Stacks Cohomology, Tag 089W) gives \\chi(X,f^*\\mathcal M^{\\otimes m})=\\chi(Y,f_*f^*\\mathcal M^{\\otimes m}). By the projection formula, \\chi(Y,f_*f^*\\mathcal M^{\\otimes m})=\\chi(Y,f_*\\mathcal O_X\\otimes\\mathcal M^{\\otimes m}).",
+   "uses": [
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-pc-projection-formula"
+   ],
+   "elementary": false
   },
   {
-   "text": "The coherent sheaf $f_*\\mathcal O_X$ has generic rank\n$[k(X):k(Y)]=\\deg(f)$ (the stalk at the generic point of $Y$ is\n$k(X)$, of degree $\\deg(f)$ over $k(Y)$), and for a coherent\nsheaf $\\mathcal E$ of generic rank $r$ on the proper\n$g$-dimensional variety $Y$, the numerical polynomial\n$m\\mapsto\\chi(Y,\\mathcal E\\otimes\\mathcal M^{\\otimes m})$ has the\nsame leading coefficient as\n$r\\cdot\\chi(Y,\\mathcal M^{\\otimes m})$ (both are polynomials of\ndegree at most $g$ whose difference has degree at most $g-1$:\nthis follows from the additivity of $\\chi$ in short exact\nsequences and devissage, reducing to the case $\\mathcal E$\ninvertible, where $\\chi(Y,\\mathcal M^{\\otimes m}\\otimes\\mathcal E)$ and $\\chi(Y,\\mathcal M^{\\otimes m})$ differ by a polynomial\nof degree at most $g-1$ by [lem-sc-hilbert-polynomial] (*Stacks\nProject, Varieties, Lemma 33.45.1, [Tag 0BEM](https://stacks.math.columbia.edu/tag/0BEM)*), the numerical-polynomial\nlemma, applied to the two invertible modules). Hence the degrees\nof [def-sc-hilbert-degree] satisfy\n$\\deg_{f^*\\mathcal M}(X)=\\deg(f)\\deg_{\\mathcal M}(Y)$.",
+   "text": "Since f is finite, f_*\\mathcal O_X is a quasi-coherent \\mathcal O_Y-module of finite type [def-weil-finite-integral-morphism]; Y is of finite type over k, hence noetherian, so f_*\\mathcal O_X is coherent by [pqf-lem-coherent-ft-locnoeth] (Stacks Tag 01XZ). Choose an affine neighbourhood V=Spec(A) of the generic point of integral Y. The module M=\\Gamma(V,f_*\\mathcal O_X) is finite over the noetherian ring A, hence finitely presented by [lem-sc-noetherian-finite-module-finite-presentation]. Its localization at the generic prime is the finite field extension k(X) over k(Y), hence is free of rank r=[k(X):k(Y)]=\\deg(f). Applying [lem-sc-finitely-presented-free-at-prime-principal] at that prime gives a nonempty principal open on which f_*\\mathcal O_X is free of rank r; thus it is free of rank r on a nonempty open of Y. Apply [lem-sc-generic-rank-leading-degree]. Since dim X=dim Y by [lem-sc-finite-surjective-dimension], the m^g coefficient, and hence g! times that coefficient in [def-sc-hilbert-degree], is multiplied by r. Therefore \\deg_{f^*\\mathcal M}(X)=\\deg(f)\\deg_{\\mathcal M}(Y).",
    "uses": [
-    "lem-sc-hilbert-polynomial",
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-weil-finite-integral-morphism",
+    "lem-sc-generic-rank-leading-degree",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-sc-finitely-presented-free-at-prime-principal",
+    "lem-sc-finite-surjective-dimension",
     "def-sc-hilbert-degree"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-hilbert-polynomial",
-  "def-sc-hilbert-degree"
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-projection-formula",
+  "lem-sc-generic-rank-leading-degree",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sc-finitely-presented-free-at-prime-principal",
+  "lem-sc-finite-surjective-dimension",
+  "def-sc-hilbert-degree",
+  "pqf-lem-coherent-ft-locnoeth",
+  "def-weil-finite-integral-morphism"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-deg-pullback/lem-sc-deg-pullback-finite.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "degree of pullback under finite surjective morphism ample line bundle",
+   "results": "8 hits, none state the degree pullback formula; unrelated scheme morphism properties.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Hom.degree_pullback, Scheme.Modules.degree_pullback",
+   "results": "0 hits; loogle reports unknown identifier Scheme.Hom.degree_pullback.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "degree_pullback|fwdDiff_iter_eulerChar in Mathlib/AlgebraicGeometry",
+   "results": "0 matches in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -134,5 +174,66 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-deg-pullback"
+ "unit": "sk-prop-av-deg-pullback",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-deg-pullback-finite",
+  "worker": "stage1",
+  "summary": "Split the imported proof into the projection-formula/coherence step and the generic-rank leading-coefficient step. Added a statement-only node for the missing generic-rank declaration, cited existing nodes for projection formula and quasi-coherence, recorded Mathlib searches, and checked the finite integral hypotheses against the Lean theorem.",
+  "blueprint": "Realizes the single blueprint proof paragraph: projection formula and coherence, followed by generic-rank comparison and extraction of the Hilbert degree.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projection-formula",
+    "why": "Step 1 uses the generic derived projection formula to identify tensor with pushforward."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-ample-invertible",
+    "why": "Step 1 uses the generic fact that pullback along the finite affine morphism preserves ampleness, needed to define the degree."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "Step 1 uses affine morphism cohomology to replace cohomology on X by that of the ordinary pushforward on Y."
+   },
+   {
+    "node": "lem-sc-finite-surjective-dimension",
+    "why": "Step 2 uses dimension equality for the finite surjective morphism to identify the m^g coefficient."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-module-finite-presentation",
+    "why": "Step 2 uses finite generation over a Noetherian affine chart to obtain finite presentation before generic freeness."
+   },
+   {
+    "node": "lem-sc-finitely-presented-free-at-prime-principal",
+    "why": "Step 2 uses the existing Stacks 0GWM localization criterion to spread freeness from the generic point to a nonempty principal open."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Step 2 uses the generic fact that a quasi-coherent module of finite type on a noetherian scheme is coherent, to see that f_*O_X is coherent."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projection-formula",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-sc-finite-surjective-dimension",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sc-finitely-presented-free-at-prime-principal",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-projection-formula",
+  "lem-weil-pbc-pullback-ample-invertible",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-sc-finite-surjective-dimension",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sc-finitely-presented-free-at-prime-principal",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dpf1943",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dpf1943 (reviewer sub-agent of L); spot-checked: All five points of the 18:59 return (R-dpf1901) repaired: (1) Step 1 cites lem-weil-pbc-affine-morphism-cohomology-edge (089W) for chi(X,f^*M^m)=chi(Y,f_*f^*M^m) before the projection formula; (2) lem-sc-finite-surjective-dimension cited for dim X=dim Y; (3) well-definedness via the existing lem-weil-pbc-pullback-ample-invertible (0892, affine g) instead of a new node, hypotheses match (finite => affine); (4) devissage parenthetical and lem-sc-hilbert-polynomial use removed, generic freeness of f_*O_X made explicit via lem-sc-noetherian-finite-module-finite-presentation and lem-sc-finitely-presented-free-at-prime-principal (0GWM); (5) child source now Section 33.44 / Lean decl, g=dim Y and m^g coefficient explicit. Steps together prove the statement, no cycle. FIX more, RETURN less: C1 Step 2 asserted coherence of f_*O_X with no node or tag (asked for by return point 4): now cites def-weil-finite-integral-morphism (finite type quasi-coherent) and pqf-lem-coherent-ft-locnoeth (01XZ), added to uses/proof_deps/tool_uses; B: child mathlib search dates were 2026-10-11 (future), added my grep eulerChar|EulerCharacteristic in Mathlib/AlgebraicGeometry: 0 files, no match. The Second reading by H1 missed the coherence citation.; 2 file(s) fixed by the reviewer"
+ }
 }

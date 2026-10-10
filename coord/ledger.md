@@ -2384,3 +2384,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:26 L: merged deliver/E1/def-pc-ringed-spaces-derived-direct-image (reviewer FIX; first push; new nodes: 0)
 - 19:26 L: merged deliver/F1/lem-sp-half-plane-graded-canonical (reviewer FIX; first push; new nodes: 0)
 - 19:27 L: lemma-weil-pbc-leray-acyclicity step 3: comparison citation moved from the leaf lem-sp-derived-well-defined to the lifting nodes (C5 noted by R-dwd1939)
+- 19:27 L: merged deliver/H1/lem-sc-deg-pullback-finite (reviewer FIX; after a return; new nodes: 1)
