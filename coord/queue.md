@@ -1,8 +1,8 @@
 # Work queue
 
-926 items; claim with `tools/claim.py next <group> [--stage N]`.
+925 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (318)
+## Stage 1: nodes to split (316)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -14,11 +14,10 @@
 | `lem-sc-irreducible-noetherian-constant-acyclic` | 2013 | none |
 | `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
 | `lem-sc-noetherian-open-closed-cohomology-sequence` | 2013 | none |
-| `lem-sc-ample-proj-local-chart` | 2014 | none |
 | `lem-sc-semilocal-dim-one-conductor` | 2014 | none |
+| `lem-sc-ample-proj-canonical-map` | 2015 | none |
 | `lem-sc-boundary-cech-injective-middle` | 2015 | none |
 | `lem-sc-dvr-nonnegative-valuation-in-ring` | 2015 | none |
-| `lem-sc-dvr-valuation-ring-characterization` | 2015 | none |
 | `lem-sc-zariski-contracted-power-torsor` | 2016 | none |
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
@@ -32,7 +31,6 @@
 | `lem-sc-p1-boundary-one-extension-class` | 3014 | none |
 | `lem-sc-p1-pullback-extension-class` | 3014 | none |
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
-| `lem-sc-support-dimension-cohomology-vanishing` | 3014 | none |
 | `lem-sp-cartan-eilenberg-properties` | 3014 | none |
 | `lem-pc-brown-representability-right-adjoint` | 3015 | none |
 | `lem-pc-derived-direct-image-preserves-direct-sums` | 3015 | none |
@@ -325,7 +323,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (608)
+## Stage 2: nodes to state (609)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -422,6 +420,7 @@
 | `lem-sc-divisor-finite-support` | 1 | state |
 | `lem-sc-dvr-saturation-line` | 1 | state |
 | `lem-sc-dvr-tensor-surjective-negative-valuation` | 1 | state |
+| `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
 | `lem-sc-etale-affine-over-curve` | 1 | state |
 | `lem-sc-etale-coproduct-etale` | 1 | state |
 | `lem-sc-etale-fibre-product-coproduct` | 1 | state |
@@ -938,7 +937,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 335 nodes that wait for stage 1, 1262 nodes that wait for a statement dependency.
+Not open yet: 333 nodes that wait for stage 1, 1264 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
