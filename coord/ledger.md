@@ -991,3 +991,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of F1: lem-weil-pbc-flat-base-change-map-sections returned (5c65062e1): B7: the statement defines beta as 'degree p of the base change map g^*Rf_*F -> Rf'_*F' of Stacks, Cohomology 02N7': the DAG has no node defining that map, so th
 - 06:59 L: reviewed and accepted lem-weil-pbc-power-series-quotient-variables (6 elementary steps by agent, no new nodes).
 - 07:00 L: reviewed and accepted lem-weil-pbc-nagata-universally-japanese (6 steps; +finite-over-nagata-nagata 032T, +polynomial-ring-n2 032O, +normal-nagata-monogenic-n1 (0334 (***)) nodes).
+- 07:01 L: reviewed and accepted lem-weil-pbc-projective-dimension-well-defined (5 elementary steps by agent, no new nodes).

@@ -11,9 +11,65 @@
   "def-weil-pbc-exact-sequence",
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(1) Padding by zeros. Let $0\\to P_n\\xrightarrow{d_n}P_{n-1}\\to\\dots\\to P_0\\xrightarrow{d_0}M\\to0$ be exact with every $P_i$ projective, and $m\\ge n$; if $m=n$ there is nothing to do. Otherwise put $P_i=0$ for $n<i\\le m$, with all maps out of and into these zero modules equal to $0$. The zero module is projective [def-weil-pbc-projective-module]: it is a direct summand of the free module $R^{\\oplus\\emptyset}=0$ (take $i=s=0$, then $s\\circ i=0=\\mathrm{id}_0$). The new sequence $0\\to P_m\\to\\dots\\to P_{n+1}\\to P_n\\to\\dots\\to P_0\\to M\\to0$ is a complex [def-weil-pbc-exact-sequence]: every composite of two consecutive maps either is one of the original sequence, hence $0$, or passes through a zero module, hence is $0$. Exactness: at each new $P_i=0$ ($n<i\\le m$) image and kernel are submodules of the zero module, hence both $0$ and equal. At $P_n$ the incoming map is now $P_{n+1}=0\\to P_n$, with image $0$, exactly as the incoming map $0\\to P_n$ of the original sequence; the outgoing map ($d_n$, or $d_0:P_0\\to M$ when $n=0$) is unchanged; so exactness at $P_n$ is the original exactness there, i.e. $\\operatorname{Ker}(d_n)=0$. At $P_i$ for $i<n$ and at $M$ both neighbouring maps are unchanged, so exactness there is the original one. Hence the padded sequence is a projective resolution of $M$ of length $\\le m$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 00O4 (definition-finite-proj-dim) and Definition Tag 00O6 (definition-finite-gl-dim); the minima are stated there without proof"
+   }
+  },
+  {
+   "text": "(2) Existence of the least length. Let $S_M=\\{k\\in\\mathbb Z_{\\ge0}: M\\text{ has a projective resolution of length}\\le k\\}$. By hypothesis $n\\in S_M$, so $S_M$ is a nonempty set of natural numbers and has a least element $d$ (least number principle for $\\mathbb N$: if $S_M$ had no least element, induction on $j$ would show that no $k\\le j$ lies in $S_M$ for every $j$, contradicting $n\\in S_M$). By definition of $S_M$, $M$ has a projective resolution of length $\\le d$, and $d\\le k$ for every $k\\in S_M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 00O4 (definition-finite-proj-dim) and Definition Tag 00O6 (definition-finite-gl-dim); the minima are stated there without proof"
+   }
+  },
+  {
+   "text": "(2) The equivalence. Let $k\\ge0$. If $d\\le k$, take a projective resolution of $M$ of length $\\le d$ (Step 2) and pad it by zeros to length $\\le k$ by Step 1; so $M$ has a projective resolution of length $\\le k$. Conversely, if $M$ has a projective resolution of length $\\le k$, then $k\\in S_M$, so $d\\le k$ by the minimality of $d$ (Step 2).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 00O4 (definition-finite-proj-dim) and Definition Tag 00O6 (definition-finite-gl-dim); the minima are stated there without proof"
+   }
+  },
+  {
+   "text": "(3) Existence of the least global bound. Let $G=\\{k\\in\\mathbb Z_{\\ge0}:\\text{every }R\\text{-module has a projective resolution of length}\\le k\\}$. By hypothesis $n\\in G$, so $G$ is a nonempty set of natural numbers and has a least element $g$ (least number principle, as in Step 2). Every $R$-module has a projective resolution of length $\\le g$, and $g\\le k$ for every $k\\in G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 00O4 (definition-finite-proj-dim) and Definition Tag 00O6 (definition-finite-gl-dim); the minima are stated there without proof"
+   }
+  },
+  {
+   "text": "(3) The equivalence. Let $k\\ge0$. If $g\\le k$, let $N$ be any $R$-module; by Step 4 it has a projective resolution of length $\\le g$, which padded by zeros (Step 1, with $g\\le k$) is one of length $\\le k$; so every $R$-module has a projective resolution of length $\\le k$. Conversely, if every $R$-module has a projective resolution of length $\\le k$, then $k\\in G$, so $g\\le k$ by the minimality of $g$ (Step 4).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Definition Tag 00O4 (definition-finite-proj-dim) and Definition Tag 00O6 (definition-finite-gl-dim); the minima are stated there without proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Definitions 00O4 (definition-finite-proj-dim) and 00O6 (definition-finite-gl-dim): Stacks asserts the minima without proof; the padding and minimality argument is written by the agent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -35,10 +91,52 @@
    "results": "Data/Nat/Find.lean:75 Nat.find_spec, :80 Nat.find_min, :83 Nat.find_min'; CategoryTheory/Preadditive/Projective/Resolution.lean:41 structure ProjectiveResolution (unbounded, no length); Dimension.lean:111 hasProjectiveDimensionLT_of_ge (Ext-vanishing form)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projective dimension of a module is the minimal length of a projective resolution; monotone in the bound",
+   "results": "CategoryTheory.HasProjectiveDimensionLE, HasProjectiveDimensionLT, hasProjectiveDimensionLT_of_ge, projectiveDimension, instHasProjectiveDimensionLTSucc, projective_iff_hasProjectiveDimensionLT_one (Mathlib.CategoryTheory.Abelian.Projective.Dimension)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib's notions are defined by vanishing of Ext, not by resolutions; the monotonicity hasProjectiveDimensionLT_of_ge (Dimension.lean:111) is the Ext analogue of (1), and the bridge to resolutions (Stacks 00O5/065R) is itself a theorem (delivery-errors B8)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasProjectiveDimensionLE",
+   "results": "HasProjectiveDimensionLE, projective_iff_hasProjectiveDimensionLE_zero, projectiveDimension_ne_top_iff, projectiveDimension_le_iff (Mathlib.CategoryTheory.Abelian.Projective.Dimension); hasProjectiveDimensionLE_of_linearEquiv (Mathlib.Algebra.Category.ModuleCat.ProjectiveDimension); ObjectProperty.hasFiniteResolutionOfLength.hasProjectiveDimensionLE and .iff_hasProjectiveDimensionLE (Mathlib.CategoryTheory.ObjectProperty.HasFiniteResolution.Projective)",
+   "date": "2026-10-10",
+   "verdict": "no match in the pinned Mathlib: the resolution-based ObjectProperty.hasFiniteResolutionOfLength is in the newer Mathlib indexed by Loogle only; grep finds no 'FiniteResolution' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (candidate for a future Mathlib bump, not a leaf now)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "global dimension of a ring: least n such that every module has projective dimension at most n",
+   "results": "CategoryTheory.projectiveDimension, projectiveDimension_le_iff, projectiveDimension_lt_iff, HasProjectiveDimensionLE, projectiveDimension_ge_iff, instHasProjectiveDimensionLTSucc (Mathlib.CategoryTheory.Abelian.Projective.Dimension)",
+   "date": "2026-10-10",
+   "verdict": "no match: no global dimension of a ring in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exact sequence of modules extended by zero modules on the left remains exact",
+   "results": "ShortComplex.Exact.mk, ShortComplex.ShortExact.exact, ComposableArrows.Exact.δlast, ShortComplex.exact_of_isZero_X₂ (Mathlib.Algebra.Homology.ShortComplex.Exact, ExactSequence)",
+   "date": "2026-10-10",
+   "verdict": "no match for padding a resolution (only exactness at a zero object, exact_of_isZero_X₂)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'hasFiniteResolution\\|FiniteResolution' and grep -rn 'gldim\\|globalDim\\|global dimension' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n lemma CategoryTheory/Abelian/Projective/Dimension.lean",
+   "results": "no FiniteResolution file, no global dimension; Dimension.lean:45 class HasProjectiveDimensionLT, :52 abbrev HasProjectiveDimensionLE, :111 hasProjectiveDimensionLT_of_ge, :296 projectiveDimension_le_iff (all Ext-based)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "globalDimension; hasProjectiveDimensionLT_of_ge (project root ~/weil-conjectures-slopmaster2)",
+   "results": "globalDimension: none (index unavailable, so not a proof of absence); hasProjectiveDimensionLT_of_ge: found in Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "created": {
@@ -60,5 +158,12 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": " L 2026-10-10: unreachable flag cleared; used by lem-weil-pbc-regular-local-finite-gl-dim step 4."
+ "lead_note": " L 2026-10-10: unreachable flag cleared; used by lem-weil-pbc-regular-local-finite-gl-dim step 4.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-projective-dimension-well-defined",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks Definitions 00O4 and 00O6 (algebra.tex, labels definition-finite-proj-dim and definition-finite-gl-dim), which assert the minima without proof; statement kept. Proof written by the agent in five elementary steps: (1) padding by zero modules, checking the complex condition and exactness at the new zeros, at P_n (the incoming map is still zero, so exactness there is the injectivity of d_n from the original sequence) and elsewhere, with the zero module projective as a direct summand of the free module on the empty set [def-weil-pbc-projective-module, def-weil-pbc-exact-sequence]; (2)-(3) the least element d of the nonempty set of lengths by the least number principle of N, and the equivalence via padding and minimality; (4)-(5) the same for the set of global bounds. The well-ordering of N is elementary (lem-weil-pbc-well-ordering-theorem, Zermelo for arbitrary sets, is not needed). No new node. Mathlib: not a leaf; Mathlib's HasProjectiveDimensionLE/projectiveDimension are Ext-based and the bridge to resolutions is a theorem (B8); the resolution-based ObjectProperty.hasFiniteResolutionOfLength exists only in the newer Mathlib that Loogle indexes, not in the pinned one."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: elementary proof by agent (padding by zeros, least number principle); fills the minima asserted without proof in Algebra 00O4/00O6. No new nodes; not a Mathlib leaf (Mathlib's projective dimension is by Ext vanishing, B8)."
 }
