@@ -1,8 +1,8 @@
 # Work queue
 
-847 items; claim with `tools/claim.py next <group> [--stage N]`.
+850 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (656)
+## Stage 1: nodes to split (658)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
 | `lem-weil-pbc-smooth-over-normal-ring-normal` | 1011 | none |
-| `lem-weil-pbc-spec-map-residue-field-naturality` | 1011 | none |
 | `lem-weil-pbc-spec-surjective-base-change` | 1011 | none |
 | `lem-weil-pbc-spectral-finite-coequalizer-from-finite-space` | 1011 | none |
 | `lem-weil-pbc-split-injection-after-completion` | 1011 | none |
@@ -71,9 +70,11 @@
 | `lem-weil-pbc-finite-open-cover-degree-sum` | 1012 | none |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1012 | none |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1012 | none |
+| `lem-weil-pbc-finite-type-z-domain-normalization-finite` | 1012 | none |
 | `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1012 | none |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1012 | none |
+| `lem-weil-pbc-flat-normal-fibres-noetherian-normal` | 1012 | none |
 | `lem-weil-pbc-flat-ses-kernel-flat` | 1012 | none |
 | `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1012 | none |
 | `lem-weil-pbc-flat-under-regular` | 1012 | none |
@@ -130,6 +131,7 @@
 | `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1012 | none |
 | `lem-weil-pbc-regular-local-finite-gl-dim` | 1012 | none |
 | `lem-weil-pbc-regular-local-hypersurface-criterion` | 1012 | none |
+| `lem-weil-pbc-regular-ring-normal` | 1012 | none |
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1012 | none |
 | `lem-weil-pbc-regular-sequence-swap-two` | 1012 | none |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1012 | none |
@@ -663,7 +665,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (191)
+## Stage 2: nodes to state (192)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -825,6 +827,7 @@
 | `lem-weil-pbc-smooth-conormal-sequence-exact` | 1 | state |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state |
 | `lem-weil-pbc-spec-finite-product-fields` | 1 | state |
+| `lem-weil-pbc-spec-map-residue-field-naturality` | 1 | state |
 | `lem-weil-pbc-spectral-closed-clopen-decomposition-lift` | 1 | state |
 | `lem-weil-pbc-spectral-closed-subspace` | 1 | state |
 | `lem-weil-pbc-spectral-constructible-clopen-constructible-topology` | 1 | state |
@@ -859,7 +862,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 668 nodes that wait for stage 1, 478 nodes that wait for a statement dependency.
+Not open yet: 670 nodes that wait for stage 1, 478 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
