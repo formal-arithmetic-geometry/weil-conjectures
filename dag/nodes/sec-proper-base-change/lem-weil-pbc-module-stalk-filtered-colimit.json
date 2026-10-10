@@ -13,9 +13,85 @@
   "def-weil-pbc-module-stalk",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Regard $(X,\\mathcal O_X)$ as a ringed space; only this is used of the scheme structure. Let $\\iota:\\Mod(\\mathcal O_X)\\to\\mathrm{PMod}(\\mathcal O_X)$ be the inclusion of sheaves of $\\mathcal O_X$-modules into presheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], [def-weil-presheaf-modules-sheafification]. For every open $U\\subseteq X$ choose a colimit $(\\mathcal P(U),(p_{i,U})_i)$ of the $\\mathcal O_X(U)$-modules $D(i)(U)$, and give $\\mathcal P$ the restriction maps induced by those of the $D(i)$. By [lem-weil-pbc-presheaf-modules-colimits-sectionwise] (with $\\mathcal C$ the category of open subsets of $X$ and $\\mathcal O=\\mathcal O_X$), $\\mathcal P$ is a presheaf of $\\mathcal O_X$-modules, the $p_i=(p_{i,U})_U:\\iota D(i)\\to\\mathcal P$ are morphisms of presheaves of $\\mathcal O_X$-modules, and $(\\mathcal P,(p_i)_i)$ is a colimit of $\\iota\\circ D$ in $\\mathrm{PMod}(\\mathcal O_X)$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AH (label lemma-limits-colimits, lines 204-239), part (2) and its proof: colimits in Mod(O_X) are the sheafification of the presheaf colimit; Sheaves, Section 009D (label section-limits-presheaves), colimits of presheaves sectionwise"
+   }
+  },
+  {
+   "text": "Let $\\eta:\\mathcal P\\to\\mathcal P^\\#$ be the sheafification of $\\mathcal P$ as a presheaf of $\\mathcal O_X$-modules, and for each $i$ let $\\eta_i:\\iota D(i)\\to(\\iota D(i))^\\#$ be that of $\\iota D(i)$ [def-weil-presheaf-modules-sheafification]. By the universal property of $\\eta_i$, every morphism $g:\\iota D(i)\\to\\mathcal Q$ of presheaves of modules has a unique $g^\\#:(\\iota D(i))^\\#\\to\\mathcal Q^\\#$ with $g^\\#\\circ\\eta_i=\\eta_{\\mathcal Q}\\circ g$; in particular $p_i^\\#\\circ\\eta_i=\\eta\\circ p_i$ and $D(a)^\\#\\circ\\eta_i=\\eta_j\\circ D(a)$ for $a:i\\to j$. By [lem-weil-pbc-module-presheaf-sheafification-exact] (2) sheafification $\\#$ preserves colimits (it is a left adjoint), so by step 1 $(\\mathcal P^\\#,(p_i^\\#)_i)$ is a colimit of $i\\mapsto(\\iota D(i))^\\#$ in $\\Mod(\\mathcal O_X)$; and by part (3) of the same node each $\\eta_i:D(i)\\to(\\iota D(i))^\\#$ is an isomorphism. The isomorphisms $\\eta_i$ form a natural isomorphism from $D$ to $i\\mapsto(\\iota D(i))^\\#$ (by $D(a)^\\#\\eta_i=\\eta_jD(a)$), so $(\\mathcal P^\\#,(p_i^\\#\\circ\\eta_i)_i)=(\\mathcal P^\\#,(\\eta\\circ p_i)_i)$ is a colimit of $D$: a cocone $(\\mu_i:D(i)\\to\\mathcal G)_i$ of $D$ gives the cocone $(\\mu_i\\circ\\eta_i^{-1})_i$ of $i\\mapsto(\\iota D(i))^\\#$, and a morphism $u:\\mathcal P^\\#\\to\\mathcal G$ satisfies $u\\circ p_i^\\#=\\mu_i\\circ\\eta_i^{-1}$ for all $i$ iff $u\\circ p_i^\\#\\circ\\eta_i=\\mu_i$ for all $i$. Since colimits are unique up to unique isomorphism [def-weil-pbc-category-colimit], there is an isomorphism of $\\mathcal O_X$-modules $\\theta:\\mathcal P^\\#\\to\\mathcal F$ with $c_i=\\theta\\circ\\eta\\circ p_i$ (as maps of presheaves $\\iota D(i)\\to\\iota\\mathcal F$) for all $i$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-module-presheaf-sheafification-exact",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AH (label lemma-limits-colimits), part (2): 'Colimits are the sheafification of the corresponding colimit in the category of presheaves'; Sheaves, Section 009E (label section-limits-sheaves), items (3) and (6)"
+   }
+  },
+  {
+   "text": "Take stalks at $x$ [def-weil-pbc-module-stalk]. Since $\\varphi_x(s_x)=\\varphi(s)_x$, taking stalks is compatible with composition and identities, so $(c_i)_x=\\theta_x\\circ\\eta_x\\circ(p_i)_x$ for every $i$, and $\\theta_x$ is an isomorphism of $\\mathcal O_{X,x}$-modules with inverse $(\\theta^{-1})_x$. The map $\\eta_x:\\mathcal P_x\\to\\mathcal P^\\#_x$ is $\\mathcal O_{X,x}$-linear because $\\eta$ is a morphism of presheaves of $\\mathcal O_X$-modules [def-weil-pbc-module-stalk]. By [def-weil-presheaf-modules-sheafification], $\\eta:\\mathcal P\\to\\mathcal P^\\#$ is the sheafification of $\\mathcal P$ as a presheaf of abelian groups, so $\\eta_x$ is bijective by [lem-weil-pbc-stalk-sheafification-space]; hence $\\eta_x$ is an isomorphism of $\\mathcal O_{X,x}$-modules.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-stalk-sheafification-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 01AH (label lemma-limits-colimits), proof: 'Since sheafification commutes with taking stalks we see that colimits commute with taking stalks'; Sheaves, Lemma 007Z (label lemma-stalk-sheafification)"
+   }
+  },
+  {
+   "text": "The stalk $D(i)_x$ of the sheaf $D(i)$ is the stalk of the presheaf $\\iota D(i)$ [def-weil-pbc-module-stalk]. Apply [lem-weil-pbc-presheaf-module-stalk-filtered-colimit] to the presheaf of rings $\\mathcal O_X$, the filtered category $\\mathcal I$, the diagram $i\\mapsto\\iota D(i)$ of presheaves of $\\mathcal O_X$-modules and its sectionwise colimit $(\\mathcal P,(p_i)_i)$ of step 1: $(\\mathcal P_x,((p_i)_x)_i)$ is a colimit of the diagram $i\\mapsto D(i)_x$ of $\\mathcal O_{X,x}$-modules.",
+   "uses": [
+    "lem-weil-pbc-presheaf-module-stalk-filtered-colimit",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 009D (label section-limits-presheaves), item (5): $(\\colim_i\\mathcal F_i)_x=\\colim_i\\mathcal F_{i,x}$ for presheaves, lines 3392-3396"
+   }
+  },
+  {
+   "text": "By steps 2-4, $\\theta_x\\circ\\eta_x:\\mathcal P_x\\to\\mathcal F_x$ is an isomorphism of $\\mathcal O_{X,x}$-modules carrying the colimit cocone $((p_i)_x)_i$ to $((c_i)_x)_i$. A cocone obtained from a colimit cocone by composing with an isomorphism $\\psi$ is a colimit cocone: for a cocone $(\\mu_i)_i$ the morphisms $v$ with $v\\circ\\psi\\circ(p_i)_x=\\mu_i$ for all $i$ correspond bijectively, by $v\\mapsto v\\circ\\psi$, to the morphisms $u$ with $u\\circ(p_i)_x=\\mu_i$ for all $i$, of which there is exactly one [def-weil-pbc-category-colimit]. Hence $(\\mathcal F_x,((c_i)_x)_i)$ is a colimit of $i\\mapsto D(i)_x$; equivalently, the canonical map $\\varinjlim_iD(i)_x\\to\\mathcal F_x$ induced by the $(c_i)_x$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 009E (label section-limits-sheaves), item (5): $(\\colim_i\\mathcal F_i)_x=\\colim_i\\mathcal F_{i,x}$, lines 3431-3434"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "lem-weil-pbc-module-presheaf-sheafification-exact",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-stalk-sheafification-space",
+  "lem-weil-pbc-presheaf-module-stalk-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 01AH (label lemma-limits-colimits, lines 204-239), part (2) and its proof; with Sheaves, Sections 009D and 009E (sheaves.tex lines 3367-3440) and Lemma 007Z"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -37,10 +113,17 @@
    "results": "No matching sheaf-module stalk colimit theorem",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'PreservesFilteredColimits|preservesFilteredColimits|PreservesColimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Stalks.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Skyscraper.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Presheaf/*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/*.lean",
+   "results": "Stalks.lean:427 only a variable [PreservesFilteredColimits (forget C)]; Skyscraper.lean:395,415 the stalk functors on Presheaf C X and Sheaf C X are left adjoints (one value category C); Presheaf/Colimits.lean:72-173 sectionwise colimits of presheaves of modules; nothing on stalks of colimits in SheafOfModules or the O_x-module stalk of a colimit",
+   "date": "2026-10-10",
+   "verdict": "no match (the statement is not a one-line specialization: Mathlib's SheafOfModules is on sites, without stalks)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +143,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-stalk-filtered-colimit",
+  "worker": "stage1",
+  "summary": "Statement checked against Modules 01AH(2) and Sheaves 009E(5) and kept (it holds for any small diagram; the filtered hypothesis is only used through the new presheaf node). Proof follows the proof of Modules 01AH(2): (1) the sectionwise colimit P of the underlying presheaves is a colimit in PMod(O_X) (existing Mathlib leaf lem-weil-pbc-presheaf-modules-colimits-sectionwise); (2) sheafification preserves colimits and is the identity on sheaves (existing leaf lem-weil-pbc-module-presheaf-sheafification-exact), so F is isomorphic to P^# compatibly with the coprojections; (3) eta_x: P_x -> P^#_x is bijective (existing leaf lem-weil-pbc-stalk-sheafification-space, 007Z); (4) stalks of the sectionwise filtered colimit of presheaves are the colimit of stalks: new unsplit node lem-weil-pbc-presheaf-module-stalk-filtered-colimit (Sheaves 009D(5)); (5) composing with the isomorphism, elementary. Searched the DAG for 009D/009E/007Z/01AH and stalk-colimit statements; reused three Mathlib leaves. Mathlib: no match for the item (one more grep recorded)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following the proof of Modules 01AH (2): the sectionwise presheaf colimit (existing leaf); sheafification preserves colimits and is the identity on sheaves (today's leaf), giving P^# = F; stalks and 007Z; stalks of a sectionwise filtered colimit of presheaves of modules are the colimit of the stalks (new unsplit node, Sheaves 009D (5), Mathlib candidate recorded); transport along the isomorphism. Tools of other units are Mathlib leaves."
+ }
 }

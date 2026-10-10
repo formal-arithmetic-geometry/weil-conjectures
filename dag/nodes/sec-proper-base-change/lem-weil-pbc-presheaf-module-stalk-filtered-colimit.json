@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-presheaf-module-stalk-filtered-colimit",
+ "kind": "statement",
+ "title": "Stalks of a sectionwise filtered colimit of presheaves of modules are the filtered colimit of the stalks",
+ "statement": "Let $X$ be a topological space, $\\mathcal O$ a presheaf of commutative rings on $X$ and $x\\in X$. Let $\\mathcal I$ be a small filtered category [def-weil-pbc-category-colimit] and $i\\mapsto\\mathcal P_i$ a diagram $\\mathcal I\\to\\mathrm{PMod}(\\mathcal O)$ of presheaves of $\\mathcal O$-modules on the open subsets of $X$ [def-weil-presheaf-modules-sheafification]. For every open $U\\subseteq X$ let $(\\mathcal P(U),(p_{i,U})_i)$ be a colimit of the diagram $i\\mapsto\\mathcal P_i(U)$ of $\\mathcal O(U)$-modules [def-weil-pbc-category-colimit], and for opens $V\\subseteq U$ let $\\mathcal P(U)\\to\\mathcal P(V)$ be the map induced by the restriction maps of the $\\mathcal P_i$, so that $\\mathcal P$ is a presheaf of $\\mathcal O$-modules and $p_i=(p_{i,U})_U:\\mathcal P_i\\to\\mathcal P$ are morphisms of presheaves of $\\mathcal O$-modules. Let $\\mathcal O_x$, $(\\mathcal P_i)_x$, $\\mathcal P_x$ be the stalks at $x$, with the $\\mathcal O_x$-module structures and the $\\mathcal O_x$-linear stalk maps $(p_i)_x:(\\mathcal P_i)_x\\to\\mathcal P_x$ of [def-weil-pbc-module-stalk]. Then $(\\mathcal P_x,((p_i)_x)_i)$ is a colimit of the diagram $i\\mapsto(\\mathcal P_i)_x$ in the category of $\\mathcal O_x$-modules.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section 009D (label section-limits-presheaves, lines 3367-3398), item (5): $(\\colim_i\\mathcal F_i)_x=\\colim_i\\mathcal F_{i,x}$ for presheaves, lines 3392-3396 ('The proofs are all easy'); used for modules in Modules, Lemma 01AH (label lemma-limits-colimits, lines 204-239), proof of (2) (modules.tex)"
+ },
+ "stmt_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk of a filtered colimit of presheaves of modules is the colimit of the stalks",
+   "results": "TopCat.Presheaf.stalk, TopCat.Presheaf.stalkFunctor (Mathlib.Topology.Sheaves.Stalks); SheafOfModules HasColimitsOfShape instance (Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits); PresheafOfModules.hasColimit, PresheafOfModules.colimitPresheafOfModules (Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits); none states the stalk of a colimit of presheaves of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalk at x of a filtered colimit of presheaves of modules over a presheaf of rings is the filtered colimit of the stalks as modules over the stalk ring",
+   "results": "PresheafOfModules.colimitPresheafOfModules(_obj), colimitCocone(_pt), isColimitColimitCocone, hasColimit (Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits); smoothSheafCommRing.forgetStalk (Mathlib.Geometry.Manifold.Sheaf.Smooth); no stalk-colimit commutation for presheaves of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkFunctor, CategoryTheory.Limits.PreservesColimitsOfSize ; then (TopCat.Presheaf.stalkFunctor _ _).IsLeftAdjoint",
+   "results": "first query: none; second: instIsLeftAdjointPresheafStalkFunctor (Mathlib.Topology.Sheaves.Skyscraper): for C with colimits (and a terminal object) the stalk functor Presheaf C X => C is a left adjoint, hence preserves colimits; this is for presheaves valued in one fixed category C (e.g. abelian groups), not for presheaves of O-modules with the O_x-module structure on stalks",
+   "date": "2026-10-10",
+   "verdict": "no match (candidate for the abelian-group part only)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'colimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Stalk.lean; grep -rn 'stalkFunctor.*olimit|olimit.*stalkFunctor|stalk_colimit|colimit_stalk|stalkColimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; grep -rln stalk ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+   "results": "Stalk.lean only builds the O_x-module structure on stalks of a presheaf of modules (instance line 194, germ_smul line 205) and the module structure on filtered colimits (lines 41-136); Topology/Sheaves/Skyscraper.lean:395 instance (Presheaf.stalkFunctor C p0).IsLeftAdjoint; Abelian.lean:79 finite colimits; no file in ModuleCat/Sheaf mentions stalks; no lemma that the stalk of a colimit of presheaves of modules is the colimit of the stalks as O_x-modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_candidate": {
+  "declaration": "instIsLeftAdjointPresheafStalkFunctor (with PresheafOfModules.toPresheaf_preservesColimitsOfSize and the O_x-module instance of Mathlib/Algebra/Category/ModuleCat/Stalk.lean)",
+  "file": "Mathlib/Topology/Sheaves/Skyscraper.lean",
+  "line": "395 (Skyscraper.lean); Stalk.lean:194",
+  "how": "Gives the statement for the underlying abelian groups (stalkFunctor AddCommGrpCat x is a left adjoint, so preserves colimits; the underlying abelian presheaf of the sectionwise colimit is the colimit by toPresheaf_preservesColimitsOfSize). Passing to the colimit in O_x-modules needs that the O_x-module structure of Stalk.lean:194 on the colimit is the colimit one, which is a further argument, not a one-line specialization."
+ },
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-stalk-filtered-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
