@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-sc-etale-qcoherent-descent",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Descent for quasi-coherent modules",
@@ -19,14 +19,86 @@
   ]
  },
  "stmt_deps": [
-  "def-weil-pbc-etale-site"
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-weil-pbc-etale-site",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof": [
+  {
+   "text": "Let a covering family in the small etale site of X be given. By the definition of the small etale topology and the etale-to-fpqc comparison, this family is an fpqc covering of its target.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-fpqc-finer-than-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022C (etale coverings are fpqc)"
+   }
+  },
+  {
+   "text": "Apply the fpqc descent statement for quasi-coherent modules to the pullback module on the target and to the compatible family of sections. It gives a unique section on the target whose pullbacks are the given sections; uniqueness is the uniqueness part of effective descent.",
+   "uses": [
+    "lem-sc-etale-qcoherent-descent-fpqc-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DT (Lemma 35.8.1), proof via Proposition 35.5.2"
+   }
+  },
+  {
+   "text": "The presheaf is the assignment in the statement because its restriction maps are the pullback restrictions of the functoriality node. Thus the existence and uniqueness just proved are precisely the sheaf equalizer condition on the small etale site.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DR equation (35.8.1) and Tag 03DT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-sc-etale-qcoherent-descent-fpqc-sections",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tags 03DR and 03DT, Section 35.8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf condition for sections of pullback of a quasi-coherent module on the small etale site",
+   "results": "Scheme.Modules.isSheaf_etaleHom; no theorem for the section presheaf itself",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Presheaf.IsSheaf X.smallEtaleTopology (fun V => Γ(V, pullback F))",
+   "results": "Scheme.Modules.isSheaf_etaleHom, isSheaf_etaleStructurePresheaf_aux",
+   "date": "2026-10-10",
+   "verdict": "no match: the former is Hom of pullbacks and the latter only treats the structure sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'isSheaf_etaleHom|isSheaf_etaleStructurePresheaf_aux|quasi-coherent.*etale' Mathlib/ WeilConjectures/",
+   "results": "WeilConjectures/AlgebraicGeometry/Sites/EtaleHom.lean:160; EtaleStructureSheaf.lean:85; no general section theorem",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "undischarged_input",
@@ -61,5 +133,35 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-etale-qcoherent-descent",
+  "worker": "stage1",
+  "summary": "Split the etale sheaf assertion into the etale-to-fpqc comparison, the fpqc descent-of-sections input, and the identification with the presheaf and its sheaf equalizer condition. Added one unsplit node for the fpqc sections statement; no Mathlib declaration states the general section presheaf.",
+  "blueprint": "The three proof steps realize the blueprint sentence recording Tag 03DR/03DT: etale coverings are fpqc, quasi-coherent sections descend for fpqc covers, and this is the sheaf condition.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "The fpqc sections node is the generic effective descent theorem for quasi-coherent modules; this unit has no route node replacing that classical input."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "The source route requires the generic fact that every etale covering is fpqc; this unit has no route node replacing that topology comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-finer-than-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eqd",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eqd (reviewer sub-agent of L); spot-checked: Source: Stacks Descent Section 35.8, equation (35.8.1) (Tag 03DR, label equation-quasi-coherent-presheaf) and Lemma 35.8.1 (Tag 03DT, label lemma-sheaf-condition-holds), read in literature/stacks-project/descent.tex 2138-2180: S scheme, F quasi-coherent, presheaf (f:T->S) |-> Gamma(T,f^*F), sheaf condition for tau-coverings incl. etale, proof via etale coverings being fpqc and fpqc descent 023T; the item statement (X scheme, F quasi-coherent, presheaf on X_Et) agrees hypothesis by hypothesis, and the new node fpqc-sections is the fpqc case of 03DT for arbitrary f:T->S, true as stated. Step 1 carried by lem-weil-pbc-fpqc-finer-than-etale (any covering in a small etale site is fpqc per def-weil-pbc-fpqc-covering) with def-weil-pbc-etale-site; step 2 by the new node with S=X, T=U, f=u, g_i the etale cover; step 3 elementary from lem-sc-etale-qcoherent-presheaf-functorial (restrictions rho_g = c(g^*s)) and def-weil-pbc-etale-site (fibre products in X_Et are scheme fibre products), giving the equalizer condition. Tool uses: lem-weil-pbc-fpqc-finer-than-etale (unit sk-thm-p1) accepted as a generic topology comparison; lem-pc-fpqc-descent dropped, no step cites it. No Mathlib leaf; B10: slopmaster2 FpqcSections.lean exists_sections_of_mem_fpqcTopology / sections_ext_of_mem_fpqcTopology (sorryfree.py OK) are in sieve form for N on X, not the node's statement exactly, so the unsplit node stands (lead note). Small cases: singleton cover {id_T} gives s=s_1; empty T with empty cover gives the unique zero section. Fixes: dag/nodes/sec-curve-estimates/lem-sc-etale-qcoherent-descent-fpqc-sections.json: source.place: label corrected lemma-quasi-coherent-sheaf -> lemma-sheaf-condition-holds; statement + stmt_deps: cited lem-sc-etale-qcoherent-presheaf-functorial for pullback of sections and the composition isomorphisms used in the compatibility condition (B3). Time: start Sat Oct 10 02:49:27 PM UTC 2026, end Sat Oct 10 02:50:51 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-eqd): fpqc-sections node (unsplit): slopmaster2 has sorry-free AlgebraicGeometry.Scheme.Modules.exists_sections_of_mem_fpqcTopology and sections_ext_of_mem_fpqcTopology (WeilConjectures/AlgebraicGeometry/Modules/FpqcSections.lean 199-295), sieve form for N on X over an open O; not an exact match (family/fibre-product form, f^*F on T) but the next worker should split onto them; the worker's grep missed this file."
 }
