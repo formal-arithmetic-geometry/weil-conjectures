@@ -1346,3 +1346,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of K1: lem-weil-pbc-koszul-differential-square-zero merged from deliver/K1/lem-weil-pbc-koszul-differential-square-zero (1 commit(s), 0 new node(s), spot-checked by L: L: D^2 = 0 by the recursion on wedge monomials (D^2(v wedge x) = v wedge D^2(x)), then by linearity; 0 new); claim closed
 - 11:49 L: merged K1 lem-weil-pbc-koszul-differential-square-zero (0 new).
 - 11:50 L: lem-weil-pbc-integral-injective-dimension-equal finished by ringKrullDim_eq_of_isIntegral (sorry-free, rule 0; attached).
+- 11:51 L: accepted lem-weil-pbc-complete-local-map-cohen-presentation (07NN power-series form, 5 steps, 0 new; the three 07NN nodes could be merged later).

@@ -35,9 +35,97 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Presentations of $A$ and $B$.) Since $f$ is local it induces a field homomorphism $A/\\mathfrak m_A\\to B/\\mathfrak m_B$, so the two residue fields have the same characteristic. Apply [lem-weil-pbc-cohen-power-series-presentation] to $A$ and to $B$: there are $n,e\\ge0$, coefficient rings $\\Lambda_A,\\Lambda_B$ which are both fields (residue characteristic $0$) or both Cohen rings [def-weil-pbc-cohen-ring] (residue characteristic $p>0$), and surjective local homomorphisms $q:R=\\Lambda_A[[X_1,\\ldots,X_n]]\\to A$ and $v_0:S_0=\\Lambda_B[[Z_1,\\ldots,Z_e]]\\to B$ [def-weil-pbc-multivariate-power-series]. The same node says $R$ is a complete regular local ring with regular system of parameters $t_1,\\ldots,t_d$ equal to $X_1,\\ldots,X_n$ ($d=n$) in the field case and to $t_1=p,t_2=X_1,\\ldots,t_d=X_n$ ($d=n+1$) in the Cohen case. By [lem-weil-pbc-power-series-field-cohen-regular-complete] (1),(3) applied to $\\Lambda_B$, $S_0$ is local with $\\mathfrak m_{S_0}=(Z_1,\\ldots,Z_e)$ resp. $(p,Z_1,\\ldots,Z_e)$ and is $\\mathfrak m_{S_0}$-adically complete. As $v_0$ is surjective and local, $v_0^{-1}(\\mathfrak m_B)$ is a maximal ideal containing $\\mathfrak m_{S_0}$, hence equals $\\mathfrak m_{S_0}$; so $J=\\ker v_0\\subseteq\\mathfrak m_{S_0}$ and $v_0(\\mathfrak m_{S_0}^m)=\\mathfrak m_B^m$ for all $m$.",
+   "uses": [
+    "lem-weil-pbc-cohen-power-series-presentation",
+    "def-weil-pbc-cohen-ring",
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings), proof"
+   }
+  },
+  {
+   "text": "(Lifting $fq$ to $\\varphi:R\\to S_0$.) By [lem-weil-pbc-field-cohen-power-series-formally-smooth] (case (i) with $\\Lambda_A$ a field of characteristic $0$, case (ii) with $\\Lambda_A$ a Cohen ring), $\\mathbf Z\\to R$ is formally smooth for the $\\mathfrak m_R$-adic topology. Apply [lem-weil-pbc-fs-adic-lift-into-complete] with base ring $\\mathbf Z$ (every ring is a $\\mathbf Z$-algebra and every ring map is $\\mathbf Z$-linear), source $R$ with $\\mathfrak n=\\mathfrak m_R$, target $S_0$ with $I=\\mathfrak m_{S_0}$ (complete by step 1), the ideal $J$ with $t=1$ ($J\\subseteq I$ by step 1), and $g=fq:R\\to B\\cong S_0/J$, which satisfies $g(\\mathfrak m_R)\\subseteq\\mathfrak m_B=v_0(I)$ (so $r=1$) because $q$ and $f$ are local. $J$ is closed: $v_0$ maps $\\bigcap_m(J+\\mathfrak m_{S_0}^m)$ into $\\bigcap_m\\mathfrak m_B^m$, which is $0$ because $B$ is $\\mathfrak m_B$-adically complete [def-weil-pbc-adically-complete-ring] (the map $B\\to\\varprojlim B/\\mathfrak m_B^m$ is injective); so this intersection lies in $\\ker v_0=J$, and it contains $J$. The lemma gives a ring map $\\varphi:R\\to S_0$ with $v_0\\varphi=fq$ and $\\varphi(\\mathfrak m_R)\\subseteq\\mathfrak m_{S_0}$.",
+   "uses": [
+    "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+    "lem-weil-pbc-fs-adic-lift-into-complete",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, proof, second paragraph ('We lift the composition ... by Lemma 07NL and Lemma 07NJ')"
+   }
+  },
+  {
+   "text": "(The ring $S$ and the maps $v$, $u$.) Put $S=\\Lambda_B[[Y_1,\\ldots,Y_n,Z_1,\\ldots,Z_e]]$ [def-weil-pbc-multivariate-power-series], a power series ring over the field resp. Cohen ring $\\Lambda_B$, and regard $S_0\\subseteq S$ as the series not involving the $Y_i$. By [lem-weil-pbc-power-series-field-cohen-regular-complete] with $n+e$ variables, $S$ is a Noetherian $\\mathfrak m_S$-adically complete regular local ring with $\\mathfrak m_S=(Y,Z)$ resp. $(p,Y,Z)$ and $\\dim S=n+e$ resp. $n+e+1$; in particular $\\mathfrak m_{S_0}\\subseteq\\mathfrak m_S$. By [lem-weil-pbc-power-series-quotient-variables] ($i=n$) the map $\\pi:S\\to S_0$ setting $Y_i=0$ is a surjective ring map which is the identity on $S_0$; put $v=v_0\\pi:S\\to B$, surjective, and local since $v(Y_i)=0$, $v(Z_j)=v_0(Z_j)\\in\\mathfrak m_B$ and $v(p)=p\\cdot1_B=v_0(p)\\in\\mathfrak m_B$ in the Cohen case. Let $u:R\\to S$ be the map of [lem-weil-pbc-power-series-adic-evaluation] with $C=\\Lambda_A$, $T=S$, $\\alpha=\\varphi|_{\\Lambda_A}$, $I=\\mathfrak m_S$, $b_i=\\varphi(X_i)+Y_i\\in\\mathfrak m_S$ (step 2 gives $\\varphi(X_i)\\in\\mathfrak m_{S_0}$); it is continuous, and local because $u(X_i)\\in\\mathfrak m_S$ and, in the Cohen case, $u(p)=p\\in\\mathfrak m_S$, and these generate $\\mathfrak m_R$. Finally $vu=fq$: both are ring maps $R\\to B$ restricting to $fq|_{\\Lambda_A}$ on $\\Lambda_A$ (as $v u(\\lambda)=v_0\\pi\\varphi(\\lambda)=v_0\\varphi(\\lambda)$), both send $X_i$ to $fq(X_i)=v_0\\varphi(X_i)$ (as $\\pi(\\varphi(X_i)+Y_i)=\\varphi(X_i)$), and both are continuous from the $(X)$-adic to the $\\mathfrak m_B$-adic topology ($u$ by the lemma and $v(\\mathfrak m_S^N)\\subseteq\\mathfrak m_B^N$; $fq((X)^N)\\subseteq\\mathfrak m_B^N$ as $fq$ is local). $B$ is $\\mathfrak m_B$-adically complete [def-weil-pbc-adically-complete-ring], so the uniqueness in [lem-weil-pbc-power-series-adic-evaluation] ($T=B$, $I=\\mathfrak m_B$) gives $vu=fq$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-power-series-quotient-variables",
+    "lem-weil-pbc-power-series-adic-evaluation",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, proof, last paragraph ('Finally, we replace $\\varphi$ by the map $\\varphi'$ ...')"
+   }
+  },
+  {
+   "text": "(The parameters.) Write $a_i=\\varphi(X_i)$, so $u(X_i)=a_i+Y_i$ and $a_i\\in\\mathfrak m_{S_0}$ (step 2), i.e. $a_i\\in(Z_1,\\ldots,Z_e)S$ resp. $(p,Z_1,\\ldots,Z_e)S$ by step 1. Consider the elements $u(t_1),\\ldots,u(t_d),Z_1,\\ldots,Z_e$ of $S$: in the field case they are $a_1+Y_1,\\ldots,a_n+Y_n,Z_1,\\ldots,Z_e$; in the Cohen case $u(t_1)=u(p)=p$ (a unital ring map fixes $p$) and they are $p,a_1+Y_1,\\ldots,a_n+Y_n,Z_1,\\ldots,Z_e$. The ideal they generate contains the $Z_j$ (and $p$), hence every $a_i$, hence every $Y_i=(a_i+Y_i)-a_i$; so it is $\\mathfrak m_S$ (step 3). Their number is $n+e$ resp. $n+1+e$, which is $\\dim S$ (step 3). By [def-weil-regular-scheme] a set of $\\dim S$ generators of $\\mathfrak m_S$ is a regular system of parameters, so $u(t_1),\\ldots,u(t_d)$ extend (by $Z_1,\\ldots,Z_e$) to a regular system of parameters of $S$, with $t_1=p$ in residue characteristic $p$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, proof, last sentence ('it is clear that a regular system of parameters of $R$ maps to part of a regular sequence in $S'$'), and statement (4); $t_1=p$: proof of Proposition Tag 07NQ"
+   }
+  },
+  {
+   "text": "(Flatness and the closed fibre.) By [lem-weil-pbc-regular-local-generators-regular-sequence] applied to $S$ and the regular system of step 4 listed as $u(t_1),\\ldots,u(t_d),Z_1,\\ldots,Z_e$, this list is a regular sequence [def-weil-pbc-regular-sequence] and $S/(u(t_1),\\ldots,u(t_d))$ is a regular local ring of dimension $\\dim S-d$ (case $c=d$). Hence the initial segment $u(t_1),\\ldots,u(t_d)$ is a regular sequence: its nonzerodivisor conditions are among those of the whole list, and $S/(u(t_1),\\ldots,u(t_d))\\ne0$ since it is local. Now $u:R\\to S$ is a local map of Noetherian local rings (step 3), $R$ is regular of dimension $d$ with $t_1,\\ldots,t_d$ generating $\\mathfrak m_R$ (step 1), so [lem-weil-pbc-flat-over-regular] proves $u$ flat [def-weil-pbc-flat-ring-map]. Since $t_1,\\ldots,t_d$ generate $\\mathfrak m_R$, $\\mathfrak m_RS=(u(t_1),\\ldots,u(t_d))S$, so $S/\\mathfrak m_RS$ is regular local. This also covers $d=0$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-flat-over-regular",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07NN, statement, final sentence ('In particular $R\\to S$ is flat (Algebra 00R4) with regular fibre (Algebra 00NU)')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohen-power-series-presentation",
+  "def-weil-pbc-cohen-ring",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-field-cohen-power-series-formally-smooth",
+  "lem-weil-pbc-fs-adic-lift-into-complete",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-power-series-quotient-variables",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-flat-over-regular",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NN (lemma-embed-map-Noetherian-complete-local-rings), statement and proof; t_1 = p from the proof of Proposition Tag 07NQ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -66,10 +154,17 @@
    "results": "Only Cohen's prime ideal theorem in Noetherian/OfPrime.lean; no Cohen structure theorem. Available tree revision may differ from project pin",
    "date": "2026-10-10",
    "verdict": "no match; pin unverified"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Cohen\\b|cohen' RingTheory; grep -rn 'IsCohenRing|CohenRing|cohenStructure' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (the pinned tree)",
+   "results": "only RingTheory/Noetherian/OfPrime.lean (Cohen's prime-ideal theorem); no Cohen ring, no Cohen structure theorem",
+   "date": "2026-10-10",
+   "verdict": "no match (pin verified)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -86,5 +181,13 @@
    "state": "none"
   }
  },
- "lead_note": "2026-10-10 L: refines lem-weil-pbc-complete-local-map-regular-presentation (07NN, split): that node gives R, S regular complete with the parameters; this one adds that R, S are power-series rings over fields or Cohen rings with t_1 = p. Its split should cite that node and lem-weil-pbc-cohen-power-series-presentation for the power-series form, not reprove 07NN."
+ "lead_note": "2026-10-10 L: refines lem-weil-pbc-complete-local-map-regular-presentation (07NN, split): that node gives R, S regular complete with the parameters; this one adds that R, S are power-series rings over fields or Cohen rings with t_1 = p. Its split should cite that node and lem-weil-pbc-cohen-power-series-presentation for the power-series form, not reprove 07NN.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-complete-local-map-cohen-presentation",
+  "worker": "stage1",
+  "summary": "Proof in 5 steps following Stacks 07NN (read with 07NL, 07NJ, 032A, 00R4, 00NU and the proof of 07NQ for t_1=p). The lead note asked to cite lem-weil-pbc-complete-local-map-regular-presentation for R, S; its statement does not say that R and S are power-series rings over fields or Cohen rings (that is only in its proof), and a regular complete local ring need not be such a power-series ring (ramified case: p in m^2), so its statement cannot give this node and is not cited (C3: no use of a proof). Instead the construction is done from statements: Cohen presentations of A and B (lem-weil-pbc-cohen-power-series-presentation, which gives t_1=p), the formal-smoothness lift, S = Lambda_B[[Y,Z]] with u(X_i)=phi(X_i)+Y_i, and flatness/fibre from the parameter nodes. Step 4 replaces the regular-presentation node's substitution automorphism by the direct observation that u(t), Z generate m_S and are dim S in number. No new nodes. No slopmaster2 Lean (grep by id, 07NN, Cohen, power series).",
+  "blueprint": "Realizes the place recorded in blueprint.from.place of thm-weil-pbc-finite-etale-lifting: the compatible Cohen presentation used in the formal-smoothness input (Stacks 07NQ) of its step 7 (Lemma 0GS2 essential surjectivity); steps 1-4 give the presentation with t_1 = p, step 5 the flatness and regular closed fibre that 07NQ uses."
+ },
+ "reviewed": "2026-10-10 L: 5 steps rebuilding 07NN from the Cohen presentation node (the regular-presentation node states only regularity, not the power-series form: the worker was right not to cite it), the lift by formal smoothness, S = Lambda_B[[Y, Z]] with vu = fq by the universal property, the parameters, flatness and the regular fibre; 0 new nodes. 07NN is stated three times (flat, regular, power-series form), the stronger implying the weaker: a later merge."
 }
