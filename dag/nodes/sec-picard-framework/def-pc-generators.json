@@ -13,7 +13,7 @@
  },
  "kind": "definition",
  "title": "Generator of a triangulated category",
- "statement": "Let C be a triangulated category [def-weil-triangulated-category]. An object E is a generator if every nonzero object K of C admits an integer n and a nonzero morphism E \\to K[n]. A family (E_i) generates C when its coproduct is a generator.",
+ "statement": "Let C be a triangulated category [def-weil-triangulated-category]. An object E of C is a (weak) generator of C if every nonzero object K of C admits an integer n and a nonzero morphism E \\to K[n]. A set-indexed family (E_i)_{i\\in I} of objects of C whose coproduct \\bigoplus_{i} E_i exists in C generates C when \\bigoplus_i E_i is a generator.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tag 09SJ, Definition definition-generators"
@@ -45,15 +45,65 @@
    "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "generator of a triangulated category every nonzero object admits a nonzero morphism from a shift of the generator",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "weak generator triangulated category nonzero morphism shift",
+   "results": "8 hits, none state generator definition",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty generator triangulated",
+   "results": "0 hits; unknown identifier ObjectProperty",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "weak generator triangulated category nonzero morphism shift [Mathlib/CategoryTheory]",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generat in Mathlib/CategoryTheory/Triangulated/",
+   "results": "Generators.lean defines IsClassicalTriangulatedGenerator and IsStrongTriangulatedGenerator (Stacks 09SJ (1),(2)) only; no weak generator",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-brown-cohomological-representability",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-generators",
+  "worker": "stage1",
+  "summary": "Checked the Stacks Tag 09SJ definition of a generator against the imported statement. The definition introduces no proof obligations beyond the existing triangulated-category notion, so no subordinate nodes are needed; the node is marked split. No sorry-free project declaration states this definition, and Mathlib searches found no matching declaration.",
+  "blueprint": "The node realizes the compact-generator hypothesis in the Brown representability input from the blueprint ancestor lem-sc-finite-duality."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dgn1907",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dgn1907 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 09SJ(3) weak generator: matches; stmt_deps only def-weil-triangulated-category (no cycle with def-pc-compactly-generated); grep generat in Mathlib Triangulated/: Generators.lean has only classical/strong generators, no weak generator, so no Mathlib leaf. FIX more, RETURN less: E/precision - family clause presupposed a coproduct the cited triangulated-category definition does not supply; now requires the set-indexed coproduct to exist in C (as Stacks 09SQ assumes direct sums); recorded the Mathlib grep in mathlib_searches.; 1 file(s) fixed by the reviewer"
+ }
 }
