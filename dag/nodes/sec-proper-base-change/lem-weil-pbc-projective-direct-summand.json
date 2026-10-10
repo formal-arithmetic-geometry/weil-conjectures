@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-projective-direct-summand",
+ "kind": "statement",
+ "title": "A direct summand of a projective module is projective",
+ "statement": "Let $R$ be a commutative ring, $M$ a projective $R$-module [def-weil-pbc-projective-module] and $P$ an $R$-module. (1) If there are $R$-linear maps $i:P\\to M$ and $s:M\\to P$ with $s\\circ i=\\mathrm{id}_P$, then $P$ is projective. (2) In particular, if $P\\cong M$ as $R$-modules, then $P$ is projective.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05CF (lemma-characterize-projective, line 18795), proof of (2) => (1): $\\mathrm{Hom}_R(P\\oplus Q,-)=\\mathrm{Hom}_R(P,-)\\times\\mathrm{Hom}_R(Q,-)$, so a direct summand of a module whose Hom functor is exact has an exact Hom functor. Tag verified in tags/tags: 05CF,algebra-lemma-characterize-projective"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a direct summand of a projective module is projective",
+   "results": "Module.Projective, ModuleCat.projective_of_module_projective, Module.Projective.iff_split', ModuleCat.projective_of_categoryTheory_projective, Module.instProjectiveDFinsupp, IsProjective.iff_projective",
+   "date": "2026-10-10",
+   "verdict": "no direct hit (see leanfinder)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "retract of a projective module is projective; module linearly equivalent to a projective module is projective",
+   "results": "Module.Projective.of_equiv, Module.Projective.of_split, Module.Projective.iff_split', Module.Projective.iff_split, Module.Projective.iff_split_of_projective (Mathlib.Algebra.Module.Projective)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, LinearMap.comp, LinearMap.id",
+   "results": "Module.Projective.of_split, LinearMap.exists_rightInverse_of_surjective, Module.Projective.iff_split, iff_split', iff_split_of_projective, Module.projective_def', of_lifting_property'', Module.Finite.exists_comp_eq_id_of_projective",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Projective.of_split"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/Projective.lean; sed -n 163,192p",
+   "results": "line 165 Projective.of_split [Module.Projective R M] (i : P →ₗ[R] M) (s : M →ₗ[R] P) (H : s.comp i = LinearMap.id) : Module.Projective R P; line 188 Projective.of_equiv' [Module.Projective R M] (e : M ≃ₗ[R] P) : Module.Projective R P",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Projective.of_split",
+  "file": "Mathlib/Algebra/Module/Projective.lean",
+  "line": 165,
+  "how": "one declaration per clause: (1) exact: Module.Projective.of_split (lines 165-171, docstring 'A direct summand of a projective module is projective'), [Module.Projective R M] (i : P →ₗ[R] M) (s : M →ₗ[R] P) (H : s.comp i = LinearMap.id) : Module.Projective R P; (2) exact: Module.Projective.of_equiv' (lines 188-190), [Module.Projective R M] (e : M ≃ₗ[R] P) : Module.Projective R P. Lines read with sed -n 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-projective-resolution-kernel-projective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: Mathlib leaf, one declaration per clause (Module.Projective.of_split line 165, of_equiv' line 188; read).",
+ "lead_note": "Composed leaf: of_split for (1), of_equiv' for (2)."
+}

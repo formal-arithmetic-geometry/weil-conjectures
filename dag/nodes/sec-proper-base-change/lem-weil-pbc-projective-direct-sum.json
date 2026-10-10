@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-projective-direct-sum",
+ "kind": "statement",
+ "title": "A direct sum of two projective modules is projective",
+ "statement": "Let $R$ be a commutative ring and $P$, $Q$ projective $R$-modules [def-weil-pbc-projective-module]. Then the direct sum $P\\oplus Q$ is a projective $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 065Q (lemma-direct-sum-projective, line 18864), for two summands. Tag verified in tags/tags: 065Q,algebra-lemma-direct-sum-projective"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "direct sum (product) of two projective modules is projective",
+   "results": "Module.instProjectiveDFinsupp, Module.instProjectiveProd (Mathlib.Algebra.Module.Projective), CategoryTheory.Projective.instBiprod, instBiproduct, Module.Projective.tensorProduct, Projective.instSigmaObj",
+   "date": "2026-10-10",
+   "verdict": "match: Module.instProjectiveProd"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective ?R (?P × ?Q)",
+   "results": "Module.instProjectiveProd (Mathlib.Algebra.Module.Projective)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'instance\\|theorem' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Module/Projective.lean; sed -n 131,138p",
+   "results": "line 133: instance [Projective R P] [Projective R Q] : Projective R (P × Q); line 304 Projective.directSum",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.instProjectiveProd",
+  "file": "Mathlib/Algebra/Module/Projective.lean",
+  "line": 133,
+  "how": "exact: the anonymous instance at lines 133-138 (named Module.instProjectiveProd, confirmed by loogle), [Module.Projective R P] [Module.Projective R Q] : Module.Projective R (P × Q) over a semiring R; P × Q is the binary direct sum P ⊕ Q. Lines read with sed -n 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-projective-resolution-kernel-projective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: exact Mathlib leaf, the instance Module.instProjectiveProd (Projective.lean line 133, read)."
+}

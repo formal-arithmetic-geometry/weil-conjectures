@@ -1,0 +1,76 @@
+{
+ "id": "lem-weil-pbc-ses-projective-quotient-splits",
+ "kind": "statement",
+ "title": "A short exact sequence ending in a projective module splits",
+ "statement": "Let $R$ be a commutative ring and $0\\to K\\xrightarrow{i}F\\xrightarrow{p}P\\to0$ a short exact sequence [def-weil-pbc-exact-sequence] of $R$-modules ($i$ injective, $p$ surjective, $\\mathrm{Im}(i)=\\mathrm{Ker}(p)$) with $P$ projective [def-weil-pbc-projective-module]. Then there are $R$-linear maps $s:P\\to F$ with $p\\circ s=\\mathrm{id}_P$ and $r:F\\to K$ with $r\\circ i=\\mathrm{id}_K$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 05CF (lemma-characterize-projective, line 18795), proof of (1) => (2): as $P$ is projective there is $i\\in\\mathrm{Hom}_R(P,F)$ with $\\pi\\circ i=\\mathrm{id}_P$, so $F\\cong\\mathrm{Ker}(\\pi)\\oplus i(P)$ (stated there for $F$ free; the argument uses only the surjection). Also the first sentence of the proof of Lemma Tag 00O5. Tag verified in tags/tags: 05CF,algebra-lemma-characterize-projective"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "short exact sequence of modules 0 → K → F → P → 0 with P projective splits, K has a retraction",
+   "results": "ShortComplex.Splitting.ofExactOfRetraction, ShortComplex.ShortExact.splittingOfProjective (Mathlib.Algebra.Homology.ShortComplex.ShortExact), Function.Exact.split_tfae (Mathlib.Algebra.Exact.Basic), Splitting.ofExactOfSection, Splitting.r, Function.Exact.split_tfae'",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact sequence 0 → K → F → P → 0 of modules with P projective splits: the injection K → F has a left inverse",
+   "results": "Module.Projective.of_split, Module.Projective.iff_split_of_projective, ShortComplex.ShortExact.splittingOfProjective, Module.Projective.iff_split, iff_split'",
+   "date": "2026-10-10",
+   "verdict": "match (with Function.Exact.split_tfae)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Exact, Function.Injective, Function.Surjective, LinearMap.id",
+   "results": "Function.Exact.split_tfae, Function.Exact.split_tfae' (Mathlib.Algebra.Exact.Basic), Module.Basis.ofSplitExact, ofSplitExact_apply",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'splittingOfProjective\\|exists_rightInverse_of_surjective\\|theorem Exact.split_tfae' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Algebra/Module/Projective.lean:111 LinearMap.exists_rightInverse_of_surjective; Algebra/Exact/Basic.lean:470 Function.Exact.split_tfae; Algebra/Homology/ShortComplex/ShortExact.lean:213 ShortExact.splittingOfProjective",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LinearMap.exists_rightInverse_of_surjective",
+  "file": "Mathlib/Algebra/Module/Projective.lean",
+  "line": 111,
+  "how": "one declaration per clause: the section s is LinearMap.exists_rightInverse_of_surjective (Mathlib/Algebra/Module/Projective.lean:111-113), [Module.Projective R P] (f : M →ₗ[R] P) (hf_surj : range f = ⊤) : ∃ g, f ∘ₗ g = LinearMap.id, applied to f = p; the retraction r is the implication (1) => (2) of Function.Exact.split_tfae (Mathlib/Algebra/Exact/Basic.lean:470-484: for Function.Exact i p, i injective, p surjective, (∃ l, p ∘ₗ l = id) ↔ (∃ l, l ∘ₗ i = id)) applied to s. Categorical form: CategoryTheory.ShortComplex.ShortExact.splittingOfProjective (Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean:213). Lines read with sed -n 2026-10-10"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-projective-resolution-kernel-projective",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10: Mathlib leaf, one declaration per clause (LinearMap.exists_rightInverse_of_surjective line 111; Function.Exact.split_tfae line 470; read).",
+ "lead_note": "Composed leaf: the section from exists_rightInverse_of_surjective, the retraction from split_tfae (1)=>(2)."
+}

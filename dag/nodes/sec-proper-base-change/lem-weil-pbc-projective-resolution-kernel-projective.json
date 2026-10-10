@@ -12,9 +12,134 @@
   "def-weil-pbc-exact-sequence",
   "def-weil-pbc-projective-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Notation and the inductive claim.) For an exact sequence $F_e\\xrightarrow{\\partial_e}F_{e-1}\\to\\dots\\xrightarrow{\\partial_1}F_0\\xrightarrow{\\partial_0}M\\to0$ exactness [def-weil-pbc-exact-sequence] means: $\\partial_0$ is surjective and $\\mathrm{Im}(\\partial_{i+1})=\\mathrm{Ker}(\\partial_i)$ for $0\\le i\\le e-1$; the module to be shown projective is $\\mathrm{Ker}(\\partial_e)$ (for $e=0$ this is $\\mathrm{Ker}(\\partial_0)=\\mathrm{Ker}(F_0\\to M)$). For an integer $d\\ge0$ let $C(d)$ be the claim: for every $R$-module $M$ that has a projective resolution of length $\\le d$ [def-weil-pbc-finite-global-dimension], every integer $e\\ge\\max(0,d-1)$ and every exact sequence $F_e\\to\\dots\\to F_0\\to M\\to0$ with all $F_i$ projective, $\\mathrm{Ker}(\\partial_e)$ is projective. The first assertion of the lemma is $C(d)$ for all $d$; we prove $C(d)$ by induction on $d$ (Steps 2-3 for $d=0$, Steps 4-8 for $d\\ge1$ assuming $C(d-1)$). The source states the lemma for $M$ of projective dimension exactly $d$ and applies the induction hypothesis to a module with a resolution of length $d-1$; the claim with 'length $\\le d$' is the form in which that induction is valid as written.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00O5 (lemma-independent-resolution), lines 26594-26627"
+   }
+  },
+  {
+   "text": "(Case $d=0$: $M$ is projective.) A projective resolution of length $\\le0$ is an exact sequence $0\\to P_0\\xrightarrow{\\delta_0}M\\to0$ with $P_0$ projective [def-weil-pbc-finite-global-dimension]; exactness at $P_0$ and at $M$ say that $\\delta_0$ is injective and surjective [def-weil-pbc-exact-sequence], so $\\delta_0:P_0\\to M$ is an isomorphism and $M$ is projective by [lem-weil-pbc-projective-direct-summand] (2).",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-projective-direct-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00O5 (lemma-independent-resolution), lines 26594-26627"
+   }
+  },
+  {
+   "text": "(Case $d=0$, by induction on $e$.) Let $D(e)$ be the claim: for every projective $R$-module $M$ and every exact sequence $F_e\\to\\dots\\to F_0\\to M\\to0$ with all $F_i$ projective, $\\mathrm{Ker}(\\partial_e)$ is projective. $D(0)$: put $K_0=\\mathrm{Ker}(\\partial_0)$; $0\\to K_0\\to F_0\\xrightarrow{\\partial_0}M\\to0$ is short exact ($\\partial_0$ surjective), $M$ is projective, so by [lem-weil-pbc-ses-projective-quotient-splits] there is $r:F_0\\to K_0$ with $r\\circ\\mathrm{incl}=\\mathrm{id}_{K_0}$ (the source's splitting $F_0=\\mathrm{Ker}(F_0\\to M)\\oplus M$), and $K_0$ is projective by [lem-weil-pbc-projective-direct-summand] (1), $F_0$ being projective. $D(e-1)\\Rightarrow D(e)$ for $e\\ge1$ (the source's 'replacing $M$ by $\\mathrm{Ker}(F_0\\to M)$ we decrease $e$'): by $D(0)$ applied to $F_0\\to M\\to0$, $K_0$ is projective. Since $\\mathrm{Im}(\\partial_1)=K_0$, $\\partial_1$ corestricts to a surjection $\\partial_1':F_1\\to K_0$ with $\\mathrm{Ker}(\\partial_1')=\\mathrm{Ker}(\\partial_1)$ ($K_0\\subseteq F_0$). Hence $F_e\\to\\dots\\to F_2\\xrightarrow{\\partial_2}F_1\\xrightarrow{\\partial'_1}K_0\\to0$ is exact (at $K_0$: $\\partial'_1$ surjective; at $F_1$, if $e\\ge2$: $\\mathrm{Ker}(\\partial'_1)=\\mathrm{Ker}(\\partial_1)=\\mathrm{Im}(\\partial_2)$; at $F_i$, $2\\le i\\le e-1$: as before); with $F'_i=F_{i+1}$ it is an exact sequence $F'_{e-1}\\to\\dots\\to F'_0\\to K_0\\to0$ of projective modules over the projective module $K_0$. By $D(e-1)$ the kernel of its last map is projective: for $e\\ge2$ this is $\\mathrm{Ker}(\\partial_e)$; for $e=1$ it is $\\mathrm{Ker}(\\partial'_1)=\\mathrm{Ker}(\\partial_1)$. So $D(e)$ holds for all $e\\ge0$, and with Step 2 this is $C(0)$ ($e\\ge\\max(0,-1)=0$).",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-ses-projective-quotient-splits",
+    "lem-weil-pbc-projective-direct-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00O5 (lemma-independent-resolution), lines 26594-26627"
+   }
+  },
+  {
+   "text": "(Case $d\\ge1$: Schanuel.) Let $d\\ge1$, assume $C(d-1)$, and let $M$, $e\\ge\\max(0,d-1)$ and $F_e\\to\\dots\\to F_0\\to M\\to0$ be as in $C(d)$. By [def-weil-pbc-finite-global-dimension] choose an exact sequence $0\\to P_d\\xrightarrow{\\delta_d}P_{d-1}\\to\\dots\\to P_1\\xrightarrow{\\delta_1}P_0\\xrightarrow{\\delta_0}M\\to0$ with all $P_i$ projective (the source takes one of minimal length; any one of length $\\le d$ serves). Put $K_0=\\mathrm{Ker}(\\partial_0)\\subseteq F_0$ and $L_0=\\mathrm{Ker}(\\delta_0)\\subseteq P_0$. Since $\\partial_0$ and $\\delta_0$ are surjective [def-weil-pbc-exact-sequence], $0\\to K_0\\to F_0\\xrightarrow{\\partial_0}M\\to0$ and $0\\to L_0\\to P_0\\xrightarrow{\\delta_0}M\\to0$ are short exact with projective middle terms, and [lem-weil-pbc-schanuel] (with $K=K_0$, $P_1=F_0$, $L=L_0$, $P_2=P_0$) gives an isomorphism of $R$-modules $\\varphi:K_0\\oplus P_0\\xrightarrow{\\sim}L_0\\oplus F_0$.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-schanuel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00O5 (lemma-independent-resolution), lines 26594-26627"
+   }
+  },
+  {
+   "text": "(Case $d\\ge1$, $e=0$.) Then $0\\ge d-1$, so $d=1$ and the resolution is $0\\to P_1\\xrightarrow{\\delta_1}P_0\\xrightarrow{\\delta_0}M\\to0$. Exactness at $P_1$ makes $\\delta_1$ injective and exactness at $P_0$ gives $\\mathrm{Im}(\\delta_1)=L_0$ [def-weil-pbc-exact-sequence], so $\\delta_1$ induces an isomorphism $P_1\\cong L_0$ and hence $P_1\\oplus F_0\\cong L_0\\oplus F_0\\cong K_0\\oplus P_0$ (via $\\varphi^{-1}$). $P_1\\oplus F_0$ is projective by [lem-weil-pbc-projective-direct-sum], so $K_0\\oplus P_0$ is projective by [lem-weil-pbc-projective-direct-summand] (2). The maps $i:K_0\\to K_0\\oplus P_0$, $k\\mapsto(k,0)$, and $s:K_0\\oplus P_0\\to K_0$, $(k,x)\\mapsto k$, satisfy $s\\circ i=\\mathrm{id}_{K_0}$, so $K_0=\\mathrm{Ker}(\\partial_0)=\\mathrm{Ker}(\\partial_e)$ is projective by [lem-weil-pbc-projective-direct-summand] (1).",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-projective-direct-sum",
+    "lem-weil-pbc-projective-direct-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00O5 (lemma-independent-resolution), lines 26594-26627"
+   }
+  },
+  {
+   "text": "(Case $d\\ge1$, $e\\ge1$: a projective resolution of length $\\le d-1$ of $N=K_0\\oplus P_0$.) Put $Q_0=P_1\\oplus F_0$ and $Q_i=P_{i+1}$ for $1\\le i\\le d-1$, with the maps $\\varepsilon:Q_0\\to L_0\\oplus F_0$, $(x,y)\\mapsto(\\delta_1x,y)$ (well defined: $\\delta_1x\\in\\mathrm{Im}(\\delta_1)=L_0$), $\\rho_1:Q_1=P_2\\to Q_0$, $x\\mapsto(\\delta_2x,0)$ (if $d\\ge2$), and $\\rho_i=\\delta_{i+1}:Q_i\\to Q_{i-1}$ for $2\\le i\\le d-1$. The sequence $0\\to Q_{d-1}\\to\\dots\\to Q_1\\xrightarrow{\\rho_1}Q_0\\xrightarrow{\\varepsilon}L_0\\oplus F_0\\to0$ is exact [def-weil-pbc-exact-sequence]: $\\varepsilon$ is surjective since $\\mathrm{Im}(\\delta_1)=L_0$; $\\mathrm{Ker}(\\varepsilon)=\\mathrm{Ker}(\\delta_1)\\oplus0$, which is $0$ if $d=1$ ($\\delta_1$ injective by exactness of the resolution at $P_1$) and equals $\\mathrm{Im}(\\delta_2)\\oplus0=\\mathrm{Im}(\\rho_1)$ if $d\\ge2$; for $d\\ge2$, $\\mathrm{Ker}(\\rho_1)=\\mathrm{Ker}(\\delta_2)$, which is $0$ if $d=2$ and $\\mathrm{Im}(\\delta_3)=\\mathrm{Im}(\\rho_2)$ if $d\\ge3$; exactness at $Q_i$ for $2\\le i\\le d-1$ (including injectivity of $\\rho_{d-1}=\\delta_d$) is exactness of the resolution at $P_{i+1}$. $Q_0$ is projective by [lem-weil-pbc-projective-direct-sum] and $Q_i=P_{i+1}$ ($i\\ge1$) is projective. Replacing $\\varepsilon$ by $\\varphi^{-1}\\circ\\varepsilon:Q_0\\to N$ (Step 4) keeps the sequence exact (an isomorphism preserves surjectivity and $\\mathrm{Ker}(\\varphi^{-1}\\circ\\varepsilon)=\\mathrm{Ker}(\\varepsilon)$). So $0\\to Q_{d-1}\\to\\dots\\to Q_0\\to N\\to0$ is a projective resolution of $N=K_0\\oplus P_0$ of length $\\le d-1$ [def-weil-pbc-finite-global-dimension]; this is the source's resolution $0\\to P_d\\to\\dots\\to P_2\\to P_1\\oplus F_0\\to\\mathrm{Ker}(P_0\\to M)\\oplus F_0\\to0$ transported along Schanuel's isomorphism.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-projective-direct-sum",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00O5 (lemma-independent-resolution), lines 26594-26627"
+   }
+  },
+  {
+   "text": "(Case $d\\ge1$, $e\\ge1$: an exact sequence of length $e-1$ over $N$, and the induction hypothesis.) Put $G_0=F_1\\oplus P_0$ and $G_i=F_{i+1}$ for $1\\le i\\le e-1$, with $\\eta:G_0\\to N=K_0\\oplus P_0$, $(x,p)\\mapsto(\\partial_1x,p)$ (well defined: $\\partial_1x\\in\\mathrm{Im}(\\partial_1)=K_0$), $\\sigma_1:G_1=F_2\\to G_0$, $x\\mapsto(\\partial_2x,0)$ (if $e\\ge2$), and $\\sigma_i=\\partial_{i+1}:G_i\\to G_{i-1}$ for $2\\le i\\le e-1$. The sequence $G_{e-1}\\to\\dots\\to G_1\\xrightarrow{\\sigma_1}G_0\\xrightarrow{\\eta}N\\to0$ is exact [def-weil-pbc-exact-sequence]: $\\eta$ is surjective since $\\mathrm{Im}(\\partial_1)=K_0$; $\\mathrm{Ker}(\\eta)=\\mathrm{Ker}(\\partial_1)\\oplus0$, which for $e\\ge2$ is $\\mathrm{Im}(\\partial_2)\\oplus0=\\mathrm{Im}(\\sigma_1)$; for $e\\ge3$, $\\mathrm{Ker}(\\sigma_1)=\\mathrm{Ker}(\\partial_2)=\\mathrm{Im}(\\partial_3)=\\mathrm{Im}(\\sigma_2)$; exactness at $G_i$ for $2\\le i\\le e-2$ is exactness of $F_\\bullet$ at $F_{i+1}$. $G_0$ is projective by [lem-weil-pbc-projective-direct-sum], and $G_i=F_{i+1}$ ($i\\ge1$) is projective. Since $e\\ge1$ and $e\\ge d-1$, we have $e-1\\ge\\max(0,(d-1)-1)$; and $N$ has a projective resolution of length $\\le d-1$ by Step 6. So $C(d-1)$ applies to $N$ and this sequence (the source's $F_e\\to\\dots\\to F_2\\to P_0\\oplus F_1\\to P_0\\oplus\\mathrm{Ker}(F_0\\to M)\\to0$): the kernel of its last map is projective, namely $\\mathrm{Ker}(\\sigma_{e-1})$ if $e\\ge2$ and $\\mathrm{Ker}(\\eta)$ if $e=1$.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-projective-direct-sum",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00O5 (lemma-independent-resolution), lines 26594-26627"
+   }
+  },
+  {
+   "text": "(Identification of the kernel; end of the induction.) If $e\\ge3$, $\\sigma_{e-1}=\\partial_e$, so $\\mathrm{Ker}(\\partial_e)$ is projective by Step 7. If $e=2$, $\\mathrm{Ker}(\\sigma_1)=\\{x\\in F_2:(\\partial_2x,0)=0\\}=\\mathrm{Ker}(\\partial_2)$. If $e=1$, $\\mathrm{Ker}(\\eta)=\\{(x,p)\\in F_1\\oplus P_0:\\partial_1x=0,\\ p=0\\}=\\mathrm{Ker}(\\partial_1)\\oplus0$, and $x\\mapsto(x,0)$ is an isomorphism $\\mathrm{Ker}(\\partial_1)\\cong\\mathrm{Ker}(\\eta)$, so $\\mathrm{Ker}(\\partial_1)$ is projective by [lem-weil-pbc-projective-direct-summand] (2) (the source writes this kernel as $\\mathrm{Ker}(F_1\\oplus P_0\\to F_0\\oplus P_0)$, which is the same submodule $\\mathrm{Ker}(\\partial_1)\\oplus0$, and leaves the identification to the reader). With Step 5 for $e=0$ this proves $C(d)$, and by induction $C(d)$ holds for every $d\\ge0$.",
+   "uses": [
+    "lem-weil-pbc-projective-direct-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00O5 (lemma-independent-resolution), lines 26594-26627"
+   }
+  },
+  {
+   "text": "(The particular cases.) Let $d\\ge1$ and let $0\\to K\\xrightarrow{j}F_{d-1}\\to\\dots\\to F_0\\to M\\to0$ be exact with all $F_i$ projective. The part $F_{d-1}\\to\\dots\\to F_0\\to M\\to0$ is exact, so by $C(d)$ with $e=d-1\\ge\\max(0,d-1)$ the module $Z=\\mathrm{Ker}(F_{d-1}\\to F_{d-2})$ ($Z=\\mathrm{Ker}(F_0\\to M)$ if $d=1$) is projective; exactness at $K$ and at $F_{d-1}$ [def-weil-pbc-exact-sequence] say that $j$ is injective with image $Z$, so $j:K\\to Z$ is an isomorphism and $K$ is projective by [lem-weil-pbc-projective-direct-summand] (2). If $d=0$, $M$ is projective by Step 2.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-projective-direct-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00O5 (lemma-independent-resolution), lines 26594-26627"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-finite-global-dimension",
+  "lem-weil-pbc-projective-direct-summand",
+  "lem-weil-pbc-ses-projective-quotient-splits",
+  "lem-weil-pbc-schanuel",
+  "lem-weil-pbc-projective-direct-sum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00O5 (lemma-independent-resolution, line 26585), proof lines 26594-26627; Schanuel's Lemma Tag 00O3 (line 26485)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,10 +168,38 @@
    "results": "no 00O5 tag, no Schanuel lemma; Dimension.lean has the short-exact-sequence lemmas hasProjectiveDimensionLT_X₁/X₂/X₃/X₃_iff and projective_iff_hasProjectiveDimensionLE_zero; ModuleCat/ProjectiveDimension.lean only invariance under (semi)linear equivalence",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "if M has projective dimension at most d then the kernel of F_{d-1} → F_{d-2} in any exact sequence of projective modules F_i over M is projective",
+   "results": "CategoryTheory.Projective.instSyzygies, ShortExact.hasProjectiveDimensionLT_X₁, hasProjectiveDimensionLT_X₂, ProjectiveResolution.exact₀, hasProjectiveDimensionLT_X₃_iff, CategoryTheory.projectiveDimension, HasProjectiveDimensionLT.mk', ModuleCat.projectiveResolution",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module of projective dimension at most n: the n-th syzygy (kernel) in any projective resolution is projective",
+   "results": "instHasProjectiveDimensionLTOfNatNatOfProjective, projective_iff_hasProjectiveDimensionLT_one, projectiveDimension_le_iff, HasProjectiveDimensionLE, HasProjectiveDimensionLT, projectiveDimension_lt_iff (Mathlib.CategoryTheory.Abelian.Projective.Dimension)",
+   "date": "2026-10-10",
+   "verdict": "no match: Ext-vanishing projective dimension only; the syzygy statement for an arbitrary exact sequence is absent"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, LinearMap.ker, Function.Exact",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'syzyg' --include=*.lean /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -n 'lemma' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean; sed -n 186,235p",
+   "results": "Projective.syzygies (CategoryTheory/Preadditive/Projective/Basic.lean:181, the canonical kernel-of-cover object only); Dimension.lean: hasProjectiveDimensionLT_X₁/X₂/X₃/X₃_iff (one dimension shift for a short exact sequence with projective middle), Retract.hasProjectiveDimensionLT, hasProjectiveDimensionLT_of_iso, projective_iff_hasProjectiveDimensionLE_zero",
+   "date": "2026-10-10",
+   "verdict": "no match; candidate route recorded: iterate ShortExact.hasProjectiveDimensionLT_X₃_iff along 0 → Ker ∂_i → F_i → Ker ∂_{i-1} → 0 and conclude with projective_iff_hasProjectiveDimensionLT_one, which needs Mathlib's Ext projective dimension to agree with def-weil-pbc-finite-global-dimension (a theorem, not a one-line specialization)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +219,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.ShortComplex.ShortExact.hasProjectiveDimensionLT_X₃_iff, CategoryTheory.projective_iff_hasProjectiveDimensionLT_one",
+  "file": "Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean",
+  "how": "lines 223-227 and 151: dimension shifting along the short exact sequences 0 → Ker ∂_i → F_i → Ker ∂_{i-1} → 0 in ModuleCat R, d times, gives HasProjectiveDimensionLT (Ker ∂_e) 1, i.e. projectivity; it needs HasProjectiveDimensionLT M (d+1) from a resolution of length ≤ d, which is not in Mathlib in that form. Not a leaf."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-projective-resolution-kernel-projective",
+  "worker": "stage1",
+  "summary": "Proof written from Stacks 00O5 (algebra.tex lines 26594-26627) in 9 steps: the inductive claim C(d) stated with 'resolution of length <= d' (the source's 'projective dimension d' with an induction hypothesis applied to a module of projective dimension <= d-1); d=0 by an inner induction D(e) on e over projective modules (splitting of 0 -> K_0 -> F_0 -> M -> 0, direct summand); d>=1 by Schanuel (00O3) giving K_0 (+) P_0 = L_0 (+) F_0, the case e=0 (d=1, L_0 = P_1), the explicit resolution of length <= d-1 of K_0 (+) P_0 transported along Schanuel's isomorphism with all exactness checks, the explicit exact sequence F_e -> ... -> F_2 -> F_1 (+) P_0 -> K_0 (+) P_0 -> 0 with its exactness, the induction hypothesis with e-1 >= max(0,d-2), and the identification of the resulting kernel with Ker(F_e -> F_{e-1}) for e>=3, e=2, e=1 (the source leaves e=1,2 to the reader and writes the e=1 target as F_0 (+) P_0); then the 'in particular' clauses. Statement and stmt_deps unchanged. New nodes: lem-weil-pbc-schanuel (unsplit, 00O3, not in Mathlib), lem-weil-pbc-projective-direct-sum (leaf Module.instProjectiveProd), lem-weil-pbc-projective-direct-summand (leaf Module.Projective.of_split / of_equiv'), lem-weil-pbc-ses-projective-quotient-splits (leaf LinearMap.exists_rightInverse_of_surjective + Function.Exact.split_tfae). Mathlib: no match for the item; candidate (Ext dimension shifting) recorded in mathlib_candidate."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00O5 with the induction on d set up for 'length ≤ d', the d = 0 case by an inner induction on e, Schanuel's lemma (00O3, new unsplit node) for d ≥ 1, and the explicit resolutions/exact sequences over K_0 ⊕ P_0 written out with every exactness check (steps 6-8, where the source leaves the identifications to the reader). Three new Mathlib leaves (direct sum, direct summand/isomorphic, splitting of a sequence ending in a projective). No Mathlib match for the item (Ext-based dimension, B8)."
 }
