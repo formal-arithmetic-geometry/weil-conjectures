@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-fs-adic-lift-into-complete",
+ "kind": "statement",
+ "title": "Adic formal smoothness gives lifts into complete rings along closed ideals",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings and $\\mathfrak n\\subseteq S$ an ideal such that $S$ is formally smooth over $R$ for the $\\mathfrak n$-adic topology [def-weil-pbc-formally-smooth-adic]. Let $A$ be a commutative $R$-algebra [def-weil-pbc-algebra-hom-quotient], $I\\subseteq A$ an ideal such that $A$ is $I$-adically complete [def-weil-pbc-adically-complete-ring], and $J\\subseteq A$ an ideal such that $J^t\\subseteq I$ for some $t\\ge1$ and $J=\\bigcap_{m\\ge1}(J+I^m)$ ($J$ is closed for the $I$-adic topology). Let $q:A\\to A/J$ be the quotient map, with $A/J$ an $R$-algebra via $q$, and let $g:S\\to A/J$ be a homomorphism of $R$-algebras such that $g(\\mathfrak n^r)\\subseteq q(I)$ for some $r\\ge1$. Then there is a homomorphism of $R$-algebras $f:S\\to A$ with $q\\circ f=g$, and $f(\\mathfrak n^{rt})\\subseteq I$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07NJ (lemma-lift-continuous, line 9257) and its proof, for $R$ with the discrete topology (Definition Tag 07NI, definition-formally-smooth-adic, line 9213, condition (2)(b)); 'A adic' is Definition Tag 07E8 (definition-topological-ring, line 8959) (8): pre-adic with ideal of definition I and complete, i.e. A -> lim A/I^n bijective; continuity of g for the I-adic quotient topology on A/J is, by Lemma Tag 07E9 (lemma-continuous), g(n^r) in (I+J)/J for some r"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "formally smooth algebra lifts homomorphism into adically complete ring modulo closed ideal",
+   "results": "Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_kerProj_comp_eq_id (Mathlib.RingTheory.Smooth.AdicCompletion); Algebra.FormallySmooth.lift, Algebra.FormallySmooth.exists_lift (Mathlib.RingTheory.Smooth.Basic); AdicCompletion.liftAlgHom, IsAdicComplete.mk_liftAlgHom",
+   "date": "2026-10-10",
+   "verdict": "no match: all for the discrete Algebra.FormallySmooth and the lift along S -> S/I with I the ideal of completeness itself; candidate recorded in mathlib_candidate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "formally smooth R-algebra S: an R-algebra map S → A/J lifts to S → A when A is I-adically complete and J^t ⊆ I",
+   "results": "Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_lift, Algebra.FormallySmooth.lift, Algebra.FormallySmooth.of_comp_surjective, IsAdicComplete.liftAlgHom, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.FormallySmooth",
+   "date": "2026-10-10",
+   "verdict": "no match (no formal smoothness for an adic topology on S, no closed ideal J different from I)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, IsAdicComplete",
+   "results": "Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete (Mathlib.RingTheory.Smooth.AdicCompletion) only",
+   "date": "2026-10-10",
+   "verdict": "no match (discrete formal smoothness, J = I)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln FormallySmooth /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'IsAdicComplete|Adic'; grep -rn 'FormallySmooth.*Adic|AdicFormallySmooth|formallySmooth.*[Tt]opolog' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 80,104p RingTheory/Smooth/AdicCompletion.lean",
+   "results": "files RingTheory/Smooth/Flat.lean, RingTheory/Smooth/AdicCompletion.lean, RingTheory/Etale/Kaehler.lean; no adic-topology version of FormallySmooth anywhere; AdicCompletion.lean lines 82-101: exists_adicCompletionEvalOneₐ_comp_eq and exists_mkₐ_comp_eq_of_isAdicComplete (hypothesis [Algebra.FormallySmooth R A] [IsAdicComplete I S], lift of A ->ₐ[R] S ⧸ I to A ->ₐ[R] S)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "exists_mkₐ_comp_eq_of_isAdicComplete (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.FormallySmooth.exists_mk... in .lake/packages/mathlib/Mathlib/RingTheory/Smooth/AdicCompletion.lean (index: unavailable)",
+   "date": "2026-10-10",
+   "verdict": "candidate exists in this Mathlib; not a match"
+  }
+ ],
+ "mathlib_candidate": {
+  "declaration": "Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete",
+  "file": "Mathlib/RingTheory/Smooth/AdicCompletion.lean",
+  "how": "lines 94-101 (read with sed -n 80,104p): for [Algebra.FormallySmooth R A] (discrete formal smoothness) and [IsAdicComplete I S], every A ->ₐ[R] S ⧸ I lifts to A ->ₐ[R] S. This is the special case n = 0, J = I, t = 1 of this node; the node needs formal smoothness only for the n-adic topology (lifting of maps killing a power of n) and a closed ideal J with J^t in I, which Mathlib does not have. Not a leaf (B8)."
+ },
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-fs-adic-lift-derivation",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): More on Algebra 07NJ with R discrete, A I-adically complete, J closed with J^t ⊆ I, continuity of g as g(n^r) ⊆ q(I) (07E9); the conclusion includes f(n^{rt}) ⊆ I. Unsplit; Mathlib candidate is the discrete case (B8)."
+}
