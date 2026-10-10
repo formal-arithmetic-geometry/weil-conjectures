@@ -1,8 +1,8 @@
 # Work queue
 
-906 items; claim with `tools/claim.py next <group> [--stage N]`.
+904 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (264)
+## Stage 1: nodes to split (262)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-sc-affine-rhom-qcoherent` | 3015 | none |
 | `lem-sc-derived-hom-finite-free-model` | 3015 | none |
-| `lem-sc-ext-noetherian-finite` | 3015 | none |
 | `lem-sc-finite-affine-derived-equivalence` | 3015 | none |
 | `lem-sc-finite-pushforward-derived-hom-qcoherent` | 3015 | none |
 | `lem-sc-p1-ext-connecting-yoneda` | 3015 | none |
@@ -44,7 +43,6 @@
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
-| `lem-pc-arrow-iso-pullback-counit` | 4010 | none |
 | `lem-pc-ideal-sheaf-comap-affine-extension` | 4010 | none |
 | `lem-pc-projection-formula` | 4010 | sorry_here |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
@@ -918,7 +916,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1319 nodes that wait for a statement dependency, 293 nodes that wait for stage 1.
+Not open yet: 1320 nodes that wait for a statement dependency, 291 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
