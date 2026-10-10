@@ -1,0 +1,79 @@
+{
+ "id": "lem-sc-irreducible-components-cover",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sc-function-field",
+   "place": "the statement's clause 'Equivalently it is the ring R(C) of rational functions on C: the germ map R(C) -> k(C) is a ring isomorphism', through the proof of lem-sc-rational-functions-generic-stalks (Stacks 01RV, first sentence of the proof: U_i = (U ∩ X_i) \\ ∪_{j≠i} X_j is contained in X_i and ∪ U_i is dense, which needs that X is the union of its irreducible components)",
+   "via": [
+    "lem-sc-rational-functions-generic-stalks"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Every irreducible subset lies in an irreducible component; the components cover the space",
+ "statement": "Let $X$ be a topological space. Every irreducible subset $T\\subseteq X$ [def-weil-irreducible-components] is contained in some irreducible component of $X$. In particular every point $x\\in X$ lies in some irreducible component of $X$ (apply this to the irreducible subset $\\{x\\}$), that is, $X$ is the union of its irreducible components.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 004W (label lemma-irreducible, line 886), parts (3) and (4)"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "every point lies in an irreducible component / irreducible subset contained in irreducible component",
+   "results": "none: the LeanSearch service answered HTTP 500 (Internal Server Error) to four queries between 13:41 and 13:45 UTC (date -u)",
+   "date": "2026-10-10",
+   "verdict": "search not available; covered by the Loogle, LeanFinder and grep searches below"
+  },
+  {
+   "tool": "loogle",
+   "query": "irreducibleComponents, IsIrreducible, Exists",
+   "results": "exists_mem_irreducibleComponents_subset_of_isIrreducible (Mathlib.Topology.Irreducible)",
+   "date": "2026-10-10",
+   "verdict": "match (part 1)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a topological space is the union of its irreducible components",
+   "results": "irreducibleComponents, irreducibleComponents_eq_singleton, irreducibleComponent_mem_irreducibleComponents, irreducibleSpace_def, IrreducibleSpace.isIrreducible_univ (Mathlib.Topology.Irreducible)",
+   "date": "2026-10-10",
+   "verdict": "match (part 2): irreducibleComponent_mem_irreducibleComponents with mem_irreducibleComponent"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem mem_irreducibleComponent\\|theorem irreducibleComponent_mem_irreducibleComponents\\|lemma exists_mem_irreducibleComponents_subset_of_isIrreducible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Irreducible.lean",
+   "results": "Irreducible.lean:128 exists_mem_irreducibleComponents_subset_of_isIrreducible (s) (hs : IsIrreducible s) : ∃ u ∈ irreducibleComponents X, s ⊆ u [@stacks 004W (3)]; :148 mem_irreducibleComponent : x ∈ irreducibleComponent x [@stacks 004W (4)]; :158 irreducibleComponent_mem_irreducibleComponents (x) : irreducibleComponent x ∈ irreducibleComponents X; irreducibleComponents X := {s | Maximal IsIrreducible s} (line 107)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "exists_mem_irreducibleComponents_subset_of_isIrreducible; mem_irreducibleComponent; irreducibleComponent_mem_irreducibleComponents",
+  "file": "Mathlib/Topology/Irreducible.lean",
+  "how": "exact: line 128 (exists_mem_irreducibleComponents_subset_of_isIrreducible) is the first sentence; lines 148 (mem_irreducibleComponent) and 158 (irreducibleComponent_mem_irreducibleComponents) give for each point x the component irreducibleComponent x containing it, the second sentence; Mathlib's irreducibleComponents (line 107) are the maximal irreducible subsets, as in def-weil-irreducible-components"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-rational-functions-generic-stalks",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-pic"
+}

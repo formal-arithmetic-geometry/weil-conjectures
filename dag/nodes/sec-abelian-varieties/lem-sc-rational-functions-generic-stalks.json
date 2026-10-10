@@ -25,9 +25,101 @@
   "def-weil-pbc-module-stalk",
   "def-pc-integral-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Setup (Stacks 01RV, proof, first sentence). By [lem-sc-irreducible-components-cover] $X=X_1\\cup\\dots\\cup X_n$, and each $X_k$ is closed [def-weil-irreducible-components]. Since $X_i=\\overline{\\{\\eta_i\\}}$ [def-sc-generic-point, lem-sc-scheme-sober], for $j\\neq i$ we have $\\eta_i\\notin X_j$: otherwise $X_i=\\overline{\\{\\eta_i\\}}\\subseteq X_j$ as $X_j$ is closed, and maximality of the irreducible subset $X_i$ gives $X_i=X_j$, against $i\\neq j$. Put $V_i:=X\\setminus\\bigcup_{j\\neq i}X_j$. It is open (complement of a finite union of closed sets), contains $\\eta_i$, is contained in $X_i$ (a point of $V_i$ lies in some $X_k$ by the cover, and $k=i$ is the only possibility), and $V_i\\cap V_j=\\emptyset$ for $i\\neq j$ (as $V_j\\cap X_i=\\emptyset$ and $V_i\\subseteq X_i$). Finally, for an open $W\\subseteq X$: $W\\cap X_i\\neq\\emptyset$ iff $\\eta_i\\in W$; indeed if $\\eta_i\\notin W$ then $\\eta_i$ lies in the closed set $X\\setminus W$, so $X_i=\\overline{\\{\\eta_i\\}}\\subseteq X\\setminus W$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "def-weil-irreducible-components",
+    "def-sc-generic-point",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), proof, first sentence: the sets U_i = (U ∩ X_i) \\ ∪_{j≠i} X_j"
+   }
+  },
+  {
+   "text": "Dense opens are the opens containing all generic points (first assertion; Stacks 01RV, proof, first sentence). Let $U$ be a dense open. The open set $V_i$ of step 1 is nonempty ($\\eta_i\\in V_i$), so the dense $U$ meets it, say in $y$; $y\\in V_i\\subseteq X_i$, so $U\\cap X_i\\neq\\emptyset$ and hence $\\eta_i\\in U$ by step 1. So $\\eta_1,\\dots,\\eta_n\\in U$. Conversely, if an open $W$ contains $\\eta_1,\\dots,\\eta_n$, its closure contains $\\overline{\\{\\eta_i\\}}=X_i$ for every $i$, hence contains $X_1\\cup\\dots\\cup X_n=X$: $W$ is dense. In particular, if $W_i$ is an open with $\\eta_i\\in W_i\\subseteq V_i$ for each $i$, then $W:=W_1\\cup\\dots\\cup W_n$ is a dense open subset of $X$ and a disjoint union of the $W_i$ (Stacks: '$U_i$ is nonempty open as it contains $\\eta_i$, contained in $X_i$, and $\\bigcup U_i\\subset U\\subset X$ is dense').",
+   "uses": [
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), proof, first sentence"
+   }
+  },
+  {
+   "text": "The map is a well defined ring homomorphism (Stacks 01RV, the string of equalities: $R(X)=\\operatorname{colim}_{U\\text{ dense}}\\mathcal O_X(U)$, the second equality being the description of $R(X)$ by sections). By [def-sc-rational-functions] $R(X)=\\varinjlim_U\\mathcal O_X(U)$ over the dense opens $U$. For a dense open $U$ we have $\\eta_i\\in U$ by step 2, so the germ maps $\\mathcal O_X(U)\\to\\mathcal O_{X,\\eta_i}$, $f\\mapsto f_{\\eta_i}$ [def-weil-pbc-module-stalk], are ring homomorphisms, and so is $\\varphi_U:\\mathcal O_X(U)\\to\\prod_i\\mathcal O_{X,\\eta_i}$, $f\\mapsto(f_{\\eta_i})_i$. They are compatible with restriction to a smaller dense open $W\\subseteq U$: $(f|_W)_{\\eta_i}=f_{\\eta_i}$, since $\\eta_i\\in W$ and germs are unchanged by restriction to a neighbourhood. Hence (universal property of the colimit, or directly: if $(U,f)\\sim(V,g)$ with $f|_W=g|_W$ on a dense open $W\\subseteq U\\cap V$, then $f_{\\eta_i}=(f|_W)_{\\eta_i}=(g|_W)_{\\eta_i}=g_{\\eta_i}$) they induce a well-defined ring homomorphism $\\varphi:R(X)\\to\\prod_i\\mathcal O_{X,\\eta_i}$, $[(U,f)]\\mapsto(f_{\\eta_1},\\dots,f_{\\eta_n})$; sums and products are respected because they are computed on $U\\cap V$ by restriction and germs are additive and multiplicative.",
+   "uses": [
+    "def-sc-rational-functions",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), proof, first and second equalities of the displayed string"
+   }
+  },
+  {
+   "text": "Injectivity (Stacks 01RV, third equality: the dense opens of the form $U_1\\sqcup\\dots\\sqcup U_n$ with $\\eta_i\\in U_i$ are cofinal, and $\\mathcal O_X(\\bigsqcup U_i)=\\prod\\mathcal O_X(U_i)$). Let $[(U,f)]\\in\\ker\\varphi$, so $f_{\\eta_i}=0$ for all $i$. By [def-weil-pbc-module-stalk] there is for each $i$ an open $W_i$ with $\\eta_i\\in W_i\\subseteq U$ and $f|_{W_i}=0$; replacing $W_i$ by $W_i\\cap V_i$ (step 1) we may assume $W_i\\subseteq V_i$. By step 2, $W=W_1\\sqcup\\dots\\sqcup W_n\\subseteq U$ is a dense open. Since $\\mathcal O_X$ is a sheaf [def-pc-scheme] and $W$ is covered by the $W_i$, the section $f|_W$, whose restrictions to all $W_i$ vanish, is $0$ (locality axiom). Thus $f|_W=0|_W$ on the dense open $W\\subseteq U$, so $(U,f)\\sim(U,0)$ and $[(U,f)]=0$ in $R(X)$ [def-sc-rational-functions]. Hence $\\varphi$ is injective.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-pc-scheme",
+    "def-sc-rational-functions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), proof, third equality of the displayed string"
+   }
+  },
+  {
+   "text": "Surjectivity (Stacks 01RV, third to fifth equalities: the colimit of $\\prod_i\\mathcal O_X(U_i)$ over the tuples $(U_i)$ with $\\eta_i\\in U_i$ is $\\prod_i\\varinjlim_{U_i\\ni\\eta_i}\\mathcal O_X(U_i)=\\prod_i\\mathcal O_{X,\\eta_i}$). Let $(s_1,\\dots,s_n)\\in\\prod_i\\mathcal O_{X,\\eta_i}$. By [def-weil-pbc-module-stalk] every element of a stalk is a germ: $s_i=(g_i)_{\\eta_i}$ for some open $W_i\\ni\\eta_i$ and $g_i\\in\\mathcal O_X(W_i)$; replacing $W_i$ by $W_i\\cap V_i$ and $g_i$ by its restriction (same germ) we may assume $W_i\\subseteq V_i$, so the $W_i$ are pairwise disjoint (step 1). On the open $W=W_1\\sqcup\\dots\\sqcup W_n$ the sections $g_i$ agree on all overlaps $W_i\\cap W_j=\\emptyset$ ($i\\neq j$), so by the gluing axiom of the sheaf $\\mathcal O_X$ [def-pc-scheme] there is $g\\in\\mathcal O_X(W)$ with $g|_{W_i}=g_i$. $W$ is dense by step 2, so $[(W,g)]\\in R(X)$ [def-sc-rational-functions], and $\\varphi([(W,g)])=(g_{\\eta_i})_i=((g|_{W_i})_{\\eta_i})_i=(s_i)_i$. Hence $\\varphi$ is surjective, and with steps 3 and 4 a ring isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-pc-scheme",
+    "def-sc-rational-functions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), proof, third, fourth and fifth equalities of the displayed string"
+   }
+  },
+  {
+   "text": "Integral case (Stacks 01RV, last sentence of the proof: 'The final statement follows from Algebra, Lemma 00EU'). If $X$ is integral it is nonempty and irreducible [def-pc-integral-scheme], so $X$ itself is an irreducible subset, and it is maximal (no subset is larger); any irreducible component $Z$ satisfies $Z\\subseteq X$, hence $Z=X$ by maximality of $Z$ [def-weil-irreducible-components]. So $n=1$, $X_1=X$, $\\eta_1=\\eta$ the generic point of $X$, and by steps 3 to 5 $R(X)\\cong\\mathcal O_{X,\\eta}$. Since $X$ is a nonempty scheme it has a nonempty affine open $U$ [def-pc-scheme], and [lem-sc-integral-function-field-affine-fraction] applied to $U$ says that $\\mathcal O_{X,\\eta}$ is a field. (That node is the step Stacks takes through 00EU: $\\mathcal O_X(U)$ is a domain, $\\eta$ is its minimal prime $(0)$, and the localization of a reduced ring at a minimal prime is a field.)",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-irreducible-components",
+    "def-pc-scheme",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), proof, last sentence, citing Algebra Lemma 00EU (label lemma-minimal-prime-reduced-ring, algebra.tex line 4543)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-irreducible-components-cover",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "lem-sc-scheme-sober",
+  "def-sc-rational-functions",
+  "def-weil-pbc-module-stalk",
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-function-field-affine-fraction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705) and its proof, the string of equalities written out elementwise; last step through Algebra Lemma 00EU (algebra.tex line 4543) as carried by lem-sc-integral-function-field-affine-fraction; Topology Lemma 004W (topology.tex line 886) for the cover by components"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -52,7 +144,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -73,5 +165,13 @@
   "declaration": "AlgebraicGeometry.Scheme.functionField, AlgebraicGeometry.instFieldCarrierFunctionField",
   "file": "Mathlib/AlgebraicGeometry/FunctionField.lean",
   "reason": "Lines 37 and 51 give O_{X,η} and that it is a field for integral X (the last clause); Mathlib has no ring of rational functions, so the isomorphism R(X) ≅ ∏ O_{X,η_i} has no counterpart."
- }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-rational-functions-generic-stalks",
+  "worker": "stage1",
+  "summary": "Split following Stacks 01RV's proof exactly: the sets V_i = X minus the other components (Stacks' U_i) are open, contain eta_i, lie in X_i and are pairwise disjoint (needs X = union of components, Topology 004W, new Mathlib leaf lem-sc-irreducible-components-cover); a dense open meets each V_i hence contains each eta_i, and an open containing all eta_i is dense; the germ maps give a well-defined ring map on the colimit R(X); Stacks' equalities colim_{U dense} O(U) = colim prod O(U_i) = prod colim O(U_i) = prod O_{X,eta_i} are written out as injectivity (locality of the sheaf on the disjoint cover by W_i ⊆ V_i) and surjectivity (gluing germs on disjoint W_i ⊆ V_i). The integral case: X irreducible is its own only component, and O_{X,eta} is a field by the existing Mathlib leaf lem-sc-integral-function-field-affine-fraction (the 00EU step). Statement unchanged; stmt_deps unchanged. The reduced clause of 01RV (R(X) = prod kappa(eta_i)) is not in the statement and not proved. No slopmaster2 declaration states the item (grep by id, 01RV, rational function names): rule 0 does not apply; Mathlib has no ring of rational functions.",
+  "blueprint": "The item is a created node serving def-sc-function-field's clause 'Equivalently it is the ring R(C) of rational functions on C: the germ map R(C) -> k(C) is a ring isomorphism' (steps 1-5) and 'for an integral curve ... k(C) = O_{C,eta} is a field' (step 6); def-sc-function-field is a definition with no proof text of its own, so these are clauses of its statement."
+ },
+ "reviewed": "2026-10-10 L: 6 steps along 01RV checked (opens V_i = X minus the other components; a dense open contains every generic point; the germ map well defined on the colimit; injective by locality on a disjoint cover; surjective by gluing; integral case via the affine-fraction leaf, the 00EU step). New Mathlib leaf lem-sc-irreducible-components-cover (004W (3),(4): Irreducible.lean 128/148/158, verified). The reduced clause of 01RV is not part of the item. LeanSearch down."
 }
