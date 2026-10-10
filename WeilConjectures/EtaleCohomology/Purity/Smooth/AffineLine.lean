@@ -201,6 +201,8 @@ theorem injective_upperStar_map_of_isFiniteLocallyConstantSheaf
     rw [hj]
     exact AffineSpace.dense_compl_range_zeroSection _ _)
 
+set_option linter.unusedSectionVars false in
+set_option linter.unusedVariables false in
 /-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
 
 *Uniqueness for lisse sheaf maps on `𝔾_{m,Y}`.* Two morphisms between finite locally constant
@@ -212,8 +214,25 @@ theorem injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf
     (i₁ : Y ⟶ G) (hi₁ : i₁ ≫ j = AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)
     (L M : Sheaf G.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsFiniteLocallyConstantSheaf L] [Scheme.IsFiniteLocallyConstantSheaf M] :
-    Function.Injective fun φ : L ⟶ M ↦ ((i₁)^*[ModuleCat.{u + 1} Λ]).map φ :=
-  sorry
+    Function.Injective fun φ : L ⟶ M ↦ ((i₁)^*[ModuleCat.{u + 1} Λ]).map φ := by
+  -- `i₁` is a section of the separated `G ⟶ Y`, hence a closed immersion
+  have hp : i₁ ≫ j ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y) = 𝟙 Y := by
+    rw [reassoc_of% hi₁, AffineSpace.oneSection_comp_over]
+  have : IsClosedImmersion (i₁ ≫ j ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)) := by
+    rw [hp]
+    infer_instance
+  have : IsClosedImmersion i₁ :=
+    IsClosedImmersion.of_comp i₁ (j ≫ (𝔸(ULift.{u} (Fin 1); Y) ↘ Y))
+  -- every fibre of `G ⟶ Y` is irreducible, being open in a fibre of `𝔸¹_Y ⟶ Y`
+  refine upperStar_map_injective_of_isPreconnected i₁ fun g ↦ ?_
+  let y := (𝔸(ULift.{u} (Fin 1); Y) ↘ Y).base (j.base g)
+  refine ⟨j.base ⁻¹' ((𝔸(ULift.{u} (Fin 1); Y) ↘ Y).base ⁻¹' {y}),
+    ((((𝔸(ULift.{u} (Fin 1); Y) ↘ Y).isIrreducible_preimage
+      (AffineSpace.isOpenMap_over (n := ULift.{u} (Fin 1)) Y)
+      isIrreducible_singleton).isPreirreducible.preimage j.isOpenEmbedding).isPreconnected),
+    rfl, i₁.base y, ?_, y, rfl⟩
+  have := congrArg (fun f : Y ⟶ Y ↦ f.base y) hp
+  simpa using this
 
 /-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
 
