@@ -1,8 +1,8 @@
 # Work queue
 
-919 items; claim with `tools/claim.py next <group> [--stage N]`.
+915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (334)
+## Stage 1: nodes to split (330)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -20,23 +20,19 @@
 | `lem-sc-boundary-cech-local-lifts` | 2013 | none |
 | `lem-sc-closed-pushforward-boundary-naturality` | 2013 | none |
 | `lem-sc-jacobson-denominator-function-field` | 2013 | none |
-| `lem-sc-proj-standard-open-basis` | 2013 | none |
 | `lem-sc-separated-affine-function-field-surjective` | 2013 | none |
 | `lem-sc-topological-leray-spectral-sequence` | 2013 | none |
-| `lem-sc-global-generation-nonvanishing-cover` | 2014 | none |
 | `lem-sc-invert-s-cohomology-affine-case` | 2014 | none |
 | `lem-sc-tensor-generating-sections` | 2014 | none |
 | `lem-sc-torsor-h1-zariski-boundary-class` | 2014 | none |
 | `lem-sc-zariski-ext-torsor` | 2014 | none |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 2015 | none |
 | `lem-sc-invert-s-cohomology-separated-induction` | 2015 | none |
-| `lem-weil-pbc-complex-spectral-sequence-comparison` | 3006 | none |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
 | `lem-exc-field-sections-stalk-invariants` | 3007 | none |
 | `lem-weil-pbc-derived-finite-product` | 3007 | none |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
 | `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
-| `lem-weil-pbc-etale-site-localization-open` | 3009 | none |
 | `lem-exc-etale-field-galois-classification` | 3010 | none |
 | `lem-sc-etale-fibre-product-base-change-coproduct` | 3010 | none |
 | `lem-sc-point-tangent-finite-local-cotangent-surjective` | 3011 | none |
@@ -52,7 +48,6 @@
 | `lem-pc-local-flat-faithful-flat-reflects-surjective` | 3013 | none |
 | `lem-pc-proper-geometrically-reduced-global-sections-separable` | 3013 | none |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 3013 | none |
-| `lem-sc-ext-sheaf-to-global-spectral-sequence` | 3013 | none |
 | `lem-sc-finite-flat-duality-evaluation` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
 | `lem-sc-p1-ext-yoneda-associativity` | 3013 | none |
@@ -68,6 +63,7 @@
 | `lem-sc-cech-comparison-map-iso-affine` | 3014 | none |
 | `lem-sc-cech-comparison-map-naturality` | 3014 | none |
 | `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
+| `lem-sc-ext-coherent-hom-injective-acyclic` | 3014 | none |
 | `lem-sc-open-map-irreducible-fibres-components` | 3014 | none |
 | `lem-sc-rhom-cohomology-ext-ring` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
@@ -931,7 +927,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 351 nodes that wait for stage 1, 1177 nodes that wait for a statement dependency.
+Not open yet: 347 nodes that wait for stage 1, 1182 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
