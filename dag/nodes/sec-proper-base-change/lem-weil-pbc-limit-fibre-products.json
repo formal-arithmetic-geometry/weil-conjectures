@@ -15,9 +15,53 @@
   "def-pc-scheme-fibre",
   "lem-weil-pbc-limit-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Limit comparison.) Apply the universal-property lemma [lem-kun-fibre-product-limits] to the compatible inverse systems $(X_i)$, $(S_i)$ and $(T_i)$. The canonical map from the limit of the fibre products to the fibre product of the three limits is an isomorphism. Inverting it and using the given identifications of $X$, $S$, and $T$ with their limits gives $X\\times_ST\\cong\\varprojlim_i(X_i\\times_{S_i}T_i)$, with the stated projections.",
+   "uses": [
+    "lem-kun-fibre-product-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-fibre-product-limits.md",
+    "place": "node lem-kun-fibre-product-limits, proof; Stacks Categories Tag 002M as cited in perfect.tex proof of Lemma Tag 0G7X, line 8166"
+   }
+  },
+  {
+   "text": "(Affine transition morphisms.) For $i'\\ge i$, the three comparison maps $X_{i'}\\to X_i$, $S_{i'}\\to S_i$, and $T_{i'}\\to T_i$ are affine by hypothesis and commute with the structure maps. The induced map $X_{i'}\\times_{S_{i'}}T_{i'}\\to X_i\\times_{S_i}T_i$ is therefore affine by [lem-weil-pbc-fibre-product-affine-transition]. In detail, the map first factors through the pullback along the affine diagonal of $S_{i'}\\to S_i$, and then through the fibre product of the affine maps on $X$ and $T$; stability under base change and composition are Tags 01SD and 01SC, while the affine diagonal/permanence is Tag 01SG. Thus the fibre products form an inverse system with affine transitions.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Lemmas Tags 01SD, 01SC, and 01SG, applied to the transition square"
+   }
+  },
+  {
+   "text": "(Scheme-theoretic fibres.) For $s\\in S$ with images $s_i\\in S_i$, the residue-field limit [lem-weil-pbc-limit-residue-field] identifies $\\operatorname{Spec}\\kappa(s)$ with $\\varprojlim_i\\operatorname{Spec}\\kappa(s_i)$ over the $S_i$. Apply the same limit-comparison argument of the first step to the diagrams $X_i\\to S_i\\leftarrow\\operatorname{Spec}\\kappa(s_i)$. It gives $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)\\cong\\varprojlim_i(X_i\\times_{S_i}\\operatorname{Spec}\\kappa(s_i))=\\varprojlim_iX_{s_i}$. The transition maps of these fibres are affine by the affine-transition lemma in the second step (with $T_i=\\operatorname{Spec}\\kappa(s_i)$), so they form the asserted affine inverse system.",
+   "uses": [
+    "lem-weil-pbc-limit-residue-field",
+    "lem-kun-fibre-product-limits",
+    "lem-weil-pbc-fibre-product-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories, proof of Lemma Tag 0G7X, line 8166: 'X_s = X x_S s = lim X_i x_{S_i} s_i = lim X_{i,s_i} because limits commute with limits', citing Categories Tag 002M"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-fibre-product-limits",
+  "lem-weil-pbc-fibre-product-affine-transition",
+  "lem-weil-pbc-limit-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories, proof of Lemma Tag 0G7X, line 8166, with Categories Tag 002M and Morphisms Tags 01SD, 01SC, 01SG"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,7 +86,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -62,5 +106,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-limit-fibre-products",
+  "worker": "stage1",
+  "summary": "Split the source argument at perfect.tex line 8166 into the categorical limit comparison, affine transition morphisms, and the residue-field fibre specialization. The categorical comparison is the existing imported generic lemma lem-kun-fibre-product-limits (Categories 002M); the affine transition assertion is isolated as the new reusable node lem-weil-pbc-fibre-product-affine-transition using Morphisms 01SD, 01SC, and 01SG. The fibre clause applies the same comparison to Spec kappa(s_i) using the existing residue-field limit node."
+ },
+ "tool_uses": [
+  "lem-kun-fibre-product-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: three steps: the categorical comparison (lem-kun-fibre-product-limits, imported, recorded in tool_uses by G1), affine transition morphisms via a new node (01SD/01SC/01SG, diagonal of an affine map), fibres via the residue-field node; tags verified"
+ }
 }
