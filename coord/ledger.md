@@ -1531,3 +1531,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of H1: lem-weil-pbc-tor-one-surjective-flat-middle returned (e360e6525): Reviewed in full (reviewer sub-agent of L). C1/C4/E5, step 2: 'since M tensor A is flat over A, tensoring this exact sequence with B preserves exactness' is car
 - 13:45 L: returned deliver/H1/lem-weil-pbc-tor-one-surjective-flat-middle (reviewer RETURN: C1/C4 exactness after tensoring not carried by a cited node, C2 step 3, F report copied from another item)
 - 13:45 L: accepted lem-sc-invertible-module-generic-stalk: 9 steps, no new nodes
+- 2026-10-10, delivery of E1: lem-weil-pbc-set-cech-nerve-free-resolution merged from deliver/E1/lem-weil-pbc-set-cech-nerve-free-resolution (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: a wrong label in a step source): 01GC/03AT read, 4 steps recomputed, small cases); claim closed

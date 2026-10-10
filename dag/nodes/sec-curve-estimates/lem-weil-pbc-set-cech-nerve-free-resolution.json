@@ -21,9 +21,60 @@
  "stmt_deps": [
   "def-weil-pbc-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Surjectivity of $f$ lets us choose one $\\sigma(b)\\in f^{-1}(b)$ for every $b\\in B$; thus $f\\sigma=\\operatorname{id}_B$. Define $R$-linear maps on the free-module bases [def-weil-pbc-free-module] by $h_{-1}[b]=[\\sigma(b)]$ and, for $n\\geq0$, $h_n[(a_0,\\ldots,a_n)]=[(\\sigma f(a_0),a_0,\\ldots,a_n)]$. All coordinates of the latter tuple have the same $f$-image, so $h_n$ lands in $R[A_{n+1}]$. The empty-set case is included: a surjection $A\\to\\varnothing$ forces $A=\\varnothing$, and the zero maps give the same formulas.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma Tag 03AT (label lemma-homology-complex), final paragraph: prefix a chosen element; applied separately to the fibres of $f$"
+   }
+  },
+  {
+   "text": "For $i<j$, deleting coordinate $j$ and then $i$ gives the same tuple as deleting $i$ and then $j-1$. In $\\partial^2$, these two terms have coefficients $(-1)^{i+j}$ and $(-1)^{i+j-1}$ and cancel; hence $\\partial^2=0$. In degree one, $\\varepsilon\\partial[(a_0,a_1)]=[f(a_1)]-[f(a_0)]=0$, since $(a_0,a_1)\\in A_1$; this is $\\varepsilon\\partial=0$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemmas Tags 03AS and 03AT (labels lemma-cech-covering-complex and lemma-homology-complex), alternating-face complex"
+   }
+  },
+  {
+   "text": "On a basis tuple $x=(a_0,\\ldots,a_n)$ with $n\\geq1$, the zeroth face of $h_n(x)$ is $x$. For $1\\leq j\\leq n+1$, its $j$th face is the prefixed tuple obtained by deleting $a_{j-1}$ from $x$; when $j=1$, its prefix is still $\\sigma f(a_0)$ because all entries of $x$ have the same image in $B$. Thus the remaining terms of $\\partial h_n(x)$ cancel term by term against $h_{n-1}\\partial(x)$, giving $\\partial h_n+h_{n-1}\\partial=\\operatorname{id}_{R[A_n]}$. For $n=0$, the two faces of $h_0[a]$ give $\\partial h_0[a]=[a]-[\\sigma f(a)]$, while $h_{-1}\\varepsilon[a]=[\\sigma f(a)]$. Finally $\\varepsilon h_{-1}[b]=[f\\sigma(b)]=[b]$. Linearity extends all three identities from basis elements to modules.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma Tag 03AT (label lemma-homology-complex), final paragraph, prefixing homotopy; Stacks 01GC applies this fibrewise to the nerve"
+   }
+  },
+  {
+   "text": "For $n>0$ and $z\\in\\ker\\partial\\subseteq R[A_n]$, step 3 gives $z=\\partial h_n(z)$, so $H_n=0$. In degree zero, a $z$ with $\\varepsilon(z)=0$ satisfies $z=\\partial h_0(z)$, and step 2 gives the reverse inclusion $\\operatorname{im}\\partial\\subseteq\\ker\\varepsilon$. Since $\\varepsilon h_{-1}=\\operatorname{id}$, the augmentation is onto; consequently $R[A_0]/\\operatorname{im}\\partial\\cong R[B]$, with the stated map on $H_0$. Together with step 2 these equalities prove exactness at every term, including $R[B]$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), proof, first paragraph, sectionwise Cech-nerve homology; explicit contraction from Tag 03AT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma Tag 03AT (label lemma-homology-complex), final paragraph, applied fibrewise; Hypercoverings, Lemma Tag 01GC (label lemma-compare-cosk0), proof, first paragraph"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +107,7 @@
   ],
   "note": "f : A -> B in Type is a split epi (surjective, choice); its augmented Cech nerve (wide pullbacks in Type = the A_n) has an extra degeneracy (:368); mapping along ModuleCat.free R (:96) and :415 give a homotopy equivalence of the alternating face map complex of R[A_bullet] with R[B] in degree 0, hence the homology. Three declarations plus the identification of the wide pullbacks, so a candidate, not a leaf. Alternatively the DAG node lem-weil-pbc-power-set-complex-contractible (unit sk-thm-p1) applied to each fibre f^{-1}(b) and summed over b."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +123,19 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-set-cech-nerve-free-resolution",
+  "worker": "stage1",
+  "summary": "Read Stacks 01GC and 03AT and supplied the omitted fibrewise contracting-homotopy calculation for the free R-module Cech nerve. The split gives the differential identities, an explicit section-based contraction in every degree including the augmentation, and exactness. No new node is needed; the only notion cited is the existing Mathlib leaf for free modules. No exact Lean declaration was found.",
+  "blueprint": "The blueprint ancestor lem-weil-pbc-hypercover-free-resolution, proof first paragraph, chooses a local vertex to contract a matching complex. Here step 1 chooses a vertex in each nonempty fibre of the set map, steps 2 and 3 verify the alternating-face cancellation and prefixing contraction, and step 4 obtains the degree-zero and positive-degree homology used by its Cech-nerve comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: a wrong label in a step source): 01GC/03AT read, 4 steps recomputed, small cases"
+ }
 }
