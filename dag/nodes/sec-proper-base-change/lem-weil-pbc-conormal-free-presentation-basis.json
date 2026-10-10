@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-conormal-free-presentation-basis",
+ "kind": "statement",
+ "title": "A presentation with free conormal module can be changed so that the relations form a basis of the conormal module (Huber)",
+ "statement": "Let $R$ be a commutative ring and $S$ a finitely presented $R$-algebra [def-weil-pbc-finitely-presented-algebra]. Assume that there are $n\\ge0$ and a surjective homomorphism of $R$-algebras $R[x_1,\\dots,x_n]\\to S$ [def-weil-pbc-mv-polynomial-ring] whose kernel $I$ has conormal module $I/I^2$ (an $S$-module) free as an $S$-module. Then there are integers $m,c\\ge0$, polynomials $f_1,\\dots,f_c\\in R[y_1,\\dots,y_m]$ and an isomorphism of $R$-algebras $R[y_1,\\dots,y_m]/(f_1,\\dots,f_c)\\cong S$ such that, with $J=(f_1,\\dots,f_c)$, the $S$-module $J/J^2$ is free with basis the classes $f_1\\bmod J^2,\\dots,f_c\\bmod J^2$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 07CF (lemma-huber, line 36520); used in the proofs of Algebra Lemma 00U9 (lemma-etale-standard-smooth, line 39265) and Smoothing Lemma 07CG"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if the conormal module I/I^2 is free then there is a presentation whose relations form a basis of the conormal module",
+   "results": "Module.free_iff_exists_presentation, Module.Presentation.ofExact_R, Algebra.Generators.exists_presentation_of_free_cotangent (Mathlib.RingTheory.Extension.Cotangent.Basis)",
+   "date": "2026-10-10",
+   "verdict": "match: Algebra.Generators.exists_presentation_of_free_cotangent"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_presentation_of\"",
+   "results": "Algebra.Generators.exists_presentation_of_basis_cotangent, Algebra.Generators.exists_presentation_of_free_cotangent (Mathlib.RingTheory.Extension.Cotangent.Basis)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'exists_presentation_of_free_cotangent\\|stacks 07CF' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Cotangent/Basis.lean; grep -n 'def Cotangent' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Basic.lean",
+   "results": "Basis.lean:286-293 @[stacks 07CF] exists_presentation_of_basis_cotangent; Basis.lean:337-344 @[stacks 07CF] exists_presentation_of_free_cotangent [Algebra.FinitePresentation R S] (P : Generators R S α) [Finite α] [Module.Free S P.toExtension.Cotangent] : ∃ P' : Presentation R S (Unit ⊕ α) (Unit ⊕ Fin (finrank S P.toExtension.Cotangent)), ∃ b : Basis _ S P'.toExtension.Cotangent, P'.val ∘ Sum.inr = P.val ∧ ∀ r, b r = Cotangent.mk ⟨P'.relation r, _⟩; Extension/Basic.lean:330 Cotangent := P.ker.Cotangent (= I/I^2)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.Generators.exists_presentation_of_free_cotangent (project ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.Generators.exists_presentation_of_free_cotangent, lemma, .lake/packages/mathlib/Mathlib/RingTheory/Extension/Cotangent/Basis.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Algebra.Generators.exists_presentation_of_free_cotangent",
+  "file": "Mathlib/RingTheory/Extension/Cotangent/Basis.lean",
+  "how": "exact (lines 337-344 read): the surjection R[x_1..x_n] -> S is a `Generators R S α` with `Finite α`; `P.toExtension.Cotangent` is `P.ker.Cotangent` = I/I^2 (Mathlib/RingTheory/Extension/Basic.lean:330); the output `Presentation R S (Unit ⊕ α) (Unit ⊕ Fin r)` is R[y_1..y_m]/(f_1..f_c) with m = 1 + n, c = 1 + r (finitely many variables and relations, relations spanning the kernel), and `b r = Cotangent.mk (relation r)` says the classes of the relations form a basis of J/J^2. Tagged @[stacks 07CF].",
+  "line": 337
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-retract-standard-smooth",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: Mathlib leaf (exists_presentation_of_free_cotangent, Basis.lean:337-344, tagged stacks 07CF); lines verified."
+}

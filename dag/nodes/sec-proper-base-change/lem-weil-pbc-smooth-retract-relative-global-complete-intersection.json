@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-smooth-retract-relative-global-complete-intersection",
+ "kind": "statement",
+ "title": "A smooth algebra is a retract of a relative global complete intersection smooth over it",
+ "statement": "Let $R$ be a commutative ring and $A$ a smooth $R$-algebra [def-weil-pbc-smooth-ring-map]. Then there are integers $n,c\\ge0$ and polynomials $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring] such that, writing $J=(f_1,\\dots,f_c)\\subseteq R[x_1,\\dots,x_n]$ and $C=R[x_1,\\dots,x_n]/J$: (1) $C=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection over $R$ [def-weil-pbc-relative-global-complete-intersection]; (2) the conormal module $J/J^2$, a $C$-module, is a free $C$-module with basis the classes $f_1\\bmod J^2,\\dots,f_c\\bmod J^2$; (3) there are homomorphisms of $R$-algebras $\\sigma:A\\to C$ and $\\pi:C\\to A$ with $\\pi\\circ\\sigma=\\mathrm{id}_A$ such that $C$, an $A$-algebra via $\\sigma$, is a smooth $A$-algebra [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07CG (lemma-syntomic-complete-intersection, line 567) and its proof (lines 580-588: Lemma 07CE lemma-improve-presentation gives A -> C with retraction; Algebra Lemma 07CF lemma-huber gives the presentation C = R[x_1..x_n]/(f_1..f_c) with the f_i mapping to a basis of J/J^2; fibre dimension n - c by Algebra Lemma 00SC lemma-lci). Stacks states 07CG for a syntomic ring map R -> A; this node is its case R -> A smooth (a smooth ring map is syntomic, Algebra Lemma 00TA lemma-smooth-syntomic), the only case used; clause (2) is the property of the presentation chosen in the proof, stated because Lemma 07CH uses it (the sequence 0 -> (+) C f_j -> (+) C dx_i)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-relative-global-complete-intersection"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "syntomic algebra has a smooth map to a relative global complete intersection with a retraction",
+   "results": "AlgebraicGeometry.IsSmooth.casesOn, retractionOfSectionOfKerSqZero (Mathlib.RingTheory.Smooth.Kaehler), RingHom.Smooth, Algebra.FormallySmooth.exists_kerProj_comp_eq_id (Mathlib.RingTheory.Smooth.AdicCompletion), AlgebraicGeometry.isSmoothOfRelativeDimension_comp: none about complete intersections",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth algebra A over R admits a smooth A-algebra C with a retraction C -> A such that C is a relative global complete intersection over R",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension, Algebra.smooth_iff, Algebra.Smooth, Algebra.IsStandardSmooth, Algebra.Smooth.exists_finiteType (Mathlib.RingTheory.Smooth.NoetherianDescent): none gives a retraction onto A",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'CompleteIntersection|complete intersection|relative global' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory; grep -rnE 'IsStandardSmooth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory | grep -iE 'retract|section|exists'",
+   "results": "only a docstring mention in Extension/Presentation/Basic.lean:103 ('is a complete intersection'); no notion of relative global complete intersection in Mathlib; IsStandardSmooth hits are composition and descent lemmas (RingHom/StandardSmooth.lean:94-110, Smooth/NoetherianDescent.lean:277)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-smooth-retract-standard-smooth",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
