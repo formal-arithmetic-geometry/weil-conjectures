@@ -1643,3 +1643,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:41 L: merged deliver/K1/lem-exc-continuous-cochains-short-exact (reviewer PASS; first push; new nodes: 0)
 - 14:41 L: merged deliver/H1/lemma-weil-pbc-fibre-product-limit (reviewer PASS; after a return; new nodes: 0)
 - 14:42 L: merged deliver/C1/lem-galois-inverse-image-representable (reviewer PASS; after a return; new nodes: 1)
+- 14:42 L: merged deliver/E1/lem-sc-generic-cohomology-comparison (reviewer FIX; first push; new nodes: 1)
