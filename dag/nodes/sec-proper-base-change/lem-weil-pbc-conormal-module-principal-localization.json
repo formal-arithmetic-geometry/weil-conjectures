@@ -12,9 +12,92 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-module-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The two complexes and their terms.) Let $P=R[x_1,\\dots,x_n]$, $Q=R[y_1,\\dots,y_m]$. Since $\\alpha$ is surjective, $S\\cong P/I$ and $I/I^2$ is an $P/I=S$-module; likewise $J/J^2$ is a $Q/J\\cong S_g$-module. Write $\\mathrm{NL}(\\alpha)$ for the two-term complex of $S$-modules $\\mathrm d_\\alpha:I/I^2\\to S\\otimes_P\\Omega_{P/R}$, $f\\bmod I^2\\mapsto1\\otimes\\mathrm df$, and $\\mathrm{NL}(\\beta)$ for $\\mathrm d_\\beta:J/J^2\\to S_g\\otimes_Q\\Omega_{Q/R}$ ($\\Omega$, $\\mathrm d$ as in [def-weil-pbc-kahler-differentials]). Let $K=\\mathrm{NL}(\\alpha)\\otimes_SS_g$ be the complex $\\mathrm d_K=\\mathrm d_\\alpha\\otimes1:K_1=(I/I^2)\\otimes_SS_g\\to K_0=(S\\otimes_P\\Omega_{P/R})\\otimes_SS_g=\\Omega_{P/R}\\otimes_PS_g$ of $S_g$-modules. By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] (for the $P$-algebra $S_g$, via $P\\to S\\to S_g$, and for the $Q$-algebra $S_g$ via $\\beta$), $K_0$ is a free $S_g$-module with basis $\\mathrm dx_1\\otimes1,\\dots,\\mathrm dx_n\\otimes1$ and $\\mathrm{NL}(\\beta)_0=S_g\\otimes_Q\\Omega_{Q/R}$ is free with basis $1\\otimes\\mathrm dy_1,\\dots,1\\otimes\\mathrm dy_m$; so $K_0\\cong S_g^{\\oplus n}$ and $\\mathrm{NL}(\\beta)_0\\cong S_g^{\\oplus m}$. By [lem-weil-pbc-localization-module-tensor] (ring $S$, element $g$, module $I/I^2$), $K_1=(I/I^2)\\otimes_SS_g\\cong(I/I^2)_g$ as $S_g$-modules [def-weil-pbc-module-localization-away].",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-weil-pbc-localization-module-tensor",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S6 (lemma-conormal-module-localize), lines 35787-35798; definition of NL(alpha) in Section Tag 00S0, lines 35188-35206"
+   }
+  },
+  {
+   "text": "(The presentation $\\beta'$ of $S_g$ built from $\\alpha$.) Since $\\alpha$ is surjective choose $f\\in P$ with $\\alpha(f)=g$. Let $P[x]=R[x_1,\\dots,x_n,x]$ be the polynomial ring in one more variable and $\\beta':P[x]\\to S_g$ the homomorphism of $R$-algebras which is $\\alpha$ followed by $S\\to S_g$ on $P$ and sends $x$ to $1/g$; let $J'=\\ker\\beta'$. By [lem-weil-pbc-principal-localization-naive-cotangent] (with $A=R$, $B=S$, the presentation $\\alpha$ on the variables $x_1,\\dots,x_n$, the element $g$ and this $f$), $\\beta'$ is surjective, and by its clause (3) there is an isomorphism of complexes of $S_g$-modules $\\Theta:K\\oplus C\\xrightarrow{\\sim}\\mathrm{NL}(\\beta')$, where $C$ is the complex $S_g\\xrightarrow{\\ g\\ }S_g$ and $\\mathrm{NL}(\\beta')$ is $\\mathrm d_{\\beta'}:J'/J'^2\\to\\Omega_{P[x]/R}\\otimes_{P[x]}S_g$, $u\\bmod J'^2\\mapsto\\mathrm du\\otimes1$; i.e. $S_g$-linear isomorphisms $\\Theta_1:K_1\\oplus S_g\\to J'/J'^2$, $\\Theta_0:K_0\\oplus S_g\\to\\Omega_{P[x]/R}\\otimes S_g$ with $\\mathrm d_{\\beta'}\\Theta_1=\\Theta_0(\\mathrm d_K\\oplus g)$.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-naive-cotangent",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S6 (lemma-conormal-module-localize), lines 35787-35798 ('Let beta' : R[x_1,...,x_n,x] -> S_g be the presentation of Lemma 08JZ constructed starting with alpha. Then NL(alpha) (x)_S S_g is homotopy equivalent to NL(beta')'); Lemma Tag 08JZ (lemma-principal-localization-NL, line 35605) (3)"
+   }
+  },
+  {
+   "text": "($K$ is homotopy equivalent to $\\mathrm{NL}(\\beta')$.) Put $u_i=\\Theta_i\\circ\\iota_i:K_i\\to\\mathrm{NL}(\\beta')_i$ and $v_i=\\pi_i\\circ\\Theta_i^{-1}:\\mathrm{NL}(\\beta')_i\\to K_i$ ($i=0,1$), where $\\iota_i:K_i\\to K_i\\oplus S_g$, $a\\mapsto(a,0)$, and $\\pi_i:K_i\\oplus S_g\\to K_i$, $(a,c)\\mapsto a$. Since $\\iota,\\pi$ commute with $\\mathrm d_K\\oplus g$ and $\\Theta$ is an isomorphism of complexes, $\\mathrm d_{\\beta'}u_1=u_0\\mathrm d_K$ and $\\mathrm d_Kv_1=v_0\\mathrm d_{\\beta'}$. Clearly $v_iu_i=\\pi_i\\iota_i=\\mathrm{id}_{K_i}$. Since $g$ is a unit of $S_g$, define $k:K_0\\oplus S_g\\to K_1\\oplus S_g$, $(a,c)\\mapsto(0,g^{-1}c)$. Then $k\\circ(\\mathrm d_K\\oplus g)(a,c)=(0,c)$ on $K_1\\oplus S_g$ and $(\\mathrm d_K\\oplus g)\\circ k(a,c)=(0,c)$ on $K_0\\oplus S_g$, i.e. both equal $\\mathrm{id}-\\iota_i\\pi_i$. Conjugating by $\\Theta$ and putting $H=\\Theta_1k\\Theta_0^{-1}:\\mathrm{NL}(\\beta')_0\\to\\mathrm{NL}(\\beta')_1$: $\\mathrm{id}-u_1v_1=\\Theta_1(\\mathrm{id}-\\iota_1\\pi_1)\\Theta_1^{-1}=H\\mathrm d_{\\beta'}$ and $\\mathrm{id}-u_0v_0=\\mathrm d_{\\beta'}H$. All maps are $S_g$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S6 (lemma-conormal-module-localize), lines 35787-35798; the splitting of the proof of Lemma Tag 08JZ, lines 35674-35688"
+   }
+  },
+  {
+   "text": "($\\mathrm{NL}(\\beta')$ is homotopy equivalent to $\\mathrm{NL}(\\beta)$.) $\\beta':P[x]\\to S_g$ and $\\beta:Q\\to S_g$ are surjective homomorphisms of $R$-algebras from polynomial rings over $R$ (on $n+1$ and $m$ variables) onto the $R$-algebra $S_g$, with kernels $J'$ and $J$. By [lem-weil-pbc-nl-presentations-homotopy-equivalent] (algebra $S_g$, presentations $\\beta'$, $\\beta$) there are $S_g$-linear maps $\\varphi_i:\\mathrm{NL}(\\beta')_i\\to\\mathrm{NL}(\\beta)_i$, $\\psi_i:\\mathrm{NL}(\\beta)_i\\to\\mathrm{NL}(\\beta')_i$ ($i=0,1$), $h:\\mathrm{NL}(\\beta')_0\\to J'/J'^2$ and $h':\\mathrm{NL}(\\beta)_0\\to J/J^2$ with $\\mathrm d_\\beta\\varphi_1=\\varphi_0\\mathrm d_{\\beta'}$, $\\mathrm d_{\\beta'}\\psi_1=\\psi_0\\mathrm d_\\beta$, $\\mathrm{id}-\\psi_1\\varphi_1=h\\mathrm d_{\\beta'}$, $\\mathrm{id}-\\psi_0\\varphi_0=\\mathrm d_{\\beta'}h$, $\\mathrm{id}-\\varphi_1\\psi_1=h'\\mathrm d_\\beta$, $\\mathrm{id}-\\varphi_0\\psi_0=\\mathrm d_\\beta h'$.",
+   "uses": [
+    "lem-weil-pbc-nl-presentations-homotopy-equivalent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S6 (lemma-conormal-module-localize), lines 35787-35798 ('We know that NL(beta) and NL(beta') are homotopy equivalent by Lemma 00S1'); Lemma Tag 00S1 (lemma-NL-homotopy, line 35274)"
+   }
+  },
+  {
+   "text": "(Composing the two homotopy equivalences.) Let $a_i=\\varphi_iu_i:K_i\\to\\mathrm{NL}(\\beta)_i$ and $b_i=v_i\\psi_i:\\mathrm{NL}(\\beta)_i\\to K_i$; they commute with the differentials ($\\mathrm d_\\beta a_1=\\varphi_0\\mathrm d_{\\beta'}u_1=\\varphi_0u_0\\mathrm d_K=a_0\\mathrm d_K$, and likewise $\\mathrm d_Kb_1=b_0\\mathrm d_\\beta$). Since $v_iu_i=\\mathrm{id}$ (step 3), $\\mathrm{id}-b_ia_i=v_i(\\mathrm{id}-\\psi_i\\varphi_i)u_i$; with step 4 and the chain-map identities this is $v_1h\\mathrm d_{\\beta'}u_1=(v_1hu_0)\\mathrm d_K$ in degree $1$ and $v_0\\mathrm d_{\\beta'}hu_0=\\mathrm d_K(v_1hu_0)$ in degree $0$. So $H_K:=v_1hu_0:K_0\\to K_1$ satisfies $\\mathrm{id}-b_1a_1=H_K\\mathrm d_K$, $\\mathrm{id}-b_0a_0=\\mathrm d_KH_K$. Further $\\mathrm{id}-a_ib_i=(\\mathrm{id}-\\varphi_i\\psi_i)+\\varphi_i(\\mathrm{id}-u_iv_i)\\psi_i$; by steps 3 and 4 this is $h'\\mathrm d_\\beta+\\varphi_1H\\mathrm d_{\\beta'}\\psi_1=(h'+\\varphi_1H\\psi_0)\\mathrm d_\\beta$ in degree $1$ and $\\mathrm d_\\beta h'+\\varphi_0\\mathrm d_{\\beta'}H\\psi_0=\\mathrm d_\\beta(h'+\\varphi_1H\\psi_0)$ in degree $0$. So $H_\\beta:=h'+\\varphi_1H\\psi_0:\\mathrm{NL}(\\beta)_0\\to J/J^2$ satisfies $\\mathrm{id}-a_1b_1=H_\\beta\\mathrm d_\\beta$, $\\mathrm{id}-a_0b_0=\\mathrm d_\\beta H_\\beta$. All these maps are $S_g$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S6 (lemma-conormal-module-localize), lines 35787-35798 ('We conclude that NL(alpha) (x)_S S_g is homotopy equivalent to NL(beta)')"
+   }
+  },
+  {
+   "text": "(Conclusion.) Apply [lem-weil-pbc-two-term-homotopy-equivalence-direct-sum] over the ring $S_g$ to $d_A=\\mathrm d_K:K_1\\to K_0$, $d_B=\\mathrm d_\\beta:J/J^2\\to\\mathrm{NL}(\\beta)_0$, the maps $a_i$, $b_i$ and the homotopies $H_K$, $H_\\beta$ of step 5: $K_1\\oplus\\mathrm{NL}(\\beta)_0\\cong J/J^2\\oplus K_0$ as $S_g$-modules. By step 1, $K_1\\cong(I/I^2)_g$, $\\mathrm{NL}(\\beta)_0\\cong S_g^{\\oplus m}$ and $K_0\\cong S_g^{\\oplus n}$, hence $(I/I^2)_g\\oplus S_g^{\\oplus m}\\cong J/J^2\\oplus S_g^{\\oplus n}$ as $S_g$-modules.",
+   "uses": [
+    "lem-weil-pbc-two-term-homotopy-equivalence-direct-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S6 (lemma-conormal-module-localize), lines 35787-35798 ('Finally, we apply Lemma 00S5'), i.e. the argument of the proof of Lemma Tag 00S5 (lemma-conormal-module, line 35761: 'See Lemmas 00S1 and 00S3'), Lemma Tag 00S3 (lemma-sum-two-terms, line 35709)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-localization-module-tensor",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-principal-localization-naive-cotangent",
+  "lem-weil-pbc-nl-presentations-homotopy-equivalent",
+  "lem-weil-pbc-two-term-homotopy-equivalence-direct-sum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00S6 (lemma-conormal-module-localize, line 35776), proof lines 35787-35798, with Lemmas Tag 08JZ, 00S1, 00S3 (the content of 00S5's proof)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +119,38 @@
    "results": "no 00S5/00S6 tag; cotangentCompLocalizationAwayEquiv (LocalizationAway.lean line 200, tagged @[stacks 08JZ \"(1)\"]) is J/J^2 = T (x)_S (I/I^2) x K/K^2 for the composite presentation R[X,Y] -> S_g built from P only, not a comparison with an arbitrary presentation beta of S_g; Generators.H1Cotangent.equiv (Basic.lean line 549) compares H1, not I/I^2",
    "date": "2026-10-10",
    "verdict": "no match (08JZ (1) is a special case of one presentation; the comparison 00S5 between arbitrary presentations is missing)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.Cotangent, Prod, LinearEquiv",
+   "results": "Algebra.Generators.cotangentCompLocalizationAwayEquiv, snd_cotangentCompLocalizationAwayEquiv, cotangentCompLocalizationAwayEquiv_symm_inr, cotangentCompLocalizationAwayEquiv_symm_inl (Mathlib.RingTheory.Extension.Cotangent.LocalizationAway)",
+   "date": "2026-10-10",
+   "verdict": "no match: only 08JZ (1) for the composite presentation R[X,Y] -> S_g built from P (read sed -n 120,135p and 192,205p of Extension/Cotangent/LocalizationAway.lean)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cotangent of a presentation of the localization S_g of an algebra S is the localization of the cotangent of a presentation of S plus a free module of rank one",
+   "results": "Algebra.Generators.cotangentCompLocalizationAwayEquiv, snd_cotangentCompLocalizationAwayEquiv, cMulXSubOneCotangent, snd_comp_cotangentCompLocalizationAwayEquiv, cotangentCompAwaySec(_apply)",
+   "date": "2026-10-10",
+   "verdict": "no match (step 2's ingredient, 08JZ (1), not the comparison with an arbitrary beta)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "conormal module I/I^2 of two presentations with n and m variables: I/I^2 × S^m ≃ J/J^2 × S^n",
+   "results": "Ideal.instModuleQuotientCotangent, Ideal.instModuleCotangentOfAlgebra, Ideal.Cotangent, Ideal.cotangentEquivIdeal, TensorProduct.tensorQuotMapSMulEquivTensorQuot",
+   "date": "2026-10-10",
+   "verdict": "no match (00S5 absent too)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Generators.defaultHom (project ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.Generators.defaultHom (Mathlib/RingTheory/Extension/Generators.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "the comparison morphism between two Generators exists (ingredient of step 4); no 00S5/00S6 declaration"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +170,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-conormal-module-principal-localization",
+  "worker": "stage1",
+  "summary": "Read Stacks 00S6 (lemma-conormal-module-localize, algebra.tex 35776) and its proof, and the statements and proofs of 08JZ, 00S1, 00S3, 00S5 (tags verified in tags/tags). Statement kept (Stacks' 'finite type' hypothesis is implied by the finite presentations alpha, beta). Proof in six steps following 00S6: the complexes K = NL(alpha) (x)_S S_g and NL(beta) with free degree-0 terms of ranks n and m (Kahler basis node, localization-tensor node); the presentation beta' : R[x_1..x_n,x] -> S_g of 08JZ and the isomorphism NL(beta') = K (+) (S_g -g-> S_g) of its clause (3) (existing node); K homotopy equivalent to NL(beta') (elementary: g is a unit, so the summand is contractible); NL(beta') homotopy equivalent to NL(beta) (new node, 00S1); composition of homotopy equivalences written out (elementary); conclusion by the new node for 00S3. The source's last sentence 'apply Lemma 00S5' is read as the argument of 00S5's proof (00S1 + 00S3): 00S5 itself compares two presentations of one algebra and K is not the NL of a presentation; the route through 00S5 for beta', beta would need cancelling a free summand S_g, which fails in general. Two new unsplit nodes: lem-weil-pbc-nl-presentations-homotopy-equivalent (00S1, Mathlib candidate Extension.Hom.sub with map_sub_map recorded), lem-weil-pbc-two-term-homotopy-equivalence-direct-sum (00S3, no Mathlib match). Item re-searched (loogle, leanfinder, leansearch, local_search): not in Mathlib."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps following Algebra 00S6 via the argument of 00S5's proof (not 00S5 itself, which does not apply to K = NL(alpha) (x) S_g; the worker's cancellation counterexample noted): the two complexes and their free degree-0 terms; the presentation beta' with NL(beta') = K + (S_g -> S_g, g) by clause (3) of the 08JZ node; K homotopy equivalent to NL(beta') (g a unit); NL(beta') homotopy equivalent to NL(beta) by a new unsplit node for 00S1; composition of homotopy equivalences written out; a new unsplit node for 00S3 (two-term homotopy equivalence gives A_1 + B_0 = B_1 + A_0). Statement unchanged. Stage-3 notes: lem-weil-pbc-localization-away-tensor-iso and lem-weil-pbc-localization-module-tensor look like duplicates; citer lci-conormal-free-rank-codimension step 6 refers to the wrong step."
+ }
 }

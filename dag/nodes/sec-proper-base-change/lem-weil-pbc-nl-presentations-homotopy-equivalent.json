@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-nl-presentations-homotopy-equivalent",
+ "kind": "statement",
+ "title": "Naive cotangent complexes of two presentations of the same algebra are homotopy equivalent",
+ "statement": "Let $R$ be a commutative ring and $S$ an $R$-algebra. Let $\\alpha:P\\to S$ and $\\alpha':P'\\to S$ be surjective homomorphisms of $R$-algebras, where $P=R[x_t,\\ t\\in T]$ and $P'=R[x'_u,\\ u\\in U]$ are polynomial rings over $R$ on arbitrary sets of variables [def-weil-pbc-mv-polynomial-ring]; let $I=\\ker\\alpha$, $I'=\\ker\\alpha'$. Then $I/I^2$ is an $S=P/I$-module and $I'/I'^2$ an $S=P'/I'$-module, and the maps $\\mathrm d_\\alpha:I/I^2\\to S\\otimes_P\\Omega_{P/R}$, $f\\bmod I^2\\mapsto1\\otimes\\mathrm df$, and $\\mathrm d_{\\alpha'}:I'/I'^2\\to S\\otimes_{P'}\\Omega_{P'/R}$, $f'\\bmod I'^2\\mapsto1\\otimes\\mathrm df'$ ($\\Omega$ and $\\mathrm d$ as in [def-weil-pbc-kahler-differentials]), are well defined and $S$-linear. There exist $S$-linear maps $$\\varphi_1:I/I^2\\to I'/I'^2,\\quad\\varphi_0:S\\otimes_P\\Omega_{P/R}\\to S\\otimes_{P'}\\Omega_{P'/R},\\quad\\psi_1:I'/I'^2\\to I/I^2,\\quad\\psi_0:S\\otimes_{P'}\\Omega_{P'/R}\\to S\\otimes_P\\Omega_{P/R},$$ $$h:S\\otimes_P\\Omega_{P/R}\\to I/I^2,\\qquad h':S\\otimes_{P'}\\Omega_{P'/R}\\to I'/I'^2$$ such that $\\mathrm d_{\\alpha'}\\circ\\varphi_1=\\varphi_0\\circ\\mathrm d_\\alpha$, $\\mathrm d_\\alpha\\circ\\psi_1=\\psi_0\\circ\\mathrm d_{\\alpha'}$, $$\\mathrm{id}_{I/I^2}-\\psi_1\\circ\\varphi_1=h\\circ\\mathrm d_\\alpha,\\qquad\\mathrm{id}_{S\\otimes_P\\Omega_{P/R}}-\\psi_0\\circ\\varphi_0=\\mathrm d_\\alpha\\circ h,$$ $$\\mathrm{id}_{I'/I'^2}-\\varphi_1\\circ\\psi_1=h'\\circ\\mathrm d_{\\alpha'},\\qquad\\mathrm{id}_{S\\otimes_{P'}\\Omega_{P'/R}}-\\varphi_0\\circ\\psi_0=\\mathrm d_{\\alpha'}\\circ h'.$$ Moreover $\\varphi_1,\\varphi_0$ may be taken to be the maps induced by any homomorphism of $R$-algebras $\\varphi:P\\to P'$ with $\\alpha'\\circ\\varphi=\\alpha$ (one exists), namely $\\varphi_1(f\\bmod I^2)=\\varphi(f)\\bmod I'^2$ and $\\varphi_0(s\\otimes\\mathrm dp)=s\\otimes\\mathrm d\\varphi(p)$, and likewise $\\psi_1,\\psi_0$ for any $R$-algebra map $\\psi:P'\\to P$ with $\\alpha\\circ\\psi=\\alpha'$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00S1 (lemma-NL-homotopy, statement lines 35273-35293), parts (1), (2), (3) and the proof of part (4) (lines 35295-35392), in the case R = R', S = S', phi = id; definitions of presentation and NL(alpha) in Section Tag 00S0, lines 35178-35242. Tags verified in stacks-project/tags/tags: 00S1,algebra-lemma-NL-homotopy."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "two morphisms of presentations induce homotopic maps of naive cotangent complexes, difference f1 - f2 gives map CotangentSpace to Cotangent",
+   "results": "Algebra.Extension.Cotangent.map_sub_map, Algebra.Extension.CotangentSpace.map_sub_map, Algebra.Extension.Hom.sub (Mathlib.RingTheory.Extension.Cotangent.Basic); CategoryTheory.InjectiveResolution.descHomotopy; homotopic (Mathlib.Algebra.Homology.HomotopyCategory)",
+   "date": "2026-10-10",
+   "verdict": "no match for the statement; the homotopy between two morphisms of presentations is in Mathlib (candidate below)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naive cotangent complexes of two presentations of the same algebra are homotopy equivalent",
+   "results": "Algebra.SubmersivePresentation.cotangentEquiv, Algebra.H1Cotangent.mapEquiv, Algebra.Generators.CotangentSpace.compEquiv, Algebra.Generators.H1Cotangent.δ_comp_equiv, KaehlerDifferential.quotientCotangentIdeal",
+   "date": "2026-10-10",
+   "verdict": "no match (H1-level statements and composite presentations only)"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Extension.Hom.sub",
+   "results": "Algebra.Extension.Hom.sub : P.CotangentSpace →ₗ[S] P'.Cotangent; Algebra.Extension.Cotangent.map_sub_map : map f - map g = f.sub g ∘ₗ P.cotangentComplex; Algebra.Extension.CotangentSpace.map_sub_map : map f - map g = P'.cotangentComplex ∘ₗ f.sub g; Hom.sub_one_tmul, Hom.sub_tmul",
+   "date": "2026-10-10",
+   "verdict": "the homotopy of 00S1 (2) exists; no declaration packages the homotopy equivalence of 00S1 (4)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'def Hom.sub\\|map_sub_map\\|stacks 00S' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Cotangent/Basic.lean; grep -rn 'stacks 00S1\\|stacks 00S3' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn 'def defaultHom' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/; sed -n 205,330p and 540,560p Extension/Cotangent/Basic.lean",
+   "results": "Extension/Cotangent/Basic.lean: Hom.sub (line 252), CotangentSpace.map_sub_map (line 290), Cotangent.map_sub_map (line 311), Generators.H1Cotangent.equiv (line 549, H1 only); Generators.defaultHom (Generators.lean line 468); Extension/Basic.lean: Cotangent.map_id (488), Cotangent.map_comp (498); Extension/Cotangent/Basic.lean: CotangentSpace.map_id (173), map_comp (176), map_comp_cotangentComplex (205); no stacks 00S1 tag",
+   "date": "2026-10-10",
+   "verdict": "no single declaration; assembling the six maps and four identities from these is more than one line"
+  },
+  {
+   "tool": "local_search",
+   "query": "Generators.defaultHom (project ~/weil-conjectures-slopmaster2)",
+   "results": "Algebra.Generators.defaultHom (Mathlib/RingTheory/Extension/Generators.lean); index: unavailable",
+   "date": "2026-10-10",
+   "verdict": "name exists; not a verdict on absence"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "Algebra.Generators.defaultHom, Algebra.Generators.Hom.toExtensionHom, Algebra.Extension.Cotangent.map, Algebra.Extension.CotangentSpace.map, Algebra.Extension.Hom.sub, Algebra.Extension.Cotangent.map_sub_map, Algebra.Extension.CotangentSpace.map_sub_map, Cotangent.map_comp, CotangentSpace.map_comp, map_comp_cotangentComplex",
+  "file": "Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+  "how": "Not a leaf: with Generators P, P' of S over R, f = (defaultHom P P').toExtensionHom and g = (defaultHom P' P).toExtensionHom (Generators.lean line 468, Hom.toExtensionHom line 600), phi_1 = Cotangent.map f (Extension/Basic.lean line 465), phi_0 = CotangentSpace.map f (Cotangent/Basic.lean line 147), chain-map identity map_comp_cotangentComplex (line 205); the homotopy h = (g.comp f).sub (Hom.id _) (Hom.sub, line 252) with Cotangent.map_sub_map (line 311) and CotangentSpace.map_sub_map (line 290), after rewriting map (g.comp f) = map g ∘ map f (Cotangent.map_comp, Extension/Basic.lean line 498; CotangentSpace.map_comp, Cotangent/Basic.lean line 176) and map id = id (lines 488, 173). Read with sed -n 205,330p and 540,560p on Extension/Cotangent/Basic.lean on 2026-10-10. A short proof from these, but several declarations and a composition argument, not one line."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-conormal-module-principal-localization",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
