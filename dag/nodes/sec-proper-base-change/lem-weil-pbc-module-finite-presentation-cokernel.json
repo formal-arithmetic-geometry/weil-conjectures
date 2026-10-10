@@ -2,17 +2,123 @@
  "id": "lem-weil-pbc-module-finite-presentation-cokernel",
  "kind": "statement",
  "title": "Cokernels of maps between finite-presentation modules are finite presentation",
- "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, let $\\mathcal G,\\mathcal H$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and let $f:\\mathcal G\\to\\mathcal H$ be $\\mathcal O_X$-linear. If $\\mathcal G$ is of finite type (locally a quotient of $\\mathcal O_X^{\\oplus m}$ with $m$ finite) and $\\mathcal H$ is of finite presentation (locally the cokernel of $\\mathcal O_X^{\\oplus r}\\to\\mathcal O_X^{\\oplus n}$ with $r,n$ finite), then the cokernel of $f$ in $\\Mod(\\mathcal O_X)$ is of finite presentation. In particular this holds when both $\\mathcal G$ and $\\mathcal H$ are of finite presentation.",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, let $\\mathcal G,\\mathcal H$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and let $f:\\mathcal G\\to\\mathcal H$ be $\\mathcal O_X$-linear. If $\\mathcal G$ is of finite type (locally a quotient of $\\mathcal O_X^{\\oplus m}$ with $m$ finite) and $\\mathcal H$ is of finite presentation (locally the cokernel of $\\mathcal O_X^{\\oplus r}\\to\\mathcal O_X^{\\oplus n}$ with $r,n$ finite) [def-weil-pbc-module-finite-type-presentation], then the cokernel of $f$ in $\\Mod(\\mathcal O_X)$ is of finite presentation. In particular this holds when both $\\mathcal G$ and $\\mathcal H$ are of finite presentation.",
  "source": {
   "document": "literature/stacks-project/modules.tex",
   "place": "Modules, Lemma 0H96 (lemma-cokernel-finite-finite-presentation), lines 1431-1450; used in Properties, Lemma 01PJ, lines 3112-3116"
  },
  "stmt_deps": [
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-finite-type-presentation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Preliminaries on restriction to opens. For an open $U\\subseteq X$, $\\Mod(\\mathcal O_U)$ is abelian with sectionwise kernels [def-weil-sheaf-of-modules-category], and $\\mathcal M\\mapsto\\mathcal M|_U$, $\\psi\\mapsto\\psi|_U$ ($(\\psi|_U)_W=\\psi_W$) is a functor with $(\\mathcal M|_U)|_V=\\mathcal M|_V$ for $V\\subseteq U$. (a) Restriction preserves epimorphisms and exactness of complexes: by [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1) and (2) both are local lifting conditions over all opens $W$ and open coverings of them, and for $\\mathcal M|_U$ these are the same conditions over the opens $W\\subseteq U$. (b) If $c:\\mathcal H\\to\\mathcal C$ is a cokernel of $f:\\mathcal G\\to\\mathcal H$, then $c|_U$ is a cokernel of $f|_U$: the complex $\\mathcal G\\xrightarrow{f}\\mathcal H\\xrightarrow{c}\\mathcal C$ is exact at $\\mathcal H$, the image of $f$ being by definition the kernel of its cokernel [def-weil-pbc-exact-sequence], and $c$ is an epimorphism; by (a) $\\mathcal G|_U\\to\\mathcal H|_U\\to\\mathcal C|_U$ is exact at $\\mathcal H|_U$ with $c|_U$ an epimorphism, so $c|_U$ is a cokernel of $f|_U$ by [lem-weil-pbc-abelian-exact-epi-cokernel] (a). (c) By [def-weil-pbc-module-finite-type-presentation] both 'of finite type' and 'of finite presentation' are conditions on open neighbourhoods of the points, so $\\mathcal M$ has the property if every point has an open neighbourhood $U$ with $\\mathcal M|_U$ having it as an $\\mathcal O_U$-module, and conversely $\\mathcal M|_U$ has it if $\\mathcal M$ has it (since $(\\mathcal M|_U)|_V=\\mathcal M|_V$). Both properties pass to isomorphic modules (compose the local epimorphism, resp. the local isomorphism with a cokernel, with the isomorphism restricted to $U$). (d) $\\mathcal O_U^{\\oplus m}$ is of finite type (the identity map, sections $e_1,\\dots,e_m$). (e) A module of finite presentation is of finite type: if $\\theta:\\operatorname{Coker}(\\alpha)\\xrightarrow{\\sim}\\mathcal F|_U$ with $\\alpha:\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}$ and cokernel map $c_\\alpha$, then $\\theta\\circ c_\\alpha:\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$ is an epimorphism (a cokernel map followed by an isomorphism), and it is the map of the $n$ sections $\\theta c_\\alpha(e_i)$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-epi-cokernel",
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 0H96 (lemma-cokernel-finite-finite-presentation), proof, lines 1440-1454 ('Locally on X'); Definitions 01B5 (line 810) and 01BN (line 1378)"
+   }
+  },
+  {
+   "text": "Reduction to a presentation of $\\mathcal H$ on all of the space. Let $c:\\mathcal H\\to\\mathcal C$ be the cokernel of $f$ in $\\Mod(\\mathcal O_X)$ and $x\\in X$. Since $\\mathcal H$ is of finite presentation [def-weil-pbc-module-finite-type-presentation] there are an open $U\\ni x$, a map $\\alpha:\\mathcal O_U^{\\oplus m}\\to\\mathcal O_U^{\\oplus n}$ with cokernel map $c_\\alpha$ and an isomorphism $\\theta:\\operatorname{Coker}\\alpha\\to\\mathcal H|_U$; put $\\pi=\\theta\\circ c_\\alpha:\\mathcal O_U^{\\oplus n}\\to\\mathcal H|_U$. Then $\\pi$ is an epimorphism and $\\pi\\alpha=0$, and the complex $\\mathcal O_U^{\\oplus m}\\xrightarrow{\\alpha}\\mathcal O_U^{\\oplus n}\\xrightarrow{\\pi}\\mathcal H|_U$ is exact at $\\mathcal O_U^{\\oplus n}$: the image of $\\alpha$ is the kernel of $c_\\alpha$ by definition [def-weil-pbc-exact-sequence], and $\\operatorname{Ker}\\pi=\\operatorname{Ker}c_\\alpha$ since $\\theta_W$ is injective on every open $W$ (kernels are sectionwise [def-weil-sheaf-of-modules-category]). By step 1 (b) $c|_U$ is a cokernel of $f|_U$, and by step 1 (c) $\\mathcal G|_U$ is of finite type. By step 1 (c) it suffices to show that $\\mathcal C|_U$ is of finite presentation for each such $U$. Replacing $X$ by $U$ and $\\mathcal G,\\mathcal H,f,c$ by their restrictions, we may and do assume from now on that $U=X$: there is an exact sequence $\\mathcal O_X^{\\oplus m}\\xrightarrow{\\alpha}\\mathcal O_X^{\\oplus n}\\xrightarrow{\\pi}\\mathcal H\\to0$, $\\mathcal G$ is of finite type, and $c:\\mathcal H\\to\\mathcal C$ is a cokernel of $f$.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 0H96 (lemma-cokernel-finite-finite-presentation), proof, lines 1440-1454: 'Locally on X, we can write F = O_X^n / M'"
+   }
+  },
+  {
+   "text": "The relations module $\\mathcal M$ is of finite type. Let $\\mathcal M=\\operatorname{Ker}\\pi\\subseteq\\mathcal O_X^{\\oplus n}$, the sub-$\\mathcal O_X$-module $W\\mapsto\\ker\\pi_W$ with inclusion $j$ [def-weil-sheaf-of-modules-category], and $\\alpha':\\mathcal O_X^{\\oplus m}\\to\\mathcal M$ the map with $j\\alpha'=\\alpha$ (it exists since $\\pi\\alpha=0$). As $\\mathcal O_X^{\\oplus m}\\to\\mathcal O_X^{\\oplus n}\\to\\mathcal H$ is exact at $\\mathcal O_X^{\\oplus n}$ (step 2), $\\alpha'$ is an epimorphism by [lem-weil-pbc-abelian-exact-iff-epi-kernel-lift]. $\\mathcal O_X^{\\oplus m}$ is of finite type (step 1 (d)), so $\\mathcal M$ is of finite type by [lem-weil-pbc-module-finite-type-image-extension] (1).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+    "lem-weil-pbc-module-finite-type-image-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 0H96 (lemma-cokernel-finite-finite-presentation), proof, lines 1440-1454: 'M ⊂ O_X^n is a finite type O_X-submodule'"
+   }
+  },
+  {
+   "text": "The image of $f$ is of finite type. Let $\\mathcal I=\\operatorname{Ker}c\\subseteq\\mathcal H$ (sectionwise, $\\mathcal I(W)=\\ker c_W$) with inclusion $i$; this is the image of $f$ [def-weil-pbc-exact-sequence]. Since $cf=0$, $f=i\\circ f'$ for a unique $f':\\mathcal G\\to\\mathcal I$. The complex $\\mathcal G\\xrightarrow{f}\\mathcal H\\xrightarrow{c}\\mathcal C$ is exact at $\\mathcal H$ (step 1 (b)), so $f'$ is an epimorphism by [lem-weil-pbc-abelian-exact-iff-epi-kernel-lift]; as $\\mathcal G$ is of finite type, $\\mathcal I$ is of finite type by [lem-weil-pbc-module-finite-type-image-extension] (1).",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+    "lem-weil-pbc-module-finite-type-image-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 0H96 (lemma-cokernel-finite-finite-presentation), proof, lines 1440-1454: 'The O_X-module Im(φ) is of finite type because G → Im(φ) is surjective and G is finite type'"
+   }
+  },
+  {
+   "text": "The preimage $\\mathcal N$ of the image is of finite type. Let $\\mathcal N=\\operatorname{Ker}(c\\pi)\\subseteq\\mathcal O_X^{\\oplus n}$, sectionwise $\\mathcal N(W)=\\{t\\in\\mathcal O_X^{\\oplus n}(W):c_W(\\pi_W(t))=0\\}=\\{t:\\pi_W(t)\\in\\mathcal I(W)\\}$ [def-weil-sheaf-of-modules-category]. Then $\\mathcal M(W)\\subseteq\\mathcal N(W)$ for all $W$, giving an inclusion $\\mathcal M\\to\\mathcal N$, which is a monomorphism (injective on every $W$, so its sectionwise kernel is $0$), and $\\pi$ restricts to $p:\\mathcal N\\to\\mathcal I$, $p_W(t)=\\pi_W(t)$, with $p\\circ(\\mathcal M\\to\\mathcal N)=0$. $p$ is an epimorphism by [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (1): for $s\\in\\mathcal I(W)\\subseteq\\mathcal H(W)$, $\\pi$ being an epimorphism, the same lemma (1) gives an open covering $W=\\bigcup_kW_k$ and $t_k\\in\\mathcal O_X^{\\oplus n}(W_k)$ with $\\pi(t_k)=s|_{W_k}$; then $c\\pi(t_k)=c(s)|_{W_k}=0$, so $t_k\\in\\mathcal N(W_k)$ and $p(t_k)=s|_{W_k}$. The complex $\\mathcal M\\to\\mathcal N\\xrightarrow{p}\\mathcal I$ is exact at $\\mathcal N$ by [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (2): if $t\\in\\mathcal N(W)$ and $p(t)=0$ then $\\pi(t)=0$, i.e. $t\\in\\mathcal M(W)$ (trivial covering). Hence $0\\to\\mathcal M\\to\\mathcal N\\xrightarrow{p}\\mathcal I\\to0$ is a short exact sequence [def-weil-pbc-exact-sequence] (this is $\\operatorname{Im}(f)=\\mathcal N/\\mathcal M$ of the source). $\\mathcal M$ (step 3) and $\\mathcal I$ (step 4) are of finite type, so $\\mathcal N$ is of finite type by [lem-weil-pbc-module-finite-type-image-extension] (2).",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-module-finite-type-image-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 0H96 (lemma-cokernel-finite-finite-presentation), proof, lines 1440-1454: 'Im(φ) = N/M ... By Lemma 01B7, N is finite type' (Lemma 01B7, label lemma-extension-finite-type, line 855)"
+   }
+  },
+  {
+   "text": "$\\mathcal C=\\mathcal O_X^{\\oplus n}/\\mathcal N$ is of finite presentation. Let $y\\in X$. As $\\mathcal N$ is of finite type [def-weil-pbc-module-finite-type-presentation], there are an open $V\\ni y$ and sections $t_1,\\dots,t_s\\in\\mathcal N(V)$ whose map $\\beta:\\mathcal O_V^{\\oplus s}\\to\\mathcal N|_V$ is an epimorphism. Let $k:\\mathcal N\\to\\mathcal O_X^{\\oplus n}$ be the inclusion and $\\gamma=k|_V\\circ\\beta:\\mathcal O_V^{\\oplus s}\\to\\mathcal O_V^{\\oplus n}$ (the map of the sections $t_l$ viewed in $\\mathcal O_X^{\\oplus n}(V)$). The complex $\\mathcal O_V^{\\oplus s}\\xrightarrow{\\gamma}\\mathcal O_V^{\\oplus n}\\xrightarrow{(c\\pi)|_V}\\mathcal C|_V$ has composite $0$ (as $c\\pi k=0$) and is exact at $\\mathcal O_V^{\\oplus n}$ by [lem-weil-pbc-ringed-space-module-exactness-local-lifting] (2): for $W\\subseteq V$ and $t\\in\\mathcal O_X^{\\oplus n}(W)$ with $c\\pi(t)=0$ we have $t\\in\\mathcal N(W)$, and since $\\beta$ is an epimorphism the same lemma (1) gives a covering $W=\\bigcup_kW_k$ and $u_k\\in\\mathcal O_V^{\\oplus s}(W_k)$ with $\\beta(u_k)=t|_{W_k}$, i.e. $\\gamma(u_k)=t|_{W_k}$. Moreover $c\\pi$ is an epimorphism (a cokernel map composed with the epimorphism $\\pi$), hence so is $(c\\pi)|_V$ (step 1 (a)). By [lem-weil-pbc-abelian-exact-epi-cokernel] (a), $(c\\pi)|_V$ is a cokernel of $\\gamma$ in $\\Mod(\\mathcal O_V)$, so $\\mathcal C|_V$ is isomorphic to the cokernel of $\\gamma:\\mathcal O_V^{\\oplus s}\\to\\mathcal O_V^{\\oplus n}$ (two cokernels of the same morphism are isomorphic by their universal properties). As $y$ was arbitrary, $\\mathcal C$ is of finite presentation [def-weil-pbc-module-finite-type-presentation]; by step 2 this proves that $\\operatorname{Coker}f$ is of finite presentation.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation",
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 0H96 (lemma-cokernel-finite-finite-presentation), proof, lines 1440-1454: 'Thus Coker(φ) = O_X^n/N is finitely presented'"
+   }
+  },
+  {
+   "text": "The final clause: if $\\mathcal G$ and $\\mathcal H$ are both of finite presentation, $\\mathcal G$ is of finite type by step 1 (e) [def-weil-pbc-module-finite-type-presentation], and steps 2-6 apply.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Modules, Lemma 0H96 statement (lines 1431-1438) with Definitions 01B5, 01BN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "def-weil-pbc-module-finite-type-presentation",
+  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+  "lem-weil-pbc-module-finite-type-image-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules, Lemma 0H96 (label lemma-cokernel-finite-finite-presentation), proof, lines 1440-1454; tag verified in stacks-project/tags/tags (0H96,modules-lemma-cokernel-finite-finite-presentation)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -34,10 +140,31 @@
    "results": "No sheaf cokernel closure theorem",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cokernel of a morphism from a finite type sheaf of modules to a finitely presented sheaf of modules is finitely presented",
+   "results": "Module.Presentation.cokernel, Module.Presentation.ofExact, Module.finitePresentation_of_ker, Module.FinitePresentation.fg_ker_iff (modules over a ring only), CategoryTheory.Limits.cokernel",
+   "date": "2026-10-10",
+   "verdict": "no match (ring-level only)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient of a finitely presented sheaf of modules by the image of a finite type sheaf is finitely presented",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation(.isFinite_presentation), IsFinitePresentation.exists_quasicoherentData, instIsFiniteTypeOfIsFinitePresentation, quasicoherentDataOfIsFinitePresentation (definitions and instances only)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln IsFinitePresentation ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; grep -rn cokernel ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/*.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules/*.lean | grep -i finite",
+   "results": "IsFinitePresentation only in Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean (definitions, instances to IsFiniteType/IsQuasicoherent); no closure of finite presentation under cokernels",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +184,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-module-finite-presentation-cokernel",
+  "worker": "stage1",
+  "summary": "Proof written from Stacks Modules 0H96 (modules.tex lines 1440-1454) in 7 steps: restriction to opens preserves epis/exactness/cokernels and the two finiteness notions are local and isomorphism-invariant (step 1); reduction to a global presentation O^m -> O^n -> H -> 0 (step 2); M = Ker(pi) finite type (image of O^m, 01B7 (1)); Im f finite type (01B7 (1)); N = Ker(c pi) sits in 0 -> M -> N -> Im f -> 0, so finite type (01B7 (2)); locally O^s -> N -> O^n has cokernel C|_V (step 6); the 'in particular' clause via finite presentation => finite type. The notions 'finite type' and 'finite presentation' now cite the new definition node def-weil-pbc-module-finite-type-presentation (Stacks 01B5, 01BN; Mathlib leaf SheafOfModules.IsFiniteType / IsFinitePresentation). Statement unchanged apart from the citation. Mathlib re-searched with LeanSearch, LeanFinder and grep: absent."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "7 steps following Stacks 0H96 with the implicit parts written out: restriction to opens preserves exactness and cokernels, locality of the finiteness notions; reduction to a presentation O^m -> O^n -> H on the space; the relations module and the image of f are of finite type (01B7 node); their extension N = Ker(c pi) is of finite type; near each point a surjection O^s -> N gives O^s -> O^n with cokernel Coker f. New definition leaf def-weil-pbc-module-finite-type-presentation (01B5/01BN; SheafOfModules.IsFiniteType Generators.lean:142 and IsFinitePresentation Quasicoherent.lean:267 with the two translating declarations :114/:123, verified by L; accepted as a leaf because Mathlib supplies the translation). Statement now cites the definition."
+ }
 }

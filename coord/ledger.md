@@ -849,3 +849,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:05 L: reviewed lem-weil-pbc-ml-cohomology-powers-ideal (6 steps, +02OA (2),(3) node; Stacks 02OB cites 02OA (4) where (3) is used): accepted.
 - 04:06 L: reviewed lem-weil-pbc-make-separably-generated (10 steps, +5 leaves, +031V node): accepted.
 - 04:08 L: reviewed lem-weil-pbc-module-cohomology-fmap-basic-properties (8 steps, 0 new): accepted.
+- 04:10 L: reviewed lem-weil-pbc-module-finite-presentation-cokernel (7 steps, +def-weil-pbc-module-finite-type-presentation leaf): accepted.
