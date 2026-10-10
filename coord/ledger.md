@@ -2493,3 +2493,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:13 L: merged deliver/J1/lem-sc-hilbert-polynomial (reviewer FIX; after a return; new nodes: 3)
 - 20:14 L: merged deliver/G1/lem-pc-derived-functor-truncation-stabilization (reviewer FIX; first push; new nodes: 1)
 - 20:14 L: merged deliver/J1/lem-sc-filtered-colimit-prime-chain-dimension (reviewer FIX; first push; new nodes: 0)
+- 20:14 L: merged deliver/C1/lem-sp-cartan-eilenberg-exists (reviewer FIX+NODE(1); first push; new nodes: 1)

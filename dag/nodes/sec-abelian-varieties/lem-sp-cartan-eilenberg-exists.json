@@ -22,9 +22,69 @@
   "def-sp-double-complex-total",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the given bound with $n=0$, and put $Z^p=\\ker(d_K^p)$, $B^p=\\operatorname{im}(d_K^{p-1})$, and $H^p=Z^p/B^p$. Exactness of kernels, images, and cokernels in the abelian category gives the alternating short exact sequences $0\\to Z^0\\to K^0\\to B^1\\to0$, $0\\to B^1\\to Z^1\\to H^1\\to0$, and the analogous pair in every later degree.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015I (lemma-cartan-eilenberg), proof: decomposition into the alternating short exact sequences"
+   }
+  },
+  {
+   "text": "Choose an injective resolution $Z^0\\to J_Z^{0,\\bullet}$ with $J_Z^{0,q}=0$ for $q<0$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1). Apply the horseshoe lemma with prescribed end resolutions [lem-sp-horseshoe-prescribed-resolutions] to $0\\to Z^0\\to K^0\\to B^1\\to0$, with the given resolution $J_Z^{0,\\bullet}$ of $Z^0$ and any injective resolution of $B^1$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1); it yields an injective resolution $K^0\\to I^{0,\\bullet}$ and a degreewise short exact sequence $0\\to J_Z^{0,\\bullet}\\to I^{0,\\bullet}\\to J_B^{1,\\bullet}\\to0$ of complexes compatible with the augmentations, in which the outer complexes are the prescribed ones. Apply the same lemma to $0\\to B^1\\to Z^1\\to H^1\\to0$ with the resolution $J_B^{1,\\bullet}$ just obtained (and any resolution of $H^1$), giving $0\\to J_B^{1,\\bullet}\\to J_Z^{1,\\bullet}\\to J_H^{1,\\bullet}\\to0$; then to $0\\to Z^1\\to K^1\\to B^2\\to0$ with this $J_Z^{1,\\bullet}$, and so on inductively through all degrees. Prescribing the subobject resolution is what makes consecutive rows share $J_B^{p+1,\\bullet}$ and $J_Z^{p,\\bullet}$. Put $J_B^{0,\\bullet}=0$ and $J_H^{0,\\bullet}=J_Z^{0,\\bullet}$ (as $B^0=0$, $H^0=Z^0$). All complexes vanish in negative resolution degrees.",
+   "uses": [
+    "lem-sp-horseshoe-prescribed-resolutions",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015I (lemma-cartan-eilenberg), proof Steps 1-4, using Lemma 013T (in its 'given injective resolutions' form)"
+   }
+  },
+  {
+   "text": "Let $I^{p,\\bullet}$ be the resolution of $K^p$ produced at the $p$-th stage. Define the horizontal differential $d_I:I^{p,\\bullet}\\to I^{p+1,\\bullet}$ as the composite $I^{p,\\bullet}\\to J_B^{p+1,\\bullet}\\to J_Z^{p+1,\\bullet}\\to I^{p+1,\\bullet}$ through the quotient and subobject resolutions supplied by the two adjacent horseshoe rows [lem-sp-horseshoe-prescribed-resolutions]. The compatibility in the horseshoe diagrams makes these maps commute with vertical differentials and induces $d_K$ on the augmentations; exactness of the rows gives $d_I d_I=0$.",
+   "uses": [
+    "lem-sp-horseshoe-prescribed-resolutions",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015I (lemma-cartan-eilenberg), proof conclusion: define d_1 by the composite through J_B and J_Z"
+   }
+  },
+  {
+   "text": "The construction is zero for horizontal degree $p<0$ (we started at $n=0$) and for resolution degree $q<0$, so it is first quadrant. Each vertical column resolves $K^p$ by construction. In each fixed $q$, exactness of the two adjacent horseshoe rows [lem-sp-horseshoe-prescribed-resolutions] (the composite $J_B^{p+1,q}\\to J_Z^{p+1,q}\\to I^{p+1,q}$ is monic and $I^{p,q}\\to J_B^{p+1,q}$ is epic) identifies the horizontal cycles with the chosen injective resolution of $Z^p(K)$, the horizontal boundaries with that of $B^p(K)$, and horizontal cohomology with that of $H^p(K)$; all terms are injective and the augmentations are quasi-isomorphisms. Thus the stated Cartan--Eilenberg conditions hold.",
+   "uses": [
+    "lem-sp-horseshoe-prescribed-resolutions",
+    "def-sp-injective-resolutions",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 015H and Lemma 015I, proof conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "lem-sp-horseshoe-prescribed-resolutions",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-sp-injective-resolutions",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 015H and Lemma 015I"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +116,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "thm-sp-grothendieck",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sp-cartan-eilenberg-exists",
+  "worker": "stage1",
+  "summary": "Split the existence lemma using the alternating short exact sequence decomposition of a bounded-below complex and the existing injective-resolution horseshoe node. The proof constructs compatible resolutions inductively, defines the horizontal differential through quotient and cycle resolutions, and verifies all Cartan--Eilenberg clauses and first-quadrant bounds.",
+  "blueprint": "thm-sp-grothendieck proof, first paragraph: choose a Cartan--Eilenberg resolution of F(I bullet)",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "why": "Generic existence of injective resolutions (clause (1)) for the starting object and the free end of each horseshoe; this unit has no such statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cee2234",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cee2234 (reviewer sub-agent of L); spot-checked: Read packet whole; statement vs Stacks 015H/015I (specialised to K^p=0 for p<0, unchanged); index convention I^{p,q} with columns resolving K^p as in 015H, consistent with thm-sp-grothendieck's use and with lem-sp-cartan-eilenberg-properties, which states itself explicitly in the exchanged convention; Step 4 identifications checked (ker d_I = J_Z since J_B->J_Z->I monic, im = J_B, H = J_H; p=0 case B^0=0). FIX more, RETURN less: dag/nodes/sec-abelian-varieties/lem-sp-cartan-eilenberg-exists.json steps 2-4: the induction needs the horseshoe with the subobject resolution PRESCRIBED (J_B^{p+1} from one row reused in the next, J_Z^p likewise), but cited lem-weil-pbc-injective-resolution-ses only asserts existence of three fresh resolutions (C4; missed by C1's second reading, which claimed a check against 013T); added statement-only unsplit node lem-sp-horseshoe-prescribed-resolutions (Stacks 013T last sentence, grep 'horseshoe' in Mathlib: 0 hits) and cite it in steps 2-4; existence of the starting/free-end resolutions now cites lem-weil-pbc-left-exact-injective-resolution-degree-zero (1) (C1, tool use); dropped tool use lem-weil-pbc-injective-resolution-ses (no longer cited); proof_deps corrected. End Sat Oct 10 08:14:40 PM UTC 2026; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
