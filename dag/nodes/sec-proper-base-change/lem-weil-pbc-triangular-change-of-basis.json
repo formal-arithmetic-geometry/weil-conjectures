@@ -30,9 +30,60 @@
  "stmt_deps": [
   "def-weil-pbc-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $m=0$, the empty family is the basis of the zero free module, so assume $m>0$. Regard the coordinate map $R^{\\oplus m}\\to F$ sending the $k$-th standard vector to $v_k$; in the given basis $(b_l)$ its matrix is $(t_{kl})$. This map is the map whose being an isomorphism is equivalent to $(v_k)$ being a basis.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641: writing the images of basis vectors in the other basis"
+   }
+  },
+  {
+   "text": "Suppose first that $t_{kl}=0$ for $l<k$ (upper-triangular rows). For spanning, solve successively from $k=m$ down to $k=1$: the coefficient of $b_m$ in $v_m$ is the unit $t_{mm}$, so $b_m$ lies in the span of $v_m$; after $b_{k+1},\\ldots,b_m$ have been obtained, the equation $v_k=t_{kk}b_k+\\sum_{l>k}t_{kl}b_l$ and the inverse of the unit $t_{kk}$ give $b_k$ in the span of $v_k,\\ldots,v_m$. For independence, if $\\sum_k a_kv_k=0$, inspect the coefficient of $b_1$: only $v_1$ can contribute to it, so $a_1t_{11}=0$ and $a_1=0$; after $a_1,\\ldots,a_{k-1}=0$, the coefficient of $b_k$ gives $a_kt_{kk}=0$, hence $a_k=0$. Thus the family spans and is linearly independent.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641: the first basis change and the subsequent unit-column elimination"
+   }
+  },
+  {
+   "text": "Suppose instead that $t_{kl}=0$ for $l>k$ (lower-triangular rows). The same argument with the order reversed proves spanning: start with $b_1$ from $v_1=t_{11}b_1$, then solve for $b_k$ using $v_k=t_{kk}b_k+\\sum_{l<k}t_{kl}b_l$. For a relation $\\sum_k a_kv_k=0$, inspect the coefficient of $b_m$ first and then descend: only $v_m$ can contribute after the later coefficients have been shown zero, so the unit $t_{mm}$ gives $a_m=0$, and induction gives every $a_k=0$. Hence the family spans and is independent in this case as well.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641; the lower-triangular orientation is the transposed coordinate convention"
+   }
+  },
+  {
+   "text": "A spanning, linearly independent family of $m$ vectors in the free module with basis $(b_l)$ is a basis (equivalently, the coordinate map in Step 1 is an isomorphism). Therefore $(v_1,\\ldots,v_m)$ is a basis of $F$ in either triangular orientation.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641; the basis changes are expanded into the two triangular orientations"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -76,7 +127,7 @@
   "file": "Mathlib/LinearAlgebra/Determinant.lean; Mathlib/LinearAlgebra/Matrix/Block.lean",
   "how": "Not a leaf: is_basis_iff_det (Determinant.lean:634, read with sed -n 625,645p) reduces the claim to IsUnit (e.det v); det_apply (Determinant.lean:616) identifies e.det v with the determinant of the coordinate matrix e.toMatrix v, which is the transpose of (t_kl); det_of_isUpperTriangular / det_of_isLowerTriangular (Block.lean:336, 343, read with sed -n 330,345p) give the product of the diagonal t_kk, a unit. Four declarations composed, plus the orientation of the triangularity under transpose."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -96,5 +147,29 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-triangular-change-of-basis",
+  "worker": "G1",
+  "summary": "The source's two changes of basis in Stacks Tag 00MT are justified by a complete elementary proof for both upper- and lower-triangular coordinate matrices with unit diagonal. No new node is needed: spanning and independence follow by recursive elimination using the unit diagonal entries.",
+  "lean_audit": {
+   "source": "/home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "searches": [
+    "rg -n -i 'lem-weil-pbc-triangular-change-of-basis|triangular.*change.*basis|unit.*diagonal|00MT' /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+    "rg -n -i 'basis.*coordinate|triangular' /home/ubuntu/weil-src-slopmaster2/WeilConjectures"
+   ],
+   "decls": [],
+   "result": "no declaration with this statement or blueprint tag; no exact sorry-free attachment"
+  },
+  "blueprint": "The item supplies the two basis-change facts used by the final sentence of thm-weil-pbc-finite-etale-lifting's proof, through lem-weil-pbc-free-complex-unit-entry-splits and the listed blueprint ancestor chain. A whole-blueprint search for triangular, unit-diagonal, change of basis, matrix coefficient, and 00MT found no same statement; same_as is [].",
+  "checks": "Sections B-E were checked: the statement is self-contained and cites the free-module definition; each proof step names its statement dependency and spells out the recursive coefficient argument; source tag and exact lines are recorded; no Mathlib leaf or Lean attachment is claimed."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 4 elementary steps (coordinate map, triangular solving in both orientations, independence by the unit diagonal) checked against 00MT"
+ }
 }
