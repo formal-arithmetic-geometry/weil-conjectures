@@ -1,8 +1,8 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (638)
+## Stage 1: nodes to split (639)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -18,9 +18,7 @@
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1012 | none |
-| `lem-weil-pbc-finite-surjective-affine-target` | 1012 | none |
 | `lem-weil-pbc-finite-type-z-domain-normalization-finite` | 1012 | none |
-| `lem-weil-pbc-first-order-thickening-base-change` | 1012 | none |
 | `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1012 | none |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1012 | none |
@@ -124,6 +122,8 @@
 | `lem-weil-pbc-universal-thickening-affine-case` | 1012 | none |
 | `lem-weil-pbc-universal-thickening-open-pieces` | 1012 | none |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1012 | none |
+| `def-weil-pbc-japanese-domain` | 1013 | none |
+| `def-weil-pbc-nagata-ring` | 1013 | none |
 | `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1013 | none |
 | `lem-weil-pbc-cohen-rings-exist` | 1013 | none |
 | `lem-weil-pbc-coherent-finite-type-sub-kernel` | 1013 | none |
@@ -133,6 +133,7 @@
 | `lem-weil-pbc-module-finite-type-image-extension` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injective-acyclic` | 1013 | none |
 | `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1013 | none |
+| `lem-weil-pbc-nagata-universally-japanese` | 1013 | none |
 | `lem-weil-pbc-quasi-finite-at-finite-subalgebra-away` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1013 | none |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1013 | none |
@@ -645,7 +646,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (221)
+## Stage 2: nodes to state (222)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -745,6 +746,7 @@
 | `lem-weil-pbc-finite-projective-standard-free-cover` | 1 | state |
 | `lem-weil-pbc-finite-purely-inseparable-scalar-descent` | 1 | state |
 | `lem-weil-pbc-finite-separable-multiplication-etale` | 1 | state |
+| `lem-weil-pbc-finite-surjective-affine-target` | 1 | state |
 | `lem-weil-pbc-finite-unramified-etale-local` | 1 | state |
 | `lem-weil-pbc-finite-unramified-one-point-closed` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
@@ -871,7 +873,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 650 nodes that wait for stage 1, 504 nodes that wait for a statement dependency.
+Not open yet: 651 nodes that wait for stage 1, 505 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
