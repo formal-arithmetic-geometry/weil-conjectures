@@ -2611,3 +2611,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:02 L: merged deliver/K1/lem-pc-perfect-generation-affine-base (reviewer PASS; first push; new nodes: 0)
 - 21:03 L: deleted deliver/C1/def-weil-pbc-C2 after C1's abandonment (item attached by L at 20:51)
 - 21:03 L: merged deliver/M1/lem-pc-monomial-cech-complex-homology (reviewer PASS; first push; new nodes: 0)
+- 21:03 L: merged deliver/H1/lem-pc-bounded-above-flat-tensor-acyclic (reviewer FIX; first push; new nodes: 0)
