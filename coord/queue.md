@@ -2,7 +2,7 @@
 
 926 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (213)
+## Stage 1: nodes to split (212)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,8 +22,9 @@
 | `lem-sc-affine-pseudo-coherent-rhom-qcoherent` | 3017 | none |
 | `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
-| `lem-sc-proper-flat-right-adjoint-open-support` | 3019 | none |
 | `lem-sc-right-adjoint-open-support-criterion` | 3019 | none |
+| `lem-sc-perfect-support-map-lift` | 3020 | none |
+| `lem-sc-pseudo-coherent-support-annihilation` | 3020 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -50,7 +51,6 @@
 | `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
 | `lem-pc-rf-base-change-complex` | 5012 | none |
 | `lem-pc-bounded-above-flat-kflat-site` | 5013 | none |
-| `lem-pc-complex-hocolim-colimit` | 5013 | none |
 | `lem-pc-finite-flat-proper-support-descent` | 5013 | none |
 | `lem-pc-kflat-cone-direct-sum` | 5013 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
@@ -60,7 +60,6 @@
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
 | `lem-pc-affine-morphism-hi` | 6010 | rests_on_sorry |
-| `lem-pc-closed-immersion-coherent-cohomology` | 6010 | rests_on_sorry |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-alternating-cech-computes` | 6011 | none |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
@@ -220,7 +219,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (713)
+## Stage 2: nodes to state (714)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -306,6 +305,7 @@
 | `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
+| `lem-pc-complex-hocolim-colimit` | 1 | state |
 | `lem-pc-derived-acyclic-resolution` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-filtered-free-resolution` | 1 | state |
@@ -938,7 +938,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1419 nodes that wait for a statement dependency, 250 nodes that wait for stage 1.
+Not open yet: 1421 nodes that wait for a statement dependency, 249 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
