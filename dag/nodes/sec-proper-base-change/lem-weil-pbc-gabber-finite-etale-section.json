@@ -2,19 +2,21 @@
  "id": "lem-weil-pbc-gabber-finite-etale-section",
  "kind": "statement",
  "title": "Finite etale covers of closed subschemes of an affine normal scheme with separably closed function field (Stacks 09ZA)",
- "statement": "Let $X$ be an affine integral normal scheme [def-weil-pbc-normal-ring] with separably closed function field [def-pc-separably-closed]. Let $Z\\subseteq X$ be a closed subscheme [def-weil-closed-immersion]. Let $V\\to Z$ be an etale morphism [def-weil-etale-morphism] with $V$ affine. Then $V$ is a finite disjoint union of open subschemes of $Z$. If $V\\to Z$ is surjective [def-weil-surjective-morphism] and finite etale [def-weil-finite-integral-morphism], then $V\\to Z$ has a section.",
+ "statement": "Let $X$ be an affine [def-pc-scheme] integral scheme [def-pc-integral-scheme] which is normal (every local ring $\\mathcal O_{X,x}$ is a normal domain [def-weil-pbc-normal-ring]) and whose function field (the local ring at the generic point) is separably closed [def-pc-separably-closed]. Let $Z\\subseteq X$ be a closed subscheme [def-weil-closed-immersion]. Let $V\\to Z$ be an etale morphism [def-weil-etale-morphism] with $V$ affine. Then $V$ is a finite disjoint union of open subschemes of $Z$: $V=V_1\\amalg\\dots\\amalg V_n$ with each $V_i$ open and closed in $V$ and each restriction $V_i\\to Z$ an open immersion [def-weil-open-immersion]. If $V\\to Z$ is surjective [def-weil-surjective-morphism] and finite [def-weil-finite-integral-morphism] etale, then $V\\to Z$ has a section.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Stacks Project, Lemma 59.80.6 (Tag 09ZA), statement and proof"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
   "def-weil-pbc-normal-ring",
   "def-pc-separably-closed",
   "def-weil-closed-immersion",
   "def-weil-etale-morphism",
+  "def-weil-open-immersion",
   "def-weil-surjective-morphism",
-  "def-weil-finite-integral-morphism",
-  "def-weil-open-immersion"
+  "def-weil-finite-integral-morphism"
  ],
  "mathlib_searches": [
   {
@@ -47,7 +49,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -68,6 +70,114 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "proof_deps": [],
- "proof": []
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-exc-etale-algebra-lift",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "sbc-lem-etale-over-normal",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-clopen-open-cover-section"
+ ],
+ "proof": [
+  {
+   "text": "*Affine description.* Write $X=\\operatorname{Spec}R$ with $R=\\mathcal O_X(X)$ [def-pc-scheme]. By part (1) of [lem-weil-pbc-closed-immersion-affine-cover-criterion] applied to the closed immersion $Z\\to X$ and the affine open $V=X$, the scheme $Z$ is affine and $R\\to\\mathcal O_Z(Z)$ is surjective; with $I$ its kernel, $Z\\cong\\operatorname{Spec}(R/I)$ over $X$, the morphism $Z\\to X$ corresponding to $R\\to R/I$ [lem-weil-pbc-morphism-into-affine-scheme]. Likewise $V=\\operatorname{Spec}\\overline C$ with $\\overline C=\\mathcal O_V(V)$, and the morphism $V\\to Z$ of affine schemes is $\\operatorname{Spec}$ of a ring map $R/I\\to\\overline C$ [lem-weil-pbc-morphism-into-affine-scheme]. Since $V\\to Z$ is etale, $R/I\\to\\overline C$ is an etale ring map [lem-weil-pbc-etale-ring-map-iff-etale-affine].",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, first sentence (the affine set-up implicit in 'lift V')"
+   }
+  },
+  {
+   "text": "*Lift $V$ to $U$ etale over $X$ (Stacks: 'By Algebra, Lemma 04D1 we can lift $V$ to an affine scheme $U$ etale over $X$').* By [lem-exc-etale-algebra-lift] (Algebra 04D1: etale ring maps lift along surjections) there is an etale ring map $R\\to C$ with $C/IC\\cong\\overline C$ as $R/I$-algebras. Put $U=\\operatorname{Spec}C$; then $U\\to X$ is etale [lem-weil-pbc-etale-ring-map-iff-etale-affine]. Moreover $U\\times_XZ\\cong\\operatorname{Spec}(C\\otimes_R R/I)$ [lem-weil-pbc-fibre-product-affine-spectra] and $C\\otimes_R R/I\\cong C/IC\\cong\\overline C$ [lem-weil-pbc-tensor-quotient-base-change], all as $R/I$-algebras, so $U\\times_XZ\\cong V$ as schemes over $Z$.",
+   "uses": [
+    "lem-exc-etale-algebra-lift",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, first sentence; literature/stacks-project/algebra.tex Lemma 04D1 (label lemma-lift-etale)"
+   }
+  },
+  {
+   "text": "*Apply Lemma 09Z9 to $U\\to X$.* The morphism $U\\to X$ is a morphism between affine schemes, hence affine [lem-weil-pbc-morphism-affine-schemes-affine], hence separated [lem-weil-pbc-affine-morphism-permanence] (part (3)); and it is etale (step 2). As $X$ is an integral normal scheme with separably closed function field, part (1) of [sbc-lem-etale-over-normal] gives nonempty, pairwise disjoint opens $U_i\\subseteq U$ ($i\\in\\iota$) covering $U$ with every $U_i\\to X$ an open immersion. The affine scheme $U=\\operatorname{Spec}C$ is quasi-compact [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] (part (iii)), so finitely many $U_i$ cover $U$; since each $U_i$ is nonempty and disjoint from all the others, no $U_i$ can be left out, so $\\iota$ is finite, say $\\iota=\\{1,\\dots,n\\}$. Each $U_i$ is also closed in $U$, its complement being the union of the others.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "sbc-lem-etale-over-normal",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, second sentence ('Apply Lemma 09Z9 to U -> X'); Lemma 09Z9 (label lemma-normal-scheme-with-alg-closed-function-field), part (1)"
+   }
+  },
+  {
+   "text": "*Restrict to $Z$: the first statement.* Let $p:U\\times_XZ\\to U$ and $q:U\\times_XZ\\to Z$ be the projections and $V'_i=p^{-1}(U_i)$. These are open, pairwise disjoint and cover $U\\times_XZ$ (step 3), hence each is also closed. By [lem-weil-pbc-open-fibre-product] (with base $S=X$, its open $X$, the opens $U_i\\subseteq U$ and $Z\\subseteq Z$) the canonical morphism $U_i\\times_XZ\\to U\\times_XZ$ is an open immersion with image $V'_i$, compatibly with the projections; so $q|_{V'_i}$ is the projection $U_i\\times_XZ\\to Z$, which is the base change of the open immersion $U_i\\to X$ along $Z\\to X$ and hence an open immersion [lem-weil-pbc-open-immersion-base-change]. Transporting along the isomorphism $V\\cong U\\times_XZ$ over $Z$ of step 2 gives $V=V_1\\amalg\\dots\\amalg V_n$ with $V_i$ open and closed in $V$ and $V_i\\to Z$ an open immersion: $V$ is a finite disjoint union of open subschemes of $Z$.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, second sentence ('to get the first statement'): the decomposition of U is pulled back to V = U x_X Z"
+   }
+  },
+  {
+   "text": "*The section (Stacks: 'The final statement is a consequence of the first').* Assume $V\\to Z$ is surjective and finite etale. The decomposition $V=\\coprod_{i=1}^nV_i$ of step 4 into open and closed subschemes with $V_i\\to Z$ open immersions is exactly the hypothesis of [lem-weil-pbc-clopen-open-cover-section] for the finite surjective morphism $V\\to Z$, which gives a section $s:Z\\to V$ (in that lemma the images $U_i\\subseteq Z$ of the $V_i$ are open and closed, $Z$ is the disjoint union of the strata $\\bigcap_{i\\in A}U_i\\cap\\bigcap_{i\\in B}U_i^c$ over $\\{1,\\dots,n\\}=A\\amalg B$ with $A\\neq\\emptyset$, and on each stratum the inverse of one open immersion $V_i\\to U_i$ is used).",
+   "uses": [
+    "lem-weil-pbc-clopen-open-cover-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09ZA (label lemma-closed-of-affine-normal-scheme-with-alg-closed-function-field, line 14390), proof, second paragraph (the decomposition of Z into strata and the section)"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Project, Lemma 59.80.6 (Tag 09ZA), proof"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-gabber-finite-etale-section",
+  "worker": "stage1",
+  "summary": "Split along the proof of Stacks 09ZA (read in etale-cohomology.tex line 14390, with Algebra 04D1 and Etale Cohomology 09Z9). Five steps: affine description of Z and of V -> Z as an etale ring map R/I -> C-bar; lift to an etale R -> C by 04D1 (existing node lem-exc-etale-algebra-lift, chapter sec-smooth-purity, unit sk-prop-sf-open-closed-triangle: a generic tool lemma used as a black box, for the lead to accept in tool_uses) with U x_X Z = V; 09Z9(1) (sbc-lem-etale-over-normal, Lean closed on slopmaster2, a tool) applied to U -> X, separated because a morphism of affine schemes is affine; finiteness of the decomposition from quasi-compactness of U (Stacks leaves it implicit); pull back to Z (open-fibre-product and base change of open immersions; Stacks leaves this implicit); the section from the existing node lem-weil-pbc-clopen-open-cover-section (09ZA final paragraph, created earlier by the citer's worker and flagged unreachable; it is now cited). Statement kept, made explicit (normal = local rings normal domains; 'finite disjoint union of open subschemes' spelled out); stmt_deps gained def-pc-scheme and def-pc-integral-scheme. New nodes: two Mathlib leaves (lem-weil-pbc-morphism-affine-schemes-affine = isAffineHom_of_isAffine, lem-weil-pbc-open-immersion-base-change = isOpenImmersion_stableUnderBaseChange). No error in the source."
+ },
+ "tool_uses": [
+  "lem-exc-etale-algebra-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following Stacks 09ZA: affine description; lift of the etale R/I-algebra to an etale R-algebra (04D1, recorded by L as the tool use lem-exc-etale-algebra-lift from unit sk-prop-sf-open-closed-triangle; Mathlib has no lifting of etale algebras along surjections); 09Z9 (1) for U -> X (sbc-lem-etale-over-normal, Lean closed), with separatedness via the new 01SH leaf (Affine.lean:181 verified) and finiteness via quasi-compactness; restriction to Z via the new 01JY leaf (OpenImmersion.lean:842 verified); the section via the existing clopen-open-cover-section node, whose stale unreachable flag L cleared. Statement spelled out (normal, disjoint union as open immersions), stmt_deps gained def-pc-scheme and def-pc-integral-scheme."
+ }
 }
