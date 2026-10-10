@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-pc-f-subfunctor",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The open subfunctor $F$",
- "statement": "Let $k$ be a field, $X$ a scheme over $k$ and $\\sigma\\in X(k)$. For a\nscheme $T$ over $k$, let $F(T)\\subseteq\\operatorname{Pic}_{X/k,\\sigma}(T)$ be the\nsubset of those $\\mathcal{L}$ such that $Rf_{T,*}\\mathcal{L}$ ($f_T:X_T\\to T$,\n$Rf_{T,*}$ as in [def-pc-derived-direct-image]) is an object of\n$D(\\mathcal{O}_T)$ isomorphic to an\ninvertible\n$\\mathcal{O}_T$-module placed in degree $0$; this is the subfunctor $F$ of\nStacks Project, Picard Schemes of Curves, Lemma 44.6.2 (the fact that it\nis a subfunctor, and the open-immersion property, are\nrecorded with the other properties of this construction).",
+ "statement": "Let $k$ be a field, $X$ a smooth projective curve over $k$ [def-pc-smooth-projective-curve], and $\\sigma\\in X(k)$; regard $\\operatorname{Pic}_{X/k,\\sigma}$ [def-pc-pic-sigma-functor] as a functor on schemes $T$ over $k$, a morphism $u:T'\\to T$ over $k$ acting by $[\\mathcal{L}]\\mapsto[u_X^*\\mathcal{L}]$ with $u_X:X_{T'}\\to X_T$ the base change of $u$ [def-pc-base-change]. For a scheme $T$ over $k$, with $f_T:X_T\\to T$ the base change of $X\\to\\operatorname{Spec}k$, let $F(T)\\subseteq\\operatorname{Pic}_{X/k,\\sigma}(T)$ be the subset of those classes $[\\mathcal{L}]$ such that $Rf_{T,*}\\mathcal{L}$ ($Rf_{T,*}$ as in [def-pc-derived-direct-image]) is an object of $D(\\mathcal{O}_T)$ isomorphic to an invertible $\\mathcal{O}_T$-module placed in degree $0$ [def-pc-invertible-in-degree-zero] (a condition depending only on the isomorphism class of $\\mathcal{L}$). This defines the assignment $T\\mapsto F(T)$ only; that it is stable under the maps $u_X^*$, i.e. is a subfunctor of $\\operatorname{Pic}_{X/k,\\sigma}$ in the sense of [def-pc-subfunctor], and that the inclusion is representable by open immersions, is Stacks Project, Picard Schemes of Curves, Lemma 44.6.2 (Tag 0B9V), proved separately; only after that lemma is $F$ called the subfunctor $F$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-def-picard-f/def-pc-f-subfunctor.md",
   "place": "node def-pc-f-subfunctor, order 819"
@@ -17,14 +17,15 @@
   "def-pc-base-change",
   "def-pc-invertible-in-degree-zero",
   "def-pc-pic-sigma-functor",
-  "def-pc-subfunctor"
+  "def-pc-subfunctor",
+  "def-pc-smooth-projective-curve"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -126,5 +127,21 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-def-picard-f"
+ "unit": "sk-def-picard-f",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-pc-f-subfunctor",
+  "worker": "stage1",
+  "summary": "Checked the definition against the project declaration AlgebraicGeometry.picardFunctorInvertibleDirectImage in WeilConjectures/AlgebraicGeometry/Picard/Representability.lean:171-194 and the unit sketch. The declaration is not attachable because its body depends transitively on sorried project lemmas, but the definition itself is a direct Subfunctor construction and has no proof steps to split. Second reading restricted X to a smooth projective curve, matching the unit and its open-subfunctor lemma; no new DAG nodes are needed.",
+  "blueprint": "Realizes the complete definition node def-pc-f-subfunctor (order 819), including the object predicate and the Subfunctor map field.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fsf1805",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsf1805 (reviewer sub-agent of L); spot-checked: Read packet; checked def-pc-subfunctor, def-pc-open-subfunctor, def-pc-pic-sigma-functor, def-pc-base-change, def-pc-invertible-in-degree-zero, def-pc-derived-direct-image and lem-pc-f-open-subfunctor (stmt_deps include def-pc-f-subfunctor; item cites no lemma: no cycle). Smooth-projective-curve restriction correct (matches lem-pc-f-open-subfunctor). FIX more, RETURN less: (1) E/well-definedness: statement asserted 'This defines the subfunctor F' without proof, a claim missed by the second reading; rephrased so the item defines only the assignment T -> F(T) and states that stability under pullback (subfunctor in the sense of [def-pc-subfunctor]) and the open-immersion property are Lemma 44.6.2 (lem-pc-f-open-subfunctor step 1/2), without citing that node (avoids a cycle). (2) Made the object precise: Pic_{X/k,sigma} as a functor on schemes over k with u acting by u_X^* [def-pc-base-change], f_T named as base change, condition independent of representative, [def-pc-invertible-in-degree-zero] cited; uses_not_cited trimmed accordingly.; 1 file(s) fixed by the reviewer"
+ }
 }
