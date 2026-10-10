@@ -1468,3 +1468,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:13 L: merged deliver/E1/lem-sc-sylow-module-filtration (reviewer PASS, first push; tool_uses 2)
 - 2026-10-10, delivery of H1: lemma-weil-pbc-fibre-product-limit returned (2571a9ee8): Reviewed in full (reviewer sub-agent of L). E2/E4: the new node lem-weil-pbc-qcqs-fibre-product-gluing is ill-typed: S names both the base and the strict hensel
 - 13:14 L: returned deliver/H1/lemma-weil-pbc-fibre-product-limit (reviewer RETURN: E2/E4 ill-typed new node, E1/E3 false quasi-compactness step, C5 the fact is lem-weil-pbc-scheme-over-limit, B3, B4)
+- 2026-10-10, delivery of H1: lemma-weil-pbc-affine-neighbourhood-cofinal returned (ccb0a7e8e): Reviewed in full (reviewer sub-agent of L). C4/C2: step 2 says the initial-full-subcategory criterion 'makes the affine inclusion initial', but lem-weil-pbc-col
