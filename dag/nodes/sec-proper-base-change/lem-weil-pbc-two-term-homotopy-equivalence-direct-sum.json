@@ -20,15 +20,57 @@
  },
  "kind": "statement",
  "title": "Homotopy equivalent two-term complexes: A_1 + B_0 is isomorphic to B_1 + A_0",
- "statement": "Let $R$ be a commutative ring, and let $d_A:A_1\\to A_0$ and $d_B:B_1\\to B_0$ be homomorphisms of $R$-modules. Suppose given $R$-linear maps $\\varphi_i:A_i\\to B_i$ and $\\psi_i:B_i\\to A_i$ ($i=0,1$) with $d_B\\circ\\varphi_1=\\varphi_0\\circ d_A$ and $d_A\\circ\\psi_1=\\psi_0\\circ d_B$, and $R$-linear maps $h:A_0\\to A_1$ and $h':B_0\\to B_1$ with $$\\mathrm{id}_{A_1}-\\psi_1\\circ\\varphi_1=h\\circ d_A,\\quad\\mathrm{id}_{A_0}-\\psi_0\\circ\\varphi_0=d_A\\circ h,\\quad\\mathrm{id}_{B_1}-\\varphi_1\\circ\\psi_1=h'\\circ d_B,\\quad\\mathrm{id}_{B_0}-\\varphi_0\\circ\\psi_0=d_B\\circ h'.$$ Then $A_1\\oplus B_0\\cong B_1\\oplus A_0$ as $R$-modules.",
+ "statement": "Let $R$ be a commutative ring, and let $d_A:A_1\\to A_0$ and $d_B:B_1\\to B_0$ be homomorphisms of $R$-modules. Suppose given $R$-linear maps $\\varphi_i:A_i\\to B_i$ and $\\psi_i:B_i\\to A_i$ ($i=0,1$) with $d_B\\circ\\varphi_1=\\varphi_0\\circ d_A$ and $d_A\\circ\\psi_1=\\psi_0\\circ d_B$, and $R$-linear maps $h:A_0\\to A_1$ and $h':B_0\\to B_1$ with $$\\mathrm{id}_{A_1}-\\psi_1\\circ\\varphi_1=h\\circ d_A,\\quad\\mathrm{id}_{A_0}-\\psi_0\\circ\\varphi_0=d_A\\circ h,\\quad\\mathrm{id}_{B_1}-\\varphi_1\\circ\\psi_1=h'\\circ d_B,\\quad\\mathrm{id}_{B_0}-\\varphi_0\\circ\\psi_0=d_B\\circ h'.$$ Then $A_1\\oplus B_0\\cong B_1\\oplus A_0$ as $R$-modules [def-weil-pbc-direct-sum-modules].",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Algebra, Lemma Tag 00S3 (lemma-sum-two-terms, line 35709) and its proof (the 2x2 matrix identity, lines 35721-35754). Tag verified in stacks-project/tags/tags: 00S3,algebra-lemma-sum-two-terms."
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof": [
+  {
+   "text": "Write $P=A_1\\oplus B_0$ and $Q=B_1\\oplus A_0$ [def-weil-pbc-direct-sum-modules]. Define $R$-linear maps $C:P\\to Q$ and $D:Q\\to P$ by $C(a,b)=(\\varphi_1(a)-h'(b),d_A(a)+\\psi_0(b))$ and $D(c,e)=(\\psi_1(c)+h(e),-d_B(c)+\\varphi_0(e))$. These are the two $2\\times2$ matrices in the proof of Stacks 00S3, with rows and columns ordered as the displayed summands.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00S3 (lemma-sum-two-terms), proof, lines 35721-35749"
+   }
+  },
+  {
+   "text": "For $(a,b)\\in P$, expand $DC(a,b)$. Its first component is $\\psi_1\\varphi_1(a)-\\psi_1h'(b)+hd_A(a)+h\\psi_0(b)=a+(h\\psi_0-\\psi_1h')(b)$ by $\\mathrm{id}_{A_1}-\\psi_1\\varphi_1=hd_A$. Its second component is $-d_B\\varphi_1(a)+d_Bh'(b)+\\varphi_0d_A(a)+\\varphi_0\\psi_0(b)=b$ by $d_B\\varphi_1=\\varphi_0d_A$ and $\\mathrm{id}_{B_0}-\\varphi_0\\psi_0=d_Bh'$. Thus $DC=U_P$, where $U_P(a,b)=(a+u(b),b)$ and $u=h\\psi_0-\\psi_1h'$. Reversing the roles gives $CD=U_Q$: its components on $(c,e)\\in Q$ are $\\varphi_1\\psi_1(c)+h'd_B(c)+(\\varphi_1h-h'\\varphi_0)(e)=c+v(e)$ and $d_A\\psi_1(c)-\\psi_0d_B(c)+d_Ah(e)+\\psi_0\\varphi_0(e)=e$, where $v=\\varphi_1h-h'\\varphi_0$. The first equality uses $\\mathrm{id}_{B_1}-\\varphi_1\\psi_1=h'd_B$; the second uses $d_A\\psi_1=\\psi_0d_B$ and $\\mathrm{id}_{A_0}-\\psi_0\\varphi_0=d_Ah$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00S3 (lemma-sum-two-terms), proof, matrix identity, lines 35734-35754; the reverse product is checked explicitly here"
+   }
+  },
+  {
+   "text": "The triangular maps have explicit inverses: $U_P^{-1}(a,b)=(a-u(b),b)$ and $U_Q^{-1}(c,e)=(c-v(e),e)$. Hence $L=U_P^{-1}D:Q\\to P$ satisfies $LC=\\mathrm{id}_P$, while $T=DU_Q^{-1}:Q\\to P$ satisfies $CT=\\mathrm{id}_Q$. Then $L=L(CT)=(LC)T=T$, so $C$ is an $R$-linear isomorphism $P\\cong Q$ with inverse $L=T$. This is the claimed $A_1\\oplus B_0\\cong B_1\\oplus A_0$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00S3 (lemma-sum-two-terms), final proof sentence, lines 35749-35754 (invertibility of the two matrices); inverse calculations expanded here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00S3 (lemma-sum-two-terms), proof, lines 35721-35754"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -67,7 +109,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -87,5 +129,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-two-term-homotopy-equivalence-direct-sum",
+  "worker": "stage1",
+  "summary": "Checked Algebra 00S3 against the four explicit chain-homotopy identities. The maps between the two direct sums are written as block matrices; both compositions are computed as upper triangular maps with identity diagonal, whose inverses are explicit. Their left and right inverses agree, giving the isomorphism. The existing direct-sum definition is the only dependency; no new statement is required."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: 00S3: C, D as 2x2 matrices on A_1+B_0 and B_1+A_0, DC and CD unipotent triangular (both products recomputed), common left and right inverse; source typo -h'psi_1 for -psi_1 h' in 00S3 noted; delivered before the blueprint-refs rule: blueprint field backfilled by tools/blueprint_refs.py, same_as not yet searched"
+ }
 }
