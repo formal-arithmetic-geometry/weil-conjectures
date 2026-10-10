@@ -78,7 +78,7 @@ def read_place(anc: dict, head: str) -> str:
         out = "step " + ", ".join(map(str, steps)) + " of its split"
         sp = (anc["proof"][steps[0] - 1].get("source") or {}) if isinstance(anc["proof"][steps[0] - 1].get("source"), dict) else {}
         if sp.get("place"):
-            out += f" (source: {str(sp['place'])[:160]})"
+            out += f" (source: {sp['place']})"
         return out
     if head in (anc.get("stmt_deps") or []):
         return "its statement (a notion the statement uses)"
@@ -134,7 +134,10 @@ def backfill() -> int:
                 f["from"] = None
             elif not isinstance(f.get("from"), dict) or not f["from"].get("node") and new["from"]["node"]:
                 f["from"] = new["from"]
-            elif f["from"].get("place") in (None, "", UNSPEC) and new["from"]["place"] != UNSPEC and f["from"].get("node") == new["from"]["node"]:
+            elif f["from"].get("node") == new["from"]["node"] and new["from"]["place"] != UNSPEC and (
+                    f["from"].get("place") in (None, "", UNSPEC)
+                    or (new["from"]["place"] != f["from"]["place"] and new["from"]["place"].startswith(f["from"]["place"].rstrip(")")))):
+                # an unspecified place, or one cut short by the first backfill (a prefix of the full place)
                 f["from"] = {**f["from"], "place": new["from"]["place"]}; places += 1
             if f == cur:
                 continue
