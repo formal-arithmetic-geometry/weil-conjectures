@@ -1,8 +1,8 @@
 # Work queue
 
-854 items; claim with `tools/claim.py next <group> [--stage N]`.
+851 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (389)
+## Stage 1: nodes to split (385)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-weil-pbc-flat-formally-smooth-closed-fibre-adic` | 1015 | none |
 | `lem-weil-pbc-limit-module-essentially-finite-presentation-over-system` | 1015 | none |
 | `lem-weil-pbc-local-nagata-domain-analytically-unramified` | 1015 | none |
-| `lem-weil-pbc-normal-ring-integrally-closed-total` | 1015 | none |
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
 | `lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation` | 1015 | none |
@@ -38,7 +37,6 @@
 | `lem-weil-pbc-torsion-cyclic-presentation` | 1016 | none |
 | `lem-weil-pbc-torsion-hom-flat-comparison` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
-| `lem-weil-pbc-finite-ring-map-quasi-finite` | 1017 | none |
 | `lem-weil-pbc-regular-sequence-koszul-regular` | 1017 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
 | `lem-weil-pbc-koszul-differential-square-zero` | 1018 | none |
@@ -56,7 +54,6 @@
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `def-sc-constant-sheaves` | 3004 | none |
-| `def-weil-pbc-curve-setting` | 3004 | none |
 | `def-weil-pbc-pointed-etale-neighbourhoods` | 3004 | none |
 | `lem-pc-module-pullback-adjunction` | 3004 | none |
 | `lem-pc-module-pullback-identity-composition` | 3004 | none |
@@ -69,7 +66,6 @@
 | `lem-weil-pbc-hypercover-refinement` | 3005 | none |
 | `lem-weil-pbc-universal-homeomorphism-base-change` | 3005 | none |
 | `lemma-weil-pbc-finite-hypercover-descent` | 3005 | none |
-| `thm-galois-lc-etale` | 3005 | rests_on_sorry |
 | `thm-weil-pbc-hypercover-cohomology` | 3005 | none |
 | `def-weil-pbc-finite-split-hypercover` | 3006 | none |
 | `lem-galois-aut-profinite` | 3006 | none |
@@ -396,7 +392,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (465)
+## Stage 2: nodes to state (466)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -684,6 +680,7 @@
 | `lem-weil-pbc-normal-domain-principal-quotient-associated-height` | 1 | state |
 | `lem-weil-pbc-normal-extension-purely-inseparable-then-galois` | 1 | state |
 | `lem-weil-pbc-normal-locus-open` | 1 | state |
+| `lem-weil-pbc-normal-ring-integrally-closed-total` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1 | state |
 | `lem-weil-pbc-p-basis-exists` | 1 | state |
@@ -866,7 +863,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 407 nodes that wait for stage 1, 862 nodes that wait for a statement dependency.
+Not open yet: 403 nodes that wait for stage 1, 865 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
