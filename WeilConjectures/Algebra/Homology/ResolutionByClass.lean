@@ -5,7 +5,11 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 public import Mathlib.Algebra.Homology.QuasiIso
+public import WeilConjectures.Mathlib.Algebra.Homology.Embedding.Extend
+public import WeilConjectures.Mathlib.Algebra.Homology.Embedding.HomEquiv
 public import Mathlib.Algebra.Homology.Refinements
 public import Mathlib.CategoryTheory.ObjectProperty.ContainsZero
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
@@ -35,6 +39,8 @@ of extensions by zero `j_{V!} Λ_V` for `S`.
 
 - `ChainComplex.LiftsAlongEpi S T`: the lifting property.
 - `ChainComplex.exists_quasiIso_of_liftsAlongEpi`: the resolution.
+- `CochainComplex.exists_quasiIso_of_liftsAlongEpi`: the resolution of a cochain complex
+  indexed by `ℤ` and vanishing above some degree `b`, by a complex vanishing above `b`.
 -/
 
 @[expose] public section
@@ -99,7 +105,8 @@ lemma exists_cover_homology (hlift : LiftsAlongEpi S T) (hM : ∀ k, T (M.homolo
   rw [Category.assoc, Category.assoc, hy, add_comm]
 
 /-- The stage in degree `0`. -/
-noncomputable def stageZero [T.ContainsZero] [T.IsClosedUnderIsomorphisms] (hlift : LiftsAlongEpi S T)
+noncomputable def stageZero [T.ContainsZero] [T.IsClosedUnderIsomorphisms]
+    (hlift : LiftsAlongEpi S T)
     (hM : ∀ k, T (M.homology k)) : Stage S T M 0 :=
   have h := exists_cover_homology hlift hM 0
   { X := h.choose
@@ -237,7 +244,7 @@ theorem exists_quasiIso_of_liftsAlongEpi [T.IsClosedUnderKernels] [T.ContainsZer
       have h₁ : Q.d 0 (0 - 1) = 0 := Q.shape _ _ (by simp)
       have h₂ : (s 0).d = 0 := rfl
       simp only [h₁, h₂, Limits.comp_zero]
-    | succ k => rw [show k + 1 - 1 = k from rfl, hd]; rfl
+    | succ k => rw [show k + 1 - 1 = k from rfl, hd]
   refine ⟨Q, φ, ?_, fun k ↦ (s k).hX⟩
   rw [quasiIso_iff]
   intro k
@@ -255,3 +262,31 @@ theorem exists_quasiIso_of_liftsAlongEpi [T.IsClosedUnderKernels] [T.ContainsZer
     exact ⟨A', π, inferInstance, x, (hQd k x).2 hx, y, by simpa using hxy⟩
 
 end ChainComplex
+
+namespace CochainComplex
+
+variable {C : Type*} [Category* C] [Abelian C] {S T : ObjectProperty C}
+
+/-- **Resolutions by a class lifting along epimorphisms**, for cochain complexes indexed by `ℤ`.
+Let `T` be closed under kernels and isomorphisms and contain the zero objects, and let `S ≤ T`
+be closed under binary biproducts and isomorphisms, contain the zero objects and lift along
+epimorphisms onto `T`. Then a cochain complex `L` vanishing above degree `b` whose cohomology
+objects belong to `T` has a quasi-isomorphism `P ⟶ L` from a complex vanishing above `b` whose
+terms belong to `S`. -/
+theorem exists_quasiIso_of_liftsAlongEpi [T.IsClosedUnderKernels] [T.ContainsZero]
+    [T.IsClosedUnderIsomorphisms] [S.ContainsZero] [S.IsClosedUnderIsomorphisms]
+    (hST : S ≤ T) (hS : ∀ X Y, S X → S Y → S (X ⊞ Y)) (hlift : ChainComplex.LiftsAlongEpi S T)
+    (L : CochainComplex C ℤ) (b : ℤ) [L.IsStrictlyLE b] (hL : ∀ n, T (L.homology n)) :
+    ∃ (P : CochainComplex C ℤ) (_ : P.IsStrictlyLE b) (π : P ⟶ L), QuasiIso π ∧
+      ∀ n, S (P.X n) := by
+  let e := ComplexShape.embeddingUpIntLE b
+  let M := L.restriction e
+  have hM (k : ℕ) : T (M.homology k) :=
+    T.prop_of_iso ((HomologicalComplex.homologyMapIso (L.isoRestrictionExtend e) _) ≪≫
+      M.extendHomologyIso e rfl) (hL (e.f k))
+  obtain ⟨Q, φ, _, hQ⟩ := ChainComplex.exists_quasiIso_of_liftsAlongEpi S T hST hS hlift M hM
+  exact ⟨Q.extend e, inferInstanceAs ((Q.extend e).IsStrictlySupported e),
+    HomologicalComplex.extendMap φ e ≫ (L.isoRestrictionExtend e).inv, inferInstance,
+    HomologicalComplex.prop_extend_X S e hQ⟩
+
+end CochainComplex
