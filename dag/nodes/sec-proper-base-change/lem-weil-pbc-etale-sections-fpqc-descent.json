@@ -27,37 +27,116 @@
   "def-weil-pbc-etale-sheaf-of-sets",
   "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $V\\to S$ be an object of $S_{\\Et}$ and $t\\in F(V)$. For each $i$, the restriction of $s_i$ to the object $T_i\\times_SV\\to T_i$ of $(T_i)_{\\Et}$ and the section $g_i^*t$ of [lem-weil-pbc-sets-etale-inverse-image-composition-units] are two sections of $g_i^{-1}F$ over $T_i\\times_SV$; applying [lem-weil-pbc-etale-sections-equal-open] to the scheme $T_i$, the sheaf $g_i^{-1}F$ and these two sections gives the largest open $W_i\\subset T_i\\times_SV$ characterized by: a morphism $Z\\to T_i\\times_SV$ factors through $W_i$ iff the two sections agree after pullback to $Z$. Since $s_i$ and $s_j$ agree over $T_i\\times_ST_j$ (via the composition isomorphisms), a morphism $Z\\to T_i\\times_ST_j\\times_SV$ factors through the pullback of $W_i$ iff it factors through the pullback of $W_j$; hence the pullbacks of $W_i$ and $W_j$ to $T_i\\times_ST_j\\times_SV$ are equal.",
+   "uses": [
+    "lem-weil-pbc-etale-sections-equal-open",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XN proof, lines 4970-4982; Tag 09XM"
+   }
+  },
+  {
+   "text": "By Tag 03N0, these equal opens descend to a unique open $W\\subset V$ whose pullback to each $T_i\\times_S V$ is $W_i$.",
+   "uses": [
+    "lem-weil-pbc-etale-open-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03N0 and Tag 09XN proof, lines 4978-4985"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-inverse-image-section-description], each $T_i$ has an etale covering $\\{T_{ia}\\to T_i\\}_a$ with factorizations $T_{ia}\\to V_{ia}\\to S$, $V_{ia}\\to S$ etale, and $t_{ia}\\in F(V_{ia})$ pulling back to $s_i|_{T_{ia}}$. Applying steps 1 and 2 (with the original covering $\\{T_j\\to S\\}$) to $V=V_{ia}$ and $t=t_{ia}$ gives an open $W_{ia}\\subset V_{ia}$ whose pullback to each $T_j\\times_SV_{ia}$ is the open where $s_j$ and $t_{ia}$ agree. The morphism $T_j\\times_ST_{ia}\\to T_j\\times_SV_{ia}$ lands in that open because $t_{ia}$ pulls back to $s_i$ on $T_{ia}$ and $s_i=s_j$ over $T_i\\times_ST_j$; as the $T_j\\times_ST_{ia}\\to T_{ia}$ are jointly surjective (the $T_j$ cover $S$ by [def-weil-pbc-fpqc-covering]), $T_{ia}\\to V_{ia}$ factors through the open subscheme $W_{ia}$.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-section-description",
+    "lem-weil-pbc-etale-sections-equal-open",
+    "lem-weil-pbc-etale-open-fpqc-descent",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XN proof, lines 4987-5005"
+   }
+  },
+  {
+   "text": "The $W_{ia}\\to S$ are etale and jointly surjective, since their images contain the images of the $T_{ia}$, which cover $S$ [def-weil-pbc-fpqc-covering]; so $\\{W_{ia}\\to S\\}$ is a covering of $S_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets]. The sections $t_{ia}|_{W_{ia}}$ and $t_{jb}|_{W_{jb}}$ agree on $U=W_{ia}\\times_SW_{jb}$: by [lem-weil-pbc-etale-sections-equal-open] they agree on a largest open $E\\subset U$, and the pullback of $E$ to each $T_k\\times_SU$ is everything because both pull back to $s_k$ there (step 3); as the $T_k\\times_SU\\to U$ are jointly surjective, $E=U$. The sheaf equalizer axiom of [def-weil-pbc-etale-sheaf-of-sets] glues them to a unique $s\\in F(S)$. Its pullback to $T_{ia}$ is $s_i|_{T_{ia}}$, so its pullback to $T_i$ is $s_i$ by the sheaf axiom for $g_i^{-1}F$ on the covering $\\{T_{ia}\\to T_i\\}$. Uniqueness: two sections of $F(S)$ with the same pullbacks to every $T_i$ agree on an open $E\\subset S$ through which every $T_i\\to S$ factors [lem-weil-pbc-etale-sections-equal-open], so $E=S$. The singleton case is the case $I=\\{1\\}$, with the inverse-image identifications supplied by the composition isomorphisms of [lem-weil-pbc-sets-etale-inverse-image-composition-units].",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "lem-weil-pbc-etale-sections-equal-open",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XN proof and conclusion, lines 5005-5027"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-sections-equal-open",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-etale-open-fpqc-descent",
+  "lem-weil-pbc-etale-inverse-image-section-description",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 59.39.2 (Tag 09XN), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "global sections of pullback of etale sheaf satisfy fpqc descent along surjective flat quasi compact morphism",
-   "results": "HTTP 500 from LeanSearch",
-   "date": "2026-10-10",
-   "verdict": "no match obtained"
+   "query": "fpqc descent of sections arbitrary sheaf small etale site",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "fpqc descent of sections of an arbitrary sheaf of sets on the small etale site of a scheme",
-   "results": "Scheme.etaleTopology and Scheme.smallEtaleTopology only; no section descent declaration",
-   "date": "2026-10-10",
+   "query": "descent of etale sheaf sections along fpqc family",
+   "results": "none",
+   "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "rg -n 'fpqc.*(sheaf|section)|isSheaf_fpqc|sheaf.*fpqc' Mathlib/AlgebraicGeometry/Sites",
-   "results": "Only isSheaf_fpqcTopology_continuousMapPresheaf for the particular continuous-map presheaf, ConstantSheaf.lean:68; no descent theorem for arbitrary small-etale sheaves",
-   "date": "2026-10-10",
+   "query": "rg -n 'fpqc.*descent|smallEtale.*section' Mathlib/AlgebraicGeometry/Sites",
+   "results": "none",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-etale-sections-fpqc-descent",
+  "worker": "stage1",
+  "summary": "Replaced the false generated-sieve argument with the actual Tag 09XN proof: largest agreement opens (09XM), fpqc descent of opens (03N0), local etale descriptions of inverse-image sections, and etale sheaf gluing. Dropped the generated-sieve node and added three statement-only dependencies.",
+  "blueprint": "Realizes the Tag 09XN section-descent paragraph used in lemma-weil-pbc-proper-underived-exchange.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpd1703",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpd1703 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:45 return; both points repaired: the false generated-sieve route is gone and the split follows Tag 09XN (etale-cohomology.tex lines 4958-5027, read) via Tag 09XM (lemma-where-sections-are-equal), Descent Tag 03N0 (descent-lemma-open-fpqc-covering) and the local description of sections of g^{-1}F; the report's unfinished notes are removed. New nodes checked against the source: equal-open = 09XM relativized to an etale V (apply the lemma to F|_V); open-fpqc-descent = 03N0 for the base-changed fpqc covering {T_i x_S V -> V}; inverse-image-section-description = the 'By construction of g^{-1}' paragraph. Steps: 1 from equal-open applied to g_i^{-1}F on (T_i)_Et; 2 from open-fpqc-descent; 3 from section-description + steps 1-2 for V_ia etale; 4 gluing over the etale covering {W_ia -> S} by the sheaf axiom of def-weil-pbc-etale-sheaf-of-sets, agreement on W_ia x_S W_jb and uniqueness by equal-open plus joint surjectivity. Small cases: S = Spec k, T = Spec of a separable closure (the old counterexample): W_ia are etale k-algebras through which the T_ia factor, the gluing is Galois-invariance; identity cover trivial. My LeanFinder queries (searches before 17:00 treated as not done): open descent -> only descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact' (FlatDescent.lean:133, single morphism, property descent, not exact); equal-open and section-description -> no match; recorded on the nodes. FIX more, RETURN less: lem-weil-pbc-etale-sections-equal-open: statement: the restriction s|_T for an arbitrary T -> V was undefined (B3): defined via e^*s of lem-weil-pbc-sets-etale-inverse-image-composition-units restricted along (a,id_T), added that node and def-pc-scheme to stmt_deps; item: proof[0]: made explicit which two sections of g_i^{-1}F over T_i x_S V the equal-open node is applied to, uses += composition-units; item: proof[2]: wrote the factorization T_ia -> W_ia via joint surjectivity of T_j x_S T_ia -> T_ia, uses += equal-open, def-weil-pbc-fpqc-covering (C2); item: proof[3]: agreement of t_ia, t_jb on overlaps and uniqueness need equal-open + surjectivity, not the sheaf axiom alone (C4), uses += equal-open, def-weil-pbc-fpqc-covering; proof_deps = union; item: statement and blueprint.from.place restored to sheaf-dag (an unreported wording change, E7, and a from.place that was not 'unspecified'); dropped new node lem-weil-pbc-etale-sheaf-sieve-equalizer (cited by no step, absent from the report, restates the sheaf axiom of def-weil-pbc-etale-sheaf-of-sets). Start Sat Oct 10 05:00:14 PM UTC 2026, end Sat Oct 10 05:02:30 PM UTC 2026.; 4 file(s) fixed by the reviewer"
  }
 }
