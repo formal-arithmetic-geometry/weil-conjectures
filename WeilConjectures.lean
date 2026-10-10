@@ -157,6 +157,13 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Representation
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Image
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Field
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.PointOfDerivation
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Reduced
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated

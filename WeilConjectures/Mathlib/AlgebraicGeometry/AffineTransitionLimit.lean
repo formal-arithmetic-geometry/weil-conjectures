@@ -169,4 +169,3 @@ closed immersion which is surjective on points.
 - [Stacks: Tag 09ZP](https://stacks.math.columbia.edu/tag/09ZP)
 - [Stacks: Tag 09ZQ](https://stacks.math.columbia.edu/tag/09ZQ)
 -/
-
