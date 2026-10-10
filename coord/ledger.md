@@ -2432,3 +2432,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:45 L: merged deliver/K1/lem-sc-strict-henselization-noetherian (reviewer FIX; first push; new nodes: 2)
 - 19:45 L: merged deliver/H1/lem-pc-flat-tensor-complex-cohom (reviewer FIX; first push; new nodes: 0)
 - 19:45 L: merged deliver/C1/pqf-lem-pushforward-qcoh (reviewer FIX; first push; new nodes: 0)
+- 19:45 L: returned deliver/J1/lem-pc-derived-filtered-free-resolution (reviewer RETURN: 1. E (false new statement): lem-pc-derived-free-complex-cover says Q is a direct sum of two-term complexes x->y with d(x)
