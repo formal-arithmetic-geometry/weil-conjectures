@@ -2,7 +2,7 @@
 
 897 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (654)
+## Stage 1: nodes to split (653)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,7 +23,6 @@
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
 | `lem-weil-pbc-popescu-lift-once` | 1012 | none |
-| `lem-weil-pbc-popescu-lift-twice` | 1012 | none |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1012 | none |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1012 | none |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1012 | none |
@@ -661,7 +660,7 @@
 | `lem-pc-linear-pair-graded-finite` | - | none |
 | `def-exc-jacobian-presentation` | - | none |
 
-## Stage 2: nodes to state (243)
+## Stage 2: nodes to state (244)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -836,6 +835,7 @@
 | `lem-weil-pbc-popescu-find-sequence` | 1 | state |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1 | state |
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
+| `lem-weil-pbc-popescu-lift-twice` | 1 | state |
 | `lem-weil-pbc-popescu-product` | 1 | state |
 | `lem-weil-pbc-power-series-onto-completion` | 1 | state |
 | `lem-weil-pbc-power-set-complex-contractible` | 1 | state |
@@ -909,7 +909,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 666 nodes that wait for stage 1, 532 nodes that wait for a statement dependency.
+Not open yet: 665 nodes that wait for stage 1, 532 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
