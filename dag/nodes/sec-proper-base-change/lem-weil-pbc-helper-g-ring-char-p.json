@@ -14,9 +14,112 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-g-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Base case.) The ring $A=k[[x_1,\\ldots,x_n]][y_1,\\ldots,y_m]$ is regular: $k[[x_1,\\ldots,x_n]]$ is regular local by [lem-weil-pbc-power-series-field-cohen-regular-complete], the polynomial extension is smooth by [lem-weil-pbc-polynomial-ring-smooth], and regularity ascends along this smooth map by [lem-weil-pbc-regular-ring-smooth-ascent]. Thus $A_{\\mathfrak p}$ is regular local by [lem-weil-pbc-regular-local-localization], its completion is regular local by [lem-weil-pbc-completion-regular-local], and every localization of that completion, in particular $(A_{\\mathfrak p})^\\wedge\\otimes_AK$, is regular. It is Noetherian by [lem-weil-pbc-adic-completion-noetherian] and localization of a Noetherian ring.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-adic-completion-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof, base case $L=K$; Lemma Tag 07NY (completion-regular)"
+   }
+  },
+  {
+   "text": "(Induction setup.) For a finite purely inseparable extension $L/K$, let $P(L)$ be the assertion that $(A_{\\mathfrak p})^\\wedge\\otimes_A L$ is Noetherian and regular. We prove $P(L)$ by induction on $[L:K]$. The degree-one case is Step 1. If $[L:K]>1$, apply the public degree-$p$ tower node [lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate] to obtain an intermediate field $K\\subseteq M\\subseteq L$ and $z\\in L$ with $L=M(z)$, $z^p=f\\in M$, $[L:M]=p$, and $[M:K]<[L:K]$; hence $P(M)$ is the induction hypothesis. Since $[L:M]=p$, $f$ is not a $p$th power in $M$, or else $z\\in M$ and the degree would be one. Steps 3 and 4 transport $P(M)$ to $P(L)$.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PR, proof, induction on $[L:K]$ and the degree-$p$ intermediate field"
+   }
+  },
+  {
+   "text": "(Finite model, the substitution $z\\mapsto sz$, primes, and the 07N9 identifications.) By [lem-weil-pbc-finite-subalgebra-fraction-field] choose a subring $B\\subseteq M$ containing $A$, finite as an $A$-module, with fraction field $M$; it is a domain with $p=0$, being a subring of the field $M$. (Substitution.) As $f\\in M=\\operatorname{Frac}(B)$, write $f=b/s$ with $b,s\\in B$, $s\\neq0$. Put $z'=sz\\in L$ and $f'=s^pf=s^{p-1}b\\in B$. Then $z'^p=s^pz^p=s^pf=f'$; $M(z')=M(z)=L$ since $s\\in M^\\times$; $[L:M]=p$ is unchanged; and $f'$ is not a $p$th power in $M$, because $f'=u^p$ with $u\\in M$ would give $f=(u/s)^p$, while $f$ is not a $p$th power (Step 2) and $s^p$ is one. Replacing $z,f$ by $z',f'$ we assume from now on: $f\\in B$, $L=M(z)$, $z^p=f$, $[L:M]=p$, and $f$ is not a $p$th power in $M$. (The ring $C$.) $A$ is regular (Step 1), hence Noetherian, so $B$ is Noetherian by [lem-weil-pbc-finite-algebra-noetherian]. Put $C=B[z]/(z^p-f)$ [def-weil-polynomial-ring]. Division by the monic polynomial $z^p-f$ shows that $C$ is a free $B$-module with basis $1,z,\\ldots,z^{p-1}$; so $C$ is finite over $B$, and finite over $A$ (the products of $A$-module generators of $B$ with $1,\\ldots,z^{p-1}$ generate). The $B$-algebra map $C\\to L$, $z\\mapsto z$, is injective: an element $\\sum_{i<p}b_iz^i$ of its kernel is a polynomial relation of degree $<p$ for $z$ over $M$, and the minimal polynomial of $z$ over $M$ has degree $[L:M]=p$, so all $b_i=0$. Its image contains $B$ and $z$, so its fraction field contains $M(z)=L$. Hence $C$ is a domain with fraction field $L$. Likewise $C\\otimes_BM=M[z]/(z^p-f)\\to L$ is surjective ($L=M[z]$) between $M$-vector spaces of dimension $p$, hence $C\\otimes_BM\\cong L$ as $C$-algebras. (Primes.) Every localization of the regular ring $A$ at a prime is a normal domain by [lem-weil-pbc-regular-ring-normal], so the domain $A$ is a normal domain by [lem-weil-pbc-normal-domain-of-local-normal]. $A\\subseteq B$ is a finite extension of domains whose fraction field extension $M/K$ is finite purely inseparable (a subextension of $L/K$), so [lem-weil-pbc-purely-inseparable-integral-prime-unique] gives exactly one prime $\\mathfrak r\\subset B$ with $\\mathfrak r\\cap A=\\mathfrak p$. The ring $B$ need not be normal, and none is needed: [lem-weil-pbc-radicial-prime-unique-degree-p] applies to the domain $B$ with $p=0$, the element $f\\in B$ and the domain $C=B[z]/(z^p-f)$, and gives that $c^p\\in B$ for every $c\\in C$ and that exactly one prime $\\mathfrak q\\subset C$ has $\\mathfrak q\\cap B=\\mathfrak r$. A prime of $C$ over $\\mathfrak p$ contracts to a prime of $B$ over $\\mathfrak p$, which is $\\mathfrak r$; so $\\mathfrak q$ is the only prime of $C$ over $\\mathfrak p$. (The local ring $C_{\\mathfrak q}$.) Let $C'=C\\otimes_BB_{\\mathfrak r}=B_{\\mathfrak r}[z]/(z^p-f)$, the localization of $C$ at the image of $B\\setminus\\mathfrak r$. Its primes are $\\mathfrak q'C'$ for primes $\\mathfrak q'\\subset C$ with $\\mathfrak q'\\cap B\\subseteq\\mathfrak r$; for such $\\mathfrak q'$ and $c\\in\\mathfrak q'$ we have $c^p\\in\\mathfrak q'\\cap B\\subseteq\\mathfrak r\\subseteq\\mathfrak q$, so $c\\in\\mathfrak q$. Thus every prime of $C'$ lies in the prime $\\mathfrak qC'$: $C'$ is local with maximal ideal $\\mathfrak qC'$ over $\\mathfrak rB_{\\mathfrak r}$, the elements of $C\\setminus\\mathfrak q$ are units of $C'$, and $C'=C_{\\mathfrak q}$. $B_{\\mathfrak r}$ is a Noetherian local ring [lem-weil-pbc-localization-noetherian], so [lem-weil-pbc-completion-finite-quotient] gives $(C_{\\mathfrak q})^\\wedge\\cong(B_{\\mathfrak r})^\\wedge[z]/(z^p-f)=(B_{\\mathfrak r})^\\wedge\\otimes_BC$ compatibly with the maps from $B_{\\mathfrak r}[z]$, hence as $C$-algebras. (Identifications.) Apply Algebra Lemma 07N9 [lem-weil-pbc-completion-finite-extension] to the Noetherian ring $A$, the finite $A$-algebra $B$ and $\\mathfrak p$ (one prime $\\mathfrak r$ over it): $(A_{\\mathfrak p})^\\wedge\\otimes_AB\\cong(B_{\\mathfrak r})^\\wedge$ as $B$-algebras; applying $-\\otimes_BM$ and $(X\\otimes_AB)\\otimes_BM=X\\otimes_AM$ gives (*) $(A_{\\mathfrak p})^\\wedge\\otimes_AM\\cong R:=(B_{\\mathfrak r})^\\wedge\\otimes_BM$ as $M$-algebras. Apply 07N9 to $A$, the finite $A$-algebra $C$ and $\\mathfrak p$ (one prime $\\mathfrak q$ over it): $(A_{\\mathfrak p})^\\wedge\\otimes_AC\\cong(C_{\\mathfrak q})^\\wedge\\cong(B_{\\mathfrak r})^\\wedge\\otimes_BC$ as $C$-algebras. Applying $-\\otimes_CL$ with $L=C\\otimes_BM$ gives (**) $(A_{\\mathfrak p})^\\wedge\\otimes_AL\\cong(B_{\\mathfrak r})^\\wedge\\otimes_BC\\otimes_BM=R\\otimes_BB[z]/(z^p-f)=R[z]/(z^p-f)$ as $L$-algebras.",
+   "uses": [
+    "lem-weil-pbc-finite-subalgebra-fraction-field",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "def-weil-polynomial-ring",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-normal-domain-of-local-normal",
+    "lem-weil-pbc-purely-inseparable-integral-prime-unique",
+    "lem-weil-pbc-radicial-prime-unique-degree-p",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-completion-finite-quotient",
+    "lem-weil-pbc-completion-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof: 'Let B be a finite A-subalgebra of M ... Clearing denominators ... Set C = B[z]/(z^p-f) ... unique prime r, resp. q ... A_p^ (x)_A M = B_r^ (x)_B M ... the completion of C = B[z]/(z^p-f) equals B_r^[z]/(z^p-f)'; Algebra, Lemma Tag 07N9 (lemma-completion-finite-extension); Algebra, Lemma Tag 030B (lemma-normality-is-local)"
+   }
+  },
+  {
+   "text": "(Derivation extension and the degree-$p$ quotient.) The domain $B$ of Step 3 has $p=0$ and is of finite type over the Noetherian $(x_1,\\ldots,x_n)$-adically complete local ring $k[[x_1,\\ldots,x_n]]$ ([lem-weil-pbc-power-series-field-cohen-regular-complete] (1), (3)): it is generated as a $k[[x_1,\\ldots,x_n]]$-algebra by $y_1,\\ldots,y_m$ and finitely many $A$-module generators of $B$. Since $f\\in B$ is not a $p$th power in $M$ (Step 3), [lem-weil-pbc-derivation-nonzero-on-non-pth-power] supplies a derivation $D:B\\to B$ with $D(f)\\ne0$. First extend $D$ from $B$ to $B_{\\mathfrak r}$ by the quotient formula $D(a/s)=D(a)/s-aD(s)/s^2$ ([lem-weil-pbc-derivation-extends] (2)); then extend it to $(B_{\\mathfrak r})^\\wedge$ by the compatible maps $D_n:B_{\\mathfrak r}/(\\mathfrak rB_{\\mathfrak r})^{n+1}\\to B_{\\mathfrak r}/(\\mathfrak rB_{\\mathfrak r})^n$ ([lem-weil-pbc-derivation-extends] (1)); finally extend it to $R=(B_{\\mathfrak r})^\\wedge\\otimes_BM$, the localization of $(B_{\\mathfrak r})^\\wedge$ at the image of $B\\setminus\\{0\\}$, by the same localization formula. These extensions agree with $D$ on $B$, so they send $f$ to the image of $D(f)$, which is a nonzero element of $M$ and therefore a unit in the $M$-algebra $R$. By $P(M)$ and the identification (*) of Step 3, $R$ is Noetherian and regular. The polynomial-smooth node [lem-weil-pbc-polynomial-ring-smooth] makes $R\\to R[z]$ smooth, and [lem-weil-pbc-regular-ring-smooth-ascent] therefore makes the polynomial ring $R[z]$ regular. Extend the derivation on $R$ to $\\overline D:R[z]\\to R[z]$ by $\\overline D(z)=0$, i.e. $\\overline D(\\sum r_iz^i)=\\sum D(r_i)z^i$. Then $\\overline D(z^p-f)=-D(f)$, whose image in $R[z]/(z^p-f)$ is a unit. Apply the hypersurface node [lem-weil-pbc-hypersurface-derivation-regular] to the regular ring $R[z]$, the element $z^p-f$, and $\\overline D$: the ring $R[z]/(z^p-f)$ is regular, in particular Noetherian. By the identification (**) of Step 3 it is isomorphic to $(A_{\\mathfrak p})^\\wedge\\otimes_AL$, which proves $P(L)$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
+    "lem-weil-pbc-derivation-extends",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-weil-pbc-hypersurface-derivation-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PR, proof; More on Algebra Lemmas 07PH (find-D), 07PE (derivation-extends), 07PG (degree-p-extension-regular)"
+   }
+  },
+  {
+   "text": "The induction proves that $(A_{\\mathfrak p})^\\wedge\\otimes_AL$ is Noetherian and regular for every finite purely inseparable $L/K$. By the definition [def-weil-pbc-g-ring], this is exactly geometric regularity over $K$, and the Noetherian assertion is already part of the preceding steps.",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 07PR, conclusion of the proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate",
+  "lem-weil-pbc-finite-subalgebra-fraction-field",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-weil-pbc-purely-inseparable-integral-prime-unique",
+  "lem-weil-pbc-radicial-prime-unique-degree-p",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-completion-finite-quotient",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
+  "lem-weil-pbc-derivation-extends",
+  "lem-weil-pbc-hypersurface-derivation-regular",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07PR (lemma-helper-G-ring), proof; supporting Lemmas 07NY, 07PH, 07PE, 07PG and Algebra Lemma 07N9"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,7 +144,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -61,5 +164,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-helper-g-ring-char-p",
+  "worker": "stage1",
+  "summary": "Built on the third E1 delivery (commit 3edab980f, branch deleted): steps 1, 2, 5 and the new nodes finite-purely-inseparable-degree-p-intermediate, finite-subalgebra-fraction-field, purely-inseparable-integral-prime-unique, derivation-nonzero-on-non-pth-power and completion-finite-quotient are taken from it (accepted by L), all created nodes now with created.item = this item. Step 3 repaired per L's third return: (a) lem-weil-pbc-radicial-prime-unique-degree-p is restated without normality (R a domain with p = 0, C = R[z]/(z^p-f) a domain; R -> C injective and integral, c^p in R for all c in C, exactly one prime of C over each prime of R); unsplit, Mathlib candidate PrimeSpectrum.isHomeomorph_comap (Stacks 0BR8); its split: (2) by (sum b_i z^i)^p = sum b_i^p f^i, uniqueness either by c in q <=> c^p in q cap R = q' cap R <=> c in q' or by incomparability [lem-weil-pbc-integral-incomparability], existence by lying over (00GQ). It is applied to B -> C, so normality of B is no longer used. (b) the substitution z' = sz, f' = s^p f = s^{p-1} b for f = b/s is written out, with the check that f' is not a p-th power. Further gaps of step 3 closed: 'A regular, hence a normal domain' cited only the definition; it now cites lem-weil-pbc-regular-ring-normal and the new Mathlib leaf lem-weil-pbc-normal-domain-of-local-normal (030B, IsIntegrallyClosed.of_localization_maximal); B Noetherian [lem-weil-pbc-finite-algebra-noetherian], B_r Noetherian [lem-weil-pbc-localization-noetherian]; C free over B, a domain with fraction field L, C (x)_B M = L, C (x)_B B_r = C_q local (from c^p in B), so the hypotheses of completion-finite-quotient and 07N9 hold; the identifications (*) and (**) are written. Step 4 now justifies the hypotheses of 07PH for B (domain with p = 0, finite type over k[[x]]), names the parts of derivation-extends used and refers to (*) and (**). Form fixes in accepted nodes: completion-finite-quotient introduces p and R^ (B2); derivation-nonzero-on-non-pth-power cites finite type and adically complete (B3); finite-subalgebra-fraction-field cites the polynomial ring and finite module notions inline (B3). No Lean written."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "5 steps following More on Algebra 07PR, built on the third E1 delivery (3edab980f; steps 1, 2, 4, 5 and five new nodes accepted at the third return) with step 3 repaired by L's worker: the radicial node restated without normality (c^p in R, unique prime over each prime; candidate 0BR8 recorded), the substitution z -> sz, f -> s^p f written out, A normal via regular-ring-normal and a new 030B leaf (of_localization_maximal, line 69 verified by L), C free over B, C a domain with fraction field L, C_q = C (x)_B B_r local, the completion-finite-quotient node, the two 07N9 identifications (*) and (**) written. Step 4 now checks the hypotheses of 07PH for B. Seven new nodes; the E1 nodes carry created.item = this item and their origin in split_report."
+ }
 }

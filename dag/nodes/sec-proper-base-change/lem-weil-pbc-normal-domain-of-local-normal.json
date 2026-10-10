@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-normal-domain-of-local-normal",
+ "kind": "statement",
+ "title": "A domain whose localizations at maximal ideals are normal domains is a normal domain",
+ "statement": "Let $R$ be an integral domain such that for every maximal ideal $\\mathfrak m\\subset R$ the localization $R_{\\mathfrak m}$ [def-weil-pbc-localization-at-prime] is a normal domain [def-weil-pbc-normal-ring]. Then $R$ is a normal domain (integrally closed in its field of fractions). In particular an integral domain which is a normal ring is a normal domain.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 030B (lemma-normality-is-local, algebra.tex line 8177), implication (3) => (1) and its proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral domain is integrally closed if its localizations at all maximal ideals are integrally closed",
+   "results": "IsIntegrallyClosed.of_isLocalization_maximal, IsIntegrallyClosed.of_localization_maximal, isIntegrallyClosed_ofLocalizationMaximal, IsIntegrallyClosed.of_localization (all Mathlib.RingTheory.LocalProperties.IntegrallyClosed)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed.of_localization_maximal",
+   "results": "IsIntegrallyClosed.of_localization_maximal {R} [CommRing R] [IsDomain R] (h : ∀ p : Ideal R, p ≠ ⊥ → ∀ [p.IsMaximal], IsIntegrallyClosed (Localization.AtPrime p)) : IsIntegrallyClosed R (Mathlib.RingTheory.LocalProperties.IntegrallyClosed)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "domain whose localizations at all maximal ideals are integrally closed is integrally closed",
+   "results": "IsIntegrallyClosed.of_localization_maximal, IsIntegrallyClosed.of_isLocalization_maximal, isIntegrallyClosed_ofLocalizationMaximal, IsIntegrallyClosed.of_localization",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean; sed -n 55,100p of that file",
+   "results": "IsIntegrallyClosed.iInf (31), .of_iInf_eq_bot (42), .of_localization_submonoid (48), .of_localization (58), .of_localization_maximal (69), isIntegrallyClosed_ofLocalizationMaximal (81), .of_isLocalization_maximal (91)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsIntegrallyClosed.of_localization_maximal (project ~/weil-conjectures-slopmaster2)",
+   "results": "IsIntegrallyClosed.of_localization_maximal, .lake/packages/mathlib/Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsIntegrallyClosed.of_localization_maximal",
+  "file": "Mathlib/RingTheory/LocalProperties/IntegrallyClosed.lean",
+  "line": 69,
+  "how": "specializes in one line: `theorem IsIntegrallyClosed.of_localization_maximal [IsDomain R] (h : ∀ p : Ideal R, p ≠ ⊥ → [p.IsMaximal] → IsIntegrallyClosed (Localization.AtPrime p)) : IsIntegrallyClosed R` (IntegrallyClosed.lean:69-71, read with sed -n 55,100p, 2026-10-10); a normal domain is `IsDomain ∧ IsIntegrallyClosed` by the match of def-weil-pbc-normal-ring, so the hypothesis 'R_m normal domain for every maximal m' gives h (dropping p ≠ ⊥); the 'in particular' clause restricts the normal-ring hypothesis to maximal ideals"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-helper-g-ring-char-p",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

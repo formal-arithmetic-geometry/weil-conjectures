@@ -894,3 +894,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:02 L: deleted the stale branches deliver/C1/lem-weil-pbc-z-localizations-dvr (item abandoned by C1 at 02:16, merged from G1 at 03:04; roles/remote-lead.md 3a) and deliver/F1/lem-weil-pbc-etale-stratification-local-gluing (push at 01:28 after the merge at 01:19; delivery-errors A7).
 - 05:04 L: reviewed lem-weil-pbc-smooth-over-product-ring (3 steps, +0GIF 'if' node): accepted.
 - 05:07 L: reviewed lem-weil-pbc-smooth-over-field-local-complete-intersection (10 steps, +00SJ node, +00SC (5)=>(1) node): accepted.
+- 05:07 L: reviewed lem-weil-pbc-helper-g-ring-char-p (5 steps, +7 nodes: five from E1's third delivery 3edab980f, the radicial node restated without normality, +030B leaf): accepted; E1's work on steps 1, 2, 4, 5 and five nodes is kept, step 3 repaired by L's worker.
