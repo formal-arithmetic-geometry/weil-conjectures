@@ -5,9 +5,7 @@
   "from": {
    "node": "lem-sc-finite-duality",
    "place": "Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives clause for perfect complexes",
-   "via": [
-    "lem-pc-derived-qcoh-compact-generation"
-   ]
+   "via": []
   },
   "same_as": []
  },
@@ -23,39 +21,116 @@
   "def-pc-perfect-complex",
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let W = Spec(A) be an affine open. By [lem-pc-perfect-affine-bounded-projective] (Stacks 08EB), every perfect object of D_QCoh(O_W) is isomorphic to the complex of quasi-coherent sheaves associated with a bounded complex P^\\bullet of finite projective A-modules. Each finite projective A-module is isomorphic to a direct summand of some A^n, hence to a submodule of some A^n, and these submodules form a set; so every such P^\\bullet is isomorphic, as a complex, to one whose terms are submodules of finite free modules A^n and whose differentials are A-linear maps between them, and these data (a finite range of degrees, terms, and differentials) form a set. Isomorphic complexes give isomorphic objects of the derived category, so the isomorphism classes of perfect objects on W form a set.",
+   "uses": [
+    "lem-pc-perfect-affine-bounded-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+    "place": "Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives input for perfect complexes"
+   }
+  },
+  {
+   "text": "Let P(W) assert that perfect objects of D_QCoh(O_W) have a set of isomorphism representatives. Suppose W = U union V with U quasi-compact and V affine open, and P(U), P(V), and P(U intersect V). For E perfect on W, each restriction of E to an open is again perfect (restrict the covering in [def-pc-perfect-complex]), and U, V, U intersect V are quasi-compact opens of the qcqs scheme W, so the derived Mayer–Vietoris triangle [lem-pc-derived-mayer-vietoris-triangle] expresses E as the first object of a distinguished triangle whose other terms are R(j_U)_*E|_U direct-sum R(j_V)_*E|_V and R(j_{U intersect V})_*E|_{U intersect V}. Choose representatives for the three restrictions using P(U), P(V), and P(U intersect V); transporting along the chosen isomorphisms, the second morphism of the triangle becomes a morphism between the derived direct images of the three representatives. For fixed representatives, the Hom-set between these two objects of the derived category is a set, so the possible morphisms form a set, and E is isomorphic to a cocone of one of them; each cone (equivalently, cocone) is unique up to isomorphism once this morphism is fixed, by the triangulated-category morphism-of-triangles axiom (TR3) and the five-lemma. Thus P(W) holds. The qcqs induction principle [lem-sc-invert-s-cohomology-induction] then gives P(X) from the affine case of Step 1 and this gluing implication.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-sc-invert-s-cohomology-induction",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+    "place": "Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives input for perfect complexes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-derived-mayer-vietoris-triangle",
+  "lem-sc-invert-s-cohomology-induction",
+  "def-pc-perfect-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived-categories-of-schemes.tex",
+  "place": "Theorem perfect-theorem-bondal-van-den-Bergh, set-of-representatives input for perfect complexes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "set of representatives for perfect complexes on a quasi-compact quasi-separated scheme",
-   "results": "8 hits, all unrelated AlgebraicGeometry quasi-separated/open-cover declarations; no essential-smallness theorem",
+   "results": "8 hits: AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine; AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen; AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen; AlgebraicGeometry.exists_of_res_eq_of_qcqs. None states essential smallness of perfect complexes.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "essentially small perfect complexes",
-   "results": "0 hits; Unknown identifier `essentially`",
+   "query": "EssentiallySmall perfect complexes, CategoryTheory.EssentiallySmall, Compact",
+   "results": "0 hits; Unknown identifier `EssentiallySmall`",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "representatives.*perfect|essentially small.*perfect in Mathlib/AlgebraicGeometry Mathlib/CategoryTheory",
+   "query": "representatives.*perfect|essentially small.*perfect [Mathlib/CategoryTheory Mathlib/AlgebraicGeometry]",
    "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "set of isomorphism representatives for perfect complexes on a quasi-compact quasi-separated scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite affine covers and bounded finite locally free complexes form a set",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-pc-derived-qcoh-compact-generation",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-complexes-compact-set",
+  "worker": "stage1",
+  "summary": "Repaired the false chain-level encoding argument. The proof now uses the affine derived equivalence together with Stacks 08CM/08EB for the affine set of classes, then the derived Mayer–Vietoris triangle (08BV) to reduce a two-open gluing step to sets of restrictions and Hom-sets, and finally the existing qcqs induction principle.",
+  "blueprint": "Realizes the set-of-representatives clause of Theorem perfect-theorem-bondal-van-den-Bergh.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "The affine derived equivalence is a generic tool from the Picard-f-representable unit needed to identify affine perfect objects with bounded finite-projective complexes."
+   },
+   {
+    "node": "lem-sc-invert-s-cohomology-induction",
+    "why": "Its statement is the generic qcqs induction principle applied to the property P(W) of having a set of perfect-object isomorphism classes; no node in this unit restates that induction principle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-sc-invert-s-cohomology-induction"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pcs2624",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcs2624 (reviewer sub-agent of L); spot-checked: 20:59 return points 1-3 repaired: chain-level encoding removed, route is qcqs induction (08DR node) + affine case + 08BV derived Mayer-Vietoris triangle (new node true as stated, specialization of 08BV; not dup of the open-restriction triangle or MV long exact sequence); cocone-of-fixed-morphism argument correct; no downstream citation (no cycle); statement unchanged so citer lem-pc-derived-qcoh-compact-generation unaffected (C4). FIX more, RETURN less: (C1) Step 1 used the local-to-global affine fact Stacks 08EB (perfect on Spec A = bounded finite projective complex globally), which def-pc-perfect-complex does not state (it only describes strictly perfect complexes on the cover) and no node stated; added statement-only node lem-pc-perfect-affine-bounded-projective and rewrote Step 1 on it, making the set-size argument explicit (terms as submodules of A^n); (C1) Step 2 now states restriction of perfect is perfect from def-pc-perfect-complex and the transport of the second triangle map to fixed representatives; dropped tool_use lem-pc-affine-qcoh-derived-equivalence (no longer used). Hom-sets of D(O_X) taken as sets by the framework convention of def-pc-derived-category. Second reading by C1 missed the 08EB gap.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
