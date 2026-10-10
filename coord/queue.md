@@ -1,8 +1,8 @@
 # Work queue
 
-888 items; claim with `tools/claim.py next <group> [--stage N]`.
+887 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (330)
+## Stage 1: nodes to split (328)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,11 +19,11 @@
 | `lem-sc-cohomology-closed-immersion-pushforward` | 2011 | none |
 | `lem-sc-integral-dim-one-ample` | 2011 | none |
 | `lem-sc-noetherian-cohomology-vanishing-abelian-dim-one` | 2011 | none |
-| `lem-sc-picard-h1-restriction-compatibility` | 2011 | none |
 | `lem-sc-boundary-derivation-square-zero` | 2012 | none |
 | `lem-sc-conductor-ideal-zero-intersection` | 2012 | none |
 | `lem-sc-noetherian-closed-points-finite` | 2012 | none |
 | `lem-sc-section-affine-open-kills-cohomology` | 2012 | none |
+| `lem-sc-torsor-h1-functoriality` | 2012 | none |
 | `lem-sc-zero-dim-noetherian-finite-discrete` | 2012 | none |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 3005 | none |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 3005 | none |
@@ -31,16 +31,14 @@
 | `lem-sc-zariski-module-abelian-cohomology-agree` | 3008 | none |
 | `lem-weil-pbc-etale-cohomology-over-open` | 3008 | none |
 | `lem-exc-etale-field-gsets` | 3009 | none |
-| `lem-exc-etale-sheaves-gsets-point` | 3009 | none |
+| `lem-exc-field-sections-stalk-invariants` | 3010 | none |
 | `lem-sc-injective-module-abelian-acyclic-zariski` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
 | `lem-galois-fpqc-singleton-fully-faithful-0241` | 3011 | none |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
-| `lem-pc-localization-preserves-nonzerodivisor` | 3011 | none |
 | `lem-pc-quasi-compact-local-on-target` | 3011 | none |
 | `lem-sc-fibre-dimension-after-base-change` | 3011 | none |
-| `lem-exc-coinduced-functions-open-stabilizer` | 3012 | none |
 | `lem-exc-rg-group-algebra-functorial-injective-embeddings` | 3012 | none |
 | `lem-exc-rg-open-stabilizer-adjoint` | 3012 | none |
 | `lem-pc-affine-finite-type-algebra` | 3012 | none |
@@ -337,7 +335,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (558)
+## Stage 2: nodes to state (559)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -385,6 +383,7 @@
 | `def-weil-pbc-symmetric-product-morphism` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `etale-proposition-etale-reduced` | 1 | state |
+| `lem-exc-coinduced-functions-open-stabilizer` | 1 | state |
 | `lem-galois-aut-profinite` | 1 | state |
 | `lem-galois-coproduct-copies-morphisms-clopen` | 1 | state |
 | `lem-galois-flat-algebra-descent` | 1 | state |
@@ -900,7 +899,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 350 nodes that wait for stage 1, 1076 nodes that wait for a statement dependency.
+Not open yet: 348 nodes that wait for stage 1, 1078 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
