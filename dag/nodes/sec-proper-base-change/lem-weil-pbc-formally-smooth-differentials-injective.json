@@ -63,15 +63,27 @@
    "results": "no injectivity lemma for mapBaseChange; RingTheory/Kaehler/JacobiZariski.lean:556 Algebra.H1Cotangent.exact_δ_mapBaseChange : Function.Exact (δ R S T) (mapBaseChange R S T); RingTheory/Smooth/Basic.lean:70-72 class Algebra.FormallySmooth with field subsingleton_h1Cotangent : Subsingleton (H1Cotangent R A); Smooth/Basic.lean:371 Algebra.FormallySmooth.iff_comp_surjective (lifting property); Kaehler/Basic.lean:719 KaehlerDifferential.mapBaseChange (the map u)",
    "date": "2026-10-10",
    "verdict": "candidate: a chain of three Mathlib facts (lifting property -> FormallySmooth by iff_comp_surjective; Subsingleton (H1Cotangent B C) by the class field; exactness at B-side by exact_δ_mapBaseChange gives injectivity); not one declaration, left unsplit with the candidate recorded"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'injective_iff_eq_zero_of_exact\\|exact_zero_iff_injective' Mathlib/Algebra/Exact/Basic.lean; grep -rn 'mapBaseChange' Mathlib/RingTheory (outside Kaehler/Basic.lean); grep -n 'uniqueOfLeft' Mathlib/Algebra/Module/LinearMap/Defs.lean",
+   "results": "Algebra/Exact/Basic.lean:574 LinearMap.injective_iff_eq_zero_of_exact (Function.Exact f g → (Injective g ↔ f = 0)); RingTheory/Etale/Kaehler.lean:38-45 KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, whose injectivity part is exactly exact_δ_mapBaseChange plus Subsingleton (H1Cotangent S T); Algebra/Module/LinearMap/Defs.lean:811 LinearMap.uniqueOfLeft; no standalone injectivity lemma for mapBaseChange under FormallySmooth",
+   "date": "2026-10-10",
+   "verdict": "match, one declaration per clause: iff_comp_surjective (hypothesis), subsingleton_h1Cotangent (H1 = 0), exact_δ_mapBaseChange with injective_iff_eq_zero_of_exact (conclusion); see mathlib_match"
   }
  ],
- "mathlib_match": null,
+ "mathlib_match": {
+  "declaration": "Algebra.H1Cotangent.exact_δ_mapBaseChange",
+  "file": "Mathlib/RingTheory/Kaehler/JacobiZariski.lean",
+  "line": 556,
+  "how": "one Mathlib declaration per clause, with Mathlib's (R, S, T) := (A, B, C) and the algebra structures from the ring maps (lines read 2026-10-10 with sed -n). Hypothesis: the lifting property of the statement (the case n = 0 of def-weil-pbc-formally-smooth-adic, where the condition g(n^k)=0 is empty) is Algebra.FormallySmooth B C by Algebra.FormallySmooth.iff_comp_surjective (Mathlib/RingTheory/Smooth/Basic.lean:371, direction mpr, D taken in the universe the lemma quantifies over), and the class field Algebra.FormallySmooth.subsingleton_h1Cotangent (Smooth/Basic.lean:72, an instance) gives Subsingleton (Algebra.H1Cotangent B C). The map u is KaehlerDifferential.mapBaseChange A B C : C ⊗[B] Ω[B⁄A] →ₗ[C] Ω[C⁄A] (Mathlib/RingTheory/Kaehler/Basic.lean:719; mapBaseChange_tmul, line 723: c ⊗ₜ y ↦ c • map A A B C y, and map_D, line 668: map (D b) = D (algebraMap B C b)). Conclusion: Algebra.H1Cotangent.exact_δ_mapBaseChange (JacobiZariski.lean:556, Stacks 00S2: Function.Exact (δ A B C) (mapBaseChange A B C), δ : H1Cotangent B C →ₗ[C] C ⊗[B] Ω[B⁄A] at line 541) with LinearMap.injective_iff_eq_zero_of_exact (Mathlib/Algebra/Exact/Basic.lean:574: Injective g ↔ f = 0) gives injectivity, since δ = 0 because its domain is a subsingleton (LinearMap.uniqueOfLeft, Mathlib/Algebra/Module/LinearMap/Defs.lean:811). Mathlib writes the same argument inline in the proof of KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale (Mathlib/RingTheory/Etale/Kaehler.lean:42-45). This is Stacks' own proof of 031K (Proposition 031J: H_1(L_{C/B}) = 0 for formally smooth B -> C, and Lemma 00S2). Mathlib's Ω, D is the node def-weil-pbc-kahler-differentials (its own Mathlib match)."
+ },
  "mathlib_candidate": {
   "declaration": "Algebra.H1Cotangent.exact_δ_mapBaseChange with Algebra.FormallySmooth.subsingleton_h1Cotangent and Algebra.FormallySmooth.iff_comp_surjective",
   "file": "Mathlib/RingTheory/Kaehler/JacobiZariski.lean (line 556); Mathlib/RingTheory/Smooth/Basic.lean (lines 70-72, 371); map: Mathlib/RingTheory/Kaehler/Basic.lean line 719 (KaehlerDifferential.mapBaseChange)",
   "how": "iff_comp_surjective turns the lifting property into Algebra.FormallySmooth B C; its field gives Subsingleton (H1Cotangent B C); Function.Exact (δ A B C) (mapBaseChange A B C) then gives ker(mapBaseChange) = range δ = 0"
  },
- "status": "unsplit",
+ "status": "mathlib",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -87,5 +99,13 @@
   "slopmaster2": {
    "state": "none"
   }
- }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formally-smooth-differentials-injective",
+  "worker": "stage1",
+  "summary": "Read Stacks Algebra 031K (lemma-ses-formally-smooth, tag verified) and its proof, which is 'follows from Proposition 031J (proposition-characterize-formally-smooth) and Lemma 00S2 (lemma-exact-sequence-NL)': formal smoothness of B -> C gives H_1(L_{C/B}) = 0, and 00S2 gives H_1(L_{C/B}) -> C ⊗_B Ω_{B/A} -> Ω_{C/A} exact. (The proof is not the left-inverse construction through the square-zero extension C ⊕ Ω; that is the proof of 031J itself.) Mathlib states each clause of this route: iff_comp_surjective (lifting property = Algebra.FormallySmooth), the class field subsingleton_h1Cotangent (Mathlib's H1Cotangent vanishes), exact_δ_mapBaseChange (00S2, the relevant part), and injective_iff_eq_zero_of_exact closes it. The node is therefore a Mathlib leaf (status mathlib, mathlib_match), not split; the earlier mathlib_candidate is kept and superseded by mathlib_match. No sorry-free slopmaster2 declaration states it (grep of WeilConjectures and Comparator for the id, mapBaseChange, H1Cotangent: none; the id is not in dag/lean_names_upstream.json). Statement checked against 031K and kept; stmt_deps kept. The existing DAG nodes lem-weil-pbc-jacobi-zariski-differential-maps (00RU), lem-weil-pbc-kahler-differentials-first-exact-sequence (00RS) and lem-weil-pbc-char-zero-field-extension-formally-smooth (0322) were read: none states this injectivity; the Jacobi-Zariski 00S2 node lem-weil-pbc-jacobi-zariski-homology-sequence states the general sequence but would need 031J (H_1 vanishing) as a further node, which Mathlib gives directly.",
+  "blueprint": "realizes, in thm-weil-pbc-finite-etale-lifting, the place recorded in blueprint.from.place (step 7 of its split, the characteristic-zero residue-field differential injection behind Stacks 07NQ, via 0322/031Y resting on 031K) as a Mathlib leaf; blueprint search (tools/blueprint_refs.py search 031K, 'formally smooth', 'differentials injective', 'split short exact', 'Omega_{C/A}', 'ses-formally-smooth') found no blueprint node stating it: same_as []"
+ },
+ "reviewed": "2026-10-10 L: Mathlib leaf, one declaration per clause (FormallySmooth.iff_comp_surjective for the lifting property, subsingleton_h1Cotangent, H1Cotangent.exact_δ_mapBaseChange 00S2, injectivity from exactness with a subsingleton source); the route of 031K itself; lines read; 0 new nodes"
 }

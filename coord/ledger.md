@@ -1356,3 +1356,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of E1: def-sp-etale-dictionary merged from deliver/E1/def-sp-etale-dictionary (1 commit(s), 0 new node(s), spot-checked by L: L: the dictionary of substitutions checked against the unit record); claim closed
 - 2026-10-10, delivery of F1: lem-weil-pbc-universal-homeomorphism-base-change merged from deliver/F1/lem-weil-pbc-universal-homeomorphism-base-change (1 commit(s), 0 new node(s), spot-checked by L: L: Mathlib leaf: 'universally P' is stable under base change (Limits.lean)); claim closed
 - 11:57 L: merged E1 def-sp-etale-dictionary (0 new) and F1 lem-weil-pbc-universal-homeomorphism-base-change (Mathlib leaf).
+- 11:57 L: accepted lem-weil-pbc-formally-smooth-differentials-injective as a Mathlib leaf (031K via FormallySmooth, H1Cotangent and exact_δ_mapBaseChange).
