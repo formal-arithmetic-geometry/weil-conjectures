@@ -1,8 +1,8 @@
 # Work queue
 
-908 items; claim with `tools/claim.py next <group> [--stage N]`.
+905 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (268)
+## Stage 1: nodes to split (265)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,7 +10,6 @@
 | `lem-weil-pbc-fpqc-affine-standard-refinement` | 2009 | none |
 | `lem-weil-pbc-standard-fpqc-quotient-topology` | 2009 | none |
 | `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
-| `lem-sc-irreducible-constant-sections` | 2014 | none |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 2016 | none |
 | `lem-sc-mayer-vietoris-ringed-space` | 2017 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
@@ -55,8 +54,6 @@
 | `lem-pc-flat-base-change-cohom` | 5008 | rests_on_sorry |
 | `lem-pc-picard-functor-agrees-sc` | 5008 | none |
 | `thm-pc-picard-representable` | 5008 | rests_on_sorry |
-| `cor-picard-degree-g` | 5009 | rests_on_sorry |
-| `lem-pc-sigma-k-points` | 5009 | none |
 | `lem-pc-zariski-coverings-are-fppf` | 5009 | none |
 | `lem-sc-deg-pullback-finite` | 5009 | rests_on_sorry |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
@@ -920,7 +917,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1313 nodes that wait for a statement dependency, 295 nodes that wait for stage 1.
+Not open yet: 1315 nodes that wait for a statement dependency, 293 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
