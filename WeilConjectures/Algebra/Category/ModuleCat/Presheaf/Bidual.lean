@@ -73,7 +73,7 @@ lemma app_unit_eq_smul (s : (restrictOver R U).obj (unit _) ⟶ (restrictOver R 
   have h1 : s.app W (1 : R.obj (op W.unop.left)) =
       A.map W.unop.hom.op (s.app (op (Over.mk (𝟙 U))) (1 : R.obj (op U))) :=
     (congrArg (s.app W) (unit_map_one (R := R ⋙ forget₂ _ _) W.unop.hom.op).symm).trans
-      (naturality_apply s (Over.homMk W.unop.hom : W.unop ⟶ Over.mk (𝟙 U)).op _)
+      (naturality_apply s (Over.homMk W.unop.hom (Category.comp_id _) : W.unop ⟶ Over.mk (𝟙 U)).op _)
   refine (congrArg (s.app W) (mul_one r).symm).trans ?_
   refine ((s.app W).hom.map_smul r (1 : R.obj (op W.unop.left))).trans ?_
   exact congrArg (fun y : A.obj (op W.unop.left) ↦ r • y) h1
@@ -134,7 +134,7 @@ lemma bidual_app_bijective {ι : Type*} [Fintype ι] [DecidableEq ι]
       have hn : ψ.app W' (A.map W''.unop.hom.op (m i)) = R.map W'.unop.hom.op (b i) := by
         refine (congrArg (ψ.app W') (A.map_comp_apply W.unop.hom.op W'.unop.hom.op (m i))).trans ?_
         exact naturality_apply ψ
-          (Over.homMk W'.unop.hom : W'.unop ⟶ Over.mk (𝟙 W.unop.left)).op _
+          (Over.homMk W'.unop.hom (Category.comp_id _) : W'.unop ⟶ Over.mk (𝟙 W.unop.left)).op _
       refine ((ψ.app W').hom.map_smul _ _).trans ?_
       refine Eq.trans ?_ (restrictOver_smul_app_apply (b i) _ W' y).symm
       change (show R.obj (op W'.unop.left) from (c i).app W'' y) *
@@ -146,7 +146,7 @@ lemma bidual_app_bijective {ι : Type*} [Fintype ι] [DecidableEq ι]
     -- The value of `Ψ` at a restriction of `c i` is the restriction of `a i`.
     have hΨ (i : ι) : Ψ.app W ((homObj A (unit _)).map W.unop.hom.op (c i)) =
         R.map W.unop.hom.op (a i) :=
-      naturality_apply Ψ (Over.homMk W.unop.hom : W.unop ⟶ Over.mk (𝟙 U)).op (c i)
+      naturality_apply Ψ (Over.homMk W.unop.hom (Category.comp_id _) : W.unop ⟶ Over.mk (𝟙 U)).op (c i)
     have hL : ((bidual A).app (op U) (∑ i, a i • m i)).app W ψ =
         ∑ i, R.map W.unop.hom.op (a i) * b i := by
       change ψ.app T' (A.map W.unop.hom.op (∑ i, a i • m i)) = _
@@ -161,5 +161,33 @@ lemma bidual_app_bijective {ι : Type*} [Fintype ι] [DecidableEq ι]
       exact ((Ψ.app W).hom.map_smul _ _).trans (congrArg (b i * ·) (hΨ i))
     rw [hL, hR]
     exact Finset.sum_congr rfl fun i _ ↦ mul_comm (R.map W.unop.hom.op (a i)) (b i)
+
+/-- The restriction of a morphism between restrictions to `Over U` along `g : V ⟶ U` is additive
+in the morphism. -/
+lemma restrictOverMap_sum {M N : PresheafOfModules.{u} (R ⋙ forget₂ _ _)} {V : C} (g : V ⟶ U)
+    {ι : Type*} (t : Finset ι) (f : ι → ((restrictOver R U).obj M ⟶ (restrictOver R U).obj N)) :
+    restrictOverMap g (∑ i ∈ t, f i) = ∑ i ∈ t, restrictOverMap g (f i) :=
+  map_sum ({ toFun := restrictOverMap g, map_zero' := rfl, map_add' _ _ := rfl } :
+    ((restrictOver R U).obj M ⟶ (restrictOver R U).obj N) →+
+      ((restrictOver R V).obj M ⟶ (restrictOver R V).obj N)) f t
+
+/-- **Biduality for locally free presheaves of modules of finite rank.** If `A` is free of
+finite rank on `U`, then the biduality morphism is bijective on sections over every `V ⟶ U`. -/
+lemma bidual_app_bijective_of_hom {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (s : ι → ((restrictOver R U).obj (unit _) ⟶ (restrictOver R U).obj A))
+    (c : ι → ((restrictOver R U).obj A ⟶ (restrictOver R U).obj (unit _)))
+    (hsc : ∀ i j, s j ≫ c i = if j = i then 𝟙 _ else 0)
+    (htot : ∑ i, c i ≫ s i = 𝟙 _) {V : C} (g : V ⟶ U) :
+    Function.Bijective ((bidual A).app (op V)) := by
+  refine bidual_app_bijective (fun i ↦ restrictOverMap g (s i)) (fun i ↦ restrictOverMap g (c i))
+    (fun i j ↦ ?_) ?_
+  · change restrictOverMap g (s j ≫ c i) = _
+    rw [hsc]
+    split_ifs
+    · exact restrictOverMap_id (R := R) (M := unit _) (N := unit _) (𝟙 _)
+    · rfl
+  · change ∑ i, restrictOverMap g (c i ≫ s i) = _
+    rw [← restrictOverMap_sum, htot]
+    rfl
 
 end PresheafOfModules

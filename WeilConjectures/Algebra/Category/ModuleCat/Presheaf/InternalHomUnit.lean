@@ -113,7 +113,7 @@ noncomputable def homObjUnitIsoApp (X : Cᵒᵖ) : (homObj (unit _) N).obj X ≅
           (φ.app (op (Over.mk (𝟙 X.unop))) (1 : R.obj (op X.unop))) =
             φ.app W (1 : R.obj (op W.unop.left))
         rw [one_smul]
-        refine (naturality_apply φ (Over.homMk W.unop.hom : W.unop ⟶ Over.mk (𝟙 X.unop)).op
+        refine (naturality_apply φ (Over.homMk W.unop.hom (Category.comp_id _) : W.unop ⟶ Over.mk (𝟙 X.unop)).op
           (1 : R.obj (op X.unop))).symm.trans ?_
         exact congrArg (φ.app W) (unit_map_one (R := R ⋙ forget₂ _ _) W.unop.hom.op)
       inv_hom_id := by
@@ -134,7 +134,7 @@ noncomputable def homObjUnitIso : homObj (unit _) N ≅ N :=
       N.map g (φ.app (op (Over.mk (𝟙 X.unop))) (1 : R.obj X))
     refine (restrictOver_hom_app_congr (M := unit _) (N := N) φ (Category.id_comp g.unop)
       (1 : R.obj Y)).trans (Eq.trans ?_ (naturality_apply φ
-        (Over.homMk g.unop : Over.mk g.unop ⟶ Over.mk (𝟙 X.unop)).op (1 : R.obj X)))
+        (Over.homMk g.unop (Category.comp_id _) : Over.mk g.unop ⟶ Over.mk (𝟙 X.unop)).op (1 : R.obj X)))
     exact congrArg (φ.app _) (unit_map_one (R := R ⋙ forget₂ _ _) g).symm
 
 end Unit
