@@ -2527,3 +2527,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:31 L: merged deliver/J1/lem-pc-fppf-affine-refinement (reviewer FIX; first push; new nodes: 0)
 - 20:31 L: merged deliver/E1/lem-sc-ample-positive-degree (reviewer FIX; first push; new nodes: 0)
 - 20:31 L: merged deliver/K1/def-nagata-final-descended-model (reviewer FIX; first push; new nodes: 0)
+- 20:32 L: merged deliver/E1/pqf-lem-leray (reviewer FIX; first push; new nodes: 0)
