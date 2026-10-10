@@ -13,9 +13,73 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-depth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(Depth by vanishing of Ext.) Put $\\kappa=R/\\mathfrak m$. Each of $N'$, $N$, $N''$ is a nonzero finite module over the Noetherian local ring $R$, so by [lem-weil-pbc-depth-ext] (Stacks 00LW) its depth [def-weil-pbc-depth] is a finite integer $\\ge0$ equal to the smallest $i\\ge0$ with $\\operatorname{Ext}^i_R(\\kappa,-)\\neq0$, Ext as in [def-pc-ext]. Consequently, for $X\\in\\{N',N,N''\\}$ and every integer $n$: $\\operatorname{depth}(X)\\ge n$ if and only if $\\operatorname{Ext}^i_R(\\kappa,X)=0$ for all integers $0\\le i<n$ (if $\\operatorname{depth}(X)\\ge n$, every $i<n$ is below the smallest index of a nonzero Ext; conversely, if all $\\operatorname{Ext}^i$ with $i<n$ vanish, the smallest index of a nonzero Ext is $\\ge n$; for $n\\le0$ both sides hold). In particular all depths in the statement are integers, so the conventions $\\infty\\pm1=\\infty$ are not needed, and in (2) the bound $\\operatorname{depth}(N')-1$ may be $-1$.",
+   "uses": [
+    "lem-weil-pbc-depth-ext",
+    "def-weil-pbc-depth",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LX proof (\"Use the characterization of depth using the Ext groups, see Lemma 00LW\"), lines 17918-17920"
+   }
+  },
+  {
+   "text": "(The long exact sequence.) Apply [lem-weil-pbc-ext-long-exact-second-variable] (Stacks 00LU) to $M=\\kappa$ and the short exact sequence $0\\to N'\\xrightarrow{u}N\\xrightarrow{v}N''\\to0$ [def-weil-pbc-exact-sequence]: for every $i\\ge0$ the sequences (a) $\\operatorname{Ext}^i_R(\\kappa,N')\\xrightarrow{u_*}\\operatorname{Ext}^i_R(\\kappa,N)\\xrightarrow{v_*}\\operatorname{Ext}^i_R(\\kappa,N'')$, (b) $\\operatorname{Ext}^i_R(\\kappa,N)\\xrightarrow{v_*}\\operatorname{Ext}^i_R(\\kappa,N'')\\xrightarrow{\\delta^i}\\operatorname{Ext}^{i+1}_R(\\kappa,N')$, (c) $\\operatorname{Ext}^{i}_R(\\kappa,N'')\\xrightarrow{\\delta^i}\\operatorname{Ext}^{i+1}_R(\\kappa,N')\\xrightarrow{u_*}\\operatorname{Ext}^{i+1}_R(\\kappa,N)$ are exact at the middle term, and (c$_0$) $0\\to\\operatorname{Ext}^0_R(\\kappa,N')\\xrightarrow{u_*}\\operatorname{Ext}^0_R(\\kappa,N)$ is exact, i.e. $u_*$ is injective in degree $0$. In an exact sequence $A\\to B\\to C$ of abelian groups with $A=0$ and $C=0$ one has $B=0$ (the kernel of $B\\to C$ is all of $B$ and equals the image of $A$, which is $0$); likewise $B=0$ when $B\\to C$ is injective and $C=0$.",
+   "uses": [
+    "lem-weil-pbc-ext-long-exact-second-variable",
+    "def-weil-pbc-exact-sequence",
+    "def-pc-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LX proof (the long exact cohomology sequence from Lemma 00LU), lines 17920-17935"
+   }
+  },
+  {
+   "text": "(Part (1).) Let $n=\\min\\{\\operatorname{depth}(N'),\\operatorname{depth}(N'')\\}$ and $0\\le i<n$. Then $i<\\operatorname{depth}(N')$ and $i<\\operatorname{depth}(N'')$, so $\\operatorname{Ext}^i_R(\\kappa,N')=0$ and $\\operatorname{Ext}^i_R(\\kappa,N'')=0$ by Step 1, and the exact sequence (a) of Step 2 gives $\\operatorname{Ext}^i_R(\\kappa,N)=0$. By Step 1 again, $\\operatorname{depth}(N)\\ge n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LX (lemma-depth-in-ses), proof lines 17918-17936"
+   }
+  },
+  {
+   "text": "(Part (2).) Let $n=\\min\\{\\operatorname{depth}(N),\\operatorname{depth}(N')-1\\}$ and $0\\le i<n$ (if $n\\le0$ there is nothing to prove, depths being $\\ge0$). Then $i<\\operatorname{depth}(N)$ and $i+1<\\operatorname{depth}(N')$, so $\\operatorname{Ext}^i_R(\\kappa,N)=0$ and $\\operatorname{Ext}^{i+1}_R(\\kappa,N')=0$ by Step 1, and the exact sequence (b) of Step 2 gives $\\operatorname{Ext}^i_R(\\kappa,N'')=0$. By Step 1, $\\operatorname{depth}(N'')\\ge n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LX (lemma-depth-in-ses), proof lines 17918-17936"
+   }
+  },
+  {
+   "text": "(Part (3).) Let $n=\\min\\{\\operatorname{depth}(N),\\operatorname{depth}(N'')+1\\}$ and $0\\le i<n$. Then $\\operatorname{Ext}^i_R(\\kappa,N)=0$ by Step 1 since $i<\\operatorname{depth}(N)$. If $i=0$, (c$_0$) of Step 2 makes $\\operatorname{Ext}^0_R(\\kappa,N')\\to\\operatorname{Ext}^0_R(\\kappa,N)=0$ injective, so $\\operatorname{Ext}^0_R(\\kappa,N')=0$. If $i\\ge1$, then $i-1<\\operatorname{depth}(N'')$, so $\\operatorname{Ext}^{i-1}_R(\\kappa,N'')=0$ by Step 1, and the exact sequence (c) of Step 2 with index $i-1$, $\\operatorname{Ext}^{i-1}_R(\\kappa,N'')\\to\\operatorname{Ext}^i_R(\\kappa,N')\\to\\operatorname{Ext}^i_R(\\kappa,N)$, gives $\\operatorname{Ext}^i_R(\\kappa,N')=0$. By Step 1, $\\operatorname{depth}(N')\\ge n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00LX (lemma-depth-in-ses), proof lines 17918-17936"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-depth-ext",
+  "def-weil-pbc-depth",
+  "def-pc-ext",
+  "lem-weil-pbc-ext-long-exact-second-variable",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LX (lemma-depth-in-ses, line 17905), proof lines 17918-17936, via Lemma 00LW (lemma-depth-ext) and Lemma 00LU (lemma-long-exact-seq-ext)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,7 +123,7 @@
   "file": "Mathlib/RingTheory/Depth/Rees.lean",
   "how": "line 158 (read by sed -n 145,170p): the Rees theorem, equivalence of the existence of an M-regular sequence of length n in I with the vanishing of Ext^i(R/I, M) for i < n (R Noetherian, M finite nontrivial, IM < M). It is the Ext characterization of depth (00LW) on which the proof of 00LX rests; the pinned Mathlib has no depth and no depth inequality for short exact sequences: candidate for the proof, not a leaf (B8)."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -79,5 +143,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-depth-in-ses",
+  "worker": "stage1",
+  "summary": "Checked statement against Stacks 00LX (algebra.tex 17905-17916): agrees clause by clause (statement kept). The source proof is two lines (Ext characterization 00LW plus the long exact Ext sequence 00LU); written out as 5 steps: Step 1 turns 00LW into 'depth(X) >= n iff Ext^i(kappa,X)=0 for i<n' (all depths finite, so the infinity conventions are vacuous); Step 2 extracts the three exact pieces and the degree-0 injectivity from 00LU; Steps 3-5 prove (1),(2),(3) by vanishing of the middle term. The citer lem-weil-pbc-cm-local-free-resolution-to-mcm (step 4) uses parts (2) and (3); all three are proved. New nodes: lem-weil-pbc-depth-ext (00LW, unsplit, candidate ModuleCat.exists_isRegular_tfae Rees.lean:158, not one line by B8) and lem-weil-pbc-ext-long-exact-second-variable (00LU, Mathlib leaf: Abelian.Ext.covariantSequence_exact line 135 and postcomp_mk0_injective_of_mono line 166). Ext is the existing def-pc-ext (Hom in D(R-Mod)), which is also Mathlib's Abelian.Ext; the Stacks resolution definition (00LO) is not needed by these statements."
+ },
+ "reviewed": "pass (L, 2026-10-10): 5 steps follow 00LX: depth via Ext vanishing (new unsplit node 00LW, Rees candidate) and the long exact Ext sequence in the second variable (new leaf 00LU); the three inequalities are read off the exact pieces."
 }

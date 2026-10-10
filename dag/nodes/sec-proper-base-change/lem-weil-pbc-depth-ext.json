@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-depth-ext",
+ "kind": "statement",
+ "title": "Depth of a finite module over a Noetherian local ring via Ext from the residue field",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring], i.e. a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$, let $\\kappa=R/\\mathfrak m$, and let $M$ be a nonzero finite $R$-module [def-weil-finitely-generated-module]. For $i\\ge0$ let $\\operatorname{Ext}^i_R(\\kappa,M)$ be the $i$-th Ext group of [def-pc-ext] in the abelian category of $R$-modules. Then there is an integer $i\\ge0$ with $\\operatorname{Ext}^i_R(\\kappa,M)\\neq0$, and the depth $\\operatorname{depth}(M)=\\operatorname{depth}_{\\mathfrak m}(M)$ of [def-weil-pbc-depth] is finite and equals the smallest integer $i\\ge0$ such that $\\operatorname{Ext}^i_R(\\kappa,M)\\neq0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LW (lemma-depth-ext, line 17863), proof lines 17870-17901; tag verified in literature/stacks-project/tags/tags: 00LW,algebra-lemma-depth-ext"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-pc-ext",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "depth of a finite module over Noetherian local ring equals smallest i with Ext^i(residue field, M) nonzero",
+   "results": "Ideal.iInf_pow_smul_eq_bot_of_isLocalRing (RingTheory.Filtration), IsArtinianRing.tfae, Module.length_eq_one, IsLocalRing.finrank_cotangentSpace_eq_zero_iff, Module.supportDim_le_supportDim_quotSMulTop_succ (RingTheory.KrullDimension.Regular): no depth",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "depth of M equals the least i such that Ext^i_R(R/m, M) ≠ 0 for a finitely generated module over a Noetherian local ring",
+   "results": "Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, Module.supportDim_le_supportDim_quotSMulTop_succ, Module.supportDim, Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_add_length_eq_supportDim_of_isRegular, Module.supportDim_eq_ringKrullDim_quotient_annihilator: support dimension only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.exists_isRegular_tfae",
+   "results": "ModuleCat.exists_isRegular_tfae [Small R] [IsNoetherianRing R] (I : Ideal R) (n : ℕ) (M : ModuleCat R) [Module.Finite R M] (smul_lt : I • ⊤ < ⊤): TFAE of (∀ N finite nontrivial with support ⊆ V(I), ∀ i < n, Subsingleton (Ext N M i)), (∀ i < n, Subsingleton (Ext (Shrink (R ⧸ I)) M i)), (∃ such N with support = V(I)), (∃ rs, rs.length = n ∧ rs ⊆ I ∧ IsRegular M rs); Mathlib.RingTheory.Depth.Rees",
+   "date": "2026-10-10",
+   "verdict": "candidate (not a one-line specialization; see mathlib_candidate)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'depth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory; grep -rn 'IsLocalRing.depth\\|Ideal.depth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 1,60p and 130,175p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Depth/Rees.lean",
+   "results": "only RingTheory/Depth/Rees.lean (line 158 exists_isRegular_tfae, the Rees theorem), RingTheory/Regular/RegularSequence.lean, Polynomial/ScaleRoots.lean (other sense); no IsLocalRing.depth, no Ideal.depth in the pinned Mathlib",
+   "date": "2026-10-10",
+   "verdict": "no match (candidate exists_isRegular_tfae)"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsLocalRing.depth (project root ~/weil-conjectures-slopmaster2)",
+   "results": "no items, index: unavailable (not a proof of absence; the grep above is)",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "ModuleCat.exists_isRegular_tfae",
+  "file": "Mathlib/RingTheory/Depth/Rees.lean",
+  "line": 158,
+  "how": "Rees' theorem (read by sed -n 130,175p): for R Noetherian, M finite with IM < M and n : ℕ, Ext^i(R/I, M) = 0 for all i < n iff there is an M-regular sequence of length n in I. With I = m this gives: depth(M) ≥ n iff Ext^i(κ,M) = 0 for i < n, once one adds (a) Nakayama (mM ≠ M for M nonzero finite over a local ring), (b) the agreement of Mathlib's RingTheory.Sequence.IsRegular with the regular sequences of [def-weil-pbc-depth] and that a regular sequence of length ≥ n has an initial piece of length n which is regular, (c) Shrink (R ⧸ I) ≅ R/I and Mathlib's Ext against [def-pc-ext], and (d) finiteness of depth(M) (Stacks 00LR/00LK) for the existence of a nonzero Ext. Several lines, not one: candidate, not a leaf (B8). Upstream Mathlib (not pinned) has IsLocalRing.depth_eq_sSup_length_isRegular in RingTheory/Depth/Basic.lean."
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-depth-in-ses",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

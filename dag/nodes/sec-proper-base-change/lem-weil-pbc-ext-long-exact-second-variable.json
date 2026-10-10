@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-ext-long-exact-second-variable",
+ "kind": "statement",
+ "title": "Long exact sequence of Ext of modules in the second variable",
+ "statement": "Let $R$ be a commutative ring, $M$ an $R$-module and $0\\to N'\\xrightarrow{u}N\\xrightarrow{v}N''\\to0$ a short exact sequence of $R$-modules [def-weil-pbc-exact-sequence]. For $i\\ge0$ write $\\operatorname{Ext}^i_R(M,-)$ for the $i$-th Ext group $\\operatorname{Ext}^i_{\\mathcal A}(M,-)$ of [def-pc-ext] in the abelian category $\\mathcal A$ of $R$-modules, with the maps $u_*:\\operatorname{Ext}^i_R(M,N')\\to\\operatorname{Ext}^i_R(M,N)$ and $v_*:\\operatorname{Ext}^i_R(M,N)\\to\\operatorname{Ext}^i_R(M,N'')$ given by composition with $u$ and $v$. Then there are homomorphisms $\\delta^i:\\operatorname{Ext}^i_R(M,N'')\\to\\operatorname{Ext}^{i+1}_R(M,N')$ ($i\\ge0$) such that the sequence $$0\\to\\operatorname{Ext}^0_R(M,N')\\xrightarrow{u_*}\\operatorname{Ext}^0_R(M,N)\\xrightarrow{v_*}\\operatorname{Ext}^0_R(M,N'')\\xrightarrow{\\delta^0}\\operatorname{Ext}^1_R(M,N')\\xrightarrow{u_*}\\operatorname{Ext}^1_R(M,N)\\xrightarrow{v_*}\\operatorname{Ext}^1_R(M,N'')\\xrightarrow{\\delta^1}\\operatorname{Ext}^2_R(M,N')\\to\\cdots$$ is exact; that is, $u_*$ is injective in degree $0$, and for every $i\\ge0$ the sequence $\\operatorname{Ext}^i_R(M,N')\\to\\operatorname{Ext}^i_R(M,N)\\to\\operatorname{Ext}^i_R(M,N'')\\to\\operatorname{Ext}^{i+1}_R(M,N')\\to\\operatorname{Ext}^{i+1}_R(M,N)$ is exact at its three inner terms.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00LU (lemma-long-exact-seq-ext, line 17623), with the Ext groups of Section Tag 00LO (section-ext, line 17403); tag verified in literature/stacks-project/tags/tags: 00LU,algebra-lemma-long-exact-seq-ext"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-pc-ext"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "long exact sequence of Ext groups in second variable for a short exact sequence",
+   "results": "CategoryTheory.Abelian.Ext.covariant_sequence_exact₁/₂/₃ and covariant_sequence_exact₁'/₂'/₃', covariantSequence (Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences); contravariantSequence_exact, contravariant_sequence_exact₃ (same module, first variable)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "covariant long exact sequence Ext(X, S.X₁) → Ext(X, S.X₂) → Ext(X, S.X₃) → Ext^{n+1}(X, S.X₁) for a short exact sequence S in an abelian category",
+   "results": "CategoryTheory.Abelian.Ext.covariant_sequence_exact₁', covariant_sequence_exact₃', covariant_sequence_exact₂', contravariant_sequence_exact₁'/₂'/₃' (Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.covariantSequence_exact",
+   "results": "CategoryTheory.Abelian.Ext.covariantSequence_exact (X : C) (hS : S.ShortExact) (n₀ n₁ : ℕ) (h : n₀ + 1 = n₁) : (covariantSequence X hS n₀ n₁ h).Exact, Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'covariantSequence_exact\\|postcomp_mk₀_injective_of_mono' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; sed -n 1,30p and 55,180p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean; sed -n 110,125p and 215,230p Ext/Basic.lean; grep -rn 'instance.*HasExt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "ExactSequences.lean:128 covariantSequence (the 6-term window Ext^{n₀}(X,S.X₁)→Ext^{n₀}(X,S.X₂)→Ext^{n₀}(X,S.X₃)→Ext^{n₁}(X,S.X₁)→Ext^{n₁}(X,S.X₂)→Ext^{n₁}(X,S.X₃), n₀+1=n₁), :135 covariantSequence_exact, :166 postcomp_mk₀_injective_of_mono (injectivity of Ext^0(L,M)→Ext^0(L,N) for f mono); Ext/Basic.lean:118 def Ext X Y n := SmallShiftedHom for quasi-isomorphisms (a small model of Hom_{D(C)}(X,Y[n]), Ext.homAddEquiv); Algebra/Category/ModuleCat/Ext/HasExt.lean:27 instance HasExt (ModuleCat R) for Small R",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "CategoryTheory.Abelian.Ext.covariantSequence_exact (project root ~/weil-conjectures-slopmaster2)",
+   "results": "index unavailable; existence confirmed by loogle and grep above",
+   "date": "2026-10-10",
+   "verdict": "inconclusive (tool), match by grep"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.Ext.covariantSequence_exact; CategoryTheory.Abelian.Ext.postcomp_mk₀_injective_of_mono",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean",
+  "line": 135,
+  "how": "specializes in one line per clause, with C = ModuleCat R (abelian; HasExt instance Mathlib/Algebra/Category/ModuleCat/Ext/HasExt.lean line 27), X = M and S the short complex N' → N → N'' with hS : S.ShortExact: exactness of every window Ext^i(M,N')→Ext^i(M,N)→Ext^i(M,N'')→Ext^{i+1}(M,N')→Ext^{i+1}(M,N)→Ext^{i+1}(M,N'') is covariantSequence_exact (line 135, sequence defined line 128, with n₀ = i, n₁ = i+1, δ^i = postcomposition with hS.extClass); injectivity of u_* in degree 0 is postcomp_mk₀_injective_of_mono (line 166) with f = u mono. Mathlib's Abelian.Ext X Y n (Ext/Basic.lean line 118) is a small model of Hom_{D(C)}(X, Y[n]), the group of [def-pc-ext], via Ext.homAddEquiv. Lines read with sed."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-depth-in-ses",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf accepted by L (2026-10-10): Abelian.Ext.covariantSequence_exact (Ext/ExactSequences.lean:135) for every window and postcomp_mk0_injective_of_mono (:166) for degree 0, in ModuleCat R; checked with grep/sed.",
+ "reviewed": "pass (L, 2026-10-10): leaf, declarations checked."
+}
