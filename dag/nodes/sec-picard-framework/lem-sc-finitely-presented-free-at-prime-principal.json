@@ -1,0 +1,74 @@
+{
+ "id": "lem-sc-finitely-presented-free-at-prime-principal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-riemann-roch",
+   "place": "The torsion-free quotient: a coherent module with free stalks is locally free",
+   "via": [
+    "lem-sc-affine-finite-module-free-locus",
+    "lem-sc-coherent-free-stalks-locally-free",
+    "lem-sc-regular-curve-torsionfree-free"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A finitely presented module free at a prime is free on a principal neighborhood",
+ "statement": "Let $A$ be a commutative ring, let $M$ be a finitely presented [def-sc-finitely-presented-module] $A$-module, and let $\\mathfrak p$ be a prime ideal of $A$. If $M_{\\mathfrak p}$ is a finite free [def-weil-pbc-free-module] $A_{\\mathfrak p}$-module, then there exists $f\\in A\\setminus\\mathfrak p$ such that $M_f$ is a finite free [def-weil-pbc-free-module] $A_f$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0GWM (algebra-lemma-finitely-presented-localization-free)"
+ },
+ "stmt_deps": [
+  "def-sc-finitely-presented-module",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finitely presented module free at a prime is free after localizing at an element outside the prime",
+   "results": "Module.FinitePresentation.exists_free_localizedModule_powers",
+   "date": "2026-10-10",
+   "verdict": "generalization: gives a power localization and basis once a localized free module is supplied"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation.exists_free_localizedModule_powers",
+   "results": "Module.FinitePresentation.exists_free_localizedModule_powers in Mathlib.RingTheory.Localization.Free",
+   "date": "2026-10-10",
+   "verdict": "generalization: algebraic localization statement, not the Stacks prime-neighborhood formulation"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'exists_free_localizedModule_powers|freeLocus_eq_univ_iff' Mathlib/RingTheory/Localization/Free.lean Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "results": "Localization/Free.lean:78 and Spectrum/Prime/FreeLocus.lean:154-175",
+   "date": "2026-10-10",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 78,86p Mathlib/RingTheory/Localization/Free.lean; sed -n 177p Mathlib/RingTheory/Localization/Finiteness.lean",
+   "results": "Module.FinitePresentation.exists_free_localizedModule_powers (Free.lean:78); instance Module.Finite (Localization S) (LocalizedModule S M) (Finiteness.lean:177)",
+   "date": "2026-10-10",
+   "verdict": "match: one-line specialization S = p.primeCompl, R_S = Localization.AtPrime p (reviewer R-afl)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.FinitePresentation.exists_free_localizedModule_powers",
+  "file": "Mathlib/RingTheory/Localization/Free.lean",
+  "line": 78,
+  "how": "one-line specialization of Free.lean:78 with S = p.asIdeal.primeCompl, R_S = Localization.AtPrime p, f = LocalizedModule.mkLinearMap (Nontrivial R_S as a local ring): gives r not in p with M_r free over R_r; finiteness of M_r is the instance Mathlib/RingTheory/Localization/Finiteness.lean:177 (Module.Finite (Localization S) (LocalizedModule S M)), M being finite as finitely presented"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-affine-finite-module-free-locus",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr"
+}

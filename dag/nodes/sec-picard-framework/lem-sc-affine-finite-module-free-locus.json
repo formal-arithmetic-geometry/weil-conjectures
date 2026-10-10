@@ -26,9 +26,65 @@
   "def-weil-pbc-noetherian-ring",
   "lem-weil-pbc-spec-module-tilde-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $A$ is Noetherian and $M$ is finite, $M$ is finitely presented by [lem-sc-noetherian-finite-module-finite-presentation].",
+   "uses": [
+    "lem-sc-noetherian-finite-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0517, Noetherian finite modules are finitely presented"
+   }
+  },
+  {
+   "text": "For every prime $\\mathfrak p\\subset A$, the hypothesis gives that $M_{\\mathfrak p}$ is finite free. Applying [lem-sc-finitely-presented-free-at-prime-principal] yields an element $f_{\\mathfrak p}\\notin\\mathfrak p$ for which $M_{f_{\\mathfrak p}}$ is finite free; thus the principal opens $D(f_{\\mathfrak p})$ cover $\\operatorname{Spec}(A)$.",
+   "uses": [
+    "lem-sc-finitely-presented-free-at-prime-principal",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0GWM, pointwise localization-free criterion"
+   }
+  },
+  {
+   "text": "The spectrum of $A$ is quasi-compact, so finitely many of these principal opens cover it. By [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](i), their defining elements $f_1,\\ldots,f_n$ generate the unit ideal. Each corresponding localization $M_{f_i}$ is finite free by construction.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E0 and 00E8, Zariski topology and quasi-compactness of Spec"
+   }
+  },
+  {
+   "text": "On $\\operatorname{Spec}(A)$, the module sheaf $\\widetilde M$ has sections $M_f$ on each principal open $D(f)$ by [lem-weil-pbc-spec-module-tilde-sections]. Therefore the finite principal cover above trivializes $\\widetilde M$ by finite free modules, which is exactly finite local freeness.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I1 and 01I2, module sheaves on affine schemes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sc-finitely-presented-free-at-prime-principal",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0GWM, algebra-lemma-finitely-presented-localization-free"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,12 +116,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-coherent-free-stalks-locally-free",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-affine-finite-module-free-locus",
+  "worker": "stage1",
+  "summary": "Split the affine free-locus criterion into Noetherian finite-to-finitely-presented, the Stacks 0GWM pointwise principal-localization lemma, quasi-compact extraction of a finite principal cover, and the affine module-sheaf dictionary.",
+  "blueprint": [
+   "The torsion-free quotient: a coherent module with free stalks is locally free"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-afl",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-afl (reviewer sub-agent of L); spot-checked: Source Stacks 0GWM (algebra.tex:19445, lemma-finitely-presented-localization-free: R ring, p prime, M finitely presented, M_p free => f not in p with M_f free) agrees with lem-sc-finitely-presented-free-at-prime-principal hypothesis by hypothesis; Definition 0518(2) agrees with def-sc-finitely-presented-module. Item statement unchanged. Step 1 carried by lem-sc-noetherian-finite-module-finite-presentation (Mathlib Module.finitePresentation_of_finite, FinitePresentation.lean:118 verified, [IsNoetherianRing R] [Module.Finite R M]); step 2 by the 0GWM node (M f.p. from step 1, M_p finite free by hypothesis) and def-weil-pbc-free-module; step 3 by lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact (i) and (iii); step 4 by lem-weil-pbc-spec-module-tilde-sections (sections M_r on D(r), restrictions canonical, so M_f = A_f^r gives the trivialization on the basis D(fg) of D(f)). Fixes: dag/nodes/sec-picard-framework/def-sc-finitely-presented-module.json: mathlib_match.line: 39 (docstring) -> 67 (class Module.FinitePresentation), how names lines 67-69; dag/nodes/sec-picard-framework/lem-sc-finitely-presented-free-at-prime-principal.json: status unsplit -> mathlib, mathlib_match = Module.FinitePresentation.exists_free_localizedModule_powers (Localization/Free.lean:78 verified) specialized to S = p.primeCompl, R_S = Localization.AtPrime p, finiteness of M_r by the instance Localization/Finiteness.lean:177 (B8 one-line specialization; the worker had recorded it as 'generalization'), search entry added. Blueprint search 'finitely presented module', 'localization free prime': no matching node. No slopmaster2 declaration states the item. Small cases: M=A^r; M=0; M=k[x]/(x) over k[x] (not free at (x), hypothesis fails); (x,y) over k[x,y]. Report omits def-sc-finitely-presented-module from its file list (minor F). Start Sat Oct 10 04:21:22 PM UTC 2026, end Sat Oct 10 04:23:10 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
