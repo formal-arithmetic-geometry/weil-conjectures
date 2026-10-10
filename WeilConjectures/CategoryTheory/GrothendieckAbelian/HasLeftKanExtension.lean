@@ -291,8 +291,8 @@ namespace AlgebraicGeometry.ProEtale
 `g : Z ⟶ Y` exist for `A`-valued presheaves on the small pro-étale sites: the sites are
 essentially small and the Grothendieck abelian category `A` is cocomplete. For a weakly
 étale `g` this is proved in
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` via
-the adjunction with the localization functor. -/
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` via the adjunction with
+the localization functor. -/
 instance hasLeftKanExtension_op_overPullback (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] {Z Y : Scheme.{u}} (g : Z ⟶ Y) (F : Y.ProEtᵒᵖ ⥤ A) :
     (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op.HasLeftKanExtension F :=
@@ -340,8 +340,8 @@ instance preservesFiniteLimits_op_lan_overMap (A : Type u') [Category.{u + 1} A]
 comma categories of the pointwise left Kan extensions are cofiltered (base change
 preserves the finite limits of the pro-étale slice), so the Kan extension is computed by
 filtered colimits, which are exact in `A` by AB5. For a weakly étale `g` this is proved in
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` via the adjunction
-with the localization functor. -/
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs` via the
+adjunction with the localization functor. -/
 instance preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian
     (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
     {Z Y : Scheme.{u}} (g : Z ⟶ Y) :

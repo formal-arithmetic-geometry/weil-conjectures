@@ -23,8 +23,7 @@ invertible after restricting along every `g i` is itself invertible
 (`AlgebraicGeometry.ProEtale.isIso_of_isIso_localizationRestriction`). Here restriction is
 the functor `AlgebraicGeometry.ProEtale.localizationRestriction` of
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.OpenImmersion.Defs`, which for
-an open
-immersion is `AlgebraicGeometry.ProEtale.openImmersionRestriction`.
+an open immersion is `AlgebraicGeometry.ProEtale.openImmersionRestriction`.
 
 Note the difference with the étale statement: joint surjectivity of the `g i` is *not*
 enough, since the pro-étale topology imposes a quasi-compactness condition on covers as

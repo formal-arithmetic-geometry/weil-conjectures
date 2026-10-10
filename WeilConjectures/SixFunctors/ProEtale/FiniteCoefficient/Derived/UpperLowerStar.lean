@@ -139,8 +139,7 @@ reflection theorem, in
 The additivity and exactness of `g^*` are `ProEtale.additive_upperStar`,
 `ProEtale.preservesFiniteLimits_upperStar` and `ProEtale.preservesHomology_upperStar` of
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs`; the left exactness
-there rests
-on the sorried `HasSheafify` instance for the small pro-étale site of `Z` and on left
+there rests on the sorried `HasSheafify` instance for the small pro-étale site of `Z` and on left
 exactness of the left Kan extension along the opposite of base change, both global
 instances of the folder `WeilConjectures.CategoryTheory.GrothendieckAbelian` (for a weakly
 étale `g` the latter is proved, not sorried). Since `g^*` is exact, it preserves in
