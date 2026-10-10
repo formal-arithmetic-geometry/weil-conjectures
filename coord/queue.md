@@ -1,8 +1,8 @@
 # Work queue
 
-861 items; claim with `tools/claim.py next <group> [--stage N]`.
+860 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (356)
+## Stage 1: nodes to split (354)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -53,7 +53,6 @@
 | `lem-sc-ga-cohomology` | 3007 | none |
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
 | `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
-| `lem-weil-pbc-simplicial-set-add-simplices` | 3007 | none |
 | `def-pc-dimension` | 3008 | none |
 | `def-pc-divisor-line-bundle` | 3008 | none |
 | `def-pc-projective-morphism` | 3008 | none |
@@ -64,7 +63,6 @@
 | `lem-pc-h0-proper-variety` | 3008 | none |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
 | `lem-sc-smooth-connected-curve-local-rings` | 3008 | none |
-| `lem-sc-sylow-module-filtration` | 3008 | none |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
 | `lem-weil-pbc-matching-object-coskeleton` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
@@ -363,7 +361,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (505)
+## Stage 2: nodes to state (506)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -766,6 +764,7 @@
 | `lem-weil-pbc-sheaf-on-basis-extends` | 1 | state |
 | `lem-weil-pbc-sheaf-tensor-closed` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
+| `lem-weil-pbc-simplicial-set-add-simplices` | 1 | state |
 | `lem-weil-pbc-skyscraper-constant-on-point-closure` | 1 | state |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-smooth-conormal-sequence-exact` | 1 | state |
@@ -873,7 +872,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 376 nodes that wait for stage 1, 938 nodes that wait for a statement dependency.
+Not open yet: 374 nodes that wait for stage 1, 939 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
