@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-kun-algebraic-separable-smooth",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Algebraic separable extensions are filtered colimits of finite etale algebras",
@@ -12,27 +12,88 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-algebraic-separable-smooth.md",
   "place": "node lem-kun-algebraic-separable-smooth, order 1756"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-finite-separable-extension-etale"
+ ],
  "proof": [
   {
-   "text": "Every element of $L$ generates a finite extension of $K$, and the\ncompositum of two finite subextensions is finite, so the finite subextensions\nof $L/K$ form a filtered system whose union is $L$. They are separable\nbecause $L/K$ is, and a finite separable extension of a field is a finite\netale algebra over that field. A finite etale algebra over a field is smooth:\nit is of finite presentation and flat, and after base change to an algebraic\nclosure of $K$ it becomes a finite product of copies of that field, so its\ngeometric fibres are regular; this is smoothness in the sense of\n[def-sbc-smooth-morphisms]. Hence $L$, being the filtered colimit of\nthese finite etale $K$-algebras, is a filtered colimit of smooth\n$K$-algebras.",
+   "text": "For every $x\\in L$, the field $K(x)$ is finite over $K$ because $L/K$ is algebraic. Given finite subextensions $E_1,E_2\\subseteq L$, their compositum $E_1E_2$ is again finite over $K$ and contains both. Thus the finite subextensions form a filtered poset, and their union is $L$, so $L$ is their filtered colimit. Each finite subextension is separable because $L/K$ is separable; by [lem-weil-pbc-finite-separable-extension-etale], its affine scheme over $K$ is etale. By [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], an etale morphism in the sense of [def-weil-etale-morphism] is smooth [def-sbc-smooth-morphisms] (of relative dimension zero), so each stage is a smooth $K$-algebra. The same filtered system consequently exhibits $L$ as a filtered colimit of smooth $K$-algebras.",
    "uses": [
-    "def-sbc-smooth-morphisms"
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-algebraic-separable-smooth.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
-  "def-sbc-smooth-morphisms"
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-algebraic-separable-smooth.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "an algebraic separable field extension is a filtered colimit of finite separable extensions and smooth algebras",
+   "results": "Algebra.FormallyEtale.of_isSeparable; Algebra.Etale.iff_exists_algEquiv_prod; Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntermediateField, Algebra.IsSeparable, Algebra.Etale, filtered colimit",
+   "results": "Unknown identifier filtered; no hit",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*colimit|finite.*separable|Algebra.*Etale in Mathlib/FieldTheory",
+   "results": "no matching declaration in Mathlib/FieldTheory",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "algebraic separable extension filtered colimit finite separable smooth algebra",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale.iff_exists_algEquiv_prod, Algebra.IsSeparable",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod in Mathlib.RingTheory.Etale.Field",
+   "date": "2026-10-11",
+   "verdict": "generalization, but not the filtered-colimit statement"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSepClosure|IntermediateField|isColimit in Mathlib/FieldTheory",
+   "results": "no hit",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite separable field extension is an etale algebra and etale algebras are smooth",
+   "results": "Algebra.FormallyEtale.of_isSeparable; Algebra.Etale.iff_exists_algEquiv_prod; Algebra.Etale.formallyEtale",
+   "date": "2026-10-11",
+   "verdict": "general facts only; no exact colimit statement"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -54,5 +115,21 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-kunneth-ordinary"
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-kun-algebraic-separable-smooth",
+  "worker": "stage1",
+  "summary": "Statement retained. The proof is one elementary step: finite subextensions form a filtered system under compositum and have union L; separability gives the existing finite-separable-etale leaf, and smoothness follows directly from the smoothness definition after base change to an algebraic closure. No new node was created.",
+  "blueprint": "Realizes the sole proof paragraph: filtered finite subextensions, finite etale/smooth stages, and the resulting filtered colimit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ass3026",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ass3026 (reviewer sub-agent of L); spot-checked: Filtered/directed union of finite separable subextensions elementary (compositum, union by algebraicity, separability inherited); citer lem-kun-separable-smooth-colimit uses it only for finite separable L_j, consistent. FIX more, RETURN less: C4 lem-weil-pbc-finite-separable-extension-etale concludes etale in the sense of def-weil-etale-morphism (lfp+flat+unramified), while the step took etale=>smooth from def-sbc-smooth-morphisms whose 'etale' is smooth of rel. dim. 0, a different definition; now cites existing lem-weil-pbc-etale-smooth-zero-dimensional-fibres for the bridge (added to uses and proof_deps). Missed by J1 second reading.; 1 file(s) fixed by the reviewer"
+ }
 }
