@@ -1,8 +1,8 @@
 # Work queue
 
-929 items; claim with `tools/claim.py next <group> [--stage N]`.
+936 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (239)
+## Stage 1: nodes to split (244)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,7 +13,11 @@
 | `lem-sc-ringed-space-module-sheaves-enough-injectives` | 2019 | none |
 | `lem-pc-derived-functor-truncation-stabilization` | 3013 | none |
 | `lem-pc-derived-limit-milnor-sequence` | 3013 | none |
+| `lem-pc-essentially-constant-ind-hom-colimit` | 3013 | none |
+| `lem-pc-essentially-constant-pro-hom-colimit` | 3013 | none |
+| `lem-pc-left-localization-hom-colimit` | 3013 | none |
 | `lem-pc-qcoh-truncation-derived-limit` | 3013 | none |
+| `lem-pc-right-localization-hom-colimit` | 3013 | none |
 | `lem-pc-skyscraper-complex` | 3013 | none |
 | `lem-pc-stalk-tensor-complex` | 3013 | none |
 | `lem-pc-derived-sections-pushforward-comparison` | 3014 | none |
@@ -23,21 +27,19 @@
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
 | `lem-pc-ringed-spaces-derived-adjoint-general` | 3016 | none |
 | `lem-sc-coherent-pseudo-coherent` | 3016 | none |
-| `lem-sc-p1-ext-resolution-derived-connecting` | 3016 | none |
 | `lem-sc-pseudo-coherent-rhom-qcoherent` | 3016 | none |
 | `lem-pc-perfect-object-compact` | 3017 | none |
 | `lem-pc-perfect-tensor-hom-duality` | 3017 | none |
 | `lem-pc-proper-perfect-direct-image-perfect` | 3017 | none |
 | `lem-sc-finite-free-internal-hom-exact` | 3017 | none |
-| `lem-pc-essentially-constant-ind-hom-colimit` | 3018 | none |
-| `lem-pc-essentially-constant-pro-hom-colimit` | 3018 | none |
-| `lem-pc-left-localization-hom-colimit` | 3018 | none |
-| `lem-pc-right-localization-hom-colimit` | 3018 | none |
-| `lem-sc-etale-polynomial-diagonal-kernel-clearance` | 3018 | none |
+| `lem-sc-p1-rhom-hom-derived-connecting` | 3017 | none |
+| `lem-sc-p1-right-derived-triangle-connecting` | 3017 | none |
 | `lem-sc-flat-polynomial-diagonal-differences-weakly-regular` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
-| `lem-sc-proper-flat-right-adjoint-restriction-open` | 3018 | none |
 | `lem-sc-qcoh-acyclic-derived-sections-comparison` | 3018 | none |
+| `lem-sc-proper-flat-right-adjoint-direct-sums` | 3019 | none |
+| `lem-sc-proper-flat-right-adjoint-open-support` | 3019 | none |
+| `lem-sc-right-adjoint-open-support-criterion` | 3019 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
@@ -57,18 +59,21 @@
 | `lem-pc-derived-filtered-free-resolution` | 4012 | none |
 | `lem-pc-derived-module-direct-sums` | 4012 | none |
 | `lem-pc-affine-tilde-kflat` | 4013 | none |
-| `lem-pc-base-change-map-cech` | 5009 | none |
 | `lem-pc-flat-filtered-complex-comparison` | 5009 | none |
 | `lem-pc-flat-tensor-complex-cohom` | 5009 | none |
 | `lem-sc-hilbert-polynomial` | 5009 | none |
+| `lem-pc-derived-direct-image-composition` | 5010 | none |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 5010 | none |
 | `lem-sc-generic-rank-leading-degree` | 5010 | none |
-| `lem-pc-bounded-above-flat-kflat` | 5011 | none |
-| `lem-pc-proper-support-perfect-direct-image` | 5011 | none |
 | `lem-sc-mult-n-locally-quasi-finite` | 5011 | none |
+| `lem-pc-flat-sheaf-stalk-flat` | 5012 | none |
 | `lem-pc-kflat-bounded-flat-replacement` | 5012 | none |
 | `lem-pc-kflat-closure` | 5012 | none |
 | `lem-pc-kflat-hocolim-truncations` | 5012 | none |
+| `lem-pc-module-bounded-flat-kflat` | 5012 | none |
+| `lem-pc-noetherian-approximation-data` | 5012 | none |
+| `lem-pc-noetherian-perfect-direct-image` | 5012 | none |
+| `lem-pc-rf-base-change-complex` | 5012 | none |
 | `thm-sp-grothendieck` | 6004 | none |
 | `lem-sp-edge-collapse` | 6005 | none |
 | `thm-sp-double-complex-spectral-sequences` | 6005 | sorry_here |
@@ -82,12 +87,12 @@
 | `lem-sc-cech-spectral` | 6009 | sorry_here |
 | `pqf-lem-associated-sections-localize` | 6009 | none |
 | `pqf-lem-coherent-ft-locnoeth` | 6009 | none |
+| `lem-pc-affine-morphism-hi` | 6010 | rests_on_sorry |
 | `lem-pc-closed-immersion-coherent-cohomology` | 6010 | rests_on_sorry |
 | `lem-pc-projective-space-cohomology-bound` | 6010 | sorry_here |
 | `lem-pc-serre-vanishing` | 6010 | rests_on_sorry |
 | `thm-pqf-finite-iff-proper-finite-fibres` | 6010 | none |
 | `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
-| `lem-pc-affine-morphism-hi` | 6011 | rests_on_sorry |
 | `lem-pc-projective-space-serre-vanishing` | 6011 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
 | `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
@@ -246,7 +251,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (690)
+## Stage 2: nodes to state (692)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -381,6 +386,7 @@
 | `lem-sc-etale-affine-over-curve` | 1 | state |
 | `lem-sc-etale-coproduct-etale` | 1 | state |
 | `lem-sc-etale-fibre-product-coproduct` | 1 | state |
+| `lem-sc-etale-polynomial-diagonal-kernel-clearance` | 1 | state |
 | `lem-sc-exact-functor-higher-derived-vanishing` | 1 | state |
 | `lem-sc-ext-torsor` | 1 | state |
 | `lem-sc-exterior-top-direct-sum` | 1 | state |
@@ -406,6 +412,7 @@
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
+| `lem-sc-p1-ext-resolution-derived-connecting` | 1 | state |
 | `lem-sc-p1-graded-degree-component-exact` | 1 | state |
 | `lem-sc-p1-tor-dimension-shift-natural` | 1 | state |
 | `lem-sc-p1-tor-dimension-shifting` | 1 | state |
@@ -941,7 +948,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1365 nodes that wait for a statement dependency, 275 nodes that wait for stage 1.
+Not open yet: 1369 nodes that wait for a statement dependency, 280 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
