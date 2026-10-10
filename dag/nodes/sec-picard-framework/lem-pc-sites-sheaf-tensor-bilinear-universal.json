@@ -25,8 +25,59 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "For each object U of the site, the ordinary module tensor-product universal property identifies O(U)-bilinear maps F(U) \\times G(U) \\to H(U) with O(U)-linear maps F(U) \\otimes_{O(U)} G(U) \\to H(U). Compatibility with restriction maps is preserved in both directions, so these sectionwise bijections identify O-bilinear morphisms F \\times G \\to H with morphisms of presheaves of O-modules F \\otimes_{p,O} G \\to H. The presheaf tensor product is sectionwise the indicated module tensor product by [def-pur-presheaf-tensor-product].",
+   "uses": [
+    "def-pur-presheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, characterization of the presheaf tensor product by bilinear maps"
+   }
+  },
+  {
+   "text": "Since H is already a sheaf of O-modules, the universal property of module sheafification gives a bijection between morphisms of presheaves of O-modules F \\otimes_{p,O} G \\to H and morphisms of sheaves of O-modules (F \\otimes_{p,O} G)^# \\to H: every presheaf morphism factors uniquely through the sheafification. By [def-pur-sheaf-tensor-product], (F \\otimes_{p,O} G)^# is F \\otimes_O G.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, sheafification step after the presheaf tensor product"
+   }
+  },
+  {
+   "text": "Composing the bijections of the preceding two steps yields a bijection Hom_O(F \\otimes_O G,H) \\cong Bilin_O(F \\times G,H). Under this bijection a morphism is sent to its composite with the canonical pure-tensor morphism F \\times G \\to F \\otimes_O G, and the inverse sends a bilinear morphism to the unique sheaf morphism induced by its sectionwise tensor maps. Thus the displayed bijection has exactly the asserted meaning.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, display after Tag 0GMW"
+   }
+  },
+  {
+   "text": "The ordinary module tensor-product bijections commute with restriction and with postcomposition in H, and the sheafification factorization is unique and functorial in the target sheaf. Therefore the composite bijection is natural in H.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK, naturality assertion following the display after Tag 0GMW"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-presheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
@@ -63,10 +114,26 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-sites-module-sheafification-tensor",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "worker": "stage1",
+  "summary": "No exact sorry-free project declaration states this universal property. I checked Stacks sites-modules.tex Section 03EK and the display after Tag 0GMW. The proof is split into the sectionwise module tensor bijection, unique factorization through module sheafification, composition into the stated Hom/Bilin bijection, and naturality. All cited notions are existing DAG nodes; no new node is needed.",
+  "blueprint": "Realizes the sheafification step 'use the universal property of sheaf tensor' in blueprint ancestor def-weil-derived-tensor, via the item's route from lem-pc-sites-module-sheafification-tensor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tbu3130",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tbu3130 (reviewer sub-agent of L); spot-checked: def-pur-sheaf-tensor-product defines F⊗_O G as the sheafification of the presheaf tensor (C4 ok); Bilin defined in the statement; Step 1 sectionwise module universal property (Tag 00CV) elementary on def-pur-presheaf-tensor-product; Step 2 cites unique factorization in def-weil-presheaf-modules-sheafification (C1 ok); naturality in H stated; only citer lem-pc-sites-module-sheafification-tensor uses the bijection given by composing with the pure-tensor map, which the statement gives; no new nodes, no duplicate of H1 node or ringed-space tensor-hom nodes. No repairs. Second reading missed no fault."
  }
 }

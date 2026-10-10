@@ -2966,3 +2966,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:27 L: merged deliver/G1/thm-sp-spectral-object-yields (reviewer PASS; after a return; new nodes: 1)
 - 23:27 L: merged deliver/C1/lem-weil-common-extension-fields (reviewer PASS; first push; new nodes: 4)
 - 23:28 L: merged deliver/F1/lem-pc-finite-support-hi (reviewer FIX; after a return; new nodes: 0)
+- 23:28 L: merged deliver/K1/lem-pc-sites-sheaf-tensor-bilinear-universal (reviewer PASS; first push; new nodes: 0)
