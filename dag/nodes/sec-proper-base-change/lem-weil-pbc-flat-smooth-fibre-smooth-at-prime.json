@@ -13,9 +13,121 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-singular-ideal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(The fibre is a global complete intersection near $\\mathfrak Q$.) Write $k=\\kappa(\\mathfrak p)$. By hypothesis (3) and [def-weil-pbc-singular-ideal] there is $h\\in F\\setminus\\mathfrak Q$ such that $F_h$ is a smooth $k$-algebra. By [lem-weil-pbc-smooth-over-field-local-complete-intersection] $F_h$ is a local complete intersection over $k$ [def-weil-pbc-complete-intersection-over-field]: there are $e_i\\in F_h$ ($i\\in J$) with $\\operatorname{Spec}F_h=\\bigcup_iD(e_i)$ and every $(F_h)_{e_i}$ a global complete intersection over $k$. The ideal $\\mathfrak QF_h$ is prime since $h\\notin\\mathfrak Q$, so it lies in some $D(e_i)$; write $e_i=a/h^m$ with $a\\in F$; then $a\\notin\\mathfrak Q$ (otherwise $e_i\\in\\mathfrak QF_h$), hence $h'=ha\\notin\\mathfrak Q$. The composite $F\\to F_h\\to(F_h)_{e_i}$ is a localization of $F$ at $\\{(ha)^N\\}$ in the sense of [lem-weil-pbc-localization-of-localization]: $ha\\mapsto(h/1)(a/1)=h^{m+1}e_i/1$ is a unit; every element $(x/h^l)/e_i^j=xh^{mj}/(h^la^j)$ equals $y/(ha)^{l+j}$ with $y=xh^{mj+j}a^l$ (multiply numerator and denominator by $h^ja^l$); and $x\\mapsto0$ means $e_i^j(x/1)=0$ in $F_h$, i.e. $h^ua^jx=0$ in $F$ for some $u$, so $(ha)^{\\max(u,j)}x=0$. Hence $(F_h)_{e_i}\\cong F_{h'}$ as $k$-algebras, and $F_{h'}$ is a global complete intersection over $k$ (the definition is invariant under $k$-algebra isomorphism).",
+   "uses": [
+    "def-weil-pbc-singular-ideal",
+    "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+    "def-weil-pbc-complete-intersection-over-field",
+    "lem-weil-pbc-localization-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TF (lemma-flat-fibre-smooth), lines 37689-37692 ('By Lemmas 00SY and 00T5 we see that there exists a g in S such that S_g is a relative global complete intersection')"
+   }
+  },
+  {
+   "text": "(A relative global complete intersection near $\\mathfrak q$.) Hypotheses (1), (2) of the statement and step 1 (with $h'\\in F\\setminus\\mathfrak Q$) are the hypotheses of [lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection]. Hence there are $g\\in S\\setminus\\mathfrak q$, integers $n,c\\ge0$, $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ such that $T=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection [def-weil-pbc-relative-global-complete-intersection], and an isomorphism of $R$-algebras $\\theta:S_g\\xrightarrow{\\sim}T$. Since $g\\notin\\mathfrak q$, $\\mathfrak qS_g$ is a prime of $S_g$ whose inverse image in $S$ is $\\mathfrak q$; let $\\mathfrak q_T=\\theta(\\mathfrak qS_g)$, a prime of $T$ whose inverse image in $R$ is $\\mathfrak p$ (as $\\theta$ is an $R$-algebra map), and $\\kappa(\\mathfrak q_T)\\cong\\kappa(\\mathfrak q)$ compatibly with $S\\to S_g\\to T$.",
+   "uses": [
+    "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+    "def-weil-pbc-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TF (lemma-flat-fibre-smooth), lines 37689-37692 ('By Lemmas 00SY and 00T5 we see that there exists a g in S such that S_g is a relative global complete intersection')"
+   }
+  },
+  {
+   "text": "(The fibre of $T$.) Let $F_T=T\\otimes_Rk$ and $\\mathfrak Q_T\\subset F_T$ the kernel of $F_T\\to\\kappa(\\mathfrak q_T)$, $t\\otimes\\lambda\\mapsto\\bar t\\bar\\lambda$. (a) With $A=R[x_1,\\dots,x_n]$, $A\\otimes_Rk\\cong k[x_1,\\dots,x_n]$, $p\\otimes\\lambda\\mapsto\\lambda\\rho(p)$ with $\\rho:A\\to k[x_1,\\dots,x_n]$ the coefficient reduction [lem-weil-pbc-polynomial-scalar-extension]; so $F_T=(A/(f_1,\\dots,f_c))\\otimes_Rk\\cong(A/(f))\\otimes_A(A\\otimes_Rk)\\cong k[x_1,\\dots,x_n]/(\\bar f_1,\\dots,\\bar f_c)$, $\\bar f_j=\\rho(f_j)$, by associativity of $\\otimes$ and [lem-weil-pbc-tensor-quotient-base-change] (with $B=k[x_1,\\dots,x_n]$, $I=(f_1,\\dots,f_c)$); this isomorphism sends $(p\\bmod(f))\\otimes1$ to $\\rho(p)\\bmod(\\bar f)$. (b) By [lem-weil-pbc-localization-tensor-over-base] (with $A=M=S$, multiplicative set $\\{g^N\\}$, $N=k$), $S_g\\otimes_Rk\\cong(S\\otimes_Rk)_{\\bar g}=F_{\\bar g}$, $\\bar g=g\\otimes1$; composed with $\\theta\\otimes1$ this gives a $k$-algebra isomorphism $\\psi:F_{\\bar g}\\xrightarrow{\\sim}F_T$, compatible with the maps to $\\kappa(\\mathfrak q)\\cong\\kappa(\\mathfrak q_T)$ of step 2, so $\\psi(\\mathfrak QF_{\\bar g})=\\mathfrak Q_T$; note $\\bar g\\notin\\mathfrak Q$ because $g$ has nonzero image in $\\kappa(\\mathfrak q)$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TF, lines 37692-37694 ('Replacing S by S_g we may assume S = R[x_1..x_n]/(f_1..f_c) is a relative global complete intersection')"
+   }
+  },
+  {
+   "text": "($k\\to F_T$ is a relative global complete intersection, smooth at $\\mathfrak Q_T$.) Smoothness: with $h$ from step 1, $F_{\\bar gh}$ is a localization of $F_h$ at the powers of $\\bar g/1$ and of $F_{\\bar g}$ at the powers of $h/1$ [lem-weil-pbc-localization-of-localization] (check of (a)-(c) as in step 1), so $(F_{\\bar g})_{h/1}\\cong(F_h)_{\\bar g/1}$, which is smooth over $k$ by [lem-weil-pbc-smooth-ring-map-principal-localization]; with $u=\\psi(h/1)\\notin\\mathfrak Q_T$ (as $h\\notin\\mathfrak Q$), $(F_T)_u\\cong(F_{\\bar g})_{h/1}$ is a smooth $k$-algebra (smoothness [def-weil-pbc-smooth-ring-map] is invariant under isomorphism of $k$-algebras), so $k\\to F_T$ is smooth at $\\mathfrak Q_T$ [def-weil-pbc-singular-ideal]. Complete intersection: by step 3(a) $F_T\\cong k[x_1,\\dots,x_n]/(\\bar f_1,\\dots,\\bar f_c)=:\\bar T$. $\\operatorname{Spec}k$ has the single point $(0)$ with $\\kappa((0))=k$, and the fibre ring $\\bar T\\otimes_kk\\cong\\bar T\\cong F_T$ is nonzero (it has the prime $\\mathfrak Q_T$); since $F_T=T\\otimes_R\\kappa(\\mathfrak p)$ is a nonzero fibre ring of the relative global complete intersection $T$ (step 2), $\\dim\\operatorname{Spec}F_T=n-c$ [def-weil-pbc-relative-global-complete-intersection], and homeomorphic spectra have equal Krull dimension. So $\\bar T=k[x_1,\\dots,x_n]/(\\bar f_1,\\dots,\\bar f_c)$ is a relative global complete intersection over $k$ [def-weil-pbc-relative-global-complete-intersection].",
+   "uses": [
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-singular-ideal",
+    "def-weil-pbc-relative-global-complete-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TF, lines 37695-37705 (image of g_I in kappa(p)[x_1..x_n]; 'applying Lemma 00TE both to R -> S and to kappa(p) -> S (x)_R kappa(p)')"
+   }
+  },
+  {
+   "text": "(A maximal minor outside $\\mathfrak Q_T$.) Let $\\bar{\\mathfrak Q}\\subset\\bar T$ be the image of $\\mathfrak Q_T$ under $F_T\\cong\\bar T$. By step 4 and [lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian] ('only if', applied to $k\\to\\bar T$, $\\bar f_1,\\dots,\\bar f_c$ and $\\bar{\\mathfrak Q}$) there is $I\\subseteq\\{1,\\dots,n\\}$, $|I|=c$, with $\\det(\\partial\\bar f_j/\\partial x_i)_{j,\\,i\\in I}\\bmod(\\bar f)\\notin\\bar{\\mathfrak Q}$. The coefficient reduction $\\rho$ is a ring homomorphism with $\\rho(\\partial p/\\partial x_i)=\\partial\\rho(p)/\\partial x_i$ (check on monomials $r x^e$, [def-weil-pbc-polynomial-partial-derivative]) and the determinant is a polynomial in the entries with integer coefficients, so $\\rho(g_I)=\\det(\\partial\\bar f_j/\\partial x_i)_{j,\\,i\\in I}$ with $g_I=\\det(\\partial f_j/\\partial x_i)_{j,\\,i\\in I}\\in R[x_1,\\dots,x_n]$. By step 3(a), $(g_I\\bmod(f))\\otimes1\\in F_T$ corresponds to $\\rho(g_I)\\bmod(\\bar f)$; hence $(\\bar g_I)\\otimes1\\notin\\mathfrak Q_T$, $\\bar g_I$ the image of $g_I$ in $T$.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TF, lines 37695-37705 (image of g_I in kappa(p)[x_1..x_n]; 'applying Lemma 00TE both to R -> S and to kappa(p) -> S (x)_R kappa(p)')"
+   }
+  },
+  {
+   "text": "($R\\to T$ is smooth at $\\mathfrak q_T$.) For $t\\in T$, $t\\otimes1\\in\\mathfrak Q_T$ iff the image $\\bar t$ of $t$ in $\\kappa(\\mathfrak q_T)$ is $0$ iff $t\\in\\mathfrak q_T$ (definition of $\\mathfrak Q_T$ as the kernel of $F_T\\to\\kappa(\\mathfrak q_T)$). So by step 5 $\\bar g_I\\notin\\mathfrak q_T$, and [lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian] ('if', applied to the relative global complete intersection $T=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ of step 2 and $\\mathfrak q_T$) shows that $R\\to T$ is smooth at $\\mathfrak q_T$: there is $t\\in T\\setminus\\mathfrak q_T$ with $T_t$ a smooth $R$-algebra [def-weil-pbc-singular-ideal].",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TF, lines 37695-37705 (image of g_I in kappa(p)[x_1..x_n]; 'applying Lemma 00TE both to R -> S and to kappa(p) -> S (x)_R kappa(p)')"
+   }
+  },
+  {
+   "text": "(Back to $S$.) Write $\\theta^{-1}(t)=s/g^m$ with $s\\in S$, $m\\ge0$; since $t\\notin\\mathfrak q_T$, $s/g^m\\notin\\mathfrak qS_g$, so $s\\notin\\mathfrak q$ and $gs\\notin\\mathfrak q$. As in step 1, $S\\to S_g\\to(S_g)_{s/g^m}$ is a localization of $S$ at the powers of $gs$ [lem-weil-pbc-localization-of-localization] ($gs\\mapsto g^{m+1}(s/g^m)$ is a unit, every $(x/g^l)/(s/g^m)^j$ equals $xg^{mj}s^{l}g^{j}/(gs)^{l+j}$, and the kernel condition follows from that of the two localizations), so $T_t\\cong(S_g)_{s/g^m}\\cong S_{gs}$ as $R$-algebras via $\\theta$. Hence $S_{gs}$ is a smooth $R$-algebra [def-weil-pbc-smooth-ring-map] with $gs\\in S\\setminus\\mathfrak q$, i.e. $R\\to S$ is smooth at $\\mathfrak q$ [def-weil-pbc-singular-ideal].",
+   "uses": [
+    "lem-weil-pbc-localization-of-localization",
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00TF, lines 37692-37694 ('Replacing S by S_g we may assume S = R[x_1..x_n]/(f_1..f_c) is a relative global complete intersection')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-smooth-over-field-local-complete-intersection",
+  "def-weil-pbc-complete-intersection-over-field",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-smooth-ring-map-principal-localization",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00TF (lemma-flat-fibre-smooth, line 37673), proof lines 37688-37705"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -40,7 +152,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -60,5 +172,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 00TF and kept (hypotheses (1)-(3) and conclusion agree; 'smooth at q' is Definition 00TB as recorded in def-weil-pbc-singular-ideal). Proof written in 7 steps following the Stacks proof: 00T5 (existing node lem-weil-pbc-smooth-over-field-local-complete-intersection) turns the smooth fibre near Q into a global complete intersection F_{h'}; 00SY (3)=>(2) (new node lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection, hypothesis on the fibre phrased via 00SG (3) instead of 'S_q/pS_q complete intersection ring') gives S_g = R[x]/(f) a relative global complete intersection (new definition node for 00SP); the replacement of S by S_g, which Stacks leaves implicit, is written out (fibre of S_g = F_{g-bar}, tensor of a quotient of a polynomial ring with kappa(p), prime correspondence, transport of smoothness at a prime through S_g = T and principal localizations); 00TE (new node lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian) is applied to kappa(p) -> F_T (which is a relative global complete intersection over kappa(p) because its only fibre is F_T) and then to R -> T, with the compatibility of the Jacobian minors with coefficient reduction. Mathlib: Algebra.IsSmoothAt.of_formallySmooth_fiber (RingTheory/Smooth/Fiber.lean:193-237, @[stacks 00TF] with global flatness and the whole fibre formally smooth) is the closest Lean statement, not a one-line specialization; recorded on the item, no leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "7 steps following Stacks 00TF with the hidden checks written out: fibre a global complete intersection near Q (00T5 node, localization of localization); 00SY (3)=>(2) as a new unsplit node, stated with the 00SG-equivalent hypothesis 'F_h a global complete intersection for some h not in Q' (L checked 00SY and 00SG: equivalent to S_q/pS_q a complete intersection ring); fibre of T = k[x]/(f bar) with matching primes; k -> F_T a relative global complete intersection smooth at Q_T; a Jacobian minor outside Q_T via the new unsplit 00TE node, commuting derivatives with coefficient reduction; 00TE 'if' for R -> T; back to S by T_t = S_{gs}. New unsplit definition def-weil-pbc-relative-global-complete-intersection (00SP). Mathlib's IsSmoothAt.of_formallySmooth_fiber (Smooth/Fiber.lean:193, @[stacks 00TF]) assumes global flatness and a formally smooth whole fibre, so not a leaf."
+ }
 }

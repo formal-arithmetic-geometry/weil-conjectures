@@ -823,3 +823,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:26 L: reviewed lem-weil-pbc-flat-ses-kernel-flat (4 steps, 0 new; attached Module.Flat.of_exact_of_flat_of_flat_right, closed on slopmaster2): accepted.
 - 03:27 L: reviewed lem-weil-pbc-flat-normal-fibres-noetherian-normal (5 steps, +4: def depth, def (R_k)/(S_k), 031S, 0339): accepted. Stage 3: lem-weil-pbc-regularity-rk-goes-up should cite def-weil-pbc-serre-conditions-rk-sk (source line 46460).
 - 03:30 L: reviewed lem-weil-pbc-flat-fp-lqf-bounded-stratification (10 steps, +4 unsplit: 02LP, fibre-degree base change, 02VO descent, separated/lqf base change): accepted.
+- 03:31 L: reviewed lem-weil-pbc-flat-smooth-fibre-smooth-at-prime (7 steps, +3 unsplit: 00SP definition, 00SY (3)=>(2), 00TE): accepted.

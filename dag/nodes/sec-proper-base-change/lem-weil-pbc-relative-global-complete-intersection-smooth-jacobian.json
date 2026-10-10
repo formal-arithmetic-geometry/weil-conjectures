@@ -1,0 +1,71 @@
+{
+ "id": "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
+ "kind": "statement",
+ "title": "Jacobian criterion for smoothness of a relative global complete intersection at a prime",
+ "statement": "Let $R$ be a commutative ring, $n,c\\ge0$ integers and $f_1,\\dots,f_c\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring] such that $S=R[x_1,\\dots,x_n]/(f_1,\\dots,f_c)$ is a relative global complete intersection [def-weil-pbc-relative-global-complete-intersection]. For a subset $I\\subseteq\\{1,\\dots,n\\}$ of cardinality $c$ let $g_I=\\det(\\partial f_j/\\partial x_i)_{j=1,\\dots,c,\\ i\\in I}\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-polynomial-partial-derivative] and $\\bar g_I\\in S$ its image. Let $\\mathfrak q\\subset S$ be a prime ideal. Then $R\\to S$ is smooth at $\\mathfrak q$ [def-weil-pbc-singular-ideal] if and only if there is a subset $I\\subseteq\\{1,\\dots,n\\}$ with $|I|=c$ and $\\bar g_I\\notin\\mathfrak q$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00TE (lemma-relative-global-complete-intersection-smooth, line 37629) and its proof (naive cotangent complex of a relative global complete intersection, Lemma 00SV lemma-relative-global-complete-intersection-conormal; Lemma 00S7 lemma-localize-NL; maximal minors)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-relative-global-complete-intersection",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-weil-pbc-singular-ideal"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "jacobian criterion: R[x_1..x_n]/(f_1..f_c) smooth at prime iff some c by c minor of the jacobian matrix is not in the prime",
+   "results": "Algebra.mvPolynomial, Algebra.IsSmoothAt, Algebra.IsStandardSmooth, Algebra.instSmoothOfIsStandardSmooth, Algebra.smoothLocus, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField (Mathlib.RingTheory.Smooth.Local)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient of polynomial ring by c polynomials is smooth at a prime iff a maximal minor of the Jacobian matrix of partial derivatives is a unit there",
+   "results": "Algebra.SubmersivePresentation.isStandardSmooth, Algebra.IsStandardSmooth, RingHom.IsStandardSmooth, Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match: a submersive presentation (Jacobian a unit in S) gives standard smooth, a partial tool for the 'if' direction after localizing at g_I, not the equivalence for relative global complete intersections"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.PreSubmersivePresentation.jacobian",
+   "results": "Algebra.PreSubmersivePresentation.jacobian, Algebra.SubmersivePresentation.mk/jacobian_isUnit, ...jacobian_reindex, localizationAway_jacobian, jacobian_mvPolynomial, jacobian_ofAlgEquiv, comp_jacobian_eq_jacobian_smul_jacobian, isUnit_jacobian_iff_aevalDifferential_bijective (Mathlib.RingTheory.Extension.Presentation.Submersive)",
+   "date": "2026-10-10",
+   "verdict": "no match: no statement relating these to smoothness at a prime of a complete intersection"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'stacks 00TE\\|stacks 00TB' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/; grep -rn 'jacobian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/*.lean RingTheory/Extension/Presentation/Submersive.lean",
+   "results": "@[stacks 00TB] on Algebra.IsSmoothAt (RingTheory/Smooth/Locus.lean:45, formal smoothness of the localization, not Stacks' definition); Jacobian criterion for local algebras Algebra.FormallySmooth.iff_injective_lTensor_residueField (RingTheory/Smooth/Local.lean:26-45, injectivity of the cotangent complex tensored with the residue field); PreSubmersivePresentation.jacobian (Submersive.lean:118-135)",
+   "date": "2026-10-10",
+   "verdict": "no match (the local Jacobian criterion is a possible Lean route, not the statement)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
