@@ -1,0 +1,87 @@
+{
+ "id": "lem-weil-pbc-depth-le-dim-associated-prime",
+ "kind": "statement",
+ "title": "The depth of a module is at most dim(R/p) for every associated prime p",
+ "statement": "Let $(R,\\mathfrak m)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] (a Noetherian commutative ring with exactly one maximal ideal $\\mathfrak m$) and let $M$ be a finite $R$-module [def-weil-finitely-generated-module]. Let $\\mathfrak p\\subset R$ be a prime ideal for which there is an element $z\\in M$ with $\\operatorname{Ann}_R(z)=\\{a\\in R: az=0\\}=\\mathfrak p$ (an associated prime of $M$). Then $\\dim(R/\\mathfrak p)\\ge\\operatorname{depth}(M)$, where $\\dim(R/\\mathfrak p)$ is the Krull dimension of the ring $R/\\mathfrak p$ [def-weil-pbc-krull-dimension-ring] and $\\operatorname{depth}(M)=\\operatorname{depth}_{\\mathfrak m}(M)$ is the depth [def-weil-pbc-depth].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0BK4 (lemma-depth-dim-associated-primes, line 17985), proof lines 17991-18020; associated primes as in Definition Tag 00LA (definition-associated, line 15108). Tags verified in tags/tags: 0BK4,algebra-lemma-depth-dim-associated-primes; 00LA,algebra-definition-associated"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-depth"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "depth of a finite module over a Noetherian local ring is at most the dimension of R/p for every associated prime p",
+   "results": "associatedPrimes, IsAssociatedPrime, associatedPrimes.finite (Mathlib.RingTheory.Ideal.AssociatedPrime.*); Ideal.height_le_ringKrullDim_quotient_add_one, Ideal.height_le_ringKrullDim_quotient_add_encard, Ideal.height_le_card_of_mem_minimalPrimes_span_finset, height_le_ringKrullDim_quotient_add_spanFinrank (Mathlib.RingTheory.Ideal.KrullsHeightTheorem); Module.supportDim_le_ringKrullDim (Mathlib.RingTheory.KrullDimension.Module)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an associated prime p of a finitely generated module M over a Noetherian local ring, the length of an M-regular sequence in the maximal ideal is at most the Krull dimension of R/p",
+   "results": "ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Module.supportDim_add_length_eq_supportDim_of_isRegular, ringKrullDim_quotSMulTop_succ_eq_ringKrullDim, ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim, ringKrullDim_le_ringKrullDim_add_spanFinrank, Module.supportDim_quotSMulTop_succ_eq_supportDim, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, ringKrullDim_le_ringKrullDim_add_card (all Mathlib.RingTheory.KrullDimension.Regular: dimension drop along regular sequences, nothing about associated primes)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"depth\"",
+   "results": "only Lean core names (Lean.defaultMaxRecDepth, Lean.Macro.Context.maxRecDepth, Lean.Meta.Simp.Config.maxDischargeDepth, ...); no depth of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, ringKrullDim",
+   "results": "no results",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "associatedPrimes (project root ~/weil-conjectures-slopmaster2)",
+   "results": "Submodule.associatedPrimes, associatedPrimes, associatedPrimes.finite, associatedPrimes.nonempty, associatedPrimes.eq_empty_of_subsingleton, associatedPrimes.eq_singleton_of_isPrimary (index unavailable, so not a proof of absence)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'associatedPrimes|IsAssociatedPrime' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -lE 'IsRegular|IsWeaklyRegular|ringKrullDim|supportDim'; grep -rnE 'associatedPrimes|IsAssociatedPrime' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/KrullDimension ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular; grep -rn 'def depth' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Depth ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular",
+   "results": "no file combines associated primes with Krull dimension or regular sequences; RingTheory/Regular/IsSMulRegular.lean:124 biUnion_associatedPrimes_eq_compl_regular and RingTheory/Regular/LinearMap.lean:53-76 (zero divisors, not dimension); the only 'def depth' is WType.depth (Data/W/Basic.lean:113); RingTheory/Depth holds only Rees.lean (Ext characterisation of regular sequences), RingTheory/Regular/Depth.lean is a 10-line file with no declaration",
+   "date": "2026-10-10",
+   "verdict": "no match: the pinned Mathlib has no depth of modules and no bound by associated primes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-cm-local-associated-prime-minimal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 0BK4",
+ "lead_note": "split following the 0BK4 proof (induction on depth; it can use lem-weil-pbc-associated-prime-power-quotient, 0CN5)"
+}

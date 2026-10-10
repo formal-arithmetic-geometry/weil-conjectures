@@ -1156,3 +1156,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:16 L: accepted lem-weil-pbc-zariski-extension-by-zero-exact (5 steps, 0 new; 03DJ).
 - 09:16 L: accepted lem-weil-pbc-well-ordered-union-projective-dimension (11 steps; new leaf lem-weil-pbc-projective-direct-sum-family (065Q, Module.Projective.directSum) and lem-weil-pbc-projective-dimension-ses-kernel (065S (1))). Stage-3 note: the last step of lem-weil-pbc-global-dimension-finite-modules-suffice says "By Steps 2 and 3" for its two preceding steps (indices 1-2).
 - 09:19 L: accepted lem-weil-pbc-associated-prime-power-quotient (6 steps; new leaves lem-weil-pbc-associated-prime-submodule (02M3) and lem-weil-pbc-minimal-support-prime-associated (05BV)).
+- 09:20 L: accepted lem-weil-pbc-cm-local-associated-prime-minimal (2 steps; new lem-weil-pbc-depth-le-dim-associated-prime, 0BK4).
