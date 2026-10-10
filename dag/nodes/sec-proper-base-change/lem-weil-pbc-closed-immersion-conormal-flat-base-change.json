@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
  "kind": "statement",
  "title": "Conormal sheaf of a closed immersion under (flat) base change",
- "statement": "Let $i:Z\\to X$, $i':Z'\\to X'$, $g:X\\to X'$, $f:Z\\to Z'$ be as in [lem-weil-pbc-closed-immersion-conormal-functorial] ($i,i'$ closed immersions [def-weil-closed-immersion], $g\\circ i=i'\\circ f$), with canonical map $c:f^*\\mathcal C_{Z'/X'}\\to\\mathcal C_{Z/X}$ of conormal sheaves. Assume the square is cartesian, i.e. $(Z,i,f)$ is a fibre product of $g$ and $i'$ [def-pc-fibre-product]. Then $c$ is surjective; if moreover $g$ is flat [def-weil-flat-morphism], then $c$ is an isomorphism of $\\mathcal O_Z$-modules. (Affine locally: for a ring map $R'\\to R$ and an ideal $I'\\subset R'$ with $I=I'R$, the map $I'/I'^2\\otimes_{R'}R\\to I/I^2$ is surjective, and bijective when $R'\\to R$ is flat.)",
+ "statement": "Let $i:Z\\to X$, $i':Z'\\to X'$, $g:X\\to X'$, $f:Z\\to Z'$ be as in [lem-weil-pbc-closed-immersion-conormal-functorial] ($i,i'$ closed immersions [def-weil-closed-immersion], $g\\circ i=i'\\circ f$), with canonical map $c:f^*\\mathcal C_{Z'/X'}\\to\\mathcal C_{Z/X}$ of conormal sheaves. Assume the square is cartesian, i.e. $(Z,i,f)$ is a fibre product of $g$ and $i'$ [def-pc-fibre-product]. Then $c$ is surjective; if moreover $g$ is flat [def-weil-flat-morphism], then $c$ is an isomorphism of $\\mathcal O_Z$-modules. (Affine locally: for a ring map $R'\\to R$ and an ideal $I'\\subset R'$ with $I=I'R$, the map $I'/I'^2\\otimes_{R'}R\\to I/I^2$ is surjective, and bijective when $R'\\to R$ is flat [def-weil-pbc-flat-ring-map].)",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
@@ -11,11 +11,74 @@
   "lem-weil-pbc-closed-immersion-conormal-functorial",
   "def-weil-closed-immersion",
   "def-pc-fibre-product",
-  "def-weil-flat-morphism"
+  "def-weil-flat-morphism",
+  "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The map $c$ is the canonical conormal map constructed in [lem-weil-pbc-closed-immersion-conormal-functorial], since the commutative square of closed immersions is part of the hypotheses.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-conormal-functorial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 01R4 (morphisms-lemma-conormal-functorial), closed-immersion case"
+   }
+  },
+  {
+   "text": "Fix $z\\in Z$. Choose affine opens $U'=\\operatorname{Spec}R'\\subseteq X'$ containing $g(i(z))$ and $U=\\operatorname{Spec}R\\subseteq g^{-1}(U')$ containing $i(z)$. By [lem-weil-pbc-closed-immersion-affine-cover-criterion] write $i'^{-1}(U')=\\operatorname{Spec}(R'/I')$. The cartesian square restricted to $U$ remains cartesian [lem-weil-pbc-open-preimage-fibre-product], [lem-weil-pbc-cartesian-square-pasting]. Apply [lem-weil-pbc-quotient-base-change-closed-immersion-ideal] to $U\\to U'$ and $I'$, obtaining $i^{-1}(U)=\\operatorname{Spec}(R/I)$ and the ideal $I=I'R$. On these charts [lem-weil-pbc-module-pullback-affine-sections] identifies the source of $c$ with $(I'/I'^2)\\otimes_{R'}R$, and the affine characterization in [lem-weil-pbc-closed-immersion-conormal-functorial] identifies $c$ with the map induced by $R'\\to R$ into $I/I^2$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-closed-immersion-conormal-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), affine reduction; Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
+   }
+  },
+  {
+   "text": "For each chart of the preceding step, [lem-weil-pbc-ideal-cotangent-flat-base-change-ring] makes the module map $(I'/I'^2)\\otimes_{R'}R\\to I/I^2$ surjective. If $g$ is flat, [lem-weil-pbc-flat-morphism-affine-criterion] makes $R'\\to R$ flat, so the same ring result makes the map bijective. These charts cover $Z$. The source and target of $c$ are quasi-coherent, and their affine sections have the displayed descriptions [lem-weil-pbc-module-pullback-quasi-coherent], [lem-weil-pbc-closed-immersion-conormal-functorial]. For surjectivity, the cokernel has zero sections on every such chart by [lem-weil-pbc-quasi-coherent-module-cokernel-image] (3), hence is the zero sheaf because the charts cover $Z$; thus $c$ is an epimorphism. In the flat case the restrictions of $c$ on these charts are isomorphisms: each is a map of quasi-coherent modules induced by a bijection on affine sections [lem-weil-pbc-affine-tilde-gamma-adjunction] (3). Hence $c$ is globally an isomorphism by [lem-weil-pbc-sheaf-morphism-on-basis] (b).",
+   "uses": [
+    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-closed-immersion-conormal-functorial",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), affine calculation and conclusion; locality of quasi-coherent modules from Schemes, Lemmas 01IA and 01IB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 0473 with affine fibre-product lemmas 01I4 and 01JQ"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +110,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +130,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Morphisms 0473. The affine ring calculation is a Mathlib leaf by specializing Ideal.tensorCotangentHom_surjective and Ideal.tensorCotangentEquiv to S=A; the affine criterion for a flat scheme morphism is another Mathlib leaf (Morphisms 01U5). The proof uses the existing node for the ideal of a base-changed closed immersion (Schemes 01JU), identifies the affine conormal map, and checks surjectivity or bijectivity on an affine cover using the existing quasi-coherent module and sheaf-locality nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L read the three steps (0473): the canonical map from the functorial node, affine charts with I = I'R (01JU node), the ring leaf (tensorCotangentHom surjective, iso when flat) and the affine flatness criterion leaf (flat_iff), locality on a cover."
+ }
 }
