@@ -14,7 +14,7 @@
     "lem-weil-pbc-etale-colimit-normal-local-domain"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Associated primes of a fractional principal intersection quotient in a normal domain",
@@ -28,9 +28,54 @@
   "def-weil-pbc-normal-ring",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $y=a/b$ with nonzero $a,b\\in A$. For $c\\in A$, the equality $c=yd$ with $d\\in A$ holds if and only if $bc=ad$. Thus $J=\\{c\\in A:bc\\in aA\\}$. This is an ideal, and it contains $aA$ because $bc\\in aA$ whenever $c\\in aA$. In particular $a\\in J$ is nonzero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1, clauses (1) and (3); agent-written direct principal-quotient argument"
+   }
+  },
+  {
+   "text": "The $A$-linear map $A/J\\longrightarrow A/aA$, $c+J\\longmapsto bc+aA$, is well-defined by the displayed description of $J$. Its kernel is zero by the same description. If $\\mathfrak p$ is the annihilator of a nonzero $c+J$, its image $bc+aA$ is nonzero, and for each $r\\in A$ we have $rc\\in J$ if and only if $brc\\in aA$. Therefore the image has exactly the same annihilator $\\mathfrak p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1, clauses (1) and (3); agent-written direct principal-quotient argument"
+   }
+  },
+  {
+   "text": "Consequently every associated prime $\\mathfrak p$ of $A/J$ is an associated prime of $A/aA$. Apply [lem-weil-pbc-normal-domain-principal-quotient-associated-height] to the nonzero numerator $a$ in the original Noetherian normal domain $A$; it gives height one for $\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1, clauses (1) and (3); agent-written direct principal-quotient argument"
+   }
+  },
+  {
+   "text": "The annihilator $\\mathfrak p$ contains $J$, since each element of $J$ kills every class in $A/J$. If a prime $\\mathfrak q$ satisfied $J\\subseteq\\mathfrak q\\subsetneq\\mathfrak p$, then $a\\in\\mathfrak q$ would show $\\mathfrak q\\ne(0)$. Since $A$ is a domain, $(0)$ is prime; the chain $(0)\\subsetneq\\mathfrak q\\subsetneq\\mathfrak p$ contradicts the height-one conclusion. Thus $\\mathfrak p$ is minimal among primes containing $J$. If $J=A$, there are no nonzero classes and all assertions are vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1, clauses (1) and (3); agent-written direct principal-quotient argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 031T, lemma-normal-domain-intersection-localizations-height-1, clauses (1) and (3); agent-written direct principal-quotient argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,7 +100,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -75,5 +120,27 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-normal-domain-fractional-principal-quotient-ass",
+  "worker": "stage1",
+  "summary": "Read Stacks 031T and replaced its height-one-localization/symbolic-power proof of clause (3) below the node level by an explicit injection into the nonzero principal quotient A/aA. The only new fact is clause (1), strictly smaller than the fractional statement. Annihilator equality and minimality are written out, including the zero quotient edge case.",
+  "blueprint": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "Step 4: normality of the strict henselization, through the normal-etale colimit and normal-Nagata monogenic argument. The fractional principal quotient bound is the auxiliary 031T(3) used in that argument; steps 1-4 prove that auxiliary fact using 031T(1).",
+   "searches": [
+    "tools/blueprint_refs.py search principal associated: def-sc-divisor and pqf-lem-associated-sections-localize are not this statement",
+    "tools/blueprint_refs.py search fractional quotient: no matches",
+    "tools/blueprint_refs.py search 031T: no matches"
+   ]
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 031T (3) by the embedding A/J into A/aA and the height-one node"
+ }
 }
