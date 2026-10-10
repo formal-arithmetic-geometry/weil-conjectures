@@ -1747,3 +1747,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:13 L: returned deliver/J1/lem-sc-ample-finite-principal-affine (reviewer RETURN: 1. E3: lem-sc-ample-finite-principal-affine, step 3: the claim that Y_s = \bigcap_i Y_{v_{e_i}} contains E is false. v_{)
 - 15:13 L: merged deliver/G1/lem-sc-module-abelian-zariski-cohomology (reviewer FIX; first push; new nodes: 2)
 - 15:14 L: merged deliver/E1/lem-exc-coinduced-homotopy-continuous (reviewer PASS; first push; new nodes: 0)
+- 15:14 L: retired uncited duplicate node lem-sc-zariski-module-sheaves-enough-injectives (G1's module-abelian-zariski-cohomology; the fix cites lem-weil-pbc-scheme-modules-enough-injectives; reviewer R-maz)
