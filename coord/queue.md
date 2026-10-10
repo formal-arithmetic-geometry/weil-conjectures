@@ -1,8 +1,8 @@
 # Work queue
 
-890 items; claim with `tools/claim.py next <group> [--stage N]`.
+888 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (333)
+## Stage 1: nodes to split (330)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-sections-base-field-extension` | 2004 | none |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 2007 | none |
-| `lem-weil-pbc-filtered-category-directed-cofinal` | 2009 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-restriction` | 2009 | none |
 | `lem-weil-pbc-sets-etale-section-continuity` | 2009 | none |
 | `def-sc-topological-abelian-cohomology` | 2011 | none |
@@ -22,7 +21,6 @@
 | `lem-sc-noetherian-cohomology-vanishing-abelian-dim-one` | 2011 | none |
 | `lem-sc-picard-h1-restriction-compatibility` | 2011 | none |
 | `lem-sc-boundary-derivation-square-zero` | 2012 | none |
-| `lem-sc-conductor-ideal-restriction` | 2012 | none |
 | `lem-sc-conductor-ideal-zero-intersection` | 2012 | none |
 | `lem-sc-noetherian-closed-points-finite` | 2012 | none |
 | `lem-sc-section-affine-open-kills-cohomology` | 2012 | none |
@@ -36,7 +34,6 @@
 | `lem-exc-etale-sheaves-gsets-point` | 3009 | none |
 | `lem-sc-injective-module-abelian-acyclic-zariski` | 3010 | none |
 | `lem-sc-point-tangent-separation-closed-immersion` | 3010 | none |
-| `lem-galois-fpqc-pullback-canonical-iso` | 3011 | none |
 | `lem-galois-fpqc-singleton-fully-faithful-0241` | 3011 | none |
 | `lem-pc-affine-nonzerodivisor-complement-dense` | 3011 | none |
 | `lem-pc-base-change-closure-components` | 3011 | none |
@@ -340,7 +337,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (557)
+## Stage 2: nodes to state (558)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -543,6 +540,7 @@
 | `lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor` | 1 | state |
 | `lem-weil-pbc-field-point-factors-through-closed-immersion` | 1 | state |
 | `lem-weil-pbc-field-point-factors-through-immersion` | 1 | state |
+| `lem-weil-pbc-filtered-category-directed-cofinal` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-underlying-module` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-categories` | 1 | state |
@@ -902,7 +900,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 353 nodes that wait for stage 1, 1074 nodes that wait for a statement dependency.
+Not open yet: 350 nodes that wait for stage 1, 1076 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
