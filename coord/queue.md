@@ -1,8 +1,8 @@
 # Work queue
 
-885 items; claim with `tools/claim.py next <group> [--stage N]`.
+884 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (101)
+## Stage 1: nodes to split (99)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -11,7 +11,6 @@
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-affine-pseudo-coherent-criterion` | 3015 | none |
 | `lem-pc-affine-tor-amplitude-criterion` | 3015 | none |
-| `lem-pc-perfect-pseudo-coherent-locally-finite-tor` | 3015 | none |
 | `lem-sc-derived-hom-mayer-vietoris` | 3015 | none |
 | `lem-pc-injective-split-tower-injective` | 3016 | none |
 | `lem-pc-perfect-rhom-tensor-comparison` | 3018 | none |
@@ -28,7 +27,6 @@
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
-| `lem-sc-effective-cartier-affine-dimension-drop` | 4012 | none |
 | `lem-sc-etale-triple-to-sh-completion-flat` | 4012 | none |
 | `lem-sc-etale-at-prime-flat-unramified-criterion` | 4013 | none |
 | `lem-sc-etale-local-ring-stalk-faithfully-flat` | 4013 | none |
@@ -36,11 +34,11 @@
 | `lem-sc-affine-weakass-nonzerodivisors` | 5013 | none |
 | `lem-sc-ass-weakass-fg-stalk` | 5013 | none |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 5014 | none |
-| `lem-pc-flat-module-descent` | 5015 | none |
 | `lem-pc-fp-module-map-descent-affine` | 5015 | none |
 | `lem-pc-rf-single-complex-affine-base-change` | 5015 | none |
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 5015 | none |
 | `lem-pc-sites-module-sheafification-tensor` | 5015 | none |
+| `lem-pc-affine-flat-module-descent` | 5016 | none |
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `lem-sp-cartan-eilenberg-double-complex-homotopy` | 6007 | none |
 | `lem-sc-picard-diagonal-locally-closed` | 6012 | none |
@@ -108,7 +106,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (784)
+## Stage 2: nodes to state (785)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -289,6 +287,7 @@
 | `lem-sc-dvr-saturation-line` | 1 | state |
 | `lem-sc-dvr-tensor-surjective-negative-valuation` | 1 | state |
 | `lem-sc-dvr-valuation-ring-characterization` | 1 | state |
+| `lem-sc-effective-cartier-affine-dimension-drop` | 1 | state |
 | `lem-sc-effective-cartier-dimension-drop` | 1 | state |
 | `lem-sc-etale-affine-over-curve` | 1 | state |
 | `lem-sc-etale-coproduct-etale` | 1 | state |
@@ -897,7 +896,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1603 nodes that wait for a statement dependency, 141 nodes that wait for stage 1.
+Not open yet: 1605 nodes that wait for a statement dependency, 139 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
