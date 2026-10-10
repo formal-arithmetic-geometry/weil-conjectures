@@ -24,9 +24,77 @@
   "def-pc-derived-category",
   "def-amb-finite-locally-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each integer $i$ let $\\beta_i(x)=\\dim_{\\kappa(x)}H^i(Li_x^*E)$. By the jump-loci lemma [lem-sc-perfect-jump-loci], these functions are upper semicontinuous, locally constructible, and pull back along every base change. Let $U\\subseteq S$ be the open locus where $\\beta_a\\le r$. Any morphism satisfying the universal condition in the statement has fibre dimension exactly $r$, hence factors through $U$; replace $S$ by $U$.",
+   "uses": [
+    "lem-sc-perfect-jump-loci"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL, first paragraph"
+   }
+  },
+  {
+   "text": "After this replacement, at every point $x$ one has $0\\le\\beta_a(x)\\le r$. The locus where $\\beta_a<r$ is open by [lem-sc-perfect-jump-loci], so the desired locus is set-theoretically closed in $S$. At a point with $\\beta_a(x)=r$, apply [lem-sc-perfect-finite-free-residue-model] to obtain an affine neighbourhood and a bounded finite-free representative whose degree-$a$ term is $\\mathcal O^{\\oplus r}$ and whose degree-$(a+1)$ term has rank $\\beta_{a+1}(x)$. Since $E$ has tor-amplitude in $[a,b]$, $\\beta_i(x)=0$ for $i<a$, so the complex is zero below degree $a$ and $H^a$ is the kernel of the outgoing matrix. The closed subscheme on which all entries of that matrix vanish is cut out by finitely many functions; there the kernel is the whole degree-$a$ term, so $H^a$ is finite locally free of rank $r$. These local constructions restrict to the same matrix equations on smaller affine neighbourhoods.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-sc-perfect-jump-loci",
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL, local finite-free model and matrix equations"
+   }
+  },
+  {
+   "text": "Let $Z$ be the resulting closed subscheme of $U$, glued from the affine constructions. If $h:T\\to S$ factors through $Z$, the matrix equations remain zero after every further base change, so the finite-free complex has zero outgoing differential in degree $a$ and $H^a(L(h\\circ u)^*E)\\cong\\mathcal O_{T'}^{\\oplus r}$ for every $u:T'\\to T$. Conversely, assume this module is finite locally free of rank $r$ after every further base change. Applying the condition to residue-field maps gives $\\beta_a=r$ by the base-change clause of [lem-sc-perfect-jump-loci], so the map lands in the closed set where the charts apply. Take an affine open $V=\\mathrm{Spec}(B)\\subseteq T$ mapping into a chart, small enough that $K=\\ker(\\varphi:B^{\\oplus r}\\to B^{\\oplus m})=H^a$ of the pulled-back finite-free complex is free of rank $r$. The composite $\\psi:B^{\\oplus r}\\cong K\\subseteq B^{\\oplus r}$ is an injective map of finite free modules of the same rank, so $\\mathrm{Hom}_B(\\mathrm{Coker}(\\psi),B)=0$ by [lem-sc-square-injective-free-map-dual-coker-zero]. Now $\\varphi$ induces an injection $\\mathrm{Coker}(\\psi)=B^{\\oplus r}/K\\hookrightarrow B^{\\oplus m}$; each coordinate projection of it lies in $\\mathrm{Hom}_B(\\mathrm{Coker}(\\psi),B)=0$, so the image of $\\varphi$ is zero, i.e. all entries of the outgoing matrix vanish in $B$. (An injective map of free modules of equal rank need not be split, e.g. $2:\\mathbf Z\\to\\mathbf Z$, so this lemma, Stacks More on Algebra Tag 0EWY as cited in Tag 0BDL, is what is needed.) The universal property of the affine closed subscheme then forces the chart map, and hence $h$, to factor through $Z$.",
+   "uses": [
+    "lem-sc-perfect-jump-loci",
+    "lem-sc-perfect-finite-free-residue-model",
+    "lem-sc-square-injective-free-map-dual-coker-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL, conditions (1), (2), and matrix-locus argument"
+   }
+  },
+  {
+   "text": "Only finitely many matrix entries occur on each affine chart, so the defining ideal is of finite type; hence the immersion $j:Z\\to S$ is of finite presentation. On $Z$, the outgoing differential is zero and there is no preceding term, so the degree-$a$ cohomology is the degree-$a$ finite-free term, of rank $r$. Pulling the same finite-free representative and its zero matrix along any $h:T\\to Z$ identifies $H^a(Lh^*E)$ canonically with $h^*H^a(Lj^*E)$, proving pullback compatibility.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL, finite-presentation and compatibility clauses"
+   }
+  },
+  {
+   "text": "The construction is independent of the chosen finite-free charts: on overlaps both closed subschemes represent exactly the same functor of morphisms satisfying the condition in Step 3, so their canonical identifications glue. Thus $j:Z\\to S$ is an immersion of finite presentation with precisely the factorization property and the asserted finite locally free degree-$a$ cohomology module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL, conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-perfect-jump-loci",
+  "def-pc-perfect-complex",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-sc-square-injective-free-map-dual-coker-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Derived Categories of Schemes, Lemma locally-closed-where-H0-locally-free, Tag 0BDL"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +126,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-picard-diagonal-locally-closed",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-h0-locally-closed",
+  "worker": "stage1",
+  "summary": "Split Tag 0BDL into the jump-locus reduction, local finite-free matrix construction, universal factorization criterion, finite-presentation and pullback compatibility, and gluing. Added the statement-only jump-loci dependency Tag 0BDI.",
+  "blueprint": "Realizes the theorem-of-cube proof clause constructing locally closed loci on which degree-zero direct images are finite locally free."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-phl3134",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-phl3134 (reviewer sub-agent of L); spot-checked: Read packet whole: item statement vs Tag 0BDL (perfect, tor-amplitude [a,b], r>=0, fp immersion, factorization tested after every further base change, pullback compatibility) agrees; new nodes lem-sc-perfect-jump-loci vs 0BDI and lem-sc-perfect-finite-free-residue-model vs 0BCD agree, no duplicates (grep 0BDI/0BCD; lem-pc-perfect-locus and lem-sc-affine-truncation-kernel-finite-locally-free are different statements). Steps 1-2 cite jump-loci for openness (C1 ok), 0BCD model for the chart; both directions of the factorization in step 3 present. FIX more, RETURN less: (1) step 3 converse justified 'kernel locally free of rank r inside O^r, hence a direct summand of full rank, complement zero' - false as stated (2:Z->Z) and the needed fact uncited (C1): added statement-only node lem-sc-square-injective-free-map-dual-coker-zero (More on Algebra Tag 0EWY, the lemma Stacks cites in 0BDL; Mathlib grep recorded, only the converse direction exists) and rewrote the converse via Hom(Coker psi,B)=0 and the coordinate projections of Coker psi -> B^m; uses/proof_deps updated. (2) step 2: vanishing of the model below degree a now justified from tor-amplitude (beta_i=0 for i<a). The J1 Second reading missed (1). Start Sat Oct 10 11:34:55 PM UTC 2026, end Sat Oct 10 11:34:55 PM UTC 2026; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
