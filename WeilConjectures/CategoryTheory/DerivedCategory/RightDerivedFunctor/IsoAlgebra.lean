@@ -75,9 +75,18 @@ variable {D : Type u'} [Category.{v'} D] [Abelian D] {G : D ⥤ D} [G.Additive] 
 /-- **Right derivation commutes with forgetting the algebra structures.** For an additive
 functor `L : C ⥤ D` and `e : L ⋙ G ≅ F ⋙ L`, the total right derived functor of the transport
 `mapOfNatIso e` of algebras is computed on underlying objects by the total right derived
-functor of `L`: `R(mapOfNatIso e) ⋙ For ≅ For ⋙ RL`. Both sides are the total right derived
-functor of `For ⋙ L`, the forgetful functors being exact and preserving K-injective
-complexes. -/
+functor of `L`: `R(mapOfNatIso e) ⋙ For ≅ For ⋙ RL`.
+
+```
+D(IsoAlgebra F) --R(mapOfNatIso e)--> D(IsoAlgebra G)
+      |                                    |
+     For                                  For
+      v                                    v
+     D(C) ---------------RL-------------> D(D)
+```
+
+Both sides are the total right derived functor of `For ⋙ L`, the forgetful functors being
+exact and preserving K-injective complexes. -/
 noncomputable def rightDerivedFunctorMapOfNatIsoCompForgetIso :
     (mapOfNatIso e).rightDerivedFunctor ⋙ (forget G).mapDerivedCategory ≅
       (forget F).mapDerivedCategory ⋙ L.rightDerivedFunctor :=

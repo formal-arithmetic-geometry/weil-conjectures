@@ -185,7 +185,16 @@ lemma isRightDerivedFunctor_rightDerivedFunctor_comp_of_exact (F : C ⥤ D) (G :
 
 /-- The composition isomorphism `R(F ⋙ G) ≅ RF ⋙ G` for an arbitrary additive functor `F` and
 an *exact* functor `G`, where `G` acts on derived categories levelwise. Unlike
-`Functor.rightDerivedFunctorCompIso`, no K-injectivity condition on `F` is needed. -/
+`Functor.rightDerivedFunctorCompIso`, no K-injectivity condition on `F` is needed.
+
+```
+D(C) --R(F ⋙ G)--> D(E)
+  |                ^
+ RF                |
+  v                |
+D(D) ------G-------'
+```
+-/
 noncomputable def rightDerivedFunctorCompMapDerivedCategoryIso (F : C ⥤ D) (G : D ⥤ E)
     [F.Additive] [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
     (F ⋙ G).rightDerivedFunctor ≅ F.rightDerivedFunctor ⋙ G.mapDerivedCategory :=

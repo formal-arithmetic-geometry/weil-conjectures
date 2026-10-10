@@ -105,7 +105,16 @@ instance : (j')^*ᵃ[l].PreservesKInjectiveComplexes :=
   (adicOpenImmersionLowerShriekAdjunction l j').preservesKInjectiveComplexes
 
 /-- **Open base change for the derived pushforward of `ℓ`-adic sheaves**: for a cartesian square
-with `j` (hence `j'`) an open immersion, `j^* ∘ Rg''_* ≅ Rg'_* ∘ j'^*`. -/
+with `j` (hence `j'`) an open immersion, `j^* ∘ Rg''_* ≅ Rg'_* ∘ j'^*`.
+
+```
+D(Z') --Rg''_*--> D(Z)
+  |                 |
+ j'^*             j^*
+  v                 v
+D(U') --Rg'_*---> D(U)
+```
+-/
 noncomputable def adicDerivedBaseChangeIso (hsq : IsPullback g' j' j g'') :
     (g'')_*ᵃ[l].rightDerivedFunctor ⋙ (j)^*ᵃ[l].mapDerivedCategory ≅
       (j')^*ᵃ[l].mapDerivedCategory ⋙ (g')_*ᵃ[l].rightDerivedFunctor :=
