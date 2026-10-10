@@ -922,3 +922,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:36 L: reviewed def-weil-pbc-depth (definition, no match; status split) and def-weil-pbc-essentially-constant-system (definition, no match): accepted.
 - 05:36 L: reviewed lem-weil-pbc-zariski-cohomology-locally-zero (4 steps, +03F3 node; the restriction map now defined in the statement): accepted. Stage-3 notes: def-sc-zariski-cohomology cites the K-injective definition for its convention; gabber-criterion step 3 needs the comparison isomorphism compatible with restriction to opens.
 - 05:37 L: reviewed def-weil-pbc-japanese-domain (definition, no match): accepted.
+- 05:38 L: reviewed def-weil-pbc-nagata-ring (definition, no match): accepted.

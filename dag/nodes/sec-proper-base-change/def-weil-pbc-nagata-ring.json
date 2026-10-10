@@ -5,7 +5,7 @@
  "statement": "Let $R$ be a commutative ring. (1) $R$ is *universally Japanese* if for every ring map $R\\to S$ of finite type [def-weil-pbc-finite-type-algebra] with $S$ an integral domain, $S$ is N-2 [def-weil-pbc-japanese-domain]. (2) $R$ is a *Nagata ring* if $R$ is Noetherian [def-weil-pbc-noetherian-ring] and for every prime ideal $\\mathfrak p\\subset R$ the domain $R/\\mathfrak p$ is N-2.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Definition Tag 032R (definition-nagata), line 45622"
+  "place": "Algebra, Definition Tag 032R (label definition-nagata, algebra.tex line 45622; tags file: 032R,algebra-definition-nagata); N-2 itself is Definition 032F (definition-N, line 45135)"
  },
  "stmt_deps": [
   "def-weil-pbc-finite-type-algebra",
@@ -43,10 +43,73 @@
    "results": "none, index: unavailable (not a proof of absence; the grep above is)",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nagata ring: Noetherian ring such that R/p is Japanese (N-2) for every prime ideal p",
+   "results": "IsNoetherianRing (Mathlib.RingTheory.Noetherian.Defs), IsDedekindRing.casesOn, IsNoetherianRing.of_prime, IsNoetherianRing.of_prime_ne_bot, IsJacobsonRing, IsNoetherianRing.of_isLocalization_maximal, AlgebraicGeometry.isNoetherian_Spec, Ideal.FG.of_isNoetherianRing",
+   "date": "2026-10-10",
+   "verdict": "no match: only the Noetherian half"
+  },
+  {
+   "tool": "leansearch",
+   "query": "universally Japanese ring: every domain of finite type over R has finite integral closure in every finite extension of its fraction field",
+   "results": "integralClosure.isIntegrallyClosedOfFiniteExtension, IsIntegralClosure.of_isIntegrallyClosed, integralClosure, IsDedekindRing.toIsIntegralClosure, IsDedekindDomainDvr.isIntegrallyClosed, integralClosure.AlgebraIsIntegral, FunctionField.ringOfIntegers instance, completeIntegralClosure_eq_integralClosure",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Nagata\" (name substring)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no Mathlib declaration has Nagata in its name"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Japanese\" (name substring)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match: no declaration named Japanese (N-1/N-2/universally Japanese absent)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata ring (Noetherian ring all of whose quotients by primes are Japanese / N-2 domains)",
+   "results": "AlgebraicGeometry.isNoetherianRing_of_away, IsNoetherianRing.of_prime, IsNoetherianRing.of_prime_ne_bot, IsNoetherianRing.of_isLocalization_maximal, Algebra.EssFiniteType.isNoetherianRing, isDedekindRing_iff, AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing, reesAlgebra FiniteType instance",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universally Japanese ring: every finitely generated algebra which is a domain is Japanese (N-2)",
+   "results": "Algebra.QuasiFinite, Algebra.QuasiFiniteAt, RingHom.finite_of_algHom_finiteType_of_isJacobsonRing, RingHom.finite_iff_finiteType_of_isJacobsonRing, Algebra.IsGeometricallyReduced.of_forall_fg, fg_of_fg_of_fg, Algebra.quasiFinite_iff, finite_of_algHom_finiteType_of_isJacobsonRing",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn \"Nagata\\|IsNagata\\|UniversallyJapanese\\|Japanese\\|IsN2\\|IsN1\\|N-2\\|N-1 \" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib ; and grep -rn \"N-2\\|N-1\\|Japanese\\|Nagata ring\\|universally Japanese\" ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "RingTheory/NoetherNormalization.lean:14 (Nagata's proof of Noether normalization), Algebra/EuclideanDomain/Defs.lean:18,56 (Nagata on Euclid algorithm), Analysis/SpecialFunctions/JapaneseBracket.lean and its importers (Japanese bracket); nothing in RingTheory for N-1/N-2/Nagata rings",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn \"Nagata\\|Japanese\\|UniversallyJapanese\" ~/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "only comments on Nagata compactification (Blowup/*.lean, AlgebraicGeometry/ProjectiveSpace.lean); no Nagata-ring or Japanese declaration in the source repository",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsNagata (project_root ~/weil-conjectures-slopmaster2)",
+   "results": "none, index: unavailable (not a proof of absence; the greps above are)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -66,5 +129,22 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "none for the notion; building blocks only: IsNoetherianRing, integralClosure, Module.Finite, Algebra.FiniteType; related theorem IsIntegralClosure.finite",
+  "file": "Mathlib/RingTheory/Noetherian/Defs.lean; Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean; Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean",
+  "how": "Mathlib has neither Nagata rings, universally Japanese rings nor N-1/N-2 domains. The definition would be written from IsNoetherianRing (Noetherian/Defs.lean line 196, `abbrev IsNoetherianRing (R) [Semiring R] := IsNoetherian R R`, read with sed -n 194,198p), integralClosure (IntegralClosure/Algebra/Basic.lean line 216, read with sed -n 214,218p), Module.Finite and Algebra.FiniteType. The nearest result, IsIntegralClosure.finite (DedekindDomain/IntegralClosure.lean line 175, read with sed -n 140,180p), gives finiteness of the integral closure only for an integrally closed Noetherian A and a finite separable L/Frac(A): a special case of N-2, not the notion. Not a leaf."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-weil-pbc-nagata-ring",
+  "worker": "stage1",
+  "summary": "Definition node, checked against Stacks Definition 032R (algebra.tex line 45622, label definition-nagata; tag verified in stacks-project/tags/tags): clause (1) universally Japanese (every finite type ring map R -> S with S a domain has S N-2) and clause (2) Nagata (R Noetherian and R/p N-2 for every prime p) agree word for word with the source; the statement was kept unchanged; only the source place was made precise. Stated with its own objects; the cited definitions exist and say what is needed: def-weil-pbc-finite-type-algebra (finite type ring map, Mathlib leaf Algebra.FiniteType), def-weil-pbc-japanese-domain (N-1/N-2 for a domain, matching Stacks 032F line 45135; N-2 is defined for domains and R/p and S are domains, so it applies), def-weil-pbc-noetherian-ring (Mathlib leaf IsNoetherianRing). The two citers use exactly these clauses: lem-weil-pbc-nagata-universally-japanese (Stacks 0334) states Nagata implies universally Japanese, and lem-weil-pbc-finite-type-z-domain-normalization-finite verifies clause (2) for Z (step 1, Stacks 0335 (3)) and uses clause (1) for A (step 2). Mathlib: no Nagata, universally Japanese or N-1/N-2 notion (LeanSearch, Loogle, LeanFinder, grep of Mathlib and of the source checkout); building blocks recorded in mathlib_candidate. A definition with no Mathlib match: status split with empty proof."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "definition checked against Stacks 032R clause by clause (universally Japanese, Nagata); the cited definitions say what is needed. No Mathlib notion (candidate lists the building blocks). Status split."
+ }
 }
