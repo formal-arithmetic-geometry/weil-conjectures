@@ -121,24 +121,6 @@ instance Etale.isIso_unit_app_of_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
 
 end UnitComp
 
-/-- **Constant sheaves at the generic point of a normal scheme.** Let `Y` be an integral scheme all
-of whose local rings are integrally closed and `g : Spec K ⟶ Y` the inclusion of its generic
-point. Then the unit `M_Y ⟶ g_* g^* M_Y = g_* M_{Spec K}` is an isomorphism for every
-`Λ`-module `M`.
-
-This is the first half of `AlgebraicGeometry.Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed`;
-the second half follows from it by
-`AlgebraicGeometry.Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint`. On stalks at
-a geometric point `ȳ`, the unit is `M ⟶ M^{π₀(Spec 𝒪ˢʰ_{Y,ȳ} ×_Y Spec K)}`, and the generic fibre of
-`Spec 𝒪ˢʰ_{Y,ȳ}` is connected since the strict henselisation of a normal local domain is a normal
-domain (Stacks 06DI). -/
-theorem Etale.isIso_unit_constantSheaf_fromSpecStalk_genericPoint {Y : Scheme.{u}} [IsIntegral Y]
-    (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) (M : ModuleCat.{u + 1} Λ) :
-    IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
-        (Y.fromSpecStalk (genericPoint Y))).unit.app
-          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
-  sorry
-
 /-- **The open-immersion half of 09Z5 from the generic-point half.** Let `Y` be a normal integral
 scheme and `j : U ⟶ Y` the inclusion of a nonempty open subscheme. If the unit
 `M_Z ⟶ g_* g^* M_Z` along the generic point `g` is an isomorphism for every normal integral `Z`,
@@ -196,9 +178,19 @@ theorem Etale.isIso_unit_constantSheaf_of_isIntegrallyClosed {Y : Scheme.{u}} [I
       ∀ {U : Scheme.{u}} (j : U ⟶ Y) [IsOpenImmersion j] [Nonempty U],
         IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app
           ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
-  ⟨Etale.isIso_unit_constantSheaf_fromSpecStalk_genericPoint Λ hY M, fun j ↦
-    Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint Λ M
-      (fun _ _ hZ ↦ Etale.isIso_unit_constantSheaf_fromSpecStalk_genericPoint Λ hZ M) hY j⟩
+  by
+  -- The generic-point half: on stalks at a geometric point `ȳ` the unit is
+  -- `M ⟶ M^{π₀(Spec 𝒪ˢʰ_{Y,ȳ} ×_Y Spec K)}`, and this generic fibre is connected since the strict
+  -- henselisation of a normal local domain is a normal domain (Stacks 06DI).
+  have hgen : ∀ (Z : Scheme.{u}) [IsIntegral Z],
+      (∀ z : Z, IsIntegrallyClosed (Z.presheaf.stalk z)) →
+        IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+          (Z.fromSpecStalk (genericPoint Z))).unit.app
+            ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) :=
+    sorry
+  -- The open-immersion half follows from the generic-point half.
+  exact ⟨hgen Y hY, fun j ↦
+    Etale.isIso_unit_constantSheaf_of_isOpenImmersion_of_genericPoint Λ M hgen hY j⟩
 
 /-- **Constructible sheaves are finitely presentable.** On a quasi-compact quasi-separated
 scheme `X`, with `Λ` Noetherian, a constructible sheaf of `Λ`-modules `F` is a finitely
