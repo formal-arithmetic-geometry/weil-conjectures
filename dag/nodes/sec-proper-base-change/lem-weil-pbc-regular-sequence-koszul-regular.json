@@ -33,9 +33,64 @@
   "def-weil-pbc-koszul-complex",
   "def-weil-pbc-regular-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Induct on the length $r$. For $r=0$, the Koszul complex tensored with $M$ has $M$ in degree zero and zero in positive degrees. For the inductive step put $A_\\bullet=K_\\bullet(f_1,\\dots,f_{r-1})\\otimes_RM$. The hypotheses for the prefix are unchanged, so the induction hypothesis gives $H_i(A_\\bullet)=0$ for $i>0$. The degree-zero differential has image $(f_1,\\dots,f_{r-1})M$, hence $H_0(A_\\bullet)=M/(f_1,\\dots,f_{r-1})M$. Multiplication by $f_r$ is injective on this quotient by the remaining hypothesis.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 062F, lemma-regular-koszul-regular, proof, induction and the short exact sequence, lines 7273-7298"
+   }
+  },
+  {
+   "text": "Write $E=R^{\\oplus(r-1)}$ with basis $e_1,\\dots,e_{r-1}$ and let $e_r$ denote the final generator of $E\\oplus R$. In every degree the exterior-power basis divides according to whether $e_r$ occurs: $K_n(f_1,\\dots,f_r)\\otimes_RM\\cong A_n\\oplus A_{n-1}$, taking $(a,b)$ to $a+e_r\\wedge b$. The differential formula of [def-weil-pbc-koszul-complex] gives $D_n(a,b)=(d a+f_r b,-d b)$, because $d(e_r\\wedge b)=f_r b-e_r\\wedge d b$. Thus this is the mapping-cone description of Stacks Lemma 0629, verified here from the basis and the differential rather than taken as an uncited fact.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemmas 0629 (lemma-cone-koszul, lines 6750-6766) and 0628 (lemma-cone-koszul-abstract, lines 6694-6748), used in the proof of Lemma 062F"
+   }
+  },
+  {
+   "text": "Let $n>0$ and let $(a,b)\\in A_n\\oplus A_{n-1}$ be a $D$-cycle. If $n>1$, then $d b=0$ and $H_{n-1}(A)=0$, so write $b=d c$ with $c\\in A_n$. If $n=1$, the equation $d a+f_r b=0$ in $A_0=M$ says $f_r[b]=0$ in $H_0(A)$; the injectivity in step 1 gives $[b]=0$, so again $b=d c$, now with $c\\in A_1$. In either case subtract $D_{n+1}(0,-c)=(-f_r c,d c)$ from $(a,b)$ to get $(a+f_r c,0)$. Its first coordinate is a $d$-cycle. Since $H_n(A)=0$, choose $e\\in A_{n+1}$ with $d e=a+f_r c$; then $(a+f_r c,0)=D_{n+1}(e,0)$. Thus every positive-degree cycle is a boundary, including the edge case $n=1$. By the definition [def-weil-pbc-koszul-regular-sequence], the sequence is $M$-Koszul-regular.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 062F, lemma-regular-koszul-regular, proof, lines 7273-7298; the degreewise cycle chase spells out its cone/quasi-isomorphism step"
+   }
+  },
+  {
+   "text": "An $M$-regular sequence [def-weil-pbc-regular-sequence] has exactly the successive injectivity hypothesis already used (and additionally requires a nonzero final quotient); hence it is $M$-Koszul-regular. Taking $M=R$ gives the last assertion for a regular sequence in $R$. For $r=0$ the empty sequence satisfies the first assertion independently of whether the optional nonzero-quotient condition holds.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 062F, lemma-regular-koszul-regular, final sentence and final proof sentence, lines 7270-7298"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 062F (lemma-regular-koszul-regular), with Lemmas 0629 and 0628; the induction is run from the final element so 0629 applies directly"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -67,7 +122,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -87,5 +142,19 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-regular-sequence-koszul-regular",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks Lemma 062F and its proof against Lemmas 0629 and 0628. The existing statement has the correct successive-injectivity hypothesis and the correct consequences. The inductive proof is made explicit with the final element, the exterior-power decomposition, the cone differential, and a degreewise cycle chase, including degree one and the empty sequence. The cone identity is proved in the step, so no new node or uncited source theorem is needed. Search of the read-only slopmaster2 Lean source found no declaration for this item or its Koszul-regularity notion; Mathlib's RegularSequence file lists Koszul regularity as TODO.",
+  "blueprint": "The item is a created tool under thm-weil-pbc-finite-etale-lifting, step 7 of its split, the essential-surjectivity/approximation chain. Steps 1-4 establish the regular-to-Koszul-regular implication invoked in that chain's Stacks 0665 conormal argument (via lem-weil-pbc-regular-quotient-ideal-intersection). Whole-blueprint searches for 062F, regular Koszul, Koszul complex, and regular sequence found no node stating this lemma."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: 062F by induction on r through the cone decomposition K(f_1..f_r) = A_n + e_r A_{n-1}, the cycle computation written out; 0 new"
+ }
 }
