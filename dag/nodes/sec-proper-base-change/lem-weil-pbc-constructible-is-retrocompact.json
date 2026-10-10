@@ -10,9 +10,51 @@
  "stmt_deps": [
   "def-weil-constructible-subset"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Reduction to one piece.* By [def-weil-constructible-subset] write $E=\\bigcup_{i=1}^{n}U_i\\cap(X\\setminus V_i)$ with $U_i,V_i\\subseteq X$ open and retrocompact ($n\\ge 0$; for $n=0$, $E=\\emptyset$). Fix a quasi-compact open $W\\subseteq X$. Distributing the intersection over the finite union gives $E\\cap W=\\bigcup_{i=1}^{n}P_i$ with $P_i=U_i\\cap(X\\setminus V_i)\\cap W=(U_i\\cap W)\\setminus V_i$. So it suffices to show each $P_i$ is quasi-compact (step 2) and that a finite union of quasi-compact subsets is quasi-compact (step 3).",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 09YH (lemma-constructible-is-retrocompact, line 2727), proof, first three sentences"
+   }
+  },
+  {
+   "text": "*Each piece is quasi-compact.* Fix $i$. Since $U_i$ is retrocompact and $W$ is a quasi-compact open of $X$, the set $Q=U_i\\cap W$ is quasi-compact in its induced topology [def-weil-constructible-subset]. Since $V_i$ is open in $X$, $Q\\cap V_i$ is open in the subspace $Q$, so $P_i=Q\\setminus(Q\\cap V_i)$ is closed in $Q$. By [lem-weil-pbc-closed-in-quasi-compact] (Stacks 005C) applied to the quasi-compact space $Q$ and its closed subset $P_i$, $P_i$ is quasi-compact in the topology induced from $Q$, which equals the topology induced from $X$ (the subspace topology of a subspace of a subspace is the subspace topology). Hence $P_i$ is a quasi-compact subset of $X$. (Only openness of $V_i$ is used here, not its retrocompactness.)",
+   "uses": [
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-closed-in-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 09YH (lemma-constructible-is-retrocompact, line 2727), proof, last sentence (closed subset of the quasi-compact $U\\cap W$, Lemma 005C)"
+   }
+  },
+  {
+   "text": "*Finite unions.* A finite union $P_1\\cup\\dots\\cup P_n$ of quasi-compact subsets of $X$ is quasi-compact: given a family of open subsets of $X$ covering the union, each $P_i$ is covered by finitely many of its members, and the union of these $n$ finite subfamilies is a finite subfamily covering $P_1\\cup\\dots\\cup P_n$ (for $n=0$ the empty set is quasi-compact). With step 1 and step 2, $E\\cap W$ is quasi-compact for every quasi-compact open $W\\subseteq X$, i.e. $E$ is retrocompact in $X$ [def-weil-constructible-subset].",
+   "uses": [
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Lemma Tag 09YH (lemma-constructible-is-retrocompact, line 2727), proof, 'Thus it suffices to show' (finite union of quasi-compact sets, used implicitly)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-closed-in-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 09YH (lemma-constructible-is-retrocompact, line 2727), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,10 +90,38 @@
    "results": "none",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "IsConstructible s → IsRetrocompact s",
+   "results": "IsRetrocompact, IsRetrocompact.isConstructible (open retrocompact ⇒ constructible), Topology.IsConstructible, IsRetrocompact.isCompact [CompactSpace], IsCompact.isRetrocompact [QuasiSeparatedSpace], IsRetrocompact_iff_isSpectralMap_subtypeVal, IsRetrocompact.isLocallyConstructible, IsCompact.isConstructible [QuasiSeparatedSpace] (all Mathlib.Topology.Constructible)",
+   "date": "2026-10-10",
+   "verdict": "no match (only the converse for open sets)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "intersection of a constructible set with a compact open set is compact",
+   "results": "Topology.IsLocallyConstructible.inter_of_isOpen_isCompact [PrespectralSpace, QuasiSeparatedSpace] (conclusion: constructible, not compact), IsCompact.isConstructible, Topology.IsLocallyConstructible.isConstructible_of_subset_of_isCompact, IsRetrocompact.isConstructible, Topology.IsLocallyConstructible.isConstructible, Topology.IsConstructible.inter, Topology.IsLocallyConstructible.inter, Topology.IsConstructible (Mathlib.Topology.Constructible)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'isRetrocompact\\|IsRetrocompact' Mathlib/Topology/Constructible.lean; grep -rn 'lemma.*IsConstructible\\.' Mathlib; grep -rn 'IsConstructible' Mathlib | grep -i compact",
+   "results": "IsRetrocompact lemmas: empty, univ, singleton, union, finsetSup, iUnion, sUnion, biUnion, inter [T2], inter_isOpen, isOpen_inter, image_of_isEmbedding, preimage_of_isOpen/ClosedEmbedding, isConstructible (open case), isLocallyConstructible, isCompact [CompactSpace], IsCompact.isRetrocompact [QuasiSeparatedSpace]; IsConstructible lemmas: empty, univ, union, inter, sdiff, himp, iUnion, iInter, sUnion, sInter, biUnion, biInter, empty_union_induction, preimage*, image_of_*, induction_of_isTopologicalBasis, isLocallyConstructible. No IsConstructible.isRetrocompact and no IsConstructible.isCompact, under any hypothesis (CompactSpace or QuasiSeparatedSpace included)",
+   "date": "2026-10-10",
+   "verdict": "no match: Mathlib does not state constructible ⇒ retrocompact; it would follow in Lean from IsConstructible.empty_union_induction (or BooleanSubalgebra.mem_closure_iff_sup_sdiff) with IsRetrocompact.union and a closed-in-compact argument, which is this proof"
+  },
+  {
+   "tool": "local_search",
+   "query": "IsConstructible.isRetrocompact (project root ~/weil-conjectures-slopmaster2)",
+   "results": "index unavailable (no language server running); not evidence of absence, the grep above is",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -71,5 +141,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-constructible-is-retrocompact",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 09YH (topology.tex line 2727) and the definition node def-weil-constructible-subset (retrocompact: E∩W quasi-compact for every quasi-compact open W; constructible: finite union of U∩(X∖V), U,V retrocompact open): statement correct, unchanged; stmt_deps unchanged. Wrote the Stacks proof in three steps: reduction of E∩W to the finite union of (U_i∩W)∖V_i (elementary); each piece closed in the quasi-compact U_i∩W, hence quasi-compact by the existing Mathlib leaf lem-weil-pbc-closed-in-quasi-compact (Stacks 005C, same unit sk-thm-p1), with the transitivity of subspace topologies written out; finite union of quasi-compact sets quasi-compact, written out (elementary, no node exists and none created). No new nodes. Mathlib re-searched (leansearch, leanfinder, grep, local_search unavailable): no IsConstructible.isRetrocompact, nor any compactness conclusion for constructible sets under CompactSpace or QuasiSeparatedSpace; only the converse IsRetrocompact.isConstructible for open sets; status split, not mathlib."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "3 steps following Topology 09YH: reduce to one piece (U_i cap W) minus V_i, closed in the quasi-compact U_i cap W (005C leaf), finite unions. No new nodes."
+ }
 }
