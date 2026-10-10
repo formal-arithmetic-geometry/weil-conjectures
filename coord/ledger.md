@@ -1577,3 +1577,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:00 L: tools/merge_delivery.py rewritten (sub-agent, tested in a scratch clone): flock on coord/.merge.lock, merge by files on the current tip (split-owned fields only), --apply-fixes/--tool-uses/--reviewed/--lead-note/--reviewer/--verdict/--head, bookkeeping and queue rewrite (at most once a minute) inside the tool, one-line output; reviewers now run merge/return themselves (brief-review.md); group_stats counts the new return lines
 - 14:01 L: merged deliver/J1/def-weil-pbc-strict-henselization-limit (reviewer PASS; after a return; new nodes: 1)
 - 14:01 L: returned deliver/E1/lem-sc-second-kummer-divisors (reviewer RETURN: 1. C4/C3: step 2: the step says the 'degree-two exact-sequence clause' of [lem-sc-kummer-les] makes the Kummer coboundar)
+- 14:02 L: accepted lem-weil-pbc-proj-polynomial-twist-chart: 8 steps (01NG/01M4/01ME), no new nodes
