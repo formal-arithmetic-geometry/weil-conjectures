@@ -15,8 +15,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 
 Let `R` be a commutative ring. A perfect complex of `D(R)` is dualizable for the derived tensor
 product (`DerivedCategory.IsPerfect.isDualizable`). This file proves the converse over a
-Noetherian ring: a dualizable object of `D(R)` is perfect (`DerivedCategory.isPerfect_of_isDualizable`).
-Together, perfectness and dualizability agree (`DerivedCategory.isPerfect_iff_isDualizable`).
+Noetherian ring: a dualizable object of `D(R)` is perfect
+(`DerivedCategory.isPerfect_of_isDualizable`). Together, perfectness and dualizability agree
+(`DerivedCategory.isPerfect_iff_isDualizable`).
 
 ## Strategy
 
@@ -249,8 +250,8 @@ theorem exists_retract_of_exactPairing (C D : DerivedCategory (ModuleCat.{u} R))
       Category.assoc]
   have key : (tensorRightHomEquiv _ C D _).symm (eU.hom ≫ Q.map φ' ≫ (T _).inv) ≫ Q.map ι =
       (λ_ C).hom ≫ e.hom := by
-    rw [← tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight (Y' := D), ← hu, Equiv.eq_symm_apply,
-      tensorRightHomEquiv_naturality, Equiv.apply_symm_apply]
+    rw [← tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight (Y' := D), ← hu,
+      Equiv.eq_symm_apply, tensorRightHomEquiv_naturality, Equiv.apply_symm_apply]
   exact ⟨N, hN, _, by rw [Category.assoc, key, Iso.inv_hom_id_assoc]⟩
 
 /-- Over a Noetherian ring, an object of `D(R)` with a right dual is bounded and has finitely
