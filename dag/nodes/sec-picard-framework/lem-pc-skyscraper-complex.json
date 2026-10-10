@@ -23,9 +23,40 @@
   "def-pc-cochain-complex-modules",
   "def-pc-acyclic-complex-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every degree $i$ and open $U\\subseteq X$, the term $(i_{x,*}M^i)(U)$ is $M^i$ when $x\\in U$ and the zero module otherwise, and the differential is $d^i_M$ or the zero map accordingly. If $x\\in U$, the sequence of sections in degrees $i-1,i,i+1$ is $M^{i-1}\\to M^i\\to M^{i+1}$, exact by acyclicity of $M^\\bullet$; if $x\\notin U$, it is the zero sequence, which is exact. Thus $i_{x,*}M^{i-1}\\to i_{x,*}M^i\\to i_{x,*}M^{i+1}$ is sectionwise exact, hence exact as a sequence of sheaves, for every $i$. By the definition of acyclicity, $i_{x,*}M^\\bullet$ is acyclic.",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-acyclic-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Definition Tag 009A (label definition-skyscraper-sheaf), case (4), and Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint), applied degreewise; exactness is sectionwise"
+   }
+  },
+  {
+   "text": "The stalk at $x$ of each term $i_{x,*}M^i$ is the filtered colimit over open neighbourhoods $U$ of $x$ of $(i_{x,*}M^i)(U)$. Every such value is $M^i$ and every transition map is the identity, so this colimit is canonically $M^i$. These identifications commute with the differentials, since all restriction maps and differentials are defined termwise from those of $M^\\bullet$. They therefore assemble to an isomorphism of cochain complexes $(i_{x,*}M^\\bullet)_x\\cong M^\\bullet$, and since $\\mathcal O_X(U)$ acts through the germ at $x$, the $\\mathcal O_{X,x}$-module structures agree.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Definition Tag 009A (label definition-skyscraper-sheaf), case (4), and Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint), applied degreewise; stalk computed from neighborhoods of x"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Definition Tag 009A (label definition-skyscraper-sheaf), case (4), and Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint), applied degreewise; source text unavailable in this checkout"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,12 +88,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-kflat-stalk-criterion",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-skyscraper-complex",
+  "worker": "stage1",
+  "summary": "No exact sorry-free Lean declaration exists. Split the degreewise skyscraper argument into two elementary steps: sectionwise exactness proves acyclicity, and the filtered-colimit stalk computation gives the canonical complex isomorphism. No new nodes were needed because the only nontrivial notions are the existing cochain-complex and acyclicity definitions.",
+  "blueprint": "The steps realize the skyscraper-complex input used by the converse stalk test for K-flatness in lem-pc-kflat-stalk-criterion, along the ancestor route from lem-sc-finite-duality."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-skc2026",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-skc2026 (reviewer sub-agent of L); spot-checked: Read packet whole. Step 1: sectionwise exactness (x in U gives M's exact sequence, x not in U the zero sequence) implies sheaf exactness, hence acyclic by def-pc-acyclic-complex-modules; correct, elementary. Step 2: stalk is constant colimit M^i over neighbourhoods, compatible with differentials and germ action; correct, elementary. Grepped dag/nodes for skyscraper: only lem-weil-pbc-module-skyscraper-stalk-adjunction (schemes only, not used; item is for ringed spaces); no skyscraper fact restated, no class (b). FIX more, RETURN less: B4 plain-text arrows and plain-text math in both step texts rewritten in TeX (\\to, \\cong, M^\\bullet); no mathematical change. Second reading by G1 missed only the B4 TeX fault.; 1 file(s) fixed by the reviewer"
+ }
 }
