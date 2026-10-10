@@ -1327,6 +1327,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMapBaseChange
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtaleFlat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GeometricFrobenius
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
