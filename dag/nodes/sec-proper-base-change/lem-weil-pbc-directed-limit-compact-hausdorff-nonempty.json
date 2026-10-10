@@ -1,0 +1,73 @@
+{
+ "id": "lem-weil-pbc-directed-limit-compact-hausdorff-nonempty",
+ "kind": "statement",
+ "title": "An inverse system of nonempty quasi-compact Hausdorff spaces over a directed set has a compatible family of points",
+ "statement": "Let $K$ be a preordered set in which any two elements have a common upper bound ($K$ may be empty). For every $k\\in K$ let $T_k$ be a nonempty topological space which is quasi-compact (every open covering has a finite subcovering) and Hausdorff (any two distinct points have disjoint open neighbourhoods), and for $k\\le k'$ let $h_{kk'}:T_{k'}\\to T_k$ be a continuous map, with $h_{kk}=\\mathrm{id}$ and $h_{kk'}\\circ h_{k'k''}=h_{kk''}$ for $k\\le k'\\le k''$. Then there is a family $(t_k)_{k\\in K}$ with $t_k\\in T_k$ for every $k$ and $h_{kk'}(t_{k'})=t_k$ for all $k\\le k'$.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 0A2R (label lemma-nonempty-limit, line 2507), stated there for a cofiltered index category; here for the cofiltered category $K^{\\mathrm{op}}$ of a directed preordered set, with the limit written as the set of compatible families"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "limit of cofiltered system of nonempty compact Hausdorff spaces is nonempty",
+   "results": "TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system (Mathlib.Topology.Category.TopCat.Limits.Konig), CompHaus.hasLimits, Compactum.instHasLimits, AlgebraicGeometry.Scheme.nonempty_of_isLimit, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'",
+   "date": "2026-10-10",
+   "verdict": "match: TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse system over a directed set of nonempty compact Hausdorff spaces has a compatible family of points (Konig's lemma)",
+   "results": "TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system (Konig), Profinite.exists_locallyConstant_finite_nonempty, Profinite.exists_locallyConstant, Profinite.indexCone, nonempty_sections_of_finite_inverse_system (CategoryTheory.CofilteredSystem: finite sets only)",
+   "date": "2026-10-10",
+   "verdict": "match: TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system",
+   "results": "TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system {J : Type u} [SmallCategory J] (F : J ⥤ TopCat) [IsCofilteredOrEmpty J] [∀ j, Nonempty (F.obj j)] [∀ j, CompactSpace (F.obj j)] [∀ j, T2Space (F.obj j)] : Nonempty (TopCat.limitCone F).pt (Mathlib.Topology.Category.TopCat.Limits.Konig)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n nonempty_limitCone_of_compact_t2_cofiltered_system ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Category/TopCat/Limits/Konig.lean; sed -n 120,140p same; sed -n 36,52p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Category/TopCat/Limits/Basic.lean; grep -n isFilteredOrEmpty_of_directed_le\\|isCofilteredOrEmpty_op_of_isFilteredOrEmpty ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Filtered/Basic.lean",
+   "results": "Konig.lean:125 theorem nonempty_limitCone_of_compact_t2_cofiltered_system (read 120-140); TopCat.limitCone (Limits/Basic.lean:43) has as point the subspace {u : ∀ j, F.obj j | ∀ {i j} (f : i ⟶ j), F.map f (u i) = u j}; instances isFilteredOrEmpty_of_directed_le (Filtered/Basic.lean:108) and isCofilteredOrEmpty_op_of_isFilteredOrEmpty (Filtered/Basic.lean:930)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system",
+  "file": "Mathlib/Topology/Category/TopCat/Limits/Konig.lean",
+  "line": 125,
+  "how": "specializes in one line: the system is a functor F : Kᵒᵖ ⥤ TopCat (K with its preorder category, Mathlib/CategoryTheory/Category/Preorder.lean:47; F.obj (op k) = T_k, F.map of the arrow op k' ⟶ op k for k ≤ k' is h_{kk'}; functoriality is h_{kk}=id and the composition rule); Kᵒᵖ is IsCofilteredOrEmpty by the instances isFilteredOrEmpty_of_directed_le (CategoryTheory/Filtered/Basic.lean:108, for IsDirectedOrder K) and isCofilteredOrEmpty_op_of_isFilteredOrEmpty (Filtered/Basic.lean:930); nonempty, quasi-compact (CompactSpace, no Hausdorff condition in Mathlib) and Hausdorff (T2Space) are the three instance hypotheses; the point of TopCat.limitCone F is by definition (Topology/Category/TopCat/Limits/Basic.lean:43) the set of families u with F.map f (u i) = u j for all arrows f, i.e. of compatible families (t_k), so Nonempty of it is the conclusion. Lines 125-138 of Konig.lean read 2026-10-10."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-spectral-limit-constructible-closed-nonempty",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Leaf accepted by L (2026-10-10): TopCat.nonempty_limitCone_of_compact_t2_cofiltered_system (Konig.lean:125, checked with sed) applied to the functor K^op -> TopCat of the directed system; the point of TopCat.limitCone is the set of compatible families by definition (Limits/Basic.lean:43).",
+ "reviewed": "pass (L, 2026-10-10): leaf, declaration checked by sed; one-line specialization via the preorder category."
+}
