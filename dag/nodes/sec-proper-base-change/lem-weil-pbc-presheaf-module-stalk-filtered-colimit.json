@@ -5,16 +5,76 @@
  "statement": "Let $X$ be a topological space, $\\mathcal O$ a presheaf of commutative rings on $X$ and $x\\in X$. Let $\\mathcal I$ be a small filtered category [def-weil-pbc-category-colimit] and $i\\mapsto\\mathcal P_i$ a diagram $\\mathcal I\\to\\mathrm{PMod}(\\mathcal O)$ of presheaves of $\\mathcal O$-modules on the open subsets of $X$ [def-weil-presheaf-modules-sheafification]. For every open $U\\subseteq X$ let $(\\mathcal P(U),(p_{i,U})_i)$ be a colimit of the diagram $i\\mapsto\\mathcal P_i(U)$ of $\\mathcal O(U)$-modules [def-weil-pbc-category-colimit], and for opens $V\\subseteq U$ let $\\mathcal P(U)\\to\\mathcal P(V)$ be the map induced by the restriction maps of the $\\mathcal P_i$, so that $\\mathcal P$ is a presheaf of $\\mathcal O$-modules and $p_i=(p_{i,U})_U:\\mathcal P_i\\to\\mathcal P$ are morphisms of presheaves of $\\mathcal O$-modules. Let $\\mathcal O_x$, $(\\mathcal P_i)_x$, $\\mathcal P_x$ be the stalks at $x$, with the $\\mathcal O_x$-module structures and the $\\mathcal O_x$-linear stalk maps $(p_i)_x:(\\mathcal P_i)_x\\to\\mathcal P_x$ of [def-weil-pbc-module-stalk]. Then $(\\mathcal P_x,((p_i)_x)_i)$ is a colimit of the diagram $i\\mapsto(\\mathcal P_i)_x$ in the category of $\\mathcal O_x$-modules.",
  "source": {
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Section 009D (label section-limits-presheaves, lines 3367-3398), item (5): $(\\colim_i\\mathcal F_i)_x=\\colim_i\\mathcal F_{i,x}$ for presheaves, lines 3392-3396 ('The proofs are all easy'); used for modules in Modules, Lemma 01AH (label lemma-limits-colimits, lines 204-239), proof of (2) (modules.tex)"
+  "place": "Sheaves, Section 009D (label section-limits-presheaves, sheaves.tex lines 3367-3398), item (4), lines 3392-3396: $(\\colim_i\\mathcal F_i)_x=\\colim_i\\mathcal F_{i,x}$ for presheaves ('The proofs are all easy', line 3398); the same for sheaves is Section 009E (label section-limits-sheaves), item (5), lines 3431-3434; used for modules in Modules, Lemma 01AH (label lemma-limits-colimits, modules.tex lines 204-239), proof of (2)"
  },
  "stmt_deps": [
   "def-weil-presheaf-modules-sheafification",
   "def-weil-pbc-module-stalk",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Notation and the cocone. For $a:i\\to j$ in $\\mathcal I$ write $\\mathcal P(a):\\mathcal P_i\\to\\mathcal P_j$ for the transition morphism of presheaves of $\\mathcal O$-modules. By [lem-weil-pbc-presheaf-modules-colimits-sectionwise], $\\mathcal P$ is a presheaf of $\\mathcal O$-modules and the $p_i$ are morphisms of presheaves of $\\mathcal O$-modules; concretely, for opens $W\\subseteq U$ and $t\\in\\mathcal P_i(U)$ one has $p_{i,U}(t)|_W=p_{i,W}(t|_W)$, and $p_{j,U}\\circ\\mathcal P(a)_U=p_{i,U}$ for every $a:i\\to j$ since the $p_{i,U}$ are the coprojections of a colimit [def-weil-pbc-category-colimit]. By [def-weil-pbc-module-stalk] a morphism $\\varphi$ of presheaves of $\\mathcal O$-modules induces the $\\mathcal O_x$-linear map $\\varphi_x$, $s_x\\mapsto\\varphi(s)_x$; this formula gives $(\\psi\\circ\\varphi)_x=\\psi_x\\circ\\varphi_x$ and $(\\mathrm{id})_x=\\mathrm{id}$, since every element of a stalk is a germ. Hence $i\\mapsto(\\mathcal P_i)_x$ with the maps $\\mathcal P(a)_x$ is a functor from $\\mathcal I$ to $\\mathcal O_x$-modules, and $(p_j)_x\\circ\\mathcal P(a)_x=(p_j\\circ\\mathcal P(a))_x=(p_i)_x$, so $(\\mathcal P_x,((p_i)_x)_i)$ is a cocone of $\\mathcal O_x$-modules on it.",
+   "uses": [
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 009D, item (4) (lines 3392-3398; proof omitted as 'easy', written out here)"
+   }
+  },
+  {
+   "text": "Every element of $\\mathcal P_x$ comes from some $(\\mathcal P_i)_x$. By [def-weil-pbc-module-stalk] an element of $\\mathcal P_x$ is a germ $s_x$ of some $s\\in\\mathcal P(U)$, $U$ an open neighbourhood of $x$. Since $(\\mathcal P(U),(p_{i,U})_i)$ is a colimit of the filtered diagram $i\\mapsto\\mathcal P_i(U)$ of $\\mathcal O(U)$-modules, [lem-weil-pbc-filtered-colimit-modules-elementwise] (1) gives an object $i$ and $t\\in\\mathcal P_i(U)$ with $s=p_{i,U}(t)$. Then $(p_i)_x(t_x)=p_{i,U}(t)_x=s_x$ by the formula for $(p_i)_x$ of [def-weil-pbc-module-stalk].",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 009D, item (4) (lines 3392-3398; proof omitted as 'easy', written out here)"
+   }
+  },
+  {
+   "text": "Elements identified in $\\mathcal P_x$ are identified at a later stage. Let $\\sigma,\\tau\\in(\\mathcal P_i)_x$ with $(p_i)_x(\\sigma)=(p_i)_x(\\tau)$, and put $\\rho=\\sigma-\\tau$, so $(p_i)_x(\\rho)=0$ by linearity. By [def-weil-pbc-module-stalk] $\\rho=t_x$ for some open neighbourhood $U$ of $x$ and $t\\in\\mathcal P_i(U)$, and $p_{i,U}(t)_x=(p_i)_x(t_x)=0=0_x$ ($0\\in\\mathcal P(U)$ has germ $0$, the germ maps being additive); by the description of equality of germs in [def-weil-pbc-module-stalk] there is an open $W$ with $x\\in W\\subseteq U$ and $p_{i,U}(t)|_W=0|_W=0$. By step 1, $p_{i,W}(t|_W)=p_{i,U}(t)|_W=0$. As $(\\mathcal P(W),(p_{i,W})_i)$ is a colimit of the filtered diagram $i\\mapsto\\mathcal P_i(W)$ of $\\mathcal O(W)$-modules, [lem-weil-pbc-filtered-colimit-modules-elementwise] (2), case $p_{i,W}(t|_W)=0$, gives a morphism $f:i\\to k$ with $\\mathcal P(f)_W(t|_W)=0$. Taking germs, $\\mathcal P(f)_x(\\rho)=\\mathcal P(f)_x((t|_W)_x)=(\\mathcal P(f)_W(t|_W))_x=0$, where $(t|_W)_x=t_x=\\rho$ because $t|_W$ and $t$ agree on $W$. By linearity $\\mathcal P(f)_x(\\sigma)=\\mathcal P(f)_x(\\tau)$.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 009D, item (4) (lines 3392-3398; proof omitted as 'easy', written out here)"
+   }
+  },
+  {
+   "text": "Conclusion. Apply [lem-weil-pbc-filtered-colimit-modules-criterion] to the ring $R=\\mathcal O_x$, the small filtered category $\\mathcal I$, the functor $i\\mapsto(\\mathcal P_i)_x$ of $\\mathcal O_x$-modules and the cocone $(\\mathcal P_x,((p_i)_x)_i)$ of step 1 (the $(p_i)_x$ are $\\mathcal O_x$-linear by [def-weil-pbc-module-stalk]): its hypothesis (1) is step 2 and its hypothesis (2) is step 3. Hence $(\\mathcal P_x,((p_i)_x)_i)$ is a colimit of $i\\mapsto(\\mathcal P_i)_x$ in the category of $\\mathcal O_x$-modules.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-criterion",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Section 009D, item (4) (lines 3392-3398; proof omitted as 'easy', written out here)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-filtered-colimit-modules-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves, Section 009D (label section-limits-presheaves), item (4), lines 3392-3398: the source states the fact and says 'The proofs are all easy'; the steps (elementwise description of the stalk and of the sectionwise colimit, then the elementwise criterion for a filtered colimit of modules) were written by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -43,16 +103,51 @@
    "results": "Stalk.lean only builds the O_x-module structure on stalks of a presheaf of modules (instance line 194, germ_smul line 205) and the module structure on filtered colimits (lines 41-136); Topology/Sheaves/Skyscraper.lean:395 instance (Presheaf.stalkFunctor C p0).IsLeftAdjoint; Abelian.lean:79 finite colimits; no file in ModuleCat/Sheaf mentions stalks; no lemma that the stalk of a colimit of presheaves of modules is the colimit of the stalks as O_x-modules",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalk of presheaf of modules preserves colimits, stalk of colimit is colimit of stalks as module over stalk ring",
+   "results": "PresheafOfModules.colimitPresheafOfModules(_obj), hasColimit, evaluation_preservesColimit, Finite.toPresheaf_preservesFiniteColimits (Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits); TopCat.Presheaf.stalk, stalkFunctor (Mathlib.Topology.Sheaves.Stalks); PresheafedSpace.restrictStalkIso; none about stalks of a colimit of presheaves of modules",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "PresheafOfModules stalk functor preserves filtered colimits into ModuleCat over the stalk of the ring",
+   "results": "PresheafOfModules.hasColimit, toPresheaf_preservesColimit, colimitPresheafOfModules_obj, isColimitColimitCocone (Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits); ModuleCat.FilteredColimits.forget_preservesFilteredColimits; no stalk functor PresheafOfModules R => ModuleCat (R.stalk x)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalk, PresheafOfModules",
+   "results": "only 4 declarations, all in Mathlib.Algebra.Category.ModuleCat.Stalk: the two Module (R.stalk x) instances on (M.presheaf).stalk x (RingCat and CommRingCat versions), germ_ringCat_smul, germ_smul; nothing about colimits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'theorem|lemma|def |instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Stalk.lean; grep -rln PresheafOfModules ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln stalk; grep -rnE 'stalk.*(Colimit|colimit)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Modules; sed -n 390,397p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves/Skyscraper.lean",
+   "results": "Stalk.lean: colimit.smul (41), IsColimit.ι_smul (136), Module instances (167, 194), germ_ringCat_smul (176), germ_smul (205), no stalk functor of presheaves of modules and no colimit statement; other files with both: AlgebraicGeometry/StructureSheaf.lean, AlgebraicGeometry/Modules/Sheaf.lean (509-512: restriction along open immersions commutes with stalks of the underlying abelian presheaves); Skyscraper.lean:395 (Presheaf.stalkFunctor C p0).IsLeftAdjoint for one fixed category C",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "local_search",
+   "query": "PresheafOfModules.stalk (project ~/weil-conjectures-slopmaster2)",
+   "results": "none (index: unavailable, so not a proof of absence; the grep above finds no such declaration)",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_candidate": {
   "declaration": "instIsLeftAdjointPresheafStalkFunctor (with PresheafOfModules.toPresheaf_preservesColimitsOfSize and the O_x-module instance of Mathlib/Algebra/Category/ModuleCat/Stalk.lean)",
   "file": "Mathlib/Topology/Sheaves/Skyscraper.lean",
   "line": "395 (Skyscraper.lean); Stalk.lean:194",
-  "how": "Gives the statement for the underlying abelian groups (stalkFunctor AddCommGrpCat x is a left adjoint, so preserves colimits; the underlying abelian presheaf of the sectionwise colimit is the colimit by toPresheaf_preservesColimitsOfSize). Passing to the colimit in O_x-modules needs that the O_x-module structure of Stalk.lean:194 on the colimit is the colimit one, which is a further argument, not a one-line specialization."
+  "how": "Gives the statement for the underlying abelian groups (stalkFunctor AddCommGrpCat x is a left adjoint, so preserves colimits; the underlying abelian presheaf of the sectionwise colimit is the colimit by toPresheaf_preservesColimitsOfSize). Mathlib has no stalk functor PresheafOfModules R => ModuleCat (R.stalk x) (re-checked 2026-10-10), so passing to O_x-modules is a further argument; a Lean proof can follow the split instead: the O_x-module instance of Stalk.lean:194 with germ_smul (205) and the recognition lemma of lem-weil-pbc-filtered-colimit-modules-criterion (Types.FilteredColimit.isColimitOf' with forget_reflectsFilteredColimits)."
  },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +167,12 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-presheaf-module-stalk-filtered-colimit",
+  "worker": "stage1",
+  "summary": "Statement checked against Sheaves 009D item (4) (the node's source said item (5), which is the item of 009E for sheaves; place corrected) and Modules 01AH proof of (2); kept. The source gives no proof ('The proofs are all easy'); the proof is written out elementwise: (1) the stalks of the P_i form a diagram of O_x-modules with cocone ((p_i)_x) (stalk functoriality from def-weil-pbc-module-stalk; p_i morphisms of presheaves by the Mathlib leaf lem-weil-pbc-presheaf-modules-colimits-sectionwise); (2) every germ of P comes from a germ of some P_i (existing leaf lem-weil-pbc-filtered-colimit-modules-elementwise (1) on P(U)); (3) a germ of P_i killed in P_x is killed by some transition map (equality of germs, then lem-weil-pbc-filtered-colimit-modules-elementwise (2) on P(W)); (4) the new Mathlib leaf lem-weil-pbc-filtered-colimit-modules-criterion (the converse, recognition direction, which the elementwise node does not state) concludes. Mathlib re-searched (leansearch, leanfinder, loogle, grep, local_search): no stalk functor for presheaves of modules, item not a leaf; mathlib_candidate updated."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: proof by agent (Sheaves 009D item (4), 'easy'): the stalk cocone satisfies the elementwise criterion for filtered colimits of modules (steps 2-3 from the elementwise node on P(U), P(W)), which is a new composed Mathlib leaf. No Mathlib match for the item (no stalk functor for presheaves of modules into O_x-modules, candidate kept)."
 }

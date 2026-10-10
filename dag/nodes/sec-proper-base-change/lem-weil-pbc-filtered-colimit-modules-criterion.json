@@ -1,0 +1,82 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-modules-criterion",
+ "kind": "statement",
+ "title": "Elementwise criterion for a cocone of a filtered diagram of modules to be a colimit",
+ "statement": "Let $R$ be a ring, $\\mathcal I$ a small filtered category [def-weil-pbc-category-colimit] and $i\\mapsto M_i$ a functor from $\\mathcal I$ to the category of $R$-modules, with transition maps $M(a):M_i\\to M_j$ for $a:i\\to j$. Let $N$ be an $R$-module and $q_i:M_i\\to N$ $R$-linear maps with $q_j\\circ M(a)=q_i$ for every morphism $a:i\\to j$ of $\\mathcal I$ (a cocone). Assume: (1) every element of $N$ is $q_i(x)$ for some object $i$ and some $x\\in M_i$; (2) for every object $i$ and all $x,y\\in M_i$ with $q_i(x)=q_i(y)$ there is a morphism $f:i\\to k$ of $\\mathcal I$ with $M(f)(x)=M(f)(y)$ (equivalently, since the maps are linear: $q_i(z)=0$ implies $M(f)(z)=0$ for some $f:i\\to k$). Then $(N,(q_i)_i)$ is a colimit of the diagram $i\\mapsto M_i$ in the category of $R$-modules.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Categories, Section 04AX (label section-directed-colimits, lines 2124-2176): for a filtered diagram the colimit is the disjoint union modulo 'eventually equal'; for modules Algebra, Lemmas 00D6 (label lemma-directed-colimit, algebra.tex line 778) and 00D7 (label lemma-zero-directed-limit, algebra.tex line 811). The criterion is the converse direction: the canonical map from the colimit to N is surjective by (1) and injective by (2)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "recognize a filtered colimit of modules: cocone jointly surjective and kernel elements vanish at a later stage is a colimit",
+   "results": "ModuleCat.FilteredColimits.colimitCoconeIsColimit, colimitCocone, colimit, M, M.mk (Mathlib.Algebra.Category.ModuleCat.FilteredColimits); ModuleCat.HasColimit.isColimitColimitCocone (Mathlib.Algebra.Category.ModuleCat.Colimits); CategoryTheory.Limits.Types.FilteredColimit.isColimitOf and isColimitOf' (Mathlib.CategoryTheory.Limits.Types.Filtered)",
+   "date": "2026-10-10",
+   "verdict": "match (types version, with the reflection below)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a cocone of a filtered diagram of modules whose maps are jointly surjective and such that two elements identified in the cocone are identified at some later stage is a colimit cocone",
+   "results": "ModuleCat.FilteredColimits.colimitCoconeIsColimit, colimitCocone, M.mk_surjective, colimit, colimitModule, M.mk_eq (Mathlib.Algebra.Category.ModuleCat.FilteredColimits); no direct recognition lemma in ModuleCat",
+   "date": "2026-10-10",
+   "verdict": "no direct match; the construction of the chosen colimit only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.ReflectsFilteredColimits (CategoryTheory.forget (ModuleCat _))",
+   "results": "ModuleCat.FilteredColimits.forget_reflectsFilteredColimits {R : Type u} [Ring R] : ReflectsFilteredColimits (forget (ModuleCat R)) (Mathlib.Algebra.Category.ModuleCat.FilteredColimits)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'def isColimitOf\\|def isColimitOfReflects \\|ReflectsFilteredColimits' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (CategoryTheory/Limits, Algebra/Category/ModuleCat)",
+   "results": "CategoryTheory/Limits/Types/Filtered.lean:60 isColimitOf, :98 isColimitOf' (hsurj; hinj: t.ι.app i x = t.ι.app i y → ∃ k f, F.map f x = F.map f y; needs IsFilteredOrEmpty J); Algebra/Category/ModuleCat/FilteredColimits.lean:206 instance forget_reflectsFilteredColimits : ReflectsFilteredColimits (forget (ModuleCat.{u} R)); CategoryTheory/Limits/Preserves/Basic.lean:463 isColimitOfReflects (F) (t : IsColimit (F.mapCocone c)) [ReflectsColimit K F] : IsColimit c",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "local_search",
+   "query": "forget_reflectsFilteredColimits (project ~/weil-conjectures-slopmaster2)",
+   "results": "ModuleCat.FilteredColimits.forget_reflectsFilteredColimits, instance, .lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean (index: unavailable, name found)",
+   "date": "2026-10-10",
+   "verdict": "exists"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Limits.Types.FilteredColimit.isColimitOf', ModuleCat.FilteredColimits.forget_reflectsFilteredColimits, CategoryTheory.Limits.isColimitOfReflects",
+  "file": "Mathlib/CategoryTheory/Limits/Types/Filtered.lean",
+  "how": "specializes in one line: `isColimitOfReflects (forget (ModuleCat R)) (Types.FilteredColimit.isColimitOf' _ _ h1 h2)`. Types.FilteredColimit.isColimitOf' (CategoryTheory/Limits/Types/Filtered.lean:98, read 98-108; [IsFilteredOrEmpty J]) recognizes the cocone of underlying sets (forget).mapCocone t, whose legs are the q_i, from hypotheses (1) (hsurj) and (2) (hinj, same index i, one morphism f); the instance ModuleCat.FilteredColimits.forget_reflectsFilteredColimits (Algebra/Category/ModuleCat/FilteredColimits.lean:206, read 190-209; modules in ModuleCat.{u} R, J : Type u small and filtered) supplies ReflectsColimit, and isColimitOfReflects (CategoryTheory/Limits/Preserves/Basic.lean:463, read 460-465) concludes IsColimit t. Sources read 2026-10-10.",
+  "line": 98
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-presheaf-module-stalk-filtered-colimit",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "Composed leaf: Types.FilteredColimit.isColimitOf' (Limits/Types/Filtered.lean line 98) transported by ModuleCat.FilteredColimits.forget_reflectsFilteredColimits (ModuleCat/FilteredColimits.lean line 206) and isColimitOfReflects (Limits/Preserves/Basic.lean line 463); lines read by L.",
+ "reviewed": "Reviewed by L 2026-10-10: composed Mathlib leaf (converse of the elementwise description, Categories 04AX / Algebra 00D6-00D7); lines read."
+}
