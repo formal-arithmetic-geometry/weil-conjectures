@@ -716,8 +716,19 @@ the smooth `g`-dimensional `Hilb^g_{X/k}`, and its classes have degree `g`, so `
 theorem smoothOfRelativeDimension_of_representableBy_picardFunctorDegree_genus
     (P : Over (Spec (.of k)))
     (hP : (picardFunctorDegree (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj.RepresentableBy P) :
-    SmoothOfRelativeDimension (arithmeticGenus k X) P.hom :=
-  sorry
+    SmoothOfRelativeDimension (arithmeticGenus k X) P.hom := by
+  obtain ⟨A, -, hA, -⟩ := isRepresentable_picardFunctor (X ↘ Spec (.of k))
+  obtain ⟨Pd, j, hj, -, -, -, hPd⟩ := exists_decomposition_picardFunctor A hA
+  obtain ⟨hg⟩ := hPd (arithmeticGenus k X)
+  have := smoothOfRelativeDimension_of_representableBy_picardFunctor A hA
+  have := hj (arithmeticGenus k X)
+  have := smoothOfRelativeDimension_comp (n := 0) (m := arithmeticGenus k X)
+    (j (arithmeticGenus k X)).left A.hom
+  rw [zero_add, Over.w (j _)] at this
+  let e := hP.uniqueUpToIso hg
+  rw [← Over.w e.hom, MorphismProperty.cancel_left_of_respectsIso
+    (P := @SmoothOfRelativeDimension (arithmeticGenus k X))]
+  exact this
 
 /-- Two representing objects of degree components of the Picard functor are isomorphic over
 `k`: both are isomorphic to a representing object of `Pic^0_{X/k}`. -/
