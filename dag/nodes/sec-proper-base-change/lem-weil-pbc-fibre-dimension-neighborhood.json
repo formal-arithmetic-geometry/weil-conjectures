@@ -14,9 +14,74 @@
   "def-kun-topological-krull-dimension",
   "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-fibre-dimension-bounded-open-upstairs] to $R\\to S$, $\\mathfrak q$ and $d$. Its definition of relative dimension is precisely the dimension of $\\operatorname{Spec}(S\\otimes_R\\kappa(\\mathfrak p))$ at the kernel specified in our statement. It gives an open neighbourhood $V$ of $\\mathfrak q$ such that every $\\mathfrak q'\\in V$ has fibre dimension at most $d$. By part (i) of [lem-weil-pbc-spec-localization-away-basic-open], choose $g\\in S$ with $\\mathfrak q\\in D(g)\\subseteq V$. Thus $g\\notin\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 00QH (lemma-dimension-fibres-bounded-open-upstairs); the principal-open choice in Tag 00ST (lemma-localize-relative-complete-intersection), proof (3)"
+   }
+  },
+  {
+   "text": "Fix any prime $\\mathfrak p'\\subset R$. Set $F'=S\\otimes_R\\kappa(\\mathfrak p')$, $\\bar g=g\\otimes1$ and $H=S_g\\otimes_R\\kappa(\\mathfrak p')$. By [lem-weil-pbc-algebra-localization-away-base-change], $H\\cong F'_{\\bar g}$, compatibly with $s\\otimes a\\mapsto (s/1)\\otimes a$. By part (ii) of [lem-weil-pbc-spec-localization-away-basic-open], $\\operatorname{Spec}H$ is therefore homeomorphic to the open subspace $O=D(\\bar g)\\subseteq\\operatorname{Spec}F'$. A ring isomorphism induces inverse continuous spectrum maps by [def-weil-affine-spectrum].",
+   "uses": [
+    "lem-weil-pbc-algebra-localization-away-base-change",
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tags 00DK (lemma-tensor-localization), 00DL (lemma-tensor-product-localization) and 00E4 (lemma-standard-open), spelling out the fibres of the principal localization in 00ST (3)"
+   }
+  },
+  {
+   "text": "For any $\\mathfrak Q'\\in O$, [lem-weil-pbc-fibre-ring-primes-bijection] identifies its inverse image $\\mathfrak q'\\subset S$ as a prime lying over $\\mathfrak p'$, with $\\mathfrak Q'$ equal to the kernel of $F'\\to\\kappa(\\mathfrak q')$. As $\\bar g\\notin\\mathfrak Q'$, one has $g\\notin\\mathfrak q'$, so $\\mathfrak q'\\in D(g)\\subseteq V$. Step 1 gives $\\dim_{\\mathfrak Q'}\\operatorname{Spec}F'\\le d$. By [lem-weil-pbc-dimension-at-point-open-subspace], $\\dim_{\\mathfrak Q'}O=\\dim_{\\mathfrak Q'}\\operatorname{Spec}F'\\le d$.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Tag 00E6 (remark-fundamental-diagram); Topology Definition 0055 (definition-Krull) and its following remark"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-dimension-supremum-local-dimensions] to $O$. Step 3 bounds every term of the supremum by $d$, hence $\\dim O\\le d$. The homeomorphism of Step 2 preserves Krull dimension: it takes irreducible closed subsets to irreducible closed subsets and its inverse does the same, preserving strict inclusions and hence the lengths of all chains in [def-kun-topological-krull-dimension]. Therefore $\\dim\\operatorname{Spec}H=\\dim O\\le d$. This proves the requested bound whenever $H\\ne0$. If $O$ is empty, its dimension and the supremum over its points are both $-\\infty$, so no nonemptiness assumption was needed for the inequality.",
+   "uses": [
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Topology, Tag 0B7I (lemma-dimension-supremum-local-dimensions) and Definition 0055 (definition-Krull)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-algebra-localization-away-base-change",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00ST (lemma-localize-relative-complete-intersection), proof (3), with 00QH and explicit principal-open/localized-fibre/supremum details from Topology 0B7I"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +110,31 @@
    "results": "Only AlgebraicGeometry/EllipticCurve/Weierstrass.lean:23, a docstring describing geometrically connected one-dimensional elliptic-curve fibres. No upper-semicontinuity or relative fibre-dimension theorem in AlgebraicGeometry or RingTheory.",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite type ring homomorphism, a neighbourhood of a prime with fibre dimension d has all fibres of dimension at most d",
+   "results": "RingHom.QuasiFinite.of_finite; finite scheme-fibre instance; ringKrullDim_le_of_surjective; RingHom.IsStandardSmoothOfRelativeDimension; LocallyOfFiniteType instance. None states upper semicontinuity of fibre dimension.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim",
+   "results": "topologicalKrullDim; homeomorphism invariance; discrete-space bound; inducing/subspace bound; PrimeSpectrum dimension comparison; locally-Artinian criterion. No pointwise fibre-dimension theorem.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i fibre.*dimension|fiber.*dimension|relativeDimension|00QH|dimAt|krullDimAt /tmp/mathlib-f1/Mathlib/{AlgebraicGeometry,RingTheory,Topology}",
+   "results": "SmoothOfRelativeDimension and standard smooth presentation results only; no arbitrary finite-type fibre dimension upper bound. Sparse current-head source is additional evidence, not a claim about the pinned version.",
+   "date": "2026-10-10",
+   "verdict": "no match found"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -69,5 +155,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "lead_note": "Note by L (2026-10-10): same lemma (00QH) as lem-weil-pbc-fibre-dimension-bounded-open-upstairs, created earlier today, in the global-fibre form; the splitter of this node should cite that node plus lem-weil-pbc-dimension-supremum-local-dimensions (0B7I) and lem-weil-pbc-dimension-at-point-open-subspace rather than reprove 00QH."
+ "lead_note": "Note by L (2026-10-10): same lemma (00QH) as lem-weil-pbc-fibre-dimension-bounded-open-upstairs, created earlier today, in the global-fibre form; the splitter of this node should cite that node plus lem-weil-pbc-dimension-supremum-local-dimensions (0B7I) and lem-weil-pbc-dimension-at-point-open-subspace rather than reprove 00QH.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-fibre-dimension-neighborhood",
+  "worker": "F1 worker",
+  "summary": "Four-step genuine deduction from existing 00QH neighbourhood node: choose principal open, identify localized fibres with an open subspace, bound every local dimension by open invariance and the fibre-prime bijection, then take the supremum. One new smaller generic localization/base-change node, verified as a Mathlib match at pinned v4.33.1 lines 427 and 438. Statement unchanged; no unit-route change."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L read the four steps: 00QH local form (existing node) gives V, a basic open D(g) in V, fibres of S_g are localizations of fibres of S (new leaf tensorProductEquivTMulRight), local dimensions bounded on the open subspace, supremum (0B7I)."
+ }
 }

@@ -1,0 +1,60 @@
+{
+ "id": "lem-weil-pbc-algebra-localization-away-base-change",
+ "kind": "statement",
+ "title": "Localization away in an algebra commutes with arbitrary base change",
+ "statement": "Let $R,A,B$ be commutative rings with ring homomorphisms $R\\to A$ and $R\\to B$, and let $g\\in A$. Write $A_g$ for localization at the powers of $g$ [def-weil-ring-localization-away]. For commutative $R$-algebras $C,D$, $C\\otimes_R D$ denotes their tensor product algebra [lem-weil-pbc-algebra-tensor-pushout-universal-property], whose multiplication is $(c\\otimes d)(c'\\otimes d')=cc'\\otimes dd'$ and whose unit is $1\\otimes1$. Put $T=A\\otimes_R B$ and $\\bar g=g\\otimes1\\in T$. There is a canonical isomorphism of $B$-algebras $A_g\\otimes_R B\\xrightarrow{\\sim}T_{\\bar g}$ which sends $(a/g^n)\\otimes b$ to $(a\\otimes b)/\\bar g^n$ for every $a\\in A$, $b\\in B$ and integer $n\\ge0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tags 00DK (lemma-tensor-localization) and 00DL (lemma-tensor-product-localization), the algebra base-change consequence; used implicitly in Tag 00ST (lemma-localize-relative-complete-intersection), proof (3)"
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of an algebra at an element commutes with arbitrary base change tensor product",
+   "results": "IsLocalization.Away.tensorEquiv; IsLocalization.tensorRight; IsLocalization.tensorProduct_tensorProduct. First two concern localization of the base ring. Third concerns localization of an algebra.",
+   "date": "2026-10-10",
+   "verdict": "candidate match; exact algebra version found by Loogle and source below"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away.tensorProductEquivTMulRight",
+   "results": "IsLocalization.Away.tensorProductEquivTMulRight and IsLocalization.Away.tensorProductEquivTMulRight_tmul, Mathlib.RingTheory.Localization.BaseChange. Their types give B tensor_R A_g isomorphic to (B tensor_R A)_(1 tensor g), with compatibility on b tensor (a/1).",
+   "date": "2026-10-10",
+   "verdict": "exact candidate up to tensor commutativity; pinned Mathlib not available"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 400,482p /tmp/mathlib-f1/Mathlib/RingTheory/Localization/BaseChange.lean; rg localization.*base|base.*localization|localization.*tensor|tensor.*localization dag/nodes; full DAG statement scan for localization and tensor/base change",
+   "results": "Current-head sparse Mathlib source: tensorProductEquivTMulRight at line 427, _tmul at 438. They state the candidate isomorphism and generator compatibility. No existing DAG node gives arbitrary algebra localization base change; formal-glueing nodes only localize at base-ring elements.",
+   "date": "2026-10-10",
+   "verdict": "candidate only: source checkout is current head, not project-pinned Mathlib; keep unsplit"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.Away.tensorProductEquivTMulRight",
+  "file": "Mathlib/RingTheory/Localization/BaseChange.lean",
+  "line": 427,
+  "how": "At pinned Mathlib v4.33.1, line 427 gives the algebra isomorphism with the localized algebra in the right tensor factor. Apply it with the factors reversed and exchange tensor factors using the commutative tensor algebra symmetry. The companion lemma tensorProductEquivTMulRight_tmul at line 438 gives the generator formula; preservation of inverses gives the displayed fractions. Verified with git show v4.33.1:Mathlib/RingTheory/Localization/BaseChange.lean and numbered lines; no Lean build."
+ },
+ "mathlib_candidate": {
+  "declaration": "IsLocalization.Away.tensorProductEquivTMulRight; IsLocalization.Away.tensorProductEquivTMulRight_tmul",
+  "file": "Mathlib/RingTheory/Localization/BaseChange.lean",
+  "how": "Read current-head sparse source lines 423-448. Specialize S=B, A=A, g=g, localization ring A_g; exchange tensor factors. Compatibility on denominators follows since the algebra isomorphism preserves inverses. Requires pinned-version verification before leaf acceptance."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "F1 worker",
+  "item": "lem-weil-pbc-fibre-dimension-neighborhood",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

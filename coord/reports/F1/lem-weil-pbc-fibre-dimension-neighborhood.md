@@ -1,0 +1,30 @@
+# Worker report: lem-weil-pbc-fibre-dimension-neighborhood
+
+Statement unchanged. Four proof steps deduce the principal-open global-fibre bound from the existing local fibre bound, rather than moving 00QH into a fresh node. No chapter or unit route changes.
+
+Sources read: `/tmp/stacks-project/algebra.tex` 31308–31324 (Tag 00QH, `lemma-dimension-fibres-bounded-open-upstairs`), 36715–36720 (Tag 00ST, `lemma-localize-relative-complete-intersection`, proof (3)), 2088–2145 (Tags 00DK/00DL, `lemma-tensor-localization` / `lemma-tensor-product-localization`); `/tmp/stacks-project/topology.tex` 1392–1449 (Definition 0055 and Tag 0B7I). Read the chapter record and the entire sk-thm-p1 unit record. The source's use of 00QH in 00ST (3) leaves the principal-open/fibre-globalization argument implicit; the split writes it explicitly.
+
+Public statements checked:
+
+- `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` gives an open neighbourhood with pointwise fibre dimension at most d, with exactly the kernel and point dimension used here.
+- `lem-weil-pbc-spec-localization-away-basic-open` gives both the principal-open basis and the homeomorphism from the localization spectrum to D(g).
+- `lem-weil-pbc-fibre-ring-primes-bijection` gives all primes over the chosen base prime, including the inverse map as the kernel of the stated residue-field homomorphism. Its order statement is not needed.
+- `lem-weil-pbc-dimension-at-point-open-subspace` gives equality of local dimensions on an open subspace.
+- `lem-weil-pbc-dimension-supremum-local-dimensions` gives global dimension as the supremum of pointwise dimensions, including the empty-space convention.
+- `def-weil-affine-spectrum` provides contravariant functoriality for the isomorphism of rings in step 2. Homeomorphism invariance of Krull dimension in step 4 is written directly from the chain definition: inverse homeomorphisms preserve closed irreducible sets, strict inclusions and chain lengths.
+
+New node: `lem-weil-pbc-algebra-localization-away-base-change` (unsplit, statement only). It states the general B-algebra isomorphism A_g tensor_R B ≅ (A tensor_R B)_(g tensor 1), including its explicit fraction formula. It has no finite-type, dimension, prime or residue-field hypotheses and is strictly smaller than the item. Source: the algebra base-change consequence of 00DK/00DL, used implicitly in 00ST (3). No proof steps or proof dependencies are hidden in the new node.
+
+Duplicate searches: full DAG statement scan for localization with tensor/base change, plus textual searches of localization/base change and principal-open phrases. The existing formal-glueing lemmas only handle localization at an element of the base ring. The existing spectrum-localization leaf is reused, not duplicated.
+
+Three search kinds recorded on the item and new node: LeanSearch, Loogle and source grep. The exact candidate `IsLocalization.Away.tensorProductEquivTMulRight` and generator lemma `_tmul` occur in `/tmp/mathlib-f1/Mathlib/RingTheory/Localization/BaseChange.lean` at lines 427 and 438, read with surrounding hypotheses at 400–482. Loogle returned the same public types. Tensor commutativity exchanges its orientation with the new statement. This sparse Mathlib checkout is current head, not the project pin; therefore the new node remains unsplit with a candidate and explicit verification caveat, as the lead directed. No leaf claimed.
+
+Edge cases checked: d = 0 is allowed; the argument imposes no Noetherian, finite-presentation, reducedness or flatness assumption. R or S zero cannot have the given prime q, so that case is excluded by the original hypotheses. A fibre outside the image may be zero, and then its spectrum is empty and dimension is minus infinity; the required conclusion only asks about nonzero fibres. When g becomes nilpotent in a fibre the localization is zero, consistently with D(g) empty. When g is a unit the fibre open is the entire spectrum. The generic new isomorphism remains valid for g = 0 and arbitrary noninjective base changes.
+
+Validation: `python3 tools/review_split.py lem-weil-pbc-fibre-dimension-neighborhood` PASS, one new node. `python3 tools/check_dag.py`: zero cycles and zero self-loops; exit 1 solely for seven existing reachability warnings (`lem-weil-pbc-constructible-finite-pushforward-approximation`, `lem-weil-pbc-constructible-finite-pushforward-noetherian`, `lemma-weil-pbc-constructible-approximation`, `lemma-weil-pbc-finite-cover-killing`, `lemma-weil-pbc-finite-stage-killing`, `lemma-weil-pbc-prime-torsion-devissage`, `lemma-weil-pbc-pushout-monicity`). These same seven warnings were present before the edit. No Lean build, git mutation, server access or unrelated node edits.
+
+## Review by F1
+
+I read Stacks Algebra 00QH and its use in 00ST(3), the cited 00DK/00DL localization facts, and the public statements of the neighbourhood, principal-open, fibre-prime, open-dimension and dimension-supremum nodes. The proof applies 00QH once, then passes to a principal open, identifies each localized fibre with that fibre's principal open, bounds local dimensions at every point, and takes their supremum. The cited prime correspondence and open-subspace invariance state precisely the needed facts. The final homeomorphism preserves chains of irreducible closed sets, which the proof spells out (C, D).
+
+The new helper is a generic algebra-localization/base-change isomorphism, independent of dimension and finite type. I added the existing tensor-algebra public definition to its statement dependencies. I checked IsLocalization.Away.tensorProductEquivTMulRight and its generator lemma at lines 427 and 438 of pinned Mathlib v4.33.1. With tensor symmetry these give exactly the helper, including fractions; the helper now records a Mathlib match and remains a statement-only leaf (B). I checked d=0, empty fibres, g=0 after base change and g a unit. No extra finiteness, flatness or nonemptiness enters. review_split passes after this review; the seven DAG reach warnings are unrelated (A, E, F).
