@@ -1,0 +1,86 @@
+{
+ "id": "lem-weil-pbc-module-finite-extension-of-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, 'Applying Lemma lemma-tate-japanese once more with x = p in Lambda we reduce yet again to the case of a field', proof of Algebra 032W (via lem-weil-pbc-complete-local-nagata); within the proof of Tate's lemma 032P: 'Note that S/y^nS has a finite filtration whose subquotients are the modules y^iS/y^{i+1}S ≅ S/yS. Hence we see that each S/y^nS is finite over R'",
+   "via": [
+    "lem-weil-pbc-tate-n2-complete-principal",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An extension of finitely generated modules is finitely generated",
+ "statement": "Let $R$ be a commutative ring and let $M_1\\xrightarrow{f}M_2\\xrightarrow{g}M_3\\to0$ be $R$-linear maps of $R$-modules with $\\operatorname{im}f=\\ker g$ and $g$ surjective (for instance a short exact sequence $0\\to M_1\\to M_2\\to M_3\\to0$). If $M_1$ and $M_3$ are finitely generated $R$-modules [def-weil-finitely-generated-module], then $M_2$ is a finitely generated $R$-module.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0519 (lemma-extension, line 390), part (1). Tag verified in tags/tags: 0519,algebra-lemma-extension"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "if 0 → M → N → P → 0 exact and M, P finitely generated modules then N finitely generated",
+   "results": "Module.Finite.of_exact (Mathlib.RingTheory.Finiteness.Finsupp), isNoetherian_of_range_eq_ker (Mathlib.RingTheory.Noetherian.Basic), CategoryTheory.ShortComplex.ShortExact.ab_finite_iff, Module.Finite.trans, Module.finitePresentation_of_projective_of_exact",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Finite.of_exact"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension of finitely generated modules is finitely generated: M → N → P → 0 exact with M and P finite gives N finite",
+   "results": "Module.Finite.of_exact (Mathlib.RingTheory.Finiteness.Finsupp), CategoryTheory.ShortComplex.Exact.ab_finite, ShortExact.ab_finite_iff, Module.finitePresentation_of_split_exact, ShortComplex.Exact.moduleCat_of_range_eq_ker",
+   "date": "2026-10-10",
+   "verdict": "match: Module.Finite.of_exact"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'Module.Finite.of_exact\\|fg_of_fg_map_of_fg_inf_ker' Mathlib/RingTheory/Finiteness/ (slopmaster2 Mathlib); sed -n 150,165p Mathlib/RingTheory/Finiteness/Finsupp.lean",
+   "results": "Submodule.fg_of_fg_map_of_fg_inf_ker (Finsupp.lean:70); Module.Finite.of_exact (Finsupp.lean:157, tagged @[stacks 0519 \"(1)\"]): {f : M →ₗ[R] N} {g : N →ₗ[R] P} (h_exact : Function.Exact f g) (h_surj : Function.Surjective g) [Module.Finite R M] [Module.Finite R P] : Module.Finite R N",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.Finite.of_exact",
+  "file": "Mathlib/RingTheory/Finiteness/Finsupp.lean",
+  "line": 157,
+  "how": "exact: `Module.Finite.of_exact (h_exact : Function.Exact f g) (h_surj : Function.Surjective g) [Module.Finite R M] [Module.Finite R P] : Module.Finite R N` over `[Ring R]` (Finsupp.lean:157, tagged Stacks 0519 (1), read with sed -n 150,165p on 2026-10-10); `Function.Exact f g` is im f = ker g and `Module.Finite` is def-weil-finitely-generated-module."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-tate-n2-complete-principal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: Mathlib leaf checked: Module.Finite.of_exact (Finiteness/Finsupp.lean:157) (0519 (1))"
+}

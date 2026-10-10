@@ -1,0 +1,84 @@
+{
+ "id": "lem-weil-pbc-dim-one-residue-field-extensions-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1)); within it, 'Applying Lemma lemma-tate-japanese once more with x = p in Lambda we reduce yet again to the case of a field', proof of Algebra 032W (via lem-weil-pbc-complete-local-nagata); within the proof of Tate's lemma 032P: 'By Lemma lemma-finite-extension-residue-fields-dimension-1 we see that κ(q)/κ(p) is a finite field extension'",
+   "via": [
+    "lem-weil-pbc-tate-n2-complete-principal",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-weil-pbc-analytically-unramified-n1",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Over a one-dimensional Noetherian local domain, residue field extensions in a finite extension of fraction fields are finite",
+ "statement": "Let $\\varphi:R\\to S$ be an injective homomorphism of integral domains, with fraction fields $K$ of $R$ and $L$ of $S$, so that $\\varphi$ induces a field extension $K\\subseteq L$ [def-pc-field-extension]; assume $\\dim_KL<\\infty$. Assume $R$ is a Noetherian [def-weil-pbc-noetherian-ring] local ring with maximal ideal $\\mathfrak m$ and Krull dimension $1$ [def-weil-pbc-krull-dimension-ring]. Then (1) every prime ideal $\\mathfrak n\\subset S$ with $\\varphi^{-1}(\\mathfrak n)=\\mathfrak m$ is a maximal ideal of $S$; (2) there are only finitely many such prime ideals; (3) for each of them the residue field $\\kappa(\\mathfrak n)=S_{\\mathfrak n}/\\mathfrak nS_{\\mathfrak n}$ [def-weil-pbc-localization-at-prime], which is a field extension of $\\kappa(\\mathfrak m)=R/\\mathfrak m$ through $\\varphi$, is finite-dimensional over $\\kappa(\\mathfrak m)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 031F (lemma-finite-extension-residue-fields-dimension-1, line 29241), statement. Tag verified in tags/tags: 031F,algebra-lemma-finite-extension-residue-fields-dimension-1"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian local domain of dimension one, extension of domains with finite extension of fraction fields, residue field extension at primes over maximal ideal is finite",
+   "results": "IsDedekindDomainDvr.ring_dimensionLEOne, Algebra.instFiniteResidueFieldOfQuasiFiniteAt (Mathlib.RingTheory.QuasiFinite.Basic; needs S quasi-finite at P), Algebra.QuasiFinite.instFiniteResidueField (needs S quasi-finite over R), instIsAlgebraicResidueFieldOfIsIntegral (only algebraic, for integral extensions), Ideal.ramificationIdx_le_finrank (Dedekind), primesOver_finite (Dedekind B), IsLocalRing.ResidueField.finite_of_module_finite (needs S module-finite over R)",
+   "date": "2026-10-10",
+   "verdict": "no match: all candidates assume S finite, quasi-finite or Dedekind over R, which is not given (S need not be of finite type over R)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian local domain of dimension one, a domain S containing it with finite fraction field extension: primes of S over the maximal ideal are maximal, finitely many, finite residue field extensions",
+   "results": "Algebra.instFiniteResidueFieldOfQuasiFiniteAt, IsLocalRing.ResidueField.finite_of_finite, Algebra.QuasiFinite.instFiniteResidueField, IsLocalRing.primesOverFinset_eq, IsLocalRing.primesOver_eq (local Dedekind A finite over R), IsLocalRing.ResidueField.instLiesOverMaximalIdeal, Algebra.QuasiFinite.instResidueField, instFiniteMaximalSpectrumOfIsFractionRing",
+   "date": "2026-10-10",
+   "verdict": "no match (same hypotheses as above)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -i 'akizuki' Mathlib/ ; grep -rn 'ringKrullDim.*= 1\\|DimensionLEOne' Mathlib/RingTheory/LocalRing Mathlib/RingTheory/QuasiFinite (slopmaster2 Mathlib)",
+   "results": "no Krull–Akizuki and no finite-length statement for submodules of K^n over a one-dimensional Noetherian domain; nothing on residue fields over a dimension-one base without finiteness of S",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-tate-n2-complete-principal",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "2026-10-10 L: statement checked against 031F"
+}
