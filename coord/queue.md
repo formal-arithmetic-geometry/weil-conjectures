@@ -1,8 +1,8 @@
 # Work queue
 
-916 items; claim with `tools/claim.py next <group> [--stage N]`.
+915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (323)
+## Stage 1: nodes to split (322)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,15 +26,14 @@
 | `lem-sc-free-prime-membership` | 2014 | none |
 | `lem-sc-semilocal-dedekind-dvr-reduction` | 2014 | none |
 | `lem-sc-semilocal-dim-one-conductor` | 2014 | none |
-| `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 2015 | none |
 | `lem-sc-zariski-contracted-power-extension` | 2015 | none |
+| `lem-sc-graded-localization-exact` | 2016 | none |
+| `lem-sc-mayer-vietoris-open-cover` | 2016 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
-| `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
 | `lem-exc-finite-galois-sections-descent` | 3008 | none |
 | `lem-weil-pbc-site-restriction-injectives` | 3010 | none |
 | `lem-exc-etale-open-subgroup-fixed-field` | 3011 | none |
 | `lem-sc-quasi-finite-points-open` | 3012 | none |
-| `lem-pc-proper-geometrically-reduced-global-sections-separable` | 3013 | none |
 | `lem-sc-affine-maximal-points-closed-in-lft-scheme` | 3013 | none |
 | `lem-sc-fg-domain-positive-dimension-infinite-maximals` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
@@ -43,13 +42,13 @@
 | `lem-sc-tangent-map-linear` | 3013 | none |
 | `lem-sc-tangent-space-vector-space` | 3013 | none |
 | `lem-weil-pbc-ringed-site-module-sheafification-exact` | 3013 | none |
+| `lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` | 3014 | none |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 3014 | none |
 | `lem-pc-proper-derived-direct-image-composition` | 3014 | none |
 | `lem-pc-separable-polynomial-distinct-roots-alg-closed` | 3014 | none |
 | `lem-sc-acyclic-comparison-natural` | 3014 | none |
 | `lem-sc-affine-derived-concentration` | 3014 | none |
-| `lem-sc-cech-comparison-map-naturality` | 3014 | none |
 | `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
 | `lem-sc-ext-coherent-hom-injective-acyclic` | 3014 | none |
 | `lem-sc-finite-duality-derived-hom` | 3014 | none |
@@ -928,7 +927,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 340 nodes that wait for stage 1, 1220 nodes that wait for a statement dependency.
+Not open yet: 339 nodes that wait for stage 1, 1224 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
