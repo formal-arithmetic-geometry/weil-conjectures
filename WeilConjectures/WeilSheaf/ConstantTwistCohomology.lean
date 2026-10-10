@@ -164,7 +164,8 @@ lemma globalSectionsMap_comp_frobeniusHom {G G' : WeilSheaf k₀ l X} (f : G ⟶
   erw [reassoc_of% h₁]
   exact congrArg (_ ≫ ·) h₂
 
-lemma globalSections_frobenius_apply_eq_frobeniusHom (G : WeilSheaf k₀ l X) (x : G.globalSections.carrier) :
+lemma globalSections_frobenius_apply_eq_frobeniusHom (G : WeilSheaf k₀ l X)
+    (x : G.globalSections.carrier) :
     G.globalSections.frobenius x =
       ((WeilCoefficients.toModuleCat l).map (globalSectionsFrobeniusHom G)).hom x :=
   rfl
