@@ -112,3 +112,61 @@ theorem IsAdicLisseSheaf.bijective_evaluationPairing {Z : Scheme.{u}} {F : AdicS
   exact Mod.bijective_evaluationPairing_of_iso_biproduct _ e _
 
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.WeilCoefficients
+
+variable {l : ℕ} [Fact l.Prime] {M N L : WeilCoefficients.{u} l}
+
+/-- A perfect pairing `M × N → L` of modules over `ULift ℚ̄_ℓ`, with `L ≅ ULift ℚ̄_ℓ`, identifies
+`M` with the `ℚ̄_ℓ`-dual of `N`: `m ↦ (n ↦ θ (p m n))`. -/
+noncomputable def dualLinearMap
+    (p : M →ₗ[ULift.{u + 1} (PadicAlgCl l)] N →ₗ[ULift (PadicAlgCl l)] L)
+    (θ : L →ₗ[ULift.{u + 1} (PadicAlgCl l)] ULift.{u + 1} (PadicAlgCl l)) :
+    (toModuleCat l).obj M →ₗ[PadicAlgCl l] Module.Dual (PadicAlgCl l) ((toModuleCat l).obj N) where
+  toFun (m : M) :=
+    { toFun (n : N) := (θ (p m n)).down
+      map_add' (n n' : N) := by
+        show (θ (p m (n + n'))).down = (θ (p m n)).down + (θ (p m n')).down
+        rw [map_add, map_add]
+        rfl
+      map_smul' c (n : N) := by
+        show (θ (p m ((ULift.up c : ULift (PadicAlgCl l)) • n))).down = c * (θ (p m n)).down
+        rw [map_smul, map_smul]
+        rfl }
+  map_add' (m m' : M) := by
+    ext (n : N)
+    show (θ (p (m + m') n)).down = (θ (p m n)).down + (θ (p m' n)).down
+    rw [map_add, LinearMap.add_apply, map_add]
+    rfl
+  map_smul' c (m : M) := by
+    ext (n : N)
+    show (θ (p ((ULift.up c : ULift (PadicAlgCl l)) • m) n)).down = c * (θ (p m n)).down
+    rw [map_smul, LinearMap.smul_apply, map_smul]
+    rfl
+
+lemma dualLinearMap_apply (p : M →ₗ[ULift.{u + 1} (PadicAlgCl l)] N →ₗ[ULift (PadicAlgCl l)] L)
+    (θ : L →ₗ[ULift.{u + 1} (PadicAlgCl l)] ULift.{u + 1} (PadicAlgCl l)) (m : M) (n : N) :
+    dualLinearMap p θ m n = (θ (p m n)).down :=
+  rfl
+
+lemma bijective_dualLinearMap
+    {p : M →ₗ[ULift.{u + 1} (PadicAlgCl l)] N →ₗ[ULift (PadicAlgCl l)] L}
+    (hp : Function.Bijective p)
+    (θ : L ≃ₗ[ULift.{u + 1} (PadicAlgCl l)] ULift.{u + 1} (PadicAlgCl l)) :
+    Function.Bijective (dualLinearMap p θ.toLinearMap) := by
+  refine ⟨fun (m : M) (m' : M) h ↦ hp.1 (LinearMap.ext fun (n : N) ↦
+    θ.injective (ULift.ext _ _ ?_)), fun φ ↦ ?_⟩
+  · exact LinearMap.congr_fun h n
+  · let ψ : N →ₗ[ULift.{u + 1} (PadicAlgCl l)] L :=
+      { toFun (n : N) := θ.symm (ULift.up (φ n))
+        map_add' n n' := (congrArg (fun a ↦ θ.symm (ULift.up a)) (φ.map_add n n')).trans
+          (map_add θ.symm _ _)
+        map_smul' c n := (congrArg (fun a ↦ θ.symm (ULift.up a)) (φ.map_smul c.down n)).trans
+          (map_smul θ.symm c _) }
+    obtain ⟨m, hm⟩ := hp.2 ψ
+    refine ⟨m, LinearMap.ext fun (n : N) ↦ ?_⟩
+    rw [dualLinearMap_apply, hm]
+    show (θ (θ.symm (ULift.up (φ n)))).down = φ n
+    rw [LinearEquiv.apply_symm_apply]
+
+end AlgebraicGeometry.WeilCoefficients
