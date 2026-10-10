@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "pqf-lem-finite-integral-lft",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite morphisms are integral",
- "statement": "A finite morphism of\nschemes is integral.\n(*Stacks Project, Morphisms of Schemes, Lemma 29.45.4, Tag\n[01WJ](https://stacks.math.columbia.edu/tag/01WJ).*)",
+ "statement": "A finite morphism of\nschemes is integral.\n(*Stacks Project, Morphisms of Schemes, Tag\n[01WJ](https://stacks.math.columbia.edu/tag/01WJ).*)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-finite-integral-lft.md",
   "place": "node pqf-lem-finite-integral-lft, order 496",
@@ -19,26 +19,64 @@
   ]
  },
  "stmt_deps": [],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-finite-integral-lft.md",
+  "place": "node pqf-lem-finite-integral-lft, order 496"
+ },
+ "mathlib_searches": [
   {
-   "text": "We work ring-locally. Recall the classical determinant trick:\nif $A\\to B$ is a finite ring homomorphism, i.e. $B$ is a finite\n$A$-module, then every $b\\in B$ is integral over $A$: choosing\n$b_1,\\dots,b_n$ generating $B$ as an $A$-module and writing\n$b\\,b_j=\\sum_i c_{ij}\\,b_i$ with $c_{ij}\\in A$, the vector\n$(b_1,\\dots,b_n)$ is annihilated by the matrix $b\\cdot\\mathrm{id}-C$,\n$C=(c_{ij})$, so the adjugate argument gives a monic equation\n$b^n+a_{n-1}b^{n-1}+\\dots+a_0=0$ with $a_k\\in A$ (the characteristic\npolynomial of the multiplication map $b\\cdot$).\nNow let $f:X\\to S$ be finite: $f$ is affine and $f_*\\mathcal O_X$ is\na finite $\\mathcal O_S$-algebra, by\n[def-weil-pbc-scheme-conventions]; for $V=\\operatorname{Spec}A$\naffine open in $S$ and $f^{-1}(V)=\\operatorname{Spec}B$ the ring map\n$A\\to B$ is finite, so every element of $B$ is integral over $A$ by\nthe determinant trick, which is exactly the assertion that\n$f_*\\mathcal O_X$ is integral over $\\mathcal O_S$; with affineness\nthis is $f$ integral.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false
+   "tool": "leanfinder",
+   "query": "finite morphism of schemes is integral",
+   "results": "AlgebraicGeometry.IsFinite.instIsIntegralHom (Mathlib/AlgebraicGeometry/Morphisms/Finite)",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFinite IsIntegralHom Scheme.Hom",
+   "results": "no hits (unknown identifier IsFinite)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite.*IsIntegralHom|isIntegral.*finite|finite.*integral [AlgebraicGeometry]",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:101,114-118; instance IsFinite.instIsIntegralHom at lines 117-118",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite morphism of schemes is integral",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite.instIsIntegralHom",
+   "results": "AlgebraicGeometry.IsFinite.instIsIntegralHom",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinite.*IsIntegralHom [AlgebraicGeometry/Morphisms]",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:101,114-118",
+   "date": "2026-10-11",
+   "verdict": "match"
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-finite-integral-lft.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsFinite.instIsIntegralHom",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+  "line": 117,
+  "how": "exact: the instance at lines 117-118 has type {X Y : Scheme} (f : X ⟶ Y) [IsFinite f] : IsIntegralHom f"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -60,5 +98,21 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-pqf-finite"
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-finite-integral-lft",
+  "worker": "stage1",
+  "summary": "No sorry-free project declaration states this item. Mathlib directly provides the exact implication as AlgebraicGeometry.IsFinite.instIsIntegralHom, so the item is a Mathlib leaf with no proof steps or child nodes.",
+  "blueprint": "The item is itself the blueprint node; the Mathlib declaration realizes its single assertion.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fil1923",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fil1923 (reviewer sub-agent of L); spot-checked: Read Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:117-118 with sed: instance (priority 900) [IsFinite f] : IsIntegralHom f in namespace AlgebraicGeometry.IsFinite, so AlgebraicGeometry.IsFinite.instIsIntegralHom matches the item (Stacks 01WJ first clause) exactly; no project declaration (sorryfree.py: MISSING), B10 n/a; no steps, no new nodes. FIX more, RETURN less: added the missing mathlib_match.line (117).; 1 file(s) fixed by the reviewer"
+ }
 }
