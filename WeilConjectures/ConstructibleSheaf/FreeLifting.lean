@@ -14,6 +14,8 @@ public import WeilConjectures.Algebra.Homology.ResolutionByClass
 public import Mathlib.CategoryTheory.Sites.EpiMono
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyTrivial
+public import WeilConjectures.AlgebraicGeometry.GenericFiniteness
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.CategoryTheory.ConcreteCategory.FinitelyGenerated
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
@@ -441,8 +443,15 @@ containing `η`, and over the complement `U` of that subset `W` is closed in `T`
 over `U`. -/
 theorem exists_isFinite_etale_obj {Z : Scheme.{u}} [TopologicalSpace.NoetherianSpace Z]
     [Nonempty Z] (W : Z.Etale) [IsAffine W.left] :
-    ∃ U : Z.Opens, (U : Set Z).Nonempty ∧ IsFinite (U.ι.Etale.obj W).hom :=
-  sorry
+    ∃ U : Z.Opens, (U : Set Z).Nonempty ∧ IsFinite (U.ι.Etale.obj W).hom := by
+  let f : W.left ⟶ Z := W.hom
+  have : LocallyQuasiFinite f := inferInstance
+  have : LocallyOfFiniteType f := inferInstance
+  obtain ⟨U, hU, hfin⟩ := f.exists_isFinite_morphismRestrict_of_noetherianSpace
+  refine ⟨U, hU, ?_⟩
+  change IsFinite (pullback.snd W.hom U.ι)
+  rw [← pullbackRestrictIsoRestrict_hom_morphismRestrict]
+  infer_instance
 
 /-- **Generic local constancy of free sheaves.** Let `Z` be a nonempty scheme with Noetherian
 underlying space and `Λ` finite. The free étale sheaf `Λ[W]` on an affine étale `Z`-scheme `W`
