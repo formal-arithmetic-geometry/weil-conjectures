@@ -8,6 +8,7 @@ module
 public import Mathlib
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
 public import WeilConjectures.SixFunctors.Finite.Exact
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
 
 /-!
 # Exactness of the direct image along an integral morphism
@@ -173,15 +174,71 @@ theorem Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom :
     Functor.preservesHomology_of_preservesEpis_and_kernels _
   Functor.preservesFiniteColimits_of_preservesHomology _
 
+/-- The sections of a sheaf `G` on `X_ét` over a piece of a decomposition of `U ×_Y X` into
+pairwise disjoint opens vanish as soon as the sections over `U ×_Y X`, that is the sections of
+`f_* G` over `U`, do: by the sheaf condition the latter are the product of the former
+(`AlgebraicGeometry.Scheme.Etale.isIso_piLift_of_disjoint`). -/
+lemma Etale.isZero_obj_of_isZero_lowerStar_obj_obj {f : X ⟶ Y}
+    {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (U : Y.Etale)
+    (hG : IsZero (((f)_*[ModuleCat.{u + 1} Λ].obj G).obj.obj (Opposite.op U))) {ι : Type u}
+    (P : ι → (pullback U.hom f).Opens) (hdisj : ∀ i j, i ≠ j → Disjoint (P i) (P j))
+    (hsup : ⨆ i, P i = ⊤) (i : ι) :
+    IsZero (G.obj.obj (Opposite.op (Scheme.Etale.mk ((P i).ι ≫ pullback.snd U.hom f)))) := by
+  classical
+  let W (j : ι) := Scheme.Etale.mk ((P j).ι ≫ pullback.snd U.hom f)
+  let π (j : ι) : W j ⟶ f.Etale.obj U := MorphismProperty.Over.homMk (P j).ι rfl
+  have (j : ι) : Mono (π j) := ⟨fun a b hab ↦ MorphismProperty.Over.Hom.ext
+    ((cancel_mono (P j).ι).mp (congrArg (fun m ↦ m.left) hab))⟩
+  have hcov : Sieve.ofArrows W π ∈ X.smallEtaleTopology _ := by
+    rw [ofArrows_mem_smallEtaleTopology_iff, Set.eq_univ_iff_forall]
+    intro w
+    obtain ⟨j, hj⟩ := TopologicalSpace.Opens.mem_iSup.mp (hsup.symm ▸ trivial : w ∈ ⨆ j, P j)
+    refine Set.mem_iUnion.mpr ⟨j, ?_⟩
+    change w ∈ Set.range (P j).ι
+    rw [Scheme.Opens.range_ι]
+    exact hj
+  have hdisj' : ∀ j k, j ≠ k →
+      Disjoint (Set.range (π j).left.base) (Set.range (π k).left.base) := by
+    intro j k hjk
+    change Disjoint (Set.range (P j).ι.base) (Set.range (P k).ι.base)
+    simp only [Scheme.Opens.range_ι]
+    rw [Set.disjoint_iff_inter_eq_empty, ← TopologicalSpace.Opens.coe_inf,
+      (hdisj j k hjk).eq_bot, TopologicalSpace.Opens.coe_bot]
+  have := Scheme.Etale.isIso_piLift_of_disjoint G W π hcov hdisj'
+  have hprod : IsZero (∏ᶜ fun j ↦ G.obj.obj (Opposite.op (W j))) :=
+    hG.of_iso (asIso (Pi.lift fun j ↦ G.obj.map (π j).op)).symm
+  rw [IsZero.iff_id_eq_zero]
+  have h := congrArg (· ≫ Pi.π (fun j ↦ G.obj.obj (Opposite.op (W j))) i)
+    (hprod.eq_of_tgt (Pi.lift fun j ↦ (if h : i = j then eqToHom (by rw [h]) else 0 :
+      G.obj.obj (Opposite.op (W i)) ⟶ G.obj.obj (Opposite.op (W j)))) 0)
+  simpa using h
+
 /-- The direct image along an integral morphism detects the zero sheaf: if `f_* G = 0` then
 `G = 0`. This is the conservativity step of the proof of blueprint `sbc-lem-bc-integral-base`.
-For a geometric point `x` of `X` over the geometric point `y` of `Y`, the stalk `G_x` is a
-colimit of factors of the sections of `G` over the integral base change of the strict
-henselisation at `y`, which is the stalk `(f_* G)_y`; so `G_x` is a quotient of `(f_* G)_y`. -/
+
+Every point `z` of an étale `X`-scheme `V` is hit by a morphism to `V` from a piece of a
+decomposition of some `U ×_Y X` into pairwise disjoint opens
+(`AlgebraicGeometry.Scheme.Hom.exists_disjoint_cover_hom_mem_range`). The sections of `G` over
+such a piece vanish (`AlgebraicGeometry.Etale.isZero_obj_of_isZero_lowerStar_obj_obj`), and
+these pieces cover `V`, so every section of `G` over `V` vanishes. -/
 theorem Etale.isZero_of_isZero_lowerStar_obj
     {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G :=
-  sorry
+    (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G := by
+  refine Sheaf.isZero_of_isZero_obj G fun V ↦ ?_
+  obtain ⟨V⟩ := V
+  choose U ι P hdisj hsup i m hm using f.exists_disjoint_cover_hom_mem_range V
+  have hzero (z : V.left) := Etale.isZero_obj_of_isZero_lowerStar_obj_obj Λ (U z)
+    (((sheafToPresheaf _ _).map_isZero hG).obj (Opposite.op (U z))) (P z) (hdisj z) (hsup z)
+    (i z)
+  have hcov : Sieve.ofArrows _ m ∈ X.smallEtaleTopology V := by
+    rw [ofArrows_mem_smallEtaleTopology_iff, Set.eq_univ_iff_forall]
+    exact fun z ↦ Set.mem_iUnion.mpr ⟨z, hm z⟩
+  rw [IsZero.iff_id_eq_zero]
+  obtain ⟨t, -, ht⟩ := G.property.existsUnique_amalgamation_ofArrows m hcov
+    (fun z ↦ G.obj.map (m z).op) (fun Z z z' a b hab ↦ by
+      rw [← Functor.map_comp, ← Functor.map_comp, ← op_comp, ← op_comp, hab])
+  exact (ht (𝟙 _) fun z ↦ Category.id_comp _).trans
+    (ht 0 fun z ↦ (hzero z).eq_of_tgt _ _).symm
 
 /-- The direct image along an integral morphism is conservative: being exact by
 `AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`, it sends the
