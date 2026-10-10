@@ -17,7 +17,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Formal glueing: the module H^0 of a glueing datum localizes to its components",
@@ -33,9 +33,84 @@
   "def-weil-pbc-module-localization-away",
   "def-weil-module-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=H^0(\\mathbf M)$ and $u=f_i$. For each $j$ let $B_j=M_j\\otimes_RS$ and $C_{jk}=(M_k)_{f_j}$. Define an $R$-linear map $d:M'\\times\\prod_jM_j\\to\\prod_jB_j\\times\\prod_{j,k}C_{jk}$ whose $j$-component is $\\alpha_j(m'/1)-m_j\\otimes1$ and whose $(j,k)$-component is $\\alpha_{jk}(m_j/1)-m_k/1$. By the displayed definition of $H$ in the statement, $H=\\ker d$ with its inclusion into the finite product. The maps and differences are $R$-linear because the localization and tensor maps are linear [def-weil-pbc-formal-glueing-data], [def-weil-pbc-module-localization-away], [def-weil-module-base-change].",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Remark 05EL (remark-glueing-data), displayed definition of H^0 and its exact sequence; Lemma 05EQ (lemma-base-change-glue)"
+   }
+  },
+  {
+   "text": "The natural map $H_u\\to (M')_u\\times\\prod_j(M_j)_u$ identifies $H_u$ with the families satisfying the localized equations of step 1. Indeed localization at $u$ is exact [lem-weil-pbc-localization-module-exact], so it preserves the kernel of $d$. Here localization commutes with the two finite products: a tuple of fractions has a common denominator $u^n$, obtained by taking the largest of its finitely many exponents, and a tuple is zero after localization precisely when one common power of $u$ kills every coordinate. Thus the localized map of $d$ is exactly the list of its component equations, localized at $u$. For surjectivity of the identification directly, write a compatible localized tuple with common denominator $u^n$; each of the finitely many equations becomes zero after multiplying by some power of $u$, so one common power $u^N$ clears them all. Its numerator multiplied by $u^N$ lies in $H$ and represents the original tuple as a fraction in $H_u$. The same common-power argument proves injectivity.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 05EQ (lemma-base-change-glue), proof omitted in the source; applied to localization at f_i as in the proof of Proposition 05ER (proposition-equivalence)"
+   }
+  },
+  {
+   "text": "For $x\\in M_i$ construct a localized tuple $e(x)$. Its $M'$-coordinate is $y'=\\alpha_i^{-1}(x\\otimes1)\\in(M')_u$; its $M_j$-coordinate is $y_j=\\alpha_{ij}(x/1)\\in(M_j)_u$ for every $j$. These expressions are meaningful because $u=f_i$ is invertible on $M_i$, $M_i\\otimes_RS$, and $(M_j)_u$ [def-weil-pbc-module-localization-away], [def-weil-pbc-formal-glueing-data]. The cocycle condition (b) with all three indices $i$ says $\\alpha_{ii}^2=\\alpha_{ii}$ after the canonical iterated-localization identifications; since $\\alpha_{ii}$ is an isomorphism, it is the identity. Hence $y_i=x/1$, identified with $x$ under $(M_i)_u\\cong M_i$. The tuple $e(x)$ is $R$-linear in $x$.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-formal-glueing-canonical-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 05EP (lemma-equivalence-I-unit), proof: after a generator becomes a unit one component recovers the others; Remark 05EL, cocycle condition (b)"
+   }
+  },
+  {
+   "text": "The tuple $e(x)$ satisfies the localized equations of step 2. For the $j$th equation, localize condition (a) of [def-weil-pbc-formal-glueing-data] at $u=f_i$ and evaluate it on $y'/1\\in((M')_{f_i})_{f_j}$. Its left side, $(\\alpha_{ij}\\otimes_RS)c^{M_i}_{f_j}(\\alpha_i)_{f_j}(y'/1)$, is $\\alpha_{ij}(x/1)\\otimes1=y_j\\otimes1$; its right side, $c^{M_j}_{f_i}(\\alpha_j)_{f_i}\\sigma^{M'}_{f_i,f_j}(y'/1)$, is the image of $\\alpha_j(y')$ under the tensor-localization identification. Hence the $j$th localized equation holds [lem-weil-pbc-formal-glueing-canonical-maps] (2), (3). For the $(j,k)$th equation, evaluate condition (b) on $(x/1)/1$ in $((M_i)_{f_j})_{f_k}$ and localize at $u$: its left side is $\\alpha_{jk}(y_j/1)$ and its right side is $y_k/1$ after the swaps $\\sigma$ identify the iterated localizations [lem-weil-pbc-formal-glueing-canonical-maps] (2). Thus step 2 supplies an element $e(x)\\in H_u$ whose $i$th projection is $x$.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "lem-weil-pbc-formal-glueing-canonical-maps",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Remark 05EL (remark-glueing-data), conditions (a) and (b); Lemma 05EP (lemma-equivalence-I-unit); proof of Proposition 05ER (proposition-equivalence), second paragraph"
+   }
+  },
+  {
+   "text": "Conversely, let $(z',(z_j)_j)$ be a family in $H_u$ as described in step 2, and let $x=z_i\\in(M_i)_u=M_i$. Its $i$th equation says $\\alpha_i(z')=x\\otimes1$, hence $z'=\\alpha_i^{-1}(x\\otimes1)=y'$. Its $(i,j)$th equation says $z_j=\\alpha_{ij}(x/1)=y_j$ in $(M_j)_u$. Therefore the tuple equals $e(x)$, and the localized $i$th projection $H_u\\to M_i$ and $e$ are inverse $R$-linear maps. The universal property of localization [def-weil-pbc-module-localization-away] says this projection is the unique $R$-linear map taking $h/1$ to $p_i(h)$; it is bijective as required.",
+   "uses": [
+    "def-weil-pbc-formal-glueing-data",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-formal-glueing-canonical-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 05EP (lemma-equivalence-I-unit) and proof of Proposition 05ER (proposition-equivalence), second paragraph: the i-th component of Psi after localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formal-glueing-data",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-formal-glueing-canonical-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proposition 05ER (proposition-equivalence), second paragraph, using Remark 05EL and Lemmas 05EQ and 05EP; details of the base-change lemma 05EQ are omitted in Stacks and expanded here"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -81,7 +156,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -102,5 +177,18 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked (the module component of Psi (x) R_{f_i} iso in the 05ER proof, from 05EP/05EQ and 00EQ)"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: the i-th component of Psi (x) R_{f_i} in 05ER: H^0 as a kernel, localization exact, explicit inverse e(x) via alpha_i and alpha_ij, both composites identity"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-formal-glueing-H0-localization",
+  "worker": "stage1",
+  "summary": "Split the localization of H0 into the finite equalizer calculation of Stacks 05EQ and the unit-component argument of 05EP used in the proof of 05ER. The source omits the details of 05EQ, so the proof clears common powers of f_i explicitly. Conditions (a) and (b) of the existing glueing-data node prove compatibility of the inverse tuple, and alpha_ii = id follows from its cocycle. Reused the existing Mathlib leaf localization-module-exact and existing formal-glueing-canonical-maps node; no new nodes or route changes. The flatness hypothesis is inherited from 05ER and is not needed for localization itself.",
+  "blueprint": "Serves the essential-surjectivity proof step of thm-weil-pbc-finite-etale-lifting (its 0GS2 algebraization argument), reached through prop-weil-pbc-formal-glueing-equivalence and its 05ER localization component. The five steps realize the equalizer, localization, inverse-tuple and compatibility calculations required there. Whole-blueprint searches for 05ER, formal glueing H0, and glueing localization found no duplicate statement."
+ }
 }
