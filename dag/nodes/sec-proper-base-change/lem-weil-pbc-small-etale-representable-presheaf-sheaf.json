@@ -5,15 +5,35 @@
  "statement": "Let $T$ be a scheme [def-pc-scheme], let $T_{\\Et}$ be its small etale site [def-weil-pbc-etale-site], and let $X\\to T$ be a $T$-scheme. The presheaf $h_X$ on $T_{\\Et}$ defined by $h_X(U)=\\operatorname{Mor}_T(U,X)$ is a sheaf of sets for the etale topology: for every etale covering family $(U_i\\to U)_i$, morphisms $U_i\\to X$ which agree after pullback to $U_i\\times_UU_j$ glue uniquely to a morphism $U\\to X.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, Lemma 59.15.8 (Tag 03O3, label etale-cohomology-lemma-representable-sheaf-fpqc): representable presheaves satisfy the fpqc sheaf condition, hence the restriction to the small etale site is a sheaf"
+  "place": "Tags 03O3 (etale-cohomology-lemma-representable-sheaf-fpqc, lines 1066–1076) and 03O4 (etale-cohomology-remark-fpqc-finest, lines 1086–1095), literature/stacks-project/etale-cohomology.tex"
  },
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-pbc-etale-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let (U_i → U) be an etale covering family in T_Et. By [lem-weil-pbc-fpqc-finer-than-etale] it is an fpqc covering of U. Apply [lem-weil-pbc-fpqc-representable-descent] with base U and target X to the compatible scheme morphisms U_i → X: compatibility means equality after composition with the two projections of U_i ×_U U_j. This yields a unique scheme morphism g:U → X restricting to the given maps. Write p:X → T and u:U → T for the structure maps. The composites p ∘ g and u restrict to the same maps U_i → T because every given map is a T-morphism. Apply the uniqueness clause of the same descent node again, with target T, to conclude p ∘ g = u. Thus g is a T-morphism. Absolute uniqueness also gives uniqueness among T-morphisms; this is precisely the sheaf equalizer condition.",
+   "uses": [
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03O3 (etale-cohomology-lemma-representable-sheaf-fpqc, lines 1066–1076) and 03O4 (etale-cohomology-remark-fpqc-finest, lines 1086–1095), literature/stacks-project/etale-cohomology.tex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03O3 (etale-cohomology-lemma-representable-sheaf-fpqc, lines 1066–1076) and 03O4 (etale-cohomology-remark-fpqc-finest, lines 1086–1095), literature/stacks-project/etale-cohomology.tex"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +65,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +85,13 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": "coord/reports/F1/lem-weil-pbc-small-etale-representable-presheaf-sheaf.md",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L read the single step: 022C child (etale covering is fpqc) and 023Q child (fpqc descent of morphisms) applied with targets X and T; both children unsplit with sources."
+ }
 }
