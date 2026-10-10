@@ -22,9 +22,63 @@
   "def-pc-scheme",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because I^2=0, the action of a local section of O' on I depends only on its image in O: changing a lift by an element of I changes the product by an element of I^2. Thus I is an O-module, and multiplication by a global section of O is an endomorphism of the O_X-module I. The sequence 0 -> I -> O' -> O -> 0 is a short exact sequence of O_X-modules, so [pqf-def-cohomology] supplies its long exact cohomology sequence, and applying the functor H^1(X,-) to these endomorphisms gives the H^0(X,O)-module structure on H^1(X,I).",
+   "uses": [
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 0B8S proof, first paragraph"
+   }
+  },
+  {
+   "text": "The connecting map in the long exact cohomology sequence is additive, so it remains to prove the Leibniz identity for products.",
+   "uses": [
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 0B8S proof, sentence 'The boundary map is additive hence it suffices to prove the Leibniz rule'"
+   }
+  },
+  {
+   "text": "For f in H^0(X,O), choose a cover U_i and lifts f_i in O'(U_i). By [lem-sc-boundary-cech-local-lifts], the differences alpha_{i_0 i_1}=f_{i_0}-f_{i_1} form a Cech 1-cocycle in I and represent partial(f) under the injective Cech-to-H^1 map. After refining the cover, choose lifts g_i of a second section g; the same node identifies the Cech classes of beta_{i_0 i_1}=g_{i_0}-g_{i_1} and gamma_{i_0 i_1}=f_{i_0}g_{i_0}-f_{i_1}g_{i_1} with partial(g) and partial(fg).",
+   "uses": [
+    "lem-sc-boundary-cech-local-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 0B8S proof, local lifts and the Cech classes alpha, beta, gamma"
+   }
+  },
+  {
+   "text": "On each overlap, the elementary identity f_{i_0}g_{i_0}-f_{i_1}g_{i_1}=(f_{i_0}-f_{i_1})g_{i_0}+f_{i_1}(g_{i_0}-g_{i_1})=(f_{i_0}-f_{i_1})g+f(g_{i_0}-g_{i_1}) holds in I because the two factors that differ by an element of I have the same image in O and I^2=0. Therefore gamma=alpha·g+f·beta in the Cech complex, where alpha·g and f·beta are obtained by applying the endomorphisms 'multiplication by g' and 'multiplication by f' of I to the cocycles. By [lem-sc-cech-h1-map-natural] the canonical map from Cech cohomology to H^1(X,I) carries the classes of alpha·g and f·beta to g partial(f) and f partial(g), so the identifications of step 3 give partial(fg)=g partial(f)+f partial(g).",
+   "uses": [
+    "lem-sc-boundary-cech-local-lifts",
+    "lem-sc-cech-h1-map-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma 0B8S proof, final displayed identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-cohomology",
+  "lem-sc-boundary-cech-local-lifts",
+  "lem-sc-cech-h1-map-natural"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Lemma 0B8S proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -49,12 +103,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-ample-square-zero-thickening",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate"
+ "unit": "sk-thm-curveestimate",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-boundary-derivation-square-zero",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by deleting the generic relabelling node and writing the proof of Stacks Cohomology Lemma 0B8S: square-zero module factorization, additivity, the local-lift Cech boundary description from Lemma 0B8R, and the explicit product cocycle identity. Added one narrower statement-only Cech support node.",
+  "blueprint": "The four steps realize the 09MS square-zero proof clause and the complete proof of Cohomology Lemma 0B8S: module factorization, additivity, local-lift Cech classes, and the Leibniz calculation."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bd2",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bd2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 15:40 return: point 1 (D1/D2) repaired, the relabelling node is deleted and the four steps now follow the proof of Stacks 0B8S (cohomology.tex lemma-boundary-derivation-over-cup-product), read in full: (1) I^2=0 makes I an O-module, (2) additivity, (3) local lifts and the Cech cocycles alpha, beta, gamma via the new node lem-sc-boundary-cech-local-lifts (0B8R lemma-cech-h1 injectivity plus the local-lift description of the boundary, checked against the source), (4) the overlap identity f_{i0}g_{i0}-f_{i1}g_{i1}=(f_{i0}-f_{i1})g_{i0}+f_{i1}(g_{i0}-g_{i1}) checked by hand. Point 2 (created {by,item,date}) is moot: tools/README says a delivered new node carries created.item only, by/date filled at merge. Point 3 (F) repaired: WANTED removed, the source read. Item statement agrees with 0B8S hypothesis by hypothesis (scheme instead of topological space, O_X-algebras; a specialization). Cited statements read: def-pc-scheme, pqf-def-cohomology (long exact sequence for O_X-modules). Small cases: split dual numbers O'=O[e] (all boundaries zero, Leibniz trivial), I=0. FIX more, RETURN less: (a) C4: step 4 used that the Cech-to-H^1 map commutes with multiplication by f,g on I, which no cited node states; added statement-only node dag/nodes/sec-curve-estimates/lem-sc-cech-h1-map-natural.json (Stacks 01EQ, cohomology-lemma-cech-cohomology: naturality of Cech-to-cohomology maps in the O_X-module), cited in step 4 uses and proof_deps; lem-sc-cech-comparison-natural exists but only for affine covers and quasi-coherent modules, so not applicable. Fixes: lem-sc-boundary-derivation-square-zero.json: proof[0].text: 'the short exact sequence is a sequence of O-modules' (false, O' is not an O-module) replaced by 'a short exact sequence of O_X-modules', the H^0(X,O)-module structure on H^1 stated as induced by functoriality of H^1(X,-); proof[3].text/uses and proof_deps: cite lem-sc-cech-h1-map-natural. lem-sc-boundary-cech-local-lifts.json: statement: 'choose lifts f_i' (which asserted lifts exist on an arbitrary cover) reworded to 'let f be such that each f|_{U_i} has a lift, and choose such lifts'. No Mathlib leaf; Mathlib has Cech complex functor (CategoryTheory/Sites/SheafCohomology/Cech.lean) but no comparison map to H^1. Times: start Sat Oct 10 03:56:34 PM UTC 2026, end Sat Oct 10 03:58:11 PM UTC 2026.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
