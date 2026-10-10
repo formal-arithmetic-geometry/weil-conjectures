@@ -14,17 +14,62 @@
  },
  "kind": "statement",
  "title": "Strict henselization preserves Noetherianity of local rings",
- "statement": "Let $R$ be a local commutative ring and $R^{\\mathrm{sh}}$ its strict henselization with respect to a separable closure of its residue field. Then $R$ is Noetherian [def-weil-pbc-noetherian-ring] if and only if $R^{\\mathrm{sh}}$ is Noetherian.",
+ "statement": "Let $R$ be a local commutative ring and let $R^{\\mathrm{sh}}$ be its strict henselization with respect to a separable closure of its residue field [lem-weil-pbc-strict-henselization-triples]. Then $R$ is Noetherian [def-weil-pbc-noetherian-ring] if and only if $R^{\\mathrm{sh}}$ is Noetherian.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), equivalence of conditions (1) and (3)"
  },
  "stmt_deps": [
-  "def-weil-pbc-noetherian-ring"
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-strict-henselization-triples"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C=R^{\\mathrm{sh}}$. By [lem-sc-strict-henselization-faithfully-flat], the canonical map $R\\to C$ is faithfully flat.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 06LJ: 'Since R -> R^h -> R^sh are faithfully flat (Lemma 07QM)'"
+   }
+  },
+  {
+   "text": "If $C$ is Noetherian, faithful-flat descent of Noetherianity [lem-weil-pbc-faithfully-flat-descent-noetherian] applied to $R\\to C$ shows that $R$ is Noetherian.",
+   "uses": [
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-descent-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ, proof: faithfully flat maps descend Noetherianity via Algebra Tag 033E"
+   }
+  },
+  {
+   "text": "Assume conversely that $R$ is Noetherian. By [lem-sc-strict-henselization-completion-noetherian], $\\widehat C$ is Noetherian and $C\\to\\widehat C$ is faithfully flat. Applying [lem-weil-pbc-faithfully-flat-descent-noetherian] to this map gives that $C=R^{\\mathrm{sh}}$ is Noetherian.",
+   "uses": [
+    "lem-sc-strict-henselization-completion-noetherian",
+    "lem-weil-pbc-faithfully-flat-descent-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ, proof parts (a), (c), and final descent using Algebra Tag 033E"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-descent-noetherian",
+  "lem-sc-strict-henselization-completion-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), equivalence of conditions (1) and (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,12 +108,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-dvr",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-strict-henselization-noetherian",
+  "worker": "stage1",
+  "summary": "Split the equivalence using two missing strict-henselization prerequisites: faithful flatness of R -> R^sh, and Noetherianity plus faithful flatness of the completion of R^sh when R is Noetherian. The three item steps then apply faithful-flat descent in each direction.",
+  "blueprint": "Realizes the blueprint ancestor's boundary-stalk claim that strict henselization of a Noetherian local ring is Noetherian, following Stacks Tag 06LJ.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shn2046",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shn2046 (reviewer sub-agent of L); spot-checked: Steps 1-3 against Tag 06LJ proof: reverse direction by ff descent along R->R^sh, forward by Noetherian completion + ff R^sh->completion + descent; cited statements carry the hypotheses (descent node: ff map, Noetherian target; completion node assumes R Noetherian). C1: faithful flatness of R->R^sh cited (new node). Class (b) checked: no existing node states ff of R->R^sh (lem-weil-pbc-strict-henselization-triples gives construction/strictly henselian only; lem-sc-strict-henselization-dvr's flatness clause is geometric and DVR-specific; lem-weil-pbc-henselization-noetherian-completion is for pair henselization R^h, not R^sh); sibling's cotangent-dimension node not needed. Both new nodes real lemmas (07QM(1); 06LJ (a),(c)), true as stated. FIX more, RETURN less: (1) source of lem-sc-strict-henselization-faithfully-flat pointed to 04GP/04GN, which do not state flatness (the second reading introduced this); repointed to More on Algebra Tag 07QM part (1). (2) item step 1 source likewise repointed to 06LJ proof citing 07QM.; 2 file(s) fixed by the reviewer"
+ }
 }
