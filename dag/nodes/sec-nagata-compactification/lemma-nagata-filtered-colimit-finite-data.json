@@ -3,36 +3,90 @@
  "blueprint": {
   "is": "lemma-nagata-filtered-colimit-finite-data",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite data and finite relations descend in a filtered colimit",
- "statement": "Let $(A_i)_{i\\in I}$ be a directed system of rings with colimit $A$. Given\nfinitely many elements of $A$ and finitely many equalities between ring\nexpressions in those elements, there exists one stage $i$ and lifts of all\nselected elements to $A_i$ for which all selected equalities hold. Once\nthey hold at $i$, they hold after every transition $A_i\\to A_j$.",
+ "statement": "Let $I$ be a nonempty directed set and $(A_i)_{i\\in I}$ a directed system of commutative rings (ring maps $A_i\\to A_j$ for $i\\le j$, compatible) with colimit $A$ in the category of commutative rings [def-weil-pbc-category-colimit]. Given\nfinitely many elements of $A$ and finitely many equalities between ring\nexpressions in those elements, there exists one stage $i$ and lifts of all\nselected elements to $A_i$ for which all selected equalities hold. Once\nthey hold at $i$, they hold after every transition $A_i\\to A_j$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-filtered-colimit-finite-data.md",
   "place": "node lemma-nagata-filtered-colimit-finite-data, order 331"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
  "proof": [
   {
-   "text": "Choose a representative stage for each selected element. Directedness and\n[lemma-nagata-directed-finite-upper-bound] place all representatives at\none common stage. Equality of two representatives in a filtered colimit is\nwitnessed at a later stage. There are only finitely many equalities, so a\nsecond finite upper bound makes them all true simultaneously. Ring\nhomomorphisms preserve the equalities at every later stage.",
+   "text": "A nonempty directed set, viewed as a category, is filtered, so [lem-pc-filtered-colimit-commrings-elementwise] applies to the system $(A_i)$ of commutative rings. By [lem-pc-filtered-colimit-commrings-elementwise] (1), choose a representative stage and lift for each selected element. Put these finitely many stages into a finite set and use directedness together with [lemma-nagata-directed-finite-upper-bound] to move all lifts to one common stage. Evaluate every selected ring expression on those lifts. Its image in the colimit is the corresponding selected element, so the asserted equality of two expressions is an equality of two representatives in the colimit. By [lem-pc-filtered-colimit-commrings-elementwise] (2), each such equality holds after passing to some later stage. There are finitely many equalities; apply [lemma-nagata-directed-finite-upper-bound] to their witness stages and the common stage, and transport all equalities there. Ring homomorphisms preserve these equalities at every later stage.",
    "uses": [
-    "lemma-nagata-directed-finite-upper-bound"
+    "lemma-nagata-directed-finite-upper-bound",
+    "lem-pc-filtered-colimit-commrings-elementwise"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lemma-nagata-directed-finite-upper-bound"
+  "lemma-nagata-directed-finite-upper-bound",
+  "lem-pc-filtered-colimit-commrings-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-filtered-colimit-finite-data.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite elements and finitely many equalities descend to one stage of a filtered colimit of rings",
+   "results": "RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; CategoryTheory.Limits.FintypeCat.jointly_surjective; CommRingCat.FilteredColimits.instNontrivialCarrierColimitOfIsFilteredOrEmptyOfObj; CommRingCat.FilteredColimits.nontrivial; RingCat.FilteredColimits.colimitCoconeIsColimit; CategoryTheory.Limits.FintypeCat.finite_of_isColimit; FGModuleCat.instFiniteCarrierColimitModuleCatCompForget₂",
+   "date": "2026-10-10",
+   "verdict": "no exact match; returned finite-presentation and generic filtered-colimit results"
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectedSystem, RingHom, filtered colimit, finite equalities",
+   "results": "0 hits; unknown identifier filtered",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*colimit|directed.*colimit|RingHom [Mathlib/CategoryTheory]",
+   "results": "0 hits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a filtered colimit of rings, finitely many elements and equations are represented at a common stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-10",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite relations in filtered colimit ring descend to an index",
+   "results": "RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; RingCat.FilteredColimits.colimitCoconeIsColimit; RingCat.FilteredColimits.colimit; RingCat.FilteredColimits.colimitCocone; RingCat.FilteredColimits.colimitRing; CommRingCat.FilteredColimits.colimitCoconeIsColimit; CategoryTheory.Limits.Types.FilteredColimit.rel_of_colimitTypeRel",
+   "date": "2026-10-10",
+   "verdict": "no exact match; generic filtered-colimit declarations only"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.EssFiniteType, IsColimit, filtered",
+   "results": "0 hits; unknown identifier IsColimit",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsColimit|FilteredColimits|exists.*ι [Mathlib/Algebra/Category/Ring]",
+   "results": "0 hits",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -63,5 +117,21 @@
   }
  },
  "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-approximation"
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lemma-nagata-filtered-colimit-finite-data",
+  "worker": "stage1",
+  "summary": "Checked the blueprint-only finite-data statement against the imported blueprint node and the existing directed-upper-bound and filtered-colimit elementwise statements. No project declaration states this item, and the single proof step now explicitly obtains representatives and eventual equality witnesses from the cited filtered-colimit statement, uses the finite upper bound twice, and propagates equalities along ring maps. No new node is needed.",
+  "blueprint": "The item's single proof paragraph (blueprint node lemma-nagata-filtered-colimit-finite-data, order 331): its representative, common-stage, finite-equality-witness, and persistence clauses are realized in proof step 1.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fcd2740",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcd2740 (reviewer sub-agent of L); spot-checked: Read step 1 against lem-pc-filtered-colimit-commrings-elementwise (Concrete.isColimit_exists_rep / isColimit_rep_eq_iff_exists leaf) and lemma-nagata-directed-finite-upper-bound; checked citers (closed-immersion-stage-exists, qc-open-equality-stage, affine-fp-descent) use only stage+lifts+equalities, which the statement gives; no Ring.DirectLimit single-declaration match for the finite-data clause; no overlap with lem-weil-pbc-limit-global-sections-colimit. FIX more, RETURN less: (1) C4: statement said 'rings' while the cited leaf needs commutative rings in CRing and a filtered index; statement now says nonempty directed set, directed system of commutative rings, colimit in commutative rings [def-weil-pbc-category-colimit] (stmt_deps added, as in the pbc ring-colimit nodes); (2) step 1 now says a nonempty directed set is a filtered category so the leaf applies. Second reading missed (1).; 1 file(s) fixed by the reviewer"
+ }
 }
