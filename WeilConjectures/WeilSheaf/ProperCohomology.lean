@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.OpenImmersion
@@ -21,8 +22,6 @@ is its ordinary cohomology, Frobenius-equivariantly.
 
 ## Main statements
 
-- `AlgebraicGeometry.ProEtale.isIso_adicOpenImmersionLowerShriekToLowerStar_of_isClosed_range`:
-  `j_! ⟶ j_*` is an isomorphism of `ℓ`-adic sheaves for an open immersion `j` with closed range.
 - `AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoOfIsProper`: `Ra_! K ≅ Ra_* K` for `X`
   proper.
 - `AlgebraicGeometry.WeilSheaf.globalSectionsEquivOfIso`: isomorphic Weil sheaves have
@@ -36,51 +35,6 @@ universe u
 open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry
-
-namespace ProEtale
-
-variable (l : ℕ) [Fact l.Prime] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-
-/-- **The comparison `j_! ⟶ j_*` of `ℓ`-adic sheaves is an isomorphism for an open immersion `j`
-with closed range.** The open immersion `j` and the inclusion of the open complement `W` of its
-range form a Zariski cover of `X`; the comparison restricts to an isomorphism along `j`, and
-both sides vanish along `W`. -/
-theorem isIso_adicOpenImmersionLowerShriekToLowerStar_of_isClosed_range
-    (hj : IsClosed (Set.range j.base)) :
-    IsIso (adicOpenImmersionLowerShriekToLowerStar l j) := by
-  let W : X.Opens := ⟨(Set.range j.base)ᶜ, hj.isOpen_compl⟩
-  let g : ∀ i, ![U, (W : Scheme.{u})] i ⟶ X := Fin.cons j (Fin.cons W.ι fun i ↦ i.elim0)
-  have : ∀ i, IsOpenImmersion (g i) :=
-    Fin.cases (inferInstanceAs (IsOpenImmersion j))
-      (Fin.cases (inferInstanceAs (IsOpenImmersion W.ι)) fun i ↦ i.elim0)
-  have hW : Set.range W.ι.base = (Set.range j.base)ᶜ := W.range_ι
-  have hsurj : ∀ x, ∃ i, x ∈ Set.range (g i).base := fun x ↦ by
-    by_cases hx : x ∈ Set.range j.base
-    · exact ⟨0, hx⟩
-    · exact ⟨1, hW.ge hx⟩
-  have hcover : Presieve.ofArrows _ g ∈ Scheme.proetalePrecoverage X :=
-    Scheme.zariskiPrecoverage_le_proetalePrecoverage _
-      ((Scheme.ofArrows_mem_precoverage_iff _).mpr ⟨hsurj, fun i ↦ this i⟩)
-  have hjk : Set.range j.base ∩ Set.range W.ι.base = ∅ := by
-    rw [hW, Set.inter_compl_self]
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro M
-  refine isIso_of_isIso_adicUpperStar l g hcover _ (Fin.cases ?_ (Fin.cases ?_ fun i ↦ i.elim0))
-  · change IsIso ((j)^*ᵃ[l].map ((adicOpenImmersionLowerShriekToLowerStar l j).app M))
-    let c := (adicOpenImmersionLowerShriekToLowerStar l j).app M
-    have : IsIso ((adicOpenImmersionLowerShriekAdjunction l j).unit.app M ≫ (j)^*ᵃ[l].map c) := by
-      rw [adicOpenImmersionLowerShriekAdjunction_unit_app_comp_map_lowerShriekToLowerStar]
-      infer_instance
-    exact IsIso.of_isIso_comp_left ((adicOpenImmersionLowerShriekAdjunction l j).unit.app M) _
-  · change IsIso ((W.ι)^*ᵃ[l].map ((adicOpenImmersionLowerShriekToLowerStar l j).app M))
-    have h₁ : IsZero ((W.ι)^*ᵃ[l].obj ((j)_!ᵃ[l].obj M)) :=
-      isZero_adicUpperStar_adicOpenImmersionLowerShriek j W.ι hjk M
-    have h₂ : IsZero ((W.ι)^*ᵃ[l].obj ((j)_*ᵃ[l].obj M)) :=
-      AdicSheaf.isZero_of_isZero_X ((isZero_openImmersionRestriction_lowerStar _ j W.ι hjk
-        M.X).of_iso ((upperStarIsoOpenImmersionRestriction _ W.ι).app _))
-    exact ⟨⟨h₂.to_ _, h₁.eq_of_src _ _, h₂.eq_of_src _ _⟩⟩
-
-end ProEtale
 
 open ProEtale Endofunctor
 
@@ -150,13 +104,6 @@ noncomputable def globalSectionsEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅
 
 end WeilSheaf
 
-/-- A functor isomorphic to one preserving K-injective complexes preserves them. -/
-lemma _root_.CategoryTheory.Functor.preservesKInjectiveComplexes_of_iso {C D : Type*}
-    [Category C] [Category D] [Abelian C] [Abelian D] {F F' : C ⥤ D} [F.Additive] [F'.Additive]
-    (e : F ≅ F') [F'.PreservesKInjectiveComplexes] : F.PreservesKInjectiveComplexes where
-  isKInjective_map K _ := CochainComplex.isKInjective_of_iso
-    ((NatIso.mapHomologicalComplex e (ComplexShape.up ℤ)).symm.app K)
-
 attribute [local instance] Compactification.over
 
 variable (k₀ l) in
@@ -177,7 +124,7 @@ instance (i : U ⟶ X) [IsOpenImmersion i] [UniversallyClosed i]
   have := isIso_adicOpenImmersionLowerShriekToLowerStar_of_isClosed_range l _
     (isClosed_range_geometricFiberMap (k₀ := k₀) i)
   Functor.preservesKInjectiveComplexes_of_iso
-    (asIso (adicOpenImmersionLowerShriekToLowerStar l _))
+    (asIso (adicOpenImmersionLowerShriekToLowerStar l _)).symm
 
 /-- **For a proper `k₀`-scheme, compactly supported direct image is direct image**: for the
 chosen compactification `X ⟶[i] Z ⟶[g] Spec k₀` of the proper structure morphism `a`, the open
