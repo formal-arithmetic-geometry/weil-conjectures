@@ -1,0 +1,93 @@
+{
+ "id": "lem-weil-pbc-formal-glueing-canonical-maps",
+ "kind": "statement",
+ "title": "The canonical maps of formal glueing: localized S-module structure, swap of two localizations, localization of a base change",
+ "statement": "Let $\\varphi:R\\to S$ be a homomorphism of commutative rings, let $P$ be an $R$-module and $f,g\\in R$. For an $R$-module $Q$ and $e\\in R$ let $Q_e$ be the localization of $Q$ at $e$ with its localization map $Q\\to Q_e$, $q\\mapsto q/1$ [def-weil-pbc-module-localization-away], and for an $R$-linear map $h:Q\\to Q'$ let $h_e:Q_e\\to Q'_e$, $q/e^n\\mapsto h(q)/e^n$, be its localization [def-weil-pbc-module-localization]; $Q\\otimes_RS$ and $h\\otimes_RS$ are the base changes [def-weil-module-base-change], and an $S$-module is regarded as an $R$-module through $\\varphi$.\n(1) For $R$-linear maps $k:Q\\to Q'$, $h:Q'\\to Q''$ and $h':Q'\\to Q''$ one has $(h\\circ k)_e=h_e\\circ k_e$, $(h+h')_e=h_e+h'_e$ and $(\\mathrm{id}_Q)_e=\\mathrm{id}_{Q_e}$. Consequently, if $Q$ is an $S$-module, the maps $(s\\cdot)_e:Q_e\\to Q_e$, $s\\in S$ (the localizations of the multiplications $q\\mapsto sq$), make $Q_e$ an $S$-module, i.e. $s\\cdot(q/e^n)=(sq)/e^n$, whose underlying $R$-module structure is the given one; the localization map $Q\\to Q_e$ is $S$-linear; and $h_e$ is $S$-linear whenever $h:Q\\to Q'$ is an $S$-linear map of $S$-modules.\n(2) The elements $f$ and $g$ act bijectively on the $R$-module $(P_g)_f$, and there is exactly one $R$-linear map $\\sigma^P_{f,g}:(P_f)_g\\to(P_g)_f$ with $\\sigma^P_{f,g}((p/1)/1)=(p/1)/1$ for all $p\\in P$. It is given by $\\sigma^P_{f,g}((p/f^a)/g^b)=(p/g^b)/f^a$ ($p\\in P$, $a,b\\ge0$), and it is an isomorphism with inverse $\\sigma^P_{g,f}$.\n(3) The element $f$ acts bijectively on $P_f\\otimes_RS$, and there is exactly one $R$-linear map $c^P_f:(P\\otimes_RS)_f\\to P_f\\otimes_RS$ with $c^P_f((p\\otimes s)/1)=(p/1)\\otimes s$ for all $p\\in P$, $s\\in S$. It is given by $c^P_f((p\\otimes s)/f^e)=(p/f^e)\\otimes s$, it is $S$-linear for the $S$-module structure of (1) on $(P\\otimes_RS)_f$, and it is an isomorphism of $S$-modules.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Remark 05EL (label remark-glueing-data, line 24641): the 'canonical isomorphisms' can_i : (M ⊗_R S)_{f_i} → M_{f_i} ⊗_R S and can_ij : (M_{f_i})_{f_j} → (M_{f_j})_{f_i} of the functor Can, used implicitly in conditions (a), (b) of the objects; existence and uniqueness from Algebra Lemma 07K0 (algebra.tex line 1171, label lemma-universal-property-localization-module); (P ⊗_R S)_f ≅ P_f ⊗_R S from Algebra Lemma 00DK (line 2088, label lemma-tensor-localization)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-module-localization",
+  "def-weil-module-base-change"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization of a module at f then at g is isomorphic to localization at g then at f",
+   "results": "IsLocalization.Away.commutes (Mathlib.RingTheory.Localization.Away.Basic; rings only: S1 localized at y is a localization at x), IsLocalizedModule.linearEquiv, IsLocalizedModule.lift_comp_iso, IsLocalizedModule.mk, IsLocalizedModule.map_iso_commute (Mathlib.Algebra.Module.LocalizedModule.Basic), IsLocalization.map_map",
+   "date": "2026-10-10",
+   "verdict": "no match for clause (2): the ring statement IsLocalization.Away.commutes exists, no module version; the module isomorphism follows from IsLocalizedModule.linearEquiv once both (P_f)_g and (P_g)_f are shown to be localizations of P at the powers of fg, which is itself not stated in Mathlib for modules"
+  },
+  {
+   "tool": "leansearch",
+   "query": "localization of base change of a module is base change of localization, (M ⊗ S)_f ≅ M_f ⊗ S",
+   "results": "IsLocalizedModule.rTensor (Mathlib.RingTheory.Localization.BaseChange:244), IsLocalization.Away.tensorEquiv, IsLocalization.tensor, isLocalizedModule_iff_isBaseChange, IsLocalizedModule.isBaseChange, IsLocalization.algebraTensorEquiv",
+   "date": "2026-10-10",
+   "verdict": "candidate for the R-linear part of clause (3): IsLocalizedModule.rTensor (BaseChange.lean:244-252) says that for a localization map g : M → M' at a submonoid, AlgebraTensorModule.rTensor R N g is again a localization map; with g = P → P_f and N = S it makes P ⊗_R S → P_f ⊗_R S a localization at the powers of f, and IsLocalizedModule.iso/linearEquiv then gives an R-linear isomorphism (P ⊗_R S)_f ≅ P_f ⊗_R S. The S-linearity and clauses (1), (2) are not covered; not a leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of a localized module with an algebra is the localization of the base-changed module",
+   "results": "IsLocalizedModule.rTensor, IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.instIsLocalizedModuleTensorProductMap (localization commutes with TensorProduct.map of two localization maps), IsLocalization.moduleTensorEquiv, IsLocalization.algebraTensorEquiv, IsLocalization.tensorProduct_tensorProduct (Mathlib.RingTheory.Localization.BaseChange)",
+   "date": "2026-10-10",
+   "verdict": "no match beyond the candidate IsLocalizedModule.rTensor for clause (3)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localizing a module at two elements in either order gives isomorphic modules",
+   "results": "isLocalizedModule_iff_isLocalization', IsLocalizedModule.mapEquiv, IsLocalizedModule.mapEquiv_apply (Mathlib.RingTheory.Localization.Module), IsLocalization.mk'_eq_mk', IsLocalizedModule.map_iso_commute, IsLocalizedModule.of_linearEquiv",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule (Submonoid.powers _) _, LocalizedModule (Submonoid.powers _) (LocalizedModule (Submonoid.powers _) _)",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'LocalizedModule.Away.*LocalizedModule.Away\\|LocalizedModule (Submonoid.powers [a-z]*) (LocalizedModule\\|isLocalizedModule_away_mul\\|Away.mul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -n 'theorem\\|lemma\\|instance\\|def' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Localization/BaseChange.lean",
+   "results": "only IsLocalization.Away.mul / mul' (RingTheory/Localization/Away/Basic.lean:279-320, rings), a use in RingTheory/Flat/LocallyFree.lean:54 and ZariskisMainTheorem.lean:150; BaseChange.lean has IsLocalizedModule.isBaseChange (34), isLocalizedModule_iff_isBaseChange (52), LocalizedModule.equivTensorProduct lemmas (73-83), tensorProduct_isLocalizedModule (98), the TensorProduct.map instance (119), IsLocalizedModule.rTensor (244); no iterated module localization, no S-linear (P ⊗ S)_f ≅ P_f ⊗ S",
+   "date": "2026-10-10",
+   "verdict": "no match (candidate IsLocalizedModule.rTensor for the R-linear part of (3))"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "IsLocalizedModule.rTensor",
+  "file": "Mathlib/RingTheory/Localization/BaseChange.lean",
+  "how": "lines 244-252: for an A-linear localization map g : M → M' at S ⊆ A, AlgebraTensorModule.rTensor R N g is a localization map at S; with A = R, g = P → P_f, N = S it gives the R-linear isomorphism of clause (3) through IsLocalizedModule.linearEquiv; clause (1), clause (2) and the S-linearity in (3) are not covered"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-pbc-formal-glueing-data",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "import_flags": [
+  "unreachable"
+ ],
+ "note": "Claim moved out of def-weil-pbc-formal-glueing-data (well-definedness of its data: the S-module structure of P_f, the maps sigma^P_{f,g} and c^P_f). The definition names it in `pointers`, not in stmt_deps (a definition does not cite a lemma about its own data). Clauses (2), (3) 'is an isomorphism' overlap prop-weil-pbc-formal-glueing-equivalence (1), whose split can cite this node for them."
+}
