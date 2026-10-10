@@ -182,6 +182,93 @@ theorem GrpObj.exists_derivation_of_isOpenImmersion {G : Over (Spec (.of K))} [G
   rw [DualNumber.derivationOfSection_apply, ← DualNumber.snd_mapOfAlgHom, h2a,
     AlgHom.snd_toDualNumber, AlgHom.cotangentDerivation_of_mem]
 
+
+omit [Field K] in
+theorem specMap_asOver_comp_specMap_asOver {K : Type u} [CommRing K] {R S T : Type u}
+    [CommRing R] [Algebra K R] [CommRing S] [Algebra K S] [CommRing T] [Algebra K T]
+    (f : R →ₐ[K] S) (g : S →ₐ[K] T) :
+    (Spec.map (CommRingCat.ofHom g.toRingHom)).asOver (Spec (.of K)) ≫
+        (Spec.map (CommRingCat.ofHom f.toRingHom)).asOver (Spec (.of K)) =
+      (Spec.map (CommRingCat.ofHom (g.comp f).toRingHom)).asOver (Spec (.of K)) := by
+  apply Over.OverMorphism.ext
+  change Spec.map _ ≫ Spec.map _ = Spec.map _
+  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+  rfl
+
+/-- **Invariant vector fields as infinitesimal right translations.** Let `G` be a group scheme over
+a field `K`, `j : Spec A ⟶ G` an affine open subscheme and `v` a point of `G` over `K[ε]` reducing
+to the identity modulo `ε`. The right translation `(g, t) ↦ g v(t)` of `Spec A` maps
+`Spec A[ε]` into `Spec A`: it is `Spec ψ` for a section `ψ : A → A[ε]`, `ψ a = a + D(a) ε`, of
+the reduction modulo `ε`, since `Spec A[ε]` and `Spec A` have the same points. -/
+theorem GrpObj.exists_algHom_specMap_comp_eq_mul {G : Over (Spec (.of K))} [GrpObj G]
+    {A : Type u} [CommRing A] [Algebra K A] (j : (Spec (.of A)).asOver (Spec (.of K)) ⟶ G)
+    [IsOpenImmersion j.left] (v : (Spec (.of (DualNumber K))).asOver (Spec (.of K)) ⟶ G)
+    (hv : (Spec.map (CommRingCat.ofHom (fstHom K K K).toRingHom)).asOver (Spec (.of K)) ≫ v = 1) :
+    ∃ ψ : A →ₐ[K] DualNumber A, (fstHom K A A).comp ψ = AlgHom.id K A ∧
+      (Spec.map (CommRingCat.ofHom ψ.toRingHom)).asOver (Spec (.of K)) ≫ j =
+        ((Spec.map (CommRingCat.ofHom (inlAlgHom K A A).toRingHom)).asOver (Spec (.of K)) ≫ j) *
+          ((Spec.map (CommRingCat.ofHom (DualNumber.mapAlgebraMap A).toRingHom)).asOver
+            (Spec (.of K)) ≫ v) := by
+  set Φ :=
+    ((Spec.map (CommRingCat.ofHom (inlAlgHom K A A).toRingHom)).asOver (Spec (.of K)) ≫ j) *
+    ((Spec.map (CommRingCat.ofHom (DualNumber.mapAlgebraMap A).toRingHom)).asOver
+      (Spec (.of K)) ≫ v)
+  have hi :
+      (Spec.map (CommRingCat.ofHom (fstHom K A A).toRingHom)).asOver (Spec (.of K)) ≫ Φ = j := by
+    rw [MonObj.comp_mul, ← Category.assoc, ← Category.assoc, specMap_asOver_comp_specMap_asOver,
+      specMap_asOver_comp_specMap_asOver,
+      show (fstHom K A A).comp (inlAlgHom K A A) = AlgHom.id K A from by ext; simp,
+      show (fstHom K A A).comp (DualNumber.mapAlgebraMap A) =
+        (Algebra.ofId K A).comp (fstHom K K K) from by ext; simp,
+      ← specMap_asOver_comp_specMap_asOver, Category.assoc, hv, MonObj.comp_one, mul_one]
+    convert Category.id_comp j
+    apply Over.OverMorphism.ext
+    change Spec.map (CommRingCat.ofHom (RingHom.id A)) = 𝟙 _
+    exact Spec.map_id _
+  -- every point of `Spec A[ε]` comes from `Spec A`, as `ε` is nilpotent
+  have hsurj : Function.Surjective (Spec.map (CommRingCat.ofHom (fstHom K A A).toRingHom)) := by
+    intro (P : PrimeSpectrum (DualNumber A))
+    refine ⟨PrimeSpectrum.comap (inlAlgHom K A A).toRingHom P, PrimeSpectrum.ext (Ideal.ext
+      fun x ↦ ?_)⟩
+    change DualNumber A at x
+    have hn : (inr x.snd : DualNumber A) ∈ P.asIdeal :=
+      (P.isPrime.mem_or_mem (by
+        rw [DualNumber.mul_self_eq_zero_of_fst_eq_zero (fst_inr _ _)]
+        exact zero_mem _)).elim id id
+    have hx : inl x.fst = x - inr x.snd := by
+      rw [eq_sub_iff_add_eq]
+      exact inl_fst_add_inr_snd_eq x
+    change inl x.fst ∈ P.asIdeal ↔ x ∈ P.asIdeal
+    rw [hx]
+    exact ⟨fun h ↦ by simpa using add_mem h hn, fun h ↦ sub_mem h hn⟩
+  have hrange : Set.range Φ.left ⊆ Set.range j.left := by
+    rintro _ ⟨y, rfl⟩
+    obtain ⟨z, rfl⟩ := hsurj y
+    exact ⟨z, (congrArg (fun φ : (Spec (.of A)).asOver (Spec (.of K)) ⟶ G ↦ φ.left z)
+      hi).symm⟩
+  let ψ : Spec (.of (DualNumber A)) ⟶ Spec (.of A) := IsOpenImmersion.lift j.left Φ.left hrange
+  have hψ : ψ ≫ j.left = Φ.left := IsOpenImmersion.lift_fac _ _ _
+  let ψ' := Spec.preimage ψ
+  have hψ' : Spec.map ψ' = ψ := Spec.map_preimage ψ
+  have h1 : ψ' ≫ CommRingCat.ofHom (fstHom K A A).toRingHom = 𝟙 _ := by
+    apply Spec.map_injective
+    rw [Spec.map_comp, hψ', Spec.map_id, ← cancel_mono j.left, Category.assoc, hψ,
+      Category.id_comp]
+    exact congrArg Over.Hom.left hi
+  have hj : j.left ≫ G.hom = Spec.map (CommRingCat.ofHom (algebraMap K A)) := by
+    rw [Over.w j]
+    simp [specOverSpec_over]
+  have h3 : CommRingCat.ofHom (algebraMap K A) ≫ ψ' =
+      CommRingCat.ofHom (algebraMap K (DualNumber A)) := by
+    apply Spec.map_injective
+    rw [Spec.map_comp, hψ', ← hj, ← Category.assoc, hψ, Over.w Φ]
+    simp [specOverSpec_over]
+  let ψA : A →ₐ[K] DualNumber A :=
+    { ψ'.hom with commutes' r := congr(($h3).hom r) }
+  refine ⟨ψA, AlgHom.ext fun a ↦ congr(($h1).hom a), ?_⟩
+  apply Over.OverMorphism.ext
+  change Spec.map ψ' ≫ j.left = Φ.left
+  rw [hψ', hψ]
 end InvariantDerivation
 
 variable {K : Type u} [Field K] [CharZero K] {G : Scheme} (f : G ⟶ Spec (.of K))
