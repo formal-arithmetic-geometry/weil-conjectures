@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-pc-smooth-flat",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Smooth morphisms are flat",
@@ -16,26 +16,70 @@
   "def-pc-morphism-conventions",
   "def-weil-scheme-morphism-properties"
  ],
- "proof": [
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-f-open/lem-pc-smooth-flat.md",
+  "place": "node statement"
+ },
+ "mathlib_searches": [
   {
-   "text": "By [lem-pc-smooth-characterization] a smooth morphism is flat and\nlocally of finite presentation (its fibres are also smooth, but we do\nnot need this here).",
-   "uses": [
-    "lem-pc-smooth-characterization"
-   ],
-   "elementary": false
+   "tool": "leanfinder",
+   "query": "a smooth morphism of schemes is flat and locally of finite presentation",
+   "results": "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth (Mathlib/AlgebraicGeometry/Morphisms/Smooth); related Smooth declarations",
+   "date": "2026-10-11",
+   "verdict": "match: smooth morphisms are locally of finite presentation; Flat instance found by grep"
+  },
+  {
+   "tool": "loogle",
+   "query": "Smooth, Flat, LocallyOfFinitePresentation",
+   "results": "0 hits: unknown identifier Smooth",
+   "date": "2026-10-11",
+   "verdict": "no match (query service rejected identifier)"
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*Smooth.*Flat|Smooth.*LocallyOfFinitePresentation [Mathlib/AlgebraicGeometry/Morphisms]",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:113 instance (priority := low) [Smooth f] : Flat f; line 241 instance (priority := 100) [hf : Smooth f] : LocallyOfFinitePresentation f",
+   "date": "2026-10-11",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth morphism flat locally of finite presentation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat f instance from Smooth f and LocallyOfFinitePresentation f instance from Smooth f",
+   "results": "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; Algebra.Smooth.flat; Algebra.Smooth.finitePresentation",
+   "date": "2026-10-11",
+   "verdict": "match/generalization: scheme instances are induced by affine smooth ring-map facts"
+  },
+  {
+   "tool": "loogle",
+   "query": "[Smooth f] |- Flat f",
+   "results": "0 hits: unknown identifier Smooth",
+   "date": "2026-10-11",
+   "verdict": "no match (query service rejected identifier)"
+  },
+  {
+   "tool": "grep",
+   "query": "instFlatOfSmooth|instLocallyOfFinitePresentationOfSmooth [Mathlib/AlgebraicGeometry/Morphisms]",
+   "results": "0 literal name hits; source instances are at Smooth.lean:113 and Smooth.lean:241",
+   "date": "2026-10-11",
+   "verdict": "match by source declarations"
   }
  ],
- "proof_deps": [
-  "lem-pc-smooth-characterization"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-lem-picard-f-open/lem-pc-smooth-flat.md",
-  "place": "## Proof"
+ "mathlib_match": {
+  "declaration": "the anonymous instance at Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:113; the anonymous instance at Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:241",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+  "how": "exact conjunction: the instance clause at lines 113-114 has hypothesis [Smooth f] and field Flat f; the instance clause at lines 241-245 has hypothesis [Smooth f] and concludes LocallyOfFinitePresentation f"
  },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +107,20 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-lem-picard-f-open"
+ "unit": "sk-lem-picard-f-open",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-smooth-flat",
+  "worker": "stage1",
+  "summary": "The item is a Mathlib leaf. Mathlib's Smooth morphism API provides Flat and LocallyOfFinitePresentation instances, exactly the two asserted clauses.",
+  "blueprint": "The item statement itself; no proof steps remain after the Mathlib match."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-smf1807",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-smf1807 (reviewer sub-agent of L); spot-checked: B8 leaf: sed of Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean lines 113-114 ([Smooth f] : Flat f) and 241-245 ([Smooth f] : LocallyOfFinitePresentation f); one declaration per clause, exact match; no split, no new nodes; second reading by H1 correct, no missed fault"
+ }
 }
