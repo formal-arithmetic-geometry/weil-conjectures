@@ -151,14 +151,18 @@ For `T` over `Y` consider the base change `π : T ×_Y X ⟶ T` of `p` and the t
 If every such `π` is an epimorphism along which the points of `V₀` descend (a point of `V₀` over
 `T ×_Y X` whose two pullbacks along `pr₁`, `pr₂` agree comes from `T`), and `F` satisfies the
 sheaf condition for the covering `π`, then `V₀` represents `F`. -/
-theorem nonempty_representableBy_of_descent
+theorem exists_representableBy_of_descent
     (hepi : ∀ T : Over Y, Epi (pullback.fst T.hom p))
     (hV₀ : ∀ (T : Over Y) (a : pullback T.hom p ⟶ V₀.left),
       pullback.fst (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a =
         pullback.snd (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a →
       ∃ b : T.left ⟶ V₀.left, pullback.fst T.hom p ≫ b = a)
     (hF : ∀ T : Over Y, Presieve.IsSheafFor F (.singleton (descentCoverπ p T))) :
-    Nonempty (F.RepresentableBy V₀) := by
+    ∃ e : F.RepresentableBy V₀, ∀ (T : Over Y) (b : T ⟶ V₀),
+      F.map (descentCoverπ p T).op (e.homEquiv b) =
+        r.homEquiv (Over.homMk (hq.lift (pullback.fst T.hom p ≫ b.left) (pullback.snd T.hom p)
+          (by rw [Category.assoc, Over.w b, pullback.condition])) (hq.lift_snd _ _ _) :
+            Over.mk (pullback.snd T.hom p) ⟶ V) := by
   have hFinj (T : Over Y) (x₁ x₂ : F.obj (op T))
       (h : F.map (descentCoverπ p T).op x₁ = F.map (descentCoverπ p T).op x₂) : x₁ = x₂ :=
     (Presieve.isSheafFor_singleton.1 (hF T) _ fun p₁ p₂ hp ↦ by
@@ -226,7 +230,7 @@ theorem nonempty_representableBy_of_descent
                               invFun x := Φ T x
                               left_inv b := ?_
                               right_inv x := ?_ }
-            homEquiv_comp {T' T} c b := ?_ }⟩
+            homEquiv_comp {T' T} c b := ?_ }, fun T b ↦ (hFglue T _ (hdesc T b)).choose_spec⟩
   · have := hepi T
     have h₁ := (hFglue T _ (hdesc T b)).choose_spec
     refine Over.OverMorphism.ext ((cancel_epi (pullback.fst T.hom p)).1 ?_)
@@ -255,5 +259,18 @@ theorem nonempty_representableBy_of_descent
     refine (hlift_eq T' _ _ ?_).symm
     simp only [Over.comp_left, Category.assoc, hlift, cc, Over.homMk_left]
     rw [pullback.lift_fst_assoc, Category.assoc]
+
+include hq hinv in
+/-- **Descending a representing object**, without the compatibility of
+`CategoryTheory.Functor.RepresentableBy.exists_representableBy_of_descent`. -/
+theorem nonempty_representableBy_of_descent
+    (hepi : ∀ T : Over Y, Epi (pullback.fst T.hom p))
+    (hV₀ : ∀ (T : Over Y) (a : pullback T.hom p ⟶ V₀.left),
+      pullback.fst (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a =
+        pullback.snd (pullback.fst T.hom p) (pullback.fst T.hom p) ≫ a →
+      ∃ b : T.left ⟶ V₀.left, pullback.fst T.hom p ≫ b = a)
+    (hF : ∀ T : Over Y, Presieve.IsSheafFor F (.singleton (descentCoverπ p T))) :
+    Nonempty (F.RepresentableBy V₀) :=
+  ⟨(exists_representableBy_of_descent r q hq hinv hepi hV₀ hF).choose⟩
 
 end CategoryTheory.Functor.RepresentableBy
