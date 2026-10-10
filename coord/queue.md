@@ -1,6 +1,6 @@
 # Work queue
 
-851 items; claim with `tools/claim.py next <group> [--stage N]`.
+853 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (375)
 
@@ -63,7 +63,6 @@
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-galois-pi1-finite-etale-image-stabilizer` | 3006 | none |
 | `lem-sc-artin-schreier-dimension` | 3006 | none |
-| `lem-sc-cohomological-dimension` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
 | `def-sc-divisor` | 3007 | none |
@@ -72,17 +71,16 @@
 | `lem-galois-descent` | 3007 | none |
 | `lem-galois-object-exists` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
+| `lem-sc-affine-curve-h2-vanishing` | 3007 | rests_on_sorry |
 | `lem-sc-ample-complement-affine` | 3007 | sorry_here |
 | `lem-sc-divisor-class-curve` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
 | `lem-sc-etale-qcoherent-descent` | 3007 | none |
-| `lem-sc-function-field-cd-one` | 3007 | none |
 | `lem-sc-ga-cohomology` | 3007 | none |
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
 | `lem-sc-local-ring-artin-schreier-kernel` | 3007 | none |
 | `lem-sc-pic-proper-decomposition` | 3007 | none |
 | `lem-sc-positive-degree-ample` | 3007 | rests_on_sorry |
-| `lem-sc-zero-generic-acyclic` | 3007 | rests_on_sorry |
 | `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 3007 | none |
 | `thm-av-final` | 3007 | rests_on_sorry |
 | `thm-sc-jacobian-representability` | 3007 | rests_on_sorry |
@@ -94,9 +92,9 @@
 | `lem-pc-curves-are-sc` | 3008 | none |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
 | `lem-sc-etale-qcoherent-presheaf-functorial` | 3008 | none |
-| `lem-sc-group-cd-one` | 3008 | none |
 | `lem-sc-line-bundle-rational-section` | 3008 | rests_on_sorry |
 | `lem-sc-sylow-module-filtration` | 3008 | none |
+| `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
 | `thm-sc-theorem-of-the-base` | 3008 | rests_on_sorry |
 | `def-exc-continuous-cohomology` | 3009 | none |
 | `def-pc-curve` | 3009 | none |
@@ -119,6 +117,7 @@
 | `lem-pc-very-ample-ample` | 3010 | sorry_here |
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
 | `lem-sc-canonical-degree` | 3010 | rests_on_sorry |
+| `lem-sc-function-field-cd-one` | 3010 | none |
 | `lem-sc-generic-kummer-residues` | 3010 | none |
 | `lem-sc-negative-degree-no-sections` | 3010 | rests_on_sorry |
 | `thm-sc-serre-duality-curve` | 3010 | rests_on_sorry |
@@ -127,6 +126,7 @@
 | `lem-pc-genus-well-defined` | 3011 | none |
 | `lem-pc-very-ample-descends` | 3011 | sorry_here |
 | `lem-sc-finite-duality` | 3011 | rests_on_sorry |
+| `lem-sc-group-cd-one` | 3011 | none |
 | `thm-sc-p1-duality` | 3011 | sorry_here |
 | `lem-sc-ext-locally-free` | 3012 | sorry_here |
 | `lem-sc-p1-graded-resolution` | 3012 | sorry_here |
@@ -382,7 +382,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (476)
+## Stage 2: nodes to state (478)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -430,8 +430,10 @@
 | `lem-pc-linear-pair-graded-finite` | 1 | state |
 | `lem-pc-linear-pair-morphism-finite` | 1 | state |
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
+| `lem-sc-affine-open-finite-complement` | 1 | state |
 | `lem-sc-dim0-finite` | 1 | state |
 | `lem-sc-divisible-quotient-torsion` | 1 | state |
+| `lem-sc-etale-affine-over-curve` | 1 | state |
 | `lem-sc-ext-torsor` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
@@ -863,7 +865,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 393 nodes that wait for stage 1, 877 nodes that wait for a statement dependency.
+Not open yet: 393 nodes that wait for stage 1, 884 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
