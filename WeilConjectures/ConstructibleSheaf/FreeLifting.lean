@@ -603,7 +603,7 @@ lemma exists_detecting_freeYoneda_of_iso_constantSheaf {Y : Scheme.{u}}
   simpa [c] using this
 
 lemma freeYonedaEtaleHomEquiv_zero {Y Z : Scheme.{u}} (e : Y ⟶ Z) (he : Etale e) (V : Y.Etale)
-    {G F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)} :
+    {F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)} :
     freeYonedaEtaleHomEquiv e he V F
       (0 : Sheaf.freeYoneda Z.smallEtaleTopology ((MorphismProperty.Over.map ⊤ he).obj V)
         (ModuleCat.of Λ Λ) ⟶ F) = 0 := by
@@ -651,14 +651,14 @@ lemma exists_detecting_freeYoneda_of_isConstant {Z A : Scheme.{u}} (e : A ⟶ Z)
   refine ⟨n, fun k ↦ (freeYonedaEtaleHomEquiv e he _ G).symm (σ k), fun F f hf ↦ hσ _ fun k ↦ ?_⟩
   have := congrArg (freeYonedaEtaleHomEquiv e he _ F) (hf k)
   rwa [freeYonedaEtaleHomEquiv_comp, Equiv.apply_symm_apply,
-    freeYonedaEtaleHomEquiv_zero e he _ (G := G)] at this
+    freeYonedaEtaleHomEquiv_zero e he _] at this
 
 /-- A finite locally constant restriction to a quasi-compact open `U` is trivialised by finitely
 many étale maps from nonempty affine schemes whose images cover `U`. -/
 lemma exists_etale_isConstant_cover {Z : Scheme.{u}} (U : Z.Opens)
     (hU : IsCompact (U : Set Z)) (G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj G)] :
-    ∃ (n : ℕ) (A : Fin n → Scheme.{u}) (e : ∀ l, A l ⟶ Z) (he : ∀ l, Etale (e l)),
+    ∃ (n : ℕ) (A : Fin n → Scheme.{u}) (e : ∀ l, A l ⟶ Z) (_ : ∀ l, Etale (e l)),
       (∀ l, IsAffine (A l) ∧ Nonempty (A l)) ∧
       (∀ l, ((Etale.upperStar (ModuleCat.{u + 1} Λ) (e l)).obj G).IsConstant
         (A l).smallEtaleTopology ∧
@@ -714,7 +714,8 @@ lemma epi_upperStarLowerStarAdjunction_unit_app {Z Z' : Scheme.{u}} (i : Z' ⟶ 
   let adj := Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i
   let U : Z.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
   have hij : Set.range i = (Set.range U.ι)ᶜ := by simp [U]
-  refine Preadditive.epi_of_isZero_cokernel _ (Etale.isZero_of_isZero_upperStar (j := U.ι) i hij ?_ ?_)
+  refine Preadditive.epi_of_isZero_cokernel _
+    (Etale.isZero_of_isZero_upperStar (j := U.ι) i hij ?_ ?_)
   · refine IsZero.of_iso ?_ (PreservesCokernel.iso (Etale.upperStar _ U.ι) (adj.unit.app G))
     refine IsZero.of_epi (cokernel.π _) ?_
     exact Etale.isZero_upperStar_lowerStar_of_disjoint_range _ U.ι i
