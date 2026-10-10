@@ -68,15 +68,42 @@ theorem exists_iso_Q_obj_of_homologyMap {P M : CochainComplex C ℤ} (α : P ⟶
       · exact h₂
       · have := h₁ i hi
         infer_instance)
+  have := hC
   let C' := (mappingCone α).truncLE (k - 1)
   let ι : C' ⟶ mappingCone α := (mappingCone α).ιTruncLE (k - 1)
   let β : C' ⟶ P⟦(1 : ℤ)⟧ := ι ≫ (mappingCone.triangle α).mor₃
   let j : P ⟶ mappingCocone β := ((mappingCocone.inr β).leftUnshift 0 (by lia)).homOf
-  have hj (i : ℤ) : j.f i = (mappingCocone.inr β).1.v (i + -1 + 0) i (by lia) := by
-    sorry
+  have hj (i : ℤ) : j.f i = ((1 : ℤ) * 1 + ((1 : ℤ) * (1 - 1)) / 2).negOnePow •
+      ((P.shiftFunctorObjXIso 1 (i - 1) i (by lia)).inv ≫
+        (mappingCocone.inr β).1.v (i - 1) i (by lia)) :=
+    Cochain.leftUnshift_v _ 0 (by lia) i i (add_zero i) (i - 1) (by lia)
+  have hunit {X Y : C} (u : ℤˣ) (f : X ⟶ Y) : u • f = (u • 𝟙 X) ≫ f := by simp
+  have hunitIso {X : C} (u : ℤˣ) : IsIso (u • 𝟙 X) :=
+    ⟨⟨u⁻¹ • 𝟙 X, by simp [smul_smul], by simp [smul_smul]⟩⟩
+  have hmono (i : ℤ) : Mono ((mappingCocone.inr β).1.v (i - 1) i (by lia)) :=
+    mono_of_mono_fac (mappingCocone.inr_v_snd_v β (i - 1) i (by lia))
   refine ⟨mappingCocone β, j, fun i ↦ ?_, fun i hi ↦ ?_, ?_⟩
-  · sorry
-  · sorry
-  · sorry
+  · rw [hj, hunit]
+    infer_instance
+  · rw [hj, hunit]
+    have hC' : IsZero (C'.X i) := C'.isZero_of_isStrictlyLE (k - 1) i (by lia)
+    have : IsIso ((mappingCocone.inr β).1.v (i - 1) i (by lia)) := by
+      refine ⟨⟨(mappingCocone.snd β).v i (i - 1) (by lia),
+        mappingCocone.inr_v_snd_v β (i - 1) i (by lia), ?_⟩⟩
+      have h := mappingCocone.id_X β i (i - 1) (by lia)
+      rwa [hC'.eq_of_tgt ((mappingCocone.fst β).f i) 0, zero_comp, zero_add] at h
+    infer_instance
+  · have hT₁ := rot_of_distTriang _ (mappingCocone_triangle_distinguished β)
+    have hT₂ := rot_of_distTriang _ (rot_of_distTriang _ (mappingCone_triangle_distinguished α))
+    have : IsIso (Q.map ι) := (isIso_Q_map_iff_quasiIso (C := C) ι).2 inferInstance
+    let e₁ : Q.obj C' ≅ Q.obj (mappingCone α) := asIso (Q.map ι)
+    obtain ⟨e, -, -⟩ := Pretriangulated.exists_iso_of_arrow_iso _ _ hT₁ hT₂
+      (Arrow.isoMk e₁ ((Q.commShiftIso (1 : ℤ)).app P) (by
+        simp [e₁, β, Functor.mapTriangle, mappingCocone.triangle, Triangle.rotate]
+        exact (Q.map_comp_assoc _ _ _).symm))
+    let e' : (Q.obj (mappingCocone β))⟦(1 : ℤ)⟧ ≅ (Q.obj M)⟦(1 : ℤ)⟧ := Triangle.π₃.mapIso e
+    exact ⟨(shiftFunctorCompIsoId (DerivedCategory C) (1 : ℤ) (-1) (by simp)).symm.app _ ≪≫
+      (CategoryTheory.shiftFunctor (DerivedCategory C) (-1 : ℤ)).mapIso e' ≪≫
+      (shiftFunctorCompIsoId (DerivedCategory C) (1 : ℤ) (-1) (by simp)).app _⟩
 
 end CochainComplex

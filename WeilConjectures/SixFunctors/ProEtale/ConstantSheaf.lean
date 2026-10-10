@@ -9,7 +9,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
-public import WeilConjectures.SixFunctors.ProEtale.LocalSections
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LocalCocycle
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
 
 /-!

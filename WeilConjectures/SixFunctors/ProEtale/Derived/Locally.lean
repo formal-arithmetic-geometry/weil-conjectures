@@ -38,6 +38,8 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
 
 /-- A property `P` of objects of the derived categories of pro-étale sheaves holds *locally* at
 `K ∈ D(X_proét)` if there is a pro-étale covering family `g i : W i ⟶ X`, indexed by a
