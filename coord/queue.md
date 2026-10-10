@@ -1,8 +1,8 @@
 # Work queue
 
-856 items; claim with `tools/claim.py next <group> [--stage N]`.
+861 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (355)
+## Stage 1: nodes to split (356)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -20,18 +20,17 @@
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
-| `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
+| `lem-weil-pbc-dim-one-submodule-quotient-finite-length` | 1019 | none |
 | `lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary` | 1019 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 2003 | none |
 | `lemma-weil-pbc-proper-underived-exchange` | 2003 | sorry_here |
-| `lem-sc-pic-proper-ntorsion` | 2006 | none |
 | `lemma-weil-pbc-finite-refinement-etale-cover` | 2006 | sorry_here |
+| `lem-sc-proper-dim-one-projective` | 2007 | none |
 | `lem-weil-pbc-finite-over-henselian-local-product` | 2008 | none |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 2008 | none |
 | `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 2008 | none |
-| `def-weil-pbc-inverse-image` | 3002 | none |
 | `def-weil-pbc-etale-cohomology` | 3003 | none |
 | `def-weil-pbc-strict-henselization-limit` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
@@ -45,6 +44,7 @@
 | `lem-galois-inverse-image-representable` | 3006 | none |
 | `lem-sc-flat-base-change-coherent` | 3006 | sorry_here |
 | `lem-weil-pbc-hypercover-free-resolution` | 3006 | none |
+| `def-pc-curve` | 3007 | none |
 | `lem-galois-finite-etale-connected-object` | 3007 | none |
 | `lem-galois-transitive` | 3007 | none |
 | `lem-sc-etale-affine-qcoherent` | 3007 | none |
@@ -52,17 +52,17 @@
 | `lem-sc-etale-zariski-qcoh-comparison` | 3007 | none |
 | `lem-sc-ga-cohomology` | 3007 | none |
 | `lem-sc-generic-cohomology-comparison` | 3007 | rests_on_sorry |
-| `lem-sc-local-ring-artin-schreier-kernel` | 3007 | none |
 | `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `lem-weil-pbc-simplicial-set-add-simplices` | 3007 | none |
+| `def-pc-dimension` | 3008 | none |
 | `def-pc-divisor-line-bundle` | 3008 | none |
+| `def-pc-projective-morphism` | 3008 | none |
 | `def-sc-picard-functor` | 3008 | none |
 | `lem-exc-field-discrete-modules` | 3008 | none |
+| `lem-pc-closed-imm-base-change` | 3008 | sorry_here |
+| `lem-pc-h0-geom-connected` | 3008 | none |
+| `lem-pc-h0-proper-variety` | 3008 | none |
 | `lem-sc-degree-2g1-very-ample` | 3008 | rests_on_sorry |
-| `lem-sc-divisor-finite-support` | 3008 | none |
-| `lem-sc-etale-qcoherent-presheaf-functorial` | 3008 | none |
-| `lem-sc-line-bundle-rational-section` | 3008 | rests_on_sorry |
-| `lem-sc-picg-geometrically-integral` | 3008 | sorry_here |
 | `lem-sc-smooth-connected-curve-local-rings` | 3008 | none |
 | `lem-sc-sylow-module-filtration` | 3008 | none |
 | `lem-sc-zero-generic-acyclic` | 3008 | rests_on_sorry |
@@ -73,26 +73,26 @@
 | `lem-weil-pbc-simplicial-set-glue-simplex` | 3008 | none |
 | `thm-sc-theorem-of-the-base` | 3008 | rests_on_sorry |
 | `def-exc-continuous-cohomology` | 3009 | none |
-| `def-pc-curve` | 3009 | none |
-| `def-pc-dimension` | 3009 | none |
-| `def-pc-projective-morphism` | 3009 | none |
 | `def-sc-rational-functions` | 3009 | none |
+| `def-sc-rational-section-divisor` | 3009 | none |
 | `lem-galois-fpqc-descend-unramified` | 3009 | none |
 | `lem-galois-fpqc-descending-types-morphisms` | 3009 | none |
 | `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
 | `lem-pc-chi-zero-dim-support` | 3009 | none |
-| `lem-pc-closed-imm-base-change` | 3009 | sorry_here |
 | `lem-pc-dimension-affine-open-cover` | 3009 | none |
 | `lem-pc-euler-characteristic-well-defined` | 3009 | none |
-| `lem-pc-h0-geom-connected` | 3009 | none |
-| `lem-pc-h0-proper-variety` | 3009 | none |
+| `lem-pc-finite-extension-alg-closed` | 3009 | none |
 | `lem-pc-scheme-dimension-local-rings` | 3009 | none |
+| `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
+| `lem-sc-hilb-to-pic-morphism` | 3009 | none |
+| `lem-sc-hilb-to-pic-surjective` | 3009 | none |
+| `lem-sc-invertible-module-generic-stalk` | 3009 | none |
 | `lem-sc-rational-functions-generic-stalks` | 3009 | none |
+| `lem-sc-rational-section-order` | 3009 | none |
 | `lem-sc-riemann-roch` | 3009 | rests_on_sorry |
 | `lem-sc-riemann-roch-large-degree` | 3009 | rests_on_sorry |
 | `lem-sc-second-kummer-divisors` | 3009 | none |
 | `lem-pc-ample-positive-degree` | 3010 | rests_on_sorry |
-| `lem-pc-finite-extension-alg-closed` | 3010 | none |
 | `lem-pc-very-ample-ample` | 3010 | sorry_here |
 | `lem-sc-brauer-zero-all-curves` | 3010 | sorry_here |
 | `lem-sc-canonical-degree` | 3010 | rests_on_sorry |
@@ -118,7 +118,9 @@
 | `lem-sc-normalization-properties` | 4005 | none |
 | `lem-sc-affine-open-proper` | 4006 | sorry_here |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
+| `prop-pc-xk-integral` | 4007 | rests_on_sorry |
 | `lem-pc-degree-agrees-sc` | 4008 | rests_on_sorry |
+| `lem-pc-flat-field` | 4008 | none |
 | `lem-pc-rational-hyp` | 4008 | rests_on_sorry |
 | `lem-pc-zero-scheme-properties` | 4008 | rests_on_sorry |
 | `lem-sc-isogeny-surjective` | 4008 | rests_on_sorry |
@@ -126,11 +128,9 @@
 | `lem-sc-mult-n-finite-flat` | 4008 | rests_on_sorry |
 | `lem-sc-ntorsion-etale` | 4008 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
-| `prop-pc-xk-integral` | 4008 | rests_on_sorry |
 | `prop-pd-picard-degree-decomposition` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-f-open-subfunctor` | 4009 | rests_on_sorry |
-| `lem-pc-flat-field` | 4009 | none |
 | `lem-pc-structure-pushforward` | 4009 | sorry_here |
 | `lem-pc-twist` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
@@ -138,6 +138,7 @@
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
 | `lem-sc-isogeny-facts` | 4009 | rests_on_sorry |
 | `thm-pc-f-representable` | 4009 | rests_on_sorry |
+| `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
 | `def-pc-f-subfunctor` | 4010 | rests_on_sorry |
 | `lem-pc-closed-subscheme-base-change-ideal-image` | 4010 | none |
 | `lem-pc-projection-formula` | 4010 | sorry_here |
@@ -145,7 +146,6 @@
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-pc-zero-scheme-recd` | 4010 | rests_on_sorry |
 | `lem-sc-finite-nonempty-point` | 4010 | none |
-| `thm-pc-hilb-curves` | 4010 | rests_on_sorry |
 | `lem-pc-degree-zero-properties` | 4011 | none |
 | `lem-pc-smooth-characterization` | 4011 | none |
 | `def-weil-pbc-etale-sheaves` | 5002 | none |
@@ -338,6 +338,7 @@
 | `lem-weil-pbc-lisse-generic-kernel` | - | none |
 | `lem-weil-separably-closed-geometrically-connected` | - | none |
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
+| `sbc-lem-smooth-geometrically-reduced` | - | none |
 | `def-pc-derived-category` | - | none |
 | `lem-kun-fibre-product-limits` | - | none |
 | `lem-pc-curve-coherent-finiteness` | - | rests_on_sorry |
@@ -362,7 +363,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (501)
+## Stage 2: nodes to state (505)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -420,11 +421,14 @@
 | `lem-sc-affine-open-finite-complement` | 1 | state |
 | `lem-sc-dim0-finite` | 1 | state |
 | `lem-sc-divisible-quotient-torsion` | 1 | state |
+| `lem-sc-divisor-finite-support` | 1 | state |
 | `lem-sc-etale-affine-over-curve` | 1 | state |
 | `lem-sc-ext-torsor` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
+| `lem-sc-local-ring-artin-schreier-kernel` | 1 | state |
 | `lem-sc-normal-dim1-dvr` | 1 | state |
 | `lem-sc-pic-proper-decomposition` | 1 | state |
+| `lem-sc-pic-proper-ntorsion` | 1 | state |
 | `lem-sc-point-z-cohomology` | 1 | state |
 | `lem-sc-principal-ideal-dvr` | 1 | state |
 | `lem-sc-regular-connected-integral` | 1 | state |
@@ -495,6 +499,7 @@
 | `lem-weil-pbc-derivation-extends-finite-type-extension` | 1 | state |
 | `lem-weil-pbc-derivation-nonzero-on-non-pth-power` | 1 | state |
 | `lem-weil-pbc-differential-zero-iff-pth-power` | 1 | state |
+| `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-directed-union-subrings-flat-module` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
@@ -868,7 +873,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 375 nodes that wait for stage 1, 934 nodes that wait for a statement dependency.
+Not open yet: 376 nodes that wait for stage 1, 938 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
