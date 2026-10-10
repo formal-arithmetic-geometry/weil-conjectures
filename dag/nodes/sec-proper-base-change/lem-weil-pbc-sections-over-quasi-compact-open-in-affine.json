@@ -34,9 +34,120 @@
   "lem-weil-pbc-spec-module-tilde-sections",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Step 1 (the cover).* Write $I=(f_1,\\dots,f_t)$ ($t\\ge0$). For $\\mathfrak p\\in X$ [def-weil-affine-spectrum] one has $I\\not\\subseteq\\mathfrak p$ iff $f\\notin\\mathfrak p$ for some $f\\in I$ iff $f_i\\notin\\mathfrak p$ for some $i$ (if all $f_i\\in\\mathfrak p$ then $I\\subseteq\\mathfrak p$). Hence $D=\\bigcup_{f\\in I}D(f)=\\bigcup_{i=1}^tD(f_i)$, and $D(f)\\cap D(g)=D(fg)$ since $\\mathfrak p$ is prime. (For $t=0$, $I=0$ and $D=\\emptyset$.)",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, proof, second paragraph: 'Say $I=(f_1,\\ldots,f_t)$. Then $\\Spec(A)\\setminus V(I)=\\bigcup D(f_i)$'"
+   }
+  },
+  {
+   "text": "*Step 2 (sections over $D$ as compatible families; the source's exact sequence $0\\to\\Gamma(D,\\widetilde M)\\to\\bigoplus_iM_{f_i}\\to\\bigoplus_{i,j}M_{f_if_j}$).* By [lem-weil-pbc-spec-module-tilde-sections], $\\widetilde M(D(f))=M_f$ [def-weil-pbc-module-localization-away] via $x/f^k\\leftrightarrow f^{-k}\\tau_{D(f)}(x)$, and the restriction $\\widetilde M(D(f))\\to\\widetilde M(D(fg))$ is the canonical map $M_f\\to M_{fg}$, $x/f^e\\mapsto g^ex/(fg)^e$. $\\widetilde M$ is a sheaf [def-weil-sheaf-of-modules-category]; applied to the open covers $D=\\bigcup_{f\\in S}D(f)$ for $S=I$ or $S=\\{f_1,\\dots,f_t\\}$ (Step 1, with $D(f)\\cap D(g)=D(fg)$) this gives: (a) a section $s\\in\\widetilde M(D)$ is determined by its restrictions $s|_{D(f_i)}\\in M_{f_i}$, $i=1,\\dots,t$; (b) if for every $f\\in S$ an element $s_f\\in M_f$ is given such that $s_f$ and $s_g$ have the same image in $M_{fg}$ for all $f,g\\in S$, there is exactly one $s\\in\\widetilde M(D)$ with $s|_{D(f)}=s_f$ for all $f\\in S$. Equality in $M_f$ is as in [def-weil-pbc-module-localization-away]: $x/f^a=y/f^b$ iff $f^k(f^bx-f^ay)=0$ for some $k$.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, proof, second paragraph: 'Hence $0\\to\\Gamma(\\Spec(A)\\setminus V(I),\\widetilde M)\\to\\bigoplus_iM_{f_i}\\to\\bigoplus_{i,j}M_{f_if_j}$ is exact'"
+   }
+  },
+  {
+   "text": "*Step 3 (the maps $c'_n$, $c_n$, their compatibility with the transition maps, and the two canonical maps).* Let $\\psi:I^n\\to M/M_n$ be $A$-linear. For $f\\in I$ choose $y_f\\in M$ with class $\\psi(f^n)$ (note $f^n\\in I^n$). The fraction $y_f/f^n\\in M_f$ does not depend on the choice: two choices differ by $z\\in M_n$, and $f^nz=0$ as $f^n\\in I^n$, so $z/f^n=0$. For $f,g\\in I$, the class of $g^ny_f-f^ny_g$ is $g^n\\psi(f^n)-f^n\\psi(g^n)=\\psi(g^nf^n)-\\psi(f^ng^n)=0$ ($A$-linearity), so $g^ny_f-f^ny_g\\in M_n$ and $(fg)^n\\in I^n$ kills it; hence $g^ny_f/(fg)^n=f^ny_g/(fg)^n$, i.e. $y_f/f^n$ and $y_g/g^n$ have the same image in $M_{fg}$ (Step 2). By Step 2(b) with $S=I$ there is exactly one $c'_n(\\psi)\\in\\widetilde M(D)$ with $c'_n(\\psi)|_{D(f)}=y_f/f^n$ for all $f\\in I$; by this uniqueness $c'_n$ is $A$-linear (for $\\psi+\\psi'$, $a\\psi$ choose $y_f+y'_f$, $ay_f$). For $\\varphi:I^n\\to M$ put $c_n(\\varphi)=c'_n(\\pi_n\\circ\\varphi)$, $\\pi_n:M\\to M/M_n$; with the choice $y_f=\\varphi(f^n)$ this is the unique section with restrictions $\\varphi(f^n)/f^n$, as in (1). Transition: for $f\\in I$, $(\\bar p_n\\circ\\psi)(f^{n+1})=f\\psi(f^n)$ is the class of $fy_f$ in $M/M_{n+1}$, and $fy_f/f^{n+1}=y_f/f^n$ in $M_f$; so by uniqueness $c'_{n+1}(\\bar p_n\\circ\\psi|_{I^{n+1}})=c'_n(\\psi)$; likewise $\\varphi(f^{n+1})=f\\varphi(f^n)$ gives $c_{n+1}(\\varphi|_{I^{n+1}})=c_n(\\varphi)$. Thus $(c_n)_n$ and $(c'_n)_n$ are cocones on the two systems of $A$-modules (the transition maps are $A$-linear) and induce the two canonical maps out of the colimits [def-weil-pbc-category-colimit]. This writes out the compatibility the source omits ('We omit the verification that this is compatible with the transition maps'); the source's sheaf-theoretic description via $\\widetilde{I^n}\\to\\widetilde M$ is not needed, as the statement takes the algebraic description as definition.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, proof, first and second paragraphs (transition maps; 'Consider the vector of elements $\\varphi(f_i^n)/f_i^n\\in M_{f_i}$. It is easy to see that this vector maps to zero in the second direct sum')"
+   }
+  },
+  {
+   "text": "*Step 4 (a power of $I$ inside the ideal of $k$-th powers of the generators).* For $k\\ge1$ let $J_k=(f_1^k,\\dots,f_t^k)$. Each $f_i\\in\\sqrt{J_k}$, and $\\sqrt{J_k}$ is an ideal, so $I\\subseteq\\sqrt{J_k}$; $I$ is finitely generated, so by [lem-weil-pbc-fg-ideal-radical-power] there is $N\\ge1$ with $I^N\\subseteq J_k$, and then $I^{N'}\\subseteq J_k$ for all $N'\\ge N$; so we may take $N\\ge k$. (The source takes $N=t(k-1)+1$: $I^N$ is generated by the monomials $f_1^{e_1}\\cdots f_t^{e_t}$, $\\sum e_i=N$, and in each some $e_i\\ge k$; only the existence of $N$ is used below.) In particular every $a\\in I^N$ is $\\sum_ib_if_i^k$ with $b_i\\in A$.",
+   "uses": [
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, proof, third paragraph: 'It is easy to see that this means that $\\varphi|_{I^{t(n+m-1)+1}}=0$', and fourth-to-last paragraph (the monomials of degree $t(n-1)+1$)"
+   }
+  },
+  {
+   "text": "*Step 5 (injectivity in (1)).* By [lem-weil-pbc-filtered-colimit-modules-elementwise](1) every element of $\\varinjlim_n\\operatorname{Hom}_A(I^n,M)$ is the image $\\iota_n(\\varphi)$ of some $\\varphi:I^n\\to M$. Suppose $c_n(\\varphi)=0$. Then $\\varphi(f_i^n)/f_i^n=0$ in $M_{f_i}$ for every $i$ (Step 3, $f_i\\in I$), so $f_i^{m}\\varphi(f_i^n)=0$ for some $m$, which we take $\\ge1$ and common to all $i$ (Step 2). Hence $\\varphi(f_i^{n+m})=f_i^m\\varphi(f_i^n)=0$. Take $N\\ge n+m$ with $I^N\\subseteq J_{n+m}$ (Step 4). Every $a\\in I^N$ is $\\sum_ib_if_i^{n+m}$ with $f_i^{n+m}\\in I^n$, so $\\varphi(a)=\\sum_ib_i\\varphi(f_i^{n+m})=0$: the image of $\\varphi$ in $\\operatorname{Hom}_A(I^N,M)$ under the composite transition map (restriction to $I^N$) is $0$, hence $\\iota_n(\\varphi)=0$ by [lem-weil-pbc-filtered-colimit-modules-elementwise](2). So the map of (1) is injective.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, proof, third paragraph ('Let us show that the first arrow is injective using this description')"
+   }
+  },
+  {
+   "text": "*Step 6 (injectivity in (2); the source omits it).* As in Step 5 an element of $\\varinjlim_n\\operatorname{Hom}_A(I^n,M/M_n)$ is $\\iota_n(\\psi)$ for some $\\psi:I^n\\to M/M_n$ [lem-weil-pbc-filtered-colimit-modules-elementwise](1). Suppose $c'_n(\\psi)=0$; choose $y_i\\in M$ with class $\\psi(f_i^n)$. Then $y_i/f_i^n=0$ in $M_{f_i}$, so $f_i^my_i=0$ for a common $m\\ge1$, and $\\psi(f_i^{n+m})=f_i^m\\psi(f_i^n)$ is the class of $f_i^my_i=0$. With $N\\ge n+m$, $I^N\\subseteq J_{n+m}$ (Step 4) we get $\\psi|_{I^N}=0$ as in Step 5. The composite transition map from stage $n$ to stage $N$ sends $\\psi$ to $\\bar p\\circ\\psi|_{I^N}$, $\\bar p:M/M_n\\to M/M_N$ the projection, which is therefore $0$; so $\\iota_n(\\psi)=0$ by [lem-weil-pbc-filtered-colimit-modules-elementwise](2).",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, proof, last paragraph: 'We omit the proof of injectivity' (written out here along the lines of the third paragraph)"
+   }
+  },
+  {
+   "text": "*Step 7 (surjectivity in (2)).* Let $s\\in\\widetilde M(D)$. For each $i$, $s|_{D(f_i)}=x_i/f_i^{n_i}\\in M_{f_i}$ (Step 2); since $x/f^a=f^bx/f^{a+b}$ we may use one exponent $n\\ge1$ for all $i$. The restrictions of $s|_{D(f_i)}$ and $s|_{D(f_j)}$ to $D(f_if_j)$ agree, i.e. $f_j^nx_i/(f_if_j)^n=f_i^nx_j/(f_if_j)^n$, so $(f_if_j)^m(f_j^nx_i-f_i^nx_j)=0$ for some $m$, common to all pairs (Step 2). Replacing $x_i$ by $f_i^mx_i$ and $n$ by $n+m$ (which does not change $x_i/f_i^n$) we get $f_j^nx_i=f_i^nx_j$ in $M$ for all $i,j$. Put $K_n=\\{x\\in M: f_1^nx=\\dots=f_t^nx=0\\}$ and take $N\\ge n$ with $I^N\\subseteq J_n$ (Step 4). Define $\\varphi:I^N\\to M/K_n$ by $\\varphi(\\sum_ib_if_i^n)=$ class of $\\sum_ib_ix_i$ ($b_i\\in A$). It is well defined: if $\\sum_ib_if_i^n=0$ and $z=\\sum_ib_ix_i$, then for every $j$, $f_j^nz=\\sum_ib_if_i^nx_j=0$ by the relations, so $z\\in K_n$; and it is $A$-linear. (The source defines $\\varphi$ on the monomial generators of $I^{t(n-1)+1}$, writing each monomial as $f^{E-ne_{i(E)}}\\cdot f_{i(E)}^n$, and checks relations by the same computation.) Since $J_n$ kills $K_n$ and $I^N\\subseteq J_n$, $K_n\\subseteq M_N$; let $\\psi:I^N\\to M/M_N$ be $\\varphi$ followed by the projection $M/K_n\\to M/M_N$. For each $i$, $f_i^N=f_i^{N-n}f_i^n$, so $\\psi(f_i^N)$ is the class of $f_i^{N-n}x_i$, and by Step 3 $c'_N(\\psi)|_{D(f_i)}=f_i^{N-n}x_i/f_i^N=x_i/f_i^n=s|_{D(f_i)}$. By Step 2(a), $c'_N(\\psi)=s$, so $s$ is the image of $\\iota_N(\\psi)$. With Step 6 the map of (2) is bijective.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, proof, fifth and sixth paragraphs ('Let us attempt to construct an inverse of the second map' through 'This proves the second arrow of the lemma is surjective')"
+   }
+  },
+  {
+   "text": "*Step 8 (the torsion-free case (3)).* Assume $Ix=0\\Rightarrow x=0$. Then $M_n=0$ by induction: $M_0=0$; if $I^{n+1}x=0$, then for every $a\\in I^n$, $I(ax)\\subseteq I^{n+1}x=0$, so $ax=0$; thus $x\\in M_n=0$. Hence $M/M_n=M$, the transition maps of the system in (2) are those of (1), and $c'_n(\\psi)=c_n(\\psi)$ (choose $y_f=\\psi(f^n)$ in Step 3); so the map of (1) is the map of (2) [def-weil-pbc-category-colimit], bijective by Steps 6 and 7.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Lemma 01PM, proof, fourth paragraph: 'Note that each $M_n=0$ in case we have $Ix=0\\Rightarrow x=0$'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-fg-ideal-radical-power",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Properties, Lemma 01PM (lemma-sections-over-quasi-compact-open-in-affine, line 3941), proof lines 3962-4089; the parts the source omits (compatibility with transition maps, injectivity of the second map) written out by the worker"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -68,7 +179,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -85,5 +196,12 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 01PM, with the explicit canonical maps"
+ "reviewed": "2026-10-10 L: 8 steps checked against 01PM: cover of D by basic opens, sections as compatible families, the explicit maps well defined and compatible with transitions (written out), a power of I in (f_i^k) via the radical, injectivity of both maps (the second written out), surjectivity of (2), torsion-free case",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-sections-over-quasi-compact-open-in-affine",
+  "worker": "stage1",
+  "summary": "Read Properties 01PM (properties.tex 3941) with its proof and Example 01PN (4092); tag 01PM verified in tags/tags line 2235. Statement kept (it takes the source's algebraic description of the canonical maps as definition, so the source's omitted comparison with the sheaf-theoretic map is not needed). Proof in 8 steps following the source: the cover D = U D(f_i) (1), the sheaf axiom for M~ on basic opens as the source's exact sequence (2), construction and transition-compatibility of c_n, c'_n (3, omitted in the source), a power of I inside (f_1^k,...,f_t^k) via the existing Mathlib leaf lem-weil-pbc-fg-ideal-radical-power (4; the source's pigeonhole exponent t(k-1)+1 is not needed), injectivity of (1) (5), injectivity of (2) (6, omitted in the source), surjectivity of (2) by the source's construction of phi: I^N -> M/K_n, phrased with the generators f_i^n of J_n instead of monomials (7), the torsion-free case (8). No new nodes: all cited nodes are existing Mathlib leaves (tilde sections, sheaf of modules, localization away, colimit, filtered-colimit elementwise, fg-ideal-radical-power). No slopmaster2 declaration states the item (grep by id, tag 01PM and key words); no blueprint node states it (blueprint_refs search).",
+  "blueprint": "Realizes, through lem-weil-pbc-sections-over-quasi-compact-open (01PQ), the place in blueprint.from.place: Steps 1-5 give the injectivity used in 'It is injective by Properties, Lemma 01PQ', Steps 6-7 the bijection on affine W used in 'The lemma guarantees that we have a bijection ... for any such affine open W' (01PQ proof) and hence in 'the top horizontal arrow ... is a bijection' (01YB, step 7 of the split of thm-weil-pbc-finite-etale-lifting)."
+ }
 }
