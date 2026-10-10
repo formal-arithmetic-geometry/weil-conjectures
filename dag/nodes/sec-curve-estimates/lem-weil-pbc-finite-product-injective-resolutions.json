@@ -24,9 +24,61 @@
   "def-sp-abelian",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Form the product category with objects $(A_i)_{i\\in I}$ and componentwise morphisms. The zero object, finite biproducts, kernels, and cokernels are obtained componentwise. A componentwise morphism is a monomorphism (respectively epimorphism) exactly when every component is, and the componentwise kernel (respectively cokernel) has the universal property. Thus the kernel-of-monomorphism and cokernel-of-epimorphism conditions hold componentwise; together with preadditivity, zero object, and biproducts this makes the product category abelian by [def-sp-abelian].",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "componentwise check against the definition of an abelian category (no Stacks statement for product categories)"
+   }
+  },
+  {
+   "text": "Let $J=(J_i)_i$. By Step 1, kernels in the product category are computed componentwise, so a morphism $M\\to N$ of the product category is a monomorphism exactly when every component $M_i\\to N_i$ is. Since $\\operatorname{Hom}(N,J)=\\prod_i\\operatorname{Hom}(N_i,J_i)$ and $\\operatorname{Hom}(M,J)=\\prod_i\\operatorname{Hom}(M_i,J_i)$, the restriction map $\\operatorname{Hom}(N,J)\\to\\operatorname{Hom}(M,J)$ is the product of the componentwise restriction maps. If every $J_i$ is injective, each componentwise restriction is surjective [def-sp-injective-resolutions], hence so is their product, and $J$ is injective. Conversely, suppose $J$ is injective and let $M_i\\hookrightarrow N_i$ be a monomorphism and $M_i\\to J_i$ a map in $\\mathcal A_i$. Place them in the $i$-th component with zero objects and zero maps in the other components; the result is a monomorphism and a map into $J$ in the product category, which extends along the monomorphism; its $i$-th component is the required extension $N_i\\to J_i$. Hence $J$ is injective exactly when every $J_i$ is.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "componentwise check against the definition of an injective object; cf. Lemma Tag 0137 (lemma-product-injectives) for the analogous statement inside one category"
+   }
+  },
+  {
+   "text": "For each $A_i$, choose a monomorphism $A_i\\hookrightarrow J_i$ with $J_i$ injective, using the enough-injectives hypothesis. Their componentwise product is a monomorphism in the product category, and its target is injective by the preceding componentwise characterization. Therefore the product category has enough injectives.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Injective resolutions setup preceding Lemma Tag 0137; componentwise construction supplied here"
+   }
+  },
+  {
+   "text": "Choose injective resolutions $A_i\\to J_i^\\bullet$ in the component categories. The componentwise maps give a morphism $(A_i)_i\\to (J_i^\\bullet)_i$ of cochain complexes. Every term is injective by the componentwise characterization. Kernels and images of each differential are computed componentwise, so the complex is exact in every nonzero degree precisely when each $J_i^\\bullet$ is; its degree-zero cohomology is $(A_i)_i$. Thus the componentwise complex is an injective resolution in the product category, by the definition [def-sp-injective-resolutions].",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Injective resolutions and componentwise exactness; formulation supplied by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "componentwise product-category argument from the definitions of abelian category, injective object and injective resolution"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,12 +103,35 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-derived-finite-product",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-finite-product-injective-resolutions",
+  "worker": "stage1",
+  "summary": "Split the finite-product injective-resolution assertion into componentwise abelian structure, the characterization of injectives by components, enough-injectives construction, and componentwise exactness of resolutions. No exact declaration for the item exists in the Lean source. The literature checkout does not contain the cited Stacks TeX sources, so the proof is recorded as agent-written with a WANTED source note.",
+  "blueprint": {
+   "statement": "the item's statement",
+   "steps": {
+    "1": "proof, second paragraph: identify the finite product category as abelian",
+    "2": "proof, second paragraph: injectives in the finite product category are componentwise",
+    "3": "proof, second paragraph: choose injective resolutions componentwise",
+    "4": "proof, second paragraph: the componentwise resolutions form an injective resolution"
+   }
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpi",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpi (reviewer sub-agent of L); spot-checked: Delivery = item node only (no new nodes), one commit, report with Review by K1. Statement unchanged: finite product of abelian categories with enough injectives is abelian, has enough injectives, injectives are componentwise, componentwise injective resolutions are resolutions; elementary (Hom in the product is the product of Homs, kernels/cokernels componentwise); no Stacks statement for product categories (homology.tex Tag 0137 lemma-product-injectives, line 7118, is a product inside one category); Mathlib has no Abelian/EnoughInjectives instance for Pi categories (grep of pinned Mathlib). Steps checked against def-sp-abelian (structural conditions componentwise, step 1) and def-sp-injective-resolutions (Hom-extension along monos, step 2; enough injectives, step 3; bounded-below complex of injectives with cohomology X in degree 0, step 4). Small cases: I empty (zero category), I singleton, two factors with a zero object. FIX more, RETURN less (C4): dag/nodes/sec-curve-estimates/lem-weil-pbc-finite-product-injective-resolutions.json: proof[1].text/uses: the forward direction cited lem-weil-pbc-product-injectives, which states a product inside one category and does not apply as written ((J_i) is the product of the objects e_i(J_i) whose injectivity is not given); replaced by the one-line componentwise argument from def-sp-injective-resolutions (Hom(N,J)->Hom(M,J) is the product of the componentwise restrictions, monos componentwise by step 1); proof_deps and split_report.tool_uses: lem-weil-pbc-product-injectives removed (--drop-tool-uses); proof[*].elementary set true (each step is a few lines from the two definitions); proof[0].source.place, proof[1].source.place, proof_origin.place: no longer attribute the product-category argument to Tag 0137. Start 16:52:24 UTC, end Sat Oct 10 04:52:56 PM UTC 2026 (date -u).; 1 file(s) fixed by the reviewer"
+ }
 }

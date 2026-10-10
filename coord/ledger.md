@@ -2050,3 +2050,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:49 L: merged deliver/H1/lem-sc-p1-regular-dimension-one (reviewer PASS; after a return; new nodes: 3)
 - 16:49 L: merged deliver/E1/lem-exc-etale-field-galois-classification (reviewer FIX; after a return; new nodes: 5)
 - 16:50 L: merged deliver/E1/lem-pc-field-extension-surjective (reviewer FIX; first push; new nodes: 0)
+- 16:53 L: merged deliver/K1/lem-weil-pbc-finite-product-injective-resolutions (reviewer FIX; first push; new nodes: 0)
