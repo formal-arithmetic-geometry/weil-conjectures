@@ -1,20 +1,18 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+857 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (662)
+## Stage 1: nodes to split (660)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-z-localizations-dvr` | 1010 | none |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1011 | none |
-| `lem-weil-pbc-site-coverings-common-refinement` | 1011 | none |
 | `lem-weil-pbc-site-module-sheafification-lift-injective` | 1011 | none |
 | `lem-weil-pbc-site-plus-construction-functorial` | 1011 | none |
 | `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 1011 | none |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1011 | none |
-| `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1011 | none |
 | `def-weil-pbc-ample-invertible-module` | 1012 | none |
 | `def-weil-pbc-complete-intersection-over-field` | 1012 | none |
 | `def-weil-pbc-constant-group-scheme` | 1012 | none |
@@ -669,7 +667,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (196)
+## Stage 2: nodes to state (197)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -864,13 +862,14 @@
 | `lem-weil-pbc-unramified-over-field-discrete` | 1 | state |
 | `lem-weil-pbc-zariski-pair-finite-gabber-polynomial` | 1 | state |
 | `lem-weil-pbc-zariski-pair-flat-integral-isomorphism` | 1 | state |
+| `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state |
 | `lemma-weil-pbc-finite-l-group-filtration` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 2 | state |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state |
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 674 nodes that wait for stage 1, 488 nodes that wait for a statement dependency.
+Not open yet: 672 nodes that wait for stage 1, 489 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
