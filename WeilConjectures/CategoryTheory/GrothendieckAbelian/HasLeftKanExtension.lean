@@ -93,7 +93,7 @@ variable {P : MorphismProperty Scheme.{u}} {V U : Scheme.{u}}
 /-- The type of lifts of `W : P.Over ⊤ U` through `f : V ⟶ U`: factorizations of the
 structure morphism of `W` through `f`. It indexes the colimit computing the presheaf-level
 left Kan extension along the localization functor of `h : P f`. -/
-private def LiftIndex (f : V ⟶ U) (W : P.Over ⊤ U) : Type u :=
+def LiftIndex (f : V ⟶ U) (W : P.Over ⊤ U) : Type u :=
   {α : W.left ⟶ V // α ≫ f = W.hom}
 
 namespace LiftIndex
@@ -103,23 +103,23 @@ variable [P.IsMultiplicative] [P.HasOfPostcompProperty P] {f : V ⟶ U} {W : P.O
 omit [P.IsMultiplicative] in
 /-- The lift of a `P`-scheme over `U` through `f` with `P f` satisfies `P`, by the
 cancellation property `MorphismProperty.HasOfPostcompProperty P P`. -/
-private lemma prop_val (h : P f) (α : LiftIndex f W) : P α.1 :=
+lemma prop_val (h : P f) (α : LiftIndex f W) : P α.1 :=
   MorphismProperty.of_postcomp (W := P) (W' := P) α.1 f h (by rw [α.2]; exact W.prop)
 
 /-- The `P`-scheme over `V` determined by a lift of `W : P.Over ⊤ U` through `f`. -/
-private def toOver (h : P f) (α : LiftIndex f W) : P.Over ⊤ V :=
+def toOver (h : P f) (α : LiftIndex f W) : P.Over ⊤ V :=
   MorphismProperty.Over.mk ⊤ α.1 (α.prop_val h)
 
 /-- The comparison morphism from `W` to the image of `α.toOver` in `P.Over ⊤ U`; its
 underlying morphism is the identity. -/
-private def homToComp (h : P f) (α : LiftIndex f W) :
+def homToComp (h : P f) (α : LiftIndex f W) :
     W ⟶ (MorphismProperty.Over.map ⊤ h).obj (α.toOver h) :=
   MorphismProperty.Over.homMk (𝟙 W.left) ((Category.id_comp _).trans α.2)
 
 /-- A lift of `W` through `f` identifies `W` with the image of a `P`-scheme over `V`
 under the localization functor: the comparison morphism `LiftIndex.homToComp` is the
 identity on underlying schemes. -/
-private def isoComp (h : P f) (α : LiftIndex f W) :
+def isoComp (h : P f) (α : LiftIndex f W) :
     W ≅ (MorphismProperty.Over.map ⊤ h).obj (α.toOver h) where
   hom := α.homToComp h
   inv := MorphismProperty.Over.homMk (𝟙 W.left) ((Category.id_comp _).trans α.2.symm)
@@ -133,12 +133,12 @@ private def isoComp (h : P f) (α : LiftIndex f W) :
 /-- The object of the comma category indexing the pointwise left Kan extension at `W`
 associated with a lift `α`; for a monomorphism `f` it is terminal, see
 `LiftIndex.isTerminalCostructuredArrow`. -/
-private def costructuredArrow (h : P f) (α : LiftIndex f W) :
+def costructuredArrow (h : P f) (α : LiftIndex f W) :
     CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W) :=
   CostructuredArrow.mk (α.homToComp h).op
 
 /-- The lift of `W` extracted from an object of the indexing comma category. -/
-private def ofCostructuredArrow (h : P f) (W : P.Over ⊤ U)
+def ofCostructuredArrow (h : P f) (W : P.Over ⊤ U)
     (s : CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W)) :
     LiftIndex f W :=
   ⟨s.hom.unop.left ≫ s.left.unop.hom, by
@@ -150,14 +150,14 @@ private def ofCostructuredArrow (h : P f) (W : P.Over ⊤ U)
 
 omit [P.HasOfPostcompProperty P] in
 /-- If `W` has no lift through `f`, the indexing comma category is empty. -/
-private lemma isEmpty_costructuredArrow (h : P f) (W : P.Over ⊤ U)
+lemma isEmpty_costructuredArrow (h : P f) (W : P.Over ⊤ U)
     (hempty : IsEmpty (LiftIndex f W)) :
     IsEmpty (CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W)) :=
   ⟨fun s => hempty.elim (ofCostructuredArrow h W s)⟩
 
 /-- For a monomorphism `f`, the comma object associated with a lift `α` of `W` is
 terminal: the pointwise left Kan extension formula collapses to a single value. -/
-private noncomputable def isTerminalCostructuredArrow (h : P f) [Mono f]
+noncomputable def isTerminalCostructuredArrow (h : P f) [Mono f]
     (α : LiftIndex f W) :
     IsTerminal (α.costructuredArrow h) :=
   IsTerminal.ofUniqueHom
@@ -186,7 +186,7 @@ private noncomputable def isTerminalCostructuredArrow (h : P f) [Mono f]
 omit [P.HasOfPostcompProperty P] in
 /-- The lift of `W` extracted from an object of the indexing comma category is constant along
 the morphisms of the comma category. -/
-private lemma ofCostructuredArrow_eq_of_hom (h : P f)
+lemma ofCostructuredArrow_eq_of_hom (h : P f)
     {s t : CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W)} (m : s ⟶ t) :
     ofCostructuredArrow h W s = ofCostructuredArrow h W t := by
   apply Subtype.ext
@@ -197,13 +197,13 @@ private lemma ofCostructuredArrow_eq_of_hom (h : P f)
   rw [hw, Category.assoc, MorphismProperty.Over.w m.left.unop]
 
 /-- The lift of `W` extracted from the comma object associated with a lift `α` is `α`. -/
-private lemma ofCostructuredArrow_costructuredArrow (h : P f) (α : LiftIndex f W) :
+lemma ofCostructuredArrow_costructuredArrow (h : P f) (α : LiftIndex f W) :
     ofCostructuredArrow h W (α.costructuredArrow h) = α :=
   Subtype.ext (Category.id_comp _)
 
 /-- A morphism of the indexing comma category into the comma object associated with a lift
 `α`, from an object inducing the lift `α`. -/
-private def homCostructuredArrow (h : P f) (α : LiftIndex f W)
+def homCostructuredArrow (h : P f) (α : LiftIndex f W)
     (s : CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W))
     (hs : ofCostructuredArrow h W s = α) : s ⟶ α.costructuredArrow h :=
   CostructuredArrow.homMk
@@ -217,7 +217,7 @@ private def homCostructuredArrow (h : P f) (α : LiftIndex f W)
 
 /-- There is at most one morphism of the indexing comma category into the comma object
 associated with a lift. -/
-private lemma subsingleton_hom_costructuredArrow (h : P f) (α : LiftIndex f W)
+lemma subsingleton_hom_costructuredArrow (h : P f) (α : LiftIndex f W)
     (s : CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W)) :
     Subsingleton (s ⟶ α.costructuredArrow h) := by
   refine ⟨fun m m' ↦ ?_⟩
@@ -231,13 +231,13 @@ private lemma subsingleton_hom_costructuredArrow (h : P f) (α : LiftIndex f W)
 
 /-- The functor sending a lift `α` of `W` through `f` to the associated object of the indexing
 comma category. -/
-private def discreteFunctor (h : P f) :
+def discreteFunctor (h : P f) :
     Discrete (LiftIndex f W) ⥤ CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W) :=
   Discrete.functor (costructuredArrow h)
 
 /-- The functor sending an object of the indexing comma category to the lift of `W` it
 induces. -/
-private def toDiscrete (h : P f) :
+def toDiscrete (h : P f) :
     CostructuredArrow (MorphismProperty.Over.map ⊤ h).op (op W) ⥤ Discrete (LiftIndex f W) where
   obj s := ⟨ofCostructuredArrow h W s⟩
   map m := Discrete.eqToHom (ofCostructuredArrow_eq_of_hom h m)
@@ -245,7 +245,7 @@ private def toDiscrete (h : P f) :
 /-- The indexing comma category is the disjoint union, over the lifts `α` of `W` through `f`,
 of categories with terminal object `α.costructuredArrow h`: sending an object to its lift is
 left adjoint to `LiftIndex.discreteFunctor`. -/
-private def toDiscreteAdjunction (h : P f) :
+def toDiscreteAdjunction (h : P f) :
     toDiscrete (W := W) h ⊣ discreteFunctor h :=
   Adjunction.mkOfHomEquiv
     { homEquiv s α :=
@@ -260,7 +260,7 @@ private def toDiscreteAdjunction (h : P f) :
         (subsingleton_hom_costructuredArrow h α.as s).elim _ _ }
 
 /-- The inclusion of the lifts of `W` into the indexing comma category is final. -/
-private lemma final_discreteFunctor (h : P f) : (discreteFunctor (W := W) h).Final :=
+lemma final_discreteFunctor (h : P f) : (discreteFunctor (W := W) h).Final :=
   Functor.final_of_adjunction (toDiscreteAdjunction h)
 
 end LiftIndex

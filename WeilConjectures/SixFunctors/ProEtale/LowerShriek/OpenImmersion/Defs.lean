@@ -72,11 +72,12 @@ the adjoint triple `ProEtale.localizationAdjunctionTriple` below.
 
 - `j_{f!}` is defined as the left Kan extension along `(MorphismProperty.Over.map ⊤ h).op`
   on presheaves followed by sheafification; this holds definitionally, see
-  `localizationLowerShriek_eq`. For a monomorphism `f` — in particular for an open
-  immersion — no Kan extension existence hypothesis is needed: the indexing comma
-  categories are either empty or admit a terminal object, so both the existence and the
-  left exactness of the presheaf-level left Kan extension are provided by the instances of
-  `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
+  `localizationLowerShriek_eq`. No Kan extension existence hypothesis is needed: the
+  pointwise left Kan extensions exist for an arbitrary `f` by
+  `CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize`. For a
+  monomorphism `f` — in particular for an open immersion — the indexing comma categories are
+  either empty or admit a terminal object, which makes the presheaf-level left Kan extension
+  left exact, see `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
 - `j_f^*` restricts along the localization functor, so it requires `WeaklyEtale f`, but it
   needs neither Kan extensions nor sheafification. The pullback `ProEtale.upperStar` of
   `WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs` is defined for an arbitrary
@@ -103,8 +104,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {V U : Scheme.{u}} (f : V ⟶ U) (h : WeaklyEtale f)
 
 section LowerShriek
-
-variable [Mono f]
 
 /-- The lower shriek `j_{f!}` along a weakly étale `f : V ⟶ U`: left Kan extension on
 presheaves followed by sheafification, left adjoint to
@@ -143,8 +142,6 @@ lemma ProEtale.localizationRestriction_map_hom_app
   rfl
 
 section Adjunction
-
-variable [Mono f]
 
 /-- The adjunction `j_{f!} ⊣ j_f^*`. -/
 noncomputable def ProEtale.localizationLowerShriekAdjunction :
@@ -194,8 +191,6 @@ noncomputable def ProEtale.upperStarIsoLocalizationRestriction :
   (ProEtale.upperStarLowerStarAdjunction A f).leftAdjointUniq
     (ProEtale.localizationRestrictionLowerStarAdjunction A f h)
 
-variable [Mono f]
-
 /-- The adjunction `j_{f!} ⊣ f^*` between the lower shriek and the pullback, obtained from
 `localizationLowerShriekAdjunction` by transporting along
 `upperStarIsoLocalizationRestriction`. -/
@@ -219,8 +214,6 @@ end Restriction
 /-! ### The presheaf-level lower shriek -/
 
 section Presheaf
-
-variable [Mono f]
 
 /-- The presheaf-level lower shriek `j_{f,!}^{pre}`: left Kan extension along
 `(MorphismProperty.Over.map ⊤ h).op`. -/

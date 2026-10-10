@@ -14,7 +14,9 @@ public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 For categories `C` and `D` with objects in `Type (u + 1)` and `Hom`-types in `Type u`, every
 functor `F : C ⥤ D` admits pointwise left Kan extensions of all functors `C ⥤ A` to a
 category `A` with colimits of size `u + 1`
-(`CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize`).
+(`CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize`), and dually pointwise
+right Kan extensions to a category with limits of size `u + 1`
+(`CategoryTheory.Functor.hasPointwiseRightKanExtension_of_hasLimitsOfSize`).
 This applies in particular to the opposites of functors between the small sites of a scheme.
 -/
 
@@ -37,6 +39,19 @@ instance hasPointwiseLeftKanExtension_of_hasColimitsOfSize {C D : Type (u + 1)}
   -- the indexing comma category has objects in `Type (u + 1)` and `Hom`-types in `Type u`
   have : HasColimitsOfShape (CostructuredArrow F V) A :=
     hasColimitsOfShape_of_essentiallySmall.{u + 1} _ _
+  infer_instance
+
+/-- For categories `C` and `D` with objects in `Type (u + 1)` and `Hom`-types in `Type u`,
+every functor `C ⥤ A` has a pointwise right Kan extension along every functor `F : C ⥤ D`,
+provided `A` has limits of size `u + 1`. -/
+instance hasPointwiseRightKanExtension_of_hasLimitsOfSize {C D : Type (u + 1)}
+    [Category.{u} C] [Category.{u} D] (F : C ⥤ D) {A : Type u'} [Category.{u + 1} A]
+    [HasLimitsOfSize.{u + 1, u + 1} A] (G : C ⥤ A) :
+    F.HasPointwiseRightKanExtension G := by
+  intro V
+  -- the indexing comma category has objects in `Type (u + 1)` and `Hom`-types in `Type u`
+  have : HasLimitsOfShape (StructuredArrow V F) A :=
+    hasLimitsOfShape_of_essentiallySmall.{u + 1} _ _
   infer_instance
 
 end CategoryTheory.Functor
