@@ -22,9 +22,40 @@
   "def-sc-invertible-module",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let X^0 be the set of generic points of the irreducible components of X. For eta in X^0 the stalk L_eta is free of rank one over O_{X,eta}, since L is locally isomorphic to O_X [def-sc-invertible-module]; choose a generator s_eta. By [lem-sc-meromorphic-sheaf-generic-product] with U=X, sending a global meromorphic section of L to its germs at the points of X^0 is a bijection K_X(L)(X) \\to prod_{eta in X^0} L_eta; let s be the meromorphic section of L corresponding to (s_eta)_eta.",
+   "uses": [
+    "lem-sc-meromorphic-sheaf-generic-product",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EMI, proof: pick a generator s_eta of the free rank 1 module L_eta at each generic point, using the description of K_X and K_X(L) in Tag 0EMH"
+   }
+  },
+  {
+   "text": "Let U be open in X. By [lem-sc-meromorphic-sheaf-generic-product] for U and its compatibility with multiplication, the map K_X(U) \\to K_X(L)(U), f \\mapsto fs, becomes prod_{eta in X^0 cap U} O_{X,eta} \\to prod_{eta in X^0 cap U} L_eta, (a_eta) \\mapsto (a_eta s_eta). Multiplication by a generator of a free rank-one module is injective, and a product of injective maps is injective. So K_X \\to K_X(L) is injective on every open, and s is a regular meromorphic section.",
+   "uses": [
+    "lem-sc-meromorphic-sheaf-generic-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0EMI, proof: s = prod s_eta is a regular meromorphic section"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-meromorphic-sheaf-generic-product",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0EMI (Lemma 31.25.4), with Tag 02OZ (Lemma 31.26.4) case (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,12 +87,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-hilbert-polynomial",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-ample-degree"
+ "unit": "sk-def-av-ample-degree",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-regular-meromorphic-section-exists",
+  "worker": "stage1",
+  "summary": "Corrected the source place to the current Stacks Tag 0EMI/02OZ presentation. The source proof is kept in two steps: choose generators at the finitely many generic points and check the canonical map componentwise. No Lean declaration states the item and no new node is needed.",
+  "blueprint": "Realizes the ancestor blueprint proof clause 'choose a regular meromorphic section after removing embedded points' by the two steps above.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rms2432",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rms2432 (reviewer sub-agent of L); spot-checked: Statement unchanged; keeps locally Noetherian + no embedded points (02OZ(3)/0EMI) and the injectivity definition K_X -> K_X(L). No new node in the delivery, so nothing restates lem-sc-hilbert-difference (class b). Read 0EMI, 02OZ, 0EMH against the steps. FIX more, RETURN less: dag/nodes/sec-abelian-varieties/lem-sc-regular-meromorphic-section-exists.json: step 1 cited lem-sc-rational-functions-generic-stalks, which describes the ring R(X), not the sheaf K_X, and the K_X(L) generic-stalk description was uncited (the delivery's own report admits the existing node cannot supply it); step 2 checked injectivity only on global sections (C4, C1). Repair: new statement-only node lem-sc-meromorphic-sheaf-generic-product (Stacks Tag 0EMH, unsplit, grep search recorded) giving K_X(U) and K_X(L)(U) as products over generic points in U; steps 1-2 rewritten to cite it, injectivity checked on every open U; rank-one freeness of L_eta cites def-sc-invertible-module; finiteness of generic points no longer needed; proof_deps updated. Second reading by E1 missed this fault. Start 'Sat Oct 10 08:57:24 PM UTC 2026', end 'Sat Oct 10 08:57:48 PM UTC 2026'.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
