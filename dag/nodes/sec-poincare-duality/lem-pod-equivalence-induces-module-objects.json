@@ -7,7 +7,7 @@
    "place": "step 1 of its split (source: Lemma 0DV5 (Section 59.65 'Locally constant sheaves and the fundamental group', lemma-locally-constant-on-connected), part (3) and its proof; also Milne LEC, Proposition 6.16, p. 49)",
    "via": []
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Equivalences induce equivalences of module objects; module objects in finite G-sets",
@@ -17,9 +17,32 @@
   "place": "Lemma 0DV5 (etale-cohomology, Section 59.65), proof of parts (2)-(3): 'The equivalence in (1) sends products to products and hence sends + to an addition on the corresponding finite pi_1-set. Since pi_1-modules are the same thing as pi_1-sets with a compatible abelian group structure we obtain (2). Part (3) is proved in exactly the same way.'"
  },
  "stmt_deps": [],
- "proof": [],
+ "proof": [
+  {
+   "text": "An equivalence of categories preserves all finite limits up to canonical isomorphism, hence it carries the chosen binary products and final object to products and a final object. Apply the functor to each operation map of a Lambda-module object and conjugate by these canonical isomorphisms. Applying the functor to each commutative diagram expressing a module axiom gives the corresponding diagram in the target, and the quasi-inverse transports structures back; naturality shows that maps commuting with the operations are carried precisely to maps commuting with the transported operations. Thus the induced functor on Lambda-module objects is an equivalence and its underlying functor is Phi.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0DV5 (Section 59.65 'Locally constant sheaves and the fundamental group'), proof of parts (2)-(3): the equivalence sends products to products and transports the module operations"
+   }
+  },
+  {
+   "text": "In the category of finite sets with continuous G-action, a Lambda-module object consists of a finite set A equipped with equivariant maps for addition, zero, negation and scalar multiplication satisfying the module diagrams. These maps make A a finite left Lambda-module, and equivariance says exactly that every element of G acts by a Lambda-linear automorphism. Conversely, a finite left Lambda-module with a continuous Lambda-linear G-action has all these operations equivariant, so it defines a Lambda-module object; the two constructions are inverse on objects and on equivariant linear maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0DV5 (Section 59.65 'Locally constant sheaves and the fundamental group'), proof of parts (2)-(3): pi_1-modules are pi_1-sets with a compatible module structure"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0DV5 (Section 59.65 'Locally constant sheaves and the fundamental group'), proof of parts (2)-(3)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -37,7 +60,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -57,5 +80,21 @@
   }
  },
  "chapter": "sec-poincare-duality",
- "unit": "sk-lem-finite"
+ "unit": "sk-lem-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pod-equivalence-induces-module-objects",
+  "worker": "stage1",
+  "summary": "The item had no sorry-free Lean declaration. I checked the DAG and Mathlib for existing categorical or finite-action statements, found no exact node or Mathlib match, and wrote the two source-driven steps: transport of module operations across an equivalence preserving finite products and the direct identification of module objects in finite continuous G-sets with finite modules carrying continuous linear actions.",
+  "blueprint": "step 1 of cor-galois-lisse-representations, the passage from the finite locally constant sheaf/G-set equivalence to module objects",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eim2544",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eim2544 (reviewer sub-agent of L); spot-checked: Statement fixes the structure: Lambda-module objects defined via finite products/final object (cartesian), which any equivalence preserves, so no monoidal hypothesis needed (E/C4 ok). Step 1 (transport along canonical product/terminal isos, counit naturality for essential surjectivity) and step 2 (equivariance of +,0,-,lambda iff G acts Lambda-linearly; 0 fixed automatic; continuity on discrete finite sets) are elementary, matching Stacks 0DV5 proof. Mathlib record honest: Equivalence.mapCommGrp at CommGrp_.lean:297 confirmed (commutative group objects only, needs Braided); grep 'equivalence' in Monoidal/Mod_.lean finds nothing, and Mod_ is modules over a monoid object, not a Lambda-action. No new nodes, no restatement (class b n/a). Second reading: no missed fault found. No repairs."
+ }
 }
