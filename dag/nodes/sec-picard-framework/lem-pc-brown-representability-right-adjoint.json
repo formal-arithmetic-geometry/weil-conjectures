@@ -21,9 +21,56 @@
  "stmt_deps": [
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each object d of D, define H_d:C^{op}\\to Ab by H_d(c)=Hom_D(F(c),d). Since F is exact and D is triangulated, applying Hom_D(-,d) to the image under F of every distinguished triangle gives the long exact sequence required for H_d to be cohomological.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8G, Proposition proposition-brown proof; construction of the cohomological Hom functor"
+   }
+  },
+  {
+   "text": "Because F preserves set-indexed coproducts, for every family (c_i) the canonical map H_d(\\bigoplus_i c_i)\\to\\prod_i H_d(c_i) is the usual Hom-out-of-a-coproduct isomorphism. Thus H_d sends coproducts to products.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8G, Proposition proposition-brown proof; direct-sum preservation"
+   }
+  },
+  {
+   "text": "The Brown representability statement [lem-pc-brown-cohomological-representability] applies to H_d by steps 1 and 2. Hence for every d there are an object G(d) of C and natural isomorphisms Hom_D(F(c),d)\\cong Hom_C(c,G(d)).",
+   "uses": [
+    "lem-pc-brown-cohomological-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8G, Proposition proposition-brown, using Lemma lemma-brown (Tag 0A8F)"
+   }
+  },
+  {
+   "text": "For a morphism u:d\\to d' in D, naturality of the representing isomorphisms gives a unique morphism G(u):G(d)\\to G(d') whose precomposition action corresponds to postcomposition by u on Hom_D(F(-),-). The identity and composition laws follow by the uniqueness part of representability (Yoneda), so G is a functor and the displayed isomorphisms are natural in both c and d. Therefore F is left adjoint to G, and G is the required right adjoint.",
+   "uses": [
+    "lem-pc-brown-cohomological-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8G, Proposition proposition-brown proof; representability-to-adjunction argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-brown-cohomological-representability"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8G, Proposition proposition-brown"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +95,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-pc-noetherian-derived-direct-image-right-adjoint",
   "by": "worker",
   "date": "2026-10-10"
- }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-brown-representability-right-adjoint",
+  "worker": "stage1",
+  "summary": "Split the right-adjoint criterion into the cohomological Hom construction, its coproduct-to-product property, Brown representability for such functors, and the Yoneda construction of the representing right-adjoint functor. Added one statement-only dependency for the external Brown representability theorem after searching the DAG, blueprint, Lean source, and Mathlib.",
+  "blueprint": "The steps realize the Brown representability input used in the derived direct-image right-adjoint argument of lem-pc-noetherian-derived-direct-image-right-adjoint.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-brr1751",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-brr1751 (reviewer sub-agent of L); spot-checked: Item statement vs Stacks 0A8G (right adjoint, weaker than exact right adjoint: fine); steps 1-2 elementary and correct (H_d cohomological via exactness of F; coproducts to products via F preserving sums, D having sums); step 3 hypotheses match new node; step 4 Yoneda construction of G as in Categories adjoint-exists; new node lem-pc-brown-cohomological-representability matches 0A8F (compactly generated, sums, cohomological, sums to products), not a duplicate (dag grep brown/0A8F/0A8G: only consumers and the etale application); Mathlib grep Brown in CategoryTheory/Triangulated: none. Pre-existing item stmt_deps cites def-pc-derived-category for 'triangulated categories' (not changed by this delivery) left as is."
+ },
+ "lead_note": "2026-10-10 L (R-brr1751): Item statement (pre-existing) cites def-pc-derived-category for general triangulated categories; def-weil-triangulated-category would be the right stmt_dep."
 }
