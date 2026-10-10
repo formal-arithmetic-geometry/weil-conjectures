@@ -101,13 +101,13 @@ abbrev kFlatUpperStar :
 omit [Abelian.HasFunctorialFlatResolution A] in
 /-- The pullbacks of the functorial flat resolutions of complexes of pro-étale sheaves on `Y` are
 K-flat. -/
-lemma kFlatUpperStar_quotient_obj_resolutionFunctor_obj [ProEtale.UpperStarPreservesFlat A]
+lemma kFlatUpperStar_quotient_obj_resolutionFunctor_obj [(g)^*[A].PreservesFlat]
     (Λ : LeftResolution (ObjectProperty.flat.ι : _ ⥤ Sheaf (Scheme.ProEt.topology Y) A))
     [Λ.F.PreservesZeroMorphisms]
     (K : CochainComplex (Sheaf (Scheme.ProEt.topology Y) A) ℤ) :
     kFlatUpperStar A g ((HomotopyCategory.quotient _ _).obj (Λ.resolutionFunctor.obj K)) :=
   (HomotopyCategory.kFlat_quotient_obj_iff _).2
-    (kFlat_upperStar_mapHomologicalComplex_obj g
+    ((g)^*[A].kFlat_mapHomologicalComplex_obj_of_colimitsOfShape
       (Λ.colimitOfShapeFlatResolutionFunctorObj
         ObjectProperty.flat.essImage_ι_le K).colimitsOfShape)
 
@@ -116,7 +116,7 @@ omit [Abelian.HasFunctorialFlatResolution A] in
 pullback by `g` is K-flat form a left derivability structure on `K(Y_proét)` for the
 quasi-isomorphisms. -/
 lemma isLeftDerivabilityStructure_kFlatUpperStar_of_leftResolution
-    [ProEtale.UpperStarPreservesFlat A]
+    [(g)^*[A].PreservesFlat]
     (Λ : LeftResolution (ObjectProperty.flat.ι : _ ⥤ Sheaf (Scheme.ProEt.topology Y) A)) :
     (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).IsLeftDerivabilityStructure :=
   HomotopyCategory.isLeftDerivabilityStructure_quasiIsoLocalizerMorphism _
@@ -126,7 +126,7 @@ lemma isLeftDerivabilityStructure_kFlatUpperStar_of_leftResolution
 /-- The complexes whose pullback by `g` is K-flat form a left derivability structure on
 `K(Y_proét)` for the quasi-isomorphisms. The functorial flat resolution of pro-étale sheaves on `Y`
 is given by the instance `Etale.hasFunctorialFlatResolution_sheaf`. -/
-instance isLeftDerivabilityStructure_kFlatUpperStar [ProEtale.UpperStarPreservesFlat A] :
+instance isLeftDerivabilityStructure_kFlatUpperStar [(g)^*[A].PreservesFlat] :
     (HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)).IsLeftDerivabilityStructure :=
   isLeftDerivabilityStructure_kFlatUpperStar_of_leftResolution A g
     (inferInstance : HasFunctorialFlatResolution (Sheaf (Scheme.ProEt.topology Y) A)).some
@@ -248,7 +248,7 @@ end
 from `K(Y_proét) × K(Y_proét)` to `D(Z_proét)`. It is computed on pairs `(K, M)` with `K` K-flat and
 `g^*M` K-flat. -/
 theorem isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
-    [ProEtale.UpperStarPreservesFlat A] :
+    [(g)^*[A].PreservesFlat] :
     (derivedTensorLeftDerivedUpperStar A g).IsLeftDerivedFunctor₂
       (derivedTensorLeftDerivedUpperStarCounit A g)
         (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
@@ -282,7 +282,7 @@ section
 
 open DerivedCategory Functor.OplaxMonoidal
 
-variable [ProEtale.UpperStarPreservesFlat A]
+variable [(g)^*[A].PreservesFlat]
 
 attribute [local instance] isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
   isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor

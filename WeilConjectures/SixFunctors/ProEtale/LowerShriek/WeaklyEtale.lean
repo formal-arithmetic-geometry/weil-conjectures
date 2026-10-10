@@ -89,8 +89,8 @@ noncomputable def lanRetractionCocone (F : (P.Over ⊤ V)ᵒᵖ ⥤ A) (T : P.Ov
           congrArg Subtype.val (LiftIndex.ofCostructuredArrow_eq_of_hom h m)
         dsimp
         split_ifs with h₁ h₂ h₂
-        · rw [Category.comp_id, ← F.map_comp]
-          congr 1
+        · rw [Category.comp_id]
+          refine (F.map_comp _ _).symm.trans (congrArg F.map ?_)
           apply Quiver.Hom.unop_inj
           apply MorphismProperty.Over.Hom.ext
           exact hw
@@ -112,8 +112,15 @@ lemma lanUnit_app_app_comp_desc_lanRetractionCocone (F : (P.Over ⊤ V)ᵒᵖ �
   have := ((MorphismProperty.Over.map ⊤ h).op.isPointwiseLeftKanExtensionLeftKanExtensionUnit F
     (op ((MorphismProperty.Over.map ⊤ h).obj T))).fac (lanRetractionCocone h F T)
     (CostructuredArrow.mk (𝟙 _))
-  simp [lanRetractionCocone] at this
-  simpa using this
+  refine Eq.trans ?_ (this.trans ?_)
+  · simp [Functor.LeftExtension.coconeAt, Functor.lanUnit]
+  · dsimp only [lanRetractionCocone]
+    split_ifs with hg
+    · refine (congrArg F.map ?_).trans (F.map_id _)
+      apply Quiver.Hom.unop_inj
+      apply MorphismProperty.Over.Hom.ext
+      rfl
+    · exact absurd (Category.id_comp _) hg
 
 /-- The unit `F ⟶ u^* (lan F)` of the left Kan extension along the opposite of the localization
 functor `u` of `h : P f` is a monomorphism, for an arbitrary `f`: its components are split
@@ -161,19 +168,19 @@ sheafification of `u^* (lan E)`, which receives the sheafification of the unit
 `AlgebraicGeometry.SmallSite.mono_lanUnit_app_overMap`, and sheafification preserves
 monomorphisms and restricts to the identity on sheaves. -/
 instance faithful_localizationLowerShriek : (localizationLowerShriek A f h).Faithful := by
-  have : (sheafToPresheaf (ProEt.topology V) A ⋙ presheafToSheaf _ A).Faithful :=
+  have : (sheafToPresheaf (ProEt.topology V) A ⋙ 𝟭 _ ⋙ presheafToSheaf _ A).Faithful :=
     Functor.Faithful.of_iso (asIso (sheafificationAdjunction (ProEt.topology V) A).counit).symm
   have : (sheafToPresheaf (ProEt.topology V) A ⋙ localizationLowerShriekPresheaf A f h ⋙
       (Functor.whiskeringLeft V.ProEtᵒᵖ U.ProEtᵒᵖ A).obj (MorphismProperty.Over.map ⊤ h).op ⋙
         presheafToSheaf _ A).Faithful :=
-    Functor.Faithful.of_mono_app (Functor.whiskerLeft (sheafToPresheaf _ A)
+    @Functor.Faithful.of_mono_app _ _ _ _ _ _ this (Functor.whiskerLeft (sheafToPresheaf _ A)
       (Functor.whiskerRight (MorphismProperty.Over.map ⊤ h).op.lanUnit (presheafToSheaf _ A)))
       fun _ ↦ (presheafToSheaf _ A).map_mono _
   have : (localizationLowerShriek A f h ⋙ localizationRestriction A f h).Faithful :=
-    Functor.Faithful.of_iso (Functor.isoWhiskerLeft
-      (sheafToPresheaf _ A ⋙ localizationLowerShriekPresheaf A f h)
+    @Functor.Faithful.of_iso _ _ _ _ _ _ this (Functor.isoWhiskerLeft
+      (sheafToPresheaf (ProEt.topology V) A ⋙ localizationLowerShriekPresheaf A f h)
       ((MorphismProperty.Over.map ⊤ h).pushforwardContinuousSheafificationCompatibility A
-        (ProEt.topology V) (ProEt.topology U))).symm
+        (ProEt.topology V) (ProEt.topology U)))
   exact Functor.Faithful.of_comp _ (localizationRestriction A f h)
 
 /-! ### The projection formula -/
@@ -189,8 +196,8 @@ instance isIso_frobeniusMap_localizationLowerShriekUpperStarAdjunction
     (K : Sheaf (ProEt.topology U) A) (M : Sheaf (ProEt.topology V) A) :
     IsIso ((localizationLowerShriekUpperStarAdjunction A f h).frobeniusMap K M) := by
   have := isIso_ihomComparison_upperStar (hg := h) A f K
-  exact (localizationLowerShriekUpperStarAdjunction A f h).isIso_frobeniusMap_of_isIso_ihomComparison
-    K (fun _ ↦ inferInstance) M
+  exact (localizationLowerShriekUpperStarAdjunction A f
+    h).isIso_frobeniusMap_of_isIso_ihomComparison K (fun _ ↦ inferInstance) M
 
 /-- **The projection formula** `j_{f!}(f^* K ⊗ M) ≅ K ⊗ j_{f!} M` for the lower shriek along a
 weakly étale morphism `f`, given by the Frobenius map. -/
@@ -231,7 +238,8 @@ instance preservesFlat_localizationLowerShriek :
     rw [ObjectProperty.flat_iff_preservesFiniteLimits]
     have : (tensorLeft ((localizationLowerShriek A f h).obj B)).PreservesMonomorphisms :=
       ⟨fun {C C'} m _ ↦ by
-        have : Mono ((f)^*[A].map m ▷ B) := (tensorRight B).map_mono ((f)^*[A].map_mono m)
+        have : Mono ((f)^*[A].map m) := (f)^*[A].map_mono m
+        have : Mono ((f)^*[A].map m ▷ B) := (tensorRight B).map_mono ((f)^*[A].map m)
         have : Mono (m ▷ (localizationLowerShriek A f h).obj B) := by
           rw [← (IsIso.inv_comp_eq _).2 ((localizationLowerShriekUpperStarAdjunction A f
             h).map_whiskerRight_comp_frobeniusMap m B)]
@@ -239,7 +247,7 @@ instance preservesFlat_localizationLowerShriek :
         have : Mono ((localizationLowerShriek A f h).obj B ◁ m ≫ (β_ _ _).hom) := by
           rw [BraidedCategory.braiding_naturality_right]
           infer_instance
-        exact mono_of_mono _ (β_ _ _).hom⟩
+        exact mono_of_mono ((localizationLowerShriek A f h).obj B ◁ m) (β_ _ _).hom⟩
     exact Functor.preservesFiniteLimits_of_preservesMonomorphisms _
 
 end ProEtale
