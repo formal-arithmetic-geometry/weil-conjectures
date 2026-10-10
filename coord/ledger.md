@@ -2688,3 +2688,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:34 L: returned deliver/G1/def-nagata-qc-open-equality-stage (reviewer RETURN: 1. E (missing hypotheses; the definition is not well formed as stated): 'a finite affine cover' of Y_{lambda_0} needs Y_)
 - 21:34 L: merged deliver/M1/lem-sc-hilbert-embedded-points-affine-removal (reviewer FIX; first push; new nodes: 0)
 - 21:34 L: returned deliver/K1/def-nagata-relative-gluing-datum-descent (reviewer RETURN: 1. E (missing hypotheses, ill-formed definition): the statement names no setting. It must say: I nonempty directed, (S_l)
+- 21:35 UTC L deleted deliver/E1/lem-pc-tower-abelian (re-push of a Mathlib leaf) and deliver/F1/lem-weil-pbc-flat-lfp-open (abandoned 21:34); notices in the returns files
