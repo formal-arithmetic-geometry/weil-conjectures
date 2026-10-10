@@ -1960,3 +1960,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:21 L: merged deliver/K1/lem-sc-point-tangent-closed-fibre-singleton (reviewer PASS; first push; new nodes: 0)
 - 16:22 L: merged deliver/G1/lem-sc-find-globally-generated (reviewer FIX; after a return; new nodes: 2)
 - 16:22 L: merged deliver/H1/lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence (reviewer FIX; first push; new nodes: 0)
+- 16:22 L: returned deliver/H1/lem-sc-p1-regular-dimension-one (reviewer RETURN: 1. D1: steps 1 and 2 / lem-sc-p1-noetherian, lem-sc-p1-local-regular: these two new nodes restate the item's first two c)
