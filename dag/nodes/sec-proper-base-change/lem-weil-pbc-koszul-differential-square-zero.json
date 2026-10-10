@@ -33,39 +33,80 @@
   "lem-weil-pbc-koszul-differential",
   "def-weil-pbc-exterior-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a wedge monomial, the empty case gives $D^2(1)=D(0)=0$. Suppose $D^2(v_2\\wedge\\cdots\\wedge v_n)=0$. Applying the recursion from [lem-weil-pbc-koszul-differential] twice gives $D^2(v_1\\wedge x)=D(\\varphi(v_1)x-v_1\\wedge D(x))=\\varphi(v_1)D(x)-D(v_1\\wedge D(x))=v_1\\wedge D^2(x)$, where $x=v_2\\wedge\\cdots\\wedge v_n$. Thus $D^2(v_1\\wedge\\cdots\\wedge v_n)=0$ by induction on $n$.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Definition Tag 0622 and the paragraph after it (definition-koszul, lines 6560-6590); the omitted generator computation is written out here."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-exterior-algebra], the wedge monomials span each exterior power and their direct sum is $\\wedge(E)$. Since $D^2$ is $R$-linear and vanishes on every such monomial by step 1, it vanishes on all of $\\wedge(E)$, so $D\\circ D=0$.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Definition Tag 0622, the description of the exterior algebra and its homogeneous generators immediately preceding and following line 6566."
+   }
+  },
+  {
+   "text": "For $n\\ge1$, the restriction $d_n$ is $D|_{\\wedge^n_R(E)}$ and the restriction $d_{n-1}$ is $D|_{\\wedge^{n-1}_R(E)}$ by the degree statement in [lem-weil-pbc-koszul-differential]. Therefore $d_{n-1}\\circ d_n$ is the restriction of $D\\circ D$ to $\\wedge^n_R(E)$, hence is zero by step 2.",
+   "uses": [
+    "lem-weil-pbc-koszul-differential"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Definition Tag 0622 (definition-koszul, line 6566), where the differential on the graded pieces is the restriction of d."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-koszul-differential",
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Definition Tag 0622 and the paragraph after it (definition-koszul, lines 6560-6590); the generator computation d(d(v \\wedge x)) = phi(v)d(x) - phi(v)d(x) + v \\wedge d(d(x)) is supplied because the source calls it implicit."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
    "query": "CliffordAlgebra.contractLeft ?d (CliffordAlgebra.contractLeft ?d ?x) = 0",
-   "results": "CliffordAlgebra.contractLeft_contractLeft (Mathlib.LinearAlgebra.CliffordAlgebra.Contraction)",
+   "results": "CliffordAlgebra.contractLeft_contractLeft (Mathlib.LinearAlgebra.CliffordAlgebra.Contraction), a contraction theorem on a Clifford algebra; identifying it with this exterior-algebra differential is not a one-line specialization.",
    "date": "2026-10-10",
-   "verdict": "candidate: states d(d x) = 0 for contractLeft d; identifying the D of the statement with contractLeft φ is the uniqueness clause of lem-weil-pbc-koszul-differential"
+   "verdict": "candidate only; not an exact match"
   },
   {
    "tool": "leansearch",
    "query": "contraction of exterior algebra by a linear form is a derivation of degree -1 squaring to zero",
-   "results": "CliffordAlgebra.contractLeft, contractLeft_ι_mul, contractLeftAux; extDeriv_extDeriv (differential forms on normed spaces, not this)",
+   "results": "CliffordAlgebra.contractLeft and contractLeft_contractLeft; no declaration with the stated exterior-algebra Koszul differential and hypotheses.",
    "date": "2026-10-10",
-   "verdict": "candidate contractLeft_contractLeft (see loogle)"
+   "verdict": "candidate only; not an exact match"
   },
   {
    "tool": "grep",
-   "query": "grep -n 'theorem contractLeft_contractLeft' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean; grep -rn -i 'koszul' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "contractLeft_contractLeft at Contraction.lean:188 (proof by left_induction from contractLeft_ι_mul); no Koszul complex in Mathlib",
+   "query": "grep -rn -i 'koszul\\|contractLeft_contractLeft\\|differential.*square' /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "Only ProjectiveSpace/Koszul.lean's two-term categorical Koszul complex and Mathlib contractLeft infrastructure occur; no declaration states this node. The pinned Mathlib source has contractLeft_contractLeft in LinearAlgebra/CliffordAlgebra/Contraction.lean, but it is for CliffordAlgebra contraction.",
    "date": "2026-10-10",
-   "verdict": "candidate, not a one-line match"
+   "verdict": "no exact match"
   }
  ],
  "mathlib_match": null,
  "mathlib_candidate": {
   "declaration": "CliffordAlgebra.contractLeft_contractLeft",
   "file": "Mathlib/LinearAlgebra/CliffordAlgebra/Contraction.lean",
-  "how": "line 188: contractLeft d (contractLeft d x) = 0 on CliffordAlgebra Q, in particular on ExteriorAlgebra R E = CliffordAlgebra 0. It applies once D = contractLeft φ, which is the uniqueness part of lem-weil-pbc-koszul-differential (an induction by CliffordAlgebra.left_induction), so this is not a one-line specialization; the split is two steps (identify D, apply the lemma) or the direct three-line induction."
+  "how": "This proves contractLeft d (contractLeft d x) = 0 for the Clifford-algebra contraction. It is only a related candidate: the equality of that contraction with the D in this node requires the uniqueness theorem [lem-weil-pbc-koszul-differential], so it is not an exact one-line specialization."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -85,5 +126,20 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-koszul-differential-square-zero",
+  "worker": "K1 worker",
+  "summary": "No exact sorry-free slopmaster2 declaration or blueprint node states this result. Split the direct d squared computation into induction on wedge monomials, linear extension to the exterior algebra, and restriction to homogeneous pieces. No new nodes were needed; the existing differential and exterior-algebra statements supply all dependencies.",
+  "blueprint": "The item is created for the proof of def-weil-pbc-koszul-complex, which refines the thm-weil-pbc-finite-etale-lifting chain at the Stacks 0622 assertion that the Koszul differential makes a commutative differential graded algebra. Step 1 writes the generator computation omitted by Stacks, step 2 uses the exterior-algebra spanning statement, and step 3 gives the chain-complex restrictions.",
+  "source_search": "Before editing, searched /home/ubuntu/weil-src-slopmaster2/WeilConjectures with rg for the item id, blueprint tag, koszul, contractLeft, differential-square and square-zero. No exact declaration was found; the related ProjectiveSpace Koszul maps and contractLeft theorem are not this statement and are recorded as candidates above."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: D^2 = 0 by the recursion on wedge monomials (D^2(v wedge x) = v wedge D^2(x)), then by linearity; 0 new"
+ }
 }
