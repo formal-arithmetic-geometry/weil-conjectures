@@ -10,9 +10,38 @@
  "stmt_deps": [
   "def-weil-pbc-regular-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unwinding [def-weil-pbc-regular-sequence] for $M=R$: the hypothesis that $a,b$ is a regular sequence says (i) multiplication by $a$ on $R$ is injective, (ii) multiplication by $b$ on $R/(a)$ is injective, and (iii) $R/(a,b)\\neq0$. The conclusion that $b,a$ is a regular sequence says (i') multiplication by $b$ on $R$ is injective, (ii') multiplication by $a$ on $R/(b)$ is injective, and (iii') $R/(b,a)\\neq0$. Here (i') is the hypothesis that $b$ is a nonzerodivisor on $R$, and (iii') is (iii) because $(b,a)=(a,b)$ as ideals. It remains to prove (ii').",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07DW (lemma-regular-sequence-in-polynomial-ring), case $r=2$"
+   }
+  },
+  {
+   "text": "Proof of (ii') (the source's isomorphism of the kernel of $a$ on $R/(b)$ with the kernel of $b$ on $R/(a)$; only its injectivity is needed). Let $x\\in R$ with $ax\\in(b)$, say $ax=by$ with $y\\in R$. Then $by=ax\\in(a)$, so the class of $y$ lies in the kernel of $b$ on $R/(a)$, which is $0$ by (ii): $y=az$ for some $z\\in R$. Hence $ax=abz$, i.e. $a(x-bz)=0$, and $x=bz\\in(b)$ by (i). So the kernel of multiplication by $a$ on $R/(b)$ is $0$, which is (ii'). (The map $\\bar x\\mapsto\\bar y$ is well defined because $y$ is determined by $x$ via (i'), and replacing $x$ by $x+bw$ replaces $y$ by $y+aw$; the argument above is its injectivity; by symmetry it is an isomorphism, which is not used.) With (i'), (ii'), (iii') the sequence $b,a$ is a regular sequence in $R$ by [def-weil-pbc-regular-sequence].",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 07DW (lemma-regular-sequence-in-polynomial-ring), case $r=2$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 07DW (lemma-regular-sequence-in-polynomial-ring), case $r=2$ (\"the kernel of $a : R/(b)\\to R/(b)$ is isomorphic to the kernel of $b : R/(a)\\to R/(a)$ if both $a$ and $b$ are nonzerodivisors\")"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -41,10 +70,52 @@
    "results": "RegularSequence.lean:576 private lemma IsWeaklyRegular.swap {a b} (h1 : IsWeaklyRegular M [a, b]) (h2 : torsionBy R M b = a • torsionBy R M b → torsionBy R M b = ⊥) : IsWeaklyRegular M [b, a] -- private, and its hypothesis h2 is a torsion condition (implied by b being M-regular, since then torsionBy b = ⊥); weakly regular only (no nonvanishing of M/(a,b)M)",
    "date": "2026-10-10",
    "verdict": "no match (private lemma IsWeaklyRegular.swap is a Lean candidate for stage 3: with b regular, h2 holds trivially; IsRegular adds only top_ne_smul, which is symmetric in a,b)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "regular sequence a, b with b a nonzerodivisor implies b, a is a regular sequence",
+   "results": "RingTheory.Sequence.IsRegular, IsRegular.cons', IsRegular.cons, isRegular_cons_iff, IsWeaklyRegular.cons, isWeaklyRegular_iff (Mathlib.RingTheory.Regular.RegularSequence); IsWeaklyRegular.isRegular_of_isLocalization_of_mem (Mathlib.RingTheory.Regular.Flat)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "permuting a regular sequence of length two: if a,b is M-regular and b is M-regular then b,a is M-regular",
+   "results": "IsLocalRing.isRegular_of_perm (local, M Noetherian), IsWeaklyRegular.prototype_perm (torsion hypothesis on sub-quotients), IsRegular.toIsWeaklyRegular, IsRegular.cons, isRegular_cons_iff, IsRegular.cons', IsWeaklyRegular.cons (Mathlib.RingTheory.Regular.RegularSequence)",
+   "date": "2026-10-10",
+   "verdict": "no exact match; candidate IsWeaklyRegular.prototype_perm"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, List.Perm",
+   "results": "IsLocalRing.isRegular_of_perm, IsRegular.of_perm_of_subset_jacobson_annihilator (Mathlib.RingTheory.Regular.RegularSequence); both need IsNoetherian R M and elements in the Jacobson radical of the annihilator",
+   "date": "2026-10-10",
+   "verdict": "no match (hypotheses not available here)"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsWeaklyRegular, List.Perm",
+   "results": "IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal, IsWeaklyRegular.of_perm_of_subset_jacobson_annihilator, IsWeaklyRegular.prototype_perm (Mathlib.RingTheory.Regular.RegularSequence)",
+   "date": "2026-10-10",
+   "verdict": "candidate IsWeaklyRegular.prototype_perm (not a one-line specialization)"
+  },
+  {
+   "tool": "local_search",
+   "query": "RingTheory.Sequence.IsWeaklyRegular.swap (project root ~/weil-conjectures-slopmaster2)",
+   "results": "RingTheory.Sequence.IsWeaklyRegular.swap in .lake/packages/mathlib/Mathlib/RingTheory/Regular/RegularSequence.lean (index: unavailable); it is declared private (line 576)",
+   "date": "2026-10-10",
+   "verdict": "exists but private, so not usable as a leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n -i 'swap\\|perm' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Regular/RegularSequence.lean; sed -n 130,150p and 560,670p of the same file",
+   "results": "IsWeaklyRegular (135), IsRegular (146, extends IsWeaklyRegular with top_ne_smul), section Perm (572-643): private IsWeaklyRegular.swap (576), IsWeaklyRegular.prototype_perm (594), of_perm_of_subset_jacobson_annihilator (628, 645), IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal (653), IsLocalRing.isRegular_of_perm (660)",
+   "date": "2026-10-10",
+   "verdict": "no public exact match; candidate recorded in mathlib_candidate"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -64,5 +135,22 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "RingTheory.Sequence.IsWeaklyRegular.prototype_perm",
+  "file": "Mathlib/RingTheory/Regular/RegularSequence.lean",
+  "how": "lines 594-623 read 2026-10-10: from IsWeaklyRegular M rs, rs ~ rs' and, for every a :: b :: rs'' subperm of rs, (K = a • K -> K = ⊥) for K = torsionBy R (M ⧸ ofList rs'' • ⊤) b, it gives IsWeaklyRegular M rs'. For rs = [a,b], rs' = [b,a], M = R the side condition reduces (rs'' = [], M ⧸ ⊥ ≅ M) to torsionBy R R b = ⊥ and torsionBy R R a = ⊥, i.e. b and a regular on R (isSMulRegular_iff_torsionBy_eq_bot, IsSMulRegular.lean:132); the top_ne_smul part of IsRegular (line 146) transfers since Ideal.ofList [b,a] = Ideal.ofList [a,b]. Not a one-line specialization (a case analysis over the subperms and the quotient by ⊥), so not a leaf. The closer private lemma IsWeaklyRegular.swap (line 576: IsWeaklyRegular M [a,b] and (torsionBy R M b = a • torsionBy R M b -> torsionBy R M b = ⊥) give IsWeaklyRegular M [b,a]) is not accessible outside its file."
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-regular-sequence-swap-two",
+  "worker": "stage1",
+  "summary": "Checked the statement against Stacks 07DW (proof, case r=2) and against [def-weil-pbc-regular-sequence]: the definition's nonvanishing condition R/(a,b) != 0 is symmetric in a,b, so the swapped sequence inherits it and the statement is correct as written (it also needs a to be a nonzerodivisor on R, which is the first condition of a,b regular). Proof in two steps, both from the definition only: unwinding the conditions (b regular on R by hypothesis, R/(b,a) = R/(a,b) != 0), then the source's kernel comparison written out as the injectivity argument (ax = by gives y in (a), then x in (b) using that a is a nonzerodivisor). No new nodes. Mathlib: no public exact match; IsWeaklyRegular.prototype_perm (RegularSequence.lean:594) specializes with a few lines of side conditions and the private IsWeaklyRegular.swap (line 576) is not accessible, so the node is split and the candidate is recorded in mathlib_candidate. The citer lem-weil-pbc-regular-sequence-polynomial-variables uses the statement as stated (step 3: a = f_s, b = f_r in R/a, with f_r a nonzerodivisor), consistent."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "2 elementary steps citing only the definition (07DW, case r=2): (i'),(iii') are the hypothesis and the symmetry of the ideal; (ii') by the kernel argument ax = by, y = az by (ii), x = bz by (i). Mathlib candidate IsWeaklyRegular.prototype_perm recorded (B8), not a leaf."
+ }
 }
