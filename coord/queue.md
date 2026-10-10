@@ -1,8 +1,8 @@
 # Work queue
 
-857 items; claim with `tools/claim.py next <group> [--stage N]`.
+856 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (370)
+## Stage 1: nodes to split (367)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,12 +19,10 @@
 | `lem-weil-pbc-openness-of-flatness` | 1015 | none |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1015 | none |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1015 | none |
-| `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1015 | none |
 | `lem-weil-pbc-valuation-ring-normal` | 1015 | none |
 | `lem-weil-pbc-dimension-preserved-field-extension` | 1016 | none |
 | `lem-weil-pbc-direct-sum-extension-assembly` | 1016 | none |
 | `lem-weil-pbc-tor-one-surjective-flat-middle` | 1016 | none |
-| `lem-weil-pbc-torsion-hom-flat-comparison` | 1016 | none |
 | `lem-weil-pbc-triangular-change-of-basis` | 1016 | none |
 | `lem-weil-pbc-dim-one-residue-field-extensions-finite` | 1018 | none |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1018 | none |
@@ -68,7 +66,6 @@
 | `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 3007 | none |
 | `lem-weil-pbc-hypercover-one-more-simplex` | 3007 | none |
 | `lem-weil-pbc-matching-object-fibre-product` | 3007 | none |
-| `lem-weil-pbc-semi-representable-covering-permanence` | 3007 | none |
 | `lem-weil-pbc-simplicial-set-add-simplices` | 3007 | none |
 | `thm-av-final` | 3007 | rests_on_sorry |
 | `thm-sc-jacobian-representability` | 3007 | rests_on_sorry |
@@ -377,7 +374,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (487)
+## Stage 2: nodes to state (489)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -808,6 +805,7 @@
 | `lem-weil-pbc-symmetric-algebra-finite-projective-smooth` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-graded` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-quotient-module` | 1 | state |
+| `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1 | state |
 | `lem-weil-pbc-tensor-field-extension-galois-invariants` | 1 | state |
 | `lem-weil-pbc-termwise-adjunction-homotopy` | 1 | state |
 | `lem-weil-pbc-topological-inverse-image-stalk` | 1 | state |
@@ -819,6 +817,7 @@
 | `lem-weil-pbc-tor-symmetry` | 1 | state |
 | `lem-weil-pbc-torsion-cyclic-presentation` | 1 | state |
 | `lem-weil-pbc-torsion-extension-flat-descent` | 1 | state |
+| `lem-weil-pbc-torsion-hom-flat-comparison` | 1 | state |
 | `lem-weil-pbc-torsion-module-flat-base-change-iso` | 1 | state |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1 | state |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1 | state |
@@ -869,7 +868,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 388 nodes that wait for stage 1, 907 nodes that wait for a statement dependency.
+Not open yet: 385 nodes that wait for stage 1, 908 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
