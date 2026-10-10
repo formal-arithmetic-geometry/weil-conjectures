@@ -207,7 +207,8 @@ lemma isPerfect_Q_obj_mappingCone {P₁ P₂ : CochainComplex (ModuleCat.{u} R) 
 /-- Perfect complexes are stable under extensions: in a distinguished triangle
 `C₁ ⟶ C₂ ⟶ C₃ ⟶ C₁[1]` with `C₁` and `C₃` perfect, `C₂` is perfect. The map `C₃ ⟶ C₁[1]` lifts
 to a morphism of complexes, its source being K-projective, and `C₂[1]` is its mapping cone. -/
-lemma isPerfect_obj₂_of_distTriang (T : Pretriangulated.Triangle (DerivedCategory (ModuleCat.{u} R)))
+lemma isPerfect_obj₂_of_distTriang
+    (T : Pretriangulated.Triangle (DerivedCategory (ModuleCat.{u} R)))
     (hT : T ∈ distTriang _) (h₁ : T.obj₁.IsPerfect) (h₃ : T.obj₃.IsPerfect) :
     T.obj₂.IsPerfect := by
   obtain ⟨P₁, a₁, b₁, _, _, hP₁, ⟨e₁⟩⟩ := h₁
