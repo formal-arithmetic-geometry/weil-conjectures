@@ -2160,7 +2160,8 @@ theorem picardFunctorDegree_zero_descent_of_finiteDimensional {K : Type u} [Fiel
   have := surjective_specMap_algebraMap k K
   have : Flat π'.left := by change Flat (pullback.fst T.hom g); infer_instance
   have : Surjective π'.left := by change Surjective (pullback.fst T.hom g); infer_instance
-  have : LocallyOfFinitePresentation π'.left := by change LocallyOfFinitePresentation (pullback.fst T.hom g); infer_instance
+  have : LocallyOfFinitePresentation π'.left := by
+    change LocallyOfFinitePresentation (pullback.fst T.hom g); infer_instance
   have hcov : Sieve.generate (Presieve.singleton π') ∈ (fppfTopology.over (Spec (.of k))) T := by
     rw [GrothendieckTopology.mem_over_iff, Sieve.overEquiv_generate]
     refine fppfTopology.superset_covering ?_
