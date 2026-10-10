@@ -1519,3 +1519,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:39 L: G1 lem-weil-pbc-flat-variant-local-criterion: reviewer found the sorry-free Lean Module.Flat.of_flat_quotient_of_lTensor_injective; attached and closed by L, G1's split not merged, branch deleted
 - 2026-10-10, delivery of F1: lem-pc-closed-imm-base-change merged from deliver/F1/lem-pc-closed-imm-base-change (1 commit(s), 0 new node(s), spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: citations of the pullback-ideal and affine-sections nodes in steps 1-2): corrected image-form statement kept, 01JU (1) read, 3 steps checked, small cases); claim closed
 - 13:40 L: merged deliver/F1/lem-pc-closed-imm-base-change (reviewer FIX applied; tool_uses 2; first push)
+- 13:40 L: accepted lem-galois-finite-etale-connected-object: attachment Scheme.FiniteEtale.isConnected_of_connectedSpace verified, closed, not split
