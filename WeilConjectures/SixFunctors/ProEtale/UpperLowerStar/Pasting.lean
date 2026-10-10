@@ -109,4 +109,54 @@ lemma upperStarComp_hpaste_app {X₁ X₂ X₃ Y₁ Y₂ Y₃ : Scheme.{u}} (a�
   rw [E2']
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
+/-- **Vertical pasting** of the square isomorphisms of pullbacks, with all composites given up to
+equality: for squares `a ≫ t' = p = t ≫ e` and `e ≫ u' = q = u ≫ d`, the square isomorphism of
+the composite square `a ≫ (t' ≫ u') = r = (t ≫ u) ≫ d` is obtained by pasting. -/
+lemma upperStarComp_vpaste_app {W₁ W₂ X₁ X₂ Y₁ Y₂ : Scheme.{u}} (a : W₁ ⟶ W₂) (t' : W₂ ⟶ X₂)
+    (t : W₁ ⟶ X₁) (e : X₁ ⟶ X₂) (u' : X₂ ⟶ Y₂) (u : X₁ ⟶ Y₁) (d : Y₁ ⟶ Y₂)
+    (p : W₁ ⟶ X₂) (hp : p = a ≫ t') (hp' : p = t ≫ e)
+    (q : X₁ ⟶ Y₂) (hq : q = e ≫ u') (hq' : q = u ≫ d)
+    (tu : W₁ ⟶ Y₁) (htu : tu = t ≫ u) (tu' : W₂ ⟶ Y₂) (htu' : tu' = t' ≫ u')
+    (r : W₁ ⟶ Y₂) (hr : r = a ≫ tu') (hr' : r = tu ≫ d)
+    (M : Sheaf (Scheme.ProEt.topology Y₂) A) :
+    (upperStarCongr A hr).hom.app M ≫ (upperStarComp A a tu').hom.app M ≫
+        (a)^*[A].map ((upperStarCongr A htu').hom.app M ≫ (upperStarComp A t' u').hom.app M) ≫
+        (upperStarComp A a t').inv.app ((u')^*[A].obj M) ≫
+        (upperStarCongr A hp).inv.app ((u')^*[A].obj M) ≫
+        (upperStarCongr A hp').hom.app ((u')^*[A].obj M) ≫
+        (upperStarComp A t e).hom.app ((u')^*[A].obj M) ≫
+        (t)^*[A].map ((upperStarComp A e u').inv.app M ≫ (upperStarCongr A hq).inv.app M ≫
+          (upperStarCongr A hq').hom.app M ≫ (upperStarComp A u d).hom.app M) =
+      (upperStarCongr A hr').hom.app M ≫ (upperStarComp A tu d).hom.app M ≫
+        (upperStarCongr A htu).hom.app ((d)^*[A].obj M) ≫
+        (upperStarComp A t u).hom.app ((d)^*[A].obj M) := by
+  have hR : r = p ≫ u' := by rw [hr, htu', hp, Category.assoc]
+  have hR₂ : r = t ≫ q := by rw [hR, hp', hq, Category.assoc]
+  have F1 := upperStarComp_assoc'_app A a t' u' p hp tu' htu' r hr hR M
+  have F2 := upperStarComp_assoc'_app A t e u' p hp' q hq r hR₂ hR M
+  have F3 := upperStarComp_assoc'_app A t u d tu htu q hq' r hR₂ hr' M
+  have F1' (Z : Sheaf (Scheme.ProEt.topology W₁) A)
+      (k : ((t')^*[A] ⋙ (a)^*[A]).obj ((u')^*[A].obj M) ⟶ Z) :
+      (upperStarCongr A hr).hom.app M ≫ (upperStarComp A a tu').hom.app M ≫
+        (a)^*[A].map ((upperStarCongr A htu').hom.app M ≫ (upperStarComp A t' u').hom.app M) ≫
+          k =
+      (upperStarCongr A hR).hom.app M ≫ (upperStarComp A p u').hom.app M ≫
+        (upperStarCongr A hp).hom.app ((u')^*[A].obj M) ≫
+        (upperStarComp A a t').hom.app ((u')^*[A].obj M) ≫ k := by
+    simpa only [Category.assoc] using congrArg (· ≫ k) F1
+  have F2' (Z : Sheaf (Scheme.ProEt.topology W₁) A)
+      (k : ((e)^*[A] ⋙ (t)^*[A]).obj ((u')^*[A].obj M) ⟶ Z) :
+      (upperStarCongr A hR).hom.app M ≫ (upperStarComp A p u').hom.app M ≫
+        (upperStarCongr A hp').hom.app ((u')^*[A].obj M) ≫
+        (upperStarComp A t e).hom.app ((u')^*[A].obj M) ≫ k =
+      (upperStarCongr A hR₂).hom.app M ≫ (upperStarComp A t q).hom.app M ≫
+        (t)^*[A].map ((upperStarCongr A hq).hom.app M ≫ (upperStarComp A e u').hom.app M) ≫
+          k := by
+    simpa only [Category.assoc] using (congrArg (· ≫ k) F2).symm
+  rw [F1', Iso.hom_inv_id_app_assoc]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  rw [F2', ← Functor.map_comp]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  exact F3
+
 end AlgebraicGeometry.ProEtale
