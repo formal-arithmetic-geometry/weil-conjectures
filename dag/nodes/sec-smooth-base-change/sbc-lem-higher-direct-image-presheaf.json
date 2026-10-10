@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "sbc-lem-higher-direct-image-presheaf",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Higher direct image as a sheafified cohomology presheaf",
- "statement": "Let $h:Y\\to X$ be a morphism of schemes and $F\\in\\Ab(Y_{\\Et})$. Then\n$R^qh_*F$ is the sheaf associated with the presheaf\n\n$$\n(U\\to X)\\longmapsto H^q\\bigl(U\\times_XY,F|_{U\\times_XY}\\bigr)\n$$\n\non $X_{\\Et}$; more generally for $K\\in D(Y_{\\Et})$ the cohomology sheaf\n$R^qh_*K$ is associated with $U\\mapsto H^q(U\\times_XY,K|_{U\\times_XY})$.\n(*Stacks Project, Lemma 59.51.6, [Tag `03Q8`](https://stacks.math.columbia.edu/tag/03Q8).*)",
+ "statement": "Let $h:Y\\to X$ be a morphism of schemes and $F\\in\\Ab(Y_{\\Et})$. Then\n$R^qh_*F$ is the sheaf associated with the presheaf\n\n$$\n(U\\to X)\\longmapsto H^q\\bigl(U\\times_XY,F|_{U\\times_XY}\\bigr)\n$$\n\non $X_{\\Et}$; more generally for $K\\in\\Dplus(Y_{\\Et})$ the cohomology sheaf\n$R^qh_*K$ is associated with $U\\mapsto H^q(U\\times_XY,K|_{U\\times_XY})$.\n(*Stacks Project, Lemma Tag 03Q8.*)",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-higher-direct-image-presheaf.md",
   "place": "node sbc-lem-higher-direct-image-presheaf, order 1388",
@@ -18,29 +18,97 @@
    }
   ]
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-derived-categories"
+ ],
  "proof": [
   {
-   "text": "The cohomology of\n[def-weil-pbc-etale-cohomology] of the fibre products\n$U\\times_XY$ computes the sections of the higher direct images of\n[def-weil-pbc-direct-image] on the basis of etale $U\\to X$; both\nthe direct image and the associated sheaf have the same\nsheafification, which is the statement.",
+   "text": "Let $K\\in\\Dplus(Y_{\\Et})$ (for the sheaf clause $K=F$ placed in degree $0$). There are a bounded below complex $I^\\bullet$ of injective objects of $\\Ab(Y_{\\Et})$ and an isomorphism $K\\cong QI^\\bullet$, and $I^\\bullet$ is K-injective [lem-weil-pbc-dplus-injective-representative]; for $K=F$ this may be taken to be an injective resolution $F\\to I^\\bullet$. By [def-weil-pbc-direct-image], $Rh_*K\\cong Q(h_*I^\\bullet)$, so $R^qh_*K=\\mathcal H^q(h_*I^\\bullet)$, and $(h_*I^r)(U)=I^r(U\\times_XY)$ for each etale $U\\to X$.",
    "uses": [
-    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-dplus-injective-representative",
     "def-weil-pbc-direct-image"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W proof; etale specialization in Lemma Tag 03Q8"
+   }
+  },
+  {
+   "text": "Fix an etale $U\\to X$, put $W=U\\times_XY$ with its etale projection $v:W\\to Y$, and read $K|_W$ as $v^{-1}K$. The functor $v^{-1}$ is exact [prop-weil-pbc-inverse-image-exact] and sends injective sheaves to injective sheaves, being right adjoint to the exact functor $v_!$ [lem-weil-pbc-etale-restriction-injectives] (with $R=\\mathbf Z$). Hence $v^{-1}K\\cong Q(v^{-1}I^\\bullet)$ with $v^{-1}I^\\bullet$ a bounded below complex of injectives, which is K-injective [lem-weil-pbc-dplus-injective-representative]; so by [def-weil-pbc-etale-cohomology] (resolution independence) $H^q(W,K|_W)=H^q(\\Gamma(W,v^{-1}I^\\bullet))$. Through the isomorphisms $\\rho_{I^r}(W):\\Gamma(W,v^{-1}I^r)\\xrightarrow{\\sim}I^r(W)$, natural in $I^r$ and so compatible with the differentials [lem-weil-pbc-etale-inverse-image-restriction] (1), this is $H^q(I^\\bullet(W))=H^q\\bigl((h_*I^\\bullet)(U)\\bigr)$. No hypothesis on $h$ is used.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W proof; etale specialization in Lemma Tag 03Q8"
+   }
+  },
+  {
+   "text": "Kernels and images of the underlying presheaf complex are sectionwise. Exact sheafification commutes with cohomology of complexes, so the cohomology sheaf $\\mathcal H^q(h_*I^\\bullet)=R^qh_*K$ is the sheafification of the sectionwise cohomology presheaf, which by the previous step is $U\\mapsto H^q(U\\times_XY,K|)$. For $K=F$ in degree $0$ this is the ordinary-sheaf clause.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 072W proof, cohomology-sheaf paragraph"
+   }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-weil-pbc-direct-image",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-etale-restriction-injectives",
   "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-direct-image"
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-pbc-sheafification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-higher-direct-image-presheaf.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image sheafification of presheaf of cohomology for a morphism of sites",
+   "results": "sheafification declarations only; no higher direct image theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Sheaf",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i 'higher direct image\\|directImage.*rightDerived\\|pushforward.*rightDerived' Mathlib/CategoryTheory/Sites Mathlib/AlgebraicGeometry",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -63,5 +131,25 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-lem-failure-field"
+ "unit": "sk-lem-failure-field",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "sbc-lem-higher-direct-image-presheaf",
+  "worker": "stage1",
+  "summary": "Expanded the imported proof into the Stacks 03Q8 morphism-of-sites argument. The sheaf clause cites the item source directly; the derived-complex clause is written from the direct-image definition, K-injective resolution, and exact sheafification. No new nodes were needed.",
+  "blueprint": "The three steps realize the blueprint proof sentence invoking Stacks 03Q8: site-level sheafification for F, the K-injective extension to K, and the exact sheafification/cohomology identification.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-hdp2541",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hdp2541 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 03Q8 (orientation, both clauses); class b: lem-weil-pbc-higher-direct-image-presheaf is the Zariski/O_X-module 01E4 version, sites differ, no restatement; downstream users (sbc-lem-higher-direct-image-limit, sbc-thm-universal-test-vanishing, lem-weil-pbc-unrestricted-strict-henselization-stalk) use only the sheaf clause. FIX more, RETURN less: (1) C1 steps 1-2: H^q(I(U x_X Y)) = H^q(U x_X Y, F|) needed that restriction v^{-1} along the etale W->Y is exact and keeps injectives, and Gamma(W,v^{-1}I)=I(W); now cited prop-weil-pbc-inverse-image-exact (generic tool), lem-weil-pbc-etale-restriction-injectives, lem-weil-pbc-dplus-injective-representative (bounded below injectives are K-injective), lem-weil-pbc-etale-inverse-image-restriction (1); steps 1-2 merged into one resolution step plus one restriction step; (2) stmt_deps: removed lem-weil-pbc-qcqs-higher-direct-image (whose own proof cites this item: cycle risk, and the statement uses neither) and lem-weil-pbc-site-higher-direct-image-sheafified-presheaf; added def-weil-pbc-derived-categories; (3) E7 statement D(Y_Et) -> D^+(Y_Et) to match the D^+-only definitions the proof uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-10 L (R-hdp2541): Statement complex clause narrowed from D(Y_Et) to D^+(Y_Et) (E7): the project's Rh_* (def-weil-pbc-direct-image) and H^q(T,K) (def-weil-pbc-etale-cohomology) are defined only on D^+, and no consumer uses unbounded K. Not a restatement of lem-weil-pbc-higher-direct-image-presheaf (Zariski site, O_X-modules, Stacks 01E4); different site. Tool use prop-weil-pbc-inverse-image-exact (exactness of etale inverse image) accepted as a generic tool (C7)."
 }
