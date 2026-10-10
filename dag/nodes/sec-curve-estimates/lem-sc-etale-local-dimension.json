@@ -23,9 +23,47 @@
  "stmt_deps": [
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The localization map $A_p\\to B_q$ is flat and local by [lem-weil-pbc-etale-algebra-flat] and [lem-weil-pbc-flat-local-ring-maps]: the first node gives flatness of the etale map $A\\to B$, and the second gives the induced flat local map on localizations. Hence it is faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective]. Applying [lem-sc-faithfully-flat-local-dimension] gives $\\dim(A_p)\\le\\dim(B_q)$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "lem-sc-faithfully-flat-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07QP, proof, first paragraph: the localized etale map is flat, hence going down, giving the lower dimension inequality"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-ring-map-quasi-finite], the etale ring map $A\\to B$ is of finite type and quasi-finite at $q$. Therefore [lem-weil-pbc-dimension-inequality-quasi-finite], applied to $q$ and its contraction $p$, gives $\\dim(B_q)\\le\\dim(A_p)$. Combining the two inequalities proves equality.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "lem-weil-pbc-dimension-inequality-quasi-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 07QP, proof, second paragraph: etale maps are quasi-finite and strict prime chains contract, giving the reverse inequality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "lem-sc-faithfully-flat-local-dimension",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-dimension-inequality-quasi-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07QP (Lemma 44.2), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +88,39 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-strict-henselization-dimension",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-etale-local-dimension",
+  "worker": "stage1",
+  "summary": "Split Tag 07QP into its two inequalities without creating duplicate prerequisites. The lower bound uses the existing etale-flat, localized-flat-local, local-flat-faithfully-flat, and faithfully-flat dimension nodes. The upper bound uses the existing etale-quasi-finite and quasi-finite local-dimension inequality nodes.",
+  "blueprint": "The upper bound in the strict henselization dimension proof, using dimension invariance for etale localizations.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "why": "The upper-bound step needs the generic theorem that an etale ring map is finite type and quasi-finite at every prime; the sk-thm-br route has no local quasi-finiteness node."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-inequality-quasi-finite",
+    "why": "The upper-bound step needs the generic quasi-finite local-dimension inequality; the sk-thm-br route has no equivalent dimension inequality node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-dimension-inequality-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eld2313",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eld2313 (reviewer sub-agent of L); spot-checked: Statement matches Stacks 07QP and is exactly what step 2 of lem-sc-strict-henselization-dimension uses (R->S etale, q over m, dim S_q = dim R_m). Step 1: etale-flat, flat-local-ring-maps (A_p->B_q flat local), local flat => faithfully flat, then sibling lem-sc-faithfully-flat-local-dimension (going-down via lem-sc-flat-going-down) gives dim A_p <= dim B_q; hypotheses match, no cycle (sibling does not depend on item). Step 2: etale => finite type and quasi-finite at q, then quasi-finite dimension inequality (Algebra 00OM-type) gives dim B_q <= dim A_p; this covers the fibre-dimension-zero part via a cited node (C1 ok). No new nodes, no restatement (class b n/a). Second reading by C1 complete; no missed fault found."
  }
 }
