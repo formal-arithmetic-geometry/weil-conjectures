@@ -13,48 +13,149 @@
  },
  "kind": "statement",
  "title": "Pullback preserves K-flat complexes",
- "statement": "Let $f:(X,\\mathcal O_X)\\to(Y,\\mathcal O_Y)$ be a morphism of ringed spaces [def-pc-scheme]. If $K^\\bullet$ is a K-flat complex of $\\mathcal O_Y$-modules [def-pc-kflat-complex], then the pulled-back complex $f^*K^\\bullet$ is K-flat over $\\mathcal O_X$.",
+ "statement": "Let $f:(X,\\mathcal O_X)\\to(Y,\\mathcal O_Y)$ be a morphism of ringed spaces, consisting of a continuous map $f:X\\to Y$ and a morphism of sheaves of rings $f^\\sharp:\\mathcal O_Y\\to f_*\\mathcal O_X$, with adjoint map $f^{-1}\\mathcal O_Y\\to\\mathcal O_X$. For a complex $K^\\bullet$ of $\\mathcal O_Y$-modules, let $f^*K^\\bullet$ be the termwise pullback $f^{-1}K^\\bullet\\otimes_{f^{-1}\\mathcal O_Y}\\mathcal O_X$ using inverse image [def-weil-pbc-topological-inverse-image] and sheaf tensor product [def-pur-sheaf-tensor-product]. If $K^\\bullet$ is K-flat [def-pc-kflat-complex], then $f^*K^\\bullet$ is K-flat over $\\mathcal O_X$.",
  "source": {
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 06YC, Cohomology Lemma cohomology-lemma-pullback-K-flat"
  },
  "stmt_deps": [
-  "def-pc-scheme",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-weil-pbc-topological-inverse-image",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x\\in X$ and put $y=f(x)$, $A=\\mathcal O_{Y,y}$ and $B=\\mathcal O_{X,x}$, with ring map $A\\to B$ induced by $f^\\sharp$. The natural inverse-image stalk isomorphisms identify $(f^{-1}K^n)_x$ with $K^n_y$ and $(f^{-1}\\mathcal O_Y)_x$ with $A$ [lem-weil-pbc-topological-inverse-image-stalk]. Applying the natural change-of-rings tensor-stalk isomorphism [lem-weil-pbc-stalk-change-of-rings-tensor] degreewise to the definition of $f^*$ identifies $(f^*K^\\bullet)_x$ with $K_y^\\bullet\\otimes_A B$ as a complex, including the differentials by naturality.",
+   "uses": [
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "lem-weil-pbc-stalk-change-of-rings-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma Tag 0098 (label lemma-stalk-pullback-modules), via Tags 008H and 008B"
+   }
+  },
+  {
+   "text": "By the forward implication of [lem-pc-kflat-stalk-criterion] applied on $Y$, the K-flatness of $K^\\bullet$ implies that $K_y^\\bullet$ is a K-flat complex of $A$-modules.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma Tag 06YC (label lemma-pullback-K-flat), citing Lemma Tag 06YB (label lemma-check-K-flat-stalks)"
+   }
+  },
+  {
+   "text": "Let $L^\\bullet$ be any acyclic complex of $B$-modules. Forgetting the $B$-action leaves an acyclic $A$-complex, since kernels and images of its differentials are the same additive subgroups. Associativity of tensor products, with the total-complex direct sums, gives $\\operatorname{Tot}(L^\\bullet\\otimes_B(K_y^\\bullet\\otimes_A B))\\cong\\operatorname{Tot}(L^\\bullet\\otimes_A K_y^\\bullet)$. The latter is acyclic by the K-flatness from step 2. Thus $K_y^\\bullet\\otimes_A B$ is K-flat over $B$ by definition [def-pc-kflat-complex]. This is the two-line base-change argument of Stacks Tag 06Y1; no flatness of $A\\to B$ is required.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma Tag 06Y1 (label lemma-base-change-K-flat), proof"
+   }
+  },
+  {
+   "text": "Steps 1 and 3 show that $(f^*K^\\bullet)_x$ is K-flat over $\\mathcal O_{X,x}$ for every $x\\in X$. The reverse implication of [lem-pc-kflat-stalk-criterion] on $X$ gives that $f^*K^\\bullet$ is K-flat over $\\mathcal O_X$.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology, Lemma Tag 06YC (label lemma-pullback-K-flat), citing Lemma Tag 06YB (label lemma-check-K-flat-stalks)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-weil-pbc-stalk-change-of-rings-tensor",
+  "lem-pc-kflat-stalk-criterion",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma Tag 06YC (label lemma-pullback-K-flat), using Tags 06YB, 0098 and 06Y1"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "pullback of K-flat complex is K-flat",
-   "results": "Only Module.Flat preservation lemmas and flat morphism base-change declarations; no K-flat complex theorem.",
+   "query": "pullback of a K-flat complex along a morphism of ringed spaces is K-flat",
+   "results": "Only flat scheme-morphism base-change declarations and SheafOfModules.pullback; no K-flat complex theorem.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "K-flat pullback complex",
-   "results": "Unknown identifier K; no usable hit.",
+   "query": "KFlat, pullback",
+   "results": "Unknown identifier KFlat; no hit.",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "lemma-pullback-K-flat",
-   "results": "No Mathlib declaration found.",
+   "query": "KFlat|K-flat|kFlat Algebra/Homology",
+   "results": "No hit.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback preserves K-flat complexes over ringed spaces",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of K-flat sheaf complex remains K-flat after tensoring with structure sheaf",
+   "results": "Only flatness of single modules; no K-flat complex theorem.",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-ringed-spaces-derived-pullback-composition",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-kflat-pullback-preservation",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 06YC and split its stalkwise proof: the sole new statement is the K-flat stalk criterion (06YB); the module-pullback stalk formula follows from existing inverse-image and change-of-rings stalk nodes, and the ring-level base-change argument is written in the proof. Replaced the scheme citation with the full ringed-space pullback data in the statement.",
+  "blueprint": "The steps realize the need for pullback to preserve K-flat resolutions in the derived pullback composition argument of lem-pc-ringed-spaces-derived-pullback-composition, reached from lem-sc-finite-duality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-topological-inverse-image-stalk",
+    "why": "Step 1 needs the stalk of inverse image along a continuous map; the Picard unit has no version of this general sheaf result."
+   },
+   {
+    "node": "lem-weil-pbc-stalk-change-of-rings-tensor",
+    "why": "Step 1 needs the stalk of sheaf extension of scalars; the Picard unit has no ringed-space version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-weil-pbc-stalk-change-of-rings-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-kpp1836",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kpp1836 (reviewer sub-agent of L); spot-checked: Item vs 06YC (general ringed-space morphism, termwise pullback); step 1 vs inverse-image stalk (abelian groups and rings) and change-of-rings tensor stalk statements; steps 2/4 use the two directions of new 06YB node; step 3 elementary 06Y1 base change (no flatness of A->B), 06Y1 warning fine as in-proof argument; no existing 06YB node in dag; no cycle: new node has only def-pc-kflat-complex as dep, not created from parent, no link to lem-pc-kflat-resolution; proof_deps match citations. No fault missed by second reading."
+ }
 }
