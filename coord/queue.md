@@ -32,14 +32,12 @@
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 3006 | none |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 3007 | none |
 | `lem-exc-finite-galois-sections-descent` | 3008 | none |
-| `lem-weil-pbc-finite-product-functor-left-exact` | 3008 | none |
 | `lem-weil-pbc-finite-product-injective-resolutions` | 3008 | none |
 | `lem-weil-pbc-cohomology-over-object-localization` | 3009 | none |
 | `lem-exc-etale-field-galois-classification` | 3010 | none |
-| `thm-sc-proper-finite-fibre-finite-neighbourhood` | 3011 | none |
 | `def-sc-scheme-tangent-space` | 3012 | none |
 | `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 3012 | none |
-| `def-sc-sheaf-cohomology-functor` | 3013 | none |
+| `lem-sc-quasi-finite-points-open` | 3012 | none |
 | `lem-pc-grothendieck-ss-double-complex-model` | 3013 | none |
 | `lem-pc-proper-geometrically-reduced-global-sections-separable` | 3013 | none |
 | `lem-sc-p1-boundary-extension-composition` | 3013 | none |
@@ -63,6 +61,7 @@
 | `lem-sc-finite-duality-derived-hom` | 3014 | none |
 | `lem-sc-finite-locally-free-derived-hom` | 3014 | none |
 | `lem-sc-finite-pushforward-locally-free` | 3014 | none |
+| `lem-sc-global-sections-left-exact` | 3014 | none |
 | `lem-sc-open-map-irreducible-fibres-components` | 3014 | none |
 | `lem-sc-rhom-cohomology-ext-ring` | 3014 | none |
 | `lem-sc-scheme-over-field-universally-open` | 3014 | none |
@@ -191,6 +190,7 @@
 | `pqf-lem-qf-finitefibres` | 6011 | none |
 | `pqf-lem-serre-criterion` | 6011 | none |
 | `pqf-lem-sheaf-zero-stalks` | 6011 | none |
+| `pqf-lem-locqf-fibre-discrete` | 6012 | none |
 | `lem-pc-projective-space-canonical` | 6013 | sorry_here |
 | `pqf-lem-going-up` | 6017 | none |
 | `pqf-lem-incomparability` | 6017 | none |
@@ -930,7 +930,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 346 nodes that wait for stage 1, 1205 nodes that wait for a statement dependency.
+Not open yet: 345 nodes that wait for stage 1, 1208 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
