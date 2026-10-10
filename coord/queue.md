@@ -1,8 +1,8 @@
 # Work queue
 
-909 items; claim with `tools/claim.py next <group> [--stage N]`.
+917 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (263)
+## Stage 1: nodes to split (259)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -54,7 +54,6 @@
 | `lem-sc-mult-n-tangent-differential` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
-| `lem-pc-ideal-sheaf-comap-affine-extension` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-pc-affine-qcoh-derived-equivalence` | 4011 | none |
 | `lem-pc-derived-module-free-generation` | 4011 | none |
@@ -80,10 +79,7 @@
 | `lem-sp-couple-morphism` | 6002 | none |
 | `lem-sp-kinjective-computes` | 6002 | none |
 | `thm-sp-half-plane-convergence` | 6002 | none |
-| `def-sp-abelian` | 6003 | none |
 | `def-sp-injective-resolutions` | 6003 | none |
-| `def-sp-left-exact-additive` | 6003 | none |
-| `lem-sp-grothendieck-enough-injectives` | 6003 | none |
 | `lem-weil-pbc-finite-proper` | 6003 | none |
 | `def-sp-acyclic` | 6004 | none |
 | `lem-sp-derived-well-defined` | 6004 | none |
@@ -270,7 +266,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (646)
+## Stage 2: nodes to state (658)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -293,11 +289,14 @@
 | `def-sc-p1-standard` | 1 | state |
 | `def-sc-rational-functions` | 1 | state |
 | `def-sc-zariski-flasque` | 1 | state |
+| `def-sp-exact-couple` | 1 | state |
+| `def-sp-filtration` | 1 | state |
 | `def-weil-pbc-analytically-unramified` | 1 | state |
 | `def-weil-pbc-associated-graded-ring` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
 | `def-weil-pbc-complete-intersection-over-field` | 1 | state |
 | `def-weil-pbc-constant-group-scheme` | 1 | state |
+| `def-weil-pbc-delta-functor` | 1 | state |
 | `def-weil-pbc-depth` | 1 | state |
 | `def-weil-pbc-double-complex-zigzag-module` | 1 | state |
 | `def-weil-pbc-essentially-constant-system` | 1 | state |
@@ -320,6 +319,7 @@
 | `def-wf-algebraic-representations` | 1 | state |
 | `etale-proposition-etale-reduced` | 1 | state |
 | `lem-exc-coinduced-functions-open-stabilizer` | 1 | state |
+| `lem-exc-discrete-modules-abelian-structure` | 1 | state |
 | `lem-exc-etale-coproduct-etale` | 1 | state |
 | `lem-exc-etale-field-gsets` | 1 | state |
 | `lem-exc-finite-galois-algebra-tensor-decomposition` | 1 | state |
@@ -341,10 +341,12 @@
 | `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` | 1 | state |
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-cech-exact` | 1 | state |
+| `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-flat-pullback-effective-cartier-ideal` | 1 | state |
 | `lem-pc-fpqc-descend-closed-immersion` | 1 | state |
 | `lem-pc-h0-geom-connected` | 1 | state |
+| `lem-pc-ideal-sheaf-comap-affine-extension` | 1 | state |
 | `lem-pc-inseparable-tensor-nilpotent` | 1 | state |
 | `lem-pc-integral-radicial-surjective-universal-homeomorphism` | 1 | state |
 | `lem-pc-invertible-common-free-generator` | 1 | state |
@@ -395,6 +397,7 @@
 | `lem-sc-finite-type-nonclosed-closure-closed-points` | 1 | state |
 | `lem-sc-four-lemma` | 1 | state |
 | `lem-sc-free-prime-membership` | 1 | state |
+| `lem-sc-global-sections-left-exact` | 1 | state |
 | `lem-sc-glue-component-line-bundles` | 1 | state |
 | `lem-sc-glue-component-reduced-cover-sections` | 1 | state |
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
@@ -444,6 +447,7 @@
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
 | `lem-weil-pbc-cartier-equality` | 1 | state |
 | `lem-weil-pbc-cauchy-binet` | 1 | state |
+| `lem-weil-pbc-cech-vanishing-criterion` | 1 | state |
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-existence` | 1 | state |
 | `lem-weil-pbc-chow-noetherian` | 1 | state |
@@ -563,6 +567,8 @@
 | `lem-weil-pbc-finite-open-cover-degree-sum` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1 | state |
 | `lem-weil-pbc-finite-over-complete-ring` | 1 | state |
+| `lem-weil-pbc-finite-product-complex-cohomology` | 1 | state |
+| `lem-weil-pbc-finite-product-functor-left-exact` | 1 | state |
 | `lem-weil-pbc-finite-product-integral-closure` | 1 | state |
 | `lem-weil-pbc-finite-product-normal` | 1 | state |
 | `lem-weil-pbc-finite-projective-prime-local-free` | 1 | state |
@@ -745,6 +751,7 @@
 | `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
+| `lem-weil-pbc-pushout-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1 | state |
 | `lem-weil-pbc-radicial-etale-open` | 1 | state |
 | `lem-weil-pbc-radicial-prime-unique-degree-p` | 1 | state |
@@ -839,6 +846,7 @@
 | `lem-weil-pbc-stein-flat-base-change-global-sections` | 1 | state |
 | `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state |
 | `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1 | state |
+| `lem-weil-pbc-subcategory-right-resolution-05T6` | 1 | state |
 | `lem-weil-pbc-surjective-universally-closed-affine-target` | 1 | state |
 | `lem-weil-pbc-surjective-universally-closed-separated` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-base-change` | 1 | state |
@@ -921,7 +929,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1348 nodes that wait for a statement dependency, 294 nodes that wait for stage 1.
+Not open yet: 1337 nodes that wait for a statement dependency, 290 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
