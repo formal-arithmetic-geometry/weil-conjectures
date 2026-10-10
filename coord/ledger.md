@@ -2691,3 +2691,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:35 UTC L deleted deliver/E1/lem-pc-tower-abelian (re-push of a Mathlib leaf) and deliver/F1/lem-weil-pbc-flat-lfp-open (abandoned 21:34); notices in the returns files
 - 21:35 L: merged deliver/K1/lem-sc-proper-flat-right-adjoint-affine-basechange (reviewer FIX; after a return; new nodes: 9)
 - 21:35 L: merged deliver/C1/lem-pc-perfect-complexes-compact-set (reviewer FIX+NODE(1); after a return; new nodes: 2)
+- 21:35 L: merged deliver/C1/lem-sc-affine-unit-quotient (reviewer PASS; first push; new nodes: 0)
