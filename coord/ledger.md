@@ -2407,3 +2407,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:35 L: merged deliver/C1/lem-sc-p1-ext-resolution-derived-connecting (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 19:35 L: merged deliver/G1/lem-pc-bounded-above-flat-kflat (reviewer FIX; first push; new nodes: 2)
 - 19:35 L: merged deliver/J1/lem-pc-proper-support-perfect-direct-image (reviewer FIX; after a return; new nodes: 3)
+- 19:35 L: merged deliver/K1/lem-pc-base-change-map-cech (reviewer FIX; after a return; new nodes: 1)

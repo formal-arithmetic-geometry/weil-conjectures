@@ -21,22 +21,123 @@
   "def-pc-module-pullback",
   "def-pc-derived-pullback",
   "def-pc-derived-direct-image",
-  "lem-pc-cech-resolution"
+  "lem-pc-cech-resolution",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-derived-direct-image-composition",
+  "lem-weil-pbc-separated-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-derived-adjunction-from-underived"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The hypotheses on $S$, $X$, and the finite affine cover give the Cech resolution for $f$ by [lem-pc-cech-resolution]. The base changes preserve separatedness and quasi-compactness by [lem-weil-pbc-separated-base-change] and [lem-pc-quasi-compact-base-change], and the opens $U_i\\times_ST$ are affine, so the same Cech-resolution statement applies to $f_T$. For an intersection $U_J$, the morphism $U_J\\to S$ is affine; [lem-pc-affine-morphism-hi] gives that $f_*j_{J,*}(\\mathcal G|_{U_J})$ is quasi-coherent and identifies its sections on affine opens with $\\Gamma(U_J,\\mathcal G)$, which is the term used in $K^\\bullet$ (and similarly after base change). The derived pullback and derived direct-image definitions supply the functors used in these identifications. Thus $Rf_*\\mathcal G\\cong\\widetilde{K^\\bullet}$ and $Rf_{T,*}\\mathcal G_T\\cong\\widetilde{K_T^\\bullet}$.",
+   "uses": [
+    "lem-pc-cech-resolution",
+    "lem-weil-pbc-separated-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "lem-pc-affine-morphism-hi",
+    "def-pc-base-change",
+    "def-pc-module-pullback",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+    "place": "Proof, final comparison: Cech resolutions for X and X_T"
+   }
+  },
+  {
+   "text": "For each affine intersection $U_J=\\operatorname{Spec}(C_J)$, the affine pullback-sections lemma [lem-weil-pbc-module-pullback-affine-sections], applied to $f=p$, $V=U_J$, and $U=p^{-1}(U_J)$, gives an isomorphism $c_J:\\Gamma(U_J,\\mathcal G)\\otimes_{C_J}(C_J\\otimes_AB)\\to\\Gamma(U_J\\times_ST,\\mathcal G_T)$ with $c_J(s\\otimes b)=b\\cdot(p^*s)|_{U_J\\times_ST}$. Rewriting the source as $\\Gamma(U_J,\\mathcal G)\\otimes_AB$ gives the displayed maps.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+    "place": "Proof, pullback cover and tensor identification of sections"
+   }
+  },
+  {
+   "text": "The maps $c_J$ commute with every Cech restriction map: restriction carries $s$ to its restriction, pullback commutes with restriction, and multiplication by the scalar $b$ is preserved. Since each Cech differential is an alternating sum of these restrictions, the $c_J$ therefore assemble into a cochain map $\\gamma:K^\\bullet\\otimes_AB\\to K_T^\\bullet$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+    "place": "Proof, compatibility with Cech differentials"
+   }
+  },
+  {
+   "text": "The unit $\\mathcal G\\to Rp_*p^*\\mathcal G$ is represented by the termwise map from the Cech resolution $\\mathcal G\\to C(U,\\mathcal G)$ to the pulled-back Cech resolution $p_*C(U_T,\\mathcal G_T)$: on each intersection $p^{-1}(U_J)=U_J\\times_ST$, it sends a section $s$ to $p^*s$. The terms are $p_*$-acyclic: with $j_{J,T}:U_J\\times_ST\\to X_T$, the morphisms $j_{J,T}$ and $p\\circ j_{J,T}=j_J\\circ(U_J\\times_ST\\to U_J)$ are affine (open immersions of affine opens into the separated $X_T$, $X$, and a base change of the affine $T\\to S$), so by [lem-pc-affine-morphism-hi] and [lem-pc-derived-direct-image-composition] $Rp_*j_{J,T,*}=Rp_*Rj_{J,T,*}=R(p\\circ j_{J,T})_*=(p\\circ j_{J,T})_*$ on quasi-coherent modules; hence this termwise map represents the derived unit. Applying $f_*$ and the canonical composition isomorphism [lem-pc-derived-direct-image-composition] $Rf_*Rp_*=R(f\\circ p)_*=R(g\\circ f_T)_*=Rg_*Rf_{T,*}$ gives the $A$-linear cochain map $K^\\bullet\\to K_T^\\bullet$, $s\\mapsto p^*s$, where $Rg_*\\widetilde{K_T^\\bullet}=g_*\\widetilde{K_T^\\bullet}$ termwise because $g$ is affine and the terms are quasi-coherent [lem-pc-affine-morphism-hi]. Under the adjunction [lem-pc-ringed-spaces-derived-adjoint], the map represented by $\\widetilde{K^\\bullet}\\to g_*\\widetilde{K_T^\\bullet}$ has adjoint $Lg^*\\widetilde{K^\\bullet}\\to g^*\\widetilde{K^\\bullet}\\to\\widetilde{K_T^\\bullet}$ by [lem-sc-derived-adjunction-from-underived]. The underived adjoint is the sheafification of the cochain map whose sections are the $c_J$ by [lem-weil-pbc-module-pullback-affine-sections], hence it is $\\widetilde\\gamma$. Therefore $\\theta$ is the stated composite.",
+   "uses": [
+    "lem-pc-cech-resolution",
+    "lem-pc-affine-morphism-hi",
+    "lem-pc-derived-direct-image-composition",
+    "lem-pc-ringed-spaces-derived-adjoint",
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/master/08IB",
+    "place": "Stacks Tag 08IB proof, comparison of the unit with the Cech model"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-cech-resolution",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-derived-direct-image-composition",
+  "lem-weil-pbc-separated-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
+  "place": "## Proof, final comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "derived base change map for quasi-coherent sheaf computed by Cech complex tensor product",
-   "results": "SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso and naturality lemmas (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree); no derived base change or Cech statement",
-   "date": "2026-10-10",
+   "query": "derived base change map computed by Cech complex tensor product",
+   "results": "Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex; no derived base-change/Cech declaration",
+   "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory Sheaf Cech base change map",
+   "results": "0 hits; loogle reported Unknown identifier CategoryTheory",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*Cech|Cech.*baseChange in Mathlib",
+   "results": "0 matches",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical derived base change map agrees with tensor Cech cochain map",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -52,5 +153,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-base-change-map-cech",
+  "worker": "stage1",
+  "summary": "Repaired the returned split. Step 1 now verifies separated and quasi-compact base change and the affine pushforward identification. Step 4 explicitly constructs the Cech representative of the unit, uses derived direct-image composition, applies the derived adjunction, and invokes the affine pullback-sections formula for the components. Added the statement-only generic derived direct-image composition node.",
+  "blueprint": "The steps realize the ancestor proof's Cech resolutions, pullback-section maps, differential compatibility, and final canonical-map comparison; Step 4 realizes the unit and adjunction clauses of that final comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "The affine tensor formula for pullback sections is a generic theorem supplied by another unit; the Picard route has no replacement."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-adjoint",
+    "why": "The derived pullback/direct-image adjunction is supplied by the Picard duality unit and is required to identify the canonical base-change adjoint."
+   },
+   {
+    "node": "lem-pc-affine-morphism-hi",
+    "why": "Affine pushforward acyclicity and quasi-coherence are supplied by the Picard Serre unit and are required for the Cech terms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-ringed-spaces-derived-adjoint",
+  "lem-pc-affine-morphism-hi"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bcm2009",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcm2009 (reviewer sub-agent of L); spot-checked: Return 19:02 points: 1 (Step 4 split) repaired: Cech unit representative, p_*-acyclicity via lem-pc-affine-morphism-hi, composition node, Lg^*-|Rg_* adjunction, underived comparison, c_J via affine pullback-sections; 2 repaired: stmt_deps now carry lem-pc-ringed-spaces-derived-adjoint and new lem-pc-derived-direct-image-composition (Stacks 0D5T, statement-only, not a duplicate of the proper-Noetherian or Weil-coefficient composition nodes); 3 repaired: Step 1 cites separated/qc base change and affine pushforward. Statement unchanged from d32b73d17, so H1 lem-pc-flat-base-change-cohom Step 1 still gets the cochain map and canonical-map identification. FIX more, RETURN less: C1 Step 4 completed (point 1(b) residue): stated Rg_*~K_T=g_*~K_T (g affine, lem-pc-affine-morphism-hi), spelled out Rf_*Rp_*=R(fp)_*=R(g f_T)_*=Rg_*Rf_{T,*}, and justified p_*-acyclicity of j_{J,T,*} terms via affineness of j_{J,T}, p o j_{J,T} plus composition. Second reading by K1 missed this residue.; 1 file(s) fixed by the reviewer"
  }
 }
