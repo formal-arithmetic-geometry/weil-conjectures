@@ -1,17 +1,19 @@
 # Work queue
 
-912 items; claim with `tools/claim.py next <group> [--stage N]`.
+914 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (318)
+## Stage 1: nodes to split (319)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-constructible-constant-exact` | 7 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
-| `lem-weil-pbc-etale-sections-fpqc-descent` | 2006 | none |
 | `lem-weil-pbc-flat-fibres-irreducible` | 2006 | none |
 | `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 2007 | none |
 | `lem-weil-pbc-etale-geometric-fibre-inverse-image-constant` | 2007 | none |
+| `lem-weil-pbc-etale-inverse-image-section-description` | 2007 | none |
+| `lem-weil-pbc-etale-open-fpqc-descent` | 2007 | none |
+| `lem-weil-pbc-etale-sections-equal-open` | 2007 | none |
 | `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-exact` | 2012 | none |
 | `lem-sc-affine-standard-cover-finite-presentation-flat` | 2014 | none |
@@ -28,7 +30,7 @@
 | `lem-sc-graded-localization-exact` | 2016 | none |
 | `lem-sc-mayer-vietoris-open-cover` | 2016 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
-| `lem-exc-finite-galois-sections-descent` | 3008 | none |
+| `lem-exc-finite-galois-tensor-decomposition` | 3009 | none |
 | `lem-weil-pbc-site-restriction-injectives` | 3010 | none |
 | `lem-exc-etale-open-subgroup-fixed-field` | 3011 | none |
 | `lem-sc-quasi-finite-points-open` | 3012 | none |
@@ -44,9 +46,7 @@
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 3014 | none |
 | `lem-pc-proper-derived-direct-image-composition` | 3014 | none |
 | `lem-pc-separable-polynomial-distinct-roots-alg-closed` | 3014 | none |
-| `lem-sc-acyclic-comparison-natural` | 3014 | none |
 | `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
-| `lem-sc-ext-coherent-hom-injective-acyclic` | 3014 | none |
 | `lem-sc-finite-duality-derived-hom` | 3014 | none |
 | `lem-sc-finite-pushforward-locally-free` | 3014 | none |
 | `lem-sc-global-sections-left-exact` | 3014 | none |
@@ -58,6 +58,7 @@
 | `lem-sc-support-dimension-cohomology-vanishing` | 3014 | none |
 | `lem-sp-cartan-eilenberg-properties` | 3014 | none |
 | `lem-sc-affine-derived-pushforward-t-exact` | 3015 | none |
+| `lem-sc-ext-coherent-hom-injective-flasque` | 3015 | none |
 | `lem-sc-p1-invertible-section-localization` | 3015 | none |
 | `lem-sc-p1-tor-dimension-shift-natural` | 3015 | none |
 | `lem-sc-p1-twist-multiplication` | 3015 | none |
@@ -325,7 +326,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (594)
+## Stage 2: nodes to state (595)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -377,6 +378,7 @@
 | `lem-exc-coinduced-functions-open-stabilizer` | 1 | state |
 | `lem-exc-etale-coproduct-etale` | 1 | state |
 | `lem-exc-etale-field-gsets` | 1 | state |
+| `lem-exc-finite-galois-sections-descent` | 1 | state |
 | `lem-galois-aut-profinite` | 1 | state |
 | `lem-galois-coproduct-copies-morphisms-clopen` | 1 | state |
 | `lem-galois-flat-algebra-descent` | 1 | state |
@@ -924,7 +926,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 335 nodes that wait for stage 1, 1228 nodes that wait for a statement dependency.
+Not open yet: 336 nodes that wait for stage 1, 1231 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
