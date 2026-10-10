@@ -19,11 +19,59 @@
   "place": "Cohomology on Sites, Lemma 03F3 (lemma-cohomology-of-open), derived-functor calculation transported by an equivalence of sites (agent extension)"
  },
  "stmt_deps": [
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $e':\\mathcal D\\to\\mathcal C$ be the inverse functor, with natural isomorphisms $\\eta:\\mathrm{id}_{\\mathcal C}\\cong e'\\circ e$ and $\\varepsilon:e\\circ e'\\cong\\mathrm{id}_{\\mathcal D}$. First, a family $\\{f_a:X_a\\to X\\}_{a\\in A}$ of $\\mathcal C$ is a covering iff $\\{e(f_a)\\}_{a\\in A}$ is a covering of $\\mathcal D$: 'only if' is the hypothesis on $e$; if $\\{e(f_a)\\}$ is a covering, so is $\\{e'e(f_a)\\}$ by the hypothesis on $e'$, and $e'e(f_a)\\circ\\eta_{X_a}=\\eta_X\\circ f_a$ with $\\eta_{X_a},\\eta_X$ isomorphisms, so $\\{f_a\\}$ is a covering by [lem-weil-pbc-site-covering-isomorphic-family] (with $g_a=e'e(f_a)$, $\\sigma_a=\\eta_{X_a}$, $\\varphi=\\eta_X$, and the reindexing convention of [def-weil-pbc-sites-and-cohomology](1)). Hence [lem-weil-pbc-site-equivalence-is-morphism-of-sites](3), applied to $p=e$, $p'=e'$, shows that $e_*:=e'^s$, $G\\mapsto G\\circ e'$, is an equivalence $\\textit{Ab}(\\mathcal C)\\to\\textit{Ab}(\\mathcal D)$ with quasi-inverse $e^s$; it is additive since sums of morphisms of abelian sheaves are computed sectionwise. For every abelian sheaf $G$ on $\\mathcal C$ and object $W$ of $\\mathcal C$, $(e_*G)(e(W))=G(e'e(W))$, and $G(\\eta_W):G(e'e(W))\\to G(W)$ is an isomorphism, natural in $G$ and in $W$ by naturality of $\\eta$.",
+   "uses": [
+    "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+    "lem-weil-pbc-site-covering-isomorphic-family",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Sites, Lemma Tag 03A0 (lemma-equivalence), specialized to an equivalence of sites carrying coverings to coverings in both directions"
+   }
+  },
+  {
+   "text": "Choose an injective resolution $s:G\\to I^\\bullet$ in $\\operatorname{Ab}(\\mathcal C)$. The additive equivalence $e_*$ carries it to an injective resolution $e_*G\\to e_*I^\\bullet$ in $\\operatorname{Ab}(\\mathcal D)$, since it carries injectives to injectives and exact sequences to exact sequences; it also carries morphisms of resolutions and their homotopies.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-equivalence-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology, Lemma Tag 015Z (lemma-adjoint-preserve-injectives), as used in Cohomology on Sites, Lemma Tag 03YU"
+   }
+  },
+  {
+   "text": "Evaluation on the corresponding objects gives an isomorphism of cochain complexes $\\Gamma(e(W),e_*I^\\bullet)=I^\\bullet(e'e(W))\\xrightarrow{I^\\bullet(\\eta_W)}I^\\bullet(W)=\\Gamma(W,I^\\bullet)$ (a map of complexes since the differentials are morphisms of sheaves, step 1), and it is compatible with the augmentation and with morphisms $W'\\to W$. By the definition of cohomology over an object as the cohomology of sections of an injective resolution, taking cohomology yields natural isomorphisms $H^q(W,G)\\cong H^q(e(W),e_*G)$ for every $q\\ge0$; the degree-zero map is the canonical identification of sections.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-equivalence-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Cohomology on Sites, Lemma Tag 03YU (lemma-cohomology-bigger-site), injective-resolution calculation and functoriality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-equivalence-injective-resolutions",
+  "lem-weil-pbc-site-covering-isomorphic-family",
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03YU (lemma-cohomology-bigger-site), with the equivalence-of-sites specialization of Lemma Tag 03A0"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +96,32 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-etale-cohomology-over-open",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+  "worker": "stage1",
+  "summary": "Checked the imported statement against the site cohomology definition and the equivalence-of-sites argument. No sorry-free Lean declaration states this item. Split the proof into (1) the sheaf-category equivalence induced by an equivalence of sites carrying coverings to coverings in both directions, (2) transport of injective resolutions by the resulting additive equivalence, and (3) equality of section complexes on corresponding objects, giving the natural cohomology isomorphism. Existing nodes were cited for every non-elementary fact; no new nodes were needed.",
+  "blueprint": "Realizes the blueprint ancestor lem-sc-artin-schreier-dimension proof clause 'transport of sheaf cohomology through the localized-site equivalence' via the existing site-equivalence and injective-resolution nodes.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-equivalence-is-morphism-of-sites",
+  "lem-weil-pbc-site-covering-isomorphic-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cis",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cis (reviewer sub-agent of L); spot-checked: Source: Stacks Sites 03A0 (lemma-equivalence) specialized to an equivalence, and Cohomology on Sites 03YU injective-resolution computation; the statement (00VH sites, e and its inverse carrying coverings to coverings, H^q(W,G) = R^q Gamma(W,-) per def-weil-pbc-sites-and-cohomology(2)) is unchanged and correct. FIX more, RETURN less: step 1 cited lem-weil-pbc-site-equivalence-sheaf-transport, which is stated for Grothendieck topologies of sieves with the induced topology, not for the item's 00VH covering-family sites (C4); replaced by lem-weil-pbc-site-equivalence-is-morphism-of-sites(3) (00VH sites, p^s and p'^s quasi-inverse equivalences on abelian sheaves), whose 'covering iff image covering' hypothesis is derived in the step from the item's two-way hypothesis via eta-naturality and lem-weil-pbc-site-covering-isomorphic-family with the reindexing convention of the def. Fixes: : stmt_deps: sheaf-transport -> is-morphism-of-sites; proof[0]: text, uses, source rewritten as above, e_* defined as precomposition with the inverse e', value at e(W) identified with G(W) by G(eta_W) (not an equality); proof[2]: text: the 'equality' of section complexes made the isomorphism I^bullet(eta_W); proof_deps: sheaf-transport replaced by is-morphism-of-sites and covering-isomorphic-family; split_report summary/blueprint wording. Steps 2-3: lem-weil-pbc-equivalence-injective-resolutions (Mathlib leaf, clauses (1)-(3): injectives, exactness, resolutions, lifts and homotopies) carries the resolution and its functoriality; cohomology of sections by def(2), degree 0 = sections, naturality in G by clause (3), in W'->W by naturality of eta and restriction maps. Tool uses (C8, generic site lemmas of sk-thm-p1 used as black boxes): is-morphism-of-sites, covering-isomorphic-family. Small case: e = identity gives eta = id and the identity of H^q. No new nodes. Times: Sat Oct 10 04:21:09 PM UTC 2026 to Sat Oct 10 04:22:31 PM UTC 2026; 1 file(s) fixed by the reviewer"
+ }
 }
