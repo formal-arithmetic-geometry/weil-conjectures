@@ -25,18 +25,54 @@
   "document": "literature/stacks-project/coherent.tex",
   "place": "Cohomology of Schemes, Lemma Tag 01XD (coherent-lemma-cech-cohomology-quasi-coherent), proved via Cohomology of Sheaves, Lemma Tag 01ET (cohomology-lemma-cech-spectral-sequence-application, degeneration of the Cech-to-cohomology spectral sequence, whose edge map is the canonical map of Tag 01EQ) and Cohomology of Schemes, Lemma Tag 01XB (cohomology of quasi-coherent modules on affines vanishes)"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $p\\geq0$. By [lem-sc-cech-comparison-map-naturality] the canonical comparison map $c_{\\mathcal F}:\\check H^p(\\mathcal U,\\mathcal F)\\to H^p(X,\\mathcal F)$ is defined for every $\\mathcal O_X$-module $\\mathcal F$ and every open covering $\\mathcal U$ of $X$. Under the present hypotheses (all finite intersections $U_{i_0\\dots i_p}$ affine, $\\mathcal F$ quasi-coherent), which are exactly those of [lem-pc-cech-computes], that node gives the identification $\\check H^p(\\mathcal U,\\mathcal F)=H^p(X,\\mathcal F)$ for all $p\\geq0$, the identification being the canonical comparison map $c_{\\mathcal F}$ (Stacks 01XD states that the map of 01EQ, which [lem-sc-cech-comparison-map-naturality] defines, is an isomorphism). Hence $c_{\\mathcal F}$ is an isomorphism for every $p$, and it is the identification of [lem-pc-cech-computes].",
+   "uses": [
+    "lem-sc-cech-comparison-map-naturality",
+    "lem-pc-cech-computes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Lemma Tag 01XD"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-pc-cech-computes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma Tag 01XD (the map of Tag 01EQ is an isomorphism)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
-   "query": "cechComparison | Cech comparison | cechToCohomology in Mathlib",
-   "verdict": "no match: Mathlib has no Cech-to-derived comparison map for sheaves on sites/schemes (grep by L, 2026-10-10 16:17 UTC)"
+   "query": "rg -n -i 'cech.*comparison|comparison.*cech|cechToCohomology' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "No Cech-to-derived comparison map for sheaves on schemes/sites",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology of a quasi-coherent sheaf for an affine open cover equals sheaf cohomology",
+   "results": "AffineZariskiSite.sheafEquiv, Sheaf.cohomologyPresheaf, Sheaf.H: no Cech-to-cohomology comparison",
+   "date": "2026-10-10",
+   "verdict": "no match (run by reviewer R-ccia1657)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln -iE 'cech.*comparison|comparison.*cech|cechToCohomology|cechComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only CategoryTheory/Sites/SheafCohomology/Cech.lean (Cech complex, no comparison map)",
+   "date": "2026-10-10",
+   "verdict": "no match (run by reviewer R-ccia1657)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-ccn",
@@ -52,5 +88,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-cech-comparison-map-iso-affine",
+  "worker": "stage1",
+  "summary": "Folded by reviewer R-ccia1657 (audit coord/audit-new-nodes.md: duplicate of lem-pc-cech-computes, same tag 01XD, same hypotheses) into one elementary step citing lem-pc-cech-computes and lem-sc-cech-comparison-map-naturality; the delivered node lem-sc-cech-edge-map-identification is dropped.",
+  "blueprint": "Realizes the ancestor proof clause for the Cech identification used in the locally free Ext/cohomology argument, following Stacks Tags 01XD, 01ET, 01EQ.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-cech-computes",
+    "why": "The item needs the generic Cech-computation identification supplied by the neighboring Cech unit; no node in the Serre-duality route reproves it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-cech-computes"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ccia1657",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccia1657 (reviewer sub-agent of L); spot-checked: Source Stacks 01XD (coherent-lemma-cech-cohomology-quasi-coherent): X scheme, cover with all finite intersections affine, F quasi-coherent, the map of 01EQ is an isomorphism; the item's statement agrees hypothesis by hypothesis. lem-pc-cech-computes states exactly this (tag 01XD, same hypotheses) and lem-sc-cech-comparison-map-naturality defines c_F (01EQ). FIX more, RETURN less (per audit coord/audit-new-nodes.md 16:50): the delivered two-step route (spectral sequence lem-sc-cech-spectral, stated for the etale site, plus new node lem-sc-cech-edge-map-identification) duplicated lem-pc-cech-computes; dag/nodes/sec-picard-framework/lem-sc-cech-comparison-map-iso-affine.json: proof: replaced by one elementary step citing lem-sc-cech-comparison-map-naturality and lem-pc-cech-computes; proof_deps, proof_origin, split_report.summary/tool_uses updated accordingly; mathlib_searches: unlogged pre-17:00 leansearch/leanfinder records removed, reviewer leanfinder query and grep (no match) recorded; new node lem-sc-cech-edge-map-identification dropped (--drop-nodes), tool use lem-sc-cech-spectral dropped. Tool use lem-pc-cech-computes accepted (generic black box). Small case: affine X with one-open cover, both sides are Gamma in degree 0 and 0 above. Start Sat Oct 10 04:57:40 PM UTC 2026, end Sat Oct 10 04:58:38 PM UTC 2026; 1 file(s) fixed by the reviewer"
  }
 }

@@ -2067,3 +2067,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:57 L: returned deliver/H1/lem-sc-boundary-cech-compatibility (reviewer RETURN: 1. E5/C4/D3: steps 2-3: the compatibility of c_A with the connecting map, which is the whole content of the item, is ass)
 - 16:57 L: merged deliver/C1/lem-sc-affine-finite-projective-prime-membership (reviewer FIX; after a return; new nodes: 1)
 - 16:58 L: returned deliver/F1/lem-sc-finite-duality-derived-hom (reviewer RETURN: 1. D1: new node lem-sc-finite-derived-hom-right-adjoint and Step 2: the node's statement is the item's first clause verb)
+- 16:58 L: merged deliver/K1/lem-sc-cech-comparison-map-iso-affine (reviewer FIX; first push; new nodes: 0)
