@@ -1,0 +1,64 @@
+{
+ "id": "lem-sc-p1-ungraded-submodule-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, Noetherianity keeps the successive graded kernels finitely generated",
+   "via": [
+    "lem-sc-p1-graded-submodule-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Submodules of finite modules over a two-variable polynomial ring are finite",
+ "statement": "Let k be a field and S=k[x_0,x_1]. If N is a finitely generated (ungraded) S-module [def-weil-finitely-generated-module] and K is an S-submodule of N, then K is finitely generated as an S-module [def-weil-finitely-generated-module].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "proof, Noetherianity keeps the successive graded kernels finitely generated"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "submodule of a finitely generated module over k[x0,x1] is finitely generated",
+   "results": "Mathlib Noetherian module infrastructure; no single specialized declaration",
+   "date": "2026-10-10",
+   "verdict": "generalization: isNoetherian_of_isNoetherianRing_of_finite plus IsNoetherian.noetherian"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherian R M -> Module.Finite R M -> IsNoetherian R M",
+   "results": "isNoetherian_of_isNoetherianRing_of_finite",
+   "date": "2026-10-10",
+   "verdict": "match: general theorem specializes to S=k[x0,x1]"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'isNoetherian_of_isNoetherianRing_of_finite' Mathlib/RingTheory/Noetherian/Basic.lean; grep -n 'noetherian :' Mathlib/RingTheory/Noetherian/Defs.lean",
+   "results": "Mathlib/RingTheory/Noetherian/Basic.lean:324-328 and Noetherian/Defs.lean:63-65",
+   "date": "2026-10-10",
+   "verdict": "match: finite module over Noetherian ring is Noetherian, and every submodule is FG"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "isNoetherian_of_isNoetherianRing_of_finite; IsNoetherian.noetherian",
+  "file": "Mathlib/RingTheory/Noetherian/Basic.lean",
+  "line": 324,
+  "how": "specializes in one line: `MvPolynomial.isNoetherianRing` (Mathlib/RingTheory/Polynomial/Basic.lean:935, Hilbert basis, instance) makes S = MvPolynomial (Fin 2) k Noetherian; the instance `isNoetherian_of_isNoetherianRing_of_finite` (Mathlib/RingTheory/Noetherian/Basic.lean:324-328) makes the finite S-module N Noetherian; `IsNoetherian.noetherian` (Mathlib/RingTheory/Noetherian/Defs.lean:63-64) applied to K gives K.FG"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-p1-graded-submodule-finite",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality"
+}

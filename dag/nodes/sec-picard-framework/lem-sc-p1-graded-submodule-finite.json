@@ -19,9 +19,36 @@
  "stmt_deps": [
   "def-sc-p1-standard"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Forget the grading. The polynomial ring S=k[x_0,x_1] over the field k is Noetherian by the Hilbert basis theorem, and the finitely generated S-module N is therefore a Noetherian module. Hence its S-submodule K is finitely generated, by [lem-sc-p1-ungraded-submodule-finite].",
+   "uses": [
+    "lem-sc-p1-ungraded-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, Noetherianity keeps the successive graded kernels finitely generated"
+   }
+  },
+  {
+   "text": "Choose a finite S-generating set for K from step 1. Each generator is a finite sum of homogeneous components because K is graded. Collect all those components. The collected finite set is homogeneous and still generates K: it generates each original generator, hence K, and all its elements lie in K because K is a graded submodule. Thus K is finitely generated as a graded S-module (including K=0, where the empty set generates).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, Noetherianity keeps the successive graded kernels finitely generated"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-ungraded-submodule-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "proof, Noetherianity keeps the successive graded kernels finitely generated"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,12 +73,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-graded-kernel-finite",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-graded-submodule-finite",
+  "worker": "stage1",
+  "summary": "Split the graded Noetherian submodule argument into the ungraded finite-submodule fact and the elementary extraction of homogeneous components from finite generators. The ungraded fact is recorded as a Mathlib leaf via the Noetherian-module theorem; no exact graded Lean declaration exists.",
+  "blueprint": "Realizes the proof sentence 'Noetherianity keeps the successive graded kernels finitely generated' in lem-sc-p1-graded-resolution.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-gsf",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gsf (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-p1-graded-resolution.md, proof sentence 'Noetherianity keeps the successive graded kernels finitely generated'; the item statement (k field, S=k[x_0,x_1] graded per def-sc-p1-standard, N f.g. graded, K graded submodule => K f.g. graded) is unchanged and is what that sentence uses. Step 1 forgets the grading and takes K f.g. from the statement of the new leaf lem-sc-p1-ungraded-submodule-finite (same k, S, N f.g., K submodule; conclusion K f.g.), which says it with all hypotheses (C4 ok). Step 2 is elementary: elements of N have finitely many homogeneous components, which lie in K because K is graded; the components of a finite generating set form a finite homogeneous generating set; K=0 handled. Not relabelling (D1): the leaf is ungraded, strictly smaller. Mathlib lines verified in the pinned Mathlib: Noetherian/Basic.lean:324-328 isNoetherian_of_isNoetherianRing_of_finite (instance), Noetherian/Defs.lean:63-64 IsNoetherian.noetherian, Polynomial/Basic.lean:935 MvPolynomial.isNoetherianRing (Hilbert basis instance); the leaf is a one-line specialization. Mathlib states only the ungraded fact, so the graded item stays split rather than a leaf. No slopmaster2 declaration found (grep for the ids and graded FG keywords). Small cases: K=0, K=N, K=(x_0)S in N=S. Fixes: dag/nodes/sec-picard-framework/lem-sc-p1-ungraded-submodule-finite.json: mathlib_match.how: added the Hilbert-basis instance MvPolynomial.isNoetherianRing (Polynomial/Basic.lean:935) that step 1's 'Hilbert basis theorem' relies on, and the exact lines; stmt_deps: dropped def-weil-pbc-noetherian-ring, which the statement does not cite. Start Sat Oct 10 04:12:23 PM UTC 2026, end Sat Oct 10 04:13:01 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
