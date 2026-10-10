@@ -24,9 +24,44 @@
   "def-weil-abstract-derived-category",
   "lem-sc-derived-open-restriction-adjunction-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $\\mathcal A=\\operatorname{Mod}(\\mathcal O_X)$ and $\\mathcal B=\\operatorname{Mod}(\\mathcal O_U)$, with $F=j^{-1}:\\mathcal A\\to\\mathcal B$ and $G=j_!:\\mathcal B\\to\\mathcal A$. Both functors are exact and additive by [lem-sc-derived-open-restriction-adjunction-exact], and $G$ is left adjoint to $F$ there. Applying [lem-weil-pbc-exact-functor-derived-factorization] to each of $F$ and $G$ gives functors on the derived categories whose values are represented by applying the corresponding functor termwise to any complex; the same statement says that the termwise functors carry quasi-isomorphisms to quasi-isomorphisms. Hence for a complex $K$ of $\\mathcal A$ every transition map of the ind-system $(F(K'))_{K\\to K'}$ is an isomorphism in $D(\\mathcal B)$, so the system is essentially constant with value $F(K)$; dually for the pro-system $(G(M'))_{M'\\to M}$. Thus $RF$ and $LG$ in the sense of [lem-pc-derived-adjoint-functors] are defined at every complex and are computed termwise.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pc-derived-adjoint-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 015F (lemma-right-derived-exact-functor), parts (2)-(4), applied to the exact functors j_! and j^{-1}"
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-pc-derived-adjoint-functors] now hold for the adjoint pair $G=j_!\\dashv F=j^{-1}$: the module categories are abelian, their derived categories are [def-weil-abstract-derived-category], and the left and right derived functors are defined everywhere by Step 1. The lemma therefore gives a canonical bijection $\\operatorname{Hom}_{D(\\mathcal O_X)}(j_!A,B)\\cong\\operatorname{Hom}_{D(\\mathcal O_U)}(A,j^{-1}B)$, functorial in $A$ and $B$. Since the derived restriction is represented termwise by restriction, this is the asserted restriction of $B$ to $U$.",
+   "uses": [
+    "lem-pc-derived-adjoint-functors",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 09T5 (lemma-derived-adjoint-functors), as in the proof of Cohomology Tag 08BT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-derived-adjoint-functors",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Cohomology Lemma 08BT proof; derived-adjunction mechanism from Derived Categories Lemmas 015F and 09T5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,12 +93,44 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-derived-hom-mayer-vietoris",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-derived-open-shriek-derived-adjunction",
+  "worker": "stage1",
+  "summary": "Split the derived extension-by-zero adjunction into two proof steps. Exactness and termwise computation of both derived functors come from the existing exact-functor factorization statement; the natural derived Hom bijection then follows from the existing generic derived-adjoint theorem applied to j_! ⊣ j^{-1}. No new nodes were needed.",
+  "blueprint": "Realizes the proper-flat support proof clause of lem-sc-finite-duality identifying Hom from extension-by-zero with Hom on the corresponding open.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Its generic statement supplies that an exact functor induces a derived-category functor computed termwise, which is needed for both j_! and restriction."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Its generic statement supplies the natural adjunction between everywhere-defined derived functors of an adjoint pair."
+   }
+  ],
+  "not_duplicates": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-derived-adjoint-functors",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-derived-adjoint-functors"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-osa3133",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-osa3133 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Step 1/2 against lem-sc-derived-open-restriction-adjunction-exact, lem-weil-pbc-exact-functor-derived-factorization, lem-pc-derived-adjoint-functors (Tag 015F/09T5 route via exactness, no K-injective restriction needed); no duplicate of lem-pc-ringed-spaces-derived-adjoint(-general) (those are Lf^*/Rf_*). FIX more, RETURN less: (1) C4: Step 1 set A=Mod(O_U), B=Mod(O_X), making G=j_! : A->B and F=j^{-1} : B->A, the reverse of lem-pc-derived-adjoint-functors (F:A->B, G:B->A); swapped to A=Mod(O_X), B=Mod(O_U). (2) C1: the inference 'termwise functor => RF/LG defined everywhere' (essentially constant ind/pro-systems) is now spelled out from the qis-preservation clause of the factorization lemma. (3) source.place still said 'Tag 08BW proof, using 08BS' despite the second reading's claim; set to 08BT, and Step 2 source no longer names 08BS (K-injective restriction is not used).; 1 file(s) fixed by the reviewer"
+ }
 }
