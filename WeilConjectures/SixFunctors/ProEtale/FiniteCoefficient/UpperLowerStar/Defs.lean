@@ -299,37 +299,6 @@ noncomputable def ProEtale.upperStarComp : (h₁ ≫ h₂)^*[A] ≅ (h₂)^*[A] 
 
 end UpperStar
 
-section Id
-
-variable (X : Scheme.{u})
-
-/-- Base change along the identity of `X` is the identity of the small pro-étale site of `X`,
-by uniqueness of right adjoints: it is right adjoint to the localization functor along the
-identity, which is the identity functor by `MorphismProperty.Over.mapId`. -/
-noncomputable def ProEt.overPullbackId :
-    MorphismProperty.Over.pullback @WeaklyEtale ⊤ (𝟙 X) ≅ 𝟭 X.ProEt :=
-  (conjugateIsoEquiv
-    (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ (𝟙 X) inferInstance _root_.trivial)
-    (Adjunction.id (C := X.ProEt)) (MorphismProperty.Over.mapId ⊤ X).symm)
-
-/-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of the pushforward along the identity of `X`: the
-pushforward along a continuous functor isomorphic to the identity is isomorphic to the identity
-functor. -/
-noncomputable def ProEtale.lowerStarId :
-    (𝟙 X)_*[A] ≅ 𝟭 (Sheaf (Scheme.ProEt.topology X) A) :=
-  Functor.sheafPushforwardContinuousId' (eF'' := ProEt.overPullbackId X) A
-    (Scheme.ProEt.topology X)
-
-/-- The identity isomorphism `(𝟙 X)^* ≅ 𝟭` of the pullback along the identity of `X`, obtained
-from `ProEtale.lowerStarId` by uniqueness of left adjoints. -/
-noncomputable def ProEtale.upperStarId :
-    (𝟙 X)^*[A] ≅ 𝟭 (Sheaf (Scheme.ProEt.topology X) A) :=
-  ((conjugateIsoEquiv (ProEtale.upperStarLowerStarAdjunction A (𝟙 X))
-      (Adjunction.id (C := Sheaf (Scheme.ProEt.topology X) A))).symm
-    (ProEtale.lowerStarId A X)).symm
-
-end Id
-
 end Comp
 
 end AlgebraicGeometry
