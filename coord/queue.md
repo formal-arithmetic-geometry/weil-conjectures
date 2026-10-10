@@ -1,8 +1,8 @@
 # Work queue
 
-837 items; claim with `tools/claim.py next <group> [--stage N]`.
+840 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (661)
+## Stage 1: nodes to split (664)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
-| `lem-weil-pbc-popescu-solution-modulo` | 1011 | none |
 | `lem-weil-pbc-regular-local-generators-regular-sequence` | 1011 | none |
 | `lem-weil-pbc-regular-local-localization` | 1011 | none |
 | `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1011 | none |
@@ -103,6 +102,8 @@
 | `lem-weil-pbc-formally-smooth-complete-local-regular` | 1012 | none |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1012 | none |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1012 | none |
+| `lem-weil-pbc-geometrically-regular-h1-injective` | 1012 | none |
+| `lem-weil-pbc-geometrically-regular-over-field-flat` | 1012 | none |
 | `lem-weil-pbc-grothendieck-existence-easy` | 1012 | none |
 | `lem-weil-pbc-henselian-finite-etale-equivalence` | 1012 | none |
 | `lem-weil-pbc-higher-direct-image-presheaf` | 1012 | none |
@@ -127,12 +128,14 @@
 | `lem-weil-pbc-module-pullback-affine-sections` | 1012 | none |
 | `lem-weil-pbc-module-stalk-filtered-colimit` | 1012 | none |
 | `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1012 | none |
+| `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1012 | none |
 | `lem-weil-pbc-popescu-delocalize-weak` | 1012 | none |
 | `lem-weil-pbc-popescu-desingularize` | 1012 | none |
 | `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1012 | none |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1012 | none |
 | `lem-weil-pbc-popescu-lift-once` | 1012 | none |
 | `lem-weil-pbc-popescu-lift-twice` | 1012 | none |
+| `lem-weil-pbc-popescu-solution-modulo-choose` | 1012 | none |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1012 | none |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1012 | none |
 | `lem-weil-pbc-quasi-coherent-ideal-zero-set-affine` | 1012 | none |
@@ -849,7 +852,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 673 nodes that wait for stage 1, 467 nodes that wait for a statement dependency.
+Not open yet: 676 nodes that wait for stage 1, 468 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
