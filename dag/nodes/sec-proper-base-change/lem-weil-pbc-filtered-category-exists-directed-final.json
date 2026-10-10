@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-filtered-category-exists-directed-final",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof, invocation of Theorem 03Q9 in degree zero: the passage from the small filtered neighbourhood category to a nonempty directed index",
+   "via": [
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A small filtered category admits a final functor from a nonempty directed set",
+ "statement": "Let $\\mathcal J$ be a small filtered category [def-weil-pbc-category-colimit]. Then there exist a nonempty directed set $(A,\\le)$, regarded as a category with exactly one morphism $a\\to b$ when $a\\le b$ and none otherwise, and a functor $F:A\\to\\mathcal J$ which is final (cofinal in the sense of Stacks, Categories, Definition 04E6), that is: (1) for every object $y$ of $\\mathcal J$ there exist $a\\in A$ and a morphism $y\\to F(a)$ in $\\mathcal J$; (2) for every object $y$ of $\\mathcal J$, all $a,a'\\in A$ and all morphisms $b:y\\to F(a)$, $b':y\\to F(a')$ there exist a sequence $a=a_0\\ge a_1\\le a_2\\ge a_3\\le\\cdots\\le a_{2n}=a'$ in $A$ and morphisms $b_i:y\\to F(a_i)$ ($0\\le i\\le 2n$) with $b_0=b$, $b_{2n}=b'$, $F(a_{2k+1}\\to a_{2k})\\circ b_{2k+1}=b_{2k}$ and $F(a_{2k+1}\\to a_{2k+2})\\circ b_{2k+1}=b_{2k+2}$ for $k=0,\\ldots,n-1$.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma Tag 0032 (lemma-directed-category-system), categories.tex line 2710; existence of the directed index and the cofinal functor"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "small filtered category admits a nonempty directed poset and a final functor into it",
+   "results": "CategoryTheory.IsFiltered.exists_directed",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFiltered.exists_directed",
+   "results": "CategoryTheory.IsFiltered.exists_directed (Mathlib/CategoryTheory/Presentable/Directed.lean:544)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'exists_directed' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Presentable/Directed.lean",
+   "results": "Presentable/Directed.lean:544: IsFiltered.exists_directed: a nonempty directed partial order alpha and a final functor alpha => J",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.IsFiltered.exists_directed",
+  "file": "Mathlib/CategoryTheory/Presentable/Directed.lean",
+  "line": 544,
+  "how": "exact: IsFiltered.exists_directed (Presentable/Directed.lean:544, @[stacks 0032]) gives a nonempty directed partial order alpha and F : alpha => J with F.Final; Final is the class (Limits/Final.lean:96) `out (d) : IsConnected (StructuredArrow d F)`, whose objects are pairs (a, y -> F(a)) and morphisms a <= a' compatible with the arrows from y: nonemptiness is (1), and isPreconnected_zigzag (IsConnected.lean:418) gives a Zigzag in StructuredArrow y F, which after inserting identities is the alternating sequence of (2)"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-weil-pbc-filtered-category-directed-cofinal",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff"
+}

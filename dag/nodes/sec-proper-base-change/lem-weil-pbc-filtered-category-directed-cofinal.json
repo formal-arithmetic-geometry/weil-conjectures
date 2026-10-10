@@ -21,20 +21,78 @@
  "stmt_deps": [
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-filtered-category-exists-directed-final] to obtain a nonempty directed set A and a functor F:A\\to\\mathcal J satisfying the finality conditions (1) and (2) of that statement. Write x_a=F(a) and let \\varphi_{ab}:x_a\\to x_b be the image under F of the unique morphism a\\to b of A when a\\le b. Functoriality gives \\varphi_{aa}=\\mathrm{id} and \\varphi_{bc}\\circ\\varphi_{ab}=\\varphi_{ac}, and A, x_a, \\varphi_{ab} do not depend on any target category or diagram.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma Tag 0032 (lemma-directed-category-system), categories.tex line 2710, construction of the directed system"
+   }
+  },
+  {
+   "text": "Put H=F^{\\mathrm{op}}:A^{\\mathrm{op}}\\to\\mathcal J^{\\mathrm{op}}. The category A^{\\mathrm{op}} is cofiltered since A is a nonempty directed set. H satisfies hypotheses (i) and (ii) of clause (1) of [lem-weil-pbc-initial-functor-cofiltered-criterion]: a morphism H(a)\\to y in \\mathcal J^{\\mathrm{op}} is a morphism y\\to F(a) in \\mathcal J, so (i) is condition (1) of [lem-weil-pbc-filtered-category-exists-directed-final]. For (ii), let s,s':y\\to F(a) in \\mathcal J. Condition (2) of that statement gives a sequence a=a_0\\ge a_1\\le a_2\\ge\\cdots\\le a_{2n}=a and b_i:y\\to F(a_i) with b_0=s, b_{2n}=s' and F(a_{2k+1}\\to a_{2k})\\circ b_{2k+1}=b_{2k}, F(a_{2k+1}\\to a_{2k+2})\\circ b_{2k+1}=b_{2k+2}. Choose c\\in A with c\\ge a_i for all i (A is directed and the sequence is finite). By functoriality F(a_i\\to c)\\circ b_i is the same morphism for all i, so F(a\\to c)\\circ s=F(a\\to c)\\circ s'; in \\mathcal J^{\\mathrm{op}} this is s\\circ H(t)=s'\\circ H(t) for the morphism t:c\\to a of A^{\\mathrm{op}}. Now take \\mathcal B=\\mathcal J^{\\mathrm{op}}, so \\mathcal B^{\\mathrm{op}}=\\mathcal J and H^{\\mathrm{op}}=F. For a category \\mathcal C, a functor M:\\mathcal J\\to\\mathcal C and a colimit cocone (L,(\\iota_x)_x) of M, the cited statement says that M\\circ F has a colimit and that the canonical map \\varinjlim_A M\\circ F\\to L induced by the \\iota_{x_a} is an isomorphism; hence (L,(\\iota_{x_a})_a) is a colimit of the directed system (M(x_a),M(\\varphi_{ab})). This is clause (1).",
+   "uses": [
+    "lem-weil-pbc-initial-functor-cofiltered-criterion",
+    "lem-weil-pbc-filtered-category-exists-directed-final"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma Tag 0032 (lemma-directed-category-system), clause (1), via Lemma Tag 04E7 (lemma-cofinal)"
+   }
+  },
+  {
+   "text": "Let H=F^{\\mathrm{op}}:A^{\\mathrm{op}}\\to\\mathcal J^{\\mathrm{op}} as in step 2. H is initial in the sense of conditions (1) and (2) of [lem-weil-pbc-initial-functor-limit]: (1) is condition (1) of [lem-weil-pbc-filtered-category-exists-directed-final] read in \\mathcal J^{\\mathrm{op}}. For (2), given b:y\\to F(a), b':y\\to F(a') in \\mathcal J, take the sequence a=a_0\\ge a_1\\le\\cdots\\le a_{2n}=a' and the b_i of condition (2) of that statement and insert identities at both ends, c_0=c_1=a_0, c_{j+1}=a_j (1\\le j\\le 2n), c_{2n+2}=a_{2n}, with the corresponding morphisms from y; then c_0\\le c_1\\ge c_2\\le c_3\\ge\\cdots\\ge c_{2n+2} in A, i.e. c_0\\leftarrow c_1\\rightarrow c_2\\leftarrow\\cdots\\rightarrow c_{2n+2} in A^{\\mathrm{op}}, and the compatibilities of (2) of [lem-weil-pbc-initial-functor-limit] are, read in \\mathcal J, those of the given sequence (and trivial at the identities). For a category \\mathcal C, a functor M:\\mathcal J^{\\mathrm{op}}\\to\\mathcal C and a limit cone (S,(\\pi_x)_x) of M, clause (a) of [lem-weil-pbc-initial-functor-limit] says that the restricted cone (S,(\\pi_{x_a})_a) is a limit of M\\circ H, which is the inverse system (M(x_a),M(\\varphi_{ab})) over A. This proves clause (2) with the same A, x_a, \\varphi_{ab}.",
+   "uses": [
+    "lem-weil-pbc-initial-functor-limit",
+    "lem-weil-pbc-filtered-category-exists-directed-final"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma Tag 0032 (lemma-directed-category-system), clause (2), via Lemma Tag 002R (lemma-initial)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-category-exists-directed-final",
+  "lem-weil-pbc-initial-functor-cofiltered-criterion",
+  "lem-weil-pbc-initial-functor-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Lemma Tag 0032 (lemma-directed-category-system), categories.tex line 2710"
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "sed -n 540,555p Mathlib/CategoryTheory/Presentable/Directed.lean; grep -n 'final_iff_isIso_colimit_pre\\|isColimitWhiskerEquiv' Mathlib/CategoryTheory/Limits/Final.lean",
-   "results": "CategoryTheory.IsFiltered.exists_directed (Presentable/Directed.lean:544, @[stacks 0032]): a nonempty directed partial order alpha and a final functor alpha => J; Functor.Final.isColimitWhiskerEquiv (Limits/Final.lean:294) transports colimits along a final functor",
+   "tool": "leansearch",
+   "query": "filtered category can be replaced by one directed set for all colimits and limits simultaneously",
+   "results": "CategoryTheory.IsFiltered.exists_directed; initial_op_of_final; Functor.Initial.isLimitWhiskerEquiv; Functor.Final.colimitIso",
    "date": "2026-10-10",
-   "verdict": "candidate for the splitter: these declarations together state clauses (1)-(2) (for (2) with initial_op_of_final); not recorded as a leaf by the reviewer"
+   "verdict": "match for the proof after combining the cited transport leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsFiltered.exists_directed; Functor.Final.colimitIso; Functor.Initial.isLimitWhiskerEquiv",
+   "results": "IsFiltered.exists_directed (Presentable/Directed.lean:544), Final.colimitIso (Limits/Final.lean:350), Initial.isLimitWhiskerEquiv (Limits/Final.lean:656)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'exists_directed' Mathlib/CategoryTheory/Presentable/Directed.lean; grep -n 'colimitIso\\|isLimitWhiskerEquiv' Mathlib/CategoryTheory/Limits/Final.lean",
+   "results": "Presentable/Directed.lean:544; Limits/Final.lean:350 and :656",
+   "date": "2026-10-10",
+   "verdict": "match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "R-ps3",
@@ -50,5 +108,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-filtered-category-directed-cofinal",
+  "worker": "stage1",
+  "summary": "Split Tag 0032 into a directed-index existence leaf and two transport steps. A single final functor from the directed set is converted to an initial opposite functor; the reviewed colimit and limit transport leaves then establish both clauses for the same index.",
+  "blueprint": "Realizes the ancestor blueprint proof clause invoking Categories Lemma 0032: first the directed cofinal index, then its colimit and limit consequences.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fcc",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcc (reviewer sub-agent of L); spot-checked: Source Stacks Tag 0032 (categories-lemma-directed-category-system) with Definition 04E6 (definition-cofinal, categories.tex read): the item statement agrees with it (small filtered J, one nonempty directed A with x_a, phi_ab serving all C and M, clause (1) colimits, clause (2) limits of contravariant diagrams). Leaf lem-weil-pbc-filtered-category-exists-directed-final verified at Mathlib/CategoryTheory/Presentable/Directed.lean:544 (IsFiltered.exists_directed, @[stacks 0032] at 543): nonempty directed partial order and F.Final, exact. Step 1 carried by the leaf; step 2 by lem-weil-pbc-initial-functor-cofiltered-criterion clause (1) with A:=A^op, B:=J^op, H:=F^op (canonical map induced by the coprojections iota_{F(a)} is an iso); step 3 by lem-weil-pbc-initial-functor-limit clause (a) with H:=F^op. Both cited nodes are off-unit Mathlib leaves used as generic transport tools (C8 accepted). FIX more, RETURN less: (B3) the leaf used 'final' with no definition node; dag/nodes/sec-proper-base-change/lem-weil-pbc-filtered-category-exists-directed-final.json: statement: finality now spelled out as Stacks 04E6 conditions (1) nonempty, (2) alternating zigzag, same mathematics; mathlib_match.how: Final.out (Limits/Final.lean:96, IsConnected (StructuredArrow d F)) plus isPreconnected_zigzag (IsConnected.lean:418) named for the unfolding. (C4/C2) steps 2 and 3 asserted 'F^op is initial because F is final' while the cited nodes require explicit hypotheses (i),(ii) resp. (1),(2); dag/nodes/sec-proper-base-change/lem-weil-pbc-filtered-category-directed-cofinal.json: proof[1].text: derivation of (i) from leaf (1) and of (ii) from leaf (2) by pushing the zigzag to a common upper bound c in A, and the explicit B=J^op, H^op=F instantiation; proof[2].text: (1),(2) of the initial-functor node from leaf (1),(2) by padding the zigzag with identities to the required orientation; proof[1].uses and proof[2].uses: leaf added; proof[0].text: wording (finality conditions, phi_aa=id, phi_bc phi_ab=phi_ac). proof_deps unchanged (already the union). Small cases: one-object J (A singleton, both clauses tautological), J a directed poset with F=id (usual directed (co)limits). Start Sat Oct 10 03:28:06 PM UTC 2026, end Sat Oct 10 03:30:20 PM UTC 2026; 2 file(s) fixed by the reviewer"
  }
 }

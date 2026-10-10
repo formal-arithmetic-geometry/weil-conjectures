@@ -1793,3 +1793,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:29 L: merged deliver/C1/lem-sc-etale-zariski-qcoh-comparison (reviewer FIX; after a return; new nodes: 2)
 - 15:30 L: lem-weil-pbc-radicial-etale-open attached (of_etale_of_universallyInjective, sorry-free; reviewer R-reo's B10 finding), E1's return entry dropped
 - 15:30 L: merged deliver/K1/lem-sc-p1-proj-sheafification-exact (reviewer PASS; after a return; new nodes: 2)
+- 15:30 L: merged deliver/K1/lem-weil-pbc-filtered-category-directed-cofinal (reviewer FIX; first push; new nodes: 1)
