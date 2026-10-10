@@ -1294,3 +1294,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 2026-10-10, delivery of H1: lem-weil-pbc-coherent-stalk-map-extends merged from deliver/H1/lem-weil-pbc-coherent-stalk-map-extends (1 commit(s), 1 new node(s), spot-checked by L: L: 01Y4 via the stalk of the internal Hom of a finitely presented module (01CP, new node)); claim closed
 - 11:20 L: merged C1 lem-weil-pbc-local-ring-colimit-essentially-finite-type-over-z (00QU, +1 Mathlib leaf), H1 lem-weil-pbc-coherent-stalk-map-extends (01Y4, +1 node 01CP).
 - 2026-10-10, delivery of F1: lem-weil-pbc-principal-maximal-dim-one-regular merged from deliver/F1/lem-weil-pbc-principal-maximal-dim-one-regular (1 commit(s), 0 new node(s), spot-checked by L: L: one step, the definition of regular local ring with dim 1 and m principal); claim closed
+- 11:22 L: merged F1 lem-weil-pbc-principal-maximal-dim-one-regular (one step from the definition, 0 new).
