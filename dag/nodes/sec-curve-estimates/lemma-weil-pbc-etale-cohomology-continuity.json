@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-weil-pbc-etale-cohomology-continuity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Etale cohomology continuity",
@@ -36,7 +36,9 @@
    "text": "For injectivity, represent a stagewise class by a hypercover cocycle, again\nusing [thm-weil-pbc-hypercover-cohomology]. If its pullback vanishes on $X$,\nthat theorem and [lem-weil-pbc-hypercover-refinement] give a refinement of\nthe pulled-back hypercover on which the cocycle is a boundary. Descend the\ntruncation of the refinement, its map to the original hypercover, its\nprimitive, and the boundary equation, using the same two descent lemmas. The\nclass is then zero at a later stage. For degree zero, replace the primitive\nby the assertion that the section is zero; section continuity applies\ndirectly. All the maps are pullbacks of sections, so the isomorphism is the\ncanonical restriction map in the statement and is natural in the sheaf and in\nthe inverse system.",
    "uses": [
     "thm-weil-pbc-hypercover-cohomology",
-    "lem-weil-pbc-hypercover-refinement"
+    "lem-weil-pbc-hypercover-refinement",
+    "lemma-weil-pbc-finite-hypercover-descent",
+    "lem-weil-pbc-etale-section-continuity"
    ],
    "elementary": false
   }
@@ -45,17 +47,38 @@
   "thm-weil-pbc-hypercover-cohomology",
   "lemma-weil-pbc-finite-hypercover-descent",
   "lem-weil-pbc-etale-section-continuity",
-  "lem-weil-pbc-hypercover-refinement",
-  "lemma-weil-pbc-fibre-product-limit"
+  "lem-weil-pbc-hypercover-refinement"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lemma-weil-pbc-etale-cohomology-continuity.md",
   "place": "## Proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale cohomology of an inverse limit of qcqs schemes with affine transition maps is the filtered colimit of the cohomologies",
+   "results": "No matching declaration found; the source checkout contains only the separate fixed-scheme theorem Scheme.H_map_isColimit_of_isFiltered.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "|- IsIso (cohomology comparison from a filtered colimit over an inverse system of schemes)",
+   "results": "No matching Mathlib declaration; Mathlib has no etale cohomology continuity theorem for inverse systems of schemes.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'cohomology.*colimit|cohomology.*continu|H_map_isColimit_of_isFiltered' /home/ubuntu/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib /home/ubuntu/weil-conjectures-slopmaster2/WeilConjectures",
+   "results": "Only AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered (WeilConjectures/AlgebraicGeometry/Curve/Reductions.lean:78), a fixed-scheme filtered colimit of sheaves with sorry; no inverse-system comparison.",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -96,5 +119,23 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lemma-weil-pbc-etale-cohomology-continuity",
+  "worker": "H1",
+  "summary": "Split the imported two-paragraph proof along Stacks Etale Cohomology Lemma 03Q6's finite-data continuity argument. Surjectivity represents a class by a finite-degree hypercover cocycle, descends its finite truncation and cocycle equation with lemma-weil-pbc-finite-hypercover-descent, and descends section representatives using lem-weil-pbc-etale-section-continuity. Injectivity represents a stage class similarly; a vanishing pullback supplies a finite hypercover refinement and primitive via thm-weil-pbc-hypercover-cohomology and lem-weil-pbc-hypercover-refinement, and all finite data, maps, and boundary equations descend to a later stage by the same descent and section lemmas. Degree zero is the direct section-continuity case. The fibre-product-limit node previously listed in proof_deps is not used by either step and was removed. Source-first search of /home/ubuntu/weil-src-slopmaster2/WeilConjectures found no declaration tagged (blueprint: lemma-weil-pbc-etale-cohomology-continuity) and no exact inverse-limit cohomology declaration. The closest declaration is Scheme.H_map_isColimit_of_isFiltered in AlgebraicGeometry/Curve/Reductions.lean:68-84, which has the different fixed-scheme filtered-colimit statement and contains sorry; it is not an attachment.",
+  "blueprint": [
+   "blueprint proof paragraph 2 (surjectivity): finite hypercover cocycle, finite truncation descent, and section continuity",
+   "blueprint proof paragraph 3 (injectivity): finite refinement, primitive, and boundary-equation descent"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ecc",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecc (reviewer sub-agent of L); spot-checked: Source: blueprint node lemma-weil-pbc-etale-cohomology-continuity (master, sk-prop-h2, ## Proof and detailed form) and Stacks 03Q6 (etale-cohomology-lemma-directed-colimit-cohomology, abelian sheaf, base change of a qcqs X/A along a directed system of A-algebras; a special case of the colimit theorem). Item statement unchanged by the delivery; its hypotheses (cofiltered qcqs system, affine transitions, sheaf from one stage) are those of the blueprint; 'torsion' is stronger than needed and harmless since every cited node holds for abelian sheaves. Delivery changes only same_as=[], the second step's uses, proof_deps (removal of lemma-weil-pbc-fibre-product-limit, which neither step uses; proof_deps now equals the union of uses), mathlib_searches, status, split_report; no new nodes, no maintainer field touched. Step 1 (surjectivity): thm-weil-pbc-hypercover-cohomology (qcqs X, abelian F, colimit over finite split hypercovers, representatives use finitely many degrees) gives the cocycle; lemma-weil-pbc-finite-hypercover-descent (same inverse-system hypotheses) descends the (q+1)-truncation with matching maps covers at a late stage; lem-weil-pbc-etale-section-continuity applies to the descended terms, which are finite unions of qcqs etale fp schemes per def-weil-pbc-finite-split-hypercover, and gives descent of the degree-q components and (by injectivity of the colimit) of the finitely many equalities delta z=0. Step 2 (injectivity): same theorem for X_j and for X; vanishing gives a refinement of the pulled-back hypercover with primitive, lem-weil-pbc-hypercover-refinement makes it finite through degree q+1; the descent lemma covers morphisms between truncations, section continuity the primitive and boundary equations; q=0 is direct section continuity. All cited nodes in unit sk-prop-h2, no C7/C8 tool use. Mathlib searches recorded (leansearch, loogle, grep); the source declaration Scheme.H_map_isColimit_of_isFiltered (Reductions.lean:78, @[stacks 03Q6], blueprint tag lemma-weil-pbc-curve-filtered-cohomology) verified to be a fixed-scheme filtered colimit of sheaves, not this statement, so B10 does not apply. No new statement to test. 14:45-14:52 UTC"
+ }
 }
