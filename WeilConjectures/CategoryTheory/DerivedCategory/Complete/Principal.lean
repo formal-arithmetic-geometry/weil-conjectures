@@ -111,30 +111,24 @@ variable {J}
 section Main
 
 variable {I : Ideal R} {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {ϖ})
+
+set_option hygiene false in
+/-- The functor `- ⊗ᴸ R/ϖ` on `D(J, R)`, where `R/ϖ = R/I` is the first reduction. -/
+local notation "⊗ᴸR/ϖ" => (curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj
+  ((quotPowFunctor J I).obj (op 1))
+
 include hϖ hI in
 /-- The reductions `K ⊗ᴸ R/ϖⁿ ⊗ᴸ R/ϖ` form a tower which is pro-isomorphic to the constant tower
 `K ⊗ᴸ R/ϖ`: the transition map from level `n + 1` to level `n` factors through `K ⊗ᴸ R/ϖ`,
 compatibly with the reduction maps. -/
 lemma exists_lift_whiskerRight_derivedCompletionCone
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) (n : ℕ) :
-    ∃ b : (derivedCompletionDiagram J I K ⋙ (curriedTensor
-        (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj
-          ((quotPowFunctor J I).obj (op 1))).obj (op (n + 1)) ⟶
-        ((Functor.const ℕᵒᵖ).obj K ⋙ (curriedTensor
-          (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj
-            ((quotPowFunctor J I).obj (op 1))).obj (op n),
-      b ≫ (Functor.whiskerRight (derivedCompletionCone J I K).π ((curriedTensor
-          (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj
-            ((quotPowFunctor J I).obj (op 1)))).app (op n) =
-          (derivedCompletionDiagram J I K ⋙ (curriedTensor
-            (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj
-              ((quotPowFunctor J I).obj (op 1))).map (homOfLE n.le_succ).op ∧
-        (Functor.whiskerRight (derivedCompletionCone J I K).π ((curriedTensor
-          (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj
-            ((quotPowFunctor J I).obj (op 1)))).app (op (n + 1)) ≫ b =
-          ((Functor.const ℕᵒᵖ).obj K ⋙ (curriedTensor
-            (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj
-              ((quotPowFunctor J I).obj (op 1))).map (homOfLE n.le_succ).op := by
+    ∃ b : (derivedCompletionDiagram J I K ⋙ ⊗ᴸR/ϖ).obj (op (n + 1)) ⟶
+        ((Functor.const ℕᵒᵖ).obj K ⋙ ⊗ᴸR/ϖ).obj (op n),
+      b ≫ (Functor.whiskerRight (derivedCompletionCone J I K).π ⊗ᴸR/ϖ).app (op n) =
+          (derivedCompletionDiagram J I K ⋙ ⊗ᴸR/ϖ).map (homOfLE n.le_succ).op ∧
+        (Functor.whiskerRight (derivedCompletionCone J I K).π ⊗ᴸR/ϖ).app (op (n + 1)) ≫ b =
+          ((Functor.const ℕᵒᵖ).obj K ⋙ ⊗ᴸR/ϖ).map (homOfLE n.le_succ).op := by
   let c := derivedCompletionCone J I K
   let TM := (curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj
     ((quotPowFunctor J I).obj (op 1))
