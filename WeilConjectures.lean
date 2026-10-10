@@ -160,6 +160,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
+public import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
 public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
@@ -180,6 +181,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
 public import WeilConjectures.AlgebraicGeometry.Modules.SectionAvoidance
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.AlgebraicGeometry.Modules.VanishingOnOpen
+public import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology

@@ -43,6 +43,10 @@ and noetherian, there are only finitely many such points.
   subset of a noetherian space has finitely many maximal points, which generalize all its points.
 - `exists_specializes_ne_le_topologicalKrullDim_closure`: in a space of dimension at least
   `d + 1`, a proper specialization of the generic point whose closure has dimension at least `d`.
+- `exists_le_topologicalKrullDim_closure_singleton`: in a space of dimension at least `d`, a
+  point whose closure has dimension at least `d`.
+- `Topology.IsEmbedding.topologicalKrullDim_eq_range`: an embedding preserves dimension onto its
+  range.
 -/
 
 @[expose] public section
@@ -456,4 +460,22 @@ theorem exists_specializes_ne_le_topologicalKrullDim_closure {x : X}
   rw [topologicalKrullDim_closure_singleton]
   exact_mod_cast le_trans (by simp [hl]) (length_le_height_last (p := l.eraseLast))
 
+attribute [local instance] specializationOrder in
+/-- A quasi-sober `T₀` space of dimension at least `d` contains a point whose closure has
+dimension at least `d`: the generic end of a chain of length `d`. -/
+theorem exists_le_topologicalKrullDim_closure_singleton {d : ℕ}
+    (hd : (d : WithBot ℕ∞) ≤ topologicalKrullDim X) :
+    ∃ x : X, (d : WithBot ℕ∞) ≤ topologicalKrullDim (closure {x} : Set X) := by
+  rw [topologicalKrullDim_eq_krullDim_specializationOrder] at hd
+  obtain ⟨l, hl⟩ := le_krullDim_iff.1 hd
+  refine ⟨l.last, ?_⟩
+  rw [topologicalKrullDim_closure_singleton, ← hl]
+  exact_mod_cast length_le_height_last (p := l)
+
 end Specialization
+
+/-- An embedding `f : Y → X` identifies the dimension of `Y` with that of its range. -/
+theorem Topology.IsEmbedding.topologicalKrullDim_eq_range {X Y : Type*} [TopologicalSpace X]
+    [TopologicalSpace Y] {f : Y → X} (hf : IsEmbedding f) :
+    topologicalKrullDim Y = topologicalKrullDim (Set.range f) :=
+  IsHomeomorph.topologicalKrullDim_eq _ hf.toHomeomorph.isHomeomorph

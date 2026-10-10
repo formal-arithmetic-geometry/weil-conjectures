@@ -453,6 +453,44 @@ theorem exists_polynomial_eulerChar_tensorObj_tensorPow (hℒ : IsAmple (X ↘ S
       (fun n ↦ (hA' n).trans rfl) (fun n ↦ (hB' n).trans rfl)
     exact ⟨P, by exact_mod_cast hP, fun n ↦ hP' n⟩
 
+include K in
+/-- A proper scheme over a field has finite dimension, at most
+`((topologicalKrullDim X).unbotD 0).toNat`. -/
+lemma topologicalKrullDim_le_unbotD_toNat :
+    topologicalKrullDim X ≤ (((topologicalKrullDim X).unbotD 0).toNat : WithBot ℕ∞) := by
+  have := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of K))
+  have h := topologicalKrullDim_ne_top_of_compactSpace (X ↘ Spec (.of K))
+  generalize topologicalKrullDim X = n at h ⊢
+  induction n using WithBot.recBotCoe with
+  | bot => exact bot_le
+  | coe n =>
+    induction n using ENat.recTopCoe with
+    | top => exact absurd rfl h
+    | coe n => simp
+
+/-- **The Hilbert polynomial of a coherent module on a proper scheme.** For `ℒ` ample and `ℱ`
+coherent on `X` proper over `K`, `n ↦ χ(X, ℱ ⊗ ℒ^{⊗ n})` is given by a polynomial of degree at
+most `g` whenever `dim X ≤ g`. -/
+theorem exists_polynomial_eulerChar_tensorObj_tensorPow_of_le
+    (hℒ : IsAmple (X ↘ Spec (.of K)) ℒ) (ℱ : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+    [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] {g : ℕ}
+    (hg : topologicalKrullDim X ≤ g) :
+    ∃ P : Polynomial ℚ, P.natDegree ≤ g ∧
+      ∀ n : ℕ, P.eval (n : ℚ) = (ℱ ⊗ ℒ.tensorPow n).eulerChar K := by
+  have hU : topologicalKrullDim (((⊥ : X.Opens) : Set X)ᶜ : Set X) < (g + 1 : ℕ) := by
+    have : topologicalKrullDim (((⊥ : X.Opens) : Set X)ᶜ : Set X) = topologicalKrullDim X := by
+      rw [TopologicalSpace.Opens.coe_bot, Set.compl_empty]
+      exact IsHomeomorph.topologicalKrullDim_eq _ (Homeomorph.Set.univ X).isHomeomorph
+    rw [this]
+    exact hg.trans_lt (by exact_mod_cast Nat.lt_succ_self g)
+  have : IsEmpty (⊥ : X.Opens).toScheme := ⟨fun x ↦ x.2⟩
+  obtain ⟨P, hP, hP'⟩ := exists_polynomial_eulerChar_tensorObj_tensorPow K hℒ (g + 1) ⊥ hU ℱ
+    (isZero_of_isEmpty _)
+  refine ⟨P, Polynomial.natDegree_le_iff_coeff_eq_zero.mpr fun n hn ↦
+    Polynomial.coeff_eq_zero_of_degree_lt (hP.trans_le ?_), hP'⟩
+  exact_mod_cast Nat.succ_le_of_lt hn
+
 end Polynomial
 
 end AlgebraicGeometry.Scheme.Modules
