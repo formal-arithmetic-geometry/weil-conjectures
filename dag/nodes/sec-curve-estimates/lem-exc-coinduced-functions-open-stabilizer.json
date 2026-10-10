@@ -19,9 +19,32 @@
   "place": "Tag 04JP, label definition-G-module-continuous, the remark that continuity into a discrete space is equivalent to open stabilizers; the profinite compactness and open-normal-basis argument is supplied by the agent"
  },
  "stmt_deps": [],
- "proof": [],
+ "proof": [
+  {
+   "text": "For each $s\\in S$, the fibre $f^{-1}(\\{s\\})$ is open because $S$ is discrete and $f$ is continuous. Thus the fibres form an open cover of the compact space $G$. For every $x\\in G$, choose an open subgroup $V_x$ with $xV_x\\subseteq f^{-1}(\\{f(x)\\})$, using that open subgroups form a neighbourhood basis at the identity in a profinite group: writing $G=\\lim_iG_i$ as a cofiltered limit of finite discrete groups (the definition of a profinite group), the sets $p_i^{-1}(p_i(y))$ for the projections $p_i:G\\to G_i$ form a basis of the topology because the limit is cofiltered, and $p_i^{-1}(p_i(e))=\\ker p_i$ is an open normal subgroup; apply this to the open neighbourhood $x^{-1}f^{-1}(\\{f(x)\\})$ of $e$. A finite subcover $x_1V_{x_1},\\ldots,x_rV_{x_r}$ exists. The intersection $V=\\bigcap_{i=1}^rV_{x_i}$ is open, and if $x\\in x_iV_{x_i}$ then $xV\\subseteq x_iV_{x_i}$, so $f(xv)=f(x)$ for all $x\\in G$ and $v\\in V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JP, label definition-G-module-continuous; the profinite compactness argument supplied by the agent"
+   }
+  },
+  {
+   "text": "An open subgroup $V$ of the compact group $G$ has finite index, since its cosets form a disjoint open cover of $G$, so the intersection of its finitely many conjugates, $U=\\bigcap_{i=1}^r g_iVg_i^{-1}$ over representatives of $G/V$, is open and normal and is contained in $V$. Therefore $f(xu)=f(x)$ for every $x\\in G$ and $u\\in U$, because the equality from the first step holds for every element of $V$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JP, label definition-G-module-continuous; the open-normal-basis argument supplied by the agent"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JP, label definition-G-module-continuous, and the profinite compactness/open-normal-basis argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,12 +69,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-exc-coinduced-discrete-embedding",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-exc-coinduced-functions-open-stabilizer",
+  "worker": "stage1",
+  "summary": "Split the open-stabilizer assertion into the explicit compactness and fibre argument, using the open-normal-subgroup basis of a profinite group read off from its definition as a cofiltered limit of finite discrete groups, followed by the finite-index core construction.",
+  "blueprint": "Realizes the final continuous-cochain comparison clause of def-exc-continuous-cohomology: the continuous-to-discrete fibre argument and open-normal subgroup construction used to control coinduced functions.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cfo",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cfo (reviewer sub-agent of L); spot-checked: Statement unchanged; source Stacks 04JP (etale-cohomology definition-G-module-continuous) is the definition of discrete G-module, the argument is agent-supplied and agrees with Stacks 0BR1 (topology-lemma-profinite-group) proof paragraphs 1-2 and Definition 0BR2, read. Step 1: fibres open, cover by x V_x, finite subcover, V = intersection; checked x = x_i a, a in V_{x_i}, gives xV in x_i V_{x_i} since V_{x_i} is a subgroup, so f(xv)=f(x_i)=f(x). Step 2: open subgroup of compact G has finite index, normal core open normal inside V. No cited nodes; both steps elementary. Small cases: G finite discrete (U trivial), f constant (U=G), G=Z_p with f = reduction mod p^n (U=p^n Z_p). Fixes: dag/nodes/sec-curve-estimates/lem-exc-coinduced-functions-open-stabilizer.json: proof[0].text: the neighbourhood basis of open subgroups was asserted bare; added its few-line justification from the definition of profinite group as a cofiltered limit of finite discrete groups (kernels of projections) and the translate x^{-1}f^{-1}(f(x)) it is applied to (a reviewer-added statement node citing ProfiniteGrp.exist_openNormalSubgroup_sub_open_nhds_of_one, Mathlib/Topology/Algebra/ClopenNhdofOne.lean:48, was refused by the tool since no DAG node defines profinite group to put in stmt_deps); proof[1].text: reason for finite index (cosets a disjoint open cover of compact G); split_report.summary: claimed a helper node the delivery does not contain, corrected. Start 'Sat Oct 10 03:30:48 PM UTC 2026', end 'Sat Oct 10 03:32:59 PM UTC 2026'.; 1 file(s) fixed by the reviewer"
+ }
 }
