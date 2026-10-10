@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-formal-glueing-complex-exact",
+ "kind": "statement",
+ "title": "Exactness of the formal glueing complex",
+ "statement": "Let $\\varphi:R\\to S$ be a flat ring map of commutative rings [def-weil-pbc-flat-ring-map], $f_1,\\dots,f_t\\in R$ and $I=(f_1,\\dots,f_t)$, such that the induced map $R/I\\to S/IS$ is an isomorphism. For an $R$-module $M$ let $M\\otimes_RS$ be its base change [def-weil-module-base-change], $M_{f_i}$, $M_{f_if_j}$ its localizations [def-weil-pbc-module-localization-away], and identify $(M\\otimes_RS)_{f_i}$ with $M_{f_i}\\otimes_RS$ canonically. Consider the sequence $0\\to M\\xrightarrow{\\alpha}(M\\otimes_RS)\\times\\prod_iM_{f_i}\\xrightarrow{\\beta}\\prod_i(M\\otimes_RS)_{f_i}\\times\\prod_{i,j}M_{f_if_j}$ with $\\alpha(m)=(m\\otimes1,m/1,\\dots,m/1)$ and $\\beta(m',(m_i)_i)=\\big((m'/1-m_i\\otimes1)_i,(m_i/1-m_j/1)_{i,j}\\big)$ (the images of $m_i\\in M_{f_i}$, $m_j\\in M_{f_j}$ in $M_{f_if_j}$). Then this sequence is exact: $\\alpha$ is injective and $\\operatorname{Ker}\\beta=\\operatorname{Im}\\alpha$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 05EK (lemma-recover-module-from-glueing-data, line 24579), the complex (equation-glueing-complex) before it, and its two proofs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact sequence 0 -> M -> M ⊗ S × ∏ M_{f_i} -> ∏ (M ⊗ S)_{f_i} × ∏ M_{f_i f_j} for flat R -> S with R/I ≅ S/IS",
+   "results": "Module.FaithfullyFlat.range_le_ker_of_exact_rTensor, Module.Flat.lTensor_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.Flat.rTensor_exact: generic flatness, no glueing complex",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "module is the equalizer of its base change to S and its localizations at f_i, flat R -> S with R/I isomorphic to S/IS",
+   "results": "IsLocalization.flat, IsLocalizedModule.isBaseChange, Module.Flat.tfae_equational_criterion, RingHom.Flat.ofLocalizationSpanTarget, Module.flat_of_isLocalized_span, isLocalizedModule_iff_isBaseChange: none",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rliE 'beauville|laszlo|formal glu' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (and a look at RingTheory/Flat/Localization.lean, RingTheory/Localization/BaseChange.lean)",
+   "results": "no glueing complex or Beauville-Laszlo statement; the localization files have only the Zariski-local (span = top) exactness/flatness lemmas, where (f_1,...,f_t) = R, not the case R/I = S/IS",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-grothendieck-existence-easy",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

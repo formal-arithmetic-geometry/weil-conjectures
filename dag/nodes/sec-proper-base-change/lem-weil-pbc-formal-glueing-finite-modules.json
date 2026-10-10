@@ -1,0 +1,64 @@
+{
+ "id": "lem-weil-pbc-formal-glueing-finite-modules",
+ "kind": "statement",
+ "title": "Finiteness of a module is detected by its formal glueing data",
+ "statement": "Let $\\varphi:R\\to S$ be a flat ring map of commutative rings [def-weil-pbc-flat-ring-map], $f_1,\\dots,f_t\\in R$ and $I=(f_1,\\dots,f_t)$, such that the induced map $R/I\\to S/IS$ is an isomorphism. Let $M$ be an $R$-module. Then $M$ is a finitely generated $R$-module [def-weil-finitely-generated-module] if and only if the base change $M\\otimes_RS$ [def-weil-module-base-change] is a finitely generated $S$-module and, for every $i$, the localization $M_{f_i}$ [def-weil-pbc-module-localization-away] is a finitely generated $R_{f_i}$-module.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Remark 05EU (remark-formal-glueing-algebras, line 25036), the case 'finite': R -> S x prod R_{f_i} is faithfully flat, and finiteness descends along faithfully flat maps (Algebra, Lemma 03C4, lemma-descend-properties-modules)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-finitely-generated-module",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "module is finitely generated if its base change along a faithfully flat ring map is finitely generated",
+   "results": "RingHom.Finite, ModuleCat.isFG, RingHom.finite_isStableUnderBaseChange, Module.finitePresentation_iff_finite, RingHom.FaithfullyFlat, Module.Finite: no direct hit",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, Module.FaithfullyFlat, TensorProduct",
+   "results": "Module.Finite.of_finite_tensorProduct_of_faithfullyFlat (Mathlib.RingTheory.Finiteness.Descent: [Module.FaithfullyFlat R T] [Module.Finite T (T ⊗[R] M)] : Module.Finite R M); Algebra.IsFiniteSplit.exists_tensorProduct_of_etale",
+   "verdict": "generalization, not a one-line specialization: applying it needs T = S x prod R_{f_i} faithfully flat over R, which is itself a theorem (Stacks 05E7 / 05EU: flatness plus surjectivity on spectra using R/I = S/IS), and the identification of T ⊗ M with the product of the M ⊗ S and M_{f_i}",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn 'theorem .*of_faithfullyFlat|Module.Finite.of_.*FaithfullyFlat' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory ; sed -n 30,40p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Finiteness/Descent.lean",
+   "results": "RingTheory/Finiteness/Descent.lean:34 Module.Finite.of_finite_tensorProduct_of_faithfullyFlat (read); Flat/FaithfullyFlat/Basic.lean:634 IsNoetherian.of_isNoetherian_tensorProduct_of_faithfullyFlat; no statement for the formal glueing data",
+   "verdict": "no match (candidate recorded above)",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-grothendieck-existence-easy",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

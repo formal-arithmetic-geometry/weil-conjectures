@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-glue-sheaves-of-modules",
+ "kind": "statement",
+ "title": "Glueing morphisms and sheaves of modules along an open covering",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, $X=\\bigcup_{i\\in J}U_i$ an open covering, $U_{ij}=U_i\\cap U_j$, $U_{ijk}=U_i\\cap U_j\\cap U_k$, and write $|_V$ for restriction to an open $V$ (of sheaves of modules [def-weil-sheaf-of-modules-category] and of their morphisms). (1) (Glueing morphisms.) Let $\\mathcal F,\\mathcal G$ be $\\mathcal O_X$-modules and $\\varphi_i:\\mathcal F|_{U_i}\\to\\mathcal G|_{U_i}$ $\\mathcal O_{U_i}$-linear maps with $\\varphi_i|_{U_{ij}}=\\varphi_j|_{U_{ij}}$ for all $i,j$. Then there is a unique $\\mathcal O_X$-linear $\\varphi:\\mathcal F\\to\\mathcal G$ with $\\varphi|_{U_i}=\\varphi_i$ for all $i$; in particular two $\\mathcal O_X$-linear maps that agree on every $U_i$ are equal. (2) (Glueing sheaves.) Let $\\mathcal F_i$ be $\\mathcal O_{U_i}$-modules and $\\varphi_{ij}:\\mathcal F_i|_{U_{ij}}\\to\\mathcal F_j|_{U_{ij}}$ $\\mathcal O_{U_{ij}}$-linear isomorphisms with $\\varphi_{ik}=\\varphi_{jk}\\circ\\varphi_{ij}$ on $U_{ijk}$ for all $i,j,k$ (cocycle condition). Then there are an $\\mathcal O_X$-module $\\mathcal F$ and $\\mathcal O_{U_i}$-linear isomorphisms $\\varphi_i:\\mathcal F|_{U_i}\\to\\mathcal F_i$ with $\\varphi_{ij}\\circ\\varphi_i|_{U_{ij}}=\\varphi_j|_{U_{ij}}$ for all $i,j$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves on Spaces, Section 00AK (section-glueing-sheaves, line 5071): Lemma 04TN (lemma-glue-maps, line 5078) for (1), Lemma 00AL (lemma-glue-sheaves, line 5192) and Lemma 00AM (lemma-glue-sheaves-structures, line 5253) for (2); O-linearity of the glued map in (1) is checked on the U_i"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "glue sheaves on an open cover along isomorphisms satisfying the cocycle condition",
+   "results": "TopCat.Sheaf.existsUnique_gluing, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing(_types) (gluing of sections), AlgebraicGeometry.Scheme.Cover.gluedCover, glued_cover_cocycle (gluing of schemes), Scheme.LocalRepresentability.glueData",
+   "verdict": "no match (sections and schemes only)",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "gluing morphisms of sheaves of modules defined on an open cover that agree on overlaps",
+   "results": "Scheme.GlueData.sheafValGluedMk(_val), TopCat.Sheaf.existsUnique_gluing', MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue / map_f₃₄_op_glue",
+   "verdict": "no match: gluing of sections of one sheaf, not of morphisms or of sheaves of modules",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf, TopCat.GlueData",
+   "results": "none",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlniE 'cocycle|glue' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology/Sheaves ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf ; grep -rn 'instance.*IsStack' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Sites/Descent/IsStack.lean defines the class IsStack with no instance for sheaves on a space; ModuleCat/Sheaf/Quasicoherent.lean:425 glues only quasi-coherent presentation data; no gluing of sheaves of modules along a cocycle",
+   "verdict": "no match",
+   "date": "2026-10-10"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-grothendieck-existence-easy",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
