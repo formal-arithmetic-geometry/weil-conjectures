@@ -22,7 +22,6 @@
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
-| `lem-weil-pbc-popescu-desingularize` | 1012 | none |
 | `lem-weil-pbc-popescu-lift-once` | 1012 | none |
 | `lem-weil-pbc-popescu-lift-twice` | 1012 | none |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1012 | none |
@@ -145,6 +144,7 @@
 | `lem-weil-pbc-site-higher-direct-image-sheafified-presheaf` | 1013 | none |
 | `lem-weil-pbc-site-leray-degenerate` | 1013 | none |
 | `lem-weil-pbc-strictly-henselian-etale-acyclic` | 1013 | none |
+| `lem-weil-pbc-strictly-standard-localization-smooth` | 1013 | none |
 | `lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection` | 1013 | none |
 | `lem-weil-pbc-transitivity-gamma` | 1013 | none |
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
@@ -909,7 +909,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 666 nodes that wait for stage 1, 531 nodes that wait for a statement dependency.
+Not open yet: 666 nodes that wait for stage 1, 532 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
