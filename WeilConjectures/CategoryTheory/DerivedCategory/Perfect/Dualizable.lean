@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 public import WeilConjectures.Algebra.Homology.ModuleCat.Subcomplex
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
@@ -51,35 +51,6 @@ universe w v u
 
 open CategoryTheory Limits MonoidalCategory
 
-namespace CochainComplex
-
-variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
-  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
-  [Abelian.HasFunctorialFlatResolution C]
-
-/-- Every complex has a K-flat resolution by a complex of flat objects: the functorial flat
-resolution of an unbounded complex is a colimit of bounded above complexes of flat objects. -/
-lemma exists_quasiIso_flat_kFlat (L : CochainComplex C ℤ) :
-    ∃ (P : CochainComplex C ℤ) (π : P ⟶ L), QuasiIso π ∧ (∀ n, ObjectProperty.flat (P.X n)) ∧
-      (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P := by
-  have (X : C) : PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X) :=
-    preservesColimitsOfShape_of_natIso (F := tensorLeft X)
-      (NatIso.ofComponents (fun Y ↦ β_ X Y) (by intros; simp [curriedTensor]))
-  let Λ := (Classical.arbitrary (Abelian.LeftResolution
-    (ObjectProperty.flat.ι : _ ⥤ C))).reduced
-  have hι : (ObjectProperty.flat.ι : _ ⥤ C).essImage ≤ ObjectProperty.flat := by
-    rintro X ⟨Y, ⟨e⟩⟩
-    exact ObjectProperty.prop_of_iso _ e Y.property
-  refine ⟨Λ.resolutionFunctor.obj L, Λ.resolutionNatTrans.app L, inferInstance, fun n ↦ ?_,
-    Λ.kFlat_resolutionFunctor_obj hι L⟩
-  have := CochainComplex.closedUnderColimitsOfShape_flat C ℤ
-  let c := Λ.colimitOfShapeResolutionFunctorObj L
-  exact ObjectProperty.prop_of_isColimit _
-    (isColimitOfPreserves (HomologicalComplex.eval C (.up ℤ) n) c.isColimit)
-    (fun i ↦ hι _ ((c.prop_diag_obj i).1 n))
-
-end CochainComplex
-
 namespace DerivedCategory
 
 section General
@@ -87,41 +58,6 @@ section General
 variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
   [HasDerivedCategory.{w} C] [Abelian.HasFunctorialFlatResolution C]
-
-/-- The isomorphism `L ⊗ᴸ P ≅ L ⊗ P` for a K-flat complex `P` is natural in `L`. -/
-@[reassoc]
-lemma QObjTensorQObjIsoOfKFlatRight_hom_naturality {L L' : CochainComplex C ℤ} (f : L ⟶ L')
-    (P : CochainComplex C ℤ) (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
-    Q.map f ▷ Q.obj P ≫ (QObjTensorQObjIsoOfKFlatRight L' P hP).hom =
-      (QObjTensorQObjIsoOfKFlatRight L P hP).hom ≫ Q.map (f ▷ P) := by
-  have h₁ := (tensorRightCounit ((HomotopyCategory.quotient C (.up ℤ)).obj P)).naturality
-    ((HomotopyCategory.quotient C (.up ℤ)).map f)
-  have h₂ := Functor.LaxMonoidal.μ_natural_left (HomotopyCategory.quotient C (.up ℤ)) f P
-  have h₃ := (quotientCompQhIso C).hom.naturality (f ▷ P)
-  have h₄ := (quotientCompQhIso C).inv.naturality f
-  dsimp at h₁ h₂ h₃ h₄
-  simp only [QObjTensorQObjIsoOfKFlatRight, Iso.trans_hom, tensorIso_hom, Iso.app_hom,
-    Iso.symm_hom, asIso_hom, Functor.mapIso_hom, Category.assoc]
-  have key : Q.map f ▷ Q.obj P ≫
-      ((quotientCompQhIso C).inv.app L' ⊗ₘ (quotientCompQhIso C).inv.app P) =
-      ((quotientCompQhIso C).inv.app L ⊗ₘ (quotientCompQhIso C).inv.app P) ≫
-        Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map f) ▷ _ := by
-    rw [← tensorHom_id, ← tensorHom_id, tensorHom_comp_tensorHom, tensorHom_comp_tensorHom, h₄,
-      Category.comp_id, Category.id_comp]
-  rw [reassoc_of% key, reassoc_of% h₁, ← h₃, Functor.Monoidal.μIso_hom, ← Qh.map_comp_assoc,
-    h₂, Qh.map_comp_assoc, Functor.Monoidal.μIso_hom]
-
-/-- The derived tensor product of an object vanishing above `b` and one vanishing above `d`
-vanishes above `b + d`: represent the first by a bounded above complex of flat objects. -/
-lemma isLE_tensor (K N : DerivedCategory C) (b d : ℤ) [K.IsLE b] [N.IsLE d] :
-    (K ⊗ N).IsLE (b + d) := by
-  obtain ⟨L, _, ⟨e⟩⟩ := K.exists_iso_Q_obj_of_isLE b
-  obtain ⟨P, _, π, _, hP⟩ := L.exists_quasiIso_flat_of_isStrictlyLE b
-  have : IsIso (Q.map π) := by rwa [isIso_Q_map_iff_quasiIso]
-  obtain ⟨M, _, ⟨e'⟩⟩ := N.exists_iso_Q_obj_of_isLE d
-  have := CochainComplex.isStrictlyLE_tensorObj P M b d
-  exact TStructure.t.isLE_of_iso (tensorIso (e ≪≫ (asIso (Q.map π)).symm) e' ≪≫
-    QObjTensorQObjIsoOfKFlatLeft P M (CochainComplex.kFlat_of_isStrictlyLE_of_flat P b hP)).symm _
 
 /-- If `K` and its right dual `L` vanish above `b` and `b'` respectively, then `K` has Tor
 amplitude in `[-b', b]`: maps `Y ⟶ K ⊗ᴸ F[0]` correspond to maps `L ⊗ᴸ Y ⟶ F[0]`, which
@@ -140,32 +76,6 @@ lemma torAmplitudeIn_of_exactPairing_of_isLE {K L : DerivedCategory C} [ExactPai
     rwa [add_zero] at this
 
 end General
-
-end DerivedCategory
-
-namespace CochainComplex
-
-variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
-
-/-- A morphism `Q(K) ⟶ Q(L)` in the derived category out of a K-projective complex `K` is
-the image of a morphism of complexes. -/
-lemma IsKProjective.exists_Q_map_eq (K L : CochainComplex C ℤ) [K.IsKProjective]
-    (g : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj L) :
-    ∃ φ : K ⟶ L, DerivedCategory.Q.map φ = g := by
-  obtain ⟨g', hg'⟩ := (IsKProjective.Qh_map_bijective K
-    ((HomotopyCategory.quotient C (.up ℤ)).obj L)).2
-      ((DerivedCategory.quotientCompQhIso C).hom.app K ≫ g ≫
-        (DerivedCategory.quotientCompQhIso C).inv.app L)
-  obtain ⟨φ, rfl⟩ := (HomotopyCategory.quotient C (.up ℤ)).map_surjective g'
-  refine ⟨φ, ?_⟩
-  have h := (DerivedCategory.quotientCompQhIso C).hom.naturality φ
-  dsimp at h hg'
-  rw [← cancel_epi ((DerivedCategory.quotientCompQhIso C).hom.app K), ← h, hg']
-  simp
-
-end CochainComplex
-
-namespace DerivedCategory
 
 section ModuleCat
 
@@ -211,7 +121,7 @@ theorem exists_retract_of_exactPairing (C D : DerivedCategory (ModuleCat.{u} R))
   have hT {L₁ L₂ : CochainComplex (ModuleCat.{u} R) ℤ} (f : L₁ ⟶ L₂) :
       Q.map f ▷ D ≫ (T L₂).hom = (T L₁).hom ≫ Q.map (f ▷ F) := by
     simp only [T, Iso.trans_hom, whiskerLeftIso_hom, Category.assoc, ← whisker_exchange_assoc,
-      QObjTensorQObjIsoOfKFlatRight_hom_naturality]
+      qObjTensorQObjIsoOfKFlatRight_hom_naturality]
   let eU := unitIsoQObjUnitComplex (R := R)
   obtain ⟨φ, hφ⟩ := CochainComplex.IsKProjective.exists_Q_map_eq (unitComplex R) (L ⊗ F)
     (eU.inv ≫ η_ C D ≫ e.hom ▷ D ≫ (T L).hom)
