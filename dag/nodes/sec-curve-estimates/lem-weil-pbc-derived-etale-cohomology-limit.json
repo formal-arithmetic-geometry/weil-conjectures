@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Derived etale cohomology over an inverse limit",
- "statement": "Let $T$ be a scheme [def-weil-pbc-scheme-conventions], let $(Y_i)_{i\\in I}$ be a cofiltered inverse system of quasi-compact quasi-separated $T$-schemes with affine transition maps and limit $Y$, and let $K\\in D^+(\\Ab(T_{\\Et}))$ [def-weil-pbc-bounded-derived-subcategories] be a bounded-below complex of abelian etale sheaves [def-weil-pbc-etale-sheaves]. Write $K_i$ and $K_Y$ for its inverse images [def-weil-pbc-inverse-image] on $Y_i$ and $Y$. Then the pullback maps induce, for every integer $n$, an isomorphism\n\n$$\n \\varinjlim_i H^n(Y_{i,\\Et},K_i)\\xrightarrow{\\sim} H^n(Y_{\\Et},K_Y),\n$$\n\nwhere cohomology of a complex is the cohomology of derived global sections [def-weil-pbc-etale-cohomology]. No torsion or fixed finite coefficient-ring hypothesis is required.",
+ "statement": "Let $T$ be a scheme [def-weil-pbc-scheme-conventions], let $(Y_i)_{i\\in I}$ be a cofiltered inverse system of quasi-compact quasi-separated $T$-schemes with affine transition maps and limit $Y$, and let $K\\in D^+(\\Ab(T_{\\Et}))$ [def-weil-pbc-bounded-derived-subcategories] be a bounded-below complex of abelian etale sheaves [def-weil-pbc-etale-sheaves]. Write $K_i$ and $K_Y$ for its derived inverse images [def-weil-pbc-derived-inverse-image] on $Y_i$ and $Y$. Then the pullback maps induce, for every integer $n$, an isomorphism\n\n$$\n \\varinjlim_i H^n(Y_{i,\\Et},K_i)\\xrightarrow{\\sim} H^n(Y_{\\Et},K_Y),\n$$\n\nwhere cohomology of a complex is the cohomology of derived global sections [def-weil-pbc-etale-cohomology]. No torsion or fixed finite coefficient-ring hypothesis is required.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Lemma Tag 0GIT (lemma-colimit-complexes), lines 7852-7881: continuity of etale cohomology for bounded-below complexes over a qcqs inverse system with affine transition maps"
@@ -20,12 +20,71 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-bounded-derived-subcategories",
-  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-inverse-image",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Represent $K$ by a complex $C^\\bullet$ of abelian sheaves, using the localization description of the derived category [def-weil-abstract-derived-category]. Since $K\\in D^+$ [def-weil-pbc-bounded-derived-subcategories], choose $a$ with $H^r(C^\\bullet)=0$ for $r<a$. Replace $C^\\bullet$ by the good truncation $G^\\bullet=\\tau_{\\geq a}C^\\bullet$: it is zero below $a$, has $G^a=\\operatorname{coker}(C^{a-1}\\to C^a)$, and agrees with $C^\\bullet$ above $a$. The quotient map $C^\\bullet\\to G^\\bullet$ induces an isomorphism on $H^r$ for $r\\geq a$, and both sides have zero $H^r$ for $r<a$, so it is a quasi-isomorphism and $G^\\bullet$ represents $K$. No injectivity or acyclicity of the terms of $G^\\bullet$ is asserted.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0GIT (lemma-colimit-complexes), proof lines 7867-7869; bounded-below replacement spelled out"
+   }
+  },
+  {
+   "text": "For each $i$ and for $Y$, pull $G^\\bullet$ back termwise to $F_i^\\bullet$ and $F_Y^\\bullet$. The derived inverse-image definition [def-weil-pbc-derived-inverse-image] says these complexes represent $K_i$ and $K_Y$, without requiring their terms to be injective. The transition maps are the inverse-image composition isomorphisms [lem-weil-pbc-inverse-image-composition], degree by degree and compatible with differentials. After pulling to $Y$, every $f_i^{-1}F_i^r$ identifies with the same sheaf $F_Y^r$; the transition maps become identities. The connected filtered-diagram colimit statement [lem-weil-pbc-colimit-constant-connected-diagram] therefore identifies $\\varinjlim_i f_i^{-1}F_i^\\bullet$ with $F_Y^\\bullet$ termwise. Every $F_i^r$ is zero for $r<a$ because inverse image preserves zero objects.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-colimit-constant-connected-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0GIT (lemma-colimit-complexes), proof lines 7869-7873"
+   }
+  },
+  {
+   "text": "The system $(F_i^\\bullet)$ satisfies the uniform lower bound and all the transition and affine-limit hypotheses of [lem-weil-pbc-etale-cohomology-limit-complex-systems] (Stacks 0EZM). Apply that lemma in degree $n$ and use the termwise colimit identification of Step 2 to obtain $\\varinjlim_iH^n(Y_{i,\\Et},F_i^\\bullet)\\cong H^n(Y_{\\Et},F_Y^\\bullet)$. Here $H^n$ means cohomology of derived global sections [def-weil-pbc-etale-cohomology]; 0EZM uses $H^t(Y_i,F_i^s)$ in all degrees $t$ to obtain this conclusion. No termwise global-sections complex is claimed to compute these groups.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0GIT (lemma-colimit-complexes), proof lines 7870-7874; Lemma Tag 0EZM, lines 7783-7823"
+   }
+  },
+  {
+   "text": "The identifications $F_i^\\bullet\\simeq K_i$ and $F_Y^\\bullet\\simeq K_Y$ from Step 2 replace the two sides of Step 3 with the groups in the statement. The map supplied by 0EZM is induced by the projection pullbacks and the colimit coprojections, so under those natural identifications it is precisely the displayed canonical map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 0GIT (lemma-colimit-complexes), conclusion of the proof lines 7870-7874"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0GIT (lemma-colimit-complexes), proof lines 7852-7881"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,12 +116,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "prop-weil-pbc-strict-henselization-stalk-formula",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-derived-etale-cohomology-limit",
+  "worker": "stage1",
+  "summary": "Repaired Tag 0GIT using a bounded-below complex representing K, termwise derived inverse image, and the full complex-continuity lemma 0EZM. The earlier inverse-image-of-injectives argument was false: inverse images need not be Gamma-acyclic.",
+  "blueprint": "The four steps realize the blueprint ancestor prop-weil-pbc-strict-henselization-stalk-formula's sentence 'On a bounded-below K-injective representative the same argument gives the derived statement' and the item's imported Tag 0GIT proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Identifies each pullback of F_i to Y with the termwise inverse image of G along Y to T."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-constant-connected-diagram",
+    "why": "Identifies the termwise colimit of the canonical constant pullback diagram with F_Y."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-colimit-constant-connected-diagram"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-de2",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-de2 (reviewer sub-agent of L); spot-checked: Re-push after return 6ec3fa82d: both points repaired. Point 1 (E3/C4/D4): the proof no longer claims termwise global sections of pulled-back injectives compute cohomology; it follows Stacks 0GIT (etale-cohomology.tex 7852-7874) exactly: bounded-below representative G (step 1, good truncation tau_{>=a} computed explicitly from def-weil-abstract-derived-category + def-weil-pbc-bounded-derived-subcategories), termwise pullback representing K_i, K_Y by def-weil-pbc-derived-inverse-image (its statement says the termwise complex represents u^{-1}(QK), no resolution), transition maps from lem-weil-pbc-inverse-image-composition, termwise colimit = F_Y by lem-weil-pbc-colimit-constant-connected-diagram, then the new statement-only node for Stacks 0EZM (lines 7783-7798) in all degrees. Point 2: tool_uses now only inverse-image-composition and colimit-constant-connected-diagram, both generic black-box tools, accepted; dplus-injective-representative gone. Item statement unchanged except stmt_deps now cites def-weil-pbc-derived-inverse-image (correct, C4). New node 0EZM checked hypothesis by hypothesis against Stacks (directed/cofiltered, qcqs, affine transitions, uniform bound a, termwise colimit); small cases: constant system with identity transitions gives identity, complex in degree 0 reduces to sheaf continuity 09YQ. FIX: dag/nodes/sec-curve-estimates/lem-weil-pbc-etale-cohomology-limit-complex-systems.json: statement: 'compatible' spelled out as the Stacks cocycle condition phi_{i''i}=phi_{i''i'} o f^{-1}phi_{i'i} with the composition identification cited [lem-weil-pbc-inverse-image-composition] (added to stmt_deps); removed the proof-remark sentence 'In particular, this conclusion uses higher cohomology...' (B, no proof commentary in a statement); created: added by/date. Started Sat Oct 10 03:20:27 PM UTC 2026, ended Sat Oct 10 03:21:20 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
