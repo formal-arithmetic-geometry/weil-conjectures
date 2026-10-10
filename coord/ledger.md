@@ -2883,3 +2883,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:53 L: merged deliver/M1/def-amb-finite-locally-free-module (reviewer FIX; first push; new nodes: 0)
 - 22:53 L: returned deliver/G1/lem-pc-coherent-hi (reviewer RETURN: Reviewer R-chi2936, head ec26d79a0. 1. C4/E (devissage hypotheses): steps 2 and 4 cite [lem-weil-pbc-coherent-property-d)
 - 22:54 L: returned deliver/M1/lem-weil-separably-closed-geometrically-connected (reviewer RETURN: Not a fault beyond the 23:04 return: the item is attached by L to the sorry-free slopmaster2 theorem AlgebraicGeometry.G)
+- 22:54 UTC L attached lem-weil-separably-closed-geometrically-connected (slopmaster2 of_connectedSpace_of_isSepClosed; converse Mathlib connectedSpace_of_subsingleton in mathlib_match) after R-sgc2938; M1 delivery returned as unneeded

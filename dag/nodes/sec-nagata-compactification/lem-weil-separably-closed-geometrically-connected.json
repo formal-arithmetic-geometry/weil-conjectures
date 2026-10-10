@@ -1,75 +1,108 @@
 {
- "id": "lem-weil-separably-closed-geometrically-connected",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-geometric-hypotheses",
-   "place": "its statement (a notion the statement uses)",
-   "via": [
-    "lem-weil-geometrically-connected-algebraic-closure"
-   ]
+  "id": "lem-weil-separably-closed-geometrically-connected",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-geometric-hypotheses",
+      "place": "its statement (a notion the statement uses)",
+      "via": [
+        "lem-weil-geometrically-connected-algebraic-closure"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Over a separably closed field connected implies geometrically connected",
- "statement": "Let $k$ be a separably closed field [def-pc-separably-closed] and let $X$ be a scheme over $k$ [def-weil-scheme-over-base]. Then $X$ is geometrically connected over $k$ [def-pc-geometrically-irreducible] if and only if $X$ is connected [def-weil-connected-scheme].",
- "source": {
-  "document": "literature/stacks-project/varieties.tex",
-  "place": "Lemma 33.7.6, tag 0363 (lemma-separably-closed-field-connected-components), second assertion ('In particular ...'), Section 33.7"
- },
- "stmt_deps": [
-  "def-pc-separably-closed",
-  "def-weil-scheme-over-base",
-  "def-pc-geometrically-irreducible",
-  "def-weil-connected-scheme"
- ],
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rn 'IsSepClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "only Sites/EtalePoint.lean, Sites/Etale.lean (geometric points of the etale site), EllipticCurve/IsomOfJ.lean; nothing about connectedness of base changes",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "kind": "statement",
+  "title": "Over a separably closed field connected implies geometrically connected",
+  "statement": "Let $k$ be a separably closed field [def-pc-separably-closed] and let $X$ be a scheme over $k$ [def-weil-scheme-over-base]. Then $X$ is geometrically connected over $k$ [def-pc-geometrically-irreducible] if and only if $X$ is connected [def-weil-connected-scheme].",
+  "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Lemma 33.7.6, tag 0363 (lemma-separably-closed-field-connected-components), second assertion ('In particular ...'), Section 33.7"
   },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'IsSepClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'ConnectedSpace\\|IsConnected\\|IsIdempotentElem\\|PrimeSpectrum'",
-   "results": "RingTheory/TotallySplit.lean, RingTheory/Etale/Finite.lean, RingTheory/Etale/Field.lean: etale algebras over separably closed fields split; no statement that a connected scheme (or an algebra with connected spectrum) over a separably closed field stays connected after field extension",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "stmt_deps": [
+    "def-pc-separably-closed",
+    "def-weil-scheme-over-base",
+    "def-pc-geometrically-irreducible",
+    "def-weil-connected-scheme"
+  ],
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -rn 'IsSepClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+      "results": "only Sites/EtalePoint.lean, Sites/Etale.lean (geometric points of the etale site), EllipticCurve/IsomOfJ.lean; nothing about connectedness of base changes",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'IsSepClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'ConnectedSpace\\|IsConnected\\|IsIdempotentElem\\|PrimeSpectrum'",
+      "results": "RingTheory/TotallySplit.lean, RingTheory/Etale/Finite.lean, RingTheory/Etale/Field.lean: etale algebras over separably closed fields split; no statement that a connected scheme (or an algebra with connected spectrum) over a separably closed field stays connected after field extension",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n '^lemma\\|^theorem\\|^instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+      "results": "GeometricallyConnected.connectedSpace_of_subsingleton (geometrically connected over a point implies connected) is the trivial direction; no converse over separably closed fields",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_match": {
+    "declaration": "AlgebraicGeometry.GeometricallyConnected.connectedSpace_of_subsingleton",
+    "file": "Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+    "line": 98,
+    "how": "the converse clause only (geometrically connected over Spec k implies connected), read with sed by L (22:54 UTC): `[GeometricallyConnected f] [Subsingleton S] [Nonempty S] : ConnectedSpace X` with S = Spec k; the forward clause is the attached slopmaster2 theorem (see lean)."
   },
-  {
-   "tool": "grep",
-   "query": "grep -n '^lemma\\|^theorem\\|^instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
-   "results": "GeometricallyConnected.connectedSpace_of_subsingleton (geometrically connected over a point implies connected) is the trivial direction; no converse over separably closed fields",
-   "date": "2026-10-09",
-   "verdict": "no match"
+  "status": "unsplit",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-geometrically-connected-algebraic-closure",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.GeometricallyConnected.of_connectedSpace_of_isSepClosed",
+          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected",
+          "lines": [
+            61,
+            73
+          ],
+          "kind": "theorem",
+          "sorry": false,
+          "part": "connected implies geometrically connected"
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-nagata-compactification",
+  "unit": "sk-prop-nagata-sketch-comp-category",
+  "lean": {
+    "branch": "slopmaster2",
+    "declarations": [
+      "AlgebraicGeometry.GeometricallyConnected.of_connectedSpace_of_isSepClosed"
+    ],
+    "note": "attached by the lead Attached by L 2026-10-10 22:54 UTC on reviewer R-sgc2938's finding (M1 delivery a15e7445f): the hard direction (connected over a separably closed field implies geometrically connected, Stacks 0363) is the sorry-free slopmaster2 theorem AlgebraicGeometry.GeometricallyConnected.of_connectedSpace_of_isSepClosed (WeilConjectures/Mathlib/AlgebraicGeometry/Geometrically/Connected.lean:65); the converse (geometrically connected over Spec k implies connected) is Mathlib's GeometricallyConnected.connectedSpace_of_subsingleton (Mathlib/AlgebraicGeometry/Geometrically/Connected.lean:98, S = Spec k a nonempty subsingleton), recorded in mathlib_match since Mathlib names are not in the sorry map."
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-sgc2938",
+    "group": "M1",
+    "result": "pass",
+    "note": "attachment case found by the packet reviewer: forward clause slopmaster2 (sorry-free per the sorry map), converse Mathlib; L read both with sed; the M1 split (a15e7445f) is not merged because nothing remains to split."
   }
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-geometrically-connected-algebraic-closure",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-nagata-compactification",
- "unit": "sk-prop-nagata-sketch-comp-category"
 }
