@@ -1,0 +1,67 @@
+{
+ "id": "lem-weil-pbc-glue-schemes",
+ "kind": "statement",
+ "title": "Glueing schemes along open subschemes",
+ "statement": "Let $I$ be a set and let $(X_i,U_{ij},\\varphi_{ij})$ be glueing data of schemes: for $i\\in I$ a scheme $X_i$ [def-pc-scheme], for $i,j\\in I$ an open subscheme $U_{ij}\\subseteq X_i$ [def-weil-open-immersion] and an isomorphism of schemes $\\varphi_{ij}:U_{ij}\\to U_{ji}$, such that $U_{ii}=X_i$ and $\\varphi_{ii}=\\mathrm{id}$, and for all $i,j,k$: $\\varphi_{ij}^{-1}(U_{ji}\\cap U_{jk})=U_{ij}\\cap U_{ik}$ and $\\varphi_{ik}=\\varphi_{jk}\\circ\\varphi_{ij}$ on $U_{ij}\\cap U_{ik}$ (cocycle condition). Then there exist a scheme $X$ and open immersions $\\psi_i:X_i\\to X$ such that (1) $X=\\bigcup_i\\psi_i(X_i)$, (2) $\\psi_i(U_{ij})=\\psi_i(X_i)\\cap\\psi_j(X_j)$, and (3) $\\psi_i|_{U_{ij}}=\\psi_j\\circ\\varphi_{ij}$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Section 26.14 (Tag 01JA, section-glueing-schemes): the glueing data of 01JA, Lemma 26.14.1 (Tag 01JB, lemma-glue: the glued locally ringed space with (1)-(3)) and Lemma 26.14.2 (Tag 01JC, lemma-glue-schemes: it is a scheme)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "glue schemes along open subschemes with cocycle condition, glued scheme with open immersions",
+   "results": "Scheme.LocalRepresentability.glueData (Sites/Representability.lean), Scheme.GlueData.glued, Scheme.GlueData.gluedScheme, Scheme.GlueData, Scheme.GlueData.f_open (Gluing.lean)",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.GlueData"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "gluing data of schemes: schemes U_i, open subschemes V_ij, transition isomorphisms satisfying cocycle condition give glued scheme covered by open immersions",
+   "results": "Scheme.GlueData.openCover, Scheme.Cover.gluedCover, Scheme.Cover.RelativeGluingData.cover, Scheme.Cover.instIsOpenImmersionFromGlued (Gluing.lean, RelativeGluing.lean)",
+   "date": "2026-10-10",
+   "verdict": "match: Scheme.GlueData with its openCover"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'structure GlueData\\|ι_isOpenImmersion\\|ι_jointly_surjective\\|glue_condition\\|vPullbackConeIsLimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Gluing.lean; sed -n 40,75p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/GlueData.lean",
+   "results": "Gluing.lean:91 structure Scheme.GlueData extends CategoryTheory.GlueData Scheme (f i j open immersions), :129 gluedScheme, :177 ι_isOpenImmersion, :180 ι_jointly_surjective, :186 glue_condition (t i j ≫ f j i ≫ ι j = f i j ≫ ι i), :202 vPullbackConeIsLimit (V i j is the intersection of the images of U i and U j); CategoryTheory/GlueData.lean:40-75 fields f_id, t_id, t', t_fac, cocycle",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.GlueData (with Scheme.GlueData.glued, ι_isOpenImmersion, ι_jointly_surjective, glue_condition, vPullbackConeIsLimit)",
+  "file": "Mathlib/AlgebraicGeometry/Gluing.lean",
+  "how": "specializes: Stacks' glueing data is a Scheme.GlueData with U i = X_i, V (i,j) = U_ij, f i j the open immersion U_ij -> X_i (f i i an isomorphism since U_ii = X_i), t i j = φ_ij (t i i = id); the pullback V i j ×_{U i} V i k is U_ij ∩ U_ik, and the condition φ_ij^{-1}(U_ji ∩ U_jk) = U_ij ∩ U_ik says that φ_ij restricts to t' i j k : U_ij ∩ U_ik -> U_jk ∩ U_ji (t_fac), the cocycle condition φ_ik = φ_jk ∘ φ_ij (with φ_ki = φ_ik^{-1}, from k = i) giving t' i j k ≫ t' j k i ≫ t' k i j = id; then X = D.glued, ψ_i = D.ι i: open immersions (:177), covering (:180), ψ_i(U_ij) = ψ_i(X_i) ∩ ψ_j(X_j) (:202 vPullbackConeIsLimit), ψ_j ∘ φ_ij = ψ_i on U_ij (:186 glue_condition)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-universal-first-order-thickening-exists",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match (Scheme.GlueData and its lemmas, Gluing.lean); the translation of Stacks' glueing data into GlueData takes a few lines; stage 3 decides whether to keep it as a leaf."
+}

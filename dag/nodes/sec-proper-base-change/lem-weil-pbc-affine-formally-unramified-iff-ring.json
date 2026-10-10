@@ -1,0 +1,68 @@
+{
+ "id": "lem-weil-pbc-affine-formally-unramified-iff-ring",
+ "kind": "statement",
+ "title": "A morphism of affine schemes is formally unramified iff its ring map is formally unramified",
+ "statement": "Let $f:Z\\to X$ be a morphism of affine schemes [def-pc-scheme], $R=\\mathcal O_X(X)$, $S=\\mathcal O_Z(Z)$, and $\\varphi=f^\\sharp:R\\to S$ the induced ring map, so that $f$ is identified with $\\operatorname{Spec}\\varphi$ [def-weil-affine-spectrum]. Then $f$ is formally unramified [def-weil-pbc-formally-unramified-morphism] if and only if $\\varphi$ is a formally unramified ring map: for every $R$-algebra $A$, every ideal $I\\subseteq A$ with $I^2=0$ and every $R$-algebra map $a:S\\to A/I$ there is at most one $R$-algebra map $a':S\\to A$ lifting $a$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 02HD (label lemma-affine-formally-unramified), with Algebra, Definition 00UN (definition-formally-unramified)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-formally-unramified-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "morphism of affine schemes is formally unramified iff ring map on global sections is formally unramified",
+   "results": "AlgebraicGeometry.FormallyUnramified (recOn/casesOn/mk), AlgebraicGeometry.formallyUnramified_iff (affine opens U, V: appLE formally unramified), RingHom.FormallyUnramified",
+   "date": "2026-10-10",
+   "verdict": "match (with HasRingHomProperty)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "FormallyUnramified (Spec.map φ) iff φ formally unramified ring hom",
+   "results": "FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified, formallyUnramified_iff, RingHom.FormallyUnramified.propertyIsLocal, IsEtale.instFormallyUnramified",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'Spec_iff\\|iff_of_isAffine' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean; grep -n 'iff_comp_injective\\|class FormallyUnramified' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Unramified/Basic.lean; grep -n 'formallyUnramified_algebraMap' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/RingHom/Unramified.lean",
+   "results": "RingHomProperties.lean:355 HasRingHomProperty.iff_of_isAffine (P f ↔ Q f.appTop for affine X, Y), :360 Spec_iff; Unramified/Basic.lean:58 class Algebra.FormallyUnramified (Omega=0, @[stacks 00UM]), :116 iff_comp_injective (at most one lift along a square-zero ideal, all B in the universe of A); RingHom/Unramified.lean:32 formallyUnramified_algebraMap",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.HasRingHomProperty.iff_of_isAffine, Algebra.FormallyUnramified.iff_comp_injective",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/RingTheory/Unramified/Basic.lean",
+  "how": "one Mathlib lemma per link: FormallyUnramified f ↔ RingHom.FormallyUnramified f.appTop for affine source and target (iff_of_isAffine, RingHomProperties.lean:355, via the instance HasRingHomProperty @FormallyUnramified RingHom.FormallyUnramified, FormallyUnramified.lean:66; f.appTop is φ), RingHom.FormallyUnramified φ ↔ Algebra.FormallyUnramified R S (RingHom/Unramified.lean:32), and Algebra.FormallyUnramified R S ↔ injectivity of composing with A -> A/I for every square-zero I (iff_comp_injective, Unramified/Basic.lean:116), which is the 'at most one lift' of the node; the scheme side is the node def-weil-pbc-formally-unramified-morphism through its accepted match with AlgebraicGeometry.FormallyUnramified"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-universal-first-order-thickening-exists",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: composed match (HasRingHomProperty.iff_of_isAffine with Algebra.FormallyUnramified.iff_comp_injective); accepted as a leaf, stage 3 verifies the lines."
+}

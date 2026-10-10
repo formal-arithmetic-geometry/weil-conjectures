@@ -11,9 +11,129 @@
   "def-weil-pbc-formally-unramified-morphism",
   "def-weil-pbc-universal-first-order-thickening"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Uniqueness.* If $(Z'_1,i_1,h'_1)$ and $(Z'_2,i_2,h'_2)$ are universal first order thickenings of $Z$ over $X$, there is exactly one $\\varphi:Z'_1\\to Z'_2$ with $h'_2\\circ\\varphi=h'_1$ and $\\varphi\\circ i_1=i_2$, and it is an isomorphism: this is the uniqueness clause of [def-weil-pbc-universal-first-order-thickening], proved there by applying the universal property of each $Z'_k$ to the thickening $Z\\subset Z'_l$ with $a=\\mathrm{id}_Z$. It remains to prove existence.",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, Section 04F2 (section-universal-thickening), opening paragraph ('Thus if a universal first order thickening exists, then it is unique up to unique isomorphism'); proof of Lemma 04F3, second paragraph, first sentence"
+   }
+  },
+  {
+   "text": "*Affine pieces.* Choose an open covering $Z=\\bigcup_{i\\in I}Z_i$ by affine opens such that each $h(Z_i)$ lies in an affine open $U_i\\subseteq X$: cover $X$ by affine opens $U$, and each open $h^{-1}(U)$ by affine opens of $Z$, affine opens forming a basis of the topology of a scheme [def-pc-scheme]. By [lem-weil-pbc-formally-unramified-open-restriction] the restriction $h_i:Z_i\\to U_i$ is formally unramified. Write $U_i\\cong\\operatorname{Spec}R_i$, $Z_i\\cong\\operatorname{Spec}S_i$ [def-weil-affine-spectrum] with $R_i=\\mathcal O_X(U_i)$, $S_i=\\mathcal O_Z(Z_i)$, so that $h_i$ is $\\operatorname{Spec}$ of $\\varphi_i=h_i^\\sharp:R_i\\to S_i$; by [lem-weil-pbc-affine-formally-unramified-iff-ring] $\\varphi_i$ is a formally unramified ring map. By [lem-weil-pbc-ring-universal-first-order-thickening] there is a surjection of $R_i$-algebras $\\pi_i:S'_i\\to S_i$ with square-zero kernel and the universal property for square-zero ideals, and by [lem-weil-pbc-universal-thickening-affine-case] $Z_i\\cong\\operatorname{Spec}S_i\\subset Z'_i:=\\operatorname{Spec}S'_i$, with closed immersion $\\iota_i:Z_i\\to Z'_i$ ($\\operatorname{Spec}\\pi_i$ composed with the identification) and $h'_i:Z'_i\\to U_i$, is a universal first order thickening of $Z_i$ over $U_i$ (transporting along the isomorphisms $Z_i\\cong\\operatorname{Spec}S_i$, $U_i\\cong\\operatorname{Spec}R_i$ only renames the objects in [def-weil-pbc-universal-first-order-thickening]). By part (2) of [lem-weil-pbc-universal-thickening-open-pieces], composing $h'_i$ with the inclusion $U_i\\subseteq X$, $Z_i\\subset Z'_i$ is a universal first order thickening of $Z_i$ over $X$; we write $h'_i:Z'_i\\to X$ from now on.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-formally-unramified-open-restriction",
+    "lem-weil-pbc-affine-formally-unramified-iff-ring",
+    "lem-weil-pbc-ring-universal-first-order-thickening",
+    "lem-weil-pbc-universal-thickening-affine-case",
+    "lem-weil-pbc-universal-thickening-open-pieces",
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F3, third paragraph (affine case, from Algebra Lemma 04EB) and fourth paragraph, first three sentences (covering, Lemma 02HC, 'By the general remarks above Z_i ⊂ Z'_i is also a universal first order thickening of Z_i over X'); More on Morphisms, Lemma 02HD for the ring map"
+   }
+  },
+  {
+   "text": "*Overlaps.* For $i,j\\in I$ put $Z_{ij}=Z_i\\cap Z_j$, open in $Z_i$. Since $\\iota_i$ is a homeomorphism of underlying spaces (a first order thickening is a thickening, [def-sbc-first-order-thickening] (1)-(2)), there is a unique open subscheme $Z'_{ij}\\subseteq Z'_i$ with $\\iota_i^{-1}(Z'_{ij})=Z_{ij}$; $Z'_{ii}=Z'_i$. By part (1) of [lem-weil-pbc-universal-thickening-open-pieces] (with $V=Z_{ij}$, $U=X$) both $Z_{ij}\\subset Z'_{ij}$ (closed immersion $\\iota_i|$, structure $h'_i|$) and $Z_{ij}\\subset Z'_{ji}$ (closed immersion $\\iota_j|$, structure $h'_j|$) are universal first order thickenings of $Z_{ij}$ over $X$. By the uniqueness clause of [def-weil-pbc-universal-first-order-thickening] there is exactly one morphism $\\varphi_{ij}:Z'_{ij}\\to Z'_{ji}$ with $h'_j\\circ\\varphi_{ij}=h'_i|_{Z'_{ij}}$ and $\\varphi_{ij}\\circ\\iota_i|_{Z_{ij}}=\\iota_j|_{Z_{ij}}$, and it is an isomorphism; $\\varphi_{ii}=\\mathrm{id}$ because the identity has these properties. On underlying sets $\\varphi_{ij}(\\iota_i(z))=\\iota_j(z)$ for $z\\in Z_{ij}$.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-weil-pbc-universal-thickening-open-pieces",
+    "def-weil-pbc-universal-first-order-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F3, fourth paragraph ('Let Z'_{i,j} ⊂ Z'_i be the open subscheme ... there is a canonical isomorphism φ_ij : Z'_{i,j} → Z'_{j,i} inducing the identity on Z_i ∩ Z_j')"
+   }
+  },
+  {
+   "text": "*Cocycle condition* (omitted in the source; its hint is carried out). Fix $i,j,k$ and $Z_{ijk}=Z_i\\cap Z_j\\cap Z_k$. The open $Z'_{ij}\\cap Z'_{ik}\\subseteq Z'_i$ is the open with $\\iota_i^{-1}(Z'_{ij}\\cap Z'_{ik})=Z_{ijk}$, so by part (1) of [lem-weil-pbc-universal-thickening-open-pieces] it is a universal first order thickening of $Z_{ijk}$ over $X$, and likewise $Z'_{ji}\\cap Z'_{jk}\\subseteq Z'_j$ and $Z'_{ki}\\cap Z'_{kj}\\subseteq Z'_k$. (a) Since $\\varphi_{ij}(\\iota_i(z))=\\iota_j(z)$ and these opens have the underlying sets $\\iota_i(Z_{ijk})$, $\\iota_j(Z_{ijk})$, $\\varphi_{ij}^{-1}(Z'_{ji}\\cap Z'_{jk})=Z'_{ij}\\cap Z'_{ik}$. (b) The two morphisms $\\varphi_{jk}\\circ\\varphi_{ij}$ and $\\varphi_{ik}$, restricted to $Z'_{ij}\\cap Z'_{ik}$, both land in the open $Z'_{ki}\\cap Z'_{kj}$ (by (a) for the pairs $(j,k)$ and $(i,k)$), so they factor through it as morphisms of schemes [def-weil-open-immersion]; both satisfy $h'_k\\circ(-)=h'_i|$ and $(-)\\circ\\iota_i|_{Z_{ijk}}=\\iota_k|_{Z_{ijk}}$. Applying the universal property of $Z_{ijk}\\subset Z'_{ki}\\cap Z'_{kj}$ [def-weil-pbc-universal-first-order-thickening] to the first order thickening $Z_{ijk}\\subset Z'_{ij}\\cap Z'_{ik}$ over $X$ (structure morphism $h'_i|$) and $a=\\mathrm{id}_{Z_{ijk}}$, at most one morphism has these two properties, so $\\varphi_{ik}=\\varphi_{jk}\\circ\\varphi_{ij}$ on $Z'_{ij}\\cap Z'_{ik}$. Hence $(Z'_i,Z'_{ij},\\varphi_{ij})$ is glueing data of schemes.",
+   "uses": [
+    "lem-weil-pbc-universal-thickening-open-pieces",
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F3, fourth paragraph ('We claim that these morphisms satisfy the cocycle condition ... Verification omitted. Hint: Use that Z'_{i,j} ∩ Z'_{i,k} is the universal first order thickening of Z_i ∩ Z_j ∩ Z_k'); glueing data as in Schemes, Section 01JA"
+   }
+  },
+  {
+   "text": "*Glueing.* By [lem-weil-pbc-glue-schemes] there are a scheme $Z'$ and open immersions $\\psi_i:Z'_i\\to Z'$ with $Z'=\\bigcup_i\\psi_i(Z'_i)$, $\\psi_i(Z'_{ij})=\\psi_i(Z'_i)\\cap\\psi_j(Z'_j)$ and $\\psi_i|_{Z'_{ij}}=\\psi_j\\circ\\varphi_{ij}$. Put $W_i=\\psi_i(Z'_i)$. The morphisms $h'_i\\circ\\psi_i^{-1}:W_i\\to X$ agree on $W_i\\cap W_j=\\psi_i(Z'_{ij})$ because $h'_j\\circ\\varphi_{ij}=h'_i|_{Z'_{ij}}$, so by [lem-weil-pbc-scheme-morphism-gluing] they glue to $h':Z'\\to X$ with $h'\\circ\\psi_i=h'_i$. The morphisms $\\psi_i\\circ\\iota_i:Z_i\\to Z'$ agree on $Z_{ij}$ because $\\psi_j\\circ\\iota_j|_{Z_{ij}}=\\psi_j\\circ\\varphi_{ij}\\circ\\iota_i|_{Z_{ij}}=\\psi_i\\circ\\iota_i|_{Z_{ij}}$, so by [lem-weil-pbc-scheme-morphism-gluing] they glue to $\\iota:Z\\to Z'$ with $\\iota|_{Z_i}=\\psi_i\\circ\\iota_i$. Then $h'\\circ\\iota=h$, since on each $Z_i$ both equal $h'_i\\circ\\iota_i=h|_{Z_i}$ (uniqueness in [lem-weil-pbc-scheme-morphism-gluing]); i.e. $\\iota$ is a morphism over $X$ [def-weil-scheme-over-base].",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F3, fourth paragraph ('Hence we can use the results of Schemes, Section 01JA to get a first order thickening Z ⊂ Z' over X'); Schemes, Lemmas 01JB, 01JC and the mapping property of the glued scheme"
+   }
+  },
+  {
+   "text": "*$Z\\subset Z'$ is a first order thickening over $X$, and the $W_i$ are universal.* (a) $\\iota^{-1}(W_j)=Z_j$: if $z\\in Z_k$ and $\\psi_k(\\iota_k(z))\\in W_j$, then $\\iota_k(z)\\in\\psi_k^{-1}(W_k\\cap W_j)=Z'_{kj}$, so $z\\in Z_{kj}\\subseteq Z_j$; the converse is clear. Under the isomorphism $\\psi_j:Z'_j\\to W_j$ the restriction $\\iota|_{Z_j}:Z_j\\to W_j$ is $\\iota_j$, a closed immersion whose ideal sheaf has square zero. (b) Cover $Z'$ by affine opens $V$ each contained in some $W_j$; by part (1) of [lem-weil-pbc-closed-immersion-affine-cover-criterion] applied to $\\iota_j$, each $\\iota^{-1}(V)$ is affine and $\\mathcal O_{Z'}(V)\\to\\mathcal O_Z(\\iota^{-1}V)$ is surjective, so by part (2) $\\iota$ is a closed immersion [def-weil-closed-immersion]. (c) Its ideal sheaf $\\mathcal I=\\ker(\\mathcal O_{Z'}\\to\\iota_*\\mathcal O_Z)$ [def-sbc-closed-immersion-ideal-sheaf] restricts on $W_j$ to the ideal sheaf of $\\iota|_{Z_j}$ (kernels of sheaf maps are computed open by open), whose square is $0$; a sheaf of ideals whose restriction to every member of an open covering is $0$ is $0$, so $\\mathcal I^2=0$. With step 5 ($h'\\circ\\iota=h$), $Z\\subset Z'$ with $h'$ is a first order thickening over $X$ [def-sbc-first-order-thickening]. (d) By (a), $W_j$ is the open of $Z'$ with $\\iota^{-1}(W_j)=Z_j$, and $(W_j,\\iota|_{Z_j},h'|_{W_j})\\cong(Z'_j,\\iota_j,h'_j)$ via $\\psi_j$, so $Z_j\\subset W_j$ is a universal first order thickening of $Z_j$ over $X$ (step 2); similarly $W_j\\cap W_k=\\psi_j(Z'_{jk})$ is the open with $\\iota^{-1}(W_j\\cap W_k)=Z_{jk}$, and $Z_{jk}\\subset W_j\\cap W_k$ is a universal first order thickening of $Z_{jk}$ over $X$ (step 3).",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-closed-immersion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-first-order-thickening",
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F3, end of the fourth paragraph ('a first order thickening Z ⊂ Z' over X which the property that the open subscheme Z'_i ⊂ Z' with Z_i = Z'_i ∩ Z is a universal first order thickening of Z_i over X'); closed immersions are checked on an affine covering, Morphisms, Lemma 01QO"
+   }
+  },
+  {
+   "text": "*The universal property of $Z'$.* Let $T\\subset T'$ be a first order thickening over $X$ with closed immersion $i_T$ and $b:T'\\to X$, and $a:T\\to Z$ with $h\\circ a=b\\circ i_T$. Put $T_j=a^{-1}(Z_j)$, an open covering of $T$, and let $T'_j\\subseteq T'$ be the open with $i_T^{-1}(T'_j)=T_j$; the $T'_j$ cover $T'$ since $i_T$ is a homeomorphism, and $T'_j\\cap T'_k$ is the open over $T_j\\cap T_k=a^{-1}(Z_{jk})$. By part (0) of [lem-weil-pbc-universal-thickening-open-pieces], $T_j\\subset T'_j$ and $T_j\\cap T_k\\subset T'_j\\cap T'_k$ are first order thickenings over $X$. *Existence:* by the universal property of $Z_j\\subset W_j$ over $X$ (step 6 (d)) there is a unique $a'_j:T'_j\\to W_j$ with $h'\\circ a'_j=b|_{T'_j}$ and $a'_j\\circ i_T|_{T_j}=\\iota\\circ a|_{T_j}$. On underlying sets $a'_j(i_T(t))=\\iota(a(t))$, so $a'_j$ and $a'_k$ map $T'_j\\cap T'_k$ into $W_j\\cap W_k$ and factor through it [def-weil-open-immersion]; both are morphisms over $X$ restricting to $\\iota\\circ a$ on $T_j\\cap T_k$, so by the uniqueness in the universal property of $Z_{jk}\\subset W_j\\cap W_k$ [def-weil-pbc-universal-first-order-thickening] they agree on $T'_j\\cap T'_k$. By [lem-weil-pbc-scheme-morphism-gluing] they glue to $a':T'\\to Z'$, and $h'\\circ a'=b$, $a'\\circ i_T=\\iota\\circ a$ hold because they hold on every $T'_j$, resp. $T_j$ (uniqueness in the gluing lemma). *Uniqueness:* if $a'':T'\\to Z'$ also satisfies $h'\\circ a''=b$ and $a''\\circ i_T=\\iota\\circ a$, then $a''(T'_j)=a''(i_T(T_j))=\\iota(a(T_j))\\subseteq W_j$, so $a''|_{T'_j}$ factors through $W_j$ and equals $a'_j$ by the uniqueness for $Z_j\\subset W_j$; hence $a''=a'$ by [lem-weil-pbc-scheme-morphism-gluing]. So $Z\\subset Z'$ is a universal first order thickening of $Z$ over $X$ [def-weil-pbc-universal-first-order-thickening].",
+   "uses": [
+    "lem-weil-pbc-universal-thickening-open-pieces",
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "More on Morphisms, proof of Lemma 04F3, last paragraph ('It turns out that this implies formally that Z' is a universal first order thickening of Z over X ... This finishes the proof')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-first-order-thickening",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-weil-scheme-over-base",
+  "lem-weil-pbc-affine-formally-unramified-iff-ring",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-formally-unramified-open-restriction",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-ring-universal-first-order-thickening",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-universal-thickening-affine-case",
+  "lem-weil-pbc-universal-thickening-open-pieces"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "More on Morphisms, Lemma 04F3 (lemma-universal-thickening) and its proof, with the opening paragraph of Section 04F2 (section-universal-thickening) for uniqueness"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,7 +165,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +185,18 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-universal-first-order-thickening-exists",
+  "worker": "stage1",
+  "summary": "Statement kept (checked against Stacks 04F2/04F3; the uniqueness half is the uniqueness clause already stated and proved in def-weil-pbc-universal-first-order-thickening). Proof written in 7 steps following the proof of 04F3: uniqueness; affine pieces via 02HC (new leaf lem-weil-pbc-formally-unramified-on-opens), 02HD (new leaf lem-weil-pbc-affine-formally-unramified-iff-ring), Algebra 04EB (new unsplit lem-weil-pbc-ring-universal-first-order-thickening) and the affine case of 04F3 (new unsplit lem-weil-pbc-universal-thickening-affine-case); overlaps and the cocycle condition (omitted in Stacks, written out from its hint) via the 'general remarks' of the proof (new unsplit lem-weil-pbc-universal-thickening-open-pieces, conormal-free; the existing lem-weil-pbc-universal-thickening-open-restriction could not be cited since its statement depends on def-weil-pbc-conormal-sheaf-formally-unramified, which depends on this item: a cycle); glueing via 01JA/01JB/01JC (new leaf lem-weil-pbc-glue-schemes) and lem-weil-pbc-scheme-morphism-gluing; first order thickening via 01QO (lem-weil-pbc-closed-immersion-affine-cover-criterion); the final universal property by covering T'. Mathlib searches of the item (no match) kept."
+ },
+ "lead_note": " L 2026-10-10: the worker's 02HC leaf lem-weil-pbc-formally-unramified-on-opens duplicated lem-weil-pbc-formally-unramified-open-restriction (created in parallel); citations redirected to the latter and the duplicate file removed before commit.",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "7 steps following Stacks 04F3: uniqueness from the definition; affine pieces via 02HC, 02HD (new composed leaf), the algebraic universal thickening (new 04EB node) and its Spec (new node, universal for all thickenings); overlaps and the maps phi_ij by uniqueness of universal thickenings of opens (new 'open-pieces' node, conormal-free to avoid a cycle with the open-restriction item); the cocycle condition written out from Stacks' hint; glueing (new composed leaf, 01JC); Z in Z' a first order thickening with the W_j universal; the universal property by covering T'. The duplicate 02HC leaf was removed by L. Tags verified."
+ }
 }
