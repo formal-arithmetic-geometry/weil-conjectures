@@ -13,18 +13,56 @@
  },
  "kind": "statement",
  "title": "Differential of multiplication by d",
- "statement": "Let G be a commutative group scheme [def-sc-group-scheme] over a field k, e its identity, and d\\geq1. The tangent map at e of the multiplication morphism [d]:G\\to G is the scalar multiplication map v\\mapsto d\\cdot v on T_{G/k,e}.",
+ "statement": "Let G be a commutative group scheme [def-sc-group-scheme] over a field k, e its identity, and d\\geq1. The tangent map [def-sc-scheme-tangent-space] at e of the multiplication morphism [d]:G\\to G is the scalar multiplication map v\\mapsto d\\cdot v on the tangent space T_{G/k,e} [def-sc-scheme-tangent-space].",
  "source": {
   "document": "literature/stacks-project/groupoids.tex",
   "place": "Groupoid Schemes, proof of lemma-group-scheme-addition-tangent-vectors applied inductively to [d]"
  },
  "stmt_deps": [
   "def-sc-group-scheme",
-  "lem-sc-group-addition-tangent-differential"
+  "lem-sc-mult-n-homomorphism",
+  "lem-sc-group-addition-tangent-differential",
+  "def-sc-scheme-tangent-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For d=1, the inductive definition of [n] gives [1]=m∘(e∘p,id_G), which is the identity by the unit axiom in [def-sc-group-scheme]. Therefore its tangent map at e is the identity on T_{G/k,e}, namely v ↦ 1·v.",
+   "uses": [
+    "lem-sc-mult-n-homomorphism",
+    "def-sc-group-scheme",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoid Schemes, definition of the n-fold multiplication morphism and tangent map"
+   }
+  },
+  {
+   "text": "Assume the assertion for d. The inductive definition gives [d+1] = m ∘ ([d], id_G). Since tangent maps are given by post-composition θ ↦ f∘θ [def-sc-scheme-tangent-space] (κ(e)=k), they are functorial, so d([d+1])_e is dm_(e,e) composed with the tangent map of ([d],id_G); under the canonical product identification θ ↦ (pr_1∘θ, pr_2∘θ), the latter sends v to ([d]∘v, v) = (d[d]_e(v),v). The induction hypothesis makes this (d·v,v), and the group-addition tangent lemma gives dm_(e,e)(d·v,v)=d·v+v=(d+1)·v by the vector-space axioms. This proves the induction.",
+   "uses": [
+    "lem-sc-mult-n-homomorphism",
+    "lem-sc-group-addition-tangent-differential",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Groupoid Schemes, proof of lemma-group-scheme-addition-tangent-vectors applied inductively to [d]"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "lem-sc-mult-n-homomorphism",
+  "lem-sc-group-addition-tangent-differential",
+  "def-sc-scheme-tangent-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Groupoid Schemes, proof of lemma-group-scheme-addition-tangent-vectors applied inductively to [d]"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,12 +87,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-mult-n-etale-kernel",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-ntorsion-etale"
+ "unit": "sk-prop-av-ntorsion-etale",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-mult-n-tangent-differential",
+  "worker": "stage1",
+  "summary": "Checked that no exact sorry-free Lean declaration exists. Split the proof into the identity base case and the induction [d+1] = m composed with ([d], id), using the existing group-addition tangent differential node for the only nontrivial tangent calculation.",
+  "blueprint": "Realizes the parent blueprint proof step (c), differential of [d] is multiplication by d on the tangent space, by induction from the differential of addition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mtd1914",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mtd1914 (reviewer sub-agent of L); spot-checked: No cycle: lem-sc-group-addition-tangent-differential is unsplit with no proof deps and does not cite the item; lem-sc-mult-n-etale-kernel cites the item downstream only. Step 1 ([1]=m∘(e∘p,id)=id by the unit axiom) and step 2 (induction [d+1]=m∘([d],id), chain rule, product identification, addition differential, d·v+v=(d+1)·v) correct; the addition formula itself is the cited node (unsplit, its own item); no node restated. FIX more, RETURN less: C1/B3 the statement and step 2 used T_{G/k,e}, the tangent map and its functoriality without citing def-sc-scheme-tangent-space; added the citation to the statement, to both steps' uses, stmt_deps and proof_deps, and wrote out in step 2 that tangent maps are post-composition (κ(e)=k) and the product identification is θ↦(pr_1∘θ,pr_2∘θ).; 1 file(s) fixed by the reviewer"
+ }
 }
