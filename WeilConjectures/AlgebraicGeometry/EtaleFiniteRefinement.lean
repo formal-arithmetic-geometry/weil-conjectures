@@ -49,4 +49,15 @@ theorem Scheme.exists_finite_surjective_refinement_of_etale {U T : Scheme.{u}} (
       (φ : ∀ a, (W a).toScheme ⟶ U), ⨆ a, W a = ⊤ ∧ ∀ a, φ a ≫ u = (W a).ι ≫ r :=
   sorry
 
+/-- The case of `AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale` where `u`
+is already finite: take `r = u` and the single open `U`. This is the base case of the induction in
+Stacks 09Z0. -/
+theorem Scheme.exists_finite_surjective_refinement_of_etale_of_isFinite {U T : Scheme.{u}}
+    (u : U ⟶ T) [Etale u] [Surjective u] [IsFinite u] :
+    ∃ (T' : Scheme.{u}) (r : T' ⟶ T) (_ : IsFinite r) (_ : LocallyOfFinitePresentation r)
+      (_ : Surjective r) (J : Type) (_ : Finite J) (W : J → T'.Opens)
+      (φ : ∀ a, (W a).toScheme ⟶ U), ⨆ a, W a = ⊤ ∧ ∀ a, φ a ≫ u = (W a).ι ≫ r :=
+  ⟨U, u, inferInstance, inferInstance, inferInstance, Unit, inferInstance, fun _ ↦ ⊤,
+    fun _ ↦ (⊤ : U.Opens).ι, by simp, fun _ ↦ rfl⟩
+
 end AlgebraicGeometry
