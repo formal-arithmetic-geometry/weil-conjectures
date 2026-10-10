@@ -2571,3 +2571,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:50 L: returned deliver/E1/lem-sc-open-restriction-support-triangle (reviewer RETURN: 1. E (wrong mathematics), Step 3: 'for an open immersion, direct image is exact: on stalks it is the identity over V and)
 - 20:50 L: merged deliver/C1/def-nagata-fixed-base-separated-stage (reviewer FIX; first push; new nodes: 0)
 - 20:50 L: merged deliver/G1/lem-pc-kbar-pure-insep (reviewer PASS; first push; new nodes: 0)
+- 20:50 L: merged deliver/M1/lem-weil-pbc-finite-pushforward-constructible-noetherian (reviewer FIX; first push; new nodes: 0)

@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-finite-pushforward-constructible-noetherian",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite pushforward preserves constructibility on Noetherian schemes",
@@ -19,23 +19,26 @@
  ],
  "proof": [
   {
-   "text": "Pullback preserves constructibility: pull back the finite locally closed\npartition and each of its finite constant etale trivializations. For every\nclosed subset $T\\subset U$, give $T$ its reduced scheme structure and put\n$V_T=V\\times_UT$. [lemma-weil-pbc-finite-exchange] identifies $(h_*E)|_T$ with\nthe direct image of the constructible pullback of $E$ along the finite map\n$V_T\\to T$.",
+   "text": "For every closed subset $T\\subset U$, give $T$ its reduced scheme structure and put $V_T=V\\times_UT$. By the constructible-pullback statement, the pullback of $E$ to $V_T$ (and to any open of $V_T$) is constructible; that statement uses stratifications without the constructible-subset condition of the definition used here, but all schemes involved are Noetherian ($V$ is finite over the Noetherian $U$), where every locally closed subset is constructible [def-weil-constructible-subset, Stacks 005L], so the two notions agree. The finite-exchange statement identifies $(h_*E)|_T$ with the direct image of this constructible pullback along the finite map $V_T\\to T$.",
    "uses": [
-    "lemma-weil-pbc-finite-exchange"
+    "prop-constructible-pullback",
+    "lemma-weil-pbc-finite-exchange",
+    "def-weil-constructible-subset"
    ],
    "elementary": false
   },
   {
-   "text": "We prove that $(h_*E)|_T$ has a finite lisse partition by Noetherian\ninduction on these closed subsets. The empty subset is immediate. If $T$ is\nreducible, its finitely many irreducible components $T_1,\\ldots,T_r$ from\n[lem-weil-pbc-noetherian-finite-components] are proper closed subsets. Apply\ninduction to each and restrict its partition to\n$T_i\\setminus\\bigcup_{j<i}T_j$. These restricted pieces are locally closed,\ndisjoint and cover $T$.",
+   "text": "We prove that $(h_*E)|_T$ has a finite lisse partition by Noetherian induction on these closed subsets. The empty subset is immediate. If $T$ is reducible, the finite-components statement gives finitely many irreducible components $T_1,\\ldots,T_r$, each a proper closed subset. Apply induction to each and restrict its partition to $T_i\\setminus\\bigcup_{j<i}T_j$. These restricted pieces are locally closed, disjoint and cover $T$.",
    "uses": [
     "lem-weil-pbc-noetherian-finite-components"
    ],
    "elementary": false
   },
   {
-   "text": "If $T$ is irreducible, its reduced structure is integral. Choose a nonempty\naffine open $Q\\subset T$ and apply\n[lem-weil-pbc-finite-pushforward-generic-constructible] to $V_Q\\to Q$. It\nsupplies a dense open $Q^\\circ\\subset T$ on which $(h_*E)|_T$ is lisse. The\nproper closed complement $T\\setminus Q^\\circ$ has a finite lisse partition by\ninduction. Adjoining $Q^\\circ$ gives the required partition of $T$. At\n$T=U_{\\mathrm{red}}$, its locally closed pieces, composed with\n$U_{\\mathrm{red}}\\to U$, are locally closed subschemes partitioning $U$, which\nproves constructibility on $U$. No finite bound on the Krull dimension is\nused.",
+   "text": "If $T$ is irreducible, its reduced structure is integral. Choose a nonempty affine open $Q\\subset T$ and apply the generic finite-pushforward statement to $V_Q\\to Q$. It supplies a dense open $Q^\\circ\\subset T$ on which $(h_*E)|_T$ is lisse. The proper closed complement $T\\setminus Q^\\circ$ has a finite lisse partition by induction. Adjoining $Q^\\circ$ gives the required partition of $T$. At $T=U_{\\mathrm{red}}$, its locally closed pieces, composed with $U_{\\mathrm{red}}\\to U$, are locally closed subschemes partitioning $U$, and each piece is a constructible subset because $U$ is Noetherian [def-weil-constructible-subset, Stacks 005L], which proves constructibility on $U$. No finite bound on the Krull dimension is used.",
    "uses": [
-    "lem-weil-pbc-finite-pushforward-generic-constructible"
+    "lem-weil-pbc-finite-pushforward-generic-constructible",
+    "def-weil-constructible-subset"
    ],
    "elementary": false
   }
@@ -43,16 +46,47 @@
  "proof_deps": [
   "lemma-weil-pbc-finite-exchange",
   "lem-weil-pbc-noetherian-finite-components",
-  "lem-weil-pbc-finite-pushforward-generic-constructible"
+  "lem-weil-pbc-finite-pushforward-generic-constructible",
+  "prop-constructible-pullback",
+  "def-weil-constructible-subset"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-constructible-noetherian.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/EtaleCohomology.tex",
+  "place": "Lemma 095R (finite pushforward of constructible sheaves)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite pushforward of a constructible sheaf along a finite morphism over a Noetherian scheme is constructible",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; PrimeSpectrum.isConstructible_comap_image; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; PrimeSpectrum.isConstructible_range_comap; Topology.IsConstructible.image_of_isOpenEmbedding; Topology.IsConstructible.image_of_isClosedEmbedding; AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian",
+   "date": "2026-10-11",
+   "verdict": "no match: only constructible topological images/preimages, not sheaf pushforward"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.Hom, IsFinite, Constructible",
+   "results": "loogle: unknown identifier 'Sheaf.Hom'",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*finite|finite.*constructible [Mathlib]",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite pushforward preserves constructible sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -84,5 +118,36 @@
   }
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-prop-sf-cbc"
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+  "worker": "stage1",
+  "summary": "Completed the Stacks 095R Noetherian-induction proof using the existing finite exchange, finite irreducible-components, and generic finite-pushforward statements. No new child nodes were needed; the first step's pullback observation is elementary from the constructibility definition.",
+  "blueprint": "Steps 1-3 realize the three paragraphs under ## Proof: finite base change, Noetherian induction on closed subsets, and the irreducible case via the generic lisse open.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-finite-exchange",
+    "why": "Step 1 uses its finite Cartesian exchange isomorphism to identify restriction of h_*E after closed base change."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Step 1 pulls the constructible sheaf E back to the closed and open pieces V_T, V_Q; on Noetherian schemes its constructibility notion agrees with the one used here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-finite-exchange",
+  "prop-constructible-pullback",
+  "lemma-weil-pbc-finite-exchange",
+  "prop-constructible-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fpc2410",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpc2410 (reviewer sub-agent of L); spot-checked: No cycle (generic node and finite-exchange do not cite the item); Noetherian induction, reducible/irreducible cases, generic-node hypotheses (integral Noetherian affine Q, finite V_Q->Q, dense open in irreducible T) checked; constructibility notion of def-weil-pbc-etale-sheaves matches generic node and citers. FIX more, RETURN less: (1) C1: Step 1 called pullback-preserves-constructibility elementary although prop-constructible-pullback states it; now cited (tool use, other unit), with the note that its stratification notion agrees with the constructible-subset one on Noetherian schemes (Stacks 005L). (2) C4: final partition must consist of constructible subsets per def-weil-pbc-etale-sheaves; Step 3 now says so via def-weil-constructible-subset (U Noetherian).; 1 file(s) fixed by the reviewer"
+ }
 }
