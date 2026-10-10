@@ -1,0 +1,78 @@
+{
+ "id": "lem-weil-pbc-ring-localization-universal-property",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (essential surjectivity via Stacks 0GS2), through the 00R7 limit presentation in the approximation branch; the localization universal property is used to identify the intermediate finite presentation",
+   "via": [
+    "lem-weil-pbc-essentially-finite-presentation-over-intermediate",
+    "lem-weil-pbc-limit-tower-essentially-finite-presentation",
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Universal property of localization at an arbitrary multiplicative subset",
+ "statement": "Let $A$ and $C$ be commutative rings, $U\\subseteq A$ a multiplicative subset, and $U^{-1}A$ the ring of fractions $a/u$ ($a\\in A$, $u\\in U$), where $a/u=a'/u'$ exactly when some $v\\in U$ annihilates $au'-a'u$ [def-weil-pbc-essentially-finite-type-algebra]. If $f:A\\to C$ is a ring homomorphism for which $f(u)$ is a unit of $C$ for every $u\\in U$, then there is a unique ring homomorphism $g:U^{-1}A\\to C$ with $g(a/1)=f(a)$ for every $a\\in A$. It is given by $g(a/u)=f(a)f(u)^{-1}$. Consequently two ring homomorphisms from $U^{-1}A$ that agree after precomposition with $A\\to U^{-1}A$ are equal.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Proposition Tag 00CP (proposition-universal-property-localization, line 1084), statement and proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal property of localization at a submonoid: ring homomorphism that maps denominators to units factors uniquely through localization",
+   "results": "IsLocalization.lift, IsLocalization.ringHom_ext (Mathlib.RingTheory.Localization.Defs); declaration types read from LeanSearch",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.lift",
+   "results": "IsLocalization.lift, lift_comp, lift_eq, lift_unique, ringHom_ext (Mathlib.RingTheory.Localization.Defs); types read from Loogle",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg 'IsLocalization.lift|IsLocalization.ringHom_ext|def lift' /home/ubuntu/Poincare-MorganTian/.work/helpers/codex-m47-line/.lake/packages/mathlib/Mathlib/RingTheory/Localization/Defs.lean; read lines 475-551",
+   "results": "IsLocalization.lift at line 488 sends fractions by f(a)f(u)^-1; lift_mk' at 507, lift_eq at 517, lift_comp at 522, lift_of_comp at 526, ringHom_ext at 543",
+   "date": "2026-10-10",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsLocalization.lift, IsLocalization.ringHom_ext",
+  "file": "Mathlib/RingTheory/Localization/Defs.lean",
+  "how": "The universal map is IsLocalization.lift (line 488), with lift_mk' (line 507) and lift_eq (line 517). Uniqueness is ringHom_ext (line 543), or lift_of_comp (line 526), for the localization at the submonoid U.",
+  "line": 488
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-essentially-finite-presentation-over-intermediate",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {"state": "none"},
+  "slopmaster2": {"state": "none"}
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

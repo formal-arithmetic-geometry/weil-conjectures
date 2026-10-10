@@ -17,7 +17,7 @@
     "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Essentially of finite presentation over an intermediate algebra essentially of finite type",
@@ -30,9 +30,72 @@
   "def-weil-pbc-essentially-finite-type-algebra",
   "def-weil-pbc-finitely-presented-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose presentations $S\\cong W^{-1}B$ as $R$-algebras, with $B$ generated over $R$ by $b_1,\\ldots,b_n$ [def-weil-pbc-essentially-finite-type-algebra, def-weil-pbc-finite-type-algebra], and $S'\\cong U^{-1}P$ as $R$-algebras, with $P$ finitely presented over $R$ [def-weil-pbc-finitely-presented-algebra]. Transport $\\psi$ through these isomorphisms. The image of $b_i/1$ in $U^{-1}P$ has a representative $p_i/u_i$ with $p_i\\in P$, $u_i\\in U$, for each $i$. These are finitely many choices even though $W$ and $U$ need not be finitely generated.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition 00QM (definition-essentially-finite-p-t), Definition 00F3 (definition-finite-type), and Proposition 00CP (proposition-universal-property-localization); the finite choices are made by an agent"
+   }
+  },
+  {
+   "text": "Set $A=S\\otimes_RP$, viewed as an $S$-algebra, and let $Q=A[t_1,\\ldots,t_n]/(u_it_i-1,\\ b_i\\otimes1-1\\otimes p_i\\,t_i\\mid 1\\le i\\le n)$, where $u_i$ and $p_i$ denote $1\\otimes u_i$ and $1\\otimes p_i$ in $A$. The $S$-algebra $A$ is finitely presented by base change from $P$ [lem-weil-pbc-finite-presentation-base-change-composition]. Adjoining finitely many polynomial variables is of finite presentation by the definition [def-weil-pbc-finitely-presented-algebra]; quotienting by the displayed finite set of relations preserves finite presentation [lem-weil-pbc-finite-presentation-quotient-fg-ideal]. Hence $Q$ is a finitely presented $S$-algebra, by composition [lem-weil-pbc-finite-presentation-base-change-composition].",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-finite-presentation-quotient-fg-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma 05G5 (lemma-base-change-finiteness), item (4); Lemma 00F4 (lemma-compose-finite-type), proof of item (4), where finitely many equations for the images of generators are imposed; the localized construction is by an agent"
+   }
+  },
+  {
+   "text": "The $S$-algebra maps $S\\xrightarrow{\\psi}U^{-1}P$ and $P\\to U^{-1}P$ give an $S$-algebra map $A\\to U^{-1}P$. Send $t_i$ to $1/u_i$. The relation $u_it_i=1$ holds, and $b_i\\otimes1-1\\otimes p_i\\,t_i$ maps to $\\psi(b_i/1)-p_i/u_i=0$, so this induces an $S$-algebra map $Q\\to U^{-1}P$. It sends the image of each $u\\in U$ to a unit, and thus extends uniquely to $\\theta:V^{-1}Q\\to U^{-1}P$, where $V$ is the image of $U$ in $Q$ [def-weil-pbc-essentially-finite-type-algebra] (the localization universal property).",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proposition 00CP (proposition-universal-property-localization), existence and uniqueness; the map and relation checks are by an agent"
+   }
+  },
+  {
+   "text": "The localization map $P\\to V^{-1}Q$ sends $U$ to units, hence gives an $R$-algebra map $\\eta:U^{-1}P\\to V^{-1}Q$ by Proposition 00CP. The composite $\\theta\\eta$ fixes $P$ and therefore fixes all $p/u\\in U^{-1}P$. Conversely, $\\eta\\theta$ fixes $1\\otimes P$ and $t_i$ (since $t_i=u_i^{-1}$ in $Q$). It fixes $b_i\\otimes1$ because the second defining relation says $b_i\\otimes1=p_it_i=\\eta(\\psi(b_i/1))$. Since $b_1,\\ldots,b_n$ generate $B$ over $R$, it fixes the image of $B$ in $S\\otimes_RP$; since the images of all $w\\in W$ are units in $S$, it also fixes their inverses and hence the image of all of $S=W^{-1}B$. Thus it fixes $A$, then $Q$, then the inverses of $V$, so $\\eta\\theta=\\mathrm{id}$. Therefore $S'\\cong U^{-1}P\\cong V^{-1}Q$ as $S$-algebras, with $Q$ finitely presented over $S$ by step 2.",
+   "uses": [
+    "def-weil-pbc-essentially-finite-type-algebra",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proposition 00CP (proposition-universal-property-localization), formula $p/u\\mapsto f(p)f(u)^{-1}$ and uniqueness; Lemma 00F4 (lemma-compose-finite-type), proof of item (4), generation by finitely many compatibility equations; the inverse check is by an agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-presentation-quotient-fg-ideal",
+  "lem-weil-pbc-ring-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "localized essentially-finite-presentation cancellation used in Algebra Lemma 00R7"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -71,7 +134,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -92,6 +155,24 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked (localized form of 00F4 (4), used silently in the 00R7 proof)",
- "lead_note": "prove via 00F4 (4) applied to R -> S -> P and a localization; Mathlib has only the non-localized RingHom.FinitePresentation.of_comp_finiteType"
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of J1; spot-checked by L: L: 00QN-type: the presentation of S' over S by inverting the u_i and identifying the generators; new leaf IsLocalization.lift"
+ },
+ "lead_note": "prove via 00F4 (4) applied to R -> S -> P and a localization; Mathlib has only the non-localized RingHom.FinitePresentation.of_comp_finiteType",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-essentially-finite-presentation-over-intermediate",
+  "worker": "stage1",
+  "summary": "Verified the claim against Stacks 00QM, 00F4 (4), 05G5 (4), 00CP and the place where 00R7 uses it without proof. Constructed a finitely presented S-algebra by base-changing the chosen R-presentation of S', adjoining inverses for the finitely many denominators in the images of generators of the finite-type R-algebra B, and imposing their compatibility equations. Explicit inverse maps identify its localization at U with S'. Added a Mathlib leaf for the general ring localization universal property; existing leaves cover base change and finite-generated-ideal quotient. The blueprint search found no node stating either new result.",
+  "blueprint": {
+   "steps": [
+    "Finite-etale-lifting step 7: essential surjectivity via Stacks 0GS2, through the approximation chain and the 00R7 limit-tower construction",
+    "The limit-tower construction's use of S' essentially of finite presentation over the intermediate ring S, supplied by the four proof steps here"
+   ]
+  }
+ }
 }
