@@ -26,9 +26,57 @@
   "def-pc-derived-pullback",
   "def-weil-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix x' and write R=\\mathcal O_{S,s}, A=\\mathcal O_{X,x}, B=\\mathcal O_{S',s'}, and C=\\mathcal O_{X',x'}. Choose affine neighbourhoods of x and s' and use the affine perfect-model criterion [lem-pc-perfect-affine-bounded-projective] after localizing at x; thus P_x is represented by a bounded complex Q^\\bullet of finite projective A-modules.",
+   "uses": [
+    "lem-pc-perfect-affine-bounded-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08IB, local affine reduction"
+   }
+  },
+  {
+   "text": "The assumed stalkwise Tor-independence is Tor_i^R(A,B)=0 for i>0. Apply [lem-pc-tor-independent-projective-complex-tensor] to Q^\\bullet, with E=A\\otimes_R B and D=C. It gives the required cohomology isomorphism after identifying Q^\\bullet\\otimes_A D with the pulled-back stalk complex.",
+   "uses": [
+    "lem-pc-tor-independent-projective-complex-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
+   }
+  },
+  {
+   "text": "Choose the affine open U=\\operatorname{Spec}(A_0)\\ni x of Step 1 with P|_U\\cong\\widetilde{P_0^\\bullet}, P_0^\\bullet a bounded complex of finite projective A_0-modules, so that Q^\\bullet=P_0^\\bullet\\otimes_{A_0}A. By [lem-pc-affine-derived-pullback-tensor-tilde](1), (Lg_X^*P)|_{g_X^{-1}U}\\cong L(g_X|_{g_X^{-1}U})^*\\widetilde{P_0^\\bullet}. Each \\widetilde{P_0^n} is a direct summand of a finite free \\mathcal O_U-module, hence flat, so by [lem-pc-flat-complex-derived-pullback] this derived pullback is represented by the termwise pullback g_X^*\\widetilde{P_0^\\bullet}. Apply the stalk pullback identification [lem-weil-pbc-module-stalk-pullback] degreewise; its naturality identifies (g_X^*\\widetilde{P_0^\\bullet})_{x'} with Q^\\bullet\\otimes_A C, hence (Lg_X^*P)_{x'}\\cong Q^\\bullet\\otimes_A C. The canonical map A\\otimes_R B\\to C is a localization (on affine opens \\operatorname{Spec}A_0, \\operatorname{Spec}B_0 over \\operatorname{Spec}R_0 the local ring C is a localization of A_0\\otimes_{R_0}B_0, of which A\\otimes_R B is itself a localization, by the affine description of fibre products, Stacks, Schemes, Section on fibre products), so tensoring with C is exact [lem-weil-pbc-localization-module-exact] and commutes with cohomology. Under these identifications the isomorphism of Step 2 is exactly the displayed canonical map, for every i.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08IB, lemma-compare-base-change: local affine reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-tor-independent-projective-complex-tensor",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-flat-complex-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08IB, lemma-compare-base-change"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,12 +108,55 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-tor-independent-perfect-tensor-base-change",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-tor-independent-perfect-pullback-comparison",
+  "worker": "stage1",
+  "summary": "Checked the target against Stacks Tag 08IB and the Tag 0AVW use. Added one statement-only algebraic child for the Tor-independent tensor comparison of a bounded finite-projective complex. The parent proof reduces at a stalk to a bounded projective model, applies that comparison, and identifies the result with the pullback stalk using existing stalk and localization lemmas.",
+  "blueprint": "Realizes the ancestor proof clause 'Tor independence identifies the base-derived tensor with the pullback tensor at each stalk'.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "The generic stalk formula for pullback modules identifies the pulled-back perfect model with the tensor product at x'."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Exactness of localization is used to pass from the affine tensor model to the local stalk and commute localization with cohomology."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic restriction of derived pullback to opens, to compute Lg_X^*P on the affine model."
+   },
+   {
+    "node": "lem-pc-flat-complex-derived-pullback",
+    "why": "Generic fact that derived pullback of a bounded-above flat complex is the termwise pullback."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-flat-complex-derived-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tip3146",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tip3146 (reviewer sub-agent of L); spot-checked: Statement vs Tag 08IB: stalkwise Tor-independence inline, no base-change map used (aligned). Child lem-pc-tor-independent-projective-complex-tensor true (Q^n summand of A^m so Tor-acyclic over R; D flat over E), real lemma, not dup of lem-pc-base-change-map-cech or lem-pc-derived-pullback-tor-independent-flat-complex (that one needs R-flat terms). FIX more, RETURN less: C1 Step 3 claimed (Lg_X^*P)_{x'}=Q⊗_A C 'because Q termwise projective' uncited and marked elementary; now restricts via lem-pc-affine-derived-pullback-tensor-tilde(1), uses lem-pc-flat-complex-derived-pullback for termwise pullback of the flat model, elementary:false; localization A⊗_R B->C phrased as in merged sibling lem-pc-derived-pullback-tor-independent-flat-complex. Second reading by F1 missed this C1.; 1 file(s) fixed by the reviewer"
+ }
 }
