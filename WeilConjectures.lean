@@ -516,6 +516,9 @@ public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStep
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Equivariance
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Reciprocity
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
@@ -1159,6 +1162,9 @@ public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
+public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.BaseChange.Etale
 public import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
@@ -1246,9 +1252,17 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Detection
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.FieldFailure
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Transition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Induction
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.LongExactSequence
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
