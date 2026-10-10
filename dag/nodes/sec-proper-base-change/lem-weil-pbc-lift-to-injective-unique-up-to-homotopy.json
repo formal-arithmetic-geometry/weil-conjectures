@@ -12,9 +12,97 @@
   "def-weil-abstract-derived-category",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Mapping cylinder.* Apply [lem-weil-pbc-complex-mapping-cylinder-split-factorization] to $\\alpha:K^\\bullet\\to L^\\bullet$ (an abelian category is additive): there are a complex $\\tilde L^\\bullet$ and morphisms of complexes $\\tilde\\alpha:K^\\bullet\\to\\tilde L^\\bullet$, $\\pi:\\tilde L^\\bullet\\to L^\\bullet$, $s:L^\\bullet\\to\\tilde L^\\bullet$ with $\\pi\\tilde\\alpha=\\alpha$, $\\pi s=\\mathrm{id}_{L^\\bullet}$, $s\\pi$ homotopic to $\\mathrm{id}_{\\tilde L^\\bullet}$, and $\\tilde\\alpha$ a termwise split injection: $\\tilde L^n\\cong K^n\\oplus M^n$ with $\\tilde\\alpha^n$ the inclusion of $K^n$.",
+   "uses": [
+    "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 013S (lemma-morphisms-equal-up-to-homotopy, line 6481), direct argument of the proof (lines 6498-6537)"
+   }
+  },
+  {
+   "text": "*$\\tilde\\alpha$ is a quasi-isomorphism.* By [lem-weil-pbc-homotopic-maps-equal-cohomology] (b), homotopic morphisms induce the same map on $H^n$, so $H^n(s)H^n(\\pi)=H^n(s\\pi)=\\mathrm{id}$, and $H^n(\\pi)H^n(s)=H^n(\\pi s)=\\mathrm{id}$ by functoriality of $H^n$ [def-weil-abstract-derived-category]. Hence $H^n(\\pi)$ is an isomorphism and $H^n(\\tilde\\alpha)=H^n(\\pi)^{-1}H^n(\\alpha)$ is an isomorphism for every $n$, i.e. $\\tilde\\alpha$ is a quasi-isomorphism [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 013S (lemma-morphisms-equal-up-to-homotopy, line 6481), direct argument of the proof (lines 6498-6537)"
+   }
+  },
+  {
+   "text": "*Reduction to $\\alpha$ termwise split.* Put $\\beta_i'=\\beta_i\\pi:\\tilde L^\\bullet\\to I^\\bullet$. Then $\\beta_i'\\tilde\\alpha=\\beta_i\\alpha$, so $\\beta_1'\\tilde\\alpha$ and $\\beta_2'\\tilde\\alpha$ are homotopic. Suppose $\\beta_1'-\\beta_2'=dk+kd$ for morphisms $k^n:\\tilde L^n\\to I^{n-1}$. Since $\\pi s=\\mathrm{id}$ we get $\\beta_1-\\beta_2=(\\beta_1'-\\beta_2')s=d(ks)+(ks)d$, using $s^{n+1}d_L^n=d_{\\tilde L}^ns^n$; so $\\beta_1$ and $\\beta_2$ are homotopic by the maps $k^ns^n$. Therefore, replacing $(L^\\bullet,\\alpha,\\beta_1,\\beta_2)$ by $(\\tilde L^\\bullet,\\tilde\\alpha,\\beta_1',\\beta_2')$ (step 2 keeps $\\alpha$ a quasi-isomorphism), we may assume that $L^n=K^n\\oplus M^n$ with $\\alpha^n$ the inclusion of the first summand for every $n$: there are morphisms $p^n:L^n\\to K^n$, $q^n:L^n\\to M^n$, $j^n:M^n\\to L^n$ with $p^n\\alpha^n=\\mathrm{id}$, $q^nj^n=\\mathrm{id}$, $q^n\\alpha^n=0$, $p^nj^n=0$, $\\alpha^np^n+j^nq^n=\\mathrm{id}_{L^n}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 013S (lemma-morphisms-equal-up-to-homotopy, line 6481), direct argument of the proof (lines 6498-6537)"
+   }
+  },
+  {
+   "text": "*The quotient complex.* Put $d_M^n=q^{n+1}d_L^nj^n:M^n\\to M^{n+1}$. Then $q^{n+1}d_L^n=q^{n+1}d_L^n(\\alpha^np^n+j^nq^n)=q^{n+1}\\alpha^{n+1}d_K^np^n+d_M^nq^n=d_M^nq^n$, so $q$ commutes with the differentials, and $d_M^{n+1}d_M^n=q^{n+2}d_L^{n+1}(\\mathrm{id}-\\alpha^{n+1}p^{n+1})d_L^nj^n=-q^{n+2}\\alpha^{n+2}d_K^{n+1}p^{n+1}d_L^nj^n=0$. So $M^\\bullet$ is a complex, $q:L^\\bullet\\to M^\\bullet$ is a morphism of complexes, and $0\\to K^\\bullet\\xrightarrow{\\alpha}L^\\bullet\\xrightarrow{q}M^\\bullet\\to0$ is short exact in each degree (it is split in each degree). Moreover, if $\\psi:L^\\bullet\\to I^\\bullet$ is a morphism of complexes with $\\psi\\alpha=0$, then $\\psi=\\psi(\\alpha p+jq)=\\varphi q$ with $\\varphi^n=\\psi^nj^n$, and $\\varphi$ is a morphism of complexes: $\\varphi^{n+1}d_M^n=\\psi^{n+1}j^{n+1}q^{n+1}d_L^nj^n=\\psi^{n+1}d_L^nj^n=d_I^n\\psi^nj^n=d_I^n\\varphi^n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 013S (lemma-morphisms-equal-up-to-homotopy, line 6481), direct argument of the proof (lines 6498-6537)"
+   }
+  },
+  {
+   "text": "*$M^\\bullet$ is acyclic.* By [lem-weil-pbc-complex-ses-homology-long-exact] the short exact sequence of step 4 gives an exact sequence $H^n(K)\\xrightarrow{H^n(\\alpha)}H^n(L)\\xrightarrow{H^n(q)}H^n(M)\\xrightarrow{\\delta^n}H^{n+1}(K)\\xrightarrow{H^{n+1}(\\alpha)}H^{n+1}(L)$. Since $H^n(\\alpha)$ is surjective, $H^n(q)=0$ (its kernel is the image of $H^n(\\alpha)$), so $\\delta^n$ is a monomorphism (its kernel is the image of $H^n(q)$); since $H^{n+1}(\\alpha)$ is a monomorphism, the image of $\\delta^n$, which is the kernel of $H^{n+1}(\\alpha)$, is $0$, so $\\delta^n=0$. Hence $H^n(M)=0$ for all $n$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 013S (lemma-morphisms-equal-up-to-homotopy, line 6481), direct argument of the proof (lines 6498-6537)"
+   }
+  },
+  {
+   "text": "*Correcting $\\beta_1-\\beta_2$ on $K^\\bullet$.* By hypothesis there are $h^n:K^n\\to I^{n-1}$ with $\\beta_1^n\\alpha^n-\\beta_2^n\\alpha^n=d_I^{n-1}h^n+h^{n+1}d_K^n$. Put $\\bar h^n=h^np^n:L^n\\to I^{n-1}$ (equal to $h^n$ on $K^n$ and zero on $M^n$; Stacks writes $h=h_1-h_2$ from the two homotopies to $\\gamma$, here $\\gamma=\\beta_1\\alpha$) and $\\psi=\\beta_1-\\beta_2-(d_I\\bar h+\\bar hd_L)$. A map of the form $d\\bar h+\\bar hd$ commutes with the differentials, so $\\psi$ is a morphism of complexes, and $\\psi^n\\alpha^n=\\beta_1^n\\alpha^n-\\beta_2^n\\alpha^n-d_I^{n-1}h^np^n\\alpha^n-h^{n+1}p^{n+1}\\alpha^{n+1}d_K^n=\\beta_1^n\\alpha^n-\\beta_2^n\\alpha^n-d_I^{n-1}h^n-h^{n+1}d_K^n=0$. (Stacks prints the correction as $(d\\circ h^n+h^{n+1})\\circ d$; it is $d\\circ h^n+h^{n+1}\\circ d$.)",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 013S (lemma-morphisms-equal-up-to-homotopy, line 6481), direct argument of the proof (lines 6498-6537)"
+   }
+  },
+  {
+   "text": "*Conclusion.* By step 4, $\\psi=\\varphi q$ for a morphism of complexes $\\varphi:M^\\bullet\\to I^\\bullet$. Since $M^\\bullet$ is acyclic (step 5) and $I^\\bullet$ is bounded below with injective terms, [lem-weil-pbc-acyclic-map-to-injective-nullhomotopy] gives $t^n:M^n\\to I^{n-1}$ with $\\varphi^n=d_I^{n-1}t^n+t^{n+1}d_M^n$. As $q$ commutes with the differentials, $\\psi^n=\\varphi^nq^n=d_I^{n-1}(t^nq^n)+(t^{n+1}q^{n+1})d_L^n$. Hence $\\beta_1^n-\\beta_2^n=d_I^{n-1}k^n+k^{n+1}d_L^n$ with $k^n=\\bar h^n+t^nq^n:L^n\\to I^{n-1}$, i.e. $\\beta_1$ and $\\beta_2$ are homotopic; by step 3 this proves the lemma for the original $L^\\bullet$.",
+   "uses": [
+    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 013S (lemma-morphisms-equal-up-to-homotopy, line 6481), direct argument of the proof (lines 6498-6537)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+  "def-sp-abelian",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 013S (lemma-morphisms-equal-up-to-homotopy, line 6481), the direct argument of its proof (lines 6498-6537), through Lemma 013N (lemma-make-injective, line 2623) and Lemma 013R (lemma-acyclic-is-zero, line 6308)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +124,52 @@
    "results": "CochainComplex.isKInjective_of_injective (HomotopyCategory/KInjective.lean:133), IsKInjective.Qh_map_bijective (DerivedCategory/KInjective.lean:41), IsKInjective.quasiIso_iff (:50); no lemma comparing two lifts along a quasi-isomorphism",
    "verdict": "no match: the statement follows from isKInjective_of_injective, Qh_map_bijective (injectivity of Hom_K(L,I) -> Hom_D(QL,QI)) and the invertibility of Q(alpha), several steps rather than a one-line specialization; left unsplit",
    "date": "2026-10-10"
+  },
+  {
+   "tool": "leansearch",
+   "query": "two morphisms into a bounded below complex of injectives which agree after composing with a quasi-isomorphism are homotopic",
+   "results": "CategoryTheory.InjectiveResolution.descHomotopy (Mathlib.CategoryTheory.Abelian.Injective.Resolution; K = single object only), HomologicalComplex.instHasTwoOutOfThreePropertyQuasiIso, HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy, quasiIso_of_comp_right (Mathlib.Algebra.Homology.QuasiIso)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective, Homotopy",
+   "results": "CochainComplex.IsKInjective.homotopyZero, IsKInjective.mk, IsKInjective.nonempty_homotopy_zero, IsKInjective.homotopyZero_def (Mathlib.Algebra.Homology.HomotopyCategory.KInjective)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the acyclic-source property"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,140p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; sed -n 1,80p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; grep -n 'homotopyOfEq\\|eq_of_homotopy' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory.lean",
+   "results": "isKInjective_of_injective (HomotopyCategory/KInjective.lean:133), IsKInjective.Qh_map_bijective (DerivedCategory/KInjective.lean:41, needs HasDerivedCategory), IsKInjective.quasiIso_iff (:50), HomotopyCategory.eq_of_homotopy (HomotopyCategory.lean:112), homotopyOfEq (:117)",
+   "date": "2026-10-10",
+   "verdict": "no match; mathlib_candidate: isKInjective_of_injective + injectivity of Qh_map_bijective + invertibility of Q(alpha) + homotopyOfEq, several lines (choice of HasDerivedCategory instance, cancellation of Qh.map alpha), not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "two morphisms into a bounded below complex of injectives which agree after composing with a quasi-isomorphism are homotopic",
+   "results": "CategoryTheory.InjectiveResolution.descHomotopy (Mathlib.CategoryTheory.Abelian.Injective.Resolution; K = single object only), HomologicalComplex.instHasTwoOutOfThreePropertyQuasiIso, HomologicalComplexUpToQuasiIso.Q_map_eq_of_homotopy, quasiIso_of_comp_right (Mathlib.Algebra.Homology.QuasiIso)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective, Homotopy",
+   "results": "CochainComplex.IsKInjective.homotopyZero, IsKInjective.mk, IsKInjective.nonempty_homotopy_zero, IsKInjective.homotopyZero_def (Mathlib.Algebra.Homology.HomotopyCategory.KInjective)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the acyclic-source property"
+  },
+  {
+   "tool": "grep",
+   "query": "sed -n 1,140p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; sed -n 1,80p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean; grep -n 'homotopyOfEq\\|eq_of_homotopy' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomotopyCategory.lean",
+   "results": "isKInjective_of_injective (HomotopyCategory/KInjective.lean:133), IsKInjective.Qh_map_bijective (DerivedCategory/KInjective.lean:41, needs HasDerivedCategory), IsKInjective.quasiIso_iff (:50), HomotopyCategory.eq_of_homotopy (HomotopyCategory.lean:112), homotopyOfEq (:117)",
+   "date": "2026-10-10",
+   "verdict": "no match; mathlib_candidate: isKInjective_of_injective + injectivity of Qh_map_bijective + invertibility of Q(alpha) + homotopyOfEq, several lines (choice of HasDerivedCategory instance, cancellation of Qh.map alpha), not a one-line specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +189,17 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "CochainComplex.IsKInjective.Qh_map_bijective; CochainComplex.isKInjective_of_injective; HomotopyCategory.homotopyOfEq",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean",
+  "how": "Qh_map_bijective (line 41) for L := I, K-injective by isKInjective_of_injective (HomotopyCategory/KInjective.lean:133); Qh.map [beta_1] ≫ ... cancel the isomorphism Qh.map [alpha], injectivity gives [beta_1] = [beta_2] in the homotopy category, homotopyOfEq (HomotopyCategory.lean:117) gives the homotopy; several lines, not a leaf (B8)"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 013S (derived.tex 6481): Stacks assumes beta_i alpha homotopic to a common gamma, equivalent to beta_1 alpha ~ beta_2 alpha (take gamma = beta_1 alpha); statement kept. Proof written from the direct argument of 013S (lines 6498-6537) in 7 steps: mapping cylinder 013N (new unsplit node lem-weil-pbc-complex-mapping-cylinder-split-factorization), the replacement alpha~ is a quasi-isomorphism (homotopic-maps-equal-cohomology leaf), reduction through pi and s (elementary), quotient complex M and factorization through it (elementary), M acyclic from the long exact cohomology sequence (existing leaf complex-ses-homology-long-exact, five-term chase written out), correction of beta_1-beta_2 on K (elementary), conclusion by 013R (existing leaf acyclic-map-to-injective-nullhomotopy). Source typo in 013S: '(d h^n + h^{n+1}) d' should read 'd h^n + h^{n+1} d'. Mathlib: re-searched (leansearch, loogle, grep); no one-line match; mathlib_candidate through IsKInjective.Qh_map_bijective recorded. lean_audit none on both branches."
+ },
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Derived Categories 013S (direct proof): mapping cylinder (013N, new unsplit node) reduces to a termwise split alpha, the quotient complex is acyclic by the long exact sequence, the difference is corrected on K and killed by 013R (existing leaf); the source's misprinted correction term noted. No Mathlib match; candidate recorded (K-injective route, B8)."
 }

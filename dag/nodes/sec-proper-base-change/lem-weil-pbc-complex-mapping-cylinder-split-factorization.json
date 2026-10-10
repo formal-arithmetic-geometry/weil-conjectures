@@ -1,0 +1,81 @@
+{
+ "id": "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
+ "kind": "statement",
+ "title": "A morphism of complexes factors as a termwise split injection followed by a homotopy equivalence with a section",
+ "statement": "Let $\\mathcal A$ be an additive category [def-weil-additive-category]. A cochain complex $K^\\bullet$ of $\\mathcal A$ is a family of objects $K^n$ ($n\\in\\mathbf Z$) with morphisms $d^n:K^n\\to K^{n+1}$ such that $d^{n+1}d^n=0$; a morphism of complexes is a family of morphisms commuting with the differentials; two morphisms $f,g:A^\\bullet\\to B^\\bullet$ are homotopic if there are morphisms $h^n:A^n\\to B^{n-1}$ with $f^n-g^n=d_B^{n-1}h^n+h^{n+1}d_A^n$ for all $n$. Let $\\alpha:K^\\bullet\\to L^\\bullet$ be a morphism of cochain complexes of $\\mathcal A$. Then there are a cochain complex $\\tilde L^\\bullet$ and morphisms of complexes $\\tilde\\alpha:K^\\bullet\\to\\tilde L^\\bullet$, $\\pi:\\tilde L^\\bullet\\to L^\\bullet$, $s:L^\\bullet\\to\\tilde L^\\bullet$ such that: (0) $\\pi\\circ\\tilde\\alpha=\\alpha$; (1) $\\tilde\\alpha$ is a termwise split injection, i.e. for every $n$ there are an object $M^n$ and an isomorphism $\\tilde L^n\\cong K^n\\oplus M^n$ under which $\\tilde\\alpha^n$ is the inclusion of the summand $K^n$ (the $M^n$ and these isomorphisms need not be compatible with the differentials); (2) $\\pi\\circ s=\\mathrm{id}_{L^\\bullet}$, and $s\\circ\\pi$ is homotopic to $\\mathrm{id}_{\\tilde L^\\bullet}$. Moreover, if $K^n=L^n=0$ for all $n<n_0$ (resp. for all $n>n_1$, resp. both), then $\\tilde L^n=0$ for all $n<n_0-1$ (resp. for all $n>n_1$, resp. both), so $\\tilde L^\\bullet$ is again bounded below (resp. above, resp. bounded).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Lemma 013N (lemma-make-injective, line 2623) and its proof (lines 2649-2711), with Definition 014G (definition-termwise-split-map, line 2580) for the notion of termwise split injection and Remark remark-compute-modules (line 2714) for the homotopy $\\mathrm{id}-s\\pi=dh+hd$"
+ },
+ "stmt_deps": [
+  "def-weil-additive-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "factor a morphism of complexes as a termwise split monomorphism followed by a homotopy equivalence (mapping cylinder)",
+   "results": "HomologicalComplex.cylinder.homotopyEquiv, HomologicalComplex.cylinder, cylinder.desc, cylinder.π (Mathlib.Algebra.Homology.HomotopyCofiber: the cylinder of one complex K, not the mapping cylinder of a morphism), CochainComplex.cm5b (Mathlib.Algebra.Homology.Factorizations.CM5b: needs EnoughInjectives and bounded below complexes, gives a monomorphism i and a quasi-isomorphism p that is a degreewise epimorphism with injective kernel, through mappingCone (𝟙 (I K)) ⊞ L), ShortComplex.Splitting.isSplitMono_f, CochainComplex.mappingConeHomOfDegreewiseSplitIso_hom_f",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mapping cylinder of a morphism of cochain complexes: K → cylinder is degreewise split mono, projection cylinder → L is a homotopy equivalence with section",
+   "results": "HomologicalComplex.cylinder.homotopyEquiv, HomologicalComplex.cylinder, cylinder.inlX, cylinder.ι₀, cylinder.desc, cylinder.inrX, cylinder.ι₁, cylinder.π (all Mathlib.Algebra.Homology.HomotopyCofiber, the cylinder object of a single complex)",
+   "date": "2026-10-10",
+   "verdict": "no match: only the cylinder of one complex; the mapping cylinder of a morphism is not defined"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCylinder\"",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rniE 'mapping ?cylinder|termwise ?split|degreewise ?split mono|IsSplitMono \\(.*\\.f ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; read Factorizations/CM5b.lean lines 1-130",
+   "results": "only HomologicalComplex.lean:613 (instance IsSplitMono (f.f j) from IsSplitMono f, a different statement); CM5b.lean:70 cm5b.i : K ⟶ mappingCone (𝟙 (I K)) ⊞ L, :110 cm5b.homotopyEquiv (the analogous construction with an injective hull I K in place of K, needing EnoughInjectives; its i is mono, not termwise split)",
+   "date": "2026-10-10",
+   "verdict": "no match; mathlib_candidate: the construction L ⊞ mappingCone (𝟙 K) with CochainComplex.mappingCone (Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean) imitating cm5b.i / cm5b.homotopyEquiv (CM5b.lean:70, :110) — several definitions, not a one-line specialization"
+  },
+  {
+   "tool": "local_search",
+   "query": "mappingCylinder (project root ~/weil-conjectures-slopmaster2)",
+   "results": "none; index: unavailable (no running language server), so not a proof of absence; replaced by the grep above",
+   "date": "2026-10-10",
+   "verdict": "inconclusive"
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declaration": "CochainComplex.cm5b.i, CochainComplex.cm5b.homotopyEquiv (pattern), CochainComplex.mappingCone",
+  "file": "Mathlib/Algebra/Homology/Factorizations/CM5b.lean",
+  "how": "the same construction with mappingCone (𝟙 K) in place of mappingCone (𝟙 (I K)) (lines 70, 110); not a one-line specialization"
+ },
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": "Reviewed by L 2026-10-10 (statement): Derived Categories 013N with 014G, stated in an additive category with boundedness clauses. Unsplit."
+}
