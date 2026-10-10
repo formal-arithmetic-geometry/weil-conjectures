@@ -1,8 +1,8 @@
 # Work queue
 
-913 items; claim with `tools/claim.py next <group> [--stage N]`.
+915 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (303)
+## Stage 1: nodes to split (305)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -56,20 +56,21 @@
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
 | `lem-sc-open-curve-boundary-higher-direct-image-vanishing` | 4007 | none |
 | `lem-sc-open-curve-etale-leray-low-degree` | 4007 | none |
-| `lem-pc-zero-scheme-properties` | 4008 | rests_on_sorry |
 | `lem-sc-mult-n-etale-kernel` | 4008 | rests_on_sorry |
-| `lem-sc-mult-n-finite-flat` | 4008 | rests_on_sorry |
-| `lem-sc-ntorsion-etale` | 4008 | rests_on_sorry |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `prop-pd-picard-degree-decomposition` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-twist` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
+| `lem-pc-zero-scheme-ideal-local` | 4009 | none |
+| `lem-pc-zero-scheme-locally-principal` | 4009 | none |
+| `lem-pc-zero-scheme-pullback` | 4009 | none |
+| `lem-pc-zero-scheme-zero-iff` | 4009 | none |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
+| `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `thm-pc-f-representable` | 4009 | rests_on_sorry |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
 | `def-pc-f-subfunctor` | 4010 | rests_on_sorry |
-| `lem-pc-closed-subscheme-base-change-ideal-image` | 4010 | none |
 | `lem-pc-projection-formula` | 4010 | sorry_here |
 | `lem-pc-smooth-flat` | 4010 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
@@ -89,25 +90,26 @@
 | `cor-picard-degree-g` | 5009 | rests_on_sorry |
 | `lem-pc-sigma-k-points` | 5009 | none |
 | `lem-pc-zariski-coverings-are-fppf` | 5009 | none |
+| `lem-sc-deg-pullback-finite` | 5009 | rests_on_sorry |
+| `lem-sc-hilbert-polynomial` | 5009 | none |
+| `lem-sc-mult-n-isogeny` | 5009 | rests_on_sorry |
+| `lem-sc-mult-n-pullback` | 5009 | rests_on_sorry |
 | `def-pc-perfect-complex` | 5010 | none |
 | `lem-pc-flat-complex-derived-pullback` | 5010 | none |
 | `lem-pc-pic-of-field` | 5010 | none |
 | `lem-pc-pic-presheaf-functorial` | 5010 | none |
 | `lem-pc-rf-base-change-flat-module` | 5010 | none |
 | `lem-pc-rf-perfect-base-change` | 5010 | none |
-| `lem-sc-mult-n-isogeny` | 5010 | rests_on_sorry |
+| `lem-sc-image-subgroup` | 5010 | none |
+| `lem-sc-mult-n-finite-kernel` | 5010 | rests_on_sorry |
 | `thm-picard-serre-a` | 5010 | rests_on_sorry |
 | `def-pc-derived-pullback` | 5011 | none |
+| `def-sc-group-scheme-subgroup` | 5011 | none |
 | `lem-pc-cech-resolution` | 5011 | none |
 | `lem-pc-projective-noetherian-rf-perfect` | 5011 | none |
-| `lem-sc-hilbert-polynomial` | 5011 | none |
-| `lem-sc-image-subgroup` | 5011 | none |
-| `lem-sc-mult-n-finite-kernel` | 5011 | rests_on_sorry |
 | `thm-pc-semicontinuity-base-change` | 5011 | sorry_here |
-| `def-sc-group-scheme-subgroup` | 5012 | none |
 | `lem-pc-kflat-resolution` | 5012 | none |
 | `lem-pc-noetherian-flat-complex-perfect` | 5012 | none |
-| `lem-sc-mult-n-pullback` | 5012 | rests_on_sorry |
 | `lem-sp-page-induction` | 6001 | none |
 | `def-sp-convergence` | 6002 | none |
 | `def-sp-exact-couple` | 6002 | none |
@@ -153,6 +155,7 @@
 | `lem-pc-projective-space-cohomology-bound` | 6010 | sorry_here |
 | `lem-pc-serre-vanishing` | 6010 | rests_on_sorry |
 | `thm-pqf-finite-iff-proper-finite-fibres` | 6010 | none |
+| `thm-sc-theorem-of-cube` | 6010 | rests_on_sorry |
 | `lem-pc-projective-space-serre-vanishing` | 6011 | rests_on_sorry |
 | `lem-pc-projective-space-twist-cohomology` | 6011 | rests_on_sorry |
 | `lem-sc-ample-positive-degree` | 6011 | rests_on_sorry |
@@ -166,7 +169,6 @@
 | `pqf-lem-sheaf-zero-stalks` | 6011 | none |
 | `pqf-lem-locqf-fibre-discrete` | 6012 | none |
 | `lem-pc-projective-space-canonical` | 6013 | sorry_here |
-| `thm-sc-theorem-of-cube` | 6013 | rests_on_sorry |
 | `pqf-lem-going-up` | 6017 | none |
 | `pqf-lem-incomparability` | 6017 | none |
 | `pqf-def-affine-morphism` | - | none |
@@ -925,7 +927,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 325 nodes that wait for stage 1, 1274 nodes that wait for a statement dependency.
+Not open yet: 329 nodes that wait for stage 1, 1275 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
