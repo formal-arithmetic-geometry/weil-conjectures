@@ -2797,3 +2797,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:15 L: merged deliver/J1/lemma-nagata-directed-finite-upper-bound (reviewer FIX; first push; new nodes: 0)
 - 22:15 L: merged deliver/F1/lem-pc-perfect-descend-morphisms (reviewer FIX; first push; new nodes: 1)
 - 22:15 L: returned deliver/H1/lem-pc-perfect-rhom-tensor-comparison (reviewer RETURN: R-prt2800 (head 5c30de014). 1. E3/D (repair of 21:40 point 1 incomplete): Step 2 applies lem-pc-dualizable-evaluation-cr)
+- 22:16 L: returned deliver/M1/lemma-nagata-morphism-descends (reviewer RETURN: 1. E/D (dependency in returned form): the statement ('apply the finite-stage construction of [def-nagata-morphism-descen)
