@@ -1,8 +1,8 @@
 # Work queue
 
-918 items; claim with `tools/claim.py next <group> [--stage N]`.
+925 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (317)
+## Stage 1: nodes to split (324)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -13,19 +13,21 @@
 | `lem-weil-pbc-etale-sections-equal-open` | 2007 | none |
 | `lem-weil-pbc-fibre-spec-homeomorphism` | 2007 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 2008 | none |
-| `lem-sc-noetherian-topological-cohomology-vanishing` | 2012 | none |
 | `lem-weil-pbc-sets-etale-inverse-image-exact` | 2012 | none |
+| `lem-sc-irreducible-noetherian-constant-acyclic` | 2013 | none |
+| `lem-sc-noetherian-extension-by-zero-reduction` | 2013 | none |
+| `lem-sc-noetherian-open-closed-cohomology-sequence` | 2013 | none |
 | `lem-sc-ample-proj-local-chart` | 2014 | none |
-| `lem-sc-boundary-cech-compatibility` | 2014 | none |
 | `lem-sc-dvr-valuation-arithmetic` | 2014 | none |
 | `lem-sc-free-prime-membership` | 2014 | none |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 2014 | none |
 | `lem-sc-semilocal-dedekind-dvr-reduction` | 2014 | none |
 | `lem-sc-semilocal-dim-one-conductor` | 2014 | none |
+| `lem-sc-boundary-cech-injective-middle` | 2015 | none |
 | `lem-sc-dvr-nonnegative-valuation-in-ring` | 2015 | none |
 | `lem-sc-dvr-valuation-ring-characterization` | 2015 | none |
-| `lem-sc-zariski-contracted-power-extension` | 2015 | none |
 | `lem-sc-mayer-vietoris-open-cover` | 2016 | none |
+| `lem-sc-zariski-contracted-power-torsor` | 2016 | none |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 3007 | none |
 | `lem-exc-finite-galois-tensor-decomposition` | 3009 | none |
 | `lem-weil-pbc-site-restriction-injectives` | 3010 | none |
@@ -34,9 +36,7 @@
 | `lem-sc-affine-maximal-points-closed-in-lft-scheme` | 3013 | none |
 | `lem-sc-tangent-space-vector-space` | 3013 | none |
 | `lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` | 3014 | none |
-| `lem-pc-noetherian-derived-direct-image-right-adjoint` | 3014 | none |
 | `lem-pc-polynomial-quotient-distinct-linear-crt` | 3014 | none |
-| `lem-pc-proper-derived-direct-image-composition` | 3014 | none |
 | `lem-pc-separable-polynomial-distinct-roots-alg-closed` | 3014 | none |
 | `lem-sc-derived-internal-hom-stalk-localization` | 3014 | none |
 | `lem-sc-ext-locally-free-second-naturality` | 3014 | none |
@@ -49,6 +49,13 @@
 | `lem-sc-sheaf-ext-coherent` | 3014 | none |
 | `lem-sc-support-dimension-cohomology-vanishing` | 3014 | none |
 | `lem-sp-cartan-eilenberg-properties` | 3014 | none |
+| `lem-pc-brown-representability-right-adjoint` | 3015 | none |
+| `lem-pc-derived-direct-image-preserves-direct-sums` | 3015 | none |
+| `lem-pc-derived-direct-image-preserves-qcoh` | 3015 | none |
+| `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
+| `lem-pc-derived-qcoh-direct-sums` | 3015 | none |
+| `lem-pc-ringed-spaces-derived-adjoint` | 3015 | none |
+| `lem-pc-ringed-spaces-derived-pullback-composition` | 3015 | none |
 | `lem-sc-affine-derived-pushforward-t-exact` | 3015 | none |
 | `lem-sc-ext-coherent-hom-injective-flasque` | 3015 | none |
 | `lem-sc-p1-invertible-section-localization` | 3015 | none |
@@ -930,7 +937,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 334 nodes that wait for stage 1, 1240 nodes that wait for a statement dependency.
+Not open yet: 341 nodes that wait for stage 1, 1245 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
