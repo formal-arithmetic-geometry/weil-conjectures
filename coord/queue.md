@@ -1,8 +1,8 @@
 # Work queue
 
-902 items; claim with `tools/claim.py next <group> [--stage N]`.
+901 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (154)
+## Stage 1: nodes to split (152)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -10,12 +10,11 @@
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
 | `lem-pc-derived-functor-commutes-derived-limit` | 3014 | none |
-| `lem-pc-proper-direct-image-finite-tor` | 3014 | none |
 | `lem-pc-coherent-support-proper-higher-direct-image` | 3015 | none |
 | `lem-pc-direct-image-qc-support-reduction` | 3015 | none |
 | `lem-pc-pseudo-coherent-distinguished-triangle` | 3015 | none |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 3015 | none |
-| `lem-pc-tower-abelian` | 3015 | none |
+| `lem-pc-tor-amplitude-qcoh-test` | 3015 | none |
 | `lem-pc-tower-enough-injectives` | 3015 | none |
 | `lem-pc-tower-surjective-lim-acyclic` | 3015 | none |
 | `lem-pc-perfect-complexes-compact-set` | 3016 | none |
@@ -58,7 +57,6 @@
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-pqf-finite-spectrum-maximal-primes` | 6014 | none |
 | `thm-pqf-immersion-descent` | - | none |
-| `def-sbc-normal-dominant-galois` | - | none |
 | `lem-pc-representable-unique` | - | none |
 | `lem-pod-adic-limit-finite-modules` | - | none |
 | `lem-pod-lisse-module-sheaves-as-module-objects` | - | none |
@@ -161,7 +159,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (748)
+## Stage 2: nodes to state (749)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -296,6 +294,7 @@
 | `lem-pc-stalk-direct-sums` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
 | `lem-pc-tensor-mapping-cone-iso` | 1 | state |
+| `lem-pc-tower-limit-left-exact` | 1 | state |
 | `lem-pc-zero-scheme-ideal-local` | 1 | state |
 | `lem-pc-zero-scheme-locally-principal` | 1 | state |
 | `lem-pc-zero-scheme-recd` | 1 | state |
@@ -914,7 +913,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1509 nodes that wait for a statement dependency, 194 nodes that wait for stage 1.
+Not open yet: 1510 nodes that wait for a statement dependency, 192 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
