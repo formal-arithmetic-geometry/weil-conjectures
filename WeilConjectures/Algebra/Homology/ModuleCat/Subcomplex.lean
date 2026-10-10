@@ -5,9 +5,11 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
+public import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 public import Mathlib.CategoryTheory.MorphismProperty.Limits
 public import Mathlib.RingTheory.Finiteness.Basic
 
@@ -188,5 +190,86 @@ lemma isStrictlyLE_subcomplex {N : L.SubcomplexFamily} {b : ℤ}
 lemma SubcomplexFamily.IsFinite.finite {N : L.SubcomplexFamily} (hN : N.IsFinite) (n : ℤ) :
     Module.Finite R ((subcomplex N).X n) :=
   Module.Finite.iff_fg.2 (hN.1 n)
+
+section Tensor
+
+variable (F : CochainComplex (ModuleCat.{u} R) ℤ)
+
+lemma range_subcomplexι_whiskerRight_f_mono {N N' : L.SubcomplexFamily} (h : N ≤ N') (j : ℤ) :
+    LinearMap.range ((subcomplexι N ▷ F).f j).hom ≤
+      LinearMap.range ((subcomplexι N' ▷ F).f j).hom := by
+  rw [← subcomplexMap_subcomplexι h, comp_whiskerRight, HomologicalComplex.comp_f,
+    ModuleCat.hom_comp]
+  exact LinearMap.range_comp_le_range _ _
+
+variable (L) in
+/-- The elements of `(L ⊗ F)ʲ` coming from a finite subcomplex of `L`. -/
+noncomputable def tensorFiniteSubmodule (j : ℤ) : Submodule R ((L ⊗ F).X j) where
+  carrier := {x | ∃ N : L.SubcomplexFamily, N.IsFinite ∧
+    x ∈ LinearMap.range ((subcomplexι N ▷ F).f j).hom}
+  zero_mem' := ⟨⊥, SubcomplexFamily.isFinite_bot, zero_mem _⟩
+  add_mem' := by
+    rintro x y ⟨N, hN, hx⟩ ⟨N', hN', hy⟩
+    exact ⟨max N N', hN.max hN',
+      add_mem (range_subcomplexι_whiskerRight_f_mono F (SubcomplexFamily.le_max_left N N') j hx)
+        (range_subcomplexι_whiskerRight_f_mono F (SubcomplexFamily.le_max_right N N') j hy)⟩
+  smul_mem' := by
+    rintro r x ⟨N, hN, hx⟩
+    exact ⟨N, hN, Submodule.smul_mem _ r hx⟩
+
+lemma range_ιTensorObj_le (p q j : ℤ) (h : p + q = j) :
+    LinearMap.range (HomologicalComplex.ιTensorObj L F p q j h).hom ≤
+      tensorFiniteSubmodule L F j := by
+  rintro _ ⟨z, rfl⟩
+  induction z using TensorProduct.induction_on with
+  | zero => simp
+  | add z z' hz hz' => simpa using add_mem hz hz'
+  | tmul l f =>
+    refine ⟨SubcomplexFamily.span l, SubcomplexFamily.isFinite_span l,
+      HomologicalComplex.ιTensorObj (subcomplex (SubcomplexFamily.span l)) F p q j h
+        ((⟨l, SubcomplexFamily.mem_span_self l⟩ : (SubcomplexFamily.span l).N p) ⊗ₜ f), ?_⟩
+    rw [← ModuleCat.comp_apply]
+    erw [HomologicalComplex.ι_mapBifunctorMap]
+    rfl
+
+/-- Every element of `(L ⊗ F)ʲ` comes from `(L' ⊗ F)ʲ` for a subcomplex `L'` of `L` with
+finitely generated terms, vanishing outside a finite interval. -/
+lemma exists_mem_range_tensor (j : ℤ) (x : (L ⊗ F).X j) :
+    ∃ N : L.SubcomplexFamily, N.IsFinite ∧
+      x ∈ LinearMap.range ((subcomplexι N ▷ F).f j).hom := by
+  let S := tensorFiniteSubmodule L F j
+  let π : (L ⊗ F).X j ⟶ ModuleCat.of R ((L ⊗ F).X j ⧸ S) := ModuleCat.ofHom S.mkQ
+  have hπ : π = 0 := HomologicalComplex.mapBifunctor.hom_ext fun p q h ↦ by
+    ext z
+    change S.mkQ (HomologicalComplex.ιTensorObj L F p q j h z) = 0
+    exact (Submodule.Quotient.mk_eq_zero S).2 (range_ιTensorObj_le F p q j h ⟨z, rfl⟩)
+  have : π x = 0 := by rw [hπ]; rfl
+  exact (Submodule.Quotient.mk_eq_zero S).1 this
+
+/-- If the terms of `F` are flat, the inclusion `L' ⊗ F ⟶ L ⊗ F` of a subcomplex is a
+monomorphism in every degree: it is the coproduct of the monomorphisms `L'ᵖ ⊗ F^q ⟶ Lᵖ ⊗ F^q`.
+-/
+lemma mono_subcomplexι_whiskerRight_f (hF : ∀ q, ObjectProperty.flat (F.X q)) (j : ℤ) :
+    Mono ((subcomplexι N ▷ F).f j) := by
+  have (i : ℤ × ℤ) : Mono ((subcomplexι N).f i.1 ▷ F.X i.2) := by
+    have : PreservesFiniteLimits (tensorRight (F.X i.2)) := (hF i.2).tensorRight.1
+    have : PreservesLimitsOfShape WalkingCospan (tensorRight (F.X i.2)) := inferInstance
+    have : Mono ((subcomplexι N).f i.1) :=
+      (ModuleCat.mono_iff_injective _).2 (injective_subcomplexι_f N i.1)
+    exact (tensorRight (F.X i.2)).map_mono ((subcomplexι N).f i.1)
+  exact MorphismProperty.IsStableUnderColimitsOfShape.condition
+    (W := MorphismProperty.monomorphisms (ModuleCat.{u} R)) _ _ (colimit.cocone _)
+    (colimit.cocone _) (colimit.isColimit _) (colimit.isColimit _)
+    (Discrete.natTrans fun i ↦ (subcomplexι N).f i.as.1.1 ▷ F.X i.as.1.2)
+    (fun i ↦ this i.as.1) _ (fun ⟨⟨⟨p, q⟩, h⟩⟩ ↦ by
+      refine (HomologicalComplex.ι_mapBifunctorMap (subcomplexι N) (𝟙 F) _ _ p q j h).trans ?_
+      simp
+      rfl)
+
+lemma injective_subcomplexι_whiskerRight_f (hF : ∀ q, ObjectProperty.flat (F.X q)) (j : ℤ) :
+    Function.Injective ((subcomplexι N ▷ F).f j) :=
+  (ModuleCat.mono_iff_injective _).1 (mono_subcomplexι_whiskerRight_f N F hF j)
+
+end Tensor
 
 end CochainComplex
