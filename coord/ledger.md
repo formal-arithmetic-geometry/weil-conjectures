@@ -3032,3 +3032,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:58 L: returned deliver/E1/lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change (reviewer RETURN: Reviewer R-tsb3157 (head 6c9ca56ff). 1. E (false new statement): lem-weil-pbc-torsion-module-injective-resolution is fal)
 - 23:58 L: merged deliver/F1/lem-sc-finite-cohomology (reviewer FIX; first push; new nodes: 0)
 - 23:58 L: merged deliver/C1/lem-sc-etale-triple-to-sh-completion-flat (reviewer FIX; first push; new nodes: 2)
+- 23:59 L: returned deliver/J1/lem-sc-square-injective-free-map-dual-coker-zero (reviewer RETURN: Not a fault: the node is a Mathlib leaf (Matrix.mulVec_injective_iff ToLin.lean:346 + Matrix.linearIndependent_col_iff_r)
