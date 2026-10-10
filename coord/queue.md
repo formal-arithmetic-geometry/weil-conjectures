@@ -1,26 +1,20 @@
 # Work queue
 
-819 items; claim with `tools/claim.py next <group> [--stage N]`.
+817 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (659)
+## Stage 1: nodes to split (656)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-pbc-etale-stratification-local-gluing` | 1010 | none |
 | `lem-weil-pbc-z-localizations-dvr` | 1010 | none |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1011 | none |
-| `lem-weil-pbc-formal-functions-stalk` | 1011 | none |
-| `lem-weil-pbc-geometrically-regular-descent` | 1011 | none |
-| `lem-weil-pbc-grothendieck-existence-devissage` | 1011 | none |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1011 | none |
 | `lem-weil-pbc-hypersurface-derivation-regular` | 1011 | none |
-| `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-charpoly-field` | 1011 | none |
 | `lem-weil-pbc-idempotent-endomorphism-image-base-change` | 1011 | none |
 | `lem-weil-pbc-jacobi-zariski-homology-sequence` | 1011 | none |
 | `lem-weil-pbc-jacobi-zariski-left-term-vanishing` | 1011 | none |
-| `lem-weil-pbc-jacobi-zariski-surjection-h1` | 1011 | none |
-| `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1011 | none |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1011 | none |
 | `lem-weil-pbc-limit-fibre-products` | 1011 | none |
 | `lem-weil-pbc-limit-flat-modules` | 1011 | none |
@@ -116,6 +110,7 @@
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1012 | none |
 | `lem-weil-pbc-descend-finite-locally-free` | 1012 | none |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1012 | none |
+| `lem-weil-pbc-faithfully-flat-base-change` | 1012 | none |
 | `lem-weil-pbc-finite-length-module-simple-filtration` | 1012 | none |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1012 | none |
 | `lem-weil-pbc-finite-over-complete-local-product` | 1012 | none |
@@ -123,12 +118,14 @@
 | `lem-weil-pbc-flat-base-change-map-sections` | 1012 | none |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1012 | none |
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1012 | none |
+| `lem-weil-pbc-flat-ses-kernel-flat` | 1012 | none |
 | `lem-weil-pbc-flat-variant-local-criterion` | 1012 | none |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1012 | none |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1012 | none |
 | `lem-weil-pbc-formally-smooth-complete-local-regular` | 1012 | none |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1012 | none |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1012 | none |
+| `lem-weil-pbc-grothendieck-existence-easy` | 1012 | none |
 | `lem-weil-pbc-higher-direct-image-presheaf` | 1012 | none |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1012 | none |
 | `lem-weil-pbc-integral-extension-dimension` | 1012 | none |
@@ -666,7 +663,7 @@
 | `lem-pc-finite-linear-avoidance` | - | none |
 | `lem-pc-linear-pair-graded-finite` | - | none |
 
-## Stage 2: nodes to state (160)
+## Stage 2: nodes to state (161)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -768,6 +765,7 @@
 | `lem-weil-pbc-isolated-fibre-point-base-change` | 1 | state |
 | `lem-weil-pbc-isolated-fibre-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-quotient-smooth` | 1 | state |
+| `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-monic-coprime-factorization-etale` | 1 | state |
@@ -831,7 +829,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 671 nodes that wait for stage 1, 446 nodes that wait for a statement dependency.
+Not open yet: 668 nodes that wait for stage 1, 450 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
