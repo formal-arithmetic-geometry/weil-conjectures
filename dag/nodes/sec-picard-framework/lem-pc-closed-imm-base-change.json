@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "lem-pc-closed-imm-base-change",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The ideal sheaf of a base-changed closed immersion",
- "statement": "(Schemes, Lemma 26.18.2, Tag\n[01JY](https://stacks.math.columbia.edu/tag/01JY).) Closed immersions\nare stable under arbitrary base change; if $i:Z\\to X$ is a closed\nimmersion with ideal sheaf $\\mathcal{I}_Z$, and $g:X'\\to X$ is a morphism, then\n$Z'=Z\\times_XX'$ is a closed subscheme of $X'$ whose ideal sheaf is the image of the canonical map\n$g^*\\mathcal{I}_Z\\to\\mathcal{O}_{X'}$ (equal to $g^*\\mathcal{I}_Z$ itself when $g$ is flat, $g^*$ being exact then); in particular for a closed immersion with a section\nstructure this yields the canonical identification $\\mathcal{I}_{x_K}=\\mathcal{I}_x\\otimes \\mathcal{O}_{X_K}$ for $\\kappa(x)$-points.",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-weil-closed-immersion] with ideal sheaf $\\mathcal I_Z\\subseteq\\mathcal O_X$ [def-sbc-closed-immersion-ideal-sheaf], and let $g:X'\\to X$ be any morphism of schemes [def-pc-scheme]. The projection $i':Z'=Z\\times_XX'\\to X'$ from the fibre product [def-pc-fibre-product] is a closed immersion, with ideal sheaf $\\mathcal I_{Z'}=\\operatorname{im}(g^*\\mathcal I_Z\\to\\mathcal O_{X'})$, where $g^*$ denotes module pullback [def-pc-module-pullback] and the arrow is induced by $\\mathcal I_Z\\hookrightarrow\\mathcal O_X$. If $g$ is flat [def-weil-flat-morphism], this arrow is injective, so it identifies $g^*\\mathcal I_Z$ with $\\mathcal I_{Z'}$. In particular, if $X$ is a scheme over a field $k$, $x:\\operatorname{Spec}k\\to X$ is a closed immersion and $K/k$ is a field extension [def-pc-field-extension], then for $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ and $x_K=\\operatorname{Spec}K\\to X_K$ [def-pc-base-change], the canonical map identifies $\\mathcal I_{x_K}$ with $g^*\\mathcal I_x$, where $g:X_K\\to X$ is the projection.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-closed-imm-base-change.md",
   "place": "node lem-pc-closed-imm-base-change, order 726",
@@ -19,24 +19,83 @@
   ]
  },
  "stmt_deps": [
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-weil-flat-morphism",
+  "def-pc-field-extension",
+  "def-pc-base-change"
  ],
  "proof": [
   {
-   "text": "The first assertion is the statement that closed immersions are stable\nunder base change (Schemes, Lemma 26.18.2, Tag\n[01JY](https://stacks.math.columbia.edu/tag/01JY)): the pullback\n$Z\\times_XX'\\to X'$ is a closed immersion; for the ideal sheaf, the\npullback $g^*\\mathcal{I}_Z$ is the ideal sheaf of the base change: the\nexactness argument: $g^*$ is right exact, so applying it to the exact\nsequence $0\\to\\mathcal{I}_Z\\to\\mathcal{O}_X\\to i_*\\mathcal{O}_Z\\to0$ gives an exact sequence\n$g^*\\mathcal{I}_Z\\to\\mathcal{O}_{X'}\\to g^*i_*\\mathcal{O}_Z\\to0$; the last map is the canonical\n$\\mathcal{O}_{X'}\\to i'_*\\mathcal{O}_{Z'}$, the image of $g^*\\mathcal{I}_Z$ in $\\mathcal{O}_{X'}$ is therefore\nits kernel, i.e. the ideal sheaf of $Z'$ (the base change of the closed\nimmersion is the closed immersion with this ideal sheaf, by the affine\ncomputation: on affines, $A\\to A/I$ and $B=A'$-tensored: the ideal of\n$Z'$ is $(A'\\otimes_A I)$-image = the kernel of\n$A'\\to A'\\otimes_AA/I$). This gives\n$\\mathcal{I}_{Z'}=g^*\\mathcal{I}_Z$.",
-   "uses": [],
-   "elementary": null
+   "text": "By [lem-weil-pbc-closed-immersion-base-change], $i'$ is a closed immersion. To compute its ideal, cover $X$ by affine opens $U=\\operatorname{Spec}A$; by [lem-weil-pbc-closed-immersion-affine-cover-criterion] and [def-sbc-closed-immersion-ideal-sheaf], $Z\\times_XU=\\operatorname{Spec}(A/I)$ with $I=\\mathcal I_Z(U)$. Cover $g^{-1}(U)$ by affine opens $V=\\operatorname{Spec}B$. By [lem-weil-pbc-open-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra], $Z'\\times_{X'}V=\\operatorname{Spec}((A/I)\\otimes_AB)=\\operatorname{Spec}(B/IB)$, so the ideal of $i'$ on $V$ is $IB=\\ker(B\\to B/IB)$. By the sheaf-tensor definition of pullback [def-pc-module-pullback], the canonical map $g^*\\mathcal I_Z\\to\\mathcal O_{X'}$ on this affine chart is the sheaf map associated to $I\\otimes_AB\\to B$, $a\\otimes b\\mapsto g^\\sharp(a)b$; its image is precisely $IB$. These $V$ cover $X'$, so equality of the ideals on them gives $\\mathcal I_{Z'}=\\operatorname{im}(g^*\\mathcal I_Z\\to\\mathcal O_{X'})$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemma 01JU (lemma-fibre-product-immersion), part (1); Schemes, Lemma 01JY (lemma-base-change-immersion)"
+   }
+  },
+  {
+   "text": "Assume $g$ is flat and use the affine opens $U=\\operatorname{Spec}A$ and $V=\\operatorname{Spec}B$ of step 1. By [lem-weil-pbc-flat-morphism-affine-criterion], $B$ is a flat $A$-module. Apply [lem-weil-pbc-flat-tensor-exact] to the injection $0\\to I\\to A$: the map $I\\otimes_AB\\to A\\otimes_AB=B$ is injective. Step 1 identifies its image with $IB=\\mathcal I_{Z'}(V)$, hence $g^*\\mathcal I_Z\\to\\mathcal O_{X'}$ is injective on this cover and identifies its source with the ideal of $Z'$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-pc-module-pullback",
+    "def-sbc-closed-immersion-ideal-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/modules.tex",
+    "place": "Schemes, Lemma 01JU (lemma-fibre-product-immersion), part (1), combined with Modules, Lemma 02N4 (lemma-pullback-flat)"
+   }
+  },
+  {
+   "text": "For $K/k$, [lem-weil-pbc-module-over-field-flat] gives that $K$ is a flat $k$-module, hence $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is flat by [lem-weil-pbc-flat-ring-map-iff-flat-affine]. The projection $g:X_K\\to X$ is its base change along $X\\to\\operatorname{Spec}k$, hence flat by [lem-weil-pbc-flat-morphism-base-change]. The base change of the closed immersion $x:\\operatorname{Spec}k\\to X$ along $g$ is $x_K:\\operatorname{Spec}K\\to X_K$ by the universal property of fibre products [def-pc-fibre-product]. Apply step 2 to $i=x$ and this $g$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/morphisms.tex",
+    "place": "Schemes, Lemma 01JU (lemma-fibre-product-immersion), part (1), and Morphisms, Lemma 01U9 (lemma-base-change-flat)"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-pc-fibre-product"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-pc-closed-imm-base-change.md",
-  "place": "## Proof"
+  "place": "Schemes, Lemma 01JU (1), together with Modules, Lemma 02N4 and Morphisms, Lemma 01U9; the blueprint's ## Proof required correction"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature"
@@ -76,5 +135,19 @@
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
- "lead_note": "2026-10-10 L: statement corrected. The blueprint said the ideal sheaf of Z x_X X' is the pullback g^* I_Z; that is false without flatness (D = V(x) in A^1_k and g the inclusion of the origin: g^* I_D = k but I_(D_Y) = 0; found by the worker of lem-pc-divisor-line-bundle-properties). Stacks 01JY states only that immersions are stable under base change; the ideal is the image of g^* I_Z -> O_X' (Schemes 01JU (1)); equality holds for flat g. The particular case I_(x_K) = I_x tensor O_(X_K) is a flat base change (field extension). Citers (lem-pc-hilb-functorial, lem-pc-recd-pullback, lem-pc-very-ample-ample, lem-pc-twist, prop-pc-xk-integral, lem-weil-pbc-first-order-thickening-base-change, lem-weil-pbc-thickening-systems-dictionary, lem-pc-divisor-line-bundle-properties, lem-pc-closed-subscheme-base-change-ideal-image) must use the image form or a flat g; checked at their review."
+ "lead_note": "2026-10-10 L: statement corrected. The blueprint said the ideal sheaf of Z x_X X' is the pullback g^* I_Z; that is false without flatness (D = V(x) in A^1_k and g the inclusion of the origin: g^* I_D = k but I_(D_Y) = 0; found by the worker of lem-pc-divisor-line-bundle-properties). Stacks 01JY states only that immersions are stable under base change; the ideal is the image of g^* I_Z -> O_X' (Schemes 01JU (1)); equality holds for flat g. The particular case I_(x_K) = I_x tensor O_(X_K) is a flat base change (field extension). Citers (lem-pc-hilb-functorial, lem-pc-recd-pullback, lem-pc-very-ample-ample, lem-pc-twist, prop-pc-xk-integral, lem-weil-pbc-first-order-thickening-base-change, lem-weil-pbc-thickening-systems-dictionary, lem-pc-divisor-line-bundle-properties, lem-pc-closed-subscheme-base-change-ideal-image) must use the image form or a flat g; checked at their review.",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-closed-imm-base-change",
+  "worker": "stage1",
+  "summary": "The blueprint proof incorrectly equated the ideal of every base change with the pulled-back ideal. On affine charts A/I over A and B over A, the base change is Spec(B/IB), so its ideal is the image of I tensor_A B -> B. Flatness of B over A makes this arrow injective. The field-extension case specifies a closed k-rational point and uses flatness of K over k and its base change. All non-elementary inputs are existing Mathlib leaves or definitions, so no node was created.",
+  "blueprint": "The single paragraph of the proof of lem-pc-closed-imm-base-change: closed-immersion base change, its ideal sheaf, and the final field-extension specialization."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: citations of the pullback-ideal and affine-sections nodes in steps 1-2): corrected image-form statement kept, 01JU (1) read, 3 steps checked, small cases"
+ }
 }
