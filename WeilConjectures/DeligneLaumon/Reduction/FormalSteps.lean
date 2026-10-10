@@ -89,10 +89,11 @@ theorem HasDirectImageWeightBound.of_eq {X Y : Scheme.{u}} [X.Over (Spec (CommRi
 
 The blueprint argument for the composition step runs through the composition isomorphism
 `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!` and the compact-support Leray spectral sequence
-`E₂^{a,b} = Rᵃg₀!Rᵇf₀!F ⇒ Rᵃ⁺ᵇ(f ≫ g)₀!F`. With the present scaffold
-`AlgebraicGeometry.WeilComplex` is not triangulated, so this spectral sequence cannot be set up;
-its output needed here — the finite abutment filtration by subquotients of the `E₂`-terms — is
-stated as an open black box. The composition step itself is derived from it as in the blueprint.
+`E₂^{a,b} = Rᵃg₀!Rᵇf₀!F ⇒ Rᵃ⁺ᵇ(f ≫ g)₀!F`. The composition isomorphism is the composition law of
+the six-functor package (`AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso`);
+the output of the spectral sequence needed here, the finite abutment filtration by subquotients
+of the `E₂`-terms, is obtained by dévissage along the truncations of `Rf₀!F`
+(`AlgebraicGeometry.WeilComplex.prop_homologySheaf_obj`).
 -/
 
 section Composition
@@ -322,19 +323,17 @@ end QuasiFinite
 
 The blueprint argument for the open–closed reduction runs through the open–closed triangle
 `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶ K[1]`, the long exact cohomology sequence of a triangle and compact
-support base change. The inputs that need distinguished triangles of Weil complexes — the
-restriction of weight bounds, the exact sequences of direct images and the base change
-isomorphisms below — are stated with `sorry`, since `AlgebraicGeometry.WeilComplex` is not
-triangulated; the reductions themselves are derived from these inputs as in the blueprint.
+support base change. The open–closed triangle, the composition law and base change are taken
+from the six-functor package of `WeilConjectures.WeilSheaf.LowerShriekPackage`; the reductions are
+derived from them as in the blueprint.
 
 ## TODO
 
-Prove the inputs stated with `sorry`. Those that form the open–closed triangle or the
-hypercohomology spectral sequence
-(`AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.of_openClosed`,
-`AlgebraicGeometry.HasDirectImageComplexWeightBound.of_openClosed`,
-`AlgebraicGeometry.HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek`) need
-`AlgebraicGeometry.WeilComplex` to be the triangulated Verdier localization of `sk-d-real-weil`.
+Prove `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_openClosed` for a scheme `X` which
+is not quasi-compact over `k₀`. The argument through the open–closed triangle of Weil complexes
+needs `X` quasi-compact and quasi-separated over `k₀`, for the direct image with compact support
+along `j` to be defined; without it one needs the open–closed short exact sequence of Weil sheaves
+and the stalks of the direct image along the closed immersion.
 -/
 
 section OpenClosed

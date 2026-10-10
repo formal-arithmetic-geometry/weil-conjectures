@@ -88,7 +88,8 @@ lemma homologySheaf_exact₂ (T : Triangle (WeilComplex k₀ l X)) (hT : T ∈ d
 /-- In a distinguished triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` of Weil complexes, `𝓗ⁿK₁ ⟶ 𝓗ⁿK₂` is an
 isomorphism if `𝓗ⁿ⁻¹K₃` and `𝓗ⁿK₃` vanish. -/
 lemma isIso_homologySheaf_map_mor₁ (T : Triangle (WeilComplex k₀ l X)) (hT : T ∈ distTriang _)
-    (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁) (h₀ : IsZero ((DerivedCategory.homologyFunctor _ n₀).obj T.obj₃.obj))
+    (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁)
+    (h₀ : IsZero ((DerivedCategory.homologyFunctor _ n₀).obj T.obj₃.obj))
     (h₁ : IsZero ((DerivedCategory.homologyFunctor _ n₁).obj T.obj₃.obj)) :
     IsIso ((homologySheaf n₁).map T.mor₁) := by
   have : IsIso ((WeilSheaf.objectProperty k₀ l X).ι.map ((homologySheaf n₁).map T.mor₁)) :=
@@ -98,7 +99,8 @@ lemma isIso_homologySheaf_map_mor₁ (T : Triangle (WeilComplex k₀ l X)) (hT :
 /-- In a distinguished triangle `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` of Weil complexes, `𝓗ⁿK₂ ⟶ 𝓗ⁿK₃` is an
 isomorphism if `𝓗ⁿK₁` and `𝓗ⁿ⁺¹K₁` vanish. -/
 lemma isIso_homologySheaf_map_mor₂ (T : Triangle (WeilComplex k₀ l X)) (hT : T ∈ distTriang _)
-    (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁) (h₀ : IsZero ((DerivedCategory.homologyFunctor _ n₀).obj T.obj₁.obj))
+    (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁)
+    (h₀ : IsZero ((DerivedCategory.homologyFunctor _ n₀).obj T.obj₁.obj))
     (h₁ : IsZero ((DerivedCategory.homologyFunctor _ n₁).obj T.obj₁.obj)) :
     IsIso ((homologySheaf n₀).map T.mor₂) := by
   have : IsIso ((WeilSheaf.objectProperty k₀ l X).ι.map ((homologySheaf n₀).map T.mor₂)) :=
@@ -194,7 +196,8 @@ private lemma prop_homologySheaf_obj_aux
         asIso ((homologySheaf b).map T.mor₂) ≪≫ ObjectProperty.isoMk _ eH) (hK b)
     let e₃' : T.obj₃ ≅ (WeilSheaf.toComplex.obj G)⟦-b⟧ :=
       (WeilComplex.objectProperty k₀ l X).fullyFaithfulι.preimageIso
-        (eY ≪≫ (((DerivedCategory.singleFunctors _).shiftIso (-b) b 0 (neg_add_cancel b)).app Y₃).symm ≪≫
+        (eY ≪≫
+          (((DerivedCategory.singleFunctors _).shiftIso (-b) b 0 (neg_add_cancel b)).app Y₃).symm ≪≫
           (((WeilComplex.objectProperty k₀ l X).ι.commShiftIso (-b)).app
             (WeilSheaf.toComplex.obj G)).symm)
     have hP₃ : P n ((homologySheaf n).obj (Φ.obj T.obj₃)) := by
