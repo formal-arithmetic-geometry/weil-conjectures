@@ -2208,3 +2208,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:09 L: merged deliver/M1/lem-sc-derived-internal-hom-restrict-open (reviewer FIX; first push; new nodes: 1)
 - 18:09 L: returned deliver/E1/lem-weil-pbc-cartesian-eilenberg-functorial (reviewer RETURN: R-cef1808. 1 (C4/E, point 1 of the 17:31 return NOT repaired): Step 2 still applies [lem-weil-pbc-injective-resolution-l)
 - 18:10 L: merged deliver/H1/lem-weil-pbc-site-extension-by-zero-exact (reviewer FIX+NODE(1); first push; new nodes: 2)
+- 18:10 L: merged deliver/H1/thm-pc-f-representable (reviewer FIX; first push; new nodes: 1)
