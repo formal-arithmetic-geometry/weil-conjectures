@@ -2608,3 +2608,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:02 L: merged deliver/C1/lem-pc-sites-modules-quotient-j-shriek (reviewer FIX; first push; new nodes: 0)
 - 21:02 L: merged deliver/M1/lem-fin-dense-normal-open (reviewer PASS; first push; new nodes: 0)
 - 21:02 L: merged deliver/M1/thm-sc-theorem-of-cube (reviewer FIX+NODE(1); first push; new nodes: 1)
+- 21:02 L: merged deliver/K1/lem-pc-perfect-generation-affine-base (reviewer PASS; first push; new nodes: 0)

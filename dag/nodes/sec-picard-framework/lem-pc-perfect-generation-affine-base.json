@@ -24,9 +24,40 @@
   "def-pc-perfect-complex",
   "def-pc-generators"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the affine derived equivalence [lem-pc-affine-qcoh-derived-equivalence], the functor from D(A) to D_{\\mathrm{QCoh}}(\\mathcal O_X) is an equivalence with quasi-inverse R\\Gamma(X,-), and it sends A[n] to \\mathcal O_X[n]. Therefore zero objects and all Hom-vanishing conditions for the shifts of A are preserved and reflected by this equivalence.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 06Z0, affine comparison, applied in Tag 09IS"
+   }
+  },
+  {
+   "text": "The structure sheaf \\mathcal O_X is represented on the affine scheme by the degree-zero free rank-one module A, so it is perfect by the definition of a strictly perfect complex. In D(A), maps from A[n] to a complex M identify with the corresponding shifted cohomology group of M; hence all these Hom groups vanish exactly when every cohomology group of M vanishes, which is equivalent to M=0. Transporting this calculation across the equivalence in Step 1 gives the asserted criterion for E.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 09IS, affine case; Tag 06Z0, affine tilde construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pc-perfect-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 09IS, affine case using Tag 06Z0"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +82,36 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "created": {
   "item": "lem-pc-derived-qcoh-perfect-generation",
   "by": "worker",
   "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-perfect-generation-affine-base",
+  "worker": "stage1",
+  "summary": "Split the affine base case using the existing affine quasi-coherent derived equivalence. The short module calculation that maps from shifts of the free rank-one module are the cohomology groups is written directly as an elementary proof step, avoiding a duplicate child node with the same Tag 09IS source.",
+  "blueprint": "Realizes the affine-base sentence of the perfect-generation proof in the ancestor lem-sc-finite-duality: identify D_QCoh(O_X) with D(A), transport the free-module generator criterion, and identify A[n] with O_X[n].",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "The affine base step needs the established D(A) equivalence and the identification A[n] = O_X[n], which are not supplied by a node in the Picard-duality unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-pga2503",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pga2503 (reviewer sub-agent of L); spot-checked: C1: proof is the short Tag 09IS/06Z0 argument: Step 1 transports via cited lem-pc-affine-qcoh-derived-equivalence (equivalence D(A)->D_QCoh, A[k]->O_Y[k], statement read); Step 2 O_X strictly perfect (degree-0 finite free, def-pc-perfect-complex) and Hom_{D(A)}(A[n],M)=H^{-n}(M) spelled inline, standard. C4: statement's criterion (E=0 iff Hom(O_X[n],E)=0 all n) is exactly what citer lem-pc-derived-qcoh-perfect-generation Step 1/4 uses and converts to def-pc-generators' weak-generator notion. No new nodes; nothing restates the citer (no cycle). tool_uses lem-pc-affine-qcoh-derived-equivalence accepted as generic tool. Second reading: no missed fault found."
  }
 }
