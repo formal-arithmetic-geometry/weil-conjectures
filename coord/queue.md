@@ -1,8 +1,8 @@
 # Work queue
 
-858 items; claim with `tools/claim.py next <group> [--stage N]`.
+856 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (327)
+## Stage 1: nodes to split (325)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -24,7 +24,6 @@
 | `lem-weil-pbc-finite-over-henselian-local-product` | 2008 | none |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 2008 | none |
 | `lem-weil-pbc-sets-strictly-henselian-open-sections-stalk` | 2008 | none |
-| `def-weil-pbc-strict-henselization-limit` | 3003 | none |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 3003 | none |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 3004 | none |
 | `lemma-weil-pbc-affine-neighbourhood-cofinal` | 3004 | none |
@@ -51,7 +50,6 @@
 | `lem-galois-fpqc-descending-types-morphisms` | 3009 | none |
 | `lem-pc-cartier-divisor-finite-over-field` | 3009 | none |
 | `lem-pc-chi-zero-dim-support` | 3009 | none |
-| `lem-sc-group-scheme-separated-field` | 3009 | none |
 | `lem-sc-hilb-geometrically-integral` | 3009 | rests_on_sorry |
 | `lem-sc-riemann-roch-large-degree` | 3009 | rests_on_sorry |
 | `lem-sc-second-kummer-divisors` | 3009 | none |
@@ -870,7 +868,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 346 nodes that wait for stage 1, 966 nodes that wait for a statement dependency.
+Not open yet: 344 nodes that wait for stage 1, 968 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
