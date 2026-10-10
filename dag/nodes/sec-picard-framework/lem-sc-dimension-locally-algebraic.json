@@ -1,0 +1,64 @@
+{
+ "id": "lem-sc-dimension-locally-algebraic",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-jacobian-representability",
+   "place": "proof, step (4) Connectedness: the assertion that for the curve C every point y has dim_y(C)=1, used in the fibre-dimension calculation",
+   "via": [
+    "lem-sc-curve-base-change-relative-dimension-one",
+    "lem-sc-hilb-to-pic-morphism",
+    "lem-sc-picg-geometrically-integral"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Dimension of an irreducible locally algebraic scheme over a field",
+ "statement": "Let $k$ be a field and let $X$ be an irreducible scheme [def-weil-irreducible-components] whose structure morphism $X\\to\\operatorname{Spec}k$ is locally of finite type [def-weil-finite-type-morphism]. Then $\\dim U=\\dim X$ for every nonempty open subset $U\\subseteq X$, and $\\dim_x(X)=\\dim X$ for every $x\\in X$, where $\\dim$ is the topological Krull dimension [def-kun-topological-krull-dimension] and $\\dim_x$ is the dimension at a point [def-kun-dimension].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0A21 (lemma-dimension-locally-algebraic), part (3)"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-kun-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "for an irreducible locally finite type scheme over a field, every nonempty open has the same topological Krull dimension and every point has that dimension",
+   "results": "topologicalKrullDim, AlgebraicGeometry.Scheme.height_of_isClosed, ringKrullDim_stalk_eq_coheight; no theorem combining irreducibility, local finite type, open subsets, and dimension at a point",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dimension of every nonempty open subset and local dimension at every point of an irreducible finite type scheme over a field",
+   "results": "AlgebraicGeometry.Scheme.height_of_isClosed and ringKrullDim_stalk_eq_coheight give stalk/point ingredients; topologicalKrullDim_subspace_le gives only an inequality; no result with the stated hypotheses and conclusion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'topologicalKrullDim|ringKrullDim_stalk_eq_coheight|height_of_isClosed' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Topology; rg -n 'irreducible.*(finite type|locally of finite type)|dimension.*open' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Properties.lean has ringKrullDim_stalk_eq_coheight; Mathlib/Topology/KrullDimension.lean has topologicalKrullDim_subspace_le; no declaration stating Tag 0A21 or its local-dimension conclusion",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-curve-base-change-relative-dimension-one",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian"
+}

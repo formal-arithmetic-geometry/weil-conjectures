@@ -25,9 +25,72 @@
   "def-pc-base-change",
   "def-kun-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The structure morphism C\\to\\operatorname{Spec}k is smooth by hypothesis. The projection f_T:C_T\\to T is its base change along T\\to\\operatorname{Spec}k, so f_T is smooth by [lem-pc-proper-base-change](2), the base-change stability of smooth morphisms in [def-sbc-smooth-morphisms].",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VB (lemma-base-change-smooth), equivalently Tags 02H2 and 01TS for the formal-smooth definition"
+   }
+  },
+  {
+   "text": "For x\\in C_T with t=f_T(x), the fibre (C_T)_t is canonically C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\kappa(t) by associativity of the fibre-product defining C_T and the scheme-theoretic fibre. Thus it is the fibre of C\\to\\operatorname{Spec}k after base change to \\kappa(t), and x maps to a point of C.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1)"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-fibre-dimension-after-base-change] to C\\to\\operatorname{Spec}k and T\\to\\operatorname{Spec}k. The fibre of C\\to\\operatorname{Spec}k over its unique point s is C itself, since \\kappa(s)=k, so the X_s occurring in that lemma is C. It gives dim_x((C_T)_t)=dim_y(C), where y is the image of x in C. By [def-pc-curve], dim C=1 in the sense of [def-pc-dimension]. Hence the topological dimension of C is 1 by [lem-pc-scheme-dimension-local-rings], and dim_y(C)=1 for every y by [lem-sc-dimension-locally-algebraic], because C is integral and therefore irreducible and its structure morphism is of finite type, hence locally of finite type. Thus dim_x((C_T)_t)=1 for every x.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-pc-curve",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-sc-dimension-locally-algebraic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NK (lemma-base-change-relative-dimension-d), using Tag 02FY (1); for C over a field, Tag 0A21 (lemma-dimension-locally-algebraic), part (3)"
+   }
+  },
+  {
+   "text": "Combining smoothness from step 1 with the fibre-dimension calculation from step 3 is exactly the definition of smooth of relative dimension 1 [def-sbc-smooth-morphisms].",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/_section.md",
+    "place": "proof, step (4), Connectedness, family C_T -> T"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "def-pc-scheme-fibre",
+  "lem-sc-fibre-dimension-after-base-change",
+  "def-pc-curve",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sc-dimension-locally-algebraic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 02NK, 02FY, 01VB and 0A21"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,7 +127,7 @@
   "file": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
   "how": "lines 166-170: base change stability of Mathlib's SmoothOfRelativeDimension n (standard-smooth presentations); with slopmaster2's smoothOfRelativeDimension_iff_topologicalKrullDim_eq (WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean:417) for C -> Spec k; the comparison with the fibre-dimension notion of [def-sbc-smooth-morphisms] is not in Mathlib"
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -80,5 +143,29 @@
   }
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-prop-jacobian"
+ "unit": "sk-prop-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-curve-base-change-relative-dimension-one",
+  "worker": "stage1",
+  "summary": "Split the claim into smoothness stability, fibre identification, preservation of local fibre dimension, and the final definition check. Reused the reviewed smooth base-change node, the unsplit Stacks 02FY fibre-dimension statement, and added the unsplit Stacks 0A21 local-dimension statement needed to pass from the curve's global dimension to every point.",
+  "blueprint": "Realizes thm-sc-jacobian-representability proof step (4), Connectedness, the sentence that C_T -> T is smooth of relative dimension 1.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Its clause (2) supplies smoothness after base change, a generic stability fact not reproved by this curve unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-cb2",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cb2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:58 return (point 1, C1/C4 on step 3): repaired as asked. New node lem-sc-dimension-locally-algebraic states Stacks Tag 0A21 (varieties.tex lemma-dimension-locally-algebraic) part (3) hypothesis by hypothesis (k a field, X irreducible, locally of finite type over k; dim U = dim X for nonempty open U, dim_x X = dim X), cites existing def-weil-irreducible-components, def-weil-finite-type-morphism, def-kun-topological-krull-dimension, def-kun-dimension; created.item is the item, unsplit, empty proof, three Mathlib searches, same_as [] and from {node,place,via}. Step 3 now: 02FY node (lem-sc-fibre-dimension-after-base-change, matches Tag 02FY (1)) applied to C -> Spec k with X_s = C since kappa(s)=k; def-pc-curve gives dim C = 1 in the sense of def-pc-dimension (sup of local-ring dimensions); lem-pc-scheme-dimension-local-rings turns this into topological Krull dimension 1; the 0A21 node (C integral hence irreducible, finite type hence locally finite type) gives dim_y C = 1 for every y; uses and proof_deps updated with all four. Step 1 carried by lem-pc-proper-base-change (2) (declared tool use, generic, accepted); step 2 elementary from def-pc-base-change and def-pc-scheme-fibre (now cited); step 4 the definition in def-sbc-smooth-morphisms. Small case: Spec of a DVR shows why 0A21 needs locally finite type over a field (generic point has dim 0); for C = P^1_k every point has dim_y = 1. Start 15:16:56 UTC, end Sat Oct 10 03:17:13 PM UTC 2026 (date -u)."
+ }
 }
