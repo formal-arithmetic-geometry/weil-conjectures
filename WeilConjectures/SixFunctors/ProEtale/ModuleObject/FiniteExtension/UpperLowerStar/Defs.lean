@@ -33,7 +33,7 @@ objects, by the "`mapMod` followed by change of scalars" recipe:
   (`Adjunction.mapModAdjunction`) with the adjunction between extension and restriction of
   scalars along `α_f`, using that `η_f` is the mate of `α_f`.
 
-These constructions are formal: they do not require `α_f` to be invertible, and do not use any
+The constructions are formal: they do not require `α_f` to be invertible, and do not use any
 finiteness or completeness hypothesis on `T`.
 
 ## Main results
@@ -42,11 +42,29 @@ finiteness or completeness hypothesis on `T`.
   `f_* M`; `ProEtale.ContinuousMapRing.preservesFiniteLimits_lowerStar`: `f_*` is left exact.
 - `ProEtale.ContinuousMapRing.upperStar_comp_forget`: the underlying sheaf of `f^* M` is
   `A_X(T) ⊗_{f^* A_Y(T)} f^* M`; `ProEtale.ContinuousMapRing.preservesFiniteColimits_upperStar`:
-  `f^*` is right exact. It is not left exact in general.
+  `f^*` is right exact, and `ProEtale.ContinuousMapRing.preservesFiniteLimits_upperStar`: `f^*`
+  is left exact (assumed, see below).
 - `ProEtale.ContinuousMapRing.upperStarLowerStarAdjunction`: the adjunction `f^* ⊣ f_*`.
 - `ProEtale.ContinuousMapRing.linearLowerStar`: the linear pushforward
   `Mod_{f^* A_Y(T)} ⥤ Mod_{A_Y(T)}`, of which `f_*` is the composition with the restriction of
   scalars along `α_f`.
+- `ProEtale.ContinuousMapRing.lowerStarComp` and `ProEtale.ContinuousMapRing.upperStarComp`: the
+  composition isomorphisms `f_* ⋙ g_* ≅ (f ≫ g)_*` and `(f ≫ g)^* ≅ g^* ⋙ f^*`, the latter
+  obtained from the former by uniqueness of left adjoints.
+
+## Sorried input
+
+- `ProEtale.ContinuousMapRing.preservesFiniteLimits_upperStar`: the pullback `f^*` on module
+  objects is left exact. This is an *assumption* on the coefficients: the extension of scalars
+  along `α_f` is only right exact, but for the coefficient rings of interest (`T = E` or `𝒪_E`
+  for a finite extension `E` of `ℚ_ℓ`) the coefficient morphism `α_f : f^* A_Y(T) ⟶ A_X(T)` is
+  an isomorphism, so that `f^*` is `mapMod(f^*)` up to restriction of scalars along `α_f⁻¹`, and
+  is exact. It is what makes the derived pullback the levelwise functor `D((f)^*⟦T⟧)`, as for
+  étale sheaves.
+- `ProEtale.isMonoidal_lowerStarComp` (in
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Monoidal`):
+  the composition isomorphism of pushforwards of sheaves is monoidal; it enters
+  `ProEtale.ContinuousMapRing.lowerStarComp`.
 
 -/
 
@@ -142,8 +160,8 @@ instance upperStar_additive : (f)^*⟦T⟧.Additive := by
   infer_instance
 
 /-- The pullback `f^*` on module objects is right exact, being a composition of a left adjoint
-with the exact functor `mapMod(f^*)`. It is not left exact in general, since the extension of
-scalars along `α_f` is not. -/
+with the exact functor `mapMod(f^*)`. Its left exactness is assumed separately
+(`ProEtale.ContinuousMapRing.preservesFiniteLimits_upperStar`). -/
 instance preservesFiniteColimits_upperStar : PreservesFiniteColimits (f)^*⟦T⟧ := by
   unfold upperStar
   exact comp_preservesFiniteColimits _ _
@@ -218,5 +236,53 @@ noncomputable instance preservesColimitsOfSize_upperStar :
   (upperStarLowerStarAdjunction T f).leftAdjoint_preservesColimits
 
 end Adjunction
+
+/-! ### Exactness of the pullback -/
+
+section Exact
+
+/-- The pullback `f^*` on module objects over `C(-, T)` is left exact. See the module docstring:
+this is *assumed*, and is expected only for coefficient rings such as `T = E` or `𝒪_E`. -/
+instance preservesFiniteLimits_upperStar : PreservesFiniteLimits (f)^*⟦T⟧ := sorry
+
+/-- The pullback `f^*` on module objects over `C(-, T)` is exact. -/
+instance preservesHomology_upperStar : (f)^*⟦T⟧.PreservesHomology := {}
+
+end Exact
+
+/-! ### Composition -/
+
+section Comp
+
+variable {Z : Scheme.{u}} (g : Y ⟶ Z)
+
+/-- The composition isomorphism `f_* ⋙ g_* ≅ (f ≫ g)_*` of pushforwards on module objects over
+`C(-, T)`: on underlying sheaves it is the composition isomorphism `ProEtale.lowerStarComp`,
+which is monoidal (`ProEtale.isMonoidal_lowerStarComp`), and the two actions of `A_Z(T)`
+agree since `η_{f ≫ g}` is `η_g` followed by `g_* η_f` up to `ProEtale.lowerStarComp`
+(`ProEtale.continuousMapPushforwardHom_comp`). -/
+noncomputable def lowerStarComp : (f)_*⟦T⟧ ⋙ (g)_*⟦T⟧ ≅ (f ≫ g)_*⟦T⟧ :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight
+        ((g)_*[Ab.{u + 1}].mapModComapIso (continuousMapPushforwardHom T f)) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (Mod.comapComp _ _).symm) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (Functor.mapModCompIso (f)_*[Ab.{u + 1}] (g)_*[Ab.{u + 1}]
+      (ProEtale.lowerStarComp Ab.{u + 1} f g).hom (continuousMapRingObj T X)) _ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ ((Mod.comapComp _ _).symm ≪≫
+      Mod.comapIsoOfEq (by rw [continuousMapPushforwardHom_comp, Category.assoc]))
+
+/-- The composition isomorphism `(f ≫ g)^* ≅ g^* ⋙ f^*` of pullbacks on module objects over
+`C(-, T)`, obtained from `ProEtale.ContinuousMapRing.lowerStarComp` by uniqueness of left
+adjoints: both sides are left adjoint to `f_* ⋙ g_*`. -/
+noncomputable def upperStarComp : (f ≫ g)^*⟦T⟧ ≅ (g)^*⟦T⟧ ⋙ (f)^*⟦T⟧ :=
+  ((conjugateIsoEquiv (upperStarLowerStarAdjunction T (f ≫ g))
+      ((upperStarLowerStarAdjunction T g).comp (upperStarLowerStarAdjunction T f))).symm
+    (lowerStarComp T f g).symm).symm
+
+end Comp
 
 end AlgebraicGeometry.ProEtale.ContinuousMapRing

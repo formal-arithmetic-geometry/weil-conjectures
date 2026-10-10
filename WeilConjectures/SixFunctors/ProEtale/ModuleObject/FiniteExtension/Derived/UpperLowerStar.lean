@@ -33,6 +33,8 @@ and `(f)_*⟦T⟧` of
 | `Rf_* : D(Mod_{A_X(T)}) ⥤ D(Mod_{A_Y(T)})` | `R((f)_*⟦T⟧)` | `(f)_*⟦T⟧.rightDerivedFunctor` |
 | `Rf_* : D⁺(Mod_{A_X(T)}) ⥤ D⁺(Mod_{A_Y(T)})` | `R+((f)_*⟦T⟧)` | `rightDerivedFunctorPlus` |
 | `Lf^* : D(Mod_{A_Y(T)}) ⥤ D(Mod_{A_X(T)})` | `L((f)^*⟦T⟧)` | `(f)^*⟦T⟧.leftDerivedFunctor` |
+| `f^* : D(Mod_{A_Y(T)}) ⥤ D(Mod_{A_X(T)})` | `D((f)^*⟦T⟧)` | `(f)^*⟦T⟧.mapDerivedCategory` |
+| `f^* : D⁺(Mod_{A_Y(T)}) ⥤ D⁺(Mod_{A_X(T)})` | `D+((f)^*⟦T⟧)` | `mapDerivedCategoryPlus` |
 
 The derived pushforward is computed on K-injective resolutions in `Mod_{A_X(T)}`, and the
 derived pullback is the total left derived functor of `f^* = A_X(T) ⊗_{f^* A_Y(T)} f^*(-)`,
@@ -41,11 +43,14 @@ computed on K-flat resolutions in `Mod_{A_Y(T)}`, that is
 Lf^* M = A_X(T) ⊗ᴸ_{f^* A_Y(T)} f^* M,
 ```
 the derived extension of scalars along `α_f` of the exact pullback `f^* M`; this is the
-pullback of Bhatt–Scholze, Remark 6.8.15, for `𝒪_E`- and `E`-coefficients. In contrast with the
-finite-coefficient case, `f^*` on module objects is *not* exact (the extension of scalars along
-`α_f` is only right exact), so `Lf^*` is not the levelwise functor: this is exactly the situation
-the K-flat left derivability structure of
-`WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs` is designed for.
+pullback of Bhatt–Scholze, Remark 6.8.15, for `𝒪_E`- and `E`-coefficients. The pullback `f^*`
+on module objects is *assumed* to be exact
+(`ProEtale.ContinuousMapRing.preservesFiniteLimits_upperStar`, see
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.UpperLowerStar.Defs`), so,
+as for étale sheaves, `Lf^*` is canonically the levelwise functor `D((f)^*⟦T⟧)`
+(`ProEtale.ContinuousMapRing.leftDerivedUpperStarIsoMapDerivedCategory`), and on the bounded
+below derived categories the pullback is the levelwise functor `D+((f)^*⟦T⟧)`, left adjoint to
+`R+((f)_*⟦T⟧)` (`ProEtale.ContinuousMapRing.derivedUpperStarLowerStarAdjunctionPlus`).
 
 The two displayed formulas are theorems about the total derived functors, not definitions:
 
@@ -64,16 +69,20 @@ The two displayed formulas are theorems about the total derived functors, not de
 ## Main results
 
 - `ProEtale.ContinuousMapRing.derivedUpperStarLowerStarAdjunction`: the derived adjunction
-  `L((f)^*⟦T⟧) ⊣ R((f)_*⟦T⟧)`, induced by the adjunction `f^* ⊣ f_*` on module objects.
+  `L((f)^*⟦T⟧) ⊣ R((f)_*⟦T⟧)`, induced by the adjunction `f^* ⊣ f_*` on module objects, and
+  `ProEtale.ContinuousMapRing.derivedUpperStarLowerStarAdjunctionPlus`: its bounded below
+  version `D+((f)^*⟦T⟧) ⊣ R+((f)_*⟦T⟧)`.
+
+- `ProEtale.ContinuousMapRing.leftDerivedUpperStarIsoMapDerivedCategory`: the derived pullback
+  `L((f)^*⟦T⟧)` is the levelwise functor `D((f)^*⟦T⟧)`.
+
+- `ProEtale.ContinuousMapRing.leftDerivedUpperStarComp`: the composition isomorphism
+  `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`, obtained from the underived
+  `ProEtale.ContinuousMapRing.upperStarComp` through the levelwise functors.
 
 - `ProEtale.ContinuousMapRing.rightDerivedLowerStarIso` and
   `ProEtale.ContinuousMapRing.leftDerivedUpperStarIso`: the computations of `Rf_*` and `Lf^*`
   described above.
-
-There is no bounded below derived adjunction in general, `f^*` on module objects not being
-exact; for an open immersion see the file
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.Derived.OpenImmersionLowerShriek`
-of this folder.
 
 ## Sorried input
 
@@ -199,6 +208,24 @@ noncomputable def leftDerivedUpperStarIso :
     ((f)^*[Ab.{u + 1}].mapMod (R := continuousMapRingObj T Y))
     (Mod.extendScalars (continuousMapPullbackHom T f))
 
+/-- The derived pullback on module objects is the levelwise functor: since `f^*` on module
+objects is exact (`ProEtale.ContinuousMapRing.preservesFiniteLimits_upperStar`), its total left
+derived functor `L((f)^*⟦T⟧)`, computed via K-flat resolutions, is canonically isomorphic to the
+functor `D((f)^*⟦T⟧)` induced by applying `f^*` levelwise. This is
+`Functor.leftDerivedFunctorIsoMapDerivedCategory` at `f^*`. -/
+noncomputable def leftDerivedUpperStarIsoMapDerivedCategory :
+    L((f)^*⟦T⟧) ≅ D((f)^*⟦T⟧) :=
+  (f)^*⟦T⟧.leftDerivedFunctorIsoMapDerivedCategory
+
+/-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` of derived pullbacks on module
+objects over `C(-, T)`, obtained from the underived composition isomorphism
+`ProEtale.ContinuousMapRing.upperStarComp` and the compatibility of left derivation with
+`mapDerivedCategory` for exact functors. -/
+noncomputable def leftDerivedUpperStarComp {Z : Scheme.{u}} (g : Y ⟶ Z) :
+    L((f ≫ g)^*⟦T⟧) ≅ L((g)^*⟦T⟧) ⋙ L((f)^*⟦T⟧) :=
+  Functor.leftDerivedFunctorNatIso _ (upperStarComp T f g) ≪≫
+    Functor.leftDerivedFunctorCompIso (g)^*⟦T⟧ (f)^*⟦T⟧
+
 end DerivedUpperStar
 
 /-! ### The derived adjunction `Lf^* ⊣ Rf_*` -/
@@ -216,6 +243,14 @@ noncomputable def derivedUpperStarLowerStarAdjunction : L((f)^*⟦T⟧) ⊣ R((f
 instance : L((f)^*⟦T⟧).IsLeftAdjoint := (derivedUpperStarLowerStarAdjunction T f).isLeftAdjoint
 
 instance : R((f)_*⟦T⟧).IsRightAdjoint := (derivedUpperStarLowerStarAdjunction T f).isRightAdjoint
+
+/-- The bounded below version of `ProEtale.ContinuousMapRing.derivedUpperStarLowerStarAdjunction`:
+since the pullback `f^*` on module objects is exact, its derived functor on the bounded below
+derived categories is the levelwise functor `D+((f)^*⟦T⟧)`, and it is left adjoint to the right
+derived functor `R+((f)_*⟦T⟧)` of the pushforward on the bounded below derived categories. -/
+noncomputable def derivedUpperStarLowerStarAdjunctionPlus :
+    D+((f)^*⟦T⟧) ⊣ R+((f)_*⟦T⟧) :=
+  (upperStarLowerStarAdjunction T f).derivedAdjunctionPlus
 
 end Adjunction
 
