@@ -27,9 +27,64 @@
   "lem-pc-tower-enough-injectives",
   "lem-pc-tower-limit-left-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a surjective tower $B=(B_n,g_n)$. By [lem-pc-tower-injective-embedding], embed it as a subobject $B\\hookrightarrow I$ of a tower whose level groups are injective and whose transition maps $p_n:I_{n+1}\\to I_n$ are split surjections. Put $Q_n=I_n/B_n$; the induced transition $Q_{n+1}\\to Q_n$ is surjective, because a representative in $I_n$ lifts along the split surjection $p_n$ and its class maps to the prescribed class. Thus $0\\to B\\to I\\to Q\\to0$ is a short exact sequence of towers [lem-pc-tower-abelian].",
+   "uses": [
+    "lem-pc-tower-injective-embedding",
+    "lem-pc-tower-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+   }
+  },
+  {
+   "text": "The tower $I$ is injective in the tower category by [lem-pc-injective-split-tower-injective]. Therefore its higher derived limits vanish directly from the injective-resolution definition [def-sp-left-exact-additive]: resolve $I$ by the identity in degree zero. Since the kernel tower $B$ has surjective transitions, [lem-weil-pbc-tower-limit-exact-surjective-kernels] (b), with $R=\\mathbf Z$, makes $\\varprojlim I\\to\\varprojlim Q$ surjective. The long exact sequence of right derived functors for $0\\to B\\to I\\to Q\\to0$, supplied by [lem-weil-pbc-horseshoe-delta-functor] (2) (its hypotheses hold: the tower category has enough injectives [lem-pc-tower-enough-injectives] and $\\varprojlim$ is additive and left exact [lem-pc-tower-limit-left-exact]), then has $\\varprojlim I\\to\\varprojlim Q\\to R^1\\varprojlim B\\to R^1\\varprojlim I=0$; hence $R^1\\varprojlim B=0$.",
+   "uses": [
+    "lem-pc-injective-split-tower-injective",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "lem-weil-pbc-horseshoe-delta-functor",
+    "lem-pc-tower-enough-injectives",
+    "lem-pc-tower-limit-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 (3), right acyclicity of Mittag--Leffler systems"
+   }
+  },
+  {
+   "text": "For every $q\\ge2$, the same long exact sequence gives an isomorphism $R^q\\varprojlim B\\cong R^{q-1}\\varprojlim Q$, because the adjacent groups $R^q\\varprojlim I$ and $R^{q-1}\\varprojlim I$ vanish. The quotient tower $Q$ is again surjective by Step 1, so induction on $q$ (with the base case $q=1$ proved in Step 2, applied to every surjective tower) gives $R^{q-1}\\varprojlim Q=0$, and therefore $R^q\\varprojlim B=0$.",
+   "uses": [
+    "lem-pc-injective-split-tower-injective",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-horseshoe-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KW, Lemma 15.88.1 (3), right acyclicity of Mittag--Leffler systems"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tower-injective-embedding",
+  "lem-pc-tower-abelian",
+  "lem-pc-injective-split-tower-injective",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-pc-tower-enough-injectives",
+  "lem-pc-tower-limit-left-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07KW, Lemma 15.88.1 (3)"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -38,11 +93,64 @@
    "date": "2026-10-10",
    "verdict": "no match",
    "by": "R-rag2445"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjective transition maps inverse system abelian groups derived inverse limit acyclic",
+   "results": "CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map_aux; CategoryTheory.Limits.Types.surjective_π_app_zero_of_surjective_map; CategoryTheory.Limits.Concrete.surjective_π_app_zero_of_surjective_map; none states derived inverse limits of abelian-group towers",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory inverse limit derived functor surjective",
+   "results": "0 hits; unknown identifier CategoryTheory",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|lim\\^1|derived.*inverse.*limit in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "surjective transition maps make higher derived inverse limits of abelian groups vanish",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-derived-limit-roos-abelian-groups"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-tower-surjective-lim-acyclic",
+  "worker": "stage1",
+  "summary": "Repaired the circular Roos proof by dimension shifting through an injective split tower and its surjective quotient; the long exact sequence gives the base case and induction.",
+  "blueprint": "The three steps realize the ancestor blueprint proof's first-step cohomology-of-the-derived-limit argument, using injective dimension shifting for the surjective/Mittag--Leffler case of Tag 07KW.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "why": "The dimension-shifting base case needs surjectivity of the inverse-limit map for a short exact tower with surjective kernel transitions, a generic Mittag-Leffler tool supplied by the proper-base-change unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-horseshoe-delta-functor",
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tsl2822",
+  "group": "K1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tsl2822 (reviewer sub-agent of L); spot-checked: Re-push after 21:39 return: D repaired, non-circular dimension shift (B into M1 split-injective tower I, Q=I/B surjective, lim I->lim Q onto by tower-limit-exact-surjective-kernels (b), LES, induction over all surjective towers); new node lem-pc-injective-split-tower-injective is a real lemma (argument only inline in F1's proof, no node states it), not (b)/(c)/(d); C4 for citer lem-pc-derived-limit-roos-abelian-groups OK, statement unchanged. FIX more, RETURN less: C4/C1 the long exact sequence is part (2) of lem-weil-pbc-horseshoe-delta-functor (accepted as generic tool use: derived-functor LES), not lem-sc-p1-right-derived-triangle-connecting (which only identifies connecting maps) - recited in Steps 2-3 with uses/proof_deps; added lem-pc-tower-enough-injectives and lem-pc-tower-limit-left-exact for its hypotheses. K1 second reading missed this C4.; 1 file(s) fixed by the reviewer"
  }
 }
