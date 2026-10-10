@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Relative Mayer–Vietoris gluing for the single-complex base-change map",
- "statement": "Let X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S be a cartesian square with f:X\\to S quasi-compact and quasi-separated and f':X'\\to S' its base change [def-pc-scheme, def-pc-base-change]. Let K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X) and let L(g')^*K\\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. Suppose X=U\\cup V, where U and V are quasi-compact open subschemes and U\\cap V is quasi-compact. For each W\\in\\{U,V,U\\cap V\\}, let W'=X'\\times_X W and assume that the canonical composite Lg^*Rf_{W,*}(K|_W)\\to Rf'_{W',*}L(g'|_{W'})^*(K|_W)\\to Rf'_{W',*}(K'|_{W'}) is an isomorphism, using derived pullback and direct image [def-pc-derived-pullback, def-pc-derived-direct-image]. Then the canonical composite Lg^*Rf_*K\\to Rf'_*L(g')^*K\\to Rf'_*K' is an isomorphism.",
+ "statement": "Let X' \\xrightarrow{g'} X and S' \\xrightarrow{g} S be a cartesian square with f:X\\to S quasi-compact and quasi-separated and f':X'\\to S' its base change [def-pc-scheme, def-pc-base-change]. Assume moreover that S and S' are affine. Let K\\in D_{\\mathrm{QCoh}}(\\mathcal O_X) and let L(g')^*K\\to K' be a map in D_{\\mathrm{QCoh}}(\\mathcal O_{X'}) [def-pc-derived-category]. Suppose X=U\\cup V, where U and V are quasi-compact open subschemes and U\\cap V is quasi-compact. For each W\\in\\{U,V,U\\cap V\\}, let W'=X'\\times_X W and assume that the canonical composite Lg^*Rf_{W,*}(K|_W)\\to Rf'_{W',*}L(g'|_{W'})^*(K|_W)\\to Rf'_{W',*}(K'|_{W'}) is an isomorphism, using derived pullback and direct image [def-pc-derived-pullback, def-pc-derived-direct-image]. Then the canonical composite Lg^*Rf_*K\\to Rf'_*L(g')^*K\\to Rf'_*K' is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0DJ9, induction step; relative Mayer--Vietoris triangle from Cohomology, Lemma cohomology-lemma-unbounded-relative-mayer-vietoris"
@@ -25,9 +25,62 @@
   "def-pc-derived-pullback",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since S is affine and f is quasi-separated, X is quasi-separated, and X=U\\cup V is quasi-compact (Tag 01KU, elementary). Since S and S' are affine, g is affine, hence so is its base change g' (Tag 01S5); thus U'=(g')^{-1}(U), V'=(g')^{-1}(V) are quasi-compact opens with X'=U'\\cup V', and X' is quasi-compact and quasi-separated over the affine S'. So the derived Mayer--Vietoris triangle node applies to the cover X=U\\cup V with E=K and to X'=U'\\cup V' with E=K' [lem-pc-derived-mayer-vietoris-triangle]. Apply the exact functors Lg^*Rf_* and Rf'_* to these triangles and identify Rf_*R(j_W)_*=R(f|_W)_* and Rf'_*R(j_{W'})_*=R(f'|_{W'})_* for W\\in\\{U,V,U\\cap V\\} [lem-pc-derived-direct-image-composition]. This gives distinguished triangles in D(\\mathcal O_{S'}) whose terms are Lg^*R(f|_W)_*(K|_W) and R(f'|_{W'})_*(K'|_{W'}) for W=X,U,V,U\\cap V.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BV, distinguished Mayer--Vietoris triangle"
+   }
+  },
+  {
+   "text": "By the naturality node, applied with the same affine S and S' and the same cover [lem-pc-rf-mv-triangle-naturality], the comparison maps alpha_X, alpha_U direct-sum alpha_V, and alpha_{U intersect V} form a morphism from the first triangle of Step 1 to the second.",
+   "uses": [
+    "lem-pc-rf-mv-triangle-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ9, induction step; relative Mayer--Vietoris naturality"
+   }
+  },
+  {
+   "text": "By hypothesis, alpha_U and alpha_V are isomorphisms, so alpha_U direct-sum alpha_V is an isomorphism. The hypothesis for U intersect V says that alpha_{U intersect V} is an isomorphism. Applying the Mathlib two-out-of-three theorem for a morphism of distinguished triangles to these latter two components shows that alpha_X is an isomorphism.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ9, induction step and conclusion"
+   }
+  },
+  {
+   "text": "For W=X, alpha_X is exactly the canonical composite Lg^*Rf_*K \\to Rf'_*L(g')^*K \\to Rf'_*K' appearing in the statement, so the preceding isomorphism is the required conclusion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0DJ9, induction step and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-mayer-vietoris-triangle",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-rf-mv-triangle-naturality",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DJ9, induction step using the relative Mayer--Vietoris triangle"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,12 +105,37 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-rf-single-complex-qcqs-induction",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-rf-single-complex-relative-mayer-vietoris",
+  "worker": "stage1",
+  "summary": "The item is proved by applying the existing derived Mayer--Vietoris triangle to X and its base change, using a new statement-only naturality node to obtain a morphism of triangles, and then applying the existing Mathlib two-out-of-three triangle-isomorphism leaf to the local isomorphisms on U, V, and U intersect V.",
+  "blueprint": "Realizes the parent proof's Tag 0DJ9 induction step: relative Mayer--Vietoris triangles for U, V, and U intersect V, followed by the five-lemma analogue for distinguished triangles.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-mayer-vietoris-triangle",
+    "why": "The generic derived Mayer--Vietoris triangle is a cross-unit tool needed to form the triangles; no node in the semicontinuity/base-change unit supplies this derived-category construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-mayer-vietoris-triangle",
+  "lem-pc-derived-mayer-vietoris-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-rmv3042",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rmv3042 (reviewer sub-agent of L); spot-checked: Read packet; checked Step 1 against lem-pc-derived-mayer-vietoris-triangle hypotheses, F1 (lem-pc-rf-single-complex-qcqs-induction) Steps 1 and 4, lem-sf-triangle-morphism-iso, Tag 0DJ9. FIX more, RETURN less: (1) C4/E7: the MV node needs X and X' qcqs with U', V' quasi-compact, which the item's general S, S' (g arbitrary) did not give, a fault the Second reading missed; added 'S and S' affine' to the item and to lem-pc-rf-mv-triangle-naturality, exactly F1's Step 1 reduction (F1 Step 4 applies it over affine S, S'), and Step 1 now derives X qcqs (Tag 01KU) and U', V' qc via g' affine (Tag 01S5). (2) C1: pushing the triangles to S' needed Rf_*Rj_W*=R(f|_W)_*; cited lem-pc-derived-direct-image-composition in Step 1 and proof_deps, and the naturality statement now says which triangles on S' it compares. New node class: none of b/c/d (grep of Mathlib AlgebraicGeometry for MayerVietoris recorded). Tool use accepted.; 2 file(s) fixed by the reviewer"
+ }
 }
