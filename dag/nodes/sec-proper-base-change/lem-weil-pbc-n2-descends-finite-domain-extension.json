@@ -33,9 +33,101 @@
   "def-pc-field-extension",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Fraction fields.* Let $K$ be the fraction field of $A$ and $E$ that of $B$, i.e. their localizations at the prime $(0)$ [def-weil-pbc-localization-at-prime]. Since $A\\subseteq B\\subseteq E$ and every nonzero $s\\in A$ is nonzero in the field $E$, the map $\\iota:K\\to E$, $a/s\\mapsto a s^{-1}$, is well defined ($a/s=a'/s'$ means $as'=a's$ in the domain $A$, hence in $E$), a ring homomorphism, and injective as $K$ is a field; it is the inclusion $A\\subseteq B$ on $A$. Fix a finite field extension $L$ of $K$ [def-pc-field-extension], $n=\\dim_KL$; we must show that the integral closure $A_L$ of $A$ in $L$ [def-weil-pbc-integral-closure] ($L$ an $A$-algebra through $A\\subseteq K\\to L$) is a finitely generated $A$-module.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-field-extension",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2), lines 45256-45266, proof ('Omitted. (Hint: Integral closures of $R$ in extension fields are contained in integral closures of $S$ in extension fields.)'), N-2 clause: the comparison of $R$ inside $S$ and of their fraction fields implicit in the hint"
+   }
+  },
+  {
+   "text": "*A field containing $L$ and $E$.* $L$ is algebraic over $K$: for $x\\in L$ the $n+1$ elements $1,x,\\dots,x^n$ of the $n$-dimensional $K$-vector space $L$ are linearly dependent, which is a nonzero polynomial over $K$ vanishing at $x$. Let $\\Omega$ be an algebraic closure of $E$ [def-weil-algebraic-closure], with $j:E\\to\\Omega$ (injective, a homomorphism of fields). By [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] applied to the algebraic extension $L/K$ and the field homomorphism $\\varphi=j\\circ\\iota:K\\to\\Omega$ into the algebraically closed field $\\Omega$, there is a field homomorphism $\\psi:L\\to\\Omega$ with $\\psi|_K=j\\circ\\iota$; $\\psi$ is injective, being a homomorphism of fields. In particular $\\psi(a)=j(a)$ for $a\\in A$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2), lines 45256-45266, proof ('Omitted. (Hint: Integral closures of $R$ in extension fields are contained in integral closures of $S$ in extension fields.)'), N-2 clause: the 'extension fields' of $S$ in which the hint places the closures of $R$: a field receiving both $L$ and the fraction field of $S$"
+   }
+  },
+  {
+   "text": "*A finite extension $M$ of $E$ containing $\\psi(L)$.* In $\\Omega$ put $F=j(\\iota(K))$, $L_1=\\psi(L)$ and $E_1=j(E)$, subfields of $\\Omega$ [def-pc-field-extension] with $F\\subseteq L_1$ (as $\\psi|_K=j\\iota$) and $F\\subseteq E_1$. The isomorphisms $\\psi:L\\to L_1$ and $j\\iota:K\\to F$ are compatible with $K\\subseteq L$, so $\\dim_FL_1=\\dim_KL=n$ is finite. By [lem-weil-pbc-compositum-degree-bound] (with $\\Omega$, $F$, $K:=L_1$, $M:=E_1$) the compositum $M:=L_1E_1\\subseteq\\Omega$ is finite over $E_1$, of degree $\\le n$. Through the isomorphism $j:E\\to E_1$, $M$ is a finite field extension of $E$, the structure map being $j:E\\to M$, and $\\psi(L)\\subseteq M$.",
+   "uses": [
+    "def-pc-field-extension",
+    "lem-weil-pbc-compositum-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2), lines 45256-45266, proof ('Omitted. (Hint: Integral closures of $R$ in extension fields are contained in integral closures of $S$ in extension fields.)'), N-2 clause: the finite extension field of the fraction field of $S$ in which the hint's integral closure of $S$ is taken"
+   }
+  },
+  {
+   "text": "*$\\psi(A_L)\\subseteq B_M$.* Let $B_M\\subseteq M$ be the integral closure of $B$ in $M$ [def-weil-pbc-integral-closure], $M$ a $B$-algebra through $B\\subseteq E\\xrightarrow{j}M$. If $x\\in A_L$, then $x^m+a_{m-1}x^{m-1}+\\dots+a_0=0$ in $L$ with $a_i\\in A$; applying the ring map $\\psi$, with $\\psi(a_i)=j(a_i)$ (step 2) and $\\psi(x)\\in M$ (step 3), gives $\\psi(x)^m+j(a_{m-1})\\psi(x)^{m-1}+\\dots+j(a_0)=0$ in $M$, a monic equation whose coefficients are the images of $a_i\\in A\\subseteq B$ under the structure map $B\\to M$. So $\\psi(x)$ is integral over $B$, i.e. $\\psi(x)\\in B_M$. This is the hint: the integral closure of $A$ in $L$ lies in the integral closure of $B$ in $M$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2), lines 45256-45266, proof ('Omitted. (Hint: Integral closures of $R$ in extension fields are contained in integral closures of $S$ in extension fields.)'), N-2 clause: the hint itself"
+   }
+  },
+  {
+   "text": "*$B_M$ is a finite $A$-module.* $B$ is N-2 [def-weil-pbc-japanese-domain] and $M$ is a finite field extension of the fraction field $E$ of $B$ (step 3), so $B_M$ is a finitely generated $B$-module [def-weil-finitely-generated-module]; $B$ is a finitely generated $A$-module by hypothesis. By [lem-weil-pbc-finite-module-over-finite-algebra] (with $R=A$, the algebra $B$ and the $B$-module $B_M$), $B_M$ is a finitely generated $A$-module, $A$ acting through $A\\subseteq B\\to M$, i.e. $a\\cdot y=j(a)y$.",
+   "uses": [
+    "def-weil-pbc-japanese-domain",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-module-over-finite-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2), lines 45256-45266, proof ('Omitted. (Hint: Integral closures of $R$ in extension fields are contained in integral closures of $S$ in extension fields.)'), N-2 clause: the omitted conclusion from the hint (finiteness of the closure of $S$ passes to $R$ since $S$ is finite over $R$)"
+   }
+  },
+  {
+   "text": "*Conclusion.* $A_L$ is an $A$-submodule of $L$ [def-weil-pbc-integral-closure], and $\\psi$ is injective (step 2) and $A$-linear for the $A$-module structure of step 5, since $\\psi(ax)=\\psi(a)\\psi(x)=j(a)\\psi(x)$ for $a\\in A$; so $\\psi$ maps $A_L$ isomorphically, as an $A$-module, onto the $A$-submodule $\\psi(A_L)$, which lies in $B_M$ by step 4. Since $A$ is Noetherian [def-weil-pbc-noetherian-ring] and $B_M$ is a finitely generated $A$-module (step 5), [lem-weil-pbc-noetherian-submodule-finite] shows that $\\psi(A_L)$ is a finitely generated $A$-module, hence so is $A_L$. As $L$ was an arbitrary finite extension of $K$, $A$ is N-2 [def-weil-pbc-japanese-domain].",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-pbc-japanese-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2), lines 45256-45266, proof ('Omitted. (Hint: Integral closures of $R$ in extension fields are contained in integral closures of $S$ in extension fields.)'), N-2 clause: the omitted conclusion, using that $R$ is Noetherian"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-compositum-degree-bound",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-module-over-finite-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-noetherian-submodule-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 032K (lemma-finite-extension-N-2): the source's proof is 'Omitted' with a one-sentence hint; the steps write out that hint for the N-2 clause, mirroring the N-1 clause (lem-weil-pbc-n1-descends-finite-domain-extension)"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -67,7 +159,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -88,5 +180,12 @@
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
- "reviewed": "2026-10-10 L: statement checked against 032K (N-2 clause)"
+ "reviewed": "2026-10-10 L: 6 steps checked (032K N-2 clause, proof omitted, written out): L embeds into an algebraic closure of Frac(B) over K, M = compositum finite over Frac(B), A_L maps into B_M, B_M finite over A, A_L an A-submodule of a finite module over Noetherian A",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-n2-descends-finite-domain-extension",
+  "worker": "stage1",
+  "summary": "Read Algebra Lemma 032K (lemma-finite-extension-N-2, algebra.tex 45256-45266; tag verified in tags/tags): proof 'Omitted' with the hint that integral closures of R in extension fields lie in those of S. Wrote the N-2 clause out in six steps, mirroring the N-1 sibling: the embedding K=Frac(A) -> E=Frac(B); for a finite L/K, an embedding psi of L over K into an algebraic closure Omega of E (Mathlib leaf IsAlgClosed.lift via lem-weil-pbc-algebraic-extension-embeds-algebraically-closed); the compositum M of psi(L) and E in Omega is finite over E (Mathlib leaf lem-weil-pbc-compositum-degree-bound); psi maps the closure A_L of A in L into the closure B_M of B in M (same monic equation); B_M finite over B (B N-2) hence over A (lem-weil-pbc-finite-module-over-finite-algebra); A_L is isomorphic to an A-submodule of B_M, finite as A is Noetherian (lem-weil-pbc-noetherian-submodule-finite). Statement checked against the source and kept; stmt_deps unchanged. No new node: every fact used is an existing Mathlib leaf of unit sk-thm-p1 or a definition (def-weil-algebraic-closure of sec-nagata-compactification is a definition node, a notion). No sorry-free slopmaster2 declaration states the lemma (grep of WeilConjectures for the id, 032K, Japanese, Module.Finite ... integralClosure). No blueprint node states the lemma (blueprint_refs search 'N-2', '032K', 'Japanese', 'finite extension N-2', 'integral closure finite extension', 'Nagata ring', 'integral closure Noetherian domain finite'), same_as []. proof_origin agent because the source omits the proof.",
+  "blueprint": "Realizes, through the via chain (lem-weil-pbc-power-series-n2, last sentence of the proof of Algebra 032Q: 'Then Lemma lemma-finite-extension-N-2 shows that $R[[x]]$ is N-2'), the place of the blueprint node lem-weil-pbc-normal-constant-generic recorded in from.place: step 4 of its split (Lemma 59.73.13, Tag 09Z5, proof of (1)), within it the reduction 'In the case k[[X_1,...,X_d]] we reduce to the statement that a field is N-2 by Lemma lemma-power-series-over-N-2'. All six steps serve that one place."
+ }
 }
