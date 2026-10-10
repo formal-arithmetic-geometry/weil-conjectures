@@ -2229,3 +2229,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:18 L: returned deliver/M1/lem-sc-mayer-vietoris-ringed-space (reviewer RETURN: 1. E (wrong mathematics) / C4, step 1: applying the derived-functor long exact sequence on X to 0->F->j_{U,*}F|_U+j_{V,*)
 - 18:18 L: merged deliver/M1/def-weil-pbc-finite-torsors (reviewer PASS; first push; new nodes: 0)
 - 18:18 L: merged deliver/M1/lem-sc-topological-flasque-acyclic (reviewer PASS; first push; new nodes: 0)
+- 18:18 L: merged deliver/G1/lem-sc-finite-twisted-inverse-bounded-below (reviewer PASS; first push; new nodes: 1)
