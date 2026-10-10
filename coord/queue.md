@@ -1,8 +1,8 @@
 # Work queue
 
-933 items; claim with `tools/claim.py next <group> [--stage N]`.
+931 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (239)
+## Stage 1: nodes to split (237)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -23,7 +23,6 @@
 | `lem-pc-derived-qcoh-compact-generation` | 3015 | none |
 | `lem-pc-derived-qcoh-perfect-generation` | 3016 | none |
 | `lem-pc-ringed-spaces-derived-adjoint-general` | 3016 | none |
-| `lem-sc-coherent-pseudo-coherent` | 3016 | none |
 | `lem-sc-pseudo-coherent-rhom-qcoherent` | 3016 | none |
 | `lem-pc-perfect-object-compact` | 3017 | none |
 | `lem-pc-perfect-tensor-hom-duality` | 3017 | none |
@@ -77,7 +76,6 @@
 | `thm-sp-spectral-object-yields` | 6006 | none |
 | `pqf-def-coherent` | 6007 | none |
 | `pqf-def-cohomology` | 6007 | none |
-| `def-sp-homological-functor` | 6008 | none |
 | `pqf-lem-pushforward-qcoh` | 6008 | none |
 | `lem-sc-cech-spectral` | 6009 | sorry_here |
 | `pqf-lem-associated-sections-localize` | 6009 | none |
@@ -945,7 +943,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1371 nodes that wait for a statement dependency, 275 nodes that wait for stage 1.
+Not open yet: 1372 nodes that wait for a statement dependency, 273 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
