@@ -1,8 +1,8 @@
 # Work queue
 
-906 items; claim with `tools/claim.py next <group> [--stage N]`.
+907 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (262)
+## Stage 1: nodes to split (263)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -27,7 +27,6 @@
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 3015 | none |
 | `lem-sc-bounded-above-finite-free-hom-acyclic` | 3016 | none |
 | `lem-sc-bounded-below-injective-resolution` | 3016 | none |
-| `def-pc-compactly-generated` | 3017 | none |
 | `def-sc-perfect-closed-immersion` | 3017 | none |
 | `lem-pc-compact-generators-build-objects` | 3017 | none |
 | `lem-pc-compact-hom-hocolim` | 3017 | none |
@@ -41,13 +40,16 @@
 | `lem-sc-proper-flat-right-adjoint-affine-basechange` | 3018 | none |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 3018 | none |
 | `lem-pc-genus-agrees-sc` | 4007 | rests_on_sorry |
-| `lem-sc-mult-n-etale-kernel` | 4008 | rests_on_sorry |
 | `lem-sc-strict-henselization-dvr` | 4008 | none |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 4008 | none |
 | `prop-av-tate-rank` | 4008 | rests_on_sorry |
 | `cor-pc-sigma-pic-iso` | 4009 | rests_on_sorry |
 | `lem-pc-vanishing-above-dim` | 4009 | rests_on_sorry |
 | `lem-sc-finite-flat-surj-points` | 4009 | none |
+| `lem-sc-finite-flat-unramified-tangent-criterion` | 4009 | none |
+| `lem-sc-group-addition-tangent-differential` | 4009 | none |
+| `lem-sc-hom-etale-locus-translation` | 4009 | none |
+| `lem-sc-mult-n-tangent-differential` | 4009 | none |
 | `lem-sc-positive-ample-hilbert-degree` | 4009 | none |
 | `thm-pc-hilb-curves` | 4009 | rests_on_sorry |
 | `lem-pc-ideal-sheaf-comap-affine-extension` | 4010 | none |
@@ -71,7 +73,6 @@
 | `lem-pc-proper-support-perfect-direct-image` | 5011 | none |
 | `thm-pc-semicontinuity-base-change` | 5011 | sorry_here |
 | `lem-pc-kflat-resolution` | 5012 | none |
-| `lem-sp-page-induction` | 6001 | none |
 | `def-sp-convergence` | 6002 | none |
 | `lem-sp-couple-morphism` | 6002 | none |
 | `lem-sp-kinjective-computes` | 6002 | none |
@@ -918,7 +919,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 1342 nodes that wait for a statement dependency, 292 nodes that wait for stage 1.
+Not open yet: 1345 nodes that wait for a statement dependency, 293 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
