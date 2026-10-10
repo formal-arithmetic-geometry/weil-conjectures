@@ -81,6 +81,18 @@ theorem Hom.finite_residueField_of_isClosed (f : X.Hom (Spec (.of k))) [LocallyO
   rw [← f.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff] at this
   exact this
 
+/-- A closed point of a scheme locally of finite type over an algebraically closed field `K` is
+the image of a `K`-point: its residue field is finite over `K`, hence `K` itself. -/
+theorem Hom.exists_spec_base_eq_of_isClosed {K : Type u} [Field K] [IsAlgClosed K]
+    (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] (x : X) (hx : IsClosed {x}) :
+    ∃ s : Spec (.of K) ⟶ X, s.base (IsLocalRing.closedPoint K) = x := by
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have := f.finite_residueField_of_isClosed x hx
+  let φ : X.residueField x →ₐ[K] K := IsAlgClosed.lift
+  refine ⟨Spec.map (CommRingCat.ofHom φ.toRingHom) ≫ X.fromSpecResidueField x, ?_⟩
+  rw [Scheme.Hom.comp_apply]
+  exact X.fromSpecResidueField_apply x _
+
 /-- The embedding of the base field into the residue field of a point of `X` over `k`,
 for `X` mapping to a `k`-scheme `Y`, is the embedding into the residue field of the image
 point followed by the induced map of residue fields. -/
