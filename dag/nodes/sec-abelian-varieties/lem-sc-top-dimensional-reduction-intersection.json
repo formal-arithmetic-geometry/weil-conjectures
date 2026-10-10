@@ -11,22 +11,65 @@
  },
  "kind": "statement",
  "title": "Top-dimensional component reduction for intersection positivity",
- "statement": "Let $k$ be a field [def-weil-field], let $X$ be a nonempty proper $k$-scheme [def-weil-proper-morphism] of dimension $d$, and let $\\mathcal L$ be an ample invertible sheaf [def-sc-invertible-module] [def-sc-ample]. The top self-intersection number $(\\mathcal L^d\\cdot X)$ is the sum, with positive generic multiplicities, of the corresponding intersection numbers on the integral irreducible components of $X$ having dimension $d$ [def-pc-integral-scheme]. Consequently, positivity of those integral component numbers implies $(\\mathcal L^d\\cdot X)>0.",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a proper $k$-scheme [def-weil-proper-morphism], and let $i:Z\\hookrightarrow X$ be a nonempty closed subscheme [def-weil-closed-immersion] of dimension $d=\\dim Z$ [def-kun-topological-krull-dimension]. Let $Z_1,\\ldots,Z_r$ be the irreducible components of $Z$ of dimension $d$ [def-weil-irreducible-components], with their reduced induced integral closed-subscheme structures [def-pc-integral-scheme]. For each $j$, let $\\xi_j$ be the generic point of $Z_j$ [def-sc-generic-point] and put $m_j=\\mathrm{length}_{\\mathcal O_{Z,\\xi_j}}(\\mathcal O_{Z,\\xi_j})$ [def-weil-pbc-module-length]. For invertible $\\mathcal O_X$-modules $\\mathcal L_1,\\ldots,\\mathcal L_d$ [def-sc-invertible-module], the intersection number of [def-sc-intersection-number] satisfies $(\\mathcal L_1\\cdots\\mathcal L_d\\cdot Z)=\\sum_{j=1}^r m_j(\\mathcal L_1\\cdots\\mathcal L_d\\cdot Z_j)$. Each $m_j$ is positive. In particular, when all $\\mathcal L_i=\\mathcal L$ is ample [def-sc-ample], positivity of the numbers $(\\mathcal L^d\\cdot Z_j)$ implies $(\\mathcal L^d\\cdot Z)>0.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Tag 0BES (varieties reduction to top-dimensional components with multiplicities), used in the proof of Tag 0BEV"
  },
  "stmt_deps": [
-  "def-sc-intersection-number"
+  "def-sc-intersection-number",
+  "def-sc-ample",
+  "def-sc-invertible-module",
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-pc-integral-scheme",
+  "def-sc-generic-point",
+  "def-weil-pbc-module-length",
+  "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-numerical-polynomial-leading-term] to the coherent $\\mathcal O_X$-module $\\mathcal F=i_*\\mathcal O_Z$ and $\\mathcal L_1,\\ldots,\\mathcal L_d$ (so $r=d$): $\\operatorname{Supp}(i_*\\mathcal O_Z)=Z$ has dimension $d$, its $d$-dimensional irreducible components are the $Z_j$ with generic points $\\xi_j$, and $\\mathcal F_{\\xi_j}=\\mathcal O_{Z,\\xi_j}$, whose length over $\\mathcal O_{X,\\xi_j}$ equals its length over the quotient ring $\\mathcal O_{Z,\\xi_j}$ [def-weil-pbc-module-length], i.e. equals $m_j$. Hence $\\chi(X,i_*\\mathcal O_Z\\otimes\\mathcal L_1^{\\otimes n_1}\\otimes\\cdots\\otimes\\mathcal L_d^{\\otimes n_d})-\\sum_j m_j\\chi(X,i_{j*}\\mathcal O_{Z_j}\\otimes\\mathcal L_1^{\\otimes n_1}\\otimes\\cdots\\otimes\\mathcal L_d^{\\otimes n_d})$ is a numerical polynomial of total degree $<d$, so its coefficient of the degree-$d$ monomial $n_1\\cdots n_d$ is $0$. Each $Z_j$ is a nonempty closed subscheme of $X$ of dimension $d$, so by [def-sc-intersection-number] the coefficients of $n_1\\cdots n_d$ in the two $\\chi$-polynomials are $(\\mathcal L_1\\cdots\\mathcal L_d\\cdot Z)$ and $(\\mathcal L_1\\cdots\\mathcal L_d\\cdot Z_j)$; comparing coefficients gives the displayed equality.",
+   "uses": [
+    "lem-sc-numerical-polynomial-leading-term",
+    "def-sc-intersection-number",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BES proof"
+   }
+  },
+  {
+   "text": "By [lem-sc-numerical-polynomial-leading-term] each $m_j$ is a positive integer. Therefore, if every $(\\mathcal L^d\\cdot Z_j)$ is positive, the finite weighted sum $\\sum_j m_j(\\mathcal L^d\\cdot Z_j)=(\\mathcal L^d\\cdot Z)$ of step 1 is positive (with $r\\ge1$ since $Z$ is nonempty of dimension $d$).",
+   "uses": [
+    "lem-sc-numerical-polynomial-leading-term"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BES statement and its use in Tag 0BEV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-numerical-polynomial-leading-term",
+  "def-sc-intersection-number",
+  "def-weil-pbc-module-length"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BES used in Tag 0BEV"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "top dimensional irreducible components with multiplicities reduce positivity of intersection number to an integral proper scheme",
-   "results": "irreducibleSpace_of_isIntegral and related topology declarations; no intersection-theory theorem",
+   "results": "AlgebraicGeometry.QuasiSeparated and zeroLocus declarations; no intersection-number component formula",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -53,12 +96,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-positive-ample-hilbert-degree",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-isogeny"
+ "unit": "sk-prop-av-isogeny",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-top-dimensional-reduction-intersection",
+  "worker": "stage1",
+  "summary": "Tag 0BES is the item itself, so no child node is created. The proof writes the source's direct leading-coefficient argument and the positive weighted-sum consequence as two elementary steps.",
+  "blueprint": "The two proof steps realize the blueprint clause reduction to an integral scheme using top-dimensional components with multiplicities in ancestor lem-sc-mult-n-finite-flat.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tdr2356",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tdr2356 (reviewer sub-agent of L); spot-checked: Read packet, Tag 0BES/0BEN source, def-sc-intersection-number (Z nonempty, d=dim Z; hypotheses met for Z and each Z_j), lem-sc-snapper-numerical-polynomial, lem-pc-euler-additive, lem-sc-hilbert-embedded-points; no existing node states 0BEN (grep). FIX more, RETURN less: (1) C1: step 1 was marked elementary with uses [] but rests on Tag 0BEN (leading term of chi via lengths at generic points of top-dim components, a devissage proof), missed by the second reading; added statement-only node lem-sc-numerical-polynomial-leading-term (unsplit, one LeanFinder search, no match), stated with pushforwards to match def-sc-intersection-number and including positivity of m_i; step 1 rewritten to apply it to i_*O_Z, identify lengths over O_{X,xi} and O_{Z,xi}, and compare n_1...n_d coefficients via def-sc-intersection-number; (2) C1: step 2 finiteness/positivity of m_j now cited from the new node; (3) B3: 'dimension d' now cites def-kun-topological-krull-dimension; proof_deps filled. Statement change (exact 0BES formula instead of self-intersection sum) is named in the report (E7) and agrees with the source; restates nothing (class b none).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
