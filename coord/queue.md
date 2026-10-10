@@ -1,6 +1,6 @@
 # Work queue
 
-891 items; claim with `tools/claim.py next <group> [--stage N]`.
+892 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (123)
 
@@ -55,11 +55,11 @@
 | `lem-sc-picard-product-open` | 6012 | none |
 | `lem-sc-proper-flat-global-sections` | 6012 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
-| `lem-pod-lisse-tensor-and-scalar-extension` | - | none |
 | `lem-sc-base-change-curve` | - | none |
 | `thm-sc-constant-invariance` | - | none |
 | `lem-pc-coherent-hi` | - | sorry_here |
 | `lem-pod-adic-tower-reconstruction` | - | none |
+| `lem-pod-etale-stalk-tensor-scalar` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-weil-pbc-generic-separable-algebra-splitting` | - | none |
 | `lem-weil-pbc-pullback-finite-locally-constant` | - | none |
@@ -130,7 +130,7 @@
 | `lem-zl-noether-normalization-dimension` | - | none |
 | `lem-pur-rhom-global-sections` | - | none |
 
-## Stage 2: nodes to state (768)
+## Stage 2: nodes to state (769)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -279,6 +279,7 @@
 | `lem-pc-zero-scheme-recd` | 1 | state |
 | `lem-pc-zero-scheme-zero-iff` | 1 | state |
 | `lem-pod-equivalence-induces-module-objects` | 1 | state |
+| `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pqf-finite-spectrum-maximal-primes` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
