@@ -3,24 +3,54 @@
  "blueprint": {
   "is": "def-weil-pbc-finite-torsors",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Finite torsors",
- "statement": "For a finite abelian group $M$, an $M$-torsor on $Y_{\\Et}$ is a finite locally\nconstant sheaf $P$ with an $M$-action such that $M\\times P\\to P\\times_YP$ is\nan isomorphism. Write\n\n$$\n \\operatorname{Tor}^1(Y,M)\n$$\n\nfor the pointed set of isomorphism classes of $M$-torsors on $Y_{\\Et}$.",
+ "statement": "For a finite abelian group $M$ and a scheme $Y$, let $\\underline M_Y$ be the constant sheaf on the small etale site $Y_{\\Et}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. An $M$-torsor on $Y_{\\Et}$ is a finite locally constant sheaf of sets $P$ equipped with an action of $\\underline M_Y$ such that the map\n\n$$\n\\underline M_Y\\times P\\longrightarrow P\\times P,\\qquad (m,p)\\longmapsto(m+p,p),\n$$\n\nis an isomorphism of sheaves, and such that every object $U$ of $Y_{\\Et}$ has an etale covering $\\{U_i\\to U\\}$ for which $P(U_i)$ is nonempty. Write $\\operatorname{Tor}^1(Y,M)$ for the pointed set of isomorphism classes of $M$-torsors on $Y_{\\Et}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-finite-etale-points/def-weil-pbc-finite-torsors.md",
   "place": "node def-weil-pbc-finite-torsors, order 582"
  },
  "stmt_deps": [
+  "def-weil-pbc-etale-site",
   "def-weil-pbc-etale-sheaves"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite locally constant sheaf torsor local sections simply transitive action",
+   "results": "CompHausLike.LocallyConstant.presheaf_ext; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier; CompHausLike.LocallyConstant.counitAppAppImage; CompHausLike.LocallyConstantModule.functor; CompHausLike.LocallyConstant.functor; CompHausLike.LocallyConstantModule.functor_obj_val; CompHausLike.LocallyConstant.functor_obj_val; CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Torsor, IsTorsor, FiniteLocallyConstant",
+   "results": "none; unknown identifier IsTorsor",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite locally constant torsor (Mathlib)",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite locally constant sheaf torsor on an etale site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -45,5 +75,20 @@
  },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-finite-etale-points",
- "lead_note": "2026-10-10 L: too weak as stated (found by the worker of thm-galois-lc-etale): an M-torsor must also have sections locally (Stacks 03AH), otherwise the empty sheaf is a torsor; thm-galois-lc-etale reads it with that condition (as def-sc-gm-torsor). To be corrected at its split."
+ "lead_note": "2026-10-10 L: too weak as stated (found by the worker of thm-galois-lc-etale): an M-torsor must also have sections locally (Stacks 03AH), otherwise the empty sheaf is a torsor; thm-galois-lc-etale reads it with that condition (as def-sc-gm-torsor). To be corrected at its split.",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-weil-pbc-finite-torsors",
+  "worker": "stage1",
+  "summary": "Corrected the imported definition using Stacks Definition 03AH by adding the required local nonemptiness clause and making the site, action, and torsor isomorphism explicit. The item is a definition and has no subordinate proof nodes.",
+  "blueprint": "Realizes the complete definition in blueprint node def-weil-pbc-finite-torsors; the imported statement was corrected to include local sections."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-dft1817",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dft1817 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 03AH: constant-sheaf action, M_Y x P -> P x P iso, local nonemptiness (empty sheaf excluded); finite-locally-constant clause redundant but harmless, defined in def-weil-pbc-etale-sheaves (lisse). No H^1 = torsors identification claimed, so no lem-sc-torsor-h1 citation needed. No new nodes; class (b): the item is a pre-existing imported node, consistent with def-constructible-torsor (non-commutative G) and def-sc-gm-torsor general clause (abelian G), of which it is the case G = M_Y. B10: slopmaster2 CategoryTheory.Sheaf.Torsor (Sites/Torsor.lean:80) is the general-site abelian torsor (states def-sc-gm-torsor), not this statement exactly (needs G := constant sheaf on Y_et, no finiteness clause); Scheme.EtaleTorsor (Morphisms/EtaleTorsor.lean:112) is the scheme-level finite etale form, not the sheaf-level statement; no attachment. Second reading by M1: no fault missed."
+ }
 }

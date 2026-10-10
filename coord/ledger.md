@@ -2227,3 +2227,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:17 L: merged deliver/C1/lem-pc-smooth-characterization (reviewer PASS; first push; new nodes: 0)
 - 18:17 L: merged deliver/J1/lem-sc-open-curve-etale-leray-low-degree (reviewer PASS; first push; new nodes: 0)
 - 18:18 L: returned deliver/M1/lem-sc-mayer-vietoris-ringed-space (reviewer RETURN: 1. E (wrong mathematics) / C4, step 1: applying the derived-functor long exact sequence on X to 0->F->j_{U,*}F|_U+j_{V,*)
+- 18:18 L: merged deliver/M1/def-weil-pbc-finite-torsors (reviewer PASS; first push; new nodes: 0)
