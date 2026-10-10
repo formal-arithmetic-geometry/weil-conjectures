@@ -2822,3 +2822,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 22:27 UTC L matched def-pc-subfunctor to Mathlib CategoryTheory.Subfunctor (R-sub2834); K1 delivery returned as unneeded
 - 22:27 L: merged deliver/G1/lem-sc-affine-support-iterated-cones (reviewer FIX; first push; new nodes: 0)
 - 22:27 L: merged deliver/H1/lem-sc-ass-weakass-locally-noetherian (reviewer FIX; first push; new nodes: 2)
+- 22:27 L: merged deliver/M1/def-pc-fppf-site (reviewer FIX; first push; new nodes: 0)
