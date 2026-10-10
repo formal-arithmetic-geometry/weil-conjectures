@@ -13,20 +13,75 @@
  },
  "kind": "statement",
  "title": "The tensor-formula pullback of modules is left adjoint to pushforward",
- "statement": "Let $g:X\\to Y$ be a morphism of schemes [def-pc-scheme] with ring map $g^\\sharp:\\mathcal O_Y\\to g_*\\mathcal O_X$. For a sheaf of $\\mathcal O_Y$-modules $\\mathcal G$ [def-weil-sheaf-of-modules-category], its inverse image sheaf $g^{-1}\\mathcal G$ [def-weil-pbc-topological-inverse-image] has the $g^{-1}\\mathcal O_Y$-module structure induced from the action on $\\mathcal G$. Set $P_g\\mathcal G=\\mathcal O_X\\otimes_{g^{-1}\\mathcal O_Y}g^{-1}\\mathcal G$ using the sheaf tensor product and change of rings [def-pur-sheaf-tensor-product]. The assignment $P_g$ extends to a functor on module sheaves, acting on a morphism $u:\\mathcal G\\to\\mathcal G'$ by $\\mathrm{id}_{\\mathcal O_X}\\otimes g^{-1}u$. For a sheaf of $\\mathcal O_X$-modules $\\mathcal F$, define $g_*\\mathcal F$ on opens $V\\subseteq Y$ by $(g_*\\mathcal F)(V)=\\mathcal F(g^{-1}V)$, with its $\\mathcal O_Y(V)$-action restricted along $g^\\sharp_V$. Then the natural map $\\operatorname{Hom}_{\\mathcal O_X}(P_g\\mathcal G,\\mathcal F)\\to\\operatorname{Hom}_{\\mathcal O_Y}(\\mathcal G,g_*\\mathcal F)$ obtained by tensor/restriction of scalars and inverse-image/direct-image adjunction is a bijection, natural in both modules. Consequently $P_g$ is left adjoint to $g_*$.",
+ "statement": "Let $g:X\\to Y$ be a morphism of schemes [def-pc-scheme], viewed as a morphism of locally ringed spaces [def-weil-locally-ringed-space-morphism] with ring map $g^\\sharp:\\mathcal O_Y\\to g_*\\mathcal O_X$. For a sheaf of $\\mathcal O_Y$-modules $\\mathcal G$ [def-weil-sheaf-of-modules-category], its inverse image sheaf $g^{-1}\\mathcal G$ [def-weil-pbc-topological-inverse-image] has the $g^{-1}\\mathcal O_Y$-module structure induced from the action on $\\mathcal G$. Set $P_g\\mathcal G=\\mathcal O_X\\otimes_{g^{-1}\\mathcal O_Y}g^{-1}\\mathcal G$ using the sheaf tensor product and change of rings [def-pur-sheaf-tensor-product]. The assignment $P_g$ extends to a functor on module sheaves, acting on a morphism $u:\\mathcal G\\to\\mathcal G'$ by $\\mathrm{id}_{\\mathcal O_X}\\otimes g^{-1}u$. For a sheaf of $\\mathcal O_X$-modules $\\mathcal F$, define $g_*\\mathcal F$ on opens $V\\subseteq Y$ by $(g_*\\mathcal F)(V)=\\mathcal F(g^{-1}V)$, with its $\\mathcal O_Y(V)$-action restricted along $g^\\sharp_V$. Then the natural map $\\operatorname{Hom}_{\\mathcal O_X}(P_g\\mathcal G,\\mathcal F)\\to\\operatorname{Hom}_{\\mathcal O_Y}(\\mathcal G,g_*\\mathcal F)$ obtained by tensor/restriction of scalars and inverse-image/direct-image adjunction is a bijection, natural in both modules. Consequently $P_g$ is left adjoint to $g_*$.",
  "source": {
   "document": "literature/stacks-project/sheaves.tex",
   "place": "Tag 008X, lemma-pullback-module (line 2896), for the inverse-image module structure; Tag 0095, definition-pushforward (lines 3116-3152), for the two functors; Tag 0096, lemma-adjoint-pullback-pushforward-modules (lines 3156-3187), using lemma-adjointness-tensor-restrict (line 1916) and lemma-adjoint-push-pull-modules (line 2933)"
  },
  "stmt_deps": [
   "def-pc-scheme",
+  "def-weil-locally-ringed-space-morphism",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-topological-inverse-image",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\rho:g^{-1}\\mathcal O_Y\\to\\mathcal O_X$ for the adjoint of $g^\\sharp$ [def-weil-locally-ringed-space-morphism, def-weil-pbc-topological-inverse-image], and let $\\mathcal F_0=\\operatorname{Res}_{\\rho}\\mathcal F$, the sheaf $\\mathcal F$ viewed as a $g^{-1}\\mathcal O_Y$-module. The inverse image $g^{-1}\\mathcal G$ has its $g^{-1}\\mathcal O_Y$-action by [lem-pc-module-inverse-image-adjunction]. By the formula defining $P_g$ and the change-of-rings adjunction [lem-pc-module-change-of-rings-adjunction] (with $\\mathcal A=g^{-1}\\mathcal O_Y$, $\\mathcal B=\\mathcal O_X$, $\\mathcal M=g^{-1}\\mathcal G$, $\\mathcal N=\\mathcal F$), there is a natural bijection $\\operatorname{Hom}_{\\mathcal O_X}(P_g\\mathcal G,\\mathcal F)\\cong\\operatorname{Hom}_{g^{-1}\\mathcal O_Y}(g^{-1}\\mathcal G,\\mathcal F_0)$. On a map $u$ it sends a local section $m$ to $u(1\\otimes m)$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-topological-inverse-image",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-module-inverse-image-adjunction",
+    "lem-pc-module-change-of-rings-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0096, lemma-adjoint-pullback-pushforward-modules, proof: first equality; Tag 008A, lemma-adjointness-tensor-restrict"
+   }
+  },
+  {
+   "text": "Apply the natural inverse-image/direct-image module adjunction [lem-pc-module-inverse-image-adjunction] with $f=g$, $\\mathcal A=\\mathcal O_Y$, $\\mathcal M=\\mathcal G$, and $\\mathcal N=\\mathcal F_0$. This gives $\\operatorname{Hom}_{g^{-1}\\mathcal O_Y}(g^{-1}\\mathcal G,\\mathcal F_0)\\cong\\operatorname{Hom}_{\\mathcal O_Y}(\\mathcal G,g_*\\mathcal F_0)$, where the $\\mathcal O_Y$-action on $g_*\\mathcal F_0$ is through $\\eta_{\\mathcal O_Y}:\\mathcal O_Y\\to g_*g^{-1}\\mathcal O_Y$.",
+   "uses": [
+    "lem-pc-module-inverse-image-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0096, lemma-adjoint-pullback-pushforward-modules, proof: second equality; Tag 008Y, lemma-adjoint-push-pull-modules"
+   }
+  },
+  {
+   "text": "For every open $V\\subseteq Y$, $g_*\\mathcal F_0(V)=\\mathcal F(g^{-1}V)$ as abelian groups [def-weil-pbc-topological-inverse-image]. Its $\\mathcal O_Y(V)$-action from step 2 sends $a\\in\\mathcal O_Y(V)$ and $s\\in\\mathcal F(g^{-1}V)$ to $\\rho_{g^{-1}V}(\\eta_{\\mathcal O_Y,V}(a))s$. Since $\\rho$ is adjoint to $g^\\sharp$, $\\rho_{g^{-1}V}\\circ\\eta_{\\mathcal O_Y,V}=g^\\sharp_V$ [def-weil-locally-ringed-space-morphism, def-weil-pbc-topological-inverse-image]; thus the action is exactly $g^\\sharp_V(a)s$, the action defining $g_*\\mathcal F$ in the statement. The identity of section groups is therefore an isomorphism of $\\mathcal O_Y$-modules $g_*\\mathcal F_0=g_*\\mathcal F$. Compose this identification with the two bijections from steps 1 and 2. Each is natural in both module variables by the cited statements, and the identification is natural in $\\mathcal F$ by its sectionwise formula. Their composite is the asserted natural Hom bijection, hence the adjunction $P_g\\dashv g_*$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-topological-inverse-image",
+    "lem-pc-module-change-of-rings-adjunction",
+    "lem-pc-module-inverse-image-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0095, definition-pushforward, first clause (the O_Y-action); Tag 0096, lemma-adjoint-pullback-pushforward-modules, proof and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-locally-ringed-space-morphism",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-inverse-image-adjunction",
+  "lem-pc-module-change-of-rings-adjunction",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0096, lemma-adjoint-pullback-pushforward-modules, using Tags 008A and 008Y"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,7 +111,7 @@
   "file": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
   "reason": "Its pullback is the abstract left adjoint; identifying it with the tensor-formula functor requires this statement's comparison."
  },
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -76,5 +131,19 @@
   }
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-def-av-jacobian"
+ "unit": "sk-def-av-jacobian",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-pc-module-pullback-adjunction",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0096 against the tensor-formula statement. Split its proof into the sheaf change-of-rings adjunction (008A), the inverse-image/direct-image adjunction for module sheaves (008Y), and the explicit calculation identifying the composite pushforward action with restriction along g-sharp. The two source lemmas are new unsplit children; no exact sorry-free source declaration or Mathlib theorem states the tensor-formula adjunction.",
+  "blueprint": "The lemma serves the module base-change clause in the statement of def-pc-base-change, 'F_{T'} = g_X^* F'. Its three steps justify the adjunction claimed for that pullback by the proof of Stacks 0096; the blueprint node has no proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 0096 as the composite of the inverse-image adjunction (008A) and the change-of-rings adjunction; 2 new nodes"
+ }
 }

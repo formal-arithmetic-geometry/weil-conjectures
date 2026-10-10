@@ -1,0 +1,35 @@
+{
+ "id": "lem-pc-module-change-of-rings-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "statement, module base-change clause: 'the base change of a module F on X_T is F_{T'} = g_X^* F'; the change-of-rings step in the adjunction for that pullback",
+   "via": ["lem-pc-module-pullback-adjunction", "def-pc-module-pullback"]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Change of rings for sheaves of modules is left adjoint to restriction",
+ "statement": "Let $X$ be a topological space, let $a:\\mathcal A\\to\\mathcal B$ be a morphism of sheaves of commutative rings on $X$, let $\\mathcal M$ be a sheaf of $\\mathcal A$-modules, and let $\\mathcal N$ be a sheaf of $\\mathcal B$-modules [def-weil-sheaf-of-modules-category]. Write $\\operatorname{Res}_a\\mathcal N$ for $\\mathcal N$ as an $\\mathcal A$-module through $a$, and $\\mathcal B\\otimes_{\\mathcal A}\\mathcal M$ for the sheafified sectionwise tensor product with its $\\mathcal B$-module structure [def-pur-sheaf-tensor-product]. The correspondence sending a $\\mathcal B$-linear map $u:\\mathcal B\\otimes_{\\mathcal A}\\mathcal M\\to\\mathcal N$ to $m\\mapsto u(1\\otimes m)$ gives a bijection $\\operatorname{Hom}_{\\mathcal B}(\\mathcal B\\otimes_{\\mathcal A}\\mathcal M,\\mathcal N)\\cong\\operatorname{Hom}_{\\mathcal A}(\\mathcal M,\\operatorname{Res}_a\\mathcal N)$, natural in both modules.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008A, lemma-adjointness-tensor-restrict (line 1916), including its proof by the presheaf tensor adjunction and sheafification"
+ },
+ "stmt_deps": ["def-weil-sheaf-of-modules-category", "def-pur-sheaf-tensor-product"],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {"tool": "leansearch", "query": "extension of scalars of sheaves of modules tensor product left adjoint to restriction of scalars", "results": "ModuleCat.extendRestrictScalarsAdj (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings), for modules over individual rings; no sheafified tensor-formula adjunction", "date": "2026-10-10", "verdict": "no exact match"},
+  {"tool": "loogle", "query": "ModuleCat.extendRestrictScalarsAdj; SheafOfModules.restrictScalars", "results": "ModuleCat.extendRestrictScalarsAdj (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings); SheafOfModules.restrictScalars (Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings)", "date": "2026-10-10", "verdict": "no exact match: the first is for one ring map, and the latter supplies only restriction"},
+  {"tool": "grep", "query": "rg -n 'extendRestrictScalarsAdj|def restrictScalars|def pullback|def adjunction' /tmp/mathlib-f1/Mathlib/Algebra/Category/ModuleCat/{ChangeOfRings,Sheaf/ChangeOfRings,Sheaf/PullbackContinuous}.lean", "results": "ChangeOfRings.lean:880 gives the single-ring adjunction; Sheaf/ChangeOfRings.lean:35 gives sheaf restriction; Sheaf/PullbackContinuous.lean:53,60 gives an abstract left adjoint, with no sheafified tensor formula", "date": "2026-10-10", "verdict": "no exact match"}
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {"by": "worker", "item": "lem-pc-module-pullback-adjunction", "date": "2026-10-10"},
+ "lean_audit": {"master": {"state": "none"}, "slopmaster2": {"state": "none"}},
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian"
+}

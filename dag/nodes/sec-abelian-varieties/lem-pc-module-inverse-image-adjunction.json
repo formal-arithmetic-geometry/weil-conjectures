@@ -1,0 +1,35 @@
+{
+ "id": "lem-pc-module-inverse-image-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-base-change",
+   "place": "statement, module base-change clause: 'the base change of a module F on X_T is F_{T'} = g_X^* F'; the inverse-image/direct-image step in the adjunction for that pullback",
+   "via": ["lem-pc-module-pullback-adjunction", "def-pc-module-pullback"]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Inverse image of module sheaves is left adjoint to direct image",
+ "statement": "Let $f:X\\to Y$ be a continuous map of topological spaces, $\\mathcal A$ a sheaf of commutative rings on $Y$, $\\mathcal M$ a sheaf of $\\mathcal A$-modules, and $\\mathcal N$ a sheaf of $f^{-1}\\mathcal A$-modules on $X$ [def-weil-sheaf-of-modules-category]. The inverse-image sheaf $f^{-1}\\mathcal M$ [def-weil-pbc-topological-inverse-image] is an $f^{-1}\\mathcal A$-module by the inverse image of the action on $\\mathcal M$. The direct-image sheaf $f_*\\mathcal N$, whose sections over $V\\subseteq Y$ are $\\mathcal N(f^{-1}V)$, is an $\\mathcal A$-module through the unit $\\eta_{\\mathcal A}:\\mathcal A\\to f_*f^{-1}\\mathcal A$. The inverse-image/direct-image adjunction for abelian sheaves restricts to a natural bijection $\\operatorname{Hom}_{f^{-1}\\mathcal A}(f^{-1}\\mathcal M,\\mathcal N)\\cong\\operatorname{Hom}_{\\mathcal A}(\\mathcal M,f_*\\mathcal N)$.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008Y, lemma-adjoint-push-pull-modules (line 2933), with Tag 008X, lemma-pullback-module (line 2896), for the inverse-image module structure"
+ },
+ "stmt_deps": ["def-weil-sheaf-of-modules-category", "def-weil-pbc-topological-inverse-image"],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {"tool": "leansearch", "query": "inverse image of sheaf modules adjoint to direct image along continuous map", "results": "SheafOfModules.PullbackConstruction.adjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), an adjunction for an abstract presheaf pullback followed by sheafification", "date": "2026-10-10", "verdict": "no exact match for the stated inverse-image module structure"},
+  {"tool": "loogle", "query": "SheafOfModules.pullbackPushforwardAdjunction", "results": "SheafOfModules.pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), whose pullback is defined as a left adjoint rather than as inverse image of modules", "date": "2026-10-10", "verdict": "no exact match"},
+  {"tool": "grep", "query": "rg -n 'def pullback|def adjunction|pullbackPushforwardAdjunction' /tmp/mathlib-f1/Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; rg -n 'def restrictScalars' /tmp/mathlib-f1/Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean", "results": "PullbackContinuous.lean:53 defines pullback as an abstract left adjoint, :60 gives its adjunction, and :79 gives a sheafification-based construction; ChangeOfRings.lean:35 gives restriction, but none identifies inverse image with its induced module action", "date": "2026-10-10", "verdict": "no exact match"}
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {"by": "worker", "item": "lem-pc-module-pullback-adjunction", "date": "2026-10-10"},
+ "lean_audit": {"master": {"state": "none"}, "slopmaster2": {"state": "none"}},
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-jacobian"
+}
