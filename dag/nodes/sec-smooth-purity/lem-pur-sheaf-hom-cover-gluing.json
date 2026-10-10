@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Gluing O-linear maps on one covering family",
- "statement": "Let C be a site [def-weil-sheaf-of-modules-category], O a sheaf of commutative rings, and F,G sheaves of O-modules [def-weil-sheaf-of-modules-category]. Given an object U and a covering family {U_i\\to U}, every family of O|_{U_i}-linear morphisms φ_i:F|_{U_i}\\to G|_{U_i} that agrees after restriction to U_i\\times_U U_j glues to a unique O|_U-linear morphism φ:F|_U\\to G|_U.",
+ "statement": "Let C be a site with the fiber products U_i\\times_U U_j and V\\times_U U_i used below [def-weil-sheaf-of-modules-category], O a sheaf of commutative rings, and F,G sheaves of O-modules [def-weil-sheaf-of-modules-category]. Given an object U and a covering family {U_i\\to U}, every family of O|_{U_i}-linear morphisms φ_i:F|_{U_i}\\to G|_{U_i} that agrees after restriction to U_i\\times_U U_j glues to a unique O|_U-linear morphism φ:F|_U\\to G|_U.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Lemma 03EM (sites-modules-lemma-internal-hom), via Sites Lemma 04TQ"
@@ -23,14 +23,56 @@
   "def-pur-localized-ringed-site",
   "def-pur-sheaf-modules-hom-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the localized site C/U. For each object V/U, the site base-change axiom makes {V×_U U_i→V} a covering. For x∈F(V), the local maps give sections φ_i(x|_{V×_U U_i}) of G on these members. On (V×_U U_i)×_V(V×_U U_j)=V×_U(U_i×_U U_j) the two sections agree because the restrictions of φ_i and φ_j agree on U_i×_U U_j. The sheaf equalizer axiom for the underlying sheaf of abelian groups G therefore gives a unique section φ_V(x)∈G(V) restricting to all these sections. Applying the same uniqueness to sums and to restrictions shows additivity and naturality, so the φ_V form a morphism of sheaves of abelian groups F|_U→G|_U.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EM (sites-modules-lemma-internal-hom), via Sites Lemma 04TQ (sites-lemma-glue-maps)"
+   }
+  },
+  {
+   "text": "The glued morphism restricts to φ_i: on U_i the two maps have the same restrictions on the pulled-back covering family, so uniqueness in the sheaf axiom identifies them. If another morphism has the same restrictions, its value on every section x∈F(V) has the same restrictions on the covering V×_U U_i→V and hence equals φ_V(x); thus the glued morphism is unique.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EM (sites-modules-lemma-internal-hom), using Sites Lemma 04TQ"
+   }
+  },
+  {
+   "text": "The glued map is O|_U-linear. For a∈O(V) and x∈F(V), on every member V×_U U_i of the covering its value is φ_i(a x)=a|_{V×_U U_i} φ_i(x), since each φ_i is O|_{U_i}-linear and scalar multiplication restricts sectionwise. The sheaf uniqueness assertion then gives φ_V(a x)=a φ_V(x). Hence φ is a morphism of sheaves of O|_U-modules, as required.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EM (sites-modules-lemma-internal-hom), proof after reduction to Sites Lemma 04TQ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03EM, using Sites Lemma 04TQ"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "internal Hom presheaf of sheaves of modules satisfies sheaf condition",
-   "results": "CategoryTheory.sheafHom and Presheaf.IsSheaf.hom are Type-valued; no O-linear module gluing theorem",
+   "query": "internal Hom sheaf of modules compatible local linear maps glue uniquely",
+   "results": "SheafOfModules.unitHomEquiv and related declarations; these concern maps from the unit sheaf, not gluing compatible local O-linear maps",
    "date": "2026-10-11",
    "verdict": "no match"
   },
@@ -43,26 +85,42 @@
   },
   {
    "tool": "grep",
-   "query": "homObj|IsSheaf.*hom|sections.*Hom",
+   "query": "glue.*map|IsSheaf.*hom|sections.*Hom (Mathlib/CategoryTheory/Sites)",
    "results": "none",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "global sections internal Hom linear over ring sections",
+   "query": "compatible local O-linear maps of sheaves glue uniquely",
    "results": "service unavailable",
    "date": "2026-10-11",
    "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-sheaf-hom-is-sheaf",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-sheaf-hom-cover-gluing",
+  "worker": "stage1",
+  "summary": "Split the compatible O-linear map gluing assertion into sectionwise sheaf gluing, restriction and uniqueness, and local O-linearity; no auxiliary node is needed.",
+  "blueprint": "Realizes the internal-Hom sheaf clause of def-coefficient-twists-detailed restricted to one covering family: the three steps expand the Sites 04TQ gluing argument used by Lemma 03EM.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-shg2650",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shg2650 (reviewer sub-agent of L); spot-checked: Read whole packet; Mathlib SheafHom.lean presheafHom_isSheafFor/sheafHom is for Sheaf J A, not sheaves of O-modules, so no single-declaration leaf; DAG: lem-pur-sheaf-hom-is-sheaf cites this item (no cycle, item's proof_deps are definitions only), def-pur-sheaf-hom is a definition, no duplicate. Steps 1-3 are the Sites 04TQ sectionwise argument plus local O-linearity (E ok), statement matches the citer lem-pur-sheaf-hom-is-sheaf step 2 (C4 ok). FIX more, RETURN less: Step 1 was flagged elementary:false while citing only definitions (C1) - it is the complete 04TQ sheaf-equalizer argument, set elementary:true with its tag; made the overlap identification (V×_U U_i)×_V(V×_U U_j)=V×_U(U_i×_U U_j) explicit.; 1 file(s) fixed by the reviewer"
+ }
 }

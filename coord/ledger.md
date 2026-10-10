@@ -2707,3 +2707,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 21:40 L: returned deliver/H1/lem-pc-perfect-rhom-tensor-comparison (reviewer RETURN: R-prt2638 (head d8cfff5ef). 1. E/D: Step 2 obtains the global zig-zag identities by gluing, claiming 'equality of these )
 - 21:41 L: merged deliver/C1/lem-weil-pbc-constructible-subobjects-noetherian (reviewer FIX; first push; new nodes: 1)
 - 21:41 L: returned deliver/J1/lem-sc-affine-perfect-support-extension (reviewer RETURN: 1. E (false new statement) lem-sc-affine-support-iterated-cones: with E|_U = F+F[1], each cone of a map that is zero on )
+- 21:42 L: merged deliver/J1/lem-pur-sheaf-hom-cover-gluing (reviewer FIX; first push; new nodes: 0)
