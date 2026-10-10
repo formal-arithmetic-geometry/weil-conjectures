@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-lqf-restriction-to-opens",
+ "kind": "statement",
+ "title": "Restriction of a locally quasi-finite morphism to open subschemes is locally quasi-finite (Stacks 01TH (4))",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] which is locally quasi-finite [pqf-def-quasifinite]. Let $U\\subseteq X$ and $V\\subseteq S$ be open subschemes with $f(U)\\subseteq V$, with inclusions $\\iota_U:U\\to X$, $\\iota_V:V\\to S$ (open immersions [def-weil-open-immersion]), and let $f|_U:U\\to V$ be the unique morphism with $\\iota_V\\circ f|_U=f\\circ\\iota_U$. Then $f|_U:U\\to V$ is locally quasi-finite. (Stacks Project, Morphisms, Lemma Tag 01TH, part (4): quasi-finiteness at a point may be checked on any pair of affine opens $\\operatorname{Spec}A\\subseteq X$, $\\operatorname{Spec}R\\subseteq S$ with $f(\\operatorname{Spec}A)\\subseteq\\operatorname{Spec}R$ containing the point; this is the 'local nature of local quasi-finiteness' invoked in the proof of Morphisms, Lemma Tag 03JA.)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 01TH (lemma-quasi-finite-at-point-characterize), line 3664, part (4) and its proof; Definition Tag 01TD (definition-quasi-finite), line 3538; as invoked in the proof of Lemma Tag 03JA, line 15495"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-quasifinite",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of a locally quasi-finite morphism to open subschemes is locally quasi-finite",
+   "results": "instLocallyQuasiFiniteMorphismRestrict, instLocallyQuasiFiniteResLE (Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite), IsLocalAtSource.resLE, morphismRestrict, instLocallyOfFinitePresentationMorphismRestrict",
+   "date": "2026-10-10",
+   "verdict": "generalization only for Mathlib's notion: `LocallyQuasiFinite (f.resLE V U e)` (QuasiFinite.lean:132) is for Mathlib's LocallyQuasiFinite (Mathlib RingHom.QuasiFinite on affine opens, no finite type condition); Stacks locally quasi-finite (pqf-def-quasifinite) is Mathlib LocallyQuasiFinite plus LocallyOfFiniteType only by a theorem (Algebra 00PK/00PM against Mathlib's Algebra.QuasiFinite), so not one line: no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If R → S is a finite type quasi-finite ring map ... ; locally quasi-finite morphism restricted to affine opens",
+   "results": "locallyQuasiFinite_iff, instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, LocallyOfFiniteType.finiteType_of_affine_subset",
+   "date": "2026-10-10",
+   "verdict": "no match (Mathlib notion only, as above)"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'resLE' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean",
+   "results": "QuasiFinite.lean:133 LocallyQuasiFinite (f.resLE V U e); FiniteType.lean:99 LocallyOfFiniteType (f.resLE V U e)",
+   "date": "2026-10-10",
+   "verdict": "no match for the Stacks notion (Lean candidate: the conjunction of these two instances once pqf-def-quasifinite is matched to LocallyQuasiFinite and LocallyOfFiniteType)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}

@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
  "kind": "statement",
  "title": "A locally quasi-finite morphism with quasi-compact source has universally bounded fibres (Stacks 03JA)",
- "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] which is locally quasi-finite [pqf-def-quasifinite], and assume $X$ is quasi-compact. Then the fibres of $f$ are universally bounded: there is an integer $n\\geq0$ such that for every $y\\in Y$ the fibre $X_y=X\\times_Y\\operatorname{Spec}\\kappa(y)$ (fibre product [def-pc-fibre-product], residue field $\\kappa(y)$ [def-weil-residue-field]) is a finite scheme over $\\kappa(y)$, i.e. $X_y=\\operatorname{Spec}B_y$ with $B_y$ a finite $\\kappa(y)$-algebra, of degree $\\dim_{\\kappa(y)}B_y=\\dim_{\\kappa(y)}\\Gamma(X_y,\\mathcal O_{X_y})\\leq n$. (Stacks Project, Morphisms, Definition Tag 03J4 and Lemma Tag 03JA.)",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] which is locally quasi-finite [pqf-def-quasifinite], and assume $X$ is quasi-compact. Then the fibres of $f$ are universally bounded: there is an integer $n\\geq0$ such that for every $y\\in Y$ the fibre $X_y=X\\times_Y\\operatorname{Spec}\\kappa(y)$ (fibre product [def-pc-fibre-product], residue field $\\kappa(y)$ [def-weil-residue-field]) is a finite scheme over $\\kappa(y)$, i.e. $X_y=\\operatorname{Spec}B_y$ with $B_y$ a finite $\\kappa(y)$-algebra, of degree $\\dim_{\\kappa(y)}B_y=\\dim_{\\kappa(y)}\\Gamma(X_y,\\mathcal O_{X_y})\\leq n$; that is, $n$ bounds the degrees of the fibres of $f$ and the fibres of $f$ are universally bounded [def-weil-pbc-fibre-degree-bound]. (Stacks Project, Morphisms, Definition Tag 03J4 and Lemma Tag 03JA.)",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Morphisms, Lemma Tag 03JA (lemma-locally-quasi-finite-qc-source-universally-bounded), line 15495; Definition Tag 03J4 (definition-universally-bounded), line 15302"
@@ -11,11 +11,126 @@
   "def-pc-scheme",
   "pqf-def-quasifinite",
   "def-pc-fibre-product",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-weil-pbc-fibre-degree-bound"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "*Finite affine covering.* Since $X$ is quasi-compact, there are finitely many affine opens $U_1,\\dots,U_m\\subseteq X$ ($m\\ge0$) covering $X$ and affine opens $V_1,\\dots,V_m\\subseteq Y$ with $f(U_i)\\subseteq V_i$: for each $x\\in X$ choose an affine open $V_x\\ni f(x)$ of $Y$ and an affine open $U_x\\ni x$ of $X$ contained in the open $f^{-1}(V_x)$ (affine opens form a basis of the topology of a scheme [def-pc-scheme]); the $U_x$ cover $X$, and quasi-compactness gives finitely many of them covering $X$.",
+   "uses": [
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03JA, first paragraph, lines 15505-15518"
+   }
+  },
+  {
+   "text": "*The pieces are quasi-finite.* Let $f_i=f|_{U_i}:U_i\\to V_i$ be the restriction ($\\iota_{V_i}\\circ f_i=f\\circ\\iota_{U_i}$ for the inclusions of the open subschemes). By the local nature of local quasi-finiteness [lem-weil-pbc-lqf-restriction-to-opens] (Stacks 01TH (4)), $f_i$ is locally quasi-finite. As a morphism between affine schemes, $f_i$ is affine [pqf-def-affine-morphism], hence quasi-compact [lem-weil-pbc-affine-morphism-permanence] (3). A locally quasi-finite quasi-compact morphism is quasi-finite [pqf-lem-qf-locqf-qc] (Stacks 01TJ). So each $f_i$ is a quasi-finite morphism of affine schemes.",
+   "uses": [
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-lem-qf-locqf-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03JA, first paragraph, lines 15505-15518 (with Lemmas Tag 01TH (4) and 01TJ)"
+   }
+  },
+  {
+   "text": "*Finite morphisms of affine schemes.* Let $\\pi:Z\\to V$ be a finite morphism [def-weil-finite-integral-morphism] with $Z$ and $V$ affine. Write $V=\\operatorname{Spec}A$ and $Z=\\operatorname{Spec}B$; then $\\pi=\\operatorname{Spec}(\\varphi)$ for a unique ring map $\\varphi:A\\to B$ [def-weil-affine-spectrum], and since $\\pi^{-1}(V)=Z$ the definition of a finite morphism says that $B$ is a finitely generated $A$-module, say by $x_1,\\dots,x_n$, so $A^{\\oplus n}\\to B$, $(a_1,\\dots,a_n)\\mapsto\\sum a_ix_i$, is a surjective $A$-module map. Let $v\\in V$ correspond to the prime $\\mathfrak p\\subset A$, with $\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime]. The canonical morphism $\\operatorname{Spec}\\kappa(v)\\to V$ is $\\operatorname{Spec}$ of $A\\to\\kappa(\\mathfrak p)$ up to the isomorphism $\\kappa(v)\\cong\\kappa(\\mathfrak p)$ [lem-weil-pbc-spec-residue-field-identification], so the fibre $Z_v=Z\\times_V\\operatorname{Spec}\\kappa(v)$ [def-pc-scheme-fibre] is $\\operatorname{Spec}(B\\otimes_A\\kappa(\\mathfrak p))$ over $\\operatorname{Spec}\\kappa(\\mathfrak p)$ [lem-weil-pbc-fibre-product-affine-spectra], with ring of global sections $C=B\\otimes_A\\kappa(\\mathfrak p)$. Tensoring the surjection with $\\kappa(\\mathfrak p)$ (right exactness of $-\\otimes_A\\kappa(\\mathfrak p)$) gives a surjective $\\kappa(\\mathfrak p)$-linear map $\\kappa(\\mathfrak p)^{\\oplus n}\\to C$, so $\\dim_{\\kappa(\\mathfrak p)}C\\le n$. The morphism $Z_v=\\operatorname{Spec}C\\to\\operatorname{Spec}\\kappa(\\mathfrak p)$ is a morphism of affine schemes, hence affine [pqf-def-affine-morphism], and the only nonempty open of the one-point scheme $\\operatorname{Spec}\\kappa(\\mathfrak p)$ is the whole space, with preimage $\\operatorname{Spec}C$, over which the ring map $\\kappa(\\mathfrak p)\\to C$ is finite; so $Z_v$ is finite over $\\kappa(v)$ of degree $\\le n$. Hence $n$ bounds the degrees of the fibres of $\\pi$ [def-weil-pbc-fibre-degree-bound].",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "pqf-def-affine-morphism",
+    "def-weil-pbc-fibre-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03JA, third paragraph, lines 15537-15552"
+   }
+  },
+  {
+   "text": "*Quasi-finite morphisms of affine schemes.* Let $g:U\\to V$ be a quasi-finite morphism of affine schemes. By [lem-weil-pbc-quasi-finite-affine-open-in-finite] (Stacks 03GU) there are an affine scheme $Z$, an open immersion $j:U\\to Z$ and a finite morphism $\\pi:Z\\to V$ with $g=\\pi\\circ j$. The open immersion $j$ is an immersion (the identity of $U$, a closed immersion, followed by $j$ [def-weil-closed-immersion]), so $1$ bounds the degrees of its fibres [lem-weil-pbc-immersion-fibre-degree-one] (Stacks 03J9). By step 3 some integer $n$ bounds the degrees of the fibres of $\\pi$. By [lem-weil-pbc-composition-fibre-degree-bound] (Stacks 03J6) the integer $1\\cdot n=n$ bounds the degrees of the fibres of $g=\\pi\\circ j$. Applied to the morphisms $f_i$ of step 2, this gives integers $n_i\\ge0$ such that $n_i$ bounds the degrees of the fibres of $f_i:U_i\\to V_i$ [def-weil-pbc-fibre-degree-bound].",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-affine-open-in-finite",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-immersion-fibre-degree-one",
+    "lem-weil-pbc-composition-fibre-degree-bound",
+    "def-weil-pbc-fibre-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03JA, second paragraph, lines 15521-15535 (Lemmas Tag 03GU, 03J9, 03J6)"
+   }
+  },
+  {
+   "text": "*The fibre of $f$ is covered by the fibres of the pieces.* Let $y\\in Y$, let $X_y=X\\times_Y\\operatorname{Spec}\\kappa(y)$ with projections $p:X_y\\to X$ and $q:X_y\\to\\operatorname{Spec}\\kappa(y)$ [def-pc-scheme-fibre], and let $c:\\operatorname{Spec}\\kappa(y)\\to Y$ be the canonical morphism. For each $i$ the open subscheme $p^{-1}(U_i)$ of $X_y$, with the restrictions of $p$ and $q$, is a fibre product $U_i\\times_XX_y$ [lem-weil-pbc-open-preimage-fibre-product]; pasting it with the cartesian square defining $X_y$ [lem-weil-pbc-cartesian-square-pasting] shows that $p^{-1}(U_i)$ is a fibre product $U_i\\times_Y\\operatorname{Spec}\\kappa(y)$ of $f\\circ\\iota_{U_i}=\\iota_{V_i}\\circ f_i$ and $c$. The sets $p^{-1}(U_i)$ cover $X_y$ since the $U_i$ cover $X$. If $y\\notin V_i$, then $p^{-1}(U_i)=\\emptyset$, because $p$ maps $X_y$ into $f^{-1}(y)$ [def-pc-scheme-fibre] and $f(U_i)\\subseteq V_i$. If $y\\in V_i$, the residue field of the open subscheme $V_i$ at $y$ is $\\kappa(y)$ and the canonical morphism $c_{V_i}:\\operatorname{Spec}\\kappa(y)\\to V_i$ satisfies $\\iota_{V_i}\\circ c_{V_i}=c$ [lem-weil-pbc-residue-field-point-naturality]; the preimage of $V_i$ under $c$ is all of $\\operatorname{Spec}\\kappa(y)$, so $(\\operatorname{Spec}\\kappa(y),c_{V_i},\\mathrm{id})$ is a fibre product $V_i\\times_Y\\operatorname{Spec}\\kappa(y)$ [lem-weil-pbc-open-preimage-fibre-product], and pasting [lem-weil-pbc-cartesian-square-pasting] the square defining the fibre $(U_i)_y=U_i\\times_{V_i}\\operatorname{Spec}\\kappa(y)$ of $f_i$ with this square shows that $(U_i)_y$ is also a fibre product $U_i\\times_Y\\operatorname{Spec}\\kappa(y)$. By uniqueness of fibre products [def-pc-fibre-product], $p^{-1}(U_i)\\cong(U_i)_y$ as schemes over $\\operatorname{Spec}\\kappa(y)$. Thus $X_y=\\bigcup_{i:\\,y\\in V_i}p^{-1}(U_i)$ is a covering by finitely many open subschemes, each isomorphic over $\\kappa(y)$ to the fibre of $f_i$ at $y$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-residue-field-point-naturality",
+    "def-pc-fibre-product",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03JA, first paragraph, lines 15505-15518 ('For $y \\in Y$ it is clear that $X_y = \\bigcup_{y \\in V_i} (U_i)_y$ is an open covering')"
+   }
+  },
+  {
+   "text": "*Conclusion.* Put $N=n_1+\\dots+n_m$. Let $y\\in Y$. By step 5, $X_y$ is covered by the open subschemes $p^{-1}(U_i)$, $y\\in V_i$, and by step 4 each of them is finite over $\\kappa(y)$ with $\\dim_{\\kappa(y)}\\Gamma(p^{-1}(U_i),\\mathcal O)\\le n_i$ [def-weil-pbc-fibre-degree-bound]. By [lem-weil-pbc-finite-open-cover-degree-sum], $X_y$ is finite over $\\kappa(y)$, i.e. $X_y=\\operatorname{Spec}B_y$ with $B_y=\\Gamma(X_y,\\mathcal O_{X_y})$ a finite $\\kappa(y)$-algebra, and $\\dim_{\\kappa(y)}B_y\\le\\sum_{i:\\,y\\in V_i}n_i\\le N$. So $N$ bounds the degrees of the fibres of $f$, which is the statement.",
+   "uses": [
+    "lem-weil-pbc-finite-open-cover-degree-sum",
+    "def-weil-pbc-fibre-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, proof of Lemma Tag 03JA, first paragraph, lines 15505-15518 ('if $n_i$ works for the morphism $f|_{U_i}$, then $\\sum n_i$ works for $f$')"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "pqf-lem-qf-locqf-qc",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-fibre-degree-bound",
+  "lem-weil-pbc-quasi-finite-affine-open-in-finite",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-immersion-fibre-degree-one",
+  "lem-weil-pbc-composition-fibre-degree-bound",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "lem-weil-pbc-finite-open-cover-degree-sum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 03JA (lemma-locally-quasi-finite-qc-source-universally-bounded), line 15495, and its proof (lines 15504-15552); the claim 'if n_i works for f|U_i then the sum works for f', stated there without proof, is the new node lem-weil-pbc-finite-open-cover-degree-sum"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -47,7 +162,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -67,5 +182,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "worker": "stage1",
+  "summary": "Statement checked against Stacks 03JA and Definition 03J4 (morphisms.tex lines 15302, 15495) and kept; only a pointer to the new definition node def-weil-pbc-fibre-degree-bound (03J4) was appended, which the citers' reading ('dim Gamma(X_y,O) <= n', X_y finite over kappa(y)) matches. Proof follows the three paragraphs of the Stacks proof in six steps: finite affine cover with f(U_i) in V_i (elementary); f|U_i: U_i -> V_i quasi-finite (new node lem-weil-pbc-lqf-restriction-to-opens for 01TH (4); pqf-def-affine-morphism, lem-weil-pbc-affine-morphism-permanence (3) for quasi-compactness; pqf-lem-qf-locqf-qc for 01TJ, an off-route tool already accepted by L on lem-weil-pbc-flat-fp-qf-stratification); the finite case written out (fibre Spec(B tensor kappa(p)) via existing Mathlib-leaf nodes, generators give the bound); the quasi-finite affine case via new nodes for 03GU (open immersion into a finite affine Z), 03J9 (immersions: bound 1) and 03J6 (bounds multiply under composition); the identification of the fibres (U_i)_y with the open subschemes p^{-1}(U_i) of X_y written out with the open-preimage and pasting leaves; and the summation, which Stacks states without proof, as the new node lem-weil-pbc-finite-open-cover-degree-sum (agent-stated, source the 03JA proof and the Artinian arguments of 03J5/03J6). Tags 03J4, 03J6, 03J9, 03JA, 03GU, 01TH, 01TJ, 01TD, 00QB verified in stacks-project/tags/tags. Mathlib: no universally bounded fibres, no global affine Zariski main theorem factorization, no degree bounds of fibres (LeanSearch, LeanFinder, Loogle, grep); Mathlib's LocallyQuasiFinite and LocallyOfFiniteType restrict to opens (resLE instances), a Lean candidate for the 01TH (4) node once pqf-def-quasifinite is matched."
+ },
+ "tool_uses": [
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "lead_note": "L 2026-10-10: tool_uses pqf-lem-qf-locqf-qc (unit sk-prop-nagata-sketch-zmt; 01TJ, generic). A stray '.;' in the statement was repaired.",
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "6 steps follow Stacks 03JA: finite affine cover, pieces quasi-finite (new 01TH(4) node + 01TJ tool), finite affine morphisms have bounded fibre degree (written out), quasi-finite affine via the new 03GU, 03J9, 03J6 nodes, fibres of f covered by the fibres of the pieces, sum bound via a new node (Stacks' unproved step). New definition node for 03J4. Tags 03JA, 03J4, 03J6, 03J9, 03GU, 01TH, 01TJ, 00QB verified."
+ }
 }

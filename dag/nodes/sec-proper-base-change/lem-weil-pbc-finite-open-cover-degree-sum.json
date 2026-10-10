@@ -1,0 +1,63 @@
+{
+ "id": "lem-weil-pbc-finite-open-cover-degree-sum",
+ "kind": "statement",
+ "title": "A scheme over a field covered by finitely many finite open pieces is finite, of degree at most the sum",
+ "statement": "Let $k$ be a field, let $T$ be a scheme [def-pc-scheme] with a morphism $t:T\\to\\operatorname{Spec}k$ [def-weil-affine-spectrum], and let $T=W_1\\cup\\dots\\cup W_m$ ($m\\ge0$) be a covering of $T$ by finitely many open subschemes. Suppose that for each $i$ the scheme $W_i$, over $k$ through $t|_{W_i}$, is finite over $k$ [def-weil-finite-integral-morphism] (so $W_i$ is affine and $\\Gamma(W_i,\\mathcal O_{W_i})$ is a finite-dimensional $k$-algebra) with $\\dim_k\\Gamma(W_i,\\mathcal O_{W_i})\\le n_i$ for an integer $n_i\\ge0$. Then $T$ is finite over $k$ and $\\dim_k\\Gamma(T,\\mathcal O_T)\\le n_1+\\dots+n_m$. (The step 'if $n_i$ works for $f|_{U_i}:U_i\\to V_i$, then $\\sum n_i$ works for $f$' of the proof of Stacks Project, Morphisms, Lemma Tag 03JA, applied to the fibre $T=X_y$ and its open covering by the fibres $(U_i)_y$.)",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, proof of Lemma Tag 03JA (lemma-locally-quasi-finite-qc-source-universally-bounded), first paragraph, lines 15505-15518 (stated without proof there; compare the proofs of Lemma Tag 03J5, line 15322, and Tag 03J6, line 15371: a scheme over a field with finite discrete underlying space is affine and its ring is the product of its local rings)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "scheme over a field covered by finitely many open subschemes each finite over the field; then the scheme is finite over the field and the dimension of global sections is at most the sum",
+   "results": "instIsAffineXSchemeFiniteSubcover, instFintypeI₀FiniteSubcover, IsFinite.instHasAffineProperty..., isNoetherian_iff_of_finite_iSup_eq_top",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "scheme covered by finitely many affine opens each finite over a field is affine and finite over the field",
+   "results": "IsFinite.toIsAffineHom, Scheme.isAffine_affineOpenCover, Scheme.affineCover, isFinite_iff",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'isAffine_of_finite|IsAffine.*DiscreteTopology|DiscreteTopology.*IsAffine' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Limits.lean:700 instance [Finite X] [DiscreteTopology X] : IsAffine X (affineness only, no degree count); AffineTransitionLimit.lean:1080 exists_isOpenCover_and_isAffine_of_finite (unrelated)",
+   "date": "2026-10-10",
+   "verdict": "no match (partial ingredient: Limits.lean:700)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
