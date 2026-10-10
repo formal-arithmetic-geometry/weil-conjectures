@@ -187,4 +187,32 @@ noncomputable def tensorHomAdjunction (A : SheafOfModules.{u} 𝓡) :
           (tensorHomEquiv_whiskerLeft_comp A f _).symm)
       homEquiv_naturality_right f g := tensorHomEquiv_comp_homObjMap A f g }
 
+/-- **Sheaves of modules form a monoidal closed category**, with internal hom `homObj`:
+tensoring with `A` is left adjoint to `homObj A` (`SheafOfModules.tensorHomAdjunction`). -/
+@[instance_reducible]
+noncomputable def monoidalClosed : MonoidalClosed (SheafOfModules.{u} 𝓡) where
+  closed A := { rightAdj := (homFunctor R).obj (Opposite.op A), adj := tensorHomAdjunction R A }
+
+attribute [local instance] monoidalClosed
+
+lemma ihom_obj (A N : SheafOfModules.{u} 𝓡) : (ihom A).obj N = homObj A N := rfl
+
+lemma uncurry_eq_tensorHomEquiv_symm {A T N : SheafOfModules.{u} 𝓡} (g : T ⟶ homObj A N) :
+    MonoidalClosed.uncurry g = (tensorHomEquiv A T N).symm g := by
+  change ((tensorHomAdjunction R A).homEquiv _ _).symm g = _
+  rw [tensorHomAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
+  rfl
+
+lemma ihom_ev_app (A N : SheafOfModules.{u} 𝓡) :
+    (ihom.ev A).app N = (tensorHomEquiv A ((ihom A).obj N) N).symm (𝟙 _) := by
+  rw [← MonoidalClosed.uncurry_id_eq_ev, uncurry_eq_tensorHomEquiv_symm]
+
+/-- The functoriality `MonoidalClosed.pre` of the internal hom in its first variable is
+`homObjMap`. -/
+lemma pre_app {A A' : SheafOfModules.{u} 𝓡} (f : A' ⟶ A) (N : SheafOfModules.{u} 𝓡) :
+    (MonoidalClosed.pre f).app N = homObjMap f (𝟙 N) := by
+  apply MonoidalClosed.uncurry_injective
+  rw [MonoidalClosed.uncurry_pre, uncurry_eq_tensorHomEquiv_symm, Equiv.eq_symm_apply,
+    tensorHomEquiv_whiskerRight_comp, ihom_ev_app, Equiv.apply_symm_apply, Category.id_comp]
+
 end SheafOfModules
