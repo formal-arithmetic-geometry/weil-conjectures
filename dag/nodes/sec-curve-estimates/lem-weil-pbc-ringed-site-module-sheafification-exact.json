@@ -49,15 +49,43 @@
    "results": "ModuleCat/Presheaf/Sheafification.lean:126,157,190 and CategoryTheory/Sites/Sheafification.lean:76,79; no theorem for a general sheaf of rings on an arbitrary site",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteLimits (PresheafOfModules.sheafification _)",
+   "results": "PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification), hypotheses IsLocallyInjective/IsLocallySurjective J alpha, WEqualsLocallyBijective, HasSheafify J AddCommGrpCat; sed -n 1,200p of the file confirms lines 125, 157, 190",
+   "date": "2026-10-10",
+   "verdict": "match (one-line specialization alpha = identity, B8); colimit clause via IsLeftAdjoint (line 157)"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+  "line": 190,
+  "how": "specializes in one line with alpha = 𝟙 R.obj (the same specialization that makes def-weil-presheaf-modules-sheafification a Mathlib leaf), one declaration per clause: finite limits: `noncomputable instance : PreservesFiniteLimits (sheafification.{v} α)` at line 190 (section with [HasSheafify J AddCommGrpCat] at line 178, file-level [J.WEqualsLocallyBijective AddCommGrpCat] at line 37, the same instance hypotheses the definition node's Mathlib functor already carries; HasSheafify holds for small sites, Mathlib/CategoryTheory/Sites/LeftExact.lean:308-311); finite colimits: `instance : (sheafification.{v} α).IsLeftAdjoint` at line 157 (from sheafificationAdjunction, line 125) with `instance [IsLeftAdjoint F] : PreservesColimitsOfSize F` at Mathlib/CategoryTheory/Adjunction/Limits.lean:357; exactness is the conjunction. Lines read with sed -n on 2026-10-10 by reviewer R-mse1700. Analogue of the Mathlib leaf lem-weil-pbc-sheafification-exact."
+ },
+ "status": "mathlib",
  "created": {
   "item": "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-cd"
+ "unit": "sk-prop-cd",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "worker": "stage1",
+  "summary": "Reviewer R-mse1700 (FIX): the item is stated by Mathlib (PresheafOfModules sheafification preserves finite limits, line 190, and is a left adjoint, line 157), so it is a Mathlib leaf; the worker's three-step split and its finite-limits child are withdrawn. Worker's original summary: Split the ringed-site sheafification exactness assertion into finite-limit preservation, finite-colimit preservation from the stated left adjoint, and the exact-functor conclusion. Created one statement-only child for the finite-limit theorem because Mathlib's corresponding module-sheafification instance requires explicit site hypotheses absent from the item's arbitrary-site statement.",
+  "blueprint": "Realizes the ancestor lem-sc-ga-cohomology proof's second-paragraph assertion that module sheafification on a ringed site is exact, as a Mathlib leaf.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-mse1700",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mse1700 (reviewer sub-agent of L); spot-checked: Source Stacks sites-modules.tex Section 03CX (Lemmas 03CN, 03CO): # on PMod(C,O) is left adjoint to inclusion, preserves finite limits, hence exact; the item states exactly this for an arbitrary ringed site, statement unchanged. Per audit coord/audit-new-nodes.md (16:50) and B8, Mathlib states the item by one-line specialization alpha = identity of R.obj, the same specialization already used by the Mathlib leaf def-weil-presheaf-modules-sheafification (same instance hypotheses WEqualsLocallyBijective line 37 and HasSheafify line 178; HasSheafify for small sites at CategoryTheory/Sites/LeftExact.lean:308-311). Verified with sed on the pinned Mathlib: Algebra/Category/ModuleCat/Presheaf/Sheafification.lean:190 noncomputable instance PreservesFiniteLimits (sheafification alpha) (finite-limit clause), :157 instance (sheafification alpha).IsLeftAdjoint from sheafificationAdjunction :125, with CategoryTheory/Adjunction/Limits.lean:357 instance [IsLeftAdjoint F] PreservesColimitsOfSize F (colimit clause); my own loogle query 'CategoryTheory.Limits.PreservesFiniteLimits (PresheafOfModules.sheafification _)' returned PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification. The worker's split was mathematically correct (finite limits from the child, colimits from the left adjoint, exactness by definition) but the worker recorded 'no match' for the very line-190 instance only because of the site typeclass hypotheses. FIX more, RETURN less / B8: dag/nodes/sec-curve-estimates/lem-weil-pbc-ringed-site-module-sheafification-exact.json: status split -> mathlib, mathlib_match set (declaration, file, line 190, how), proof/proof_deps/proof_origin emptied, loogle search appended to mathlib_searches, split_report summary/blueprint updated; new node lem-weil-pbc-ringed-site-module-sheafification-finite-limits dropped with --drop-nodes (its only citation was the withdrawn step 1; it is clause 1 of the same Mathlib leaf). Small case checked: one-object site with identity covering, # = identity. Start Sat Oct 10 04:59:36 PM UTC 2026, end Sat Oct 10 05:00:49 PM UTC 2026 (date -u).; 1 file(s) fixed by the reviewer"
+ }
 }
