@@ -1,8 +1,8 @@
 # Work queue
 
-916 items; claim with `tools/claim.py next <group> [--stage N]`.
+918 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (624)
+## Stage 1: nodes to split (625)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -26,9 +26,6 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1012 | none |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1012 | none |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1012 | none |
-| `lem-weil-pbc-field-char-p-nilpotent-lifting` | 1013 | none |
-| `lem-weil-pbc-finite-locally-free-degree-etale-descent` | 1013 | none |
-| `lem-weil-pbc-finite-surjective-affine-target-noetherian` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-complex-exact` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-finite-modules` | 1013 | none |
 | `lem-weil-pbc-formal-glueing-isogeny` | 1013 | none |
@@ -101,6 +98,8 @@
 | `lem-weil-pbc-transitivity-gamma` | 1013 | none |
 | `lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites` | 1013 | none |
 | `lem-weil-pbc-zariski-open-restriction-injectives` | 1013 | none |
+| `lem-weil-pbc-affine-pushforward-ideal-product` | 1014 | none |
+| `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1014 | none |
 | `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1014 | none |
 | `lem-weil-pbc-colimit-eventually-flat` | 1014 | none |
 | `lem-weil-pbc-completion-noetherian-quotient-noetherian` | 1014 | none |
@@ -108,15 +107,17 @@
 | `lem-weil-pbc-depth-le-support-dimension` | 1014 | none |
 | `lem-weil-pbc-essentially-constant-splitting` | 1014 | none |
 | `lem-weil-pbc-etale-splits-off-isolated-points-technical` | 1014 | none |
-| `lem-weil-pbc-field-char-p-separable-over-prime-field` | 1014 | none |
+| `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1014 | none |
 | `lem-weil-pbc-finite-type-domain-dimension-local-ring` | 1014 | none |
 | `lem-weil-pbc-finitely-generated-field-complete-intersection-model` | 1014 | none |
 | `lem-weil-pbc-flat-local-extension-given-residue-field` | 1014 | none |
+| `lem-weil-pbc-fpqc-descend-finite` | 1014 | none |
+| `lem-weil-pbc-fpqc-descend-flat` | 1014 | none |
+| `lem-weil-pbc-fpqc-descend-locally-finite-presentation` | 1014 | none |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1014 | none |
 | `lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods` | 1014 | none |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1014 | none |
 | `lem-weil-pbc-p-basis-differentials-basis` | 1014 | none |
-| `lem-weil-pbc-separable-field-extension-formally-smooth` | 1014 | none |
 | `lem-weil-pbc-two-term-homotopy-equivalence-direct-sum` | 1014 | none |
 | `lem-weil-pbc-injective-acyclicity-bounded-below` | 2002 | sorry_here |
 | `lem-weil-pbc-property-implies-acyclicity` | 2003 | none |
@@ -631,7 +632,7 @@
 | `def-exc-jacobian-presentation` | - | none |
 | `def-nagata-rees-algebra` | - | none |
 
-## Stage 2: nodes to state (292)
+## Stage 2: nodes to state (293)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -726,6 +727,7 @@
 | `lem-weil-pbc-fibre-ring-noetherian` | 1 | state |
 | `lem-weil-pbc-fibre-ring-primes-residue-fields` | 1 | state |
 | `lem-weil-pbc-field-char-p-h1-cotangent-vanishing` | 1 | state |
+| `lem-weil-pbc-field-char-p-nilpotent-lifting` | 1 | state |
 | `lem-weil-pbc-field-point-factors-through-closed-immersion` | 1 | state |
 | `lem-weil-pbc-field-point-factors-through-immersion` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
@@ -928,7 +930,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 636 nodes that wait for stage 1, 566 nodes that wait for a statement dependency.
+Not open yet: 637 nodes that wait for stage 1, 568 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
