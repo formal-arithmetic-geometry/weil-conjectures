@@ -1906,3 +1906,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:09 L: returned deliver/G1/lem-sc-find-globally-generated (reviewer RETURN: 1. E2: new node lem-sc-separated-affine-function-field-surjective: the statement is false as written, it omits the hypot)
 - 16:09 L: returned deliver/J1/lem-sc-finite-flat-duality-evaluation (reviewer RETURN: 1. B (return point 3 of 15:45 NOT repaired): the three new nodes lem-sc-finite-duality-derived-hom, lem-sc-affine-derive)
 - 16:09 L: merged deliver/J1/lem-sc-point-tangent-separation-closed-immersion (reviewer FIX; after a return; new nodes: 5)
+- 16:10 L: merged deliver/G1/lem-sc-p1-tor-dimension-shifting (reviewer FIX+NODE(1); first push; new nodes: 1)

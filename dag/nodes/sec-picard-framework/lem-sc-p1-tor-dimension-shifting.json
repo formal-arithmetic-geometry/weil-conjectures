@@ -19,9 +19,50 @@
  "stmt_deps": [
   "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-p1-tor-dimension-shift-natural] to the exact sequence 0 \\to K_2 \\to F_1 \\to K_1 \\to 0 (F_1 free) with i=1. It gives isomorphisms Tor_2^S(K_1,N) \\cong Tor_1^S(K_2,N), natural in the S-module N; take N=k.",
+   "uses": [
+    "lem-sc-p1-tor-dimension-shift-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S2 (dimension shifting for the displayed free presentation)"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-p1-tor-dimension-shift-natural] to the exact sequence 0 \\to K_1 \\to F_0 \\to M \\to 0 (F_0 free) with i=2. It gives isomorphisms Tor_3^S(M,N) \\cong Tor_2^S(K_1,N), natural in N. Composing at N=k the isomorphism of Step 1 with the inverse of this one yields an isomorphism Tor_1^S(K_2,k) \\cong Tor_3^S(M,k); as a composite of isomorphisms natural in N (the inverse of a natural isomorphism is natural), it is natural in k.",
+   "uses": [
+    "lem-sc-p1-tor-dimension-shift-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, proof of Lemma Tag 00S2 (dimension shifting for the displayed free presentation)"
+   }
+  },
+  {
+   "text": "If M has a projective resolution of length at most two, choose one concentrated in degrees 0, 1, and 2. By [def-weil-pbc-tor-modules], Tor_3^S(M,k) is the third homology of the resolution tensored with k; the degree-3 and degree-4 terms are zero, so this homology vanishes. The isomorphism of Step 2 then gives Tor_1^S(K_2,k)=0.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section Tag 00LY (definition of Tor by homology of a projective resolution)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-tor-dimension-shift-natural",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00S2 together with Section Tag 00LY"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -46,12 +87,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-graded-syzygy",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-p1-tor-dimension-shifting",
+  "worker": "stage1",
+  "summary": "Split the two-step dimension shift into two applications of the free-presentation dimension shift natural in the second variable, followed by the vanishing of degree-three Tor for a projective resolution of length at most two. Reviewer R-tds added the statement-only node lem-sc-p1-tor-dimension-shift-natural (FIX more, RETURN less) because the statement claims a natural isomorphism and lem-weil-pbc-tor-dimension-shift-free states only an isomorphism.",
+  "blueprint": "Realizes the dimension-shifting sentence in the proof of lem-sc-p1-graded-resolution: first shift from K_2 to K_1, then from K_1 to M, and use the length-two resolution to obtain vanishing."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-tds",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tds (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-p1-graded-resolution proof (dimension shifting) and Stacks Algebra 00S2 proof (the free-presentation shift sentence) with section 00LY; the item statement is unchanged (commutative ring S, S-module k, two exact sequences with F_0,F_1 free, Tor of def-weil-pbc-tor-modules). Steps 1-2: the dimension shift at i=1 for 0->K_2->F_1->K_1->0 and at i=2 for 0->K_1->F_0->M->0, composed; hypotheses (F free, i>=1) checked. Step 3: def-weil-pbc-tor-modules computes Tor_3 from a projective resolution of length <=2, whose degree-3 term is 0, so Tor_3(M,k)=0; checked on M projective (length 0) and length 2. Downstream lem-sc-p1-graded-syzygy uses only the isomorphism and the vanishing. FIX more, RETURN less: the statement claims a NATURAL isomorphism but the cited lem-weil-pbc-tor-dimension-shift-free states only an isomorphism (C4); added statement-only node lem-sc-p1-tor-dimension-shift-natural (the shift natural in the second variable N; Stacks 00LY/00LZ/00M0, 00S2; Mathlib searched: loogle CategoryTheory.Tor and grep of Monoidal/Tor.lean, no match, leansearch HTTP 500) and dag/nodes/sec-picard-framework/lem-sc-p1-tor-dimension-shifting.json: proof[0], proof[1]: text and uses cite it, naturality in k stated for the composite; proof_deps: lem-weil-pbc-tor-dimension-shift-free replaced by the new node; split_report.tool_uses removed (the off-unit tool is no longer cited; --drop-tool-uses). Start Sat Oct 10 04:07:45 PM UTC 2026, end Sat Oct 10 04:09:56 PM UTC 2026.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
 }
