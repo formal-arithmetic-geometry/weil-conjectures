@@ -12,9 +12,108 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-polynomial-partial-derivative"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "(A standard smooth presentation of $A$.) Since $A$ is standard smooth [def-weil-pbc-standard-smooth-algebra], there are integers $m\\ge d\\ge0$, polynomials $g_1,\\dots,g_d\\in R[y_1,\\dots,y_m]$ [def-weil-pbc-mv-polynomial-ring] and an isomorphism of $R$-algebras $\\alpha_0:R[y_1,\\dots,y_m]/(g_1,\\dots,g_d)\\xrightarrow{\\sim}A$ such that, writing $\\pi_0:R[y_1,\\dots,y_m]\\to A$ for the composite of the quotient map and $\\alpha_0$, the element $\\pi_0(\\Delta_0)$ is a unit of $A$, where $\\Delta_0=\\det(\\partial g_j/\\partial y_i)_{1\\le i,j\\le d}\\in R[y_1,\\dots,y_m]$ [def-weil-pbc-polynomial-partial-derivative]. The map $\\pi_0$ is surjective and its kernel is $(g_1,\\dots,g_d)$.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma Tag 07EY (lemma-standard-smooth-include-generators, line 694), proof lines 705-718"
+   }
+  },
+  {
+   "text": "(Lifts of the $a_i$.) Since $\\pi_0$ is surjective, choose $h_1,\\dots,h_n\\in R[y_1,\\dots,y_m]$ with $\\pi_0(h_i)=a_i$ for $i=1,\\dots,n$ (if $a_i=a_k$ the lifts may be chosen independently; nothing below uses distinctness).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma Tag 07EY (lemma-standard-smooth-include-generators, line 694), proof lines 705-718"
+   }
+  },
+  {
+   "text": "(The new polynomial ring and the map to $A$.) Let $P=R[x_1,\\dots,x_n,y_1,\\dots,y_m]$, a polynomial ring in $n+m$ variables, ordered $z_1,\\dots,z_{n+m}=x_1,\\dots,x_n,y_1,\\dots,y_m$ (so $z_k=x_k$ for $k\\le n$ and $z_{n+k}=y_k$ for $k\\le m$); regard $R[y_1,\\dots,y_m]\\subset P$ as the polynomials involving no $x_k$. By the universal property of the polynomial ring [def-weil-pbc-mv-polynomial-ring] there is a unique $R$-algebra homomorphism $\\varphi:P\\to A$ with $\\varphi(x_i)=a_i$ ($i\\le n$) and $\\varphi(y_k)=\\pi_0(y_k)$ ($k\\le m$). Its restriction to $R[y_1,\\dots,y_m]$ agrees with $\\pi_0$ on every $y_k$, hence equals $\\pi_0$ (uniqueness part of the universal property). Therefore $\\varphi(x_i-h_i)=a_i-\\pi_0(h_i)=0$, $\\varphi(g_j)=\\pi_0(g_j)=0$, and $\\varphi$ is surjective since already $\\pi_0=\\varphi|_{R[y]}$ is.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma Tag 07EY (lemma-standard-smooth-include-generators, line 694), proof lines 705-718"
+   }
+  },
+  {
+   "text": "(The kernel of $\\varphi$.) Let $J=(x_1-h_1,\\dots,x_n-h_n)\\subset P$ and $I=J+(g_1,\\dots,g_d)P$. We show $\\ker\\varphi=I$. By Step 3, $I\\subset\\ker\\varphi$. Conversely, let $\\sigma:P\\to R[y_1,\\dots,y_m]$ be the $R$-algebra homomorphism with $\\sigma(x_i)=h_i$, $\\sigma(y_k)=y_k$ [def-weil-pbc-mv-polynomial-ring]. The set $T=\\{F\\in P: F-\\sigma(F)\\in J\\}$ contains $R$ (as $\\sigma$ is the identity on constants), each $y_k$ ($y_k-\\sigma(y_k)=0$) and each $x_i$ ($x_i-h_i\\in J$), and is closed under sums and under products, since $FG-\\sigma(F)\\sigma(G)=F\\,(G-\\sigma(G))+\\sigma(G)\\,(F-\\sigma(F))$; as $P$ is generated as an $R$-algebra by the $x_i$ and $y_k$, $T=P$. Now let $F\\in\\ker\\varphi$. Since $F-\\sigma(F)\\in J\\subset\\ker\\varphi$, $\\pi_0(\\sigma(F))=\\varphi(\\sigma(F))=\\varphi(F)=0$, so $\\sigma(F)\\in\\ker\\pi_0=(g_1,\\dots,g_d)R[y_1,\\dots,y_m]$ (Step 1: $\\alpha_0$ is injective), which lies in $I$. Hence $F=(F-\\sigma(F))+\\sigma(F)\\in J+I=I$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma Tag 07EY (lemma-standard-smooth-include-generators, line 694), proof lines 705-718 (the source writes the presentation A = R[x,y]/(x_i - h_i, g_j) without proof; the elimination of the x_i is written out here)"
+   }
+  },
+  {
+   "text": "(The new presentation.) By Steps 3 and 4 and the homomorphism theorem, $\\varphi$ induces an isomorphism of $R$-algebras $\\alpha:P/I\\xrightarrow{\\sim}A$ sending the class of $x_i$ to $a_i$ for $i=1,\\dots,n$. Set $c=n+d$ and $(f_1,\\dots,f_c)=(x_1-h_1,\\dots,x_n-h_n,g_1,\\dots,g_d)$, so $I=(f_1,\\dots,f_c)$. From $0\\le d\\le m$ we get $n\\le c\\le n+m$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma Tag 07EY (lemma-standard-smooth-include-generators, line 694), proof lines 705-718"
+   }
+  },
+  {
+   "text": "(The partial derivatives.) By the monomial formula of [def-weil-pbc-polynomial-partial-derivative], for $H\\in R[y_1,\\dots,y_m]\\subset P$ we have $\\partial H/\\partial x_k=0$ for every $k\\le n$ (no monomial of $H$ contains $x_k$), and $\\partial H/\\partial y_i$ computed in $P$ equals $\\partial H/\\partial y_i$ computed in $R[y_1,\\dots,y_m]$. Together with $\\partial x_j/\\partial x_k=\\delta_{jk}$ and $\\partial x_j/\\partial y_i=0$ this gives, for the variables $z_1,\\dots,z_c=x_1,\\dots,x_n,y_1,\\dots,y_d$: $\\partial f_j/\\partial x_k=\\delta_{jk}$ and $\\partial f_{n+j'}/\\partial x_k=\\partial g_{j'}/\\partial x_k=0$ for $k,j\\le n$, $j'\\le d$; $\\partial f_j/\\partial y_i=-\\partial h_j/\\partial y_i$ and $\\partial f_{n+j'}/\\partial y_i=\\partial g_{j'}/\\partial y_i$ for $i,j'\\le d$, $j\\le n$.",
+   "uses": [
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma Tag 07EY (lemma-standard-smooth-include-generators, line 694), proof lines 705-718"
+   }
+  },
+  {
+   "text": "(The Jacobian determinant.) By Step 6, the $c\\times c$ matrix $M=(\\partial f_j/\\partial z_k)_{1\\le k,j\\le c}$ (rows indexed by the variables, columns by the relations, as in [def-weil-pbc-standard-smooth-algebra]) is in block form $M=\\begin{pmatrix}1_n&0\\\\C&G\\end{pmatrix}$ with $1_n$ the $n\\times n$ identity (rows and columns $1,\\dots,n$), upper right $n\\times d$ block zero ($\\partial g_{j'}/\\partial x_k=0$), $C=(-\\partial h_j/\\partial y_i)_{i\\le d,\\,j\\le n}$ and $G=(\\partial g_{j'}/\\partial y_i)_{1\\le i,j'\\le d}$. By [lem-weil-pbc-block-triangular-determinant] (with $p=n$, $q=d$), $\\det M=\\det 1_n\\cdot\\det G=\\Delta_0$, an element of $R[y_1,\\dots,y_m]\\subset P$. Its image in $A$ under $P\\to P/I\\xrightarrow{\\alpha}A$, which is $\\varphi$, is $\\varphi(\\Delta_0)=\\pi_0(\\Delta_0)$ (Step 3), a unit of $A$ by Step 1.",
+   "uses": [
+    "lem-weil-pbc-block-triangular-determinant",
+    "def-weil-pbc-standard-smooth-algebra",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma Tag 07EY (lemma-standard-smooth-include-generators, line 694), proof lines 705-718 (the source sets c = n + d and leaves the Jacobian computation to the reader; it is written out here)"
+   }
+  },
+  {
+   "text": "(Conclusion.) The integers $m$ and $c$ with $n\\le c\\le n+m$ (Step 5), the polynomials $f_1,\\dots,f_c\\in R[z_1,\\dots,z_{n+m}]=R[x_1,\\dots,x_n,y_1,\\dots,y_m]$ and the isomorphism $\\alpha:R[z_1,\\dots,z_{n+m}]/(f_1,\\dots,f_c)\\xrightarrow{\\sim}A$, which sends the class of $z_i=x_i$ to $a_i$ for $i\\le n$ (Step 5) and maps $\\det(\\partial f_j/\\partial z_i)_{i,j\\le c}$ to a unit (Step 7), form a standard smooth presentation of $A$ over $R$ [def-weil-pbc-standard-smooth-algebra] as claimed.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Smoothing Ring Maps, Lemma Tag 07EY (lemma-standard-smooth-include-generators, line 694), proof lines 705-718"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "lem-weil-pbc-block-triangular-determinant"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07EY (lemma-standard-smooth-include-generators, line 694), proof lines 705-718; the elimination of the x_i (Step 4) and the Jacobian computation (Steps 6-7), which the source leaves to the reader, are written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -36,10 +135,66 @@
    "results": "SubmersivePresentation.comp (line 534: composition of presentations, variables ι' ⊕ ι), reindex (575), naive (470), ofBijectiveAlgebraMap (516); no lemma producing a submersive presentation whose first variables are given elements (comp with a presentation of R[x_1..x_n] -> ... does not give it directly); Mathlib's submersive presentations index the relations by a subset of variables rather than the first c, agreement with Stacks 00T6 not stated",
    "date": "2026-10-10",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "standard smooth algebra has a submersive presentation in which given elements are among the generators",
+   "results": "Algebra.IsStandardSmooth.mk, Algebra.SubmersivePresentation, Algebra.SubmersivePresentation.isStandardSmooth, Algebra.IsStandardSmooth.out, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.IsStandardSmooth.finitePresentation (Mathlib.RingTheory.Smooth.StandardSmooth)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quotient of polynomial ring R[x,y] by x_i - h_i(y) is isomorphic to R[y] (eliminate variables)",
+   "results": "Polynomial.quotientSpanXSubCAlgEquiv, Polynomial.quotientSpanCXSubCAlgEquiv, Polynomial.quotientSpanCXSubCXSubCAlgEquiv, MvPolynomial.quotientEquivQuotientMvPolynomial (Mathlib.RingTheory.Polynomial.Quotient), Algebra.Generators.naive_val: one-variable eliminations only",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjoin extra variables x_i with relations x_i - h_i to a presentation of an algebra, Jacobian unchanged",
+   "results": "Algebra.SubmersivePresentation.map_jacobianRelationsOfHasCoeffs, ofHasCoeffs, jacobianRelations, jacobianRelationsOfHasCoeffs, aeval_jacobianOfHasCoeffs, invJacobianOfHasCoeffs (Mathlib.RingTheory.Extension.Presentation.Core), PreSubmersivePresentation.jacobian_ofAlgEquiv, jacobiMatrix_naive (Mathlib.RingTheory.Extension.Presentation.Submersive)",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "standard smooth presentation can be chosen with prescribed elements of the algebra as the first generators",
+   "results": "Algebra.IsStandardSmooth.out, Algebra.SubmersivePresentation.isStandardSmooth, Algebra.IsStandardSmooth, Algebra.IsStandardSmooth.finitePresentation, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.Smooth.exists_span_eq_top_isStandardSmooth",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.SubmersivePresentation, Algebra.Generators.val",
+   "results": "SubmersivePresentation.linearIndependent_aeval_val_pderiv_relation, basisDeriv_apply, aeval_jacobianOfHasCoeffs, aeval_invJacobianOfHasCoeffs, basisKaehlerOfIsCompl_apply, basisKaehler_apply",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Generators.extend",
+   "results": "Algebra.Generators.extend (P : Generators R S ι) (b : ι' → S) : Generators R S (ι ⊕ ι'), extend_val_inr, extend_val_inl (Mathlib.RingTheory.Extension.Generators): extends generators only, no presentation or Jacobian",
+   "date": "2026-10-10",
+   "verdict": "no match (candidate ingredient)"
+  },
+  {
+   "tool": "local_search",
+   "query": "Algebra.SubmersivePresentation.extend (project root ~/weil-conjectures-slopmaster2)",
+   "results": "empty, index: unavailable (no verdict from this search; covered by the grep below)",
+   "date": "2026-10-10",
+   "verdict": "no verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rnE 'def (extend|addGen|ofSurjective|ofComp|add)|naive|SubmersivePresentation\\.comp|Generators\\.(extend|ofSurjective|self)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Smooth/ ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Etale/; grep -rn 'extend' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/RingTheory/Extension/Presentation/",
+   "results": "Generators.lean:322 Generators.extend (sed -n 315,335p: adds generators b, no relations); Generators.lean:534 Generators.ofComp; Presentation/Basic.lean:511 Presentation.naive; Submersive.lean:258 PreSubmersivePresentation.comp, :470 naive, :479 jacobiMatrix_naive, :534 SubmersivePresentation.comp; StandardSmoothOfFree.lean:57 uses Generators.extend inside IsStandardSmooth.of_basis_kaehlerDifferential; no Presentation/SubmersivePresentation extension by relations x_i - h_i",
+   "date": "2026-10-10",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -59,5 +214,23 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1"
+ "unit": "sk-thm-p1",
+ "mathlib_candidate": {
+  "declaration": "Algebra.PreSubmersivePresentation.naive, Algebra.PreSubmersivePresentation.jacobiMatrix_naive, Algebra.Generators.extend, Matrix.det_fromBlocks_zero₁₂",
+  "file": "Mathlib/RingTheory/Extension/Presentation/Submersive.lean, Mathlib/RingTheory/Extension/Generators.lean, Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean",
+  "line": "Submersive.lean:470 (naive), :479-480 (jacobiMatrix_naive); Generators.lean:322 (extend); Determinant/Basic.lean:726 (det_fromBlocks_zero₁₂)",
+  "how": "no single declaration; in Lean the item is: from a SubmersivePresentation P of A (IsStandardSmooth.out), build PreSubmersivePresentation.naive on variables Fin n ⊕ ι with relations Sum.elim (X (inl i) - rename inr (h i)) (rename inr ∘ P.relation) and map Sum.elim inl (inr ∘ P.map), prove the kernel equality (Step 4) and compute the Jacobian with jacobiMatrix_naive and det_fromBlocks_zero₁₂ after reindexing; several dozen lines, so not a leaf (point B8). Mathlib's submersive presentations index the Jacobian variables by an injective σ → ι instead of 'the first c variables'; the renumbering is part of def-weil-pbc-standard-smooth-algebra's match"
+ },
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-weil-pbc-standard-smooth-include-generators",
+  "worker": "stage1",
+  "summary": "Split following the proof of Stacks 07EY (smoothing.tex lines 705-718), read in full; tag 07EY checked in literature/stacks-project/tags/tags (line 9463, smoothing-lemma-standard-smooth-include-generators). Eight steps: a standard smooth presentation R[y_1..y_m]/(g_1..g_d) with unit Jacobian determinant Delta_0 (Step 1), lifts h_i of a_i (Step 2), the map phi: R[x,y] -> A with x_i -> a_i (Step 3), ker phi = (x_i - h_i, g_j) by the substitution sigma: x_i -> h_i (Step 4, written out; the source states the presentation without proof), c = n + d with n <= c <= n + m from d <= m (Step 5), the partial derivatives from the monomial formula (Step 6), the block lower-triangular Jacobian [[1_n, 0], [C, G]] with determinant Delta_0 by the new Mathlib leaf lem-weil-pbc-block-triangular-determinant (Matrix.det_fromBlocks_zero₁₂) (Step 7), conclusion (Step 8). Statement unchanged (it already treats a family a_1..a_n with repetitions, as the citers lem-weil-pbc-popescu-delocalize-base Step 2 and lem-weil-pbc-popescu-delocalize-weak Step 4 use it; both use exactly the statement: the presentation over the base with c relations, n <= c <= n+m, unit Jacobian of the first c variables, x_i -> a_i). Mathlib: no match after LeanSearch, LeanFinder, Loogle and grep; mathlib_candidate recorded (naive presentation + jacobiMatrix_naive + det_fromBlocks_zero₁₂)."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "result": "accepted",
+  "note": "8 steps following Smoothing 07EY: the old presentation; lifts h_i; the map phi from R[x, y]; its kernel (x_i - h_i, g_j) proved via the substitution sigma (omitted in the source); c = n + d; the partial derivatives; the block-triangular Jacobian with determinant Delta_0 by a new Mathlib leaf (det_fromBlocks_zero_12, Determinant/Basic.lean:726 verified by L); conclusion. Statement unchanged."
+ }
 }

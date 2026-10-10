@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-block-triangular-determinant",
+ "kind": "statement",
+ "title": "Determinant of a block lower-triangular matrix",
+ "statement": "Let $R$ be a commutative ring, $p,q\\ge0$ integers and $M$ a $(p+q)\\times(p+q)$ matrix with entries in $R$ which in block form is $M=\\begin{pmatrix}P&0\\\\C&Q\\end{pmatrix}$, with $P$ a $p\\times p$ matrix (rows and columns $1,\\dots,p$), $Q$ a $q\\times q$ matrix (rows and columns $p+1,\\dots,p+q$), $C$ a $q\\times p$ matrix and the upper right $p\\times q$ block zero, i.e. $M_{ij}=0$ for $i\\le p<j$. Then $\\det M=\\det P\\cdot\\det Q$ (an empty determinant being $1$).",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Lemma Tag 07EY (lemma-standard-smooth-include-generators, line 694), proof lines 705-718: the Jacobian matrix of the presentation R[x_1..x_n,y_1..y_m]/(x_1-h_1,...,x_n-h_n,g_1,...,g_d) is block lower-triangular; the source uses the determinant formula without stating it"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "determinant of block lower triangular matrix with zero upper right block equals product of determinants of diagonal blocks",
+   "results": "Matrix.det_fromBlocks_zero₁₂ (Mathlib.LinearAlgebra.Matrix.Determinant.Basic), Matrix.twoBlockTriangular_det', Matrix.twoBlockTriangular_det, Matrix.BlockTriangular.det_fintype, Matrix.det_of_lowerTriangular (Mathlib.LinearAlgebra.Matrix.Block)",
+   "date": "2026-10-10",
+   "verdict": "match: Matrix.det_fromBlocks_zero₁₂"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det (Matrix.fromBlocks _ 0 _ _)",
+   "results": "Matrix.det_fromBlocks_zero₁₂ : (Matrix.fromBlocks A 0 C D).det = A.det * D.det (Mathlib.LinearAlgebra.Matrix.Determinant.Basic)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -n 'det_fromBlocks_zero' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean; grep -n 'theorem det_reindex_self' same file; grep -rn 'def finSumFinEquiv' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "Determinant/Basic.lean:675 det_fromBlocks_zero₂₁, :726 det_fromBlocks_zero₁₂ (read by sed -n 720,735p), :252 det_reindex_self; Logic/Equiv/Fin/Basic.lean:228 finSumFinEquiv : Fin m ⊕ Fin n ≃ Fin (m + n)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rli 'block.{0,20}triangular|fromBlocks|det_fromBlocks' dag/nodes; ls dag/nodes/*/ | grep -i 'determinant|block'",
+   "results": "no DAG node states the block-triangular determinant formula (hits are unrelated: filtrations, weight blocks, determinant lines)",
+   "date": "2026-10-10",
+   "verdict": "no existing node"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Matrix.det_fromBlocks_zero₁₂",
+  "file": "Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean",
+  "line": 726,
+  "how": "specializes in one line: for A : Matrix m m R, C : Matrix n m R, D : Matrix n n R over a commutative ring, (Matrix.fromBlocks A 0 C D).det = A.det * D.det (lines 726-727, read by sed -n 720,735p); with m = Fin p, n = Fin q this is the statement for the matrix indexed by Fin p ⊕ Fin q, and the indexing by 1..p+q is transported by finSumFinEquiv (Mathlib/Logic/Equiv/Fin/Basic.lean:228) using det_reindex_self (Determinant/Basic.lean:252)"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-standard-smooth-include-generators",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: Mathlib leaf (Matrix.det_fromBlocks_zero_12, Determinant/Basic.lean:726, reindexed by finSumFinEquiv); line verified."
+}
