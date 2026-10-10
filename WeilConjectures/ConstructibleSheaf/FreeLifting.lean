@@ -11,7 +11,9 @@ public import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import WeilConjectures.Algebra.Homology.ResolutionByClass
 public import Mathlib.CategoryTheory.Sites.EpiMono
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.Monoidal
+public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 
@@ -248,15 +250,74 @@ noncomputable def upperStarFreeYonedaIso {Y : Scheme.{u}} (g : Y ⟶ X) (W : X.E
       apply (e _).injective
       rw [he, Equiv.apply_symm_apply, Equiv.apply_symm_apply])
 
-/-- **Free sheaves on affine étale schemes are constructible** [Stacks 03SA, 095M]. Let `X` be
-Noetherian and `Λ` finite. The free étale sheaf `Λ[W] = j_{W!} Λ_W` on an affine étale
-`X`-scheme `W` is constructible: over a stratification of `X` on whose strata `W` becomes finite
-étale, its pullbacks are the pushforwards of `Λ` along finite étale maps, which are finite
-locally constant. -/
-theorem isConstructibleSheaf_freeYoneda [Finite Λ] [IsNoetherian X] (W : X.Etale)
-    [IsAffine W.left] :
-    Scheme.IsConstructibleSheaf (Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of Λ Λ)) :=
+/-- **Generic local constancy of free sheaves.** Let `Z` be a nonempty scheme with Noetherian
+underlying space and `Λ` finite. The free étale sheaf `Λ[W]` on an affine étale `Z`-scheme `W`
+is finite locally constant on some nonempty open `U ⊆ Z`: over a dense open `U` the morphism
+`W ⟶ Z` is finite étale (it is finite étale over the generic points of `Z`, and this spreads
+out), and the free sheaf on a finite étale `U`-scheme is finite locally constant, the finite
+étale scheme splitting étale-locally on `U` (`lem-fet-locally-trivial`). -/
+theorem exists_isFiniteLocallyConstantSheaf_freeYoneda [Finite Λ] {Z : Scheme.{u}}
+    [TopologicalSpace.NoetherianSpace Z] [Nonempty Z] (W : Z.Etale) [IsAffine W.left] :
+    ∃ U : Z.Opens, (U : Set Z).Nonempty ∧ Scheme.IsFiniteLocallyConstantSheaf
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj
+        (Sheaf.freeYoneda Z.smallEtaleTopology W (ModuleCat.of Λ Λ))) :=
   sorry
+
+/-- **Free sheaves on affine étale schemes are constructible** [Stacks 03SA, 095M]. Let `X` be
+a scheme with Noetherian underlying space and `Λ` finite. The free étale sheaf `Λ[W] = j_{W!} Λ_W`
+on an affine étale `X`-scheme `W` is constructible. By Noetherian induction it is finite
+locally constant on a nonempty open `U`
+(`AlgebraicGeometry.Etale.exists_isFiniteLocallyConstantSheaf_freeYoneda`) and, by base change
+(`AlgebraicGeometry.Etale.upperStarFreeYonedaIso`), its restriction to the closed complement of
+`U` is the free sheaf on an affine étale scheme over a smaller closed subset. -/
+theorem isConstructibleSheaf_freeYoneda [Finite Λ] [TopologicalSpace.NoetherianSpace X]
+    (W : X.Etale) [IsAffine W.left] :
+    Scheme.IsConstructibleSheaf (Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of Λ Λ)) := by
+  -- Noetherian induction on the closed subsets `C` of `X` containing the image of a closed
+  -- subscheme `Z`
+  suffices h : ∀ C : TopologicalSpace.Closeds X, ∀ (Z : Scheme.{u}) (i : Z ⟶ X)
+      [IsClosedImmersion i], Set.range i.base ⊆ C → ∀ (W : Z.Etale) [IsAffine W.left],
+      Scheme.IsConstructibleSheaf (Sheaf.freeYoneda Z.smallEtaleTopology W (ModuleCat.of Λ Λ)) by
+    exact h ⊤ X (𝟙 X) (Set.subset_univ _) W
+  intro C
+  induction C using WellFoundedLT.induction with
+  | _ C ih =>
+  intro Z i _ hZC W _
+  have : TopologicalSpace.NoetherianSpace (Set.range i.base) := inferInstance
+  have : TopologicalSpace.NoetherianSpace Z :=
+    (TopologicalSpace.noetherianSpace_iff_of_homeomorph
+      i.isClosedEmbedding.isEmbedding.toHomeomorph).2 inferInstance
+  by_cases hZ : IsEmpty Z
+  · exact Scheme.IsConstructibleSheaf.of_isZero (Scheme.Etale.isZero_sheaf_of_isEmpty _)
+  rw [not_isEmpty_iff] at hZ
+  obtain ⟨U, hU, hlc⟩ := exists_isFiniteLocallyConstantSheaf_freeYoneda (Λ := Λ) W
+  let i' := Scheme.Opens.closedComplement U
+  have : TopologicalSpace.NoetherianSpace U.toScheme :=
+    inferInstanceAs (TopologicalSpace.NoetherianSpace (U : Set Z))
+  have hij : Set.range i'.base = (Set.range U.ι.base)ᶜ := by
+    rw [Scheme.Opens.range_closedComplement, Scheme.Opens.range_ι]
+  rw [Scheme.isConstructibleSheaf_iff_upperStar U.ι i' hij]
+  refine ⟨hlc.isConstructibleSheaf, ?_⟩
+  have : IsAffine (i'.Etale.obj W).left :=
+    have : IsAffine ((𝟭 Scheme).obj W.left) := ‹IsAffine W.left›
+    isAffine_of_isAffineHom (pullback.fst W.hom i')
+  let C' : TopologicalSpace.Closeds X :=
+    ⟨Set.range (i' ≫ i).base, (i' ≫ i).isClosedEmbedding.isClosed_range⟩
+  have hC' : C' < C := by
+    refine lt_of_le_of_ne (fun x hx ↦ ?_) fun h ↦ ?_
+    · obtain ⟨z, rfl⟩ := hx
+      exact hZC ⟨_, rfl⟩
+    · obtain ⟨u, hu⟩ := hU
+      have hx : i.base u ∈ (C : Set X) := hZC ⟨u, rfl⟩
+      rw [← h] at hx
+      obtain ⟨z, hz⟩ := hx
+      rw [Scheme.Hom.comp_apply] at hz
+      have := i.isClosedEmbedding.injective hz
+      have hz' : u ∈ Set.range i'.base := ⟨z, this⟩
+      rw [hij] at hz'
+      exact hz' ⟨⟨u, hu⟩, rfl⟩
+  have := ih C' hC' _ (i' ≫ i) subset_rfl (i'.Etale.obj W)
+  exact Scheme.IsConstructibleSheaf.of_iso (upperStarFreeYonedaIso i' W).symm
 
 /-- **Constructible sheaves are generated by finitely many sections** [Stacks 095M; SGA 4½,
 Rapport, 4.6]. Let `X` be Noetherian and `Λ` finite. A constructible sheaf `G` of `Λ`-modules
