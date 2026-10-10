@@ -17,7 +17,10 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Con
 The restrictions of sheaves of `ℚ̄_ℓ,X`-modules on `X_proét` along the members of a pro-étale
 covering family, for instance an open cover, are jointly conservative
 (`AlgebraicGeometry.ProEtale.isIso_of_isIso_adicUpperStar`), and so are the induced functors on
-the derived categories (`AlgebraicGeometry.ProEtale.isIso_of_isIso_mapDerivedCategory_adicUpperStar`).
+the derived categories
+(`AlgebraicGeometry.ProEtale.isIso_of_isIso_mapDerivedCategory_adicUpperStar`). For an open cover
+`X = U ∪ V`, a K-injective complex vanishing on `U` is the pushforward of its restriction to `V`
+(`AlgebraicGeometry.ProEtale.isIso_Q_map_unit_of_isZero`).
 -/
 
 @[expose] public section
@@ -146,6 +149,15 @@ lemma isIso_Q_map_unit_of_isZero (hcov : ∀ x, x ∈ Set.range jU.base ∨ x �
           ((jV)_*ᵃ[l].rightDerivedFunctorObjQIso J).symm ≪≫
         (adicDerivedBaseChangeIso l hsq).app _
     exact isIso_of_isZero_of_isZero _ hI h₂
+
+open ZeroObject in
+/-- **Restrictions along a pro-étale cover detect zero objects.** -/
+lemma isZero_of_isZero_adicUpperStar {ι : Type*} {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ X)
+    [∀ i, WeaklyEtale (g i)] (hg : Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage X)
+    {M : AdicSheaf l X} (h : ∀ i, IsZero ((g i)^*ᵃ[l].obj M)) : IsZero M := by
+  have : IsIso (0 : M ⟶ 0) := isIso_of_isIso_adicUpperStar l g hg _ fun i ↦
+    isIso_of_isZero_of_isZero _ (h i) ((g i)^*ᵃ[l].map_isZero (isZero_zero _))
+  exact (isZero_zero _).of_iso (asIso (0 : M ⟶ 0))
 
 end MayerVietoris
 
