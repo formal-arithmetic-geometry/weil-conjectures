@@ -2262,3 +2262,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:35 L: merged deliver/C1/lem-pc-kflat-pullback-preservation (reviewer PASS; first push; new nodes: 1)
 - 18:36 L: merged deliver/E1/lem-exc-finite-galois-algebra-tensor-decomposition (reviewer FIX; first push; new nodes: 0)
 - 18:37 L: merged deliver/J1/lem-sc-noetherian-extension-by-zero-reduction (reviewer PASS; first push; new nodes: 2)
+- 18:37 L: merged deliver/J1/lem-sc-open-curve-boundary-higher-direct-image-vanishing (reviewer FIX; first push; new nodes: 2)

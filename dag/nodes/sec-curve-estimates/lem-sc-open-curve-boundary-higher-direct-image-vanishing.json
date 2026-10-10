@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Boundary higher direct images of the multiplicative group vanish",
- "statement": "Let k be an algebraically closed field, let Cbar be a proper smooth connected curve over k [def-sc-curves], let S be a finite set of closed points, let C := Cbar minus S, and let j:C \\to Cbar be the open immersion [def-weil-open-immersion]. For every geometric point x of Cbar [def-weil-pbc-geometric-stalks] and every q=1,2, the stalk (R^q j_* G_m)_x of the higher direct image [def-weil-pbc-direct-image] of the etale sheaf G_m [def-sc-gm-torsor] is zero. At x in C this is because j is an isomorphism locally; at a geometric point over P in S it is H^q of the fraction field of the strict henselization [def-weil-pbc-strict-henselization-limit] of the DVR O_{Cbar,P} [def-sc-discrete-valuation-ring], which vanishes for q=1 by Hilbert 90 and for q=2 by vanishing of the Brauer group of that field.",
+ "statement": "Let $k$ be an algebraically closed field, let $\\bar C$ be a proper smooth connected curve over $k$ [def-sc-curves], let $S$ be a finite set of closed points of $\\bar C$, put $C=\\bar C\\setminus S$, and let $j:C\\to\\bar C$ be the open immersion [def-weil-open-immersion]. For every geometric point $\\bar x$ of $\\bar C$ [def-weil-pbc-geometric-stalks], the stalks $(R^qj_*\\mathbf G_m)_{\\bar x}$ vanish for $q=1,2$, where higher direct images and the etale sheaf of units are as in [def-weil-pbc-direct-image] and [def-sc-gm-torsor].",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Discussion preceding Tag 03RM, computation of stalks of R^q j_* G_m using strict henselizations"
@@ -23,14 +23,66 @@
   "def-weil-pbc-direct-image",
   "def-sc-gm-torsor",
   "def-weil-open-immersion",
-  "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-etale-cohomology",
-  "def-sc-discrete-valuation-ring"
+  "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The open immersion $j$ is quasi-compact because $C$ is an open subscheme of the Noetherian curve $\\bar C$, and quasi-separated because it is an open immersion. Apply [lem-weil-pbc-gm-strict-henselization-stalk-formula] to $f=j$: for every geometric point $\\bar x$, $(R^qj_*\\mathbf G_m)_{\\bar x}$ is, by the last assertion of that statement, $H^q((C\\times_{\\bar C}\\bar C_{(\\bar x)})_{\\mathrm{Et}},\\mathbf G_m)$, where $\\bar C_{(\\bar x)}$ is the strict henselization at $\\bar x$.",
+   "uses": [
+    "lem-weil-pbc-gm-strict-henselization-stalk-formula",
+    "def-weil-open-immersion",
+    "lem-sc-smooth-connected-curve-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Theorem Tag 03Q9 (theorem-higher-direct-images), specialized to j and G_m"
+   }
+  },
+  {
+   "text": "If $\\bar x$ lies over a point of $C$, some open neighbourhood $V$ of that point in $\\bar C$ lies in $C$. Over $V$, $j$ is the identity, whose direct-image functor is exact; restriction to $V$ therefore makes $R^qj_*\\mathbf G_m$ zero for every $q>0$. Its stalk at $\\bar x$ is zero.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03RJ (lemma-higher-direct-jstar-Gm), geometric-stalk argument adapted to an interior point"
+   }
+  },
+  {
+   "text": "If $\\bar x$ lies over $P\\in S$, [lem-sc-smooth-connected-curve-local-rings] makes $A=\\mathcal O_{\\bar C,P}$ a Noetherian DVR with fraction field $k(\\bar C)$. By [lem-sc-strict-henselization-dvr] applied to $Y=\\bar C$, $A^{\\mathrm{sh}}=\\mathcal O^{\\mathrm{sh}}_{\\bar C,\\bar x}$ is again a DVR and $A\\to A^{\\mathrm{sh}}$ is a flat local, hence injective, homomorphism. The base change $C\\times_{\\bar C}\\operatorname{Spec}(A^{\\mathrm{sh}})$ is the open subscheme of points not mapping to $P$; it removes exactly the closed point: the closed point maps to $P$ (locality), while the generic point maps to the generic point of $\\bar C$ (the injection $A\\to A^{\\mathrm{sh}}$ of domains pulls back the zero ideal to the zero ideal), which lies in $C$. Thus it is $\\operatorname{Spec}K$ for $K=\\operatorname{Frac}(A^{\\mathrm{sh}})\\supset k(\\bar C)$. Each element of $A^{\\mathrm{sh}}$ comes from an etale neighbourhood of $P$, whose fraction field is finite algebraic over $k(\\bar C)$; hence $K/k(\\bar C)$ is algebraic. For $q=1$, [cor-sc-hilbert-90-field] gives $H^1((\\operatorname{Spec}K)_{\\mathrm{Et}},\\mathbf G_m)=0$. For $q=2$, apply [lem-sc-brauer-algebraic-function-field-zero] with $L=E=K$ (the degree-one separable extension) to obtain $H^2((\\operatorname{Spec}K)_{\\mathrm{Et}},\\mathbf G_m)=0$. The stalks in Step 1 therefore vanish.",
+   "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-strict-henselization-dvr",
+    "def-weil-pbc-strict-henselization-limit",
+    "cor-sc-hilbert-90-field",
+    "lem-sc-brauer-algebraic-function-field-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma Tag 03RJ (lemma-higher-direct-jstar-Gm), boundary calculation and its invocation of Tag 03RG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-gm-strict-henselization-stalk-formula",
+  "def-weil-open-immersion",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "def-weil-pbc-direct-image",
+  "lem-sc-strict-henselization-dvr",
+  "def-weil-pbc-strict-henselization-limit",
+  "cor-sc-hilbert-90-field",
+  "lem-sc-brauer-algebraic-function-field-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem Tag 03Q9 and Lemma Tag 03RJ, adapted to an open curve"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,12 +114,43 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-open-curve-gm-direct-image-cohomology",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-open-curve-boundary-higher-direct-image-vanishing",
+  "worker": "stage1",
+  "summary": "Use the unrestricted strict-henselization stalk formula and DVR preservation, then identify the boundary field as an algebraic extension of the curve function field and apply existing field-level vanishing.",
+  "blueprint": "Realizes the stalk-computation sentence in the affine-case proof of lem-sc-brauer-zero; the steps adapt the geometric-stalk calculation of Stacks Tag 03RJ to the open complement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Structural black box: supplies Noetherianity and the DVR local ring at each closed point; no node of sk-thm-br states these local facts."
+   },
+   {
+    "node": "lem-sc-brauer-algebraic-function-field-zero",
+    "why": "Field-level vanishing black box for an algebraic extension of k(Cbar); no node of sk-thm-br states this algebraic-extension case."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-brauer-algebraic-function-field-zero",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-brauer-algebraic-function-field-zero"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-bhv1836",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bhv1836 (reviewer sub-agent of L); spot-checked: No cycle (new nodes and cited lem-sc-brauer-algebraic-function-field-zero/tsen/c1-brauer-trivial/smooth-connected-curve-local-rings do not reach the item); stalk computation cites the new 03Q9 G_m node (existing prop is torsion-only, so not a duplicate); tool uses accepted. FIX more, RETURN less: (1) C4 Step 1 used H^q(fibre, G_m) but the cited stalk node gives p^{-1}G_m: added to that new node the identification p^{-1}G_m = G_m on the limit (Tag 09YQ), Step 1 cites it; (2) C1 Step 3 applied the ring-level DVR node to O^sh_{Cbar,xbar} without identifying it with (O_{Cbar,P})^sh and used injectivity/flatness of A -> A^sh for the generic-point claim uncited: restated lem-sc-strict-henselization-dvr scheme-wise (04HX + 0AP3 + 07QM: iota flat local, DVR iff DVR), Step 3 rewritten to use it; one LeanFinder query recorded.; 3 file(s) fixed by the reviewer"
+ }
 }
