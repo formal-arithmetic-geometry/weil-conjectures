@@ -1,8 +1,8 @@
 # Work queue
 
-911 items; claim with `tools/claim.py next <group> [--stage N]`.
+909 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (174)
+## Stage 1: nodes to split (172)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -53,10 +53,8 @@
 | `lem-pc-derived-pullback-tor-independent-flat-complex` | 5013 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
 | `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
-| `lem-pc-bounded-above-flat-tensor-acyclic` | 5014 | none |
 | `lem-pc-flat-bounded-complex-descent` | 5014 | none |
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 5014 | none |
-| `lem-pc-module-filtered-colimits-tensor` | 5014 | none |
 | `lem-pc-proper-support-descent` | 5014 | none |
 | `lem-pc-sites-modules-sheafification-flat` | 5014 | none |
 | `lem-sp-cartan-eilenberg-comparison-homotopy` | 6006 | none |
@@ -923,7 +921,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1481 nodes that wait for a statement dependency, 214 nodes that wait for stage 1.
+Not open yet: 1483 nodes that wait for a statement dependency, 212 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
