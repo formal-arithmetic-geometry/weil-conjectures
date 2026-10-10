@@ -98,7 +98,7 @@ section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
   [HasInvertibleExponent Λ (Spec (.of k))]
-  {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
+  {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
   [HasCompactification aX]
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
@@ -124,7 +124,6 @@ theorem isPerfect_compactlySupportedGlobalSections
     rw [_root_.DerivedCategory.isLE_iff]
     exact fun q hq ↦ hab q (Or.inr hq)
 
-omit [IsSeparated aX] in
 include aX in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
@@ -168,7 +167,6 @@ theorem isPerfect_ihom_compactlySupportedGlobalSections
       (𝟙_ _)).IsPerfect :=
   (isPerfect_compactlySupportedGlobalSections Λ aX K hK).ihom_unit
 
-omit [IsSeparated aX] in
 include aX in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
