@@ -1,8 +1,8 @@
 # Work queue
 
-865 items; claim with `tools/claim.py next <group> [--stage N]`.
+864 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (58)
+## Stage 1: nodes to split (57)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,8 +12,7 @@
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
 | `lem-pc-module-flat-opcycles-tor-criterion` | 3017 | none |
 | `lem-sc-derived-open-mayer-vietoris-ses` | 3017 | none |
-| `lem-sc-derived-internal-hom-adjunction` | 3019 | none |
-| `lem-pc-sheaf-rhom-projection-formula` | 3021 | none |
+| `lem-sc-derived-hom-tensor-total` | 3020 | none |
 | `lem-pc-tor-independent-perfect-pullback-comparison` | 3021 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-perfect-ext-bounded-qcoh-vanishing` | 3022 | none |
@@ -877,7 +876,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1686 nodes that wait for a statement dependency, 99 nodes that wait for stage 1.
+Not open yet: 1688 nodes that wait for a statement dependency, 98 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
