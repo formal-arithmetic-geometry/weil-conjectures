@@ -1767,3 +1767,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:19 L: returned deliver/G1/lem-sc-affine-cap-section-open (reviewer RETURN: 1. D1/C3: item steps 2-5: these steps are the proof of the new node lem-sc-affine-cap-section-open-algebra (construction)
 - 15:19 L: returned deliver/K1/lem-sc-p1-proj-sheafification-exact (reviewer RETURN: 1. C4: item, Step 1: lem-weil-pbc-proj-graded-module-sheaf-exists (and def-weil-pbc-proj-twisting-sheaf (1)) state only )
 - 15:19 L: merged deliver/F1/lem-sc-pic-lift-closed-immersion-dim-le-one (reviewer PASS; after a return; new nodes: 4)
+- 15:20 L: merged deliver/H1/lem-sc-torsion-sections-generic (reviewer FIX; after a return; new nodes: 0)

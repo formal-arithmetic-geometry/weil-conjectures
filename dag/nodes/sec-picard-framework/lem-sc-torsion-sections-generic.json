@@ -19,11 +19,78 @@
  "stmt_deps": [
   "def-pc-integral-scheme",
   "pqf-def-coherent",
-  "def-sc-function-field"
+  "def-sc-function-field",
+  "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x\\in U$. By quasi-coherence [pqf-def-coherent], choose an affine open $W=\\operatorname{Spec}A$ containing $x$ with $\\mathcal F|_W=\\widetilde M$ for an $A$-module $M$. Since $W\\cap U$ is an open neighbourhood of $x$ in $W$, choose $f\\in A$ with $x\\in D(f)\\subseteq W\\cap U$ (principal opens form a basis). The open $D(f)$ is nonempty, so it contains $\\eta$ because $X$ is integral. By [lem-weil-pbc-spec-module-tilde-sections], the map $\\tau_{D(f)}:M\\to\\widetilde M(D(f))$ is localization at the powers of $f$; hence for $s|_{D(f)}$ there are $m\\in M$ and $k\\ge 0$ with $f^k s|_{D(f)}=\\tau_{D(f)}(m)$. As $f$ is invertible on $D(f)$, its germs $f_x$ and $f_\\eta$ are units, so $s_x$ (resp. $s_\\eta$) is torsion (resp. zero) exactly when the corresponding germ of the section $\\tau_W(m)$ is torsion (resp. zero). Now apply [lem-weil-pbc-spec-tilde-stalk-localization] on $\\operatorname{Spec}A$ to $\\tau_W(m)$ at $\\mathfrak p_x$ and at $(0)$; [lem-sc-integral-scheme-stalks-in-function-field] identifies the latter localization's fraction field with $k(X)$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "pqf-def-coherent",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves, parts (2), (6), (7); Stacks Tag 0AXR, lemma-torsion-sections, proof omitted"
+   }
+  },
+  {
+   "text": "If $s_\\eta=0$, Step 1 and the localization criterion for $m/1=0$ in $M_{(0)}$ give $a\\in A\\setminus\\{0\\}$ with $am=0$. The germ $a_x$ kills the germ of $\\tau_W(m)$ by [def-weil-pbc-module-stalk], and hence kills $s_x$ because $s_x=f_x^{-k}(\\tau_W(m))_x$ with $f_x$ a unit. Its germ $a_x$ is nonzero in $\\mathcal O_{X,x}$ because the map $A\\to\\mathcal O_{X,x}\\to k(X)$ is injective [lem-sc-integral-scheme-stalks-in-function-field]. As $x$ was arbitrary, (3) implies (2).",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AXR, lemma-torsion-sections, implication (3) to (2); proof omitted, localization calculation supplied here"
+   }
+  },
+  {
+   "text": "If $s_x$ is torsion for some $x\\in U$, take $0\\neq b\\in\\mathcal O_{X,x}$ with $b s_x=0$. The germ map $\\rho_x:\\mathcal O_{X,x}\\hookrightarrow k(X)$ of [lem-sc-integral-scheme-stalks-in-function-field] sends $b$ to a nonzero element of the field $k(X)$, hence to a unit. Applying the compatible map $\\mathcal F_x\\to\\mathcal F_\\eta$ to $b s_x=0$ gives $\\rho_x(b)s_\\eta=0$, hence $s_\\eta=0$. Thus (1) implies (3).",
+   "uses": [
+    "lem-sc-integral-scheme-stalks-in-function-field",
+    "def-sc-function-field",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AXR, lemma-torsion-sections, implication (1) to (3); proof omitted, germ calculation supplied here"
+   }
+  },
+  {
+   "text": "The open $U$ is nonempty, so (2) implies (1). Since $\\eta\\in U$ and $s_\\eta=0$ is killed by $1\\in\\mathcal O_{X,\\eta}$, (3) also directly implies (1). For the generic-point morphism $j:\\operatorname{Spec}k(X)\\to X$, its inverse image of any nonempty open $U$ is its one-point source, so $(j_*\\mathcal F_\\eta)(U)=\\mathcal F_\\eta$ and the image of $s$ is exactly $s_\\eta$. Thus (3) and (4) are equivalent, finishing all four equivalences.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0AXR, lemma-torsion-sections, conditions (1)-(4); proof omitted, definition of generic-point pushforward used here"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "def-sc-function-field",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0AXR, lemma-torsion-sections (proof omitted); affine localization calculation from Schemes Tag 01HV"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -55,12 +122,27 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-torsion-subsheaf-quotient",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-rr"
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "lem-sc-torsion-sections-generic",
+  "worker": "stage1",
+  "summary": "Checked the four clauses against Stacks 0AXR and supplied its omitted proof using the existing affine associated-module and stalk-localization nodes: vanishing at the generic stalk clears one nonzero denominator on every affine neighbourhood, while torsion at one stalk maps to zero over the function field. The generic-point pushforward clause is evaluation on a nonempty open. No new nodes or Mathlib leaves were needed.",
+  "blueprint": "The steps realize the sentence 'an element of F_x dies in F_eta iff it is killed by a nonzero element of O_{C,x}' in the imported lem-sc-riemann-roch proof, The torsion part, by first identifying affine stalks with module localizations and then comparing their zero and torsion elements."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ts2",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ts2 (reviewer sub-agent of L); spot-checked: Repaired re-push after return 9edd1fda3: return point 1 (C4, step 1) repaired as prescribed: W=Spec A from [pqf-def-coherent], D(f) in W cap U by the principal-open basis, f^k s|D(f)=tau_D(f)(m) from [lem-weil-pbc-spec-module-tilde-sections] (localization at powers of f), unit germs f_x,f_eta transfer torsion/vanishing to tau_W(m), then [lem-weil-pbc-spec-tilde-stalk-localization] at p_x and (0); step 2 now derives a_x s_x=0 from s_x=f_x^{-k}tau_W(m)_x; the wrong Wanted entry was dropped. Source: Stacks 0AXR divisors.tex lemma-torsion-sections lines 1649-1665 (proof omitted); the statement agrees hypothesis by hypothesis (integral X, generic point, quasi-coherent F, nonempty open U, s in F(U), four clauses), statement text unchanged on the branch. Steps: 3=>2 via step 1 + localization zero criterion in M_(0) and injectivity part 1 of [lem-sc-integral-scheme-stalks-in-function-field] for a_x nonzero; 1=>3 via injective rho_x into the field k(X) [def-sc-function-field]; 2=>1 and 3=>1 since U nonempty and eta in U; 3<=>4 since j^{-1}U is the one-point source. Each cited statement read and checked to say what the step takes. Only changed fields are split-owned (stmt_deps adds def-weil-pbc-module-stalk for germs). No new nodes, no Mathlib leaves. Small cases: Spec k, Spec Z with O, ~(Z/n), ~(Z+Z/n) agree. FIX: dag/nodes/sec-picard-framework/lem-sc-torsion-sections-generic.json: proof[1].uses: added def-weil-pbc-module-stalk, cited in the step text but missing from uses. Start Sat Oct 10 03:19:17 PM UTC 2026, end Sat Oct 10 03:19:52 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ }
 }
