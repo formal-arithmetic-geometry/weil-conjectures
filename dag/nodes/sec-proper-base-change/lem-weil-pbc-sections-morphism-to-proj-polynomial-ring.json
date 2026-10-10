@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-finite-etale-lifting",
-   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs), specialized to the construction from sections on an affine-base projective scheme",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
    "via": [
     "lem-weil-pbc-ample-very-ample-immersion-affine-base",
     "lem-weil-pbc-coherent-serre-vanishing",
@@ -45,12 +45,13 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemmas 01NG, 01M4 and Modules, Lemma 01MS"
+    "place": "Constructions, Lemmas 01NG, 01M4 and 01MS"
    }
   },
   {
-   "text": "*The local trivializations and ratios.* Since $\\mathcal M$ is invertible, on the open locus where the germ of $s_k$ is outside $\\mathfrak m_y\\mathcal M_y$ it is a basis of the rank-one stalk; this is the defining local calculation for $Y_{s_k}$ and gives the unique quotient $a^{(k)}_l=s_l/s_k\\in\\Gamma(Y_{s_k},\\mathcal O_Y)$ with $s_l=a^{(k)}_ls_k$. The assumed cover says that these opens cover $Y$. On $Y_{s_k}\\cap Y_{s_l}$ one has $a^{(l)}_k a^{(k)}_l=1$ and $a^{(k)}_r=a^{(l)}_r(a^{(l)}_k)^{-1}$; the same local-basis calculation shows that this overlap is exactly the locus in $Y_{s_k}$ where $a^{(k)}_l$ is invertible.",
+   "text": "*The local trivializations and ratios.* By [lem-weil-pbc-nonvanishing-section-trivializes], each $Y_{s_k}$ is open, $a\\mapsto a\\,s_k|$ is an isomorphism $\\mathcal O_{Y_{s_k}}\\to\\mathcal M|_{Y_{s_k}}$, and there is a unique $a^{(k)}_l=s_l/s_k\\in\\Gamma(Y_{s_k},\\mathcal O_Y)$ with $s_l=a^{(k)}_ls_k$ on $Y_{s_k}$. The assumed cover says that these opens cover $Y$. On $Y_{s_k}\\cap Y_{s_l}$ uniqueness of the quotient gives $a^{(l)}_k a^{(k)}_l=1$ (since $s_k=a^{(l)}_ka^{(k)}_ls_k$) and $a^{(k)}_r=a^{(l)}_r(a^{(l)}_k)^{-1}$ (since $s_r=a^{(l)}_rs_l=a^{(l)}_ra^{(k)}_ls_k$). For $y\\in Y_{s_k}$ the stalk $\\mathcal M_y$ is free on the germ of $s_k$ by the isomorphism above, so the germ of $s_l=a^{(k)}_ls_k$ lies outside $\\mathfrak m_y\\mathcal M_y$ if and only if the germ of $a^{(k)}_l$ lies outside $\\mathfrak m_y$, i.e. is a unit of $\\mathcal O_{Y,y}$; thus $Y_{s_k}\\cap Y_{s_l}$ is exactly the locus in $Y_{s_k}$ where $a^{(k)}_l$ is invertible.",
    "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes",
     "def-sc-invertible-module"
    ],
    "elementary": false,
@@ -124,6 +125,7 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-proj-polynomial-twist-chart",
+  "lem-weil-pbc-nonvanishing-section-trivializes",
   "def-sc-invertible-module",
   "lem-weil-pbc-morphism-into-affine-scheme",
   "lem-weil-pbc-scheme-morphism-gluing",
@@ -208,5 +210,6 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (FIX: trivialization lemma cited in step 2, from.place restored, two source labels, the chart node's S_(x_k) cited and q made explicit): 01N8 read, 7 steps checked, small cases"
- }
+ },
+ "lead_note": "2026-10-10 L: reviewer found WeilConjectures/AlgebraicGeometry/ProjectiveSpace/OfInvertible.lean (homOfIsFreeGenerator, exists_hom_twistRestrict line 291, sorry-free) stating the same construction for P(n;S) with Proj's twist; not an exact match (Proj(A[x]) with the glued O(1) here); candidate for the Lean stage."
 }
