@@ -1,0 +1,75 @@
+{
+ "id": "lem-weil-pbc-finite-discrete-scheme-affine",
+ "kind": "statement",
+ "title": "A scheme with finite discrete underlying space is affine",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] whose underlying topological space is finite and discrete (every subset of $X$ is open). Then $X$ is an affine scheme: the canonical morphism $X\\to\\operatorname{Spec}\\Gamma(X,\\mathcal O_X)$ [def-weil-affine-spectrum] (corresponding to the identity of $\\Gamma(X,\\mathcal O_X)$) is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "proof of Morphisms, Lemma Tag 03J6 (lemma-composition-universally-bounded), line 15371: 'Thus X_z is an affine scheme (this is a nice exercise; it also follows for example from Properties, Lemma 01ZV (properties-lemma-maximal-points-affine) applied to the set of all points of X_z)'; Properties, Lemma Tag 01ZV, properties.tex"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, DiscreteTopology, Finite",
+   "results": "AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat (Mathlib.AlgebraicGeometry.Limits)",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a scheme whose underlying space is finite and discrete is affine",
+   "results": "instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat, instIsAffineOfSubsingletonCarrierCarrierCommRingCat (AlgebraicGeometry.Limits), IsAffine, AffineScheme, IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme with finite discrete underlying topological space is an affine scheme",
+   "results": "instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat (AlgebraicGeometry.Limits), IsFinite.instHasAffineProperty..., instIsAffineTerminalScheme, IsArtinianScheme.finite, IsLocallyArtinian.discreteTopology_of_isAffine",
+   "date": "2026-10-10",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'Finite X\\] \\[DiscreteTopology X\\]' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -n DiscreteTopology ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Artinian.lean",
+   "results": "AlgebraicGeometry/Limits.lean:700 instance (priority := low) [Finite X] [DiscreteTopology X] : IsAffine X (proof: X is the disjoint union of the affine one-point opens, IsAffineOpen.iSup_of_disjoint); Artinian.lean: IsLocallyArtinian/IsArtinianScheme results, not this",
+   "date": "2026-10-10",
+   "verdict": "match (source read)"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat",
+  "file": "Mathlib/AlgebraicGeometry/Limits.lean",
+  "how": "exact: the anonymous instance at line 700, {X : Scheme} [Finite X] [DiscreteTopology X] : IsAffine X; IsAffine X is by definition IsIso X.toSpecΓ, the canonical morphism X -> Spec Γ(X, ⊤). Source read 2026-10-10",
+  "line": 700
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-composition-fibre-degree-bound",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lead_note": "L 2026-10-10: match verified (Limits.lean:700, anonymous instance [Finite X] [DiscreteTopology X] : IsAffine X)."
+}

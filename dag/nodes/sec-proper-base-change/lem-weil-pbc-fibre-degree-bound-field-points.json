@@ -1,0 +1,72 @@
+{
+ "id": "lem-weil-pbc-fibre-degree-bound-field-points",
+ "kind": "statement",
+ "title": "Fibre degree bounds hold for all field-valued points (Stacks 03J5)",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $n\\ge0$ an integer. The following are equivalent: (1) $n$ bounds the degrees of the fibres of $f$ [def-weil-pbc-fibre-degree-bound]; (2) for every field $K$ and every morphism of schemes $\\operatorname{Spec}K\\to Y$ [def-weil-affine-spectrum], the fibre product $X_K=X\\times_Y\\operatorname{Spec}K$ [def-pc-fibre-product], regarded as a scheme over $K$ through its second projection $X_K\\to\\operatorname{Spec}K$, is finite over $K$ (the projection is a finite morphism [def-weil-finite-integral-morphism]) and $\\dim_K\\Gamma(X_K,\\mathcal O_{X_K})\\le n$, where $\\Gamma(X_K,\\mathcal O_{X_K})$ is a $K$-algebra through the ring map induced by the projection.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma Tag 03J5 (lemma-characterize-universally-bounded), line 15322, equivalence of (1) and (2), and the first two sentences of its proof ((2)=>(1) trivial, taking Spec kappa(y) -> Y; (1)=>(2) since X_K = Spec K x_{Spec kappa(y)} X_y for y the image of Spec K -> Y)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fibre-degree-bound",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "base change of scheme finite over residue field to a field extension, finrank of global sections preserved",
+   "results": "Module.finrank_baseChange (LinearAlgebra.Dimension.Constructions), IsBaseChange.finrank_eq, IsBaseChange.rank_eq (LinearAlgebra.Dimension.Localization), IsFinite.instIsStableUnderBaseChangeScheme (AlgebraicGeometry.Morphisms.Finite), Subfield.relfinrank_eq_finrank_of_le",
+   "date": "2026-10-10",
+   "verdict": "no match (Module.finrank_baseChange is the linear-algebra ingredient of (1)=>(2); no scheme statement)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for every morphism Spec K -> Y from a field, the fibre product X x_Y Spec K is finite over K of degree at most n",
+   "results": "instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, IsFinite.finite_preimage_singleton (AlgebraicGeometry.Fiber), finite_appTop_of_universallyClosed, isField_of_universallyClosed (Morphisms.Proper), IsFinite",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.finrank",
+   "results": "Scheme.Hom.finrank, isLocallyConstant_finrank, finrank_comp_left_of_isIso, finrank_SpecMap_eq_finrank, finrank_eq_one_of_isIso (Morphisms.FlatRank)",
+   "date": "2026-10-10",
+   "verdict": "no match: Scheme.Hom.finrank is the rank of a finite flat morphism; Mathlib has no notion of bounded fibre degrees"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'stacks 03J[3-9A]|universally.?bounded' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none",
+   "date": "2026-10-10",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-composition-fibre-degree-bound",
+  "date": "2026-10-10"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1"
+}
