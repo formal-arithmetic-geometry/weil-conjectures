@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.BigOperators.Finprod
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import Mathlib.Data.Int.Interval
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 @[expose] public section
@@ -143,6 +145,79 @@ lemma coevD₂_add_coevD₁ (p q q₁ p' : ℤ) (h : p + q = 0) (hq : q + 1 = q�
     ← comp_whiskerRight_assoc, hd, comp_whiskerRight_assoc]
   exact units_smul_smul_add_self _ _ _ hs
 
+variable (a b : ℤ) [K.IsStrictlyGE a] [K.IsStrictlyLE b]
+
+/-- The degree `0` component `𝟙_ C ⟶ (K ⊗ K^∨).X 0` of the coevaluation. -/
+noncomputable def coevZero : 𝟙_ C ⟶ (K ⊗ K.rightDual).X 0 :=
+  ∑ p ∈ Finset.Icc a b,
+    coevPQ K p (-p) (by simp) ≫ HomologicalComplex.ιTensorObj K K.rightDual p (-p) 0 (by simp)
+
+lemma isZero_X_of_notMem (p : ℤ) (hp : p ∉ Finset.Icc a b) : IsZero (K.X p) := by
+  simp only [Finset.mem_Icc, not_and_or, not_le] at hp
+  rcases hp with hp | hp
+  · exact K.isZero_of_isStrictlyGE a p hp
+  · exact K.isZero_of_isStrictlyLE b p hp
+
+lemma coevZero_comp_d : coevZero K a b ≫ (K ⊗ K.rightDual).d 0 1 = 0 := by
+  let f : ℤ → (𝟙_ C ⟶ (K ⊗ K.rightDual).X 1) := fun p ↦ coevD₁ K p (-p) (p + 1) (by simp) rfl
+  have hf : ∀ p ∉ Finset.Icc a b, f p = 0 := fun p hp ↦ by
+    simp only [f, coevD₁, coevPQ_eq_zero K p (-p) (by simp) (isZero_X_of_notMem K a b p hp),
+      zero_comp]
+  have hf' : ∀ p ∉ Finset.Icc a b, f (p - 1) = 0 := fun p hp ↦ by
+    by_cases hp' : p - 1 ∈ Finset.Icc a b
+    · obtain rfl : p = b + 1 := by simp only [Finset.mem_Icc] at hp hp'; omega
+      simp only [f, coevD₁]
+      rw [(K.isZero_of_isStrictlyLE b (b + 1 - 1 + 1) (by omega)).eq_of_tgt (K.d _ _) 0]
+      simp
+    · exact hf _ hp'
+  have e : ∀ p : ℤ, coevPQ K p (-p) (by simp) ≫
+      HomologicalComplex.ιTensorObj K K.rightDual p (-p) 0 (by simp) ≫
+        (K ⊗ K.rightDual).d 0 1 = f p - f (p - 1) := fun p ↦ by
+    erw [ιTensorObj_d K K.rightDual p (-p) 0 1 (by simp) rfl]
+    have h := coevD₂_add_coevD₁ K p (-p) (-p + 1) (p - 1) (by simp) rfl (by omega)
+    rw [coevD₁_congr K (p - 1) (-p + 1) p (p - 1) (-(p - 1)) (p - 1 + 1) (by omega) (by omega)
+      (by simp) rfl rfl (by omega)] at h
+    rw [sub_eq_add_neg, ← eq_neg_of_add_eq_zero_left h, Preadditive.comp_add,
+      Linear.comp_units_smul]
+    rfl
+  simp only [coevZero, Preadditive.sum_comp, assoc, e, Finset.sum_sub_distrib]
+  rw [← finsum_eq_sum_of_support_subset f (s := Finset.Icc a b) ?_,
+    ← finsum_eq_sum_of_support_subset (fun p ↦ f (p - 1)) (s := Finset.Icc a b) ?_]
+  · show _ - ∑ᶠ p, f (Equiv.subRight 1 p) = 0
+    rw [finsum_comp_equiv (Equiv.subRight 1) (f := f), sub_self]
+  · intro p hp
+    by_contra hp'
+    exact hp (hf' p hp')
+  · intro p hp
+    by_contra hp'
+    exact hp (hf p hp')
+
+
+/-- The coevaluation `𝟙_ ⟶ K ⊗ K^∨` of the termwise dual of a bounded complex. -/
+noncomputable def coev : 𝟙_ (CochainComplex C ℤ) ⟶ K ⊗ K.rightDual :=
+  HomologicalComplex.mkHomFromSingle (coevZero K a b) (by
+    rintro k hk
+    obtain rfl : k = 1 := by simpa using hk.symm
+    exact coevZero_comp_d K a b)
+
 end rightDual
+
+section Unitors
+
+variable (L : CochainComplex C ℤ)
+
+lemma leftUnitor_inv_f (n : ℤ) :
+    (λ_ L).inv.f n = (λ_ (L.X n)).inv ≫
+      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ C)).inv ▷ L.X n ≫
+        HomologicalComplex.ιTensorObj (𝟙_ (CochainComplex C ℤ)) L 0 n n (zero_add n) :=
+  HomologicalComplex.leftUnitor'_inv L n
+
+lemma rightUnitor_inv_f (n : ℤ) :
+    (ρ_ L).inv.f n = (ρ_ (L.X n)).inv ≫
+      L.X n ◁ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ C)).inv ≫
+        HomologicalComplex.ιTensorObj L (𝟙_ (CochainComplex C ℤ)) n 0 n (add_zero n) :=
+  HomologicalComplex.rightUnitor'_inv L n
+
+end Unitors
 
 end CochainComplex
