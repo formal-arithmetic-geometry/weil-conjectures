@@ -59,10 +59,11 @@
 | `lem-sc-local-ring-artin-schreier-kernel` | 3007 | none |
 | `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 3007 | none |
 | `lem-weil-pbc-matching-object-fibre-product` | 3007 | none |
+| `lem-weil-pbc-matching-object-proper-faces` | 3007 | none |
+| `lem-weil-pbc-simplicial-matching-object` | 3007 | none |
 | `lem-weil-pbc-simplicial-set-add-simplices` | 3007 | none |
 | `thm-sc-jacobian-representability` | 3007 | rests_on_sorry |
 | `def-pc-divisor-line-bundle` | 3008 | none |
-| `def-pc-morphism-conventions` | 3008 | none |
 | `def-pc-smooth-projective-curve` | 3008 | none |
 | `def-sc-function-field` | 3008 | none |
 | `def-sc-picard-functor` | 3008 | none |
@@ -85,7 +86,6 @@
 | `lem-weil-pbc-simplicial-hom-object-exists` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-pushout` | 3008 | none |
 | `lem-weil-pbc-simplicial-hom-object-standard-simplex` | 3008 | none |
-| `lem-weil-pbc-simplicial-matching-object` | 3008 | none |
 | `lem-weil-pbc-simplicial-set-glue-simplex` | 3008 | none |
 | `thm-sc-theorem-of-the-base` | 3008 | rests_on_sorry |
 | `def-exc-continuous-cohomology` | 3009 | none |
@@ -873,7 +873,7 @@
 | `lem-weil-pbc-p1-field-dimension-one` | 4 | state |
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 
-Not open yet: 384 nodes that wait for stage 1, 916 nodes that wait for a statement dependency.
+Not open yet: 384 nodes that wait for stage 1, 917 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
