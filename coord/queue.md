@@ -1,8 +1,8 @@
 # Work queue
 
-912 items; claim with `tools/claim.py next <group> [--stage N]`.
+914 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (181)
+## Stage 1: nodes to split (182)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -38,16 +38,19 @@
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 4009 | none |
 | `lem-pc-universal-adjoint-section` | 4010 | rests_on_sorry |
 | `lem-sc-intersection-effective-cartier` | 4010 | none |
-| `lem-pc-hilb-containment-locus` | 4011 | none |
 | `lem-sc-etale-faithfully-flat-local` | 4011 | none |
 | `lem-sc-numerical-polynomial-leading-term` | 4011 | none |
 | `lem-sc-snapper-numerical-polynomial` | 4011 | none |
 | `lem-sc-strict-henselization-completion-flat` | 4011 | none |
+| `lem-pc-affine-containment-ideal` | 4012 | none |
 | `lem-sc-hilbert-difference` | 5010 | none |
-| `lem-sc-hilbert-embedded-points` | 5010 | none |
 | `lem-sc-regular-meromorphic-section-exists` | 5010 | none |
-| `lem-pc-rf-base-change-complex` | 5012 | none |
+| `lem-sc-hilbert-embedded-points-affine-localization` | 5011 | none |
+| `lem-sc-hilbert-embedded-points-affine-removal` | 5011 | none |
+| `lem-sc-hilbert-embedded-points-gluing` | 5011 | none |
+| `lem-pc-derived-pullback-tor-independent-flat-complex` | 5013 | none |
 | `lem-pc-perfect-complex-descent` | 5013 | none |
+| `lem-pc-rf-base-change-single-complex-criterion` | 5013 | none |
 | `lem-pc-sites-modules-quotient-j-shriek` | 5013 | none |
 | `lem-pc-bounded-above-flat-tensor-acyclic` | 5014 | none |
 | `lem-pc-flat-bounded-complex-descent` | 5014 | none |
@@ -64,8 +67,6 @@
 | `pqf-lem-finite-type-algebra-finite-spectrum` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `def-weil-t-structure` | - | none |
-| `def-pur-sheaf-tensor-product` | - | none |
-| `def-weil-pbc-constructible-torsion` | - | none |
 | `sbc-lem-higher-direct-image-presheaf` | - | none |
 | `thm-pqf-zmt-factorization` | - | none |
 | `def-pc-representable-functor` | - | none |
@@ -188,7 +189,7 @@
 | `lem-pur-rhom-well-defined` | - | none |
 | `lem-zl-noether-normalization-dimension` | - | none |
 
-## Stage 2: nodes to state (731)
+## Stage 2: nodes to state (732)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -209,6 +210,7 @@
 | `def-pc-projective-morphism` | 1 | state |
 | `def-pc-standard-graded-algebra` | 1 | state |
 | `def-pc-zero-scheme` | 1 | state |
+| `def-pur-sheaf-tensor-product` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
 | `def-sc-cr-field` | 1 | state |
 | `def-sc-p1-standard` | 1 | state |
@@ -924,7 +926,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1459 nodes that wait for a statement dependency, 220 nodes that wait for stage 1.
+Not open yet: 1463 nodes that wait for a statement dependency, 221 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
