@@ -1,0 +1,71 @@
+{
+ "id": "lem-sc-p1-ext-yoneda-splicing-associative",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 2: associativity of derived/Yoneda composition",
+   "via": [
+    "lem-sc-p1-duality-pairing-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Associativity of Yoneda splicing of extensions",
+ "statement": "Let $X$ be a ringed space and let $\\mathcal A,\\mathcal B,\\mathcal C,\\mathcal D$ be $\\mathcal O_X$-modules, with Ext as in [def-sc-ext-sheaf]. Yoneda splicing of composable exact sequences, equivalently Yoneda composition of their Ext classes, is associative: for composable classes $e\\in\\operatorname{Ext}^i_X(\\mathcal A,\\mathcal B)$, $f\\in\\operatorname{Ext}^j_X(\\mathcal B,\\mathcal C)$, and $g\\in\\operatorname{Ext}^k_X(\\mathcal C,\\mathcal D)$, one has $(g\\circ f)\\circ e=g\\circ(f\\circ e)$ in $\\operatorname{Ext}^{i+j+k}_X(\\mathcal A,\\mathcal D)$, with the usual canonical identifications of iterated sums.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Section Tag 06XP, bilinear associative composition of Ext groups"
+ },
+ "stmt_deps": [
+  "def-sc-ext-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "associativity of Yoneda composition of Ext classes for sheaves",
+   "results": "service error (HTTP 500); no exact sheaf-Ext declaration",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "associative composition of Ext groups in an abelian category",
+   "results": "CategoryTheory.Abelian.Ext.comp_assoc in Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic",
+   "date": "2026-10-11",
+   "verdict": "generalization: abstract Abelian.Ext, not the sheaf Ext defined here"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'comp_assoc|Yoneda.*associ|Ext.*associ' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory/Ext /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:132 has CategoryTheory.Abelian.Ext.comp_assoc; no sheaf-Ext Yoneda declaration",
+   "date": "2026-10-11",
+   "verdict": "generalization only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.comp, CategoryTheory.Abelian.Ext.comp",
+   "results": "CategoryTheory.Abelian.Ext.comp_assoc_of_second_deg_zero, comp_assoc_of_third_deg_zero, mk0_comp_mk0 (Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic); comp_assoc read at Basic.lean:132-136",
+   "date": "2026-10-10",
+   "verdict": "exact up to one-line specialization: CategoryTheory.Abelian.Ext.comp_assoc"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Abelian.Ext.comp_assoc",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean",
+  "line": 132,
+  "how": "specializes in one line: Ext^i_X of [def-sc-ext-sheaf] is Abelian.Ext in the abelian category of O_X-modules (slopmaster2 AlgebraicGeometry.Scheme.Modules.Ext is `abbrev Ext F G i := Abelian.Ext F G i`, WeilConjectures/AlgebraicGeometry/Modules/Ext.lean:51-57) and Yoneda composition is Abelian.Ext.comp (Basic.lean:128); `comp_assoc (α : Ext X Y a1) (β : Ext Y Z a2) (γ : Ext Z T a3) (h12) (h23) (h) : (α.comp β h12).comp γ _ = α.comp (β.comp γ h23) _` (lines 132-136, any abelian C with HasExt) with C := O_X-modules, α=e, β=f, γ=g (Mathlib writes composition in diagrammatic order, α.comp β = β∘α)"
+ },
+ "status": "mathlib",
+ "created": {
+  "item": "lem-sc-p1-ext-yoneda-associativity",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality"
+}

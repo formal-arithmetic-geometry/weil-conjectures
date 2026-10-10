@@ -1,0 +1,72 @@
+{
+ "id": "lem-sc-p1-ext-pushout-postcompose",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 2: the pushout description of the Ext connecting map",
+   "via": [
+    "lem-sc-p1-duality-pairing-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pushout of an extension is postcomposition in Ext",
+ "statement": "Let $X$ be a ringed space and let $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ be a short exact sequence of $\\mathcal O_X$-modules with Yoneda class $\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal A)$, with Ext as in [def-sc-ext-sheaf]. For every morphism $\\varphi:\\mathcal A\\to\\mathcal W$, the pushout short exact sequence $0\\to\\mathcal W\\to\\mathcal B\\amalg_{\\mathcal A}\\mathcal W\\to\\mathcal C\\to0$ has Yoneda class $\\varphi[1]\\circ\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal W)$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Homology Section Tag 010I, pushout of extensions; Derived Section Tag 06XP, functoriality of Ext composition"
+ },
+ "stmt_deps": [
+  "def-sc-ext-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pushout short exact sequence extension class equals Ext postcomposition",
+   "results": "service error (HTTP 500); no exact declaration",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pushout of extension and induced map on Ext classes",
+   "results": "No declaration for extension pushout classes; only generic categorical pushout constructions",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'pushout.*Ext|Ext.*pushout|extension.*pushout|mk₁' /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/DerivedCategory /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory",
+   "results": "No declaration states the pushout extension class formula",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension class of pushout short exact sequence equals composition of extClass with morphism in Ext",
+   "results": "only Abelian.Ext covariant/contravariant_sequence_exact lemmas; grep of Ext/ExtClass.lean finds ShortComplex.ShortExact.extClass_naturality (line 131: for a morphism f : S1 -> S2 of short exact sequences, extClass(S1).comp (mk0 f.tau1) = (mk0 f.tau3).comp extClass(S2)), which gives the formula once the pushout sequence is shown short exact",
+   "date": "2026-10-10",
+   "verdict": "no exact match; candidate extClass_naturality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "item": "lem-sc-p1-ext-yoneda-associativity",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.ShortComplex.ShortExact.extClass_naturality",
+  "file": "Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean",
+  "line": 131,
+  "why": "applied to the morphism (phi, pushout map, id) from the given sequence to the pushout sequence it gives delta.comp (mk0 phi) = extClass of the pushout; exactness of the pushout sequence is not in this declaration"
+ }
+}

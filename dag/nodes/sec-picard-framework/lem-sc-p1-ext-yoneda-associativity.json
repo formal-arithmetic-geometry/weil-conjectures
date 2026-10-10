@@ -21,9 +21,51 @@
  "stmt_deps": [
   "def-sc-ext-sheaf"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Represent each Ext class by a composable extension (or by the corresponding derived-category morphism). The Yoneda splice of three extensions is independent of whether the first two or the last two are spliced first, giving $(g\\circ f)\\circ e=g\\circ(f\\circ e)$. ",
+   "uses": [
+    "lem-sc-p1-ext-yoneda-splicing-associative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Section Tag 06XP, associative composition of Ext groups"
+   }
+  },
+  {
+   "text": "The pushout of the short exact sequence along $\\varphi$ is the coefficient-change image of its extension class. Thus the pushed-out sequence represents $\\varphi[1]\\circ\\delta$.",
+   "uses": [
+    "lem-sc-p1-ext-pushout-postcompose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology Section Tag 010I, pushout of extensions"
+   }
+  },
+  {
+   "text": "Applying the associativity identity to $e=s$, $f=\\delta$, and $g=\\varphi[1]$ gives $(\\varphi[1]\\circ\\delta)\\circ s=\\varphi[1]\\circ(\\delta\\circ s)$.",
+   "uses": [
+    "lem-sc-p1-ext-yoneda-splicing-associative",
+    "lem-sc-p1-ext-pushout-postcompose"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Section Tag 06XP, associativity specialized to degrees 0 and 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-ext-yoneda-splicing-associative",
+  "lem-sc-p1-ext-pushout-postcompose"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Section Tag 06XP together with Homology Section Tag 010I"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -48,12 +90,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-p1-duality-pairing-naturality",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-p1-ext-yoneda-associativity",
+  "worker": "stage1",
+  "summary": "Split the combined assertion into statement-only dependencies for associativity of Yoneda splicing and for the pushout/postcomposition formula, then combined them in three sourced proof steps.",
+  "blueprint": "Realizes thm-sc-p1-duality proof Step 2 clauses on associativity of derived/Yoneda composition and the pushout description of the Ext connecting map.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-eya",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eya (reviewer sub-agent of L); spot-checked: Sources read: Stacks Homology 010I (section-extensions, homology.tex:1260, extensions and their functoriality/pushout) and Derived 06XP (section-ext, derived.tex:8625, Ext^i = Hom_D(X,Y[i])). Item: statement unchanged; step 1 (associativity) carried by lem-sc-p1-ext-yoneda-splicing-associative, which states it for Ext^i,Ext^j,Ext^k; step 2 (pushout class = phi[1] o delta) carried verbatim by lem-sc-p1-ext-pushout-postcompose; step 3 is splicing-associativity with (A,B,C,D,i,j,k)=(O_X,C,A,W,0,1,0), e=s, f=delta, g=phi[1]: checked, elementary. Pushout statement correct (Baer pushout = phi_* delta, Mathlib extClass_naturality with tau3=id gives it). Small cases: phi=id (pushout is the sequence, class delta), s=0 (both sides 0), phi=0 (pushout split, class 0). Remote searches before 17:00 treated as not run; I ran loogle 'Abelian.Ext.comp' and leanfinder for the pushout. def-sc-ext-sheaf is Abelian.Ext in slopmaster2 (abbrev, Modules/Ext.lean:51-57, sorryfree OK). FIX more, RETURN less / B8: dag/nodes/sec-picard-framework/lem-sc-p1-ext-yoneda-splicing-associative.json: status unsplit -> mathlib, mathlib_match CategoryTheory.Abelian.Ext.comp_assoc Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:132 (line verified with sed, one-line specialization to O_X-modules), my loogle search recorded; dag/nodes/sec-picard-framework/lem-sc-p1-ext-pushout-postcompose.json: mathlib_searches: my leanfinder query recorded (no exact match), mathlib_candidate extClass_naturality ExtClass.lean:131. Start Sat Oct 10 04:54:53 PM UTC 2026, end Sat Oct 10 04:56:19 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ }
 }
