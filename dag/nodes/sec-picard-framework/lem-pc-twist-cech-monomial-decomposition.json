@@ -18,7 +18,8 @@
  },
  "stmt_deps": [
   "def-pc-projective-space-twist",
-  "lem-pc-alternating-cech-computes"
+  "lem-pc-alternating-cech-computes",
+  "def-pc-exponent-cech-complex"
  ],
  "proof": [
   {
@@ -128,5 +129,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.TwistCechMonomialDecomposition",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.twist_cech_monomial_decomposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/TwistCechMonomialDecomposition.lean",
+  "statement": "theorem twist_cech_monomial_decomposition (A : Type u) [CommRing A] (n : ℕ) (hn : 1 ≤ n) (d : ℤ) : ∃ b : ∀ (s : Set (ULift.{u} (Fin (n + 1)))), s.Nonempty → (laurentExponents s d →₀ A) ≃ₗ[A] ((ModuleCat.restrictScalars (((Scheme.ΓSpecIso (.of A)).inv ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A)) ↘ Spec (.of A)).appTop).hom)).obj ((twist (ULift.{u} (Fin (n + 1))) (Spec (.of A)) d).presheafModuleCat.obj (op (toProjInt (ULift.{u} (Fin (n + 1))) (Spec (.of A)) ⁻¹ᵁ basicOpenInt (ULift.{u} (Fin (n + 1))) s)))), (∀ (s : Set (ULift.{u} (Fin (n + 1)))) (hs : s.Nonempty) (e : laurentExponents s d) (a : A), b s hs (Finsupp.single e a) = ((Scheme.ΓSpecIso (.of A)).inv ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A)) ↘ Spec (.of A)).appTop ≫ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A)).presheaf.map (homOfLE (le_top : toProjInt (ULift.{u} (Fin (n + 1))) (Spec (.of A)) ⁻¹ᵁ basicOpenInt (ULift.{u} (Fin (n + 1))) s ≤ ⊤)).op) a • twistMonomialSection (Spec (.of A)) s e) ∧ (∀ (s t : Set (ULift.{u} (Fin (n + 1)))) (hs : s.Nonempty) (ht : t.Nonempty) (hst : s ⊆ t) (e : laurentExponents s d) (a : A), (twist (ULift.{u} (Fin (n + 1))) (Spec (.of A)) d).presheafModuleCat.map (homOfLE ((toProjInt (ULift.{u} (Fin (n + 1))) (Spec (.of A))).preimage_mono (Proj.basicOpen_monomialToNat_indicator_mono (R := ULift.{u} ℤ) hst))).op (b s hs (Finsupp.single e a)) = b t ht (Finsupp.single ⟨e.1, laurentExponents_mono hst d e.2⟩ a)) ∧ ∃ K : CochainComplex (ModuleCat.{u} A) ℕ, ∃ g : ∀ p : ℕ, K.X p ≃ₗ[A] (∀ t : {t : Fin (p + 1) → ULift.{u} (Fin (n + 1)) // StrictMono t}, ((ModuleCat.restrictScalars (((Scheme.ΓSpecIso (.of A)).inv ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A)) ↘ Spec (.of A)).appTop).hom)).obj ((twist (ULift.{u} (Fin (n + 1))) (Spec (.of A)) d).presheafModuleCat.obj (op (toProjInt (ULift.{u} (Fin (n + 1))) (Spec (.of A)) ⁻¹ᵁ basicOpenInt (ULift.{u} (Fin (n + 1))) (Set.range t.1)))))), ∃ q : (∐ fun e : {e : Fin (n + 1) → ℤ // ∑ i, e i = d} ↦ exponentCechComplex (A := A) n e.1) ≅ K, (∀ (p : ℕ) (c : K.X p) (t : {t : Fin (p + 2) → ULift.{u} (Fin (n + 1)) // StrictMono t}), g (p + 1) ((K.d p (p + 1)) c) t = ∑ j : Fin (p + 2), (-1 : ℤ) ^ j.val • ((ModuleCat.restrictScalars (((Scheme.ΓSpecIso (.of A)).inv ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A)) ↘ Spec (.of A)).appTop).hom)).map ((twist (ULift.{u} (Fin (n + 1))) (Spec (.of A)) d).presheafModuleCat.map (homOfLE ((toProjInt (ULift.{u} (Fin (n + 1))) (Spec (.of A))).preimage_mono (Proj.basicOpen_monomialToNat_indicator_mono (R := ULift.{u} ℤ) (s := Set.range t.1) (t := Set.range (t.1 ∘ j.succAbove)) (Set.range_comp_subset_range j.succAbove t.1)))).op)) (g p c ⟨t.1 ∘ j.succAbove, t.2.comp (Fin.strictMono_succAbove j)⟩)) ∧ (∀ (p : ℕ) (e : {e : Fin (n + 1) → ℤ // ∑ i, e i = d}) (J : exponentCechBasis n e.1 p) (a : A) (t : {t : Fin (p + 1) → ULift.{u} (Fin (n + 1)) // StrictMono t}) (w : laurentExponents (Set.range t.1) d), ((b (Set.range t.1) ⟨t.1 0, Set.mem_range_self 0⟩).symm (g p ((q.hom.f p) (((Sigma.ι (fun e : {e : Fin (n + 1) → ℤ // ∑ i, e i = d} ↦ exponentCechComplex (A := A) n e.1) e).f p) (Finsupp.single J a))) t)) w = if (fun i ↦ w.1 (ULift.up i)) = e.1 ∧ Set.range t.1 = ULift.up '' (J.1 : Set (Fin (n + 1))) then a else 0)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the landed fixed-exponent complex (stmt_deps gained def-pc-exponent-cech-complex under brief-stage2 §5). ULift coordinates preserve arbitrary ring universes. The coproduct is an isomorphism of A-module complexes, with every basis image specified."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-C",
+  "group": "T1",
+  "result": "pass",
+  "note": "A CommRing, n>=1, d:Z; b_J linear equiv from Finsupp on laurentExponents J d (sum=d, e_i>=0 off J) pinned to twistMonomialSection; restriction J<=J' keeps exponent (direction of laurentExponents_mono/basicOpen mono checked); K pinned by g and signed face differential; coproduct over sum e=d of exponentCechComplex pinned on basis, sign (-1)^#{j<k} = deletion position; stmt_deps gain is the landed def-pc-exponent-cech-complex only"
  }
 }
