@@ -16,7 +16,8 @@
   "def-pc-base-change",
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
-  "def-pc-morphism-conventions"
+  "def-pc-morphism-conventions",
+  "def-pc-scheme-module-flat-over"
  ],
  "proof": [
   {
@@ -176,5 +177,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rbf1829 (reviewer sub-agent of L); spot-checked: Read packet whole; checked no cycle/restatement with lem-pc-flat-base-change-cohom (flat g, R^i), lem-pc-flat-rf-open, lem-pc-coherent-hi (none cite back into the item's proof). Steps 2 and 3 correct. FIX more, RETURN less: (1) C1, Step 5 (and the local-on-base reduction of Step 1): the claim that the canonical base change map Lg^*Rf_*G -> Rf_{T,*}G_T is the identity on the Cech model is cited to no node (lem-pc-cech-resolution says nothing about the base change map), and without a global canonical map the local isomorphisms do not glue; added statement-only node lem-pc-base-change-map-cech (unsplit, created from the item, one LeanFinder search: no match) stating that the base change map equals Lg^*K~ -> g^*K~=(K tensor_A B)~ -> K_T~ via the cochain map of the c_J; Steps 1,4,5 rewritten to cite it, theta defined in Step 1 with the open-restriction reduction spelled out. (2) C4, Step 4: lem-weil-pbc-module-pullback-affine-sections is natural in the module G, not in the open V, so it does not identify restriction maps; compatibility with Cech differentials is now a clause of the new node, and Step 4 applies the cited lemma to p:X_T->X with V=U_J, U=p^{-1}(U_J) to get each c_J an isomorphism. Step 3 also now cites the same affine-sections lemma for g^*K~=(K tensor_A B)~ and says why K~ is termwise flat. proof_deps updated. The Second reading by M1 missed both faults (it read the naturality clause as covering restriction maps and accepted the canonical-map assertion).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChange",
+  "declaration": "AlgebraicGeometry.nonempty_derivedBaseChange_iso_of_isFlatOver",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativelyFlatDerivedBaseChange.lean",
+  "statement": "theorem nonempty_derivedBaseChange_iso_of_isFlatOver {X S T : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [IsSeparated f] (G : SheafOfModules.{u} (moduleRings X.toRingedSpace)) [SheafOfModules.IsQuasicoherent.{u} (R := moduleRings X.toRingedSpace) G] (hflat : Scheme.Modules.IsFlatOver G f) (g : T ⟶ S) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace))] : Nonempty ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G)) ≅ (schemeDerivedDirectImage (pullback.snd f g)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) 0).obj ((Scheme.Modules.tensorPullback (pullback.fst f g)).obj G)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rbc",
+  "group": "E1",
+  "result": "pass",
+  "note": "Read packet whole; matched f qc+separated as instances, G : SheafOfModules O_X quasi-coherent, flat over S = recorded IsFlatOver G f (stmt_deps gain of landed def-pc-scheme-module-flat-over justified, no cycle), arbitrary g, X_T = pullback f g with f_T = pullback.snd and G_T = tensorPullback (pullback.fst) per BASE CHANGE X_T, LHS derivedPullback g of schemeDerivedDirectImage f of G[0], RHS schemeDerivedDirectImage f_T of G_T[0]; Nonempty iso because def-pc-derived-base-change-map has no Lean yet"
  }
 }
