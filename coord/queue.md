@@ -1,11 +1,11 @@
 # Work queue
 
-30 items; claim with `tools/claim.py next <group> [--stage N]`.
+28 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (30)
+## Stage 2: nodes to state (28)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -18,7 +18,6 @@
 | `lem-pc-twist-cech-monomial-decomposition` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-boundary-cech-local-lifts` | 1 | state | 0 |
-| `lem-sc-cech-h1-injective` | 1 | state | 0 |
 | `lem-sc-closed-pushforward-boundary-naturality` | 1 | state | 0 |
 | `lem-sc-constant-subsheaf-finite-filtration` | 1 | state | 0 |
 | `lem-sc-flat-precompose-pus` | 1 | state | 0 |
@@ -29,7 +28,6 @@
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
 | `lem-sc-zariski-contracted-power-extension` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-colimit-of-sites` | 1 | state | 0 |
-| `lem-weil-pbc-colimit-of-sites-cech-complex` | 1 | state | 0 |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-hypercover-free-resolution` | 1 | state | 0 |
