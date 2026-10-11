@@ -136,6 +136,14 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
+lemma leftDerivedUpperStarCompactificationIso_hom_app
+    (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    (leftDerivedUpperStarCompactificationIso A c).hom.app K =
+      (leftDerivedUpperStarComp A c.i c.g f c.comm).inv.app K := by
+  -- WIP: `obtain ⟨Z, p, j, hc, _, _⟩ := c; subst hc; rw [leftDerivedUpperStarCompactificationIso,
+  -- eqToIso_refl, Iso.trans_refl]; rfl` elaborates but the kernel times out.
+  sorry
+
 /-- The projection map `Rf_!(c) M ⊗ᴸ L ⟶ Rf_!(c)(M ⊗ᴸ Lf^* L)` is compatible with the
 associators. -/
 theorem projectionMapOfCompactification_assoc (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
