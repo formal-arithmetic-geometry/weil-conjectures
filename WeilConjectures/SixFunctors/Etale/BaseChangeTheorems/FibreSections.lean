@@ -317,7 +317,49 @@ theorem strictLocalizationPullback_sections [IsProper f] :
         (by simp [pullback.condition]) ≫ 𝟙 _ := rfl
     rw [h₁, Category.comp_id]
     apply pullback.hom_ext <;> simp [strictLocalizationPullbackLeg]
-  sorry
+  let j₀ : CategoryTheory.Over d₀ := CategoryTheory.Over.mk (𝟙 d₀)
+  have hj₀ : IsTerminal j₀ := CategoryTheory.Over.mkIdTerminal
+  have ht : pullback.snd (Scheme.strictLocalizationToBase y) f = c.π.app j₀ ≫ (U.obj j₀).hom := by
+    rw [hcπ]
+    exact (strictLocalizationPullbackLeg_snd f y _).symm
+  have (j : CategoryTheory.Over d₀) : CompactSpace (U.obj j).left := by
+    have : CompactSpace ((𝟭 Scheme).obj (Φ.obj j).obj.1.left) :=
+      inferInstanceAs (CompactSpace (Φ.obj j).obj.1.left)
+    exact QuasiCompact.compactSpace_of_compactSpace (pullback.fst (Φ.obj j).obj.1.hom f)
+  have (j : CategoryTheory.Over d₀) : QuasiSeparatedSpace (U.obj j).left := by
+    have : QuasiSeparatedSpace ((𝟭 Scheme).obj (Φ.obj j).obj.1.left) :=
+      inferInstanceAs (QuasiSeparatedSpace (Φ.obj j).obj.1.left)
+    exact quasiSeparatedSpace_of_quasiSeparated (pullback.fst (Φ.obj j).obj.1.hom f)
+  have {j k : CategoryTheory.Over d₀} (g : j ⟶ k) : IsAffineHom (U.map g).left :=
+    isAffineHom_etale_map_left f (V := (Φ.obj j).obj.1) (W := (Φ.obj k).obj.1) _
+  refine ⟨fun τ ↦ ?_, fun x s hs ↦ ?_⟩
+  · obtain ⟨j, s, hs⟩ := exists_pullSection_eq_of_isLimit F U c j₀ hj₀ _ ht hc τ
+    refine ⟨Φ.obj j, s, ?_⟩
+    rw [← hs]
+    exact pullSection_congr _ _ _ (hcπ j).symm _
+  · obtain ⟨c'⟩ : Nonempty (CostructuredArrow Φ x) := inferInstance
+    let j := c'.left
+    let h : Φ.obj j ⟶ x := c'.hom
+    have hs' : pullSection (pullback.snd (Scheme.strictLocalizationToBase y) f) F
+        (V := Scheme.Etale.mk (𝟙 _)) (U := f.Etale.obj (Φ.obj j).obj.1)
+        (strictLocalizationPullbackLeg f y (Φ.obj j))
+        ((strictLocalizationPullbackLeg_snd f y _).trans (Category.id_comp _).symm)
+        (F.obj.map (f.Etale.map h.hom.1).op s) = 0 := by
+      rw [← pullSection_comp, ← hs]
+      refine pullSection_congr _ _ _ ?_ _
+      apply pullback.hom_ext
+      · rw [Category.assoc, Scheme.Hom.etale_map_left_comp_fst, strictLocalizationPullbackLeg_fst,
+          strictLocalizationPullbackLeg_fst_assoc]
+        congr 1
+        exact (Scheme.strictLocalizationCone y).w h
+      · rw [Category.assoc, Scheme.Hom.etale_map_left_comp_snd, strictLocalizationPullbackLeg_snd,
+          strictLocalizationPullbackLeg_snd]
+    obtain ⟨j', g, hg⟩ := exists_map_eq_zero_of_pullSection_eq_zero_of_isLimit F U c j₀ hj₀ _ ht
+      hc j _ ((pullSection_congr _ _ _ (hcπ j) _).trans hs')
+    refine ⟨Φ.obj j', Φ.map g ≫ h, ?_⟩
+    have e : (Φ.map g ≫ h).hom.1 = (Φ.map g).hom.1 ≫ h.hom.1 := rfl
+    rw [e, Functor.map_comp, op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
+    exact hg
 
 end Neighbourhoods
 
