@@ -133,5 +133,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fcd2740 (reviewer sub-agent of L); spot-checked: Read step 1 against lem-pc-filtered-colimit-commrings-elementwise (Concrete.isColimit_exists_rep / isColimit_rep_eq_iff_exists leaf) and lemma-nagata-directed-finite-upper-bound; checked citers (closed-immersion-stage-exists, qc-open-equality-stage, affine-fp-descent) use only stage+lifts+equalities, which the statement gives; no Ring.DirectLimit single-declaration match for the finite-data clause; no overlap with lem-weil-pbc-limit-global-sections-colimit. FIX more, RETURN less: (1) C4: statement said 'rings' while the cited leaf needs commutative rings in CRing and a filtered index; statement now says nonempty directed set, directed system of commutative rings, colimit in commutative rings [def-weil-pbc-category-colimit] (stmt_deps added, as in the pbc ring-colimit nodes); (2) step 1 now says a nonempty directed set is a filtered category so the leaf applies. Second reading missed (1).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredColimitFiniteData",
+  "declaration": "CommRingCat.exists_finite_data_stage",
+  "file": "lean/Sheaf/RingTheory/FilteredColimitFiniteData.lean",
+  "statement": "theorem exists_finite_data_stage {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) (n m : ℕ) (x : Fin n → ↑(CategoryTheory.Limits.colimit F)) (p q : Fin m → MvPolynomial (Fin n) ℤ) (h : ∀ r : Fin m, (p r).eval₂ (Int.castRingHom ↑(CategoryTheory.Limits.colimit F)) x = (q r).eval₂ (Int.castRingHom ↑(CategoryTheory.Limits.colimit F)) x) : ∃ (i : I) (y : Fin n → F.obj i), (∀ a : Fin n, colimit.ι F i (y a) = x a) ∧ (∀ r : Fin m, (p r).eval₂ (Int.castRingHom (F.obj i)) y = (q r).eval₂ (Int.castRingHom (F.obj i)) y) ∧ (∀ (j : I) (hij : i ≤ j) (r : Fin m), (p r).eval₂ (Int.castRingHom (F.obj j)) (fun a ↦ F.map (homOfLE hij) (y a)) = (q r).eval₂ (Int.castRingHom (F.obj j)) (fun a ↦ F.map (homOfLE hij) (y a)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

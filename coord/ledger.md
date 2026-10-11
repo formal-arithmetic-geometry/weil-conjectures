@@ -5051,3 +5051,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:48 L: merged deliver/V1/lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection Algebra.exists_relativeGlobalCompleteIntersection_of_syntomicAtPrime)
 - 14:48 L: merged deliver/Q1/lem-weil-pbc-standard-fpqc-quotient-topology (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.StandardFpqcQuotientTopology AlgebraicGeometry.standard_fpqc_quotient_topology)
 - 14:48 L: merged deliver/K1/prop-weil-pbc-kinjective-resolutions-exist (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist CochainComplex.etale_kinjective_resolutions_exist)
+- 14:48 L: merged deliver/M1/lemma-nagata-filtered-colimit-finite-data (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FilteredColimitFiniteData CommRingCat.exists_finite_data_stage)
