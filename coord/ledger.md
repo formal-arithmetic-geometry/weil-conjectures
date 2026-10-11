@@ -3270,3 +3270,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:01 L: merged deliver/G1/lem-pc-finite-free-map-residue-localization (reviewer PASS; first push; new nodes: 0)
 - 02:03 L: merged deliver/H1/lem-sc-picard-qcoh-finite-cd (reviewer FIX; first push; new nodes: 0)
 - 02:03 L: STATE rows 00:05-01:57 (progress and blueprint tables) and the groups-table stamp were dated 2026-10-10 by the lead's row script; corrected to 2026-10-11, script now reads the day from date -u
+- 02:03 L: tool use accepted on lem-sc-picard-qcoh-finite-cd: lem-pc-alternating-cech-computes (sk-thm-picard-pn) as a generic tool (SETUP.md tool-lemma rule; R-qfc0203's DOUBTFUL point); second reading by H1 missed the false 'no terms above degree N' claim for the full Čech complex
