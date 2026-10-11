@@ -1,94 +1,107 @@
 {
- "id": "def-weil-pbc-abelian-etale-sheaves",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-pbc-property",
-   "place": "its statement (a notion the statement uses)",
-   "via": []
+  "id": "def-weil-pbc-abelian-etale-sheaves",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-pbc-property",
+      "place": "its statement (a notion the statement uses)",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "definition",
- "title": "The category of abelian sheaves on the small etale site",
- "statement": "Let $T$ be a scheme and $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site]. A *sheaf of abelian groups* (abelian sheaf) on $T_{\\Et}$ is a contravariant functor $F$ from $T_{\\Et}$ to abelian groups such that for every object $U$ and every covering $\\{U_i\\to U\\}_i$ of $T_{\\Et}$ the sequence $F(U)\\to\\prod_iF(U_i)\\rightrightarrows\\prod_{i,j}F(U_i\\times_UU_j)$ is an equalizer. Abelian sheaves on $T_{\\Et}$, with natural transformations as morphisms, form a full subcategory $\\Ab(T_{\\Et})$ of the category of presheaves of abelian groups; it is an abelian category, and it has all small colimits.",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Stacks Project, Etale cohomology, sections on sheaves on the small etale site (abelian sheaves on $X_\\etale$, notation $\\textit{Ab}(X_\\etale)$, used throughout section 095S); blueprint usage: literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-pbc/def-weil-pbc-property.md ($F\\in\\Ab(X_{\\Et})$)"
- },
- "stmt_deps": [
-  "def-weil-pbc-etale-site"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -n 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Etale.lean",
-   "results": "def smallEtaleTopology (X : Scheme.{u}) : GrothendieckTopology X.Etale (line 51): the small etale site of X on the category X.Etale of schemes etale over X",
-   "date": "2026-10-09",
-   "verdict": "match (the site)"
+  "kind": "definition",
+  "title": "The category of abelian sheaves on the small etale site",
+  "statement": "Let $T$ be a scheme and $T_{\\Et}$ its small etale site [def-weil-pbc-etale-site]. A *sheaf of abelian groups* (abelian sheaf) on $T_{\\Et}$ is a contravariant functor $F$ from $T_{\\Et}$ to abelian groups such that for every object $U$ and every covering $\\{U_i\\to U\\}_i$ of $T_{\\Et}$ the sequence $F(U)\\to\\prod_iF(U_i)\\rightrightarrows\\prod_{i,j}F(U_i\\times_UU_j)$ is an equalizer. Abelian sheaves on $T_{\\Et}$, with natural transformations as morphisms, form a full subcategory $\\Ab(T_{\\Et})$ of the category of presheaves of abelian groups; it is an abelian category, and it has all small colimits.",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Project, Etale cohomology, sections on sheaves on the small etale site (abelian sheaves on $X_\\etale$, notation $\\textit{Ab}(X_\\etale)$, used throughout section 095S); blueprint usage: literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-pbc/def-weil-pbc-property.md ($F\\in\\Ab(X_{\\Et})$)"
   },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'abbrev Sheaf \\|instance sheafIsAbelian\\|HasColimitsOfSize.*Sheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/",
-   "results": "abbrev Sheaf := ObjectProperty.FullSubcategory (Presheaf.IsSheaf J (A := A)) (Sites/Sheaf.lean:302); instance sheafIsAbelian : Abelian (Sheaf J D) (Sites/Abelian.lean:40); instance [HasColimitsOfSize D] : HasColimitsOfSize (Sheaf J D) (Sites/Limits.lean:228)",
-   "date": "2026-10-09",
-   "verdict": "match: Ab(T_et) = Sheaf (smallEtaleTopology T) AddCommGrpCat"
+  "stmt_deps": [
+    "def-weil-pbc-etale-site"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -n 'smallEtaleTopology' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/Etale.lean",
+      "results": "def smallEtaleTopology (X : Scheme.{u}) : GrothendieckTopology X.Etale (line 51): the small etale site of X on the category X.Etale of schemes etale over X",
+      "date": "2026-10-09",
+      "verdict": "match (the site)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'abbrev Sheaf \\|instance sheafIsAbelian\\|HasColimitsOfSize.*Sheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/",
+      "results": "abbrev Sheaf := ObjectProperty.FullSubcategory (Presheaf.IsSheaf J (A := A)) (Sites/Sheaf.lean:302); instance sheafIsAbelian : Abelian (Sheaf J D) (Sites/Abelian.lean:40); instance [HasColimitsOfSize D] : HasColimitsOfSize (Sheaf J D) (Sites/Limits.lean:228)",
+      "date": "2026-10-09",
+      "verdict": "match: Ab(T_et) = Sheaf (smallEtaleTopology T) AddCommGrpCat"
+    },
+    {
+      "tool": "leansearch",
+      "query": "category of sheaves of abelian groups on a site is abelian",
+      "results": "CategoryTheory.sheafIsAbelian (Sites.Abelian), Sheaf.isGrothendieckAbelian_of_essentiallySmall, Sheaf.instIsGrothendieckAbelian, instPreadditiveSheaf, presheafToSheaf_additive",
+      "date": "2026-10-09",
+      "verdict": "match (confirmed)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "category of sheaves of abelian groups on the small étale site of a scheme is abelian",
+      "results": "Scheme.Modules.instAbelian, SheafOfModules.instAbelian, CategoryTheory.sheafIsAbelian, Sheaf.instIsGrothendieckAbelian",
+      "date": "2026-10-09",
+      "verdict": "match (confirmed)"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n '^abbrev Sheaf |instance sheafIsAbelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/; sed -n 225,230p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Limits.lean; sed -n 100,140p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+      "results": "Sheaf.lean:302 abbrev Sheaf := FullSubcategory (Presheaf.IsSheaf J); Abelian.lean:40 sheafIsAbelian [HasSheafify J D]; Limits.lean:228 HasColimitsOfSize (Sheaf J D); AffineEtale.lean:112 HasSheafify S.smallEtaleTopology A, :136 Abelian (Sheaf S.smallEtaleTopology A); Etale.lean:51 smallEtaleTopology",
+      "date": "2026-10-09",
+      "verdict": "confirmed"
+    }
+  ],
+  "mathlib_match": {
+    "declaration": "CategoryTheory.Sheaf",
+    "file": "Mathlib/CategoryTheory/Sites/Sheaf.lean",
+    "how": "specializes in one line: Ab(T_et) is `Sheaf (AlgebraicGeometry.Scheme.smallEtaleTopology T) AddCommGrpCat` (Sheaf: Sites/Sheaf.lean:302; smallEtaleTopology: Mathlib/AlgebraicGeometry/Sites/Etale.lean:51); abelian by `CategoryTheory.sheafIsAbelian` (Mathlib/CategoryTheory/Sites/Abelian.lean:40), cocomplete by the instance at Mathlib/CategoryTheory/Sites/Limits.lean:228 Re-check 2026-10-09: declarations exist as recorded. Comparison: the node's site T_et is `T.smallEtaleTopology` on `T.Etale` (schemes etale over T); objects of `Sheaf J AddCommGrpCat` are functors `T.Etaleᵒᵖ ⥤ AddCommGrpCat` with `Presheaf.IsSheaf J`, a full subcategory of presheaves as in the node; the equalizer form for covering families is the Mathlib sheaf condition through `smallGrothendieckTopology_eq_toGrothendieck_smallPretopology` (Mathlib/AlgebraicGeometry/Sites/Small.lean:203) and `Presheaf.isSheaf_iff_isLimit_pretopology` (Mathlib/CategoryTheory/Sites/Sheaf.lean:208); the hypothesis `HasSheafify` of sheafIsAbelian and of the colimit instance is supplied for the small etale site by Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:112."
   },
-  {
-   "tool": "leansearch",
-   "query": "category of sheaves of abelian groups on a site is abelian",
-   "results": "CategoryTheory.sheafIsAbelian (Sites.Abelian), Sheaf.isGrothendieckAbelian_of_essentiallySmall, Sheaf.instIsGrothendieckAbelian, instPreadditiveSheaf, presheafToSheaf_additive",
-   "date": "2026-10-09",
-   "verdict": "match (confirmed)"
+  "status": "mathlib",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "def-weil-pbc-property",
+    "date": "2026-10-09"
   },
-  {
-   "tool": "leanfinder",
-   "query": "category of sheaves of abelian groups on the small étale site of a scheme is abelian",
-   "results": "Scheme.Modules.instAbelian, SheafOfModules.instAbelian, CategoryTheory.sheafIsAbelian, Sheaf.instIsGrothendieckAbelian",
-   "date": "2026-10-09",
-   "verdict": "match (confirmed)"
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "grep",
-   "query": "rg -n '^abbrev Sheaf |instance sheafIsAbelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/; sed -n 225,230p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Limits.lean; sed -n 100,140p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
-   "results": "Sheaf.lean:302 abbrev Sheaf := FullSubcategory (Presheaf.IsSheaf J); Abelian.lean:40 sheafIsAbelian [HasSheafify J D]; Limits.lean:228 HasColimitsOfSize (Sheaf J D); AffineEtale.lean:112 HasSheafify S.smallEtaleTopology A, :136 Abelian (Sheaf S.smallEtaleTopology A); Etale.lean:51 smallEtaleTopology",
-   "date": "2026-10-09",
-   "verdict": "confirmed"
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-pbc",
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "Mathlib leaf created by the split of def-weil-pbc-property; the match was verified by the lead against the Mathlib source at that item's review"
+  },
+  "lean": {
+    "module": "Mathlib.CategoryTheory.Sites.Sheaf",
+    "declaration": "CategoryTheory.Sheaf",
+    "declarations": [
+      "AlgebraicGeometry.Scheme.smallEtaleTopology"
+    ],
+    "statement": "structure Sheaf (J : GrothendieckTopology C) (A : Type*) [Category A]",
+    "branch": "mathlib",
+    "by": "L",
+    "date": "2026-10-11",
+    "existing": true,
+    "note": "Used as Sheaf T.smallEtaleTopology AddCommGrpCat.{u+1}, as landed citers write it; the abelian structure and colimits are Mathlib instances on sheaf categories. Names checked with #check in an L sandbox; recorded by a T-leaves bookkeeping agent of L."
   }
- ],
- "mathlib_match": {
-  "declaration": "CategoryTheory.Sheaf",
-  "file": "Mathlib/CategoryTheory/Sites/Sheaf.lean",
-  "how": "specializes in one line: Ab(T_et) is `Sheaf (AlgebraicGeometry.Scheme.smallEtaleTopology T) AddCommGrpCat` (Sheaf: Sites/Sheaf.lean:302; smallEtaleTopology: Mathlib/AlgebraicGeometry/Sites/Etale.lean:51); abelian by `CategoryTheory.sheafIsAbelian` (Mathlib/CategoryTheory/Sites/Abelian.lean:40), cocomplete by the instance at Mathlib/CategoryTheory/Sites/Limits.lean:228 Re-check 2026-10-09: declarations exist as recorded. Comparison: the node's site T_et is `T.smallEtaleTopology` on `T.Etale` (schemes etale over T); objects of `Sheaf J AddCommGrpCat` are functors `T.Etaleᵒᵖ ⥤ AddCommGrpCat` with `Presheaf.IsSheaf J`, a full subcategory of presheaves as in the node; the equalizer form for covering families is the Mathlib sheaf condition through `smallGrothendieckTopology_eq_toGrothendieck_smallPretopology` (Mathlib/AlgebraicGeometry/Sites/Small.lean:203) and `Presheaf.isSheaf_iff_isLimit_pretopology` (Mathlib/CategoryTheory/Sites/Sheaf.lean:208); the hypothesis `HasSheafify` of sheafIsAbelian and of the colimit instance is supplied for the small etale site by Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean:112."
- },
- "status": "mathlib",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "def-weil-pbc-property",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-pbc",
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "Mathlib leaf created by the split of def-weil-pbc-property; the match was verified by the lead against the Mathlib source at that item's review"
- }
 }

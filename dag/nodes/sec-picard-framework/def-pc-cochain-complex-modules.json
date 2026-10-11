@@ -1,96 +1,106 @@
 {
- "id": "def-pc-cochain-complex-modules",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-derived-tensor",
-   "place": "its statement (a notion the statement uses)",
-   "via": [
-    "def-pc-kflat-complex"
-   ]
+  "id": "def-pc-cochain-complex-modules",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-derived-tensor",
+      "place": "its statement (a notion the statement uses)",
+      "via": [
+        "def-pc-kflat-complex"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "definition",
- "title": "Cochain complexes of sheaves of modules on a ringed site",
- "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, and let $\\Mod(\\mathcal O)$ be the abelian category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. A *cochain complex* $\\mathcal F^\\bullet$ of $\\mathcal O$-modules consists of $\\mathcal O$-modules $\\mathcal F^i$, $i\\in\\mathbf Z$, and morphisms $d^i:\\mathcal F^i\\to\\mathcal F^{i+1}$ of $\\mathcal O$-modules with $d^{i+1}\\circ d^i=0$ for all $i$. A *morphism of cochain complexes* $f:\\mathcal F^\\bullet\\to\\mathcal G^\\bullet$ is a family of morphisms $f^i:\\mathcal F^i\\to\\mathcal G^i$ of $\\mathcal O$-modules with $d^i_{\\mathcal G}\\circ f^i=f^{i+1}\\circ d^i_{\\mathcal F}$ for all $i$. These form a category $\\mathrm{CoCh}(\\Mod(\\mathcal O))$, which is abelian.",
- "source": {
-  "document": "literature/stacks-project/homology.tex",
-  "place": "Section 010V (homology-section-complexes), definition of cochain complexes and the category CoCh(A); Lemma 0114 (homology-lemma-cat-cochain-abelian): CoCh(A) is abelian; applied to A = Mod(O) as in literature/stacks-project/sites-cohomology.tex Section 06YL"
- },
- "stmt_deps": [
-  "def-weil-sheaf-of-modules-category"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -n '^abbrev CochainComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplex.lean",
-   "results": "`CochainComplex V α := HomologicalComplex V (ComplexShape.up α)` (HomologicalComplex.lean:157), with its category structure (morphisms `HomologicalComplex.Hom`: degreewise maps commuting with the differentials, `d i j = 0` unless `j = i + 1`, `d ≫ d = 0`)",
-   "date": "2026-10-09",
-   "verdict": "generalization: take V = SheafOfModules R, α = ℤ"
+  "kind": "definition",
+  "title": "Cochain complexes of sheaves of modules on a ringed site",
+  "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$, and let $\\Mod(\\mathcal O)$ be the abelian category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. A *cochain complex* $\\mathcal F^\\bullet$ of $\\mathcal O$-modules consists of $\\mathcal O$-modules $\\mathcal F^i$, $i\\in\\mathbf Z$, and morphisms $d^i:\\mathcal F^i\\to\\mathcal F^{i+1}$ of $\\mathcal O$-modules with $d^{i+1}\\circ d^i=0$ for all $i$. A *morphism of cochain complexes* $f:\\mathcal F^\\bullet\\to\\mathcal G^\\bullet$ is a family of morphisms $f^i:\\mathcal F^i\\to\\mathcal G^i$ of $\\mathcal O$-modules with $d^i_{\\mathcal G}\\circ f^i=f^{i+1}\\circ d^i_{\\mathcal F}$ for all $i$. These form a category $\\mathrm{CoCh}(\\Mod(\\mathcal O))$, which is abelian.",
+  "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section 010V (homology-section-complexes), definition of cochain complexes and the category CoCh(A); Lemma 0114 (homology-lemma-cat-cochain-abelian): CoCh(A) is abelian; applied to A = Mod(O) as in literature/stacks-project/sites-cohomology.tex Section 06YL"
   },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'instance.*Abelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Additive.lean; grep -n 'instance : Abelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
-   "results": "`HomologicalComplex` over an abelian category is abelian (HomologicalComplexAbelian.lean:45); `SheafOfModules R` is abelian (Sheaf/Abelian.lean:40)",
-   "date": "2026-10-09",
-   "verdict": "supports the specialization"
+  "stmt_deps": [
+    "def-weil-sheaf-of-modules-category"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -n '^abbrev CochainComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplex.lean",
+      "results": "`CochainComplex V α := HomologicalComplex V (ComplexShape.up α)` (HomologicalComplex.lean:157), with its category structure (morphisms `HomologicalComplex.Hom`: degreewise maps commuting with the differentials, `d i j = 0` unless `j = i + 1`, `d ≫ d = 0`)",
+      "date": "2026-10-09",
+      "verdict": "generalization: take V = SheafOfModules R, α = ℤ"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'instance.*Abelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Additive.lean; grep -n 'instance : Abelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+      "results": "`HomologicalComplex` over an abelian category is abelian (HomologicalComplexAbelian.lean:45); `SheafOfModules R` is abelian (Sheaf/Abelian.lean:40)",
+      "date": "2026-10-09",
+      "verdict": "supports the specialization"
+    },
+    {
+      "tool": "leansearch",
+      "query": "category of cochain complexes indexed by integers",
+      "results": "CochainComplex, CochainComplex.of (Mathlib.Algebra.Homology.HomologicalComplex); CochainComplex.instHasShiftInt (Mathlib.Algebra.Homology.HomotopyCategory.Shift)",
+      "date": "2026-10-09",
+      "verdict": "match: CochainComplex"
+    },
+    {
+      "tool": "loogle",
+      "query": "CochainComplex, CategoryTheory.Abelian",
+      "results": "CochainComplex.isIso_liftCycles_iff, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, DerivedCategory.Q : CochainComplex C ℤ ⥤ DerivedCategory C (complexes over an abelian category)",
+      "date": "2026-10-09",
+      "verdict": "supports the match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n '^abbrev CochainComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplex.lean; rg -n 'instance : Abelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+      "results": "CochainComplex V α := HomologicalComplex V (ComplexShape.up α) (line 157); `noncomputable instance : Abelian (HomologicalComplex C c)` (HomologicalComplexAbelian.lean:45); `noncomputable instance : Abelian (SheafOfModules.{v} R)` (Sheaf/Abelian.lean:40)",
+      "date": "2026-10-09",
+      "verdict": "confirmed: with V = SheafOfModules R, α = ℤ, objects are families F^i with d^i : F^i → F^{i+1}, d∘d = 0, morphisms degreewise commuting with d, and the category is abelian, as the node says"
+    }
+  ],
+  "mathlib_match": {
+    "declaration": "CochainComplex",
+    "file": "Mathlib/Algebra/Homology/HomologicalComplex.lean",
+    "how": "specializes in one line: `CochainComplex (SheafOfModules.{v} R) ℤ` for `R : Sheaf J RingCat` (the Mathlib leaf of def-weil-sheaf-of-modules-category), with the category structure of `HomologicalComplex`; abelian by the instance for `HomologicalComplex` over the abelian category `SheafOfModules R`"
   },
-  {
-   "tool": "leansearch",
-   "query": "category of cochain complexes indexed by integers",
-   "results": "CochainComplex, CochainComplex.of (Mathlib.Algebra.Homology.HomologicalComplex); CochainComplex.instHasShiftInt (Mathlib.Algebra.Homology.HomotopyCategory.Shift)",
-   "date": "2026-10-09",
-   "verdict": "match: CochainComplex"
+  "status": "mathlib",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "def-pc-kflat-complex",
+    "date": "2026-10-09"
   },
-  {
-   "tool": "loogle",
-   "query": "CochainComplex, CategoryTheory.Abelian",
-   "results": "CochainComplex.isIso_liftCycles_iff, HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic, DerivedCategory.Q : CochainComplex C ℤ ⥤ DerivedCategory C (complexes over an abelian category)",
-   "date": "2026-10-09",
-   "verdict": "supports the match"
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "grep",
-   "query": "rg -n '^abbrev CochainComplex' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplex.lean; rg -n 'instance : Abelian' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/HomologicalComplexAbelian.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
-   "results": "CochainComplex V α := HomologicalComplex V (ComplexShape.up α) (line 157); `noncomputable instance : Abelian (HomologicalComplex C c)` (HomologicalComplexAbelian.lean:45); `noncomputable instance : Abelian (SheafOfModules.{v} R)` (Sheaf/Abelian.lean:40)",
-   "date": "2026-10-09",
-   "verdict": "confirmed: with V = SheafOfModules R, α = ℤ, objects are families F^i with d^i : F^i → F^{i+1}, d∘d = 0, morphisms degreewise commuting with d, and the category is abelian, as the node says"
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-semicon",
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "Mathlib leaf created by the split of def-pc-kflat-complex; the match was verified by the lead against the Mathlib source at that item's review"
+  },
+  "lean": {
+    "module": "Mathlib.Algebra.Homology.HomologicalComplex",
+    "declaration": "CochainComplex",
+    "statement": "abbrev CochainComplex (V : Type*) [Category V] [HasZeroMorphisms V] (α : Type*) [AddRightCancelSemigroup α] [One α]",
+    "branch": "mathlib",
+    "by": "L",
+    "date": "2026-10-11",
+    "existing": true,
+    "note": "Used as CochainComplex (SheafOfModules R) ℤ, as landed citers write it; morphisms are chain maps and the category is abelian by Mathlib instance. Names checked with #check in an L sandbox; recorded by a T-leaves bookkeeping agent of L."
   }
- ],
- "mathlib_match": {
-  "declaration": "CochainComplex",
-  "file": "Mathlib/Algebra/Homology/HomologicalComplex.lean",
-  "how": "specializes in one line: `CochainComplex (SheafOfModules.{v} R) ℤ` for `R : Sheaf J RingCat` (the Mathlib leaf of def-weil-sheaf-of-modules-category), with the category structure of `HomologicalComplex`; abelian by the instance for `HomologicalComplex` over the abelian category `SheafOfModules R`"
- },
- "status": "mathlib",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "def-pc-kflat-complex",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon",
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "Mathlib leaf created by the split of def-pc-kflat-complex; the match was verified by the lead against the Mathlib source at that item's review"
- }
 }

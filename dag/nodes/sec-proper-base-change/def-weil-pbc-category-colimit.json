@@ -1,86 +1,102 @@
 {
- "id": "def-weil-pbc-category-colimit",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-pbc-property",
-   "place": "unspecified",
-   "via": []
+  "id": "def-weil-pbc-category-colimit",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-pbc-property",
+      "place": "unspecified",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "definition",
- "title": "Colimit of a diagram in a category",
- "statement": "Let $I$ be a small category and $D:I\\to\\mathcal C$ a functor (a diagram). A *cocone* on $D$ is an object $L$ with morphisms $\\iota_i:D(i)\\to L$ such that $\\iota_j\\circ D(a)=\\iota_i$ for every $a:i\\to j$. A *colimit* of $D$ is a cocone $(\\varinjlim_ID,(\\iota_i))$ such that for every cocone $(M,(\\mu_i))$ there is exactly one morphism $u:\\varinjlim_ID\\to M$ with $u\\circ\\iota_i=\\mu_i$ for all $i$; it is unique up to unique isomorphism, and one is chosen when it exists. In particular a family of morphisms $\\mu_i:D(i)\\to M$ compatible with the transition maps induces the *canonical map* $\\varinjlim_ID\\to M$. The colimit is *filtered* when $I$ is a filtered category (Stacks, Categories, Definition 002V: $I$ has at least one object, every two objects map to a common object, every two parallel arrows are equalized by some arrow; a nonempty directed poset is filtered).",
- "source": {
-  "document": "literature/stacks-project/categories.tex",
-  "place": "Stacks Project, Categories, Section 'Limits and colimits' (tag 002D), definition of colimit (tag 002F), and Section 'Filtered colimits'"
- },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -n 'def limit (F : J ⥤ C)\\|to_dual.*colimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/HasLimits.lean",
-   "results": "def limit (F : J ⥤ C) [HasLimit F] with @[to_dual ... colimit object] (lines 180-182), colimit.ι, colimit.desc; IsFiltered in Mathlib/CategoryTheory/Filtered/Basic.lean",
-   "date": "2026-10-09",
-   "verdict": "match"
+  "kind": "definition",
+  "title": "Colimit of a diagram in a category",
+  "statement": "Let $I$ be a small category and $D:I\\to\\mathcal C$ a functor (a diagram). A *cocone* on $D$ is an object $L$ with morphisms $\\iota_i:D(i)\\to L$ such that $\\iota_j\\circ D(a)=\\iota_i$ for every $a:i\\to j$. A *colimit* of $D$ is a cocone $(\\varinjlim_ID,(\\iota_i))$ such that for every cocone $(M,(\\mu_i))$ there is exactly one morphism $u:\\varinjlim_ID\\to M$ with $u\\circ\\iota_i=\\mu_i$ for all $i$; it is unique up to unique isomorphism, and one is chosen when it exists. In particular a family of morphisms $\\mu_i:D(i)\\to M$ compatible with the transition maps induces the *canonical map* $\\varinjlim_ID\\to M$. The colimit is *filtered* when $I$ is a filtered category (Stacks, Categories, Definition 002V: $I$ has at least one object, every two objects map to a common object, every two parallel arrows are equalized by some arrow; a nonempty directed poset is filtered).",
+  "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Stacks Project, Categories, Section 'Limits and colimits' (tag 002D), definition of colimit (tag 002F), and Section 'Filtered colimits'"
   },
-  {
-   "tool": "leansearch",
-   "query": "colimit of a functor, cocone, colimit.desc",
-   "results": "CategoryTheory.Limits.colimit, colimit.desc_extend, getColimitCocone, colimit.isColimit (Limits.HasLimits), IsColimit.desc (Limits.IsLimit)",
-   "date": "2026-10-09",
-   "verdict": "match (confirmed)"
+  "stmt_deps": [],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -n 'def limit (F : J ⥤ C)\\|to_dual.*colimit' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/HasLimits.lean",
+      "results": "def limit (F : J ⥤ C) [HasLimit F] with @[to_dual ... colimit object] (lines 180-182), colimit.ι, colimit.desc; IsFiltered in Mathlib/CategoryTheory/Filtered/Basic.lean",
+      "date": "2026-10-09",
+      "verdict": "match"
+    },
+    {
+      "tool": "leansearch",
+      "query": "colimit of a functor, cocone, colimit.desc",
+      "results": "CategoryTheory.Limits.colimit, colimit.desc_extend, getColimitCocone, colimit.isColimit (Limits.HasLimits), IsColimit.desc (Limits.IsLimit)",
+      "date": "2026-10-09",
+      "verdict": "match (confirmed)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "colimit of a diagram in a category with universal cocone and induced map from colimit",
+      "results": "colimit.coconeMorphism, colimit.desc (Limits.HasLimits), IsColimit.desc (Limits.IsLimit), CoconeTypes.IsColimit.exists_desc",
+      "date": "2026-10-09",
+      "verdict": "match (confirmed)"
+    },
+    {
+      "tool": "grep",
+      "query": "sed -n 176,184p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/HasLimits.lean",
+      "results": "def limit (F : J ⥤ C) [HasLimit F] with @[to_dual ... 'An arbitrary choice of colimit object of a functor.'] (lines 180-182), so `colimit F` exists by to_dual",
+      "date": "2026-10-09",
+      "verdict": "confirmed"
+    }
+  ],
+  "mathlib_match": {
+    "declaration": "CategoryTheory.Limits.colimit",
+    "file": "Mathlib/CategoryTheory/Limits/HasLimits.lean",
+    "how": "exact: `colimit F` for `F : J ⥤ C` with `[HasColimit F]` (generated by `to_dual` from `limit`, lines 180-182), coprojections `colimit.ι F j`, canonical map `colimit.desc F c`; filteredness is `CategoryTheory.IsFiltered J` (Mathlib/CategoryTheory/Filtered/Basic.lean) Re-check 2026-10-09: `colimit F` exists (to_dual of `limit`, HasLimits.lean:180-182), type `(F : J ⥤ C) → [HasColimit F] → C`, 'an arbitrary choice of colimit object' as the node's chosen colimit; cocone = `Cocone F`, uniqueness of the factorization = `IsColimit` (`colimit.isColimit`), canonical map = `colimit.desc F c`; J small category = `[SmallCategory J]` or `Category.{v₁, u₁} J`; filtered = `IsFiltered J`."
   },
-  {
-   "tool": "leanfinder",
-   "query": "colimit of a diagram in a category with universal cocone and induced map from colimit",
-   "results": "colimit.coconeMorphism, colimit.desc (Limits.HasLimits), IsColimit.desc (Limits.IsLimit), CoconeTypes.IsColimit.exists_desc",
-   "date": "2026-10-09",
-   "verdict": "match (confirmed)"
+  "status": "mathlib",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "def-weil-pbc-property",
+    "date": "2026-10-09"
   },
-  {
-   "tool": "grep",
-   "query": "sed -n 176,184p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Limits/HasLimits.lean",
-   "results": "def limit (F : J ⥤ C) [HasLimit F] with @[to_dual ... 'An arbitrary choice of colimit object of a functor.'] (lines 180-182), so `colimit F` exists by to_dual",
-   "date": "2026-10-09",
-   "verdict": "confirmed"
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-def-pbc",
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "Mathlib leaf created by the split of def-weil-pbc-property; the match was verified by the lead against the Mathlib source at that item's review"
+  },
+  "lead_note": "Corrected by the lead 2026-10-10: 'filtered' now includes the nonemptiness clause of Stacks 002V (it was omitted; without it part (2) of lem-weil-pbc-filtered-colimit-algebras-elementwise fails for the empty diagram; Mathlib's IsFiltered requires nonemptiness, so the Mathlib match is unchanged).",
+  "lean": {
+    "module": "Mathlib.CategoryTheory.Limits.HasLimits",
+    "declaration": "CategoryTheory.Limits.colimit",
+    "declarations": [
+      "CategoryTheory.Limits.Cocone",
+      "CategoryTheory.Limits.IsColimit",
+      "CategoryTheory.Limits.colimit.desc",
+      "CategoryTheory.IsFiltered"
+    ],
+    "statement": "def colimit (F : J ⥤ C) [HasColimit F] : C",
+    "branch": "mathlib",
+    "by": "L",
+    "date": "2026-10-11",
+    "existing": true,
+    "note": "The chosen colimit; colimit.desc is the canonical map from a compatible family, IsFiltered the filtered case. Names checked with #check in an L sandbox; recorded by a T-leaves bookkeeping agent of L."
   }
- ],
- "mathlib_match": {
-  "declaration": "CategoryTheory.Limits.colimit",
-  "file": "Mathlib/CategoryTheory/Limits/HasLimits.lean",
-  "how": "exact: `colimit F` for `F : J ⥤ C` with `[HasColimit F]` (generated by `to_dual` from `limit`, lines 180-182), coprojections `colimit.ι F j`, canonical map `colimit.desc F c`; filteredness is `CategoryTheory.IsFiltered J` (Mathlib/CategoryTheory/Filtered/Basic.lean) Re-check 2026-10-09: `colimit F` exists (to_dual of `limit`, HasLimits.lean:180-182), type `(F : J ⥤ C) → [HasColimit F] → C`, 'an arbitrary choice of colimit object' as the node's chosen colimit; cocone = `Cocone F`, uniqueness of the factorization = `IsColimit` (`colimit.isColimit`), canonical map = `colimit.desc F c`; J small category = `[SmallCategory J]` or `Category.{v₁, u₁} J`; filtered = `IsFiltered J`."
- },
- "status": "mathlib",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "def-weil-pbc-property",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-def-pbc",
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "Mathlib leaf created by the split of def-weil-pbc-property; the match was verified by the lead against the Mathlib source at that item's review"
- },
- "lead_note": "Corrected by the lead 2026-10-10: 'filtered' now includes the nonemptiness clause of Stacks 002V (it was omitted; without it part (2) of lem-weil-pbc-filtered-colimit-algebras-elementwise fails for the empty diagram; Mathlib's IsFiltered requires nonemptiness, so the Mathlib match is unchanged)."
 }

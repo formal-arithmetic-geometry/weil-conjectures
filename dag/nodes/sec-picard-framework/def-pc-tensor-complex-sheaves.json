@@ -1,101 +1,116 @@
 {
- "id": "def-pc-tensor-complex-sheaves",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-derived-tensor",
-   "place": "its statement (a notion the statement uses)",
-   "via": []
+  "id": "def-pc-tensor-complex-sheaves",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-derived-tensor",
+      "place": "its statement (a notion the statement uses)",
+      "via": []
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "definition",
- "title": "Tensor product of complexes of modules on a ringed site",
- "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. For cochain complexes $\\mathcal F^\\bullet$, $\\mathcal G^\\bullet$ of sheaves of $\\mathcal O$-modules, the double complex $\\mathcal F^\\bullet\\otimes_{\\mathcal O}\\mathcal G^\\bullet$ has terms $\\mathcal F^p\\otimes_{\\mathcal O}\\mathcal G^q$ (the tensor product of sheaves of modules [def-pur-sheaf-tensor-product]), first differential $d_{\\mathcal F}\\otimes 1$ and second differential $1\\otimes d_{\\mathcal G}$. Its total complex $\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathcal O}\\mathcal G^\\bullet)$ is the complex with terms $\\bigoplus_{p+q=n}\\mathcal F^p\\otimes_{\\mathcal O}\\mathcal G^q$ (a direct sum in the abelian category of $\\mathcal O$-modules, which has all direct sums) and differential $\\sum_{p+q=n}(d_{\\mathcal F}^p\\otimes 1+(-1)^p\\,1\\otimes d_{\\mathcal G}^q)$. It is written $\\mathcal F^\\bullet\\otimes_{\\mathcal O}\\mathcal G^\\bullet$ when no confusion arises; it is functorial in both complexes.",
- "source": {
-  "document": "literature/stacks-project/homology.tex",
-  "place": "Definition 012Z (homology-definition-associated-simple-complex), applied as in literature/stacks-project/sites-cohomology.tex Section 06YL (sites-cohomology-section-flat), first display of Lemma 06YM"
- },
- "stmt_deps": [
-  "def-pur-sheaf-tensor-product"
- ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -n 'abbrev mapBifunctor\\|abbrev HasMapBifunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Bifunctor.lean",
-   "results": "`HomologicalComplex.mapBifunctor K₁ K₂ F c` (Bifunctor.lean:125): for a bifunctor `F : C₁ ⥤ C₂ ⥤ D` into a preadditive category, the total complex of the bicomplex `F(K₁^p, K₂^q)` with the sign rule of `ComplexShape.up ℤ` (TotalComplex.lean), under `HasMapBifunctor` (existence of the coproducts)",
-   "date": "2026-10-09",
-   "verdict": "generalization: take F = the sheaf tensor bifunctor of [def-pur-sheaf-tensor-product], c = ComplexShape.up ℤ"
+  "kind": "definition",
+  "title": "Tensor product of complexes of modules on a ringed site",
+  "statement": "Let $\\mathcal C$ be a site and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. For cochain complexes $\\mathcal F^\\bullet$, $\\mathcal G^\\bullet$ of sheaves of $\\mathcal O$-modules, the double complex $\\mathcal F^\\bullet\\otimes_{\\mathcal O}\\mathcal G^\\bullet$ has terms $\\mathcal F^p\\otimes_{\\mathcal O}\\mathcal G^q$ (the tensor product of sheaves of modules [def-pur-sheaf-tensor-product]), first differential $d_{\\mathcal F}\\otimes 1$ and second differential $1\\otimes d_{\\mathcal G}$. Its total complex $\\operatorname{Tot}(\\mathcal F^\\bullet\\otimes_{\\mathcal O}\\mathcal G^\\bullet)$ is the complex with terms $\\bigoplus_{p+q=n}\\mathcal F^p\\otimes_{\\mathcal O}\\mathcal G^q$ (a direct sum in the abelian category of $\\mathcal O$-modules, which has all direct sums) and differential $\\sum_{p+q=n}(d_{\\mathcal F}^p\\otimes 1+(-1)^p\\,1\\otimes d_{\\mathcal G}^q)$. It is written $\\mathcal F^\\bullet\\otimes_{\\mathcal O}\\mathcal G^\\bullet$ when no confusion arises; it is functorial in both complexes.",
+  "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Definition 012Z (homology-definition-associated-simple-complex), applied as in literature/stacks-project/sites-cohomology.tex Section 06YL (sites-cohomology-section-flat), first display of Lemma 06YM"
   },
-  {
-   "tool": "grep",
-   "query": "grep -n 'tensorObj\\|HasTensor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Monoidal.lean; grep -rln 'SheafOfModules' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -l 'MonoidalCategory'",
-   "results": "`HomologicalComplex.tensorObj` (Monoidal.lean:48) needs a `MonoidalCategory` on the terms; no monoidal structure is declared on `SheafOfModules R`, so `tensorObj` does not apply directly",
-   "date": "2026-10-09",
-   "verdict": "no match for tensorObj; use mapBifunctor"
+  "stmt_deps": [
+    "def-pur-sheaf-tensor-product"
+  ],
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -n 'abbrev mapBifunctor\\|abbrev HasMapBifunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Bifunctor.lean",
+      "results": "`HomologicalComplex.mapBifunctor K₁ K₂ F c` (Bifunctor.lean:125): for a bifunctor `F : C₁ ⥤ C₂ ⥤ D` into a preadditive category, the total complex of the bicomplex `F(K₁^p, K₂^q)` with the sign rule of `ComplexShape.up ℤ` (TotalComplex.lean), under `HasMapBifunctor` (existence of the coproducts)",
+      "date": "2026-10-09",
+      "verdict": "generalization: take F = the sheaf tensor bifunctor of [def-pur-sheaf-tensor-product], c = ComplexShape.up ℤ"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'tensorObj\\|HasTensor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Monoidal.lean; grep -rln 'SheafOfModules' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -l 'MonoidalCategory'",
+      "results": "`HomologicalComplex.tensorObj` (Monoidal.lean:48) needs a `MonoidalCategory` on the terms; no monoidal structure is declared on `SheafOfModules R`, so `tensorObj` does not apply directly",
+      "date": "2026-10-09",
+      "verdict": "no match for tensorObj; use mapBifunctor"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean",
+      "results": "`HasColimitsOfSize (SheafOfModules R)` (Colimits.lean:40): the coproducts needed for `HasMapBifunctor` exist",
+      "date": "2026-10-09",
+      "verdict": "supports the specialization"
+    },
+    {
+      "tool": "leansearch",
+      "query": "total complex of tensor product of two complexes via a bifunctor",
+      "results": "HomologicalComplex.mapBifunctor (Mathlib.Algebra.Homology.Bifunctor), CochainComplex.mapBifunctor (Mathlib.Algebra.Homology.BifunctorShift), HomologicalComplex.tensorObj, ιTensorObj (Mathlib.Algebra.Homology.Monoidal)",
+      "date": "2026-10-09",
+      "verdict": "match: mapBifunctor (tensorObj needs a MonoidalCategory)"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "tensor product of two cochain complexes as total complex of a bicomplex given by a bifunctor",
+      "results": "CochainComplex.HasMapBifunctor, CochainComplex.mapBifunctor, CochainComplex.ιMapBifunctor (Mathlib.Algebra.Homology.BifunctorShift), HomologicalComplex.tensorObj (Mathlib.Algebra.Homology.Monoidal)",
+      "date": "2026-10-09",
+      "verdict": "match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n 'abbrev mapBifunctor|abbrev HasMapBifunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Bifunctor.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/BifunctorShift.lean; rg -n 'ε₂ := |lemma ε_succ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ComplexShapeSigns.lean; rg -ln Monoidal ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
+      "results": "HomologicalComplex.mapBifunctor (Bifunctor.lean:125, total complex of the bicomplex F(K₁^p, K₂^q)), HasMapBifunctor (:117); CochainComplex.mapBifunctor K₁ K₂ F := HomologicalComplex.mapBifunctor K₁ K₂ F (ComplexShape.up ℤ) (BifunctorShift.lean:57); signs for c₁ = c₂ = c = up ℤ: ε₁ = 1, ε₂(p,q) = c.ε p (ComplexShapeSigns.lean:159) with ε_succ (:141), i.e. (-1)^p; no MonoidalCategory on SheafOfModules",
+      "date": "2026-10-09",
+      "verdict": "confirmed: terms ⊕_{p+q=n} F^p ⊗ G^q, differential d_F ⊗ 1 + (-1)^p 1 ⊗ d_G, functorial in both complexes, as the node says, with F the sheaf tensor bifunctor of def-pur-sheaf-tensor-product"
+    }
+  ],
+  "mathlib_match": {
+    "declaration": "HomologicalComplex.mapBifunctor",
+    "file": "Mathlib/Algebra/Homology/Bifunctor.lean",
+    "how": "specializes in one line: `HomologicalComplex.mapBifunctor F G T (ComplexShape.up ℤ)` with `T : SheafOfModules O ⥤ SheafOfModules O ⥤ SheafOfModules O` the sheaf tensor bifunctor of def-pur-sheaf-tensor-product (sheafification of `PresheafOfModules.Monoidal` curriedTensor), coproducts from `SheafOfModules` colimits Re-check 2026-10-09: for c₁ = c₂ = c = `ComplexShape.up ℤ` this is the abbreviation `CochainComplex.mapBifunctor K₁ K₂ T` (Mathlib/Algebra/Homology/BifunctorShift.lean:57); the signs are ε₁ = 1 and ε₂(p,q) = (-1)^p (Mathlib/Algebra/Homology/ComplexShapeSigns.lean:159, `ε_succ`), so the differential is d_F ⊗ 1 + (-1)^p 1 ⊗ d_G as in the node."
   },
-  {
-   "tool": "grep",
-   "query": "grep -n 'instance' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean",
-   "results": "`HasColimitsOfSize (SheafOfModules R)` (Colimits.lean:40): the coproducts needed for `HasMapBifunctor` exist",
-   "date": "2026-10-09",
-   "verdict": "supports the specialization"
+  "status": "mathlib",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "def-weil-derived-tensor",
+    "date": "2026-10-09"
   },
-  {
-   "tool": "leansearch",
-   "query": "total complex of tensor product of two complexes via a bifunctor",
-   "results": "HomologicalComplex.mapBifunctor (Mathlib.Algebra.Homology.Bifunctor), CochainComplex.mapBifunctor (Mathlib.Algebra.Homology.BifunctorShift), HomologicalComplex.tensorObj, ιTensorObj (Mathlib.Algebra.Homology.Monoidal)",
-   "date": "2026-10-09",
-   "verdict": "match: mapBifunctor (tensorObj needs a MonoidalCategory)"
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "leanfinder",
-   "query": "tensor product of two cochain complexes as total complex of a bicomplex given by a bifunctor",
-   "results": "CochainComplex.HasMapBifunctor, CochainComplex.mapBifunctor, CochainComplex.ιMapBifunctor (Mathlib.Algebra.Homology.BifunctorShift), HomologicalComplex.tensorObj (Mathlib.Algebra.Homology.Monoidal)",
-   "date": "2026-10-09",
-   "verdict": "match"
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-semicon",
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass",
+    "note": "Mathlib leaf created by the split of def-weil-derived-tensor; the match was verified by the lead against the Mathlib source at that item's review"
   },
-  {
-   "tool": "grep",
-   "query": "rg -n 'abbrev mapBifunctor|abbrev HasMapBifunctor' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/Bifunctor.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/BifunctorShift.lean; rg -n 'ε₂ := |lemma ε_succ' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Homology/ComplexShapeSigns.lean; rg -ln Monoidal ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/Algebra/Category/ModuleCat/Sheaf/",
-   "results": "HomologicalComplex.mapBifunctor (Bifunctor.lean:125, total complex of the bicomplex F(K₁^p, K₂^q)), HasMapBifunctor (:117); CochainComplex.mapBifunctor K₁ K₂ F := HomologicalComplex.mapBifunctor K₁ K₂ F (ComplexShape.up ℤ) (BifunctorShift.lean:57); signs for c₁ = c₂ = c = up ℤ: ε₁ = 1, ε₂(p,q) = c.ε p (ComplexShapeSigns.lean:159) with ε_succ (:141), i.e. (-1)^p; no MonoidalCategory on SheafOfModules",
-   "date": "2026-10-09",
-   "verdict": "confirmed: terms ⊕_{p+q=n} F^p ⊗ G^q, differential d_F ⊗ 1 + (-1)^p 1 ⊗ d_G, functorial in both complexes, as the node says, with F the sheaf tensor bifunctor of def-pur-sheaf-tensor-product"
+  "lean": {
+    "module": "Mathlib.Algebra.Homology.BifunctorShift",
+    "declaration": "CochainComplex.mapBifunctor",
+    "declarations": [
+      "CategoryTheory.MonoidalCategory.curriedTensor",
+      "SheafOfModules.monoidalCategory",
+      "HomologicalComplex.mapBifunctor"
+    ],
+    "statement": "noncomputable def CochainComplex.mapBifunctor (K₁ : CochainComplex C₁ ℤ) (K₂ : CochainComplex C₂ ℤ) (F : C₁ ⥤ C₂ ⥤ D) [K₁.HasMapBifunctor K₂ F] : CochainComplex D ℤ",
+    "branch": "mathlib",
+    "by": "L",
+    "date": "2026-10-11",
+    "existing": true,
+    "note": "Used as CochainComplex.mapBifunctor K L (curriedTensor _) with the tensor of SheafOfModules.monoidalCategory, as the landed KFlat files write it: the total complex of the termwise tensor double complex, sign (-1)^p on the second differential. Names checked with #check in an L sandbox; recorded by a T-leaves bookkeeping agent of L."
   }
- ],
- "mathlib_match": {
-  "declaration": "HomologicalComplex.mapBifunctor",
-  "file": "Mathlib/Algebra/Homology/Bifunctor.lean",
-  "how": "specializes in one line: `HomologicalComplex.mapBifunctor F G T (ComplexShape.up ℤ)` with `T : SheafOfModules O ⥤ SheafOfModules O ⥤ SheafOfModules O` the sheaf tensor bifunctor of def-pur-sheaf-tensor-product (sheafification of `PresheafOfModules.Monoidal` curriedTensor), coproducts from `SheafOfModules` colimits Re-check 2026-10-09: for c₁ = c₂ = c = `ComplexShape.up ℤ` this is the abbreviation `CochainComplex.mapBifunctor K₁ K₂ T` (Mathlib/Algebra/Homology/BifunctorShift.lean:57); the signs are ε₁ = 1 and ε₂(p,q) = (-1)^p (Mathlib/Algebra/Homology/ComplexShapeSigns.lean:159, `ε_succ`), so the differential is d_F ⊗ 1 + (-1)^p 1 ⊗ d_G as in the node."
- },
- "status": "mathlib",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "def-weil-derived-tensor",
-  "date": "2026-10-09"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon",
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass",
-  "note": "Mathlib leaf created by the split of def-weil-derived-tensor; the match was verified by the lead against the Mathlib source at that item's review"
- }
 }

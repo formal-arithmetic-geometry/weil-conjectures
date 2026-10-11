@@ -121,5 +121,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-jdf (reviewer sub-agent of L); spot-checked: Read Stacks 09N5 (varieties-lemma-create-globally-generated) and 09N2 (varieties-lemma-semi-local-dimension-one-conductor) in varieties.tex; item statement unchanged and agrees with 09N5 hypothesis by hypothesis (domain A, B_i Noetherian 1-dim semilocal domains in K with fraction field K, A tensor B_i -> K surjective; conclusion nonzero f). New nodes checked true: conductor node = 09N2 verbatim; dedekind-dvr-reduction true (Jacobson radical of a Dedekind B equals the elements in every m B_m since B = cap B_m); tensor-surjective base case true (else A in B and image of A tensor B is B, not K); valuation arithmetic true. Step 1 carried by the conductor node with x^{-1}, y=1 and common power N = n_1...n_r; step 2 by the reduction node; step 3 by the base case and valuation arithmetic (x^N has v_i(x^N) < v_i(y) for i<r, v_r(x^N) >= 0 > v_r(y), so v_i(x^N+y) < 0 for all i, and x^N+y nonzero). Small cases r=1 and r=2 (A=k[t], B_1=k[t]_(t) style, v_1(x)<0, v_2(x)>=0) checked. FIX more, RETURN less: (1) C1: step 1 used Spec(B'_i)->Spec(B_i) surjective claiming it was part of the conductor node, which does not state it; now cites the existing Mathlib leaf lem-weil-pbc-integral-injective-lying-over (RingHom.IsIntegral.comap_surjective) with the two-line argument q over m, n maximal over q, n cap B_i = m, added to uses and proof_deps; (2) B3: lem-sc-semilocal-dim-one-conductor statement used 'semilocal Dedekind domain', 'integral closure', 'Jacobson radical' without definition; now defined inline with def-weil-pbc-normal-ring and def-weil-pbc-integral-closure added to stmt_deps (and 'with fraction field K' made explicit). FIX: item proof step 2: text now says A tensor (B_i)_m -> K stays surjective (needed by the base case) and states what the reduction node gives; step 3: text adds v(z)<0 iff z^{-1} in m_B; four new nodes: blueprint.from.via corrected to [item] + item's via (was listing sibling new nodes). Blueprint search 'conductor', 'Dedekind': 0 matches. Start Sat Oct 10 04:45:48 PM UTC 2026, end Sat Oct 10 04:47:12 PM UTC 2026; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.JacobsonDenominatorFunctionField",
+  "declaration": "RingTheory.exists_inv_mem_jacobson_of_tensor_surjective",
+  "file": "lean/Sheaf/RingTheory/JacobsonDenominatorFunctionField.lean",
+  "statement": "theorem exists_inv_mem_jacobson_of_tensor_surjective {A : Type u} {K : Type v} [CommRing A] [IsDomain A] [Field K] [Algebra A K] [IsFractionRing A K] {ι : Type w} [Finite ι] (B : ι → Type t) [∀ i, CommRing (B i)] [∀ i, IsDomain (B i)] [∀ i, IsNoetherianRing (B i)] [∀ i, Finite (MaximalSpectrum (B i))] (hdim : ∀ i, ringKrullDim (B i) = 1) [∀ i, Algebra (B i) K] [∀ i, IsFractionRing (B i) K] (hsurj : ∀ i, Function.Surjective (Algebra.TensorProduct.productMap (IsScalarTower.toAlgHom ℤ A K) (IsScalarTower.toAlgHom ℤ (B i) K))) : ∃ f : A, f ≠ 0 ∧ ∀ i, ∃ b : B i, b ∈ (Ideal.jacobson (⊥ : Ideal (B i)) : Set (B i)) ∧ algebraMap (B i) K b = (algebraMap A K f)⁻¹",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-jdf1155",
+  "group": "F1",
+  "result": "pass",
+  "note": "A domain + IsFractionRing A K; finite ι; B i domain/Noetherian/Finite MaximalSpectrum/ringKrullDim=1/IsFractionRing (B i) K (injective = subring); productMap over ℤ surjective = A⊗B_i→K; ∃ f≠0 ∀ i, f⁻¹ = image of b ∈ jacobson ⊥; forms match landed siblings (FiniteIntegralConductor, IntegralOverringJacobsonPower)"
  }
 }
