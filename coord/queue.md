@@ -27,10 +27,10 @@
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
 | `lem-pc-affine-derived-base-change-comparison-map` | 5016 | none |
 | `lem-pc-affine-flat-module-descent` | 5016 | none |
-| `lem-pc-rf-mv-triangle-naturality` | 5016 | none |
+| `def-pc-derived-base-change-map` | 5017 | none |
+| `lem-pc-derived-mayer-vietoris-functorial` | 5017 | none |
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
 | `lem-sp-filtered-complex-associated-spectral-sequence-construction` | 6008 | none |
-| `lem-sc-picard-h1-multiple-locus` | 6013 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
 | `lem-sc-perfect-degree-zero-fibre-criterion` | 6014 | none |
 | `lem-sc-perfect-finite-free-residue-model` | 6014 | none |
@@ -43,9 +43,9 @@
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
 | `lem-pc-coherent-property-devissage` | - | none |
-| `lem-sc-pic-affine-base-change-compatibility` | - | none |
 | `lem-sc-etale-torsor-h1-functoriality` | - | none |
 | `lem-sc-local-dvr-base-change` | - | none |
+| `lem-sc-pic-restriction-boundary` | - | none |
 | `lem-pur-kinjective-degreewise-existence` | - | none |
 | `lem-pc-flf-properties` | - | none |
 | `lem-pur-left-derived-from-kflat-class` | - | none |
@@ -869,7 +869,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1707 nodes that wait for a statement dependency, 86 nodes that wait for stage 1.
+Not open yet: 1710 nodes that wait for a statement dependency, 86 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
