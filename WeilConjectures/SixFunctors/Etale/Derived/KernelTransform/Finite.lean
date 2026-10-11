@@ -12,6 +12,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Assoc
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
@@ -84,7 +85,7 @@ theorem nonempty_iso_kernelTransform_comp [Finite Λ]
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ
     (IsPullback.of_hasPullback (pullback.snd π π') (pullback.fst π' π''))
   nonempty_iso_kernelTransform_comp_of_nonempty_iso (ModuleCat.{u + 1} Λ) π π' π''
-    (fun f g _ _ _ ↦ nonempty_iso_rightDerivedLowerShriek_comp Λ f g)
+    (fun f g _ _ _ _ ↦ nonempty_iso_rightDerivedLowerShriek_comp Λ f g)
     ⟨asIso (rightDerivedLowerShriekBaseChangeMap _
       (IsPullback.of_hasPullback (pullback.snd π π') (pullback.fst π' π'')))⟩
     (fun L ↦ nonempty_iso_rightDerivedLowerShriek_comp_derivedTensorRight _ _ L
