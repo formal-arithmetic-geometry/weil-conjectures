@@ -3096,3 +3096,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:24 L: merged deliver/C1/lem-wf-mixed-commutator-tangent (reviewer PASS; first push; new nodes: 0)
 - 00:25 UTC L: C1 mixed-commutator-tangent PASS c09c52704 (R-mct0024).
 - 00:26 L: returned deliver/H1/lem-pc-derived-mayer-vietoris-functorial (reviewer RETURN: Reviewer R-mvf0025, head afddf232a. 1 (E, statement): the item defines delta_E from the sequence 0->I->j_{U*}I|_U+j_{V*})
+- 00:26 UTC L: returned: H1 derived-mayer-vietoris-functorial 2afcfc7fa (R-mvf0025: delta built from any K-injective though 08BV needs injective terms; h_*I' not a valid representative for non-flat h).
