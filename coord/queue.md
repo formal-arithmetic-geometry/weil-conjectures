@@ -1,17 +1,16 @@
 # Work queue
 
-494 items; claim with `tools/claim.py next <group> [--stage N]`.
+513 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (494)
+## Stage 2: nodes to state (513)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `pqf-def-coherent` | 1 | state |
-| `pqf-def-locnoeth` | 1 | state |
-| `def-nagata-glued-limit-comparison` | 2 | state |
+| `def-nagata-final-noetherian-base-system` | 2 | state |
 | `def-pc-smooth-projective-curve` | 2 | state |
 | `def-sc-group-scheme` | 2 | state |
 | `def-sp-convergence` | 2 | state |
@@ -22,13 +21,31 @@
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
+| `lem-sc-affine-complement-finite-on-integral-curve` | 1 | state |
+| `lem-sc-ample-on-reduction-noetherian` | 1 | state |
+| `lem-sc-ample-square-zero-thickening` | 1 | state |
+| `lem-sc-ass-weakass-locally-noetherian` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
+| `lem-sc-component-intersections-finite` | 1 | state |
+| `lem-sc-find-globally-generated` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
+| `lem-sc-hilbert-nowhere-dense-dimension-drop` | 1 | state |
+| `lem-sc-integral-dim-one-ample` | 1 | state |
+| `lem-sc-locnoeth-components-locally-finite` | 1 | state |
+| `lem-sc-meromorphic-sheaf-generic-product` | 1 | state |
+| `lem-sc-noetherian-closed-points-finite` | 1 | state |
+| `lem-sc-p1-regular-dimension-one` | 1 | state |
+| `lem-sc-reduced-dim-le-one-ample` | 1 | state |
+| `lem-sc-regular-meromorphic-section-exists` | 1 | state |
+| `lem-sc-zero-dim-noetherian-affine` | 1 | state |
+| `lem-sc-zero-dim-noetherian-finite-discrete` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
+| `lem-weil-pbc-constructible-module-noetherian-descent` | 1 | state |
+| `lem-weil-pbc-etale-infinitesimal-neighbourhoods` | 1 | state |
 | `lem-weil-pbc-finite-etale-trace-degree` | 1 | state |
+| `lem-weil-pbc-finite-surjective-affine-target-noetherian` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
 | `lem-weil-pbc-graded-module-away-restriction` | 1 | state |
-| `lem-weil-pbc-henselian-etale-retraction` | 1 | state |
 | `lem-weil-pbc-higher-direct-image-sheafified-presheaf` | 1 | state |
 | `lem-weil-pbc-horseshoe-morphism-lift-exact-source` | 1 | state |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
@@ -46,7 +63,6 @@
 | `lem-weil-pbc-krull-intersection-localization` | 1 | state |
 | `lem-weil-pbc-lci-conormal-free-rank-codimension` | 1 | state |
 | `lem-weil-pbc-lci-conormal-generators-global-complete-intersection` | 1 | state |
-| `lem-weil-pbc-lci-field-change` | 1 | state |
 | `lem-weil-pbc-lci-regular-sequence-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-lft-over-field-isolated-point-residue-finite` | 1 | state |
 | `lem-weil-pbc-lift-coprime-factorization-etale` | 1 | state |
@@ -311,6 +327,7 @@
 | `lem-weil-pbc-skyscraper-constant-on-point-closure` | 1 | state |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1 | state |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1 | state |
+| `lem-weil-pbc-smooth-artinian-lifting-at-point` | 1 | state |
 | `lem-weil-pbc-smooth-at-generic-point-over-field` | 1 | state |
 | `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1 | state |
 | `lem-weil-pbc-smooth-at-prime-artinian-lifting` | 1 | state |
@@ -445,6 +462,7 @@
 | `lemma-weil-pbc-torsion-assembly` | 1 | state |
 | `lemma-weil-pbc-torsion-filtered-union` | 1 | state |
 | `pqf-lem-coherent-ft-locnoeth` | 1 | state |
+| `pqf-lem-finite-fp-locnoeth` | 1 | state |
 | `pqf-lem-finite-qf` | 1 | state |
 | `pqf-lem-finite-type-algebra-finite-spectrum` | 1 | state |
 | `pqf-lem-proper-basic` | 1 | state |
@@ -461,6 +479,7 @@
 | `thm-galois-abstract-equivalence` | 1 | state |
 | `thm-galois-fundamental` | 1 | state |
 | `thm-pqf-zmt-factorization` | 1 | state |
+| `thm-sc-proper-finite-fibre-finite-neighbourhood` | 1 | state |
 | `thm-sp-grothendieck` | 1 | state |
 | `lem-exc-coinduced-discrete-embedding` | 2 | state |
 | `lem-kun-etale-lfp` | 2 | state |
@@ -504,7 +523,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 807 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 784 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
