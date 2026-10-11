@@ -1,11 +1,11 @@
 # Work queue
 
-962 items; claim with `tools/claim.py next <group> [--stage N]`.
+959 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (962)
+## Stage 2: nodes to state (959)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -27,7 +27,6 @@
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-limit-milnor-sequence` | 1 | state |
-| `lem-pc-derived-lower-truncation-step-triangle` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
 | `lem-pc-finite-projective-tor-acyclic` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
@@ -46,9 +45,7 @@
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-ringed-space-module-stalk-tensor` | 1 | state |
-| `lem-pc-sites-modules-quotient-j-shriek` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
-| `lem-pc-stalk-direct-sums` | 1 | state |
 | `lem-pc-stalk-tensor-complex` | 1 | state |
 | `lem-pc-termwise-tor-acyclic-derived-tensor` | 1 | state |
 | `lem-pc-tor-independent-projective-complex-tensor` | 1 | state |
