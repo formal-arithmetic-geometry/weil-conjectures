@@ -210,5 +210,23 @@
   "item": "lem-weil-pbc-complex-mapping-cylinder-split-factorization",
   "worker": "stage1",
   "summary": "Proof written from Stacks Derived Categories 013N (lemma-make-injective, derived.tex 2623, proof 2649-2711), Remark 013O (remark-compute-modules, 2714) and Definition 014G (definition-termwise-split-map, 2580); tags checked in stacks-project/tags/tags. Six steps, all elementary matrix computations over the three-term direct sum L^n ⊕ K^n ⊕ K^{n+1} of an additive category: the differential and d^2=0 (omitted in the source), alpha~ = (alpha, id, 0), pi, s as morphisms of complexes with pi alpha~ = alpha and pi s = id, an explicit isomorphism K^n ⊕ (L^n ⊕ K^{n+1}) ≅ L~^n carrying the inclusion of K^n to alpha~ (the source says only 'clearly a split injection'), the homotopy id - s pi = dh + hd entry by entry, and the boundedness clause (no argument in the source; L~^n = 0 for n < n0-1, resp. n > n1). Statement unchanged; it covers everything the citer lem-weil-pbc-lift-to-injective-unique-up-to-homotopy takes in its step 1 (pi alpha~ = alpha, pi s = id, s pi ~ id, L~^n ≅ K^n ⊕ M^n with alpha~^n the inclusion); the Moreover clause is not used by that citer. No new nodes. Mathlib re-searched (LeanSearch, LeanFinder, Loogle, grep): HomologicalComplex.cylinder (HomotopyCofiber.lean:556) is the cylinder of one complex only; mathlib_candidate (L ⊞ mappingCone (𝟙 K), CM5b pattern) kept, not a leaf (B8)."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.MappingCylinderSplitFactorization",
+  "declaration": "CochainComplex.exists_mapping_cylinder_split_factorization",
+  "file": "lean/Sheaf/Algebra/Homology/MappingCylinderSplitFactorization.lean",
+  "statement": "theorem exists_mapping_cylinder_split_factorization {C : Type u} [Category.{v} C] [Preadditive C] [HasFiniteBiproducts C] {K L : CochainComplex C ℤ} (α : K ⟶ L) : ∃ (T : CochainComplex C ℤ) (i : K ⟶ T) (p : T ⟶ L) (s : L ⟶ T), i ≫ p = α ∧ (∀ n : ℤ, ∃ (M : C) (e : T.X n ≅ K.X n ⊞ M), i.f n ≫ e.hom = biprod.inl) ∧ s ≫ p = 𝟙 L ∧ Nonempty (Homotopy (p ≫ s) (𝟙 T)) ∧ (∀ n₀ : ℤ, (∀ n : ℤ, n < n₀ → IsZero (K.X n) ∧ IsZero (L.X n)) → ∀ n : ℤ, n < n₀ - 1 → IsZero (T.X n)) ∧ (∀ n₁ : ℤ, (∀ n : ℤ, n₁ < n → IsZero (K.X n) ∧ IsZero (L.X n)) → ∀ n : ℤ, n₁ < n → IsZero (T.X n))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mcs1509",
+  "group": "J1",
+  "result": "pass",
+  "note": "additive A = Preadditive+HasFiniteBiproducts (recorded dep); K L CochainComplex C Z, alpha : K ⟶ L; ∃ T i p s; (0) i≫p=α; (1) ∀n ∃M e : T.X n ≅ K.X n ⊞ M, i.f n ≫ e.hom = biprod.inl (true summand, not IsSplitMono); (2) s≫p=𝟙, Nonempty Homotopy (p≫s) (𝟙 T); bounds n<n₀-1 / n>n₁ on the same T; #check ok, no Mathlib exact match (cylinder is of one complex, CM5b abelian)"
  }
 }
