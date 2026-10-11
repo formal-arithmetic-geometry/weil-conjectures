@@ -137,6 +137,19 @@ noncomputable def extendScalarsAdjunction :
       sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
   Sheaf.adjunction _ (ModuleCat.extendScalarsAddCommGrpAdj Λ)
 
+instance : (extendScalars Λ X).IsLeftAdjoint :=
+  (extendScalarsAdjunction Λ X).isLeftAdjoint
+
+instance : (sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).Additive where
+  map_add {_ _ _ _} := by
+    apply Sheaf.hom_ext
+    ext U x
+    rfl
+
+instance : (extendScalars Λ X).Additive :=
+  (extendScalarsAdjunction Λ X).left_adjoint_additive
+
 variable {X}
 
 /-- Extension of scalars commutes with pullback, `f^*(Λ ⊗ F) ≅ Λ ⊗ f^* F`: both functors are left
