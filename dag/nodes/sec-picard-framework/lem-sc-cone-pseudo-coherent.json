@@ -20,7 +20,8 @@
   "place": "Tag 064R, label lemma-cone-pseudo-coherent"
  },
  "stmt_deps": [
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-m-pseudo-coherent"
  ],
  "proof": [
   {
@@ -90,5 +91,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cpc3151 (reviewer sub-agent of L); spot-checked: Statement vs Tag 064R: exactly clause (1), clauses (2),(3) not claimed; not word-for-word duplicate of lem-pc-ring-pseudo-coherent-distinguished-triangle (that node states all three clauses with A,B,C; item is its clause 1 renamed K,L,M) so cited as broader existing node (created from lem-pc-ring-pseudo-coherent-summand, not from this item: no cycle). Inline m-pseudo-coherence definition identical to the triangle node; summand node's complex-level version reconciled there via Tag 064B. stmt_deps change def-pc-derived-category (sheaves on scheme) -> def-weil-abstract-derived-category correct and named (E7). Citer lem-sc-affine-pseudo-coherent-lift step 3 uses exactly clause 1 (K=F bounded finite free, L=M_{f_j} (n-1)-pc, m=n-1). Report mentions citations.json which is not in the diff: report inaccuracy only. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ConePseudoCoherent",
+  "declaration": "CategoryTheory.isMPseudoCoherent_cone",
+  "file": "lean/Sheaf/RingTheory/ConePseudoCoherent.lean",
+  "statement": "theorem isMPseudoCoherent_cone (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] (m : ℤ) (T : Triangle (DerivedCategory (ModuleCat.{v} R))) (hT : T ∈ distTriang (DerivedCategory (ModuleCat.{v} R))) : IsMPseudoCoherent (m + 1) T.obj₁ → IsMPseudoCoherent m T.obj₂ → IsMPseudoCoherent m T.obj₃",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the landed DerivedCategory.IsMPseudoCoherent definition; the prior inline duplicate was removed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpc1010",
+  "group": "K1",
+  "result": "fix",
+  "note": "R CommRing, m:Z, D(R)=DerivedCategory (ModuleCat R) with HasDerivedCategory, K->L->M->K[1] = T with hT in distTriang, T.obj1/2/3 = K/L/M; hyps IsMPseudoCoherent (m+1) K and m L, concl m M: exactly node and clause (1) of landed M1 isMPseudoCoherent_of_distinguished_triangle (same triangle form); landed DerivedCategory.IsMPseudoCoherent used, no private copy; any m, zero objects admissible; FIX: unused imports dropped, proof in words in docstring, stale worker report annotated"
  }
 }
