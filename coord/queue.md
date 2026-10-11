@@ -1,11 +1,11 @@
 # Work queue
 
-507 items; claim with `tools/claim.py next <group> [--stage N]`.
+504 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (507)
+## Stage 2: nodes to state (504)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-arrow-iso-pullback-counit` | 1 | state |
 | `lem-pc-base-change-closure-components` | 1 | state |
-| `lem-pc-curves-are-sc` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-global-sections-separable` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
@@ -27,7 +26,6 @@
 | `lem-sc-hilb-to-pic-morphism` | 1 | state |
 | `lem-sc-integral-dim-one-ample` | 1 | state |
 | `lem-sc-meromorphic-sheaf-generic-product` | 1 | state |
-| `lem-sc-noetherian-closed-points-finite` | 1 | state |
 | `lem-sc-p1-regular-dimension-one` | 1 | state |
 | `lem-sc-reduced-dim-le-one-ample` | 1 | state |
 | `lem-sc-regular-meromorphic-section-exists` | 1 | state |
@@ -73,7 +71,6 @@
 | `lem-weil-pbc-lqf-locally-finite-type` | 1 | state |
 | `lem-weil-pbc-lqf-qc-source-bounded-fibres` | 1 | state |
 | `lem-weil-pbc-lqf-restriction-to-opens` | 1 | state |
-| `lem-weil-pbc-make-separable` | 1 | state |
 | `lem-weil-pbc-mittag-leffler-limit-exact` | 1 | state |
 | `lem-weil-pbc-ml-sets-tower-limit-nonempty` | 1 | state |
 | `lem-weil-pbc-module-base-change-map-open-restriction` | 1 | state |
