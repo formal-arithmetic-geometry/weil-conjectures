@@ -131,5 +131,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shr2034 (reviewer sub-agent of L); spot-checked: Item = Stacks 06LN (R vs R^sh); proof follows the 06LN minimal-generator route, not 07NG ascent, so no flat-regular-fibre citation needed. Steps 1-3 cite statements whose hypotheses hold (noetherian/dimension nodes are unconditional iff/equality; Mathlib cotangent criterion applied to both Noetherian local rings). New node cotangent-dimension checked true: m^sh=mR^sh, flatness gives (m/m^2)⊗_R R^sh = m^sh/(m^sh)^2 and R^sh/mR^sh=kappa^sep (07QM). Not class b: no existing node states it (lem-sc-strict-henselization-dvr is the scheme-stalk DVR statement and is downstream; lem-weil-pbc-ideal-cotangent-flat-base-change-ring is the generic flat input only); not d: needs flatness, mR^sh=m^sh and residue field, none stated by a node for local R^sh; not c: grep of Mathlib for StrictHenselization: 0 files. No cycle. FIX more, RETURN less: no repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationRegular",
+  "declaration": "Algebra.isRegularLocalRing_iff_strictHenselization",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationRegular.lean",
+  "statement": "theorem isRegularLocalRing_iff_strictHenselization (R K C : Type v) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [Field K] [Algebra (IsLocalRing.ResidueField R) K] [IsSepClosure (IsLocalRing.ResidueField R) K] [Algebra R K] [IsScalarTower R (IsLocalRing.ResidueField R) K] [CommRing C] [Algebra R C] (hC : IsStrictHenselization R K C) : IsRegularLocalRing R ↔ IsRegularLocalRing C",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-shr1307"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shr1307",
+  "group": "C1",
+  "result": "fix",
+  "note": "R: CommRing+IsLocalRing+IsNoetherianRing; K: IsSepClosure of ResidueField R with R acting through it (IsScalarTower); R^sh: landed Algebra.IsStrictHenselization R K C (04GW, F1 4f26cb852), C1's duplicate def dropped; conclusion IsRegularLocalRing R <-> IsRegularLocalRing C (Mathlib, includes local+Noetherian of C); fixed file compiled clean; dropped duplicate new node(s) def-sc-ring-strict-henselization (--drop-nodes; not merged, the item points at the landed declaration); left out new module(s) lean/Sheaf/RingTheory/StrictHenselization.lean (--drop-files)"
  }
 }
