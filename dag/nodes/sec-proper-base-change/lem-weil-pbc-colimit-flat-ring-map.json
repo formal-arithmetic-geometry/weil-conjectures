@@ -274,5 +274,23 @@
   "worker": "stage1",
   "summary": "Not a Mathlib leaf (searches recorded by the creator; repeated for the new nodes: Mathlib has no flat locus, no descent of flatness to a stage). Statement checked against 02JO (3) for the system (B_i -> C_i, C_i): hypotheses (a)-(c) hold (step 1); unchanged. The node lem-weil-pbc-colimit-eventually-flat (00R6) needs Noetherian local stages, so it cannot be applied to the localized system of the B_i, C_i themselves; the proof therefore follows Stacks exactly: (1) for a Noetherian approximation (P_l -> Q_l) of B -> C (new node 00R0), flatness at each prime at some stage (00R6 node via 00QX-type localized systems, conditions checked), openness of the flat locus (new node 00RC), the persistence of flatness at a prime along the system (an argument Stacks asserts without proof, written in step 3), quasi-compactness of Spec C and the unit-ideal argument giving a stage P' -> Q' flat; then (3): P' -> B and Q' -> C factor through stages by 00QO, and the comparison B_i (x)_{P'} Q' -> C_i becomes an isomorphism at a stage by 05N9 (2),(3) (new node). Three new unsplit nodes: lem-weil-pbc-limit-finite-presentation (00R0), lem-weil-pbc-openness-of-flatness (00RC), lem-weil-pbc-colimit-category-fp-algebras (05N9 (2),(3))."
  },
- "reviewed": "pass (L, 2026-10-10): 9 steps follow 02JO: Noetherian approximation of the finitely presented map B -> C (new unsplit node 00R0), openness of the flat locus (new unsplit node 00RC) with persistence written out, each prime of C lies in a stage's flat locus via 00R6 (hypotheses checked), quasi-compactness and the unit-ideal argument give a stage with everything flat, and the flat Noetherian model reaches the system (B_i -> C_i) (00QO and the new unsplit 05N9 node), so flatness follows by base change for all i >= i_0. Worker correctly notes 00R6 cannot be applied directly to the non-Noetherian B_i."
+ "reviewed": "pass (L, 2026-10-10): 9 steps follow 02JO: Noetherian approximation of the finitely presented map B -> C (new unsplit node 00R0), openness of the flat locus (new unsplit node 00RC) with persistence written out, each prime of C lies in a stage's flat locus via 00R6 (hypotheses checked), quasi-compactness and the unit-ideal argument give a stage with everything flat, and the flat Noetherian model reaches the system (B_i -> C_i) (00QO and the new unsplit 05N9 node), so flatness follows by base change for all i >= i_0. Worker correctly notes 00R6 cannot be applied directly to the non-Noetherian B_i.",
+ "lean": {
+  "module": "Sheaf.RingTheory.ColimitFlatRingMap",
+  "declaration": "RingHom.exists_eventually_flat_of_colimit_flat",
+  "file": "lean/Sheaf/RingTheory/ColimitFlatRingMap.lean",
+  "statement": "theorem exists_eventually_flat_of_colimit_flat {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{v}) [HasColimit F] (i₀ : I) (B₀ : Type w) (C₀ : Type x) [CommRing B₀] [CommRing C₀] [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀] (φ₀ : B₀ →ₐ[F.obj i₀] C₀) (hfp : φ₀.toRingHom.FinitePresentation) (hflat : letI := (colimit.ι F i₀).hom.toAlgebra (Algebra.TensorProduct.map (R := ((F.obj i₀ : CommRingCat) : Type v)) (S := ((colimit F : CommRingCat) : Type v)) (A := ((colimit F : CommRingCat) : Type v)) (B := B₀) (C := ((colimit F : CommRingCat) : Type v)) (D := C₀) (Algebra.ofId ((colimit F : CommRingCat) : Type v) ((colimit F : CommRingCat) : Type v)) φ₀).toRingHom.Flat) : ∃ i₁ : I, ∃ h₀ : i₀ ≤ i₁, ∀ i : I, ∀ hi : i₁ ≤ i, letI := (F.map (homOfLE (h₀.trans hi))).hom.toAlgebra (Algebra.TensorProduct.map (R := ((F.obj i₀ : CommRingCat) : Type v)) (S := ((F.obj i : CommRingCat) : Type v)) (A := ((F.obj i : CommRingCat) : Type v)) (B := B₀) (C := ((F.obj i : CommRingCat) : Type v)) (D := C₀) (Algebra.ofId (F.obj i) (F.obj i)) φ₀).toRingHom.Flat",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfm1540",
+  "group": "K1",
+  "result": "pass",
+  "note": "directed I as [Preorder I][IsDirected]; F : I ⥤ CommRingCat, colimit F, A0-action on A via colimit.ι and on A_i (i>=i1>=i0) via F.map homOfLE; B0,C0 comm A0-algebras, phi0 A0-alg hom, RingHom.FinitePresentation via phi0; B=A⊗B0, C=A⊗C0, phi=map ofId(=id) phi0 RingHom.Flat; conclusion ∃ i1 ≥ i0 ∀ i ≥ i1 flat; #check clean; not dup of FlatColimitRings / ColimitEventuallyFlat / AffineFlatModuleDescent"
+ }
 }
