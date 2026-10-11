@@ -150,5 +150,23 @@
   "worker": "stage1",
   "summary": "Checked the statement against More on Algebra 05EB(1) and expanded its finite-generator proof: the torsion submodule and quotient criterion, individual annihilating powers for each generator, a common exponent proved by monomials, and the conclusion. Included the empty generating set I=0. No new node is needed: the argument uses only the statement's inline definitions and elementary ideal arithmetic. Whole-blueprint searches found only a principal-ideal specialization in the Nagata chapter, not the finitely generated ideal statement.",
   "blueprint": "This lemma supplies the torsion control used by lem-weil-pbc-torsion-submodule-flat-base-change-iso, on the chain descending from step 7 of thm-weil-pbc-finite-etale-lifting (Stacks 0GS2 essential-surjectivity route). The blueprint contains no matching general finite-ideal assertion; the Nagata power-torsion quotient lemma is only the principal-ideal case."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Module.QuotientPrimaryComponentNoTorsion",
+  "declaration": "Ideal.eq_zero_of_annihilated_quotient_primaryComponent",
+  "file": "lean/Sheaf/Algebra/Module/QuotientPrimaryComponentNoTorsion.lean",
+  "statement": "theorem eq_zero_of_annihilated_quotient_primaryComponent {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M] (I : Ideal R) (hI : I.FG) (x : M ⧸ primaryComponent M I) (hx : ∀ a : R, a ∈ I → a • x = 0) : x = 0",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qpt1350",
+  "group": "G1",
+  "result": "pass",
+  "note": "CommRing R; module M with no finiteness, independent universes; I.FG; M[I^inf] = Ideal.primaryComponent M I (verified membership iff exists n>=1, I^n kills m, compiled); quotient M ⧸ primaryComponent; hx forall a in I, a•x=0; conclusion x=0; compiled under default limit"
  }
 }

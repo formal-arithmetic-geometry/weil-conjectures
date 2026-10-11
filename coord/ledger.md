@@ -4810,3 +4810,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:49 L: merged deliver/H1/lem-weil-pbc-reduced-induced-closed-subscheme (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme AlgebraicGeometry.Scheme.IdealSheafData.reduced_induced_closed_subscheme)
 - 13:50 L: merged deliver/H1/lem-weil-pbc-reduced-curve-normalization (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ReducedCurveNormalization AlgebraicGeometry.exists_finite_smooth_modification_of_reduced_curve)
 - 13:50 L: merged deliver/J1/lem-pc-perfect-descend-morphisms (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectDescendMorphisms AlgebraicGeometry.perfect_descend_morphisms)
+- 13:51 L: merged deliver/G1/lem-weil-pbc-quotient-by-power-torsion-no-torsion (stage 2; reviewer PASS; first push; Sheaf.Algebra.Module.QuotientPrimaryComponentNoTorsion Ideal.eq_zero_of_annihilated_quotient_primaryComponent)
