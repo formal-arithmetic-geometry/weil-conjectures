@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.ContinuousMap
 
 /-!
 
@@ -53,22 +54,6 @@ open CategoryTheory MonoidalCategory MonObj Limits
 
 /-! ### Abelian pro-étale sheaves -/
 
-namespace AddCommGrpCat
-
-/-- Abelian groups admit functorial flat resolutions: the unit `ULift ℤ` is a flat
-separator. -/
-instance hasFunctorialFlatResolution : Abelian.HasFunctorialFlatResolution AddCommGrpCat.{u} :=
-  (Abelian.hasFunctorialFlatResolution_iff_exists_flat_separator _).mpr
-    ⟨𝟙_ AddCommGrpCat.{u}, fun A B f g h ↦ by
-      ext x
-      simpa [AddEquiv.ulift, Equiv.ulift] using
-        congr($(h _ ((ObjectProperty.singleton_iff _ _).2 rfl)
-          (ofHom ((zmultiplesHom A x).comp (AddEquiv.ulift (α := ℤ)).toAddMonoidHom)))
-          (ULift.up 1)),
-      ObjectProperty.prop_unit _⟩
-
-end AddCommGrpCat
-
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
@@ -76,7 +61,7 @@ open Scheme
 variable (X : Scheme.{u})
 
 /-- The monoidal structure on abelian pro-étale sheaves is symmetric. -/
-noncomputable instance sheafSymmetricCategory :
+noncomputable instance sheafAbSymmetricCategory :
     SymmetricCategory (Sheaf (ProEt.topology X) Ab.{u + 1}) :=
   Sheaf.symmetricCategory _ _
 
