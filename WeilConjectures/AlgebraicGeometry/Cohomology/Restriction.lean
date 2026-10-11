@@ -216,4 +216,25 @@ lemma mem_range_app_toCycles_of_isCompatible (K : CochainComplex Y.Modules ℕ)
   rw [HomologicalComplex.toCycles_i]
   exact hu
 
+/-- **Cocycles lift over affine opens.** For a quasi-coherent `ℱ` with injective resolution `I`
+and an affine open `U`, every section over `U` of the cycles `Z¹` of `I` comes from `I⁰`. -/
+lemma exists_app_toCycles_eq_of_isAffineOpen [ℱ.IsQuasicoherent] (I : InjectiveResolution ℱ)
+    {U : Y.Opens} (hU : IsAffineOpen U) (z : Γ(I.cocomplex.cycles 1, U)) :
+    ∃ t : Γ(I.cocomplex.X 0, U), (I.cocomplex.toCycles 0 1).app U t = z := by
+  let K := I.cocomplex
+  have e : U.ι ''ᵁ ⊤ = U := U.ι_image_top
+  let z' : Γ((K.cycles 1).restrict U.ι, ⊤) := (K.cycles 1).presheaf.map (eqToHom e).op z
+  obtain ⟨t', ht'⟩ := surjective_app_toCycles_restrict_of_isAffineOpen I hU
+    ((restrictCyclesIso U.ι K 1).inv.app ⊤ z')
+  have h1 : (K.toCycles 0 1).app (U.ι ''ᵁ ⊤) t' = z' := by
+    apply injective_app_of_mono (restrictCyclesIso U.ι K 1).inv
+    rw [← ht', ← map_toCycles_restrictCyclesIso_inv]
+    rfl
+  refine ⟨(K.X 0).presheaf.map (eqToHom e.symm).op t', ?_⟩
+  rw [Hom.app_presheaf_map, h1]
+  change (K.cycles 1).presheaf.map _ ((K.cycles 1).presheaf.map _ z) = z
+  rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, eqToHom_trans, eqToHom_refl,
+    op_id, CategoryTheory.Functor.map_id]
+  rfl
+
 end AlgebraicGeometry.Scheme.Modules
