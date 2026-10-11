@@ -1,0 +1,94 @@
+{
+ "id": "def-sbc-abelian-higher-direct-image-map",
+ "kind": "definition",
+ "title": "Canonical transition map of higher direct images of abelian etale sheaves",
+ "status": "split",
+ "statement": "Let $a:Y'\\to Y$, $h:Y\\to S$, and $h':Y'\\to S$ be morphisms of schemes [def-weil-pbc-scheme-conventions] with $h\\circ a=h'$. Let $F$ and $F'$ be abelian etale sheaves on $Y$ and $Y'$ [def-weil-pbc-etale-sheaves], and let $\\varphi:a^{-1}F\\to F'$ use inverse image [def-weil-pbc-inverse-image]. For $p\\geq0$, the canonical transition morphism $R^p h_* F\\to R^p h'_*F'$ of the derived direct images [def-weil-pbc-direct-image] is degree-$p$ cohomology of the derived adjunction unit $Rh_*F\\to Rh'_*Lh'^*Rh_*F$, followed by the pullback composition identification $Lh'^*=La^*Lh^*$, $Rh'_*La^*$ applied to the counit $Lh^*Rh_*F\\to F$, the identification $La^*(F[0])=(a^{-1}F)[0]$, and $Rh'_*(\\varphi[0])$.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09Z1, canonical transition and comparison morphisms"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical transition map higher direct images abelian etale sheaves varying scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical morphism between higher direct images of abelian sheaves induced by a commutative triangle of schemes and a map from inverse image",
+   "results": "CategoryTheory.Functor.sheafPushforwardContinuousNatTrans_app_val; CategoryTheory.Functor.sheafPushforwardContinuous_map_val_app; SheafOfModules.pushforwardNatTrans_app_val_app_apply; SheafOfModules.pushforwardNatTrans_app_val_app; AlgebraicGeometry.Scheme.Modules.pushforward_map_app; CategoryTheory.Functor.sheafPushforwardContinuousNatTrans; CategoryTheory.Functor.sheafPushforwardContinuous_obj_val_map; SheafOfModules.pushforwardNatTrans. No matching abelian higher-direct-image transition definition.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImageTransition|higherDirectImageMap",
+   "results": "0 hits. No matching abelian higher-direct-image transition definition.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "sbc-lem-higher-direct-image-limit",
+  "date": "2026-10-11",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "the canonical arrow in the statement and the restriction-compatible comparisons of proof step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap",
+  "declaration": "AlgebraicGeometry.Etale.abelianHigherDirectImageMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianHigherDirectImageMap.lean",
+  "statement": "def abelianHigherDirectImageMap {S Y Y' : Scheme.{u}} (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (F' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : ((a)^*[AddCommGrpCat.{u + 1}]).obj F ⟶ F') : (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj (R+((h)_*[AddCommGrpCat.{u + 1}]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ⟶ (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj (R+((h')_*[AddCommGrpCat.{u + 1}]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F'))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hdl",
+  "group": "C1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hdl",
+  "group": "C1",
+  "result": "pass"
+ }
+}

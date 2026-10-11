@@ -22,7 +22,8 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-sbc-abelian-higher-direct-image-map"
  ],
  "proof": [
   {
@@ -172,5 +173,22 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hdl2904 (reviewer sub-agent of L); spot-checked: Statement vs Tag 09Z1 (transition maps restored, citers bc-failure-field step (2) and constructible-finite-pushforward p=0 use exactly this form); step 1 vs presheaf node 03Q8 (any morphism, abelian sheaf); step 2 vs continuity node (V affine and g_i qcqs give qcqs V x_S X_i, affine transitions, degree-0 complexes a=0; node created from lem-weil-pbc-derived-etale-cohomology-limit in sk-prop-h2, no cycle, generic tool accepted); step 3 sheafification commutes with colimits and agreement on affine basis, elementary (Tag 00WI area). No repairs. Bookkeeping note: second reading says uses_not_cited empty but file lists def-weil-pbc-direct-image and def-weil-pbc-scheme-conventions; harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageLimitSystem",
+  "declaration": "AlgebraicGeometry.Etale.isIso_higherDirectImage_limit_system",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageLimitSystem.lean",
+  "statement": "theorem isIso_higherDirectImage_limit_system {S : Scheme.{v}} {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left] [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom] [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom] (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom] (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j) (hφid : ∀ i : I, HEq (φ (𝟙 i)) ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i))) (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g)) ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left (D.map f.op).left).hom.app (F i) ≫ (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g)) (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1}) (eH : ∀ i : I, H.obj i ≅ (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i)) (hH : ∀ {i j : I} (f : i ⟶ j), H.map f = (eH i).hom ≫ (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left (c.π.app (op i)).left (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫ (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv) [HasColimit H] (p : ℕ) (K : I ⥤ Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) (eK : ∀ i : I, K.obj i ≅ (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj (R+(((D.obj (op i)).hom)_*[AddCommGrpCat.{v + 1}]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj (F i)))) (hK : ∀ {i j : I} (f : i ⟶ j), K.map f = (eK i).hom ≫ abelianHigherDirectImageMap (D.map f.op).left (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p (F i) (F j) (φ f) ≫ (eK j).inv) [HasColimit K] (η : K ⟶ (Functor.const I).obj ((DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H))))) (hη : ∀ i : I, η.app i = (eK i).hom ≫ abelianHigherDirectImageMap (c.π.app (op i)).left (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p (F i) (colimit H) ((eH i).inv ≫ colimit.ι H i)) : IsIso (colimit.desc K (Cocone.mk _ η))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hdl",
+  "group": "C1",
+  "result": "pass"
  }
 }
