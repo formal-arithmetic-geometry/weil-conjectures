@@ -211,5 +211,24 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps (agent proof of Stacks 00CR, proof omitted there, ring case): directedness; transition maps by the universal property of P -> P_f (existing leaf) and independence of h; functoriality; the cocone kappa and the 'moreover' clause; common later stage; existence and uniqueness of the induced map. Statement now cites the two localization definitions. The worker's write script had not been applied (run without its path argument); L ran it and reviewed the result."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations",
+  "declaration": "CommRingCat.localization_colimit_principalLocalizations",
+  "file": "lean/Sheaf/RingTheory/LocalizationColimitPrincipalLocalizations.lean",
+  "statement": "theorem localization_colimit_principalLocalizations (P : Type u) [CommRing P] (S : Submonoid P) : ∃ p : Preorder S, letI : Preorder S := p (∀ f g : S, f ≤ g ↔ ∃ h : P, (g : P) = (f : P) * h) ∧ (∀ f g : S, f ≤ f * g ∧ g ≤ f * g) ∧ IsDirected S (· ≤ ·) ∧ IsFiltered S ∧ ∃ (rho : ∀ f g : S, f ≤ g → Localization.Away (f : P) →+* Localization.Away (g : P)) (kappa : ∀ f : S, Localization.Away (f : P) →+* LocalizedModule S P), (∀ (f g : S) (l : f ≤ g) (h a : P) (n : ℕ), (g : P) = (f : P) * h → rho f g l (IsLocalization.mk' (M := Submonoid.powers (f : P)) (Localization.Away (f : P)) a ⟨(f : P) ^ n, ⟨n, rfl⟩⟩) = IsLocalization.mk' (M := Submonoid.powers (g : P)) (Localization.Away (g : P)) (a * h ^ n) ⟨(g : P) ^ n, ⟨n, rfl⟩⟩) ∧ (∀ (f : S) (l : f ≤ f), rho f f l = RingHom.id _) ∧ (∀ (f g k : S) (l : f ≤ g) (m : g ≤ k), (rho g k m).comp (rho f g l) = rho f k (le_trans l m)) ∧ (∀ (f : S) (a : P) (n : ℕ), kappa f (IsLocalization.mk' (M := Submonoid.powers (f : P)) (Localization.Away (f : P)) a ⟨(f : P) ^ n, ⟨n, rfl⟩⟩) = LocalizedModule.mk a (f ^ n)) ∧ (∀ (f g : S) (l : f ≤ g), (kappa g).comp (rho f g l) = kappa f) ∧ (∀ f : S, (kappa f).comp (algebraMap P (Localization.Away (f : P))) = algebraMap P (LocalizedModule S P)) ∧ ∃ (F : S ⥤ CommRingCat.{u}) (e : ∀ f : S, F.obj f ≅ CommRingCat.of (Localization.Away (f : P))) (eL : colimit F ≅ CommRingCat.of (LocalizedModule S P)), (∀ (f g : S) (l : f ≤ g), (e f).inv ≫ F.map (homOfLE l) ≫ (e g).hom = ofHom (rho f g l)) ∧ (∀ f : S, (e f).inv ≫ colimit.ι F f ≫ eL.hom = ofHom (kappa f))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-lcp1116"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lcp1116",
+  "group": "G1",
+  "result": "fix",
+  "note": "P CommRing/S Submonoid arbitrary (0∈S, zero ring ok); divisibility preorder with factor in P via ∃ Preorder + iff; (1) f,g≤fg, IsDirected, IsFiltered; (2) rho ring homs with a/f^n↦ah^n/g^n for every h, id, comp; functor via e; (3) kappa formula mk a (f^n), compat, colimit F≅LocalizedModule S P with legs kappa (fixed from Cocone/IsColimit); moreover algebraMap = mk a 1 (rfl)"
  }
 }
