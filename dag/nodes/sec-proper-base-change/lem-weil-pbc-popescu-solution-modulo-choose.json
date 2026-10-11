@@ -28,7 +28,8 @@
   "def-weil-pbc-g-ring",
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-kahler-differentials"
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-popescu-admissible-subalgebra"
  ],
  "proof": [
   {
@@ -327,5 +328,24 @@
   "by": "L",
   "result": "accepted",
   "note": "15 steps (agent proof; the node was created today to close the gap in Stacks 07FH): setup and the parenthetical claims; a basis dc_j of Omega_{F_0/k} (finite by 07E1) with lifts a_j in A_0; generators of m_{A_0} (n >= 2) or of q (n = 1); a common denominator s with residue alpha; the claim that an element with nonzero residue in the residue field of a local subring has its q-th power in it for q = p^e >= n (L checked: (1+eps)^q = 1 + eps^q = 1); case T (alpha transcendental): A = the image of A_0[t]_n, flat by the local criterion, faithfully flat hence injective, essentially of finite type via 07DT (3), residue field F_0(alpha) with basis dc_j, d alpha (polynomial extension and localization of differentials); case S (alpha algebraic): beta = alpha^Q separable, F_1 = F_0(beta) lifted to a finite etale A_0-algebra by the henselian equivalence (04GK node), embedded into Lambda-bar by the henselian retraction (04GG (8) node) since Lambda-bar is Artinian hence henselian, flat as before, s-bar^N in A by the claim, basis dc_j of Omega_{F/k} by Jacobi-Zariski with F/F_0 etale; lambda_j = mu_j s^{N-1} (and s in case T), residues c_j alpha^N with d(alpha^N) = 0 as p | N, giving (a), (b); lambda'_i = mu'_i s^{N-1} generating q Lambda_q by Nakayama (n >= 2), giving (c). L checked every hypothesis of the flatness criterion, of the henselian nodes and of the p-th power claim."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuSolutionModuloChoose",
+  "declaration": "Algebra.exists_popescu_admissible_differential_basis",
+  "file": "lean/Sheaf/RingTheory/PopescuSolutionModuloChoose.lean",
+  "statement": "theorem exists_popescu_admissible_differential_basis (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ] [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p) (hreg : IsGeometricallyRegular k Λ) (q : Ideal Λ) [q.IsPrime] (n : ℕ) (hn : 1 ≤ n) (A₀ : Subalgebra k (Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)) (hA₀ : A₀.IsPopescuAdmissible ((q.map (algebraMap Λ (Localization.AtPrime q))).map (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)))) : ∃ (A : Subalgebra k (Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n)) (_ : IsLocalRing A), A₀ ≤ A ∧ A.IsPopescuAdmissible ((q.map (algebraMap Λ (Localization.AtPrime q))).map (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n))) ∧ IsLocalRing.maximalIdeal A = Ideal.comap A.val.toRingHom ((q.map (algebraMap Λ (Localization.AtPrime q))).map (Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n))) ∧ ∃ (ι : IsLocalRing.ResidueField A →ₐ[k] q.ResidueField), Function.Injective ι ∧ (∀ (a : A) (x : Localization.AtPrime q), (a : Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) = Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) x → ι (IsLocalRing.residue A a) = IsLocalRing.residue (Localization.AtPrime q) x) ∧ ∃ (t r : ℕ) (xs : Fin t → Λ) (ys : Fin r → Λ) (a : Fin t → A) (a' : Fin r → A), (∀ j, (a j : Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) = Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) (algebraMap Λ (Localization.AtPrime q) (xs j))) ∧ (∀ i, ys i ∈ q ∧ (a' i : Localization.AtPrime q ⧸ (q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) = Ideal.Quotient.mk ((q.map (algebraMap Λ (Localization.AtPrime q))) ^ n) (algebraMap Λ (Localization.AtPrime q) (ys i))) ∧ (∃ b : Module.Basis (Fin t) (IsLocalRing.ResidueField A) (KaehlerDifferential k (IsLocalRing.ResidueField A)), ∀ j, b j = KaehlerDifferential.D k (IsLocalRing.ResidueField A) (IsLocalRing.residue A (a j))) ∧ Ideal.span (Set.range (fun i => algebraMap Λ (Localization.AtPrime q) (ys i))) = q.map (algebraMap Λ (Localization.AtPrime q))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-smc1440"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-smc1440",
+  "group": "J1",
+  "result": "fix",
+  "note": "k field char p>0 (CharP k p, 0<p), Λ Noetherian geometrically regular k-algebra, q prime, n>=1, Λ̄ = Λ_q/(qΛ_q)^n, admissible A₀ via new def IsPopescuAdmissible (Artinian, EssFiniteType, local, flat inclusion, m_A Λ̄ = m̄); conclusion A₀<=A admissible, m_A = A∩m̄, injective k-embedding F->κ(q) compatible with residues, (a) xs/ys images in A, ys in q, (b) residue differentials form a basis of Ω_{F/k}, (c) ys generate qΛ_q; fix: local notation expanded to the landed sibling spelling (PopescuSolutionModulo / EnlargeSolutionModulo), binder order, autoImplicit false"
  }
 }

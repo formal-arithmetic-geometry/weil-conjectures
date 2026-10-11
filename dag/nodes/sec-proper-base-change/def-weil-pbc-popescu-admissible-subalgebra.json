@@ -1,0 +1,108 @@
+{
+ "id": "def-weil-pbc-popescu-admissible-subalgebra",
+ "kind": "definition",
+ "title": "Admissible subalgebra for the Popescu construction",
+ "status": "split",
+ "statement": "Let $k$ be a field, $B$ a commutative $k$-algebra, and $\\mathfrak m\\subset B$ an ideal. A $k$-subalgebra $A\\subset B$ is admissible relative to $\\mathfrak m$ if it is an Artinian local ring, essentially of finite type over $k$ [def-weil-pbc-essentially-finite-type-algebra], its inclusion $A\\to B$ is flat [def-weil-pbc-flat-ring-map], and $\\mathfrak m_A B=\\mathfrak m$. In the Popescu construction $B=\\bar\\Lambda$ and $\\mathfrak m$ is its maximal ideal.",
+ "stmt_deps": [
+  "def-weil-pbc-essentially-finite-type-algebra",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Tag 07FH (lemma-solution-modulo), choice of A immediately after defining Lambda-bar; admissibility terminology of lem-weil-pbc-popescu-solution-modulo-choose"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "admissible Artinian local subalgebra flat essentially finite type maximal ideal generates ambient maximal ideal",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artinian local subalgebra essentially of finite type with flat inclusion whose maximal ideal generates the ambient maximal ideal",
+   "results": "[leanfinder] OK 8 hit(s): Algebra.QuasiFinite.instIsArtinianRingFiber; Module.finite_of_isArtinianRing; IsLocalRing.quotient_artinian_of_mem_minimalPrimes_of_isLocalRing; Algebra.QuasiFinite.iff_of_isArtinianRing; Module.Finite.of_quasiFinite; IsArtinianRing.localization_artinian; IsLocalRing.exists_maximalIdeal_pow_le_of_finite_quotient; Module.finite_iff_isArtinianRing",
+   "date": "2026-10-11",
+   "verdict": "no match: Artinian and quasi-finite facts, no admissibility predicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subalgebra, IsArtinianRing",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep Admissible|admissible RingTheory; rg -n IsPopescuAdmissible|admissible.*(Artinian|subalgebra)|Artinian.*admissible on Mathlib, WeilConjectures, lean/Sheaf; rg -l admissible.*subalgebra|subalgebra.*admissible dag/nodes; blueprint_refs.py search admissible",
+   "results": "Mathlib grep: Mathlib/RingTheory/ClassGroup/Basic.lean:429, unrelated class-group admissibility. rg on Mathlib, WeilConjectures and lean/Sheaf: no hits. DAG grep: only lem-weil-pbc-popescu-solution-modulo and lem-weil-pbc-popescu-solution-modulo-choose. Blueprint search: 92 hits, no definition of this subalgebra predicate.",
+   "date": "2026-10-11",
+   "verdict": "no existing definition node or declaration"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-popescu-solution-modulo-choose",
+  "date": "2026-10-11",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Choice of the Artinian flat subalgebra in the proof of Tag 07FH, captured by the admissibility condition in the choose node.",
+   "via": [
+    "lem-weil-pbc-popescu-solution-modulo-choose",
+    "lem-weil-pbc-popescu-solution-modulo",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuAdmissibleSubalgebra",
+  "declaration": "Subalgebra.IsPopescuAdmissible",
+  "file": "lean/Sheaf/RingTheory/PopescuAdmissibleSubalgebra.lean",
+  "statement": "def IsPopescuAdmissible {k : Type uA} {B : Type vA} [Field k] [CommRing B] [Algebra k B] (A : Subalgebra k B) (m : Ideal B) : Prop",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-smc1440",
+  "group": "J1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-smc1440",
+  "group": "J1",
+  "result": "fix",
+  "note": "k field char p>0 (CharP k p, 0<p), Λ Noetherian geometrically regular k-algebra, q prime, n>=1, Λ̄ = Λ_q/(qΛ_q)^n, admissible A₀ via new def IsPopescuAdmissible (Artinian, EssFiniteType, local, flat inclusion, m_A Λ̄ = m̄); conclusion A₀<=A admissible, m_A = A∩m̄, injective k-embedding F->κ(q) compatible with residues, (a) xs/ys images in A, ys in q, (b) residue differentials form a basis of Ω_{F/k}, (c) ys generate qΛ_q; fix: local notation expanded to the landed sibling spelling (PopescuSolutionModulo / EnlargeSolutionModulo), binder order, autoImplicit false"
+ }
+}
