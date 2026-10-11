@@ -258,5 +258,23 @@
   "item": "lem-weil-pbc-lci-conormal-generators-global-complete-intersection",
   "worker": "stage1",
   "summary": "Split following Algebra 00SC (lemma-lci) (3)=>(1), proof lines 35937-35985, with c := n - d. Step 1 gets 0 <= d <= n from the 00P2 node; steps 2-4 write out what the source compresses: generators of (I/I^2)_q are taken directly in I (the source's lift to I_{q'} plus clearing of denominators), Nakayama (00DV, maximal-ideal node, submodule form) applied to M = IR with M = N + mM because I^2R is in q'R*M, and g' with g'I in J from a finite generating set of I (P Noetherian). Step 5-6 choose g'' through the definition of dim at a point, the basis of principal opens and the homeomorphism Spec S_g = D(g); the source's 'dim S_g = n - c by the choice of g''' is written as d <= dim D(g) <= dim D(h) <= d. Step 7 identifies S_g with k[x_1..x_{n+1}]/(f', x_{n+1}g'g''-1) through (P/J)_r = S_g (kernel argument with g'I in J) and the Mathlib leaf for B[x]/(rx-1) = B_r. The regular-sequence / Cohen-Macaulay part of the source's first paragraph is not needed for this implication and is not used. No new nodes; not a Mathlib leaf (searches added). Statement unchanged; citer lem-weil-pbc-lci-field-change uses it as stated."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ConormalGeneratorsGlobalCompleteIntersection",
+  "declaration": "Algebra.conormal_generators_global_complete_intersection",
+  "file": "lean/Sheaf/RingTheory/ConormalGeneratorsGlobalCompleteIntersection.lean",
+  "statement": "theorem conormal_generators_global_complete_intersection (k : Type u) [Field k] (n : ℕ) (I : Ideal (MvPolynomial (Fin n) k)) (q : Ideal (MvPolynomial (Fin n) k ⧸ I)) [q.IsPrime] : ∃ d : ℕ, topologicalKrullDimAt (⟨q, inferInstance⟩ : PrimeSpectrum (MvPolynomial (Fin n) k ⧸ I)) = (d : WithBot ℕ∞) ∧ d ≤ n ∧ ((∃ gens : Fin (n - d) → LocalizedModule q.primeCompl (Ideal.Cotangent I), Submodule.span (R := Localization.AtPrime q) (Set.range gens) = ⊤) → ∃ g : (MvPolynomial (Fin n) k ⧸ I), g ∉ q ∧ IsGlobalCompleteIntersection k (Localization.Away g))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lcg1110",
+  "group": "F1",
+  "result": "pass",
+  "note": "k field any universe; n, P=MvPolynomial (Fin n) k, arbitrary I, S=P/I; q prime of S as point of PrimeSpectrum S; d:ℕ with topologicalKrullDimAt=d (inf over open nbhds) and d≤n unconditional; hyp: Fin (n-d) family spanning LocalizedModule q.primeCompl I.Cotangent over Localization.AtPrime q (#synth: instModuleQuotientCotangent, OreLocalization.instModule, as E1 fa71cc3b4); concl ∃ g∉q, Algebra.IsGlobalCompleteIntersection k (Localization.Away g) (F1 9145a6374, canonical k-algebra rfl); edge n=0, d=n empty family; no hollow binders"
  }
 }
