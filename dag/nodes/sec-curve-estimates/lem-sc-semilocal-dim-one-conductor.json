@@ -125,5 +125,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sdc1756 (reviewer sub-agent of L); spot-checked: Both R-sdc1750 points repaired: lem-sc-finite-integral-conductor now assumes dim B = 1 (true: A/B finite, zero at the generic point, so supported on the finitely many maximal ideals, killed by m_B^n by Noetherianity); lem-sc-integral-overring-jacobson-power now assumes B' semilocal (true: maxima of A are contractions of maxima of B', primes over m_B A contract to maxima of B). Steps 1-3 chain checked, x^{nm}y in m_B^n A in B. FIX more, RETURN less: (1) Jacobson node's final clause said every x in Jac(B') lies in the radical of m_B A, an ideal of A, false for x outside A (e.g. A=B, x=t, B the localized cusp); restricted to x in A, which Step 3 supplies (x generates A); Step 3 text states this. (2) Step 3 plain arrows A -> B', Spec(B') -> Spec(A) rewritten as TeX \\to (preflight B4).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemilocalDimOneConductor",
+  "declaration": "semilocal_dim_one_conductor",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilocalDimOneConductor.lean",
+  "statement": "theorem semilocal_dim_one_conductor (B : Type u) [CommRing B] [IsDomain B] [IsNoetherianRing B] [Finite (MaximalSpectrum B)] (hdim : ringKrullDim B = 1) (K : Type v) [Field K] [Algebra B K] [IsFractionRing B K] : Finite (MaximalSpectrum (integralClosure B K)) ∧ IsDedekindDomain (integralClosure B K) ∧ ringKrullDim (integralClosure B K) = 1 ∧ IsFractionRing (integralClosure B K) K ∧ ∀ x y : integralClosure B K, x ≠ 0 → x ∈ Ideal.jacobson (⊥ : Ideal (integralClosure B K)) → ∃ n : ℕ, 0 < n ∧ ∃ b : B, algebraMap B K b = (x : K) ^ n * (y : K)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sdc1303"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sdc1303",
+  "group": "K1",
+  "result": "fix",
+  "note": "B CommRing+IsDomain+IsNoetherianRing+Finite MaximalSpectrum+ringKrullDim=1, K Field+IsFractionRing; B'=integralClosure B K: semilocal, IsDedekindDomain, dim 1 (added), fraction field K; x≠0 in Ideal.jacobson ⊥ of B', all y, n>0, b:B with b = x^n y in K. FIX: added dim-1 clause, Field K, Ideal.jacobson ⊥ as siblings"
  }
 }
