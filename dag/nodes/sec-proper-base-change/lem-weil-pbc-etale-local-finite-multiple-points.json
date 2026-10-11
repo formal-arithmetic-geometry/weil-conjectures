@@ -16,7 +16,7 @@
  },
  "kind": "statement",
  "title": "Isolated locally finite type points become finite after an etale base change",
- "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. Let $s\\in S$ and let $x_1,\\ldots,x_n\\in X$ satisfy $f(x_i)=s$. Let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the scheme-theoretic fibre [def-pc-scheme-fibre], and assume that $f$ is locally of finite type [def-weil-finite-type-morphism] and that each $x_i$ is an isolated point of $X_s$. Then there are an etale neighbourhood $(U,u)\\to(S,s)$ (so $U$ is a scheme, $U\\to S$ is etale [def-weil-etale-morphism], and $u\\in U$ maps to $s$), integers $m_i\\geq0$, and open subschemes $V_{i,j}\\subseteq X\\times_SU$ [def-pc-fibre-product] such that: each $V_{i,j}\\to U$ is finite [def-weil-finite-integral-morphism]; it has a unique point $v_{i,j}$ over $u$ with $\\kappa(u)\\subseteq\\kappa(v_{i,j})$ a finite purely inseparable extension [def-weil-residue-field] [def-weil-pbc-finite-purely-inseparable-extension]; $v_{i,j}$ maps to $x_i$; no other point of $(X\\times_SU)_u$ maps to $x_i$; and $v_{i,j}=v_{i',j'}$ implies $(i,j)=(i',j')$.",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. Let $s\\in S$ and let $x_1,\\ldots,x_n\\in X$ be pairwise distinct points satisfying $f(x_i)=s$. Let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the scheme-theoretic fibre [def-pc-scheme-fibre], and assume that $f$ is locally of finite type [def-weil-finite-type-morphism] and that each $x_i$ is an isolated point of $X_s$. Then there are an etale neighbourhood $(U,u)\\to(S,s)$ (so $U$ is a scheme, $U\\to S$ is etale [def-weil-etale-morphism], and $u\\in U$ maps to $s$), integers $m_i\\geq0$, and open subschemes $V_{i,j}\\subseteq X\\times_SU$ [def-pc-fibre-product] such that: each $V_{i,j}\\to U$ is finite [def-weil-finite-integral-morphism]; it has a unique point $v_{i,j}$ over $u$ with $\\kappa(u)\\subseteq\\kappa(v_{i,j})$ a finite purely inseparable extension [def-weil-residue-field] [def-weil-pbc-finite-purely-inseparable-extension]; $v_{i,j}$ maps to $x_i$; every point of $(X\\times_SU)_u$ mapping to $x_i$ is one of $v_{i,1},\\ldots,v_{i,m_i}$; and $v_{i,j}=v_{i',j'}$ implies $(i,j)=(i',j')$.",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
   "place": "More on Morphisms, Lemma 02LM (label lemma-etale-makes-quasi-finite-finite-multiple-points-var), statement and proof at lines 12018-12090; Stacks Project Tag [02LM]."
@@ -204,5 +204,42 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Six steps along the proof of Stacks 02LM (more-morphisms.tex 12053-12089), split by one level with six new unsplit nodes (tags verified: 01TH residue fields finite at isolated fibre points, 01TM(1) isolated points stable under base change, 02LF etale neighbourhood with prescribed separable residue field, the elementary field theory packaging the choice of L (030K/09DT/0EXM), the residue-field sentence of 01JT, 02LL the elementary-neighbourhood case): residue fields finite, choice of (U,u), the points y_{i,j} with purely inseparable residue extensions, lft and isolatedness after base change, 02LL plus pasting and composition, the verification Stacks omits (agent-written). Lean candidates reported: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq (@[stacks 00UJ], Etale/QuasiFinite.lean:379), ..._completeOrthogonalIdempotents_... (@[stacks 00UL], :613), exists_etale_isCompl_of_quasiFiniteAt (ZariskisMainTheorem.lean:49). Stage-3 notes: lem-weil-pbc-fibre-product-points (Mathlib leaf) lacks the residue-field sentence of 01JT (now a separate node); lem-weil-pbc-standard-etale-monic-derivative cites 00UH for lemma-make-etale-map-prescribed-residue-field, which is 00UD."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePoints",
+  "declaration": "AlgebraicGeometry.exists_etale_local_finite_multiple_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalFiniteMultiplePoints.lean",
+  "statement": "theorem exists_etale_local_finite_multiple_points {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (s : S) (n : ℕ) (x : Fin n → X) (hx : ∀ i, f (x i) = s) (hdistinct : Function.Injective x) (hisolated : ∀ i, IsOpen ({f.asFiber (x i)} : Set (f.fiber (f (x i))))) : ∃ (U : Scheme.{u}) (φ : U ⟶ S) (u : U), Etale φ ∧ φ u = s ∧ ∃ (m : Fin n → ℕ) (V : (i : Fin n) → Fin (m i) → (pullback f φ).Opens) (v : (i : Fin n) → (j : Fin (m i)) → (V i j).toScheme), (∀ (i : Fin n) (j : Fin (m i)), IsFinite ((V i j).ι ≫ pullback.snd f φ) ∧ ∃ (hv : ((V i j).ι ≫ pullback.snd f φ) (v i j) = u), (∀ w : (V i j).toScheme, ((V i j).ι ≫ pullback.snd f φ) w = u → w = v i j) ∧ (letI := ((U.residueFieldCongr hv.symm).hom ≫ ((V i j).ι ≫ pullback.snd f φ).residueFieldMap (v i j)).hom.toAlgebra Module.Finite (U.residueField u) ((V i j).toScheme.residueField (v i j)) ∧ IsPurelyInseparable (U.residueField u) ((V i j).toScheme.residueField (v i j))) ∧ ((V i j).ι ≫ pullback.fst f φ) (v i j) = x i) ∧ Function.Injective (fun a : (i : Fin n) × Fin (m i) ↦ (V a.1 a.2).ι (v a.1 a.2)) ∧ (∀ (i : Fin n) (w : ↥(pullback f φ)), pullback.snd f φ w = u → pullback.fst f φ w = x i → ∃ j : Fin (m i), w = (V i j).ι (v i j))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-elm0958"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-elm0958",
+  "group": "J1",
+  "result": "fix",
+  "note": "correction checked against more-morphisms.tex 02LM (repeated x_i contradict (iii)+(iv); distinctness forced; exhaustion = (iii)); lft instance; Fin n points, injective; isolated as IsOpen {f.asFiber (x i)} in f.fiber (f (x i)) (F1 4d326dc08 spelling); etale nbhd not elementary; m : Fin n -> N; V i j opens of pullback f φ; IsFinite (V.ι ≫ snd); unique point over u; κ(u)->κ(v) via residueFieldCongr + residueFieldMap, Module.Finite ∧ IsPurelyInseparable; (V.ι ≫ fst) v = x i; global injectivity on sigma; exhaustion per i; citer holds:true read",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "J1 stage 2",
+  "old_statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme]. Let $s\\in S$ and let $x_1,\\ldots,x_n\\in X$ satisfy $f(x_i)=s$. Let $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ be the scheme-theoretic fibre [def-pc-scheme-fibre], and assume that $f$ is locally of finite type [def-weil-finite-type-morphism] and that each $x_i$ is an isolated point of $X_s$. Then there are an etale neighbourhood $(U,u)\\to(S,s)$ (so $U$ is a scheme, $U\\to S$ is etale [def-weil-etale-morphism], and $u\\in U$ maps to $s$), integers $m_i\\geq0$, and open subschemes $V_{i,j}\\subseteq X\\times_SU$ [def-pc-fibre-product] such that: each $V_{i,j}\\to U$ is finite [def-weil-finite-integral-morphism]; it has a unique point $v_{i,j}$ over $u$ with $\\kappa(u)\\subseteq\\kappa(v_{i,j})$ a finite purely inseparable extension [def-weil-residue-field] [def-weil-pbc-finite-purely-inseparable-extension]; $v_{i,j}$ maps to $x_i$; no other point of $(X\\times_SU)_u$ maps to $x_i$; and $v_{i,j}=v_{i',j'}$ implies $(i,j)=(i',j')$.",
+  "what": "Repeated inputs are incompatible with simultaneous exhaustion and globally distinct output points: for f=id of Spec k, n=2 and x_1=x_2 the same sole lift must occur in both lists, contradicting (iv). Stacks 02LM implicitly treats the listed points as distinct: its global distinctness clause (iv), together with exhaustion (iii), requires this. The elementary lemma 02LL itself permits repetitions. Also the phrase no other point must mean no point outside the entire list for i, not outside an individual singleton; separable residue extensions may give m_i>1. Make both conventions explicit.",
+  "source": {
+   "document": "literature/stacks-project/more-morphisms.tex",
+   "place": "Stacks Tag 02LM, statement (iii)-(iv) and proof enumerating all y_{i,j}; Tag 02LL applied to that finite set of points."
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-unramified-etale-local-decomposition",
+    "holds": true,
+    "note": "Apply to the finite set of distinct input points (deduplicate the list); assign m_i=0 to redundant indices in the decomposition. The exclusion and disjointness uses remain valid."
+   }
+  ]
  }
 }
