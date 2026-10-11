@@ -147,3 +147,214 @@ Step 6 can be done before the stop on a tools branch if the patches are first te
 | `tools/lean_file.sh` (`SHEAF_LEAN_OPTS`) | reads only the package `[leanOptions]`; the `Sheaf` library's `autoImplicit = false` is not applied to single-file compiles, so a file can compile alone and fail in the global build | parse the `Sheaf` lib's `leanOptions` too, or drop `autoImplicit=false` (upstream uses only `relaxedAutoImplicit=false`); package level would rebuild upstream |
 | `tools/compile_remote.sh` | rejects `.` in the item, and stage-3 items are module names | allow dots, or the brief's workaround (`_` for `.`) |
 | `tools/preflight_delivery.py`, `review_packet.py`, `merge_delivery.py`, `review_class.py`, `~/cc1/autoland.py` | no stage-3 mode | drafts in `$S/s3/C/patches/` |
+
+## Addendum (03:30 +08): the five upstream sorries against their nodes; the four nodes without Lean
+
+Written 2026-10-11 by S3-D for L. Read-only: slopmaster2 `7d675a263` (`~/weil-conjectures-slopmaster2`), the sorry map `local/sorry_map_slopmaster2_7d675a26.jsonl.gz`, the node files in `dag/nodes/sec-proper-base-change/`, `coord/HUMAN.md` (entries of 2026-10-09 evening and 2026-10-10 10:14) and Stacks `etale-cohomology.tex` §59.91.
+
+### 0. Pairing confirmed
+
+Each pair below appears in the node's `lean` record (module, declaration, line). The sorry map gives each of the five declarations its own `sorry` (`s = true`).
+
+| Node | Upstream declaration | Module : lines |
+|---|---|---|
+| lemma-weil-pbc-p1-exchange-geometric-stalk | `Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine` | `…BaseChangeTheorems.ProjectiveLine.GeometricStalk` : 93–159 |
+| lemma-weil-pbc-property-iff-acyclicity (record also lists the three sorry-free `HasTorsionBaseChange.hasInjectiveAcyclicity`, `HasInjectiveAcyclicity.hasTorsionBaseChange`, `hasTorsionBaseChange_iff_hasInjectiveAcyclicity`) | `Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity` | `…BaseChangeTheorems.BaseChangeProperty` : 309–323 |
+| lem-weil-pbc-injective-acyclicity-bounded-below | same | same |
+| prop-weil-pbc-reduction-to-projective-line | `Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper` | `…BaseChangeTheorems.ProjectiveLine` : 124–149 |
+| prop-weil-pbc-algebraically-closed-extension | `IsCurve.bijective_cohomologyMap_of_isAlgClosed` | `WeilConjectures.AlgebraicGeometry.Curve.FieldExtension` : 69–95 |
+| lemma-weil-pbc-curve-separably-closed-passage | `IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed` | same : 97–134 |
+
+The Lean route of target 1 is: `isIso_baseChange_of_isProper` → `hasTorsionBaseChange_of_isProper` → `hasTorsionBaseChange_of_projectiveLine_of_isProper` (sorry), applied to `hasTorsionBaseChange_projectiveLine`. That declaration is `hasTorsionBaseChange_of_hasInjectiveAcyclicity` (sorry) applied to `hasInjectiveAcyclicity_projectiveLine`. That in turn is `isIso_baseChangeHomologyMap_projectiveLine`, which uses `exists_addEquiv_…` (sorry) and `bijective_cohomologyMap_of_isSepClosed`. The last is the two curve sorries. Target 2 (`…_of_isAddTorsion_ring`) is target 1 together with `torsionHomology_of_isTorsion`.
+
+### Encoding gaps shared by all five (referred to as G1–G6 below)
+
+| | Lean (all five) | Nodes | Bridge needed |
+|---|---|---|---|
+| G1 coefficients | `Sheaf X.smallEtaleTopology (ModuleCat.{u+1} Λ)`, with `Λ : Type (u+1)` any `CommRing`. `R+`, `upperStar` and the exchange map are computed in Λ-modules | abelian sheaves `Ab(X_et)` (`Sheaf … AddCommGrpCat.{u+1}`). The Sheaf records `HasTorsionAbelianBaseChange` and `HasPrimeInjectiveAcyclicity` are abelian | `forget₂ (ModuleCat Λ) AddCommGrpCat` commutes with `upperStar`, with `R+ lowerStar` on D⁺ (Λ-injectives are acyclic for the abelian `f_*`), and with the exchange map; it is also conservative. There is **no node** for this (lead_note of 2026-10-10 on lem-weil-pbc-injective-acyclicity-bounded-below). The nearest upstream statement is the change of rings in `Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero` (SmoothBaseChange/Coefficients.lean:133, which has its own sorry) |
+| G2 torsion | `Scheme.IsTorsionSheaf` (geometric stalks are torsion groups); `torsionHomology` (every homology sheaf is `IsTorsionSheaf`) | def-weil-pbc-torsion-etale-sheaf = Sheaf `Scheme.IsTorsionAbelianSheaf` (`colim F[n] → F` is an iso) | `IsTorsionSheaf F ↔ IsTorsionAbelianSheaf (forget F)`. Ingredients: upstream `Scheme.isTorsionSheaf_iff_isTorsion` (sorry-free) and lem-weil-pbc-torsion-sheaf-characterizations |
+| G3 cohomology | `Sheaf.H` (Ext from the constant sheaf ℤ) and `Etale.cohomologyMap` | def-weil-pbc-etale-cohomology = `Etale.cohomology` (RΓ via K-injectives). def-weil-pbc-cohomology-pullback = `Etale.cohomologyMap` (on `Sheaf.H`). The DAG mixes the two | `Sheaf.H F q ≅ (Etale.cohomology … q).obj F[0]`, natural in F and compatible with pullback. Needed wherever a node computes `H^q` by resolutions or cochains |
+| G4 squares | any `IsPullback` square (arbitrary `X'`/`C'`) | the canonical fibre product (`X' = P¹_T`, `C_{k'} = C ×_k k'`) | transport along the unique isomorphisms. Routine, but every proof needs it |
+| G5 exchange map | `derivedBaseChangeMapPlus`, or `Etale.baseChange` through `baseChangeHomologyMap` | def-weil-pbc-derived-exchange (records both) | `baseChange_eq_derivedBaseChangeMapPlus` (sorry-free). No gap |
+| G6 sheaves vs complexes | `HasTorsionBaseChange Λ f`: K ∈ D⁺(X, Λ) with torsion cohomology | `PBC(f)` (def-weil-pbc-property): a torsion abelian sheaf in degree 0 | the 0DDE spectral-sequence passage: steps 4–7 of thm-weil-pbc-bounded-below, which are steps 2–6 of lem-weil-pbc-injective-acyclicity-bounded-below |
+
+Universes match throughout: schemes are `Scheme.{u}`, fields are `Type u`, and coefficients live in `u+1`. The Sheaf IA record takes `ULift (ZMod r)` for 𝐅_r. Neither side has a universe obstruction.
+
+### 1. `Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine` ↔ lemma-weil-pbc-p1-exchange-geometric-stalk
+
+**Lean** (GeometricStalk.lean:133):
+```lean
+theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
+    {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
+    (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
+    {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']
+    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k))
+    (hι : ι ≫ σ = τ ≫ g)
+    (hσ : ∃ (s : S) (φ : S.residueField s ⟶ .of k), φ.hom.IsIntegral ∧ Spec.map φ ≫ S.fromSpecResidueField s = σ)
+    (hτ : ∃ (t : T) (φ : T.residueField t ⟶ .of k'), φ.hom.IsIntegral ∧ Spec.map φ ≫ T.fromSpecResidueField t = τ)
+    (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] (q : ℕ) :
+    ∃ (e₁ : (stalk at τ of (baseChangeSourceFunctor Λ g p q).obj F) ≃+ Sheaf.H (forget ((map σ)^*[Λ] F)) q)
+      (e₂ : (stalk at τ of (baseChangeTargetFunctor Λ g' f' q).obj F) ≃+ Sheaf.H ((map ι)^*[Ab] (forget ((map σ)^*[Λ] F))) q),
+      ∀ x, e₂ (stalk map of (baseChangeHomologyMap Λ sq q F) x) = Etale.cohomologyMap (map ι) (forget ((map σ)^*[Λ] F)) q (e₁ x)
+```
+(Abbreviated: "stalk at τ" is `(pointSmallEtale τ).sheafFiber (A := ModuleCat Λ)`, `forget` is `sheafCompose _ (forget₂ (ModuleCat Λ) AddCommGrpCat)`, and `map` is `ProjectiveSpace.map _`.)
+
+**Node:** `X = P¹_S`, `X' = P¹_T`, and F is a torsion abelian sheaf on X_et. There is one geometric point t̄ : Spec Ω → T, and s̄ = g∘t̄. The fields are κ(s̄) ⊂ κ(t̄), the separable closures of κ(s), κ(t) in Ω. A = O^sh_{S,s̄}, B = O^sh_{T,t̄}. Claims: (1) c_S = i_A^*Φ_Sσ and c_T = i_B^*Φ_T are isomorphisms; (2) Φ_T∘(Ex^q)_t̄ = h̃^*∘Φ_S∘σ; (3) c_T∘(Ex^q)_t̄ = h_0^*∘c_S.
+
+| Clause | Lean vs node |
+|---|---|
+| square | Lean allows any pullback (G4); the node fixes X' = P¹_T. Equivalent |
+| P¹ | `ProjectiveLine S = ℙ(ULift (Fin 2); S)` against `P({0,1};S)` (recorded as `ProjectiveSpace`). Same |
+| sheaf | Lean: a Λ-module sheaf with torsion stalks. Node: a torsion abelian sheaf. Modulo G1/G2 the Lean covers a sub-class (sheaves of the form `forget F`), so it is **weaker** here |
+| geometric points | Lean: σ and τ are *independent* separably closed points, **algebraic** over κ(s) and κ(t) (not necessarily the separable closures: the only caller passes `AlgebraicClosure`), linked by an arbitrary ι with `ι ≫ σ = τ ≫ g`. Node: one point Ω with κ(s̄) = κ(s)^sep in Ω. Lean is **more general** here |
+| stalk | `(pointSmallEtale τ).sheafFiber`, which is the record of def-weil-pbc-geometric-stalks. Same, modulo G1 |
+| source/target | Lean: homology of `R+ p_*` in Λ-modules, then `g^*`, taken in Λ-modules (G1). Node: abelian `R^q p_*` |
+| cohomology | Lean: `Sheaf.H` and `cohomologyMap`. Node: H^q via RΓ (G3) |
+| conclusion | Lean: *there exist* additive equivalences e₁, e₂ making the square commute; it does not ask for them to be canonical. Node: the specific c_S, c_T. Lean is **weaker** (its docstring says so). Under the sorry-free `isIso_baseChangeHomologyMap_projectiveLine`, the Lean form is equivalent to bijectivity of the stalk map |
+
+**Does the node's proof prove the Lean?** Mostly. Claim (3) of the node gives the Lean square for Ω = k', k = κ(s)^sep and k' = κ(t)^sep. Five things are missing:
+1. G1 on both sides: the Λ-stalk of `H^q(g^*R+p_*F[0])` must be identified with the stalk of the abelian `g^{-1}R^q p_*(forget F)`, and likewise on the target side. The node's Steps 2–4 run on abelian injective resolutions.
+2. G3: the codomains of c_S and c_T must be read as `Sheaf.H`, with h_0^* = `cohomologyMap`.
+3. The purely inseparable gap: the Lean k may be strictly larger than κ(s)^sep. One extra step is needed: `H^q(P¹_{κ(s)^sep}) → H^q(P¹_k)` is bijective because the base change is a universal homeomorphism (upstream `Etale.cohomologyMap_bijective`, sorry-free; DAG prop-weil-pbc-universal-homeomorphism-topos). The same holds for k', together with commutativity of the resulting square.
+4. Aligning the independent σ with the node's s̄ = g∘t̄. The separable closure of κ(s) in k maps by ι onto the separable closure of κ(s) in k'. The argument is the one in lem-weil-pbc-strict-henselization-functoriality (2), but the Lean form needs it written out.
+5. G4: the Lean target sheaf is `(map ι)^*[Ab](forget((map σ)^*[Λ] F))`. That needs the composite-inverse-image isomorphisms and the commutation of `forget` with `upperStar` (not found upstream by grep).
+
+None of the node's steps fails. The node's review already flags a "hypothesis gap" in prop-weil-pbc-p1-strict-henselian-comparison, which is the node's own business.
+
+### 2. `Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity` ↔ lem-weil-pbc-injective-acyclicity-bounded-below and lemma-weil-pbc-property-iff-acyclicity
+
+**Lean** (BaseChangeProperty.lean:321):
+```lean
+variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
+theorem Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity (f : X ⟶ Y) [IsProper f]
+    (hf : Etale.HasInjectiveAcyclicity Λ f) : Etale.HasTorsionBaseChange Λ f := sorry
+-- HasTorsionBaseChange Λ f := ∀ sq : IsPullback g' f' f g, ∀ K : D⁺(Sheaf X_et (ModuleCat Λ)),
+--   torsionHomology Λ X K → IsIso ((derivedBaseChangeMapPlus (ModuleCat Λ) sq.toCommSq).app K)
+-- HasInjectiveAcyclicity Λ f := ∀ sq, ∀ I : Sheaf X_et (ModuleCat Λ), IsTorsionSheaf I → Injective I →
+--   ∀ q > 0, IsZero (H^q (R+ (f')_*[ModuleCat Λ] ((g')^*[ModuleCat Λ] I)[0]))
+```
+
+**Node lem-weil-pbc-injective-acyclicity-bounded-below** (after the statement_change of 2026-10-11): Λ is any commutative ring and f is proper. The hypothesis is coefficient-wise IA: for every prime ℓ, every square and every injective sheaf I of (Λ/ℓ)-modules, `R^q f'_* g'^{-1} I = 0` for q > 0, with the abelian `R^q` of the underlying abelian sheaf. Conclusion: for K ∈ D⁺(X_et, Λ) with torsion cohomology, the **abelian** exchange `Ex_{□,K}` is an isomorphism in D⁺(Y'_et).
+
+| Clause | Lean vs node |
+|---|---|
+| Λ, f proper, all squares | same |
+| hypothesis: injectives | Lean: injective objects of Λ-module sheaves that are torsion. Node: injective (Λ/ℓ)-module sheaves, for every prime ℓ. **Different, and neither implies the other** (statement_change 2026-10-11, checker R-e7c0032; HUMAN.md 10-10: a Λ/ℓ-injective is a summand of I[ℓ] for a Λ-injective I that need not be torsion) |
+| hypothesis: R^q | Lean: in Λ-modules (`R+` of `ModuleCat Λ`). Node: abelian. Re-encoded (G1) |
+| conclusion | Lean: iso in D⁺(Y', Λ). Node: iso of the underlying abelian complexes. The node plus G1 gives the Lean conclusion |
+| torsion of K | `torsionHomology` against "cohomology sheaves torsion as abelian sheaves". Same modulo G2 |
+
+**Does the node's proof prove the Lean?** **No.** Step 1 cites lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change, whose hypothesis is the coefficient-wise IA. The Lean `hf` does not supply it. Steps 2–6 (the 0DDE truncation spectral sequences) do carry over, because they use only the sheaf case. The HUMAN.md addendum of 2026-10-10 shows that the 0A4B route cannot start from the Lean hypothesis: a torsion Λ-sheaf need not embed in a torsion injective, with Λ = ℤ[x₁,x₂,…]/(pⁱxᵢ, xᵢxⱼ). The Lean statement is nonetheless **true** for proper f, because its conclusion is target 1. Its only known proof goes through the target, which is a cycle on the present route, since `hasTorsionBaseChange_projectiveLine` uses it.
+
+**Node lemma-weil-pbc-property-iff-acyclicity:** for proper f, PBC(f) (torsion abelian sheaves in degree 0; Sheaf `HasTorsionAbelianBaseChange`) holds iff IA_r(f) for every prime r (𝐅_r-injectives; Sheaf `HasAllPrimeInjectiveAcyclicity`). Against the Lean, this is an iff where the Lean has one direction. It is abelian where the Lean uses Λ, sheaves where the Lean uses complexes, and 𝐅_r-injectives where the Lean uses torsion-Λ injectives. The node's proof (Stacks 0A4B) proves the abelian iff, **not** the Lean declaration. The pairing is nominal. The node's natural Lean is a Sheaf theorem `hasTorsionAbelianBaseChange_iff_hasAllPrimeInjectiveAcyclicity [IsProper f]`; the forward half already exists as the Sheaf `hasAllPrimeInjectiveAcyclicity_of_hasTorsionAbelianBaseChange`. Its `lean.declarations` should drop the upstream sorry.
+
+**What stage 3 needs.** This is a decision, and it is still open: HUMAN.md 10-09 evening and 10-10 10:14, and stage3-prep §4 item 2.
+- **(b)** Add `IsAddTorsion Λ`. The declaration then becomes the sorry-free `HasInjectiveAcyclicity.hasTorsionBaseChange`. That proof calls `Etale.isIso_baseChangeMap_of_isProper` (UnderivedExchange.lean:52, **its own sorry**; node lemma-weil-pbc-proper-underived-exchange), which adds a **sixth** sorry to the route. Target 1 for general Λ then needs another way in (restriction of scalars).
+- **(d)** Restate `HasInjectiveAcyclicity` coefficient-wise (Λ/ℓ-injectives, every ℓ). The node then proves the declaration once G1 is in place. `hasInjectiveAcyclicity_projectiveLine` must be re-proved: it needs `R^q p_* I = 0` (Λ-derived) for a Λ/ℓ-injective I, a change of rings with no node yet.
+- **(c′, recommended)** Re-prove the sorry-free `hasTorsionBaseChange_projectiveLine` (ProjectiveLine.lean:119–122) directly. Use the sorry-free `isIso_baseChangeHomologyMap_projectiveLine`, which gives the degree-q exchange iso for every torsion Λ-sheaf, plus the Λ-typed 0DDE lift (steps 2–6 of this node). No IA is needed. The declaration then leaves the target's closure; it could later be closed from `hasTorsionBaseChange_of_isProper` if moved after it. This is a proof-only change of an upstream module.
+
+### 3. `Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper` ↔ prop-weil-pbc-reduction-to-projective-line
+
+**Lean** (ProjectiveLine.lean:145):
+```lean
+theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper
+    (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] : Etale.HasTorsionBaseChange Λ f := sorry
+```
+**Node:** if `P¹_S → S` satisfies PBC for every scheme S, then every proper f satisfies PBC. PBC is abelian, for torsion sheaves in degree 0.
+
+| Clause | Lean vs node |
+|---|---|
+| coefficients | Λ against ℤ (G1), in both the hypothesis and the conclusion |
+| objects | complexes with torsion cohomology against sheaves in degree 0 (G6), in both the hypothesis and the conclusion |
+| P¹, properness, universes | same |
+| logical strength | **Re-encoded, not comparable.** The Lean hypothesis (Λ-complexes) does not give the node's abelian hypothesis; for Λ = ℚ it is vacuous. The converse fails too |
+
+**Does the node's proof prove the Lean?** In shape yes (Stacks 0A4F: affine base, Chow, closed immersions are finite, ℙ¹ → ℙⁿ, composition, cancellation), but not as written. Six of its citations are typed for abelian PBC/IA and need Λ-complex versions:
+- target locality: Sheaf `hasTorsionAbelianBaseChange_of_etale_cover`
+- lem-weil-pbc-reduction-projective-space
+- prop-weil-pbc-composition-stability
+- lemma-weil-pbc-cancellation
+- lemma-weil-pbc-property-iff-acyclicity
+- prop-weil-pbc-finite-morphism
+
+Some of the pieces already work for Λ:
+- Finite morphisms: upstream `isBaseChangeIso_of_isFinite` (any coefficient) with `hasTorsionBaseChange_of_isBaseChangeIso`, both sorry-free.
+- Chow's lemma: Sheaf `exists_chow_factorization_of_isAffine` (coefficient-free; upstream `ChowModification` is Noetherian only, as the docstring notes).
+- Composition, for complexes: pasting the derived exchange (lem-weil-pbc-exchange-identity-pasting), plus the fact that Rf'_* keeps torsion cohomology. No IA is needed.
+- Cancellation: this does need IA, in the Λ/ℓ form of (d).
+
+The alternative is to prove the conclusion unconditionally and ignore `h`, since the statement is a true theorem. That would use the abelian DAG route plus G1 and the G6 lift. The abelian ℙ¹ case would then come from the DAG, and under stage3-prep §2.1 option C that means Sheaf imports in an upstream proof, which are not available.
+
+### 4. `IsCurve.bijective_cohomologyMap_of_isAlgClosed` ↔ prop-weil-pbc-algebraically-closed-extension
+
+**Lean** (FieldExtension.lean:88):
+```lean
+theorem bijective_cohomologyMap_of_isAlgClosed {k k' : Type u} [Field k] [IsAlgClosed k]
+    [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
+    [IsProper f] {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}
+    (h : IsPullback ι' f' f ι) (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsTorsionSheaf F] (q : ℕ) :
+    Function.Bijective (Etale.cohomologyMap ι' ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q)
+```
+**Node:** k ⊆ k' are algebraically closed; C is proper over k with dim C ≤ 1 (the empty scheme is allowed); F is a torsion abelian sheaf. Then `π^* : H^q(C,F) → H^q(C_{k'}, π^{-1}F)` is an isomorphism (Stacks 03SC (7)).
+
+| Clause | Lean vs node |
+|---|---|
+| fields, ι | algebraically closed in both. Lean takes any morphism ι, which is always induced by k → k'. Same |
+| curve | `IsCurve f` (separated, locally of finite type, quasi-compact, `topologicalKrullDim C ≤ 1`) plus `IsProper f`, against "proper with dim ≤ 1, empty allowed". Same (proper implies separated and finite type; ⊥ ≤ 1 covers the empty scheme) |
+| square | any pullback (G4) |
+| sheaf | `forget F` for a Λ-sheaf with torsion stalks, against any torsion abelian sheaf. **Lean weaker** (a special case, given G2) |
+| cohomology, map | `Sheaf.H` and `cohomologyMap`, against H^q and π^* (G3; the pullback record is already `cohomologyMap`) |
+| conclusion | bijective against isomorphism. Same |
+
+**Does the node's proof prove the Lean?** **Yes.** Apply the node to the abelian sheaf `forget F`; the needed facts are `IsTorsionSheaf F ⇒ IsTorsionAbelianSheaf (forget F)` (G2) and the G4 transport. The node's dévissage (F[ℓ], j_!, constructible 𝐅_ℓ-sheaves, normalisation) runs entirely on abelian sheaves, which is legitimate because the Lean instance is the abelian sheaf `forget F`. G3 matters only where a step of the subtree computes H^q by resolutions. The upstream curve files (`Curve/*.lean`) use `Sheaf.H`, so that subtree is probably consistent already.
+
+### 5. `IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed` ↔ lemma-weil-pbc-curve-separably-closed-passage
+
+**Lean** (FieldExtension.lean:120): the separably closed version of §4, under a hypothesis `H` that is exactly the statement of §4 for the **same Λ**. `H` quantifies over k, k' : Type u, C : Scheme.{u}, Λ-module torsion sheaves and any pullback square.
+
+**Node:** k ⊆ k' are separably closed. Hypothesis (H) covers all algebraically closed K ⊆ K', all proper D with dim ≤ 1, and **all torsion abelian sheaves** G. The conclusion is π^* bijective (Stacks 0A5E).
+
+| Clause | Lean vs node |
+|---|---|
+| hypothesis H | Lean: only for sheaves `forget G` with G a torsion Λ-sheaf. Node: all torsion abelian sheaves. **Lean hypothesis weaker** |
+| conclusion | only for Λ-sheaves. **Lean conclusion weaker** |
+| fields, curve, square, cohomology | as in §4 |
+
+**Does the node's proof prove the Lean?** **Yes**, with two small additions:
+- **Where H is used.** The node applies (H) to G = F (characteristic 0, step 1) and to G = ρ^{-1}F (step 6). In Lean, take `ρ^*[Λ] F` instead. It is torsion by the upstream instance `isTorsionSheaf_upperStar` (TorsionSheaf.lean:153). Transport along `forget ∘ ρ^*[Λ] ≅ ρ^*[Ab] ∘ forget` (not found upstream by grep; this is a sheaf-level piece of G1), using naturality of `cohomologyMap` in the sheaf (TopologicalInvariance.lean, sorry-free).
+- **Hypotheses of H.** The node's step 6 supplies `IsCurve` for `C_{k̄} → Spec k̄` (base change keeps separated, locally of finite type and quasi-compact; the dimension is preserved by the homeomorphism).
+
+Step 5 of the node is upstream `Etale.cohomologyMap_bijective` (sorry-free). No step fails.
+
+### 6. The four nodes between the target and the five, with no upstream Lean
+
+The upstream Lean has no declaration for any of them. ProjectiveLine.lean says: "The reduction also absorbs several steps which the blueprint keeps separate — target locality, stability under composition, and cancellation along a proper surjection (Stacks 0A4D and 0A4C) — none of which is stated on its own here." Each has a stage-2 **Sheaf** record. These records are abelian, carry a `sorry`, and are statement-only.
+
+| Node (Sheaf record) | Upstream Lean | Verdict |
+|---|---|---|
+| prop-weil-pbc-composition-stability (`prop_weil_pbc_composition_stability`, abelian, IA-based) | its content (0A4D) sits inside the **sorry of `hasTorsionBaseChange_of_projectiveLine_of_isProper`**; that docstring says the property "composes and cancels along proper surjections". No own name | **used** (inside the §3 sorry, unnamed). Stays under prop-weil-pbc-reduction-to-projective-line. If that node is retyped to Λ-complexes (§3), retype this one to `HasTorsionBaseChange Λ`; its proof can then be a direct derived pasting with no IA |
+| lemma-weil-pbc-cancellation (`hasTorsionAbelianBaseChange_of_comp_of_surjective`) | 0A4C, the same sorry ("cancels along proper surjections") | **used** (inside the §3 sorry). For Λ it needs IA in the Λ/ℓ form (option (d) of §2), or stays abelian if §3 goes by the abelian route |
+| lem-weil-pbc-reduction-projective-space (`hasTorsionAbelianBaseChange_projectiveSpace_of_projectiveLine`) | the same sorry ("the finite surjective symmetric-product morphism (ℙ¹_S)ⁿ ⟶ ℙⁿ_S passes the hypothesis from ℙ¹ to ℙⁿ") | **used** (inside the §3 sorry). Purely formal from finite, composition and cancellation, so it carries over to any coefficients once those are retyped |
+| lemma-weil-pbc-torsion-assembly (`isIso_derivedBaseChangeMapPlus_torsion_assembly`) | **bypassed**. The Lean target is `hasTorsionBaseChange_of_isProper Λ f sq K hK`: `HasTorsionBaseChange` already covers every complex with torsion cohomology for every proper f, so no "prime → n-torsion → colimit" step exists at a general f. That dévissage appears in Lean only for ℙ¹, inside `hasTorsionBaseChange_of_hasInjectiveAcyclicity` (its docstring) | **pruned.** It is also **redundant inside the DAG**: its conclusion (Ex_{□,F} an iso for every torsion abelian F and proper f) *is* PBC(f) of def-weil-pbc-property. thm-weil-pbc-bounded-below step 2 already has that from prop-weil-pbc-reduction-to-projective-line + prop-weil-pbc-projective-line, and lemma-weil-pbc-prime-proper-base-change only specialises it to 𝐅_r for torsion-assembly to rebuild. Replacement: thm-weil-pbc-bounded-below steps 3–4 cite "PBC(f) [def-weil-pbc-property], step 2" directly. On the Lean route the whole of steps 2–7 becomes "`hasTorsionBaseChange_of_isProper` applied to K" (lemma-weil-pbc-prime-proper-base-change, whose record is that declaration, retyped to Λ-complexes). Its other citer, prop-weil-proet-finite-proper-base-change, is `imported`; check that it is out of scope before deleting the node |
+
+### 7. Consequences for stage 3
+
+- **Statement or record changes on nodes:**
+  - lem-weil-pbc-injective-acyclicity-bounded-below: the node ≠ the Lean (hypothesis differs). Either the Lean changes ((b) or (d), the human's decision) or, under (c′), the node's `lean` is re-pointed to a new "sheaf-level PBC_Λ ⇒ complex PBC_Λ" lemma (its steps 2–6), with a statement_change dropping the IA hypothesis.
+  - lemma-weil-pbc-property-iff-acyclicity: record only. Drop the upstream sorry and point to the Sheaf iff; the statement is unchanged.
+  - prop-weil-pbc-reduction-to-projective-line: re-encoded (Λ, complexes). Either a statement_change to Λ-complexes (then also the four nodes of §6 and target locality), or keep it abelian and add the G1 + G6 lift nodes, with the declaration proved unconditionally.
+  - exists_addEquiv and the two curve declarations: **no statement change**. Their nodes prove the Lean once bridges are added.
+- **Extra Sheaf nodes needed:**
+  - (N1) G1: `forget₂` commutes with `upperStar`, with `R+ lowerStar` on D⁺, and with the exchange map, and is conservative. Needed by all five.
+  - (N2) G2: `IsTorsionSheaf F ↔ IsTorsionAbelianSheaf (forget F)`.
+  - (N3) G3: `Sheaf.H ≅ R^qΓ`, natural and compatible with `cohomologyMap`, unless the DAG settles on `Sheaf.H`.
+  - (N4) the Λ-typed 0DDE lift: sheaf-level torsion PBC_Λ implies complex PBC_Λ.
+  - (N5) the purely inseparable step and the σ/τ alignment for §1.
+  - (N6) only if the Lean route keeps Λ throughout: Λ-complex versions of composition, cancellation, ℙⁿ reduction and target locality, and the Λ/ℓ change of rings for IA.
+- **Order:**
+  1. N1 and N2 first; everything uses them.
+  2. The curve pair (§4, §5): closest to the Lean, bridges only.
+  3. §1 (bridges plus N5).
+  4. §2 and §3 wait for the human's choice (HUMAN.md 10-09/10-10; stage3-prep §4 item 2). Recommendation: (c′) for §2, which removes that sorry from the route at the cost of N4. For §3, decide Λ-throughout (N6) against abelian plus lift (N1 and N4, plus Sheaf imports in an upstream proof, which runs into the §2.1 module blocker unless option A or B is taken).
