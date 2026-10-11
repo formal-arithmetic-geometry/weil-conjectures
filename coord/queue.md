@@ -1,11 +1,11 @@
 # Work queue
 
-525 items; claim with `tools/claim.py next <group> [--stage N]`.
+522 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (525)
+## Stage 2: nodes to state (522)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -30,8 +30,6 @@
 | `lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | 1 | state |
-| `lem-weil-pbc-global-complete-intersection-equidimensional` | 1 | state |
-| `lem-weil-pbc-glue-sheaves-of-modules` | 1 | state |
 | `lem-weil-pbc-graded-module-away-restriction` | 1 | state |
 | `lem-weil-pbc-grothendieck-spectral-sequence` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
@@ -42,7 +40,6 @@
 | `lem-weil-pbc-horseshoe-morphism-lift-exact-source` | 1 | state |
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
 | `lem-weil-pbc-immersion-affine-constructible-pieces` | 1 | state |
-| `lem-weil-pbc-improve-presentation` | 1 | state |
 | `lem-weil-pbc-improve-presentation-smooth-conormal-free` | 1 | state |
 | `lem-weil-pbc-injective-module-direct-image-acyclic` | 1 | state |
 | `lem-weil-pbc-injective-resolution-ses-complexes` | 1 | state |
