@@ -173,5 +173,28 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps follow Stacks 07CE restricted to the smooth case (the lci clause is not part of the statement): C = Sym_A(I/I^2) with retraction; C_a = Sym_{A_a}((I/I^2)_a); (I/I^2)_a finite projective with (I/I^2)_a + Omega_{A_a/R} = A_a^n via the new 08JZ node and the Jacobi-Zariski quotient node; C_a smooth over A_a (Sym of finite projective) and over R; Omega_{C_a/R} free via the Jacobi-Zariski sequence and the new 07EV node. Statement citations added (finitely presented, Sym). Tags 07CE, 08JZ, 07EV, 00S2 verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ImprovePresentation",
+  "declaration": "Algebra.exists_finiteType_retract_smooth_free_differentials",
+  "declarations": [
+   "Algebra.exists_finiteType_retract_smooth_free_differentials",
+   "Algebra.Presentation.symmetricAlgebra_improves"
+  ],
+  "file": "lean/Sheaf/RingTheory/ImprovePresentation.lean",
+  "statement": "theorem exists_finiteType_retract_smooth_free_differentials (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A] [FinitePresentation R A] : ∃ (C : Type (max u v)) (_ : CommRing C) (_ : Algebra A C), letI : Algebra R C := ((algebraMap A C).comp (algebraMap R A)).toAlgebra FiniteType A C ∧ ∃ ρ : C →ₐ[A] A, (∀ x : A, ρ (algebraMap A C x) = x) ∧ ∀ a : A, Smooth R (Localization.Away a) → Smooth R (Localization.Away (algebraMap A C a)) ∧ Module.Free (Localization.Away (algebraMap A C a)) (KaehlerDifferential R (Localization.Away (algebraMap A C a)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The first declaration states existence; the second renders the parenthetical construction for every finite polynomial presentation, with C = Sym_A(I/I²) and ρ = SymmetricAlgebra.lift 0."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-imp1100",
+  "group": "H1",
+  "result": "pass",
+  "note": "R,A CommRing + Algebra + FinitePresentation; ∃ C : Type (max u v) A-algebra, R-structure = composite (rfl-checked through Localization.Away); FiniteType A C; ρ : C →ₐ[A] A retraction; ∀ a, Smooth R A_a → Smooth R C_a ∧ Module.Free C_a Ω[C_a/R]; parenthetical: Presentation R A (Fin n vars) (Fin m rels), C = SymmetricAlgebra A P.toExtension.Cotangent (I/I²), ρ = lift 0"
  }
 }
