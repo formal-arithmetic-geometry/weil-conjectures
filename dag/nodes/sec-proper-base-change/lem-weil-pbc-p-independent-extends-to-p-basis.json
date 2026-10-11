@@ -180,5 +180,23 @@
   "worker": "C1-stage1",
   "summary": "Six-step split of 07P2 relative p-basis extension: identify the initial independent family with its injective image; verify the chain condition and apply the existing Zorn leaf; show the monomial span is a field using a^{-1}=a^{p-1}/a^p; write the degree-p argument using the existing simple-extension power-basis leaf; group relations to contradict maximality; reindex to preserve the original family. No new nodes. Source misprint z^p-x corrected to z^p-x^p; statement unchanged. Three Mathlib search kinds renewed; no p-basis extension match.",
   "blueprint": "Whole-blueprint searches for p-basis, independent and 07P2 found no equivalent blueprint node. This node realizes the p-independent extension argument introduced by lem-weil-pbc-p-independent-differentials-independent; its ancestor is thm-weil-pbc-finite-etale-lifting, step 7 (essential surjectivity), through the complete-local G-ring and derivation/intersection-subfields chain recorded in blueprint.from.via."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.PBasisExtension",
+  "declaration": "FieldTheory.exists_pBasis_extension",
+  "file": "lean/Sheaf/FieldTheory/PBasisExtension.lean",
+  "statement": "theorem exists_pBasis_extension {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K] (p : ℕ) [Fact p.Prime] [CharP k p] [CharP K p] {I : Type w} (x : I → K) (hx : LinearIndependent (IntermediateField.adjoin k (Set.range (fun a : K ↦ a ^ p))) (fun E : {E : I →₀ ℕ // ∀ i : I, E i < p} ↦ E.val.prod (fun i e ↦ x i ^ e))) : ∃ (J : Type v) (y : J → K) (b : Module.Basis {E : (I ⊕ J) →₀ ℕ // ∀ l : I ⊕ J, E l < p} (IntermediateField.adjoin k (Set.range (fun a : K ↦ a ^ p))) K), ∀ E, b E = E.val.prod (fun l e ↦ Sum.elim x y l ^ e)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pie1302",
+  "group": "H1",
+  "result": "pass",
+  "note": "prime p + CharP k/K p + Algebra k K; kK^p = IntermediateField.adjoin k (range (^p)) and bounded-exponent Finsupp monomials word-for-word as landed C1/G1 (alpha-renamed binders only); p-independence = LinearIndependent of the exponent-indexed monomial family; arbitrary I : Type w; tied ∃ J : Type v, y, Module.Basis on I ⊕ J with b E = monomial of Sum.elim x y; #check universes (J in K's universe v, sufficient since added generators are a subset of K), no let, no hollow hypotheses, root-namespace names"
  }
 }

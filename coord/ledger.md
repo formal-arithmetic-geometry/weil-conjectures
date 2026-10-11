@@ -4632,3 +4632,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:32 L: merged deliver/J1/lem-sc-regular-curve-torsionfree-free (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.RegularCurveTorsionfreeFree AlgebraicGeometry.Scheme.Modules.regular_curve_torsionfree_iff_finiteLocallyFree)
 - 12:32 L: merged deliver/G1/lem-sc-qc-open-derived-lift (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.QcOpenDerivedLift AlgebraicGeometry.exists_qc_derived_lift_of_isCompact_open)
 - 12:33 L: merged deliver/F1/lem-sc-perfect-local-pseudocoherent-free-model (stage 2; reviewer PASS; first push; Sheaf.RingTheory.MinimalFreeModel DerivedCategory.exists_unique_minimalFreeModel; statement corrected (1 citers))
+- 12:33 L: merged deliver/H1/lem-weil-pbc-p-independent-extends-to-p-basis (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.PBasisExtension FieldTheory.exists_pBasis_extension)
