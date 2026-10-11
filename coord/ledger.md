@@ -3801,3 +3801,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:18 L: merged deliver/K1/lem-sc-point-tangent-closed-fibre-singleton (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ClosedFibreSingleton AlgebraicGeometry.preimage_singleton_eq_empty_or_singleton_of_injOn_closedPoints)
 - 08:18 L: merged deliver/C1/lem-sc-proj-standard-open-basis (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProjStandardOpenBasis AlgebraicGeometry.Proj.isBasis_positiveDegree_basicOpen_and_isAffineOpen)
 - 08:18 L: merged deliver/H1/lem-sc-p1-ext-resolution-derived-connecting (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.ExtResolutionDerivedConnecting CategoryTheory.InjectiveResolution.extMk_resolution_connecting_eq_triangle)
+- 08:19 L: merged deliver/J1/lem-sc-pic-proper-ntorsion (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion AlgebraicGeometry.Scheme.Hom.pic_proper_ntorsion)

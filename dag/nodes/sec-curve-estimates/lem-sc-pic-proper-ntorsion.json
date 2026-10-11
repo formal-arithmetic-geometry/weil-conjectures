@@ -183,5 +183,24 @@
   "lem-sc-smooth-regular",
   "lem-weil-pbc-finite-type-over-noetherian"
  ],
- "reviewed": "2026-10-10 E1 (delivered); L: reviewed in full by a reviewer sub-agent (FIX: same_as null -> [] after search): 0A26 read for the new node lem-sc-proper-dim-one-projective; step 1 passage from def-sc-curves to the Jacobian theorem hypotheses checked node by node; thm-av-final (c),(d) applied with the group identification Pic^0(C) = J_C(k); tool_uses recorded for the four off-unit generic tools."
+ "reviewed": "2026-10-10 E1 (delivered); L: reviewed in full by a reviewer sub-agent (FIX: same_as null -> [] after search): 0A26 read for the new node lem-sc-proper-dim-one-projective; step 1 passage from def-sc-curves to the Jacobian theorem hypotheses checked node by node; thm-av-final (c),(d) applied with the group identification Pic^0(C) = J_C(k); tool_uses recorded for the four off-unit generic tools.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.pic_proper_ntorsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicProperNTorsion.lean",
+  "statement": "theorem Scheme.Hom.pic_proper_ntorsion {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (_hn : (n : k) ≠ 0) : Nonempty ((powMonoidHom n : C.Pic →* C.Pic).ker ≃* Multiplicative (Fin (2 * f.genus) → ZMod n)) ∧ Nonempty (C.Pic ⧸ (powMonoidHom n : C.Pic →* C.Pic).range ≃* Multiplicative (ZMod n)) ∧ (∀ L : C.Pic, L ∈ f.picZero → ∃ M : C.Pic, M ∈ f.picZero ∧ M ^ n = L)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pnt1212"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pnt1212",
+  "group": "J1",
+  "result": "fix",
+  "note": "k alg. closed; f proper smooth IsConnectedCurve; g = recorded f.genus; n prime to char as (n:k)≠0 (n≥1, p∤n); Pic[n] = ker powMonoidHom n ≃* (Z/n)^(2g); coker = Pic ⧸ range ≃* Z/n; Pic⁰ = recorded f.picZero n-divisible inside Pic⁰"
+ }
 }
