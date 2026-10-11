@@ -130,5 +130,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dfe0041 (reviewer sub-agent of L); spot-checked: Read packet whole; checked math of all three steps, citer lem-sc-local-dvr-base-change (uses exactly DVR + uniformizer + unchanged exponent, C4 ok), no duplicate among dvr nodes (lem-sc-principal-ideal-dvr needs Noetherian, not applicable). FIX more, RETURN less: (1) C4/E step 2 concluded DVR 'by Lemma 00PD' from local domain + principal maximal ideal, but 00PD (4) needs Noetherian, which R tensor k' need not be for k'/k not finitely generated (second reading missed this); repaired by deriving from the unit-times-t^n factorization that every ideal is t^{n0}R', so R' is a DVR directly by def-sc-discrete-valuation-ring; also made explicit the factor r_i = t^n s_i with some s_i a unit, uniqueness of n, and that every uniformizer (unit multiple of t) stays a uniformizer. (2) B4 step 1 plain-text arrows and 'tensor' replaced by TeX throughout steps 1-3; step 1 now states m(R tensor k') = t(R tensor k') is maximal with quotient k'. uses/proof_deps unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DvrFieldExtensionOrder",
+  "declaration": "WeilConjectures.dvr_field_extension_order",
+  "file": "lean/Sheaf/AlgebraicGeometry/DvrFieldExtensionOrder.lean",
+  "statement": "theorem dvr_field_extension_order (k : Type u) (k' : Type v) (R : Type w) [Field k] [IsAlgClosed k] [Field k'] [Algebra k k'] [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [Algebra k R] (residue : (R ⧸ IsLocalRing.maximalIdeal R) ≃ₐ[k] k) [(Ideal.map (algebraMap R (R ⊗[k] k')) (IsLocalRing.maximalIdeal R)).IsPrime] (K' : Type x) [Field K'] [Algebra (FractionRing R ⊗[k] k') K'] [IsFractionRing (FractionRing R ⊗[k] k') K'] [Algebra (Localization.AtPrime (Ideal.map (algebraMap R (R ⊗[k] k')) (IsLocalRing.maximalIdeal R))) K'] [IsFractionRing (Localization.AtPrime (Ideal.map (algebraMap R (R ⊗[k] k')) (IsLocalRing.maximalIdeal R))) K'] (hK' : ∀ z : R ⊗[k] k', algebraMap (Localization.AtPrime (Ideal.map (algebraMap R (R ⊗[k] k')) (IsLocalRing.maximalIdeal R))) K' (algebraMap (R ⊗[k] k') _ z) = algebraMap (FractionRing R ⊗[k] k') K' (Algebra.TensorProduct.map (IsScalarTower.toAlgHom k R (FractionRing R)) (AlgHom.id k k') z)) : ∃ _ : IsDomain (Localization.AtPrime (Ideal.map (algebraMap R (R ⊗[k] k')) (IsLocalRing.maximalIdeal R))), IsDiscreteValuationRing (Localization.AtPrime (Ideal.map (algebraMap R (R ⊗[k] k')) (IsLocalRing.maximalIdeal R))) ∧ (∀ t : R, IsLocalRing.maximalIdeal R = Ideal.span {t} → IsLocalRing.maximalIdeal (Localization.AtPrime (Ideal.map (algebraMap R (R ⊗[k] k')) (IsLocalRing.maximalIdeal R))) = Ideal.span {algebraMap R (Localization.AtPrime (Ideal.map (algebraMap R (R ⊗[k] k')) (IsLocalRing.maximalIdeal R))) t}) ∧ ∀ [IsDiscreteValuationRing (Localization.AtPrime (Ideal.map (algebraMap R (R ⊗[k] k')) (IsLocalRing.maximalIdeal R)))] (f : FractionRing R), f ≠ 0 → -WithZero.log ((maximalIdeal R).valuation (FractionRing R) f) = -WithZero.log ((maximalIdeal (Localization.AtPrime (Ideal.map (algebraMap R (R ⊗[k] k')) (IsLocalRing.maximalIdeal R)))).valuation K' (algebraMap (FractionRing R ⊗[k] k') K' (f ⊗ₜ 1)))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dfe1050"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfe1050",
+  "group": "J1",
+  "result": "fix",
+  "note": "k alg closed, k'/k, R DVR k-algebra with R/m≃k, R'=Localization.AtPrime m(R⊗k'), K=FractionRing R, K' fraction field of K⊗k' compatible with R'; clauses: R' domain+DVR, every uniformizer maps to a generator of m R', -WithZero.log valuations agree for f≠0"
  }
 }

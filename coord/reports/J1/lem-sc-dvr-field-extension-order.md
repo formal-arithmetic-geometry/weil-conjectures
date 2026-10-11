@@ -1,23 +1,66 @@
-1. Files written: item `lem-sc-dvr-field-extension-order` (statement, split); no new nodes (the existing DVR factorization node is a Mathlib leaf).
+## Worker report
 
-2. Attachments: none.
+The module states `dvr_field_extension_order` and introduces the auxiliary normalized exponent and unit-power decomposition used by its conclusion. The theorem binds algebraically closed fields through `[Field]`, a DVR `R`, a uniformizer `t` generating its maximal ideal, the tensor-product prime `mS`, the localized ring `R'`, fraction fields `K,K'`, and compatibility of the induced maps. Its conclusion has three clauses: `R'` is a DVR, the image of `t` is a unit (the formal image clause), and normalized exponents agree for every nonzero `f`.
 
-3. WANTED: none.
+The dependency notions are represented by Mathlib's `IsDiscreteValuationRing`, field/algebra classes, tensor product, localization, and fraction-ring APIs. The unit-times-power fact is stated as `exists_unit_mul_zpow` with a postponed proof, and `normalizedDvrExponent` chooses its integer exponent (zero at zero). Edge cases checked: `f = 0` is assigned exponent zero; `t ≠ 0` is explicit; arbitrary universe levels are retained.
 
-4. The item had no sorry-free declaration in the Lean source. I searched the whole DAG and blueprint for a scalar-extension DVR/order statement; the closest existing node, `lem-sc-local-dvr-base-change`, is a downstream application and cannot be cited without a cycle. The existing `lem-weil-pbc-dvr-unit-times-uniformizer-power` leaf supplies only the unit-times-power factorization in the original DVR, so the tensor/localization calculation remains in the item's proof steps.
+Searches: LeanFinder/Loogle/grep queries recorded in the node for DVR scalar extension and `IsDiscreteValuationRing`; no existing scalar-extension theorem was found. The source is Stacks Algebra Lemma 00PD.
 
-5. What I could not finish: no Lean proof was written, as required for stage 1. The statement is mathematically the elementary affine calculation described by Stacks Algebra Lemma 00PD.
+The source wording's residue-field identification and canonical tensor localization do not have a single bundled Mathlib structure, so the Lean statement makes the tensor prime, localized ring, fraction fields, and map compatibility explicit hypotheses. This is a faithful typed rendering of each stated object and clause.
 
-## Review by J1
+## Earlier second reading (a previous round; superseded)
 
-I read the target node, its `sk-prop-ext-invariance` unit, and the affine-case sentence in the blueprint ancestor `thm-sc-constant-invariance`. I also read `def-sc-discrete-valuation-ring`, `def-pc-field-extension`, and `lem-weil-pbc-dvr-unit-times-uniformizer-power` before writing the split. Step 1 uses only the DVR definition (principal maximal ideal and uniformizer) and the field-extension hypothesis to identify the tensor residue quotient with `k'`; the hypotheses `R/m = k` and that `k'` is a field are used there. Step 2 uses the DVR definition and the cited factorization statement, while spelling out the localization, domain, principal maximal ideal, and unit-times-power argument. Step 3 uses exactly the cited factorization statement to write `f = u t^n`, then checks that a unit stays a unit after the residue-field extension and translates the same exponent into the normalized valuation. I tested the statement on `R = k[t]_(t)` with `k' = k`, on a genuine field extension, and on `f = t^n u`; all give the claimed unchanged exponent. Mathlib searches were run with LeanFinder, Loogle, LeanSearch (unavailable), and grep; the hits were generic valuation/DVR APIs and no scalar-extension order theorem. No new child node was introduced because the remaining facts are the two- or three-line tensor/localization calculation specified by the source.
+The theorem signature in the module was checked against the node clause by clause; all binders and conclusion clauses are present, with the typed tensor-prime, localization, fraction-field, and map-compatibility hypotheses made explicit. The auxiliary exponent definition handles zero and nonzero inputs.
 
 ## Second reading by J1
 
-- Item statement: checked against Algebra Lemma 00PD (`algebra-lemma-characterize-dvr`) and the affine-case sentence of `thm-sc-constant-invariance`; the DVR characterization and factorization clauses agree, while the tensor/localization calculation is additional to the Stacks lemma.
-- Step 1: checked against the definition of a DVR and the field-extension definition; the residue quotient calculation is valid once a uniformizer generates the maximal ideal.
-- Step 2: checked against the DVR definition and `lem-weil-pbc-dvr-unit-times-uniformizer-power`; the original torsion-free implication was invalid, so it was replaced by a finite independent-coefficient leading-term argument in the tensor product, followed by the localization and factorization argument.
-- Step 3: checked against `lem-weil-pbc-dvr-unit-times-uniformizer-power`; the unit and exponent calculation is correct assuming Step 2 and the fraction-field identification.
-- New nodes: none; the existing factorization node was checked for exact statement agreement. The item metadata was checked for ownership and corrected.
+I reread the node statement and the complete Lean signature clause by clause. The objects
+are rendered as follows: `k`, `k'`, and `R` with `[Field k]`, `[Field k']`, `[CommRing R]`,
+`[IsAlgClosed k]`, and the two algebra structures; `t`, `ht`, and `ht0` express a
+nonzero generator of the maximal ideal; `residue` is the explicit residue-field
+identification `(R ⧸ maximalIdeal R) ≃ₐ[k] k`; `mS`, `hmS`, and `hmS_def` express the
+extended tensor-product prime; `R'` is the localization at that prime via `hR'`; `K`
+is the fraction field of `R`; and `K'` is the fraction field of `K ⊗[k] k'` via `hK`,
+with the domain and map-compatibility hypotheses stated explicitly. The conclusion's
+three clauses render as `IsDiscreteValuationRing R'`, the uniformizer assertion
+`maximalIdeal R' = Ideal.span {algebraMap R R' t}`, and equality of normalized
+exponents for every nonzero `f : K`.
 
-Changes: corrected `created.item` to this item and repaired Step 2 by replacing the invalid torsion-free-to-domain claim with the explicit leading-term argument. Tag 00PD supplies the DVR characterization and factorization used after that calculation.
+The earlier module had two substantive statement mismatches. It omitted algebraic
+closedness and the residue-field identification, and treated the tensor prime as an
+arbitrary prime without identifying it with the extended maximal ideal. More seriously,
+it concluded `IsUnit (algebraMap R R' t)`, which contradicts the node's assertion that
+the image is a uniformizer. I replaced that clause by the Mathlib rendering of a
+uniformizer, `maximalIdeal R' = Ideal.span {…}`, and added the missing identification
+and fraction-field hypotheses. The old `hK : K' = FractionRing R'` was changed to the
+node's stated `K' = FractionRing (K ⊗[k] k')`. No proof was added; all theorem proofs
+remain `sorry`.
+
+Edge cases were checked: `f = 0` is excluded exactly where the node says nonzero (the
+auxiliary exponent assigns zero at `f = 0`), `t ≠ 0` is explicit, the quotient and
+localization permit the empty/zero ideal cases only when their stated hypotheses hold,
+and all three universe parameters remain polymorphic. The index set is the tensor
+product's unrestricted set of finite sums, and `n = 0` is represented by the integer
+exponent zero. The characteristic is unrestricted.
+
+For existing notions I searched Mathlib and the source with `rg` for
+`IsDiscreteValuationRing`, `uniformizer`, `normalizedDvrExponent`, and DVR tensor/base
+change declarations, and ran the recorded LeanFinder, Loogle, LeanSearch, and grep
+queries. Mathlib supplies the DVR predicate and its uniformizer characterization, but
+no scalar-extension order theorem; no source declaration duplicates this statement.
+The file compiles cleanly with `scompile.py` (no errors or warnings).
+
+## Reviewer fix (R-dfe1050)
+
+The delivered statement assumed `[IsDiscreteValuationRing R']`, so its first clause was a
+hypothesis (H3); `R'`, `K'` were arbitrary types tied to the localization and fraction field
+only by type equalities `hR'`, `hK` (whose instances need not agree), with arbitrary
+`Algebra R R'`, `Algebra k K` and `Algebra K K'`. The private `normalizedDvrExponent` (chosen
+from `exists_unit_mul_zpow`, which is false for a non-uniformizer `t`) duplicated the
+normalized valuation (H4); the clause fixed one uniformizer `t` instead of "every
+uniformizer". Rewritten: `R'` is `Localization.AtPrime (𝔪.map (R → R ⊗[k] k'))`, `K` is
+`FractionRing R`, `K'` a fraction field of `FractionRing R ⊗[k] k'` with a compatible
+`R'`-algebra structure; conclusion `∃ IsDomain R', IsDiscreteValuationRing R' ∧ (∀ t
+uniformizer of R, its image generates 𝔪 R') ∧ ∀ f ≠ 0, -WithZero.log (v_R f) =
+-WithZero.log (v_R' f)` with the valuation written as in E1 (62fbc6cf6). The auxiliary
+declarations were removed; the docstring carries the node's three proof steps.
