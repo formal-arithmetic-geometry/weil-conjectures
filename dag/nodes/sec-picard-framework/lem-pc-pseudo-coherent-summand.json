@@ -122,5 +122,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcs3016 (reviewer sub-agent of L); spot-checked: Checked item vs Stacks 08CE and vs use in lem-pc-perfect-summand step 2 (exact match, C4 ok); affine reduction cites lem-pc-affine-qcoh-derived-equivalence and lem-pc-affine-pseudo-coherent-criterion; ring node vs 064X, no existing duplicate node (grep dag/nodes), no Mathlib match (grep Mathlib pseudo.?coherent: none); no degreewise idempotent splitting assumed (064X uses cones). FIX more, RETURN less: (1) C4: ring node's 'pseudo-coherent' meant m-pseudo-coherent for all m while the affine criterion yields 'quasi-isomorphic to bounded-above finite free'; the bridge is Tag 064T, not cited. Repaired by stating the ring node's last clause in the bounded-above finite-free form (source names 064T) and dropping its stray [def-pur-pseudo-coherent-complex] citation (sheaf definition, absent from stmt_deps; B3). (2) C1: Step 1 used the affine equivalence on L|U, M|U without showing they lie in D_QCoh; folded in the elementary argument (cohomology of a summand is an idempotent image of quasi-coherent H^i(K|U)) and spelled out the transport P⊕Q. Note: report's claimed created.item correction was not in the file; the original value (lem-pc-perfect-summand) is the correct creating item and was left.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PseudoCoherentSummand",
+  "declaration": "AlgebraicGeometry.Scheme.pseudoCoherent_of_isIso_biproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/PseudoCoherentSummand.lean",
+  "statement": "theorem pseudoCoherent_of_isIso_biproduct (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (K L M : schemeDerivedCategory X) (h : Nonempty (K ≅ L ⊞ M)) (hK : IsPseudoCoherent X K) : IsPseudoCoherent X L ∧ IsPseudoCoherent X M",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcs1335",
+  "group": "E1",
+  "result": "pass",
+  "note": "X:Scheme.{u}, shared HasDerivedCategory.{w} binders for X and every open as in Scheme.IsPseudoCoherent; K L M : schemeDerivedCategory X; K ≅ L ⊞ M as Nonempty iso (biproduct instance resolves); hK Scheme.IsPseudoCoherent; conclusion both L and M; #check outside namespace ok; no let, no new defs, docstring carries node proof"
  }
 }
