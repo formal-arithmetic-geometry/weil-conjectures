@@ -200,5 +200,24 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps following Stacks 07F0 with the omitted verification written out: Ann(pi^4) = Ann(pi^8) from Ann(pi) = Ann(pi^2) (Stacks applies 07CP to pi^4 without saying so); 07CP with pi^4 (today's node); the map A/pi^4 -> D/pi^4; 07CT with every hypothesis checked (existing node); pi lies in H_{D/R} by 07CP (b) and radicality; (a) by the singular-ideal localization and base change; primes containing J lie over the singular locus of C-bar via 07CP (c); (b). No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuDesingularizeLiftingApply",
+  "declaration": "Algebra.popescu_desingularize_lifting_apply",
+  "statement": "theorem popescu_desingularize_lifting_apply (R : Type u) (A : Type v) (Λ : Type w) [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ] [IsNoetherianRing R] (π : R) (hAnnR : Module.annihilator R (Ideal.span ({π} : Set R)) = Module.annihilator R (Ideal.span ({π ^ 2} : Set R))) (hAnnΛ : Module.annihilator Λ (Ideal.span ({algebraMap R Λ π} : Set Λ)) = Module.annihilator Λ (Ideal.span ({(algebraMap R Λ π) ^ 2} : Set Λ))) (α : A →ₐ[R] Λ) [FinitePresentation R A] (hstandard : IsStrictlyStandardElement (R := R) (algebraMap R A π)) (C : Type z) [CommRing C] [Algebra (R ⧸ Ideal.span ({π ^ 8} : Set R)) C] [FinitePresentation (R ⧸ Ideal.span ({π ^ 8} : Set R)) C] (σ : (A ⧸ Ideal.map (algebraMap R A) (Ideal.span ({π ^ 8} : Set R))) →ₐ[R ⧸ Ideal.span ({π ^ 8} : Set R)] C) (τ : C →ₐ[R ⧸ Ideal.span ({π ^ 8} : Set R)] (Λ ⧸ Ideal.map (algebraMap R Λ) (Ideal.span ({π ^ 8} : Set R)))) (hfactor : ∀ a : A, τ (σ (Ideal.Quotient.mk (Ideal.map (algebraMap R A) (Ideal.span ({π ^ 8} : Set R))) a)) = Ideal.Quotient.mk (Ideal.map (algebraMap R Λ) (Ideal.span ({π ^ 8} : Set R))) (α a)) : ∃ (B : Type (max u v w z)) (_ : CommRing B) (_ : Algebra R B), FinitePresentation R B ∧ ∃ (β : B →ₐ[R] Λ) (aB : A →ₐ[R] B), β.comp aB = α ∧ @Smooth (Localization.Away π) _ (Localization.Away (algebraMap R B π)) _ (Localization.awayMap (algebraMap R B) π).toAlgebra ∧ Ideal.map τ.toRingHom (singularIdeal (R ⧸ Ideal.span ({π ^ 8} : Set R)) C) ≤ Ideal.map (Ideal.Quotient.mk (Ideal.map (algebraMap R Λ) (Ideal.span ({π ^ 8} : Set R)))) (Ideal.map β.toRingHom (singularIdeal R B)).radical",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/PopescuDesingularizeLiftingApply.lean",
+  "fixed_by": "R-pdla1357"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdla1357",
+  "group": "F1",
+  "result": "fix",
+  "note": "Noetherian R; Ann(π)=Ann(π²) in R and Λ via Module.annihilator (H1 07CP form); α : A →ₐ[R] Λ, FinitePresentation R A, IsStrictlyStandardElement; C fp over R/π⁸ with σ, τ R/π⁸-algebra maps via algebraQuotientMapQuotient (C1 form) and hfactor; tied ∃ B (max u v w z) fp, β.comp aB = α; (a) @Smooth R_π B_π via awayMap; (b) map τ H_C ≤ image of radical of map β H_B; reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
