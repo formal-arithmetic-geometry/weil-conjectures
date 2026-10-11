@@ -20,7 +20,8 @@
   "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks)"
  },
  "stmt_deps": [
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-pc-module-stalk-functor"
  ],
  "proof": [
   {
@@ -183,5 +184,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kfs1919 (reviewer sub-agent of L); spot-checked: Both steps against Stacks 06YB text; skyscraper node (stalk at x and sectionwise exactness) and stalk-tensor-complex node true over ringed spaces (not special cases of scheme-only lem-weil-pbc-module-skyscraper-stalk-adjunction / lem-weil-pbc-module-stalk-tensor). FIX more, RETURN less: (1) B class (b)/(d): new lem-pc-acyclic-stalk-detection duplicates clause (5) of existing lem-weil-pbc-module-stalk-exact (ringed spaces: a complex of O_X-modules is exact iff stalkwise exact), applied degreewise via def-pc-acyclic-complex-modules; dropped, both steps now cite lem-weil-pbc-module-stalk-exact(5) and def-pc-acyclic-complex-modules, proof_deps updated, declared as tool_use (generic stalk-exactness tool, unit sk-thm-p1). The Second reading by C1 and the report's Not-duplicates section missed this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatStalkCriterion",
+  "declaration": "AlgebraicGeometry.RingedSpace.isKFlat_iff_stalk_isKFlat",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatStalkCriterion.lean",
+  "statement": "theorem isKFlat_iff_stalk_isKFlat (X : RingedSpace.{v}) (K : CochainComplex (SheafOfModules.{v} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{v} RingCat.{v})).obj X.sheaf)) ℤ) : K.IsKFlat ↔ ∀ x : X, ∀ F : CochainComplex (ModuleCat.{v} (X.presheaf.stalk x)) ℤ, F.Acyclic → (CochainComplex.mapBifunctor F (((moduleStalkFunctor X x).mapHomologicalComplex (ComplexShape.up ℤ)).obj K) (curriedTensor _)).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ksc0915"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ksc0915",
+  "group": "K1",
+  "result": "fix",
+  "note": "X:RingedSpace.{v} (Zariski, as G1) = ringed space; K: CochainComplex (SheafOfModules X.sheaf) Z = complex of O_X-modules; K.IsKFlat = landed H12; RHS forall x, forall acyclic F of ModuleCat(stalk x), Acyclic(mapBifunctor F K_x curriedTensor) = M1 inline form; K_x via moduleStalkFunctor over Mathlib TopCat.Presheaf.stalk + PresheafOfModules stalk Module instance; iff as node; universes v throughout; docstring = node's two proof steps. FIX: new node def-pc-module-stalk-functor had stmt_deps [] though built from def-weil-pbc-module-stalk (a DAG node carrying the stalk module and linear stalk map), def-weil-sheaf-of-modules-category, def-pc-cochain-complex-modules: cited; private Modules/stalkAddMap given blueprint docstrings; unused import Homology.Additive moved from ModuleStalkFunctor to KFlatStalkCriterion (where mapHomologicalComplex is used)"
  }
 }

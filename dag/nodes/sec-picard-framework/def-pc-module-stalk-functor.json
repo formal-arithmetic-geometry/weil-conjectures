@@ -1,0 +1,117 @@
+{
+ "id": "def-pc-module-stalk-functor",
+ "kind": "definition",
+ "title": "Stalk functor for sheaves of modules on a ringed space",
+ "status": "split",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space, $\\textit{Mod}(\\mathcal O_X)$ the category of sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and $x\\in X$. The stalk functor $\\textit{Mod}(\\mathcal O_X)\\to\\textit{Mod}(\\mathcal O_{X,x})$ sends an $\\mathcal O_X$-module $M$ to its stalk $M_x$ with its $\\mathcal O_{X,x}$-module structure, and a morphism $\\varphi$ of $\\mathcal O_X$-modules to the induced $\\mathcal O_{X,x}$-linear map $\\varphi_x$ [def-weil-pbc-module-stalk]; it preserves identities, composition and zero morphisms. Applied degreewise, it sends a cochain complex $K^\\bullet$ of $\\mathcal O_X$-modules [def-pc-cochain-complex-modules] to the stalk complex $K_x^\\bullet$ of $\\mathcal O_{X,x}$-modules.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Lemma Tag 06YB (label lemma-check-K-flat-stalks), use of stalk complexes"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalk functor from sheaves of modules on a ringed space to modules over the stalk ring",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "functor taking sheaves of modules on a ringed space to modules over the local ring at a point",
+   "results": "Found SheafOfModules.evaluation on opens and affine tilde stalk declarations, but no general stalk functor into modules over the stalk ring.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.stalkFunctor, PresheafOfModules.stalkFunctor",
+   "results": "No hit; SheafOfModules.stalkFunctor is unknown.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleStalkFunctor|stalkFunctor.*SheafOfModules|module stalk functor in Mathlib/Algebra/Category/ModuleCat, WeilConjectures and lean/Sheaf",
+   "results": "No matching declaration in any of the three source trees. Reviewer R-ksc0915: the source has the scheme-only linear stalk map AlgebraicGeometry.Scheme.Modules.Hom.stalkLinearMap (WeilConjectures/AlgebraicGeometry/Modules/FlatPullbackStalk.lean), no ringed-space version and no functor; the DAG node def-weil-pbc-module-stalk carries the stalk module and the linear stalk map (Mathlib match: TopCat.Presheaf.stalk with the PresheafOfModules stalk instance), now cited; this node adds only the functor packaging and its degreewise application.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-kflat-stalk-criterion",
+  "date": "2026-10-11",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the stalkwise criterion used to show that derived pullback preserves K-flat resolutions",
+   "via": [
+    "lem-pc-kflat-stalk-criterion",
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-proper-derived-direct-image-composition",
+    "lem-sc-proper-upper-shriek-composition",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ModuleStalkFunctor",
+  "declaration": "AlgebraicGeometry.RingedSpace.moduleStalkFunctor",
+  "declarations": [
+   "AlgebraicGeometry.RingedSpace.stalkMap_linear",
+   "AlgebraicGeometry.RingedSpace.moduleStalkMap",
+   "AlgebraicGeometry.RingedSpace.moduleStalkMap_id",
+   "AlgebraicGeometry.RingedSpace.moduleStalkMap_comp",
+   "AlgebraicGeometry.RingedSpace.moduleStalkFunctor",
+   "AlgebraicGeometry.RingedSpace.moduleStalkFunctor_preservesZeroMorphisms_proof",
+   "AlgebraicGeometry.RingedSpace.moduleStalkFunctor_preservesZeroMorphisms"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ModuleStalkFunctor.lean",
+  "statement": "def moduleStalkFunctor : Modules X ⥤ ModuleCat.{u} (X.presheaf.stalk x)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ksc0915",
+  "group": "K1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ksc0915",
+  "group": "K1",
+  "result": "fix",
+  "note": "X:RingedSpace.{v} (Zariski, as G1) = ringed space; K: CochainComplex (SheafOfModules X.sheaf) Z = complex of O_X-modules; K.IsKFlat = landed H12; RHS forall x, forall acyclic F of ModuleCat(stalk x), Acyclic(mapBifunctor F K_x curriedTensor) = M1 inline form; K_x via moduleStalkFunctor over Mathlib TopCat.Presheaf.stalk + PresheafOfModules stalk Module instance; iff as node; universes v throughout; docstring = node's two proof steps. FIX: new node def-pc-module-stalk-functor had stmt_deps [] though built from def-weil-pbc-module-stalk (a DAG node carrying the stalk module and linear stalk map), def-weil-sheaf-of-modules-category, def-pc-cochain-complex-modules: cited; private Modules/stalkAddMap given blueprint docstrings; unused import Homology.Additive moved from ModuleStalkFunctor to KFlatStalkCriterion (where mapHomologicalComplex is used)"
+ }
+}
