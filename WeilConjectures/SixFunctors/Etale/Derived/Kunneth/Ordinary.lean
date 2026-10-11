@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # The Künneth map in ordinary étale cohomology
@@ -166,6 +167,193 @@ def HasFiniteCohomologicalDimensionMorphism {Y : Scheme.{u}} (f : X ⟶ Y) : Pro
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj F)))
 
 end Constant
+
+end Etale
+
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+open Scheme
+
+namespace Etale
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- The derived pullback along the identity is the identity: `L(𝟙 X)^* ≅ 𝟭`. -/
+noncomputable def leftDerivedUpperStarId (X : Scheme.{u}) :
+    L((𝟙 X)^*[ModuleCat.{u + 1} Λ]) ≅ 𝟭 _ :=
+  leftDerivedUpperStarIsoMapDerivedCategory _ (𝟙 X) ≪≫
+    Functor.mapDerivedCategoryNatIso (Etale.upperStarId _ X) ≪≫
+      Functor.mapDerivedCategoryIdIso _
+
+section Inputs
+
+/-- Blueprint `lem-kun-0f10`: finite cohomological dimension of finite-type morphisms, part (1).
+
+Let `K` be a field and `f : X ⟶ Y` a morphism between `K`-schemes of finite type. For a torsion
+coefficient ring `Λ`, the higher direct images `R^q f_*` of étale sheaves of `Λ`-modules vanish
+in all large degrees `q`. -/
+theorem hasFiniteCohomologicalDimensionMorphism (hΛ : IsAddTorsion Λ) {K : Type u} [Field K]
+    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) (_hf : f ≫ aY = aX) :
+    HasFiniteCohomologicalDimensionMorphism Λ f :=
+  sorry
+
+/-- Blueprint `lem-kun-0f10`: finite cohomological dimension of finite-type morphisms, part (2).
+
+Over a separably closed field `K`, a `K`-scheme `X` of finite type has finite étale
+cohomological dimension: for a torsion coefficient ring `Λ`, `H^q(X, F) = 0` for every étale
+sheaf `F` of `Λ`-modules and all large `q`. -/
+theorem hasFiniteCohomologicalDimension_of_isSepClosed (hΛ : IsAddTorsion Λ) {K : Type u}
+    [Field K] [IsSepClosed K] {X : Scheme.{u}} (aX : X ⟶ Spec (.of K))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] :
+    HasFiniteCohomologicalDimension Λ X :=
+  sorry
+
+/-- Blueprint `lem-kun-0f12`: tensor product with a constant complex.
+
+Let `X` be a quasi-compact quasi-separated scheme of finite cohomological dimension and `Λ` a
+torsion ring. For `E ∈ D(X_ét, Λ)` and `C ∈ D(Λ)`,
+
+`RΓ(X, E) ⊗ᴸ C ≅ RΓ(X, E ⊗ᴸ C_X)`,
+
+where `C_X` is the constant complex (`AlgebraicGeometry.Etale.constantFunctor`). -/
+theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_constantFunctor
+    (hΛ : IsAddTorsion Λ) (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
+    (hX : HasFiniteCohomologicalDimension Λ X)
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (C : DerivedCategory (ModuleCat.{u + 1} Λ)) :
+    Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj E ⊗ C ≅
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj E).obj ((constantFunctor Λ X).obj C))) :=
+  sorry
+
+/-- Blueprint `lem-kun-0f1n`: base change for a pushforward tensored with an arbitrary complex.
+
+Let `K` be a field and `Λ` a finite ring whose exponent is invertible in `K`. For a diagram
+
+```
+  X <--p-- X' <--h-- Y
+  |        |         |
+  a        f'        e
+  v        v         v
+Spec K <-b- S' <--g-- T
+```
+
+of `K`-schemes of finite type with both squares cartesian, the base change map
+(`AlgebraicGeometry.Etale.tensorBaseChangeMap`)
+
+`Lp^* E ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Lp^* E ⊗ᴸ Le^* F)`
+
+is an isomorphism for all `E ∈ D(X_ét, Λ)` and `F ∈ D(T_ét, Λ)`, unbounded. -/
+theorem isIso_tensorBaseChangeMap [Finite Λ] {K : Type u} [Field K]
+    [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}
+    (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K)) (t : T ⟶ Spec (.of K))
+    [LocallyOfFiniteType a] [QuasiCompact a] [LocallyOfFiniteType b] [QuasiCompact b]
+    [LocallyOfFiniteType t] [QuasiCompact t]
+    (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') (_hg : g ≫ b = t)
+    (_sq₁ : IsPullback p f' a b) (sq₂ : IsPullback h e f' g)
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
+      ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) :=
+  sorry
+
+/-- Blueprint `lem-kun-pullback-constant`: the inverse image of a constant complex is the
+constant complex, `Lf^*(C_Y) ≅ C_X`. -/
+noncomputable def constantFunctorCompLeftDerivedUpperStarIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    constantFunctor Λ Y ⋙ L((f)^*[ModuleCat.{u + 1} Λ]) ≅ constantFunctor Λ X :=
+  sorry
+
+/-- Over a separably closed field `k`, every object `C` of `D((Spec k)_ét, Λ)` is the constant
+complex on its derived global sections: `C ≅ RΓ(Spec k, C)_{Spec k}`. -/
+theorem nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed {k : Type u}
+    [Field k] [IsSepClosed k]
+    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty (C ≅ (constantFunctor Λ (Spec (.of k))).obj
+      ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C)) :=
+  sorry
+
+end Inputs
+
+section Kunneth
+
+variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
+  [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}}
+  (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+  [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
+
+omit [HasInvertibleExponent Λ (Spec (.of k))] in
+/-- `RΓ(X, E ⊗ᴸ La_X^* C) ≅ RΓ(X, E) ⊗ᴸ RΓ(Spec k, C)` for a finite-type scheme `X` over a
+separably closed field `k`: the tensor product with a constant complex
+(`lem-kun-0f12`), through the identification of complexes on `Spec k` with constant complexes. -/
+theorem nonempty_iso_rightDerivedGlobalSections_derivedTensor_leftDerivedUpperStar
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj E ⊗
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C ≅
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj E).obj
+          ((L((aX)^*[ModuleCat.{u + 1} Λ])).obj C))) := by
+  have hΛ : IsAddTorsion Λ := isAddTorsion_of_finite
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedGlobalSections_derivedTensor_constantFunctor Λ hΛ X
+    (hasFiniteCohomologicalDimension_of_isSepClosed Λ hΛ aX) E
+    ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj C)
+  obtain ⟨e₂⟩ := nonempty_iso_constantFunctor_rightDerivedGlobalSections_of_isSepClosed Λ C
+  exact ⟨e₁ ≪≫ (rightDerivedGlobalSections _ X).mapIso (((derivedTensor _ X).obj E).mapIso
+    (((constantFunctorCompLeftDerivedUpperStarIso Λ aX).app _).symm ≪≫
+      (L((aX)^*[ModuleCat.{u + 1} Λ])).mapIso e₂.symm))⟩
+
+/-- Blueprint `thm-kun-0f1p`: the Künneth formula in étale cohomology.
+
+Let `k` be a separably closed field, `Λ` a finite ring whose exponent is invertible in `k`, and
+`X`, `Y` schemes of finite type over `k`. For a cartesian square
+
+```
+  W --p₂--> Y
+  |         |
+  p₁        a_Y
+  v         v
+  X --a_X-> Spec k
+```
+
+and all `E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)`, unbounded,
+
+`RΓ(X, E) ⊗ᴸ RΓ(Y, K) ≅ RΓ(W, Lp₁^* E ⊗ᴸ Lp₂^* K)`.
+
+Following the blueprint, it is the composite of the tensor product with a constant complex
+(`lem-kun-0f12`), of `RΓ(X, -)` applied to the base change map of `lem-kun-0f1n` for the
+diagram `X = X ⟵ W`, `Spec k = Spec k ⟵ Y`, and of the Leray isomorphisms. -/
+theorem nonempty_iso_kunneth_of_isSepClosed {W : Scheme.{u}} (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
+    (sq : IsPullback p₁ p₂ aX aY)
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj E ⊗
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y).obj K ≅
+      (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W).obj
+        (((derivedTensor (ModuleCat.{u + 1} Λ) W).obj
+            ((L((p₁)^*[ModuleCat.{u + 1} Λ])).obj E)).obj
+          ((L((p₂)^*[ModuleCat.{u + 1} Λ])).obj K))) := by
+  have := isIso_tensorBaseChangeMap Λ aX (𝟙 _) aY (𝟙 X) aX p₁ p₂ aY (Category.comp_id _)
+    (IsPullback.of_horiz_isIso (by simp)) sq E K
+  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedGlobalSections_derivedTensor_leftDerivedUpperStar Λ aX
+    E ((R((aY)_*[ModuleCat.{u + 1} Λ])).obj K)
+  let RΓ := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ)
+  let ι := leftDerivedUpperStarId Λ X
+  refine ⟨whiskerLeftIso _
+      ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ aY).app K).symm ≪≫ e₁ ≪≫
+    (RΓ X).mapIso (((derivedTensor _ X).mapIso (ι.app E).symm).app _ ≪≫
+      asIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) p₁ p₂ aX aY sq.w
+        ((L((𝟙 X)^*[ModuleCat.{u + 1} Λ])).obj E) K)) ≪≫
+    (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ p₁).app _ ≪≫
+    (RΓ W).mapIso (((derivedTensor _ W).mapIso
+      ((L((p₁)^*[ModuleCat.{u + 1} Λ])).mapIso (ι.app E))).app _)⟩
+
+end Kunneth
 
 end Etale
 
