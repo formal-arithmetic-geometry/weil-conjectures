@@ -1,11 +1,11 @@
 # Work queue
 
-527 items; claim with `tools/claim.py next <group> [--stage N]`.
+526 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (527)
+## Stage 2: nodes to state (526)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-zero-scheme-adjunction-base-change` | 1 | state |
 | `lem-pqf-leray-five-term` | 1 | state |
-| `lem-sc-affine-complement-finite-on-integral-curve` | 1 | state |
 | `lem-sc-ample-on-reduction-noetherian` | 1 | state |
 | `lem-sc-ample-square-zero-thickening` | 1 | state |
 | `lem-sc-ass-weakass-locally-noetherian` | 1 | state |
