@@ -206,5 +206,23 @@
   "item": "lem-weil-pbc-charpoly-locally-free-existence",
   "worker": "stage1",
   "summary": "Split along the indication of Stacks 09XI (3)=>(1), last paragraph (free case = charpoly of the matrix, general case glued by Algebra 00EJ, details omitted there; proof_origin agent). Seven steps: local charpolys chi_i of phi_{f_i} on the free M_{f_i}; a local comparison lemma (for any A->B inverting f_i, M(x)_A B is free of rank n with charpoly the image of chi_i), via the new Mathlib leaves lem-weil-pbc-localization-module-tensor (00DK, IsLocalizedModule.isBaseChange), lem-weil-pbc-module-base-change-transitive (00D2, AlgebraTensorModule.cancelBaseChange + LinearMap.baseChange_baseChange) and lem-weil-pbc-charpoly-free-module-properties (LinearMap.charpoly_toMatrix, LinearEquiv.charpoly_conj, Matrix.charpoly_monic, Basis.baseChange, LinearMap.charpoly_baseChange); agreement on overlaps A_{f_if_j}; coefficientwise gluing by the new Mathlib leaf lem-weil-pbc-standard-covering-glue (00EJ, Localization.existsUnique_algebraMap_eq_of_span_eq_top), which also gives monic of degree n; the characterizing property for any A->A' with M(x)A' free of rank n (the g_i=rho(f_i) generate the unit ideal of A', compare in each A'_{g_i}, injectivity by 00EJ (i)); uniqueness; free case. New definition leaf def-weil-pbc-charpoly-free-module (Matrix.charpoly). Statement unchanged; stmt_deps filled (they were empty). Mathlib has the characteristic polynomial only for finite free modules (re-checked). Existing lem-weil-pbc-cover-module-exact (00EK, unit sk-thm-reduction, not cited by sk-thm-p1) was not used, to keep the route; 00EJ got its own Mathlib leaf. Source repository: no Lean declaration for the locally free case."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.CharpolyLocallyFree",
+  "declaration": "Algebra.charpoly_locallyFree_exists_unique",
+  "file": "lean/Sheaf/Algebra/CharpolyLocallyFree.lean",
+  "statement": "theorem charpoly_locallyFree_exists_unique {A : Type u} {M : Type v} [CommRing A] [AddCommGroup M] [Module A M] {n r : ℕ} (f : Fin r → A) (hgen : Ideal.span (Set.range f) = ⊤) (hfree : ∀ i : Fin r, ∃ e : Module.Basis (Fin n) (Localization.Away (f i)) (LocalizedModule.Away (f i) M), True) (φ : M →ₗ[A] M) : let P : Polynomial A → Prop := fun χ ↦ ∀ (A' : Type (max u w)) [CommRing A'] (ρ : A →+* A'), letI : Algebra A A' := RingHom.toAlgebra ρ; ∀ e : Module.Basis (Fin n) A' (A' ⊗[A] M), χ.map ρ = (LinearMap.toMatrix e e (φ.baseChange A')).charpoly; ∃ χ : Polynomial A, (P χ ∧ ∀ χ' : Polynomial A, P χ' → χ' = χ) ∧ (∃ c : Fin n → A, χ = Polynomial.X ^ n + ∑ k : Fin n, Polynomial.C (c k) * Polynomial.X ^ (k : ℕ)) ∧ ((Nonempty (Module.Basis (Fin n) A M)) → ∀ e : Module.Basis (Fin n) A M, χ = (LinearMap.toMatrix e e φ).charpoly)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cle1430",
+  "group": "G1",
+  "result": "pass",
+  "note": "A comm ring/M module/phi endo; f : Fin r -> A spanning unit ideal; M_{f_i} free rank n over A_{f_i} (LocalizedModule.Away, Localization.Away); P: all CommRing A' in Type (max u w) with rho, all Fin n bases of A' (x)_A M, chi.map rho = charpoly(toMatrix (phi.baseChange A')); unique for P alone; X^n + sum_{k<n} c_k X^k; free case every basis; n=0, r=0 (zero ring), universes (localizations fit via ULift); Mathlib/source have charpoly only for free modules, no existing"
  }
 }
