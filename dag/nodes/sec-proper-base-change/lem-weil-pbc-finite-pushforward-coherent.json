@@ -210,5 +210,27 @@
  },
  "tool_uses": [
   "pqf-lem-coherent-ft-locnoeth"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePushforwardCoherent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isCoherent_pushforward_of_isFinite",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.isCoherent_pushforward_of_isFinite",
+   "AlgebraicGeometry.Scheme.Modules.isCoherent_unit_of_finite_to_locallyNoetherian"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePushforwardCoherent.lean",
+  "statement": "theorem isCoherent_pushforward_of_isFinite {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [IsLocallyNoetherian X] (F : Y.Modules) (hF : RingedSpace.IsCoherent Y.toRingedSpace F) : RingedSpace.IsCoherent X.toRingedSpace ((pushforward f).obj F) ∧ ∀ (U : X.Opens), IsAffineOpen U → Γ((pushforward f).obj F, U) = Γ(F, f ⁻¹ᵁ U) ∧ Module.Finite Γ(X, U) Γ((pushforward f).obj F, U)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpc1215",
+  "group": "C1",
+  "result": "pass",
+  "note": "f:Y⟶X [IsFinite f], [IsLocallyNoetherian X] (not inferable, tested), F:Y.Modules coherent via landed RingedSpace.IsCoherent; concl IsCoherent of Mathlib pushforward f ∧ ∀ affine U, Γ equality (rfl) ∧ Module.Finite Γ(X,U) with action = restriction along f.app U (rfl-checked); companion O_Y coherence = node's 'for instance F=O_Y'; node diff only adds lean record"
+ }
 }
