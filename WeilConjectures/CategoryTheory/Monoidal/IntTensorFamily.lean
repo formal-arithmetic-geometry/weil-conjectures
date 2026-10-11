@@ -74,9 +74,39 @@ end TensorInverse
 
 namespace IntTensorFamily
 
-variable {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
-
 variable (P : IntTensorFamily C)
+
+/-- The coherent family with objects `F`, a family of objects equal to `P.obj`, and with the
+identifications of `P` transported along this equality. -/
+def copy (F : ℤ → C) (hF : F = P.obj) : IntTensorFamily C where
+  obj := F
+  zeroIso := eqToIso (congrFun hF 0) ≪≫ P.zeroIso
+  addIso a b := eqToIso (by rw [hF]) ≪≫ P.addIso a b ≪≫ eqToIso (congrFun hF (a + b)).symm
+  zero_left m := by
+    subst hF
+    simpa using P.zero_left m
+  zero_right m := by
+    subst hF
+    simpa using P.zero_right m
+  assoc a b c := by
+    subst hF
+    simpa using P.assoc a b c
+
+@[simp]
+lemma copy_obj (F : ℤ → C) (hF : F = P.obj) : (P.copy F hF).obj = F :=
+  rfl
+
+lemma copy_zeroIso (F : ℤ → C) (hF : F = P.obj) :
+    (P.copy F hF).zeroIso = eqToIso (congrFun hF 0) ≪≫ P.zeroIso :=
+  rfl
+
+lemma copy_addIso (F : ℤ → C) (hF : F = P.obj) (a b : ℤ) :
+    (P.copy F hF).addIso a b =
+      eqToIso (by simp only [copy_obj, hF]) ≪≫ P.addIso a b ≪≫
+        eqToIso (congrFun hF (a + b)).symm :=
+  rfl
+
+variable {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
 
 /-- The image of a coherent family under a functor whose oplax monoidal structure maps are
 isomorphisms. -/
