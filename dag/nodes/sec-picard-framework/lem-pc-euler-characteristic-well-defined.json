@@ -168,5 +168,23 @@
   "pqf-lem-locnoeth-lft",
   "pqf-lem-coherent-ft-locnoeth"
  ],
- "reviewed": "2026-10-10 L: 5 steps along the paragraph after Varieties 0BEJ checked (proper gives separated, quasi-compact; coherent is quasi-coherent on the locally Noetherian X; finiteness by lem-pc-coherent-hi; vanishing of R^i f_* for i large and H^i = Gamma(S, R^i f_*) by the new 01XK node; chi a finite sum). tool_uses lem-pc-coherent-hi, pqf-lem-locnoeth-lft, pqf-lem-coherent-ft-locnoeth. New node lem-pc-cohomology-sections-affine-base (01XK, separated case; Lean exists_addEquiv_sections_higherDirectImage_H sorry_here recorded by the worker). Statement made self-contained. LeanSearch down."
+ "reviewed": "2026-10-10 L: 5 steps along the paragraph after Varieties 0BEJ checked (proper gives separated, quasi-compact; coherent is quasi-coherent on the locally Noetherian X; finiteness by lem-pc-coherent-hi; vanishing of R^i f_* for i large and H^i = Gamma(S, R^i f_*) by the new 01XK node; chi a finite sum). tool_uses lem-pc-coherent-hi, pqf-lem-locnoeth-lft, pqf-lem-coherent-ft-locnoeth. New node lem-pc-cohomology-sections-affine-base (01XK, separated case; Lean exists_addEquiv_sections_higherDirectImage_H sorry_here recorded by the worker). Statement made self-contained. LeanSearch down.",
+ "lean": {
+  "module": "Sheaf.Paper.EulerCharacteristicWellDefined",
+  "declaration": "AlgebraicGeometry.Scheme.eulerCharacteristic_wellDefined",
+  "file": "lean/Sheaf/Paper/EulerCharacteristicWellDefined.lean",
+  "statement": "theorem eulerCharacteristic_wellDefined (k : Type u) [Field k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsProper f] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) : (∀ i : ℕ, FiniteDimensional k ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace i).obj F))) ∧ Set.Finite {i : ℕ | ¬ IsZero ((RingedSpace.moduleCohomology X.toRingedSpace i).obj F)} ∧ ∃ n : ℕ, (∑ᶠ i : ℕ, (-1 : ℤ) ^ i * (Module.finrank k ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace i).obj F)) : ℤ)) = ∑ i ∈ Finset.range n, (-1 : ℤ) ^ i * (Module.finrank k ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace i).obj F)) : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
