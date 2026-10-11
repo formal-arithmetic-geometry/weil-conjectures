@@ -31,6 +31,16 @@ adjunction is the restriction of any ambient one.
 
 - `AlgebraicGeometry.ProEtale.comparisonUpperStarPlusEtaleOrigin`: `ν^*` as a functor from
   `D⁺(X_ét)` to the bounded below objects of étale origin in `D(X_proét)`; it is an equivalence.
+- `AlgebraicGeometry.ProEtale.ιCompRightDerivedLowerShriekCompIso` and its restriction
+  `AlgebraicGeometry.ProEtale.liftRightDerivedLowerShriekCompIso`: the composition isomorphism
+  `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on objects of étale origin.
+- `AlgebraicGeometry.ProEtale.liftRightDerivedUpperShriekCompIso` and
+  `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekPlusCompIso`: its mate
+  `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!`; that the units and counits are the pasted ones is
+  `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction_comp_eq`, on `Dctf`
+  `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction_comp_eq_of_finiteTor`.
+- `HasAmbientExceptionalRightAdjoint.compYonedaPlusEtaleOriginIso`: clause (a), the mate under the
+  ambient adjunctions on objects of étale origin.
 
 ## Main statements
 
@@ -56,10 +66,10 @@ adjunction is the restriction of any ambient one.
 
 ## Implementation notes
 
-The composition law of the pro-étale `Rf_!` is only available through the étale one
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`, which asserts that *some*
-isomorphism exists; this is why the mate statements are existential in the isomorphism of left
-adjoints. Being formal, they hold for every such isomorphism.
+The composition isomorphism of the pro-étale `Rf_!` on objects of étale origin,
+`AlgebraicGeometry.ProEtale.ιCompRightDerivedLowerShriekCompIso`, is transported from the étale
+one `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`, and the mate statements are about
+this isomorphism. The existential forms of these statements are kept as corollaries.
 
 Clause (a) of `sk-lem-sf-mate` takes the mate of "the composition isomorphism
 `R(gf)_! ≅ Rg_! Rf_!` of `sk-thm-sf-comp-composition`" on the *ambient* functors, but that node
@@ -137,19 +147,19 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}} (f :
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
   [QuasiCompact (f ≫ g)]
 
-/-- Blueprint `sk-thm-sf-comp-composition`, on the pro-étale site: the composition law
-`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the pro-étale derived lower shriek, as functors on the objects of
-`D(X_proét)` bounded below of étale origin, for finite coefficients. It is transported from the
-étale composition law `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp` along
-the compact-support comparison `Rf_! ν^* ≅ ν^* Rf^{ét}_!`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekComparisonIso`) and the equivalence
-`AlgebraicGeometry.ProEtale.comparisonUpperStarPlusEtaleOrigin`. -/
-theorem nonempty_iso_ι_comp_rightDerivedLowerShriek_comp :
-    Nonempty ((DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι ⋙
+/-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the pro-étale derived lower shriek,
+as functors on the objects of `D(X_proét)` bounded below of étale origin, for finite coefficients.
+It is transported from the étale composition isomorphism
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso` along the compact-support comparison
+`Rf_! ν^* ≅ ν^* Rf^{ét}_!` (`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekComparisonIso`)
+and the equivalence `AlgebraicGeometry.ProEtale.comparisonUpperStarPlusEtaleOrigin`: it is the
+unique isomorphism whose precomposition with that equivalence is the transported one. -/
+noncomputable def ιCompRightDerivedLowerShriekCompIso :
+    (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι ⋙
         R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
       (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι ⋙
-        R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) := by
-  obtain ⟨e⟩ := Etale.nonempty_iso_rightDerivedLowerShriek_comp Λ f g
+        R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ] :=
+  let e := Etale.rightDerivedLowerShriekCompIso Λ f g
   let Φ := comparisonUpperStarPlusEtaleOrigin (ModuleCat.{u + 1} Λ) X
   let ι := DerivedCategory.Plus.ι (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   let ιY := DerivedCategory.Plus.ι (C := Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -179,7 +189,19 @@ theorem nonempty_iso_ι_comp_rightDerivedLowerShriek_comp :
       Functor.isoWhiskerRight (rightDerivedLowerShriekComparisonIso _ f).symm
         R(g)_![ModuleCat.{u + 1} Λ] ≪≫
       Functor.associator _ _ _
-  exact ⟨(Φ.asEquivalence.congrLeft.fullyFaithfulInverse).preimageIso e'⟩
+  (Φ.asEquivalence.congrLeft.fullyFaithfulInverse).preimageIso e'
+
+/-- Blueprint `sk-thm-sf-comp-composition`, on the pro-étale site: the composition law
+`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the pro-étale derived lower shriek, as functors on the objects of
+`D(X_proét)` bounded below of étale origin, for finite coefficients. The isomorphism is
+`AlgebraicGeometry.ProEtale.ιCompRightDerivedLowerShriekCompIso`, transported from the étale
+composition isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`. -/
+theorem nonempty_iso_ι_comp_rightDerivedLowerShriek_comp :
+    Nonempty ((DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι ⋙
+        R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
+      (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι ⋙
+        R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) :=
+  ⟨ιCompRightDerivedLowerShriekCompIso Λ f g⟩
 
 variable {Λ}
 
@@ -198,6 +220,80 @@ variable (PX : ObjectProperty (_root_.DerivedCategory
   (hfg₁ : ∀ K, PX K → PZ ((R(f ≫ g)_![ModuleCat.{u + 1} Λ]).obj K))
   (hfg₂ : ∀ L, PZ L → PX ((R(f ≫ g)^![ModuleCat.{u + 1} Λ]).obj L))
 
+/-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of
+`AlgebraicGeometry.ProEtale.ιCompRightDerivedLowerShriekCompIso`, restricted to full
+subcategories `PX`, `PY`, `PZ` preserved by the lower shrieks, `PX` consisting of objects bounded
+below of étale origin. -/
+noncomputable def liftRightDerivedLowerShriekCompIso :
+    PZ.lift (PX.ι ⋙ R(f ≫ g)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hfg₁ _ K.property) ≅
+      PY.lift (PX.ι ⋙ R(f)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hf₁ _ K.property) ⋙
+        PZ.lift (PY.ι ⋙ R(g)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hg₁ _ K.property) :=
+  (PZ.fullyFaithfulι.whiskeringRight _).preimageIso
+    (Functor.isoWhiskerLeft (ObjectProperty.ιOfLE hPX) (ιCompRightDerivedLowerShriekCompIso Λ f g))
+
+/-- Blueprint `sk-lem-sf-mate`, clause (b), constructible form, on full subcategories `PX`, `PY`
+of objects bounded below of étale origin and `PZ` of bounded below objects, preserved by `Rf_!`,
+`Rg_!`, `R(f ≫ g)_!` and by `Rf^!`, `Rg^!`, `R(f ≫ g)^!`: the isomorphism
+`R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` which is the mate of the composition isomorphism
+`AlgebraicGeometry.ProEtale.liftRightDerivedLowerShriekCompIso` under the exceptional
+adjunctions of blueprint `sk-prop-sf-existence` (c)
+(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction`). -/
+noncomputable def liftRightDerivedUpperShriekCompIso :
+    PX.lift (PZ.ι ⋙ R(f ≫ g)^![ModuleCat.{u + 1} Λ]) (fun L ↦ hfg₂ _ L.property) ≅
+      PY.lift (PZ.ι ⋙ R(g)^![ModuleCat.{u + 1} Λ]) (fun L ↦ hg₂ _ L.property) ⋙
+        PX.lift (PY.ι ⋙ R(f)^![ModuleCat.{u + 1} Λ]) (fun L ↦ hf₂ _ L.property) :=
+  (conjugateIsoEquiv
+    ((rightDerivedUpperShriekAdjunction f PX PY hPX
+        (hPY.trans (DerivedCategory.plusEtaleOrigin_le_plus _ Y)) hf₁ hf₂).comp
+      (rightDerivedUpperShriekAdjunction g PY PZ hPY hPZ hg₁ hg₂))
+    (rightDerivedUpperShriekAdjunction (f ≫ g) PX PZ hPX hPZ hfg₁ hfg₂)
+    (liftRightDerivedLowerShriekCompIso f g PX PY PZ hPX hf₁ hg₁ hfg₁)).symm
+
+/-- Blueprint `sk-lem-sf-mate`, clause (b), constructible form, on full subcategories: transporting
+the adjunction `R(f ≫ g)_! ⊣ R(f ≫ g)^!` along the composition isomorphism
+`AlgebraicGeometry.ProEtale.liftRightDerivedLowerShriekCompIso` and its mate
+`AlgebraicGeometry.ProEtale.liftRightDerivedUpperShriekCompIso` gives the composite adjunction
+`Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`: the unit and counit of the composite adjunction are the pasted
+ones. -/
+theorem rightDerivedUpperShriekAdjunction_comp_eq :
+    ((rightDerivedUpperShriekAdjunction (f ≫ g) PX PZ hPX hPZ hfg₁ hfg₂).ofNatIsoLeft
+        (liftRightDerivedLowerShriekCompIso f g PX PY PZ hPX hf₁ hg₁ hfg₁)).ofNatIsoRight
+        (liftRightDerivedUpperShriekCompIso f g PX PY PZ hPX hPY hPZ hf₁ hf₂ hg₁ hg₂ hfg₁ hfg₂) =
+      (rightDerivedUpperShriekAdjunction f PX PY hPX
+          (hPY.trans (DerivedCategory.plusEtaleOrigin_le_plus _ Y)) hf₁ hf₂).comp
+        (rightDerivedUpperShriekAdjunction g PY PZ hPY hPZ hg₁ hg₂) :=
+  Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ _
+
+/-- Blueprint `sk-lem-sf-mate`, clause (b), units: under the mate
+`AlgebraicGeometry.ProEtale.liftRightDerivedUpperShriekCompIso`, the pasted unit
+`K ⟶ Rf^! Rg^! Rg_! Rf_! K` corresponds to the unit of `R(f ≫ g)_! ⊣ R(f ≫ g)^!`. -/
+lemma unit_comp_liftRightDerivedUpperShriekCompIso_inv_app (K : PX.FullSubcategory) :
+    ((rightDerivedUpperShriekAdjunction f PX PY hPX
+          (hPY.trans (DerivedCategory.plusEtaleOrigin_le_plus _ Y)) hf₁ hf₂).comp
+        (rightDerivedUpperShriekAdjunction g PY PZ hPY hPZ hg₁ hg₂)).unit.app K ≫
+        (liftRightDerivedUpperShriekCompIso f g PX PY PZ hPX hPY hPZ hf₁ hf₂ hg₁ hg₂ hfg₁
+          hfg₂).inv.app _ =
+      (rightDerivedUpperShriekAdjunction (f ≫ g) PX PZ hPX hPZ hfg₁ hfg₂).unit.app K ≫
+        (PX.lift (PZ.ι ⋙ R(f ≫ g)^![ModuleCat.{u + 1} Λ]) (fun L ↦ hfg₂ _ L.property)).map
+          ((liftRightDerivedLowerShriekCompIso f g PX PY PZ hPX hf₁ hg₁ hfg₁).hom.app K) := by
+  rw [liftRightDerivedUpperShriekCompIso, Iso.symm_inv, conjugateIsoEquiv_apply_hom]
+  exact unit_conjugateEquiv _ _ _ K
+
+/-- Blueprint `sk-lem-sf-mate`, clause (b), counits: under the mate
+`AlgebraicGeometry.ProEtale.liftRightDerivedUpperShriekCompIso`, the counit of
+`R(f ≫ g)_! ⊣ R(f ≫ g)^!` corresponds to the pasted counit `Rg_! Rf_! Rf^! Rg^! L ⟶ L`. -/
+lemma map_liftRightDerivedUpperShriekCompIso_inv_app_counit (L : PZ.FullSubcategory) :
+    (PZ.lift (PX.ι ⋙ R(f ≫ g)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hfg₁ _ K.property)).map
+        ((liftRightDerivedUpperShriekCompIso f g PX PY PZ hPX hPY hPZ hf₁ hf₂ hg₁ hg₂ hfg₁
+          hfg₂).inv.app L) ≫
+        (rightDerivedUpperShriekAdjunction (f ≫ g) PX PZ hPX hPZ hfg₁ hfg₂).counit.app L =
+      (liftRightDerivedLowerShriekCompIso f g PX PY PZ hPX hf₁ hg₁ hfg₁).hom.app _ ≫
+        ((rightDerivedUpperShriekAdjunction f PX PY hPX
+            (hPY.trans (DerivedCategory.plusEtaleOrigin_le_plus _ Y)) hf₁ hf₂).comp
+          (rightDerivedUpperShriekAdjunction g PY PZ hPY hPZ hg₁ hg₂)).counit.app L := by
+  rw [liftRightDerivedUpperShriekCompIso, Iso.symm_inv, conjugateIsoEquiv_apply_hom]
+  exact conjugateEquiv_counit _ _ _ L
+
 include hPX in
 /-- The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of
 `AlgebraicGeometry.ProEtale.nonempty_iso_ι_comp_rightDerivedLowerShriek_comp`, restricted to full
@@ -206,14 +302,14 @@ below of étale origin. -/
 theorem nonempty_iso_lift_rightDerivedLowerShriek_comp :
     Nonempty (PZ.lift (PX.ι ⋙ R(f ≫ g)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hfg₁ _ K.property) ≅
       PY.lift (PX.ι ⋙ R(f)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hf₁ _ K.property) ⋙
-        PZ.lift (PY.ι ⋙ R(g)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hg₁ _ K.property)) := by
-  obtain ⟨e⟩ := nonempty_iso_ι_comp_rightDerivedLowerShriek_comp Λ f g
-  exact ⟨(PZ.fullyFaithfulι.whiskeringRight _).preimageIso
-    (Functor.isoWhiskerLeft (ObjectProperty.ιOfLE hPX) e)⟩
+        PZ.lift (PY.ι ⋙ R(g)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hg₁ _ K.property)) :=
+  ⟨liftRightDerivedLowerShriekCompIso f g PX PY PZ hPX hf₁ hg₁ hfg₁⟩
 
-/-- Blueprint `sk-lem-sf-mate`, clause (b), constructible form, on full subcategories: let `PX`,
-`PY` be full subcategories of objects bounded below of étale origin and `PZ` one of bounded below
-objects, preserved by `Rf_!`, `Rg_!`, `R(f ≫ g)_!` and by `Rf^!`, `Rg^!`, `R(f ≫ g)^!`, so that the
+/-- The existential form of blueprint `sk-lem-sf-mate`, clause (b), constructible form, on
+full subcategories, a corollary of
+`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction_comp_eq`: let `PX`, `PY` be full
+subcategories of objects bounded below of étale origin and `PZ` one of bounded below objects,
+preserved by `Rf_!`, `Rg_!`, `R(f ≫ g)_!` and by `Rf^!`, `Rg^!`, `R(f ≫ g)^!`, so that the
 exceptional adjunctions of blueprint `sk-prop-sf-existence` (c) restrict to them
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction`). Then there is a composition
 isomorphism `e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of left adjoints whose mate
@@ -233,9 +329,9 @@ theorem exists_rightDerivedUpperShriekAdjunction_comp_eq :
           (rightDerivedUpperShriekAdjunction (f ≫ g) PX PZ hPX hPZ hfg₁ hfg₂) e).symm =
         (rightDerivedUpperShriekAdjunction f PX PY hPX
             (hPY.trans (DerivedCategory.plusEtaleOrigin_le_plus _ Y)) hf₁ hf₂).comp
-          (rightDerivedUpperShriekAdjunction g PY PZ hPY hPZ hg₁ hg₂) := by
-  obtain ⟨e⟩ := nonempty_iso_lift_rightDerivedLowerShriek_comp f g PX PY PZ hPX hf₁ hg₁ hfg₁
-  exact ⟨e, Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ e⟩
+          (rightDerivedUpperShriekAdjunction g PY PZ hPY hPZ hg₁ hg₂) :=
+  ⟨_, rightDerivedUpperShriekAdjunction_comp_eq f g PX PY PZ hPX hPY hPZ hf₁ hf₂ hg₁ hg₂ hfg₁
+    hfg₂⟩
 
 end Composition
 
@@ -267,39 +363,45 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}} (f :
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
   [QuasiCompact (f ≫ g)]
 
+/-- Blueprint `sk-lem-sf-mate`, clause (b), constructible form: the isomorphism
+`R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` of functors `D⁺(Z_proét) ⥤ D⁺(X_proét)`, for finite coefficients,
+which is the mate of the composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the bounded below
+objects of étale origin (`AlgebraicGeometry.ProEtale.ιCompRightDerivedLowerShriekCompIso`) under
+the exceptional adjunctions of blueprint `sk-prop-sf-existence` (c): it is
+`AlgebraicGeometry.ProEtale.liftRightDerivedUpperShriekCompIso` for the objects of étale origin
+over `X` and `Y` and the bounded below objects over `Z`, followed by the inclusion of the objects
+of étale origin into `D⁺(X_proét)`. That the unit and counit of the composite adjunction are the
+pasted ones is `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction_comp_eq` for the same
+data. -/
+noncomputable def rightDerivedUpperShriekPlusCompIso :
+    R(f ≫ g)^![ModuleCat.{u + 1} Λ]+ ≅
+      R(g)^![ModuleCat.{u + 1} Λ]+ ⋙ R(f)^![ModuleCat.{u + 1} Λ]+ :=
+  Functor.isoWhiskerRight
+    (liftRightDerivedUpperShriekCompIso f g (DerivedCategory.plusEtaleOrigin _ X)
+      (DerivedCategory.plusEtaleOrigin _ Y) DerivedCategory.TStructure.t.plus le_rfl le_rfl
+      le_rfl (fun _ hK ↦ hK.rightDerivedLowerShriek_obj f)
+      (fun _ hL ↦ plusEtaleOrigin_rightDerivedUpperShriek_obj f hL.plus)
+      (fun _ hK ↦ (hK.rightDerivedLowerShriek_obj g).plus)
+      (fun _ hL ↦ plusEtaleOrigin_rightDerivedUpperShriek_obj g hL)
+      (fun _ hK ↦ (hK.rightDerivedLowerShriek_obj (f ≫ g)).plus)
+      (fun _ hL ↦ plusEtaleOrigin_rightDerivedUpperShriek_obj (f ≫ g) hL))
+    (ObjectProperty.ιOfLE (DerivedCategory.plusEtaleOrigin_le_plus (ModuleCat.{u + 1} Λ) X))
+
 /-- Blueprint `sk-lem-sf-mate`, clause (b), constructible form: the mate of the composition
 isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the bounded below objects of étale origin, under the
 exceptional adjunctions of blueprint `sk-prop-sf-existence` (c), is an isomorphism
-`R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` of functors `D⁺(Z_proét) ⥤ D⁺(X_proét)`, for finite coefficients.
-That it is the mate, with the pasted unit and counit, is
-`AlgebraicGeometry.ProEtale.exists_rightDerivedUpperShriekAdjunction_comp_eq` for the objects of
-étale origin over `X` and `Y` and the bounded below objects over `Z`. -/
+`R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` of functors `D⁺(Z_proét) ⥤ D⁺(X_proét)`, for finite coefficients,
+namely `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekPlusCompIso`. -/
 theorem nonempty_iso_rightDerivedUpperShriekPlus_comp :
     Nonempty (R(f ≫ g)^![ModuleCat.{u + 1} Λ]+ ≅
-      R(g)^![ModuleCat.{u + 1} Λ]+ ⋙ R(f)^![ModuleCat.{u + 1} Λ]+) := by
-  have hle := DerivedCategory.plusEtaleOrigin_le_plus (ModuleCat.{u + 1} Λ)
-  have hf₁ : ∀ K, DerivedCategory.plusEtaleOrigin _ X K →
-      DerivedCategory.plusEtaleOrigin _ Y ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) :=
-    fun _ hK ↦ hK.rightDerivedLowerShriek_obj f
-  have hg₁ : ∀ K, DerivedCategory.plusEtaleOrigin _ Y K →
-      DerivedCategory.TStructure.t.plus ((R(g)_![ModuleCat.{u + 1} Λ]).obj K) :=
-    fun _ hK ↦ (hK.rightDerivedLowerShriek_obj g).plus
-  have hfg₁ : ∀ K, DerivedCategory.plusEtaleOrigin _ X K →
-      DerivedCategory.TStructure.t.plus ((R(f ≫ g)_![ModuleCat.{u + 1} Λ]).obj K) :=
-    fun _ hK ↦ (hK.rightDerivedLowerShriek_obj (f ≫ g)).plus
-  obtain ⟨e⟩ := nonempty_iso_lift_rightDerivedLowerShriek_comp f g _ _ _ le_rfl hf₁ hg₁ hfg₁
-  let adjf := rightDerivedUpperShriekAdjunction f _ _ le_rfl (hle Y) hf₁
-    (fun _ hL ↦ plusEtaleOrigin_rightDerivedUpperShriek_obj f hL.plus)
-  let adjg := rightDerivedUpperShriekAdjunction g _ _ le_rfl le_rfl hg₁
-    (fun _ hL ↦ plusEtaleOrigin_rightDerivedUpperShriek_obj g hL)
-  let adjfg := rightDerivedUpperShriekAdjunction (f ≫ g) _ _ le_rfl le_rfl hfg₁
-    (fun _ hL ↦ plusEtaleOrigin_rightDerivedUpperShriek_obj (f ≫ g) hL)
-  exact ⟨Functor.isoWhiskerRight (conjugateIsoEquiv (adjf.comp adjg) adjfg e).symm
-    (ObjectProperty.ιOfLE (hle X))⟩
+      R(g)^![ModuleCat.{u + 1} Λ]+ ⋙ R(f)^![ModuleCat.{u + 1} Λ]+) :=
+  ⟨rightDerivedUpperShriekPlusCompIso f g⟩
 
-/-- Blueprint `sk-lem-sf-mate`, clause (b), restriction to `Dctf`: as soon as `Rf_!`, `Rg_!`,
-`R(f ≫ g)_!` and `Rf^!`, `Rg^!`, `R(f ≫ g)^!` preserve the bounded constructible objects of finite
-Tor amplitude, the exceptional adjunctions restrict to `Dctf`, and the mate of a composition
+/-- The existential form of blueprint `sk-lem-sf-mate`, clause (b), restriction to `Dctf`, a
+corollary of `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction_comp_eq_of_finiteTor`:
+as soon as `Rf_!`, `Rg_!`, `R(f ≫ g)_!` and `Rf^!`, `Rg^!`, `R(f ≫ g)^!` preserve the bounded
+constructible objects of finite Tor amplitude, the exceptional adjunctions restrict to `Dctf`, and
+the mate of a composition
 isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the restricted functors is an isomorphism
 `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` of functors `Dctf(Z) ⥤ Dctf(X)` carrying the adjunction of `f ≫ g` to
 the composite adjunction. -/
@@ -339,6 +441,39 @@ theorem exists_rightDerivedUpperShriekAdjunction_comp_eq_of_finiteTor
           (rightDerivedUpperShriekAdjunction g _ _ (fun _ hK ↦ hK.plusEtaleOrigin)
             (fun _ hK ↦ hK.plus) hg₁ hg₂) :=
   exists_rightDerivedUpperShriekAdjunction_comp_eq f g _ _ _ _ _ _ hf₁ hf₂ hg₁ hg₂ hfg₁ hfg₂
+
+/-- Blueprint `sk-lem-sf-mate`, clause (b), restriction to `Dctf`: as soon as `Rf_!`, `Rg_!`,
+`R(f ≫ g)_!` and `Rf^!`, `Rg^!`, `R(f ≫ g)^!` preserve the bounded constructible objects of finite
+Tor amplitude, the exceptional adjunctions restrict to `Dctf`, and transporting the adjunction of
+`f ≫ g` along the restricted composition isomorphism
+`AlgebraicGeometry.ProEtale.liftRightDerivedLowerShriekCompIso` and its mate
+`AlgebraicGeometry.ProEtale.liftRightDerivedUpperShriekCompIso`, an isomorphism
+`R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` of functors `Dctf(Z) ⥤ Dctf(X)`, gives the composite adjunction: the
+unit and counit of the composite adjunction are the pasted ones. -/
+theorem rightDerivedUpperShriekAdjunction_comp_eq_of_finiteTor
+    (hf₁ : ∀ K, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+      DerivedCategory.constructibleFiniteTor _ Y ((R(f)_![ModuleCat.{u + 1} Λ]).obj K))
+    (hf₂ : ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L →
+      DerivedCategory.constructibleFiniteTor _ X ((R(f)^![ModuleCat.{u + 1} Λ]).obj L))
+    (hg₁ : ∀ K, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K →
+      DerivedCategory.constructibleFiniteTor _ Z ((R(g)_![ModuleCat.{u + 1} Λ]).obj K))
+    (hg₂ : ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z L →
+      DerivedCategory.constructibleFiniteTor _ Y ((R(g)^![ModuleCat.{u + 1} Λ]).obj L))
+    (hfg₁ : ∀ K, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+      DerivedCategory.constructibleFiniteTor _ Z ((R(f ≫ g)_![ModuleCat.{u + 1} Λ]).obj K))
+    (hfg₂ : ∀ L, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z L →
+      DerivedCategory.constructibleFiniteTor _ X ((R(f ≫ g)^![ModuleCat.{u + 1} Λ]).obj L)) :
+    ((rightDerivedUpperShriekAdjunction (f ≫ g) _ _ (fun _ hK ↦ hK.plusEtaleOrigin)
+          (fun _ hK ↦ hK.plus) hfg₁ hfg₂).ofNatIsoLeft
+        (liftRightDerivedLowerShriekCompIso f g _ _ _ (fun _ hK ↦ hK.plusEtaleOrigin) hf₁ hg₁
+          hfg₁)).ofNatIsoRight
+        (liftRightDerivedUpperShriekCompIso f g _ _ _ (fun _ hK ↦ hK.plusEtaleOrigin)
+          (fun _ hK ↦ hK.plusEtaleOrigin) (fun _ hK ↦ hK.plus) hf₁ hf₂ hg₁ hg₂ hfg₁ hfg₂) =
+      (rightDerivedUpperShriekAdjunction f _ _ (fun _ hK ↦ hK.plusEtaleOrigin)
+          (fun _ hK ↦ hK.plus) hf₁ hf₂).comp
+        (rightDerivedUpperShriekAdjunction g _ _ (fun _ hK ↦ hK.plusEtaleOrigin)
+          (fun _ hK ↦ hK.plus) hg₁ hg₂) :=
+  rightDerivedUpperShriekAdjunction_comp_eq f g _ _ _ _ _ _ hf₁ hf₂ hg₁ hg₂ hfg₁ hfg₂
 
 end BoundedBelow
 
@@ -475,11 +610,51 @@ omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Monoida
   [Abelian.HasFunctorialFlatResolution A] in
 /-- Blueprint `sk-lem-sf-mate`, clause (a), with the composition law of
 `sk-thm-sf-comp-composition`: if `f`, `g` and `f ≫ g` carry the ambient exceptional right adjoint
-datum, the mate of the composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the objects
-bounded below of étale origin (`nonempty_iso_ι_comp_rightDerivedLowerShriek_comp`, which is
-where blueprint `sk-thm-sf-comp-composition` provides it) under the ambient adjunctions is a
-natural isomorphism `Hom(K, R(f ≫ g)^× L) ≅ Hom(K, Rf^× Rg^× L)`, natural in `L ∈ D(Z_proét)` and
-in `K` bounded below of étale origin. It is the composite of the adjunction bijection of
+datum, the mate, under the ambient adjunctions, of the composition isomorphism
+`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the objects bounded below of étale origin
+(`AlgebraicGeometry.ProEtale.ιCompRightDerivedLowerShriekCompIso`, transported from
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`): the natural isomorphism
+`Hom(K, R(f ≫ g)^× L) ≅ Hom(K, Rf^× Rg^× L)`, natural in `L ∈ D(Z_proét)` and in `K` bounded below
+of étale origin, composed of the adjunction bijection of `R(f ≫ g)_! ⊣ R(f ≫ g)^×`, the
+composition isomorphism, and the adjunction bijection of the pasted adjunction
+`Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`. The ambient composition law on all of `D(X_proét)` is not available,
+so the ambient isomorphism `HasAmbientExceptionalRightAdjoint.compIso` takes the composition
+isomorphism as an argument; this is its canonical form on the objects of étale origin. -/
+noncomputable def HasAmbientExceptionalRightAdjoint.compYonedaPlusEtaleOriginIso
+    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)]
+    (hf : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) f)
+    (hg : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) g)
+    (hfg : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) (f ≫ g)) :
+    (@Functor.rightAdjoint _ _ _ _ (R(f ≫ g)_![ModuleCat.{u + 1} Λ])
+          hfg.isLeftAdjoint ⋙ yoneda) ⋙
+        (Functor.whiskeringLeft _ _ _).obj
+          (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι.op ≅
+      ((@Functor.rightAdjoint _ _ _ _ (R(g)_![ModuleCat.{u + 1} Λ]) hg.isLeftAdjoint ⋙
+          @Functor.rightAdjoint _ _ _ _ (R(f)_![ModuleCat.{u + 1} Λ]) hf.isLeftAdjoint) ⋙
+          yoneda) ⋙
+        (Functor.whiskeringLeft _ _ _).obj
+          (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι.op :=
+  let e := ιCompRightDerivedLowerShriekCompIso Λ f g
+  Functor.isoWhiskerRight hfg.adjunction.compYonedaIso _ ≪≫
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) ≪≫
+    Functor.isoWhiskerLeft yoneda ((Functor.whiskeringLeft _ _ _).mapIso (NatIso.op e)).symm ≪≫
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _) : _ ≅ (yoneda ⋙ (Functor.whiskeringLeft _ _ _).obj
+      (R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]).op) ⋙
+      (Functor.whiskeringLeft _ _ _).obj
+        (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι.op) ≪≫
+    (Functor.isoWhiskerRight (hf.adjunction.comp hg.adjunction).compYonedaIso _).symm
+
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] in
+/-- The existential form of blueprint `sk-lem-sf-mate`, clause (a), a corollary of
+`AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint.compYonedaPlusEtaleOriginIso`: if
+`f`, `g` and `f ≫ g` carry the ambient exceptional right adjoint datum, the mate of the
+composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the objects bounded below of étale origin
+under the ambient adjunctions is a natural isomorphism
+`Hom(K, R(f ≫ g)^× L) ≅ Hom(K, Rf^× Rg^× L)`, natural in `L ∈ D(Z_proét)` and in `K` bounded
+below of étale origin. It is the composite of the adjunction bijection of
 `R(f ≫ g)_! ⊣ R(f ≫ g)^×`, the composition isomorphism, and the adjunction bijection of the
 pasted adjunction `Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`. -/
 theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_yoneda_comp_whiskeringLeft
@@ -497,16 +672,9 @@ theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_yoneda_comp_whiskeri
           @Functor.rightAdjoint _ _ _ _ (R(f)_![ModuleCat.{u + 1} Λ]) hf.isLeftAdjoint) ⋙
           yoneda) ⋙
         (Functor.whiskeringLeft _ _ _).obj
-          (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι.op) := by
-  obtain ⟨e⟩ := nonempty_iso_ι_comp_rightDerivedLowerShriek_comp Λ f g
-  exact ⟨Functor.isoWhiskerRight hfg.adjunction.compYonedaIso _ ≪≫
-    NatIso.ofComponents (fun _ ↦ Iso.refl _) ≪≫
-    Functor.isoWhiskerLeft yoneda ((Functor.whiskeringLeft _ _ _).mapIso (NatIso.op e)).symm ≪≫
-    (NatIso.ofComponents (fun _ ↦ Iso.refl _) : _ ≅ (yoneda ⋙ (Functor.whiskeringLeft _ _ _).obj
-      (R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]).op) ⋙
-      (Functor.whiskeringLeft _ _ _).obj
-        (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι.op) ≪≫
-    (Functor.isoWhiskerRight (hf.adjunction.comp hg.adjunction).compYonedaIso _).symm⟩
+          (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι.op) :=
+  ⟨HasAmbientExceptionalRightAdjoint.compYonedaPlusEtaleOriginIso f g hf hg hfg⟩
+
 end Ambient
 
 end AlgebraicGeometry.ProEtale
