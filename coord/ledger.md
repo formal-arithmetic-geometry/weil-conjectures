@@ -3088,3 +3088,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:20 L: merged deliver/H1/def-pc-derived-base-change-map (reviewer FIX; first push; new nodes: 0)
 - 00:20 UTC L: H1 def-pc-derived-base-change-map FIX f3c938956 (R-dbc0019; composite retyped, source moved to cohomology.tex Remark 08HY).
 - 00:21 L: merged deliver/H1/lem-sc-pic-restriction-boundary (reviewer FIX; first push; new nodes: 0)
+- 00:21 UTC L: H1 pic-restriction-boundary FIX 06530a3ec (R-prb0020).
