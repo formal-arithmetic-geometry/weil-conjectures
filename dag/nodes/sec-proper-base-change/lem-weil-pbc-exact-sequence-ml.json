@@ -232,5 +232,23 @@
   "worker": "stage1",
   "summary": "Read Homology 070D (homology.tex 7761--7807) and 070C (7733--7753) with 02N0 and Categories 05PU/05PV/0G2V. Statement kept (agrees with 070D; the hypotheses are those of the definition nodes). Proof split into 9 steps following the Stacks proof: dropping the indices below i_0 ('after renumbering', written out), the decomposition C_j = pi_j(X) (+) Z_j from 070C (new unsplit node lem-weil-pbc-essentially-constant-splitting, stated with the cone X of def-weil-pbc-essentially-constant-system instead of lim C_i, so that 0G2V is not needed), the case of an essentially zero quotient (inclusion chain of images with an arbitrary intermediate index instead of the subsequence n_j, and the omitted 'small detail' written out), the replacement of B by B' = v^{-1}(pi(X)), the exact sequences 0 -> A_i -> B'_i -> X -> 0 and of images, stabilization, conclusion. Only the forward direction of 070C is used; the ML of essentially constant systems and the converse of 070C are not. Mathlib searched again (LeanSearch, Loogle, LeanFinder, grep of CategoryTheory, local search): no statement on ML under exact sequences."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Homology 070D with the source's renumbering, the omitted 'small detail' (steps 3-4) and the decomposition of 070C written out; the new node lem-weil-pbc-essentially-constant-splitting (forward direction of 070C stated with the cone, no 0G2V) was checked against def-weil-pbc-essentially-constant-system clause by clause. No Mathlib match (searches recorded)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Homology 070D with the source's renumbering, the omitted 'small detail' (steps 3-4) and the decomposition of 070C written out; the new node lem-weil-pbc-essentially-constant-splitting (forward direction of 070C stated with the cone, no 0G2V) was checked against def-weil-pbc-essentially-constant-system clause by clause. No Mathlib match (searches recorded).",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MittagLefflerExactSequence",
+  "declaration": "CategoryTheory.ShortComplex.isMittagLeffler_iff_of_isEssentiallyConstant",
+  "file": "lean/Sheaf/CategoryTheory/MittagLefflerExactSequence.lean",
+  "statement": "theorem isMittagLeffler_iff_of_isEssentiallyConstant (S : ShortComplex (ℕᵒᵖ ⥤ AddCommGrpCat.{u})) (hS : ∀ n : ℕᵒᵖ, (S.map ((evaluation ℕᵒᵖ AddCommGrpCat).obj n)).ShortExact) (hC : S.X₃.IsEssentiallyConstant) : (S.X₁ ⋙ forget AddCommGrpCat).IsMittagLeffler ↔ (S.X₂ ⋙ forget AddCommGrpCat).IsMittagLeffler",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eml1010",
+  "group": "H1",
+  "result": "pass",
+  "note": "S : ShortComplex (ℕᵒᵖ ⥤ AddCommGrpCat) = A→B→C morphisms of inverse systems (def-weil-inverse-system ofOpSequence form, n↦n+1); hS levelwise ShortExact via evaluation = 0→A_i→B_i→C_i→0 exact (mono/exact/epi in Ab); hC recorded Functor.IsEssentiallyConstant (G1); conclusion Mathlib Functor.IsMittagLeffler after forget as def-weil-pbc-mittag-leffler-system's mathlib_match prescribes (ℕᵒᵖ morphisms k⟶j iff k≥j, decreasing images ⇒ Stacks c(i)); #check/#print clean, sorryAx only"
+ }
 }
