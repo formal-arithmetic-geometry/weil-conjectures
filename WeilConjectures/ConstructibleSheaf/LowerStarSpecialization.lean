@@ -232,6 +232,16 @@ lemma toPresheafFiber_specializationStalk
         ((sheafToPresheaf _ _).obj F) :=
   GrothendieckTopology.Point.toPresheafFiber_presheafFiberDesc _ _ _ _ _
 
+lemma specializationStalk_toPresheafFiber
+    (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : X.Etale)
+    (v : (pointSmallEtale (closedGeometricPoint A ≫ a)).fiber.obj V)
+    (z : ToType (((j)_*[ModuleCat.{u + 1} Λ].obj F).obj.obj (op V))) :
+    specializationStalk j a ι η hη F ((pointSmallEtale _).toPresheafFiber V v
+        ((sheafToPresheaf _ _).obj ((j)_*[ModuleCat.{u + 1} Λ].obj F)) z) =
+      (pointSmallEtale η).toPresheafFiber _ (specializationFiber j a ι η hη V v)
+        ((sheafToPresheaf _ _).obj F) z :=
+  ConcreteCategory.congr_hom (toPresheafFiber_specializationStalk j a ι η hη F V v) z
+
 /-- **Equivariance of the specialization map.** An endomorphism `τ` of `A` over `X` inducing `τ'`
 on the residue field and a compatible endomorphism `σ` of `Ω` fixing `η` act on the two stalks,
 and the specialization map intertwines these actions. -/
@@ -251,6 +261,48 @@ theorem stalkHom_comp_specializationStalk (τ : A →+* A)
     toPresheafFiber_specializationStalk, toPresheafFiber_specializationStalk_assoc,
     toPresheafFiber_pointSmallEtaleHom_sheafFiber_app,
     specializationFiber_pointSmallEtaleHom j a ι η hη τ hτa τ' hτ σ hσι hση]
+
+omit [IsStrictlyHenselianLocalRing A] in
+/-- In a locally noetherian scheme whose étale `X`-schemes have local rings that are domains,
+every étale neighbourhood of a geometric point is refined by one with irreducible underlying
+space. -/
+lemma exists_irreducibleSpace_refinement
+    (hX : ∀ (W : X.Etale) (w : W.left), IsDomain (W.left.presheaf.stalk w))
+    [IsLocallyNoetherian X] {Ω' : Type u} [Field Ω'] [IsSepClosed Ω'] (s : Spec (.of Ω') ⟶ X)
+    (V : X.Etale) (v : (pointSmallEtale s).fiber.obj V) :
+    ∃ (W : X.Etale) (w : (pointSmallEtale s).fiber.obj W) (k : W ⟶ V),
+      (pointSmallEtale s).fiber.map k w = v ∧ IrreducibleSpace W.left := by
+  have : IsLocallyNoetherian V.left := LocallyOfFiniteType.isLocallyNoetherian (Y := X) V.hom
+  obtain ⟨O, hO, hOirr⟩ := exists_isOpen_irreducibleSpace_of_isDomain_stalk (hX V)
+    (v.left (IsLocalRing.closedPoint Ω'))
+  obtain ⟨v', hv'⟩ := exists_pointSmallEtale_fiber_ofOpens s v O (by
+    rintro _ ⟨z, rfl⟩
+    have : Subsingleton (Spec (.of Ω')) := inferInstanceAs (Subsingleton (PrimeSpectrum Ω'))
+    rwa [@Subsingleton.elim (Spec (.of Ω')) this z (IsLocalRing.closedPoint Ω')])
+  exact ⟨Etale.ofOpens V O, v', Etale.ofOpensι V O, hv', hOirr⟩
+
+/-- **The specialization map is injective** for a locally constant sheaf `F` on an open `U` of a
+locally noetherian scheme `X` whose étale `X`-schemes have local rings that are domains (for
+instance `X` regular): two germs at the closed geometric point are represented over an
+irreducible étale neighbourhood `W`, whose punctured part `W ×_X U` is connected, and sections of
+a locally constant sheaf over a connected étale scheme are determined by their germ at one
+geometric point. -/
+theorem injective_specializationStalk [IsOpenImmersion j]
+    (hX : ∀ (W : X.Etale) (w : W.left), IsDomain (W.left.presheaf.stalk w))
+    [IsLocallyNoetherian X] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsLocallyConstantSheaf F] : Function.Injective (specializationStalk j a ι η hη F) := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  intro p₁ p₂ h
+  obtain ⟨V, v, z₁, z₂, rfl, rfl⟩ :=
+    (pointSmallEtale (closedGeometricPoint A ≫ a)).toPresheafFiber_jointly_surjective₂ p₁ p₂
+  obtain ⟨W, w, k, rfl, hW⟩ := exists_irreducibleSpace_refinement hX _ V v
+  rw [← GrothendieckTopology.Point.toPresheafFiber_w_apply,
+    ← GrothendieckTopology.Point.toPresheafFiber_w_apply] at h ⊢
+  rw [specializationStalk_toPresheafFiber, specializationStalk_toPresheafFiber] at h
+  have : PreconnectedSpace ((MorphismProperty.Over.pullback @Etale ⊤ j).obj W).left :=
+    @preconnectedSpace_pullback_of_irreducibleSpace _ _ _ hW W.hom j _
+  rw [injective_toPresheafFiber_of_preconnectedSpace F η _ h]
 
 end Specialization
 
