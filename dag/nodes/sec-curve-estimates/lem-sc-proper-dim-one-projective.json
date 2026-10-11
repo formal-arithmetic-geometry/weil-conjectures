@@ -124,5 +124,23 @@
  "reviewed": "2026-10-10 J1 (delivered); L: reviewed in full by a reviewer sub-agent (PASS): 0A26/0A25 read, 2 steps checked; tool_uses lem-weil-pbc-proper-closed-image (sk-thm-br).",
  "tool_uses": [
   "lem-weil-pbc-proper-closed-image"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.ProperProjective",
+  "declaration": "AlgebraicGeometry.isProjective_of_isProper_of_dim_le_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ProperProjective.lean",
+  "statement": "theorem isProjective_of_isProper_of_dim_le_one {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsProper f] (hdim : X.dim ≤ 1) : IsProjective f",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdp1227",
+  "group": "M1",
+  "result": "pass",
+  "note": "field k {k : Type u} [Field k]; X over k by explicit f : X ⟶ Spec (.of k) (acceptable form, same as landed sibling lem-sc-dim-one-quasi-projective); proper = Mathlib IsProper f (sep+univ closed+LFT, QC by instance); dim X ≤ 1 = X.dim ≤ 1 via stmt_dep def-pc-dimension (Scheme.dim, ⊥ on empty, = topologicalKrullDim by Scheme.dim_eq_topologicalKrullDim), matching the landed proof dep's hdim; conclusion IsProjective f = IsHProjective (∃ n:ℕ closed immersion into ℙ(ULift (Fin (n+1)); Spec k) over k) + QuasiCompact (implied by proper); N=0 and empty X allowed; docstring carries both proof steps and blueprint tag"
+ }
 }
