@@ -24,9 +24,72 @@
   "def-sbc-locally-finite-presentation",
   "def-amb-finite-locally-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because a finite morphism is affine by [def-weil-finite-integral-morphism], the inverse image of every affine open of $Y$ is affine. This supplies the affine morphism hypothesis needed below.",
+   "uses": [
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Modules/FinitePushforward.lean",
+    "place": "lines 214-223"
+   }
+  },
+  {
+   "text": "The finite locally free hypothesis on $\\mathcal F$ gives local freeness and quasi-coherence by [def-amb-finite-locally-free-module]. Applying the affine pushforward quasi-coherence statement [lem-weil-pbc-affine-pushforward-base-change] to $g$ and $\\mathcal F$ shows that $g_*\\mathcal F$ is quasi-coherent.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Modules/FinitePushforward.lean",
+    "place": "lines 218-223"
+   }
+  },
+  {
+   "text": "Let $V\\subseteq Y$ be affine and put $V'=g^{-1}(V)$. By Step 1, $V'$ is affine. The sections $M=\\Gamma(V',\\mathcal F)$ are finitely presented and projective over $B=\\Gamma(V',\\mathcal O_X)$ by [lem-pc-finite-flat-affine-sections-projective]. Put $A=\\Gamma(V,\\mathcal O_Y)$. Since $g$ is finite, $B$ is a finite $A$-module by [def-weil-finite-integral-morphism]; since $g$ is locally of finite presentation and $g(V')\\subseteq V$ with $V,V'$ affine, $A\\to B$ is of finite presentation by [lem-weil-pbc-lfp-affine-opens-finite-presentation]; since $g$ is flat, $B$ is a flat $A$-module by [lem-weil-pbc-flat-morphism-affine-criterion]. Hence [lem-pc-finite-flat-restriction-projective] makes $M$ finitely presented and projective as an $A$-module; projective modules are flat, and the $A$-module of sections of $g_*\\mathcal F$ on $V$ is exactly $M$ by the definition of direct image.",
+   "uses": [
+    "lem-pc-finite-flat-affine-sections-projective",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-pc-finite-flat-restriction-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Modules/FinitePushforward.lean",
+    "place": "lines 221-242"
+   }
+  },
+  {
+   "text": "The affine criterion [lem-pc-affine-sections-finite-locally-free-criterion], applied to the quasi-coherent sheaf from Step 2 and the finitely presented flat section module from Step 3 on every affine open $V$, yields that $g_*\\mathcal F$ is finite locally free over $\\mathcal O_Y$.",
+   "uses": [
+    "lem-pc-affine-sections-finite-locally-free-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/AlgebraicGeometry/Modules/FinitePushforward.lean",
+    "place": "lines 220-242"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-amb-finite-locally-free-module",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-pc-finite-flat-restriction-projective",
+  "lem-pc-affine-sections-finite-locally-free-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-flat-morphism-affine-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "WeilConjectures/AlgebraicGeometry/Modules/FinitePushforward.lean",
+  "place": "theorem isFiniteLocallyFree_pushforward, lines 218-242"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +114,45 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-flf-properties",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-the-hilbert-functor--definition-1"
+ "unit": "sk-the-hilbert-functor--definition-1",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-finite-flat-pushforward-locally-free",
+  "worker": "stage1",
+  "summary": "Split the finite-flat pushforward theorem into the affine reduction, affine pushforward quasi-coherence, affine section algebra, scalar-restriction algebra, and affine finite-locally-free criterion. The two source-repository affine lemmas are attached as sorry-free slopmaster2 declarations; the scalar-restriction lemma remains statement-only.",
+  "blueprint": "Realizes the ancestor proof step 'finite-flat pushforward is finite locally free' by following the source theorem's affine-open proof from lines 218-242.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Its quasi-coherence clause is the generic affine pushforward result used to make the target sheaf eligible for the affine criterion; no node in this Hilbert-functor unit supplies that tool."
+   },
+   {
+    "node": "lem-pc-finite-flat-affine-sections-projective",
+    "why": "The affine sections theorem is a generic locally-free module tool from the Modules unit, used to identify the section module on each affine preimage."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-pc-finite-flat-affine-sections-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffp0108",
+  "group": "M1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffp0108 (reviewer sub-agent of L); spot-checked: Read source FinitePushforward.lean 205-242 and LocallyFreeAffine 67-73/220-227; sorryfree.py OK for finitePresentation_projective_sections and isFiniteLocallyFree_of_isAffineOpen (attached, exact); Steps 1,2,4 hypotheses checked; citer lem-pc-flf-properties applies item to O_X, matches. FIX more, RETURN less: (1) C1 Step 3: finite presentation and flatness of Gamma(V)->Gamma(g^-1V) for an arbitrary affine V came from the pointwise definitions alone; now cites lem-weil-pbc-lfp-affine-opens-finite-presentation (Tag 01TQ) and lem-weil-pbc-flat-morphism-affine-criterion as tool uses; (2) B3 lem-pc-finite-flat-restriction-projective statement had a TAB where \\to was (JSON escape), restored \\to; (3) B3 lem-pc-affine-sections-finite-locally-free-criterion stmt_deps lacked def-amb-finite-locally-free-module, added. No duplicates of the three new nodes found by grep.; 3 file(s) fixed by the reviewer"
+ }
 }
