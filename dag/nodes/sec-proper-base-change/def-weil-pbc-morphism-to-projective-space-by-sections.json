@@ -127,5 +127,32 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.homOfGeneratingSections",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.homOfGeneratingSections",
+   "AlgebraicGeometry.ProjectiveSpace.integralHomOfGeneratingSections",
+   "AlgebraicGeometry.ProjectiveSpace.generatingSections_integralHom_exists",
+   "AlgebraicGeometry.ProjectiveSpace.integralHomOfGeneratingSections_spec",
+   "AlgebraicGeometry.ProjectiveSpace.homOfGeneratingSections_spec"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceHomOfGeneratingSections.lean",
+  "statement": "def homOfGeneratingSections (g : Y ⟶ S) (L : Y.Modules) [L.IsInvertible] (s : I → L.sections) (hs : Epi (L.freeHomEquiv.symm s)) : Y ⟶ ℙ(I; S)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Arbitrary finite homogeneous coordinate set, Epi generating hypothesis, selected universal integral pair, pullback pairing, projection identities and uniqueness. The functor-of-points integral model is identified with raw Proj by toProjInt.",
+  "fixed_by": "R-mps"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mps",
+  "group": "C1",
+  "result": "fix",
+  "note": "S,Y,g; finite index I (any finite set, n>=0, empty case); P(I;S) recorded ProjectiveSpace, q_n = over, pr_2 = toProjInt; L IsInvertible; s generating = recorded Epi freeHomEquiv form; psi = unique classified map of functor-of-points (exists_tensorPullbackAdjunction unit), composed with toProjInt to raw Proj; phi = pullback.lift g psi; spec: pr1=g, pr2=psi, uniqueness for any chi. Fixed: expanded file-local notations Z/pb in statements, removed unneeded local instance"
  }
 }
