@@ -72,5 +72,27 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nnb2336 (reviewer sub-agent of L); spot-checked: Statement vs blueprint order 371 word for word (B3 ok); stmt_deps = blueprint uses, both definitions (def-nagata-noetherian-inverse-system for N(S), def-nagata-glued-limit-comparison for kappa_S), no lemmas (C4 ok); citing nodes lemma-nagata-final-noetherian-base-system and def-nagata-final-descended-model use the same notion; duplicate search over dag/nodes for N_f (no other definition; lemma-nagata-final-noetherian-base-system is its property statement, class b no); no proof steps, citations empty; no Stacks tags. FIX more, RETURN less: (1) blueprint.same_as reverted [] -> null; (2) split_report date corrected 2026-10-11 -> 2026-10-10 (date -u 20:35 UTC; worker used +08:00 local date). Second reading missed both.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GluedLimitComparison",
+  "declaration": "AlgebraicGeometry.Scheme.NoetherianApproximation.gluedLimitComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.NoetherianApproximation",
+   "AlgebraicGeometry.Scheme.NoetherianApproximation.gluedLimitComparison"
+  ],
+  "statement": "def gluedLimitComparison {S : Scheme.{u}} (N : S.NoetherianApproximation)\n    [HasLimit N.D] : S ⟶ limit N.D",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "The node only aliases N(S) as N_f and retains its already constructed comparison. N is AlgebraicGeometry.Scheme.NoetherianApproximation in WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit (slopmaster2); its comparison is the recorded primary declaration in Sheaf.AlgebraicGeometry.GluedLimitComparison. No new type, choice of approximation, or comparison is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nfb1119",
+  "group": "E1",
+  "result": "pass",
+  "note": "existing alias: N_f = the supplied N : S.NoetherianApproximation (slopmaster2 structure, I : Type u same universe as S, cofiltered, finite-type-over-Z stages, affine transitions, limit cone; isNoetherian_obj), kappa_S = N.gluedLimitComparison (K1 a5be8ed2e, [HasLimit N.D], body limit.lift N.D (Cone.mk S N.pi)); no new definition (an identity def would be hollow/H4); citers lemma-nagata-final-noetherian-base-system and def-nagata-final-descended-model can take (N : S.NoetherianApproximation) and haveI : HasLimit N.D := <<<_, N.isLimit>>>"
  }
 }
