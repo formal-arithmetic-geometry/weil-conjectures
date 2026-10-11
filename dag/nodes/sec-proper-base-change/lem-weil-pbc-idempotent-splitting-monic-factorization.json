@@ -167,5 +167,23 @@
   "item": "lem-weil-pbc-idempotent-splitting-monic-factorization",
   "worker": "stage1",
   "summary": "Split following the proof of Stacks 09XI (3)=>(1) in more-algebra.tex, whose details Stacks omits. Five steps: setup (B free, CRT, via lem-weil-pbc-monic-quotient-free); the splitting B=eB+(1-e)B and its reduction mod I (elementary); constant ranks n1=deg g0, n2=deg h0 (rank locally constant: new Mathlib leaf lem-weil-pbc-finite-projective-rank-locally-constant = Module.isLocallyConstant_rankAtStalk; the clopen argument with I in the Jacobson radical written out; standard free cover: new unsplit node lem-weil-pbc-finite-projective-standard-free-cover, 00NX); g, h = CharPol on eB, (1-e)B (new definition def-weil-pbc-charpoly-locally-free, well-definedness from new unsplit lem-weil-pbc-charpoly-locally-free-existence, glued via 00EJ, characterized by base change to every A' over which the module is free of rank n, so reduction mod I and the free case are instances), f=gh via new unsplit lem-weil-pbc-charpoly-locally-free-direct-sum (free case Mathlib LinearMap.charpoly_prodMap) and new Mathlib leaf lem-weil-pbc-charpoly-mul-T-monic-quotient (charpoly_leftMulMatrix + AdjoinRoot.powerBasis' + minpoly.unique'); reductions mod I. Statement unchanged. Source repository: no declaration matching charpoly.*idempotent, IsIdempotentElem.*charpoly or AdjoinRoot.*charpoly."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonicFactorizationOfIdempotent",
+  "declaration": "Polynomial.exists_monic_factorization_of_idempotent",
+  "file": "lean/Sheaf/RingTheory/MonicFactorizationOfIdempotent.lean",
+  "statement": "theorem exists_monic_factorization_of_idempotent {A : Type u} [CommRing A] (I : Ideal A) (hI : I ≤ Ideal.jacobson (⊥ : Ideal A)) (f : A[X]) (hf : f.Monic) (g₀ h₀ : (A ⧸ I)[X]) (hg₀ : g₀.Monic) (hh₀ : h₀.Monic) (hcoprime : IsCoprime g₀ h₀) (hfactor : f.map (Ideal.Quotient.mk I) = g₀ * h₀) (e : AdjoinRoot f) (he : IsIdempotentElem e) (he₁ : AdjoinRoot.map (Ideal.Quotient.mk I) f g₀ (hfactor.symm ▸ dvd_mul_right g₀ h₀) e = 1) (he₀ : AdjoinRoot.map (Ideal.Quotient.mk I) f h₀ (hfactor.symm ▸ dvd_mul_left h₀ g₀) e = 0) : ∃ g h : A[X], g.Monic ∧ h.Monic ∧ f = g * h ∧ g.map (Ideal.Quotient.mk I) = g₀ ∧ h.map (Ideal.Quotient.mk I) = h₀",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ism1115",
+  "group": "E1",
+  "result": "pass",
+  "note": "A CommRing Type u; I <= jacobson bot; f Monic; g0 h0 Monic, IsCoprime, f.map mk I = g0*h0 (G1 55a7d6399 spellings); B = AdjoinRoot f; ebar via AdjoinRoot.map residues 1 mod g0, 0 mod h0 (CRT-injective, equals lift of ebar); e IsIdempotentElem; conclusion monic g h, f=gh, reductions g0 h0; names #check'd to Mathlib inside namespace Polynomial; hypotheses satisfiable (Z, I=0, X(X-1), e=1-X)"
  }
 }
