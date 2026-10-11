@@ -5573,3 +5573,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:36 L: merged deliver/N1/lem-weil-pbc-site-restriction-injectives (stage 2; reviewer PASS; first push; Sheaf.Paper.SiteRestrictionInjectives CategoryTheory.siteRestriction_injectives)
 - 18:37 L: merged deliver/N1/lem-weil-pbc-site-higher-direct-image-sheafified-presheaf (stage 2; reviewer FIX; first push; Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf CategoryTheory.siteHigherDirectImageSheafifiedPresheaf)
 - 18:37 L: merged deliver/M1/lem-sc-zariski-flasque-acyclic (stage 2; reviewer FIX; first push; Sheaf.Topology.FlasqueZariskiAcyclic TopCat.Sheaf.IsFlasque.subsingleton_H'_top)
+- 18:37 L: returned deliver/V1/lem-sc-flat-precompose-pus (reviewer RETURN: Reviewer R-fpp2. H3 (hollow conclusion): the node asserts that two CANONICAL morphisms (M,a(K))_X (x)^L_A A' -> (Lg_X^*M)
