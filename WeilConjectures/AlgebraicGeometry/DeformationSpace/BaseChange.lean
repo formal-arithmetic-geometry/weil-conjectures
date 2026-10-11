@@ -381,3 +381,38 @@ lemma deformationSpaceSection_comp_eq_of_isPullback [IsClosedImmersion s]
       deformationSpaceSection_deformationSpaceProj hs, Category.comp_id]
 
 end AlgebraicGeometry.Scheme.Hom
+
+namespace Ideal
+
+variable {C C' : Type*} [CommRing C] [CommRing C'] (f : C →+* C') (σ : Type*)
+
+lemma map_mvPolynomialOrigin_le :
+    (mvPolynomialOrigin C σ).map (MvPolynomial.map f) ≤ mvPolynomialOrigin C' σ :=
+  Ideal.map_le_iff_le_comap.mpr <| Ideal.span_le.mpr <| by
+    rintro _ ⟨i, rfl⟩
+    exact Ideal.subset_span ⟨i, (MvPolynomial.map_X f i).symm⟩
+
+/-- Towards `sk-lem-geometry` (5) on the level of rings: the chart
+`C[t][U_i] ≅ C[X_i][t, (X) t⁻¹]` of the deformation space of the origin is natural in the base
+ring `C`, so the extended Rees algebra of the origin commutes with arbitrary base change. -/
+lemma extendedReesAlgebraMap_comp_mvPolynomialExtendedReesAlgebraEquiv :
+    ((mvPolynomialOrigin C σ).extendedReesAlgebraMap (MvPolynomial.map f)
+      (mvPolynomialOrigin C' σ) (map_mvPolynomialOrigin_le f σ)).comp
+        (mvPolynomialExtendedReesAlgebraEquiv C σ).toRingHom =
+      (mvPolynomialExtendedReesAlgebraEquiv C' σ).toRingHom.comp
+        (MvPolynomial.map (Polynomial.mapRingHom f)) := by
+  refine MvPolynomial.ringHom_ext (fun p ↦ Subtype.ext ?_) fun i ↦ Subtype.ext ?_
+  · change LaurentPolynomial.mapRingHom _ (mvPolynomialToLaurent C σ (MvPolynomial.C p)) =
+      mvPolynomialToLaurent C' σ (MvPolynomial.map _ (MvPolynomial.C p))
+    rw [MvPolynomial.map_C, mvPolynomialToLaurent_C, mvPolynomialToLaurent_C,
+      LaurentPolynomial.mapRingHom_toLaurent, Polynomial.map_map, Polynomial.coe_mapRingHom,
+      Polynomial.map_map]
+    congr 2
+    ext x : 1
+    simp
+  · change LaurentPolynomial.mapRingHom _ (mvPolynomialToLaurent C σ (MvPolynomial.X i)) =
+      mvPolynomialToLaurent C' σ (MvPolynomial.map _ (MvPolynomial.X i))
+    rw [MvPolynomial.map_X, mvPolynomialToLaurent_X, mvPolynomialToLaurent_X, map_mul,
+      LaurentPolynomial.mapRingHom_C, LaurentPolynomial.mapRingHom_T, MvPolynomial.map_X]
+
+end Ideal
