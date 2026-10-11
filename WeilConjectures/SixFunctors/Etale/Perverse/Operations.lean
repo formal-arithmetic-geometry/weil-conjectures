@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
-public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
+public import WeilConjectures.SixFunctors.Etale.Perverse.AffinePushforward
 
 /-!
 # The perverse classes under the operations
@@ -304,8 +304,32 @@ theorem isPerverseLE_lowerShriek (d : ℕ) (f : X ⟶ Y) [IsAffineHom f] [Locall
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsPerverseLE n K) (hK' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     IsPerverseLE (n + d) ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) :=
-  -- TODO(adic): the fibrewise cohomological dimension bound and the generating blocks
-  sorry
+  supportCondition_shift_rightDerivedLowerShriek aY f d
+    (fun y ↦ ((f.fiberHomeo y).isHomeomorph.topologicalKrullDim_eq).symm.trans_le (hf y)) hK hK'.1
+
+/-- The cosupport side of Artin–Gabber reduced to the support estimate for the ordinary direct
+image: if `Rf_*` carries bounded constructible complexes `M` with `M[m]` satisfying the support
+condition to complexes with `(Rf_* M)[m + d]` satisfying it, then `Rf_!` carries
+`ᵖD^{≥n}(X) ∩ Dctf(X)` into `ᵖD^{≥n-d}(Y)`: by Verdier exchange `𝔻_Y Rf_! K ≅ Rf_* 𝔻_X K`, and
+`𝔻_X K` is bounded constructible with `(𝔻_X K)[-n]` satisfying the support condition.
+(blueprint: `lem-per-artin-gabber-affine-curve`, Step 3) -/
+theorem isPerverseGE_lowerShriek_of_supportCondition_rightDerivedLowerStar (d : ℕ) (f : X ⟶ Y)
+    [LocallyOfFiniteType f] [IsSeparated f] [HasCompactification f] [QuasiCompact f]
+    [HasCompactification (f ≫ aY)]
+    (hf : ∀ (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
+      boundedConstructible (ModuleCat.{u + 1} Λ) X M → ∀ m : ℤ, SupportCondition (M⟦m⟧) →
+        SupportCondition (((R((f)_*[ModuleCat.{u + 1} Λ])).obj M)⟦m + d⟧)) {n : ℤ}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : IsPerverseGE (f ≫ aY) n K) (hK' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
+    IsPerverseGE aY (n - d) ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) := by
+  let DK := (verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj (op K)
+  have h := hf DK (constructibleFiniteTor_verdierDual Λ (f ≫ aY) hK').1 (-n)
+    (SupportCondition.of_iso (verdierDualShiftIso _ (f ≫ aY) K n) hK)
+  obtain ⟨e⟩ := nonempty_iso_verdierDual_rightDerivedLowerShriek Λ f aY K
+  have hnd : -n + (d : ℤ) = -(n - d) := by ring
+  rw [hnd] at h
+  exact SupportCondition.of_iso ((shiftFunctor _ (-(n - d : ℤ))).mapIso e.symm ≪≫
+    (verdierDualShiftIso _ aY _ (n - d)).symm) h
 
 /-- **Artin–Gabber**, cosupport side: under the hypotheses of `isPerverseLE_lowerShriek`, the
 compactly supported pushforward carries `ᵖD^{≥n}(X) ∩ Dctf(X)` into `ᵖD^{≥n-d}(Y)`, by Verdier
@@ -317,8 +341,13 @@ theorem isPerverseGE_lowerShriek (d : ℕ) (f : X ⟶ Y) [IsAffineHom f] [Locall
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsPerverseGE (f ≫ aY) n K) (hK' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     IsPerverseGE aY (n - d) ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) :=
-  -- TODO(adic): Verdier exchange and the support estimate for `Rf_*`
-  sorry
+  isPerverseGE_lowerShriek_of_supportCondition_rightDerivedLowerStar aY d f
+    -- The support estimate for `Rf_*` along the affine `f`: Artin's affine vanishing theorem
+    -- (BBD 4.1.1; Stacks `0F0X`: `Rᵠf_*` of a sheaf supported on points of transcendence
+    -- degree `≤ a` is supported on points of transcendence degree `≤ a - q`), applied to the
+    -- homology sheaves of `M`. Neither it nor its inputs (Stacks `0F0U`, `0F0W`, and the
+    -- affine bound `thm-sc-affine-torsion-cd`) are available in the repository.
+    (fun _ _ _ _ ↦ sorry) hK hK'
 
 end LowerShriek
 

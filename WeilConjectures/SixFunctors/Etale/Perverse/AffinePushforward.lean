@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.ClosurePointDimension
 public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.ConstructibleSheaf.Pullback
@@ -13,7 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
-public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyDevissage
+public import WeilConjectures.SixFunctors.Etale.Perverse.StalkSupport
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!
@@ -146,5 +148,101 @@ theorem isZero_upperStar_homology_rightDerivedLowerShriek_singleFunctor
     D((t)^*[ModuleCat.{u + 1} Λ]).mapIso
       ((((i)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app G) ≪≫
     (((t)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app _
+
+
+/-- **Pointwise estimate behind Artin–Gabber.** Let `f : X ⟶ Y` be a compactifiable morphism of
+finite type to a scheme of finite type over a field, whose fibres have dimension at most `d`,
+`G` a constructible sheaf on `X` and `s : Spec Ω ⟶ Y` a point with values in a field, lying over
+`y ∈ Y`. If `s^* Rᵠf_! G ≠ 0`, then the support of `G` meets `f⁻¹(y)` in a set of some dimension
+`e ≤ d` with `q ≤ 2e`, and `dim {y}⁻ + e ≤ dim supp G`. -/
+theorem exists_le_of_not_isZero_upperStar_homology_rightDerivedLowerShriek_singleFunctor
+    {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] (d : ℕ)
+    (hf : ∀ y : Y, topologicalKrullDim (f ⁻¹' {y}) ≤ (d : WithBot ℕ∞))
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf G]
+    {Ω : Type u} [Field Ω] (s : Spec (.of Ω) ⟶ Y) (q : ℤ)
+    (hs : ¬ IsZero (((s)^*[ModuleCat.{u + 1} Λ]).obj
+      ((_root_.DerivedCategory.homologyFunctor _ q).obj ((R(f)_![ModuleCat.{u + 1} Λ]).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj G))))) :
+    ∃ e : ℕ, e ≤ d ∧ q ≤ 2 * e ∧ (sheafSupport G).Nonempty ∧
+      topologicalKrullDim (closure {s.base (IsLocalRing.closedPoint Ω)} : Set Y) + e ≤
+        topologicalKrullDim (sheafSupport G) := by
+  set y := s.base (IsLocalRing.closedPoint Ω)
+  have hW : (sheafSupport G ∩ f ⁻¹' {y}).Nonempty := by
+    by_contra hW
+    exact hs (isZero_upperStar_homology_rightDerivedLowerShriek_singleFunctor aY f G s 0 q
+      fun h ↦ absurd h hW)
+  have : Nonempty (sheafSupport G ∩ f ⁻¹' {y} : Set X) := hW.to_subtype
+  obtain ⟨e, hed, he⟩ := exists_topologicalKrullDim_eq_natCast
+    (((Topology.IsEmbedding.inclusion (Set.inter_subset_right (s := sheafSupport G))
+      ).isInducing.topologicalKrullDim_le).trans (hf y))
+  refine ⟨e, hed, ?_, hW.mono Set.inter_subset_left, ?_⟩
+  · by_contra hq
+    exact hs (isZero_upperStar_homology_rightDerivedLowerShriek_singleFunctor aY f G s e q
+      fun _ ↦ ⟨he.le, by lia⟩)
+  · exact Scheme.Hom.topologicalKrullDim_closure_singleton_add_le aY f
+      (isClosed_sheafSupport G) y e he.ge
+
+open _root_.DerivedCategory in
+/-- **Artin–Gabber**, support side, in the form proved here: for a compactifiable morphism
+`f : X ⟶ Y` of finite type to a scheme of finite type over a field, whose fibres have dimension
+at most `d`, and a bounded constructible `K` with `K[n]` satisfying the support condition,
+`(Rf_! K)[n + d]` satisfies the support condition. Affineness of `f` is not needed. A point `y`
+with nonzero stalk of `Hᵐ(Rf_! K)` has, by dévissage, a nonzero stalk of `Rᵐ⁻ᵇf_! Hᵇ K` for some
+`b`; then `dim {y}⁻ + e ≤ dim supp Hᵇ K ≤ n - b` for some `e ≤ d` with `m - b ≤ 2e`, whence
+`dim {y}⁻ ≤ n + d - m`. (blueprint: `lem-per-artin-gabber-affine-curve`) -/
+theorem DerivedCategory.supportCondition_shift_rightDerivedLowerShriek {X Y : Scheme.{u}}
+    (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] (d : ℕ)
+    (hf : ∀ y : Y, topologicalKrullDim (f ⁻¹' {y}) ≤ (d : WithBot ℕ∞)) {n : ℤ}
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.SupportCondition (K⟦n⟧))
+    (hK' : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
+    DerivedCategory.SupportCondition (((R(f)_![ModuleCat.{u + 1} Λ]).obj K)⟦n + d⟧) := by
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+  have : IsNoetherian Y := { __ := LocallyOfFiniteType.isLocallyNoetherian aY }
+  have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom (f ≫ aY)
+  have hN := boundedConstructible_rightDerivedLowerShriek Λ f (f ≫ aY) aY rfl K hK'
+  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hKc⟩ := hK'
+  intro i hi
+  rw [DerivedCategory.sheafSupport_homology_shift] at hi ⊢
+  have : IsConstructibleSheaf ((homologyFunctor _ (n + d + -i)).obj
+      ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)) := hN.2 _
+  -- the dimension of the closure of a point with nonzero stalk
+  have key (y : Y) (hy : y ∉ stalkZeroLocus ((homologyFunctor _ (n + d + -i)).obj
+      ((R(f)_![ModuleCat.{u + 1} Λ]).obj K))) :
+      ∃ δ : ℕ, topologicalKrullDim (closure {y} : Set Y) = δ ∧ (δ : ℤ) ≤ i := by
+    obtain ⟨Ω, _, _, s, rfl, hs⟩ := exists_not_isZero_upperStar_of_notMem_stalkZeroLocus _ hy
+    let Φ := R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((s)^*[ModuleCat.{u + 1} Λ])
+    have hΦ : ¬ IsZero ((homologyFunctor _ (n + d + -i)).obj (Φ.obj K)) := fun h ↦
+      hs (h.of_iso ((leftDerivedUpperStarHomologyFunctorIso _ s _).app _))
+    have : K.IsLE (a + ((b - a + 1).toNat : ℕ) - 1) :=
+      TStructure.t.isLE_of_le K b _ (by lia)
+    obtain ⟨c, hc⟩ :=
+      _root_.DerivedCategory.exists_not_isZero_homology_obj_singleFunctor Φ _ a K ha this _ hΦ
+    have : IsConstructibleSheaf ((homologyFunctor _ c).obj K) := hKc c
+    obtain ⟨e, hed, hq, hne, hdim⟩ :=
+      exists_le_of_not_isZero_upperStar_homology_rightDerivedLowerShriek_singleFunctor aY f d hf
+        ((homologyFunctor _ c).obj K) s _ fun h ↦
+          hc (h.of_iso ((leftDerivedUpperStarHomologyFunctorIso _ s _).app _).symm)
+    -- the support condition for `Hᶜ K`
+    have hG := hK (n - c)
+    have hnc : n + -(n - c) = c := by ring
+    rw [DerivedCategory.sheafSupport_homology_shift, hnc] at hG
+    obtain ⟨h₀, h₁⟩ := hG hne
+    have hdim' := hdim.trans h₁
+    have : Nonempty (closure {s.base (IsLocalRing.closedPoint Ω)} : Set Y) :=
+      ⟨⟨_, subset_closure rfl⟩⟩
+    obtain ⟨δ, -, hδ⟩ := exists_topologicalKrullDim_eq_natCast (N := (n - c).toNat)
+      ((le_add_of_nonneg_right (by exact_mod_cast Nat.zero_le e)).trans hdim')
+    rw [hδ] at hdim'
+    have : δ + e ≤ (n - c).toNat := by exact_mod_cast hdim'
+    exact ⟨δ, hδ, by lia⟩
+  obtain ⟨y, hy⟩ := (sheafSupport_nonempty_iff _).1 hi
+  obtain ⟨δ, -, hδi⟩ := key y hy
+  refine ⟨by lia, topologicalKrullDim_sheafSupport_le _ _ fun y hy ↦ ?_⟩
+  obtain ⟨δ, hδ, hδi⟩ := key y hy
+  rw [hδ]
+  exact_mod_cast (by lia : δ ≤ i.toNat)
 
 end AlgebraicGeometry.Etale
