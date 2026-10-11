@@ -3262,3 +3262,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:50 UTC L: C1 valuation-limit-qcoh-section-descent FIX c0e255b21 (R-lsd0148), F1 derived-splitting-unique FIX aaf0d5322 (R-dsu0149).
 - 01:51 L: merged deliver/E1/lem-pur-derived-functor-inverts-05sb (reviewer FIX; first push; new nodes: 0)
 - 01:51 UTC L: E1 derived-functor-inverts-05sb FIX eb5b511aa (R-dfi0150).
+- 01:57 L: merged deliver/F1/lem-pur-derived-functor-shift-05su (reviewer PASS; first push; new nodes: 0)
