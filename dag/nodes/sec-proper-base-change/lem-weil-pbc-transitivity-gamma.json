@@ -186,5 +186,23 @@
   "worker": "stage1",
   "summary": "Proof written from More on Algebra 07E2 = 07D5 (from 07D4 and 07BQ) + Algebra 07BV, applied to M/L (not M/K: the colimit is of the last map L -> M). Steps: (1) the six-term part from the existing Jacobi-Zariski node; (2) Tor^L_i(Omega_{L/K}, C) = 0 over the field L, so H_1(L_{L/K}) tensor C = H_1(NL_{L/K} tensor C) by the Tor clause of that node; (3) a = u o theta via the functoriality node, giving exactness at H_1(L_{M/K}); (4) injectivity at a finite stage C = L[Y]/(regular sequence) from a new node for 07D4 (restricted to a regular-sequence presentation); (5) passage to M elementwise: a relation in I_{M/K}^2 involves finitely many variables, so it lives at some stage C from the new 07BV node, using I_{C/K} = I_{M/K} cap K[C] (the 07BQ argument written out). Statement unchanged. New nodes: 07BV (unsplit), 07D4 regular-sequence case (unsplit). Mathlib: exactness at H_1(L_{M/K}) is Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat, the injectivity is absent; item not a leaf."
  },
- "reviewed": "pass (L, 2026-10-10): 5 steps follow 07E2 via 07D5/07BV: the Jacobi-Zariski node gives exactness from H_1(L_{M/K}) on; over the field L the Tor term vanishes so a = u o theta with theta an isomorphism; injectivity of u at finite stages C = L[Y]/(regular sequence) is the new 07D4 node, and the passage to M is the directed-union argument (07BQ written out) using the new 07BV node applied to M/L. Worker corrects the brief: 07BV is applied to M over L."
+ "reviewed": "pass (L, 2026-10-10): 5 steps follow 07E2 via 07D5/07BV: the Jacobi-Zariski node gives exactness from H_1(L_{M/K}) on; over the field L the Tor term vanishes so a = u o theta with theta an isomorphism; injectivity of u at finite stages C = L[Y]/(regular sequence) is the new 07D4 node, and the passage to M is the directed-union argument (07BQ written out) using the new 07BV node applied to M/L. Worker corrects the brief: 07BV is applied to M over L.",
+ "lean": {
+  "module": "Sheaf.RingTheory.TransitivityGamma",
+  "declaration": "Algebra.transitivityGamma",
+  "file": "lean/Sheaf/RingTheory/TransitivityGamma.lean",
+  "statement": "theorem transitivityGamma (K : Type u) (L : Type v) (M : Type w) [Field K] [Field L] [Field M] [Algebra K L] [Algebra L M] [Algebra K M] [IsScalarTower K L M] : Function.Injective ((H1Cotangent.map K K L M).liftBaseChange M) ∧ Function.Exact ((H1Cotangent.map K K L M).liftBaseChange M) (H1Cotangent.map K L M M) ∧ Function.Exact (H1Cotangent.map K L M M) (H1Cotangent.δ K L M) ∧ Function.Exact (H1Cotangent.δ K L M) (KaehlerDifferential.mapBaseChange K L M) ∧ Function.Exact (KaehlerDifferential.mapBaseChange K L M) (KaehlerDifferential.map K L M M) ∧ Function.Surjective (KaehlerDifferential.map K L M M)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }

@@ -5089,3 +5089,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:55 L: merged deliver/C1/def-weil-pbc-semi-representable-object (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.SemiRepresentableObject AlgebraicGeometry.Scheme.IsSemiRepresentableHypercover)
 - 14:56 L: merged deliver/P1/lem-weil-pbc-stalk-change-of-rings-tensor (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings SheafOfModules.stalkChangeOfRingsIso)
 - 14:56 L: merged deliver/V1/pqf-lem-associated-sections-localize (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AssociatedSectionsLocalize AlgebraicGeometry.associated_sections_localize)
+- 14:56 L: merged deliver/Q1/lem-weil-pbc-transitivity-gamma (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TransitivityGamma Algebra.transitivityGamma)
