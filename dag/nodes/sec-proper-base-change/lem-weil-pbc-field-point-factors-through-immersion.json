@@ -178,5 +178,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Four steps (residue fields along the closed-then-open factorization via the naturality node and a new unsplit node for closed immersions; existence of the lift through the open subscheme node and a new unsplit node for closed immersions; uniqueness by the monomorphism leaf) checked by L; new nodes cite their notions. Accepted by L."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldPointFactorsThroughImmersion",
+  "declaration": "AlgebraicGeometry.fieldPoint_factorsThrough_immersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldPointFactorsThroughImmersion.lean",
+  "statement": "theorem fieldPoint_factorsThrough_immersion {Z X : Scheme.{u}} (iota : Z ⟶ X) [IsImmersion iota] (z : Z) : IsIso (iota.residueFieldMap z) ∧ ∀ (K : Type u) [Field K] (s : Spec (.of K) ⟶ X), s.base ((default : Spec (.of K))) = iota.base z → (∃! s' : Spec (.of K) ⟶ Z, s' ≫ iota = s) ∧ ∀ s' : Spec (.of K) ⟶ Z, s' ≫ iota = s → s'.base ((default : Spec (.of K))) = z",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fpi1011"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpi1011",
+  "group": "H1",
+  "result": "fix",
+  "note": "Z X schemes, iota immersion [IsImmersion], z, x=iota.base z; (1) IsIso (iota.residueFieldMap z) kappa(x)->kappa(z); (2) all fields K, s : Spec K -> X with s(default)=x; FIX: ∃! over the conjunction (unique only among lifts at z) replaced by literal (∃! s', s' ≫ iota = s) ∧ every lift maps default to z; geometric point = K alg. closed specialization"
  }
 }
