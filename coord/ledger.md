@@ -3144,3 +3144,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:43 L: returned deliver/E1/lem-pc-termwise-tor-acyclic-derived-tensor (reviewer RETURN: 1. E (Step 1, wrong construction): lifting each d^n to chain maps P^{n,.}->P^{n+1,.} via lem-weil-pbc-projective-resolut)
 - 00:43 UTC L: returned: E1 termwise-tor-acyclic-derived-tensor 4e9fda3f4 (R-tta0042: lifted differentials give no double complex; fourth-quadrant bicomplex outside the cited spectral-sequence node).
 - 00:43 L: merged deliver/F1/lem-pc-affine-derived-base-change-comparison-map (reviewer FIX; after a return; new nodes: 1)
+- 00:43 UTC L: F1 affine-derived-base-change-comparison-map FIX 780f1520a re-push (R-cmp0042; duplicate K-flat node dropped, cites lem-pur-derived-change-of-rings).
