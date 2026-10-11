@@ -191,5 +191,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Node created by E1; statement reworded by the worker (same content: beta defined explicitly, alpha characterized by alpha_X tau = beta through the tilde-Gamma adjunction, the irrelevant pointer to 01CE(3) removed). Seven steps along the second proof of 01I8(1): beta well defined; alpha unique by lem-weil-pbc-affine-tilde-gamma-adjunction (1); on stalks, M -> (tilde M)_x is a localization at R \\ p (new unsplit node lem-weil-pbc-spec-tilde-stalk-localization, 01HV(7), kept unsplit since Mathlib's tilde.toStalk localization instance is for Mathlib's own module structure), localization commutes with tensor products (new Mathlib leaf, 00DL: IsLocalization.moduleTensorEquiv BaseChange.lean:132 with the IsLocalizedModule instances :119 and LocalizedModule/Basic.lean:567, verified), the stalk of the tensor product via lem-weil-pbc-module-stalk-tensor (tool use), two localizations of the same module are isomorphic, isomorphism on stalks implies isomorphism; (iii) from the unit isomorphism."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor",
+  "declaration": "AlgebraicGeometry.affine_tilde_tensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/AffineTildeTensor.lean",
+  "statement": "theorem affine_tilde_tensor (R : CommRingCat.{u}) (M N : ModuleCat.{u} R) : ∃ β : M ⊗[R] N →ₗ[R] Γ(tilde M ⊗ tilde N, ⊤), (∀ (m : M) (n : N), β (m ⊗ₜ[R] n) = Scheme.Modules.tmulSection (tilde.toOpen M ⊤ m) (tilde.toOpen N ⊤ n)) ∧ Function.Bijective β ∧ ∃ α : tilde (ModuleCat.of R (M ⊗[R] N)) ⟶ tilde M ⊗ tilde N, (∀ z : M ⊗[R] N, α.val.app (op ⊤) (tilde.toOpen (ModuleCat.of R (M ⊗[R] N)) ⊤ z) = β z) ∧ IsIso α ∧ ∀ α' : tilde (ModuleCat.of R (M ⊗[R] N)) ⟶ tilde M ⊗ tilde N, (∀ z : M ⊗[R] N, α'.val.app (op ⊤) (tilde.toOpen (ModuleCat.of R (M ⊗[R] N)) ⊤ z) = β z) → α' = α",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-att1356"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-att1356",
+  "group": "G1",
+  "result": "fix",
+  "note": "R : CommRingCat (zero ring incl.), X = Spec R, M N : ModuleCat R unrestricted; tildes = Mathlib tilde with tau = tilde.toOpen _ ⊤; sheaf tensor switched from explicit sheafification T to tilde M ⊗ tilde N of SheafOfModules.monoidalCategory (H4/H12) with a⊗b = Scheme.Modules.tmulSection; (i) beta R-linear with pure-tensor formula, alpha with alpha_X∘tau = beta and uniqueness; (ii) IsIso alpha; (iii) Bijective beta"
  }
 }
