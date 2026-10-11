@@ -5255,3 +5255,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:32 L: merged deliver/G1/lem-pc-essentially-constant-pro-hom-colimit (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit CategoryTheory.essentiallyConstantPro_hom_colimit)
 - 15:32 L: merged deliver/G1/lem-weil-pbc-cohomology-filtered-colimit (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit AlgebraicGeometry.Scheme.etaleCohomology_isColimit_of_isFiltered)
 - 15:32 L: merged deliver/E1/def-weil-pbc-sheaf-ext (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SheafExt AlgebraicGeometry.sheafExt)
+- 15:32 L: merged deliver/H1/lem-pur-essential-constant-pro-criterion-05py (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProCriterion CategoryTheory.homColimit_essentiallyConstantProDiagram)
