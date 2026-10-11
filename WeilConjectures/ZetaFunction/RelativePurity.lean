@@ -73,7 +73,9 @@ point `x` by `q_x⁻ᵈ`.
 
 universe u v
 
-open CategoryTheory Limits
+open CategoryTheory Limits Endofunctor
+
+open scoped AlgebraicGeometry.ProEtale
 
 namespace FrobeniusModule
 
@@ -122,6 +124,42 @@ theorem IsPureOfWeight.of_hasWeightsAtMost_dual {ι : K →+* ℂ} {q : ℕ} (hq
 end FrobeniusModule
 
 namespace AlgebraicGeometry
+
+namespace ProEtale
+
+
+
+variable {l : ℕ} [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K] {X Y : Scheme.{u}}
+
+/-- **Local constancy of smooth proper direct images** (Step 1 of
+`prop-zl-smooth-proper-relative-purity`, at the level of `ℓ`-adic sheaves on the geometric
+fibres): over an algebraically closed field `K` of characteristic `≠ ℓ`, the higher direct
+images `Rⁿf_* F` of a lisse `ℓ`-adic sheaf along a smooth proper morphism `f` are lisse.
+
+The blueprint proof chooses a lattice of `F`, shows that the torsion direct images
+`R^q f_* F_m` have bijective specialization maps by proper base change to strict henselizations
+and smooth base change along the closed fibre, and passes to the limit. -/
+theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper
+    (s : Y ⟶ Spec (.of K)) (f : X ⟶ Y) (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
+    [Smooth f] [IsProper f] {F : AdicSheaf l X} (hF : IsAdicLisseSheaf F) (n : ℤ) :
+    IsAdicLisseSheaf ((DerivedCategory.homologyFunctor _ n).obj
+      ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))) :=
+  sorry
+
+/-- **Local constancy over a point.** Over an algebraically closed field `K` of characteristic
+`≠ ℓ`, the higher direct images of a lisse `ℓ`-adic sheaf along any quasi-compact quasi-separated
+morphism of finite type `f : X ⟶ Spec K` are lisse: they are constructible by the finiteness
+theorem, and a constructible sheaf on the spectrum of a field is lisse. This is the case of the
+point of `isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`. -/
+theorem isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_isField
+    (f : X ⟶ Spec (.of K)) (hK : ringChar K ≠ l) [QuasiCompact f] [QuasiSeparated f]
+    [LocallyOfFiniteType f] {F : AdicSheaf l X} (hF : IsAdicLisseSheaf F) (n : ℤ) :
+    IsAdicLisseSheaf ((DerivedCategory.homologyFunctor _ n).obj
+      ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))) :=
+  (isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar (𝟙 _) f hK
+    hF.isAdicConstructibleSheaf n).isAdicLisseSheaf_of_isField
+
+end ProEtale
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
@@ -226,20 +264,38 @@ theorem isMixedOfWeightsAtMost_higherLowerStar_of_isProper {F : WeilSheaf k₀ l
   (hasDirectImageWeightBound_over_finiteField ι f w F hF i).of_iso
     (higherLowerShriekObjIsoOfIsProper f i F)
 
+omit [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **Local constancy** (Step 1 of `prop-zl-smooth-proper-relative-purity`, second half of
 clause (a)): for a smooth proper morphism `f` and a lisse Weil sheaf `F`, the higher direct
-images `Rⁱf₀*F` are lisse.
-
-The proof of the blueprint reduces, on a lattice, to the torsion sheaves `R^q f_* F_n`; these
-are constructible, and proper base change to the strict henselizations of `Y` together with
-smooth base change along `X' ⟶ Y'` shows that all their specialization maps are isomorphisms.
-This needs proper and smooth base change for the `ℓ`-adic pro-étale sheaves underlying Weil
-sheaves, and the comparison of `Rf_*` of the lattice with the limit of its reductions, which the
-repository does not provide yet. -/
+images `Rⁱf₀*F` are lisse. The underlying `ℓ`-adic sheaf of `Rⁱf₀*F` is the higher direct image
+`Rⁱf̄_* F̄` along the base change `f̄` to the geometric fibres, forgetting the Weil structure
+commuting with right derivation; so this is
+`ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`. -/
 theorem isLisse_higherLowerStar_of_smooth_of_isProper [hs : Smooth f] {F : WeilSheaf k₀ l X}
     (hF : F.IsLisse)
-    (i : ℕ) : ((higherLowerStar f i).obj F).IsLisse :=
-  sorry
+    (i : ℕ) : ((higherLowerStar f i).obj F).IsLisse := by
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have : Smooth (Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀)))) :=
+    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @Smooth) f _ hs
+  have : IsProper (Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀)))) :=
+    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsProper) f _ ‹_›
+  let e : (IsoAlgebra.forget _).mapDerivedCategory.obj
+      ((ProEtaleWeilSheaf.lowerStar k₀ l f).rightDerivedFunctor.obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F.obj)) ≅
+      (Scheme.Hom.geometricFiberMap f
+        (comp_over f (Spec (CommRingCat.of k₀))))_*ᵃ[l].rightDerivedFunctor.obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F.obj.carrier) :=
+    (IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _ _).app _ ≪≫
+      Functor.mapIso _ (((IsoAlgebra.forget _).mapDerivedCategorySingleFunctor 0).app F.obj)
+  exact (ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure _
+    ringChar_algebraicClosure_ne hF i).of_iso
+      ((_root_.DerivedCategory.homologyFunctor _ i).mapIso e.symm ≪≫
+        ((IsoAlgebra.forget _).mapDerivedCategoryHomologyFunctorIso i).symm.app _)
 
 variable (d : ℕ) [SmoothOfRelativeDimension d f]
 
