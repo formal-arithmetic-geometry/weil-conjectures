@@ -3734,3 +3734,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:58 L: merged deliver/C1/lem-exc-cochains-derived-invariants (stage 2; reviewer FIX; first push; Sheaf.RepresentationTheory.ContinuousCochainsDerivedInvariants Rep.continuousCochains_derived_invariants)
 - 07:58 L: merged deliver/K1/lem-sc-finite-maximals-over-element (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteMaximalsOverElement Ring.finite_maximalIdeals_containing_nonzero)
 - 07:59 L: merged deliver/C1/lem-sc-ample-finite-set-affine (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AmpleFiniteSetAffine AlgebraicGeometry.Scheme.exists_affineOpen_of_isAmple)
+- 07:59 L: merged deliver/H1/lem-sc-dim-one-ample-invertible (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ExistsAmpleOfDimLEOne AlgebraicGeometry.Scheme.Modules.exists_isAmple_of_dim_le_one)
