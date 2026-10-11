@@ -42,7 +42,20 @@ constituent isomorphisms, which are arguments of the constructions.
 
 The statements of `sk-prop-cohsm` carry `include d in`: their statements do not mention the
 relative dimension `d`, and without it the hypothesis `[SmoothOfRelativeDimension d f]` would
-silently be dropped.
+silently be dropped. They hold without the Tate twist datum and without separatedness
+(which is implied by the compactification), so these hypotheses are omitted.
+
+The three clauses of `sk-prop-cohsm` are read off from the orientation-free smooth duality of
+the ambient chapter, as in the proof of `thm-pur-cohomological-smoothness`: the locally constant
+rank-one shape of `ω_f` and the tensor formula
+(`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`, `thm-asd-smooth-tensor`),
+and arbitrary base change for `Rf^!`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar`,
+`prop-asd-smooth-base-change`). A locally constant sheaf with free rank-one stalks, placed in any
+degree, is invertible
+(`AlgebraicGeometry.Etale.isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf`).
+The notion of a cohomologically smooth morphism and its structural properties are in
+`WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness`.
 
 ## Main definitions
 
