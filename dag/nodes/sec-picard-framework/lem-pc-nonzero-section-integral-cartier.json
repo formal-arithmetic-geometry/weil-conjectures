@@ -155,5 +155,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nzsc (reviewer sub-agent of L); spot-checked: Source: Stacks 02OR (divisors.tex lemma-zero-scheme) (3),(4), proof omitted, with 01X5 (lemma-meromorphic-functions-integral-scheme) and 01OK; statement unchanged by the delivery and agrees: integral X, invertible L, s nonzero, conclusion local generator a nonzero hence nonzerodivisor and I_Z effective Cartier, the integral case of 02OR(4). Step 1: clause 3 of lem-sc-invertible-module-generic-stalk (lambda_U injective on nonempty open U of integral X) gives s|_U nonzero, hence a nonzero as e is a basis; accepted as declared generic tool (other unit sk-thm-picard-rr, C8). Step 2: def-pc-integral-scheme gives A a domain (U nonempty affine); the local ideal aA was attributed to def-pc-zero-scheme, whose statement only defines I_Z as im(s^vee) and defers the local form to lem-pc-zero-scheme-properties. Step 3: def-sc-invertible-module gives the trivializing cover, def-nagata-effective-cartier-ideal is exactly 'generator a non-zero-divisor on an open cover', def-pc-divisor-line-bundle names the divisor; elementary. Only proof fields, status and split_report changed on the existing node; no new nodes, no leaves. Small cases: X = Spec of a domain with L = O, s = a nonzero gives Z = Spec A/(a), Cartier; reducible Spec k[x,y]/(xy) with s = x shows integrality is needed. FIX: dag/nodes/sec-picard-framework/lem-pc-nonzero-section-integral-cartier.json: proof[1].text, proof[1].uses, proof_deps: cite lem-pc-zero-scheme-properties (clause 1, Z(s) cap U = Spec(A/(a))) for the local principal ideal (C4), added as tool use. 14:20-14:20 UTC; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NonzeroSectionIntegralCartier",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonzero_section_integral_cartier",
+  "file": "lean/Sheaf/AlgebraicGeometry/NonzeroSectionIntegralCartier.lean",
+  "statement": "theorem nonzero_section_integral_cartier [IsIntegral X] (M : X.Modules) [M.IsInvertible] (s : Γ(M, ⊤)) (hs : s ≠ 0) : (∀ (U : X.affineOpens) (_ : Nonempty U.1) (e : Γ(M, U.1)) (he : IsFreeGenerator e), IsFreeGenerator.coeff (M := M) (U := U.1) (e := e) he (M.presheaf.map (homOfLE (le_top : U.1 ≤ ⊤)).op s) ≠ 0 ∧ (homOfGlobalSection M s).zeroLocus.ideal U = Ideal.span {IsFreeGenerator.coeff (M := M) (U := U.1) (e := e) he (M.presheaf.map (homOfLE (le_top : U.1 ≤ ⊤)).op s)} ∧ IsFreeGenerator.coeff (M := M) (U := U.1) (e := e) he (M.presheaf.map (homOfLE (le_top : U.1 ≤ ⊤)).op s) ∈ nonZeroDivisors Γ(X, U.1)) ∧ (homOfGlobalSection M s).zeroLocus.IsInvertible",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nsc0925",
+  "group": "H1",
+  "result": "fix",
+  "note": "IsIntegral X = AlgebraicGeometry.IsIntegral (checked by #check); M.IsInvertible = Scheme.Modules.IsInvertible; s : Γ(M,⊤), s ≠ 0; Z(s) = (homOfGlobalSection M s).zeroLocus; every nonempty affine U with IsFreeGenerator e, a = coeff of s|_U (matches Hom.ideal_zeroLocus with eM=1): a ≠ 0, ideal U = span{a}, a ∈ nonZeroDivisors; Z.IsInvertible (IdealSheafData effective Cartier); no extra hypotheses; source has no such theorem (existing false). FIX: docstring proof, import, report on nonexistent let binders"
  }
 }
