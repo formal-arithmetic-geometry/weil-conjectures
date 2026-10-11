@@ -5547,3 +5547,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:26 L: merged deliver/N1/lem-weil-pbc-site-equivalence-morphism-transport (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.SiteEquivalenceMorphismTransport CategoryTheory.site_equivalence_morphism_transport)
 - 18:26 L: merged deliver/N1/lem-weil-pbc-site-module-sheafification-lift-injective (stage 2; reviewer PASS; first push; Sheaf.Paper.SiteModuleSheafificationLiftInjective CategoryTheory.site_module_sheafification_lift_injective)
 - 18:26 L: merged deliver/G1/lem-weil-pbc-site-restriction-exact (stage 2; reviewer PASS; first push; Sheaf.Paper.SiteRestrictionExact CategoryTheory.siteRestriction_exact)
+- 18:27 L: merged deliver/N1/lem-weil-pbc-site-sheafification-sections-local (stage 2; reviewer PASS; first push; Sheaf.Paper.SiteSheafificationSectionsLocal CategoryTheory.sheafification_sections_local)

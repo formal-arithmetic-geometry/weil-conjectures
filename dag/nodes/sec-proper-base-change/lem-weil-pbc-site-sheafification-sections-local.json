@@ -136,5 +136,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: 2nd delivery repairs the return: new unsplit node for Sites 00WB (theorem-plus: F^+ separated, F^++ a sheaf, F -> F^++ the universal sheafification); steps 1-2 cite it, step 3 the separatedness node; 00WK argument correct."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SiteSheafificationSectionsLocal",
+  "declaration": "CategoryTheory.sheafification_sections_local",
+  "file": "lean/Sheaf/Paper/SiteSheafificationSectionsLocal.lean",
+  "statement": "theorem sheafification_sections_local {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [HasWeakSheafify J.toGrothendieck (Type w)] (F : Cᵒᵖ ⥤ Type w) : (∀ (U : C) (s : (sheafify J.toGrothendieck F).obj (op U)), ∃ (S : Presieve U) (x : ∀ (V : C) (f : V ⟶ U), S f → F.obj (op V)), S ∈ J U ∧ (∀ (V : C) (f : V ⟶ U) (hf : S f), (sheafify J.toGrothendieck F).map f.op s = (toSheafify J.toGrothendieck F).app (op V) (x V f hf)) ∧ (∀ (V W : C) (f : V ⟶ U) (g : W ⟶ U) (hf : S f) (hg : S g), ∀ (Z : C) (a : Z ⟶ V) (b : Z ⟶ W), a ≫ f = b ≫ g → ∃ (T : Presieve Z), T ∈ J Z ∧ ∀ (Y : C) (h : Y ⟶ Z), T h → F.map (h ≫ a).op (x V f hf) = F.map (h ≫ b).op (x W g hg))) ∧ (∀ (U : C) (S : Presieve U) (_ : S ∈ J U) (x : ∀ (V : C) (f : V ⟶ U), S f → F.obj (op V)), (∀ (V W : C) (f : V ⟶ U) (g : W ⟶ U) (hf : S f) (hg : S g), ∀ (Z : C) (a : Z ⟶ V) (b : Z ⟶ W), a ≫ f = b ≫ g → ∃ (T : Presieve Z), T ∈ J Z ∧ ∀ (Y : C) (h : Y ⟶ Z), T h → F.map (h ≫ a).op (x V f hf) = F.map (h ≫ b).op (x W g hg)) → ∃! s : (sheafify J.toGrothendieck F).obj (op U), ∀ (V : C) (f : V ⟶ U) (hf : S f), (sheafify J.toGrothendieck F).map f.op s = (toSheafify J.toGrothendieck F).app (op V) (x V f hf)) ∧ (∀ (U : C) (p q : F.obj (op U)), (toSheafify J.toGrothendieck F).app (op U) p = (toSheafify J.toGrothendieck F).app (op U) q → ∃ (S : Presieve U), S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U) (_ : S f), F.map f.op p = F.map f.op q)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
