@@ -1,11 +1,11 @@
 # Work queue
 
-560 items; claim with `tools/claim.py next <group> [--stage N]`.
+557 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (560)
+## Stage 2: nodes to state (557)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -76,7 +76,6 @@
 | `lem-weil-pbc-descend-closed-immersion` | 1 | state |
 | `lem-weil-pbc-descend-finite` | 1 | state |
 | `lem-weil-pbc-descend-finite-locally-free` | 1 | state |
-| `lem-weil-pbc-descend-flat-finite-presentation` | 1 | state |
 | `lem-weil-pbc-descend-separated` | 1 | state |
 | `lem-weil-pbc-descend-surjective` | 1 | state |
 | `lem-weil-pbc-etale-finite-data-descent` | 1 | state |
@@ -85,7 +84,6 @@
 | `lem-weil-pbc-finite-presentation-kernel-surjection-finite-type` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-coherent` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-constructible-descent` | 1 | state |
-| `lem-weil-pbc-finite-surjective-affine-target-noetherian` | 1 | state |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1 | state |
 | `lem-weil-pbc-flat-fp-qf-stratification` | 1 | state |
 | `lem-weil-pbc-formal-fibre-quasi-finite-ascent` | 1 | state |
@@ -101,7 +99,6 @@
 | `lem-weil-pbc-lqf-locally-finite-type` | 1 | state |
 | `lem-weil-pbc-lqf-qc-source-bounded-fibres` | 1 | state |
 | `lem-weil-pbc-lqf-restriction-to-opens` | 1 | state |
-| `lem-weil-pbc-mittag-leffler-limit-exact` | 1 | state |
 | `lem-weil-pbc-module-base-change-map-pasting` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1 | state |
