@@ -3585,3 +3585,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:58 L: merged deliver/K1/def-sp-double-complex-total (stage 2; reviewer PASS; after a return; Sheaf.CategoryTheory.DoubleComplexTotal HomologicalComplex₂.firstFiltration)
 - 06:59 L: merged deliver/C1/lem-pc-ring-pseudo-coherent-localization-glue (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RingPseudoCoherentLocalizationGlue DerivedCategory.ringPseudoCoherent_localization_glue; new nodes: def-pc-ring-pseudo-coherent-complex)
 - 07:00 L: merged deliver/K1/def-weil-pbc-popescu-resolution (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuResolution Algebra.IsPopescuResolution)
+- 07:00 L: merged deliver/C1/lem-pc-separable-tensor-algebraic-closure (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.SeparableTensorAlgebraicClosure Algebra.separable_tensor_algebraicallyClosed_equiv_pi)
