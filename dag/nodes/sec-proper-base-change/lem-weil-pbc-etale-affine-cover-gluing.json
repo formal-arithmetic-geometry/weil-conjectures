@@ -211,5 +211,23 @@
   "by": "L",
   "result": "pass",
   "note": "Seven steps along Stacks 03S9 second paragraph: charts and overlaps separated quasi-compact etale over the affine X, the separated case (committed node, hypothesis qc satisfied), common refinement by fibre products of strata, affine refinement (new unsplit node: an immersion with constructible image in an affine scheme splits into finitely many affine constructible pieces), V_a and V_a cap V_b affine and finite over X_i, overlaps closed in charts (proper immersion = closed immersion, leaf of sk-thm-chow; global sections surjective), separatedness by 01KP(2) over an affine base (new unsplit node, a correct specialization). Correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineCoverStratification",
+  "declaration": "AlgebraicGeometry.exists_etale_affine_cover_stratification",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineCoverStratification.lean",
+  "statement": "theorem exists_etale_affine_cover_stratification {X U : Scheme.{u}} [IsAffine X] [CompactSpace U] [QuasiSeparatedSpace U] (j : U ⟶ X) [Etale j] (m : ℕ) (A : Fin m → U.Opens) (hA : ∀ a : Fin m, IsAffineOpen (A a)) (hcover : ⨆ a : Fin m, A a = ⊤) : ∃ (n : ℕ) (S : Fin n → Scheme.{u}) (ι : ∀ i : Fin n, S i ⟶ X), (∀ i : Fin n, IsAffine (S i) ∧ IsImmersion (ι i) ∧ Topology.IsConstructible (Set.range (ι i))) ∧ Pairwise (fun i k : Fin n ↦ Disjoint (Set.range (ι i)) (Set.range (ι k))) ∧ (⋃ i : Fin n, Set.range (ι i)) = Set.univ ∧ (∀ (i : Fin n) (a : Fin m), IsFinite (pullback.snd ((A a).ι ≫ j) (ι i)) ∧ Etale (pullback.snd ((A a).ι ≫ j) (ι i))) ∧ (∀ (i : Fin n) (a b : Fin m), IsFinite (pullback.snd ((A a ⊓ A b).ι ≫ j) (ι i)) ∧ Etale (pullback.snd ((A a ⊓ A b).ι ≫ j) (ι i))) ∧ (∀ i : Fin n, IsSeparated (pullback.snd j (ι i)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eag0953",
+  "group": "H1",
+  "result": "pass",
+  "note": "X affine=[IsAffine X]; U qcqs=CompactSpace/QuasiSeparatedSpace; j Etale; finite affine cover Fin m, IsAffineOpen, iSup=top; strata Fin n affine immersions with constructible range, disjoint, covering; charts and overlaps (A a ⊓ A b) pullback.snd IsFinite∧Etale; pullback.snd j separated; m=0/n=0/a=b edge cases"
  }
 }
