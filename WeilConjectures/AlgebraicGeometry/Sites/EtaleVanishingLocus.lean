@@ -221,3 +221,19 @@ lemma eq_zero_of_restrictAlong_eq_zero {V : T.Etale} {V' : T'.Etale}
 end RestrictAlong
 
 end AlgebraicGeometry.Etale
+
+namespace AlgebraicGeometry.Etale
+
+variable {R T T' : Scheme.{u}} (t : T ⟶ R) (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1})
+  (t' : T' ⟶ R)
+
+/-- `restrictAlong` only depends on the morphisms `f` and `m`, not on the proofs of
+compatibility. -/
+lemma restrictAlong_congr' {f₁ f₂ : T' ⟶ T} (hf : f₁ = f₂) (ht₁ : t' = f₁ ≫ t)
+    (ht₂ : t' = f₂ ≫ t) {V : T.Etale} {V' : T'.Etale} {m₁ m₂ : V'.left ⟶ V.left} (hm : m₁ = m₂)
+    (hm₁ : m₁ ≫ V.hom = V'.hom ≫ f₁) (hm₂ : m₂ ≫ V.hom = V'.hom ≫ f₂) :
+    restrictAlong t G f₁ t' ht₁ m₁ hm₁ = restrictAlong t G f₂ t' ht₂ m₂ hm₂ := by
+  subst hf hm
+  rfl
+
+end AlgebraicGeometry.Etale

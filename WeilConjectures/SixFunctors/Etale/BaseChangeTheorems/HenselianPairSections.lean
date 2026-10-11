@@ -439,6 +439,7 @@ lemma injective_pullSection_of_henselianRing :
   exact this
 
 set_option backward.isDefEq.respectTransparency false in
+omit [HenselianRing A I] in
 include h in
 /-- **Surjectivity of restriction to the closed fibre over a henselian pair**, first step: the
 local representatives of a section `t` over `Y₀` assemble to a section `g` over a surjective
@@ -490,6 +491,202 @@ lemma exists_surjective_etale_pullSection_eq
         exact ⟨_, rfl⟩⟩
       exact eq_of_isEmpty _ _ _
     | some k => exact hg k.1
+
+set_option backward.isDefEq.respectTransparency false in
+set_option maxHeartbeats 800000 in
+-- the proof assembles several constructions and is long
+include h in
+/-- **Surjectivity of restriction to the closed fibre over a henselian pair.** Every global
+section of `i^* G` over the closed fibre `Y₀` is the restriction of a global section of `G`. -/
+theorem surjective_pullSection_of_henselianRing :
+    Function.Surjective (pullSection i G (V := Scheme.Etale.mk (𝟙 Y₀))
+      (U := Scheme.Etale.mk (𝟙 Y)) i ((Category.comp_id _).trans (Category.id_comp _).symm)) := by
+  intro t
+  have : IsClosedImmersion i := isClosedImmersion_of_isPullback I p i p₀ h
+  have hrange := range_eq_preimage_zeroLocus_of_isPullback I p i p₀ h
+  -- a surjective étale `Ut ⟶ Y` with a section `gt` representing `t` along the closed fibre
+  obtain ⟨Ut, _, gt, hgt⟩ := exists_surjective_etale_pullSection_eq I p i p₀ h G t
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace p
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated p
+  -- the finite refinement
+  obtain ⟨Y', r, _, -, _, J, _, W, φ, hWtop, hφ⟩ :=
+    Scheme.exists_finite_surjective_refinement_of_etale (T := Y) Ut.hom
+  -- the closed fibre of `Y'`
+  let Y'₀ := pullback r i
+  let i' : Y'₀ ⟶ Y' := pullback.fst r i
+  let r₀ : Y'₀ ⟶ Y₀ := pullback.snd r i
+  have hsq : i' ≫ r = r₀ ≫ i := pullback.condition
+  have hT₀ : Set.range i' = (r ≫ p) ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := by
+    rw [Scheme.Pullback.range_fst, hrange]
+    rfl
+  have : CompactSpace Y' := QuasiCompact.compactSpace_of_compactSpace (r ≫ p)
+  have : QuasiSeparatedSpace Y' := quasiSeparatedSpace_of_quasiSeparated (r ≫ p)
+  have hT₀c : IsClosed (Set.range i') := i'.isClosedEmbedding.isClosed_range
+  let F := (r)^*[AddCommGrpCat.{u + 1}].obj G
+  -- finitely many quasi-compact opens, each inside some `W a`, covering the closed fibre
+  have hcovT : ∀ y ∈ Set.range i', ∃ (N : Y'.Opens), IsCompact (N : Set Y') ∧ y ∈ N ∧
+      ∃ a, N ≤ W a := by
+    intro y _
+    obtain ⟨a, ha⟩ : ∃ a, y ∈ W a := TopologicalSpace.Opens.mem_iSup.1 (hWtop ▸ trivial)
+    obtain ⟨_, ⟨N, hN, rfl⟩, hyN, hNW⟩ :=
+      Y'.isBasis_affineOpens.exists_subset_of_mem_open ha (W a).2
+    exact ⟨N, hN.isCompact, hyN, a, hNW⟩
+  choose N hNc hyN aN hNa using hcovT
+  obtain ⟨M, hM⟩ := hT₀c.isCompact.elim_finite_subcover
+    (fun y : Set.range i' ↦ (N y.1 y.2 : Set Y')) (fun y ↦ (N y.1 y.2).2)
+    (fun y hy ↦ Set.mem_iUnion.2 ⟨⟨y, hy⟩, hyN y hy⟩)
+  let N' : M → Y'.Opens := fun m ↦ N m.1.1 m.1.2
+  let a' : M → J := fun m ↦ aN m.1.1 m.1.2
+  have hN'W : ∀ m, N' m ≤ W (a' m) := fun m ↦ hNa m.1.1 m.1.2
+  let ψ : ∀ m, (N' m).toScheme ⟶ Ut.left := fun m ↦ Y'.homOfLE (hN'W m) ≫ φ (a' m)
+  have hψ : ∀ m, ψ m ≫ Ut.hom = (Scheme.Etale.mk (N' m).ι).hom ≫ r := fun m ↦ by
+    simp only [ψ, Category.assoc, hφ]
+    rw [← Category.assoc, Scheme.homOfLE_ι]
+    rfl
+  let σ : ∀ m, F.obj.obj (op (Scheme.Etale.mk (N' m).ι)) :=
+    fun m ↦ pullSection r G (ψ m) (hψ m) gt
+  -- the restriction of any `σ m` to the closed fibre is the pullback of `t`
+  have hσ₀ : ∀ m {V : Y'.Etale} (b : V ⟶ Scheme.Etale.mk (N' m).ι) {V' : Y'₀.Etale}
+      (n : V'.left ⟶ V.left) (hn : n ≫ V.hom = V'.hom ≫ i'),
+      restrictAlong r G i' (i' ≫ r) rfl n hn (F.obj.map b.op (σ m)) =
+        restrictAlong i G r₀ (i' ≫ r) hsq (V := Scheme.Etale.mk (𝟙 Y₀)) (V' := V')
+          (V'.hom ≫ r₀) (Category.comp_id _) t := by
+    intro m V b V' n hn
+    rw [restrictAlong_map, restrictAlong_pullSection_eq_restrictAlong i r i' r₀ hsq G gt t hgt]
+  -- any two of the `σ m` have the same germs along the closed fibre
+  have hagree : ∀ m n, (N' m : Set Y') ∩ N' n ∩ Set.range i' ⊆ germEqLocus F (σ m) (σ n) := by
+    rintro m n y ⟨⟨hym, hyn⟩, ⟨x, rfl⟩⟩
+    let O := N' m ⊓ N' n
+    let am : Scheme.Etale.mk O.ι ⟶ Scheme.Etale.mk (N' m).ι := opensHomOfLE inf_le_left
+    let an : Scheme.Etale.mk O.ι ⟶ Scheme.Etale.mk (N' n).ι := opensHomOfLE inf_le_right
+    let D := F.obj.map am.op (σ m) - F.obj.map an.op (σ n)
+    have hD : restrictAlong r G i' (i' ≫ r) rfl
+        (V := Scheme.Etale.mk O.ι)
+        (V' := (MorphismProperty.Over.pullback @Etale ⊤ i').obj (Scheme.Etale.mk O.ι))
+        (pullback.fst O.ι i') pullback.condition D = 0 := by
+      rw [map_sub, hσ₀ m am, hσ₀ n an, sub_self]
+    obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := O.ι) (g := i')
+      (⟨i' x, hym, hyn⟩ : O) x rfl
+    obtain ⟨V, b, ⟨w, hw⟩, hb⟩ :=
+      range_subset_vanishingLocus_of_restrictAlong_eq_zero r G i' (i' ≫ r) rfl _ _ D hD ⟨z, hz⟩
+    refine ⟨V, b ≫ am, b ≫ an, w, ?_, ?_⟩
+    · rw [← MorphismProperty.Over.w b]
+      change (b.left ≫ O.ι) w = _
+      rw [Scheme.Hom.comp_apply, hw]
+      rfl
+    · rw [op_comp, Functor.map_comp, op_comp, Functor.map_comp, ConcreteCategory.comp_apply,
+        ConcreteCategory.comp_apply, ← sub_eq_zero, ← map_sub]
+      exact hb
+  -- glue the `σ m` to a global section `σ'` of `r^* G`
+  have hcovM : Set.range i' ⊆ ⋃ m : M, (N' m : Set Y') := fun y hy ↦ by
+    obtain ⟨m, hm, hym⟩ := Set.mem_iUnion₂.1 (hM hy)
+    exact Set.mem_iUnion.2 ⟨⟨m, hm⟩, hym⟩
+  have hconn : ∀ C : Set Y', IsClosed C → IsIrreducible C →
+      IsConnected (C ∩ Set.range i') := by
+    rw [hT₀]
+    exact fun C hC hC' ↦ (r ≫ p).isConnected_inter_preimage_zeroLocus I hC hC'
+  obtain ⟨σ', W', hW'N, hNW', hσ'⟩ := exists_glue_of_isConnected_inter F hT₀c hconn N'
+    (fun m ↦ hNc _ _) hcovM σ hagree
+  -- the restriction of `σ'` to the closed fibre is the pullback of `t`
+  have hσ'₀ : restrictAlong r G i' (i' ≫ r) rfl (V := Scheme.Etale.mk (𝟙 Y'))
+      (V' := Scheme.Etale.mk (𝟙 Y'₀)) i' ((Category.comp_id _).trans (Category.id_comp _).symm)
+        σ' =
+      restrictAlong i G r₀ (i' ≫ r) hsq (V := Scheme.Etale.mk (𝟙 Y₀))
+        (V' := Scheme.Etale.mk (𝟙 Y'₀)) r₀ ((Category.comp_id _).trans (Category.id_comp _).symm)
+        t := by
+    refine eq_of_forall_exists_map_eq _ _ _ fun x ↦ ?_
+    obtain ⟨m, hm⟩ := Set.mem_iUnion.1 (hcovM ⟨x, rfl⟩)
+    have hxW : i' x ∈ W' m := hNW' m ⟨hm, x, rfl⟩
+    let Q : Y'₀.Opens := i' ⁻¹ᵁ W' m
+    refine ⟨Scheme.Etale.mk Q.ι, opensToTerminal Q, ⟨⟨x, hxW⟩, rfl⟩, ?_⟩
+    have hℓ : (i' ∣_ W' m) ≫ (W' m).ι = Q.ι ≫ i' := morphismRestrict_ι _ _
+    rw [map_restrictAlong, map_restrictAlong,
+      restrictAlong_congr r G i' (i' ≫ r) rfl _
+        (show (opensToTerminal Q).left ≫ i' = (i' ∣_ W' m) ≫ (opensToTerminal (W' m)).left
+          from hℓ.symm),
+      ← restrictAlong_map r G i' (i' ≫ r) rfl (V' := Scheme.Etale.mk Q.ι)
+        (opensToTerminal (W' m)) (i' ∣_ W' m) hℓ, hσ' m,
+      hσ₀ m (opensHomOfLE (hW'N m))]
+    rfl
+  -- the two pullbacks of `σ'` to `Y' ×_Y Y'` agree, since they agree on the closed fibre
+  let p₁ := pullback.fst r r
+  let p₂ := pullback.snd r r
+  let Y''₀ := pullback (p₁ ≫ r) i
+  let i'' : Y''₀ ⟶ pullback r r := pullback.fst (p₁ ≫ r) i
+  let r''₀ : Y''₀ ⟶ Y₀ := pullback.snd (p₁ ≫ r) i
+  have hsq'' : i'' ≫ p₁ ≫ r = r''₀ ≫ i := pullback.condition
+  have key : ∀ (pj : pullback r r ⟶ Y') (hpj : p₁ ≫ r = pj ≫ r),
+      restrictAlong (p₁ ≫ r) G i'' (i'' ≫ p₁ ≫ r) rfl
+          (V := Scheme.Etale.mk (𝟙 (pullback r r))) (V' := Scheme.Etale.mk (𝟙 Y''₀)) i''
+          ((Category.comp_id _).trans (Category.id_comp _).symm)
+          (restrictAlong r G pj (p₁ ≫ r) hpj (V := Scheme.Etale.mk (𝟙 Y'))
+            (V' := Scheme.Etale.mk (𝟙 (pullback r r))) pj
+            ((Category.comp_id _).trans (Category.id_comp _).symm) σ') =
+        restrictAlong i G r''₀ (i'' ≫ p₁ ≫ r) hsq'' (V := Scheme.Etale.mk (𝟙 Y₀))
+          (V' := Scheme.Etale.mk (𝟙 Y''₀)) r''₀
+          ((Category.comp_id _).trans (Category.id_comp _).symm) t := by
+    intro pj hpj
+    let q : Y''₀ ⟶ pullback r i := pullback.lift (i'' ≫ pj) r''₀ (by
+      rw [Category.assoc, ← hpj]
+      exact hsq'')
+    have hq : i'' ≫ pj = q ≫ i' := (pullback.lift_fst _ _ _).symm
+    have hq₀ : q ≫ r₀ = r''₀ := pullback.lift_snd _ _ _
+    rw [restrictAlong_restrictAlong,
+      restrictAlong_congr' r G _ hq _ (by
+          simp only [Category.assoc]
+          rw [← Category.assoc q, ← hq, Category.assoc, ← hpj]) hq _
+        ((Category.comp_id _).trans (Category.id_comp _).symm),
+      ← restrictAlong_restrictAlong r G i' (i' ≫ r) rfl q (i'' ≫ p₁ ≫ r) (by
+          rw [← Category.assoc q, ← hq, Category.assoc, ← hpj])
+        (V := Scheme.Etale.mk (𝟙 Y')) (V' := Scheme.Etale.mk (𝟙 Y'₀))
+        (V'' := Scheme.Etale.mk (𝟙 Y''₀)) i' ((Category.comp_id _).trans (Category.id_comp _).symm)
+        q ((Category.comp_id _).trans (Category.id_comp _).symm) σ',
+      hσ'₀, restrictAlong_restrictAlong]
+    rw [restrictAlong_congr' i G (i'' ≫ p₁ ≫ r) hq₀
+      (by rw [Category.assoc, ← hsq, ← Category.assoc q, ← hq, Category.assoc, ← hpj]) hsq''
+      (V := Scheme.Etale.mk (𝟙 Y₀)) (V' := Scheme.Etale.mk (𝟙 Y''₀)) (m₁ := q ≫ r₀) (m₂ := r''₀) hq₀
+      ((Category.comp_id _).trans (Category.id_comp _).symm)
+      ((Category.comp_id _).trans (Category.id_comp _).symm)]
+  have hdesc : restrictAlong r G p₁ (p₁ ≫ r) rfl (V := Scheme.Etale.mk (𝟙 Y'))
+        (V' := Scheme.Etale.mk (𝟙 (pullback r r))) p₁
+        ((Category.comp_id _).trans (Category.id_comp _).symm) σ' =
+      restrictAlong r G p₂ (p₁ ≫ r) pullback.condition (V := Scheme.Etale.mk (𝟙 Y'))
+        (V' := Scheme.Etale.mk (𝟙 (pullback r r))) p₂
+        ((Category.comp_id _).trans (Category.id_comp _).symm) σ' := by
+    rw [← sub_eq_zero]
+    refine eq_zero_of_restrictAlong_eq_zero (p₁ ≫ r) G i'' (i'' ≫ p₁ ≫ r) rfl
+      (V := Scheme.Etale.mk (𝟙 (pullback r r))) (V' := Scheme.Etale.mk (𝟙 Y''₀)) i''
+      ((Category.comp_id _).trans (Category.id_comp _).symm) (fun C hC hne ↦ ?_) _ ?_
+    · have hr'' : Set.range i'' = (p₁ ≫ r ≫ p) ⁻¹' PrimeSpectrum.zeroLocus (I : Set A) := by
+        rw [Scheme.Pullback.range_fst, hrange]
+        rfl
+      have := (p₁ ≫ r ≫ p).nonempty_inter_preimage_zeroLocus I HenselianRing.jac (C := C) hC hne
+      rw [← hr''] at this
+      exact this
+    · rw [map_sub, key p₁ rfl, key p₂ pullback.condition, sub_self]
+  -- descent along the finite surjective `r`
+  obtain ⟨s, hs⟩ := exists_pullSection_eq_of_isFinite_of_surjective r G σ' hdesc
+  refine ⟨s, ?_⟩
+  rw [← sub_eq_zero]
+  refine eq_zero_of_restrictAlong_eq_zero i G r₀ (i' ≫ r) hsq
+    (V := Scheme.Etale.mk (𝟙 Y₀)) (V' := Scheme.Etale.mk (𝟙 Y'₀)) r₀
+    ((Category.comp_id _).trans (Category.id_comp _).symm) (fun C _ hne ↦ ?_) _ ?_
+  · obtain ⟨c, hc⟩ := hne
+    exact ⟨c, hc, r₀.surjective c⟩
+  · rw [map_sub, ← hσ'₀, ← hs, restrictAlong_pullSection, restrictAlong_pullSection, sub_eq_zero]
+    exact pullSection_congr _ _ _ hsq.symm _
+
+include h in
+/-- **Sections over a proper scheme over a henselian pair.** Let `(A, I)` be a henselian pair,
+`p : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre over `Spec A/I`. For every abelian
+étale sheaf `G` on `Y`, restriction `Γ(Y, G) ⟶ Γ(Y₀, i^* G)` is bijective.
+(blueprint: `lemma-weil-pbc-etale-degree-zero`) -/
+@[stacks 0A0C]
+theorem bijective_pullSection_of_henselianRing :
+    Function.Bijective (pullSection i G (V := Scheme.Etale.mk (𝟙 Y₀))
+      (U := Scheme.Etale.mk (𝟙 Y)) i ((Category.comp_id _).trans (Category.id_comp _).symm)) :=
+  ⟨injective_pullSection_of_henselianRing I p i p₀ h G,
+    surjective_pullSection_of_henselianRing I p i p₀ h G⟩
 
 end Main
 
