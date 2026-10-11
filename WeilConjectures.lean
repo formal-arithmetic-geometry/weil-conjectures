@@ -1784,6 +1784,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerStarProjectionComparison
+public import WeilConjectures.SixFunctors.ProEtale.Derived.ModuleDerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenCover
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Derived.OpenImmersionLowerShriekProjection

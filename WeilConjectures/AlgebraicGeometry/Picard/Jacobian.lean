@@ -329,7 +329,10 @@ variable [SmoothOfRelativeDimension 1 f] [IsProper f]
 
 /-- The classes `ℒ ∈ Pic (X_T)` of fibrewise degree zero form a subgroup of `Pic (X_T)`, the
 fibrewise degree being additive (`AlgebraicGeometry.picardFibreDegree_mul`). Its carrier is
-`(AlgebraicGeometry.picardSubfunctorDegree f 0).obj (.op T)`. -/
+`(AlgebraicGeometry.picardSubfunctorDegree f 0).obj (.op T)`.
+
+(blueprint: `prop-pd-picard-degree-decomposition`, part (1): `Pic^0_{X/k}` is a subgroup
+functor) -/
 noncomputable def picardSubgroupDegreeZero (T : Over (Spec (.of k))) :
     Subgroup (pullback f T.hom).Pic where
   carrier := (picardSubfunctorDegree f 0).obj (.op T)
@@ -348,7 +351,8 @@ subfunctor `AlgebraicGeometry.picardSubfunctorDegree f 0`
 (`AlgebraicGeometry.picardPresheafDegreeZeroGrp_comp_forget`), whose fppf sheafification is
 `Pic^0_{X/k}`.
 
-(blueprint: `sk-prop-picard-degree-decomposition`) -/
+(blueprint: `sk-prop-picard-degree-decomposition`, `prop-pd-picard-degree-decomposition` part (1))
+-/
 noncomputable def picardPresheafDegreeZeroGrp :
     (Over (Spec (.of k)))ᵒᵖ ⥤ GrpCat.{u + 1} where
   obj T := GrpCat.of (picardSubgroupDegreeZero f T.unop)
@@ -405,7 +409,8 @@ group law of `J` is the tensor product of invertible modules, through the group 
 sheafification `Pic^0_{X/k}` inherits from `AlgebraicGeometry.picardPresheafDegreeZeroGrp`
 (`CategoryTheory.sheafifyGrp`).
 
-(blueprint: `sk-prop-picard-degree-decomposition`, `rem-pc-group-structure`) -/
+(blueprint: `sk-prop-picard-degree-decomposition`, `rem-pc-group-structure`,
+`prop-pd-picard-degree-decomposition` part (3): the group scheme structure on `Pic^0`) -/
 theorem exists_commGrpObj_isPicardZeroMul {J : Over (Spec (.of k))}
     (e : (picardFunctorDegree f 0).obj.RepresentableBy J) :
     ∃ _ : CommGrpObj J, IsPicardZeroMul f e := by
@@ -522,7 +527,9 @@ lemma picardSubfunctorDegreeMulMapFst_app_val {d d' e : ℤ} (M : X.Pic)
 
 /-- **Translating the degree.** Tensoring with the pullback of a class `M ∈ Pic X` of degree `e`
 is an isomorphism from the degree-`d` subfunctor of the Picard presheaf onto the degree-`d'`
-subfunctor, `d' = d + e`, with inverse the tensor product with the pullback of `M⁻¹`. -/
+subfunctor, `d' = d + e`, with inverse the tensor product with the pullback of `M⁻¹`.
+
+(blueprint: `prop-pd-picard-degree-decomposition`, part (4) on the level of subfunctors) -/
 noncomputable def picardSubfunctorDegreeIsoOfDegree {d d' e : ℤ} (M : X.Pic)
     (hM : picDegreeHom k X M = .ofAdd e) (h : d' = d + e) :
     (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor ≅
@@ -758,7 +765,8 @@ set_option linter.unusedSectionVars false in
 /-- **The fibrewise degree is locally constant.** For a connected `k`-scheme `T` and a class
 `ℒ ∈ Pic (X_T)`, all the fibrewise degrees `deg ℒ_t` agree.
 
-(blueprint: `sk-prop-picard-degree-decomposition`) -/
+(blueprint: `sk-prop-picard-degree-decomposition`, `prop-pd-picard-degree-decomposition`
+part (2): the degree is locally constant) -/
 theorem picardFibreDegree_eq_of_connectedSpace (T : Over (Spec (.of k)))
     [ConnectedSpace T.left] (L : (picardPresheaf (X ↘ Spec (.of k))).obj (.op T))
     {K : Type u} [Field K] [Algebra k K]
@@ -778,7 +786,13 @@ a separably closed field `k` and let `P` represent the Picard functor `Pic_{X/k}
 the disjoint union `∐_{d ∈ ℤ} P^d` of a family of open and closed subschemes indexed by `ℤ`,
 and `P^d` represents the degree-`d` part `Pic^d_{X/k}`.
 
-(blueprint: `sk-prop-picard-degree-decomposition`) -/
+The other parts of the detailed statement are `AlgebraicGeometry.picardSubgroupDegreeZero`
+(part (1)), `AlgebraicGeometry.exists_commGrpObj_isPicardZeroMul` (part (3)) and
+`AlgebraicGeometry.nonempty_iso_of_representableBy` (part (4)). The pointer remark
+`rem-ptr-sc-picard-functor-3` refers to this decomposition.
+
+(blueprint: `sk-prop-picard-degree-decomposition`, `prop-pd-picard-degree-decomposition`
+part (2), `rem-ptr-sc-picard-functor-3`) -/
 theorem exists_decomposition_picardFunctor (P : Over (Spec (.of k)))
     (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P) :
     ∃ (Pd : ℤ → Over (Spec (.of k))) (j : ∀ d, Pd d ⟶ P),
@@ -886,7 +900,8 @@ theorem exists_decomposition_picardFunctor (P : Over (Spec (.of k)))
 `Pic^d_{X/k}` are isomorphic as `k`-schemes; the isomorphism is tensoring with `𝒪_X(dP)` for a
 rational point `P`, which cannot be named for lack of the twisting sheaf.
 
-(blueprint: `sk-prop-picard-degree-decomposition`) -/
+(blueprint: `sk-prop-picard-degree-decomposition`, `prop-pd-picard-degree-decomposition`
+part (4)) -/
 theorem nonempty_iso_of_representableBy (d : ℤ) (P₀ Pd : Over (Spec (.of k)))
     (hP₀ : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy P₀)
     (hPd : (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy Pd) :
@@ -1337,7 +1352,7 @@ laws (`AlgebraicGeometry.IsPicardZeroMul`). Then the tangent space of `J` at the
 isomorphic as a `k`-vector space to `H^1(X, 𝒪_X)`, which has dimension `g` by the definition of
 `AlgebraicGeometry.Scheme.arithmeticGenus`.
 
-(blueprint: `sk-prop-picard-jacobian-tangent`) -/
+(blueprint: `sk-prop-picard-jacobian-tangent`, `lem-sc-pic-tangent-space`) -/
 theorem nonempty_tangentSpaceAt_linearEquiv_H_one [IsSepClosed k]
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (J : Over (Spec (.of k))) [GrpObj J]
@@ -1654,6 +1669,29 @@ variable {k : Type u} [Field k]
 
 attribute [local instance] Scheme.smoothOfRelativeDimension_baseChange Scheme.isProper_baseChange
 
+/-- **The geometric curve.** Let `C` be a smooth projective geometrically integral curve of genus
+`g` over `k` and let `k_s` be a separable closure of `k`. Then `k_s` is separably closed and the
+base change `C_{k_s}` is a smooth projective geometrically integral curve of genus `g` over `k_s`.
+
+(blueprint: `lem-pd-geometric-curve`) -/
+theorem isSepClosed_and_pullback_sepClosure (ks : Type u) [Field ks] [Algebra k ks]
+    [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (g : ℕ) (hg : arithmeticGenus k C = g) :
+    IsSepClosed ks ∧
+      SmoothOfRelativeDimension 1 (pullback (C ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) ∧
+      IsProper (pullback (C ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) ∧
+      GeometricallyIntegral (pullback (C ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) ∧
+      arithmeticGenus ks
+        (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))) = g :=
+  ⟨IsSepClosure.sep_closed k, inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd _ _)),
+    inferInstanceAs (IsProper (pullback.snd _ _)),
+    inferInstanceAs (GeometricallyIntegral (pullback.snd _ _)),
+    (arithmeticGenus_pullback ks).trans hg⟩
+
 /-- **The degree-zero Picard functor over a separable closure.** Let `C` be a smooth projective
 geometrically integral curve of genus `g` over `k` and let `k_s` be a separable closure of `k`.
 Then `Pic^0_{C_{k_s}/k_s}` is represented, compatibly with the group laws, by an abelian variety
@@ -1673,7 +1711,8 @@ theorem exists_jacobian_pullback (ks : Type u) [Field ks] [Algebra k ks] [IsSepC
             (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))) ≃*
           (𝟙_ (Over (Spec (.of ks))) ⟶ J)) := by
   -- The base change of `C` to `k_s` is a smooth projective geometrically integral curve of
-  -- genus `g` over the separably closed field `k_s` (blueprint `lem-pd-geometric-curve`).
+  -- genus `g` over the separably closed field `k_s`
+  -- (`AlgebraicGeometry.isSepClosed_and_pullback_sepClosure`).
   have : IsSepClosed ks := IsSepClosure.sep_closed k
   have : SmoothOfRelativeDimension 1 (pullback (C ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
@@ -2109,7 +2148,12 @@ is effective there, and descends the geometric properties to `k`. The group law 
 scheme is the one induced by the group law of `Pic^0_{C/k}`
 (`AlgebraicGeometry.exists_commGrpObj_isPicardZeroMul`), so it need not be descended separately.
 
-(blueprint: `thm-pd-jacobian-general-field`) -/
+This is the general-field statement that the scope remarks `rem-sc-jacobian-scope` and
+`rem-pd-scope` refer to: over a separably closed field it is `AlgebraicGeometry.exists_jacobian`,
+and here it is descended from a separable closure, without a rational point.
+
+(blueprint: `thm-pd-jacobian-general-field`; pointed to by `rem-sc-jacobian-scope`,
+`rem-pd-scope`) -/
 theorem exists_commGrpObj_representableBy_picardFunctorDegree (ks : Type u) [Field ks]
     [Algebra k ks] [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
