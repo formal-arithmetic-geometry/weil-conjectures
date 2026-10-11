@@ -209,5 +209,24 @@
   "by": "L",
   "result": "pass",
   "note": "coherence proved from the uniqueness clauses (sheaf level) and the localization (derived level); lem-weil-pbc-inverse-image-composition (sk-thm-p1) accepted as a tool use; the Lean of slopmaster2 has the data and the sheaf-level and unit laws (upperStarCompDerivedPlus, upperStarComp_assoc, upperStarCompDerivedPlus_id_*) but no derived associativity for the etale inverse images, so nothing is attached to this node; the new coherence node for direct images closed by Lean"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedInverseImageComposition",
+  "declaration": "AlgebraicGeometry.Etale.derivedInverseImageComposition",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedInverseImageComposition.lean",
+  "statement": "theorem derivedInverseImageComposition {X Y Z W : Scheme.{u}} (u₀ : Y ⟶ X) (v₀ : Z ⟶ Y) (w₀ : W ⟶ Z) : let A := AddCommGrpCat.{u + 1} let P := fun {S T : Scheme.{u}} (f : S ⟶ T) => upperStar A f let D := fun {S T : Scheme.{u}} (f : S ⟶ T) => (P f).mapDerivedCategoryPlus let c := fun {R S T : Scheme.{u}} (f : T ⟶ S) (g : S ⟶ R) (fg : T ⟶ R) (hfg : fg = f ≫ g) => (upperStarComp A f g fg hfg).symm let e := fun S : Scheme.{u} => upperStarId A S let cD := fun {R S T : Scheme.{u}} (f : T ⟶ S) (g : S ⟶ R) (fg : T ⟶ R) (hfg : fg = f ≫ g) => (upperStarCompDerivedPlus A f g fg hfg).symm let eD := fun S : Scheme.{u} => upperStarIdDerivedPlus A S (Functor.whiskerLeft (P u₀) (c w₀ v₀ (w₀ ≫ v₀) rfl).hom ≫ (c (w₀ ≫ v₀) u₀ (w₀ ≫ v₀ ≫ u₀) (Category.assoc w₀ v₀ u₀).symm).hom = Functor.whiskerRight (c v₀ u₀ (v₀ ≫ u₀) rfl).hom (P w₀) ≫ (c w₀ (v₀ ≫ u₀) (w₀ ≫ v₀ ≫ u₀) rfl).hom) ∧ ((c u₀ (𝟙 X) u₀ (Category.comp_id u₀).symm).hom = Functor.whiskerRight (e X).hom (P u₀)) ∧ ((c (𝟙 Y) u₀ u₀ (Category.id_comp u₀).symm).hom = Functor.whiskerLeft (P u₀) (e Y).hom) ∧ (∀ t : D u₀ ⋙ D v₀ ≅ D (v₀ ≫ u₀), (∀ K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology A), t.hom.app (DerivedCategory.Plus.Qh.obj K) ≫ (P (v₀ ≫ u₀)).mapDerivedCategoryPlusFactorsh.hom.app K = (D v₀).map ((P u₀).mapDerivedCategoryPlusFactorsh.hom.app K) ≫ (P v₀).mapDerivedCategoryPlusFactorsh.hom.app ((P u₀).mapHomotopyCategoryPlus.obj K) ≫ DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus (c v₀ u₀ (v₀ ≫ u₀) rfl).hom).app K)) ↔ t = cD v₀ u₀ (v₀ ≫ u₀) rfl) ∧ (∀ t : D (𝟙 X) ≅ 𝟭 (DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)), (∀ K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology A), t.hom.app (DerivedCategory.Plus.Qh.obj K) = (P (𝟙 X)).mapDerivedCategoryPlusFactorsh.hom.app K ≫ DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus (e X).hom).app K)) ↔ t = eD X) ∧ (Functor.whiskerLeft (D u₀) (cD w₀ v₀ (w₀ ≫ v₀) rfl).hom ≫ (cD (w₀ ≫ v₀) u₀ (w₀ ≫ v₀ ≫ u₀) (Category.assoc w₀ v₀ u₀).symm).hom = Functor.whiskerRight (cD v₀ u₀ (v₀ ≫ u₀) rfl).hom (D w₀) ≫ (cD w₀ (v₀ ≫ u₀) (w₀ ≫ v₀ ≫ u₀) rfl).hom) ∧ ((cD u₀ (𝟙 X) u₀ (Category.comp_id u₀).symm).hom = Functor.whiskerRight (eD X).hom (D u₀)) ∧ ((cD (𝟙 Y) u₀ u₀ (Category.id_comp u₀).symm).hom = Functor.whiskerLeft (D u₀) (eD Y).hom)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "One conjunction renders all three clauses. The two universal equivalences characterize the existing comparison isomorphisms by the representative formulas and assert both existence and uniqueness. Sheaf and derived composition comparisons use the inverses of the upstream comparisons, to match the node orientation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dic0950",
+  "group": "H1",
+  "result": "pass",
+  "note": "schemes X Y Z W + u0,v0,w0 arbitrary; P=upperStar AddCommGrpCat.{u+1}; c=(upperStarComp).symm (conjugate of lowerStarComp, P fg ≅ P g ⋙ P f so symm is node c), e=upperStarId; sheaf assoc whiskerLeft/Right paths and both unit laws match (1); D=mapDerivedCategoryPlus, global instance; (2) iff-characterisations over HomotopyCategory.Plus (strictly bounded below complexes) match cD≫phi_uv = v^-1(phi_u)≫phi_v≫Q(c) and eD = phi_id≫Q(e), agree with upstream *_hom_app formulas; (3) derived assoc/units as (1)"
  }
 }
