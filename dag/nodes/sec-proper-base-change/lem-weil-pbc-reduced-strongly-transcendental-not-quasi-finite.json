@@ -169,5 +169,23 @@
   "item": "lem-weil-pbc-reduced-strongly-transcendental-not-quasi-finite",
   "worker": "stage1",
   "summary": "Read Algebra 00Q2 (line 30714) and its proof, and the lemmas it uses: 00Q0 (line 30644), 00Q1 (line 30666), 00PN (line 30293), 00EU (line 4543, used inside 00Q0). The proof is written in five steps following 00Q2: a minimal prime q' below q (existing Mathlib leaf lem-weil-pbc-prime-contains-minimal-prime); strong transcendence of the image of x over R/(R cap q') (new Mathlib leaf lem-weil-pbc-strongly-transcendental-quotient-minimal-prime = 00Q0, isStronglyTranscendental_mk_of_mem_minimalPrimes + of_surjective_left); the finiteness of S/q' over the image of R[x] and the finite type of R -> S written out; the domain case (new unsplit node lem-weil-pbc-domains-strongly-transcendental-not-quasi-finite = 00Q1, Mathlib candidate only with Mathlib's QuasiFiniteAt, B8); transfer back to R -> S by the four rings lemma (existing unsplit node lem-weil-pbc-quasi-finite-four-rings = 00PN) applied to the surjection S -> S/q'. The statement is unchanged; the source's hypothesis that R is reduced is not used (00Q0 needs only S reduced). The item itself stays without a Mathlib match: Algebra.not_isStronglyTranscendental_of_quasiFiniteAt (ZariskisMainTheorem.lean:448-454) uses Mathlib's QuasiFiniteAt (B8)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NotQuasiFiniteAtPrimeOfReducedStronglyTranscendental",
+  "declaration": "Algebra.not_isQuasiFiniteAtPrime_of_reduced_isStronglyTranscendental",
+  "file": "lean/Sheaf/RingTheory/NotQuasiFiniteAtPrimeOfReducedStronglyTranscendental.lean",
+  "statement": "theorem not_isQuasiFiniteAtPrime_of_reduced_isStronglyTranscendental (R : Type u) (S : Type v) [CommRing R] [CommRing S] [IsReduced R] [IsReduced S] [Algebra R S] [FaithfulSMul R S] (x : S) (hx : IsStronglyTranscendental R x) [Module.Finite (Algebra.adjoin R ({x} : Set S)) S] : ∀ q : PrimeSpectrum S, ¬ @IsQuasiFiniteAtPrime R S _ _ _ (Algebra.FiniteType.trans (Algebra.FiniteType.adjoin_of_finite (Set.finite_singleton x)) (inferInstance : Algebra.FiniteType (Algebra.adjoin R ({x} : Set S)) S)) q",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-stq",
+  "group": "J1",
+  "result": "pass",
+  "note": "CommRing R S; IsReduced R,S; inclusion = Algebra + FaithfulSMul (as landed 00Q1 sibling); x, IsStronglyTranscendental R x (Mathlib record); Module.Finite (adjoin R {x}) S; FiniteType via explicit trans term (no let); forall q : PrimeSpectrum S, not Algebra.IsQuasiFiniteAtPrime (recorded); zero ring vacuous"
  }
 }
