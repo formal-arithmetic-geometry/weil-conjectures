@@ -105,6 +105,28 @@ Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/
 noncomputable def changeOfRings : SheafOfModules.{u} (𝓡 R₂) :=
   (PresheafOfModules.sheafification (𝟙 (𝓡 R₂).obj)).obj (changeOfRingsPresheaf α M)
 
+/-- The sectionwise extension of a module morphism commutes with restrictions.
+Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product).
+Proof: on a pure tensor both composites restrict the scalar and apply the original
+module morphism to the restricted module section. Naturality of that morphism and
+linearity identify the results; pure tensors generate each section tensor product. -/
+theorem changeOfRingsHom_naturality {N : SheafOfModules.{u} (𝓡 R₁)} (a : M ⟶ N)
+    {U V : Cᵒᵖ} (i : U ⟶ V) :
+    (changeOfRingsPresheaf α M).map i ≫
+      (ModuleCat.restrictScalars (R₂.obj.map i).hom).map
+        ((ModuleCat.extendScalars (α.hom.app V).hom).map (a.val.app V)) =
+    ((ModuleCat.extendScalars (α.hom.app U).hom).map (a.val.app U)) ≫
+      (changeOfRingsPresheaf α N).map i := by
+  sorry
+
+/-- Change of rings on module morphisms: sheafify the sectionwise map `id ⊗ a`.
+Source: Stacks, Tag 03EK (blueprint: def-pur-sheaf-tensor-product). -/
+noncomputable def changeOfRingsHom {N : SheafOfModules.{u} (𝓡 R₁)} (a : M ⟶ N) :
+    changeOfRings α M ⟶ changeOfRings α N :=
+  (PresheafOfModules.sheafification (𝟙 (𝓡 R₂).obj)).map
+    { app := fun U ↦ (ModuleCat.extendScalars (α.hom.app U).hom).map (a.val.app U)
+      naturality := changeOfRingsHom_naturality α M a }
+
 end ChangeOfRings
 
 section TensorPower
