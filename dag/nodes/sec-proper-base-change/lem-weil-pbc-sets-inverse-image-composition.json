@@ -191,5 +191,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps (Sheaves 008I, 008E): g_* f_* = (g o f)_* on the nose; the composite adjunction (leaf of sk-def-exchange) with its unit computed on sections; the unit condition rewritten as R(c) o eta_1 = eta_2; existence, isomorphism and naturality by the conjugate-isomorphism leaf with delta = id; uniqueness for each G alone by the adjunct-counit identity leaf. Statement unchanged. L widened def-weil-pbc-topological-inverse-image to sheaves of sets (B3 concern raised by the worker: the item and 12 other nodes cite it 'with values in sets')."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SetsInverseImageComposition",
+  "declaration": "TopCat.Sheaf.exists_sets_inverseImage_comp",
+  "file": "lean/Sheaf/Topology/SetsInverseImageComposition.lean",
+  "statement": "theorem exists_sets_inverseImage_comp {X Y Z : TopCat.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) : ∃ e : pullback (Type u) g ⋙ pullback (Type u) f ≅ pullback (Type u) (f ≫ g), ∀ G : Z.Sheaf (Type u), (∀ (W : Opens Z) (s : G.obj.obj (op W)), (e.hom.app G).hom.app (op ((Opens.map (f ≫ g)).obj W)) (((pullbackPushforwardAdjunction (Type u) f).unit.app ((pullback (Type u) g).obj G)).hom.app (op ((Opens.map g).obj W)) (((pullbackPushforwardAdjunction (Type u) g).unit.app G).hom.app (op W) s)) = ((pullbackPushforwardAdjunction (Type u) (f ≫ g)).unit.app G).hom.app (op W) s) ∧ (∀ c : (pullback (Type u) f).obj ((pullback (Type u) g).obj G) ⟶ (pullback (Type u) (f ≫ g)).obj G, (∀ (W : Opens Z) (s : G.obj.obj (op W)), c.hom.app (op ((Opens.map (f ≫ g)).obj W)) (((pullbackPushforwardAdjunction (Type u) f).unit.app ((pullback (Type u) g).obj G)).hom.app (op ((Opens.map g).obj W)) (((pullbackPushforwardAdjunction (Type u) g).unit.app G).hom.app (op W) s)) = ((pullbackPushforwardAdjunction (Type u) (f ≫ g)).unit.app G).hom.app (op W) s) → c = e.hom.app G)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
