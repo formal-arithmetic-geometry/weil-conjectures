@@ -1525,6 +1525,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekOpenRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
