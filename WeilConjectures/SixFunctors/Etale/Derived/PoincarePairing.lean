@@ -121,7 +121,8 @@ variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a] [(R(a)_![A]).I
   {d : ℕ}
 
 /-- Blueprint `sk-def-pairing-data`: The pairing data. This is also blueprint `def-sf-cup`
-(Mixed-support cup product).
+(Mixed-support cup product) and blueprint `def-pod-mixed-support-cup-product`
+(Mixed-support cup product, at the finite stage).
 
 The *mixed-support cup product* of the pairing data,
 
@@ -189,8 +190,8 @@ noncomputable def poincarePairingEvaluation (T K : 𝐃(X, A)) :
   mixedSupportCupProduct A a _ _ ≫ (R(a)_![A]).map (twistedEvaluation T K)
 
 /-- Blueprint `sk-def-pairing`: The derived pairing, and perfectness of a pairing. This is also
-blueprint `def-sf-pairing` (Derived Poincaré pairing); perfectness of a pairing is
-`AlgebraicGeometry.Etale.IsPerfectPairing`.
+blueprint `def-sf-pairing` and `def-pod-derived-poincare-pairing` (Derived Poincaré pairing);
+perfectness of a pairing is `AlgebraicGeometry.Etale.IsPerfectPairing`.
 
 The *derived Poincaré pairing* of a purity isomorphism `γ : T[2d] ≅ Ra^! Λ_Y`,
 

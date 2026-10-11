@@ -85,7 +85,9 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X S : Scheme.{u}} (aX : X ⟶ S)
   [HasCompactification aX]
 
-/-- Blueprint `sk-thm-sf-global-duality`: Global Verdier duality.
+/-- Blueprint `sk-thm-sf-global-duality`: Global Verdier duality. This is also blueprint
+`thm-pod-global-verdier-duality` (Global Verdier duality at the point); the canonical form of the
+isomorphism is `AlgebraicGeometry.Etale.globalVerdierDualityIso`.
 
 For `a_X : X ⟶ S` admitting a compactification, a finite coefficient ring `Λ` and `K` an
 object of `D(X_ét, Λ)`, the coefficient dual of the compactly supported cohomology of `K` is the

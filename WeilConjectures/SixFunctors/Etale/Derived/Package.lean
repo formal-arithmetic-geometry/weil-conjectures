@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 
 /-!
 
@@ -45,8 +46,10 @@ type over `k`. For a general coefficient category the clauses are false: for `Λ
 (Artin–Schreier).
 
 Each clause is one of the statements of this directory, and `sixOperationsPackage` is the
-assembly: the clauses are proved from the corresponding statements, and only smooth base change
-and the orientation, whose statements live in other chapters, carry a `sorry` here.
+assembly: the clauses are proved from the corresponding statements. Smooth base change for `Rf_*`
+is stated, as in the blueprint, on the bounded below derived categories `D⁺`, where it is the
+smooth base change theorem of the smooth base change chapter; the comparison of the `D⁺` base
+change map with the unbounded `AlgebraicGeometry.Etale.derivedBaseChangeMap` is not available.
 
 The clauses of the blueprint that this statement does not carry are the ones whose content is
 an identity *between canonical comparison transformations* rather than the existence of an
@@ -101,8 +104,8 @@ The eight clauses of the blueprint, one group of fields each:
      v          v
      Y' --g---> Y
    ```
-   one has `Lg^* Rf_! ≅ Rf'_! Lg'^*`; and `Lg^* Rf_* ≅ Rf'_* Lg'^*` for proper `f` and for
-   smooth `g`.
+   one has `Lg^* Rf_! ≅ Rf'_! Lg'^*`; and `Lg^* Rf_* ≅ Rf'_* Lg'^*` for proper `f`, and for
+   smooth `g` on `D⁺`, where the base change map `g^* Rf_* ⟶ Rf'_* g'^*` is an isomorphism.
 3. **Projection formula.** `Rf_!(K ⊗ᴸ Lf^* L) ≅ Rf_! K ⊗ᴸ L` at every `K` and `L`.
 4. **Compactifications and proper coincidence.** `Rf_!` is independent of the compactification,
    `R(f ≫ h)_! ≅ Rh_! Rf_!`, and `Rf_! ≅ Rf_*` for proper `f`.
@@ -132,12 +135,12 @@ structure SixOperationsPackage : Prop where
       IsPullback g' f' f g → IsProper f →
       Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
         L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R((f')_*[ModuleCat.{u + 1} Λ]))
-  /-- (2) Smooth base change for `Rf_*`. -/
+  /-- (2) Smooth base change for `Rf_*`: for smooth `g` the base change map
+  `g^* Rf_* ⟶ Rf'_* g'^*` is an isomorphism of functors `D⁺(X_ét, Λ) ⥤ D⁺(Y'_ét, Λ)`. -/
   baseChangeLowerStarOfSmooth :
-    ∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y'),
-      IsPullback g' f' f g → Smooth g →
-      Nonempty (R((f)_*[ModuleCat.{u + 1} Λ]) ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ≅
-        L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ R((f')_*[ModuleCat.{u + 1} Λ]))
+    ∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (g' : X' ⟶ X) (f' : X' ⟶ Y')
+      (sq : IsPullback g' f' f g), Smooth g →
+      IsIso (Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq)
   /-- (3) The projection formula. -/
   projectionFormula : ∀ K L, HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L
   /-- (4) `Rf_!` is independent of the chosen compactification. -/
@@ -200,10 +203,12 @@ structure SixOperationsPackage : Prop where
 
 The eight clauses of `AlgebraicGeometry.Etale.SixOperationsPackage` hold for a finite `Λ` whose
 exponent is invertible on `k`. Every clause is one of the propositions of this directory, and
-the proof is the assembly. Smooth base change on the unbounded derived categories and the
-orientation, which is smooth purity, are not available in this directory and are left open
-here. The Tate twist datum is assumed normalized: for the untwisted datum `Λ_X(m) = Λ_X` the
-orientation clause fails over `ℚ`, where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`. -/
+the proof is the assembly: smooth base change is
+`AlgebraicGeometry.Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder`,
+every sheaf of `Λ`-modules being torsion of order invertible on `Y`, and the orientation is
+smooth purity (`AlgebraicGeometry.Etale.Orientation.nonempty`). The Tate twist datum is assumed
+normalized: for the untwisted datum `Λ_X(m) = Λ_X` the orientation clause fails over `ℚ`,
+where `Rf^! Λ ≅ μ_n[2] ≇ Λ[2]` for `𝔸¹_ℚ ⟶ Spec ℚ`. -/
 theorem sixOperationsPackage [HasTateTwist.IsNormalized Λ] [HasInvertibleExponent Λ (Spec (.of k))]
     [IsSeparated f] :
     SixOperationsPackage Λ k f aY where
@@ -216,14 +221,25 @@ theorem sixOperationsPackage [HasTateTwist.IsNormalized Λ] [HasInvertibleExpone
   baseChangeLowerStarOfProper g g' f' sq _ :=
     have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
     ⟨asIso (derivedBaseChangeMap _ sq.toCommSq)⟩
-  baseChangeLowerStarOfSmooth _ _ _ _ _ := sorry
+  baseChangeLowerStarOfSmooth g _ _ sq hg := by
+    have := hg
+    have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
+    obtain ⟨N, hN₀, hN, hNY⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
+    have (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+        IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
+      Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder Λ g sq K fun _ ↦
+        IsTorsionSheafOfInvertibleOrder.of_natCast_eq_zero Λ N hN₀.ne' hN hNY _
+    exact NatIso.isIso_of_isIso_app _
   projectionFormula K L := hasProjectionFormula_of_finite Λ f K L
   lowerShriekCompactificationIndependent c c' :=
     ⟨rightDerivedLowerShriekOfCompactificationIso Λ c c'⟩
   lowerShriekComp h := nonempty_iso_rightDerivedLowerShriek_comp Λ f h
   lowerShriekIsoLowerStarOfProper _ :=
     nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar _ f
-  orientation _ _ := sorry
+  orientation _ h :=
+    have := h
+    have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom (f ≫ aY)
+    Orientation.nonempty f aY
   biduality _ hK := nonempty_iso_verdierDual_verdierDual Λ (f ≫ aY) hK
   verdierExchange M := nonempty_iso_verdierDual_rightDerivedLowerShriek Λ f aY M
   kunneth := hasKunnethComparisons Λ k

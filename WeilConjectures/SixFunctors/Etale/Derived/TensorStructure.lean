@@ -105,7 +105,9 @@ theorem nonempty_iso_derivedTensor_flip :
 
 variable {A X}
 
-/-- A pairing `b : C ⊗ᴸ D ⟶ Λ_X` in `D(X_ét)` is *perfect* if its tensor–internal-hom adjoint
+/-- Blueprint `def-pod-perfect-derived-pairing`: Perfect derived pairing.
+
+A pairing `b : C ⊗ᴸ D ⟶ Λ_X` in `D(X_ét)` is *perfect* if its tensor–internal-hom adjoint
 `D ⟶ RHom(C, Λ_X)` is an isomorphism.
 
 This is `CategoryTheory.MonoidalClosed.IsPerfectPairing` (see

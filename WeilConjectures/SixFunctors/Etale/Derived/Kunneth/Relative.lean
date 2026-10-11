@@ -16,8 +16,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 
 /-!
 
@@ -68,6 +70,65 @@ namespace Etale
 
 variable {B X Y : Scheme.{u}}
 
+/-- The square
+```
+  X ×_B Z --f × 𝟙--> Y ×_B Z
+     |                  |
+    pr                 pr
+     v                  v
+     X -------f-------> Y
+```
+is cartesian. -/
+lemma isPullback_mapOverBaseRight_fst {Z : Scheme.{u}} (b : Y ⟶ B) (c : Z ⟶ B) (f : X ⟶ Y) :
+    IsPullback (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c) (pullback.fst b c)
+      f :=
+  .of_right (h₁₂ := pullback.snd b c) (h₂₂ := b) (v₁₃ := c)
+    (by simpa using (IsPullback.of_hasPullback (f ≫ b) c).flip)
+    (pullback.mapOverBaseRight_fst f b c) (IsPullback.of_hasPullback b c).flip
+
+/-- The comparison map `Rf_* M ⊠ Q ⟶ R(f × 𝟙_Z)_* (M ⊠ Q)` of the ordinary Künneth formula
+with an identity factor (`sk-lem-sf-kunneth-star`, `lem-trf-ordinary-kunneth`), for
+`f : X ⟶ Y`, `b : Y ⟶ B`, `c : Z ⟶ B`, `M ∈ D(X_ét)` and `Q ∈ D(Z_ét)`.
+
+Writing `p_Y, p'_Z` for the projections of `Y ×_B Z` and `p_X, p_Z` for those of `X ×_B Z`,
+it is the composite
+
+`p_Y^* Rf_* M ⊗ᴸ p'_Z^* Q ≅ p'_Z^* Q ⊗ᴸ p_Y^* Rf_* M
+  ⟶ R(f × 𝟙)_* ((f × 𝟙)^* p'_Z^* Q ⊗ᴸ p_X^* M) ≅ R(f × 𝟙)_* (p_X^* M ⊗ᴸ p_Z^* Q)`
+
+of a symmetry of `⊗ᴸ` (chosen from `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`),
+the base change map `AlgebraicGeometry.Etale.tensorBaseChangeMap` of `lem-kun-0f1n` for the
+cartesian square `AlgebraicGeometry.Etale.isPullback_mapOverBaseRight_fst`, and the
+composition isomorphism `(f × 𝟙)^* p'_Z^* ≅ p_Z^*` followed by the symmetry again. -/
+noncomputable def externalProductRightDerivedLowerStarMap [UpperStarPreservesFlat A]
+    {Z : Scheme.{u}} (b : Y ⟶ B) (c : Z ⟶ B) (f : X ⟶ Y)
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    externalProduct A b c ((R((f)_*[A])).obj M) Q ⟶
+      (R((pullback.mapOverBaseRight f b c)_*[A])).obj (externalProduct A (f ≫ b) c M Q) :=
+  ((nonempty_iso_derivedTensor_flip A (pullback b c)).some.hom.app _).app _ ≫
+    tensorBaseChangeMap A (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c)
+      (pullback.fst b c) f (isPullback_mapOverBaseRight_fst b c f).w
+      ((L((pullback.snd b c)^*[A])).obj Q) M ≫
+    (R((pullback.mapOverBaseRight f b c)_*[A])).map
+      (((derivedTensor A (pullback (f ≫ b) c)).map
+          ((leftDerivedUpperStarComp A (pullback.mapOverBaseRight f b c) (pullback.snd b c)
+            (pullback.snd (f ≫ b) c) (by simp)).inv.app Q)).app _ ≫
+        ((nonempty_iso_derivedTensor_flip A (pullback (f ≫ b) c)).some.hom.app _).app _)
+
+/-- The comparison map `Rf_* M ⊠ Q ⟶ R(f × 𝟙_Z)_* (M ⊠ Q)` is an isomorphism as soon as the
+base change map of `lem-kun-0f1n` it is built from is one. -/
+lemma isIso_externalProductRightDerivedLowerStarMap [UpperStarPreservesFlat A]
+    {Z : Scheme.{u}} (b : Y ⟶ B) (c : Z ⟶ B) (f : X ⟶ Y)
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    [IsIso (tensorBaseChangeMap A (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c)
+      (pullback.fst b c) f (isPullback_mapOverBaseRight_fst b c f).w
+      ((L((pullback.snd b c)^*[A])).obj Q) M)] :
+    IsIso (externalProductRightDerivedLowerStarMap A b c f M Q) := by
+  rw [externalProductRightDerivedLowerStarMap]
+  infer_instance
+
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [HasSmallSiteSheafify A]
@@ -107,13 +168,17 @@ theorem nonempty_iso_externalProduct_rightDerivedLowerStar (Λ : Type (u + 1)) [
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
     {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
-    (hQ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z Q) :
+    (_hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M)
+    (_hQ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z Q) :
     Nonempty (externalProduct (ModuleCat.{u + 1} Λ) b c
         ((R((f)_*[ModuleCat.{u + 1} Λ])).obj M) Q ≅
       (R((pullback.mapOverBaseRight f b c)_*[ModuleCat.{u + 1} Λ])).obj
-        (externalProduct (ModuleCat.{u + 1} Λ) (f ≫ b) c M Q)) :=
-  sorry
+        (externalProduct (ModuleCat.{u + 1} Λ) (f ≫ b) c M Q)) := by
+  have := isIso_tensorBaseChangeMap Λ c b (f ≫ b) (pullback.snd b c) (pullback.fst b c)
+    (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c) f rfl
+    (IsPullback.of_hasPullback b c).flip (isPullback_mapOverBaseRight_fst b c f) Q M
+  have := isIso_externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f M Q
+  exact ⟨asIso (externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f M Q)⟩
 
 /-- Blueprint `sk-thm-sf-kunneth-relative`: Relative product theorem.
 

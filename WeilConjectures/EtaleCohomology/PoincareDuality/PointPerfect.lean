@@ -102,6 +102,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [I
   [HasCompactification aX]
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+This is also blueprint `thm-pod-point-perfectness` (Point perfectness of global sections), at
+the finite stage.
 
 **`RΓ_c(X, K)` is perfect.** Let `Λ` be a finite ring whose exponent is invertible in the
 separably closed field `k`, `X` separated of finite type over `k` and `K ∈ Dctf(X, Λ)`. Then
@@ -127,6 +129,8 @@ theorem isPerfect_compactlySupportedGlobalSections
 omit [IsSeparated aX] in
 include aX in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+This is also blueprint `thm-pod-point-perfectness` (Point perfectness of global sections), at
+the finite stage.
 
 **`RΓ(X, K)` is perfect.** In the situation of
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`, the ordinary cohomology
@@ -157,6 +161,8 @@ theorem isPerfect_rightDerivedGlobalSections [QuasiCompact aX]
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+This is also blueprint `thm-pod-point-perfectness` (Point perfectness of global sections), at
+the finite stage.
 
 **The dual of `RΓ_c(X, K)` is perfect.** In the situation of
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`, the dual
@@ -171,6 +177,8 @@ theorem isPerfect_ihom_compactlySupportedGlobalSections
 omit [IsSeparated aX] in
 include aX in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
+This is also blueprint `thm-pod-point-perfectness` (Point perfectness of global sections), at
+the finite stage.
 
 **The dual of `RΓ(X, K)` is perfect.** In the situation of
 `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections`, the dual
