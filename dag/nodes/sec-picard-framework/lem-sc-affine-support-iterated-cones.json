@@ -116,5 +116,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sic2834 (reviewer sub-agent of L); spot-checked: Statement identical to sheaf-dag (binom(s+1,j), hypotheses-first form of R-pse2710; no revert). J1 step 3 uses exactly this statement (C4 ok). Math checked: cone of zero map doubles, (1+t)^{s+1}; support via D(g_i). FIX more, RETURN less: (1) E/C1 gap missed by second reading: step 3 asserted g_i zero on C_{i-1}|_U only from zero on F+F[1]; repaired by induction using naturality of multiplication by g_i on the decomposition C_{i-1}|_U, cone of zero map = K+K[1] (Tags 05QS, 05QR), Pascal. (2) class (d): lem-sc-single-cone-principal-support folded into step 2 (g_i unit on D(g_i), cone of iso zero, Tag 05QR) and dropped. (3) class (d): lem-sc-zero-cone-binomial folded into step 3 and dropped. proof_deps now lem-pc-perfect-two-out-of-three only. Note: created.item on the item still names lem-sc-affine-perfect-support-extension (correct: it was created there); second reading's claimed change did not land and is not needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSupportIteratedCones",
+  "declaration": "AlgebraicGeometry.Scheme.affine_support_iterated_cones",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSupportIteratedCones.lean",
+  "statement": "theorem affine_support_iterated_cones (X : Scheme.{u}) [IsAffine X] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ V : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))] (s : ℕ) (g : Fin s → RingCat.sectionsSubring (X.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u})) (C : Fin (s + 1) → schemeDerivedCategory X) (hE : IsPerfect X (C 0)) (U : X.Opens) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (b : ∀ i : Fin s, C i.castSucc ⟶ C i.succ) (d : ∀ i : Fin s, C i.succ ⟶ (C i.castSucc)⟦(1 : ℤ)⟧) (hcone : ∀ i : Fin s, Triangle.mk (schemeDerivedScalar X (g i) (𝟙 (C i.castSucc))) (b i) (d i) ∈ distTriang (schemeDerivedCategory X)) : IsPerfect X (C (Fin.last s)) ∧ (∀ (n : ℤ) (x : X), (∃ i : Fin s, x ∈ X.basicOpen ((g i).val (op ⊤))) → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj (C (Fin.last s))).val.presheaf x))) ∧ (IsCompact (U : Set X) → ∀ F : schemeDerivedCategory U.toScheme, IsPerfect U.toScheme F → Nonempty (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj (C 0) ≅ F ⊞ F⟦(1 : ℤ)⟧) → ∀ (g' : Fin s → RingCat.sectionsSubring (U.toScheme.sheaf.obj ⋙ forget₂ CommRingCat RingCat.{u})), (∀ i : Fin s, (g' i).val (op ⊤) = U.ι.appTop.hom ((g i).val (op ⊤))) → (∀ i : Fin s, schemeDerivedScalar U.toScheme (g' i) (𝟙 F) = 0) → Nonempty (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj (C (Fin.last s)) ≅ biproduct (fun p : (j : Fin (s + 2)) × Fin (Nat.choose (s + 1) j.val) ↦ F⟦(p.1.val : ℤ)⟧)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sic"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sic",
+  "group": "C1",
+  "result": "fix",
+  "note": "X affine, g_1..g_s as compatible families, C_0=E perfect, C_i distinguished cone of schemeDerivedScalar g_i on C_{i-1}; C_s perfect; H^n stalks of C_s vanish on union of D(g_i); U qc, F perfect on U.toScheme, E|_U = F+F[1] via overFunctor+overEquiv, g_i|_U zero on F, C_s|_U = sum F[j]^binom(s+1,j); dropped duplicate new node(s) def-sc-derived-function-multiplication (--drop-nodes; not merged, the item points at the landed declaration); reverted the delivery's change of existing node(s) def-pc-perfect-complex (--revert-nodes; kept as on sheaf-dag); left out new module(s) lean/Sheaf/AlgebraicGeometry/PerfectComplexOnOpen.lean, lean/Sheaf/AlgebraicGeometry/DerivedFunctionMultiplication.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
