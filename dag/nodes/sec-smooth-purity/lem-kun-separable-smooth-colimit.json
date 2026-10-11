@@ -114,5 +114,28 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ssc3030 (reviewer sub-agent of L); spot-checked: Read whole packet; checked steps against fg node, algebraic node, spec-colimit-limit and both citers (popescu-resolve-separable, lem-kun-0f1c use exactly the stated subalgebra/inclusion form; C4 ok). FIX more, RETURN less: (1) new node lem-kun-filtered-colimit-spec-limit false/ill-typed as stated (Grothendieck construction needs compatible inner presentations; union of arbitrary inner subalgebras need not be directed without finite generation), dropped and replaced by the elementary Tag 07BV cofinality argument over the set of fg smooth subalgebras (class d); (2) C4: algebraic node gives no subalgebra/inclusion clause, so step 2 now uses the fg node, which covers finite separable extensions; (3) separability of subextensions folded as elementary (Tag 030R); step 4 now cites spec-colimit-limit on the directed set S.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableSmoothColimit",
+  "declaration": "FieldTheory.separable_extension_is_filtered_colimit_smooth",
+  "declarations": [
+   "FieldTheory.smoothSubalgebraDiagram",
+   "FieldTheory.smoothSubalgebraCocone",
+   "FieldTheory.separable_extension_is_filtered_colimit_smooth"
+  ],
+  "file": "lean/Sheaf/FieldTheory/SeparableSmoothColimit.lean",
+  "statement": "theorem separable_extension_is_filtered_colimit_smooth {K : Type u} {L : Type v} [Field K] [Field L] [Algebra K L] (hsep : Algebra.IsSeparableExtension K L) : Nonempty {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG} ∧ Directed (· ≤ ·) (fun A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG} => A.1) ∧ (∀ x : L, ∃ A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}, x ∈ A.1) ∧ Nonempty (IsColimit (smoothSubalgebraCocone K L)) ∧ Nonempty (IsLimit (Scheme.Spec.mapCone (smoothSubalgebraCocone K L).op)) ∧ (∀ A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}, Algebra.Smooth K A.1) ∧ (∀ (A B : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}) (f : B ⟶ A), IsAffineHom (Spec.map (CommRingCat.ofHom (Subalgebra.inclusion (leOfHom f)).toRingHom)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ssc0804",
+  "group": "C1",
+  "result": "fix",
+  "note": "K u/L v fields+Algebra, hsep = recorded Algebra.IsSeparableExtension (H12); index = all FG smooth subalgebras (Algebra.Smooth, Subalgebra.FG), Nonempty+Directed(<=)+cover = filtered union; IsColimit of inclusion cocone in CommRingCat; Spec mapCone op IsLimit; smooth + IsAffineHom transitions; docstring proof; FIX H9: dropped unused imports GammaSpecAdjunction, Limits.Opposites (recompiled clean)"
  }
 }
