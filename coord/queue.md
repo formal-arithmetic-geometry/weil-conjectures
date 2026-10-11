@@ -1,11 +1,11 @@
 # Work queue
 
-693 items; claim with `tools/claim.py next <group> [--stage N]`.
+690 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (693)
+## Stage 2: nodes to state (690)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -14,7 +14,6 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pur-derived-functor-shift-05su` | 1 | state |
-| `lem-pur-essential-constant-cofinal-0a1s` | 1 | state |
 | `lem-pur-left-derived-exact-when-defined` | 1 | state |
 | `lem-pur-triangle-common-refinement-ms3-05r9` | 1 | state |
 | `lem-pur-triangle-completion-ms6-05r9` | 1 | state |
@@ -27,14 +26,12 @@
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
-| `lem-weil-pbc-etale-retraction-finite-type-splitting` | 1 | state |
 | `lem-weil-pbc-etale-separated-stratified-finite` | 1 | state |
 | `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1 | state |
 | `lem-weil-pbc-field-cohen-power-series-formally-smooth` | 1 | state |
 | `lem-weil-pbc-field-extension-complete-intersection-subalgebras` | 1 | state |
-| `lem-weil-pbc-field-point-factors-through-closed-immersion` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-categories` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-flat-modules` | 1 | state |
@@ -45,9 +42,9 @@
 | `lem-weil-pbc-finite-after-completion` | 1 | state |
 | `lem-weil-pbc-finite-coproduct-lfp-qcqs` | 1 | state |
 | `lem-weil-pbc-finite-etale-etale-local-split` | 1 | state |
-| `lem-weil-pbc-finite-etale-lifting-approximation` | 1 | state |
 | `lem-weil-pbc-finite-etale-lifting-complete` | 1 | state |
 | `lem-weil-pbc-finite-etale-lifting-essential-surjectivity` | 1 | state |
+| `lem-weil-pbc-finite-etale-lifting-limit-descent` | 1 | state |
 | `lem-weil-pbc-finite-etale-trace-exists` | 1 | state |
 | `lem-weil-pbc-finite-free-resolution-noetherian` | 1 | state |
 | `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1 | state |
@@ -703,7 +700,7 @@
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 817 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 816 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
