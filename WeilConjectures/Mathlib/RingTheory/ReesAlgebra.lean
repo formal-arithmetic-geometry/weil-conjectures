@@ -5,8 +5,9 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Category.Ring.Constructions
 public import Mathlib.Algebra.Polynomial.Laurent
-public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Localization.BaseChange
 public import Mathlib.RingTheory.ReesAlgebra
 public import Mathlib.RingTheory.TensorProduct.MonoidAlgebra
@@ -43,6 +44,8 @@ open LaurentPolynomial Polynomial
 open scoped TensorProduct
 
 namespace Ideal
+
+universe u
 
 variable {R : Type*} [CommRing R] (I : Ideal R)
 
@@ -266,6 +269,148 @@ theorem isBaseChange_extendedReesAlgebraAlgHom [Module.Flat R S] :
   simp only [L, Algebra.TensorProduct.lift_tmul, map_one, one_mul]
   rfl
 
+/-- The extended Rees algebra of `I S` as an algebra over that of `I`, along an `R`-algebra `S`. -/
+noncomputable instance : Algebra I.extendedReesAlgebra (I.map (algebraMap R S)).extendedReesAlgebra :=
+  (I.extendedReesAlgebraAlgHom S).toRingHom.toAlgebra
+
+instance : IsScalarTower R I.extendedReesAlgebra (I.map (algebraMap R S)).extendedReesAlgebra :=
+  .of_algebraMap_eq fun r ↦ ((I.extendedReesAlgebraAlgHom S).commutes r).symm
+
+instance : IsScalarTower R S (I.map (algebraMap R S)).extendedReesAlgebra :=
+  .of_algebraMap_eq fun r ↦ Subtype.ext (IsScalarTower.algebraMap_apply R S S[T;T⁻¹] r)
+
+/-- Along a flat `R`-algebra `S`, `S[t, (I S) t⁻¹] = S ⊗_R R[t, I t⁻¹]`, as a pushout of
+algebras. -/
+instance isPushout_extendedReesAlgebra [Module.Flat R S] :
+    Algebra.IsPushout R S I.extendedReesAlgebra (I.map (algebraMap R S)).extendedReesAlgebra where
+  out := isBaseChange_extendedReesAlgebraAlgHom S
+
 end BaseChange
+
+section Localization
+
+variable {S : Type*} [CommRing S]
+
+/-- The extended Rees algebra commutes with localization: if `φ : R ⟶ S` is the localization
+away from `r` and `J = I S`, then `S[t, J t⁻¹]` is the localization of `R[t, I t⁻¹]` away from
+`r`. -/
+theorem isLocalization_away_extendedReesAlgebraMap (φ : R →+* S) (r : R)
+    (hφ : letI := φ.toAlgebra; IsLocalization.Away r S) (J : Ideal S) (hJ : I.map φ = J) :
+    letI := (I.extendedReesAlgebraMap φ J hJ.le).toAlgebra
+    IsLocalization.Away (⟨LaurentPolynomial.C r, C_mem_extendedReesAlgebra r⟩ :
+      I.extendedReesAlgebra) J.extendedReesAlgebra := by
+  subst hJ
+  let := φ.toAlgebra
+  have : Module.Flat R S := IsLocalization.flat S (.powers r)
+  have : IsLocalization (Algebra.algebraMapSubmonoid I.extendedReesAlgebra (.powers r))
+      (I.map (algebraMap R S)).extendedReesAlgebra :=
+    (Algebra.isLocalization_iff_isPushout (.powers r) S).mpr (Algebra.IsPushout.symm inferInstance)
+  rw [Algebra.algebraMapSubmonoid, Submonoid.map_powers] at this
+  exact this
+
+end Localization
+
+section Polynomial
+
+variable (I) in
+/-- The inclusion `R[t] ⊆ R[t, I t⁻¹]`. -/
+noncomputable def toExtendedReesAlgebra : R[X] →+* I.extendedReesAlgebra :=
+  toLaurent.codRestrict I.extendedReesAlgebra.toSubring toLaurent_mem_extendedReesAlgebra
+
+@[simp]
+lemma coe_toExtendedReesAlgebra (p : R[X]) :
+    (I.toExtendedReesAlgebra p : R[T;T⁻¹]) = toLaurent p :=
+  rfl
+
+@[simp]
+lemma toExtendedReesAlgebra_X : I.toExtendedReesAlgebra X = I.extendedReesAlgebraT :=
+  Subtype.ext toLaurent_X
+
+lemma extendedReesAlgebraMap_comp_toExtendedReesAlgebra {S : Type*} [CommRing S] (φ : R →+* S)
+    (J : Ideal S) (h : I.map φ ≤ J) :
+    (I.extendedReesAlgebraMap φ J h).comp I.toExtendedReesAlgebra =
+      J.toExtendedReesAlgebra.comp (Polynomial.mapRingHom φ) := by
+  ext p : 2
+  · exact Subtype.ext (by simp only [coe_extendedReesAlgebraMap, coe_toExtendedReesAlgebra,
+      RingHom.comp_apply, Polynomial.coe_mapRingHom, Polynomial.map_C, Polynomial.toLaurent_C,
+      laurentMap_C])
+  · simp
+
+/-- The square `R[t] ⟶ R[t, I t⁻¹] ⟶ R[t, t⁻¹]` exhibits `R[t, t⁻¹]` as the localization of the
+extended Rees algebra at `t`, base changed from `R[t] ⟶ R[t, t⁻¹]`. -/
+theorem isPushout_toExtendedReesAlgebra {R : Type u} [CommRing R] (I : Ideal R) :
+    CategoryTheory.IsPushout (CommRingCat.ofHom I.toExtendedReesAlgebra)
+      (CommRingCat.ofHom (algebraMap R[X] R[T;T⁻¹]))
+      (CommRingCat.ofHom (algebraMap I.extendedReesAlgebra R[T;T⁻¹]))
+      (CommRingCat.ofHom (RingHom.id R[T;T⁻¹])) := by
+  have : IsLocalization ((Submonoid.powers (X : R[X])).map I.toExtendedReesAlgebra)
+      R[T;T⁻¹] := by
+    rw [Submonoid.map_powers, toExtendedReesAlgebra_X]
+    infer_instance
+  exact CommRingCat.isPushout_of_isLocalization _ _
+    (by ext p : 2 <;> simp) (.powers X)
+
+end Polynomial
+
+section ToPolynomial
+
+variable {S : Type*} [CommRing S]
+
+lemma laurentMap_mem_range_toLaurent (φ : R →+* S) (h : I ≤ RingHom.ker φ) {x : R[T;T⁻¹]}
+    (hx : x ∈ I.extendedReesAlgebra) : laurentMap φ x ∈ (toLaurent (R := S)).range := by
+  induction hx using Algebra.adjoin_induction with
+  | mem y hy =>
+    obtain rfl | ⟨x, hx, rfl⟩ := hy
+    · exact ⟨X, by simp⟩
+    · refine ⟨0, ?_⟩
+      simp [RingHom.mem_ker.mp (h hx)]
+  | algebraMap r =>
+    exact ⟨Polynomial.C (φ r), by simp [← LaurentPolynomial.C_eq_algebraMap]⟩
+  | add x y _ _ hx hy => rw [map_add]; exact Subring.add_mem _ hx hy
+  | mul x y _ _ hx hy => rw [map_mul]; exact Subring.mul_mem _ hx hy
+
+variable (I) in
+/-- For `φ : R ⟶ S` killing `I`, the map `R[t, I t⁻¹] ⟶ S[t]` sending `t ↦ t`, `x t⁻¹ ↦ 0` for
+`x ∈ I` and `r ↦ φ r`: it is induced by `R[t, t⁻¹] ⟶ S[t, t⁻¹]`, which lands in `S[t]`. -/
+noncomputable def extendedReesAlgebraToPolynomial (φ : R →+* S) (h : I ≤ RingHom.ker φ) :
+    I.extendedReesAlgebra →+* S[X] :=
+  (RingEquiv.ofLeftInverse (f := toLaurent (R := S)) leftInverse_trunc_toLaurent).symm.toRingHom.comp
+    (((laurentMap φ).comp I.extendedReesAlgebra.val.toRingHom).codRestrict _
+      fun x ↦ laurentMap_mem_range_toLaurent φ h x.2)
+
+@[simp]
+lemma toLaurent_extendedReesAlgebraToPolynomial (φ : R →+* S) (h : I ≤ RingHom.ker φ)
+    (x : I.extendedReesAlgebra) :
+    toLaurent (I.extendedReesAlgebraToPolynomial φ h x) = laurentMap φ (x : R[T;T⁻¹]) := by
+  simp only [extendedReesAlgebraToPolynomial, RingHom.coe_comp, Function.comp_apply]
+  exact congrArg Subtype.val ((RingEquiv.ofLeftInverse
+    (f := toLaurent (R := S)) leftInverse_trunc_toLaurent).apply_symm_apply _)
+
+lemma extendedReesAlgebraToPolynomial_comp_toExtendedReesAlgebra (φ : R →+* S)
+    (h : I ≤ RingHom.ker φ) :
+    (I.extendedReesAlgebraToPolynomial φ h).comp I.toExtendedReesAlgebra =
+      Polynomial.mapRingHom φ := by
+  refine RingHom.ext fun p ↦ ?_
+  apply toLaurent_injective
+  simp only [RingHom.comp_apply, toLaurent_extendedReesAlgebraToPolynomial,
+    coe_toExtendedReesAlgebra, coe_mapRingHom]
+  induction p using Polynomial.induction_on' with
+  | add p q hp hq => simp only [map_add, Polynomial.map_add, hp, hq]
+  | monomial n a =>
+    simp [← C_mul_X_pow_eq_monomial]
+
+@[simp]
+lemma extendedReesAlgebraToPolynomial_T (φ : R →+* S) (h : I ≤ RingHom.ker φ) :
+    I.extendedReesAlgebraToPolynomial φ h I.extendedReesAlgebraT = X := by
+  apply toLaurent_injective
+  simp
+
+lemma extendedReesAlgebraToPolynomial_C_mul_T_neg_one (φ : R →+* S) (h : I ≤ RingHom.ker φ)
+    {x : R} (hx : x ∈ I) :
+    I.extendedReesAlgebraToPolynomial φ h ⟨_, C_mul_T_neg_one_mem_extendedReesAlgebra hx⟩ = 0 := by
+  apply toLaurent_injective
+  simp [RingHom.mem_ker.mp (h hx)]
+
+end ToPolynomial
 
 end Ideal
