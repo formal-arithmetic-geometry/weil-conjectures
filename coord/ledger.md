@@ -4006,3 +4006,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:23 L: merged deliver/C1/lem-weil-pbc-constructible-module-finite-pushforward-embedding (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding AlgebraicGeometry.Etale.finite_pushforward_embedding_of_isConstructibleEtaleModuleSheaf)
 - 09:24 L: merged deliver/M1/lem-weil-pbc-coskeletal-map-trivial-kan (stage 2; reviewer PASS; first push; Sheaf.AlgebraicTopology.CoskeletalMapTrivialKan SSet.rlp_boundaries_of_coskeletal_map)
 - 09:24 L: merged deliver/E1/lem-weil-pbc-constant-sheaf-geometric-stalk (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk AlgebraicGeometry.Scheme.constantSheaf_geometricStalk_isIso)
+- 09:25 L: merged deliver/E1/def-sc-divisor (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DivisorModule AlgebraicGeometry.Scheme.Divisor.moduleOfSmoothConnectedCurve)
