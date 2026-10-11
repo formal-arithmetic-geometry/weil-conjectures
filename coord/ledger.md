@@ -3083,3 +3083,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:18 L: merged deliver/F1/lem-pc-tor-independent-projective-complex-tensor (reviewer FIX; first push; new nodes: 2)
 - 00:19 UTC L: F1 tor-independent-projective-complex-tensor FIX d5288863c (R-tpt0018).
 - 00:19 L: merged deliver/J1/lem-sc-valuation-proper-coherent-sections (reviewer PASS; first push; new nodes: 1)
+- 00:20 L: returned deliver/M1/lem-sc-picard-closure-specialization (reviewer RETURN: Not a fault: the node was attached by L at 23:56 UTC (commit becdd3ebc) to the sorry-free slopmaster2 declaration Algebr)
