@@ -25,7 +25,8 @@
   "def-weil-pbc-scheme-conventions",
   "pqf-def-cohomology",
   "def-weil-pbc-quasi-compact-scheme",
-  "def-weil-pbc-ample-invertible-module"
+  "def-weil-pbc-ample-invertible-module",
+  "def-sc-cohomology-fraction-presentation"
  ],
  "proof": [
   {
@@ -127,5 +128,22 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-isc (reviewer sub-agent of L); spot-checked: Source: Stacks coherent.tex Lemma 09MR (lemma-invert-s-cohomology) and Lemma 08DR (lemma-induction-principle) read; the item statement is unchanged against sheaf-dag and agrees with 09MR hypothesis by hypothesis (X qcqs, L invertible, s in Gamma(X,L), F quasi-coherent, degree-zero localization, xi/s^n -> s^{-n}xi). Step 1 is carried by the affine-case node (true: U and U_s affine, so both sides vanish for p>0 by 01XB/01PV and p=0 is 01PW); step 2 by the gluing node (the MV paragraph of 09MR; U cap V quasi-compact as X is quasi-separated; localization exact; five-lemma); step 3 by the induction node, which states 08DR exactly with the property P(U) of the 09MR proof. DAG search: no existing node for 08DR, Zariski Mayer-Vietoris or 01PW (pqf-lem-affine-vanishing and lem-sc-affine-cap-section-open exist but only cover parts of the bundled affine case; creating one affine-case statement node is acceptable). No slopmaster2 declaration (grep 09MR/08DR/invert-s/induction principle). Small cases: P^1, L=O(1), s=x0, F=O: p=0 gives k[x1/x0]=Gamma(A^1,O); p=1 the degree-zero localization is 0 since H^1(O(n))=0 for n>=0, and H^1(A^1,O)=0; s=0 gives X_s empty and zero localization. FIX: dag/nodes/sec-curve-estimates/lem-sc-invert-s-cohomology-gluing.json: statement: removed the proof sketch 'This follows from the Mayer-Vietoris sequences ... and the five-lemma' (B1), introduced H^p_*, the degree-zero localization, W_s and the canonical map c^p_W in the node itself (B2), TeX (B4); stmt_deps: added def-weil-pbc-quasi-compact-scheme and def-weil-pbc-scheme-conventions which the statement cites. dag/nodes/sec-curve-estimates/lem-sc-invert-s-cohomology-affine-case.json: statement: introduced H^p_*, the degree-zero localization, U_s and the canonical map in the node (B2), TeX (B4); mathematics unchanged. Start Sat Oct 10 04:06:38 PM UTC 2026, end Sat Oct 10 04:07:58 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvertSCOhomology",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.invertS_cohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertSCOhomology.lean",
+  "statement": "theorem invertS_cohomology (X : Scheme.{u}) (L F : X.Modules) [L.IsInvertible] [F.IsQuasicoherent] [CompactSpace X] [QuasiSeparatedSpace X] (s : Γ(L, ⊤)) (p : ℕ) : ∃ U : X.Opens, (U : Set X) = nonvanishingLocus L s ∧ ∃ e : CohomologyFractionPresentation L F s p ⊤ ≃+ (RingedSpace.openModuleCohomology X.toRingedSpace p U).obj F, ∀ (n : ℕ) (ξ : (RingedSpace.openModuleCohomology X.toRingedSpace p ⊤).obj (F ⊗ L.tensorPow n : X.Modules)), (RingedSpace.openModuleCohomology X.toRingedSpace p U).map (((ρ_ F).inv ≫ F ◁ tensorPowSection (homOfGlobalSection L s) n) : F ⟶ (F ⊗ L.tensorPow n : X.Modules)) (e (cohomologyFraction L F s p ⊤ n ξ)) = (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p (homOfLE (le_top : U ≤ ⊤))).app (F ⊗ L.tensorPow n : X.Modules) ξ",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-isc",
+  "group": "C1",
+  "result": "pass"
  }
 }
