@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Transition
 
 /-!
@@ -42,83 +43,6 @@ namespace AlgebraicGeometry
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 section TransitionComposition
-
-/-- The associativity law for the composition isomorphisms
-`AlgebraicGeometry.Etale.upperStarCompDerivedPlus` of the derived pullbacks, at an object, with
-all three composites of the morphisms named. It is checked on the image of the homotopy
-category, where it is the underived law `AlgebraicGeometry.Etale.upperStarComp_assoc'`. -/
-lemma Etale.upperStarCompDerivedPlus_assoc {W X Y Z : Scheme.{u}} (f : W ⟶ X) (g : X ⟶ Y)
-    (h : Y ⟶ Z) (fg : W ⟶ Y) (gh : X ⟶ Z) (fgh : W ⟶ Z) (hfg : fg = f ≫ g)
-    (hgh : gh = g ≫ h) (hfgh : fgh = fg ≫ h)
-    (K : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) f gh fgh
-        (by rw [hfgh, hfg, hgh, Category.assoc])).hom.app K ≫
-      D+((f)^*[ModuleCat.{u + 1} Λ]).map
-        ((Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) g h gh hgh).hom.app K) =
-    (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) fg h fgh hfgh).hom.app K ≫
-      (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) f g fg hfg).hom.app
-        (D+((h)^*[ModuleCat.{u + 1} Λ]).obj K) := by
-  suffices H : (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) f gh fgh
-        (by rw [hfgh, hfg, hgh, Category.assoc])).hom ≫
-      Functor.whiskerRight (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) g h gh hgh).hom
-        D+((f)^*[ModuleCat.{u + 1} Λ]) =
-    (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) fg h fgh hfgh).hom ≫
-      Functor.whiskerLeft D+((h)^*[ModuleCat.{u + 1} Λ])
-        (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) f g fg hfg).hom from
-    NatTrans.congr_app H K
-  refine Localization.natTrans_ext DerivedCategory.Plus.Qh
-    (HomotopyCategory.Plus.quasiIso _) (fun K => ?_)
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
-  rw [← cancel_mono (D+((f)^*[ModuleCat.{u + 1} Λ]).map (D+((g)^*[ModuleCat.{u + 1} Λ]).map
-      (((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.hom.app K)) ≫
-    D+((f)^*[ModuleCat.{u + 1} Λ]).map
-      (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.hom.app
-        (((h)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K)) ≫
-    ((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.hom.app
-      (((g)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
-        (((h)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K)))]
-  have e1 := Etale.upperStarCompDerivedPlus_hom_app_factorsh (ModuleCat.{u + 1} Λ) g h gh hgh K
-  have e2 := Etale.upperStarCompDerivedPlus_hom_app_factorsh (ModuleCat.{u + 1} Λ) f gh fgh
-    (by rw [hfgh, hfg, hgh, Category.assoc]) K
-  have e3 := Etale.upperStarCompDerivedPlus_hom_app_factorsh (ModuleCat.{u + 1} Λ) fg h fgh hfgh K
-  have e4 := Etale.upperStarCompDerivedPlus_hom_app_factorsh (ModuleCat.{u + 1} Λ) f g fg hfg
-    (((h)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K)
-  have n1 := ((f)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.hom.naturality
-    ((NatTrans.mapHomotopyCategoryPlus
-      (Etale.upperStarComp (ModuleCat.{u + 1} Λ) g h gh hgh).hom).app K)
-  have n2 := (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) f g fg hfg).hom.naturality
-    (((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.hom.app K)
-  have ua := Etale.upperStarComp_assoc' (ModuleCat.{u + 1} Λ) f g h fg gh fgh hfg hgh hfgh
-  simp only [Functor.comp_obj, Functor.comp_map] at e1 e2 e3 e4 n1 n2
-  have ua' := congrArg (fun α ↦ (NatTrans.mapHomotopyCategoryPlus α).app K) ua
-  simp only [NatTrans.mapHomotopyCategoryPlus_comp, NatTrans.comp_app] at ua'
-  have e1' : (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) g h gh hgh).hom.app
-        (DerivedCategory.Plus.Qh.obj K) ≫
-      D+((g)^*[ModuleCat.{u + 1} Λ]).map
-        (((h)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.hom.app K) ≫
-      ((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.hom.app
-        (((h)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K) =
-      ((gh)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.hom.app K ≫
-      (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
-        (Etale.upperStarComp (ModuleCat.{u + 1} Λ) g h gh hgh).hom).app K) :
-        DerivedCategory.Plus.Qh.obj (((gh)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K) ⟶
-        DerivedCategory.Plus.Qh.obj (((g)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
-          (((h)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K))) := e1
-  have e1f := congrArg (fun x ↦ D+((f)^*[ModuleCat.{u + 1} Λ]).map x) e1'
-  simp only [Functor.map_comp] at e1f
-  simp only [Category.assoc]
-  rw [reassoc_of% e1f]
-  erw [n1]
-  erw [reassoc_of% e2]
-  erw [← reassoc_of% n2]
-  erw [e4]
-  erw [reassoc_of% e3]
-  simp only [NatTrans.mapHomotopyCategoryPlus_whiskerRight_app,
-    NatTrans.mapHomotopyCategoryPlus_whiskerLeft_app] at ua'
-  refine congrArg (CategoryStruct.comp
-    (((fgh)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.hom.app K)) ?_
-  exact ((DerivedCategory.Plus.Qh.map_comp _ _).symm.trans
-    ((congrArg DerivedCategory.Plus.Qh.map ua').trans (DerivedCategory.Plus.Qh.map_comp _ _)))
 
 /-- The transition maps `AlgebraicGeometry.Etale.lowerStarPlusTransition` are natural in the
 complex. -/
@@ -272,11 +196,13 @@ lemma Etale.upperStarCompDerivedPlus_coherence {T T₂ T₁ Y Y₂ Y₁ : Scheme
         ((Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) π₁ π₂ π hπ.symm).inv.app K) =
     (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) a e (a ≫ e) rfl).inv.app K ≫
       (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) e₁ π (a ≫ e) wa).hom.app K := by
-  have A1 := Etale.upperStarCompDerivedPlus_assoc Λ a₁ a₂ e a (a₂ ≫ e) (a ≫ e) ha.symm rfl rfl K
-  have A2 := Etale.upperStarCompDerivedPlus_assoc Λ a₁ e₂ π₂ (a₁ ≫ e₂) (a₂ ≫ e) (a ≫ e) rfl wa₂
-    (by simp only [← ha, Category.assoc, wa₂]) K
-  have A3 := Etale.upperStarCompDerivedPlus_assoc Λ e₁ π₁ π₂ (a₁ ≫ e₂) π (a ≫ e) wa₁ hπ.symm
-    (by simp only [← ha, Category.assoc, wa₂]) K
+  have A1 := NatTrans.congr_app (Etale.upperStarCompDerivedPlus_assoc (ModuleCat.{u + 1} Λ)
+    a₁ a₂ e a (a₂ ≫ e) (a ≫ e) ha.symm rfl rfl) K
+  have A2 := NatTrans.congr_app (Etale.upperStarCompDerivedPlus_assoc (ModuleCat.{u + 1} Λ)
+    a₁ e₂ π₂ (a₁ ≫ e₂) (a₂ ≫ e) (a ≫ e) rfl wa₂ (by simp only [← ha, Category.assoc, wa₂])) K
+  have A3 := NatTrans.congr_app (Etale.upperStarCompDerivedPlus_assoc (ModuleCat.{u + 1} Λ)
+    e₁ π₁ π₂ (a₁ ≫ e₂) π (a ≫ e) wa₁ hπ.symm (by simp only [← ha, Category.assoc, wa₂])) K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at A1 A2 A3
   have A1' : (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) a₁ a₂ a ha.symm).hom.app
         (D+((e)^*[ModuleCat.{u + 1} Λ]).obj K) ≫
       D+((a₁)^*[ModuleCat.{u + 1} Λ]).map

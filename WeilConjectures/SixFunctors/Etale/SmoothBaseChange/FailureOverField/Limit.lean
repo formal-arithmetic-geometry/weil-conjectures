@@ -241,8 +241,9 @@ lemma Etale.overLowerStarTransition_comp (g : T ⟶ S) {Tᵢ Tⱼ Tₖ : Scheme.
   have hn := Etale.lowerStarPlusTransition_naturality Λ ρ' ((ρ ≫ πᵢ) ≫ g)
     ((ρ' ≫ ρ ≫ πᵢ) ≫ g) (by simp only [Category.assoc])
     ((Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) ρ πᵢ (ρ ≫ πᵢ) rfl).inv.app K)
-  have A := Etale.upperStarCompDerivedPlus_assoc Λ ρ' ρ πᵢ (ρ' ≫ ρ) (ρ ≫ πᵢ) (ρ' ≫ ρ ≫ πᵢ) rfl rfl
-    (Category.assoc _ _ _).symm K
+  have A := NatTrans.congr_app (Etale.upperStarCompDerivedPlus_assoc (ModuleCat.{u + 1} Λ)
+    ρ' ρ πᵢ (ρ' ≫ ρ) (ρ ≫ πᵢ) (ρ' ≫ ρ ≫ πᵢ) rfl rfl (Category.assoc _ _ _).symm) K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at A
   have A' : D+((ρ')^*[ModuleCat.{u + 1} Λ]).map
         ((Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) ρ πᵢ (ρ ≫ πᵢ) rfl).inv.app K) ≫
       (Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) ρ' (ρ ≫ πᵢ) (ρ' ≫ ρ ≫ πᵢ)
