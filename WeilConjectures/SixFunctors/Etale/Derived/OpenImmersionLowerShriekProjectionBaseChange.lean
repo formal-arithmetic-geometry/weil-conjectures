@@ -217,6 +217,43 @@ lemma derivedOpenImmersionSquareMap_tensor (sq : CommSq g' j' j g'')
   rw [tensorHom_def, Category.assoc]
   rfl
 
+/-- **The projection formula for the extension by zero commutes with base change**: for a
+cartesian square `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions, `K` in `D(U_ét)` and `M` in
+`D(Z_ét)`, the square
+```
+Dj'_!Lg'^*(K ⊗ᴸ Lj^*M) ──≅──▶ Lg''^*Dj_!(K ⊗ᴸ Lj^*M) ──Lg''^* π──▶ Lg''^*(Dj_!K ⊗ᴸ M)
+          │                                                              │
+          ▼                                                              ▼
+Dj'_!(Lg'^*K ⊗ᴸ Lj'^*Lg''^*M) ──π──▶ Dj'_!Lg'^*K ⊗ᴸ Lg''^*M ──≅ ⊗ 1──▶ Lg''^*Dj_!K ⊗ᴸ Lg''^*M
+```
+commutes, where `π` is the projection map, the horizontal isomorphisms are the base change
+isomorphism, and the vertical arrows are the tensor comparisons of the derived pullbacks
+followed, on the left, by `Lg'^*Lj^* ≅ Lj'^*Lg''^*`. -/
+lemma derivedOpenImmersionLowerShriekProjectionMap_baseChange (hsq : IsPullback g' j' j g'')
+    (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
+    (M : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    (derivedOpenImmersionLowerShriekBaseChangeIso A hsq).hom.app
+          (((-⊗ᴸ-(U)[A]).obj K).obj (L((j)^*[A]).obj M)) ≫
+        L((g'')^*[A]).map (((derivedOpenImmersionLowerShriekProjectionMap A j).app K).app M) ≫
+        ((leftDerivedUpperStarTensorComparison A g'').app (D((j)_!open[A]).obj K)).app M =
+      D((j')_!open[A]).map (((leftDerivedUpperStarTensorComparison A g').app K).app
+          (L((j)^*[A]).obj M)) ≫
+        D((j')_!open[A]).map (((-⊗ᴸ-(U')[A]).obj (L((g')^*[A]).obj K)).map
+          ((derivedSquareUpperStarIso A hsq.toCommSq).inv.app M)) ≫
+        ((derivedOpenImmersionLowerShriekProjectionMap A j').app (L((g')^*[A]).obj K)).app
+          (L((g'')^*[A]).obj M) ≫
+        ((-⊗ᴸ-(Z')[A]).map ((derivedOpenImmersionLowerShriekBaseChangeIso A hsq).hom.app K)).app
+          (L((g'')^*[A]).obj M) :=
+  Adjunction.projectionMap_mate (derivedOpenImmersionLowerShriekUpperStarAdjunction A j)
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction A j') L((j)^*[A]) L((j')^*[A])
+    (mapDerivedCategoryUpperStarDerivedTensorIso A j).hom
+    (mapDerivedCategoryUpperStarDerivedTensorIso A j').hom
+    (leftDerivedUpperStarTensorComparison A g') (leftDerivedUpperStarTensorComparison A g'')
+    (derivedOpenImmersionSquareMap A hsq.toCommSq) (derivedSquareUpperStarIso A hsq.toCommSq).inv
+    (derivedOpenImmersionLowerShriekBaseChangeIso A hsq).hom
+    (unit_map_derivedOpenImmersionLowerShriekBaseChangeIso A hsq)
+    (derivedOpenImmersionSquareMap_tensor A hsq.toCommSq) K M
+
 end Derived
 
 end Etale
