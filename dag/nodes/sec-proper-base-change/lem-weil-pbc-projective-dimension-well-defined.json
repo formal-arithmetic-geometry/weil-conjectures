@@ -26,7 +26,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-exact-sequence",
-  "def-weil-pbc-projective-module"
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-finite-global-dimension"
  ],
  "proof": [
   {
@@ -182,5 +183,24 @@
   "worker": "stage1",
   "summary": "Statement checked against Stacks Definitions 00O4 and 00O6 (algebra.tex, labels definition-finite-proj-dim and definition-finite-gl-dim), which assert the minima without proof; statement kept. Proof written by the agent in five elementary steps: (1) padding by zero modules, checking the complex condition and exactness at the new zeros, at P_n (the incoming map is still zero, so exactness there is the injectivity of d_n from the original sequence) and elsewhere, with the zero module projective as a direct summand of the free module on the empty set [def-weil-pbc-projective-module, def-weil-pbc-exact-sequence]; (2)-(3) the least element d of the nonempty set of lengths by the least number principle of N, and the equivalence via padding and minimality; (4)-(5) the same for the set of global bounds. The well-ordering of N is elementary (lem-weil-pbc-well-ordering-theorem, Zermelo for arbitrary sets, is not needed). No new node. Mathlib: not a leaf; Mathlib's HasProjectiveDimensionLE/projectiveDimension are Ext-based and the bridge to resolutions is a theorem (B8); the resolution-based ObjectProperty.hasFiniteResolutionOfLength exists only in the newer Mathlib that Loogle indexes, not in the pinned one."
  },
- "reviewed": "Reviewed by L 2026-10-10: elementary proof by agent (padding by zeros, least number principle); fills the minima asserted without proof in Algebra 00O4/00O6. No new nodes; not a Mathlib leaf (Mathlib's projective dimension is by Ext vanishing, B8)."
+ "reviewed": "Reviewed by L 2026-10-10: elementary proof by agent (padding by zeros, least number principle); fills the minima asserted without proof in Algebra 00O4/00O6. No new nodes; not a Mathlib leaf (Mathlib's projective dimension is by Ext vanishing, B8).",
+ "lean": {
+  "module": "Sheaf.Algebra.ProjectiveDimensionWellDefined",
+  "declaration": "ModuleCat.projective_and_global_dimension_well_defined",
+  "statement": "theorem projective_and_global_dimension_well_defined {R : Type u} [CommRing R] (M : ModuleCat.{max u v} R) (m n : ℕ) (hnm : n ≤ m) : (∀ P : ProjectiveResolution M, (∀ i : ℕ, n < i → IsZero (P.complex.X i)) → ∀ i : ℕ, m < i → IsZero (P.complex.X i)) ∧ (HasProjectiveResolutionLE M n → ∃ d : ℕ, HasProjectiveResolutionLE M d ∧ ∀ k : ℕ, HasProjectiveResolutionLE M k ↔ d ≤ k) ∧ ((∃ b : ℕ, Ring.HasGlobalDimensionLE.{u, max u v} R b) → ∃ g : ℕ, Ring.HasGlobalDimensionLE.{u, max u v} R g ∧ ∀ k : ℕ, Ring.HasGlobalDimensionLE.{u, max u v} R k ↔ g ≤ k)",
+  "by": "H1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/Algebra/ProjectiveDimensionWellDefined.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "fixed_by": "R-pdw1424"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdw1424",
+  "group": "H1",
+  "result": "fix",
+  "note": "CommRing R implicit as landed E1/C1/G1; M : ModuleCat.{max u v} R; m n : ℕ, n ≤ m; (1) zero-continuation ProjectiveResolution P zero above n is zero above m (same P = padded sequence); (2) HasProjectiveResolutionLE M n → least d with ↔ d ≤ k; (3) ∃ b HasGlobalDimensionLE.{u,max u v} → least g with ↔; zero ring/M=0/n=0/m=n included"
+ }
 }
