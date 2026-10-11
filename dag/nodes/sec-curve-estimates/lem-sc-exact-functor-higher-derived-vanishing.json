@@ -117,5 +117,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-edv (reviewer sub-agent of L); spot-checked: Source: Stacks 015F (label lemma-right-derived-exact-functor, derived.tex l.5884), part (5) R^iF=0 for i!=0 for an exact functor of abelian categories; the item's statement agrees (its extra enough-injectives hypothesis is only what def-sp-left-exact-additive needs to define R^q; statement unchanged by the split). Stacks proof: F preserves quasi-isomorphisms/cohomology, details omitted; the split fills them. Step 1: exact => preserves kernels and additive, so left exact additive in the sense of def-sp-left-exact-additive, R^qv(M)=H^q(v(I)) for an injective resolution; def-sp-injective-resolutions states the resolution's cohomology is concentrated in degree 0 (so H^q(I)=0, q>0). Step 2: lem-weil-pbc-exact-functor-complex-cohomology (Mathlib leaf, exact F, H^r(F(K)) iso F(H^r(K))) gives H^q(v(I)) iso v(0)=0 (additive). Step 3: definition of R^q. Off-unit cited nodes are definitions (def-sp-*) or a Mathlib leaf, so no tool_uses needed. Mathlib: grep of pinned Mathlib Abelian/RightDerived.lean and whole tree for isZero_rightDerived / rightDerived with Exact/PreservesFiniteColimits finds only Functor.isZero_rightDerived_obj_injective_succ (injective objects), no exact-functor vanishing, so no leaf; the node stays split. Small cases: q=1, M=0, M injective (resolution M->M, v(M) in degree 0) consistent. Minor: step 1 lists lem-weil-pbc-exact-functor-complex-cohomology in uses though step 2 is where it is applied; harmless. Start Sat Oct 10 03:57:20 PM UTC 2026, end Sat Oct 10 03:57:53 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing",
+  "declaration": "CategoryTheory.Functor.isZero_rightDerived_obj_of_exact",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/ExactFunctorHigherDerivedVanishing.lean",
+  "statement": "theorem isZero_rightDerived_obj_of_exact {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B] [Abelian A] [Abelian B] [EnoughInjectives A] [EnoughInjectives B] (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v] (M : A) (q : ℕ) : IsZero ((v.rightDerived (q + 1)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-efv1024"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-efv1024",
+  "group": "F1",
+  "result": "fix",
+  "note": "A,B abelian (Abelian), both enough injectives (EnoughInjectives A/B), v exact additive (Additive + PreservesFiniteLimits + PreservesFiniteColimits), every M : A, R^q for q>0 as Functor.rightDerived (q+1) (fixed from q:ℤ/toNat to the Mathlib/rightAcyclic ℕ-succ form), IsZero conclusion; no Mathlib/upstream exact-functor vanishing (only isZero_rightDerived_obj_injective_succ), existing false correct"
  }
 }

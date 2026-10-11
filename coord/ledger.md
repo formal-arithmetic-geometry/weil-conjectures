@@ -3697,3 +3697,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:48 L: merged deliver/M1/lem-sc-dvr-saturation-line (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DvrSaturationLine Module.dvr_saturation_line)
 - 07:48 L: returned deliver/G1/lem-pc-pre-derived-adjoint-functors-general (reviewer RETURN: (reviewer R-pda1014, head 6a3c662ea) H7: this item was un-parked as a STAGE 2 STATEMENT CORRECTION (coord/stage2-parked.)
 - 07:48 L: returned deliver/F1/lem-sc-dvr-valuation-ring-characterization (reviewer RETURN: Reviewer R-dvc1014, head eeb066fd4. The item's clauses are matched correctly (B with CommRing/IsDomain/IsDiscreteValuati)
+- 07:49 L: merged deliver/F1/lem-sc-exact-functor-higher-derived-vanishing (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing CategoryTheory.Functor.isZero_rightDerived_obj_of_exact)
