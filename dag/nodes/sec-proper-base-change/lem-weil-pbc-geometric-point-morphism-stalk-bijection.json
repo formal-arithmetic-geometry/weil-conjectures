@@ -181,5 +181,23 @@
   "item": "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
   "worker": "stage1",
   "summary": "Read Stacks Remark 04FN (etale-cohomology.tex 3416-3441; it only asserts the functor is 'clearly an equivalence'). Wrote the proof by agent in five steps: morphisms Spec K -> X as pairs (point, field map) with the composition rules (lem-weil-pbc-morphism-from-spec-field, lem-weil-pbc-residue-field-point-naturality, lem-weil-pbc-spec-field-point-residue-field), a = Spec(alpha) and precomposition with a injective; lifts of s-bar' / s-bar to U as kappa(s)-embeddings of kappa(u); bijectivity on objects from the separability (algebraicity) of kappa(u)/kappa(s) for etale U -> S (new Mathlib leaf lem-weil-pbc-etale-residue-field-extension-separable) and the fact that an element algebraic over the algebraically closed alpha(k') lies in alpha(k') (new Mathlib leaf lem-weil-pbc-algebraic-over-algebraically-closed-subfield); the functor is an isomorphism of categories (not just an equivalence); the stalk map is the comparison map of colimits along it, bijective, additive for abelian sheaves. Statement and stmt_deps kept; the clause about modules does not occur in Stacks 04FN (it speaks of 'stalk functors' only), the item's abelian clause is covered. lem-weil-pbc-etale-fibre-discrete-separable-points and lem-weil-pbc-etale-cover-geometric-point-lift were not needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection",
+  "declaration": "AlgebraicGeometry.Scheme.geometricPointMorphism_stalk_bijection",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricPointMorphismStalkBijection.lean",
+  "statement": "theorem geometricPointMorphism_stalk_bijection {S : Scheme.{u}} {k k' : Type u} [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] (s : Spec (.of k) ⟶ S) (s' : Spec (.of k') ⟶ S) (a : Spec (.of k) ⟶ Spec (.of k')) (ha : a ≫ s' = s) : let b : Over.mk s ⟶ Over.mk s' := Over.homMk a ha let α : (pointSmallEtale s').fiber ⟶ (pointSmallEtale s).fiber := Functor.whiskerLeft (Etale.forget S) (coyoneda.map b.op) (CategoryOfElements.map α).IsEquivalence ∧ (∀ F : Sheaf S.smallEtaleTopology (Type (max u v)), let P := fun f : (pointSmallEtale s').sheafFiber.obj F → (pointSmallEtale s).sheafFiber.obj F ↦ ∀ (U : S.Etale) (t : (pointSmallEtale s').fiber.obj U) (σ : F.obj.obj (op U)), f ((pointSmallEtale s').toPresheafFiber U t F.obj σ) = (pointSmallEtale s).toPresheafFiber U (α.app U t) F.obj σ (∃! f, P f) ∧ ∀ f, P f → Function.Bijective f) ∧ (∀ F : Sheaf S.smallEtaleTopology AddCommGrpCat.{max u v}, let P := fun f : (pointSmallEtale s').sheafFiber.obj F ⟶ (pointSmallEtale s).sheafFiber.obj F ↦ ∀ (U : S.Etale) (t : (pointSmallEtale s').fiber.obj U), (pointSmallEtale s').toPresheafFiber U t F.obj ≫ f = (pointSmallEtale s).toPresheafFiber U (α.app U t) F.obj (∃! f, P f) ∧ ∀ f, P f → IsIso f)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gps1058",
+  "group": "C1",
+  "result": "pass",
+  "note": "S:Scheme.{u}; k,k' IsAlgClosed Type u; s,s' : Spec(.of k)⟶S (landed geometric-point form); arbitrary a with a≫s'=s (no IsIso); α = whiskerLeft Etale.forget (coyoneda.map (Over.homMk a ha).op) = precomposition, matches pointSmallEtale.fiber defeq; CategoryOfElements.map α IsEquivalence = parenthetical; sets Type (max u v) ∃! rule-preserving f + Bijective; AddCommGrpCat ∃! + IsIso; #check fullNames all Mathlib, instantiates at a=𝟙"
  }
 }
