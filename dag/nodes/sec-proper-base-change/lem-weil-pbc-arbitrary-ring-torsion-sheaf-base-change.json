@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "thm-weil-pbc-bounded-below",
-   "place": "proof Step 1 note: the Lean split used by the project to pass from injective acyclicity to base change for torsion coefficient sheaves over an arbitrary ring",
+   "place": "proof Step 1 note and paragraphs 2-3: filtered-colimit passage, prime-torsion dévissage, and resolution for a sheaf killed by a prime",
    "via": [
     "lem-weil-pbc-injective-acyclicity-bounded-below"
    ]
@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Injective acyclicity gives sheaf-level base change for arbitrary coefficients",
- "statement": "Let $\\Lambda$ be a commutative ring and let $f:X\\to Y$ be a proper morphism of schemes [def-weil-proper-morphism]. Assume that $f$ has injective acyclicity over $\\Lambda$: for every morphism $g:Y'\\to Y$, every cartesian square [def-weil-pbc-cartesian-square] with induced $f':X'\\to Y'$ and $g':X'\\to X$, and every injective sheaf $I$ of $\\Lambda_X$-modules on $X_{\\Et}$ whose underlying abelian sheaf is torsion [def-weil-pbc-torsion-etale-sheaf], one has $R^qf'_*g'^{-1}I=0$ for all $q>0$ (higher direct images [def-weil-pbc-direct-image] of the inverse image [def-weil-pbc-inverse-image] of the underlying abelian sheaf). Then for every such square and every sheaf $F$ of $\\Lambda_X$-modules with torsion underlying abelian sheaf on $X_{\\Et}$, regarded as a complex concentrated in degree $0$, the derived exchange morphism $\\Ex_{\\square,F}:g^{-1}Rf_*F\\to Rf'_*g'^{-1}F$ [def-weil-pbc-derived-exchange] is an isomorphism in $\\Dplus(Y'_{\\Et})$ [def-weil-pbc-derived-categories].",
+ "statement": "Let $\\Lambda$ be a commutative ring and let $f:X\\to Y$ be a proper morphism of schemes [def-weil-proper-morphism]. Assume coefficient-wise injective acyclicity: for every prime $\\ell$, every morphism $g:Y'\\to Y$, every cartesian square [def-weil-pbc-cartesian-square] with induced $f':X'\\to Y'$ and $g':X'\\to X$, and every injective sheaf $I$ of $(\\Lambda/\\ell)_X$-modules on $X_{\\Et}$, one has $R^qf'_*g'^{-1}I=0$ for all $q>0 (higher direct images [def-weil-pbc-direct-image] of the inverse image [def-weil-pbc-inverse-image] of the underlying abelian sheaf). Then for every such square and every sheaf $F$ of $\\Lambda_X$-modules with torsion underlying abelian sheaf on $X_{\\Et}$, regarded as a complex concentrated in degree 0, the derived exchange morphism $\\Ex_{\\square,F}:g^{-1}Rf_*F\\to Rf'_*g'^{-1}F$ [def-weil-pbc-derived-exchange] is an isomorphism in $\\Dplus(Y'_{\\Et})$ [def-weil-pbc-derived-categories].",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), proof paragraphs 2-3: prime-torsion dévissage, induction on the annihilator, and filtered-colimit passage"
@@ -27,46 +27,147 @@
   "def-weil-pbc-derived-exchange",
   "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the torsion underlying sheaf write $F=\\varinjlim_nF[n]$ [lemma-weil-pbc-prime-torsion-devissage]. Properness makes $f$ and every base change $f'$ quasi-compact and quasi-separated, so higher direct images along $f$ and $f'$ commute with this filtered colimit by [lemma-weil-pbc-direct-image-filtered-colimit] (the $F[n]$ and $g'^{-1}F[n]$ are torsion), while $g^{-1}$ and $g'^{-1}$ commute with colimits by [lem-weil-pbc-inverse-image-preserves-colimits]. Since $g^{-1}$ is exact, $\\mathcal H^q(\\Ex_{\\square,F})$ is the base change map $g^{-1}R^qf_*F\\to R^qf'_*g'^{-1}F$, and by the naturality of $\\Ex_\\square$ in its argument [lemma-weil-pbc-derived-exchange-replacement] applied to the inclusions $F[n]\\to F$ it is, under these colimit isomorphisms, the filtered colimit of the maps $\\mathcal H^q(\\Ex_{\\square,F[n]})$. A filtered colimit of isomorphisms is an isomorphism, and a morphism of $\\Dplus(Y'_{\\Et})$ inducing isomorphisms on all cohomology sheaves is an isomorphism [lem-weil-pbc-derived-plus-iso-on-cohomology]; so it suffices to treat the sheaves $F[n]$, each a $\\Lambda_X$-module killed by $n$.",
+   "uses": [
+    "lemma-weil-pbc-prime-torsion-devissage",
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "lemma-weil-pbc-derived-exchange-replacement",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B, proof paragraph 2 (F = colim F[n])"
+   }
+  },
+  {
+   "text": "For each $n$, the prime-torsion dévissage [lemma-weil-pbc-prime-torsion-devissage] supplies the short exact sequences $0\\to G[\\ell]\\to G\\xrightarrow{\\ell}\\ell G\\to0$ of torsion $\\Lambda_X$-modules, with $\\ell G$ killed by $n/\\ell$ when $nG=0$. For such a sequence the exchange maps form a morphism between the long exact sequences of higher direct images, and exchange is an isomorphism in every degree for $G$ once it is for $G[\\ell]$ and $\\ell G$ [lemma-weil-pbc-five-lemma-transfer] (the five lemma [lem-weil-pbc-five-lemma] on the morphism of triangles of [lem-weil-pbc-derived-exchange-triangulated]). By induction on the number of prime factors of $n$ [lemma-weil-pbc-prime-factor-induction] it suffices to treat a sheaf killed by one prime $\\ell$.",
+   "uses": [
+    "lemma-weil-pbc-prime-torsion-devissage",
+    "lemma-weil-pbc-five-lemma-transfer",
+    "lem-weil-pbc-five-lemma",
+    "lem-weil-pbc-derived-exchange-triangulated",
+    "lemma-weil-pbc-prime-factor-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B, proof paragraph 2 (induction and five lemma)"
+   }
+  },
+  {
+   "text": "Let $\\ell F=0$ and regard $F$ as a sheaf of $(\\Lambda/\\ell)$-modules. By [lem-weil-pbc-module-sheaves-enough-injectives] choose an injective resolution $F\\to I^\\bullet$ in $\\Mod(X_{\\Et},\\Lambda/\\ell)$, $I^m=0$ for $m<0$. Each $I^m$ is killed by $\\ell$, hence torsion, and by the coefficient-wise IA hypothesis $R^qf'_*g'^{-1}I^m=0$ for $q>0$; for the identity square ($g=\\mathrm{id}_Y$) also $R^qf_*I^m=0$ for $q>0$. All of this is about underlying abelian sheaves. Let $J=I(F)$ be the K-injective complex of abelian sheaves chosen for $F$ in the definition of $Rf_*$ [def-weil-pbc-direct-image] [def-weil-pbc-kinjective-resolutions], with $s=\\rho_F$; by [lem-weil-pbc-kinjective-hom-derived] the isomorphism $QI^\\bullet\\cong QF\\cong QJ$ is $Q(h)$ for a quasi-isomorphism of complexes $h:I^\\bullet\\to J$ under $F$, and likewise the chosen resolution of $g'^{-1}J$ is $Q(j)$ for a quasi-isomorphism $j:g'^{-1}J\\to J'$ with $J'$ K-injective. By [lem-weil-pbc-derived-exchange-termwise], applied with $(J,s)$ and $j$, $\\Ex_{\\square,F}$ is $Q(e_J)$ with $e_J=f'_*(j)\\circ\\Ex^0_{\\square,J}$, up to the isomorphisms $\\sigma_{\\rm src},\\sigma_{\\rm tgt}$. Termwise naturality of $\\Ex^0_\\square$ [lemma-weil-pbc-underived-exchange-naturality] for $h$ gives $e_J\\circ g^{-1}f_*(h)=f'_*(g'^{-1}I\\to g'^{-1}J\\to J')\\circ\\Ex^0_{\\square,I}$. Here $g^{-1}f_*(h)$ is a quasi-isomorphism, because $f_*(h)$ is one by the Leray criterion for complexes [lemma-weil-pbc-leray-acyclicity](3) applied to the $f_*$-acyclic $I^m$, and $g^{-1}$ is exact; likewise $f'_*$ of the quasi-isomorphism $g'^{-1}I\\to J'$ is a quasi-isomorphism by the same criterion applied to the $f'_*$-acyclic $g'^{-1}I^m$; and $\\Ex^0_{\\square,I}$ is an isomorphism of complexes, termwise by [lemma-weil-pbc-proper-underived-exchange] since $f$ is proper and the $I^m$ are torsion. Hence $Q(e_J)$, and so $\\Ex_{\\square,F}$, is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-kinjective-resolutions",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-derived-exchange-termwise",
+    "lemma-weil-pbc-underived-exchange-naturality",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lemma-weil-pbc-proper-underived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0A4B, proof paragraphs 2-3 (prime-torsion resolution and comparison)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-prime-torsion-devissage",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lemma-weil-pbc-derived-exchange-replacement",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lemma-weil-pbc-five-lemma-transfer",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-derived-exchange-triangulated",
+  "lemma-weil-pbc-prime-factor-induction",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-kinjective-resolutions",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "lemma-weil-pbc-underived-exchange-naturality",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lemma-weil-pbc-proper-underived-exchange"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 0A4B, proof paragraphs 2-3"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
-   "query": "injective acyclicity implies derived proper base change for a torsion sheaf of modules over an arbitrary ring",
+   "query": "injective acyclicity implies derived proper base change for torsion sheaves over coefficient quotients",
    "results": "service unavailable (Internal Server Error)",
    "date": "2026-10-11",
    "verdict": "unavailable"
   },
   {
    "tool": "loogle",
-   "query": "Functor.rightAcyclic IsIso derivedBaseChangeMapPlus",
-   "results": "no matching declaration; Loogle reports unknown constant Functor.rightAcyclic",
+   "query": "Injective IsIso derived exchange torsion sheaf",
+   "results": "no matching declaration",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "torsion sheaf proper base change from injective acyclicity",
-   "results": "generic sheaf and K-injective declarations only; no proper-base-change or injective-acyclicity theorem",
+   "query": "proper base change torsion sheaf injective module resolution",
+   "results": "generic derived-category and injective-resolution declarations only",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "rightAcyclic|HasInjectiveAcyclicity|torsion.*base.change",
-   "results": "no hits in the pinned Mathlib AlgebraicGeometry sources",
+   "query": "HasInjectiveAcyclicity|derivedBaseChange|torsion.*exchange in Mathlib/",
+   "results": "no hits",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-weil-pbc-injective-acyclicity-bounded-below",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff"
+ "unit": "sk-thm-iff",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change",
+  "worker": "stage1",
+  "summary": "Repaired the false torsion-preserving arbitrary-Λ injective-resolution route. The hypothesis is coefficient-wise IA for injective Λ/ℓ-module sheaves, matching Stacks 0A4B. The proof uses filtered-colimit passage, prime-torsion dévissage with five-lemma naturality, and a Λ/ℓ injective resolution whose f'_* acyclicity is supplied directly by the coefficient-wise hypothesis.",
+  "blueprint": "The three steps realize the Step 1 note of thm-weil-pbc-bounded-below and paragraphs 2-3 of Stacks 0A4B.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-inverse-image-preserves-colimits",
+    "why": "Step 1 needs inverse image to commute with the filtered colimit F = colim F[n]."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Step 3 needs injective resolutions in the Lambda/l module-sheaf category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tsb0028",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tsb0028 (reviewer sub-agent of L); spot-checked: Return R-tsb3157 points: (1) false torsion-resolution node removed; (2) hypothesis restated over injective (Lambda/l)_X-modules, E7 named in report, matches Stacks 0A4B(2) and def-weil-pbc-injective-acyclicity-property; (3) see repairs. FIX more, RETURN less: C1 Step 1 colimit compatibility of Ex now cites derived-exchange-replacement naturality and derived-plus-iso-on-cohomology; C1 Step 2 connecting-map compatibility now cites lemma-weil-pbc-five-lemma-transfer, lem-weil-pbc-derived-exchange-triangulated, lemma-weil-pbc-prime-factor-induction; C4 Step 3 applied lem-weil-pbc-derived-exchange-termwise to a Lambda/l-injective complex (not abelian K-injective) and leaned on an unstated module version via forget-coefficients: rewritten to compare I with the chosen abelian K-injective resolution J (kinjective-hom-derived), termwise naturality, Leray (3) on f_*- and f'_*-acyclic terms (f_* acyclicity from the identity square), proper underived exchange; forget-coefficients dropped from uses and tool_uses. Second reading by E1 missed the Step 3 C4 and the Step 2 triangle compatibility.; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-11 L (R-tsb0028): E7 statement change (IA over injective Lambda/l-module sheaves, as Stacks 0A4B(2)) breaks the parent lem-weil-pbc-injective-acyclicity-bounded-below, whose hypothesis (injective torsion Lambda_X-modules) does not supply it, and the slopmaster2 Lean Etale.HasInjectiveAcyclicity / hasTorsionBaseChange_of_hasInjectiveAcyclicity still state the old hypothesis: maintainer must restate the parent and the Lean."
 }

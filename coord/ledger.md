@@ -3106,3 +3106,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:29 UTC L: C1 prop-pur-kinjective-objects-small PASS d122c35e7 (R-kos0028).
 - 00:29 L: merged deliver/M1/lem-pc-finite-affine-fibre-sections (reviewer FIX; first push; new nodes: 0)
 - 00:30 UTC L: E1 site-restriction-module-adjunction-exact FIX 17342f3e0 (R-sra0028).
+- 00:30 UTC L: M1 finite-affine-fibre-sections FIX 91d2dc71a (R-ffs0029).
+- 00:30 L: merged deliver/E1/lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change (reviewer FIX; after a return; new nodes: 0)
