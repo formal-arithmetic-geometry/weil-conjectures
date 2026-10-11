@@ -4852,3 +4852,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:01 L: merged deliver/K1/lem-weil-pbc-regular-ring-faithfully-flat-descent (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RegularRingFaithfullyFlatDescent IsRegularRing.of_faithfullyFlat)
 - 14:02 L: merged deliver/F1/lem-sc-pseudo-coherent-support-annihilation (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PseudoCoherentSupportAnnihilation AlgebraicGeometry.exists_perfect_annihilator; dropped nodes: def-sc-derived-tensor-annihilates)
 - 14:02 L: merged deliver/C1/lem-weil-pbc-regular-sequence-koszul-regular (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularSequenceKoszulRegular RingTheory.Sequence.isKoszulRegularOn_of_isWeaklyRegular)
+- 14:02 L: merged deliver/C1/lem-weil-pbc-regular-ring-local-criterion (stage 2; reviewer PASS; first push; Mathlib.RingTheory.RegularLocalRing.Defs isRegularRing_iff; existing declaration)
