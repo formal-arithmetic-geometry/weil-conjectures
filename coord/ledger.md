@@ -3248,3 +3248,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:43 L: merged deliver/C1/lem-sc-coherent-ring-fp-kernel-cokernel (reviewer FIX; first push; new nodes: 0)
 - 01:43 UTC L: C1 coherent-ring-fp-kernel-cokernel FIX 86a9662ae (R-ckc0142).
 - 01:44 L: merged deliver/E1/pqf-lem-serre-criterion (reviewer FIX; first push; new nodes: 1)
+- 01:44 UTC L: E1 pqf-lem-serre-criterion FIX eb5d25977 (R-psc0143; duplicate ideal-colimit node dropped; the 01XF child lem-pqf-quasicompact-h1-zero stays unsplit).
