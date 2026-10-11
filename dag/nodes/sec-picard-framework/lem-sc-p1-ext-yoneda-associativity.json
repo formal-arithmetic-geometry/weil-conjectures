@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Associativity and pushout description of Yoneda Ext composition",
- "statement": "For $\\mathcal O_X$-modules on a ringed space $X$, with Ext as in [def-sc-ext-sheaf], Yoneda composition of extension classes is associative. If $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ represents $\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal A)$ and $\\varphi:\\mathcal A\\to\\mathcal W$, then the Ext connecting map defined by pushing out this short exact sequence along $\\varphi$ is the class $\\varphi[1]\\circ\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal W)$; consequently $(\\varphi[1]\\circ\\delta)\\circ s=\\varphi[1]\\circ(\\delta\\circ s)$ for every $s:\\mathcal O_X\\to\\mathcal C$.",
+ "statement": "For a scheme $X$, with $\\operatorname{Ext}_X$ as in [def-sc-ext-sheaf], Yoneda composition of extension classes is associative. If $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ represents $\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal A)$ and $\\varphi:\\mathcal A\\to\\mathcal W$, then the Ext connecting map defined by pushing out this short exact sequence along $\\varphi$ is the class $\\varphi[1]\\circ\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal W)$; consequently $(\\varphi[1]\\circ\\delta)\\circ s=\\varphi[1]\\circ(\\delta\\circ s)$ for every $s:\\mathcal O_X\\to\\mathcal C$.",
  "source": {
   "document": "literature/stacks-project/homology.tex",
   "place": "Homology Section Tag 010I (extensions, Baer pushout) and Derived Section Tag 06XP (bilinear associative composition of Ext groups)"
@@ -113,5 +113,56 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eya (reviewer sub-agent of L); spot-checked: Sources read: Stacks Homology 010I (section-extensions, homology.tex:1260, extensions and their functoriality/pushout) and Derived 06XP (section-ext, derived.tex:8625, Ext^i = Hom_D(X,Y[i])). Item: statement unchanged; step 1 (associativity) carried by lem-sc-p1-ext-yoneda-splicing-associative, which states it for Ext^i,Ext^j,Ext^k; step 2 (pushout class = phi[1] o delta) carried verbatim by lem-sc-p1-ext-pushout-postcompose; step 3 is splicing-associativity with (A,B,C,D,i,j,k)=(O_X,C,A,W,0,1,0), e=s, f=delta, g=phi[1]: checked, elementary. Pushout statement correct (Baer pushout = phi_* delta, Mathlib extClass_naturality with tau3=id gives it). Small cases: phi=id (pushout is the sequence, class delta), s=0 (both sides 0), phi=0 (pushout split, class 0). Remote searches before 17:00 treated as not run; I ran loogle 'Abelian.Ext.comp' and leanfinder for the pushout. def-sc-ext-sheaf is Abelian.Ext in slopmaster2 (abbrev, Modules/Ext.lean:51-57, sorryfree OK). FIX more, RETURN less / B8: dag/nodes/sec-picard-framework/lem-sc-p1-ext-yoneda-splicing-associative.json: status unsplit -> mathlib, mathlib_match CategoryTheory.Abelian.Ext.comp_assoc Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean:132 (line verified with sed, one-line specialization to O_X-modules), my loogle search recorded; dag/nodes/sec-picard-framework/lem-sc-p1-ext-pushout-postcompose.json: mathlib_searches: my leanfinder query recorded (no exact match), mathlib_candidate extClass_naturality ExtClass.lean:131. Start Sat Oct 10 04:54:53 PM UTC 2026, end Sat Oct 10 04:56:19 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExtYonedaAssociativity",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ext_yoneda_assoc_pushout",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.ext_yoneda_assoc_pushout"
+  ],
+  "statement": "theorem ext_yoneda_assoc_pushout {X : Scheme.{u}} [HasExt.{u} X.Modules] : (∀ {A B C D : X.Modules} {i j k ij jk n : ℕ} (e : Ext A B i) (f : Ext B C j) (g : Ext C D k) (hij : i + j = ij) (hjk : j + k = jk) (h : i + j + k = n), (e.comp f hij).comp g (show ij + k = n by omega) = e.comp (f.comp g hjk) (show i + jk = n by omega)) ∧ (∀ (S : ShortComplex X.Modules) (hS : S.ShortExact) {W : X.Modules} (φ : S.X₁ ⟶ W), ∃ hT : (ShortComplex.mk (pushout.inr S.f φ) (pushout.desc S.g 0 (by rw [S.zero, comp_zero])) (pushout.inr_desc _ _ _)).ShortExact, (hT.extClass : Ext S.X₃ W 1) = (hS.extClass : Ext S.X₃ S.X₁ 1).comp (Abelian.Ext.mk₀ φ : Ext S.X₁ W 0) (add_zero 1)) ∧ (∀ (S : ShortComplex X.Modules) (hS : S.ShortExact) {W : X.Modules} (φ : S.X₁ ⟶ W) (s : SheafOfModules.unit X.ringCatSheaf ⟶ S.X₃), let δ : Ext S.X₃ S.X₁ 1 := hS.extClass let φ₀ : Ext S.X₁ W 0 := Abelian.Ext.mk₀ φ let s₀ : Ext (SheafOfModules.unit X.ringCatSheaf) S.X₃ 0 := Abelian.Ext.mk₀ s s₀.comp (δ.comp φ₀ (add_zero 1)) (zero_add 1) = (s₀.comp δ (zero_add 1)).comp φ₀ (add_zero 1))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Reviewer R-eya1237 FIX: existing:true at Ext.comp_assoc/extClass_naturality did not state the node (no Mathlib declaration states the pushout clause: extClass_naturality is general naturality with arbitrary tau3 and never names the pushout extension; the s-consequence was prose). New module states the three clauses on X.Modules with the recorded Scheme.Modules.Ext: (1) associativity in all degrees, (2) the pushout W -> B ⊔_A W -> C is short exact with extClass = delta.comp (mk0 phi), (3) (mk0 s).comp (delta.comp (mk0 phi)) = ((mk0 s).comp delta).comp (mk0 phi) for s : O_X -> C.",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExtYonedaAssociativity.lean",
+  "fixed_by": "R-eya1237"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eya1237",
+  "group": "C1",
+  "result": "fix",
+  "note": "Corrected statement (ringed space -> scheme, follows def-sc-ext-sheaf; citers: composition-derived holds:false right, pairing-naturality/functoriality hold) vs Stacks 010I/06XP; existing:true rejected: no Mathlib decl states the pushout clause (extClass_naturality has arbitrary tau3), s-clause was prose; new theorem over X.Modules with Scheme.Modules.Ext: (1) assoc all degrees, (2) pushout W->B+_A W->C short exact with class delta.comp(mk0 phi), (3) (mk0 s).comp(delta.comp(mk0 phi)) = ((mk0 s).comp delta).comp(mk0 phi), s : O_X -> C (SheafOfModules.unit); #check confirms A.Ext B i is the recorded def; compiled clean",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "C1 stage 2",
+  "old_statement": "For $\\mathcal O_X$-modules on a ringed space $X$, with Ext as in [def-sc-ext-sheaf], Yoneda composition of extension classes is associative. If $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ represents $\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal A)$ and $\\varphi:\\mathcal A\\to\\mathcal W$, then the Ext connecting map defined by pushing out this short exact sequence along $\\varphi$ is the class $\\varphi[1]\\circ\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal W)$; consequently $(\\varphi[1]\\circ\\delta)\\circ s=\\varphi[1]\\circ(\\delta\\circ s)$ for every $s:\\mathcal O_X\\to\\mathcal C$.",
+  "what": "The dependency def-sc-ext-sheaf is defined for modules on a scheme X, while the old statement quantified an unspecified ringed space; the old statement therefore could not be rendered using its required Ext notion. The correction follows the scheme-specific Ext definition and keeps every associativity and pushout clause.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/_section.md",
+   "place": "proof Step 2: associativity of derived/Yoneda composition and pushout description"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-ext-yoneda-composition-derived",
+    "holds": false,
+    "note": "This citer quantifies an arbitrary abelian category; the corrected scheme-specific item does not justify that scope. Use the generic Mathlib Ext.comp/comp_assoc directly when reviewing the citer."
+   },
+   {
+    "id": "lem-sc-p1-duality-pairing-naturality",
+    "holds": true,
+    "note": "Uses the pushout and associativity consequence in scheme modules."
+   },
+   {
+    "id": "lem-sc-p1-ext-yoneda-functoriality",
+    "holds": true,
+    "note": "Uses the Ext functoriality clause, valid for scheme modules."
+   }
+  ]
  }
 }
