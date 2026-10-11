@@ -20,7 +20,8 @@
   "def-pc-acyclic-complex-modules",
   "def-pc-cochain-complex-modules",
   "def-pc-flat-sheaf-modules",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex"
  ],
  "proof": [
   {
@@ -136,5 +137,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bfa2459 (reviewer sub-agent of L); spot-checked: Read packet and head file; no cycle (item cites only four pc definitions and thm-sp-double-complex-spectral-sequences, none of which cite K-flat nodes); tool use of thm-sp-double-complex-spectral-sequences accepted as generic. FIX more, RETURN less: (1) C4 Step 1: D^{p,q}=A^p(x)P^q is bounded above in both indices (third quadrant) and no translation makes it first-quadrant, so the cited first-quadrant theorem did not apply; the Second reading by H1 claims to have repaired this but the head file still had the old text. Repaired by fixing n, replacing P by its stupid truncation P' (q>=n-1-a) and A by the acyclic truncation B (B^j=Im d^j, j=n-2-b), which agree with D in total degrees n-1,n,n+1, then translating the bounded double complex into the first quadrant; Steps 2-3 rewritten for E with the second spectral sequence and the finite image filtration. (2) source/proof_origin: Tag 06YS is lemma-K-flat-resolution; the cited argument is Lemma 06YQ (lemma-bounded-flat-K-flat), with Homology Lemma 0132; corrected.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclic",
+  "declaration": "CochainComplex.acyclic_mapBifunctor_of_boundedAbove_flat_sheaf",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedAboveFlatTensorAcyclic.lean",
+  "statement": "theorem acyclic_mapBifunctor_of_boundedAbove_flat_sheaf (A P : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (hAbounded : ∃ a : ℤ, ∀ i : ℤ, a < i → IsZero (A.X i)) (hPbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i)) (hPflat : ∀ i : ℤ, SheafOfModules.IsFlat (P.X i)) : A.Acyclic → (letI := SheafOfModules.monoidalCategory R mapBifunctor A P (curriedTensor _)).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-bft1118"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bft1118",
+  "group": "E1",
+  "result": "fix",
+  "note": "site C/J + R:Sheaf J CommRingCat; A P : CochainComplex (SheafOfModules) Z; A bounded above (IsZero form, same as consumer isKFlat_of_boundedAbove_flat) and A.Acyclic; P bounded above; IsFlat (P.X i) landed; conclusion mapBifunctor A P curriedTensor Acyclic, same order/form as landed IsKFlat body; docstring chapter name fixed to Cohomology on Sites, Lemma 21.17.8 (Tag 06YQ)"
  }
 }
