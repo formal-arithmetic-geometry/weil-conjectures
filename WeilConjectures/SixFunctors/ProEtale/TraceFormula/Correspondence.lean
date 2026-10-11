@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
 public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.Compactification.Constructions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Defs
@@ -84,6 +85,14 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShrieks A]
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA] {s : Scheme.{u}}
+
+/-- The classes supported on a morphism `i : T ⟶ Z` with values in `P ∈ D(Z, A)`: the group
+`H_T^0(Z, P) = Hom(Ri_! A_T, P)`. The map `i` is part of the data; it need not be an
+immersion, and different maps with the same image give different groups
+(blueprint: `def-trf-supported-class`). -/
+abbrev SupportedClass {T Z : Scheme.{u}} (i : T ⟶ Z) [HasCompactification i]
+    (P : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) : Type (u + 1) :=
+  (rightDerivedLowerShriek A i).obj (𝟙_ _) ⟶ P
 
 /-- A correspondence from `(X, K)` to `(Y, L)`: a geometric scheme `C` over the base `s`,
 two legs `c₁ : C ⟶ Y`, `c₂ : C ⟶ X` over `s` — the blueprint's `c = (c₁, c₂) : C ⟶ Y × X`,
@@ -188,6 +197,19 @@ lemma isPullback_fixι_toProd (c : Correspondence aX aX K K) :
     IsPullback c.fixι (c.fixι ≫ c.fst) c.toProd (pullback.diagonal aX) :=
   isPullback_equalizer_ι_diagonal c.fst c.snd _
 
+/-- The two legs agree on the fixed scheme: `c₂ ∘ i_F = c₁ ∘ i_F`, and this common composite is
+the projection `d : Fix(c) ⟶ X` (part of blueprint `prop-trf-fixed-square-cartesian`). -/
+@[reassoc]
+lemma fixι_snd (c : Correspondence aX aX K K) : c.fixι ≫ c.snd = c.fixι ≫ c.fst :=
+  (equalizer.condition c.fst c.snd).symm
+
+/-- The identity `Δ_X ∘ d = c ∘ i_F` of the fixed square, where `d = c₁ ∘ i_F`
+(part of blueprint `prop-trf-fixed-square-cartesian`). -/
+@[reassoc]
+lemma fixι_fst_diagonal (c : Correspondence aX aX K K) :
+    (c.fixι ≫ c.fst) ≫ pullback.diagonal aX = c.fixι ≫ c.toProd :=
+  c.isPullback_fixι_toProd.w.symm
+
 /-- The inclusion `Fix(c) ⟶ C` of the fixed scheme is the base change of the diagonal of
 `aX` along the support map `c : C ⟶ X × X` (`isPullback_fixι_toProd`). The diagonal is a
 closed immersion when `aX` is separated, so `Fix(c) ⟶ C` then admits a compactification. -/
@@ -207,6 +229,27 @@ geometric. -/
 instance isGeometric_fixStr [IsSeparated aX] (c : Correspondence aX aX K K) [IsGeometric c.str] :
     IsGeometric c.fixStr :=
   inferInstanceAs (IsGeometric (c.fixι ≫ c.str))
+
+/-- The trace-class source `𝓗_c = RHom(Lc₂^* K, Rc₁^! L) ∈ D(C, A)` of a correspondence; for
+an endocorrespondence of `(X, K)` it is `RHom(Lc₂^* K, Rc₁^! K)`
+(blueprint: `def-trf-trace-class-source`). -/
+noncomputable abbrev traceClassSource (c : Correspondence aX aY K L) :
+    DerivedCategory (Sheaf (Scheme.ProEt.topology c.supp) A) :=
+  (ihom (((upperStar A c.snd).leftDerivedFunctor).obj K)).obj
+    ((rightDerivedUpperShriek A c.fst).obj L)
+
+/-- The mate `ũ : A_C ⟶ 𝓗_c` of the coefficient map `u : Lc₂^* K ⟶ Rc₁^! L`: its image under
+the tensor-hom adjunction `Hom(A_C, RHom(Lc₂^* K, Rc₁^! L)) ≃ Hom(Lc₂^* K, Rc₁^! L)` of
+`CategoryTheory.MonoidalClosed.curryHomEquiv'` (blueprint: `def-trf-trace-class-source`). -/
+noncomputable def mate (c : Correspondence aX aY K L) :
+    𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology c.supp) A)) ⟶ c.traceClassSource :=
+  curry' c.coeff
+
+/-- The tensor-hom adjunction identifies the mate `ũ` with the coefficient map `u`
+(blueprint: `def-trf-trace-class-source`). -/
+@[simp]
+lemma uncurry'_mate (c : Correspondence aX aY K L) : uncurry' c.mate = c.coeff :=
+  uncurry'_curry' _
 
 /-- The structure morphism of the intersection support `E(C, D)` factors through the first
 projection of `Y × X`: the diagram
@@ -312,6 +355,65 @@ instance isGeometric_str_ofEnd : IsGeometric (ofEnd G aX K hK v).str :=
 
 instance isProper_fixStr_ofEnd [IsProper aX] : IsProper (ofEnd G aX K hK v).fixStr :=
   inferInstanceAs (IsProper ((ofEnd G aX K hK v).fixι ≫ aX))
+
+/-- Paired with the diagonal endocorrespondence `ofEnd G aX K hK v` (support `X`, swapped
+support map `Δ_X`), an endocorrespondence `c` has intersection support
+`E(C, X) = C ×_{X × X, c, Δ_X} X`, which is its fixed scheme `Fix(c)`; for `v = 𝟙 K` this is
+the pairing of `c` with the identity correspondence
+(blueprint: `def-trf-correspondence-between-pairs`). -/
+noncomputable def intersectionOfEndIso (c : Correspondence aX aX K K) :
+    c.intersection (ofEnd G aX K hK v) ≅ c.fix :=
+  c.isPullback_fixι_toProd.isoPullback.symm
+
+/-- Under `E(C, X) ≅ Fix(c)`, the inclusion of the fixed scheme into `C` is the first
+projection of `E(C, X)`. -/
+@[reassoc (attr := simp)]
+lemma intersectionOfEndIso_hom_fixι (c : Correspondence aX aX K K) :
+    (intersectionOfEndIso G aX K hK v c).hom ≫ c.fixι =
+      pullback.fst c.toProd (ofEnd G aX K hK v).toProdSwap :=
+  c.isPullback_fixι_toProd.isoPullback_inv_fst
+
+/-- Under `E(C, X) ≅ Fix(c)`, the projection `d : Fix(c) ⟶ X` is the second projection of
+`E(C, X)`. -/
+@[reassoc (attr := simp)]
+lemma intersectionOfEndIso_hom_fixι_fst (c : Correspondence aX aX K K) :
+    (intersectionOfEndIso G aX K hK v c).hom ≫ c.fixι ≫ c.fst =
+      pullback.snd c.toProd (ofEnd G aX K hK v).toProdSwap :=
+  c.isPullback_fixι_toProd.isoPullback_inv_snd
+
+/-- Under `E(C, X) ≅ Fix(c)`, the structure morphisms of the two supports agree. -/
+@[reassoc (attr := simp)]
+lemma intersectionOfEndIso_hom_fixStr (c : Correspondence aX aX K K) :
+    (intersectionOfEndIso G aX K hK v c).hom ≫ c.fixStr =
+      c.intersectionStr (ofEnd G aX K hK v) := by
+  rw [fixStr, intersectionOfEndIso_hom_fixι_assoc, intersectionStr]
+
+/-- The projection `d = c₁ ∘ i_F : Fix(c) ⟶ X` of the fixed scheme admits a compactification:
+`i_F` is a closed immersion and `c₁` is a compactifiable morphism of geometric schemes. -/
+instance hasCompactification_fixι_fst (c : Correspondence aX aX K K) [IsGeometric c.str] :
+    HasCompactification (c.fixι ≫ c.fst) :=
+  have : QuasiCompact c.fst := (IsGeometricHom.mk c.fst_comp).quasiCompact
+  .of_isClosedImmersion c.fixι c.fst
+
+/-- The composition law for the exceptional inverse image in the fixed square
+
+```
+  Fix(c) ──i_F──▶ C
+     │            │
+   d │            │ c = (c₁, c₂)
+     ▼            ▼
+     X ───Δ_X───▶ X ×_s X
+```
+
+(Cartesian by `isPullback_fixι_toProd`): as `d = c₁ ∘ i_F`, it gives `Rd^! ≃ Ri_F^! Rc₁^!` on
+`Dᵇctf`, the adjoint form of `R(c₁ i_F)_! ≃ Rc₁_! Ri_{F!}`
+(blueprint: `prop-trf-fixed-square-cartesian`). -/
+noncomputable def fixUpperShriekIso (c : Correspondence aX aX K K) [IsGeometric c.str] :
+    G.upperShriekCtf (c.fixι ≫ c.fst)
+        ((IsGeometricHom.mk (aX := c.fixStr) (aY := c.str) rfl).comp (.mk c.fst_comp)) ≅
+      G.upperShriekCtf c.fst (.mk c.fst_comp) ⋙
+        G.upperShriekCtf c.fixι (.mk (aX := c.fixStr) (aY := c.str) rfl) :=
+  G.upperShriekComp c.fixι c.fst _ _ _
 
 /-- The graph endocorrespondence `(1, g)` on `(X, K)` of an endomorphism `g : X ⟶ X` over
 `s`, for `K ∈ Dᵇctf(X)`: support `X`, exceptional leg `𝟙 X`, ordinary-pullback leg `g`, and
