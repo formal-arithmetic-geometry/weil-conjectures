@@ -5625,3 +5625,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:57 L: merged deliver/S1/lem-sc-torsor-h1-ext-pushforward (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Sites.TorsorExtensionPushforward CategoryTheory.Sheaf.Torsor.closedImmersion_extension_fibre_pushforward)
 - 19:00 L: merged deliver/C1/lem-sc-torsor-h1-boundary-representative (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Sites.TorsorH1BoundaryRepresentative CategoryTheory.Sheaf.torsor_h1_boundary_representative)
 - 19:01 L: merged deliver/K1/lem-weil-pbc-affine-etale-site-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineEtaleSiteBaseChange AlgebraicGeometry.affineEtaleSiteBaseChange)
+- 19:01 L: merged deliver/M1/lem-sc-zariski-module-abelian-cohomology-agree (stage 2; reviewer PASS; first push; Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree AlgebraicGeometry.zariskiModuleAbelianCohomologyAgree)
