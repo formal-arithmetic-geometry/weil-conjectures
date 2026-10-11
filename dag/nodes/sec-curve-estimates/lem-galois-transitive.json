@@ -159,5 +159,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gtr (reviewer sub-agent of L); spot-checked: Re-push after the 14:04 return: both points repaired (1: the C,F clause and the def-galois-category cite are gone from lem-galois-inverse-limit-surjective; 2: it is now a Mathlib leaf with corrected search verdicts). Item steps unchanged since the 14:04 review (which checked steps 1-4 against Stacks 0BN3, lemma-tame, and lem-galois-axioms (2),(4),(5),(6), lem-galois-object-exists, def-galois-category); item statement only gained the cites def-galois-category, def-galois-connected-object; Mathlib isPretransitive_of_isConnected kept as mathlib_candidate (B8 answered). Leaf verified in pinned Mathlib CofilteredSystem.lean: line 111 nonempty_sections_of_finite_inverse_system (root namespace, J Preorder+IsDirectedOrder, F : J^op => Type, Finite, Nonempty => sections nonempty), line 312 CategoryTheory.Functor.eval_section_surjective_of_surjective (section vars 177 IsCofilteredOrEmpty J, 306-307 Nonempty/Finite, Fsur; evaluation of sections surjective); with J=I resp. J=I^op these are the two clauses; empty I trivial. Used in step 3 on A_i=Aut(X_i), finite nonempty with surjective h_ii'. blueprint_refs search 'inverse limit finite nonempty surjective': 0 matches, same_as [] right. FIX: dag/nodes/sec-curve-estimates/lem-galois-inverse-limit-surjective.json: mathlib_match.declaration: nonempty_sections_of_finite_inverse_system is in the root namespace, not CategoryTheory; mathlib_match.how: J=I for the first declaration, J=I^op for the second. 14:42-14:43 UTC; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-gtr): lem-galois-inverse-limit-surjective cites [lem-galois-axioms] after 'finite nonempty set' (stmt_deps) only to satisfy the preflight's statement-must-cite-a-node check; the lemma is pure set theory and does not depend on it."
+ "lead_note": "2026-10-10 L (R-gtr): lem-galois-inverse-limit-surjective cites [lem-galois-axioms] after 'finite nonempty set' (stmt_deps) only to satisfy the preflight's statement-must-cite-a-node check; the lemma is pure set theory and does not depend on it.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Galois.GaloisTransitive",
+  "declaration": "CategoryTheory.aut_fiber_transitive",
+  "file": "lean/Sheaf/CategoryTheory/Galois/GaloisTransitive.lean",
+  "statement": "theorem aut_fiber_transitive {C : Type u} [Category.{v} C] {F : C ⥤ Type w} (hCF : IsStacksGaloisCategory F) (X : C) [IsConnected X] : ∀ x y : F.obj X, ∃ g : Aut F, g.hom.app X x = y",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gtr0722",
+  "group": "F1",
+  "result": "pass",
+  "note": "C:Type u/Category.{v}, F:C⥤Type w = node's (C,F); hCF:IsStacksGaloisCategory F = recorded def-galois-category (Stacks 0BMY, not Mathlib GaloisCategory, so isPretransitive_of_isConnected is only a candidate, existing:false right); [IsConnected X] = Mathlib PreGaloisCategory.IsConnected, checked field by field against def-galois-connected-object (not initial; mono from non-initial Y is iso), same notion used by StacksGaloisCategory/StacksGaloisAxioms; conclusion ∀x y, ∃g:Aut F, g.hom.app X x = y = transitive action of Aut(F) on F(X), empty fibre vacuous; docstring has 0BN3 steps 1-4 and tag; header, imports, no Sheaf prefix, lines ≤100, proof sorry"
+ }
 }
