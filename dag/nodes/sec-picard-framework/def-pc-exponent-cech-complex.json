@@ -1,0 +1,106 @@
+{
+ "id": "def-pc-exponent-cech-complex",
+ "kind": "definition",
+ "title": "Fixed-exponent alternating Cech complex",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring, $n\\ge1$, and $e\\in\\mathbf Z^{n+1}$. Put $N_e=\\{i:e_i<0\\}$. Define $C_e^\\bullet$ to be the cochain complex with degree-$p$ term the free $A$-module on subsets $J\\subseteq\\{0,\\ldots,n\\}$ satisfying $|J|=p+1$ and $N_e\\subseteq J$, and differential $d[J]=\\sum_{k\\notin J}(-1)^{\\#\\{j\\in J:j<k\\}}[J\\cup\\{k\\}]$.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XS, label lemma-cohomology-projective-space-over-ring, proof: NEG(e) cases"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "fixed exponent Cech cochain complex on subsets containing negative coordinates",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fixed exponent vector subcomplex of monomial Cech complex of projective space",
+   "results": "SSet.stdSimplex.face and simplicial constructions; no fixed-exponent Cech subcomplex",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, alternatingCofaceMapComplex",
+   "results": "0 hits; unknown identifier alternatingCofaceMapComplex",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exponent.*Cech|Cech.*exponent|simplex.*cochain in Mathlib/AlgebraicTopology",
+   "results": "0 hits; project and source searches found the larger monomialCechComplex but no fixed-exponent complex",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-monomial-cech-complex-homology",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-twist-cohomology",
+   "place": "proof step 2: the fixed-exponent complex whose homology is computed",
+   "via": [
+    "lem-pc-monomial-cech-complex-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.ExponentCechComplex",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exponentCechComplex",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/ExponentCechComplex.lean",
+  "statement": "def exponentCechComplex (n : ℕ) (e : Fin (n + 1) → ℤ) : CochainComplex (ModuleCat A) ℕ",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveSpace.exponentCechNegativeSet",
+   "AlgebraicGeometry.ProjectiveSpace.exponentCechBasis",
+   "AlgebraicGeometry.ProjectiveSpace.exponentCechDifferential",
+   "AlgebraicGeometry.ProjectiveSpace.exponentCechDifferential_comp",
+   "AlgebraicGeometry.ProjectiveSpace.exponentCechComplex"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mch0910",
+  "group": "H1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mch0910",
+  "group": "H1",
+  "result": "pass",
+  "note": "A CommRing Type*, hn 1<=n, e : Fin (n+1) -> Z, N_e filter e i<0, basis J card p+1 with N_e subset J, d inserts k notin J with (-1)^#{j<k} (matches Cech sign); three cases: N_e empty -> H^0 ~ A and H^q=0 q!=0; proper nonempty -> all H^q=0 incl q=0; full -> cycle = single full 1 with f:H^n ~ A sending its homologyClass to 1, H^q=0 q!=n; d^2=0 a named sorry theorem (H5 ok); H12: source monomialCechComplex is ordered tuples over all exponents, no fixed-exponent complex in Mathlib/source/DAG"
+ }
+}

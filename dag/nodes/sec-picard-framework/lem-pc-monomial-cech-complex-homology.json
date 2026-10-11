@@ -16,7 +16,9 @@
   "document": "literature/stacks-project/coherent.tex",
   "place": "Tag 01XS, label lemma-cohomology-projective-space-over-ring, proof: NEG(e) cases and contracting homotopy"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-exponent-cech-complex"
+ ],
  "proof": [
   {
    "text": "If N_e is empty, the basis consists of all nonempty subsets of {0,...,n}. The usual augmented simplex calculation, obtained by inserting the vertex 0 with the alternating sign, gives d^2=0, identifies the kernel in degree 0 with the constant coefficient copy of A, and gives a contracting homotopy in every positive degree. Thus H^0 is A and all other cohomology vanishes.",
@@ -98,5 +100,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mch2505 (reviewer sub-agent of L); spot-checked: Statement matches the C_e of lem-pc-twist-cech-monomial-decomposition (same basis J ⊇ N_e, |J|=p+1) and the citer's step 2/3 use: N_e empty gives q=0 sum, N_e full gives q=n with class [{0..n}] = x^e cochain, matching (i)-(iii); not a restatement of the decomposition node (class b clear). Step 1: kernel in degree 0 checked by hand (coefficient of [{i,k}] is a_k-a_i), positive-degree homotopy fine. Step 2: verified dh+hd=id by sign computation for r in J (k≠r terms get (-1)^{[k<r]+[r<k]}=-1, cancel) and r not in J (only k=r term, sign squared =1); h well-defined since r∉N_e and N_e≠∅ keeps J\\{r} nonempty and ⊇N_e. Step 3 trivial. All elementary with 01XS named; C1/C4 ok. Second reading by M1: no missed fault found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.ExponentCechHomology",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.exponentCechComplex_homology",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/ExponentCechHomology.lean",
+  "statement": "theorem exponentCechComplex_homology {A : Type*} [CommRing A] (n : ℕ) (hn : 1 ≤ n) (e : Fin (n + 1) → ℤ) : (exponentCechNegativeSet n e = ∅ → Nonempty ((exponentCechComplex (A := A) n e).homology 0 ≃ₗ[A] A) ∧ (∀ q : ℕ, q ≠ 0 → Subsingleton ((exponentCechComplex (A := A) n e).homology q))) ∧ (exponentCechNegativeSet n e ≠ ∅ → exponentCechNegativeSet n e ≠ Finset.univ → ∀ q : ℕ, Subsingleton ((exponentCechComplex (A := A) n e).homology q)) ∧ (exponentCechNegativeSet n e = Finset.univ → (∃ (z : LinearMap.ker ((exponentCechComplex (A := A) n e).d n (n + 1)).hom), ((z.1 : (exponentCechComplex (A := A) n e).X n) : exponentCechBasis n e n →₀ A) = Finsupp.single (⟨Finset.univ, ⟨by simp, Finset.subset_univ _⟩⟩ : exponentCechBasis n e n) 1 ∧ ∃ f : (exponentCechComplex (A := A) n e).homology n ≃ₗ[A] A, f ((exponentCechComplex (A := A) n e).homologyClass (n - 1) n (n + 1) (by cases n with | zero => omega | succ m => simp [CochainComplex.prev_nat_succ m]) (by simp) z) = 1) ∧ (∀ q : ℕ, q ≠ n → Subsingleton ((exponentCechComplex (A := A) n e).homology q)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mch0910",
+  "group": "H1",
+  "result": "pass",
+  "note": "A CommRing Type*, hn 1<=n, e : Fin (n+1) -> Z, N_e filter e i<0, basis J card p+1 with N_e subset J, d inserts k notin J with (-1)^#{j<k} (matches Cech sign); three cases: N_e empty -> H^0 ~ A and H^q=0 q!=0; proper nonempty -> all H^q=0 incl q=0; full -> cycle = single full 1 with f:H^n ~ A sending its homologyClass to 1, H^q=0 q!=n; d^2=0 a named sorry theorem (H5 ok); H12: source monomialCechComplex is ordered tuples over all exponents, no fixed-exponent complex in Mathlib/source/DAG"
  }
 }
