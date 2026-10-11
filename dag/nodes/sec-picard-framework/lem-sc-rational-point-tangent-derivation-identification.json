@@ -134,5 +134,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rtd1706 (reviewer sub-agent of L); spot-checked: Source: Stacks 0B2E (varieties-lemma-tangent-space-rational-point, S=Spec k, so m_s O_{X,x}=0) and the proof of 0B2D (phi(a)=c(a)+D(a)eps); statement agrees hypothesis by hypothesis (kappa(x)=k, dual-number tangent space of def-sc-scheme-tangent-space with kappa=k). No circularity: proof_deps do not include lem-sc-rational-tangent-cotangent-duality (which cites this node). The proof is a direct dual-number argument (agent-written, avoiding Omega), correct: step 1 coefficient extraction and Leibniz rule with D vanishing on k; step 2 D vanishes on m^2 (elementary); step 3 inverse D(a)=l(a-abar), Leibniz via ab-abar bbar=(a-abar)(b-bbar)+abar(b-bbar)+bbar(a-abar), bijection via lem-weil-pbc-morphism-from-spec-local-ring, linearity from eps->lambda eps and the pushout sum of the definition. Small cases: Spec k (both 0), A^1 at 0 (l = coefficient of t). Mathlib: grep of RingTheory/Kaehler and RingTheory/Derivation for CotangentSpace/DualNumber and of AlgebraicGeometry: only ring-level cotangent spaces, no scheme tangent space; slopmaster2 AlgebraicGeometry/TangentSpace.lean has only sheaf-level tangent sheaves, no attachment. FIX more, RETURN less (C1/C4): dag/nodes/sec-picard-framework/lem-sc-rational-point-tangent-derivation-identification.json: proof[0].text/uses and proof_deps: the claim that theta^sharp mod eps is the residue map now cites lem-weil-pbc-morphism-from-spec-local-ring and lem-weil-pbc-scheme-stalk-map-composition (existing nodes) with the closed-point condition of def-sc-scheme-tangent-space; proof_origin.place: removed the false remark that varieties.tex is absent (it is present here) and named the labels. Start Sat Oct 10 05:06:41 PM UTC 2026, end Sat Oct 10 05:07:44 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalPointTangentDerivationIdentification",
+  "declaration": "AlgebraicGeometry.exists_rationalPoint_tangent_cotangent_linearEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalPointTangentDerivationIdentification.lean",
+  "statement": "theorem exists_rationalPoint_tangent_cotangent_linearEquiv (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) : let R := X.presheaf.stalk x let K := X.residueField x let r : k →+* K := (StructureSheaf.toStalk k (p x) ≫ p.stalkMap x ≫ X.residue x).hom Function.Bijective r → letI : Module k (schemeTangentSpace k X p x) := Module.compHom (schemeTangentSpace k X p x) r letI : Module K (IsLocalRing.CotangentSpace R) := inferInstanceAs (Module (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)) letI : Module k (IsLocalRing.CotangentSpace R) := Module.compHom (IsLocalRing.CotangentSpace R) r ∃ e : schemeTangentSpace k X p x ≃ₗ[k] (IsLocalRing.CotangentSpace R →ₗ[k] k), ∀ θ : schemeTangentSpace k X p x, ∃ hx : θ.val (IsLocalRing.closedPoint (DualNumber K)) = x, let sharp : R →+* DualNumber K := (eqToHom (congrArg (fun y : X ↦ X.presheaf.stalk y) hx.symm) ≫ Scheme.stalkClosedPointTo θ.val).hom ∃! D : R → k, (∀ a : R, sharp a = TrivSqZeroExt.inl ((X.residue x).hom a) + TrivSqZeroExt.inr (r (D a))) ∧ (∀ a : IsLocalRing.maximalIdeal R, e θ ((IsLocalRing.maximalIdeal R).toCotangent a) = D a)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rtd0935",
+  "group": "H1",
+  "result": "pass",
+  "note": "field k; X with recorded p (schemeTangentSpace takes p); point x; kappa(x)=k as Bijective of the structural k->stalk->residue composite r (equivalent to M1's Bijective p.residueFieldMap form); T = schemeTangentSpace with its K-module restricted along r; theta-sharp = Scheme.stalkClosedPointTo (stalk map then inverse germ iso) transported by hx; (a) exists-unique D:R->k with sharp a = inl(abar)+inr(r(D a)) (uniqueness under the conjunction is equivalent: r, inr injective); (b) e theta k-linear on IsLocalRing.CotangentSpace R with [a]->D a for a in m; (c) e k-linear equiv T -> Hom_k(m/m^2,k); no dependence on K1 duality; no new definitions; recompiled clean"
  }
 }
