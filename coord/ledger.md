@@ -4289,3 +4289,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:41 L: merged deliver/J1/lem-weil-pbc-fs-adic-field-regular-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalOfFormallySmoothAdic Algebra.isRegularLocalRing_of_formallySmoothAdic)
 - 10:42 L: merged deliver/H1/lem-weil-pbc-fs-adic-field-geometrically-regular (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular Algebra.isGeometricallyRegular_of_formallySmoothAdic)
 - 10:42 L: merged deliver/M1/lem-weil-pbc-flat-local-completion-iso (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FlatLocalCompletionIso RingHom.flat_local_completion_iso)
+- 10:42 L: merged deliver/G1/lem-weil-pbc-fs-adic-local-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormallySmoothAdicFlat RingHom.flat_of_formallySmoothAdic)
