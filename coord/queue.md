@@ -1,15 +1,15 @@
 # Work queue
 
-575 items; claim with `tools/claim.py next <group> [--stage N]`.
+573 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (575)
+## Stage 2: nodes to state (573)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-pod-lisse-l-adic-sheaves` | 1 | state |
+| `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
@@ -35,13 +35,11 @@
 | `lem-weil-pbc-g-ring-maximal-ideal-criterion` | 1 | state |
 | `lem-weil-pbc-gabber-finite-etale-section` | 1 | state |
 | `lem-weil-pbc-gabber-h0-etale-criterion` | 1 | state |
-| `lem-weil-pbc-gabber-root-criterion-etale-section-lifting` | 1 | state |
 | `lem-weil-pbc-galois-base-change-qc-open-descends` | 1 | state |
 | `lem-weil-pbc-galois-invariant-closed-subset-descends` | 1 | state |
 | `lem-weil-pbc-generic-finite-algebra-splitting` | 1 | state |
 | `lem-weil-pbc-generic-separable-algebra-splitting` | 1 | state |
 | `lem-weil-pbc-geometric-point-morphism-stalk-bijection` | 1 | state |
-| `lem-weil-pbc-geometric-regularity-separable-extension` | 1 | state |
 | `lem-weil-pbc-geometrically-connected-finite-separable-test` | 1 | state |
 | `lem-weil-pbc-geometrically-reduced-extension-separable` | 1 | state |
 | `lem-weil-pbc-geometrically-regular-finitely-generated-extensions` | 1 | state |
@@ -585,7 +583,7 @@
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 809 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 808 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
