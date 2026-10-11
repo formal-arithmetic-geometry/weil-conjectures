@@ -1,15 +1,14 @@
 # Work queue
 
-376 items; claim with `tools/claim.py next <group> [--stage N]`.
+386 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (376)
+## Stage 2: nodes to state (386)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-weil-pbc-proj-twisting-sheaf` | 2 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-derived-qcoh-perfect-generation` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
@@ -34,7 +33,10 @@
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-koszul-regular-sequence-dual-complex` | 1 | state |
 | `lem-sc-p1-ext-pushout-postcompose` | 1 | state |
-| `lem-sc-perfect-cut-complex-degree-zero` | 1 | state |
+| `lem-sc-p1-graded-nakayama-free` | 1 | state |
+| `lem-sc-p1-graded-syzygy` | 1 | state |
+| `lem-sc-p1-koszul-resolution` | 1 | state |
+| `lem-sc-p1-serre-section-module-comparison` | 1 | state |
 | `lem-sc-perfect-derived-tensor-perfect` | 1 | state |
 | `lem-sc-perfect-finite-free-residue-model` | 1 | state |
 | `lem-sc-perfect-into-support-on-T` | 1 | state |
@@ -46,7 +48,9 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
+| `lem-weil-pbc-projective-ample-invertible` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
+| `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-tensor-product-affine-sections` | 1 | state |
@@ -353,10 +357,15 @@
 | `lem-sc-p1-boundary-connecting-naturality` | 2 | state |
 | `lem-sc-p1-boundary-extension-composition` | 2 | state |
 | `lem-sc-p1-boundary-one-extension-class` | 2 | state |
+| `lem-sc-p1-coherent-proj-representation` | 2 | state |
 | `lem-sc-p1-duality-pairing-naturality` | 2 | state |
+| `lem-sc-p1-finite-homogeneous-generators` | 2 | state |
 | `lem-sc-p1-graded-kernel-finite` | 2 | state |
 | `lem-sc-p1-graded-nakayama-generation` | 2 | state |
+| `lem-sc-p1-proj-tilde-functorial` | 2 | state |
+| `lem-sc-p1-serre-section-module-finite` | 2 | state |
 | `lem-sc-p1-twist-exists` | 2 | state |
+| `lem-sc-p1-twist-multiplication` | 2 | state |
 | `lem-sc-perfect-pullback-perfect-residue` | 2 | state |
 | `lem-sc-pic-affine-quotient` | 2 | state |
 | `lem-sc-pic-restriction-boundary` | 2 | state |
@@ -373,6 +382,7 @@
 | `lem-weil-pbc-finite-type-z-g-ring` | 2 | state |
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state |
+| `lem-weil-pbc-projective-space-twist-glued-identification` | 2 | state |
 | `lem-weil-pbc-quotient-henselian-pair` | 2 | state |
 | `lemma-nagata-final-noetherian-base-system` | 2 | state |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state |
@@ -386,7 +396,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 518 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 506 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
