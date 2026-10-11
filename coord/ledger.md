@@ -4114,3 +4114,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:55 L: merged deliver/J1/lem-weil-pbc-directed-union-subrings-flat-module (stage 2; reviewer PASS; first push; Sheaf.RingTheory.DirectedUnionSubringsFlatModule RingTheory.directedUnionSubrings_flat_module)
 - 09:55 L: merged deliver/K1/lem-weil-pbc-etale-colimit-normal-local-domain (stage 2; reviewer FIX; first push; Sheaf.RingTheory.EtaleColimitNormalLocalDomain CommAlgCat.isDomain_isIntegrallyClosed_injective_of_etale_colimit)
 - 09:56 L: merged deliver/F1/lem-weil-pbc-etale-fibre-discrete-separable-points (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints AlgebraicGeometry.Scheme.Hom.etale_fibre_discrete_separable_points)
+- 09:56 L: merged deliver/F1/lem-weil-pbc-etale-open-fpqc-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent AlgebraicGeometry.existsUnique_open_of_etale_fpqc_baseChange)
