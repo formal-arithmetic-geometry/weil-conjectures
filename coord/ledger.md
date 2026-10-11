@@ -3223,3 +3223,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:20 L: returned deliver/C1/lem-pur-homotopy-category-triangulated (reviewer RETURN: Not a fault: the node has been a Mathlib leaf since 01:08 UTC (commit b127e0c5a: the instance IsTriangulated (HomotopyCa)
 - 01:21 UTC L: C1 delivery of the Mathlib leaf lem-pur-homotopy-category-triangulated returned as unneeded (1f67a0a23), branch deleted with a notice.
 - 01:23 L: merged deliver/J1/lem-sc-strict-henselization-mod-power-free (reviewer FIX; first push; new nodes: 0)
+- 01:24 UTC L: J1 strict-henselization-mod-power-free FIX a69a1b4c0 (R-shm0122).
