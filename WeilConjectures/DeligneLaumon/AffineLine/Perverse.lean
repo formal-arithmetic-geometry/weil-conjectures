@@ -14,6 +14,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructur
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.DeligneLaumon.AffineLine.Punctual
 public import WeilConjectures.WeilSheaf.HomologyShift
+public import WeilConjectures.DeligneLaumon.AffineLine.FourierAmplitude
 
 /-!
 # The curve perverse t-structure and Fourier exactness
@@ -292,29 +293,66 @@ theorem WeilSheaf.LisseOnDenseOpen.simple_middleExtension (D : WeilSheaf.LisseOn
       WeilComplex.curvePerverse.FullSubcategory) :=
   (WeilComplex.simple_iff _).2 (.inr ⟨D, hD, ⟨Iso.refl _⟩⟩)
 
+/-- The Tate twist does not change the curve perverse upper classes: it changes neither the
+vanishing nor the support of a cohomology sheaf. -/
+theorem WeilComplex.isCurvePerverseLE_tateTwist_iff (m n : ℤ)
+    (K : WeilComplex k₀ l (affineLine k₀)) :
+    ((WeilComplex.tateTwist k₀ l (affineLine k₀) m).obj K).IsCurvePerverseLE n ↔
+      K.IsCurvePerverseLE n := by
+  simp only [WeilComplex.IsCurvePerverseLE, WeilComplex.isZero_homologySheaf_tateTwist_iff,
+    WeilComplex.support_homologySheaf_tateTwist]
+
 /-- **The Fourier transform is perverse t-exact on the line**, upper classes: for a nontrivial
-`ψ`, the transform `FT_ψ` carries `ᵖD^{≤n}(A₀)` into `ᵖD^{≤n}(A'₀)`. Its stalks are computed by
-the stalk formula, its degree-zero cohomology sheaf has finite support because at most
-`rank 𝓖` pairwise distinct characters `ℒ_{ψ(-ax)}` are quotients of the generic
-representation of `𝓖`, and a sheaf of finite support transforms into a lisse sheaf shifted by
-one. (blueprint: `thm-a1-fourier-t-exact`) -/
+`ψ`, the transform `FT_ψ` carries `ᵖD^{≤n}(A₀)` into `ᵖD^{≤n}(A'₀)`. The truncation triangle
+`τ_{<n}K ⟶ K ⟶ 𝓗ⁿK[-n] ⟶` reduces this to two facts: `FT_ψ` carries `D^{≤n-1}` into
+`D^{≤n}` with top cohomology sheaf of finite support
+(`AlgebraicGeometry.isLE_fourierTransform_obj`,
+`AlgebraicGeometry.support_homologySheaf_fourierTransform_finite`), and a sheaf of finite
+support transforms into a complex `≤ -1`
+(`AlgebraicGeometry.isLE_fourierTransform_of_isGE_of_isLE`).
+(blueprint: `thm-a1-fourier-t-exact`) -/
 theorem isCurvePerverseLE_fourierTransform_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
     {n : ℤ} {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.IsCurvePerverseLE n) :
-    ((fourierTransform ψ).obj K).IsCurvePerverseLE n :=
-  -- TODO(adic): the stalk formula, the coinvariant description of `H_c²` and the linear
-  -- independence of distinct characters
-  sorry
+    ((fourierTransform ψ).obj K).IsCurvePerverseLE n := by
+  obtain ⟨hK₁, hK₂⟩ := hK
+  obtain ⟨K₁, K₃, f, g, h, hT, h₁, h₃le, h₃ge, ⟨e₃⟩⟩ := WeilComplex.exists_distTriang_of_isLE K n
+    ((WeilComplex.isLE_iff_isZero_homologySheaf K n).2 hK₁)
+  have hT' := (fourierTransform ψ).map_distinguished _ hT
+  have hF₁ := isLE_fourierTransform_obj ψ hψ h₁
+  rw [sub_add_cancel] at hF₁
+  have hF₁' := support_homologySheaf_fourierTransform_finite ψ hψ h₁
+  rw [sub_add_cancel] at hF₁'
+  have hF₃ := isLE_fourierTransform_of_isGE_of_isLE ψ h₃ge h₃le
+    ((WeilSheaf.support_congr e₃).symm ▸ hK₂)
+  -- `𝓗ᵃ FT_ψ(K₁) ⟶ 𝓗ᵃ FT_ψ(K)` is an epimorphism for `a ≥ n`
+  have hepi (a : ℤ) (ha : n ≤ a) :
+      Epi ((WeilComplex.homologySheaf a).map ((fourierTransform ψ).map f)) :=
+    (WeilComplex.homologySheaf_exact₂ _ a hT').epi_f
+      (((WeilComplex.isLE_iff_isZero_homologySheaf _ _).1 hF₃ a (by lia)).eq_of_tgt _ _)
+  refine ⟨fun a ha ↦ ?_, ?_⟩
+  · have := hepi a ha.le
+    exact IsZero.of_epi ((WeilComplex.homologySheaf a).map ((fourierTransform ψ).map f))
+      ((WeilComplex.isLE_iff_isZero_homologySheaf _ _).1 hF₁ a ha)
+  · have := hepi n le_rfl
+    exact hF₁'.subset (WeilSheaf.support_subset_of_epi
+      ((WeilComplex.homologySheaf n).map ((fourierTransform ψ).map f)))
 
 /-- **The Fourier transform is perverse t-exact on the line**, upper classes for the inverse:
-the inverse of the equivalence `FT_ψ`, which is `FT_{ψ⁻¹}(-)(1)` by Fourier inversion, carries
-`ᵖD^{≤n}(A'₀)` into `ᵖD^{≤n}(A₀)`, by the argument for `FT_{ψ⁻¹}` and the twist being the
-tensor product with a lisse sheaf of rank one. (blueprint: `thm-a1-fourier-t-exact`) -/
+the inverse of the equivalence `FT_ψ`, which is `FT_{ψ⁻¹}(-)(1)` by Fourier inversion
+(`AlgebraicGeometry.nonempty_fourierTransform_comp_fourierTransform_inv_iso`), carries
+`ᵖD^{≤n}(A'₀)` into `ᵖD^{≤n}(A₀)`, by the argument for `FT_{ψ⁻¹}` and the twist not changing the
+upper classes. (blueprint: `thm-a1-fourier-t-exact`) -/
 theorem isCurvePerverseLE_fourierTransform_inv_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
     {n : ℤ} {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.IsCurvePerverseLE n) :
     haveI := isEquivalence_fourierTransform (l := l) ψ hψ
-    ((fourierTransform ψ).inv.obj K).IsCurvePerverseLE n :=
-  -- TODO(adic): Fourier inversion `FT_{ψ⁻¹} ∘ FT_ψ ≅ (-)(-1)` and the argument for `FT_{ψ⁻¹}`
-  sorry
+    ((fourierTransform ψ).inv.obj K).IsCurvePerverseLE n := by
+  have := isEquivalence_fourierTransform (l := l) ψ hψ
+  obtain ⟨e⟩ := nonempty_fourierTransform_comp_fourierTransform_inv_iso (l := l) ψ hψ
+  have h := isCurvePerverseLE_fourierTransform_obj ψ⁻¹ (inv_ne_one.2 hψ) hK
+  rw [← WeilComplex.isCurvePerverseLE_tateTwist_iff (-1)]
+  exact h.of_iso ((fourierTransform ψ⁻¹).mapIso
+    ((fourierTransform ψ).asEquivalence.counitIso.app K).symm ≪≫
+      e.app ((fourierTransform ψ).inv.obj K))
 
 /--
 The Fourier–Deligne transform along a nontrivial additive character is exact for the curve
