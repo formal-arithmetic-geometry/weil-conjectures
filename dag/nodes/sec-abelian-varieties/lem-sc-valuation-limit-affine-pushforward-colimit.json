@@ -23,11 +23,76 @@
   "def-weil-pbc-scheme-conventions",
   "pqf-def-affine-morphism",
   "pqf-def-coherent",
-  "lem-weil-pbc-affine-morphism-relative-spec"
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-spec-colimit-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restrict to the cofinal directed tail. Put A_i equal to the affine pushforward of the structure sheaf. The quasi-coherent algebra colimit node constructs A as their colimit on affine sections. For an affine open U of S_0, the inverse images U_i in S_i and U in S are affine by the relative-spectrum statement, and the affine-limit statement identifies U with the limit of the U_i. The rings of the U_i have colimit A(U) by the algebra-colimit statement, so the Spec-colimit-limit statement identifies U with Spec A(U), compatibly on overlaps. These local identifications glue to identify S over S_0 with the relative spectrum of A; the relative-spectrum statement then identifies g_* O_S with A.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-quasi-coherent-algebra-colimit",
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 01YX proof (relative spectrum of the colimit algebra), with 01YW and 01Z0"
+   }
+  },
+  {
+   "text": "For an affine open U of S_0, write A for its ring, B_i for the sections of A_i, and B for the sections of A over U; by (1) and the relative-spectrum statement, B_i and B are the rings of the affine inverse images of U in S_i and S. The affine pullback sections node gives natural isomorphisms from F_0(U) tensor_A B_i to the sections of the pulled-back F_0 over the inverse image of U in S_i, i.e. to ((g_i)_* g_i^* F_0)(U), and likewise from F_0(U) tensor_A B to (g_* g^* F_0)(U). By the quasi-coherent tensor-sections node, F_0(U) tensor_A B_i and F_0(U) tensor_A B are the sections over U of F_0 tensor A_i and F_0 tensor A. These isomorphisms on the affine opens are compatible with restriction between affine opens and with the transition maps by the naturality in the pullback-sections node, so they define isomorphisms of sheaves (a compatible family of isomorphisms on a basis of opens), giving the asserted pushforward-tensor isomorphisms compatible with transition maps.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 01Z0 proof, first paragraph (affine projection formula)"
+   }
+  },
+  {
+   "text": "Let (C, c_i) be the colimit of the directed system (F_0 tensor A_i) in O_{S_0}-modules; by the quasi-coherent module colimit node, C is quasi-coherent and C(U) is the directed colimit of the sections (F_0 tensor A_i)(U) for every affine open U. The maps F_0 tensor A_i -> F_0 tensor A induced by A_i -> A induce a map C -> F_0 tensor A. On an affine U, by the tensor-sections node it is the canonical map from the colimit of F_0(U) tensor_A B_i to F_0(U) tensor_A B, where B is the directed colimit of the B_i by the quasi-coherent algebra colimit node; this map is bijective because tensoring the fixed A-module F_0(U) commutes with directed colimits (tensor-colimit node). A map of sheaves bijective on every affine open is an isomorphism, so F_0 tensor A with the maps induced by A_i -> A is the colimit in O_{S_0}-modules. (Applied with F_0 = O_{S_0}, the same argument shows the underlying module of A is the colimit of the A_i in O_{S_0}-modules.)",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-algebra-colimit",
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 00DD; Limits, Lemma 01Z0 displayed colimit calculation"
+   }
+  },
+  {
+   "text": "Substituting the identifications of Step 2 into Step 3 gives the canonical colimit assertion and completes all three clauses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits, Lemma 01Z0 proof, first paragraph and displayed equalities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Limits, Lemma 01Z0 proof, with 01YX/01YW"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,15 +128,115 @@
    "results": "no relative-spectrum declaration in Mathlib/AlgebraicGeometry",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative spectrum of the colimit of affine pushforward algebras and tensoring a quasi-coherent module",
+   "results": "AlgebraicGeometry.pullbackSpecIso and related pullback declarations; no relative-spectrum limit or affine pushforward tensor theorem",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Pushforward TensorProduct QuasiCoherent colimit",
+   "results": "Unknown identifier Scheme.Pushforward",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeSpec|pushforward.*tensor|tensor.*pushforward|colim.*IsQuasicoherent in Mathlib/AlgebraicGeometry",
+   "results": "no matching declarations in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pushforward of pullback quasi coherent module along affine morphism is tensor with pushforward structure sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine morphism pushforward pullback module projection formula",
+   "results": "Scheme.Modules.pullbackPushforwardAdjunction and pushforward declarations; no projection formula",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit tensorRight ModuleCat",
+   "results": "Unknown identifier tensorRight",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*tensor|tensor.*pushforward|RelativeSpec in Mathlib/AlgebraicGeometry",
+   "results": "no matching declarations in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-valuation-limit-qcoh-section-descent",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-valuation-limit-affine-pushforward-colimit",
+  "worker": "stage1",
+  "summary": "Split along Limits 01Z0 and the relative-spectrum construction 01YX/01YW. Existing DAG nodes cover affine limits, relative Spec, affine pullback sections, quasi-coherent algebra colimits, and tensor preservation of colimits; no new nodes were needed.",
+  "blueprint": "proof: write the limit as the relative spectrum of the colimit of the affine pushforward algebras, then tensor the fixed quasi-coherent module with that colimit",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "generic affine-transition inverse-limit construction"
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "generic relative-spectrum and affine pushforward identification"
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-algebra-colimit",
+    "why": "generic quasi-coherent algebra colimit and affine sections"
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "generic affine projection formula for pullback modules"
+   },
+   {
+    "node": "lem-weil-pbc-tensor-commutes-with-colimits",
+    "why": "generic tensor preservation of module colimits"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-tensor-commutes-with-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vlp0211",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vlp0211 (reviewer sub-agent of L); spot-checked: Statement matches parent lem-sc-valuation-limit-qcoh-section-descent Steps 1/3 (g_*F=M, (g_j)_*F_j=M_j, M=colim M_j in O-modules) and Limits 01Z0/01YX; Step 1 (limit node + relative Spec + algebra colimit + Spec-colimit-limit) and g_i affine as transition maps, g affine by limit node: ok. FIX more, RETURN less: (1) C1 Step 2 used (F_0 tensor A_i)(U)=F_0(U) tensor B_i on affines without citation: now cites lem-weil-pbc-quasi-coherent-tensor-product-affine-sections, assembly on affine basis spelled out; (2) C1 Step 3 concluded colimit in O-modules from affine sections without a statement: now cites lem-weil-pbc-quasi-coherent-module-colimit-affine-sections (colimit C quasi-coherent with affine sections = colim), comparison map C -> F_0 tensor A bijective on affines by tensor-colimit node; also covers the statement's parenthetical that A's underlying module is the module colimit. Second reading by G1 missed both. Mathlib: no packaged statement (grep recorded in node).; 1 file(s) fixed by the reviewer"
+ }
 }
