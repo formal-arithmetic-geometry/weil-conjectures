@@ -11,12 +11,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
-public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
-public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
@@ -83,9 +81,6 @@ For exact functors between abelian categories, the induced functor
   `CategoryTheory.Functor.mapDerivedCategoryPlusCompIso_comp_id` and
   `CategoryTheory.Functor.mapDerivedCategoryPlusCompIso_assoc`: the unit and associativity
   laws relating `mapDerivedCategoryPlusCompIso` and `mapDerivedCategoryPlusIdIso`.
-- `CategoryTheory.Functor.commShift_mapDerivedCategoryNatIso_hom` and
-  `CategoryTheory.Functor.commShift_mapDerivedCategoryCompIso_hom`: the isomorphisms
-  `mapDerivedCategoryNatIso` and `mapDerivedCategoryCompIso` commute with the shifts.
 -/
 
 @[expose] public section
@@ -1587,70 +1582,3 @@ noncomputable def mapDerivedCategoryTruncGEIso (n : ℤ) :
         nat₁])).symm
 
 end CategoryTheory.Functor
-
-/-! ### Compatibility of the comparison isomorphisms with the shifts -/
-
-namespace CategoryTheory
-
-variable {C D E : Type*} [Category C] [Category D] [Category E] [Abelian C] [Abelian D]
-  [Abelian E] [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
-
-/-- Every object of the derived category is isomorphic to the image of a cochain complex under
-the localization functor, so its image under any functor is isomorphic to the image of such
-an object. -/
-lemma DerivedCategory.exists_isIso_map_Q_obj {F : DerivedCategory D ⥤ DerivedCategory E}
-    (X : DerivedCategory D) : ∃ (Y : CochainComplex D ℤ) (f : X ⟶ DerivedCategory.Q.obj Y),
-      IsIso (F.map f) :=
-  ⟨_, (DerivedCategory.Q.objObjPreimageIso X).inv, inferInstance⟩
-
-namespace Functor
-
-attribute [local instance] Limits.comp_preservesFiniteLimits Limits.comp_preservesFiniteColimits
-
-/-- The isomorphism `D(F) ≅ D(G)` induced by an isomorphism `F ≅ G` of exact functors commutes
-with the shifts. -/
-instance commShift_mapDerivedCategoryNatIso_hom {F G : C ⥤ D} [F.Additive] [G.Additive]
-    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G) :
-    NatTrans.CommShift (mapDerivedCategoryNatIso e).hom ℤ := by
-  have : Functor.whiskerLeft DerivedCategory.Q (mapDerivedCategoryNatIso e).hom =
-      F.mapDerivedCategoryFactors.hom ≫
-        Functor.whiskerRight (NatTrans.mapHomologicalComplex e.hom (ComplexShape.up ℤ))
-          DerivedCategory.Q ≫ G.mapDerivedCategoryFactors.inv := by
-    ext K
-    simp [← mapDerivedCategoryNatIso_fac_assoc]
-  have : NatTrans.CommShift
-      (Functor.whiskerLeft DerivedCategory.Q (mapDerivedCategoryNatIso e).hom) ℤ := by
-    rw [this]
-    infer_instance
-  exact NatTrans.CommShift.of_whiskerLeft _ DerivedCategory.Q
-    fun X ↦ DerivedCategory.exists_isIso_map_Q_obj X
-
-/-- The composition isomorphism `D(F ⋙ G) ≅ D(F) ⋙ D(G)` of exact functors commutes with the
-shifts. -/
-instance commShift_mapDerivedCategoryCompIso_hom (F : C ⥤ D) (G : D ⥤ E) [F.Additive]
-    [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
-    NatTrans.CommShift (mapDerivedCategoryCompIso F G).hom ℤ := by
-  have : Functor.whiskerLeft DerivedCategory.Q (mapDerivedCategoryCompIso F G).hom =
-      (F ⋙ G).mapDerivedCategoryFactors.hom ≫
-        Functor.whiskerRight (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))
-          (ComplexShape.up ℤ)).inv DerivedCategory.Q ≫
-        (Functor.associator _ _ _).hom ≫
-        Functor.whiskerLeft (F.mapHomologicalComplex (ComplexShape.up ℤ))
-          G.mapDerivedCategoryFactors.inv ≫
-        (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight F.mapDerivedCategoryFactors.inv G.mapDerivedCategory ≫
-        (Functor.associator _ _ _).hom := by
-    ext K
-    simp [← mapDerivedCategoryCompIso_fac]
-  have : NatTrans.CommShift
-      (Functor.whiskerLeft DerivedCategory.Q (mapDerivedCategoryCompIso F G).hom) ℤ := by
-    rw [this]
-    infer_instance
-  exact NatTrans.CommShift.of_whiskerLeft _ DerivedCategory.Q
-    fun X ↦ DerivedCategory.exists_isIso_map_Q_obj X
-
-end Functor
-
-end CategoryTheory

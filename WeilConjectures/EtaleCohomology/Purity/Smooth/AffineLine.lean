@@ -164,8 +164,9 @@ closed–open pair `(s, j)` and reading off the long exact sequence with `sk-pro
 The orientation itself, `1 ↦ ∂κ(t)`, is `AlgebraicGeometry.Etale.affineLineOrientation`; that
 it is an isomorphism is `AlgebraicGeometry.Etale.isIso_affineLineOrientation`, the
 identification of `Hom(Λ_Y, Rs^! Λ(1)[2])` with `H²_{s(Y)}(𝔸¹_Y, Λ(1))` is
-`AlgebraicGeometry.Etale.supportedClassMap_bijective`, and its uniqueness is
-`AlgebraicGeometry.Etale.affineLineOrientation_hom_ext`. -/
+`AlgebraicGeometry.Etale.supportedClassMap_bijective`, and its uniqueness
+(`prop-pur-affine-line-orientation-uniqueness`) is
+`AlgebraicGeometry.Etale.eq_affineLineOrientation_iff`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNormalized Λ] :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)).obj

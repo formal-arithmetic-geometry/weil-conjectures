@@ -5,50 +5,56 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Shift.Adjunction
+public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
-# Mates of squares commuting with shifts
+# Mates and transported adjunctions commuting with shifts
 
-If the adjunctions `L₁ ⊣ R₁` and `L₂ ⊣ R₂` are compatible with shifts and a square
-`α : G ⋙ L₂ ⟶ L₁ ⋙ H` commutes with the shifts, then so does its mate
-`R₁ ⋙ G ⟶ H ⋙ R₂`: the mate is a composite of whiskered units, counits, `α` and unitors and
-associators, all of which commute with the shifts.
+* If two adjunctions commute with shifts, the mate of a natural transformation which
+  commutes with shifts commutes with shifts (`NatTrans.CommShift.mateEquiv`).
+* An adjunction commuting with shifts, transported along an isomorphism of left adjoints
+  commuting with shifts, commutes with shifts (`Adjunction.commShift_ofNatIsoLeft`).
 -/
 
 @[expose] public section
 
 namespace CategoryTheory
 
+open Category CategoryTheory.Functor
+
+variable {A : Type*} [AddMonoid A]
+
+namespace NatTrans.CommShift
 
 variable {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* F]
-  {A : Type*} [AddMonoid A] [HasShift C A] [HasShift D A] [HasShift E A] [HasShift F A]
-  {G : C ⥤ E} {H : D ⥤ F} {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
+  [HasShift C A] [HasShift D A] [HasShift E A] [HasShift F A]
+  {G : C ⥤ D} {H : E ⥤ F} {L₁ : C ⥤ E} {R₁ : E ⥤ C} {L₂ : D ⥤ F} {R₂ : F ⥤ D}
   [G.CommShift A] [H.CommShift A] [L₁.CommShift A] [R₁.CommShift A] [L₂.CommShift A]
-  [R₂.CommShift A] (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) [adj₁.CommShift A] [adj₂.CommShift A]
+  [R₂.CommShift A]
+  (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) [adj₁.CommShift A] [adj₂.CommShift A]
 
-/-- The mate of a square of functors commuting with shifts commutes with shifts: for the square
-`α` on the left, its mate on the right commutes with the shifts.
-
-```
-    C ──L₁──▶ D             C ◀──R₁── D
-    │         │             │         │
-  G │    α    │ H         G │  mate   │ H
-    ▼         ▼             ▼         ▼
-    E ──L₂──▶ F             E ◀──R₂── F
-```
--/
-instance NatTrans.CommShift.mateEquiv (α : TwoSquare G L₁ L₂ H)
-    [NatTrans.CommShift α.natTrans A] :
+/-- The mate of a natural transformation commuting with shifts, with respect to adjunctions
+commuting with shifts, commutes with shifts. -/
+lemma mateEquiv (α : TwoSquare G L₁ L₂ H) [NatTrans.CommShift α.natTrans A] :
     NatTrans.CommShift (mateEquiv adj₁ adj₂ α).natTrans A := by
-  have h : (_root_.CategoryTheory.mateEquiv adj₁ adj₂ α).natTrans =
-      (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft (R₁ ⋙ G) adj₂.unit ≫
-        (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft _ (Functor.associator _ _ _).inv ≫
-        Functor.whiskerLeft R₁ (Functor.whiskerRight α.natTrans R₂) ≫
-        Functor.whiskerLeft _ (Functor.associator _ _ _).hom ≫ (Functor.associator _ _ _).inv ≫
-        Functor.whiskerRight adj₁.counit (H ⋙ R₂) ≫ (Functor.leftUnitor _).hom := rfl
-  rw [h]
+  dsimp only [CategoryTheory.mateEquiv, Equiv.coe_fn_mk, TwoSquare.mk, TwoSquare.natTrans]
   infer_instance
+
+end NatTrans.CommShift
+
+namespace Adjunction
+
+variable {C D : Type*} [Category* C] [Category* D] [HasShift C A] [HasShift D A]
+  {F G : C ⥤ D} {H : D ⥤ C} [F.CommShift A] [G.CommShift A] [H.CommShift A]
+
+/-- An adjunction commuting with shifts, transported along an isomorphism of left adjoints
+commuting with shifts, commutes with shifts. -/
+lemma commShift_ofNatIsoLeft (adj : F ⊣ H) (iso : F ≅ G) [adj.CommShift A]
+    [NatTrans.CommShift iso.hom A] : (adj.ofNatIsoLeft iso).CommShift A where
+  commShift_unit := by dsimp only [ofNatIsoLeft]; infer_instance
+  commShift_counit := by dsimp only [ofNatIsoLeft]; infer_instance
+
+end Adjunction
 
 end CategoryTheory
