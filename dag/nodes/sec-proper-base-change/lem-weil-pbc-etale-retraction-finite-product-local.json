@@ -198,5 +198,23 @@
   "by": "L",
   "result": "accepted",
   "note": "Split reviewed: 6 steps along Algebra 04GG (8)=>(10): the 00UL decomposition upstairs (Mathlib leaf), retraction, surjection C -> B and primes over m, idempotents f_i, each f_i B local or zero and f_infty = 0 via lem-weil-pbc-finite-algebra-local-radical, zero factors dropped. Correct; fixes the gaps of the rejected remote attempt."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleRetractionFiniteProductLocal",
+  "declaration": "finite_algebra_is_product_local_rings",
+  "file": "lean/Sheaf/RingTheory/EtaleRetractionFiniteProductLocal.lean",
+  "statement": "theorem finite_algebra_is_product_local_rings {R : Type u} [CommRing R] [IsLocalRing R] (hR : ∀ (R' : Type (max u v)) [CommRing R'] [Algebra R R'], Algebra.Etale R R' → ∀ (p : Ideal R') [p.IsPrime], ∀ (hp : p.comap (algebraMap R R') = IsLocalRing.maximalIdeal R), Function.Bijective (Ideal.ResidueField.mapₐ (IsLocalRing.maximalIdeal R) p (Algebra.ofId R R') hp.symm) → ∃ (τ : R' →ₐ[R] R), p = (IsLocalRing.maximalIdeal R).comap τ.toRingHom) {B : Type v} [CommRing B] [Algebra R B] [Module.Finite R B] : ∃ (n : ℕ) (A : Fin n → Type v) (comm : ∀ i, CommRing (A i)) (alg : ∀ i, Algebra R (A i)) (loc : ∀ i, IsLocalRing (A i)), letI : ∀ i, CommRing (A i) := comm letI : ∀ i, Algebra R (A i) := alg letI : ∀ i, IsLocalRing (A i) := loc Nonempty (B ≃ₐ[R] ∀ i, A i)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-erp1007",
+  "group": "M1",
+  "result": "pass",
+  "note": "local R (CommRing+IsLocalRing); hR over all R' : Type (max u v) with Algebra.Etale, prime p, comap p = m, Ideal.ResidueField.mapₐ bijective => tau : R' →ₐ[R] R with p = m.comap tau; B Module.Finite; conclusion n:ℕ (n=0 allowed), local factors A : Fin n → Type v, B ≃ₐ[R] Π A i; hR satisfiable (fields, henselian), not hollow"
  }
 }
