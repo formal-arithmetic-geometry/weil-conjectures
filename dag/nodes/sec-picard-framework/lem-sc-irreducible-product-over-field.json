@@ -108,5 +108,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ipf (reviewer sub-agent of L); spot-checked: Source: Stacks varieties.tex Tag 038F (lemma-bijection-irreducible-components): k field, X,Y k-schemes, X geometrically irreducible => X x_k Y -> Y bijection on irreducible components; new node lem-sc-product-irreducible-components-bijection states it hypothesis by hypothesis (U geometrically irreducible, V any K-scheme), self-contained, notions cited, unsplit, created.item = item, id fresh, not a duplicate of the other 038F-citing nodes (lem-pc-base-change-product, lem-sc-hilb-*); no slopmaster2 declaration for it in the sorry map (B10), Mathlib irreducibleComponentsEquiv needs IsOpenMap, so no leaf. Item statement unchanged. Step 1 carried by the new node; Step 2: V geometrically irreducible, base change along K/K (def-pc-geometrically-irreducible) gives V irreducible, so V is its own unique component; bijection gives one component Z of the product. FIX (C1, FIX more, RETURN less): dag/nodes/sec-picard-framework/lem-sc-irreducible-product-over-field.json: proof[1].text, proof[1].uses, proof_deps: the inference 'exactly one component hence irreducible' needs every point to lie in a component (Zorn), now cited from the existing Mathlib leaf lem-sc-irreducible-components-cover (generic topology, no tool_use needed). Small cases: U or V = Spec K (product = V or U, irreducible); V empty excluded since irreducible means nonempty. Consumer lem-sc-geometrically-irreducible-product Step 3 uses exactly this statement. Start Sat Oct 10 03:38:47 PM UTC 2026, end Sat Oct 10 03:39:37 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IrreducibleProductOverField",
+  "declaration": "AlgebraicGeometry.irreducibleSpace_pullback_of_geometricallyIrreducible",
+  "file": "lean/Sheaf/AlgebraicGeometry/IrreducibleProductOverField.lean",
+  "statement": "theorem irreducibleSpace_pullback_of_geometricallyIrreducible (K : Type u) [Field K] (U V : Scheme.{u}) [U.Over (Spec (.of K))] [V.Over (Spec (.of K))] [GeometricallyIrreducible (U ↘ Spec (.of K))] [GeometricallyIrreducible (V ↘ Spec (.of K))] : IrreducibleSpace (pullback (C := Scheme) (U ↘ Spec (.of K)) (V ↘ Spec (.of K)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ipf1158",
+  "group": "E1",
+  "result": "pass",
+  "note": "K field=(K:Type u)[Field K]; U,V schemes over K=[U.Over (Spec (.of K))] per def-weil-scheme-over-base match (Scheme.Over, X ↘ S); geometrically irreducible=Mathlib GeometricallyIrreducible (U ↘ Spec K) per def-pc-geometrically-irreducible match; U x_{Spec K} V=Limits.pullback of the two structure maps in Scheme; irreducible=IrreducibleSpace (nonempty included); universes shared u, GeometricallyIrreducible quantifies fields in u; Mathlib has only the UniversallyOpen-hypothesis instance (Irreducible.lean:111), so existing:false right; docstring has blueprint tag and proof in words"
  }
 }
