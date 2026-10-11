@@ -1,16 +1,17 @@
 # Work queue
 
-518 items; claim with `tools/claim.py next <group> [--stage N]`.
+515 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (518)
+## Stage 2: nodes to state (515)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-amb-finite-locally-free-module` | 1 | state |
 | `def-pc-derived-category` | 1 | state |
+| `def-weil-pbc-koszul-complex` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-chi-zero-dim-support` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
@@ -73,13 +74,11 @@
 | `lem-weil-pbc-ideal-times-quasi-coherent-affine-sections` | 1 | state |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
 | `lem-weil-pbc-integral-scheme-ideal-generic-stalk` | 1 | state |
-| `lem-weil-pbc-koszul-differential-square-zero` | 1 | state |
 | `lem-weil-pbc-limit-fibre-products` | 1 | state |
 | `lem-weil-pbc-module-base-change-map-algebra` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-module-filtered-colimit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-extension` | 1 | state |
-| `lem-weil-pbc-module-finite-presentation-representatives` | 1 | state |
 | `lem-weil-pbc-module-finite-type-image-extension` | 1 | state |
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
@@ -90,7 +89,6 @@
 | `lem-weil-pbc-module-tensor-hom-adjunction` | 1 | state |
 | `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1 | state |
 | `lem-weil-pbc-n2-descends-finite-domain-extension` | 1 | state |
-| `lem-weil-pbc-nagata-localization` | 1 | state |
 | `lem-weil-pbc-nagata-universally-japanese` | 1 | state |
 | `lem-weil-pbc-nakayama-nilpotent` | 1 | state |
 | `lem-weil-pbc-nl-presentations-homotopy-equivalent` | 1 | state |
@@ -99,7 +97,6 @@
 | `lem-weil-pbc-nonvanishing-section-trivializes` | 1 | state |
 | `lem-weil-pbc-nonzerodivisor-if-maximal-not-associated` | 1 | state |
 | `lem-weil-pbc-normal-domain-fractional-principal-quotient-ass` | 1 | state |
-| `lem-weil-pbc-normal-domain-principal-quotient-associated-height` | 1 | state |
 | `lem-weil-pbc-normal-extension-purely-inseparable-then-galois` | 1 | state |
 | `lem-weil-pbc-normal-locus-open` | 1 | state |
 | `lem-weil-pbc-normal-nagata-monogenic-n1` | 1 | state |
@@ -528,7 +525,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 638 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 637 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
