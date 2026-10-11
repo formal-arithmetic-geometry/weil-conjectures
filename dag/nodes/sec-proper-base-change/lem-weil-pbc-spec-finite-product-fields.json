@@ -185,5 +185,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps (Stacks 00ED/00EC/00E4 argued directly for n factors): idempotents and p_j = (e_k : k != j) maximal; every prime equals some p_j and D(e_j) = {p_j}; discrete; pi_j is the localization at e_j (the claim Stacks leaves out); Spec pi_j an open immersion via the principal-localization leaf. No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpecFiniteProductFields",
+  "declaration": "AlgebraicGeometry.spec_finite_product_fields",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpecFiniteProductFields.lean",
+  "statement": "theorem spec_finite_product_fields (n : ℕ) (L : Fin n → Type u) [∀ i, Field (L i)] : (∀ (p : Ideal (∀ i, L i)), p.IsPrime ↔ ∃ i : Fin n, p = Ideal.comap (Pi.evalRingHom L i) ⊥) ∧ (∀ i j : Fin n, i ≠ j → Ideal.comap (Pi.evalRingHom L i) ⊥ ≠ Ideal.comap (Pi.evalRingHom L j) ⊥) ∧ Nat.card (PrimeSpectrum (∀ i, L i)) = n ∧ DiscreteTopology (PrimeSpectrum (∀ i, L i)) ∧ (∀ i : Fin n, IsOpenImmersion (Spec.map (CommRingCat.ofHom (Pi.evalRingHom L i))) ∧ Set.range (fun x : PrimeSpectrum (L i) ↦ (Spec.map (CommRingCat.ofHom (Pi.evalRingHom L i))).base x) = {p | p.asIdeal = Ideal.comap (Pi.evalRingHom L i) ⊥} ∧ ∃ U : (Spec (.of (∀ i, L i))).Opens, (U : Set (Spec (.of (∀ i, L i)))) = {p | p.asIdeal = Ideal.comap (Pi.evalRingHom L i) ⊥} ∧ ∃ e : Spec (.of (L i)) ≅ U.toScheme, e.hom ≫ U.ι = Spec.map (CommRingCat.ofHom (Pi.evalRingHom L i)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
