@@ -22,8 +22,47 @@
   "def-weil-triangulated-category",
   "def-pur-saturated-triangulated-localization"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Let T_1 and T_2 be denominator triangles over T=(X,Y,Z). The category S/X is cofiltered by [def-pur-saturated-triangulated-localization], so their X-denominators have a common predecessor X_3. Every arrow p:X_3\\to X_1 of S/X lies in S: with u=s_{1,X}\\circ p in S, the second MS2 clause applied to u and s_{1,X} gives t in S and q with s_{1,X}\\circ t=u\\circ q=s_{1,X}\\circ p\\circ q, the second MS3 clause gives t' in S with t\\circ t'=p\\circ q\\circ t', so p\\circ(q\\circ t') is in S by MS1, and MS4 applied to s_{1,X},p,q\\circ t' gives p in S; the same holds for X_3\\to X_2 and, after rotation, for the Y- and Z-component maps into T_1 and T_2, so the final a,b,c lie in S. Complete the S-arrow X_3\\to X_1 to a denominator triangle morphism by [lem-pur-triangle-completion-ms6-05r9]. Repeating this after rotation for Y and Z gives a predecessor triangle with component maps a,b,c into T_2, but these maps need not commute with its triangle arrows. For the f-square, compose the two candidates f_2 a and b f_1 with the Y-component s_{2,Y}:Y_2\\to Y of T_2\\to T. They agree because both become f s_{2,X}a=f s_{1,X} on composing the component maps to T. The second MS3 clause therefore gives an S-denominator into their common source on which the f-square commutes. Complete that denominator to a triangle map by [lem-pur-triangle-completion-ms6-05r9]. Rotate and repeat for the g- and h-squares; earlier equalities persist on precomposition. The final a,b,c form a triangle morphism, yielding a common predecessor of T_1 and T_2. Iterate binary predecessors for a finite nonempty family; for the empty family take the identity triangle, using MS1.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "lem-pur-triangle-completion-ms6-05r9"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma Tag 05R9 (lemma-limit-triangles), cofilteredness construction for finitely many objects"
+   }
+  },
+  {
+   "text": "Let (a,b,c) and (a',b',c') be parallel arrows T_1\\to T_2 in I, and write s_1:T_1\\to T for the denominator triangle map. Their equality after composition with s_1 gives s_{2,X}a=s_{2,X}a' on X-components, where s_{2,X} is the X-component of T_2\\to T. The second MS3 clause supplies t_X in S into X_1 with at_X=a't_X. Complete t_X to a denominator triangle morphism T_3\\to T_1 by [lem-pur-triangle-completion-ms6-05r9]; the X-components of the parallel composites now agree. Rotate the triangles and repeat the same argument for b,b', then for c,c'. Each replacement precomposes all components, so previously obtained equalities persist, while MS1 keeps composite components in S. The final composite T_5\\to T_1 equalizes the original parallel arrows componentwise.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "lem-pur-triangle-completion-ms6-05r9"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma Tag 05R9 (lemma-limit-triangles), equalization of parallel arrows"
+   }
+  },
+  {
+   "text": "The finite-family refinement and the equalization construction use only arrows in S and commuting morphisms of distinguished triangles, so they are objects and arrows of the stated category I. These are exactly the two cofilteredness conditions: every finite pair has a common predecessor, and every parallel pair is equalized after precomposition.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma Tag 05R9, definition of the cofiltered refinement category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-saturated-triangulated-localization",
+  "lem-pur-triangle-completion-ms6-05r9"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
@@ -32,33 +71,56 @@
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "equalize parallel morphisms of distinguished triangles componentwise in a saturated multiplicative system",
-   "results": "CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism and related triangle-map lemmas; no theorem with multiplicative-system equalization",
+   "query": "common refinements and equalization of morphisms of distinguished triangles in a saturated multiplicative system",
+   "results": "CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism; CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₁; CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₂; no theorem with multiplicative-system common-refinement/equalization statement",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "IsCofiltered equalize parallel morphisms",
-   "results": "unknown identifier IsCofiltered in Loogle",
+   "query": "CategoryTheory.Pretriangulated complete distinguished triangle morphism IsCofiltered",
+   "results": "0 hits; Loogle reported Unknown identifier complete",
    "date": "2026-10-11",
    "verdict": "unavailable"
   },
   {
    "tool": "grep",
-   "query": "equalize|IsCofiltered Mathlib/CategoryTheory/Triangulated",
-   "results": "no result from the required search command",
+   "query": "cofiltered|equalize|complete_distinguished_triangle_morphism Mathlib/CategoryTheory/Triangulated",
+   "results": "no direct common-refinement/equalization theorem in Mathlib/CategoryTheory/Triangulated",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "common refinement equalization parallel morphisms distinguished triangles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-triangle-morphism-category-05r9",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-triangle-common-refinement-ms3-05r9",
+  "worker": "stage1",
+  "summary": "Split the common-refinement lemma into the finite-family construction and the componentwise equalization construction. Both follow Stacks Tag 05R9 using MS1-MS3 from the saturated multiplicative-system definition and the existing triangle-completion statement; no new node was created because the two constructions are the proof clauses themselves.",
+  "blueprint": "Realizes the Lemma 05SC proof clause stating that finite families of triangle denominators admit common refinements and parallel triangle morphisms can be equalized.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tcr0314",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tcr0314 (reviewer sub-agent of L); spot-checked: Checked Step 1 (dual of Stacks 05R9 condition (2)): S/X cofiltered is asserted by the def node; completion node hypotheses; f-square equality s_{2,Y}f_2a=f s_{1,X}=s_{2,Y}b f_P and second MS3 clause; g/h by rotation (MS5 for shifted components); empty family via identity/MS1. Step 2: s_{2,X}a=s_{1,X}=s_{2,X}a', second MS3 clause, completion, persistence under precomposition. Step 3 elementary. Only split fields changed; no new nodes; Mathlib none. FIX more, RETURN less: E/C4 (missed by the Second reading) Step 1 called the S/X-arrow X_3->X_1 an S-arrow and never showed the T_2-side components a,b,c lie in S (needed for the completion node and for arrows of I; S/X arrows are only commuting triangles); folded in the elementary saturation argument (second MS2 clause, second MS3 clause, MS1, MS4) into Step 1. Note: the Second reading's claim to have repaired created.item is untrue but harmless (created.item correctly stays lem-pur-triangle-morphism-category-05r9).; 1 file(s) fixed by the reviewer"
+ }
 }

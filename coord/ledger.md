@@ -3345,3 +3345,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:13 L: reviewer R-tcm0313 launched (E1 lem-pur-triangle-completion-ms6-05r9, head e6bac3d1d)
 - 03:13 L: merged deliver/E1/lem-pur-triangle-completion-ms6-05r9 (reviewer PASS; first push; new nodes: 0)
 - 03:14 L: lem-pur-triangle-completion-ms6-05r9 merged by R-tcm0313 (PASS ec88591ee; second reading by E1 missed nothing; proof_origin wrongly says the source text is unavailable: metadata only); reviewer R-tcr0314 launched (E1 lem-pur-triangle-common-refinement-ms3-05r9, 762859ae3)
+- 03:15 L: merged deliver/E1/lem-pur-triangle-common-refinement-ms3-05r9 (reviewer FIX; first push; new nodes: 0)
