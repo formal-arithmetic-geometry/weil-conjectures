@@ -144,5 +144,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps (omitted detail of Stacks 07EU; agent proof): Phi and the structure map from the universal properties, Psi via psi_0 killing g and factoring through quotient and localization, Psi Phi = id and Phi Psi = id by uniqueness. Two new leaves (polynomial ring in a family of variables; universal property of localization away from f, 00CP), lines added by L. Statement citations added. Tags 07EU, 00CP verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LinearEquationLocalizationPolynomial",
+  "declaration": "MvPolynomial.linearEquationLocalizationPolynomial",
+  "file": "lean/Sheaf/RingTheory/LinearEquationLocalizationPolynomial.lean",
+  "statement": "theorem linearEquationLocalizationPolynomial (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) (i : Fin r) : let I : Ideal (MvPolynomial (Fin r) A) := Ideal.span {(∑ j : Fin r, C (f j) * X j) - 1} let B := MvPolynomial (Fin r) A ⧸ I let q := Ideal.Quotient.mk I let Af := Localization.Away (f i) let Bf := Localization.Away (algebraMap A B (f i)) letI : Algebra Af Bf := (Localization.awayMap (algebraMap A B) (f i)).toAlgebra let x : Fin r → Bf := fun j ↦ algebraMap B Bf (q (X j)) ∃ e : MvPolynomial {j : Fin r // j ≠ i} Af ≃ₐ[Af] Bf, e.toAlgHom = aeval (fun j ↦ x j.1) ∧ (∀ j : {j : Fin r // j ≠ i}, e.symm (x j.1) = X j) ∧ e.symm (x i) = C (IsLocalization.Away.invSelf (S := Af) (f i)) * (1 - ∑ j : {j : Fin r // j ≠ i}, C (algebraMap A Af (f j.1)) * X j)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lel1115",
+  "group": "J1",
+  "result": "pass",
+  "note": "A:Type u CommRing; r,f:Fin r→A,i:Fin r (r≥1); I=span{∑C(f j)X j - 1}, B quotient; Af/Bf Localization.Away at f i / its image; Af→Bf = awayMap (A→B) via letI; x j = class/1; e ≃ₐ[Af] with toAlgHom = aeval(y_j↦x_j); inverse x_j↦X_j (j≠i), x_i↦C(invSelf)*(1-∑C(f j)X j); #check: C/X/aeval resolve to MvPolynomial.*"
  }
 }
