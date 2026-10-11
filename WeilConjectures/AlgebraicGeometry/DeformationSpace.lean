@@ -205,4 +205,145 @@ noncomputable abbrev punctured : Scheme.{u} :=
 noncomputable def puncturedToAffineLine : X.punctured ⟶ X.affineLine :=
   relativeGluingMap _ _ (X.affineStructurePresheaf.whiskerLeft CommRingCat.polynomialToLaurent)
 
+/-- The zero section of `𝔸¹_X` as a quasi-coherent algebra: `𝒪_X[t] / t`. -/
+noncomputable abbrev polynomialZeroPresheaf : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} :=
+  quotientPresheaf (F := X.polynomialPresheaf) (fun _ ↦ Ideal.span {Polynomial.X}) fun U V i ↦ by
+    rw [Ideal.map_span, Set.image_singleton]
+    exact congrArg (fun p ↦ Ideal.span {p}) (Polynomial.map_X _)
+
+lemma coequifibered_toPolynomialZeroPresheaf : (X.toPolynomialPresheaf ≫
+    toQuotientPresheaf _ _ : _ ⟶ X.polynomialZeroPresheaf).Coequifibered :=
+  coequifibered_comp_toQuotientPresheaf X.coequifibered_toPolynomialPresheaf _ _
+
+/-! ### The deformation space and the normal cone -/
+
+namespace IdealSheafData
+
+variable {X} (I : X.IdealSheafData)
+
+/-- The ideal `I(U)` over an affine open `U`, indexed by the small affine Zariski site. -/
+abbrev siteIdeal (U : X.AffineZariskiSite) : Ideal Γ(X, U.1) :=
+  I.ideal ⟨U.1, U.2⟩
+
+lemma map_siteIdeal {U V : X.AffineZariskiSiteᵒᵖ} (i : U ⟶ V) :
+    (I.siteIdeal U.unop).map (X.affineStructurePresheaf.map i).hom = I.siteIdeal V.unop :=
+  I.map_ideal' (U := ⟨V.unop.1, V.unop.2⟩) (V := ⟨U.unop.1, U.unop.2⟩) _
+
+/-- The extended Rees algebra `𝒪_X[t, I t⁻¹]` as a quasi-coherent algebra. -/
+@[simps]
+noncomputable def reesPresheaf : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} where
+  obj U := .of (I.siteIdeal U.unop).extendedReesAlgebra
+  map {U V} i := CommRingCat.ofHom <| (I.siteIdeal U.unop).extendedReesAlgebraMap
+    (X.affineStructurePresheaf.map i).hom _ (I.map_siteIdeal i).le
+  map_id U := CommRingCat.hom_ext <| RingHom.ext fun x ↦ Subtype.ext <| by
+    change Ideal.laurentMap (X.affineStructurePresheaf.map (𝟙 U)).hom x.1 = x.1
+    rw [CategoryTheory.Functor.map_id, CommRingCat.hom_id]
+    exact Ideal.laurentMap_id _
+  map_comp i j := CommRingCat.hom_ext <| RingHom.ext fun x ↦ Subtype.ext <| by
+    change Ideal.laurentMap (X.affineStructurePresheaf.map (i ≫ j)).hom x.1 =
+      Ideal.laurentMap (X.affineStructurePresheaf.map j).hom
+        (Ideal.laurentMap (X.affineStructurePresheaf.map i).hom x.1)
+    rw [CategoryTheory.Functor.map_comp, CommRingCat.hom_comp]
+    exact (Ideal.laurentMap_laurentMap _ _ _).symm
+
+/-- The structure map `𝒪_X ⟶ 𝒪_X[t, I t⁻¹]`. -/
+@[simps]
+noncomputable def toReesPresheaf : X.affineStructurePresheaf ⟶ I.reesPresheaf where
+  app U := CommRingCat.ofHom (algebraMap _ _)
+  naturality U V i := CommRingCat.hom_ext (RingHom.ext fun x ↦
+    (Ideal.extendedReesAlgebraMap_algebraMap _ _ (I.map_siteIdeal i).le x).symm)
+
+set_option backward.isDefEq.respectTransparency false in
+lemma coequifibered_toReesPresheaf : I.toReesPresheaf.Coequifibered := by
+  refine coequifibered_iff_forall_isLocalizationAway.mpr fun U f ↦ ?_
+  have := U.2.isLocalization_basicOpen f
+  exact Ideal.isLocalization_away_extendedReesAlgebraMap _ f this _
+    (I.map_ideal_basicOpen ⟨U.1, U.2⟩ f)
+
+/-- The deformation space `D_I X = Spec_X 𝒪_X[t, I t⁻¹]`. -/
+noncomputable abbrev deformationSpace : Scheme.{u} :=
+  (relativeGluingData I.coequifibered_toReesPresheaf).glued
+
+/-- The structure morphism `D_I X ⟶ X`. -/
+noncomputable abbrev deformationSpaceProj : I.deformationSpace ⟶ X :=
+  (relativeGluingData I.coequifibered_toReesPresheaf).toBase
+
+/-- The inclusion `𝒪_X[t] ⟶ 𝒪_X[t, I t⁻¹]`. -/
+@[simps]
+noncomputable def polynomialToRees : X.polynomialPresheaf ⟶ I.reesPresheaf where
+  app U := CommRingCat.ofHom (I.siteIdeal U.unop).toExtendedReesAlgebra
+  naturality U V i := by
+    refine CommRingCat.hom_ext (RingHom.ext fun p ↦ ?_)
+    exact congr($(Ideal.extendedReesAlgebraMap_comp_toExtendedReesAlgebra _ _
+      (I.map_siteIdeal i).le) p).symm
+
+lemma toPolynomialPresheaf_comp_polynomialToRees :
+    X.toPolynomialPresheaf ≫ I.polynomialToRees = I.toReesPresheaf := by
+  ext U x
+  exact Ideal.toExtendedReesAlgebra_C x
+
+/-- The morphism `g̃ : D_I X ⟶ 𝔸¹_X` given by the coordinate `t`. -/
+noncomputable def deformationSpaceToAffineLine : I.deformationSpace ⟶ X.affineLine :=
+  relativeGluingMap _ _ I.polynomialToRees
+
+/-- The inclusion `𝒪_X[t, I t⁻¹] ⟶ 𝒪_X[t, t⁻¹]`. -/
+@[simps]
+noncomputable def reesToLaurent : I.reesPresheaf ⟶ X.laurentPresheaf where
+  app U := CommRingCat.ofHom (I.siteIdeal U.unop).extendedReesAlgebra.val.toRingHom
+  naturality U V i := by ext x; rfl
+
+lemma polynomialToRees_comp_reesToLaurent :
+    I.polynomialToRees ≫ I.reesToLaurent =
+      X.affineStructurePresheaf.whiskerLeft CommRingCat.polynomialToLaurent := by
+  ext U p
+  rfl
+
+/-- The trivialisation of the deformation space over the punctured line:
+`𝔾_{m,X} ⟶ D_I X`. -/
+noncomputable def puncturedToDeformationSpace : X.punctured ⟶ I.deformationSpace :=
+  relativeGluingMap _ _ I.reesToLaurent
+
+/-- The ideal `(t)` of the extended Rees algebra. -/
+noncomputable abbrev tIdeal (U : X.AffineZariskiSiteᵒᵖ) : Ideal (I.reesPresheaf.obj U) :=
+  Ideal.span {(I.siteIdeal U.unop).extendedReesAlgebraT}
+
+lemma map_tIdeal ⦃U V : X.AffineZariskiSiteᵒᵖ⦄ (i : U ⟶ V) :
+    (I.tIdeal U).map (I.reesPresheaf.map i).hom = I.tIdeal V := by
+  rw [Ideal.map_span, Set.image_singleton]
+  exact congrArg (fun t ↦ Ideal.span {t})
+    (Ideal.extendedReesAlgebraMap_T _ _ (I.map_siteIdeal i).le)
+
+/-- The associated graded algebra `𝒪_X[t, I t⁻¹] / t = ⨁_{r ≥ 0} I^r / I^{r+1}`. -/
+noncomputable abbrev normalConePresheaf : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u} :=
+  quotientPresheaf I.tIdeal I.map_tIdeal
+
+lemma coequifibered_toNormalConePresheaf :
+    (I.toReesPresheaf ≫ toQuotientPresheaf I.tIdeal I.map_tIdeal).Coequifibered :=
+  coequifibered_comp_toQuotientPresheaf I.coequifibered_toReesPresheaf _ _
+
+/-- The normal cone `N_I X = Spec_X (⨁_{r ≥ 0} I^r / I^{r+1})`, the fibre of the deformation space
+over the zero section `t = 0`. -/
+noncomputable abbrev normalCone : Scheme.{u} :=
+  (relativeGluingData I.coequifibered_toNormalConePresheaf).glued
+
+/-- The inclusion `N_I X ⟶ D_I X` of the normal cone as the fibre over `t = 0`. -/
+noncomputable def normalConeToDeformationSpace : I.normalCone ⟶ I.deformationSpace :=
+  relativeGluingMap _ _ (toQuotientPresheaf I.tIdeal I.map_tIdeal)
+
+/-- The map `𝒪_X[t] / t ⟶ 𝒪_X[t, I t⁻¹] / t`. -/
+@[simps]
+noncomputable def polynomialZeroToNormalCone :
+    X.polynomialZeroPresheaf ⟶ I.normalConePresheaf where
+  app U := CommRingCat.ofHom (Ideal.quotientMap _ (I.polynomialToRees.app U).hom (by
+    rw [← Ideal.map_le_iff_le_comap, Ideal.map_span]
+    rw [Set.image_singleton, Ideal.span_singleton_le_iff_mem]
+    exact Ideal.subset_span (Set.mem_singleton_iff.mpr Ideal.toExtendedReesAlgebra_X)))
+  naturality U V i := by
+    refine CommRingCat.hom_ext (Ideal.Quotient.ringHom_ext (RingHom.ext fun x ↦ ?_))
+    change Ideal.Quotient.mk _ ((I.polynomialToRees.app V).hom ((X.polynomialPresheaf.map i).hom x)) =
+      Ideal.Quotient.mk _ ((I.reesPresheaf.map i).hom ((I.polynomialToRees.app U).hom x))
+    exact congrArg _ (I.polynomialToRees.naturality_apply i x)
+
+end IdealSheafData
+
 end AlgebraicGeometry.Scheme

@@ -68,6 +68,12 @@ lemma C_mem_extendedReesAlgebra (x : R) :
   rw [LaurentPolynomial.C_eq_algebraMap]
   exact Subalgebra.algebraMap_mem _ x
 
+@[simp]
+lemma coe_algebraMap_extendedReesAlgebra (x : R) :
+    ((algebraMap R I.extendedReesAlgebra x : I.extendedReesAlgebra) : R[T;T⁻¹]) =
+      LaurentPolynomial.C x :=
+  (LaurentPolynomial.C_eq_algebraMap x).symm
+
 lemma T_natCast_mem_extendedReesAlgebra (n : ℕ) :
     (T n : R[T;T⁻¹]) ∈ I.extendedReesAlgebra := by
   rw [show (n : ℤ) = n * 1 by simp, ← T_pow]
@@ -139,6 +145,14 @@ lemma laurentMap_T (φ : R →+* S) (n : ℤ) : laurentMap φ (T n : R[T;T⁻¹]
   rw [T, AddMonoidAlgebra.mapRingHom_single, map_one]
   rfl
 
+lemma laurentMap_laurentMap (φ : R →+* S) (ψ : S →+* S') (x : R[T;T⁻¹]) :
+    laurentMap ψ (laurentMap φ x) = laurentMap (ψ.comp φ) x := by
+  simp [laurentMap, AddMonoidAlgebra.mapRingHom_comp]
+
+@[simp]
+lemma laurentMap_id (x : R[T;T⁻¹]) : laurentMap (RingHom.id R) x = x := by
+  simp [laurentMap]
+
 @[simp]
 lemma laurentMap_toLaurent (φ : R →+* S) (p : R[X]) :
     laurentMap φ (toLaurent p) = toLaurent (p.map φ) := by
@@ -175,6 +189,12 @@ lemma coe_extendedReesAlgebraMap (φ : R →+* S) (J : Ideal S) (h : I.map φ �
     (x : I.extendedReesAlgebra) :
     (I.extendedReesAlgebraMap φ J h x : S[T;T⁻¹]) = laurentMap φ (x : R[T;T⁻¹]) :=
   rfl
+
+@[simp]
+lemma extendedReesAlgebraMap_algebraMap (φ : R →+* S) (J : Ideal S) (h : I.map φ ≤ J) (x : R) :
+    I.extendedReesAlgebraMap φ J h (algebraMap R I.extendedReesAlgebra x) =
+      algebraMap S J.extendedReesAlgebra (φ x) :=
+  Subtype.ext (by simp)
 
 lemma extendedReesAlgebraMap_id :
     I.extendedReesAlgebraMap (RingHom.id R) I (by simp) = RingHom.id _ := by
@@ -304,8 +324,7 @@ away from `r` and `J = I S`, then `S[t, J t⁻¹]` is the localization of `R[t, 
 theorem isLocalization_away_extendedReesAlgebraMap (φ : R →+* S) (r : R)
     (hφ : letI := φ.toAlgebra; IsLocalization.Away r S) (J : Ideal S) (hJ : I.map φ = J) :
     letI := (I.extendedReesAlgebraMap φ J hJ.le).toAlgebra
-    IsLocalization.Away (⟨LaurentPolynomial.C r, C_mem_extendedReesAlgebra r⟩ :
-      I.extendedReesAlgebra) J.extendedReesAlgebra := by
+    IsLocalization.Away (algebraMap R I.extendedReesAlgebra r) J.extendedReesAlgebra := by
   subst hJ
   let := φ.toAlgebra
   have : Module.Flat R S := IsLocalization.flat S (.powers r)
@@ -328,6 +347,11 @@ noncomputable def toExtendedReesAlgebra : R[X] →+* I.extendedReesAlgebra :=
 lemma coe_toExtendedReesAlgebra (p : R[X]) :
     (I.toExtendedReesAlgebra p : R[T;T⁻¹]) = toLaurent p :=
   rfl
+
+@[simp]
+lemma toExtendedReesAlgebra_C (x : R) :
+    I.toExtendedReesAlgebra (Polynomial.C x) = algebraMap R I.extendedReesAlgebra x :=
+  Subtype.ext (by simp)
 
 @[simp]
 lemma toExtendedReesAlgebra_X : I.toExtendedReesAlgebra X = I.extendedReesAlgebraT :=
