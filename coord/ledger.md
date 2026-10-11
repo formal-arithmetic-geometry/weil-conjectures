@@ -3310,3 +3310,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:39 L: merged deliver/H1/lem-pc-kflat-derived-tensor-associator (reviewer FIX; first push; new nodes: 1)
 - 02:39 L: reviewer R-dek0240 launched (J1 lem-weil-degreewise-epi-kernel-cocone-qis, head 28a89e105); three reviewers in flight
 - 02:40 L: returned deliver/J1/lem-pc-derived-tensor-flat-second-localization (reviewer RETURN: Reviewer R-dfl0239. 1. E (ill-typed new statement) lem-pc-flat-localization-kflat-resolution: F^bullet -> B is a K-flat )
+- 02:41 L: merged deliver/J1/lem-weil-degreewise-epi-kernel-cocone-qis (reviewer FIX; first push; new nodes: 0)

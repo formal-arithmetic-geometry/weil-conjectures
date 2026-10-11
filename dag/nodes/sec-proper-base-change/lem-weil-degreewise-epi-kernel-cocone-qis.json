@@ -22,41 +22,90 @@
   "def-sp-abelian",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $f$ is a morphism of complexes, $d_P(\\ker f^p)\\subseteq\\ker f^{p+1}$, so the termwise kernels $K^p=\\ker f^p$ with the restricted differential form a complex and $\\iota:K\\to P$ is a morphism of complexes [def-weil-abstract-derived-category]. For $k\\in K^p$ the displayed differential of $\\operatorname{Cone}(f)[-1]$ gives $d(0,\\iota k)=(-f\\iota k,\\,d_P\\iota k)=(0,\\iota d_Kk)$ because $f\\iota=0$; hence $\\kappa=(0,\\iota):K\\to\\operatorname{Cone}(f)[-1]$ is a morphism of complexes.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 014Q (the cone differential and shift), together with the kernel-complex construction in the proof of Lemma 070M"
+   }
+  },
+  {
+   "text": "Let $Z$ be the complex with $Z^p=Q^{p-1}\\oplus Q^p$ and differential $(y,q)\\mapsto(-d_Qy-q,\\,d_Qq)$ (this is $\\operatorname{Cone}(\\mathrm{id}_Q)[-1]$), and let $\\pi^p:Q^{p-1}\\oplus P^p\\to Z^p$, $(y,x)\\mapsto(y,f(x))$. Then $\\pi$ is a morphism of complexes: $\\pi d(y,x)=(-d_Qy-f(x),\\,f(d_Px))=(-d_Qy-f(x),\\,d_Qf(x))=d\\pi(y,x)$. In each degree, $0\\to K^p\\xrightarrow{\\kappa^p}Q^{p-1}\\oplus P^p\\xrightarrow{\\pi^p}Q^{p-1}\\oplus Q^p\\to0$ is the direct sum of $0\\to0\\to Q^{p-1}\\xrightarrow{\\mathrm{id}}Q^{p-1}\\to0$ and $0\\to K^p\\xrightarrow{\\iota^p}P^p\\xrightarrow{f^p}Q^p\\to0$, which is exact because $K^p=\\ker f^p$ and $f^p$ is an epimorphism [def-sp-abelian]; so $0\\to K\\xrightarrow{\\kappa}\\operatorname{Cone}(f)[-1]\\xrightarrow{\\pi}Z\\to0$ is a short exact sequence of complexes. The complex $Z$ is contractible: with $h(y,q)=(0,-y)$ one computes $dh(y,q)=(y,-d_Qy)$ and $hd(y,q)=(0,d_Qy+q)$, so $dh+hd=\\mathrm{id}_Z$; hence $H^r(Z)=0$ for all $r$, the morphism $Z\\to0$ is a quasi-isomorphism, and $Q(Z)$ is a zero object of $D(\\mathcal A)$ [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 014Q (cone and shift); contractibility of the cone of an identity"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-complex-ses-triangle] applied to the short exact sequence of Step 2 there is a distinguished triangle $K\\xrightarrow{Q(\\kappa)}\\operatorname{Cone}(f)[-1]\\xrightarrow{Q(\\pi)}Z\\xrightarrow{\\delta}K[1]$ in $D(\\mathcal A)$. By TR1 of [def-weil-triangulated-category] the triangle $K\\xrightarrow{\\mathrm{id}}K\\to0\\to K[1]$ is distinguished. The triple $(\\mathrm{id}_K,Q(\\kappa),0\\to Z)$ is a morphism from the second triangle to the first: the first square is $Q(\\kappa)\\circ\\mathrm{id}=Q(\\kappa)\\circ\\mathrm{id}$, the second square consists of two morphisms into the zero object $Z$, and the third of two morphisms out of $0$. Its first and third components are isomorphisms ($Z\\cong0$ in $D(\\mathcal A)$ by Step 2), so by [lem-sf-triangle-morphism-iso] $Q(\\kappa)$ is an isomorphism. Since $H^r\\circ Q\\cong H^r$ [def-weil-abstract-derived-category], $H^r(\\kappa)$ is an isomorphism for every $r$, i.e. $\\kappa$ is a quasi-isomorphism, and $K\\cong\\operatorname{Cone}(f)[-1]$ in $D(\\mathcal A)$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemmas 0152 (triangle of a short exact sequence) and 014A (two-out-of-three for a morphism of distinguished triangles)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 014Q and Lemmas 0117, 014A, 0152, and 070M"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "short exact sequence of cochain complexes: the first term is quasi-isomorphic to the shifted mapping cone of the second map",
-   "results": "CochainComplex.mappingCone.quasiIso_descShortComplex (Mathlib.Algebra.Homology.HomotopyCategory.ShortExact: mappingCone S.f -> S.X3 is a quasi-iso), DerivedCategory.triangleOfSESIso, DerivedCategory.triangleOfSESδ, CochainComplex.mappingConeHomOfDegreewiseSplitIso",
+   "query": "kernel of a degreewise epimorphism of cochain complexes is quasi-isomorphic to the shifted mapping cone",
+   "results": "CochainComplex.mappingCone.quasiIso_descShortComplex (Mathlib/Algebra/Homology/HomotopyCategory/ShortExact); no exact kernel-to-shifted-cone declaration",
    "date": "2026-10-11",
-   "verdict": "no match: quasiIso_descShortComplex is the cone of the first map onto the third term, not the kernel into the cocone of the second map; deriving this node from it needs a rotation argument, not one line"
+   "verdict": "no match: the hit maps the cone of the first map in a short exact complex to the third term; the present statement needs the rotated triangle and the kernel inclusion"
   },
   {
    "tool": "loogle",
-   "query": "CochainComplex.mappingCocone, QuasiIso",
-   "results": "none",
+   "query": "CochainComplex.mappingCone QuasiIso kernel",
+   "results": "none; parser rejected the application of mappingCone to kernel",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "mappingCocone in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "Algebra/Homology/HomotopyCategory/MappingCocone.lean (definition mappingCocone = (mappingCone φ)⟦-1⟧, fst, lift, triangle, rotateTriangleIso; no kernel comparison), DerivedCategory/Basic.lean:224 mappingCocone_triangle_distinguished, Factorizations/CM5a.lean (uses lift_fst)",
+   "query": "quasiIso_descShortComplex|mappingCone.*ShortExact in Mathlib/Algebra/Homology",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean:137 quasiIso_descShortComplex; DerivedCategory/ShortExact.lean:40,82 uses it; no kernel comparison",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "kernel of a degreewise epimorphism of cochain complexes is quasi-isomorphic to the mapping cocone",
-   "results": "service unavailable: HTTP Error 500 Internal Server Error",
+   "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -72,5 +121,21 @@
   }
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "worker": "stage1",
+  "summary": "Checked the item against Stacks Derived Categories Definition 014Q and Lemmas 0117, 014A, 0152, and 070M. No sorry-free slopmaster2 declaration states it, and no existing DAG node duplicates it. The proof stays at the item level: the kernel inclusion gives a chain map, the degreewise epimorphism gives a short exact sequence and its distinguished triangle, and TR3 plus the two-isomorphism triangle lemma identifies the kernel with the shifted cone. No new nodes were needed.",
+  "blueprint": "Realizes the comparison clause in Assertion (3) of lem-weil-derived-limit-existence, namely the kernel of the degreewise epimorphism 1-s and the shifted cone comparison used in the Roos-complex argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dek0240",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dek0240 (reviewer sub-agent of L); spot-checked: Statement signs checked against def-weil-abstract-derived-category (Cone(f)[-1] differential correct); kappa chain map OK; Mathlib grep: only CochainComplex.mappingCone.quasiIso_descShortComplex (cone of first map), no kernel/shifted-cone decl. FIX more, RETURN less: (1) C4/D gap missed by J1's second reading: step 3 claimed the TR3 morphism (via lem-weil-pbc-triangle-morphism-extension) from the ses triangle to the rotated cone triangle with identities on P,Q has first component Q(kappa); TR3/that lemma only give some morphism, uniqueness needs Hom(K[1],Q)=0, and the third square kappa[1]delta=i needs delta, which lem-weil-pbc-complex-ses-triangle does not specify. Replaced steps 2-3: ses 0->K->Cone(f)[-1]->Cone(id_Q)[-1]->0 (degreewise direct sum of id and the kernel sequence), Cone(id_Q)[-1] contractible via h(y,q)=(0,-y) (elementary), then its triangle compared with the TR1 triangle K=K->0 by lem-sf-triangle-morphism-iso gives Q(kappa) iso, hence quasi-iso via H^r o Q = H^r. Dropped lem-weil-pbc-triangle-morphism-extension from uses/proof_deps. (2) B4: all steps rewritten in TeX.; 1 file(s) fixed by the reviewer"
+ }
 }
