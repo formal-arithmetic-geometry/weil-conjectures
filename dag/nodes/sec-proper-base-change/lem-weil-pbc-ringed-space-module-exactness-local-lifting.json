@@ -181,5 +181,24 @@
   "item": "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
   "worker": "stage1",
   "summary": "Read Stacks Modules 01AF (kernels sectionwise, cokernel = sheafified sectionwise cokernel, Coker(phi)_x = Coker(phi_x)) and 01AG, Sheaves 007U/0H7H/007T/007Z, Homology 010C/010E. Statement kept; added def-weil-pbc-exact-sequence to stmt_deps (exactness at G is that notion). Proof in 5 steps: epi iff Coker = 0 (lem-weil-pbc-preadditive-epi-iff-cokernel-zero); local lifting implies epi (elementary, sheaf axiom); epi implies local lifting via the cokernel presheaf and stalks of the sheafification (lem-weil-pbc-stalk-sheafification-space, germ calculus of def-weil-pbc-module-stalk); exactness at G iff the induced map F -> Ker(phi) is an epimorphism (new Mathlib leaf lem-weil-pbc-abelian-exact-iff-epi-kernel-lift = ShortComplex.exact_iff_epi_kernel_lift); then (1) applied to F -> Ker(phi) gives (2). This route avoids the stalk criterion of 01AG (no node for it was needed) and lem-weil-pbc-locally-surjective-iff-stalks. Searches added for the item (leanfinder, grep): still not in Mathlib for SheafOfModules."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting",
+  "declaration": "AlgebraicGeometry.RingedSpace.module_exactness_local_lifting",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSpaceModuleExactnessLocalLifting.lean",
+  "statement": "theorem module_exactness_local_lifting (X : RingedSpace.{u}) : (∀ (F G : SheafOfModules.{u} (moduleRings X)) (φ : F ⟶ G) (W : Opens X), Set.range (ConcreteCategory.hom ((kernel.ι φ).val.app (op W))) = {g | φ.val.app (op W) g = 0}) ∧ (∀ (F G : SheafOfModules.{u} (moduleRings X)) (φ : F ⟶ G), (Epi φ ↔ IsZero (cokernel φ)) ∧ ((∀ (W : Opens X) (t : G.val.obj (op W)), (∃ (I : Type u) (V : I → Opens X) (hV : ∀ i, V i ≤ W) (g : ∀ i, F.val.obj (op (V i))), (⨆ i, V i) = W ∧ ∀ i, φ.val.app (op (V i)) (g i) = G.val.map (homOfLE (hV i)).op t)) ↔ Epi φ)) ∧ (∀ (F G H : SheafOfModules.{u} (moduleRings X)) (χ : F ⟶ G) (φ : G ⟶ H) (h : χ ≫ φ = 0), (ShortComplex.mk χ φ h).Exact ↔ ∀ (W : Opens X) (g : G.val.obj (op W)), φ.val.app (op W) g = 0 → ∃ (I : Type u) (V : I → Opens X) (hV : ∀ i, V i ≤ W) (f : ∀ i, F.val.obj (op (V i))), (⨆ i, V i) = W ∧ ∀ i, χ.val.app (op (V i)) (f i) = G.val.map (homOfLE (hV i)).op g)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ell"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ell",
+  "group": "G1",
+  "result": "fix",
+  "note": "X : RingedSpace, SheafOfModules (moduleRings X); sectionwise kernel clause inline; (1) Epi iff zero cokernel and Epi iff local lifts over covers ⨆ V i = W; (2) ShortComplex.Exact iff local lifts of sections killed by φ; reverted the delivery's change of existing node(s) def-weil-sheaf-of-modules-category (--revert-nodes; kept as on sheaf-dag); reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
