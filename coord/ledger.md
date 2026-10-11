@@ -3986,3 +3986,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:18 L: returned deliver/E1/lem-pc-derived-adjoint-functors (reviewer RETURN: (reviewer R-daf1509, head e7c02cbcb) Third return of the same fault (K1 454d0a35d, M1 d029caf8a; the abandonments droppe)
 - 09:19 L: merged deliver/M1/lem-weil-pbc-complete-local-map-cohen-presentation (stage 2; reviewer FIX; first push; Sheaf.RingTheory.CompleteLocalMapCohenPresentation RingHom.exists_complete_local_map_cohen_presentation; new nodes: def-weil-pbc-regular-system-of-parameters)
 - 09:19 L: merged deliver/F1/lem-weil-pbc-completion-finite-extension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CompletionFiniteExtension AdicCompletion.completion_finite_extension)
+- 09:19 L: merged deliver/C1/lem-weil-pbc-composition-fibre-degree-bound (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.BoundsFiberDegreesComp AlgebraicGeometry.Scheme.Hom.boundsFiberDegrees_comp)
