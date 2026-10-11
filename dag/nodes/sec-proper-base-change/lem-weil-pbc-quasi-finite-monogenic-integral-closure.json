@@ -247,5 +247,23 @@
   "item": "lem-weil-pbc-quasi-finite-monogenic-integral-closure",
   "worker": "stage1",
   "summary": "Split following the proof of Algebra 00Q8 (algebra.tex 30745-30781), read in full. Nine steps: notation and good relations (coefficients in S', one outside q); S' integrally closed in S (written out with the three Mathlib leaves the citer uses in its step 2); b_m x in S' via the new Mathlib leaf lem-weil-pbc-leading-coefficient-times-root-integral (00PQ, RingHom.isIntegralElem_leadingCoeff_mul); the fibre ring F = S⊗κ(p) ≅ κ(p)[X] when I ⊆ p[X], written out with the tensor pushout universal property leaf; existence of a good relation, the source's unproved 'would not be quasi-finite at any prime over p' justified through the existing 00Q2 node applied to κ(p) ⊆ κ(p)[X]; the induction on the length m (base vacuous, the two cases b_m ∉ q and b_m ∈ q) stated as an explicit claim C(m). Statement unchanged and checked against the source and the citer lem-weil-pbc-integral-closure-zariski-main-away step 9. One new node (Mathlib leaf). Mathlib: the monogenic case is private (ZariskisMainTheorem.lean:464) and uses Mathlib's quasi-finiteness (B8); not a leaf."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiFiniteMonogenicIntegralClosure",
+  "declaration": "Algebra.quasiFiniteAtPrime_monogenic_integralClosure",
+  "file": "lean/Sheaf/RingTheory/QuasiFiniteMonogenicIntegralClosure.lean",
+  "statement": "theorem quasiFiniteAtPrime_monogenic_integralClosure (R : Type u) [CommRing R] (I : Ideal (Polynomial R)) (q : PrimeSpectrum (Polynomial R ⧸ I)) (hq : IsQuasiFiniteAtPrime R (Polynomial R ⧸ I) q) : ∃ g : integralClosure R (Polynomial R ⧸ I), (g : Polynomial R ⧸ I) ∉ q.asIdeal ∧ Function.Bijective (Localization.awayMap (integralClosure R (Polynomial R ⧸ I)).val.toRingHom g)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qmi1549",
+  "group": "E1",
+  "result": "pass",
+  "note": "R CommRing; I : Ideal R[X]; S literal Polynomial R ⧸ I (FiniteType instance synthesized, inferInstance ok, not hollow); q : PrimeSpectrum S with recorded Algebra.IsQuasiFiniteAtPrime (M1/J1 form); S' = integralClosure R S; ∃ g : S', ↑g ∉ q ∧ Bijective (Localization.awayMap S'.val.toRingHom g) = same form as landed ZariskisMainAway; #check full name Algebra.quasiFiniteAtPrime_monogenic_integralClosure; node diff only the lean record"
  }
 }
