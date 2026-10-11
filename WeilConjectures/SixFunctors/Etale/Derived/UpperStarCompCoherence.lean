@@ -138,6 +138,52 @@ lemma leftDerivedUpperStarComp_assoc'_app (K : DerivedCategory (Sheaf Z.smallEta
       (leftDerivedUpperStarComp A f g fg hfg).hom.app (L((h)^*[A]).obj K) :=
   NatTrans.congr_app (leftDerivedUpperStarComp_assoc' A f g h fg gh fgh hfg hgh hfgh) K
 
+/-- The component form of `leftDerivedUpperStarComp_assoc'`, rearranged. -/
+@[reassoc]
+lemma map_leftDerivedUpperStarComp_hom_app_leftDerivedUpperStarComp_inv_app
+    (K : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    L((f)^*[A]).map ((leftDerivedUpperStarComp A g h gh hgh).hom.app K) ≫
+        (leftDerivedUpperStarComp A f g fg hfg).inv.app (L((h)^*[A]).obj K) =
+      (leftDerivedUpperStarComp A f gh fgh (by rw [hfgh, hfg, hgh, Category.assoc])).inv.app K ≫
+        (leftDerivedUpperStarComp A fg h fgh hfgh).hom.app K := by
+  rw [← cancel_epi ((leftDerivedUpperStarComp A f gh fgh
+    (by rw [hfgh, hfg, hgh, Category.assoc])).hom.app K),
+    ← cancel_mono ((leftDerivedUpperStarComp A f g fg hfg).hom.app (L((h)^*[A]).obj K))]
+  simp only [Category.assoc, Iso.inv_hom_id_app, Iso.hom_inv_id_app_assoc]
+  erw [Category.comp_id]
+  exact leftDerivedUpperStarComp_assoc'_app A f g h fg gh fgh hfg hgh hfgh K
+
+/-- The component form of `leftDerivedUpperStarComp_assoc'`, rearranged the other way. -/
+@[reassoc]
+lemma leftDerivedUpperStarComp_hom_app_map_leftDerivedUpperStarComp_inv_app
+    (K : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    (leftDerivedUpperStarComp A f g fg hfg).hom.app (L((h)^*[A]).obj K) ≫
+        L((f)^*[A]).map ((leftDerivedUpperStarComp A g h gh hgh).inv.app K) =
+      (leftDerivedUpperStarComp A fg h fgh hfgh).inv.app K ≫
+        (leftDerivedUpperStarComp A f gh fgh (by rw [hfgh, hfg, hgh, Category.assoc])).hom.app K := by
+  rw [← cancel_epi ((leftDerivedUpperStarComp A fg h fgh hfgh).hom.app K),
+    reassoc_of% (leftDerivedUpperStarComp_assoc'_app A f g h fg gh fgh hfg hgh hfgh K).symm,
+    ← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.comp_id,
+    Iso.hom_inv_id_app_assoc]
+
+/-- The inverse form of `leftDerivedUpperStarComp_assoc'_app`. -/
+@[reassoc]
+lemma map_leftDerivedUpperStarComp_inv_app_leftDerivedUpperStarComp_inv_app
+    (K : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    L((f)^*[A]).map ((leftDerivedUpperStarComp A g h gh hgh).inv.app K) ≫
+        (leftDerivedUpperStarComp A f gh fgh (by rw [hfgh, hfg, hgh, Category.assoc])).inv.app K =
+      (leftDerivedUpperStarComp A f g fg hfg).inv.app (L((h)^*[A]).obj K) ≫
+        (leftDerivedUpperStarComp A fg h fgh hfgh).inv.app K := by
+  rw [← cancel_epi ((leftDerivedUpperStarComp A fg h fgh hfgh).hom.app K ≫
+    (leftDerivedUpperStarComp A f g fg hfg).hom.app (L((h)^*[A]).obj K)),
+    ← leftDerivedUpperStarComp_assoc'_app A f g h fg gh fgh hfg hgh hfgh]
+  simp only [Category.assoc]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [map_leftDerivedUpperStarComp_hom_app_leftDerivedUpperStarComp_inv_app_assoc A f g h fg gh fgh
+    hfg hgh hfgh, Iso.hom_inv_id_app_assoc]
+  simp only [Iso.hom_inv_id_app]
+
 end Etale
 
 end AlgebraicGeometry
