@@ -53,10 +53,12 @@ lemma cechNerveMap_map {k m : ℕ} (y : Fin (m + 1) → ι) (θ : Fin (k + 1) �
   refine Pi.hom_ext _ _ fun l ↦ ?_
   have h₁ : Ψ.map (cechNerveMap U y θ) ≫ piComparison Ψ (fun l ↦ U ((y ∘ θ) l)) ≫
       Pi.π (fun l ↦ Ψ.obj (U ((y ∘ θ) l))) l = Ψ.map (Pi.π (fun l ↦ U (y l)) (θ l)) := by
-    rw [piComparison_comp_π, ← Ψ.map_comp, cechNerveMap_π]
+    rw [piComparison_comp_π, ← Ψ.map_comp]
+    erw [cechNerveMap_π]
   have h₂ : piComparison Ψ (fun l ↦ U (y l)) ≫ cechNerveMap (fun a ↦ Ψ.obj (U a)) y θ ≫
       Pi.π (fun l ↦ Ψ.obj (U ((y ∘ θ) l))) l = Ψ.map (Pi.π (fun l ↦ U (y l)) (θ l)) := by
-    rw [cechNerveMap_π, piComparison_comp_π]
+    erw [cechNerveMap_π]
+    rw [piComparison_comp_π]
   simp only [PreservesProduct.iso_hom, Category.assoc]
   exact h₁.trans h₂.symm
 
@@ -94,7 +96,7 @@ noncomputable def cechCosimplicialObjectMapIso :
           Φ.map (cechNerveMap U y θ.toOrderHom).left ≫
             (cechNerveObjMapIso Φ Ψ e U (y ∘ θ.toOrderHom)).inv := by
         rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]
-        exact (cechNerveObjMapIso_naturality Φ Ψ e U y θ.toOrderHom).symm
+        exact cechNerveObjMapIso_naturality Φ Ψ e U y θ.toOrderHom
       rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, ← P.map_comp,
         ← P.map_comp, ← op_comp, ← op_comp, key])
 

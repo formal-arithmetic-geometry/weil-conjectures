@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.UpperStarSectionsLimit
+public import WeilConjectures.AlgebraicGeometry.Sites.UpperStarSections
 public import WeilConjectures.CategoryTheory.Sites.CechComplex
 
 /-!
@@ -59,13 +59,16 @@ lemma unitComparison_comp :
     unitComparison f t t' ht' G ≫ unitComparison f' t' t'' ht'' G =
       unitComparison (f' ≫ f) t t'' (by rw [ht'', ht', Category.assoc]) G := by
   refine Sheaf.hom_ext (NatTrans.ext (funext fun W ↦ AddCommGrpCat.ext fun s ↦ ?_))
-  induction W using Opposite.rec' with | _ W
+  obtain ⟨W⟩ := W
   change (unitComparison f' t' t'' ht'' G).hom.app (op W)
     ((unitComparison f t t' ht' G).hom.app (op W) s) = _
   rw [unitComparison_hom_app_eq, unitComparison_hom_app_eq, unitComparison_hom_app_eq]
   refine (restrictAlong_restrictAlong t G f t' ht' f' t'' ht'' _ _ _ _ s).trans ?_
-  refine restrictAlong_congr t G (f' ≫ f) t'' _ _ ?_
-  apply pullback.hom_ext <;> simp
+  exact congrArg (fun (φ : ((t)^*[AddCommGrpCat.{u + 1}].obj G).obj.obj
+      (op ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ t).obj W)) ⟶
+        ((t'')^*[AddCommGrpCat.{u + 1}].obj G).obj.obj
+          (op ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ t'').obj W))) ↦ φ s)
+    (restrictAlong_congr t G (f' ≫ f) t'' _ _ (by apply pullback.hom_ext <;> simp))
 
 /-- `AlgebraicGeometry.Etale.unitComparison_comp`, applied to a section. -/
 lemma unitComparison_comp_apply {W : R.Etale}
@@ -85,30 +88,53 @@ variable {J : Type u} [SmallCategory J] [IsCofiltered J] (D : J ⥤ Scheme.{u}) 
   (π : D ⟶ (Functor.const J).obj R) (c : Cone D) (P : c.pt ⟶ R)
   (hP : ∀ j, P = c.π.app j ≫ π.app j)
 
-/-- The comparison map from a stage to the limit, followed by the comparison map from the limit
-... is the comparison map: the transition maps and the maps to the limit are compatible. -/
+omit [IsCofiltered J] in
+/-- The structure morphisms of the stages to `R` are compatible with the transition maps. -/
+lemma natTrans_app_eq_map_comp_app {D : J ⥤ Scheme.{u}} (π : D ⟶ (Functor.const J).obj R)
+    {k k' : J} (g : k' ⟶ k) : π.app k' = D.map g ≫ π.app k := by
+  simp
+
+omit [IsCofiltered J] in
+/-- In a cofiltered category, finitely many morphisms with common target are dominated by a
+single one. -/
+lemma exists_comp_eq_of_finite_aux {C : Type*} [Category* C] [IsCofiltered C]
+    {ι : Type*} [Finite ι] {k : C} (k₁ : ι → C) (f₁ : ∀ i, k₁ i ⟶ k) :
+    ∃ (K : C) (h : K ⟶ k) (g : ∀ i, K ⟶ k₁ i), ∀ i, g i ≫ f₁ i = h := by
+  classical
+  have := Fintype.ofFinite ι
+  obtain ⟨S, hS⟩ := IsCofiltered.inf_objs_exists
+    (Finset.univ.image (fun i ↦ Over.mk (f₁ i)))
+  have hg (i : ι) : Nonempty (S ⟶ Over.mk (f₁ i)) := hS (Finset.mem_image_of_mem _ (by simp))
+  exact ⟨S.left, S.hom, fun i ↦ (hg i).some.left, fun i ↦ Over.w (hg i).some⟩
+
+omit [IsCofiltered J] in
+/-- The transition map from the stage `j` to the stage `k`, followed by the comparison map from
+`k` to the limit, is the comparison map from `j` to the limit. -/
 lemma unitComparison_map_comp_apply {j k : J} (g : k ⟶ j) {W : R.Etale}
     (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1})
     (s : ((π.app j)_*[AddCommGrpCat.{u + 1}].obj
       ((π.app j)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W)) :
     (unitComparison (c.π.app k) (π.app k) P (hP k) G).hom.app (op W)
-        ((unitComparison (D.map g) (π.app j) (π.app k) (app_eq_map_comp_app π g) G).hom.app
+        ((unitComparison (D.map g) (π.app j) (π.app k) (natTrans_app_eq_map_comp_app π g) G).hom.app
           (op W) s) =
       (unitComparison (c.π.app j) (π.app j) P (hP j) G).hom.app (op W) s := by
   rw [unitComparison_comp_apply, unitComparison_congr _ _ _ (c.w g)]
 
+omit [IsCofiltered J] in
 /-- The transition maps between the stages compose. -/
 lemma unitComparison_map_map_apply {j k l : J} (g : k ⟶ j) (h : l ⟶ k) {W : R.Etale}
     (G : Sheaf R.smallEtaleTopology AddCommGrpCat.{u + 1})
     (s : ((π.app j)_*[AddCommGrpCat.{u + 1}].obj
       ((π.app j)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W)) :
-    (unitComparison (D.map h) (π.app k) (π.app l) (app_eq_map_comp_app π h) G).hom.app (op W)
-        ((unitComparison (D.map g) (π.app j) (π.app k) (app_eq_map_comp_app π g) G).hom.app
+    (unitComparison (D.map h) (π.app k) (π.app l) (natTrans_app_eq_map_comp_app π h) G).hom.app (op W)
+        ((unitComparison (D.map g) (π.app j) (π.app k) (natTrans_app_eq_map_comp_app π g) G).hom.app
           (op W) s) =
-      (unitComparison (D.map (h ≫ g)) (π.app j) (π.app l) (app_eq_map_comp_app π _) G).hom.app
+      (unitComparison (D.map (h ≫ g)) (π.app j) (π.app l) (natTrans_app_eq_map_comp_app π _) G).hom.app
         (op W) s := by
   rw [unitComparison_comp_apply, unitComparison_congr _ _ _ (D.map_comp h g).symm]
 
+set_option maxRecDepth 8000 in
+include hP in
 /-- **Čech complexes of inverse images at a cofiltered limit.** Let `X = lim Dⱼ` be a cofiltered
 limit of quasi-compact quasi-separated schemes over a quasi-separated scheme `R`, with affine
 transition maps, and let `G` be an abelian étale sheaf on `R` such that the Čech complexes of
@@ -142,15 +168,18 @@ theorem exactAt_cechComplex_lowerStar_upperStar_of_isLimit [∀ j, CompactSpace 
   have hk' (y : Fin (q + 2) → Fin n) : Nonempty (k ⟶ j y) :=
     hk (Finset.mem_image_of_mem _ (Finset.mem_univ y))
   -- a cochain at the common stage `k`
-  let w' : ((cechComplex U).obj ((π.app k)_*[AddCommGrpCat.{u + 1}].obj
-      ((π.app k)^*[AddCommGrpCat.{u + 1}].obj G)).obj).X (q + 1) := fun y ↦
-    (unitComparison (D.map (hk' y).some) (π.app (j y)) (π.app k)
-      (app_eq_map_comp_app π _) G).hom.app _ (w y)
+  obtain ⟨w', hw'def⟩ : ∃ w' : ((cechComplex U).obj ((π.app k)_*[AddCommGrpCat.{u + 1}].obj
+      ((π.app k)^*[AddCommGrpCat.{u + 1}].obj G)).obj).X (q + 1), ∀ y, w' y =
+        (unitComparison (D.map (hk' y).some) (π.app (j y)) (π.app k)
+          (natTrans_app_eq_map_comp_app π _) G).hom.app _ (w y) :=
+    ⟨fun y ↦ (unitComparison (D.map (hk' y).some) (π.app (j y)) (π.app k)
+      (natTrans_app_eq_map_comp_app π _) G).hom.app _ (w y), fun _ ↦ rfl⟩
   have hw' : ((cechComplex U).map (unitComparison (c.π.app k) (π.app k) P (hP k) G).hom).f
       (q + 1) w' = z := by
     funext y
-    rw [cechComplex_map_f_apply]
-    exact (unitComparison_map_comp_apply D π c P hP _ G (w y)).trans (hw y)
+    rw [cechComplex_map_f_apply, hw'def]
+    exact (unitComparison_map_comp_apply D π c P hP (W := (cechNerveObj U y).left)
+      (hk' y).some G (w y)).trans (hw y)
   have hdw (y : Fin (q + 3) → Fin n) :
       (unitComparison (c.π.app k) (π.app k) P (hP k) G).hom.app _
         ((((cechComplex U).obj _).d (q + 1) (q + 2) w') y) = 0 := by
@@ -164,9 +193,9 @@ theorem exactAt_cechComplex_lowerStar_upperStar_of_isLimit [∀ j, CompactSpace 
     have := (hU (q + 2) y).2
     (unitComparison_app_isColimit_of_isLimit D π c P hP hc G (cechNerveObj U y).left).2 k _
       (hdw y)
-  obtain ⟨l, ψ, g, hg⟩ := IsCofiltered.exists_comp_eq_of_finite m φ
+  obtain ⟨l, ψ, g, hg⟩ := exists_comp_eq_of_finite_aux m φ
   let w'' := ((cechComplex U).map (unitComparison (D.map ψ) (π.app k) (π.app l)
-    (app_eq_map_comp_app π ψ) G).hom).f (q + 1) w'
+    (natTrans_app_eq_map_comp_app π ψ) G).hom).f (q + 1) w'
   have hdw'' : ((cechComplex U).obj _).d (q + 1) (q + 2) w'' = 0 := by
     rw [← cechComplex_map_f_d_apply]
     funext y
@@ -177,8 +206,10 @@ theorem exactAt_cechComplex_lowerStar_upperStar_of_isLimit [∀ j, CompactSpace 
   refine ⟨((cechComplex U).map (unitComparison (c.π.app l) (π.app l) P (hP l) G).hom).f q b, ?_⟩
   rw [← cechComplex_map_f_d_apply, hb, ← hw']
   funext y
-  rw [cechComplex_map_f_apply, cechComplex_map_f_apply, cechComplex_map_f_apply]
-  exact unitComparison_map_comp_apply D π c P hP ψ G (w' y)
+  rw [cechComplex_map_f_apply, cechComplex_map_f_apply]
+  simp only [w'']
+  rw [cechComplex_map_f_apply]
+  exact unitComparison_map_comp_apply D π c P hP (W := (cechNerveObj U y).left) ψ G (w' y)
 
 end Limit
 
