@@ -18,6 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.ExtPullback
 public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 
 /-!
 # The ambient exceptional right adjoint fails for an elliptic curve
@@ -192,6 +193,8 @@ section AbelianVariety
 variable (Λ : Type (u + 1)) [Field Λ] {k : Type u} [Field k] [IsAlgClosed k]
   (E : Over (Spec (.of k))) [GrpObj E] [IsAbelianVariety E]
 
+-- the group structure `[GrpObj E]` is part of the statement but is not needed in the proof
+set_option linter.unusedSectionVars false in
 /-- Blueprint `sk-rem-sf-fullcd-scope`, the evaluation functor of the counterexample: for an
 elliptic curve (more generally an abelian variety of positive dimension) `E` over an
 algebraically closed field `k` and a field `Λ`, there is an exact functor `U` from pro-étale
@@ -213,8 +216,21 @@ theorem exists_exact_evaluation (hE : 0 < IsAbelianVariety.dim E) :
         PreservesFiniteLimits V ∧ PreservesFiniteColimits V ∧
         Nonempty (U.obj ((E.hom)^*[ModuleCat.{u + 1} Λ].obj
           ((constantSheaf (Scheme.ProEt.topology (Spec (.of k))) (ModuleCat.{u + 1} Λ)).obj
-            (ModuleCat.of Λ Λ))) ≅ Rep.trivial Λ (Multiplicative (ULift.{u + 1} ℕ →₀ ℤ)) Λ) :=
-  sorry
+            (ModuleCat.of Λ Λ))) ≅ Rep.trivial Λ (Multiplicative (ULift.{u + 1} ℕ →₀ ℤ)) Λ) := by
+  obtain ⟨φ, hfree⟩ := IsAbelianVariety.exists_genericPointSepAction_forall_eq_one E hE
+  let a := Scheme.ProEt.genericPointSepAction E.left φ
+  have hT : ∀ ⦃S : Sieve (Scheme.ProEt.genericPointSep E.left)⦄,
+      S ∈ Scheme.ProEt.topology E.left _ → S (𝟙 _) :=
+    fun _ ↦ Scheme.ProEt.id_mem_genericPointSep E.left
+  have := preservesEpimorphisms_sheafSections_genericPointSep (A := ModuleCat.{u + 1} Λ) E.left
+  refine ⟨Sheaf.evaluationRep a Λ _, Sheaf.coevaluationRep a Λ hT,
+    Sheaf.evaluationRepAdjunction a Λ hT, inferInstance, inferInstance,
+    Sheaf.preservesFiniteColimits_evaluationRep a Λ _, inferInstance, inferInstance,
+    Sheaf.preservesFiniteColimits_coevaluationRep a Λ _ hT hfree, ⟨?_⟩⟩
+  exact (Sheaf.evaluationRep a Λ _).mapIso
+      ((constantSheafCompUpperStarIso (ModuleCat.{u + 1} Λ) E.hom).app _) ≪≫
+    Sheaf.evaluationRepConstantSheafIso a Λ _ _
+      (bijective_toSheafify_app_genericPointSep E.left _)
 
 /-- Blueprint `sk-rem-sf-fullcd-scope`, the counterexample sheaf: for an elliptic curve (more
 generally an abelian variety of positive dimension) `E` over an algebraically closed field `k`
