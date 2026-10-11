@@ -134,5 +134,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aqb0033 (reviewer sub-agent of L); spot-checked: Read Stacks lemma-acyclic-quotient-complexes-bounded-size and lemma-surjection-bounded-size: kappa=sup c^n(|U|) from generator U defined (C4); new node lem-pur-kinjective-surjection-bounded-size matches Stacks verbatim, no duplicate in DAG (only set-iso-classes node shares the bounded-size area, different content); citers lem-pur-kinjective-degreewise-existence and lem-pur-kinjective-characterize-K-injective use exactly clauses (1),(2) with this kappa. FIX more, RETURN less: Step 2 stated the inductive hypothesis as 'exactness in M^bullet' (E, missed by the second reading); rewrote it with the Stacks invariants (i) d(N^m) in N^{m+1}, (ii) Im(N^{m-1}->N^m)=Ker(N^m->N^{m+1}) i.e. exactness of N, (iii) size bound, with N^{k-1} chosen inside d^{-1}(Ker), size bound via monotonicity of c, and exactness at n+1, n checked.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GrothendieckAbelian.AcyclicQuotientComplexesBoundedSize",
+  "declaration": "CochainComplex.exists_cardinal_acyclic_subcomplex_and_coproduct_quotient",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckAbelian/AcyclicQuotientComplexesBoundedSize.lean",
+  "statement": "theorem exists_cardinal_acyclic_subcomplex_and_coproduct_quotient {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C] : ∃ κ : Cardinal.{v}, ∀ M : CochainComplex C ℤ, M.Acyclic → (¬ IsZero M → ∃ (N : CochainComplex C ℤ) (ι : N ⟶ M), Mono ι ∧ ¬ IsZero N ∧ (∃ b : ℤ, N.IsStrictlyLE b) ∧ N.Acyclic ∧ ∀ n : ℤ, Cardinal.mk (Shrink.{v} (Subobject (N.X n))) ≤ κ) ∧ (∃ (I : Type v) (F : I → CochainComplex C ℤ) (π : ∐ F ⟶ M), Epi π ∧ ∀ i : I, (∃ b : ℤ, (F i).IsStrictlyLE b) ∧ (F i).Acyclic ∧ ∀ n : ℤ, Cardinal.mk (Shrink.{v} (Subobject ((F i).X n))) ≤ κ)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aqb1036",
+  "group": "C1",
+  "result": "pass",
+  "note": "Stacks lemma-acyclic-quotient-complexes-bounded-size read: exists kappa:Cardinal.{v} before forall M; M.Acyclic; (1) not IsZero M -> Mono iota N->M, not IsZero N, exists b IsStrictlyLE b, N.Acyclic, all n Shrink Subobject size <= kappa; (2) I:Type v, Epi from coproduct, each summand own bound b, acyclic, size <= kappa; no nonzero/common-bound/card(I) added; identical to h_sub/h_quot of isKInjective_of_small_acyclic (M1) and size form of E1 dependency"
  }
 }
