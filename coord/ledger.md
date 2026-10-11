@@ -4645,3 +4645,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:38 L: merged deliver/F1/lem-weil-pbc-polynomial-quotient-dimension-lower-bound (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PolynomialQuotientDimensionLowerBound AlgebraicGeometry.sub_le_topologicalKrullDim_spec_mvPolynomial_quotient)
 - 12:38 L: merged deliver/K1/lem-pc-dq-coherator-adjunction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DQCoheratorAdjunction AlgebraicGeometry.exists_dqCoheratorAdjunction)
 - 12:38 L: merged deliver/K1/lem-sc-derived-open-restriction-adjunction-exact (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact AlgebraicGeometry.open_restriction_adjunction_exact)
+- 12:38 L: merged deliver/F1/lem-weil-pbc-polynomial-ring-origin-regular-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PolynomialOriginRegularLocal MvPolynomial.polynomial_origin_regularLocal)
