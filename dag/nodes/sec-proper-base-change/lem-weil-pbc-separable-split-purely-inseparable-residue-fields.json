@@ -168,5 +168,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps (Stacks 02LM 'elementary field theory' written out): separable closures L_i (new Mathlib leaf: separableClosure.isPurelyInseparable PurelyInseparable/Basic.lean:481 @[stacks 030K] with separableClosure.isSeparable SeparableClosure.lean:151, verified), a finite Galois L receiving the L_i (new unsplit node, 09DT/0EXM), finitely many primes of L (x) K_i with residue fields finite over L (existing leaf), the image of L_i lies in the image of L (normality; elementary), E/L purely inseparable (elementary). Tags verified (030K, 09DT, 0EXM, 09HC, 09GU)."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableSplitPurelyInseparableResidueFields",
+  "declaration": "Algebra.exists_separable_split_purelyInseparable_prime_quotients",
+  "file": "lean/Sheaf/FieldTheory/SeparableSplitPurelyInseparableResidueFields.lean",
+  "statement": "theorem exists_separable_split_purelyInseparable_prime_quotients (k : Type u) [Field k] (n : ℕ) (K : Fin n → Type v) [∀ i : Fin n, Field (K i)] [∀ i : Fin n, Algebra k (K i)] [∀ i : Fin n, Module.Finite k (K i)] : ∃ (L : Type (max u v)) (_ : Field L) (_ : Algebra k L), Module.Finite k L ∧ Algebra.IsSeparable k L ∧ IsGalois k L ∧ (∀ i : Fin n, Nonempty (separableClosure k (K i) →ₐ[k] L)) ∧ ∀ i : Fin n, Finite (PrimeSpectrum (L ⊗[k] K i)) ∧ ∀ (p : Ideal (L ⊗[k] K i)), p.IsPrime → IsField ((L ⊗[k] K i) ⧸ p) ∧ Module.Finite L ((L ⊗[k] K i) ⧸ p) ∧ IsPurelyInseparable L ((L ⊗[k] K i) ⧸ p)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The Galois witness and embeddings of the relative separable closures render the parenthetical clause as well as the main conclusion. IsField uses the canonical quotient ring operations; the canonical quotient L-algebra is induced from the left-factor tensor-product algebra."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
