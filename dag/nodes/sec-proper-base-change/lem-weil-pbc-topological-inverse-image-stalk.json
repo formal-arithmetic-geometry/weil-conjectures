@@ -213,5 +213,27 @@
   "by": "L",
   "result": "accepted",
   "note": "Split reviewed: 6 steps along Sheaves 008H (presheaf stalk 008G, stalks commute with sheafification 007Z, germ formula, germs exhaust the stalk, naturality). Statement only gained citations of the new definition node and the stalk/sheafification nodes. Correct; three new Mathlib leaves verified."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.InverseImageStalk",
+  "declaration": "TopCat.Sheaf.exists_inverseImage_stalk_iso_ab",
+  "declarations": [
+   "TopCat.Sheaf.exists_inverseImage_stalk_iso_ab",
+   "TopCat.Sheaf.exists_inverseImage_stalk_iso_commRing"
+  ],
+  "file": "lean/Sheaf/Topology/InverseImageStalk.lean",
+  "statement": "theorem exists_inverseImage_stalk_iso_ab {X Y : TopCat.{u}} (f : X ⟶ Y) (x : X) : ∃ c : (forget AddCommGrpCat.{u} Y ⋙ Presheaf.stalkFunctor AddCommGrpCat.{u} (f x)) ≅ (pullback AddCommGrpCat.{u} f ⋙ forget AddCommGrpCat.{u} X ⋙ Presheaf.stalkFunctor AddCommGrpCat.{u} x), (∀ (G : Y.Sheaf AddCommGrpCat.{u}) (V : Opens Y) (hV : f x ∈ V) (s : G.obj.obj (op V)), (c.app G).hom (Presheaf.germ G.obj V (f x) hV s) = Presheaf.germ ((pullback AddCommGrpCat.{u} f).obj G).obj ((Opens.map f).obj V) x hV ((((pullbackPushforwardAdjunction AddCommGrpCat.{u} f).unit.app G).hom.app (op V)) s)) ∧ (∀ (G : Y.Sheaf AddCommGrpCat.{u}) (t : Presheaf.stalk (C := AddCommGrpCat.{u}) (X := X) ((pullback AddCommGrpCat.{u} f).obj G).obj x), ∃ (V : Opens Y) (hV : f x ∈ V) (s : G.obj.obj (op V)), Presheaf.germ ((pullback AddCommGrpCat.{u} f).obj G).obj ((Opens.map f).obj V) x hV ((((pullbackPushforwardAdjunction AddCommGrpCat.{u} f).unit.app G).hom.app (op V)) s) = t)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
