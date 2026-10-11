@@ -4291,3 +4291,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:42 L: merged deliver/M1/lem-weil-pbc-flat-local-completion-iso (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FlatLocalCompletionIso RingHom.flat_local_completion_iso)
 - 10:42 L: merged deliver/G1/lem-weil-pbc-fs-adic-local-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormallySmoothAdicFlat RingHom.flat_of_formallySmoothAdic)
 - 10:42 L: merged deliver/M1/lem-weil-pbc-free-resolution-ses-split (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.FreeResolutionSesSplit Module.exists_free_resolution_ses_split)
+- 10:43 L: merged deliver/C1/lem-weil-pbc-g-ring-quotient (stage 2; reviewer PASS; first push; Sheaf.RingTheory.QuotientGRing isGRing_quotient)
