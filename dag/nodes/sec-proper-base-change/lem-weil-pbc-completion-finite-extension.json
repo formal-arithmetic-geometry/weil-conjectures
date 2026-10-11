@@ -198,5 +198,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following Stacks 07N9 with existing nodes only: reduction to A = R_p, B = S_p; B/m^n B a product of its localizations at the finitely many maximal ideals q_i B (06RS leaf + 00JA leaf; this also gives the finiteness of the q_i); factors identified with S_{q_i}/p^n and the limit taken componentwise; the p-adic and q_i-adic completions of S_{q_i} agree (0394 node); (R_p)^ (x)_R S = B^ by 00MA (node) and tensor cancellation. No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletionFiniteExtension",
+  "declaration": "AdicCompletion.completion_finite_extension",
+  "file": "lean/Sheaf/RingTheory/CompletionFiniteExtension.lean",
+  "statement": "theorem completion_finite_extension (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] : let A := Localization.AtPrime p let m := IsLocalRing.maximalIdeal A let C := AdicCompletion m A let B := A ⊗[R] S letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := A) (B := S) let J := p.map (algebraMap R B) let Q := p.primesOver S let D := fun q : Q ↦ AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) (Localization.AtPrime q.1) letI := Algebra.TensorProduct.rightAlgebra (R := R) (A := C) (B := S) Finite Q ∧ ∃ (e : (C ⊗[R] S) ≃ₐ[S] (∀ q : Q, D q)) (g : ∀ q : Q, C →+* D q), (∀ (q : Q) (n : ℕ) (a : C) (r : A), AdicCompletion.evalₐ m n a = Ideal.Quotient.mk (m ^ n) r → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) n (g q a) = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (Localization.AtPrime q.1)) ^ n) (Localization.localRingHom p q.1 (algebraMap R S) (Ideal.LiesOver.over (P := q.1) (p := p)) r)) ∧ (∀ (a : C) (q : Q), e (a ⊗ₜ[R] (1 : S)) q = g q a) ∧ Nonempty ((C ⊗[R] S) ≃ₐ[S] AdicCompletion J B)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfe1513",
+  "group": "F1",
+  "result": "pass",
+  "note": "R Noetherian/S finite via Algebra+Module.Finite, p prime, Q=p.primesOver S (all primes contracting to p, Finite Q a conclusion), C=(R_p)^ and D q=(S_q)^ maximal-ideal AdicCompletion, e S-alg iso C⊗S≃Π D q (empty product=0), g pinned level-by-level by localRingHom, e(a⊗1)q=g q a, Nonempty S-alg iso to pS_p-adic completion of A⊗S; S/R algebraMaps into completions checked rfl through localizations"
  }
 }
