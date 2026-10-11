@@ -170,8 +170,8 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
   /-- Clauses (2), (4) and (5): étale-local coordinates on the deformation. There are a
   separated surjective étale `v : B' ⟶ B` and, writing `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B` for its base change
   and `𝒟' = 𝒟_s V ×_{𝔸¹_B} 𝔸¹_{B'}` for the base change of the deformation (5), a quasi-compact
-  open `j : W ⟶ 𝒟'` containing the base-changed section `σ` together with an étale
-  `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}` carrying `σ` to the zero section. Here `c` is the
+  open `j : W ⟶ 𝒟'` containing the base-changed section `σ` together with a quasi-compact
+  étale `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}` carrying `σ` to the zero section. Here `c` is the
   chart `u_i = x_i / t` of the deformation of the standard pair `(𝔸^d_{B'} → B', 0)`, which is
   `𝔸^d_{B'} ×_{B'} 𝔸¹_{B'}` (4), for étale coordinates `x₁, …, x_d` of `(g, s)` over `B'` (2). -/
   exists_etale_coordinates : ∃ (B' : Scheme.{u}) (v : B' ⟶ B) (W : Scheme.{u})
@@ -179,7 +179,8 @@ structure DeformationToNormalConeData (d : ℕ) (g : V ⟶ B) (s : B ⟶ V)
       (c : W ⟶ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')))
       (σ : 𝔸(ULift.{u} (Fin 1); B') ⟶ W),
     _root_.AlgebraicGeometry.Etale v ∧ Surjective v ∧ IsSeparated v ∧ IsOpenImmersion j ∧
-      QuasiCompact j ∧ _root_.AlgebraicGeometry.Etale c ∧ HasCompactification c ∧
+      QuasiCompact j ∧ _root_.AlgebraicGeometry.Etale c ∧ QuasiCompact c ∧
+      HasCompactification c ∧
       j ≫ pullback.snd _ _ =
         c ≫ 𝔸(ULift.{u} (Fin d); 𝔸(ULift.{u} (Fin 1); B')) ↘ 𝔸(ULift.{u} (Fin 1); B') ∧
       σ ≫ j ≫ pullback.fst _ _ = AffineSpace.map (ULift.{u} (Fin 1)) v ≫ sect ∧

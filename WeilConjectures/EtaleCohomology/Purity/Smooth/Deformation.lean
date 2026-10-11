@@ -168,7 +168,7 @@ theorem nonempty_iso_leftDerivedUpperStar_sectionInvariant {X Y X' Y' : Scheme.{
         (leftDerivedUpperStarConstantComplexIso Λ g))⟩
 
 /-- *Section invariants through an étale chart.* Let `g' : X ⟶ T` be compactifiable, `j : W ⟶ X`
-a quasi-compact open immersion and `c : W ⟶ 𝔸^d_T` an étale map over `T`, with
+a quasi-compact open immersion and `c : W ⟶ 𝔸^d_T` a quasi-compact étale map over `T`, with
 `j ≫ g' = c ≫ π`, and let `σ : T ⟶ W` be a section carried by `c` to the zero section. If
 `ω_π ≅ K` for some `K ∈ D^b_{ctf}`, then `𝒞(g', σ ≫ j) ≅ 𝒞(π, 0)`:
 
@@ -179,7 +179,7 @@ by `Rj^! ≅ j^*` for the open immersion `j`, the composition of exceptional inv
 `Rc^! ≅ Lc^*` on `D^b_{ctf}` for the étale `c` (`lem-pur-co-smooth-etale-locality`). -/
 theorem nonempty_iso_sectionInvariant_of_etale_chart {X W T : Scheme.{u}} {d : ℕ}
     (g' : X ⟶ T) [HasCompactification g'] (j : W ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
-    (c : W ⟶ 𝔸(ULift.{u} (Fin d); T)) [_root_.AlgebraicGeometry.Etale c]
+    (c : W ⟶ 𝔸(ULift.{u} (Fin d); T)) [_root_.AlgebraicGeometry.Etale c] [QuasiCompact c]
     [HasCompactification c] [HasInvertibleExponent Λ W]
     (hjc : j ≫ g' = c ≫ 𝔸(ULift.{u} (Fin d); T) ↘ T) (σ : T ⟶ W)
     (hσc : σ ≫ c = AffineSpace.zeroSection (ULift.{u} (Fin d)) T)
@@ -193,6 +193,7 @@ theorem nonempty_iso_sectionInvariant_of_etale_chart {X W T : Scheme.{u}} {d : �
   have : HasCompactification j := (Compactification.ofIsOpenImmersion j).hasCompactification
   have : HasCompactification (j ≫ g') := .comp_of_isOpenImmersion g' j
   have : HasCompactification (c ≫ 𝔸(ULift.{u} (Fin d); T) ↘ T) := .of_eq hjc
+  have : QuasiCompact (j ≫ g') := hjc ▸ inferInstance
   obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ j g'
   obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_eq (A := ModuleCat.{u + 1} Λ) hjc
   obtain ⟨e₃⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ c (𝔸(ULift.{u} (Fin d); T) ↘ T)
@@ -281,7 +282,7 @@ theorem exists_etale_nonempty_iso_familyObject [HasTateTwist.IsNormalized Λ] :
         (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).obj
           (sectionInvariant Λ (𝔸(ULift.{u} (Fin d); B') ↘ B')
             (AffineSpace.zeroSection (ULift.{u} (Fin d)) B'))) := by
-  obtain ⟨B', v, W, j, c, σ, hv, hsurj, hsep, hj, hjqc, hc, hcc, hjc, hσj, hσc⟩ :=
+  obtain ⟨B', v, W, j, c, σ, hv, hsurj, hsep, hj, hjqc, hc, hcqc, hcc, hjc, hσj, hσc⟩ :=
     D.exists_etale_coordinates
   let T := 𝔸(ULift.{u} (Fin 1); B')
   let v₁ := AffineSpace.map (ULift.{u} (Fin 1)) v
