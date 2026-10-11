@@ -188,5 +188,24 @@
   "by": "L",
   "result": "pass",
   "note": "five steps along Stacks 03AW in presheaves of abelian groups (the constant presheaf Z makes presheaves of modules = presheaves of abelian groups; injective sheaf ⇒ injective presheaf by the new leaf (Adjunction.map_injective, Injective/Basic.lean:279, verified); Hom(Z_{U,•}, G) is the Cech complex via the free-Yoneda leaf; exactness of Z_{U,•}; Hom(-, I) exact); 1 new Mathlib leaf; the brief's route (a) through Ab = Mod(Z) rejected by the worker for lack of a node, rightly"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InjectiveSheafCechAcyclic",
+  "declaration": "CategoryTheory.injective_sheaf_cech_acyclic",
+  "file": "lean/Sheaf/CategoryTheory/InjectiveSheafCechAcyclic.lean",
+  "statement": "theorem injective_sheaf_cech_acyclic (X : Scheme.{u}) (𝓘 : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) [Injective 𝓘] (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U) (hc : Sieve.ofArrows V f ∈ X.smallEtaleTopology U) : ∀ (p : ℕ), 0 < p → IsZero (((cechComplexFunctor fun i : I ↦ Over.mk (f i)).obj ((Over.forget U).op ⋙ 𝓘.obj)).homology p)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-isc1111"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-isc1111",
+  "group": "G1",
+  "result": "fix",
+  "note": "X/X_et=smallEtaleTopology; I injective in Ab(X_et)=Sheaf .. AddCommGrpCat.{u+1} as [Injective]; U:X.Etale; covering family I:Type(u+1), V, f, Sieve.ofArrows in topology; conclusion IsZero of homology p>0 of cechComplexFunctor (Over.mk ∘ f) on (Over.forget U).op ⋙ I.obj, the exact hcech form of lem-weil-pbc-cech-vanishing-criterion; FIX: coefficient universe max u w+1 decoupled from index (w=u+1 left Ab(X_et) and the criterion's Type(u+1) coverings), explicit h𝓘 -> instance, proof in docstring"
  }
 }
