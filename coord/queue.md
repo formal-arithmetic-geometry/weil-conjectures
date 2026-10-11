@@ -1,11 +1,11 @@
 # Work queue
 
-166 items; claim with `tools/claim.py next <group> [--stage N]`.
+162 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (166)
+## Stage 2: nodes to state (162)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -55,7 +55,6 @@
 | `lem-pc-direct-image-qc-support-reduction` | 1 | state | 0 |
 | `lem-pc-euler-characteristic-well-defined` | 1 | state | 0 |
 | `lem-pc-finite-scheme-cohomology-tensor` | 1 | state | 0 |
-| `lem-pc-flat-filtered-complex-comparison` | 1 | state | 0 |
 | `lem-pc-genus-well-defined` | 1 | state | 0 |
 | `lem-pc-leray-degenerate-sections` | 1 | state | 0 |
 | `lem-pc-noetherian-perfect-direct-image` | 1 | state | 0 |
@@ -83,7 +82,6 @@
 | `lem-sc-affine-projective-complex-derived-hom` | 1 | state | 0 |
 | `lem-sc-affine-rhom-qcoherent` | 1 | state | 0 |
 | `lem-sc-boundary-derivation-square-zero` | 1 | state | 0 |
-| `lem-sc-derived-hom-finite-free-model` | 1 | state | 0 |
 | `lem-sc-derived-hom-projective-resolution` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-ext-coherent-hom-injective-acyclic` | 1 | state | 0 |
@@ -143,13 +141,11 @@
 | `lem-weil-pbc-qs-scheme-cohomology-directed-colimit` | 1 | state | 0 |
 | `lem-weil-pbc-sets-pushforward-stalk-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
-| `lem-weil-pbc-strictly-henselian-etale-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-degree-exact` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-finite` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-over-base` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-surjective` | 1 | state | 0 |
 | `lem-weil-pbc-theorem-formal-functions` | 1 | state | 0 |
-| `lem-weil-pbc-universal-thickening-open-restriction` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-vanishing-projective` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-cohomology` | 1 | state | 0 |
