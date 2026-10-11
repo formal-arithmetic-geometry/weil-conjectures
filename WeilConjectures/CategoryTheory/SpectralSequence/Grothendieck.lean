@@ -322,6 +322,36 @@ noncomputable def grothendieckSpectralObjectHIso (p q : ℕ) (n a b : ℤ) (hn :
     Functor.isoWhiskerRight (F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q)
       (G.rightDerived p)
 
+lemma grothendieckSpectralObjectHIso_hom_app (p q : ℕ) (X : A) :
+    (F.grothendieckSpectralObjectHIso G p q (p + q : ℕ) q (q + 1) (by push_cast; rfl) rfl
+        rfl).hom.app X =
+      (DerivedCategory.Plus.homologyFunctor C (p + q : ℕ)).map (G.rightDerivedFunctorPlus.map
+        ((DerivedCategory.Plus.eTruncLTCompETruncGEIso (q : ℤ)).hom.app
+          (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X)))) ≫
+      (DerivedCategory.Plus.homologyFunctor C (p + q : ℕ)).map (G.rightDerivedFunctorPlus.map
+        (((DerivedCategory.Plus.singleFunctors B).shiftIso (-(q : ℤ)) q 0 (by simp)).inv.app
+          ((DerivedCategory.Plus.homologyFunctor B q).obj
+            (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X))))) ≫
+      (DerivedCategory.Plus.homologyFunctor C (p + q : ℕ)).map
+        ((G.rightDerivedFunctorPlus.commShiftIso (-(q : ℤ))).hom.app
+          ((DerivedCategory.Plus.singleFunctor B 0).obj
+            ((DerivedCategory.Plus.homologyFunctor B q).obj
+              (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X))))) ≫
+      ((DerivedCategory.Plus.homologyFunctor C 0).shiftIso (-(q : ℤ)) (p + q : ℕ) p
+        (by push_cast; ring)).hom.app
+          (G.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor B 0).obj
+            ((DerivedCategory.Plus.homologyFunctor B q).obj
+              (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X))))) ≫
+      (G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).hom.app
+        ((DerivedCategory.Plus.homologyFunctor B q).obj
+          (F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor A 0).obj X))) ≫
+      (G.rightDerived p).map
+        ((F.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q).hom.app X) := by
+  simp only [grothendieckSpectralObjectHIso, Iso.trans_hom, NatTrans.comp_app, isoWhiskerLeft_hom,
+    isoWhiskerRight_hom, whiskerLeft_app, whiskerRight_app, Iso.symm_hom,
+    Functor.comp_map]
+  rfl
+
 /-- The `E₂`-page of the Grothendieck spectral sequence is `E₂^{p,q} ≅ R^p G (R^q F X)`. This
 isomorphism is natural in `X`, see `Functor.grothendieckSpectralObjectHIso`. -/
 noncomputable def grothendieckSpectralSequencePageTwoIso (X : A) (p q : ℕ) :

@@ -163,6 +163,59 @@ noncomputable def rightDerivedBaseChange (e : G ⋙ γ ⟶ β ⋙ G') (p : ℕ) 
       (G'.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.homologyFunctor C' p) ≫
     Functor.whiskerLeft β (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).hom
 
+lemma rightDerivedBaseChange_app (e : G ⋙ γ ⟶ β ⋙ G') (p : ℕ) (Y : B) :
+    (rightDerivedBaseChange e p).app Y =
+      γ.map ((G.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).inv.app Y) ≫
+        (γ.mapDerivedCategoryPlusHomologyFunctorIso p).hom.app
+          (G.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor B 0).obj Y)) ≫
+        (DerivedCategory.Plus.homologyFunctor C' p).map
+          ((rightDerivedFunctorPlusBaseChange e).app ((DerivedCategory.Plus.singleFunctor B 0).obj Y)) ≫
+        (DerivedCategory.Plus.homologyFunctor C' p).map (G'.rightDerivedFunctorPlus.map
+          ((β.mapDerivedCategoryPlusSingleFunctor 0).hom.app Y)) ≫
+        (G'.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso p).hom.app (β.obj Y) := by
+  simp only [rightDerivedBaseChange, NatTrans.comp_app, Iso.symm_hom, isoWhiskerRight_hom,
+    whiskerRight_app, whiskerLeft_app, Functor.comp_map]
+  rfl
+
+/-- The base change morphism is compatible with the shifts on homology: through the
+isomorphisms `H^a(K⟦m⟧) ≅ H^{a'}(K)`, the base change morphism on `H^a(R⁺G(Y⟦m⟧))` is the one on
+`H^{a'}(R⁺G(Y))`. -/
+lemma rightDerivedFunctorPlusBaseChange_homologyFunctor_shiftIso (e : G ⋙ γ ⟶ β ⋙ G')
+    (Y : DerivedCategory.Plus B) (m a a' : ℤ) (h : m + a = a') :
+    γ.map ((DerivedCategory.Plus.homologyFunctor C a).map
+        ((G.rightDerivedFunctorPlus.commShiftIso m).hom.app Y) ≫
+        ((DerivedCategory.Plus.homologyFunctor C 0).shiftIso m a a' h).hom.app
+          (G.rightDerivedFunctorPlus.obj Y)) ≫
+      (γ.mapDerivedCategoryPlusHomologyFunctorIso a').hom.app (G.rightDerivedFunctorPlus.obj Y) ≫
+      (DerivedCategory.Plus.homologyFunctor C' a').map ((rightDerivedFunctorPlusBaseChange e).app Y) =
+    (γ.mapDerivedCategoryPlusHomologyFunctorIso a).hom.app (G.rightDerivedFunctorPlus.obj (Y⟦m⟧)) ≫
+      (DerivedCategory.Plus.homologyFunctor C' a).map
+        ((rightDerivedFunctorPlusBaseChange e).app (Y⟦m⟧)) ≫
+      (DerivedCategory.Plus.homologyFunctor C' a).map
+        (G'.rightDerivedFunctorPlus.map ((β.mapDerivedCategoryPlus.commShiftIso m).hom.app Y)) ≫
+      (DerivedCategory.Plus.homologyFunctor C' a).map
+        ((G'.rightDerivedFunctorPlus.commShiftIso m).hom.app (β.mapDerivedCategoryPlus.obj Y)) ≫
+      ((DerivedCategory.Plus.homologyFunctor C' 0).shiftIso m a a' h).hom.app
+        (G'.rightDerivedFunctorPlus.obj (β.mapDerivedCategoryPlus.obj Y)) := by
+  have h₁ := γ.mapDerivedCategoryPlusHomologyFunctorIso_hom_app_shiftIso m a a' h
+    (G.rightDerivedFunctorPlus.obj Y)
+  have h₂ := NatTrans.shift_app_comm (rightDerivedFunctorPlusBaseChange e) m Y
+  simp only [Functor.comp_obj, Functor.commShiftIso_comp_hom_app, Category.assoc] at h₂
+  have h₃ := (γ.mapDerivedCategoryPlusHomologyFunctorIso a).hom.naturality
+    ((G.rightDerivedFunctorPlus.commShiftIso m).hom.app Y)
+  have h₄ : (DerivedCategory.Plus.homologyFunctor C' a).map
+      (((rightDerivedFunctorPlusBaseChange e).app Y)⟦m⟧') ≫
+      ((DerivedCategory.Plus.homologyFunctor C' 0).shiftIso m a a' h).hom.app
+        (G'.rightDerivedFunctorPlus.obj (β.mapDerivedCategoryPlus.obj Y)) =
+      ((DerivedCategory.Plus.homologyFunctor C' 0).shiftIso m a a' h).hom.app
+        (γ.mapDerivedCategoryPlus.obj (G.rightDerivedFunctorPlus.obj Y)) ≫
+      (DerivedCategory.Plus.homologyFunctor C' a').map ((rightDerivedFunctorPlusBaseChange e).app Y) :=
+    (DerivedCategory.Plus.homologyFunctor C' 0).shiftIso_hom_naturality m a a' h _
+  have h₂' := congrArg (DerivedCategory.Plus.homologyFunctor C' a).map h₂
+  simp only [Functor.comp_obj, Functor.comp_map] at h₃
+  simp only [Functor.map_comp] at h₂'
+  rw [γ.map_comp, Category.assoc, reassoc_of% h₁, ← h₄, reassoc_of% h₃, reassoc_of% h₂']
+
 /-- **The base change morphism is invertible when `β` sends injectives to `G'`-acyclics.** If `G'`
 is left exact and `β` sends injective objects to `G'`-acyclic objects, then the base change
 morphism `R⁺G ⋙ γ⁺ ⟶ β⁺ ⋙ R⁺G'` attached to `e : G ⋙ γ ≅ β ⋙ G'` is an isomorphism. On a
