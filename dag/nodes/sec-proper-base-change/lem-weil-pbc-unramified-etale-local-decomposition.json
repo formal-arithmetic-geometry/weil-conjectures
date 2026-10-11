@@ -171,5 +171,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: Second delivery: four steps along the proof of Stacks 04HI with four new unsplit nodes carrying exact tags (02LM multiple-points version, verified distinct from the finite-unramified node lem-weil-pbc-finite-unramified-etale-local; 04DG; 02GA+02G6; 02GF/02G8/02V5), all tags checked by L in tags/tags. Accepted by L."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnramifiedEtaleLocalDecomposition",
+  "declaration": "AlgebraicGeometry.exists_etale_closed_immersion_decomposition_of_unramified_at_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnramifiedEtaleLocalDecomposition.lean",
+  "statement": "theorem exists_etale_closed_immersion_decomposition_of_unramified_at_points {X S : Scheme.{u}} (f : X ⟶ S) [IsSeparated f] (s : S) (n : ℕ) (x : Fin n → X) (hx : ∀ i, f.base (x i) = s) (hunramified : ∀ i, ∃ O : X.Opens, x i ∈ O ∧ LocallyOfFiniteType (O.ι ≫ f) ∧ IsOpenImmersion (pullback.diagonal (O.ι ≫ f))) : ∃ (U : Scheme.{u}) (g : U ⟶ S) (u : U), Etale g ∧ g.base u = s ∧ ∃ (m : Fin n → ℕ) (W : (pullback f g).Opens) (V : (Σ i : Fin n, Fin (m i)) → (pullback f g).Opens), IsClosed (W : Set ↥(pullback f g)) ∧ (∀ a, IsClosed (V a : Set ↥(pullback f g))) ∧ Pairwise (fun a b ↦ Disjoint (V a) (V b)) ∧ (∀ a, Disjoint W (V a)) ∧ W ⊔ iSup V = ⊤ ∧ (∀ a, IsClosedImmersion ((V a).ι ≫ pullback.snd f g) ∧ u ∈ Set.range (((V a).ι ≫ pullback.snd f g).base)) ∧ (∀ p : ↥(pullback f g), p ∈ W → (pullback.snd f g).base p = u → ∀ i, (pullback.fst f g).base p ≠ x i) ∧ ((∀ y : X, f.base y = s ↔ ∃ i, y = x i) → ∀ p : ↥(pullback f g), p ∈ W → (pullback.snd f g).base p ≠ u)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
