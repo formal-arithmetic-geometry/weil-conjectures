@@ -239,5 +239,28 @@
    "(7) coproduct morphisms: no Mathlib lemma; nearest connected_component_unique (Decomposition.lean 145)."
   ]
  },
- "reviewed": "2026-10-10 L: 7 steps following 0BN0, three general facts made Mathlib leaves (monos/epis detected by an exact conservative functor to Sets, epi iff cokernel pair), the epi/final definition leaf, clause (7) a new node; statement kept with its numbering (citers use it); 5 new nodes"
+ "reviewed": "2026-10-10 L: 7 steps following 0BN0, three general facts made Mathlib leaves (monos/epis detected by an exact conservative functor to Sets, epi iff cokernel pair), the epi/final definition leaf, clause (7) a new node; statement kept with its numbering (citers use it); 5 new nodes",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Galois.StacksGaloisAxioms",
+  "declaration": "CategoryTheory.stacksGaloisCategory_axioms",
+  "file": "lean/Sheaf/CategoryTheory/Galois/StacksGaloisAxioms.lean",
+  "statement": "theorem stacksGaloisCategory_axioms {C : Type u} [Category.{v} C] (F : C ⥤ Type w) (hG : IsStacksGaloisCategory F) : Functor.Faithful F ∧ (∀ {X Y : C} (f : X ⟶ Y), (Mono f ↔ Function.Injective (F.map f)) ∧ (Epi f ↔ Function.Surjective (F.map f))) ∧ (∀ X : C, (Nonempty (IsInitial X) ↔ IsEmpty (F.obj X)) ∧ (Nonempty (IsTerminal X) ↔ ∃ s : F.obj X, ∀ t : F.obj X, t = s)) ∧ (∀ {X Y : C}, IsConnected X → IsConnected Y → ∀ f : X ⟶ Y, Epi f) ∧ (∀ {X Y : C}, IsConnected X → ∀ (a b : X ⟶ Y) (s : F.obj X), F.map a s = F.map b s → a = b) ∧ (∀ X : C, IsConnected X → ∀ s : F.obj X, Function.Injective (fun g : Aut X => F.map g.hom s) ∧ Nat.card (Aut X) ≤ Nat.card (F.obj X) ∧ (IsStacksGaloisObject F X ↔ Nat.card (Aut X) = Nat.card (F.obj X)) ∧ (IsStacksGaloisObject F X ↔ ∀ t : F.obj X, ∃ g : Aut X, F.map g.hom s = t)) ∧ (∀ (I : Type wI) (J : Type wJ) [Finite I] [Finite J] (Xi : I → C) (Yj : J → C) (X Y : C) (ιX : ∀ i, Xi i ⟶ X) (ιY : ∀ j, Yj j ⟶ Y), Nonempty (IsColimit (Cofan.mk X ιX)) → Nonempty (IsColimit (Cofan.mk Y ιY)) → (∀ i, IsConnected (Xi i)) → (∀ j, IsConnected (Yj j)) → ∀ f : X ⟶ Y, ∃ (α : I → J) (component : ∀ i, Xi i ⟶ Yj (α i)), ∀ i, ιX i ≫ f = component i ≫ ιY (α i))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.IsStacksGaloisObject",
+   "CategoryTheory.stacksGaloisCategory_axioms"
+  ],
+  "fixed_by": "R-gax0641"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gax0641",
+  "group": "G1",
+  "result": "fix",
+  "note": "C:Type u, Category.{v}, F:C⥤Type w, IsStacksGaloisCategory F (landed def); clauses 1-7 each matched (Faithful; Mono/Epi iff inj/surj; Nonempty IsInitial iff empty, IsTerminal iff singleton; connected→Epi; agree at one s→a=b; Aut injective, Nat.card bound, IsStacksGaloisObject iff card eq iff transitive at s; finite Cofan colimits wI/wJ, α and components as morphism_coproduct_connected_components); fix: docstring clause 7 now cites the node's proof (lem-galois-coproduct-morphism-components)"
+ }
 }
