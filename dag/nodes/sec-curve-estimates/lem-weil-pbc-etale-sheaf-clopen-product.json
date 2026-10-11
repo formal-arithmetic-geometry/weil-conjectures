@@ -141,5 +141,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecp1658 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:34 return; all three points repaired: (1) the gluing node is gone and the steps now carry the argument (a)-(d) of the return; (2) step 2 cites lem-weil-pbc-etale-inverse-image-restriction, whose clause 1 states j^{-1}G ~= G|_Y with G|_Y(V)=G(V->X), naturally in G, exactly the identification (iota_i^{-1}F)(U_i)=F(U_i) needed (iota_i is an open immersion hence etale), and step 4 cites it for U=C; (3) the report no longer claims a created change. Source: Stacks 0A5B (etale-cohomology-lemma-constant-smooth-statements) proof, first paragraph, finite disjoint union reduction; the statement is the standard sheaf decomposition. Step 1: lem-weil-pbc-scheme-coproduct-family gives disjoint clopen images covering C, pulled back to U they give a jointly surjective open covering with empty pairwise overlaps; the equalizer of def-weil-pbc-abelian-etale-sheaves with F(empty)=0 (empty covering) gives F(U)=prod F(U_i). Step 3: products of equalizers are equalizers, restriction of G to C_i is G_i since V x_C C_j is empty for j != i and G_j(empty)=0. Small cases checked: |I|=1 (identity), I empty (C empty, Ab(C_Et) zero category = empty product). lem-weil-pbc-etale-inverse-image-restriction (unit sk-thm-p1) is used as a generic black-box tool (C8), added via --tool-uses. FIX: dag/nodes/sec-curve-estimates/lem-weil-pbc-etale-sheaf-clopen-product.json: statement: restored the committed TeX statement (the delivery had stripped the TeX to plain text without naming a change, E7/B4; mathematics unchanged); stmt_deps: restored to the three nodes the statement cites (the two added ones are cited only by the proof and are in proof_deps); split_report.summary: corrected 'Added the missing ... restriction statement' to 'Cites the existing ... node' (no node was added). Start Sat Oct 10 04:57:59 PM UTC 2026, end Sat Oct 10 04:58:37 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct",
+  "declaration": "AlgebraicGeometry.Etale.sheaf_clopen_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSheafClopenProduct.lean",
+  "statement": "theorem Etale.sheaf_clopen_product {I : Type v} [Finite I] {X : Scheme.{u}} (C : I → Scheme.{u}) (ι : ∀ i, C i ⟶ X) (hc : IsColimit (Cofan.mk X ι)) : let R := Functor.pi' (fun i ↦ Etale.upperStar AddCommGrpCat.{u + 1} (ι i)) R.IsEquivalence ∧ Nonempty ((sheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (op (Scheme.Etale.mk (𝟙 X))) ≅ R ⋙ Functor.pi (fun i ↦ (sheafSections (C i).smallEtaleTopology AddCommGrpCat.{u + 1}).obj (op (Scheme.Etale.mk (𝟙 (C i))))) ⋙ Pi.functor I)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ecp1002"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ecp1002",
+  "group": "F1",
+  "result": "fix",
+  "note": "finite I (Type v, Finite); schemes C i; coproduct now any IsColimit (Cofan.mk X ι) as E1 5d9bb8370 (was chosen ∐ C/Sigma.ι), clopen coprojections a consequence via lem-weil-pbc-scheme-coproduct-family; abelian sheaves Sheaf _.smallEtaleTopology AddCommGrpCat.{u+1} (upperStar's Hom universe); restriction = Etale.upperStar along ι i assembled by Functor.pi', IsEquivalence = recovery of sheaves and morphisms; global sections now at Scheme.Etale.mk (𝟙 X) per H1/J1 (was ⊤_ X.Etale), natural iso through the same R ⋙ Functor.pi ⋙ Pi.functor I; edge cases I empty / singleton fine; not in Mathlib, existing:false right"
  }
 }
