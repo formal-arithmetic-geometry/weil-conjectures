@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
 
 /-!
 
-# The condensed coefficient rings `ℤ_ℓ`, `ℚ_ℓ`, `𝒪_E` and `E`
+# The condensed coefficient rings `ℤ_ℓ`, `ℚ_ℓ`, `𝒪_E`, `E` and `ℚ̄_ℓ`
 
 Fix a prime `ℓ`. The four *topological* `ℓ`-adic coefficient rings are defined as condensed
 rings by their sections on profinite sets, following Section 3 of
@@ -26,7 +26,16 @@ integers.
 
 The familiar descriptions `ℤ̲_ℓ ≅ lim_n ℤ/ℓⁿ`, `ℚ̲_ℓ ≅ ℤ̲_ℓ[1/ℓ]`, `𝒪̲_E ≅ lim_n 𝒪_E/ϖⁿ` and
 `E̲ ≅ 𝒪̲_E[1/ϖ]` are *not* definitions; they are comparison isomorphisms, to be proved later.
-The condensed `ℚ̄_ℓ` is not of the form `C(-, T)` and is not treated here.
+
+The condensed `ℚ̄_ℓ` is not of the form `C(-, T)`. Following Definition 3.6 of the notes, a
+section over a profinite set `S` is a continuous map `S → E` into a finite subextension
+`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, regarded in `ℚ̄_ℓ`: the condensed ring `ℚ̲̄_ℓ` is the subsheaf of
+`C(-, ℚ̄_ℓ)` of the maps with values in a finite subextension
+(`Profinite.padicAlgClCondensedRing`). The sheaf condition is checked directly: a covering is
+refined by a finite jointly surjective family, and finitely many finite subextensions have a
+finite compositum. It is *not* `C(-, ℚ̄_ℓ)` for the valuation topology, which has more sections:
+a sequence of elements of unbounded degree converging to `0` gives a continuous map on a
+convergent sequence that takes values in no finite subextension.
 
 The inclusions `ℤ_ℓ → ℚ_ℓ → E`, `ℤ_ℓ → 𝒪_E → E` are continuous ring homomorphisms, so
 postcomposition with them gives morphisms of condensed rings.
@@ -42,6 +51,8 @@ postcomposition with them gives morphisms of condensed rings.
   `Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing` and
   `Profinite.padicIntCondensedRingToPadicIntegersCondensedRing`: the inclusions, as morphisms of
   condensed rings.
+* `Profinite.padicAlgClCondensedRing`: the condensed ring `ℚ̲̄_ℓ`, and
+  `Profinite.padicAlgClRingObj`: the underlying ring object of condensed abelian groups.
 
 -/
 
@@ -126,5 +137,90 @@ noncomputable def padicIntCondensedRingToPadicIntegersCondensedRing :
   continuousMapRingSheafMap (padicIntToIntegers ℓ E) (continuous_padicIntToIntegers ℓ E)
 
 end Integers
+
+/-! ### `ℚ̄_ℓ` -/
+
+section PadicAlgCl
+
+/-- The subfunctor of `S ↦ C(S, ℚ̄_ℓ)` on profinite sets of the continuous maps with values in a
+finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`: a section is a continuous map into one finite local
+field `E`, regarded in `ℚ̄_ℓ`. -/
+def padicAlgClSubfunctor :
+    Subfunctor (ContinuousMap.yonedaPresheaf Profinite.toTopCat.{u} (PadicAlgCl ℓ)) where
+  obj S := {a | a ∈ PadicAlgCl.finiteIntermediateFieldValued ℓ S.unop}
+  map {S S'} u a ha := by
+    obtain ⟨E, hE, h⟩ := ha
+    exact ⟨E, hE, fun x ↦ h _⟩
+
+/-- The sections with values in a finite subextension form a sheaf for the coherent topology:
+a covering is refined by a finite jointly surjective family `{Sᵢ ⟶ S}`, and if `a ∘ πᵢ` takes
+values in the finite subextension `Eᵢ` for each `i`, then `a` takes values in their compositum,
+which is again finite. -/
+lemma isSheaf_padicAlgClSubfunctor :
+    Presieve.IsSheaf (coherentTopology Profinite.{u}) (padicAlgClSubfunctor.{u} ℓ).toFunctor := by
+  rw [Subfunctor.isSheaf_iff _
+    (h := (isSheaf_iff_isSheaf_of_type _ _).mp (isSheaf_yonedaPresheaf (PadicAlgCl ℓ)))]
+  intro S a ha
+  obtain ⟨α, _, Y, π, hπ, hmem⟩ := (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily _).mp ha
+  choose E hE h using hmem
+  have hsurj : ∀ b : S.unop, ∃ (i : α) (y : Y i), π i y = b :=
+    ((Profinite.effectiveEpiFamily_tfae Y π).out 0 2).mp hπ
+  refine ⟨⨆ i, E i, inferInstance, fun x ↦ ?_⟩
+  obtain ⟨i, y, rfl⟩ := hsurj x
+  exact (le_iSup E i) (h i y)
+
+/-- The presheaf of rings `S ↦ {a ∈ C(S, ℚ̄_ℓ) | a takes values in a finite subextension}` on
+profinite sets, lifted to `Type (u + 1)`. -/
+noncomputable def padicAlgClRingPresheaf : Profinite.{u}ᵒᵖ ⥤ RingCat.{u + 1} where
+  obj S := RingCat.of (ULift.{u + 1} (PadicAlgCl.finiteIntermediateFieldValued ℓ S.unop))
+  map u := RingCat.ofHom
+    (ULift.ringEquiv.symm.toRingHom.comp
+      (((((ContinuousMap.compRightAlgHom ℤ (PadicAlgCl ℓ) u.unop.hom.hom).toRingHom).comp
+          (PadicAlgCl.finiteIntermediateFieldValued ℓ _).subtype).codRestrict
+          (PadicAlgCl.finiteIntermediateFieldValued ℓ _) (fun a ↦ by
+            obtain ⟨E, hE, h⟩ := a.2
+            exact ⟨E, hE, fun x ↦ h _⟩)).comp ULift.ringEquiv.toRingHom))
+  map_id _ := rfl
+  map_comp _ _ := rfl
+
+/-- The presheaf of types underlying `padicAlgClRingPresheaf ℓ` is the subfunctor
+`padicAlgClSubfunctor ℓ`, lifted by one universe. -/
+noncomputable def padicAlgClRingPresheafForgetIso :
+    padicAlgClRingPresheaf.{u} ℓ ⋙ forget RingCat.{u + 1} ≅
+      (padicAlgClSubfunctor.{u} ℓ).toFunctor ⋙ uliftFunctor.{u + 1} :=
+  NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
+
+/-- The presheaf of rings of sections with values in a finite subextension is a sheaf. -/
+lemma isSheaf_padicAlgClRingPresheaf :
+    Presheaf.IsSheaf (coherentTopology Profinite.{u}) (padicAlgClRingPresheaf ℓ) := by
+  rw [Presheaf.isSheaf_iff_isSheaf_forget _ _ (forget RingCat.{u + 1}),
+    Presheaf.isSheaf_of_iso_iff (padicAlgClRingPresheafForgetIso ℓ),
+    isSheaf_iff_isSheaf_of_type, Presieve.isSheaf_comp_uliftFunctor_iff]
+  exact isSheaf_padicAlgClSubfunctor ℓ
+
+/-- The condensed ring `ℚ̲̄_ℓ`, following Definition 3.6 of
+`WeilConjectures/RefactorInstruction.tex`: a section over a profinite set `S` is a continuous map
+`S → E` into a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, regarded in `ℚ̄_ℓ`, so that two such
+maps are identified when they agree pointwise in `ℚ̄_ℓ`. Restriction is precomposition and the
+ring operations are computed in a common finite subextension. It is *not* `C(-, ℚ̄_ℓ)` for the
+valuation topology of `ℚ̄_ℓ`, which has more sections. -/
+noncomputable def padicAlgClCondensedRing :
+    Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1} :=
+  ⟨padicAlgClRingPresheaf ℓ, isSheaf_padicAlgClRingPresheaf ℓ⟩
+
+/-- The condensed ring `ℚ̲̄_ℓ` as a ring object of condensed abelian groups: the abelian sheaf
+underlying `padicAlgClCondensedRing ℓ`, with the ring object structure
+`CategoryTheory.Sheaf.monObj_sheafCompose_obj`. -/
+noncomputable abbrev padicAlgClRingObj : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
+  (sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+    (padicAlgClCondensedRing ℓ)
+
+/-- The condensed ring `ℚ̲̄_ℓ` is a commutative ring object of condensed abelian groups. -/
+instance isCommMonObj_padicAlgClRingObj : IsCommMonObj (padicAlgClRingObj.{u} ℓ) :=
+  Sheaf.isCommMonObj_sheafCompose_obj (coherentTopology Profinite.{u})
+    (padicAlgClCondensedRing ℓ) fun S
+      (a b : ULift.{u + 1} (PadicAlgCl.finiteIntermediateFieldValued ℓ S.unop)) ↦ mul_comm a b
+
+end PadicAlgCl
 
 end Profinite

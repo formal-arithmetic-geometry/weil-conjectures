@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
@@ -19,18 +20,28 @@ category `D_cons(X_proét, Λ_X)` of module objects over the coefficient ring ob
 `ProEtale.BoundedConstructible (condensedRingObj Λ X)` of `D(Mod_{Λ_X})`
 (`WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory`), with scoped notation
 `Dᵇc(X)⟦Λ⟧`. This file restricts the six functors on `D(Mod_{Λ_X})` of the folder
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived` to these full
-subcategories:
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived` to these full subcategories.
 
-| functor | restriction | hypotheses |
-| --- | --- | --- |
-| `Lf^* = L((f)^*⟦Λ⟧)` | `boundedConstructibleUpperStar` | `X`, `Y` noetherian |
-| `Rf_* = R((f)_*⟦Λ⟧)` | `boundedConstructibleLowerStar` | and `f` of finite type |
-| `Rf_! = R(f)_!⟦Λ⟧` | `boundedConstructibleLowerShriek` | and `HasCompactification f` |
-| `j_! = D((j)_!open⟦Λ⟧)` | `boundedConstructibleOpenImmersionLowerShriek` | `j` an open immersion |
-| `Rf^! = R(f)^!⟦Λ⟧` | `boundedConstructibleUpperShriek` | and `HasCompactification f` |
-| `- ⊗ᴸ -` | `boundedConstructibleTensor` | `X` noetherian |
-| `RHom(-, -)` | `boundedConstructibleHom` | `X` noetherian |
+## The setting
+
+Following Bhatt–Scholze, Section 6.8, in the simplified setting of schemes over a field: fix a
+prime `ℓ` and a field `k` of characteristic `p > 0` with `p ≠ ℓ`
+(`[Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]`). All schemes are separated and of finite
+type over `Spec k` (`[X.Over (Spec (.of k))]` with `X ↘ Spec k` locally of finite type,
+quasi-compact and separated), and all morphisms are morphisms over `Spec k`
+(`[f.IsOver (Spec (.of k))]`). No further hypothesis is imposed on the schemes or morphisms. In
+particular every such morphism has a compactification, by Nagata's theorem
+(`AlgebraicGeometry.HasCompactification.of_isOver`), which is what defines `Rf_!` and `Rf^!`.
+
+| functor | restriction |
+| --- | --- |
+| `Lf^* = L((f)^*⟦Λ⟧)` | `boundedConstructibleUpperStar` |
+| `Rf_* = R((f)_*⟦Λ⟧)` | `boundedConstructibleLowerStar` |
+| `Rf_! = R(f)_!⟦Λ⟧` | `boundedConstructibleLowerShriek` |
+| `j_! = D((j)_!open⟦Λ⟧)`, `j` an open immersion | `boundedConstructibleOpenImmersionLowerShriek` |
+| `Rf^! = R(f)^!⟦Λ⟧` | `boundedConstructibleUpperShriek` |
+| `- ⊗ᴸ -` | `boundedConstructibleTensor` |
+| `RHom(-, -)` | `boundedConstructibleHom` |
 
 Each restriction is the `ObjectProperty.lift` of the composite of the inclusion with the functor
 on the ambient derived category, so it is compatible with the inclusions by construction
@@ -38,9 +49,6 @@ on the ambient derived category, so it is compatible with the inclusions by cons
 `K ⊗ᴸ - ⊣ RHom(K, -)` restrict along the fully faithful inclusions
 (`Adjunction.restrictFullyFaithful`), and so does the composition isomorphism
 `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`).
-
-Here "noetherian" means that the underlying topological space is noetherian, which is also the
-hypothesis under which `ProEtale.boundedConstructible` is triangulated.
 
 ## Sorried input
 
@@ -51,11 +59,9 @@ That the six functors preserve bounded constructible complexes is `sorry`ed:
 `boundedConstructible_rightDerivedUpperShriek_obj`, `boundedConstructible_derivedTensor_obj` and
 `boundedConstructible_derivedHom_obj`.
 
-Warning: the hypotheses are deliberately minimal and are not the ones under which these
-statements are theorems. For `Rf_*`, `Rf^!` and `RHom` one needs Deligne's finiteness theorem,
-i.e. schemes of finite type over a regular base of dimension `≤ 1` on which `ℓ` is invertible,
-and for all six functors the coefficient ring `Λ` should be `𝒪_E` or `E` for a finite extension
-`E` of `ℚ_ℓ`. The hypotheses are to be strengthened when the statements are proved.
+These are theorems for the `ℓ`-adic coefficient rings, the condensed rings `E̲` of a finite
+extension `E` of `ℚ_ℓ` and `ℚ̲̄_ℓ` (Deligne's finiteness theorems, Bhatt–Scholze, Section 6.8);
+`Λ` is kept general here, the coefficient ring being an input of the statements.
 
 -/
 
@@ -65,7 +71,7 @@ universe u
 
 open scoped CategoryTheory.Obj
 
-open CategoryTheory Limits Opposite TopologicalSpace
+open CategoryTheory Limits Opposite
 
 open scoped CategoryTheory.Functor
 
@@ -74,6 +80,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
 /-- The bounded constructible derived category `D_cons(X_proét, Λ_X)` of module objects over
 `Λ_X = p_X^* Λ`. -/
@@ -84,7 +91,13 @@ scoped notation "Dᵇc(" X ")⟦" Λ "⟧" =>
 
 section UpperLowerStar
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) [NoetherianSpace X] [NoetherianSpace Y]
+include ℓ k
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+  [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]
+  [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
+  (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
 
 /-- The derived pullback `Lf^*` on module objects over `Λ` preserves bounded constructible
 complexes. -/
@@ -99,34 +112,33 @@ lemma boundedConstructible_leftDerivedUpperStar_obj
 restriction of `L((f)^*⟦Λ⟧)`. -/
 noncomputable def boundedConstructibleUpperStar : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ :=
   (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ L((f)^*⟦Λ⟧))
-    fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ f K.obj K.property
+    fun K ↦ boundedConstructible_leftDerivedUpperStar_obj Λ ℓ k f K.obj K.property
 
 /-- The restricted derived pullback is compatible with the inclusions. -/
 noncomputable def boundedConstructibleUpperStarCompatibility :
-    boundedConstructibleUpperStar Λ f ⋙ (boundedConstructible _).ι ≅
+    boundedConstructibleUpperStar Λ ℓ k f ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ L((f)^*⟦Λ⟧) :=
   ObjectProperty.liftCompιIso _ _ _
 
 /-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` on bounded constructible complexes:
 the restriction of `ProEtale.CondensedRing.leftDerivedUpperStarComp` along the fully
 faithful inclusions. -/
-noncomputable def boundedConstructibleUpperStarComp {Z : Scheme.{u}} [NoetherianSpace Z]
-    (g : Y ⟶ Z) :
-    boundedConstructibleUpperStar Λ (f ≫ g) ≅
-      boundedConstructibleUpperStar Λ g ⋙ boundedConstructibleUpperStar Λ f :=
+noncomputable def boundedConstructibleUpperStarComp {Z : Scheme.{u}} [Z.Over (Spec (.of k))]
+    [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]
+    [IsSeparated (Z ↘ Spec (.of k))] (g : Y ⟶ Z) [g.IsOver (Spec (.of k))] :
+    boundedConstructibleUpperStar Λ ℓ k (f ≫ g) ≅
+      boundedConstructibleUpperStar Λ ℓ k g ⋙ boundedConstructibleUpperStar Λ ℓ k f :=
   ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
-    (boundedConstructibleUpperStarCompatibility Λ (f ≫ g) ≪≫
+    (boundedConstructibleUpperStarCompatibility Λ ℓ k (f ≫ g) ≪≫
       Functor.isoWhiskerLeft _ (leftDerivedUpperStarComp Λ f g) ≪≫
       (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (boundedConstructibleUpperStarCompatibility Λ g).symm _ ≪≫
+      Functor.isoWhiskerRight (boundedConstructibleUpperStarCompatibility Λ ℓ k g).symm _ ≪≫
       Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (boundedConstructibleUpperStarCompatibility Λ f).symm ≪≫
+      Functor.isoWhiskerLeft _ (boundedConstructibleUpperStarCompatibility Λ ℓ k f).symm ≪≫
       (Functor.associator _ _ _).symm)
 
-variable [LocallyOfFiniteType f] [QuasiCompact f]
-
-/-- The derived pushforward `Rf_*` on module objects over `Λ` along a morphism of finite
-type preserves bounded constructible complexes. -/
+/-- The derived pushforward `Rf_*` on module objects over `Λ` preserves bounded constructible
+complexes. -/
 lemma boundedConstructible_rightDerivedLowerStar_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
@@ -138,11 +150,11 @@ lemma boundedConstructible_rightDerivedLowerStar_obj
 the restriction of `R((f)_*⟦Λ⟧)`. -/
 noncomputable def boundedConstructibleLowerStar : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧ :=
   (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R((f)_*⟦Λ⟧))
-    fun K ↦ boundedConstructible_rightDerivedLowerStar_obj Λ f K.obj K.property
+    fun K ↦ boundedConstructible_rightDerivedLowerStar_obj Λ ℓ k f K.obj K.property
 
 /-- The restricted derived pushforward is compatible with the inclusions. -/
 noncomputable def boundedConstructibleLowerStarCompatibility :
-    boundedConstructibleLowerStar Λ f ⋙ (boundedConstructible _).ι ≅
+    boundedConstructibleLowerStar Λ ℓ k f ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ R((f)_*⟦Λ⟧) :=
   ObjectProperty.liftCompιIso _ _ _
 
@@ -150,11 +162,11 @@ noncomputable def boundedConstructibleLowerStarCompatibility :
 `ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction` along the fully faithful
 inclusions. -/
 noncomputable def boundedConstructibleUpperStarLowerStarAdjunction :
-    boundedConstructibleUpperStar Λ f ⊣ boundedConstructibleLowerStar Λ f :=
+    boundedConstructibleUpperStar Λ ℓ k f ⊣ boundedConstructibleLowerStar Λ ℓ k f :=
   Adjunction.restrictFullyFaithful (derivedUpperStarLowerStarAdjunction Λ f)
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
-    (boundedConstructibleUpperStarCompatibility Λ f).symm
-    (boundedConstructibleLowerStarCompatibility Λ f).symm
+    (boundedConstructibleUpperStarCompatibility Λ ℓ k f).symm
+    (boundedConstructibleLowerStarCompatibility Λ ℓ k f).symm
 
 end UpperLowerStar
 
@@ -162,8 +174,13 @@ end UpperLowerStar
 
 section OpenImmersion
 
-variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [NoetherianSpace U]
-  [NoetherianSpace X]
+include ℓ k
+
+variable {U X : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))]
+  [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
+  [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+  [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
+  (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))]
 
 /-- The extension by zero `j_!` along an open immersion, applied levelwise to complexes of
 module objects over `Λ`, preserves bounded constructible complexes. -/
@@ -178,11 +195,11 @@ lemma boundedConstructible_openImmersionLowerShriek_obj
 constructible complexes: the restriction of the levelwise functor `D((j)_!open⟦Λ⟧)`. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriek : Dᵇc(U)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ :=
   (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ D((j)_!open⟦Λ⟧))
-    fun K ↦ boundedConstructible_openImmersionLowerShriek_obj Λ j K.obj K.property
+    fun K ↦ boundedConstructible_openImmersionLowerShriek_obj Λ ℓ k j K.obj K.property
 
 /-- The restricted extension by zero is compatible with the inclusions. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekCompatibility :
-    boundedConstructibleOpenImmersionLowerShriek Λ j ⋙ (boundedConstructible _).ι ≅
+    boundedConstructibleOpenImmersionLowerShriek Λ ℓ k j ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ D((j)_!open⟦Λ⟧) :=
   ObjectProperty.liftCompιIso _ _ _
 
@@ -191,13 +208,13 @@ restriction of `ProEtale.CondensedRing.derivedOpenImmersionLowerShriekUpperStarA
 along the fully faithful inclusions, the levelwise `D((j)^*⟦Λ⟧)` being identified with the
 derived pullback `L((j)^*⟦Λ⟧)` that `boundedConstructibleUpperStar` restricts. -/
 noncomputable def boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction :
-    boundedConstructibleOpenImmersionLowerShriek Λ j ⊣ boundedConstructibleUpperStar Λ j :=
+    boundedConstructibleOpenImmersionLowerShriek Λ ℓ k j ⊣ boundedConstructibleUpperStar Λ ℓ k j :=
   Adjunction.restrictFullyFaithful
     ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).ofNatIsoRight
       (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j).symm)
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
-    (boundedConstructibleOpenImmersionLowerShriekCompatibility Λ j).symm
-    (boundedConstructibleUpperStarCompatibility Λ j).symm
+    (boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ k j).symm
+    (boundedConstructibleUpperStarCompatibility Λ ℓ k j).symm
 
 end OpenImmersion
 
@@ -205,8 +222,13 @@ end OpenImmersion
 
 section Shriek
 
-variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-  [NoetherianSpace X] [NoetherianSpace Y]
+include ℓ k
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+  [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]
+  [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
+  (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
 
 /-- The derived lower shriek `Rf_!` on module objects over `Λ` preserves bounded
 constructible complexes. -/
@@ -214,18 +236,21 @@ lemma boundedConstructible_rightDerivedLowerShriek_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
     (hK : boundedConstructible (condensedRingObj Λ X) K) :
+    haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
     boundedConstructible (condensedRingObj Λ Y) ((R(f)_!⟦Λ⟧).obj K) :=
   sorry
 
 /-- The derived lower shriek `Rf_! : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible complexes:
 the restriction of `R(f)_!⟦Λ⟧`. -/
 noncomputable def boundedConstructibleLowerShriek : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧ :=
+  haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
   (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R(f)_!⟦Λ⟧)
-    fun K ↦ boundedConstructible_rightDerivedLowerShriek_obj Λ f K.obj K.property
+    fun K ↦ boundedConstructible_rightDerivedLowerShriek_obj Λ ℓ k f K.obj K.property
 
 /-- The restricted derived lower shriek is compatible with the inclusions. -/
 noncomputable def boundedConstructibleLowerShriekCompatibility :
-    boundedConstructibleLowerShriek Λ f ⋙ (boundedConstructible _).ι ≅
+    haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
+    boundedConstructibleLowerShriek Λ ℓ k f ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ R(f)_!⟦Λ⟧ :=
   ObjectProperty.liftCompιIso _ _ _
 
@@ -235,18 +260,21 @@ lemma boundedConstructible_rightDerivedUpperShriek_obj
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y)))
     (hK : boundedConstructible (condensedRingObj Λ Y) K) :
+    haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
     boundedConstructible (condensedRingObj Λ X) ((R(f)^!⟦Λ⟧).obj K) :=
   sorry
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible
 complexes: the restriction of `R(f)^!⟦Λ⟧`. -/
 noncomputable def boundedConstructibleUpperShriek : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ :=
+  haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
   (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R(f)^!⟦Λ⟧)
-    fun K ↦ boundedConstructible_rightDerivedUpperShriek_obj Λ f K.obj K.property
+    fun K ↦ boundedConstructible_rightDerivedUpperShriek_obj Λ ℓ k f K.obj K.property
 
 /-- The restricted exceptional inverse image is compatible with the inclusions. -/
 noncomputable def boundedConstructibleUpperShriekCompatibility :
-    boundedConstructibleUpperShriek Λ f ⋙ (boundedConstructible _).ι ≅
+    haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
+    boundedConstructibleUpperShriek Λ ℓ k f ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ R(f)^!⟦Λ⟧ :=
   ObjectProperty.liftCompιIso _ _ _
 
@@ -254,11 +282,12 @@ noncomputable def boundedConstructibleUpperShriekCompatibility :
 `ProEtale.CondensedRing.rightDerivedUpperShriekAdjunction` along the fully faithful
 inclusions. -/
 noncomputable def boundedConstructibleUpperShriekAdjunction :
-    boundedConstructibleLowerShriek Λ f ⊣ boundedConstructibleUpperShriek Λ f :=
+    boundedConstructibleLowerShriek Λ ℓ k f ⊣ boundedConstructibleUpperShriek Λ ℓ k f :=
+  haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
   Adjunction.restrictFullyFaithful (rightDerivedUpperShriekAdjunction Λ f)
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
-    (boundedConstructibleLowerShriekCompatibility Λ f).symm
-    (boundedConstructibleUpperShriekCompatibility Λ f).symm
+    (boundedConstructibleLowerShriekCompatibility Λ ℓ k f).symm
+    (boundedConstructibleUpperShriekCompatibility Λ ℓ k f).symm
 
 end Shriek
 
@@ -266,7 +295,10 @@ end Shriek
 
 section TensorHom
 
-variable (X : Scheme.{u}) [NoetherianSpace X]
+include ℓ k
+
+variable (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+  [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
 
 /-- The derived tensor product of module objects over `Λ` preserves bounded constructible
 complexes. -/
@@ -294,7 +326,7 @@ noncomputable def boundedConstructibleTensor : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦�
   Functor.curry.obj ((boundedConstructible _).lift
     (((boundedConstructible _).ι.prod (boundedConstructible _).ι) ⋙
       Functor.uncurry.obj -⊗ᴸ-(X)⟦Λ⟧)
-    fun KL ↦ boundedConstructible_derivedTensor_obj Λ X KL.1.property KL.2.property)
+    fun KL ↦ boundedConstructible_derivedTensor_obj Λ ℓ k X KL.1.property KL.2.property)
 
 /-- The derived hom `RHom(-, -) : Dᵇc(X)⟦Λ⟧ᵒᵖ ⥤ Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible
 complexes: the restriction of `RHom(X)⟦Λ⟧` in both variables. -/
@@ -302,14 +334,14 @@ noncomputable def boundedConstructibleHom : (Dᵇc(X)⟦Λ⟧)ᵒᵖ ⥤ Dᵇc(X
   Functor.curry.obj ((boundedConstructible _).lift
     (((boundedConstructible _).ι.op.prod (boundedConstructible _).ι) ⋙
       Functor.uncurry.obj RHom(X)⟦Λ⟧)
-    fun KL ↦ boundedConstructible_derivedHom_obj Λ X KL.1.unop.property KL.2.property)
+    fun KL ↦ boundedConstructible_derivedHom_obj Λ ℓ k X KL.1.unop.property KL.2.property)
 
 variable {X}
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
 inclusions. -/
 noncomputable def boundedConstructibleTensorObjCompatibility (K : Dᵇc(X)⟦Λ⟧) :
-    (boundedConstructibleTensor Λ X).obj K ⋙ (boundedConstructible _).ι ≅
+    (boundedConstructibleTensor Λ ℓ k X).obj K ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (-⊗ᴸ-(X)⟦Λ⟧).obj K.obj :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
     simp [boundedConstructibleTensor]
@@ -317,7 +349,7 @@ noncomputable def boundedConstructibleTensorObjCompatibility (K : Dᵇc(X)⟦Λ�
 /-- For a fixed `K ∈ Dᵇc(X)⟦Λ⟧`, the restricted functor `RHom(K, -)` is compatible with the
 inclusions. -/
 noncomputable def boundedConstructibleHomObjCompatibility (K : Dᵇc(X)⟦Λ⟧) :
-    (boundedConstructibleHom Λ X).obj (op K) ⋙ (boundedConstructible _).ι ≅
+    (boundedConstructibleHom Λ ℓ k X).obj (op K) ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ (RHom(X)⟦Λ⟧).obj (op K.obj) :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
     simp [boundedConstructibleHom]
@@ -326,11 +358,11 @@ noncomputable def boundedConstructibleHomObjCompatibility (K : Dᵇc(X)⟦Λ⟧)
 complexes: the restriction of `ProEtale.CondensedRing.derivedTensorHomAdjunction` along the
 fully faithful inclusions. -/
 noncomputable def boundedConstructibleTensorHomAdjunction (K : Dᵇc(X)⟦Λ⟧) :
-    (boundedConstructibleTensor Λ X).obj K ⊣ (boundedConstructibleHom Λ X).obj (op K) :=
+    (boundedConstructibleTensor Λ ℓ k X).obj K ⊣ (boundedConstructibleHom Λ ℓ k X).obj (op K) :=
   Adjunction.restrictFullyFaithful (derivedTensorHomAdjunction Λ K.obj)
     (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
-    (boundedConstructibleTensorObjCompatibility Λ K).symm
-    (boundedConstructibleHomObjCompatibility Λ K).symm
+    (boundedConstructibleTensorObjCompatibility Λ ℓ k K).symm
+    (boundedConstructibleHomObjCompatibility Λ ℓ k K).symm
 
 end TensorHom
 

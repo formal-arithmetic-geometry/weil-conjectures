@@ -22,8 +22,9 @@ v          v
 Y' --g---> Y
 ```
 
-recorded as `sq : CommSq g' f' f g`, with noetherian underlying spaces and `f`, `f'` of finite
-type. This file constructs the *base-change morphism*
+recorded as `sq : CommSq g' f' f g`, of schemes separated and of finite type over a field `k` of
+characteristic `p > 0` with `p ≠ ℓ` and of morphisms over `Spec k`, as for the bounded
+constructible six functors. This file constructs the *base-change morphism*
 
 `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` (in diagrammatic `⋙`-order)
 
@@ -57,7 +58,7 @@ universe u
 
 open scoped CategoryTheory.Obj
 
-open CategoryTheory Limits TopologicalSpace
+open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor
 
@@ -66,63 +67,75 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
-variable {X Y X' Y' : Scheme.{u}}
-  [NoetherianSpace X] [NoetherianSpace Y] [NoetherianSpace X'] [NoetherianSpace Y']
+variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+  [X'.Over (Spec (.of k))] [Y'.Over (Spec (.of k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+  [IsSeparated (X ↘ Spec (.of k))]
+  [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+  [IsSeparated (Y ↘ Spec (.of k))]
+  [LocallyOfFiniteType (X' ↘ Spec (.of k))] [QuasiCompact (X' ↘ Spec (.of k))]
+  [IsSeparated (X' ↘ Spec (.of k))]
+  [LocallyOfFiniteType (Y' ↘ Spec (.of k))] [QuasiCompact (Y' ↘ Spec (.of k))]
+  [IsSeparated (Y' ↘ Spec (.of k))]
+
+include ℓ k
 
 section PullbackComparison
 
-variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} [f.IsOver (Spec (.of k))]
+  [g.IsOver (Spec (.of k))] [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
 /-- The pullback comparison `θ_sq : Lf'^* ∘ Lg^* ≅ Lg'^* ∘ Lf^*` of a commutative square
 `g' ≫ f = f' ≫ g` of schemes on the bounded constructible derived categories, obtained from the
 composition isomorphisms `boundedConstructibleUpperStarComp` and the commutativity of the
 square. -/
 noncomputable def boundedConstructiblePullbackSquareComparison (sq : CommSq g' f' f g) :
-    boundedConstructibleUpperStar Λ g ⋙ boundedConstructibleUpperStar Λ f' ≅
-      boundedConstructibleUpperStar Λ f ⋙ boundedConstructibleUpperStar Λ g' :=
-  (boundedConstructibleUpperStarComp Λ f' g).symm ≪≫
-    eqToIso (by rw [← sq.w]) ≪≫ boundedConstructibleUpperStarComp Λ g' f
+    boundedConstructibleUpperStar Λ ℓ k g ⋙ boundedConstructibleUpperStar Λ ℓ k f' ≅
+      boundedConstructibleUpperStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k g' :=
+  (boundedConstructibleUpperStarComp Λ ℓ k f' g).symm ≪≫
+    eqToIso (by simp only [sq.w]) ≪≫ boundedConstructibleUpperStarComp Λ ℓ k g' f
 
 end PullbackComparison
 
 section BaseChange
 
-variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
-  [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType f'] [QuasiCompact f']
+variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X) [f.IsOver (Spec (.of k))]
+  [g.IsOver (Spec (.of k))] [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
 /-- The *unit insertion* step of the base-change morphism on bounded constructible complexes:
 the natural transformation `Lg^* ∘ Rf_* ⟶ Rf'_* ∘ Lf'^* ∘ Lg^* ∘ Rf_*` obtained by inserting the
 unit of the adjunction `Lf'^* ⊣ Rf'_*`. -/
 noncomputable def boundedConstructibleBaseChangeUnitStep :
-    boundedConstructibleLowerStar Λ f ⋙ boundedConstructibleUpperStar Λ g ⟶
-      (boundedConstructibleLowerStar Λ f ⋙ boundedConstructibleUpperStar Λ g) ⋙
-        (boundedConstructibleUpperStar Λ f' ⋙ boundedConstructibleLowerStar Λ f') :=
+    boundedConstructibleLowerStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k g ⟶
+      (boundedConstructibleLowerStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k g) ⋙
+        (boundedConstructibleUpperStar Λ ℓ k f' ⋙ boundedConstructibleLowerStar Λ ℓ k f') :=
   (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft
-    (boundedConstructibleLowerStar Λ f ⋙ boundedConstructibleUpperStar Λ g)
-    (boundedConstructibleUpperStarLowerStarAdjunction Λ f').unit
+    (boundedConstructibleLowerStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k g)
+    (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f').unit
 
 variable {f g f' g'} in
 /-- The *square transport* step of the base-change morphism on bounded constructible
 complexes: `Functor.squareTransport` applied to the pullback comparison `θ_sq`, under `Rf_*` on
 the left and `Rf'_*` on the right. -/
 noncomputable def boundedConstructibleBaseChangeSquareStep (sq : CommSq g' f' f g) :
-    (boundedConstructibleLowerStar Λ f ⋙ boundedConstructibleUpperStar Λ g) ⋙
-        (boundedConstructibleUpperStar Λ f' ⋙ boundedConstructibleLowerStar Λ f') ≅
-      (boundedConstructibleLowerStar Λ f ⋙ boundedConstructibleUpperStar Λ f) ⋙
-        (boundedConstructibleUpperStar Λ g' ⋙ boundedConstructibleLowerStar Λ f') :=
-  Functor.squareTransport (boundedConstructibleLowerStar Λ f)
-    (boundedConstructibleLowerStar Λ f') (boundedConstructiblePullbackSquareComparison Λ sq)
+    (boundedConstructibleLowerStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k g) ⋙
+        (boundedConstructibleUpperStar Λ ℓ k f' ⋙ boundedConstructibleLowerStar Λ ℓ k f') ≅
+      (boundedConstructibleLowerStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k f) ⋙
+        (boundedConstructibleUpperStar Λ ℓ k g' ⋙ boundedConstructibleLowerStar Λ ℓ k f') :=
+  Functor.squareTransport (boundedConstructibleLowerStar Λ ℓ k f)
+    (boundedConstructibleLowerStar Λ ℓ k f') (boundedConstructiblePullbackSquareComparison Λ ℓ k sq)
 
 /-- The *counit contraction* step of the base-change morphism on bounded constructible
 complexes: the natural transformation obtained by contracting the counit of the adjunction
 `Lf^* ⊣ Rf_*`. -/
 noncomputable def boundedConstructibleBaseChangeCounitStep :
-    (boundedConstructibleLowerStar Λ f ⋙ boundedConstructibleUpperStar Λ f) ⋙
-        (boundedConstructibleUpperStar Λ g' ⋙ boundedConstructibleLowerStar Λ f') ⟶
-      boundedConstructibleUpperStar Λ g' ⋙ boundedConstructibleLowerStar Λ f' :=
-  Functor.whiskerRight (boundedConstructibleUpperStarLowerStarAdjunction Λ f).counit
-    (boundedConstructibleUpperStar Λ g' ⋙ boundedConstructibleLowerStar Λ f') ≫
+    (boundedConstructibleLowerStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k f) ⋙
+        (boundedConstructibleUpperStar Λ ℓ k g' ⋙ boundedConstructibleLowerStar Λ ℓ k f') ⟶
+      boundedConstructibleUpperStar Λ ℓ k g' ⋙ boundedConstructibleLowerStar Λ ℓ k f' :=
+  Functor.whiskerRight (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ k f).counit
+    (boundedConstructibleUpperStar Λ ℓ k g' ⋙ boundedConstructibleLowerStar Λ ℓ k f') ≫
     (Functor.leftUnitor _).hom
 
 variable {f g f' g'} in
@@ -135,11 +148,11 @@ Proper base change asserts that this morphism is an isomorphism for a cartesian 
 proper; no such hypothesis is built into the definition. -/
 @[no_expose]
 noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
-    boundedConstructibleLowerStar Λ f ⋙ boundedConstructibleUpperStar Λ g ⟶
-      boundedConstructibleUpperStar Λ g' ⋙ boundedConstructibleLowerStar Λ f' :=
-  boundedConstructibleBaseChangeUnitStep Λ f g f' ≫
-    (boundedConstructibleBaseChangeSquareStep Λ sq).hom ≫
-      boundedConstructibleBaseChangeCounitStep Λ f f' g'
+    boundedConstructibleLowerStar Λ ℓ k f ⋙ boundedConstructibleUpperStar Λ ℓ k g ⟶
+      boundedConstructibleUpperStar Λ ℓ k g' ⋙ boundedConstructibleLowerStar Λ ℓ k f' :=
+  boundedConstructibleBaseChangeUnitStep Λ ℓ k f g f' ≫
+    (boundedConstructibleBaseChangeSquareStep Λ ℓ k sq).hom ≫
+      boundedConstructibleBaseChangeCounitStep Λ ℓ k f f' g'
 
 end BaseChange
 

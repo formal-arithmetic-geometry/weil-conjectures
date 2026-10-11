@@ -328,8 +328,7 @@ lemma coefficientRing_X (X : Scheme.{u})
 object of condensed abelian groups. -/
 noncomputable def continuousMapCondensedRing (T : Type) [TopologicalSpace T] [Ring T]
     [IsTopologicalRing T] : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
-  Mon.mk ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
-    (Profinite.continuousMapRingSheaf T))
+  Mon.mk (Profinite.continuousMapRingObj T)
 
 /-! ### The comparison `α_f : f^* Λ_Y ≅ Λ_X` -/
 

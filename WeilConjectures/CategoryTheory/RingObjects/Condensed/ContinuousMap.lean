@@ -44,7 +44,8 @@ a ring object of the category of abelian sheaves on `*_proét`
 
 * `Profinite.continuousMapRingPresheaf`: the presheaf of rings `S ↦ C(S, T)` on `Profinite`.
 * `Profinite.continuousMapRingSheaf`: the condensed ring `T̲`, a sheaf of rings for the coherent
-  topology on `Profinite`.
+  topology on `Profinite`, and `Profinite.continuousMapRingObj`: the underlying ring object of
+  condensed abelian groups.
 * `Profinite.continuousMapRingSheafMap`: the morphism of condensed rings induced by a continuous
   ring homomorphism `T →+* T'`.
 
@@ -132,6 +133,13 @@ lemma continuousMapRingSheaf_obj :
     (continuousMapRingSheaf.{u} T).obj = continuousMapRingPresheaf T :=
   rfl
 
+/-- The condensed ring `T̲ = C(-, T)` as a ring object of condensed abelian groups: the abelian
+sheaf underlying `continuousMapRingSheaf T`, with the ring object structure
+`CategoryTheory.Sheaf.monObj_sheafCompose_obj`. -/
+noncomputable abbrev continuousMapRingObj : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
+  (sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+    (continuousMapRingSheaf T)
+
 variable {T} {T' : Type} [TopologicalSpace T'] [Ring T'] [IsTopologicalRing T']
   (φ : T →+* T') (hφ : Continuous φ)
 
@@ -179,9 +187,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
 
 /-- The condensed ring of continuous maps into a commutative topological ring is a commutative
 ring object of the category of abelian sheaves on `Profinite`. -/
-instance isCommMonObj_continuousMapRingSheaf :
-    IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u})
-      (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (continuousMapRingSheaf T)) :=
+instance isCommMonObj_continuousMapRingObj : IsCommMonObj (continuousMapRingObj.{u} T) :=
   Sheaf.isCommMonObj_sheafCompose_obj (coherentTopology Profinite.{u})
     (continuousMapRingSheaf T) fun S (a b : ULift.{u + 1} C(S.unop, T)) ↦ mul_comm a b
 
