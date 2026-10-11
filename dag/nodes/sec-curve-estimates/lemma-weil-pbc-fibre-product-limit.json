@@ -150,20 +150,19 @@
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit",
   "declaration": "AlgebraicGeometry.fibre_product_neighbourhood_limit",
-  "statement": "theorem fibre_product_neighbourhood_limit {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) {X : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] : ∃ c : Cone ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙ CategoryOfElements.π _ ⋙ Scheme.AffineEtale.Spec S ⋙ Scheme.Etale.forget S), c.pt.left = Scheme.strictHenselizationScheme s ∧ (∀ k : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), HEq (c.π.app k).left ((Scheme.strictHenselizationCone s).π.app (op (op k)) ≫ Spec.map (Scheme.ΓSpecIso ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj k).1.left.unop).inv)) ∧ Nonempty (IsLimit ((Over.pullback f ⋙ Over.forget X).mapCone c))",
+  "statement": "theorem fibre_product_neighbourhood_limit {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) : ∃ (p : Scheme.strictHenselizationScheme s ⟶ S) (q : (Functor.const (Scheme.pointSmallEtale s).fiber.Elements).obj (Over.mk p) ⟶ CategoryOfElements.π (Scheme.pointSmallEtale s).fiber ⋙ Scheme.Etale.forget S), (∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), (q.app ((Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j))).left = (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫ (Spec (unop ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1.left)).isoSpec.inv) ∧ Nonempty (IsLimit ((Over.pullback f ⋙ Over.forget X).mapCone { pt := Over.mk p, π := q }))",
   "by": "R1",
-  "date": "2026-10-11",
+  "date": "2026-10-12",
   "file": "lean/Sheaf/AlgebraicGeometry/FibreProductNeighbourhoodLimit.lean",
   "branch": "sheaf-dag",
   "existing": false,
-  "fixed_by": "R-fpl"
+  "note": "Canonical full pointed-neighbourhood limit, encoded as IsLimit of the base-changed cone. The structure map and cone legs are uniquely specified by agreement with strictHenselizationCone on small affine representatives; no limit-existence hypotheses are added. Over.pullback uses the canonically symmetric V ×_S X order."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
   "by": "L",
-  "reviewer": "R-fpl",
+  "reviewer": "R-fp2",
   "group": "R1",
-  "result": "fix",
-  "note": "STATEMENT-DISPUTED rejected (node right; delivery was a verbatim copy of landed Scheme.isIso_limit_pullback_comparison); fixed to the node: geometric point s, qcqs f, tied Over-S cone with c.pt.left = strictHenselizationScheme s and legs HEq to strictHenselizationCone legs ≫ Spec.map (ΓSpecIso R).inv, base change along f via Over.pullback is IsLimit"
+  "result": "pass"
  }
 }

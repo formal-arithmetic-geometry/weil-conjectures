@@ -3,12 +3,14 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 import Sheaf.AlgebraicGeometry.StrictHenselization
+import Mathlib.CategoryTheory.Comma.Over.Pullback
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Base change and the neighbourhood limit
 
 Source: Weil conjectures blueprint, `sec-curve-estimates/sk-prop-h2`,
-lemma `lemma-weil-pbc-fibre-product-limit`.
+(blueprint: lemma-weil-pbc-fibre-product-limit).
 -/
 
 universe u
@@ -17,34 +19,47 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Base change commutes with the inverse limit over the affine pointed etale
-neighbourhoods `(V, v)` of a geometric point `s` of `S`: for a quasi-compact and
-quasi-separated `f : X ⟶ S`, the strict henselization `S_(s)` carries a cone over the
-neighbourhood diagram in `Over S` whose legs are those of `strictHenselizationCone s`
-(after `Spec Γ(Spec R, ⊤) ≅ Spec R`), and its base change along `f` is a limit cone of
-the base changes `V ×_S X`. The vertex of the base-changed cone is `S_(s) ×_S X`.
+/-- The canonical base-change cone over all pointed étale neighbourhoods is limiting.
+The existential structure map and cone legs are specified by their restrictions to the
+chosen affine representatives: these are the spectra of the coordinate-ring colimit maps.
+This states the canonical isomorphism with the inverse limit without assuming that limit
+exists beforehand. The order of the two factors is immaterial: `Over.pullback f` uses
+`V ×_S X` with its projection to `X`.
 
-Source: Weil conjectures blueprint, `sec-curve-estimates/sk-prop-h2`, lemma
-`lemma-weil-pbc-fibre-product-limit` (blueprint: lemma-weil-pbc-fibre-product-limit).
-Proof: `strictHenselization_properties` makes the strict henselization cone limiting;
-the structure map to `S` is a leg composed with the structure map of the neighbourhood.
-A compatible cone of maps `T ⟶ V ×_S X` gives a cone into the neighbourhoods, hence one map
-`T ⟶ S_(s)`, and maps to `X` that agree by cofilteredness; the fibre-product universal
-property gives the unique factorization.
--/
+Source: blueprint `sec-curve-estimates/sk-prop-h2`,
+(blueprint: lemma-weil-pbc-fibre-product-limit).
+
+Proof:
+1. The strict-henselization cone is limiting on the small affine representatives by
+   `lem-weil-pbc-spec-small-colimit-limit`. Transport through the affine spectrum
+   equivalence, and then along the initial affine inclusion
+   (`lemma-weil-pbc-affine-neighbourhood-cofinal` and
+   `lem-weil-pbc-colimit-initial-full-subcategory`), to get the full neighbourhood cone.
+   Its leg at `(S,s)` is the structure map `p`; all its legs are over `S`.
+2. A compatible cone to the fibre products gives a compatible cone to the neighbourhoods
+   and hence a unique map to the strict henselization. Its components to `X` agree:
+   cofilteredness (`lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`) supplies common
+   refinements. The component at `(S,s)` ensures that the two maps agree over `S`.
+3. The fibre-product universal property (`def-pc-fibre-product`) gives the unique map to
+   the vertex of the displayed cone. Equality of its two components proves uniqueness,
+   so this cone is limiting and gives the canonical comparison isomorphism. -/
 theorem fibre_product_neighbourhood_limit
-    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (s : Spec (.of Ω) ⟶ S) {X : Scheme.{u}} (f : X ⟶ S)
-    [QuasiCompact f] [QuasiSeparated f] :
-    ∃ c : Cone ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙
-        CategoryOfElements.π _ ⋙ Scheme.AffineEtale.Spec S ⋙ Scheme.Etale.forget S),
-      c.pt.left = Scheme.strictHenselizationScheme s ∧
-      (∀ k : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s),
-        HEq (c.π.app k).left ((Scheme.strictHenselizationCone s).π.app (op (op k)) ≫
-          Spec.map (Scheme.ΓSpecIso
+    {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
+    ∃ (p : Scheme.strictHenselizationScheme s ⟶ S)
+      (q : (Functor.const (Scheme.pointSmallEtale s).fiber.Elements).obj (Over.mk p) ⟶
+        CategoryOfElements.π (Scheme.pointSmallEtale s).fiber ⋙ Scheme.Etale.forget S),
+      (∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s),
+        (q.app ((Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
+          (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)).obj
             ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj
-              k).1.left.unop).inv)) ∧
-      Nonempty (IsLimit ((Over.pullback f ⋙ Over.forget X).mapCone c)) := by
+              j))).left =
+          (Scheme.strictHenselizationCone s).π.app (op (op j)) ≫
+            (Spec (unop
+              ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj
+                j).1.left)).isoSpec.inv) ∧
+      Nonempty (IsLimit ((Over.pullback f ⋙ Over.forget X).mapCone
+        { pt := Over.mk p, π := q })) := by
   sorry
 
 end AlgebraicGeometry
