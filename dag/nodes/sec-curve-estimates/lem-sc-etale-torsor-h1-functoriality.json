@@ -27,19 +27,94 @@
   "def-weil-pbc-inverse-image",
   "lem-weil-pbc-cohomology-pullback-functorial"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "For a G-torsor T, the canonical bijection of [lem-sc-torsor-h1] is represented by the short exact sequence $0\\to G\\to E_T\\to\\mathbf Z_X\\to0$ and sends [T] to the connecting image of 1. Pulling this sequence back along u and using [lem-sc-etale-torsor-inverse-image-extension] identifies the pulled-back extension with E_{u^{-1}T}, whose fibre over 1 is u^{-1}T.",
+   "uses": [
+    "lem-sc-torsor-h1",
+    "lem-sc-etale-torsor-inverse-image-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 03AJ, construction by the extension E_T and functoriality under inverse image"
+   }
+  },
+  {
+   "text": "By [lem-sc-etale-torsor-inverse-image-extension], $0\\to u^{-1}G\\to u^{-1}E_T\\to\\mathbf Z_Y\\to0$ is the inverse image of $0\\to G\\to E_T\\to\\mathbf Z_X\\to0$ and is the extension $E_{u^{-1}T}$. Clause 3 of [lem-weil-pbc-pullback-cohomology-long-exact-ladder] (the pullback maps $u^*$ commute with the connecting maps, $u^*\\circ\\delta^0_X=\\delta^0_Y\\circ u^*$) gives $u^*(\\delta_{E_T}(1))=\\delta_{E_{u^{-1}T}}(u^*1)$, and $u^*1=1$ in $H^0(Y_{\\mathrm{Et}},\\mathbf Z_Y)$ since in degree zero $u^*$ is pullback of global sections [lem-weil-pbc-cohomology-pullback-degree-zero]. By the representative description in [lem-sc-torsor-h1], $\\delta_{E_T}(1)=[T]$ and $\\delta_{E_{u^{-1}T}}(1)=[u^{-1}T]$, proving clause (1).",
+   "uses": [
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "lem-sc-torsor-h1",
+    "lem-sc-etale-torsor-inverse-image-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 03AJ, functoriality of the boundary class under inverse image"
+   }
+  },
+  {
+   "text": "For a morphism $\\varphi:G\\to G'$ on S, represent [T] by the extension E_T from [lem-sc-torsor-h1]. By [lem-sc-etale-torsor-pushout-extension], its pushout along $\\varphi$ is a short exact sequence with fibre T wedge^G G'.",
+   "uses": [
+    "lem-sc-torsor-h1",
+    "lem-sc-etale-torsor-pushout-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 03AJ, pushout of E_T along phi and identification of its fibre"
+   }
+  },
+  {
+   "text": "The canonical map $E_T\\to E_T\\wedge^GG'$ together with $\\varphi$ and $\\mathrm{id}_{\\mathbf Z_S}$ is a morphism from $0\\to G\\to E_T\\to\\mathbf Z_S\\to0$ to the pushout sequence of [lem-sc-etale-torsor-pushout-extension]. Etale cohomology $H^q(S_{\\mathrm{Et}},-)$ is the right derived functor of the left exact functor $\\Gamma(S,-)$ on $\\Ab(S_{\\mathrm{Et}})$ (which has enough injectives), so by [lem-weil-pbc-right-derived-universal-delta-functor] it is a $\\delta$-functor, whose connecting maps commute with morphisms of short exact sequences: $H^1(\\varphi)(\\delta_{E_T}(1))=\\delta_{E_T\\wedge^GG'}(\\mathrm{id}(1))=\\delta_{E_T\\wedge^GG'}(1)$, with $H^1(\\varphi)$ the map of [lem-weil-pbc-cohomology-pullback-functorial]. The representative description of [lem-sc-torsor-h1], applied to the $G'$-torsor $T\\wedge^GG'$ (the fibre over $1$ of the pushout sequence), therefore identifies $H^1(\\varphi)([T])$ with $[T\\wedge^GG']$, proving clause (2).",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-sc-torsor-h1",
+    "lem-sc-etale-torsor-pushout-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 03AJ, naturality of the boundary class under change of coefficients"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-torsor-h1",
+  "lem-sc-etale-torsor-inverse-image-extension",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-sc-etale-torsor-pushout-extension"
+ ],
  "mathlib_searches": [
   {
+   "tool": "leanfinder",
+   "query": "sheaf torsor H1 functoriality",
+   "results": "8 hits, including CategoryTheory.PresheafOfGroups.H1 and unrelated sheaf/cochain declarations; no torsor-classification functoriality theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "torsor extension pushout contracted product",
+   "results": "0 hits; Unknown identifier torsor",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
    "tool": "grep",
-   "query": "grep -rlE torsor Mathlib/**/*.lean | grep -iE 'cohom|sheaf|site' in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib",
-   "results": "no file: Mathlib has no torsor classification of sheaf H^1 (and no etale cohomology)",
-   "date": "2026-10-10",
+   "query": "sheaf torsor H1 functoriality",
+   "results": "0 hits",
+   "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "reviewer",
@@ -47,5 +122,53 @@
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-ext-invariance"
+ "unit": "sk-prop-ext-invariance",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03AJ and functoriality of the torsor extension"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-etale-torsor-h1-functoriality",
+  "worker": "stage1",
+  "summary": "Split the etale torsor-H1 functoriality into four proof steps using two strict supporting statements: inverse-image compatibility of the canonical torsor extension and pushout compatibility with contracted products. Verified that all non-elementary uses are cited and that the route follows Stacks Lemma 03AJ.",
+  "blueprint": "Realizes the ancestor's stated compatibility of the Kummer/Picard identifications with torsor classification under pullback and change of coefficients.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "The proof needs generic naturality of cohomology pullback under coefficient morphisms; no node in this unit supplies this categorical tool."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "generic compatibility of etale cohomology pullback with connecting maps (reviewer R-eth0015 repair)"
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "why": "generic: u^* in degree zero is pullback of global sections (reviewer R-eth0015 repair)"
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "generic: naturality of connecting maps of right derived functors under morphisms of short exact sequences (reviewer R-eth0015 repair)"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-right-derived-universal-delta-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eth0015",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-eth0015 (reviewer sub-agent of L); spot-checked: lem-sc-torsor-h1 bijection is via the extension E_T (Z[T] quotient), as the steps use; def-sc-gm-torsor covers general abelian G; contracted product defined in the item statement; citer lem-sc-h1-gm-pic-pullback step 3 uses (1) and (2) exactly as stated; not a duplicate of Zariski lem-sc-torsor-h1-functoriality (different site, pullback clause); new nodes are etale analogues of Zariski lem-sc-torsor-h1-ext-pushout / a real inverse-image lemma, kept. FIX more, RETURN less: (1) C1/C4 step 2 cited lem-weil-pbc-cohomology-pullback-functorial clause 3 (coefficient naturality) for u^* commuting with connecting maps; now cites lem-weil-pbc-pullback-cohomology-long-exact-ladder clause 3, plus lem-weil-pbc-cohomology-pullback-degree-zero for u^*1=1. (2) C1/C4 step 4 cited the same clause 3 for naturality of the connecting map under the morphism of SES (phi, E_T->pushout, id); now cites lem-weil-pbc-right-derived-universal-delta-functor (delta-functor naturality) with the morphism of sequences spelled out. Both missed by the Second reading by C1.; 1 file(s) fixed by the reviewer"
+ }
 }

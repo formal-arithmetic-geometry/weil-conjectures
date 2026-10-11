@@ -3075,3 +3075,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:16 L: merged deliver/F1/lem-pur-kinjective-degreewise-existence (reviewer FIX; after a return; new nodes: 7)
 - 00:16 UTC L: F1 kinjective-degreewise-existence FIX ccabf2a3f third push (R-kde0014; seven Tag 079P-area nodes restated in TeX, kappa >= aleph_0 added). Second reading missed the cofinality gap.
 - 00:16 L: merged deliver/M1/lem-pc-coherent-property-devissage (reviewer FIX; after a return; new nodes: 1)
+- 00:17 L: merged deliver/C1/lem-sc-etale-torsor-h1-functoriality (reviewer FIX; first push; new nodes: 2)
