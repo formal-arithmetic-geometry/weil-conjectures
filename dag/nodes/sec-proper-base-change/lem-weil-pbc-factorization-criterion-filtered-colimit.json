@@ -143,5 +143,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Four steps along 07C3 (2)=>(1): the small filtered category of finitely presented R-algebras over Lambda with colimit Lambda is the new unsplit node lem-weil-pbc-algebra-colimit-fp-algebras-over-it (0BUF, with the set of representatives made explicit so the category is small; Mathlib's general version in Presentable/Dense.lean needs an accessibility instance CommAlgCat R lacks); the full subcategory on members of E receives a morphism from every object by the hypothesis; cofinality (0BUC, 04E7) through the existing Mathlib leaf lem-weil-pbc-colimit-initial-full-subcategory in dual form; the colimit is moved along the canonical isomorphism. Tags corrected by the worker (0BUC/04E7, not 04E6/002R). ObjectProperty.ind_iff_exists recorded as the Mathlib analogue."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredColimitOfFactorization",
+  "declaration": "CommAlgCat.exists_filtered_colimit_of_factorization",
+  "file": "lean/Sheaf/RingTheory/FilteredColimitOfFactorization.lean",
+  "statement": "theorem exists_filtered_colimit_of_factorization (R : Type u) [CommRing R] (Λ : CommAlgCat.{max u v} R) (E : Set (CommAlgCat.{max u v} R)) (hfp : ∀ B ∈ E, Algebra.FinitePresentation R B) (hfactor : ∀ (A : CommAlgCat.{max u v} R), Algebra.FinitePresentation R A → ∀ (α : A ⟶ Λ), ∃ (B : CommAlgCat.{max u v} R), B ∈ E ∧ ∃ (β : A ⟶ B) (γ : B ⟶ Λ), β ≫ γ = α) : ∃ (J : Type (max u v)) (_ : SmallCategory J) (_ : IsFiltered J) (D : J ⥤ CommAlgCat.{max u v} R) (ι : D ⟶ (Functor.const J).obj Λ), (∀ j : J, D.obj j ∈ E) ∧ Nonempty (IsColimit (Cocone.mk Λ ι))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fcf1004"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcf1004",
+  "group": "J1",
+  "result": "fix",
+  "note": "R CommRing; Λ, E in CommAlgCat.{max u v} R; hfp FinitePresentation on E; hfactor ∀ fp A, α ∃ B∈E β γ, β≫γ=α; ∃ small (Type (max u v), fixed from +1) filtered J, D with D.obj j ∈ E, ι, IsColimit (Cocone.mk Λ ι)"
  }
 }

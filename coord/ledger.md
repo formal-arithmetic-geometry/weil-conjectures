@@ -4146,3 +4146,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:04 L: merged deliver/C1/lem-weil-pbc-etale-subsheaf-final-open (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleSubsheafFinalOpen AlgebraicGeometry.Scheme.existsUnique_open_of_etale_subsheaf_final)
 - 10:04 L: merged deliver/G1/lem-weil-pbc-etale-ring-map-conormal-criterion (stage 2; reviewer FIX; first push; Sheaf.RingTheory.EtaleRingMapConormalCriterion Algebra.etale_ring_map_conormal_criterion)
 - 10:04 L: merged deliver/M1/lem-weil-pbc-fibre-degree-base-change (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange AlgebraicGeometry.Scheme.Hom.finite_fiber_degree_pullback)
+- 10:05 L: merged deliver/J1/lem-weil-pbc-factorization-criterion-filtered-colimit (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FilteredColimitOfFactorization CommAlgCat.exists_filtered_colimit_of_factorization)
