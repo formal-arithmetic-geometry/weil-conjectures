@@ -93,5 +93,30 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tan (reviewer sub-agent of L); spot-checked: Source: Stacks varieties.tex section-tangent-spaces, Def 0B29 (definition-dual-numbers, l.2919), Lemma 0B2B (lemma-tangent-space, l.2947, pushout proof), Def 0B2C (definition-tangent-space, l.2988), Lemma 0B2F (lemma-map-tangent-spaces, l.3108). The item statement (unchanged in its mathematics) is the functor-of-points definition of 0B2C with S=Spec k: dotted arrows Spec kappa(x)[eps]->X over k restricting to the canonical point, with the operations of the proof of 0B2B and df of 0B2F; agrees hypothesis by hypothesis (kappa(y)=kappa(x) for df). No proof steps. Leaf def-sc-dual-numbers: DualNumber at Mathlib/Algebra/DualNumber.lean:46 and DualNumber.eps at :50 verified with sed; my loogle DualNumber.eps_mul_eps confirms eps^2=0. Small case: X=Spec k[t], x=origin: T = {t -> a eps} = k, sum t -> a eps1 + b eps2 -> (a+b) eps, scalar t -> lambda a eps; correct. FIX more, RETURN less: the definition asserted without a node that Spec kappa[eps1,eps2] is a pushout and the operations satisfy the vector-space axioms (0B2B) and that df is kappa-linear (0B2F) (C1); added statement-only nodes lem-sc-tangent-space-vector-space (self-contained: pushout, Theta over k, operations land in T, vector space with zero) and lem-sc-tangent-map-linear (f o theta in T_Y, linear), neither cites the item (no cycle), my leanfinder query found no Mathlib match (recorded); dag/nodes/sec-picard-framework/def-sc-scheme-tangent-space.json: statement: citations [def-sc-dual-numbers], [lem-sc-tangent-space-vector-space], [lem-sc-tangent-map-linear] added, stmt_deps extended accordingly; blueprint.from.place: restored to 'proof, third paragraph: ...' (the tangent-vector separation is in the third proof paragraph of lem-sc-degree-2g1-very-ample, not its statement, as the delivery wrote); dag/nodes/sec-picard-framework/def-sc-dual-numbers.json: mathlib_searches: my loogle record added. blueprint_refs search 'tangent vector space dual numbers': 0 matches. Times: start Sat Oct 10 04:52:07 PM UTC 2026, end Sat Oct 10 04:54:13 PM UTC 2026.; 4 file(s) fixed by the reviewer; 2 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeTangentSpace",
+  "declaration": "AlgebraicGeometry.schemeTangentSpace",
+  "declarations": [
+   "AlgebraicGeometry.schemeTangentSpace",
+   "AlgebraicGeometry.schemeTangentSpaceAddCommGroup",
+   "AlgebraicGeometry.schemeTangentSpaceModule",
+   "AlgebraicGeometry.schemeTangentMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeTangentSpace.lean",
+  "statement": "def schemeTangentSpace (k : Type u) [Field k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) (x : X) : Type u",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The two instances select the canonical structure from exists_tangentVectors_vectorSpace. schemeTangentMap selects the linear map with the postcomposition formula from exists_tangentMap_linear; its target scalar action is transported along the inverse induced residue-field isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dts1459",
+  "group": "C1",
+  "result": "pass",
+  "note": "schemeTangentSpace is definitionally the subtype T of landed exists_tangentVectors_vectorSpace (same c=Spec fstHom, q=Spec inlHom, fromSpecResidueField, over-k triangle); instances are literally the Classical.choose terms used by exists_tangentMap_linear (rfl checked; zero spec recovered on the named instance); schemeTangentMap = Classical.choose of exists_tangentMap_linear, kappa(x)-linear via Module.compHom e.symm; arbitrary point, no rationality; one definition, not the cotangent dual"
  }
 }
