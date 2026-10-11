@@ -269,5 +269,23 @@
   "worker": "stage1",
   "summary": "Checked Mathlib first (B8): Mathlib has IsRegularLocalRing/IsRegularRing (RegularLocalRing/Defs.lean, Polynomial.lean) and the smooth-algebra API separately, but no declaration giving regularity of a smooth algebra or of its localizations, so the item is not a leaf; searches recorded with LeanSearch, LeanFinder, Loogle, grep and local_search. Split following the source, Stacks 00TT final assertion: (1)=>(3) by the existing node smooth-over-field-dimension-differentials; base change to an algebraic closure K of kappa(q) and the K-rational maximal ideal m over q (steps reused from the sibling node differentials-dimension-bound-smooth-at-prime); dimension and differentials comparisons (00P4, 00OU, 00RV); regularity of (A_K)_m by 00TS (1)<=>(3) through 00TR, where 00TR's split exact sequence is obtained from the Jacobi-Zariski node and the square-zero-section retraction node (02HP in square-zero form, applied to R/n^2 -> kappa'), no Nullstellensatz being needed since kappa(m)=K by construction; then flat descent 00OF. No new nodes. Statement unchanged; stmt_deps unchanged."
  },
- "reviewed": "pass (L, 2026-10-10): 8 steps follow 00TT final assertion: fibre dimension of Omega = dim at q (00TT (1)=>(3) node), base change to an algebraic closure K of kappa(q) with a K-rational maximal ideal m over q, dimensions and differentials unchanged, the cotangent space n/n^2 identified with kappa' tensor Omega (00TR via Jacobi-Zariski and the square-zero retraction), regularity by the cotangent-dimension criterion, and flat descent of regularity along A_q -> (A_K)_m. No new nodes; avoids the cycle through regular-ring-smooth-ascent."
+ "reviewed": "pass (L, 2026-10-10): 8 steps follow 00TT final assertion: fibre dimension of Omega = dim at q (00TT (1)=>(3) node), base change to an algebraic closure K of kappa(q) with a K-rational maximal ideal m over q, dimensions and differentials unchanged, the cotangent space n/n^2 identified with kappa' tensor Omega (00TR via Jacobi-Zariski and the square-zero retraction), regularity by the cotangent-dimension criterion, and flat descent of regularity along A_q -> (A_K)_m. No new nodes; avoids the cycle through regular-ring-smooth-ascent.",
+ "lean": {
+  "module": "Sheaf.RingTheory.SmoothOverFieldRegularLocal",
+  "declaration": "Algebra.smooth_over_field_regular_local",
+  "statement": "theorem smooth_over_field_regular_local (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A] [Algebra.Smooth k A] (q : Ideal A) [q.IsPrime] : IsRegularLocalRing (Localization.AtPrime q)",
+  "by": "H1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/RingTheory/SmoothOverFieldRegularLocal.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
