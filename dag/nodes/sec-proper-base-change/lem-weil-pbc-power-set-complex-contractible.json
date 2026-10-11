@@ -167,5 +167,24 @@
   "by": "L",
   "result": "pass",
   "note": "four steps (the sign cancellation, the empty case, the homotopy identities on basis elements, exactness by the new leaf (Homotopy.lean:894 with HomologicalComplex.lean:356/390/670, ZeroMorphisms.lean:172, verified)); 1 new Mathlib leaf; the Mathlib route through the Cech nerve, its extra degeneracy and the alternating face map complex recorded on the node as the stage-2 route, not a leaf"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PowerSetComplexContractible",
+  "declaration": "Algebra.powerSetComplex_contractible",
+  "file": "lean/Sheaf/Paper/PowerSetComplexContractible.lean",
+  "statement": "theorem powerSetComplex_contractible : (∀ p : ℕ, (powerSetComplexDifferential A S p).comp (powerSetComplexDifferential A S (p + 1)) = 0) ∧ (powerSetComplexAugmentation A S).comp (powerSetComplexDifferential A S 0) = 0 ∧ (IsEmpty S → ∀ p : ℕ, Subsingleton (powerSetComplexObject A S p)) ∧ (Nonempty S → (∀ p : ℕ, LinearMap.range (powerSetComplexDifferential A S (p + 1)) = LinearMap.ker (powerSetComplexDifferential A S p)) ∧ LinearMap.range (powerSetComplexDifferential A S 0) = LinearMap.ker (powerSetComplexAugmentation A S) ∧ LinearMap.range (powerSetComplexAugmentation A S) = ⊤) ∧ (∀ s : S, (powerSetComplexAugmentation A S).comp (powerSetComplexAugmentationHomotopy A S s) = LinearMap.id ∧ (powerSetComplexDifferential A S 0).comp (powerSetComplexHomotopy A S s 0) + (powerSetComplexAugmentationHomotopy A S s).comp (powerSetComplexAugmentation A S) = LinearMap.id ∧ ∀ p : ℕ, (powerSetComplexDifferential A S (p + 1)).comp (powerSetComplexHomotopy A S s (p + 1)) + (powerSetComplexHomotopy A S s p).comp (powerSetComplexDifferential A S p) = LinearMap.id)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-psc1333"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psc1333",
+  "group": "J1",
+  "result": "fix",
+  "note": "A ring (left modules, Finsupp), S any type (independent universe), C_p=(Fin (p+1)→S)→₀A, d via Fin.succAbove with (-1)^j, ε=[s]↦1; dd=0, εd=0; empty S ⇒ C_p subsingleton; nonempty ⇒ exact at C_{p+1}, C_0 and A (ε surjective, added); contracting homotopy h=Fin.cons s, 1↦[s] identities (added); no landed tuple complex in lean/Sheaf (FreeCechComplexExact uses Mathlib cech, different object)"
  }
 }

@@ -4712,3 +4712,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:07 L: merged deliver/E1/lem-pc-pseudo-coherent-summand (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PseudoCoherentSummand AlgebraicGeometry.Scheme.pseudoCoherent_of_isIso_biproduct)
 - 13:08 L: merged deliver/H1/lem-pc-derived-module-free-generation (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.DerivedModuleFreeGeneration CategoryTheory.derivedModuleFreeGeneration; statement corrected (2 citers))
 - 13:08 L: merged deliver/J1/lem-weil-pbc-proj-standard-open-inclusion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProjStandardOpenProperties AlgebraicGeometry.Proj.standardOpenProperties)
+- 13:08 L: merged deliver/J1/lem-weil-pbc-power-set-complex-contractible (stage 2; reviewer FIX; first push; Sheaf.Paper.PowerSetComplexContractible Algebra.powerSetComplex_contractible)
