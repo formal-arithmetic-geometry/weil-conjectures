@@ -473,6 +473,7 @@ theorem mem_range_stalkMap_genericPoint_of_functionField [IsIntegral X] (t : X.f
     exact ⟨s, by simp⟩
   exact hr ▸ key _ Scheme.fromSpecStalk_closedPoint s _
 
+omit [IsProper (X ↘ Spec (.of k))] in
 /-- **Separating functions give generically unramified morphisms.** Let `X` be a proper smooth
 integral curve over `k`, `t ∈ k(X)` with `dt ≠ 0` in `Ω[k(X)⁄k]`, and `π_t : X ⟶ ℙ¹_k` the
 morphism with `π_t^* (x₁ / x₀) = t`. Then the stalk map of `π_t` at the generic point, the field
@@ -528,7 +529,8 @@ theorem exists_isFinite_flat_hom_projectiveLine :
     isClosed_singleton.preimage ConnectedComponents.continuous_coe
   have key (c) : ∃ g : (U c).toScheme ⟶ ProjectiveLine (Spec (.of k)),
       g ≫ ProjectiveLine (Spec (.of k)) ↘ Spec (.of k) = (U c).ι ≫ X ↘ Spec (.of k) ∧
-        IsFinite g ∧ Flat g := by
+        IsFinite g ∧ Flat g ∧ ∀ y : (U c).toScheme, IsField ((U c).toScheme.presheaf.stalk y) →
+          (g.stalkMap y).hom.FormallyUnramified := by
     let : (U c).toScheme.Over (Spec (.of k)) := ⟨(U c).ι ≫ X ↘ Spec (.of k)⟩
     have : SmoothOfRelativeDimension 1 ((U c).toScheme ↘ Spec (.of k)) := by
       exact inferInstanceAs (SmoothOfRelativeDimension (0 + 1) ((U c).ι ≫ X ↘ Spec (.of k)))
@@ -553,13 +555,29 @@ theorem exists_isFinite_flat_hom_projectiveLine :
     have : IsIntegral (U c).toScheme := isIntegral_of_irreducibleSpace_of_isReduced _
     obtain ⟨x, -, hx⟩ := isClosed_univ.exists_closed_singleton (X := (U c).toScheme)
       Set.univ_nonempty
-    obtain ⟨t, ht⟩ := exists_transcendental_functionField (k := k) x (by
+    obtain ⟨s, hs⟩ := exists_transcendental_functionField (k := k) x (by
       rw [ringKrullDim_stalk_eq_one_of_isClosed ((U c).toScheme ↘ Spec (.of k)) hx]
       exact one_ne_zero)
+    -- choose a separating `t`, i.e. with `dt ≠ 0`
+    let := (functionFieldRingHom k (U c).toScheme).toAlgebra
+    let := (((U c).toScheme ↘ Spec (.of k)).appTop ≫
+      (U c).toScheme.presheaf.germ ⊤ (genericPoint (U c).toScheme) trivial).hom.toAlgebra
+    obtain ⟨t, ht, hDt⟩ := exists_transcendental_and_D_ne_zero (k := k)
+      (finrank_kaehlerDifferential_functionField ((U c).toScheme ↘ Spec (.of k))) hs
     obtain ⟨π, hπ, hπ'⟩ := exists_hom_projectiveLine_of_functionField t ht
     obtain ⟨h₁, -, h₂, -⟩ := isFinite_flat_of_hom_projectiveLine_of_functionField t ht π hπ'
-    exact ⟨π, hπ.comp_over, h₁, h₂⟩
-  choose g hg hfin hflat using key
+    have hunr := formallyUnramified_stalkMap_genericPoint_of_functionField t hDt π hπ'
+    have hdim : topologicalKrullDim (U c).toScheme ≤ 1 := by
+      exact_mod_cast topologicalKrullDim_le_of_smoothOfRelativeDimension
+        ((U c).toScheme ↘ Spec (.of k)) 1
+    refine ⟨π, hπ.comp_over, h₁, h₂, fun y hy ↦ ?_⟩
+    obtain rfl : y = genericPoint (U c).toScheme := eq_genericPoint_of_not_isClosed hdim
+      fun hyc ↦ by
+        have := ringKrullDim_stalk_eq_one_of_isClosed ((U c).toScheme ↘ Spec (.of k)) hyc
+        rw [ringKrullDim_eq_zero_of_isField hy] at this
+        exact zero_ne_one this
+    exact hunr
+  choose g hg hfin hflat hunr using key
   let 𝒰 : X.OpenCover := X.openCoverOfIsOpenCover U <| eq_top_iff.2 fun x _ ↦
     TopologicalSpace.Opens.mem_iSup.2 ⟨ConnectedComponents.mk x, rfl⟩
   have hcompat (c d) : pullback.fst (𝒰.f c) (𝒰.f d) ≫ g c = pullback.snd _ _ ≫ g d := by
@@ -598,8 +616,25 @@ theorem exists_isFinite_flat_hom_projectiveLine :
   have : IsFinite f := IsFinite.of_isProper_of_locallyQuasiFinite f
   have : IsLocallyNoetherian (ProjectiveLine (Spec (.of k))) :=
     LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k))
-  exact ⟨f, ⟨hover⟩, inferInstance, inferInstance,
-    LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance, sorry⟩
+  refine ⟨f, ⟨hover⟩, inferInstance, inferInstance,
+    LocallyOfFinitePresentation.iff_locallyOfFiniteType.2 inferInstance, fun x hx ↦ ?_⟩
+  -- the stalk map of `f` at `x` is that of `g c` on the component `U c` of `x`
+  let c := ConnectedComponents.mk x
+  let y : U c := ⟨x, rfl⟩
+  let e := asIso ((U c).ι.stalkMap y)
+  have hy : IsField ((U c).toScheme.presheaf.stalk y) :=
+    MulEquiv.isField hx e.symm.commRingCatIsoToRingEquiv.toMulEquiv
+  have h₁ : ∀ φ : (U c).toScheme ⟶ ProjectiveLine (Spec (.of k)), φ = g c →
+      (φ.stalkMap y).hom.FormallyUnramified := by
+    rintro _ rfl
+    exact hunr c y hy
+  have h₂ := h₁ _ (hf c)
+  rw [Scheme.Hom.stalkMap_comp] at h₂
+  have h₃ : f.stalkMap x = (f.stalkMap ((U c).ι y) ≫ (U c).ι.stalkMap y) ≫ e.inv := by
+    simp [e]
+    rfl
+  rw [h₃, CommRingCat.hom_comp]
+  exact .comp h₂ (.of_surjective (ConcreteCategory.bijective_of_isIso e.inv).2)
 
 
 end ProjectiveLine
