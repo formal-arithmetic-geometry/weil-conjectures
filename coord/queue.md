@@ -1,11 +1,11 @@
 # Work queue
 
-59 items; claim with `tools/claim.py next <group> [--stage N]`.
+57 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (59)
+## Stage 2: nodes to state (57)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -32,9 +32,7 @@
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
 | `lem-pc-rf-base-change-complex` | 1 | state | 0 |
 | `lem-pc-rf-base-change-single-complex-criterion` | 1 | state | 0 |
-| `lem-pc-rf-perfect-base-change` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-affine-base-change` | 1 | state | 0 |
-| `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
 | `lem-sc-affine-derived-pushforward-t-exact` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
