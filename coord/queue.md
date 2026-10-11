@@ -1,8 +1,8 @@
 # Work queue
 
-869 items; claim with `tools/claim.py next <group> [--stage N]`.
+868 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (24)
+## Stage 1: nodes to split (22)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -22,16 +22,14 @@
 | `lem-sc-qcoh-cech-total-tensor-iso` | 6015 | none |
 | `lem-sc-pseudo-coherent-lift-stably-free-complex` | 6016 | none |
 | `lem-sc-valuation-limit-affine-pushforward-colimit` | 6016 | none |
-| `lem-pc-derived-splitting-unique` | 6017 | none |
 | `lem-pc-finite-free-map-residue-localization` | 6018 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-pur-derived-functor-inverts-05sb` | - | none |
 | `lem-pur-derived-functor-morphisms-05sa` | - | none |
 | `lem-pur-derived-functor-shift-05su` | - | none |
 | `lem-pur-derived-functor-triangles-05sc` | - | none |
 
-## Stage 2: nodes to state (845)
+## Stage 2: nodes to state (846)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -147,6 +145,7 @@
 | `lem-pc-derived-limit-roos-abelian-groups` | 1 | state |
 | `lem-pc-derived-lower-truncation-step-ses` | 1 | state |
 | `lem-pc-derived-module-direct-sums` | 1 | state |
+| `lem-pc-derived-splitting-unique` | 1 | state |
 | `lem-pc-derived-total-resolution-quasi-iso` | 1 | state |
 | `lem-pc-field-extension-fpqc-cover` | 1 | state |
 | `lem-pc-finite-affine-fibre-sections` | 1 | state |
@@ -881,7 +880,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1761 nodes that wait for a statement dependency, 65 nodes that wait for stage 1.
+Not open yet: 1762 nodes that wait for a statement dependency, 63 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
