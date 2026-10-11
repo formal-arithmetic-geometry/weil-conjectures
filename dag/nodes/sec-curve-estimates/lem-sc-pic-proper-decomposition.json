@@ -147,5 +147,25 @@
    "note": "states the node (Pic = Z x ker deg, degree first) but rests on sorry on 71d63dcf through picDegreeHom._proof_2 (subsingleton_H_of_topologicalKrullDim_lt, finite_sections_higherDirectImage, exists_addEquiv_sections_higherDirectImage_H) (L, 2026-10-10)"
   }
  ],
- "reviewed": "2026-10-10 L: 2 steps (a closed point of residue field k gives a section of the degree; exactness and the explicit splitting); 0 new nodes; the exact Lean statement rests on sorry through the cohomological degree, recorded as a candidate"
+ "reviewed": "2026-10-10 L: 2 steps (a closed point of residue field k gives a section of the degree; exactness and the explicit splitting); 0 new nodes; the exact Lean statement rests on sorry through the cohomological degree, recorded as a candidate",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.PicardDecomposition",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_mulEquiv_prod_picZero",
+  "statement": "theorem Scheme.Hom.exists_mulEquiv_prod_picZero {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsProper f] : ∃ (P0 : Subgroup C.Pic) (_ : (P0 : Set C.Pic) = f.picZero) (e : C.Pic ≃* Multiplicative ℤ × P0), (∀ L, (e L).1 = Multiplicative.ofAdd (f.picDegree L)) ∧ ∀ y : P0, e y = (1, y)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Reviewer R-ppd1203 fix: the source theorem exists_mulEquiv_prod_ker_picDegreeHom is not the node (Nonempty + SmoothOfRelativeDimension 1 instead of a smooth connected curve; Pic0 as ker picDegreeHom instead of the recorded picZero; no compatibility with the inclusion of Pic0). New statement with IsConnectedCurve f, Smooth f, IsProper f, the recorded picZero and picDegree, and both splitting compatibilities.",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicardDecomposition.lean",
+  "fixed_by": "R-ppd1203"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppd1203",
+  "group": "G1",
+  "result": "fix",
+  "note": "k alg closed=IsAlgClosed; proper smooth connected curve=IsConnectedCurve f, Smooth f, IsProper f (as K1 genus-invariant); Pic=C.Pic; Pic0=subgroup with carrier recorded f.picZero; deg=f.picDegree; split: e first component deg, e restricts to id on Pic0"
+ }
 }
