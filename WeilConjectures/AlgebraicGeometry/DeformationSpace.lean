@@ -37,9 +37,9 @@ between them come from pushout squares of algebras through
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.affineLine`: the relative affine line `Spec_X 𝒪_X[t]`.
+- `AlgebraicGeometry.Scheme.polynomialSpec`: the relative affine line `Spec_X 𝒪_X[t]`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.deformationSpace`: the deformation space `D_I X`,
-  with its morphism `deformationSpaceToAffineLine` to the relative affine line.
+  with its morphism `deformationSpaceToPolynomialSpec` to the relative affine line.
 - `AlgebraicGeometry.Scheme.IdealSheafData.normalCone`: the normal cone `N_I X`.
 -/
 
@@ -193,19 +193,19 @@ lemma coequifibered_toLaurentPresheaf : X.toLaurentPresheaf.Coequifibered :=
   CommRingCat.coequifibered_laurentC.whiskerLeft _
 
 /-- The relative affine line `𝔸¹_X = Spec_X 𝒪_X[t]`. -/
-noncomputable abbrev affineLine : Scheme.{u} :=
+noncomputable abbrev polynomialSpec : Scheme.{u} :=
   (relativeGluingData X.coequifibered_toPolynomialPresheaf).glued
 
 /-- The projection `𝔸¹_X ⟶ X`. -/
-noncomputable abbrev affineLineProj : X.affineLine ⟶ X :=
+noncomputable abbrev polynomialSpecProj : X.polynomialSpec ⟶ X :=
   (relativeGluingData X.coequifibered_toPolynomialPresheaf).toBase
 
 /-- The punctured relative affine line `𝔾_{m,X} = Spec_X 𝒪_X[t, t⁻¹]`. -/
-noncomputable abbrev punctured : Scheme.{u} :=
+noncomputable abbrev laurentSpec : Scheme.{u} :=
   (relativeGluingData X.coequifibered_toLaurentPresheaf).glued
 
 /-- The inclusion `𝔾_{m,X} ⟶ 𝔸¹_X`. -/
-noncomputable def puncturedToAffineLine : X.punctured ⟶ X.affineLine :=
+noncomputable def laurentSpecToPolynomialSpec : X.laurentSpec ⟶ X.polynomialSpec :=
   relativeGluingMap _ _ (X.affineStructurePresheaf.whiskerLeft CommRingCat.polynomialToLaurent)
 
 /-- The zero section of `𝔸¹_X` as a quasi-coherent algebra: `𝒪_X[t] / t`. -/
@@ -286,7 +286,7 @@ lemma toPolynomialPresheaf_comp_polynomialToRees :
   exact Ideal.toExtendedReesAlgebra_C x
 
 /-- The morphism `g̃ : D_I X ⟶ 𝔸¹_X` given by the coordinate `t`. -/
-noncomputable def deformationSpaceToAffineLine : I.deformationSpace ⟶ X.affineLine :=
+noncomputable def deformationSpaceToPolynomialSpec : I.deformationSpace ⟶ X.polynomialSpec :=
   relativeGluingMap _ _ I.polynomialToRees
 
 /-- The inclusion `𝒪_X[t, I t⁻¹] ⟶ 𝒪_X[t, t⁻¹]`. -/
@@ -303,7 +303,7 @@ lemma polynomialToRees_comp_reesToLaurent :
 
 /-- The trivialisation of the deformation space over the punctured line:
 `𝔾_{m,X} ⟶ D_I X`. -/
-noncomputable def puncturedToDeformationSpace : X.punctured ⟶ I.deformationSpace :=
+noncomputable def laurentSpecToDeformationSpace : X.laurentSpec ⟶ I.deformationSpace :=
   relativeGluingMap _ _ I.reesToLaurent
 
 /-- The ideal `(t)` of the extended Rees algebra. -/
@@ -378,7 +378,7 @@ lemma coequifibered_toQuotientPolynomialAlgebra : I.toQuotientPolynomialAlgebra.
     (CommRingCat.coequifibered_polynomialC.whiskerLeft _)
 
 /-- The relative affine line `𝔸¹_{V(I)} = Spec_X (𝒪_X / I)[t]`. -/
-noncomputable abbrev quotientAffineLine : Scheme.{u} :=
+noncomputable abbrev quotientPolynomialSpec : Scheme.{u} :=
   (relativeGluingData I.coequifibered_toQuotientPolynomialAlgebra).glued
 
 /-- The map `𝒪_X[t, I t⁻¹] ⟶ (𝒪_X / I)[t]`, `t ↦ t`, `x t⁻¹ ↦ 0` for `x ∈ I`. -/
@@ -433,9 +433,9 @@ lemma toReesPresheaf_comp_reesToLaurent : I.toReesPresheaf ≫ I.reesToLaurent =
 /-- **The punctured trivialisation.** Over the punctured line `𝔾_{m,X} ⊆ 𝔸¹_X` the deformation
 space is trivial: `D_I X ×_{𝔸¹_X} 𝔾_{m,X} = 𝔾_{m,X}`, since inverting `t` in `𝒪_X[t, I t⁻¹]` gives
 `𝒪_X[t, t⁻¹]`. -/
-theorem isPullback_puncturedToDeformationSpace :
-    IsPullback I.puncturedToDeformationSpace (𝟙 X.punctured) I.deformationSpaceToAffineLine
-      X.puncturedToAffineLine := by
+theorem isPullback_laurentSpecToDeformationSpace :
+    IsPullback I.laurentSpecToDeformationSpace (𝟙 X.laurentSpec) I.deformationSpaceToPolynomialSpec
+      X.laurentSpecToPolynomialSpec := by
   have := isPullback_relativeGluingMap X.coequifibered_toPolynomialPresheaf
     I.coequifibered_toReesPresheaf X.coequifibered_toLaurentPresheaf
     X.coequifibered_toLaurentPresheaf I.polynomialToRees
@@ -463,23 +463,23 @@ lemma isPushout_polynomialToRees_toQuotientPresheaf (U : X.AffineZariskiSiteᵒ�
   · ext x; rfl
 
 /-- The zero section `t = 0` of `𝔸¹_X`, as the relative spectrum of `𝒪_X[t] / t`. -/
-noncomputable abbrev _root_.AlgebraicGeometry.Scheme.affineLineZero : Scheme.{u} :=
+noncomputable abbrev _root_.AlgebraicGeometry.Scheme.polynomialZeroSpec : Scheme.{u} :=
   (relativeGluingData X.coequifibered_toPolynomialZeroPresheaf).glued
 
 /-- The inclusion of the zero section `Spec_X (𝒪_X[t] / t) ⟶ 𝔸¹_X`. -/
-noncomputable def _root_.AlgebraicGeometry.Scheme.affineLineZeroToAffineLine :
-    X.affineLineZero ⟶ X.affineLine :=
+noncomputable def _root_.AlgebraicGeometry.Scheme.polynomialZeroSpecToPolynomialSpec :
+    X.polynomialZeroSpec ⟶ X.polynomialSpec :=
   relativeGluingMap _ _ (toQuotientPresheaf _ _)
 
 /-- The projection of the normal cone to the zero section of `𝔸¹_X`. -/
-noncomputable def normalConeToAffineLineZero : I.normalCone ⟶ X.affineLineZero :=
+noncomputable def normalConeToPolynomialZeroSpec : I.normalCone ⟶ X.polynomialZeroSpec :=
   relativeGluingMap _ _ I.polynomialZeroToNormalCone
 
 /-- **The fibre over `t = 0`.** The normal cone is the fibre of the deformation space over the
 zero section of `𝔸¹_X`: `𝒪_X[t, I t⁻¹] ⊗_{𝒪_X[t]} 𝒪_X[t]/t = 𝒪_X[t, I t⁻¹] / t`. -/
 theorem isPullback_normalConeToDeformationSpace :
-    IsPullback I.normalConeToDeformationSpace I.normalConeToAffineLineZero
-      I.deformationSpaceToAffineLine X.affineLineZeroToAffineLine :=
+    IsPullback I.normalConeToDeformationSpace I.normalConeToPolynomialZeroSpec
+      I.deformationSpaceToPolynomialSpec X.polynomialZeroSpecToPolynomialSpec :=
   isPullback_relativeGluingMap X.coequifibered_toPolynomialPresheaf
     I.coequifibered_toReesPresheaf X.coequifibered_toPolynomialZeroPresheaf
     I.coequifibered_toNormalConePresheaf I.polynomialToRees _ _ I.polynomialZeroToNormalCone
@@ -534,5 +534,62 @@ lemma isIso_homOfVector_specPolynomial (R : Type u) [CommRing R] :
       simp [e]
   rw [this]
   infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The chart `Spec Γ(X, U)[t] ⟶ 𝔸¹_X` of the affine line over an affine open `U`, given by
+the coordinate `t`. -/
+noncomputable def polynomialSpecChart (U : X.AffineZariskiSite) :
+    (relativeGluingData X.coequifibered_toPolynomialPresheaf).functor.obj U ⟶
+      𝔸(ULift.{u} (Fin 1); X) :=
+  AffineSpace.homOfVector
+    ((relativeGluingData X.coequifibered_toPolynomialPresheaf).natTrans.app U ≫ U.1.ι)
+    fun _ ↦ (ΓSpecIso (X.polynomialPresheaf.obj (.op U))).inv Polynomial.X
+
+set_option backward.isDefEq.respectTransparency false in
+lemma natTrans_app_comp_ι (U : X.AffineZariskiSite) :
+    (relativeGluingData X.coequifibered_toPolynomialPresheaf).natTrans.app U ≫ U.1.ι =
+      Spec.map (X.toPolynomialPresheaf.app (.op U)) ≫ U.2.fromSpec := by
+  simp [relativeGluingData, IsAffineOpen.isoSpec_inv_ι]
+
+set_option backward.isDefEq.respectTransparency false in
+lemma map_comp_polynomialSpecChart {U V : X.AffineZariskiSite} (i : U ⟶ V) :
+    (relativeGluingData X.coequifibered_toPolynomialPresheaf).functor.map i ≫
+      X.polynomialSpecChart V = X.polynomialSpecChart U := by
+  rw [polynomialSpecChart, polynomialSpecChart, AffineSpace.comp_homOfVector]
+  congr 1
+  · rw [natTrans_app_comp_ι, natTrans_app_comp_ι]
+    change Spec.map (X.polynomialPresheaf.map i.op) ≫ Spec.map (X.toPolynomialPresheaf.app (.op V)) ≫
+      V.2.fromSpec = _
+    rw [← Spec.map_comp_assoc, ← X.toPolynomialPresheaf.naturality, Spec.map_comp_assoc]
+    exact congrArg (Spec.map (X.toPolynomialPresheaf.app (.op U)) ≫ ·)
+      (V.2.map_fromSpec U.2 ((toOpensFunctor X).map i).op)
+  · ext
+    change (Spec.map (X.polynomialPresheaf.map i.op)).appTop _ = _
+    rw [← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
+    congr 1
+    exact Polynomial.map_X _
+
+/-- The identification `Spec_X 𝒪_X[t] ⟶ 𝔸¹_X`, glued from the charts
+`AlgebraicGeometry.Scheme.polynomialSpecChart`. -/
+noncomputable def polynomialSpecToAffineSpace : X.polynomialSpec ⟶ 𝔸(ULift.{u} (Fin 1); X) :=
+  colimit.desc _
+    { pt := _
+      ι := { app U := X.polynomialSpecChart U
+             naturality U V i := by
+              refine (X.map_comp_polynomialSpecChart i).trans ?_
+              exact (Category.comp_id _).symm } }
+
+@[reassoc (attr := simp)]
+lemma ι_polynomialSpecToAffineSpace (U : X.AffineZariskiSite) :
+    colimit.ι (relativeGluingData X.coequifibered_toPolynomialPresheaf).functor U ≫
+      X.polynomialSpecToAffineSpace = X.polynomialSpecChart U :=
+  colimit.ι_desc _ _
+
+@[reassoc (attr := simp)]
+lemma polynomialSpecToAffineSpace_over :
+    X.polynomialSpecToAffineSpace ≫ 𝔸(ULift.{u} (Fin 1); X) ↘ X = X.polynomialSpecProj := by
+  refine colimit.hom_ext fun U ↦ ?_
+  rw [ι_polynomialSpecToAffineSpace_assoc, polynomialSpecChart, AffineSpace.homOfVector_over,
+    natTrans_app_comp_ι, ι_toBase]
 
 end AlgebraicGeometry.Scheme
