@@ -1,0 +1,120 @@
+{
+ "id": "def-weil-pbc-coherent-thickening-system",
+ "kind": "definition",
+ "title": "Coherent systems on a tower of thickenings",
+ "status": "split",
+ "statement": "Let $(T_n)_{n\\ge0}$ be schemes [def-pc-scheme] and $i_n:T_n\\to T_{n+1}$ morphisms. Define $\\mathrm{Sys}(T_\\bullet,i_\\bullet)$ to have objects families of coherent $\\mathcal O_{T_n}$-modules $\\mathcal F_n$ [pqf-def-coherent] [def-weil-sheaf-of-modules-category] with isomorphisms $\\varphi_n:i_n^*\\mathcal F_{n+1}\\cong\\mathcal F_n$ [def-pc-module-pullback]. A morphism from $(\\mathcal F_n,\\varphi_n)$ to $(\\mathcal G_n,\\varphi_n\\prime)$ is a family $u_n:\\mathcal F_n\\to\\mathcal G_n$ satisfying $\\varphi_n\\prime\\circ i_n^*u_{n+1}=u_n\\circ\\varphi_n$. Identities and composition are componentwise. Evaluation at $n$ sends a system to $\\mathcal F_n$ and a morphism to $u_n$. In Remark 088F take $T_n=X\\times_{\\operatorname{Spec} A}\\operatorname{Spec}(A/I^{n+1})$ and the canonical transition maps [def-pc-base-change].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-pc-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Remark 088F (remark-reformulate-existence-theorem), systems and their compatible morphisms; indices shifted by one"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ThickeningSystem|thickening.*system|FormalModule",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible systems of coherent sheaves on infinitesimal thickenings equivalent to coherent formal modules",
+   "results": "OK 8 hits: SheafOfModules.QuasicoherentData.I, AlgebraicGeometry.Scheme.Modules.isSheaf, SheafOfModules.QuasicoherentData, AlgebraicGeometry.Scheme.Modules.instCategory, SheafOfModules.IsQuasicoherent, SheafOfModules.isQuasicoherent, SheafOfModules.forgetToSheafModuleCat, AlgebraicGeometry.Scheme.Modules.instAbelian",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of compatible coherent modules with pullback transition isomorphisms on an increasing tower of schemes",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable; no match verdict made"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'thickening.*system|ThickeningSystem|adicThickening|adicExtendedIdeal' Mathlib WeilConjectures lean/Sheaf dag/lean_names_upstream.json; blueprint_refs.py search 'pullback transition isomorphisms'; DAG search for category of systems",
+   "results": "No declarations; 0 blueprint nodes; only the assigned dictionary node introduces this category. CoherentFormalModule defines systems on a fixed scheme, a different category.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-thickening-systems-dictionary",
+  "date": "2026-10-11",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "The coherent systems on the thickenings in clause (2) of the dictionary used in the Grothendieck-existence translation.",
+   "via": [
+    "lem-weil-pbc-thickening-systems-dictionary",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentThickeningSystem",
+  "declaration": "AlgebraicGeometry.CoherentThickeningSystem",
+  "declarations": [
+   "AlgebraicGeometry.CoherentThickeningSystem",
+   "AlgebraicGeometry.CoherentThickeningSystem.Hom",
+   "AlgebraicGeometry.CoherentThickeningSystem.id_compatibility",
+   "AlgebraicGeometry.CoherentThickeningSystem.comp_compatibility",
+   "AlgebraicGeometry.CoherentThickeningSystem.identity",
+   "AlgebraicGeometry.CoherentThickeningSystem.composition",
+   "AlgebraicGeometry.CoherentThickeningSystem.category_laws",
+   "AlgebraicGeometry.CoherentThickeningSystem.category",
+   "AlgebraicGeometry.CoherentThickeningSystem.evaluation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentThickeningSystem.lean",
+  "statement": "structure CoherentThickeningSystem (T : ℕ → Scheme.{u}) (i : ∀ n, T n ⟶ T (n + 1))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tsd",
+  "group": "C1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tsd",
+  "group": "C1",
+  "result": "fix",
+  "note": "Sys = new CoherentThickeningSystem (real data; Q1 grothendieck_existence is unbundled, no landed system category; CoherentFormalModule is the target); Φ existential pinned by β, transition and unit equations; I O_X = (ofIdealTop (I.map ΓSpecIso.inv)).comap f as landed F1 qbc; support predicate = CohSupportProper's; abbrevs inlined"
+ }
+}
