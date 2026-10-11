@@ -99,6 +99,7 @@ STARTER = re.compile(r"^(?:[A-Za-z_@#«]|/-)", re.M)
 NOT_STARTER = re.compile(r"^(?:where|deriving|with|termination_by|decreasing_by)\b")
 OPEN = re.compile(r"^[ \t]*open[ \t]+([^\n]*)", re.M)
 THEOREM_KW = ("theorem", "lemma")
+LET_KW = re.compile(r"(?:letI|let|haveI|have|suffices|obtain)(?![\w'])")
 
 
 def normalize(s: str) -> str:
@@ -127,8 +128,11 @@ def declarations(text: str) -> list[dict]:
         kw_pos = x.start("kw")
         line_start = m.rfind("\n", 0, kw_pos) + 1
         end = next((s for s in starts if s > kw_pos and s > line_start), len(m))
-        # the signature: up to `:=`, `where` or `|` at bracket depth 0
+        # the signature: up to `:=`, `where` or `|` at bracket depth 0. A `let`-style binder (letI, let, haveI, have,
+        # suffices, obtain) at depth 0 after the main colon owns the next `:=` at depth 0, unless a `;` or a line
+        # indented no deeper than its keyword comes first: `theorem foo : letI := 3; x = x := by sorry`.
         depth, k, sig_end = 0, x.end(), None
+        colon, let_col = False, None
         while k < end:
             c = m[k]
             if c in "([{⦃⟨":
@@ -136,6 +140,19 @@ def declarations(text: str) -> list[dict]:
             elif c in ")]}⦄⟩":
                 depth -= 1
             elif depth == 0:
+                if let_col is not None and (c == ";" or (c == "\n" and len(m[k + 1:].split("\n", 1)[0]) -
+                                                        len(m[k + 1:].split("\n", 1)[0].lstrip(" \t")) <= let_col)):
+                    let_col = None
+                if c == ":" and not m.startswith(":=", k):
+                    colon = True
+                if colon and c in "lho" and not (m[k - 1].isalnum() or m[k - 1] in "_.'"):
+                    w = LET_KW.match(m, k)
+                    if w:
+                        let_col = k - (m.rfind("\n", 0, k) + 1)
+                        k = w.end(); continue
+                if m.startswith(":=", k) and let_col is not None:
+                    let_col = None
+                    k += 2; continue
                 if m.startswith(":=", k) or (c == "|" and m[k - 1] in " \n\t"):
                     sig_end = k; break
                 if m.startswith("where", k) and not (m[k - 1].isalnum() or m[k - 1] in "_.'") and \
