@@ -54,19 +54,20 @@ lemma leftDerivedUpperStarCompactificationIso_eq {X Y : Scheme.{u}} {f : X ⟶ Y
   leftDerivedUpperStarComp_symm_trans_eqToIso A c.i c.g f c.comm
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+  (sq : CommSq g' f' f g) (c : Compactification f) (c' : Compactification f') (q : c'.Z ⟶ c.Z)
+  (hi : IsPullback g' c'.i c.i q) (hp : CommSq q c'.g c.g g)
 
 /-- The compatibility of the square isomorphisms of the derived pullbacks for the squares of a
-compactification and of its base change with the isomorphisms `L(c.i)^* L(c.g)^* ≅ Lf^*`. -/
-lemma compactification_derivedSquareUpperStarIso (sq : IsPullback g' f' f g)
-    (c : Compactification f) (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    L(((c.ofIsPullback sq).i)^*[A]).map
-        ((derivedSquareUpperStarIso A (IsPullback.of_hasPullback c.g g).toCommSq).hom.app L) ≫
-      (derivedSquareUpperStarIso A (c.isPullback_i_ofIsPullback sq).toCommSq).hom.app
-        (L((c.g)^*[A]).obj L) ≫
+compactification `c` of `f` and of a compactification `c'` of its base change `f'`, lying over
+`c` through `q`, with the isomorphisms `L(c.i)^* L(c.g)^* ≅ Lf^*` and
+`L(c'.i)^* L(c'.g)^* ≅ Lf'^*`. -/
+lemma compactification_derivedSquareUpperStarIso
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    L((c'.i)^*[A]).map ((derivedSquareUpperStarIso A hp).hom.app L) ≫
+      (derivedSquareUpperStarIso A hi.toCommSq).hom.app (L((c.g)^*[A]).obj L) ≫
       L((g')^*[A]).map ((leftDerivedUpperStarCompactificationIso A c).hom.app L) ≫
-      (derivedSquareUpperStarIso A sq.toCommSq).inv.app L =
-    (leftDerivedUpperStarCompactificationIso A (c.ofIsPullback sq)).hom.app
-      (L((g)^*[A]).obj L) := by
+      (derivedSquareUpperStarIso A sq).inv.app L =
+    (leftDerivedUpperStarCompactificationIso A c').hom.app (L((g)^*[A]).obj L) := by
   rw [leftDerivedUpperStarCompactificationIso_eq, leftDerivedUpperStarCompactificationIso_eq]
   simp only [derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, Iso.trans_inv,
     Iso.symm_inv, NatTrans.comp_app, Functor.map_comp, Category.assoc]
@@ -74,15 +75,12 @@ lemma compactification_derivedSquareUpperStarIso (sq : IsPullback g' f' f g)
       (g' ≫ c.i) f (g' ≫ f) rfl c.comm (by rw [Category.assoc, ← c.comm]),
     Iso.hom_inv_id_app_assoc,
     map_leftDerivedUpperStarComp_hom_app_leftDerivedUpperStarComp_inv_app_assoc A
-      (c.ofIsPullback sq).i (pullback.fst c.g g) c.g (g' ≫ c.i) (pullback.fst c.g g ≫ c.g)
-      (g' ≫ f) (c.isPullback_i_ofIsPullback sq).w rfl (by rw [Category.assoc, ← c.comm]),
+      c'.i q c.g (g' ≫ c.i) (q ≫ c.g) (g' ≫ f) hi.w rfl (by rw [Category.assoc, ← c.comm]),
     Iso.hom_inv_id_app_assoc,
     map_leftDerivedUpperStarComp_inv_app_leftDerivedUpperStarComp_inv_app_assoc A
-      (c.ofIsPullback sq).i (pullback.snd c.g g) g f' (pullback.fst c.g g ≫ c.g) (g' ≫ f)
-      (c.ofIsPullback sq).comm pullback.condition sq.w,
+      c'.i c'.g g f' (q ≫ c.g) (g' ≫ f) c'.comm hp.w sq.w,
     Iso.inv_hom_id_app]
   erw [Category.comp_id]
-  rfl
 
 end Etale
 
