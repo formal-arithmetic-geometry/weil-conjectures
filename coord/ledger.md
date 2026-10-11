@@ -3379,3 +3379,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:26 L: claimed def-pc-projective-morphism for L, worker W-prj0530 launched (no delivery waits yet; the groups start about 05:50)
 - 05:28 L: stated def-pc-projective-morphism (own item, W-prj0530, R-prj0536 PASS): lean/Sheaf/AlgebraicGeometry/Morphisms/Projective.lean (IsHProjective, IsProjective); landed
 - 05:29 L: claimed def-pc-kflat-complex for L, worker W-kfl0542 launched (no delivery waits yet); global build started for the Projective landing
+- 05:32 L: FIRST STAGE-2 DELIVERY: deliver/C1/def-pc-generators (ff00d330c; stage-2 preflight OK, compile 1.1 s); reviewer R-gen0531 launched with the stage-2 packet; lead worker W-kfl0542 (def-pc-kflat-complex) still running, no further lead item will be claimed while deliveries wait
