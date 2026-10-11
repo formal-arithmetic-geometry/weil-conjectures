@@ -248,5 +248,23 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps following the second paragraph of the proof of 04F3: (0) by the thickening-open-restriction leaf with U = X and the uniqueness of the open over a given open (i_T a homeomorphism); (1) h'(V') in U on points, V in V' a thickening over U by the same leaf, existence through the universal property over X and factorization through V' (points) and through U (cancelling open immersions by the factoring leaf), uniqueness likewise; (2) the base change from U to X: b factors through U on points, then the universal property over U. Statement unchanged. Stage-3 note: lem-weil-pbc-universal-thickening-open-restriction (04FA) proves (1) again under a superfluous formally-unramified hypothesis."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalThickeningOpenPieces",
+  "declaration": "AlgebraicGeometry.universalFirstOrderThickening_open_pieces",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalThickeningOpenPieces.lean",
+  "statement": "theorem universalFirstOrderThickening_open_pieces {Z X : Scheme.{u}} (h : Z ⟶ X) : (∀ {T T' : Scheme.{u}} (iT : T ⟶ T') (_b : T' ⟶ X), IsFirstOrderThickening iT → (∀ W' : T'.Opens, IsFirstOrderThickening (iT ∣_ W') ∧ ∀ Q : W'.toScheme.affineOpens, (iT ∣_ W').ker.ideal Q = iT.ker.ideal ⟨W'.ι ''ᵁ Q, Q.2.image_of_isOpenImmersion W'.ι⟩) ∧ (∀ W : T.Opens, ∃! W' : T'.Opens, iT ⁻¹ᵁ W' = W)) ∧ (∀ {Z' : Scheme.{u}} (i : Z ⟶ Z') (h' : Z' ⟶ X), IsUniversalFirstOrderThickening h i h' → ∀ (V : Z.Opens) (U : X.Opens), V ≤ h ⁻¹ᵁ U → ∃ V' : Z'.Opens, i ⁻¹ᵁ V' = V ∧ V' ≤ h' ⁻¹ᵁ U ∧ ∃ (iV : V.toScheme ⟶ V'.toScheme) (hV : V.toScheme ⟶ U.toScheme) (hV' : V'.toScheme ⟶ U.toScheme), iV ≫ V'.ι = V.ι ≫ i ∧ hV ≫ U.ι = V.ι ≫ h ∧ hV' ≫ U.ι = V'.ι ≫ h' ∧ IsUniversalFirstOrderThickening hV iV hV') ∧ (∀ (U : X.Opens) (hU : Z ⟶ U.toScheme), hU ≫ U.ι = h → ∀ {Z' : Scheme.{u}} (i : Z ⟶ Z') (hU' : Z' ⟶ U.toScheme), IsUniversalFirstOrderThickening hU i hU' → IsUniversalFirstOrderThickening h i (hU' ≫ U.ι))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
