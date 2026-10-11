@@ -179,3 +179,26 @@ lemma map_addIso_comp (A : C ⥤ D) (B : D ⥤ E) (H : C ⥤ E) [A.OplaxMonoidal
 end IntTensorFamily
 
 end CategoryTheory.MonoidalCategory
+
+namespace CategoryTheory.MonoidalCategory.TensorInverse
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D]
+
+/-- A monoidal functor sending an object to the unit sends all its tensor powers to the unit. -/
+noncomputable def tensorPowNatMapIsoUnit (F : C ⥤ D) [F.Monoidal] {L : C}
+    (h : F.obj L ≅ 𝟙_ D) : (n : ℕ) → F.obj (tensorPowNat L n) ≅ 𝟙_ D
+  | 0 => (Functor.Monoidal.εIso F).symm
+  | n + 1 => (Functor.Monoidal.μIso F _ _).symm ≪≫ tensorIso h (tensorPowNatMapIsoUnit F h n) ≪≫
+      λ_ _
+
+/-- A monoidal functor sending an object `L` with a tensor inverse to the unit sends all the
+integer tensor powers of `L` to the unit. -/
+noncomputable def zpowMapIsoUnit {L : C} (e : TensorInverse L) (F : C ⥤ D) [F.Monoidal]
+    (h : F.obj L ≅ 𝟙_ D) : (m : ℤ) → F.obj (e.zpow m) ≅ 𝟙_ D
+  | .ofNat n => tensorPowNatMapIsoUnit F h n
+  | .negSucc n => tensorPowNatMapIsoUnit F
+      ((ρ_ _).symm ≪≫ whiskerLeftIso _ h.symm ≪≫ Functor.Monoidal.μIso F _ _ ≪≫
+        F.mapIso e.leftIso ≪≫ (Functor.Monoidal.εIso F).symm) (n + 1)
+
+end CategoryTheory.MonoidalCategory.TensorInverse

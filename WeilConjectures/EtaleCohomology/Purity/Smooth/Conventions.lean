@@ -10,6 +10,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
@@ -176,7 +177,7 @@ class HasTateTwist where
   ``` -/
   twistObjectAddIso_zero_left (X : Scheme.{u}) [HasInvertibleExponent Λ X] (m : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).map (twistObjectZeroIso X).hom).app
-        (twistObject X m) ≫ (λ_ (twistObject X m)).hom =
+        (twistObject X m) ≫ (derivedTensorLeftUnitor _ X (twistObject X m)).hom =
       (twistObjectAddIso X 0 m).hom ≫ eqToHom (by rw [zero_add])
   /-- The right unit law: `Λ_X(m) ⊗ Λ_X(0) ≅ Λ_X(m)` is the right unitor, through
   `Λ_X(0) ≅ Λ_X`.
@@ -190,7 +191,7 @@ class HasTateTwist where
   ``` -/
   twistObjectAddIso_zero_right (X : Scheme.{u}) [HasInvertibleExponent Λ X] (m : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (twistObject X m)).map
-        (twistObjectZeroIso X).hom ≫ (ρ_ (twistObject X m)).hom =
+        (twistObjectZeroIso X).hom ≫ (derivedTensorRightUnitor _ X (twistObject X m)).hom =
       (twistObjectAddIso X m 0).hom ≫ eqToHom (by rw [add_zero])
   /-- The associativity law for the products of twisting objects.
 
@@ -206,7 +207,7 @@ class HasTateTwist where
   twistObjectAddIso_assoc (X : Scheme.{u}) [HasInvertibleExponent Λ X] (a b c : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).map (twistObjectAddIso X a b).hom).app
         (twistObject X c) ≫ (twistObjectAddIso X (a + b) c).hom =
-      (α_ (twistObject X a) (twistObject X b) (twistObject X c)).hom ≫
+      (derivedTensorAssociator _ X (twistObject X a) (twistObject X b) (twistObject X c)).hom ≫
         ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (twistObject X a)).map
           (twistObjectAddIso X b c).hom ≫ (twistObjectAddIso X a (b + c)).hom ≫
             eqToHom (by rw [add_assoc])

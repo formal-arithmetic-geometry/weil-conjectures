@@ -189,6 +189,60 @@ lemma map_addIso_pullbackIntTensorFamilyIso {X Y : Scheme.{u}} (f : X ⟶ Y) (π
   simp only [Category.assoc]
   rfl
 
+section Copy
+
+/-! ### Transport to families equal to the pulled back ones -/
+
+variable {X Y : Scheme.{u}} (FX : ℤ → DerivedCategory (Sheaf X.smallEtaleTopology A))
+  (FY : ℤ → DerivedCategory (Sheaf Y.smallEtaleTopology A))
+
+/-- The identification `Lf^* F_Y m ≅ F_X m` for families `F_X`, `F_Y` equal to the pulled back
+families `Lπ_X^* P` and `Lπ_Y^* P`. -/
+noncomputable def pullbackIntTensorFamilyCopyIso (f : X ⟶ Y) (πX : X ⟶ S) (πY : Y ⟶ S)
+    (h : πX = f ≫ πY) (hX : FX = (pullbackIntTensorFamily A P πX).obj)
+    (hY : FY = (pullbackIntTensorFamily A P πY).obj) (m : ℤ) :
+    L((f)^*[A]).obj (FY m) ≅ FX m :=
+  L((f)^*[A]).mapIso (eqToIso (congrFun hY m)) ≪≫ pullbackIntTensorFamilyIso A P f πX πY h m ≪≫
+    eqToIso (congrFun hX m).symm
+
+/-- `AlgebraicGeometry.Etale.pullbackIntTensorFamilyIso_comp` for families equal to the pulled
+back families. -/
+lemma pullbackIntTensorFamilyCopyIso_comp {Z : Scheme.{u}}
+    (FZ : ℤ → DerivedCategory (Sheaf Z.smallEtaleTopology A)) (f : X ⟶ Y) (g : Y ⟶ Z)
+    (πX : X ⟶ S) (πY : Y ⟶ S) (πZ : Z ⟶ S) (hX : πX = (f ≫ g) ≫ πZ) (hY : πY = g ≫ πZ)
+    (hX' : πX = f ≫ πY) (hFX : FX = (pullbackIntTensorFamily A P πX).obj)
+    (hFY : FY = (pullbackIntTensorFamily A P πY).obj)
+    (hFZ : FZ = (pullbackIntTensorFamily A P πZ).obj) (m : ℤ) :
+    pullbackIntTensorFamilyCopyIso A P FX FZ (f ≫ g) πX πZ hX hFX hFZ m =
+      (leftDerivedUpperStarComp A f g).app _ ≪≫
+        L((f)^*[A]).mapIso (pullbackIntTensorFamilyCopyIso A P FY FZ g πY πZ hY hFY hFZ m) ≪≫
+          pullbackIntTensorFamilyCopyIso A P FX FY f πX πY hX' hFX hFY m := by
+  subst hFX hFY hFZ
+  simp only [pullbackIntTensorFamilyCopyIso, eqToIso_refl, Functor.mapIso_refl, Iso.refl_trans,
+    Iso.trans_refl]
+  exact pullbackIntTensorFamilyIso_comp A P f g πX πY πZ hX hY hX' m
+
+/-- `AlgebraicGeometry.Etale.map_addIso_pullbackIntTensorFamilyIso` for families equal to the
+pulled back families. -/
+lemma map_addIso_pullbackIntTensorFamilyCopyIso (f : X ⟶ Y) (πX : X ⟶ S) (πY : Y ⟶ S)
+    (h : πX = f ≫ πY) [NatTrans.IsMonoidal (Etale.upperStarComp A f πY πX h).hom]
+    (hX : FX = (pullbackIntTensorFamily A P πX).obj)
+    (hY : FY = (pullbackIntTensorFamily A P πY).obj) (m m' : ℤ) :
+    L((f)^*[A]).map (((pullbackIntTensorFamily A P πY).copy FY hY).addIso m m').hom ≫
+        (pullbackIntTensorFamilyCopyIso A P FX FY f πX πY h hX hY (m + m')).hom =
+      (leftDerivedUpperStarTensorIso A f _ _).hom ≫
+        ((derivedTensor A X).map
+          (pullbackIntTensorFamilyCopyIso A P FX FY f πX πY h hX hY m).hom).app _ ≫
+          ((derivedTensor A X).obj (FX m)).map
+            (pullbackIntTensorFamilyCopyIso A P FX FY f πX πY h hX hY m').hom ≫
+            (((pullbackIntTensorFamily A P πX).copy FX hX).addIso m m').hom := by
+  subst hX hY
+  simp only [pullbackIntTensorFamilyCopyIso, IntTensorFamily.copy_addIso, eqToIso_refl,
+    Functor.mapIso_refl, Iso.refl_trans, Iso.trans_refl]
+  exact map_addIso_pullbackIntTensorFamilyIso A P f πX πY h m m'
+
+end Copy
+
 end Etale
 
 end AlgebraicGeometry
