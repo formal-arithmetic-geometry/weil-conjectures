@@ -30,7 +30,9 @@
   "def-weil-flat-morphism",
   "def-pc-module-pullback",
   "def-weil-locally-ringed-space-morphism",
-  "lem-weil-pbc-morphism-from-spec-local-ring"
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "def-pc-module-stalk-functor",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -261,5 +263,30 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps (Schemes 01J6/02NA, 01J7, flatness as in 02OD): construction through an affine open with R_p = O_{Y,y} (new composed leaf for 01HV: fromSpec_app_self/isLocalization_stalk/open-immersion stalk iso, lines verified by L); independence of V by a common smaller affine open; clause (1) following 01J7 (primes of A_p, generalizations, every generalization lies in every open neighbourhood); clause (2) by the stalk-map composition leaf (germ_stalkMap/stalkMap_comp) and the Spec-map stalk leaf (localRingHom_comp_stalkIso); c = (y, id_A) under the new 01J6 leaf (SpecToEquivOfLocalRing); flatness (isomorphisms are flat); clause (4) by the stalk-of-pullback tool node (tool_uses recorded by L); clause (5) by 01J6. Statement: clause (5) restricted to J != A (needed for A/J local), citations of the 01J6 node and the locally-ringed-space definition added."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism",
+  "declaration": "AlgebraicGeometry.Scheme.fromSpecStalk_local_properties",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.fromSpecStalk_affine_description",
+   "AlgebraicGeometry.Scheme.fromSpecStalk_local_properties",
+   "AlgebraicGeometry.Scheme.fromSpecStalk_module_stalk",
+   "AlgebraicGeometry.Scheme.fromSpecStalk_quotient_factorization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpecLocalRingCanonicalMorphism.lean",
+  "statement": "theorem fromSpecStalk_local_properties (Y : Scheme.{u}) (y : Y) : (Y.fromSpecStalk y) (closedPoint (Y.presheaf.stalk y)) = y ∧ Set.range (Y.fromSpecStalk y) = {x : Y | x ⤳ y} ∧ (∀ (V : Y.Opens), y ∈ V → (Y.fromSpecStalk y) ⁻¹ᵁ V = ⊤) ∧ (∀ q : Spec (Y.presheaf.stalk y), IsIso ((Y.fromSpecStalk y).stalkMap q)) ∧ stalkClosedPointTo (Y.fromSpecStalk y) = (Y.presheaf.stalkCongr (Inseparable.of_eq (fromSpecStalk_closedPoint (X := Y) (x := y)))).hom ∧ Flat (Y.fromSpecStalk y)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Four statements cover the affine description and clauses (1)-(5), using Mathlib Scheme.fromSpecStalk. Added landed statement dependencies for the ringed-space module stalk functor and the canonical tensor-pullback unit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-slc2",
+  "group": "K1",
+  "result": "pass",
+  "note": "Y:Scheme.{u}, y; Mathlib fromSpecStalk as c; affine V: localization e pinned by algebraMap/germ, Spec.map germ ≫ fromSpec = c; (1) c(y')=y, range = generalizations, preimage of every V∋y = ⊤; (2) IsIso stalkMap ∀q, closed stalk = stalkCongr (Mathlib form); (3) Flat; (4) iso in ModuleCat O_{Y,c(y')} pinned to germ of canonical exists_tensorPullbackAdjunction unit; (5) J≠⊤, SpecToEquivOfLocalRing.symm (y, mk J) = Spec.map mk ≫ c, closed immersion; added stmt_deps both used"
  }
 }
