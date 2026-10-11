@@ -30,7 +30,8 @@
   "def-sp-injective-resolutions",
   "def-pc-cochain-complex-modules",
   "def-pc-quasi-iso-modules",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -188,5 +189,34 @@
   "by": "L",
   "result": "accepted",
   "note": "Definition node (Stacks 01F7-01FB): data kept (resolutions I, J, J', the quasi-isomorphism lambda, beta, phi^* = H^p(mu)^{-1} H^p(Gamma(beta))), names pullback/restriction/edge map; existence of the choices from enough injectives (new node 01DI) and the resolution lemma; beta from the lift leaf, uniqueness up to homotopy as a new 013S node; the quasi-isomorphism Gamma(Y, lambda) as a new node (01EZ/01EX); independence of choices and the basic properties (linearity, degree 0, h = id, restriction) as pointers (basic-properties new node, made reachable by L through formal-functions-stalk). Five elementary well-formedness steps. Restriction redefined as phi^* of the j-map rho_G (no claim j^* G = G|_U)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMap",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.ModuleCohomologyFMapData",
+   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMapData_nonempty",
+   "AlgebraicGeometry.Scheme.Modules.ModuleCohomologyFMapData.map",
+   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMap",
+   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyPullback",
+   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyRestriction",
+   "AlgebraicGeometry.Scheme.Modules.moduleCohomologyEdgeMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyFMap.lean",
+  "statement": "def moduleCohomologyFMap {X Y : Scheme.{u}} (h : X ⟶ Y) {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf} (φ : G ⟶ (pushforward h).obj F) (p : ℕ) : (forget₂ _ AddCommGrpCat.{u}).obj ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj G) ⟶ (forget₂ _ AddCommGrpCat.{u}).obj ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Resolution-based h-map on the recorded RingedSpace.moduleCohomology, with unit pullback, open restriction, and edge-map specializations. Natural-number indexing encodes zero negative terms. The existence of the choices and invertibility needed by the definition is the named theorem moduleCohomologyFMapData_nonempty.",
+  "fixed_by": "R-mcf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mcf",
+  "group": "G1",
+  "result": "fix",
+  "note": "h:X⟶Y, G/F SheafOfModules over ringCatSheaf, φ:G⟶h_*F, p:ℕ; I,J InjectiveResolution, K ℕ-complex of injectives, λ:h_*I⟶K QuasiIso, β with β⁰s_G=λ⁰h_*(s_F)φ, a pinned to restriction along h⁻¹⊤=⊤; φ*=H(μ)⁻¹∘H(Γβ) on RingedSpace.moduleCohomology; (a) unit of choose exists_tensorPullbackAdjunction, (b) restrictAdjunction U.ι unit, (c) 𝟙 h_*F; fix: let/letI removed, formula as ModuleCohomologyFMapData.map"
  }
 }
