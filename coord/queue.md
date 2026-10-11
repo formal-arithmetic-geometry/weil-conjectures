@@ -1,11 +1,11 @@
 # Work queue
 
-318 items; claim with `tools/claim.py next <group> [--stage N]`.
+314 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (318)
+## Stage 2: nodes to state (314)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -22,7 +22,6 @@
 | `lem-pc-proper-support-descent` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-derived-mayer-vietoris-triangle` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
@@ -42,9 +41,6 @@
 | `lem-weil-pbc-projective-morphism-chart-preimage` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
 | `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state |
-| `lem-weil-pbc-relative-global-complete-intersection-base-change` | 1 | state |
-| `lem-weil-pbc-relative-spec-base-change` | 1 | state |
-| `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1 | state |
 | `lem-weil-pbc-ring-quasi-finite-locus-open` | 1 | state |
 | `lem-weil-pbc-ringed-space-colimit-restriction` | 1 | state |
 | `lem-weil-pbc-ringed-space-module-exactness-local-lifting` | 1 | state |
