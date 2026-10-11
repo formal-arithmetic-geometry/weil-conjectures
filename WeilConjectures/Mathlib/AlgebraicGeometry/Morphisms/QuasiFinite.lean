@@ -27,6 +27,8 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
   a quasi-compact morphism locally of finite type descends along surjective base changes.
 - `AlgebraicGeometry.Scheme.Hom.coheight_apply_of_flat`: a flat, locally quasi-finite morphism
   preserves the codimension of points.
+- `AlgebraicGeometry.Scheme.Hom.topologicalKrullDim_le_of_locallyQuasiFinite`: a locally
+  quasi-finite morphism, for instance an étale one, does not increase dimension.
 -/
 
 @[expose] public section
@@ -112,5 +114,23 @@ lemma Scheme.Hom.coheight_apply_of_flat (f : X ⟶ Y) [Flat f] [LocallyQuasiFini
   refine ⟨a', ?_, rfl⟩
   rw [lt_iff_le_not_ge, Scheme.le_iff_specializes, Scheme.le_iff_specializes]
   exact ⟨ha', fun h ↦ hab.2 (h.map f.continuous)⟩
+
+/-- **A locally quasi-finite morphism does not increase dimension.** For `f : X ⟶ Y` locally
+quasi-finite, `dim X ≤ dim Y`: the fibres of `f` are discrete, so `f` maps strict chains of
+specializations to strict chains.
+
+Used for blueprint `lem-sf-etale-direct-image-vanishing`: an étale `X`-scheme has dimension at
+most `dim X`. -/
+theorem Scheme.Hom.topologicalKrullDim_le_of_locallyQuasiFinite (f : X ⟶ Y)
+    [LocallyQuasiFinite f] : topologicalKrullDim X ≤ topologicalKrullDim Y :=
+  topologicalKrullDim_le_of_continuous f.continuous fun _ _ ↦ f.eq_of_specializes_of_apply_eq
+
+/-- **An étale morphism does not increase dimension.** For `f : X ⟶ Y` étale, `dim X ≤ dim Y`.
+
+Used for blueprint `lem-sf-etale-direct-image-vanishing`: an étale `X`-scheme has dimension at
+most `dim X`. -/
+theorem Scheme.Hom.topologicalKrullDim_le_of_etale (f : X ⟶ Y) [Etale f] :
+    topologicalKrullDim X ≤ topologicalKrullDim Y :=
+  f.topologicalKrullDim_le_of_locallyQuasiFinite
 
 end AlgebraicGeometry
