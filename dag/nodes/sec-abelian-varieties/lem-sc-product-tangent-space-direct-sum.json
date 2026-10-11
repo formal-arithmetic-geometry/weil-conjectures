@@ -136,5 +136,25 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pts2220 (reviewer sub-agent of L); spot-checked: Read packet whole; field/k-rational setting kept (no relative tangent spaces, E ok); Step 1 k-linearity from lem-sc-tangent-map-linear (C4 ok); Step 2 Phi.Psi=id via linearity and constant maps to zero vector, ok; tool_uses accepted as generic tangent tools; Mathlib no-match verdict accepted. FIX more, RETURN less: C4 in Step 3 - lem-sc-tangent-space-vector-space does not say the pushout sum has projections (v,w); rewrote Step 3 to derive Psi(Phi(theta))=theta from Step 2 plus uniqueness in def-pc-fibre-product over Spec k, and the inverse values from linearity of d i_X, d i_Y; Step 3 uses now def-sc-scheme-tangent-space, def-pc-fibre-product, lem-sc-tangent-map-linear (missed by F1 second reading).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProductTangentSpaceDirectSum",
+  "declaration": "AlgebraicGeometry.product_tangentSpace_directSum",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProductTangentSpaceDirectSum.lean",
+  "statement": "theorem product_tangentSpace_directSum (k : Type u) [Field k] (X Y : Scheme.{u}) (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k)) (x : X) (y : Y) : let rX : k →+* X.residueField x := (StructureSheaf.toStalk k (pX x) ≫ pX.stalkMap x ≫ X.residue x).hom let rY : k →+* Y.residueField y := (StructureSheaf.toStalk k (pY y) ≫ pY.stalkMap y ≫ Y.residue y).hom ∀ (hx : Function.Bijective rX) (hy : Function.Bijective rY), let eX := RingEquiv.ofBijective rX hx let eY := RingEquiv.ofBijective rY hy let sx : Spec (.of k) ⟶ X := Spec.map (CommRingCat.ofHom eX.symm.toRingHom) ≫ X.fromSpecResidueField x let sy : Spec (.of k) ⟶ Y := Spec.map (CommRingCat.ofHom eY.symm.toRingHom) ≫ Y.fromSpecResidueField y let P := pullback pX pY let prX := pullback.fst pX pY let prY := pullback.snd pX pY let pZ := prX ≫ pX let iX : X ⟶ P := pullback.lift (𝟙 X) (pX ≫ sy) (by have h : Y.fromSpecResidueField y ≫ pY = Spec.map (CommRingCat.ofHom rY) := by rw [← pY.specMap_residueFieldAlgebraMap] congr 2 rw [Scheme.Hom.residueFieldAlgebraMap, Scheme.Spec.algebraMap_residueFieldIso_inv_assoc, Scheme.residue_residueFieldMap] rfl simp only [sy, Category.id_comp, Category.assoc, h, ← Spec.map_comp, ← CommRingCat.ofHom_comp, show eY.symm.toRingHom.comp rY = RingHom.id k from RingHom.ext eY.symm_apply_apply, CommRingCat.ofHom_id, Spec.map_id, Category.comp_id]) let iY : Y ⟶ P := pullback.lift (pY ≫ sx) (𝟙 Y) (by have h : X.fromSpecResidueField x ≫ pX = Spec.map (CommRingCat.ofHom rX) := by rw [← pX.specMap_residueFieldAlgebraMap] congr 2 rw [Scheme.Hom.residueFieldAlgebraMap, Scheme.Spec.algebraMap_residueFieldIso_inv_assoc, Scheme.residue_residueFieldMap] rfl simp only [sx, Category.id_comp, Category.assoc, h, ← Spec.map_comp, ← CommRingCat.ofHom_comp, show eX.symm.toRingHom.comp rX = RingHom.id k from RingHom.ext eX.symm_apply_apply, CommRingCat.ofHom_id, Spec.map_id, Category.comp_id]) let z := iX x let rZ : k →+* P.residueField z := (StructureSheaf.toStalk k (pZ z) ≫ pZ.stalkMap z ≫ P.residue z).hom let TX := schemeTangentSpace k X pX x let TY := schemeTangentSpace k Y pY y let TZ := schemeTangentSpace k P pZ z letI : Module k TX := Module.compHom TX rX letI : Module k TY := Module.compHom TY rY letI : Module k TZ := Module.compHom TZ rZ let dZX := Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom (rZ.comp eX.symm.toRingHom))) let dZY := Spec.map (CommRingCat.ofHom (DualNumber.mapRingHom (rZ.comp eY.symm.toRingHom))) ∃ e : TZ ≃ₗ[k] (TX × TY), (∀ v : TZ, v.val ≫ prX = dZX ≫ (e v).1.val ∧ v.val ≫ prY = dZY ≫ (e v).2.val) ∧ (∀ v : TX, (e.symm (v, 0)).val = dZX ≫ v.val ≫ iX) ∧ (∀ w : TY, (e.symm (0, w)).val = dZY ≫ w.val ≫ iY)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Fibre product pullback pX pY at k-rational points x, y (H1/K1 rX bijectivity form); (1,y), (x,1) are pullback lifts of the derived k-points; z = (1,y)(x); k-actions restricted along rX, rY, rZ; differentials in the value form of exists_tangentMap_linear with residue-field dual-number transport.",
+  "fixed_by": "R-pts1005"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pts1005",
+  "group": "G1",
+  "result": "fix",
+  "note": "field k; k-schemes X,Y via pX,pY; rational x,y as Bijective rX/rY (H1/K1 form); X x_k Y = pullback pX pY; (1,y),(x,1) pullback lifts; T via schemeTangentSpace at x,y,(x,y); k-linear iso to TX x TY with components the projection differentials; inverse on (v,0),(0,w) = d(1,y)v, d(x,1)w"
  }
 }
