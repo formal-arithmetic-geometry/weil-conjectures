@@ -1,11 +1,11 @@
 # Work queue
 
-104 items; claim with `tools/claim.py next <group> [--stage N]`.
+99 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (104)
+## Stage 2: nodes to state (99)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -59,7 +59,6 @@
 | `lem-sc-boundary-derivation-square-zero` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-ext-sheaf-to-global-spectral-sequence` | 1 | state | 0 |
-| `lem-sc-ext-support-cohomology-vanishing` | 1 | state | 0 |
 | `lem-sc-finite-affine-derived-equivalence` | 1 | state | 0 |
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
 | `lem-sc-finite-flat-duality-evaluation` | 1 | state | 0 |
@@ -67,7 +66,6 @@
 | `lem-sc-finite-twisted-inverse-bounded-below` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
-| `lem-sc-invert-s-cohomology` | 1 | state | 0 |
 | `lem-sc-invert-s-cohomology-affine-case` | 1 | state | 0 |
 | `lem-sc-invert-s-cohomology-gluing` | 1 | state | 0 |
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 1 | state | 0 |
@@ -99,13 +97,10 @@
 | `lem-weil-pbc-strict-henselization-functoriality` | 1 | state | 0 |
 | `lem-weil-pbc-theorem-formal-functions` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
-| `lem-weil-pbc-vanishing-projective` | 1 | state | 0 |
 | `pqf-lem-fff-vanishing` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `thm-sc-constant-invariance` | 1 | state | 0 |
-| `thm-weil-pbc-universal-homeomorphism-invariance` | 1 | state | 0 |
 | `lem-pc-proper-support-perfect-direct-image` | 2 | state | 0 |
-| `lem-pc-rf-base-change-flat-module` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-pc-supported-open-pushforward` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
