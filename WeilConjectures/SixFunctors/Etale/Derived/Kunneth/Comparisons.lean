@@ -19,6 +19,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-!
 
@@ -144,6 +147,32 @@ structure HasKunnethComparisons (S : Scheme.{u}) : Prop where
       Nonempty (externalProduct A a b M ((verdierDual A b).obj (op N)) ≅
         (RHom(pullback a b)[A].obj (op ((L((pullback.snd a b)^*[A])).obj N))).obj
           ((R(pullback.fst a b)^![A]).obj M))
+
+omit [HasSmallSiteSheafify A] in
+/-- The external Hom map `β` of `AlgebraicGeometry.Etale.HasKunnethComparisons` is an isomorphism
+for **dualizable** `E₁`, `E₂`:
+`RHom(E₁, N₁) ⊠ RHom(E₂, N₂) ≅ RHom(E₁ ⊠ E₂, N₁ ⊠ N₂)`. The derived pullbacks are monoidal and
+preserve duals, and internal homs out of dualizable objects are tensor products with the duals
+(`CategoryTheory.nonempty_iso_tensorObj_map_ihom_obj`). Over a field, constructible complexes of
+finite Tor amplitude are dualizable only where they are lisse, so this is the lisse case of the
+`externalHom` clause. -/
+theorem nonempty_iso_externalProduct_derivedHom_of_isDualizable [UpperStarPreservesFlat A]
+    {S Z₁ Z₂ : Scheme.{u}} (c₁ : Z₁ ⟶ S) (c₂ : Z₂ ⟶ S)
+    {E₁ N₁ : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A)}
+    {E₂ N₂ : _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology A)}
+    (h₁ : IsDualizable E₁) (h₂ : IsDualizable E₂) :
+    Nonempty (externalProduct A c₁ c₂ ((RHom(Z₁)[A].obj (op E₁)).obj N₁)
+        ((RHom(Z₂)[A].obj (op E₂)).obj N₂) ≅
+      (RHom(pullback c₁ c₂)[A].obj (op (externalProduct A c₁ c₂ E₁ E₂))).obj
+        (externalProduct A c₁ c₂ N₁ N₂)) := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Z₁.smallEtaleTopology A)
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Z₂.smallEtaleTopology A)
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
+    (Sheaf (pullback c₁ c₂).smallEtaleTopology A)
+  let _ := leftDerivedUpperStarMonoidal A (pullback.fst c₁ c₂)
+  let _ := leftDerivedUpperStarMonoidal A (pullback.snd c₁ c₂)
+  exact nonempty_iso_tensorObj_map_ihom_obj (L((pullback.fst c₁ c₂)^*[A]))
+    (L((pullback.snd c₁ c₂)^*[A])) h₁ h₂
 
 /-- Blueprint `sk-thm-sf-kunneth-verdier`: Künneth–Verdier isomorphism.
 
