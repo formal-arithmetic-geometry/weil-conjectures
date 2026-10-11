@@ -192,5 +192,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Node created by C1; the worker added the hypothesis R Noetherian (geometric regularity, 0382 and def-weil-pbc-g-ring, is defined for Noetherian algebras; the only citer applies it to a Noetherian fibre ring). Five steps along the proof of 07QH, five new unsplit nodes with statements checked: k' (x)_k L is a field, finite purely inseparable over k' (Stacks cites only 037H; the claim is isolated as a node), 0381 (2)=>(1), 07QG, 07QF, and the multiplication map k' (x)_k k' -> k' is etale for k'/k finite separable (0C2X with 00U2(1); the Mathlib composite of_isSeparable/baseChange/of_restrictScalars recorded, not a one-line match). Direction (<=) via the field L' and the cancellation isomorphism; (=>) reduced to finite k'/k by 07QG, then B = R (x)_k k' is Noetherian and geometrically regular over k' (0381), B -> R is the base change of the etale multiplication map, hence smooth, and 07QF ascends. Stacks misprint in 07QG noted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricRegularitySeparableExtension",
+  "declaration": "Algebra.isGeometricallyRegular_iff_of_isSeparable",
+  "file": "lean/Sheaf/RingTheory/GeometricRegularitySeparableExtension.lean",
+  "statement": "theorem isGeometricallyRegular_iff_of_isSeparable (k : Type u) (k' : Type v) (R : Type w) [Field k] [Field k'] [CommRing R] [Algebra k k'] [Algebra k' R] [Algebra k R] [IsScalarTower k k' R] [Algebra.IsSeparable k k'] [IsNoetherianRing R] : IsGeometricallyRegular k R ↔ IsGeometricallyRegular k' R",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-grs1045",
+  "group": "G1",
+  "result": "pass",
+  "note": "k⊆k' = Field k, Field k', Algebra k k'; separable algebraic = Algebra.IsSeparable (algebraicity via inferInstance checked); R k'-algebra Noetherian = CommRing R, Algebra k' R, IsNoetherianRing R; restriction = Algebra k R + IsScalarTower k k' R; conclusion iff of recorded Algebra.IsGeometricallyRegular on both sides (#check resolves to Algebra.IsGeometricallyRegular, same form as H1 672ddeb53); no finiteness/char/nontriviality assumptions; independent universes u v w fine since test fields are Type (max _ w)"
  }
 }
