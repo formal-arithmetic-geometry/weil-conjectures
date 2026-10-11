@@ -159,5 +159,23 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps along Stacks 07DY: quotients R_i -> S_i, base case over the field R/m (new leaf Module.Flat.of_free Flat/Basic.lean:231 with Free.of_divisionRing, verified), the parameters form a regular sequence (existing 00NQ node), descending induction with the variant local criterion mod a nonzerodivisor (new unsplit node, 00ML and its remark), conclusion. Correct."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatOverRegular",
+  "declaration": "RingHom.flat_of_regular_parameters",
+  "file": "lean/Sheaf/RingTheory/FlatOverRegular.lean",
+  "statement": "theorem flat_of_regular_parameters {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsRegularLocalRing R] [IsLocalRing S] [IsNoetherianRing S] (φ : R →+* S) [IsLocalHom φ] (d : ℕ) (x : List R) (hd : ringKrullDim R = (d : WithBot ℕ∞)) (hx : x.length = d) (hgen : Ideal.ofList x = IsLocalRing.maximalIdeal R) (hreg : RingTheory.Sequence.IsRegular S (x.map φ)) : φ.Flat",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-for1029",
+  "group": "M1",
+  "result": "pass",
+  "note": "R,S CommRing; R regular local via IsRegularLocalRing (extends IsLocalRing, IsNoetherianRing; spanFinrank m = ringKrullDim); S IsLocalRing+IsNoetherianRing; IsLocalHom φ; d = ringKrullDim R, x.length = d, Ideal.ofList x = m_R; RingTheory.Sequence.IsRegular S (x.map φ) incl. top_ne_smul (S/(φx)S ≠ 0); conclusion φ.Flat (RingHom.Flat); no hollow hyps, d=0 edge ok"
  }
 }
