@@ -1,16 +1,16 @@
 # Work queue
 
-810 items; claim with `tools/claim.py next <group> [--stage N]`.
+811 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (810)
+## Stage 2: nodes to state (811)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
+| `def-pc-compactly-generated` | 1 | state |
 | `def-pc-field-tower` | 1 | state |
-| `def-pc-generators` | 1 | state |
 | `def-pc-kflat-complex` | 1 | state |
 | `def-pc-representable-functor` | 1 | state |
 | `def-pur-sheaf-modules-hom-module` | 1 | state |
@@ -100,6 +100,7 @@
 | `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-cartier-divisor-finite-over-field` | 1 | state |
 | `lem-pc-cartier-divisor-nowhere-dense` | 1 | state |
+| `lem-pc-compact-generators-build-objects` | 1 | state |
 | `lem-pc-compact-hom-hocolim` | 1 | state |
 | `lem-pc-complex-hocolim-colimit` | 1 | state |
 | `lem-pc-derived-acyclic-resolution` | 1 | state |
@@ -820,7 +821,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1411 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1409 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
