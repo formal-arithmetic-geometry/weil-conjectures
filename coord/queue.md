@@ -1,11 +1,11 @@
 # Work queue
 
-68 items; claim with `tools/claim.py next <group> [--stage N]`.
+67 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (68)
+## Stage 2: nodes to state (67)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -43,7 +43,6 @@
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 1 | state | 0 |
 | `lem-sc-affine-projective-complex-derived-hom` | 1 | state | 0 |
-| `lem-sc-affine-truncation-kernel-finite-locally-free` | 1 | state | 0 |
 | `lem-sc-affine-truncation-kernel-flat` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-etale-torsor-h1-functoriality` | 1 | state | 0 |
