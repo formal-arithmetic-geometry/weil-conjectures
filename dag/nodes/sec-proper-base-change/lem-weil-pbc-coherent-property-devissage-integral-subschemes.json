@@ -238,5 +238,23 @@
  "tool_uses": [
   "pqf-lem-coherent-ft-locnoeth",
   "pqf-lem-locnoeth-lft"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentPropertyDevissageIntegralSubschemes",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_property_devissage_integral_subschemes",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentPropertyDevissageIntegralSubschemes.lean",
+  "statement": "theorem coherent_property_devissage_integral_subschemes (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (P : X.Modules → Prop) (hP_zero : P (0 : X.Modules)) (hP_ext : ∀ (S : ShortComplex X.Modules), S.ShortExact → RingedSpace.IsCoherent X.toRingedSpace S.X₁ → RingedSpace.IsCoherent X.toRingedSpace S.X₂ → RingedSpace.IsCoherent X.toRingedSpace S.X₃ → P S.X₁ → P S.X₃ → P S.X₂) (hP_sum : ∀ (F : X.Modules) (r : ℕ), RingedSpace.IsCoherent X.toRingedSpace F → 1 ≤ r → P (@biproduct (Fin r) X.Modules _ _ (fun _ : Fin r ↦ F) (HasBiproduct.of_hasProduct (fun _ : Fin r ↦ F))) → P F) (hP_integral : ∀ (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z] (ξ : X) (hclosure : closure ({ξ} : Set X) = Set.range i.base), ∃ G : X.Modules, RingedSpace.IsCoherent X.toRingedSpace G ∧ ({x : X | ¬ Subsingleton (G.presheaf.stalk x)} = Set.range i.base) ∧ (∀ g : X.presheaf.stalk ξ, ∀ m : (RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj G, g ∈ IsLocalRing.maximalIdeal _ → g • m = 0) ∧ ∀ (J : X.Modules) (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι] [J.IsQuasicoherent], Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map ι).hom → ∃ G' : Subobject G, RingedSpace.IsCoherent X.toRingedSpace (G' : X.Modules) ∧ (∃ h : (G' : X.Modules) ⟶ idealModuleProduct ι G, G'.arrow = h ≫ idealModuleProductι ι G) ∧ Function.Surjective ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map G'.arrow).hom ∧ P (G' : X.Modules)) : ∀ F : X.Modules, RingedSpace.IsCoherent X.toRingedSpace F → P F",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
