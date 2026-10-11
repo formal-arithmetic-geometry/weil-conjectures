@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.InvertibleFibre
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 /-!
 # Sections of `F`-classes do not vanish on fibres
@@ -153,6 +154,44 @@ theorem pullbackSection_baseChangeMap_ne_zero {T : Over (Spec (.of k))}
     exact exact_lTensor_cechDifferential hj ℒ U hUV rfl hU H hV hUa' he'
       (exactAt_cechComplex_of_isZero_higherDirectImage (Limits.pullback.snd f T''.hom) _
         (fun i ↦ isAffineOpen_preimage_of_isPullback H hV hj (hUV i) (hUa i)) hsup _ 1 hZ)
+  -- hence `Č` stays exact in degree `1` after tensoring with any module, via `A ⊕ M`
+  have hexM : ∀ (M : Type u) [AddCommGroup M] [Module Γ(T.left, V) M],
+      Function.Exact ((cechDifferential ℒ U hUV hU 0).lTensor M)
+        ((cechDifferential ℒ U hUV hU 1).lTensor M) := by
+    intro M _ _
+    let : Module Γ(T.left, V)ᵐᵒᵖ M :=
+      Module.compHom M ((RingHom.id Γ(T.left, V)).fromOpposite fun _ _ ↦ mul_comm _ _)
+    have : IsCentralScalar Γ(T.left, V) M := ⟨fun _ _ ↦ rfl⟩
+    let R := CommRingCat.of (TrivSqZeroExt Γ(T.left, V) M)
+    let φ : Γ(T.left, V) ⟶ R := CommRingCat.ofHom (algebraMap _ _)
+    let T'' : Over (Spec (.of k)) := Over.mk (Spec.map φ ≫ hV.fromSpec ≫ T.hom)
+    let j : T'' ⟶ T := Over.homMk (Spec.map φ ≫ hV.fromSpec) (by simp [T''])
+    have hj : ⊤ ≤ j.left ⁻¹ᵁ V := by
+      change ⊤ ≤ (Spec.map φ ≫ hV.fromSpec) ⁻¹ᵁ V
+      rw [Scheme.Hom.comp_preimage, hV.fromSpec_preimage_self, Scheme.Hom.preimage_top]
+    have : IsAffine T''.left := inferInstanceAs (IsAffine (Spec R))
+    have h := hexB T'' j hj
+    let := (j.left.appLE V ⊤ hj).hom.toAlgebra
+    have key (a : Γ(T.left, V)) (x : Γ(T''.left, ⊤)) :
+        (Scheme.ΓSpecIso R).hom (a • x) =
+          TrivSqZeroExt.inl a * (Scheme.ΓSpecIso R).hom x := by
+      rw [Algebra.smul_def, map_mul]
+      congr 1
+      exact ΓSpecIso_hom_appLE_SpecMap_comp_fromSpec hV φ hj a
+    let r : Γ(T''.left, ⊤) →ₗ[Γ(T.left, V)] M :=
+      { toFun x := ((Scheme.ΓSpecIso R).hom x).snd
+        map_add' x x' := by rw [map_add, TrivSqZeroExt.snd_add]
+        map_smul' a x := by
+          rw [key, TrivSqZeroExt.inl_mul_eq_smul, RingHom.id_apply]
+          exact TrivSqZeroExt.snd_smul a _ }
+    let ι' : M →ₗ[Γ(T.left, V)] Γ(T''.left, ⊤) :=
+      { toFun m := (Scheme.ΓSpecIso R).inv (TrivSqZeroExt.inr m)
+        map_add' m m' := by simp
+        map_smul' a m := by
+          apply (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso R).hom).1
+          rw [RingHom.id_apply, key, Iso.inv_hom_id_apply, Iso.inv_hom_id_apply,
+            TrivSqZeroExt.inl_mul_inr] }
+    exact Function.Exact.rTensor_of_retract ι' r (LinearMap.ext fun m ↦ by simp [r, ι']) h
   sorry
 
 end Core
