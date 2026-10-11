@@ -202,4 +202,31 @@ theorem ProEtale.isIso_derivedBaseChangeMap_app_of_smooth [Smooth p] [QuasiCompa
     (Arrow.isoMk ((ProEtale.baseChangeSourceComparisonIso g p Λ).app L)
       ((ProEtale.baseChangeTargetComparisonIso e h Λ).app L) hαβ.symm)).1 this
 
+variable (p) in
+/-- The pro-étale exchange map `p^* Rg_* K ⟶ Rh_* e^* K` is an isomorphism, for `p` smooth and
+`g` quasi-compact and quasi-separated, at every complex `K = ν^* L` of étale origin with `L` a
+bounded below complex of étale sheaves of `Λ`-modules whose cohomology sheaves are torsion of
+orders invertible on `S`. The coefficient ring `Λ` is arbitrary (for instance `Λ = 𝒪_E` and `L`
+killed by a power of a uniformizer): the torsion condition is imposed on the cohomology sheaves
+instead (compare `AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_smooth`). -/
+theorem ProEtale.isIso_derivedBaseChangeMap_app_of_smooth_of_torsionHomology [Smooth p]
+    [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)
+    (L : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hL : Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ T S.invertiblePrimes L) :
+    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+      ((comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapDerivedCategory.obj
+        (DerivedCategory.Plus.ι.obj L))) := by
+  have hBC : IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app L) :=
+    Etale.isIso_baseChange_app_of_smooth Λ p sq L hL
+  have : QuasiCompact h := MorphismProperty.of_isPullback (P := @QuasiCompact) sq inferInstance
+  have : QuasiSeparated h :=
+    MorphismProperty.of_isPullback (P := @QuasiSeparated) sq inferInstance
+  have hαβ := ProEtale.comparison_derivedBaseChangeMap Λ sq L
+  have : IsIso ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map
+      (DerivedCategory.Plus.ι.map ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app L))) :=
+    inferInstance
+  exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff
+    (Arrow.isoMk ((ProEtale.baseChangeSourceComparisonIso g p Λ).app L)
+      ((ProEtale.baseChangeTargetComparisonIso e h Λ).app L) hαβ.symm)).1 this
+
 end AlgebraicGeometry
