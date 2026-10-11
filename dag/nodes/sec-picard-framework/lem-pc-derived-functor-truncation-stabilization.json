@@ -141,5 +141,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dts2234 (reviewer sub-agent of L); spot-checked: Index arithmetic n>=N-i gives endpoints R^{i+n}F, R^{i+n+1}F with both degrees >=N (C4 ok in Step 3); new lower-truncation triangle node is a real lemma, not a duplicate of the upper-truncation lem-weil-pbc-truncation-triangle, Mathlib grep found only generic t-structure triangleLEGE (TruncLEGT.lean:189) without the H^{-n}(E)[n] identification (grep, triangleLEGE|truncGE, partial: no exact match); item does not restate citing lem-pc-unbounded-derived-functor-cohomological-bound. FIX more, RETURN less: (1) C1 Step 2: RF being triangulated on D^+ was uncited, now cites lem-weil-pbc-derived-direct-image-triangulated (generic tool, other unit); (2) C4 Step 2: the preceding LES term was H^{i-1}(RF(H^{-n}(E)[n])), corrected to H^i(RF(H^{-n}(E)[n])) as the segment Step 3/4 need; dropped the unused shift-identification from Step 2 uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedFunctorTruncationStabilization",
+  "declaration": "AlgebraicGeometry.isIso_rightDerivedFunctor_lowerTruncation_step",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedFunctorTruncationStabilization.lean",
+  "statement": "theorem isIso_rightDerivedFunctor_lowerTruncation_step (X : Scheme.{u}) [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w₂} AddCommGrpCat.{u}] [Abelian.HasKInjectiveResolutions (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasInjectiveResolutions (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (F : SheafOfModules.{u} (moduleRings X.toRingedSpace) ⥤ AddCommGrpCat.{u}) [F.Additive] (N : ℕ) (hvan : ∀ (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)), M.IsQuasicoherent → ∀ p : ℕ, N ≤ p → IsZero ((F.rightDerived p).obj M)) (E : schemeDerivedQCohCategory X) (i n : ℤ) (hn : (N : ℤ) - i ≤ n) : IsIso ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map (F.rightDerivedFunctor.map ((DerivedCategory.TStructure.t.natTransTruncGEOfLE (-n) (-n + 1) (Int.le_add_one (le_refl (-n)))).app E.obj)))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dft1238",
+  "group": "H1",
+  "result": "pass",
+  "note": "X:Scheme.{u}; Mod(O_X)=SheafOfModules (moduleRings X.toRingedSpace) as def-pc-derived-category; F additive only (node and Tag 08D4 say additive); RF=F.rightDerivedFunctor (unbounded, as sibling 08U1), R^p=F.rightDerived; HasKInjectiveResolutions/HasInjectiveResolutions/HasDerivedCategory binders not inferable (inferInstance fails) and true for Mod(O_X), not hollow; hvan over IsQuasicoherent M (same predicate as D_QCoh), p:N with N<=p; E:schemeDerivedQCohCategory; i n:Z, N-i<=n incl. equality; natTransTruncGEOfLE (-n) (-n+1) is tau>=-n E -> tau>=-(n-1) E as in landed lem-pc-derived-lower-truncation-step-triangle; homologyFunctor i of RF.map, IsIso; no let/existentials/index universes; only item node touched"
  }
 }

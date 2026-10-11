@@ -4610,3 +4610,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:24 L: merged deliver/M1/lem-weil-pbc-ogoma (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Ogoma ogoma_lemma)
 - 12:25 L: merged deliver/K1/lem-sc-torsion-sections-generic (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.TorsionSectionsGeneric AlgebraicGeometry.torsion_sections_generic)
 - 12:25 L: merged deliver/C1/lem-weil-pbc-open-restriction-pullback-unit (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit AlgebraicGeometry.open_restriction_pullback_unit)
+- 12:25 L: merged deliver/H1/lem-pc-derived-functor-truncation-stabilization (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedFunctorTruncationStabilization AlgebraicGeometry.isIso_rightDerivedFunctor_lowerTruncation_step)
