@@ -4435,3 +4435,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:24 L: merged deliver/F1/lem-weil-pbc-minimal-finite-free-resolution-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal ModuleCat.exists_minimal_finite_free_resolution)
 - 11:24 L: merged deliver/H1/lem-weil-pbc-module-finite-presentation-direct-sum (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FinitePresentationBiprod AlgebraicGeometry.RingedSpace.isFinitePresentation_biprod)
 - 11:24 L: merged deliver/K1/lem-weil-pbc-mittag-leffler-complex-limit-homology (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.MittagLefflerLimitHomology HomologicalComplex.isIso_limitPost_homology_of_mittagLeffler)
+- 11:24 L: merged deliver/M1/def-nagata-fixed-base-separated-stage (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataFixedBaseSeparatedStage AlgebraicGeometry.nagataSeparatedStage)
