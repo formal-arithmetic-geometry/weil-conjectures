@@ -107,5 +107,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fas1959 (reviewer sub-agent of L); spot-checked: New node lem-pc-fppf-affine-site-topos-equivalence vs Tag 021V text (statement includes the 021S affine-refinement fact; not a restatement of the item, which is a consequence; no existing fppf node). FIX more, RETURN less: C1 in step 2 (missed by the second reading): the claim that maps F|_Aff -> u^*H correspond to maps F -> H for a big-site sheaf H (dense-subsite sheafification compatibility) is not in the cited equivalence statement; added statement-only node lem-pc-dense-subsite-sheafification-compatibility (stmt_deps def-weil-pbc-sheafification as generic tool; Mathlib match recorded: IsDenseSubsite.sheafEquivSheafificationCompatibility, DenseSubsite/Basic.lean:805, induced-topology instance InducedTopology.lean:133), rewrote steps 1-2 to check its hypotheses (fully faithful, cover dense, induced topology from the refinement clause, equivalence) and cite it; proof_deps updated.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfAffineSheafificationRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.fppfSheafification_affineRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfAffineSheafificationRestriction.lean",
+  "statement": "theorem fppfSheafification_affineRestriction (S : Scheme.{u}) : Nonempty <| sheafification (fppfTopology.over S) (Type (u + 1)) ⋙ (whiskeringLeft _ _ (Type (u + 1))).obj (CostructuredArrow.toOver Scheme.Spec S).op ≅ (whiskeringLeft _ _ (Type (u + 1))).obj (CostructuredArrow.toOver Scheme.Spec S).op ⋙ sheafification ((fppfPrecoverage.comap (CostructuredArrow.toOver Scheme.Spec S ⋙ Over.forget S)).toGrothendieck) (Type (u + 1))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fsr0933"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsr0933",
+  "group": "J1",
+  "result": "fix",
+  "note": "S:Scheme.{u}=def-pc-scheme; big site Over S + fppfTopology.over S; u=CostructuredArrow.toOver Spec S, restriction=whiskeringLeft of .op; affine site topology fixed to E1's fppfPrecoverage.comap form (was inducedTopology); Nonempty(left≅right)=natural iso in F; Type(u+1) presheaves"
  }
 }
