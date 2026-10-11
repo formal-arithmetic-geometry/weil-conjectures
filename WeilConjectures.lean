@@ -17,11 +17,13 @@ public import WeilConjectures.Algebra.Homology.BifunctorLinear
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 public import WeilConjectures.Algebra.Homology.InternalHom
 public import WeilConjectures.Algebra.Homology.ModuleCat.Subcomplex
 public import WeilConjectures.Algebra.Homology.Monoidal.Dual
+public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
@@ -521,6 +523,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
+public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
 public import WeilConjectures.CategoryTheory.Monoidal.ShiftProduct
 public import WeilConjectures.CategoryTheory.MorphismProperty.IndSpreads

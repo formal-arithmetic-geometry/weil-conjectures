@@ -62,8 +62,9 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
 - `AlgebraicGeometry.Etale.derivedTensorRightPullback g`: tensoring with a complex pulled
   back along `g`, `N ↦ (K ↦ K ⊗ᴸ g^* N)`.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso g`: the canonical `Lg^* Λ_Y ≅ Λ_Z`.
-- `AlgebraicGeometry.Etale.nonempty_monoidal_leftDerivedUpperStar`: `Lg^*` is a monoidal
-  functor (currently `sorry`, see the TODO below).
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`: `Lg^*` is a monoidal functor, with
+  comonoidal structure the tensor comparison, and
+  `AlgebraicGeometry.Etale.nonempty_monoidal_leftDerivedUpperStar`.
 - `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_left` and
   `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_right`: `K ⊗ᴸ M` vanishes
   when `K` or `M` does.
@@ -79,10 +80,6 @@ The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor` 
   comparison `leftDerivedUpperStarTensorComparison`, which only uses the oplax monoidal
   structure of `F`, and `leftDerivedUpperStarTensorNatIso`, which uses that `F` is strong
   monoidal.
-- The comparison should be the `δ` of an oplax (in fact strong) monoidal structure
-  `Functor.OplaxMonoidal L(g^*)`, together with the unit comparison `Lg^*(𝟙_) ⟶ 𝟙_` and the
-  coherence axioms, with respect to the monoidal structure on derived categories. This needs
-  `-⊗ᴸ-(X)[A]` to agree with the tensor product of that monoidal structure.
 
 ## File structure
 

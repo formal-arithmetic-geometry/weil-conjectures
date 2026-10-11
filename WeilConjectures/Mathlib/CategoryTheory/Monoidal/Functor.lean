@@ -83,6 +83,30 @@ lemma transport_μ {F G : C ⥤ D} [F.LaxMonoidal] (i : F ≅ G) (X Y : C) :
     μ G X Y = (i.inv.app X ⊗ₘ i.inv.app Y) ≫ μ F X Y ≫ i.hom.app (X ⊗ Y) :=
   rfl
 
+variable (F : C ⥤ D) [F.LaxMonoidal] [IsIso (ε F)]
+
+/-- If the unit comparison `ε` of a lax monoidal functor is an isomorphism, so is
+`μ : F X ⊗ F 𝟙_ ⟶ F (X ⊗ 𝟙_)`: by right unitality, it is
+`(F X ◁ ε)⁻¹ ≫ ρ_ ≫ F (ρ_)⁻¹`. -/
+lemma isIso_μ_tensorUnit_right (X : C) : IsIso (μ F X (𝟙_ C)) := by
+  have h : μ F X (𝟙_ C) =
+      CategoryTheory.inv (F.obj X ◁ ε F) ≫ (ρ_ (F.obj X)).hom ≫ F.map (ρ_ X).inv := by
+    rw [right_unitality, Category.assoc, Category.assoc, ← F.map_comp, Iso.hom_inv_id,
+      F.map_id, Category.comp_id, IsIso.inv_hom_id_assoc]
+  rw [h]
+  infer_instance
+
+/-- If the unit comparison `ε` of a lax monoidal functor is an isomorphism, so is
+`μ : F 𝟙_ ⊗ F X ⟶ F (𝟙_ ⊗ X)`: by left unitality, it is
+`(ε ▷ F X)⁻¹ ≫ λ_ ≫ F (λ_)⁻¹`. -/
+lemma isIso_μ_tensorUnit_left (X : C) : IsIso (μ F (𝟙_ C) X) := by
+  have h : μ F (𝟙_ C) X =
+      CategoryTheory.inv (ε F ▷ F.obj X) ≫ (λ_ (F.obj X)).hom ≫ F.map (λ_ X).inv := by
+    rw [left_unitality, Category.assoc, Category.assoc, ← F.map_comp, Iso.hom_inv_id,
+      F.map_id, Category.comp_id, IsIso.inv_hom_id_assoc]
+  rw [h]
+  infer_instance
+
 end CategoryTheory.Functor.LaxMonoidal
 
 namespace CategoryTheory.Adjunction
