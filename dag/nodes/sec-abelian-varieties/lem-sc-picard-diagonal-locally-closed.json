@@ -22,7 +22,9 @@
   "def-weil-flat-morphism",
   "def-weil-proper-morphism",
   "def-weil-scheme-over-base",
-  "def-sbc-locally-finite-presentation"
+  "def-sbc-locally-finite-presentation",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -154,7 +156,7 @@
   "module": "Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed",
   "declaration": "AlgebraicGeometry.Scheme.picard_diagonal_locally_closed",
   "file": "lean/Sheaf/AlgebraicGeometry/PicardDiagonalLocallyClosed.lean",
-  "statement": "theorem picard_diagonal_locally_closed {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S), IsIso ((Scheme.Modules.pullbackPushforwardAdjunction (pullback.snd f g)).unit.app (SheafOfModules.unit T.ringCatSheaf))) (E : X.Modules) [E.IsFiniteLocallyFree] : ∃ (Z : Scheme.{u}) (j : Z ⟶ S), IsImmersion j ∧ LocallyOfFinitePresentation j ∧ QuasiCompact j ∧ QuasiSeparated j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S), (∃ (h : T ⟶ Z), h ≫ j = g) ↔ ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree), Nonempty (((Scheme.Modules.pullback (pullback.fst f g)).obj E) ≅ ((Scheme.Modules.pullback (pullback.snd f g)).obj N))",
+  "statement": "theorem picard_diagonal_locally_closed {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S), IsIso ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (E : X.Modules) [E.IsFiniteLocallyFree] : ∃ (Z : Scheme.{u}) (j : Z ⟶ S), IsImmersion j ∧ LocallyOfFinitePresentation j ∧ QuasiCompact j ∧ QuasiSeparated j ∧ ∀ {T : Scheme.{u}} (g : T ⟶ S), (∃ (h : T ⟶ Z), h ≫ j = g) ↔ ∃ (N : T.Modules) (_ : N.IsFiniteLocallyFree), Nonempty (((Scheme.Modules.tensorPullback (pullback.fst f g)).obj E) ≅ ((Scheme.Modules.tensorPullback (pullback.snd f g)).obj N))",
   "branch": "sheaf-dag",
   "by": "C1",
   "date": "2026-10-11",
@@ -168,5 +170,6 @@
   "group": "C1",
   "result": "fix",
   "note": "f flat/proper/LFP (proper gives qc+qs, so FP); hO = unit of pullback-pushforward adjunction at O_T for p=pullback.snd f g, all g; E finite locally free; q=pullback.fst, p=pullback.snd; FIX: j immersion of finite presentation now IsImmersion+LFP+QuasiCompact+QuasiSeparated (QC was dropped; downstream valuative criterion 943c44448 needs QuasiCompact j); factorization iff exists N finite locally free with q*E iso p*N"
- }
+ },
+ "lead_note": "2026-10-11 08:25 UTC L: lead fix: module pullback → tensorPullback per STATE convention; no mathematical change. Mathlib's Scheme.Modules.pullback (q*E, p*N) became Scheme.Modules.tensorPullback and the unit in hO is now that of Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f g)) instead of Scheme.Modules.pullbackPushforwardAdjunction; import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction added; nothing else changed, the proof is still sorry. stmt_deps gained def-pc-module-pullback and lem-pc-module-pullback-adjunction. TeX statement unchanged."
 }
