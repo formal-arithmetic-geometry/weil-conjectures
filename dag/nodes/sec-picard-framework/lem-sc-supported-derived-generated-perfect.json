@@ -128,5 +128,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sdg2434 (reviewer sub-agent of L); spot-checked: Read packet whole; checked Step 1 against 0A9A child, Step 3 against 09SN node lem-pc-compact-generators-build-objects (arbitrary set-indexed sums, Q_0=0 prepend OK), no existing 0A9A/09IS duplicate on sheaf-dag (K1 generator node was returned). FIX more, RETURN less: (1) C4 Step 2 attributed 'cohomology of a direct sum is the direct sum of cohomology' to lem-pc-derived-qcoh-direct-sums whose statement only gives existence of sums; now cites lem-pc-derived-ambient-direct-sums (missed by the Second reading); (2) E/C4 hypothesis of 09SN node that the category is triangulated: added the elementary closure-under-cones sentence in Step 2 and telescope agreement in Step 3; (3) B3 child statement used 'generated' undefined: now cites def-pc-generators and def-weil-triangulated-category, stmt_deps updated; proof_deps updated.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect",
+  "declaration": "AlgebraicGeometry.supported_derived_generated_perfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedDerivedGeneratedPerfect.lean",
+  "statement": "theorem supported_derived_generated_perfect (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (V : Y.Opens) (hV : IsCompact (V : Set Y)) : ∃ E : schemeDerivedQCohCategory Y, Scheme.IsPerfect Y E.obj ∧ (∀ (k : ℤ) (y : Y), y ∈ V → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj E.obj).val.presheaf y))) ∧ ∀ Q : schemeDerivedQCohCategory Y, (∀ (k : ℤ) (y : Y), y ∈ V → Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) k).obj Q.obj).val.presheaf y))) → ∃ (X : ℕ → schemeDerivedQCohCategory Y) (t : ∀ n : ℕ, (X n).obj ⟶ (X (n + 1)).obj), IsZero (X 0).obj ∧ (∀ n : ℕ, ∃ (I : Type u) (m : I → ℤ) (C : Cofan (fun i : I ↦ E.obj⟦m i⟧)), Nonempty (IsColimit C) ∧ ∃ (a : (X (n + 1)).obj ⟶ C.pt) (b : C.pt ⟶ (X n).obj⟦(1 : ℤ)⟧), Triangle.mk (t n) a b ∈ distTriang (schemeDerivedCategory Y)) ∧ ∃ (S : Cofan (fun n : ℕ ↦ (X n).obj)), Nonempty (IsColimit S) ∧ ∃ (s : S.pt ⟶ S.pt) (q : S.pt ⟶ Q.obj) (r : Q.obj ⟶ S.pt⟦(1 : ℤ)⟧), (∀ n : ℕ, S.inj n ≫ s = t n ≫ S.inj (n + 1)) ∧ Triangle.mk (𝟙 S.pt - s) q r ∈ distTriang (schemeDerivedCategory Y)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
