@@ -23,7 +23,8 @@ the formal properties of these transports used by the blueprint.
   transitive.
 - `AlgebraicGeometry.Etale.isIso_map_fromIntegral_realization`: the `ℚ̄_ℓ`-stage purity
   isomorphism.
-- `AlgebraicGeometry.Etale.map_smoothTrace_eq_comp`: the rational transport of the smooth trace.
+- `AlgebraicGeometry.Etale.map_smoothPurityTrace_eq_comp`: the rational transport of the smooth
+  trace.
 - `AlgebraicGeometry.Etale.dualizingComplex_purity_all_stages`: the dualizing complexes.
 
 ## Implementation notes
@@ -126,7 +127,7 @@ The `E`-stage operations are the transports of the integral ones along the exact
 `E`-smooth trace, `Rf_!^E(γ_E)` followed by the counit, is the transport of the integral smooth
 trace `Tr = Rf_!(γ) ≫ ε`: rational purity commutes with the smooth trace. The coherence squares
 are transported in the same way, `ρ` being a functor. -/
-theorem map_smoothTrace_eq_comp
+theorem map_smoothPurityTrace_eq_comp
     {FX : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E ⥤
       DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E}
     {FXE : DerivedCategoryDerivedCompleteRational X.smallEtaleTopology l E ⥤
@@ -162,7 +163,7 @@ Let `a : X ⟶ Spec k` be smooth separated, locally of finite type, of pure dime
 `Λ = (Λ_n)_n` a normalized system on `Spec k` (the coefficient system `𝒪_E ⧸ 𝔪ⁿ⁺¹`). Then
 * at every finite level `n`, the counit `Ra_! ω_X ⟶ Λ_n` is the smooth trace
   `RΓ_c(X, Λ_n(d)[2d]) ⟶ Λ_n` read through a purity identification `ω_X ≅ Λ_{n,X}(d)[2d]`
-  (`AlgebraicGeometry.Etale.exists_counit_eq_smoothTrace`), which the transports below carry
+  (`AlgebraicGeometry.Etale.exists_counit_eq_smoothPurityTrace`), which the transports below carry
   to the adic and rational stages;
 * the dualizing complex `ω_{X,𝒪_E} = Ra^! Λ` and `Λ_X(d)[2d]`, the realizations of the systems
   `S`, `T` with levels `La^* Λ_n(d)[2d]` and `Ra^! Λ_n`, are derived complete and identified by
@@ -193,7 +194,7 @@ theorem dualizingComplex_purity_all_stages {k : Type u} [Field k]
         (R(a)^![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E) ⧸
           PadicAlgCl.maximalIdealShrink l E ^ (n + 1))]).obj (constantComplex _ _),
       (rightDerivedUpperShriekAdjunction _ a).counit.app (constantComplex _ _) =
-        (R(a)_![_]).map γn.inv ≫ smoothTrace _ d a γn) ∧
+        (R(a)_![_]).map γn.inv ≫ smoothPurityTrace _ d a γn) ∧
     ∃ (hS : DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E cS.pt)
       (hT : DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E cT.pt)
       (e : cS.pt ≅ cT.pt),
@@ -203,7 +204,7 @@ theorem dualizingComplex_purity_all_stages {k : Type u} [Field k]
             X).map (eS n ≪≫ γ n ≪≫ (eT n).symm).hom) ∧
       IsIso ((DerivedCategoryDerivedCompleteRational.fromIntegral X.smallEtaleTopology l E).map
         (X := ⟨cS.pt, hS⟩) (Y := ⟨cT.pt, hT⟩) (ObjectProperty.homMk e.hom)) :=
-  ⟨fun _ ↦ exists_counit_eq_smoothTrace _ a,
+  ⟨fun _ ↦ exists_counit_eq_smoothPurityTrace _ a,
     exists_iso_fromIntegral_realization_twistShiftPullbackLevel l E d a K S T eS eT γ hγ hcS hcT⟩
 
 /-- Blueprint `sk-thm-purity-transport`: Smooth purity over `𝒪_E`, `E` and `ℚ̄_ℓ`
@@ -219,8 +220,9 @@ remaining stages:
 * over `ℚ̄_ℓ`, its image under the functor `ι : D_comp(X, E) ⥤ D(X, ℚ̄_ℓ)` into the colimit is an
   isomorphism.
 The compatibilities with composition, base change, finite reduction and scalar extension and
-the counit normalization are `AlgebraicGeometry.Etale.smoothTrace_comp`,
-`AlgebraicGeometry.Etale.smoothTrace_baseChange`, `AlgebraicGeometry.Etale.map_smoothTrace`,
+the counit normalization are `AlgebraicGeometry.Etale.smoothPurityTrace_comp`,
+`AlgebraicGeometry.Etale.smoothPurityTrace_baseChange`,
+`AlgebraicGeometry.Etale.map_smoothPurityTrace`,
 `AlgebraicGeometry.Etale.map_map_hom_comp_eq` and
 `AlgebraicGeometry.Etale.dualizingComplex_purity_all_stages`. -/
 theorem exists_iso_smoothPurity_transport (d : ℤ) {X Y : Scheme.{u}} (f : X ⟶ Y)
