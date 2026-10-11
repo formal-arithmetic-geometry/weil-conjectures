@@ -3661,3 +3661,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:40 L: merged deliver/M1/lem-sc-affine-standard-cover-finite-projective (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FiniteProjectiveOfStandardCover Module.finite_projective_of_localizationAway_free)
 - 07:40 L: merged deliver/G1/lem-exc-etale-sheaves-gsets-point (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint AlgebraicGeometry.etaleSheavesGsetsPoint)
 - 07:41 L: merged deliver/F1/lem-pur-sheaf-hom-is-sheaf (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.HomIsSheaf SheafOfModules.homObj_isSheaf_and_sections)
+- 07:41 L: merged deliver/F1/lem-sc-affine-totalquotient-minimal-product (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.TotalQuotientRingMinimalProduct Algebra.totalQuotientRing_isProduct_minimalPrimes)

@@ -146,5 +146,24 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tqm3006 (reviewer sub-agent of L); spot-checked: Read all five steps against the seven cited statements and 02LX/05C3/0547; statement matches M1 step 0 use (C4). FIX more, RETURN less: (1) C1 step 1: 'every minimal prime is weakly associated by the standard argument in 02LX' was uncited (02LX assumes it as hypothesis); replaced by the needed fact q_i subset Z via existing mathlib leaf lem-pc-minimal-prime-avoids-nonzerodivisor (Tag 00EU area), added to uses/proof_deps; (2) B4 steps 2,3,5: plain-text arrows and names rewritten in TeX; (3) step 3: maximality of each q_iQ(A) argued explicitly by minimality (the old parenthesis only showed maximal ideals are among them); step 5 names part (2) of the correspondence node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TotalQuotientRingMinimalProduct",
+  "declaration": "Algebra.totalQuotientRing_isProduct_minimalPrimes",
+  "file": "lean/Sheaf/AlgebraicGeometry/TotalQuotientRingMinimalProduct.lean",
+  "statement": "theorem totalQuotientRing_isProduct_minimalPrimes {A : Type u} [CommRing A] {t : ℕ} (q : Fin t ≃ {p : PrimeSpectrum A // p.asIdeal ∈ minimalPrimes A}) (hweak : ∀ (a : A) (p : Ideal A), p ∈ ((⊥ : Submodule A A).colon {a}).minimalPrimes → p ∈ minimalPrimes A) : Nonempty (Localization (nonZeroDivisors A) ≃ₐ[A] (∀ i : Fin t, Localization.AtPrime (q i).val.asIdeal))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tqm0942"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tqm0942",
+  "group": "F1",
+  "result": "fix",
+  "note": "CommRing A, no extra instances; Fin t ≃ minimalPrimes (exact enumeration, t=0 zero ring); hweak = every prime minimal over colon(⊥,{a}) is minimal (0547, C1 form); Localization (nonZeroDivisors A) ≃ₐ[A] Π Localization.AtPrime (A-alg pins the canonical map)"
  }
 }
