@@ -138,5 +138,23 @@
   "group": "C",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C; spot-checked by L: L read the four steps against Sites 00WW: the equalizer for the image covering is transported along the isomorphisms u(V_i x_V V_j) = u(V_i) x u(V_j) of 00WV(b); correct; the C review checks each step"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf",
+  "declaration": "CategoryTheory.siteContinuous_pushforward_isSheaf",
+  "file": "lean/Sheaf/CategoryTheory/SiteContinuousPushforwardSheaf.lean",
+  "statement": "theorem siteContinuous_pushforward_isSheaf {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D] (J : Precoverage C) (K : Precoverage D) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] (F : C ⥤ D) (hcover : ∀ (X : C) (R : Presieve X), R ∈ J X → R.map F ∈ K (F.obj X)) (hpullback : ∀ (X Y Z : C) (R : Presieve X), R ∈ J X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) F) : (∀ G : Sheaf K.toGrothendieck (Type w), Presheaf.IsSheaf J.toGrothendieck (F.op ⋙ G.obj) ∧ ∀ (X : C) (R : Presieve X), R ∈ J X → (Presieve.IsSheafFor (F.op ⋙ G.obj) R ↔ Presieve.IsSheafFor G.obj (R.map F))) ∧ (∀ G : Sheaf K.toGrothendieck AddCommGrpCat.{w}, Presheaf.IsSheaf J.toGrothendieck (F.op ⋙ G.obj))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
