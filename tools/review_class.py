@@ -18,7 +18,7 @@ from __future__ import annotations
 import hashlib, json, pathlib, subprocess, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 if not (ROOT / "dag").exists(): ROOT = pathlib.Path.home() / "weil-conjectures-sheaf"
-SAMPLE = 4
+SAMPLE = 10
 def git(*a):
     return subprocess.run(["git", "-C", str(ROOT), *a], capture_output=True, text=True).stdout
 def show(ref, path):
