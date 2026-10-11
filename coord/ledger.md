@@ -4845,3 +4845,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:00 L: merged deliver/C1/lem-weil-pbc-quasi-coherent-symmetric-algebra (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra AlgebraicGeometry.exists_quasiCoherentSymmetricAlgebra)
 - 14:00 L: merged deliver/E1/lem-weil-pbc-regular-ring-smooth-ascent (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularRingSmoothAscent Algebra.isRegularRing_of_smooth)
 - 14:00 L: merged deliver/G1/lem-weil-pbc-regular-permanence (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RegularPermanence RingHom.isRegular_of_isRegular_comp)
+- 14:00 L: merged deliver/F1/lem-sc-valuation-limit-qcoh-section-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ValuationLimitQcohSectionDescent AlgebraicGeometry.valuation_limit_qcoh_section_descent)
