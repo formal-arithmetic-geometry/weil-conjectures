@@ -147,5 +147,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: Four steps and one Mathlib leaf (products of injectives: the instance at Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean:139, verified). Follows 0EXZ: G_i = product over b:k->i of f_{b*}A_k for injective embeddings A_k (lem-weil-pbc-site-sheaves-enough-injectives); f_{b*} preserves injectives since f_b^{-1} is exact (lem-sp-right-adjoint-preserves-injectives, tool use); psi_a by projection to the factor a.b and the counit; cocycle by reindexing; gamma_i mono via the id_i component. Correctly notes that lem-weil-pbc-direct-image-preserves-injectives is scheme-specific."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ColimitSitesInjectiveSystem",
+  "declaration": "CategoryTheory.exists_compatible_injective_system",
+  "statement": "theorem exists_compatible_injective_system (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u}) (P : ∀ j : J, Precoverage (F.obj j)) [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderComposition] [∀ j, (P j).IsStableUnderBaseChange] [∀ j, (P j).HasPullbacks] (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X → Finite R.uncurry) (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X), R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X)) (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f → PreservesLimit (cospan f g) (F.map a).toFunctor) [∀ (j k : J) (a : j ⟶ k), (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck] [∀ (j k : J) (a : j ⟶ k), PreservesFiniteLimits (Functor.sheafPullbackConstruction.sheafPullback (F.map a).toFunctor (Type u) (P j).toGrothendieck (P k).toGrothendieck)] [∀ (j k : J) (a : j ⟶ k), PreservesFiniteColimits (Functor.sheafPullbackConstruction.sheafPullback (F.map a).toFunctor (Type u) (P j).toGrothendieck (P k).toGrothendieck)] (Fs : ∀ j : J, Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (φ : ∀ {j k : J} (a : j ⟶ k), Fs j ⟶ ((F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck).obj (Fs k)) (hφ : ∀ {j k l : J} (a : j ⟶ k) (b : k ⟶ l), φ (a ≫ b) = φ a ≫ ((F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck).map (φ b) ≫ (Functor.sheafPushforwardContinuousComp' (eqToIso (congrArg Cat.Hom.toFunctor (F.map_comp a b).symm)) AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck (P l).toGrothendieck).hom.app (Fs l)) : ∃ (Gs : ∀ j : J, Sheaf (P j).toGrothendieck AddCommGrpCat.{u}) (ψ : ∀ {j k : J} (a : j ⟶ k), Gs j ⟶ ((F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck).obj (Gs k)) (γ : ∀ j : J, Fs j ⟶ Gs j), (∀ j : J, Injective (Gs j)) ∧ (∀ j : J, Mono (γ j)) ∧ (∀ {j k l : J} (a : j ⟶ k) (b : k ⟶ l), ψ (a ≫ b) = ψ a ≫ ((F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck).map (ψ b) ≫ (Functor.sheafPushforwardContinuousComp' (eqToIso (congrArg Cat.Hom.toFunctor (F.map_comp a b).symm)) AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck (P l).toGrothendieck).hom.app (Gs l)) ∧ (∀ {j k : J} (a : j ⟶ k), φ a ≫ ((F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (P j).toGrothendieck (P k).toGrothendieck).map (γ k) = γ j ≫ ψ a)",
+  "by": "F1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/Paper/ColimitSitesInjectiveSystem.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-05c43",
+  "group": "F1",
+  "result": "pass",
+  "note": "independent Codex review: Matched J = Iᵒᵖ, finite-cover sites and site-morphism hypotheses, abelian sheaves, adjunction-transposed transitions and cocycles, injective targets, monic embeddings, and system compatibility to the TeX node; earlier return repaired, node differs only in lean, and packet compile is clean."
  }
 }
