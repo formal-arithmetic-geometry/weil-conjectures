@@ -19,7 +19,8 @@
   "def-sc-invertible-module",
   "def-weil-pbc-symmetric-product-morphism",
   "lem-weil-pbc-projective-space-functor-of-points",
-  "def-weil-pbc-morphism-to-projective-space-by-sections"
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-pbc-symmetric-product-sections"
  ],
  "proof": [
   {
@@ -189,5 +190,22 @@
   "by": "L",
   "result": "pass",
   "note": "sigma_n constructed through the morphism-by-sections node, consistent with the over-base split; 2 new nodes; the coefficient leaf (Finset.prod_add grouped by |J|) accepted as a few-lines specialization"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SymmetricProductProperties",
+  "declaration": "AlgebraicGeometry.symmetricProduct_properties",
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricProductProperties.lean",
+  "statement": "theorem symmetricProduct_properties (S : Scheme.{v}) (m : ℕ) (X : Over S) (pr : Fin (m + 1) → (X ⟶ Over.mk (ℙ(ULift.{v} (Fin 2); S) ↘ S))) (_hprod : IsLimit (Fan.mk X pr)) : (∀ j : Fin (m + 2), symmetricProductPolynomial (m + 1) (Nat.zero_lt_succ m) j = ∑ J ∈ (Finset.univ : Finset (Fin (m + 1))).powerset.filter (fun J ↦ J.card = j.val), (∏ i ∈ J, MvPolynomial.X (Sum.inl i)) * ∏ i ∈ (Finset.univ : Finset (Fin (m + 1))) \\ J, MvPolynomial.X (Sum.inr i)) ∧ (∀ j : Fin (m + 2), ∀ d ∈ (symmetricProductPolynomial (m + 1) (Nat.zero_lt_succ m) j).support, ∀ i : Fin (m + 1), d (Sum.inl i) + d (Sum.inr i) = 1) ∧ (∀ z : X.left, ∃ j : ULift.{v} (Fin (m + 2)), z ∈ Scheme.Modules.nonvanishingLocus (symmetricProductLineBundle (fun i ↦ (pr i).left)) ((symmetricProductCoordinateSection (fun i ↦ (pr i).left) j).val (Opposite.op ⊤))) ∧ ∃ (hL : (symmetricProductLineBundle (fun i ↦ (pr i).left)).IsInvertible) (hs : Epi ((symmetricProductLineBundle (fun i ↦ (pr i).left)).freeHomEquiv.symm (symmetricProductCoordinateSection (fun i ↦ (pr i).left)))), ∃ σ : X.left ⟶ ℙ(ULift.{v} (Fin (m + 2)); S), σ = @ProjectiveSpace.homOfGeneratingSections.{v} (ULift.{v} (Fin (m + 2))) _ X.left S X.hom (symmetricProductLineBundle (fun i ↦ (pr i).left)) hL (symmetricProductCoordinateSection (fun i ↦ (pr i).left)) hs ∧ σ ≫ ℙ(ULift.{v} (Fin (m + 2)); S) ↘ S = X.hom ∧ ∃ ψ : X.left ⟶ ℙ(ULift.{v} (Fin (m + 2)); Spec (CommRingCat.of (ULift.{v} ℤ))), σ ≫ ProjectiveSpace.toProjInt _ S = ψ ≫ ProjectiveSpace.toProjInt _ _ ∧ (∃ e : (Scheme.Modules.tensorPullback ψ).obj (ProjectiveSpace.twist (ULift.{v} (Fin (m + 2))) (Spec (CommRingCat.of (ULift.{v} ℤ))) 1) ≅ symmetricProductLineBundle (fun i ↦ (pr i).left), ∀ j : ULift.{v} (Fin (m + 2)), e.hom.app ⊤ (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction ψ)).unit.app (ProjectiveSpace.twist (ULift.{v} (Fin (m + 2))) (Spec (CommRingCat.of (ULift.{v} ℤ))) 1)).val.app (Opposite.op ⊤) (ProjectiveSpace.twistOneSection _ _ j)) = (symmetricProductCoordinateSection (fun i ↦ (pr i).left) j).val (Opposite.op ⊤)) ∧ ∀ π : Equiv.Perm (Fin (m + 1)), ∃ τ : X ≅ X, (∀ i, τ.hom ≫ pr i = pr (π i)) ∧ (∀ i, τ.inv ≫ pr i = pr (π.symm i)) ∧ (∃ β : (Scheme.Modules.tensorPullback τ.hom.left).obj (symmetricProductLineBundle (fun i ↦ (pr i).left)) ≅ symmetricProductLineBundle (fun i ↦ (pr i).left), ∀ j : ULift.{v} (Fin (m + 2)), β.hom.app ⊤ (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction τ.hom.left)).unit.app (symmetricProductLineBundle (fun i ↦ (pr i).left))).val.app (Opposite.op ⊤) ((symmetricProductCoordinateSection (fun i ↦ (pr i).left) j).val (Opposite.op ⊤))) = (symmetricProductCoordinateSection (fun i ↦ (pr i).left) j).val (Opposite.op ⊤)) ∧ τ.hom.left ≫ σ = σ",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-spp",
+  "group": "U1",
+  "result": "pass"
  }
 }
