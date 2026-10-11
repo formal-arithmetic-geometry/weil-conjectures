@@ -405,14 +405,116 @@ lemma trLeft_left {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂
   unfold Over.DescentDatum.trLeft
   rw [this]
 
+section Descended
+
+variable [AlgebraicGeometry.Etale p] {X : Y.Etale} (r : (sheaf D).obj.RepresentableBy X)
+
+variable (V) in
+/-- `V` as an étale `Y`-scheme. -/
+noncomputable abbrev VE : Y.Etale :=
+  Etale.mk (V.hom ≫ p)
+
 variable (D) in
-/-- **Effective étale descent for finite étale schemes**: a finite étale `Y'`-scheme `V` with a
-descent datum relative to a surjective étale morphism `p : Y' ⟶ Y` is the base change of a finite
-étale `Y`-scheme `X`, through a morphism `q : V ⟶ X` which is invariant under the transport. -/
-theorem exists_isPullback [AlgebraicGeometry.Etale p] [Surjective p] [IsFinite V.hom] :
-    ∃ (X : Y.Etale) (q : V.left ⟶ X.left), IsFinite X.hom ∧ IsPullback q V.hom X.hom p ∧
-      ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
-        (D.transport f₁ f₂ h a).left ≫ q = a.left ≫ q := by
+/-- The section of `sheaf D` over `V` given by the identity of `V`. -/
+noncomputable def idSection : (sheaf D).obj.obj (op (VE (p := p) V)) :=
+  ofPt V.hom rfl (𝟙 _) (Category.id_comp _)
+
+/-- The morphism `V ⟶ X` of étale `Y`-schemes corresponding to `idSection D`. -/
+noncomputable def descQE : VE (p := p) V ⟶ X :=
+  r.homEquiv.symm (idSection D)
+
+lemma homEquiv_descQE : r.homEquiv (descQE r) = idSection D :=
+  r.homEquiv.apply_symm_apply _
+
+/-- The morphism `V ⟶ X` corresponding to `idSection D`. -/
+noncomputable def descQ : V.left ⟶ X.left :=
+  (descQE r).left
+
+lemma descQ_comm : descQ r ≫ X.hom = V.hom ≫ p :=
+  MorphismProperty.Over.w (r.homEquiv.symm (idSection D))
+
+lemma isPullback_descQ : IsPullback (descQ r) V.hom X.hom p := by
+  have : AlgebraicGeometry.Etale X.hom := X.prop
+  let ZE : Y.Etale := Etale.mk (pullback.fst X.hom p ≫ X.hom)
+  let fstE : ZE ⟶ X := Etale.homMk (pullback.fst X.hom p) rfl
+  have hzZ : pullback.snd X.hom p ≫ p = ZE.hom := pullback.condition.symm
+  let ψ := toPt (Z := ZE) (pullback.snd X.hom p) hzZ (r.homEquiv fstE)
+  let φ := pullback.lift (descQ r) V.hom (descQ_comm r)
+  let φE : VE (p := p) V ⟶ ZE := Etale.homMk φ (by
+    change φ ≫ pullback.fst X.hom p ≫ X.hom = V.hom ≫ p
+    rw [pullback.lift_fst_assoc]
+    exact descQ_comm r)
+  let ψE : ZE ⟶ VE (p := p) V := Etale.homMk ψ (by
+    change ψ ≫ V.hom ≫ p = pullback.fst X.hom p ≫ X.hom
+    rw [toPt_hom_assoc]
+    exact hzZ)
+  have h1 : φ ≫ ψ = 𝟙 _ := by
+    have hφ : φE ≫ fstE = descQE r := Etale.hom_ext (pullback.lift_fst _ _ _)
+    calc φ ≫ ψ = toPt V.hom rfl ((sheaf D).obj.map φE.op (r.homEquiv fstE)) :=
+          (toPt_map φE _ hzZ V.hom rfl (pullback.lift_snd _ _ _).symm _).symm
+      _ = toPt V.hom rfl (idSection D) := by rw [← r.homEquiv_comp, hφ, homEquiv_descQE]
+      _ = 𝟙 _ := toPt_ofPt _ _ _ _
+  have h2 : ψ ≫ descQ r = pullback.fst X.hom p := by
+    have : ψE ≫ descQE r = fstE := by
+      apply r.homEquiv.injective
+      rw [r.homEquiv_comp, homEquiv_descQE]
+      apply toPt_injective (pullback.snd X.hom p) hzZ
+      rw [toPt_map ψE V.hom rfl _ hzZ (toPt_hom (Z := ZE) _ hzZ (r.homEquiv fstE)).symm,
+        idSection, toPt_ofPt]
+      exact Category.comp_id _
+    exact congrArg (fun f ↦ f.left) this
+  have h3 : ψ ≫ φ = 𝟙 _ := pullback.hom_ext (by simp [φ, h2]) (by simp [φ, ψ])
+  exact IsPullback.of_iso_pullback ⟨descQ_comm r⟩ ⟨φ, ψ, h1, h3⟩ (pullback.lift_fst _ _ _)
+    (pullback.lift_snd _ _ _)
+
+variable (D) in
+/-- The underlying morphism of `idSection D`. -/
+noncomputable def idLeft : pullback (VE (p := p) V).hom p ⟶ V.left :=
+  ofPtLeft D (Z := VE (p := p) V) V.hom rfl (𝟙 _) (Category.id_comp _)
+
+lemma fst_descQ :
+    pullback.fst (VE (p := p) V).hom p ≫ descQ (V := V) r = idLeft D ≫ descQ r := by
+  have : AlgebraicGeometry.Etale (VE (p := p) V).hom := (VE (p := p) V).prop
+  let PE : Y.Etale := Etale.mk (pullback.fst (VE (p := p) V).hom p ≫ (VE (p := p) V).hom)
+  have hzP : pullback.snd (VE (p := p) V).hom p ≫ p = PE.hom := pullback.condition.symm
+  have he : idLeft D ≫ V.hom = pullback.snd (VE (p := p) V).hom p := D.trLeft_hom _ _ _ _ _
+  let fE : PE ⟶ VE (p := p) V := Etale.homMk (pullback.fst _ _) rfl
+  let aE : PE ⟶ VE (p := p) V := Etale.homMk (idLeft D) (by
+    change idLeft D ≫ V.hom ≫ p = pullback.fst (VE (p := p) V).hom p ≫ (VE (p := p) V).hom
+    rw [reassoc_of% he]
+    exact hzP)
+  have hfa : (sheaf D).obj.map fE.op (idSection D) = (sheaf D).obj.map aE.op (idSection D) := by
+    apply toPt_injective (pullback.snd (VE (p := p) V).hom p) hzP
+    rw [toPt_map aE V.hom rfl _ hzP he.symm, idSection, toPt_ofPt,
+      toPt_eq_trLeft (pullback.fst (VE (p := p) V).hom p ≫ V.hom) _
+        (by rw [Category.assoc]; rfl) hzP]
+    refine (D.trLeft_congr rfl rfl ?_).trans (Category.comp_id _).symm
+    exact (toPt_map fE V.hom rfl _ _ rfl _).trans (congrArg (fE.left ≫ ·) (toPt_ofPt _ _ _ _))
+  have : fE ≫ descQE r = aE ≫ descQE r := by
+    apply r.homEquiv.injective
+    rw [r.homEquiv_comp, r.homEquiv_comp, homEquiv_descQE, hfa]
+  exact congrArg (fun f ↦ f.left) this
+
+lemma descQ_invariant {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂ ≫ p)
+    (a : Over.mk f₁ ⟶ V) : (D.transport f₁ f₂ h a).left ≫ descQ r = a.left ≫ descQ r := by
+  let t : T ⟶ pullback (VE (p := p) V).hom p := pullback.lift a.left f₂ (by
+    change a.left ≫ V.hom ≫ p = f₂ ≫ p
+    rw [← Category.assoc, Over.w a]
+    exact h)
+  have ht : t ≫ idLeft D = (D.transport f₁ f₂ h a).left := by
+    refine (D.trLeft_comp t _ _ rfl rfl rfl).symm.trans ?_
+    refine (D.trLeft_congr ?_ ?_ ?_).trans (trLeft_left f₁ f₂ h a)
+    · rw [pullback.lift_fst_assoc]; exact Over.w a
+    · exact pullback.lift_snd _ _ _
+    · exact (congrArg (t ≫ ·) (Category.comp_id _)).trans (pullback.lift_fst _ _ _)
+  rw [← ht, Category.assoc, ← fst_descQ, pullback.lift_fst_assoc]
+
+end Descended
+
+set_option maxHeartbeats 1000000 in
+variable (D) in
+lemma exists_representableBy [AlgebraicGeometry.Etale p] [Surjective p] [IsFinite V.hom] :
+    ∃ X : Y.Etale, IsFinite X.hom ∧ Nonempty ((sheaf D).obj.RepresentableBy X) := by
   let 𝔅 : Set Y.Opens := {U | IsAffineOpen U ∧ ∃ (W : Scheme.{u}) (_ : IsAffine W) (q : W ⟶ Y')
     (_ : AlgebraicGeometry.Etale q) (pU : W ⟶ U.toScheme), pU ≫ U.ι = q ≫ p ∧ Surjective pU}
   have h𝔅 : TopologicalSpace.Opens.IsBasis 𝔅 := by
@@ -421,84 +523,25 @@ theorem exists_isPullback [AlgebraicGeometry.Etale p] [Surjective p] [IsFinite V
     obtain ⟨U, hU, hyU, hUO, W, hW, q, hq, pU, hpq, hp⟩ :=
       exists_isAffineOpen_surjective_etale p hy (p.surjective y)
     exact ⟨U, ⟨hU, W, hW, q, hq, pU, hpq, hp⟩, hyU, hUO⟩
-  obtain ⟨X, hX, ⟨r⟩⟩ := Etale.exists_representableBy_of_isBasis (sheaf D) 𝔅 h𝔅 fun U ↦ by
-    obtain ⟨hU, W, hW, q, hq, pU, hpq, hp⟩ := U.2
-    have : IsAffine (openObj U.1).left := hU
-    let WE : Y.Etale := Etale.mk (q ≫ p)
-    have : IsAffine WE.left := hW
-    let pE : WE ⟶ openObj U.1 := Etale.homMk pU hpq
-    have : Surjective pE.left := hp
-    exact Etale.exists_representableBy_of_isAffine (sheaf D) pE (overW (V := V) (W := WE) q)
-      (representableByW D q rfl)
-  have : AlgebraicGeometry.Etale X.hom := X.prop
-  -- the section of `sheaf D` over `V` given by the identity of `V`
-  let VE : Y.Etale := Etale.mk (V.hom ≫ p)
-  let e : (sheaf D).obj.obj (op VE) := ofPt (Z := VE) V.hom rfl (𝟙 _) (Category.id_comp _)
-  let qE : VE ⟶ X := r.homEquiv.symm e
-  have hqE : r.homEquiv qE = e := r.homEquiv.apply_symm_apply e
-  have hcomm : qE.left ≫ X.hom = V.hom ≫ p := MorphismProperty.Over.w qE
-  -- the inverse of `V ⟶ X ×_Y Y'`
-  let ZE : Y.Etale := Etale.mk (pullback.fst X.hom p ≫ X.hom)
-  let fstE : ZE ⟶ X := Etale.homMk (pullback.fst X.hom p) rfl
-  have hzZ : pullback.snd X.hom p ≫ p = ZE.hom := pullback.condition.symm
-  let ψ := toPt (Z := ZE) (pullback.snd X.hom p) hzZ (r.homEquiv fstE)
-  let φ := pullback.lift qE.left V.hom hcomm
-  let φE : VE ⟶ ZE := Etale.homMk φ (by
-    change φ ≫ pullback.fst X.hom p ≫ X.hom = V.hom ≫ p
-    rw [pullback.lift_fst_assoc]
-    exact hcomm)
-  let ψE : ZE ⟶ VE := Etale.homMk ψ (by
-    change ψ ≫ V.hom ≫ p = pullback.fst X.hom p ≫ X.hom
-    rw [toPt_hom_assoc]
-    exact hzZ)
-  have h1 : φ ≫ ψ = 𝟙 _ := by
-    have hφ : φE ≫ fstE = qE := Etale.hom_ext (pullback.lift_fst _ _ _)
-    calc φ ≫ ψ = toPt V.hom rfl ((sheaf D).obj.map φE.op (r.homEquiv fstE)) :=
-          (toPt_map φE _ hzZ V.hom rfl (pullback.lift_snd _ _ _).symm _).symm
-      _ = toPt V.hom rfl e := by rw [← r.homEquiv_comp, hφ, hqE]
-      _ = 𝟙 _ := toPt_ofPt _ _ _ _
-  have h2 : ψ ≫ qE.left = pullback.fst X.hom p := by
-    have : ψE ≫ qE = fstE := by
-      apply r.homEquiv.injective
-      rw [r.homEquiv_comp, hqE]
-      apply toPt_injective (pullback.snd X.hom p) hzZ
-      rw [toPt_map ψE V.hom rfl _ hzZ (toPt_hom _ _ _).symm]
-      exact (Category.comp_id _).trans rfl
-    exact congrArg (fun f ↦ f.left) this
-  have h3 : ψ ≫ φ = 𝟙 _ := pullback.hom_ext (by simp [φ, h2]) (by simp [φ, ψ])
-  let i : V.left ≅ pullback X.hom p := ⟨φ, ψ, h1, h3⟩
-  refine ⟨X, qE.left, hX, IsPullback.of_iso_pullback ⟨hcomm⟩ i (pullback.lift_fst _ _ _)
-    (pullback.lift_snd _ _ _), ?_⟩
-  -- invariance of `q` under the transport
-  let PE : Y.Etale := Etale.mk (pullback.fst (V.hom ≫ p) p ≫ V.hom ≫ p)
-  have hzP : pullback.snd (V.hom ≫ p) p ≫ p = PE.hom := pullback.condition.symm
-  have he : e.1.left ≫ V.hom = pullback.snd (V.hom ≫ p) p := MorphismProperty.Over.w e.1
-  let fE : PE ⟶ VE := Etale.homMk (pullback.fst _ _) rfl
-  let aE : PE ⟶ VE := Etale.homMk e.1.left (by
-    change e.1.left ≫ V.hom ≫ p = pullback.fst (V.hom ≫ p) p ≫ V.hom ≫ p
-    rw [reassoc_of% he]
-    exact hzP)
-  have hfa : (sheaf D).obj.map fE.op e = (sheaf D).obj.map aE.op e := by
-    apply toPt_injective (pullback.snd (V.hom ≫ p) p) hzP
-    rw [toPt_map aE V.hom rfl _ hzP he.symm, toPt_ofPt,
-      toPt_eq_trLeft (pullback.fst (V.hom ≫ p) p ≫ V.hom) _ (by rw [Category.assoc]; rfl) hzP]
-    refine (D.trLeft_congr rfl rfl ?_).trans (Category.comp_id _).symm
-    rw [toPt_map fE V.hom rfl _ _ rfl, toPt_ofPt]
-  have hfa' : pullback.fst (V.hom ≫ p) p ≫ qE.left = e.1.left ≫ qE.left := by
-    have : fE ≫ qE = aE ≫ qE := by
-      apply r.homEquiv.injective
-      rw [r.homEquiv_comp, r.homEquiv_comp, hfa]
-    exact congrArg (fun f ↦ f.left) this
-  intro T f₁ f₂ h a
-  let t : T ⟶ pullback (V.hom ≫ p) p := pullback.lift a.left f₂ (by
-    rw [← Category.assoc, Over.w a]
-    exact h)
-  have ht : t ≫ e.1.left = (D.transport f₁ f₂ h a).left := by
-    refine (D.trLeft_comp t _ _ rfl rfl rfl).symm.trans ?_
-    refine (D.trLeft_congr ?_ ?_ ?_).trans (trLeft_left D f₁ f₂ h a)
-    · simp [t]
-    · simp [t]
-    · simp [t]
-  rw [← ht, Category.assoc, ← hfa', pullback.lift_fst_assoc]
+  refine Etale.exists_representableBy_of_isBasis (sheaf D) 𝔅 h𝔅 fun U ↦ ?_
+  obtain ⟨hU, W, hW, q, hq, pU, hpq, hp⟩ := U.2
+  have : IsAffine (Etale.openObj U.1).left := hU
+  let WE : Y.Etale := Etale.mk (q ≫ p)
+  have : IsAffine WE.left := hW
+  let pE : WE ⟶ Etale.openObj U.1 := Etale.homMk pU hpq
+  have : Surjective pE.left := hp
+  exact Etale.exists_representableBy_of_isAffine (sheaf D) pE (overW (V := V) (W := WE) q)
+    (representableByW D (W := WE) q rfl)
+
+variable (D) in
+/-- **Effective étale descent for finite étale schemes**: a finite étale `Y'`-scheme `V` with a
+descent datum relative to a surjective étale morphism `p : Y' ⟶ Y` is the base change of a finite
+étale `Y`-scheme `X`, through a morphism `q : V ⟶ X` which is invariant under the transport. -/
+theorem exists_isPullback [AlgebraicGeometry.Etale p] [Surjective p] [IsFinite V.hom] :
+    ∃ (X : Y.Etale) (q : V.left ⟶ X.left), IsFinite X.hom ∧ IsPullback q V.hom X.hom p ∧
+      ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ Y') (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
+        (D.transport f₁ f₂ h a).left ≫ q = a.left ≫ q := by
+  obtain ⟨X, hX, ⟨r⟩⟩ := exists_representableBy D
+  exact ⟨X, descQ r, hX, isPullback_descQ r, descQ_invariant r⟩
 
 end AlgebraicGeometry.Scheme.EtaleDescent
