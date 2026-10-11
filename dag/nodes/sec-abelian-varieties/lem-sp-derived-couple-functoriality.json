@@ -131,5 +131,27 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dcf1955 (reviewer sub-agent of L); spot-checked: Statement matches Stacks 011Q morphism of couples; Step 1 kernel/image transport and descent of alpha',f',g' checked against def-sp-exact-couple formulas (D'=im alpha from D^{p+1,q-1}, g' bidegree (+1,-1)); Step 2 consistent with lem-sp-derived-couple-exact item 4 (D_r=im alpha^{r-2}, type r-2, d_r bidegree (r,1-r)); Step 3 Z_r/B_r induction against def-sp-convergence. Tool use lem-sp-derived-couple-exact accepted (generic exactness, already accepted 19:26 for F1). FIX more, RETURN less: Step 2 conflated target couple (primed) with derived couple (C_r'=C_{r+1}) and wrote t_E d_r=d_r' t_E; rewritten with target iterates tilde C_r and phi_r d_r = tilde d_r phi_r, D-component = restriction of t_D to im alpha^{r-2}; no mathematical change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCoupleFunctoriality",
+  "declaration": "CategoryTheory.BigradedExactCouple.derivedCoupleFunctoriality",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCoupleFunctoriality.lean",
+  "statement": "theorem derivedCoupleFunctoriality (X Y : BigradedExactCouple C 0) (T : CoupleMorphism X Y) : (∃ M : ∀ n : ℕ, CoupleMorphism (X.pageCouple n) (Y.pageCouple n), (∀ p q : ℤ, (M 0).tD p q = T.tD p q) ∧ (∀ p q : ℤ, (M 0).tE p q = T.tE p q) ∧ (∀ (n : ℕ) (p q : ℤ), (M (n + 1)).tD p q ≫ (Y.pageCouple n).derivedDInclusion p q = (X.pageCouple n).derivedDInclusion p q ≫ (M n).tD p q) ∧ (∀ (n : ℕ) (p q : ℤ), ∃ k : kernel ((X.pageCouple n).d p q) ⟶ kernel ((Y.pageCouple n).d p q), k ≫ kernel.ι ((Y.pageCouple n).d p q) = kernel.ι ((X.pageCouple n).d p q) ≫ (M n).tE p q ∧ (X.pageCouple n).derivedEProjection p q ≫ (M (n + 1)).tE p q = k ≫ (Y.pageCouple n).derivedEProjection p q) ∧ (∀ (n : ℕ) (p q : ℤ), (M n).tE p q ≫ (Y.pageCouple n).d p q = (X.pageCouple n).d p q ≫ (M n).tE (p + 2 + n) (q - 1 - n))) ∧ (∀ (LX : LimitSubobjects X) (LY : LimitSubobjects Y), (∀ p q : ℤ, (LY.Z p q).Factors ((LX.Z p q).arrow ≫ T.tE p q) ∧ (LY.B p q).Factors ((LX.B p q).arrow ≫ T.tE p q)) ∧ (∀ p q : ℤ, ∃ (e : X.pageInfinity LX p q ⟶ Y.pageInfinity LY p q) (z : (LX.Z p q : C) ⟶ (LY.Z p q : C)), (LX.Z p q).arrow ≫ T.tE p q = z ≫ (LY.Z p q).arrow ∧ z ≫ cokernel.π (Subobject.ofLE (LY.B p q) (LY.Z p q) (limitBoundary_le_cycle Y LY p q)) = cokernel.π (Subobject.ofLE (LX.B p q) (LX.Z p q) (limitBoundary_le_cycle X LX p q)) ≫ e) )",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.BigradedExactCouple.CoupleMorphism",
+   "CategoryTheory.BigradedExactCouple.derivedCoupleFunctoriality"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "V1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
