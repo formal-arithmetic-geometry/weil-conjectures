@@ -139,5 +139,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-flf0008 (reviewer sub-agent of L); spot-checked: Def-pc-finite-locally-free is finite+flat+lfp (not f_*O_X locally free), so clause 1 is a real step via the new pushforward node, not the definition; citing lem-sc-finite-pushforward-locally-free would be a cycle (it uses this item); Step 2 affine fibre node + fibre-product leaf; Step 3 rank from degree clause elementary; citers lem-sc-finite-pushforward-locally-free, lem-pc-degree-zero-properties, lem-pc-hilb-functorial use exactly the two clauses; no duplicate finite-locally-free node; leanfinder for affine fibre node: no match. FIX more, RETURN less: (1) C4/B3 lem-pc-finite-flat-pushforward-locally-free cited the morphism definition def-pc-finite-locally-free for a finite locally free O_X-module; now cites def-amb-finite-locally-free-module (stmt_deps updated); (2) C4 item's 'locally free of rank d' now cites def-amb-finite-locally-free-module (stmt_deps updated); (3) recorded my LeanFinder search on lem-pc-finite-affine-fibre-sections.; 3 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-11 L (R-flf0008): isFiniteLocallyFree_pushforward is NOT sorry-free (sorryfree.py: depends on isQuasicoherent_higherDirectImage); report's 'closed' claim is wrong, node stays unsplit, no attachment"
+ "lead_note": "2026-10-11 L (R-flf0008): isFiniteLocallyFree_pushforward is NOT sorry-free (sorryfree.py: depends on isQuasicoherent_higherDirectImage); report's 'closed' claim is wrong, node stays unsplit, no attachment",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeStructureSheaf",
+  "declaration": "AlgebraicGeometry.finiteLocallyFree_structureSheaf_properties",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeStructureSheaf.lean",
+  "statement": "theorem finiteLocallyFree_structureSheaf_properties (d : ℕ) [f.IsFiniteLocallyFreeOfDegree d] : SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)) d ∧ ∀ s : S, ∃ e : (P(s) ⊗[R(s)] K(s)) ≃+* Γ(f.fiber s, ⊤), ∀ (U : S.Opens) (hs : s ∈ U) (hU : ⊤ ≤ (f.fiberι s) ⁻¹ᵁ (f ⁻¹ᵁ U)) (a : Γ(X, f ⁻¹ᵁ U)) (k : K(s)), e (((f.base _* X.presheaf).germ U s hs).hom a ⊗ₜ[R(s)] k) = ((f.fiberι s).appLE (f ⁻¹ᵁ U) ⊤ hU).hom a * (f.fiberToSpecResidueField s).appTop.hom ((Scheme.ΓSpecIso (K(s))).inv.hom k)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The canonical fibre identification is specified on every neighbourhood germ and residue-field scalar. P(s) denotes the ring-presheaf stalk of f_* O_X, R(s) the base local ring, K(s) its recorded residue field; local algebra instances use f.c and S.residue."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-flf1230",
+  "group": "H1",
+  "result": "pass",
+  "note": "X S Scheme.{u}, f, d:ℕ, [f.IsFiniteLocallyFreeOfDegree d] = def-pc-finite-locally-free degree class (finite+flat+lfp, fiberDegree=d); clause 1 IsFiniteLocallyFreeOfRank.{u,u,u} of pushforward f of unit (universes forced to u by X.Opens); clause 2 ∀ s ∃ e : stalk(f_*O_X)⊗[O_S,s]κ(s) ≃+* Γ(f.fiber s,⊤) tied on every germ⊗scalar; tested hU always holds via range_fiberι (not vacuous), scalar map rfl-equal to source fiberAlgebra; no let, no hollow hypotheses, no index universes"
+ }
 }
