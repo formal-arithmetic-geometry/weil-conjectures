@@ -21,7 +21,6 @@
 | `lem-pc-alternating-cech-computes` | 1 | state | 2 |
 | `lem-sc-cech-h1-map-natural` | 1 | state | 2 |
 | `lem-weil-pbc-site-system-strictification` | 1 | state | 2 |
-| `lem-pc-perfect-rhom-tensor-comparison` | 1 | state | 1 |
 | `lem-weil-pbc-colimit-of-sites-sections` | 1 | state | 1 |
 | `lem-weil-pbc-site-cech-vanishing-criterion` | 1 | state | 1 |
 | `lem-weil-pbc-site-injective-cech-acyclic` | 1 | state | 1 |
@@ -58,9 +57,10 @@
 | `lem-weil-pbc-site-ses-cech-h1-surjective` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
+| `lem-sc-rhom-supported-qcoherent` | 2 | state | 0 |
 | `lem-weil-pbc-constant-sheaf-open-maps-sections` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 78 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 77 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
