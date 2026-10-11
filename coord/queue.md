@@ -1,11 +1,11 @@
 # Work queue
 
-955 items; claim with `tools/claim.py next <group> [--stage N]`.
+953 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (955)
+## Stage 2: nodes to state (953)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -48,12 +48,10 @@
 | `lem-sc-p1-proj-degreezero-localization-exact` | 1 | state |
 | `lem-sc-p1-tor-dimension-shift-natural` | 1 | state |
 | `lem-sc-p1-tor-dimension-shifting` | 1 | state |
-| `lem-sc-pic-lift-closed-immersion-dim-le-one` | 1 | state |
 | `lem-sc-picard-diagonal-locally-closed` | 1 | state |
 | `lem-sc-picard-h1-product-injective` | 1 | state |
 | `lem-sc-picard-locus-closed-valuation-triviality` | 1 | state |
 | `lem-sc-picard-product-open` | 1 | state |
-| `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 1 | state |
 | `lem-sc-product-irreducible-components-bijection` | 1 | state |
 | `lem-sc-proper-dim-one-projective` | 1 | state |
 | `lem-sc-proper-flat-global-sections` | 1 | state |
