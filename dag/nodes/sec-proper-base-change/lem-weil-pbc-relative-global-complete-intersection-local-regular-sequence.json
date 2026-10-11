@@ -205,5 +205,24 @@
   "blueprint": "The nearest blueprint ancestor is thm-weil-pbc-finite-etale-lifting, proof step 7 (0GS2 essential-surjectivity paragraphs); this item supplies the local regular-sequence assertion used by the 00SV (3) conormal-free node along that route. Search for 'regular sequence' found no equivalent blueprint node.",
   "summary": "Noetherian case: flat local polynomial map, regular sequence in the fibre by 00SC, lift by 00MG. General case: approximate by 00SU/00SS, identify local quotient rings as directed colimits, preserve injectivity by 00DB and check that the final quotient is nonzero. All dependencies already have nodes; no new nodes."
  },
- "lead_note": "Stacks proves 00SV (1) and (2) together (Noetherian case by 00SC and 00MG, general case by approximation 00SU/00SS/05UU/00DB); coordinate with lem-weil-pbc-relative-global-complete-intersection-partial-local-flat (00SV (2)) and do not cite nodes that cite this one; nodes now exist for 00MG (lem-weil-pbc-grothendieck-regular-sequence-flat), 00SS (1) (-base-change), 00SU (-noetherian-approximation), 05UU (2) (lem-weil-pbc-directed-union-subrings-flat-module) and 0H9M (lem-weil-pbc-fibre-ring-local-ring-natural-iso); follow the split of the 00SV (2) node lem-weil-pbc-relative-global-complete-intersection-partial-local-flat"
+ "lead_note": "Stacks proves 00SV (1) and (2) together (Noetherian case by 00SC and 00MG, general case by approximation 00SU/00SS/05UU/00DB); coordinate with lem-weil-pbc-relative-global-complete-intersection-partial-local-flat (00SV (2)) and do not cite nodes that cite this one; nodes now exist for 00MG (lem-weil-pbc-grothendieck-regular-sequence-flat), 00SS (1) (-base-change), 00SU (-noetherian-approximation), 05UU (2) (lem-weil-pbc-directed-union-subrings-flat-module) and 0H9M (lem-weil-pbc-fibre-ring-local-ring-natural-iso); follow the split of the 00SV (2) node lem-weil-pbc-relative-global-complete-intersection-partial-local-flat",
+ "lean": {
+  "module": "Sheaf.RingTheory.RelativeGlobalCompleteIntersectionLocalRegularSequence",
+  "declaration": "Algebra.isRegular_localization_of_relativeGlobalCompleteIntersection",
+  "file": "lean/Sheaf/RingTheory/RelativeGlobalCompleteIntersectionLocalRegularSequence.lean",
+  "statement": "theorem isRegular_localization_of_relativeGlobalCompleteIntersection {R : Type w} [CommRing R] {n c : ℕ} (relations : Fin c → MvPolynomial (Fin n) R) (h : IsRelativeGlobalCompleteIntersectionPresentation relations) (q : Ideal (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range relations))) [q.IsPrime] : RingTheory.Sequence.IsRegular (Localization.AtPrime (q.comap (Ideal.Quotient.mk (Ideal.span (Set.range relations))))) (List.ofFn fun i : Fin c ↦ algebraMap (MvPolynomial (Fin n) R) (Localization.AtPrime (q.comap (Ideal.Quotient.mk (Ideal.span (Set.range relations))))) (relations i))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gcl"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gcl",
+  "group": "G1",
+  "result": "fix",
+  "note": "reverted the delivery's change of existing node(s) def-weil-pbc-relative-global-complete-intersection (--revert-nodes; kept as on sheaf-dag)"
+ }
 }
