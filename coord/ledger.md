@@ -3055,3 +3055,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:09 L: returned deliver/F1/lem-pc-affine-derived-base-change-comparison-map (reviewer RETURN: 1. E (statement/Step 2): the A'-module structure on H^i(M⊗^L_R R') is never defined. The statement says only 'natural' ()
 - 00:09 L: merged deliver/E1/lem-pc-flf-properties (reviewer FIX; first push; new nodes: 2)
 - 00:09 L: merged deliver/H1/lem-pc-affine-flat-module-descent (reviewer FIX+NODE(1); after a return; new nodes: 2)
+- 00:10 UTC L: returned: F1 affine-derived-base-change-comparison-map 3a9a42f0b (R-cmp0008: step 3 still localizes the R-complex E at a prime of A; A'-structure on H^i never defined; choice-independence uncited).
