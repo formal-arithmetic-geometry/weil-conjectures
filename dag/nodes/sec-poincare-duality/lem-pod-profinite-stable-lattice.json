@@ -124,5 +124,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-psl2618 (reviewer sub-agent of L); spot-checked: Read packet whole. C4 citer: cor-galois-lisse-representations step 8 uses a pi_1-stable lattice (rho(g)Lambda=Lambda for all g) with continuous m_E-adic action, matching def-pod-l-adic-representations (1)/(2); item's compact-G hypothesis covers profinite pi_1; continuity/lattice notions are inlined in the statement and agree with that def. C4 lem-sc-dvr-fg-torsionfree-free: O_E is a DVR by def-weil-l-adic-coefficient-extension (2). D: coset argument gg_i=g_jh correct, g^{-1} gives equality, Lambda spans (contains rho(g_i)Lambda_0); step 4 topology identification correct. New node lem-pod-lattice-stabilizer-open: true, well-typed, not class (b) (grep dag/nodes for lattice/compact/GL open: no existing node), not (c) (my grep of slopmaster2 Mathlib for isOpen stabilizer/GL: only stabilizer_isOpen for discrete X, no match), not (d) (needs freeness of Lambda_0, compact-open = entrywise topology, det/inverse argument). No repairs. Second reading by H1: no fault missed."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ProfiniteStableLattice",
+  "declaration": "Padic.exists_stable_lattice",
+  "file": "lean/Sheaf/RepresentationTheory/ProfiniteStableLattice.lean",
+  "statement": "theorem exists_stable_lattice (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] (V : Type w) [AddCommGroup V] [Module E V] [FiniteDimensional E V] : letI := spectralNorm.nontriviallyNormedField ℚ_[l] E letI : TopologicalSpace V := moduleTopology E V let O := coefficientExtensionIntegers l E letI : Module O V := Module.compHom V O.subtype ∀ (ρ : G →* (V ≃ₗ[E] V)), Continuous (fun p : G × V ↦ ρ p.1 p.2) → ∃ Λ : Submodule O V, Λ.FG ∧ Submodule.span E (Λ : Set V) = ⊤ ∧ Module.Free O Λ ∧ Module.finrank O Λ = Module.finrank E V ∧ (∀ g : G, (ρ g) '' (Λ : Set V) = (Λ : Set V)) ∧ (coefficientExtensionMaximalIdeal l E).adicModuleTopology Λ = TopologicalSpace.induced (fun x : Λ ↦ (x : V)) inferInstance ∧ (letI := (coefficientExtensionMaximalIdeal l E).adicModuleTopology Λ ∃ a : G × Λ → Λ, Continuous a ∧ ∀ p : G × Λ, (a p : V) = ρ p.1 (p.2 : V))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psl0929",
+  "group": "E1",
+  "result": "pass",
+  "note": "Matched all 13 clauses: prime l, finite E/Q_l, O_E/m_E = recorded coefficientExtensionIntegers/MaximalIdeal (rfl: spectralNorm field norm = coefficientExtensionAbsoluteValue), compact topological group G (no extra T2/profinite), fin-dim V with moduleTopology (= product topology via basis), rho : G ->* (V ≃ₗ[E] V) jointly continuous, Lambda FG + E-span = top, free of rank dim V, image equality for all g, m_E-adic = subspace topology, continuous restricted action; #check of names in namespace Padic clean"
  }
 }
