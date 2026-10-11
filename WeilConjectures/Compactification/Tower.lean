@@ -90,7 +90,7 @@ variable (𝒯 : Tower f g h)
 
 /-- The triangle of `(f, g)`. -/
 @[simps]
-def fg : Triangle f g where
+abbrev fg : Triangle f g where
   cf := 𝒯.cf
   cg := 𝒯.cg
   cfg := 𝒯.cfg
@@ -102,7 +102,7 @@ def fg : Triangle f g where
 
 /-- The triangle of `(g, h)`. -/
 @[simps]
-def gh : Triangle g h where
+abbrev gh : Triangle g h where
   cf := 𝒯.cg
   cg := 𝒯.ch
   cfg := 𝒯.cgh
@@ -114,7 +114,7 @@ def gh : Triangle g h where
 
 /-- The triangle of `(f, g ≫ h)`. -/
 @[simps]
-def f_gh : Triangle f (g ≫ h) where
+abbrev f_gh : Triangle f (g ≫ h) where
   cf := 𝒯.cf
   cg := 𝒯.cgh
   cfg := 𝒯.cfgh
@@ -128,10 +128,16 @@ def f_gh : Triangle f (g ≫ h) where
 
 /-- The triangle of `(f ≫ g, h)`. -/
 @[simps]
-def fg_h : Triangle (f ≫ g) h where
+abbrev fg_h : Triangle (f ≫ g) h where
   cf := 𝒯.cfg
   cg := 𝒯.ch
-  cfg := 𝒯.cfgh.copy (Category.assoc f g h)
+  cfg :=
+    { Z := 𝒯.cfgh.Z
+      g := 𝒯.cfgh.g
+      i := 𝒯.cfgh.i
+      comm := (Category.assoc f g h).trans 𝒯.cfgh.comm
+      isProper := 𝒯.cfgh.isProper
+      isOpenImmersion := 𝒯.cfgh.isOpenImmersion }
   q := 𝒯.q'
   p := 𝒯.p₁ ≫ 𝒯.p₂
   i_q := 𝒯.i_q'
