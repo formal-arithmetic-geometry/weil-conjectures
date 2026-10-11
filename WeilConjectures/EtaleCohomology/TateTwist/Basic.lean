@@ -10,6 +10,8 @@ public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleSheafPowers
 public import WeilConjectures.SixFunctors.Etale.Derived.PullbackIntTensorFamily
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.ConstructibleSheaf.Monoidal
 
 /-!
 # The Tate twists
@@ -231,6 +233,140 @@ lemma leftDerivedUpperStar_map_tateTwistObjectAddIso (f : X ⟶ Y) (m m' : ℤ) 
     m m'
 
 end Pullback
+
+section Sheaf
+
+variable (X : Scheme.{u}) [HasInvertibleExponent Λ X]
+
+/-- The sheaf `(μₙ ⊗ Λ)^{⊗ m}` on `X` (for `m < 0`, the `-m`-th tensor power of the dual of
+`μₙ ⊗ Λ`): the pullback of the integer tensor powers of the Tate sheaf of `S = Spec ℤ[1/n]`. -/
+noncomputable def tateTwistSheaf (m : ℤ) : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  (toInvertibleExponentBase (Λ := Λ) X)^*[ModuleCat.{u + 1} Λ].obj
+    ((tateSheafTensorInverse Λ).zpow m)
+
+/-- The Tate twist `Λ_X(m)` is the sheaf `(μₙ ⊗ Λ)^{⊗ m}` placed in degree zero. -/
+noncomputable def tateTwistObjectIsoSingleFunctor (m : ℤ) :
+    tateTwistObject Λ X m ≅
+      (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj
+        (tateTwistSheaf Λ X m) :=
+  eqToIso (congrFun (tateTwistObject_eq Λ X) m) ≪≫
+    L((toInvertibleExponentBase (Λ := Λ) X)^*[ModuleCat.{u + 1} Λ]).mapIso
+      ((tateSheafTensorInverse Λ).zpowSingleFunctorIso m) ≪≫
+    (singleFunctorCompLeftDerivedUpperStarIso (ModuleCat.{u + 1} Λ)
+      (toInvertibleExponentBase (Λ := Λ) X)).app _
+
+/-- The étale cover `X ×_S V ⟶ X` adjoining a primitive `n`-th root of unity. -/
+noncomputable abbrev tateCoverOf : pullback (toInvertibleExponentBase (Λ := Λ) X) (tateCover Λ) ⟶ X :=
+  pullback.fst _ _
+
+lemma surjective_tateCoverOf : Function.Surjective (tateCoverOf Λ X).base := by
+  intro x
+  obtain ⟨v, hv⟩ := surjective_tateCover Λ (toInvertibleExponentBase (Λ := Λ) X x)
+  obtain ⟨z, hz, -⟩ := Scheme.Pullback.exists_preimage_pullback x v hv.symm
+  exact ⟨z, hz⟩
+
+/-- The sheaf `(μₙ ⊗ Λ)^{⊗ m}` is trivial on the cover `X ×_S V`. -/
+noncomputable def upperStarTateCoverOfTateTwistSheafIso (m : ℤ) :
+    (tateCoverOf Λ X)^*[ModuleCat.{u + 1} Λ].obj (tateTwistSheaf Λ X m) ≅ 𝟙_ _ :=
+  ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) (tateCoverOf Λ X)
+      (toInvertibleExponentBase (Λ := Λ) X)
+      (pullback.snd _ _ ≫ tateCover Λ) pullback.condition.symm).app _).symm ≪≫
+    (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (pullback.snd _ _) (tateCover Λ) _ rfl).app _ ≪≫
+    (pullback.snd (toInvertibleExponentBase (Λ := Λ) X) (tateCover Λ))^*[ModuleCat.{u + 1} Λ].mapIso
+      ((tateSheafTensorInverse Λ).zpowMapIsoUnit ((tateCover Λ)^*[ModuleCat.{u + 1} Λ])
+        (upperStarTateCoverTateSheafIso Λ) m) ≪≫
+    (Functor.Monoidal.εIso _).symm
+
+/-- The stalks of `(μₙ ⊗ Λ)^{⊗ m}` at the geometric points are free of rank one. -/
+noncomputable def sheafFiberTateTwistSheafIso (m : ℤ) {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    (s : Spec (.of Ω) ⟶ X) :
+    (pointSmallEtale s).sheafFiber.obj (tateTwistSheaf Λ X m) ≅ ModuleCat.of Λ Λ := by
+  have hlift := exists_comp_primitiveRootsCover_eq _ _ (isUnit_ringChar_invertibleExponentRing Λ)
+    (s ≫ toInvertibleExponentBase (Λ := Λ) X)
+  let t₀ := hlift.choose
+  let t := pullback.lift s t₀ hlift.choose_spec.symm
+  have ht : t ≫ tateCoverOf Λ X = s := pullback.lift_fst _ _ _
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  exact eqToIso (by rw [ht]) ≪≫
+    ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) (tateCoverOf Λ X) t).app _).symm ≪≫
+    (pointSmallEtale t).sheafFiber.mapIso (upperStarTateCoverOfTateTwistSheafIso Λ X m) ≪≫
+    (pointSmallEtale t).sheafFiberConstantSheafIso (ModuleCat.of Λ Λ)
+
+/-- The sheaf `(μₙ ⊗ Λ)^{⊗ m}` is finite locally constant: it is trivial on the étale cover
+`X ×_S V`, and its stalks are free of rank one. -/
+lemma isFiniteLocallyConstantSheaf_tateTwistSheaf (m : ℤ) :
+    IsFiniteLocallyConstantSheaf (tateTwistSheaf Λ X m) where
+  toIsLocallyConstantSheaf := by
+    let 𝒰 : Cover.{u} etalePrecoverage X := Cover.mkOfCovers PUnit (fun _ ↦ _)
+      (fun _ ↦ tateCoverOf Λ X) (fun x ↦ ⟨⟨⟩, surjective_tateCoverOf Λ X x⟩)
+      (fun _ ↦ inferInstance)
+    have : ∀ i, IsLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj
+        (tateTwistSheaf Λ X m)) := fun _ ↦
+      have : IsLocallyConstantSheaf (𝟙_ (Sheaf (pullback (toInvertibleExponentBase (Λ := Λ) X)
+          (tateCover Λ)).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+        (isFiniteLocallyConstantSheaf_constantSheaf (𝟙_ (ModuleCat.{u + 1} Λ))).toIsLocallyConstantSheaf
+      IsLocallyConstantSheaf.of_iso (upperStarTateCoverOfTateTwistSheafIso Λ X m).symm
+    exact IsLocallyConstantSheaf.of_cover 𝒰 _
+  toIsFiniteSheaf := ⟨fun _ _ _ s ↦ ((ModuleCat.isFinitelyGenerated_iff _).2
+    (inferInstanceAs (Module.Finite Λ Λ))).of_iso (sheafFiberTateTwistSheafIso Λ X m s).symm⟩
+
+/-- The sheaf `(μₙ ⊗ Λ)^{⊗ m}` is flat: `(μₙ ⊗ Λ)^{⊗ -m}` is a tensor inverse. -/
+lemma flat_tateTwistSheaf (m : ℤ) : ObjectProperty.flat (tateTwistSheaf Λ X m) :=
+  ObjectProperty.flat_of_tensorIso (Y := tateTwistSheaf Λ X (-m))
+    (Functor.Monoidal.μIso _ _ _ ≪≫
+      (toInvertibleExponentBase (Λ := Λ) X)^*[ModuleCat.{u + 1} Λ].mapIso
+        ((tateSheafTensorInverse Λ).intTensorFamily.addIso m (-m) ≪≫
+          eqToIso (congrArg (tateSheafTensorInverse Λ).zpow (add_neg_cancel m))) ≪≫
+      (Functor.Monoidal.εIso _).symm)
+
+/-- Every Tate twist `Λ_X(m)` lies in `D^b_{ctf}(X, Λ)`: it is a finite locally constant flat
+sheaf placed in degree zero. -/
+lemma boundedConstructibleFiniteTor_tateTwistObject (m : ℤ) :
+    DerivedCategory.boundedConstructibleFiniteTor Λ X (tateTwistObject Λ X m) := by
+  have := isFiniteLocallyConstantSheaf_tateTwistSheaf Λ X m
+  have : IsConstructibleSheaf (tateTwistSheaf Λ X m) :=
+    IsFiniteLocallyConstantSheaf.isConstructibleSheaf ‹_›
+  refine ⟨(Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X).prop_of_iso
+      (tateTwistObjectIsoSingleFunctor Λ X m).symm
+      (Etale.DerivedCategory.boundedConstructible_singleFunctor_obj _ 0),
+    (Etale.DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ) X).prop_of_iso
+      (tateTwistObjectIsoSingleFunctor Λ X m).symm
+      ⟨0, 0, _root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
+        (flat_tateTwistSheaf Λ X m)⟩⟩
+
+/-- Every Tate twist `Λ_X(m)` is a locally constant sheaf of rank one placed in degree zero. -/
+lemma exists_isLocallyConstantSheaf_tateTwistObject (m : ℤ) :
+    ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
+      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
+        Nonempty ((pointSmallEtale s).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
+      Nonempty (tateTwistObject Λ X m ≅ (DerivedCategory.singleFunctor _ 0).obj L) :=
+  ⟨tateTwistSheaf Λ X m,
+    (isFiniteLocallyConstantSheaf_tateTwistSheaf Λ X m).toIsLocallyConstantSheaf,
+    fun _ _ _ s ↦ ⟨sheafFiberTateTwistSheafIso Λ X m s⟩, ⟨tateTwistObjectIsoSingleFunctor Λ X m⟩⟩
+
+end Sheaf
+
+/-- Blueprint `def-coefficient-twists-detailed`: Coefficient Tate twists.
+
+The genuine Tate twist datum of a commutative ring `Λ` of positive characteristic `n`:
+`Λ_X(m) = (μₙ ⊗ Λ)^{⊗ m}` on the schemes `X` on which `n` is invertible
+(`AlgebraicGeometry.Etale.tateTwistObject`), with the identifications coming from the derived
+pullbacks along the morphisms to `Spec ℤ[1/n]`. -/
+noncomputable instance hasTateTwist : HasTateTwist Λ where
+  twistObject := tateTwistObject Λ
+  twistObjectZeroIso X _ := tateTwistObjectZeroIso Λ X
+  twistObjectAddIso X _ := tateTwistObjectAddIso Λ X
+  leftDerivedUpperStarTwistObjectIso f := leftDerivedUpperStarTateTwistObjectIso Λ f
+  isInvertible_twistObject X _ := isInvertible_tateTwistObject Λ X
+  boundedConstructibleFiniteTor_twistObject X _ := boundedConstructibleFiniteTor_tateTwistObject Λ X
+  exists_isLocallyConstantSheaf_twistObject X _ :=
+    exists_isLocallyConstantSheaf_tateTwistObject Λ X
+  twistObjectAddIso_zero_left X _ := tateTwistObjectAddIso_zero_left Λ X
+  twistObjectAddIso_zero_right X _ := tateTwistObjectAddIso_zero_right Λ X
+  twistObjectAddIso_assoc X _ := tateTwistObjectAddIso_assoc Λ X
+  leftDerivedUpperStarTwistObjectIso_comp f g := leftDerivedUpperStarTateTwistObjectIso_comp Λ f g
+  leftDerivedUpperStar_map_twistObjectAddIso f := leftDerivedUpperStar_map_tateTwistObjectAddIso Λ f
 
 end Etale
 
