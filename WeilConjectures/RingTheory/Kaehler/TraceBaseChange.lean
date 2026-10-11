@@ -39,14 +39,17 @@ noncomputable abbrev baseChangeAlgebra : Algebra (k' ⊗[k] R) (k' ⊗[k] B) :=
 attribute [local instance] baseChangeAlgebra
 
 variable {k k' R B} in
+/-- The algebra map `k' ⊗[k] R → k' ⊗[k] B` is `x ⊗ r ↦ x ⊗ r`. -/
 lemma baseChangeAlgebra_algebraMap_tmul (x : k') (r : R) :
     algebraMap (k' ⊗[k] R) (k' ⊗[k] B) (x ⊗ₜ r) = x ⊗ₜ algebraMap R B r := rfl
 
 variable {k k' R B} in
+/-- `(x ⊗ r) • (x' ⊗ b) = x x' ⊗ r • b`. -/
 lemma baseChangeAlgebra_smul_tmul (x x' : k') (r : R) (b : B) :
     (x ⊗ₜ[k] r) • (x' ⊗ₜ[k] b) = (x * x') ⊗ₜ (r • b) := by
   rw [Algebra.smul_def, baseChangeAlgebra_algebraMap_tmul, tmul_mul_tmul, Algebra.smul_def]
 
+/-- `k' → k' ⊗[k] R → k' ⊗[k] B` is a scalar tower. -/
 lemma baseChangeAlgebra_isScalarTower : IsScalarTower k' (k' ⊗[k] R) (k' ⊗[k] B) :=
   .of_algebraMap_eq fun x ↦ by
     rw [RingHom.algebraMap_toAlgebra]
@@ -61,10 +64,12 @@ noncomputable def baseChangeReprAux : (k' ⊗[k] B) ≃ₗ[k'] (ι →₀ k' ⊗
   (LinearEquiv.baseChange k k' B (ι →₀ R) (b.repr.restrictScalars k)).trans
     (finsuppRight k k' k' R ι)
 
+/-- The coordinates of `x ⊗ y` are `x ⊗ yᵢ`. -/
 lemma baseChangeReprAux_tmul (x : k') (y : B) (i : ι) :
     baseChangeReprAux (k' := k') b (x ⊗ₜ[k] y) i = x ⊗ₜ[k] b.repr y i := by
   simp [baseChangeReprAux, finsuppRight_apply_tmul_apply]
 
+/-- `Algebra.TensorProduct.baseChangeReprAux` is `k' ⊗[k] R`-linear. -/
 lemma baseChangeReprAux_smul (r : k' ⊗[k] R) (y : k' ⊗[k] B) :
     baseChangeReprAux b (r • y) = r • baseChangeReprAux b y := by
   induction r with
@@ -85,6 +90,7 @@ noncomputable def baseChangeRepr : (k' ⊗[k] B) ≃ₗ[k' ⊗[k] R] (ι →₀ 
   __ := baseChangeReprAux b
   map_smul' := baseChangeReprAux_smul b
 
+/-- The coordinates of `x ⊗ y` are `x ⊗ yᵢ`. -/
 lemma baseChangeRepr_tmul (x : k') (y : B) (i : ι) :
     baseChangeRepr b (x ⊗ₜ[k] y) i = x ⊗ₜ[k] b.repr y i :=
   baseChangeReprAux_tmul b x y i
@@ -93,10 +99,12 @@ lemma baseChangeRepr_tmul (x : k') (y : B) (i : ι) :
 noncomputable def baseChangeBasis : Module.Basis ι (k' ⊗[k] R) (k' ⊗[k] B) :=
   .ofRepr (baseChangeRepr b)
 
+/-- The coordinates of `x ⊗ y` in the basis `1 ⊗ bᵢ` are `x ⊗ yᵢ`. -/
 lemma baseChangeBasis_repr_tmul (x : k') (y : B) (i : ι) :
     (baseChangeBasis (k' := k') b).repr (x ⊗ₜ[k] y) i = x ⊗ₜ[k] b.repr y i :=
   baseChangeRepr_tmul b x y i
 
+/-- The elements of `Algebra.TensorProduct.baseChangeBasis` are `1 ⊗ bᵢ`. -/
 lemma baseChangeBasis_apply (i : ι) : baseChangeBasis (k' := k') b i = 1 ⊗ₜ[k] b i := by
   classical
   refine (baseChangeBasis (k' := k') b).repr.injective (Finsupp.ext fun j ↦ ?_)
@@ -105,11 +113,13 @@ lemma baseChangeBasis_apply (i : ι) : baseChangeBasis (k' := k') b i = 1 ⊗ₜ
   split_ifs <;> simp [Algebra.TensorProduct.one_def]
 
 omit [DecidableEq ι] in
+/-- `k' ⊗[k] B` is free over `k' ⊗[k] R` if `B` is free over `R`. -/
 lemma free_baseChange [Module.Free R B] : Module.Free (k' ⊗[k] R) (k' ⊗[k] B) :=
   haveI := Classical.decEq (Module.Free.ChooseBasisIndex R B)
   .of_basis (baseChangeBasis (Module.Free.chooseBasis R B))
 
 omit [DecidableEq ι] in
+/-- `k' ⊗[k] B` is finite over `k' ⊗[k] R` if `B` is finite free over `R`. -/
 lemma finite_baseChange [Module.Free R B] [Module.Finite R B] :
     Module.Finite (k' ⊗[k] R) (k' ⊗[k] B) :=
   haveI := Classical.decEq (Module.Free.ChooseBasisIndex R B)
@@ -146,6 +156,7 @@ noncomputable def baseChangeLinearMap (φ : B →ₗ[R] R) :
           RingHom.id_apply, smul_eq_mul, tmul_mul_tmul, LinearMap.restrictScalars_apply,
           LinearMap.restrictScalars_apply, LinearMap.map_smul, smul_eq_mul]
 
+/-- `φ'(x ⊗ c) = x ⊗ φ(c)`. -/
 @[simp]
 lemma baseChangeLinearMap_tmul (φ : B →ₗ[R] R) (x : k') (c : B) :
     baseChangeLinearMap φ (x ⊗ₜ[k] c) = x ⊗ₜ φ c := rfl
@@ -170,6 +181,7 @@ noncomputable def baseChange : Derivation k' (k' ⊗[k] R) (k' ⊗[k] R) :=
         simp only [Algebra.TensorProduct.tmul_mul_tmul, LinearMap.baseChange_tmul,
           Derivation.coeFn_coe, Derivation.leibniz, smul_eq_mul, tmul_add, mul_comm x x']
 
+/-- `D'(x ⊗ r) = x ⊗ D(r)`. -/
 @[simp]
 lemma baseChange_tmul (x : k') (r : R) : D.baseChange k' (x ⊗ₜ r) = x ⊗ₜ D r := rfl
 
@@ -179,12 +191,14 @@ namespace Algebra
 
 open TensorProduct Matrix
 
-attribute [local instance] TensorProduct.baseChangeAlgebra TensorProduct.baseChangeAlgebra_isScalarTower
+attribute [local instance] TensorProduct.baseChangeAlgebra
+  TensorProduct.baseChangeAlgebra_isScalarTower
 
 variable {k R B : Type*} [CommRing k] [CommRing R] [Algebra k R] [CommRing B] [Algebra R B]
   [Algebra k B] [IsScalarTower k R B] (k' : Type*) [CommRing k'] [Algebra k k']
   (D : Derivation k R R)
 
+/-- The matrix of multiplication by `1 ⊗ a` in the basis `1 ⊗ bᵢ` is that of `a` in `b`. -/
 lemma leftMulMatrix_baseChangeBasis {ι : Type*} [Fintype ι] [DecidableEq ι]
     (b : Module.Basis ι R B) (a : B) :
     leftMulMatrix (TensorProduct.baseChangeBasis (k' := k') b) (1 ⊗ₜ[k] a) =
@@ -194,6 +208,7 @@ lemma leftMulMatrix_baseChangeBasis {ι : Type*} [Fintype ι] [DecidableEq ι]
     TensorProduct.baseChangeBasis_repr_tmul, Matrix.map_apply, leftMulMatrix_eq_repr_mul,
     TensorProduct.includeRight_apply]
 
+/-- `Tr(X D(Y))` commutes with base change along `R → k' ⊗[k] R`. -/
 lemma traceDerivForm_map_includeRight {m n : Type*} [Fintype m] [Fintype n] (X : Matrix m n R)
     (Y : Matrix n m R) :
     traceDerivForm (D.baseChange k') (X.map (TensorProduct.includeRight (R := k) (A := k')))

@@ -31,6 +31,7 @@ namespace Matrix
 variable {k R M : Type*} [CommRing k] [CommRing R] [Algebra k R] [AddCommGroup M] [Module R M]
   [Module k M] (D : Derivation k R M)
 
+/-- `Tr(X D(Y))` for block diagonal matrices is the sum over the blocks. -/
 lemma traceDerivForm_fromBlocks {l m n p : Type*} [Fintype l] [Fintype m] [Fintype n]
     [Fintype p] (X₁ : Matrix l m R) (X₂ : Matrix n p R) (Y₁ : Matrix m l R)
     (Y₂ : Matrix p n R) :
@@ -71,15 +72,18 @@ noncomputable def idempotentProdEquiv (he : IsIdempotentElem e) :
       · change Ideal.Quotient.mk _ _ = Ideal.Quotient.mk _ _
         exact Ideal.Quotient.eq.mpr (Ideal.mem_span_singleton'.mpr ⟨u - v, by ring⟩)
 
+/-- `B ≅ B ⧸ (1 - e) × B ⧸ (e)` is the pair of quotient maps. -/
 lemma idempotentProdEquiv_apply (he : IsIdempotentElem e) (x : B) :
     idempotentProdEquiv R he x = (Ideal.Quotient.mk _ x, Ideal.Quotient.mk _ x) := by
   simp [idempotentProdEquiv]
 
+/-- `B ≅ B ⧸ (1 - e) × B ⧸ (e)` is compatible with multiplication. -/
 lemma idempotentProdEquiv_mul (he : IsIdempotentElem e) (x y : B) :
     idempotentProdEquiv R he (x * y) = (Ideal.Quotient.mk _ x * (idempotentProdEquiv R he y).1,
       Ideal.Quotient.mk _ x * (idempotentProdEquiv R he y).2) := by
   simp [idempotentProdEquiv_apply]
 
+/-- The section `B ⧸ (1 - e) → B` of the quotient map is `c ↦ e c`. -/
 lemma idempotentProdEquiv_symm_inl (he : IsIdempotentElem e) (c : B) :
     (idempotentProdEquiv R he).symm (Ideal.Quotient.mk _ c, 0) = e * c := by
   rw [LinearEquiv.symm_apply_eq, idempotentProdEquiv_apply]
@@ -93,6 +97,8 @@ noncomputable def idempotentBasis (he : IsIdempotentElem e) {ι₁ ι₂ : Type*
     (b₂ : Module.Basis ι₂ R (B ⧸ Ideal.span {e})) : Module.Basis (ι₁ ⊕ ι₂) R B :=
   (b₁.prod b₂).map (idempotentProdEquiv R he).symm
 
+/-- The matrix of multiplication in the basis adapted to `B ≅ B ⧸ (1 - e) × B ⧸ (e)` is block
+diagonal. -/
 lemma leftMulMatrix_idempotentBasis (he : IsIdempotentElem e) {ι₁ ι₂ : Type*} [Fintype ι₁]
     [Fintype ι₂] [DecidableEq ι₁] [DecidableEq ι₂]
     (b₁ : Module.Basis ι₁ R (B ⧸ Ideal.span {1 - e}))
