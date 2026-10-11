@@ -17,22 +17,22 @@ The direct image with compact support `Rf₀! = Rḡ_* ∘ ī_!` of Weil complex
 `Rf₀!` collected in the blueprint theorem `prop-functor-package` of the six-functor chapter that
 the Deligne–Laumon reduction (`sec-deligne-laumon-general`) uses:
 
-- *independence of the compactification* (clause 2): for every compactification `c` of `f`,
-  `Rf₀! ≅ R(c.g)_* ∘ (c.i)_!`;
+- *independence of the compactification* (clause 2), in the case of the compactification
+  `U ⟶[j] X ⟶[𝟙] X` of an open immersion `j`: `Rj₀!` is the extension by zero;
 - *composition* (clause 3): `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`, and the distinguished triangle
   `R(j ≫ f)₀! j^*K ⟶ Rf₀!K ⟶ R(i ≫ f)₀! i^*K ⟶` obtained by applying `Rf₀!` to the
   localization triangle of an open immersion `j` and its closed complement `i`;
-- *base change* (clause 4): `h^* Rf₀! ≅ Rf'₀! g^*` for a cartesian square.
+- *base change* (clause 4): `h^* Rf₀! ≅ Rf'₀! g^*` for a cartesian square;
 
-These belong to the six-functor chapter and are stated here with `sorry`, each with the clause of
-`prop-functor-package` it states. From them, and from the identification of `Rf₀!` with `Rf₀*`
-for proper `f`, which is proved here, follow the open–closed triangle
-`j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶` of a Weil complex (`prop-sf-open-closed-triangle-all-stages`) and
-the identification of `Rj₀!` with the extension by zero for an open immersion `j`.
+as well as the open–closed triangle `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶` of a Weil complex
+(`prop-sf-open-closed-triangle-all-stages`). These belong to the six-functor chapter and are
+stated here with `sorry`, each with the blueprint statement it renders. The identification of
+`Rf₀!` with `Rf₀*` for proper `f` is proved here.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar`: `Rf₀! ≅ Rf₀*` for `f` proper.
+- `AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar`: `Rf₀! ≅ Rf₀*` for
+  `f` proper.
 - `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion`,
   `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriekCompIso`,
   `AlgebraicGeometry.WeilComplex.exists_distTriang_derivedLowerShriek_openClosed` and
@@ -62,7 +62,7 @@ section Proper
 
 variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
-  [IsProper f] [LocallyOfFiniteType f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [IsProper f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- **For a proper morphism, the direct image with compact support is the direct image**: for the

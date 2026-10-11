@@ -143,7 +143,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isCurve {C : Scheme
     (F.compactlySupportedCohomology r).HasWeightsAtMostOver k₀ ι (w + r) := by
   have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   have h := hasWeightsAtMostOver_compactlySupportedCohomology_directImage_of_isCurve ι (𝟙 C)
-    (by simpa using dense_univ) F hF hw r
+    (by simp) F hF hw r
   obtain ⟨e⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_of_iso
     ((WeilSheaf.lowerStarIdIso k₀ l C).app F) r
   exact FrobeniusModule.HasWeightsAtMost.of_equiv e.symm h

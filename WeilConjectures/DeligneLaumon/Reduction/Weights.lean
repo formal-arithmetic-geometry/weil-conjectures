@@ -235,6 +235,7 @@ theorem HasWeightsAtMost.of_epi {v : ℝ} (f : F ⟶ G) [Epi f] (h : F.HasWeight
   FrobeniusModule.HasWeightsAtMost.of_surjective _ (stalkAtMap_frobenius _ _ _ f)
     (surjective_stalkAtMap _ _ _ f) (h x)
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A zero Weil sheaf is punctually pure of every weight: its stalks vanish. -/
 theorem isPunctuallyPureOfWeight_of_isZero (hF : IsZero F) (w : ℝ) :
     F.IsPunctuallyPureOfWeight ι w := fun x α hα ↦ by
@@ -244,8 +245,8 @@ theorem isPunctuallyPureOfWeight_of_isZero (hF : IsZero F) (w : ℝ) :
   exact (hv.2 (Subsingleton.elim _ _)).elim
 
 
-/-- A nonzero Weil sheaf punctually pure of weight `u` with weights at most `v` has `u ≤ v`: it has a
-nonzero stalk at some closed point, and an eigenvalue there. -/
+/-- A nonzero Weil sheaf punctually pure of weight `u` with weights at most `v` has `u ≤ v`: it has
+a nonzero stalk at some closed point, and an eigenvalue there. -/
 theorem IsPunctuallyPureOfWeight.le_of_hasWeightsAtMost {u v : ℝ}
     (hu : F.IsPunctuallyPureOfWeight ι u) (hv : F.HasWeightsAtMost ι v) (hF : ¬ IsZero F) :
     u ≤ v := by
@@ -511,6 +512,8 @@ theorem IsMixedOfWeightsAtMost.map_singleComplex
   linarith
 
 set_option maxHeartbeats 2000000 in
+-- the triangle of Weil complexes lifted from the truncation triangle is checked by unfolding the
+-- full subcategory structure, which needs more heartbeats
 open _root_.DerivedCategory in
 /-- **Passage from sheaves to complexes.** Let `Φ` be a triangulated functor between Weil
 complexes which carries every Weil sheaf mixed of weights at most `v`, placed in degree zero, to a
@@ -551,7 +554,8 @@ theorem IsMixedOfWeightsAtMost.map_of_forall_toComplex
     have : T.obj₃.IsLE b := by
       have : K.obj.IsLE b := TStructure.t.isLE_of_le _ (a + ↑(n + 1) - 1) _ (by lia)
       exact inferInstanceAs (TStructure.t.IsLE ((TStructure.t.truncGE b).obj K.obj) b)
-    have : T.obj₃.IsGE b := inferInstanceAs (TStructure.t.IsGE ((TStructure.t.truncGE b).obj K.obj) b)
+    have : T.obj₃.IsGE b :=
+      inferInstanceAs (TStructure.t.IsGE ((TStructure.t.truncGE b).obj K.obj) b)
     obtain ⟨Z, ⟨e⟩⟩ := exists_iso_singleFunctor_obj_of_isGE_of_isLE T.obj₃ b
     have h₁ : IsZero ((homologyFunctor _ (b + 1)).obj T.obj₁) :=
       isZero_of_isLE _ (b - 1) _ (by lia)
