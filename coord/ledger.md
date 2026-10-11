@@ -3056,3 +3056,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:09 L: merged deliver/E1/lem-pc-flf-properties (reviewer FIX; first push; new nodes: 2)
 - 00:09 L: merged deliver/H1/lem-pc-affine-flat-module-descent (reviewer FIX+NODE(1); after a return; new nodes: 2)
 - 00:10 UTC L: returned: F1 affine-derived-base-change-comparison-map 3a9a42f0b (R-cmp0008: step 3 still localizes the R-complex E at a prime of A; A'-structure on H^i never defined; choice-independence uncited).
+- 00:10 UTC L: H1 affine-flat-module-descent FIX 42d6757e4 third push (R-afm0004; four of six return points repaired by the reviewer), E1 flf-properties FIX fb538d0a0 (R-flf0008; module definition def-amb-finite-locally-free-module cited; isFiniteLocallyFree_pushforward depends on a sorry). lem-pc-fp-module-base-change set to mathlib (FinitePresentation.lean:338 instance) by L.
