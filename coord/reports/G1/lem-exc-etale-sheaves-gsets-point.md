@@ -1,37 +1,223 @@
-# Stage-1 split: lem-exc-etale-sheaves-gsets-point
+## Worker report
 
-## Files written
+The module `Sheaf.Etale.SchemesGaloisPoint` states
+`AlgebraicGeometry.etaleSheavesGsetsPoint` with explicit fields `K`, `Ksep`,
+and `Ω`, field and algebra structures, separable/algebraic-closure hypotheses,
+an embedding `i`, and the geometric point `s`. Its first conclusion is a
+categorical equivalence between sheaves on the small etale site and `Action`
+objects for `Gal(Ksep/K)`. Its second conclusion identifies the point fiber of
+the representable presheaf `yoneda.obj X` with maps from `Spec Ksep` to `X`.
+The proof is `sorry`, as required for stage 2.
 
-- dag/nodes/sec-curve-estimates/lem-exc-etale-sheaves-gsets-point.json: split item, four proof steps.
-- dag/nodes/sec-curve-estimates/lem-exc-field-sections-stalk-invariants.json: new statement-only node; no Mathlib match. LeanSearch returned HTTP 500; LeanFinder and source grep found none.
-- citations.json: one verbatim statement quote for each cited node at each proof step.
+The Lean binders render: `Field K`, `Field Ksep`, `Field Ω` are the field
+hypotheses; `Algebra K Ksep` and `Algebra K Ω` are the extensions; `IsSepClosed
+Ksep` and `IsAlgClosed Ω` are the closure hypotheses; `Algebra.IsAlgebraic K
+Ksep` makes `Ksep/K` algebraic; `i` is the embedding into `Ω`; and `s` is the
+map `Spec Ω ⟶ Spec K`. The conjunction renders clauses (i) and (ii), with
+the stalk represented by `Scheme.pointSmallEtale s` and the representable
+presheaf by `yoneda.obj X`.
 
-## Attachments
+Dependency declarations used: `Mathlib.FieldTheory.IsSepClosed.IsSepClosed`,
+`AlgebraicGeometry.Scheme.smallEtaleTopology`,
+`AlgebraicGeometry.Scheme.pointSmallEtale`, and Mathlib's `Sheaf`, `Action`,
+`Gal`, and `yoneda` definitions. The six DAG dependencies are Mathlib matches
+or existing declarations; no project declaration was required directly.
 
-None. The slopmaster2 source has no declaration tagged lem-exc-etale-sheaves-gsets-point, and searches of its algebraic-geometry source found no declaration stating the set-valued equivalence.
+Edge cases checked: `K` separably closed (trivial Galois group), `X` empty,
+and the empty stalk/index case. The universe is explicit and no auto-implicit
+variables are used.
 
-## WANTED
+Searches: `msearch.py ... leanfinder "equivalence between etale sheaves over a field and discrete Galois sets stalk geometric point"` found only etale-site infrastructure; `loogle` for `sheafFiber, pointSmallEtale, DiscreteContAction, Action` returned no hits; grep for `Galois.*sheaf|sheaf.*Galois|DiscreteContAction` in Mathlib returned no matching theorem; `rg` over WeilConjectures found only unrelated finite-local-system and topological-invariance material. No exact existing declaration was found.
 
-literature/stacks-project/etale-cohomology.tex, Tags 03QW, 03QT, 04JM, for this item and the new node. The literature checkout is absent on this machine. I read the corresponding Stacks pages at https://stacks.math.columbia.edu/tag/03QW, https://stacks.math.columbia.edu/tag/03QT, and https://stacks.math.columbia.edu/tag/04JM, and wrote the omitted full-faithfulness details as an agent proof.
+The Stacks source path recorded by the node is not present in this checkout;
+the node's source place is Tag 03QT and Tag 03QW as recorded above.
 
-## Correction
+## Earlier second reading (a previous round; superseded)
 
-The imported statement called Spec K^sep a geometric point. For imperfect K, K^sep need not be algebraically closed, whereas [def-weil-geometric-point] requires an algebraically closed residue field and Stacks 03QT assumes a geometric point. I replaced it by Spec Omega for an algebraic closure Omega containing K^sep. The represented stalk remains Hom_K(Spec K^sep, X) because an etale K-scheme is a disjoint union of finite separable field spectra. No conclusion was weakened.
+The module and node were read together. The field, closure, embedding, and
+geometric-point hypotheses are each explicit. Clause (i) is the equivalence
+conjunction; clause (ii) is the representable point-fiber bijection. The
+compiled API exposes the representable sheaf through its point's presheaf
+fiber (`yoneda.obj X`), which is the available Mathlib formulation of the
+same stalk computation. No declaration is proved beyond the required `sorry`.
 
-## Review by G1
+## Earlier second reading (a previous round; superseded)
 
-I read Stacks 03QW (the action formula and open stabilizers), 03QT (the sheaf/G-set equivalence and its representable inverse), 04JM (the direct descent proof of the section/invariant formula), 03QR (etale K-schemes and discrete G-sets), and 03PC (decomposition of an etale K-scheme). The item agrees with 03QT after correcting the geometric point. The new node specializes the direct proof in 04JM from K to each finite separable L/K; its statement includes the action formula for every K-embedding, which follows by evaluating at the chosen lift and extending that embedding to a member of G.
+Read the node and Stacks Tags 03QT and 03QW. `K` is `[Field K]`; `Ksep` is
+`[IsSepClosure K Ksep]`, which includes separability and separable closure.
+`Ω` is `[IsAlgClosure K Ω]` and `[IsAlgClosed Ω]`. `_i : Ksep →ₐ[K] Ω` is the
+specified embedding. The geometric point is the canonical `Spec.map` of
+`algebraMap K Ω`, not an arbitrary map. `Gal(Ksep / K)` carries Mathlib's Krull
+topology. The site is `Scheme.smallEtaleTopology`; its stalk is
+`pointSmallEtale ... .sheafFiber`. Verdict: the objects and field hypotheses
+match the node, including imperfect positive-characteristic fields.
 
-For step 1, [def-weil-pbc-geometric-stalks] supplies triples indexed by pointed neighbourhoods and [lem-weil-pbc-etale-fibre-discrete-separable-points] supplies finite separable residue fields. Thus automorphisms fixing K^sep act trivially on each triple, and the finite residue field gives an open subgroup fixing it. I checked that an automorphism of K^sep extends to Omega and that the resulting action is independent of the extension. These are the exact hypotheses in the cited statements.
+Clause (i): the equivalence targets the full subcategory of Galois actions
+whose every element has an open stabilizer. A natural isomorphism of its
+underlying-set functor after `E.functor` with the geometric stalk functor
+identifies this equivalence as the stalk equivalence. The old `Action Type`
+target allowed discontinuous actions and its bare `Nonempty` equivalence was
+unrelated to stalks; both were repaired.
 
-For step 2, [lem-weil-pbc-small-etale-representable-presheaf-sheaf] says h_X is a sheaf, [lem-galois-stalk-representable] says its geometric stalk is the set of Omega-points, and [lem-weil-pbc-etale-fibre-discrete-separable-points] says each component is the spectrum of a finite separable field. Any embedding of that field into Omega lands in K^sep, proving the asserted bijection, also when X is empty. None of these citations is merely a definition offered for a theorem.
+Clause (ii): `X` ranges over every small-etale object, including the empty
+scheme. The representable `yoneda.obj X` fiber at that point is matched with
+the subtype of maps `Spec Ksep ⟶ X.left` satisfying
+`f ≫ X.hom = Spec.map (algebraMap K Ksep).op`, namely the `K`-morphisms. The old
+signature admitted non-`K` maps. The bijection is present, though naturality
+in `X` and Galois equivariance are not explicitly encoded in its signature.
 
-For step 3, the new node states exactly the needed bijection F(Spec L) = M^{H_L}, natural under all K-embeddings L to L', as well as sheaf morphisms. The etale-fibre node supplies the coproduct decomposition of an arbitrary object of the site. The sheaf condition for that coproduct reduces sections to products. The action formula in the new node makes the maps induced by a G-equivariant M to N natural under arbitrary maps of components, so they assemble into a sheaf morphism and recover the original map on stalks. I corrected an earlier draft which only asserted compatibility for inclusions L subset L'; that was insufficient for full faithfulness.
+Edge cases: `Ksep = K` is allowed when `K` is separably closed, so the trivial
+group is covered. Empty `X` and empty stalks are quantified. No finiteness,
+Noetherian, or characteristic restriction occurs; there is no integer `n`.
+`Type (max u v + 1)` lets `v` vary independently and includes arbitrarily
+large sets.
 
-For step 4, [lem-exc-etale-field-gsets] states the equivalence producing X from any discrete G-set M. The representable-sheaf, stalk, and etale-fibre nodes used again in the text of step 2 state precisely why h_X has stalk M. This proves essential surjectivity without asking the etale-scheme node to imply a sheaf equivalence.
+Independent searches: LeanFinder `continuous Galois action on stalk etale
+sheaves equivalence` returned only etale-locus lemmas. Loogle
+`DiscreteContAction` found Mathlib's general continuous-action subcategory;
+it needs a `HasForget₂ V TopCat` instance unavailable for `Type`. `rg` in
+Mathlib's Action/Continuous and FieldTheory/KrullTopology found the general
+continuous-action and Krull-topology notions. `rg` in `WeilConjectures` and
+`lean/Sheaf` found no exact sheaf/Galois equivalence. The six dependency
+records were checked; in particular, `IsSepClosed` alone did not render the
+separable-closure dependency.
 
-I checked B1-B10: the new node has only a self-contained statement with its field, closure, point, site, sheaf, and subgroup introduced; its TeX has one rendered backslash; the source uses Stacks tags and labels; it is not marked a Mathlib leaf. A whole-DAG search for 04JM and the section formula, plus blueprint searches for "sections over finite separable" and "invariants", found no blueprint node with this set-valued formula. Existing lem-exc-field-discrete-modules is about module sheaves and cites this item, so it cannot be used here. The new node comes from the third paragraph of its nearest blueprint ancestor. C1-C8: every non-elementary fact in the item is stated by a cited node, every quote in citations.json occurs verbatim in that statement, and no cited node depends on this item. The etale-fibre decomposition and representable-sheaf facts are generic tools from another unit, declared in split_report.tool_uses.
 
-For E1-E6, I tested K separably closed (G trivial; the section formula is F(Spec K)=M), L=K (invariants under G), L/K finite Galois (H_L normal and the formula respects conjugation), and the empty X and empty sheaf (all relevant Hom and stalk sets empty). The proof uses no finite-type or quasi-compact assumption on X; the etale-fibre node allows arbitrary disjoint unions. The item correction above addresses the false geometric-point hypothesis rather than silently changing its meaning. The Stacks proof says "details omitted" at the representable-stalk identification; step 2 supplies them from cited nodes. No source error remains.
+## Second reading by G1
 
-No part of this split remains unfinished; the new statement-only node is intentionally left for a later stage-1 worker.
+This is the current independent reading; the earlier sections above describe
+superseded signatures. I opened the delivered node, its four proof steps, all
+six statement-dependency nodes, and the actual Mathlib/source declarations.
+The current module is
+`Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint`, declaration
+`AlgebraicGeometry.etaleSheavesGsetsPoint`.
+
+Source reading: the Stacks tex is available locally at
+`/home/ubuntu/c1-stacks-review/etale-cohomology.tex`, lines 8516–8653.
+Section `section-galois-action-stalks` (03QW) assumes a geometric point,
+defines the left action by changing a lift to its composition with Spec of
+an automorphism, proves that it factors through the absolute Galois group,
+and gives open stabilizers from finite separable residue fields. Theorem
+`theorem-equivalence-sheaves-point` (03QT) assumes only a field and a geometric
+point, and its inverse uses representable sheaves. The node specializes the
+geometric point to an algebraic closure; the Lean retains exactly this
+specialization. No statement correction or new/dependency node is needed.
+
+Object, hypothesis, and conclusion checklist:
+
+- Field K: `(K : Type u) [Field K]`. Verdict: exact; `Algebra` in
+  `Mathlib.Algebra.Algebra.Defs` is the field-extension dependency's notion.
+- Separable closure Ksep/K: `[Field Ksep] [Algebra K Ksep]
+  [IsSepClosure K Ksep]`. Verdict: exact. I read `IsSepClosed` and
+  `IsSepClosure` in `Mathlib.FieldTheory.IsSepClosed`: the latter includes
+  separability (hence algebraicity) and a separably closed top field, which
+  are both clauses of `def-kun-separably-closed`. Merely assuming
+  `IsSepClosed Ksep` would not have sufficed; the present signature does not
+  make that error. This is the same dependency module, not a private notion.
+- Algebraic closure Omega/K and chosen embedding: `[Field Ω] [Algebra K Ω]
+  [IsAlgClosure K Ω] [IsAlgClosed Ω]` and `(i : Ksep →ₐ[K] Ω)`.
+  Verdict: exact. `IsAlgClosure` in `FieldTheory.IsAlgClosed.Basic` gives
+  algebraicity and algebraic closedness; the explicit closedness instance
+  repeats a consequence, rather than imposing a stronger condition. The
+  algebra homomorphism of fields is an embedding automatically.
+- G with Krull topology: `Gal(Ksep / K)` and the imported
+  `Mathlib.FieldTheory.KrullTopology` instance. Verdict: exact, with no
+  arbitrary topology or extra instance supplied by the caller.
+- The corresponding geometric point: each occurrence uses
+  `Scheme.Spec.map (CommRingCat.ofHom (algebraMap K Ω)).op`.
+  Verdict: exact, not an unrelated arbitrary scheme map. This is the
+  geometric-point dependency's Spec-of-an-algebraically-closed-field notion.
+- Small etale site and all its sheaves of sets: `Scheme.smallEtaleTopology`
+  on `Spec K`, and `Sheaf ... (Type (max u (v + 1)))`. Verdict: exact.
+  I read `Scheme.Etale`, `smallEtaleTopology`, and
+  `ofArrows_mem_smallEtaleTopology_iff`; objects are all etale schemes over K
+  and covers are jointly surjective families, not just finite etale objects.
+- Stalk: `(Scheme.pointSmallEtale s).sheafFiber`. Verdict: exact. In
+  `EtalePoint.lean` its fiber is lifts over s; in
+  `CategoryTheory.Sites.Point.Basic` its presheaf fiber is the colimit over
+  the opposite elements category, and `sheafFiber` restricts to sheaves.
+- Clause (i), equivalence and open stabilizers: `∃ E : Sheaf ... ≌
+  ObjectProperty.FullSubcategory (fun X : Action ... G =>
+  ∀ x : ToType X, IsOpen (MulAction.stabilizer G x : Set G))`.
+  Verdict: exact, the full subcategory retains precisely equivariant maps.
+  `∃ η : E.functor ⋙ ... ⋙ forget₂ ... ≅ ...sheafFiber` makes its underlying
+  functor the geometric stalk functor, naturally in every sheaf.
+- Clause (i), action through pointed neighborhoods: the new first conjunct
+  quantifies every F, X, section t, lift l, automorphism g, and extension τ
+  satisfying `τ.toAlgHom.comp i = i.comp g.toAlgHom`. For
+  `l' = Scheme.Spec.map ...τ... ≫ l` it equates the transported action on
+  `toPresheafFiber X (Over.homMk l h) F.obj t` with
+  `toPresheafFiber X (Over.homMk l' h') F.obj t`.
+  Verdict: exact source formula for every germ representative. The two
+  over-K equations h and h' type the lifts; they are not new assumptions on
+  K or F. Quantification over all extensions also states independence.
+- Clause (ii), every etale K-scheme X and its representable sheaf:
+  `X : (Spec K).Etale` and `smallEtaleTopology.uliftYoneda.obj X`.
+  Verdict: exact. I read `GrothendieckTopology.uliftYoneda` in
+  `Sites.Canonical`: it is Yoneda followed by universe lift, with its actual
+  sheaf structure. The source import `...Sites.Proetale` supplies
+  `Scheme.subcanonical_smallEtaleTopology`, so this import is used.
+- Clause (ii), bijection with K-morphisms: `∃ e : ∀ X, stalk ... ≃
+  {f : Spec Ksep ⟶ X.left // f ≫ X.hom = Spec.map (algebraMap K Ksep).op}`.
+  Verdict: exact, including the over-K condition.
+- Clause (ii), G-equivariance: the equation after e transports
+  `(E.functor.obj ...).obj.ρ g` by η and e, and equates it with
+  `Spec.map g.toRingHom.op ≫ (e X x).val`. Verdict: exact left Galois action;
+  Spec is contravariant, so composition agrees with `AlgEquiv.mul_apply`.
+- Clause (ii), naturality: the final quantified equation sends the stalk
+  map induced by `uliftYoneda.map f` under e to `(e X x).val ≫ f.left`.
+  Verdict: exact, for every morphism f : X ⟶ Y in the small site.
+
+Edge cases: separably closed K permits Ksep = K and the trivial Galois
+group, even when K is imperfect and Omega is a larger purely inseparable
+closure. Empty X, empty sheaves/stalk sets, and empty covering/index sets
+are included; no nonemptiness or finiteness condition is introduced. The
+base Spec K is nonempty since K is a field; an empty base is outside the
+node. No zero object or integer n occurs. Every characteristic is covered,
+with no perfectness, Noetherian, or separateness assumption. Universes u
+and v are explicit; v is independent and permits arbitrarily large set
+universes. The closure fields are algebraic over K, so the shared field
+universe does not constrain their algebraic cardinality. ULift merely
+raises representable hom-set universes. No auto-implicit binder remains.
+
+Independent searches (2026-10-11):
+
+- LeanFinder via msearch, query `Galois descent equivalence sheaves field
+  stalk functor`: eight hits, including `Point.sheafFiber` and stack descent
+  equivalences, none the field/sheaf/G-set equivalence.
+- Loogle via msearch, query `DiscreteContAction`: found the general
+  continuous/discrete action category. I opened its declaration and
+  `ContAction.IsDiscrete`; it takes a category with a forgetful functor to
+  TopCat, rather than a bare set with an open-stabilizer predicate. The
+  inline full-subcategory predicate uses existing Action, MulAction,
+  stabilizer, and IsOpen notions and defines no competing named notion.
+- LeanSearch via msearch, query `The stalk functor on etale sheaves over a
+  field is an equivalence with continuous actions of the absolute Galois
+  group`: service unavailable (Internal Server Error); no verdict inferred.
+- rg with `sheaf.*[Gg]alois|[Gg]alois.*sheaf|stalk.*[Gg]alois|
+  [Gg]alois.*stalk|etaleSheavesGsetsPoint` over Mathlib AlgebraicGeometry and
+  CategoryTheory, WeilConjectures, and repository lean/Sheaf: no exact
+  declaration. I opened the apparent near match
+  `Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`
+  in RealSheaves/LocalSystems: it treats finite locally constant module
+  sheaves with a supplied fundamental group, not all field etale set sheaves.
+  The repository's sections/invariants statements are also only partial
+  ingredients. Thus existing:false is justified.
+
+Mismatches repaired in this reading: the unused embedding and lack of a
+pointed-neighborhood action formula permitted an abstract stalk action
+without requiring the node's canonical one. Added the germ compatibility
+conjunct and used i in its extension condition. The proof docstring had
+only a compressed summary; expanded it to all four steps with dependency
+ids. Moved the module from the nonstandard Etale topic directory to
+AlgebraicGeometry/Sites, preserving the declaration name. Removed a
+broken prose sentence and shortened the one overlong line. Updated
+lean.module, lean.file, and lean.statement (the latter extracted verbatim
+from the final signature). No DAG statement, hypothesis, proof, dependency,
+or other field was changed. No new nodes or dependency modules exist in
+this delivery. There is one named theorem and its entire proof remains
+`by sorry`; no definition, hollow data, or additional proof was introduced.
+
+Validation: the repaired signature compiled on the server in 2.2 seconds
+with no errors or warnings. `deliver2.py ... --no-push` printed OK: the
+complete delivery passes the stage-2 preflight and server compilation.
