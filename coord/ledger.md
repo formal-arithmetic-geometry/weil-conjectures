@@ -5226,3 +5226,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:26 L: merged deliver/G1/def-weil-pbc-strict-henselization-limit (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.StrictHenselization AlgebraicGeometry.Scheme.strictHenselizationRing)
 - 15:27 L: merged deliver/P1/lem-weil-pbc-coherent-support-power-ideal-kills (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentSupportPowerIdealKills AlgebraicGeometry.Scheme.coherent_support_power_ideal_kills)
 - 15:27 L: merged deliver/T1/lem-weil-pbc-trivial-kan-homotopy-equivalence (stage 2; reviewer PASS; first push; Sheaf.Paper.TrivialKanHomotopyEquivalence SSet.exists_section_homotopy_equivalence)
+- 15:27 L: merged deliver/N1/lem-weil-pbc-quotient-henselian-pair (stage 2; reviewer FIX; first push; Sheaf.RingTheory.QuotientHenselianPair IsLocalRing.henselianRing_quotient_maximalIdeal)
