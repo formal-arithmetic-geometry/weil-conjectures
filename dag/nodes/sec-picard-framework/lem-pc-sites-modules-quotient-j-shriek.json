@@ -119,5 +119,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qjs2456 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 03EW(3), (U,s)-indexed map kept, small-site hypothesis named, restates nothing (sibling j-shriek-flat defines j_{U!}O_U as P^#). FIX more, RETURN less: (1) C4: Step 1 cited lem-weil-pbc-sheaf-free-separator, which is about sheaves valued in a fixed category A with constant G, not O-modules over a sheaf of rings; replaced by the adjunction Hom(j_{U!}O_U,M)=M(U) derived elementarily from def-weil-extension-by-zero-presheaf and def-weil-presheaf-modules-sheafification (03ES/03EW route, as in lem-sc-ringed-space-injective-restriction-surjective step 1); (2) C1: Step 2 named lem-weil-pbc-module-sheaves-colimits-forgetful in text but not in uses/proof_deps; added as declared generic tool use (colimits in Mod(O)), hypotheses checked (small site); Step 3 now states sectionwise surjectivity then zero sheafified cokernel via colimits-forgetful (1). Second reading by C1 missed fault (1).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.QuotientJShriek",
+  "declaration": "SheafOfModules.exists_epi_coproduct_jShriek",
+  "file": "lean/Sheaf/CategoryTheory/QuotientJShriek.lean",
+  "statement": "theorem exists_epi_coproduct_jShriek {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J RingCat.{u}) (_hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) (M : SheafOfModules.{u} R) : ∃ (c : Cofan (fun m : M.val.Elements => (PresheafOfModules.sheafification (𝟙 R.obj)).obj m.freeYoneda)) (_hc : IsColimit c) (q : c.pt ⟶ M), Epi q ∧ ∀ m : M.val.Elements, c.inj m ≫ q = (PresheafOfModules.sheafification (𝟙 R.obj)).map m.fromFreeYoneda ≫ (PresheafOfModules.sheafificationAdjunction (𝟙 R.obj)).counit.app M",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sjs0910",
+  "group": "J1",
+  "result": "pass",
+  "note": "small site C:Type u SmallCategory + J; O = R : Sheaf J RingCat with _hcomm (commutative); M : SheafOfModules R (recorded dep); j_{U!}O_U = sheafification of free(yoneda U) = P_U^# of 03DI (rank one); index M.val.Elements = pairs (U,s); coproduct existence as Cofan+IsColimit witness; components = sheafified fromFreeYoneda ≫ counit (adjunct of 1↦s); Epi q; Grp.FilteredColimits import needed (WEqualsLocallyBijective, checked by removal); no exact Mathlib/source match (source has only isSeparating_sheafification_freeYoneda)"
  }
 }
