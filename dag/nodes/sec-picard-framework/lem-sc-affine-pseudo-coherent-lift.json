@@ -151,5 +151,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apl3137 (reviewer sub-agent of L); spot-checked: Read Tag 08EE, 064R, 064S, lemma-lift-quasi-coherent, lemma-pseudo-coherent; children qcoh/qc-open-lift correct specializations; cone/finite-cohomology not duplicates (lem-pc-pseudo-coherent-distinguished-triangle is the scheme version of a different clause); recorded searches dated 2026-10-11, not rerun. FIX more, RETURN less: (1) B3/C4 lem-sc-cone-pseudo-coherent and lem-sc-finite-cohomology used m-pseudo-coherent in D(R) citing def-pur-pseudo-coherent-complex, which defines only pseudo-coherence on schemes: m-pseudo-coherence now defined inline (Tag 064N form), stmt_deps corrected; (2) E/step 4 (missed by the second reading) claimed the new map is a localized cohomology isomorphism in degrees >= n-1, false in degree n-1: corrected to iso in degrees >= n and surjection in n-1, with the stage invariant stated in step 3 and the limit argument made explicit; (3) C1 step 3 and step 2 gaps: M_{f_j} (n-1)-pseudo-coherent via stupid truncation of the step-2 model, F_{f_j} pseudo-coherent, restriction of E' to D(f_j) pseudo-coherent and represented by M_{f_j}; start of induction made F=0 with H^i=0 for i>=n; step 5 rephrased via the global map alpha-tilde being a local quasi-isomorphism.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift",
+  "declaration": "AlgebraicGeometry.Scheme.exists_boundedAbove_finiteFree_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePseudoCoherentLift.lean",
+  "statement": "theorem exists_boundedAbove_finiteFree_lift (X : Scheme.{u}) [IsAffine X] (U : X.Opens) (hU : IsCompact (U : Set X)) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ V : U.toScheme.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (E : schemeDerivedCategory U.toScheme) (hE : IsPseudoCoherent U.toScheme E) : ∃ P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ, (∃ N : ℤ, ∀ i : ℤ, N < i → IsZero (P.X i)) ∧ (∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ SheafOfModules.free (R := moduleRings X.toRingedSpace) (ULift.{u} (Fin r)))) ∧ Nonempty (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Modules.overEquiv U)).mapDerivedCategory.obj (DerivedCategory.Q.obj P) ≅ E)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apl1322",
+  "group": "G1",
+  "result": "pass",
+  "note": "X:Scheme [IsAffine X]; U:X.Opens + IsCompact = qc open; E:schemeDerivedCategory U.toScheme with landed Scheme.IsPseudoCoherent (binders as M1); ∃P cochain complex on O_X tied, bounded above by IsZero P.X i for i>N, each term ≅ SheafOfModules.free (ULift (Fin r)) as in the dependency; restriction = overFunctor ⋙ (Scheme.Modules.overEquiv U).functor mapDerivedCategory (G1 QcOpenDerivedLift/ce180b4c0 form, #check confirms Scheme.Modules.overEquiv); Nonempty iso to E; no let, no new defs, node statement untouched"
  }
 }
