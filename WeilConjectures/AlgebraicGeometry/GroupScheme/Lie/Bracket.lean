@@ -623,4 +623,133 @@ theorem tangentBracket_mul_right (v w w' : pointsKer G aug₁) :
     simp only [commutatorElement_def]
     group
   rw [e, ← tangentMul_tangentBracket v w', ← (commute_tangentMul _ _).eq, mul_inv_cancel_right]
+/-! ### The Jacobi identity -/
+
+/-- The residue map of `k[α][β][γ]`. -/
+abbrev aug₃ : DualNumber (DualNumber (DualNumber k)) →ₐ[k] k :=
+  dualAug aug₂
+
+/-- The element `α` of `k[α][β][γ]`. -/
+abbrev alp₃ : DualNumber (DualNumber (DualNumber k)) :=
+  inl eps₂
+
+/-- The element `β` of `k[α][β][γ]`. -/
+abbrev bet₃ : DualNumber (DualNumber (DualNumber k)) :=
+  inl del₂
+
+/-- The element `γ` of `k[α][β][γ]`. -/
+abbrev gam₃ : DualNumber (DualNumber (DualNumber k)) :=
+  inr 1
+
+theorem alp₃_mul_self : alp₃ (k := k) * alp₃ (k := k) = 0 := by
+  ext <;> simp
+
+theorem bet₃_mul_self : bet₃ (k := k) * bet₃ (k := k) = 0 := by
+  ext <;> simp
+
+theorem gam₃_mul_self : gam₃ (k := k) * gam₃ (k := k) = 0 := by
+  ext <;> simp
+
+theorem aug₃_alp₃ : aug₃ (alp₃ (k := k)) = 0 := by
+  simp
+
+theorem aug₃_bet₃ : aug₃ (bet₃ (k := k)) = 0 := by
+  simp
+
+theorem aug₃_gam₃ : aug₃ (gam₃ (k := k)) = 0 := by
+  simp
+
+/-- The product `αβγ`, which kills the maximal ideal of `k[α][β][γ]`. -/
+abbrev mon₃ : DualNumber (DualNumber (DualNumber k)) :=
+  alp₃ (k := k) * bet₃ * gam₃
+
+theorem mon₃_mul (x : DualNumber (DualNumber (DualNumber k))) (hx : aug₃ x = 0) :
+    mon₃ (k := k) * x = 0 := by
+  have h : x.fst.fst.fst = 0 := hx
+  ext <;> simp [h]
+
+theorem aug₃_mon₃ : aug₃ (mon₃ (k := k)) = 0 := by
+  simp [mon₃]
+
+theorem liftElem_mon₃_injective :
+    Function.Injective (DualNumber.liftElem (R := k) (mon₃ : DualNumber (DualNumber
+      (DualNumber k))) (mon₃_mul _ aug₃_mon₃)) := by
+  intro x y h
+  have h1 := congrArg (fun z : DualNumber (DualNumber (DualNumber k)) ↦ z.fst.fst.fst) h
+  have h2 := congrArg (fun z : DualNumber (DualNumber (DualNumber k)) ↦ z.snd.snd.snd) h
+  simp only [DualNumber.liftElem_apply, algebraMap_eq_inl', fst_add, fst_mul, snd_add,
+    snd_mul, fst_inl, snd_inl, fst_inr, snd_inr, smul_eq_mul, op_smul_eq_mul, mul_zero,
+    zero_mul, add_zero, zero_add, mul_one, one_mul] at h1 h2
+  exact TrivSqZeroExt.ext h1 h2
+
+/-- The points `u^{(αβγ)}`, as a homomorphism from the tangent vectors. -/
+noncomputable abbrev tangentMon (u : pointsKer G aug₁) : pointsKer G (aug₃ (k := k)) :=
+  tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) mon₃
+    (mon₃_mul _ aug₃_mon₃) aug₃_mon₃ u
+
+theorem tangentMon_injective : Function.Injective (tangentMon (G := G)) :=
+  kerMap_injective _ _ liftElem_mon₃_injective
+
+theorem commutator_commutator_tangentMap (m₁ m₂ m₃ : A) (h₁ : m₁ * m₁ = 0) (h₂ : m₂ * m₂ = 0)
+    (h₃ : m₃ * m₃ = 0) (hπ₁ : π m₁ = 0) (hπ₂ : π m₂ = 0) (hπ₃ : π m₃ = 0) (m : A)
+    (hm : m * m = 0) (hπ : π m = 0) (h : m₁ * m₂ * m₃ = m) (x y z : pointsKer G aug₁) :
+    ⁅⁅tangentMap m₁ h₁ hπ₁ x, tangentMap m₂ h₂ hπ₂ y⁆, tangentMap m₃ h₃ hπ₃ z⁆ =
+      tangentMap m hm hπ (tangentBracket (tangentBracket x y) z) := by
+  rw [commutator_tangentMap, commutator_tangentMap, tangentMap_congr (G := G) h _ _ hm hπ]
+
+/-- The point `x^{(α)}` over `k[α][β][γ]`. -/
+noncomputable abbrev tangentAlp (x : pointsKer G aug₁) : pointsKer G (aug₃ (k := k)) :=
+  tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) alp₃ alp₃_mul_self
+    aug₃_alp₃ x
+
+/-- The point `x^{(β)}` over `k[α][β][γ]`. -/
+noncomputable abbrev tangentBet (x : pointsKer G aug₁) : pointsKer G (aug₃ (k := k)) :=
+  tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) bet₃ bet₃_mul_self
+    aug₃_bet₃ x
+
+/-- The point `x^{(γ)}` over `k[α][β][γ]`. -/
+noncomputable abbrev tangentGam (x : pointsKer G aug₁) : pointsKer G (aug₃ (k := k)) :=
+  tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) gam₃ gam₃_mul_self
+    aug₃_gam₃ x
+
+theorem tangentMon_conj (u : pointsKer G aug₁) (q : pointsKer G (aug₃ (k := k))) :
+    q * tangentMon u * q⁻¹ = tangentMon u := by
+  rw [← (commute_tangentMap (A := DualNumber (DualNumber (DualNumber k))) (π := aug₃) mon₃
+    aug₃_mon₃ mon₃_mul u q).eq, mul_inv_cancel_right]
+
+set_option synthInstance.maxHeartbeats 200000 in
+set_option maxHeartbeats 1000000 in
+/-- The Hall–Witt identity for tangent vectors: the Hall–Witt identity of the group of points
+over `k[α][β][γ]`, applied to `x^{(α)}`, `y^{(β)}` and `z^{(γ)}`. -/
+theorem tangentBracket_hallWitt (x y z : pointsKer G aug₁) :
+    tangentBracket (tangentBracket x⁻¹ y) z * tangentBracket (tangentBracket z⁻¹ x) y *
+      tangentBracket (tangentBracket y⁻¹ z) x = 1 := by
+  apply tangentMon_injective
+  have hw := conj_commutatorElement_left_commutatorElement_mul (tangentAlp x) (tangentBet y)
+    (tangentGam z)
+  have e₁ : ⁅⁅(tangentAlp x)⁻¹, tangentBet y⁆, tangentGam z⁆ =
+      tangentMon (tangentBracket (tangentBracket x⁻¹ y) z) := by
+    rw [← map_inv]
+    exact commutator_commutator_tangentMap _ _ _ _ _ _ _ _ _ _ _ _ rfl _ _ _
+  have e₂ : ⁅⁅(tangentGam z)⁻¹, tangentAlp x⁆, tangentBet y⁆ =
+      tangentMon (tangentBracket (tangentBracket z⁻¹ x) y) := by
+    rw [← map_inv]
+    exact commutator_commutator_tangentMap _ _ _ _ _ _ _ _ _ _ _ _
+      (by rw [mul_comm gam₃ alp₃, mul_right_comm]) _ _ _
+  have e₃ : ⁅⁅(tangentBet y)⁻¹, tangentGam z⁆, tangentAlp x⁆ =
+      tangentMon (tangentBracket (tangentBracket y⁻¹ z) x) := by
+    rw [← map_inv]
+    exact commutator_commutator_tangentMap _ _ _ _ _ _ _ _ _ _ _ _
+      (by rw [mul_comm _ alp₃, ← mul_assoc]) _ _ _
+  rw [e₁, e₂, e₃] at hw
+  have hc := tangentMon_conj (G := G)
+  have key : ∀ {P : Type u} [Group P] (a b c t₁ t₂ t₃ : P), a * t₁ * a⁻¹ = t₁ →
+      c * t₂ * c⁻¹ = t₂ → b * t₃ * b⁻¹ = t₃ →
+      a * t₁ * a⁻¹ * c * t₂ * c⁻¹ * b * t₃ * b⁻¹ = 1 → t₁ * t₂ * t₃ = 1 := by
+    intro P _ a b c t₁ t₂ t₃ h₁ h₂ h₃ h
+    rw [← h₁, ← h₂, ← h₃, ← h]
+    group
+  have := key _ _ _ _ _ _ (hc _ _) (hc _ _) (hc _ _) hw
+  simp only [tangentMon, map_mul, map_one] at this ⊢
+  exact this
 end AlgebraicGeometry.GrpObj
