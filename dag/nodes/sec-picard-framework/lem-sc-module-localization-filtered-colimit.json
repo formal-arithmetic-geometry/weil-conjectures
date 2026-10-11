@@ -13,17 +13,71 @@
  },
  "kind": "statement",
  "title": "Module localization is the filtered colimit over powers",
- "statement": "Let A be a commutative ring [def-weil-pbc-module-localization], f an element of A, and M an A-module [def-weil-pbc-module-localization]. The canonical map from the filtered colimit of the directed system M \\xrightarrow{f} M \\xrightarrow{f} M with every transition multiplication by f to the localization M_f is an isomorphism of A-modules; the class of m at stage e maps to m/f^e.",
+ "statement": "Let A be a commutative ring, f an element of A, and M an A-module. The canonical map from the filtered colimit of the directed system M \\xrightarrow{f} M \\xrightarrow{f} M with every transition multiplication by f to the localization M_f [def-weil-pbc-module-localization-away] is an isomorphism of A-modules; the class of m at stage e maps to m/f^e.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 00CM, module localization as a colimit"
  },
  "stmt_deps": [
-  "def-weil-pbc-module-localization"
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Index the copies of $M$ by the ordered set of natural numbers, with the transition from stage $e$ to stage $e+1$ equal to multiplication by $f$. This is a filtered category: it is nonempty, any two stages have a common later stage, and a poset has no distinct parallel arrows. For each $e$ define $\\kappa_e:M\\to M_f$ by $\\kappa_e(m)=m/f^e$. These maps are $A$-linear and compatible, since $\\kappa_{e+1}(fm)=fm/f^{e+1}=m/f^e$. Thus the universal property of the colimit gives a canonical $A$-linear map $\\kappa:\\varinjlim_eM\\to M_f$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM, module localization as a colimit"
+   }
+  },
+  {
+   "text": "The map kappa is surjective. Every element of M_f is a fraction m/f^e by the definition of localization at the powers of f, and this is kappa applied to the class of m at stage e.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM, module localization as a colimit"
+   }
+  },
+  {
+   "text": "The map kappa is injective. Suppose the classes of m at stage e and n at stage d have the same image. By the equality criterion in the localization, there is a natural number r such that f^r(f^d m-f^e n)=0. Set E=e+d+r. After transporting both representatives to stage E, their difference is f^{E-e}m-f^{E-d}n=f^r(f^d m-f^e n)=0. The equality criterion for elements in a filtered colimit of modules therefore says that the two classes in colim_e M are equal.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM, module localization as a colimit"
+   }
+  },
+  {
+   "text": "The canonical map kappa is both A-linear and bijective, so it is an isomorphism of A-modules, with the stated formula on the class of m at stage e.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CM, module localization as a colimit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00CM, module localization as a colimit"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,15 +106,38 @@
    "results": "service unavailable",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "DirectLimit|colimit in files mentioning LocalizedModule/IsLocalizedModule/Localization.Away; Algebra/Module/LocalizedModule/*, RingTheory/Localization/Away/* for limit|colim",
+   "results": "only generic DirectLimit/structure-sheaf stalk colimits; no M_f = colim(M, xf)",
+   "date": "2026-10-11",
+   "verdict": "no match (R-mlc0119)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-affine-koszul-hom-alternating-cech",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-module-localization-filtered-colimit",
+  "worker": "stage1",
+  "summary": "Split the module localization colimit assertion into the filtered power-of-f diagram, the fraction-surjectivity argument, and the common-later-stage injectivity argument. The existing filtered-colimit element/equality lemma and localization definition supply all non-elementary inputs; no new nodes were needed.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality clause 'localization of one-element cochain entries as a filtered colimit' through the affine perfect open representation route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mlc0119",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mlc0119 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 00CM and citer lem-sc-affine-koszul-hom-alternating-cech Step 2 (f=f_J, stage e m->m/f^e, cofinal from e=1): exact form used. Steps 1-4 checked: compatibility fm/f^{e+1}=m/f^e; surjectivity via fractions; injectivity E=e+d+r gives f^r(f^d m-f^e n)=0, colimit equality criterion of lem-weil-pbc-filtered-colimit-modules-elementwise. Statement change (module-localization -> -away) named in report (E7), fine. No duplicate (lem-weil-pbc-localization-colimit-principal-localizations is S^{-1}P=colim P_f; lem-kun-colim-of-localizations, lem-weil-pbc-filtered-colimit-localization-at-prime differ). Mathlib grep: no match. FIX more, RETURN less: (1) B4: Step 1 plain-text arrows/kappa/colim rewritten in TeX; (2) stmt_deps listed def-weil-pbc-module-localization while statement cites def-weil-pbc-module-localization-away -> stmt_deps corrected (missed by E1's second reading); (3) recorded my Mathlib grep in mathlib_searches.; 1 file(s) fixed by the reviewer"
+ }
 }
