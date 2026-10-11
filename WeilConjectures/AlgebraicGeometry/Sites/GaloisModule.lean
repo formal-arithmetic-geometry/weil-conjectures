@@ -162,12 +162,12 @@ instance etale_specAlgebraMap_intermediateField : Etale (specAlgebraMap K E) :=
   HasRingHomProperty.Spec_iff.2 (RingHom.etale_algebraMap.2 this)
 
 /-- The étale `K`-scheme `Spec E` for a finite subextension `E` of `Ω / K`. -/
-noncomputable abbrev etaleSpec : (Spec (.of K)).Etale :=
+noncomputable abbrev galoisEtaleSpec : (Spec (.of K)).Etale :=
   Etale.mk (specAlgebraMap K E)
 
 /-- The canonical geometric point `x_E : Spec Ω ⟶ Spec E` of `Spec E`, as an element of the
 fibre of `galoisPoint K Ω`. -/
-noncomputable def galoisPointFiberSpec : (galoisPoint K Ω).fiber.obj (etaleSpec K Ω E) :=
+noncomputable def galoisPointFiberSpec : (galoisPoint K Ω).fiber.obj (galoisEtaleSpec K Ω E) :=
   ULift.up (Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap E Ω))) (by
     dsimp only [specAlgebraMap, Over.mk_hom, Etale.forget_mk]
     rw [← Spec.map_comp]
@@ -205,7 +205,7 @@ variable {K Ω E} in
 /-- The fibre of `galoisPoint K Ω` at `Spec E` is the orbit of `x_E`: every `K`-embedding
 `E → Ω` extends to an automorphism of `Ω`. -/
 lemma exists_galoisPointAct_galoisPointFiberSpec_eq
-    (y : (galoisPoint K Ω).fiber.obj (etaleSpec K Ω E)) :
+    (y : (galoisPoint K Ω).fiber.obj (galoisEtaleSpec K Ω E)) :
     ∃ σ : Gal(Ω/K), (galoisPointAct K Ω σ).app _ (galoisPointFiberSpec K Ω E) = y := by
   have : IsSepClosure K Ω := ⟨‹_›, ‹_›⟩
   obtain ⟨ψ, hψ⟩ : ∃ ψ, Spec.map ψ = y.down.left := ⟨_, Spec.map_preimage y.down.left⟩
@@ -246,7 +246,7 @@ variable {K Ω} in
 image of the residue field at the corresponding point of `X`. -/
 lemma exists_galoisPoint_fiber_map_eq (X : (Spec (.of K)).Etale)
     (x : (galoisPoint K Ω).fiber.obj X) :
-    ∃ (E : IntermediateField K Ω) (_ : FiniteDimensional K E) (g : etaleSpec K Ω E ⟶ X),
+    ∃ (E : IntermediateField K Ω) (_ : FiniteDimensional K E) (g : galoisEtaleSpec K Ω E ⟶ X),
       (galoisPoint K Ω).fiber.map g (galoisPointFiberSpec K Ω E) = x := by
   obtain ⟨⟨p, φ⟩, hφ⟩ := (SpecToEquivOfField Ω X.left).symm.surjective x.down.left
   change Spec.map φ ≫ X.left.fromSpecResidueField p = x.down.left at hφ
@@ -288,7 +288,7 @@ open GrothendieckTopology.Point
 variable {K Ω} in
 /-- `Gal(Ω/E)` fixes the image of `x_E` under a morphism `g : Spec E ⟶ X`. -/
 lemma galoisPointAct_fiber_map_galoisPointFiberSpec {E : IntermediateField K Ω}
-    [FiniteDimensional K E] {X : (Spec (.of K)).Etale} (g : etaleSpec K Ω E ⟶ X)
+    [FiniteDimensional K E] {X : (Spec (.of K)).Etale} (g : galoisEtaleSpec K Ω E ⟶ X)
     {σ : Gal(Ω/K)} (hσ : σ ∈ E.fixingSubgroup) :
     (galoisPointAct K Ω σ).app X ((galoisPoint K Ω).fiber.map g (galoisPointFiberSpec K Ω E)) =
       (galoisPoint K Ω).fiber.map g (galoisPointFiberSpec K Ω E) := by
@@ -335,7 +335,7 @@ lemma isIso_galoisPoint_fromEquivariantSheaf (M : DiscreteModule.{u + 1} Gal(Ω/
       (M.isOpen_stabilizer m).mem_nhds (one_mem _)
     obtain ⟨E, _, hEU⟩ := (krullTopology_mem_nhds_one_iff K Ω _).1 hU
     choose τ hτ using fun y ↦ exists_galoisPointAct_galoisPointFiberSpec_eq (E := E) y
-    have key (σ : Gal(Ω/K)) (y : (galoisPoint K Ω).fiber.obj (etaleSpec K Ω E))
+    have key (σ : Gal(Ω/K)) (y : (galoisPoint K Ω).fiber.obj (galoisEtaleSpec K Ω E))
         (hσ : (galoisPointAct K Ω σ).app _ (galoisPointFiberSpec K Ω E) = y) :
         (M.obj.ρ σ).hom m = (M.obj.ρ (τ y)).hom m := by
       have h : (τ y)⁻¹ * σ ∈ E.fixingSubgroup := by
@@ -348,7 +348,7 @@ lemma isIso_galoisPoint_fromEquivariantSheaf (M : DiscreteModule.{u + 1} Gal(Ω/
       conv_rhs => rw [← h']
       rw [← Action.ρ_mul_apply, ← Action.ρ_mul_apply, mul_inv_cancel, one_mul]
     let f : ((galoisPoint K Ω).equivariantPresheaf (galoisPointAct K Ω) M.obj).obj
-        (op (etaleSpec K Ω E)) :=
+        (op (galoisEtaleSpec K Ω E)) :=
       ⟨fun y ↦ (M.obj.ρ (τ y)).hom m, fun σ y ↦ by
         dsimp only
         rw [← key (σ * τ y) _ (by rw [act_mul_app, hτ y]), Action.ρ_mul_apply]⟩

@@ -96,6 +96,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
+public import WeilConjectures.AlgebraicGeometry.Curve.FunctionFieldCohomology
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
@@ -393,6 +394,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 public import WeilConjectures.AlgebraicGeometry.Sites.Ga
 public import WeilConjectures.AlgebraicGeometry.Sites.GaGmLowerStar
+public import WeilConjectures.AlgebraicGeometry.Sites.GaloisModule
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.AlgebraicGeometry.Sites.GmGenericPoint
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
@@ -403,6 +405,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.KInjectiveResolution
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
+public import WeilConjectures.AlgebraicGeometry.Sites.QuasiAlgClosedCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
@@ -606,7 +609,9 @@ public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
 public import WeilConjectures.CategoryTheory.Sites.InjectiveCocycle
 public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSmulEpi
 public import WeilConjectures.CategoryTheory.Sites.MonObj
+public import WeilConjectures.CategoryTheory.Sites.Point.DiscreteModule
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
+public import WeilConjectures.CategoryTheory.Sites.Point.GroupAction
 public import WeilConjectures.CategoryTheory.Sites.Point.Linear
 public import WeilConjectures.CategoryTheory.Sites.Point.Torsion
 public import WeilConjectures.CategoryTheory.Sites.PullbackFlat
@@ -1218,6 +1223,7 @@ public import WeilConjectures.Mathlib.FieldTheory.Fixed
 public import WeilConjectures.Mathlib.FieldTheory.Galois.Infinite
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
+public import WeilConjectures.Mathlib.FieldTheory.KrullTopology
 public import WeilConjectures.Mathlib.FieldTheory.PurelyInseparable.Basic
 public import WeilConjectures.Mathlib.GroupTheory.Exponent
 public import WeilConjectures.Mathlib.GroupTheory.SemidirectProduct
@@ -1405,6 +1411,8 @@ public import WeilConjectures.RepresentationTheory.DiscreteModule.Basic
 public import WeilConjectures.RepresentationTheory.DiscreteModule.CohomologicalDimension
 public import WeilConjectures.RepresentationTheory.DiscreteModule.Induction
 public import WeilConjectures.RepresentationTheory.DiscreteModule.Sylow
+public import WeilConjectures.RepresentationTheory.DiscreteModule.Torsion
+public import WeilConjectures.RepresentationTheory.DiscreteModule.Transport
 public import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
 public import WeilConjectures.RepresentationTheory.IntegralModel
 public import WeilConjectures.RingTheory.BertiniNoether
