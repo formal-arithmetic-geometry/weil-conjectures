@@ -1,11 +1,11 @@
 # Work queue
 
-344 items; claim with `tools/claim.py next <group> [--stage N]`.
+338 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (344)
+## Stage 2: nodes to state (338)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,7 +15,6 @@
 | `lem-pc-complete-linear-system-closed` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
-| `lem-pc-perfect-generator-pullback` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
@@ -35,22 +34,17 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-ample-invertible` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-regular-base-change` | 1 | state |
-| `lem-weil-pbc-regular-local-generators-regular-sequence` | 1 | state |
-| `lem-weil-pbc-regular-local-localization` | 1 | state |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1 | state |
 | `lem-weil-pbc-regular-local-separable-residue-smooth` | 1 | state |
 | `lem-weil-pbc-regular-permanence` | 1 | state |
 | `lem-weil-pbc-regular-ring-faithfully-flat-descent` | 1 | state |
 | `lem-weil-pbc-regular-ring-local-criterion` | 1 | state |
-| `lem-weil-pbc-regular-ring-normal` | 1 | state |
 | `lem-weil-pbc-regular-ring-smooth-ascent` | 1 | state |
 | `lem-weil-pbc-regular-sequence-conormal-free` | 1 | state |
 | `lem-weil-pbc-regular-sequence-koszul-regular` | 1 | state |
-| `lem-weil-pbc-regular-sequence-polynomial-variables` | 1 | state |
 | `lem-weil-pbc-regular-sequence-powers` | 1 | state |
 | `lem-weil-pbc-regular-sequence-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-regular-sequence-swap-two` | 1 | state |
