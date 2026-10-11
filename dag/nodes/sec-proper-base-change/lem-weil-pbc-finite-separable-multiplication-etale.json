@@ -167,5 +167,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Five steps, not the 0C2X route of source.place but the retraction argument: k -> k' etale (new node, 00U3 'if' direction; Mathlib FormallyEtale.of_isSeparable Field.lean:98 plus FinitePresentation.of_finiteType, line verified; Lean Algebra.Etale.of_finite_of_isSeparable (slopmaster2 Field.lean:140, sorry-free) attached by L, exact), i_1: k' -> k' (x) k' etale by base change, mu o i_1 = id (elementary), cancellation (02GW/00U7 via the composition-cancellation leaf) gives Spec mu etale, smoothness from 02GJ and the definition (Omega = 0 finite projective). Overlap noted for stage 3: lem-sc-finite-etale-algebra-criterion (sec-abelian-varieties, imported) contains the new node's statement inside a larger iff. Tags verified by the worker (00U1, 00U2, 00U3, 00U7, 02GJ, 02GL, 02GP, 02GW, 0C2X, 07QH)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSeparableMultiplicationEtale",
+  "declaration": "AlgebraicGeometry.finite_separable_multiplication_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSeparableMultiplicationEtale.lean",
+  "statement": "theorem finite_separable_multiplication_etale (k : Type u) (k' : Type v) [Field k] [Field k'] [Algebra k k'] [FiniteDimensional k k'] [Algebra.IsSeparable k k'] : let μ : k' ⊗[k] k' →ₐ[k] k' := Algebra.TensorProduct.lmul' k letI : Algebra (k' ⊗[k] k') k' := μ.toRingHom.toAlgebra Etale (Spec.map (CommRingCat.ofHom μ.toRingHom)) ∧ Algebra.Smooth (k' ⊗[k] k') k'",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsm1025",
+  "group": "J1",
+  "result": "pass",
+  "note": "k,k' fields + Algebra k k' (field extension), FiniteDimensional k k' (dim<inf), Algebra.IsSeparable (separable algebraic, includes algebraic), mu = Algebra.TensorProduct.lmul' k (lmul'_apply_tmul: a⊗b↦ab, checked by simp), Etale (Spec.map (ofHom mu)) Spec-form per node, Algebra.Smooth under letI algebra from the same mu; #check of all names; diff touches only the item's lean record"
  }
 }
