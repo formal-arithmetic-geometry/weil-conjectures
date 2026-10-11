@@ -181,5 +181,23 @@
   "worker": "stage1",
   "summary": "The direct module proof of More on Algebra Lemma 05EG proves exactly the extension statement used by 05ER. Split it into presentation by cyclic ideal-power quotients (05E8), the torsion-source Hom comparison (05EC(2)), the cyclic quotient extension calculation (05EG via 05EE/05EF), and assembly over arbitrary direct sums (the detail 05EG omits). The item retains the pullback, splitting lift through Hom, quotient by the lifted kernel, and verification after flat base change. The derived Lemma 05EH remains a valid alternative source but is not used in this proof.",
   "blueprint": "The item's five steps serve the blueprint ancestor thm-weil-pbc-finite-etale-lifting, ## Proof step (b) Essential surjectivity, via the formal-glueing equivalence in the algebraization branch; specifically the extension-descent invocation in Proposition 05ER."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TorsionExtensionFlatDescent",
+  "declaration": "LinearMap.exists_torsion_extension_flat_descent",
+  "file": "lean/Sheaf/RingTheory/TorsionExtensionFlatDescent.lean",
+  "statement": "theorem exists_torsion_extension_flat_descent {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (_hflat : (algebraMap R S).Flat) (I : Ideal R) (_hI : I.FG) (_hquot : Function.Bijective (Ideal.quotientMap (I.map (algebraMap R S)) (algebraMap R S) Ideal.le_comap_map)) {N : Type w} [AddCommGroup N] [Module R N] {Q : Type x} [AddCommGroup Q] [Module R Q] (_hQ : ∀ x : Q, ∃ n : ℕ, 1 ≤ n ∧ ∀ r ∈ I ^ n, r • x = 0) {M' : Type y} [AddCommGroup M'] [Module S M'] (ι : S ⊗[R] N →ₗ[S] M') (π : M' →ₗ[S] S ⊗[R] Q) (_hι : Function.Injective ι) (_hιπ : Function.Exact ι π) (_hπ : Function.Surjective π) : ∃ (E : Type (max u w x)) (_ : AddCommGroup E) (_ : Module R E) (j : N →ₗ[R] E) (q : E →ₗ[R] Q), Function.Injective j ∧ Function.Exact j q ∧ Function.Surjective q ∧ ∃ θ : S ⊗[R] E ≃ₗ[S] M', θ.toLinearMap.comp (j.baseChange S) = ι ∧ π.comp θ.toLinearMap = q.baseChange S",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
