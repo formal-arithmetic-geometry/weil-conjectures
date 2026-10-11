@@ -79,7 +79,8 @@ and fails in general (see `sk-rem-sf-fullcd-scope`); what it supports is the con
 The proof follows the blueprint: the comparison
 `AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonIso'` identifies
 `Rp'_{proét,*} ν^* F` with `ν^* Rp'_{ét,*} F`, `ν^*` is exact, and the étale higher direct
-images vanish above `2d` (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isPullback_of_isProper`).
+images vanish above `2d`
+(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isPullback_of_isProper`).
 The invertibility of the exponent of `Λ` is not used. -/
 theorem isZero_homology_rightDerivedLowerStar_comparisonUpperStar (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsSepClosed k] {X' Y : Scheme.{u}}
@@ -92,7 +93,7 @@ theorem isZero_homology_rightDerivedLowerStar_comparisonUpperStar (Λ : Type (u 
     IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj
       ((R((p')_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
         ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X'').obj F)))) := by
-  have : IsProper p' := MorphismProperty.of_isPullback sq.flip inferInstance
+  have : IsProper p' := MorphismProperty.of_isPullback sq inferInstance
   have hvan := Etale.isZero_higherDirectImage_of_isPullback_of_isProper Λ p aX' aY hp d hd sq F r hr
   let K := (_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F
   refine IsZero.of_iso (Functor.map_isZero (comparisonUpperStar (ModuleCat.{u + 1} Λ) Y'') hvan)
@@ -152,6 +153,17 @@ def HasCohomologicalDimensionLEOnEtaleOrigin {X Y : Scheme.{u}} (p : X ⟶ Y) (c
           ((R((p')_*[A])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
             ((ProEtale.upperStar A g').obj F))))
 
+variable {A} in
+/-- Blueprint `thm-sf-fullcd-used-class`: the coefficient class is closed under colimits.
+
+The comparison pullback `ν^*` is fully faithful and preserves colimits, being a left adjoint, so
+its essential image is closed under the colimits that exist in pro-étale sheaves. -/
+instance etaleOrigin_isClosedUnderColimitsOfShape (X : Scheme.{u}) (J : Type*) [Category J]
+    [HasColimitsOfShape J (Sheaf X.smallEtaleTopology A)]
+    [HasColimitsOfShape J (Sheaf (Scheme.ProEt.topology X) A)] :
+    (etaleOrigin A X).IsClosedUnderColimitsOfShape J :=
+  inferInstance
+
 end EtaleOrigin
 
 section Bound
@@ -179,6 +191,31 @@ theorem isZero_homology_rightDerivedComparisonLowerStar (X : Scheme.{u})
       ((R(ν_*(X)[ModuleCat.{u + 1} Λ])).mapIso
         (((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app G).symm ≪≫
         (asIso ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) X).unit.app M)).symm))
+
+open MonoidalCategory in
+/-- Blueprint `thm-sf-fullcd-used-class`: the constant coefficient sheaf is of étale origin.
+
+The constant sheaf `Λ`, the monoidal unit of pro-étale sheaves of `Λ`-modules, is `ν^*` of the
+constant étale sheaf (`AlgebraicGeometry.ProEtale.comparisonUpperStarUnitIso`). -/
+lemma etaleOrigin_unit (X : Scheme.{u}) :
+    etaleOrigin (ModuleCat.{u + 1} Λ) X
+      (𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :=
+  ⟨𝟙_ _, ⟨comparisonUpperStarUnitIso Λ X⟩⟩
+
+variable {Λ} in
+/-- Blueprint `thm-sf-fullcd-used-class`: the coefficient class is closed under extensions.
+
+Let `0 → F₁ → F₂ → F₃ → 0` be a short exact sequence of pro-étale sheaves of `Λ`-modules on `X`
+with `F₁` and `F₃` of étale origin. Then `F₂` is of étale origin: its extension class lies in
+`Hom(ν^* G₃, ν^* G₁[1]) ≅ Hom(G₃, G₁[1])` by the full faithfulness of `ν^*` on bounded below
+complexes (`AlgebraicGeometry.ProEtale.bijective_comparisonUpperStar_mapDerivedCategory_map`),
+so it is `ν^*` of the extension of `G₃` by `G₁` with the corresponding class. -/
+theorem etaleOrigin_of_shortExact {X : Scheme.{u}}
+    {S : ShortComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
+    (h₁ : etaleOrigin (ModuleCat.{u + 1} Λ) X S.X₁)
+    (h₃ : etaleOrigin (ModuleCat.{u + 1} Λ) X S.X₃) :
+    etaleOrigin (ModuleCat.{u + 1} Λ) X S.X₂ :=
+  sorry
 
 variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k] {X Y : Scheme.{u}} (p : X ⟶ Y)
   [IsProper p] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
