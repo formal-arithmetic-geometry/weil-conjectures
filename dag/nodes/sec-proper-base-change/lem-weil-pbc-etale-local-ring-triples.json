@@ -26,7 +26,8 @@
   "def-weil-pbc-pointed-etale-neighbourhoods",
   "def-weil-etale-morphism",
   "def-weil-pbc-category-colimit",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-etale-residue-triples"
  ],
  "proof": [
   {
@@ -243,5 +244,23 @@
   "by": "L",
   "result": "pass",
   "note": "Stacks 04HX; 5 new Mathlib leaves"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocalRingTriples",
+  "declaration": "AlgebraicGeometry.Scheme.etale_local_ring_triples",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocalRingTriples.lean",
+  "statement": "theorem etale_local_ring_triples (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω] (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i] (xU : Spec (.of Ω) ⟶ Spec A) : let x := xU ≫ i let p := (SpecToEquivOfField Ω (Spec A) xU).1 let F := (Spec A).residueField p let e := (SpecToEquivOfField Ω (Spec A) xU).2 letI : Algebra F Ω := e.hom.toAlgebra let K := separableClosure F Ω let χ : F ⟶ CommRingCat.of K := CommRingCat.ofHom (algebraMap F K) let Nall := (pointSmallEtale x).fiber.Elements let P : ObjectProperty Nall := fun c => IsAffine c.1.left let N := P.FullSubcategory let Q : ObjectProperty N := fun c => ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom let NU := Q.FullSubcategory let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙ Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ let DU := Q.ι.op ⋙ D let T := EtaleResidueTriples A p K χ let DT := etaleResidueTriplesRingDiagram A p K χ IsCofiltered N ∧ Q.ι.Initial ∧ (∀ c : N, ∃ d : NU, Nonempty (d.obj ⟶ c)) ∧ (∀ (c : NU) (z : c.obj.obj.1.left.residueField (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).1), (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).2 z ∈ K) ∧ ∃ (E : NUᵒᵖ ≌ T) (δ : DU ≅ E.functor ⋙ DT), (∀ c : NU, let t := E.functor.obj (op c) (∀ g : c.obj.obj.1.left ⟶ Spec A, g ≫ i = c.obj.obj.1.hom → (ΓSpecIso A).inv ≫ g.appTop ≫ δ.hom.app (op c) = t.α) ∧ c.obj.obj.2.left ≫ c.obj.obj.1.left.toSpecΓ = Spec.map (CommRingCat.ofHom K.subtype) ≫ Spec.map ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ) ≫ Spec.map (δ.hom.app (op c))) ∧ ∃ (cn : Cocone D) (cu : Cocone DU) (ct : Cocone DT), Nonempty (IsColimit cn) ∧ Nonempty (IsColimit cu) ∧ Nonempty (IsColimit ct) ∧ ∃ (r : cu.pt ≅ cn.pt) (s : cn.pt ≅ ct.pt), (∀ c : NUᵒᵖ, cu.ι.app c ≫ r.hom = cn.ι.app (Q.ι.op.obj c)) ∧ (∀ c : NUᵒᵖ, cn.ι.app (Q.ι.op.obj c) ≫ s.hom = δ.hom.app c ≫ ct.ι.app (E.functor.obj c))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-elt1002",
+  "group": "M1",
+  "result": "pass",
+  "note": "Y arbitrary scheme; geometric point as xU through open-immersion chart Spec A (x := xU ≫ i); p, kappa(p), e from SpecToEquivOfField; K = separableClosure F Omega; N = affine full subcat of (pointSmallEtale x).fiber.Elements (recorded match); NU by factorization property; (1) IsCofiltered; (2) Initial + incoming-arrow clause + canonical colimit comparison r; (3) residue embedding lands in K, E : NU^op ≌ T with delta on Gamma rings, chart and point equations pin (B,q_v,phi_v), final s compatible with coprojections; new node T: Under(Over) induced category = A-maps with psi'∘beta=psi ⇔ preimage + residue compatibility; compat on A ⇔ on kappa(p); combined compile clean"
  }
 }

@@ -1,0 +1,118 @@
+{
+ "id": "def-weil-pbc-etale-residue-triples",
+ "kind": "definition",
+ "title": "The category of étale algebras with a prime and a residue-field embedding",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring, let $p\\in\\operatorname{Spec}A$ [def-weil-affine-spectrum], let $K$ be a field, and let $\\chi:\\kappa(p)\\to K$ be a field homomorphism [def-weil-residue-field]. An etale residue triple is $(B,\\alpha,q,\\phi)$, where $\\alpha:A\\to B$ has etale spectrum map [def-weil-etale-morphism], $q\\in\\operatorname{Spec}B$ maps to $p$, and $\\phi:\\kappa(q)\\to K$ is compatible with $\\chi$ over $\\kappa(p)$. Its associated map $\\psi:B\\to K$ is $B\\to\\kappa(q)\\xrightarrow{\\phi}K$. The category has as morphisms $A$-ring maps $\\beta:B\\to B\\prime$ with $\\psi\\prime\\circ\\beta=\\psi$, equivalently $\\beta^{-1}(q\\prime)=q$ and $\\phi\\prime\\circ\\kappa(\\beta)=\\phi$. The forgetful ring diagram sends a triple to $B$ and a morphism to $\\beta$. Residue fields here are those of the affine schemes [def-pc-scheme].",
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-residue-field",
+  "def-weil-etale-morphism",
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, first paragraph of the proof; translation of affine pointed neighbourhoods into triples"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "affine pointed etale neighborhoods equivalent to etale algebras with prime and residue field embedding",
+   "results": "['Algebra.mem_etaleLocus_iff', 'Algebra.etaleLocus', 'Algebra.exists_etale_of_isEtaleAt', 'Algebra.basicOpen_subset_etaleLocus_iff', 'Algebra.basicOpen_subset_etaleLocus_iff_etale', 'Algebra.instEtaleOfIsStandardEtale', 'Algebra.etaleLocus_eq_univ_iff_etale', 'StandardEtalePair.instFormallyEtaleRing']",
+   "date": "2026-10-11",
+   "verdict": "No definition of the category of residue-field triples; the returned étale-locus declarations concern a different notion."
+  },
+  {
+   "tool": "grep",
+   "query": "EtaleTriple|etale.*triple|triple.*etale|strictHenselization",
+   "results": "[]",
+   "date": "2026-10-11",
+   "verdict": "No matching declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.AffineEtale, CategoryTheory.Functor.Elements",
+   "results": "[]",
+   "date": "2026-10-11",
+   "verdict": "No matching declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "category of etale algebras with prime ideal and residue field embedding",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "Unavailable (Internal Server Error); no mathematical verdict is drawn from this service failure."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n 'EtaleTriple|EtaleResidueTriple|triple.*etale|etale.*triple' /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-conjectures-sheaf-M1/lean/Sheaf; rg -l 'category of triples|triples.*etale' dag/nodes; python3 tools/blueprint_refs.py search 'etale triples'",
+   "results": "No project category declaration. DAG hits are statements using triples; def-weil-pbc-strict-henselization-limit defines a colimit of neighbourhoods, not triples. Blueprint search: 0 matches.",
+   "date": "2026-10-11",
+   "verdict": "No existing definition node or project definition for the category of triples."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-etale-local-ring-triples",
+  "date": "2026-10-11",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Tag 04HX first paragraph, the category of triples used by lem-weil-pbc-etale-local-ring-triples",
+   "via": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleResidueTriples",
+  "declaration": "AlgebraicGeometry.Scheme.EtaleResidueTriple",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleResidueTriples.lean",
+  "statement": "structure EtaleResidueTriple (A : CommRingCat.{u}) (p : Spec A) (K : Type u) [Field K] (χ : (Spec A).residueField p ⟶ CommRingCat.of K)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.EtaleResidueTriple",
+   "AlgebraicGeometry.Scheme.EtaleResidueTriple.factorization",
+   "AlgebraicGeometry.Scheme.EtaleResidueTriples",
+   "AlgebraicGeometry.Scheme.etaleResidueTriplesRingDiagram"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-elt1002",
+  "group": "M1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-elt1002",
+  "group": "M1",
+  "result": "pass",
+  "note": "Y arbitrary scheme; geometric point as xU through open-immersion chart Spec A (x := xU ≫ i); p, kappa(p), e from SpecToEquivOfField; K = separableClosure F Omega; N = affine full subcat of (pointSmallEtale x).fiber.Elements (recorded match); NU by factorization property; (1) IsCofiltered; (2) Initial + incoming-arrow clause + canonical colimit comparison r; (3) residue embedding lands in K, E : NU^op ≌ T with delta on Gamma rings, chart and point equations pin (B,q_v,phi_v), final s compatible with coprojections; new node T: Under(Over) induced category = A-maps with psi'∘beta=psi ⇔ preimage + residue compatibility; compat on A ⇔ on kappa(p); combined compile clean"
+ }
+}
