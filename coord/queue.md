@@ -1,18 +1,18 @@
 # Work queue
 
-428 items; claim with `tools/claim.py next <group> [--stage N]`.
+423 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (428)
+## Stage 2: nodes to state (423)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
+| `def-weil-pbc-proj-twisting-sheaf` | 2 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-affine-perfect-colimit-descent` | 1 | state |
 | `lem-pc-affine-perfect-cut-degree-zero` | 1 | state |
-| `lem-pc-derived-pullback-tor-independent-flat-complex` | 1 | state |
 | `lem-pc-derived-qcoh-perfect-generation` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-koszul-affine-detection` | 1 | state |
@@ -74,19 +74,14 @@
 | `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
 | `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1 | state |
-| `lem-weil-pbc-proj-graded-module-sheaf-exists` | 1 | state |
 | `lem-weil-pbc-projective-dimension-well-defined` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
-| `lem-weil-pbc-projective-space-standard-charts` | 1 | state |
 | `lem-weil-pbc-proper-limit-noetherian` | 1 | state |
-| `lem-weil-pbc-pullback-ample-invertible` | 1 | state |
-| `lem-weil-pbc-pullback-finite-locally-constant` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-integral-prime-unique` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-pth-root-tower` | 1 | state |
 | `lem-weil-pbc-pushout-short-exact-sequence` | 1 | state |
 | `lem-weil-pbc-qcqs-higher-direct-image` | 1 | state |
-| `lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings` | 1 | state |
 | `lem-weil-pbc-quasi-coherence-scalar-restriction` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-affine-section-base-change` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-algebra-affine-inclusion` | 1 | state |
@@ -438,7 +433,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 523 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 522 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
