@@ -3820,3 +3820,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:23 L: merged deliver/M1/lem-sc-proper-dim-one-projective (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Curve.ProperProjective AlgebraicGeometry.isProjective_of_isProper_of_dim_le_one)
 - 08:23 L: merged deliver/H1/def-weil-pbc-constructible-complexes (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes AlgebraicGeometry.Etale.DerivedCategory.isBoundedConstructible)
 - 08:24 L: merged deliver/M1/lem-sc-product-irreducible-components-bijection (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProductIrreducibleComponentsBijection AlgebraicGeometry.product_irreducibleComponents_bijOn_image)
+- 08:24 L: merged deliver/C1/lem-sc-picard-diagonal-locally-closed (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed AlgebraicGeometry.Scheme.picard_diagonal_locally_closed)
