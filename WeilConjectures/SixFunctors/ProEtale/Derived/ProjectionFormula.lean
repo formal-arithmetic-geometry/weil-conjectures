@@ -6,7 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerStarProjectionComparison
@@ -71,7 +73,7 @@ commute with `Rg_*`.
 
 @[expose] public section
 
-universe u' u
+universe w u' u
 
 open CategoryTheory Limits MonoidalCategory
 
@@ -153,6 +155,27 @@ lemma plus_derivedTensor_leftDerivedUpperStar_of_comparison [Etale.UpperStarPres
     _root_.DerivedCategory.TStructure.t.bounded.prop_of_iso e.symm
       ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hPN⟩)
   exact ((ν^*(Z)[A]).bounded_of_bounded_mapDerivedCategory_obj hb).1
+
+omit [ProEtale.UpperStarPreservesFlat A] in
+variable {A} in
+/-- For `g : Z ⟶ Y`, a bounded complex `M` of étale sheaves on `Z` and a complex `L` of étale
+sheaves on `Y` of finite Tor amplitude, `M ⊗ᴸ Lg^* L` is bounded below, `Lg^* L` having finite
+Tor amplitude. -/
+lemma _root_.AlgebraicGeometry.Etale.plus_derivedTensor_leftDerivedUpperStar
+    [Etale.UpperStarPreservesFlat A] {Z : Scheme.{u}} (g : Z ⟶ Y)
+    {M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)}
+    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
+    (hM : _root_.DerivedCategory.TStructure.t.bounded M) {a b : ℤ}
+    (hL : Etale.DerivedCategory.torAmplitudeIn A Y a b L) :
+    _root_.DerivedCategory.TStructure.t.plus
+      (((Etale.derivedTensor A Z).obj M).obj ((L(Etale.upperStar A g)).obj L)) := by
+  obtain ⟨p, q, hMpq⟩ := (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded M).2 hM
+  have hPM := _root_.DerivedCategory.homologyConcentratedIn_tensor_of_torAmplitudeIn_left
+    (Etale.torAmplitudeIn_leftDerivedUpperStar A g a b hL) hMpq
+  obtain ⟨β⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Z.smallEtaleTopology A)
+  exact (_root_.DerivedCategory.TStructure.t.bounded.prop_of_iso
+    (@BraidedCategory.braiding _ _ _ β _ _)
+    ((_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded _).1 ⟨_, _, hPM⟩)).1
 
 variable {A} in
 /-- **The pro-étale projection formula from the étale one.** Let `c = (X ⟶[i] Z ⟶[g] Y)` be a
@@ -261,5 +284,67 @@ theorem hasProjectionFormula_of_constructibleFiniteTor [Finite Λ] (f : X ⟶ Y)
     HasProjectionFormula (ModuleCat.{u + 1} Λ) f K L :=
   hasProjectionFormulaOfCompactification_of_constructibleFiniteTor Λ
     (HasCompactification.compactification f) hK hL
+
+end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme
+
+section Integral
+
+set_option hygiene false in
+/-- The coefficient category `ModuleCat 𝒪_E` of the integral stage. -/
+local notation "𝐌" => ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))
+
+variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra ℚ_[l] E]
+  [Algebra E (PadicAlgCl l)] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
+  [FiniteDimensional ℚ_[l] E] [Small.{u + 1} E]
+
+/-- The small étale site of a scheme is essentially small. Instance search does not find this
+in the presence of the imports of this file. -/
+local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
+
+variable {X Y : Scheme.{u}}
+
+/-- Blueprint `sk-thm-sf-pf-proetale`, the integral stage `𝒪_E`.
+
+Let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be the pro-étale realizations of bounded constructible,
+derived complete complexes `K₀`, `L₀` of étale sheaves of `𝒪_E`-modules of finite Tor amplitude,
+with the given étale-origin witnesses. Then the projection map
+`(Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism. As in the blueprint, this is the étale
+projection formula at the integral stage
+(`AlgebraicGeometry.Etale.hasProjectionFormula_of_derivedCompleteIntegral`, blueprint
+`sk-thm-sf-pf-adic`) transported along the comparison `ν^*`
+(`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_comparison`). -/
+theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompactification f]
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) 𝐌)}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌)}
+    {K₀ : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌)}
+    {L₀ : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌)}
+    (eK : D(ν^*(X)[𝐌]).obj K₀ ≅ K) (eL : D(ν^*(Y)[𝐌]).obj L₀ ≅ L)
+    (hKc : Etale.DerivedCategory.boundedConstructible 𝐌 X K₀)
+    (hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K₀)
+    (hKt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 X K₀)
+    (hLc : Etale.DerivedCategory.boundedConstructible 𝐌 Y L₀)
+    (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L₀)
+    (hLt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 Y L₀) :
+    HasProjectionFormula 𝐌 f K L := by
+  have hPF := Etale.hasProjectionFormula_of_derivedCompleteIntegral l E f K₀ L₀
+    hKc hK hKt hLc hL hLt
+  rw [Etale.HasProjectionFormula, Etale.HasProjectionFormulaOfCompactification,
+    Etale.projectionMapOfCompactification_app_app] at hPF
+  have hPF' := @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ _ hPF
+  obtain ⟨a, b, hLt'⟩ := hLt
+  exact hasProjectionFormulaOfCompactification_of_comparison _ eK eL hKc.1
+    (Etale.plus_derivedTensor_leftDerivedUpperStar (HasCompactification.compactification f).g
+      ((Etale.openImmersionLowerShriek 𝐌
+        (HasCompactification.compactification f).i).bounded_mapDerivedCategory_obj hKc.1)
+      hLt') hPF'
+
+end Integral
 
 end AlgebraicGeometry.ProEtale
