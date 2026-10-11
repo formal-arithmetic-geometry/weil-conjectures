@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Funct
 /-!
 # Base change of `Proj` of a graded algebra
 
-For a graded `R`-algebra `𝒜` we write `Proj.toSpecBase 𝒜 : Proj 𝒜 ⟶ Spec R` for the structure
+For a graded `R`-algebra `𝒜` we write `Proj.toSpecOfAlgebra 𝒜 : Proj 𝒜 ⟶ Spec R` for the structure
 morphism. If `φ : 𝒜 →+*ᵍ ℬ` is a coefficientwise base change along `R → S`
 (`GradedRingHom.IsGradedBaseChange`), then
 
@@ -28,7 +28,7 @@ instances are the localization `𝒜 → 𝒜[1/f]` (restriction of `Proj` to th
 
 ## Main results
 
-- `AlgebraicGeometry.Proj.toSpecBase` — the structure morphism `Proj 𝒜 ⟶ Spec R`
+- `AlgebraicGeometry.Proj.toSpecOfAlgebra` — the structure morphism `Proj 𝒜 ⟶ Spec R`
   (blueprint: `def-nagata-affine-proj`, structure map composed with `Spec R₀ → Spec R`).
 - `AlgebraicGeometry.Proj.isPullback_map_of_isGradedBaseChange` — the base change square is a
   pullback (blueprint: `prop-nagata-relative-proj-functoriality`, items 1 and 4, affine case).
@@ -49,14 +49,14 @@ variable {R A : Type u} [CommRing R] [CommRing A] [Algebra R A]
   (𝒜 : ℕ → Submodule R A) [GradedAlgebra 𝒜]
 
 /-- The structure morphism `Proj 𝒜 ⟶ Spec R` of the `Proj` of a graded `R`-algebra. -/
-noncomputable def toSpecBase : Proj 𝒜 ⟶ Spec (.of R) :=
+noncomputable def toSpecOfAlgebra : Proj 𝒜 ⟶ Spec (.of R) :=
   Proj.toSpecZero 𝒜 ≫ Spec.map (CommRingCat.ofHom (algebraMap R (𝒜 0)))
 
 @[reassoc]
-lemma awayι_toSpecBase {s : A} {d : ℕ} (hs : s ∈ 𝒜 d) (hd : 0 < d) :
-    Proj.awayι 𝒜 s hs hd ≫ toSpecBase 𝒜 =
+lemma awayι_toSpecOfAlgebra {s : A} {d : ℕ} (hs : s ∈ 𝒜 d) (hd : 0 < d) :
+    Proj.awayι 𝒜 s hs hd ≫ toSpecOfAlgebra 𝒜 =
       Spec.map (CommRingCat.ofHom (algebraMap R (Away 𝒜 s))) := by
-  rw [toSpecBase, Proj.awayι_toSpecZero_assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
+  rw [toSpecOfAlgebra, Proj.awayι_toSpecZero_assoc, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
   rfl
 
 variable {𝒜} {S B : Type u} [CommRing S] [Algebra R S] [CommRing B] [Algebra S B] [Algebra R B]
@@ -64,12 +64,12 @@ variable {𝒜} {S B : Type u} [CommRing S] [Algebra R S] [CommRing B] [Algebra 
 
 /-- The base change square of `Proj` commutes. -/
 @[reassoc]
-lemma map_toSpecBase (φ : 𝒜 →+*ᵍ ℬ)
+lemma map_toSpecOfAlgebra (φ : 𝒜 →+*ᵍ ℬ)
     (hφ : ∀ r : R, φ (algebraMap R A r) = algebraMap R B r)
     (hirr : HomogeneousIdeal.irrelevant ℬ ≤ (HomogeneousIdeal.irrelevant 𝒜).map φ) :
-    Proj.map φ hirr ≫ toSpecBase 𝒜 =
-      toSpecBase ℬ ≫ Spec.map (CommRingCat.ofHom (algebraMap R S)) := by
-  rw [toSpecBase, toSpecBase, ← Category.assoc, Proj.map_toSpecZero, Category.assoc,
+    Proj.map φ hirr ≫ toSpecOfAlgebra 𝒜 =
+      toSpecOfAlgebra ℬ ≫ Spec.map (CommRingCat.ofHom (algebraMap R S)) := by
+  rw [toSpecOfAlgebra, toSpecOfAlgebra, ← Category.assoc, Proj.map_toSpecZero, Category.assoc,
     Category.assoc, ← Spec.map_comp,
     ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← CommRingCat.ofHom_comp]
   congr 3
@@ -95,7 +95,7 @@ attribute [local instance] GradedRingHom.awayAlgebra GradedRingHom.awayMapAlgebr
 the structure morphisms is a pullback.
 (blueprint: `prop-nagata-relative-proj-functoriality`, items 1 and 4, affine case) -/
 theorem isPullback_map_of_isGradedBaseChange (φ : 𝒜 →+*ᵍ ℬ) (h : φ.IsGradedBaseChange) :
-    IsPullback (Proj.map φ h.irrelevant_le) (toSpecBase ℬ) (toSpecBase 𝒜)
+    IsPullback (Proj.map φ h.irrelevant_le) (toSpecOfAlgebra ℬ) (toSpecOfAlgebra 𝒜)
       (Spec.map (CommRingCat.ofHom (algebraMap R S))) := by
   refine Scheme.isPullback_of_openCover _ _ _ _ (Proj.affineOpenCover 𝒜).openCover fun i ↦ ?_
   obtain ⟨⟨d, hd⟩, s, hs⟩ := i
@@ -109,10 +109,10 @@ theorem isPullback_map_of_isGradedBaseChange (φ : 𝒜 →+*ᵍ ℬ) (h : φ.Is
     exact (Q1.isoPullback_hom_snd).symm
   · simp only [Iso.refl_hom, Category.comp_id]
     change _ = Q1.isoPullback.hom ≫ pullback.fst _ _ ≫ _
-    rw [Q1.isoPullback_hom_fst_assoc, awayι_toSpecBase]
+    rw [Q1.isoPullback_hom_fst_assoc, awayι_toSpecOfAlgebra]
   · simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
     change _ = Proj.awayι 𝒜 s hs hd ≫ _
-    rw [awayι_toSpecBase]
+    rw [awayι_toSpecOfAlgebra]
   · simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
 
 end AlgebraicGeometry.Proj
@@ -176,22 +176,22 @@ variable {R A S B : Type u} [CommRing R] [CommRing A] [Algebra R A] [CommRing S]
   [Algebra S B] {𝒜 : ℕ → Submodule R A} [GradedAlgebra 𝒜] {ℬ : ℕ → Submodule S B}
   [GradedAlgebra ℬ]
 
-/-- Naturality of `Proj.toSpecBase` along a ring homomorphism `f : R →+* S`. -/
+/-- Naturality of `Proj.toSpecOfAlgebra` along a ring homomorphism `f : R →+* S`. -/
 @[reassoc]
-lemma map_toSpecBase_of_comp (f : R →+* S) (φ : 𝒜 →+*ᵍ ℬ)
+lemma map_toSpecOfAlgebra_of_comp (f : R →+* S) (φ : 𝒜 →+*ᵍ ℬ)
     (hφ : ∀ r : R, φ (algebraMap R A r) = algebraMap S B (f r))
     (hirr : HomogeneousIdeal.irrelevant ℬ ≤ (HomogeneousIdeal.irrelevant 𝒜).map φ) :
-    Proj.map φ hirr ≫ toSpecBase 𝒜 = toSpecBase ℬ ≫ Spec.map (CommRingCat.ofHom f) :=
+    Proj.map φ hirr ≫ toSpecOfAlgebra 𝒜 = toSpecOfAlgebra ℬ ≫ Spec.map (CommRingCat.ofHom f) :=
   letI := f.toAlgebra
   letI : Algebra R B := ((algebraMap S B).comp f).toAlgebra
   haveI : IsScalarTower R S B := .of_algebraMap_eq' rfl
-  map_toSpecBase φ hφ hirr
+  map_toSpecOfAlgebra φ hφ hirr
 
 /-- **Base change for `Proj`** along a ring homomorphism `f : R →+* S`
 (blueprint: `prop-nagata-relative-proj-functoriality`, items 1 and 4, affine case). -/
 theorem isPullback_map_of_isGradedBaseChangeAlong (f : R →+* S) (φ : 𝒜 →+*ᵍ ℬ)
     (h : φ.IsGradedBaseChangeAlong f) :
-    IsPullback (Proj.map φ h.irrelevant_le) (toSpecBase ℬ) (toSpecBase 𝒜)
+    IsPullback (Proj.map φ h.irrelevant_le) (toSpecOfAlgebra ℬ) (toSpecOfAlgebra 𝒜)
       (Spec.map (CommRingCat.ofHom f)) :=
   letI := f.toAlgebra
   letI : Algebra R B := ((algebraMap S B).comp f).toAlgebra

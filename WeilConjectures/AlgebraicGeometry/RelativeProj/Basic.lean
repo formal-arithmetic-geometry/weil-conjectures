@@ -72,7 +72,7 @@ lemma relProjFunctor_map {U V : X.affineOpens} (f : U ⟶ V) :
 
 /-- The structure morphism `Proj (A(U)) ⟶ U` over an affine open `U`. -/
 noncomputable def toOpen (U : X.affineOpens) : Proj (A.grading U) ⟶ U.1 :=
-  Proj.toSpecBase (A.grading U) ≫ U.2.isoSpec.inv
+  Proj.toSpecOfAlgebra (A.grading U) ≫ U.2.isoSpec.inv
 
 /-- The restriction squares of the local `Proj`s are pullbacks: for affine opens `U ≤ V`,
 `Proj (A(U)) = U ×_V Proj (A(V))`. (blueprint: `prop-nagata-relative-proj-functoriality`, item 1;
@@ -171,10 +171,10 @@ lemma relProjFunctor_map_homOfLE {U V : X.affineOpens} (h : U ≤ V) :
     A.relProjFunctor.map (homOfLE h) = Proj.map (A.res h) (A.irrelevant_le_map_res h) :=
   rfl
 
-/-- The local structure morphism `Proj (A(U)) ⟶ U` is `Proj.toSpecBase` followed by
+/-- The local structure morphism `Proj (A(U)) ⟶ U` is `Proj.toSpecOfAlgebra` followed by
 `Spec Γ(X, U) ≅ U`. -/
 lemma toOpen_eq (U : X.affineOpens) :
-    A.toOpen U = Proj.toSpecBase (A.grading U) ≫ U.2.isoSpec.inv :=
+    A.toOpen U = Proj.toSpecOfAlgebra (A.grading U) ≫ U.2.isoSpec.inv :=
   rfl
 
 /-- The restriction isomorphism `Proj (Γ(V, 𝒜)) ≅ V ×_X Proj_X(𝒜)` over an affine open `V`.

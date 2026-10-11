@@ -63,7 +63,7 @@ variable (f : A ⟶ B) (hf : IrrelevantLE f)
 lemma map_app_toOpen (U : X.affineOpens) :
     Proj.map (f.app U) (hf U) ≫ A.toOpen U = B.toOpen U := by
   rw [toOpen_eq, toOpen_eq, ← Category.assoc,
-    Proj.map_toSpecBase_of_comp (RingHom.id _) (f.app U) (f.app_algebraMap U) (hf U),
+    Proj.map_toSpecOfAlgebra_of_comp (RingHom.id _) (f.app U) (f.app_algebraMap U) (hf U),
     CommRingCat.ofHom_id, Spec.map_id, Category.comp_id]
 
 lemma map_res_map_app_relProjι {U V : X.affineOpens} (h : U ≤ V) :

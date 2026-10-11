@@ -125,9 +125,9 @@ lemma algebraMap_reesGrading_zero (I : Ideal A) :
     change ((algebraMap A (reesAlgebra I) a : reesAlgebra I) : Polynomial A) = _
     simp
 
-lemma Proj.toSpecBase_reesGrading (I : Ideal A) :
-    Proj.toSpecBase (reesGrading I) = AffineBlowup.toSpec I := by
-  rw [Proj.toSpecBase, AffineBlowup.toSpec, algebraMap_reesGrading_zero]
+lemma Proj.toSpecOfAlgebra_reesGrading (I : Ideal A) :
+    Proj.toSpecOfAlgebra (reesGrading I) = AffineBlowup.toSpec I := by
+  rw [Proj.toSpecOfAlgebra, AffineBlowup.toSpec, algebraMap_reesGrading_zero]
 
 namespace Scheme.IdealSheafData
 
@@ -169,7 +169,7 @@ noncomputable def reesData : X.GradedAlgebraData where
 lemma toOpen_reesData (U : X.affineOpens) :
     I.reesData.toOpen U = I.blowupNatTrans.app U := by
   rw [GradedAlgebraData.toOpen_eq, blowupNatTrans_app]
-  exact congrArg (· ≫ _) (Proj.toSpecBase_reesGrading (I.ideal U))
+  exact congrArg (· ≫ _) (Proj.toSpecOfAlgebra_reesGrading (I.ideal U))
 
 lemma isPullback_blowupι_reesData (U : X.affineOpens) :
     IsPullback (I.reesData.toOpen U) (I.blowupι U) U.1.ι I.blowupMap := by
