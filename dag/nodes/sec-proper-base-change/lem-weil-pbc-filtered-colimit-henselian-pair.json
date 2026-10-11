@@ -180,5 +180,24 @@
   "item": "lem-weil-pbc-filtered-colimit-henselian-pair",
   "worker": "stage1",
   "summary": "Route (a). Read Stacks 0FWT and its proof (more-algebra.tex l.2885), 09XE, 09XI, 0AME (algebra.tex l.3555), 00D3 (directed sets are nonempty); tags verified in stacks-project/tags/tags. The DAG's henselian is the idempotent form, so the proof passes through the reviewed lem-weil-pbc-henselian-factorization-criterion ((A,I) henselian iff (i) I in rad and (ii) coprime monic factorizations lift) in both directions. Six steps: (1) elementwise facts from the reviewed leaves filtered-colimit-algebras-elementwise (R = Z) and filtered-colimit-rings-zero, I is an ideal, x with alpha(x) in I lands in some I_nu, induced maps mod I; (2) the criterion at each stage; (3) 1+I consists of units, so I in rad(A), via the new Mathlib leaf lem-weil-pbc-jacobson-radical-one-plus-units (Stacks 0AME, Ideal.mem_jacobson_bot); (4) descent of f, g0, h0, g0', h0' to a stage nu with monic lifts and the relations holding mod I_nu (Stacks' one sentence written out; the case A/I = 0 handled: then A = 0); (5) lift at nu by (ii_nu) and push to A; (6) the criterion backwards. Statement: 'directed set' made explicit as nonempty (Stacks 00D3; for empty Lambda the union I would be empty, not an ideal). No Lean candidate in slopmaster2."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FilteredColimitHenselianPair",
+  "declaration": "filteredColimit_henselianPair",
+  "file": "lean/Sheaf/RingTheory/FilteredColimitHenselianPair.lean",
+  "statement": "theorem filteredColimit_henselianPair {Λ : Type w} [Preorder Λ] [IsDirected Λ (· ≤ ·)] [Nonempty Λ] (F : Λ ⥤ CommRingCat.{u}) [HasColimit F] (J : ∀ i : Λ, Ideal (F.obj i)) (hJ : ∀ {i j : Λ} (f : i ⟶ j), Ideal.map (F.map f).hom (J i) ≤ J j) (hH : ∀ i : Λ, HenselianRing (F.obj i) (J i)) : ∃ I : Ideal (colimit F : CommRingCat.{u}), (I : Set (colimit F : CommRingCat.{u})) = {x | ∃ (i : Λ) (a : F.obj i), (colimit.ι F i).hom a = x ∧ a ∈ J i} ∧ I ≤ Ideal.jacobson ⊥ ∧ HenselianRing (colimit F : CommRingCat.{u}) I",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fch1015"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fch1015",
+  "group": "K1",
+  "result": "fix",
+  "note": "nonempty directed set Λ (Preorder+IsDirected+Nonempty, needed: empty Λ makes I empty), F : Λ ⥤ CommRingCat, stage ideals J with Ideal.map transition inclusion, HenselianRing stages; conclusion: ideal with carrier = ⋃ ι_λ(J λ), ≤ jacobson ⊥, HenselianRing (colimit F) I; fixed Cocone/IsColimit to [HasColimit F]/colimit F/colimit.ι per landed directed form, added proof sketch to docstring"
  }
 }
