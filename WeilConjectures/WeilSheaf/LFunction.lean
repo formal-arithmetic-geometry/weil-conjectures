@@ -75,21 +75,47 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 namespace WeilSheaf
 
-/-- An isomorphism of Weil sheaves induces an isomorphism of the stalks at a geometric point,
-compatible with the Frobenius. -/
-noncomputable def stalkAtEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+/-- The linear isomorphism induced by an isomorphism of Weil sheaves on the stalks at a geometric
+point. -/
+noncomputable def stalkAtLinEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
     (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
     (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
       (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    (F.stalkAt s m hs).Equiv (G.stalkAt s m hs) where
-  toLinearEquiv := LinearEquiv.ofLinear (stalkAtMap s m hs e.hom) (stalkAtMap s m hs e.inv)
+    (F.stalkAt s m hs).carrier ≃ₗ[PadicAlgCl l] (G.stalkAt s m hs).carrier :=
+  LinearEquiv.ofLinearMap (stalkAtMap s m hs e.hom) (stalkAtMap s m hs e.inv)
     (LinearMap.ext fun y ↦ (stalkAtMap_comp s m hs e.inv e.hom y).symm.trans <| by
       rw [e.inv_hom_id]
       exact stalkAtMap_id s m hs G y)
     (LinearMap.ext fun y ↦ (stalkAtMap_comp s m hs e.hom e.inv y).symm.trans <| by
       rw [e.hom_inv_id]
       exact stalkAtMap_id s m hs F y)
-  map_frobenius v := stalkAtMap_frobenius s m hs e.hom v
+
+theorem stalkAtLinEquivOfIso_apply {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (v) :
+    stalkAtLinEquivOfIso e s m hs v = stalkAtMap s m hs e.hom v :=
+  rfl
+
+/-- The linear isomorphism `AlgebraicGeometry.WeilSheaf.stalkAtLinEquivOfIso` commutes with the
+Frobenius. -/
+theorem stalkAtLinEquivOfIso_frobenius {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (v : (F.stalkAt s m hs).carrier) :
+    stalkAtLinEquivOfIso e s m hs ((F.stalkAt s m hs).frobenius v) =
+      (G.stalkAt s m hs).frobenius (stalkAtLinEquivOfIso e s m hs v) := by
+  rw [stalkAtLinEquivOfIso_apply, stalkAtLinEquivOfIso_apply]
+  exact stalkAtMap_frobenius s m hs e.hom v
+
+/-- An isomorphism of Weil sheaves induces an isomorphism of the stalks at a geometric point,
+compatible with the Frobenius. -/
+noncomputable def stalkAtEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (F.stalkAt s m hs).Equiv (G.stalkAt s m hs) :=
+  ⟨stalkAtLinEquivOfIso e s m hs, stalkAtLinEquivOfIso_frobenius e s m hs⟩
 
 /-- An isomorphism of Weil sheaves induces an isomorphism of the geometric stalks at a closed
 point, compatible with the local Frobenius. -/
@@ -173,11 +199,13 @@ theorem coeff_prod_inv_localPolynomial_stalk (F : WeilSheaf k₀ l X) {S : Finse
     n s hs
   refine Eq.trans (congrArg (coeff n) (Finset.prod_congr rfl fun x _ ↦ ?_)) h
   refine congrArg Inv.inv ?_
-  rw [LinearMap.alternatingCharpolyRevProd, Finset.prod_singleton, if_pos even_zero,
-    FrobeniusModule.localPolynomial, LinearMap.charpolyRev, LinearMap.charpolyRev,
-    WeilComplex.stalk, charpoly_frobeniusEnd_stalk_of_iso
-      ((toComplexCompHomologySheafIso (k₀ := k₀) (l := l) (X := X)).app F) x]
-  rfl
+  rw [LinearMap.alternatingCharpolyRevProd, Finset.prod_singleton, if_pos Even.zero,
+    FrobeniusModule.localPolynomial, LinearMap.charpolyRev, LinearMap.charpolyRev]
+  have h2 : (WeilComplex.stalk (toComplex.obj F) 0 x).frobeniusEnd.charpoly =
+      (F.stalk x).frobeniusEnd.charpoly :=
+    charpoly_frobeniusEnd_stalk_of_iso
+      ((toComplexCompHomologySheafIso (k₀ := k₀) (l := l) (X := X)).app F) x
+  rw [h2]
 
 end WeilSheaf
 

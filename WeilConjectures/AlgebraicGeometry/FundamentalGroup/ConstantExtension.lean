@@ -120,7 +120,8 @@ lemma geometricFrobenius_pow_finrank_apply (L : Type u) [Field L] [Algebra k₀ 
     apply (fiberConstantCoverEquiv p s _).injective
     refine Subtype.ext (RingHom.ext fun x ↦ ?_)
     have := Fintype.ofFinite L
-    rw [fiberConstantCoverEquiv_geometricFrobenius_inv_pow, ← map_pow, ← natCard_eq_pow_finrank k₀ L,
+    rw [fiberConstantCoverEquiv_geometricFrobenius_inv_pow, ← map_pow,
+      ← natCard_eq_pow_finrank k₀ L,
       Nat.card_eq_fintype_card, FiniteField.pow_card x]
   rw [inv_pow] at h
   exact (Equiv.Perm.inv_eq_iff_eq.1 h).symm
@@ -328,10 +329,11 @@ lemma constantExtensionFiberMap_surjective (A : FiniteEtaleAlgebra K) :
   intro z
   let χ := fiberConstantCoverEquiv p _ A z
   let κ := baseRingHom (constantExtensionHom p L) s'
-  letI : Algebra K Ω' := (κ.comp (algebraMap K L)).toAlgebra
+  let : Algebra K Ω' := (κ.comp (algebraMap K L)).toAlgebra
   let f : L →ₐ[K] Ω' := { κ with commutes' := fun _ ↦ rfl }
   have hg (k : K) : χ.1 (algebraMap K A.1 k) = algebraMap K Ω' k := by
-    exact (RingHom.congr_fun χ.2 k).trans (RingHom.congr_fun (baseRingHom_constantExtensionProj p s') k)
+    exact (RingHom.congr_fun χ.2 k).trans
+      (RingHom.congr_fun (baseRingHom_constantExtensionProj p s') k)
   let g : A.1 →ₐ[K] Ω' := { χ.1 with commutes' := hg }
   let ψ : (FiniteEtaleAlgebra.baseChange (L := L) A).1 →+* Ω' :=
     (Algebra.TensorProduct.productMap f g).toRingHom
@@ -371,7 +373,8 @@ lemma fundamentalGroupMap_smul_constantExtensionFiberMap {A : FiniteEtaleAlgebra
     (y : (fiber s').obj (constantCover (constantExtensionHom p L) B)) :
     fundamentalGroupMap τ G' G g •
         ((pullbackFiberIso _ s').symm ≪≫ τ).hom.app _ (constantExtensionFiberMap p s' φ hφ y) =
-      ((pullbackFiberIso _ s').symm ≪≫ τ).hom.app _ (constantExtensionFiberMap p s' φ hφ (g • y)) := by
+      ((pullbackFiberIso _ s').symm ≪≫ τ).hom.app _
+        (constantExtensionFiberMap p s' φ hφ (g • y)) := by
   have key (y : (fiber s').obj (constantCover (constantExtensionHom p L) B)) :
       ((pullbackFiberIso _ s').symm ≪≫ τ).hom.app _ (constantExtensionFiberMap p s' φ hφ y) =
         τ.hom.app _ ((fiber s').map (constantExtensionToPullback p φ hφ) y) := by
@@ -518,5 +521,82 @@ theorem mem_range_of_mem_weilGroup_constantExtension (h : G) (n : Multiplicative
     (geometricFrobenius_pow_finrank_apply p s L _) k
 
 end Range
+
+section Exact
+
+variable {K : Type u} [Field K] [Finite K] {X₀ : Scheme.{u}} (p : X₀ ⟶ Spec (.of K))
+  {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X₀)
+
+omit [Finite K] in
+/-- Every finite subset of `K̄` lies in a finite subextension of `K̄ / K`. -/
+lemma FiniteSubfield.exists_forall_mem (T : Finset (AlgebraicClosure K)) :
+    ∃ L : FiniteSubfield K, ∀ x ∈ T, x ∈ L.1 := by
+  classical
+  induction T using Finset.induction_on with
+  | empty => exact ⟨⟨⊥, inferInstance⟩, by simp⟩
+  | insert a T _ ih =>
+    obtain ⟨L, hL⟩ := ih
+    obtain ⟨L', h₁, h₂⟩ := FiniteSubfield.exists_ge L (FiniteSubfield.adjoin a)
+    refine ⟨L', fun x hx ↦ ?_⟩
+    rcases Finset.mem_insert.1 hx with rfl | hx
+    · exact h₂ (FiniteSubfield.mem_adjoin x)
+    · exact h₁ (hL x hx)
+
+/-- There are finite subextensions of `K̄ / K` of arbitrarily large degree. -/
+lemma FiniteSubfield.exists_lt_finrank (N : ℕ) :
+    ∃ L : FiniteSubfield K, N < Module.finrank K L.1 := by
+  obtain ⟨S, hS⟩ := Infinite.exists_subset_card_eq (AlgebraicClosure K) (Nat.card K ^ N + 1)
+  obtain ⟨L, hL⟩ := FiniteSubfield.exists_forall_mem S
+  refine ⟨L, ?_⟩
+  have := L.2
+  have : Finite L.1 := Module.finite_of_finite K
+  have hcard : S.card ≤ Nat.card L.1 := by
+    change S.card ≤ Nat.card (L.1 : Set (AlgebraicClosure K))
+    rw [← Set.ncard_coe_finset, Nat.card_coe_set_eq]
+    exact Set.ncard_le_ncard (fun x hx ↦ hL x hx) (Set.toFinite _)
+  rw [hS, natCard_eq_pow_finrank K L.1] at hcard
+  exact (Nat.pow_lt_pow_iff_right Finite.one_lt_card).1 (Nat.lt_of_succ_le hcard)
+
+/-- The geometric Frobenius has infinite order: on the geometric fibre of the constant cover
+attached to a finite field extension of degree `m`, it has order `m`, and there are such
+extensions of every degree. -/
+theorem not_isOfFinOrder_geometricFrobenius : ¬IsOfFinOrder (geometricFrobenius p s) := by
+  intro hfin
+  obtain ⟨d, hd, hpow⟩ := isOfFinOrder_iff_pow_eq_one.1 hfin
+  obtain ⟨L, hL⟩ := FiniteSubfield.exists_lt_finrank (K := K) d
+  have := L.2
+  have : Algebra.Etale K L.1 := L.toFiniteEtaleAlgebra.2.2
+  let : Algebra K Ω := (baseRingHom p s).toAlgebra
+  let φ : L.1 →ₐ[K] Ω := IsSepClosed.lift
+  let z := (fiberConstantCoverEquiv p s (FiniteEtaleAlgebra.of L.1)).symm
+    ⟨φ.toRingHom, φ.comp_algebraMap⟩
+  have hz : (geometricFrobenius p s (FiniteEtaleAlgebra.of L.1) ^ (d : ℤ)) z = z := by
+    rw [zpow_natCast, ← Pi.pow_apply, hpow]
+    rfl
+  have hdvd := dvd_of_geometricFrobenius_zpow_apply p s L.1 z d hz
+  have := Int.le_of_dvd (by exact_mod_cast hd) hdvd
+  omega
+
+variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+  [ConnectedSpace X₀] [∀ P, MulAction G ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G]
+
+/-- Blueprint `rem-ptr-wf-weil-group-1`: Pointer to the properties of `def-wf-weil-group`.
+
+The exact sequence of `lem-wf-weil-group-exact-sequence` for the Weil group of a connected,
+geometrically connected scheme over a finite field: the degree map is surjective, the elements of
+degree zero are those of `π₁(X₀, s)` acting trivially on the constant covers, and every lift of
+the geometric Frobenius has degree one. -/
+theorem exact_weilGroupDeg [GeometricallyConnected p] :
+    Function.Surjective (weilGroupDeg p s G) ∧
+      Function.Injective ((constantCoverAction p s G).kerToWeilGroup (geometricFrobenius p s)) ∧
+      ((constantCoverAction p s G).kerToWeilGroup (geometricFrobenius p s)).range =
+        (weilGroupDeg p s G).ker ∧
+      ∀ w : weilGroup p s G, constantCoverAction p s G (w : G × Multiplicative ℤ).1 =
+        geometricFrobenius p s → weilGroupDeg p s G w = Multiplicative.ofAdd 1 := by
+  obtain ⟨g, hg⟩ := exists_smul_eq_geometricFrobenius p s G
+  refine (constantCoverAction p s G).exact_weilGroupDeg (geometricFrobenius p s)
+    ⟨g, funext fun A ↦ Equiv.ext fun y ↦ hg A y⟩ (not_isOfFinOrder_geometricFrobenius p s)
+
+end Exact
 
 end AlgebraicGeometry.Scheme.FiniteEtale

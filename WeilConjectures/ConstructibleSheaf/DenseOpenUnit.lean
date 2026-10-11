@@ -388,6 +388,13 @@ theorem isIso_unit_upperStarLowerStarAdjunction_of_isDomain_stalk
     infer_instance
   exact isIso_of_mono_of_epi _
 
+/-- The local rings of an étale scheme over a regular scheme are integral domains, being regular
+local rings (`AlgebraicGeometry.isRegularLocalRing_stalk_of_etale`). -/
+lemma isDomain_stalk_left_of_isRegular [IsRegular X] (W : X.Etale)
+    (w : W.left) : IsDomain (W.left.presheaf.stalk w) :=
+  @IsRegularLocalRing.isDomain _ _ (isRegularLocalRing_stalk_of_etale (X := W.left) (Y := X)
+    W.hom (fun _ ↦ IsRegular.isRegularLocalRing_stalk _) w)
+
 /-- **Locally constant sheaves on a regular scheme extend uniquely over a dense open.** For a
 locally noetherian regular scheme `X`, an open immersion `j : U ⟶ X` with dense image and a
 locally constant sheaf `G` of modules on the small étale site of `X`, the unit
@@ -397,10 +404,8 @@ theorem isIso_unit_upperStarLowerStarAdjunction_of_isRegular [IsLocallyNoetheria
     [IsRegular X] (hj : Dense (Set.range j.base))
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf G] :
     IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app G) :=
-  isIso_unit_upperStarLowerStarAdjunction_of_isDomain_stalk j
-    (fun (W : X.Etale) w ↦
-      @IsRegularLocalRing.isDomain _ _ (isRegularLocalRing_stalk_of_etale (X := W.left) (Y := X)
-        W.hom (fun _ ↦ IsRegular.isRegularLocalRing_stalk _) w)) hj G
+  isIso_unit_upperStarLowerStarAdjunction_of_isDomain_stalk j isDomain_stalk_left_of_isRegular
+    hj G
 
 end Etale
 

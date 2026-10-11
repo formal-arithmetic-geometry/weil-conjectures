@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.RepresentationTheory.Invariants
+public import WeilConjectures.ConstructibleSheaf.OnePoint
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
@@ -43,22 +44,27 @@ points, which is what makes the residue degree `e_s` meaningful.
 - `AlgebraicGeometry.BoundaryDatum` : the boundary extension datum of `sk-d-real-boundary`.
 - `AlgebraicGeometry.BoundaryDatum.boundaryStalk` : the boundary stalk `V^{I_s}`.
 - `AlgebraicGeometry.BoundaryDatum.boundaryFrobenius` : the residue Frobenius acting on it.
+- `AlgebraicGeometry.BoundaryDatum.conj` : the boundary datum for another choice of path, and
+  `AlgebraicGeometry.BoundaryDatum.boundaryStalkConjEquiv` : the Frobenius-equivariant
+  identification of the boundary stalks (`d-real-boundary`).
 - `AlgebraicGeometry.Etale.middleExtension` : the middle extension `j_* ℱ`.
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension` : the
+  restriction of `j_* ℱ` to a point of a smooth curve is finite locally constant.
 - `AlgebraicGeometry.Scheme.isConstructibleSheaf_lowerStar` : `j_* ℱ` is constructible.
 - `AlgebraicGeometry.Scheme.isIso_unit_upperStarLowerStarAdjunction` : a finite locally
   constant sheaf on a smooth curve is the direct image of its restriction to a dense open.
 
-Both are proved from two auxiliary pointwise inputs at the boundary,
-`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension`
-(the restriction of `j_* ℱ` to a boundary point is finite locally constant, a consequence of
-the blueprint's identification of the boundary stalk with the inertia invariants) and
-`AlgebraicGeometry.Scheme.isIso_sheafFiber_map_unit_upperStarLowerStarAdjunction` (inertia acts
-trivially on the stalks of a sheaf lisse at the boundary point), which need the strict
-henselization of a curve at a point and are not yet proved. The inertia-invariants
-identification `lem-wf-boundary-stalk-invariants` itself is not formalised here.
+These finite-level statements are proved without henselizations, from the regularity of a smooth
+curve: étale schemes over it are regular, so their points have irreducible neighbourhoods, and
+the sections of a locally constant sheaf over an étale scheme with connected underlying space
+are determined near one point (`WeilConjectures.ConstructibleSheaf.DenseOpenUnit`,
+`WeilConjectures.ConstructibleSheaf.LowerStarOpenStalk`). The identification
+`lem-wf-boundary-stalk-invariants` of the boundary stalk of a lisse Weil sheaf with the inertia
+invariants `V^{I_s}` is not formalised: the inertia groups are data here, and the monodromy
+action of the fundamental group on the stalks of a Weil sheaf is not available.
 -/
 
 @[expose] public section
@@ -135,6 +141,60 @@ theorem inertia_le_ker_restrict (s : ↥((Set.range j.base)ᶜ)) :
   exact (Set.subset_iUnion (fun s ↦ (D.inertia s : Set WU.carrier)) s).trans
     (Subgroup.subset_normalClosure.trans (Subgroup.le_topologicalClosure _))
 
+/-- The normal closure of a set of elements of a group is unchanged by conjugating the set. -/
+lemma _root_.Subgroup.normalClosure_image_conj {G : Type*} [Group G] (S : Set G) (w : G) :
+    Subgroup.normalClosure (MulAut.conj w '' S) = Subgroup.normalClosure S := by
+  refine le_antisymm (Subgroup.normalClosure_le_normal ?_) (Subgroup.normalClosure_le_normal ?_)
+  · rintro _ ⟨x, hx, rfl⟩
+    exact (inferInstance : (Subgroup.normalClosure S).Normal).conj_mem _
+      (Subgroup.subset_normalClosure hx) w
+  · intro x hx
+    have := (inferInstance : (Subgroup.normalClosure (MulAut.conj w '' S)).Normal).conj_mem _
+      (Subgroup.subset_normalClosure ⟨x, hx, rfl⟩) w⁻¹
+    simpa [MulAut.conj_apply, mul_assoc] using this
+
+/-- Blueprint `d-real-boundary`: Boundary extension and inertia, change of path.
+
+Another choice of path from the geometric point over `Spec K_s` to the base point changes the
+decomposition-group homomorphism `Gal(K̄_s / K_s) → π₁(U₀)` by conjugation. For conjugation by an
+element `w` of `W(U₀)` this replaces the inertia groups `I_s` by `w I_s w⁻¹` and the residue
+Frobenius lifts `F_s` by `w F_s w⁻¹`; the result is again a boundary datum. -/
+def conj (w : WU.carrier) : BoundaryDatum j WU WC where
+  toRestriction := D.toRestriction
+  finite_boundary := D.finite_boundary
+  boundary_subset_finitePoints := D.boundary_subset_finitePoints
+  inertia s := (D.inertia s).map (MulAut.conj w : WU.carrier →* WU.carrier)
+  inertia_le s := by
+    rintro _ ⟨g, hg, rfl⟩
+    exact (inferInstance : WU.geometric.Normal).conj_mem g (D.inertia_le s hg) w
+  ker_restrict_eq := by
+    rw [D.ker_restrict_eq]
+    congr 1
+    have h : (⋃ s, ((D.inertia s).map (MulAut.conj w : WU.carrier →* WU.carrier) :
+        Set WU.carrier)) =
+        MulAut.conj w '' ⋃ s, (D.inertia s : Set WU.carrier) := by
+      rw [Set.image_iUnion]
+      rfl
+    rw [h, Subgroup.normalClosure_image_conj]
+  residueFrobenius s := w * D.residueFrobenius s * w⁻¹
+  deg_residueFrobenius s := by
+    rw [map_mul, map_mul, map_inv, mul_comm (WU.deg w), mul_assoc, mul_inv_cancel, mul_one]
+    exact D.deg_residueFrobenius s
+  restrict_residueFrobenius s := by
+    refine (D.restrict_residueFrobenius s).trans ?_
+    rw [map_mul, map_mul, map_inv]
+    exact isConj_iff.2 ⟨D.restrict w, rfl⟩
+  normalizes_inertia s := by
+    rw [Subgroup.map_map]
+    have h : ((MulAut.conj (w * D.residueFrobenius s * w⁻¹) : WU.carrier →* WU.carrier)).comp
+        (MulAut.conj w : WU.carrier →* WU.carrier) =
+        (MulAut.conj w : WU.carrier →* WU.carrier).comp
+          (MulAut.conj (D.residueFrobenius s) : WU.carrier →* WU.carrier) := by
+      ext g
+      simp [MulAut.conj_apply, mul_assoc]
+    rw [h, ← Subgroup.map_map]
+    exact congrArg (Subgroup.map _) (D.normalizes_inertia s)
+
 variable (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
   [FiniteDimensional (PadicAlgCl l) V]
 
@@ -182,6 +242,61 @@ theorem apply_eq_boundaryFrobenius (ρ : Representation (PadicAlgCl l) WU.carrie
         rw [← Module.End.mul_apply, ← map_mul, mul_inv_cancel_left]
     _ = D.boundaryFrobenius l ρ s v := by rw [hv]; rfl
 
+omit [FiniteDimensional (PadicAlgCl l) V] in
+/-- Blueprint `d-real-boundary`: the boundary stalk is independent of the path. Conjugating the
+boundary datum by `w ∈ W(U₀)` (`AlgebraicGeometry.BoundaryDatum.conj`) moves the inertia
+invariants `V ^ (I_s)` by `ρ w`. -/
+theorem boundaryStalk_conj (ρ : Representation (PadicAlgCl l) WU.carrier V) (w : WU.carrier)
+    (s : ↥((Set.range j.base)ᶜ)) :
+    (D.conj w).boundaryStalk l ρ s = (D.boundaryStalk l ρ s).map (ρ w) := by
+  ext v
+  rw [Submodule.mem_map]
+  change (∀ g : (D.conj w).inertia s, ρ g v = v) ↔
+    ∃ u, (∀ g : D.inertia s, ρ g u = u) ∧ ρ w u = v
+  constructor
+  · intro hv
+    refine ⟨ρ w⁻¹ v, fun ⟨h, hh⟩ ↦ ?_, ?_⟩
+    · have := hv ⟨MulAut.conj w h, ⟨h, hh, rfl⟩⟩
+      change ρ (w * h * w⁻¹) v = v at this
+      change ρ h (ρ w⁻¹ v) = ρ w⁻¹ v
+      conv_rhs => rw [← this]
+      rw [← Module.End.mul_apply, ← map_mul, ← Module.End.mul_apply, ← map_mul]
+      simp [mul_assoc]
+    · rw [← Module.End.mul_apply, ← map_mul, mul_inv_cancel, map_one, Module.End.one_apply]
+  · rintro ⟨u, hu, rfl⟩ ⟨_, ⟨h, hh, rfl⟩⟩
+    change ρ (w * h * w⁻¹) (ρ w u) = ρ w u
+    rw [← Module.End.mul_apply, ← map_mul, inv_mul_cancel_right, map_mul, Module.End.mul_apply,
+      hu ⟨h, hh⟩]
+
+/-- Blueprint `d-real-boundary`: the boundary stalk with its residue Frobenius is independent of
+the path up to Frobenius-equivariant isomorphism. The map `ρ w` identifies the boundary stalk
+`V ^ (I_s)` with that of the boundary datum conjugated by `w ∈ W(U₀)`. -/
+noncomputable def boundaryStalkConjEquiv (ρ : Representation (PadicAlgCl l) WU.carrier V)
+    (w : WU.carrier) (s : ↥((Set.range j.base)ᶜ)) :
+    D.boundaryStalk l ρ s ≃ₗ[PadicAlgCl l] (D.conj w).boundaryStalk l ρ s :=
+  (Submodule.equivMapOfInjective (ρ w) (fun a b h ↦ by
+      simpa [← Module.End.mul_apply, ← map_mul] using congrArg (ρ w⁻¹) h) _).trans
+    (LinearEquiv.ofEq _ _ (D.boundaryStalk_conj l ρ w s).symm)
+
+omit [FiniteDimensional (PadicAlgCl l) V] in
+@[simp]
+lemma coe_boundaryStalkConjEquiv_apply (ρ : Representation (PadicAlgCl l) WU.carrier V)
+    (w : WU.carrier) (s : ↥((Set.range j.base)ᶜ)) (v : D.boundaryStalk l ρ s) :
+    (D.boundaryStalkConjEquiv l ρ w s v : V) = ρ w v :=
+  rfl
+
+omit [FiniteDimensional (PadicAlgCl l) V] in
+/-- The identification `AlgebraicGeometry.BoundaryDatum.boundaryStalkConjEquiv` intertwines the
+residue Frobenius actions. -/
+theorem boundaryStalkConjEquiv_boundaryFrobenius
+    (ρ : Representation (PadicAlgCl l) WU.carrier V) (w : WU.carrier)
+    (s : ↥((Set.range j.base)ᶜ)) (v : D.boundaryStalk l ρ s) :
+    D.boundaryStalkConjEquiv l ρ w s (D.boundaryFrobenius l ρ s v) =
+      (D.conj w).boundaryFrobenius l ρ s (D.boundaryStalkConjEquiv l ρ w s v) := by
+  ext
+  change ρ w (ρ (D.residueFrobenius s) v) = ρ (w * D.residueFrobenius s * w⁻¹) (ρ w v)
+  rw [← Module.End.mul_apply, ← map_mul, ← Module.End.mul_apply, ← map_mul, inv_mul_cancel_right]
+
 /-- A lisse Weil sheaf on `C₀` restricts to a lisse Weil sheaf on `U₀`: the geometric part of
 `W(U₀)` maps continuously into that of `W(C₀)`. -/
 theorem isLisse_comp_restrict {ρ : Representation (PadicAlgCl l) WC.carrier V}
@@ -215,34 +330,50 @@ namespace Scheme
 
 variable {j : U ⟶ C} [IsOpenImmersion j] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
-/-- Let `j : U₀ ↪ C₀` be an open immersion into a curve, `ℱ` a finite locally constant sheaf of
-`Λ`-modules on `U₀` and `s` a closed point of `C₀` outside `U₀`. Then the restriction of the
-middle extension `j_* ℱ` to the point `Spec k(s)` is finite locally constant.
+omit [Finite K] in
+/-- Let `j : U₀ ↪ C₀` be an open immersion into a smooth curve, `ℱ` a finite locally constant
+sheaf of `Λ`-modules on `U₀` and `s` a point of `C₀`. Then the restriction of the middle
+extension `j_* ℱ` to the point `Spec k(s)` is finite locally constant.
 
-This is an auxiliary finiteness input, weaker than the blueprint lemma
-`lem-wf-boundary-stalk-invariants`, which identifies the stalk of `j_* ℱ` at a geometric point
-`s̄` over `s`, Frobenius-equivariantly, with the inertia invariants `ℱ_η̄ ^ I_s`. That
-identification implies this statement, since a sheaf on `Spec k(s)` is the continuous Galois
-module of its geometric stalk, and `ℱ_η̄ ^ I_s` is finite. -/
+This is the finiteness part of the blueprint lemma `lem-wf-boundary-stalk-invariants` (step 1 of
+the proof of `sk-i-real-boundary`): the geometric stalks of `j_* ℱ` are finite
+(`AlgebraicGeometry.Etale.finite_sheafFiber_lowerStar`), since a germ of `j_* ℱ` is a section of
+`ℱ` over the punctured part `V ×_{C₀} U₀` of an irreducible étale neighbourhood `V`, which is
+irreducible, and such sections inject into a stalk of `ℱ`. A sheaf on the one-point scheme
+`Spec k(s)` with finite stalks is finite locally constant
+(`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_of_subsingleton`). -/
 theorem isFiniteLocallyConstantSheaf_upperStar_middleExtension
-    (p : C ⟶ Spec (.of K)) [IsCurve p] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsFiniteLocallyConstantSheaf F] (s : C) (hs : IsClosed {s})
-    (hsj : s ∉ Set.range j.base) :
+    (p : C ⟶ Spec (.of K)) [IsCurve p] [Smooth p]
+    (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsFiniteLocallyConstantSheaf F] (s : C) :
     Scheme.IsFiniteLocallyConstantSheaf
       ((C.fromSpecResidueField s)^*[ModuleCat.{u + 1} Λ].obj
         ((Etale.middleExtension (ModuleCat.{u + 1} Λ) j).obj F)) := by
-  sorry
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian p
+  have : IsRegular C := IsRegular.of_smooth p
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace p
+  have : IsNoetherian C := ⟨⟩
+  have : TopologicalSpace.NoetherianSpace U := j.isOpenEmbedding.isInducing.noetherianSpace
+  obtain ⟨B, hB⟩ := Etale.exists_natCard_sheafFiber_le F
+  have : Subsingleton (Spec (.of (C.residueField s))) :=
+    inferInstanceAs (Subsingleton (PrimeSpectrum (C.residueField s)))
+  refine Etale.isFiniteLocallyConstantSheaf_of_subsingleton _ fun Ω _ _ t ↦ ?_
+  have := Etale.finite_sheafFiber_lowerStar j (Etale.isDomain_stalk_left_of_isRegular (X := C)) F
+    B hB (t ≫ C.fromSpecResidueField s)
+  exact Finite.of_equiv _ ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ)
+    (C.fromSpecResidueField s) t).app _).toLinearEquiv.toEquiv.symm
 
+omit [Finite K] in
 /-- Blueprint `sk-i-real-boundary`: Boundary stalks and restriction to an open.
 Also `lem-wf-dense-open-pi1-surjective`, part (5).
 
 The direct image `j_* ℱ` of a finite locally constant sheaf along an open immersion into a
-curve `C₀` with finite complement is constructible. The complement consists of closed points,
-since `C₀` is a Jacobson space, so the range of `j` and the boundary points stratify `C₀`
+smooth curve `C₀` with finite complement is constructible. The complement consists of closed
+points, since `C₀` is a Jacobson space, so the range of `j` and the boundary points stratify `C₀`
 (`AlgebraicGeometry.Scheme.Stratification.ofOpenImmersion`). On `U₀` the restriction of
 `j_* ℱ` is `ℱ`, and at a boundary point it is finite locally constant by
 `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension`. -/
-theorem isConstructibleSheaf_lowerStar (p : C ⟶ Spec (.of K)) [IsCurve p]
+theorem isConstructibleSheaf_lowerStar (p : C ⟶ Spec (.of K)) [IsCurve p] [Smooth p]
     (hfin : (Set.range j.base)ᶜ.Finite)
     (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsFiniteLocallyConstantSheaf F] :
@@ -260,27 +391,11 @@ theorem isConstructibleSheaf_lowerStar (p : C ⟶ Spec (.of K)) [IsCurve p]
     exact IsFiniteLocallyConstantSheaf.of_iso (F := F)
       (asIso ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit.app F)).symm
   | succ i =>
-    have := hfin.to_subtype
-    have hx := ((Finite.equivFin ↥(Set.range j.base)ᶜ).symm i).2
-    exact isFiniteLocallyConstantSheaf_upperStar_middleExtension p F _ (hcl _ hx) hx
+    exact isFiniteLocallyConstantSheaf_upperStar_middleExtension p F _
 
-/-- Blueprint `lem-a1-lisse-middle-extension`: Recovery from a dense lisse open, at a removed
-point.
-
-Let `𝒢` be a finite locally constant sheaf on a smooth curve `C₀` and `j : U₀ ↪ C₀` a dense
-open. At a geometric point over a point `s` of `C₀` outside `U₀`, the adjunction map
-`𝒢 ⟶ j_* j^* 𝒢` is an isomorphism on stalks: by `lem-wf-boundary-stalk-invariants` the target
-stalk is `(𝒢_η̄) ^ I_s = (𝒢_s̄) ^ I_s`, and the inertia `I_s` acts trivially on the stalk of a
-sheaf which is lisse at `s`. -/
-theorem isIso_sheafFiber_map_unit_upperStarLowerStarAdjunction [SmoothOfRelativeDimension 1 p]
-    (hdense : Dense (Set.range j.base)) (G : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsFiniteLocallyConstantSheaf G] (s : C) (hs : s ∉ Set.range j.base) :
-    IsIso ((C.uliftPointSmallEtale s).sheafFiber.map
-      ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app G)) := by
-  sorry
-
+omit [Finite K] [Finite Λ] in
 /-- Blueprint `sk-i-real-boundary`: Boundary stalks and restriction to an open.
-Also `lem-a1-lisse-middle-extension`.
+Also `lem-a1-lisse-middle-extension` and `lem-wf-dense-open-pi1-surjective`, part (3).
 
 A finite locally constant sheaf `𝒢` on a smooth curve `C₀` is the direct image of its
 restriction to a dense open `U₀`: the unit of the adjunction `j^* ⊣ j_*` is an isomorphism
@@ -290,23 +405,34 @@ at `𝒢`,
     𝒢 ──────▶ j_* j^* 𝒢
 ```
 
-It suffices to check this on the stalks at all geometric points. At a point of `U₀` the stalk
-of the unit is that of `j^*` of the unit, which is inverse to the counit `j^* j_* j^* 𝒢 ≅ j^* 𝒢`;
-at a removed point this is `isIso_sheafFiber_map_unit_upperStarLowerStarAdjunction`. -/
+The curve `C₀` is regular, being smooth over a field, so étale `C₀`-schemes are regular and
+their points have irreducible neighbourhoods; over such a neighbourhood `W` on which `𝒢` is
+constant, a section of `𝒢` over the irreducible open `W ×_{C₀} U₀` is a constant, which extends
+over `W` (`AlgebraicGeometry.Etale.isIso_unit_upperStarLowerStarAdjunction_of_isRegular`). -/
 theorem isIso_unit_upperStarLowerStarAdjunction [SmoothOfRelativeDimension 1 p]
     (hdense : Dense (Set.range j.base)) (G : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsFiniteLocallyConstantSheaf G] :
     IsIso ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app G) := by
-  refine Scheme.isIso_of_isIso_sheafFiber_map _ fun s ↦ ?_
-  by_cases hs : s ∈ Set.range j.base
-  · have h : Set.range (C.algClosurePoint s).base ⊆ Set.range j.base :=
-      Scheme.range_base_subset_of_closedPoint_mem _
-        (by exact (algClosurePoint_base C s _).symm ▸ hs)
-    have := Etale.isIso_uliftSheafFiber_comp_map_of_isIso_upperStar_map (ModuleCat.{u + 1} Λ) j
-      ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app G) inferInstance
-      (IsOpenImmersion.lift j _ h)
-    rwa [IsOpenImmersion.lift_fac] at this
-  · exact isIso_sheafFiber_map_unit_upperStarLowerStarAdjunction (p := p) hdense G s hs
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian p
+  have : Smooth p := SmoothOfRelativeDimension.smooth 1 p
+  have : IsRegular C := IsRegular.of_smooth p
+  exact Etale.isIso_unit_upperStarLowerStarAdjunction_of_isRegular j hdense G
+
+omit [Finite K] [Finite Λ] in
+/-- Blueprint `lem-a1-lisse-middle-extension`: Recovery from a dense lisse open, at a removed
+point.
+
+Let `𝒢` be a finite locally constant sheaf on a smooth curve `C₀` and `j : U₀ ↪ C₀` a dense
+open. At a geometric point over a point `s` of `C₀` outside `U₀`, the adjunction map
+`𝒢 ⟶ j_* j^* 𝒢` is an isomorphism on stalks, since it is an isomorphism
+(`AlgebraicGeometry.Scheme.isIso_unit_upperStarLowerStarAdjunction`). -/
+theorem isIso_sheafFiber_map_unit_upperStarLowerStarAdjunction [SmoothOfRelativeDimension 1 p]
+    (hdense : Dense (Set.range j.base)) (G : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsFiniteLocallyConstantSheaf G] (s : C) (_hs : s ∉ Set.range j.base) :
+    IsIso ((C.uliftPointSmallEtale s).sheafFiber.map
+      ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).unit.app G)) := by
+  have := isIso_unit_upperStarLowerStarAdjunction (p := p) hdense G
+  infer_instance
 
 end Scheme
 

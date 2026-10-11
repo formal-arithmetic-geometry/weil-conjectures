@@ -28,6 +28,12 @@ subrepresentations being modular, and the second isomorphism theorem
 - `Subrepresentation.exists_equiv_subquotient_of_compositionSeries`: the Jordan–Hölder theorem.
 - `Subrepresentation.exists_equiv_of_isIrreducible_subquotient`: every irreducible subquotient
   is equivalent to a factor of any composition series.
+- `Subrepresentation.factorMultiset_eq`: the multiset of an invariant of the composition factors
+  does not depend on the composition series.
+- `Subrepresentation.exists_compositionSeries_of_iSupIndep`: a decomposition into irreducible
+  summands gives a composition series.
+- `Subrepresentation.le_iSup_of_isInternal`: an irreducible subrepresentation of a direct sum of
+  irreducibles lies in the sum of the summands equivalent to it (Schur).
 -/
 
 @[expose] public section
@@ -168,6 +174,74 @@ theorem exists_subquotient_equiv_of_equiv {V' : Type*} [AddCommGroup V'] [Module
     {σ : Representation k G V'} (e : ρ.Equiv σ) (U S : Subrepresentation σ) :
     ∃ U' S' : Subrepresentation ρ, Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) :=
   ⟨_, _, ⟨(subquotientEquiv e.symm S U).symm⟩⟩
+
+/-- A subquotient `S' / U'` of a subquotient `M / N` of `ρ` is equivalent to a subquotient of
+`ρ`: its preimage in `M`, viewed inside `V`. -/
+theorem exists_subquotient_equiv_of_subquotient {M N : Subrepresentation ρ}
+    (U' S' : Subrepresentation (M.subquotient N)) :
+    ∃ U S : Subrepresentation ρ, Nonempty ((S.subquotient U).Equiv (S'.subquotient U')) := by
+  let q : M.toRepresentation.IntertwiningMap (M.subquotient N) := ⟨Submodule.mkQ _, fun _ ↦ rfl⟩
+  let ι : M.toRepresentation.IntertwiningMap ρ := ⟨Submodule.subtype _, fun _ ↦ rfl⟩
+  have hι : Function.Injective ι := Submodule.injective_subtype _
+  let e₁ := subquotientComapEquiv q (Submodule.mkQ_surjective _) U' S'
+  let e₂ : ((map ι (comap q S')).subquotient (map ι (comap q U'))).Equiv
+      ((comap q S').subquotient (comap q U')) :=
+    (subquotientEquivOfIntertwiningMap ι (U := comap q U') (S := comap q S')
+      (U' := map ι (comap q U')) (S' := map ι (comap q S')) (fun x hx ↦ ⟨x, hx, rfl⟩)
+      (fun x _ hx ↦ ⟨x, hx, rfl⟩) (fun x _ hx ↦ by
+        obtain ⟨y, hy, hxy⟩ := mem_map.1 hx
+        exact hι hxy ▸ hy) fun y hy ↦ by
+        obtain ⟨x, hx, rfl⟩ := mem_map.1 hy
+        exact ⟨x, hx, by rw [sub_self]; exact zero_mem _⟩).symm
+  exact ⟨_, _, ⟨e₂.trans e₁⟩⟩
+
+/-- Every irreducible subquotient `S / U` of `ρ` with `S ≤ F n`, for a chain of
+subrepresentations `0 = F 0 ≤ F 1 ≤ ⋯ ≤ F n`, is equivalent to a subquotient of one of the steps
+`F (i + 1) / F i`. -/
+theorem exists_subquotient_equiv_of_chain {n : ℕ} {F : ℕ → Subrepresentation ρ}
+    (h0 : F 0 = ⊥) (hF : ∀ i < n, F i ≤ F (i + 1)) {U S : Subrepresentation ρ} (hS : S ≤ F n)
+    (hirr : (S.subquotient U).IsIrreducible) :
+    ∃ i < n, ∃ U' S' : Subrepresentation ((F (i + 1)).subquotient (F i)),
+      Nonempty ((S'.subquotient U').Equiv (S.subquotient U)) := by
+  induction n generalizing U S with
+  | zero =>
+    have := inf_lt_of_isIrreducible hirr
+    rw [h0, le_bot_iff] at hS
+    subst hS
+    exact absurd this (by simp)
+  | succ n ih =>
+    by_cases h : F n ⊓ S ≤ U
+    · -- the subquotient survives in `F (n + 1) / F n`
+      let π : (F (n + 1)).toRepresentation.IntertwiningMap ((F (n + 1)).subquotient (F n)) :=
+        ⟨Submodule.mkQ _, fun _ ↦ rfl⟩
+      let ι : (F (n + 1)).toRepresentation.IntertwiningMap ρ := ⟨Submodule.subtype _, fun _ ↦ rfl⟩
+      let e₁ : ((comap ι S).subquotient (comap ι U)).Equiv (S.subquotient U) :=
+        subquotientEquivOfIntertwiningMap ι (fun _ hx ↦ hx) (fun _ _ hx ↦ hx) (fun _ _ hx ↦ hx)
+          fun y hy ↦ ⟨⟨y, hS hy⟩, hy, by rw [sub_self]; exact zero_mem _⟩
+      have hinj (x) (hxS : x ∈ comap ι S) (hx : π x ∈ map π (comap ι U ⊓ comap ι S)) :
+          x ∈ comap ι U := by
+        obtain ⟨u, hu, hux⟩ := mem_map.1 hx
+        have hxu : ((x - u : (F (n + 1)).toSubmodule) : V) ∈ F n := by
+          have : π (x - u) = 0 := by rw [map_sub, hux, sub_self]
+          exact (Submodule.Quotient.mk_eq_zero _).1 this
+        have hxuS : ((x - u : (F (n + 1)).toSubmodule) : V) ∈ S :=
+          S.toSubmodule.sub_mem hxS (mem_inf.1 hu).2
+        have := U.toSubmodule.add_mem (h (mem_inf.2 ⟨hxu, hxuS⟩)) (mem_inf.1 hu).1
+        simpa using this
+      let e₂ : ((comap ι S).subquotient (comap ι U)).Equiv
+          ((map π (comap ι S)).subquotient (map π (comap ι U ⊓ comap ι S))) :=
+        subquotientEquivOfIntertwiningMap π (fun x hx ↦ mem_map.2 ⟨x, hx, rfl⟩)
+          (fun x hxS hxU ↦ mem_map.2 ⟨x, mem_inf.2 ⟨hxU, hxS⟩, rfl⟩) hinj fun y hy ↦ by
+            obtain ⟨x, hx, rfl⟩ := mem_map.1 hy
+            exact ⟨x, hx, by rw [sub_self]; exact zero_mem _⟩
+      exact ⟨n, Nat.lt_succ_self n, _, _, ⟨e₂.symm.trans e₁⟩⟩
+    · -- the subquotient comes from `F n`
+      let e : ((F n ⊓ S).subquotient U).Equiv (S.subquotient U) :=
+        subquotientEquivOfIntertwiningMap (.id ρ) (fun _ hx ↦ (mem_inf.1 hx).2) (fun _ _ hx ↦ hx)
+          (fun _ _ hx ↦ hx) fun y hy ↦ exists_mem_inf_sub_mem_of_isIrreducible hirr h hy
+      obtain ⟨i, hi, U', S', ⟨e'⟩⟩ := ih (fun i hi ↦ hF i (by omega)) inf_le_left
+        (e.isIrreducible_iff.2 hirr)
+      exact ⟨i, by omega, U', S', ⟨e'.trans e⟩⟩
 
 /-- The dimensions of the factors `F (i + 1) / F i` of a chain `0 = F 0 ≤ F 1 ≤ ⋯ ≤ F n` of
 subrepresentations add up to the dimension of `F n`. -/

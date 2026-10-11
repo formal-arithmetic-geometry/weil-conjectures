@@ -40,7 +40,9 @@ and `sk-p-real-semi`).
 - `AlgebraicGeometry.WeilGroup.IsOfWeight.mul`, `AlgebraicGeometry.WeilGroup.IsOfWeight.inv`
 - `AlgebraicGeometry.WeilGroup.IsReal.exteriorPower`
 - `AlgebraicGeometry.WeilGroup.localPolynomial_semisimplification`,
-  `AlgebraicGeometry.WeilGroup.IsReal.semisimplification`
+  `AlgebraicGeometry.WeilGroup.IsReal.semisimplification`,
+  `AlgebraicGeometry.WeilGroup.isPunctuallyPure_semisimplification_iff`,
+  `AlgebraicGeometry.WeilGroup.hasWeightsAtMost_semisimplification_iff`
 -/
 
 @[expose] public section
@@ -196,8 +198,10 @@ The determinant line `det V = ⋀^{dim V} V` of a Weil representation, with `g` 
 `g (v₁ ∧ ⋯ ∧ v_r) = g v₁ ∧ ⋯ ∧ g v_r`. The other operations of the blueprint are
 `Representation.directSum`, `Representation.tprod`, `Representation.exteriorPower`,
 `Representation.dual` (with `(g λ)(v) = λ (g⁻¹ v)`), the irreducible representations
-`Representation.IsIrreducible`, the constituents `Representation.IsConstituent`, and the
-semisimplification `AlgebraicGeometry.WeilGroup.semisimplification` of a composition series. -/
+`Representation.IsIrreducible`, the constituents `Representation.IsConstituent`, the
+semisimplification `AlgebraicGeometry.WeilGroup.semisimplification` of a composition series, and,
+for a subgroup `I`, the invariants `V^I = (ρ.comp I.subtype).invariants` and coinvariants
+`V_I = (ρ.comp I.subtype).Coinvariants`. -/
 noncomputable abbrev detLine : Representation (PadicAlgCl l) W.carrier
     ↥(⋀[PadicAlgCl l]^(Module.finrank (PadicAlgCl l) V) V) :=
   ρ.exteriorPower (Module.finrank (PadicAlgCl l) V)
@@ -274,6 +278,33 @@ theorem IsReal.semisimplification (hreal : W.IsReal l ρ ι) {F : ℕ → Subrep
     W.IsReal l (semisimplification W l F n) ι := fun x m ↦ by
   rw [localPolynomial_semisimplification h0 hn hF]
   exact hreal x m
+
+/-- Blueprint `sk-r-real-linear`: Weights, reality and semisimplification.
+
+The semisimplification `⨁ F (i + 1) / F i` along a filtration by subrepresentations has the same
+local eigenvalues as `ρ`, since it has the same local characteristic polynomials. -/
+theorem localEigenvalues_semisimplification {F : ℕ → Subrepresentation ρ} {n : ℕ}
+    (h0 : F 0 = ⊥) (hn : F n = ⊤) (hF : ∀ i < n, F i ≤ F (i + 1)) (x : C.finitePoints) :
+    W.localEigenvalues l (semisimplification W l F n) x = W.localEigenvalues l ρ x := by
+  rw [localEigenvalues, localEigenvalues, charpoly_semisimplification h0 hn hF]
+
+/-- Blueprint `sk-r-real-linear`: Weights, reality and semisimplification.
+
+The semisimplification along a filtration by subrepresentations is punctually `ι`-pure of
+weight `w` exactly when `ρ` is. -/
+theorem isPunctuallyPure_semisimplification_iff {F : ℕ → Subrepresentation ρ} {n : ℕ}
+    (h0 : F 0 = ⊥) (hn : F n = ⊤) (hF : ∀ i < n, F i ≤ F (i + 1)) {w : ℝ} :
+    W.IsPunctuallyPure l (semisimplification W l F n) ι w ↔ W.IsPunctuallyPure l ρ ι w := by
+  simp only [IsPunctuallyPure, localEigenvalues_semisimplification h0 hn hF]
+
+/-- Blueprint `sk-r-real-linear`: Weights, reality and semisimplification.
+
+The semisimplification along a filtration by subrepresentations has `ι`-weights at most `w`
+exactly when `ρ` has. -/
+theorem hasWeightsAtMost_semisimplification_iff {F : ℕ → Subrepresentation ρ} {n : ℕ}
+    (h0 : F 0 = ⊥) (hn : F n = ⊤) (hF : ∀ i < n, F i ≤ F (i + 1)) {w : ℝ} :
+    W.HasWeightsAtMost l (semisimplification W l F n) ι w ↔ W.HasWeightsAtMost l ρ ι w := by
+  simp only [HasWeightsAtMost, localEigenvalues_semisimplification h0 hn hF]
 
 end Real
 

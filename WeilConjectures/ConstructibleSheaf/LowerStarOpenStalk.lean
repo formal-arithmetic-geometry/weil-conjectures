@@ -112,6 +112,7 @@ lemma finite_and_natCard_le_of_irreducibleSpace
     (U.algClosurePoint_base (WU.hom z) _) WU ⟨z, rfl⟩
   have hinj := injective_toPresheafFiber_of_preconnectedSpace F y t
   obtain ⟨hfin, hcard⟩ := hB _ y
+  have : Finite ↑((pointSmallEtale y).presheafFiber.obj F.obj) := hfin
   have : Finite (ToType (F.obj.obj (op WU))) := Finite.of_injective _ hinj
   exact ⟨this, ((Nat.card_le_card_of_injective _ hinj).trans hcard).trans (le_max_left _ _)⟩
 
@@ -144,13 +145,15 @@ theorem finite_sheafFiber_lowerStar
       (v.left (IsLocalRing.closedPoint Ω))
     obtain ⟨v', hv'⟩ := exists_pointSmallEtale_fiber_ofOpens s v O (by
       rintro _ ⟨z, rfl⟩
-      rwa [Subsingleton.elim z (IsLocalRing.closedPoint Ω)])
+      have : Subsingleton (Spec (.of Ω)) := inferInstanceAs (Subsingleton (PrimeSpectrum Ω))
+      rwa [@Subsingleton.elim (Spec (.of Ω)) this z (IsLocalRing.closedPoint Ω)])
     exact ⟨Etale.ofOpens V O, v', Etale.ofOpensι V O, hv', hOirr⟩
   by_contra hinf
   rw [not_finite_iff_infinite] at hinf
   obtain ⟨T, hT⟩ := Infinite.exists_subset_card_eq (ToType (Φ.sheafFiber.obj J)) (max B 1 + 1)
   -- representatives of the elements of `T`
-  have hrep (p : Φ.sheafFiber.obj J) : ∃ (E : Φ.fiber.Elements) (σ : ToType (J.obj.obj (op E.1))),
+  have hrep (p : ToType (Φ.sheafFiber.obj J)) :
+      ∃ (E : Φ.fiber.Elements) (σ : ToType (J.obj.obj (op E.1))),
       Φ.toPresheafFiber E.1 E.2 J.obj σ = p := by
     obtain ⟨V, v, σ, hσ⟩ := Φ.toPresheafFiber_jointly_surjective p
     exact ⟨⟨V, v⟩, σ, hσ⟩
@@ -158,17 +161,18 @@ theorem finite_sheafFiber_lowerStar
   classical
   obtain ⟨E₀, hE₀⟩ := IsCofiltered.inf_objs_exists (T.image E)
   obtain ⟨W, w, k, hk, hW⟩ := key E₀
-  have hf (p : T) : Nonempty (E₀ ⟶ E p) := hE₀ (Finset.mem_image_of_mem E p.2)
-  choose f using hf
+  let f (p : T) : E₀ ⟶ E p := (hE₀ (Finset.mem_image_of_mem E p.2)).some
   -- the restrictions of the representatives to `W` determine the elements of `T`
   let r (p : T) : ToType (J.obj.obj (op W)) := J.obj.map (k ≫ (f p).1).op (σ p)
-  have hr (p : T) : Φ.toPresheafFiber W w J.obj (r p) = p := by
+  have hr (p : T) : Φ.toPresheafFiber W w J.obj (r p) = p.1 := by
     have := Φ.toPresheafFiber_w_apply (k ≫ (f p).1) w J.obj (σ p)
-    rw [Functor.map_comp, FunctorToTypes.map_comp_apply, hk, (f p).2] at this
+    rw [CategoryTheory.Functor.map_comp_apply, hk, (f p).2] at this
     exact this.trans (hσ p)
   have hrinj : Function.Injective r := fun p q h ↦ Subtype.ext ((hr p).symm.trans
     ((congrArg _ h).trans (hr q)))
   obtain ⟨hfin, hcard⟩ := finite_and_natCard_le_of_irreducibleSpace j F B hB W
+  have hcard' : Nat.card (ToType (J.obj.obj (op W))) ≤ max B 1 := hcard
+  have : Finite (ToType (J.obj.obj (op W))) := hfin
   have := Nat.card_le_card_of_injective r hrinj
   rw [Nat.card_eq_fintype_card, Fintype.card_coe, hT] at this
   omega
@@ -189,6 +193,8 @@ theorem exists_natCard_sheafFiber_le [CompactSpace X]
     ∃ B : ℕ, ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
       Finite (ToType ((pointSmallEtale s).sheafFiber.obj F)) ∧
         Nat.card (ToType ((pointSmallEtale s).sheafFiber.obj F)) ≤ B := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
   obtain ⟨⟨𝒰, hc⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
   have hN (i : 𝒰.I₀) : ∃ N : ModuleCat.{u + 1} Λ,
       Nonempty (((𝒰.f i))^*[ModuleCat.{u + 1} Λ].obj F ≅
@@ -211,7 +217,7 @@ theorem exists_natCard_sheafFiber_le [CompactSpace X]
       (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (F := F) Ω s)
     exact Module.finite_of_finite Λ
   refine ⟨hfin, ?_⟩
-  obtain ⟨i, hi, hsi⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ (s.base (IsLocalRing.closedPoint Ω))))
+  obtain ⟨i, hi, hsi⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ (s.base default)))
   have : Etale (𝒰.f i) := 𝒰.map_prop i
   obtain ⟨y, hy⟩ := hsi
   obtain ⟨l, hl, -⟩ := exists_fac_of_etale_of_isSepClosed (𝒰.f i) s y hy
@@ -221,7 +227,7 @@ theorem exists_natCard_sheafFiber_le [CompactSpace X]
     (pointSmallEtale l).sheafFiber.mapIso (e i).some ≪≫
     (pointSmallEtale l).sheafFiberConstantSheafIso (N i)
   rw [Nat.card_congr iso.toLinearEquiv.toEquiv]
-  exact Finset.single_le_sum (fun _ _ ↦ Nat.zero_le _) hi
+  exact Finset.single_le_sum (f := fun i ↦ Nat.card (ToType (N i))) (fun _ _ ↦ Nat.zero_le _) hi
 
 end Bound
 

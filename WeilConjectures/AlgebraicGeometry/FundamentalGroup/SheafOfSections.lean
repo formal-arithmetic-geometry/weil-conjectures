@@ -144,6 +144,14 @@ lemma presheafFiberUliftYonedaDesc_toPresheafFiber (X : Y.Etale) {Z : Y.Etale}
     ((pointSmallEtale s).toPresheafFiber_presheafFiberDesc (P := yonedaPresheaf X) _ _ Z z)
     (yonedaSection f)
 
+lemma exists_eq_toPresheafFiber_yonedaSection (X : Y.Etale)
+    (p : (pointSmallEtale s).presheafFiber.obj (yonedaPresheaf X)) :
+    ∃ (Z : Y.Etale) (z : (pointSmallEtale s).fiber.obj Z) (f : Z ⟶ X),
+      p = (pointSmallEtale s).toPresheafFiber Z z (yonedaPresheaf X) (yonedaSection f) := by
+  obtain ⟨Z, z, f, rfl⟩ := (pointSmallEtale s).toPresheafFiber_jointly_surjective
+    (P := yonedaPresheaf X) p
+  exact ⟨Z, z, (show ULift.{u + 1} (Z ⟶ X) from f).down, rfl⟩
+
 /-- The stalk at a geometric point `s` of the Yoneda presheaf `U ↦ Hom_Y(U, X)` of an étale
 `Y`-scheme `X` is the geometric fibre `X_s`: the germ of `f : U ⟶ X` at a point `u` of `U_s`
 is the point `f(u)` of `X_s`. -/
@@ -154,16 +162,13 @@ noncomputable def presheafFiberUliftYonedaEquiv (X : Y.Etale) :
   invFun x := (pointSmallEtale s).toPresheafFiber X x.down (yonedaPresheaf X)
     (yonedaSection (𝟙 X))
   left_inv p := by
-    obtain ⟨Z, z, f, rfl⟩ := (pointSmallEtale s).toPresheafFiber_jointly_surjective
-      (P := yonedaPresheaf X) p
+    obtain ⟨Z, z, f, rfl⟩ := exists_eq_toPresheafFiber_yonedaSection s X p
     change (pointSmallEtale s).toPresheafFiber X _ (yonedaPresheaf X)
       (yonedaSection (𝟙 X)) =
-        (pointSmallEtale s).toPresheafFiber Z z (yonedaPresheaf X) (yonedaSection f.down)
+        (pointSmallEtale s).toPresheafFiber Z z (yonedaPresheaf X) (yonedaSection f)
     rw [presheafFiberUliftYonedaDesc_toPresheafFiber,
       ← GrothendieckTopology.Point.toPresheafFiber_w_apply]
     congr 1
-    ext
-    simp
   right_inv x := by
     change presheafFiberUliftYonedaDesc s X _ = x
     rw [presheafFiberUliftYonedaDesc_toPresheafFiber]
@@ -182,15 +187,14 @@ lemma presheafFiberUliftYonedaEquiv_naturality {X X' : Y.Etale} (g : X ⟶ X')
     presheafFiberUliftYonedaEquiv s X'
       ((pointSmallEtale s).presheafFiber.map (uliftYoneda.{u + 1}.map g) p) =
       ULift.up ((pointSmallEtale s).fiber.map g (presheafFiberUliftYonedaEquiv s X p).down) := by
-  obtain ⟨Z, z, f, rfl⟩ := (pointSmallEtale s).toPresheafFiber_jointly_surjective
-    (P := yonedaPresheaf X) p
+  obtain ⟨Z, z, f, rfl⟩ := exists_eq_toPresheafFiber_yonedaSection s X p
   rw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply]
   change presheafFiberUliftYonedaEquiv s X' ((pointSmallEtale s).toPresheafFiber Z z
     (yonedaPresheaf X')
-    (yonedaSection (f.down ≫ g))) = ULift.up ((pointSmallEtale s).fiber.map g
+    (yonedaSection (f ≫ g))) = ULift.up ((pointSmallEtale s).fiber.map g
       (presheafFiberUliftYonedaEquiv s X ((pointSmallEtale s).toPresheafFiber Z z
         (yonedaPresheaf X)
-        (yonedaSection f.down))).down)
+        (yonedaSection f))).down)
   simp
 
 /-- The stalk of the sheaf of sections of a finite étale `Y`-scheme `P` at a geometric point `s`
@@ -210,5 +214,195 @@ lemma sheafFiberToSheafEquiv_naturality {P Q : Y.FiniteEtale} (f : P ⟶ Q)
 end Fiber
 
 end FiniteEtale
+namespace FiniteLocallyConstant
+
+open FiniteEtale
+
+section Action
+
+variable {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+
+/-- The stalk `F_s` of a finite locally constant sheaf of sets at a geometric point `s`. -/
+noncomputable abbrev stalk (F : Y.FiniteLocallyConstant) : Type (u + 1) :=
+  (pointSmallEtale s).sheafFiber.obj F.obj
+
+/-- The map on stalks induced by a morphism of finite locally constant sheaves of sets. -/
+noncomputable abbrev stalkMap {F F' : Y.FiniteLocallyConstant} (f : F ⟶ F') : stalk s F → stalk s F' :=
+  (pointSmallEtale s).sheafFiber.map f.hom
+
+lemma stalkMap_comp {F F' F'' : Y.FiniteLocallyConstant} (f : F ⟶ F') (f' : F' ⟶ F'')
+    (x : stalk s F) : stalkMap s (f ≫ f') x = stalkMap s f' (stalkMap s f x) := by
+  simp [stalkMap]
+
+lemma stalkMap_id (F : Y.FiniteLocallyConstant) (x : stalk s F) : stalkMap s (𝟙 F) x = x := by
+  simp [stalkMap]
+
+/-- An identification `F ≅ Hom_Y(-, P)` of a finite locally constant sheaf of sets with the sheaf
+of sections of a finite étale `Y`-scheme `P` identifies the stalk `F_s` with the geometric fibre
+`P_s`. -/
+noncomputable def isoStalkEquiv {F : Y.FiniteLocallyConstant} {P : Y.FiniteEtale}
+    (i : F ≅ (toFiniteLocallyConstant Y).obj P) : stalk s F ≃ ULift.{u + 1} ((FiniteEtale.fiber s).obj P) :=
+  ((pointSmallEtale s).sheafFiber.mapIso ((ObjectProperty.ι _).mapIso i)).toEquiv.trans
+    (sheafFiberToSheafEquiv s P)
+
+lemma isoStalkEquiv_stalkMap {F F' : Y.FiniteLocallyConstant} {P P' : Y.FiniteEtale}
+    (i : F ≅ (toFiniteLocallyConstant Y).obj P) (i' : F' ≅ (toFiniteLocallyConstant Y).obj P')
+    (f : F ⟶ F') (φ : P ⟶ P') (h : f ≫ i'.hom = i.hom ≫ (toFiniteLocallyConstant Y).map φ)
+    (x : stalk s F) :
+    isoStalkEquiv s i' (stalkMap s f x) =
+      ULift.up ((FiniteEtale.fiber s).map φ (isoStalkEquiv s i x).down) := by
+  have h' := congrArg (fun k ↦ stalkMap s k x) h
+  simp only [stalkMap_comp] at h'
+  change sheafFiberToSheafEquiv s P' (stalkMap s i'.hom (stalkMap s f x)) = _
+  rw [h']
+  exact sheafFiberToSheafEquiv_naturality s φ _
+
+variable (Y) in
+/-- The finite étale `Y`-scheme representing a finite locally constant sheaf of sets. -/
+noncomputable abbrev rep (F : Y.FiniteLocallyConstant) : Y.FiniteEtale :=
+  (equivalenceFiniteLocallyConstant Y).inverse.obj F
+
+/-- The chosen identification of a finite locally constant sheaf of sets with the sheaf of
+sections of its representing finite étale `Y`-scheme. -/
+noncomputable abbrev repIso (F : Y.FiniteLocallyConstant) :
+    F ≅ (toFiniteLocallyConstant Y).obj (rep Y F) :=
+  ((equivalenceFiniteLocallyConstant Y).counitIso.app F).symm
+
+/-- The stalk `F_s` of a finite locally constant sheaf of sets is the geometric fibre of its
+representing finite étale `Y`-scheme. -/
+noncomputable abbrev stalkEquiv (F : Y.FiniteLocallyConstant) :
+    stalk s F ≃ ULift.{u + 1} ((FiniteEtale.fiber s).obj (rep Y F)) :=
+  isoStalkEquiv s (repIso F)
+
+lemma exists_toFiniteLocallyConstant_map_eq {P P' : Y.FiniteEtale}
+    (f : (toFiniteLocallyConstant Y).obj P ⟶ (toFiniteLocallyConstant Y).obj P') :
+    ∃ φ : P ⟶ P', (toFiniteLocallyConstant Y).map φ = f :=
+  (toFiniteLocallyConstant Y).map_surjective f
+
+variable [ConnectedSpace Y] (G : Type u) [Group G] [∀ P, MulAction G ((FiniteEtale.fiber s).obj P)]
+  [IsNaturalSMul (FiniteEtale.fiber s) G]
+
+/-- Blueprint `thm-galois-fundamental`: the action of a fundamental group `G = π₁(Y, s)` on the
+stalk `F_s` of a finite locally constant sheaf of sets `F`, transported from its action on the
+geometric fibre of the finite étale `Y`-scheme representing `F`. -/
+noncomputable def smul {F : Y.FiniteLocallyConstant} (g : G) (x : stalk s F) : stalk s F :=
+  (stalkEquiv s F).symm (ULift.up (g • (stalkEquiv s F x).down))
+
+lemma isoStalkEquiv_smul {F : Y.FiniteLocallyConstant} {P : Y.FiniteEtale}
+    (i : F ≅ (toFiniteLocallyConstant Y).obj P) (g : G) (x : stalk s F) :
+    isoStalkEquiv s i (smul s G g x) = ULift.up (g • (isoStalkEquiv s i x).down) := by
+  obtain ⟨φ, hφ⟩ := exists_toFiniteLocallyConstant_map_eq ((repIso F).inv ≫ i.hom)
+  have h : 𝟙 F ≫ i.hom = (repIso F).hom ≫ (toFiniteLocallyConstant Y).map φ := by
+    rw [hφ, Iso.hom_inv_id_assoc, Category.id_comp]
+  have key (y : stalk s F) :
+      isoStalkEquiv s i y = ULift.up ((FiniteEtale.fiber s).map φ (stalkEquiv s F y).down) := by
+    simpa [stalkMap_id] using isoStalkEquiv_stalkMap s (repIso F) i (𝟙 F) φ h y
+  rw [key, key]
+  unfold smul
+  rw [Equiv.apply_symm_apply, IsNaturalSMul.naturality]
+
+lemma stalkMap_smul {F F' : Y.FiniteLocallyConstant} (f : F ⟶ F') (g : G) (x : stalk s F) :
+    stalkMap s f (smul s G g x) = smul s G g (stalkMap s f x) := by
+  obtain ⟨φ, hφ⟩ := exists_toFiniteLocallyConstant_map_eq ((repIso F).inv ≫ f ≫ (repIso F').hom)
+  have h : f ≫ (repIso F').hom = (repIso F).hom ≫ (toFiniteLocallyConstant Y).map φ := by
+    rw [hφ, Iso.hom_inv_id_assoc]
+  apply (stalkEquiv s F').injective
+  rw [isoStalkEquiv_smul, isoStalkEquiv_stalkMap s _ _ f φ h,
+    isoStalkEquiv_stalkMap s _ _ f φ h, isoStalkEquiv_smul, IsNaturalSMul.naturality]
+
+lemma one_smul {F : Y.FiniteLocallyConstant} (x : stalk s F) : smul s G 1 x = x := by
+  unfold smul
+  rw [_root_.one_smul]
+  exact (stalkEquiv s F).symm_apply_apply x
+
+lemma mul_smul {F : Y.FiniteLocallyConstant} (g h : G) (x : stalk s F) :
+    smul s G (g * h) x = smul s G g (smul s G h x) := by
+  unfold smul
+  rw [Equiv.apply_symm_apply, SemigroupAction.mul_smul]
+
+lemma smul_toFiniteLocallyConstant (P : Y.FiniteEtale) (g : G)
+    (x : stalk s ((toFiniteLocallyConstant Y).obj P)) :
+    sheafFiberToSheafEquiv s P (smul s G g x) =
+      ULift.up (g • (sheafFiberToSheafEquiv s P x).down) := by
+  have := isoStalkEquiv_smul s G (Iso.refl _) g x
+  simpa [isoStalkEquiv] using this
+
+/-- The stalk functor is faithful on finite locally constant sheaves of sets. -/
+lemma stalkMap_injective {F F' : Y.FiniteLocallyConstant} {f f' : F ⟶ F'}
+    (h : ∀ x, stalkMap s f x = stalkMap s f' x) : f = f' := by
+  obtain ⟨φ, hφ⟩ := exists_toFiniteLocallyConstant_map_eq ((repIso F).inv ≫ f ≫ (repIso F').hom)
+  obtain ⟨φ', hφ'⟩ :=
+    exists_toFiniteLocallyConstant_map_eq ((repIso F).inv ≫ f' ≫ (repIso F').hom)
+  have e : φ = φ' := by
+    refine (FiniteEtale.fiber s).map_injective (FintypeCat.hom_ext _ _ fun y ↦ ?_)
+    obtain ⟨x, hx⟩ := (stalkEquiv s F).surjective (ULift.up y)
+    have h₁ := isoStalkEquiv_stalkMap s _ _ f φ (by rw [hφ, Iso.hom_inv_id_assoc]) x
+    have h₂ := isoStalkEquiv_stalkMap s _ _ f' φ' (by rw [hφ', Iso.hom_inv_id_assoc]) x
+    rw [h x, h₂, hx] at h₁
+    exact (congrArg ULift.down h₁).symm
+  rw [← cancel_epi (repIso F).inv, ← cancel_mono (repIso F').hom, Category.assoc,
+    Category.assoc, ← hφ, ← hφ', e]
+
+section Fundamental
+
+variable [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
+  [IsFundamentalGroup (FiniteEtale.fiber s) G]
+
+open scoped FintypeCatDiscrete in
+/-- Blueprint `lem-galois-action-continuous`: the action of `π₁(Y, s)` on the stalk of a finite
+locally constant sheaf of sets is continuous, i.e. every stabilizer is open. -/
+lemma isOpen_setOf_smul_eq {F : Y.FiniteLocallyConstant} (x : stalk s F) :
+    IsOpen {g : G | smul s G g x = x} := by
+  have : {g : G | smul s G g x = x} =
+      (MulAction.stabilizer G (stalkEquiv s F x).down : Set G) := by
+    ext g
+    simp only [Set.mem_setOf_eq, SetLike.mem_coe, MulAction.mem_stabilizer_iff]
+    constructor
+    · intro h
+      have := congrArg (fun y ↦ (stalkEquiv s F y).down) h
+      simpa only [smul, Equiv.apply_symm_apply] using this
+    · intro h
+      unfold smul
+      rw [h]
+      exact (stalkEquiv s F).symm_apply_apply x
+  rw [this]
+  exact stabilizer_isOpen G _
+
+/-- The stalk functor is full onto `π₁(Y, s)`-equivariant maps: every equivariant map between
+the stalks of two finite locally constant sheaves of sets is induced by a morphism of sheaves. -/
+lemma exists_stalkMap_eq {F F' : Y.FiniteLocallyConstant} (t : stalk s F → stalk s F')
+    (ht : ∀ g x, t (smul s G g x) = smul s G g (t x)) :
+    ∃ f : F ⟶ F', ∀ x, stalkMap s f x = t x := by
+  let t' : (FiniteEtale.fiber s).obj (rep Y F) → (FiniteEtale.fiber s).obj (rep Y F') :=
+    fun y ↦ (stalkEquiv s F' (t ((stalkEquiv s F).symm (ULift.up y)))).down
+  have ht' (g : G) (y) : t' (g • y) = g • t' y := by
+    have := ht g ((stalkEquiv s F).symm (ULift.up y))
+    simp only [t']
+    unfold smul at this
+    rw [Equiv.apply_symm_apply] at this
+    rw [this, Equiv.apply_symm_apply]
+  let E := equivalenceContAction s G
+  let a : E.functor.obj (rep Y F) ⟶ E.functor.obj (rep Y F') :=
+    ObjectProperty.homMk ⟨FintypeCat.homMk t', fun g ↦ by
+      ext y
+      change t' (g • y) = g • t' y
+      exact ht' g y⟩
+  let φ := E.functor.preimage a
+  have hφ (y) : (FiniteEtale.fiber s).map φ y = t' y := by
+    change (E.functor.map φ).hom.hom y = _
+    rw [E.functor.map_preimage a]
+    rfl
+  refine ⟨(repIso F).hom ≫ (toFiniteLocallyConstant Y).map φ ≫ (repIso F').inv, fun x ↦ ?_⟩
+  apply (stalkEquiv s F').injective
+  rw [isoStalkEquiv_stalkMap s (repIso F) (repIso F') _ φ
+    (by rw [Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id]), hφ]
+  change stalkEquiv s F' (t ((stalkEquiv s F).symm (stalkEquiv s F x))) = _
+  rw [Equiv.symm_apply_apply]
+
+end Fundamental
+
+end Action
+
+end FiniteLocallyConstant
 
 end AlgebraicGeometry.Scheme

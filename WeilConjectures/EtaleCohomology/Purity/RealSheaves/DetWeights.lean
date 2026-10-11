@@ -33,6 +33,7 @@ composition series (Jordan–Hölder).
 - `AlgebraicGeometry.WeilGroup.rankDetWeightMultiset`: the rank-counted list.
 - `AlgebraicGeometry.WeilGroup.rankAbove`, `AlgebraicGeometry.WeilGroup.weightSumAbove`:
   `N_γ` and `B_γ`.
+- `AlgebraicGeometry.WeilGroup.weightBlock`: the weight block `𝒮(γ)`.
 
 ## Main statements
 
@@ -42,6 +43,11 @@ composition series (Jordan–Hölder).
   `rank ρ * dw_ι(ρ)`.
 - `AlgebraicGeometry.WeilGroup.hasFiniteGeometricDet_and_detWeight_eq`: `dw_ι` agrees with the
   determinant weight `dw_{λ_ι}` of `sk-d-weights` for the real weight character `λ_ι`.
+- `AlgebraicGeometry.WeilGroup.detWeightMultiset_eq`,
+  `AlgebraicGeometry.WeilGroup.rankDetWeightMultiset_eq`: independence of the composition series.
+- `AlgebraicGeometry.WeilGroup.rankAbove_eq_sum`,
+  `AlgebraicGeometry.WeilGroup.weightSumAbove_eq_sum`,
+  `AlgebraicGeometry.WeilGroup.weightBlock_eq_iSup`: the description for a semisimple sheaf.
 -/
 
 @[expose] public section

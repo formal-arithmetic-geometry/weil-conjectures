@@ -10,7 +10,7 @@ public import WeilConjectures.ConstructibleSheaf.LowerStarOpenStalk
 /-!
 # Sheaves with finite stalks on a one-point scheme are finite locally constant
 
-Let `Y` be a scheme with a single point, for instance the spectrum of a field, and `H` a sheaf of
+modules on the small étale site of `Y` whose geometric stalks are finite.
 modules over a finite ring on the small étale site of `Y` whose geometric stalks are finite.
 Then `H` is finite locally constant. For `Y = Spec k` this is the statement that a discrete
 Galois module with finite underlying set is trivialised by a finite separable extension of `k`.
@@ -28,8 +28,8 @@ locally surjective. As `V ⟶ Y` is surjective, `H` is locally constant.
 
 - `AlgebraicGeometry.Etale.injective_toPresheafFiber_of_subsingleton`: sections over a one-point
   étale scheme inject into stalks.
-- `AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_of_subsingleton`: a sheaf of modules over
-  a finite ring with finite stalks on a one-point scheme is finite locally constant.
+- `AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_of_subsingleton`: a sheaf of modules with
+  finite stalks on a one-point scheme is finite locally constant.
 -/
 
 @[expose] public section
@@ -76,11 +76,12 @@ variable {Y : Scheme.{u}} [Subsingleton Y] (H : Sheaf Y.smallEtaleTopology (Modu
 /-- An étale scheme over a scheme with at most one point is discrete. -/
 lemma discreteTopology_of_etale_of_subsingleton (V : Y.Etale) : DiscreteTopology V.left := by
   rcases isEmpty_or_nonempty Y with hY | ⟨⟨y⟩⟩
-  · have : IsEmpty V.left := ⟨fun v ↦ isEmptyElim (V.hom v)⟩
+  · have : IsEmpty V.left := ⟨fun v ↦ IsEmpty.false (α := Y) (V.hom v)⟩
     infer_instance
   · have : Unique Y := uniqueOfSubsingleton y
     exact discreteTopology_of_etale_of_unique V
 
+omit [Subsingleton Y] in
 /-- Restriction from a one-point neighbourhood to one-point étale schemes over it is surjective.
 Let `V` be an étale `Y`-scheme with at most one point and `v` a geometric point of `V` at which
 every germ of `H` is the germ of a section over `V`. Then for every étale `g : W ⟶ V` with `W`
@@ -89,7 +90,7 @@ having at most one point, every section of `H` over `W` is the restriction of a 
 lemma exists_map_eq_of_subsingleton {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     {s : Spec (.of Ω) ⟶ Y} {V : Y.Etale} [Subsingleton V.left]
     (v : (pointSmallEtale s).fiber.obj V)
-    (hv : ∀ p : (pointSmallEtale s).sheafFiber.obj H,
+    (hv : ∀ p : ToType ((pointSmallEtale s).sheafFiber.obj H),
       ∃ m : ToType (H.obj.obj (op V)), (pointSmallEtale s).toPresheafFiber V v H.obj m = p)
     {W : Y.Etale} [Subsingleton W.left] (g : W ⟶ V) (τ : ToType (H.obj.obj (op W))) :
     ∃ m : ToType (H.obj.obj (op V)), H.obj.map g.op m = τ := by
@@ -100,7 +101,8 @@ lemma exists_map_eq_of_subsingleton {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (Subsingleton.elim _ _)
   let w : (pointSmallEtale s).fiber.obj W := CategoryTheory.Over.homMk l (by
     change l ≫ W.hom = s
-    rw [← CategoryTheory.Over.w g, ← Category.assoc, hl]
+    have hg : g.left ≫ V.hom = W.hom := CategoryTheory.Over.w ((Etale.forget Y).map g)
+    rw [← hg, ← Category.assoc, hl]
     exact CategoryTheory.Over.w v)
   have hw : (pointSmallEtale s).fiber.map g w = v := CategoryTheory.Over.OverMorphism.ext hl
   obtain ⟨m, hm⟩ := hv ((pointSmallEtale s).toPresheafFiber W w H.obj τ)
@@ -112,27 +114,29 @@ realised by sections, when the stalk is finite. -/
 lemma exists_subsingleton_surjective_toPresheafFiber {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ Y) [Finite (ToType ((pointSmallEtale s).sheafFiber.obj H))] :
     ∃ (V : Y.Etale) (_ : Subsingleton V.left) (v : (pointSmallEtale s).fiber.obj V),
-      ∀ p : (pointSmallEtale s).sheafFiber.obj H,
+      ∀ p : ToType ((pointSmallEtale s).sheafFiber.obj H),
         ∃ m : ToType (H.obj.obj (op V)), (pointSmallEtale s).toPresheafFiber V v H.obj m = p := by
   have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
     preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
   let Φ := pointSmallEtale s
-  have hrep (p : Φ.sheafFiber.obj H) : ∃ (E : Φ.fiber.Elements)
+  have hrep (p : ToType (Φ.sheafFiber.obj H)) : ∃ (E : Φ.fiber.Elements)
       (σ : ToType (H.obj.obj (op E.1))), Φ.toPresheafFiber E.1 E.2 H.obj σ = p := by
     obtain ⟨V, v, σ, hσ⟩ := Φ.toPresheafFiber_jointly_surjective p
     exact ⟨⟨V, v⟩, σ, hσ⟩
   choose E σ hσ using hrep
   classical
   have := Fintype.ofFinite (ToType (Φ.sheafFiber.obj H))
-  obtain ⟨⟨V₀, v₀⟩, hE₀⟩ := IsCofiltered.inf_objs_exists (Finset.univ.image E)
-  have hf (p : Φ.sheafFiber.obj H) : Nonempty (⟨V₀, v₀⟩ ⟶ E p) :=
-    hE₀ (Finset.mem_image_of_mem E (Finset.mem_univ p))
-  choose f using hf
+  obtain ⟨E₀, hE₀⟩ := IsCofiltered.inf_objs_exists (Finset.univ.image E)
+  set V₀ := E₀.1
+  set v₀ : Φ.fiber.obj V₀ := E₀.2
+  let f (p : ToType (Φ.sheafFiber.obj H)) : E₀ ⟶ E p :=
+    (hE₀ (Finset.mem_image_of_mem E (Finset.mem_univ p))).some
   have := discreteTopology_of_etale_of_subsingleton V₀
   let O : V₀.left.Opens := ⟨{v₀.left (IsLocalRing.closedPoint Ω)}, isOpen_discrete _⟩
   obtain ⟨v, hv⟩ := exists_pointSmallEtale_fiber_ofOpens s v₀ O (by
     rintro _ ⟨z, rfl⟩
-    rw [Subsingleton.elim z (IsLocalRing.closedPoint Ω)]
+    have : Subsingleton (Spec (.of Ω)) := inferInstanceAs (Subsingleton (PrimeSpectrum Ω))
+    rw [@Subsingleton.elim (Spec (.of Ω)) this z (IsLocalRing.closedPoint Ω)]
     rfl)
   have : Subsingleton (Etale.ofOpens V₀ O).left := by
     change Subsingleton O
@@ -140,14 +144,12 @@ lemma exists_subsingleton_surjective_toPresheafFiber {Ω : Type u} [Field Ω] [I
   refine ⟨Etale.ofOpens V₀ O, this, v, fun p ↦
     ⟨H.obj.map (Etale.ofOpensι V₀ O ≫ (f p).1).op (σ p), ?_⟩⟩
   have := Φ.toPresheafFiber_w_apply (Etale.ofOpensι V₀ O ≫ (f p).1) v H.obj (σ p)
-  rw [Functor.map_comp, FunctorToTypes.map_comp_apply, hv, (f p).2] at this
+  rw [CategoryTheory.Functor.map_comp_apply, hv, (f p).2] at this
   exact this.trans (hσ p)
-
-variable [Finite Λ]
 
 /-- **Sheaves with finite stalks on a one-point scheme are finite locally constant.** Let `Y` be
 a scheme with at most one point, for instance the spectrum of a field, and `H` a sheaf of modules
-over a finite ring on the small étale site of `Y` whose geometric stalks are finite. Then `H` is
+on the small étale site of `Y` whose geometric stalks are finite. Then `H` is
 finite locally constant: it is constant on a one-point étale neighbourhood of a geometric point
 over which all germs are realised by sections. -/
 theorem isFiniteLocallyConstantSheaf_of_subsingleton
@@ -179,9 +181,9 @@ theorem isFiniteLocallyConstantSheaf_of_subsingleton
     { app T' := K.obj.map (hT.from T'.unop).op
       naturality T₁ T₂ g := by
         change 𝟙 _ ≫ K.obj.map (hT.from T₂.unop).op = K.obj.map (hT.from T₁.unop).op ≫ _
-        rw [Category.id_comp, ← Functor.map_comp, ← op_comp]
-        congr 2
-        exact hT.hom_ext _ _ }
+        rw [Category.id_comp, ← Functor.map_comp]
+        congr 1
+        exact Quiver.Hom.unop_inj (hT.hom_ext _ _) }
   -- the restriction of `V` to itself as an étale `Y`-scheme maps back to `V`
   let V' : Y.Etale := (MorphismProperty.Over.map ⊤ V.prop).obj T
   let g' : V' ⟶ V := MorphismProperty.Over.homMk (𝟙 S) (by simp [V', T])
@@ -193,14 +195,14 @@ theorem isFiniteLocallyConstantSheaf_of_subsingleton
     have : Subsingleton W.left := inferInstanceAs (Subsingleton T'.left)
     let g : W ⟶ V := MorphismProperty.Over.homMk T'.hom rfl
     obtain ⟨m, hm⟩ := exists_map_eq_of_subsingleton H v hv g τ
+    have hcomp : ((MorphismProperty.Over.map ⊤ V.prop).map (hT.from T') ≫ g' : W ⟶ V) = g :=
+      MorphismProperty.Over.Hom.ext
+        (CategoryTheory.Over.w ((Scheme.Etale.forget S).map (hT.from T')))
     refine ⟨H.obj.map g'.op m, ?_⟩
     change H.obj.map ((MorphismProperty.Over.map ⊤ V.prop).map (hT.from T')).op
       (H.obj.map g'.op m) = τ
-    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp]
-    convert hm using 3
-    ext1
-    change T'.hom ≫ 𝟙 S = T'.hom
-    exact Category.comp_id _
+    rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, hcomp]
+    exact hm
   -- `K(T) ⟶ K(T')` is injective for nonempty `T'`
   have hinj (T' : S.Etale) [Nonempty T'.left] (n n' : N) (h : c.app (op T') n = c.app (op T') n') :
       n = n' := by
@@ -213,22 +215,21 @@ theorem isFiniteLocallyConstantSheaf_of_subsingleton
     rw [mem_smallEtaleTopology_iff]
     intro x
     obtain ⟨t⟩ := ‹Nonempty T'.left›
-    exact ⟨T', hT.from T', h, t, Subsingleton.elim _ _⟩
+    exact ⟨T', hT.from T', h, t, @Subsingleton.elim S ‹_› _ _⟩
   have hW : (Scheme.smallEtaleTopology S).W c := by
     rw [GrothendieckTopology.W_iff_isLocallyBijective]
-    have := discreteTopology_of_etale_of_subsingleton (Y := Y)
-    refine ⟨⟨fun {T'} n n' h ↦ ?_⟩, ⟨fun {T'} τ ↦ ?_⟩⟩
+    have hdisc := discreteTopology_of_etale_of_subsingleton (Y := Y)
+    refine ⟨⟨fun {T₀} n n' h ↦ ?_⟩, ⟨fun {T'} τ ↦ ?_⟩⟩
     · rw [mem_smallEtaleTopology_iff]
       intro t
-      have : Nonempty T'.left := ⟨t⟩
-      refine ⟨T', 𝟙 _, ?_, t, ⟨t, rfl⟩⟩
-      change (Functor.const S.Etaleᵒᵖ).obj N |>.map (𝟙 T').op n =
-        (Functor.const S.Etaleᵒᵖ).obj N |>.map (𝟙 T').op n'
-      exact congrArg _ (hinj T' n n' h)
+      have : Nonempty T₀.unop.left := ⟨t⟩
+      refine ⟨T₀.unop, 𝟙 _, ?_, ⟨t, rfl⟩⟩
+      obtain rfl := hinj T₀.unop n n' h
+      rfl
     · rw [mem_smallEtaleTopology_iff]
       intro t
       have : DiscreteTopology T'.left :=
-        this ((MorphismProperty.Over.map ⊤ V.prop).obj T')
+        hdisc ((MorphismProperty.Over.map ⊤ V.prop).obj T')
       let O : T'.left.Opens := ⟨{t}, isOpen_discrete _⟩
       have : Subsingleton (Etale.ofOpens T' O).left := by
         change Subsingleton O
@@ -236,7 +237,7 @@ theorem isFiniteLocallyConstantSheaf_of_subsingleton
       obtain ⟨n, hn⟩ := hsurj (Etale.ofOpens T' O) (K.obj.map (Etale.ofOpensι T' O).op τ)
       refine ⟨Etale.ofOpens T' O, Etale.ofOpensι T' O, ⟨n, hn⟩, ⟨⟨t, rfl⟩, rfl⟩⟩
   have : IsIso ((presheafToSheaf (Scheme.smallEtaleTopology S) (ModuleCat.{u + 1} Λ)).map c) :=
-    (GrothendieckTopology.W_iff c).1 hW
+    ((Scheme.smallEtaleTopology S).W_iff c).1 hW
   have hK : K.IsConstant S.smallEtaleTopology :=
     Sheaf.isConstant_of_iso _ ((sheafificationIso K) ≪≫
       (asIso ((presheafToSheaf (Scheme.smallEtaleTopology S) (ModuleCat.{u + 1} Λ)).map c)).symm)
