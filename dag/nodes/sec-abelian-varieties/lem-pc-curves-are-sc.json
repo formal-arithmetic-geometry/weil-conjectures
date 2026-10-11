@@ -178,5 +178,23 @@
   "summary": "Checked the blueprint proof hypothesis by hypothesis against def-pc-smooth-projective-curve, def-pc-curve and def-sc-curves. The statement now cites def-pc-smooth-projective-curve (it was missing from stmt_deps) and the definition nodes of the notions it lists; def-pc-dimension was removed from stmt_deps (the statement does not use it; the proof does). The dimension in def-sc-curves is read as the Krull dimension of the underlying space (Stacks 04MT, and slopmaster2's IsCurve uses topologicalKrullDim), so the statement says so. The single blueprint step was split into five: unfolding (step 1), integral gives nonempty and irreducible (01ON, new Mathlib leaf lem-pc-integral-scheme-irreducible), irreducible gives connected (after 004V, new Mathlib leaf lem-pc-irreducible-space-connected), dimension of local rings equals topological dimension (04MU, new unsplit node lem-pc-scheme-dimension-local-rings), assembly. Projectivity is not used. No slopmaster2 or Mathlib declaration states the item.",
   "blueprint": "lem-pc-curves-are-sc's proof: step 1 realizes 'By [def-pc-smooth-projective-curve] X is a curve over k, hence a variety: integral, with X -> Spec(k) separated and of finite type ([def-pc-curve])'; steps 2-3 realize 'in particular X is nonempty, connected (being irreducible)'; step 4 realizes 'separated, of finite type and, being a curve, of dimension 1'; step 5 realizes 'Its structure morphism is smooth by hypothesis, and [def-sc-curves] requires exactly: ... This proves the claim.'"
  },
- "reviewed": "2026-10-10 L: 5 steps checked (unfolding the two curve definitions; integral gives nonempty and irreducible; irreducible gives connected; local-ring dimension equals the Krull dimension of the space, 04MU; assembly against def-sc-curves). Statement now cites def-pc-smooth-projective-curve and the definition nodes. New Mathlib leaves lem-pc-integral-scheme-irreducible (irreducibleSpace_of_isIntegral, Properties.lean 264) and lem-pc-irreducible-space-connected (IrreducibleSpace.connectedSpace, Connected/Basic.lean 796) verified; lem-pc-scheme-dimension-local-rings (04MU) unsplit. Worker flags: def-sc-curves cites no definition of dimension or smooth; def-pc-curve does not cite def-pc-integral-scheme; check at their splits."
+ "reviewed": "2026-10-10 L: 5 steps checked (unfolding the two curve definitions; integral gives nonempty and irreducible; irreducible gives connected; local-ring dimension equals the Krull dimension of the space, 04MU; assembly against def-sc-curves). Statement now cites def-pc-smooth-projective-curve and the definition nodes. New Mathlib leaves lem-pc-integral-scheme-irreducible (irreducibleSpace_of_isIntegral, Properties.lean 264) and lem-pc-irreducible-space-connected (IrreducibleSpace.connectedSpace, Connected/Basic.lean 796) verified; lem-pc-scheme-dimension-local-rings (04MU) unsplit. Worker flags: def-sc-curves cites no definition of dimension or smooth; def-pc-curve does not cite def-pc-integral-scheme; check at their splits.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProjectiveCurveConnected",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isConnectedCurve_of_isSmoothProjectiveCurve",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProjectiveCurveConnected.lean",
+  "statement": "theorem Scheme.Hom.isConnectedCurve_of_isSmoothProjectiveCurve {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [f.IsSmoothProjectiveCurve] : IsConnectedCurve f ∧ Smooth f",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cas1129",
+  "group": "F1",
+  "result": "pass",
+  "note": "k alg closed = [Field k][IsAlgClosed k]; smooth projective curve = [f.IsSmoothProjectiveCurve] (H1 class, f explicit as IsConnectedCurve requires); nonempty+connected, separated, finite type, topologicalKrullDim=1 = IsConnectedCurve f (WeilConjectures, def-sc-curves, #check resolves to the one class); smooth = Smooth f; no hollow hyp, shared universe u forced by Spec (.of k)"
+ }
 }

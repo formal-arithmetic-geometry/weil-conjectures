@@ -4451,3 +4451,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:27 L: merged deliver/K1/lem-sc-locnoeth-components-locally-finite (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.LocallyNoetherianComponentsLocallyFinite AlgebraicGeometry.exists_open_finite_irreducibleComponents)
 - 11:27 L: merged deliver/G1/lem-sc-hilbert-nowhere-dense-dimension-drop (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop AlgebraicGeometry.Scheme.topologicalKrullDim_lt_of_isNowhereDense)
 - 11:29 L: merged deliver/J1/lem-sc-quasi-finite-points-open (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen AlgebraicGeometry.Scheme.Hom.isOpen_quasiFiniteAtPoint)
+- 11:30 L: merged deliver/F1/lem-pc-curves-are-sc (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SmoothProjectiveCurveConnected AlgebraicGeometry.Scheme.Hom.isConnectedCurve_of_isSmoothProjectiveCurve)
