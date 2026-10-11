@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.TensorQuotPow
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.ConstructibleSheaf.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
 
@@ -53,7 +53,8 @@ this is a consequence of the tower condition).
 
 Constructibility of the reductions is that of sheaves of `𝒪_E`-modules, whose stalks are
 finitely generated `𝒪_E`-modules killed by a power of `𝔪_E`, hence finite. Extensions of such
-sheaves are constructible (`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_shortExact'`).
+sheaves are constructible
+(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_shortExact_of_isNoetherianRing`).
 -/
 
 @[expose] public section
@@ -66,68 +67,17 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
 
-namespace Scheme
-
-variable {X : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
-
-/-- **The middle term of a short exact sequence of finite locally constant sheaves of modules
-over a noetherian ring is finite locally constant.** On an étale cover trivialising the outer
-terms, the extension is classified by a class which dies on a further étale cover. This is
-the extension clause of blueprint `lemma-constructible-flc-serre` without its finiteness
-hypothesis on the ring. -/
-theorem IsFiniteLocallyConstantSheaf.of_shortExact' [IsNoetherianRing Λ]
-    {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
-    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]
-    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :
-    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₂ :=
-  sorry
-
-/-- **The middle term of a short exact sequence of sheaves of modules over a noetherian ring
-whose outer terms are constructible is constructible**: on the common refinement of
-witnessing stratifications, the pullback of the sequence to a stratum is a short exact sequence
-of finite locally constant sheaves. -/
-theorem IsConstructibleSheaf.of_shortExact' [IsNoetherianRing Λ]
-    {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
-    [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]
-    [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :
-    IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₂ := by
-  obtain ⟨T₁, hT₁⟩ := IsConstructibleSheaf.exists_stratification
-    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
-    (F := S.X₁)
-  obtain ⟨T₃, hT₃⟩ := IsConstructibleSheaf.exists_stratification
-    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
-    (F := S.X₃)
-  refine ⟨T₁.inter T₃, fun k ↦ ?_⟩
-  have h₁ := (T₁.inter_refines_left T₃).isFiniteLocallyConstantSheaf_upperStar S.X₁ hT₁ k
-  have h₃ := (T₁.inter_refines_right T₃).isFiniteLocallyConstantSheaf_upperStar S.X₃ hT₃ k
-  let F := Etale.upperStar (ModuleCat.{u + 1} Λ) ((T₁.inter T₃).immersion k)
-  have : PreservesFiniteLimits F := inferInstance
-  have : PreservesFiniteColimits F := inferInstance
-  have hS' : (S.map F).ShortExact := hS.map_of_exact F
-  have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (S.map F).X₁ := h₁
-  have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (S.map F).X₃ := h₃
-  exact IsFiniteLocallyConstantSheaf.of_shortExact' hS'
-
-end Scheme
-
 variable {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
 
 /-- Constructible sheaves of modules over a noetherian ring are closed under extensions
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_shortExact'`). -/
+(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_shortExact_of_isNoetherianRing`). -/
 instance Etale.isClosedUnderExtensions_constructibleSheaf (X : Scheme.{u}) :
     (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderExtensions where
   prop_X₂_of_shortExact {S} hS h₁ h₃ := by
     have := (Etale.constructibleSheaf_iff _ _ _).mp h₁
     have := (Etale.constructibleSheaf_iff _ _ _).mp h₃
-    exact (Etale.constructibleSheaf_iff _ _ _).mpr (Scheme.IsConstructibleSheaf.of_shortExact' hS)
+    exact (Etale.constructibleSheaf_iff _ _ _).mpr
+      (Scheme.IsConstructibleSheaf.of_shortExact_of_isNoetherianRing hS)
 
 namespace ProEtale.DerivedCategory
 
