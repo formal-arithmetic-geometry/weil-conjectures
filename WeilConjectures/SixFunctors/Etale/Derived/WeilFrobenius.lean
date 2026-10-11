@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
@@ -388,11 +390,9 @@ lemma isWeilPairing_mixedSupportCupProduct [QuasiCompact a] (sq : IsPullback g a
     IsWeilPairing h (lowerShriekWeilDatum sq φ) (lowerStarWeilDatum sq.toCommSq ψ)
       (lowerShriekWeilDatum sq (tensorWeilDatum g φ ψ))
       (mixedSupportCupProduct (ModuleCat.{u + 1} Λ) a K L) :=
-  -- `⌣_c` is the projection map of `Ra_!` followed by `Ra_!` of the counit of `La^* ⊣ Ra_*`.
-  -- The projection map is compatible with `Ex_!`, `Ex_*` and the tensor comparison of the
-  -- derived pullbacks (SGA 4 XVII 5.2), and the counit is compatible with `Ex_*` by the
-  -- definition of `Ex_*` as a mate; neither compatibility is formalised yet.
-  sorry
+  mixedSupportCupProduct_exchange (ModuleCat.{u + 1} Λ) sq.toCommSq
+    (rightDerivedLowerShriekBaseChangeMap Λ sq)
+    (fun K M ↦ projectionMap_rightDerivedLowerShriekBaseChangeMap Λ sq K M) K L φ ψ
 
 end Exchange
 
