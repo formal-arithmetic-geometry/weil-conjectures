@@ -53,7 +53,8 @@ theorem exists_units_pic_presentation (f : C ⟶ Spec (.of k)) [IsConnectedCurve
       (a : ({P : closedPoints c.Z // P.1 ∉ Set.range c.i} → ℤ) →+ Additive c.Z.Pic),
       D.range = a.ker ∧
         (∀ n : ℕ, 0 < n → D.ker ≤ (zsmulAddGroupHom (α := Additive Γ(C, ⊤)ˣ) n).range) ∧
-        Nonempty (Additive C.Pic ≃+ Additive c.Z.Pic ⧸ a.range) := by
+        Nonempty (Additive C.Pic ≃+ Additive c.Z.Pic ⧸ a.range) ∧
+        Finite {P : closedPoints c.Z // P.1 ∉ Set.range c.i} := by
   classical
   have := c.isProper
   have := c.isOpenImmersion
@@ -166,7 +167,7 @@ theorem exists_units_pic_presentation (f : C ⟶ Spec (.of k)) [IsConnectedCurve
     · have hu : IsUnit ((c.i.appIso ⊤).inv u.toMul) := u.toMul.isUnit.map _
       exact Scheme.ord_of_isUnit hu ((hV _).2 h)
     · rfl
-  refine ⟨D, a, ?_, fun n hn ↦ ?_, ?_⟩
+  refine ⟨D, a, ?_, fun n hn ↦ ?_, ?_, hSfin⟩
   · ext v
     rw [AddMonoidHom.mem_range, AddMonoidHom.mem_ker]
     constructor
@@ -280,5 +281,95 @@ theorem exists_units_pic_presentation (f : C ⟶ Spec (.of k)) [IsConnectedCurve
         rw [← Scheme.Divisor.comap_div, hg, map_sub, hext, hcomap_divS, sub_zero]
     exact ⟨eC.symm.trans ((QuotientAddGroup.quotientAddEquivOfEq hker).trans
       (QuotientAddGroup.quotientKerEquivOfSurjective Ξ hΞ))⟩
+
+/-- **The order of `H¹` of a smooth affine curve.** Let `C` be a smooth affine connected curve
+over an algebraically closed field `k`, `C ⊆ C̄` a smooth proper connected compactification of
+genus `g` whose boundary consists of `r` closed points, and `n` prime to `char k`. Then
+`|H¹(C_ét, ℤ/n)| · n = n ^ (r + 2g)`, i.e. `|H¹(C_ét, ℤ/n)| = n ^ (2g + r - 1)`.
+
+By the Kummer sequence (`AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isAffine`),
+`|H¹(C, ℤ/n)| = |𝒪(C)ˣ / n| · |Pic(C)[n]|`. By
+`AlgebraicGeometry.IsConnectedCurve.exists_units_pic_presentation`, `𝒪(C)ˣ / n ≅ M / n` for the
+kernel `M` of `a : ℤ^S ⟶ Pic(C̄)` and `Pic(C) ≅ Pic(C̄) / Λ` for its image `Λ`. The
+multiplicativity of `|A / nA| / |A[n]|` (`AddSubgroup.natCard_quotient_range_zsmul_mul_eq`)
+applied to `0 → M → ℤ^S → Λ → 0` and `0 → Λ → Pic(C̄) → Pic(C) → 0`, together with
+`Pic(C̄)[n] ≅ (ℤ/n)^{2g}`, `Pic(C̄) / n ≅ ℤ/n`
+(`AlgebraicGeometry.Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient`) and the divisibility of
+`Pic(C)` (`AlgebraicGeometry.IsConnectedCurve.surjective_zsmul_pic_and_finite_torsionBy`), gives
+the formula.
+(blueprint: `thm-sc-constant-invariance`, affine case) -/
+theorem natCard_sheafH_one_constantZMod_mul (f : C ⟶ Spec (.of k)) [IsConnectedCurve f]
+    [Smooth f] [IsAffine C] (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g] {n : ℕ}
+    (hn : (n : k) ≠ 0) :
+    Nat.card (Sheaf.H (C.constantZMod n) 1) * n =
+      n ^ (Nat.card {P : closedPoints c.Z // P.1 ∉ Set.range c.i} + 2 * c.g.genus) := by
+  classical
+  have hn0 : n ≠ 0 := by rintro rfl; exact hn Nat.cast_zero
+  set S := {P : closedPoints c.Z // P.1 ∉ Set.range c.i}
+  obtain ⟨D, a, hDa, hDker, ⟨ePic⟩, hSfin⟩ := exists_units_pic_presentation f c
+  obtain ⟨-, -, ⟨α, β, hα, hαβ, hβ⟩, -, -⟩ := sheafH_constantZMod_of_isAffine f n hn
+  obtain ⟨ePicC⟩ := C.nonempty_addEquiv_cohomologicalPicardGroup
+  obtain ⟨hdivC, hfinC⟩ := surjective_zsmul_pic_and_finite_torsionBy f hn
+  have := c.isProper
+  let : c.Z.Over (Spec (.of k)) := ⟨c.g⟩
+  have := IsConnectedCurve.connectedSpace' c.g
+  have : SmoothOfRelativeDimension 1 (c.Z ↘ Spec (.of k)) :=
+    IsConnectedCurve.smoothOfRelativeDimension_one c.g
+  have : IsProper (c.Z ↘ Spec (.of k)) := c.isProper
+  obtain ⟨⟨eT⟩, ⟨eQ⟩, -⟩ := Scheme.nonempty_addEquiv_torsionBy_pic_and_quotient (C := c.Z) hn
+  -- `|H¹| = |𝒪(C)ˣ / n| · |Pic(C)[n]|`
+  have h1 : Nat.card (Sheaf.H (C.constantZMod n) 1) =
+      Nat.card (a.ker ⧸ (zsmulAddGroupHom (α := a.ker) n).range) *
+        Nat.card (AddSubgroup.torsionBy (Additive c.Z.Pic ⧸ a.range) n) := by
+    rw [AddSubgroup.natCard_eq_of_exact hαβ, hα, hβ,
+      AddSubgroup.natCard_quotient_range_zsmul_eq_of_ker_le D _ (hDker n (Nat.pos_of_ne_zero hn0)),
+      hDa, Nat.card_congr (AddSubgroup.torsionByCongr (ePicC.symm.trans ePic) n).toEquiv]
+  -- the sequence `0 → M → ℤ^S → Λ → 0`
+  have e1 := AddSubgroup.natCard_quotient_range_zsmul_mul_eq a.ker n
+  rw [Nat.card_congr (AddSubgroup.quotientRangeZsmulCongr
+      (QuotientAddGroup.quotientKerEquivRange a) n).toEquiv,
+    Nat.card_congr (AddSubgroup.torsionByCongr (QuotientAddGroup.quotientKerEquivRange a)
+      n).toEquiv, AddSubgroup.natCard_quotient_range_zsmul_pi,
+    AddSubgroup.natCard_torsionBy_eq_one_of_le_pi _ (by exact_mod_cast hn0),
+    ← Nat.card_congr (AddSubgroup.torsionByCongr AddSubgroup.topEquiv n).toEquiv,
+    AddSubgroup.natCard_torsionBy_eq_one_of_le_pi _ (by exact_mod_cast hn0)] at e1
+  -- the sequence `0 → Λ → Pic(C̄) → Pic(C) → 0`
+  have e2 := AddSubgroup.natCard_quotient_range_zsmul_mul_eq a.range n
+  have hQ : Nat.card ((Additive c.Z.Pic ⧸ a.range) ⧸
+      (zsmulAddGroupHom (α := Additive c.Z.Pic ⧸ a.range) n).range) = 1 := by
+    rw [← Nat.card_congr (AddSubgroup.quotientRangeZsmulCongr ePic n).toEquiv,
+      AddMonoidHom.range_eq_top.2 hdivC]
+    exact Nat.card_eq_one_iff_unique.2 ⟨QuotientAddGroup.subsingleton_quotient_top, ⟨0⟩⟩
+  rw [hQ, Nat.card_congr eT.toEquiv, Nat.card_congr eQ.toEquiv, Nat.card_fun, Nat.card_zmod,
+    Nat.card_eq_fintype_card (α := Fin _), Fintype.card_fin] at e2
+  -- finiteness
+  have : NeZero n := ⟨hn0⟩
+  have hT : Nat.card (AddSubgroup.torsionBy a.range n) ≠ 0 := by
+    have : Finite (AddSubgroup.torsionBy (Additive c.Z.Pic) n) := Finite.of_equiv _ eT.symm.toEquiv
+    have : Finite (AddSubgroup.torsionBy a.range n) :=
+      Finite.of_injective (fun x : AddSubgroup.torsionBy a.range n ↦
+        (⟨x.1.1, congrArg Subtype.val (show (n : ℤ) • x.1 = 0 from x.2)⟩ :
+          AddSubgroup.torsionBy (Additive c.Z.Pic) n))
+        fun x y h ↦ by
+          have := congrArg Subtype.val h
+          exact Subtype.ext (Subtype.ext this)
+    exact Nat.card_pos.ne'
+  have hQn : Nat.card (AddSubgroup.torsionBy (Additive c.Z.Pic ⧸ a.range) n) ≠ 0 := by
+    have : Finite (AddSubgroup.torsionBy (Additive c.Z.Pic ⧸ a.range) n) :=
+      Finite.of_equiv _ (AddSubgroup.torsionByCongr ePic n).toEquiv
+    exact Nat.card_pos.ne'
+  set m := Nat.card (a.ker ⧸ (zsmulAddGroupHom (α := a.ker) n).range)
+  set l := Nat.card (a.range ⧸ (zsmulAddGroupHom (α := a.range) n).range)
+  set t := Nat.card (AddSubgroup.torsionBy a.range n)
+  set q := Nat.card (AddSubgroup.torsionBy (Additive c.Z.Pic ⧸ a.range) n)
+  have hl : l ≠ 0 := by
+    intro hl
+    rw [hl, zero_mul, zero_mul, eq_comm] at e2
+    simp only [mul_eq_zero, hn0, hT, hQn, or_self] at e2
+  rw [h1]
+  refine Nat.eq_of_mul_eq_mul_right (Nat.pos_of_ne_zero (mul_ne_zero hl hT)) ?_
+  calc m * q * n * (l * t) = (m * l * 1) * (n * t * q) := by ring
+    _ = (n ^ Nat.card S * 1 * t) * (l * 1 * n ^ (2 * c.g.genus)) := by rw [e1, ← e2]; rfl
+    _ = n ^ (Nat.card S + 2 * c.g.genus) * (l * t) := by ring
 
 end AlgebraicGeometry.IsConnectedCurve
