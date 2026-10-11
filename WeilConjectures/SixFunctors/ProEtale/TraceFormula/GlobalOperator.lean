@@ -606,6 +606,49 @@ theorem globalOperator_ofGraph_comp (g h : X ⟶ X) (hg : g ≫ aX = aX) (hh : h
     G.properPullback_comp g h hg hh hK, Category.assoc, Category.assoc, ← Functor.map_comp,
     Iso.hom_inv_id_assoc, Functor.map_comp, Category.assoc,
     ← G.properPullback_naturality_assoc]
+
+open Pretriangulated in
+/-- Blueprint `prop-trf-graph-operator`: the global operator of graph correspondences is
+additive in triangles. For a triangle `T = (K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁⟦1⟧)` of objects of `Dᵇctf(X)`
+(in particular a distinguished one) and a morphism of triangles `V : Lg^* T ⟶ T` with
+components `v_i : Lg^* K_i ⟶ K_i`, the global operators `T(v_i)` of the graph correspondences
+of `g` are the components of a morphism of triangles `RΓ_c(X, T) ⟶ RΓ_c(X, T)`. -/
+theorem exists_triangleHom_globalOperator_ofGraph (g : X ⟶ X) (hg : g ≫ aX = aX) [IsProper g]
+    (T : Triangle (DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))) (h₁ : G.ctf X T.obj₁)
+    (h₂ : G.ctf X T.obj₂) (h₃ : G.ctf X T.obj₃)
+    (V : ((upperStar A g).leftDerivedFunctor).mapTriangle.obj T ⟶ T) :
+    ∃ W : (rightDerivedLowerShriek A aX).mapTriangle.obj T ⟶
+        (rightDerivedLowerShriek A aX).mapTriangle.obj T,
+      W.hom₁ = globalOperator G (ofGraph G aX T.obj₁ h₁ g hg V.hom₁) h₁ ∧
+      W.hom₂ = globalOperator G (ofGraph G aX T.obj₂ h₂ g hg V.hom₂) h₂ ∧
+      W.hom₃ = globalOperator G (ofGraph G aX T.obj₃ h₃ g hg V.hom₃) h₃ := by
+  refine ⟨Triangle.homMk _ _ (globalOperator G (ofGraph G aX T.obj₁ h₁ g hg V.hom₁) h₁)
+    (globalOperator G (ofGraph G aX T.obj₂ h₂ g hg V.hom₂) h₂)
+    (globalOperator G (ofGraph G aX T.obj₃ h₃ g hg V.hom₃) h₃) ?_ ?_ ?_, rfl, rfl, rfl⟩
+  · exact (globalOperator_ofGraph_naturality G h₁ g hg _ h₂ _ T.mor₁ V.comm₁).symm
+  · exact (globalOperator_ofGraph_naturality G h₂ g hg _ h₃ _ T.mor₂ V.comm₂).symm
+  · have h₁' := ProEtale.DerivedCategory.constructibleFiniteTor.shift h₁ 1
+    have c₃ : ((upperStar A g).leftDerivedFunctor).map T.mor₃ ≫
+        ((((upperStar A g).leftDerivedFunctor).commShiftIso (1 : ℤ)).hom.app T.obj₁ ≫
+          V.hom₁⟦(1 : ℤ)⟧') = V.hom₃ ≫ T.mor₃ := by
+      rw [← Category.assoc]
+      exact V.comm₃
+    change ((rightDerivedLowerShriek A aX).map T.mor₃ ≫
+        ((rightDerivedLowerShriek A aX).commShiftIso (1 : ℤ)).hom.app T.obj₁) ≫ _ =
+      _ ≫ ((rightDerivedLowerShriek A aX).map T.mor₃ ≫
+        ((rightDerivedLowerShriek A aX).commShiftIso (1 : ℤ)).hom.app T.obj₁)
+    have n : (rightDerivedLowerShriek A aX).map (V.hom₁⟦(1 : ℤ)⟧') ≫
+        ((rightDerivedLowerShriek A aX).commShiftIso (1 : ℤ)).hom.app T.obj₁ =
+        ((rightDerivedLowerShriek A aX).commShiftIso (1 : ℤ)).hom.app
+            (((upperStar A g).leftDerivedFunctor).obj T.obj₁) ≫
+          ((rightDerivedLowerShriek A aX).map V.hom₁)⟦(1 : ℤ)⟧' :=
+      Functor.commShiftIso_hom_naturality _ _ _
+    rw [globalOperator_ofGraph, globalOperator_ofGraph]
+    simp only [Category.assoc]
+    rw [← Functor.map_comp_assoc (rightDerivedLowerShriek A aX) V.hom₃ T.mor₃, ← c₃]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [G.properPullback_naturality_assoc g hg h₃ h₁' T.mor₃, n,
+      reassoc_of% (G.properPullback_commShift g hg h₁ 1)]
 end Correspondence
 
 end AlgebraicGeometry.ProEtale
