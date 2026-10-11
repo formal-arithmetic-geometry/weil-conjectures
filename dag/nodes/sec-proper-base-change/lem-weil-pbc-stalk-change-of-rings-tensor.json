@@ -190,5 +190,23 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps along Stacks Sheaves 008B (007K + 007Z), parallel to the reviewed lem-weil-pbc-module-stalk-tensor: stalks as modules; sheafification keeps the stalk (leaf lem-weil-pbc-stalk-sheafification-space); the presheaf change of rings via lem-weil-pbc-filtered-colimit-tensor-varying-rings (unsplit, in the queue) with the O'_x-linearity checked on generators; the germ formula; naturality. No Mathlib change of rings for sheaves of modules; no source-repository Lean."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings",
+  "declaration": "SheafOfModules.stalkChangeOfRingsIso",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/StalkChangeOfRings.lean",
+  "statement": "theorem stalkChangeOfRingsIso (X : TopCat.{u}) (R₁ R₂ : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u}) (α : R₁ ⟶ R₂) (x : X) : ∃ Φ : ∀ F : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj R₁), (ModuleCat.extendScalars ((TopCat.Presheaf.stalkFunctor CommRingCat x).map α.hom).hom).obj (ModuleCat.of (TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X) R₁.obj x) (TopCat.Presheaf.stalk (C := Ab.{u}) (X := X) F.val.presheaf x)) ≅ ModuleCat.of (TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X) R₂.obj x) (TopCat.Presheaf.stalk (C := Ab.{u}) (X := X) (changeOfRings α F).val.presheaf x), (∀ (F : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj R₁)) (U : Opens X) (hx : x ∈ U) (s : F.val.obj (op U)) (a : R₂.obj.obj (op U)), (Φ F).hom (TopCat.Presheaf.germ (C := CommRingCat.{u}) (X := X) R₂.obj U x hx a ⊗ₜ[TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X) R₁.obj x, ((TopCat.Presheaf.stalkFunctor CommRingCat x).map α.hom).hom] TopCat.Presheaf.germ (C := Ab.{u}) (X := X) F.val.presheaf U x hx s) = TopCat.Presheaf.germ (C := Ab.{u}) (X := X) (changeOfRings α F).val.presheaf U x hx (((PresheafOfModules.sheafificationAdjunction (𝟙 ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj R₂).obj)).unit.app (changeOfRingsPresheaf.{u, u, u} α F)).app (op U) (a ⊗ₜ[R₁.obj.obj (op U), (α.hom.app (op U)).hom] s))) ∧ (∀ (F G : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj R₁)) (f : F ⟶ G) (a : TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X) R₂.obj x) (s : TopCat.Presheaf.stalk (C := Ab.{u}) (X := X) F.val.presheaf x), PresheafOfModules.stalkAddMap (x := x) (changeOfRingsHom α F f).val ((Φ F).hom (a ⊗ₜ[TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X) R₁.obj x, ((TopCat.Presheaf.stalkFunctor CommRingCat x).map α.hom).hom] s)) = (Φ G).hom (a ⊗ₜ[TopCat.Presheaf.stalk (C := CommRingCat.{u}) (X := X) R₁.obj x, ((TopCat.Presheaf.stalkFunctor CommRingCat x).map α.hom).hom] PresheafOfModules.stalkAddMap (x := x) f.val s))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
