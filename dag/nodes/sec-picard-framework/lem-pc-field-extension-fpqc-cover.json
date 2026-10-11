@@ -130,5 +130,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fec (reviewer sub-agent of L); spot-checked: Source: Topologies Definition 022B (fpqc covering, read in etale-cohomology.tex/topologies.tex) and Lemma 03L7; the item statement is unchanged and agrees with def-weil-pbc-fpqc-covering (flat members; every affine open V is a finite union of images of affine opens, n>=0). Step 1 carried by lem-pc-field-extension-flat (flatness of Spec K -> Spec k, true: every K-module over field k is free). Step 2 by lem-pc-field-extension-surjective (both spectra are one point). Step 3 by lem-pc-field-extension-quasi-compact against def-weil-finite-type-morphism's quasi-compact clause (Spec K affine). Step 4 by def-weil-pbc-fpqc-covering plus Steps 1-2: affine opens of Spec k are empty (n=0) and Spec k (V_1 = Spec K, image Spec k by surjectivity). New nodes: statement-only, self-contained, cited defs exist (def-pc-field-extension, def-weil-flat-morphism, def-weil-surjective-morphism, def-weil-finite-type-morphism), created.item correct, three searches each, no Mathlib leaf; slopmaster2 sorry map has only sieve-based fpqcTopology declarations, none stating this exactly (B10 n/a). Small case K=k: identity, fpqc cover. Only split-owned fields of the item changed. Fixes: dag/nodes/sec-picard-framework/lem-pc-field-extension-flat.json: source.place: 00HB is Definition (flat ring map), not a lemma 'a field extension is flat'; dag/nodes/sec-picard-framework/lem-pc-field-extension-quasi-compact.json: source: Topologies 022B replaced by Schemes Lemma 01K4 (quasi-compactness via affine opens). Note: report mentions a citations.json not in the delivery (harmless). Start Sat Oct 10 04:09:26 PM UTC 2026, end Sat Oct 10 04:10:16 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldExtensionFpqcCover",
+  "declaration": "AlgebraicGeometry.fpqcCover_specMap_algebraMap_of_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldExtensionFpqcCover.lean",
+  "statement": "theorem fpqcCover_specMap_algebraMap_of_field {k K : Type u} [Field k] [Field K] [Algebra k K] : Flat (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∧ Surjective (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∧ QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∧ Presieve.singleton (Spec.map (CommRingCat.ofHom (algebraMap k K))) ∈ Scheme.fpqcPrecoverage (Spec (.of k))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fec0732",
+  "group": "C1",
+  "result": "pass",
+  "note": "k,K:Type u fields with [Algebra k K] = field extension k⊆K; p = Spec.map (ofHom (algebraMap k K)); conjuncts Flat p, Surjective p, QuasiCompact p (quasi-compact clause of def-weil-finite-type-morphism), Presieve.singleton p ∈ Scheme.fpqcPrecoverage (Spec (.of k)) as in merged siblings; docstring follows the 4 proof steps; no Mathlib/slopmaster2 exact statement (Mathlib has only generic Hom.singleton_mem_fpqcPrecoverage under instance hypotheses; BaseChangeNorm has surjectivity alone), existing:false right; header, tag, imports, lines ok"
  }
 }
