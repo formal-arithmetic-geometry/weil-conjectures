@@ -217,5 +217,24 @@
   "worker": "stage1",
   "summary": "Statement checked against Stacks 0BK4 (algebra.tex line 17985; tags 0BK4, 00LD, 00KW, 0CN5, 090R, 05BV verified in tags/tags); kept unchanged. Proof split following lines 17991-18020: Step 1 (Nakayama: M nonzero so mM != M and depth is a sup over regular sequences, implicit in the source), Step 2 (m associated => depth 0, first paragraph), Step 3 (depth finite and the induction on d = depth set up explicitly; the source's separate d = 1 case is subsumed), Step 4 (nonzerodivisor x not in p, Tag 00LD), Step 5 (dim R/(p+(x)) = dim R/p - 1 via Tag 00KW applied to the local domain R/p), Step 6 (the source's 'small argument omitted' written out: a minimal prime q over p+(x) with dim R/q = dim R/p - 1, via every prime containing a minimal prime), Step 7 (Tag 0CN5 gives q in Ass(M/x^nM), Tag 090R gives depth(M/x^nM) = depth(M) - 1, induction). No new nodes: every cited fact has a node (two Mathlib leaves for 00KW and minimal primes, 00LD leaf, Nakayama leaf, 0CN5 and 090R nodes, 00LL-type node for the nonzerodivisor). No blueprint node states 0BK4 (blueprint_refs search 'depth', 'associated', '0BK4': none); no Lean in slopmaster2 (no (blueprint: id) tag, no depth lemma in WeilConjectures).",
   "blueprint": "The item serves thm-weil-pbc-finite-etale-lifting at its from.place (step 7 of its split, the essential-surjectivity paragraphs of 0GS2) through the via chain ending at lem-weil-pbc-cm-local-associated-prime-minimal; its steps realize no place of that blueprint proof directly: they carry the fact 'depth(M) <= dim R/p for p in Ass(M)' that lem-weil-pbc-cm-local-associated-prime-minimal (0BUS) uses to show associated primes of a Cohen-Macaulay local ring are minimal."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DepthLeDimAssociatedPrime",
+  "declaration": "IsLocalRing.depth_le_ringKrullDim_quotient_of_mem_associatedPrimes",
+  "file": "lean/Sheaf/RingTheory/DepthLeDimAssociatedPrime.lean",
+  "statement": "theorem depth_le_ringKrullDim_quotient_of_mem_associatedPrimes {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] {M : Type v} [AddCommGroup M] [Module R M] [Module.Finite R M] (p : Ideal R) (hp : p ∈ associatedPrimes R M) : (IsLocalRing.depth (R := R) M : WithBot ℕ∞) ≤ ringKrullDim (R ⧸ p)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dap0936"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dap0936",
+  "group": "K1",
+  "result": "fix",
+  "note": "Noetherian local R (IsNoetherianRing, IsLocalRing), finite M (Module.Finite), associated prime p (Mathlib associatedPrimes, = prime Ann(z) under Noetherian, equivalence checked in Lean), conclusion depth(M) <= ringKrullDim (R/p) with recorded IsLocalRing.depth cast to WithBot; zero module vacuous (no associated primes)"
  }
 }
