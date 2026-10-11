@@ -24,7 +24,10 @@
   "def-sc-ringed-space-module-cohomology",
   "def-weil-abstract-derived-category",
   "def-weil-derived-limit",
-  "pqf-def-cohomology"
+  "pqf-def-cohomology",
+  "def-pc-open-module-derived-sections",
+  "def-pc-module-stalk-functor",
+  "lem-pc-derived-limit-roos-abelian-groups"
  ],
  "proof": [
   {
@@ -121,5 +124,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dls2642 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0D61 and citer lem-pc-ringed-space-pointwise-truncation-limit (C4 ok); new node lem-pc-ringed-space-sheafification-cohomology vs Tag 0BKJ: real lemma, not duplicate, no Mathlib (not b/c/d); no products/K-injective/stalk-product facts used. FIX more, RETURN less: (1) E hypothesis check missed by F1's second reading: Step 1 shrank to an arbitrary neighbourhood U, but (i),(ii) hold only for U in the fundamental system U_x; Step 1 now shrinks further to U in U_x. (2) E/def-weil-derived-limit: statement and steps no longer write 'the natural map' on R lim as if canonical; they fix a derived limit (K,p,delta) and the map induced by pr_{n(x)} o p; Step 2 names the right map of the 0D60 sequence as H^m(U, pr_n o p).; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-dls2642): E7: statement now names the derived limit (K,p,delta) as any one of def-weil-derived-limit and the stalk map as induced by pr_{n(x)} o p, which is what lem-pc-ringed-space-pointwise-truncation-limit uses; no 'the/natural' derived limit."
+ "lead_note": "2026-10-10 L (R-dls2642): E7: statement now names the derived limit (K,p,delta) as any one of def-weil-derived-limit and the stalk map as induced by pr_{n(x)} o p, which is what lem-pc-ringed-space-pointwise-truncation-limit uses; no 'the/natural' derived limit.",
+ "lean": {
+  "module": "Sheaf.Topology.DerivedLimitStalkInjective",
+  "declaration": "AlgebraicGeometry.RingedSpace.derivedLimit_stalk_injective",
+  "file": "lean/Sheaf/Topology/DerivedLimitStalkInjective.lean",
+  "statement": "theorem derivedLimit_stalk_injective (X : RingedSpace.{u}) [HasDerivedCategory.{v} (SheafOfModules.{u} (moduleRings X))] [HasDerivedCategory.{w} AddCommGrpCat.{u}] (K : ℕᵒᵖ ⥤ DerivedCategory (SheafOfModules.{u} (moduleRings X))) (L : DerivedCategory (SheafOfModules.{u} (moduleRings X))) (p : L ⟶ ∏ᶜ (fun n : ℕ => K.obj (op n))) (δ : (∏ᶜ (fun n : ℕ => K.obj (op n))) ⟶ L⟦(1 : ℤ)⟧) (hK : IsDerivedLimitTriangle (fun n : ℕ => K.map (homOfLE (Nat.le_succ n)).op) L p δ) (x : X) (m : ℤ) (n₀ : ℕ) (B : Set (Opens X)) (hB_mem : ∀ U ∈ B, x ∈ U) (hB_basis : ∀ V : Opens X, x ∈ V → ∃ U ∈ B, U ≤ V) (hlim : ∀ U ∈ B, IsZero ((@Functor.rightDerived _ _ _ _ _ (@InjectiveResolution.instHasInjectiveResolutions _ _ _ roosTowerEnoughInjectives) _ (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}) roosLimitAdditive 1).obj (K ⋙ openModuleDerivedSections X U ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} (m - 1)))) (hinj : ∀ U ∈ B, ∀ (n : ℕ) (h : n₀ ≤ n), Function.Injective ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} m).map ((openModuleDerivedSections X U).map (K.map (homOfLE h).op)))) : Function.Injective ((moduleStalkFunctor X x).map ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X)) m).map (p ≫ Pi.π (fun n : ℕ => K.obj (op n)) n₀))).hom",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lsi",
+  "group": "R1",
+  "result": "pass",
+  "note": "X ringed space; tower K : Nat^op => D(O_X); (L,p,delta) with IsDerivedLimitTriangle as landed rgamma_derivedLimit; x, m, n0; B fundamental system (hB_mem, hB_basis); (i) IsZero R^1 lim of H^{m-1}(U,K_n) in the exact form of rgamma_derivedLimit's left term (explicit Prop-class proofs roosTowerEnoughInjectives/roosLimitAdditive, no data); (ii) injective H^m(U, K.map (homOfLE h).op) direction n -> n0; conclusion injective moduleStalkFunctor of H^m(p >> Pi.pi n0) (STATE MODULE STALKS); stmt_deps gain 3 landed nodes the Lean cites, check_dag 0 cycles; no let/notation/local instance; no landed duplicate"
+ }
 }
