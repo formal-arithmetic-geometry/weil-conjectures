@@ -3658,3 +3658,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:40 L: merged deliver/C1/lem-sc-ass-weakass-fg-prime (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AnnihilatorEqIffMinimalPrimeOfFG Ideal.annihilator_eq_iff_mem_minimalPrimes_of_fg)
 - 07:40 L: merged deliver/E1/lem-sc-artin-schreier-k (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ArtinSchreier IsAlgClosed.artinSchreier_surjective_and_kernel)
 - 07:40 L: merged deliver/J1/lem-sc-associated-localization-fg (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AssociatedLocalizationFg Module.exists_annihilator_eq_of_localization_atPrime)
+- 07:40 L: merged deliver/M1/lem-sc-affine-standard-cover-finite-projective (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FiniteProjectiveOfStandardCover Module.finite_projective_of_localizationAway_free)

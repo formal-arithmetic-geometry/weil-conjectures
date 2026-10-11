@@ -103,5 +103,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-scp2 (reviewer sub-agent of L); spot-checked: Source: Stacks Algebra Tag 00NX (lemma-finite-projective), read in literature/stacks-project/algebra.tex; the item is (7) => (2) with the cover data exactly as in (7) (finitely many f_i generating the unit ideal, each N_{f_i} finite free over R_{f_i}); item statement and stmt_deps unchanged. Route: Stacks chain (7) => (4) (finite locally free is finitely presented, Lemma lemma-cover) => (5) => (1) (flatness local, Lemma lemma-flat-localization) is the new statement-only node lem-sc-affine-standard-cover-finite-presentation-flat, whose hypotheses reproduce the item's and whose conclusion (finitely presented [def-sc-finitely-presented-module] and flat [def-weil-pbc-flat-ring-map]) is exactly what step 1 takes; a strictly smaller fact than the item (not D2: the projectivity step (1) => (2) is separate content). Step 2: lem-weil-pbc-finitely-presented-flat-module-projective (mathlib leaf, Module.Flat.projective_of_finitePresentation, Mathlib/RingTheory/Flat/EquationalCriterion.lean:287 seen) states fp + flat => projective, hence finite projective, with def-weil-pbc-projective-module the target notion; both off-unit nodes are mathlib leaves/definitions, no C7. New node: TeX, self-contained, stmt_deps exist, three Mathlib searches; not a single Mathlib declaration (components Module.FinitePresentation.of_localizationSpan Mathlib/RingTheory/LocalProperties/FinitePresentation.lean:48 and Module.flat_of_localized_span Mathlib/RingTheory/Flat/Localization.lean:103 need the free => fp/flat glue), no duplicate in the DAG (grep of dag/nodes for locality of fp/flatness found only lem-weil-pbc-module-finite-of-localization-span, finite generation only), no sorry-free slopmaster2 declaration states it (finitePresentation_projective_sections in LocallyFreeAffine.lean is about X.Modules on an affine open). Small cases: R=k x k with f=(1,0),(0,1) and N=k + k^2 (non-constant rank): localizations free, N fp, flat, projective; r=1, f_1=1 reduces to N finite free. FIX: dag/nodes/sec-curve-estimates/lem-sc-affine-standard-cover-finite-presentation-flat.json: source.place: '(7) => (1) and (7) => (2)' mislabelled the conclusion (the node gives (1), not (2)), corrected to the Stacks chain (7) => (4) => (5) => (1) with the lemmas used; dag/nodes/sec-curve-estimates/lem-sc-affine-standard-cover-finite-projective.json: proof[0].source.place same correction; proof_origin.place '(7) => (1) => (2) => (3)' corrected to '(7) => (4) => (5) => (1) => (2)' (the item concludes (2), not (3)). Start Sat Oct 10 04:42:20 PM UTC 2026, end Sat Oct 10 04:43:30 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteProjectiveOfStandardCover",
+  "declaration": "Module.finite_projective_of_localizationAway_free",
+  "file": "lean/Sheaf/RingTheory/FiniteProjectiveOfStandardCover.lean",
+  "statement": "theorem finite_projective_of_localizationAway_free {R : Type u} [CommRing R] {N : Type v} [AddCommGroup N] [Module R N] {r : ℕ} (f : Fin r → R) (hspan : Ideal.span (Set.range f) = ⊤) (hlocal : ∀ i : Fin r, Module.Finite (Localization.Away (f i)) (LocalizedModule.Away (f i) N) ∧ Module.Free (Localization.Away (f i)) (LocalizedModule.Away (f i) N)) : Module.Finite R N ∧ Module.Projective R N",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-scp0938"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-scp0938",
+  "group": "M1",
+  "result": "fix",
+  "note": "R CommRing, N AddCommGroup+Module R (independent universes); cover f_1..f_r as {r : ℕ} (f : Fin r → R), Ideal.span (Set.range f) = ⊤ (FIX: was Finset t, now the sibling G1 b41338673 convention so step 1 applies verbatim); each N_{f_i} = LocalizedModule.Away (f i) N finite and free over Localization.Away (f i), no common rank; conclusion Module.Finite R N ∧ Module.Projective R N = finite projective (Stacks 00NX (2)); r = 0 only over the zero ring; no Mathlib declaration states it (projective_of_localization_maximal needs finite presentation)"
  }
 }
