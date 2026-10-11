@@ -14,6 +14,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Directed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
+public import Mathlib.RingTheory.TensorProduct.IsBaseChangeFree
+public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
+public import WeilConjectures.AlgebraicGeometry.VectorBundle.Trivialization
 
 /-!
 # The vector bundle of a quasi-coherent module
@@ -163,7 +167,8 @@ lemma symAlgebraAugmentation_surjective (U : X.Opens) :
 
 lemma symAlgebra_hom_ext {U : X.Opens} {A : CommRingCat.{u}} {f g : M.symAlgebra U ⟶ A}
     (h₁ : M.toSymAlgebra U ≫ f = M.toSymAlgebra U ≫ g)
-    (h₂ : ∀ x : Γ(M, U), f.hom (SymmetricAlgebra.ι _ _ x) = g.hom (SymmetricAlgebra.ι _ _ x)) :
+    (h₂ : ∀ x : Γ(M, U),
+      f.hom (SymmetricAlgebra.ι _ _ x) = g.hom (SymmetricAlgebra.ι _ _ x)) :
     f = g := by
   ext x
   induction x using SymmetricAlgebra.induction with
@@ -183,7 +188,8 @@ noncomputable def symAlgebraMap : M.symAlgebra V ⟶ M.symAlgebra U :=
 
 @[reassoc]
 lemma toSymAlgebra_symAlgebraMap :
-    M.toSymAlgebra V ≫ M.symAlgebraMap h = X.presheaf.map (homOfLE h).op ≫ M.toSymAlgebra U := by
+    M.toSymAlgebra V ≫ M.symAlgebraMap h =
+      X.presheaf.map (homOfLE h).op ≫ M.toSymAlgebra U := by
   let := resAlgebra h
   let := resModule M h
   have := resIsScalarTower M h
@@ -232,8 +238,8 @@ lemma symAlgebraMap_comp {W : X.Opens} (hUV : U ≤ V) (hVW : V ≤ W) :
     exact (congr($(M.presheaf.map_comp (homOfLE hVW).op (homOfLE hUV).op) x)).symm
 
 /-- For a quasi-coherent `M`, an affine open `V` and a basic open `U = D(g)` of `V`, the square of
-rings `Γ(V) ⟶ Γ(U)`, `Γ(V) ⟶ Sym Γ(M, V)`, `Sym Γ(M, V) ⟶ Sym Γ(M, U)`, `Γ(U) ⟶ Sym Γ(M, U)` is
-a pushout: `Sym_{Γ(U)} Γ(M, U) = Γ(U) ⊗_{Γ(V)} Sym_{Γ(V)} Γ(M, V)`. -/
+rings `Γ(V) ⟶ Γ(U)`, `Γ(V) ⟶ Sym Γ(M, V)`, `Sym Γ(M, V) ⟶ Sym Γ(M, U)`, `Γ(U) ⟶ Sym Γ(M, U)`
+is a pushout: `Sym_{Γ(U)} Γ(M, U) = Γ(U) ⊗_{Γ(V)} Sym_{Γ(V)} Γ(M, V)`. -/
 lemma isPushout_symAlgebraMap [M.IsQuasicoherent] (hV : IsAffineOpen V) (g : Γ(X, V))
     (hg : X.basicOpen g = U) :
     IsPushout (M.toSymAlgebra V) (X.presheaf.map (homOfLE h).op)
@@ -470,5 +476,112 @@ lemma locallyOfFiniteType_vectorBundleProj
   infer_instance
 
 end Gluing
+/-! ### Trivialisations over affine opens on which the module is free -/
+
+section Trivialization
+
+variable (M : X.Modules)
+
+/-- A basis `b` of `Γ(M, U)` over an affine open `U` identifies the affine piece
+`Spec (Sym_{Γ(X, U)} Γ(M, U))` of `V(M)` with the affine space `𝔸(ι; U)`: the coordinate `xᵢ`
+corresponds to `bᵢ ∈ Γ(M, U) ⊆ Sym Γ(M, U)` (`SymmetricAlgebra.equivMvPolynomial`). -/
+noncomputable def affineSpaceIso (U : X.BasicAffineOpens) {ι : Type u}
+    (b : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) :
+    𝔸(ι; U.opens) ≅ Spec (M.symAlgebra U.opens) :=
+  AffineSpace.mapIso ι U.isAffineOpen.isoSpec ≪≫ AffineSpace.SpecIso ι Γ(X, U.opens) ≪≫
+    Scheme.Spec.mapIso (SymmetricAlgebra.equivMvPolynomial b).toRingEquiv.toCommRingCatIso.op
+
+lemma symAlgebraAugmentation_ι (U : X.Opens) (x : Γ(M, U)) :
+    M.symAlgebraAugmentation U (SymmetricAlgebra.ι _ _ x) = 0 :=
+  SymmetricAlgebra.algebraMapInv_ι x
+
+variable {M} {U : X.BasicAffineOpens} {ι : Type u}
+  (b : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens))
+
+@[reassoc (attr := simp)]
+lemma affineSpaceIso_inv_over :
+    (M.affineSpaceIso U b).inv ≫ 𝔸(ι; U.opens) ↘ U.opens =
+      Spec.map (M.toSymAlgebra U.opens) ≫ U.isAffineOpen.isoSpec.inv := by
+  simp only [affineSpaceIso, Iso.trans_inv, Category.assoc, AffineSpace.mapIso_inv,
+    AffineSpace.map_over, AffineSpace.SpecIso_inv_over_assoc]
+  rw [Functor.mapIso_inv, Scheme.Spec_map, Iso.op_inv, Quiver.Hom.unop_op,
+    ← Spec.map_comp_assoc]
+  congr 2
+  ext r
+  exact (SymmetricAlgebra.equivMvPolynomial b).symm.commutes r
+
+@[reassoc (attr := simp)]
+lemma affineSpaceIso_hom_comp :
+    (M.affineSpaceIso U b).hom ≫ Spec.map (M.toSymAlgebra U.opens) ≫
+      U.isAffineOpen.isoSpec.inv = 𝔸(ι; U.opens) ↘ U.opens := by
+  rw [← affineSpaceIso_inv_over, Iso.hom_inv_id_assoc]
+
+lemma affineSpaceIso_inv_appTop_coord (i : ι) :
+    (M.affineSpaceIso U b).inv.appTop (AffineSpace.coord U.opens i) =
+      (Scheme.ΓSpecIso (M.symAlgebra U.opens)).inv (SymmetricAlgebra.ι _ _ (b i)) := by
+  simp only [affineSpaceIso, Iso.trans_inv, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+    AffineSpace.mapIso_inv, AffineSpace.map_appTop_coord, AffineSpace.SpecIso_inv_appTop_coord]
+  rw [Functor.mapIso_inv, Scheme.Spec_map, Iso.op_inv, Quiver.Hom.unop_op,
+    ← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
+  congr 1
+  exact SymmetricAlgebra.equivMvPolynomial_symm_X b i
+
+/-- Under a trivialisation, the zero section of `V(M)` over `U` is the zero section of the affine
+space. -/
+@[reassoc (attr := simp)]
+lemma zeroSection_affineSpaceIso_hom :
+    AffineSpace.zeroSection ι U.opens ≫ (M.affineSpaceIso U b).hom = M.localZeroSection U := by
+  rw [← Iso.eq_comp_inv]
+  refine AffineSpace.hom_ext ?_ fun i ↦ ?_
+  · rw [AffineSpace.zeroSection_over, Category.assoc, affineSpaceIso_inv_over,
+      localZeroSection_comp]
+  · rw [AffineSpace.zeroSection_appTop_coord, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+      affineSpaceIso_inv_appTop_coord, localZeroSection, Scheme.Hom.comp_appTop,
+      CommRingCat.comp_apply, ← CommRingCat.comp_apply (Scheme.ΓSpecIso _).inv,
+      ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply, symAlgebraAugmentation_ι,
+      map_zero, map_zero]
+
+variable [Fintype ι]
+
+/-- The matrix of the change of trivialisation from a basis `b` to a basis `b'` of `Γ(M, U)`:
+`b' i = ∑ⱼ Aᵢⱼ b j`, as functions on `U`. It is invertible (`Module.Basis.toMatrix`). -/
+noncomputable def transitionMatrix (b' : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) :
+    Matrix ι ι Γ(U.opens, ⊤) :=
+  (b.toMatrix b').transpose.map U.opens.topIso.inv
+
+/-- Changes of trivialisation are linear: they are given by the invertible matrix
+`transitionMatrix b b'`. -/
+lemma affineSpaceIso_inv_linearMap (b' : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) :
+    (M.affineSpaceIso U b).inv ≫ AffineSpace.linearMap (transitionMatrix b b') =
+      (M.affineSpaceIso U b').inv := by
+  refine AffineSpace.hom_ext (by simp) fun i ↦ ?_
+  have h (c : Γ(X, U.opens)) : (M.affineSpaceIso U b).inv.appTop
+      ((𝔸(ι; U.opens) ↘ U.opens).appTop (U.opens.topIso.inv c)) =
+      (Scheme.ΓSpecIso (M.symAlgebra U.opens)).inv (M.toSymAlgebra U.opens c) := by
+    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, affineSpaceIso_inv_over,
+      Scheme.Hom.comp_appTop, CommRingCat.comp_apply, IsAffineOpen.isoSpec_inv_appTop,
+      CommRingCat.comp_apply, Iso.inv_hom_id_apply, ← CommRingCat.comp_apply,
+      ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
+  rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.linearMap_appTop_coord,
+    map_sum]
+  simp only [map_mul, transitionMatrix, Matrix.map_apply, Matrix.transpose_apply, h,
+    affineSpaceIso_inv_appTop_coord]
+  simp only [← map_mul, ← map_sum]
+  refine congrArg _ ?_
+  have hb := congrArg (SymmetricAlgebra.ι Γ(X, U.opens) Γ(M, U.opens)) (b.sum_repr (b' i))
+  rw [map_sum] at hb
+  rw [← hb]
+  refine Finset.sum_congr rfl fun j _ ↦ ?_
+  rw [_root_.map_smul, Algebra.smul_def, Module.Basis.toMatrix_apply]
+  rfl
+
+/-- Changes of trivialisation are linear. -/
+lemma linearMap_affineSpaceIso_hom (b' : Module.Basis ι Γ(X, U.opens) Γ(M, U.opens)) :
+    AffineSpace.linearMap (transitionMatrix b b') ≫ (M.affineSpaceIso U b').hom =
+      (M.affineSpaceIso U b).hom := by
+  rw [← cancel_epi (M.affineSpaceIso U b).inv, reassoc_of% (affineSpaceIso_inv_linearMap b b'),
+    Iso.inv_hom_id, Iso.inv_hom_id]
+
+end Trivialization
 
 end AlgebraicGeometry.Scheme.Modules

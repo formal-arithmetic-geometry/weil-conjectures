@@ -464,6 +464,14 @@ lemma AffineSpace.homOfVector_coord_comp_map {σ : Type u} {S T Z : Scheme.{u}} 
   · rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, AffineSpace.map_appTop_coord,
       AffineSpace.homOfVector_appTop_coord]
 
+/-- An isomorphism of base schemes `S ≅ T` induces an isomorphism `𝔸(n; S) ≅ 𝔸(n; T)`. -/
+@[simps]
+def AffineSpace.mapIso (n : Type u) {S T : Scheme.{u}} (e : S ≅ T) : 𝔸(n; S) ≅ 𝔸(n; T) where
+  hom := AffineSpace.map n e.hom
+  inv := AffineSpace.map n e.inv
+  hom_inv_id := by rw [← AffineSpace.map_comp, e.hom_inv_id, AffineSpace.map_id]
+  inv_hom_id := by rw [← AffineSpace.map_comp, e.inv_hom_id, AffineSpace.map_id]
+
 namespace AffineSpace
 
 section GroupLaw

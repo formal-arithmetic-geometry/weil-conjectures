@@ -51,9 +51,9 @@ namespace AlgebraicGeometry
 variable {E S : Scheme.{u}} (d : ℕ) (p : E ⟶ S) (z : S ⟶ E)
 
 /-- A *trivialisation of rank `d`* of `p : E ⟶ S` with section `z` over an open immersion
-`j : V ⟶ S`: a morphism `ι : 𝔸^d_V ⟶ E` exhibiting `𝔸^d_V` as the restriction of `E` to `V`
-(the square formed with `p` and `j` is cartesian) and carrying the zero section of `𝔸^d_V` to
-`z`. (blueprint: `def-asd-vector-bundle-zero-section`) -/
+`j : V ⟶ S`: a morphism `ι : 𝔸^d_V ⟶ E` exhibiting `𝔸^d_V` as the restriction of `E` to
+`V` (the square formed with `p` and `j` is cartesian) and carrying the zero section of `𝔸^d_V`
+to `z`. (blueprint: `def-asd-vector-bundle-zero-section`) -/
 structure VectorBundleTrivialization where
   /-- The source of the open immersion. -/
   V : Scheme.{u}
