@@ -577,7 +577,7 @@ def module_path(rec: dict) -> str | None:
 
 
 def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_commits: int = 1,
-                  overrides: dict | None = None, drop=(), revert=(), drop_files=()) -> dict:
+                  overrides: dict | None = None, drop=(), revert=(), drop_files=(), revert_statement: bool = False) -> dict:
     """Checks (a), (b), (c) without the compile, (d), (e) of the delivery `ref` against `base`.
     `overrides` {path: text} replaces the text of a delivered file (a reviewer's fix, merge_delivery.py).
     `drop` (merge_delivery.py --stage 2 --drop-nodes, lead 2026-10-11): ids of NEW nodes of the delivery that are left
@@ -589,6 +589,12 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     does not change, or the item, fails (b). D["reverted"] = {id: {path, file, module}}.
     `drop_files` (--drop-files): NEW modules lean/Sheaf/... of the delivery left out (the fix no longer uses them); a
     kept module importing one, or a kept record with it as lean.file, fails (c). D["dropped_files"] = [path].
+    `revert_statement` (--revert-statement, 2026-10-11): the delivery's statement correction of the ITEM is left out:
+    statement, stmt_deps, proof, proof_deps and statement_change as on the base (stmt_deps keeps the delivery's kept
+    new nodes it added), the delivered `lean` record kept; the item is then checked as uncorrected, and (b) fails when
+    the branch does not change those fields, when the item's module uses the declaration of a node the restored
+    stmt_deps lose, or when a kept new node cites the item (a cycle). D["statement_reverted"] = [fields],
+    D["stmt_deps_reverted"] = [ids the restored stmt_deps lose].
     Returns {fails: [(letter, text)], notes, node_path, node, base_node, rec, lean_path, lean_text, report, decl,
     commits, base, new: {id: {path, node}}, deps: {id: {path, node, base_node}}, modules: [{file, node, role, rec,
     text, decl, module, siblings}] in dependency order (a module after the sibling modules it imports), roles,
@@ -597,7 +603,8 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     D = {"fails": [], "notes": [], "node_path": None, "node": None, "base_node": None, "rec": None,
          "lean_path": None, "lean_text": None, "report": None, "decl": None, "commits": [],
          "new": {}, "deps": {}, "modules": [], "roles": [], "report_path": f"coord/reports/{group}/{item}.md",
-         "corrected": False, "citers": [], "citer_marks": [], "dropped": {}, "reverted": {}, "dropped_files": []}
+         "corrected": False, "citers": [], "citer_marks": [], "dropped": {}, "reverted": {}, "dropped_files": [],
+         "statement_reverted": [], "stmt_deps_reverted": []}
     fails = D["fails"]
     over = overrides or {}
     f = lambda L, s: fails.append((L, s))  # noqa: E731
@@ -732,6 +739,36 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             if isinstance(node.get(k), list) and any(x in D["dropped"] for x in node[k]):
                 node[k] = [x for x in node[k] if x not in D["dropped"]]
         D["node"] = node
+    if revert_statement and base_text is not None:
+        # --revert-statement: the item's statement fields as on the base, whatever the branch (or a fixed node file)
+        # says; the fields compared are those of the branch, so that a re-read on the reviewer's fixes still knows them
+        try:
+            raw = json.loads(git.show(ref, node_path) or "")
+        except ValueError:
+            raw = {}
+        miss = object()
+        ch = [k for k in STAGE2_ITEM_CORRECTION if raw.get(k, miss) != bnode.get(k, miss)]
+        if not ch:
+            f("b", "--revert-statement: the delivery does not change the item's " + ", ".join(STAGE2_ITEM_CORRECTION))
+        else:
+            node = dict(node)
+            dsd = [x for x in (node.get("stmt_deps") or []) if isinstance(x, str)]
+            for k in STAGE2_ITEM_CORRECTION:
+                if k in bnode:
+                    node[k] = json.loads(json.dumps(bnode[k]))
+                else:
+                    node.pop(k, None)
+            sd = list(bnode.get("stmt_deps") or [])
+            keep = [x for x in dsd if x in D["new"] and x not in sd]
+            if keep:
+                node["stmt_deps"] = sd + keep
+            D["node"] = node
+            D["statement_reverted"] = ch
+            D["stmt_deps_reverted"] = [x for x in dsd if x not in (node.get("stmt_deps") or [])]
+            D["roles"].insert(0, f"the item's statement correction is REVERTED (--revert-statement: {', '.join(ch)} as on "
+                                 "sheaf-dag" + (f"; stmt_deps keep the new node(s) {', '.join(keep)}" if keep else "")
+                                 + (f"; stmt_deps lose {', '.join(D['stmt_deps_reverted'])}" if D["stmt_deps_reverted"] else "")
+                                 + "; the delivered lean record kept)")
     new_ids = set(D["new"])
     for nid in D["new"]:
         D["roles"].append(f"new definition node {nid} ({D['new'][nid]['path']})")
@@ -953,6 +990,25 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     for m in order:
         D["roles"].append(f"module {m['file']} of {m['role']} {m['node']}"
                           + (f" (imports the delivery's {', '.join(m['siblings'])})" if m["siblings"] else ""))
+    if D["statement_reverted"]:
+        # --revert-statement: the item's module uses no declaration of a node the restored stmt_deps lose
+        for x in D["stmt_deps_reverted"]:
+            xd = D["new"].get(x, {}).get("node") if x in D["new"] else None
+            if xd is None and x in base_paths:
+                try:
+                    xd = json.loads(git.show(base, base_paths[x]) or "{}")
+                except ValueError:
+                    xd = {}
+            r = (xd or {}).get("lean")
+            names = [r.get("declaration")] + list(r.get("declarations") or []) if isinstance(r, dict) else []
+            for nm in {str(n).split(".")[-1] for n in names if n}:
+                if D["lean_text"] and re.search(rf"(?<![\w']){re.escape(nm)}(?![\w'])", D["lean_text"]):
+                    f("b", f"--revert-statement: the item's module {D['lean_path']} uses {nm}, the declaration of {x}, which "
+                           "the restored stmt_deps do not have (fix the module with --apply-fixes, or RETURN)")
+        # no cycle: a kept new node reachable from the item does not cite the item
+        for nid in sorted(reach):
+            if item in (D["new"][nid]["node"].get("stmt_deps") or []) + (D["new"][nid]["node"].get("proof_deps") or []):
+                f("b", f"--revert-statement: the new node {nid} cites the item, which cites it: a cycle in the DAG")
     # (e) the report
     rt = show(report)
     D["report"] = rt
