@@ -145,5 +145,27 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apr2425 (reviewer sub-agent of L); spot-checked: Checked all 4 steps against cited statements; C4 vs citing lem-sc-pseudo-coherent-rhom-qcoherent (supplies bounded-above finite-free P_i and H^q(L_i)=0 for q<a: matches); new node lem-sc-affine-projective-complex-derived-hom not a duplicate (generalizes lem-sc-derived-hom-projective-resolution to complex targets). FIX more, RETURN less: (1) C1/false step: old Step 2 claimed that on a principal open, after refining, every finite projective term of P is free; with infinitely many terms no single open need work (e.g. R=prod_N F_2, P^{-n}=e_{S_n}R with S_n = {k: bit n of k is 1}), and the item's local pieces were never glued. Repaired by a global finite-free replacement E->P (Stacks 064U construction, homotopy equivalence, elementary step), then lem-sc-derived-hom-finite-free-model applied on all of Spec R to E~ -> P~ with finite-product termwise identification Hom^n(E~,L~)=C^n~; C:=Hom_R(E,L) via the new node; proof_deps resynchronized.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent",
+  "declaration": "CategoryTheory.affinePseudoCoherentRHomQuasiCoherent",
+  "statement": "theorem affinePseudoCoherentRHomQuasiCoherent (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Spec (CommRingCat.of R)).toRingedSpace))] (P L : DerivedCategory (ModuleCat.{u} R)) (p l : CochainComplex (ModuleCat.{u} R) ℤ) (_hp : ∃ b : ℤ, p.IsStrictlyLE b) (_hfinite : ∀ i : ℤ, Module.Finite R (p.X i)) (_hprojective : ∀ i : ℤ, Module.Projective R (p.X i)) (_hL : ∃ a : ℤ, L.IsGE a) (_eP : Nonempty (DerivedCategory.Q.obj p ≅ P)) (_eL : Nonempty (DerivedCategory.Q.obj l ≅ L)) (c : CochainComplex (ModuleCat.{u} R) ℤ) (e : ∀ n : ℤ, c.X n ≅ ModuleCat.of R (CochainComplex.HomComplex.Cochain p l n)) (_hc : ∀ n m : ℤ, c.d n m ≫ (e m).hom = (e n).hom ≫ ModuleCat.ofHom (CochainComplex.HomComplex.δ_hom R p l n m)) : Nonempty ((derivedInternalHom (Opens.grothendieckTopology (Spec (CommRingCat.of R))) (Spec (CommRingCat.of R)).sheaf).obj (op (DerivedCategory.Q.obj ((@id (ModuleCat.{u} R ⥤ SheafOfModules.{u} (moduleRings (Spec (CommRingCat.of R)).toRingedSpace)) (tilde.functor (CommRingCat.of R))).mapHomologicalComplex (ComplexShape.up ℤ) |>.obj p)), DerivedCategory.Q.obj ((@id (ModuleCat.{u} R ⥤ SheafOfModules.{u} (moduleRings (Spec (CommRingCat.of R)).toRingedSpace)) (tilde.functor (CommRingCat.of R))).mapHomologicalComplex (ComplexShape.up ℤ) |>.obj l)) ≅ DerivedCategory.Q.obj ((@id (ModuleCat.{u} R ⥤ SheafOfModules.{u} (moduleRings (Spec (CommRingCat.of R)).toRingedSpace)) (tilde.functor (CommRingCat.of R))).mapHomologicalComplex (ComplexShape.up ℤ) |>.obj c)) ∧ schemeDerivedQCohProperty (Spec (CommRingCat.of R)) ((derivedInternalHom (Opens.grothendieckTopology (Spec (CommRingCat.of R))) (Spec (CommRingCat.of R)).sheaf).obj (op (DerivedCategory.Q.obj ((@id (ModuleCat.{u} R ⥤ SheafOfModules.{u} (moduleRings (Spec (CommRingCat.of R)).toRingedSpace)) (tilde.functor (CommRingCat.of R))).mapHomologicalComplex (ComplexShape.up ℤ) |>.obj p)), DerivedCategory.Q.obj ((@id (ModuleCat.{u} R ⥤ SheafOfModules.{u} (moduleRings (Spec (CommRingCat.of R)).toRingedSpace)) (tilde.functor (CommRingCat.of R))).mapHomologicalComplex (ComplexShape.up ℤ) |>.obj l))) ∧ ∃ a : ℤ, ((derivedInternalHom (Opens.grothendieckTopology (Spec (CommRingCat.of R))) (Spec (CommRingCat.of R)).sheaf).obj (op (DerivedCategory.Q.obj ((@id (ModuleCat.{u} R ⥤ SheafOfModules.{u} (moduleRings (Spec (CommRingCat.of R)).toRingedSpace)) (tilde.functor (CommRingCat.of R))).mapHomologicalComplex (ComplexShape.up ℤ) |>.obj p)), DerivedCategory.Q.obj ((@id (ModuleCat.{u} R ⥤ SheafOfModules.{u} (moduleRings (Spec (CommRingCat.of R)).toRingedSpace)) (tilde.functor (CommRingCat.of R))).mapHomologicalComplex (ComplexShape.up ℤ) |>.obj l))).IsGE a",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePseudoCoherentRHomQuasiCoherent.lean",
+  "branch": "sheaf-dag",
+  "declarations": [
+   "CategoryTheory.affineTildeSheaf_preservesZeroMorphisms",
+   "CategoryTheory.affinePseudoCoherentRHomQuasiCoherent"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
