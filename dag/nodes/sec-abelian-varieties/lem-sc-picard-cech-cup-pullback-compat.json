@@ -1,80 +1,156 @@
 {
-  "id": "lem-sc-picard-cech-cup-pullback-compat",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "proof of Tag 0BF3: invoke Varieties Lemma varieties-lemma-kunneth on the special fibre",
-      "via": [
-        "lem-sc-picard-kunneth-qcoh"
-      ]
-    },
-    "same_as": []
+ "id": "lem-sc-picard-cech-cup-pullback-compat",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof of Tag 0BF3: invoke Varieties Lemma varieties-lemma-kunneth on the special fibre",
+   "via": [
+    "lem-sc-picard-kunneth-qcoh"
+   ]
   },
-  "kind": "statement",
-  "title": "Cech cup products and pullback",
-  "statement": "Let f:X' \\to X be a morphism of schemes [def-pc-scheme], let U be an arbitrary open cover of X, and let U' be an open cover of X' together with a specified refinement map U' \\to f^{-1}U in the sense of Stacks Tag 01FD. Let F and G be quasi-coherent modules on X [pqf-def-coherent], and write f^*F and f^*G for their pullbacks to X' [def-pc-module-pullback]. (a) The refinement cochain map from the Cech complex of (X,U,F) to that of (X',U',f^*F) is compatible with the usual pullback map H^p(X,F) \\to H^p(X',f^*F) under the canonical maps from Cech cohomology to cohomology, \\check H^p(U,F) \\to H^p(X,F) and \\check H^p(U',f^*F) \\to H^p(X',f^*F), which exist for every open cover. (b) For an arbitrary open cover U of X, the signed Cech cup-product cochain map of Tag 07MB, Tot(Cech(U,F) \\otimes Cech(U,G)) \\to Cech(U,F\\otimes G), induces on cohomology a map \\check H^p(U,F) \\otimes \\check H^q(U,G) \\to \\check H^{p+q}(U,F\\otimes G) that is compatible with the sheaf cup product H^p(X,F) \\otimes H^q(X,G) \\to H^{p+q}(X,F\\otimes G) under the canonical maps \\check H^n(U,-) \\to H^n(X,-) (Stacks Tag 0FKV, cohomology-lemma-diagrams-commute); in particular, when these canonical maps are isomorphisms (for instance for a finite affine cover of a scheme with affine diagonal and quasi-coherent F, G), the Cech cup product is the sheaf cup product. Both assertions are natural in F,G and f.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cech cup products and pullback",
+ "statement": "Let f:X' \\to X be a morphism of schemes [def-pc-scheme], let U be an arbitrary open cover of X, and let U' be an open cover of X' together with a specified refinement map U' \\to f^{-1}U in the sense of Stacks Tag 01FD. Let F and G be quasi-coherent modules on X [pqf-def-coherent], and write f^*F and f^*G for their pullbacks to X' [def-pc-module-pullback]. (a) The refinement cochain map from the Cech complex of (X,U,F) to that of (X',U',f^*F) is compatible with the usual pullback map H^p(X,F) \\to H^p(X',f^*F) under the canonical maps from Cech cohomology to cohomology, \\check H^p(U,F) \\to H^p(X,F) and \\check H^p(U',f^*F) \\to H^p(X',f^*F), which exist for every open cover. (b) For an arbitrary open cover U of X, the signed Cech cup-product cochain map of Tag 07MB, Tot(Cech(U,F) \\otimes Cech(U,G)) \\to Cech(U,F\\otimes G), induces on cohomology a map \\check H^p(U,F) \\otimes \\check H^q(U,G) \\to \\check H^{p+q}(U,F\\otimes G) that is compatible with the sheaf cup product H^p(X,F) \\otimes H^q(X,G) \\to H^{p+q}(X,F\\otimes G) under the canonical maps \\check H^n(U,-) \\to H^n(X,-) (Stacks Tag 0FKV, cohomology-lemma-diagrams-commute); in particular, when these canonical maps are isomorphisms (for instance for a finite affine cover of a scheme with affine diagonal and quasi-coherent F, G), the Cech cup product is the sheaf cup product. Both assertions are natural in F,G and f.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FD (cohomology-lemma-functoriality-cech), 07MB (cohomology-equation-needs-signs) and 0FKV (cohomology-lemma-diagrams-commute: the signed Cech cup product is compatible with the cup product on RGamma via the canonical maps, for every open covering)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sc-cech-comparison-map-naturality",
+  "lem-sc-cech-comparison-natural"
+ ],
+ "proof": [
+  {
+   "text": "This is Stacks Tag 01FD (the item's own source) with f:X'\\to X, the O_X-module F on the target, f^*F on the source, and the canonical f-map phi: f^*F \\to f^*F (the identity). Choose c from the index set of U' to that of U with U'_a \\subset f^{-1}(U_{c(a)}) and set gamma(s)_{a_0...a_p} = phi(s)_{c(a_0)...c(a_p)}, the restriction to U'_{a_0...a_p} of the pullback of s_{c(a_0)...c(a_p)}; pullback of sections commutes with restriction, so gamma is a cochain map. Choose injective resolutions F \\to J^\\bullet on X and f^*F \\to I^\\bullet on X', an injective resolution f_*I^\\bullet \\to J'^\\bullet on X and a map beta: J^\\bullet \\to J'^\\bullet over F \\to f_*f^*F \\to f_*I^\\bullet (this choice defines the pullback map H^p(X,F) \\to H^p(X',f^*F)). With the double complexes A^{p,q} = Cech^p(U',I^q), B^{p,q} = Cech^p(U,J^q), B'^{p,q} = Cech^p(U,J'^q), B''^{p,q} = Cech^p(U,f_*I^q), the rule defining gamma gives a map of double complexes B'' \\to A, and the 01FD diagram (pentagon commuting by the choice of beta, the other squares by definition) commutes; going around it, inverting the quasi-isomorphisms Gamma(-,resolution) \\to Tot, shows that the canonical maps of [lem-sc-cech-comparison-map-naturality] (defined from exactly these alpha and beta maps into Tot(A), Tot(B)) carry H^p(gamma) to the pullback map. This proves (a).",
+   "uses": [
+    "lem-sc-cech-comparison-map-naturality"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 01FD (cohomology-lemma-functoriality-cech), 07MB (cohomology-equation-needs-signs) and 0FKV (cohomology-lemma-diagrams-commute: the signed Cech cup product is compatible with the cup product on RGamma via the canonical maps, for every open covering)"
+    "place": "Tag 01FD, cohomology-lemma-functoriality-cech"
+   }
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "pqf-def-coherent",
-    "def-pc-module-pullback",
-    "def-pur-sheaf-tensor-product",
+  {
+   "text": "For the two Cech complexes and the sheaf tensor product, form the total tensor complex using d(a tensor b)=d(a) tensor b+(-1)^(deg a) a tensor d(b). The Cech cup map of Tag 07MB restricts the two factors to common intersections and inserts the total-complex signs; expanding the alternating restriction differential gives the Leibniz identity, with omitted-vertex terms cancelling in adjacent pairs. For sheaves in degree zero this specializes to the ordinary Cech cup product.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 07MB, cohomology-equation-needs-signs"
+   }
+  },
+  {
+   "text": "This is Stacks Tag 0FKV (the item's own source), applied to K = F and M = G placed in degree 0. Let A = Gamma(X,O_X). The sheaf cup product H^p(X,F) \\otimes_A H^q(X,G) \\to H^{p+q}(X,F \\otimes G) is (Stacks section-cup-product) the map on cohomology of the composite R Gamma(X,F) \\otimes_A^L R Gamma(X,G) --mu--> R Gamma(X, F \\otimes^L_{O_X} G) \\to R Gamma(X, F \\otimes_{O_X} G), precomposed with H^p \\otimes H^q \\to H^{p+q} of the derived tensor, with the signs of the total tensor complex [def-pc-tensor-complex-sheaves]. Tag 0FKV states that the square with top arrow Cech(U,F) \\otimes_A^L Cech(U,G) \\to R Gamma(X,F) \\otimes_A^L R Gamma(X,G) (the canonical maps), left arrow Cech(U,F) \\otimes^L \\to Tot(Cech(U,F) \\otimes_A Cech(U,G)) followed by the signed cup map of Step 2 (Tag 07MB) into Cech(U,F \\otimes G), right arrow mu followed by R Gamma(X,F \\otimes^L G) \\to R Gamma(X,F \\otimes G), and bottom arrow the canonical map Cech(U,F \\otimes G) \\to R Gamma(X,F \\otimes G), commutes in D(A) for every open covering; its proof replaces F, G by Godement (flasque) resolutions, for which Gamma = Tot(Cech) = R Gamma, and reduces to the compatibility of the naive cup product with mu. For a single sheaf the canonical maps of the square are those of [lem-sc-cech-comparison-map-naturality] (both are induced by the Cech double complex of a resolution by Cech-acyclic sheaves). Taking H^p \\otimes H^q \\to H^{p+q} gives (b). No isomorphism of comparison maps is needed; when the canonical maps are isomorphisms the two cup products correspond, which is the 'in particular' clause.",
+   "uses": [
     "lem-sc-cech-comparison-map-naturality",
-    "lem-sc-cech-comparison-natural"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Cech cup product compatible with pullback and cohomology comparison",
-      "results": "group cohomology functoriality hits; no Cech cup-product comparison theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "cochain cup product Cech",
-      "results": "0 hits; unknown identifier cochain",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "cup.*Cech|Cech.*cup|needs.signs in Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
-      "results": "0 hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Cech cup product functorial pullback",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "created": {
-    "item": "lem-sc-picard-kunneth-qcoh",
-    "by": "worker",
-    "date": "2026-10-11"
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FKV, cohomology-lemma-diagrams-commute"
+   }
   },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "statement_change": {
-    "date": "2026-10-11",
-    "by": "L",
-    "what": "clauses (a) and (b) made precise after H1's abandonment at 02:07 ('clause (b) falsely identifies arbitrary-cover Cech cup products with sheaf cup products'): for an arbitrary cover the Cech cup product is compatible with the sheaf cup product under the canonical maps Cech cohomology -> cohomology, which always exist (Stacks Tag 0FKV); it identifies the two only when those maps are isomorphisms, as in the citer's affine covers; (a) likewise reads 'compatible under the canonical maps' instead of 'whenever the comparison maps exist'",
-    "old_statement": "Let f:X' \\to X be a morphism of schemes [def-pc-scheme], let U be an arbitrary open cover of X, and let U' be an open cover of X' together with a specified refinement map U' \\to f^{-1}U in the sense of Stacks Tag 01FD. Let F and G be quasi-coherent modules on X [pqf-def-coherent], and write f^*F and f^*G for their pullbacks to X' [def-pc-module-pullback]. (a) The refinement cochain map from the Cech complex of (X,U,F) to that of (X',U',f^*F) induces the usual pullback map H^p(X,F) \\to H^p(X',f^*F) under the Cech comparison maps whenever the comparison maps exist. (b) For arbitrary covers, the signed Cech cup-product cochain map induces the sheaf cup product H^p(X,F) \\otimes H^q(X,G) \\to H^{p+q}(X,F\\otimes G), as in Tag 07MB. Both assertions are natural in F,G and f."
+  {
+   "text": "The refinement map in Step 1 carries a cup cochain to the cup cochain of the pulled-back factors: on each intersection this is f^*(s tensor t)=f^*s tensor f^*t, and the total-complex sign depends only on the degrees. Thus the refinement square commutes with the cup map. Combining this identity with Step 3 proves compatibility of cup products with pullback. The same restriction and tensor identities commute with morphisms of F and G, and refinement functions compose, proving naturality.",
+   "uses": [
+    "lem-sc-cech-comparison-map-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 01FD, 07MB and 0FKV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-cech-comparison-map-naturality",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FD, 07MB and 0FKV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech cup product compatible with pullback and cohomology comparison",
+   "results": "group cohomology functoriality hits; no Cech cup-product comparison theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
   },
-  "lead_notes": [
-    "L (02:17 UTC): restated after H1's abandonment (02:07). Clause (b) as first written was ambiguous ('induces'); the true statement, Stacks Tag 0FKV, is the compatibility of the signed Cech cup product with the cup product on RGamma(X,-) under the canonical maps Tot(Cech(U,K)) -> RGamma(X,K) of cohomology-lemma-cech-complex-complex, for every open covering; the citer lem-sc-picard-kunneth-qcoh (step 3) uses finite affine covers, where the canonical maps are isomorphisms by lem-sc-cech-comparison-map-iso-affine. A worker proves (b) by citing or splitting Tag 0FKV and (a) by Tag 01FD; no cup-product definition node exists yet (cite def-pc-tensor-complex-sheaves for the signs and state the sheaf cup product inline, or create a definition node)."
+  {
+   "tool": "loogle",
+   "query": "cochain cup product Cech",
+   "results": "0 hits; unknown identifier cochain",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cup.*Cech|Cech.*cup|needs.signs in Mathlib/CategoryTheory Mathlib/AlgebraicGeometry",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech cup product functorial pullback",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sc-picard-kunneth-qcoh",
+  "by": "worker",
+  "date": "2026-10-11"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "L",
+  "what": "clauses (a) and (b) made precise after H1's abandonment at 02:07 ('clause (b) falsely identifies arbitrary-cover Cech cup products with sheaf cup products'): for an arbitrary cover the Cech cup product is compatible with the sheaf cup product under the canonical maps Cech cohomology -> cohomology, which always exist (Stacks Tag 0FKV); it identifies the two only when those maps are isomorphisms, as in the citer's affine covers; (a) likewise reads 'compatible under the canonical maps' instead of 'whenever the comparison maps exist'",
+  "old_statement": "Let f:X' \\to X be a morphism of schemes [def-pc-scheme], let U be an arbitrary open cover of X, and let U' be an open cover of X' together with a specified refinement map U' \\to f^{-1}U in the sense of Stacks Tag 01FD. Let F and G be quasi-coherent modules on X [pqf-def-coherent], and write f^*F and f^*G for their pullbacks to X' [def-pc-module-pullback]. (a) The refinement cochain map from the Cech complex of (X,U,F) to that of (X',U',f^*F) induces the usual pullback map H^p(X,F) \\to H^p(X',f^*F) under the Cech comparison maps whenever the comparison maps exist. (b) For arbitrary covers, the signed Cech cup-product cochain map induces the sheaf cup product H^p(X,F) \\otimes H^q(X,G) \\to H^{p+q}(X,F\\otimes G), as in Tag 07MB. Both assertions are natural in F,G and f."
+ },
+ "lead_notes": [
+  "L (02:17 UTC): restated after H1's abandonment (02:07). Clause (b) as first written was ambiguous ('induces'); the true statement, Stacks Tag 0FKV, is the compatibility of the signed Cech cup product with the cup product on RGamma(X,-) under the canonical maps Tot(Cech(U,K)) -> RGamma(X,K) of cohomology-lemma-cech-complex-complex, for every open covering; the citer lem-sc-picard-kunneth-qcoh (step 3) uses finite affine covers, where the canonical maps are isomorphisms by lem-sc-cech-comparison-map-iso-affine. A worker proves (b) by citing or splitting Tag 0FKV and (a) by Tag 01FD; no cup-product definition node exists yet (cite def-pc-tensor-complex-sheaves for the signs and state the sheaf cup product inline, or create a definition node)."
+ ],
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-picard-cech-cup-pullback-compat",
+  "worker": "stage1",
+  "summary": "Split the item into the refinement cochain argument, the signed cup-product differential calculation, comparison-map naturality, and the termwise pullback compatibility. Reused the existing comparison-map nodes and created no new nodes because further nodes would restate the item's clauses.",
+  "blueprint": "The item is reached through thm-sc-theorem-of-cube via lem-sc-picard-kunneth-qcoh; the four steps realize the Cech compatibility lemma invoked in the Kunneth proof.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-cech-comparison-map-naturality",
+    "why": "The Cech pullback step needs the canonical comparison transformation and its naturality, which are generic tools from the Cech comparison unit and are not supplied by the theorem-of-the-cube route."
+   }
   ]
+ },
+ "tool_uses": [
+  "lem-sc-cech-comparison-map-naturality"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ccp0242",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ccp0242 (reviewer sub-agent of L); spot-checked: Statement identical to the lead's 02:17 restatement. Citer lem-sc-picard-kunneth-qcoh steps 3/8 use exactly (a),(b) with affine covers (C4 ok). 10-file stat vs sheaf-dag is base drift; delivery itself changes only the item and its report. Mathlib grep for Cech cup: none. FIX more, RETURN less: (1) C4 step 1: lem-sc-cech-comparison-map-naturality is for one scheme and one cover, not cross-scheme refinement; rewrote step 1 as the faithful 01FD argument (gamma, resolutions J, I, J', beta, double complexes B, B', B'', A) with the node used only for the definition of the canonical maps. (2) C4/D step 3: coefficient-naturality squares do not yield cup compatibility, and lem-sc-cech-comparison-natural is affine-only; rewrote step 3 as Tag 0FKV (item's own source) for K=F, M=G in degree 0, stating the sheaf cup product inline via mu and def-pc-tensor-complex-sheaves, with the 0FKV square and its Godement/flasque proof; dropped lem-sc-cech-comparison-natural from steps 3-4, proof_deps and tool_uses; proof_deps now the union of uses. Second reading missed fault (2).; 1 file(s) fixed by the reviewer"
+ }
 }

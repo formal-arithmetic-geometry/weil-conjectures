@@ -3312,3 +3312,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:40 L: returned deliver/J1/lem-pc-derived-tensor-flat-second-localization (reviewer RETURN: Reviewer R-dfl0239. 1. E (ill-typed new statement) lem-pc-flat-localization-kflat-resolution: F^bullet -> B is a K-flat )
 - 02:41 L: merged deliver/J1/lem-weil-degreewise-epi-kernel-cocone-qis (reviewer FIX; first push; new nodes: 0)
 - 02:41 L: read the rewritten steps of lem-weil-degreewise-epi-kernel-cocone-qis (R-dek0240 FIX, merged d787c26d7): 0 -> K -> Cone(f)[-1] -> Cone(id_Q)[-1] -> 0 termwise exact with contractible third term: sound; second reading by J1 missed the unforced TR3 component. Reviewer R-ccp0242 launched (J1 lem-sc-picard-cech-cup-pullback-compat, head 14f02be87, the lead's restatement kept word for word)
+- 02:43 L: merged deliver/J1/lem-sc-picard-cech-cup-pullback-compat (reviewer FIX; first push; new nodes: 0)
