@@ -1,11 +1,11 @@
 # Work queue
 
-41 items; claim with `tools/claim.py next <group> [--stage N]`.
+38 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (41)
+## Stage 2: nodes to state (38)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -38,15 +38,12 @@
 | `lem-sc-torsor-h1-ext-pushout` | 1 | state | 0 |
 | `lem-sc-torsor-h1-functoriality` | 1 | state | 0 |
 | `lem-sc-zariski-contracted-power-extension` | 1 | state | 0 |
-| `lem-sc-zariski-module-abelian-cohomology-agree` | 1 | state | 0 |
-| `lem-weil-pbc-affine-etale-site-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-colimit-of-sites` | 1 | state | 0 |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-sets-affine-etale-inverse-image-comparison` | 1 | state | 0 |
-| `lem-weil-pbc-sets-inverse-image-extension-by-empty-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-finite-coequalizer-embeds-constant` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-topological-flasque-acyclic` | 2 | state | 0 |
