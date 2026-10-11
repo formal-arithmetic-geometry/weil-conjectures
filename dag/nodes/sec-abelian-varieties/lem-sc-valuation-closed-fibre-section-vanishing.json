@@ -102,5 +102,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cfs0107 (reviewer sub-agent of L); spot-checked: Re-push after R-cfs0053: (1) E repaired: statement now assumes A not a field, change named with reason in the report (E7); citer 03198bf1b step 1 does not supply it but the field case is trivial there (lead note). (2) C4 repaired: step 1 takes F_{pi_0}=L|_{X_{pi_0}} itself, pullbacks are restrictions of L. Step 1 elementary: nonzero elements of m totally ordered by divisibility, m = union of pi A, so A/m = colim A/pi, X_0 = lim X_pi with affine transitions, X_pi qcqs as f is of finite presentation (qc, qs) over affine Spec A. New node lem-sc-valuation-limit-qcoh-section-descent = Limits 01Z0 for a qcoh module on a qcqs affine-transition system, hypotheses at least those of Situation descent; not a duplicate (lem-weil-pbc-limit-global-sections-colimit is the structure-sheaf case only; the 01ZR pc nodes are fp-module/complex descent); not elementary. Mathlib: grep QuasiCoherent / IsLimit in Mathlib/AlgebraicGeometry (Modules/ has only Presheaf, Sheaf, Tilde): no match. Second reading by K1 found no new fault but missed the citer hypothesis gap."
  },
- "lead_note": "2026-10-11 L (R-cfs0107): Citer lem-sc-picard-locus-closed-valuation-triviality (03198bf1b) step 1 applies this node without supplying its new hypothesis 'A is not a field'; the field case is trivial there (m=0 so X_0=X and s|_{X_0}=s is nonzero as a generator of the rank-one free H^0(X,L)); the lead should prefix step 1 with 'If A is a field, X_0=X and s|_{X_0}=s is nonzero; otherwise' (C4 at the citer, a node outside this delivery)."
+ "lead_note": "2026-10-11 L (R-cfs0107): Citer lem-sc-picard-locus-closed-valuation-triviality (03198bf1b) step 1 applies this node without supplying its new hypothesis 'A is not a field'; the field case is trivial there (m=0 so X_0=X and s|_{X_0}=s is nonzero as a generator of the rank-one free H^0(X,L)); the lead should prefix step 1 with 'If A is a field, X_0=X and s|_{X_0}=s is nonzero; otherwise' (C4 at the citer, a node outside this delivery).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ValuationClosedFibreSectionVanishing",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_nonzero_maximalIdeal_section_eq_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ValuationClosedFibreSectionVanishing.lean",
+  "statement": "theorem exists_nonzero_maximalIdeal_section_eq_zero (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A] (hA : ¬ IsField A) {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (L : X.Modules) [L.IsInvertible] (s : L.val.obj (op ⊤)) (hs : ((Classical.choose (exists_tensorPullbackAdjunction (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (IsLocalRing.maximalIdeal A))))))).unit.app L).val.app (op ⊤) s = 0) : ∃ π : A, π ≠ 0 ∧ π ∈ IsLocalRing.maximalIdeal A ∧ ((Classical.choose (exists_tensorPullbackAdjunction (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span {π}))))))).unit.app L).val.app (op ⊤) s = 0",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
