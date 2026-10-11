@@ -5056,3 +5056,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:49 L: merged deliver/M1/def-weil-pbc-coherent-formal-module (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.CoherentFormalModule AlgebraicGeometry.CoherentFormalModule)
 - 14:49 L: merged deliver/V1/lem-weil-pbc-tate-n2-complete-principal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TateN2CompletePrincipal tate_n2_complete_principal)
 - 14:49 L: merged deliver/U1/lem-weil-pbc-symmetric-algebra-quotient-module (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SymmetricAlgebraQuotientModule symmetricAlgebra_quotient_module)
+- 14:49 L: merged deliver/N1/lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralSheafColimitConstantEmbeddings TopCat.spectral_sheaf_colimit_constant_embeddings)

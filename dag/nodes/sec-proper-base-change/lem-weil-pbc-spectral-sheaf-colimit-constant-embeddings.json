@@ -132,5 +132,23 @@
   "item": "lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings",
   "worker": "stage1",
   "summary": "Statement kept (correct against Modules 0CAI + 0CAL; Stacks says 'filtered colimit', the proof of 0CAI indexes by finite subsets, so a directed set is right). stmt_deps kept. Tags checked against tags/tags: 0CAG section constructible sheaves of sets, 0CAH lemma-surjection (not a definition: Stacks has no definition of a constructible sheaf of sets in this section, and none is needed since 0CAI/0CAL name the explicit coequalizer form), 0CAI, 0CAK, 0CAL, 00A2 definition-j-shriek. Proof in three steps: the quasi-compact opens form a basis (definition of spectral space), 0CAI gives the directed colimit of coequalizers of finite coproducts of j_{U!} of finite constant sheaves, 0CAL embeds each term. New nodes: def-weil-pbc-sets-extension-by-empty (Stacks 00A2, sheaves of sets on a topological space; the existing def-weil-pbc-extension-by-zero is for etale sheaves of modules), lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers (0CAI, stated with a directed set), lem-weil-pbc-spectral-finite-coequalizer-embeds-constant (0CAL; its split will need 0CAK and the facts Stacks omits). All three searched with LeanSearch, LeanFinder and grep: no Mathlib match. No Lean of slopmaster2 states any of them."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralSheafColimitConstantEmbeddings",
+  "declaration": "TopCat.spectral_sheaf_colimit_constant_embeddings",
+  "file": "lean/Sheaf/Topology/SpectralSheafColimitConstantEmbeddings.lean",
+  "statement": "theorem spectral_sheaf_colimit_constant_embeddings (X : TopCat.{u}) [SpectralSpace X] (F : X.Sheaf (Type u)) : ∃ (I : Type u) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (D : I ⥤ X.Sheaf (Type u)) (ι : D ⟶ (Functor.const I).obj F), Nonempty (IsColimit (Cocone.mk F ι)) ∧ ∀ i : I, ∃ (n : ℕ) (Z : Fin n → Set X) (S : Fin n → Type u), (∀ k : Fin n, IsClosed (Z k) ∧ Topology.IsConstructible (Z k) ∧ Finite (S k)) ∧ ∃ e : ∀ U : Opens X, (D.obj i).obj.obj (op U) → ((k : Fin n) → LocallyConstant {x : X // x ∈ U ∧ x ∈ Z k} (S k)), (∀ U : Opens X, Function.Injective (e U)) ∧ ∀ (U V : Opens X) (f : V ⟶ U) (s : (D.obj i).obj.obj (op U)) (k : Fin n), e V ((D.obj i).obj.map f.op s) k = LocallyConstant.comap ⟨fun x : {x : X // x ∈ V ∧ x ∈ Z k} ↦ ⟨x.1, f.le x.2.1, x.2.2⟩, continuous_subtype_val.subtype_mk _⟩ (e U s k)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
