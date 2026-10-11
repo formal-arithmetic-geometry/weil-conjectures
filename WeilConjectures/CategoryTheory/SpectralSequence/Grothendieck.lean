@@ -687,9 +687,12 @@ lemma grothendieckSpectralObjectBaseChange_E₂ (eF : F ⋙ β ≅ α ⋙ F') (e
     simp only [Functor.comp_obj, Functor.comp_map] at hnat hρ
     rw [reassoc_of% hnat, rightDerivedBaseChange_app, rightDerivedBaseChange_app]
     simp only [Functor.map_comp, Category.assoc] at hρ ⊢
-    rw [← γ.map_comp_assoc, Iso.hom_inv_id_app, γ.map_id, Category.id_comp]
-    sorry
-  sorry
+    rw [← γ.map_comp_assoc, Iso.hom_inv_id_app, γ.map_id, Category.id_comp, reassoc_of% hρ, hψ,
+      ← Functor.map_comp_assoc (G'.rightDerived p), ← β.map_comp, Iso.hom_inv_id_app]
+    erw [β.map_id, Functor.map_id, Category.id_comp]
+    simp only [Functor.map_comp, Category.assoc]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hend]
 
 /-- **Base change for the Grothendieck spectral sequence.** Let `(F, G)` and `(F', G')` be
 composable pairs with acyclicity, related by exact functors `α : A ⥤ A'`, `β : B ⥤ B'`,
@@ -718,7 +721,15 @@ theorem exists_grothendieckSpectralObject_baseChange [PreservesFiniteLimits F]
           grothendieckE₂BaseChange F G F' G' eF eG p q ≫
           (Functor.isoWhiskerLeft α (F'.grothendieckSpectralObjectHIso G' p q (p + q : ℕ) q
             (q + 1) (by push_cast; rfl) rfl rfl)).inv := by
-  sorry
+  refine ⟨grothendieckSpectralObjectBaseChange F G F' G' eF eG, fun p q ↦ ?_⟩
+  ext X
+  have := grothendieckSpectralObjectBaseChange_E₂ F G F' G' eF eG p q X
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Abelian.SpectralObject.hFunctor_map]
+  rw [← cancel_mono ((F'.grothendieckSpectralObjectHIso G' p q (p + q : ℕ) q (q + 1)
+    (by push_cast; rfl) rfl rfl).hom.app (α.obj X)), Category.assoc, Category.assoc,
+    Iso.inv_hom_id_app]
+  exact this.trans (by erw [Category.comp_id])
 
 end BaseChange
 
