@@ -3095,3 +3095,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:24 UTC L: C1 local-dvr-base-change FIX 90b4e25b5 (R-ldb0022); deleted stale branch deliver/E1/lem-pc-derived-tensor-transitivity (claim now held by G1), notice in coord/returns/E1.md.
 - 00:24 L: merged deliver/C1/lem-wf-mixed-commutator-tangent (reviewer PASS; first push; new nodes: 0)
 - 00:25 UTC L: C1 mixed-commutator-tangent PASS c09c52704 (R-mct0024).
+- 00:26 L: returned deliver/H1/lem-pc-derived-mayer-vietoris-functorial (reviewer RETURN: Reviewer R-mvf0025, head afddf232a. 1 (E, statement): the item defines delta_E from the sequence 0->I->j_{U*}I|_U+j_{V*})
