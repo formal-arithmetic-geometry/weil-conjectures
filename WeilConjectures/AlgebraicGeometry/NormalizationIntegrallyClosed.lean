@@ -55,7 +55,8 @@ theorem isIntegrallyClosed_stalk_normalization (y : f.normalization)
   have := hW.isLocalization_stalk ⟨y, hyU⟩
   exact isIntegrallyClosed_of_isLocalization
     (R := Γ(f.normalization, f.fromNormalization ⁻¹ᵁ U))
-    (f.normalization.presheaf.stalk (⟨y, hyU⟩ : f.fromNormalization ⁻¹ᵁ U)) (hW.primeIdealOf ⟨y, hyU⟩).asIdeal.primeCompl
+    (f.normalization.presheaf.stalk (⟨y, hyU⟩ : f.fromNormalization ⁻¹ᵁ U))
+    (hW.primeIdealOf ⟨y, hyU⟩).asIdeal.primeCompl
     (Ideal.primeCompl_le_nonZeroDivisors _)
 
 end AlgebraicGeometry.Scheme.Hom
