@@ -200,5 +200,24 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps following Stacks 00TF with the hidden checks written out: fibre a global complete intersection near Q (00T5 node, localization of localization); 00SY (3)=>(2) as a new unsplit node, stated with the 00SG-equivalent hypothesis 'F_h a global complete intersection for some h not in Q' (L checked 00SY and 00SG: equivalent to S_q/pS_q a complete intersection ring); fibre of T = k[x]/(f bar) with matching primes; k -> F_T a relative global complete intersection smooth at Q_T; a Jacobian minor outside Q_T via the new unsplit 00TE node, commuting derivatives with coefficient reduction; 00TE 'if' for R -> T; back to S by T_t = S_{gs}. New unsplit definition def-weil-pbc-relative-global-complete-intersection (00SP). Mathlib's IsSmoothAt.of_formallySmooth_fiber (Smooth/Fiber.lean:193, @[stacks 00TF]) assumes global flatness and a formally smooth whole fibre, so not a leaf."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime",
+  "declaration": "flat_smooth_fibre_smooth_at_prime",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatSmoothFibreSmoothAtPrime.lean",
+  "statement": "theorem flat_smooth_fibre_smooth_at_prime {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (q : PrimeSpectrum S) (hfp : ∃ g : S, g ∉ q.asIdeal ∧ Algebra.FinitePresentation R (Localization.Away g)) (hflat : (Localization.localRingHom (PrimeSpectrum.comap (algebraMap R S) q).asIdeal q.asIdeal (algebraMap R S) rfl).Flat) (hsmooth : Algebra.IsSmoothAtPrime (PrimeSpectrum.comap (algebraMap R S) q).asIdeal.ResidueField (PrimeSpectrum.preimageEquivFiber R S (PrimeSpectrum.comap (algebraMap R S) q) ⟨q, rfl⟩)) : Algebra.IsSmoothAtPrime R q",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fss1040"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fss1040",
+  "group": "K1",
+  "result": "fix",
+  "note": "R S CommRing [Algebra R S] (phi), q : PrimeSpectrum S, p = comap q; (1) exists g notin q, FinitePresentation R S_g; (2) localRingHom p q flat; (3) IsSmoothAtPrime kappa(p) at preimageEquivFiber prime of p.Fiber S; concl IsSmoothAtPrime R q (fixed from Mathlib IsSmoothAt)"
  }
 }
