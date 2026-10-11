@@ -1,11 +1,11 @@
 # Work queue
 
-34 items; claim with `tools/claim.py next <group> [--stage N]`.
+33 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (34)
+## Stage 2: nodes to state (33)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -39,7 +39,6 @@
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-sheaf-finite-truncation-colimit` | 1 | state | 0 |
-| `lem-weil-pbc-sheafification-plus-theorem` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-finite-coequalizer-embeds-constant` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-topological-flasque-acyclic` | 2 | state | 0 |
