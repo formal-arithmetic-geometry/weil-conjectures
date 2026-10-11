@@ -307,20 +307,4 @@ theorem Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity (hΛ : IsAddTorsio
   ⟨Etale.HasTorsionBaseChange.hasInjectiveAcyclicity Λ f,
     Etale.HasInjectiveAcyclicity.hasTorsionBaseChange Λ hΛ f⟩
 
-/-- **Injective acyclicity implies the base change property**, over an arbitrary coefficient
-ring: if a proper morphism `f : X ⟶ Y` has injective acyclicity, then it satisfies the base
-change property for torsion coefficients. This is the converse direction of
-`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity` without the
-hypothesis that `Λ` be torsion: an object of `D⁺` with torsion cohomology is reached from
-the sheaves of `𝐅_r`-modules by the coefficient dévissage described in the module docstring
-(prime-torsion sheaves, then `n`-torsion sheaves by induction on the number of prime factors
-of `n`, then all torsion sheaves as filtered colimits), and for a sheaf of `𝐅_r`-modules one
-resolves by injectives, which stay `f'_*`-acyclic after base change by `IA(f)`, and compares
-termwise by the underived exchange morphism of the proper morphism `f`.
-(blueprint: `lemma-weil-pbc-property-iff-acyclicity`) -/
-@[stacks 0A4B]
-theorem Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity (f : X ⟶ Y) [IsProper f]
-    (hf : Etale.HasInjectiveAcyclicity Λ f) : Etale.HasTorsionBaseChange Λ f :=
-  sorry
-
 end AlgebraicGeometry

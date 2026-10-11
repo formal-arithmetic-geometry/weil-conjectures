@@ -330,6 +330,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Spreading
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
@@ -1415,6 +1416,7 @@ public import WeilConjectures.RingTheory.RelativeComponentGeneralization
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
+public import WeilConjectures.Scratch.Frontier
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
@@ -1429,6 +1431,8 @@ public import WeilConjectures.SixFunctors.BaseChange.Pasting
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Cancellation
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
@@ -1436,6 +1440,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLin
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Reduction
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift

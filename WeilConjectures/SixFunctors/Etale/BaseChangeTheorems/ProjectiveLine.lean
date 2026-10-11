@@ -6,7 +6,7 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Reduction
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk
 
 /-!
@@ -118,35 +118,8 @@ docstring, and Stacks Project, Tag 095T, whose proof it is.
 (blueprint: `prop:weil-pbc-projective-line`) -/
 theorem Etale.hasTorsionBaseChange_projectiveLine (S : Scheme.{u}) :
     Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S) :=
-  Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity Λ _
-    (Etale.hasInjectiveAcyclicity_projectiveLine Λ S)
-
-/-- **Reduction of proper base change to the projective line**: if the projection
-`ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasTorsionBaseChange` for every scheme `S`,
-then so does every proper morphism of schemes.
-
-The proof is Chow's lemma: a proper `f : X ⟶ Y` is dominated by a projective one,
-
-```
-       X̃ ------------> ℙⁿ_Y
-       |                |
-     π |                | pₙ
-       v                v
-       X ------ f ----> Y
-```
-
-with `π` proper surjective and the horizontal arrow a closed immersion over `Y`; the base
-change property for `pₙ` comes from that of `ℙ¹` by the symmetric-product morphism, and
-transfers to `f` because it composes and cancels along proper surjections. See the module
-docstring for the steps, and for the noetherian-freeness of the Chow factorisation the
-statement uses.
-(blueprint: `prop:weil-pbc-reduction-to-projective-line`) -/
-@[stacks 0A4F]
-theorem Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper
-    (h : ∀ S : Scheme.{u}, Etale.HasTorsionBaseChange Λ (ProjectiveLine S ↘ S))
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
-    Etale.HasTorsionBaseChange Λ f :=
-  sorry
+  Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity Λ _ fun _ _ ↦
+    Etale.hasInjectiveAcyclicity_projectiveLine _ S
 
 /-- **Proper morphisms satisfy base change**: the two halves of the proof combined. -/
 theorem Etale.hasTorsionBaseChange_of_isProper {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
