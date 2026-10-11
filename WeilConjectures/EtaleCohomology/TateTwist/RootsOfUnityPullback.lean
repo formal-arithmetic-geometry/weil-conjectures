@@ -45,7 +45,7 @@ lemma upperStarRootsOfUnitySheafToRootsOfUnitySheaf_comp (a : X ⟶ Y) (b : Y �
   have hn := (Etale.upperStarComp AddCommGrpCat.{u + 1} a b).hom.naturality
     (kernel.ι (n • 𝟙 Z.gmSheaf))
   simp only [Category.assoc, upperStarRootsOfUnitySheafToRootsOfUnitySheaf_ι,
-    upperStarRootsOfUnitySheafToRootsOfUnitySheaf_ι_assoc, ← Functor.map_comp_assoc]
+    ← Functor.map_comp_assoc]
   rw [Functor.map_comp_assoc, ← upperStarGmSheafToGmSheaf_comp a b, reassoc_of% hn]
   rfl
 
@@ -73,7 +73,8 @@ lemma zmodToGmSections_natCast (ζ : Γ(X, ⊤)ˣ) (hζ : ζ ^ n = 1) (k : ℕ) 
   refine (X.zmodToGmPresheaf_app_natCast n ζ hζ _ k).trans ?_
   simp [gmSection]
 
-lemma zmodToGmSections_comp_gmSectionsPullback [NeZero n] (g : X ⟶ Y) (ζ : Γ(Y, ⊤)ˣ) (hζ : ζ ^ n = 1) :
+lemma zmodToGmSections_comp_gmSectionsPullback [NeZero n] (g : X ⟶ Y) (ζ : Γ(Y, ⊤)ˣ)
+    (hζ : ζ ^ n = 1) :
     zmodToGmSections n ζ hζ ≫ gmSectionsPullback g =
       zmodToGmSections n (Units.map g.appTop.hom.toMonoidHom ζ)
         (by rw [← map_pow, hζ, map_one]) := by
@@ -99,7 +100,8 @@ lemma upperStar_map_constantZModToRootsOfUnitySheaf_comp [NeZero n] (g : X ⟶ Y
       terminalIsTerminal).homEquiv _ _).symm_apply_apply (Y.constantZModToGmSheaf n ζ hζ),
     ← ((constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1}
       terminalIsTerminal).homEquiv _ _).symm_apply_apply (X.constantZModToGmSheaf n _ _),
-    constantSheafAdj_homEquiv_constantZModToGmSheaf, constantSheafAdj_homEquiv_constantZModToGmSheaf,
+    constantSheafAdj_homEquiv_constantZModToGmSheaf,
+    constantSheafAdj_homEquiv_constantZModToGmSheaf,
     upperStar_map_constantSheafAdj_homEquiv_symm_comp, zmodToGmSections_comp_gmSectionsPullback]
 
 /-- If `Y` carries an `n`-th root of unity whose powers have invertible differences, the
@@ -158,7 +160,8 @@ set_option maxHeartbeats 1000000 in
 -- elaborating the iterated pullbacks and their étale instances is slow
 /-- **The pullback of `μₙ` is `μₙ`.** For `g : X ⟶ Y` with `n` invertible on `Y`, the comparison
 `g^* μₙ ⟶ μₙ` is an isomorphism. After the étale cover of `Y` adjoining a primitive `n`-th root of
-unity this is `AlgebraicGeometry.Scheme.isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf_of_isUnit_sub`,
+unity this is
+`AlgebraicGeometry.Scheme.isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf_of_isUnit_sub`,
 and the comparison maps are compatible with composition. -/
 theorem isIso_upperStarRootsOfUnitySheafToRootsOfUnitySheaf_of_isUnit [NeZero n] (g : X ⟶ Y)
     (hn : IsUnit (n : Γ(Y, ⊤))) :

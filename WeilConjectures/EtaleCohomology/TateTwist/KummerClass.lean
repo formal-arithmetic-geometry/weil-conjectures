@@ -37,6 +37,8 @@ coefficients extended to `Λ`. It is additive in `u` (`AlgebraicGeometry.Etale.k
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.kummerClassOf`: the Kummer class `κ(u) ∈ H¹(X, Λ(1))`.
+- `AlgebraicGeometry.Etale.hasKummerClass`: the Kummer class datum of the Tate twist `μₙ ⊗ Λ`,
+  natural under pullback (`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_kummerClassOf`).
 -/
 
 @[expose] public section
@@ -52,7 +54,8 @@ namespace AlgebraicGeometry
 namespace Scheme
 
 /-- The constant étale sheaf `ℤ` (written `ℤ/0`, so as to reuse the lemmas on `ℤ/n`). -/
-noncomputable abbrev constantSheafInt (X : Scheme.{u}) : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
+noncomputable abbrev constantSheafInt (X : Scheme.{u}) :
+    Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   X.constantZMod 0
 
 variable {X : Scheme.{u}}
@@ -170,7 +173,8 @@ lemma kummerδ_comp {C C' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (�
   erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.comp_id]
 
 instance : (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).Additive :=
-  (constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1} terminalIsTerminal).left_adjoint_additive
+  (constantSheafAdj X.smallEtaleTopology AddCommGrpCat.{u + 1}
+    terminalIsTerminal).left_adjoint_additive
 
 variable [NeZero (ringChar Λ)]
 
@@ -204,6 +208,7 @@ noncomputable def constantComplexIsoSingleFunctorExtendScalarsInt :
     (DerivedCategory.singleFunctor _ 0).mapIso
       (upperStarExtendScalarsConstantSheafIntIso Λ (toInvertibleExponentBase (Λ := Λ) X))
 
+omit [NeZero (ringChar Λ)] in
 lemma isUnit_ringChar_invertibleExponentBase :
     IsUnit ((ringChar Λ : ℕ) : Γ(invertibleExponentBase.{u} Λ, ⊤)) := by
   simpa using (isUnit_ringChar_invertibleExponentRing Λ).map
@@ -369,6 +374,7 @@ noncomputable def upperStarKummerExtendScalarsHom (v : Γ(Y, ⊤)ˣ) :
     rw [Functor.map_comp]
     exact ((upperStarExtendScalarsIso Λ f).hom.naturality_assoc _ _).symm
 
+omit [NeZero (ringChar Λ)] in
 /-- The derived pullback of the connecting morphism of the Kummer sequence pulled back along `v`
 is the connecting morphism of the Kummer sequence pulled back along the pullback of `v`. -/
 lemma leftDerivedUpperStar_map_kummerδ (v : Γ(Y, ⊤)ˣ) :
@@ -404,7 +410,134 @@ lemma leftDerivedUpperStar_map_kummerδ (v : Γ(Y, ⊤)ˣ) :
   erw [reassoc_of% h1]
   exact congrArg (_ ≫ ·) h2
 
+/-- The identifications `Λ(1) ≅ μₙ ⊗ Λ` placed in degree zero are compatible with the derived
+pullbacks. -/
+lemma leftDerivedUpperStar_map_tateTwistObjectOneIso :
+    (L((f)^*[ModuleCat.{u + 1} Λ])).map (tateTwistObjectOneIso Y Λ).hom ≫
+        (singleFunctorCompLeftDerivedUpperStarIso _ f).hom.app _ ≫
+          (DerivedCategory.singleFunctor _ 0).map
+            ((upperStarExtendScalarsIso Λ f).hom.app (Y.rootsOfUnitySheaf (ringChar Λ)) ≫
+              (extendScalars Λ X).map
+                (upperStarRootsOfUnitySheafToRootsOfUnitySheaf (ringChar Λ) f)) =
+      (leftDerivedUpperStarTateTwistObjectIso Λ f 1).hom ≫ (tateTwistObjectOneIso X Λ).hom := by
+  have hπ := (comp_toInvertibleExponentBase (Λ := Λ) f).symm
+  have hc : ∀ (πX : X ⟶ invertibleExponentBase.{u} Λ)
+      (hπ : πX = f ≫ toInvertibleExponentBase (Λ := Λ) Y),
+      (upperStarComp _ f _ πX hπ).hom.app _ ≫
+        (f)^*[AddCommGrpCat.{u + 1}].map (upperStarRootsOfUnitySheafToRootsOfUnitySheaf
+          (ringChar Λ) (toInvertibleExponentBase (Λ := Λ) Y)) ≫
+          upperStarRootsOfUnitySheafToRootsOfUnitySheaf (ringChar Λ) f =
+        upperStarRootsOfUnitySheafToRootsOfUnitySheaf (ringChar Λ) πX := by
+    rintro _ rfl
+    exact upperStarRootsOfUnitySheafToRootsOfUnitySheaf_comp _ f _
+  have hσ := upperStarComp_hom_app_comp_upperStar_map_extendScalars Λ f _ _ hπ _ _ _ (hc _ hπ)
+    (ρ_ (tateSheaf Λ (invertibleExponentBase.{u} Λ))).hom
+  have hG := leftDerivedUpperStar_map_singleFunctor_comp (ModuleCat.{u + 1} Λ) f _ _ hπ _
+    (tateTwistSheafOneIso Y Λ).hom (tateTwistSheafOneIso X Λ).hom _ hσ
+  have n := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f _ _ hπ).inv.naturality
+    ((tateSheafTensorInverse Λ).zpowSingleFunctorIso 1).hom
+  simp only [tateTwistObjectOneIso, tateTwistObjectIsoSingleFunctor,
+    leftDerivedUpperStarTateTwistObjectIso, pullbackIntTensorFamilyCopyIso,
+    pullbackIntTensorFamilyIso, Iso.trans_hom, Functor.mapIso_hom, eqToIso.hom, Iso.symm_hom,
+    Iso.app_hom, Iso.app_inv, Functor.map_comp, Category.assoc, eqToHom_trans_assoc,
+    eqToHom_refl, Category.id_comp, Functor.comp_map] at hG n ⊢
+  erw [← reassoc_of% n]
+  rw [hG]
+
+omit [NeZero (ringChar Λ)] in
+/-- The identifications `Λ ≅ Λ ⊗ ℤ` placed in degree zero are compatible with the derived
+pullbacks. -/
+lemma leftDerivedUpperStar_map_constantComplexIsoSingleFunctorExtendScalarsInt :
+    (L((f)^*[ModuleCat.{u + 1} Λ])).map
+        (constantComplexIsoSingleFunctorExtendScalarsInt Y Λ).hom ≫
+        (singleFunctorCompLeftDerivedUpperStarIso _ f).hom.app _ ≫
+          (DerivedCategory.singleFunctor _ 0).map
+            ((upperStarExtendScalarsIso Λ f).hom.app Y.constantSheafInt ≫
+              (extendScalars Λ X).map
+                ((upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).hom.app _)) =
+      (leftDerivedUpperStarConstantComplexIso Λ f).hom ≫
+        (constantComplexIsoSingleFunctorExtendScalarsInt X Λ).hom := by
+  have hπ := (comp_toInvertibleExponentBase (Λ := Λ) f).symm
+  have hc : ∀ (πX : X ⟶ invertibleExponentBase.{u} Λ)
+      (hπ : πX = f ≫ toInvertibleExponentBase (Λ := Λ) Y),
+      (upperStarComp _ f _ πX hπ).hom.app _ ≫
+        (f)^*[AddCommGrpCat.{u + 1}].map ((upperStarConstantSheafIso AddCommGrpCat.{u + 1}
+          (toInvertibleExponentBase (Λ := Λ) Y)).hom.app
+            (AddCommGrpCat.of (ULift.{u + 1} (ZMod 0)))) ≫
+          (upperStarConstantSheafIso AddCommGrpCat.{u + 1} f).hom.app _ =
+        (upperStarConstantSheafIso AddCommGrpCat.{u + 1} πX).hom.app _ := by
+    rintro _ rfl
+    exact upperStarConstantSheafIso_comp _ f _ _
+  have hσ := upperStarComp_hom_app_comp_upperStar_map_extendScalars Λ f _ _ hπ _ _ _ (hc _ hπ)
+    (𝟙 ((extendScalars Λ (invertibleExponentBase.{u} Λ)).obj
+      (invertibleExponentBase.{u} Λ).constantSheafInt))
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp] at hσ
+  have hG := leftDerivedUpperStar_map_singleFunctor_comp (ModuleCat.{u + 1} Λ) f _ _ hπ _
+    (upperStarExtendScalarsConstantSheafIntIso Λ (toInvertibleExponentBase (Λ := Λ) Y)).hom
+    (upperStarExtendScalarsConstantSheafIntIso Λ (toInvertibleExponentBase (Λ := Λ) X)).hom _ hσ
+  have n := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f _ _ hπ).inv.naturality
+    (constantComplexIsoSingleFunctorExtendScalarsIntOfUnit (invertibleExponentBase.{u} Λ) Λ).hom
+  have hη : (leftDerivedUpperStarConstantComplexIso Λ f).hom ≫
+      (leftDerivedUpperStarConstantComplexIso Λ (toInvertibleExponentBase (Λ := Λ) X)).inv =
+      (L((f)^*[ModuleCat.{u + 1} Λ])).map
+        (leftDerivedUpperStarConstantComplexIso Λ (toInvertibleExponentBase (Λ := Λ) Y)).inv ≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f _ _ hπ).inv.app _ := by
+    have c := leftDerivedUpperStarComp_hom_app_unit (ModuleCat.{u + 1} Λ) f
+      (toInvertibleExponentBase (Λ := Λ) Y) _ hπ
+    rw [← cancel_epi ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f _ _ hπ).hom.app _ ≫
+      (L((f)^*[ModuleCat.{u + 1} Λ])).map
+        (leftDerivedUpperStarConstantComplexIso Λ (toInvertibleExponentBase (Λ := Λ) Y)).hom)]
+    simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
+      CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
+    erw [reassoc_of% c]
+    exact (leftDerivedUpperStarConstantComplexIso Λ
+      (toInvertibleExponentBase (Λ := Λ) X)).hom_inv_id
+  simp only [constantComplexIsoSingleFunctorExtendScalarsInt, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapIso_hom, Iso.app_hom, Functor.map_comp, Category.assoc,
+    Functor.comp_map] at hG n ⊢
+  rw [reassoc_of% hη, ← reassoc_of% n, ← hG]
+
+/-- The Kummer class is natural under pullback, `Lf^* κ(v) = κ(f^* v)`. -/
+lemma leftDerivedUpperStar_map_kummerClassOf (v : Γ(Y, ⊤)ˣ) :
+    (L((f)^*[ModuleCat.{u + 1} Λ])).map (kummerClassOf Y Λ v) ≫
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.app (tateTwistObject Λ Y 1) ≫
+          (leftDerivedUpperStarTateTwistObjectIso Λ f 1).hom⟦(1 : ℤ)⟧' =
+      (leftDerivedUpperStarConstantComplexIso Λ f).hom ≫
+        kummerClassOf X Λ (Units.map f.appTop.hom.toMonoidHom v) := by
+  have hB := leftDerivedUpperStar_map_tateTwistObjectOneIso Λ f
+  have hB' : (L((f)^*[ModuleCat.{u + 1} Λ])).map (tateTwistObjectOneIso Y Λ).inv ≫
+      (leftDerivedUpperStarTateTwistObjectIso Λ f 1).hom =
+      ((singleFunctorCompLeftDerivedUpperStarIso _ f).hom.app _ ≫
+          (DerivedCategory.singleFunctor _ 0).map
+            ((upperStarExtendScalarsIso Λ f).hom.app (Y.rootsOfUnitySheaf (ringChar Λ)) ≫
+              (extendScalars Λ X).map
+                (upperStarRootsOfUnitySheafToRootsOfUnitySheaf (ringChar Λ) f))) ≫
+        (tateTwistObjectOneIso X Λ).inv := by
+    rw [Iso.eq_comp_inv, ← cancel_epi ((L((f)^*[ModuleCat.{u + 1} Λ])).map
+      (tateTwistObjectOneIso Y Λ).hom)]
+    simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
+      CategoryTheory.Functor.map_id, Category.id_comp]
+    exact hB.symm
+  have hA := leftDerivedUpperStar_map_constantComplexIsoSingleFunctorExtendScalarsInt Λ f
+  have hδ := leftDerivedUpperStar_map_kummerδ Λ f v
+  have hcs := ((L((f)^*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).hom.naturality
+    (tateTwistObjectOneIso Y Λ).inv
+  simp only [Functor.comp_map] at hcs
+  simp only [kummerClassOf, Functor.map_comp, Category.assoc]
+  erw [reassoc_of% hcs]
+  rw [← Functor.map_comp, hB', Functor.map_comp, ← reassoc_of% hA]
+  simp only [Functor.map_comp, Category.assoc] at hδ ⊢
+  rw [reassoc_of% hδ]
+
 end Naturality
+
+/-- The Kummer class datum of the Tate twist `Λ(1) = μₙ ⊗ Λ`: the Kummer class of a unit is the
+boundary of the unit in the Kummer sequence, with coefficients extended to `Λ`. -/
+noncomputable instance hasKummerClass : HasKummerClass Λ where
+  toHasTateTwist := hasTateTwist Λ
+  kummerClass X _ u := kummerClassOf X Λ u
+  kummerClass_mul X _ u v := kummerClassOf_mul X Λ u v
+  leftDerivedUpperStar_map_kummerClass f u := leftDerivedUpperStar_map_kummerClassOf Λ f u
 
 end Etale
 

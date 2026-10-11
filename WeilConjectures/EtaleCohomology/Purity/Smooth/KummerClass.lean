@@ -211,9 +211,9 @@ noncomputable def supportedClassMap (i : Z ⟶ X) [IsClosedImmersion i]
 /-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
 
 The *rank-one normalisation* of the Kummer classes. For every scheme `B` separated and locally
-of finite type over a field, on which the exponent of `Λ` is invertible, let `t` be the coordinate of `𝔸¹_B` and `s : V(t) ⟶ 𝔸¹_B` the zero
-section. The Kummer boundary `∂κ(t) ∈ H²_{V(t)}(𝔸¹_B, Λ(1))` is the fundamental class of the
-zero section: its adjoint `Λ_{V(t)} ⟶ Rs^! (Λ(1)[2])` is an isomorphism.
+of finite type over a field, on which the exponent of `Λ` is invertible, let `t` be the
+coordinate of `𝔸¹_B` and `s : V(t) ⟶ 𝔸¹_B` the zero section. The Kummer boundary
+`∂κ(t) ∈ H²_{V(t)}(𝔸¹_B, Λ(1))` is the fundamental class of the zero section: its adjoint `Λ_{V(t)} ⟶ Rs^! (Λ(1)[2])` is an isomorphism.
 
 This is the rank-one local calculation `H²_{0}(𝔸¹_ȳ, Λ(1)) ≅ Λ`, `∂κ(t) ↦ 1`, of the blueprint,
 a theorem for the concrete model. Naturality and multiplicativity alone do not imply it (the

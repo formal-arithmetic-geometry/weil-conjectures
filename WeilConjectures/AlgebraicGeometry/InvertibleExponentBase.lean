@@ -69,7 +69,8 @@ lemma isUnit_ringChar_of_hasInvertibleExponent (X : Scheme.{u}) [HasInvertibleEx
 noncomputable def invertibleExponentRingHom (X : Scheme.{u}) [HasInvertibleExponent Λ X] :
     CommRingCat.of (InvertibleExponentRing.{u} Λ) ⟶ Γ(X, ⊤) :=
   CommRingCat.ofHom ((IsLocalization.Away.lift (ringChar Λ : ℤ)
-      (g := Int.castRingHom Γ(X, ⊤)) (by simpa using isUnit_ringChar_of_hasInvertibleExponent X)).comp
+      (g := Int.castRingHom Γ(X, ⊤))
+        (by simpa using isUnit_ringChar_of_hasInvertibleExponent X)).comp
     ULift.ringEquiv.toRingHom)
 
 /-- The morphism `X ⟶ Spec ℤ[1/n]` from a scheme on which the characteristic `n` of `Λ` is
