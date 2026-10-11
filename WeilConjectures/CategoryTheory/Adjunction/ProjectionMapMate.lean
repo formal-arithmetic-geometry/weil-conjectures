@@ -167,7 +167,7 @@ lemma isIso_mateEquiv_mateEquiv :
     inferInstance
   rwa [← iterated_mateEquiv_conjugateEquiv adj adj' adj_D adj_C α.hom] at hconj
 
-variable [Preadditive C] [Preadditive D] [HasFiniteBiproducts C] [HasFiniteBiproducts D]
+variable [Preadditive C] [Preadditive D] [HasFiniteBiproducts C]
   [G.Additive] [R_D.ReflectsIsomorphisms]
 
 /-- The base change map `β : N_D (G M) ⟶ G' (N_C M)`, the mate of an isomorphism
