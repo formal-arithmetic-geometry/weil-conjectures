@@ -1,20 +1,21 @@
 # Work queue
 
-932 items; claim with `tools/claim.py next <group> [--stage N]`.
+935 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (932)
+## Stage 2: nodes to state (935)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-kun-support` | 1 | state |
-| `def-pur-hom-complex` | 1 | state |
+| `def-kun-dimension` | 1 | state |
+| `def-sc-ringed-space-module-cohomology` | 1 | state |
 | `def-weil-derived-tensor` | 1 | state |
 | `def-weil-pbc-kinjective-resolutions` | 1 | state |
 | `lem-exc-field-discrete-modules` | 1 | state |
 | `lem-galois-pi1-finite-etale-image-stabilizer` | 1 | state |
+| `lem-kun-04ca` | 1 | state |
 | `lem-pc-base-change-product` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-second-factor-functor` | 1 | state |
@@ -23,11 +24,14 @@
 | `lem-pc-flat-module-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
-| `lem-pc-very-ample-disjoint-union` | 1 | state |
+| `lem-pur-hom-kflat-into-kinjective` | 1 | state |
+| `lem-pur-rhom-into-kinjective-local` | 1 | state |
+| `lem-pur-rhom-well-defined` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
+| `lem-sc-bounded-above-finite-free-hom-acyclic` | 1 | state |
+| `lem-sc-derived-hom-tensor-total` | 1 | state |
 | `lem-sc-etale-faithfully-flat-local` | 1 | state |
 | `lem-sc-finite-free-internal-hom-exact` | 1 | state |
-| `lem-sc-hilbert-embedded-points-affine-localization` | 1 | state |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-p1-ext-yoneda-associativity` | 1 | state |
@@ -40,10 +44,9 @@
 | `lem-sc-rational-functions-generic-stalks` | 1 | state |
 | `lem-sc-regular-local-ext-vanishing` | 1 | state |
 | `lem-sc-ringed-space-injective-restriction-surjective` | 1 | state |
-| `lem-sc-ringed-space-module-sheaves-enough-injectives` | 1 | state |
+| `lem-sc-ringed-space-restrict-injective-resolution` | 1 | state |
 | `lem-sc-semilocal-dedekind-dvr-reduction` | 1 | state |
 | `lem-sc-semilocal-dim-one-conductor` | 1 | state |
-| `lem-sc-semilocal-dim-one-normalization` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
 | `lem-sc-strict-henselization-completion-flat-over-base` | 1 | state |
 | `lem-sc-strict-henselization-dimension` | 1 | state |
@@ -942,7 +945,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 915 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 906 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
