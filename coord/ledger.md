@@ -4151,3 +4151,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:05 L: merged deliver/F1/lem-weil-pbc-fibre-product-affine-transition (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineFibreProductTransition AlgebraicGeometry.isAffineHom_pullback_map)
 - 10:06 L: merged deliver/H1/lem-pur-left-derived-defined-pointwise-kan-bridge (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge CategoryTheory.leftDerived_defined_pointwiseKan_bridge)
 - 10:06 L: merged deliver/K1/lem-weil-pbc-etale-ring-map-prescribed-residue-field (stage 2; reviewer PASS; first push; WeilConjectures.Mathlib.RingTheory.Etale.ResidueField Algebra.exists_etale_residueField_equiv; existing declaration)
+- 10:06 L: merged deliver/F1/lem-weil-pbc-fibre-dimension-neighborhood (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FibreDimensionNeighborhood Algebra.exists_away_fibre_dimension_le)
