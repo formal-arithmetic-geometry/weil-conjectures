@@ -136,22 +136,25 @@
   "note": "Definition checked against Sites 00XJ, 03A0 (1)-(5) and 03CG; made self-contained (refinement after 00VT); the claim that it agrees with 03CG moved from the statement to a remark step (the converse direction is 03A0, a pointer, no node needed yet). Not a Mathlib leaf: only (a) is a single Mathlib predicate (Functor.IsCocontinuous, CoverLifting.lean:75); (b) is Stacks 00WV (stronger than Functor.IsContinuous); (c),(d) are source-side conditions, not IsLocallyFaithful/IsLocallyFull (target-side); (e) implies IsCoverDense; together they imply IsCocontinuous and IsDenseSubsite, a theorem. The brief's guesses on (b)-(d) corrected by the worker."
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.SpecialCocontinuousFunctor",
-  "declaration": "CategoryTheory.Functor.IsSpecialCocontinuous",
-  "file": "lean/Sheaf/CategoryTheory/SpecialCocontinuousFunctor.lean",
-  "statement": "def IsSpecialCocontinuous {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D] (J : Precoverage C) (K : Precoverage D) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] [K.HasIsos] [K.IsStableUnderComposition] [K.IsStableUnderBaseChange] [K.HasPullbacks] (F : C ⥤ D) : Prop",
+  "module": "Sheaf.CategoryTheory.SpecialCocontinuousCoverings",
+  "declaration": "CategoryTheory.Functor.IsSpecialCocontinuousForCoverings",
+  "declarations": [
+   "CategoryTheory.Functor.IsSpecialCocontinuousForCoverings"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SpecialCocontinuousCoverings.lean",
+  "statement": "def IsSpecialCocontinuousForCoverings {C : Type uc} [Category.{vc} C] {D : Type ud} [Category.{vd} D] (J : Precoverage C) (K : Precoverage D) (F : C ⥤ D) : Prop",
   "branch": "sheaf-dag",
-  "by": "F1",
+  "by": "K1",
   "date": "2026-10-11",
   "existing": false,
-  "note": "Cocontinuity (1) is Mathlib Functor.IsCocontinuous on the generated topologies J.toGrothendieck, K.toGrothendieck; the new definition packages (2)(a)-(e): (a) IsCocontinuous, (b) Stacks continuity inline as hcover/hpullback of siteContinuous_pushforward_isSheaf, (c),(d) on actual source coverings, (e) an actual covering by image objects. Categories of arbitrary size (R-scf) so that the citer lem-weil-pbc-affine-etale-site-topos can apply it to the inclusion into X.Etale.",
-  "fixed_by": "R-scf"
+  "note": "The previous record imposes Precoverage.IsStableUnderComposition, which finite coverings do not satisfy: an infinitely repeated identity cover can be refined at each index by different finite covers, producing an infinite set of distinct arrows. The dependency defines only the five Stacks conditions on the actual covering presieves and generated topologies; the new declaration states these verbatim without that extra, non-Stacks class assumption. The source and target sites are supplied by their actual pretopologies."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
   "by": "L",
-  "reviewer": "R-scf",
-  "group": "F1",
-  "result": "fix"
+  "reviewer": "R-aet",
+  "group": "K1",
+  "result": "pass",
+  "note": "S arbitrary; S_aff,et = full subcategory IsAffine U.left of S.Etale with Fin-n etale jointly surjective coverings (0219/021B(4)); special cocontinuity via dependency module (landed IsSpecialCocontinuous needs Precoverage.IsStableUnderComposition, false for finite coverings: repeated-index counterexample verified against Mathlib's indexed class); sets and Ab restriction equivalences via sheafPushforwardContinuous; natural H^p comparison at each affine U with degree-0 identity on sections; U=S affine via Sheaf.functorH (stage-3 bridge per def-weil-pbc-etale-cohomology note); check_dag clean on branch"
  }
 }

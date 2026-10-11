@@ -25,7 +25,8 @@
   "def-weil-pbc-special-cocontinuous-functor",
   "def-weil-pbc-etale-sheaf-of-sets",
   "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-etale-cohomology"
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-full-affine-etale-site"
  ],
  "proof": [
   {
@@ -208,5 +209,29 @@
   "by": "L",
   "result": "pass",
   "note": "Six steps: S_{affine,et} is a site (reviewed leaves); the inclusion is special cocontinuous (new definition node def-weil-pbc-special-cocontinuous-functor, 00XJ/03A0; proof of 021E adapted; new Mathlib leaf lem-weil-pbc-etale-covering-affine-refinement = QuasiCompactCover.exists_hom Cover/QuasiCompact.lean:183 with its hypotheses by instances, verified); the standard etale topology is the induced one (new Mathlib leaf lem-weil-pbc-pretopology-sheaf-condition: isSheaf_pretopology SheafOfTypes.lean:138, isSheaf_iff_isLimit_pretopology Sheaf.lean:208, verified); the equivalence via Mathlib's AffineEtale.sheafEquiv (new leaf lem-weil-pbc-affine-etale-induced-sheaf-equivalence, AffineEtale.lean:140) transported along the equivalence of categories (new leaf lem-weil-pbc-site-equivalence-sheaf-transport, Equivalence.sheafCongr Sites/Equivalence.lean:109-141), all verified; the cohomology clause along 03YU with the new leaf lem-weil-pbc-equivalence-injective-resolutions (Equivalence.map_injective_iff Injective/Basic.lean:352 and the limit/exactness lemmas); the case U = S affine via K-injective resolutions (prop-weil-pbc-kinjective-resolutions-exist, imported, cited as def-weil-pbc-cohomology-pullback does). Mathlib's IsDenseSubsite.sheafEquiv is ruled out by universes (worker's note), hence the detour through AffineEtale."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FullAffineEtaleTopos",
+  "declaration": "AlgebraicGeometry.Scheme.fullAffineEtaleInclusion_special_equivalences",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.fullAffineEtaleInclusion_isContinuous",
+   "AlgebraicGeometry.Scheme.fullAffineEtaleInclusion_special_equivalences",
+   "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_comparison",
+   "AlgebraicGeometry.Scheme.fullAffineEtale_cohomology_base"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FullAffineEtaleTopos.lean",
+  "statement": "theorem fullAffineEtaleInclusion_special_equivalences (S : Scheme.{u}) : (fullAffineEtaleInclusion S).IsSpecialCocontinuousForCoverings (fullAffineEtalePrecoverage S) S.smallEtalePretopology.toPrecoverage ∧ ((fullAffineEtaleInclusion S).sheafPushforwardContinuous (Type u) (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence ∧ ((fullAffineEtaleInclusion S).sheafPushforwardContinuous AddCommGrpCat.{u} (fullAffineEtaleTopology S) S.smallEtaleTopology).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aet",
+  "group": "K1",
+  "result": "pass",
+  "note": "S arbitrary; S_aff,et = full subcategory IsAffine U.left of S.Etale with Fin-n etale jointly surjective coverings (0219/021B(4)); special cocontinuity via dependency module (landed IsSpecialCocontinuous needs Precoverage.IsStableUnderComposition, false for finite coverings: repeated-index counterexample verified against Mathlib's indexed class); sets and Ab restriction equivalences via sheafPushforwardContinuous; natural H^p comparison at each affine U with degree-0 identity on sections; U=S affine via Sheaf.functorH (stage-3 bridge per def-weil-pbc-etale-cohomology note); check_dag clean on branch"
  }
 }
