@@ -166,22 +166,23 @@
   "note": "definition checked against Stacks 00SP: fibre-dimension condition as stated; the homeomorphism claim moved to a remark; the ring-map form spelled out as a presentation. No Mathlib notion of complete intersections (candidate: Algebra.Presentation with its dimension and the fibre/Krull-dimension building blocks). Status split."
  },
  "lean": {
-  "module": "Sheaf.Paper.RelativeGlobalCompleteIntersection",
-  "declaration": "Algebra.IsRelativeGlobalCompleteIntersection",
-  "file": "lean/Sheaf/Paper/RelativeGlobalCompleteIntersection.lean",
-  "statement": "def IsRelativeGlobalCompleteIntersection {R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop",
+  "module": "Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation",
+  "declaration": "Algebra.IsRelativeGlobalCompleteIntersectionPresentation",
+  "file": "lean/Sheaf/Paper/RelativeGlobalCompleteIntersectionPresentation.lean",
+  "statement": "def IsRelativeGlobalCompleteIntersectionPresentation {R : Type u} [CommRing R] {n c : ℕ} (f : Fin c → MvPolynomial (Fin n) R) : Prop",
   "branch": "sheaf-dag",
   "by": "J1",
   "date": "2026-10-11",
   "existing": false,
-  "fixed_by": "R-rgc0615"
+  "note": "The old declaration supplies only the existential ring-map notion; it cannot express the definition node’s condition on specified n,c,relations. This module adds that presentation condition and imports the old module, retaining its intrinsic ring-map definition without duplication.",
+  "fixed_by": "R-gci"
  },
  "reviewed_lean": {
   "date": "2026-10-11",
   "by": "L",
-  "reviewer": "R-rgc0615",
+  "reviewer": "R-gci",
   "group": "J1",
   "result": "fix",
-  "note": "ring map f with f.toAlgebra; exists n c, relations Fin c -> MvPolynomial (Fin n) R, R-alg equiv quotient by span ≃ S; all primes p; Nontrivial p.Fiber T (fibre nonzero) -> c ≤ n and topologicalKrullDim Spec(fibre) = n-c (truncation guarded); c>n forces empty fibres; no Mathlib/source CompleteIntersection beyond F1 field case; fix: copyright header, unused open scoped BigOperators"
+  "note": "R, n, c (zero allowed), relations : Fin c -> MvPolynomial (Fin n) R, S = the canonical quotient by Ideal.span (range relations), hypothesis = the 00SP fibre condition for THESE equations via Ideal.Fiber/topologicalKrullDim with c<=n guard on nonempty fibres, conclusion RingHom.Flat (algebraMap R S); presentation predicate aligned to the implicit-{n c} form shared by H1/J1 sibling deliveries"
  }
 }

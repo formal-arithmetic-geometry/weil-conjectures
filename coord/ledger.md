@@ -4859,3 +4859,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:03 L: merged deliver/E1/lem-weil-pbc-regular-base-change (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RegularBaseChange RingHom.regular_base_change)
 - 14:04 L: merged deliver/G1/lem-weil-pbc-regular-sequence-conormal-free (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularSequenceConormal RingTheory.Sequence.regularSequence_conormal_free)
 - 14:04 L: merged deliver/K1/lem-weil-pbc-regular-sequence-short-exact-sequence (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RegularSequenceShortExactSequence RingTheory.Sequence.isRegular_of_shortExact)
+- 14:04 L: merged deliver/J1/lem-weil-pbc-relative-global-complete-intersection-flat (stage 2; reviewer FIX; first push; Sheaf.RingTheory.RelativeGlobalCompleteIntersectionFlat Algebra.flat_of_isRelativeGlobalCompleteIntersection_quotient; dependency modules: def-weil-pbc-relative-global-complete-intersection)
