@@ -1,11 +1,11 @@
 # Work queue
 
-979 items; claim with `tools/claim.py next <group> [--stage N]`.
+978 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (979)
+## Stage 2: nodes to state (978)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `def-pur-sheaf-tensor-product` | 1 | state |
 | `def-sbc-normal-dominant-galois` | 1 | state |
 | `def-sp-double-complex-total` | 1 | state |
-| `def-weil-pbc-associated-module` | 1 | state |
 | `def-weil-pbc-curve-setting` | 1 | state |
 | `def-weil-pbc-etale-sheaves` | 1 | state |
 | `def-weil-pbc-formal-glueing-data` | 1 | state |
@@ -43,7 +42,6 @@
 | `lem-pc-derived-limit-milnor-sequence` | 1 | state |
 | `lem-pc-derived-limit-roos-abelian-groups` | 1 | state |
 | `lem-pc-derived-lower-truncation-step-triangle` | 1 | state |
-| `lem-pc-derived-splitting-unique` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
 | `lem-pc-finite-flat-restriction-projective` | 1 | state |
 | `lem-pc-finite-projective-tor-acyclic` | 1 | state |
@@ -248,6 +246,7 @@
 | `lem-weil-pbc-another-helper-g-ring` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
 | `lem-weil-pbc-artinian-local-essentially-finite-type-residue` | 1 | state |
+| `lem-weil-pbc-associated-module-hom` | 1 | state |
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
 | `lem-weil-pbc-associated-prime-power-quotient` | 1 | state |
 | `lem-weil-pbc-associated-primes-exact-sequence` | 1 | state |
@@ -989,7 +988,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1129 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1128 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
