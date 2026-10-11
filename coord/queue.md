@@ -1,11 +1,11 @@
 # Work queue
 
-82 items; claim with `tools/claim.py next <group> [--stage N]`.
+79 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (82)
+## Stage 2: nodes to state (79)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -34,7 +34,6 @@
 | `lem-pc-noetherian-perfect-direct-image` | 1 | state | 0 |
 | `lem-pc-projection-locality` | 1 | state | 0 |
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
-| `lem-pc-qcqs-sheaf-rhom-adjunction` | 1 | state | 0 |
 | `lem-pc-rf-base-change-complex` | 1 | state | 0 |
 | `lem-pc-rf-base-change-single-complex-criterion` | 1 | state | 0 |
 | `lem-pc-rf-mv-triangle-naturality` | 1 | state | 0 |
@@ -60,7 +59,6 @@
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state | 0 |
 | `lem-sc-invert-s-cohomology-affine-case` | 1 | state | 0 |
-| `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 1 | state | 0 |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
@@ -78,7 +76,6 @@
 | `lem-weil-pbc-finite-pushforward-unit-edge-compatibility` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
-| `lem-weil-pbc-grothendieck-existence-devissage` | 1 | state | 0 |
 | `lem-weil-pbc-grothendieck-existence-easy` | 1 | state | 0 |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-module-cohomology-fmap-basic-properties` | 1 | state | 0 |
