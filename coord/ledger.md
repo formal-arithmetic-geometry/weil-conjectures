@@ -3766,3 +3766,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:07 L: merged deliver/J1/lem-pc-module-pullback-adjunction (stage 2; reviewer FIX; after a return; Sheaf.AlgebraicGeometry.TensorPullbackAdjunction AlgebraicGeometry.Scheme.Modules.exists_tensorPullbackAdjunction)
 - 08:07 L: merged deliver/M1/lem-sc-hilbert-affine-denominator-module (stage 2; reviewer PASS; first push; Sheaf.RingTheory.HilbertAffineDenominatorModule Module.hilbert_affine_denominator_module; statement corrected (1 citers))
 - 08:08 L: merged deliver/G1/def-weil-pbc-finite-torsors (stage 2; reviewer PASS; after a return; WeilConjectures.CategoryTheory.Sites.Torsor CategoryTheory.Sheaf.Torsor; existing declaration)
+- 08:08 L: merged deliver/C1/lem-sc-ample-proj-local-chart (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AmpleProjLocalChart AlgebraicGeometry.Scheme.Modules.exists_sectionRing_proj_affine_charts)

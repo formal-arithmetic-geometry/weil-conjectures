@@ -24,7 +24,9 @@
   "def-pc-scheme",
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module",
-  "def-pc-proj"
+  "def-pc-proj",
+  "def-sc-invertible-section-ring",
+  "def-sc-section-generating-locus"
  ],
  "proof": [
   {
@@ -154,5 +156,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apl1753 (reviewer sub-agent of L); spot-checked: Return of 17:08 D1 repaired: lem-sc-ample-proj-affine-chart deleted; item proof now runs 01Q1 argument (a) qc + separated via def/09MP, (b) 09MR p=0 on L^d with Veronese reindexing, (c) D_+(s)=Spec S_(s), (d) localization clause added to lem-sc-ample-proj-canonical-map (01PZ(3)/01N8), (e) new mathlib leaf lem-sc-affine-global-sections-iso; read Mathlib IsIso.lean:48 HasAffineProperty isomorphisms (IsAffine X and IsIso f.appTop), one-line specialization for affine target; leaf not a duplicate of the 01I1 nodes; tool_use ample=>separated accepted as generic. FIX more, RETURN less: step 4 cited 'step 2' for the localization isomorphism, corrected to 'step 3'.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleProjLocalChart",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_sectionRing_proj_affine_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleProjLocalChart.lean",
+  "statement": "theorem exists_sectionRing_proj_affine_charts (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible] (hcover : ∀ x : X, ∃ (d : ℕ) (s : sectionRingGrade L d), 0 < d ∧ x ∈ nonvanishingLocus (L.tensorPow d) (s.val d)) : ∃ f : X ⟶ Proj (sectionRingGrade L), ∀ (d : ℕ) (_hd : 0 < d) (s : sectionRingGrade L d), (f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val : Set X) = nonvanishingLocus (L.tensorPow d) (s.val d) ∧ (∀ (n : ℕ) (ξ : sectionRingGrade L (n • d)), (f.app (Proj.basicOpen (sectionRingGrade L) s.val) (Proj.awayToSection (sectionRingGrade L) s.val (HomogeneousLocalization.Away.mk (sectionRingGrade L) s.property n ξ.val ξ.property))) • (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val ≤ ⊤)).op ((s.val ^ n) (n • d)) = (L.tensorPow (n • d)).presheaf.map (homOfLE (le_top : f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val ≤ ⊤)).op (ξ.val (n • d))) ∧ (IsAmple X L → ∀ U : X.Opens, (U : Set X) = nonvanishingLocus (L.tensorPow d) (s.val d) → IsAffineOpen U → IsIso (f ∣_ Proj.basicOpen (sectionRingGrade L) s.val))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-plc1140"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-plc1140",
+  "group": "C1",
+  "result": "fix",
+  "note": "X Scheme.{u}; L [IsInvertible] (K1); S = sectionRingGrade L (landed def-sc-invertible-section-ring, same as M1 c356294cb); positive-degree homogeneous s via 0<d, s : sectionRingGrade L d; X_s switched from source generatingLocus to landed nonvanishingLocus (L.tensorPow d) (s.val d) per STATE NON-VANISHING LOCUS in cover, inverse-image (as Set X) and affineness (U : Opens with (U:Set X)=X_s, IsAffineOpen U); one f before all d,s; canonical fraction formula identical to M1; IsAmple resolves to Scheme.Modules.IsAmple (#check); IsIso (f ∣_ D+(s)) = induced X_s -> D+(s)"
  }
 }
