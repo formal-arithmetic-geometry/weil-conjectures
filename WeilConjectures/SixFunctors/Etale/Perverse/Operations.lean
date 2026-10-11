@@ -7,10 +7,14 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.FiberDimension
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeHomology
+public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
+public import WeilConjectures.SixFunctors.Etale.Derived.HomShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
 
@@ -131,6 +135,16 @@ theorem SupportCondition.tensor
   obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip A X
   exact ⟨h.of_iso ((β.app L).app K), h⟩
 
+/-- `SupportCondition.tensor` with the tensor product written as
+`AlgebraicGeometry.Etale.derivedTensor`:
+tensoring on the right with a complex of Tor amplitude in `[0, 0]` preserves the support
+condition. -/
+theorem SupportCondition.derivedTensor
+    {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    (hK : SupportCondition K) (hL : torAmplitudeIn A X 0 0 L) :
+    SupportCondition (((Etale.derivedTensor A X).obj K).obj L) :=
+  (SupportCondition.tensor hK hL).1
+
 /-- The coefficient dual of a dualizable complex of Tor amplitude in `[0, 0]` has Tor amplitude
 in `[0, 0]`. -/
 theorem torAmplitudeIn_coefficientDual
@@ -157,6 +171,7 @@ def IsLisse (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ∃ L₀ : Sheaf X.smallEtaleTopology A, Scheme.IsLocallyConstantSheaf L₀ ∧
       Nonempty (L ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj L₀)
 
+omit [HasSmallSiteSheafify A] in
 /-- **Permanence under a lisse tensor**, support side: `K ∈ ᵖD^{≤n}` implies
 `K ⊗ᴸ L ∈ ᵖD^{≤n}` for a lisse `L`. (blueprint: `lem-per-lisse-tensor-permanence`) -/
 theorem isPerverseLE_tensor {n : ℤ}
@@ -164,6 +179,7 @@ theorem isPerverseLE_tensor {n : ℤ}
     (hK : IsPerverseLE n K) (hL : IsLisse L) : IsPerverseLE n (K ⊗ L) :=
   (SupportCondition.tensor hK hL.2.2.1).1.of_iso (shiftTensorIso K L n)
 
+omit [HasSmallSiteSheafify A] in
 /-- **Permanence under a lisse tensor**, cosupport side: `K ∈ ᵖD^{≥n}` implies
 `K ⊗ᴸ L ∈ ᵖD^{≥n}` for a lisse `L`: by `lem-per-dual-lisse-tensor` the Verdier dual of
 `K[n] ⊗ᴸ L` is `L^∨ ⊗ᴸ 𝔻(K[n])`, and `L^∨` again has Tor amplitude in `[0, 0]`.
@@ -185,6 +201,8 @@ variable {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [
   [QuasiCompact aY] [HasCompactification aY]
 
 include aY in
+omit [Finite Λ] [HasInvertibleExponent Λ (Spec (.of k))] [IsSeparated aY] [QuasiCompact aY]
+  [HasCompactification aY] in
 /-- **Smooth pullback is perverse up to the shift**, support side: for a smooth morphism
 `f : X ⟶ Y` of relative dimension `d` between separated schemes of finite type over `k`, the
 pullback carries `ᵖD^{≤n}(Y)` into `ᵖD^{≤n+d}(X)`; that is, `f^*[d]` preserves `ᵖD^{≤n}`.
@@ -192,21 +210,79 @@ pullback carries `ᵖD^{≤n}(Y)` into `ᵖD^{≤n+d}(X)`; that is, `f^*[d]` pre
 theorem isPerverseLE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimension d f] {n : ℤ}
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsPerverseLE n K) :
-    IsPerverseLE (n + d) ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) :=
-  -- TODO(adic): the support of a pullback is the preimage, of dimension raised by `d`
-  sorry
+    IsPerverseLE (n + d) ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) := by
+  have := LocallyOfFiniteType.isLocallyNoetherian aY
+  have : Smooth f := SmoothOfRelativeDimension.smooth d f
+  intro i hi
+  set S := sheafSupport ((_root_.DerivedCategory.homologyFunctor _ (-(i - d))).obj (K⟦n⟧))
+  have hsub : sheafSupport ((_root_.DerivedCategory.homologyFunctor _ (-i)).obj
+      (((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)⟦n + d⟧)) ⊆ f ⁻¹' S := by
+    have e := sheafSupport_congr ((leftDerivedUpperStarHomologyFunctorIso _ f (n + d + -i)).app K)
+    rw [Functor.comp_obj, Functor.comp_obj] at e
+    rw [sheafSupport_homology_shift, ← e,
+      show n + d + -i = n + -(i - d) by ring, show S = _ from sheafSupport_homology_shift K n _]
+    exact sheafSupport_upperStar_subset f _
+  obtain ⟨h₀, h₁⟩ := hK (i - d) (by obtain ⟨x, hx⟩ := hi; exact ⟨f x, hsub hx⟩)
+  refine ⟨by omega, ?_⟩
+  calc _ ≤ topologicalKrullDim (f ⁻¹' S) :=
+        (Topology.IsEmbedding.inclusion hsub).isInducing.topologicalKrullDim_le
+    _ ≤ topologicalKrullDim S + (d : ℕ∞) :=
+        f.topologicalKrullDim_preimage_le (isClosed_sheafSupport _) _
+          fun y _ ↦ f.topologicalKrullDim_preimage_singleton_le_of_smooth d y
+    _ ≤ ((i - d).toNat : ℕ∞) + (d : ℕ∞) := add_le_add h₁ le_rfl
+    _ = (i.toNat : ℕ∞) := by
+        rw [← WithBot.coe_add, ← Nat.cast_add, show (i - d).toNat + d = i.toNat by omega]
 
 /-- **Smooth pullback is perverse up to the shift**, cosupport side: for `f` smooth of
-relative dimension `d`, the pullback carries `ᵖD^{≥n}(Y) ∩ Dctf(Y)` into `ᵖD^{≥n+d}(X)`, by
-the Verdier exchange `𝔻_X f^* ≅ f^! 𝔻_Y` and smooth purity `f^! ≅ f^*(d)[2d]`.
+relative dimension `d`, the pullback carries `ᵖD^{≥n}(Y)` into `ᵖD^{≥n+d}(X)`. By the exchange
+`𝔻_X f^* ≅ f^! 𝔻_Y` and smooth duality `f^! M ≅ f^* M ⊗ᴸ L[2d]` for a locally constant sheaf
+`L` of free rank-one modules, `𝔻_X(f^* K[n + d]) ≅ (f^* 𝔻_Y(K[n]))[d] ⊗ᴸ L`, and the support
+side applies to `𝔻_Y(K[n])`; the tensor product with the flat `L` preserves supports.
 (blueprint: `lem-per-smooth-pullback-t-exact`) -/
 theorem isPerverseGE_upperStar (d : ℕ) (f : X ⟶ Y) [SmoothOfRelativeDimension d f]
     [HasCompactification (f ≫ aY)] {n : ℤ}
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    (hK : IsPerverseGE aY n K) (hK' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y K) :
-    IsPerverseGE (f ≫ aY) (n + d) ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) :=
-  -- TODO(adic): Verdier exchange for `f` and smooth purity
-  sorry
+    (hK : IsPerverseGE aY n K) :
+    IsPerverseGE (f ≫ aY) (n + d) ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K) := by
+  -- `X` is noetherian and separated over `k`, so `f` is compactifiable by Nagata
+  have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom aY
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
+  let c := HasCompactification.compactification (f ≫ aY)
+  have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  have : IsNoetherian c.Z := { __ := LocallyOfFiniteType.isLocallyNoetherian c.g }
+  have : TopologicalSpace.NoetherianSpace X := c.i.isOpenEmbedding.isInducing.noetherianSpace
+  have : IsSeparated (f ≫ aY) := by rw [c.comm]; infer_instance
+  have : IsSeparated f := IsSeparated.of_comp f aY
+  have : Smooth f := SmoothOfRelativeDimension.smooth d f
+  have : HasCompactification f := inferInstance
+  -- the support side for the dual
+  let DY := (verdierDual (ModuleCat.{u + 1} Λ) aY).obj (op K)
+  have hDK : IsPerverseLE (-n) DY :=
+    SupportCondition.of_iso (verdierDualShiftIso _ aY K n) hK
+  have h₁ := isPerverseLE_upperStar aY d f hDK
+  obtain ⟨L₀, _, hL₀, ⟨eω⟩, htens⟩ := exists_dualizingComplex_iso_and_tensor Λ f d
+  obtain ⟨-, hL₀f⟩ := isConstructibleSheaf_and_flat_of_sheafFiber_iso Λ L₀ hL₀
+  have h₂ := SupportCondition.derivedTensor h₁ (torAmplitudeIn_singleFunctor_zero_of_flat _ L₀ hL₀f)
+  -- the duality isomorphisms
+  obtain ⟨e₁⟩ := nonempty_iso_rightDerivedUpperShriek_comp Λ f aY
+  obtain ⟨e₂⟩ := nonempty_iso_rightDerivedUpperShriek_derivedHom Λ f K
+    (dualizingComplex (ModuleCat.{u + 1} Λ) aY)
+  obtain ⟨e₃⟩ := htens DY
+  let M := (L((f)^*[ModuleCat.{u + 1} Λ])).obj DY
+  let T := (_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)) 0).obj L₀
+  let G : (verdierDual (ModuleCat.{u + 1} Λ) (f ≫ aY)).obj
+      (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅
+      (((derivedTensor _ X).obj M).obj T)⟦(2 * d : ℤ)⟧ :=
+    ((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K))).mapIso
+        (e₁.app _) ≪≫ e₂.symm ≪≫ e₃.symm ≪≫ ((derivedTensor _ X).obj M).mapIso eω ≪≫
+      (((derivedTensor _ X).obj M).commShiftIso (2 * d : ℤ)).app T
+  refine SupportCondition.of_iso ?_ h₂
+  exact (((derivedTensor _ X).flip.obj T).commShiftIso (-n + d)).app M ≪≫
+    (shiftFunctorAdd' _ (2 * d : ℤ) (-(n + d)) (-n + d) (by ring)).app _ ≪≫
+    (shiftFunctor _ (-(n + d : ℤ))).mapIso G.symm ≪≫
+    (verdierDualShiftIso _ (f ≫ aY) _ (n + d)).symm
 
 end Pullback
 

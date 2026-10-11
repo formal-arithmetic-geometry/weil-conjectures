@@ -112,7 +112,7 @@ theorem isPerverseGE_fourierTransform [HasCompactification (pullback.fst π π' 
     (hK : IsPerverseGE π 0 K) (hK' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) V K) :
     IsPerverseGE π' (-1) ((fourierTransform Λ π π' Ψ b 1).obj K) := by
   have hL := isLisse_fourierKernel π π' Ψ b
-  have h₁ := isPerverseGE_tensor (isPerverseGE_upperStar π 1 (pullback.fst π π') hK hK') hL
+  have h₁ := isPerverseGE_tensor (isPerverseGE_upperStar π 1 (pullback.fst π π') hK) hL
   have h₂ := isPerverseGE_lowerShriek π' 1 (pullback.snd π π') hfib
     (h₁.of_eq pullback.condition)
     (constructibleFiniteTor_tensor _ _
