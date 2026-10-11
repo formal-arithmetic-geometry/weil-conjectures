@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+public import Mathlib.CategoryTheory.Idempotents.Basic
+public import Mathlib.CategoryTheory.Retract
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 
 /-!
@@ -65,6 +67,76 @@ theorem IsDualizable.biprod_of_isZero_left [HasBinaryBiproducts C] {P Z : C}
         rw [← biprod.total, hZ.eq_of_tgt biprod.fst 0, zero_comp, zero_add] }
 
 end Zero
+
+section Retract
+
+variable {C : Type*} [Category C] [MonoidalCategory C]
+
+/-- A retract of an object with a right dual has a right dual when idempotents split: the dual is
+the image of the idempotent `(r ≫ i)ᘁ` on the dual. -/
+theorem nonempty_hasRightDual_of_retract [IsIdempotentComplete C] {R D : C} (h : Retract R D)
+    [HasRightDual D] : Nonempty (HasRightDual R) := by
+  have he : ((h.r ≫ h.i)ᘁ) ≫ ((h.r ≫ h.i)ᘁ) = (h.r ≫ h.i)ᘁ := by
+    rw [← comp_rightAdjointMate, Category.assoc, h.retract_assoc]
+  obtain ⟨S, s, p, hsp, hps⟩ := IsIdempotentComplete.idempotents_split _ _ he
+  have k1 : ((p ≫ s) ⊗ₘ h.i) ≫ ε_ D Dᘁ = (Dᘁ ◁ h.i) ≫ ε_ D Dᘁ := by
+    rw [hps, tensorHom_def', Category.assoc, rightAdjointMate_comp_evaluation,
+      ← whiskerLeft_comp_assoc, h.retract_assoc]
+  have k2 : η_ D Dᘁ ≫ ((h.r ≫ h.i) ⊗ₘ p) = η_ D Dᘁ ≫ (D ◁ p) := by
+    rw [tensorHom_def, ← Category.assoc, ← coevaluation_comp_rightAdjointMate, Category.assoc,
+      ← whiskerLeft_comp, ← hps, Category.assoc, hsp, Category.comp_id]
+  exact ⟨
+    { rightDual := S
+      exact :=
+        { coevaluation' := η_ D Dᘁ ≫ (h.r ⊗ₘ p)
+          evaluation' := (s ⊗ₘ h.i) ≫ ε_ D Dᘁ
+          coevaluation_evaluation' := by
+            calc S ◁ (η_ D Dᘁ ≫ (h.r ⊗ₘ p)) ≫ (α_ S R S).inv ≫ ((s ⊗ₘ h.i) ≫ ε_ D Dᘁ) ▷ S
+                = S ◁ η_ D Dᘁ ≫ (α_ S D Dᘁ).inv ≫ ((s ⊗ₘ (h.r ≫ h.i)) ⊗ₘ p) ≫
+                  ε_ D Dᘁ ▷ S := by
+                  rw [MonoidalCategory.whiskerLeft_comp, comp_whiskerRight, Category.assoc]
+                  congr 1
+                  rw [← id_tensorHom, associator_inv_naturality_assoc, ← tensorHom_id,
+                    ← tensorHom_id, tensorHom_comp_tensorHom_assoc, tensorHom_comp_tensorHom]
+                  simp only [tensorHom_comp_tensorHom, Category.id_comp, Category.comp_id]
+              _ = s ▷ _ ≫ Dᘁ ◁ (η_ D Dᘁ ≫ ((h.r ≫ h.i) ⊗ₘ p)) ≫ (α_ Dᘁ D S).inv ≫
+                  ε_ D Dᘁ ▷ S := by
+                  have e : (α_ S D Dᘁ).inv ≫ ((s ⊗ₘ (h.r ≫ h.i)) ⊗ₘ p) =
+                      (s ⊗ₘ ((h.r ≫ h.i) ⊗ₘ p)) ≫ (α_ Dᘁ D S).inv :=
+                    (associator_inv_naturality _ _ _).symm
+                  rw [reassoc_of% e, tensorHom_def, Category.assoc, whisker_exchange_assoc]
+                  simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc]
+              _ = s ▷ _ ≫ Dᘁ ◁ η_ D Dᘁ ≫ Dᘁ ◁ (D ◁ p) ≫ (α_ Dᘁ D S).inv ≫ ε_ D Dᘁ ▷ S := by
+                  rw [k2, MonoidalCategory.whiskerLeft_comp, Category.assoc]
+              _ = s ▷ _ ≫ Dᘁ ◁ η_ D Dᘁ ≫ (α_ Dᘁ D Dᘁ).inv ≫ ε_ D Dᘁ ▷ Dᘁ ≫ 𝟙_ C ◁ p := by
+                  rw [associator_inv_naturality_right_assoc, whisker_exchange]
+              _ = _ := by
+                  rw [ExactPairing.coevaluation_evaluation_assoc, whiskerRight_id, id_whiskerLeft]
+                  simp [reassoc_of% hsp]
+          evaluation_coevaluation' := by
+            calc (η_ D Dᘁ ≫ (h.r ⊗ₘ p)) ▷ R ≫ (α_ R S R).hom ≫ R ◁ ((s ⊗ₘ h.i) ≫ ε_ D Dᘁ)
+                = η_ D Dᘁ ▷ R ≫ (α_ D Dᘁ R).hom ≫ (h.r ⊗ₘ (((p ≫ s) ⊗ₘ h.i) ≫ ε_ D Dᘁ)) := by
+                  rw [comp_whiskerRight, Category.assoc, MonoidalCategory.whiskerLeft_comp]
+                  congr 1
+                  rw [← tensorHom_id, associator_naturality_assoc, ← id_tensorHom, ← id_tensorHom,
+                    tensorHom_comp_tensorHom_assoc, tensorHom_comp_tensorHom]
+                  simp only [Category.comp_id, Category.id_comp, tensorHom_comp_tensorHom]
+              _ = η_ D Dᘁ ▷ R ≫ (α_ D Dᘁ R).hom ≫ D ◁ (Dᘁ ◁ h.i) ≫ D ◁ ε_ D Dᘁ ≫
+                  h.r ▷ _ := by
+                  rw [k1, tensorHom_def', MonoidalCategory.whiskerLeft_comp, Category.assoc]
+              _ = 𝟙_ C ◁ h.i ≫ η_ D Dᘁ ▷ D ≫ (α_ D Dᘁ D).hom ≫ D ◁ ε_ D Dᘁ ≫ h.r ▷ _ := by
+                  rw [← associator_naturality_right_assoc, whisker_exchange_assoc]
+              _ = _ := by
+                  rw [ExactPairing.evaluation_coevaluation_assoc, id_whiskerLeft, whiskerRight_id]
+                  simp [h.retract_assoc] } }⟩
+
+/-- A retract of a dualizable object is dualizable when idempotents split. -/
+theorem IsDualizable.of_retract [IsIdempotentComplete C] {R D : C} (h : Retract R D)
+    (hD : IsDualizable D) : IsDualizable R := by
+  obtain ⟨_⟩ := hD
+  exact nonempty_hasRightDual_of_retract h
+
+end Retract
 
 end CategoryTheory
 
