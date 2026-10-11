@@ -1,11 +1,11 @@
 # Work queue
 
-975 items; claim with `tools/claim.py next <group> [--stage N]`.
+971 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (975)
+## Stage 2: nodes to state (971)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -35,16 +35,12 @@
 | `lem-pc-zero-scheme-pullback` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-derived-hom-mayer-vietoris` | 1 | state |
 | `lem-sc-etale-base-change-geometric` | 1 | state |
 | `lem-sc-etale-faithfully-flat-local` | 1 | state |
 | `lem-sc-finite-free-internal-hom-exact` | 1 | state |
 | `lem-sc-finite-sheafhom-affine` | 1 | state |
 | `lem-sc-general-theorem-of-cube` | 1 | state |
 | `lem-sc-geometrically-irreducible-product` | 1 | state |
-| `lem-sc-global-generation-nonvanishing-cover` | 1 | state |
-| `lem-sc-global-sections-left-exact` | 1 | state |
-| `lem-sc-glue-component-line-bundles` | 1 | state |
 | `lem-sc-glue-component-transition-cocycle` | 1 | state |
 | `lem-sc-graded-localization-exact` | 1 | state |
 | `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
