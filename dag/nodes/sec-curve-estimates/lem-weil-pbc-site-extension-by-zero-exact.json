@@ -183,5 +183,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteExtensionByZeroExact",
+  "declaration": "CategoryTheory.site_extensionByZero_exact",
+  "file": "lean/Sheaf/CategoryTheory/SiteExtensionByZeroExact.lean",
+  "statement": "theorem site_extensionByZero_exact {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (W : C) : ∃ (hL : (Functor.sheafPullbackConstruction.sheafPullback (Over.forget W) AddCommGrpCat.{u} (J.toGrothendieck.over W) J.toGrothendieck).PreservesZeroMorphisms), ∀ (S : ShortComplex (Sheaf (J.toGrothendieck.over W) AddCommGrpCat.{u})), S.ShortExact → (@ShortComplex.map _ _ _ _ _ _ S (Functor.sheafPullbackConstruction.sheafPullback (Over.forget W) AddCommGrpCat.{u} (J.toGrothendieck.over W) J.toGrothendieck) hL).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sez",
+  "group": "G1",
+  "result": "pass",
+  "note": "site = Precoverage C + HasIsos/IsStableUnderComposition/IsStableUnderBaseChange/HasPullbacks per def-weil-pbc-sites-and-cohomology record; localized topology J.toGrothendieck.over W (Sites/Over.lean); Ab sheaves AddCommGrpCat.{u}; j_W! = sheafPullbackConstruction.sheafPullback (Over.forget W), the functor of the restriction-adjunction mathlib_match sheafAdjunctionContinuous; SES clause as ShortExact -> (S.map j_W!).ShortExact; ∃ hL is a Prop witness (PreservesZeroMorphisms : Prop, not inferable: no IsLeftAdjoint instance on the construction), implied by exactness, precedent DiscreteModulesAbelian; compile 2 s measured"
  }
 }
