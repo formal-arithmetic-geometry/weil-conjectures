@@ -186,5 +186,23 @@
   "worker": "stage1",
   "summary": "Statement checked against Stacks 032Z (algebra.tex 45889-45904, tag verified in tags/tags) hypothesis by hypothesis and kept. No slopmaster2 declaration (grep of the id, 032Z, 'nalytically' and IsDiscreteValuationRing with completion in WeilConjectures: none; lean_audit none). Proof in 7 steps following lines 45906-45914: set-up (completion Noetherian, flat 00MB, localization Noetherian); R^/pR^ reduced from hypothesis (2) via the existing node lem-weil-pbc-local-completion-quotient ((R/p)^ = R^/pR^, Stacks 00MA(3)); qC = pC, written directly from reducedness and q = Ann(z) instead of the source's 'associated = minimal over pR^'; elements of R \\ p stay outside q, from flatness (the 'by the above' of the source needs q to lie over p); choice of x with sp ⊆ xR, hence qC = xC; x a nonzerodivisor of C from flatness and Ann_R(x)_p = 0 (the source says 'faithfully flat', only flatness is needed); 'hence we win' written out: Krull intersection (existing leaf lem-weil-pbc-krull-intersection-jacobson) gives a domain, and the DVR definition of the statement is met. No new nodes. lem-weil-pbc-associated-primes-flat-base-change (0312) and the flat fibre-dimension formula 00ON are not needed by this proof, and lem-weil-pbc-regular-local-dim-one-iff-normal neither (the DVR conclusion is reached by the definition). Blueprint search (032Z, 'analytically unramified', 'discrete valuation completion associated'): no blueprint node states it, same_as [].",
   "blueprint": "The item is not a blueprint node; its ancestor is lem-weil-pbc-normal-constant-generic, place 'step 4 of its split (source: Lemma 59.73.13 (Tag 09Z5), proof of (1))' via lem-weil-pbc-analytic-unramified-principal-criterion: the seven steps realize the 032Z input of that criterion's step 4 (DVR localizations of A^ at Ass(A^/pA^)), which feeds the analytic unramifiedness used in the normality of the strict henselization in step 4 of the ancestor."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CodimensionOneAnalyticallyUnramified",
+  "declaration": "AdicCompletion.isDiscreteValuationRing_atPrime_of_isAnalyticallyUnramified",
+  "file": "lean/Sheaf/RingTheory/CodimensionOneAnalyticallyUnramified.lean",
+  "statement": "theorem isDiscreteValuationRing_atPrime_of_isAnalyticallyUnramified (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] (p : Ideal R) [p.IsPrime] [IsDomain (Localization.AtPrime p)] [IsDiscreteValuationRing (Localization.AtPrime p)] (hp : p.IsAnalyticallyUnramified) (q : Ideal (AdicCompletion (IsLocalRing.maximalIdeal R) R)) [q.IsPrime] (hq : ∃ z : AdicCompletion (IsLocalRing.maximalIdeal R) R ⧸ p.map (algebraMap R (AdicCompletion (IsLocalRing.maximalIdeal R) R)), q = (⊥ : Submodule (AdicCompletion (IsLocalRing.maximalIdeal R) R) (AdicCompletion (IsLocalRing.maximalIdeal R) R ⧸ p.map (algebraMap R (AdicCompletion (IsLocalRing.maximalIdeal R) R)))).colon {z}) : ∃ (_ : IsDomain (Localization.AtPrime q)), IsDiscreteValuationRing (Localization.AtPrime q)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cau1440",
+  "group": "F1",
+  "result": "pass",
+  "note": "Noetherian local R, m-adic AdicCompletion; p prime, IsDomain+IsDVR R_p = node (1) via TFAE; hp = landed Ideal.IsAnalyticallyUnramified (R/p at image of m); q prime with q = (⊥).colon {z} in R^/pR^ = literal Ann(z) (#check mem_colon_singleton, a•z=0); conclusion ∃ IsDomain, IsDVR (R^)_q"
  }
 }
