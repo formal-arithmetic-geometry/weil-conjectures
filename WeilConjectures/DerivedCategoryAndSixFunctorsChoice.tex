@@ -53,8 +53,9 @@ constructibility is defined, how each of the six functors is constructed, and ho
 change morphisms are set up. It describes the state of \texttt{master} after the refactor of
 the coefficient rings, in which every non-finite coefficient ring is a \emph{condensed ring}
 pulled back to each $X_\proet$ from the pro-\'etale site of a point; the design notes for
-this refactor are \texttt{WeilConjectures/RefactorInstruction.tex}. The comparison of
-\S\ref{sec:rationalization} lives on the branch \texttt{extend-scalars-isLocalization}.
+this refactor are \texttt{WeilConjectures/RefactorInstruction.tex}. It also records how the
+functors interact with a change of coefficient ring, and how $\Qlbar$-coefficients relate to
+the finite subextensions $E$.
 \end{abstract}
 
 \tableofcontents
@@ -178,9 +179,12 @@ the subsheaf of $C(-,\Qlbar)$ of maps with values in a finite subextension.
 This is already a sheaf, with no sheafification: coverings of $*_\proet$ are refined by
 \emph{finite} jointly surjective families, and finitely many finite subextensions have a
 finite compositum. (On a general $X_\proet$ the analogous presheaf is not a sheaf, which is
-one reason to define coefficients on the point and pull them back.) The expected identity
-$\underline{\Qlbar}\cong\operatorname{colim}_E\underline E$ is again a comparison, not the
-definition.
+one reason to define coefficients on the point and pull them back.) The identity
+$\underline{\Qlbar}\cong\operatorname{colim}_E\underline E$ over the filtered poset of finite
+subextensions, along the inclusions $\underline E\to\underline F\to\underline{\Qlbar}$
+(\lean{Profinite.padicSubfieldRingObjMap}, \lean{Profinite.padicSubfieldRingObjToPadicAlgCl}),
+is a comparison theorem, not the definition (\lean{Profinite.isColimitPadicAlgClRingObjCocone}):
+filtered colimits of condensed abelian groups are computed sectionwise.
 
 \subsection{Pulling back from the point}
 
@@ -215,9 +219,11 @@ with pullback along any $f$ a consequence of the composition isomorphisms of lay
 For $T\in\{\mathbb Z_\ell,\mathbb Q_\ell,\cO_E,E\}$ one expects $\underline T_X(U)=C(|U|,T)$
 for all $U\in X_\proet$ (on w-contractible $U$ one has $(p_X^*F)(U)=F(\pi_0U)$, and maps to
 a totally disconnected $T$ factor through $\pi_0U$), so $\underline T_X$ recovers the
-Bhatt--Scholze sheaves; and $\underline{\Qlbar}_X$ has, on a w-contractible $U$, the sections
-$C(|U|,E)$ for varying finite $E$, i.e.\ $\underline{\Qlbar}_X=\operatorname{colim}_E
-\underline E_X$. These are descriptions, not definitions, and are not formalized. The older
+Bhatt--Scholze sheaves; this description is not formalized. On the other hand
+$\underline{\Qlbar}_X=\operatorname{colim}_E\underline E_X$ is stated
+(\lean{ProEtale.isColimitPadicAlgClRingObjCocone}), as the image of
+$\underline{\Qlbar}=\operatorname{colim}_E\underline E$ under the left adjoint $p_X^*$; so
+$\underline{\Qlbar}_X$ is the Bhatt--Scholze $\Qlbar$-sheaf. The older
 direct definitions on $X_\proet$ (\lean{ProEtale.padicIntSheaf}, \dots,
 \lean{ProEtale.padicAlgClSheaf}, with \lean{ProEtale.isColimitPadicAlgClSheafCocone}) remain
 in \lean{RingObjects/EllAdic} but are no longer used by the six functors.
@@ -348,10 +354,11 @@ its right adjoint: $K\lotimes-\dashv\RHom(K,-)$.
 \label{sec:rationalization}
 
 $E$-coefficients are modules over $E_X$ itself, \emph{not} defined by inverting $\ell$ on
-$\cO_E$-coefficients in a triangulated category; the comparison is a theorem. It is stated on
-the branch \texttt{extend-scalars-isLocalization} for the direct sheaves $\cO_{E,X}=C(-,\cO_E)$,
-$E_X=C(-,E)$ on $X_\proet$ of the pre-refactor setup, and is still to be transported to
-$\underline{\cO}_{E,X}=p_X^*\underline{\cO}_E$, $\underline E_X=p_X^*\underline E$.
+$\cO_E$-coefficients in a triangulated category; the comparison is a theorem, for a finite
+subextension $E\subseteq\Qlbar$ and the pulled-back rings $\cO_{E,X}=p_X^*\underline{\cO}_E$,
+$E_X=p_X^*\underline E$ (\lean{CategoryTheory/ModuleObjects/EllAdicRationalization}). Finiteness of
+$E$ is what makes inverting $\ell$ the right statement: every nonzero element of the discrete
+valuation ring $\cO_E$ divides a power of $\ell$.
 
 \begin{definition}[Rationalization]
 For a triangulated category $\mathcal{T}$ linear over a commutative ring $R$ and a submonoid
@@ -362,12 +369,14 @@ over $R[M^{-1}]$.
 \end{definition}
 
 \begin{choice}[Comparison via derived extension of scalars]
-For $\varphi\colon\cO_{E,X}\to E_X$ the comparison functor is
+For $\varphi=p_X^*(\underline{\cO}_E\to\underline E)\colon\cO_{E,X}\to E_X$
+(\lean{ProEtale.padicIntegersToPadicSubfield}) the comparison functor is
 $E\lotimes_{\cO_E}-=L(\Ext_\varphi)\colon\D(\Mod_{\cO_{E,X}})\to\D(\Mod_{E_X})$, and the
 statement is that it is a localization at the morphisms whose cone is killed by a power of
 $\ell$ (\lean{ProEtale.isLocalization_derivedExtendScalars}).
 \end{choice}
-Hence $\D(\Mod_{\cO_{E,X}})[\ell^{-1}]\simeq\D(\Mod_{E_X})$, compatibly with
+Hence $\D(\Mod_{\cO_{E,X}})[\ell^{-1}]\simeq\D(\Mod_{E_X})$
+(\lean{ProEtale.rationalizationEquivalence}), compatibly with
 $E\lotimes_{\cO_E}-$; neither description is taken as the definition of the other.
 
 %======================================================================
@@ -573,20 +582,14 @@ product $\otimes_{\Lambda_X}$, not a derived tensor over $\mathbb{Z}$ followed b
 quotient; $\RHom_{\Lambda_X}$ is its right adjoint.
 \end{choice}
 
-\begin{choice}[Exceptional pullback: assembled from the two halves of $Rf_!$]
-\[
-  Rf^!:=\D(i^*)\circ Rg^!,
-\]
-with $Rg^!$ a right adjoint of the module-object $Rg_*$ along the proper $g$ (abstract,
-used only through the adjunction; alternatively obtainable from the $\Ab$-valued one via
-the projection formula and coextension of scalars along $\alpha_g$), and $\D(i^*)$ the
-levelwise pullback along the open immersion $i$.
+\begin{choice}[No exceptional pullback on the ambient category]
+On module objects $Rf^!$ is \emph{not} defined on the unbounded $\D(\Mod_{\Lambda_X})$: it is
+constructed directly on the bounded constructible categories (\S\ref{sec:sixCons}), and only for
+the $\ell$-adic coefficient rings.
 \end{choice}
-As in layer (A), there is no underived $f^!$; $Rf_!\dashv Rf^!$ is the composite of
-$\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$, so that $Rf_!$ is a left adjoint is a theorem.
-$R^+f^!$ is \emph{defined as the restriction} of $Rf^!$ to $\D^+$, not as an independently
-chosen right adjoint, and $R^+f_!\dashv R^+f^!$ is the restricted adjunction; so there is no
-ambiguity between ``the right adjoint of $R^+f_!$'' and ``the restriction of $Rf^!$''.
+The input it needs, a right adjoint of $Rg_*$ along a proper $g$, is a statement about
+$\ell$-adic constructible complexes; asking for it on all of $\D(\Mod_{\Lambda_X})$ for an arbitrary
+$\Lambda$ would be a stronger and less natural input. (Layer (A) keeps its unbounded $Rf^!$.)
 
 \subsection{$\Qlbar$-coefficients}
 \label{sec:sixB-Qlbar}
@@ -600,9 +603,8 @@ of the coefficient ring.
 
 \begin{remark}
 $\Qlbar$-coefficients are modules over the ring object $\underline{\Qlbar}_X$ itself, not a
-2-colimit of the $\D(\Mod_{\underline E_X})$ over finite $E$. Comparing
-$\D(\Mod_{\underline{\Qlbar}_X})$ with $\operatorname{colim}_E\D(\Mod_{\underline E_X})$ is
-not addressed yet.
+2-colimit of the categories of $\underline E_X$-modules over finite $E$. The 2-colimit
+description is a theorem about bounded constructible complexes (\S\ref{sec:Qlbar-colimit}).
 \end{remark}
 
 %======================================================================
@@ -616,31 +618,65 @@ Write $\Dc(X,\Lambda):=\Dc(X_\proet,\Lambda_X)$.
 Following Bhatt--Scholze \S6.8 in a simplified setting, fix a prime $\ell$ and a field $k$ of
 characteristic $p>0$, $p\neq\ell$. All schemes are separated and of finite type over $k$, and
 all morphisms are $k$-morphisms; no further hypothesis is imposed. Every such morphism has a
-compactification by Nagata's theorem (\lean{HasCompactification.of_isOver}), which is what
-defines $Rf_!$ and $Rf^!$ on $\Dc$. The coefficient ring $\Lambda$ stays general.
+compactification by Nagata's theorem (\lean{HasCompactification.of_isOver}); the one used to
+define $Rf_!$ and $Rf^!$ on $\Dc$ is \lean{compactificationOverField}.
 \end{choice}
 
-\begin{choice}[Restriction, not a new construction]
-Each functor on $\Dc$ is the \emph{restriction} of the corresponding functor on the ambient
-$\D(\Mod_{\Lambda_X})$ of \S\ref{sec:sixB}, via the statement that the ambient functor
-preserves bounded constructible complexes. Thus it commutes with the inclusions by
-construction, and the adjunctions $Lf^*\dashv Rf_*$, $j_!\dashv j^*$, $Rf_!\dashv Rf^!$,
+\begin{choice}[$Lf^*$, $Rf_*$, $j_!$, $\lotimes$, $\RHom$: restrictions]
+These functors on $\Dc$ are the \emph{restrictions} of the corresponding functors on the
+ambient $\D(\Mod_{\Lambda_X})$ of \S\ref{sec:sixB}, via the statement that the ambient functor
+preserves bounded constructible complexes. Thus they commute with the inclusions by
+construction, and the adjunctions $Lf^*\dashv Rf_*$, $j_!\dashv j^*$,
 $K\lotimes-\dashv\RHom(K,-)$ and the composition isomorphism of $Lf^*$ are restrictions of
 the ambient ones along the fully faithful inclusions. Nothing is derived afresh.
 \end{choice}
+
+\begin{choice}[$Rf_!$: assembled on $\Dc$]
+For a compactification $c=(X\xrightarrow{i}Z\xrightarrow{p}Y)$,
+\[
+  Rf_!^c := Rp_*\circ i_!\colon\Dc(X,\Lambda)\to\Dc(Y,\Lambda),
+\]
+the composite of the two restricted functors
+(\lean{boundedConstructibleLowerShriekOfCompactification}), and $Rf_!:=Rf_!^c$ for the chosen
+compactification (\lean{boundedConstructibleLowerShriek}).
+\end{choice}
+So no separate preservation statement for $Rf_!$ is needed; compatibility with the ambient
+$Rf_!^c$ of \S\ref{sec:sixB-derived} is a theorem
+(\lean{boundedConstructibleLowerShriekOfCompactificationCompatibility}).
+
+\begin{choice}[$Rf^!$: constructed on $\Dc$, for $\ell$-adic coefficients]
+For $c$ as above,
+\[
+  Rf^{!}_{c} := i^*\circ Rp^!,
+\]
+where $Rp^!$ is a chosen right adjoint of $Rp_*\colon\Dc(Z,\Lambda)\to\Dc(Y,\Lambda)$ for the
+proper $p$, and $i^*$ is the restricted pullback, right adjoint to $i_!$
+(\lean{boundedConstructibleUpperShriekOfCompactification}); $Rf^!:=Rf^!_c$ for the chosen
+compactification (\lean{boundedConstructibleUpperShriek}).
+\end{choice}
+The adjunction $Rf_!\dashv Rf^!$ (\lean{boundedConstructibleUpperShriekAdjunction}) is the
+composite of $i_!\dashv i^*$ and $Rp_*\dashv Rp^!$, so it is a theorem that $Rf_!$ is a left
+adjoint. The only input is that $Rp_*$ on $\Dc$ is a left adjoint for proper $p$; the
+construction takes this as an instance argument, supplied only for
+$\Lambda=\underline E,\underline{\cO}_E,\underline{\Qlbar}$ only. $Rp^!$ itself is an abstract
+choice (\lean{Functor.rightAdjoint}) used only through the adjunction. Working on $\Dc$ from the
+start avoids asking for a right adjoint on the unbounded $\D(\Mod_{\Lambda_X})$ for an arbitrary
+$\Lambda$, and avoids a separate statement that $Rf^!$ preserves constructibility.
 
 \medskip
 \noindent
 \begin{tabularx}{\textwidth}{@{}llX@{}}
 \toprule
-Functor on $\Dc$ & Restriction of & Lean \\
+Functor on $\Dc$ & Definition & Lean \\
 \midrule
-$Lf^*$ & $L(f^*)$ & \lean{boundedConstructibleUpperStar} \\
-$Rf_*$ & $R(f_*)$ & \lean{boundedConstructibleLowerStar} \\
-$j_!$ ($j$ open) & $\D(j_!)$ & \lean{boundedConstructibleOpenImmersionLowerShriek} \\
-$Rf_!$ & $R(g_*)\circ\D(i_!)$ & \lean{boundedConstructibleLowerShriek} \\
-$Rf^!$ & $\D(i^*)\circ Rg^!$ & \lean{boundedConstructibleUpperShriek} \\
-$\lotimes$, $\RHom$ & $\lotimes_{\Lambda_X}$, $\RHom_{\Lambda_X}$ &
+$Lf^*$ & restriction of $L(f^*)$ & \lean{boundedConstructibleUpperStar} \\
+$Rf_*$ & restriction of $R(f_*)$ & \lean{boundedConstructibleLowerStar} \\
+$j_!$ ($j$ open) & restriction of $\D(j_!)$ &
+  \lean{boundedConstructibleOpenImmersionLowerShriek} \\
+$Rf_!$ & $Rp_*\circ i_!$ on $\Dc$ & \lean{boundedConstructibleLowerShriek} \\
+$Rf^!$ & $i^*\circ Rp^!$ on $\Dc$ ($\ell$-adic $\Lambda$) &
+  \lean{boundedConstructibleUpperShriek} \\
+$\lotimes$, $\RHom$ & restrictions of $\lotimes_{\Lambda_X}$, $\RHom_{\Lambda_X}$ &
   \lean{boundedConstructibleTensor}, \lean{boundedConstructibleHom}\\
 \bottomrule
 \end{tabularx}
@@ -718,6 +754,87 @@ are relative to an explicit $c$. The \'etale $\mathrm{Ex}_!^c$ is set up identic
 bounded below derived categories, and is an isomorphism for torsion coefficients.
 
 %======================================================================
+\section{Change of coefficients}
+\label{sec:coeffchange}
+%======================================================================
+
+\subsection{Comparison maps for a morphism of condensed rings}
+
+Let $a\colon\Lambda\to\Lambda'$ be a morphism of commutative condensed rings, $a_X:=p_X^*a\colon
+\Lambda_X\to\Lambda'_X$ (\lean{ProEtale.coefficientMap}), and
+\[
+  T^X := \Lambda'_X\lotimes_{\Lambda_X}- = L(\Ext_{a_X})\colon\D(\Mod_{\Lambda_X})\to
+  \D(\Mod_{\Lambda'_X}).
+\]
+The coefficient changes are compatible with the canonical coefficient morphisms:
+$a_X\circ\alpha_f=\alpha'_f\circ f^*a_Y$ (naturality in $\Lambda$ of $f^*p_Y^*\cong p_X^*$) and
+$f_*a_X\circ\eta_f=\eta'_f\circ a_Y$ (by adjunction). This is
+Corollary~\texttt{cor:coeff-functor} of \texttt{RefactorInstruction.tex}.
+
+\begin{choice}[Comparisons as mates and conjugates]
+All comparisons between $T$ and the six functors are \emph{produced formally} from these two
+squares (\lean{CategoryTheory/ModuleObjects/ChangeOfScalarsSquare}): restriction of scalars
+commutes strictly with the pushforward, and the comparisons with the left adjoints are its
+conjugates and mates.
+\begin{itemize}
+\item \textbf{(Pull)} $T^X\circ Lf^*\cong Lf^*\circ T^Y$ (\lean{ProEtale.CondensedRing.derivedPullIso}),
+  the conjugate along $Lf^*\dashv Rf_*$ and $L(\Ext)\dashv\D(\Res)$; an isomorphism on all
+  unbounded objects.
+\item \textbf{(Push)} $T^Y\circ Rf_*\to Rf_*\circ T^X$ (\lean{ProEtale.CondensedRing.derivedPushHom}),
+  the mate; \emph{not} an isomorphism in general. The derived versions of (Pull) and (Push)
+  use that $\Lambda'_X$ is flat over $\Lambda_X$, so that restriction of scalars preserves
+  K-injectives.
+\item \textbf{Extension by zero}: $T^X\circ j_!\cong j_!\circ T^U$ for an open immersion $j$
+  (\lean{ProEtale.CondensedRing.derivedOpenImmersionShriekIso}), an isomorphism, since
+  restriction of scalars also commutes with $j^*$ ($\alpha_j$ invertible).
+\item \textbf{(Shriek)} $T^Y\circ Rf_!\to Rf_!\circ T^X$
+  (\lean{ProEtale.CondensedRing.derivedLowerShriekHom}), (Push) for the proper part of the
+  compactification followed by the extension-by-zero isomorphism; an isomorphism whenever
+  (Push) is one for the proper part (\lean{ProEtale.CondensedRing.isIso_derivedLowerShriekHom}).
+\end{itemize}
+\end{choice}
+Compatibility with $\lotimes$, $\RHom$ and $Rf^!$ is not treated: it would need strong
+monoidality of extension of scalars, resp.\ perfectness or duality hypotheses.
+
+\subsection{$\Qlbar$ as a 2-colimit of finite subextensions}
+\label{sec:Qlbar-colimit}
+
+Apply this to the inclusions $\underline E\to\underline F$ ($E\le F$ finite subextensions) and
+$\underline E\to\underline{\Qlbar}$, writing $T_{E,F}$, $T_{E,\Qlbar}$ for the extensions of
+scalars on $X$. Both are flat: $F_X$ is finite free over $E_X$ (an $E$-basis of $F$ gives
+$C(-,F)\cong C(-,E)^n$), and $\underline{\Qlbar}_X=\operatorname{colim}_FF_X$ is a filtered
+colimit of such. For $F/E$ finite, (Push) and hence (Shriek) are isomorphisms; for
+$E\subseteq\Qlbar$, (Push) is an isomorphism when $f$ is proper ($Rf_*$ then commutes with the
+coproducts computing $T_{E,\Qlbar}$) but not for general $f$, and (Shriek) is an isomorphism
+for every $f$ with a compactification, its proper part being proper
+(\lean{SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility}).
+
+\begin{choice}[2-colimit through its universal property, on $\Dc$]
+For a directed system of categories $C_i$ with a cocone $\Phi_i\colon C_i\to D$, ``$D$ is the
+filtered 2-colimit'' is \emph{defined} by three conditions on ordinary categories
+(\lean{CategoryCocone.IsFilteredTwoColimit}): \textbf{(Obj)} every object of $D$ is isomorphic to
+some $\Phi_i(x)$; \textbf{(Hom-surj)} every morphism $\Phi_i(x)\to\Phi_j(y)$ comes from some
+$C_k$, $k\ge i,j$; \textbf{(Hom-inj)} two morphisms in $C_k$ with the same image agree in some
+$C_{k'}$. Equivalently, the comparison functor from the explicit category with objects
+$(i,x)$ and morphisms $\operatorname{colim}_k\Hom_{C_k}$ is an equivalence. No higher
+categories are used.
+\end{choice}
+
+\begin{proposition}[$\Dc(X,\Qlbar)=\text{2-}\operatorname{colim}_E\Dc(X,E)$]
+For $X$ topologically Noetherian, the restrictions of $T_{E,F}$ and $T_{E,\Qlbar}$ to bounded
+constructible complexes form a cocone $E\mapsto\Dc(X,E)\to\Dc(X,\Qlbar)$
+(\lean{ProEtale.constructibleCocone}), and it is a filtered 2-colimit
+(\lean{ProEtale.constructibleCocone_isFilteredTwoColimit}).
+\end{proposition}
+(Obj) is constructible descent: the finitely many finite presentations on strata involve
+finitely many sections of $\underline{\Qlbar}_X=\operatorname{colim}_E\underline E_X$. (Hom)
+is continuity of the derived hom out of a constructible complex. Neither is a formal
+consequence of $\underline{\Qlbar}_X=\operatorname{colim}_E\underline E_X$, and both fail on the
+unbounded derived categories, which is why the statement is about $\Dc$. This is the input
+for transporting base change from finite $E$ to $\Qlbar$: by (Obj) every $K$ is
+$T_{E,\Qlbar}K_E$, and (Pull), (Push) relate the base change maps at $K$ and at $K_E$.
+
+%======================================================================
 \section{Summary}
 %======================================================================
 
@@ -743,10 +860,12 @@ $Lf^*$ & $L(f^*)\cong\D(f^*)$ &
   $L(\Ext_{\alpha_f}\circ\mathrm{mapMod}f^*)$ (derived of composite)
   $\cong L(\Ext_{\alpha_f})\circ\D(\mathrm{mapMod}f^*)\cong\D(f^*)$\\
 $Lf^*\dashv Rf_*$ & derived from $f^*\dashv f_*$ & derived from $f^*\dashv f_*$\\
-$Rf_!$ & $R(g_*)\circ\D(i_!)$ (composite of derived) & same\\
-$Rf^!$ & $\D(i^*)\circ Rg^!$, $Rg^!$ right adjoint of $Rg_*$ & same\\
+$Rf_!$ & $R(g_*)\circ\D(i_!)$ (composite of derived) & same; on $\Dc$ assembled from the
+  restricted $i_!$, $Rg_*$\\
+$Rf^!$ & $\D(i^*)\circ Rg^!$, $Rg^!$ right adjoint of $Rg_*$ & only on $\Dc$, for $\ell$-adic
+  $\Lambda$: $i^*\circ Rg^!$, $Rg^!$ right adjoint of $Rg_*$ on $\Dc$\\
 $Rf_!\dashv Rf^!$ & composite of $\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$; on $\D^+$
-  by restriction & same\\
+  by restriction & composite of $i_!\dashv i^*$ and $Rg_*\dashv Rg^!$ on $\Dc$\\
 $\lotimes$, $\RHom$ & K-flat derived $\otimes$, right adjoint &
   K-flat derived $\otimes_{\Lambda_X}$, right adjoint\\
 on $\Dc$ & --- & restrictions of the above\\
@@ -760,18 +879,17 @@ The layer B column is uniform in $\Lambda$; $\underline{\Qlbar}$ is one instance
 
 \paragraph{Main open directions.}
 \begin{itemize}
-\item The concrete descriptions $\underline T_X(U)=C(|U|,T)$ and
-  $\underline{\Qlbar}_X=\operatorname{colim}_E\underline E_X$, and the comparison identities
+\item The concrete description $\underline T_X(U)=C(|U|,T)$, and the remaining comparison
+  identities
   $\underline{\mathbb Q}_\ell\cong\underline{\mathbb Z}_\ell[1/\ell]$,
   $\underline{\mathbb Z}_\ell\cong\lim_n\underline{\mathbb Z/\ell^n}$, etc.\ on the point.
 \item An explicit construction of $Rg^!$ for proper $g$ on module objects, via the
   projection formula and coextension of scalars along $\alpha_g$.
-\item Comparing $\D(\Mod_{\underline{\Qlbar}_X})$ with
-  $\operatorname{colim}_E\D(\Mod_{\underline E_X})$.
+\item Compatibility of the base change maps with extension of scalars, to transport base
+  change from finite $E$ to $\Qlbar$ via \S\ref{sec:Qlbar-colimit}; compatibility of change of
+  coefficients with $\lotimes$, $\RHom$ and $Rf^!$.
 \item Independence of $\mathrm{Ex}_!^c$ from the compactification.
-\item Transporting $E\lotimes_{\cO_E}-$ as a localization (\S\ref{sec:rationalization}) to
-  the pulled-back coefficients, and comparing layer (B) with layer (A) via reduction modulo
-  $\ell^n$.
+\item Comparing layer (B) with layer (A) via reduction modulo $\ell^n$.
 \end{itemize}
 
 \end{document}
