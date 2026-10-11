@@ -5174,3 +5174,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:14 L: merged deliver/G1/lem-weil-pbc-tor-one-surjective-flat-middle (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TorOneSurjectiveFlatMiddle CategoryTheory.torOne_surjective_flat_middle)
 - 15:14 L: merged deliver/E1/lem-weil-pbc-tor-long-exact-first-variable (stage 2; reviewer PASS; first push; Sheaf.Paper.TorLongExactFirstVariable CategoryTheory.tor_long_exact_first_variable)
 - 15:14 L: merged deliver/G1/thm-sp-truncation-e2 (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.TruncationHypercohomology CategoryTheory.exists_truncationHypercohomology; statement corrected (14 citers))
+- 15:14 L: merged deliver/H1/lem-sc-hilbert-embedded-points (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RemoveEmbeddedPoints AlgebraicGeometry.Scheme.Modules.exists_maximal_nowhereDense_support_cokernel)

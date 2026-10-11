@@ -124,5 +124,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hep2416 (reviewer sub-agent of L); spot-checked: Statement vs 02OL/02M6/02M7; new nodes match 02M6, 02M7 and the 02OL gluing, none restates lem-sc-hilbert-difference or lem-sc-regular-meromorphic-section-exists, no same-tag duplicate; consumer step in lem-sc-hilbert-polynomial. FIX more, RETURN less: (E7/B3) delivery dropped the clause dim Supp K < dim Supp F when finite and positive, which the consumer's induction on d needs; restored it and added an elementary step 4 (components of Supp K are proper in components of Supp F by nowhere density plus local finiteness of components, Tag 0052).; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-hep2416): Second reading by F1 removed the 'finite and positive' dimension clause as unsupported by 02OL; restored because lem-sc-hilbert-polynomial's induction cites 'smaller support for K'."
+ "lead_note": "2026-10-10 L (R-hep2416): Second reading by F1 removed the 'finite and positive' dimension clause as unsupported by 02OL; restored because lem-sc-hilbert-polynomial's induction cites 'smaller support for K'.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RemoveEmbeddedPoints",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_maximal_nowhereDense_support_cokernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/RemoveEmbeddedPoints.lean",
+  "statement": "theorem exists_maximal_nowhereDense_support_cokernel (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) : ∃ K : Subobject F, Maximal (fun L : Subobject F ↦ RingedSpace.IsCoherent X.toRingedSpace (L : X.Modules) ∧ IsNowhereDense {x : {x : X | ¬ Subsingleton (F.presheaf.stalk x)} | ¬ Subsingleton ((L : X.Modules).presheaf.stalk x.val)}) K ∧ {x : X | ¬ Subsingleton ((cokernel K.arrow : X.Modules).presheaf.stalk x)} = {x : X | ¬ Subsingleton (F.presheaf.stalk x)} ∧ (∀ (V : X.Opens) (_ : IsAffineOpen V) (p : Ideal Γ(X, V)), p ∈ associatedPrimes Γ(X, V) Γ((cokernel K.arrow : X.Modules), V) → Minimal (fun q : Ideal Γ(X, V) ↦ q ∈ associatedPrimes Γ(X, V) Γ((cokernel K.arrow : X.Modules), V)) p) ∧ (∃ U : X.Opens, Dense (U : Set X) ∧ Dense {x : {x : X | ¬ Subsingleton (F.presheaf.stalk x)} | x.val ∈ U} ∧ Nonempty ((cokernel K.arrow : X.Modules).over U ≅ F.over U)) ∧ (∀ d : ℕ, 0 < d → topologicalKrullDim {x : X | ¬ Subsingleton (F.presheaf.stalk x)} = (d : WithBot ℕ∞) → topologicalKrullDim {x : X | ¬ Subsingleton ((K : X.Modules).presheaf.stalk x)} < topologicalKrullDim {x : X | ¬ Subsingleton (F.presheaf.stalk x)})",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
