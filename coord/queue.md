@@ -1,11 +1,11 @@
 # Work queue
 
-9 items; claim with `tools/claim.py next <group> [--stage N]`.
+8 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (9)
+## Stage 2: nodes to state (8)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -14,7 +14,6 @@
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 1 | state | 0 |
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
-| `lem-sc-closed-pushforward-boundary-naturality` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
