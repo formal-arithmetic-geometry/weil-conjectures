@@ -242,6 +242,92 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalG
         ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber) := by
   sorry
 
+section GaloisAction
+
+/-! ### The Galois action on stalks of finite locally constant sheaves -/
+
+variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+
+/-- The stalk at `s` of the sheaf `Hom_Y(-, P)` (with values in `Type (u + 1)`) represented by a
+finite étale `Y`-scheme `P` is the geometric fibre of `P`. -/
+noncomputable def Scheme.FiniteEtale.toFiniteLocallyConstantCompSheafFiberIso :
+    Scheme.FiniteEtale.toFiniteLocallyConstant Y ⋙ ObjectProperty.ι _ ⋙
+        (Scheme.pointSmallEtale s).sheafFiber ≅
+      ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).fiber ⋙ uliftFunctor.{u + 1} :=
+  have : Y.smallEtaleTopology.HasSheafCompose uliftFunctor.{u + 1, u} := inferInstance
+  have : Limits.PreservesFilteredColimitsOfSize.{u, u} uliftFunctor.{u + 1, u} := inferInstance
+  Functor.isoWhiskerLeft (Scheme.FiniteEtale.toSheaf Y)
+      ((Scheme.pointSmallEtale s).sheafFiberCompIso uliftFunctor.{u + 1}) ≪≫
+    Functor.isoWhiskerRight (Scheme.FiniteEtale.toSheafCompSheafFiberIso s) uliftFunctor.{u + 1}
+
+
+/-- The stalk of a finite locally constant sheaf of sets `S` at `s` is the geometric fibre of the
+finite étale `Y`-scheme representing `S`. -/
+noncomputable def Scheme.FiniteLocallyConstant.stalkEquiv (S : Y.FiniteLocallyConstant) :
+    (Scheme.pointSmallEtale s).sheafFiber.obj S.obj ≃
+      ULift.{u + 1} ((Scheme.pointSmallEtale s).fiber.obj
+        ((Scheme.FiniteEtale.equivalenceFiniteLocallyConstant Y).inverse.obj S).obj) :=
+  ((Scheme.pointSmallEtale s).sheafFiber.mapIso ((ObjectProperty.ι _).mapIso
+      ((Scheme.FiniteEtale.equivalenceFiniteLocallyConstant Y).counitIso.app S))).symm.toEquiv.trans
+    ((Scheme.FiniteEtale.toFiniteLocallyConstantCompSheafFiberIso s).app
+      ((Scheme.FiniteEtale.equivalenceFiniteLocallyConstant Y).inverse.obj S)).toEquiv
+
+lemma Scheme.FiniteLocallyConstant.stalkEquiv_naturality {S S' : Y.FiniteLocallyConstant}
+    (f : S ⟶ S') (x : (Scheme.pointSmallEtale s).sheafFiber.obj S.obj) :
+    stalkEquiv s S' ((Scheme.pointSmallEtale s).sheafFiber.map f.hom x) =
+      ULift.up ((Scheme.FiniteEtale.fiber s).map
+        ((Scheme.FiniteEtale.equivalenceFiniteLocallyConstant Y).inverse.map f)
+          (stalkEquiv s S x).down) := by
+  set E := Scheme.FiniteEtale.equivalenceFiniteLocallyConstant Y
+  have h₁ := congrArg (fun φ ↦ (Scheme.pointSmallEtale s).sheafFiber.map φ.hom)
+    (E.counitIso.inv.naturality f)
+  have h₂ := (Scheme.FiniteEtale.toFiniteLocallyConstantCompSheafFiberIso s).hom.naturality
+    (E.inverse.map f)
+  have k₁ := ConcreteCategory.congr_hom h₁ x
+  have k₂ := ConcreteCategory.congr_hom h₂
+    ((Scheme.pointSmallEtale s).sheafFiber.map (E.counitIso.inv.app S).hom x)
+  simp only [ObjectProperty.FullSubcategory.comp_hom, Functor.map_comp,
+    ConcreteCategory.comp_apply] at k₁ k₂
+  simp only [stalkEquiv, Equiv.trans_apply, Iso.toEquiv_fun, Iso.symm_hom, Functor.mapIso_inv,
+    ObjectProperty.ι_map, Iso.app_inv]
+  erw [k₁]
+  exact k₂
+
+
+variable (G : Type u) [Group G] [∀ P, MulAction G ((Scheme.FiniteEtale.fiber s).obj P)]
+
+/-- The action of `G` on the stalk at `s` of a finite locally constant sheaf of sets, through
+the geometric fibre of the representing finite étale `Y`-scheme. -/
+noncomputable def Scheme.FiniteLocallyConstant.galoisSMul (g : G) (S : Y.FiniteLocallyConstant)
+    (x : (Scheme.pointSmallEtale s).sheafFiber.obj S.obj) :
+    (Scheme.pointSmallEtale s).sheafFiber.obj S.obj :=
+  (stalkEquiv s S).symm ⟨(g • (show (Scheme.FiniteEtale.fiber s).obj
+    ((Scheme.FiniteEtale.equivalenceFiniteLocallyConstant Y).inverse.obj S) from
+      (stalkEquiv s S x).down) : (Scheme.FiniteEtale.fiber s).obj _)⟩
+
+lemma Scheme.FiniteLocallyConstant.galoisSMul_naturality
+    [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G] (g : G)
+    {S S' : Y.FiniteLocallyConstant} (f : S ⟶ S')
+    (x : (Scheme.pointSmallEtale s).sheafFiber.obj S.obj) :
+    (Scheme.pointSmallEtale s).sheafFiber.map f.hom (galoisSMul s G g S x) =
+      galoisSMul s G g S' ((Scheme.pointSmallEtale s).sheafFiber.map f.hom x) := by
+  apply (stalkEquiv s S').injective
+  rw [stalkEquiv_naturality]
+  simp only [galoisSMul, Equiv.apply_symm_apply, stalkEquiv_naturality]
+  exact congrArg ULift.up (PreGaloisCategory.IsNaturalSMul.naturality g _ _)
+
+lemma Scheme.FiniteLocallyConstant.galoisSMul_one (S : Y.FiniteLocallyConstant)
+    (x : (Scheme.pointSmallEtale s).sheafFiber.obj S.obj) : galoisSMul s G 1 S x = x := by
+  simp only [galoisSMul, one_smul]
+  exact (stalkEquiv s S).symm_apply_apply x
+
+lemma Scheme.FiniteLocallyConstant.galoisSMul_mul (g h : G) (S : Y.FiniteLocallyConstant)
+    (x : (Scheme.pointSmallEtale s).sheafFiber.obj S.obj) :
+    galoisSMul s G (g * h) S x = galoisSMul s G g S (galoisSMul s G h S x) := by
+  simp [galoisSMul, mul_smul]
+
+end GaloisAction
+
 /-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
 
 Let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point and `Λ` a finite ring.
