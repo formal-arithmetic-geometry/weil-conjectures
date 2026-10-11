@@ -1,11 +1,11 @@
 # Work queue
 
-358 items; claim with `tools/claim.py next <group> [--stage N]`.
+353 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (358)
+## Stage 2: nodes to state (353)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -19,7 +19,6 @@
 | `lem-pc-perfect-tensor-hom-duality` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
-| `lem-sc-affine-perfect-open-represent-cohomology` | 1 | state |
 | `lem-sc-affine-support-iterated-cones` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-coherent-affine-free-resolution` | 1 | state |
@@ -31,21 +30,17 @@
 | `lem-sc-p1-graded-syzygy` | 1 | state |
 | `lem-sc-p1-koszul-resolution` | 1 | state |
 | `lem-sc-p1-serre-section-module-comparison` | 1 | state |
-| `lem-sc-perfect-derived-tensor-perfect` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-support-annihilation` | 1 | state |
 | `lem-sc-valuation-limit-qcoh-section-descent` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-ample-invertible` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
-| `lem-weil-pbc-quasi-coherent-module-colimit-affine-sections` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-quasi-coherent-tensor-product-affine-sections` | 1 | state |
 | `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
-| `lem-weil-pbc-reduced-source-factors-through-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduction-projective-space` | 1 | state |
 | `lem-weil-pbc-reduction-universal-homeomorphism` | 1 | state |
 | `lem-weil-pbc-regular-base-change` | 1 | state |
