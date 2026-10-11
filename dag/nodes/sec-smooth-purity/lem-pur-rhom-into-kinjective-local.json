@@ -24,9 +24,53 @@
   "def-pur-hom-complex",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For sheaves of $\\mathcal O$-modules, restriction to $\\mathcal C/U$ and extension by zero are obtained from the corresponding abelian-sheaf functors by carrying the $\\mathcal O$-action along restriction and extension. The adjunction and exactness therefore hold in the module categories by [lem-pur-site-restriction-module-adjunction-exact]. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with restriction as the right adjoint and extension by zero as the exact left adjoint. Therefore $\\mathcal I^\\bullet|_U$ is K-injective on $\\mathcal C/U$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0A94, reduction to the localized site and K-injective target"
+   }
+  },
+  {
+   "text": "By the definition of the sheaf-valued Hom complex [def-pur-hom-complex], a degree-$0$ global cocycle is exactly a chain map $f:\\mathcal L^\\bullet|_U\\to\\mathcal I^\\bullet|_U$, and a degree-$0$ coboundary is exactly a null-homotopy. Hence $H^0(\\Gamma(U,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal I^\\bullet)))$ is canonically $\\operatorname{Hom}_{K(\\mathcal O_U)}(\\mathcal L^\\bullet|_U,\\mathcal I^\\bullet|_U)$.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0A94, identification of degree-zero Hom-complex cohomology"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-kinjective-hom-derived] in the abelian category of $\\mathcal O_U$-modules to the complex $\\mathcal L^\\bullet|_U$ and the K-injective target $\\mathcal I^\\bullet|_U$ from Step 1. It gives a bijection from the homotopy-category morphisms to $\\operatorname{Hom}_{D(\\mathcal O_U)}(Q_U(\\mathcal L^\\bullet|_U),Q_U(\\mathcal I^\\bullet|_U))$, induced by $f\\mapsto Q_U(f)$. Combining this with Step 2 proves that the displayed map is well defined and bijective.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma 0A94, final bijection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0A94; source text is not present in this checkout, so the argument is reconstructed from the cited localized-site and K-injective comparison lemmas"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,12 +95,53 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-rhom-well-defined",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-rhom-into-kinjective-local",
+  "worker": "stage1",
+  "summary": "Checked Lemma 0A94 against the imported statement and reconstructed its proof in three steps: restriction to the localized site preserves K-injectivity via the exact extension-by-zero adjunction, degree-zero global sections of the Hom complex are homotopy-category morphisms, and the K-injective comparison identifies these with localized derived morphisms. No new nodes were needed.",
+  "blueprint": "Realizes the ancestor clause for the derived internal Hom by the localized K-injective comparison and the degree-zero Hom-complex identification.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-restriction-adjunction",
+    "why": "Step 1 needs the extension-by-zero/restriction adjunction on the localized site."
+   },
+   {
+    "node": "lem-weil-pbc-site-extension-by-zero-exact",
+    "why": "Step 1 needs exactness of extension by zero to invoke K-injective preservation."
+   },
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Step 1 records exactness of restriction in the localized-site setup."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Step 1 uses the general right-adjoint/exact-left-adjoint K-injective preservation lemma."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Step 3 uses the derived-category bijection for morphisms into a K-injective target."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rkl0004",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rkl0004 (reviewer sub-agent of L); spot-checked: C1/C4: step1 cites new module adjunction node + lem-weil-pbc-right-adjoint-preserves-kinjective (u=restriction, v=j_! exact) so I|_U K-injective in def-pur-kinjective-complex sense; step2 H^0 of Gamma(U,Hom^.) = Hom_K via def-pur-hom-complex differential (d^{-1}h = dh+hd, null-homotopy), elementary; step3 lem-weil-pbc-kinjective-hom-derived map is f->Q_U(f), exactly the map H1 lem-pur-rhom-well-defined step uses (naturality from functoriality of Q_U). Class b/d: new node is site/module version, not dup of lem-sc-derived-open-restriction-adjunction-exact / lem-sc-derived-k-injective-restrict-open (ringed spaces) or abelian-sheaf lem-weil-pbc-site-* nodes; lem-pur-rhom-global-sections is the global derived statement, not a dup. Mathlib grep (overPullback only) no match, recorded. FIX more, RETURN less: (1) B3 new node lem-pur-site-restriction-module-adjunction-exact: j_U^* and j_{U!} now defined in the statement (restriction; sheafification of def-weil-extension-by-zero-presheaf), stmt_deps corrected to the referenced definitions (dropped three lemmas that the statement does not use); (2) dropped stale tool_uses for the abelian-sheaf lemmas no step cites after the second reading.; 1 file(s) fixed by the reviewer"
+ }
 }
