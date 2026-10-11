@@ -5396,3 +5396,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:18 L: merged deliver/T1/lem-pc-restrict-derived-direct-image-open (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction AlgebraicGeometry.schemeDerivedDirectImage_openRestriction)
 - 16:19 L: merged deliver/C1/pqf-lem-fff-vanishing (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FormalFunctionsFiniteFibreVanishing AlgebraicGeometry.higherDirectImage_stalk_subsingleton_of_finite_fibre)
 - 16:19 L: merged deliver/G1/lem-pc-grothendieck-edge-cocycle (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.GrothendieckEdgeCocycle CategoryTheory.grothendieck_left_edge_cocycle)
+- 16:19 L: merged deliver/R1/lem-weil-pbc-graded-finiteness-cohomology (stage 2; reviewer PASS; first push; Sheaf.Paper.GradedFinitenessCohomology AlgebraicGeometry.gradedFinitenessCohomology)
