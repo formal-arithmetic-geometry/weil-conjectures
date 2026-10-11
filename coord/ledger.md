@@ -3162,3 +3162,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:49 UTC L: G1 ring-m-pseudo-coherent-vanishing-base PASS d934352ee (R-pvb0049).
 - 00:49 UTC L: E1 ring-pseudo-coherent-distinguished-triangle FIX 6c6a085ea (R-pdt0046; lift node restated as Tag 064E); lem-pc-four-lemma-epi set to mathlib (epi_of_epi_of_epi_of_mono, Four.lean:125) by L.
 - 00:50 L: merged deliver/H1/lem-pc-derived-mayer-vietoris-functorial (reviewer FIX; after a return; new nodes: 1)
+- 00:50 L: merged deliver/G1/lem-pc-ring-pseudo-coherent-iff-all-m (reviewer FIX; first push; new nodes: 0)

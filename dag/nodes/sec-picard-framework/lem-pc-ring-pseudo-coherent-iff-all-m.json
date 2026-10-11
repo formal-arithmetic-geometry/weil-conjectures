@@ -22,39 +22,90 @@
   "def-pc-cochain-complex-modules",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Suppose C is pseudo-coherent, with a quasi-isomorphism from a bounded-above complex P of finite free R-modules. For any integer m, the stupid truncation of P in degrees at least m is bounded and finite free; its map to P, followed by the quasi-isomorphism to C, is an isomorphism on cohomology in degrees greater than m and a surjection in degree m. Thus C is m-pseudo-coherent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), proof of (1) implies (2)"
+   }
+  },
+  {
+   "text": "Conversely assume C is m-pseudo-coherent for every m. The witness for m=0 gives an upper bound b with H^i(C)=0 for i>b. Construct, by descending induction from degree b, a bounded-above complex F of finite free modules and a map F to C which is an isomorphism on H^i for i>n and surjective on H^n at stage n. If the stage-n map has cone M, the long exact sequence gives H^i(M)=0 for i>=n. The stage-n complex F (zero below degree n) is a bounded complex of finite free modules, so the identity shows it is k-pseudo-coherent for every k, in particular n-pseudo-coherent; C is (n-1)-pseudo-coherent by hypothesis. The first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] with m=n-1, applied to the triangle F to C to M to F[1], makes M (n-1)-pseudo-coherent. Applying [lem-sc-finite-cohomology] with m=n-1 to M (which has H^i(M)=0 for i>n-1) therefore makes H^{n-1}(M) finite. Choose a finite free module mapping onto this group and lift generators to cycles (f_j,c_j) of the cone, with f_j in Ker(d^n_F) and c_j in C^{n-1} compatible with the differential; sending the j-th basis vector to f_j in F^n and to c_j in C^{n-1} is a chain map; adjoining it in degree n-1 extends F so that the map is an isomorphism in degree n and surjective in degree n-1. Repeating downward constructs F bounded above with a quasi-isomorphism F to C, so C is pseudo-coherent.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+    "lem-sc-finite-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), proof of (2) implies (1), using Tags 064R and 064S"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+  "lem-sc-finite-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.66.5 (Tag 064U)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "bounded-above finite-free complex glues from localizations generating unit ideal",
-   "results": "No pseudo-coherence declaration",
+   "query": "pseudo-coherent complex iff m-pseudo-coherent for every integer",
+   "results": "CochainComplex.isLE_iff; CochainComplex.isGE_iff; no pseudo-coherence declaration",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "Module.FinitePresentation, Localization, Ideal.span",
-   "results": "No matching declaration",
+   "query": "PseudoCoherent, DerivedCategory, bounded finite free",
+   "results": "0 hits; unknown identifier PseudoCoherent",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "pseudo.?coherent|PseudoCoherent",
-   "results": "no matches in Mathlib/Algebra/Homology",
+   "query": "pseudo.?coherent|PseudoCoherent in Mathlib/Algebra/Homology",
+   "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a complex is pseudo-coherent if and only if it is m-pseudo-coherent for every integer m",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-ring-pseudo-coherent-localization-glue",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-ring-pseudo-coherent-iff-all-m",
+  "worker": "stage1",
+  "summary": "Split Tag 064U into the elementary truncation implication and the downward finite-free construction for the converse. The converse uses the existing ring distinguished-triangle closure and finite-cohomology statements; no new nodes were needed.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof clause 'm-pseudo-coherence induction: pass from all m-pseudo-coherent bounds to pseudo-coherence'."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pam0049",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pam0049 (reviewer sub-agent of L); spot-checked: Statement vs Tag 064U (1)<=>(2): agrees; definitions match citer 051657da7, which uses both directions (glue step 4); no leftover duplicate iff-all-m node. Step 1 sigma_{>=m} truncation: H^m surjective, iso above: correct. Step 2: one-step adjunction (cycles of the cone cover both ker H^n and coker H^{n-1}, since F^{n-1}=0 at stage n) checked correct. FIX more, RETURN less: (1) C4: step 2 said the stage-n F is (n-1)-pseudo-coherent, but the first clause of lem-pc-ring-pseudo-coherent-distinguished-triangle with m=n-1 needs A=F to be n-pseudo-coherent; repaired by stating F bounded finite free is k-pc for all k via identity, and naming m=n-1 for both cited nodes; lift through the cone made explicit. Second reading by G1 missed this mismatch. Note: report claims created.item was changed to this item, but head still has localization-glue, which is correct (E1's glue created the node); left as is.; 1 file(s) fixed by the reviewer"
+ }
 }
