@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Estimate
 public import WeilConjectures.AlgebraicGeometry.GeometricallyConnected
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+public import WeilConjectures.AlgebraicGeometry.Sites.FieldExtensionInjective
 
 /-!
 # Base change of curves along a field extension
@@ -145,5 +146,72 @@ theorem Scheme.Hom.genus_baseChangeField [SmoothOfRelativeDimension 1 f] [IsProp
     (X := pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))
   have h₃ := Scheme.arithmeticGenus_pullback (k := k) (X := C) k'
   exact h₂.trans (h₃.trans h₁.symm)
+
+/-- The cohomology of the pullback of `ℤ/n` to the base change is that of `ℤ/n`. -/
+noncomputable def Scheme.Hom.sheafHBaseChangeConstantZModAddEquiv (n q : ℕ) :
+    Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1}
+      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))).obj (C.constantZMod n)) q
+      ≃+ Sheaf.H ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).constantZMod n)
+        q :=
+  ((Sheaf.functorH _ q).mapIso ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1}
+    (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))).app
+      (AddCommGrpCat.of (ULift.{u + 1} (ZMod n))))).addCommGroupIsoToAddEquiv
+
+/-- **Invariance of the cohomology of a smooth proper curve.** Let `k ⊆ k'` be algebraically
+closed fields, `C` a smooth proper connected curve over `k` and `n` prime to `char k`. Then the
+pullback `Hᵠ(C, ℤ/n) ⟶ Hᵠ(C_{k'}, ℤ/n)` is bijective for every `q`: it is injective
+(`AlgebraicGeometry.injective_cohomologyMap_pullback_fst_of_isAlgClosed`), and both groups are
+finite of the same order by the curve estimate
+(`AlgebraicGeometry.IsConnectedCurve.sheafH_constantZMod_of_isProper`), since `C_{k'}` is again a
+smooth proper connected curve of the same genus.
+(blueprint: `thm-sc-constant-invariance`, proper case) -/
+theorem IsConnectedCurve.bijective_fieldExtensionCohomologyMap_of_isProper [IsAlgClosed k]
+    [IsConnectedCurve f] [Smooth f] [IsProper f] [IsAlgClosed k'] (n : ℕ) (hn : (n : k) ≠ 0)
+    (q : ℕ) : Function.Bijective (f.fieldExtensionCohomologyMap k' (C.constantZMod n) q) := by
+  have := IsConnectedCurve.connectedSpace' f
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  have : QuasiSeparatedSpace C := (quasiSeparated_iff_quasiSeparatedSpace f).mp inferInstance
+  have : SmoothOfRelativeDimension 1 f := IsConnectedCurve.smoothOfRelativeDimension_one f
+  have hinj := injective_cohomologyMap_pullback_fst_of_isAlgClosed f k' (C.constantZMod n) q
+  obtain ⟨hs, -, hp, -⟩ := f.baseChangeField_isCurve k'
+  have := hp inferInstance
+  have : Smooth (f.baseChangeField k') := hs.smooth
+  have := IsConnectedCurve.baseChangeField f k'
+  have hn' : (n : k') ≠ 0 := by
+    rw [← map_natCast (algebraMap k k')]
+    exact (map_ne_zero _).2 hn
+  have hg := f.genus_baseChangeField k'
+  obtain ⟨⟨e₀⟩, ⟨e₁⟩, ⟨e₂⟩, h₃⟩ := IsConnectedCurve.sheafH_constantZMod_of_isProper f n hn
+  obtain ⟨⟨e₀'⟩, ⟨e₁'⟩, ⟨e₂'⟩, h₃'⟩ :=
+    IsConnectedCurve.sheafH_constantZMod_of_isProper (f.baseChangeField k') n hn'
+  let E := f.sheafHBaseChangeConstantZModAddEquiv k' n q
+  have hnz : NeZero n := ⟨by rintro rfl; exact hn Nat.cast_zero⟩
+  rcases (show q = 0 ∨ q = 1 ∨ q = 2 ∨ 2 < q by omega) with rfl | rfl | rfl | hq
+  · have : Finite (Sheaf.H
+        ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).constantZMod
+        n) 0) :=
+      Finite.of_equiv _ e₀'.symm.toEquiv
+    have := Finite.of_equiv _ E.symm.toEquiv
+    refine hinj.bijective_of_nat_card_le ?_
+    rw [Nat.card_congr E.toEquiv, Nat.card_congr e₀.toEquiv, Nat.card_congr e₀'.toEquiv]
+  · have : Finite (Sheaf.H
+        ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).constantZMod
+        n) 1) :=
+      Finite.of_equiv _ e₁'.symm.toEquiv
+    have := Finite.of_equiv _ E.symm.toEquiv
+    refine hinj.bijective_of_nat_card_le ?_
+    rw [Nat.card_congr E.toEquiv, Nat.card_congr e₁.toEquiv, Nat.card_congr e₁'.toEquiv, hg]
+  · have : Finite (Sheaf.H
+        ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).constantZMod
+        n) 2) :=
+      Finite.of_equiv _ e₂'.symm.toEquiv
+    have := Finite.of_equiv _ E.symm.toEquiv
+    refine hinj.bijective_of_nat_card_le ?_
+    rw [Nat.card_congr E.toEquiv, Nat.card_congr e₂.toEquiv, Nat.card_congr e₂'.toEquiv]
+  · have := h₃' q hq
+    have : Subsingleton (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1}
+        (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k'))))).obj
+          (C.constantZMod n)) q) := E.toEquiv.subsingleton
+    exact ⟨hinj, fun y ↦ ⟨0, Subsingleton.elim _ _⟩⟩
 
 end AlgebraicGeometry
