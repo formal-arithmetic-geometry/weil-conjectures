@@ -13,13 +13,14 @@
  },
  "kind": "statement",
  "title": "Localization of cohomology of a derived tensor",
- "statement": "Let R\\to A and R\\to R' be ring maps, put A'=A\\otimes_R R', and let M be a complex of A-modules [def-pc-derived-category]. For a prime q' of A' with images q in A, p' in R' and p in R, there is a natural isomorphism H^i(M\\otimes_R^{\\mathbf L} R')\\otimes_{A'}A'_{q'} \\cong H^i(M_q\\otimes_{R_p}^{\\mathbf L} R'_{p'})\\otimes_{A_q\\otimes_{R_p}R'_{p'}}A'_{q'} for every i, where the A-action on the left is induced by endomorphisms of M in D(A) and the right side uses the localized complex. The isomorphism is compatible with morphisms of M and with the canonical comparison map to M\\otimes_A^{\\mathbf L} A'.",
+ "statement": "Let R\\to A and R\\to R' be maps of commutative rings, put A'=A\\otimes_R R', and let M be a complex of A-modules [def-pc-ring-tensor-cohomology]. For a prime q' of A' with images q in A, p' in R' and p in R, there is a natural isomorphism H^i(M\\otimes_R^{\\mathbf L} R')\\otimes_{A'}A'_{q'} \\cong H^i(M_q\\otimes_{R_p}^{\\mathbf L} R'_{p'})\\otimes_{A_q\\otimes_{R_p}R'_{p'}}A'_{q'} for every i, where the A-action on the left is induced by endomorphisms of M in D(A) and the right side uses the localized complex. Derived cohomology, its coefficient actions, and the comparison map are interpreted using [def-pc-base-derived-tensor-cohomology-model], applied to a functorial K-flat A-resolution of M and its localization. The isomorphism is compatible with morphisms of M and with the canonical comparison map to M\\otimes_A^{\\mathbf L} A'.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 0DJ8, affine proof, displayed localization identities"
  },
  "stmt_deps": [
-  "def-pc-derived-category"
+  "def-pc-ring-tensor-cohomology",
+  "def-pc-base-derived-tensor-cohomology-model"
  ],
  "proof": [
   {
@@ -133,5 +134,45 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dtl0203 (reviewer sub-agent of L); spot-checked: Return points of R-dtl0141: 1 repaired (K-flat R-resolution F of R', balanced model P tensor_R F, both factors localized; checked R=k[t], A=R'=R/t); 2 repaired via new node lem-pc-derived-tensor-action-naturality (A-action from P, R'-action through End_{D(R)}(R'), matching the parent 780f1520a clause); 3 repaired by citing that node plus chain-level localization of the comparison map. Statement identical to the returned and base versions. E: balanced tensor true (F K-flat over R, Stacks 064K/06Y6). FIX more, RETURN less: (b) lem-pc-localization-preserves-kflat is the one-point-ringed-space case of lem-pc-kflat-pullback-preservation, dropped and Step 1 cites the existing node (declared tool_use: generic K-flatness under pullback, C7); C4 lem-pc-derived-tensor-flat-second-localization did not state compatibility with the comparison maps used in Step 3, clause added (true by naturality of the comparison map in the second algebra and flatness of A tensor C over A tensor B); action-naturality's undefined 'resulting isomorphisms' made precise (model isomorphisms, comparison map represented by P tensor F -> P tensor R'); Steps 1-3 now spell out (P tensor_R F)_q = P_q tensor_{R_p} F_p via the cited tensor-localization lemma, localization of the R'-action roofs and of the comparison map, and the localization chain A' -> A_q tensor R'_p' -> A'_q'; B3 source document '064K-06Y6' corrected to more-algebra.tex. Second reading missed the duplicate and the comparison-map gap in the flat-localization node.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedTensorLocalizationCohomology",
+  "declaration": "RingTensorCohomology.derivedTensor_localization_cohomology",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedTensorLocalizationCohomology.lean",
+  "statement": "theorem derivedTensor_localization_cohomology (q' : Ideal (A ⊗[R] B)) [q'.IsPrime] (q : Ideal A) [q.IsPrime] (p' : Ideal B) [p'.IsPrime] (p : Ideal R) [p.IsPrime] (hq : q = q'.comap (algebraMap A (A ⊗[R] B))) (hp' : p' = q'.comap Algebra.TensorProduct.includeRight.toRingHom) (hp : p = q.comap (algebraMap R A)) [IsLocalization.AtPrime Rp p] [IsLocalization.AtPrime Aq q] [IsLocalization.AtPrime Bp p'] [IsLocalization.AtPrime D q'] : ∀ i : ℤ, ∃ e : ∀ (M : CochainComplex (ModuleCat.{u} A) ℤ) (L : (ML) M) (K : (MR) M), (EL).obj (L.cohomology i) ≅ (ER).obj (K.cohomology i), (∀ (M : CochainComplex (ModuleCat.{u} A) ℤ) (L : (ML) M) (K : (MR) M) (τ : ((ModuleCat.extendScalars ((algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj ((P).obj M) ≅ ((ModuleCat.extendScalars ((algebraMap (Aq ⊗[Rp] Bp) D).comp (algebraMap Aq (Aq ⊗[Rp] Bp)))).mapHomologicalComplex (.up ℤ)).obj ((J).obj ((P).obj M))), (∀ (j : ℤ) (d : D) (x : ((P).obj M).X j), τ.hom.f j (d ⊗ₜ[A, (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B))] x) = d ⊗ₜ[Aq, (algebraMap (Aq ⊗[Rp] Bp) D).comp (algebraMap Aq (Aq ⊗[Rp] Bp))] ((1 : Aq) ⊗ₜ[A, algebraMap A Aq] x)) → L.localizedComparison i ≫ HomologicalComplex.homologyMap τ.hom i = (e M L K).hom ≫ K.localizedComparison i) ∧ (∀ (M N : CochainComplex (ModuleCat.{u} A) ℤ) (f : M ⟶ N) (L : (ML) M) (K : (MR) M) (L' : (ML) N) (K' : (MR) N) (δ : L.derived ⟶ L'.derived) (ε : K.derived ⟶ K'.derived) (g : L.cohomology i ⟶ L'.cohomology i) (h : K.cohomology i ⟶ K'.cohomology i), Functor.whiskerLeft (DerivedCategory.Qh (C := ModuleCat.{u} R)) δ ≫ L'.counit = L.counit → Functor.whiskerLeft (DerivedCategory.Qh (C := ModuleCat.{u} Rp)) ε ≫ K'.counit = K.counit → (ModuleCat.restrictScalars.{u} (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom).map g ≫ (L'.cohomologyIso i).hom = (L.cohomologyIso i).hom ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map (L.derived.map (DerivedCategory.Qh.map ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).map ((restrict R A).map ((P).map f))))) ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u} B) i).map (δ.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ)).obj ((restrict R A).obj ((P).obj N))))) → (ModuleCat.restrictScalars.{u} (Algebra.TensorProduct.includeRight : Bp →ₐ[Rp] Aq ⊗[Rp] Bp).toRingHom).map h ≫ (K'.cohomologyIso i).hom = (K.cohomologyIso i).hom ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u} Bp) i).map (K.derived.map (DerivedCategory.Qh.map ((HomotopyCategory.quotient (ModuleCat.{u} Rp) (.up ℤ)).map ((restrict Rp Aq).map ((J).map ((P).map f)))))) ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u} Bp) i).map (ε.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient (ModuleCat.{u} Rp) (.up ℤ)).obj ((restrict Rp Aq).obj ((J).obj ((P).obj N)))))) → (EL).map g ≫ (e N L' K').hom = (e M L K).hom ≫ (ER).map h)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The section binds all rings, canonical compatible algebra structures and derived-category universe instances. Local notations P/J abbreviate the existing functorial K-flat resolution and termwise localization; ML/MR abbreviate the existing BaseDerivedTensorCohomologyModel, not new notions. Models are universally quantified in the conclusion, so none is an additional mathematical hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dtl1336",
+  "group": "G1",
+  "result": "pass",
+  "note": "R,A,B=R' with A'=A⊗[R]B literal; q',q,p',p prime Ideals tied by comap hq/hp'/hp; Rp,Aq,Bp,D IsLocalization.AtPrime with every algebra map tied by scalar towers (Rp->Aq, Aq⊗Bp->D determined via localization UP, checked); M arbitrary via landed resolution A, localization via landed extend A Aq; both sides via landed J1 BaseDerivedTensorCohomologyModel (no third model, nothing new defined), universally quantified; e per i, D-linear iso EL/ER; comparison clause tied by tau fixed on pure tensors d⊗x -> d⊗(1⊗x) (exists: towers make the two A->D maps equal); naturality via unique counit-compatible delta/epsilon and g/h fixed through faithful restrictScalars; universes u,w only (pp.universes #check); no let/show-from, sorry only in proof, blueprint tag present",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "G1 stage 2",
+  "old_statement": "Let R\\to A and R\\to R' be ring maps, put A'=A\\otimes_R R', and let M be a complex of A-modules [def-pc-derived-category]. For a prime q' of A' with images q in A, p' in R' and p in R, there is a natural isomorphism H^i(M\\otimes_R^{\\mathbf L} R')\\otimes_{A'}A'_{q'} \\cong H^i(M_q\\otimes_{R_p}^{\\mathbf L} R'_{p'})\\otimes_{A_q\\otimes_{R_p}R'_{p'}}A'_{q'} for every i, where the A-action on the left is induced by endomorphisms of M in D(A) and the right side uses the localized complex. The isomorphism is compatible with morphisms of M and with the canonical comparison map to M\\otimes_A^{\\mathbf L} A'.",
+  "what": "The ring-complex notation incorrectly cited def-pc-derived-category, which defines D(O_X) for a scheme. Replace that citation by the landed ring tensor cohomology and coefficient-action/comparison models, and specify how K-flat resolutions represent the arbitrary complex. The displayed isomorphism, all hypotheses and both compatibility clauses are unchanged. The earlier undelivered arbitrary-family replacement was false and is discarded.",
+  "source": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Tag 0DJ8, affine proof, displayed localization identities"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-affine-derived-base-change-comparison-map",
+    "holds": true,
+    "note": "Step 3 uses exactly the displayed source-cohomology localization and its compatibility with c. Both remain unchanged; only the ring-complex encoding and its citations were clarified."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-derived-category"
+  ]
  }
 }

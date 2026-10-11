@@ -1,42 +1,131 @@
-# Stage-1 report
+## Worker report
 
-1. Files written:
+The module states an explicit equivalence datum for the localization comparison, indexed by cohomological degree, together with ring and scalar-tower parameters and a comparison map. The source node's ring-level derived-tensor notation is not available as a single Lean declaration. The recorded dependency `def-pc-derived-category` is scheme-specific (`AlgebraicGeometry.schemeDerivedCategory`) and cannot type the ring-level expression. The original statement also leaves prime images, localized complexes, and the derived tensor/cohomology operations undefined. I therefore corrected the node to an elaborable equivalence-data statement following the source's intended comparison clause.
 
-- `dag/nodes/sec-picard-framework/lem-pc-derived-tensor-localization-cohomology.json` (statement item, repaired split).
-- `lem-pc-balanced-derived-tensor-model` (statement child, unsplit; Mathlib no match).
-- `lem-pc-localization-preserves-kflat` (statement child, unsplit; Mathlib no match).
-- `lem-pc-derived-tensor-action-naturality` (statement child, unsplit; Mathlib no match).
-- `citations.json` (verbatim step citations).
-- No Mathlib leaves.
+The ring hypotheses are the four `CommRing` instances and five `Algebra` instances in the theorem signature; scalar compatibility is expressed by the two `IsScalarTower` instances. `M`, `q'`, `q`, `p'`, and `p` are explicit index parameters. `Hleft` and `Hright` are degree-indexed families, and `comparison` is the map in each degree. The conclusion is `∀ i, Nonempty (Hleft i ≃ Hright i)`.
 
-2. Attachments: none.
+Edge cases checked: arbitrary (including empty) index types are represented by explicit `Type u` parameters; all degrees `i : ℤ` are included; no nonzero or primality assumptions are silently introduced.
 
-3. WANTED: `literature/stacks-project/perfect.tex`, Tag 0DJ8, affine proof, if the local literature checkout is restored; the repository contains the imported source reference but not the Stacks files.
+Searches: `msearch.py leanfinder` for localization/cohomology of derived tensor (only generic Tor declarations); `msearch.py loogle` for homology/localization (no hits); grep of Mathlib Algebra/Homology for localization and cohomology (no matches); `rg` of WeilConjectures and Sheaf sources (only model-specific derived-tensor modules). No existing declaration states this node.
 
-4. The source item was statement-only. The returned version incorrectly used an A-K-flat resolution P directly in `P tensor_R R'`; this does not compute the R-derived tensor (counterexample R=k[t], A=R'=R/t, M=A). I replaced it with a K-flat R-resolution F -> R' and the balanced model P tensor_R F. The split adds three genuine auxiliary statements for the balanced model, localization preservation of K-flatness, and chain-level actions/naturality.
+## Statement corrected
 
-## Review by G1
+The previous worker's undelivered correction is rejected. Arbitrary families with a map need
+not be equivalent (take the empty type and a singleton), and that replacement says nothing
+about localization. The original mathematical statement is retained. Only its incorrect
+scheme-derived-category citation is replaced by the landed ring-tensor and base-derived
+cohomology model citations, with the K-flat interpretation made explicit. The node copy
+records the original statement verbatim and its original statement dependencies.
 
-I read the target statement and parent comparison node, then checked the returned counterexample. Step 1 now cites the balanced-model child and the localization-K-flat child, so the chosen complex is genuinely a model for `M tensor_R^L R'` and localizes to the corresponding local derived tensor. Step 2 uses the existing pure-tensor localization formula degreewise; the formula commutes with differentials and gives the displayed complex isomorphism. Step 3 uses exactness of module localization to identify cohomology after localization and cites the action/naturality child: multiplication on P and F is the chain representative of the endomorphisms in the derived categories, and comparison maps are induced by the same chain maps. I verified all prime localizations and the scalar ring in each step. The old assertion of functoriality without a chain-level statement was removed.
+Source checked: Stacks perfect.tex, Tag 0DJ8, lemma-single-complex-base-change-condition,
+affine proof, lines 6488–6532 in /home/ubuntu/c1-stacks-review/perfect.tex. The source
+introduces A'=A tensor_R R', arbitrary M, compatible prime images, the displayed
+localization equality, and the comparison morphism. No Noetherian, finite, boundedness,
+flatness or characteristic assumption is made in this affine computation.
+
+Direct citer lem-pc-affine-derived-base-change-comparison-map: holds: true. Its step 3 uses
+precisely the source localization isomorphism and comparison compatibility, still present.
+There is only one direct citer in stmt_deps/proof_deps; blueprint ancestry and created.item
+occurrences are not citers. As a second downstream check, I opened
+lem-pc-rf-single-complex-affine-base-change: its steps 2–3 still use the same A'-linearity
+and localized comparison via the direct citer, so they also hold. Neither citer is edited.
 
 ## Second reading by G1
 
-- Item statement: checked against Stacks `perfect.tex`, Tag 0DJ8, and the parent node; the primes and localized scalar rings match.
-- Step 1: checked that P is K-flat over A while F is K-flat over R, and that the balanced tensor child is exactly the needed derived model. Localization is applied to both factors and to the base ring.
-- Step 2: checked the cited tensor-localization statement verbatim; the pure-tensor map is degreewise and differential-compatible.
-- Step 3: checked the cited exact-localization statement and the action/naturality child; the latter supplies the previously missing agreement with derived-category endomorphism actions and comparison-map naturality.
-- New nodes: four statement-only children (`lem-pc-balanced-derived-tensor-model`, `lem-pc-localization-preserves-kflat`, `lem-pc-derived-tensor-action-naturality`, and `lem-pc-derived-tensor-flat-second-localization`); each was searched in the DAG/blueprint and with LeanFinder, Loogle, and Mathlib grep, with no exact Mathlib match. The fourth node supplies the flat-localization-in-the-second-factor step 3 uses.
-- Edge cases checked: `M = A`, degree zero, a field (trivial localizations), and the zero complex (both sides zero).
+Independent reading: the first worker's theorem and correction were mathematically wrong;
+they are superseded by the following review and repaired statement. The Worker report above
+is kept as the historical first-worker account, not endorsed.
 
-Changes made: corrected the derived-tensor model, retained the four required child statements, rewrote all proof dependencies and verbatim citations, changed Step 2 from elementary to non-elementary because its action/naturality dependency is substantive, and recorded the counterexample that motivated the repair. Edge cases checked: `M=A`, `M=A=R/t` over `R=k[t]`, degree zero, a field, and the zero complex.
+Node checklist (objects, hypotheses, conclusion clauses), with Lean rendering and verdict:
 
-## Not duplicates
+- R, A and R' are commutative rings with R->A and R->R'. Lean uses section parameters
+  R, A, B with CommRing and Algebra R A / Algebra R B; B is the source's R'. Pass.
+- A'=A tensor_R R', not an unrelated ring. Lean uses A ⊗[R] B literally everywhere. Pass.
+- M is an arbitrary, possibly unbounded complex of A-modules. The conclusion quantifies
+  M : CochainComplex (ModuleCat.{u} A) ℤ. P=resolution A is the existing functorial
+  K-flat resolution, so no K-flatness assumption is imposed on M. Pass.
+- q' is a prime of A'; q, p', p are its compatible images. Lean uses actual Ideal
+  parameters and IsPrime instances, hq (comap of includeLeft), hp' (comap of includeRight),
+  and hp (comap R->A). The other route to p follows from the tensor algebra square. Pass.
+- Rp, Aq, Bp and D represent R_p, A_q, R'_{p'} and A'_{q'}. They are actual commutative
+  algebra rings with IsLocalization.AtPrime at the respective primes. All scalar towers
+  in the section express compatibility of the canonical localization maps, not flatness
+  or other extra ring hypotheses. In particular A and B map to D through A', Aq and Bp
+  map through Aq tensor_Rp Bp, and the two paths from A/B to D agree. Pass.
+- M_q is localization of the complex. J=extend A Aq is termwise tensor localization,
+  so MR uses J.obj (P.obj M); flat localization preserves the resolution. Pass.
+- Left cohomology has the canonical A'-action induced by A-endomorphisms of M, commuting
+  with R'. ML is the existing BaseDerivedTensorCohomologyModel R A B (P.obj M) D.
+  Its universal field identifies the true total derived functor; cohomologyIso is a
+  B-linear isomorphism with its cohomology; cohomologyIso_smul fixes the A-action. Pass.
+- Right cohomology is the derived tensor over Rp with Bp of M_q, with the
+  Aq tensor_Rp Bp-action. MR is the same existing model with R,A,B replaced by Rp,Aq,Bp
+  and input J.obj (P.obj M). Pass. These are actual models, not unconstrained families.
+- For every integer i the displayed localized modules are isomorphic. e M L K is an
+  isomorphism in ModuleCat D between EL.obj (L.cohomology i) and ER.obj (K.cohomology i),
+  where EL and ER are extension of scalars from A' and Aq tensor_Rp Bp to D. Tensor
+  symmetry changes only the left/right factor convention. Both coefficient actions and
+  D-linearity are built into these module types. Pass.
+- Compatibility with the canonical comparison to the A-derived tensor: the first
+  conjunct is L.localizedComparison i >> H(τ) = e.hom >> K.localizedComparison i.
+  The existing model's comparison_eq and localized_eq fix these maps by the derived
+  counit and extension/restriction adjunction. Since the input P(M) is A-K-flat and its
+  localization is Aq-K-flat, their ordinary target complexes compute exactly the two
+  A-derived tensors. τ is fixed on every pure tensor d tensor x by
+  d tensor (1 tensor x), so it is the canonical tensor-associativity identification,
+  not a freely chosen automorphism. The scalar towers guarantee such τ exists, and
+  pure tensors generate, so the conditional clause is not vacuous. Pass.
+- Naturality in M: the second conjunct is EL.map g >> e_N.hom = e_M.hom >> ER.map h.
+  The preceding equations say δ/ε are the counit-compatible transformations between
+  models, and g/h correspond through cohomologyIso to the cohomology maps induced by
+  resolution.map f and its localization. Universal derived functors give the unique
+  δ/ε, and the canonical actions ensure the induced g/h are tensor-algebra linear.
+  Thus these premises specify the canonical maps, rather than restrict f. Universally
+  quantifying all models in e also gives model independence by taking f=id. Naturality
+  for roofs in D(A) follows since the cohomology functors invert quasi-isomorphisms.
+  Pass.
 
-lem-pc-balanced-derived-tensor-model vs lem-pc-module-bounded-flat-kflat: the existing node only states K-flatness of bounded-above flat module complexes, while this node states the balanced two-resolution model computing a derived tensor over a base ring.
-lem-pc-balanced-derived-tensor-model vs lem-pc-affine-tilde-kflat: the existing node concerns affine sheaf tilde complexes, while this node concerns balanced derived tensor products of ring complexes.
-lem-pc-localization-preserves-kflat vs lem-pc-module-bounded-flat-kflat: the existing node proves bounded-above flat implies K-flat, while this node proves K-flatness is preserved by ring localization.
-lem-pc-localization-preserves-kflat vs lem-pc-affine-tilde-kflat: the existing node concerns affine sheaf tilde constructions, while this node concerns localization of arbitrary K-flat module complexes.
-lem-pc-derived-tensor-action-naturality vs lem-pc-module-bounded-flat-kflat: the existing node is a K-flatness criterion, while this node identifies scalar actions and naturality of derived tensor models.
-lem-pc-derived-tensor-action-naturality vs lem-pc-affine-tilde-kflat: the existing node concerns affine sheaf tilde K-flatness, while this node concerns chain-level action and comparison-map compatibility for derived tensor products.
-lem-pc-derived-tensor-flat-second-localization vs lem-pc-module-bounded-flat-kflat: the existing node is a bounded-above flatness criterion, while this node states cohomology base change for derived tensor under a flat localization of the second algebra.
-lem-pc-derived-tensor-flat-second-localization vs lem-pc-affine-tilde-kflat: the existing node concerns affine sheaf tilde complexes, while this node states flat localization compatibility for derived tensor cohomology of ring complexes.
+Dependency signatures were opened and checked: schemeDerivedCategory in the original
+record was scheme-specific and unusable for this ring statement. No replacement of that
+scheme definition is appropriate. RingTensorCohomology.resolution / restrict / extend in
+Sheaf.Algebra.Homology.RingTensorCohomology supply actual module-complex operations;
+ModuleCat.BaseDerivedTensorCohomologyModel in
+Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel supplies the total-derived
+universal property, ordinaryIso with pure-tensor normalization, coefficient modules,
+cohomologyIso_smul, comparison_eq, and localized_eq. Neither dependency needs repair,
+and no new definition node or dependency module is introduced. The concrete K-flat
+resolution is selected from the existing functorial-flat-resolution instance, never
+from a sorry-valued definition. The only new declaration is the named theorem, whose
+proof is sorry; its docstring follows all three original proof steps with their citations.
+
+Edge cases: every degree i : ℤ, including 0 and negative degrees; zero complex; arbitrary
+characteristic and zero rings are allowed. A zero tensor ring has no prime q', so the
+prime-indexed assertion is correctly vacuous there (the empty affine-scheme case).
+There is no index family to assume nonempty or finite. The universe u is arbitrary and
+shared by the ring-tensor resolution convention of the landed dependency; w is explicit
+for the derived-category construction and never a test-object universe. Every variable
+and instance is bound in the section or theorem, and autoImplicit is false. The model
+objects occur universally inside the conclusion, so their existence is not an added
+hypothesis; the existing model's nonempty theorem provides them for every input.
+
+Independent searches: msearch.py LeanFinder query “localization of derived base change
+cohomology at prime ideals” returned cotangent-H1 and Kaehler localization declarations,
+which are different objects, not this theorem. Loogle query ModuleCat.extendScalars
+returned the exact termwise extension, its adjunction and associativity, all used through
+the existing definitions; it did not state the derived localization comparison.
+LeanSearch query “derived tensor cohomology localization at prime natural comparison”
+returned Internal Server Error (unavailable; no mathematical verdict). I independently
+ran rg for BaseDerivedTensorCohomologyModel, derivedTensor_localization_cohomology,
+localiz.*homolog and homolog.*localiz in Mathlib/Algebra/Homology, WeilConjectures and
+lean/Sheaf; only the existing model and related project tensors were relevant. The model
+was reused. No exact theorem or duplicate new declaration was found.
+
+Mismatches repaired: unrestricted rings A' replaced by literal tensor algebra; arbitrary
+M and q-types replaced by complexes and prime ideals; arbitrary H families replaced by
+actual universal-derived cohomology models and their canonical scalar actions; actual
+prime localizations and all canonical scalar compatibilities restored; both naturality
+and comparison compatibility restored; false statement_change discarded and replaced
+by the minimal ring-versus-scheme citation clarification; theorem docstring expanded to
+all three source proof steps; import of the unused scheme-derived category removed.
+Server compilation completed with exit code 0 and no warnings. The node's lean.statement
+is copied verbatim from the final theorem signature.
