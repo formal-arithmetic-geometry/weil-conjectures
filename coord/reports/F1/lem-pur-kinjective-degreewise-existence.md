@@ -1,38 +1,134 @@
-# Stage 1 report: lem-pur-kinjective-degreewise-existence
+## Worker report
 
-## Files written
+The module `Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveDegreewiseExistence` states
+`CochainComplex.exists_functorial_kInjective_resolution_with_injective_terms`, with the sole
+proof `sorry`. No definitions, dependency modules, or new nodes are needed. The node is unchanged
+except for its `lean` record.
 
-- `dag/nodes/sec-smooth-purity/lem-pur-kinjective-degreewise-existence.json`: repaired item split.
-- New statement nodes: `lem-pur-kinjective-functorial-homotopies`, `lem-pur-kinjective-functorial-injective`, `lem-pur-kinjective-characterize-injective`, `prop-pur-kinjective-objects-small`, `lem-pur-kinjective-characterize-K-injective`, `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size`, and `lem-pur-kinjective-set-iso-classes-bounded-size`; all unsplit and no Mathlib leaves.
-- `citations.json`: verbatim citations for every node used by every proof step.
+Hypotheses and clauses, in the order of the node:
 
-## Attachments
+- A Grothendieck abelian category A is `(C : Type u) [Category.{v} C] [Abelian C]
+  [IsGrothendieckAbelian.{v} C]`. The Grothendieck universe is the hom universe, precisely the
+  strict Grothendieck notion recorded by the dependency: exact small filtered colimits and a
+  generator, with small colimits inferred by Mathlib. Object and hom universes are independent.
+- The category of cochain complexes and chain maps is `CochainComplex C ℤ`, with Mathlib's
+  existing category structure, not a private copy or a restriction to bounded complexes.
+- One functor for all complexes is `∃ (I : CochainComplex C ℤ ⥤ CochainComplex C ℤ)`.
+- A natural transformation from the identity is
+  `(η : 𝟭 (CochainComplex C ℤ) ⟶ I)`, inside the same existential. Its naturality is part
+  of its type, so the witnesses are uniform in K and compatible with all chain maps.
+- Every complex is quantified by `∀ (K : CochainComplex C ℤ)`.
+- The termwise monomorphism clause is `∀ (n : ℤ), Mono ((η.app K).f n)`.
+- The quasi-isomorphism clause is `QuasiIso (η.app K)`, which by its definition and
+  `quasiIsoAt_iff_isIso_homologyMap` says the induced cohomology map is an isomorphism in
+  every integer degree. Homology of a cochain complex is its cohomology; existence is inferred
+  from the abelian category instance.
+- K-injectivity is `IsKInjective (I.obj K)`. Its field states that every chain map from any
+  acyclic complex admits a homotopy to zero. No boundedness restriction occurs here.
+- Injectivity of every term is `∀ (n : ℤ), Injective ((I.obj K).X n)`. This is categorical
+  injectivity, namely extension of any map along any monomorphism.
 
-None. The sorry-free generic replacement declarations in `WeilConjectures/CategoryTheory/GrothendieckAbelian/KInjectiveResolution.lean` do not state that every term is injective, so they are not exact attachments for this item.
+Dependency declarations read and used:
 
-## WANTED
+- `def-sp-grothendieck-abelian`: `CategoryTheory.IsGrothendieckAbelian`,
+  `Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic` (direct import).
+- `def-pc-cochain-complex-modules`: `CochainComplex` and `HomologicalComplex.Hom`,
+  `Mathlib.Algebra.Homology.HomologicalComplex` (transitive import).
+- `def-pc-quasi-iso-modules`: `QuasiIso`, `Mathlib.Algebra.Homology.QuasiIso`
+  (transitive import).
+- `def-pur-kinjective-complex`: `CochainComplex.IsKInjective`,
+  `Mathlib.Algebra.Homology.HomotopyCategory.KInjective` (direct import).
+- `def-sp-injective-resolutions`: `CategoryTheory.Injective`,
+  `Mathlib.CategoryTheory.Preadditive.Injective.Basic` (transitive import). The dependency's
+  `mathlib_match.how` explicitly identifies this declaration for its injective-object clause;
+  the object-level `InjectiveResolution` structure is not needed for this item's complex-level
+  conclusion. Its signature and docstring were also read.
 
-None.
+The item explicitly asks for the general abelian-category versions of the cochain complex,
+quasi-isomorphism, and K-injective notions. Their Mathlib declarations are already general,
+so the sheaf-module specializations described in the dependency records require no replacements.
 
-## What was wrong and what changed
+Source checked: [Stacks Project, Tag 079P](https://stacks.math.columbia.edu/tag/079P),
+Theorem 19.12.6. The local `literature/stacks-project/injectives.tex` is absent on this machine,
+so the official theorem and its full proof were read online. The source confirms all clauses.
+The declaration docstring includes every step of the node's proof, with all seven proof
+nodes named, the infinite-cardinal enlargement, transfinite iteration, and both final tests.
+No statement correction or dispute is needed.
 
-The prior criterion node used undefined cardinality and transfinite-generation language. It now states the two precise 079P hypotheses: every nonzero acyclic complex contains a nonzero bounded-above acyclic subcomplex with term sizes bounded by kappa, and every acyclic complex is a quotient of a direct sum of such complexes. Object size is explicitly defined as the cardinality of the set of subobjects. I added the missing statement-only nodes for existence of kappa and for the set of isomorphism classes, strengthened the smallness proposition to identify `|M|` with this size, and removed those lemmas from `stmt_deps` while retaining them in `proof_deps`. The report no longer lists the nonexistent transfinite node or the out-of-scope unit file.
+Edge cases checked before writing:
 
-## Not duplicates
+- The zero complex and the zero abelian category are included; zero objects are injective,
+  and maps from acyclic complexes to the zero complex are homotopic to zero.
+- Degree zero, negative degrees, and arbitrarily positive degrees are covered by `n : ℤ`.
+- Unbounded complexes are included: no `IsStrictlyGE`, boundedness, or finiteness binder occurs.
+- No field, characteristic, site, chosen generator, cardinal bound on input complexes, or
+  enough-injectives hypothesis is added. The choices in the proof are consequences of the
+  Grothendieck hypothesis, not hypotheses of the theorem.
+- The existential functor and transformation precede `∀ K`, so this does not merely give
+  independently chosen replacements for individual complexes.
 
-- `lem-pur-kinjective-functorial-homotopies` vs `lem-weil-pbc-kinjective-functorial-existence`: the existing node asserts a K-injective replacement but not a functor killing a specified set of bounded-above acyclic maps by homotopy.
-- `lem-pur-kinjective-functorial-injective` vs `lem-weil-pbc-kinjective-functorial-existence`: the existing node omits factorization through injective subobjects in each degree.
-- `lem-pur-kinjective-characterize-K-injective` vs `lem-weil-pbc-kinjective-functorial-existence`: a bounded-size criterion is distinct from replacement existence.
-- `prop-pur-kinjective-objects-small` vs `lem-weil-pbc-kinjective-functorial-existence`: transfinite smallness is not a K-injective replacement statement.
+Searches for an existing statement:
 
-## Review by F1
+- `msearch.py ... leanfinder "functorial K-injective resolutions with degreewise injective
+  terms for unbounded complexes in a Grothendieck abelian category"`: eight hits, including
+  `InjectiveResolution.of`, its injective-term instance, and the K-injectivity instance for
+  object resolutions; none state this functorial theorem for arbitrary unbounded complexes.
+- `msearch.py ... loogle "CochainComplex.IsKInjective, CategoryTheory.Injective"`: two hits,
+  the bounded-below criterion `isKInjective_of_injective` and extension of natural-indexed
+  complexes; neither matches.
+- `msearch.py ... leansearch "functorial unbounded K-injective resolution with injective terms
+  in a Grothendieck abelian category"`: service unavailable (Internal Server Error).
+- `msearch.py ... grep "kInjectiveResolutionFunctor|IsKInjective|HasKInjectiveResolutions"
+  Algebra/Homology`: 24 hits on the K-injective definition, bounded-below criteria, and
+  derived-category APIs; no matching theorem.
+- `rg` on `/home/ubuntu/weil-src-slopmaster2/WeilConjectures` and repository `lean/Sheaf`
+  for the node id, functorial K-injectivity, and `kInjectiveResolutionFunctor`: found the
+  source module `WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`.
+  Read its full declarations and docstrings. `kInjectiveResolutionFunctor`,
+  `toKInjectiveResolution`, `monoQuasiIso_toKInjectiveResolution_app`, and
+  `isKInjective_kInjectiveResolutionFunctor_obj` supply the functorial monomorphic
+  quasi-isomorphism and K-injectivity, but do not state injectivity of each term.
+  Consequently they are not the complete node statement and cannot give an `existing: true`
+  record for this item. The new theorem introduces no duplicate notion or chosen resolution.
+- `rg` on Mathlib, the source project, and `lean/Sheaf` for
+  `injective.*(rlp|kInjectiveResolution)|Injective.*kInjectiveResolution|exists_functorial.*[Ii]njective`:
+  generic lifting-characterizations of injective objects only, no complete matching statement.
+  The new declaration's full name is absent from these sources.
 
-I read `literature/stacks-project/injectives.tex` at Theorem 079P and each cited lemma or proposition: `lemma-functorial-homotopies`, `lemma-functorial-injective`, `lemma-characterize-injective`, `proposition-objects-are-small`, `lemma-acyclic-quotient-complexes-bounded-size`, `lemma-set-iso-classes-bounded-size`, and `lemma-characterize-K-injective`. I also read the Lean source declaration region in `WeilConjectures/CategoryTheory/GrothendieckAbelian/KInjectiveResolution.lean` to confirm there is no exact sorry-free attachment.
-
-Step 1 uses the M statement's termwise monomorphic quasi-isomorphism and null-homotopy clause. Step 2 uses N's corresponding quasi-isomorphism and injective-subobject factorization. Step 3 uses the generator lifting criterion and the smallness factorization proposition; its hypotheses include the Grothendieck category and the generator. Step 4 uses the corrected K-injective criterion with its two explicit bounded-size hypotheses, injective terms, and vanishing homotopy maps. Step 5 uses the two new existence statements to choose kappa and representatives, then uses M, N, smallness, and both criteria. I checked that subobjects of the generator have size at most the generator's size by the size definition, and that termwise factorizations assemble at one earlier stage because there are countably many degrees, the chosen cofinality is uncountable, and transition maps are monomorphisms. I tested zero and one-degree injective complexes as edge cases and recorded verbatim quotes in `citations.json`.
+Validation: `scompile.py` compiled the 64-line module on the server in 1.3 seconds,
+exit code 0, with no warnings or errors. `deliver2.py F1
+lem-pur-kinjective-degreewise-existence --no-push` printed `OK (dry run)`: compile and
+preflight passed except for the second reading, which the independent reader must write.
+Nothing was pushed. An explicit final `rg` of the proposed declaration name in
+`dag/lean_names_upstream.json`, Mathlib, the source project, and `lean/Sheaf` found no hits.
 
 ## Second reading by F1
 
-- Item and steps checked against Theorem 079P and each cited lemma; restored the required termwise monomorphism and verified all hypotheses.
-- New nodes checked against their Stacks labels; corrected the overstrong complex-class node to the actual object-class lemma and added missing definition dependencies.
-- Changes: corrected the item, node statement, citation quote, and dependencies; zero and one-degree edge cases checked.
+I opened the node and the module and matched the statement clause by clause. The category
+object is `C : Type u` with `[Category.{v} C]`, `[Abelian C]`, and an independent
+`[IsGrothendieckAbelian.{w} C]`; this is the node's Grothendieck abelian category and does
+not identify the object, hom, and Grothendieck universes. The module now uses exactly these
+three binders. The category of complexes is `CochainComplex C ℤ`, rendered by the existential
+functor `I : CochainComplex C ℤ ⥤ CochainComplex C ℤ` and natural transformation
+`η : 𝟭 (CochainComplex C ℤ) ⟶ I`. The universal quantifier is `∀ (K : CochainComplex C ℤ)`.
+Its four conjuncts render, in order, termwise monomorphisms
+`∀ n : ℤ, Mono ((η.app K).f n)`, the quasi-isomorphism `QuasiIso (η.app K)`,
+K-injectivity `IsKInjective (I.obj K)`, and termwise categorical injectivity
+`∀ n : ℤ, Injective ((I.obj K).X n)`. The quantifier order and conjunction nesting agree
+with the node, and no boundedness, characteristic, field, chosen generator, or finiteness
+hypothesis is added.
+
+I checked the zero category and zero complex, degree zero and negative degrees, unbounded
+complexes, and arbitrary object and hom universes. All remain covered; `ℤ` includes every
+cohomological degree and no nonemptiness assumption is present. I re-read the dependency
+signatures and Mathlib declarations for `IsGrothendieckAbelian`, `CochainComplex`, `QuasiIso`,
+`IsKInjective`, and `CategoryTheory.Injective`; each Lean notion is the general notion named
+by its dependency, with no private replacement.
+
+The worker module had fixed the Grothendieck universe to the hom universe via
+`IsGrothendieckAbelian.{v}`. That was an extra universe restriction absent from the node and
+from Stacks Tag 079P. I changed it to the independent binder `universe w v u` and
+`IsGrothendieckAbelian.{w}` and updated the node's `lean.statement` verbatim. No other
+mismatch was found. The existing Mathlib/source searches recorded in the worker report were
+rechecked; no declaration states this complete functorial unbounded result. The revised module
+compiled cleanly with `scompile.py`.

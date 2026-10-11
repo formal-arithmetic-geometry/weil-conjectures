@@ -164,5 +164,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kde0014 (reviewer sub-agent of L); spot-checked: Read Stacks definition-size, lemma-set-iso-classes-bounded-size, proposition-objects-are-small, lemma-characterize-injective, lemma-acyclic-quotient-complexes-bounded-size, lemma-characterize-K-injective, lemma-functorial-homotopies, lemma-functorial-injective and 079P; all three points of R-kde3151 repaired (kappa clauses and size defined, two new nodes cited in step 5, objects-small with kappa=|M|; stmt_deps only definitions). No duplicate of lem-weil-pbc-kinjective-functorial-existence or other injective/K-injective node (grep of sources and ids). FIX more, RETURN less: (1) B4/B3: step 5 rewritten in TeX (plain-text arrow removed) and all seven new statements restated in TeX clause by clause as their Stacks lemmas, with acyclic/quasi-iso/cochain-complex/homotopy definitions cited and stmt_deps corrected; objects-small now Stacks' alpha-small wrt monomorphisms without the extra continuity hypothesis; K-injective criterion's condition (2) stated as maps homotopic to zero, matching def-pur-kinjective-complex. (2) E (fixable): step 5 claimed cof(alpha) uncountable from cof > max(kappa,|U|) without kappa infinite; now takes kappa >= aleph_0 (both clauses are monotone in kappa). (3) C1/E: step 5 now names which lemma clause each check uses (set of representatives K_i, N clause (2) for injective subobject, M clause (2), AB5 for termwise mono and quasi-iso at limit stages, |M|<=|U| for M subset U), and separates the input complex from the small acyclic complex P. Second reading by F1 missed (2) and the non-TeX statements.; 8 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveDegreewiseExistence",
+  "declaration": "CochainComplex.exists_functorial_kInjective_resolution_with_injective_terms",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckAbelian/KInjectiveDegreewiseExistence.lean",
+  "statement": "theorem exists_functorial_kInjective_resolution_with_injective_terms (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C] : ∃ (I : CochainComplex C ℤ ⥤ CochainComplex C ℤ) (η : 𝟭 (CochainComplex C ℤ) ⟶ I), ∀ (K : CochainComplex C ℤ), (∀ (n : ℤ), Mono ((η.app K).f n)) ∧ QuasiIso (η.app K) ∧ IsKInjective (I.obj K) ∧ (∀ (n : ℤ), Injective ((I.obj K).X n))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kde0940",
+  "group": "F1",
+  "result": "pass",
+  "note": "Matched node clause by clause: Grothendieck abelian C (Category.{v}, Abelian, IsGrothendieckAbelian.{w}, w independent as in the source's kInjectiveResolutionFunctor), one functor I and one natural eta : 𝟭 ⟶ I before ∀ K, termwise Mono (eta.app K).f n, QuasiIso, Mathlib IsKInjective (unbounded acyclic sources), ∀ n Injective ((I.obj K).X n); n : ℤ, no boundedness. H4: Mathlib has only the bounded-below Quillen model structure (ModelCategory/Injective.lean) and no HasKInjectiveResolutions for Grothendieck categories; the source's CochainComplex.kInjectiveResolutionFunctor/toKInjectiveResolution/hasKInjectiveResolutions_of_isGrothendieckAbelian give mono quasi-iso + K-injective but do not state the injective-term clause, so existing: false is right. Docstring carries all seven proof nodes; header, tag, no Sheaf. prefix, lines <= 100, proof sorry."
  }
 }
