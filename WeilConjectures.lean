@@ -1,5 +1,6 @@
 module  -- shake: keep-all --deprecated_module: ignore
 
+public import WeilConjectures.Algebra.Category.ModuleCat.CoextendScalarsComp
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomOver
