@@ -208,5 +208,24 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps follow Stacks 07FA with three corrections written into the steps: Lambda_q need not be Artinian (only elementwise nilpotence of the alpha(a_i) is used), B_z = C[t_ij, z]_z (Stacks' C[y, z, z^{-1}] is a misprint) so the element in H_{B/R} is zc' with c in H_{C/R} rather than z, and h_A subset h_B derived from a_l y_l. New nodes: 07F9 (delocalize-weak) and the two localization isomorphisms of B. L checked the isomorphisms and the smoothness chains. Tags 07FA, 07F9 verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuDelocalizeHeightZero",
+  "declaration": "Algebra.canBePopescuResolved_of_local_height_zero",
+  "file": "lean/Sheaf/RingTheory/PopescuDelocalizeHeightZero.lean",
+  "statement": "theorem canBePopescuResolved_of_local_height_zero {R : Type u} {A : Type v} {Λ : Type t} [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ] [IsNoetherianRing R] [FinitePresentation R A] (α : A →ₐ[R] Λ) (q : PrimeSpectrum Λ) (hminimal : q.asIdeal ∈ (popescuIdeal α).minimalPrimes) (hlocal : letI := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal CanBePopescuResolved (Algebra.TensorProduct.lift (Algebra.ofId (Localization.AtPrime (q.asIdeal.under R)) (Localization.AtPrime q.asIdeal)) ((IsScalarTower.toAlgHom R Λ (Localization.AtPrime q.asIdeal)).comp α) (fun _ _ => Commute.all _ _)) ⟨IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal), inferInstance⟩) (hdim : ringKrullDim (Localization.AtPrime q.asIdeal) = 0) : CanBePopescuResolved α q",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pdh1326"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdh1326",
+  "group": "E1",
+  "result": "fix",
+  "note": "R,A,Λ CommRing, R Noetherian, A f.p., α, q prime; (1) q ∈ minimalPrimes of popescuIdeal α; (2) localized problem R_p ⊗[R] A → Λ_q at maximal ideal in G1 delocalize-weak's form (TensorProduct.lift ofId, ⟨maximalIdeal, _⟩, letI algebraOfLiesOver inlined); (3) ringKrullDim Λ_q = 0 as landed dimension-zero modules; conclusion CanBePopescuResolved α q"
  }
 }
