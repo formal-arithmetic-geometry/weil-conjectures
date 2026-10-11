@@ -65,7 +65,7 @@ theorem kerPost_tangentMap [IsLocalRing A] {π : A →ₐ[k] k} (f : G ⟶ H) [I
   (kerMap_kerPost _ _ f v).symm
 
 theorem kerPost_injective {π : A →ₐ[k] k} (f : G ⟶ H) [IsMonHom f] [Mono f] :
-    Function.Injective (kerPost (π := π) f) := fun p q h ↦
+    Function.Injective (kerPost (π := π) f) := fun _ _ h ↦
   Subtype.ext ((cancel_mono f).1 (congrArg Subtype.val h))
 
 /-- A homomorphism of group schemes preserves the bracket of tangent vectors. -/
@@ -102,7 +102,7 @@ noncomputable def differential (f : G ⟶ H) [IsMonHom f] : Lie G →ₗ⁅k⁆ 
     exact toLie_infPointsScale H _ _
   map_lie' {x y} := by
     apply (lieEquivTangent H).injective
-    show lieEquivTangent H (lieEquiv H (infPointsMap f ((lieEquiv G).symm ⁅x, y⁆))) =
+    change lieEquivTangent H (lieEquiv H (infPointsMap f ((lieEquiv G).symm ⁅x, y⁆))) =
       lieEquivTangent H ⁅lieEquiv H (infPointsMap f ((lieEquiv G).symm x)),
         lieEquiv H (infPointsMap f ((lieEquiv G).symm y))⁆
     rw [lieEquivTangent_infPointsMap, lieEquivTangent_lie, lieEquivTangent_lie,

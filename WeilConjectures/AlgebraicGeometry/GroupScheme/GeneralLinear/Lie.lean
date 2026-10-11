@@ -197,7 +197,8 @@ theorem tangentMatrix_tangentScale (c : k) (p : GrpObj.pointsKer 𝔾𝕃(n; k) 
   simp [Matrix.one_apply, apply_ite, algebraMap_eq_inl]
 
 theorem coe_homMulEquiv_inv {A : Type u} [CommRing A] (g : GL n A) (N : Matrix n n A)
-    (hN : N * N = 0) (hg : (g : Matrix n n A) = 1 + N) : ((g⁻¹ : GL n A) : Matrix n n A) = 1 - N := by
+    (hN : N * N = 0) (hg : (g : Matrix n n A) = 1 + N) :
+    ((g⁻¹ : GL n A) : Matrix n n A) = 1 - N := by
   have h : (g : Matrix n n A) * (1 - N) = 1 := by
     rw [hg, add_mul, one_mul, mul_sub, mul_one, hN, sub_zero, sub_add_cancel]
   calc ((g⁻¹ : GL n A) : Matrix n n A)
@@ -287,7 +288,8 @@ theorem bijective_toMatrixLieHom : Function.Bijective (toMatrixLieHom n k) := by
   simp [Matrix.one_apply, apply_ite]
 
 /-- The Lie algebra of the general linear group is `gl_n`, the matrices with the commutator
-bracket: the tangent vector `1 + εX` corresponds to `X`. (blueprint: `sk-d-tangent`) -/
+bracket: the tangent vector `1 + εX` corresponds to `X`.
+(blueprint: `sk-d-tangent`, `def-wf-lie-algebra-derivation`) -/
 noncomputable def lieAlgebraEquivMatrix : GrpObj.Lie 𝔾𝕃(n; k) ≃ₗ⁅k⁆ Matrix n n k :=
   LieEquiv.ofBijective _ (bijective_toMatrixLieHom n k)
 
@@ -320,7 +322,7 @@ variable {k : Type u} [CommRing k] (G : Over (Spec (.of k))) [GrpObj G]
 
 /-- A rational representation of a group scheme `G` over `k` on `k^m`: a morphism of schemes
 `G ⟶ GL_m` over `k`, required to be a homomorphism of group schemes through an `IsMonHom`
-instance. (blueprint: `sk-d-tangent`) -/
+instance. (blueprint: `sk-d-tangent`, `def-wf-lie-algebra-derivation`) -/
 abbrev RationalHom :=
   G ⟶ 𝔾𝕃(m; k)
 
@@ -359,7 +361,7 @@ namespace RationalHom
 
 /-- The differential `dr : Lie(G) → gl_m` of a rational representation `r`: the differential of
 the homomorphism of group schemes `G ⟶ GL_m`, read in `gl_m` through `Lie(GL_m) = gl_m`. It is a
-homomorphism of Lie algebras. (blueprint: `sk-d-tangent`) -/
+homomorphism of Lie algebras. (blueprint: `sk-d-tangent`, `def-wf-lie-algebra-derivation`) -/
 noncomputable def differential (r : RationalHom G m) [IsMonHom r] :
     GrpObj.Lie G →ₗ⁅k⁆ Matrix m m k :=
   (lieAlgebraEquivMatrix m k).toLieHom.comp (GrpObj.differential r)

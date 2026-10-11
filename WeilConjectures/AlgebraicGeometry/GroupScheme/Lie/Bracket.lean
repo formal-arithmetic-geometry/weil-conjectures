@@ -419,8 +419,8 @@ theorem mul₂_injective : Function.Injective (mul₂ (k := k)) := by
   intro x y h
   have h1 := congrArg (fun z : DualNumber (DualNumber k) ↦ z.fst.fst) h
   have h2 := congrArg (fun z : DualNumber (DualNumber k) ↦ z.snd.snd) h
-  simp [DualNumber.liftElem_apply, algebraMap_eq_inl'] at h1 h2
-  exact TrivSqZeroExt.ext h1 h2
+  exact TrivSqZeroExt.ext (by simpa [DualNumber.liftElem_apply, algebraMap_eq_inl'] using h1)
+    (by simpa [DualNumber.liftElem_apply, algebraMap_eq_inl'] using h2)
 
 theorem aug₂_comp_mul₂ : aug₂.comp mul₂ = (aug₁ : DualNumber k →ₐ[k] k) :=
   aug_comp_liftElem _ _ aug₂_eps₂_mul_del₂
@@ -530,6 +530,7 @@ theorem tangentMap_apply_congr {m m' : A} (h : m = m') (hm : m * m = 0) (hπ : �
   subst h
   rfl
 
+omit [IsLocalHom π.toRingHom] in
 /-- **Substitution into the bracket.** `[v^{(m)}, w^{(n)}] = [v, w]^{(mn)}` for `m, n` of square
 zero in the maximal ideal. -/
 theorem commutator_tangentMap (m n : A) (hm : m * m = 0) (hn : n * n = 0) (hπm : π m = 0)
@@ -545,7 +546,7 @@ theorem commutator_tangentMap (m n : A) (hm : m * m = 0) (hn : n * n = 0) (hπm 
       (by simp [lift₂_apply, DualNumber.liftElem_apply]),
     kerMap_tangentMap (m := eps₂ * del₂) (m' := m * n) _ _ _ _
       (by rw [mul_mul_mul_comm, hm, zero_mul]) (by rw [map_mul, hπm, zero_mul])
-      (by simp [lift₂_apply, DualNumber.liftElem_apply, algebraMap_eq_inl])] at h
+      (by simp [lift₂_apply, DualNumber.liftElem_apply])] at h
   exact h.symm
 /-! ### The laws of the bracket -/
 
@@ -694,7 +695,7 @@ theorem liftElem_mon₃_injective :
   have h2 := congrArg (fun z : DualNumber (DualNumber (DualNumber k)) ↦ z.snd.snd.snd) h
   simp only [DualNumber.liftElem_apply, algebraMap_eq_inl', fst_add, fst_mul, snd_add,
     snd_mul, fst_inl, snd_inl, fst_inr, snd_inr, smul_eq_mul, op_smul_eq_mul, mul_zero,
-    zero_mul, add_zero, zero_add, mul_one, one_mul] at h1 h2
+    zero_mul, add_zero, zero_add, mul_one] at h1 h2
   exact TrivSqZeroExt.ext h1 h2
 
 /-- The points `u^{(αβγ)}`, as a homomorphism from the tangent vectors. -/
@@ -733,7 +734,9 @@ theorem tangentMon_conj (u : pointsKer G aug₁) (q : pointsKer G (aug₃ (k := 
     aug₃_mon₃ mon₃_mul u q).eq, mul_inv_cancel_right]
 
 set_option synthInstance.maxHeartbeats 200000 in
+-- The instances on points over `k[α][β][γ]` are slow to synthesize.
 set_option maxHeartbeats 1000000 in
+-- The Hall–Witt identity unfolds three iterated dual-number rings.
 /-- The Hall–Witt identity for tangent vectors: the Hall–Witt identity of the group of points
 over `k[α][β][γ]`, applied to `x^{(α)}`, `y^{(β)}` and `z^{(γ)}`. -/
 theorem tangentBracket_hallWitt (x y z : pointsKer G aug₁) :
@@ -910,11 +913,13 @@ theorem tangentBracket_tangentScale (c : k) (v w : pointsKer G aug₁) :
   rw [tangentMul_tangentBracket]
   have e₁ : tangentDel (tangentScale c w) = tangentMap (A := DualNumber (DualNumber k))
       (π := aug₂) (algebraMap k _ c * del₂) (by ext <;> simp [algebraMap_eq_inl']) (by simp) w :=
-    kerMap_tangentMap _ _ _ _ _ _ _ _ (by simp [DualNumber.liftElem_apply, Algebra.smul_def, algebraMap_eq_inl]) w
+    kerMap_tangentMap _ _ _ _ _ _ _ _
+      (by simp [DualNumber.liftElem_apply, Algebra.smul_def, algebraMap_eq_inl]) w
   have e₂ : tangentMul (tangentScale c (tangentBracket v w)) =
       tangentMap (A := DualNumber (DualNumber k)) (π := aug₂) (algebraMap k _ c * (eps₂ * del₂))
         (by ext <;> simp [algebraMap_eq_inl']) (by simp) (tangentBracket v w) :=
-    kerMap_tangentMap _ _ _ _ _ _ _ _ (by simp [DualNumber.liftElem_apply, Algebra.smul_def, algebraMap_eq_inl]) _
+    kerMap_tangentMap _ _ _ _ _ _ _ _
+      (by simp [DualNumber.liftElem_apply, Algebra.smul_def, algebraMap_eq_inl]) _
   rw [e₁, e₂, commutator_tangentMap]
   exact tangentMap_apply_congr (mul_left_comm _ _ _) _ _ _ _ _
 

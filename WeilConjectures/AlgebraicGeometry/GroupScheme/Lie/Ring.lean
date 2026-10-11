@@ -59,7 +59,7 @@ variable (G : Over (Spec (.of R))) [GrpObj G]
 /-- The tangent group `T_1 G = ker(G(R[ε]) → G(R))` of a group scheme `G` over `R`: the points of
 `G` with values in the ring of dual numbers that reduce to the identity modulo `ε`. Through the
 isomorphism `(Spec R)[ε] ≅ Spec R[ε]` these are the infinitesimal points of `G`.
-(blueprint: `sk-d-tangent`) -/
+(blueprint: `sk-d-tangent`, `def-wf-lie-algebra-derivation`) -/
 noncomputable def tangentGroup : Subgroup (points G (DualNumber R)) :=
   (pointsPrecomp G ((Spec.map (CommRingCat.ofHom (fstHom R R R).toRingHom)).asOver _)).ker
 

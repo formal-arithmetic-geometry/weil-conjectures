@@ -425,7 +425,7 @@ noncomputable abbrev IsGeometricallySemisimple : Prop :=
 of the set `H(k)` with the singleton `{Fᴺ}`. Only `k`-points of `Z(G)` occur, so `Z(G)(k)` is
 written as `centerPoints`, the matrices of `G(k)` commuting with all of `G(k)`; this makes sense
 over any field `k`.
-(blueprint: `sk-d-central`) -/
+(blueprint: `sk-d-central`, `d-central`) -/
 def IsPositiveCentralPair (N : ℕ) (z : GL n k) : Prop :=
   0 < N ∧ z ∈ (centerPoints D.arithmeticMonodromy : Set (GL n k)) ∩
     (zeroLocus D.geometricMonodromy k * {D.frobenius ^ N})
