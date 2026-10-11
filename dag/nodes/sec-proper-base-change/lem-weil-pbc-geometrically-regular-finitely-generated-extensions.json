@@ -188,5 +188,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Six steps along Stacks 0381 (2)=>(1): make K separable after finite purely inseparable extensions of k and K (new unsplit node, 030R first assertion), a smooth model B of K'/k' (new unsplit node, 037X in the form used), C = k' (x) A regular by the definition, D = C (x) B regular by smooth ascent (new unsplit node 07NF), K' (x) A a localization of D (new Mathlib leaf IsLocalization.tensor, Localization/BaseChange.lean:271, verified) hence regular (new unsplit node: localizations of regular rings are regular), descent along the faithfully flat K (x) A -> K' (x) A (new Mathlib leaf by instances: FaithfullyFlat/Basic.lean:209/559 with Module.Free.of_divisionRing, verified; new unsplit node 07NG). 045I not needed. Tags verified by the worker."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricallyRegularFieldExtension",
+  "declaration": "Algebra.isRegularRing_tensorProduct_of_isGeometricallyRegular",
+  "file": "lean/Sheaf/RingTheory/GeometricallyRegularFieldExtension.lean",
+  "statement": "theorem isRegularRing_tensorProduct_of_isGeometricallyRegular {k : Type u} {A : Type v} [Field k] [CommRing A] [Algebra k A] (hA : IsGeometricallyRegular k A) (K : Type w) [Field K] [Algebra k K] (hK : (⊤ : IntermediateField k K).FG) : IsRegularRing (TensorProduct k K A)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gfg1051",
+  "group": "H1",
+  "result": "pass",
+  "note": "k Field Type u; A CommRing+Algebra Type v; Noetherian+geom regular = recorded Algebra.IsGeometricallyRegular (tests Type (max u v)); K any field ext Type w; K=k(a1..an) = (⊤ : IntermediateField k K).FG (#print: ∃ Finset, adjoin = ⊤; not a class); conclusion Mathlib IsRegularRing (K⊗[k]A) extends IsNoetherian + IsRegularLocalRing at every prime (#print checked)"
  }
 }
