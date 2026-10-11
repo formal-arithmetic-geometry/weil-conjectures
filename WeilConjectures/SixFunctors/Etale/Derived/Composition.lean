@@ -115,6 +115,22 @@ theorem exists_rightDerivedUpperShriekAdjunction_comp_eq (f : X ⟶ Y) (g : Y �
   exact ⟨e, Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ e⟩
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
+/-- The composition isomorphism `c_{g,f} : R(g ∘ f)^! ≅ Rf^! ∘ Rg^!` of the exceptional inverse
+images, as functors `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!`: the mate of the composition isomorphism
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso` of the lower shrieks, that is, the
+comparison of the right adjoints of `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` under
+`R(f ≫ g)_! ⊣ R(f ≫ g)^!` and the composite adjunction `Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`. -/
+noncomputable def rightDerivedUpperShriekCompIso (f : X ⟶ Y) (g : Y ⟶ S)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)] :
+    R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅
+      R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ] :=
+  Adjunction.rightAdjointUniq
+    ((rightDerivedUpperShriekAdjunction _ (f ≫ g)).ofNatIsoLeft
+      (rightDerivedLowerShriekCompIso Λ f g))
+    ((rightDerivedUpperShriekAdjunction _ f).comp (rightDerivedUpperShriekAdjunction _ g))
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
 /-- Blueprint `sk-lem-sf-mate`: Mate calculus for a pasted adjunction
 
 **The mate of the composition isomorphism.** For composable `f : X ⟶ Y` and `g : Y ⟶ S` and
@@ -145,11 +161,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact (f ≫ g)] :
     Nonempty (R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅
-      R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ f g
-  exact ⟨Adjunction.rightAdjointUniq
-    ((rightDerivedUpperShriekAdjunction _ (f ≫ g)).ofNatIsoLeft e)
-    ((rightDerivedUpperShriekAdjunction _ f).comp (rightDerivedUpperShriekAdjunction _ g))⟩
+      R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) :=
+  ⟨rightDerivedUpperShriekCompIso Λ f g⟩
 
 end Etale
 

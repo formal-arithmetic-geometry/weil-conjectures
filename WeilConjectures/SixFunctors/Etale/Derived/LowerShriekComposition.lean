@@ -153,10 +153,10 @@ noncomputable def rightDerivedLowerShriekOfCompactificationCompIso (d : Compacti
       R((e.g ≫ d.g)_*[ModuleCat.{u + 1} Λ])
 
 /-- Blueprint `sk-thm-sf-comp-composition` (detailed: `thm-sf-comp-composition`): **the
-composition law for `Rf_!`**. For composable `f : X ⟶ Y` and `g : Y ⟶ S` admitting
-compactifications, with `f ≫ g` quasi-compact, and torsion coefficients, there is an
-isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of functors between the unbounded derived categories of
-étale sheaves.
+composition isomorphism for `Rf_!`**. For composable `f : X ⟶ Y` and `g : Y ⟶ S` admitting
+compactifications, with `f ≫ g` quasi-compact, and torsion coefficients, the isomorphism
+`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of functors between the unbounded derived categories of étale
+sheaves.
 
 It is `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationCompIso` for the chosen
 compactification `d` of `g` and the compactification
@@ -164,17 +164,31 @@ compactification `d` of `g` and the compactification
 compactifications of `f` and `f ≫ g` by `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`.
 The quasi-compactness of `f ≫ g` (automatic for the finite-type morphisms of the blueprint) is
 what makes the compactly supported direct image independent of the compactification. -/
+noncomputable def rightDerivedLowerShriekCompIso (f : X ⟶ Y) (g : Y ⟶ S)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)] :
+    R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
+      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ] :=
+  have : QuasiCompact f := .of_comp f g
+  (rightDerivedLowerShriekIso Λ ((HasCompactification.compactification g).comp
+      ((HasCompactification.compactification (f ≫ g)).ofComp
+        (HasCompactification.compactification g)))).symm ≪≫
+    (rightDerivedLowerShriekOfCompactificationCompIso Λ (HasCompactification.compactification g)
+      ((HasCompactification.compactification (f ≫ g)).ofComp
+        (HasCompactification.compactification g))).symm ≪≫
+    Functor.isoWhiskerRight (rightDerivedLowerShriekIso Λ
+      ((HasCompactification.compactification (f ≫ g)).ofComp
+        (HasCompactification.compactification g)).restrict) _
+
+/-- Blueprint `sk-thm-sf-comp-composition` (detailed: `thm-sf-comp-composition`): **the
+composition law for `Rf_!`**: the composition isomorphism
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso` exists. -/
 theorem nonempty_iso_rightDerivedLowerShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact (f ≫ g)] :
     Nonempty (R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
-      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) := by
-  have : QuasiCompact f := .of_comp f g
-  let d := HasCompactification.compactification g
-  let e := (HasCompactification.compactification (f ≫ g)).ofComp d
-  exact ⟨(rightDerivedLowerShriekIso Λ (d.comp e)).symm ≪≫
-    (rightDerivedLowerShriekOfCompactificationCompIso Λ d e).symm ≪≫
-    Functor.isoWhiskerRight (rightDerivedLowerShriekIso Λ e.restrict) _⟩
+      R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ]) :=
+  ⟨rightDerivedLowerShriekCompIso Λ f g⟩
 
 end Torsion
 
