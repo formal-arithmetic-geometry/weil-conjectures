@@ -172,5 +172,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qod2850 (reviewer sub-agent of L); spot-checked: Statement matches citers (F1 morphism-equality-stage, K1 gluing-datum-descent: qc + inverse image exactly W). Step 1 uses exactly the merged def-nagata-qc-open-descent. FIX more, RETURN less: (1) C1 step 1: 'each basic open is quasi-compact' made precise: D(f_ak,lW) is a basic open of the affine U_{a,lW} (affine since Y_lW->Y_l0 is a base change of an affine transition, Tag 01SD), basic opens of affines quasi-compact (Tag 00E8). (2) C1 step 2 (missed by the H1 second reading): the step never showed p^sharp(f_ak,lW)=f_ak nor used the finite affine cover; added the colimit identification of lem-weil-pbc-limit-global-sections-colimit (colimit maps are pullbacks, lift property from the def, transport compatibility) and the cover step U_a^inf cover Y so union_a (W cap U_a^inf)=W; uses/proof_deps updated, tool use declared.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataQCOpenDescentSpec",
+  "declaration": "AlgebraicGeometry.nagataQCOpenDescent_spec",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataQCOpenDescentSpec.lean",
+  "statement": "theorem nagataQCOpenDescent_spec {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ {i j : Iᵒᵖ} (t : i ⟶ j), IsAffineHom (D.map t)] (i₀ : I) {Y₀ : Scheme.{u}} (p : Y₀ ⟶ D.obj (op i₀)) [CompactSpace Y₀] [QuasiSeparatedSpace Y₀] (W : (baseChangeCone D c p).pt.Opens) (hW : IsCompact (W : Set (baseChangeCone D c p).pt)) (m : ℕ) (U : Fin m → Y₀.Opens) (hU : ∀ a, IsAffineOpen (U a)) (hcover : iSup U = ⊤) (r : Fin m → ℕ) (f : ∀ a, Fin (r a) → Γ((baseChangeCone D c p).pt, pullback.fst p (c.π.app (op i₀)) ⁻¹ᵁ U a)) (hpresentation : ∀ a, W ⊓ (pullback.fst p (c.π.app (op i₀)) ⁻¹ᵁ U a) = ⨆ k, (baseChangeCone D c p).pt.basicOpen (f a k)) (stage : Fin m → I) (ha : ∀ a, i₀ ≤ stage a) (lift : ∀ a, Fin (r a) → Γ((baseChangeDiagram D p).obj (Over.mk (homOfLE (ha a)).op), pullback.fst p (D.map (homOfLE (ha a)).op) ⁻¹ᵁ U a)) (hlift : ∀ a k, ((baseChangeCone D c p).π.app (Over.mk (homOfLE (ha a)).op)).appLE (pullback.fst p (D.map (homOfLE (ha a)).op) ⁻¹ᵁ U a) (pullback.fst p (c.π.app (op i₀)) ⁻¹ᵁ U a) (nagataQCOpenDescent_limit_chart_le D c p (Over.mk (homOfLE (ha a)).op) (U a)) (lift a k) = f a k) (d : I → I → I) (hd : ∀ i j, i ≤ d i j ∧ j ≤ d i j) (order : LinearOrder I) : IsCompact ((nagataQCOpenDescent D c hc i₀ p W hW m U hU hcover r f hpresentation stage ha lift hlift d hd order).2.2.carrier) ∧ (baseChangeCone D c p).π.app (Over.mk (homOfLE (nagataQCOpenDescent D c hc i₀ p W hW m U hU hcover r f hpresentation stage ha lift hlift d hd order).2.1).op) ⁻¹ᵁ (nagataQCOpenDescent D c hc i₀ p W hW m U hU hcover r f hpresentation stage ha lift hlift d hd order).2.2 = W",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qod",
+  "group": "P1",
+  "result": "pass",
+  "note": "directed index I:Type u + D, cone c/IsLimit, affine transitions, qcqs Y0, W qc open of Y, finite affine cover U/hcover, presentations f/hpresentation, lifts tied by hlift, d/hd/order = recorded nagataQCOpenDescent args; clause 1 IsCompact R.2.2, clause 2 cone projection at R.2.1 preimage R.2.2 = W; no existentials, no dispute, statement unchanged"
  }
 }

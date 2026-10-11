@@ -5307,3 +5307,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:52 L: merged deliver/S1/lem-sc-supported-derived-generated-perfect (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect AlgebraicGeometry.supported_derived_generated_perfect)
 - 15:53 L: merged deliver/S1/lem-sc-valuation-closed-fibre-section-vanishing (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ValuationClosedFibreSectionVanishing AlgebraicGeometry.Scheme.Modules.exists_nonzero_maximalIdeal_section_eq_zero)
 - 15:53 L: merged deliver/S1/lem-weil-pbc-symmetric-degree-exact (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.SymmetricAlgebra.DegreeExact SymmetricAlgebra.symmetric_degree_exact)
+- 15:53 L: merged deliver/P1/lemma-nagata-qc-open-descends (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataQCOpenDescentSpec AlgebraicGeometry.nagataQCOpenDescent_spec)
