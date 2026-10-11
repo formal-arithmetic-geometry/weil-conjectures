@@ -12,7 +12,6 @@ public import WeilConjectures.PointCount
 public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.ZetaFunction.BettiNumbers
--- public import WeilConjectures.ZetaFunction.IntegralFrobeniusFactors
 public import WeilConjectures.ZetaFunction.TraceFormula
 public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 
@@ -374,64 +373,4 @@ end Zeta
 
 end AlgebraicGeometry
 
-namespace LinearMap
-
-variable {K V W : Type*} [Field K] [CharZero K] [AddCommGroup V] [Module K V]
-  [FiniteDimensional K V] [AddCommGroup W] [Module K W] [FiniteDimensional K W]
-
-/-- In characteristic zero, the traces of the powers of an endomorphism determine its reverse
-characteristic polynomial `det (1 - T F)`. -/
-theorem charpolyRev_eq_of_trace_pow_eq (F : Module.End K V) (G : Module.End K W)
-    (h : ∀ m, 1 ≤ m → LinearMap.trace K V (F ^ m) = LinearMap.trace K W (G ^ m)) :
-    F.charpolyRev = G.charpolyRev := by
-  have hF := inv_charpolyRev_eq_exp F
-  have hG := inv_charpolyRev_eq_exp G
-  have hc : ∀ P : Polynomial K, P.coeff 0 = 1 → PowerSeries.constantCoeff (P : K⟦X⟧) ≠ 0 :=
-    fun P hP ↦ by rw [Polynomial.constantCoeff_coe, hP]; exact one_ne_zero
-  have hinv : (F.charpolyRev : K⟦X⟧)⁻¹ = (G.charpolyRev : K⟦X⟧)⁻¹ := by
-    rw [hF, hG]
-    congr 2
-    ext n
-    simp only [PowerSeries.coeff_mk]
-    split_ifs with hn
-    · rfl
-    · rw [h n (by omega)]
-  refine Polynomial.coe_injective K ?_
-  calc (F.charpolyRev : K⟦X⟧)
-      = F.charpolyRev * ((G.charpolyRev : K⟦X⟧)⁻¹ * G.charpolyRev) := by
-        rw [PowerSeries.inv_mul_cancel _ (hc _ (coeff_zero_charpolyRev G)), mul_one]
-    _ = (F.charpolyRev * (F.charpolyRev : K⟦X⟧)⁻¹) * G.charpolyRev := by rw [hinv, mul_assoc]
-    _ = G.charpolyRev := by
-        rw [PowerSeries.mul_inv_cancel _ (hc _ (coeff_zero_charpolyRev F)), one_mul]
-
-/-- In characteristic zero, a vector space with an automorphism all of whose powers have trace
-zero is zero. -/
-theorem subsingleton_of_trace_pow_eq_zero (F : V ≃ₗ[K] V)
-    (h : ∀ m, 1 ≤ m → LinearMap.trace K V ((F : Module.End K V) ^ m) = 0) : Subsingleton V := by
-  have hc := charpolyRev_eq_of_trace_pow_eq (F : Module.End K V) (1 : Module.End K PUnit)
-    fun m hm ↦ by rw [h m hm, Subsingleton.elim ((1 : Module.End K PUnit) ^ m) 0, map_zero]
-  rw [charpolyRev_of_subsingleton] at hc
-  have hd := natDegree_charpolyRev F.isUnit_det'
-  rw [hc, Polynomial.natDegree_one] at hd
-  exact Module.finrank_zero_iff.mp hd.symm
-
-/-- In characteristic zero, an automorphism all of whose powers have trace one is the identity
-of a line. -/
-theorem finrank_eq_one_and_eq_one_of_trace_pow_eq_one (F : V ≃ₗ[K] V)
-    (h : ∀ m, 1 ≤ m → LinearMap.trace K V ((F : Module.End K V) ^ m) = 1) :
-    Module.finrank K V = 1 ∧ (F : Module.End K V) = 1 := by
-  have hc := charpolyRev_eq_of_trace_pow_eq (F : Module.End K V) (1 : Module.End K K)
-    fun m hm ↦ by rw [h m hm, one_pow, LinearMap.trace_one, Module.finrank_self, Nat.cast_one]
-  rw [charpolyRev_one, Module.finrank_self, pow_one] at hc
-  have hd := natDegree_charpolyRev F.isUnit_det'
-  rw [hc, Polynomial.natDegree_one_sub_X] at hd
-  refine ⟨hd.symm, ?_⟩
-  obtain ⟨c, hc', -⟩ := LinearMap.existsUnique_eq_smul_id_of_finrank_eq_one hd.symm
-    (F : Module.End K V)
-  have h1 := h 1 le_rfl
-  rw [pow_one, hc', map_smul, LinearMap.trace_id, ← hd, Nat.cast_one, smul_eq_mul,
-    mul_one] at h1
-  rw [hc', h1, one_smul]
-  rfl
-
-end LinearMap
+end
