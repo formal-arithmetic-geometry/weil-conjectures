@@ -1,22 +1,21 @@
 # Work queue
 
-980 items; claim with `tools/claim.py next <group> [--stage N]`.
+975 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (980)
+## Stage 2: nodes to state (975)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-exc-continuous-cohomology` | 1 | state |
 | `def-galois-categories` | 1 | state |
 | `def-kun-support` | 1 | state |
 | `def-pur-hom-complex` | 1 | state |
 | `def-weil-derived-tensor` | 1 | state |
 | `def-weil-pbc-constructible-complexes` | 1 | state |
 | `def-weil-pbc-kinjective-resolutions` | 1 | state |
-| `lem-kun-03sa` | 1 | state |
+| `lem-exc-field-discrete-modules` | 1 | state |
 | `lem-pc-base-change-product` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-second-factor-functor` | 1 | state |
@@ -51,18 +50,13 @@
 | `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
 | `lem-sc-hilbert-embedded-points-affine-localization` | 1 | state |
 | `lem-sc-integral-closure-dedekind-surjective-fibres` | 1 | state |
-| `lem-sc-invert-s-cohomology-induction` | 1 | state |
 | `lem-sc-invert-s-cohomology-separated-induction` | 1 | state |
-| `lem-sc-irreducible-product-over-field` | 1 | state |
-| `lem-sc-jacobson-denominator-function-field` | 1 | state |
 | `lem-sc-krull-akizuki-noetherian` | 1 | state |
 | `lem-sc-lfp-field-extension-pointwise-descent` | 1 | state |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-p1-ext-resolution-derived-connecting` | 1 | state |
 | `lem-sc-p1-ext-yoneda-associativity` | 1 | state |
-| `lem-sc-p1-graded-submodule-finite` | 1 | state |
-| `lem-sc-p1-linear-syzygy` | 1 | state |
 | `lem-sc-p1-minimal-presentation-tor` | 1 | state |
 | `lem-sc-p1-proj-degreezero-localization-exact` | 1 | state |
 | `lem-sc-p1-tor-dimension-shift-natural` | 1 | state |
@@ -100,6 +94,7 @@
 | `lem-sc-strict-henselization-dimension` | 1 | state |
 | `lem-sc-strict-henselization-regular` | 1 | state |
 | `lem-sc-supported-factor-through-thick` | 1 | state |
+| `lem-sc-sylow-module-filtration` | 1 | state |
 | `lem-sc-tangent-space-vector-space` | 1 | state |
 | `lem-sc-tensor-generating-sections` | 1 | state |
 | `lem-sc-tensor-globally-generated` | 1 | state |
@@ -990,7 +985,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 922 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 920 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
