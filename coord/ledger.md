@@ -3129,3 +3129,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:38 L: merged deliver/M1/lem-sc-finite-free-complex-homology-upper-semicontinuous (reviewer FIX; first push; new nodes: 0)
 - 00:39 L: merged deliver/C1/lem-pc-finite-projective-tor-acyclic (reviewer FIX; first push; new nodes: 0)
 - 00:39 L: merged deliver/M1/lem-pur-left-derived-from-kflat-class (reviewer FIX; after a return; new nodes: 4)
+- 00:39 UTC L: C1 etale-torsor-pushout-extension FIX 104306968 (R-tpe0036; statement strengthened to an isomorphism of extensions, E7: lead to check the citer lem-sc-etale-torsor-h1-functoriality step 4); returned: H1 affine-koszul-hom-alternating-cech 42f6ff0fd second return (R-kha0036: I^• undefined in the statement, signs anticommute, alternating rows not the cited Cech definition; NOTE R-kha0007's point 4 demanded two signs that do not combine).
