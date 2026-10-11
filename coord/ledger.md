@@ -3192,3 +3192,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:01 UTC L: returned: F1 derived-tensor-localization-cohomology 485ba81aa (R-dtl0100: the R-complex E localized termwise at a prime of A; use the balanced P ⊗_R F model).
 - 01:01 L: merged deliver/C1/lem-pur-left-derived-defined-pointwise-kan-bridge (reviewer FIX; first push; new nodes: 0)
 - 01:02 L: merged deliver/G1/lem-sp-ce-compatible-homotopy-assembly (reviewer FIX; first push; new nodes: 0)
+- 01:02 UTC L: C1 left-derived-defined-pointwise-kan-bridge FIX 10cc24e42 (R-pkb0100; restated for any right multiplicative system, Tag 04VC inline).
