@@ -4267,3 +4267,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:36 L: merged deliver/C1/lem-weil-pbc-flat-under-regular (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FlatUnderRegular IsRegularLocalRing.of_ringHom_flat)
 - 10:36 L: merged deliver/H1/lem-weil-pbc-fpqc-descend-integral (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Morphisms.FpqcIntegralDescent AlgebraicGeometry.isIntegralHom_of_fpqcPrecoverage_pullback)
 - 10:37 L: merged deliver/K1/lem-weil-pbc-ext-one-direct-sum (stage 2; reviewer FIX; first push; Sheaf.Algebra.ExtOneDirectSum LinearMap.extOne_directSum_bijective)
+- 10:37 L: merged deliver/C1/lem-weil-pbc-flat-module-completion-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatModuleCompletion Module.flat_adicCompletion)

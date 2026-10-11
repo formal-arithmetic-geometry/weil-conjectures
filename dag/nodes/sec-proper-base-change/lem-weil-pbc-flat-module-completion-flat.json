@@ -154,5 +154,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Four steps: M/I^nM flat over R/I^n by flat base change (new Mathlib leaf Module.Flat.baseChange, Stability.lean:100, verified; the identification R/I^n (x) M = M/I^nM written out in the step), R^ Noetherian and R^/(IR^)^n = R/I^n (existing nodes), transport of structure and surjective transition maps (elementary), Stacks 0912 limit of flat modules (new unsplit node). The worker did not make the general 0AGW a node (its hypotheses (3), (4) only serve to get the flatness of M/I^nM via 051C, immediate for flat M). Stage-3 overlap: lem-weil-pbc-flat-module-base-change (00HI, this item) and lem-weil-pbc-flat-module-quotient-flat (created by flat-completion) both match Module.Flat.baseChange; the quotient one is the special case R' = R/J. Tags verified by the worker (0AGW, 00HI, 0912, 051C, 05GG, 05GH)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatModuleCompletion",
+  "declaration": "Module.flat_adicCompletion",
+  "file": "lean/Sheaf/RingTheory/FlatModuleCompletion.lean",
+  "statement": "theorem flat_adicCompletion (R : Type u) [CommRing R] (I : Ideal R) (M : Type v) [AddCommGroup M] [Module R M] [IsNoetherianRing R] [Module.Flat R M] : Module.Flat (AdicCompletion I R) (AdicCompletion I M)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fmc1036",
+  "group": "C1",
+  "result": "pass",
+  "note": "R CommRing+IsNoetherianRing, I : Ideal R, M AddCommGroup+Module R+Module.Flat; conclusion Module.Flat (AdicCompletion I R) (AdicCompletion I M) via AdicCompletion.module (pp.explicit checked, componentwise smul_eval); Mathlib has only flat_of_isNoetherian (completion over R), no existing match"
  }
 }
