@@ -158,5 +158,23 @@
  "reviewed": "2026-10-10 L: 4 steps checked against the 02L9 proof (integral = affine + universally closed by 01WM; descend each by 02KS and 02L5, new nodes); the lead note to route through 02KP is withdrawn since the source does not; citer fpqc-descend-finite matches",
  "tool_uses": [
   "pqf-lem-integral-univclosed"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FpqcIntegralDescent",
+  "declaration": "AlgebraicGeometry.isIntegralHom_of_fpqcPrecoverage_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FpqcIntegralDescent.lean",
+  "statement": "theorem isIntegralHom_of_fpqcPrecoverage_pullback {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v} (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S) (hcover : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S) (hintegral : ∀ i, IsIntegralHom (pullback.snd f (g i))) : IsIntegralHom f",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdi1035",
+  "group": "H1",
+  "result": "pass",
+  "note": "X S f, arbitrary I : Type v, S' g, hcover = ofArrows S' g ∈ Scheme.fpqcPrecoverage S, f_i = pullback.snd f (g i), IsIntegralHom each => IsIntegralHom f; no Mathlib IsIntegralHom descent instance (FlatDescent/LocalFlatDescent checked), existing:false right"
+ }
 }
