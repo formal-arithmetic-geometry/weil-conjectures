@@ -1,11 +1,11 @@
 # Work queue
 
-514 items; claim with `tools/claim.py next <group> [--stage N]`.
+507 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (514)
+## Stage 2: nodes to state (507)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,18 +21,14 @@
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-zero-scheme-adjunction-base-change` | 1 | state |
 | `lem-pqf-leray-five-term` | 1 | state |
-| `lem-sc-ample-on-reduction-noetherian` | 1 | state |
 | `lem-sc-ample-square-zero-thickening` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilb-to-pic-morphism` | 1 | state |
-| `lem-sc-hilbert-nowhere-dense-dimension-drop` | 1 | state |
 | `lem-sc-integral-dim-one-ample` | 1 | state |
-| `lem-sc-locnoeth-components-locally-finite` | 1 | state |
 | `lem-sc-meromorphic-sheaf-generic-product` | 1 | state |
 | `lem-sc-noetherian-closed-points-finite` | 1 | state |
 | `lem-sc-p1-regular-dimension-one` | 1 | state |
-| `lem-sc-quasi-finite-points-open` | 1 | state |
 | `lem-sc-reduced-dim-le-one-ample` | 1 | state |
 | `lem-sc-regular-meromorphic-section-exists` | 1 | state |
 | `lem-sc-zero-dim-noetherian-affine` | 1 | state |
@@ -74,19 +70,16 @@
 | `lem-weil-pbc-limit-residue-field` | 1 | state |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1 | state |
 | `lem-weil-pbc-lisse-generic-kernel` | 1 | state |
-| `lem-weil-pbc-locally-constant-finite-values-finite-type` | 1 | state |
 | `lem-weil-pbc-lqf-locally-finite-type` | 1 | state |
 | `lem-weil-pbc-lqf-qc-source-bounded-fibres` | 1 | state |
 | `lem-weil-pbc-lqf-restriction-to-opens` | 1 | state |
 | `lem-weil-pbc-make-separable` | 1 | state |
-| `lem-weil-pbc-make-separably-generated` | 1 | state |
 | `lem-weil-pbc-mittag-leffler-limit-exact` | 1 | state |
 | `lem-weil-pbc-ml-sets-tower-limit-nonempty` | 1 | state |
 | `lem-weil-pbc-module-base-change-map-open-restriction` | 1 | state |
 | `lem-weil-pbc-module-base-change-map-pasting` | 1 | state |
 | `lem-weil-pbc-module-directed-colimit-underlying-sets` | 1 | state |
 | `lem-weil-pbc-module-extension-by-zero-adjunction` | 1 | state |
-| `lem-weil-pbc-module-finite-presentation-cokernel` | 1 | state |
 | `lem-weil-pbc-module-finite-presentation-representatives` | 1 | state |
 | `lem-weil-pbc-module-finite-type-surjective-on-stalk` | 1 | state |
 | `lem-weil-pbc-module-injects-localizations-associated-primes` | 1 | state |
