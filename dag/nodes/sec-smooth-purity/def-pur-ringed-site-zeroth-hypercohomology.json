@@ -1,0 +1,106 @@
+{
+ "id": "def-pur-ringed-site-zeroth-hypercohomology",
+ "kind": "definition",
+ "title": "Zeroth hypercohomology on a small ringed site",
+ "statement": "Let $\\mathcal C$ be a small site and $\\mathcal O$ a sheaf of commutative rings. Write $\\operatorname{Mod}(\\mathcal O)$ for the category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category] and $D(\\mathcal O)$ for its unbounded derived category [def-weil-abstract-derived-category]. The global sections functor is $\\Gamma(\\mathcal C,-)=\\operatorname{Hom}_{\\mathcal O}(\\mathcal O,-)$ with values in abelian groups. Define the functor $H^0(\\mathcal C,-):D(\\mathcal O)\\to\\operatorname{Ab}$ as $H^0\\circ R\\Gamma(\\mathcal C,-)$, where $R\\Gamma$ is the unbounded right derived functor computed on K-injective complexes [def-pur-kinjective-complex]. Thus for any K-injective complex $\\mathcal J^\\bullet$ representing $K$, $H^0(\\mathcal C,K)$ is canonically isomorphic to $H^0(\\Gamma(\\mathcal C,\\mathcal J^\\bullet))$, independently of the representative. Such representatives exist by [prop-pur-kinjective-resolutions-exist].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 07A5 (Cohomology of unbounded complexes; sites-cohomology-section-unbounded), and Lemma 08JA (sites-cohomology-lemma-section-RHom-over-U), definition of H^0(C,-) in the global assertion"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "global sections derived internal Hom",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "zeroth hypercohomology of sheaves of modules on a ringed site by K injective global sections",
+   "results": "8 hits: Sheaf.H, cohomologyPresheaf and cohomologyPresheafFunctor concern ordinary abelian sheaf cohomology; other hits concern injective resolutions. No general ringed-site unbounded hypercohomology functor.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctor",
+   "results": "0 hits; unknown identifier. Source checkout supplies the generic functor in RightDerivedFunctor.Defs, reused rather than copied.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep hypercohomology|derivedGlobalSections; rg hypercohomology|derivedGlobalSections WeilConjectures/AlgebraicGeometry/Sites and lean/Sheaf; blueprint_refs.py search hypercohomology; rg -l global sections.*K-injective|H\\^0.*K-injective dag/nodes",
+   "results": "Mathlib: 0 hits. Project: spectral-sequence statements but no general ringed-site H^0 functor. DAG: def-pc-global-derived-rhom is restricted to schemes; def-kun-rgamma-unbounded to etale abelian sheaves. Generic rightDerivedFunctor, preadditiveCoyoneda, unit and homologyFunctor exist and are composed by this definition.",
+   "date": "2026-10-11",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-rhom-global-sections",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "The H^0 of global sections in the final identification of derived internal Hom with derived morphisms.",
+   "via": [
+    "lem-pur-rhom-global-sections",
+    "def-pur-derived-internal-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology",
+  "declaration": "CategoryTheory.ringedSiteZerothHypercohomology",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteZerothHypercohomology.lean",
+  "statement": "def ringedSiteZerothHypercohomology {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] : DerivedCategory (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤ AddCommGrpCat.{u}",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-rgs"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rgs",
+  "group": "H1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rgs",
+  "group": "H1",
+  "result": "fix",
+  "note": "small site C,J; R sheaf of comm rings; SheafOfModules + HasDerivedCategory; H0 = rightDerived of Hom(O,-) then H^0 (new def, needed: no site-level form in Mathlib/slopmaster2/lean); RHom = landed derivedInternalHom; e natural AddEquiv family, naturality directions checked; new def switched to proved SheafOfModules.isGrothendieckAbelian"
+ }
+}
