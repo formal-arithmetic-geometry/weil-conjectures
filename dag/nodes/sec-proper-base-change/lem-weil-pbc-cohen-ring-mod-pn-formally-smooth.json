@@ -204,5 +204,24 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following Algebra 0329: the property P(m) identified with the n = 0 case of the adic definition; facts on Lambda (torsion-free over Z written out); n = 1 by the existing field-lifting node (0322 route); flatness of Z/p^m -> Lambda/p^m by a new leaf for 0AUW (flat_iff_torsion_eq_bot_of_isBezout, TorsionFree.lean:93 verified by L) and the quotient-flat leaf (the hypothesis 031L (2) the source leaves unchecked); induction step by a new composed leaf for 031L (of_surjective_of_ker_eq_map_of_flat, Quotient.lean:101 verified by L; same convention as the accepted square-zero lifting leaves); conclusion. Statement: Cohen ring cited from the definition leaf, tag reference removed (B7); the source's wrong tag 0310 corrected to 031L."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CohenRingModPowFormallySmooth",
+  "declaration": "IsDiscreteValuationRing.cohenRing_mod_pow_formallySmooth",
+  "file": "lean/Sheaf/RingTheory/CohenRingModPowFormallySmooth.lean",
+  "statement": "theorem cohenRing_mod_pow_formallySmooth (p : ℕ) (Λ : Type u) [CommRing Λ] (hΛ : IsCohenRing p Λ) (n : ℕ) (hn : 1 ≤ n) : (∀ [Algebra (ZMod (p ^ n)) (Λ ⧸ Ideal.span {(p : Λ) ^ n})], Algebra.FormallySmooth (ZMod (p ^ n)) (Λ ⧸ Ideal.span {(p : Λ) ^ n})) ∧ (∀ (D : Type v) [CommRing D], (p : D) ^ n = 0 → ∀ (J : Ideal D), J ^ 2 = ⊥ → ∀ (g : (Λ ⧸ Ideal.span {(p : Λ) ^ n}) →+* D ⧸ J), ∃ f : (Λ ⧸ Ideal.span {(p : Λ) ^ n}) →+* D, (Ideal.Quotient.mk J).comp f = g)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cfs1435"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfs1435",
+  "group": "M1",
+  "result": "fix",
+  "note": "p prime, Cohen ring Λ = IsCohenRing p Λ (landed 827cee71d; was the clauses written out); n≥1 = hn; Λ/p^nΛ = Λ ⧸ span{p^n}; Z/p^n→Λ/p^n formally smooth = ∀ [Algebra (ZMod (p^n)) _], Algebra.FormallySmooth (unique algebra, was FormallySmoothAdic ⊥); explicit clause: D with (p:D)^n=0, J^2=⊥, g lifts with mk J ∘ f = g, D in independent universe"
  }
 }
