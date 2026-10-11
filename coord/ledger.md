@@ -3046,3 +3046,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:06 L: merged deliver/H1/lem-sc-picard-h1-multiple-locus (reviewer FIX; first push; new nodes: 0)
 - 00:07 L: merged deliver/K1/lem-sc-pic-affine-base-change-compatibility (reviewer FIX; first push; new nodes: 1)
 - 00:07 L: merged deliver/G1/lem-pc-rf-mv-triangle-naturality (reviewer FIX; after a return; new nodes: 2)
+- 00:07 UTC L: reviewed under the lock since 00:05: J1 pur-rhom-into-kinjective-local FIX afc3cf391 (R-rkl0004; j_U! defined in the new adjunction node), H1 picard-h1-multiple-locus FIX de27caabe (R-pml0004; chain map between fixed models). Second readings missed a fault in 2 of 2.
