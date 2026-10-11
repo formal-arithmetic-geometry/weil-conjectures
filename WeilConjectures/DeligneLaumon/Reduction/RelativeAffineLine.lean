@@ -7,6 +7,11 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.RingTheory.Etale.Field
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
+public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
+public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
+public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
 public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
@@ -166,6 +171,21 @@ theorem IsMixedOfWeightsAtMost.constantTwist {F : WeilSheaf k₀ l X} {w : ℝ}
 
 end WeilSheaf
 
+/-- The spectrum `Spec κ(y)` of the residue field at a closed point `y` of a `k₀`-scheme is étale
+over `k₀`: `κ(y)` is a finite extension of the perfect field `k₀`, hence separable (blueprint:
+`lem-zl-relative-curve-punctual`, the fibre over `y` is a smooth curve over `k₀`). -/
+theorem Scheme.etale_fromSpecResidueField_comp {Y : Scheme.{u}}
+    (p : Y ⟶ Spec (CommRingCat.of k₀)) (y : Y) (hy : y ∈ Y.finitePoints) :
+    Etale (Y.fromSpecResidueField y ≫ p) := by
+  have : Finite (Y.residueField y) := hy
+  rw [← Scheme.Hom.specMap_residueFieldAlgebraMap, HasRingHomProperty.Spec_iff (P := @Etale)]
+  let := (p.residueFieldAlgebraMap y).toAlgebra
+  rw [CommRingCat.hom_ofHom, ← RingHom.algebraMap_toAlgebra (p.residueFieldAlgebraMap y),
+    RingHom.etale_algebraMap]
+  have : Module.Finite k₀ (Y.residueField y) := Module.Finite.of_finite
+  have : Algebra.FormallyEtale k₀ (Y.residueField y) := Algebra.FormallyEtale.of_isSeparable _ _
+  exact ⟨‹_›, Algebra.FinitePresentation.of_finiteType.mp inferInstance⟩
+
 section RelativeCurve
 
 /-! ### Relative affine curves
@@ -181,6 +201,107 @@ variable {U Y : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [h.IsOver (Spec (CommRingCat.of k₀))] [SmoothOfRelativeDimension 1 h] [IsSeparated h]
   [QuasiCompact h]
 
+/-- **The fibres of a relative affine curve.** For a closed point `y` of `Y`, the fibre
+`X' = U ×_Y Spec κ(y)` of `h`, with its map `g : X' ⟶ U`, is a smooth affine curve over `k₀`, and
+compact support base change identifies the local polynomials of the stalks of the `Rⁱh₀!F` at `y`
+with those of the compactly supported cohomology of the fibre: with `d = [κ(y) : k₀]`,
+
+`det (1 - T^d F_y ∣ (Rⁱh₀!F)_ȳ) = det (1 - T F ∣ H_c^i(X' ⊗ k̄, g^*F))`
+
+(blueprint: `lem-zl-relative-curve-punctual`, `thm-cbc-qbar`). -/
+theorem exists_fiber_charpolyRev_higherLowerShriek (hfib : ∀ y, IsAffine (h.fiber y))
+    (y : Y.finitePoints) :
+    haveI := SmoothOfRelativeDimension.smooth 1 h
+    ∃ (X' : Scheme.{u}) (_ : X'.Over (Spec (CommRingCat.of k₀))) (g : X' ⟶ U)
+      (_ : g.IsOver (Spec (CommRingCat.of k₀))) (_ : IsAffine X')
+      (_ : SmoothOfRelativeDimension 1 (X' ↘ Spec (CommRingCat.of k₀)))
+      (_ : IsSeparated (X' ↘ Spec (CommRingCat.of k₀)))
+      (_ : LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀)))
+      (_ : QuasiCompact (X' ↘ Spec (CommRingCat.of k₀))),
+      ringKrullDim Γ(X', ⊤) ≤ 1 ∧ ∀ (F : WeilSheaf k₀ l U) (i : ℕ),
+        Polynomial.expand _ ((Y ↘ Spec (CommRingCat.of k₀)).degreeOver y.1)
+          (((WeilSheaf.higherLowerShriek k₀ l h i).obj F).stalk y).frobeniusEnd.charpolyRev =
+        (((WeilSheaf.upperStar g).obj F).compactlySupportedCohomology
+          i).frobeniusEnd.charpolyRev := by
+  have := SmoothOfRelativeDimension.smooth 1 h
+  -- the closed point `y`, as the spectrum of its residue field, a finite extension of `k₀`
+  let Z : Scheme.{u} := Spec (Y.residueField y.1)
+  let t : Z ⟶ Y := Y.fromSpecResidueField y.1
+  let : Z.Over (Spec (CommRingCat.of k₀)) := ⟨t ≫ Y ↘ Spec (CommRingCat.of k₀)⟩
+  have : t.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : Finite (Y.residueField y.1) := y.2
+  have hfin : IsFinite (t ≫ Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← Scheme.Hom.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff]
+    let := ((Y ↘ Spec (CommRingCat.of k₀)).residueFieldAlgebraMap y.1).toAlgebra
+    exact Module.Finite.of_finite
+  have : IsFinite (Z ↘ Spec (CommRingCat.of k₀)) := hfin
+  have : Etale (Z ↘ Spec (CommRingCat.of k₀)) :=
+    Scheme.etale_fromSpecResidueField_comp (Y ↘ Spec (CommRingCat.of k₀)) y.1 y.2
+  have : LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over h (Spec (CommRingCat.of k₀))]
+    infer_instance
+  -- the fibre `X' = U ×_Y Spec κ(y)`, a smooth affine curve over `k₀`
+  obtain ⟨X', g, f', hH, hX'⟩ : ∃ (X' : Scheme.{u}) (g : X' ⟶ U) (f' : X' ⟶ Z),
+      IsPullback g f' h t ∧ IsAffine X' :=
+    ⟨_, _, _, IsPullback.of_hasPullback h t, hfib y.1⟩
+  -- the instance must be named and passed explicitly below: an `inferInstance` in the
+  -- witness makes the kernel unfold the cohomology instead of `inferInstance`
+  let instX : X'.Over (Spec (CommRingCat.of k₀)) := ⟨g ≫ U ↘ Spec (CommRingCat.of k₀)⟩
+  have : g.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have hf' : f' ≫ t ≫ Y ↘ Spec (CommRingCat.of k₀) = g ≫ U ↘ Spec (CommRingCat.of k₀) := by
+    rw [← Category.assoc, ← hH.w, Category.assoc, comp_over]
+  have : f'.IsOver (Spec (CommRingCat.of k₀)) := ⟨hf'⟩
+  have : IsSeparated f' := MorphismProperty.of_isPullback hH ‹_›
+  have : LocallyOfFiniteType f' := MorphismProperty.of_isPullback hH inferInstance
+  have : QuasiCompact f' := MorphismProperty.of_isPullback hH ‹_›
+  have : SmoothOfRelativeDimension 1 f' :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange (n := 1)).of_isPullback hH ‹_›
+  have hX : X' ↘ Spec (CommRingCat.of k₀) = f' ≫ Z ↘ Spec (CommRingCat.of k₀) :=
+    (comp_over f' _).symm
+  have hsm : SmoothOfRelativeDimension 1 (X' ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hX]
+    exact inferInstanceAs (SmoothOfRelativeDimension (1 + 0) _)
+  have : IsSeparated (X' ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hX]
+    infer_instance
+  have : LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hX]
+    infer_instance
+  have : QuasiCompact (X' ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hX]
+    infer_instance
+  refine ⟨X', instX, g, ‹_›, hX', hsm, ‹_›, ‹_›, ‹_›,
+    ringKrullDim_le_of_smoothOfRelativeDimension (X' ↘ Spec (CommRingCat.of k₀)) 1,
+    fun F i ↦ ?_⟩
+  -- compact support base change
+  obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_fiber hH F i
+  -- the degree `d` of `y` and the unique point `z₀` of `Z`
+  set d := (Y ↘ Spec (CommRingCat.of k₀)).degreeOver y.1 with hd_def
+  have hd : d ≠ 0 := Scheme.Hom.degreeOver_ne_zero _ y.2
+  let z₀ : Z := IsLocalRing.closedPoint (Y.residueField y.1)
+  have hiz (z : Z) : t.base z = y.1 := Scheme.fromSpecResidueField_apply _ _
+  have (z : Z) : IsIso (t.residueFieldMap z) := Scheme.Hom.isIso_residueFieldMap t z
+  have hz₀ : z₀ ∈ Z.finitePoints :=
+    (Scheme.Hom.mem_finitePoints_iff_of_isIso t z₀).1 ((hiz z₀).symm ▸ y.2)
+  have hdegZ (z : Z) : (Z ↘ Spec (CommRingCat.of k₀)).degreeOver z = d :=
+    (Scheme.Hom.degreeOver_comp_of_isIso t (Y ↘ Spec (CommRingCat.of k₀)) z).trans
+      (congrArg _ (hiz z))
+  have hy : (⟨t.base z₀, Scheme.Hom.map_mem_finitePoints t hz₀⟩ : Y.finitePoints) = y :=
+    Subtype.ext (hiz z₀)
+  -- `H_c^0` of the point `Spec κ(y)`
+  have hZ : (((WeilSheaf.upperStar t).obj ((WeilSheaf.higherLowerShriek k₀ l h i).obj
+      F)).compactlySupportedCohomology 0).frobeniusEnd.charpolyRev = Polynomial.expand _ d
+        (((WeilSheaf.higherLowerShriek k₀ l h i).obj F).stalk y).frobeniusEnd.charpolyRev := by
+    rw [WeilSheaf.charpolyRev_compactlySupportedCohomology_zero_of_subsingleton _ ⟨z₀, hz₀⟩,
+      hdegZ, LinearMap.charpolyRev_def, LinearMap.charpolyRev_def,
+      WeilSheaf.charpoly_frobeniusEnd_stalk_upperStar, hy, hdegZ, hiz, ← hd_def,
+      Nat.div_self (Nat.pos_of_ne_zero hd), pow_one]
+  have hE := E.localPolynomial_eq
+  rw [FrobeniusModule.localPolynomial, FrobeniusModule.localPolynomial] at hE
+  exact hZ.symm.trans hE
+
+-- the lissity of `F` is not needed: the curve estimate holds for every punctually pure sheaf
+set_option linter.unusedVariables false in
 /-- **Punctual upper bound in a relative affine curve.** Let `h : U ⟶ Y` be a smooth separated
 morphism of relative dimension one with affine fibres, and let `F` be a lisse Weil sheaf on `U`,
 punctually `ι`-pure of weight `w`. Then `Rⁱh₀!F` has weights at most `w + i`: by compactly
@@ -193,10 +314,23 @@ theorem hasWeightsAtMost_higherLowerShriek_of_isAffine_fiber
     (hfib : ∀ y, IsAffine (h.fiber y)) (F : WeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) (i : ℕ) :
     haveI := SmoothOfRelativeDimension.smooth 1 h
-    ((WeilSheaf.higherLowerShriek k₀ l h i).obj F).HasWeightsAtMost ι (w + i) :=
-  -- TODO(adic): needs compactly supported base change for Weil sheaves and the curve estimate
-  -- over the residue fields of `Y`
-  sorry
+    ((WeilSheaf.higherLowerShriek k₀ l h i).obj F).HasWeightsAtMost ι (w + i) := by
+  have := SmoothOfRelativeDimension.smooth 1 h
+  intro y γ hγ
+  obtain ⟨X', _, g, _, _, _, _, _, _, hdim, hcp⟩ :=
+    exists_fiber_charpolyRev_higherLowerShriek (k₀ := k₀) (l := l) h hfib y
+  -- the curve estimate on the fibre
+  have hw' := hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine ι hdim
+    ((WeilSheaf.upperStar g).obj F) (hw.upperStar g) i
+  -- every eigenvalue at `y` is the `d`-th power of one on `H_c^i` of the fibre
+  have hd := Scheme.Hom.degreeOver_ne_zero (Y ↘ Spec (CommRingCat.of k₀)) y.2
+  obtain ⟨β, hβ, rfl⟩ := LinearMap.exists_hasEigenvalue_pow_eq_of_charpolyRev_eq_expand _ _ hd
+    (hcp F i).symm hγ (FrobeniusModule.ne_zero_of_hasEigenvalue hγ)
+  rw [Scheme.Hom.residueCard, map_pow, norm_pow, Nat.cast_pow,
+    ← Real.rpow_pow_comm (Nat.cast_nonneg _)]
+  refine pow_le_pow_left₀ (norm_nonneg _) ?_ _
+  have := hw' β hβ
+  rwa [Int.cast_natCast] at this
 
 /-- **Reality of the relative factors of an envelope.** Let `h : U ⟶ Y` be as in
 `AlgebraicGeometry.hasWeightsAtMost_higherLowerShriek_of_isAffine_fiber` and let `E` be a lisse
@@ -212,9 +346,82 @@ theorem isReal_higherLowerShriek_of_isAffine_fiber (hfib : ∀ y, IsAffine (h.fi
     (E : WeilSheaf k₀ l U) (hE : E.IsLisse) (hreal : E.IsReal ι)
     (hpure : E.IsPunctuallyPureOfWeight ι 0) (i : ℕ) :
     haveI := SmoothOfRelativeDimension.smooth 1 h
-    ((WeilSheaf.higherLowerShriek k₀ l h i).obj E).IsReal ι :=
-  -- TODO(adic): needs compactly supported base change and the trace formula on the fibres
-  sorry
+    ((WeilSheaf.higherLowerShriek k₀ l h i).obj E).IsReal ι := by
+  have := SmoothOfRelativeDimension.smooth 1 h
+  intro y
+  obtain ⟨X', _, g, _, _, _, _, _, _, hdim, hcp⟩ :=
+    exists_fiber_charpolyRev_higherLowerShriek (k₀ := k₀) (l := l) h hfib y
+  set E' := (WeilSheaf.upperStar g).obj E
+  have hE' : E'.IsLisse := WeilSheaf.IsLisse.upperStar hE g
+  -- the cohomology of the fibre: `H_c^0 = 0`, `H_c^1` of weights at most `1`, `H_c^2` pure of
+  -- weight `2`, nothing outside degrees `0, 1, 2`
+  have h0 := WeilSheaf.subsingleton_compactlySupportedCohomology_zero_of_isAffine E' hE'
+  have h1 := hasWeightsAtMostOver_compactlySupportedCohomology_of_isAffine ι hdim E'
+    (hpure.upperStar g) 1
+  have h2 := isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine ι E' hE'
+    (hpure.upperStar g)
+  -- the traces of the powers of the local Frobenii of `E'` are real, since `E` is real
+  have hloc (x : X'.finitePoints) (n : ℕ) :
+      (starRingEnd ℂ) (ι (LinearMap.trace _ _ ((E'.stalk x).frobeniusEnd ^ n))) =
+        ι (LinearMap.trace _ _ ((E'.stalk x).frobeniusEnd ^ n)) := by
+    rw [LinearMap.trace_pow_eq_of_charpoly_eq
+      (WeilSheaf.charpoly_frobeniusEnd_stalk_upperStar g E x), ← pow_mul]
+    exact LinearMap.conj_trace_pow_of_charpolyRev ι _ (hreal _) _
+  -- the trace formula: the alternating traces on the cohomology of the fibre are real
+  have htr (m : ℕ) (hm : m ≠ 0) : (starRingEnd ℂ) (ι (LinearMap.trace _ _
+      ((E'.compactlySupportedCohomology 2).frobeniusEnd ^ m) - LinearMap.trace _ _
+      ((E'.compactlySupportedCohomology 1).frobeniusEnd ^ m))) = ι (LinearMap.trace _ _
+      ((E'.compactlySupportedCohomology 2).frobeniusEnd ^ m) - LinearMap.trace _ _
+      ((E'.compactlySupportedCohomology 1).frobeniusEnd ^ m)) := by
+    have hGL := WeilSheaf.sum_trace_compactlySupportedCohomology E' hm
+    rw [finsum_eq_sum_of_support_subset (s := {1, 2}) _ ?_, Finset.sum_pair (by decide)] at hGL
+    · rw [Int.negOnePow_one, Int.negOnePow_even 2 even_two, Units.val_neg, Units.val_one,
+        neg_smul, one_smul, one_smul, ← sub_eq_neg_add] at hGL
+      rw [hGL]
+      refine RingHom.conj_map_finsum_of_forall ι _ fun x ↦ ?_
+      split_ifs
+      · rw [map_mul, map_mul, map_natCast, hloc]
+        simp
+      · simp
+    · intro r hr
+      rw [Function.mem_support] at hr
+      simp only [Finset.coe_insert, Finset.coe_singleton, Set.mem_insert_iff,
+        Set.mem_singleton_iff]
+      by_contra hr'
+      refine hr ?_
+      have : Subsingleton (E'.compactlySupportedCohomology r).carrier := by
+        rcases lt_trichotomy r 0 with hr0 | rfl | hr0
+        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E' (Or.inl hr0)
+        · exact h0
+        · exact WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E'
+            (Or.inr (by omega))
+      rw [Subsingleton.elim ((E'.compactlySupportedCohomology r).frobeniusEnd ^ m) 0, map_zero,
+        smul_zero]
+  -- the factors `P₁, P₂` of the fibre `L`-function have disjoint root radii, hence are real
+  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
+  obtain ⟨hr1, hr2⟩ := LinearMap.map_charpolyRev_conj_eq_self_of_trace ι _ _
+    (fun α hα ↦ h1 α hα) (fun α hα ↦ h2 α hα)
+    (Real.rpow_lt_rpow_of_exponent_lt hq (by norm_num)) htr
+  have hHi : (E'.compactlySupportedCohomology i).IsReal ι := by
+    match i with
+    | 0 =>
+      rw [Nat.cast_zero]
+      exact FrobeniusModule.isReal_of_subsingleton ι _
+    | 1 =>
+      rw [Nat.cast_one]
+      exact (Polynomial.forall_coeff_fixed_iff_map_map ι (starRingEnd ℂ) _).2 hr1
+    | 2 =>
+      rw [Nat.cast_ofNat]
+      exact (Polynomial.forall_coeff_fixed_iff_map_map ι (starRingEnd ℂ) _).2 hr2
+    | n + 3 =>
+      have := WeilSheaf.subsingleton_compactlySupportedCohomology_of_isAffine E'
+        (r := ((n + 3 : ℕ) : ℤ)) (Or.inr (by omega))
+      exact FrobeniusModule.isReal_of_subsingleton ι _
+  -- back to the stalk at `y`
+  have hd := Scheme.Hom.degreeOver_ne_zero (Y ↘ Spec (CommRingCat.of k₀)) y.2
+  refine (Polynomial.forall_coeff_expand_fixed_iff ι (starRingEnd ℂ) hd _).1 ?_
+  rw [FrobeniusModule.localPolynomial, hcp E i]
+  exact hHi
 
 /-- **Mixedness of the direct images over a relative affine curve.** Let `h : U ⟶ Y` be as in
 `AlgebraicGeometry.hasWeightsAtMost_higherLowerShriek_of_isAffine_fiber` and let `F` be a lisse
