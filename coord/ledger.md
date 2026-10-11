@@ -4058,3 +4058,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:39 L: merged deliver/C1/lem-weil-pbc-depth-over-quotient-ring (stage 2; reviewer FIX; first push; Sheaf.RingTheory.DepthOverQuotientRing IsLocalRing.depth_over_quotient_ring)
 - 09:39 L: merged deliver/F1/lem-weil-pbc-cyclic-extension-cocycle (stage 2; reviewer FIX; first push; Sheaf.Paper.CyclicExtensionCocycle Paper.cyclic_extension_cocycle)
 - 09:39 L: merged deliver/J1/def-sc-constant-sheaves (stage 2; reviewer PASS; first push; WeilConjectures.AlgebraicGeometry.Sites.Kummer AlgebraicGeometry.Scheme.constantZMod; existing declaration)
+- 09:39 L: merged deliver/C1/lem-weil-pbc-cover-module-exact (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CoverModuleExact RingTheory.coverModuleExact)
