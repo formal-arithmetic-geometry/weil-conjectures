@@ -111,8 +111,7 @@ theorem nonempty_iso_leftDerivedUpperStar_verdierDual [IsAlgClosed k] {Z T : Sch
     Nonempty ((L((i)^*[ModuleCat.{u + 1} Λ])).obj
         ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op L)) ≅
       (verdierDual (ModuleCat.{u + 1} Λ) (i ≫ aT)).obj
-        (op ((R(i)^![ModuleCat.{u + 1} Λ]).obj L))) :=
-  by
+        (op ((R(i)^![ModuleCat.{u + 1} Λ]).obj L))) := by
   -- `𝔻_Z (i^* K) ≅ Ri^! 𝔻_T K`, from `Ri^! RHom(K, ω_T) ≅ RHom(i^* K, Ri^! ω_T)` and
   -- `Ri^! ω_T ≅ ω_Z`
   have hex (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
