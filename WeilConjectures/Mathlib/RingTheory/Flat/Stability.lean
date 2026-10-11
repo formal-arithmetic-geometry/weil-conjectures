@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.LinearAlgebra.TensorProduct.Quotient
 
 /-!
 # Flatness of a tensor product over an intermediate algebra
@@ -57,3 +58,46 @@ theorem tensorProduct_of_flat [Flat S M] [Flat R N] : Flat R (M ⊗[S] N) := by
   exact hinj (by simp only [LinearMap.coe_comp, Function.comp_apply, hab])
 
 end Module.Flat
+
+namespace Ideal
+
+open TensorProduct
+
+/-- **Flat base change commutes with intersections of ideals.** For a flat `A`-algebra `B`,
+`(I ⊓ J) B = I B ⊓ J B`. -/
+theorem map_inf_of_flat {A B : Type*} [CommRing A] [CommRing B] [Algebra A B] [Module.Flat A B]
+    (I J : Ideal A) :
+    (I ⊓ J).map (algebraMap A B) = I.map (algebraMap A B) ⊓ J.map (algebraMap A B) := by
+  refine le_antisymm (map_inf_le _) fun b ⟨hI, hJ⟩ ↦ ?_
+  have hzero (K : Ideal A) (hb : b ∈ K.map (algebraMap A B)) :
+      (Ideal.Quotient.mk K 1 ⊗ₜ[A] b : (A ⧸ K) ⊗[A] B) = 0 := by
+    apply (quotTensorEquivQuotSMul B K).injective
+    rw [quotTensorEquivQuotSMul_mk_tmul, one_smul, map_zero,
+      Submodule.Quotient.mk_eq_zero, smul_top_eq_map]
+    exact hb
+  let ψ : (A ⧸ (I ⊓ J)) →ₗ[A] (A ⧸ I) × (A ⧸ J) :=
+    LinearMap.prod (Submodule.factor inf_le_left) (Submodule.factor inf_le_right)
+  have hψ : Function.Injective ψ := by
+    refine (injective_iff_map_eq_zero ψ).mpr fun z hz ↦ ?_
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective z
+    have h1 := congrArg Prod.fst hz
+    have h2 := congrArg Prod.snd hz
+    rw [Ideal.Quotient.eq_zero_iff_mem]
+    exact ⟨(Submodule.Quotient.mk_eq_zero _).mp h1, (Submodule.Quotient.mk_eq_zero _).mp h2⟩
+  have h0 : (Ideal.Quotient.mk (I ⊓ J) 1 ⊗ₜ[A] b : (A ⧸ (I ⊓ J)) ⊗[A] B) = 0 := by
+    apply Module.Flat.rTensor_preserves_injective_linearMap (M := B) ψ hψ
+    rw [LinearMap.rTensor_tmul, map_zero]
+    have : ψ (Ideal.Quotient.mk (I ⊓ J) 1) =
+        LinearMap.inl A _ _ (Ideal.Quotient.mk I 1) +
+          LinearMap.inr A _ _ (Ideal.Quotient.mk J 1) := by
+      ext
+      · simpa [ψ] using Submodule.factor_mk (inf_le_left : I ⊓ J ≤ I) (1 : A)
+      · simpa [ψ] using Submodule.factor_mk (inf_le_right : I ⊓ J ≤ J) (1 : A)
+    rw [this, add_tmul, ← LinearMap.rTensor_tmul, ← LinearMap.rTensor_tmul, hzero I hI,
+      hzero J hJ, map_zero, map_zero, add_zero]
+  have := congrArg (quotTensorEquivQuotSMul B (I ⊓ J)) h0
+  rw [quotTensorEquivQuotSMul_mk_tmul, one_smul, map_zero, Submodule.Quotient.mk_eq_zero,
+    smul_top_eq_map] at this
+  exact this
+
+end Ideal

@@ -144,4 +144,29 @@ theorem exists_isFreeGenerator_preimage_of_generatesAt (f : P ⟶ T) [Universall
   have := (isFreeGenerator_generatingLocus s).map hle
   rwa [presheaf_map_homOfLE_map_homOfLE] at this
 
+/-- **A section generating after pullback generates near the image.** Let `ℓ` be a free generator
+of `L` on `O` and `s` a section of `L` over `O` whose pullback along `σ` is a free generator.
+Then `s` is a free generator on an open neighbourhood of every point `σ q` in `O`. -/
+lemma exists_isFreeGenerator_of_isFreeGenerator_pullbackSection {A : Scheme.{u}} (σ : A ⟶ P)
+    {L : P.Modules} {O : P.Opens} {ℓ : Γ(L, O)} (hℓ : IsFreeGenerator ℓ) {s : Γ(L, O)}
+    (hs : IsFreeGenerator (pullbackSection σ s)) {q : A} (hq : σ q ∈ O) :
+    ∃ (W : P.Opens) (hW : W ≤ O), σ q ∈ W ∧
+      IsFreeGenerator (L.presheaf.map (homOfLE hW).op s) := by
+  obtain ⟨a, rfl⟩ := hℓ.exists_smul_eq s
+  rw [pullbackSection_smul] at hs
+  have hℓ' := hℓ.pullback_unit_app σ
+  obtain ⟨u, hu⟩ := hℓ'.exists_unit_smul_eq hs
+  have hau : σ.app O a = u.1 := hℓ'.smul_left_injective hu
+  have hle : P.basicOpen a ≤ O := P.basicOpen_le a
+  refine ⟨P.basicOpen a, hle, ?_, ?_⟩
+  · have hq' : q ∈ σ ⁻¹ᵁ P.basicOpen a := by
+      rw [Scheme.preimage_basicOpen, hau, A.basicOpen_of_isUnit u.isUnit]
+      exact hq
+    exact hq'
+  · have hunit : IsUnit (P.presheaf.map (homOfLE hle).op a) :=
+      P.toRingedSpace.isUnit_res_basicOpen a
+    rw [map_smul]
+    exact (hℓ.map hle).units_smul hunit.unit
+
+
 end AlgebraicGeometry.Scheme.Modules

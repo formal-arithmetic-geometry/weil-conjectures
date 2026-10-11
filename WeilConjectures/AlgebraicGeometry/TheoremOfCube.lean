@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.Rigidification
 public import WeilConjectures.AlgebraicGeometry.Seesaw
+public import WeilConjectures.AlgebraicGeometry.TheoremOfCube.SpreadOut
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-!
@@ -111,8 +112,17 @@ theorem exists_mem_nonempty_iso_preimageSnd_of_nonempty_iso_fiber (X Y Z : Over 
         (Scheme.Modules.pullback (Limits.pullback.fst (snd (X ⊗ Y) Z).left φ)).obj N)) :
     ∃ U : Z.left.Opens, φ.base (IsLocalRing.closedPoint F) ∈ U ∧
       Nonempty ((Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj M ≅
-        (Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj N) :=
-  sorry
+        (Scheme.Modules.pullback (preimageSnd X Y Z U).ι).obj N) := by
+  obtain ⟨ex⟩ := hx
+  obtain ⟨ey⟩ := hy
+  obtain ⟨e⟩ := Scheme.Modules.nonempty_iso_fiber_of_nonempty_iso_pullback
+    (snd (X ⊗ Y) Z).left M N φ hφ
+  obtain ⟨U, htU, m, hm⟩ := TheoremOfCube.exists_mem_isFreeGenerator X Y Z x y (M ⊗ Nᵛ)
+    (nonempty_pullback_tensorObj_dual_iso_unit _ M N ex)
+    (nonempty_pullback_tensorObj_dual_iso_unit _ M N ey) _
+    (nonempty_pullback_tensorObj_dual_iso_unit _ M N e)
+  obtain ⟨d⟩ := nonempty_pullback_ι_iso_unit_of_isFreeGenerator _ hm
+  exact ⟨U, htU, nonempty_pullback_iso_of_pullback_tensorObj_dual_iso_unit _ M N d⟩
 
 /-- **The locus of triviality on the fibres is closed** (Stacks, Tags 0BDP and 0BF0).
 

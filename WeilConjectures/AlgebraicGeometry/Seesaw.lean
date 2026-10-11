@@ -188,4 +188,47 @@ theorem isClosed_setOf_nonempty_iso_fiber (f : P ⟶ T) [IsProper f] [Flat f]
   rw [hset]
   exact (hopen _).isClosed_compl.inter (hopen _).isClosed_compl
 
+/-- **Triviality on a fibre is preserved by restriction to an open of the base.** For `f`
+proper with geometrically integral fibres and `L` invertible, if `L` is trivial on the fibre
+over a point `t` of an open `V`, then so is its restriction for `f ∣_ V`. -/
+lemma nonempty_iso_unit_fiber_morphismRestrict (f : P ⟶ T) [IsProper f]
+    [GeometricallyIntegral f] (L : P.Modules) [L.IsInvertible] (V : T.Opens) (t : V)
+    (ht : Nonempty ((Modules.pullback (f.fiberι (V.ι t))).obj L ≅ 𝟙_ (f.fiber (V.ι t)).Modules)) :
+    Nonempty ((Modules.pullback ((f ∣_ V).fiberι t)).obj ((Modules.pullback (f ⁻¹ᵁ V).ι).obj L) ≅
+      𝟙_ ((f ∣_ V).fiber t).Modules) := by
+  have := IsInvertible.isFinitePresentation L
+  have := IsInvertible.isFinitePresentation Lᵛ
+  obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit L
+  obtain ⟨μ⟩ := nonempty_pullback_tensorObj_iso (f ⁻¹ᵁ V).ι L Lᵛ
+  have sq : IsPullback (f ⁻¹ᵁ V).ι (f ∣_ V) f V.ι := (isPullback_morphismRestrict f V).flip
+  rw [nonempty_iso_unit_fiber_iff f d] at ht
+  rw [nonempty_iso_unit_fiber_iff (f ∣_ V) (μ.symm ≪≫ (Modules.pullback _).mapIso d ≪≫
+    pullbackObjUnitIso _), hFiber_pullback_of_isPullback f L V.ι _ _ sq,
+    hFiber_pullback_of_isPullback f Lᵛ V.ι _ _ sq]
+  exact ht
+
+
+/-- A free generator of `L` over an open `O` trivialises the restriction of `L` to `O`. -/
+lemma nonempty_pullback_ι_iso_unit_of_isFreeGenerator (L : P.Modules) {O : P.Opens}
+    {m : Γ(L, O)} (hm : IsFreeGenerator m) :
+    Nonempty ((Modules.pullback O.ι).obj L ≅ 𝟙_ O.toScheme.Modules) := by
+  have hm' : IsFreeGenerator (M := L.restrict O.ι) (U := ⊤)
+      (L.presheaf.map (homOfLE (Scheme.Opens.ι_image_top O).le).op m) :=
+    (isFreeGenerator_restrict_iff O.ι L _).mpr (hm.map _)
+  have := isIso_homOfGlobalSection hm'
+  exact ⟨((restrictFunctorIsoPullback O.ι).app L).symm ≪≫
+    (asIso (homOfGlobalSection (L.restrict O.ι)
+      (L.presheaf.map (homOfLE (Scheme.Opens.ι_image_top O).le).op m))).symm⟩
+
+/-- If `g^* (M ⊗ Nᵛ)` is trivial for an invertible `N`, then `g^* M ≅ g^* N`. -/
+lemma nonempty_pullback_iso_of_pullback_tensorObj_dual_iso_unit {A : Scheme.{u}} (g : A ⟶ P)
+    (M N : P.Modules) [N.IsInvertible]
+    (e : (Modules.pullback g).obj (M ⊗ Nᵛ) ≅ 𝟙_ A.Modules) :
+    Nonempty ((Modules.pullback g).obj M ≅ (Modules.pullback g).obj N) := by
+  obtain ⟨μ₁⟩ := nonempty_pullback_tensorObj_iso g M Nᵛ
+  obtain ⟨μ₂⟩ := nonempty_pullback_tensorObj_iso g Nᵛ N
+  obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit N
+  exact nonempty_iso_of_tensorObj_iso_unit_of_tensorObj_iso_unit (μ₁.symm ≪≫ e)
+    (μ₂.symm ≪≫ (Modules.pullback g).mapIso (β_ _ _ ≪≫ d) ≪≫ pullbackObjUnitIso g)
+
 end AlgebraicGeometry.Scheme.Modules
