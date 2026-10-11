@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.ValuativeCriterion
+public import Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.GlobalSections
@@ -45,6 +47,10 @@ connected `X` over a separably closed field.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral` and
   `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isSepClosed`: the geometrically integral
   case and the case of a smooth connected scheme over a separably closed field.
+- `AlgebraicGeometry.Scheme.isIntegralElem_of_universallyClosed`: global functions on an integral
+  scheme universally closed over `k` are integral over `k` (valuative criterion), and
+  `AlgebraicGeometry.Scheme.bijective_appTop_of_universallyClosed_of_isAlgClosed`: such a scheme
+  over an algebraically closed field has `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isAlgClosed`: a proper, reduced and
   connected scheme over an algebraically closed field has `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.pullback`: `H⁰(X, 𝒪_X) = k` is stable under
@@ -180,10 +186,140 @@ instance GlobalSectionsBijective.of_isAlgClosed [IsAlgClosed k] [IsProper (X ↘
     (f := Algebra.linearMap k A) (by rw [hA, Module.finrank_self])).1
     (algebraMap k A).injective
 
-/-- A proper geometrically integral `k`-scheme has `H⁰(X, 𝒪_X) = k`. -/
+/-- **Global functions on a universally closed integral scheme are algebraic.** Let `Y` be an
+integral scheme with a universally closed morphism `p : Y ⟶ Spec k`. Every global function on `Y`
+is integral over `k`.
+
+Otherwise some `a ∈ Γ(Y, 𝒪_Y)` is transcendental over `k`, and so is its image `b` in the function
+field `K` of `Y`. Then `b` is not integral over (the image of) `k`, so some valuation ring `V` of
+`K` contains `k` but not `b`. By the valuative criterion the generic point `Spec K ⟶ Y` extends to
+`Spec V ⟶ Y`, and `b` is the image of a section of `𝒪_{Spec V}`, i.e. `b ∈ V`: a contradiction. -/
+theorem isIntegralElem_of_universallyClosed {k : Type u} [Field k] {Y : Scheme.{u}}
+    [IsIntegral Y] (p : Y ⟶ Spec (.of k)) [UniversallyClosed p] (a : Γ(Y, ⊤)) :
+    ((Scheme.ΓSpecIso (.of k)).inv ≫ p.appTop).hom.IsIntegralElem a := by
+  classical
+  set ψ := ((Scheme.ΓSpecIso (.of k)).inv ≫ p.appTop).hom with hψ
+  have : Nonempty (⊤ : Y.Opens) := ⟨⟨genericPoint Y, trivial⟩⟩
+  let K : Type u := Y.functionField
+  let φ : Γ(Y, ⊤) →+* K := (Y.germToFunctionField ⊤).hom
+  have hφ : Function.Injective φ := germ_injective_of_isIntegral Y (U := ⊤) (genericPoint Y) trivial
+  let f : k →+* K := φ.comp ψ
+  by_contra ha
+  -- the image `φ a` of `a` in the function field is not integral over `k`
+  have hb : φ a ∉ (integralClosure (Subring.closure (Set.range f)) K).toSubring := by
+    intro hb
+    apply ha
+    have hcl : Subring.closure (Set.range f) = f.range := by
+      rw [← RingHom.coe_range, Subring.closure_eq]
+    rw [hcl] at hb
+    obtain ⟨q, hqm, hq⟩ := hb
+    have hl : q ∈ Polynomial.lifts f.rangeRestrict :=
+      Polynomial.mem_lifts_of_surjective f.rangeRestrict_surjective q
+    obtain ⟨q', hq'map, -, hq'm⟩ := Polynomial.lifts_and_degree_eq_and_monic hl hqm
+    refine ⟨q', hq'm, hφ ?_⟩
+    rw [Polynomial.hom_eval₂, map_zero, ← hq, ← hq'map, Polynomial.eval₂_map]
+    rfl
+  rw [← iInf_valuationSubring_superset, Subring.mem_iInf] at hb
+  push Not at hb
+  obtain ⟨⟨V, hsV⟩, hV⟩ := hb
+  have hex : ValuativeCriterion.Existence p := by
+    have : (ValuativeCriterion.Existence ⊓ @QuasiCompact) p := by
+      rw [← UniversallyClosed.eq_valuativeCriterion]
+      infer_instance
+    exact this.1
+  let ι : k →+* V := f.codRestrict V.toSubring fun c ↦ hsV ⟨c, rfl⟩
+  have hsq : Y.fromSpecStalk (genericPoint Y) ≫ p =
+      Spec.map (CommRingCat.ofHom (algebraMap V K)) ≫ Spec.map (CommRingCat.ofHom ι) := by
+    rw [← Spec.map_comp]
+    apply ext_of_isAffine
+    rw [← cancel_epi (ΓSpecIso (.of k)).inv, ← ΓSpecIso_inv_naturality, Scheme.Hom.comp_appTop,
+      fromSpecStalk_appTop]
+    simp only [homOfLE_refl, op_id, CategoryTheory.Functor.map_id, Category.comp_id]
+    rfl
+  obtain ⟨⟨l⟩⟩ := hex ⟨V, K, Y.fromSpecStalk (genericPoint Y), Spec.map (CommRingCat.ofHom ι),
+    ⟨hsq⟩⟩
+  have e : (Spec.map (CommRingCat.ofHom (algebraMap V K)) ≫ l.l).appTop ≫
+      (ΓSpecIso (.of K)).hom =
+      (Y.fromSpecStalk (genericPoint Y)).appTop ≫ (ΓSpecIso (.of K)).hom := by
+    rw [l.fac_left]
+  rw [Scheme.Hom.comp_appTop, Category.assoc, ΓSpecIso_naturality, fromSpecStalk_appTop] at e
+  simp only [homOfLE_refl, op_id, CategoryTheory.Functor.map_id, Category.comp_id] at e
+  have h : algebraMap V K ((ΓSpecIso (.of V)).hom.hom (l.l.appTop.hom a)) = φ a := by
+    have h := congr($(e).hom a)
+    simp only [CommRingCat.hom_comp, RingHom.comp_apply, CommRingCat.hom_ofHom] at h
+    rw [h]
+    exact Iso.inv_hom_id_apply (ΓSpecIso _) _
+  apply hV
+  change φ a ∈ V
+  rw [← h]
+  exact ((ΓSpecIso (.of V)).hom.hom (l.l.appTop.hom a)).2
+/-- **Global functions over an algebraically closed field.** An integral scheme `Y` universally
+closed over an algebraically closed field `K` has `H⁰(Y, 𝒪_Y) = K`: every global function is
+integral over `K` (`isIntegralElem_of_universallyClosed`), and `Γ(Y, 𝒪_Y)` is a domain. -/
+theorem bijective_appTop_of_universallyClosed_of_isAlgClosed {K : Type u} [Field K]
+    [IsAlgClosed K] {Y : Scheme.{u}} [IsIntegral Y] (p : Y ⟶ Spec (.of K)) [UniversallyClosed p] :
+    Function.Bijective ((Scheme.ΓSpecIso (.of K)).inv ≫ p.appTop).hom :=
+  IsAlgClosed.ringHom_bijective_of_isIntegral _ (isIntegralElem_of_universallyClosed p)
+
+/-- A proper geometrically integral `k`-scheme has `H⁰(X, 𝒪_X) = k`.
+
+Let `K` be an algebraic closure of `k`, `A = Γ(X, 𝒪_X)` and `B = Γ(X_K, 𝒪_{X_K})`. Since `X_K` is
+integral and proper over `K`, `B = K` (`bijective_appTop_of_universallyClosed_of_isAlgClosed`).
+By flat base change `B = K ⊗_k A`, so `A` has dimension `1` over `k`. -/
 theorem GlobalSectionsBijective.of_geometricallyIntegral [IsProper (X ↘ Spec (.of k))]
-    [GeometricallyIntegral (X ↘ Spec (.of k))] : GlobalSectionsBijective k X :=
-  inferInstance
+    [GeometricallyIntegral (X ↘ Spec (.of k))] : GlobalSectionsBijective k X := by
+  let K := AlgebraicClosure k
+  set iX := X ↘ Spec (.of k)
+  set f := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  have hpb := IsPullback.of_hasPullback iX f
+  have : IsIntegral (Limits.pullback iX f) :=
+    GeometricallyIntegral.geometrically_isIntegral f _ _ hpb
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace iX
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_quasiSeparated iX
+  have H := isPushout_appTop_of_flat f iX
+  let A := Γ(X, ⊤)
+  let B := Γ(Limits.pullback iX f, ⊤)
+  let : Algebra k A := (globalSectionsRingHom k (X := X)).toAlgebra
+  let : Algebra K B :=
+    ((Scheme.ΓSpecIso (.of K)).inv ≫ (Limits.pullback.snd iX f).appTop).hom.toAlgebra
+  let : Algebra A B := (Limits.pullback.fst iX f).appTop.hom.toAlgebra
+  let : Algebra k B := ((algebraMap A B).comp (algebraMap k A)).toAlgebra
+  have : IsScalarTower k A B := IsScalarTower.of_algebraMap_eq' rfl
+  have hw : CommRingCat.ofHom (algebraMap k K) ≫ CommRingCat.ofHom (algebraMap K B) =
+      CommRingCat.ofHom (algebraMap k A) ≫ CommRingCat.ofHom (algebraMap A B) := by
+    change _ ≫ (Scheme.ΓSpecIso (.of K)).inv ≫ (Limits.pullback.snd iX f).appTop =
+      ((Scheme.ΓSpecIso (.of k)).inv ≫ iX.appTop) ≫ (Limits.pullback.fst iX f).appTop
+    rw [reassoc_of% Scheme.ΓSpecIso_inv_naturality, Category.assoc, H.w]
+  have : IsScalarTower k K B := IsScalarTower.of_algebraMap_eq' congr($(hw).hom).symm
+  -- Flat base change: `B = K ⊗_k A`.
+  have : Algebra.IsPushout k K A B := by
+    rw [← CommRingCat.isPushout_iff_isPushout]
+    refine H.flip.of_iso (Scheme.ΓSpecIso (.of k)) (Scheme.ΓSpecIso (.of K)) (Iso.refl _)
+      (Iso.refl _) ?_ ?_ ?_ ?_
+    · rw [← cancel_epi (Scheme.ΓSpecIso (.of k)).inv]
+      simp [f]
+    · change _ = _ ≫ (Scheme.ΓSpecIso (.of k)).inv ≫ iX.appTop
+      simp
+    · change _ = _ ≫ (Scheme.ΓSpecIso (.of K)).inv ≫ (Limits.pullback.snd iX f).appTop
+      simp
+    · simp
+      rfl
+  -- `B = K`, as `X_K` is integral and proper over the algebraically closed field `K`
+  have hB : Function.Bijective (algebraMap K B) :=
+    bijective_appTop_of_universallyClosed_of_isAlgClosed (Limits.pullback.snd iX f)
+  let e := (Algebra.IsPushout.equiv k K A B).toLinearEquiv.trans
+    (LinearEquiv.ofBijective (Algebra.linearMap K B) hB).symm
+  have hA : Module.rank k A = 1 := by
+    have h := e.rank_eq
+    rw [Module.rank_baseChange, Module.rank_self] at h
+    exact Cardinal.lift_eq_one.mp h
+  have : Module.Finite k A := Module.finite_of_rank_eq_one hA
+  have hA' : Module.finrank k A = 1 := Module.finrank_eq_of_rank_eq hA
+  have : Nontrivial A := Module.nontrivial_of_finrank_eq_succ hA'
+  refine ⟨⟨(globalSectionsRingHom k (X := X)).injective, ?_⟩⟩
+  exact (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
+    (f := Algebra.linearMap k A) (by rw [hA', Module.finrank_self])).1
+    (algebraMap k A).injective
 
 /-- A smooth proper connected scheme over a separably closed field `k` has
 `H⁰(X, 𝒪_X) = k`.
