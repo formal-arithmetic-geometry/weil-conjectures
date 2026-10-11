@@ -1,11 +1,11 @@
 # Work queue
 
-218 items; claim with `tools/claim.py next <group> [--stage N]`.
+212 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (218)
+## Stage 2: nodes to state (212)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -36,7 +36,6 @@
 | `lemma-nagata-final-noetherian-base-system` | 2 | state | 2 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
 | `lem-sc-base-change-curve` | 1 | state | 1 |
-| `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 1 | state | 1 |
 | `lem-weil-pbc-symmetric-algebra-graded` | 1 | state | 1 |
 | `thm-sp-spectral-object-yields` | 1 | state | 1 |
 | `lem-sc-group-addition-tangent-differential` | 2 | state | 1 |
@@ -56,17 +55,13 @@
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1 | state | 0 |
 | `lem-weil-pbc-etale-geometric-fibre-constant-sections` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
-| `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state | 0 |
-| `lem-weil-pbc-scheme-theoretic-support` | 1 | state | 0 |
 | `lem-weil-pbc-sets-etale-section-continuity` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-retract-relative-global-complete-intersection` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-section-etale-lift` | 1 | state | 0 |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state | 0 |
-| `lem-weil-pbc-spec-finite-product-fields` | 1 | state | 0 |
 | `lem-weil-pbc-spec-map-residue-field-naturality` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-constructible-closed-nonempty` | 1 | state | 0 |
-| `lem-weil-pbc-spectral-limit-constructible-closed-quasi-compact` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-descend-opens` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-limit-pullback-sections` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-sheaf-colimit-constant-embeddings` | 1 | state | 0 |
@@ -82,7 +77,6 @@
 | `lem-weil-pbc-stein-fibre-idempotent-image` | 1 | state | 0 |
 | `lem-weil-pbc-stein-flat-base-change-global-sections` | 1 | state | 0 |
 | `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state | 0 |
-| `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1 | state | 0 |
 | `lem-weil-pbc-stein-universally-closed-factor` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-henselian-sections-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-strictly-standard-localization-smooth` | 1 | state | 0 |
