@@ -1,16 +1,15 @@
 # Work queue
 
-611 items; claim with `tools/claim.py next <group> [--stage N]`.
+606 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (611)
+## Stage 2: nodes to state (606)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
-| `def-weil-pbc-finite-etale-trace` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pur-left-derived-exact-when-defined` | 1 | state |
@@ -19,7 +18,7 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-etale-finite-pushforward-locally-constant` | 1 | state |
 | `lem-weil-pbc-exchange-identity-pasting` | 1 | state |
-| `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
+| `lem-weil-pbc-finite-etale-trace-degree` | 1 | state |
 | `lem-weil-pbc-finite-type-domain-dimension-trdeg` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-local-completion-iso` | 1 | state |
@@ -29,17 +28,13 @@
 | `lem-weil-pbc-flat-permanence` | 1 | state |
 | `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1 | state |
 | `lem-weil-pbc-flat-tor-ideal-criterion` | 1 | state |
-| `lem-weil-pbc-flat-under-regular` | 1 | state |
 | `lem-weil-pbc-flat-unramified-formally-etale` | 1 | state |
 | `lem-weil-pbc-formal-glueing-H0-localization` | 1 | state |
 | `lem-weil-pbc-formal-glueing-canonical-maps` | 1 | state |
-| `lem-weil-pbc-formal-glueing-complex-exact` | 1 | state |
 | `lem-weil-pbc-formal-glueing-isogeny` | 1 | state |
-| `lem-weil-pbc-fpqc-affine-standard-refinement` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-affine` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-finite` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-flat` | 1 | state |
-| `lem-weil-pbc-fpqc-descend-integral` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-locally-finite-presentation` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-locally-finite-type` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-quasi-compact` | 1 | state |
@@ -621,7 +616,7 @@
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 810 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 809 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
