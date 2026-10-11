@@ -4478,3 +4478,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:39 L: merged deliver/J1/lem-weil-pbc-curve-assertions-retract (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Curve.RetractAssertions AlgebraicGeometry.IsCurve.assertions_of_isIso_comp)
 - 11:39 L: merged deliver/C1/lem-weil-pbc-kahler-differentials-mod-power-ideal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.KaehlerDifferentialsModPowerIdeal kahlerDifferential_mod_power_ideal)
 - 11:39 L: merged deliver/E1/lem-weil-pbc-ml-sets-tower-limit-nonempty (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.MLSetsTowerLimitNonempty CategoryTheory.Functor.nonempty_sections_of_isMittagLeffler; statement correction reverted (statement, statement_change))
+- 11:39 L: merged deliver/M1/lem-weil-pbc-eventually-proper (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EventuallyProper AlgebraicGeometry.exists_isProper_baseChange_of_isLimit)

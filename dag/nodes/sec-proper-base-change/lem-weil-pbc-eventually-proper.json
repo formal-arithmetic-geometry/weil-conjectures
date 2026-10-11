@@ -212,5 +212,24 @@
   "item": "lem-weil-pbc-eventually-proper",
   "worker": "stage1",
   "summary": "Split in six steps along the proof of Stacks Limits 081F: (1) 01ZQ gives a separated stage, re-based (new unsplit node lem-weil-pbc-descend-separated, Situation 081D form of 01ZQ); (2) f_0 quasi-compact (03GI) hence separated of finite type, Chow's lemma 0202 over Y_0 via the existing lem-weil-pbc-chow-finite-type (no new Chow node); (3) the base changed diagram X'_T, P^n_{Y_T}, j_T, pi_T with the fibre-product identifications written out, immersions stable under base change (new Mathlib leaf lem-weil-pbc-immersion-base-change-lft: IsImmersion.isStableUnderBaseChange and the instance IsImmersion -> LocallyOfFiniteType); (4) X' -> P^n_Y proper over a separated base (01W6, lem-weil-pbc-proper-over-separated) and a proper immersion is closed (lem-weil-pbc-proper-immersion-closed); (5) 01ZP applied to j_0 (new unsplit node lem-weil-pbc-descend-closed-immersion, Situation 081D form of 01ZP, with the qcqs and lft hypotheses checked); (6) 03GN (lem-weil-pbc-image-universally-closed) makes f_i proper. Statement kept (it is 081F exactly); source place given with every cited tag checked in tags/tags. Not used: lem-weil-pbc-eventually-closed-immersion (0A0N, fixed target, a different statement), lemma-nagata-closed-immersion-stage-exists and the source repository's exists_isClosedImmersion_pullback_snd (need finite presentation; the Chow immersion X'_0 -> P^n_{Y_0} is only of finite type)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EventuallyProper",
+  "declaration": "AlgebraicGeometry.exists_isProper_baseChange_of_isLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EventuallyProper.lean",
+  "statement": "theorem exists_isProper_baseChange_of_isLimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (t : i ⟶ j), IsAffineHom (D.map t)] (c : Cone D) (hc : IsLimit c) (i₀ : I) [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))] {X₀ Y₀ : Scheme.{u}} [CompactSpace X₀] [QuasiSeparatedSpace X₀] [CompactSpace Y₀] [QuasiSeparatedSpace Y₀] (a : X₀ ⟶ D.obj (op i₀)) (b : Y₀ ⟶ D.obj (op i₀)) (f₀ : X₀ ⟶ Y₀) (h : f₀ ≫ b = a) [LocallyOfFiniteType f₀] (hf : IsProper (pullback.map a (c.π.app (op i₀)) b (c.π.app (op i₀)) f₀ (𝟙 c.pt) (𝟙 (D.obj (op i₀))) ((Category.comp_id a).trans h.symm) ((Category.comp_id _).trans (Category.id_comp _).symm))) : ∃ (i : I) (hi : i₀ ≤ i), IsProper (pullback.map a (D.map (homOfLE hi).op) b (D.map (homOfLE hi).op) f₀ (𝟙 (D.obj (op i))) (𝟙 (D.obj (op i₀))) ((Category.comp_id a).trans h.symm) ((Category.comp_id _).trans (Category.id_comp _).symm))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-evp1139"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-evp1139",
+  "group": "M1",
+  "result": "fix",
+  "note": "directed I (Preorder+IsDirected, now Type u), D : Iᵒᵖ ⥤ Scheme.{u} with IsAffineHom transitions, Cone+IsLimit, i₀ with S₀/X₀/Y₀ qcqs, a b f₀ h over S₀, f = pullback.map at the limit IsProper, LocallyOfFiniteType f₀, ∃ i ≥ i₀ with f_i IsProper; no hollow hyps, no private defs"
  }
 }
