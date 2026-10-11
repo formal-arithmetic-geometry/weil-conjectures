@@ -166,5 +166,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sir (reviewer sub-agent of L); spot-checked: Source: Stacks Etale Cohomology Tag 03S2 (j^{-1} is restriction via U_et -> X_et) and Sites 00XX lemma-have-functor-other-way / 00XZ; the item statement (unchanged) agrees: j etale, G sheaf of sets, rho natural iso with rho(j^*s)=s|_{W x_X U}. Step 1 carried by lem-weil-pbc-etale-localization-functor-adjoint (1)-(3) (iota_j -| b_j, counit p_W). Step 2: G o iota_j sheaf (def-weil-pbc-etale-site, j o v etale), F o b_j sheaf by lem-weil-pbc-etale-covering-base-change and lem-weil-pbc-etale-base-change-finite-limits (3). Step 3: new node with C=Y_et, D=X_et, lambda=iota_j, beta=b_j; checked the variance: lambda -| beta gives beta^op -| lambda^op, hence lambda^s -| beta^s with unit G(eps_W), true. Step 4: lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction (2) with u=b_j (hypothesis from Step 2) is j^{-1} -| j_* of lem-weil-pbc-sets-etale-inverse-image-composition-units; uniqueness of adjoints compatible with units gives rho. Step 5 elementary evaluation at W. Small case j=id: rho is the identity-compatible iso id^{-1}G=G. Fixes (FIX more, RETURN less): (1) dag/nodes/sec-proper-base-change/lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction.json: statement: 'sites [def-weil-pbc-etale-site]' cited the small etale site definition for arbitrary sites (B3/C4); specialized to C=T_et, D=S_et small etale sites of schemes S,T, which is the only use, and named Sh(C), Sh(D) as categories of sheaves of sets. (2) item: proof steps 1,2,3,5 and proof_deps: def-weil-pbc-direct-image (abelian sheaves only) cited for the direct image of sheaves of sets (C4); replaced by lem-weil-pbc-sets-etale-inverse-image-composition-units, which states (e_*H)(U)=H(U x_S T) and j^{-1} -| j_* for sets; Step 4 text now cites it for identifying u_s with j^{-1} and the unit with s -> j^*s, and says b_j satisfies the hypothesis by Step 2. (3) item step 1: text: the proof wrote j:Y->X while the statement has j:U->X; added 'Write Y=U'. Step 3 uses: added def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets. Start 'Sat Oct 10 03:38:38 PM UTC 2026', end 'Sat Oct 10 03:40:01 PM UTC 2026'.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction",
+  "declaration": "AlgebraicGeometry.etaleSetInverseImageRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetInverseImageRestriction.lean",
+  "statement": "theorem etaleSetInverseImageRestriction {X U : Scheme.{u}} (j : U ⟶ X) [Etale j] : ∃ ρ : Scheme.etaleSetPullback j ≅ Etale.localizationRestriction (Type (u + 1)) j inferInstance, ∀ (G : Sheaf X.smallEtaleTopology (Type (u + 1))) (W : X.Etale) (s : G.obj.obj (op W)), (ρ.hom.app G).hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ j).obj W)) (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ j) (Type (u + 1)) (X.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)).unit.app G).hom.app (op W) s) = G.obj.map ((MorphismProperty.Over.mapPullbackAdj @Etale ⊤ j inferInstance trivial).counit.app W).op s",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
