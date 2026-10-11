@@ -1820,6 +1820,32 @@ theorem nonempty_picardFunctorDegree_iso_of_isPullback {K : Type u} [Field K] [A
   exact ⟨overMapOpCompSheafifyIso g _ ≪≫
     (sheafToPresheaf _ _).mapIso ((presheafToSheaf _ _).mapIso eS)⟩
 
+
+/-- **The base change of a representing object of `Pic^d`.** Let `C` be a smooth projective
+geometrically integral curve over `k`, let `K/k` be a field extension and let `C_K` be the base
+change of `C`, presented by a cartesian square. If `J` represents `Pic^d_{C/k}`, then any base
+change `J_K = J ×_k K` of `J` (presented by a cartesian square) represents `Pic^d_{C_K/K}`.
+
+By the adjunction `Over.map ⊣ Over.pullback`, `J ×_k K` represents the restriction of
+`Pic^d_{C/k}` to schemes over `K`, which is `Pic^d_{C_K/K}`
+(`AlgebraicGeometry.nonempty_picardFunctorDegree_iso_of_isPullback`).
+
+(blueprint: `thm-pd-jacobian-general-field`, the clause `J_K ≅ Pic^0_{C_K/K}`;
+`sk-prop-jacobian`, the clause `J(C_{k'}) = J(C) ×_k k'`) -/
+theorem nonempty_representableBy_picardFunctorDegree_baseChange {K : Type u} [Field K]
+    [Algebra k K] {C C' : Scheme.{u}} [C.Over (Spec (.of k))] [C'.Over (Spec (.of K))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (q : C' ⟶ C)
+    (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) {J : Over (Spec (.of k))}
+    (r : (picardFunctorDegree (C ↘ Spec (.of k)) d).obj.RepresentableBy J)
+    (JK : Over (Spec (.of K))) (qJ : JK.left ⟶ J.left)
+    (hJ : IsPullback qJ JK.hom J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :
+    Nonempty ((picardFunctorDegree (C' ↘ Spec (.of K)) d).obj.RepresentableBy JK) := by
+  obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback q h d
+  refine ⟨((r.ofAdjunction (Over.mapPullbackAdj _)).ofIso e).ofIsoObj
+    (Over.isoMk hJ.isoPullback ?_)⟩
+  simp
 omit [Field k] in
 lemma specMap_algebraMap_comp_specMap_algebraMap (k K L : Type u) [CommRing k] [CommRing K]
     [CommRing L] [Algebra k K] [Algebra K L] [Algebra k L] [IsScalarTower k K L] :
