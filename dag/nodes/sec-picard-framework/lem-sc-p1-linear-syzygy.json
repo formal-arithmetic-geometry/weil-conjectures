@@ -118,5 +118,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pls (reviewer sub-agent of L); spot-checked: Source: blueprint master lem-sc-p1-graded-resolution.md (read; it states the graded Hilbert syzygy route only, the two-variable syzygy computation is the agent's expansion at the Koszul middle-exactness clause of lem-sc-p1-koszul-resolution, proof_origin by agent, correct). Statement unchanged (k field, S=k[x_0,x_1], a x_0+b x_1=0 => a=c x_1, b=-c x_0). Step 1: S=k[x_1][x_0], b=b_0+x_0 b_1, constant coefficient in x_0 gives b_0 x_1=0 in k[x_1]; k[x_1] domain from lem-weil-pbc-polynomial-ring-domain (D=k, one variable), x_1 nonzero so b_0=0. Step 2: x_0(a+b_1 x_1)=0, S domain by the same node (D=k, I={0,1}), cancel x_0. Step 3 elementary sign. Tool use lem-weil-pbc-polynomial-ring-domain (Mathlib leaf MvPolynomial.instIsDomainOfIsCancelAdd, generic) accepted. Cases: (0,0)->c=0, (x_1,-x_0)->c=1, (x_1^2,-x_0x_1)->c=x_1. Only changed fields are split-owned (proof, proof_deps, proof_origin, status, split_report). Note: report says the blueprint prose file is absent and mentions a citations.json that is not in the commit; the file exists and was read by me; no effect on the split. Start Sat Oct 10 04:14:06 PM UTC 2026, end Sat Oct 10 04:14:21 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MvPolynomial.TwoVariableSyzygy",
+  "declaration": "MvPolynomial.exists_eq_mul_X_and_eq_neg_mul_X",
+  "file": "lean/Sheaf/RingTheory/MvPolynomial/TwoVariableSyzygy.lean",
+  "statement": "theorem exists_eq_mul_X_and_eq_neg_mul_X {k : Type u} [Field k] (a b : MvPolynomial (Fin 2) k) (h : a * X 0 + b * X 1 = 0) : ∃ c : MvPolynomial (Fin 2) k, a = c * X 1 ∧ b = -c * X 0",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pls1201",
+  "group": "K1",
+  "result": "pass",
+  "note": "k field = {k : Type u} [Field k]; S=k[x0,x1] = MvPolynomial (Fin 2) k as in landed GradedSubmoduleFinite; standard grading carries no datum here (no homogeneity in hypothesis or conclusion, a,b,c arbitrary); a,b in S; h : a*X 0 + b*X 1 = 0; exists c, a = c*X 1 and b = -c*X 0 ((-c)*X 0 = -(c x0)); no extra instances; edge cases (0,0), (x1,-x0), (x1^2,-x0x1), char 2 ok; docstring carries the 3 proof steps with b1 in S (node step 1 wrongly says b1 in k[x1])"
  }
 }

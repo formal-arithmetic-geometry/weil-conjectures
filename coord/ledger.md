@@ -3785,3 +3785,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:13 L: merged deliver/M1/lem-sc-invert-s-cohomology-induction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction AlgebraicGeometry.quasiCompactOpen_induction)
 - 08:13 L: merged deliver/E1/lem-kun-03sa (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstructibleGenerationFiniteType AlgebraicGeometry.constructibleGeneration_finiteType)
 - 08:13 L: merged deliver/F1/lem-sc-jacobson-denominator-function-field (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JacobsonDenominatorFunctionField RingTheory.exists_inv_mem_jacobson_of_tensor_surjective)
+- 08:14 L: merged deliver/K1/lem-sc-p1-linear-syzygy (stage 2; reviewer PASS; first push; Sheaf.RingTheory.MvPolynomial.TwoVariableSyzygy MvPolynomial.exists_eq_mul_X_and_eq_neg_mul_X)
