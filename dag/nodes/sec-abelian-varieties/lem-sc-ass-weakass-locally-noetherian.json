@@ -20,7 +20,8 @@
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "pqf-def-locnoeth"
+  "pqf-def-locnoeth",
+  "def-sc-weakly-associated-primes"
  ],
  "proof": [
   {
@@ -102,5 +103,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-awa2834 (reviewer sub-agent of L); spot-checked: Item vs Tag 05AR; C4: meromorphic-sheaf-generic-product step uses exactly Ass=WeakAss for O_X on locally Noetherian X, matching meromorphic-weakass-generic-product (a). Mathlib grep: no weakly associated primes anywhere. FIX more, RETURN less: (1) class c: lem-sc-locnoeth-stalk-maxideal-fg made a Mathlib leaf, Ideal.fg_of_isNoetherianRing (RingTheory/Noetherian/Defs.lean:207) with inferred instance IsNoetherianRing (X.presheaf.stalk x) for IsLocallyNoetherian (AlgebraicGeometry/Noetherian.lean:349), source place corrected (not 05AR's final assertion); (2) B3: lem-sc-ass-weakass-fg-stalk used associated/weakly associated point undefined, now defined inline per Tags 02OJ/0546 via the stalk [def-weil-pbc-module-stalk] added to stmt_deps; item statement gains the inline definition of associated point and step 2 names the instantiation F=O_X. Second reading by H1 missed both.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AssociatedPointsEqWeaklyAssociatedPoints",
+  "declaration": "AlgebraicGeometry.Scheme.associatedPoints_eq_weaklyAssociatedPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/AssociatedPointsEqWeaklyAssociatedPoints.lean",
+  "statement": "theorem associatedPoints_eq_weaklyAssociatedPoints (X : Scheme.{u}) [IsLocallyNoetherian X] : {x : X | ∃ a : X.presheaf.stalk x, IsLocalRing.maximalIdeal (X.presheaf.stalk x) = (⊥ : Submodule (X.presheaf.stalk x) (X.presheaf.stalk x)).colon {a}} = {x : X | IsLocalRing.maximalIdeal (X.presheaf.stalk x) ∈ Ideal.WeakAss (X.presheaf.stalk x)}",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-awn1126",
+  "group": "K1",
+  "result": "pass",
+  "note": "X:Scheme.{u} + [IsLocallyNoetherian X] = pqf-def-locnoeth (Mathlib class, real hypothesis); Ass clause m_x = (⊥).colon {a}, a in the stalk ring = Ann(a) literally (same form as landed Ideal.annihilator_eq_iff_mem_minimalPrimes_of_fg); WeakAss clause via landed Ideal.WeakAss (H1, def-sc-weakly-associated-primes, added landed stmt_dep, no copy); set equality over points of X; true by Noetherian stalks; not in Mathlib (no associated points of schemes); statement text unchanged"
  }
 }
