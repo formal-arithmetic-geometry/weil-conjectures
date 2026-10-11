@@ -3122,3 +3122,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:35 UTC L: M1 perfect-hypercohomology-gap FIX 201a0ee27 (R-phg0033), C1 kinjective-set-iso-classes-bounded-size FIX 2e09f5d7a (R-sib0034; subobject-set node made a Mathlib leaf wellPowered_of_isSeparator).
 - 00:35 L: merged deliver/E1/lem-pc-ring-pseudo-coherent-localization-glue (reviewer FIX; after a return; new nodes: 2)
 - 00:36 L: merged deliver/H1/lem-pc-coherent-property-irreducible (reviewer FIX; first push; new nodes: 0)
+- 00:36 UTC L: E1 ring-pseudo-coherent-localization-glue FIX 051657da7 third push (R-pcg0034; proof rewritten in four TeX steps, source 064U).
