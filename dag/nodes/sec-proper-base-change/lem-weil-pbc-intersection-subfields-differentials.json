@@ -172,5 +172,24 @@
   "worker": "stage1",
   "summary": "Checked against Stacks More on Algebra 07P4 (lemma-intersection-subfields, line 11458) and its proof, with 07P2 and 07P3; statement kept. Proof in 5 steps: a p-basis of K over F_p and the basis dx_i of Omega_{K/F_p} (existing nodes for 07P2 existence and (a)=>(b)); (1) by contradiction, the relations among the x^E forming a subspace V that meets every K_alpha^N by 07P2 (1)=>(2) for K/K_alpha (new node) and hence (K^p)^N by 07P3 (new node, with the nonempty index set made explicit and derived here from omega != 0); (2) by induction on [L:K] with the tower reduction of the source (tower law leaf), then the two cases theta^p not in K and theta^p in K (split this way instead of separable/inseparable, which avoids separability), each with L^pK_alpha identified and the intersection computed via a new Mathlib leaf for the power basis of a simple algebraic extension (Fields 09GN; IntermediateField.adjoin.powerBasis). Source error: in the case theta^p = t in K the source writes L^pK_alpha = sum_j K_alpha t^j as a direct sum, which fails when t is in K_alpha (K = F_p(s,u), K_1 = K^p(s), t = s: L^pK_1 = K_1 has degree p over K^p, not p^2); the conclusion holds by an argument using (iii), written out. 3 new nodes (2 unsplit, 1 Mathlib leaf)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07P4 via 07P2 (1)=>(2) and 07P3 (both new unsplit nodes) for (1), and the tower induction with the two primitive cases for (2) (power basis: new Mathlib leaf); the source's direct-sum claim in the case theta^p = t in K fails when t lies in some K_alpha (counterexample K = F_p(s,u), K_1 = K^p(s), t = s) and is replaced by the directedness argument of step 5; the nonemptiness needed by 07P3 is derived in step 2. Recorded in coord/HUMAN.md. No Mathlib match for the item."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07P4 via 07P2 (1)=>(2) and 07P3 (both new unsplit nodes) for (1), and the tower induction with the two primitive cases for (2) (power basis: new Mathlib leaf); the source's direct-sum claim in the case theta^p = t in K fails when t lies in some K_alpha (counterexample K = F_p(s,u), K_1 = K^p(s), t = s) and is replaced by the directedness argument of step 5; the nonemptiness needed by 07P3 is derived in step 2. Recorded in coord/HUMAN.md. No Mathlib match for the item.",
+ "lean": {
+  "module": "Sheaf.FieldTheory.IntersectionSubfieldsDifferentials",
+  "declaration": "FieldTheory.intersection_subfields_differentials",
+  "file": "lean/Sheaf/FieldTheory/IntersectionSubfieldsDifferentials.lean",
+  "statement": "theorem intersection_subfields_differentials (p : ℕ) [Fact p.Prime] (K : Type u) [Field K] [CharP K p] {ι : Type v} (Kα : ι → IntermediateField (ZMod p) K) (h₁ : ∀ α : ι, Set.range (fun x : K => x ^ p) ⊆ (Kα α : Set K)) (h₂ : Set.range (fun x : K => x ^ p) = ((⨅ α, Kα α : IntermediateField (ZMod p) K) : Set K)) (h₃ : ∀ α β : ι, ∃ γ : ι, Kα γ ≤ Kα α ⊓ Kα β) : (∀ ω : Ω[K⁄ZMod p], (∀ α : ι, KaehlerDifferential.map (ZMod p) (Kα α) K K ω = 0) → ω = 0) ∧ (∀ (L : Type w) [Field L] [Algebra K L] [FiniteDimensional K L], Set.range (fun x : L => x ^ p) = ⋂ α : ι, ((Subfield.closure (Set.range (fun x : L => x ^ p) ∪ (algebraMap K L '' (Kα α : Set K))) : Set L)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-isd1104"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-isd1104",
+  "group": "C1",
+  "result": "fix",
+  "note": "p prime, CharP K p; Kα family of subfields (IntermediateField over ZMod p); (i) K^p ⊆ Kα, (ii) K^p = ⨅ Kα, (iii) directed; (1) kernel of all KaehlerDifferential.map is 0; (2) L^p = ⋂ closure(L^p ∪ Kα) for finite L/K; no Nonempty, empty ι checked"
+ }
 }
