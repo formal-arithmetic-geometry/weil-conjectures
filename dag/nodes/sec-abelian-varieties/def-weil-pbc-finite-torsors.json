@@ -90,5 +90,28 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dft1817 (reviewer sub-agent of L); spot-checked: Statement vs Stacks 03AH: constant-sheaf action, M_Y x P -> P x P iso, local nonemptiness (empty sheaf excluded); finite-locally-constant clause redundant but harmless, defined in def-weil-pbc-etale-sheaves (lisse). No H^1 = torsors identification claimed, so no lem-sc-torsor-h1 citation needed. No new nodes; class (b): the item is a pre-existing imported node, consistent with def-constructible-torsor (non-commutative G) and def-sc-gm-torsor general clause (abelian G), of which it is the case G = M_Y. B10: slopmaster2 CategoryTheory.Sheaf.Torsor (Sites/Torsor.lean:80) is the general-site abelian torsor (states def-sc-gm-torsor), not this statement exactly (needs G := constant sheaf on Y_et, no finiteness clause); Scheme.EtaleTorsor (Morphisms/EtaleTorsor.lean:112) is the scheme-level finite etale form, not the sheaf-level statement; no attachment. Second reading by M1: no fault missed."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+  "declaration": "CategoryTheory.Sheaf.Torsor",
+  "declarations": [
+   "CategoryTheory.Sheaf.Torsor",
+   "CategoryTheory.Sheaf.Torsor.setoid",
+   "CategoryTheory.Sheaf.Torsor.trivial"
+  ],
+  "statement": "structure Torsor (G : Sheaf J AddCommGrpCat.{w})",
+  "branch": "slopmaster2",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "For Y : Scheme.{u} and M : Type (u + 1) with [AddCommGroup M] [Finite M], use G = (constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M). Tor^1(Y,M) = Quotient (CategoryTheory.Sheaf.Torsor.setoid (G := G)), with base point the class of CategoryTheory.Sheaf.Torsor.trivial G. The finite-locally-constant clause is automatic by AlgebraicGeometry.Scheme.EtaleTorsor.isFiniteLocallyConstantSheafOfTypes_sheaf in WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent; it is not an additional condition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ftr1145",
+  "group": "G1",
+  "result": "pass",
+  "note": "existing slopmaster2 CategoryTheory.Sheaf.Torsor at G = constantSheaf Y_et of M (#check verified): action+laws, bijective_vadd = (m,p)->(m+p,p) iso, nonemptySieve_mem = local sections (03AH); finite-locally-constant clause automatic by Scheme.EtaleTorsor.isFiniteLocallyConstantSheafOfTypes_sheaf (binders only finite abelian M, any Y); Tor^1 = Quotient Torsor.setoid (equivariant iso) based at trivial G; no private copy, return R-ftr1046 points all repaired"
  }
 }
