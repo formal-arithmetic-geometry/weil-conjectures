@@ -144,5 +144,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sgp3012 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: C4/E (missed by F1's second reading): Steps 1-2 treated x_s: Spec kappa(x)^s -> X as a geometric point and took the stalk (i^{-1}F)_{x_s}; def-weil-geometric-point requires Omega algebraically closed, so that stalk is undefined and lem-weil-pbc-inverse-image-stalk-germ was misapplied (also i^{-1}F placed on Spec kappa(x)^s, and x = i o Spec(e) ill-typed). Repaired: G = s^{-1}F on Y = Spec kappa(x)^s, stalk-germ lemma at the geometric points Spec(e), Spec(e') of Y gives G_y = F_x, G_y' = F_x'; existing lem-weil-pbc-strictly-henselian-sections-stalk (kappa(x)^s strictly henselian, elementary from def-weil-pbc-henselian-terminology) gives G(Y) = G_y = G_y'. Checked embedding-leaf hypotheses (separable min polys split in alg. closed Omega), def-kun-support uses some-geometric-point stalk definition and only notes this lemma; statement matches citers. uses/proof_deps updated.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricStalkSupport",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_sheafFiber_iff_of_same_image",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricStalkSupport.lean",
+  "statement": "theorem isZero_sheafFiber_iff_of_same_image {X : Scheme.{u}} {Ω Ω' : Type u} [Field Ω] [IsAlgClosed Ω] [Field Ω'] [IsAlgClosed Ω'] (s : Spec (.of Ω) ⟶ X) (s' : Spec (.of Ω') ⟶ X) (h : s default = s' default) (F : Sheaf X.smallEtaleTopology Ab.{u + 1}) : IsZero ((pointSmallEtale s).sheafFiber.obj F) ↔ IsZero ((pointSmallEtale s').sheafFiber.obj F)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sgp0815",
+  "group": "J1",
+  "result": "pass",
+  "note": "X : Scheme.{u}; geometric points as s : Spec Ω ⟶ X, s' : Spec Ω' ⟶ X with Ω, Ω' algebraically closed exactly as def-weil-geometric-point (pointSmallEtale accepts via IsAlgClosed->IsSepClosed); x as h : s default = s' default; F abelian étale sheaf Ab.{u+1} = AddCommGrpCat.{u+1} as in merged files; F_x=0 <-> F_x'=0 as IsZero of sheafFiber.obj both sides; support clause a corollary (def-kun-support unrecorded); docstring has node proof; no Mathlib/source equivalent (pointSmallEtaleCongr only for isomorphic Spec)"
  }
 }

@@ -3546,3 +3546,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:42 L: merged deliver/J1/lem-pc-principal-open-dense-of-nonzerodivisor (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PrincipalOpenDenseOfNonZeroDivisor PrimeSpectrum.dense_basicOpen_of_mem_nonZeroDivisors)
 - 06:42 L: merged deliver/J1/lem-pc-finite-flat-restriction-projective (stage 2; reviewer FIX; first push; Sheaf.Algebra.FiniteFlatRestrictionProjective Module.finite_flat_restriction_projective)
 - 06:44 L: merged deliver/K1/lem-exc-rg-adjoint-transfer-functorial-injectives (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives CategoryTheory.adjunction_transfer_functorial_injective_embeddings)
+- 06:44 L: merged deliver/J1/lem-kun-support-geometric-point-independent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GeometricStalkSupport AlgebraicGeometry.Scheme.isZero_sheafFiber_iff_of_same_image)
