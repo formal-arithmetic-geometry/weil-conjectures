@@ -5,10 +5,13 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.Compactification.Over
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 
 /-!
 
@@ -31,32 +34,45 @@ type over `Spec k` (`[X.Over (Spec (.of k))]` with `X ↘ Spec k` locally of fin
 quasi-compact and separated), and all morphisms are morphisms over `Spec k`
 (`[f.IsOver (Spec (.of k))]`). No further hypothesis is imposed on the schemes or morphisms. In
 particular every such morphism has a compactification, by Nagata's theorem
-(`AlgebraicGeometry.HasCompactification.of_isOver`), which is what defines `Rf_!` and `Rf^!`.
+(`AlgebraicGeometry.HasCompactification.of_isOver`), with the choice
+`compactificationOverField k f`.
 
 | functor | restriction |
 | --- | --- |
 | `Lf^* = L((f)^*⟦Λ⟧)` | `boundedConstructibleUpperStar` |
 | `Rf_* = R((f)_*⟦Λ⟧)` | `boundedConstructibleLowerStar` |
-| `Rf_! = R(f)_!⟦Λ⟧` | `boundedConstructibleLowerShriek` |
 | `j_! = D((j)_!open⟦Λ⟧)`, `j` an open immersion | `boundedConstructibleOpenImmersionLowerShriek` |
-| `Rf^! = R(f)^!⟦Λ⟧` | `boundedConstructibleUpperShriek` |
 | `- ⊗ᴸ -` | `boundedConstructibleTensor` |
 | `RHom(-, -)` | `boundedConstructibleHom` |
 
 Each restriction is the `ObjectProperty.lift` of the composite of the inclusion with the functor
 on the ambient derived category, so it is compatible with the inclusions by construction
-(`ObjectProperty.liftCompιIso`). The adjunctions `Lf^* ⊣ Rf_*`, `j_! ⊣ j^*`, `Rf_! ⊣ Rf^!` and
+(`ObjectProperty.liftCompιIso`).
+
+The derived lower shriek is not a restriction: it is assembled on bounded constructible
+complexes out of the functors above. For a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`,
+`Rf_!^c := i_! ⋙ Rp_*` (`boundedConstructibleLowerShriekOfCompactification`), and `Rf_!` is
+`Rf_!^c` for the chosen compactification `compactificationOverField k f`
+(`boundedConstructibleLowerShriek`). Both are compatible with the derived lower shrieks
+`Rf_!(c)⟦Λ⟧` and `R(f)_!⟦Λ⟧` on the ambient derived categories
+(`boundedConstructibleLowerShriekOfCompactificationCompatibility`,
+`boundedConstructibleLowerShriekCompatibility`).
+
+The adjunctions `Lf^* ⊣ Rf_*`, `j_! ⊣ j^*` and
 `K ⊗ᴸ - ⊣ RHom(K, -)` restrict along the fully faithful inclusions
 (`Adjunction.restrictFullyFaithful`), and so does the composition isomorphism
 `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`).
+
+The exceptional inverse image `Rf^!` is not the restriction of a functor on the ambient derived
+category: it is constructed on bounded constructible complexes directly, for the `ℓ`-adic
+coefficient rings `E̲` and `ℚ̲̄_ℓ`, in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek`.
 
 ## Sorried input
 
 That the six functors preserve bounded constructible complexes is `sorry`ed:
 `boundedConstructible_leftDerivedUpperStar_obj`, `boundedConstructible_rightDerivedLowerStar_obj`,
-`boundedConstructible_openImmersionLowerShriek_obj`,
-`boundedConstructible_rightDerivedLowerShriek_obj`,
-`boundedConstructible_rightDerivedUpperShriek_obj`, `boundedConstructible_derivedTensor_obj` and
+`boundedConstructible_openImmersionLowerShriek_obj`, `boundedConstructible_derivedTensor_obj` and
 `boundedConstructible_derivedHom_obj`.
 
 These are theorems for the `ℓ`-adic coefficient rings, the condensed rings `E̲` of a finite
@@ -218,7 +234,19 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunctio
 
 end OpenImmersion
 
-/-! ### The exceptional functors -/
+/-! ### The derived lower shriek -/
+
+/-- The compactification of a morphism `f` of separated `k`-schemes of finite type chosen by
+Nagata's theorem (`AlgebraicGeometry.HasCompactification.of_isOver`): the compactification
+`HasCompactification.compactification f` for the instance it provides. It is the
+compactification defining `boundedConstructibleLowerShriek`. -/
+noncomputable abbrev compactificationOverField (k : Type u) [Field k] {X Y : Scheme.{u}}
+    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
+    [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] : Compactification f :=
+  haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
+  HasCompactification.compactification f
 
 section Shriek
 
@@ -228,68 +256,56 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
   [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
   [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))]
   [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
-  (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
 
-/-- The derived lower shriek `Rf_!` on module objects over `Λ` preserves bounded
-constructible complexes. -/
-lemma boundedConstructible_rightDerivedLowerShriek_obj
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)))
-    (hK : boundedConstructible (condensedRingObj Λ X) K) :
-    haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
-    boundedConstructible (condensedRingObj Λ Y) ((R(f)_!⟦Λ⟧).obj K) :=
-  sorry
+section OfCompactification
+
+variable {f : X ⟶ Y} [f.IsOver (Spec (.of k))] (c : Compactification f)
+
+/-- The lower shriek `Rf_!^c = i_! ⋙ Rp_* : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible
+complexes attached to a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`: the extension by zero
+along the open immersion `i` followed by the derived pushforward along the proper morphism `p`,
+both on bounded constructible complexes. -/
+noncomputable def boundedConstructibleLowerShriekOfCompactification : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧ :=
+  boundedConstructibleOpenImmersionLowerShriek Λ ℓ k c.i ⋙ boundedConstructibleLowerStar Λ ℓ k c.g
+
+/-- `Rf_!^c` on bounded constructible complexes is the restriction of the derived lower shriek
+`Rf_!(c)⟦Λ⟧` on the ambient derived categories. -/
+noncomputable def boundedConstructibleLowerShriekOfCompactificationCompatibility :
+    boundedConstructibleLowerShriekOfCompactification Λ ℓ k c ⋙ (boundedConstructible _).ι ≅
+      (boundedConstructible _).ι ⋙ Rf_!(c)⟦Λ⟧ :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility Λ ℓ k c.g) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ k c.i)
+      _ ≪≫
+    Functor.associator _ _ _
+
+end OfCompactification
+
+variable (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
 
 /-- The derived lower shriek `Rf_! : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible complexes:
-the restriction of `R(f)_!⟦Λ⟧`. -/
+the functor `boundedConstructibleLowerShriekOfCompactification` attached to the compactification
+`compactificationOverField k f` chosen by Nagata's theorem. -/
 noncomputable def boundedConstructibleLowerShriek : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧ :=
-  haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
-  (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R(f)_!⟦Λ⟧)
-    fun K ↦ boundedConstructible_rightDerivedLowerShriek_obj Λ ℓ k f K.obj K.property
+  boundedConstructibleLowerShriekOfCompactification Λ ℓ k (compactificationOverField k f)
 
-/-- The restricted derived lower shriek is compatible with the inclusions. -/
+lemma boundedConstructibleLowerShriek_eq :
+    boundedConstructibleLowerShriek Λ ℓ k f =
+      boundedConstructibleLowerShriekOfCompactification Λ ℓ k (compactificationOverField k f) :=
+  rfl
+
+/-- The derived lower shriek on bounded constructible complexes is the restriction of the
+derived lower shriek `R(f)_!⟦Λ⟧` on the ambient derived categories. -/
 noncomputable def boundedConstructibleLowerShriekCompatibility :
     haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
     boundedConstructibleLowerShriek Λ ℓ k f ⋙ (boundedConstructible _).ι ≅
       (boundedConstructible _).ι ⋙ R(f)_!⟦Λ⟧ :=
-  ObjectProperty.liftCompιIso _ _ _
-
-/-- The exceptional inverse image `Rf^!` on module objects over `Λ` preserves bounded
-constructible complexes. -/
-lemma boundedConstructible_rightDerivedUpperShriek_obj
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y)))
-    (hK : boundedConstructible (condensedRingObj Λ Y) K) :
-    haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
-    boundedConstructible (condensedRingObj Λ X) ((R(f)^!⟦Λ⟧).obj K) :=
-  sorry
-
-/-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded constructible
-complexes: the restriction of `R(f)^!⟦Λ⟧`. -/
-noncomputable def boundedConstructibleUpperShriek : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ :=
-  haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
-  (boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R(f)^!⟦Λ⟧)
-    fun K ↦ boundedConstructible_rightDerivedUpperShriek_obj Λ ℓ k f K.obj K.property
-
-/-- The restricted exceptional inverse image is compatible with the inclusions. -/
-noncomputable def boundedConstructibleUpperShriekCompatibility :
-    haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
-    boundedConstructibleUpperShriek Λ ℓ k f ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ R(f)^!⟦Λ⟧ :=
-  ObjectProperty.liftCompιIso _ _ _
-
-/-- The adjunction `Rf_! ⊣ Rf^!` on bounded constructible complexes: the restriction of
-`ProEtale.CondensedRing.rightDerivedUpperShriekAdjunction` along the fully faithful
-inclusions. -/
-noncomputable def boundedConstructibleUpperShriekAdjunction :
-    boundedConstructibleLowerShriek Λ ℓ k f ⊣ boundedConstructibleUpperShriek Λ ℓ k f :=
-  haveI := HasCompactification.of_isOver (S := Spec (.of k)) f
-  Adjunction.restrictFullyFaithful (rightDerivedUpperShriekAdjunction Λ f)
-    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
-    (boundedConstructibleLowerShriekCompatibility Λ ℓ k f).symm
-    (boundedConstructibleUpperShriekCompatibility Λ ℓ k f).symm
+  boundedConstructibleLowerShriekOfCompactificationCompatibility Λ ℓ k
+    (compactificationOverField k f)
 
 end Shriek
+
 
 /-! ### The derived tensor product and the derived hom -/
 

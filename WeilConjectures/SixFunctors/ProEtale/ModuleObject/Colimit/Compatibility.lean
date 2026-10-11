@@ -83,7 +83,7 @@ variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. -/
 noncomputable abbrev padicSubfieldRingObj (E : FiniteIntermediateField ℓ) :
     Sheaf (ProEt.topology X) Ab.{u + 1} :=
-  condensedRingObj (Profinite.padicSubfieldRingObj ℓ E) X
+  condensedRingObj (Profinite.continuousMapRingObj E) X
 
 /-- The coefficient ring object `ℚ̄_ℓ,X = p_X^* ℚ̲̄_ℓ` on `X_proét`. -/
 noncomputable abbrev padicAlgClRingObj : Sheaf (ProEt.topology X) Ab.{u + 1} :=
