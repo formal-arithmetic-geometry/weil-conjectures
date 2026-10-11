@@ -206,5 +206,24 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following the last paragraph of Stacks 00SC (1)=>(4): the prime of S_g and its localization; d = m - t via the open immersion Spec S_g -> Spec S and the equidimensionality of global complete intersections (new unsplit node, Section 00S8); the f_i form a regular sequence in k[y]_{q''} (new unsplit node from the proof of 00SB) and J/J^2 is free on them (new unsplit 00LN (1) node); localization of the conormal module; the comparison (I/I^2)_g + S_g^m = J/J^2 + S_g^n (new unsplit 00S6 node); a direct summand of a finite free module over the local ring S_q is free, of rank t + n - m = n - d >= 0. L checked the two new statements on the source: all components of a global complete intersection have dimension m - t, and t elements generating an ideal of height t in a Cohen-Macaulay local ring form a regular sequence."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LciConormalFreeRankCodimension",
+  "declaration": "Ideal.exists_basis_cotangent_localization_of_completeIntersection",
+  "file": "lean/Sheaf/RingTheory/LciConormalFreeRankCodimension.lean",
+  "statement": "theorem exists_basis_cotangent_localization_of_completeIntersection {k : Type u} [Field k] (n : ℕ) (I : Ideal (MvPolynomial (Fin n) k)) (q : PrimeSpectrum (MvPolynomial (Fin n) k ⧸ I)) (hci : ∃ g : MvPolynomial (Fin n) k ⧸ I, g ∉ q.asIdeal ∧ Algebra.IsGlobalCompleteIntersection k (Localization.Away g)) : ∃ d : ℕ, topologicalKrullDimAt q = (d : WithBot ℕ∞) ∧ d ≤ n ∧ Nonempty (Module.Basis (Fin (n - d)) (Localization.AtPrime q.asIdeal) (LocalizedModule q.asIdeal.primeCompl I.Cotangent))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-lcf1105"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lcf1105",
+  "group": "E1",
+  "result": "fix",
+  "note": "k field/Type u; n:ℕ; P=MvPolynomial (Fin n) k; I ideal; S=P⧸I literal; q:PrimeSpectrum S; ∃g∉q with landed Algebra.IsGlobalCompleteIntersection k (Localization.Away g) (00S9 incl. zero ring); d via topologicalKrullDimAt (not local-ring dim), d:ℕ, d≤n; I.Cotangent localized at q.primeCompl with Basis Fin (n-d) over Localization.AtPrime (free of rank n-d, finite); truth checked via equidimensionality; dead local instance moduleOfIsLocalization removed (synth picks OreLocalization.instModule anyway)"
  }
 }
