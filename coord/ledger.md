@@ -5155,3 +5155,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:10 L: merged deliver/C1/thm-pqf-zmt-factorization (stage 2; reviewer PASS; first push; WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite; existing declaration)
 - 15:10 L: merged deliver/C1/lem-sp-couple-morphism (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.ExactCoupleMorphism CategoryTheory.BigradedExactCouple.coupleMorphism)
 - 15:10 L: merged deliver/V1/lemma-weil-pbc-torsion-filtered-union (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TorsionFilteredUnion AlgebraicGeometry.Scheme.isTorsionAbelianSheaf_of_isTorsion)
+- 15:11 L: merged deliver/E1/lem-pc-sigma-k-points (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Picard.SigmaKPoints AlgebraicGeometry.bijective_picardFunctorNormalized_kPoints)

@@ -111,5 +111,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-skp1834 (reviewer sub-agent of L); spot-checked: Repairs of return 18:23 checked: (1) def-pc-pic-sigma-functor now in stmt_deps, proof_deps and step 1 uses, X_{Spec k}=X and sigma_{Spec k}=sigma stated; no cycle (def's stmt_deps on sheaf-dag no longer list the item). (2) 'closed immersion' removed; sigma^*L invertible on Spec k, trivial by lem-pc-pic-of-field, valid for any k-point. (3) report corrected: blueprint.from stays null. C/D/E: step proves statement; kernel of zero map is Pic(X)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Picard.SigmaKPoints",
+  "declaration": "AlgebraicGeometry.bijective_picardFunctorNormalized_kPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/SigmaKPoints.lean",
+  "statement": "theorem bijective_picardFunctorNormalized_kPoints (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ (X ↘ Spec (.of k)) = 𝟙 (Spec (.of k))) : Function.Bijective (fun L : (picardFunctorNormalized (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (.op (Over.mk (𝟙 (Spec (.of k))))) ↦ Scheme.Pic.map (inv (pullback.fst (X ↘ Spec (.of k)) (𝟙 (Spec (.of k))))) L.val)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
