@@ -23,8 +23,6 @@ locally constant sheaves, and such morphisms are determined along `i`
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_constantSheaf`: a constant sheaf with
-  finitely generated value is finite locally constant.
 - `AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_map_eq_of_isInvertible`: two
   isomorphisms out of an invertible complex agreeing after `Li^*` are equal.
 -/
@@ -83,28 +81,6 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
-/-- A constant sheaf of `Λ`-modules with finitely generated value is finite locally constant:
-it is trivialised by the identity cover, and its stalks are its value. -/
-instance isFiniteLocallyConstantSheaf_constantSheaf (N : ModuleCat.{u + 1} Λ)
-    [Module.Finite Λ N] :
-    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
-      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N) := by
-  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
-    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
-  have : ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N).IsConstant
-      X.smallEtaleTopology := Sheaf.isConstant_of_iso _ (Iso.refl _)
-  have : IsLocallyConstantSheaf
-      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N) :=
-    ⟨⟨⟨Cover.mkOfCovers PUnit (fun _ ↦ X) (fun _ ↦ 𝟙 X) (fun x ↦ ⟨⟨⟩, x, rfl⟩)
-      (fun _ ↦ inferInstance), fun _ ↦
-      (isConstant_over_iff_upperStar _ _ _).2 (Sheaf.IsConstant.upperStar (X := X) _ _ _)⟩⟩⟩
-  have : IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
-      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N) :=
-    ⟨fun Ω _ _ s ↦ ((ModuleCat.isFinitelyGenerated_iff N).2 inferInstance).of_iso
-      ((pointSmallEtale s).sheafFiberConstantSheafIso N).symm⟩
-  exact {}
 variable {Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   (hi : ∀ x : X, ∃ S : Set X, _root_.IsPreconnected S ∧ x ∈ S ∧ (S ∩ Set.range i.base).Nonempty)
 
@@ -118,7 +94,7 @@ lemma eq_id_of_leftDerivedUpperStar_map_eq_id
   let U := 𝟙_ (Sheaf X.smallEtaleTopology A)
   have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) U :=
-    isFiniteLocallyConstantSheaf_constantSheaf (𝟙_ A)
+    Scheme.isFiniteLocallyConstantSheaf_constantSheaf (𝟙_ A)
   let u := singleFunctorObjUnitIso A X
   let S := DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0
   obtain ⟨δ₀, hδ₀⟩ := S.map_surjective (u.hom ≫ δ ≫ u.inv)
