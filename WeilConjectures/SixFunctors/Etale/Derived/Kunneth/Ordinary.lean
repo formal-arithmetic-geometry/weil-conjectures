@@ -101,6 +101,68 @@ noncomputable def kunnethMap (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y �
       ((-⊗ᴸ-(W)[A]).obj _).map ((leftDerivedUpperStarComp A q g c hq.symm).hom.app _ ≫
           L((q)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app K)))
 
+/-- Blueprint `lem-kun-kunneth-map-natural`: the Künneth map is natural in both variables. -/
+@[reassoc]
+lemma kunnethMap_naturality (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)
+    (hp : p ≫ f = c) (hq : q ≫ g = c)
+    {E E' : DerivedCategory (Sheaf X.smallEtaleTopology A)}
+    {K K' : DerivedCategory (Sheaf Y.smallEtaleTopology A)} (φ : E ⟶ E') (ψ : K ⟶ K') :
+    ((-⊗ᴸ-(S)[A]).map (R((f)_*[A]).map φ)).app _ ≫
+        ((-⊗ᴸ-(S)[A]).obj _).map (R((g)_*[A]).map ψ) ≫ kunnethMap A p q f g c hp hq E' K' =
+      kunnethMap A p q f g c hp hq E K ≫ R((c)_*[A]).map
+        (((-⊗ᴸ-(W)[A]).map (L((p)^*[A]).map φ)).app _ ≫
+          ((-⊗ᴸ-(W)[A]).obj _).map (L((q)^*[A]).map ψ)) := by
+  rw [kunnethMap, kunnethMap, ← Adjunction.homEquiv_naturality_left,
+    ← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_right]
+  congr 1
+  have h₁ := NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A c).naturality
+    (R((f)_*[A]).map φ)) (R((g)_*[A]).obj K)
+  have h₂ := ((leftDerivedUpperStarTensorComparison A c).app
+    (R((f)_*[A]).obj E')).naturality (R((g)_*[A]).map ψ)
+  simp only [Functor.map_comp, Category.assoc] at h₁ h₂ ⊢
+  have hu : ∀ {E E' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (φ : E ⟶ E'),
+      L((c)^*[A]).map (R((f)_*[A]).map φ) ≫
+        (leftDerivedUpperStarComp A p f c hp.symm).hom.app _ ≫
+          L((p)^*[A]).map ((derivedUpperStarLowerStarAdjunction A f).counit.app E') =
+      ((leftDerivedUpperStarComp A p f c hp.symm).hom.app _ ≫
+          L((p)^*[A]).map ((derivedUpperStarLowerStarAdjunction A f).counit.app E)) ≫
+        L((p)^*[A]).map φ := fun φ ↦ by
+    rw [NatTrans.naturality_assoc]
+    simp only [Functor.comp_map, Category.assoc, ← Functor.map_comp]
+    congr 2
+    exact (derivedUpperStarLowerStarAdjunction A _).counit.naturality _
+  have hv : ∀ {K K' : DerivedCategory (Sheaf Y.smallEtaleTopology A)} (ψ : K ⟶ K'),
+      L((c)^*[A]).map (R((g)_*[A]).map ψ) ≫
+        (leftDerivedUpperStarComp A q g c hq.symm).hom.app _ ≫
+          L((q)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app K') =
+      ((leftDerivedUpperStarComp A q g c hq.symm).hom.app _ ≫
+          L((q)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app K)) ≫
+        L((q)^*[A]).map ψ := fun ψ ↦ by
+    rw [NatTrans.naturality_assoc]
+    simp only [Functor.comp_map, Category.assoc, ← Functor.map_comp]
+    congr 2
+    exact (derivedUpperStarLowerStarAdjunction A _).counit.naturality _
+  simp only [derivedTensor, curriedTensor_obj_map, curriedTensor_map_app, NatTrans.comp_app,
+    Category.assoc, leftDerivedUpperStarDerivedTensor, derivedTensorLeftDerivedUpperStar] at
+    h₁ h₂ hu hv ⊢
+  have h₁' : L((c)^*[A]).map (R((f)_*[A]).map φ ▷ R((g)_*[A]).obj K) ≫
+      ((leftDerivedUpperStarTensorComparison A c).app (R((f)_*[A]).obj E')).app
+        (R((g)_*[A]).obj K) =
+      ((leftDerivedUpperStarTensorComparison A c).app (R((f)_*[A]).obj E)).app
+        (R((g)_*[A]).obj K) ≫
+        L((c)^*[A]).map (R((f)_*[A]).map φ) ▷ L((c)^*[A]).obj (R((g)_*[A]).obj K) := h₁
+  have h₂' : L((c)^*[A]).map (R((f)_*[A]).obj E' ◁ R((g)_*[A]).map ψ) ≫
+      ((leftDerivedUpperStarTensorComparison A c).app (R((f)_*[A]).obj E')).app
+        (R((g)_*[A]).obj K') =
+      ((leftDerivedUpperStarTensorComparison A c).app (R((f)_*[A]).obj E')).app
+        (R((g)_*[A]).obj K) ≫
+        L((c)^*[A]).obj (R((f)_*[A]).obj E') ◁ L((c)^*[A]).map (R((g)_*[A]).map ψ) := h₂
+  rw [reassoc_of% h₂', reassoc_of% h₁']
+  congr 1
+  simp only [Functor.id_obj, whisker_exchange_assoc]
+  simp only [← comp_whiskerRight_assoc, ← whiskerLeft_comp]
+  rw [hu, hv]
+
 variable {X' S' T : Scheme.{u}}
 
 /-- The base change map for a pushforward tensored with a complex (`lem-kun-0f1j`,
