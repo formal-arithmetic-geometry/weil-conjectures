@@ -184,4 +184,135 @@ theorem IsLocallyConstantSheaf.of_shortExact_of_lift
 
 end Lift
 
+section Extension
+
+variable {X : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ] [IsNoetherianRing Λ]
+
+omit [IsNoetherianRing Λ] in
+/-- A constant sheaf of `Λ`-modules with finitely generated value is finite locally constant. -/
+lemma isFiniteLocallyConstantSheaf_constantSheaf (N : ModuleCat.{u + 1} Λ) [Module.Finite Λ N] :
+    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N) := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have : ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N).IsConstant
+      X.smallEtaleTopology := Sheaf.isConstant_of_iso _ (Iso.refl _)
+  have : IsLocallyConstantSheaf
+      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N) :=
+    ⟨⟨⟨Cover.mkOfCovers PUnit (fun _ ↦ X) (fun _ ↦ 𝟙 X) (fun x ↦ ⟨⟨⟩, x, rfl⟩)
+      (fun _ ↦ inferInstance), fun _ ↦
+      (isConstant_over_iff_upperStar _ _ _).2 (Sheaf.IsConstant.upperStar (X := X) _ _ _)⟩⟩⟩
+  have : IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N) :=
+    ⟨fun Ω _ _ s ↦ ((ModuleCat.isFinitelyGenerated_iff N).2 inferInstance).of_iso
+      ((pointSmallEtale s).sheafFiberConstantSheafIso N).symm⟩
+  exact {}
+
+open Limits in
+/-- Blueprint `lemma-constructible-flc-serre`, extension clause, over a noetherian ring: **the
+middle term of a short exact sequence of sheaves of modules over a noetherian ring whose outer
+terms are finite locally constant is finite locally constant.** Étale locally the outer terms
+are constant, at finitely generated modules `M` and `N`; on a further étale cover a free module
+mapping onto `N` lifts to the middle term, which is then the cokernel of a morphism between
+finite locally constant sheaves. -/
+theorem IsFiniteLocallyConstantSheaf.of_shortExact_of_isNoetherianRing
+    {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]
+    [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :
+    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₂ where
+  toIsFiniteSheaf := IsFiniteSheaf.of_shortExact hS
+  toIsLocallyConstantSheaf := by
+    obtain ⟨𝒰₀, h𝒰₀⟩ := IsLocallyConstantSheaf.exists_cover₂ S.X₁ S.X₃
+    let 𝒰 := 𝒰₀.nonemptyMembers
+    have key (i : 𝒰.I₀) :
+        IsLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f i)).obj S.X₂) := by
+      set Y := 𝒰.X i
+      set g := 𝒰.f i
+      let SY := S.map (Etale.upperStar (ModuleCat.{u + 1} Λ) g)
+      have hSY : SY.ShortExact := hS.map_of_exact _
+      have h₁ : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) SY.X₁ :=
+        IsFiniteLocallyConstantSheaf.upperStar g S.X₁
+      have h₃ : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) SY.X₃ :=
+        IsFiniteLocallyConstantSheaf.upperStar g S.X₃
+      have hC : (SY.X₃).IsConstant Y.smallEtaleTopology := (h𝒰₀ i.1).2
+      obtain ⟨N, ⟨e₃⟩⟩ := SY.X₃.mem_essImage_of_isConstant
+      have : IsFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N) :=
+        IsFiniteSheaf.of_iso (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) e₃.symm
+      have : Module.Finite Λ N := moduleFinite_of_isFiniteSheaf_constantSheaf (Y := Y) N
+      obtain ⟨n, v, hv⟩ := Module.Finite.exists_fin (R := Λ) (M := N)
+      let ι := ULift.{u + 1} (Fin n)
+      let π : (ι →₀ Λ) →ₗ[Λ] N := Finsupp.linearCombination Λ (v ∘ ULift.down)
+      have hπ : Function.Surjective π := by
+        rw [← LinearMap.range_eq_top, Finsupp.range_linearCombination, Set.range_comp,
+          ULift.down_surjective.range_eq, Set.image_univ, hv]
+      let F := ModuleCat.of Λ (ι →₀ Λ)
+      let q : (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj F ⟶ SY.X₃ :=
+        (constantSheaf _ _).map (ModuleCat.ofHom π) ≫ e₃.hom
+      have : Epi (ModuleCat.ofHom π) := (ModuleCat.epi_iff_surjective _).2 hπ
+      have : (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).IsLeftAdjoint :=
+        (constantSheafAdj _ _ terminalIsTerminal).isLeftAdjoint
+      have hq : Epi q := epi_comp _ _
+      have := hSY.epi_g
+      obtain ⟨R, hR, hlift⟩ := exists_mem_forall_exists_lift_constantSheafOverHom
+        Y.smallEtaleTopology q SY.g (Etale.mk (𝟙 Y))
+      suffices h : ∀ y, IsLocallyConstantSheaf
+          ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((Cover.ofSieve R hR).f y)).obj SY.X₂) from
+        IsLocallyConstantSheaf.of_cover (Cover.ofSieve R hR) SY.X₂
+      intro y
+      set V := Cover.ofSieveObj R hR y
+      obtain ⟨s, hs⟩ := hlift (Cover.ofSieveHom R hR y) (Cover.ofSieveHom_mem R hR y)
+      let Φ := (Etale.overSheafEquiv V (ModuleCat.{u + 1} Λ)).functor
+      let T := (SY.map (Y.smallEtaleTopology.overPullback (ModuleCat.{u + 1} Λ) V)).map Φ
+      have hT : T.ShortExact := (hSY.map_of_exact _).map_of_exact _
+      have hT₁ : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) T.X₁ := by
+        have := IsFiniteLocallyConstantSheaf.upperStar
+          (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) V.hom SY.X₁
+        exact IsFiniteLocallyConstantSheaf.of_iso (overSheafEquivFunctorObjOverIso _ V SY.X₁).symm
+      have hT₃ : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) T.X₃ := by
+        have := IsFiniteLocallyConstantSheaf.upperStar
+          (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) V.hom SY.X₃
+        exact IsFiniteLocallyConstantSheaf.of_iso (overSheafEquivFunctorObjOverIso _ V SY.X₃).symm
+      let P := Φ.obj ((constantSheaf (Y.smallEtaleTopology.over V) (ModuleCat.{u + 1} Λ)).obj F)
+      have hP : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) P := by
+        have := isFiniteLocallyConstantSheaf_constantSheaf (X := Y) F
+        have := IsFiniteLocallyConstantSheaf.upperStar
+          (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+          (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) V.hom
+          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj F)
+        exact IsFiniteLocallyConstantSheaf.of_iso ((overSheafEquivFunctorObjOverIso _ V _).symm ≪≫
+          Φ.mapIso (asIso (constantSheafOverHom Y.smallEtaleTopology _ V F)).symm)
+      have hepi : Epi (Φ.map s ≫ T.g) := by
+        change Epi (Φ.map s ≫
+          Φ.map ((Y.smallEtaleTopology.overPullback (ModuleCat.{u + 1} Λ) V).map SY.g))
+        rw [← Φ.map_comp, hs, Φ.map_comp]
+        have : (Y.smallEtaleTopology.overPullback (ModuleCat.{u + 1} Λ) V).PreservesEpimorphisms :=
+          inferInstance
+        have h₁ : Epi (Φ.map (constantSheafOverHom Y.smallEtaleTopology _ V F)) := inferInstance
+        have h₂ : Epi (Φ.map ((Y.smallEtaleTopology.overPullback (ModuleCat.{u + 1} Λ) V).map q)) :=
+          Φ.map_epi _
+        exact epi_comp _ _
+      have hloc : IsLocallyConstantSheaf (Φ.obj (SY.X₂.over V)) :=
+        IsLocallyConstantSheaf.of_shortExact_of_lift hT (Φ.map s)
+      have := IsLocallyConstantSheaf.of_iso (overSheafEquivFunctorObjOverIso _ V SY.X₂)
+      rw [Cover.ofSieve_f, Cover.ofSieveHom_left]
+      exact this
+    exact IsLocallyConstantSheaf.of_cover 𝒰 S.X₂
+
+end Extension
+
 end AlgebraicGeometry.Scheme
