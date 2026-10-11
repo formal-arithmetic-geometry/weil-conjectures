@@ -1,17 +1,17 @@
 # Work queue
 
-463 items; claim with `tools/claim.py next <group> [--stage N]`.
+460 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (463)
+## Stage 2: nodes to state (460)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-derived-category-qcoh-algebra` | 1 | state |
 | `def-pc-perfect-complex` | 1 | state |
-| `def-weil-pbc-koszul-complex` | 1 | state |
+| `def-weil-pbc-koszul-regular-sequence` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-derived-module-free-generation` | 1 | state |
 | `lem-pc-derived-pullback-tensor-product` | 1 | state |
@@ -21,13 +21,12 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-dq-coherator-adjunction` | 1 | state |
 | `lem-pc-flat-complex-derived-pullback` | 1 | state |
-| `lem-pc-fp-relation-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-noetherian-bounded-coherent-pseudo-coherent` | 1 | state |
 | `lem-pc-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-pseudo-coherent-summand` | 1 | state |
 | `lem-pc-ringed-spaces-derived-pullback-composition` | 1 | state |
-| `lem-pc-tor-amplitude-qcoh-test` | 1 | state |
+| `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
 | `lem-sc-affine-pseudo-coherent-lift` | 1 | state |
 | `lem-sc-ass-weakass-fg-stalk` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
@@ -48,7 +47,6 @@
 | `lem-weil-pbc-affine-module-finite-type` | 1 | state |
 | `lem-weil-pbc-affine-morphism-relative-spec` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
-| `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1 | state |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
@@ -57,7 +55,6 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-polynomial-complete-local-formal-fibres` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
-| `lem-weil-pbc-polynomial-local-completion-formally-smooth` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-quotient-dimension-lower-bound` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1 | state |
@@ -473,7 +470,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 583 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 581 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
