@@ -1,11 +1,11 @@
 # Work queue
 
-523 items; claim with `tools/claim.py next <group> [--stage N]`.
+518 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (523)
+## Stage 2: nodes to state (518)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `lem-pc-quasi-coherent-extension` | 1 | state |
 | `lem-pc-relative-kill-by-twisting` | 1 | state |
 | `lem-pc-zero-support-finite-scheme` | 1 | state |
-| `lem-pqf-leray-five-term` | 1 | state |
 | `lem-sc-affine-cap-section-open-dictionary` | 1 | state |
 | `lem-sc-affine-section-localization` | 1 | state |
 | `lem-sc-ample-ideal-section` | 1 | state |
@@ -67,7 +66,6 @@
 | `lem-weil-pbc-coherent-sheaf-hom-coherent` | 1 | state |
 | `lem-weil-pbc-coherent-stalk-map-extends` | 1 | state |
 | `lem-weil-pbc-coherent-twist-global-generation` | 1 | state |
-| `lem-weil-pbc-descend-finite-locally-free` | 1 | state |
 | `lem-weil-pbc-etale-finite-data-descent` | 1 | state |
 | `lem-weil-pbc-finite-presentation-kernel-surjection-finite-type` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-coherent` | 1 | state |
@@ -86,14 +84,11 @@
 | `lem-weil-pbc-module-finite-type-submodule-extension` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-module-pullback-finite-type` | 1 | state |
-| `lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso` | 1 | state |
 | `lem-weil-pbc-module-sheaves-grothendieck-abelian` | 1 | state |
 | `lem-weil-pbc-module-stalk-exact` | 1 | state |
 | `lem-weil-pbc-module-stalk-tensor` | 1 | state |
 | `lem-weil-pbc-module-tensor-hom-adjunction` | 1 | state |
-| `lem-weil-pbc-n1-local-characterization` | 1 | state |
 | `lem-weil-pbc-n2-ascends-finite-domain-extension` | 1 | state |
-| `lem-weil-pbc-n2-char-p-purely-inseparable-criterion` | 1 | state |
 | `lem-weil-pbc-n2-descends-finite-domain-extension` | 1 | state |
 | `lem-weil-pbc-nagata-localization` | 1 | state |
 | `lem-weil-pbc-nagata-universally-japanese` | 1 | state |
