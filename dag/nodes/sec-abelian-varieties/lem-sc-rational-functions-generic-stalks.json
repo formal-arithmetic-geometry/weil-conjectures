@@ -173,5 +173,23 @@
   "summary": "Split following Stacks 01RV's proof exactly: the sets V_i = X minus the other components (Stacks' U_i) are open, contain eta_i, lie in X_i and are pairwise disjoint (needs X = union of components, Topology 004W, new Mathlib leaf lem-sc-irreducible-components-cover); a dense open meets each V_i hence contains each eta_i, and an open containing all eta_i is dense; the germ maps give a well-defined ring map on the colimit R(X); Stacks' equalities colim_{U dense} O(U) = colim prod O(U_i) = prod colim O(U_i) = prod O_{X,eta_i} are written out as injectivity (locality of the sheaf on the disjoint cover by W_i ⊆ V_i) and surjectivity (gluing germs on disjoint W_i ⊆ V_i). The integral case: X irreducible is its own only component, and O_{X,eta} is a field by the existing Mathlib leaf lem-sc-integral-function-field-affine-fraction (the 00EU step). Statement unchanged; stmt_deps unchanged. The reduced clause of 01RV (R(X) = prod kappa(eta_i)) is not in the statement and not proved. No slopmaster2 declaration states the item (grep by id, 01RV, rational function names): rule 0 does not apply; Mathlib has no ring of rational functions.",
   "blueprint": "The item is a created node serving def-sc-function-field's clause 'Equivalently it is the ring R(C) of rational functions on C: the germ map R(C) -> k(C) is a ring isomorphism' (steps 1-5) and 'for an integral curve ... k(C) = O_{C,eta} is a field' (step 6); def-sc-function-field is a definition with no proof text of its own, so these are clauses of its statement."
  },
- "reviewed": "2026-10-10 L: 6 steps along 01RV checked (opens V_i = X minus the other components; a dense open contains every generic point; the germ map well defined on the colimit; injective by locality on a disjoint cover; surjective by gluing; integral case via the affine-fraction leaf, the 00EU step). New Mathlib leaf lem-sc-irreducible-components-cover (004W (3),(4): Irreducible.lean 128/148/158, verified). The reduced clause of 01RV is not part of the item. LeanSearch down."
+ "reviewed": "2026-10-10 L: 6 steps along 01RV checked (opens V_i = X minus the other components; a dense open contains every generic point; the germ map well defined on the colimit; injective by locality on a disjoint cover; surjective by gluing; integral case via the affine-fraction leaf, the 00EU step). New Mathlib leaf lem-sc-irreducible-components-cover (004W (3),(4): Irreducible.lean 128/148/158, verified). The reduced clause of 01RV is not part of the item. LeanSearch down.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalFunctionsGenericStalks",
+  "declaration": "AlgebraicGeometry.Scheme.rationalFunctions_generic_stalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalFunctionsGenericStalks.lean",
+  "statement": "theorem rationalFunctions_generic_stalks (X : Scheme.{u}) (n : ℕ) (components : Fin n ≃ {Z : Set X // Z ∈ irreducibleComponents X}) (η : Fin n → X) (hη : ∀ i : Fin n, IsGenericPoint (η i) (components i).val) : ∃ hDense : ∀ (U : DenseOpens X) (i : Fin n), η i ∈ U.val, ∃ e : (X.rationalFunctionRing : Type u) ≃+* ((i : Fin n) → X.presheaf.stalk (η i)), (∀ (U : DenseOpens X) (f : Γ(X, U.val)) (i : Fin n), e ((colimit.ι (denseOpenSections X) (op U)) f) i = X.presheaf.germ U.val (η i) (hDense U i) f) ∧ (IsIntegral X → n = 1 ∧ (∀ i : Fin n, (components i).val = Set.univ) ∧ IsField (X.rationalFunctionRing : Type u) ∧ ∀ i : Fin n, IsField (X.presheaf.stalk (η i)) ∧ ∃ ei : (X.rationalFunctionRing : Type u) ≃+* X.presheaf.stalk (η i), ∀ r : X.rationalFunctionRing, ei r = e r i)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rfg1256",
+  "group": "M1",
+  "result": "pass",
+  "note": "X:Scheme.{u}; n+Fin n equiv irreducibleComponents; eta IsGenericPoint; dense opens contain eta (conclusion); e: rationalFunctionRing ≃+* Pi stalks with germ values on colimit.ι classes; IsIntegral (AlgebraicGeometry.IsIntegral by #check) -> n=1, X_1=univ, IsField R(X) and stalk, ei compatible; old rationalFunctions verified Scheme.{0} so rule (B) module justified"
+ }
 }

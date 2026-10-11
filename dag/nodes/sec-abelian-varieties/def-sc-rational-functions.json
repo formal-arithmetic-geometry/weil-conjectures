@@ -90,21 +90,22 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of M1; spot-checked by L: L: reviewed in full by a reviewer sub-agent (PASS): 01RS-01RV read, the claims inside the definition elementary, citers checked, no cycle"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.RationalFunctions",
-  "declaration": "AlgebraicGeometry.Scheme.rationalFunctions",
-  "file": "lean/Sheaf/AlgebraicGeometry/RationalFunctions.lean",
-  "statement": "def rationalFunctions (X : Scheme) : CommRingCat",
+  "module": "Sheaf.AlgebraicGeometry.RationalFunctionRing",
+  "declaration": "AlgebraicGeometry.Scheme.rationalFunctionRing",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalFunctionRing.lean",
+  "statement": "def rationalFunctionRing (X : Scheme.{v}) : CommRingCat.{v}",
   "branch": "sheaf-dag",
-  "by": "E1",
+  "by": "M1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": false,
+  "note": "Rule (B): the previous declaration Scheme.rationalFunctions takes only Scheme.{0}, as server elaboration demonstrated. The node quantifies over arbitrary schemes. This module states the same colimit ring with explicit arbitrary universe v and reuses DenseOpens and denseOpenSections from the previous module; no diagram or equivalence relation is copied."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
   "by": "L",
-  "reviewer": "R-rtf0608",
-  "group": "E1",
-  "result": "fix",
-  "note": "arbitrary X (no integrality, so not Mathlib functionField; source has no R(X)); DenseOpens subtype open+Dense; inter dense; colimit over (DenseOpens)^op of O_X restrictions = classes and ring ops on U∩V; universes from Scheme; fix: (blueprint:) tag form on RationalFunction"
+  "reviewer": "R-rfg1256",
+  "group": "M1",
+  "result": "pass",
+  "note": "X:Scheme.{u}; n+Fin n equiv irreducibleComponents; eta IsGenericPoint; dense opens contain eta (conclusion); e: rationalFunctionRing ≃+* Pi stalks with germ values on colimit.ι classes; IsIntegral (AlgebraicGeometry.IsIntegral by #check) -> n=1, X_1=univ, IsField R(X) and stalk, ei compatible; old rationalFunctions verified Scheme.{0} so rule (B) module justified"
  }
 }
