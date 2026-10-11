@@ -132,14 +132,14 @@ noncomputable def Etale.projectiveLineClosedFibreRestriction (A : Type u) [CommR
 For every étale sheaf `F` of `Λ`-modules on `Y`, restriction `Γ(Y, F) ⟶ Γ(Y₀, F|_{Y₀})` is an
 isomorphism.
 
-The proof has two stages: the Zariski comparison on `Y` and on all its finite covers, from
-the connectedness of the closed fibres
-(`AlgebraicGeometry.Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter`) and the
-spectral restriction criterion; and the passage to étale sheaves by finite-refinement descent
-(`AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale`) along the
-finite-pullback identities
-(`AlgebraicGeometry.Etale.globalSectionsUpperStarMap_identities`). The affine case is
-`AlgebraicGeometry.Etale.bijective_cohomologyMap_zero_of_henselianRing`.
+The statement reduces to abelian sheaves
+(`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_iff_forget₂`), where it is
+`AlgebraicGeometry.Etale.bijective_pullSection_of_henselianRing`: the Zariski gluing near the
+closed fibre on the finite covers of `Y`, from the connectedness of the closed fibres
+(`AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`) and the spectral
+shrinking `SpectralSpace.exists_shrink_of_isConnected_inter`, and the passage to étale sheaves
+by finite refinement (`AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale`)
+and descent (`AlgebraicGeometry.Etale.exists_pullSection_eq_of_isFinite_of_surjective`).
 (blueprint: `lemma-weil-pbc-etale-degree-zero`) -/
 @[stacks 0A0C]
 theorem Etale.isIso_globalSectionsUpperStarMap_of_henselianRing {A : Type u} [CommRing A]
