@@ -13,55 +13,131 @@
  },
  "kind": "statement",
  "title": "Affine perfect-complex cut after a surjective fibre map",
- "statement": "Let R be a ring, let p be a prime ideal of R, and let K be a bounded-above complex [def-pc-derived-category] of finite free R-modules. Assume that the canonical map H^0(K) tensor_R kappa(p) to H^0(K tensor_R^L kappa(p)) is surjective. Then there is f not in p such that, in D(R_f), K tensor_R R_f is isomorphic to tau_{<=0}(K tensor_R R_f) direct-sum tau_{>=1}(K tensor_R R_f), and tau_{>=1}(K tensor_R R_f) is perfect of Tor-amplitude in [1,infinity).",
+ "statement": "Let R be a ring, let p be a prime ideal of R, and let K be a bounded-above complex of finite free R-modules. Assume that the canonical map H^0(K) tensor_R kappa(p) to H^0(K tensor_R^L kappa(p)) is surjective. Then there is f not in p such that, in the derived category D(R_f), K tensor_R R_f is isomorphic to tau_{<=0}(K tensor_R R_f) direct-sum tau_{>=1}(K tensor_R R_f), and tau_{>=1}(K tensor_R R_f) is represented by a bounded complex of finite projective R_f-modules in degrees at least 1; in particular tau_{>=1}(K tensor_R R_f) is perfect [def-pc-perfect-complex] of Tor-amplitude in [1,infinity).",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 0A1U, Lemma better-cut-complex-in-two"
  },
  "stmt_deps": [
-  "def-pc-derived-category",
+  "def-weil-abstract-derived-category",
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write kappa for kappa(p). By the bounded-above finite-free hypothesis, inspect the three consecutive terms K^{−1} to K^0 to K^1. In K^0 tensor_R kappa define V as the image of K^{−1} tensor_R kappa and W as the kernel of K^0 tensor_R kappa to K^1 tensor_R kappa. Choose x_a in K^{−1} whose differentials form a basis of V, choose y_b in Ker(d^0) mapping to a basis of W/V using the assumed surjectivity of H^0(K) tensor_R kappa to H^0(K tensor_R^L kappa), and choose z_c in K^0 lifting a basis of (K^0 tensor_R kappa)/W. Then the d^0(z_c) are linearly independent in K^1 tensor_R kappa.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A1U, proof of Lemma better-cut-complex-in-two"
+   }
+  },
+  {
+   "text": "Let $\\psi:R^{\\oplus(r+s+t)}\\to K^0$ send the standard basis to the elements $d^{-1}(x_a),y_b,z_c$. Its residue-field map is an isomorphism, so the isomorphism clause of [lem-pc-finite-projective-cokernel-localization] gives, after shrinking by $f\\notin\\mathfrak p$, that these elements form an $R_f$-basis of $(K^0)_f$. Apply the injective-fibre clause of the same node to $R^{\\oplus t}\\to K^1$, sending the standard basis to $d^0(z_c)$; after a further shrinking, these elements are $R_f$-linearly independent and their cokernel $E^1$ is finite projective. Since $d^0$ kills $d^{-1}(x_a)$ and $y_b$, $E^1=\\operatorname{Coker}(d^0)$. Thus $\\tau_{\\geq1}(K^\\bullet\\otimes_RR_f)$ is represented by the bounded complex with $E^1$ in degree $1$ and the original finite free terms in higher degrees (bounded because $K$ is bounded above), hence by finite projectives in degrees $[1,b]$ for some $b$. Such a complex is strictly perfect on $\\operatorname{Spec}(R_f)$, so $\\tau_{\\geq1}(K^\\bullet\\otimes_RR_f)$ is perfect; its terms are flat and vanish below degree $1$, so tensoring with any $R_f$-module has no cohomology below degree $1$, i.e. its Tor-amplitude is in $[1,\\infty)$.",
+   "uses": [
+    "lem-pc-finite-projective-cokernel-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A1U, proof of Lemma better-cut-complex-in-two"
+   }
+  },
+  {
+   "text": "The truncation triangle tau_{<=0}(K tensor_R R_f) to K tensor_R R_f to tau_{>=1}(K tensor_R R_f) to tau_{<=0}(K tensor_R R_f)[1] is distinguished. The right-hand object has projective-amplitude in [1,b] for some b, while the left-hand object has no cohomology in degrees greater than 0. The derived splitting statement [lem-pc-derived-splitting-unique], with a=1, therefore supplies a canonical direct-sum isomorphism K tensor_R R_f isomorphic to tau_{<=0}(K tensor_R R_f) direct-sum tau_{>=1}(K tensor_R R_f).",
+   "uses": [
+    "lem-pc-derived-splitting-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A1U, proof of Lemma better-cut-complex-in-two"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finite-projective-cokernel-localization",
+  "lem-pc-derived-splitting-unique"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A1U, proof of Lemma better-cut-complex-in-two"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "bounded above finite free complex surjective H0 fibre map split truncation",
-   "results": "Homological splitting and localization hits, but no affine perfect-complex cut theorem",
+   "query": "bounded above finite free complex localization split truncation surjective degree zero fibre",
+   "results": "HomologicalComplex truncation and K-projective splitting hits, but no affine perfect-complex cut theorem",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "CochainComplex truncation splitting perfect",
-   "results": "0 hits; Unknown identifier truncation",
+   "query": "DerivedCategory, Hom, projective-amplitude, truncation",
+   "results": "0 hits; unknown identifier Hom",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "split.*trunc|cokernel-flat|finite free complex in Mathlib/Algebra/Homology",
+   "query": "better-cut-complex-in-two|splitting-unique|cokernel-flat in Mathlib",
    "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "bounded finite free complex local splitting after fibre surjectivity",
+   "query": "localize a bounded above finite free complex to split at a surjective cohomology fibre map",
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjective map H zero complex tensor residue field truncation direct sum",
+   "results": "Unrelated surjectivity and tensor declarations; no exact theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, IsProjective, Homology",
+   "results": "0 hits; unknown identifier IsProjective",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projective-amplitude|TorAmplitude|homology in Mathlib/Algebra/Homology",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-perfect-cut-complex-degree-zero",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-affine-perfect-cut-degree-zero",
+  "worker": "stage1",
+  "summary": "Split Tag 0A1U into the residue-field finite-projective localization input and the derived splitting-unique input. The proof explicitly constructs the subspaces V and W, lifts bases using the fibre-map surjectivity, localizes to obtain a finite-projective cokernel, identifies the positive truncation as a bounded finite-projective complex, and splits the truncation triangle. No exact Lean declaration exists.",
+  "blueprint": "Realizes the theorem-of-the-cube blueprint proof clause 'cut a perfect complex after the degree-zero fibre map is surjective'.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apc0116",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apc0116 (reviewer sub-agent of L); spot-checked: Read Tags 0A1U, 00O0, 0BCG; Steps 1-3 follow the 0A1U proof at i=0; hypotheses of 00O0 (1),(3) and 0BCG (2) with a=1 checked; citer 8b5e8f6cd Step 2 uses 'perfect of Tor-amplitude in [1,infinity)'; no duplicate (lem-sc-finite-locally-free-residue-isomorphism is the global sheaf iso version, lem-weil-pbc-flat-mod-injective local-ring flat version). FIX more, RETURN less: (1) E7/C4: the item's conclusion was silently changed from 'perfect of Tor-amplitude in [1,infinity)' (which the citer lem-sc-perfect-cut-complex-degree-zero uses) to 'represented by a bounded finite projective complex in degrees >=1', unnamed in the report; restored the original clause as a consequence of the stronger one, stmt_deps def-pc-perfect-complex restored, Step 2 ends with the elementary deduction (strictly perfect on Spec R_f, flat terms in degrees [1,b] give Tor-amplitude [1,infinity)); (2) B3: Step 2 TeX had lost all backslashes; restored; (3) B3: lem-pc-finite-projective-cokernel-localization cited [def-pc-perfect-complex] in its statement with empty stmt_deps; the definition is inline, so the bracket reference was dropped.; 2 file(s) fixed by the reviewer"
+ }
 }

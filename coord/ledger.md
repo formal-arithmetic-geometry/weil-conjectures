@@ -3213,3 +3213,5 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:14 L: returned deliver/H1/lem-pc-derived-tensor-transitivity (reviewer RETURN: Reviewer R-dtt0114 at a712da6fe. 1. E7: the delivered statement is NOT the one L restated at 02df7db2c; the delivery ove)
 - 01:14 UTC L: returned: H1 derived-tensor-transitivity c886a0c40 (R-dtt0114: the push replaced L's restatement 02df7db2c with the older weaker statement; flat-C clause unproved).
 - 01:15 UTC L: attachment by E1 of lem-pc-finite-flat-affine-sections-projective (finitePresentation_projective_sections, 681ba71c3) verified by L: sorry-free, statement read against LocallyFreeAffine.lean:71-73 and matches.
+- 01:18 UTC L: deleted stale branches deliver/C1/pqf-lem-affine-open-locnoeth (Mathlib leaf since 22:03) and deliver/J1/pqf-lem-serre-criterion (returned 20:24, no re-push in 5 h) and released both claims; notices quoting the last returns in coord/returns/C1.md and J1.md.
+- 01:18 L: merged deliver/C1/lem-pc-affine-perfect-cut-degree-zero (reviewer FIX; first push; new nodes: 2)
