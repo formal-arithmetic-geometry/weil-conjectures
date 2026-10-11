@@ -5,7 +5,10 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.PolynomialAlgebra
 public import Mathlib.RingTheory.Smooth.Basic
+public import WeilConjectures.RingTheory.Kaehler.TraceBaseChange
 public import Mathlib.RingTheory.Jacobson.Ring
 public import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
 public import Mathlib.RingTheory.Unramified.Field
@@ -338,6 +341,7 @@ noncomputable def _root_.Polynomial.tensorLocalizationAwayEquiv (k k' : Type*) [
 
 end LocalizationPolynomial
 
+open TensorProduct in
 /-- **Duality for the trace of differentials over an arbitrary field.** Let `R = k[t]_g` be a
 localization of `k[t]` at a nonzero polynomial `g`, with a `k`-derivation `D` of `R` such that
 `D t = 1`, and let `B` be a smooth `k`-algebra, finite free over `R`, such that `Ω_{B/k}` is
@@ -353,7 +357,36 @@ theorem bijective_liftKaehlerDifferential_traceDerivation_of_smooth {k R B : Typ
       ∃ ω₀ : Ω[B⁄k], ∃ s ∉ q, ∀ ω : Ω[B⁄k], ∃ b : B, s • ω = b • ω₀)
     (hgen : ∀ (p : Ideal B) [p.IsPrime], p ∈ minimalPrimes B →
       Algebra.FormallyUnramified R (Localization.AtPrime p)) :
-    Function.Bijective (traceDerivation (B := B) D).liftKaehlerDifferential :=
-  sorry
+    Function.Bijective (traceDerivation (B := B) D).liftKaehlerDifferential := by
+  classical
+  have : IsReduced B := Algebra.Smooth.isReduced_of_field k B
+  have : IsNoetherianRing B := Algebra.FiniteType.isNoetherianRing k B
+  have hunr := KaehlerDifferential.exists_mem_nonZeroDivisors_smul_eq_zero hgen
+  -- base change to an algebraic closure `k'` of `k`
+  let k' := AlgebraicClosure k
+  let := Algebra.TensorProduct.baseChangeAlgebra k k' R B
+  have := Algebra.TensorProduct.baseChangeAlgebra_isScalarTower k k' R B
+  have := Algebra.TensorProduct.free_baseChange (k := k) (k' := k') (R := R) (B := B)
+  have := Algebra.TensorProduct.finite_baseChange (k := k) (k' := k') (R := R) (B := B)
+  obtain ⟨l, hl⟩ := LinearMap.exists_leftInverse_of_injective (Algebra.linearMap k k')
+    (LinearMap.ker_eq_bot.2 (algebraMap k k').injective)
+  refine bijective_liftKaehlerDifferential_traceDerivation_of_baseChange k' D l ?_ ?_
+  · simpa using LinearMap.congr_fun hl 1
+  -- `k' ⊗[k] R = k'[X]_g` is a principal ideal domain which is not a field
+  let e := Polynomial.tensorLocalizationAwayEquiv k k' R g
+  have hg' : g.map (algebraMap k k') ≠ 0 :=
+    (Polynomial.map_ne_zero_iff (algebraMap k k').injective).2 hg
+  have : IsDomain (Localization.Away (g.map (algebraMap k k'))) :=
+    IsLocalization.isDomain_localization (powers_le_nonZeroDivisors_of_noZeroDivisors hg')
+  have : IsDomain (k' ⊗[k] R) := e.toMulEquiv.isDomain _
+  have : IsPrincipalIdealRing (Localization.Away (g.map (algebraMap k k'))) :=
+    IsLocalization.isPrincipalIdealRing (Submonoid.powers (g.map (algebraMap k k')))
+  have : IsPrincipalIdealRing (k' ⊗[k] R) := .of_surjective e.symm.toRingHom e.symm.surjective
+  have hR : ¬ IsField (k' ⊗[k] R) := fun h ↦
+    Polynomial.not_isField_localization_away hg' (MulEquiv.isField h e.symm.toMulEquiv)
+  refine bijective_liftKaehlerDifferential_traceDerivation_of_perfectField (D.baseChange k') hR
+    (1 ⊗ₜ algebraMap k[X] R X) ?_ (exists_smul_eq_smul_baseChange k' hsm)
+    (exists_mem_nonZeroDivisors_smul_eq_zero_baseChange k' hunr)
+  rw [Derivation.baseChange_tmul, hD, Algebra.TensorProduct.one_def]
 
 end KaehlerDifferential
