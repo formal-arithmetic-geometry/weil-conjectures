@@ -44,6 +44,7 @@ Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 - Lines of at most 100 characters. Imports only `Mathlib.*`, `WeilConjectures.*`, `Sheaf.*`; no import the file does not use. Header as in the example module.
 - The source's lakefile options hold: `relaxedAutoImplicit = false` (bind every variable, every universe); `warn.sorry = false`.
 - Module pullback of O_X-modules = `Scheme.Modules.tensorPullback` (def-pc-module-pullback; adjunction `exists_tensorPullbackAdjunction`), never Mathlib's `Scheme.Modules.pullback`; a node's literal `Modules.pullback`/`g^*` names that node. Invertible = `Scheme.Modules.IsInvertible`, not `SheafOfModules.IsInvertible`. This binds the second reading too.
+- "X a scheme over k" is `[X.Over (Spec (.of k))]` with properties as instances on `X ↘ Spec (.of k)` (def-weil-scheme-over-base); explicit `(f : X ⟶ Spec (.of k)) [P f]` only when the node names f, involves base change/several morphisms over the base, or a recorded declaration takes f (`Scheme.Hom.genus`, `f.picZero`, `f.picDegree`, `IsConnectedCurve f`). Both are the same notion: not H4, never convert one acceptable form to the other (STATE line SCHEMES OVER A FIELD).
 
 ## 4. Compiling
 
