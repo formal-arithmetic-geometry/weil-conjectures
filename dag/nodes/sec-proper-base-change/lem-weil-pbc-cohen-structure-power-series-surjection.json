@@ -175,5 +175,24 @@
   "worker": "stage1",
   "summary": "Statement checked against Stacks 032A (2) (unchanged; the field/Cohen-ring dichotomy by p is the case split of the proof). No slopmaster2 declaration (grep for Cohen/coefficient ring in WeilConjectures, blueprint-id grep, lean_names_upstream: none). Proof in 6 steps following the 032A proof: generators y_i of m and separatedness (elementary); p = 0: the coefficient field from part (1) (lem-weil-pbc-cohen-coefficient-ring-exists), which is a field of characteristic 0; p > 0: Cohen ring Lambda with Lambda/p = kappa (lem-weil-pbc-cohen-rings-exist, 0328) and the compatible lifts Lambda/p^k -> R/m^k by formal smoothness (lem-weil-pbc-cohen-ring-mod-pn-formally-smooth, 0329), limit alpha: Lambda -> R (paragraph 2 written out, since part (1)'s node only gives the image subring, which need not be a Cohen ring); Phi: Lambda[[x]] -> R, x_i -> y_i, from lem-weil-pbc-power-series-universal-property-complete; surjectivity: Stacks's appeal to 0315 (1) is realized by the existing node lem-weil-pbc-finite-over-complete-ring (031D, proved from 0315) with A = Lambda[[x]] complete for (x) (Mathlib leaf lem-weil-pbc-power-series-variables-complete), I^k R = m^k and the generator 1 of R/m over Lambda. No new nodes. stmt_deps kept.",
   "blueprint": "No blueprint node states the Cohen structure theorem (same_as [] after searching 'Cohen', '032A', 'quotient of a power series', 'complete local ring', 'power series ring'). The item serves the blueprint ancestor thm-weil-pbc-finite-etale-lifting at its from.place (step 7 of its split, Lemma 0GS2 essential-surjectivity paragraphs) through the chain in via; all six steps realize that place: they supply the presentation Lambda[[x]] ->> R used by lem-weil-pbc-complete-local-flat-presentation."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CohenStructurePowerSeriesSurjection",
+  "declaration": "IsLocalRing.cohen_structure_power_series_surjection",
+  "file": "lean/Sheaf/RingTheory/CohenStructurePowerSeriesSurjection.lean",
+  "statement": "theorem cohen_structure_power_series_surjection (R : Type u) [CommRing R] [IsLocalRing R] (hfg : (maximalIdeal R).FG) [IsAdicComplete (maximalIdeal R) R] (p : ℕ) [CharP (ResidueField R) p] : ∃ (n : ℕ) (Λ : Type u) (_ : CommRing Λ), (p = 0 → IsField Λ ∧ CharZero Λ) ∧ (0 < p → IsCohenRing p Λ) ∧ ∃ φ : MvPowerSeries (Fin n) Λ →+* R, Function.Surjective φ",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-csp1437"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-csp1437",
+  "group": "C1",
+  "result": "fix",
+  "note": "local ring R=[CommRing][IsLocalRing]; m f.g.=(maximalIdeal R).FG (no Noetherian); m-adically complete=[IsAdicComplete (maximalIdeal R) R]; residue char p>=0=(p:ℕ)[CharP (ResidueField R) p]; ∃ n:ℕ (n=0 ok); p=0→IsField Λ ∧ CharZero Λ; p>0→IsCohenRing p Λ (landed def-weil-pbc-cohen-ring, replaces the inline restatement: H4/H12); ∃ φ : MvPowerSeries (Fin n) Λ →+* R, Function.Surjective φ"
  }
 }
