@@ -21,7 +21,10 @@
   "def-pc-derived-category",
   "def-pc-derived-direct-image",
   "def-pc-derived-pullback",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-single-complex-base-change-stalk-condition",
+  "lem-pc-derived-pullback-tensor-product"
  ],
  "proof": [
   {
@@ -133,5 +136,25 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex",
+  "declaration": "AlgebraicGeometry.relativelyFlat_derivedBaseChange_complex",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativelyFlatDerivedBaseChangeComplex.lean",
+  "statement": "theorem relativelyFlat_derivedBaseChange_complex {X S T : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] (g : T ⟶ S) [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [@MonoidalPreadditive _ _ _ (SheafOfModules.monoidalCategory X.sheaf)] (E : schemeDerivedCategory X) (hE : schemeDerivedQCohProperty X E) (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (G.X i)) (hqc : ∀ i : ℤ, (G.X i).IsQuasicoherent) (hflat : ∀ i : ℤ, Scheme.Modules.IsFlatOver (G.X i) f) (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hP : CochainComplex.IsKFlat (R := X.sheaf) P) (e : DerivedCategory.Q.obj P ≅ E) (α : E ⊗ DerivedCategory.Q.obj G ≅ DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) : IsIso ((derivedPullback g).map ((schemeDerivedDirectImage f).map α.hom) ≫ schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g) pullback.condition (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P G (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf)))) ≫ (schemeDerivedDirectImage (pullback.snd f g)).map ((SingleComplexBaseChange.counit (pullback.fst f g)).app ((HomotopyCategory.quotient _ (.up ℤ)).obj (CochainComplex.mapBifunctor P G (@curriedTensor _ _ (SheafOfModules.monoidalCategory X.sheaf))))))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "Canonical map invertibility in K-flat total-complex coordinates (form of lem-pc-tor-independent-perfect-tensor-base-change, 64cb2bb5b): derived base-change map at Tot(P ⊗ G) followed by the universal derived-to-ordinary counit; the identifications with E ⊗^L G (α) and with L(g')^*E ⊗^L (g')^*G (module pullback tensor iso, K-flat pullback) are isomorphisms that do not change IsIso. hE restores D_QCoh.",
+  "fixed_by": "R-rbx"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rbx",
+  "group": "R1",
+  "result": "fix",
+  "note": "qcqs f instances; E with hE schemeDerivedQCohProperty (D_QCoh); G bounded above (hbounded), termwise quasi-coherent (hqc) and IsFlatOver f (hflat); arbitrary g with pullback square; conclusion IsIso of schemeDerivedBaseChangeMap at Tot(P⊗G) then Rf_T* of SingleComplexBaseChange.counit, transported along α; fixed: dropped φ/hφ (Classical.choose of sorried module_pullback_tensor), β and two Prop instance binders, all postcomposed isomorphisms irrelevant to IsIso; stmt_deps additions checked (used or cited in docstring, as in 64cb2bb5b), check_dag 0 cycles; node JSON diff touches only stmt_deps and lean"
  }
 }
