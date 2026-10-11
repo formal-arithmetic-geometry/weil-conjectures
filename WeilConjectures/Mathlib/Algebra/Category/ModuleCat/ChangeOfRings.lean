@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.Span.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 
 /-!
 # Extension of scalars along an algebra map as a tensor product
@@ -138,5 +139,47 @@ lemma exact_coextendQuotientShortComplex (M : ModuleCat.{u} Λ) :
   change φ (show Λ ⧸ Ideal.span {ϖ} from 1) = x
   change Submodule.liftQ _ _ hle (Submodule.Quotient.mk (1 : Λ)) = x
   rw [Submodule.liftQ_apply, LinearMap.toSpanSingleton_apply, one_smul]
+
+end ModuleCat
+
+namespace ModuleCat
+
+open MonoidalCategory
+
+variable (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
+
+/-- For an `R`-algebra `S`, the tensor product `N ⊗[R] S` is the extension of scalars
+`S ⊗[R] N` of `N` with its scalars restricted back to `R`. -/
+noncomputable def tensorEquivRestrictScalarsExtendScalars (N : ModuleCat.{u} R) :
+    N ⊗[R] S ≃ₗ[R] (restrictScalars (algebraMap R S)).obj
+      ((extendScalars (algebraMap R S)).obj N) where
+  __ := (TensorProduct.comm R N S).toAddEquiv.trans (tensorEquivExtendScalars R S N).toAddEquiv
+  map_smul' r x := by
+    change tensorEquivExtendScalars R S N (TensorProduct.comm R N S (r • x)) =
+      algebraMap R S r • tensorEquivExtendScalars R S N (TensorProduct.comm R N S x)
+    rw [← map_smul, map_smul, algebraMap_smul]
+
+@[simp]
+lemma tensorEquivRestrictScalarsExtendScalars_tmul (N : ModuleCat.{u} R) (n : N) (s : S) :
+    tensorEquivRestrictScalarsExtendScalars R S N (n ⊗ₜ s) =
+      TensorProduct.tmul R
+        (M := (ModuleCat.restrictScalars (algebraMap R S)).obj (ModuleCat.of S S)) s n :=
+  rfl
+
+/-- **Extension followed by restriction of scalars is tensoring with `S`.** For an `R`-algebra
+`S`, extending the scalars of an `R`-module `N` to `S` and restricting them back to `R` gives
+`N ⊗[R] S`, naturally in `N`. -/
+noncomputable def extendScalarsCompRestrictScalarsIso :
+    extendScalars.{u, u, u} (algebraMap R S) ⋙ restrictScalars (algebraMap R S) ≅
+      tensorRight (ModuleCat.of R S) :=
+  NatIso.ofComponents (fun N ↦ (tensorEquivRestrictScalarsExtendScalars R S N).toModuleIso.symm)
+    (fun {M N} f ↦ by
+      ext x
+      obtain ⟨y, rfl⟩ := (tensorEquivRestrictScalarsExtendScalars R S M).surjective x
+      apply (tensorEquivRestrictScalarsExtendScalars R S N).injective
+      induction y using TensorProduct.induction_on with
+      | zero => simp
+      | tmul m s => rfl
+      | add x y hx hy => simp only [map_add, hx, hy])
 
 end ModuleCat
