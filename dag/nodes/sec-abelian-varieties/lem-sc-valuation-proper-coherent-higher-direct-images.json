@@ -131,5 +131,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vhd0043 (reviewer sub-agent of L); spot-checked: Step1 vs lem-pc-rf-perfect-base-change hyps (fp, flat over S from finite free + X flat) and def-amb: OK; citer 62557e2cd step 2 uses q=0 exactly: OK; no duplicate coherent/valuation node; Mathlib grep for coherent rings: none. FIX more, RETURN less: (1) C1 Step 2 coherence of valuation rings uncited: written out (f.g. ideal principal, free since domain; Tag 0EWV); (2) C1/C4 Step 2 'Spec A covered by itself' unjustified and H^q(X,F)=H^q(E) claimed from the definition of Rf_*: now local-ring argument for a global strictly perfect model and Leray [pqf-lem-leray, generic tool] + [lem-pc-affine-vanishing] for H^q(X,F)=Gamma(R^qf_*F); (3) B3 new node source cited Tag 0ASU (Bezout domains, unrelated): replaced by More on Algebra 0EWZ + Algebra 05CX; Mathlib grep recorded.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ValuationProperCoherentHigherDirectImages",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finitePresentation_moduleCohomology_of_valuationRing",
+  "by": "C1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/AlgebraicGeometry/ValuationProperCoherentHigherDirectImages.lean",
+  "statement": "theorem finitePresentation_moduleCohomology_of_valuationRing {A : Type u} [CommRing A] [IsDomain A] [ValuationRing A] {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (d : ℕ) (F : X.Modules) [F.IsFiniteLocallyFreeOfRank d] (q : ℕ) : Module.FinitePresentation A ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F))",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "fixed_by": "R-vph1440"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vph1440",
+  "group": "C1",
+  "result": "fix",
+  "note": "valuation ring CommRing+IsDomain+ValuationRing; IsProper/Flat/LocallyOfFinitePresentation f (proper gives qc,qs); F.IsFiniteLocallyFreeOfRank d; all q; H^q(X,F)=RingedSpace.moduleCohomology restricted to A along ΓSpecIso.inv ≫ f.appTop, Module.FinitePresentation A; statement correction reverted (unneeded); reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
