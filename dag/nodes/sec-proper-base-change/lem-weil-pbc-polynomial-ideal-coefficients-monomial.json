@@ -157,5 +157,24 @@
   "by": "L",
   "result": "accepted",
   "note": "4 elementary steps (agent proof of the assertion in the 07DW proof): the coefficient of x^E in g_j x_j q; membership in J forces c_E in I_E; the converse by writing c_E x^E as a combination of the generators; the direct-sum description. No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PolynomialIdealCoefficientsMonomial",
+  "declaration": "MvPolynomial.ideal_coefficients_monomial",
+  "file": "lean/Sheaf/Paper/PolynomialIdealCoefficientsMonomial.lean",
+  "statement": "theorem ideal_coefficients_monomial {R : Type u} [CommRing R] (r i : ℕ) (hr : 1 ≤ r) (hir : i ≤ r) (g : Fin i → R) (p : MvPolynomial (Fin r) R) : (p ∈ Ideal.span (Set.range fun j : Fin i => C (g j) * X (Fin.castLE hir j)) ↔ ∀ E : Fin r →₀ ℕ, coeff E p ∈ Ideal.span (g '' {j : Fin i | E (Fin.castLE hir j) ≠ 0})) ∧ ∃ Φ : MvPolynomial (Fin r) R →ₗ[R] Π₀ E : Fin r →₀ ℕ, R ⧸ Ideal.span (g '' {j : Fin i | E (Fin.castLE hir j) ≠ 0}), (∀ q E, Φ q E = Ideal.Quotient.mk _ (coeff E q)) ∧ Function.Surjective Φ ∧ LinearMap.ker Φ = Submodule.restrictScalars R (Ideal.span (Set.range fun j : Fin i => C (g j) * X (Fin.castLE hir j))) ∧ ∃ e : (MvPolynomial (Fin r) R ⧸ Ideal.span (Set.range fun j : Fin i => C (g j) * X (Fin.castLE hir j))) ≃ₗ[R] Π₀ E : Fin r →₀ ℕ, R ⧸ Ideal.span (g '' {j : Fin i | E (Fin.castLE hir j) ≠ 0}), ∀ q, e (Ideal.Quotient.mk _ q) = Φ q",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pic1312"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pic1312",
+  "group": "G1",
+  "result": "fix",
+  "note": "R comm ring, r>=1 (hr), i<=r (hir), g_1..g_i as Fin i -> R, x_j = X (castLE j), J span of C g_j * X_j (bot at i=0), I_E span of g_j with e_j>0, coeff iff, Phi R-linear to Pi0 R/I_E with coeff formula, surjective, ker = J, P/J iso tied to Phi"
  }
 }
