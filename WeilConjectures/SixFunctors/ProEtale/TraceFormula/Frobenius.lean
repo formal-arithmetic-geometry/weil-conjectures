@@ -45,6 +45,12 @@ graph correspondences `c_m = (id, Φ_m)` and the global Frobenius operators.
 
 ## Main results
 
+- `AlgebraicGeometry.ProEtale.comp_frobenius_pow_eq_of_isFrobenius`,
+  `AlgebraicGeometry.ProEtale.isPullback_relativeFrobenius_of_isFrobenius`: for the base change
+  `f` of a morphism `f₀` of schemes over a finite field, `Φ_Y ^ m ∘ f = f ∘ Φ_X ^ m`, and the
+  relative Frobenius `r_m` is the base change of the relative `q ^ m`-power Frobenius of `f₀`.
+- `AlgebraicGeometry.ProEtale.relativeFrobenius_specMap`: the relative Frobenius of an affine
+  morphism `Spec S ⟶ Spec R` is `Spec` of `R ⊗_{φ, R} S ⟶ S`, `r ⊗ s ↦ r * φ s`.
 - `AlgebraicGeometry.ProEtale.isFinite_relativeFrobenius`,
   `AlgebraicGeometry.ProEtale.isUniversalHomeomorphism_relativeFrobenius`: the relative
   Frobenius is a finite universal homeomorphism.
@@ -360,22 +366,149 @@ compatible with Frobenius morphisms `Φ_X`, `Φ_Y`, where `X'_m = Y ×_{Φ_Y, Y,
 ```
 
 Here `X'_m` is `CategoryTheory.Limits.pullback Φ_Y f`, with `f'_m = pullback.fst` and
-`p_m = pullback.snd` (blueprint: `sk-d-relative-frob`). -/
+`p_m = pullback.snd` (blueprint: `sk-d-relative-frob`, `d-relative-frob`). -/
 noncomputable def relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ X) (frobY : Y ⟶ Y)
     (h : f ≫ frobY = frobX ≫ f) : X ⟶ pullback frobY f :=
   pullback.lift f frobX h
 
-@[simp]
+@[reassoc (attr := simp)]
 lemma relativeFrobenius_comp_snd (f : X ⟶ Y) (frobX : X ⟶ X) (frobY : Y ⟶ Y)
     (h : f ≫ frobY = frobX ≫ f) :
     relativeFrobenius f frobX frobY h ≫ pullback.snd frobY f = frobX :=
   pullback.lift_snd _ _ _
 
-@[simp]
+@[reassoc (attr := simp)]
 lemma relativeFrobenius_comp_fst (f : X ⟶ Y) (frobX : X ⟶ X) (frobY : Y ⟶ Y)
     (h : f ≫ frobY = frobX ≫ f) :
     relativeFrobenius f frobX frobY h ≫ pullback.fst frobY f = f :=
   pullback.lift_fst _ _ _
+
+section BaseChange
+
+variable {S s₀ X₀ Y₀ : Scheme.{u}} {gX : X₀ ⟶ S} {gY : Y₀ ⟶ S} {σ : s₀ ⟶ S} {pX : X ⟶ X₀}
+  {aX : X ⟶ s₀} {pY : Y ⟶ Y₀} {aY : Y ⟶ s₀} {f₀ : X₀ ⟶ Y₀} {f : X ⟶ Y}
+
+/-- Let `f : X ⟶ Y` be the base change of `f₀ : X₀ ⟶ Y₀`, and let `Φ_X`, `Φ_Y` be base changes
+of endomorphisms `F_X`, `F_Y` of `X₀`, `Y₀` along `σ : s₀ ⟶ S`. If `f₀ ≫ F_Y = F_X ≫ f₀`, then
+`f ≫ Φ_Y = Φ_X ≫ f` (blueprint: `d-relative-frob`). -/
+lemma comp_eq_comp_of_isPullback (hY : IsPullback pY aY gY σ) {FX : X₀ ⟶ X₀} {FY : Y₀ ⟶ Y₀}
+    (h₀ : f₀ ≫ FY = FX ≫ f₀) {ΦX : X ⟶ X} {ΦY : Y ⟶ Y} (hΦXa : ΦX ≫ aX = aX)
+    (hΦYa : ΦY ≫ aY = aY) (hΦX : ΦX ≫ pX = pX ≫ FX) (hΦY : ΦY ≫ pY = pY ≫ FY)
+    (hfp : f ≫ pY = pX ≫ f₀) (hfa : f ≫ aY = aX) : f ≫ ΦY = ΦX ≫ f := by
+  apply hY.hom_ext
+  · rw [Category.assoc, hΦY, reassoc_of% hfp, h₀, Category.assoc, hfp, reassoc_of% hΦX]
+  · rw [Category.assoc, hΦYa, hfa, Category.assoc, hfa, hΦXa]
+
+/-- The fibre product `X'_m = Y ×_{Φ_Y, Y, f} X` commutes with base change: if `f`, `Φ_Y` are
+the base changes of `f₀ : X₀ ⟶ Y₀` and of `F_Y : Y₀ ⟶ Y₀` along `σ : s₀ ⟶ S`, then
+`X'_m = X₀' ×_S s₀` for `X₀' = Y₀ ×_{F_Y, Y₀, f₀} X₀` (blueprint: `d-relative-frob`). -/
+lemma isPullback_pullbackMap (hX : IsPullback pX aX gX σ) (hfp : f ≫ pY = pX ≫ f₀)
+    {ΦY : Y ⟶ Y} {FY : Y₀ ⟶ Y₀} (hΦY : IsPullback ΦY pY pY FY) :
+    IsPullback (pullback.map ΦY f FY f₀ pY pX pY hΦY.w hfp) (pullback.snd ΦY f ≫ aX)
+      (pullback.snd FY f₀ ≫ gX) σ := by
+  refine IsPullback.paste_vert ?_ hX
+  refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _) (.of_hasPullback FY f₀)
+  rw [pullback.lift_fst, ← hfp]
+  exact (IsPullback.of_hasPullback ΦY f).paste_horiz hΦY.flip
+
+/-- The relative Frobenius commutes with base change: in the situation of
+`AlgebraicGeometry.ProEtale.isPullback_pullbackMap`, if moreover `Φ_X = F_X ×_S 𝟙_{s₀}` with
+`F_X` an `S`-morphism, then `r = (f, Φ_X)` is the base change `(f₀, F_X) ×_S 𝟙_{s₀}` of the
+relative Frobenius of `X₀` over `Y₀` (blueprint: `d-relative-frob`). -/
+lemma isPullback_relativeFrobenius (hX : IsPullback pX aX gX σ) (hfp : f ≫ pY = pX ≫ f₀)
+    {FX : X₀ ⟶ X₀} {FY : Y₀ ⟶ Y₀} (h₀ : f₀ ≫ FY = FX ≫ f₀) (hFX : FX ≫ gX = gX)
+    {ΦX : X ⟶ X} {ΦY : Y ⟶ Y} (h : f ≫ ΦY = ΦX ≫ f) (hΦXa : ΦX ≫ aX = aX)
+    (hΦX : ΦX ≫ pX = pX ≫ FX) (hΦY : IsPullback ΦY pY pY FY) :
+    IsPullback (relativeFrobenius f ΦX ΦY h) pX (pullback.map ΦY f FY f₀ pY pX pY hΦY.w hfp)
+      (relativeFrobenius f₀ FX FY h₀) := by
+  refine (IsPullback.of_bot ?_ ?_ (isPullback_pullbackMap hX hfp hΦY)).flip
+  · simpa [hΦXa, hFX] using hX
+  · apply pullback.hom_ext <;> simp [relativeFrobenius, hfp, hΦX]
+
+end BaseChange
+
+section Model
+
+variable {k : Type u} [Field k] [Finite k] {s₀ X₀ Y₀ : Scheme.{u}} {gX : X₀ ⟶ Spec (.of k)}
+  {gY : Y₀ ⟶ Spec (.of k)} {σ : s₀ ⟶ Spec (.of k)} {pX : X ⟶ X₀} {aX : X ⟶ s₀} {pY : Y ⟶ Y₀}
+  {aY : Y ⟶ s₀} {FX : X₀ ⟶ X₀} {FY : Y₀ ⟶ Y₀} {ΦX : X ⟶ X} {ΦY : Y ⟶ Y}
+
+private lemma pow_comp_eq_comp_pow {Z W : Scheme.{u}} {F : Z ⟶ Z} {G : W ⟶ W} {g : Z ⟶ W}
+    (hg : F ≫ g = g ≫ G) (m : ℕ) :
+    End.asHom (End.of F ^ m) ≫ g = g ≫ End.asHom (End.of G ^ m) := by
+  induction m with
+  | zero => simp [End.one_def]
+  | succ m ih =>
+    rw [pow_succ, pow_succ, End.mul_def, End.mul_def]
+    simp only [End.asHom, End.of, Category.assoc] at ih ⊢
+    rw [ih, reassoc_of% hg]
+
+private lemma pow_comp_eq_of_comp_eq {Z W : Scheme.{u}} {F : Z ⟶ Z} {g : Z ⟶ W} (hg : F ≫ g = g)
+    (m : ℕ) : End.asHom (End.of F ^ m) ≫ g = g := by
+  refine (pow_comp_eq_comp_pow (G := 𝟙 W) (hg.trans (Category.comp_id g).symm) m).trans ?_
+  rw [show End.of (𝟙 W) ^ m = 1 from one_pow m]
+  exact Category.comp_id g
+
+/-- For the base change `f : X ⟶ Y` of a morphism `f₀ : X₀ ⟶ Y₀` of schemes over a finite
+field `k`, and the base changes `Φ_X = F_X ×_k 𝟙`, `Φ_Y = F_Y ×_k 𝟙` of the `#k`-power
+Frobenii, `Φ_Y ^ m ∘ f = f ∘ Φ_X ^ m` for every `m`: the absolute Frobenius commutes with every
+morphism of `𝐅_p`-schemes. Hence the relative Frobenius `r_m = (f, Φ_X ^ m)` is defined
+(blueprint: `sk-d-relative-frob`, `d-relative-frob`). -/
+theorem comp_frobenius_pow_eq_of_isFrobenius (hX : IsPullback pX aX gX σ)
+    (hY : IsPullback pY aY gY σ) (hFX : FX.IsFrobenius (Nat.card k))
+    (hFY : FY.IsFrobenius (Nat.card k))
+    (hΦXa : ΦX ≫ aX = aX) (hΦYa : ΦY ≫ aY = aY) (hΦX : ΦX ≫ pX = pX ≫ FX)
+    (hΦY : ΦY ≫ pY = pY ≫ FY) (hfp : f ≫ pY = pX ≫ f₀) (hfa : f ≫ aY = aX) (m : ℕ) :
+    f ≫ End.asHom (End.of ΦY ^ m) = End.asHom (End.of ΦX ^ m) ≫ f :=
+  (pow_comp_eq_comp_pow (comp_eq_comp_of_isPullback hY (hFX.comp_eq_comp gX hFY f₀) hΦXa
+    hΦYa hΦX hΦY hfp hfa).symm m).symm
+
+/-- **The relative Frobenius factorization.** Let `f : X ⟶ Y` be the base change along
+`σ : s₀ ⟶ Spec k` of a morphism `f₀ : X₀ ⟶ Y₀` of schemes over a finite field `k`, and let
+`Φ_X = F_X ×_k 𝟙`, `Φ_Y = F_Y ×_k 𝟙` be the base changes of their `#k`-power Frobenii. Put
+`Q = #k ^ m`. Then `F_X ^ m`, `F_Y ^ m` are the `Q`-power Frobenii of `X₀`, `Y₀`, the fibre
+product `X'_m = Y ×_{Φ_Y ^ m, Y, f} X` is the base change `X₀^{(Q)} ×_k s₀` of
+`X₀^{(Q)} = Y₀ ×_{F_Y ^ m, Y₀, f₀} X₀`, and `r_m = (f, Φ_X ^ m)` is the base change of the
+relative `Q`-power Frobenius `F_{X₀/Y₀} = (f₀, F_X ^ m)`. The identities `p_m ∘ r_m = Φ_X ^ m`
+and `f'_m ∘ r_m = f` are `relativeFrobenius_comp_snd` and `relativeFrobenius_comp_fst`
+(blueprint: `sk-d-relative-frob`, `d-relative-frob`). -/
+theorem isPullback_relativeFrobenius_of_isFrobenius (hX : IsPullback pX aX gX σ)
+    (hY : IsPullback pY aY gY σ) (hFX : FX.IsFrobenius (Nat.card k))
+    (hFY : FY.IsFrobenius (Nat.card k)) (hΦXa : ΦX ≫ aX = aX) (hΦYa : ΦY ≫ aY = aY)
+    (hΦX : ΦX ≫ pX = pX ≫ FX) (hΦY : ΦY ≫ pY = pY ≫ FY) (hfp : f ≫ pY = pX ≫ f₀)
+    (hfa : f ≫ aY = aX) (m : ℕ) :
+    (End.asHom (End.of FX ^ m)).IsFrobenius (Nat.card k ^ m) ∧
+      (End.asHom (End.of FY ^ m)).IsFrobenius (Nat.card k ^ m) ∧
+      ∃ (h₀ : f₀ ≫ End.asHom (End.of FY ^ m) = End.asHom (End.of FX ^ m) ≫ f₀)
+        (hm : End.asHom (End.of ΦY ^ m) ≫ pY = pY ≫ End.asHom (End.of FY ^ m)),
+        IsPullback (pullback.map _ f _ f₀ pY pX pY hm hfp)
+          (pullback.snd _ f ≫ aX) (pullback.snd _ f₀ ≫ gX) σ ∧
+        IsPullback (relativeFrobenius f _ _ (comp_frobenius_pow_eq_of_isFrobenius hX hY hFX
+          hFY hΦXa hΦYa hΦX hΦY hfp hfa m)) pX (pullback.map _ f _ f₀ pY pX pY hm hfp)
+          (relativeFrobenius f₀ _ _ h₀) := by
+  have h₀ := (pow_comp_eq_comp_pow (hFX.comp_eq_comp gX hFY f₀).symm m).symm
+  have hm := pow_comp_eq_comp_pow hΦY m
+  have hYm : IsPullback (End.asHom (End.of ΦY ^ m)) pY pY (End.asHom (End.of FY ^ m)) :=
+    have h₁ := pow_comp_eq_of_comp_eq hΦYa m
+    have h₂ := pow_comp_eq_of_comp_eq (hFY.comp_eq gY) m
+    IsPullback.of_right (by rw [h₁, h₂]; exact hY.flip) hm hY.flip
+  exact ⟨hFX.pow gX m, hFY.pow gY m, h₀, hm, isPullback_pullbackMap hX hfp hYm,
+    isPullback_relativeFrobenius hX hfp h₀ (pow_comp_eq_of_comp_eq (hFX.comp_eq gX) m) _
+      (pow_comp_eq_of_comp_eq hΦXa m) (pow_comp_eq_comp_pow hΦX m) hYm⟩
+
+end Model
+
+/-- The relative Frobenius of an affine morphism. Let `g : R ⟶ S` be a ring map and `φ_R`, `φ_S`
+ring endomorphisms with `φ_R ≫ g = g ≫ φ_S` (for instance the `Q`-power maps `a ↦ a ^ Q` of
+`𝐅_p`-algebras). Under the identification of `Spec R ×_{Spec φ_R, Spec R, Spec g} Spec S` with
+`Spec (R ⊗_{φ_R, R} S)`, the relative Frobenius of `Spec g` is `Spec` of the map
+`R ⊗_{φ_R, R} S ⟶ S`, `r' ⊗ s ↦ g r' * φ_S s` (blueprint: `d-relative-frob`). -/
+lemma relativeFrobenius_specMap {R S : CommRingCat.{u}} (g : R ⟶ S) (φR : R ⟶ R) (φS : S ⟶ S)
+    (w : φR ≫ g = g ≫ φS) :
+    relativeFrobenius (Spec.map g) (Spec.map φS) (Spec.map φR)
+        (by rw [← Spec.map_comp, ← Spec.map_comp, w]) =
+      Spec.map (pushout.desc g φS w) ≫ (isPullback_SpecMap_pushout φR g).isoPullback.hom := by
+  apply pullback.hom_ext <;> simp [← Spec.map_comp]
 
 /-- The relative Frobenius of a morphism between schemes with finite Frobenius morphisms is
 finite: it is a section of the projection `p_m`, a base change of `Φ_Y`, and its composite
