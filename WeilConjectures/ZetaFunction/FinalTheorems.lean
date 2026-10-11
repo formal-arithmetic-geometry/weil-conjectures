@@ -9,6 +9,7 @@ public import WeilConjectures.EulerProduct
 public import WeilConjectures.ZetaFunction.BettiSymmetry
 public import WeilConjectures.ZetaFunction.DualityReciprocity
 public import WeilConjectures.ZetaFunction.Rationality
+public import WeilConjectures.ZetaLinearAlgebra.ReciprocalRoots
 public import WeilConjectures.ZetaLinearAlgebra.WeilNumbers
 
 /-!
@@ -65,7 +66,8 @@ theorem Hom.weilRationality {k : Type u} [Field k] [Finite k] {X : Scheme.{u}}
       PowerSeries.map (Int.castRingHom ℚ) Z = f.zetaSeries) ∧
     f.zetaSeries =
       ∏' x : X.finitePoints, (1 - PowerSeries.X ^ f.degreeOver x.1 : PowerSeries ℚ)⁻¹ :=
-  sorry
+  ⟨f.exists_int_mul_zetaSeries_eq, (f.exists_int_zetaSeries_and_exists_rat_mul_eq).1,
+    f.zetaSeries_eq_tprod⟩
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀]
 
@@ -85,7 +87,10 @@ theorem weilIntegralFactors :
       (∀ (i : Fin (2 * d + 1)) (Q : Polynomial ℤ), Q.coeff 0 = 1 →
         IsIntegralFrobeniusFactor k₀ X (i : ℕ) Q → Q = P i) ∧
       IsWeilFactorization (Nat.card k₀) d (X ↘ Spec (CommRingCat.of k₀)).zetaSeries P :=
-  sorry
+  by
+  obtain ⟨P, hfact, -, -, hP⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
+  exact ⟨P, fun i ↦ ⟨hfact.coeff_zero_eq_one i, hP i⟩, fun i Q _ hQ ↦ hQ.unique k₀ X (hP i),
+    hfact⟩
 
 /-- Blueprint `sk-thm-rh`, `prop-arithmetic-roots`, `sk-thm-weil3` and `thm-weil-final-rh`
 (the Riemann hypothesis): for `X₀` smooth, proper and geometrically connected of pure
@@ -104,8 +109,40 @@ theorem riemannHypothesis {i : ℕ} (hi : i ≤ 2 * d) {P : Polynomial ℤ}
     (∀ β ∈ (P.map (Int.castRingHom ℂ)).roots, IsWeilNumber (Nat.card k₀) (-(i : ℝ)) β) ∧
     ∀ (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)],
       ∀ α ∈ (P.reverse.map (Int.castRingHom (PadicAlgCl l))).roots,
-        ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue α :=
-  sorry
+        ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue α := by
+  obtain ⟨P', hfact, -, hrh, hP'⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
+  have hPi : P = P' ⟨i, by omega⟩ := hP.unique k₀ X (hP' ⟨i, by omega⟩)
+  have h0 : P.coeff 0 = 1 := hPi ▸ hfact.coeff_zero_eq_one _
+  have hP0 : P ≠ 0 := fun h ↦ by simp [h] at h0
+  have hroot : ∀ z ∈ (P.map (Int.castRingHom ℂ)).roots,
+      ‖z‖ = (Nat.card k₀ : ℝ) ^ (-(i : ℝ) / 2) := hPi ▸ hrh ⟨i, by omega⟩
+  have hmon : P.reverse.Monic := by
+    rw [Monic, reverse_leadingCoeff, trailingCoeff_eq_coeff_zero (by rw [h0]; exact one_ne_zero),
+      h0]
+  have hrev : P.reverse.map (Int.castRingHom ℂ) = (P.map (Int.castRingHom ℂ)).reverse :=
+    (Polynomial.reverse_map (RingHom.injective_int _) P).symm
+  have hPℂ : P.map (Int.castRingHom ℂ) ≠ 0 :=
+    (Polynomial.map_ne_zero_iff (RingHom.injective_int _)).2 hP0
+  have hq : (0 : ℝ) < Nat.card k₀ := by exact_mod_cast Nat.card_pos
+  -- the reciprocal roots have absolute value `q^{i/2}`
+  have hrroot : ∀ y ∈ (P.reverse.map (Int.castRingHom ℂ)).roots,
+      ‖y‖ = (Nat.card k₀ : ℝ) ^ ((i : ℝ) / 2) := fun y hy ↦ by
+    rw [hrev, Polynomial.mem_roots_reverse_iff hPℂ] at hy
+    have := hroot _ ((Polynomial.mem_roots hPℂ).2 hy.2)
+    rw [norm_inv, neg_div, Real.rpow_neg hq.le, inv_inj] at this
+    exact this
+  refine ⟨fun α hα ↦ ⟨⟨_, hmon, ?_⟩, isWeilNumber_of_mem_roots (hmon.ne_zero) hrroot hα⟩,
+    fun β hβ ↦ isWeilNumber_of_mem_roots hP0 (fun y hy ↦ by rw [hroot y hy, neg_div]) hβ,
+    fun l _ _ α hα ↦ ?_⟩
+  · rw [show algebraMap ℤ ℂ = Int.castRingHom ℂ from RingHom.ext_int _ _, ← eval_map]
+    exact (Polynomial.mem_roots
+      ((Polynomial.map_ne_zero_iff (RingHom.injective_int _)).2 hmon.ne_zero)).1 hα
+  · rw [← Polynomial.reverse_map (RingHom.injective_int _), hP l, frobeniusCharpolyRev_def,
+      FrobeniusModule.localPolynomial,
+      (LinearMap.reciprocal_roots_eigenvalues
+        ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd
+        (LinearEquiv.isUnit_det' ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobenius)).1] at hα
+    exact (Module.End.hasEigenvalue_iff_isRoot_charpoly _ _).2 (Polynomial.isRoot_of_mem_roots hα)
 
 /-- Blueprint `sk-thm-weil4` and `thm-weil-final-betti` (Weil conjectures IV: Betti
 symmetry): the integral Frobenius factors `Pᵢ` of `X₀` have degrees
@@ -122,7 +159,10 @@ theorem weilBetti :
       (P 0).natDegree = 1 ∧ (P (Fin.last (2 * d))).natDegree = 1 ∧
       P 0 = 1 - Polynomial.X ∧
       P (Fin.last (2 * d)) = 1 - C ((Nat.card k₀ : ℤ) ^ d) * Polynomial.X :=
-  sorry
+  by
+  obtain ⟨P, -, -, -, hP⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
+  obtain ⟨h1, h2, h3, h4, h5, h6, -⟩ := bettiSymmetry k₀ X d hP
+  exact ⟨P, hP, h1, h2, h3, h4, h5, h6⟩
 
 /-- Blueprint `sk-thm-weil5` and `thm-weil-final-functional-equation` (Weil conjectures V:
 functional equation): for the integral Frobenius factors `Pᵢ` of `X₀`, with
@@ -144,7 +184,13 @@ theorem weilFunctionalEquation :
             (weilSign (Nat.card k₀) m P : ℂ) * (Nat.card k₀ : ℂ) ^ m *
               t ^ Polynomial.alternatingNatDegreeSum P *
               Polynomial.alternatingProdEval (fun i ↦ (P i).map (Int.castRingHom ℂ)) t :=
-  sorry
+  by
+  obtain ⟨P, hfact, hfe, -, hP⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
+  have hq : 1 < Nat.card k₀ := Finite.one_lt_card
+  obtain ⟨m, hm⟩ := (reciprocity k₀ X d hP).2.2
+  have hm' : (d : ℤ) * Polynomial.alternatingNatDegreeSum P = 2 * m := by rw [hm]; ring
+  exact ⟨P, hP, m, hm', weilSign_eq_one_or_eq_neg_one hq hfact.coeff_zero_eq_one hfe hm',
+    fun t ht hne ↦ hfe.alternatingProdEval_eq hq hfact.coeff_zero_eq_one hm' t ht hne⟩
 
 end Scheme
 
