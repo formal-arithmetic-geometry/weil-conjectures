@@ -27,6 +27,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
   `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M`, and
   `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso g`: it is a natural isomorphism.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso g`: the canonical `Lg^* Λ_Y ≅ Λ_Z`.
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal g`: `Lg^*` is a monoidal functor, with
+  comonoidal structure `leftDerivedUpperStarTensorComparison`. The coherence axioms are
+  checked on complexes whose pullback is K-flat
+  (`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare`).
 
 See `WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal` for an overview.
 -/
@@ -252,9 +256,8 @@ end Monoidal
 products. This is the monoidality of derived pullback in blueprint
 `def-weil-derived-pullback-tensor-hom` (within `sk-def-sf-operations`).
 
-The structure isomorphisms are `leftDerivedUpperStarTensorIso` and the unit comparison of
-`nonempty_iso_leftDerivedUpperStar_unit`; what is missing is their compatibility with the
-associators and unitors of the derived tensor products, see the TODO in the module docstring. -/
+The monoidal structure is `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`, whose
+tensor comparison is `leftDerivedUpperStarTensorIso`. -/
 theorem nonempty_monoidal_leftDerivedUpperStar [Etale.UpperStarPreservesFlat A] :
     Nonempty (L((g)^*[A])).Monoidal :=
   ⟨leftDerivedUpperStarMonoidal A g⟩

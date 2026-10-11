@@ -119,15 +119,15 @@ noncomputable instance mapHomotopyCategoryOplaxMonoidal :
       (OplaxMonoidal.left_unitality (G.mapHomologicalComplex (.up ℤ)) K)
     simp only [Functor.map_comp, mapCochainComplex_δ,
       ← OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app, quotient_map_whiskerRight',
-      quotient_map_whiskerLeft', ← Functor.mapHomotopyCategory_map, ← quotient_leftUnitor_inv] at h
+      ← Functor.mapHomotopyCategory_map, ← quotient_leftUnitor_inv] at h
     exact h
   oplax_right_unitality X := by
     obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
     have h := (HomotopyCategory.quotient D (.up ℤ)).congr_map
       (OplaxMonoidal.right_unitality (G.mapHomologicalComplex (.up ℤ)) K)
     simp only [Functor.map_comp, mapCochainComplex_δ,
-      ← OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app, quotient_map_whiskerRight',
-      quotient_map_whiskerLeft', ← Functor.mapHomotopyCategory_map, ← quotient_rightUnitor_inv] at h
+      ← OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app, quotient_map_whiskerLeft',
+      ← Functor.mapHomotopyCategory_map, ← quotient_rightUnitor_inv] at h
     exact h
 
 lemma mapHomotopyCategory_δ (X Y : HomotopyCategory C (.up ℤ)) :

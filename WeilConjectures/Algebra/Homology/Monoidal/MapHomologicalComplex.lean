@@ -88,6 +88,10 @@ noncomputable def mapCochainComplexεIso :
   (single D (.up ℤ) 0).mapIso (Monoidal.εIso G) ≪≫
     ((singleMapHomologicalComplex G (.up ℤ) 0).app (𝟙_ C)).symm
 
+omit [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ D), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ j, PreservesColimitsOfShape
+    (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) G] in
 lemma mapCochainComplexεIso_hom_f_zero :
     (G.mapCochainComplexεIso).hom.f 0 =
       (singleObjXSelf (.up ℤ) 0 (𝟙_ D)).hom ≫ LaxMonoidal.ε G ≫
@@ -173,14 +177,14 @@ lemma mapCochainComplexμIso_associativity (K L M : CochainComplex C ℤ) :
   erw [CochainComplex.Monoidal.ι₁₂_eq _ _ _ p q r (p + q) n rfl h',
     CochainComplex.Monoidal.ι₁₂_associator_hom_assoc,
     CochainComplex.Monoidal.ι₂₃_eq _ _ _ p q r (q + r) n rfl h'']
+  on_goal 2 => exact h'
   simp only [assoc]
   erw [CochainComplex.Monoidal.ι_whiskerRight_assoc, CochainComplex.ιTensorObj_whiskerLeft_f_assoc,
     ιTensorObj_mapCochainComplexμIso_hom_f_whiskerRight_assoc,
     whiskerLeft_ιTensorObj_mapCochainComplexμIso_hom_f_assoc,
     ιTensorObj_mapCochainComplexμIso_hom_f_assoc, ιTensorObj_mapCochainComplexμIso_hom_f]
   erw [LaxMonoidal.μ_natural_left_assoc, LaxMonoidal.μ_natural_right_assoc, key']
-  · exact LaxMonoidal.associativity_assoc G _ _ _ _
-  all_goals exact h'
+  exact LaxMonoidal.associativity_assoc G _ _ _ _
 
 lemma mapCochainComplex_leftUnitor_inv (K : CochainComplex C ℤ) :
     (λ_ ((G.mapHomologicalComplex (.up ℤ)).obj K)).inv ≫
@@ -195,8 +199,7 @@ lemma mapCochainComplex_leftUnitor_inv (K : CochainComplex C ℤ) :
   simp only [assoc]
   erw [CochainComplex.Monoidal.ι_whiskerRight_assoc, ιTensorObj_mapCochainComplexμIso_hom_f]
   rw [mapCochainComplexεIso_hom_f_zero]
-  simp only [comp_whiskerRight, assoc, Iso.inv_hom_id_assoc, Functor.map_comp,
-    inv_hom_whiskerRight_assoc]
+  simp only [comp_whiskerRight, assoc, Functor.map_comp, inv_hom_whiskerRight_assoc]
   erw [LaxMonoidal.μ_natural_left_assoc, LaxMonoidal.left_unitality_inv_assoc]
   rfl
 

@@ -188,7 +188,8 @@ lemma oplax_associativity_of_lax_square [∀ a, IsIso (e a)] (a b c : K₁)
     simp only [assoc]
     rw [μ_natural_right_assoc, app_app_comp_whiskerLeft_assoc, reassoc_of% hδ,
       ← G.map_comp_assoc, ← G.map_comp_assoc,
-      Category.assoc (α_ (Q₁.obj a) (Q₁.obj b) (Q₁.obj c)).hom, ← LaxMonoidal.associativity, G.map_comp_assoc,
+      Category.assoc (α_ (Q₁.obj a) (Q₁.obj b) (Q₁.obj c)).hom, ← LaxMonoidal.associativity,
+      G.map_comp_assoc,
       G.map_comp_assoc]
     rw [reassoc_of% (he (α_ a b c).hom), ← Q₂.map_comp, ← Q₂.map_comp, ← Q₂.map_comp,
       OplaxMonoidal.associativity_inv, ← F.map_comp_assoc, Iso.hom_inv_id, F.map_id, id_comp,
@@ -202,7 +203,8 @@ lemma oplax_left_unitality_of_lax_square [∀ a, IsIso (e a)] [IsIso (ε Q₂)] 
     [IsIso (μ Q₂ (𝟙_ K₂) (F.obj a))] :
     (λ_ (G.obj (Q₁.obj a))).inv = G.map (λ_ (Q₁.obj a)).inv ≫
       (δG.app (𝟙_ D₁)).app (Q₁.obj a) ≫
-        (G.map (ε Q₁) ≫ e (𝟙_ K₁) ≫ Q₂.map (η F) ≫ CategoryTheory.inv (ε Q₂)) ▷ G.obj (Q₁.obj a) := by
+        (G.map (ε Q₁) ≫ e (𝟙_ K₁) ≫ Q₂.map (η F) ≫ CategoryTheory.inv (ε Q₂)) ▷
+          G.obj (Q₁.obj a) := by
   rw [← cancel_mono ((ε Q₂ ⊗ₘ e a) ≫ μ Q₂ (𝟙_ K₂) (F.obj a))]
   rw [leftUnitor_inv_comp_tensorHom_assoc, LaxMonoidal.left_unitality_inv]
   simp only [assoc]
@@ -211,7 +213,8 @@ lemma oplax_left_unitality_of_lax_square [∀ a, IsIso (e a)] [IsIso (ε Q₂)] 
   rw [comp_tensorHom_comp_comp]
   simp only [assoc]
   rw [μ_natural_left, app_app_comp_whiskerRight_assoc, reassoc_of% hδ, ← G.map_comp_assoc,
-    ← G.map_comp_assoc, assoc (λ_ (Q₁.obj a)).inv, LaxMonoidal.left_unitality_inv, reassoc_of% (he (λ_ a).inv),
+    ← G.map_comp_assoc, assoc (λ_ (Q₁.obj a)).inv, LaxMonoidal.left_unitality_inv,
+    reassoc_of% (he (λ_ a).inv),
     ← Q₂.map_comp, ← Q₂.map_comp, ← OplaxMonoidal.left_unitality]
 
 include hδ he in
@@ -221,7 +224,8 @@ lemma oplax_right_unitality_of_lax_square [∀ a, IsIso (e a)] [IsIso (ε Q₂)]
     [IsIso (μ Q₂ (F.obj a) (𝟙_ K₂))] :
     (ρ_ (G.obj (Q₁.obj a))).inv = G.map (ρ_ (Q₁.obj a)).inv ≫
       (δG.app (Q₁.obj a)).app (𝟙_ D₁) ≫
-        G.obj (Q₁.obj a) ◁ (G.map (ε Q₁) ≫ e (𝟙_ K₁) ≫ Q₂.map (η F) ≫ CategoryTheory.inv (ε Q₂)) := by
+        G.obj (Q₁.obj a) ◁
+          (G.map (ε Q₁) ≫ e (𝟙_ K₁) ≫ Q₂.map (η F) ≫ CategoryTheory.inv (ε Q₂)) := by
   rw [← cancel_mono ((e a ⊗ₘ ε Q₂) ≫ μ Q₂ (F.obj a) (𝟙_ K₂))]
   rw [rightUnitor_inv_comp_tensorHom_assoc, LaxMonoidal.right_unitality_inv]
   simp only [assoc]
@@ -230,7 +234,8 @@ lemma oplax_right_unitality_of_lax_square [∀ a, IsIso (e a)] [IsIso (ε Q₂)]
   rw [tensorHom_comp_comp_comp]
   simp only [assoc]
   rw [μ_natural_right, app_app_comp_whiskerLeft_assoc, reassoc_of% hδ, ← G.map_comp_assoc,
-    ← G.map_comp_assoc, assoc (ρ_ (Q₁.obj a)).inv, LaxMonoidal.right_unitality_inv, reassoc_of% (he (ρ_ a).inv),
+    ← G.map_comp_assoc, assoc (ρ_ (Q₁.obj a)).inv, LaxMonoidal.right_unitality_inv,
+    reassoc_of% (he (ρ_ a).inv),
     ← Q₂.map_comp, ← Q₂.map_comp, ← OplaxMonoidal.right_unitality]
 
 /-- The oplax monoidal structure on `G : D₁ ⥤ D₂` with comonoidal structure `δG`, induced by
