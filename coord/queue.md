@@ -1,16 +1,15 @@
 # Work queue
 
-62 items; claim with `tools/claim.py next <group> [--stage N]`.
+63 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (62)
+## Stage 2: nodes to state (63)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
-| `def-weil-pbc-sets-extension-by-empty` | 1 | state | 8 |
 | `def-weil-pbc-finite-split-hypercover` | 1 | state | 7 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `lem-sc-cech-comparison-map-naturality` | 1 | state | 4 |
@@ -19,12 +18,10 @@
 | `lem-pc-alternating-cech-computes` | 1 | state | 2 |
 | `lem-sc-cech-h1-map-natural` | 1 | state | 2 |
 | `lem-sc-topological-extension-by-zero-stalks` | 1 | state | 2 |
+| `lem-weil-pbc-sets-extension-by-empty-adjunction` | 1 | state | 2 |
 | `lem-weil-pbc-site-plus-construction-presheaf` | 1 | state | 2 |
-| `lem-weil-pbc-site-system-strictification` | 1 | state | 2 |
 | `lem-sc-closed-immersion-pushforward-exact` | 2 | state | 2 |
 | `lem-weil-pbc-colimit-of-sites-sections` | 1 | state | 1 |
-| `lem-weil-pbc-site-cech-vanishing-criterion` | 1 | state | 1 |
-| `lem-weil-pbc-site-injective-cech-acyclic` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 1 | state | 0 |
 | `lem-pc-global-hom-pullback-adjunction` | 1 | state | 0 |
@@ -44,6 +41,7 @@
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
 | `lem-sc-support-dimension-cohomology-vanishing` | 1 | state | 0 |
 | `lem-sc-topological-filtered-cohomology` | 1 | state | 0 |
+| `lem-sc-topological-filtered-injective-cech-acyclic` | 1 | state | 0 |
 | `lem-sc-topological-leray-spectral-sequence` | 1 | state | 0 |
 | `lem-sc-torsor-h1-boundary-representative` | 1 | state | 0 |
 | `lem-sc-torsor-h1-ext-pushout` | 1 | state | 0 |
@@ -52,17 +50,20 @@
 | `lem-sc-zariski-module-abelian-cohomology-agree` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-colimit-of-sites` | 1 | state | 0 |
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1 | state | 0 |
-| `lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-zariski-etale-restriction-injective` | 1 | state | 0 |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-module-ses-cech-h1-surjective` | 1 | state | 0 |
+| `lem-weil-pbc-sets-inverse-image-extension-by-empty-constant` | 1 | state | 0 |
+| `lem-weil-pbc-sheaf-basis-surjection` | 1 | state | 0 |
+| `lem-weil-pbc-sheaf-directed-colimit-finite-coequalizers` | 1 | state | 0 |
 | `lem-weil-pbc-site-covering-morphisms-same-h0-map` | 1 | state | 0 |
-| `lem-weil-pbc-site-extension-by-zero-presheaf-adjoint` | 1 | state | 0 |
 | `lem-weil-pbc-site-leray-degenerate` | 1 | state | 0 |
 | `lem-weil-pbc-site-plus-construction-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-site-ses-cech-h1-surjective` | 1 | state | 0 |
+| `lem-weil-pbc-spectral-finite-coequalizer-embeds-constant` | 1 | state | 0 |
+| `lem-weil-pbc-spectral-finite-coequalizer-from-finite-space` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-cohomology-locally-zero` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-rhom-supported-qcoherent` | 2 | state | 0 |
@@ -72,7 +73,7 @@
 | `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 2 | state | 0 |
 | `lem-weil-pbc-site-plus-of-sheaf-iso` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 50 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 43 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
