@@ -3136,3 +3136,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:41 UTC L: J1 perfect-cut-complex-degree-zero PASS 8b5e8f6cd (R-pcc0039).
 - 00:41 UTC L: C1 affine-flat-module-local-criterion PASS c693c7457 (R-flc0039).
 - 00:41 L: merged deliver/J1/lem-sc-dvr-field-extension-order (reviewer FIX; first push; new nodes: 0)
+- 00:42 L: merged deliver/H1/lem-sc-etale-torsor-inverse-image-extension (reviewer FIX; first push; new nodes: 0)
