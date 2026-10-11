@@ -215,5 +215,23 @@
   "worker": "stage1",
   "summary": "Not a Mathlib leaf: the pinned Mathlib has no depth, no Cohen-Macaulay and no (S_k) (searches recorded; the newer Mathlib behind loogle has IsLocalRing.depth but no flat depth formula). Statement checked against Stacks 0339 (tags 0339, 0337, 00OM, 00ON verified in tags/tags) and against its only citer lem-weil-pbc-flat-normal-fibres-noetherian-normal (step 3 uses it with k = 2, exactly as stated); kept unchanged. Proof split along the source in 7 steps: localization phi_q flat local of Noetherian local rings (lem-weil-pbc-flat-local-ring-maps, leaf), closed fibre = S_q/pS_q (elementary), depth formula 0337 (new unsplit node lem-weil-pbc-flat-local-depth-formula), dimension inequality taken from the existing leaf lem-weil-pbc-flat-height-formula (00ON; the source cites 00OM for the inequality and itself remarks that 00ON gives equality), fibre term via the fibre-ring nodes (noetherian, primes bijection, local ring iso) and (S_k) of the fibre, base term (S_k) of R, and the min-inequality computed in N u {infinity}. No new node other than the depth formula; no Serre-criterion node created."
  },
- "reviewed": "pass (L, 2026-10-10): 7 steps follow 0339: localize to a flat local map R_p -> S_q, the depth formula (new node 0337), the dimension formula (00ON leaf), (S_k) of the fibre via the fibre-ring local-ring isomorphism, and the min inequality in N u {infinity}."
+ "reviewed": "pass (L, 2026-10-10): 7 steps follow 0339: localize to a flat local map R_p -> S_q, the depth formula (new node 0337), the dimension formula (00ON leaf), (S_k) of the fibre via the fibre-ring local-ring isomorphism, and the min inequality in N u {infinity}.",
+ "lean": {
+  "module": "Sheaf.RingTheory.SerreSkGoesUp",
+  "declaration": "RingHom.isSerreS_of_flat",
+  "statement": "theorem isSerreS_of_flat {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S] [Algebra R S] (k : ℕ) (hflat : (algebraMap R S).Flat) (hfibres : ∀ (p : Ideal R) [p.IsPrime], ∃ (_ : IsNoetherianRing (p.Fiber S)), Ring.IsSerreS (p.Fiber S) k) (hR : Ring.IsSerreS R k) : Ring.IsSerreS S k",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/RingTheory/SerreSkGoesUp.lean",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
