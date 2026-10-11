@@ -1,11 +1,11 @@
 # Work queue
 
-732 items; claim with `tools/claim.py next <group> [--stage N]`.
+727 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (732)
+## Stage 2: nodes to state (727)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -25,15 +25,12 @@
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
-| `lem-weil-pbc-direct-image-split-cover-product` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 1 | state |
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
-| `lem-weil-pbc-etale-local-finite-multiple-points-elementary` | 1 | state |
 | `lem-weil-pbc-etale-local-ring-triples` | 1 | state |
-| `lem-weil-pbc-etale-localize-upstairs` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-cofinal-finite-coverings` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-etale-residue-polynomial-lift` | 1 | state |
@@ -42,8 +39,6 @@
 | `lem-weil-pbc-etale-retraction-finite-type-splitting` | 1 | state |
 | `lem-weil-pbc-etale-ring-map-conormal-criterion` | 1 | state |
 | `lem-weil-pbc-etale-ring-map-prescribed-residue-field` | 1 | state |
-| `lem-weil-pbc-etale-section-idempotent-splitting` | 1 | state |
-| `lem-weil-pbc-etale-section-lifting-henselian-pair` | 1 | state |
 | `lem-weil-pbc-etale-separated-stratified-finite` | 1 | state |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 1 | state |
 | `lem-weil-pbc-etale-smooth-zero-dimensional-fibres` | 1 | state |
