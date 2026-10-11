@@ -115,5 +115,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pbx (reviewer sub-agent of L); spot-checked: Source: Stacks morphisms 01WF (morphisms-lemma-H-projective-base-change) and schemes 01K5 (schemes-lemma-quasi-compact-preserved-base-change) against the convention of def-pc-projective-morphism (H-projective + quasi-compact, 01W8); the item statement is unchanged except the unused stmt_dep def-weil-scheme-over-base removed (statement does not cite it). Step 1: def-pc-projective-morphism gives i:X->P^n_S closed immersion with f=pi.i; lem-pc-closed-imm-base-change (same unit) gives the base-changed closed immersion; identification X x_{P^n_S}(P^n_S x_S S') = X x_S S' and P(n;S) x_S S' = S x_Z P_Z x_S S' = P(n;S') (def-nagata-projective-space-base-change) is pasting/associativity of fibre products from def-pc-fibre-product and def-pc-base-change, a few lines. Step 2: quasi-compactness of f from the definition, preserved by the new node, then the definition again. Small cases: identity base change, P^n_S->S itself, S'=empty. Blueprint ancestor lem-pc-genus-well-defined confirmed with blueprint_refs.py ancestor; searches 'projective base change' and 'quasi-compact base change' find no blueprint node stating either. No slopmaster2 declaration for projective-morphism base change (grep WeilConjectures). FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-pc-quasi-compact-base-change.json: status/mathlib_match/mathlib_searches: the worker's 'no match' Mathlib verdict was wrong; made it a Mathlib leaf, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean:165 (read; IsStableUnderBaseChange.of_isPullback at CategoryTheory/MorphismProperty/Limits.lean:110), grep search entry corrected (C5: also stated by clause (3) of the existing leaf lem-weil-pbc-qcqs-morphism-permanence, noted in lead_note). Dropped the declared tool_use lem-pc-closed-imm-base-change: it is in the item's own unit sk-thm-picard-rr, no tool use needed. Start-end UTC: Sat Oct 10 03:11:11 PM UTC 2026 - Sat Oct 10 03:12:39 PM UTC 2026.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-pbx): lem-pc-quasi-compact-base-change (made a Mathlib leaf by the reviewer) duplicates clause (3) of lem-weil-pbc-qcqs-morphism-permanence (unit sk-thm-p1); candidates for merging."
+ "lead_note": "2026-10-10 L (R-pbx): lem-pc-quasi-compact-base-change (made a Mathlib leaf by the reviewer) duplicates clause (3) of lem-weil-pbc-qcqs-morphism-permanence (unit sk-thm-p1); candidates for merging.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange",
+  "declaration": "AlgebraicGeometry.projective_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/ProjectiveBaseChange.lean",
+  "statement": "theorem projective_base_change {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) [IsProjective f] : IsProjective (pullback.snd f g)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pbc1243",
+  "group": "M1",
+  "result": "pass",
+  "note": "#check: X S S' : Scheme.{u}, f : X ⟶ S with [AlgebraicGeometry.IsProjective f] (recorded H-projective+QC class of def-pc-projective-morphism), g : S' ⟶ S unrestricted, X' = CategoryTheory.Limits.pullback f g, f' = pullback.snd f g (STATE BASE CHANGE X_T, explicit-g form), conclusion IsProjective f'; no extra hypotheses; empty S', n=0, identity base change covered; single arbitrary universe as in IsProjective; docstring has blueprint tag and two-step proof"
+ }
 }
