@@ -3880,3 +3880,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:47 L: merged deliver/C1/lem-weil-l-adic-extension-integers-dvr (stage 2; reviewer PASS; first push; Sheaf.NumberTheory.Padics.ExtensionIntegersDvr Padic.extension_integers_dvr)
 - 08:47 L: merged deliver/C1/lem-weil-pbc-affine-basic-sets-disjoint-refinement (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AffineBasicSetsDisjointRefinement PrimeSpectrum.finite_disjoint_basic_constructible_refinement)
 - 08:48 L: merged deliver/F1/lem-sp-filtered-complex-associated-spectral-sequence-construction (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.FilteredComplexSpectralSequence CategoryTheory.filteredComplex_associated_spectralSequence)
+- 08:48 L: merged deliver/E1/def-kun-dimension (stage 2; reviewer PASS; first push; WeilConjectures.Mathlib.Topology.KrullDimension topologicalKrullDimAt; existing declaration)
