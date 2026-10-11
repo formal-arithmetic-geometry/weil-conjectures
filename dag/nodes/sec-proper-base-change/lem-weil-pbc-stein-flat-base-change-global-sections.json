@@ -105,5 +105,24 @@
  "tool_uses": [
   "lem-pc-flat-base-change-cohom"
  ],
- "lead_note": "Off-route tool use recorded by L (2026-10-10): lem-pc-flat-base-change-cohom (02KH, flat base change of R^i f_*, imported, unit sk-thm-picard-semicon) in step 1, used as a black box."
+ "lead_note": "Off-route tool use recorded by L (2026-10-10): lem-pc-flat-base-change-cohom (02KH, flat base change of R^i f_*, imported, unit sk-thm-picard-semicon) in step 1, used as a black box.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperGlobalSectionsFlatBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.globalSections_flat_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperGlobalSectionsFlatBaseChange.lean",
+  "statement": "theorem Scheme.Hom.globalSections_flat_base_change {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S] {X : Scheme.{u}} (f : X ⟶ Spec (.of R)) [IsProper f] : IsPushout f.appTop (Spec.map (CommRingCat.ofHom (algebraMap R S))).appTop (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R S)))).appTop (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R S)))).appTop ∧ (IsIso ((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop) → IsIso ((Scheme.ΓSpecIso (.of S)).inv ≫ (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap R S)))).appTop))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sfb"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sfb",
+  "group": "R1",
+  "result": "fix",
+  "note": "R,S CommRing; Algebra R S + Module.Flat R S = flat ring map; f : X ⟶ Spec R IsProper; X_U = pullback f (Spec.map algebraMap); canonical H^0 tensor map iso = IsPushout of appTop square (fixed from applied instance lambda); corollary IsIso ΓSpecIso.inv ≫ appTop R → S"
+ }
 }
