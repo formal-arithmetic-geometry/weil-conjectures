@@ -250,5 +250,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ez2 (reviewer sub-agent of L); spot-checked: Re-push after the 15:03 return; points checked: (1) the circular higher-direct-image node is gone, step 3 now proves R^q eps_* F_et=0 from the new node lem-weil-pbc-etale-cohomology-over-open (Stacks 03F3 + localized etale site = U_Et, with j^{-1}F_et=(F|_U)_et via kappa; statement checked true), lem-sc-etale-affine-qcoherent for the affine open and quasi-coherent F|_U, sheafification zero on an affine basis, and lem-weil-pbc-site-higher-direct-image-sheafified-presheaf; lem-pc-affine-vanishing dropped: repaired. (3) step 5 writes the four squares, cites lem-sc-zariski-module-abelian-cohomology-agree (a correct 03FD for the Zariski site), fmap nodes removed from step 5 and tool_uses: repaired. (4) proof_deps = union of uses, tool_uses each with a why, report updated: repaired. (2) only asserted, not written (eps_*F_et ~ F_ab was routed through the cohomology-over-open node and its compatibility/naturality stated without derivation): FIX more, RETURN less (C1/C4): dag/nodes/sec-curve-estimates/lem-sc-etale-zariski-qcoh-comparison.json: proof[1]: rewrote step 2 to define theta_U = kappa on sections over U (lem-weil-pbc-open-immersion-module-pullback-restriction, unit clause theta_U(t)=eta^{j_U}(t)), prove rho_g(theta_U t)=theta_W(t|_W) from the unit normalization of c_{g,j_U} in lem-sc-etale-qcoherent-presheaf-functorial (now cited in step 2), naturality in phi from naturality of kappa, and define c^q_F = e^q o H^q(theta) o alpha^q explicitly; the over-open node dropped from step 2 (still used in step 3, proof_deps unchanged); proof[3]: the edge map e^q is the iso, hence c^q; proof[4]: square (ii) named as H^q(theta-square) and degree zero c^0 = theta_X = identity under Gamma(X,F)=Gamma(X,id^*F). Statement agrees with 03DW(2) (canonical isomorphisms H^q(S,F)=H^q(S_et,F^a)) plus naturality; Leray edge map lem-weil-pbc-site-leray-degenerate applied with V=X final, hypotheses supplied by step 3. Small cases: q=0, affine X (both sides vanish for q>0), phi=id. All tool_uses accepted as generic site/module tools. Start Sat Oct 10 03:27:45 PM UTC 2026, end Sat Oct 10 03:29:22 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etale_zariski_qcoh_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleZariskiQcohComparison.lean",
+  "statement": "theorem etale_zariski_qcoh_comparison (X : Scheme.{u}) : ∃ m : ∀ (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent], (F ⟶ G) → (etaleTensorSectionsSheaf F ⟶ etaleTensorSectionsSheaf G), (∀ (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] (φ : F ⟶ G) (U : X.Etale), (m F G φ).hom.app (op U) = ((tensorPullback U.hom).map φ).app ⊤) ∧ ∃ c : ∀ (F : X.Modules) [F.IsQuasicoherent] (q : ℕ), ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≃+ @Sheaf.H _ _ X.smallEtaleTopology (etaleTensorSectionsSheaf F) inferInstance (HasExt.standard _) q, (∀ (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent] (φ : F ⟶ G) (q : ℕ) (x : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F), c G q (((RingedSpace.moduleCohomology X.toRingedSpace q).map φ).hom x) = @Sheaf.H.map _ _ X.smallEtaleTopology inferInstance (HasExt.standard _) _ _ (m F G φ) q (c F q x)) ∧ (∀ (F : X.Modules) [F.IsQuasicoherent] (s : Γ(F, ⊤)), @Sheaf.H.equiv₀ _ _ X.smallEtaleTopology inferInstance (HasExt.standard _) (etaleTensorSectionsSheaf F) _ terminalIsTerminal (c F 0 (((@Functor.toRightDerivedZero _ _ _ _ _ (@InjectiveResolution.instHasInjectiveResolutions _ _ _ (RingedSpace.moduleSheaves_abelian_enoughInjectives X.toRingedSpace).2) _ (RingedSpace.globalSectionsFunctor X.toRingedSpace) _).app F).hom s)) = tensorSectionsUnit (⊤_ X.Etale).hom F s)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12",
+  "existing": false,
+  "note": "Full comparison, natural in all quasi-coherent modules and normalized in degree zero. Uses RingedSpace.moduleCohomology on the left and the standard large Ext model Sheaf.H of etale cohomology on the right, as allowed by the recorded etale-cohomology dependency; no additional typeclass hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
