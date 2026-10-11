@@ -13,21 +13,61 @@
  },
  "kind": "statement",
  "title": "Tor-independent tensor comparison for a bounded projective complex",
- "statement": "Let R be a commutative ring and let A and B be R-algebras such that Tor_i^R(A,B)=0 for every i>0 [def-weil-pbc-tor-modules]. Put E=A\\otimes_R B. If Q^\\bullet is a bounded complex of finite projective A-modules [def-pc-perfect-complex] and D is a localization of E [lem-weil-pbc-localization-module-over-localization], then for every i the canonical map H^i(Q^\\bullet\\otimes_R^L B)\\otimes_E D \\longrightarrow H^i(Q^\\bullet\\otimes_A D) is an isomorphism [def-pc-derived-category, def-weil-derived-tensor].",
+ "statement": "Let R be a commutative ring and let A and B be commutative R-algebras. Write Tor_i^R(-,-) for the usual projective-resolution Tor groups [def-weil-pbc-tor-modules], and assume Tor_i^R(A,B)=0 for every i>0. Put E=A\\otimes_R B. Let Q^\\bullet be a bounded cochain complex of A-modules whose terms are finite projective A-modules (each is a direct summand of A^m for some finite m), and let D be a localization of E. Writing Q^\\bullet\\otimes_R^L B for the left-derived tensor product and Q^\\bullet\\otimes_A D for the ordinary tensor complex, the canonical map H^i(Q^\\bullet\\otimes_R^L B)\\otimes_E D \\longrightarrow H^i(Q^\\bullet\\otimes_A D) is an isomorphism for every i.",
  "source": {
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 08IB, lemma-compare-base-change: local affine reduction and Tor-independent comparison of derived tensors"
  },
  "stmt_deps": [
-  "def-pc-derived-category",
-  "def-pc-perfect-complex",
-  "def-weil-derived-tensor",
-  "def-weil-pbc-tor-modules",
-  "lem-weil-pbc-localization-module-over-localization"
+  "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every degree n, Q^n is a finite projective A-module. The Tor-independence hypothesis and [lem-pc-finite-projective-tor-acyclic] therefore give Tor_i^R(Q^n,B)=0 for every i>0.",
+   "uses": [
+    "lem-pc-finite-projective-tor-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-termwise-tor-acyclic-derived-tensor] to Q^bullet and B. The canonical derived-to-ordinary tensor map is a quasi-isomorphism, so for every i it identifies H^i(Q^bullet tensor_R^L B) with H^i(Q^bullet tensor_R B).",
+   "uses": [
+    "lem-pc-termwise-tor-acyclic-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08IB, lemma-compare-base-change: Tor-independent comparison of derived tensors"
+   }
+  },
+  {
+   "text": "The canonical map E=A\\otimes_R B\\to D is a localization of E, hence D is a flat E-module [lem-weil-pbc-localization-flat]. The ordinary tensor complex C^\\bullet=Q^\\bullet\\otimes_R B is a bounded complex of E-modules (C^n=Q^n\\otimes_A E). By [lem-weil-pbc-flat-tensor-exact], -\\otimes_E D preserves exactness of each sequence C^{i-1}\\to C^i\\to C^{i+1}, so it carries kernels and images of the differentials to those of C^\\bullet\\otimes_E D, giving H^i(C^\\bullet)\\otimes_E D\\cong H^i(C^\\bullet\\otimes_E D) for every i. Degreewise associativity of tensor products gives (Q^n\\otimes_R B)\\otimes_E D=(Q^n\\otimes_A E)\\otimes_E D\\cong Q^n\\otimes_A D, compatibly with differentials. Combined with Step 2, under these identifications the map in the statement is the composite of these isomorphisms, hence an isomorphism for every i.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 08IB, lemma-compare-base-change: local affine reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-finite-projective-tor-acyclic",
+  "lem-pc-termwise-tor-acyclic-derived-tensor",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08IB, lemma-compare-base-change"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,12 +92,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pc-tor-independent-perfect-pullback-comparison",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality"
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-tor-independent-projective-complex-tensor",
+  "worker": "stage1",
+  "summary": "Split the Tor-independent bounded-projective tensor comparison into finite-projective Tor acyclicity, termwise Tor-acyclic derived-tensor computation, and exact localization with tensor associativity.",
+  "blueprint": "Realizes the Tag 0AVW/08IB clause that Tor independence identifies the base-derived tensor with the pullback tensor at each stalk.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tpt0018",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tpt0018 (reviewer sub-agent of L); spot-checked: Steps 1-2: children state exactly the needed Tor vanishing (summand of A^m) and termwise-Tor-acyclic derived=ordinary tensor; no duplicate among 08IB nodes, lem-pc-module-bounded-flat-kflat, lem-pc-bounded-above-flat-tensor-acyclic; citer 502603da5 Step 2 uses this statement with D=C (C4 ok). FIX more, RETURN less: C4 in Step 3 (missed by the second reading): lem-weil-pbc-localization-module-exact states exactness of T^{-1}(-), not of -\\otimes_E D, and the step was marked elementary while citing it; replaced by lem-weil-pbc-localization-flat (D flat over E) + lem-weil-pbc-flat-tensor-exact (flat tensor preserves exactness, hence commutes with H^i), elementary false, proof_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }

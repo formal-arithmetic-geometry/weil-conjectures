@@ -3080,3 +3080,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:17 UTC L: C1 etale-torsor-h1-functoriality FIX 7c471da85 (R-eth0015).
 - 00:17 L: merged deliver/M1/lem-pc-module-opcycles-tor-surjection (reviewer FIX; first push; new nodes: 0)
 - 00:17 UTC L: M1 module-opcycles-tor-surjection FIX 218cb0973 (R-ots0016; Tor symmetry route, TeX). Second reading missed wrong mathematics in step 1.
+- 00:18 L: merged deliver/F1/lem-pc-tor-independent-projective-complex-tensor (reviewer FIX; first push; new nodes: 2)
