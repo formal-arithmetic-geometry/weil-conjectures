@@ -3788,3 +3788,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:14 L: merged deliver/K1/lem-sc-p1-linear-syzygy (stage 2; reviewer PASS; first push; Sheaf.RingTheory.MvPolynomial.TwoVariableSyzygy MvPolynomial.exists_eq_mul_X_and_eq_neg_mul_X)
 - 08:15 L: merged deliver/K1/lem-sc-derived-hom-mayer-vietoris (stage 2; reviewer PASS; after a return; Sheaf.Paper.DerivedHomMayerVietoris AlgebraicGeometry.derived_hom_mayer_vietoris; statement corrected (2 citers))
 - 08:15 L: merged deliver/K1/lem-sc-global-generation-nonvanishing-cover (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.GlobalGenerationNonvanishingCover AlgebraicGeometry.Scheme.Modules.globalGeneration_nonvanishing_cover)
+- 08:15 L: merged deliver/H1/lem-sc-global-sections-left-exact (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GlobalSectionsLeftExact AlgebraicGeometry.Scheme.Modules.globalSectionsFunctor_additive_leftExact)

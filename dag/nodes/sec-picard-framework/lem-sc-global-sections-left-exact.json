@@ -159,5 +159,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gsl1707 (reviewer sub-agent of L); spot-checked: Source: Stacks 01EZ (cohomology-lemma-before-Leray, cohomology.tex present) uses left exactness of Gamma(Y,-); the item statement (Gamma(X,-): Mod(O_X)->Ab additive and kernel-preserving, hence left exact per def-sp-left-exact-additive) agrees. Step 1-2: def-weil-sheaf-of-modules-category (mathlib leaf) states Mod(O) abelian with kernels computed sectionwise, which carries kernel preservation. Step 3: def-sp-left-exact-additive defines additive as preserving finite products and left exact as additive plus kernels; the delivered step asserted finite products sectionwise without a node stating it (C4). FIX more, RETURN less: dag/nodes/sec-picard-framework/lem-sc-global-sections-left-exact.json: proof[2].text/uses and proof_deps: cite the existing Mathlib leaf lem-weil-pbc-module-sheaves-limits-sectionwise (limits in Mod(O) computed sectionwise, evaluation to the limit of abelian groups) for finite products; mathlib_searches: added my Loogle query 'SheafOfModules.evaluation, CategoryTheory.Limits.PreservesFiniteLimits' -> SheafOfModules.Finite.evaluationPreservesFiniteLimits (Limits.lean:98, verified with sed) evaluation into ModuleCat(R(X)) on a general site, a generalization not the Ab/Scheme.Modules statement, so the item stays a split, no leaf. No new nodes; DAG grep found no existing node stating the item. Small cases: X empty (Gamma = 0), X = Spec k. Start Sat Oct 10 05:07:43 PM UTC 2026, end Sat Oct 10 05:08:29 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlobalSectionsLeftExact",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.globalSectionsFunctor_additive_leftExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalSectionsLeftExact.lean",
+  "statement": "theorem globalSectionsFunctor_additive_leftExact (X : Scheme.{u}) : (globalSectionsFunctor X).Additive ∧ ∀ {M N : X.Modules} (f : M ⟶ N), PreservesLimit (parallelPair f 0) (globalSectionsFunctor X)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gsl1203",
+  "group": "H1",
+  "result": "pass",
+  "note": "X:Scheme = def-pc-scheme; X.Modules = Mod(O_X); globalSectionsFunctor = toPresheaf then eval at top, to AddCommGrpCat (Ab); conclusion Additive and PreservesLimit (parallelPair f 0) for all f = additive + preserves kernels (node's literal left-exact form); no Mathlib/WeilConjectures/lean/Sheaf global-sections functor on X.Modules exists (Tilde's is Spec-only, Sheaf.Γ is for sites with sheaves of Ab); empty scheme and universe u covered"
  }
 }
