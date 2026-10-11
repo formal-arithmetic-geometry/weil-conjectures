@@ -1,11 +1,11 @@
 # Work queue
 
-511 items; claim with `tools/claim.py next <group> [--stage N]`.
+508 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (511)
+## Stage 2: nodes to state (508)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -30,7 +30,6 @@
 | `lem-pc-fp-module-map-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-module-tor-amplitude-flat-model` | 1 | state |
-| `lem-pc-picard-functor-agrees-sc` | 1 | state |
 | `lem-pc-qcoh-truncation-derived-limit` | 1 | state |
 | `lem-pc-tor-amplitude-qcoh-test` | 1 | state |
 | `lem-pc-unbounded-derived-functor-cohomological-bound` | 1 | state |
@@ -52,7 +51,6 @@
 | `lem-sc-local-section-quotient-finite-free` | 1 | state |
 | `lem-sc-local-splitting-finite-free` | 1 | state |
 | `lem-sc-numerical-polynomial-leading-term` | 1 | state |
-| `lem-sc-p1-invertible-section-localization` | 1 | state |
 | `lem-sc-p1-section-clearing-denominators-qcqs` | 1 | state |
 | `lem-sc-p1-section-restriction-s-torsion` | 1 | state |
 | `lem-sc-perfect-local-pseudocoherent-free-model` | 1 | state |
@@ -67,7 +65,6 @@
 | `lem-weil-pbc-affine-module-correspondence` | 1 | state |
 | `lem-weil-pbc-affine-morphism-relative-spec` | 1 | state |
 | `lem-weil-pbc-affine-pushforward-base-change` | 1 | state |
-| `lem-weil-pbc-affine-pushforward-ideal-product` | 1 | state |
 | `lem-weil-pbc-algebra-directed-colimit-finite-type` | 1 | state |
 | `lem-weil-pbc-closed-immersion-pushforward-annihilated` | 1 | state |
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1 | state |
