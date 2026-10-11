@@ -105,13 +105,14 @@ noncomputable abbrev composeAndSheafifyOplaxMonoidal :
     (Sheaf.composeAndSheafify J L).OplaxMonoidal :=
   (Sheaf.adjunction J adj).leftAdjointOplaxMonoidal
 
+omit [BraidedCategory A] [BraidedCategory B'] [L.OplaxMonoidal] [adj.IsMonoidal] in
 lemma isMonoidal_sheafAdjunction :
     letI := composeAndSheafifyOplaxMonoidal J adj
     (Sheaf.adjunction J adj).IsMonoidal := by
   let := (Sheaf.adjunction J adj).leftAdjointOplaxMonoidal
   infer_instance
 
-omit [(J.W (A := B)).IsMonoidal] [HasWeakSheafify J B] in
+omit [(J.W (A := B)).IsMonoidal] [HasWeakSheafify J B] [BraidedCategory A] [BraidedCategory B'] in
 /-- If `L` is strong monoidal, the comparison `δ : L_*(S ⊗ T) ⟶ L_* S ⊗ L_* T` of the sheafified
 postcomposition `L_*` is an isomorphism. On sheafifications of presheaves this follows from the
 conjugate triangle `CategoryTheory.conjugateEquiv_symm_app_tensor_comp_δ`, sheafification after
@@ -121,7 +122,7 @@ lemma isIso_δ_composeAndSheafify {L : B' ⥤ A} [L.Monoidal] (adj : L ⊣ R) [a
     (S T : Sheaf J B') :
     letI := composeAndSheafifyOplaxMonoidal J adj
     IsIso (δ (Sheaf.composeAndSheafify J L) S T) := by
-  letI := composeAndSheafifyOplaxMonoidal J adj
+  let := composeAndSheafifyOplaxMonoidal J adj
   have := isMonoidal_sheafAdjunction J adj
   have : IsIso (δ ((Functor.whiskeringRight _ _ _).obj L ⋙ presheafToSheaf J A) S.obj T.obj) := by
     rw [Functor.OplaxMonoidal.comp_δ]
@@ -142,14 +143,14 @@ lemma isIso_δ_composeAndSheafify {L : B' ⥤ A} [L.Monoidal] (adj : L ⊣ R) [a
     rw [← Functor.OplaxMonoidal.δ_natural]
     infer_instance
   exact IsIso.of_isIso_comp_left ((Sheaf.composeAndSheafify J L).map (εS ⊗ₘ εT)) _
-omit [(J.W (A := B)).IsMonoidal] [HasWeakSheafify J B] in
+omit [(J.W (A := B)).IsMonoidal] [HasWeakSheafify J B] [BraidedCategory A] [BraidedCategory B'] in
 /-- If `L` is strong monoidal, the comparison `η : L_* 𝟙 ⟶ 𝟙` of the sheafified postcomposition
 is an isomorphism, by the conjugate triangle
 `CategoryTheory.conjugateEquiv_symm_app_unit_comp_η`. -/
 lemma isIso_η_composeAndSheafify {L : B' ⥤ A} [L.Monoidal] (adj : L ⊣ R) [adj.IsMonoidal] :
     letI := composeAndSheafifyOplaxMonoidal J adj
     IsIso (η (Sheaf.composeAndSheafify J L)) := by
-  letI := composeAndSheafifyOplaxMonoidal J adj
+  let := composeAndSheafifyOplaxMonoidal J adj
   have := isMonoidal_sheafAdjunction J adj
   have : IsIso (η ((Functor.whiskeringRight _ _ _).obj L ⋙ presheafToSheaf J A)) := by
     rw [Functor.OplaxMonoidal.comp_η]
@@ -166,7 +167,7 @@ lemma isIso_η_composeAndSheafify {L : B' ⥤ A} [L.Monoidal] (adj : L ⊣ R) [a
 oplax structure being `CategoryTheory.composeAndSheafifyOplaxMonoidal`. -/
 noncomputable abbrev composeAndSheafifyMonoidal {L : B' ⥤ A} [L.Monoidal] (adj : L ⊣ R)
     [adj.IsMonoidal] : (Sheaf.composeAndSheafify J L).Monoidal :=
-  letI := composeAndSheafifyOplaxMonoidal J adj
+  let := composeAndSheafifyOplaxMonoidal J adj
   have := isIso_η_composeAndSheafify J adj
   have := isIso_δ_composeAndSheafify J adj
   .ofOplaxMonoidal _
