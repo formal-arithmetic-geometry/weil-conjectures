@@ -161,5 +161,23 @@
   "item": "lem-weil-pbc-separably-generated-differentials-dimension",
   "worker": "stage1",
   "summary": "Checked the statement against Stacks Algebra 031W (lines 44189-44202) and the dimension assertion in 00TV. The omitted computation splits into the polynomial differential basis (existing Mathlib leaf 00RX), localization to the rational-function field (existing Mathlib leaf 00RT), and the canonical differential base-change isomorphism along finite separable K/k(x_i) (new Mathlib leaf, Mathlib/RingTheory/Etale/Kaehler.lean:38 via Etale/Field.lean:98). The four steps spell out the fraction-field identification, finite-degree reduction, basis transport, and the r=0 case."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparablyGeneratedDifferentialsDimension",
+  "declaration": "KaehlerDifferential.exists_basis_differentials_of_separating_transcendenceBasis",
+  "file": "lean/Sheaf/FieldTheory/SeparablyGeneratedDifferentialsDimension.lean",
+  "statement": "theorem exists_basis_differentials_of_separating_transcendenceBasis {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K] (hfg : (⊤ : IntermediateField k K).FG) (hsep : Algebra.IsSeparableExtension k K) {r : ℕ} (x : Fin r → K) (hx : IsTranscendenceBasis k x) (hxs : Algebra.IsSeparable (IntermediateField.adjoin k (Set.range x)) K) : (∃ b : Module.Basis (Fin r) K (KaehlerDifferential k K), ∀ i : Fin r, b i = D k K (x i)) ∧ FiniteDimensional K (KaehlerDifferential k K) ∧ (Module.finrank K (KaehlerDifferential k K) : Cardinal.{v}) = Algebra.trdeg k K",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
