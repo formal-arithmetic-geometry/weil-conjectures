@@ -5649,3 +5649,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:30 L: returned deliver/F1/lem-weil-pbc-colimit-of-sites-injective-system (reviewer RETURN: (reviewer R-h4bfd5, head 4bfd5e70f) H3+H4 (lean/Sheaf/Paper/ColimitSitesInjectiveSystem.lean, theorem exists_compatible_)
 - 19:31 L: merged deliver/H1/lem-weil-pbc-spectral-finite-coequalizer-embeds-constant (stage 2; reviewer PASS; first push; Sheaf.Topology.SpectralFiniteCoequalizerEmbedsConstant TopCat.spectral_finite_coequalizer_embeds_constant)
 - 19:31 L: merged deliver/N1/def-nagata-qc-open-equality-stage (stage 2; reviewer PASS; after a return; Sheaf.AlgebraicGeometry.NagataQCOpenEqualityStage AlgebraicGeometry.nagataQCOpenEqualityStage; statement corrected (4 citers))
+- 19:31 L: merged deliver/Q1/lem-weil-pbc-gabber-strict-henselian-zariski-comparison (stage 2; reviewer PASS; first push; Sheaf.Paper.StrictHenselianZariskiEtaleComparison strictHenselian_zariski_etale_comparison)
