@@ -176,5 +176,28 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ddp1839 (reviewer sub-agent of L); spot-checked: Read packet; checked no cycle (stmt/proof deps exclude derived-pullback-composition and derived-adjoint; lem-pc-kflat-pullback-preservation and lem-pur-derived-change-of-rings do not depend on this item); checked Stacks 06YI/06YJ/06YC/06YG text. FIX more, RETURN less: C1/E7 the delivered definition asserted 'computed by a K-flat resolution' with no argument for independence of the resolution and left ambiguous which complex is resolved; restated precisely as Lg^* = L(g^sharp)^* o g^{-1} with the derived change of rings of lem-pur-derived-change-of-rings (generic tool, other unit) and added three proof steps (g^{-1} exact via lem-weil-pbc-topological-inverse-image-stalk; derived change of rings; g^{-1}P K-flat over g^{-1}O_S via lem-pc-kflat-pullback-preservation (06YC) on (T,g^{-1}O_S)->(S,O_S), so Lg^*E = g^*P independently of P, Stacks 06YJ). Dropped the unsupported phrase 'the left derived functor' (E7). Second reading by F1 missed this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullback",
+  "declaration": "AlgebraicGeometry.derivedPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullback.lean",
+  "statement": "def derivedPullback {T S : Scheme.{u}} (g : T ⟶ S) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] : schemeDerivedCategory S ⥤ schemeDerivedCategory T",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.exists_derivedPullback",
+   "AlgebraicGeometry.derivedPullback"
+  ],
+  "note": "The chosen functor satisfies the left-derived universal property for the recorded tensor pullback, is triangulated, and has a natural counit invertible on every K-flat complex; exact inverse image preserves K-flat resolutions. The shared SheafOfModules category instances are used throughout."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ddp1300",
+  "group": "K1",
+  "result": "pass",
+  "note": "g:T⟶S on Scheme.{u}; source/target schemeDerivedCategory S/T on the moduleRings carrier with sibling HasDerivedCategory.{w} binders; L pinned by IsLeftDerivedFunctor ε for E pinned (obj/map eqToHom) to tensorPullbackObj/Map g; CommShift+IsTriangulated; ε invertible on every IsKFlat P (Lg*E ≅ g*P); I pinned to inverseImageModule/Map, exact, carries K-flat resolutions to K-flat resolutions over inverseImageRing (06YC); def = Classical.choose as exists_tensorPullbackAdjunction; no source/Mathlib O_X-module derived pullback (source only étale upperStar.leftDerivedFunctor); recompiled on sheaf-dag c77be01c6 with #check"
  }
 }
