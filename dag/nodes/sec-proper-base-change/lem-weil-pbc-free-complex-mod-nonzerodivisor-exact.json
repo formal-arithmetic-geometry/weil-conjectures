@@ -171,5 +171,24 @@
   "summary": "Read Stacks 00MZ and its proof (algebra.tex 24766-24795) in Situation 00MS; tags 00MR, 00MS, 00MZ verified in tags/tags. Statement kept (it matches 00MZ; R local and x in m are hypotheses of the source that the proof does not use). The source's three-line proof (snake lemma / long exact sequence for 0 -> F -> F -> F/xF -> 0) written out in four steps: reindexing as a cochain complex of R-modules and exactness = vanishing of homology; the degreewise short exact sequence (x injective on free modules as x is a nonzerodivisor; R^n/xR^n = (R/xR)^n with the induced maps the reduced matrices); the long exact sequence [lem-weil-pbc-complex-ses-homology-long-exact] giving H_i(F/xF)=0 for 2<=i<=e; the translation back. Only existing nodes cited ([lem-weil-pbc-ring-modules-enough-injectives] for Mod(R) abelian with the usual kernels/images, a Mathlib leaf); no new node. The citer's step 4 (lem-weil-pbc-exact-free-complex-last-minors-regular-sequence) uses exactly this statement. Mathlib: the item's earlier searches (LeanSearch, LeanFinder, Loogle, grep) kept; one LeanSearch and one local_search added; the four-term candidate QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last stays a candidate (not a one-line specialization).",
   "blueprint": "The item is not a blueprint node; its blueprint ancestor thm-weil-pbc-finite-etale-lifting is served through the chain in blueprint.from.via (from.place 'step 7 of its split ... essential-surjectivity paragraphs', not 'unspecified', kept). None of the four steps realizes a place of thm-weil-pbc-finite-etale-lifting's proof directly: together they realize the Stacks 00MZ fact used in step 4 (the inductive reduction modulo x) of lem-weil-pbc-exact-free-complex-last-minors-regular-sequence, which lies under that step 7 (essential surjectivity, via the G-ring / regular local ring chain). same_as: [] after searching the whole blueprint (blueprint_refs.py search: 00MZ, 00MS, div-x, nonzerodivisor, zerodivisor, R/xR, 'nonzerodivisor exact complex', 'modulo nonzerodivisor exact', 'free complex exact', 'exact one less', 'what makes a complex exact', 'snake lemma long exact sequence homology', 'Buchsbaum Eisenbud', 'regular element complex', 'finite free exact at', 'regular sequence minors', 'Tor nonzerodivisor', 'long exact', 'reduction modulo', 'mod x'): no blueprint node states it."
  },
- "reviewed": "2026-10-10 L: 4 steps checked against the 00MZ proof: 0 -> F -x-> F -> F/xF -> 0 short exact degreewise (x a nonzerodivisor), long exact homology sequence gives H_i(F/xF) = 0 for i >= 2; locality of R and x in m unused (noted); citer exact-free-complex-last-minors step 4 matches"
+ "reviewed": "2026-10-10 L: 4 steps checked against the 00MZ proof: 0 -> F -x-> F -> F/xF -> 0 short exact degreewise (x a nonzerodivisor), long exact homology sequence gives H_i(F/xF) = 0 for i >= 2; locality of R and x in m unused (noted); citer exact-free-complex-last-minors step 4 matches",
+ "lean": {
+  "module": "Sheaf.RingTheory.FreeComplexModNonzerodivisorExact",
+  "declaration": "free_complex_mod_nonzerodivisor_exact",
+  "statement": "theorem free_complex_mod_nonzerodivisor_exact (R : Type u) [CommRing R] [IsLocalRing R] (e : ℕ) (he : 2 ≤ e) (n : ℕ → ℕ) (φ : ∀ i : ℕ, Matrix (Fin (n (i - 1))) (Fin (n i)) R) (hcomplex : ∀ i : ℕ, 1 ≤ i → i < e → ∀ v : Fin (n (i + 1)) → R, (φ i).mulVec ((φ (i + 1)).mulVec v) = 0) (hexact : ∀ i : ℕ, 1 ≤ i → i < e → Function.Exact (φ (i + 1)).mulVec (φ i).mulVec) (hinjective : Function.Injective (φ e).mulVec) (x : R) (hxmem : x ∈ IsLocalRing.maximalIdeal R) (hx : x ∈ nonZeroDivisors R) : let S := R ⧸ Ideal.span ({x} : Set R) let q : R →+* S := Ideal.Quotient.mk _ let φbar : ∀ i : ℕ, Matrix (Fin (n (i - 1))) (Fin (n i)) S := fun i => (φ i).map q Function.Injective (φbar e).mulVec ∧ (∀ i : ℕ, 2 ≤ i → i < e → Function.Exact (φbar (i + 1)).mulVec (φbar i).mulVec)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/FreeComplexModNonzerodivisorExact.lean",
+  "fixed_by": "R-fmn1102"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fmn1102",
+  "group": "M1",
+  "result": "fix",
+  "note": "local R, e>=2, Fin(n i) coordinate modules with Matrix.mulVec maps as the G1 citer 00N1 spells them, hcomplex/hexact on 1<=i<e, injectivity at n_e, x in m, nonzerodivisor now x ∈ nonZeroDivisors R, R/xR with entrywise-reduced matrices, conclusion injective at bar n_e and Function.Exact for 2<=i<e; one universe, no hollow hypothesis"
+ }
 }
