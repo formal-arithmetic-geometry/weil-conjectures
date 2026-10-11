@@ -19,7 +19,8 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-morphism-conventions",
-  "def-pc-base-change"
+  "def-pc-base-change",
+  "def-pc-scheme-module-flat-over"
  ],
  "proof": [
   {
@@ -121,5 +122,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fmd2912 (reviewer sub-agent of L); spot-checked: FIX more, RETURN less: (1) prior B repaired: lem-pc-affine-flat-module-descent now fixes stage i with A_j,B_j,N_j,A,B,N all tensor base changes from R_i, so 02JO(3)(a) holds by construction ((R_mu(x)A_i)(x)_{R_lam(x)A_i}(R_lam(x)B_i)=R_mu(x)B_i), (b) since a map of fp R_i-algebras is fp; the k[t,x]/(tx), x->0 system is not of this form; true; source 02JO(3); Noetherian dropped; not a duplicate of lem-weil-pbc-colimit-flat-ring-map (that is M=C), no Mathlib eventual-flatness theorem. (2) E7/C4 FIXED: the delivery replaced the item statement by the general 05LY form (Y_i, single stage i') while the report claims it was restored; the only citer lem-pc-flat-bounded-complex-descent uses flatness over S_{j'} for EVERY j'>=j_r, which the delivered statement dropped; restored the merged statement and stmt_deps verbatim and rewrote the proof for Y_i=S_i. (3) C1 FIXED: Step 1 now cites qcqs finite cover (X_i qc), lfp-affine-opens for B_{k,i} fp over R_i, Properties 01PC for fp chart module, Morphisms 01U4 (1)=>(2) for chart flatness over R; Step 2 applies the affine node with A_i=R_i and takes a common stage; Step 3 elementary gluing over the finite affine cover by Morphisms 01U4 (3)=>(1) for every j'>=j; Noetherian hypothesis stated as unused.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-fmd2912): Second reading by C1 missed that the item statement was changed (not restored) and lost the 'every later stage' conclusion its citer uses."
+ "lead_note": "2026-10-10 L (R-fmd2912): Second reading by C1 missed that the item statement was changed (not restored) and lost the 'every later stage' conclusion its citer uses.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatModuleDescent",
+  "declaration": "AlgebraicGeometry.exists_eventually_isFlatOver_of_limit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatModuleDescent.lean",
+  "statement": "theorem exists_eventually_isFlatOver_of_limit {I : Type v} [PartialOrder I] [IsDirectedOrder I] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (M : Xi.Modules) [M.IsFinitePresentation] [M.IsQuasicoherent] (hflat : Scheme.Modules.IsFlatOver ((Scheme.Modules.tensorPullback (pullback.fst f (c.π.app (op i)))).obj M) (pullback.snd f (c.π.app (op i)))) : ∃ j : I, ∃ hij : i ≤ j, ∀ (k : I) (hjk : j ≤ k), Scheme.Modules.IsFlatOver ((Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (R.map (homOfLE (hij.trans hjk)))))).obj M) (pullback.snd f (Spec.map (R.map (homOfLE (hij.trans hjk)))))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fmd1259",
+  "group": "F1",
+  "result": "pass",
+  "note": "directed I (fixed i); R : I ⥤ CommRingCat Noetherian stages, S_k = Spec R_k via R.op ⋙ Spec (qcqs, affine transitions by construction); limit cone + IsAffine c.pt = Spec R; f LFP+QC+QS = finite presentation; M IsFinitePresentation+IsQuasicoherent (#check: SheafOfModules classes); X = pullback f (c.π i), module = tensorPullback pullback.fst, hflat IsFlatOver along pullback.snd; ∃ j ≥ i ∀ k ≥ j same at S_k incl. k=j; IsFlatOver (slopmaster2 DirectImage:193) read = node's affine-pair clause exactly"
+ }
 }

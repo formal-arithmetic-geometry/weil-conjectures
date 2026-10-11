@@ -1,0 +1,127 @@
+{
+ "id": "def-pc-scheme-module-flat-over",
+ "kind": "definition",
+ "title": "Scheme module flat over a base morphism",
+ "status": "split",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] and $\\mathcal M$ a quasi-coherent sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. We say $\\mathcal M$ is flat over $S$ (through $f$) if for every pair of affine opens $V\\subseteq S$, $U\\subseteq X$ with $f(U)\\subseteq V$, the module $\\mathcal M(U)$ is flat over $\\mathcal O_S(V)$, with scalars restricted along the structure map. Equivalently, for every $x\\in X$, $\\mathcal M_x$ is flat over $\\mathcal O_{S,f(x)}$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Morphisms, Tag 01U3 (2), (4), and Lemma 29.26.2, Tag 01U4 (1) iff (2)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FlatOver|IsFlat|eventually.*flat",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no matching relative module-flatness definition or descent theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "eventual flatness of finitely presented quasi coherent module over inverse limit of schemes",
+   "results": "8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, AdicCompletion.flat_of_isNoetherian, SheafOfModules.instIsQuasicoherentOfIsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, Module.Flat.exists_factorization_of_isFinitelyPresented",
+   "date": "2026-10-11",
+   "verdict": "no matching relative module-flatness definition or descent theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, SheafOfModules.IsFinitePresentation",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no matching relative module-flatness definition or descent theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "sheaf of modules flat over morphism stalk modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat sheaf of modules over scheme morphism all stalks flat over base local ring",
+   "results": "8 hits: AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat.iff_flat_stalkMap, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.flat_appLE, RingHom.Flat.propertyIsLocal, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-11",
+   "verdict": "no matching relative module-flatness definition or descent theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFlatOver|FlatOver|flat over.*base|flat over.*morphism in WeilConjectures/AlgebraicGeometry/Modules and lean/Sheaf/AlgebraicGeometry; def nodes searched for flat over and flat stalk; blueprint_refs.py search flat module",
+   "results": "No relative module-flatness declaration. def-pc-flat-sheaf-modules concerns tensor exactness over the same structure sheaf; def-weil-flat-morphism concerns the structure ring rather than an arbitrary module. No existing definition node for this notion.",
+   "date": "2026-10-11",
+   "verdict": "new notion required"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsFlatOver /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage.lean:193, IsFlatOver: affine-local flatness of module sections over base affine rings. Full signature and docstring checked; exact match on quasi-coherent modules by 01U4.",
+   "date": "2026-10-11",
+   "verdict": "existing declaration used; no DAG node carries this notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-flat-module-descent",
+  "date": "2026-10-11",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-perfect-base-change",
+   "place": "eventual flatness of each finitely presented module term over the approximating base",
+   "via": [
+    "lem-pc-flat-module-descent",
+    "lem-pc-flat-bounded-complex-descent",
+    "lem-pc-finite-flat-proper-support-descent",
+    "lem-pc-noetherian-approximation-data",
+    "lem-pc-proper-support-perfect-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.IsFlatOver",
+  "statement": "def IsFlatOver (ℱ : X.Modules) (f : X ⟶ T) : Prop",
+  "branch": "slopmaster2",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Existing affine-local definition; equivalent to stalk flatness for quasi-coherent modules by Stacks Tag 01U4. No new Lean definition."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fmd1259",
+  "group": "F1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fmd1259",
+  "group": "F1",
+  "result": "pass",
+  "note": "directed I (fixed i); R : I ⥤ CommRingCat Noetherian stages, S_k = Spec R_k via R.op ⋙ Spec (qcqs, affine transitions by construction); limit cone + IsAffine c.pt = Spec R; f LFP+QC+QS = finite presentation; M IsFinitePresentation+IsQuasicoherent (#check: SheafOfModules classes); X = pullback f (c.π i), module = tensorPullback pullback.fst, hflat IsFlatOver along pullback.snd; ∃ j ≥ i ∀ k ≥ j same at S_k incl. k=j; IsFlatOver (slopmaster2 DirectImage:193) read = node's affine-pair clause exactly"
+ }
+}
