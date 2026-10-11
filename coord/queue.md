@@ -1,51 +1,56 @@
 # Work queue
 
-847 items; claim with `tools/claim.py next <group> [--stage N]`.
+863 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (847)
+## Stage 2: nodes to state (863)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-sbc-smooth-morphisms` | 1 | state |
+| `def-pod-l-adic-representations` | 1 | state |
+| `def-pod-lisse-l-adic-sheaves` | 1 | state |
 | `def-sc-divisor` | 1 | state |
 | `def-sc-kahler-differentials` | 1 | state |
 | `def-sc-scheme-tangent-space` | 1 | state |
 | `def-sp-kinjective-bridge` | 1 | state |
-| `def-weil-l-adic-coefficient-extension` | 1 | state |
 | `def-weil-pbc-charpoly-locally-free` | 1 | state |
 | `lem-kun-cp-approximation` | 1 | state |
+| `lem-pc-clopen-smooth-proper-curve` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
+| `lem-pc-proper-base-change` | 1 | state |
 | `lem-pc-ringed-space-derived-products` | 1 | state |
+| `lem-pod-adic-limit-finite-modules` | 1 | state |
+| `lem-pod-lattice-stabilizer-open` | 1 | state |
+| `lem-pod-profinite-stable-lattice` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
+| `lem-sc-curve-base-change-relative-dimension-one` | 1 | state |
 | `lem-sc-fibre-dimension-after-base-change` | 1 | state |
+| `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-invertible-module-generic-stalk` | 1 | state |
 | `lem-sc-mayer-vietoris-ringed-space` | 1 | state |
 | `lem-sc-separated-affine-function-field-surjective` | 1 | state |
 | `lem-sc-smooth-connected-curve-local-rings` | 1 | state |
+| `lem-sc-smooth-diagonal-regular-immersion` | 1 | state |
+| `lem-sc-standard-smooth-local-relative-dimension` | 1 | state |
 | `lem-sc-vector-bundle-line-subbundle` | 1 | state |
+| `lem-sp-cartan-eilenberg-comparison-homotopy` | 1 | state |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
-| `lem-sp-cartan-eilenberg-double-complex-homotopy` | 1 | state |
 | `lem-sp-ce-horizontal-lift` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-associated-module-pullback` | 1 | state |
-| `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
-| `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-stalks` | 1 | state |
 | `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
-| `lem-weil-pbc-colimit-etale-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-eventually-flat` | 1 | state |
 | `lem-weil-pbc-colimit-flat-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
-| `lem-weil-pbc-complete-local-flat-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-g-ring` | 1 | state |
 | `lem-weil-pbc-complete-local-map-cohen-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
@@ -159,6 +164,7 @@
 | `lem-weil-pbc-etale-local-finite-multiple-points-elementary` | 1 | state |
 | `lem-weil-pbc-etale-local-ring-triples` | 1 | state |
 | `lem-weil-pbc-etale-localize-upstairs` | 1 | state |
+| `lem-weil-pbc-etale-near-point-smooth-zero-fibre-dimension` | 1 | state |
 | `lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing` | 1 | state |
 | `lem-weil-pbc-etale-neighbourhood-prescribed-residue-field` | 1 | state |
 | `lem-weil-pbc-etale-open-fpqc-descent` | 1 | state |
@@ -176,6 +182,7 @@
 | `lem-weil-pbc-etale-section-lifting-henselian-pair` | 1 | state |
 | `lem-weil-pbc-etale-separated-stratified-finite` | 1 | state |
 | `lem-weil-pbc-etale-sheaf-clopen-product` | 1 | state |
+| `lem-weil-pbc-etale-smooth-zero-dimensional-fibres` | 1 | state |
 | `lem-weil-pbc-etale-splits-off-isolated-points-technical` | 1 | state |
 | `lem-weil-pbc-etale-splits-off-quasi-finite-part` | 1 | state |
 | `lem-weil-pbc-etale-stratification-local-gluing` | 1 | state |
@@ -525,6 +532,7 @@
 | `lem-weil-pbc-popescu-reduce-to-field` | 1 | state |
 | `lem-weil-pbc-popescu-resolve-char-p` | 1 | state |
 | `lem-weil-pbc-popescu-resolve-separable` | 1 | state |
+| `lem-weil-pbc-popescu-smoothing` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-in-base-after-localization` | 1 | state |
@@ -575,6 +583,7 @@
 | `lem-weil-pbc-quotient-base-change-closed-immersion-ideal` | 1 | state |
 | `lem-weil-pbc-quotient-by-power-torsion-no-torsion` | 1 | state |
 | `lem-weil-pbc-radicial-prime-unique-degree-p` | 1 | state |
+| `lem-weil-pbc-reduced-curve-normalization` | 1 | state |
 | `lem-weil-pbc-reduced-induced-closed-subscheme` | 1 | state |
 | `lem-weil-pbc-reduced-noetherian-total-ring-fractions` | 1 | state |
 | `lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions` | 1 | state |
@@ -670,12 +679,15 @@
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-smooth-at-generic-point-over-field` | 1 | state |
 | `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1 | state |
+| `lem-weil-pbc-smooth-at-prime-artinian-lifting` | 1 | state |
 | `lem-weil-pbc-smooth-at-prime-field-extension-descent` | 1 | state |
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1 | state |
 | `lem-weil-pbc-smooth-conormal-sequence-exact` | 1 | state |
+| `lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension` | 1 | state |
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1 | state |
 | `lem-weil-pbc-smooth-free-differentials-strictly-standard-power` | 1 | state |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1 | state |
+| `lem-weil-pbc-smooth-locally-standard-smooth` | 1 | state |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1 | state |
 | `lem-weil-pbc-smooth-over-field-local-complete-intersection` | 1 | state |
 | `lem-weil-pbc-smooth-over-field-regular-local` | 1 | state |
@@ -684,6 +696,9 @@
 | `lem-weil-pbc-smooth-product-algebra` | 1 | state |
 | `lem-weil-pbc-smooth-retract-relative-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-smooth-retract-standard-smooth` | 1 | state |
+| `lem-weil-pbc-smooth-ring-map-iff-smooth-affine` | 1 | state |
+| `lem-weil-pbc-smooth-section-etale-lift` | 1 | state |
+| `lem-weil-pbc-smooth-zero-differentials-affine-open-etale` | 1 | state |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state |
 | `lem-weil-pbc-spec-field-point-residue-field` | 1 | state |
 | `lem-weil-pbc-spec-finite-product-fields` | 1 | state |
@@ -816,6 +831,7 @@
 | `thm-sp-grothendieck` | 1 | state |
 | `def-nagata-glued-limit-comparison` | 2 | state |
 | `def-pc-essentially-constant-ind-diagram` | 2 | state |
+| `def-pc-smooth-projective-curve` | 2 | state |
 | `def-sc-group-scheme` | 2 | state |
 | `def-sp-convergence` | 2 | state |
 | `def-weil-pbc-constructible-torsion` | 2 | state |
@@ -857,7 +873,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 877 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 40 nodes that wait for stage 1, 854 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
