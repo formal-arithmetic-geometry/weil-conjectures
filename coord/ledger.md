@@ -4347,3 +4347,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:56 L: merged deliver/C1/lem-weil-pbc-idempotent-endomorphism-image-base-change (stage 2; reviewer FIX; first push; Sheaf.LinearAlgebra.IdempotentImageBaseChange LinearMap.idempotent_image_baseChange)
 - 10:57 L: merged deliver/E1/lem-weil-pbc-immersion-fibre-degree-one (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ImmersionFiberDegreeOne AlgebraicGeometry.Scheme.Hom.immersion_fiber_degree_one)
 - 10:57 L: merged deliver/M1/lem-weil-pbc-injective-resolution-ses (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.HorseshoeResolutions CategoryTheory.InjectiveResolution.exists_horseshoe_resolutions)
+- 10:57 L: merged deliver/J1/lem-weil-pbc-henselian-pair-approximation (stage 2; reviewer FIX; first push; Sheaf.RingTheory.HenselianPairApproximation henselian_pair_approximation)
