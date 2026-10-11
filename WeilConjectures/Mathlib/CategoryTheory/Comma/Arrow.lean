@@ -13,8 +13,10 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 An arrow `a ≫ c ≫ b` with `a` and `b` isomorphisms is isomorphic to `c`
 (`CategoryTheory.Arrow.isoOfIsIsoComp`), and an isomorphism `x ≅ y` identifies the arrows
 `H (α_x)` and `H (α_y)` attached to a natural transformation `α` and a functor `H`
-(`CategoryTheory.Arrow.isoMapApp`). These are the forms in which a morphism is identified with
-another one, up to isomorphism, once a factorisation of it is known.
+(`CategoryTheory.Arrow.isoMapApp`). More generally, two arrows related by isomorphisms
+through a commuting diagram are isomorphic (`CategoryTheory.Arrow.isoOfCompEq`). These are the
+forms in which a morphism is identified with another one, up to isomorphism, once a factorisation
+of it is known.
 -/
 
 @[expose] public section
@@ -58,5 +60,20 @@ lemma mk_whiskerLeft_whiskerRight_app {B D E : Type*} [Category* B] [Category* D
     Arrow.mk ((Functor.whiskerLeft F (Functor.whiskerRight α H)).app x) =
       Arrow.mk (H.map (α.app (F.obj x))) :=
   rfl
+
+/-- If `a ≫ x = b ≫ y ≫ c` with `a`, `b` and `c` isomorphisms, the arrows `x` and `y` are
+isomorphic. The hypothesis says that the two paths from `P` to `B` agree:
+```
+P --a--> A  --x--> B
+P --b--> A' --y--> B' --c--> B
+```
+-/
+noncomputable def isoOfCompEq {P A B A' B' : C} {x : A ⟶ B} {y : A' ⟶ B'} (a : P ⟶ A)
+    (b : P ⟶ A') (c : B' ⟶ B) [IsIso a] [IsIso b] [IsIso c] (w : a ≫ x = b ≫ y ≫ c) :
+    Arrow.mk x ≅ Arrow.mk y :=
+  Arrow.isoMk (asIso (inv a ≫ b)) (asIso (inv c)) (by
+    dsimp
+    rw [← cancel_epi a, ← cancel_mono c]
+    simp [reassoc_of% w])
 
 end CategoryTheory.Arrow
