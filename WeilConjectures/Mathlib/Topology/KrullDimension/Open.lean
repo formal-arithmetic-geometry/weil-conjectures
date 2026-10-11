@@ -75,3 +75,27 @@ theorem topologicalKrullDim_le_of_forall_exists_isOpen {Z : Set X} (hZ : IsClose
         exact ⟨⟨⟨x, hxZ⟩, hxV⟩, rfl⟩
     rw [(IsEmbedding.subtypeVal.comp IsEmbedding.subtypeVal).topologicalKrullDim_eq_range, hr]
     exact hd z.1 z.2
+
+omit [QuasiSober X] [T0Space X] in
+/-- A nonempty space has nonnegative dimension: the closure of a point is an irreducible closed
+subset. -/
+theorem topologicalKrullDim_nonneg [Nonempty X] : 0 ≤ topologicalKrullDim X :=
+  have : Nonempty (TopologicalSpace.IrreducibleCloseds X) :=
+    ⟨⟨closure {Classical.arbitrary X}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
+  krullDim_nonneg
+
+omit [QuasiSober X] [T0Space X] in
+/-- A nonempty space of dimension at most `N : ℕ` has dimension a natural number. -/
+theorem exists_topologicalKrullDim_eq_natCast [Nonempty X] {N : ℕ}
+    (h : topologicalKrullDim X ≤ N) : ∃ n : ℕ, n ≤ N ∧ topologicalKrullDim X = n := by
+  have h₀ := topologicalKrullDim_nonneg (X := X)
+  induction hd : topologicalKrullDim X using WithBot.recBotCoe with
+  | bot => simp [hd] at h₀
+  | coe m =>
+    induction m using ENat.recTopCoe with
+    | top =>
+      rw [hd] at h
+      exact absurd h (not_le.2 (by exact_mod_cast ENat.natCast_lt_top N))
+    | coe m =>
+      rw [hd] at h
+      exact ⟨m, by exact_mod_cast h, rfl⟩

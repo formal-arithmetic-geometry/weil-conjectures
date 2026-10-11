@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Flat
-public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
+public import WeilConjectures.SixFunctors.Etale.Perverse.AffinePushforward
 
 /-!
 # The perverse classes under the operations
@@ -304,8 +304,8 @@ theorem isPerverseLE_lowerShriek (d : ℕ) (f : X ⟶ Y) [IsAffineHom f] [Locall
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsPerverseLE n K) (hK' : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
     IsPerverseLE (n + d) ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) :=
-  -- TODO(adic): the fibrewise cohomological dimension bound and the generating blocks
-  sorry
+  supportCondition_shift_rightDerivedLowerShriek aY f d
+    (fun y ↦ ((f.fiberHomeo y).isHomeomorph.topologicalKrullDim_eq).symm.trans_le (hf y)) hK hK'.1
 
 /-- **Artin–Gabber**, cosupport side: under the hypotheses of `isPerverseLE_lowerShriek`, the
 compactly supported pushforward carries `ᵖD^{≥n}(X) ∩ Dctf(X)` into `ᵖD^{≥n-d}(Y)`, by Verdier
