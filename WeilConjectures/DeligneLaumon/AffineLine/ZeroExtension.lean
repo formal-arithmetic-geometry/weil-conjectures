@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
-public import WeilConjectures.WeilSheaf.ShiftedSheaf
+public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryWeights
 
 /-!
 # Comparing the transform of the zero extension with the transform of the middle extension
@@ -147,13 +147,11 @@ structure FourierCorrection (D D' : LisseOnDenseOpen k₀ l) where
         isoMiddleExtension.hom =
       isoExtensionByZero.hom ≫ (WeilSheaf.toComplex.map seq.g)⟦(1 : ℤ)⟧'
 
-/-- **Steps 1–4 of `prop-fd-zero-extension-comparison`.** The transform of the boundary sheaf
-`B = j_*M / j_!M` is `B'[1]` for a Weil sheaf `B'` on the dual line which is lisse, and has
-weights at most `w` as soon as `M` has. (blueprint: `prop-fd-zero-extension-comparison`) -/
-theorem exists_iso_fourierTransform_boundarySheaf (D : LisseOnDenseOpen k₀ l) :
+/-- **Steps 1–3 of `prop-fd-zero-extension-comparison`.** The transform of the boundary sheaf
+`B = j_*M / j_!M` is `B'[1]` for a Weil sheaf `B'` on the dual line which is lisse.
+(blueprint: `prop-fd-zero-extension-comparison`) -/
+theorem exists_isLisse_iso_fourierTransform_boundarySheaf (D : LisseOnDenseOpen k₀ l) :
     ∃ B' : WeilSheaf k₀ l (affineLine k₀), B'.IsLisse ∧
-      (∀ (ι : PadicAlgCl l →+* ℂ) (w : ℝ), D.sheaf.HasWeightsAtMost ι w →
-        B'.HasWeightsAtMost ι w) ∧
       Nonempty ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj D.boundarySheaf) ≅
         WeilSheaf.toShiftedComplex.obj B') := by
   sorry
@@ -360,35 +358,27 @@ theorem nonempty_fourierCorrection (_hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k�
     (_hD : D.sheaf.IsIrreducibleLisse)
     (_hne : D.sheaf.IsNonexceptional ψ D.j) (hFT : D.IsFourierPartner ψ D') :
     Nonempty (FourierCorrection ψ D D') := by
-  obtain ⟨B', -, -, ⟨eB⟩⟩ := D.exists_iso_fourierTransform_boundarySheaf ψ
+  obtain ⟨B', -, ⟨eB⟩⟩ := D.exists_isLisse_iso_fourierTransform_boundarySheaf ψ
   exact ⟨fourierCorrectionOfIso eB hFT.some⟩
 
-/-- The correction sheaf `B'` of a comparison datum is the one of
-`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_iso_fourierTransform_boundarySheaf`: both
-are `𝓗⁻¹ FT_ψ(B)`. -/
-lemma FourierCorrection.nonempty_iso {D D' : LisseOnDenseOpen k₀ l}
-    (c : FourierCorrection ψ D D') {B' : WeilSheaf k₀ l (affineLine k₀)}
-    (eB : (fourierTransform ψ).obj (WeilSheaf.toComplex.obj D.boundarySheaf) ≅
-      WeilSheaf.toShiftedComplex.obj B') : Nonempty (c.seq.X₁ ≅ B') :=
-  ⟨WeilSheaf.toShiftedComplex.preimageIso (c.isoBoundary.symm ≪≫ eB)⟩
-
-/-- The correction sheaf `B'` is lisse on the entire dual line: it is a sum of Artin–Schreier
-kernels. (blueprint: `sk-p-dl-a1-correction`, `prop-fd-zero-extension-comparison`) -/
+/-- The correction sheaf `B'` is lisse on the entire dual line: it is a sum of finite direct
+images of Artin–Schreier kernels. It is `𝓗⁻¹ FT_ψ(B)`, as is the sheaf of
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_isLisse_iso_fourierTransform_boundarySheaf`.
+(blueprint: `sk-p-dl-a1-correction`, `prop-fd-zero-extension-comparison`) -/
 theorem FourierCorrection.isLisse {D D' : LisseOnDenseOpen k₀ l}
     (c : FourierCorrection ψ D D') : c.seq.X₁.IsLisse := by
-  obtain ⟨B', hB', -, ⟨eB⟩⟩ := D.exists_iso_fourierTransform_boundarySheaf ψ
-  exact hB'.of_iso (c.nonempty_iso ψ eB).some.symm
+  obtain ⟨B', hB', ⟨eB⟩⟩ := D.exists_isLisse_iso_fourierTransform_boundarySheaf ψ
+  exact hB'.of_iso (WeilSheaf.toShiftedComplex.preimageIso (c.isoBoundary.symm ≪≫ eB)).symm
 
 /-- The correction sheaf `B'` has weights at most `w` when `M` is punctually `ι`-pure of weight
 `w`: semicontinuity of weights at the boundary points, together with the weight zero of the
-Artin–Schreier kernel. (blueprint: `sk-p-dl-a1-correction`, `prop-fd-zero-extension-comparison`)
--/
+Artin–Schreier kernel
+(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_of_iso_fourierTransform`).
+(blueprint: `sk-p-dl-a1-correction`, `prop-fd-zero-extension-comparison`) -/
 theorem FourierCorrection.hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ)
     {D D' : LisseOnDenseOpen k₀ l} (c : FourierCorrection ψ D D') {w : ℝ}
-    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) : c.seq.X₁.HasWeightsAtMost ι w := by
-  obtain ⟨B', -, hB', ⟨eB⟩⟩ := D.exists_iso_fourierTransform_boundarySheaf ψ
-  exact WeilSheaf.HasWeightsAtMost.of_iso (c.nonempty_iso ψ eB).some.symm
-    (hB' ι w hw.hasWeightsAtMost)
+    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) : c.seq.X₁.HasWeightsAtMost ι w :=
+  D.hasWeightsAtMost_of_iso_fourierTransform ψ hw.hasWeightsAtMost c.isoBoundary
 
 end WeilSheaf.LisseOnDenseOpen
 
