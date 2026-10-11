@@ -150,5 +150,29 @@
  "tool_uses": [
   "lem-pc-coherent-hi"
  ],
- "lead_note": "L 2026-10-10: tool_uses lem-pc-coherent-hi (unit sk-thm-picard-coherence; the 02O6 clause, generic). Stage 3: lem-pc-coherent-hi states cohomology via def-pc-morphism-conventions while this unit uses pqf-def-cohomology; check they agree."
+ "lead_note": "L 2026-10-10: tool_uses lem-pc-coherent-hi (unit sk-thm-picard-coherence; the 02O6 clause, generic). Stage 3: lem-pc-coherent-hi states cohomology via def-pc-morphism-conventions while this unit uses pqf-def-cohomology; check they agree.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsCompleteBase",
+  "declaration": "AlgebraicGeometry.formalFunctions_complete_base",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsCompleteBase.lean",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12",
+  "existing": false,
+  "statement": "theorem formalFunctions_complete_base {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) [IsAdicComplete I A] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (F : CoherentModules X) (p : ℕ) : ∃ e : (RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj F.obj ≅ limit (formalCompletionSystem ((Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) F.obj ⋙ (RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom)), ∀ n : ℕ, e.hom ≫ limit.π (formalCompletionSystem ((Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) F.obj ⋙ (RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom)) (op n) = (RingedSpace.moduleCohomology X.toRingedSpace p ⋙ ModuleCat.restrictScalars ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).map (formalModuleQuotientπ ((Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) (n + 1) F.obj)",
+  "note": "H^p and Gamma are A-modules by restrictScalars ((ΓSpecIso A).inv ≫ f.appTop) as in lem-weil-pbc-theorem-formal-functions (V1 7555dd5e8); the isomorphism is specified by its projections (the quotient-induced maps); index n is level n+1; the p = 0 clause is the separate theorem on actual global sections. Reviewer R-fcb fix.",
+  "declarations": [
+   "AlgebraicGeometry.formalFunctions_complete_base",
+   "AlgebraicGeometry.globalSections_formalFunctions_complete_base"
+  ],
+  "fixed_by": "R-fcb"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcb",
+  "group": "K1",
+  "result": "fix",
+  "note": "Noetherian A, IsAdicComplete I A, IsProper f, extended ideal ofIdealTop/comap tied inline, coherent F, all p; FIX: H^p and limit as A-modules via restrictScalars (V1 form), added p=0 global-sections theorem"
+ }
 }
