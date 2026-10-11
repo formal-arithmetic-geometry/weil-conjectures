@@ -165,5 +165,24 @@
   "item": "lem-weil-pbc-colimit-etale-ring-map",
   "worker": "stage1",
   "summary": "Split in five steps along the proof of Stacks Algebra 07RI. Statement kept (checked against algebra.tex line 47626). Step 1 base-changes the presentation C_0 = B_0[x]/(f) to every stage and to A (tensor-cancel-base-change, polynomial-scalar-extension, new Mathlib leaf lem-weil-pbc-tensor-quotient-base-change = Algebra.TensorProduct.quotIdealMapEquivTensorQuot, Stacks 00DF); step 2 turns etaleness into bijectivity of d:(f)/(f)^2 -> (+) C dx_k by the new unsplit node lem-weil-pbc-etale-ring-map-conormal-criterion (Stacks 00U1 + 00S1 + 02GJ; no such node existed, Mathlib has the ingredients 031I/Kaehler exact sequence but no one-line statement); step 3 writes surjectivity and injectivity of d over A as finitely many polynomial identities (Leibniz); step 4 descends them to a stage with the new unsplit node lem-weil-pbc-directed-colimit-base-change-elementwise (Stacks 00DD with 00D6/00D7; Mathlib has TensorProduct.directLimitLeft for Module.DirectLimit only); step 5 builds the inverse s of d_i from the descended identities, as Stacks does. The brief's guesses 00U9 (= lemma-etale-standard-smooth) and the module-sheaf nodes 01PK/01BS are not what the proof uses. Mathlib searches of the item were already recorded (no match)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleDirectedColimitDescent",
+  "declaration": "AlgebraicGeometry.Etale.exists_stage_of_directedColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleDirectedColimitDescent.lean",
+  "statement": "theorem Etale.exists_stage_of_directedColimit {I : Type w} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{u}) [HasColimit F] (i₀ : I) (B₀ C₀ : Type v) [CommRing B₀] [CommRing C₀] [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀] (φ₀ : B₀ →ₐ[F.obj i₀] C₀) (hfp : φ₀.FinitePresentation) : letI : Algebra (F.obj i₀) (colimit F : CommRingCat.{u}) := (colimit.ι F i₀).hom.toAlgebra Etale (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.map (AlgHom.id (F.obj i₀) (colimit F : CommRingCat.{u})) φ₀).toRingHom)) → ∃ (i : I) (hi : i₀ ≤ i), letI : Algebra (F.obj i₀) (F.obj i) := (F.map (homOfLE hi)).hom.toAlgebra Etale (Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.map (AlgHom.id (F.obj i₀) (F.obj i)) φ₀).toRingHom))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cer1450"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cer1450",
+  "group": "G1",
+  "result": "fix",
+  "note": "directed set I as [Preorder I] [IsDirected] (was PartialOrder; Stacks 00D3 preorder, as J1 63e62d7a5); ring universe u, index universe w, B0 C0 : Type v (were forced into the ring universe); F : I ⥤ CommRingCat, colimit F, colimit.ι A0-algebra; B0 C0 A0-algebras, phi0 A0-alg hom, AlgHom.FinitePresentation = finite presentation of C0 over B0 via phi0; phi = Algebra.TensorProduct.map id phi0, Spec.map contravariant gives Spec C -> Spec B; Etale = def-weil-etale-morphism's match; exists i, i0 <= i with transition algebra and same Etale conclusion"
  }
 }
