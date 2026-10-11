@@ -186,5 +186,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps following the proof of Etale Cohomology 09ZA: the images U_i open (open immersions), closed (finite maps are closed, existing leaf) and covering Z; the clopen strata Z_A of the source; the section on a stratum through the inverse of the open immersion (new composed leaf isoOpensRange, Restrict.lean:423/428/433 verified by L) and the factorization through U_i; gluing by the gluing leaf of sk-thm-reduction (a tool), the empty overlaps handled. Statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteClopenOpenCoverSection",
+  "declaration": "AlgebraicGeometry.exists_section_of_finite_clopen_open_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClopenOpenCoverSection.lean",
+  "statement": "theorem exists_section_of_finite_clopen_open_cover {n : ℕ} (Z V : Scheme.{u}) (p : V ⟶ Z) [IsFinite p] [Surjective p] (Vi : Fin n → Scheme.{u}) (k : ∀ i, Vi i ⟶ V) (hk : ∀ i, IsOpenImmersion (k i) ∧ IsClosedImmersion (k i)) (hcop : IsColimit (Cofan.mk V k)) (pi : ∀ i, Vi i ⟶ Z) (hpi : ∀ i, pi i = k i ≫ p) [∀ i, IsOpenImmersion (pi i)] : ∃ s : Z ⟶ V, s ≫ p = 𝟙 Z",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-coc1412",
+  "group": "K1",
+  "result": "pass",
+  "note": "Z V : Scheme, p : V ⟶ Z [IsFinite p] [Surjective p] (AlgebraicGeometry.* by pp.fullNames #check); ⨿V_i = Fin n family with IsColimit (Cofan.mk V k), k open+closed immersions (clopen subschemes); p_i = k i ≫ p via hpi with IsOpenImmersion; conclusion ∃ s, s ≫ p = 𝟙 Z; n=0 forces Z empty, true"
  }
 }
