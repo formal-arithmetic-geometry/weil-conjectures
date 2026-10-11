@@ -1,6 +1,6 @@
 # Work queue
 
-89 items; claim with `tools/claim.py next <group> [--stage N]`.
+87 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (1)
 
@@ -8,11 +8,11 @@
 |---|---|---|
 | `lem-pc-localization-preserves-nonzerodivisor` | 3011 | closed_part |
 
-## Stage 2: nodes to state (88)
+## Stage 2: nodes to state (86)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-weil-pbc-sites-and-cohomology` | 1 | state | 136 |
+| `def-weil-pbc-sites-and-cohomology` | 1 | state | 135 |
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
 | `def-pc-global-derived-rhom` | 1 | state | 4 |
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
@@ -31,7 +31,6 @@
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
-| `lem-sc-cech-comparison-natural` | 1 | state | 1 |
 | `lem-weil-pbc-edge-map-base-change` | 1 | state | 1 |
 | `lem-sc-affine-unit-divisor-base-change` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
@@ -67,7 +66,6 @@
 | `lem-sc-invert-s-cohomology-mayer-vietoris-diagram` | 1 | state | 0 |
 | `lem-sc-koszul-regular-immersion-derived-hom` | 1 | state | 0 |
 | `lem-sc-open-restriction-support-triangle` | 1 | state | 0 |
-| `lem-sc-pic-affine-base-change-compatibility` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-direct-sums` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 1 | state | 0 |
