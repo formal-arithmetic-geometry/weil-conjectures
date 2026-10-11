@@ -210,5 +210,24 @@
   "worker": "stage1",
   "summary": "Not a Mathlib leaf (three kinds of search, also by the creator; Mathlib has no descent of flatness to a stage of a limit; AffineTransitionLimit.lean has no flatness). Statement checked against Limits 04AI in Situation 081D (tags 04AI, 081D, 02JO verified in tags/tags): unchanged. Proof in 6 steps following 04AI: finitely many affine triples W_b, V_b, U_b (only quasi-compactness of X_0 used; lfp gives phi_0 of finite presentation, 01TQ leaf), the base over W_b as Spec of the directed colimit of the A_i (01YW node and Spec-colimit leaf), the pieces of f_T as Spec(id (x) phi_0), flatness of the piece over S read stalkwise (local rings of open subschemes, Spec-flat iff ring-flat leaf 01U5), the algebra result through a new unsplit node lem-weil-pbc-colimit-flat-ring-map (the algebra statement of the 04AI proof, from Algebra 02JO (3), concluding for all sufficiently large i so no separate persistence step is needed), and a common index with the stalkwise definition of flat. The affine reduction mirrors the reviewed split of lem-weil-pbc-descend-etale (07RP). Source typo: the 04AI proof writes 'an R_0-algebra map A_i -> B_i' for A_0 -> B_0. Existing 00R6 node lem-weil-pbc-colimit-eventually-flat is what the new node's own split (02JO (3) via 00QX/00R6 and openness of flatness) will use; not cited here."
  },
- "reviewed": "pass (L, 2026-10-10): 6 steps follow 04AI: finitely many affine triples over X_0 (quasi-compactness), the base over an affine W as Spec of a directed colimit of rings, the pieces of f_T as Spec of id tensor phi_0, flatness of f gives flatness of the colimit ring map (01U5 leaf), the algebra fact 02JO (3) (new unsplit node colimit-flat-ring-map) gives a stage for each piece, common index."
+ "reviewed": "pass (L, 2026-10-10): 6 steps follow 04AI: finitely many affine triples over X_0 (quasi-compactness), the base over an affine W as Spec of a directed colimit of rings, the pieces of f_T as Spec of id tensor phi_0, flatness of f gives flatness of the colimit ring map (01U5 leaf), the algebra fact 02JO (3) (new unsplit node colimit-flat-ring-map) gives a stage for each piece, common index.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation",
+  "declaration": "AlgebraicGeometry.exists_flat_stage_of_limit",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendFlatFinitePresentation.lean",
+  "statement": "theorem exists_flat_stage_of_limit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)] (c : Cone D) (hc : IsLimit c) (i₀ : I) [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))] (X₀ Y₀ : Over (D.obj (op i₀))) (f₀ : X₀ ⟶ Y₀) [CompactSpace X₀.left] [QuasiSeparatedSpace X₀.left] [CompactSpace Y₀.left] [QuasiSeparatedSpace Y₀.left] [LocallyOfFinitePresentation f₀.left] (hflat : Flat (((Over.pullback (c.π.app (op i₀))).map f₀).left)) : ∃ (i : I) (hi : i₀ ≤ i), Flat (((Over.pullback (D.map (homOfLE hi).op)).map f₀).left)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dff1141"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dff1141",
+  "group": "J1",
+  "result": "fix",
+  "note": "I directed preorder in Type u (fixed from Type v), D : Iᵒᵖ ⥤ Scheme.{u} affine transitions, Cone+IsLimit, i₀, S₀/X₀/Y₀ qcqs via CompactSpace/QuasiSeparatedSpace, f₀ : X₀ ⟶ Y₀ in Over S₀, LocallyOfFinitePresentation f₀.left, f = Over.pullback (c.π.app) map flat, ∃ i ≥ i₀ with Over.pullback (D.map) map Flat; matches J1 13cd55798 form"
+ }
 }

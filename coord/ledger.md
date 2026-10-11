@@ -4484,3 +4484,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:40 L: merged deliver/G1/lem-weil-pbc-lift-idempotent-upstairs (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LiftIdempotentUpstairs AlgebraicGeometry.exists_etale_lift_isIdempotentElem)
 - 11:41 L: merged deliver/M1/lem-weil-pbc-mittag-leffler-limit-exact (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.MittagLefflerLimitExact CategoryTheory.ShortComplex.mittagLeffler_quotient_and_limit_exact)
 - 11:41 L: merged deliver/E1/lem-weil-pbc-finite-surjective-affine-target-noetherian (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetNoetherian AlgebraicGeometry.isAffine_of_isFinite_surjective_of_isNoetherian)
+- 11:42 L: merged deliver/J1/lem-weil-pbc-descend-flat-finite-presentation (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation AlgebraicGeometry.exists_flat_stage_of_limit)
