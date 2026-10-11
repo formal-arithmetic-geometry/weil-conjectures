@@ -164,5 +164,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps: statement made precise (directed set Lambda of finite index pairs, transition maps, cocone maps); monomorphy of the subcoproduct inclusions from the finite-subcoproducts leaf, directedness, the induced maps via coequalizers, and the universal property of the colimit checked directly (instead of interchange of colimits plus cofinality). No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SheafFiniteTruncationColimit",
+  "declaration": "TopCat.sheaf_finite_truncation_colimit",
+  "file": "lean/Sheaf/Topology/SheafFiniteTruncationColimit.lean",
+  "statement": "theorem sheaf_finite_truncation_colimit (X : TopCat.{u}) (A B : Type u) (U : A → Opens X) (V : B → Opens X) (S : A → Type u) (T : B → Type u) (C : ∀ P : Set A, Cofan (fun a : P ↦ extensionByEmptyConstant (U a.val) (S a.val))) (D : ∀ P : Set B, Cofan (fun b : P ↦ extensionByEmptyConstant (V b.val) (T b.val))) (hC : ∀ P, IsColimit (C P)) (hD : ∀ P, IsColimit (D P)) (κ : ∀ (P Q : Set A), P ⊆ Q → ((C P).pt ⟶ (C Q).pt)) (δ : ∀ (P Q : Set B), P ⊆ Q → ((D P).pt ⟶ (D Q).pt)) (hκ : ∀ (P Q : Set A) (h : P ⊆ Q) (a : P), (C P).inj a ≫ κ P Q h = (C Q).inj ⟨a.val, h a.property⟩) (hδ : ∀ (P Q : Set B) (h : P ⊆ Q) (b : P), (D P).inj b ≫ δ P Q h = (D Q).inj ⟨b.val, h b.property⟩) (r s : (D Set.univ).pt ⟶ (C Set.univ).pt) (F : Cofork r s) (hF : IsColimit F) (hfinite : ∀ P : Set B, P.Finite → ∃ Q : Set A, Q.Finite ∧ ∃ r' s' : (D P).pt ⟶ (C Q).pt, r' ≫ κ Q Set.univ (Set.subset_univ Q) = δ P Set.univ (Set.subset_univ P) ≫ r ∧ s' ≫ κ Q Set.univ (Set.subset_univ Q) = δ P Set.univ (Set.subset_univ P) ≫ s) (L : Set (Set B × Set A)) (hL : ∀ p : Set B × Set A, p ∈ L ↔ p.1.Finite ∧ p.2.Finite ∧ ∃ r' s' : (D p.1).pt ⟶ (C p.2).pt, r' ≫ κ p.2 Set.univ (Set.subset_univ p.2) = δ p.1 Set.univ (Set.subset_univ p.1) ≫ r ∧ s' ≫ κ p.2 Set.univ (Set.subset_univ p.2) = δ p.1 Set.univ (Set.subset_univ p.1) ≫ s) : (∀ i : L, ∃! z : ((D i.val.1).pt ⟶ (C i.val.2).pt) × ((D i.val.1).pt ⟶ (C i.val.2).pt), z.1 ≫ κ i.val.2 Set.univ (Set.subset_univ i.val.2) = δ i.val.1 Set.univ (Set.subset_univ i.val.1) ≫ r ∧ z.2 ≫ κ i.val.2 Set.univ (Set.subset_univ i.val.2) = δ i.val.1 Set.univ (Set.subset_univ i.val.1) ≫ s) ∧ Nonempty L ∧ (∀ i j : L, ∃ k : L, i.val.1 ⊆ k.val.1 ∧ i.val.2 ⊆ k.val.2 ∧ j.val.1 ⊆ k.val.1 ∧ j.val.2 ⊆ k.val.2) ∧ (∀ (R S' : ∀ i : L, (D i.val.1).pt ⟶ (C i.val.2).pt), (∀ i : L, R i ≫ κ i.val.2 Set.univ (Set.subset_univ i.val.2) = δ i.val.1 Set.univ (Set.subset_univ i.val.1) ≫ r) → (∀ i : L, S' i ≫ κ i.val.2 Set.univ (Set.subset_univ i.val.2) = δ i.val.1 Set.univ (Set.subset_univ i.val.1) ≫ s) → ∀ Q : ∀ i : L, Cofork (R i) (S' i), (∀ i : L, IsColimit (Q i)) → ∃ (φ : ∀ (i j : L), i.val.1 ⊆ j.val.1 → i.val.2 ⊆ j.val.2 → ((Q i).pt ⟶ (Q j).pt)) (c : ∀ i : L, (Q i).pt ⟶ F.pt), (∀ (i j : L) (hB : i.val.1 ⊆ j.val.1) (hA : i.val.2 ⊆ j.val.2), (Q i).π ≫ φ i j hB hA = κ i.val.2 j.val.2 hA ≫ (Q j).π ∧ ∀ f : (Q i).pt ⟶ (Q j).pt, (Q i).π ≫ f = κ i.val.2 j.val.2 hA ≫ (Q j).π → f = φ i j hB hA) ∧ (∀ i : L, (Q i).π ≫ c i = κ i.val.2 Set.univ (Set.subset_univ i.val.2) ≫ F.π ∧ ∀ f : (Q i).pt ⟶ F.pt, (Q i).π ≫ f = κ i.val.2 Set.univ (Set.subset_univ i.val.2) ≫ F.π → f = c i) ∧ (∀ i : L, φ i i (Set.Subset.refl _) (Set.Subset.refl _) = 𝟙 (Q i).pt) ∧ (∀ (i j k : L) (hB : i.val.1 ⊆ j.val.1) (hA : i.val.2 ⊆ j.val.2) (kB : j.val.1 ⊆ k.val.1) (kA : j.val.2 ⊆ k.val.2), φ i j hB hA ≫ φ j k kB kA = φ i k (hB.trans kB) (hA.trans kA)) ∧ (∀ (i j : L) (hB : i.val.1 ⊆ j.val.1) (hA : i.val.2 ⊆ j.val.2), φ i j hB hA ≫ c j = c i) ∧ (∀ (M : X.Sheaf (Type u)) (m : ∀ i : L, (Q i).pt ⟶ M), (∀ (i j : L) (hB : i.val.1 ⊆ j.val.1) (hA : i.val.2 ⊆ j.val.2), φ i j hB hA ≫ m j = m i) → ∃! f : F.pt ⟶ M, ∀ i : L, c i ≫ f = m i))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

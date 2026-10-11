@@ -5634,3 +5634,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:05 L: merged deliver/K1/lem-weil-pbc-sets-affine-etale-inverse-image-comparison (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison AlgebraicGeometry.Scheme.exists_affineEtale_inverseImage_comparison)
 - 19:07 L: merged deliver/U1/lem-sc-affine-koszul-hom-alternating-cech (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineKoszulHomAlternatingCech AlgebraicGeometry.affineKoszulHomAlternatingCech)
 - 19:09 L: merged deliver/F1/lem-weil-pbc-sheafification-plus-theorem (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Sites.SheafificationPlusTheorem CategoryTheory.GrothendieckTopology.plus_sheafification_theorem)
+- 19:12 L: merged deliver/F1/lem-weil-pbc-sheaf-finite-truncation-colimit (stage 2; reviewer PASS; first push; Sheaf.Topology.SheafFiniteTruncationColimit TopCat.sheaf_finite_truncation_colimit)
