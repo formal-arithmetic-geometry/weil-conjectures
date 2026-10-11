@@ -223,5 +223,23 @@
   "by": "L",
   "result": "pass",
   "note": "Six elementary steps: the ring map theta, the graph identity a_U Gamma_{phi a} = Gamma_phi a, naturality of gamma, P_M a presheaf of Lambda_X-modules with semilinear restrictions, the identity e_phi(theta(f)s) = gamma_V(f) e_phi(s) via the uniqueness clause of the graph-section node (correctly handles locally constant f), linearity of c^p_M. Correct; 0 new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGraphSectionExtensionMapLinear",
+  "declaration": "AlgebraicGeometry.etale_graph_section_extension_map_linear",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGraphSectionExtensionMapLinear.lean",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12",
+  "existing": false,
+  "statement": "theorem etale_graph_section_extension_map_linear {X U : Scheme.{u}} (π : U ⟶ X) [IsFinite π] [Etale π] (Λ : Type (u + 1)) [CommRing Λ] : let L := MorphismProperty.Over.map (P := @Etale) ⊤ (inferInstance : Etale π) let P := sheafToPresheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙ L.op.lan let D := Etale.lowerStar (ModuleCat.{u + 1} Λ) π ⋙ sheafToPresheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) ∃ c : P ⟶ D, ∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : X.Etaleᵒᵖ) (f : Λ) (s : ((P.obj M).obj V)), (c.app M).app V (f • s) = f • (c.app M).app V s"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "P1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
