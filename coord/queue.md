@@ -1,11 +1,11 @@
 # Work queue
 
-499 items; claim with `tools/claim.py next <group> [--stage N]`.
+495 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (499)
+## Stage 2: nodes to state (495)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -16,7 +16,6 @@
 | `lem-pc-arrow-iso-pullback-counit` | 1 | state |
 | `lem-pc-base-change-closure-components` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
-| `lem-pc-global-sections-separable` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-zero-scheme-adjunction-base-change` | 1 | state |
 | `lem-pqf-leray-five-term` | 1 | state |
@@ -24,11 +23,9 @@
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilb-to-pic-morphism` | 1 | state |
-| `lem-sc-integral-dim-one-ample` | 1 | state |
 | `lem-sc-meromorphic-sheaf-generic-product` | 1 | state |
 | `lem-sc-regular-meromorphic-section-exists` | 1 | state |
 | `lem-sc-zero-dim-noetherian-affine` | 1 | state |
-| `lem-sc-zero-dim-noetherian-finite-discrete` | 1 | state |
 | `lem-sp-page-induction` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-constructible-module-limit-descent` | 1 | state |
@@ -55,7 +52,6 @@
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1 | state |
 | `lem-weil-pbc-flat-fp-qf-stratification` | 1 | state |
 | `lem-weil-pbc-formal-fibre-quasi-finite-ascent` | 1 | state |
-| `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-quasi-finite` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
