@@ -5,8 +5,11 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.CharP.Lemmas
 public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.RingTheory.Bialgebra.Convolution
 public import Mathlib.RingTheory.HopfAlgebra.Basic
+public import WeilConjectures.Mathlib.RingTheory.HopfAlgebra.Quotient
 
 /-!
 # The Hopf algebra `R[X]` with `X` primitive
@@ -24,11 +27,18 @@ the symmetric algebra, in which every generator is primitive.
 
 - `Polynomial.instBialgebra`: the bialgebra structure on `R[X]` with `X` primitive.
 - `Polynomial.instHopfAlgebra`: the Hopf algebra structure on `R[X]`, with antipode `X ↦ -X`.
+- `Polynomial.algHomMulEquiv`: `R`-algebra homomorphisms `R[X] → S`, with the convolution
+  product, are the additive group of `S`: the `S`-points of `𝔾ₐ` are `S`.
+
+## Main results
+
+- `Polynomial.comul_X_pow_char`: in characteristic `p`, `X ^ p` is primitive, so that
+  `(X ^ p)` is a Hopf ideal (`Polynomial.isHopfIdeal_span_X_pow_char`), cutting out `α_p`.
 
 ## Blueprint
 
 - `def-sc-gm-ga`: the coordinate ring `k[y]` of the additive group `𝐆_a`, with
-  `m^*(y) = y ⊗ 1 + 1 ⊗ y`, `ε(y) = 0` and `i^*(y) = -y`.
+  `m^*(y) = y ⊗ 1 + 1 ⊗ y`, `ε(y) = 0` and `i^*(y) = -y`, and the Hopf ideal `(y^p)` of `α_p`.
 -/
 
 @[expose] public section
@@ -78,6 +88,42 @@ instance instIsCocomm : Coalgebra.IsCocomm R R[X] where
       simp [add_comm]
     exact congr(($h).toLinearMap)
 
+variable (R) (S : Type*) [CommSemiring S] [Algebra R S]
+
+/-- `R`-algebra homomorphisms `R[X] → S`, with the convolution product, are the additive group of
+`S`: a homomorphism `φ` corresponds to `φ(X)`. In other words, the `S`-points of
+`𝔾ₐ = Spec R[X]` are the group `S` (written multiplicatively). -/
+noncomputable def algHomMulEquiv : WithConv (R[X] →ₐ[R] S) ≃* Multiplicative S where
+  toFun φ := .ofAdd (φ.ofConv X)
+  invFun s := WithConv.toConv (aeval s.toAdd)
+  left_inv φ := by
+    ext1
+    ext
+    simp
+  right_inv s := by simp
+  map_mul' φ ψ := by simp [AlgHom.convMul_apply, ← ofAdd_add]
+
+variable {R S}
+
+@[simp]
+theorem toAdd_algHomMulEquiv (φ : WithConv (R[X] →ₐ[R] S)) :
+    (algHomMulEquiv R S φ).toAdd = φ.ofConv X :=
+  rfl
+
+@[simp]
+theorem algHomMulEquiv_symm_apply (s : Multiplicative S) :
+    (algHomMulEquiv R S).symm s = WithConv.toConv (aeval s.toAdd) :=
+  rfl
+
+/-- In characteristic `p`, the `p`-th power of the primitive element `X` is primitive. -/
+theorem comul_X_pow_char (p : ℕ) [hp : Fact p.Prime] [CharP R p] :
+    Coalgebra.comul (R := R) (X ^ p : R[X]) = (X ^ p) ⊗ₜ[R] 1 + 1 ⊗ₜ[R] (X ^ p) := by
+  have h0 : (p : R[X] ⊗[R] R[X]) = 0 := by
+    rw [← map_natCast (algebraMap R (R[X] ⊗[R] R[X])), CharP.cast_eq_zero, map_zero]
+  rw [← Bialgebra.comulAlgHom_apply, map_pow, comulAlgHom_X, add_pow_prime_eq hp.out, h0,
+    zero_mul, zero_mul, zero_mul, add_zero, Algebra.TensorProduct.tmul_pow,
+    Algebra.TensorProduct.tmul_pow, one_pow]
+
 end CommSemiring
 
 section CommRing
@@ -94,6 +140,14 @@ variable {R}
 @[simp]
 theorem antipode_X : HopfAlgebra.antipode R (X : R[X]) = -X :=
   aeval_X _
+
+/-- In characteristic `p`, the ideal `(X ^ p)` of `R[X]` is a Hopf ideal: it cuts out the Frobenius
+kernel `α_p` of `𝔾ₐ`. (blueprint: `def-sc-gm-ga`) -/
+instance isHopfIdeal_span_X_pow_char (p : ℕ) [hp : Fact p.Prime] [CharP R p] :
+    (Ideal.span {(X ^ p : R[X])}).IsHopfIdeal R :=
+  Ideal.isHopfIdeal_span_singleton_of_comul_eq
+    (by rw [← Bialgebra.counitAlgHom_apply, map_pow, counitAlgHom_X, zero_pow hp.out.ne_zero])
+    (comul_X_pow_char p)
 
 end CommRing
 
