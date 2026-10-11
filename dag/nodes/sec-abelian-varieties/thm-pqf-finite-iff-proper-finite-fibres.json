@@ -164,5 +164,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffp2215 (reviewer sub-agent of L); spot-checked: Read every cited statement in the packet; step 1 matches Stacks 02OG. Read Mathlib ZariskisMainTheorem.lean:373-385 and QuasiFinite.lean:303-328. The item itself is not a one-declaration leaf (needs IsFinite.iff_isProper_and_locallyQuasiFinite plus locallyQuasiFinite_iff_finite_preimage_singleton), so kept split. FIX more, RETURN less: step 2 used Mathlib's proper+locally-quasi-finite => finite (Zariski main theorem) as an uncited fact (C1); added statement-only node pqf-lem-proper-lqf-finite (Stacks 02LS (3)=>(1); unsplit, exact Mathlib match IsFinite.of_isProper_of_locallyQuasiFinite at ZariskisMainTheorem.lean:373 recorded in mathlib_searches, a leaf candidate) and cited it in step 2 uses and proof_deps. cor-pqf-proper-quasifinite-finite could not be cited (it depends on this item: cycle). Second reading by F1 missed this C1 (it said no uncited geometric fact is used). Finite fibres => quasi-finite cites pqf-lem-qf-finitefibres with finite type and qc from pqf-lem-proper-basic (C4 ok). Tool use pqf-lem-qf-locqf-qc accepted as generic.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteIffProperFiniteFibres",
+  "declaration": "AlgebraicGeometry.isFinite_iff_isProper_and_hasFiniteFibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteIffProperFiniteFibres.lean",
+  "statement": "theorem isFinite_iff_isProper_and_hasFiniteFibres {X S : Scheme.{u}} [IsLocallyNoetherian S] (f : X ⟶ S) : IsFinite f ↔ IsProper f ∧ Scheme.Hom.HasFiniteFibres f",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
