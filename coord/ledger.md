@@ -5184,3 +5184,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:16 L: merged deliver/H1/lem-sc-p1-boundary-connecting-naturality (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Modules.BoundaryConnectingNaturality AlgebraicGeometry.Scheme.Modules.boundary_connecting_naturality)
 - 15:16 L: merged deliver/J1/lem-weil-pbc-coherent-formal-module-kernel (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel AlgebraicGeometry.coherentFormalModule_kernel)
 - 15:16 L: merged deliver/J1/lem-weil-pbc-vanishing-descends-retract (stage 2; reviewer PASS; first push; Sheaf.Paper.VanishingDescendsRetract AlgebraicGeometry.Etale.vanishing_descends_retract)
+- 15:17 L: merged deliver/F1/lem-sc-strict-henselization-noetherian (stage 2; reviewer PASS; first push; Sheaf.RingTheory.StrictHenselizationNoetherian Algebra.isNoetherianRing_iff_isStrictHenselization)

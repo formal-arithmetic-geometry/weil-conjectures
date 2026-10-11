@@ -21,7 +21,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-strict-henselization-triples"
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-sc-ring-strict-henselization"
  ],
  "proof": [
   {
@@ -131,5 +132,22 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shn2046 (reviewer sub-agent of L); spot-checked: Steps 1-3 against Tag 06LJ proof: reverse direction by ff descent along R->R^sh, forward by Noetherian completion + ff R^sh->completion + descent; cited statements carry the hypotheses (descent node: ff map, Noetherian target; completion node assumes R Noetherian). C1: faithful flatness of R->R^sh cited (new node). Class (b) checked: no existing node states ff of R->R^sh (lem-weil-pbc-strict-henselization-triples gives construction/strictly henselian only; lem-sc-strict-henselization-dvr's flatness clause is geometric and DVR-specific; lem-weil-pbc-henselization-noetherian-completion is for pair henselization R^h, not R^sh); sibling's cotangent-dimension node not needed. Both new nodes real lemmas (07QM(1); 06LJ (a),(c)), true as stated. FIX more, RETURN less: (1) source of lem-sc-strict-henselization-faithfully-flat pointed to 04GP/04GN, which do not state flatness (the second reading introduced this); repointed to More on Algebra Tag 07QM part (1). (2) item step 1 source likewise repointed to 06LJ proof citing 07QM.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationNoetherian",
+  "declaration": "Algebra.isNoetherianRing_iff_isStrictHenselization",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationNoetherian.lean",
+  "statement": "theorem isNoetherianRing_iff_isStrictHenselization (R K C : Type u) [CommRing R] [IsLocalRing R] [Field K] [Algebra (IsLocalRing.ResidueField R) K] [IsSepClosure (IsLocalRing.ResidueField R) K] [Algebra R K] [IsScalarTower R (IsLocalRing.ResidueField R) K] [CommRing C] [Algebra R C] (hC : IsStrictHenselization R K C) : IsNoetherianRing R ↔ IsNoetherianRing C",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shn",
+  "group": "F1",
+  "result": "pass"
  }
 }
