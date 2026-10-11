@@ -87,7 +87,6 @@ lemma mem_stalkZeroLocus_iff_of_isImmersion {X T : Scheme.{u}}
       rw [← Scheme.Hom.comp_apply]; exact hs)
     exact (h Ω t' ht').of_iso ((upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) ι t').app Q).symm
 
-variable [HasSmallSiteSheafify (ModuleCat.{u + 1} Λ)]
 
 /-- **For constructible sheaves, vanishing at one geometric point suffices.** -/
 lemma mem_stalkZeroLocus_of_isZero_sheafFiber {X : Scheme.{u}}
@@ -96,7 +95,8 @@ lemma mem_stalkZeroLocus_of_isZero_sheafFiber {X : Scheme.{u}}
     (h : IsZero ((pointSmallEtale s).sheafFiber.obj Q)) :
     s.base (IsLocalRing.closedPoint Ω) ∈ stalkZeroLocus Q := by
   obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification
-    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (F := Q)
+    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    (F := Q)
   obtain ⟨i, hi⟩ := Set.mem_iUnion.mp
     (S.iUnion_stratum_eq_univ ▸ Set.mem_univ (s.base (IsLocalRing.closedPoint Ω)))
   rw [← S.range_immersion] at hi
@@ -111,7 +111,8 @@ theorem isOpen_constructibleTopology_stalkZeroLocus {X : Scheme.{u}} [CompactSpa
     (Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf Q] :
     IsOpen[constructibleTopology X] (stalkZeroLocus Q) := by
   obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification
-    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (F := Q)
+    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    (F := Q)
   have heq : stalkZeroLocus Q = ⋃ i, (S.stratum i ∩ stalkZeroLocus Q) := by
     rw [← Set.iUnion_inter, S.iUnion_stratum_eq_univ, Set.univ_inter]
   rw [heq]
