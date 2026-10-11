@@ -20,7 +20,8 @@
  },
  "stmt_deps": [
   "def-weil-scheme-morphism-properties",
-  "def-sc-invertible-module"
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology"
  ],
  "proof": [
   {
@@ -112,5 +113,22 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-vcs0018 (reviewer sub-agent of L); spot-checked: Route: 0EX8 general case (valuation ring coherent + perfect-lemma-cohomology-over-coherent-ring). Step 1 invertible => locally free constant rank 1 matches child hypothesis (C4 ok); step 2 q=0 specialization exact. Child true: flat needed so F finite locally free is flat over A and lem-pc-rf-perfect-base-change gives RGamma perfect; over coherent A its cohomology is f.p. Citer lem-sc-picard-locus-closed-valuation-triviality step 1 uses exactly H^0(X,L) f.p. with same hypotheses. No duplicate among the 5 0EX8 nodes or rf-perfect/pseudo-coherent nodes (lem-pc-rf-perfect-base-change is an input, not the statement; noetherian nodes inapplicable). Mathlib searches recorded; no match expected. No fault missed by the second reading (only stale 'every finitely presented quasi-coherent module' wording in the packet's Not-duplicates paragraph, not in any node)."
  },
- "lead_note": "2026-10-11 L (R-vcs0018): child lem-sc-valuation-proper-coherent-higher-direct-images is a real lemma, splittable later via lem-pc-rf-perfect-base-change (proper fp, F fp flat over S => Rf_*F perfect; F finite locally free on flat X is flat over A) plus coherence of valuation rings (Stacks 0ASU-area example, perfect complex over coherent ring has f.p. cohomology)"
+ "lead_note": "2026-10-11 L (R-vcs0018): child lem-sc-valuation-proper-coherent-higher-direct-images is a real lemma, splittable later via lem-pc-rf-perfect-base-change (proper fp, F fp flat over S => Rf_*F perfect; F finite locally free on flat X is flat over A) plus coherence of valuation rings (Stacks 0ASU-area example, perfect complex over coherent ring has f.p. cohomology)",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ValuationProperCoherentSections",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finitePresentation_moduleCohomology_zero_of_valuationRing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ValuationProperCoherentSections.lean",
+  "statement": "theorem finitePresentation_moduleCohomology_zero_of_valuationRing {A : Type u} [CommRing A] [IsDomain A] [ValuationRing A] {X : Scheme.{u}} (f : X ⟶ Spec (.of A)) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (F : X.Modules) [F.IsInvertible] : Module.FinitePresentation A ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom).obj ((RingedSpace.moduleCohomology X.toRingedSpace 0).obj F))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-vpc",
+  "group": "T1",
+  "result": "pass"
+ }
 }

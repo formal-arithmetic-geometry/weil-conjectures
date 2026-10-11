@@ -1,0 +1,165 @@
+## Worker report
+
+The module `Sheaf.AlgebraicGeometry.ValuationProperCoherentSections` states
+`AlgebraicGeometry.Scheme.Modules.finitePresentation_moduleCohomology_zero_of_valuationRing`.
+Its only theorem proof is `sorry`; no definition or proof was added.
+
+Hypothesis and conclusion correspondence:
+
+- A valuation ring A is `{A : Type u} [CommRing A] [IsDomain A] [ValuationRing A]`.
+  Mathlib's valuation-ring class is defined for integral domains; fields are included.
+- The morphism f:X→Spec(A) is `{X : Scheme.{u}} (f : X ⟶ Spec (.of A))`.
+- Properness is `[IsProper f]`, and flatness is `[Flat f]`.
+- Finite presentation is `[LocallyOfFinitePresentation f]` together with the existing
+  properness hypothesis. A proper morphism is quasi-compact and separated, hence
+  quasi-separated; these are exactly the additional conditions for finite presentation.
+  They need not be added as redundant hypothesis binders.
+- An invertible module F on X is `(F : X.Modules) [F.IsInvertible]`.
+- H⁰(X,F) is `((RingedSpace.moduleCohomology X.toRingedSpace 0).obj F)`.
+  This is the degree-zero right-derived global sections object of O_X-modules, following
+  the project's cohomology convention. `ModuleCat.restrictScalars` along
+  `((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom` supplies its canonical A-action:
+  A→Γ(Spec A,O)→Γ(X,O_X). No arbitrary scalar structure is assumed.
+- Finite presentation as an A-module is `Module.FinitePresentation A` of that object.
+
+Dependency declarations read and used:
+
+- `def-weil-scheme-morphism-properties` is a convention record collecting pointers, not
+  a declaration. Its proper, flat and finite-presentation pointers are rendered by
+  `AlgebraicGeometry.IsProper` (`Mathlib.AlgebraicGeometry.Morphisms.Proper`),
+  `AlgebraicGeometry.Flat` (`Mathlib.AlgebraicGeometry.Morphisms.Flat`), and
+  `AlgebraicGeometry.LocallyOfFinitePresentation`
+  (`Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation`). Their definitions and docstrings
+  were read in the pinned Mathlib source.
+- `def-sc-invertible-module`: `AlgebraicGeometry.Scheme.Modules.IsInvertible`, from
+  `WeilConjectures.AlgebraicGeometry.Modules.Invertible`, means locally isomorphic to the
+  structure sheaf on open neighbourhoods. The full class signature and docstring were read.
+- The already landed `def-sc-ringed-space-module-cohomology` is added to stmt_deps;
+  `AlgebraicGeometry.RingedSpace.moduleCohomology`, from
+  `Sheaf.Topology.RingedSpaceModuleCohomology`, is the shared definition used in the statement.
+  Its signature, docstring and underlying global-sections definition were read.
+- Mathlib `Module.FinitePresentation` from `Mathlib.Algebra.Module.FinitePresentation`
+  uses finite generators and finitely generated relations. `ValuationRing` from
+  `Mathlib.RingTheory.Valuation.ValuationRing` is divisibility-totality for a domain.
+- The proof docstring follows both original steps: invertible implies rank-one finite
+  locally free, then specialize `lem-sc-valuation-proper-coherent-higher-direct-images` to
+  q=0. Its landed statement was inspected to retain exactly its cohomology and A-action.
+
+Edge cases: the empty scheme is allowed, with zero global cohomology finitely presented;
+fields are valuation rings and are allowed; no discrete, Noetherian, nonempty or
+positive-dimensional condition is imposed. Arbitrary invertible modules are included,
+without assuming triviality, generic-fibre triviality, or integral fibres. The scheme and
+ring share universe u as required for f; u is explicitly bound. Degree zero is literal 0.
+
+Source checked: https://stacks.math.columbia.edu/tag/0EX8, general-case proof. The finiteness
+sentence there follows from coherent cohomology and coherence of valuation rings, before
+using the extra fibre/triviality assumptions for the conclusion of the surrounding lemma.
+No statement correction or disputed statement is needed.
+
+Searches for an existing exact statement:
+
+- `msearch.py ... leanfinder "global sections invertible sheaf proper flat finitely presented
+  scheme over valuation ring are finitely presented"`: eight hits, principally
+  `LocallyOfFinitePresentation.finitePresentation_appLE` and generic quasi-coherent presentation
+  statements; no exact match.
+- `msearch.py ... loogle "Module.FinitePresentation, ValuationRing"`: zero hits.
+- `msearch.py ... leansearch "Global sections of an invertible sheaf on a proper flat finitely
+  presented scheme over a valuation ring form a finitely presented module"`: service unavailable
+  (Internal Server Error). Recorded as unavailable, with no verdict on that search.
+- `msearch.py ... grep "valuation.*sections|sections.*valuation|coherent.*valuation"
+  AlgebraicGeometry`: only a residue-field evaluation-map docstring, no exact statement.
+- `rg` of valuation/sections/coherence combinations in `WeilConjectures` and `lean/Sheaf`:
+  the already landed higher-cohomology lemma is found. It has a different coefficient hypothesis
+  (constant finite rank d) and conclusion (all degrees q); the present node is its rank-one,
+  degree-zero corollary, not the same declaration. No exact statement exists.
+- Search for the node id in `WeilConjectures`: no match. Search for the proposed full theorem
+  name in Mathlib, `WeilConjectures`, `lean/Sheaf`, and `dag/lean_names_upstream.json`: no match.
+
+Validation: server `scompile.py` accepted the file without errors or warnings. No local
+compilation was performed. No new definition nodes or dependency modules were needed.
+
+## Second reading by T1
+
+I independently opened the item node and module, the three statement-dependency nodes,
+Mathlib's property definitions, the recorded invertibility and cohomology modules, and the
+landed higher-direct-image statement. No statement mismatch was found; the Lean and node
+records are unchanged. Only this second-reading report was added.
+
+Object/hypothesis/conclusion checklist (each verdict: exact):
+
+- A valuation ring A: `{A : Type u} [CommRing A] [IsDomain A] [ValuationRing A]`.
+  The class is total divisibility on an integral domain, exactly the source's valuation
+  ring, with no discrete or Noetherian restriction. `IsDomain` is required by the notion,
+  not an additional hypothesis on a more general ring.
+- A scheme X and named morphism to Spec A: `{X : Scheme.{u}}`
+  and `(f : X ⟶ Spec (.of A))`. This is the given base and morphism, not an affine X.
+- Proper f: `[IsProper f]`. I read its separated, universally closed, locally finite type
+  fields; `UniversallyClosed` supplies `QuasiCompact`, so this is proper in the node's sense.
+- Flat f: `[Flat f]`. Its affine ring-map flatness is the scheme-flatness notion named by
+  the convention node, with the stalk characterization recorded in its Mathlib docstring.
+- Finite presentation f: `[LocallyOfFinitePresentation f]`, together with properness.
+  Properness supplies quasi-compactness and separatedness, hence quasi-separatedness.
+  Thus the conjunction is exactly finite presentation under the convention node's Stacks
+  01TP interpretation; no redundant binder or stronger finiteness assumption is present.
+- Invertible O_X-module F: `(F : X.Modules) [F.IsInvertible]`. The actual recorded
+  `Scheme.Modules.IsInvertible.exists_isoUnit` says every point has an open neighbourhood
+  on which F is isomorphic to the structure sheaf. This gives precisely locally free rank
+  one, including quasi-coherence, rather than globally trivial or merely finite type F.
+- Degree-zero cohomology: `(RingedSpace.moduleCohomology X.toRingedSpace 0).obj F`.
+  I read `moduleCohomology` and `globalSectionsFunctor`: this is R^0 of evaluation at the
+  whole space in O_X-modules. The shared definition is used, not abelian-sheaf Ext.
+- Canonical A-module structure: `ModuleCat.restrictScalars` along
+  `((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom`. The inverse ΓSpec isomorphism maps
+  A to Γ(Spec A,O); `f.appTop` maps this to Γ(X,O_X). Restriction of scalars acts by
+  r • m = image(r) • m, so no unrelated A-action is assumed.
+- Sole conclusion: `Module.FinitePresentation A` of that restricted cohomology object.
+  I opened its definition: finitely many generators with finitely generated relations.
+  There is no added freeness, rank, trivialization, or higher-degree conclusion.
+
+Source reading: the local project omits its untracked Stacks .tex files. I obtained the
+upstream Stacks source `more-morphisms.tex` in this item's scratchpad and read lines
+9333–9410, `lemma-triviality-generic-fibre-valuation-ring`; the local tag table maps 0EX8
+exactly to this label. The node's historical filename `more-on-morphisms.tex` refers to
+this chapter. In the general-case proof, coherence of A and coherent cohomology give
+H^0(X,L) finitely presented before the argument uses generic triviality, integral closed
+fibre, or the generic global-functions condition. Those surrounding hypotheses are needed
+for the later triviality conclusion, not this extracted finiteness statement. The landed
+higher-cohomology child has the same base, morphism hypotheses, cohomology and A-action,
+and specializes to constant rank one and q=0 as the item's proof says.
+
+Edge cases: fields (all characteristics and valuation ranks) are included. The zero ring
+is excluded by the source's definition of valuation ring. The empty scheme is allowed;
+invertibility is vacuous there and its zero cohomology module is finitely presented. On a
+nonempty scheme the zero sheaf is not invertible, as required. No nonempty scheme, integral
+fibre, positive dimension, or generic triviality is assumed. There is no index family or
+n binder, and degree zero is literal 0. The arbitrary universe u bounds A, X and its module
+category consistently; choosing a common universe does not omit larger schemes or rings.
+All variables and the universe are explicitly bound.
+
+Independent searches, using different wording from the worker:
+
+- LeanFinder via `msearch.py`: "finite presentation cohomology line bundle valuation domain
+  proper flat morphism" gave eight affine-limit and morphism-finite-presentation hits,
+  including `LocallyOfFinitePresentation.finitePresentation_appLE`; none states this result.
+- Loogle via `msearch.py`: `ValuationRing, Module.FinitePresentation` gave zero hits.
+- LeanSearch via `msearch.py`: "cohomology of a line bundle over a proper flat scheme over
+  a valuation domain is finitely presented" was unavailable (Internal Server Error);
+  this is an unavailable service, not evidence of absence.
+- `rg` in pinned Mathlib, WeilConjectures and project Sheaf searched valuation/cohomology
+  and valuation/sections in both orders, then finite-presentation sections/cohomology in
+  the module directories. The only valuation-cohomology statement found is the project's
+  higher-direct-image child, with general constant finite rank and every q, rather than
+  this invertible degree-zero statement. I also opened upstream
+  `finitePresentation_sections_of_isFinitePresentation` and
+  `finitePresentation_flat_sections_top_of_isFiniteLocallyFree`; they concern affine opens
+  or Spec R and scalar rings of those opens, not proper cohomology over the base A.
+- The proposed full declaration name and blueprint id have no matches in pinned Mathlib,
+  WeilConjectures, project's Lean modules or `dag/lean_names_upstream.json`.
+
+No new definition node or dependency module is delivered, and no statement correction is
+present or needed. The one added dependency is the already landed shared cohomology node.
+The module has no definitions, auxiliary proofs, private notation or local instances. Its
+only theorem proof is `sorry`. The header and declaration docstrings cite 0EX8 and the
+item id, and the declaration docstring carries both proof steps with their DAG references.
+The node's `lean.statement` was checked verbatim against the file signature. Independent
+server compilation through `scompile.py` completed in 1.8 seconds with no errors or warnings.
