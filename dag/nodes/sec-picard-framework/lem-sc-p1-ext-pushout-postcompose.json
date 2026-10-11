@@ -13,7 +13,7 @@
  },
  "kind": "statement",
  "title": "Pushout of an extension is postcomposition in Ext",
- "statement": "Let $X$ be a ringed space and let $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ be a short exact sequence of $\\mathcal O_X$-modules with Yoneda class $\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal A)$, with Ext as in [def-sc-ext-sheaf]. For every morphism $\\varphi:\\mathcal A\\to\\mathcal W$, the pushout short exact sequence $0\\to\\mathcal W\\to\\mathcal B\\amalg_{\\mathcal A}\\mathcal W\\to\\mathcal C\\to0$ has Yoneda class $\\varphi[1]\\circ\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal W)$.",
+ "statement": "Let $X$ be a scheme and let $S:0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ be a short exact sequence in $X\\text{-\\operatorname{Modules}}$, with Ext as in [def-sc-ext-sheaf]. For every morphism $\\varphi:\\mathcal A\\to\\mathcal W$, the pushout short exact sequence $0\\to\\mathcal W\\to\\mathcal B\\amalg_{\\mathcal A}\\mathcal W\\to\\mathcal C\\to0$ has Yoneda class $\\varphi[1]\\circ\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal W)$, where $\\delta$ is the Yoneda class of $S$.",
  "source": {
   "document": "literature/stacks-project/homology.tex",
   "place": "Homology Section Tag 010I, pushout of extensions; Derived Section Tag 06XP, functoriality of Ext composition"
@@ -126,5 +126,42 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-epp1735 (reviewer sub-agent of L); spot-checked: Read extClass_naturality at ExtClass.lean:131 (h1.extClass.comp (mk0 f.tau1) = (mk0 f.tau3).comp h2.extClass): leaf is an exact match; sorryfree.py: not in slopmaster2 (no attach). Step 1 uses lem-weil-pbc-pushout-short-exact-sequence statement exactly (morphism (phi,v,id_C)); accepted as generic tool use. Step 2 with f3=id gives the formula; split is real, no cycle. FIX more, RETURN less: B3/C4 the leaf statement wrote Mathlib's diagrammatic comp with conventional circ ([S1] o f1[0] = f3[0] o [S2], ill-typed in the item's conventional notation phi[1] o delta); rewrote as f1[1] o [S1] = [S2] o f3 in Ext^1(C1,A2) with named objects.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ExtPushoutPostcompose",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.pushout_extClass_postcompose",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExtPushoutPostcompose.lean",
+  "statement": "theorem pushout_extClass_postcompose {X : Scheme.{u}} [HasExt.{u} X.Modules] (S : ShortComplex X.Modules) (hS : S.ShortExact) {W : X.Modules} (φ : S.X₁ ⟶ W) : ∃ p : pushout φ S.f ⟶ S.X₃, ∃ hz : pushout.inl φ S.f ≫ p = 0, pushout.inr φ S.f ≫ p = S.g ∧ ∃ hp : (ShortComplex.mk (pushout.inl φ S.f) p hz).ShortExact, (hp.extClass : Ext S.X₃ W 1) = hS.extClass.comp (Abelian.Ext.mk₀ φ) (add_zero 1)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-epp1351"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-epp1351",
+  "group": "F1",
+  "result": "fix",
+  "note": "X scheme + [HasExt.{u} X.Modules] (EXT ON SCHEMES, Scheme.Modules.Ext = Abelian.Ext by rfl); S ShortComplex + hS ShortExact; phi : S.X1 -> W; pushout phi S.f with p tied by inl>>p=0, inr>>p=S.g (C1 52041d948 form, p unique, no pushout.condition); hp ShortExact of mk inl p hz; conclusion hp.extClass = hS.extClass.comp (mk0 phi) = phi[1] o delta (#check extClass, extClass_naturality, mk0_id_comp). Correction ringed space -> scheme justified: def-sc-ext-sheaf is scheme-only; citer yoneda-associativity is scheme-level. FIX: conclusion stated as the node says (pushout class = phi[1] o delta, typed Ext S.X3 W 1) instead of the mk0(id)-composed naturality form; docstring proof cites both proof deps; unused universe v dropped",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "F1 stage 2",
+  "old_statement": "Let $X$ be a ringed space and let $0\\to\\mathcal A\\to\\mathcal B\\to\\mathcal C\\to0$ be a short exact sequence of $\\mathcal O_X$-modules with Yoneda class $\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal A)$, with Ext as in [def-sc-ext-sheaf]. For every morphism $\\varphi:\\mathcal A\\to\\mathcal W$, the pushout short exact sequence $0\\to\\mathcal W\\to\\mathcal B\\amalg_{\\mathcal A}\\mathcal W\\to\\mathcal C\\to0$ has Yoneda class $\\varphi[1]\\circ\\delta\\in\\operatorname{Ext}^1_X(\\mathcal C,\\mathcal W)$.",
+  "what": "The original statement quantified over an arbitrary ringed space and used Ext/Yoneda classes for O_X-modules, but the cited dependency def-sc-ext-sheaf defines Ext only for schemes and the category X.Modules; consequently the statement was not typable. The correction specializes X to a scheme and the modules to X.Modules, preserving the pushout class formula.",
+  "source": {
+   "document": "literature/stacks-project/homology.tex",
+   "place": "Homology Tag 010I, pushout of extensions; Derived Tag 06XP, functoriality of Ext composition"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-p1-ext-yoneda-associativity",
+    "holds": true,
+    "note": "Its scheme-level use of the pushout class formula remains valid."
+   }
+  ]
  }
 }
