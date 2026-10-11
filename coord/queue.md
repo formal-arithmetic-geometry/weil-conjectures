@@ -1,11 +1,11 @@
 # Work queue
 
-184 items; claim with `tools/claim.py next <group> [--stage N]`.
+179 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (184)
+## Stage 2: nodes to state (179)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -18,7 +18,7 @@
 | `def-nagata-affine-fp-descent` | 2 | state | 9 |
 | `def-weil-pbc-conormal-sheaf-formally-unramified` | 1 | state | 2 |
 | `lem-weil-pbc-site-morphism-composition` | 1 | state | 138 |
-| `prop-weil-pbc-inverse-image-modules-exact` | 1 | state | 46 |
+| `prop-weil-pbc-inverse-image-modules-exact` | 1 | state | 45 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 11 |
 | `lem-weil-pbc-coherent-formal-modules-abelian` | 1 | state | 9 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
@@ -64,7 +64,6 @@
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-support-power-ideal-kills` | 1 | state | 0 |
 | `lem-weil-pbc-completion-internal-hom` | 1 | state | 0 |
-| `lem-weil-pbc-etale-geometric-fibre-constant-sections` | 1 | state | 0 |
 | `lem-weil-pbc-formal-completion-fully-faithful-proper` | 1 | state | 0 |
 | `lem-weil-pbc-formal-system-support-constant` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-kernel-rees-finite` | 1 | state | 0 |
@@ -88,7 +87,6 @@
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1 | state | 0 |
 | `lem-weil-pbc-tower-limit-exact-surjective-kernels` | 1 | state | 0 |
 | `lem-weil-pbc-triangle-morphism-extension` | 1 | state | 0 |
-| `lem-weil-pbc-triangular-change-of-basis` | 1 | state | 0 |
 | `lem-weil-pbc-trivial-kan-homotopy-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-truncated-coskeleton-finite-limits` | 1 | state | 0 |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state | 0 |
@@ -97,7 +95,6 @@
 | `lem-weil-pbc-universal-thickening-affine-case` | 1 | state | 0 |
 | `lem-weil-pbc-universal-thickening-open-pieces` | 1 | state | 0 |
 | `lem-weil-pbc-unramified-base-change-open` | 1 | state | 0 |
-| `lem-weil-pbc-unramified-fibre-point-isolated` | 1 | state | 0 |
 | `lem-weil-pbc-valuation-ring-normal` | 1 | state | 0 |
 | `lem-weil-pbc-vanishing-descends-retract` | 1 | state | 0 |
 | `lem-weil-pbc-well-ordered-union-projective-dimension` | 1 | state | 0 |
@@ -111,7 +108,6 @@
 | `lem-weil-tower-split-envelope` | 1 | state | 0 |
 | `lem-wf-lie-algebra-derivation-bracket` | 1 | state | 0 |
 | `lem-wf-mixed-commutator-tangent` | 1 | state | 0 |
-| `lemma-weil-pbc-cancellation` | 1 | state | 0 |
 | `lemma-weil-pbc-chow-factorization` | 1 | state | 0 |
 | `lemma-weil-pbc-target-locality` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-assembly` | 1 | state | 0 |
@@ -136,7 +132,6 @@
 | `thm-pqf-zmt-factorization` | 1 | state | 0 |
 | `thm-sc-proper-finite-fibre-finite-neighbourhood` | 1 | state | 0 |
 | `lem-exc-coinduced-continuous-acyclic` | 2 | state | 0 |
-| `lem-exc-etale-algebra-lift` | 2 | state | 0 |
 | `lem-kun-etale-lfp` | 2 | state | 0 |
 | `lem-pc-affine-perfect-hom-colimit` | 2 | state | 0 |
 | `lem-pc-bounded-above-flat-kflat` | 2 | state | 0 |
