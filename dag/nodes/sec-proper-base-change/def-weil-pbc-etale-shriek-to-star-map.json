@@ -187,5 +187,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Definition node split by five elementary well-formedness steps: the objects (P_M as a presheaf of Lambda_X-modules with the action through theta_{V,phi}, a claim factored into the new unsplit node lem-weil-pbc-etale-graph-section-extension-map-linear; pi_*M a sheaf of Lambda_X-modules via prop-weil-pbc-inverse-image-modules-exact (3), cited as a definition-level input), c^p_M Lambda_X-linear (new node), existence and uniqueness of c_M by the universal property of sheafification, functoriality, naturality. Statement: the Lambda_X-structures added, mathematics unchanged. Stage-3 notes: def-weil-pbc-direct-image and def-weil-pbc-etale-sum-extension do not specify the module structures; the Lean works with Lambda-valued sheaves (Sheaf (ModuleCat Lambda)) rather than sheaves of Lambda_X-modules, and no node states the equivalence. Lean candidates reported, not attached. Tags verified (0F4L, 03S7, 03DI, 03CY)."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale",
+  "declaration": "AlgebraicGeometry.Etale.etaleLowerShriekToLowerStar",
+  "statement": "noncomputable def Etale.etaleLowerShriekToLowerStar\n    (G : Sheaf X.smallEtaleTopology A) :\n    (Etale.etaleLowerShriek A f ‹_›).obj G ⟶ (f)_*[A].obj G",
+  "branch": "slopmaster2",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "The current upstream defines precisely this comparison: the mate under etaleLowerShriekRestrictionAdjunction of lowerStarUnit, whose components are graphExtend (the unique section equal to the input on the graph and zero on its complement). The adjunction is left Kan extension followed by sheafification, so its mate is exactly the unique sheafification factorization of the sum-presheaf graph map. Specialize A to ModuleCat.{u+1} Λ and f to the finite etale π; IsSeparated π follows from IsFinite π. The ModuleCat encoding is authorized by def-weil-pbc-etale-sheaves. Naturality follows from lowerStarUnit.naturality and the adjunction homEquiv naturality. No new module or definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sts",
+  "group": "M1",
+  "result": "pass",
+  "note": "existing upstream AlgebraicGeometry.Etale.etaleLowerShriekToLowerStar (slopmaster2 7d675a263, FiniteEtale.lean:654): homEquiv.symm of lowerStarUnit (graphExtend components = c^p) under etaleLowerShriekRestrictionAdjunction = sheafAdjunctionContinuous (Kan + sheafification) transported by upperStarIsoLocalizationRestriction and its inverse, so the unique factorization through toSheafify; source etaleLowerShriek, target lowerStar; separated etale generalizes finite etale (RULING 14:36); A specializes to ModuleCat Λ (checked compile 1.8 s, axioms propext/choice/Quot.sound, no sorry); no new node, no H5 data, no duplicate record"
  }
 }
