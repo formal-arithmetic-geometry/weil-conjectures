@@ -4900,3 +4900,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:18 L: merged deliver/E1/lem-weil-pbc-sets-etale-inverse-image-constant-base-change (stage 2; reviewer PASS; first push; Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange AlgebraicGeometry.baseChange_sigmaScheme_iso)
 - 14:18 L: merged deliver/E1/lem-weil-pbc-sheaf-hom-finite-presentation-colimit (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.FinitePresentationHomColimit SheafOfModules.hom_finitePresentation_colimit)
 - 14:18 L: merged deliver/E1/lem-weil-pbc-sheaf-on-basis-extends (stage 2; reviewer PASS; first push; Sheaf.Topology.SheafOnBasisExtends TopologicalSpace.Opens.exists_sheaf_extension_of_basis_gluing)
+- 14:18 L: returned deliver/C1/def-weil-pbc-henselian-terminology (reviewer RETURN: Stale re-push of the version already returned at 06:17 (R-hen0715) and deleted at 06:54 (6b3a3b9a4, base 44362f0aa, unch)
