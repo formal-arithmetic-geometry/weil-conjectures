@@ -43,6 +43,7 @@ Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 - Every declaration has a docstring naming the source place and carrying `(blueprint: <node id>)`. A statement's docstring also carries the node's proof in natural language, step by step (its `proof` steps, with the nodes they use), so that stage 3 can take it from there.
 - Lines of at most 100 characters. Imports only `Mathlib.*`, `WeilConjectures.*`, `Sheaf.*`; no import the file does not use. Header as in the example module.
 - The source's lakefile options hold: `relaxedAutoImplicit = false` (bind every variable, every universe); `warn.sorry = false`.
+- Module pullback of O_X-modules = `Scheme.Modules.tensorPullback` (def-pc-module-pullback; adjunction `exists_tensorPullbackAdjunction`), never Mathlib's `Scheme.Modules.pullback`; a node's literal `Modules.pullback`/`g^*` names that node. Invertible = `Scheme.Modules.IsInvertible`, not `SheafOfModules.IsInvertible`. This binds the second reading too.
 
 ## 4. Compiling
 
