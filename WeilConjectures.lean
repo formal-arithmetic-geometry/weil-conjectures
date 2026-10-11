@@ -1821,6 +1821,15 @@ public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.Fourier
+public import WeilConjectures.WeilSheaf.FourierInversion
+public import WeilConjectures.WeilSheaf.FourierInversion.ArtinSchreier
+public import WeilConjectures.WeilSheaf.FourierInversion.Composite
+public import WeilConjectures.WeilSheaf.FourierInversion.Defs
+public import WeilConjectures.WeilSheaf.FourierInversion.Delta
+public import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
+public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
+public import WeilConjectures.WeilSheaf.FourierInversion.UpperStar
+public import WeilConjectures.WeilSheaf.FourierInversion.Vanishing
 public import WeilConjectures.WeilSheaf.FourierTateTwist
 public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
 public import WeilConjectures.WeilSheaf.FourierTateTwist.Transform
