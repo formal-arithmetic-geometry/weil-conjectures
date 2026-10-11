@@ -125,5 +125,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hcl2416 (reviewer sub-agent of L); spot-checked: All five points of the 20:24 return repaired: (E1) Step 1 localizes only on T, Z_U=Spec B with B finite projective; (C4/B2) new node basis-free over finite projective B, true (functionals of B tensor R' are Hom_R(B,R) tensor R'); (C1 Step 2) K_{U_f}=K_U R_f by uniqueness, elementary; (C1 Step 3) lift and factor-ideal nodes cited; (B3) T and X_T introduced with def-pc-base-change. FIX more, RETURN less: B4 plain-text arrows and plain-text math in all three steps rewritten in TeX; new node statement rewritten in TeX (B); C1 Step 3 now states both directions explicitly, including the factorization of T' -> T through T_W via the lift node and the pullback of T_W's ideal via the factor-ideal node (previously left implicit), and the base-change compatibility as an elementary Yoneda remark. Second reading by C1 missed the implicit T'->T_W factorization and the plain-text new-node statement.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Hilbert.Curve",
+  "declaration": "AlgebraicGeometry.exists_idealSheafData_le_ker_iff_comap_le",
+  "statement": "theorem exists_idealSheafData_le_ker_iff_comap_le {d : ℕ} {T : Over S}\n    {I : (pullback f T.hom).IdealSheafData} (hI : IsHilbertSubscheme f d T I)\n    (J : (pullback f T.hom).IdealSheafData) :\n    ∃ K : T.left.IdealSheafData, ∀ (T' : Over S) (φ : T' ⟶ T),\n      K ≤ φ.left.ker ↔ J.comap (baseChangeMap f φ) ≤ I.comap (baseChangeMap f φ)",
+  "branch": "slopmaster2",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Second reading: the source theorem already has exactly this universal containment property, with arbitrary X, S and f from section Relative. Closed subschemes are equivalently IdealSheafData; compatibility with arbitrary base change follows from its universal property and uniqueness. Its proof is sorry; stage 2 records existing statements regardless of proof status."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hcl1234",
+  "group": "F1",
+  "result": "pass",
+  "note": "f:X->S arbitrary (section vars), T:Over S, X_T=pullback f T.hom; W,Z as IdealSheafData J,I (closed immersions up to iso via overEquivIdealSheafData); Z->T finite flat lfp rank d = IsHilbertSubscheme (the predicate of recorded hilbertPresheaf; finrank = fiberDegree under these hyps); exists K on T.left; forall T' over S, phi: K<=phi.left.ker (= factorization by IsClosedImmersion.lift) iff J.comap<=I.comap along baseChangeMap (comap = scheme pullback, inclusion reversed); base-change compatibility follows by uniqueness of K; #check of source type ascription clean"
  }
 }
