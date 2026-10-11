@@ -132,5 +132,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-epa2622 (reviewer sub-agent of L); spot-checked: Read all four steps against Tag 02M6 and cited statements (minimal-support-associated, associated-prime-submodule, associated-primes-finite); statement change (explicit Supp/embedded definitions) named, matches use in lem-sc-hilbert-embedded-points, -affine-localization and -gluing (K finite, maximal, quotient M/K). Mathlib leaf isNoetherian_of_isNoetherianRing_of_finite read at Basic.lean:324. FIX more, RETURN less: (1) B class (b): new node lem-sc-hilbert-finite-submodule-noetherian duplicates existing lem-weil-pbc-noetherian-submodule-finite (same statement, status mathlib); dropped and Step 2 cites the existing node; (2) C1: Step 2 nowhere-density and Step 3 K'_{q_j}=0 now justified via generic points of finitely many components (Tag 0052); (3) C1: Step 4 'Supp(Rm) contains some q_j' made explicit with minimal-support and associated-prime-submodule citations added to its uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RemoveEmbeddedPrimes",
+  "declaration": "Module.exists_maximal_nowhereDense_support_quotient",
+  "file": "lean/Sheaf/RingTheory/RemoveEmbeddedPrimes.lean",
+  "statement": "theorem exists_maximal_nowhereDense_support_quotient (R : Type u) [CommRing R] [IsNoetherianRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] : ∃ K : Submodule R M, Maximal (fun L : Submodule R M => IsNowhereDense {p : Module.support R M | p.val ∈ Module.support R L}) K ∧ Module.support R (M ⧸ K) = Module.support R M ∧ (∀ p : Ideal R, p ∈ associatedPrimes R (M ⧸ K) → Minimal (fun q : Ideal R => q ∈ associatedPrimes R (M ⧸ K)) p) ∧ (∀ f : R, (∀ p : Ideal R, p ∈ associatedPrimes R M → ¬ Minimal (fun q : Ideal R => q ∈ associatedPrimes R M) p → f ∈ p) → Function.Bijective (IsLocalizedModule.map (Submonoid.powers f) (LocalizedModule.mkLinearMap (Submonoid.powers f) M) (LocalizedModule.mkLinearMap (Submonoid.powers f) (M ⧸ K)) K.mkQ))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hep1136",
+  "group": "G1",
+  "result": "pass",
+  "note": "R CommRing+IsNoetherianRing, M Module.Finite (indep. universes); Supp = Module.support; Ass = Mathlib associatedPrimes (= prime colon ⊥ {m} under Noetherian via isAssociatedPrime_iff); embedded = ¬Minimal in Ass; Maximal over IsNowhereDense of Supp(L) in subspace Supp(M); Supp(M/K)=Supp(M); Ass(M/K) all minimal; ∀ f in all embedded primes, IsLocalizedModule.map powers f of K.mkQ bijective; #check: all names root-level"
  }
 }
