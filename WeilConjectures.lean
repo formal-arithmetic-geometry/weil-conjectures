@@ -447,6 +447,7 @@ public import WeilConjectures.Blowup.FiniteDegree.Generation
 public import WeilConjectures.Blowup.FiniteDegree.LocalAlgebra
 public import WeilConjectures.Blowup.FiniteDegree.Main
 public import WeilConjectures.Blowup.FiniteDegree.UniformNumerator
+public import WeilConjectures.Blowup.FlatBaseChange
 public import WeilConjectures.Blowup.Gluing
 public import WeilConjectures.Blowup.GluingOverlap
 public import WeilConjectures.Blowup.GraphQuasiFinite
