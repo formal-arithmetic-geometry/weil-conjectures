@@ -12,7 +12,9 @@
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/pqf-lem-qf-locqf-qc.md",
   "place": "node pqf-lem-qf-locqf-qc, order 200"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "pqf-def-quasifinite"
+ ],
  "proof": [
   {
    "text": "Assume first that $f$ is quasi-finite. By [pqf-def-quasifinite], it is of finite type and every point of $X$ is isolated in its fibre. The finite-type convention [def-weil-pbc-scheme-conventions] says that a finite-type morphism is locally of finite type and quasi-compact. For any $x\\in X$, choose affine neighbourhoods $U=\\operatorname{Spec}A$ of $x$ and $V=\\operatorname{Spec}R$ of $f(x)$ with $f(U)\\subseteq V$. The point of the fibre over $f(x)$ lying over $x$ is isolated by the hypothesis, so [lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs] gives that $R\\to A$ is quasi-finite at the prime of $x$; hence $f$ is quasi-finite at $x$ by [pqf-def-quasifinite]. Thus $f$ is locally quasi-finite and quasi-compact. Conversely, assume that $f$ is locally quasi-finite and quasi-compact. By [lem-weil-pbc-lqf-locally-finite-type], local quasi-finiteness gives local finite type, and the convention [def-weil-pbc-scheme-conventions] upgrades local finite type together with quasi-compactness to finite type. For each $x\\in X$, quasi-finiteness at $x$ implies that the point of the fibre over $f(x)$ lying over $x$ is isolated by [lem-weil-pbc-quasi-finite-at-point-isolated]. Hence every point is isolated in its fibre, and [pqf-def-quasifinite] gives that $f$ is quasi-finite.",
@@ -133,5 +135,22 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qlq2846 (reviewer sub-agent of L); spot-checked: Mathlib has no scheme-level QuasiFinite class (only LocallyQuasiFinite in Morphisms/QuasiFinite.lean), so no MATHLIB attach. Both directions checked against pqf-def-quasifinite (Tag 01TD) and def-weil-pbc-scheme-conventions (finite type = lft + qc); hypotheses (lft) of the two pbc criterion lemmas met; no cycle through cited nodes. FIX more, RETURN less: C1 - 'local quasi-finiteness gives local finite type' was attributed to pqf-def-quasifinite but is not definitional (the definition gives finite-type ring maps on one affine pair per point, def-weil-finite-type-morphism asks it over every affine V); now cites existing lem-weil-pbc-lqf-locally-finite-type, added to uses, proof_deps and tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isQuasiFinite_iff_isLocallyQuasiFinite_and_quasiCompact",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiFiniteLocallyQuasiFinite.lean",
+  "statement": "theorem isQuasiFinite_iff_isLocallyQuasiFinite_and_quasiCompact {X S : AlgebraicGeometry.Scheme.{v}} (f : X ⟶ S) : IsQuasiFinite f ↔ IsLocallyQuasiFinite f ∧ AlgebraicGeometry.QuasiCompact f",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qlq",
+  "group": "C1",
+  "result": "pass"
  }
 }
