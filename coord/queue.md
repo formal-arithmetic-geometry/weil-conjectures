@@ -1,22 +1,22 @@
 # Work queue
 
-984 items; claim with `tools/claim.py next <group> [--stage N]`.
+998 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (984)
+## Stage 2: nodes to state (998)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-nagata-relative-finite-affine-presentation` | 1 | state |
-| `def-pc-field-tower` | 1 | state |
 | `def-pur-sheaf-tensor-product` | 1 | state |
 | `def-sbc-first-order-thickening` | 1 | state |
 | `def-sbc-normal-dominant-galois` | 1 | state |
 | `def-sc-perfect-closed-immersion` | 1 | state |
+| `def-sp-double-complex-total` | 1 | state |
 | `def-sp-exact-couple` | 1 | state |
-| `def-sp-filtration` | 1 | state |
+| `def-sp-image-filtration` | 1 | state |
 | `def-weil-extension-by-zero-presheaf` | 1 | state |
 | `def-weil-pbc-associated-graded-ring` | 1 | state |
 | `def-weil-pbc-associated-module` | 1 | state |
@@ -31,7 +31,6 @@
 | `def-weil-pbc-proetale-site` | 1 | state |
 | `def-weil-pbc-relative-global-complete-intersection` | 1 | state |
 | `def-weil-pbc-serre-conditions-rk-sk` | 1 | state |
-| `def-weil-pbc-strictly-standard-element` | 1 | state |
 | `def-weil-pbc-torsion-etale-sheaf` | 1 | state |
 | `def-weil-tower-transition-endomorphism` | 1 | state |
 | `lem-exc-discrete-modules-abelian` | 1 | state |
@@ -110,6 +109,7 @@
 | `lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable` | 1 | state |
 | `lem-pc-finite-flat-restriction-projective` | 1 | state |
 | `lem-pc-finite-free-map-residue-localization` | 1 | state |
+| `lem-pc-finite-inseparable-element` | 1 | state |
 | `lem-pc-finite-projective-tor-acyclic` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fp-module-map-descent-affine` | 1 | state |
@@ -151,6 +151,7 @@
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-localization-glue` | 1 | state |
 | `lem-pc-separable-polynomial-alg-closed-quotient-product` | 1 | state |
+| `lem-pc-separable-tensor-algebraic-closure` | 1 | state |
 | `lem-pc-sites-modules-quotient-j-shriek` | 1 | state |
 | `lem-pc-skyscraper-complex` | 1 | state |
 | `lem-pc-stalk-direct-sums` | 1 | state |
@@ -296,6 +297,9 @@
 | `lem-sc-zariski-contracted-power-torsor` | 1 | state |
 | `lem-sp-cart-eilenberg-left-exact-cohomology` | 1 | state |
 | `lem-sp-ce-compatible-homotopy-assembly` | 1 | state |
+| `lem-sp-filtered-complex-ZB-description` | 1 | state |
+| `lem-sp-filtered-complex-associated-spectral-sequence-construction` | 1 | state |
+| `lem-sp-finite-filtration-induction` | 1 | state |
 | `lem-sp-horseshoe-prescribed-resolutions` | 1 | state |
 | `lem-weil-common-extension-fields` | 1 | state |
 | `lem-weil-degreewise-epi-kernel-cocone-qis` | 1 | state |
@@ -365,6 +369,7 @@
 | `lem-weil-pbc-completion-regular-local` | 1 | state |
 | `lem-weil-pbc-complex-injective-resolution-mono` | 1 | state |
 | `lem-weil-pbc-complex-mapping-cylinder-split-factorization` | 1 | state |
+| `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-composition-fibre-degree-bound` | 1 | state |
 | `lem-weil-pbc-conormal-intersection-regular-quotient` | 1 | state |
 | `lem-weil-pbc-conormal-module-principal-localization` | 1 | state |
@@ -524,6 +529,7 @@
 | `lem-weil-pbc-finite-unramified-etale-local` | 1 | state |
 | `lem-weil-pbc-finite-unramified-one-point-closed` | 1 | state |
 | `lem-weil-pbc-finitely-generated-field-complete-intersection-model` | 1 | state |
+| `lem-weil-pbc-first-quadrant-row-collapse` | 1 | state |
 | `lem-weil-pbc-flat-another-variant-local-criterion` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-fibres-irreducible` | 1 | state |
@@ -600,6 +606,7 @@
 | `lem-weil-pbc-glue-sheaves-of-modules` | 1 | state |
 | `lem-weil-pbc-graded-module-away-restriction` | 1 | state |
 | `lem-weil-pbc-grothendieck-regular-sequence-flat` | 1 | state |
+| `lem-weil-pbc-grothendieck-spectral-sequence` | 1 | state |
 | `lem-weil-pbc-h0-spectral-closed-restriction` | 1 | state |
 | `lem-weil-pbc-h1-injective-differentials-injective-char-p` | 1 | state |
 | `lem-weil-pbc-helper-g-ring-char-p` | 1 | state |
@@ -725,7 +732,11 @@
 | `lem-weil-pbc-polynomial-ring-n2` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-origin-regular-local` | 1 | state |
 | `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1 | state |
+| `lem-weil-pbc-popescu-delocalize-base` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1 | state |
+| `lem-weil-pbc-popescu-desingularize` | 1 | state |
+| `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1 | state |
+| `lem-weil-pbc-popescu-desingularize-strictly-standard` | 1 | state |
 | `lem-weil-pbc-popescu-final-solve` | 1 | state |
 | `lem-weil-pbc-popescu-find-sequence` | 1 | state |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1 | state |
@@ -856,6 +867,7 @@
 | `lem-weil-pbc-smooth-at-prime-free-conormal-basis` | 1 | state |
 | `lem-weil-pbc-smooth-conormal-sequence-exact` | 1 | state |
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1 | state |
+| `lem-weil-pbc-smooth-free-differentials-strictly-standard-power` | 1 | state |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1 | state |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1 | state |
 | `lem-weil-pbc-smooth-over-field-local-complete-intersection` | 1 | state |
@@ -895,6 +907,8 @@
 | `lem-weil-pbc-stein-geometric-fibre-etale-criterion` | 1 | state |
 | `lem-weil-pbc-stein-normalized-fibre-idempotent` | 1 | state |
 | `lem-weil-pbc-stein-universally-closed-factor` | 1 | state |
+| `lem-weil-pbc-strictly-standard-base-change` | 1 | state |
+| `lem-weil-pbc-strictly-standard-localization-smooth` | 1 | state |
 | `lem-weil-pbc-subcategory-right-resolution-05T6` | 1 | state |
 | `lem-weil-pbc-surjective-universally-closed-affine-target` | 1 | state |
 | `lem-weil-pbc-surjective-universally-closed-separated` | 1 | state |
@@ -994,7 +1008,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1208 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1191 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
