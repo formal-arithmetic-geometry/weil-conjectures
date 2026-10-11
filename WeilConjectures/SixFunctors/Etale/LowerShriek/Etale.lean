@@ -11,6 +11,8 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Mathlib.CategoryTheory.Localization.Adjunction
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.LiftIndexFinal
+public import WeilConjectures.CategoryTheory.Functor.KanExtension.ProjectionFormula
 
 /-!
 # Extension by zero along an étale morphism
@@ -96,5 +98,27 @@ noncomputable def Etale.derivedEtaleLowerShriekUpperStarAdjunction :
   ((Etale.etaleLowerShriekUpperStarAdjunction A f h).mapHomologicalComplex
     (ComplexShape.up ℤ)).localization DerivedCategory.Q (HomologicalComplex.quasiIso _ _)
       DerivedCategory.Q (HomologicalComplex.quasiIso _ _) _ _
+
+section Projection
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A]
+
+variable {V U : Scheme.{u}} {f : V ⟶ U} (h : Etale f)
+
+/-- **The presheaf-level projection formula for extension by zero along an étale morphism.**
+For presheaves `F` on `V_ét` and `G` on `U_ét`, the projection map
+`Lan(F ⊗ f^*G) ⟶ Lan F ⊗ G` of the left Kan extension along the localization functor is an
+isomorphism: at `W` both sides are `⨁_α F(α) ⊗ G(W)` over the lifts `α` of `W` through `f`
+(`AlgebraicGeometry.SmallSite.exists_final_discrete_costructuredArrow_overMap`,
+`CategoryTheory.Functor.isIso_lanProjectionMap_app`). -/
+theorem Etale.isIso_lanProjectionMap_overMap (F : V.Etaleᵒᵖ ⥤ A) (G : U.Etaleᵒᵖ ⥤ A) :
+    IsIso ((MorphismProperty.Over.map ⊤ h).op.lanProjectionMap F G) := by
+  have : HasCoproducts.{u} A := hasCoproducts_shrink.{u, u + 1}
+  refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun W ↦ ?_
+  obtain ⟨ι, s, hs, hiso⟩ := SmallSite.exists_final_discrete_costructuredArrow_overMap h W.unop
+  exact Functor.isIso_lanProjectionMap_app _ F G W s hiso
+
+end Projection
 
 end AlgebraicGeometry
