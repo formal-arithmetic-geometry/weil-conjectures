@@ -4245,3 +4245,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:29 L: merged deliver/J1/lem-weil-pbc-flat-normal-fibres-noetherian-normal (stage 2; reviewer PASS; first push; Sheaf.RingTheory.NormalOfFlatNormalFibers RingHom.normal_of_flat_normal_fibers)
 - 10:29 L: merged deliver/F1/lem-weil-pbc-finite-unramified-etale-local (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteUnramifiedEtaleLocal AlgebraicGeometry.exists_etale_closed_immersion_decomposition_of_finite_unramified)
 - 10:29 L: merged deliver/M1/lem-weil-pbc-flat-over-regular (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatOverRegular RingHom.flat_of_regular_parameters)
+- 10:30 L: merged deliver/H1/lem-weil-pbc-flat-formally-smooth-closed-fibre-adic (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiber RingHom.formallySmoothAdic_of_flat_closedFiber)

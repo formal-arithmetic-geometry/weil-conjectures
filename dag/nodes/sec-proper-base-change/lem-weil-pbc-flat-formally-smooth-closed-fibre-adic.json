@@ -280,5 +280,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of K1; spot-checked by L: L: 07NQ: reduction to complete rings, Cohen presentation, removing the regular-fibre part, base change, the square-zero lifting with the derivation correction; 4 new nodes, two near the 07NN/07NL nodes (lead notes)"
  },
- "lead_note": "2026-10-10 L: to check at a later review (found by the worker of lem-weil-pbc-power-series-field-cohen-fs-adic): the \"unrestricted lift\" step says S is formally smooth over Z in residue characteristic p; with a coefficient field of characteristic p, 07NL gives formal smoothness over F_p only (Z -> F_p does not lift to Z/p^2), so that step must use that the test ring is an F_p-algebra or the Cohen-ring form."
+ "lead_note": "2026-10-10 L: to check at a later review (found by the worker of lem-weil-pbc-power-series-field-cohen-fs-adic): the \"unrestricted lift\" step says S is formally smooth over Z in residue characteristic p; with a coefficient field of characteristic p, 07NL gives formal smoothness over F_p only (Z -> F_p does not lift to Z/p^2), so that step must use that the test ring is an F_p-algebra or the Cohen-ring form.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiber",
+  "declaration": "RingHom.formallySmoothAdic_of_flat_closedFiber",
+  "file": "lean/Sheaf/RingTheory/FormallySmoothAdicOfFlatClosedFiber.lean",
+  "statement": "theorem formallySmoothAdic_of_flat_closedFiber (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B] (f : A →+* B) [IsLocalHom f] (hflat : f.Flat) : letI : Algebra A B := f.toAlgebra let I : Ideal B := Ideal.map f (maximalIdeal A) letI : Algebra (A ⧸ maximalIdeal A) (B ⧸ I) := Ideal.Quotient.algebraQuotientOfLEComap (Ideal.le_comap_map : maximalIdeal A ≤ I.comap (algebraMap A B)) Algebra.FormallySmoothAdic (A ⧸ maximalIdeal A) (B ⧸ I) (Ideal.map (Ideal.Quotient.mk I) (maximalIdeal B)) → Algebra.FormallySmoothAdic A B (maximalIdeal B)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffs1028",
+  "group": "H1",
+  "result": "pass",
+  "note": "local hom f of Noetherian local rings = IsLocalRing/IsNoetherianRing x2 + IsLocalHom f; flat = f.Flat; k = A/m_A, fibre B/(m_A B) via Ideal.map f, induced k-algebra algebraQuotientOfLEComap (rfl: [a] -> [f a]); fibre max ideal = map mk m_B; hyp/concl = recorded Algebra.FormallySmoothAdic, test rings Type (max u v) both sides"
+ }
 }
