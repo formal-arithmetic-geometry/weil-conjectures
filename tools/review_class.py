@@ -7,6 +7,7 @@ Usage:  tools/review_class.py <group> <item>      prints "AUTO" or "FULL: <reaso
 FULL (read by a reviewer sub-agent of the lead before it lands), when any of these holds:
   the item is a definition; the delivery adds a node (a new definition node) or changes another existing node (a
   dependency module); the item's statement is corrected (statement differs from sheaf-dag, or statement_change added);
+  [CODEX: an independent Codex reviewer on the other machine, xreview.py, since 2026-10-12: `existing: true` records and repairs of returns]
   the record says `existing: true` (the node is mapped to a declaration nobody compiled against it); the report says
   STATEMENT-DISPUTED; the item was returned before (a repair); more than one module; the automatic landing of this
   head failed (local/autoland-failed.tsv); or the item falls in the sample (one statement in four, by a hash of its id).
@@ -47,13 +48,13 @@ def classify(g: str, item: str):
     if d.get("statement") != b.get("statement") or d.get("statement_change") != b.get("statement_change"): return "FULL", "statement corrected", head
     if d.get("stmt_deps") != b.get("stmt_deps") or d.get("proof") != b.get("proof"): return "FULL", "stmt_deps or proof changed", head
     lean = d.get("lean") or {}
-    if lean.get("existing") or not mods: return "FULL", "existing: true record (no module)", head
+    if lean.get("existing") or not mods: return "CODEX", "existing: true record (no module)", head
     rep = show(br, f"coord/reports/{g}/{item}.md") or ""
     import re
     if any(not re.match(r"\s*`?\s*(none|no\b|n/a|not applicable|nothing)", m, re.I) for m in re.findall(r"STATEMENT-DISPUTED:(.{0,40})", rep)):
         return "FULL", "STATEMENT-DISPUTED", head
     ret = ROOT / "coord" / "returns" / f"{g}.md"
-    if ret.exists() and f"## {item} (" in ret.read_text(): return "FULL", "repair of a returned delivery", head
+    if ret.exists() and f"## {item} (" in ret.read_text(): return "CODEX", "repair of a returned delivery", head
     if int(hashlib.sha1(item.encode()).hexdigest(), 16) % SAMPLE == 0: return "FULL", f"sample (1 in {SAMPLE})", head
     return "AUTO", "", head
 def branches():
