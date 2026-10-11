@@ -283,5 +283,23 @@
   "worker": "stage1",
   "summary": "Read Algebra 00SC (lemma-lci, line 35909) statement and proof, 00P2 (line 28270), 00P1, 00OP, 00KW, Topology 0055 and its remark (line 1421), the citer lem-weil-pbc-smooth-over-field-local-complete-intersection (step 9 uses exactly the statement with q maximal) and def-weil-pbc-complete-intersection-over-field. Statement kept. Proof in ten steps following the second ((5) => (2)) and third ((2) => (1)) paragraphs of 00SC: setup (P and P_{q'} Noetherian, IR = {f/w}); R/IR = S_q written out; dim R/IR + e = dim R by the existing leaf for 00KW applied e times; e = ht q' - ht q and dim_q Spec S = n - e by the dimension-of-localization leaf and one new node for the 00P2 identity dim_q Spec S = n - ht q' + ht q (the source's 'in other words dim_q(S) = n - c'); clearing denominators and g' with g'I in (f') written out (no 'clear denominators' left); g'' from an open neighbourhood of minimal dimension and principal opens; dim S_g = n - e through the open-subspace monotonicity leaf and the principal-localization open immersion leaf; the presentation k[x_1..x_{n+1}]/(f', x g'g'' - 1) = S_g with its kernel computed (coefficient-map kernel and R[x]/(rx-1) = R_r leaves); conclusion by the definition. The source's detour through (2) (c generators of (I/I^2)_q) is not needed: the generators come directly from the regular sequence. One new node (unsplit): lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00SC (5)=>(1) (paragraphs 2-3): dimension drop along the regular sequence by the 00KW leaf, e = ht q' − ht q and dim_q Spec S = n − e by 00P2 (new unsplit node), denominators cleared explicitly (steps 5-6), g'' from an open neighbourhood of minimal dimension, the presentation S_g = k[x_1..x_{n+1}]/(f', x g'g''−1) via the coefficient-map and localization leaves. No Mathlib match (no complete intersections)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00SC (5)=>(1) (paragraphs 2-3): dimension drop along the regular sequence by the 00KW leaf, e = ht q' − ht q and dim_q Spec S = n − e by 00P2 (new unsplit node), denominators cleared explicitly (steps 5-6), g'' from an open neighbourhood of minimal dimension, the presentation S_g = k[x_1..x_{n+1}]/(f', x g'g''−1) via the coefficient-map and localization leaves. No Mathlib match (no complete intersections).",
+ "lean": {
+  "module": "Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection",
+  "declaration": "Algebra.exists_globalCompleteIntersection_of_regularSequence",
+  "file": "lean/Sheaf/RingTheory/LCIRegularSequenceGlobalCompleteIntersection.lean",
+  "statement": "theorem exists_globalCompleteIntersection_of_regularSequence (k : Type u) [Field k] (n : ℕ) (I : Ideal (MvPolynomial (Fin n) k)) (q : Ideal (MvPolynomial (Fin n) k ⧸ I)) (hq : q.IsPrime) (e : ℕ) (h : Fin e → Localization.AtPrime (q.comap (Ideal.Quotient.mk I))) (hreg : RingTheory.Sequence.IsRegular (Localization.AtPrime (q.comap (Ideal.Quotient.mk I))) (List.ofFn h)) (hgen : Ideal.map (algebraMap (MvPolynomial (Fin n) k) (Localization.AtPrime (q.comap (Ideal.Quotient.mk I)))) I = Ideal.span (Set.range h)) : ∃ g : (MvPolynomial (Fin n) k ⧸ I), g ∉ q ∧ Algebra.IsGlobalCompleteIntersection k (Localization.Away g)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lrs1110",
+  "group": "H1",
+  "result": "pass",
+  "note": "k field, P=MvPolynomial (Fin n) k, I, S=P/I, q prime (hq), q'=q.comap mk, P_q' = Localization.AtPrime q', h : Fin e -> P_q' with RingTheory.Sequence.IsRegular (List.ofFn h) and Ideal.map algebraMap I = span (range h); conclusion exists g : S, g notin q, Algebra.IsGlobalCompleteIntersection k (Localization.Away g) (F1 9145a6374 decl, k-algebra structure on S_g checked rfl = OreLocalization.instAlgebra); n=0/e=0 admitted; single universe; no hollow hypothesis"
+ }
 }
