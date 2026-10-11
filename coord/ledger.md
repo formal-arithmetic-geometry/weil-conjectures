@@ -5734,3 +5734,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:45 L: merged deliver/E1/WeilConjectures.AlgebraicGeometry.Curve.FieldExtension (stage 3; reviewer PASS; after a return; landing 20261011T234426-L-429530 (interface); modules 2; new nodes 1)
 - 23:48 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ZariskiDimensionBound (stage 3; reviewer PASS; first push; landing 20261011T234804-L-439981 (proof); modules 1; new nodes 0)
 - 23:49 L: returned deliver/R1/WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian (reviewer RETURN: (reviewer X-fe71c, head fe71ce0ad) B5: Incorrect source locator. The finite-pushforward lifting argument is in https://s)
+- 23:54 L: returned deliver/F1/Sheaf.AlgebraicGeometry.Curve.AlgebraicallyClosedCohomologyInvariant (reviewer RETURN: (reviewer X-9d08a, head 9d08aa082) D2/C1/C2/B1: dag/nodes/sec-proper-base-change/e1-prime-coefficient-curve-assertions.j)
