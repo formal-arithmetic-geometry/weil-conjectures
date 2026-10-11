@@ -101,5 +101,31 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dsl0147 (reviewer sub-agent of L); spot-checked: C4 word-for-word vs categories.tex 3906-3950 (LMS/RMS 1-3), 4779-4787 (MS4), derived.tex 1156-1181 (MS5, MS6), 4518-4563 (05S8, 05S9), tags file: all clauses match; localization defined inline by universal property; essentially constant via def-pc-essentially-constant-pro-diagram (cofiltered J); citer lem-pur-left-derived-exact-when-defined uses exactly these clauses; no duplicate definition node. FIX more, RETURN less: (1) C4: statement, source.place and split_report cited Tags 04VB (localization section) and 04VD (left-localization lemma) for multiplicative system and saturation; replaced by 04VC and 05Q8. The Second reading by E1 claimed this repair but the node at d0f087adf still carried 04VB/04VD. (2) C4: S/X stated as the cofiltered category of arrows with target X (Stacks Remark 05Q4), since the essentially-constant dependency is defined only for cofiltered index categories.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-11 L (R-dsl0147): lem-pur-quasi-isos-saturated-triangulated (c87c23f21) numbers its inline axioms differently from this definition and from Stacks (its MS4 = shift, MS5 = triangles, MS6 = saturation; Stacks/this node: MS4 saturation 05Q8, MS5 shift, MS6 triangles) and cites 04VB/04VD wrongly; content equivalent, renumber and recite 04VC/05Q8 there."
+ "lead_note": "2026-10-11 L (R-dsl0147): lem-pur-quasi-isos-saturated-triangulated (c87c23f21) numbers its inline axioms differently from this definition and from Stacks (its MS4 = shift, MS5 = triangles, MS6 = saturation; Stacks/this node: MS4 saturation 05Q8, MS5 shift, MS6 triangles) and cites 04VB/04VD wrongly; content equivalent, renumber and recite 04VC/05Q8 there.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem",
+  "declaration": "CategoryTheory.MorphismProperty.IsSaturatedTriangulatedMultiplicativeSystem",
+  "declarations": [
+   "CategoryTheory.MorphismProperty.IsMultiplicativeSystem",
+   "CategoryTheory.MorphismProperty.IsSaturatedMultiplicativeSystem",
+   "CategoryTheory.MorphismProperty.IsSaturatedTriangulatedMultiplicativeSystem",
+   "CategoryTheory.Functor.IsStrictLocalizationAt",
+   "CategoryTheory.Functor.IsTriangulatedLeftDerivedValue",
+   "CategoryTheory.Functor.IsTriangulatedLeftDerivedDefinedAt"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/IsSaturatedTriangulatedMultiplicativeSystem.lean",
+  "statement": "def IsSaturatedTriangulatedMultiplicativeSystem {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [CategoryTheory.IsTriangulated C] (S : MorphismProperty C) : Prop",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-stl1006",
+  "group": "C1",
+  "result": "pass",
+  "note": "MS1-3 = Left∧Right CalculusOfFractions (exists_left/rightFraction, ext directions checked vs 04VC); MS4 four-object implication with ≫ order; MS5 IsCompatibleWithShift ℤ equiv to shift-by-1 iff given isos in S via MS4; MS6 = compatible_with_triangulation; strict localization = StrictUniversalPropertyFixedTarget + whiskering bijection; S/X = S.Over ⊤ X, value via recorded IsEssentiallyConstantProDiagram (cofiltered); no MorphismProperty.IsSaturated / Triangulated.Subcategory in pinned Mathlib (#check unknown), so derived notion built on Mathlib primitives"
+ }
 }
