@@ -177,6 +177,62 @@ instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasBaseChange where
         (isZero_plus_upperStar_upperStar_openImmersionLowerShriek Λ r b _ hdisj' M)
     exact NatIso.isIso_of_isIso_app _
 
+
+omit [Finite Λ] in
+/-- In a cartesian square `t ≫ r = l ≫ b` with `b` proper and torsion coefficients, `b_*` of an
+extension by zero along `l` vanishes on the closed complement of `r`: by proper base change it is
+computed on `b⁻¹` of the closed complement, which does not meet `l`. -/
+lemma isZero_plus_upperStar_lowerStar_openImmersionLowerShriek (hΛ : IsAddTorsion Λ)
+    {U' U Z' Z : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'} {r : U ⟶ Z} {b : Z' ⟶ Z}
+    [IsOpenImmersion l] [IsOpenImmersion r] [IsProper b] (h : IsPullback t l r b)
+    (M : DerivedCategory.Plus (Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsZero (D+((r.closedComplement)^*[ModuleCat.{u + 1} Λ]).obj
+      (R+((b)_*[ModuleCat.{u + 1} Λ]).obj (D+((l)_!open[ModuleCat.{u + 1} Λ]).obj M))) := by
+  let sq := IsPullback.of_hasPullback b r.closedComplement
+  have := Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ hΛ sq
+  have hdisj : Disjoint (Set.range (pullback.fst b r.closedComplement).base) (Set.range l.base) := by
+    rw [Set.disjoint_left]
+    rintro _ ⟨p, rfl⟩ ⟨u, hu⟩
+    have h₁ : b.base ((pullback.fst b r.closedComplement).base p) ∈ Set.range r.base := by
+      refine ⟨t.base u, ?_⟩
+      rw [← hu, ← Scheme.Hom.comp_apply, h.w, Scheme.Hom.comp_apply]
+    have h₂ : b.base ((pullback.fst b r.closedComplement).base p) ∈ (Set.range r.base)ᶜ := by
+      rw [← r.range_closedComplement, ← Scheme.Hom.comp_apply, pullback.condition,
+        Scheme.Hom.comp_apply]
+      exact ⟨_, rfl⟩
+    exact h₂ h₁
+  exact IsZero.of_iso (((pullback.snd b r.closedComplement)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus
+      |>.map_isZero (isZero_plus_upperStar_openImmersionLowerShriek Λ l _ hdisj M))
+    (asIso ((Etale.derivedBaseChangeMapPlus _ sq.toCommSq).app _))
+
+/-- **Proper base change for the compactly supported direct image**: in the bounded below étale
+derived categories with finite coefficients, the exchange map `r_! t_* ⟶ b_* l_!` of a cartesian
+square with `b` proper is an isomorphism. On the open `r` this is formal; on its closed complement
+both sides vanish, by proper base change (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`,
+blueprint `sk-thm-properbasechange`). -/
+instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasProperExchange where
+  isIso_exchange {U' U Z' Z t l r b} _ _ _ h := by
+    have := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := derivedPlusFormalism (ModuleCat.{u + 1} Λ)) h
+    have : IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shAdj r).unit :=
+      isIso_derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus_unit Λ r
+    have : IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shAdj l).unit :=
+      isIso_derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus_unit Λ l
+    have (M : DerivedCategory.Plus (Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+        IsIso (((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).exchange t l r b h.w).natTrans.app
+          M) :=
+      isIso_of_isIso_plus_of_isZero Λ r _
+        (isIso_map_mateEquiv_app_of_isIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).adj t)
+          ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).adj b)
+          ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shAdj r)
+          ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shAdj l)
+          (TwoSquare.mk _ _ _ _
+            (inv ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).baseChange t l r b h.w).natTrans))
+          M)
+        (isZero_plus_upperStar_openImmersionLowerShriek Λ r _
+          (by rw [r.range_closedComplement]; exact disjoint_compl_left) _)
+        (isZero_plus_upperStar_lowerStar_openImmersionLowerShriek Λ isAddTorsion_of_finite h M)
+    exact NatIso.isIso_of_isIso_app _
+
 end Torsion
 
 end Etale
