@@ -24,7 +24,9 @@
   "def-pc-module-pullback",
   "def-nagata-affine-proj",
   "def-sc-invertible-module",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof": [
   {
@@ -246,5 +248,24 @@
   "by": "L",
   "result": "pass",
   "note": "nine steps (the identification of the two descriptions of O(1) as a new node; the cover from the Proj standard opens (tool use prop-nagata-proj-standard-open, as in the functor-of-points sibling); (b) reduced to h = ρ∘g with the value formula, the non-vanishing trivialization and the linearity of the unit; (c) by the open and affine fibre-product leaves and the new scalar-extension leaf (MvPolynomial.lean:97, verified)); 2 new nodes, one Mathlib leaf; clause-level Lean of the source repository (a) iSup_standardOpen, (b) isFreeGenerator_pullbackSection_twistOneSection / pullbackSection_twistOneSection_map_eq_smul exact, the non-vanishing clause and (c) not, recorded in lean_candidates"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.projectiveSpace_standardCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceStandardCharts.lean",
+  "statement": "theorem projectiveSpace_standardCharts (n : Type u) (S : Scheme.{u}) [Finite n] [Nonempty n] : (⨆ i : n, standardOpen n S i) = ⊤ ∧ (∀ (Y : Scheme.{u}) (g : Y ⟶ ℙ(n; S)) (i j : n), ((Scheme.Modules.tensorPullback g).obj (twist n S 1)).IsInvertible ∧ (∀ (V : Y.Opens), V ≤ g ⁻¹ᵁ standardOpen n S i → ∀ t : Γ((Scheme.Modules.tensorPullback g).obj (twist n S 1), V), ∃! a : Γ(Y, V), t = a • ((Scheme.Modules.tensorPullback g).obj (twist n S 1)).presheaf.map (homOfLE (le_top : V ≤ ⊤)).op (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app (twist n S 1)).val.app (op ⊤) (twistOneSection n S i))) ∧ ((Scheme.Modules.tensorPullback g).obj (twist n S 1)).presheaf.map (homOfLE (le_top : g ⁻¹ᵁ standardOpen n S i ≤ ⊤)).op (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app (twist n S 1)).val.app (op ⊤) (twistOneSection n S j)) = g.app (standardOpen n S i) ((toProjInt n S).app (Proj.basicOpen (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i)) (Proj.awayToSection _ _ (MvPolynomial.awayXRatio (ULift.{u} ℤ) i j))) • ((Scheme.Modules.tensorPullback g).obj (twist n S 1)).presheaf.map (homOfLE (le_top : g ⁻¹ᵁ standardOpen n S i ≤ ⊤)).op (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).unit.app (twist n S 1)).val.app (op ⊤) (twistOneSection n S i))) ∧ (∀ i : n, Scheme.Modules.nonvanishingLocus (twist n S 1) (twistOneSection n S i) = (standardOpen n S i : Set ℙ(n; S))) ∧ ∀ (V : S.Opens) (R : CommRingCat.{u}) (eV : V.toScheme ≅ Spec R) (i : n), IsAffineOpen (standardOpen n S i ⊓ (ℙ(n; S) ↘ S) ⁻¹ᵁ V) ∧ ∃ (h : (standardOpen n S i ⊓ (ℙ(n; S) ↘ S) ⁻¹ᵁ V).toScheme ⟶ V.toScheme) (E : MvPolynomial {j : n // j ≠ i} R ≃+* Γ(ℙ(n; S), standardOpen n S i ⊓ (ℙ(n; S) ↘ S) ⁻¹ᵁ V)), h ≫ V.ι = (standardOpen n S i ⊓ (ℙ(n; S) ↘ S) ⁻¹ᵁ V).ι ≫ (ℙ(n; S) ↘ S) ∧ (∀ r : R, E (MvPolynomial.C r) = (standardOpen n S i ⊓ (ℙ(n; S) ↘ S) ⁻¹ᵁ V).topIso.hom ((h ≫ eV.hom).appTop ((Scheme.ΓSpecIso R).inv r))) ∧ ∀ j : {j : n // j ≠ i}, E (MvPolynomial.X j) = (ℙ(n; S)).presheaf.map (homOfLE (inf_le_left : standardOpen n S i ⊓ (ℙ(n; S) ↘ S) ⁻¹ᵁ V ≤ standardOpen n S i)).op ((toProjInt n S).app (Proj.basicOpen (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) (MvPolynomial.X i)) (Proj.awayToSection _ _ (MvPolynomial.awayXRatio (ULift.{u} ℤ) i j.1)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Full conjunction (a), (b), (c), using the recorded twist and twistOneSection; further pullback uses tensorPullback and the canonical adjunction unit. The ring equivalence has prescribed coefficients and prescribed coordinate ratios."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psc1401",
+  "group": "E1",
+  "result": "pass",
+  "note": "n:Type u [Finite][Nonempty]=finite nonempty index set; (a) iSup standardOpen=top, standardOpen rfl-equal to toProjInt preimage of Proj.basicOpen X_i = node's D+(T_i)_S; (b) all Y,g,i,j: tensorPullback g of recorded twist, pulled T_i via exists_tensorPullbackAdjunction unit, exists-unique a over every V<=g^-1 chart, T_j=g^*(u_{j/i})T_i with awayXRatio i j = T_j/T_i, nonvanishingLocus(twist,T_i)=chart; (c) V,R,eV: IsAffineOpen, E: MvPolynomial {j//j!=i} R ≃+* Γ with C r via q-restriction h and X j -> u_{j/i}, same form as P1PowerAffineCharts"
  }
 }

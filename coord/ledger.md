@@ -4732,3 +4732,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:15 L: merged deliver/E1/lem-weil-pbc-pth-roots-extension-degree (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.PthRootsExtensionDegree IntermediateField.finiteDimensional_finrank_adjoin_pth_roots)
 - 13:15 L: merged deliver/F1/lem-weil-pbc-popescu-desingularize-lifting-apply (stage 2; reviewer FIX; first push; Sheaf.RingTheory.PopescuDesingularizeLiftingApply Algebra.popescu_desingularize_lifting_apply; statement correction reverted (statement, statement_change))
 - 13:16 L: merged deliver/H1/lem-sc-derived-open-gluing (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DerivedOpenGluing AlgebraicGeometry.derived_open_gluing)
+- 13:16 L: merged deliver/E1/lem-weil-pbc-projective-space-standard-charts (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts AlgebraicGeometry.ProjectiveSpace.projectiveSpace_standardCharts)
