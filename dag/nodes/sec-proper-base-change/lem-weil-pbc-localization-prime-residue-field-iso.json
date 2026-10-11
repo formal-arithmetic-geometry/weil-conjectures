@@ -187,5 +187,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps: 00E3 written out directly from (a)-(c) (primes, converse, bijection), (2) via the localization-of-localization leaf (1) with U = A minus q, (3) maximal ideals and residue fields. Statement (1) strengthened to the full 00E3 bijection (needed by the citer lem-weil-pbc-another-helper-g-ring). No new nodes. Tags 00E3, 00C9 verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizationPrimeResidueFieldIso",
+  "declaration": "IsLocalization.prime_localRing_residueField_iso",
+  "file": "lean/Sheaf/RingTheory/LocalizationPrimeResidueFieldIso.lean",
+  "statement": "theorem prime_localRing_residueField_iso (A : Type u) (A' : Type v) [CommRing A] [CommRing A'] [Algebra A A'] (W : Submonoid A) [IsLocalization W A'] (q' : Ideal A') [q'.IsPrime] : let q := q'.comap (algebraMap A A') q.IsPrime ∧ Disjoint (W : Set A) (q : Set A) ∧ (∀ p : Ideal A, p.IsPrime → Disjoint (W : Set A) (p : Set A) → (p.map (algebraMap A A')).IsPrime ∧ (p.map (algebraMap A A')).comap (algebraMap A A') = p) ∧ q.map (algebraMap A A') = q' ∧ Set.BijOn (Ideal.comap (algebraMap A A')) {r : Ideal A' | r.IsPrime} {p : Ideal A | p.IsPrime ∧ Disjoint (W : Set A) (p : Set A)} ∧ IsLocalization.AtPrime (Localization.AtPrime q') q ∧ ∃ e : Localization.AtPrime q ≃ₐ[A] Localization.AtPrime q', e.toRingHom = Localization.localRingHom q q' (algebraMap A A') rfl ∧ (q.map (algebraMap A (Localization.AtPrime q))).map e.toRingHom = q'.map (algebraMap A' (Localization.AtPrime q')) ∧ ∃ σ : q.ResidueField ≃ₐ[A] q'.ResidueField, ∀ x : Localization.AtPrime q, σ (IsLocalRing.residue (Localization.AtPrime q) x) = IsLocalRing.residue (Localization.AtPrime q') (e x)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lpr1118",
+  "group": "F1",
+  "result": "pass",
+  "note": "A,A' CommRing, W Submonoid, [Algebra A A'][IsLocalization W A'] = (a)-(c); q' prime, q=comap; (1) q prime, disjoint W, ∀p map prime & comap∘map=p, map∘comap q'=q', BijOn comap; (2) IsLocalization.AtPrime (Loc q') q with Algebra A instance checked rfl = composite, e ≃ₐ[A] with toRingHom = localRingHom; (3) e maps qA_q to q'A'_q', σ : q.ResidueField ≃ₐ[A] q'.ResidueField (A-algebra via A→A'→κ checked) compatible with residue"
  }
 }

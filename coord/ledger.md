@@ -4425,3 +4425,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:17 L: merged deliver/G1/lem-weil-pbc-limit-module-essentially-finite-presentation-over-system (stage 2; reviewer FIX; first push; Sheaf.RingTheory.LimitModuleEssentiallyFinitePresentationOverSystem RingHom.exists_limit_module_essentially_finite_presentation_over_system)
 - 11:18 L: merged deliver/H1/lem-weil-pbc-locally-constant-germ-evaluation (stage 2; reviewer FIX; first push; Sheaf.Topology.LocallyConstantGermEvaluation TopCat.existsUnique_locallyConstant_germ_evaluation)
 - 11:18 L: merged deliver/M1/lem-weil-pbc-matrix-left-inverse-minors (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.Matrix.LeftInverseMinors Matrix.scalar_left_inverse_maximal_minors)
+- 11:18 L: merged deliver/F1/lem-weil-pbc-localization-prime-residue-field-iso (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LocalizationPrimeResidueFieldIso IsLocalization.prime_localRing_residueField_iso)
