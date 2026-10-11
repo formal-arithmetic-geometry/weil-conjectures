@@ -7,6 +7,7 @@ module
 
 public import Mathlib.GroupTheory.Perm.Fin
 public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.RepresentationTheory.Homological.GroupCohomology.Basic
 
 /-!
@@ -124,5 +125,130 @@ theorem altPairing_d {n : ℕ} (e : Fin (n + 1) → G) (b : (Fin n → G) → k)
     rw [← pow_add]; exact Odd.neg_one_pow ⟨n, by ring⟩
   push_cast [Fin.val_last, Nat.add_sub_cancel]
   linear_combination ((Equiv.Perm.sign σ : ℤ) : k) * (b fun i ↦ (e ∘ σ) i.succ) * h1
+
+/-- The cup product `a₀ ∪ ⋯ ∪ a_{n-1}` of homomorphisms `aᵢ : G → k`, as an `n`-cochain with
+values in the trivial representation: `(g₀, …, g_{n-1}) ↦ ∏ aᵢ(gᵢ)`. -/
+def cupHom {n : ℕ} (a : Fin n → Additive G →+ k) : (Fin n → G) → k :=
+  fun g ↦ ∏ i, a i (Additive.ofMul (g i))
+
+/-- The partial products `T m = ∏ᵢ aᵢ(g_{i or i+1})`, taking `gᵢ` for `i < m` and `g_{i+1}` for
+`i ≥ m`, through which the coboundary of the cup product telescopes. -/
+def cupPartial {n : ℕ} (a : Fin n → Additive G →+ k) (g : Fin (n + 1) → G) (m : ℕ) : k :=
+  ∏ i : Fin n, a i (Additive.ofMul (g (if (i : ℕ) < m then i.castSucc else i.succ)))
+
+lemma cupHom_contractNth_castSucc {n : ℕ} (a : Fin n → Additive G →+ k) (g : Fin (n + 1) → G)
+    (j : Fin n) :
+    cupHom a (Fin.contractNth j.castSucc (· * ·) g) =
+      cupPartial a g (j + 1) + cupPartial a g j := by
+  unfold cupHom cupPartial
+  rw [Fintype.prod_eq_mul_prod_compl j, Fintype.prod_eq_mul_prod_compl j,
+    Fintype.prod_eq_mul_prod_compl j, Fin.contractNth_apply_of_eq _ _ _ _ (by simp),
+    ofMul_mul, map_add, add_mul]
+  congr 1
+  · rw [if_pos (by omega)]
+    congr 1
+    refine Finset.prod_congr rfl fun i hi ↦ ?_
+    have hi : i ≠ j := by simpa using hi
+    rcases lt_or_gt_of_ne (Fin.val_ne_of_ne hi) with h | h
+    · rw [Fin.contractNth_apply_of_lt _ _ _ _ (by simpa using h), if_pos (by omega)]
+    · rw [Fin.contractNth_apply_of_gt _ _ _ _ (by simpa using h), if_neg (by omega)]
+  · rw [if_neg (by omega)]
+    congr 1
+    refine Finset.prod_congr rfl fun i hi ↦ ?_
+    have hi : i ≠ j := by simpa using hi
+    rcases lt_or_gt_of_ne (Fin.val_ne_of_ne hi) with h | h
+    · rw [Fin.contractNth_apply_of_lt _ _ _ _ (by simpa using h), if_pos (by omega)]
+    · rw [Fin.contractNth_apply_of_gt _ _ _ _ (by simpa using h), if_neg (by omega)]
+
+/-- The cup product of homomorphisms is a cocycle. -/
+theorem d_cupHom {n : ℕ} (a : Fin n → Additive G →+ k) :
+    (inhomogeneousCochains.d (Rep.trivial k G k) n).hom (cupHom a) = 0 := by
+  funext g
+  change _ = (0 : k)
+  rw [d_trivial_apply, Fin.sum_univ_castSucc, contractNth_last]
+  simp only [cupHom_contractNth_castSucc, Fin.val_castSucc, Fin.val_last]
+  have h0 : cupHom a (fun i ↦ g i.succ) = cupPartial a g 0 := by
+    simp [cupHom, cupPartial]
+  have hn : cupHom a (fun i ↦ g i.castSucc) = cupPartial a g n := by
+    simp only [cupHom, cupPartial]
+    exact Finset.prod_congr rfl fun i _ ↦ by rw [if_pos i.isLt]
+  rw [h0, hn]
+  have htel : ∑ j : Fin n, (-1 : k) ^ ((j : ℕ) + 1) *
+      (cupPartial a g (j + 1) + cupPartial a g j) =
+      (-1) ^ n * cupPartial a g n - cupPartial a g 0 := by
+    rw [Fin.sum_univ_eq_sum_range (fun j ↦ (-1 : k) ^ (j + 1) *
+      (cupPartial a g (j + 1) + cupPartial a g j)) n]
+    have := Finset.sum_range_sub (fun m ↦ (-1 : k) ^ m * cupPartial a g m) n
+    simp only [pow_zero, one_mul] at this
+    rw [← this]
+    refine Finset.sum_congr rfl fun j _ ↦ ?_
+    ring
+  rw [htel]
+  ring
+
+/-- The alternating pairing of the fundamental cycle of a dual family with the cup product of
+the dual homomorphisms is `1`. -/
+theorem altPairing_cupHom {n : ℕ} (e : Fin n → G) (a : Fin n → Additive G →+ k)
+    (h : ∀ i j, a i (Additive.ofMul (e j)) = if i = j then 1 else 0) :
+    altPairing e (cupHom a) = 1 := by
+  unfold altPairing cupHom
+  rw [Finset.sum_eq_single (1 : Equiv.Perm (Fin n))]
+  · simp [h]
+  · intro σ _ hσ
+    obtain ⟨i, hi⟩ : ∃ i, σ i ≠ i := by
+      by_contra! H
+      exact hσ (Equiv.ext H)
+    rw [Finset.prod_eq_zero (Finset.mem_univ i) (by simp [h, Ne.symm hi]), mul_zero]
+  · simp
+
+/-- **Nonvanishing of `Hⁿ(G, k)`.** Let `G` be a commutative group and `k` a nontrivial
+commutative ring. If there are homomorphisms `aᵢ : G → k` and elements `eⱼ ∈ G`, `i, j < n`, with
+`aᵢ(eⱼ) = δᵢⱼ`, then `Hⁿ(G, k) ≠ 0` for the trivial representation `k`: the cup product
+`a₀ ∪ ⋯ ∪ a_{n-1}` is a cocycle whose alternating pairing with the fundamental cycle of the `eⱼ` is
+`1`, while that pairing kills coboundaries. -/
+theorem not_isZero_of_dualFamily [Nontrivial k] {n : ℕ} (e : Fin (n + 1) → G)
+    (a : Fin (n + 1) → Additive G →+ k)
+    (h : ∀ i j, a i (Additive.ofMul (e j)) = if i = j then 1 else 0) :
+    ¬ Limits.IsZero (groupCohomology (Rep.trivial k G k) (n + 1)) := by
+  intro hZ
+  have hex := ((inhomogeneousCochains (Rep.trivial k G k)).exactAt_iff_isZero_homology
+    (n + 1)).2 hZ
+  rw [HomologicalComplex.exactAt_iff' _ n (n + 1) (n + 2) (by simp) (by simp),
+    ShortComplex.moduleCat_exact_iff] at hex
+  have key : ∀ x : (Fin (n + 1) → G) → k,
+      (inhomogeneousCochains.d (Rep.trivial k G k) (n + 1)).hom x = 0 →
+        ∃ y, (inhomogeneousCochains.d (Rep.trivial k G k) n).hom y = x := by
+    intro x hx
+    have hg : (HomologicalComplex.sc' (inhomogeneousCochains (Rep.trivial k G k)) n (n + 1)
+        (n + 2)).g = inhomogeneousCochains.d (Rep.trivial k G k) (n + 1) :=
+      inhomogeneousCochains.d_def _ (n + 1)
+    have hf : (HomologicalComplex.sc' (inhomogeneousCochains (Rep.trivial k G k)) n (n + 1)
+        (n + 2)).f = inhomogeneousCochains.d (Rep.trivial k G k) n :=
+      inhomogeneousCochains.d_def _ n
+    obtain ⟨y, hy⟩ := hex x (by rw [hg]; exact hx)
+    exact ⟨y, by rw [hf] at hy; exact hy⟩
+  obtain ⟨b, hb'⟩ := key (cupHom a) (d_cupHom a)
+  have := altPairing_d e b
+  rw [hb', altPairing_cupHom e a h] at this
+  exact one_ne_zero this
+
+/-- `Hⁿ(⊕_ι ℤ, k) ≠ 0` in every positive degree for an infinite index type `ι` and a nontrivial
+commutative ring `k`, with trivial action; in particular `Hⁿ(⊕_ℕ ℤ, Λ) ≠ 0` for `n ≥ 1`, the
+group-cohomological input of blueprint `sk-rem-sf-fullcd-scope`. -/
+theorem not_isZero_groupCohomology_finsupp [Nontrivial k] (ι : Type u) [Infinite ι] (n : ℕ) :
+    ¬ Limits.IsZero
+      (groupCohomology (Rep.trivial k (Multiplicative (ι →₀ ℤ)) k) (n + 1)) := by
+  let f : ℕ ↪ ι := Infinite.natEmbedding ι
+  refine not_isZero_of_dualFamily (fun j ↦ Multiplicative.ofAdd (Finsupp.single (f j) 1))
+    (fun i ↦ (Int.castAddHom k).comp ((Finsupp.applyAddHom (f i)).comp
+      (AddEquiv.additiveMultiplicative _).toAddMonoidHom)) fun i j ↦ ?_
+  simp only [AddMonoidHom.coe_comp, Function.comp_apply, Finsupp.applyAddHom_apply,
+    Int.coe_castAddHom]
+  change ((Finsupp.single (f j) (1 : ℤ) (f i) : ℤ) : k) = _
+  by_cases hij : i = j
+  · subst hij; simp
+  · classical
+    rw [Finsupp.single_apply, if_neg (fun h ↦ hij (Fin.ext (f.injective h).symm)), if_neg hij]
+    simp
 
 end groupCohomology
