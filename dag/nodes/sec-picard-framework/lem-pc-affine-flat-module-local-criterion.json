@@ -22,9 +22,39 @@
   "def-weil-pbc-flat-ring-map",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a prime $\\mathfrak q$ of $A$ and put $\\mathfrak p=\\mathfrak q\\cap R$. Apply the localization-preserves-flatness statement to the multiplicative subset $A\\setminus\\mathfrak q$. It gives that $M_{\\mathfrak q}$ is flat over $R$. The induced $R_{\\mathfrak p}$-module structure on $M_{\\mathfrak q}$ exists because every element of $R\\setminus\\mathfrak p$ maps outside $\\mathfrak q$ and is therefore invertible in $A_{\\mathfrak q}$.",
+   "uses": [
+    "lem-pc-affine-flat-module-localization-preserves-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.39.18, Tag 00HT, part (6), only-if direction"
+   }
+  },
+  {
+   "text": "The canonical map $R\\to R_{\\mathfrak p}$ is the localization at $R\\setminus\\mathfrak p$, and $M_{\\mathfrak q}$ is an $R_{\\mathfrak p}$-module. By the equivalence of flatness over a ring and over its localization for modules over the localized ring, $M_{\\mathfrak q}$ is flat over $R_{\\mathfrak p}$.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma 10.39.18, Tag 00HT, part (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-flat-over-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma 10.39.18, Tag 00HT, part (6), only-if direction"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,13 +86,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
- "split_report": null,
+ "status": "split",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-affine-flat-module-local-criterion",
+  "worker": "stage1",
+  "summary": "Split the prime-local flatness criterion into the localization-preserves-flatness statement and the final equivalence between flatness over a ring and its localization. The prime contraction supplies the localized module structure because denominators outside p map outside q.",
+  "blueprint": "Realizes the final local flatness criterion used in the Noetherian approximation proof: localize M at q, then pass from R-flatness to R_p-flatness.",
+  "tool_uses": []
+ },
  "created": {
   "item": "lem-pc-affine-flat-module-descent",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-semicon"
+ "unit": "sk-thm-picard-semicon",
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-flc0039",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-flc0039 (reviewer sub-agent of L); spot-checked: Mathlib: grep of RingTheory/Flat/{Localization,Stability,IsBaseChange}.lean: of_isLocalizedModule/localizedModule/flat_iff_of_isLocalization localize at a submonoid of the base ring only, Localization.flat needs Flat R A; no <=3-declaration composite gives R-flatness of an A-module localization (verdict: no exact match). Step 1: new node (S^{-1}M R-flat for M R-flat A-module) is true (localization exact, commutes with tensor over R), real lemma from Tag 00HT proof, not duplicate of the 11 same-tag nodes; R_p-structure check (R minus p maps outside q) correct. Step 2: lem-weil-pbc-flat-over-localization reverse direction with A=R, A'=R_p, R-structure via R->R_p agrees with R->A->A_q. Citer lem-pc-affine-flat-module-descent steps 2 and 4 use exactly this statement. Not duplicate of lem-weil-pbc-flat-over-localization (different hypotheses). No faults found."
+ }
 }
