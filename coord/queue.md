@@ -1,18 +1,18 @@
 # Work queue
 
-768 items; claim with `tools/claim.py next <group> [--stage N]`.
+765 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (768)
+## Stage 2: nodes to state (765)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
 | `def-pur-saturated-triangulated-localization` | 1 | state |
 | `def-sc-rational-section-divisor` | 1 | state |
-| `def-sp-truncation-couple` | 1 | state |
+| `def-weil-pbc-derived-direct-image-composition` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
@@ -23,25 +23,22 @@
 | `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
 | `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
-| `lem-sp-shift-identification` | 1 | state |
+| `lem-sp-truncation-couple-exact` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
 | `lem-weil-pbc-derived-exchange-termwise` | 1 | state |
-| `lem-weil-pbc-derived-inverse-image-composition` | 1 | state |
+| `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
 | `lem-weil-pbc-direct-image-split-cover-product` | 1 | state |
-| `lem-weil-pbc-direct-sum-extension-assembly` | 1 | state |
 | `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-directed-union-subrings-flat-module` | 1 | state |
-| `lem-weil-pbc-domains-strongly-transcendental-not-quasi-finite` | 1 | state |
 | `lem-weil-pbc-double-complex-cokernel-homology-iso` | 1 | state |
 | `lem-weil-pbc-double-complex-row-cycle-lifts-to-zigzag` | 1 | state |
 | `lem-weil-pbc-double-complex-zigzag-module-functorial` | 1 | state |
 | `lem-weil-pbc-double-complex-zigzag-to-row-cokernel-map` | 1 | state |
 | `lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary` | 1 | state |
-| `lem-weil-pbc-dvr-completion-regular` | 1 | state |
 | `lem-weil-pbc-effaceable-delta-functor-universal` | 1 | state |
 | `lem-weil-pbc-elementary-etale-finite-piece-persistence` | 1 | state |
 | `lem-weil-pbc-equation-count-fibre-dimension-flat` | 1 | state |
@@ -778,7 +775,7 @@
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 826 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 823 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
