@@ -121,5 +121,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rdo2002 (reviewer sub-agent of L); spot-checked: Step 1 cites lem-sc-derived-k-injective-restrict-open (08BS, K-injective complexes restrict to K-injective on opens; hypotheses: U=f^{-1}V open) - correct node; lem-sc-ringed-space-restrict-injective-resolution/-injective-restriction-surjective concern injective modules (01E1/01EA), not K-injective complexes, so not duplicated or restated; no f^{-1}-exact-left-adjoint-of-f_* slip (08BS proof via j_! lives in the cited node, not restated). Step 2: def-pc-ringed-spaces-derived-direct-image gives the K-injective model; (f_*I)|_V = g_*(I|_U) sectionwise, restriction exact so passes to D. Stacks 08FE text matches. No new nodes. Second reading: no missed fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction",
+  "declaration": "AlgebraicGeometry.schemeDerivedDirectImage_openRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedDirectImageOpenRestriction.lean",
+  "statement": "theorem schemeDerivedDirectImage_openRestriction {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.Opens) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [HasDerivedCategory.{wU} (SheafOfModules.{u} (moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace))] [HasDerivedCategory.{wV} (SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace))] : Nonempty ((schemeDerivedDirectImage f ⋙ (@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u} (moduleRings Y.toRingedSpace) V ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over V)) (D := SheafOfModules.{u} (moduleRings V.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv V)) (Functor.additive_of_preserves_binary_products _) (comp_preservesFiniteLimits _ _) (comp_preservesFiniteColimits _ _))) ≅ (@Functor.mapDerivedCategory _ _ _ _ _ _ _ _ (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) (f ⁻¹ᵁ V) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over (f ⁻¹ᵁ V))) (D := SheafOfModules.{u} (moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace)) (Scheme.Modules.overEquiv (f ⁻¹ᵁ V))) (Functor.additive_of_preserves_binary_products _) (comp_preservesFiniteLimits _ _) (comp_preservesFiniteColimits _ _)) ⋙ schemeDerivedDirectImage (f ∣_ V))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
