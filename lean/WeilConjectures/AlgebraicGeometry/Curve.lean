@@ -125,8 +125,16 @@ noncomputable def Scheme.Hom.genus (f : C ⟶ Spec (.of K)) : ℕ :=
 /-- The genus `dim_K Γ(C, Ω¹_{C/K})` is `h⁰(C, Ω¹_{C/K})`: the global sections of a sheaf of
 modules are its cohomology in degree `0`, compatibly with the `K`-module structures. -/
 theorem Scheme.Hom.genus_eq_finrankH_zero [C.Over (Spec (.of K))] :
-    (C ↘ Spec (.of K)).genus = Modules.finrankH K (C ↘ Spec (.of K)).relativeDifferentials 0 :=
-  sorry
+    (C ↘ Spec (.of K)).genus = Modules.finrankH K (C ↘ Spec (.of K)).relativeDifferentials 0 := by
+  let f := C ↘ Spec (.of K)
+  let M := f.relativeDifferentials
+  let := f.ΓAlgebra
+  let : Module K Γ(M, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
+  let e : M.H 0 ≃ₗ[K] Γ(M, ⊤) :=
+    { (Modules.H.zeroLinearEquiv M).toAddEquiv with
+      map_smul' c x :=
+        (Modules.H.zeroLinearEquiv M).map_smul (Scheme.globalSectionsRingHom K c) x }
+  exact e.finrank_eq.symm
 
 /-- Blueprint `sk-def-av-pic`: Pic, degree, Pic⁰
 
