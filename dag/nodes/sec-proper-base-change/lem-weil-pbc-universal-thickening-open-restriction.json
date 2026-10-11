@@ -179,5 +179,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Stacks 04FA and the general remarks in the proof of 04F3: h|_V formally unramified (new 02HC leaf), V in V' a first order thickening over U (new composed leaf on restricting closed immersions and their ideals to opens), the lift exists and is unique because |T| = |T'| forces it into V', conormal sheaves by restriction = pullback along the open immersion. Tags verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalThickeningOpenRestriction",
+  "declaration": "AlgebraicGeometry.universalFirstOrderThickening_open_restriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalThickeningOpenRestriction.lean",
+  "statement": "theorem universalFirstOrderThickening_open_restriction {Z X Z' : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X) (H : IsUniversalFirstOrderThickening h i h') (hform : FormallyUnramified h) (V : Z.Opens) (U : X.Opens) (hVU : V ≤ h ⁻¹ᵁ U) : ∃ (hV : V.toScheme ⟶ U.toScheme), V.ι ≫ h = hV ≫ U.ι ∧ FormallyUnramified hV ∧ ∃ (V' : Z'.Opens) (iV : V.toScheme ⟶ V'.toScheme) (hV' : V'.toScheme ⟶ U.toScheme), i ⁻¹ᵁ V' = V ∧ V' ≤ h' ⁻¹ᵁ U ∧ iV ≫ V'.ι = V.ι ≫ i ∧ hV' ≫ U.ι = V'.ι ≫ h' ∧ iV ≫ hV' = hV ∧ IsUniversalFirstOrderThickening hV iV hV' ∧ ∃ (hVform : FormallyUnramified hV), ∃ (HV : IsUniversalFirstOrderThickening hV iV hV'), Nonempty ((Scheme.Modules.restrictFunctor V.ι).obj (@formallyUnramifiedConormal _ _ _ h hform i h' H) ≅ @formallyUnramifiedConormal _ _ _ hV hVform iV hV' HV)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
