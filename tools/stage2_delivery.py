@@ -637,6 +637,11 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     item_dir = pathlib.PurePosixPath(node_path).parent.as_posix()
     base_paths = {pathlib.PurePosixPath(p).stem: p for p in
                   git.run("ls-tree", "-r", "--name-only", base, "--", "dag/nodes", check=False).splitlines() if p.endswith(".json")}
+    # --drop-nodes / --revert-nodes decide "new vs existing" on the tip of sheaf-dag (2026-10-11): a node the delivery
+    # adds that has since landed via another group is left out like a dropped new node (the delivery's copy omitted)
+    tip_paths = {pathlib.PurePosixPath(p).stem: p for p in
+                 git.run("ls-tree", "-r", "--name-only", "sheaf-dag", "--", "dag/nodes", check=False).splitlines()
+                 if p.endswith(".json")}
     status = [l.split("\t") for l in git.run("diff", "--name-status", base, ref).splitlines() if l] if commits else []
     lean_files, node_files, added_files = [], [], set()
     for st in status:
@@ -698,7 +703,10 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             D["reverted"][nid] = {"path": p, "file": r.get("file") if isinstance(r, dict) else None,
                                   "module": r.get("module") if isinstance(r, dict) else None}
             continue
-        if nid in drop and nid not in base_paths:
+        if (nid in drop or nid in revert) and nid not in base_paths:
+            if nid in revert and tip_paths.get(nid) != p:
+                f("b", f"--revert-nodes {nid}: a new node of this delivery not on sheaf-dag (leave it out with --drop-nodes)")
+                continue
             # --drop-nodes: left out; its module (lean.file) is left out below when no kept node owns it
             try:
                 dn = json.loads(git.show(ref, p) or "")
@@ -707,6 +715,8 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             r = dn.get("lean") if isinstance(dn, dict) else None
             D["dropped"][nid] = {"path": p, "file": r.get("file") if isinstance(r, dict) else None,
                                  "module": r.get("module") if isinstance(r, dict) else None}
+            if nid in tip_paths:
+                D["notes"].append(f"{nid}: landed on sheaf-dag since the delivery's base; the delivery's copy is left out")
             continue
         try:
             nd = json.loads(show(p) or "")
@@ -725,7 +735,7 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             D["new"][nid] = {"path": p, "node": nd}
     for nid in sorted(drop - set(D["dropped"])):
         f("b", f"--drop-nodes {nid}: not a new node of this delivery (only a node file the delivery creates is dropped)")
-    for nid in sorted(revert - set(D["reverted"]) - {item}):
+    for nid in sorted(revert - set(D["reverted"]) - set(D["dropped"]) - {item}):
         f("b", f"--revert-nodes {nid}: not an existing node changed by this delivery (a new node is left out with --drop-nodes)")
     for nid, x in D["reverted"].items():
         D["roles"].append(f"REVERTED dependency node {nid} ({x['path']} stays as on sheaf-dag"
@@ -954,6 +964,13 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             D["lean_path"], D["lean_text"], D["decl"] = lf, text, decl
     for m in mods:
         bad = [i for i in imports(m["text"]) if i in dropped_mods]
+        # a module of that name already on sheaf-dag (the delivery's copy duplicated a landed module): the import
+        # reads the landed module (2026-10-11)
+        landed = [i for i in bad if git.show("sheaf-dag", "lean/" + i.replace(".", "/") + ".lean") is not None]
+        for i in landed:
+            D["notes"].append(f"{m['file']} ({m['node']}): imports {i}, the landed module of that name on sheaf-dag "
+                              "(the delivery's copy is left out)")
+        bad = [i for i in bad if i not in landed]
         if bad:
             f("c", f"{m['file']} ({m['node']}): imports the dropped/reverted module(s) {', '.join(bad)} (fix it to "
                    "import the landed declaration's module)")
