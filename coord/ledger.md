@@ -5630,3 +5630,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:03 L: merged deliver/V1/lem-sc-topological-leray-spectral-sequence (stage 2; reviewer PASS; first push; Sheaf.Topology.TopologicalLeraySpectralSequence CategoryTheory.exists_topological_leray_spectralSequence)
 - 19:03 L: merged deliver/T1/lem-weil-pbc-sheafification-plus-separated (stage 2; reviewer PASS; first push; Sheaf.Paper.SitePlusSeparated CategoryTheory.GrothendieckTopology.plus_separated_and_injective)
 - 19:04 L: merged deliver/U1/lem-weil-pbc-sheaf-finite-relation-truncations (stage 2; reviewer PASS; first push; Sheaf.Topology.SheafFiniteRelationTruncations TopCat.extensionByEmptyConstant_finite_support)
+- 19:04 L: merged deliver/V1/lem-sc-torsor-h1-functoriality (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Sites.TorsorH1Functoriality CategoryTheory.Sheaf.torsor_h1_functoriality)
