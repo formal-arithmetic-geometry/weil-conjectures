@@ -121,5 +121,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-apc2822 (reviewer sub-agent of L); spot-checked: Packet, sheaf-dag affine/fp colimit nodes, parent lem-pc-perfect-complex-descent. FIX more, RETURN less: (1) C4 filtered vs directed: item stated filtered but proof uses directedness and directed-set nodes; restated over a directed set. (2) class (b): lem-pc-finite-projective-map-colimit-descent is the special case (finite projective => f.p., 00NX) of clause (maps) of merged lem-pc-fp-module-map-descent-affine; dropped, Step 3 cites it and gets d^2=0 from its equality clause instead of the elementwise argument. (3) class (d): lem-pc-finite-projective-colimit-descent is three lines from the same node (descend P, the splitting maps iota/sigma, and sigma iota = id); folded into Step 2, node dropped; tool_uses dropped (no longer used). Second reading by K1 missed (2) and (3) and the directed/filtered mismatch.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-apc2822): Item restated over a directed set (E7) to match lem-pc-fp-module-map-descent-affine; parent lem-pc-perfect-complex-descent says 'filtered' but already indexes with j>=i and cites directed nodes."
+ "lead_note": "2026-10-10 L (R-apc2822): Item restated over a directed set (E7) to match lem-pc-fp-module-map-descent-affine; parent lem-pc-perfect-complex-descent says 'filtered' but already indexes with j>=i and cites directed nodes.",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.AffinePerfectColimitDescent",
+  "declaration": "CochainComplex.exists_finite_projective_model_of_directed_colimit",
+  "file": "lean/Sheaf/Algebra/Homology/AffinePerfectColimitDescent.lean",
+  "statement": "theorem exists_finite_projective_model_of_directed_colimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (F : I ⥤ CommRingCat.{u}) [HasColimit F] (P : CochainComplex (ModuleCat.{u} (colimit F : CommRingCat.{u})) ℤ) (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) (hfinite : ∀ n : ℤ, Module.Finite (colimit F : CommRingCat.{u}) (P.X n)) (hprojective : ∀ n : ℤ, Module.Projective (colimit F : CommRingCat.{u}) (P.X n)) : ∃ (i : I) (Pi : CochainComplex (ModuleCat.{u} (F.obj i)) ℤ), (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (Pi.X n)) ∧ (∀ n : ℤ, Module.Finite (F.obj i) (Pi.X n)) ∧ (∀ n : ℤ, Module.Projective (F.obj i) (Pi.X n)) ∧ Nonempty (((ModuleCat.extendScalars (colimit.ι F i).hom).mapHomologicalComplex (ComplexShape.up ℤ)).obj Pi ≅ P)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-apc1445",
+  "group": "F1",
+  "result": "pass",
+  "note": "directed set I:Type u Preorder+IsDirected+Nonempty (00D3, sibling fp-module-map-descent form); F:I⥤CommRingCat.{u}, A=colimit F; P bounded/finite/projective termwise; tied ∃ i, Pi bounded finite projective, complex iso extendScalars(colimit.ι F i).mapHomologicalComplex Pi ≅ P; node diff only lean; [HasColimit F] Prop, inferInstance-derivable, kept per FILTERED COLIMITS line"
+ }
 }
