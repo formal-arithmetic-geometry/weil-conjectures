@@ -1,0 +1,131 @@
+{
+ "id": "def-sc-abelian-open-extension-by-zero",
+ "kind": "definition",
+ "title": "Open extension by zero and its counit for topological abelian sheaves",
+ "status": "split",
+ "statement": "Let $X$ be a topological space, $U$ an open subset, and $G$ an abelian sheaf on $U$ [def-sc-topological-abelian-cohomology]. Regard its underlying presheaf as a presheaf on the slice category of opens of $X$ over $U$, by evaluating an inclusion $V\\to U$ on the inverse image of $V$ in $U$. Define $j_{p!}G$ using the direct-sum construction [def-weil-pbc-site-extension-by-zero-presheaf]: its value on $V$ is the direct sum over inclusions $V\\to U$. Thus it is $G(V)$ when $V\\subseteq U$ and zero otherwise, with the induced restrictions and componentwise action on sheaf morphisms. Define $j_!G$ by sheafification [def-weil-pbc-sheafification]. For an abelian sheaf $F$ on $X$, define $F|_U$ by evaluating on the images in $X$ of opens of $U$, with the same restrictions. The presheaf counit $j_{p!}(F|_U)\\to F$ is the identity on the sole summand for $V\\subseteq U$ and zero otherwise; its unique factorization through sheafification is the sheaf counit $j_!(F|_U)\\to F$.",
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-site-extension-by-zero-presheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Definition 00A4 (definition-j-shriek-structures), Lemma 00A5 (lemma-j-shriek-abelian), parts (1), (2)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extendByZero|lowerShriek|extension by zero",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Presheaf.stalkFunctor, CategoryTheory.presheafToSheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stalks of extension by zero of an abelian sheaf on an open subset",
+   "results": "8 hits: TopCat.stalkToFiber, StalkSkyscraperPresheafAdjunctionAuxs.toSkyscraperPresheaf_app, ModuleCat.Tilde.toOpen_germ_apply, TopCat.stalkToFiber_germ, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk_to_skyscraper, StalkSkyscraperPresheafAdjunctionAuxs.fromStalk, ModuleCat.Tilde.toStalk, AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "extension by zero abelian presheaf on open topological subset",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extendByZero|lowerShriek in Mathlib/Topology/Sheaves, WeilConjectures/Topology and lean/Sheaf/Topology; DAG and blueprint_refs search extension by zero",
+   "results": "No topological abelian specialization. Existing siteExtensionByZeroPresheaf found in Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf, carried by def-weil-pbc-site-extension-by-zero-presheaf; it is reused, not copied. Module-sheaf and etale constructions have different domains.",
+   "date": "2026-10-11",
+   "verdict": "partial match, reused"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-topological-extension-by-zero-stalks",
+  "date": "2026-10-11",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the open-closed sequence step requiring extension by zero and its counit",
+   "via": [
+    "lem-sc-topological-extension-by-zero-stalks",
+    "lem-sc-noetherian-open-closed-cohomology-sequence",
+    "lem-sc-noetherian-topological-cohomology-vanishing",
+    "lem-sc-noetherian-cohomology-vanishing-abelian-dim-one",
+    "lem-sc-pic-lift-closed-immersion-dim-le-one",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective",
+    "lem-sc-proper-dim-one-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "module": "Sheaf.Topology.AbelianOpenExtensionByZero",
+  "declaration": "TopCat.Sheaf.abelianOpenExtensionByZero",
+  "declarations": [
+   "TopCat.Sheaf.openSlicePresheaf",
+   "TopCat.Sheaf.abelianOpenExtensionPresheaf",
+   "TopCat.Sheaf.abelianOpenExtensionByZero",
+   "TopCat.Sheaf.abelianOpenRestrictionPresheaf",
+   "TopCat.Sheaf.abelianOpenRestriction_isSheaf",
+   "TopCat.Sheaf.abelianOpenRestriction",
+   "TopCat.Sheaf.openImage_preimage_eq",
+   "TopCat.Sheaf.abelianOpenCounitApp",
+   "TopCat.Sheaf.abelianOpenCounitApp_naturality",
+   "TopCat.Sheaf.abelianOpenPresheafCounit",
+   "TopCat.Sheaf.abelianOpenCounit",
+   "TopCat.Sheaf.abelianOpenExtensionSection"
+  ],
+  "file": "lean/Sheaf/Topology/AbelianOpenExtensionByZero.lean",
+  "statement": "def abelianOpenExtensionByZero {X : TopCat.{u}} (U : Opens X) : TopCat.Sheaf AddCommGrpCat.{u} ((Opens.toTopCat X).obj U) ⥤ TopCat.Sheaf AddCommGrpCat.{u} X",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-h02de8",
+  "group": "T1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-h02de8",
+  "group": "T1",
+  "result": "pass",
+  "note": "headless review: X arbitrary TopCat, U : Opens X, G every abelian sheaf on U (TopCat.Sheaf AddCommGrpCat on the subspace); j_{p!}G = landed siteExtensionByZeroPresheaf U over (Over U) (one summand iff V≤U, else zero), j_!G = presheafToSheaf; e x G : G_x ≅ (j_!G)_x pinned on all germs over V≤U via summand injection ≫ toSheafify (canonical map); naturality square for every α : G ⟶ H; IsZero stalk in AddCommGrpCat for x ∉ U; for every sheaf F on X, the counit = sheafifyLift of the presheaf map (eqToHom on the sole summand, zero on the empty sum), and e ≫ stalk(counit) = r with r the germ-pinned restriction-stalk iso, i.e. the identity of F_x; combined copy of both modules compiles clean (2.4 s)"
+ }
+}
