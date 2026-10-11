@@ -21,9 +21,42 @@
  "stmt_deps": [
   "def-pc-perfect-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the affine characterization [lem-pc-perfect-affine-bounded-projective] (Stacks Tag 08EB, with the ring form of a perfect complex, More on Algebra Definition 0656), the perfect A-complex K is quasi-isomorphic to a bounded complex P^\\bullet of finite projective A-modules. Each P^n is projective, so Tor_i^A(P^n,B)=0 for i>0 (elementary); hence by [lem-pc-termwise-tor-acyclic-derived-tensor] the canonical map K\\otimes_A^{\\mathbf L}B\\cong P^\\bullet\\otimes_A^{\\mathbf L}B\\to P^\\bullet\\otimes_A B is a quasi-isomorphism, so the derived tensor is represented by the ordinary termwise tensor complex.",
+   "uses": [
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-pc-termwise-tor-acyclic-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.9, Tag 066W"
+   }
+  },
+  {
+   "text": "Each P^n is a direct summand of a finite free A-module A^m, so P^n\\otimes_A B is a direct summand of A^m\\otimes_A B=B^m, i.e. finite projective over B (elementary). Hence P^\\bullet\\otimes_A B is a bounded complex of finite projective B-modules, so by the converse direction of [lem-pc-perfect-affine-bounded-projective] (over Spec B) it is a perfect complex [def-pc-perfect-complex] of B-modules.",
+   "uses": [
+    "lem-pc-perfect-affine-bounded-projective",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.76.9, Tag 066W"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-termwise-tor-acyclic-derived-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma lemma-pull-perfect, Tag 066W"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,15 +78,43 @@
    "results": "no matches",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect in Mathlib (slopmaster2 .lake/packages/mathlib)",
+   "results": "only perfect fields/closures, perfect pairings; no derived-category perfect complexes over rings",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-perfect-finite-free-residue-model",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-perfect-pullback-perfect-residue",
+  "worker": "stage1",
+  "summary": "Corrected the imported item metadata and split Tag 066W into the affine finite-projective representation and the termwise scalar-extension argument. No new node is needed: boundedness, flatness of projective terms, and preservation of finite projectivity under tensor are elementary consequences of the cited perfect-complex definition. No sorry-free project declaration states this item.",
+  "blueprint": "Realizes the ancestor thm-sc-theorem-of-cube proof clause 'proof: construct the locally closed loci on which degree-zero direct images are finite locally free', through the finite-free residue-model route.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-termwise-tor-acyclic-derived-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ppp0109",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ppp0109 (reviewer sub-agent of L); spot-checked: Statement vs Tag 066W; citer lem-sc-perfect-finite-free-residue-model uses it for A->kappa(p), matches. No duplicate (lem-pc-rf-perfect-base-change, lem-sc-perfect-derived-tensor-perfect etc. are different statements); Mathlib grep IsPerfect: no match (recorded). FIX more, RETURN less: (1) C4/C1 step 1: def-pc-perfect-complex only gives local strictly perfect models, not a global bounded finite projective model over A; now cites lem-pc-perfect-affine-bounded-projective (also for the converse in step 2), declared as generic tool use. (2) C1 step 1: termwise tensor computing the derived tensor was asserted elementary; now cites lem-pc-termwise-tor-acyclic-derived-tensor (generic tool; Tor vanishing for projective terms elementary). (3) source.place still said 15.68.3 despite the second reading's claim; made source and proof_origin consistent (Tag 066W).; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-11 L (R-ppp0109): No ring-level perfect definition node exists; def-pc-perfect-complex is the scheme (locally strictly perfect) form, the ring reading goes through lem-pc-perfect-affine-bounded-projective (Tag 08EB / Def 0656), as in lem-pc-ring-pseudo-coherent-finite-tor-perfect. Both new citations are generic tools of sk-thm-picard-duality (C7/C8)."
 }
