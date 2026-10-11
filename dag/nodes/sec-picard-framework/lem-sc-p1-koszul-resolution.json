@@ -131,5 +131,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pkr (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-p1-graded-resolution.md (source note: Koszul resolution of k on the regular sequence x_0,x_1; graded global dimension two); item statement unchanged, agrees with it (field k, S=k[x_0,x_1] standard grading, shifts S(-2), S(-1)^2 via def-weil-pbc-proj-twisting-sheaf (2), k=S/(x_0,x_1), maps homogeneous of degree zero). Step 1 (elementary): degree check from M(d)_n=M_{d+n} of def-weil-pbc-proj-twisting-sheaf, composite x_1x_0-x_0x_1=0, kernel of S->k is (x_0,x_1)=image; checked. Step 2: injectivity at S(-2) from lem-weil-pbc-polynomial-ring-domain (D=k a domain, finite variable set), cancellation of x_0; accepted as a generic off-unit tool (tool_uses declared, C8). Step 3: middle exactness from new node lem-sc-p1-linear-syzygy, whose statement gives exactly a=cx_1, b=-cx_0 from ax_0+bx_1=0; converse by Step 1. Step 4 (elementary) assembles. New node lem-sc-p1-linear-syzygy: true (x_0,x_1 regular sequence / UFD: x_0 | b x_1 so x_0 | b), self-contained, TeX, stmt_deps def-sc-p1-standard and def-pc-standard-graded-algebra exist, statement-only unsplit, created.item = item, three Mathlib searches no match, blueprint from/same_as filled; my blueprint_refs search syzygy/Koszul found no same-statement node. B10: slopmaster2 AlgebraicGeometry/ProjectiveSpace/Koszul.lean koszul_shortExact is the sheaf-level sequence on P^1, not this graded-ring statement, so no attachment. Small cases: a=x_1,b=-x_0 gives c=1; a=b=0 gives c=0; a=x_1^2, b=-x_0x_1 gives c=x_1. Maintainer fields of the item unchanged. Start Sat Oct 10 03:57:09 PM UTC 2026, end Sat Oct 10 03:57:33 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.KoszulResolution",
+  "declaration": "AlgebraicGeometry.ProjectiveLine.koszul_resolution",
+  "statement": "theorem koszul_resolution {k : Type u} [Field k] : ∃ (f : MvPolynomial (Fin 2) k →ₗ[MvPolynomial (Fin 2) k] MvPolynomial (Fin 2) k × MvPolynomial (Fin 2) k) (g : MvPolynomial (Fin 2) k × MvPolynomial (Fin 2) k →ₗ[MvPolynomial (Fin 2) k] MvPolynomial (Fin 2) k) (q : MvPolynomial (Fin 2) k →ₗ[MvPolynomial (Fin 2) k] MvPolynomial (Fin 2) k ⧸ Ideal.span ({X 0, X 1} : Set (MvPolynomial (Fin 2) k))), (∀ a : MvPolynomial (Fin 2) k, f a = (a * X 1, -a * X 0)) ∧ (∀ p : MvPolynomial (Fin 2) k × MvPolynomial (Fin 2) k, g p = p.1 * X 0 + p.2 * X 1) ∧ (∀ a : MvPolynomial (Fin 2) k, q a = Ideal.Quotient.mk (Ideal.span ({X 0, X 1} : Set (MvPolynomial (Fin 2) k))) a) ∧ Function.Injective f ∧ Function.Exact f g ∧ Function.Exact g q ∧ Function.Surjective q ∧ (∀ a : MvPolynomial (Fin 2) k, q a = 0 ↔ a ∈ Ideal.span ({X 0, X 1} : Set (MvPolynomial (Fin 2) k))) ∧ (∀ a : MvPolynomial (Fin 2) k, g (f a) = 0) ∧ (∀ (n : ℕ) (a : MvPolynomial (Fin 2) k), a ∈ homogeneousSubmodule (Fin 2) k n → (f a).1 ∈ homogeneousSubmodule (Fin 2) k (n + 1) ∧ (f a).2 ∈ homogeneousSubmodule (Fin 2) k (n + 1)) ∧ (∀ (n : ℕ) (p : MvPolynomial (Fin 2) k × MvPolynomial (Fin 2) k), p.1 ∈ homogeneousSubmodule (Fin 2) k n → p.2 ∈ homogeneousSubmodule (Fin 2) k n → g p ∈ homogeneousSubmodule (Fin 2) k (n + 1)) ∧ (∀ (n : ℕ) (a : MvPolynomial (Fin 2) k), a ∈ homogeneousSubmodule (Fin 2) k (n + 1) → q a = 0)",
+  "by": "F1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/KoszulResolution.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "fixed_by": "R-pkr2"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pkr2",
+  "group": "F1",
+  "result": "fix",
+  "note": "field k (any universe); S=MvPolynomial (Fin 2) k total-degree homogeneousSubmodule (neg. degrees 0) as landed E1 graded-syzygy; f a=(a x1,-a x0), g=(a,b)->a x0+b x1, q=mk onto S/(x0,x1), all S-linear and tied by equations; exactness Injective f, Exact f g, Exact g q, Surjective q; degree zero: S(-2)_{n+2}=S_n -> S_{n+1}^2, S_n^2 -> S_{n+1}, q kills S_{n+1} (quotient in degree 0), via S(d)_n=S_{d+n} of twisting-sheaf (2). FIX: removed file-local notations S[k]/I[k]/w from the statement and replaced the Z-weighted IsWeightedHomogeneous spelling of total degree by homogeneousSubmodule as in E1 4d1db98b7"
  }
 }
