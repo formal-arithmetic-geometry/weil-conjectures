@@ -160,5 +160,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HilbertEmbeddedPointsGluing",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.existsUnique_coherent_submodule_of_affine_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/HilbertEmbeddedPointsGluing.lean",
+  "statement": "theorem existsUnique_coherent_submodule_of_affine_cover (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (I : Type u) (U : I → X.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcover : ∀ x : X, ∃ i, x ∈ U i) (N : ∀ i, Submodule (Γ(X, U i)) (Γ(F, U i))) (hN : ∀ i, Module.Finite (Γ(X, U i) : Type u) (N i)) (Nloc : ∀ (i : I) (V : X.Opens), Submodule (Γ(X, V)) (Γ(F, V))) (hNloc : ∀ i, Nloc i (U i) = N i) (hcompat : ∀ (i j : I) (V : X.Opens), V ≤ U i → V ≤ U j → Nloc i V = Nloc j V) : ∃! K : Subobject F, (RingedSpace.IsCoherent X.toRingedSpace (K : X.Modules) ∧ (∀ (i : I) (V : X.Opens), (AddSubgroup.map (K.arrow.app V).hom (Submodule.toAddSubgroup (⊤ : Submodule (Γ(X, V)) (Γ((K : X.Modules), V)))) = (Nloc i V).toAddSubgroup)) ∧ (∀ i, Nloc i (U i) = N i) ∧ (∀ i, Nonempty (Γ((cokernel K.arrow : X.Modules), U i) ≃ₗ[Γ(X, U i)] (Γ(F, U i) ⧸ N i))))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
