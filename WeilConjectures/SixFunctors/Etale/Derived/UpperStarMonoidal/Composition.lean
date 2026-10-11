@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 public import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
-public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalNatTrans
 
 /-!
 # The composition isomorphisms of the derived pullback are monoidal
@@ -40,7 +40,7 @@ transformations into the left derived bifunctor `(K, M) ↦ L(fg)^*K ⊗ᴸ L(fg
 
 @[expose] public section
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal
 
@@ -70,60 +70,163 @@ instance isMonoidal_upperStarComp_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h�
   rw [h]
   exact isMonoidal_conjugateEquiv_symm _ _ _
 
-/-- The levelwise composition isomorphism `(h₁ ≫ h₂)^* K ⟶ h₁^* (h₂^* K)` of complexes of
-étale sheaves: `AlgebraicGeometry.Etale.upperStarComp` applied in every degree. -/
-noncomputable def upperStarCompMapHomologicalComplex {R S T : Scheme.{u}} (h₁ : T ⟶ S)
-    (h₂ : S ⟶ R) (h₁₂ : T ⟶ R) (hh : h₁₂ = h₁ ≫ h₂)
-    (K : CochainComplex (Sheaf R.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) :
-    ((h₁₂)^*[ModuleCat.{u + 1} Λ].mapHomologicalComplex (.up ℤ)).obj K ⟶
-      ((h₁)^*[ModuleCat.{u + 1} Λ].mapHomologicalComplex (.up ℤ)).obj
-        (((h₂)^*[ModuleCat.{u + 1} Λ].mapHomologicalComplex (.up ℤ)).obj K) :=
-  (NatTrans.mapHomologicalComplex (Etale.upperStarComp _ h₁ h₂ h₁₂ hh).hom (.up ℤ)).app K ≫
-    (Functor.mapHomologicalComplexCompIso
-      (Iso.refl ((h₂)^*[ModuleCat.{u + 1} Λ] ⋙ (h₁)^*[ModuleCat.{u + 1} Λ])) (.up ℤ)).inv.app K
+section Derived
 
-@[simp]
-lemma upperStarCompMapHomologicalComplex_f {R S T : Scheme.{u}} (h₁ : T ⟶ S)
-    (h₂ : S ⟶ R) (h₁₂ : T ⟶ R) (hh : h₁₂ = h₁ ≫ h₂)
-    (K : CochainComplex (Sheaf R.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (n : ℤ) :
-    (upperStarCompMapHomologicalComplex h₁ h₂ h₁₂ hh K).f n =
-      (Etale.upperStarComp _ h₁ h₂ h₁₂ hh).hom.app (K.X n) := by
-  simp only [upperStarCompMapHomologicalComplex, HomologicalComplex.comp_f,
-    NatTrans.mapHomologicalComplex_app_f, Functor.mapHomologicalComplexCompIso_inv_app_f,
-    Iso.refl_inv]
-  erw [Category.comp_id]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
 
-/-- The levelwise composition isomorphism of the pullbacks is compatible with the monoidal
-structures of the pullbacks of complexes: on the summand `K^p ⊗ L^q` this is the monoidality of
-`AlgebraicGeometry.Etale.upperStarComp`. -/
-lemma upperStarCompMapHomologicalComplex_tensor {R S T : Scheme.{u}} (h₁ : T ⟶ S)
-    (h₂ : S ⟶ R) (h₁₂ : T ⟶ R) (hh : h₁₂ = h₁ ≫ h₂)
-    (K L : CochainComplex (Sheaf R.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) :
-    (upperStarCompMapHomologicalComplex h₁ h₂ h₁₂ hh K ⊗ₘ
-        upperStarCompMapHomologicalComplex h₁ h₂ h₁₂ hh L) ≫
-      ((h₁)^*[ModuleCat.{u + 1} Λ].mapCochainComplexμIso _ _).hom ≫
-        ((h₁)^*[ModuleCat.{u + 1} Λ].mapHomologicalComplex (.up ℤ)).map
-          ((h₂)^*[ModuleCat.{u + 1} Λ].mapCochainComplexμIso K L).hom =
-    ((h₁₂)^*[ModuleCat.{u + 1} Λ].mapCochainComplexμIso K L).hom ≫
-      upperStarCompMapHomologicalComplex h₁ h₂ h₁₂ hh (K ⊗ L) := by
-  ext n : 1
-  apply HomologicalComplex.mapBifunctor.hom_ext
-  intro p q h
-  simp only [HomologicalComplex.comp_f, tensorHom_def, Category.assoc]
-  rw [CochainComplex.Monoidal.ι_whiskerRight_assoc, CochainComplex.ιTensorObj_whiskerLeft_f_assoc,
-    Functor.ιTensorObj_mapCochainComplexμIso_hom_f_assoc]
-  erw [Functor.ιTensorObj_mapCochainComplexμIso_hom_f_assoc]
-  simp only [upperStarCompMapHomologicalComplex_f, Functor.mapHomologicalComplex_map_f]
-  rw [← (h₁)^*[ModuleCat.{u + 1} Λ].map_comp]
-  erw [Functor.ιTensorObj_mapCochainComplexμIso_hom_f]
-  have hnat := (Etale.upperStarComp (ModuleCat.{u + 1} Λ) h₁ h₂ h₁₂ hh).hom.naturality
-    (HomologicalComplex.ιTensorObj K L p q n h)
-  have hmon := NatTrans.IsMonoidal.tensor
-    (τ := (Etale.upperStarComp (ModuleCat.{u + 1} Λ) h₁ h₂ h₁₂ hh).hom) (K.X p) (L.X q)
-  simp only [Functor.comp_obj, Functor.comp_map, Functor.LaxMonoidal.comp_μ] at hnat hmon
-  erw [hnat]
-  rw [reassoc_of% hmon, tensorHom_def, Category.assoc, Functor.map_comp]
+open DerivedCategory
+
+attribute [local instance] isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
+  isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor
+
+variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (fg : X ⟶ Z) (hfg : fg = f ≫ g)
+  [(f)^*[A].PreservesFlat] [(g)^*[A].PreservesFlat] [(fg)^*[A].PreservesFlat]
+
+/-- The components of the derived tensor comparison counit
+`AlgebraicGeometry.Etale.derivedTensorLeftDerivedUpperStarCounit`. -/
+lemma derivedTensorLeftDerivedUpperStarCounit_app_app {W V : Scheme.{u}} (h : W ⟶ V)
+    (K M : HomotopyCategory (Sheaf V.smallEtaleTopology A) (.up ℤ)) :
+    ((derivedTensorLeftDerivedUpperStarCounit A h).app K).app M =
+      ((h)^*[A].leftDerivedFunctorCounit.app K ⊗ₘ (h)^*[A].leftDerivedFunctorCounit.app M) ≫
+        Functor.LaxMonoidal.μ Qh (((h)^*[A].mapHomotopyCategory (.up ℤ)).obj K)
+          (((h)^*[A].mapHomotopyCategory (.up ℤ)).obj M) := by
+  rw [tensorHom_def]
+  dsimp [derivedTensorLeftDerivedUpperStarCounit, derivedTensor]
+  rw [Category.assoc]
   rfl
+
+/-- The tensor comparison `L(fg)^*(K ⊗ᴸ M) ⟶ L(fg)^*K ⊗ᴸ L(fg)^*M` obtained through the
+composition isomorphism `L(fg)^* ≅ Lg^* ⋙ Lf^*` and the tensor comparisons of `Lg^*` and `Lf^*`.
+By `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison_eq_comp` it is the tensor
+comparison of `L(fg)^*`. -/
+noncomputable def leftDerivedUpperStarTensorComparisonComp :
+    leftDerivedUpperStarDerivedTensor A fg ⟶ derivedTensorLeftDerivedUpperStar A fg where
+  app K :=
+    { app M := (leftDerivedUpperStarComp A f g fg hfg).hom.app _ ≫
+          (L((f)^*[A])).map (((leftDerivedUpperStarTensorComparison A g).app K).app M) ≫
+          ((leftDerivedUpperStarTensorComparison A f).app _).app _ ≫
+          ((leftDerivedUpperStarComp A f g fg hfg).inv.app K ⊗ₘ
+            (leftDerivedUpperStarComp A f g fg hfg).inv.app M)
+      naturality M M' φ := by
+        have h₁ := (leftDerivedUpperStarComp A f g fg hfg).hom.naturality
+          ((((derivedTensor A Z).obj K).map φ))
+        have h₂ := ((leftDerivedUpperStarTensorComparison A g).app K).naturality φ
+        have h₃ := ((leftDerivedUpperStarTensorComparison A f).app ((L((g)^*[A])).obj K)).naturality
+          ((L((g)^*[A])).map φ)
+        dsimp at h₁ h₂ h₃ ⊢
+        simp only [Category.assoc]
+        rw [reassoc_of% h₁, ← Functor.map_comp_assoc, h₂, Functor.map_comp_assoc, reassoc_of% h₃]
+        have h₄ := (leftDerivedUpperStarComp A f g fg hfg).inv.naturality φ
+        dsimp at h₄
+        dsimp only [derivedTensor, curriedTensor_obj_map]
+        rw [whiskerLeft_comp_tensorHom, tensorHom_comp_whiskerLeft, h₄] }
+  naturality K K' ψ := by
+    ext M
+    have h₁ := (leftDerivedUpperStarComp A f g fg hfg).hom.naturality
+      ((((derivedTensor A Z).map ψ).app M))
+    have h₂ := NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A g).naturality ψ) M
+    have h₃ := NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A f).naturality
+      ((L((g)^*[A])).map ψ)) ((L((g)^*[A])).obj M)
+    have h₄ := (leftDerivedUpperStarComp A f g fg hfg).inv.naturality ψ
+    dsimp at h₁ h₂ h₃ h₄ ⊢
+    simp only [Category.assoc]
+    rw [reassoc_of% h₁, ← Functor.map_comp_assoc, h₂, Functor.map_comp_assoc, reassoc_of% h₃]
+    dsimp only [derivedTensor, curriedTensor_map_app]
+    rw [whiskerRight_comp_tensorHom, tensorHom_comp_whiskerRight, h₄]
+
+/-- The tensor comparison of a derived pullback is natural in both variables at once. -/
+@[reassoc]
+lemma leftDerivedUpperStarTensorComparison_naturality {W V : Scheme.{u}} (h : W ⟶ V)
+    [(h)^*[A].PreservesFlat] {K K' M M' : DerivedCategory (Sheaf V.smallEtaleTopology A)}
+    (a : K ⟶ K') (b : M ⟶ M') :
+    (L((h)^*[A])).map (a ⊗ₘ b) ≫ ((leftDerivedUpperStarTensorComparison A h).app K').app M' =
+      ((leftDerivedUpperStarTensorComparison A h).app K).app M ≫
+        ((L((h)^*[A])).map a ⊗ₘ (L((h)^*[A])).map b) := by
+  have h₁ := NatTrans.congr_app ((leftDerivedUpperStarTensorComparison A h).naturality a) M
+  have h₂ := ((leftDerivedUpperStarTensorComparison A h).app K').naturality b
+  dsimp [derivedTensor] at h₁ h₂
+  rw [tensorHom_def, Functor.map_comp, Category.assoc, h₂, ← Category.assoc, h₁, Category.assoc,
+    ← tensorHom_def]
+
+variable [NatTrans.IsMonoidal (Etale.upperStarComp A f g fg hfg).hom]
+
+set_option maxHeartbeats 1600000 in
+/-- The tensor comparison of `L(fg)^*` is the one obtained through the composition isomorphism
+`L(fg)^* ≅ Lg^* ⋙ Lf^*` (`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparisonComp`).
+Both are natural transformations into the left derived bifunctor
+`(K, M) ↦ L(fg)^*K ⊗ᴸ L(fg)^*M`, so it suffices to compare them on complexes, where it is the
+monoidality of the composition isomorphism `(fg)^* ≅ g^* ⋙ f^*` of the underived pullbacks. -/
+theorem leftDerivedUpperStarTensorComparison_eq_comp :
+    leftDerivedUpperStarTensorComparison A fg =
+      leftDerivedUpperStarTensorComparisonComp A f g fg hfg := by
+  refine Functor.leftDerived₂_ext (derivedTensorLeftDerivedUpperStar A fg)
+    (derivedTensorLeftDerivedUpperStarCounit A fg) (HomotopyCategory.quasiIso _ (.up ℤ))
+    (HomotopyCategory.quasiIso _ (.up ℤ)) _ _ _ ?_
+  ext K M
+  dsimp only [NatTrans.comp_app, Functor.whiskeringLeft₂_obj_obj_map_app_app]
+  rw [derivedTensorLeftDerivedUpperStarCounit_app_app, leftDerivedUpperStarTensorComparison_app_app_comp]
+  let X := Functor.mapHomotopyCategoryCompNatTrans (g)^*[A] (f)^*[A] (fg)^*[A]
+    (Etale.upperStarComp A f g fg hfg).hom
+  have hX (P : HomotopyCategory (Sheaf Z.smallEtaleTopology A) (.up ℤ)) :
+      (fg)^*[A].leftDerivedFunctorCounit.app P ≫ Qh.map (X P) =
+        (leftDerivedUpperStarComp A f g fg hfg).hom.app (Qh.obj P) ≫
+          (L((f)^*[A])).map ((g)^*[A].leftDerivedFunctorCounit.app P) ≫
+            (f)^*[A].leftDerivedFunctorCounit.app (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj P) :=
+    (leftDerivedUpperStarComp_hom_app_comp_counit A f g fg hfg P).symm
+  have hK : IsIso (X K) := Functor.isIso_mapHomotopyCategoryCompNatTrans _ _ _ _ K
+  have hM : IsIso (X M) := Functor.isIso_mapHomotopyCategoryCompNatTrans _ _ _ _ M
+  have : IsIso (Qh.map (X K ⊗ₘ X M)) := Functor.map_isIso _ _
+  rw [← cancel_mono (Qh.map (X K ⊗ₘ X M))]
+  simp only [Category.assoc, ← Functor.map_comp]
+  rw [Functor.mapHomotopyCategoryCompNatTrans_tensor, ← Functor.LaxMonoidal.μ_natural,
+    tensorHom_comp_tensorHom_assoc, hX, hX]
+  dsimp only [leftDerivedUpperStarTensorComparisonComp]
+  simp only [Category.assoc]
+  rw [tensorHom_comp_tensorHom_assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app_assoc,
+    ← tensorHom_comp_tensorHom_assoc, ← leftDerivedUpperStarTensorComparison_naturality_assoc]
+  simp only [Functor.comp_obj]
+  rw [leftDerivedUpperStarTensorComparison_app_app_comp, ← Functor.map_comp_assoc,
+    ← Functor.map_comp_assoc, Category.assoc, leftDerivedUpperStarTensorComparison_app_app_comp]
+  have e₁ : (L((f)^*[A])).map ((L((g)^*[A])).map (μ Qh K M) ≫
+      (g)^*[A].leftDerivedFunctorCounit.app (K ⊗ M) ≫
+        Qh.map (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M)) =
+      (L((f)^*[A])).map ((L((g)^*[A])).map (μ Qh K M)) ≫
+        (L((f)^*[A])).map ((g)^*[A].leftDerivedFunctorCounit.app (K ⊗ M)) ≫
+          (L((f)^*[A])).map (Qh.map (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M)) := by
+    simp only [Functor.map_comp]
+  have hn : (L((f)^*[A])).map (Qh.map (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M)) ≫
+      (f)^*[A].leftDerivedFunctorCounit.app
+        (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj K ⊗ ((g)^*[A].mapHomotopyCategory (.up ℤ)).obj M) =
+      (f)^*[A].leftDerivedFunctorCounit.app (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj (K ⊗ M)) ≫
+        Qh.map (((f)^*[A].mapHomotopyCategory (.up ℤ)).map
+          (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M)) :=
+    (f)^*[A].leftDerivedFunctorCounit.naturality (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M)
+  have hc : (leftDerivedUpperStarComp A f g fg hfg).hom.app
+        (((derivedTensor A Z).obj (Qh.obj K)).obj (Qh.obj M)) ≫
+        (L((f)^*[A])).map ((L((g)^*[A])).map (μ Qh K M)) =
+      (L((fg)^*[A])).map (μ Qh K M) ≫
+        (leftDerivedUpperStarComp A f g fg hfg).hom.app (Qh.obj (K ⊗ M)) :=
+    ((leftDerivedUpperStarComp A f g fg hfg).hom.naturality (μ Qh K M)).symm
+  have e₂ : Qh.map ((g)^*[A].mapHomotopyCategoryCompNatTrans (f)^*[A] (fg)^*[A]
+      (Etale.upperStarComp A f g fg hfg).hom (K ⊗ M) ≫
+        ((f)^*[A].mapHomotopyCategory (.up ℤ)).map
+          (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M) ≫
+          δ ((f)^*[A].mapHomotopyCategory (.up ℤ))
+            (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj K)
+            (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj M)) =
+      Qh.map (X (K ⊗ M)) ≫ Qh.map (((f)^*[A].mapHomotopyCategory (.up ℤ)).map
+          (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M)) ≫
+        Qh.map (δ ((f)^*[A].mapHomotopyCategory (.up ℤ))
+            (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj K)
+            (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj M)) := by
+    simp only [Functor.map_comp]
+    rfl
+  rw [e₁, Category.assoc, Category.assoc, reassoc_of% hn, reassoc_of% hc,
+    ← reassoc_of% (hX (K ⊗ M)), e₂]
+
+end Derived
 
 end Etale
 
