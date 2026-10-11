@@ -248,5 +248,24 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps following Smoothing 07EY: the old presentation; lifts h_i; the map phi from R[x, y]; its kernel (x_i - h_i, g_j) proved via the substitution sigma (omitted in the source); c = n + d; the partial derivatives; the block-triangular Jacobian with determinant Delta_0 by a new Mathlib leaf (det_fromBlocks_zero_12, Determinant/Basic.lean:726 verified by L); conclusion. Statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StandardSmoothIncludeGenerators",
+  "declaration": "Algebra.exists_standardSmoothPresentation_include_generators",
+  "file": "lean/Sheaf/RingTheory/StandardSmoothIncludeGenerators.lean",
+  "statement": "theorem exists_standardSmoothPresentation_include_generators {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A] [IsStandardSmooth R A] (n : ℕ) (a : Fin n → A) : ∃ (m c : ℕ) (hc : c ≤ n + m) (P : SubmersivePresentation R A (Fin (n + m)) (Fin c)), n ≤ c ∧ P.map = Fin.castLE hc ∧ ∀ i : Fin n, P.val (Fin.castAdd m i) = a i",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ssg"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ssg",
+  "group": "Q1",
+  "result": "fix",
+  "note": "R, A commutative, IsStandardSmooth; family a : Fin n → A with repetitions; m, c with n ≤ c ≤ n+m; presentation = Mathlib SubmersivePresentation on Fin (n+m) / Fin c with map = Fin.castLE hc (Jacobian in the first c variables, unit) and val (castAdd i) = a i; this replaces the inline quotient and det"
  }
 }
