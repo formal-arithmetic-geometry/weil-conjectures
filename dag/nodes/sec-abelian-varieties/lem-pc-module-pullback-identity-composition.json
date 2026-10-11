@@ -132,5 +132,27 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 0097 via uniqueness of left adjoints of id and of h_* g_* (conjugate isomorphisms); 0 new"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TensorPullback",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackId",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackId",
+   "AlgebraicGeometry.Scheme.Modules.nonempty_tensorPullbackComp"
+  ],
+  "statement": "theorem nonempty_tensorPullbackId (T : Scheme.{w}) :\n    Nonempty (tensorPullback (𝟙 T) ≅ 𝟭 T.Modules)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Both clauses already occur in Sheaf.AlgebraicGeometry.TensorPullback: nonempty_tensorPullbackId is the identity clause; nonempty_tensorPullbackComp, with {X Y Z : Scheme.{w}} (g : X ⟶ Y) (h : Y ⟶ Z), states Nonempty (tensorPullback (g ≫ h) ≅ tensorPullback h ⋙ tensorPullback g). These use the explicit tensor-formula functor, including its morphism action, rather than Mathlib abstract pullback."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mic",
+  "group": "N1",
+  "result": "pass",
+  "note": "existing TensorPullback.lean:111 nonempty_tensorPullbackId (T : Scheme.{w}) : Nonempty (tensorPullback (𝟙 T) ≅ 𝟭 T.Modules) and :120 nonempty_tensorPullbackComp {X Y Z : Scheme.{w}} (g) (h) : Nonempty (tensorPullback (g ≫ h) ≅ tensorPullback h ⋙ tensorPullback g) = P_id≅id, P_{h∘g}≅P_g∘P_h; tensorPullback is def-pc-module-pullback's landed tensor-formula functor (obj changeOfRings of inverseImageModule, map sheafified extendScalars); no added hypotheses; single scheme universe w as Scheme.Modules"
  }
 }
