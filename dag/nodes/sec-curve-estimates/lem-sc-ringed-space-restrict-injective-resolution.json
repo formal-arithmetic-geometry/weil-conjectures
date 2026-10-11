@@ -123,5 +123,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rri1919 (reviewer sub-agent of L); spot-checked: Steps 1-3 against cited statements: j^{-1} exact and j_! exact left adjoint (lem-sc-derived-open-restriction-adjunction-exact, ringed-space node, unit sk-thm-picard-duality, accepted as generic tool), orientation j_! -| j^{-1} matches lem-sp-right-adjoint-preserves-injectives, enough injectives on Mod(O_U) via ringed-space node lem-sc-ringed-space-module-sheaves-enough-injectives; no scheme-only citations; no cycle (adjunction node created from lem-sc-derived-k-injective-restrict-open, does not depend on item); matches Stacks 01E1(1) and proof. No faults found."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.RestrictInjectiveResolution",
+  "declaration": "AlgebraicGeometry.RingedSpace.restrict_injectiveResolution",
+  "file": "lean/Sheaf/Topology/RestrictInjectiveResolution.lean",
+  "statement": "theorem restrict_injectiveResolution (X : RingedSpace.{u}) (U : Opens X) (F : SheafOfModules.{u} (moduleRings X)) (I : InjectiveResolution F) : let R := SheafOfModules.overFunctor.{u} (moduleRings X) U (∃ (J : InjectiveResolution (R.obj F)) (h : J.cocomplex = (R.mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex), J.ι.f 0 ≫ eqToHom (congrArg (fun K => K.X 0) h) = R.map (I.ι.f 0)) ∧ (∀ n : ℕ, Injective (R.obj (I.cocomplex.X n)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rir1329",
+  "group": "M1",
+  "result": "pass",
+  "note": "X:RingedSpace.{u}, F:SheafOfModules.{u} (moduleRings X), U:Opens X, restriction = STATE overFunctor (no private copy), I:Mathlib InjectiveResolution; conclusion: exists J:InjectiveResolution (R.obj F) whose cocomplex EQUALS termwise R.mapHomologicalComplex of I (objects+differentials) with augmentation J.ι.f 0 transported = R.map (I.ι.f 0), plus Injective (R.obj (I^n)) for all n incl. 0; #check of moduleRings/overFunctor/InjectiveResolution resolved, recompiled clean, axioms only sorryAx; no extra hypotheses"
  }
 }
