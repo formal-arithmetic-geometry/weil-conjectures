@@ -65,38 +65,47 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {X : Scheme.{u}} (Q : IntTensorFamily (DerivedCategory (Sheaf X.smallEtaleTopology A)))
 
+/-- The identification `Q a ⊗ᴸ Q b ≅ Q (a + b)` of a coherent family in `D(X_ét)`, written with
+the derived tensor product. Over `A = ModuleCat Λ` this presentation avoids the comparison of the
+tensor product of the monoidal structure on `D(X_ét)` with the derived tensor product, which the
+kernel does not perform in reasonable time. -/
+noncomputable def _root_.CategoryTheory.MonoidalCategory.IntTensorFamily.derivedTensorAddIso
+    (a b : ℤ) : ((derivedTensor A X).obj (Q.obj a)).obj (Q.obj b) ≅ Q.obj (a + b) :=
+  Q.addIso a b
+
 /-- The left unit law of a coherent family in `D(X_ét)`, written with the derived tensor
 product. -/
-lemma IntTensorFamily.derivedTensor_zero_left (m : ℤ) :
+lemma _root_.CategoryTheory.MonoidalCategory.IntTensorFamily.derivedTensor_zero_left (m : ℤ) :
     ((derivedTensor A X).map Q.zeroIso.hom).app (Q.obj m) ≫
         (derivedTensorLeftUnitor A X (Q.obj m)).hom =
-      (Q.addIso 0 m).hom ≫ eqToHom (by rw [zero_add]) :=
+      (Q.derivedTensorAddIso 0 m).hom ≫ eqToHom (by rw [zero_add]) :=
   Q.zero_left m
 
 /-- The right unit law of a coherent family in `D(X_ét)`, written with the derived tensor
 product. -/
-lemma IntTensorFamily.derivedTensor_zero_right (m : ℤ) :
+lemma _root_.CategoryTheory.MonoidalCategory.IntTensorFamily.derivedTensor_zero_right (m : ℤ) :
     ((derivedTensor A X).obj (Q.obj m)).map Q.zeroIso.hom ≫
         (derivedTensorRightUnitor A X (Q.obj m)).hom =
-      (Q.addIso m 0).hom ≫ eqToHom (by rw [add_zero]) :=
+      (Q.derivedTensorAddIso m 0).hom ≫ eqToHom (by rw [add_zero]) :=
   Q.zero_right m
 
 /-- The associativity law of a coherent family in `D(X_ét)`, written with the derived tensor
 product. -/
-lemma IntTensorFamily.derivedTensor_assoc (a b c : ℤ) :
-    ((derivedTensor A X).map (Q.addIso a b).hom).app (Q.obj c) ≫ (Q.addIso (a + b) c).hom =
+lemma _root_.CategoryTheory.MonoidalCategory.IntTensorFamily.derivedTensor_assoc (a b c : ℤ) :
+    ((derivedTensor A X).map (Q.derivedTensorAddIso a b).hom).app (Q.obj c) ≫
+        (Q.derivedTensorAddIso (a + b) c).hom =
       (derivedTensorAssociator A X (Q.obj a) (Q.obj b) (Q.obj c)).hom ≫
-        ((derivedTensor A X).obj (Q.obj a)).map (Q.addIso b c).hom ≫
-          (Q.addIso a (b + c)).hom ≫ eqToHom (by rw [add_assoc]) :=
+        ((derivedTensor A X).obj (Q.obj a)).map (Q.derivedTensorAddIso b c).hom ≫
+          (Q.derivedTensorAddIso a (b + c)).hom ≫ eqToHom (by rw [add_assoc]) :=
   Q.assoc a b c
 
 /-- Every member of a coherent family in `D(X_ét)` is invertible for the derived tensor product,
 with inverse the member of opposite index. -/
-lemma IntTensorFamily.exists_derivedTensor_iso (m : ℤ) :
+lemma _root_.CategoryTheory.MonoidalCategory.IntTensorFamily.exists_derivedTensor_iso (m : ℤ) :
     ∃ M, Nonempty (((derivedTensor A X).obj (Q.obj m)).obj M ≅ 𝟙_ _) ∧
       Nonempty (((derivedTensor A X).obj M).obj (Q.obj m) ≅ 𝟙_ _) :=
-  ⟨Q.obj (-m), ⟨Q.addIso m (-m) ≪≫ eqToIso (by rw [add_neg_cancel]) ≪≫ Q.zeroIso⟩,
-    ⟨Q.addIso (-m) m ≪≫ eqToIso (by rw [neg_add_cancel]) ≪≫ Q.zeroIso⟩⟩
+  ⟨Q.obj (-m), ⟨Q.derivedTensorAddIso m (-m) ≪≫ eqToIso (by rw [add_neg_cancel]) ≪≫ Q.zeroIso⟩,
+    ⟨Q.derivedTensorAddIso (-m) m ≪≫ eqToIso (by rw [neg_add_cancel]) ≪≫ Q.zeroIso⟩⟩
 
 end Generic
 
@@ -228,16 +237,18 @@ lemma map_addIso_pullbackIntTensorFamilyCopyIso (f : X ⟶ Y) (πX : X ⟶ S) (�
     (h : πX = f ≫ πY) [NatTrans.IsMonoidal (Etale.upperStarComp A f πY πX h).hom]
     (hX : FX = (pullbackIntTensorFamily A P πX).obj)
     (hY : FY = (pullbackIntTensorFamily A P πY).obj) (m m' : ℤ) :
-    L((f)^*[A]).map (((pullbackIntTensorFamily A P πY).copy FY hY).addIso m m').hom ≫
+    L((f)^*[A]).map
+        (((pullbackIntTensorFamily A P πY).copy FY hY).derivedTensorAddIso m m').hom ≫
         (pullbackIntTensorFamilyCopyIso A P FX FY f πX πY h hX hY (m + m')).hom =
       (leftDerivedUpperStarTensorIso A f _ _).hom ≫
         ((derivedTensor A X).map
           (pullbackIntTensorFamilyCopyIso A P FX FY f πX πY h hX hY m).hom).app _ ≫
           ((derivedTensor A X).obj (FX m)).map
             (pullbackIntTensorFamilyCopyIso A P FX FY f πX πY h hX hY m').hom ≫
-            (((pullbackIntTensorFamily A P πX).copy FX hX).addIso m m').hom := by
+            (((pullbackIntTensorFamily A P πX).copy FX hX).derivedTensorAddIso m m').hom := by
   subst hX hY
-  simp only [pullbackIntTensorFamilyCopyIso, IntTensorFamily.copy_addIso, eqToIso_refl,
+  simp only [pullbackIntTensorFamilyCopyIso, IntTensorFamily.derivedTensorAddIso,
+    IntTensorFamily.copy_addIso, eqToIso_refl,
     Functor.mapIso_refl, Iso.refl_trans, Iso.trans_refl]
   exact map_addIso_pullbackIntTensorFamilyIso A P f πX πY h m m'
 
