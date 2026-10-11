@@ -5181,3 +5181,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:16 L: merged deliver/C1/prop-weil-pbc-grothendieck-existence-proper (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GrothendieckExistenceProper AlgebraicGeometry.grothendieck_existence_proper)
 - 15:16 L: merged deliver/C1/lem-sc-strict-henselization-mod-power-free (stage 2; reviewer FIX; first push; Sheaf.RingTheory.StrictHenselizationModPowerFree Algebra.strictHenselization_mod_power_free)
 - 15:16 L: returned deliver/N1/def-nagata-qc-open-equality-stage (reviewer RETURN: R-qoe: the definition does not define the node's notion. (1) None of the node's objects appear: no inverse system / limi)
+- 15:16 L: merged deliver/H1/lem-sc-p1-boundary-connecting-naturality (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Modules.BoundaryConnectingNaturality AlgebraicGeometry.Scheme.Modules.boundary_connecting_naturality)

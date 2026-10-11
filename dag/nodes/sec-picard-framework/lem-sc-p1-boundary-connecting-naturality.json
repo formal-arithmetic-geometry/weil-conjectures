@@ -138,5 +138,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcn1753 (reviewer sub-agent of L); spot-checked: Step 1 pullback SES (id_A,v,u) elementary and correct; Step 2: def-sc-sheaf-cohomology-functor supplies abelian+enough injectives+left exact Gamma, delta-functor node states naturality G^{n+1}(a)delta=delta'G^n(c) for morphisms of SES, n=0 with a=id gives the item at t (C1/C4/C5 ok, D ok). Tool use of generic delta-functor node accepted (C7). Mathlib: read ExtClass.lean:131 extClass_naturality (Ext-level, S1->S2 with tau1,tau3); item is about H^1 connecting maps under the Ext/H^1 identification, so a leaf would need the boundary=extClass composition plus associativity, not a one-line specialization (B8); split via existing node kept. Source 0B3A mislabel reported by worker, not a fault of the split."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.BoundaryConnectingNaturality",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundary_connecting_naturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/BoundaryConnectingNaturality.lean",
+  "statement": "theorem boundary_connecting_naturality {X : Scheme.{u}} [HasExt.{u} X.Modules] (S : ShortComplex X.Modules) (hS : S.ShortExact) {C' E' : X.Modules} (u : C' ⟶ S.X₃) (i' : S.X₁ ⟶ E') (p' : E' ⟶ C') (w' : i' ≫ p' = 0) (hT : (ShortComplex.mk i' p' w').ShortExact) (v : E' ⟶ S.X₂) (_hi : i' ≫ v = S.f) (_hp : IsPullback v p' S.g u) (t : SheafOfModules.unit X.ringCatSheaf ⟶ C') : hS.extClass.postcomp (SheafOfModules.unit X.ringCatSheaf) (zero_add 1) (Abelian.Ext.mk₀ (t ≫ u)) = hT.extClass.postcomp (SheafOfModules.unit X.ringCatSheaf) (zero_add 1) (Abelian.Ext.mk₀ t)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
