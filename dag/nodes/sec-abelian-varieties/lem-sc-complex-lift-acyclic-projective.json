@@ -22,9 +22,41 @@
   "def-pc-acyclic-complex-modules",
   "def-pc-cochain-complex-modules"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Choose $b$ with $E^i=0$ for $i>b$; for $n>b$ start with the zero tail. Inductively suppose a tail $P^n\\to P^{n+1}\\to\\cdots\\to P^b$ has been constructed, with a morphism of complexes to $E^\\bullet$, all $P^i\\in\\mathcal P$, the maps $P^i/IP^i\\to E^i$ isomorphisms, and exactness in degrees $\\geq n+1$. Working down from degree $b$, exactness and projectivity (1) split each short exact sequence of cycles and boundaries, so one can choose isomorphisms $P^i\\cong Z^i\\oplus Z^{i+1}$ under which $P^i\\to P^{i+1}$ is the projection onto $Z^{i+1}$ followed by the inclusion into $Z^{i+1}\\oplus Z^{i+2}$. Starting from $Z^{b+1}=0$ and applying (2) inductively from the top, every $Z^i$ lies in $\\mathcal P$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.75.1, proof, construction of the split tail"
+   }
+  },
+  {
+   "text": "Choose $P^{n-1}\\in\\mathcal P$ and an isomorphism $P^{n-1}/IP^{n-1}\\cong E^{n-1}$, which exists because $E^{n-1}$ has the required form. Since $Z^n$ is a direct summand of $P^n$ and the image of $Z^{n}\\oplus Z^{n+1}\\to Z^{n+1}\\oplus Z^{n+2}$ is $Z^{n+1}$, exactness of $E^\\bullet$ at $E^n$ identifies $\\operatorname{im}(E^{n-1}\\to E^n)$ with $Z^n/IZ^n\\subset P^n/IP^n\\cong E^n$. As $P^{n-1}$ is projective (1), lift the composite $P^{n-1}\\to E^{n-1}\\to E^n$, which lands in $Z^n/IZ^n$, to a map $P^{n-1}\\to Z^n$. Its reduction modulo $I$ is surjective and $P^{n-1},Z^n\\in\\mathcal P$, so by (3) it is surjective. Appending $P^{n-1}\\to Z^n\\subset P^n$ to the tail gives a morphism of complexes to $E^\\bullet$ extending the diagram one degree to the left, with kernel of $P^n\\to P^{n+1}$ equal to $Z^n$ equal to the image of $P^{n-1}$; so exactness holds in all degrees $\\geq n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.75.1, proof, lifting the next term"
+   }
+  },
+  {
+   "text": "Repeat the preceding extension for $n=b+1,b,b-1,\\dots$. Since each step only adds a term on the left, the descending construction defines one complex $A^\\bullet$ with $A^i=0$ for $i>b$, every term in $\\mathcal P$, and reduction maps giving an isomorphism of complexes $A^\\bullet/IA^\\bullet\\cong E^\\bullet$. Exactness in each degree was established when the degree to its left was added, so $A^\\bullet$ is acyclic. Thus $A^\\bullet$ is the required bounded-above acyclic lift.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "More on Algebra, Lemma 15.75.1, proof, final induction"
+   }
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.75.1, Tag 0BC9"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,15 +78,38 @@
    "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*acyclic|acyclic.*lift in slopmaster2 Mathlib/ (R-cla0309)",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-cube",
  "created": {
   "item": "lem-sc-complex-lift-class-projective",
   "by": "worker",
   "date": "2026-10-11"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-complex-lift-acyclic-projective",
+  "worker": "stage1",
+  "summary": "Read More on Algebra, Lemma 15.75.1, Tag 0BC9. Split its proof into the split-tail construction, projective lifting and surjectivity modulo I, and the descending induction that yields a bounded-above acyclic lift. These are direct constructions from the three hypotheses and the definitions, so no additional DAG node is needed. No exact Lean declaration exists.",
+  "blueprint": "Realizes the theorem-of-the-cube proof clause 'inductively lift the acyclic cone complex'.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cla0309",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cla0309 (reviewer sub-agent of L); spot-checked: Read Tag 0BC9 statement and whole proof; steps 1-3 follow it (E): (1) for splitting/lifting, (2) for Z^i in P, (3) for surjectivity of P^{n-1}->Z^n. C4: H1 lem-sc-complex-lift-class-projective step 3 applies it to Cone(q) with (1), only-if (2), (3): matches. Diff vs merge-base: only the item and its report; the 300 deletions are sheaf-dag moving on (K1 prop-av-tate-rank). created.item unchanged (correct: node created by H1). No duplicate; one Mathlib grep, 0 hits. FIX more, RETURN less: (a) statement had been changed without statement_change (definitions inlined, citations dropped); restored sheaf-dag statement and stmt_deps verbatim; (b) B4: steps rewritten in TeX (no plain-text arrows, E^\\bullet, \\mathcal P); (c) step 2 now names Z^n in P, needed for (3), and the identification im(E^{n-1}->E^n)=Z^n/IZ^n. Second reading by J1 missed (a) and wrongly claimed it corrected created.item.; 1 file(s) fixed by the reviewer"
  }
 }
