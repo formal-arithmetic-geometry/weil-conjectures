@@ -94,6 +94,7 @@ there is an isomorphism `α_K : Ri^! 𝔻_T K ≅ 𝔻_Z (i^* K)` for every `K`,
 No finiteness of `K` is needed. -/
 theorem nonempty_iso_rightDerivedUpperShriek_verdierDual {Z T S : Scheme.{u}} (aT : T ⟶ S)
     [HasCompactification aT] (i : Z ⟶ T) [HasCompactification i] [HasCompactification (i ≫ aT)]
+    [QuasiCompact (i ≫ aT)]
     (K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((R(i)^![ModuleCat.{u + 1} Λ]).obj
         ((verdierDual (ModuleCat.{u + 1} Λ) aT).obj (op K)) ≅
