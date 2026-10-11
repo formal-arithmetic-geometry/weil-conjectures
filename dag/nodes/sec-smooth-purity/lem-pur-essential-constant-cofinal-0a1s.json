@@ -159,5 +159,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ecc0244 (reviewer sub-agent of L); spot-checked: Read the packet, Stacks 0A1S/0A1T/05PZ/definition-initial/lemma-cofinal, def-pc-essentially-constant-pro-diagram, 05py, hom-colimit, the citer 05sc steps 2 and 4, 05r9 (projections initial in Stacks' zigzag sense). FIX more, RETURN less: (1) C4/E7 (missed by the Second reading by J1, which deleted it as 'unsupported'): the delivery dropped the value and cone-map clauses that the citer lem-pur-derived-functor-triangles-05sc uses in steps 2 and 4, with no statement_change; restored the sheaf-dag statement word for word and made the proof establish them (Step 2: cone maps of M∘H are u_{H(i)} via the 05py characterization; Steps 3-4: u_{H(i)}=v_i, elementary from injectivity of the comparison map and r∘v_{i0}=id). (2) C4: the delivery cited lem-weil-pbc-initial-functor-cofiltered-criterion, whose colimit clause assumes the equalizer conditions (i),(ii), not Stacks' zigzag initiality that the statement and 05r9 use; replaced by lem-weil-pbc-initial-functor-limit (Stacks' initial, any target category) applied with target Set^op, giving the Hom-colimit comparison bijection kappa_W. (3) source place corrected: Tag 0A1S is the ind/cofinal lemma-cofinal-essentially-constant; the item is the pro form Tag 0A1T (lemma-initial-essentially-constant). Mathlib: grep EssentiallyConstant in Mathlib: 0 hits; Functor.Initial exists (generic only).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantCofinal",
+  "declaration": "CategoryTheory.initial_iff_essentiallyConstantProDiagram",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/EssentiallyConstantCofinal.lean",
+  "statement": "theorem initial_iff_essentiallyConstantProDiagram {I : Type uI} {J : Type uJ} {C : Type uC} [Category.{vI} I] [Category.{vJ} J] [Category.{vC} C] [IsCofiltered I] [IsCofiltered J] (H : I ⥤ J) [H.Initial] (M : J ⥤ C) (X : C) : (IsEssentiallyConstantProDiagram M X ↔ IsEssentiallyConstantProDiagram (H ⋙ M) X) ∧ (∀ u : (Functor.const J).obj X ⟶ M, (∃ j₀ : J, ∃ r : M.obj j₀ ⟶ X, u.app j₀ ≫ r = 𝟙 X ∧ ∀ j : J, ∃ k : J, ∃ a : k ⟶ j₀, ∃ b : k ⟶ j, M.map b = M.map a ≫ r ≫ u.app j) → ∃ i₀ : I, ∃ r : M.obj (H.obj i₀) ⟶ X, u.app (H.obj i₀) ≫ r = 𝟙 X ∧ ∀ i : I, ∃ k : I, ∃ a : k ⟶ i₀, ∃ b : k ⟶ i, M.map (H.map b) = M.map (H.map a) ≫ r ≫ u.app (H.obj i)) ∧ (∀ v : (Functor.const I).obj X ⟶ H ⋙ M, (∃ i₀ : I, ∃ r : M.obj (H.obj i₀) ⟶ X, v.app i₀ ≫ r = 𝟙 X ∧ ∀ i : I, ∃ k : I, ∃ a : k ⟶ i₀, ∃ b : k ⟶ i, M.map (H.map b) = M.map (H.map a) ≫ r ≫ v.app i) → ∃ u : (Functor.const J).obj X ⟶ M, (∃ j₀ : J, ∃ r : M.obj j₀ ⟶ X, u.app j₀ ≫ r = 𝟙 X ∧ ∀ j : J, ∃ k : J, ∃ a : k ⟶ j₀, ∃ b : k ⟶ j, M.map b = M.map a ≫ r ≫ u.app j) ∧ ∀ i : I, u.app (H.obj i) = v.app i)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ecc1012"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ecc1012",
+  "group": "E1",
+  "result": "fix",
+  "note": "H:I⥤J [H.Initial] = Stacks zigzag initial (node proof step 1); added [IsCofiltered I] [IsCofiltered J] (node 'between cofiltered categories'; iff false without: walking cospan -> point); iff via landed IsEssentiallyConstantProDiagram with same X; cone-map clauses restated for the given cone u (restriction u.app (H.obj i)) and given v (extension u with u.app (H.obj i) = v.app i), replacing rfl/existential-v vacuous clauses; docstring carries node proof steps 1-4"
  }
 }
