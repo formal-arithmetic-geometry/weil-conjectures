@@ -174,5 +174,23 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily",
+  "declaration": "AlgebraicGeometry.Etale.isIso_iff_of_jointlySurjective_etale_family",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsIsoIffOfJointlySurjectiveEtaleFamily.lean",
+  "statement": "theorem isIso_iff_of_jointlySurjective_etale_family {T : Scheme.{u}} {I : Type w} {U : I → Scheme.{u}} (t : ∀ i : I, U i ⟶ T) [∀ i : I, Etale (t i)] (ht : ∀ x : T, ∃ (i : I) (y : U i), (t i).base y = x) {G H : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : G ⟶ H) : IsIso φ ↔ ∀ i : I, IsIso ((upperStar AddCommGrpCat.{u + 1} (t i)).map φ)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ecd0958",
+  "group": "C1",
+  "result": "pass",
+  "note": "T:Scheme.{u}; I:Type w arbitrary (empty I forces T empty via ht, RHS vacuous); t i : U i ⟶ T with [Etale (t i)]; ht = joint surjectivity on points via (t i).base; G H : Sheaf T.smallEtaleTopology AddCommGrpCat.{u+1} per def-weil-pbc-abelian-etale-sheaves note; t_i^{-1} = recorded Etale.upperStar, map φ; IsIso both sides in ↔. Sandbox: for I:Type u the statement is proved from Functor.map_isIso + WeilConjectures Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective (one direction only, ι:Type u, so not existing:true); Mathlib Sheaf.isIso_iff_of_coversTop uses overPullback, not literal."
  }
 }
