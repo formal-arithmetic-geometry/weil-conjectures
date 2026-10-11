@@ -219,5 +219,23 @@
   "worker": "stage1",
   "summary": "Statement checked against More on Algebra Remark 07NS (3),(4), Lemmas 07NR, 07NJ and the second paragraph of the proof of Proposition 07PM; kept unchanged (it matches the citer lem-weil-pbc-formally-smooth-complete-local-regular, step 'The coefficient ring A_0 and the algebra C'). Proof written in 8 steps: closed fibre complete (0325 node); lift C of the closed fibre by 07NR (new unsplit node lem-weil-pbc-fs-adic-lift-from-residue-field, isomorphism stated as one of A_0-algebras, as the source's proof gives); the map psi by 07NJ (existing node lem-weil-pbc-fs-adic-lift-into-complete, closedness of m_A B by Krull); m_A^N in m_0 A (Artinian quotient); D = C (x)_{A_0} A finite over C, Noetherian, m_A D in the Jacobson radical; surjectivity of D -> B by 031D (in place of the source's Nakayama mod m^n plus completion, which the finite case makes unnecessary, as 07PM remarks); injectivity by tensoring the kernel sequence with k (B flat, 00HL) and Nakayama, as in the proof of 07NQ; conclusion. The source's 'completion C (x)^ A' and Algebra 00ME/00MA are not needed on this route. Mathlib: no adic formal smoothness, no Cohen structure theory; searches recorded."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07NS (3)-(4) as used in 07PM: lift of the closed fibre by 07NR (new node), the map psi by 07NJ (today's node) with J closed by Krull, surjectivity of C⊗A → B by 031D (no completion needed since A_0 → A is finite), injectivity by flatness + Nakayama as in 07NQ; m_A D in the Jacobson radical via m_A^N ⊆ m_0 A (steps 4-5) checked. No Mathlib match."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07NS (3)-(4) as used in 07PM: lift of the closed fibre by 07NR (new node), the map psi by 07NJ (today's node) with J closed by Krull, surjectivity of C⊗A → B by 031D (no completion needed since A_0 → A is finite), injectivity by flatness + Nakayama as in 07NQ; m_A D in the Jacobson radical via m_A^N ⊆ m_0 A (steps 4-5) checked. No Mathlib match.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FsAdicLiftOverFiniteCoefficientMap",
+  "declaration": "RingHom.exists_fs_adic_lift_over_finite_coefficient_map",
+  "file": "lean/Sheaf/RingTheory/FsAdicLiftOverFiniteCoefficientMap.lean",
+  "statement": "theorem exists_fs_adic_lift_over_finite_coefficient_map {A₀ : Type u} {A : Type v} {B : Type w} [CommRing A₀] [CommRing A] [CommRing B] [Algebra A₀ A] [Algebra A B] [IsNoetherianRing A₀] [IsNoetherianRing A] [IsNoetherianRing B] [IsLocalRing A₀] [IsLocalRing A] [IsLocalRing B] [IsAdicComplete (IsLocalRing.maximalIdeal A₀) A₀] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [IsAdicComplete (IsLocalRing.maximalIdeal B) B] (α : A₀ →+* A) (hα : algebraMap A₀ A = α) [IsLocalHom α] [Module.Finite A₀ A] (hres : Function.Bijective (IsLocalRing.ResidueField.map α)) (φ : A →+* B) (hφ : algebraMap A B = φ) [IsLocalHom φ] (hflat : RingHom.Flat φ) : letI : Algebra (IsLocalRing.ResidueField A) (B ⧸ Ideal.map φ (IsLocalRing.maximalIdeal A)) := Ideal.Quotient.algebraQuotientOfLEComap (Eq.mpr (congrArg (fun f : A →+* B => IsLocalRing.maximalIdeal A ≤ (Ideal.map φ (IsLocalRing.maximalIdeal A)).comap f) hφ) Ideal.le_comap_map) Algebra.FormallySmoothAdic (IsLocalRing.ResidueField A) (B ⧸ Ideal.map φ (IsLocalRing.maximalIdeal A)) (Ideal.map (Ideal.Quotient.mk (Ideal.map φ (IsLocalRing.maximalIdeal A))) (IsLocalRing.maximalIdeal B)) → ∃ (C : Type (max u v w)) (_ : CommRing C) (_ : IsLocalRing C) (_ : Algebra A₀ C), IsNoetherianRing C ∧ IsAdicComplete (IsLocalRing.maximalIdeal C) C ∧ ∃ (γ : A₀ →+* C), algebraMap A₀ C = γ ∧ IsLocalHom γ ∧ Algebra.FormallySmoothAdic A₀ C (IsLocalRing.maximalIdeal C) ∧ ∃ (ψ : C →+* B), IsLocalHom ψ ∧ ψ.comp γ = φ.comp α ∧ ∃ F : RingHom (TensorProduct A₀ C A) B, Function.Bijective F ∧ ∀ c a, F (TensorProduct.tmul A₀ c a) = ψ c * φ a",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-flc1058",
+  "group": "F1",
+  "result": "pass",
+  "note": "A0,A,B CommRing+IsNoetherianRing+IsLocalRing+IsAdicComplete(maximalIdeal); alpha local, Module.Finite A0 A via hα, residue iso = Bijective (ResidueField.map α); φ local, RingHom.Flat; closed fibre B/m_A B FormallySmoothAdic over ResidueField A for image of m_B (algebraQuotientOfLEComap as landed OfFlatClosedFiber); ∃ C:Type(max u v w) Noetherian complete local, γ local = algebraMap, FormallySmoothAdic A0 C m_C, ψ local, ψγ=φα, bijective ring map C⊗[A0]A→B with c⊗a↦ψc·φa; instantiation A0=A=B=k compiles"
+ }
 }
