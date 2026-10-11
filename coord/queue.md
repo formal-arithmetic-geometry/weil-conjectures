@@ -1,16 +1,17 @@
 # Work queue
 
-127 items; claim with `tools/claim.py next <group> [--stage N]`.
+129 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (127)
+## Stage 2: nodes to state (129)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-pc-ringed-spaces-derived-direct-image` | 1 | state | 146 |
+| `def-pc-derived-direct-image` | 1 | state | 81 |
 | `def-weil-pbc-etale-cohomology` | 1 | state | 57 |
+| `pqf-def-cohomology` | 1 | state | 57 |
 | `def-pur-derived-internal-hom` | 1 | state | 34 |
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
 | `def-nagata-qc-open-descent` | 1 | state | 11 |
@@ -22,6 +23,7 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-weil-pbc-simplicial-hom-object-exists` | 1 | state | 5 |
 | `lem-weil-pbc-truncation-triangle` | 1 | state | 4 |
+| `lem-pc-ringed-spaces-derived-adjoint-general` | 1 | state | 3 |
 | `lem-sp-exact-functor-couple` | 1 | state | 3 |
 | `lem-weil-pbc-coherent-formal-modules-affine` | 1 | state | 3 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
@@ -30,10 +32,13 @@
 | `thm-sp-grothendieck` | 1 | state | 2 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
 | `lem-weil-pbc-formal-systems-pullback` | 1 | state | 1 |
-| `thm-sp-spectral-object-yields` | 1 | state | 1 |
 | `lem-sc-group-addition-tangent-differential` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
+| `lem-pc-derived-functor-termwise-split-ses-triangle` | 1 | state | 0 |
+| `lem-pc-flat-filtered-complex-comparison` | 1 | state | 0 |
 | `lem-pc-ringed-space-rgamma-derived-limit` | 1 | state | 0 |
+| `lem-pc-ringed-space-sheafification-cohomology` | 1 | state | 0 |
+| `lem-pc-ringed-spaces-derived-direct-image-composition` | 1 | state | 0 |
 | `lem-pur-derived-functor-triangles-05sc` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-etale-torsor-inverse-image-extension` | 1 | state | 0 |
@@ -66,7 +71,6 @@
 | `lem-weil-pbc-module-pullback-ideal-quotient` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-retract-supplied` | 1 | state | 0 |
-| `lem-weil-pbc-semi-representable-covering-permanence` | 1 | state | 0 |
 | `lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-degree-exact` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-finite` | 1 | state | 0 |
@@ -96,7 +100,6 @@
 | `lem-pc-finite-projective-cokernel-localization` | 2 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state | 0 |
-| `lem-sc-generic-rank-leading-degree` | 2 | state | 0 |
 | `lem-sc-hilbert-embedded-points` | 2 | state | 0 |
 | `lem-sc-hom-etale-locus-translation` | 2 | state | 0 |
 | `lem-sc-p1-boundary-connecting-naturality` | 2 | state | 0 |
@@ -122,7 +125,6 @@
 | `lem-sp-filtered-homotopy-spectral-sequence` | 2 | state | 0 |
 | `lem-sp-half-plane-graded-canonical` | 2 | state | 0 |
 | `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state | 0 |
-| `lem-weil-pbc-finite-type-z-g-ring` | 2 | state | 0 |
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state | 0 |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state | 0 |
 | `lem-weil-pbc-projective-space-twist-glued-identification` | 2 | state | 0 |
@@ -137,7 +139,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 393 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 386 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
