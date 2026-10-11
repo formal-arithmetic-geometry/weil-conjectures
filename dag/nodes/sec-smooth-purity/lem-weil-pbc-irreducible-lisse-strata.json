@@ -126,5 +126,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ils2704 (reviewer sub-agent of L); spot-checked: Read the item, the 3 cited statements (def-weil-pbc-etale-sheaves constructible/finite locally constant clauses, scheme conventions, finite-components Mathlib leaf), Stacks 095A/03Q1/01OX text. Topology of S_i=C_i minus earlier components correct (nonempty via generic point, irreducible, disjoint cover, locally closed); empty strata harmless; 'locally constant with finite stalks' = finite locally constant of the definition. FIX more, RETURN less: (1) C1/C4: step 2 (elementary) derived that F|_{S_i} is finite locally constant from the definition node, which does not say pullback along S_i->Z_k->X preserves finite local constancy; added statement-only node lem-weil-pbc-pullback-finite-locally-constant (Stacks 095A, 03Q1(3), 03CB: (f g)^{-1}F = g^{-1}f^{-1}F and it is finite locally constant if f^{-1}F is), cited in a new step 3, proof_deps updated. (2) C1: 'each part is Noetherian' untagged; now Tags 01OX, 01T5, 01T6; reduced induced structure on S_i inside Z_k and the composite immersion tagged 01J4, 02V0. Second reading by C1 missed both. Start Sat Oct 10 09:50:32 PM UTC 2026; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IrreducibleLisseStrata",
+  "declaration": "AlgebraicGeometry.Scheme.exists_irreducible_lisse_stratification",
+  "file": "lean/Sheaf/AlgebraicGeometry/IrreducibleLisseStrata.lean",
+  "statement": "theorem exists_irreducible_lisse_stratification (X : Scheme.{u}) [IsNoetherian X] (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : IsConstructibleEtaleSheafOfSets ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F)) : ∃ S : Stratification X, ∀ i : Fin S.n, IrreducibleSpace (S.domain i) ∧ IsFiniteLocallyConstantEtaleSheafOfSets ((etaleSetPullback (S.immersion i)).obj ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj F))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ils1106"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ils1106",
+  "group": "G1",
+  "result": "fix",
+  "note": "X Scheme.{u}+[IsNoetherian X]; F abelian etale sheaf; constructible = stmt_dep IsConstructibleEtaleSheafOfSets of forget F; finite partition = Stratification (n, disjoint, cover, IsLocallyClosed, immersed domains); nonempty irreducible = IrreducibleSpace (S.domain i); F|S_i lisse finite stalks = IsFiniteLocallyConstantEtaleSheafOfSets of etaleSetPullback; n=0 empty X ok"
  }
 }
