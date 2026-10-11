@@ -164,7 +164,6 @@ lemma homologyIsoExt_naturality {X' : C} (g : X' ⟶ X) {M' : CochainComplex Add
   congr 1
   rw [← hψ, ← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply,
     HomologicalComplex.cyclesMap_i]
-  rfl
 
 end CategoryTheory.InjectiveResolution
 
@@ -222,7 +221,7 @@ lemma sheafifyFreeYonedaHomAddEquiv_comp (V : C) {I I' : Sheaf J AddCommGrpCat.{
     (f : (presheafToSheaf J _).obj (yoneda.obj V ⋙ AddCommGrpCat.free) ⟶ I) (g : I ⟶ I') :
     sheafifyFreeYonedaHomAddEquiv V I' (f ≫ g) =
       g.hom.app (op V) (sheafifyFreeYonedaHomAddEquiv V I f) := by
-  simp only [sheafifyFreeYonedaHomAddEquiv, AddEquiv.trans_apply, freeYonedaHomAddEquiv_apply,
+  simp only [sheafifyFreeYonedaHomAddEquiv, AddEquiv.trans_apply,
     Adjunction.homAddEquiv_apply, Adjunction.homEquiv_naturality_right]
   rfl
 
@@ -232,17 +231,20 @@ lemma sheafifyFreeYonedaHomAddEquiv_map_comp {V V' : C} (h : V' ⟶ V)
     sheafifyFreeYonedaHomAddEquiv V' I ((presheafToSheaf J _).map
         (((Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free).map (yoneda.map h)) ≫ f) =
       I.obj.map h.op (sheafifyFreeYonedaHomAddEquiv V I f) := by
-  simp only [sheafifyFreeYonedaHomAddEquiv, AddEquiv.trans_apply, freeYonedaHomAddEquiv_apply,
+  simp only [sheafifyFreeYonedaHomAddEquiv, AddEquiv.trans_apply,
     Adjunction.homAddEquiv_apply, Adjunction.homEquiv_naturality_left]
-  rw [freeYonedaHomAddEquiv_apply, freeYonedaHomAddEquiv_apply, NatTrans.comp_app,
+  erw [freeYonedaHomAddEquiv_apply, freeYonedaHomAddEquiv_apply, NatTrans.comp_app,
     ConcreteCategory.comp_apply]
   have := ConcreteCategory.congr_hom
     (((sheafificationAdjunction J _).homEquiv _ I f).naturality h.op) (FreeAbelianGroup.of (𝟙 V))
-  refine Eq.trans ?_ this
-  congr 1
-  change FreeAbelianGroup.map _ (FreeAbelianGroup.of _) = FreeAbelianGroup.map _ _
-  rw [FreeAbelianGroup.map_of_apply, FreeAbelianGroup.map_of_apply]
-  simp
+  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at this
+  have e : (((Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free).map (yoneda.map h)).app
+      (op V') (FreeAbelianGroup.of (𝟙 V')) =
+      (yoneda.obj V ⋙ AddCommGrpCat.free).map h.op (FreeAbelianGroup.of (𝟙 V)) := by
+    erw [FreeAbelianGroup.map_of_apply, FreeAbelianGroup.map_of_apply]
+    simp
+  erw [e]
+  exact this
 
 /-- The presheaf of complexes of sections `V ↦ K^•(V)` of a complex of abelian sheaves `K`. -/
 @[simps]
@@ -253,32 +255,61 @@ noncomputable def complexSections (K : CochainComplex (Sheaf J AddCommGrpCat.{v}
       d i j := (K.d i j).hom.app V
       shape i j h := by rw [K.shape i j h]; rfl
       d_comp_d' i j k _ _ := by
-        rw [← NatTrans.comp_app, ← Sheaf.comp_hom, K.d_comp_d]
+        rw [← NatTrans.comp_app, ← ObjectProperty.FullSubcategory.comp_hom, K.d_comp_d]
         rfl }
   map f :=
     { f n := (K.X n).obj.map f
-      comm' i j _ := ((K.d i j).hom.naturality f).symm }
+      comm' i j _ := (K.d i j).hom.naturality f }
+
+lemma sheafifyFreeYonedaHomAddEquiv_symm_comp (V : C) {I I' : Sheaf J AddCommGrpCat.{v}}
+    (g : I ⟶ I') (s : I.obj.obj (op V)) :
+    (sheafifyFreeYonedaHomAddEquiv V I).symm s ≫ g =
+      (sheafifyFreeYonedaHomAddEquiv V I').symm (g.hom.app (op V) s) := by
+  apply (sheafifyFreeYonedaHomAddEquiv V I').injective
+  rw [sheafifyFreeYonedaHomAddEquiv_comp, AddEquiv.apply_symm_apply, AddEquiv.apply_symm_apply]
+
+lemma map_comp_sheafifyFreeYonedaHomAddEquiv_symm {V V' : C} (h : V' ⟶ V)
+    {I : Sheaf J AddCommGrpCat.{v}} (s : I.obj.obj (op V)) :
+    (presheafToSheaf J _).map
+        (((Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free).map (yoneda.map h)) ≫
+      (sheafifyFreeYonedaHomAddEquiv V I).symm s =
+      (sheafifyFreeYonedaHomAddEquiv V' I).symm (I.obj.map h.op s) := by
+  apply (sheafifyFreeYonedaHomAddEquiv V' I).injective
+  rw [sheafifyFreeYonedaHomAddEquiv_map_comp, AddEquiv.apply_symm_apply,
+    AddEquiv.apply_symm_apply]
 
 variable [HasExt.{v} (Sheaf J AddCommGrpCat.{v})] {F : Sheaf J AddCommGrpCat.{v}}
   (R : InjectiveResolution F)
+lemma cohomologyPresheaf_map_apply
+    (F : Sheaf J AddCommGrpCat.{v}) (n : ℕ) {V V' : Cᵒᵖ} (h : V ⟶ V')
+    (y : F.H' n V.unop) :
+    (F.cohomologyPresheaf n).map h y = (Ext.mk₀ ((presheafToSheaf J _).map
+      (((Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free).map (yoneda.map h.unop)))).comp y
+        (zero_add n) :=
+  rfl
+
+
+/-- The isomorphism `H^n(I^•(V)) ≅ H^n(V, F)` for an injective resolution `I^•` of `F`. -/
+noncomputable def cohomologyPresheafIsoApp (n : ℕ) (V : Cᵒᵖ) :
+    ((complexSections R.cocomplex).obj V).homology n ≅ (F.cohomologyPresheaf n).obj V :=
+  R.homologyIsoExt (fun _ ↦ (sheafifyFreeYonedaHomAddEquiv V.unop _).symm)
+    (fun _ _ ↦ (sheafifyFreeYonedaHomAddEquiv_symm_comp _ _ _).symm) n
+
+lemma cohomologyPresheafIsoApp_naturality (n : ℕ) {V V' : Cᵒᵖ} (h : V ⟶ V')
+    (x : ((complexSections R.cocomplex).obj V).homology n) :
+    (cohomologyPresheafIsoApp R n V').hom
+        (HomologicalComplex.homologyMap ((complexSections R.cocomplex).map h) n x) =
+      (F.cohomologyPresheaf n).map h ((cohomologyPresheafIsoApp R n V).hom x) := by
+  rw [cohomologyPresheaf_map_apply]
+  exact R.homologyIsoExt_naturality _ _ _ _ _ ((complexSections R.cocomplex).map h)
+    (fun _ m ↦ (map_comp_sheafifyFreeYonedaHomAddEquiv_symm h.unop m).symm) n x
 
 /-- **Cohomology presheaves via an injective resolution.** For an injective resolution `I^•` of
 `F`, the presheaf `V ↦ H^n(I^•(V))` is the cohomology presheaf `V ↦ H^n(V, F)`. -/
 noncomputable def cohomologyPresheafIso (n : ℕ) :
     complexSections R.cocomplex ⋙ HomologicalComplex.homologyFunctor _ _ n ≅
       F.cohomologyPresheaf n :=
-  NatIso.ofComponents
-    (fun V ↦ R.homologyIsoExt (fun n ↦ (sheafifyFreeYonedaHomAddEquiv V.unop _).symm)
-      (fun n m ↦ (sheafifyFreeYonedaHomAddEquiv V.unop _).injective (by
-        rw [sheafifyFreeYonedaHomAddEquiv_comp, AddEquiv.apply_symm_apply,
-          AddEquiv.apply_symm_apply]
-        rfl)) n)
-    (fun {V V'} h ↦ by
-      ext x
-      exact R.homologyIsoExt_naturality _ _ _ _ _ _ (fun n m ↦
-        (sheafifyFreeYonedaHomAddEquiv V'.unop _).injective (by
-          rw [sheafifyFreeYonedaHomAddEquiv_map_comp, AddEquiv.apply_symm_apply,
-            AddEquiv.apply_symm_apply]
-          rfl)) n x)
+  NatIso.ofComponents (cohomologyPresheafIsoApp R n) (fun h ↦
+    AddCommGrpCat.ext fun x ↦ cohomologyPresheafIsoApp_naturality R n h x)
 
 end CategoryTheory.Sheaf

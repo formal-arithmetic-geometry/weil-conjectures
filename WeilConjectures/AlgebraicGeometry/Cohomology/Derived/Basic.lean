@@ -117,7 +117,8 @@ lemma IsInvertible.exists_isAffineOpen_restrict_iso (M : X.Modules) [M.IsInverti
   let i : U.toScheme ⟶ V.toScheme := X.homOfLE hUV
   refine ⟨U, hU, hxU, ⟨(restrictFunctorIsoPullback U.ι).app M ≪≫
     (Modules.pullbackCongr (X.homOfLE_ι hUV).symm).app M ≪≫
-    (Modules.pullbackComp i V.ι).symm.app M ≪≫ (Modules.pullback i).mapIso e ≪≫ pullbackObjUnitIso i⟩⟩
+    (Modules.pullbackComp i V.ι).symm.app M ≪≫ (Modules.pullback i).mapIso e ≪≫
+    pullbackObjUnitIso i⟩⟩
 
 /-- **An invertible module is perfect.** An invertible `𝒪_X`-module `ℒ`, placed in degree `0`, is
 a perfect object of `D(𝒪_X)`: on an affine open `U` on which `ℒ|_U ≅ 𝒪_U`, it is the complex

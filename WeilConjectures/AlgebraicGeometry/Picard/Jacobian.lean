@@ -19,11 +19,11 @@ public import WeilConjectures.AlgebraicGeometry.DescentFiniteLevel
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import WeilConjectures.AlgebraicGeometry.Picard.FpqcSheaf
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentRepresentable
 public import WeilConjectures.Mathlib.Algebra.DualNumber
@@ -1836,7 +1836,9 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
     (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
   let i : Js ≅ J' := (rs.ofIso e).uniqueUpToIso e'
   have hi : Js.hom = i.hom.left ≫ J'.hom := (Over.w i.hom).symm
-  have : Smooth J'.hom := SmoothOfRelativeDimension.smooth _ J'.hom
+  have := hJ'P
+  have := hJ'S
+  have : Smooth J'.hom := SmoothOfRelativeDimension.smooth (arithmeticGenus k C) J'.hom
   have : LocallyOfFinitePresentation Js.hom := by rw [hi]; infer_instance
   have : QuasiCompact Js.hom := by rw [hi]; infer_instance
   have : QuasiSeparated Js.hom := by rw [hi]; infer_instance

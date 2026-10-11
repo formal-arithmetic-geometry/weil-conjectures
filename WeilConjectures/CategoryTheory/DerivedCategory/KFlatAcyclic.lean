@@ -38,11 +38,10 @@ lemma isZero_Q_obj_iff (K : CochainComplex C ℤ) : IsZero (Q.obj K) ↔ K.Acycl
     exact ((homologyFunctor C n).map_isZero h).of_iso
       ((homologyFunctorFactors C n).app K).symm
   · have : QuasiIso (0 : K ⟶ 0) :=
-      ⟨fun n ↦ by
-        rw [quasiIsoAt_iff_isIso_homologyMap]
-        exact isIso_of_source_target_iso_zero _
-          ((h n).isZero_homology.isoZero)
-          (((HomologicalComplex.homologyFunctor C _ n).map_isZero (isZero_zero _)).isoZero)⟩
+      ⟨fun n ↦ (quasiIsoAt_iff_exactAt' _ n (by
+        rw [HomologicalComplex.exactAt_iff]
+        exact ShortComplex.exact_of_isZero_X₂ _
+          ((HomologicalComplex.eval _ _ n).map_isZero (isZero_zero _)))).2 (h n)⟩
     exact (Q.map_isZero (isZero_zero _)).of_iso (asIso (Q.map (0 : K ⟶ 0)))
 
 /-- A morphism of complexes is a quasi-isomorphism if and only if its mapping cone is
@@ -92,14 +91,18 @@ lemma PreservesKFlatQuasiIso.mk'
     (hF : ∀ (K : CochainComplex C ℤ), (HomologicalComplex.quasiIso C (.up ℤ)).kFlat K →
       K.Acyclic → ((F.mapHomologicalComplex _).obj K).Acyclic) :
     F.PreservesKFlatQuasiIso where
-  quasiIso_map {K L} hK hL f _ := by
+  quasiIso_map {K L} hK hL f hf := by
     let := HasDerivedCategory.standard C
     let := HasDerivedCategory.standard D
-    have hcone : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat (CochainComplex.mappingCone f) := by
-      rw [← HomotopyCategory.kFlat_quotient_obj_iff] at hK hL ⊢
-      exact (HomotopyCategory.quasiIso C (.up ℤ)).kFlat.ext_of_isTriangulatedClosed₃ _
-        (HomotopyCategory.mappingCone_triangleh_distinguished f) hK hL
-    rw [DerivedCategory.quasiIso_iff_acyclic_mappingCone] at *
-    exact (hF _ hcone ‹_›).of_iso (CochainComplex.mappingCone.mapHomologicalComplexIso f F)
+    have hK' := (HomotopyCategory.kFlat_quotient_obj_iff K).2 hK
+    have hL' := (HomotopyCategory.kFlat_quotient_obj_iff L).2 hL
+    have h₃ : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat
+        ((HomotopyCategory.quotient C (.up ℤ)).obj (CochainComplex.mappingCone f)) :=
+      (HomotopyCategory.quasiIso C (.up ℤ)).kFlat.ext_of_isTriangulatedClosed₃
+        (CochainComplex.mappingCone.triangleh f)
+        (HomotopyCategory.mappingCone_triangleh_distinguished f) hK' hL'
+    have hcone := (HomotopyCategory.kFlat_quotient_obj_iff _).1 h₃
+    rw [DerivedCategory.quasiIso_iff_acyclic_mappingCone] at hf ⊢
+    exact (hF _ hcone hf).of_iso (CochainComplex.mappingCone.mapHomologicalComplexIso f F)
 
 end CategoryTheory.Functor

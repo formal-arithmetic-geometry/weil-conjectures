@@ -23,6 +23,10 @@ of a presheaf of types for a single morphism `π : T' ⟶ T`:
   morphism under `Over.map` follows from the sheaf condition of the restricted presheaf.
 - `CategoryTheory.Presieve.isSheafFor_singleton_of_injective`: the sheaf condition passes to a
   subpresheaf whose sections are detected after pulling back along `π`.
+- `CategoryTheory.Presieve.isSheafFor_singleton_of_overMap`: the converse of
+  `isSheafFor_singleton_overMap`.
+- `CategoryTheory.Presieve.mem_range_of_imageSieve_mem`: a section of a sheaf which lies locally
+  in the image of an injective morphism from a sheaf lies in its image.
 -/
 
 @[expose] public section
