@@ -565,6 +565,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
 public import WeilConjectures.CategoryTheory.Monoidal.ShiftProduct
@@ -1799,6 +1800,7 @@ public import WeilConjectures.Topology.StratificationDense
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.ComplexWeights
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.Curve
@@ -1837,6 +1839,7 @@ public import WeilConjectures.WeilSheaf.TraceFormula
 public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.WeilSheaf.TraceSeries
 public import WeilConjectures.WeilSheaf.Triangle
+public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.ClassicalFunctionalEquation
@@ -1846,6 +1849,7 @@ public import WeilConjectures.ZetaIntegrality
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 public import WeilConjectures.ZetaLinearAlgebra.Fatou
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
+public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Induced
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Real
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TraceSeries

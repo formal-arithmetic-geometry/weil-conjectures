@@ -92,14 +92,14 @@ noncomputable def inducedFrobenius : (Fin e → M.carrier) ≃ₗ[K] (Fin e → 
   left_inv v := by
     funext i
     by_cases h : (i : ℕ) = e - 1
-    · obtain rfl : i = ⟨e - 1, by omega⟩ := Fin.ext h
-      simp
+    · have hv : v ⟨e - 1, by omega⟩ = v i := congrArg v (Fin.ext h.symm)
+      simp [h, hv]
     · simp [h]
   right_inv v := by
     funext i
     by_cases h : (i : ℕ) = 0
-    · obtain rfl : i = ⟨0, by omega⟩ := Fin.ext h
-      simp
+    · have hv : v ⟨0, by omega⟩ = v i := congrArg v (Fin.ext h.symm)
+      simp [h, hv]
     · have : (i : ℕ) - 1 ≠ e - 1 := by omega
       simp [h, this, Nat.sub_add_cancel (Nat.pos_of_ne_zero h)]
 

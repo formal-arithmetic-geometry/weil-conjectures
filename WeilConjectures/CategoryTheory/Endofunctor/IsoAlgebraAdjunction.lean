@@ -43,15 +43,15 @@ lemma map_unit_app_comp_str (K : IsoAlgebra F) :
         ((mapOfNatIso eR).obj ((mapOfNatIso eL).obj K)).obj.str =
       K.obj.str ≫ adj.unit.app K.carrier := by
   have hu := unit_mateEquiv adj adj (TwoSquare.mk _ _ _ _ eL.inv) K.carrier
-  rw [h] at hu
+  rw [NatTrans.congr_app h] at hu
   have hs : ((mapOfNatIso eR).obj ((mapOfNatIso eL).obj K)).obj.str =
       eR.hom.app (L.obj K.carrier) ≫ R.map (eL.hom.app K.carrier ≫ L.map K.obj.str) := by
     rw [← str_hom, mapOfNatIso_obj_str]
     simp [← str_hom, mapOfNatIso_obj_str]
   rw [hs, reassoc_of% hu]
-  simp only [Functor.comp_obj, Functor.id_obj, TwoSquare.natTrans_app]
+  simp only [Functor.comp_obj, Functor.id_obj]
   rw [← R.map_comp, Iso.inv_hom_id_app_assoc]
-  exact (adj.unit_naturality K.obj.str).symm
+  exact adj.unit_naturality K.obj.str
 
 include h in
 /-- The counit of `L ⊣ R` intertwines the structure morphism of an algebra with that of its
@@ -60,12 +60,17 @@ lemma map_counit_app_comp_str (M : IsoAlgebra G) :
     G.map (adj.counit.app M.carrier) ≫ M.obj.str =
       ((mapOfNatIso eL).obj ((mapOfNatIso eR).obj M)).obj.str ≫ adj.counit.app M.carrier := by
   have hc := mateEquiv_counit adj adj (TwoSquare.mk _ _ _ _ eL.inv) M.carrier
-  rw [h] at hc
+  rw [NatTrans.congr_app h] at hc
   have hs : ((mapOfNatIso eL).obj ((mapOfNatIso eR).obj M)).obj.str =
       eL.hom.app (R.obj M.carrier) ≫ L.map (eR.hom.app M.carrier ≫ R.map M.obj.str) := by
     rw [← str_hom, mapOfNatIso_obj_str]
     simp [← str_hom, mapOfNatIso_obj_str]
-  rw [hs, L.map_comp, Category.assoc, Category.assoc, ← adj.counit_naturality, reassoc_of% hc]
+  have hn : L.map (R.map M.obj.str) ≫ adj.counit.app M.carrier =
+      adj.counit.app (G.obj M.carrier) ≫ M.obj.str :=
+    adj.counit_naturality M.obj.str
+  simp only [hs, Functor.map_comp, Category.assoc]
+  rw [hn]
+  rw [reassoc_of% hc]
   simp
 
 /-- **Lifting an adjunction to algebras.** If the exchange isomorphism `eR` of the right adjoint
@@ -86,10 +91,12 @@ noncomputable def mapOfNatIsoAdjunction : mapOfNatIso eL ⊣ mapOfNatIso eR :=
             ObjectProperty.hom_ext _ (Algebra.Hom.ext (adj.counit.naturality f.hom.f)) }
       left_triangle := by
         ext K
-        exact adj.left_triangle_components K.carrier
+        refine ObjectProperty.hom_ext _ (Algebra.Hom.ext ?_)
+        simp
       right_triangle := by
         ext M
-        exact adj.right_triangle_components M.carrier }
+        refine ObjectProperty.hom_ext _ (Algebra.Hom.ext ?_)
+        simp }
 
 @[simp]
 lemma mapOfNatIsoAdjunction_unit_app_hom_f (K : IsoAlgebra F) :

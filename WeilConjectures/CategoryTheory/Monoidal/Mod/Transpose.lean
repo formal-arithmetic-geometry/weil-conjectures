@@ -102,7 +102,6 @@ lemma IsBilinear.braiding {u : P.X ⊗ M.X ⟶ N.X} (hu : IsBilinear (P := P) (M
       (α_ A M.X P.X).hom ≫ A ◁ (β_ M.X P.X).hom ≫ A ◁ u ≫ act N.X := by
     rw [BraidedCategory.braiding_naturality_left_assoc, key,
       ← braiding_tensor_left_comp_braiding_whiskerRight_eq_assoc]
-    simp only [Category.assoc]
   have hlin : act P.X ▷ M.X ≫ u = (α_ A P.X M.X).hom ≫ A ◁ u ≫ act N.X := by
     rw [← hu.linear, Iso.hom_inv_id_assoc]
   refine ⟨?_, ?_⟩
@@ -176,8 +175,9 @@ noncomputable def tensorDesc (u : P.X ⊗ M.X ⟶ N.X) (hu : IsBilinear (P := P)
             · simp } }
 
 lemma tensorπ_tensorDesc (u : P.X ⊗ M.X ⟶ N.X) (hu : IsBilinear (P := P) (M := M) u) :
-    tensorπ P M ≫ (tensorDesc u hu).hom = u :=
-  congrArg Mod.Hom.hom (colimit.ι_desc _ WalkingParallelPair.one)
+    tensorπ P M ≫ (tensorDesc u hu).hom = u := by
+  rw [tensorπ, ← Mod.comp_hom', tensorDesc, colimit.ι_desc]
+  rfl
 
 /-- The morphism `P ⊗ M ⟶ N` of underlying objects corresponding to `v : P ⟶ Hom_A(M, N)`:
 `p ⊗ m ↦ v(p)(m)`. -/

@@ -63,6 +63,81 @@ namespace WeilSheaf.LisseOnDenseOpen
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
+/-- **Degree one of the affine-line estimate.** If `F` is lisse on the dense open `U₀ ⊆ 𝔸¹`,
+punctually `ι`-pure of weight `w` and unramified at infinity, then `H_c^1(𝔸¹, j_*F)` has weights
+at most `w + 1`. Write `F ≅ j'^* G` for a lisse `G` on an open `W ⊆ ℙ¹` containing `∞`; by
+`hasWeightsAtMostOver_compactlySupportedCohomology_one_of_upperStar` it suffices to treat
+`N = j'^* M` for `M` irreducible lisse on `W`. Such an `N` is irreducible and unramified at
+infinity; it is either geometrically constant, hence a constant twist with `H_c^1 = 0`, or it is
+covered by `hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity`.
+(blueprint: `thm-a1-line-middle-extension-upper`) -/
+theorem hasWeightsAtMostOver_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
+    (D : LisseOnDenseOpen k₀ l) (hinf : D.IsUnramifiedAtInfinity) {w : ℝ}
+    (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
+    (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
+  obtain ⟨ψ, hψ⟩ := AddChar.exists_ne_one_of_isAlgClosed k₀ (PadicAlgCl l) (by
+    rw [ringChar.eq_zero]
+    exact (CharP.ringChar_ne_zero_of_finite k₀).symm)
+  obtain ⟨W, hW, hWtop, G, hG, ⟨e⟩⟩ := hinf
+  have hrange : Set.range (D.j ≫ ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))) ⊆ Set.range W.ι := by
+    rintro _ ⟨x, rfl⟩
+    rw [Scheme.Opens.range_ι]
+    have hx := D.j.mem_opensRange.2 ⟨x, rfl⟩
+    rw [← hW] at hx
+    exact hx
+  set j' := IsOpenImmersion.lift W.ι (D.j ≫ ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))) hrange
+  have hj' : j' ≫ W.ι = D.j ≫ ProjectiveLine.affineChart (Spec (CommRingCat.of k₀)) := IsOpenImmersion.lift_fac _ _ _
+  have : IsOpenImmersion j' := by
+    have : IsOpenImmersion (j' ≫ W.ι) := hj' ▸ inferInstance
+    exact IsOpenImmersion.of_comp j' W.ι
+  have : j'.IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    rw [← Scheme.Opens.ι_comp_over, ← Category.assoc, hj', Category.assoc,
+      ProjectiveLine.affineChart_over, comp_over]⟩
+  have : Nonempty D.U := by
+    have : Nonempty (affineLine k₀) := ⟨affineLine.origin k₀⟩
+    exact (D.isDominant.denseRange.nonempty_iff).2 inferInstance
+  have hWne : (W : Set (ProjectiveLine (Spec (CommRingCat.of k₀)))).Nonempty := ⟨_, (j' (Classical.arbitrary D.U)).2⟩
+  have : GeometricallyIrreducible (W.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← Scheme.Opens.ι_comp_over]
+    exact ProjectiveLine.geometricallyIrreducible_opens k₀ W hWne
+  have : IrreducibleSpace (W.toScheme ↘ Spec (CommRingCat.of k₀)).geometricFiber := by
+    rw [← Scheme.Opens.ι_comp_over]
+    exact ProjectiveLine.irreducibleSpace_geometricFiber_opens k₀ W hWne
+  have : GeometricallyConnected (W.toScheme ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible _
+  have : SmoothOfRelativeDimension 1 (W.toScheme ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← Scheme.Opens.ι_comp_over, ← zero_add (1 : ℕ)]
+    infer_instance
+  have := SmoothOfRelativeDimension.smooth 1 (W.toScheme ↘ Spec (CommRingCat.of k₀))
+  have : IrreducibleSpace W := GeometricallyIrreducible.irreducibleSpace_of_subsingleton
+    (f := W.toScheme ↘ Spec (CommRingCat.of k₀))
+  have : IsDominant j' := ⟨j'.isOpenEmbedding.isOpenMap.denseRange_of_isPreirreducibleSpace⟩
+  have : LocallyOfFiniteType (D.U ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over D.j]
+    infer_instance
+  have : QuasiCompact (D.U ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over D.j]
+    infer_instance
+  have : GeometricallyIrreducible (D.U ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over j']
+    infer_instance
+  have : GeometricallyConnected (D.U ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible _
+  have := connectedSpace_geometricFiber (k₀ := k₀) (Y := D.U)
+  refine hasWeightsAtMostOver_compactlySupportedCohomology_one_of_upperStar ι D j' ?_ G hG e hw
+  intro M hM hMw
+  have hN := hM.upperStar_of_isDominant j'
+  by_cases hc : ((upperStar j').obj M).IsGeometricallyConstant
+  · obtain ⟨b, ⟨e'⟩⟩ := exists_iso_constantTwist_of_isGeometricallyConstant hN hc
+    have : Subsingleton ((D.withSheaf ((upperStar j').obj M) (ProEtale.IsAdicLisseSheaf.upperStar _
+        hM.1)).directImage.compactlySupportedCohomology 1).carrier :=
+      LisseOnDenseOpen.subsingleton_compactlySupportedCohomology_one_of_iso_constantTwist
+        (D.withSheaf ((upperStar j').obj M) (ProEtale.IsAdicLisseSheaf.upperStar _ hM.1)) e'
+    exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _ _ _
+  · exact hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity ψ ι hψ
+      (D.withSheaf ((upperStar j').obj M) (ProEtale.IsAdicLisseSheaf.upperStar _ hM.1)) hN
+      ⟨W, hW, hWtop, M, hM.1, ⟨Iso.refl _⟩⟩ hc hMw
+
 /-- Let `j : U₀ ↪ 𝔸¹_{k₀}` be a dense open immersion and let `F` be a lisse Weil sheaf on `U₀`,
 punctually `ι`-pure of weight `w` and unramified at infinity. Then `H_c^r(𝔸¹, j_*F)` has
 weights at most `w + r` for every integer `r`. (blueprint: `sk-thm-dl-a1-upper`) -/
@@ -70,7 +145,28 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_directImage (ι : PadicAlg
     (D : LisseOnDenseOpen k₀ l) (hinf : D.IsUnramifiedAtInfinity) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (r : ℤ) :
     (D.directImage.compactlySupportedCohomology r).HasWeightsAtMostOver k₀ ι (w + r) := by
-  sorry
+  have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    simpa using AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (Spec (.of k₀))
+  have : GeometricallyConnected (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) :=
+    GeometricallyConnected.of_geometricallyIrreducible _
+  rcases lt_trichotomy r 1 with hr | rfl | hr
+  · rcases (by omega : r < 0 ∨ r = 0) with hr | rfl
+    · have : Subsingleton (D.directImage.compactlySupportedCohomology r).carrier :=
+        subsingleton_compactlySupportedCohomology_directImage D.j D.sheaf D.lisse
+        (Or.inl hr)
+      exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _ _ _
+    · have : Subsingleton (D.directImage.compactlySupportedCohomology 0).carrier :=
+        AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage_zero D.j D.sheaf
+          D.lisse
+      exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _ _ _
+  · exact_mod_cast D.hasWeightsAtMostOver_compactlySupportedCohomology_one ι hinf hw
+  · rcases (by omega : 2 < r ∨ r = 2) with hr | rfl
+    · have : Subsingleton (D.directImage.compactlySupportedCohomology r).carrier :=
+        subsingleton_compactlySupportedCohomology_directImage D.j D.sheaf D.lisse
+        (Or.inr hr)
+      exact FrobeniusModule.hasWeightsAtMost_of_subsingleton _ _ _
+    · exact_mod_cast (AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two
+        D.j D.sheaf ι D.lisse hw).hasWeightsAtMostOver
 
 /-- In degree zero the compactly supported cohomology of `j_*F` on the line vanishes.
 (blueprint: `sk-thm-dl-a1-upper`) -/
