@@ -32,12 +32,17 @@ to different compactifications (blueprint `sk-prop-sf-comp-coherence`):
   it agrees with the one above for cartesian `r`, satisfies the identity and transitivity
   laws, and independence of the common refinement holds for arbitrary common refinements.
 
-The comparison `α_u` on `d.Z` is only treated for refinements with cartesian square over `X`.
+The comparison `α_u` on `d.Z` is likewise extended to arbitrary refinements
+(`AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekIso`), as `α_{w.comp u}` followed by
+the inverse of `R⁺u_* α_w` for a dense refinement `w`; this does not depend on `w`, and it
+is an isomorphism, the identity for the identity refinement and transitive.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison`: the comparison
-  `α_u : D⁺(d.i)_! ⟶ D⁺(c.i)_! ⋙ R⁺u_*`.
+  `α_u : D⁺(d.i)_! ⟶ D⁺(c.i)_! ⋙ R⁺u_*` along a refinement with cartesian square.
+- `AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekIso`: the isomorphism `α_u` along
+  an arbitrary refinement.
 - `AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekRestrictionIso`: the isomorphism
   `θ_u : (d.i)^* Ru_* (c.i)_! K ≅ K` of blueprint `rem-ptr-weil-pbc-proper-open-comparison-1`,
   whose inverse is adjoint to `α_u`.
@@ -49,6 +54,9 @@ The comparison `α_u` on `d.Z` is only treated for refinements with cartesian sq
 - `AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison_id` and
   `AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison_comp`: the identity and
   transitivity of `α_u`.
+- `AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekIso_hom_id` and
+  `AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekIso_hom_comp`: the same for
+  arbitrary refinements.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso_eq`: independence
   of the common refinement.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso_trans`: the cocycle
@@ -255,40 +263,6 @@ instance isIso_derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus_unit {Z : 
   have : D+((j)_!open[ModuleCat.{u + 1} Λ]).Faithful :=
     Functor.Faithful.of_comp _ DerivedCategory.Plus.ι
   infer_instance
-
-/-- The isomorphism `θ_u : (d.i)^* Ru_* (c.i)_! K ≅ K` of
-blueprint `rem-ptr-weil-pbc-proper-open-comparison-1`, for a refinement `r : c.Refinement d`
-with cartesian square over `X` and `u = r.hom`: the restriction to `X` of the inverse of the
-isomorphism `α_u` of `refinementOpenImmersionLowerShriekComparison`, followed by the inverse of
-the unit isomorphism `K ≅ (d.i)^* (d.i)_! K`. Its inverse is adjoint to `α_u`
-(`homEquiv_refinementOpenImmersionLowerShriekComparison_app`). -/
-noncomputable def refinementOpenImmersionLowerShriekRestrictionIso
-    (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
-    haveI : ((r.hom)_*[ModuleCat.{u + 1} Λ]).PreservesInjectiveObjects :=
-      Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
-        (Etale.upperStarLowerStarAdjunction _ r.hom)
-    D+((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙ (r.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ⋙
-        D+((d.i)^*[ModuleCat.{u + 1} Λ]) ≅
-      𝟭 _ :=
-  haveI : ((r.hom)_*[ModuleCat.{u + 1} Λ]).PreservesInjectiveObjects :=
-    Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
-      (Etale.upperStarLowerStarAdjunction _ r.hom)
-  (Functor.isoWhiskerRight
-      (asIso (refinementOpenImmersionLowerShriekComparison (ModuleCat.{u + 1} Λ) r hcart))
-      D+((d.i)^*[ModuleCat.{u + 1} Λ])).symm ≪≫
-    (asIso (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
-      (ModuleCat.{u + 1} Λ) d.i).unit).symm
-
-/-- The comparison `α_u` is the adjoint, under `D⁺(d.i)_! ⊣ D⁺(d.i)^*`, of the inverse of
-`θ_u = refinementOpenImmersionLowerShriekRestrictionIso`.
-(blueprint: `rem-ptr-weil-pbc-proper-open-comparison-1`) -/
-theorem homEquiv_refinementOpenImmersionLowerShriekComparison_app
-    (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus (ModuleCat.{u + 1} Λ) d.i).homEquiv
-        _ _ ((refinementOpenImmersionLowerShriekComparison (ModuleCat.{u + 1} Λ) r hcart).app K) =
-      (refinementOpenImmersionLowerShriekRestrictionIso r Λ hcart).inv.app K := by
-  simp [refinementOpenImmersionLowerShriekRestrictionIso, Adjunction.homEquiv_unit]
 
 end Torsion
 
@@ -513,15 +487,335 @@ theorem rightDerivedLowerShriekOfCompactificationPlusRefinementIso_comp
 
 end Independence
 
+section ArbitraryRefinements
+
+/-! ### The comparison `α_u` along arbitrary refinements
+
+For a refinement `u : c.Refinement d` whose square over `X` need not be cartesian, the
+comparison `α_u : j_{d!} ⟶ Ru_* j_{c!}` is obtained from any refinement `w : c' ⟶ c` such that
+`w` and `w.comp u` have cartesian squares (for instance `w = Compactification.infFst c c`,
+out of a dense compactification) as `α_{w.comp u}` followed by the inverse of `R⁺u_* α_w`,
+modulo the composition isomorphism `Rw_* ⋙ Ru_* ≅ R(w ≫ u)_*`. This does not depend on `w`
+(`refinementOpenImmersionLowerShriekComparisonAux_eq`), and the identity and transitivity
+laws follow from those of the cartesian comparison. -/
+
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
+/-- The pushforward along any morphism of schemes preserves injective objects, being right
+adjoint to the exact pullback. -/
+lemma preservesInjectiveObjects_lowerStar [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+    {T S : Scheme.{u}} (h : T ⟶ S) : ((h)_*[A]).PreservesInjectiveObjects :=
+  Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+    (Etale.upperStarLowerStarAdjunction A h)
+
+attribute [local instance] preservesInjectiveObjects_lowerStar
+
+omit [HasSmallSiteSheafify A] in
+/-- The associativity law for the composition isomorphisms of the bounded below derived
+pushforwards, with all three composites named. -/
+lemma rightDerivedFunctorPlusCompIso'_lowerStarComp_assoc {Q R S T : Scheme.{u}}
+    (h₁ : Q ⟶ T) (h₂ : T ⟶ S) (h₃ : S ⟶ R) (h₁₂ : Q ⟶ S) (h₂₃ : T ⟶ R) (h₁₂₃ : Q ⟶ R)
+    (hh₁₂ : h₁₂ = h₁ ≫ h₂) (hh₂₃ : h₂₃ = h₂ ≫ h₃) (hh₁₂₃ : h₁₂₃ = h₁₂ ≫ h₃) :
+    Functor.whiskerRight (Functor.rightDerivedFunctorPlusCompIso' (h₁)_*[A] (h₂)_*[A]
+          (Etale.lowerStarComp A h₁ h₂ h₁₂ hh₁₂)).hom (h₃)_*[A].rightDerivedFunctorPlus ≫
+        (Functor.rightDerivedFunctorPlusCompIso' (h₁₂)_*[A] (h₃)_*[A]
+          (Etale.lowerStarComp A h₁₂ h₃ h₁₂₃ hh₁₂₃)).hom =
+      Functor.whiskerLeft (h₁)_*[A].rightDerivedFunctorPlus
+          (Functor.rightDerivedFunctorPlusCompIso' (h₂)_*[A] (h₃)_*[A]
+            (Etale.lowerStarComp A h₂ h₃ h₂₃ hh₂₃)).hom ≫
+        (Functor.rightDerivedFunctorPlusCompIso' (h₁)_*[A] (h₂₃)_*[A]
+          (Etale.lowerStarComp A h₁ h₂₃ h₁₂₃
+            (by rw [hh₁₂₃, hh₁₂, hh₂₃, Category.assoc]))).hom :=
+  Functor.rightDerivedFunctorPlusCompIso'_assoc _ _ _ _ _ _ _ _ _ _
+    (Etale.lowerStarComp_assoc' A h₁ h₂ h₃ h₁₂ h₂₃ h₁₂₃ hh₁₂ hh₂₃ hh₁₂₃)
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+
+/-- The comparison `α_u` computed through a refinement `w : c'.Refinement c`: with
+`x : c'.Refinement d` the refinement `w.comp u` (in the form `x.hom = w.hom ≫ u.hom`), and `w`,
+`x` with cartesian squares over `X`, it is `α_x` followed by the inverse of the composition
+isomorphism `Rw_* ⋙ Ru_* ≅ Rx_*` and of `R⁺u_* α_w`. -/
+noncomputable def refinementOpenImmersionLowerShriekComparisonAux (u : c.Refinement d)
+    {c' : Compactification f} (w : c'.Refinement c) (hw : IsPullback c'.i (𝟙 X) w.hom c.i)
+    (x : c'.Refinement d) (hx : x.hom = w.hom ≫ u.hom) (hxc : IsPullback c'.i (𝟙 X) x.hom d.i) :
+    D+((d.i)_!open[ModuleCat.{u + 1} Λ]) ⟶
+      D+((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙
+        (u.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus :=
+  refinementOpenImmersionLowerShriekComparison _ x hxc ≫
+    Functor.whiskerLeft D+((c'.i)_!open[ModuleCat.{u + 1} Λ])
+      (Functor.rightDerivedFunctorPlusCompIso' (w.hom)_*[ModuleCat.{u + 1} Λ]
+        (u.hom)_*[ModuleCat.{u + 1} Λ]
+        (Etale.lowerStarComp _ w.hom u.hom x.hom hx)).inv ≫
+    Functor.whiskerRight (inv (refinementOpenImmersionLowerShriekComparison _ w hw))
+      (u.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus
+
+lemma refinementOpenImmersionLowerShriekComparisonAux_congr (u : c.Refinement d)
+    {c' : Compactification f} {w w' : c'.Refinement c} (hww' : w = w')
+    (hw : IsPullback c'.i (𝟙 X) w.hom c.i) (hw' : IsPullback c'.i (𝟙 X) w'.hom c.i)
+    {x x' : c'.Refinement d} (hxx' : x = x') (hx : x.hom = w.hom ≫ u.hom)
+    (hx' : x'.hom = w'.hom ≫ u.hom)
+    (hxc : IsPullback c'.i (𝟙 X) x.hom d.i) (hxc' : IsPullback c'.i (𝟙 X) x'.hom d.i) :
+    refinementOpenImmersionLowerShriekComparisonAux Λ u w hw x hx hxc =
+      refinementOpenImmersionLowerShriekComparisonAux Λ u w' hw' x' hx' hxc' := by
+  subst hww' hxx'
+  rfl
+
+/-- The defining property of `refinementOpenImmersionLowerShriekComparisonAux`: `α_x` is the
+composite of it with `R⁺u_* α_w` and the composition isomorphism. -/
+lemma refinementOpenImmersionLowerShriekComparisonAux_spec (u : c.Refinement d)
+    {c' : Compactification f} (w : c'.Refinement c) (hw : IsPullback c'.i (𝟙 X) w.hom c.i)
+    (x : c'.Refinement d) (hx : x.hom = w.hom ≫ u.hom) (hxc : IsPullback c'.i (𝟙 X) x.hom d.i) :
+    refinementOpenImmersionLowerShriekComparison _ x hxc =
+      refinementOpenImmersionLowerShriekComparisonAux Λ u w hw x hx hxc ≫
+        Functor.whiskerRight (refinementOpenImmersionLowerShriekComparison _ w hw)
+          (u.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ≫
+        Functor.whiskerLeft D+((c'.i)_!open[ModuleCat.{u + 1} Λ])
+          (Functor.rightDerivedFunctorPlusCompIso' (w.hom)_*[ModuleCat.{u + 1} Λ]
+            (u.hom)_*[ModuleCat.{u + 1} Λ]
+            (Etale.lowerStarComp _ w.hom u.hom x.hom hx)).hom := by
+  rw [refinementOpenImmersionLowerShriekComparisonAux]
+  ext W : 2
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Category.assoc, Functor.comp_obj]
+  simp
+
+/-- `refinementOpenImmersionLowerShriekComparisonAux` is characterised by its defining
+property. -/
+lemma refinementOpenImmersionLowerShriekComparisonAux_eq_of_spec (u : c.Refinement d)
+    {c' : Compactification f} (w : c'.Refinement c) (hw : IsPullback c'.i (𝟙 X) w.hom c.i)
+    (x : c'.Refinement d) (hx : x.hom = w.hom ≫ u.hom) (hxc : IsPullback c'.i (𝟙 X) x.hom d.i)
+    (φ : D+((d.i)_!open[ModuleCat.{u + 1} Λ]) ⟶
+      D+((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙
+        (u.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus)
+    (h : refinementOpenImmersionLowerShriekComparison _ x hxc =
+      φ ≫ Functor.whiskerRight (refinementOpenImmersionLowerShriekComparison _ w hw)
+          (u.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ≫
+        Functor.whiskerLeft D+((c'.i)_!open[ModuleCat.{u + 1} Λ])
+          (Functor.rightDerivedFunctorPlusCompIso' (w.hom)_*[ModuleCat.{u + 1} Λ]
+            (u.hom)_*[ModuleCat.{u + 1} Λ]
+            (Etale.lowerStarComp _ w.hom u.hom x.hom hx)).hom) :
+    refinementOpenImmersionLowerShriekComparisonAux Λ u w hw x hx hxc = φ := by
+  rw [refinementOpenImmersionLowerShriekComparisonAux, h]
+  ext W : 2
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Category.assoc, Functor.comp_obj, Iso.hom_inv_id_app_assoc]
+  simp
+
+/-- On a refinement `u` with cartesian square, `refinementOpenImmersionLowerShriekComparisonAux`
+is the comparison `α_u`. -/
+lemma refinementOpenImmersionLowerShriekComparisonAux_eq_of_isPullback (u : c.Refinement d)
+    (hu : IsPullback c.i (𝟙 X) u.hom d.i)
+    {c' : Compactification f} (w : c'.Refinement c) (hw : IsPullback c'.i (𝟙 X) w.hom c.i)
+    (x : c'.Refinement d) (hx : x.hom = w.hom ≫ u.hom) (hxc : IsPullback c'.i (𝟙 X) x.hom d.i) :
+    refinementOpenImmersionLowerShriekComparisonAux Λ u w hw x hx hxc =
+      refinementOpenImmersionLowerShriekComparison _ u hu := by
+  obtain rfl : x = w.comp u := Compactification.Refinement.ext hx
+  rw [refinementOpenImmersionLowerShriekComparisonAux,
+    refinementOpenImmersionLowerShriekComparison_comp _ w u hw hu]
+  ext W : 2
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp,
+    Functor.comp_obj]
+  simp
+
+/-- Invariance of `refinementOpenImmersionLowerShriekComparisonAux` under a further refinement
+`t` with cartesian square. -/
+lemma refinementOpenImmersionLowerShriekComparisonAux_comp (u : c.Refinement d)
+    {c' c'' : Compactification f} (w : c'.Refinement c) (hw : IsPullback c'.i (𝟙 X) w.hom c.i)
+    (x : c'.Refinement d) (hx : x.hom = w.hom ≫ u.hom) (hxc : IsPullback c'.i (𝟙 X) x.hom d.i)
+    (t : c''.Refinement c') (ht : IsPullback c''.i (𝟙 X) t.hom c'.i) :
+    refinementOpenImmersionLowerShriekComparisonAux Λ u (t.comp w)
+        (Compactification.Refinement.isPullback_comp t w ht hw) (t.comp x)
+        (by simp [hx]) (Compactification.Refinement.isPullback_comp t x ht hxc) =
+      refinementOpenImmersionLowerShriekComparisonAux Λ u w hw x hx hxc := by
+  refine refinementOpenImmersionLowerShriekComparisonAux_eq_of_spec Λ u _ _ _ _ _ _ ?_
+  rw [refinementOpenImmersionLowerShriekComparison_comp _ t x ht hxc,
+    refinementOpenImmersionLowerShriekComparison_comp _ t w ht hw,
+    refinementOpenImmersionLowerShriekComparisonAux_spec Λ u w hw x hx hxc]
+  ext W : 2
+  have hassoc := NatTrans.congr_app (rightDerivedFunctorPlusCompIso'_lowerStarComp_assoc
+    (ModuleCat.{u + 1} Λ) t.hom w.hom u.hom (t.comp w).hom x.hom (t.comp x).hom rfl hx
+    (by simp [hx])) (D+((c''.i)_!open[ModuleCat.{u + 1} Λ]).obj W)
+  have hnat := (Functor.rightDerivedFunctorPlusCompIso' (w.hom)_*[ModuleCat.{u + 1} Λ]
+    (u.hom)_*[ModuleCat.{u + 1} Λ] (Etale.lowerStarComp _ w.hom u.hom x.hom hx)).hom.naturality
+    ((refinementOpenImmersionLowerShriekComparison _ t ht).app W)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.comp_obj, Functor.comp_map] at hassoc hnat ⊢
+  simp only [Functor.map_comp, Category.assoc, hassoc]
+  rw [reassoc_of% hnat]
+
+
+variable [QuasiCompact f]
+
+/-- `refinementOpenImmersionLowerShriekComparisonAux` does not depend on the refinement through
+which it is computed: compare both with the dense common refinement
+`Compactification.inf c₁ c₂`, out of which refinements are unique. -/
+lemma refinementOpenImmersionLowerShriekComparisonAux_eq (u : c.Refinement d)
+    {c₁ c₂ : Compactification f}
+    (w₁ : c₁.Refinement c) (hw₁ : IsPullback c₁.i (𝟙 X) w₁.hom c.i)
+    (x₁ : c₁.Refinement d) (hx₁ : x₁.hom = w₁.hom ≫ u.hom)
+    (hxc₁ : IsPullback c₁.i (𝟙 X) x₁.hom d.i)
+    (w₂ : c₂.Refinement c) (hw₂ : IsPullback c₂.i (𝟙 X) w₂.hom c.i)
+    (x₂ : c₂.Refinement d) (hx₂ : x₂.hom = w₂.hom ≫ u.hom)
+    (hxc₂ : IsPullback c₂.i (𝟙 X) x₂.hom d.i) :
+    refinementOpenImmersionLowerShriekComparisonAux Λ u w₁ hw₁ x₁ hx₁ hxc₁ =
+      refinementOpenImmersionLowerShriekComparisonAux Λ u w₂ hw₂ x₂ hx₂ hxc₂ := by
+  have hdense := Compactification.isSchemeTheoreticallyDominant_inf_i c₁ c₂
+  rw [← refinementOpenImmersionLowerShriekComparisonAux_comp Λ u w₁ hw₁ x₁ hx₁ hxc₁
+      (Compactification.infFst c₁ c₂) (Compactification.isPullback_infFst c₁ c₂),
+    ← refinementOpenImmersionLowerShriekComparisonAux_comp Λ u w₂ hw₂ x₂ hx₂ hxc₂
+      (Compactification.infSnd c₁ c₂) (Compactification.isPullback_infSnd c₁ c₂)]
+  exact refinementOpenImmersionLowerShriekComparisonAux_congr Λ u
+    (Compactification.Refinement.ext_of_isSchemeTheoreticallyDominant hdense _ _) _ _
+    (Compactification.Refinement.ext_of_isSchemeTheoreticallyDominant hdense _ _) _ _ _ _
+
+instance isIso_refinementOpenImmersionLowerShriekComparisonAux (u : c.Refinement d)
+    {c' : Compactification f} (w : c'.Refinement c) (hw : IsPullback c'.i (𝟙 X) w.hom c.i)
+    (x : c'.Refinement d) (hx : x.hom = w.hom ≫ u.hom) (hxc : IsPullback c'.i (𝟙 X) x.hom d.i) :
+    IsIso (refinementOpenImmersionLowerShriekComparisonAux Λ u w hw x hx hxc) := by
+  unfold refinementOpenImmersionLowerShriekComparisonAux
+  infer_instance
+
+/-- **The comparison `α_u : j_{d!} K ≅ Ru_* j_{c!} K` along an arbitrary refinement**
+`u : c.Refinement d` of compactifications of a quasi-compact morphism, for torsion
+coefficients. It is computed through the dense refinement `w = Compactification.infFst c c`
+as `α_{w.comp u}` followed by the inverse of `R⁺u_* α_w` (modulo the composition isomorphism),
+and agrees with `refinementOpenImmersionLowerShriekComparison` when the square of `u` over `X`
+is cartesian (`refinementOpenImmersionLowerShriekIso_hom_of_isPullback`).
+(blueprint: `sk-prop-sf-comp-coherence`) -/
+noncomputable def refinementOpenImmersionLowerShriekIso (u : c.Refinement d) :
+    D+((d.i)_!open[ModuleCat.{u + 1} Λ]) ≅
+      D+((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙
+        (u.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus :=
+  asIso (refinementOpenImmersionLowerShriekComparisonAux Λ u (Compactification.infFst c c)
+    (Compactification.isPullback_infFst c c) ((Compactification.infFst c c).comp u) rfl
+    (Compactification.Refinement.isPullback_of_inf _))
+
+/-- `α_u` may be computed through any refinement `w` such that `w` and `w.comp u` have cartesian
+squares over `X`. -/
+lemma refinementOpenImmersionLowerShriekIso_hom_eq (u : c.Refinement d)
+    {c' : Compactification f} (w : c'.Refinement c) (hw : IsPullback c'.i (𝟙 X) w.hom c.i)
+    (x : c'.Refinement d) (hx : x.hom = w.hom ≫ u.hom) (hxc : IsPullback c'.i (𝟙 X) x.hom d.i) :
+    (refinementOpenImmersionLowerShriekIso Λ u).hom =
+      refinementOpenImmersionLowerShriekComparisonAux Λ u w hw x hx hxc :=
+  refinementOpenImmersionLowerShriekComparisonAux_eq Λ u _ _ _ _ _ _ _ _ _ _
+
+/-- For a refinement `u` with cartesian square over `X`, `α_u` is
+`refinementOpenImmersionLowerShriekComparison`. (blueprint: `sk-prop-sf-comp-coherence`) -/
+theorem refinementOpenImmersionLowerShriekIso_hom_of_isPullback (u : c.Refinement d)
+    (hu : IsPullback c.i (𝟙 X) u.hom d.i) :
+    (refinementOpenImmersionLowerShriekIso Λ u).hom =
+      refinementOpenImmersionLowerShriekComparison _ u hu :=
+  refinementOpenImmersionLowerShriekComparisonAux_eq_of_isPullback Λ u hu _ _ _ _ _
+
+/-- `α_x` along `x = w.comp u` is `α_u` followed by `R⁺u_* α_w` and the composition
+isomorphism, for `w` and `x` with cartesian squares over `X`. -/
+lemma refinementOpenImmersionLowerShriekComparison_eq_refinementOpenImmersionLowerShriekIso
+    (u : c.Refinement d)
+    {c' : Compactification f} (w : c'.Refinement c) (hw : IsPullback c'.i (𝟙 X) w.hom c.i)
+    (x : c'.Refinement d) (hx : x.hom = w.hom ≫ u.hom) (hxc : IsPullback c'.i (𝟙 X) x.hom d.i) :
+    refinementOpenImmersionLowerShriekComparison _ x hxc =
+      (refinementOpenImmersionLowerShriekIso Λ u).hom ≫
+        Functor.whiskerRight (refinementOpenImmersionLowerShriekComparison _ w hw)
+          (u.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ≫
+        Functor.whiskerLeft D+((c'.i)_!open[ModuleCat.{u + 1} Λ])
+          (Functor.rightDerivedFunctorPlusCompIso' (w.hom)_*[ModuleCat.{u + 1} Λ]
+            (u.hom)_*[ModuleCat.{u + 1} Λ]
+            (Etale.lowerStarComp _ w.hom u.hom x.hom hx)).hom := by
+  rw [refinementOpenImmersionLowerShriekIso_hom_eq Λ u w hw x hx hxc]
+  exact refinementOpenImmersionLowerShriekComparisonAux_spec Λ u w hw x hx hxc
+
+/-- **Identity law for `α_u`, arbitrary refinements**: for the identity refinement of `c`,
+`α` is the inverse of the identity isomorphism `R(𝟙)_* ≅ 𝟭`.
+(blueprint: `sk-prop-sf-comp-coherence`) -/
+theorem refinementOpenImmersionLowerShriekIso_hom_id (c : Compactification f) :
+    (refinementOpenImmersionLowerShriekIso Λ (Compactification.Refinement.id c)).hom =
+      Functor.whiskerLeft D+((c.i)_!open[ModuleCat.{u + 1} Λ])
+        (lowerStarIdDerivedPlus _ c.Z).inv := by
+  have hid : IsPullback c.i (𝟙 X) (Compactification.Refinement.id c).hom c.i := by
+    rw [Compactification.Refinement.id_hom]
+    exact IsPullback.of_vert_isIso ⟨by simp⟩
+  rw [refinementOpenImmersionLowerShriekIso_hom_of_isPullback Λ _ hid,
+    refinementOpenImmersionLowerShriekComparison_id]
+
+/-- **Transitivity of `α_u`, arbitrary refinements**: for refinements `r : c.Refinement d` and
+`s : d.Refinement e`, `α_{r.comp s}` is the composite of `α_s`, of `R(s.hom)_*` applied to `α_r`
+and of the composition isomorphism of the derived pushforwards.
+(blueprint: `sk-prop-sf-comp-coherence`) -/
+theorem refinementOpenImmersionLowerShriekIso_hom_comp {c d e : Compactification f}
+    (r : c.Refinement d) (s : d.Refinement e) :
+    (refinementOpenImmersionLowerShriekIso Λ (r.comp s)).hom =
+      (refinementOpenImmersionLowerShriekIso Λ s).hom ≫
+        Functor.whiskerRight (refinementOpenImmersionLowerShriekIso Λ r).hom
+          (s.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ≫
+        Functor.whiskerLeft D+((c.i)_!open[ModuleCat.{u + 1} Λ])
+          (Functor.rightDerivedFunctorPlusCompIso' (r.hom)_*[ModuleCat.{u + 1} Λ]
+            (s.hom)_*[ModuleCat.{u + 1} Λ]
+            (Etale.lowerStarComp _ r.hom s.hom ((r.comp s).hom) rfl)).hom := by
+  set v := Compactification.infFst c c
+  have hv := Compactification.isPullback_infFst c c
+  set x₁ := v.comp r
+  set x₂ := x₁.comp s
+  have hx₁ : IsPullback (Compactification.inf c c).i (𝟙 X) x₁.hom d.i :=
+    Compactification.Refinement.isPullback_of_inf _
+  have hx₂ : IsPullback (Compactification.inf c c).i (𝟙 X) x₂.hom e.i :=
+    Compactification.Refinement.isPullback_of_inf _
+  rw [refinementOpenImmersionLowerShriekIso_hom_eq Λ (r.comp s) v hv x₂
+    (by simp [x₂, x₁]) hx₂]
+  refine refinementOpenImmersionLowerShriekComparisonAux_eq_of_spec Λ _ _ _ _ _ _ _ ?_
+  rw [refinementOpenImmersionLowerShriekComparison_eq_refinementOpenImmersionLowerShriekIso
+      Λ s x₁ hx₁ x₂ rfl hx₂,
+    refinementOpenImmersionLowerShriekComparison_eq_refinementOpenImmersionLowerShriekIso
+      Λ r v hv x₁ rfl hx₁]
+  ext W : 2
+  have hassoc := NatTrans.congr_app (rightDerivedFunctorPlusCompIso'_lowerStarComp_assoc
+    (ModuleCat.{u + 1} Λ) v.hom r.hom s.hom x₁.hom (r.comp s).hom x₂.hom rfl rfl rfl)
+    (D+(((Compactification.inf c c).i)_!open[ModuleCat.{u + 1} Λ]).obj W)
+  have hnat := (Functor.rightDerivedFunctorPlusCompIso' (r.hom)_*[ModuleCat.{u + 1} Λ]
+    (s.hom)_*[ModuleCat.{u + 1} Λ]
+    (Etale.lowerStarComp _ r.hom s.hom ((r.comp s).hom) rfl)).hom.naturality
+    ((refinementOpenImmersionLowerShriekComparison _ v hv).app W)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.comp_obj, Functor.comp_map] at hassoc hnat ⊢
+  simp only [Functor.map_comp, Category.assoc, hassoc]
+  rw [reassoc_of% hnat]
+
+/-- The isomorphism `θ_u : (d.i)^* Ru_* (c.i)_! K ≅ K` of
+blueprint `rem-ptr-weil-pbc-proper-open-comparison-1`, for an arbitrary refinement
+`u : c.Refinement d`: the restriction to `X` of the inverse of `α_u`
+(`refinementOpenImmersionLowerShriekIso`), followed by the inverse of the unit isomorphism
+`K ≅ (d.i)^* (d.i)_! K`. Its inverse is adjoint to `α_u`
+(`homEquiv_refinementOpenImmersionLowerShriekIso_hom_app`). -/
+noncomputable def refinementOpenImmersionLowerShriekRestrictionIso (u : c.Refinement d) :
+    D+((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙
+        (u.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ⋙
+        D+((d.i)^*[ModuleCat.{u + 1} Λ]) ≅
+      𝟭 _ :=
+  (Functor.isoWhiskerRight (refinementOpenImmersionLowerShriekIso Λ u)
+      D+((d.i)^*[ModuleCat.{u + 1} Λ])).symm ≪≫
+    (asIso (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
+      (ModuleCat.{u + 1} Λ) d.i).unit).symm
+
+/-- `α_u` is the adjoint, under `D⁺(d.i)_! ⊣ D⁺(d.i)^*`, of the inverse of
+`θ_u = refinementOpenImmersionLowerShriekRestrictionIso`.
+(blueprint: `rem-ptr-weil-pbc-proper-open-comparison-1`) -/
+theorem homEquiv_refinementOpenImmersionLowerShriekIso_hom_app (u : c.Refinement d)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus (ModuleCat.{u + 1} Λ) d.i).homEquiv
+        _ _ ((refinementOpenImmersionLowerShriekIso Λ u).hom.app K) =
+      (refinementOpenImmersionLowerShriekRestrictionIso Λ u).inv.app K := by
+  simp [refinementOpenImmersionLowerShriekRestrictionIso, Adjunction.homEquiv_unit]
+
+end ArbitraryRefinements
+
 end Etale
 
 end AlgebraicGeometry
 
 /-! ### Axiom census
 
-The transitivity of `α_u` depends only on the three standard axioms; the check below is run by
-the build. The statements involving the inverse of a comparison use that `α_u` is an
-isomorphism, which rests on proper base change
+The transitivity of the cartesian comparison `α_u` depends only on the three standard axioms;
+the check below is run by the build. The statements that invert a comparison use that `α_u`
+is an isomorphism, which rests on proper base change
 (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`, blueprint
 `sk-thm-properbasechange`), not proved yet. -/
 
@@ -531,4 +825,3 @@ info: 'AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison_comp
 -/
 #guard_msgs (whitespace := lax) in
 #print axioms AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekComparison_comp
-
