@@ -8,6 +8,9 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.CoextendScalarsComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientExtension
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationFunctoriality
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 /-!
 # The transition functors of the `ℚ̄_ℓ` coefficient stage
@@ -70,16 +73,12 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- The finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`, ordered by inclusion: the index of the
 `2`-colimit defining the coefficient stage `ℚ̄_ℓ`. -/
-def FiniteSubext : Type :=
+abbrev FiniteSubext : Type :=
   {E : IntermediateField ℚ_[l] (PadicAlgCl l) // FiniteDimensional ℚ_[l] E}
 
 namespace FiniteSubext
 
 variable {l}
-
-instance : Preorder (FiniteSubext l) :=
-  inferInstanceAs (Preorder {E : IntermediateField ℚ_[l] (PadicAlgCl l) //
-    FiniteDimensional ℚ_[l] E})
 
 /-- The field underlying a finite subextension. -/
 abbrev field (E : FiniteSubext l) : Type := E.1
@@ -224,6 +223,64 @@ lemma integralStageTransitionComp_cocycle {E L L' L'' : FiniteSubext l} (h : E �
   apply (ObjectProperty.fullyFaithfulι _).map_injective
   exact congr_app (derivedStageTransitionComp_cocycle X h h' h'')
     ((DerivedCategoryDerivedCompleteIntegral.ι _ l E.field).obj K)
+
+noncomputable instance {E L : FiniteSubext l} (h : E ≤ L) :
+    (integralStageTransition X h).CommShift ℤ :=
+  inferInstanceAs (((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l L.field).lift
+    ((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E.field).ι ⋙
+      derivedStageTransition X h) _).CommShift ℤ)
+
+instance {E L : FiniteSubext l} (h : E ≤ L) : (integralStageTransition X h).IsTriangulated :=
+  inferInstanceAs (((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l L.field).lift
+    ((DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E.field).ι ⋙
+      derivedStageTransition X h) _).IsTriangulated)
+
+-- The instance arguments of the derived complete categories are expensive to unify.
+set_option maxHeartbeats 1600000 in
+/-- The integral transition functors carry torsion objects to torsion objects. -/
+lemma torsion_integralStageTransition_obj {E L : FiniteSubext l} (h : E ≤ L)
+    (K : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E.field)
+    (hK : Rationalization.torsion (nonZeroDivisors (Shrink.{u + 1} (integers l E.field)))
+      (DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E.field) K) :
+    Rationalization.torsion (nonZeroDivisors (Shrink.{u + 1} (integers l L.field)))
+      (DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l L.field)
+      ((integralStageTransition X h).obj K) := by
+  obtain ⟨m, hm, hK⟩ := hK
+  refine ⟨integersShrinkMap.{0, u} l (incl h) (incl_compat h) m,
+    map_le_nonZeroDivisors_of_injective _ (integersShrinkMap_injective l (incl h) (incl_compat h))
+      le_rfl ⟨m, hm, rfl⟩, ?_⟩
+  have h0 : (derivedStageTransition X h).map ((DerivedCategoryDerivedCompleteIntegral.ι _ l
+      E.field).map (m • 𝟙 K)) = 0 := by
+    rw [hK]
+    exact Functor.map_zero (derivedStageTransition X h) _ _
+  have h1 := DerivedCategory.rightDerivedFunctor_coextendScalars_map_smul_id X.smallEtaleTopology
+    (integersShrinkMap.{0, u} l (incl h) (incl_compat h)) m
+    ((DerivedCategoryDerivedCompleteIntegral.ι _ l E.field).obj K)
+  exact (ObjectProperty.fullyFaithfulι _).map_injective (h1.symm.trans (by exact h0))
+
+/-- The transition functor `D_comp(X_ét, E) ⥤ D_comp(X_ét, L)` of the rational stages, induced on
+rationalizations by the integral transition functor. -/
+noncomputable abbrev rationalStageTransition {E L : FiniteSubext l} (h : E ≤ L) :
+    DerivedCategoryDerivedCompleteRational X.smallEtaleTopology l E.field ⥤
+      DerivedCategoryDerivedCompleteRational X.smallEtaleTopology l L.field :=
+  Rationalization.mapOfTorsion _ _ (integralStageTransition X h)
+    (torsion_integralStageTransition_obj X h)
+
+/-- The composition isomorphisms of the rational transition functors. -/
+noncomputable def rationalStageTransitionComp {E L L' : FiniteSubext l} (h : E ≤ L)
+    (h' : L ≤ L') :
+    rationalStageTransition X h ⋙ rationalStageTransition X h' ≅
+      rationalStageTransition X (h.trans h') :=
+  Rationalization.mapOfTorsionCompIso _ _ _ (integralStageTransitionComp X h h')
+
+/-- The cocycle condition for the rational transition functors. -/
+lemma rationalStageTransitionComp_cocycle {E L L' L'' : FiniteSubext l} (h : E ≤ L)
+    (h' : L ≤ L') (h'' : L' ≤ L'') :
+    Functor.whiskerRight (rationalStageTransitionComp X h h').hom (rationalStageTransition X h'') ≫
+        (rationalStageTransitionComp X (h.trans h') h'').hom =
+      Functor.whiskerLeft (rationalStageTransition X h) (rationalStageTransitionComp X h' h'').hom ≫
+        (rationalStageTransitionComp X h (h'.trans h'')).hom :=
+  Rationalization.mapOfTorsionCompIso_cocycle _ _ _ _ (integralStageTransitionComp_cocycle X h h' h'')
 
 end Integral
 

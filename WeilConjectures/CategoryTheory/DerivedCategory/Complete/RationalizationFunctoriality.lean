@@ -65,9 +65,10 @@ noncomputable instance : Localization.Lifting (Q M₁ C₁) (W M₁ C₁) (F ⋙
     (mapOfTorsion M₁ M₂ F hF) :=
   ⟨Localization.fac _ _ _⟩
 
+omit [F.CommShift ℤ] [F.IsTriangulated] in
 /-- A functor semilinear along a ring morphism `φ` with `φ(M₁) ⊆ M₂` carries torsion objects to
 torsion objects. -/
-lemma torsion_obj_of_semilinear (φ : R₁ →+* R₂) (hM : M₁.map φ ≤ M₂)
+lemma torsion_obj_of_semilinear [F.PreservesZeroMorphisms] (φ : R₁ →+* R₂) (hM : M₁.map φ ≤ M₂)
     (hF : ∀ (X : C₁) (r : R₁), F.map (r • 𝟙 X) = φ r • 𝟙 (F.obj X)) (X : C₁)
     (hX : torsion M₁ C₁ X) : torsion M₂ C₂ (F.obj X) := by
   obtain ⟨m, hm, h⟩ := hX

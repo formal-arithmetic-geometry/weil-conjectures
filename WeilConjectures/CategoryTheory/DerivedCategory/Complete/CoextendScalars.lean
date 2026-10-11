@@ -145,4 +145,22 @@ theorem derivedComplete_rightDerivedFunctor_coextendScalars {ϖ : R} {ϖ' : R'}
   rw [← (adj.homEquiv _ _).apply_symm_apply f, h0]
   simp
 
+variable (J φ) in
+/-- Derived coextension of scalars is semilinear along `φ`: it is right adjoint to the
+restriction of scalars, which is semilinear (`DerivedCategory.restrictScalars_map_smul_id`). -/
+lemma rightDerivedFunctor_coextendScalars_map_smul_id (r : R)
+    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
+    (sheafCompose J (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ)).rightDerivedFunctor.map
+        (r • 𝟙 K) = φ r • 𝟙 _ := by
+  let adj := (Sheaf.restrictCoextendScalarsAdj J φ).mapDerivedCategoryRightDerivedAdjunction
+  apply (adj.homEquiv _ _).symm.injective
+  rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit]
+  have h₁ := adj.counit.naturality (r • 𝟙 K)
+  have h₂ : (Sheaf.restrictScalars J φ).mapDerivedCategory.map (φ r • 𝟙 _) ≫ adj.counit.app K =
+      (r • 𝟙 _) ≫ adj.counit.app K := by
+    rw [restrictScalars_map_smul_id]
+  simp only [Functor.comp_map, Functor.id_map] at h₁
+  rw [h₁, h₂, Linear.smul_comp, Linear.comp_smul]
+  simp
+
 end DerivedCategory
