@@ -84,5 +84,27 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: L: definition checked (sheafification of the constant presheaf Z/n on C_et)"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.Kummer",
+  "declaration": "AlgebraicGeometry.Scheme.constantZMod",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.constantZMod",
+   "AlgebraicGeometry.Scheme.constantSheaf_geometricStalk_isIso"
+  ],
+  "statement": "noncomputable abbrev constantZMod : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}",
+  "branch": "slopmaster2",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "The construction is X.constantZMod n, with ambient (X : Scheme.{u}) (n : ℕ): constantSheaf on X.smallEtaleTopology at AddCommGrpCat.of (ULift.{u+1} (ZMod n)). Restrict to the node’s algebraically closed-field curves and n ≥ 1; the definition requires no further hypotheses. The geometric-stalk clause is supplied by the already recorded dependency AlgebraicGeometry.Scheme.constantSheaf_geometricStalk_isIso in Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk, specialized to E = AddCommGrpCat.of (ULift.{u+1} (ZMod n)), v = u. ULift is canonically additively equivalent to ZMod n; no new definition or proof is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dcs0940",
+  "group": "J1",
+  "result": "pass",
+  "note": "existing slopmaster2 abbrev Scheme.constantZMod X n := (CategoryTheory.constantSheaf X.smallEtaleTopology AddCommGrpCat.{u+1}).obj (of (ULift (ZMod n))) (rfl-checked, Mathlib constantSheaf, no private copy); X:=C curve, n≥1 domain, small etale site, Z/n value via ULift; stalk clause = constantSheaf_geometricStalk_isIso at E=ULift ZMod n, v=u (#check-instantiated)"
  }
 }
