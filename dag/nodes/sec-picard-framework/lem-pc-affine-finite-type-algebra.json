@@ -101,5 +101,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-afa (reviewer sub-agent of L); spot-checked: Source Stacks 01T2 (morphisms-lemma-locally-finite-type-characterize) read in morphisms.tex: (1)=>(2) for affine U=Y, V=Spec k gives O(Spec k)=k -> O_Y(Y)=B of finite type; the item statement (Y affine, Y->Spec k finite type, B=Gamma(Y,O_Y) finite type k-algebra) agrees, statement unchanged. Single step: finite type => locally of finite type is carried by the statement of def-weil-finite-type-morphism (LFT and QC); the finite-type ring map for every affine pair U,V with f(U) in V is exactly the statement of lem-weil-pbc-lft-affine-pairs (Mathlib leaf locallyOfFiniteType_iff, FiniteType.lean), whose hypotheses (U=Y affine, V=Spec k affine, f(Y) in Spec k trivially) hold; def-weil-pbc-finite-type-algebra gives the meaning of the conclusion. Declared tool_use lem-weil-pbc-lft-affine-pairs (unit sk-thm-p1, a Mathlib leaf) is a generic black-box statement: accepted. Leaf question: Mathlib does not state the item exactly; nearest is HasRingHomProperty.iff_of_isAffine (RingHomProperties.lean:355) with the instance at FiniteType.lean:54, which needs dropping QC and the identification Gamma(Spec k) = k via Scheme.GammaSpecIso, so the one-step split through the existing leaf is acceptable (B8). B10: no slopmaster2 declaration mentions the item (grep of WeilConjectures, Comparator). Only the item's node and report changed; split_report with blueprint entry; same_as [] and from.place filled already. Small cases: Y=Spec k (B=k), Spec k[e]/(e^2), finite disjoint union of points, empty scheme (B=0), A^1_k. Start 2026-10-10 Sat Oct 10 03:40:29 PM UTC 2026, end Sat Oct 10 03:41:06 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFiniteTypeAlgebra",
+  "declaration": "AlgebraicGeometry.affine_finiteType_algebra_of_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFiniteTypeAlgebra.lean",
+  "statement": "theorem affine_finiteType_algebra_of_field {k : Type u} [Field k] {Y : Scheme.{u}} [IsAffine Y] (f : Y ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] : (letI := ((f.appTop).hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom).toAlgebra Algebra.FiniteType k Γ(Y, ⊤))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fta0705",
+  "group": "C1",
+  "result": "pass",
+  "note": "k field = {k : Type u} [Field k]; Y affine = Scheme.{u} + [IsAffine Y]; finite type Y->Spec k = [LocallyOfFiniteType f] [QuasiCompact f] per def-weil-finite-type-morphism; B = Γ(Y, ⊤) with k-algebra via f.appTop ∘ ΓSpecIso⁻¹; conclusion Algebra.FiniteType k Γ(Y, ⊤); Mathlib HasRingHomProperty.iff_of_isAffine gives RingHom.FiniteType f.appTop only (not exact); source IsAffineOpen.algebra_finiteType_of_field is strictly more general (any affine open, LFT only), not exact, existing:false kept"
  }
 }
