@@ -188,5 +188,28 @@
   "summary": "Read Stacks Sheaves 008T, 008S, 008U (sheaves.tex lines 2693-2830) and the passages their proofs cite: section 008N (lines 2600-2630; i_G, c_F, the presheaf adjunction for algebraic structures), 008F (lemma-pullback-presheaves, for i_G and c_F) and Categories 002W (directed colimits commute with finite limits); all tags verified in tags/tags. Rule 0: no slopmaster2 declaration states this (grep of WeilConjectures and Comparator for the id, the tags, PresheafOfModules.pullback, Presheaf.pullback: only scheme-module pullbacks, all abstract left adjoints, and TopCat.Presheaf.pullback of a ring presheaf in TangentSpace.lean, none with modules). Statement kept. Split in 8 steps following the source: step 1 the elementwise description of f_pO(U), f_pG(U) as filtered colimits (it replaces the source's appeal to 002W: the source identifies colim O(V) x colim G(V) with colim (O(V) x G(V)) in sets, which also needs the fact, left implicit, that filtered colimits of rings and abelian groups are computed on underlying sets; the elementwise lemmas give both at once); steps 2-3 the product of 008T, its independence of representatives, the module axioms, semilinear restrictions and linearity of f_pu (all left to the reader in the source); step 4 the O-module f_*F of 008S/008U through i_O; step 5 the abelian bijection psi -> f_*psi o i_G and the formula psi_U o iota^U_V = rho o phi_V; steps 6-7 the two linearity checks 008U leaves to the reader, step 7 by direct computation via the colimit formula instead of the counit c_F (which [def-weil-pbc-topological-inverse-image] does not state); step 8 the restricted bijection and its naturality. One new node, the Mathlib leaf lem-pc-filtered-colimit-commrings-elementwise (representatives and equality at a later stage in a filtered colimit of commutative rings: Concrete.isColimit_exists_rep / isColimit_rep_eq_iff_exists with CommRingCat.FilteredColimits.forget_preservesFilteredColimits); for abelian groups the existing Mathlib leaf lem-weil-pbc-filtered-colimit-modules-elementwise (R = Z) is used; everything else is computation with representatives. Mathlib searches of the creator kept (PresheafOfModules.pullback is an abstract left adjoint; candidate kept).",
   "blueprint": "No blueprint node states this lemma (blueprint_refs search for 008T, 008S, 008U, 'presheaf of modules', 'pullback presheaf', 'presheaf modules adjoint': nothing relevant), so same_as = []. The blueprint ancestor def-pc-base-change is a definition; its module base-change clause 'F_{T'} = g_X^* F' rests on the module pullback adjunction (Stacks 008Y) through lem-pc-module-inverse-image-adjunction, whose step 3 (second equality of 008Y) is this lemma's (3); steps 1-4 here give the presheaf-module structures that lem-pc-module-inverse-image-adjunction's step 1 uses, steps 5-8 its step 3."
  },
- "reviewed": "2026-10-10 L: 8 steps (the colimit description of f_p through a new Mathlib leaf for filtered colimits of rings, the module structures, the abelian bijection restricting to module maps in both directions, naturality); 1 new Mathlib leaf"
+ "reviewed": "2026-10-10 L: 8 steps (the colimit description of f_p through a new Mathlib leaf for filtered colimits of rings, the module structures, the abelian bijection restricting to module maps in both directions, naturality); 1 new Mathlib leaf",
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Presheaf.TopologicalPullback",
+  "declaration": "PresheafOfModules.topologicalPullbackAdjunction",
+  "declarations": [
+   "PresheafOfModules.topologicalPullbackSectionMap",
+   "PresheafOfModules.topologicalPullbackAdjunctionSpec",
+   "PresheafOfModules.topologicalPullbackAdjunction"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Presheaf/TopologicalPullback.lean",
+  "statement": "theorem topologicalPullbackAdjunction {X Y : TopCat.{u}} (f : X ⟶ Y) (O : Y.Presheaf CommRingCat.{u}) : topologicalPullbackAdjunctionSpec f O",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pia0940",
+  "group": "G1",
+  "result": "pass",
+  "note": "f:X->Y TopCat, O CommRingCat presheaf; f_p via TopCat.Presheaf.pullback (Lan colimit), iota = unit then restriction; (1) P with e: underlying = pullback Ab, coprojection action formula + exists-unique sectionwise map; (2) pushforward iO = restrictScalars along ring unit; (3) adj P -| pushforward iO whose homEquiv lies over the abelian homEquiv (both directions of 'exactly onto' via bijectivity); Mathlib PresheafOfModules.pullback is abstract left adjoint without the f_p/coprojection content, so existing:false correct"
+ }
 }

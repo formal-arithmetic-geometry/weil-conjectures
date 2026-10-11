@@ -3633,3 +3633,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:24 L: returned deliver/M1/lem-pc-stalk-tensor-complex (reviewer RETURN: Reviewer R-stc0928, head cdf51f38d. The item's statement is RIGHT (ringed space, arbitrary Z-graded complexes of O_X-mod)
 - 07:26 L: merged deliver/E1/def-weil-pbc-etale-sheaves (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleSheaves AlgebraicGeometry.Scheme.IsLocallyConstantEtaleSheafOfSets)
 - 07:27 L: merged deliver/E1/lem-pur-kinjective-set-iso-classes-bounded-size (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.BoundedSubobjectSize CategoryTheory.bounded_subobject_size_quotient_and_small_iso_classes)
+- 07:27 L: merged deliver/G1/lem-pc-presheaf-module-inverse-image-adjunction (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Presheaf.TopologicalPullback PresheafOfModules.topologicalPullbackAdjunction)
