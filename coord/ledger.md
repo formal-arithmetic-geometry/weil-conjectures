@@ -4742,3 +4742,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:18 L: merged deliver/C1/lem-weil-pbc-pushout-short-exact-sequence (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.PushoutShortExactSequence CategoryTheory.pushout_short_exact_sequence)
 - 13:19 L: merged deliver/E1/lem-weil-pbc-presheaf-module-stalk-filtered-colimit (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PresheafModuleStalkFilteredColimit TopCat.Presheaf.isColimit_stalk_mapCocone; dependency modules: def-weil-pbc-module-stalk)
 - 13:19 L: merged deliver/H1/lem-weil-pbc-projective-dimension-well-defined (stage 2; reviewer FIX; first push; Sheaf.Algebra.ProjectiveDimensionWellDefined ModuleCat.projective_and_global_dimension_well_defined)
+- 13:19 L: merged deliver/E1/lem-sc-module-extension-by-zero-stalk-maps (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps AlgebraicGeometry.module_extensionByZero_stalk_maps)
