@@ -167,4 +167,37 @@ lemma mapHomotopyCategoryCompNatTrans_tensor (P Q : HomotopyCategory C (.up ℤ)
   simp only [Functor.mapCochainComplexμIso_inv, tensorHom_def] at this
   exact this
 
+/-- The morphisms `H(K) ⟶ G(F(K))` are compatible with the units of the monoidal structures of
+the induced functors on cochain complexes. -/
+lemma mapCochainComplexεIso_hom_mapHomologicalComplexCompNatTrans :
+    H.mapCochainComplexεIso.hom ≫ mapHomologicalComplexCompNatTrans F G H τ (𝟙_ _) =
+      G.mapCochainComplexεIso.hom ≫
+        (G.mapHomologicalComplex (.up ℤ)).map F.mapCochainComplexεIso.hom := by
+  apply HomologicalComplex.from_single_hom_ext
+  simp only [HomologicalComplex.comp_f, mapHomologicalComplexCompNatTrans_f,
+    Functor.mapHomologicalComplex_map_f, mapCochainComplexεIso_hom_f_zero, Category.assoc,
+    Functor.map_comp]
+  have hnat := τ.naturality (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ C)).inv
+  have hmon := NatTrans.IsMonoidal.unit (τ := τ)
+  simp only [Functor.comp_obj, Functor.comp_map, Functor.LaxMonoidal.comp_ε] at hnat hmon
+  erw [hnat]
+  rw [reassoc_of% hmon, ← G.map_comp_assoc, Iso.inv_hom_id, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+
+/-- The morphisms `H(P) ⟶ G(F(P))` are compatible with the counits of the oplax monoidal
+structures of the induced functors on the homotopy categories. -/
+lemma mapHomotopyCategoryCompNatTrans_η :
+    mapHomotopyCategoryCompNatTrans F G H τ (𝟙_ _) ≫
+        (G.mapHomotopyCategory (.up ℤ)).map (OplaxMonoidal.η (F.mapHomotopyCategory (.up ℤ))) ≫
+          OplaxMonoidal.η (G.mapHomotopyCategory (.up ℤ)) =
+      OplaxMonoidal.η (H.mapHomotopyCategory (.up ℤ)) := by
+  simp only [Functor.mapHomotopyCategory_η, Functor.mapCochainComplex_η]
+  erw [mapHomotopyCategoryCompNatTrans_quotient]
+  simp only [Functor.mapHomotopyCategory_map, ← Functor.map_comp]
+  congr 1
+  rw [← cancel_epi H.mapCochainComplexεIso.hom, Iso.hom_inv_id,
+    ← Category.assoc, mapCochainComplexεIso_hom_mapHomologicalComplexCompNatTrans,
+    Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id,
+    Category.id_comp, Iso.hom_inv_id]
+
 end CategoryTheory.Functor

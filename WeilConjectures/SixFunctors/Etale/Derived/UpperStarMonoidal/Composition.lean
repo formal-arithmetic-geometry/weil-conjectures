@@ -226,6 +226,62 @@ theorem leftDerivedUpperStarTensorComparison_eq_comp :
   rw [e₁, Category.assoc, Category.assoc, reassoc_of% hn, reassoc_of% hc,
     ← reassoc_of% (hX (K ⊗ M)), e₂]
 
+omit [NatTrans.IsMonoidal (Etale.upperStarComp A f g fg hfg).hom] in
+/-- The counit `η : Lh^* Λ_Y ⟶ Λ_X` of the oplax monoidal derived pullback, in terms of the counit
+of the left derived functor. -/
+lemma leftDerivedUpperStar_η_eq {W V : Scheme.{u}} (h : W ⟶ V) [(h)^*[A].PreservesFlat] :
+    letI := leftDerivedUpperStarOplaxMonoidal A h
+    haveI := DerivedCategory.isIso_ε_Qh (Sheaf W.smallEtaleTopology A)
+    Functor.OplaxMonoidal.η (L((h)^*[A])) = (L((h)^*[A])).map (Functor.LaxMonoidal.ε Qh) ≫
+      (h)^*[A].leftDerivedFunctorCounit.app (𝟙_ _) ≫
+        Qh.map (Functor.OplaxMonoidal.η ((h)^*[A].mapHomotopyCategory (.up ℤ))) ≫
+          CategoryTheory.inv (Functor.LaxMonoidal.ε Qh) :=
+  rfl
+
+set_option maxHeartbeats 800000 in
+/-- The composition isomorphism `L(fg)^* ≅ Lg^* ⋙ Lf^*` is compatible with the counits
+`η : Lh^* Λ ⟶ Λ` of the oplax monoidal derived pullbacks. -/
+theorem leftDerivedUpperStarComp_hom_app_unit :
+    letI := leftDerivedUpperStarOplaxMonoidal A f
+    letI := leftDerivedUpperStarOplaxMonoidal A g
+    letI := leftDerivedUpperStarOplaxMonoidal A fg
+    (leftDerivedUpperStarComp A f g fg hfg).hom.app (𝟙_ _) ≫
+        (L((f)^*[A])).map (Functor.OplaxMonoidal.η (L((g)^*[A]))) ≫ Functor.OplaxMonoidal.η (L((f)^*[A])) =
+      Functor.OplaxMonoidal.η (L((fg)^*[A])) := by
+  rw [leftDerivedUpperStar_η_eq, leftDerivedUpperStar_η_eq, leftDerivedUpperStar_η_eq]
+  haveI := DerivedCategory.isIso_ε_Qh (Sheaf Y.smallEtaleTopology A)
+  have e₁ : (L((f)^*[A])).map ((L((g)^*[A])).map (Functor.LaxMonoidal.ε Qh) ≫
+        (g)^*[A].leftDerivedFunctorCounit.app (𝟙_ _) ≫
+          Qh.map (Functor.OplaxMonoidal.η ((g)^*[A].mapHomotopyCategory (.up ℤ))) ≫
+            CategoryTheory.inv (Functor.LaxMonoidal.ε Qh)) ≫
+        (L((f)^*[A])).map (Functor.LaxMonoidal.ε Qh) =
+      (L((f)^*[A])).map ((L((g)^*[A])).map (Functor.LaxMonoidal.ε Qh)) ≫
+        (L((f)^*[A])).map ((g)^*[A].leftDerivedFunctorCounit.app (𝟙_ _)) ≫
+          (L((f)^*[A])).map
+            (Qh.map (Functor.OplaxMonoidal.η ((g)^*[A].mapHomotopyCategory (.up ℤ)))) := by
+    simp only [← Functor.map_comp, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  have hn : (L((f)^*[A])).map
+        (Qh.map (Functor.OplaxMonoidal.η ((g)^*[A].mapHomotopyCategory (.up ℤ)))) ≫
+        (f)^*[A].leftDerivedFunctorCounit.app (𝟙_ _) =
+      (f)^*[A].leftDerivedFunctorCounit.app (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj (𝟙_ _)) ≫
+        Qh.map (((f)^*[A].mapHomotopyCategory (.up ℤ)).map
+          (Functor.OplaxMonoidal.η ((g)^*[A].mapHomotopyCategory (.up ℤ)))) :=
+    (f)^*[A].leftDerivedFunctorCounit.naturality _
+  have hc : (leftDerivedUpperStarComp A f g fg hfg).hom.app (𝟙_ _) ≫
+        (L((f)^*[A])).map ((L((g)^*[A])).map (Functor.LaxMonoidal.ε Qh)) =
+      (L((fg)^*[A])).map (Functor.LaxMonoidal.ε Qh) ≫
+        (leftDerivedUpperStarComp A f g fg hfg).hom.app (Qh.obj (𝟙_ _)) :=
+    ((leftDerivedUpperStarComp A f g fg hfg).hom.naturality _).symm
+  have hX := (leftDerivedUpperStarComp_hom_app_comp_counit A f g fg hfg (𝟙_ _)).symm
+  have hu := Functor.mapHomotopyCategoryCompNatTrans_η (g)^*[A] (f)^*[A] (fg)^*[A]
+    (Etale.upperStarComp A f g fg hfg).hom
+  have e₂ := congrArg Qh.map hu
+  simp only [Functor.map_comp] at e₂
+  rw [reassoc_of% e₁, reassoc_of% hn, reassoc_of% hc, ← reassoc_of% hX]
+  rw [← e₂]
+  simp only [Category.assoc]
+  rfl
+
 end Derived
 
 end Etale
