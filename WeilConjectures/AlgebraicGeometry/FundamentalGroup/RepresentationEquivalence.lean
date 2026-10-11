@@ -19,16 +19,23 @@ equivalence between finite locally constant sheaves of `Λ`-modules on the small
 
 ## Strategy
 
-For a finite étale `Y`-scheme `P`, the free sheaf `Λ[P]` is finite locally constant, with stalk
-the permutation representation `Λ[P_s]`. Morphisms out of `Λ[P]` correspond to sections over
-`P`, i.e. to morphisms of sheaves of sets out of `Hom_Y(-, P)`, and these correspond to
-`G`-equivariant maps out of `P_s`: so the stalk functor is bijective on morphisms out of free
-sheaves. Every finite locally constant sheaf of modules `F` is a quotient of a free sheaf
-`Λ[P]` (take `P` representing the underlying sheaf of sets of `F`), with finite locally constant
-kernel; together with the faithfulness of the stalk functor this gives full faithfulness.
-Every finite continuous representation `V` is the cokernel of a map `Λ[K] ⟶ Λ[V]` of permutation
-representations, which comes from a map of free sheaves; its cokernel is a finite locally
+The stalk functor `AlgebraicGeometry.Scheme.FiniteLocallyConstantModule.toRep` is faithful and
+full onto `G`-equivariant maps because the stalk functor on finite locally constant sheaves of
+sets is: a morphism of the underlying sheaves of sets inducing a `Λ`-linear map on stalks is
+`Λ`-linear on sections, as its compatibility with the addition `F ⊞ F ⟶ F` and the scalar
+multiplications can be tested on stalks. For a finite étale `Y`-scheme `P`, the free sheaf
+`Λ[P]` is finite locally constant, with stalk the permutation representation `Λ[P_s]`. Every
+finite continuous representation `V` is the cokernel of a map `Λ[K] ⟶ Λ[V]` of permutation
+representations on finite continuous `G`-sets, which are geometric fibres of finite étale
+`Y`-schemes; this map comes from a map of free sheaves, whose cokernel is a finite locally
 constant sheaf with stalk `V`, as the stalk functor is right exact.
+
+## Main definitions and statements
+
+- `AlgebraicGeometry.Scheme.FiniteLocallyConstantModule.exists_stalkMap_eq`: fullness.
+- `AlgebraicGeometry.Scheme.FiniteLocallyConstantModule.exists_iso_toRep`: essential
+  surjectivity.
+- `AlgebraicGeometry.Scheme.FiniteLocallyConstantModule.equivalenceRep`: the equivalence.
 -/
 
 @[expose] public section

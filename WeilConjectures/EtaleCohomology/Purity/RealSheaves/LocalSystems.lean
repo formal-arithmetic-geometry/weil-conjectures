@@ -14,6 +14,7 @@ public import Mathlib.FieldTheory.IntermediateField.Basic
 public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RepresentationEquivalence
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
 public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
@@ -131,8 +132,9 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalG
           ObjectProperty.FullSubcategory (Rep.IsFiniteContinuous (Λ := Λ) (G := G)),
       Nonempty (e.functor ⋙ ObjectProperty.ι _ ⋙
           forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅
-        ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber) := by
-  sorry
+        ObjectProperty.ι _ ⋙ (Scheme.pointSmallEtale s).sheafFiber) :=
+  ⟨Scheme.FiniteLocallyConstantModule.equivalenceRep Λ s G,
+    ⟨Scheme.FiniteLocallyConstantModule.equivalenceRepCompForgetIso Λ s G⟩⟩
 
 /-- Blueprint `sk-i-real-galois`: Galois correspondence for finite local systems.
 
