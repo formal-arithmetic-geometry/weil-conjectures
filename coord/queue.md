@@ -1,11 +1,11 @@
 # Work queue
 
-488 items; claim with `tools/claim.py next <group> [--stage N]`.
+485 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (488)
+## Stage 2: nodes to state (485)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -43,7 +43,6 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-difference` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
-| `lem-sc-local-section-quotient-finite-free` | 1 | state |
 | `lem-sc-perfect-local-pseudocoherent-free-model` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-qc-open-derived-lift` | 1 | state |
@@ -52,7 +51,7 @@
 | `lem-sc-torsion-sections-generic` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-affine-module-correspondence` | 1 | state |
+| `lem-weil-pbc-affine-module-finite-type` | 1 | state |
 | `lem-weil-pbc-affine-morphism-relative-spec` | 1 | state |
 | `lem-weil-pbc-affine-pushforward-base-change` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
@@ -69,8 +68,6 @@
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-module-pullback-finite-type` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
-| `lem-weil-pbc-normal-nagata-monogenic-n1` | 1 | state |
-| `lem-weil-pbc-normal-ring-integrally-closed-total` | 1 | state |
 | `lem-weil-pbc-normalization-in-residue-field-extension` | 1 | state |
 | `lem-weil-pbc-ogoma` | 1 | state |
 | `lem-weil-pbc-open-restriction-pullback-unit` | 1 | state |
@@ -498,7 +495,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 599 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 598 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
