@@ -757,4 +757,53 @@ lemma opensRange_laurentSpecToPolynomialSpec :
   rw [Scheme.preimage_basicOpen_top, ι_appTop_polynomialSpecCoord]
   exact e1.symm.trans (e2.trans e3.symm)
 
+/-! ### The relative spectrum of `𝒪_X` -/
+
+lemma coequifibered_id_affineStructurePresheaf :
+    NatTrans.Coequifibered (𝟙 X.affineStructurePresheaf) :=
+  NatTrans.Coequifibered.of_isIso _
+
+/-- `Spec_X 𝒪_X`, which is `X` itself. -/
+noncomputable abbrev structureSpec : Scheme.{u} :=
+  (relativeGluingData X.coequifibered_id_affineStructurePresheaf).glued
+
+instance : IsIso (relativeGluingData X.coequifibered_id_affineStructurePresheaf).toBase :=
+  toBase_of_forall _ (.isomorphisms _) fun _ ↦
+    (MorphismProperty.isomorphisms.iff _).mpr (by rw [NatTrans.id_app, Spec.map_id]; infer_instance)
+
+namespace IdealSheafData
+
+variable {X} (I : X.IdealSheafData)
+
+/-- The map `𝒪_X[t] ⟶ (𝒪_X / I)[t]`. -/
+noncomputable abbrev polynomialToQuotientPolynomial :
+    X.polynomialPresheaf ⟶ I.quotientPolynomialAlgebra :=
+  Functor.whiskerRight I.toQuotientAlgebra CommRingCat.polynomialFunctor
+
+/-- The relative affine line of `V(I)` is the base change of the one of `X`:
+`Spec_X (𝒪_X / I)[t] = V(I) ×_X Spec_X 𝒪_X[t]`. -/
+theorem isPullback_quotientPolynomialSpec :
+    IsPullback
+      (relativeGluingMap I.coequifibered_toQuotientAlgebra
+        I.coequifibered_toQuotientPolynomialAlgebra
+        (I.quotientAlgebra.whiskerLeft CommRingCat.polynomialC))
+      (relativeGluingMap X.coequifibered_toPolynomialPresheaf
+        I.coequifibered_toQuotientPolynomialAlgebra I.polynomialToQuotientPolynomial)
+      (relativeGluingData I.coequifibered_toQuotientAlgebra).toBase X.polynomialSpecProj := by
+  have h := isPullback_relativeGluingMap X.coequifibered_id_affineStructurePresheaf
+    I.coequifibered_toQuotientAlgebra X.coequifibered_toPolynomialPresheaf
+    I.coequifibered_toQuotientPolynomialAlgebra I.toQuotientAlgebra X.toPolynomialPresheaf
+    (I.quotientAlgebra.whiskerLeft CommRingCat.polynomialC) I.polynomialToQuotientPolynomial
+    (Category.id_comp _) rfl fun U ↦
+      CommRingCat.coequifibered_polynomialC (I.toQuotientAlgebra.app (.op U))
+  refine h.of_iso (Iso.refl _) (Iso.refl _) (Iso.refl _)
+    (asIso (relativeGluingData X.coequifibered_id_affineStructurePresheaf).toBase)
+    (by simp) (by simp) ?_ ?_
+  · simp only [Iso.refl_hom, asIso_hom, Category.id_comp]
+    exact relativeGluingMap_toBase _ _ _ (Category.id_comp _)
+  · simp only [Iso.refl_hom, asIso_hom, Category.id_comp]
+    exact relativeGluingMap_toBase _ _ _ (Category.id_comp _)
+
+end IdealSheafData
+
 end AlgebraicGeometry.Scheme
