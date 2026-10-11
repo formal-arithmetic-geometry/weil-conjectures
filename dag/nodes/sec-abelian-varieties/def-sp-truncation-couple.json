@@ -62,5 +62,32 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dtc1849 (reviewer sub-agent of L); spot-checked: Recomputed bidegrees from the long exact sequence of Rv on tau<=q-1 K -> tau<=q K -> H^q(K)[-q]: alpha D^{p+1,q-1}->D^{p,q} (-1,+1), g (0,0), f E^{p,q}->H^{p+q+1}(Rv tau<=q-1 K)=D^{p+2,q-1} (+2,-1), matching def-sp-exact-couple. Exactness is not claimed by the definition; it is the separate node lem-sp-truncation-couple-exact (cites this def and lem-weil-pbc-truncation-triangle, lem-sf-derived-homology-long-exact, lem-sp-kinjective-computes), so no cycle and no unproved claim. Rv on Ch^+ per def-sp-kinjective-bridge. Metadata-only diff (status split, same_as [], split_report). No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TruncationCouple",
+  "declaration": "CategoryTheory.truncationCouple",
+  "declarations": [
+   "CategoryTheory.truncationCouple",
+   "CategoryTheory.TruncationCouple.D",
+   "CategoryTheory.TruncationCouple.E",
+   "CategoryTheory.TruncationCouple.alpha",
+   "CategoryTheory.TruncationCouple.f",
+   "CategoryTheory.TruncationCouple.g"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TruncationCouple.lean",
+  "statement": "def truncationCouple {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A] {B : Type u₂} [Category.{v₂} B] [Abelian B] [IsGrothendieckAbelian.{v₂} B] (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (K : CochainComplex.Plus A) (a : ℤ) (ha : ∀ q : ℤ, q < a → IsZero (K.obj.homology q)) : Σ D : ℤ → ℤ → B, Σ E : ℤ → ℤ → B, (∀ p q, D p q ⟶ D (p - 1) (q + 1)) × (∀ p q, E p q ⟶ D (p + 2) (q - 1)) × (∀ p q, D p q ⟶ E p q)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dtc0948"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dtc0948",
+  "group": "E1",
+  "result": "fix",
+  "note": "A,B Grothendieck abelian (IsGrothendieckAbelian at hom universes); v additive+PreservesFiniteLimits; K : CochainComplex.Plus, a, ha on homology; D/E = bridge rightDerivedCohomologyWithResolution on Mathlib truncLE q and singleFunctor q (H^q K) at p+q; alpha (-1,+1) via transition at q+1; f (+2,-1) = HomologySequence.δ of RF-image of truncation triangle; g (0,0) = mor2; FIX: transition/projection now built from Mathlib ιTruncLE/truncLEMap/mkHomToSingle instead of Classical.choose of sorry'd existsUnique"
  }
 }
