@@ -189,5 +189,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact",
+  "declaration": "SheafOfModules.localizedModule_adjunction_exact",
+  "file": "lean/Sheaf/CategoryTheory/LocalizedModuleAdjunctionExact.lean",
+  "statement": "theorem localizedModule_adjunction_exact {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (O : Sheaf J.toGrothendieck CommRingCat.{u}) (U : C) : PreservesFiniteLimits (overFunctor.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U) ∧ PreservesFiniteColimits (overFunctor.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U) ∧ PreservesFiniteLimits (extensionByZeroPresheaf.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U ⋙ PresheafOfModules.sheafification.{u} (𝟙 ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O).obj)) ∧ PreservesFiniteColimits (extensionByZeroPresheaf.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U ⋙ PresheafOfModules.sheafification.{u} (𝟙 ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O).obj)) ∧ Nonempty (Adjunction (extensionByZeroPresheaf.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U ⋙ PresheafOfModules.sheafification.{u} (𝟙 ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O).obj)) (overFunctor.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj O) U))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sra2",
+  "group": "H1",
+  "result": "pass",
+  "note": "site = recorded Precoverage form of def-weil-pbc-sites-and-cohomology (4 instances, J.toGrothendieck); O : Sheaf CommRingCat via sheafCompose forget₂; j_U^* = SheafOfModules.overFunctor on R.over U (localized topology); j_U! = extensionByZeroPresheaf ⋙ PresheafOfModules.sheafification (𝟙 _) tied, not an abstract left adjoint; exactness of both as PreservesFiniteLimits ∧ PreservesFiniteColimits; Nonempty (j_! ⊣ j^*) gives natural homEquiv in F and G (EXTENSION BY ZERO line form); no let/letI, inline instance, notation, choose or tautological conjunct; universe u common"
  }
 }
