@@ -211,5 +211,23 @@
   "summary": "Read Stacks 00QA (algebra.tex 30880-30904) and the lemmas its proof cites: 00Q9 (theorem-main-theorem), 00GM (lemma-characterize-integral), 00PM (lemma-quasi-finite) with 0H8X, and 077H (lemma-quasi-finite-local) for the 'depends only on the local ring' sentence; tags verified in tags/tags. No slopmaster2 declaration states the ring-level lemma (grep by id, 00QA, quasi-finite/isOpen key words). Statement kept. Six steps: the finite subalgebra B'' and g with B''_g = B_g (existing node lem-weil-pbc-quasi-finite-at-finite-subalgebra-away, which packages 00Q9 and the 00GM construction of S''); B'' finite hence finite type and quasi-finite everywhere (new node, 00PM); B_g of finite type (elementary); the 'easy to see' sentence written out through 077H with f=1 and the prime correspondence of the open immersion Spec B_g -> Spec B; transport along the A-algebra isomorphism (elementary); D(g) contained in Q by 077H again. The source's 'it is easy to see' is made precise in steps 4-5.",
   "blueprint": "The item is not a blueprint node; its ancestor thm-weil-pbc-finite-etale-lifting is served at the place recorded in blueprint.from.place (step (b), essential surjectivity, through the fibre-dimension bound of the cited route). All six steps realize that one place: openness of the quasi-finite locus used by lem-weil-pbc-quasi-finite-over-polynomial-algebra. blueprint_refs search (00QA, 'quasi-finite open', 'quasi-finite locus open', 'locally quasi-finite open subset', 'set of points quasi-finite') found no blueprint node stating it: same_as []."
  },
- "reviewed": "2026-10-10 L: 6 steps following 00QA (finite subalgebra away from q by the 00Q9 node, finite implies quasi-finite everywhere (new node, same_as pqf-lem-finite-qf), the \"easy to see\" written out via 077H and the open immersion of D(g)); 1 new node"
+ "reviewed": "2026-10-10 L: 6 steps following 00QA (finite subalgebra away from q by the 00Q9 node, finite implies quasi-finite everywhere (new node, same_as pqf-lem-finite-qf), the \"easy to see\" written out via 077H and the open immersion of D(g)); 1 new node",
+ "lean": {
+  "module": "Sheaf.RingTheory.QuasiFiniteLocusOpen",
+  "declaration": "Algebra.isOpen_isQuasiFiniteAtPrime",
+  "file": "lean/Sheaf/RingTheory/QuasiFiniteLocusOpen.lean",
+  "statement": "theorem isOpen_isQuasiFiniteAtPrime (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] [Algebra.FiniteType A B] : IsOpen {q : PrimeSpectrum B | IsQuasiFiniteAtPrime A B q} ∧ (IsOpen {q : PrimeSpectrum B | IsQuasiFiniteAtPrime A B q} ↔ ∀ q : PrimeSpectrum B, IsQuasiFiniteAtPrime A B q → ∃ g : B, g ∉ q.asIdeal ∧ ∀ p : PrimeSpectrum (Localization.Away g), IsQuasiFiniteAtPrime A (Localization.Away g) p)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "H1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
