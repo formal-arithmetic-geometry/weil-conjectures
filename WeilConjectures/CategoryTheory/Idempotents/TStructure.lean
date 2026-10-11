@@ -19,6 +19,8 @@ the image of the idempotent endomorphism of the truncation triangle of `K` induc
 ## Main definitions
 
 - `CategoryTheory.Triangulated.TStructure.karoubi`: the t-structure on `Karoubi C`.
+- `CategoryTheory.Triangulated.TStructure.karoubiHeartEquivalence`: the heart of `t.karoubi` is
+  canonically equivalent to the Karoubi envelope of the heart of `t`.
 -/
 
 @[expose] public section
@@ -177,14 +179,16 @@ instance : (t.heartToKaroubi).EssSurj where
     exact ⟨A, ⟨t.karoubi.heart.fullyFaithfulι.preimageIso
       ((eP ≪≫ asIso (Karoubi.triangleOfIdem T E hE).mor₂ ≪≫ eA).symm)⟩⟩
 
-/-- Blueprint `lem-weil-envelope-tstructure`: the heart of the t-structure on the Karoubi
-envelope is equivalent to the Karoubi envelope of the heart. -/
-theorem nonempty_karoubi_heart_equivalence :
-    Nonempty (t.karoubi.heart.FullSubcategory ≌ Karoubi t.heart.FullSubcategory) := by
-  let := t.hasHeartFullSubcategory
-  have := t.isIdempotentComplete_heart t.heart.FullSubcategory
-  have : t.heartToKaroubi.IsEquivalence := { }
-  exact ⟨t.heartToKaroubi.asEquivalence.symm.trans (toKaroubiEquivalence _)⟩
+/-- Blueprint `lem-weil-envelope-tstructure`: the canonical equivalence between the heart of the
+t-structure on the Karoubi envelope and the Karoubi envelope of the heart. It is the inverse of
+the equivalence `t.heartToKaroubi` from the heart of `C` (idempotent complete, since it is
+abelian) followed by the equivalence of the heart with its Karoubi envelope. -/
+noncomputable def karoubiHeartEquivalence :
+    t.karoubi.heart.FullSubcategory ≌ Karoubi t.heart.FullSubcategory :=
+  letI := t.hasHeartFullSubcategory
+  haveI := t.isIdempotentComplete_heart t.heart.FullSubcategory
+  haveI : t.heartToKaroubi.IsEquivalence := { }
+  t.heartToKaroubi.asEquivalence.symm.trans (toKaroubiEquivalence _)
 
 end Heart
 

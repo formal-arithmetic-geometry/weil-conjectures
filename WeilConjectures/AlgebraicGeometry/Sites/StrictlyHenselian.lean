@@ -30,7 +30,7 @@ moreover the global sections of the constant sheaf with value `A` are `A`.
   neighbourhoods of the closed point have sections.
 - `AlgebraicGeometry.Scheme.subsingleton_H_of_isStrictlyHenselianLocalRing`:
   `Hⁿ(Spec R_ét, F) = 0` for `n > 0`.
-- `AlgebraicGeometry.Scheme.nonempty_H_zero_constantSheaf_addEquiv_of_isStrictlyHenselianLocalRing`:
+- `AlgebraicGeometry.Scheme.hZeroConstantSheafAddEquiv`:
   `H⁰(Spec R_ét, A) ≅ A` for the constant sheaf with value `A`.
 
 ## References
@@ -184,14 +184,16 @@ lemma bijective_toSheafify_app_of_isStrictlyHenselianLocalRing
 
 /-- Blueprint `sbc-lem-strict-henselian-constant-cohomology`, degree zero: over a strictly
 henselian local ring `R`, the cohomology in degree `0` of the constant étale sheaf on `Spec R`
-with value `A` is `A`. -/
-theorem nonempty_H_zero_constantSheaf_addEquiv_of_isStrictlyHenselianLocalRing
+with value `A` is `A`: the global sections of the constant sheaf, computed through the
+identification `H⁰ = Γ` (`CategoryTheory.Sheaf.H.equiv₀`), are the sections of the constant
+presheaf, since sheafification does not change sections over `Spec R`. -/
+noncomputable def hZeroConstantSheafAddEquiv
     (A : AddCommGrpCat.{u + 1}) :
-    Nonempty (Sheaf.H ((constantSheaf (Spec (.of R)).smallEtaleTopology
-      AddCommGrpCat.{u + 1}).obj A) 0 ≃+ A) :=
-  ⟨(Sheaf.H.equiv₀ _ (isTerminalEtaleTerminal R)).trans
+    Sheaf.H ((constantSheaf (Spec (.of R)).smallEtaleTopology
+      AddCommGrpCat.{u + 1}).obj A) 0 ≃+ A :=
+  (Sheaf.H.equiv₀ _ (isTerminalEtaleTerminal R)).trans
     (AddEquiv.ofBijective _
       (bijective_toSheafify_app_of_isStrictlyHenselianLocalRing R
-        ((Functor.const _).obj A))).symm⟩
+        ((Functor.const _).obj A))).symm
 
 end AlgebraicGeometry.Scheme
