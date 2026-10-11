@@ -219,5 +219,23 @@
   "result": "accepted",
   "note": "9 steps follow Stacks 00S2: canonical presentations alpha, beta, gamma, epsilon; morphisms of presentations (new 00S1 leaf: H1Cotangent.map_eq/map_id/map_comp, Cotangent/Basic.lean:391 verified); exact rows via the any-variables Kaehler basis leaf (Polynomial.lean:60) and the coefficient-map kernel leaf (Polynomial/Basic.lean:995, Eval.lean:407); snake lemma leaf (SnakeLemma.lean:385); cokernels via the 00RU leaf; H_1 of gamma vs epsilon via 00S1; the Tor clause via a new unsplit node and a Tor definition leaf (Monoidal/Tor.lean:50). Statement reworded as a plain statement with the maps defined and the Tor clause added. Tags 00S2, 00S1, 07JW, 010H, 00RX, 00LY verified."
  },
- "lead_note": "L 2026-10-10 (stage 3): lem-weil-pbc-polynomial-ring-kahler-basis-any-variables generalizes the existing leaf lem-weil-pbc-polynomial-ring-kahler-basis (finitely many variables); the two could be merged. L 2026-10-10 06:40: the statement now gives the explicit formula for the connecting map (step 10 added), because exactness alone does not determine ∂ and lem-weil-pbc-jacobi-zariski-connecting-map-naturality needs the map itself."
+ "lead_note": "L 2026-10-10 (stage 3): lem-weil-pbc-polynomial-ring-kahler-basis-any-variables generalizes the existing leaf lem-weil-pbc-polynomial-ring-kahler-basis (finitely many variables); the two could be merged. L 2026-10-10 06:40: the statement now gives the explicit formula for the connecting map (step 10 added), because exactness alone does not determine ∂ and lem-weil-pbc-jacobi-zariski-connecting-map-naturality needs the map itself.",
+ "lean": {
+  "module": "Sheaf.RingTheory.JacobiZariskiHomologySequence",
+  "declaration": "Algebra.jacobiZariski_homology_sequence",
+  "file": "lean/Sheaf/RingTheory/JacobiZariskiHomologySequence.lean",
+  "statement": "theorem jacobiZariski_homology_sequence (A : Type u) (B : Type v) (C : Type w) [CommRing A] [CommRing B] [CommRing C] [Algebra A B] [Algebra B C] [Algebra A C] [IsScalarTower A B C] : let P := (Generators.self A B).toExtension let Q := (Generators.self B C).toExtension let E := (Generators.self A C).toExtension let K := (P.cotangentComplex.baseChange C).ker let f := Extension.Cotangent.map (Generators.defaultHom (Generators.self A B) (Generators.self A C)).toExtensionHom let v := H1Cotangent.map A B C C let w := KaehlerDifferential.mapBaseChange A B C let z := KaehlerDifferential.map A B C C let δ := H1Cotangent.δ A B C ∃ (u : K →ₗ[C] H1Cotangent A C) (t : C ⊗[B] H1Cotangent A B →ₗ[C] K), (∀ x : K, E.h1Cotangentι (u x) = f.liftBaseChange C x.val) ∧ (∀ (c : C) (h : H1Cotangent A B), (t (c ⊗ₜ[B] h)).val = c ⊗ₜ[B] P.h1Cotangentι h) ∧ (∀ (g : Q.ker) (h : H1Cotangent B C), Q.h1Cotangentι h = Extension.Cotangent.mk g → δ h = ∑ α ∈ g.val.support, (α.prod (fun c n ↦ c ^ n)) ⊗ₜ[B] D A B (MvPolynomial.coeff α g.val)) ∧ Function.Exact u v ∧ Function.Exact v δ ∧ Function.Exact δ w ∧ Function.Exact w z ∧ Function.Surjective z ∧ ((IsZero (((Tor' (ModuleCat (ULift.{max u v w} B)) 1).obj (ModuleCat.of (ULift.{max u v w} B) (ULift.{max u v w} Ω[B⁄A]))).obj (ModuleCat.of (ULift.{max u v w} B) (ULift.{max u v w} C))) ∧ IsZero (((Tor' (ModuleCat (ULift.{max u v w} B)) 2).obj (ModuleCat.of (ULift.{max u v w} B) (ULift.{max u v w} Ω[B⁄A]))).obj (ModuleCat.of (ULift.{max u v w} B) (ULift.{max u v w} C)))) → Function.Bijective t)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-jzh1107",
+  "group": "J1",
+  "result": "pass",
+  "note": "A,B,C arbitrary CommRings with Algebra A B, B C, A C + IsScalarTower (composite only); canonical presentations Generators.self; u pinned via injective h1Cotangentι on all of ker(P.cotangentComplex.baseChange C) with defaultHom = phi_sharp (spelling as M1 e6dafbfe1); v = H1Cotangent.map A B C C; w,z = mapBaseChange/map; delta = Mathlib H1Cotangent.delta, coefficient formula checked against delta_eq_deltaAux/deltaAux_monomial with self.val = id; v,delta,w,z exactness + surjectivity are Mathlib's exact_map_delta/exact_delta_mapBaseChange/exact_mapBaseChange_map/map_surjective verbatim, u-exactness and Tor clause new (Mathlib TODO); Tor' derives first argument Omega[B/A], degrees 1 and 2, ULift.module actions rfl to the B-actions; t pinned on pure tensors; no hollow hypotheses, no quantified universes"
+ }
 }

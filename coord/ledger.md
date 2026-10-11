@@ -4390,3 +4390,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:08 L: merged deliver/G1/lem-weil-pbc-irreducible-lisse-strata (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.IrreducibleLisseStrata AlgebraicGeometry.Scheme.exists_irreducible_lisse_stratification)
 - 11:08 L: merged deliver/H1/lem-weil-pbc-lift-monic-coprime-factorization-etale (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LiftMonicCoprimeFactorizationEtale Polynomial.exists_etale_lift_monic_coprime_factorization)
 - 11:09 L: merged deliver/K1/def-weil-pbc-constructible-torsion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf AlgebraicGeometry.CurveCoefficientPair.IsConstructible)
+- 11:09 L: merged deliver/J1/lem-weil-pbc-jacobi-zariski-homology-sequence (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JacobiZariskiHomologySequence Algebra.jacobiZariski_homology_sequence)
