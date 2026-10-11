@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Sites.PreservesSheafification
 public import WeilConjectures.Algebra.Category.ModuleCat.QuotSMulTop
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
+public import WeilConjectures.Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Reduction of flat sheaves of modules modulo an ideal
@@ -42,26 +43,6 @@ namespace CategoryTheory
 
 variable {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
   {R : Type (u + 1)} [CommRing R]
-
-/-- An element of `I • M` is `∑ₖ γₖ • wₖ` for given generators `γ` of `I`. -/
-lemma _root_.Submodule.exists_eq_sum_smul_of_mem_smul_top {M : Type*} [AddCommGroup M]
-    [Module R M] {r : ℕ} {γ : Fin r → R} {I : Ideal R} (hγ : Ideal.span (Set.range γ) = I)
-    {x : M} (hx : x ∈ I • (⊤ : Submodule R M)) : ∃ w : Fin r → M, x = ∑ k, γ k • w k := by
-  let Φ : (Fin r → M) →ₗ[R] M :=
-    { toFun := fun w ↦ ∑ k, γ k • w k
-      map_add' := fun _ _ ↦ by simp [Finset.sum_add_distrib, smul_add]
-      map_smul' := fun c w ↦ by
-        simp only [Pi.smul_apply, RingHom.id_apply, Finset.smul_sum]
-        exact Finset.sum_congr rfl fun k _ ↦ smul_comm _ _ _ }
-  have hle : I • (⊤ : Submodule R M) ≤ LinearMap.range Φ := by
-    rw [Submodule.smul_le]
-    intro c hc m _
-    rw [← hγ, Submodule.mem_span_range_iff_exists_fun] at hc
-    obtain ⟨a, rfl⟩ := hc
-    refine ⟨fun k ↦ a k • m, ?_⟩
-    simp [Φ, Finset.sum_smul, smul_smul, mul_comm]
-  obtain ⟨w, hw⟩ := hle hx
-  exact ⟨w, hw.symm⟩
 
 /-- **Reduction modulo `I` preserves locally trivial relations.** If `P` is a presheaf of modules
 over a Noetherian ring `R` with locally trivial relations, so is its reduction

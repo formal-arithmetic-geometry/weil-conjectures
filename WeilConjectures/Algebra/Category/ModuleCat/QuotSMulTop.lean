@@ -18,6 +18,9 @@ For an ideal `I` of a commutative ring `R`, the functor `M ↦ M / I M` from `R`
 restricting scalars back to `R` it is `M ↦ M ⊗_R R ⧸ I`
 (`ModuleCat.quotSMulTopCompRestrictScalarsIso`).
 
+Unlike Mathlib's `QuotSMulTop r M = M ⧸ r • ⊤`, which reduces modulo a single element `r`, the
+functor here reduces modulo an ideal `I`.
+
 ## Main definitions
 
 - `ModuleCat.quotSMulTop`: the functor `M ↦ M / I M`.
@@ -60,7 +63,9 @@ lemma quotSMulTopMap_mk {M N : Type v} [AddCommGroup M] [Module R M] [AddCommGro
     quotSMulTopMap I f (Submodule.Quotient.mk m) = Submodule.Quotient.mk (f m) :=
   rfl
 
-/-- The reduction functor `M ↦ M / I M` from `R`-modules to `R ⧸ I`-modules. -/
+/-- The reduction functor `M ↦ M / I M` from `R`-modules to `R ⧸ I`-modules, i.e. extension of
+scalars along `R ⟶ R ⧸ I`. It reduces modulo the ideal `I`, not modulo an element as Mathlib's
+`QuotSMulTop`. -/
 noncomputable def quotSMulTop : ModuleCat.{v} R ⥤ ModuleCat.{v} (R ⧸ I) where
   obj M := ModuleCat.of (R ⧸ I) (M ⧸ I • (⊤ : Submodule R M))
   map f := ModuleCat.ofHom (quotSMulTopMap I f.hom)

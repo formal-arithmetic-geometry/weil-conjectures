@@ -17,6 +17,7 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Pi
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
@@ -142,27 +143,6 @@ section Flat
 
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   {J : GrothendieckTopology C} {R : Type (u + 1)} [CommRing R]
-
-/-- Coordinates of an element of `M ⊗ R^t` after applying the matrix `b`: the coordinates of
-`(1 ⊗ b) z` are `∑ₘ bⱼₘ zₘ`, in terms of the coordinates `zₘ` of `z`. -/
-lemma _root_.TensorProduct.piScalarRight_lTensor_mulVecLin {M : Type*} [AddCommGroup M]
-    [Module R M] {s t : ℕ} (b : Matrix (Fin s) (Fin t) R) (z : M ⊗[R] (Fin t → R))
-    (j : Fin s) :
-    TensorProduct.piScalarRight R R M (Fin s) ((b.mulVecLin).lTensor M z) j =
-      ∑ m, b j m • TensorProduct.piScalarRight R R M (Fin t) z m := by
-  induction z using TensorProduct.induction_on with
-  | zero => simp
-  | add x y hx hy =>
-    simp only [map_add, Pi.add_apply, hx, hy, smul_add, Finset.sum_add_distrib]
-  | tmul x v =>
-    simp [Matrix.mulVec, dotProduct, Finset.sum_smul, mul_smul]
-
-/-- Coordinates of `∑ⱼ yⱼ ⊗ eⱼ` in `M ⊗ R^s` are the `yⱼ`. -/
-lemma _root_.TensorProduct.piScalarRight_sum_tmul_single {M : Type*} [AddCommGroup M]
-    [Module R M] {s : ℕ} (y : Fin s → M) :
-    TensorProduct.piScalarRight R R M (Fin s) (∑ j, y j ⊗ₜ Pi.single j 1) = y := by
-  ext i
-  simp [Pi.single_apply]
 
 variable (J) in
 /-- A presheaf of `R`-modules *has locally trivial relations* if every finite family of sections
