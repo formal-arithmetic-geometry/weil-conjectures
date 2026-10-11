@@ -1,11 +1,11 @@
 # Work queue
 
-856 items; claim with `tools/claim.py next <group> [--stage N]`.
+851 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (856)
+## Stage 2: nodes to state (851)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -50,7 +50,6 @@
 | `lem-weil-pbc-colimit-flat-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
-| `lem-weil-pbc-complete-local-map-cohen-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-map-regular-presentation` | 1 | state |
 | `lem-weil-pbc-complete-local-quotient` | 1 | state |
 | `lem-weil-pbc-complete-pair-henselian` | 1 | state |
@@ -58,12 +57,8 @@
 | `lem-weil-pbc-completion-at-quasi-finite-prime` | 1 | state |
 | `lem-weil-pbc-completion-dimension` | 1 | state |
 | `lem-weil-pbc-completion-finite-extension` | 1 | state |
-| `lem-weil-pbc-completion-noetherian-quotient-noetherian` | 1 | state |
-| `lem-weil-pbc-complex-injective-resolution-mono` | 1 | state |
-| `lem-weil-pbc-complex-mapping-cylinder-split-factorization` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-composition-fibre-degree-bound` | 1 | state |
-| `lem-weil-pbc-conormal-module-principal-localization` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-morphism-clopen` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-multiplication` | 1 | state |
 | `lem-weil-pbc-constant-sheaf-geometric-stalk` | 1 | state |
