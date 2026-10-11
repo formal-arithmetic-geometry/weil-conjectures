@@ -5691,3 +5691,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:59 L: merged deliver/T1/def-nagata-morphism-equality-stage (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataMorphismEqualityStage AlgebraicGeometry.nagataMorphismEqualityStage)
 - 20:01 L: returned deliver/H1/lem-sc-boundary-cech-local-lifts (reviewer RETURN: (reviewer R-sub-D, head 4ca752d72) One point, in the new definition; the item's theorem is matched to the node and stays)
 - 20:05 L: merged deliver/E1/lemma-nagata-morphism-eq-eventually (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataMorphismEqEventually AlgebraicGeometry.nagataMorphismEqEventually)
+- 20:10 L: returned deliver/C1/lem-pc-global-hom-pullback-adjunction (reviewer RETURN: (reviewer X-0e84e, head 0e84ed521) the reviewer passed it, but the landing failed: NOT MERGED lem-pc-global-hom-pullback)
