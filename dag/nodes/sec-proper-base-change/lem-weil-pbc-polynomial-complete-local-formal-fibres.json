@@ -249,5 +249,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Seven steps along paragraphs 2-5 of the proof of Stacks 07PV, reusing the nodes of the 07PS split (0325, 032D, 07PP(1), 0AFS, 07NY, 07PR, 07NF) and the completion-of-quotient nodes: flatness and Noetherian fibres, reduction to a complete local domain (07PN identity written out), the regular subring A_0 with quasi-finiteness written out, the completion regular, characteristic 0 with r_0 = 0, characteristic 0 with r_0 != 0 (agent-written: Stacks' sentence 'the fibre is, as a localization of R[x]_q^, regular' covers only r = (0); for r != 0 the fibre is a hypersurface f = 0 in that localization and regularity comes from the derivation d/dx with f' a unit mod f, via new unsplit nodes for 07PE and 07PF; recorded for stage 3 as a Stacks gap), characteristic p by 07PR and the new unsplit node for 07PU. Tags verified (07PU, 07PE, 07PF). Stacks misprint list: add 07PV paragraph 4."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialCompleteLocalFormalFibres",
+  "declaration": "Polynomial.completeLocalFormalFibres",
+  "file": "lean/Sheaf/RingTheory/PolynomialCompleteLocalFormalFibres.lean",
+  "statement": "theorem completeLocalFormalFibres (S : Type u) [CommRing S] [IsNoetherianRing S] [IsLocalRing S] [IsAdicComplete (IsLocalRing.maximalIdeal S) S] (Q : Ideal (Polynomial S)) [Q.IsMaximal] (hQ : Q.comap (Polynomial.C : S →+* Polynomial S) = IsLocalRing.maximalIdeal S) : RingHom.IsRegular (algebraMap (Localization.AtPrime Q) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime Q)) (Localization.AtPrime Q)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pcf1321"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcf1321",
+  "group": "E1",
+  "result": "fix",
+  "note": "S Noetherian local, IsAdicComplete at maximalIdeal; Q maximal in Polynomial S; hQ comap C = n (not hollow: Z_p, Q=(px-1) has Q∩S=0); conclusion RingHom.IsRegular of algebraMap to AdicCompletion at maximalIdeal of Localization.AtPrime Q, verbatim the IsGRing form of GRing.lean; formal-fibre clause is the unfolding of IsRegular; node statement unchanged; docstring proof added"
  }
 }
