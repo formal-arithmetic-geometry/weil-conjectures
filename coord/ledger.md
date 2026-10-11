@@ -4269,3 +4269,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:37 L: merged deliver/K1/lem-weil-pbc-ext-one-direct-sum (stage 2; reviewer FIX; first push; Sheaf.Algebra.ExtOneDirectSum LinearMap.extOne_directSum_bijective)
 - 10:37 L: merged deliver/C1/lem-weil-pbc-flat-module-completion-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatModuleCompletion Module.flat_adicCompletion)
 - 10:37 L: merged deliver/G1/lem-pur-left-derived-exact-when-defined (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.LeftDerivedExactWhenDefined CategoryTheory.Functor.leftDerived_exact_when_defined)
+- 10:37 L: merged deliver/J1/lem-weil-pbc-flat-permanence (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatPermanence RingHom.flat_of_flat_module_of_faithfullyFlat_module)
