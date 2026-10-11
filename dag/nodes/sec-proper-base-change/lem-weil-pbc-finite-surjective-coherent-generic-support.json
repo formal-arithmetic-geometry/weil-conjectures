@@ -209,5 +209,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the six steps (01YO): reduced closure of a lift of the generic point, image equals Z by closedness of finite maps, i'_* O_Z' coherent, generic stalk kappa(xi') via incomparability, annihilation by m_xi, closed support equals Z."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteSurjectiveCoherentGenericSupport",
+  "declaration": "AlgebraicGeometry.Scheme.exists_coherent_pushforward_support_eq_range",
+  "file": "lean/Sheaf/Paper/FiniteSurjectiveCoherentGenericSupport.lean",
+  "statement": "theorem exists_coherent_pushforward_support_eq_range {X Y Z : Scheme.{u}} (f : Y ⟶ X) (i : Z ⟶ X) (ξ : X) [IsFinite f] [Surjective f] [IsLocallyNoetherian X] [IsClosedImmersion i] [IsIntegral Z] (hξ : IsGenericPoint ξ (Set.range i.base)) : ∃ F : Y.Modules, RingedSpace.IsCoherent Y.toRingedSpace F ∧ {x : X | ¬ Subsingleton (((Modules.pushforward f).obj F).presheaf.stalk x : Type u)} = Set.range i.base ∧ ∀ a : (X.toRingedSpace.presheaf.stalk ξ : Type u), a ∈ IsLocalRing.maximalIdeal (X.toRingedSpace.presheaf.stalk ξ) → ∀ s : ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj ((Modules.pushforward f).obj F) : Type u), a • s = 0",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fsg"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsg",
+  "group": "C1",
+  "result": "fix"
  }
 }
