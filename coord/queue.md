@@ -1,11 +1,11 @@
 # Work queue
 
-120 items; claim with `tools/claim.py next <group> [--stage N]`.
+115 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (120)
+## Stage 2: nodes to state (115)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -42,7 +42,6 @@
 | `lem-pc-finite-scheme-cohomology-tensor` | 1 | state | 0 |
 | `lem-pc-genus-well-defined` | 1 | state | 0 |
 | `lem-pc-grothendieck-edge-cocycle` | 1 | state | 0 |
-| `lem-pc-leray-degenerate-sections` | 1 | state | 0 |
 | `lem-pc-noetherian-perfect-direct-image` | 1 | state | 0 |
 | `lem-pc-projection-locality` | 1 | state | 0 |
 | `lem-pc-proper-derived-direct-image-composition` | 1 | state | 0 |
@@ -82,7 +81,6 @@
 | `lem-sc-pic-affine-base-change-compatibility` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-basechange` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-direct-sums` | 1 | state | 0 |
-| `lem-sc-proper-flat-right-adjoint-open-support` | 1 | state | 0 |
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 1 | state | 0 |
 | `lem-sc-proper-upper-shriek-composition` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 1 | state | 0 |
@@ -92,7 +90,6 @@
 | `lem-sc-smooth-proper-diagonal-pushforward-structure` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-tensor-formula` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
-| `lem-weil-pbc-coherent-formal-short-exact-levels` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-powers-ideal-application` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
@@ -105,9 +102,7 @@
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-weil-pbc-graded-finiteness-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
-| `lem-weil-pbc-integral-cover-kills-constant-cohomology` | 1 | state | 0 |
 | `lem-weil-pbc-ml-cohomology-powers-ideal` | 1 | state | 0 |
-| `lem-weil-pbc-module-pushforward-injective-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-pullback-iso-prime-torsion-devissage` | 1 | state | 0 |
 | `lem-weil-pbc-qs-scheme-cohomology-directed-colimit` | 1 | state | 0 |
