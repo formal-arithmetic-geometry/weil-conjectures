@@ -142,5 +142,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: 02N4/02N5: exactness of h^* stalkwise via 0098 (tool use recorded) and flatness of local rings, additivity, injectives preserved by the right adjoint of an exact functor; delivered before the blueprint-refs rule: blueprint field backfilled by tools/blueprint_refs.py, same_as not yet searched"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatModulePullbackExact",
+  "declaration": "AlgebraicGeometry.flat_module_pullback_exact_pushforward_injective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatModulePullbackExact.lean",
+  "statement": "theorem flat_module_pullback_exact_pushforward_injective {X Y : Scheme.{u}} (h : X ⟶ Y) [Flat h] : (PreservesFiniteLimits (Scheme.Modules.tensorPullback h) ∧ PreservesFiniteColimits (Scheme.Modules.tensorPullback h)) ∧ (Scheme.Modules.pushforward h).PreservesInjectiveObjects",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpe1030",
+  "group": "G1",
+  "result": "pass",
+  "note": "schemes X Y + h : X ⟶ Y = T,Z,h; [Flat h] (Mathlib, stalkwise via Flat.iff_flat_stalkMap) = def-weil-flat-morphism; exactness of h^* = PreservesFiniteLimits ∧ PreservesFiniteColimits of recorded Scheme.Modules.tensorPullback h; injectives = (Scheme.Modules.pushforward h).PreservesInjectiveObjects, the right adjoint of the recorded adjunction (#check: Mathlib Scheme.Modules.pushforward); not existing: Adjunction.preservesInjectiveObjects_of_preservesFiniteLimits needs the exactness clause as input; universe u single, no extra hypotheses"
  }
 }
