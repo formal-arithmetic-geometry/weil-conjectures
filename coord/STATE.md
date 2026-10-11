@@ -35,22 +35,22 @@ Written by the launcher at the start (`1-dag`), then kept current by the maintai
 - **Imported statement false in general (2026-10-09 15:05):** lem-fet-locally-trivial (sec-curve-estimates, imported, unit of the finite-etale points) asks for one surjective etale Y' → Y and one finite set S trivializing a finite etale P → Y; false for disconnected Y (Y = pt ⊔ pt, P one point over one component), true for connected Y. Found by the worker of lem-weil-pbc-finite-etale-trace-degree, which used Stacks 04HN instead. To be corrected at its own split (add 'Y connected' or allow S to vary with the component).
 - **Gap in a reviewed proof (node level, 2026-10-09 14:45):** prop-weil-pbc-algebraically-closed-extension step 10 feeds step 9 (constructibility in the curve sense, def-weil-pbc-constructible-torsion) into lem-weil-pbc-curve-constructible-reduction, whose hypothesis is constructibility as a sheaf of Z/r-modules (def-weil-pbc-etale-constructible-sheaf); the bridge is the new node lem-weil-pbc-constructible-torsion-modules-agree (unsplit): to be cited at step 10 when that node is split (the lead will add the pointer then). RESOLVED 2026-10-09 15:45: lem-weil-pbc-constructible-torsion-modules-agree split and reviewed; step 10 cites it.
 
-**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-11 05:24 UTC):
+**Remote groups** (`tools/group_stats.py`, updated with each progress row; 2026-10-11 05:35 UTC):
 | group | merged | returned | abandoned (distinct items) | claims held (age, h) |
 |---|---|---|---|---|
 | C | 19 | 20 | 0 | 0: none |
-| C1 | 206 | 56 | 21 | 3: def-pc-field-tower (0.0), def-pc-generators (0.0), def-pc-kflat-complex (0.0) |
+| C1 | 208 | 56 | 22 | 6: def-pc-compactly-generated (0.0), def-pc-field-tower (0.2), def-pur-sheaf-modules-hom-module (0.1), def-pur-sheaf-tensor-product (0.1), def-sbc-first-order-thickening (0.0), def-sc-perfect-closed-immersion (0.0) |
 | D | 2 | 8 | 0 | 0: none |
 | D1 | 3 | 4 | 2 | 0: none |
 | E | 1 | 5 | 0 | 0: none |
-| E1 | 216 | 68 | 24 | 0: none |
+| E1 | 216 | 68 | 24 | 5: def-sc-rational-functions (0.0), def-sp-composite-acyclicity (0.0), def-sp-exact-couple (0.0), def-sp-filtration (0.0), def-weil-extension-by-zero-presheaf (0.0) |
 | F | 1 | 4 | 0 | 0: none |
-| F1 | 198 | 61 | 34 | 0: none |
+| F1 | 198 | 61 | 34 | 5: def-weil-pbc-analytically-unramified (0.0), def-weil-pbc-associated-graded-ring (0.0), def-weil-pbc-associated-module (0.0), def-weil-pbc-complete-intersection-over-field (0.0), def-weil-pbc-constant-group-scheme (0.0) |
 | G | 0 | 2 | 0 | 0: none |
-| G1 | 168 | 44 | 18 | 0: none |
-| H1 | 160 | 47 | 20 | 0: none |
-| J1 | 161 | 39 | 21 | 0: none |
-| K1 | 162 | 37 | 17 | 0: none |
+| G1 | 168 | 44 | 18 | 5: def-weil-pbc-delta-functor (0.0), def-weil-pbc-depth (0.0), def-weil-pbc-double-complex-zigzag-module (0.0), def-weil-pbc-essentially-constant-system (0.0), def-weil-pbc-essentially-smooth-ring-map (0.0) |
+| H1 | 160 | 47 | 20 | 5: def-weil-pbc-fibre-degree-bound (0.0), def-weil-pbc-finite-global-dimension (0.0), def-weil-pbc-formal-glueing-data (0.0), def-weil-pbc-formally-smooth-adic (0.0), def-weil-pbc-g-ring (0.0) |
+| J1 | 161 | 39 | 21 | 5: def-weil-pbc-generating-sections (0.0), def-weil-pbc-japanese-domain (0.0), def-weil-pbc-relative-global-complete-intersection (0.0), def-weil-pbc-ring-map-quasi-finite-at-prime (0.0), def-weil-pbc-scheme-conventions (0.0) |
+| K1 | 162 | 37 | 17 | 5: def-weil-pbc-separable-field-extension (0.0), def-weil-pbc-singular-ideal (0.0), def-weil-pbc-strictly-standard-element (0.0), def-weil-pbc-symmetric-product-morphism (0.0), def-weil-pbc-torsion-etale-sheaf (0.0) |
 | M1 | 151 | 32 | 20 | 0: none |
 | T1 | 0 | 0 | 1 | 0: none |
 
@@ -409,6 +409,7 @@ Oldest delivery awaiting review: 4 min deliver/F1/lem-sc-p1-boundary-extension-c
 | 2026-10-11 05:13 | 807 | 3026 | 1153 | 353 | stage 2 running: 0 remote deliveries yet (dispatcher idle until it reads STAGE 2 READY), 0 reviewers in flight; lead items since 05:05: def-galois-category stated and landed (W-gal0508, R-gal0511 PASS; build green), def-kun-topological-dimension-at-point and def-nagata-basechanged-system recorded as existing source declarations (found by the workers; lean_names_upstream misses them); stage 2 open: see dag_queue summary; next lead item being claimed |
 | 2026-10-11 05:20 | 811 | 3026 | 1153 | 353 | stage 2 running: 0 remote deliveries yet, 0 reviewers in flight; lead items since 05:13: def-nagata-directed-finite-upper-bound (W-dub0518, R-dub0522 FIX) and def-pc-dimension (W-dimx0530, R-dimx0533 FIX) stated and landed, each module also realizing a lemma node (recorded existing); global builds green (05:16); next lead item being claimed |
 | 2026-10-11 05:24 | 810 | 3026 | 1153 | 353 | stage 2 running: remote side installed, deliveries expected from ~05:50; 0 deliveries yet; lead item def-pc-curve stated and landed (W-cur0537, R-cur0541 PASS), def-pc-divisor-line-bundle in progress (W-dlb0545; stops at 'state nothing yourself' once deliveries wait); lean options and PATH fixed in single-file compiles (STATE line above); builds green |
+| 2026-10-11 05:35 | 816 | 3026 | 1153 | 353 | stage 2 running: first group deliveries arrived (C1): 2 merged (def-pc-generators PASS R-gen0531, def-pc-representable-functor PASS R-rep0535, existing Mathlib); 0 wait; lead items since 05:24: def-pc-divisor-line-bundle recorded existing, def-pc-projective-morphism stated (R-prj0536 PASS), def-pc-kflat-complex stated (R-kfl0545 FIX); the lead claims no further item while the groups deliver; builds green |
 
 **LEAN REFRESH DONE** (2026-10-10 10:53 UTC; the human's decision relayed at 09:47, commit 6fde5cb5d). The done-branch checkout `~/weil-conjectures-slopmaster2` is at `71d63dcf` (from `1ad77be9`, 882 commits; same Mathlib, lake-manifest unchanged; `.lake/build` seeded from the other session's worktree, 10116 jobs built with 12 threads by 10:12). New sorry map `local/sorry_map_slopmaster2_71d63dcf.jsonl.gz`: 32094 declarations (21984 owners after merging auxiliaries; 420 with `sorry`, 271 of them named by no node), made with the `Weil` root included; the first run died with the session at the 21st account limit and was rerun detached (10:30–10:47). Names added to the audit: the `lean = [...]` lists of `upstream-blueprint-main` (849 lists, 508 for DAG nodes, 754 names; an old `blueprint_lean` name absent from the branch is `superseded` when the current list exists) and the docstring tags `(blueprint: <id>)`: 1438 tag ids; **822 declarations with such a tag matched a node** (exact tags for 473 nodes; qualified tags such as "the implication (1) ⇒ (2)" for 78 nodes, which count as partial and never close a node); 182 tagged ids are no DAG node, 75 tags sit outside a declaration docstring. Also a list of every declaration of the imported libraries (`local/library_names_mathlib.tsv.gz`, 473131 names, `tools/library_names.lean`), so that a Mathlib declaration named by the blueprint counts as found and sorry-free. The lean-lsp server already serves the new checkout (it finds the new declarations), no restart needed.
 
@@ -580,6 +581,7 @@ Numbers (the DAG as of the refresh, 4471 nodes; the "before" is the same DAG und
 | 2026-10-11 05:13 | 171 of 789 | 17 |
 | 2026-10-11 05:20 | 171 of 789 | 17 |
 | 2026-10-11 05:24 | 171 of 789 | 17 |
+| 2026-10-11 05:35 | 171 of 789 | 17 |
 
 Review lag (10:12 UTC): 11 deliveries waiting, the oldest since 09:36 UTC (about 35 minutes), more than the twenty minutes the human set; the lead missed them while the delivery watch slept (10-minute polling) during the Lean refresh. Working through them now; the watch is now checked at every review.
 
