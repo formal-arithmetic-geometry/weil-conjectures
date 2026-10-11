@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.GlobalSections
 public import WeilConjectures.Topology.Sheaves.CechCriterion
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # Čech complexes of invertible modules under affine base change
@@ -130,5 +131,81 @@ theorem sectionsBaseChange_bijective (H : IsPullback g iY iX f) (hV : IsAffineOp
   exact he'.bijective.comp ε.bijective
 
 end Sections
+
+section Cech
+
+open TopCat.Presheaf
+
+variable {V : S.Opens} (hfV : ⊤ ≤ f ⁻¹ᵁ V) (ℱ : X.Modules) {ι : Type u} (U : ι → X.Opens)
+  (hUV : ∀ i, U i ≤ iX ⁻¹ᵁ V)
+
+include hUV in
+lemma iInf_le_preimage_of_forall_le {k : ℕ} (y : Fin (k + 1) → ι) :
+    ⨅ l, U (y l) ≤ iX ⁻¹ᵁ V :=
+  (iInf_le _ 0).trans (hUV _)
+
+variable (g) in
+lemma iInf_preimage_eq_preimage_iInf {k : ℕ} (y : Fin (k + 1) → ι) :
+    ⨅ l, g ⁻¹ᵁ U (y l) = g ⁻¹ᵁ ⨅ l, U (y l) :=
+  (g.preimage_iInf _).symm
+
+variable [Algebra Γ(S, V) Γ(T, ⊤)] (hf : algebraMap Γ(S, V) Γ(T, ⊤) = (f.appLE V ⊤ hfV).hom)
+  [∀ (k : ℕ) (y : Fin (k + 1) → ι), Module Γ(S, V) Γ(ℱ, ⨅ l, U (y l))]
+  (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι) (a : Γ(S, V)) (x : Γ(ℱ, ⨅ l, U (y l))),
+    a • x = iX.appLE V _ (iInf_le_preimage_of_forall_le U hUV y) a • x)
+
+include hU in
+/-- The Čech differential `Č^k(U, ℱ) ⟶ Č^{k+1}(U, ℱ)` is `Γ(S, V)`-linear. -/
+lemma cechComplex_d_smul (k : ℕ) (a : Γ(S, V)) (c : CechCochain U ℱ.presheaf k) :
+    ((cechComplex U).obj ℱ.presheaf).d k (k + 1) (a • c : CechCochain U ℱ.presheaf k) =
+      a • (show CechCochain U ℱ.presheaf (k + 1) from
+        ((cechComplex U).obj ℱ.presheaf).d k (k + 1) c) := by
+  funext y
+  rw [cechComplex_d_apply, Pi.smul_apply, cechComplex_d_apply, Finset.smul_sum]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [smul_comm, Pi.smul_apply, hU, hU, Scheme.Modules.map_smul]
+  congr 2
+  rw [← CommRingCat.comp_apply, Scheme.Hom.appLE_map]
+
+/-- The Čech differential `Č^k(U, ℱ) ⟶ Č^{k+1}(U, ℱ)` as a `Γ(S, V)`-linear map. -/
+noncomputable def cechDifferential (k : ℕ) :
+    CechCochain U ℱ.presheaf k →ₗ[Γ(S, V)] CechCochain U ℱ.presheaf (k + 1) where
+  toFun := ((cechComplex U).obj ℱ.presheaf).d k (k + 1)
+  map_add' := map_add _
+  map_smul' a c := cechComplex_d_smul ℱ U hUV hU k a c
+
+lemma cechDifferential_apply (k : ℕ) (c : CechCochain U ℱ.presheaf k) :
+    cechDifferential ℱ U hUV hU k c = ((cechComplex U).obj ℱ.presheaf).d k (k + 1) c :=
+  rfl
+
+lemma cechDifferential_comp (k : ℕ) :
+    cechDifferential ℱ U hUV hU (k + 1) ∘ₗ cechDifferential ℱ U hUV hU k = 0 := by
+  refine LinearMap.ext fun c ↦ ?_
+  exact congr($(((cechComplex U).obj ℱ.presheaf).d_comp_d k (k + 1) (k + 2)) c)
+
+variable (w : g ≫ iX = iY ≫ f) [Fintype ι] [DecidableEq ι]
+
+include w hf hU in
+/-- **Base change of Čech cochains.** The map `B ⊗[A] Č^k(U, ℱ) ⟶ Č^k(g⁻¹ U, g^* ℱ)`,
+`b ⊗ c ↦ (y ↦ iY^♯ b • g^* (c y))`. -/
+noncomputable def cechBaseChange (k : ℕ) :
+    Γ(T, ⊤) ⊗[Γ(S, V)] CechCochain U ℱ.presheaf k →+
+      CechCochain (fun i ↦ g ⁻¹ᵁ U i) ((pullback g).obj ℱ).presheaf k :=
+  AddMonoidHom.pi fun y ↦
+    (((pullback g).obj ℱ).presheaf.map
+      (eqToHom (iInf_preimage_eq_preimage_iInf g U y)).op).hom.comp
+      ((sectionsBaseChange w hfV ℱ (iInf_le_preimage_of_forall_le U hUV y) hf (hU k y)).comp
+        ((Pi.evalAddMonoidHom _ y).comp (TensorProduct.piRight Γ(S, V) Γ(S, V) Γ(T, ⊤)
+          (fun y : Fin (k + 1) → ι ↦ Γ(ℱ, ⨅ l, U (y l)))).toLinearMap.toAddMonoidHom))
+
+lemma cechBaseChange_tmul (k : ℕ) (b : Γ(T, ⊤)) (c : CechCochain U ℱ.presheaf k)
+    (y : Fin (k + 1) → ι) :
+    cechBaseChange hfV ℱ U hUV hf hU w k (b ⊗ₜ c) y =
+      ((pullback g).obj ℱ).presheaf.map (eqToHom (iInf_preimage_eq_preimage_iInf g U y)).op
+        (iY.appLE ⊤ (g ⁻¹ᵁ ⨅ l, U (y l)) (le_top.trans iY.preimage_top.ge) b •
+          pullbackSection g (c y)) := by
+  simp [cechBaseChange, TensorProduct.piRight_apply, sectionsBaseChange_tmul]
+
+end Cech
 
 end AlgebraicGeometry.Scheme.Modules
