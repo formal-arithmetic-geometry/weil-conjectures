@@ -473,6 +473,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationaliz
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.SmulInvertible
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.TensorQuotPow
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModelOfClass
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
@@ -1472,6 +1473,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryCompactSupport
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryProper
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
