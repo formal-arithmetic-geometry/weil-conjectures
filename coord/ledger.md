@@ -3849,3 +3849,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:34 L: merged deliver/F1/lem-pc-flat-module-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FlatModuleDescent AlgebraicGeometry.exists_eventually_isFlatOver_of_limit; new nodes: def-pc-scheme-module-flat-over)
 - 08:35 L: merged deliver/H1/lem-sc-weakass-localization (stage 2; reviewer PASS; first push; Sheaf.RingTheory.WeakAssLocalization Module.weakly_associated_atPrime_iff)
 - 08:35 L: merged deliver/M1/lem-sc-picard-locus-closed-valuation-triviality (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.PicardLocusClosedValuationTriviality generic_fibre_triviality_over_valuation_ring)
+- 08:36 L: merged deliver/E1/lem-sc-regular-local-ext-vanishing (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularLocalExtVanishing IsRegularLocalRing.subsingleton_ext_of_ringKrullDim_lt)

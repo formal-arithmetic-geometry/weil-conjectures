@@ -118,5 +118,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-rlv (reviewer sub-agent of L); spot-checked: Source: Stacks 0FZ3 (equiv lemma-Ext-0-regular, proof of (1): stalk regular so global dimension d_x by 00O7, hence local Ext^q vanishes for q>d_x) and 00O7 (algebra proposition-regular-finite-gl-dim, 'regular local ring has global dimension <= d'); the item statement (regular local R, d=dim R, M finitely generated, N arbitrary, q>d) agrees, with M f.g. a harmless specialisation and d finite (regular local => Noetherian local). Step 1 carried by lem-weil-pbc-regular-local-finite-gl-dim (statement: every R-module has a projective resolution of length <= d, read). Step 2 carried by lem-weil-pbc-projective-dimension-ext-characterization (statement includes Ext^i_R(X,Y)=0 for all Y and all i>=n+1, read), with def-pc-ext for Ext of R-modules, i>=0. No circularity: neither cited node reaches the item (BFS over stmt/proof deps). Tool uses accepted (C8): both are generic commutative-algebra facts used as black boxes, not a step of the Picard-duality route. Mathlib (pinned): RegularLocalRing/ has only Defs.lean and Polynomial.lean, no global-dimension or Ext-vanishing theorem for regular local rings, no globalDimension declaration, so the item is not a leaf; slopmaster2 has no regular-local Ext/projective-dimension declaration stating it (B10 not applicable). Small cases: d=0 (regular local of dim 0 is a field, Ext^q=0 for q>=1), d=1 (DVR, Ext^q=0 for q>=2). Only changed fields: proof, proof_deps, proof_origin, status, split_report. Start Sat Oct 10 04:12:45 PM UTC 2026, end Sat Oct 10 04:13:19 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularLocalExtVanishing",
+  "declaration": "IsRegularLocalRing.subsingleton_ext_of_ringKrullDim_lt",
+  "file": "lean/Sheaf/RingTheory/RegularLocalExtVanishing.lean",
+  "statement": "theorem subsingleton_ext_of_ringKrullDim_lt (R : Type u) [CommRing R] [IsRegularLocalRing R] (M N : ModuleCat.{v} R) [Module.Finite R M] (q : ℕ) (hq : ringKrullDim R < (q : WithBot ℕ∞)) : letI := HasExt.standard (ModuleCat.{v} R) Subsingleton (Abelian.Ext M N q)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rle1303",
+  "group": "E1",
+  "result": "pass",
+  "note": "IsRegularLocalRing (Mathlib: local+Noetherian, spanFinrank m = ringKrullDim) = regular local; d=ringKrullDim R; M finite (Module.Finite), N arbitrary in ModuleCat.{v} R; q:N with dim<q covers all integers q>d (d>=0); Ext=CategoryTheory.Abelian.Ext with HasExt.standard, Subsingleton = 0; names #check'd"
  }
 }
