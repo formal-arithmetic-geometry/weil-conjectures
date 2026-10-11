@@ -1,8 +1,8 @@
 # Work queue
 
-865 items; claim with `tools/claim.py next <group> [--stage N]`.
+864 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (15)
+## Stage 1: nodes to split (14)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -19,7 +19,6 @@
 | `lem-sc-complex-lift-class-projective` | 6017 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-pur-essential-constant-cofinal-0a1s` | - | none |
 | `lem-pur-triangle-morphism-category-05r9` | - | none |
 
 ## Stage 2: nodes to state (850)
@@ -877,7 +876,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1776 nodes that wait for a statement dependency, 56 nodes that wait for stage 1.
+Not open yet: 1777 nodes that wait for a statement dependency, 55 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
