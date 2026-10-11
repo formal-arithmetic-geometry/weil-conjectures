@@ -46,6 +46,13 @@ Claim with `tools/claim.py next <G> --stage 2` (nearest to Mathlib first).
 - `NoetherianApproximation.gluedLimitComparison` takes `[HasLimit N.D]`: citers supply `haveI : HasLimit N.D := ⟨⟨⟨_, N.isLimit⟩⟩⟩` (K1 a5be8ed2e).
 - The siblings of module-base-change-map-open-restriction (-pasting, -algebra) cite C1's `Scheme.Modules.moduleBaseChangeMap` (1798df265), never a second definition.
 - Λ-module étale sheaves: constructible material uses `Sheaf … (ModuleCat.{u+1} Λ)` with `Λ : Type (u+1)`; the `ULift` `SheafOfModules` encoding does not apply there (F1 c208eb7a6; STATE line Λ-MODULE ÉTALE SHEAVES: TWO ENCODINGS).
+- No `let` in statements: they elaborate as `have` and stage 3 cannot unfold them; write the terms out (21 lets removed in C1 14d642f46).
+- Never run `cat` (or any reader) without a file or heredoc: it waits on stdin and stalls the agent (F1 e681a69a6 reviewer, 16 min).
+- `IsZero` on a bare `Type` is unprovable; state vanishing as `Subsingleton` (J1 bd3f9a579).
+- Rebase on sheaf-dag before delivering: a stale-base re-record of a landed node is reverted (F1 394d93d01).
+- A dead inflight landing record (merging process gone): `tools/landing.py abort <id>` (C1 2556ce25a).
+- ⨁ on sheaves of modules needs a local `HasFiniteBiproducts.of_hasFiniteProducts` instance (`Abelian.hasFiniteBiproducts` is a theorem, not an instance) (E1 45deb4957).
+- Support of a module is inline `{x | ¬ Subsingleton (F.presheaf.stalk x)}` (C1 14e331910; STATE line SUPPORT OF A MODULE); stalks as objects/maps `RingedSpace.moduleStalkFunctor` (STATE line MODULE STALKS).
 - A statement you find false or untypable: correct the node by (C) of §1, following the source, with `statement_change` and the report section. Never write it weaker, never change the statement silently (H7).
 - A statement you only doubt (no counterexample, the source agrees with it): write it as the node says, mark `STATEMENT-DISPUTED: <reason>` in the report.
 
