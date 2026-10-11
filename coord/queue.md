@@ -1,16 +1,15 @@
 # Work queue
 
-32 items; claim with `tools/claim.py next <group> [--stage N]`.
+38 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (32)
+## Stage 2: nodes to state (38)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-nagata-qc-open-equality-stage` | 1 | state | 13 |
-| `def-weil-pbc-finite-split-hypercover` | 1 | state | 7 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `lem-sc-cech-h1-map-natural` | 1 | state | 2 |
 | `lem-sc-topological-extension-by-zero-stalks` | 1 | state | 2 |
@@ -37,12 +36,19 @@
 | `lem-weil-pbc-colimit-of-sites-injective-system` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-strict-henselian-zariski-comparison` | 1 | state | 0 |
+| `lem-weil-pbc-hypercover-free-resolution` | 1 | state | 0 |
+| `lem-weil-pbc-hypercover-product` | 1 | state | 0 |
+| `lem-weil-pbc-hypercover-refinement` | 1 | state | 0 |
+| `lem-weil-pbc-matching-object-fibre-product` | 1 | state | 0 |
 | `lem-weil-pbc-module-injective-open-cover-cech-acyclic` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-finite-coequalizer-embeds-constant` | 1 | state | 0 |
+| `lem-weil-pbc-sr-matching-object-one-member` | 1 | state | 0 |
+| `lemma-weil-pbc-finite-hypercover-descent` | 1 | state | 0 |
+| `thm-weil-pbc-hypercover-cohomology` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-topological-flasque-acyclic` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 26 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 19 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
