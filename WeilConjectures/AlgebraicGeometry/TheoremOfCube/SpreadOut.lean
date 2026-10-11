@@ -334,6 +334,38 @@ lemma exists_lift (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ Y) ⊗ Z)
     exact hg₂
 
 
+/-- **Rigidified trivialisations on the slices.** If `L` is trivial on the two slices, there are
+free generators of `L` on the slices which agree on `{x} × {y} × Z`. -/
+lemma exists_isFreeGenerator_slices (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
+    (L : ((X ⊗ Y) ⊗ Z).left.Modules)
+    (hx : Nonempty ((Scheme.Modules.pullback (sliceX X Y Z x)).obj L ≅ 𝟙_ _))
+    (hy : Nonempty ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L ≅ 𝟙_ _)) :
+    ∃ (ex : Γ((Scheme.Modules.pullback (sliceX X Y Z x)).obj L, ⊤))
+      (ey : Γ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L, ⊤)),
+      Scheme.Modules.IsFreeGenerator ex ∧ Scheme.Modules.IsFreeGenerator ey ∧
+      (sliceComparison X Y Z x y L).hom.app ⊤ (Scheme.Modules.pullbackSection _ ex) =
+        Scheme.Modules.pullbackSection _ ey := by
+  obtain ⟨αx⟩ := hx
+  obtain ⟨αy⟩ := hy
+  have hex := (Scheme.Modules.isFreeGenerator_one ⊤).app_hom αx.symm
+  have hey := (Scheme.Modules.isFreeGenerator_one ⊤).app_hom αy.symm
+  have hA := (hex.pullback_unit_app (slicePt Z y)).app_hom (sliceComparison X Y Z x y L)
+  have hB := hey.pullback_unit_app (slicePt Z x)
+  obtain ⟨u, hu⟩ := hB.exists_unit_smul_eq hA
+  let v : Γ((X ⊗ Z).left, ⊤)ˣ := Units.map ((snd X Z).left.app ⊤).hom.toMonoidHom u
+  refine ⟨_, (v : Γ((X ⊗ Z).left, ⊤)) • _, hex, hey.units_smul v, ?_⟩
+  have h1 : slicePt Z x ≫ (snd X Z).left = 𝟙 _ := by
+    rw [← Over.comp_left, lift_snd, Over.id_left]
+  have h2 : (slicePt Z x).app ⊤ ((snd X Z).left.app ⊤ u.1) = u.1 := by
+    have h3 := congrArg (fun f ↦ f u.1) (Scheme.Hom.congr_app h1 ⊤)
+    simp only [Scheme.Hom.comp_app, Scheme.Hom.id_app, CommRingCat.comp_apply,
+      CommRingCat.id_apply] at h3
+    exact h3.trans (by simp)
+  refine hu.trans ?_
+  rw [Scheme.Modules.pullbackSection_smul]
+  congr 1
+  exact h2.symm
+
 variable [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
   [GeometricallyIntegral Y.hom]
 
