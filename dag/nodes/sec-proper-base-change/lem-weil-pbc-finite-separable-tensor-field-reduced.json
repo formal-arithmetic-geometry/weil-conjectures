@@ -209,5 +209,23 @@
   "worker": "stage1",
   "summary": "Checked against Stacks 030U (algebra.tex lines 10170-10182) and 030N (fields.tex lemma-primitive-element); tags verified. Statement kept (it is exactly what the only citer, lem-weil-pbc-separably-generated-tensor-reduced step 4, uses). Mathlib re-searched (LeanSearch, Loogle, LeanFinder, grep, local_search): no single declaration; IsSeparable ⇒ IsGeometricallyReduced is an open TODO in Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean; the three-declaration FormallyUnramified chain stays a mathlib_candidate (B8). Split following the source: (1) primitive element 030N reduces to $K'=L(\\alpha)\\cong L[T]/(P)$, $P$ the separable minimal polynomial (power-basis node for surjectivity); (2) $K'\\otimes_LE\\cong E[T]/(\\bar P)$ by polynomial scalar extension and tensor-quotient base change; (3) $\\bar P$ stays separable (elementary); (4) the source's 'since $P$ is separable this is a finite product of fields' is the new unsplit node lem-weil-pbc-separable-polynomial-quotient-reduced (stated as the reducedness the item needs; Mathlib chain Separable.squarefree → Squarefree.isRadical → isRadical_iff_span_singleton → Ideal.isRadical_iff_quotient_reduced recorded as candidate). The source treats only a simple extension $L(x_{r+1})$; the item's $K'$ is any finite separable extension, hence the added primitive-element step."
  },
- "reviewed": "pass (L, 2026-10-10): 4 steps follow 030U first paragraph plus the primitive element theorem (030N): K' = L[T]/(P) with P separable, base change gives E[T]/(P bar), P bar stays separable, and a quotient by a separable polynomial is reduced (new unsplit node with a four-declaration Mathlib candidate)."
+ "reviewed": "pass (L, 2026-10-10): 4 steps follow 030U first paragraph plus the primitive element theorem (030N): K' = L[T]/(P) with P separable, base change gives E[T]/(P bar), P bar stays separable, and a quotient by a separable polynomial is reduced (new unsplit node with a four-declaration Mathlib candidate).",
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteSeparableTensorFieldReduced",
+  "declaration": "Algebra.isReduced_tensorProduct_of_finiteSeparable",
+  "file": "lean/Sheaf/FieldTheory/FiniteSeparableTensorFieldReduced.lean",
+  "statement": "theorem isReduced_tensorProduct_of_finiteSeparable (L : Type u) (K : Type v) (E : Type w) [Field L] [Field K] [Field E] [Algebra L K] [Algebra L E] [FiniteDimensional L K] [Algebra.IsSeparable L K] : IsReduced (K ⊗[L] E)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fst1023",
+  "group": "J1",
+  "result": "pass",
+  "note": "L field; K field+Algebra L K (K'); FiniteDimensional=Module.Finite; Algebra.IsSeparable (includes algebraic); E arbitrary field ext, no extra hyp; K ⊗[L] E Algebra.TensorProduct ring; IsReduced; no Mathlib/landed duplicate (exact? fails, name free under import Mathlib)"
+ }
 }

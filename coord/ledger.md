@@ -4217,3 +4217,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:23 L: merged deliver/K1/lem-weil-pbc-finite-pushforward-constructible-noetherian (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian AlgebraicGeometry.Scheme.isConstructibleEtaleSheafOfSets_lowerStar_of_isNoetherian)
 - 10:23 L: merged deliver/G1/lem-weil-pbc-finite-after-completion (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FiniteAfterCompletion AdicCompletion.finite_after_completion)
 - 10:23 L: merged deliver/M1/lem-weil-pbc-finite-over-nagata-nagata (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteOverNagata finite_over_nagata_is_nagata)
+- 10:23 L: merged deliver/J1/lem-weil-pbc-finite-separable-tensor-field-reduced (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.FiniteSeparableTensorFieldReduced Algebra.isReduced_tensorProduct_of_finiteSeparable)
