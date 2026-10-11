@@ -5729,3 +5729,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 23:24 L: merged deliver/E1/WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk (stage 3; reviewer PASS; after a return; landing 20261011T232327-L-371913 (interface); modules 2; new nodes 1)
 - 23:27 L: returned deliver/E1/WeilConjectures.AlgebraicGeometry.Curve.FieldExtension (reviewer RETURN: (reviewer X-d6867, head d6867aa88) C3/D4: In dag/nodes/sec-proper-base-change/e1-algebraically-closed-cohomology-invaria)
 - 23:36 L: returned deliver/E1/WeilConjectures.AlgebraicGeometry.Curve.FieldExtension (reviewer RETURN: (reviewer X-4912a, head 4912a9060) H8: lean/Sheaf/AlgebraicGeometry/Curve/AlgebraicallyClosedCohomologyInvariant.lean la)
+- 23:39 L: merged deliver/H1/WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (stage 3; reviewer PASS; after a return; landing 20261011T233842-L-412783 (proof); modules 1; new nodes 0)

@@ -26,46 +26,35 @@
  ],
  "proof": [
   {
-   "text": "Suppose $X$ is nonempty. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], its underlying topological space is Noetherian (Stacks 01OZ). Since its topological Krull dimension is strictly below the finite integer $q$, it is a finite integer $d<q$ [def-kun-topological-krull-dimension]. Apply [lem-sc-zariski-dimension-bound] to the underlying abelian sheaf $\\mathcal F_{\\mathrm{ab}}$: that node covers every abelian sheaf on the Zariski site of a Noetherian scheme of finite dimension, so $H^q(X,\\mathcal F_{\\mathrm{ab}})=0$. The canonical comparison [lem-sc-module-abelian-zariski-cohomology] identifies this group with the module cohomology $H^q(X,\\mathcal F)$ in the statement. Neither the dimension bound nor the comparison needs quasi-coherence.",
+   "text": "For nonempty X, the closure of a point is an irreducible closed subset, so its topological Krull dimension [def-kun-topological-krull-dimension] is nonnegative. Thus q cannot be zero. Write q=n+1; the discrete WithBot extended-natural order converts dim X < n+1 into dim X ≤ n. Apply [lem-sc-zariski-dimension-bound] to the underlying abelian sheaf of the module, obtaining that Sheaf.H' F (n+1) top is zero. The free abelian presheaf on yoneda(top) is isomorphic to the constant presheaf ULift Z: each Hom(U,top) is a singleton and its free abelian group is Z. Sheafify this natural isomorphism and precompose Ext with it. This identifies Sheaf.H F (n+1), which is definitionally Modules.H, with the vanishing group. No module-derived-cohomology comparison theorem is required.",
    "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
     "def-kun-topological-krull-dimension",
-    "lem-sc-zariski-dimension-bound",
-    "lem-sc-module-abelian-zariski-cohomology"
+    "lem-sc-zariski-dimension-bound"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Proposition Tag 02UZ (proposition-vanishing-Noetherian), statement; Properties, Lemma Tag 01OZ (lemma-Noetherian-topology); Sites and Sheaves, Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree)"
+    "place": "Proposition 02UZ; Mathlib FreeAbelianGroup.uniqueEquiv and Ext precomposition along an isomorphism"
    }
   },
   {
-   "text": "Suppose $X=\\varnothing$. Its only open is $\\varnothing$; the empty-cover sheaf axiom forces the abelian group of sections $\\mathcal F_{\\mathrm{ab}}(\\varnothing)$ to be zero. Every restriction map is therefore surjective, so $\\mathcal F_{\\mathrm{ab}}$ is flasque [def-sc-zariski-flasque]. Its $H^0$ is its zero group of global sections, and its $H^q$ is zero for $q>0$ by [lem-sc-zariski-flasque-acyclic]. The comparison [lem-sc-module-abelian-zariski-cohomology] transfers this to the module cohomology, including $q=0$. This covers the $-\\infty$ dimension case in [def-kun-topological-krull-dimension].",
-   "uses": [
-    "def-sc-zariski-flasque",
-    "lem-sc-zariski-flasque-acyclic",
-    "lem-sc-module-abelian-zariski-cohomology",
-    "def-kun-topological-krull-dimension"
-   ],
-   "elementary": false,
+   "text": "For empty X, the underlying abelian sheaf has no stalks. The Mathlib zero-sheaf criterion checked on all stalks is vacuous, hence the sheaf is zero. Its cohomology in every degree is zero because the additive cohomology functor maps zero objects to zero objects (Sheaf.subsingleton_H_of_isZero). This handles q=0 as well as positive q, without flasque acyclicity.",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Proposition Tag 02UZ (proposition-vanishing-Noetherian), $d=0$ including the empty space; Lemma Tag 09SY (lemma-flasque-acyclic) and Cohomology on Sites, Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree)"
+    "document": "Mathlib.Topology.Sheaves.Abelian; Mathlib.CategoryTheory.Sites.SheafCohomology.Basic",
+    "place": "TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero; CategoryTheory.Sheaf.subsingleton_H_of_isZero"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
   "def-kun-topological-krull-dimension",
-  "lem-sc-zariski-dimension-bound",
-  "lem-sc-module-abelian-zariski-cohomology",
-  "def-sc-zariski-flasque",
-  "lem-sc-zariski-flasque-acyclic"
+  "lem-sc-zariski-dimension-bound"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Proposition Tag 02UZ (proposition-vanishing-Noetherian), via Sites and Sheaves, Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree)"
+  "place": "Proposition 02UZ, specialized via the existing Zariski dimension bound; empty-space case by the zero-stalk criterion"
  },
  "mathlib_searches": [
   {
@@ -171,5 +160,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-0172f",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261011T233842-L-412783",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered EulerChar proof, node metadata, report, and compiled files matched the stage-3 brief; lcompile and axiom checks passed."
  }
 }

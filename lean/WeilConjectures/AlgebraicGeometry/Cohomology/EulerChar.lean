@@ -15,6 +15,8 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.AlgebraicGeometry.ZariskiDimensionBound
+import Mathlib.Topology.Sheaves.Abelian
 
 /-!
 # The arithmetic genus and the cohomological degree of a sheaf of modules
@@ -69,8 +71,45 @@ sum, hence makes `χ`, the genus and the degree meaningful, for instance on a cu
 `n = 1`. -/
 @[stacks 02UZ]
 theorem Modules.subsingleton_H_of_topologicalKrullDim_lt {X : Scheme.{u}} [IsNoetherian X]
-    (ℱ : X.Modules) {q : ℕ} (hq : topologicalKrullDim X < q) : Subsingleton (ℱ.H q) :=
-  sorry
+    (ℱ : X.Modules) {q : ℕ} (hq : topologicalKrullDim X < q) : Subsingleton (ℱ.H q) := by
+  classical
+  let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj ℱ
+  by_cases hX : Nonempty X
+  · obtain ⟨x⟩ := hX
+    have : Nonempty (IrreducibleCloseds X) :=
+      ⟨⟨closure {x}, isIrreducible_singleton.closure, isClosed_closure⟩⟩
+    have hnonneg : 0 ≤ topologicalKrullDim X := Order.krullDim_nonneg
+    cases q with
+    | zero => exact False.elim (not_lt_of_ge hnonneg hq)
+    | succ n =>
+      have hdim : topologicalKrullDim X ≤ (n : WithBot ℕ∞) := by
+        apply ENat.WithBot.lt_add_one_iff.mp
+        simpa only [Nat.cast_add, Nat.cast_one] using hq
+      have hz := AlgebraicGeometry.isZero_zariskiCohomology_of_dimension_bound
+        X n hdim F (n + 1) n.lt_succ_self
+      let e : (yoneda.obj (⊤ : X.Opens) ⋙ AddCommGrpCat.free) ≅
+          (Functor.const X.Opensᵒᵖ).obj (AddCommGrpCat.of (ULift ℤ)) :=
+        NatIso.ofComponents (fun U ↦ by
+          letI : Unique (U.unop ⟶ (⊤ : X.Opens)) :=
+            ⟨⟨homOfLE le_top⟩, fun f ↦ Subsingleton.elim f _⟩
+          exact ((FreeAbelianGroup.uniqueEquiv _).trans AddEquiv.ulift.symm).toAddCommGrpIso)
+          (by
+            intro U V f
+            ext g
+            change ULift.up ((FreeAbelianGroup.lift fun _ ↦ (1 : ℤ))
+                (FreeAbelianGroup.map (fun g ↦ f.unop ≫ g) g)) =
+              ULift.up ((FreeAbelianGroup.lift fun _ ↦ (1 : ℤ)) g)
+            rw [← FreeAbelianGroup.lift_comp]
+            rfl)
+      let e' := (presheafToSheaf (Opens.grothendieckTopology X) AddCommGrpCat).mapIso e
+      have : Subsingleton (F.H' (n + 1) ⊤) := AddCommGrpCat.subsingleton_of_isZero hz
+      let a : ℱ.H (n + 1) ≃+ (F.H' (n + 1) ⊤) :=
+        Abelian.Ext.precompAddEquiv e' F (n + 1)
+      exact a.injective.subsingleton
+  · have : IsEmpty X := not_nonempty_iff.mp hX
+    have hz : Limits.IsZero F :=
+      (TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero F).mpr fun x ↦ isEmptyElim x
+    exact Sheaf.subsingleton_H_of_isZero hz q
 
 section Defs
 
@@ -102,9 +141,16 @@ quasi-separated scheme over a field `k`, let `K/k` be a field extension and let 
 quasi-coherent `𝒪_X`-module. Then `H^q(X_K, M_K) ≅ H^q(X, M) ⊗_k K` as `K`-vector spaces, where
 `X_K = X ×_{Spec k} Spec K` and `M_K` is the pullback of `M` to `X_K`.
 
-Both sides are computed by the Čech complex of a finite affine open cover of `X`, which has
-affine intersections since `X` is quasi-separated; the Čech complex of the base-changed cover
-of `X_K` is obtained by applying the exact functor `- ⊗_k K` (Stacks 02KH).
+Proof (Stacks 02KH): first suppose `X` is separated. A finite affine open cover has affine
+intersections, so its Čech complex computes quasi-coherent cohomology. The affine pullback
+section formula identifies the base-changed complex with its tensor product by `K`.
+Tensoring over the field `k` is exact, hence commutes with cohomology. For general
+quasi-separated `X`, the intersections of a finite affine cover are quasi-compact and
+separated, so the separated case applies to their cohomology. The natural comparison of
+Čech-to-cohomology spectral sequences is an isomorphism on the second pages after tensoring
+by `K`. Exactness of tensoring preserves these pages and the finite filtrations in each total
+degree, giving the claimed isomorphism on the abutments. Tensor symmetry gives the displayed
+order `K ⊗[k] H^q(X, M)` and its `K`-linear structure.
 
 (blueprint: `lem-sc-flat-base-change-coherent`) -/
 @[stacks 02KH]
