@@ -90,4 +90,92 @@ theorem compIso_tower (𝒯 : Compactification.Tower f g h) :
   erw [← hP]
   simp only [← Functor.map_comp_assoc, ← Functor.map_comp, Iso.inv_hom_id_app_assoc, hSC]
 
+
+section
+
+variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
+
+omit [F.HasProperExchange] in
+private lemma whiskerRight_comp_hcomp {G G' G'' : A ⥤ B} {H H' : B ⥤ C} (α : G ⟶ G')
+    (β : G' ⟶ G'') (γ : H ⟶ H') :
+    Functor.whiskerRight α H ≫ NatTrans.hcomp β γ = NatTrans.hcomp (α ≫ β) γ := by
+  ext; simp
+
+omit [F.HasProperExchange] in
+private lemma whiskerLeft_comp_hcomp {G G' : A ⥤ B} {H H' H'' : B ⥤ C} (α : H ⟶ H')
+    (β : G ⟶ G') (γ : H' ⟶ H'') :
+    Functor.whiskerLeft G α ≫ NatTrans.hcomp β γ = NatTrans.hcomp β (α ≫ γ) := by
+  ext; simp
+
+omit [F.HasProperExchange] in
+private lemma hcomp_eq_whiskerLeft_comp_whiskerRight {G G' : A ⥤ B} {H H' : B ⥤ C}
+    (α : G ⟶ G') (β : H ⟶ H') :
+    NatTrans.hcomp α β = Functor.whiskerLeft G β ≫ Functor.whiskerRight α H' := by
+  ext; simp
+
+omit [F.HasProperExchange] in
+private lemma hcomp_eq_whiskerRight_comp_whiskerLeft {G G' : A ⥤ B} {H H' : B ⥤ C}
+    (α : G ⟶ G') (β : H ⟶ H') :
+    NatTrans.hcomp α β = Functor.whiskerRight α H ≫ Functor.whiskerLeft G' β := by
+  ext; simp
+
+omit [F.HasProperExchange] in
+private lemma hcomp_comp_hcomp {G G' G'' : A ⥤ B} {H H' H'' : B ⥤ C} (α : G ⟶ G')
+    (α' : G' ⟶ G'') (β : H ⟶ H') (β' : H' ⟶ H'') :
+    NatTrans.hcomp α β ≫ NatTrans.hcomp α' β' = NatTrans.hcomp (α ≫ α') (β ≫ β') :=
+  (NatTrans.exchange _ _ _ _).symm
+
+omit [F.HasProperExchange] in
+private lemma hcomp_hcomp_associator {G G' : A ⥤ B} {H H' : B ⥤ C} {K K' : C ⥤ D}
+    (α : G ⟶ G') (β : H ⟶ H') (γ : K ⟶ K') :
+    NatTrans.hcomp (NatTrans.hcomp α β) γ ≫ (Functor.associator _ _ _).hom =
+      (Functor.associator _ _ _).hom ≫ NatTrans.hcomp α (NatTrans.hcomp β γ) := by
+  ext; simp
+
+end
+
+/-- The comparison isomorphism from a copy of a compactification to the chosen compactification
+of an equal morphism. -/
+lemma shriekIso_copy_trans_congr {u u' : X ⟶ Y} [HasCompactification u]
+    [HasCompactification u'] [QuasiCompact u] [QuasiCompact u'] (hu : u = u')
+    (c : Compactification u') :
+    F.shriekIso (c.copy hu) (HasCompactification.compactification u) ≪≫ F.lowerShriekCongr hu =
+      F.shriekIso c (HasCompactification.compactification u') := by
+  subst hu
+  simp only [lowerShriekCongr_refl, Iso.trans_refl]
+  rfl
+
+/-- **Associativity of the composition isomorphism**: for composable `f`, `g`, `h`, the two
+isomorphisms `Rf_! ⋙ Rg_! ⋙ Rh_! ≅ R(f ≫ g ≫ h)_!` agree.
+(blueprint: `sk-thm-sf-comp-composition`) -/
+theorem lowerShriekCompIso_assoc (f : X ⟶ Y) (g : Y ⟶ S) (h : S ⟶ T) [HasCompactification f]
+    [HasCompactification g] [HasCompactification h] [HasCompactification (f ≫ g)]
+    [HasCompactification (g ≫ h)] [HasCompactification ((f ≫ g) ≫ h)]
+    [HasCompactification (f ≫ g ≫ h)] [QuasiCompact f] [QuasiCompact g] [QuasiCompact h] :
+    Functor.whiskerRight (F.lowerShriekCompIso f g).hom (F.lowerShriek h) ≫
+        (F.lowerShriekCompIso (f ≫ g) h).hom ≫ (F.lowerShriekCongr (Category.assoc f g h)).hom =
+      (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft (F.lowerShriek f) (F.lowerShriekCompIso g h).hom ≫
+          (F.lowerShriekCompIso f (g ≫ h)).hom := by
+  let 𝒯 := Compactification.Tower.ofHasCompactification f g h
+  rw [F.lowerShriekCompIso_hom_eq 𝒯.fg, F.lowerShriekCompIso_hom_eq 𝒯.fg_h,
+    F.lowerShriekCompIso_hom_eq 𝒯.gh, F.lowerShriekCompIso_hom_eq 𝒯.f_gh]
+  have hc := congrArg Iso.hom (F.shriekIso_copy_trans_congr (Category.assoc f g h) 𝒯.cfgh)
+  have hT := F.compIso_tower 𝒯
+  simp only [Iso.trans_hom] at hc
+  rw [← F.shriekIso_symm 𝒯.cfg, ← F.shriekIso_symm 𝒯.cgh]
+  simp only [Iso.symm_hom, Functor.whiskerRight_comp, Functor.whiskerLeft_comp, Category.assoc]
+  slice_lhs 3 4 => rw [whiskerRight_comp_hcomp, Iso.hom_inv_id, ← whiskerLeft_eq_hcomp]
+  slice_lhs 2 3 => rw [← hcomp_eq_whiskerRight_comp_whiskerLeft,
+    hcomp_eq_whiskerLeft_comp_whiskerRight]
+  slice_lhs 1 2 => rw [← hcomp_eq_whiskerRight_comp_whiskerLeft]
+  slice_rhs 4 5 => rw [whiskerLeft_comp_hcomp, Iso.hom_inv_id, ← whiskerRight_eq_hcomp]
+  slice_rhs 3 4 => rw [← hcomp_eq_whiskerLeft_comp_whiskerRight,
+    hcomp_eq_whiskerRight_comp_whiskerLeft]
+  slice_rhs 2 3 => rw [← hcomp_eq_whiskerLeft_comp_whiskerRight]
+  slice_rhs 1 2 => rw [← hcomp_hcomp_associator]
+  simp only [Category.assoc]
+  rw [reassoc_of% hT]
+  exact congrArg (fun x ↦ _ ≫ _ ≫ _ ≫ _ ≫ x) hc
+
 end AlgebraicGeometry.CompactSupportFormalism
