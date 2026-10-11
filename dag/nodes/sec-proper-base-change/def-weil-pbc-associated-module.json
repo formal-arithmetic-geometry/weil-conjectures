@@ -205,5 +205,23 @@
   "by": "L",
   "result": "pass",
   "note": "Definition node split by six elementary well-formedness steps (presheaf of modules, sheafification on the site of opens, R-linearity of c_M, P_u a morphism functorial in u, F_u by the universal property with F_id = id and F_vu = F_v F_u, compatibility with c). Statement: functoriality made explicit (F_id, F_{vu}); content as in Stacks 01BH(3)/01BI. Both citers covered. Correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AssociatedModule",
+  "declaration": "AlgebraicGeometry.associatedModule",
+  "file": "lean/Sheaf/AlgebraicGeometry/AssociatedModule.lean",
+  "statement": "def associatedModule (X : SheafedSpace CommRingCat.{u}) (M : ModuleCat (X.presheaf.obj (op (⊤ : Opens (X : Type u))))) : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology (X : Type u)) (forget₂ CommRingCat RingCat)).obj X.sheaf)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-asm0759",
+  "group": "H1",
+  "result": "fix",
+  "note": "X general ringed space (SheafedSpace CommRingCat, no locality); R=Gamma(X,O_X) via top open; M arbitrary R-module; P_M(U)=extendScalars along restriction, rho⊗id unique on pure tensors + presheaf laws; F_M = PresheafOfModules.sheafification, sigma_M = adjunction unit with universal property; c_M(m)=sigma(1⊗m); F_u natural, unique, functor laws, c natural. Mathlib tilde is Spec-only, no general ringed-space version in Mathlib/source. Fix: docstrings on 5 private decls, docstring parentheses"
  }
 }
