@@ -1,0 +1,133 @@
+{
+ "id": "def-pc-perfect-rhom-base-change-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "The canonical algebraic RHom base-change map in Tag 0AA8, via equation-base-change-RHom (0A6A).",
+   "via": [
+    "lem-pc-base-change-rhom-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Canonical RHom scalar-extension map on perfect representatives",
+ "statement": "Let $\\varphi:A\\to B$ be a homomorphism of commutative rings. Regard modules over these rings as sheaves of modules [def-weil-sheaf-of-modules-category] on their one-object bottom-topology sites. Let $H_A(P,Q)=\\operatorname{Hom}_A^\\bullet(P,Q)$ be the shared Hom complex [def-pur-hom-complex], with its actual product projections, and let $R\\operatorname{Hom}_A$ be [def-pur-derived-internal-hom]. Package the extension functor $T_\\varphi$, with its objects and maps exactly those of [def-pur-sheaf-tensor-product], and its left derived functor $L_\\varphi$ and K-flat counit $\\epsilon$ as in [lem-pur-derived-change-of-rings]. The canonical chain map $\\chi_{P,Q}:T_\\varphi H_A(P,Q)\\to H_B(T_\\varphi P,T_\\varphi Q)$ is specified in degree $n$, at every product coordinate $p$, by $b\\otimes f\\mapsto(c\\otimes x\\mapsto bc\\otimes f_p(x))$, using the sheafification units of the shared scalar extension. Let $E,K\\in D(A)$ with $E$ represented by a bounded complex of finite projective modules. Choose such a representative $P$ of $E$ and a K-flat representative $Q$ of $K$ [def-pc-kflat-complex] and [lem-pc-kflat-resolution]. Write $r_A:R\\operatorname{Hom}_A(E,K)\\cong Q_A H_A(P,Q)$ for the shared localization factorization through the functorial K-injective replacement, followed by the inverse of $Q_A\\operatorname{Hom}^\\bullet(P,Q\\to I(Q))$ and transport along the representative isomorphisms; define $r_B$ analogously on $T_\\varphi P,T_\\varphi Q$, transporting the representative isomorphisms by the actual counit. The canonical perfect-source base-change map is the composite $L_\\varphi R\\operatorname{Hom}_A(E,K)\\xrightarrow{L_\\varphi(r_A)}L_\\varphi Q_AH_A(P,Q)\\xrightarrow{\\epsilon}Q_BT_\\varphi H_A(P,Q)\\xrightarrow{Q_B\\chi}Q_BH_B(T_\\varphi P,T_\\varphi Q)\\xrightarrow{r_B^{-1}}R\\operatorname{Hom}_B(L_\\varphi E,L_\\varphi K)$. This is the $B$-linear extension of the map induced by scalar extension, and introduces no boundedness assumption on $K$ or flatness assumption on $\\varphi$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "equation-base-change-RHom and lemma-base-change-RHom (Tag 0A6A), clause (1), bounded finite-projective computation"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-base-change-rhom-perfect",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical scalar extension on Hom complexes: b tensor f sends c tensor x to b c tensor f x",
+   "results": "Service unavailable (Internal Server Error); no mathematical search verdict is inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "RHom extension of scalars comparison computed by finite projective and K-flat representatives",
+   "results": "Eight hits: ordinary scalar-extension descent, extendScalarsComp, flatness. No derived Hom comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars",
+   "results": "Twelve hits including extendRestrictScalarsAdj; these concern ordinary modules and do not supply the localized Hom comparison on the shared ringed site.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeRHom|perfectRHomBaseChange|ringRHomModelIso|HomComplex.*Change|Change.*HomComplex in Mathlib, WeilConjectures and lean/Sheaf; RHom base-change in DAG",
+   "results": "No definition matches. DAG has this theorem and scheme-level RHom comparisons; these do not define its algebraic map. Reused derivedInternalHom, changeOfRings, homComplex_exists and onePointRingSheaf.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap",
+  "declaration": "CategoryTheory.perfectRHomBaseChangeMap",
+  "declarations": [
+   "CategoryTheory.RingSiteModules",
+   "CategoryTheory.ringSiteMap",
+   "CategoryTheory.ringSiteModulesGrothendieck",
+   "CategoryTheory.ringHomComplexProjection",
+   "CategoryTheory.ringHomEvaluate",
+   "CategoryTheory.ringExtensionComplex",
+   "CategoryTheory.ringExtensionHomotopy",
+   "CategoryTheory.ringExtensionPure",
+   "CategoryTheory.RingRHomBaseChangeData",
+   "CategoryTheory.ringRHomBaseChangeData_exists",
+   "CategoryTheory.ringHomReplacement_quasiIso",
+   "CategoryTheory.ringRHomModelIso",
+   "CategoryTheory.ringDerivedExtensionCounit",
+   "CategoryTheory.PerfectRHomBaseChangeModel",
+   "CategoryTheory.perfectRHomBaseChangeModel_exists",
+   "CategoryTheory.perfectRHomBaseChangeMap"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PerfectRHomBaseChangeMap.lean",
+  "statement": "def perfectRHomBaseChangeMap {A B : Type u} [CommRing A] [CommRing B] [HasDerivedCategory.{w} (RingSiteModules A)] [HasDerivedCategory.{w} (RingSiteModules B)] {φ : A →+* B} (d : RingRHomBaseChangeData φ) {E K : DerivedCategory (RingSiteModules A)} (m : PerfectRHomBaseChangeModel d E K) : d.derived.obj ((derivedInternalHom ⊥ (CochainComplex.onePointRingSheaf A)).obj (op E, K)) ⟶ (derivedInternalHom ⊥ (CochainComplex.onePointRingSheaf B)).obj (op (d.derived.obj E), d.derived.obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-brp"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-brp",
+  "group": "Q1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-brp",
+  "group": "Q1",
+  "result": "fix",
+  "note": "rings A,B and phi; one-object site modules; E perfect via m.source bounded+Finite+Projective+sourceIso; K arbitrary; RHom = derivedInternalHom on onePointRingSheaf; derived extension d pinned by changeOfRings obj/map eqs, IsLeftDerivedFunctor, homMap_pure; conclusion IsIso of the canonical composite"
+ }
+}

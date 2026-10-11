@@ -22,7 +22,8 @@
   "def-pc-perfect-complex",
   "lem-pc-perfect-affine-bounded-projective",
   "def-pur-derived-internal-hom",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "def-pc-perfect-rhom-base-change-map"
  ],
  "proof": [
   {
@@ -153,5 +154,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BaseChangeRHomPerfect",
+  "declaration": "CategoryTheory.baseChangeRHomPerfect",
+  "declarations": [
+   "CategoryTheory.baseChangeRHomPerfect"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/BaseChangeRHomPerfect.lean",
+  "statement": "theorem baseChangeRHomPerfect {A B : Type u₁} [CommRing A] [CommRing B] {φ : A →+* B} [HasDerivedCategory.{w₁} (RingSiteModules A)] [HasDerivedCategory.{w₁} (RingSiteModules B)] (d : RingRHomBaseChangeData φ) (E K : DerivedCategory (RingSiteModules A)) (m : PerfectRHomBaseChangeModel d E K) : IsIso (perfectRHomBaseChangeMap d m)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-brp"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-brp",
+  "group": "Q1",
+  "result": "fix",
+  "note": "rings A,B and phi; one-object site modules; E perfect via m.source bounded+Finite+Projective+sourceIso; K arbitrary; RHom = derivedInternalHom on onePointRingSheaf; derived extension d pinned by changeOfRings obj/map eqs, IsLeftDerivedFunctor, homMap_pure; conclusion IsIso of the canonical composite"
  }
 }
