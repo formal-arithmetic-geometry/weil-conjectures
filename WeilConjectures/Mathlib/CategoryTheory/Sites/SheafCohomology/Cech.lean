@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
-public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+public import WeilConjectures.Algebra.Homology.ExactCouple.DoubleComplex
 
 /-!
 # The Čech-to-derived spectral sequence
