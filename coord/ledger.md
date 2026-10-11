@@ -3831,3 +3831,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:27 L: merged deliver/H1/lem-sc-p1-tor-dimension-shifting (stage 2; reviewer FIX; first push; Sheaf.Algebra.TorDimensionShifting CategoryTheory.tor_dimension_shifting)
 - 08:28 L: merged deliver/C1/lem-sc-proper-flat-global-sections-criterion (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProperFlatGlobalSectionsCriterion AlgebraicGeometry.isIso_structureSheafMap_of_proper_flat_fiberwise)
 - 08:28 L: merged deliver/C1/lem-sc-proper-or-affine (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.IsProperOrIsAffine AlgebraicGeometry.IsConnectedCurve.isProper_or_isAffine)
+- 08:28 L: merged deliver/G1/lem-sc-proper-flat-global-sections (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProperFlatGlobalSections AlgebraicGeometry.isIso_structureSheafMap_of_proper_flat_geometricallyReduced_connected_fibers)
