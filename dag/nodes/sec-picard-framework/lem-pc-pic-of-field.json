@@ -110,5 +110,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pof1833 (reviewer sub-agent of L); spot-checked: Step 1 elementary: def-sc-invertible-module defines invertible as locally free of rank one, and a Zariski cover of the one-point Spec(k) contains Spec(k), so L = O globally; D: proves the statement. B8/B10: Mathlib CommRing.Pic.instSubsingletonOfIsLocalRing (RingTheory/PicardGroup.lean:537) is the algebraic Pic, not the sheaf statement; slopmaster2 subsingleton_cohomologicalPicardGroup_of_field (Sites/Hilbert90.lean:366) is etale H^1(G_m), not this statement; no exact leaf or attach. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PicardOfField",
+  "declaration": "AlgebraicGeometry.Scheme.pic_of_field",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardOfField.lean",
+  "statement": "theorem pic_of_field (k : Type u) [Field k] : Subsingleton (Spec (.of k)).Pic ∧ ∀ (L : (Spec (.of k)).Modules) [L.IsInvertible], Nonempty (L ≅ SheafOfModules.unit (Spec (.of k)).ringCatSheaf)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pof0858",
+  "group": "J1",
+  "result": "pass",
+  "note": "k:Type u [Field k] = arbitrary field; Subsingleton (Spec (.of k)).Pic = Pic trivial via recorded Scheme.Pic (group from Picard.Group); forall L : (Spec k).Modules [Scheme.Modules.IsInvertible L] (elaborated, pp.fieldNotation false: recorded dep class) -> Nonempty (L ≅ SheafOfModules.unit) = every invertible O_k-module ≅ O_k; no extra hyps; existing:false (source nonempty_iso_unit is one-point sheaf clause only, Hilbert90 is etale CohomologicalPicardGroup, Mathlib CommRing.Pic algebraic)"
  }
 }
