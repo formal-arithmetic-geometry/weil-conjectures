@@ -194,5 +194,23 @@
   "item": "lem-weil-pbc-horseshoe-delta-functor",
   "worker": "stage1",
   "summary": "Statement kept (checked: correct; the stmt_deps lem-weil-pbc-derived-functor-long-exact and lem-weil-pbc-right-derived-universal-delta-functor are only cited in the closing parenthetical remark and are pointers rather than dependencies; kept on the lead's instruction). Proof written in six steps: (1) R^n v additive via lifts (map-via-lift, lift-exists); (2) v(H) degreewise split short exact (0136 argument written out), defining partial_H and delta_H; (3) naturality for arbitrary horseshoes H of S and H' of S' via a morphism of horseshoe resolutions lifting (a,b,c) (new node lem-weil-pbc-horseshoe-morphism-lift, unsplit, absent from Mathlib after LeanSearch/LeanFinder/Loogle/grep) and naturality of the connecting maps (Mathlib leaf lem-weil-pbc-complex-ses-long-exact-naturality); (4) independence by taking identities; (5) exactness by transporting the long exact sequence of v(H) along iota; (6) the delta-functor axioms. Tags checked against tags/tags: 013T derived-lemma-injective-resolution-ses, 0117 homology-lemma-long-exact-sequence-cochain (0111 is the chain version, 0112 is about homotopies), 0136, 013P, 013R, 05TE, 015B, 010Q. Item Lean state none; the source repository's exists_rightDerived_δ_exact (LongExactSequence.lean:58, sorry-free) is triangle-based, existential, and not this statement."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor",
+  "declaration": "CategoryTheory.exists_horseshoe_rightDerived_deltaFunctor",
+  "by": "K1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/HorseshoeDeltaFunctor.lean",
+  "statement": "theorem exists_horseshoe_rightDerived_deltaFunctor {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A] [EnoughInjectives A] [Category.{v₂} B] [Abelian B] (v : A ⥤ B) [v.Additive] [PreservesFiniteLimits v] : ∃ (G : CohomologicalDeltaFunctor A B) (hF : G.F = (fun n : ℕ ↦ v.rightDerived n)), ∀ (S : ShortComplex A) (hS : S.ShortExact) (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂) (IC : InjectiveResolution S.X₃) (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex) (hαβ : α ≫ β = 0) (_hιA : IA.ι ≫ α = (CochainComplex.single₀ A).map S.f ≫ IB.ι) (_hιB : IB.ι ≫ β = (CochainComplex.single₀ A).map S.g ≫ IC.ι) (_hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map (HomologicalComplex.eval A (ComplexShape.up ℕ) k)).ShortExact), ∃ hvH : ((ShortComplex.mk α β hαβ).map (v.mapHomologicalComplex (ComplexShape.up ℕ))).ShortExact, ∀ n : ℕ, G.delta S hS n ≫ eqToHom (congrArg (fun F ↦ (F (n + 1)).obj S.X₁) hF) = eqToHom (congrArg (fun F ↦ (F n).obj S.X₃) hF) ≫ (IC.isoRightDerivedObj v n).hom ≫ hvH.δ n (n + 1) rfl ≫ (IA.isoRightDerivedObj v (n + 1)).inv",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hdf",
+  "group": "K1",
+  "result": "pass",
+  "note": "A,B abelian, EnoughInjectives A, v Additive+PreservesFiniteLimits, G.F = rightDerived; every horseshoe (IA,IB,IC,α,β, complex-level augmentations, degreewise SES) gives v(H) SES and G.delta = isoRightDerivedObj-transported snake δ (iota order matches node); clause (1)/(2) via G.naturality/exactness fields; no claim vs triangle δ"
  }
 }
