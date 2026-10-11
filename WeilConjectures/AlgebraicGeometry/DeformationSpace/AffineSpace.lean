@@ -347,4 +347,43 @@ lemma reesEquiv_comp_C :
   change polyToSections (n := n) hW (MvPolynomial.C c) = _
   rw [MvPolynomial.eval₂Hom_C]
 
+set_option backward.isDefEq.respectTransparency false in
+lemma homOfVector_specMap_eq :
+    AffineSpace.homOfVector (Spec.map (CommRingCat.ofHom
+      (((AffineSpace.zeroSection n B).ker.siteIdeal (affineOpenOver hW)).toExtendedReesAlgebra.comp
+        (Polynomial.mapRingHom ((𝔸(n; B) ↘ B).appLE W (affineOpenOver hW).1 le_rfl).hom))))
+      (fun k ↦ (ΓSpecIso _).inv (uCoord n B (affineOpenOver hW) k)) =
+      Spec.map (CommRingCat.ofHom (reesEquiv n hW)) ≫
+        (AffineSpace.SpecIso n (.of (Polynomial Γ(B, W)))).inv := by
+  refine AffineSpace.hom_ext ?_ fun k ↦ ?_
+  · rw [AffineSpace.homOfVector_over, Category.assoc, AffineSpace.SpecIso_inv_over,
+      ← Spec.map_comp]
+    congr 1
+    rw [← CommRingCat.ofHom_comp]
+    change _ = CommRingCat.ofHom ((reesEquiv n hW).comp MvPolynomial.C)
+    rw [reesEquiv_comp_C, Scheme.Hom.app_eq_appLE]
+    rfl
+  · rw [AffineSpace.homOfVector_appTop_coord, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+      AffineSpace.SpecIso_inv_appTop_coord]
+    have h := congr($(Scheme.ΓSpecIso_inv_naturality (CommRingCat.ofHom (reesEquiv n hW)))
+      (MvPolynomial.X k))
+    refine Eq.trans ?_ h
+    exact congrArg _ (reesEquiv_X n hW k).symm
+
+lemma deformationSpaceToAffineSpaceChart_eq :
+    deformationSpaceToAffineSpaceChart n B (affineOpenOver hW) =
+      Spec.map (CommRingCat.ofHom (reesEquiv n hW)) ≫
+        (AffineSpace.SpecIso n (.of (Polynomial Γ(B, W)))).inv ≫
+          AffineSpace.map n (affineLineChart hW) := by
+  rw [deformationSpaceToAffineSpaceChart, ι_deformationSpaceProj (𝔸(n; B) ↘ B)
+    (AffineSpace.zeroSection n B) (affineOpenOver hW) hW le_rfl, ← AffineSpace.homOfVector_map,
+    ← Category.assoc]
+  exact congrArg (· ≫ _) (homOfVector_specMap_eq n hW)
+
+instance : IsIso (Spec.map (CommRingCat.ofHom (reesEquiv n hW))) := by
+  have : IsIso (CommRingCat.ofHom (reesEquiv n hW)) := by
+    rw [ConcreteCategory.isIso_iff_bijective]
+    exact bijective_reesEquiv n hW
+  infer_instance
+
 end AlgebraicGeometry.Scheme.Hom
