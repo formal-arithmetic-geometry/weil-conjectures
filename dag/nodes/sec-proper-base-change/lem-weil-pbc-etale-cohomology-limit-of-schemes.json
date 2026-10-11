@@ -259,5 +259,28 @@
   "by": "L",
   "result": "pass",
   "note": "Nine steps: the system and the canonical map; cofinality; the affine case along Stacks' proof of 09YQ (affine etale sites 04HR with a cohomology clause, their colimit 0EYL, colimits of sites 09YL/0A35, cohomology on a colimit of sites 09YP; new statement nodes for each, plus def-weil-pbc-sites-and-cohomology and 01DP); the quasi-compact quasi-separated case reduced to the affine case by Mayer-Vietoris (agent-written: new nodes lem-weil-pbc-etale-mayer-vietoris-pullback and the Mathlib leaf lem-weil-pbc-filtered-colimit-abelian-groups-exact (AB.lean:37, filtered colimits preserve homology in AddCommGrpCat, verified); five lemma; separated case then general case); the ring case (Mathlib leaf lem-weil-pbc-spec-colimit-limit: Spec.reflective GammaSpecAdjunction.lean:600 and isAffineHom_of_isAffine Affine.lean:181, verified). LITERATURE GAP recorded: Stacks' proof of 09YQ cites 09YP, which is stated for cohomology over objects of the colimit site, and a non-affine X_i is not an object of (X_i)_{affine,etale}; the proof as written covers affine X_i (the only case the route uses, in lemma-weil-pbc-injective-restriction-acyclicity step 5); the statement is true and the reduction is supplied. Tag corrections by the worker: lemma-alternative = 04HR, lemma-colimit-affine-sites = 0EYL, sites-cohomology lemma-colimit = 09YP, the situation = 0A34."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_isColimit_etale_cohomology_of_isLimit",
+  "declarations": [
+   "AlgebraicGeometry.Etale.nonempty_isColimit_etale_cohomology_of_isLimit",
+   "AlgebraicGeometry.Etale.nonempty_isColimit_etale_cohomology_spec_ring_colimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCohomologyLimitOfSchemes.lean",
+  "statement": "theorem nonempty_isColimit_etale_cohomology_of_isLimit {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)] (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j) (hidentity : ∀ i : I, φ (𝟙 i) = (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i)) (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k), φ (f ≫ g) = (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op) (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g) (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (eG : ∀ i : I, G.obj i ≅ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i)) (hG : ∀ (i j : I) (f : i ⟶ j), G.map f = (eG i).hom ≫ (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op) (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv) (L : Cocone G) (hL : IsColimit L) (p : ℕ) (H : I ⥤ AddCommGrpCat.{u + 1}) (eH : ∀ i : I, H.obj i ≅ AddCommGrpCat.of (Sheaf.H (F i) p)) (hH : ∀ (i j : I) (f : i ⟶ j), H.map f = (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (F i) p) ≫ AddCommGrpCat.ofHom (Sheaf.H.map (φ f) p) ≫ (eH j).inv) (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H L.pt p)) (hB : ∀ i : I, B.ι.app i ≫ eB.hom = (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫ AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)) : Nonempty (IsColimit B)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cls"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cls",
+  "group": "J1",
+  "result": "fix",
+  "note": "directed preorder I:Type u nonempty; D:Iᵒᵖ⥤Scheme.{u} cone+IsLimit; qcqs stages; IsAffineHom transitions; F_i abelian etale sheaves, φ via upperStar with id/comp laws; G,L colimit of f_i⁻¹F_i tied by eG/hG; H,B tied by cohomologyMap+Sheaf.H.map; Nonempty IsColimit B; ring case: removed Spec-limit and IsAffineHom conjuncts (clauses of lem-weil-pbc-spec-colimit-limit)"
  }
 }
