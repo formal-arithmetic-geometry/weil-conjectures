@@ -181,5 +181,24 @@
   "worker": "stage1",
   "summary": "Proof written from Stacks More on Algebra 07EG (lemma-base-change-fs, line 9346; tag checked in tags/tags) and its three-sentence proof, against the DAG definition def-weil-pbc-formally-smooth-adic exactly (commutative D with a ring map, J^2 = 0, g(n^k) = 0 for some k ≥ 1). Five steps: (1) the lifting problem over R' and the restricted R-algebra map g = g'∘ι; (2) ι(n^k) ⊆ n'^k, so g kills n^k (elementary); (3) the lift f:S → D from the hypothesis; (4) the R'-algebra map f':S⊗R' → D from f and ρ:R' → D by the pushout property of the tensor product; (5) q∘f' = g' by the uniqueness clause (Stacks leaves this implicit). The existing node lem-weil-pbc-algebra-tensor-base-change-universal-property puts the base ring on the left (S ⊗_R A, S-algebra maps) and would need the swap S⊗R' ≅ R'⊗S; it also gives no ring structure. So one new Mathlib leaf lem-weil-pbc-algebra-tensor-pushout-universal-property (ring structure on A⊗_R B, existence of h(a⊗b)=f(a)g(b), uniqueness; Algebra.TensorProduct.instCommRing/productMap/ext) was created and added to stmt_deps, since the statement's 'S' is a commutative ring and an R'-algebra' uses its clause (1). Statement unchanged. Mathlib: three search kinds re-done; adic formal smoothness absent, discrete analogue recorded in mathlib_candidate."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07EG against the DAG's lifting definition; continuity of the restricted map (step 2) and the two-triangle check (step 5) written out; the tensor-product pushout property is a new composed Mathlib leaf. Mathlib candidate: the discrete instance (B8)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to More on Algebra 07EG against the DAG's lifting definition; continuity of the restricted map (step 2) and the two-triangle check (step 5) written out; the tensor-product pushout property is a new composed Mathlib leaf. Mathlib candidate: the discrete instance (B8).",
+ "lean": {
+  "module": "Sheaf.RingTheory.FormallySmoothAdicBaseChange",
+  "declaration": "Algebra.formallySmoothAdic_tensorProduct",
+  "file": "lean/Sheaf/RingTheory/FormallySmoothAdicBaseChange.lean",
+  "statement": "theorem formallySmoothAdic_tensorProduct (R : Type u) (S : Type v) (R' : Type w) [CommRing R] [CommRing S] [CommRing R'] [Algebra R S] [Algebra R R'] (n : Ideal S) (h : FormallySmoothAdic R S n) : letI : Algebra R' (S ⊗[R] R') := Algebra.TensorProduct.rightAlgebra FormallySmoothAdic R' (S ⊗[R] R') (n.map (algebraMap S (S ⊗[R] R')))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fbc1101"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fbc1101",
+  "group": "E1",
+  "result": "fix",
+  "note": "R,S,R' CommRing (any universes); [Algebra R S],[Algebra R R']; n : Ideal S; h : FormallySmoothAdic R S n (landed H1 def, D : Type (max u v), not vacuous); S' = S ⊗[R] R' with rightAlgebra (algebraMap r' = 1⊗r' by rfl); n' = n.map (algebraMap S (S ⊗[R] R')) (rfl = map along includeLeft); conclusion FormallySmoothAdic R' S' n'; conclusion tests Type (max v w) vs hypothesis Type (max u v): true by size reduction"
+ }
 }
