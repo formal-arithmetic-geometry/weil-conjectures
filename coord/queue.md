@@ -1,20 +1,24 @@
 # Work queue
 
-708 items; claim with `tools/claim.py next <group> [--stage N]`.
+707 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (708)
+## Stage 2: nodes to state (707)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
-| `def-pur-saturated-triangulated-localization` | 1 | state |
 | `def-weil-pbc-derived-direct-image-composition` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
+| `lem-pur-derived-functor-shift-05su` | 1 | state |
 | `lem-pur-essential-constant-cofinal-0a1s` | 1 | state |
+| `lem-pur-left-derived-exact-when-defined` | 1 | state |
+| `lem-pur-triangle-common-refinement-ms3-05r9` | 1 | state |
+| `lem-pur-triangle-completion-ms6-05r9` | 1 | state |
+| `lem-pur-triangle-morphism-category-05r9` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
@@ -22,22 +26,17 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
 | `lem-weil-pbc-descend-qc-open-fg-subalgebra` | 1 | state |
-| `lem-weil-pbc-directed-colimit-base-change-elementwise` | 1 | state |
 | `lem-weil-pbc-etale-fibre-specialization-bound` | 1 | state |
 | `lem-weil-pbc-etale-graph-section-extension-map` | 1 | state |
 | `lem-weil-pbc-etale-inverse-image-algebraic-structures` | 1 | state |
 | `lem-weil-pbc-etale-qcqs-sections-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-etale-restriction-pullback-unit` | 1 | state |
-| `lem-weil-pbc-etale-retraction-finite-product-local` | 1 | state |
 | `lem-weil-pbc-etale-retraction-finite-type-splitting` | 1 | state |
 | `lem-weil-pbc-etale-separated-stratified-finite` | 1 | state |
 | `lem-weil-pbc-exact-free-complex-last-minors-regular-sequence` | 1 | state |
 | `lem-weil-pbc-exact-sequence-ml` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
-| `lem-weil-pbc-fibre-degree-bound-field-points` | 1 | state |
 | `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` | 1 | state |
-| `lem-weil-pbc-fibre-dimension-neighborhood` | 1 | state |
-| `lem-weil-pbc-fibre-product-point-residue-field` | 1 | state |
 | `lem-weil-pbc-fibre-ring-local-ring-natural-iso` | 1 | state |
 | `lem-weil-pbc-fibre-ring-noetherian` | 1 | state |
 | `lem-weil-pbc-fibre-ring-primes-residue-fields` | 1 | state |
@@ -45,7 +44,6 @@
 | `lem-weil-pbc-field-char-p-nilpotent-lifting` | 1 | state |
 | `lem-weil-pbc-field-cohen-power-series-formally-smooth` | 1 | state |
 | `lem-weil-pbc-field-extension-complete-intersection-subalgebras` | 1 | state |
-| `lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor` | 1 | state |
 | `lem-weil-pbc-field-point-factors-through-closed-immersion` | 1 | state |
 | `lem-weil-pbc-field-point-factors-through-immersion` | 1 | state |
 | `lem-weil-pbc-field-tensor-irreducible` | 1 | state |
@@ -684,6 +682,7 @@
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state |
 | `lem-pc-sigma-k-points` | 2 | state |
 | `lem-pc-sites-modules-coproduct-flat` | 2 | state |
+| `lem-pur-derived-functor-morphisms-05sa` | 2 | state |
 | `lem-sc-divisor-class-curve` | 2 | state |
 | `lem-sc-hilbert-polynomial` | 2 | state |
 | `lem-sc-mult-n-locally-quasi-finite` | 2 | state |
@@ -718,7 +717,7 @@
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 823 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 817 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
