@@ -185,13 +185,6 @@ noncomputable def derivedHomShiftIso
     ((derivedTensorHomAdjunction A K).comp (shiftEquiv _ a).toAdjunction)
     (derivedTensorObjShiftIso A K a).symm
 
-/-- The derived internal hom `RHom(K, -)` commutes with shifts, being right adjoint to
-`K ⊗ᴸ -`. -/
-noncomputable instance commShiftDerivedHomObj
-    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
-    ((RHom(Z)[A]).obj (op K)).CommShift ℤ :=
-  (derivedTensorHomAdjunction A K).rightAdjointCommShift ℤ
-
 /-- The coefficient dual turns shifts into opposite shifts, `(K⟦a⟧)^∨ ≅ (K^∨)⟦-a⟧`. -/
 noncomputable def coefficientDualShiftIso
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (a : ℤ) :
