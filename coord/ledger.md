@@ -5680,3 +5680,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:48 L: merged deliver/K1/lem-weil-pbc-sr-matching-object-one-member (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember AlgebraicGeometry.Scheme.sr_matching_object_one_member)
 - 19:48 L: merged deliver/M1/lemma-weil-pbc-finite-hypercover-descent (stage 2; reviewer PASS; first push; Sheaf.Paper.FiniteHypercoverDescent AlgebraicGeometry.finite_hypercover_descent; dependency modules: def-weil-pbc-finite-split-hypercover)
 - 19:48 L: returned deliver/C1/lem-pc-global-hom-pullback-adjunction (reviewer RETURN: (reviewer X-a3bef, head a3bef3d8d) H3: The binders `hS : ∀ M N, ... ≃+ (M ⟶ N)` and `hT : ∀ M N, ... ≃+ (M ⟶ N)` are arb)
+- 19:48 L: returned deliver/K1/lem-weil-pbc-hypercover-free-resolution (reviewer RETURN: (reviewer R-sub-A, head 3eb68f535) (1) H3, lean/Sheaf/Paper/HypercoverFreeResolution.lean, theorems `injective_abelian_s)
