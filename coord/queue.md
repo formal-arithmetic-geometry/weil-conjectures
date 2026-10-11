@@ -1,11 +1,11 @@
 # Work queue
 
-944 items; claim with `tools/claim.py next <group> [--stage N]`.
+943 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (944)
+## Stage 2: nodes to state (943)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `def-kun-support` | 1 | state |
 | `def-pur-hom-complex` | 1 | state |
 | `def-weil-derived-tensor` | 1 | state |
-| `def-weil-pbc-constructible-complexes` | 1 | state |
 | `def-weil-pbc-kinjective-resolutions` | 1 | state |
 | `lem-exc-field-discrete-modules` | 1 | state |
 | `lem-pc-base-change-product` | 1 | state |
@@ -39,12 +38,11 @@
 | `lem-sc-p1-ext-yoneda-associativity` | 1 | state |
 | `lem-sc-p1-tor-dimension-shift-natural` | 1 | state |
 | `lem-sc-p1-tor-dimension-shifting` | 1 | state |
-| `lem-sc-picard-diagonal-locally-closed` | 1 | state |
+| `lem-sc-picard-h1-multiple-locus` | 1 | state |
 | `lem-sc-picard-h1-product-injective` | 1 | state |
+| `lem-sc-picard-locus-closed` | 1 | state |
 | `lem-sc-picard-locus-closed-valuation-triviality` | 1 | state |
 | `lem-sc-picard-product-open` | 1 | state |
-| `lem-sc-product-irreducible-components-bijection` | 1 | state |
-| `lem-sc-proper-dim-one-projective` | 1 | state |
 | `lem-sc-proper-flat-global-sections` | 1 | state |
 | `lem-sc-proper-flat-global-sections-criterion` | 1 | state |
 | `lem-sc-proper-or-affine` | 1 | state |
@@ -187,6 +185,7 @@
 | `lem-weil-pbc-constructible-module-finite-stalks` | 1 | state |
 | `lem-weil-pbc-constructible-module-support-constructible` | 1 | state |
 | `lem-weil-pbc-constructible-noetherian-finite-selection` | 1 | state |
+| `lem-weil-pbc-constructible-subobjects-noetherian` | 1 | state |
 | `lem-weil-pbc-coskeletal-map-trivial-kan` | 1 | state |
 | `lem-weil-pbc-coskeleton-free-homology-comparison` | 1 | state |
 | `lem-weil-pbc-coskeleton-matching-tuples` | 1 | state |
@@ -954,7 +953,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 920 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 917 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
