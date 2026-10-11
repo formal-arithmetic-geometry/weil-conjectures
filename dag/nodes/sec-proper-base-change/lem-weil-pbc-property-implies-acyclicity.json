@@ -164,11 +164,14 @@
   }
  },
  "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.Etale.HasTorsionBaseChange.hasInjectiveAcyclicity"
-  ],
-  "note": "Related source declaration in BaseChangeProperty.lean:204-221 proves the module-valued generalization; it is not an exact attachment to the abelian-sheaf statement without the coefficient-forgetting comparison."
+  "module": "Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicityOfBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.hasAllPrimeInjectiveAcyclicity_of_hasTorsionAbelianBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeInjectiveAcyclicityOfBaseChange.lean",
+  "statement": "theorem hasAllPrimeInjectiveAcyclicity_of_hasTorsionAbelianBaseChange {X Y : Scheme.{u_forward}} (f : X ⟶ Y) [IsProper f] (hf : HasTorsionAbelianBaseChange f) : HasAllPrimeInjectiveAcyclicity f",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
  },
  "split_report": {
   "date": "2026-10-10",
@@ -200,5 +203,13 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pia (reviewer sub-agent of L); spot-checked: Source Stacks Tag 0A4B (etale-cohomology lemma-proper-base-change-in-terms-of-injectives), direction (1)=>(2) (stated as clear): the node's statement agrees hypothesis by hypothesis (proper f, arbitrary cartesian base change, every prime r, injective F_r-module sheaf I, R^q f'_* g'^{-1} I = 0 for q>0), with PBC in the DAG's derived-exchange form [def-weil-pbc-property]. Step 1: I is killed by r hence torsion per def-weil-pbc-etale-sheaves, so def-weil-pbc-property gives Ex iso for I[0]. Step 2: lem-weil-pbc-injective-module-direct-image-acyclic states exactly R^q f_* I = 0 (q>0) for the underlying abelian sheaf of an injective R-module sheaf, H^q = R^q by def-weil-pbc-direct-image (degree-zero lemma, a mathlib leaf, superfluous but harmless). Step 3: prop-weil-pbc-inverse-image-exact + lem-weil-pbc-exact-functor-complex-cohomology (mathlib leaf). Step 4/5 elementary from the iso and def-weil-pbc-injective-acyclicity-property. Tool uses accepted as generic (no sk-thm-iff node states injective acyclicity or exactness of inverse image). Not attached: slopmaster2 HasTorsionBaseChange.hasInjectiveAcyclicity (BaseChangeProperty.lean 198-221, sorry-free OK) is Lambda-module PBC/IA over arbitrary Lambda, not this abelian/F_r statement. Small case f=id checked. FIX: dag/nodes/sec-proper-base-change/lem-weil-pbc-property-implies-acyclicity.json: proof[2].uses/text: cite def-weil-pbc-derived-inverse-image and def-weil-pbc-derived-categories (derived g^{-1} computed termwise, H^q of any representative) needed to apply the complex-level cohomology lemma; proof[3].uses/text: cite def-weil-pbc-derived-inverse-image for g'^{-1}(I[0]) = (g'^{-1}I)[0]; proof_deps: both added. 14:43-14:45 UTC.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pia1352",
+  "group": "M1",
+  "result": "pass",
+  "note": "X Y Scheme.{u}, f, [IsProper f]; PBC = IsIso of recorded derivedBaseChangeMapPlus AddCommGrpCat at singleFunctor 0 of every F with recorded Scheme.IsTorsionAbelianSheaf, every IsPullback square; IA = forall prime r, IsPullback square, Injective I in Sheaf (ModuleCat (ULift (ZMod r))), R^q f'_* (lowerStar.rightDerivedFunctorPlus + homologyFunctor q) of upperStar g' of forget2 I zero for q>0, same form as landed lem-weil-pbc-arbitrary-ring-torsion-sheaf-base-change; combined compile clean"
  }
 }
