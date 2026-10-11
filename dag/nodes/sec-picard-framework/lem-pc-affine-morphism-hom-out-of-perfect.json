@@ -24,7 +24,9 @@
   "def-pc-perfect-complex",
   "def-pc-derived-category",
   "def-pc-derived-pullback",
-  "def-pc-global-derived-rhom"
+  "def-pc-global-derived-rhom",
+  "def-pc-affine-global-hom-base-change-map",
+  "def-pc-pullback-stalk-tensor-comparison"
  ],
  "proof": [
   {
@@ -165,5 +167,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineMorphismHomOutOfPerfect",
+  "declaration": "AlgebraicGeometry.affineMorphism_hom_out_of_perfect",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineMorphismHomOutOfPerfect.lean",
+  "statement": "theorem affineMorphism_hom_out_of_perfect [∀ Z : Scheme.{uAH}, HasDerivedCategory.{wAH} (SheafOfModules.{uAH} (moduleRings Z.toRingedSpace))] [∀ (A : Type uAH) [Ring A], HasDerivedCategory.{wAH} (ModuleCat.{uAH} A)] {R B : CommRingCat.{uAH}} {X : Scheme.{uAH}} [CompactSpace X] [QuasiSeparatedSpace X] (f : X ⟶ Spec R) (g : Spec B ⟶ Spec R) [∀ U : X.Opens, HasDerivedCategory.{wAH} (SheafOfModules.{uAH} ((moduleRings X.toRingedSpace).over U))] (hTor : PullbackStalkTensor.IsTorIndependent f g) (M K : schemeDerivedCategory X) (hM : Scheme.IsPerfect X M) (hK : schemeDerivedQCohProperty X K) : IsIso (affineGlobalHomBaseChangeMap f g M K hM hK)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-62603",
+  "group": "C1",
+  "result": "pass",
+  "note": "independent Codex review: Matched qcqs schemes, affine bases, pullback projections, stalkwise Tor independence, perfect M, unbounded QCoh K, and the canonical comparison in D(B); all earlier normalization repairs are present, and both modules compile together cleanly in 25.6 s."
  }
 }
