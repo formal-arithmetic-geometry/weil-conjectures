@@ -1,11 +1,11 @@
 # Work queue
 
-450 items; claim with `tools/claim.py next <group> [--stage N]`.
+448 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (450)
+## Stage 2: nodes to state (448)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -36,7 +36,6 @@
 | `lem-pc-perfect-thick-closure` | 1 | state |
 | `lem-pc-perfect-two-out-of-three` | 1 | state |
 | `lem-pc-pseudo-coherent-finite-tor-perfect` | 1 | state |
-| `lem-pc-pseudo-coherent-summand` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-finite-tor-perfect` | 1 | state |
 | `lem-pc-ringed-spaces-derived-pullback-composition` | 1 | state |
 | `lem-pc-supported-perfect-generator` | 1 | state |
@@ -57,7 +56,6 @@
 | `lem-sc-derived-open-shriek-derived-adjunction` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
-| `lem-sc-intersection-effective-cartier` | 1 | state |
 | `lem-sc-koszul-regular-closed-immersion-perfect` | 1 | state |
 | `lem-sc-koszul-regular-sequence-dual-complex` | 1 | state |
 | `lem-sc-module-extension-by-zero-stalk-maps` | 1 | state |
