@@ -22,9 +22,54 @@
   "def-weil-triangulated-category",
   "def-pur-saturated-triangulated-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $t:X_0\\to X$ be an object of $S/X$. The triangle-completion lemma [lem-pur-triangle-completion-ms6-05r9] supplies a distinguished triangle $(X_0,Y_0,Z_0)$ and a morphism of triangles $(t,t',t'')$ to $(X,Y,Z,f,g,h)$ with $t',t''\\in S$, i.e. an object of $\\mathcal I$ whose projection to $S/X$ is $t$; the identity of $t$ is then a morphism in $S/X$ from that projection to $t$. Thus $\\mathcal I\\to S/X$ satisfies the existence condition (1) of initiality, and by the $Y$- and $Z$-forms of the same lemma so do $\\mathcal I\\to S/Y$ and $\\mathcal I\\to S/Z$.",
+   "uses": [
+    "lem-pur-triangle-completion-ms6-05r9"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma Tag 05R9 proof, construction over a prescribed denominator"
+   }
+  },
+  {
+   "text": "$\\mathcal I$ is nonempty: by MS1 of [def-pur-saturated-triangulated-localization] the identity morphism of $(X,Y,Z,f,g,h)$ is an object. Given two objects of $\\mathcal I$, the first assertion of the common-refinement lemma [lem-pur-triangle-common-refinement-ms3-05r9] gives an object of $\\mathcal I$ with an arrow to each of them; given two parallel arrows of $\\mathcal I$, its second assertion gives an arrow into their common source after which they agree. Hence $\\mathcal I$ is cofiltered.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "lem-pur-triangle-common-refinement-ms3-05r9"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma Tag 05R9 proof, filteredness condition (2)"
+   }
+  },
+  {
+   "text": "Initiality of $\\mathcal I\\to S/X$, condition (2) (Stacks' initial functor, the notion used by the cofinality lemma 0A1S; here a zigzag of length two suffices). Let $t:X_0\\to X$ be an object of $S/X$, let $x_1,x_2$ be objects of $\\mathcal I$ with $X$-components $s_1:X_1\\to X$, $s_2:X_2\\to X$, and let $u_i:X_i\\to X_0$ be morphisms of $S/X$, so $t\\circ u_i=s_i$. By the first assertion of the common-refinement lemma [lem-pur-triangle-common-refinement-ms3-05r9] there are an object $x_3$ of $\\mathcal I$, with $X$-component $s_3:X_3\\to X$, and arrows $x_3\\to x_i$ in $\\mathcal I$ with $X$-components $a_i:X_3\\to X_i$, so $s_i\\circ a_i=s_3$. Then $t\\circ(u_1\\circ a_1)=s_3=t\\circ(u_2\\circ a_2)$ with $t\\in S$, so the second clause of MS3 in [def-pur-saturated-triangulated-localization] gives $v:X_4\\to X_3$ in $S$ with $u_1\\circ a_1\\circ v=u_2\\circ a_2\\circ v$. The triangle-completion lemma [lem-pur-triangle-completion-ms6-05r9], applied to the distinguished triangle $(X_3,Y_3,Z_3)$ of $x_3$ and to $v$, gives a distinguished triangle $(X_4,Y_4,Z_4)$ and a morphism of triangles $(v,v',v'')$ to $(X_3,Y_3,Z_3)$ with all components in $S$; composing with the structure morphism of $x_3$ (MS1) gives an object $x_4$ of $\\mathcal I$ and an arrow $x_4\\to x_3$. The composite arrows $x_4\\to x_1$ and $x_4\\to x_2$ satisfy $u_1\\circ a_1\\circ v=u_2\\circ a_2\\circ v$ on $X$-components, which is condition (2) for $\\mathcal I\\to S/X$ with the zigzag $x_1\\leftarrow x_4\\rightarrow x_2$. Rotation of distinguished triangles (TR2), together with MS5 to identify $S/X[1]$ with $S/X$, identifies $\\mathcal I$ with the corresponding categories for $(Y,Z,X[1],g,h,-f[1])$ and $(Z,X[1],Y[1],h,-f[1],-g[1])$ compatibly with the projections, so the same argument gives condition (2) for $\\mathcal I\\to S/Y$ and $\\mathcal I\\to S/Z$.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "lem-pur-triangle-completion-ms6-05r9",
+    "lem-pur-triangle-common-refinement-ms3-05r9"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma Tag 05R9 proof, cofinality of the three projections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-saturated-triangulated-localization",
+  "lem-pur-triangle-completion-ms6-05r9",
+  "lem-pur-triangle-common-refinement-ms3-05r9"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Lemma Tag 05R9 (dual cofiltered form)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,12 +115,28 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-derived-functor-triangles-05sc",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-triangle-morphism-category-05r9",
+  "worker": "stage1",
+  "summary": "Split the 05R9 categorical claim into two supporting statements: completion of a prescribed S-denominator to a morphism of distinguished triangles, and common refinement/equalization of triangle morphisms. The item proof then derives cofilteredness and initiality of all three projections from those helpers and the definitions of the saturated triangulated localization.",
+  "blueprint": "Realizes the Lemma 05SC proof clause asserting that the category I of triangle morphisms is cofiltered and cofinal over X/S, Y/S, and Z/S.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tmc0250",
+  "group": "J1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tmc0250 (reviewer sub-agent of L); spot-checked: Item statement identical word for word to 152e1fcd6 (no statement_change needed). Initial = Stacks conditions (1),(2) of lem-weil-pbc-initial-functor-limit, as in 0A1S and 05SC: consistent. Completion helper true (TR1 on f∘s with Y'=Y, s'=id, then MS6; Y/Z cases by TR2+MS5). Mathlib grep Localization/ and Triangulated/ for cofiltered: no match. FIX more, RETURN less: (1) C4: common-refinement helper's first clause was in the filtered direction ('receiving an arrow from each', trivially true since the identity triangle is terminal in I, useless for cofilteredness); restated as 'with an arrow from it to each of them'. (2) Step 3 was the filtered (ind) argument (s:X->X', arrows from X', common target) with a JSON \\t eating '\\to' (B4); rewritten in the cofiltered form: span x1<-x3->x2 from the helper, MS3 second clause to equalize u1a1,u2a2 by v in S, completion lemma on (X3,Y3,Z3) and MS1 to get x4; zigzag of length two; rotation with TR2/MS5 for Y,Z. (3) Steps 1-2 rewritten (math mode for \\to; step 2 now nonempty by MS1 + the two helper clauses, dropping the vague 'MS2 and MS6 give'). The Second reading by J1 missed (1) and (2).; 2 file(s) fixed by the reviewer"
+ }
 }

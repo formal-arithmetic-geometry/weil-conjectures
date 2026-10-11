@@ -3322,3 +3322,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:50 L: reviewer R-tmc0250 launched (J1 lem-pur-triangle-morphism-category-05r9, head c7bcfef52); two reviewers in flight
 - 02:51 L: merged deliver/H1/lem-sc-complex-lift-class-projective (reviewer FIX; first push; new nodes: 1)
 - 02:51 L: read steps 3-6 of lem-sc-complex-lift-class-projective as repaired by R-clp0250 (merged eac06e58c): Stacks lemma-lift-complex's cone argument (acyclic lift A of Cone(q), exact lift h by a homotopy correction, split-injectivity from (1)-(3), P = coker[-1]) is sound; H1 had reworded the statement without a record, restored by the reviewer; second reading by H1 missed three faults (uncited K-flat representation, homotopy-only lift, the shift of the cokernel)
+- 02:52 L: merged deliver/J1/lem-pur-triangle-morphism-category-05r9 (reviewer FIX; first push; new nodes: 2)
