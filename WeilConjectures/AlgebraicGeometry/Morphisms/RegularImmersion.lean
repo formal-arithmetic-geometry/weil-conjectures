@@ -123,8 +123,9 @@ attribute [instance] NormalConeData.isClosedImmersion_zeroSection
 
 end Scheme.Hom
 
-/-- Blueprint `sk-lem-regular-smooth`: A regular immersion of smooth schemes over a perfect
-field
+/-- Blueprint `sk-lem-regular-smooth` (and its detailed node
+`lem-pur-regular-immersion-smooth-structure`): A regular immersion of smooth schemes over a
+perfect field
 
 **Smoothness of the sub-scheme.** Let `i : Z ⟶ X` be a regular closed immersion of pure
 codimension `c` with `X` smooth over a perfect field `k` and `Z` regular. Then the structure
@@ -138,8 +139,9 @@ theorem IsRegularImmersion.smooth_comp {k : Type u} [Field k] [PerfectField k] (
   have : IsRegular Z := ⟨hZ⟩
   smooth_of_isRegular (i ≫ aX)
 
-/-- Blueprint `sk-lem-regular-smooth`: A regular immersion of smooth schemes over a perfect
-field
+/-- Blueprint `sk-lem-regular-smooth` (and its detailed node
+`lem-pur-regular-immersion-smooth-structure`): A regular immersion of smooth schemes over a
+perfect field
 
 **The dimension count.** With the hypotheses of `AlgebraicGeometry.IsRegularImmersion.smooth_comp`,
 a component of `X` of dimension `n` meets `Z` in pure dimension `n - c`. Stated stalkwise, so
@@ -374,7 +376,8 @@ theorem isRegularImmersion_diagonal_of_isAffine {U V : Scheme.{u}} [IsAffine U] 
   rw [h]
   exact IsRegularImmersion.diagonal_isIso_comp _ _
 
-/-- Blueprint `sk-lem-diag-reg`: The diagonal is a regular immersion
+/-- Blueprint `sk-lem-diag-reg` (and its detailed node `lem-pur-diagonal-regular-immersion`): The
+diagonal is a regular immersion
 
 Let `f : X ⟶ Y` be smooth and separated of pure relative dimension `d`, let `W = X ×_Y X` and
 let `Δ : X ⟶ W` be the diagonal. Then `Δ` is a regular closed immersion of pure codimension
