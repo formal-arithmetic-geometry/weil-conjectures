@@ -54,7 +54,8 @@ attribute [local instance] Sheaf.monoidalCategory
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [BraidedCategory A]
   [(X.smallEtaleTopology.W (A := A)).IsMonoidal]
   [(V.smallEtaleTopology.W (A := A)).IsMonoidal] in
-instance Etale.isContinuous_overMap {V X : Scheme.{u}} {g : V ⟶ X} (h : Etale g) :
+instance Etale.isContinuous_overMap_smallEtaleTopology {V X : Scheme.{u}} {g : V ⟶ X}
+    (h : Etale g) :
     (MorphismProperty.Over.map ⊤ h).IsContinuous V.smallEtaleTopology X.smallEtaleTopology :=
   inferInstanceAs ((MorphismProperty.Over.map ⊤ h).IsContinuous
     (V.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale))
