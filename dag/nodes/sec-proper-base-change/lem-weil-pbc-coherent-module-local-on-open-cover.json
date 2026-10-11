@@ -195,5 +195,24 @@
   "by": "L",
   "result": "pass",
   "note": "Five elementary steps from the definitions: restriction facts (iterated restriction, left adjoint keeps O^n and epimorphisms, kernels sectionwise), finite type restricts and is local, both parts. Correct; 0 new nodes. Stage-3 note (worker): pqf-def-coherent says surjection without saying epimorphism of O_U-modules; read so."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover",
+  "declaration": "AlgebraicGeometry.coherent_module_local_on_open_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentModuleLocalOnOpenCover.lean",
+  "statement": "theorem coherent_module_local_on_open_cover (X : Scheme.{u}) (F : X.Modules) (I : Type u) (U : I → X.Opens) (hU : ⨆ i, U i = ⊤) : (RingedSpace.IsCoherent X.toRingedSpace F → ∀ (W : X.Opens), RingedSpace.IsCoherent W.toScheme.toRingedSpace ((Scheme.Modules.restrictFunctor W.ι).obj F)) ∧ ((∀ (i : I), RingedSpace.IsCoherent (U i).toScheme.toRingedSpace ((Scheme.Modules.restrictFunctor (U i).ι).obj F)) → RingedSpace.IsCoherent X.toRingedSpace F)",
+  "by": "J1",
+  "date": "2026-10-11",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "fixed_by": "R-cml1210"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cml1210",
+  "group": "J1",
+  "result": "fix",
+  "note": "X:Scheme.{u}; F:X.Modules; I:Type u, U:I→X.Opens, hU:⨆ U i=⊤ (OPEN COVERS); (1) IsCoherent X.toRingedSpace F → ∀ W, IsCoherent W.toRingedSpace (restrictFunctor W.ι).obj F; (2) ∀ i coherent restriction → IsCoherent F; restriction = Mathlib restrictFunctor along open immersion (node's O_W-module F|_W; .over gives no RingedSpace for IsCoherent); fix: docstring carries node's 5-step proof"
  }
 }
