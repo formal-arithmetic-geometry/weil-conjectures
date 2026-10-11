@@ -254,16 +254,14 @@ theorem isMixedOfWeightsAtMost_higherLowerStar_of_isProper {F : WeilSheaf k₀ l
   (hasDirectImageWeightBound_over_finiteField ι f w F hF i).of_iso
     (higherLowerShriekObjIsoOfIsProper f i F)
 
+omit [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- **Local constancy** (Step 1 of `prop-zl-smooth-proper-relative-purity`, second half of
 clause (a)): for a smooth proper morphism `f` and a lisse Weil sheaf `F`, the higher direct
-images `Rⁱf₀*F` are lisse.
-
-The proof of the blueprint reduces, on a lattice, to the torsion sheaves `R^q f_* F_n`; these
-are constructible, and proper base change to the strict henselizations of `Y` together with
-smooth base change along `X' ⟶ Y'` shows that all their specialization maps are isomorphisms.
-This needs proper and smooth base change for the `ℓ`-adic pro-étale sheaves underlying Weil
-sheaves, and the comparison of `Rf_*` of the lattice with the limit of its reductions, which the
-repository does not provide yet. -/
+images `Rⁱf₀*F` are lisse. The underlying `ℓ`-adic sheaf of `Rⁱf₀*F` is the higher direct image
+`Rⁱf̄_* F̄` along the base change `f̄` to the geometric fibres, forgetting the Weil structure
+commuting with right derivation; so this is
+`ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`. -/
 theorem isLisse_higherLowerStar_of_smooth_of_isProper [hs : Smooth f] {F : WeilSheaf k₀ l X}
     (hF : F.IsLisse)
     (i : ℕ) : ((higherLowerStar f i).obj F).IsLisse := by
@@ -278,7 +276,8 @@ theorem isLisse_higherLowerStar_of_smooth_of_isProper [hs : Smooth f] {F : WeilS
   let e : (IsoAlgebra.forget _).mapDerivedCategory.obj
       ((ProEtaleWeilSheaf.lowerStar k₀ l f).rightDerivedFunctor.obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj F.obj)) ≅
-      (Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀))))_*ᵃ[l].rightDerivedFunctor.obj
+      (Scheme.Hom.geometricFiberMap f
+        (comp_over f (Spec (CommRingCat.of k₀))))_*ᵃ[l].rightDerivedFunctor.obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj F.obj.carrier) :=
     (IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso _ _).app _ ≪≫
       Functor.mapIso _ (((IsoAlgebra.forget _).mapDerivedCategorySingleFunctor 0).app F.obj)
