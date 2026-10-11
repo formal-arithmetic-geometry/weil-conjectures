@@ -191,5 +191,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fpg2539 (reviewer sub-agent of L); spot-checked: Steps 1-6 against cited statements: closedness of finite maps, reduction via universal-homeomorphism topos equivalence (accepted as generic tool from sk-prop-cd), generic-fibre/dominating components, lisse open nbhds from irreducible-lisse-strata (same constructible notion, def-weil-pbc-etale-sheaves, C4 ok), splitting node, u_j* of lisse is lisse via topos equivalence, finite exchange, etale-surjective descent. Route avoids generic flatness (03S0/02NW): valid, uses universal homeomorphisms instead. New node lem-weil-pbc-generic-finite-algebra-splitting: true (Galois closure of separable parts, spread out, purely inseparable factors radicial), not a duplicate (lem-fin-finite-splitting is etale-local, different), not in Mathlib per recorded searches, not elementary. FIX more, RETURN less: new node cited def-weil-pbc-scheme-conventions for 'universal homeomorphism', which that node does not define; now cites def-weil-universal-homeomorphism (added to stmt_deps).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericFinitePushforward",
+  "declaration": "AlgebraicGeometry.Scheme.exists_dense_open_lisse_finite_directImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFinitePushforward.lean",
+  "statement": "theorem exists_dense_open_lisse_finite_directImage (S : Scheme.{u}) [IsIntegral S] [IsNoetherian S] [IsAffine S] {Z : Scheme.{u}} (g : Z ⟶ S) [IsFinite g] (E : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) (hE : IsConstructibleEtaleSheafOfSets ((sheafCompose Z.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj E)) : ∃ U : S.Opens, Dense (U : Set S) ∧ IsLisseEtaleSheafOfSets ((etaleSetPullback U.ι).obj ((sheafCompose S.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj ((Etale.lowerStar AddCommGrpCat.{u + 1} g).obj E)))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpg1028",
+  "group": "E1",
+  "result": "pass",
+  "note": "S integral (AlgebraicGeometry.IsIntegral, #check'd; packet §5 misresolved to ring IsIntegral) Noetherian affine; g finite IsFinite; E : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u+1}, constructible via IsConstructibleEtaleSheafOfSets on sheafCompose forget (same spelling as K1 382eecafa sibling); ∃ U : S.Opens, Dense; g_*E = Etale.lowerStar AddCommGrpCat g, restricted by etaleSetPullback U.ι, IsLisseEtaleSheafOfSets (finite stalks); no statement change; empty Z / E=0 fine"
  }
 }

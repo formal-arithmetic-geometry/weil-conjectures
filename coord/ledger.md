@@ -4241,3 +4241,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:28 L: merged deliver/M1/lem-weil-pbc-finite-module-complete-over-complete-noetherian (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteModuleComplete finite_module_complete_over_complete_noetherian)
 - 10:28 L: merged deliver/K1/lem-weil-pbc-finite-subalgebra-fraction-field (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteSubalgebraFractionField MvPolynomial.exists_finite_subalgebra_fraction_field)
 - 10:29 L: merged deliver/E1/lem-weil-pbc-flat-local-depth-formula (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatLocalDepthFormula IsLocalRing.depth_eq_add_of_flat_local)
+- 10:29 L: merged deliver/E1/lem-weil-pbc-finite-pushforward-generic-constructible (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GenericFinitePushforward AlgebraicGeometry.Scheme.exists_dense_open_lisse_finite_directImage)
