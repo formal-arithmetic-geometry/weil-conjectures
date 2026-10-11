@@ -1,11 +1,11 @@
 # Work queue
 
-877 items; claim with `tools/claim.py next <group> [--stage N]`.
+874 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (877)
+## Stage 2: nodes to state (874)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -26,7 +26,6 @@
 | `lem-sc-dimension-locally-algebraic` | 1 | state |
 | `lem-sc-fibre-dimension-after-base-change` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
-| `lem-sc-picard-h1-multiple-locus` | 1 | state |
 | `lem-sc-picard-product-open` | 1 | state |
 | `lem-sc-smooth-proper-diagonal-conormal-differentials` | 1 | state |
 | `lem-sp-cartan-eilenberg-comparison-independence` | 1 | state |
@@ -36,7 +35,6 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-ample-very-ample-immersion-affine-base` | 1 | state |
 | `lem-weil-pbc-artinian-ideal-length-one-filtration` | 1 | state |
-| `lem-weil-pbc-associated-module-hom` | 1 | state |
 | `lem-weil-pbc-associated-module-pullback` | 1 | state |
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
 | `lem-weil-pbc-associated-primes-flat-base-change` | 1 | state |
@@ -50,7 +48,6 @@
 | `lem-weil-pbc-clopen-open-cover-section` | 1 | state |
 | `lem-weil-pbc-closed-immersion-pushforward-fully-faithful` | 1 | state |
 | `lem-weil-pbc-closed-immersion-unit-quotient` | 1 | state |
-| `lem-weil-pbc-closed-point-dimension-local-ring` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-constant-restriction` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-stalks` | 1 | state |
 | `lem-weil-pbc-cm-local-associated-prime-minimal` | 1 | state |
