@@ -115,5 +115,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pki2710 (reviewer sub-agent of L); spot-checked: Tag 0BK6 statement matches (general abelian category, degreewise products exist; generalisation from ringed space named in second reading, citers lem-pc-derived-functor-commutes-derived-limit / lem-pc-ringed-space-rgamma-derived-limit apply it to Mod(O_X), which has products); no ATTACH: slopmaster2 Products.lean has only HomotopyCategory.isLimitFanQuotient and DerivedCategory.hasLimitsOfShape_discrete (existence, needs K-injective resolutions), not this statement; no Mathlib match; lem-pc-ringed-space-derived-products is existence of products, not duplicated and not needed. FIX more, RETURN less: (1) C1 Step 1 exactness of products in Ab now cites existing lem-pc-abelian-groups-exact-products (added to uses and proof_deps); (2) C4/E Step 3 now checks the hypothesis of lem-weil-pbc-kinjective-hom-derived (homotopic-to-zero form) from the Hom-complex-acyclic form of def-sp-kinjective-bridge, for I_t and I.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KInjectiveProducts",
+  "declaration": "CochainComplex.termwise_product_isKInjective_and_isLimit",
+  "file": "lean/Sheaf/Algebra/Homology/KInjectiveProducts.lean",
+  "statement": "theorem termwise_product_isKInjective_and_isLimit {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C] {T : Type t} (I : T → CochainComplex C ℤ) [∀ s : T, (I s).IsKInjective] [∀ n : ℤ, HasLimit (Discrete.functor I ⋙ HomologicalComplex.eval C (ComplexShape.up ℤ) n)] : let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I) IsKInjective P.pt ∧ Nonempty (IsLimit (DerivedCategory.Q.mapCone P))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rpk0938",
+  "group": "F1",
+  "result": "pass",
+  "note": "abelian C; arbitrary T:Type t; I_t K-injective = Mathlib CochainComplex.IsKInjective (#check resolved); degreewise HasLimit of this family only; P = coneOfHasLimitEval termwise product with its projections; conclusions IsKInjective P.pt and Q.mapCone P IsLimit in D(C) via HasDerivedCategory.{w}; empty T ok"
  }
 }
