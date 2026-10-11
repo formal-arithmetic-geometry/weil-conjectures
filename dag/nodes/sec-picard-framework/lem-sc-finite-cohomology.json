@@ -14,13 +14,14 @@
  },
  "kind": "statement",
  "title": "Finite cohomology below a pseudo-coherent bound",
- "statement": "Let R be a ring and m an integer. Let D(R) be the derived category [def-weil-abstract-derived-category] of the abelian category of R-modules. Call an object C of D(R) m-pseudo-coherent if there are a bounded complex E^\\bullet of finite free R-modules and a morphism E^\\bullet\\to C in D(R) inducing isomorphisms H^i(E^\\bullet)\\to H^i(C) for i>m and a surjection H^m(E^\\bullet)\\to H^m(C). If K^\\bullet is a complex of R-modules, viewed as an object of D(R), which is m-pseudo-coherent and satisfies H^i(K^\\bullet)=0 for every i>m, then H^m(K^\\bullet) is a finite type R-module.",
+ "statement": "Let R be a commutative ring with identity (including the zero ring, as in the Stacks conventions) and m an integer. Let D(R) be the derived category [def-weil-abstract-derived-category] of the abelian category of R-modules. Call an object C of D(R) m-pseudo-coherent [def-pc-ring-m-pseudo-coherent] if there are a bounded complex E^\\bullet of finite free R-modules and a morphism E^\\bullet\\to C in D(R) inducing isomorphisms H^i(E^\\bullet)\\to H^i(C) for i>m and a surjection H^m(E^\\bullet)\\to H^m(C). If K^\\bullet is a complex of R-modules, viewed as an object of D(R), which is m-pseudo-coherent and satisfies H^i(K^\\bullet)=0 for every i>m, then H^m(K^\\bullet) is a finite type R-module.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 064S, label lemma-finite-cohomology"
  },
  "stmt_deps": [
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-m-pseudo-coherent"
  ],
  "proof": [
   {
@@ -105,5 +106,54 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fco3157 (reviewer sub-agent of L); spot-checked: Read Tag 064S; steps 1-3 elementary and correct (top-degree cancellation by splitting over finite projectives, H^m(E') quotient of finitely generated E'^m, quotient of finite type is finite type); def-weil-abstract-derived-category is the right ring-level citation (def-pc-derived-category is O_X-modules, correctly dropped); citer lem-sc-affine-pseudo-coherent-lift uses exactly this clause with m=n-1 in the sense of lem-sc-cone-pseudo-coherent; no duplicate among pseudo-coherent/finite-cohomology nodes; Mathlib grep for pseudo-coherent: 0 hits. FIX more, RETURN less: (1) C4 (missed by the second reading, which introduced it) inline definition changed to finite projective witnesses, diverging from the identical inline definitions in lem-sc-cone-pseudo-coherent and lem-pc-ring-pseudo-coherent-distinguished-triangle and from Tag 064Q: restored finite free in the statement; step 1 notes finite free is finite projective and step 2 works with finite projectives, as Tag 064S does; (2) stale split_report summary naming a removed child lemma corrected.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-fco3157): The three inline m-pseudo-coherence definitions (this item, lem-sc-cone-pseudo-coherent, lem-pc-ring-pseudo-coherent-distinguished-triangle) now agree word for word (finite free); a definition node for m-pseudo-coherence in D(R) is still missing."
+ "lead_note": "2026-10-10 L (R-fco3157): The three inline m-pseudo-coherence definitions (this item, lem-sc-cone-pseudo-coherent, lem-pc-ring-pseudo-coherent-distinguished-triangle) now agree word for word (finite free); a definition node for m-pseudo-coherence in D(R) is still missing.",
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent",
+  "declaration": "DerivedCategory.finite_homology_of_isMPseudoCoherent",
+  "file": "lean/Sheaf/RingTheory/FiniteHomologyOfMPseudoCoherent.lean",
+  "statement": "theorem finite_homology_of_isMPseudoCoherent {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] (m : ℤ) (K : CochainComplex (ModuleCat.{v} R) ℤ) (hK : IsMPseudoCoherent m (Q.obj K)) (hvan : ∀ i : ℤ, m < i → IsZero ((homologyFunctor (ModuleCat.{v} R) i).obj (Q.obj K))) : Module.Finite R ((homologyFunctor (ModuleCat.{v} R) m).obj (Q.obj K))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fco1043",
+  "group": "K1",
+  "result": "pass",
+  "note": "CommRing R (Tag 00AQ, zero ring allowed), m:ℤ, K CochainComplex ℤ via Q.obj, hK = landed IsMPseudoCoherent (all clauses), hvan IsZero H^i for i>m only, conclusion Module.Finite of H^m; no existing source/Mathlib statement; correction only makes the Stacks ring convention explicit (not H7); citers hold",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "K1 stage 2",
+  "old_statement": "Let R be a ring and m an integer. Let D(R) be the derived category [def-weil-abstract-derived-category] of the abelian category of R-modules. Call an object C of D(R) m-pseudo-coherent if there are a bounded complex E^\\bullet of finite free R-modules and a morphism E^\\bullet\\to C in D(R) inducing isomorphisms H^i(E^\\bullet)\\to H^i(C) for i>m and a surjection H^m(E^\\bullet)\\to H^m(C). If K^\\bullet is a complex of R-modules, viewed as an object of D(R), which is m-pseudo-coherent and satisfies H^i(K^\\bullet)=0 for every i>m, then H^m(K^\\bullet) is a finite type R-module.",
+  "what": "The word ring did not explicitly state the source convention of commutativity with identity. Stacks Tag 00AQ includes the zero ring. Make this standing convention explicit and cite the already landed m-pseudo-coherence definition, rather than silently imposing CommRing or duplicating that notion. The finite-cohomology assertion is unchanged.",
+  "source": {
+   "document": "Stacks Project, More on Algebra and Commutative Algebra",
+   "place": "Tag 064S (1), Tag 064Q (1), and Tag 00AQ (ring conventions)"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-ring-pseudo-coherent-iff-all-m",
+    "holds": true,
+    "note": "The descending construction applies the lemma over the commutative ring of Stacks Tag 064U, at m=n-1 to its cone; the use still holds."
+   },
+   {
+    "id": "lem-pc-ring-pseudo-coherent-localization-glue",
+    "holds": true,
+    "note": "The lemma is applied over commutative localization rings A_{f_i} at the top degree n; the use still holds."
+   },
+   {
+    "id": "lem-sc-affine-pseudo-coherent-lift",
+    "holds": true,
+    "note": "The lemma is applied to complexes over localized coordinate rings of affine schemes, which are commutative with identity; the use at m=n-1 still holds."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-abstract-derived-category"
+  ]
+ }
 }
