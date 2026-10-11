@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Presentable.Finite
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Generators
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericPoint
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.PointSplitting
 public import WeilConjectures.SixFunctors.Finite.BaseChange
@@ -230,11 +231,7 @@ theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :
     IsFinitelyPresentable.{u} F := by
-  -- Stacks 095N: sections over affine étale `X`-schemes give an epimorphism from a possibly
-  -- infinite sum of `v_! Λ` (093C, `Etale.epi_sigmaDesc_sectionHom`); the supports of the
-  -- cokernels of its finite subsums are constructible (`v_! Λ` is constructible, 03SA) with
-  -- empty intersection, so one is empty by compactness of the constructible topology; likewise
-  -- for the constructible kernel.
+  -- Stacks 095N (`Etale.exists_presentation_of_isConstructibleSheaf`)
   obtain ⟨m, n, V, v, hv, hV, U, w, hw, hU, φ, π, hφπ, ⟨hc⟩⟩ :
       ∃ (m n : ℕ) (V : Fin m → Scheme.{u}) (v : ∀ j, V j ⟶ X) (hv : ∀ j, Etale (v j))
         (_ : ∀ j, IsAffine (V j)) (U : Fin n → Scheme.{u}) (w : ∀ i, U i ⟶ X)
@@ -249,7 +246,7 @@ theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ
             ((constantSheaf (U i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
               (ModuleCat.of Λ Λ))) ⟶ F)
         (hφπ : φ ≫ π = 0), Nonempty (IsColimit (CokernelCofork.ofπ π hφπ)) :=
-    sorry
+    Etale.exists_presentation_of_isConstructibleSheaf F
   have := Etale.isFinitelyPresentable_sigma_etaleLowerShriek Λ V v hv hV
   have := Etale.isFinitelyPresentable_sigma_etaleLowerShriek Λ U w hw hU
   have (j : WalkingParallelPair) : IsFinitelyPresentable.{u} ((parallelPair φ 0).obj j) := by
