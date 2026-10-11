@@ -1,19 +1,72 @@
-# Delivery report
+## Worker report
 
-1. Files written:
-   - `dag/nodes/sec-picard-framework/lem-sc-p1-graded-nakayama-free.json` — split item, four proof steps; Mathlib verdict: no match.
-   - `dag/nodes/sec-picard-framework/lem-sc-p1-graded-nakayama-generation.json` — new statement-only node; Mathlib verdict: no match.
-   - `dag/nodes/sec-picard-framework/lem-sc-p1-minimal-presentation-tor.json` — new statement-only node; Mathlib verdict: no match.
-   - `citations.json` — verbatim quotes for every cited proof statement.
-2. Attachments: none.
-3. WANTED: EGA II, Section 2 or Hartshorne, *Algebraic Geometry*, II.5, for the graded Nakayama and minimal graded presentation facts; the split is marked agent-written because those references are not present locally.
-4. The imported item had no proof. I made the total-degree grading and irrelevant ideal explicit and added the Tor and graded-shift definition dependencies. The two substantive inputs were not present elsewhere in the DAG or blueprint, so they are statement-only queue nodes.
-5. No unfinished work remains in this sandbox.
+The module states the graded Nakayama freeness criterion as
+`MvPolynomial.graded_nakayama_free`.  It takes a field `k`, a module `N` over
+`MvPolynomial (Fin 2) k`, and an internal integer grading `ℳ`.  The hypothesis
+`hℳ` is `DirectSum.IsInternal ℳ`, rendering the direct-sum grading clause.  The
+hypothesis `hsmul` states that a degree-`n` homogeneous polynomial sends degree
+`j` elements to degree `n+j`.  The hypothesis `hN` gives a finite set of
+homogeneous generators, rendering finite generation.  The hypothesis `hTor`
+is `Subsingleton` of Mathlib's first left-derived tensor functor
+`CategoryTheory.Tor'` applied to `N` and the residue-field module obtained by
+restriction along `MvPolynomial.constantCoeff`; this is the Lean rendering of
+`Tor_1^S(N,k)=0` and the irrelevant ideal `S_+=(x_0,x_1)` residue field.
+The conclusion supplies a finite rank `Module.Basis` of `N` and a degree for
+each basis vector, rendering that `N` is a finite direct sum of graded shifts
+`S(d)`.
 
-## Review by M1
+Dependencies used: `def-sc-p1-standard` (its source declaration is the
+standard projective-line grading convention), `def-weil-pbc-tor-modules`
+(Mathlib `CategoryTheory.Tor'`), and `def-weil-pbc-proj-twisting-sheaf`
+(source declaration `AlgebraicGeometry.Proj.twist`).  The module imports
+Mathlib's module-category and Tor declarations; `MinimalPresentationTor` is
+imported to make the standard abelian structure for module categories
+available.
 
-I read the item and its parent proof paragraph in the blueprint node `lem-sc-p1-graded-resolution`. I also read the existing graded syzygy, finite homogeneous generator, graded-kernel, Koszul, and Tor dimension-shifting nodes to ensure the new criterion is used in the same two-variable graded setting. The item is not stated by a sorry-free declaration in either Lean checkout; the only related Lean search hits are comments and generic Nakayama imports.
+Edge cases checked: the finite generator set may be empty (the zero module),
+the grading index is all of `ℤ` (including negative degrees), and the basis
+rank may be zero.  The Tor residue module is the zero condition via
+`Subsingleton`, so the zero module is included.  Searches: `rg` over the
+project and source for graded Nakayama/free/Tor declarations found no exact
+statement; the node's recorded LeanSearch, Loogle, and Mathlib grep searches
+also report no exact match.  Mathlib's `CategoryTheory.Tor'` is used for the
+Tor notion, while the existing source `AlgebraicGeometry.Proj.twist` supplies
+the twisting-sheaf notion.  No statement correction or disputed-statement
+marker is needed.
 
-Step 1 uses the new graded-generation statement exactly: it supplies homogeneous lifts of a basis of `N/S_+N` and says those lifts generate `N`, so the displayed finite graded free presentation is justified. Step 2 uses the new minimal-presentation Tor statement exactly: its kernel quotient is identified with `Tor_1`, and the hypothesis gives zero quotient. Step 3 uses the zero-quotient consequence of graded generation on the finitely generated graded kernel; the finite-generation hypothesis follows because the kernel is a graded submodule of a finite free module over the Noetherian polynomial ring. Step 4 is the direct definition-level conclusion from the finite free presentation and the existing graded-shift definition. The fourth citation is therefore elementary and carries only the existing definition dependency; all non-elementary facts are cited in the preceding steps.
+## Second reading by M1
 
-For both new nodes I searched the whole DAG and blueprint before writing them, then ran LeanSearch, Loogle, and Mathlib-source grep searches on the concept and likely declaration names. No existing node states either result and no Mathlib declaration gives the graded version. I checked small cases: `N=S` has quotient `k` and the criterion returns the free rank-one module; `N=k` has nonzero `Tor_1` and is correctly excluded; a zero module has zero quotient and is free of rank zero. The minimal-presentation statement uses the standard tensor calculation for a presentation whose reduction modulo `S_+` is an isomorphism, matching the criterion's hypothesis.
+The node introduces: a field `k`; the polynomial ring `S = k[x₀,x₁]` with its
+total-degree grading (negative parts zero); the irrelevant ideal `S₊ = (x₀,x₁)`;
+a finitely generated `ℤ`-graded `S`-module `N`; and the hypothesis
+`Tor₁^S(N,k)=0`. Its conclusion is that `N` is graded free, equivalently a
+finite direct sum of graded shifts `S(d)`.
+
+The Lean theorem renders these objects as `k : Type u` with `[Field k]`,
+`N : Type u` with additive-group and `Module (MvPolynomial (Fin 2) k) N`
+instances, and `ℳ : ℤ → AddSubgroup N` with `DirectSum.IsInternal ℳ`. The
+`hsmul` clause says homogeneous degree-`n` polynomials carry `ℳ j` into
+`ℳ (n+j)`, while `hN` gives a finite homogeneous spanning set; together these
+are the stated graded-module and finite-generation hypotheses. `hTor` is
+`Subsingleton` of `CategoryTheory.Tor'` in degree one applied to `N` and the
+residue-field module obtained by restriction along `constantCoeff`, which is
+the `S/S₊` coefficient module. The conclusion
+`∃ r b d, ∀ i, b i ∈ ℳ (d i)` is a finite homogeneous `Module.Basis`, exactly
+the finite direct sum of shifts. Every object, hypothesis, quantifier, and
+conclusion clause matches; no extra Noetherian, characteristic, or universe
+restriction occurs.
+
+Edge cases are covered: `r = 0` and an empty generating set give the zero
+module; degrees range over all `ℤ`, including negative values; and the
+subsingleton Tor condition includes the zero residue/Tor object. The fixed
+universe is shared by `k`, `N`, and the module category, so no independent
+universe makes the statement vacuous.
+
+I searched the repository and slopmaster2 source, and Mathlib, for graded
+Nakayama/free/Tor declarations (including `graded_nakayama_free` and
+`gradedNakayama`); no exact existing declaration was found. The recorded
+dependency declarations were checked: `def-sc-p1-standard` supplies the
+standard grading convention, `CategoryTheory.Tor'` supplies the Tor notion,
+and the recorded projective twisting declaration supplies shifts `S(d)`.
+The worker module already matches the corrected node and compiled cleanly;
+no mismatch or repair was needed.

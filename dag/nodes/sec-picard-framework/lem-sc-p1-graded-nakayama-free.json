@@ -126,5 +126,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gnf (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-p1-graded-resolution (proof, graded Nakayama applied to K_2); no Stacks tag; item statement now spells out the total-degree grading and S_+ and drops the 'equivalently' parenthetical (named in report item 4); the only citer lem-sc-p1-graded-syzygy uses only Tor_1=0 => finite sum of S(d), still given. Step 1: lem-sc-p1-graded-nakayama-generation gives that homogeneous lifts of a homogeneous basis of N/S_+N generate, so q surjective and F/S_+F->N/S_+N basis-to-basis iso (elementary). Step 2: lem-sc-p1-minimal-presentation-tor (from 0->K->F->N->0 tensored with k, Tor_1(F,k)=0 and F(x)k->N(x)k iso give Tor_1(N,k)=K/S_+K; checked true) gives K/S_+K=0. Step 3: finite generation of K plus the 'in particular' clause of the generation node gives K=0. Step 4: F=sum S(-deg n_j), def (2) of S(d). New nodes: statement only, self-contained, true (degrees of f.g. graded module over S with S_0=k bounded below); tested N=S, N=k (Tor_1=k^2 nonzero), N=0. Blueprint search 'Nakayama', 'graded free' found only the parent; no slopmaster2 declaration (grep). Fixes: dag/nodes/sec-picard-framework/lem-sc-p1-graded-nakayama-free.json: proof[2].text/uses + proof_deps: FIX more, RETURN less (C1): the Noetherian finite generation of K was used with no node; now cites existing lem-sc-p1-graded-kernel-finite (graded surjection F->N of f.g. graded modules has f.g. kernel); statement: restored the inline citations [def-sc-p1-standard], [def-weil-pbc-tor-modules], [def-weil-pbc-proj-twisting-sheaf] (2) that the worker dropped (already in stmt_deps). Start Sat Oct 10 03:54:07 PM UTC 2026, end Sat Oct 10 03:55:10 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedNakayamaFree",
+  "declaration": "MvPolynomial.graded_nakayama_free",
+  "file": "lean/Sheaf/RingTheory/GradedNakayamaFree.lean",
+  "statement": "theorem graded_nakayama_free (k : Type u) [Field k] (N : Type u) [AddCommGroup N] [Module (MvPolynomial (Fin 2) k) N] (ℳ : ℤ → AddSubgroup N) (hℳ : DirectSum.IsInternal ℳ) (hsmul : ∀ (n : ℕ) (j : ℤ) (f : MvPolynomial (Fin 2) k) (x : N), f ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℳ j → f • x ∈ ℳ ((n : ℤ) + j)) (hN : ∃ s : Set N, s.Finite ∧ (∀ x ∈ s, SetLike.IsHomogeneousElem ℳ x) ∧ Submodule.span (MvPolynomial (Fin 2) k) s = ⊤) (hTor : Subsingleton (((Tor' (ModuleCat.{u} (MvPolynomial (Fin 2) k)) 1).obj (ModuleCat.of (MvPolynomial (Fin 2) k) N)).obj ((ModuleCat.restrictScalars (MvPolynomial.constantCoeff : MvPolynomial (Fin 2) k →+* k)).obj (ModuleCat.of k k)))) : ∃ (r : ℕ) (b : Module.Basis (Fin r) (MvPolynomial (Fin 2) k) N) (d : Fin r → ℤ), ∀ i : Fin r, b i ∈ ℳ (d i)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gnf"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gnf",
+  "group": "M1",
+  "result": "fix",
+  "note": "k field; S=MvPolynomial (Fin 2) k graded by homogeneousSubmodule (negatives zero); N Z-graded via IsInternal ℳ + hsmul (as GradedSyzygy/MinimalGradedPresentation); f.g. as finite homogeneous span (MinimalGradedPresentation.finite form); Tor_1(N,k)=0 as Subsingleton of Tor' 1 with residue via restrictScalars constantCoeff (as MinimalPresentationTor); conclusion finite homogeneous Module.Basis with integer degrees = finite sum of shifts S(d); zero module and universes checked. Fix: three imports stranded inside the copyright comment moved into the import block"
  }
 }
