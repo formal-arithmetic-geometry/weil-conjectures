@@ -7,31 +7,35 @@
  },
  "kind": "statement",
  "title": "Eventual equality of descended quasi-compact opens",
- "statement": "Fix the base-changed inverse system, opens, affine charts, finite basic-open presentations, transported sections, witness identities, and selected stage $\\lambda_{W_1=W_2}$ constructed in [def-nagata-qc-open-equality-stage]. For every index $\\lambda\\geq\\lambda_{W_1=W_2}$, let $W_{i,\\lambda}$ be the pullback of $W_{i,\\lambda_0}$ to $Y_\\lambda$ (equivalently, the finite union of the transported basic opens on each chart). Then $W_{1,\\lambda}=W_{2,\\lambda}$ as opens of $Y_\\lambda$.",
+ "statement": "Fix the nonempty directed preorder $I$, inverse system $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ with affine transitions, limit cone $c$ with vertex $S$, base index $i_0$, morphism $p:Y_0\\to D(i_0)$ with $Y_0$ quasi-compact and quasi-separated, and quasi-compact opens $W_1,W_2\\subseteq Y_0$ whose inverse images in $Y_0\\times_{D(i_0)}S$ agree, as in [def-nagata-qc-open-equality-stage]. Fix the selected binary upper bounds $d$ with $i\\le d(i,j)$ and $j\\le d(i,j)$ and auxiliary linear order $r$ of [def-nagata-directed-finite-upper-bound]. Let $\\sigma=\\lambda_{W_1=W_2}$ be exactly the stage returned by [def-nagata-qc-open-equality-stage] with these data. For every $j\\ge i_0$ satisfying $\\sigma\\le j$, the inverse images of $W_1$ and $W_2$ under the first projection $Y_0\\times_{D(i_0)}D(j)\\to Y_0$ agree. Here the map $D(j)\\to D(i_0)$ is the transition corresponding to $i_0\\le j$, so these are precisely the opens on the base-changed system [def-nagata-basechanged-system]. The condition $j\\ge i_0$ only specifies its indexing tail: the upper-bound property implies $i_0\\le\\sigma$, hence it excludes no stage above $\\sigma$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-qc-open-eq-eventually.md",
   "place": "node lemma-nagata-qc-open-eq-eventually, order 350"
  },
  "stmt_deps": [
-  "def-nagata-qc-open-equality-stage"
+  "def-nagata-qc-open-equality-stage",
+  "def-nagata-directed-finite-upper-bound",
+  "def-nagata-basechanged-system"
  ],
  "proof": [
   {
-   "text": "The definition node supplies a finite affine cover and, on each chart, power identities witnessing both radical containments. Every element of the finite set $F$ of the definition is $\\leq\\lambda_{W_1=W_2}=u(F)\\leq\\lambda$ by [lemma-nagata-directed-finite-upper-bound], so $\\lambda$ is above every element of $F$ and, applying the transition ring maps, every identity transports to the $\\lambda$-chart with the pullbacks $f_{ijk,\\lambda}$. If a point lies in $D(f_{1jk,\\lambda})$, the first identity forces at least one $f_{2\\ell k,\\lambda}$ to be nonzero at that point, so $D(f_{1jk,\\lambda})\\subseteq\\bigcup_\\ell D(f_{2\\ell k,\\lambda})$; the second identity gives the reverse inclusion after exchanging $1$ and $2$. Taking the finite unions and then the affine charts gives $W_{1,\\lambda}\\subseteq W_{2,\\lambda}$ and $W_{2,\\lambda}\\subseteq W_{1,\\lambda}$, hence equality.",
+   "text": "Unfold the selected stage of [def-nagata-qc-open-equality-stage]. Its chosen compact-open equality witness in the base-changed limit system has underlying index τ, and its equality is equality of inverse images under the first projection to Y₀. By [lemma-nagata-directed-finite-upper-bound], both i₀ and τ are below the selected finite upper bound σ, using the upper-bound property of d. For j≥σ, transitivity gives τ≤j. Pull the witness equality back along the base-changed transition map from j to τ supplied by [def-nagata-basechanged-system]. Its compatibility with the first projections, and functoriality of inverse images, give equality of the two opens at j.",
    "uses": [
     "def-nagata-qc-open-equality-stage",
-    "lemma-nagata-directed-finite-upper-bound"
+    "lemma-nagata-directed-finite-upper-bound",
+    "def-nagata-basechanged-system"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-qc-open-equality-stage.md",
-    "place": "node def-nagata-qc-open-equality-stage, final parenthetical clause"
+    "document": "https://stacks.math.columbia.edu/tag/01Z4",
+    "place": "Lemma 32.4.11 (2), equality witness followed by inverse-image transport"
    }
   }
  ],
  "proof_deps": [
   "def-nagata-qc-open-equality-stage",
-  "lemma-nagata-directed-finite-upper-bound"
+  "lemma-nagata-directed-finite-upper-bound",
+  "def-nagata-basechanged-system"
  ],
  "proof_origin": {
   "by": "agent",
@@ -119,5 +123,72 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-qoe2958 (reviewer sub-agent of L); spot-checked: Merged def-nagata-qc-open-equality-stage on sheaf-dag unchanged since base, statement and proof use exactly its data and final parenthetical; chartwise pointwise argument from the power identities (D(f_1)⊆∪D(f_2) and conversely), finite unions over the cover; statement matches use in def-nagata-morphism-descent (covering at lambda_phi). FIX more, RETURN less: (1) C1: the step used i<=u(F) for every i in F (needed because the definition's parenthetical is stated for lambda above every element of F, while the item assumes lambda>=u(F)) without citation; cited lemma-nagata-directed-finite-upper-bound in uses and proof_deps and spelled out the transport. Second reading by C1 missed this.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataQCOpenEqEventually",
+  "declaration": "AlgebraicGeometry.nagataQCOpenEqEventually",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataQCOpenEqEventually.lean",
+  "statement": "theorem nagataQCOpenEqEventually {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (i₀ : I) {Y₀ : Scheme.{u}} (p : Y₀ ⟶ D.obj (Opposite.op i₀)) [CompactSpace Y₀] [QuasiSeparatedSpace Y₀] (W₁ W₂ : Y₀.Opens) (hW₁ : IsCompact (W₁ : Set Y₀)) (hW₂ : IsCompact (W₂ : Set Y₀)) (hEq : pullback.fst p (c.π.app (Opposite.op i₀)) ⁻¹ᵁ W₁ = pullback.fst p (c.π.app (Opposite.op i₀)) ⁻¹ᵁ W₂) (d : I → I → I) (hd : ∀ i j, i ≤ d i j ∧ j ≤ d i j) (r : LinearOrder I) : ∀ (j : I) (h₀ : i₀ ≤ j), nagataQCOpenEqualityStage D c hc i₀ p W₁ W₂ hW₁ hW₂ hEq d r ≤ j → pullback.fst p (D.map (homOfLE h₀).op) ⁻¹ᵁ W₁ = pullback.fst p (D.map (homOfLE h₀).op) ⁻¹ᵁ W₂",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sub-D",
+  "group": "T1",
+  "result": "pass",
+  "note": "corrected statement = blueprint order 350 (equality of inverse images of W1,W2 in Y_j for all j above the selected stage) with the data of the landed stage def; Lean binders identical to nagataQCOpenEqualityStage plus hd (upper-bound property of d, needed and in the node), limit equality hEq, threshold literally the landed stage, conclusion pullback.fst p (D.map (homOfLE h0).op) preimages equal; citers morphism-descent and morphism-eq-eventually read, both apply it with limit equality only",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "T1 stage 2",
+  "old_statement": "Fix the base-changed inverse system, opens, affine charts, finite basic-open presentations, transported sections, witness identities, and selected stage $\\lambda_{W_1=W_2}$ constructed in [def-nagata-qc-open-equality-stage]. For every index $\\lambda\\geq\\lambda_{W_1=W_2}$, let $W_{i,\\lambda}$ be the pullback of $W_{i,\\lambda_0}$ to $Y_\\lambda$ (equivalently, the finite union of the transported basic opens on each chart). Then $W_{1,\\lambda}=W_{2,\\lambda}$ as opens of $Y_\\lambda$.",
+  "what": "The landed equality-stage definition was corrected to choose a geometric equality witness rather than chartwise power-identity data. Remove references to those nonexistent outputs, retain its full geometric inputs and the same selected stage, and prove equality at every later stage from equality on the limit. The first worker instead assumed equality at an arbitrary selected stage, which removed the main obligation and did not support the citers. This repair restores that obligation. The upper-bound property of d is explicit, as required by its recorded definition. No unit statement changes.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/01Z4",
+   "place": "Lemma 32.4.11 (2), in Situation 32.4.5, applied to the base-changed limit; transport from the chosen witness to the prescribed upper bound"
+  },
+  "citers": [
+   {
+    "id": "lemma-nagata-relative-gluing-axioms-eventually",
+    "holds": true,
+    "note": "Its common upper bound includes the open-equality stages. The restored lemma proves equality there from equality on the limit; it does not require equality at the selected stage as an extra hypothesis."
+   },
+   {
+    "id": "def-nagata-morphism-descent",
+    "holds": true,
+    "note": "Apply at its rebased base index λ′ to W₁ the finite union and W₂ the whole scheme. Their limit preimages agree; λφ is above the selected equality stage, so the transported opens cover as required."
+   },
+   {
+    "id": "lemma-nagata-morphism-eq-eventually",
+    "holds": true,
+    "note": "Step 2 applies the item to the qcqs X at the base stage and compact inverse-image opens, with equality on the limit and λ above the selected stage. These are exactly the restored hypotheses and conclusion."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "The definition node supplies a finite affine cover and, on each chart, power identities witnessing both radical containments. Every element of the finite set $F$ of the definition is $\\leq\\lambda_{W_1=W_2}=u(F)\\leq\\lambda$ by [lemma-nagata-directed-finite-upper-bound], so $\\lambda$ is above every element of $F$ and, applying the transition ring maps, every identity transports to the $\\lambda$-chart with the pullbacks $f_{ijk,\\lambda}$. If a point lies in $D(f_{1jk,\\lambda})$, the first identity forces at least one $f_{2\\ell k,\\lambda}$ to be nonzero at that point, so $D(f_{1jk,\\lambda})\\subseteq\\bigcup_\\ell D(f_{2\\ell k,\\lambda})$; the second identity gives the reverse inclusion after exchanging $1$ and $2$. Taking the finite unions and then the affine charts gives $W_{1,\\lambda}\\subseteq W_{2,\\lambda}$ and $W_{2,\\lambda}\\subseteq W_{1,\\lambda}$, hence equality.",
+    "uses": [
+     "def-nagata-qc-open-equality-stage",
+     "lemma-nagata-directed-finite-upper-bound"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-qc-open-equality-stage.md",
+     "place": "node def-nagata-qc-open-equality-stage, final parenthetical clause"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-nagata-qc-open-equality-stage",
+   "lemma-nagata-directed-finite-upper-bound"
+  ],
+  "old_stmt_deps": [
+   "def-nagata-qc-open-equality-stage"
+  ]
  }
 }
