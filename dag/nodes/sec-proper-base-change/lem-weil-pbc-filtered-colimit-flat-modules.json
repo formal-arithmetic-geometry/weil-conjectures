@@ -157,5 +157,24 @@
   "by": "L",
   "result": "pass",
   "note": "Three steps along Stacks 05UT: flatness as injectivity of 1 tensor u, tensor commutes with colimits (existing node), filtered colimits of injections are injective from the elementwise node. Correct; 0 new nodes. Statement restated for a small filtered category (the citer applies it to a filtered category of etale algebras; worker notes the citer should pass to a small equivalent category)."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat",
+  "declaration": "ModuleCat.filteredColimit_flat",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/FilteredColimitFlat.lean",
+  "statement": "theorem filteredColimit_flat {R : Type u} [CommRing R] {I : Type w} [SmallCategory I] [IsFiltered I] (F : I ⥤ ModuleCat.{v} R) [HasColimit F] (hflat : ∀ i : I, Module.Flat R (F.obj i)) : Module.Flat R (colimit F : ModuleCat.{v} R)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fcf1015"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcf1015",
+  "group": "H1",
+  "result": "fix",
+  "note": "CommRing R; small filtered I (IsFiltered incl. nonempty); F : I ⥤ ModuleCat R; colimit as [HasColimit F]/colimit F per FILTERED COLIMITS convention (was explicit Cocone+IsColimit, FIX); hflat ∀ i Module.Flat; conclusion Module.Flat R (colimit F); no Mathlib lemma (grep Flat/directLimit/colimit), existing:false kept"
  }
 }
