@@ -103,5 +103,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-osf1745 (reviewer sub-agent of L); spot-checked: Read Mathlib decls: InfiniteGalois.isOpen_iff_finite (Infinite.lean:241), fixingSubgroup_fixedField (146; open subgroup is closed, inferred), IntermediateField.isSeparable_tower_bot (Separable.lean:713), Subgroup.quotient_finite_of_isOpen (OpenSubgroup.lean:287), QuotientGroup.discreteTopology (Group/Quotient.lean:115): both leaves exact (B8). Steps cover both directions; stabilizer open by continuity. FIX more, RETURN less: (1) B3 quotient leaf stmt_deps was [] though statement cites lem-galois-aut-profinite, added; (2) its mathlib_match named the wrong file for QuotientGroup.discreteTopology, corrected to Group/Quotient.lean:115 and my grep recorded.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.OpenSubgroupFixedField",
+  "declaration": "openSubgroup_fixedField_finite_separable",
+  "file": "lean/Sheaf/FieldTheory/OpenSubgroupFixedField.lean",
+  "statement": "theorem openSubgroup_fixedField_finite_separable (K : Type u) (Ks : Type v) [Field K] [Field Ks] [Algebra K Ks] [IsSepClosure K Ks] : (∀ H : Subgroup Gal(Ks/K), IsOpen (H : Set Gal(Ks/K)) → FiniteDimensional K (IntermediateField.fixedField H) ∧ Algebra.IsSeparable K (IntermediateField.fixedField H) ∧ (IntermediateField.fixedField H).fixingSubgroup = H ∧ Finite (Gal(Ks/K) ⧸ H) ∧ DiscreteTopology (Gal(Ks/K) ⧸ H) ∧ ContinuousSMul Gal(Ks/K) (Gal(Ks/K) ⧸ H)) ∧ (∀ (X : Type w) [TopologicalSpace X] [DiscreteTopology X] [Finite X] [MulAction Gal(Ks/K) X] [ContinuousSMul Gal(Ks/K) X] [MulAction.IsPretransitive Gal(Ks/K) X] (x : X), IsOpen (MulAction.stabilizer Gal(Ks/K) x : Set Gal(Ks/K)) ∧ FiniteDimensional K (IntermediateField.fixedField (MulAction.stabilizer Gal(Ks/K) x)) ∧ Algebra.IsSeparable K (IntermediateField.fixedField (MulAction.stabilizer Gal(Ks/K) x)))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-eos0632"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eos0632",
+  "group": "G1",
+  "result": "fix",
+  "note": "Matched: K,Ks Field+Algebra+IsSepClosure (def deps; recorded module imported), Gal(Ks/K) with Mathlib krullTopology instance, every open H -> fixedField finite (FiniteDimensional) + Algebra.IsSeparable + fixingSubgroup = H + G/H Finite, DiscreteTopology, ContinuousSMul; converse: finite discrete transitive continuous X with point x -> stabilizer open, its fixed field finite separable; universes u v w free. Mathlib Galois/Infinite.lean read: isOpen_iff_finite, fixingSubgroup_fixedField (ClosedSubgroup) are components only, no packaged statement, existing:false right. FIX H9: unused import Mathlib.Topology.Algebra.OpenSubgroup dropped, Mathlib.FieldTheory.Galois.Infinite replaced by Mathlib.FieldTheory.KrullTopology (only the Krull topology is used); recompiled clean."
  }
 }
