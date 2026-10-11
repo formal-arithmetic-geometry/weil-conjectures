@@ -152,13 +152,13 @@ end DerivedCategory
 
 namespace DerivedCategory.Plus
 
-variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w'} C] [HasExt.{w} C]
+variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C] [HasExt.{w'} C]
 
 /-- Morphisms `X[0] ⟶ Y[0][n]` in the bounded below derived category are the elements of
 `Ext^n(X, Y)`. -/
 noncomputable def singleFunctorHomEquivExt (X Y : C) (n : ℕ) :
     ((singleFunctor C 0).obj X ⟶ ((singleFunctor C 0).obj Y)⟦(n : ℤ)⟧) ≃
-      Abelian.Ext.{w} X Y n :=
+      Abelian.Ext.{w'} X Y n :=
   (ObjectProperty.fullyFaithfulι _).homEquiv.trans
     ((Iso.homCongr (Iso.refl _) ((Plus.ι.commShiftIso (n : ℤ)).app _)).trans
       Abelian.Ext.homEquiv.symm)

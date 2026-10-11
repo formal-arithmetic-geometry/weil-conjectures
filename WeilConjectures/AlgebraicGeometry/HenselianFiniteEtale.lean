@@ -111,9 +111,10 @@ theorem Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso (T : Scheme.{u}) :
         Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)) := by
   refine ⟨fun P π _ _ ↦ ?_, fun E hE ↦ ?_⟩
   · let X : T.Etale := Scheme.Etale.mk π
+    have : IsFinite X.hom := ‹IsFinite π›
     refine ⟨(T.smallEtaleTopology.uliftYoneda.{u + 1}.obj X).property, ?_, ?_⟩
     · choose U g hg S hS fst hy hpb using
-        fun y ↦ FiniteEtale.exists_etale_isPullback_sigma ⟨X, ‹IsFinite π›⟩ y
+        fun y ↦ FiniteEtale.exists_etale_isPullback_sigma ⟨X, this⟩ y
       let 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage T :=
         Scheme.Cover.mkOfCovers T U g (fun y ↦ ⟨y, hy y⟩) hg
       exact ⟨𝒰, fun y ↦ Etale.isConstant_over_uliftYoneda_of_isPullback (hpb y)⟩
