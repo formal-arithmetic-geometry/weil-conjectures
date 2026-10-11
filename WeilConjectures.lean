@@ -43,6 +43,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
 public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.Subtraction
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import WeilConjectures.AlgebraicGeometry.BaseChangeNorm
 public import WeilConjectures.AlgebraicGeometry.Bertini
@@ -717,6 +718,7 @@ public import WeilConjectures.Evaluation
 public import WeilConjectures.FieldTheory.Cr
 public import WeilConjectures.FieldTheory.Tsen
 public import WeilConjectures.FourierTransform.AffineSpace
+public import WeilConjectures.FourierTransform.AffineSpace.Convolution
 public import WeilConjectures.FourierTransform.AffineSpace.KernelTransform
 public import WeilConjectures.FourierTransform.AffineSpace.NegProd
 public import WeilConjectures.FourierTransform.AffineSpace.Transform
@@ -1208,6 +1210,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Finiteness
+public import WeilConjectures.Mathlib.LinearAlgebra.Trace
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Pi
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
@@ -1824,6 +1827,7 @@ public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.StalkFrobenius
 public import WeilConjectures.WeilSheaf.StalkFunctor
+public import WeilConjectures.WeilSheaf.StalkInternalHom
 public import WeilConjectures.WeilSheaf.StalkMonoidal
 public import WeilConjectures.WeilSheaf.StalkPairing
 public import WeilConjectures.WeilSheaf.StalkUpperStar

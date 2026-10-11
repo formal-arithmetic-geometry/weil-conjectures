@@ -36,7 +36,7 @@ These are the properties of the trace function (blueprint `def-fd-trace-function
 
 universe u v
 
-open CategoryTheory
+open CategoryTheory Limits
 
 open scoped AlgebraicGeometry.ProEtale
 
@@ -234,8 +234,28 @@ namespace WeilComplex
 noncomputable def homologySheafShiftIso (K : WeilComplex k₀ l X) (a j : ℤ) :
     (homologySheaf j).obj ((shiftFunctor (WeilComplex k₀ l X) a).obj K) ≅
       (homologySheaf (a + j)).obj K :=
-  ObjectProperty.isoMk _
-    (((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso a j (a + j) rfl).app K.obj)
+  ObjectProperty.isoMk _ ((_root_.DerivedCategory.homologyFunctor _ j).mapIso
+      (((ObjectProperty.ι _).commShiftIso a).app K) ≪≫
+    ((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso a j (a + j) rfl).app K.obj)
+
+/-- The underlying object of the cohomology sheaf `𝓗ʲ(K)` is the cohomology object of the
+underlying object of `K`. -/
+noncomputable def homologySheafObjIso (j : ℤ) (K : WeilComplex k₀ l X) :
+    ((homologySheaf j).obj K).obj ≅ (_root_.DerivedCategory.homologyFunctor _ j).obj K.obj :=
+  Iso.refl _
+
+/-- The underlying object of the pullback `φ^* K` of a Weil complex. -/
+noncomputable def upperStarObjIso (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+    (K : WeilComplex k₀ l Y) :
+    ((upperStar φ).obj K).obj ≅
+      (ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategory.obj K.obj :=
+  Iso.refl _
+
+/-- The underlying object of the pullback `φ^* F` of a Weil sheaf. -/
+noncomputable def _root_.AlgebraicGeometry.WeilSheaf.upperStarObjIso (φ : X ⟶ Y)
+    [φ.IsOver (Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l Y) :
+    ((WeilSheaf.upperStar φ).obj F).obj ≅ (ProEtaleWeilSheaf.upperStar k₀ l φ).obj F.obj :=
+  Iso.refl _
 
 /-- Pullback commutes with the cohomology sheaves: `𝓗ʲ(φ^* K) ≅ φ^* 𝓗ʲ(K)`, the pullback of
 pro-étale Weil sheaves being exact. -/
@@ -243,7 +263,13 @@ noncomputable def homologySheafUpperStarIso (φ : X ⟶ Y) [φ.IsOver (Spec (Com
     (j : ℤ) (K : WeilComplex k₀ l Y) :
     (homologySheaf j).obj ((upperStar φ).obj K) ≅
       (WeilSheaf.upperStar φ).obj ((homologySheaf j).obj K) :=
-  ObjectProperty.isoMk _ ((Functor.mapDerivedCategoryHomologyFunctorIso _ j).app K.obj).symm
+  ObjectProperty.isoMk _
+    (homologySheafObjIso j _ ≪≫ (_root_.DerivedCategory.homologyFunctor _ j).mapIso
+      (upperStarObjIso φ K) ≪≫
+    ((Functor.mapDerivedCategoryHomologyFunctorIso (ProEtaleWeilSheaf.upperStar k₀ l φ) j).app
+      K.obj).symm ≪≫
+    (ProEtaleWeilSheaf.upperStar k₀ l φ).mapIso (homologySheafObjIso j K).symm ≪≫
+    (WeilSheaf.upperStarObjIso φ _).symm)
 
 /-- A shift `[a]` multiplies the trace function by `(-1)ᵃ`. -/
 theorem traceFunction_shift (K : WeilComplex k₀ l X) (a : ℤ) (n : ℕ)
