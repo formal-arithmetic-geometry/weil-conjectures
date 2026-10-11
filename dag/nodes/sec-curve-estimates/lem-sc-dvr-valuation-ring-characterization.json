@@ -101,5 +101,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dvc1752 (reviewer sub-agent of L); spot-checked: Step 1 vs def-sc-discrete-valuation-ring (states the 00IE valuation-ring/value-group-Z characterization and uniformizer = generator of m): v>=0 on B, v(t)=1 under normalization, v(t^{-1})=-1 by homomorphism identity; elementary, no cycle. B8/B10: Mathlib addVal_uniformizer (DiscreteValuationRing/Basic.lean:428) is R-valued in N-infinity, not K^x->Z, and does not cover v(t^{-1}); no slopmaster2 uniformizer theorem (grep), so split rather than leaf is correct. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DVRValuationRingCharacterization",
+  "declaration": "IsDiscreteValuationRing.dvr_valuation_ring_characterization",
+  "file": "lean/Sheaf/RingTheory/DVRValuationRingCharacterization.lean",
+  "statement": "theorem dvr_valuation_ring_characterization (B : Type u₁) (K : Type v₁) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B] [Field K] [Algebra B K] [IsFractionRing B K] : (∀ b : B, b ≠ 0 → 0 ≤ -WithZero.log ((maximalIdeal B).valuation K (algebraMap B K b))) ∧ (∀ t : B, IsLocalRing.maximalIdeal B = Ideal.span {t} → -WithZero.log ((maximalIdeal B).valuation K (algebraMap B K t)) = 1 ∧ -WithZero.log ((maximalIdeal B).valuation K (algebraMap B K t)⁻¹) = -1)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dvr1135",
+  "group": "F1",
+  "result": "pass",
+  "note": "B CommRing/IsDomain/IsDiscreteValuationRing, K Field/Algebra/IsFractionRing; v = -WithZero.log ((maximalIdeal B).valuation K .) (maximalIdeal = IsDiscreteValuationRing.maximalIdeal HeightOneSpectrum, #check) as E1/DvrFieldExtensionOrder; b≠0 -> 0≤v(b); maximalIdeal = span{t} -> v(t)=1, v(t⁻¹)=-1 in K; return eeb066fd4 points 1-4 repaired (no normalized-valuation node/module, no val/hval, docstring proof, report)"
  }
 }
