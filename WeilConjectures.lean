@@ -348,6 +348,17 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorO
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.RelativeProj.Affine
+public import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
+public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
+public import WeilConjectures.AlgebraicGeometry.RelativeProj.ChartBaseChange
+public import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
+public import WeilConjectures.AlgebraicGeometry.RelativeProj.GradedAlgebraData
+public import WeilConjectures.AlgebraicGeometry.RelativeProj.GradedTensor
+public import WeilConjectures.AlgebraicGeometry.RelativeProj.PullbackAffine
+public import WeilConjectures.AlgebraicGeometry.RelativeProj.Rees
+public import WeilConjectures.AlgebraicGeometry.RelativeProj.Universal
+public import WeilConjectures.AlgebraicGeometry.SeparatedEnvelope
 public import WeilConjectures.AlgebraicGeometry.Sites.AffineRefinement
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
 public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup
@@ -404,6 +415,7 @@ public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.BaseChange
 public import WeilConjectures.Blowup.Affine.BaseChangeSurjectivity
+public import WeilConjectures.Blowup.Affine.ChartAlgebra
 public import WeilConjectures.Blowup.Affine.Defs
 public import WeilConjectures.Blowup.Affine.Functoriality
 public import WeilConjectures.Blowup.Affine.Localization
@@ -412,6 +424,7 @@ public import WeilConjectures.Blowup.Affine.Principalization
 public import WeilConjectures.Blowup.Affine.Projective
 public import WeilConjectures.Blowup.Affine.Proper
 public import WeilConjectures.Blowup.Affine.ReesGrading
+public import WeilConjectures.Blowup.Affine.ReesPieceLocalization
 public import WeilConjectures.Blowup.BaseChange
 public import WeilConjectures.Blowup.BlowupUniversal
 public import WeilConjectures.Blowup.Complement
@@ -440,6 +453,7 @@ public import WeilConjectures.Blowup.FiniteDegree.LocalAlgebra
 public import WeilConjectures.Blowup.FiniteDegree.Main
 public import WeilConjectures.Blowup.FiniteDegree.UniformNumerator
 public import WeilConjectures.Blowup.Gluing
+public import WeilConjectures.Blowup.GluingOverlap
 public import WeilConjectures.Blowup.GraphQuasiFinite
 public import WeilConjectures.Blowup.InvertibleCenter
 public import WeilConjectures.Blowup.PartialSectionExtension
@@ -618,6 +632,7 @@ public import WeilConjectures.ClosedPoints
 public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.Compactification.BoundaryPreparation
+public import WeilConjectures.Compactification.BoundarySeparationData
 public import WeilConjectures.Compactification.CategoryBaseChange
 public import WeilConjectures.Compactification.Cofiltered
 public import WeilConjectures.Compactification.CommonModification
@@ -647,6 +662,7 @@ public import WeilConjectures.Compactification.Tower
 public import WeilConjectures.Compactification.Triangle
 public import WeilConjectures.Compactification.TwoOpen
 public import WeilConjectures.Compactification.TwoOpenComparison
+public import WeilConjectures.Compactification.TwoOpenComparisonIso
 public import WeilConjectures.Compactification.TwoOpenSetup
 public import WeilConjectures.Compactification.ValuativeCriterion
 public import WeilConjectures.ConstructibleSheaf.Biproduct
@@ -1807,6 +1823,7 @@ public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import WeilConjectures.Topology.Sheaves.SpectralRestriction
 public import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
 public import WeilConjectures.Topology.SpectralSpace.Constructible
+public import WeilConjectures.Topology.SpectralSpace.ConstructibleSeparation
 public import WeilConjectures.Topology.SpectralSpace.Profinite
 public import WeilConjectures.Topology.SpectralSpace.Pullback
 public import WeilConjectures.Topology.SpectralSpace.WLocal.Basic
