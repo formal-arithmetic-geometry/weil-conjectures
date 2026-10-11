@@ -22,7 +22,8 @@
   "def-pc-separably-closed",
   "def-weil-etale-morphism",
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-henselian-terminology"
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-etale-residue-triples"
  ],
  "proof": [
   {
@@ -237,5 +238,24 @@
   "by": "L",
   "result": "pass",
   "note": "nine steps along Stacks 04GW/04GP/04GN with triples (triples = R-maps to K, essential smallness, filteredness by tensor products and the equalizing ring, ψ and locality by inverting f, m_C = pC by 00U4, the simple-root lift through the standard etale algebra, surjectivity of ψ from separability, henselian via the root-lifting characterization); 3 new nodes, two Mathlib leaves verified by the lead (Unramified/LocalRing.lean:134 with Locus.lean:133; StandardEtale.lean:65/75/143/191); the equivalence of the idempotent-lifting and root-lifting definitions of henselian is the new unsplit node lem-weil-pbc-henselian-local-root-lifting"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationTriples",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselization_triples",
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationTriples.lean",
+  "statement": "theorem strictHenselization_triples (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K] [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K] : IsFiltered (EtaleResidueTriples R p K (CommRingCat.ofHom (algebraMap ((Spec R).residueField p) K))) ∧ ∃ c : Cocone (etaleResidueTriplesRingDiagram R p K (CommRingCat.ofHom (algebraMap ((Spec R).residueField p) K))), Nonempty (IsColimit c) ∧ ∃ (_ : IsLocalRing c.pt) (ρ : R ⟶ c.pt) (ψ : c.pt →+* K), (∀ t, t.α ≫ c.ι.app t = ρ) ∧ (∀ t, ψ.comp (c.ι.app t).hom = ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ).hom) ∧ Function.Surjective ψ ∧ IsLocalRing.maximalIdeal c.pt = RingHom.ker ψ ∧ RingHom.ker ψ = p.asIdeal.map ρ.hom ∧ (RingHom.ker ψ).comap ρ.hom = p.asIdeal ∧ (∃ e : (c.pt ⧸ IsLocalRing.maximalIdeal c.pt) ≃+* K, e.toRingHom.comp (Ideal.Quotient.mk (IsLocalRing.maximalIdeal c.pt)) = ψ) ∧ IsStrictlyHenselianLocalRing c.pt",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-sht"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sht",
+  "group": "R1",
+  "result": "fix",
+  "note": "R,p,K Field; separable closure as [Algebra κ(p) K][IsSepClosure] with χ := ofHom algebraMap (was @IsSepClosure χ.hom.toAlgebra inline); IsFiltered; universal cocone; ρ and ψ tied by coprojections; ψ surjective; m=kerψ=pC; contraction p; C/m≅K through ψ; IsStrictlyHenselianLocalRing"
  }
 }
