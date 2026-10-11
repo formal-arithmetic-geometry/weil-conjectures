@@ -65,7 +65,11 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
                         and the module with --apply-fixes to state the sheaf-dag statement; no <item>.statement-change.json
                         then); the checks run on the result (refused if the branch does not change those fields, if the
                         item's module uses the declaration of a node the restored stmt_deps lose, or on a cycle); named in
-                        reviewed_lean.note, the ledger line and the commit message.
+                        reviewed_lean.note, the ledger line and the commit message. A record the fix turns from a new
+                        module into `existing: true` (DIR/<item>.lean-record.json or DIR/<id>.json with existing: true,
+                        module, declaration, branch, statement verbatim, no `file` or "file": null) is checked as an
+                        existing record (declaration found, statement verbatim, `#check @decl` where Lean runs) and its
+                        delivered module is left out as by --drop-files (refused if a kept module imports it).
   tools/merge_delivery.py return <group> <item> REASONS write the reasons into coord/returns/<group>.md, the ledger
                                                         line, and commit; the claim and the branch stay with the group
 
@@ -782,7 +786,7 @@ def cmd_merge2(o):
                 df, dn = s2.check_existing(r, G, base)
                 bad = [x for _, x in df] + [x for x in dn if "differs" in x or "not resolved" in x]
                 for d in [r.get("declaration")] + list(r.get("declarations") or []):
-                    ran, rc, out = s2.compile_text(f"import {r.get('module')}\n\n#check @{d}\n", "L", f"{item}.check")
+                    ran, rc, out = s2.compile_text(f"import {r.get('module')}\n\n#check @{d}\n", "L", f"{item}-check")
                     if ran and rc != 0:
                         bad.append(f"#check @{d} fails: {out.splitlines()[-1] if out else rc}")
                     elif not ran:

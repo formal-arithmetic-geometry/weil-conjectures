@@ -111,5 +111,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bff1930 (reviewer sub-agent of L); spot-checked: Reviewed packet head 564a4ff32; new head ad5775a51 is a rebase onto 41077d70d with the three delivery files byte-identical. Checked item statement against Tag 0GM8 case (2) and def-pur-hom-complex/def-pc-acyclic-complex-modules; new node lem-sc-finite-free-internal-hom-exact is a correct finite-free Hom exactness statement, no same-tag duplicate. FIX more, RETURN less: C4/E Step 2 rewritten: components were mis-indexed (z^p:E^p->A^{m-p}, h^p:E^p->A^{m-1-p}, ill-typed against def-pur-hom-complex where Hom^n=prod Hom(L^p,M^{p+n})) and the sign (-1)^{m-p} was wrong (correct: d(h)^p=d_A h^p+(-1)^m h^{p+1}d_E); also made explicit that lifts exist only locally (sheaf surjectivity, after refining coverings), that only finitely many p (M-m<=p<=N) occur so finitely many refinements suffice, and the cocycle check d_A w^p=0. Second reading missed both (and wrongly speaks of an infinite downward family).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BoundedAboveFiniteFreeHomAcyclic",
+  "declaration": "CochainComplex.acyclic_homComplex_of_boundedAbove_finiteFree",
+  "file": "lean/Sheaf/Algebra/Homology/BoundedAboveFiniteFreeHomAcyclic.lean",
+  "statement": "theorem acyclic_homComplex_of_boundedAbove_finiteFree {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})] [HasWeakSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasWeakSheafify J AddCommGrpCat.{max u v w}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}] {R : Sheaf J CommRingCat.{w}} (E A : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) (hEbounded : ∃ N : ℤ, ∀ p : ℤ, N < p → IsZero (E.X p)) (hEfree : ∀ p : ℤ, ∃ r : ℕ, Nonempty (E.X p ≅ SheafOfModules.free (R := (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R) (ULift.{w} (Fin r)))) (hAbounded : ∃ M : ℤ, ∀ q : ℤ, q < M → IsZero (A.X q)) (hAacyclic : A.Acyclic) : (CategoryTheory.homComplex E A).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-bfh1338",
+  "group": "J1",
+  "result": "pass",
+  "note": "Matched: site C/J + R : Sheaf J CommRingCat (ringed site; no locally-ringed restriction, source Tag 0GM8 is a ringed space); E,A : CochainComplex (SheafOfModules R) Z; E bounded above as landed BoundedAboveFlat form (∃N, N<p → IsZero); finite free per degree as landed J1 ce2092cd8 (free (ULift (Fin r)), rank varies); A bounded below termwise; A.Acyclic; conclusion (CategoryTheory.homComplex E A).Acyclic with landed E1 homComplex, universes r=w, output max u v w; extra HasWeakSheafify/WEqualsLocallyBijective instances only supply abelian structure at w and max u v w. Proof docstring checked: h^p:E^p->A^(p+m-1), sign (-1)^m, finite range M-m..N, local lifts, endpoint at A^M. Statement is true (finite product in each degree)."
  }
 }
