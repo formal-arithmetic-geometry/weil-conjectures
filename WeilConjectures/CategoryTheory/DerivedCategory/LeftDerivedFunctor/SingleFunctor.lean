@@ -60,7 +60,8 @@ lemma mapDerivedCategoryNatIso_hom_app_singleFunctor (F : C ⥤ D) (G : D ⥤ E)
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) =
       (F ⋙ G).mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map
-        ((Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) (ComplexShape.up ℤ)).inv.app K) := by
+        ((Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G))
+          (ComplexShape.up ℤ)).inv.app K) := by
     rw [← hc]
     simp [← Functor.map_comp]
   simp only [Category.assoc]
