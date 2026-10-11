@@ -3885,3 +3885,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:48 L: merged deliver/J1/lem-weil-pbc-analytic-unramified-principal-criterion (stage 2; reviewer PASS; first push; Sheaf.RingTheory.AnalyticallyUnramifiedPrincipalCriterion isAnalyticallyUnramified_of_principal_quotient)
 - 08:49 L: merged deliver/K1/lem-weil-pbc-algebra-colimit-fp-algebras-over-it (stage 2; reviewer FIX; first push; Sheaf.RingTheory.ColimitFinitelyPresentedAlgebras CommAlgCat.isFiltered_and_isColimit_finitelyPresentedAlgebras)
 - 08:49 L: merged deliver/K1/lem-weil-pbc-analytically-unramified-n1 (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified isN1_of_isAnalyticallyUnramified)
+- 08:49 L: merged deliver/M1/lem-weil-geometrically-connected-check-after-extension (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension AlgebraicGeometry.geometricallyConnected_iff_of_fieldExtension)

@@ -144,5 +144,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gcc2940 (reviewer sub-agent of L); spot-checked: Statement matches tag 054N; def-pc-geometrically-irreducible does define geometric connectedness (resp. clause, C4 ok); Step 1 transitivity is the identification X_{T'}=X_T x_T T' stated in def-pc-base-change; new node lem-weil-common-extension-fields matches 0H7K, no DAG duplicate, real lemma (not class d), one LeanFinder query run (no match: exists_field_of_isDomain needs IsDomain); sibling M1 adds no helper, no duplicate; no cycle (lem-weil-geometrically-connected-algebraic-closure cites the item, not conversely). FIX more, RETURN less: C1 in Step 3 -- surjectivity of a base change of a surjective morphism (Tag 01S1) was marked elementary; now cites existing lem-weil-pbc-surjective-base-change (generic tool from sk-thm-p1, added to tool_uses), step elementary false, proof_deps updated. Second reading by K1 missed this.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension",
+  "declaration": "AlgebraicGeometry.geometricallyConnected_iff_of_fieldExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricallyConnectedCheckAfterExtension.lean",
+  "statement": "theorem geometricallyConnected_iff_of_fieldExtension {k k' : Type u} [Field k] [Field k'] [Algebra k k'] (X : Scheme.{u}) [X.Over (Spec (.of k))] : GeometricallyConnected (X ↘ Spec (.of k)) ↔ GeometricallyConnected (pullback.snd (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k k'))): pullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k k'))) ⟶ Spec (.of k'))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gcc1326",
+  "group": "M1",
+  "result": "pass",
+  "note": "field k = {k}[Field k]; X over k = [X.Over (Spec (.of k))]; k'/k = [Field k'][Algebra k k'] (k' in universe u, Mathlib geometrically convention); X_{k'} = pullback (X ↘ Spec k) (Spec.map (ofHom (algebraMap k k'))) over k' via pullback.snd (STATE BASE CHANGE X_T); geom. connected = Mathlib GeometricallyConnected on structure maps (as G1 54b8d74b6); iff both directions; #check confirms namespaces; empty X both sides false"
  }
 }
