@@ -243,5 +243,23 @@
   "worker": "stage1",
   "summary": "Statement kept (checked against Stacks 00DM, line 2165, and against the citer lem-weil-pbc-symmetric-degree-exact, which uses the spanning of Sym^n by products iota(x_1)...iota(x_n), Sym^1 = iota(M), Sym^1 Sym^k in Sym^(k+1), and existence and uniqueness of homogeneous components: all in the statement). Mathlib re-checked: still no grading of SymmetricAlgebra and no graded quotient by a homogeneous (two-sided) ideal, so not a leaf (B8). Seven-step proof by an agent (Stacks uses the grading without statement): grading of T(M) from the new Mathlib leaf lem-weil-pbc-tensor-algebra-graded (TensorAlgebra.gradedAlgebra, Grading.lean:43, with Submodule.pow_eq_span_pow_set for the span of products); J is spanned by the homogeneous elements a(x(x)y - y(x)x)b of J; so the components of an element of J lie in J and J is the direct sum of the J cap T^n; Sym^n = pi(T^n) is spanned by the products iota_M(x_1)...iota_M(x_n); existence of components by surjectivity of pi; uniqueness by lifting the differences to T^n and Step 3; multiplicativity from that of T. stmt_deps unchanged (universal-property node, for Sym, pi and iota_M)."
  },
- "reviewed": "pass (L, 2026-10-10): 7 steps by agent: the two-sided ideal J is spanned by homogeneous elements (grading of T(M), new leaf), so J is the direct sum of its homogeneous parts and the quotient Sym(M) is graded by the images of the T^n; multiplicativity inherited."
+ "reviewed": "pass (L, 2026-10-10): 7 steps by agent: the two-sided ideal J is spanned by homogeneous elements (grading of T(M), new leaf), so J is the direct sum of its homogeneous parts and the quotient Sym(M) is graded by the images of the T^n; multiplicativity inherited.",
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.SymmetricAlgebra.Graded",
+  "declaration": "SymmetricAlgebra.graded_by_tensor_images",
+  "file": "lean/Sheaf/LinearAlgebra/SymmetricAlgebra/Graded.lean",
+  "statement": "theorem graded_by_tensor_images (R : Type u) (M : Type v) [CommRing R] [AddCommGroup M] [Module R M] : DirectSum.IsInternal (fun n : ℕ => ((TensorAlgebra.ι R : M →ₗ[R] TensorAlgebra R M).range ^ n).comap (LinearMap.ker (algHom R M).toLinearMap).subtype) ∧ (∀ n : ℕ, ((TensorAlgebra.ι R : M →ₗ[R] TensorAlgebra R M).range ^ n).map (algHom R M).toLinearMap = Submodule.span R {s | ∃ x : Fin n → M, s = (List.ofFn (fun i => ι R M (x i))).prod}) ∧ (((TensorAlgebra.ι R : M →ₗ[R] TensorAlgebra R M).range ^ 0).map (algHom R M).toLinearMap = Submodule.span R {1}) ∧ (((TensorAlgebra.ι R : M →ₗ[R] TensorAlgebra R M).range ^ 1).map (algHom R M).toLinearMap = (ι R M).range) ∧ DirectSum.IsInternal (fun n : ℕ => ((TensorAlgebra.ι R : M →ₗ[R] TensorAlgebra R M).range ^ n).map (algHom R M).toLinearMap) ∧ (∀ n m : ℕ, (((TensorAlgebra.ι R : M →ₗ[R] TensorAlgebra R M).range ^ n).map (algHom R M).toLinearMap) * (((TensorAlgebra.ι R : M →ₗ[R] TensorAlgebra R M).range ^ m).map (algHom R M).toLinearMap) ≤ ((TensorAlgebra.ι R : M →ₗ[R] TensorAlgebra R M).range ^ (n + m)).map (algHom R M).toLinearMap)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
