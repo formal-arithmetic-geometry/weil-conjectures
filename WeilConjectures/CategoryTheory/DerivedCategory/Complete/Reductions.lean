@@ -36,19 +36,19 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
 attribute [-instance] commShift₂CurriedTensor commShiftTensorLeft commShiftTensorRight
   isTriangulated_tensorLeft isTriangulated_tensorRight monoidalPreadditive monoidalLinear
 
-noncomputable local instance (priority := high) :
+noncomputable local instance (priority := high) reductionsMonoidalCategory :
     MonoidalCategory (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   (sheafTensorStructure J R).monoidalCategory
 
-noncomputable local instance (priority := high) :
+noncomputable local instance (priority := high) reductionsMonoidalPreadditive :
     MonoidalPreadditive (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   (sheafTensorStructure J R).monoidalPreadditive
 
-noncomputable local instance (priority := high) :
+noncomputable local instance (priority := high) reductionsCommShift₂ :
     (curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).CommShift₂Int :=
   (sheafTensorStructure J R).commShift₂
 
-noncomputable local instance (priority := high)
+noncomputable local instance (priority := high) reductionsIsTriangulatedTensorRight
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     ((curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj K).IsTriangulated :=
   (sheafTensorStructure J R).isTriangulated_tensorRight K
@@ -72,18 +72,23 @@ lemma derivedCompletionDiagram_obj (K : DerivedCategory (Sheaf J (ModuleCat.{u +
     (n : ℕ) : (derivedCompletionDiagram J I K).obj (op n) = (reductionFunctor J I n).obj K :=
   rfl
 
-variable [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]
+variable [P.IsClosedUnderIsomorphisms]
 
-/-- If `P` is a triangulated subcategory, so are the objects whose reductions lie in `P`,
-with homology in a common interval. -/
-instance isTriangulated_reductionsIn : (reductionsIn J I P).IsTriangulated := by
-  have hiso : (reductionsIn J I P).IsClosedUnderIsomorphisms := ⟨fun {K K'} e ⟨a, b, h⟩ ↦
+/-- The objects whose reductions lie in `P` form a property closed under isomorphisms. -/
+instance isClosedUnderIsomorphisms_reductionsIn :
+    (reductionsIn J I P).IsClosedUnderIsomorphisms := ⟨fun {K K'} e ⟨a, b, h⟩ ↦
     ⟨a, b, fun n ↦ by
       let e' := (reductionFunctor J I n).mapIso e
       have : TStructure.t.IsGE ((reductionFunctor J I n).obj K) a := (h n).2.1
       have : TStructure.t.IsLE ((reductionFunctor J I n).obj K) b := (h n).2.2
       exact ⟨P.prop_of_iso e' (h n).1, ⟨TStructure.t.isGE_of_iso e' a,
         TStructure.t.isLE_of_iso e' b⟩⟩⟩⟩
+
+variable [P.IsTriangulated]
+
+/-- If `P` is a triangulated subcategory, so are the objects whose reductions lie in `P`,
+with homology in a common interval. -/
+instance isTriangulated_reductionsIn : (reductionsIn J I P).IsTriangulated := by
   have hshift : (reductionsIn J I P).IsStableUnderShift ℤ := ⟨fun k ↦ ⟨fun K ⟨a, b, h⟩ ↦
     ⟨a - k, b - k, fun n ↦ by
       let e := ((reductionFunctor J I n).commShiftIso k).app K
@@ -120,3 +125,22 @@ instance isTriangulated_reductionsIn : (reductionsIn J I P).IsTriangulated := by
       TStructure.t.isLE_of_isZero hz 0⟩⟩ }
 
 end DerivedCategory
+
+namespace CategoryTheory.ObjectProperty
+
+variable {D : Type*} [Category D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
+  [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+
+/-- The intersection of two triangulated subcategories closed under isomorphisms is a
+triangulated subcategory. -/
+lemma isTriangulated_inf (P Q : ObjectProperty D) [P.IsTriangulated] [Q.IsTriangulated]
+    [P.IsClosedUnderIsomorphisms] [Q.IsClosedUnderIsomorphisms] : (P ⊓ Q).IsTriangulated where
+  exists_zero := by
+    obtain ⟨Z, hZ, hP⟩ := ContainsZero.exists_zero (P := P)
+    exact ⟨Z, hZ, hP, Q.prop_of_isZero hZ⟩
+  isStableUnderShiftBy n := ⟨fun X h ↦ ⟨P.le_shift n X h.1, Q.le_shift n X h.2⟩⟩
+  ext₂' T hT h₁ h₃ :=
+    ⟨T.obj₂, ⟨P.ext_of_isTriangulatedClosed₂ T hT h₁.1 h₃.1,
+      Q.ext_of_isTriangulatedClosed₂ T hT h₁.2 h₃.2⟩, ⟨Iso.refl _⟩⟩
+
+end CategoryTheory.ObjectProperty
