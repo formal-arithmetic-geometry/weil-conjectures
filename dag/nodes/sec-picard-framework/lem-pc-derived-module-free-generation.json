@@ -11,13 +11,13 @@
  },
  "kind": "statement",
  "title": "Generation of a module derived category by shifts of the ring",
- "statement": "For a ring $A$, every object $K$ of $D(A)$ [def-pc-derived-category] belongs to the smallest full subcategory of $D(A)$ that contains all shifts $A[k]$, $k\\in\\mathbf Z$, and is closed under set-indexed direct sums, under the third vertex of a distinguished triangle whose other two vertices lie in it, and under retracts.",
+ "statement": "For a ring $A$, let $D(A)$ be the derived category [def-weil-abstract-derived-category] of the abelian category of $A$-modules. Every object $K$ of $D(A)$ belongs to the smallest full subcategory of $D(A)$ that contains all shifts $A[k]$, $k\\in\\mathbf Z$, and is closed under set-indexed direct sums, under the third vertex of a distinguished triangle whose other two vertices lie in it, and under retracts.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Remark 15.60.11 (more-algebra-remark-P-resolution), Tag 09PB, as invoked in perfect.tex Lemma 36.22.1 (Tag 08EU)"
  },
  "stmt_deps": [
-  "def-pc-derived-category"
+  "def-weil-abstract-derived-category"
  ],
  "proof": [
   {
@@ -124,5 +124,50 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dmf1919 (reviewer sub-agent of L); spot-checked: Read steps 1-4 against Tag 09PB/09KP; leaf lem-weil-pbc-complex-ses-triangle fits steps 2-3 (termwise split ses). FIX more, RETURN less: C1 in steps 2 and 3 (missed by the second reading): both treat the termwise direct sum of complexes (the quotient sum of shifts A[k], and the telescope vertices sum F_iP) as the direct sum in D(A), a non-elementary fact (Injectives Lemma 07D9) that no cited node states; added statement-only node lem-pc-derived-module-direct-sums (created from the item, unsplit, Mathlib grep for HasCoproducts in Algebra/Homology: no DerivedCategory match) and cited it in steps 2, 3 and proof_deps. New node lem-pc-derived-filtered-free-resolution matches 09KP specialized to rings; no duplicate or Mathlib match.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedModuleFreeGeneration",
+  "declaration": "CategoryTheory.derivedModuleFreeGeneration",
+  "file": "lean/Sheaf/CategoryTheory/DerivedModuleFreeGeneration.lean",
+  "statement": "theorem derivedModuleFreeGeneration (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] (K : DerivedCategory (ModuleCat.{max u v} R)) : ∀ (P : ObjectProperty (DerivedCategory (ModuleCat.{max u v} R))), (∀ (n : ℤ), P (((DerivedCategory.singleFunctor (ModuleCat.{max u v} R) 0).obj (ModuleCat.of R (ULift.{v} R)))⟦n⟧)) → (∀ {I : Type (max u v)} (F : I → DerivedCategory (ModuleCat.{max u v} R)) (S : DerivedCategory (ModuleCat.{max u v} R)) (ι : ∀ i : I, F i ⟶ S), IsColimit (Cofan.mk S ι) → (∀ i : I, P (F i)) → P S) → (∀ (T : Pretriangulated.Triangle (DerivedCategory (ModuleCat.{max u v} R))), T ∈ Pretriangulated.distinguishedTriangles → P T.obj₁ → P T.obj₂ → P T.obj₃) → (∀ {X Y : DerivedCategory (ModuleCat.{max u v} R)}, Retract X Y → P Y → P X) → P K",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dfg1330"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dfg1330",
+  "group": "H1",
+  "result": "fix",
+  "note": "Correction to def-weil-abstract-derived-category checked (def-pc-derived-category is D(O_X) only; wording = sibling lem-pc-derived-module-direct-sums); ring -> [CommRing R] (Stacks rings commutative; proof dep lem-pc-derived-filtered-free-resolution is CommRing; [Ring R] strengthened); generators A[k] written as (singleFunctor 0).obj R shifted by n; ModuleCat.{max u v}+ULift (F1 f5fdec7f3 form); coproduct index Type (max u v) = carrier universe via IsColimit (Cofan.mk S ι), empty I allowed; dist-triangle third-vertex and Retract direction checked; P quantified (smallest subcategory); no hollow hyps, no let; both citers hold",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "H1 stage 2",
+  "old_statement": "For a ring $A$, every object $K$ of $D(A)$ [def-pc-derived-category] belongs to the smallest full subcategory of $D(A)$ that contains all shifts $A[k]$, $k\\in\\mathbf Z$, and is closed under set-indexed direct sums, under the third vertex of a distinguished triangle whose other two vertices lie in it, and under retracts.",
+  "source": {
+   "document": "literature/stacks-project/more-algebra.tex",
+   "place": "More on Algebra, Remark 15.60.11 (Tag 09PB)"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-projection-formula",
+    "holds": true,
+    "note": "uses the generation conclusion"
+   },
+   {
+    "id": "lem-pc-derived-tensor-transitivity",
+    "holds": true,
+    "note": "proof dependency citation remains valid"
+   }
+  ],
+  "what": "The cited dependency def-pc-derived-category defines D(O_X) for a scheme X, so it does not introduce D(A) for a ring A; the original statement therefore had an undefined and mismatched derived category. The corrected statement follows the source and cites the general derived category of an abelian category.",
+  "old_stmt_deps": [
+   "def-pc-derived-category"
+  ]
  }
 }

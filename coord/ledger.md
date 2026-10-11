@@ -4710,3 +4710,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 13:06 L: merged deliver/M1/lem-weil-pbc-power-series-field-cohen-regular-complete (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete MvPowerSeries.power_series_field_cohen_regular_complete)
 - 13:07 L: merged deliver/F1/lem-sc-intersection-effective-cartier (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.IntersectionEffectiveCartier AlgebraicGeometry.intersection_effectiveCartier)
 - 13:07 L: merged deliver/E1/lem-pc-pseudo-coherent-summand (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PseudoCoherentSummand AlgebraicGeometry.Scheme.pseudoCoherent_of_isIso_biproduct)
+- 13:08 L: merged deliver/H1/lem-pc-derived-module-free-generation (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.DerivedModuleFreeGeneration CategoryTheory.derivedModuleFreeGeneration; statement corrected (2 citers))
