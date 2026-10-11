@@ -1,15 +1,14 @@
 # Work queue
 
-966 items; claim with `tools/claim.py next <group> [--stage N]`.
+962 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (966)
+## Stage 2: nodes to state (962)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-nagata-relative-finite-affine-presentation` | 1 | state |
 | `def-pc-flat-sheaf-modules` | 1 | state |
 | `def-pc-module-pullback` | 1 | state |
 | `def-weil-pbc-ample-invertible-module` | 1 | state |
@@ -25,7 +24,6 @@
 | `lem-fin-normal-generic-constant` | 1 | state |
 | `lem-galois-descent` | 1 | state |
 | `lem-galois-fpqc-pullback-canonical-iso` | 1 | state |
-| `lem-pc-affine-tilde-kflat` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-limit-milnor-sequence` | 1 | state |
@@ -42,12 +40,10 @@
 | `lem-pc-module-filtered-colimits-tensor` | 1 | state |
 | `lem-pc-module-pullback-adjunction` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
-| `lem-pc-monomial-cech-complex-homology` | 1 | state |
 | `lem-pc-nonzero-section-integral-cartier` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-presheaf-module-inverse-image-adjunction` | 1 | state |
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
-| `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 1 | state |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 1 | state |
 | `lem-pc-ringed-space-module-stalk-tensor` | 1 | state |
 | `lem-pc-sites-modules-quotient-j-shriek` | 1 | state |
