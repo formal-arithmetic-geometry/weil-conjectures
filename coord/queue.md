@@ -1,11 +1,11 @@
 # Work queue
 
-443 items; claim with `tools/claim.py next <group> [--stage N]`.
+440 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (443)
+## Stage 2: nodes to state (440)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -49,7 +49,6 @@
 | `lem-sc-coherent-ring-perfect-complex-cohomology` | 1 | state |
 | `lem-sc-derived-k-injective-restrict-open` | 1 | state |
 | `lem-sc-derived-open-gluing` | 1 | state |
-| `lem-sc-derived-open-mayer-vietoris-ses` | 1 | state |
 | `lem-sc-derived-open-shriek-derived-adjunction` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
@@ -80,10 +79,8 @@
 | `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
 | `lem-weil-pbc-presheaf-module-stalk-filtered-colimit` | 1 | state |
 | `lem-weil-pbc-principal-localization-naive-cotangent` | 1 | state |
-| `lem-weil-pbc-principal-maximal-dim-one-regular` | 1 | state |
 | `lem-weil-pbc-proj-graded-module-sheaf-exists` | 1 | state |
 | `lem-weil-pbc-proj-polynomial-twist-chart` | 1 | state |
-| `lem-weil-pbc-projective-dimension-ext-characterization` | 1 | state |
 | `lem-weil-pbc-projective-dimension-ses-kernel` | 1 | state |
 | `lem-weil-pbc-projective-dimension-well-defined` | 1 | state |
 | `lem-weil-pbc-projective-resolution-kernel-projective` | 1 | state |
