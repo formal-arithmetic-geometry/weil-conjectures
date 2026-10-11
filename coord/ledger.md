@@ -4324,3 +4324,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:51 L: merged deliver/E1/lem-weil-pbc-flat-completion (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FlatCompletion flat_adicCompletion_of_flat_local)
 - 10:51 L: merged deliver/E1/lem-weil-pbc-global-complete-intersection-local-regular-sequence (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence MvPolynomial.isRegular_localizationAtPrime_of_quotient_dimension)
 - 10:51 L: merged deliver/F1/lem-weil-pbc-geometrically-regular-over-subfields (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GeometricRegularitySubfields geometricallyRegular_of_directed_subfields)
+- 10:52 L: merged deliver/K1/lem-weil-pbc-grothendieck-regular-sequence-flat (stage 2; reviewer PASS; first push; Sheaf.RingTheory.RegularSequenceFlatClosedFiber RingTheory.Sequence.isRegular_and_flat_quotient_of_closedFiber)

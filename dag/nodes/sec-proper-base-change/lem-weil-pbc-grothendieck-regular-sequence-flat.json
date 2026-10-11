@@ -157,5 +157,23 @@
   "worker": "stage1",
   "summary": "Read Stacks Algebra 00MG, 00MF and 00ME. Expanded the one-line induction into the quotient-ring setup, flat base case, application of the existing 00ME node to multiplication by each successive element, and the final regularity and flatness claims. The nonzero final closed fibre ensures each quotient is local and the terminal quotient in S is nonzero. No new nodes. Blueprint search for 00MG, 00MF, and regular-sequence flatness found no matching blueprint statement; same_as is empty.",
   "blueprint": "The item descends from step 7 of thm-weil-pbc-finite-etale-lifting, the essential-surjectivity route of Stacks 0GS2, through the recorded via chain. Its four steps supply the flat local regular-sequence argument required in the relative-global-complete-intersection part of that route; the blueprint does not itself state 00MG."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularSequenceFlatClosedFiber",
+  "declaration": "RingTheory.Sequence.isRegular_and_flat_quotient_of_closedFiber",
+  "file": "lean/Sheaf/RingTheory/RegularSequenceFlatClosedFiber.lean",
+  "statement": "theorem isRegular_and_flat_quotient_of_closedFiber {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsLocalRing R] [IsLocalRing S] [IsNoetherianRing R] [IsNoetherianRing S] (φ : R →+* S) [IsLocalHom φ] (hflat : φ.Flat) (fs : List S) : letI : Algebra R S := φ.toAlgebra let I : Ideal S := (IsLocalRing.maximalIdeal R).map φ IsRegular (S ⧸ I) (fs.map (Ideal.Quotient.mk I)) → IsRegular S fs ∧ ∀ i : ℕ, i ≤ fs.length → Module.Flat R (S ⧸ Ideal.ofList (fs.take i))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-grq1107",
+  "group": "K1",
+  "result": "pass",
+  "note": "R,S CommRing+IsLocalRing+IsNoetherianRing; phi IsLocalHom (not inferable) + phi.Flat; I=(maxIdeal R).map phi = mS; fs:List S (c>=0, [] ok); hyp RingTheory.Sequence.IsRegular (S/I) images (#check resolved namespace); concl IsRegular S fs and forall i<=length Module.Flat R (S/ofList(take i)) with algebraMap = mk.comp phi (rfl)"
  }
 }
