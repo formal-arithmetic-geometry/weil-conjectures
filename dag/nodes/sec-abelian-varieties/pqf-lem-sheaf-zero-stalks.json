@@ -132,5 +132,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-szs2316 (reviewer sub-agent of L); spot-checked: Steps 1-3 checked against def-weil-pbc-module-stalk (germ representation and germ equality criterion, applied with the zero section) and def-weil-sheaf-of-modules-category (underlying abelian sheaf, separatedness); proof complete, no circularity, hypotheses uniform in U, x, s. Dropping pqf-def-coherent from stmt_deps correct (unused), statement unchanged. Mathlib: grep found TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero (Mathlib/Topology/Sheaves/Abelian.lean:90), only for Sheaf C X with a fixed coefficient category; a ringed-space O_X-module sheaf needs the forgetful step and zero-reflection, so not a one-line leaf (B8); split kept. No new nodes, no tool_uses. No fault found that the second reading missed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SheafZeroStalks",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalks",
+  "statement": "theorem isZero_of_isZero_stalks (X : Scheme.{u}) (F : X.Modules) (hF : ∀ (x : X), IsZero ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)) : IsZero F",
+  "by": "N1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/AlgebraicGeometry/SheafZeroStalks.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-szs",
+  "group": "N1",
+  "result": "pass",
+  "note": "X : Scheme.{u}, F : X.Modules (def-weil-sheaf-of-modules-category record), hF every point's O_X-module stalk IsZero via RingedSpace.moduleStalkFunctor (STATE MODULE STALKS, same form as landed CoherentLocalIsomorphism), conclusion IsZero F in X.Modules; no extra hypotheses, no let/notation/local instance/tautological conjunct; Mathlib only TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero (fixed coefficient category), not exact, existing:false correct"
  }
 }
