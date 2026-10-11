@@ -56,8 +56,7 @@ noncomputable def integersShrinkMap :
 /-- The ring morphisms `𝒪_E → 𝒪_L` are functorial in the embeddings. -/
 lemma integersShrinkMap_comp {L' : Type w} [Field L'] [Algebra L' (PadicAlgCl l)]
     [Small.{u + 1} L'] (ι' : L →+* L')
-    (hι' : ∀ x, algebraMap L' (PadicAlgCl l) (ι' x) = algebraMap L (PadicAlgCl l) x)
-    [Small.{u + 1} L] :
+    (hι' : ∀ x, algebraMap L' (PadicAlgCl l) (ι' x) = algebraMap L (PadicAlgCl l) x) :
     integersShrinkMap.{w, u} l (ι'.comp ι) (fun x ↦ (hι' _).trans (hι x)) =
       (integersShrinkMap.{w, u} l ι' hι').comp (integersShrinkMap.{w, u} l ι hι) := by
   ext x

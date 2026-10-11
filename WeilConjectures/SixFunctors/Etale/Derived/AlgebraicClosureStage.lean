@@ -151,4 +151,80 @@ lemma sheafStageTransitionComp_cocycle {E L L' L'' : FiniteSubext l} (h : E ≤ 
     (integersShrinkMap_incl_comp h h') (integersShrinkMap_incl_comp h' h'')
     (integersShrinkMap_incl_comp (h.trans h') h'') (integersShrinkMap_incl_comp h (h'.trans h'')))
 
+/-- The derived transition functor `D(X_ét, 𝒪_E) ⥤ D(X_ét, 𝒪_L)`: right derived coextension of
+scalars along `𝒪_E → 𝒪_L`. -/
+noncomputable abbrev derivedStageTransition {E L : FiniteSubext l} (h : E ≤ L) :=
+  (sheafStageTransition X h).rightDerivedFunctor
+
+/-- The composition isomorphisms of the derived transition functors. -/
+noncomputable def derivedStageTransitionComp {E L L' : FiniteSubext l} (h : E ≤ L)
+    (h' : L ≤ L') :
+    derivedStageTransition X h ⋙ derivedStageTransition X h' ≅
+      derivedStageTransition X (h.trans h') :=
+  Functor.rightDerivedFunctorCompIso' _ _ (sheafStageTransitionComp X h h')
+
+/-- The cocycle condition for the derived transition functors. -/
+lemma derivedStageTransitionComp_cocycle {E L L' L'' : FiniteSubext l} (h : E ≤ L)
+    (h' : L ≤ L') (h'' : L' ≤ L'') :
+    Functor.whiskerRight (derivedStageTransitionComp X h h').hom (derivedStageTransition X h'') ≫
+        (derivedStageTransitionComp X (h.trans h') h'').hom =
+      Functor.whiskerLeft (derivedStageTransition X h) (derivedStageTransitionComp X h' h'').hom ≫
+        (derivedStageTransitionComp X h (h'.trans h'')).hom :=
+  Functor.rightDerivedFunctorCompIso'_cocycle _ _ _ _ (sheafStageTransitionComp_cocycle X h h' h'')
+
+section Integral
+
+/-- The small étale site of a scheme is essentially small. Instance search does not find this
+in the presence of the imports of this file. -/
+local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
+
+/-- The transition functor `D_comp(X_ét, 𝒪_E) ⥤ D_comp(X_ét, 𝒪_L)` of the integral stages. -/
+noncomputable abbrev integralStageTransition {E L : FiniteSubext l} (h : E ≤ L) :
+    DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E.field ⥤
+      DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l L.field :=
+  coextendScalarsDerivedCompleteIntegral l (incl h) (incl_compat h) X
+
+lemma integralStageTransition_comp_ι {E L : FiniteSubext l} (h : E ≤ L) :
+    integralStageTransition X h ⋙ DerivedCategoryDerivedCompleteIntegral.ι _ l L.field =
+      DerivedCategoryDerivedCompleteIntegral.ι _ l E.field ⋙ derivedStageTransition X h :=
+  rfl
+
+/-- The composition isomorphisms of the integral transition functors. -/
+noncomputable def integralStageTransitionComp {E L L' : FiniteSubext l} (h : E ≤ L)
+    (h' : L ≤ L') :
+    integralStageTransition X h ⋙ integralStageTransition X h' ≅
+      integralStageTransition X (h.trans h') :=
+  NatIso.ofComponents
+    (fun K ↦ (ObjectProperty.fullyFaithfulι _).preimageIso
+      ((derivedStageTransitionComp X h h').app
+        ((DerivedCategoryDerivedCompleteIntegral.ι _ l E.field).obj K)))
+    (fun f ↦ (ObjectProperty.fullyFaithfulι _).map_injective
+      ((derivedStageTransitionComp X h h').hom.naturality
+        ((DerivedCategoryDerivedCompleteIntegral.ι _ l E.field).map f)))
+
+lemma integralStageTransitionComp_hom_app {E L L' : FiniteSubext l} (h : E ≤ L)
+    (h' : L ≤ L') (K : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E.field) :
+    (DerivedCategoryDerivedCompleteIntegral.ι _ l L'.field).map
+        ((integralStageTransitionComp X h h').hom.app K) =
+      (derivedStageTransitionComp X h h').hom.app
+        ((DerivedCategoryDerivedCompleteIntegral.ι _ l E.field).obj K) :=
+  rfl
+
+/-- The cocycle condition for the integral transition functors. -/
+lemma integralStageTransitionComp_cocycle {E L L' L'' : FiniteSubext l} (h : E ≤ L)
+    (h' : L ≤ L') (h'' : L' ≤ L'') :
+    Functor.whiskerRight (integralStageTransitionComp X h h').hom (integralStageTransition X h'') ≫
+        (integralStageTransitionComp X (h.trans h') h'').hom =
+      Functor.whiskerLeft (integralStageTransition X h) (integralStageTransitionComp X h' h'').hom ≫
+        (integralStageTransitionComp X h (h'.trans h'')).hom := by
+  ext K
+  apply (ObjectProperty.fullyFaithfulι _).map_injective
+  exact congr_app (derivedStageTransitionComp_cocycle X h h' h'')
+    ((DerivedCategoryDerivedCompleteIntegral.ι _ l E.field).obj K)
+
+end Integral
+
 end AlgebraicGeometry.Etale
