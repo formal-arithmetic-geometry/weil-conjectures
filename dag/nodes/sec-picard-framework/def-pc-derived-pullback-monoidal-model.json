@@ -1,0 +1,112 @@
+{
+ "id": "def-pc-derived-pullback-monoidal-model",
+ "kind": "definition",
+ "title": "Canonical monoidal model of derived pullback",
+ "status": "split",
+ "statement": "Let $g:T\\to X$ be a morphism of schemes [def-pc-scheme]. On the derived categories of modules [def-pc-derived-category], let $L=Lg^*$ be the recorded derived pullback [def-pc-derived-pullback], equipped with the derived tensor structure [def-pc-scheme-derived-tensor-structure]. A canonical monoidal model of $L$ is a strong monoidal structure $m$ induced by termwise module pullback [def-pc-module-pullback] as follows. There is an additive functor $F:\\operatorname{Mod}(O_X)\\to\\operatorname{Mod}(O_T)$ agreeing on objects and arrows with that module pullback, a strong monoidal structure $m_F$ whose inverse tensorator is the recorded module pullback tensor comparison [lem-weil-pbc-module-pullback-tensor], and a left-derived counit $\\epsilon:Q_hL\\to K(F)Q_h$. The degreewise inverse tensorators induce the total-complex isomorphisms $\\varphi_{P,N}:F(\\operatorname{Tot}(P\\otimes N))\\cong\\operatorname{Tot}(FP\\otimes FN)$ [def-pc-tensor-complex-sheaves]; equivalently, the composite of each summand inclusion with $\\varphi$ is the module tensor comparison followed by the corresponding target summand inclusion. For every pair of K-flat complexes $P,N$ [def-pc-kflat-complex], the tensorator of $m$ is characterized by the equation $\\mu_m(QP,QN);L(\\mu_Q(P,N));\\epsilon_{P\\otimes N};Q(\\varphi_{P,N})=(\\epsilon_P\\otimes\\epsilon_N);\\mu_Q(FP,FN)$, where semicolons mean composition in order and $\\mu_Q$ is the localization tensor comparison. This is the descent of the canonical comparison [lem-pc-derived-pullback-tensor-product]. The unit isomorphism $O_T\\cong L(O_X)$ is the one determined by the strong monoidal unit laws. Such models exist; their tensor and unit isomorphisms are used in defining canonical derived-Hom base change, and statements using them hold for every such model.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pullback-tensor",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "lem-pc-derived-pullback-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; unit from termwise tensor pullback and monoidal unit laws"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "monoidal derived pullback of sheaves of modules on a scheme",
+   "results": "HTTP Internal Server Error; service unavailable, supplemented by LeanFinder and local searches",
+   "date": "2026-10-12",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "canonical monoidal tensor comparison derived inverse image O_X modules scheme",
+   "results": "8 hits, underived Mathlib module pullback and generic presheaf tensor notions only",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullbackMonoidalModel|IsDerivedPullbackMonoidalModel|derived.*pullback.*monoidal, plus tensor comparison searches in DAG, Mathlib, WeilConjectures and lean/Sheaf",
+   "results": "Generic CoreMonoidal and derived comparisons for etale/proetale coefficient sheaves; SingleComplexInheritedTensorCondition asserts existence of an unpinned monoidal structure. No canonical O_X-module model for the recorded derivedPullback.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-perfect-rhom-tensor-comparison",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Canonical tensor and unit comparisons specifying the base-change map for the perfect dual",
+   "via": [
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-pc-perfect-tensor-hom-duality",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel",
+  "declaration": "AlgebraicGeometry.IsDerivedPullbackMonoidalModel",
+  "declarations": [
+   "AlgebraicGeometry.IsDerivedPullbackMonoidalModel",
+   "AlgebraicGeometry.exists_derivedPullbackMonoidalModel"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackMonoidalModel.lean",
+  "statement": "def IsDerivedPullbackMonoidalModel {T X : Scheme.{uModel}} (g : T ⟶ X) [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))] (m : (derivedPullback g).CoreMonoidal) : Prop",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prt",
+  "group": "C1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prt",
+  "group": "C1",
+  "result": "fix",
+  "note": "H5 fix: derivedPullbackMonoidalModel (Classical.choose of sorried exists) removed, item quantifies over every m with IsDerivedPullbackMonoidalModel g m; Classical.choose of scheme_derivedInternalHom_adjunction replaced by bound adj/adj'/adjT tied by their naturality equations (0f5459d94 pattern; bidual via the symmetric form adj'); X, QCoh K M, IsPerfect K, Kdual=RHom(K,O) QCoh+perfect, ev, comparison for M and K, bidual, unique eta, ExactPairing with ev/eta, base change for every g matched"
+ }
+}

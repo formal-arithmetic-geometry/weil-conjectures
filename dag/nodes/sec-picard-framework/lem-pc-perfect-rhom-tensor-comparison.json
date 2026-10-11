@@ -27,7 +27,8 @@
   "def-pur-derived-internal-hom",
   "def-pc-tensor-complex-sheaves",
   "lem-sc-derived-internal-hom-adjunction",
-  "lem-pc-derived-pullback-tensor-product"
+  "lem-pc-derived-pullback-tensor-product",
+  "def-pc-derived-pullback-monoidal-model"
  ],
  "proof": [
   {
@@ -207,5 +208,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison",
+  "declaration": "AlgebraicGeometry.perfect_rhom_tensor_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectRHomTensorComparison.lean",
+  "statement": "theorem perfect_rhom_tensor_comparison (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] (K M : schemeDerivedQCohCategory X) (hK : Scheme.IsPerfect X K.obj) (adj : ∀ A B C : schemeDerivedCategory X, (A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op B, C)) ≃ (A ⊗ B ⟶ C)) (hadj : ∀ (A A' B B' C C' : schemeDerivedCategory X) (a : A' ⟶ A) (b : B' ⟶ B) (c : C ⟶ C') (f : A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op B, C)), adj A' B' C' (a ≫ f ≫ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).map (b.op, c)) = (a ⊗ₘ b) ≫ adj A B C f ≫ c) (adj' : ∀ A B C : schemeDerivedCategory X, (A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op B, C)) ≃ (B ⊗ A ⟶ C)) (hadj' : ∀ (A A' B B' C C' : schemeDerivedCategory X) (a : A' ⟶ A) (b : B' ⟶ B) (c : C ⟶ C') (f : A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op B, C)), adj' A' B' C' (a ≫ f ≫ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).map (b.op, c)) = (b ⊗ₘ a) ≫ adj' A B C f ≫ c) : ∃ (Kdual : schemeDerivedQCohCategory X) (hdual : Kdual.obj = (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op K.obj, 𝟙_ (schemeDerivedCategory X))) (ev : Kdual.obj ⊗ K.obj ⟶ 𝟙_ (schemeDerivedCategory X)), ev = adj Kdual.obj K.obj (𝟙_ (schemeDerivedCategory X)) (eqToHom hdual) ∧ Scheme.IsPerfect X Kdual.obj ∧ ∃ comparison : ∀ N : schemeDerivedQCohCategory X, N.obj ⊗ Kdual.obj ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op K.obj, N.obj), (∀ N, adj (N.obj ⊗ Kdual.obj) K.obj N.obj (comparison N) = (α_ N.obj Kdual.obj K.obj).hom ≫ N.obj ◁ ev ≫ (ρ_ N.obj).hom) ∧ IsIso (comparison M) ∧ IsIso (comparison K) ∧ ∃ bidual : K.obj ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op Kdual.obj, 𝟙_ (schemeDerivedCategory X)), adj' K.obj Kdual.obj (𝟙_ (schemeDerivedCategory X)) bidual = ev ∧ IsIso bidual ∧ ∃ η : 𝟙_ (schemeDerivedCategory X) ⟶ K.obj ⊗ Kdual.obj, adj (𝟙_ (schemeDerivedCategory X)) K.obj K.obj (η ≫ comparison K) = (λ_ K.obj).hom ∧ (∀ z : 𝟙_ (schemeDerivedCategory X) ⟶ K.obj ⊗ Kdual.obj, adj (𝟙_ (schemeDerivedCategory X)) K.obj K.obj (z ≫ comparison K) = (λ_ K.obj).hom → z = η) ∧ (∃ p : ExactPairing K.obj Kdual.obj, p.evaluation' = ev ∧ p.coevaluation' = η) ∧ ∀ (T : Scheme.{u}) (g : T ⟶ X) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] (adjT : ∀ A B C : schemeDerivedCategory T, (A ⟶ (derivedInternalHom (Opens.grothendieckTopology T.toRingedSpace) T.toRingedSpace.sheaf).obj (op B, C)) ≃ (A ⊗ B ⟶ C)), (∀ (A A' B B' C C' : schemeDerivedCategory T) (a : A' ⟶ A) (b : B' ⟶ B) (c : C ⟶ C') (f : A ⟶ (derivedInternalHom (Opens.grothendieckTopology T.toRingedSpace) T.toRingedSpace.sheaf).obj (op B, C)), adjT A' B' C' (a ≫ f ≫ (derivedInternalHom (Opens.grothendieckTopology T.toRingedSpace) T.toRingedSpace.sheaf).map (b.op, c)) = (a ⊗ₘ b) ≫ adjT A B C f ≫ c) → ∀ m : (derivedPullback g).CoreMonoidal, IsDerivedPullbackMonoidalModel g m → ∃ bc : (derivedPullback g).obj Kdual.obj ⟶ (derivedInternalHom (Opens.grothendieckTopology T.toRingedSpace) T.toRingedSpace.sheaf).obj (op ((derivedPullback g).obj K.obj), 𝟙_ (schemeDerivedCategory T)), adjT ((derivedPullback g).obj Kdual.obj) ((derivedPullback g).obj K.obj) (𝟙_ (schemeDerivedCategory T)) bc = (m.μIso Kdual.obj K.obj).hom ≫ (derivedPullback g).map ev ≫ m.εIso.inv ∧ IsIso bc",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-prt"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-prt",
+  "group": "C1",
+  "result": "fix",
+  "note": "H5 fix: derivedPullbackMonoidalModel (Classical.choose of sorried exists) removed, item quantifies over every m with IsDerivedPullbackMonoidalModel g m; Classical.choose of scheme_derivedInternalHom_adjunction replaced by bound adj/adj'/adjT tied by their naturality equations (0f5459d94 pattern; bidual via the symmetric form adj'); X, QCoh K M, IsPerfect K, Kdual=RHom(K,O) QCoh+perfect, ev, comparison for M and K, bidual, unique eta, ExactPairing with ev/eta, base change for every g matched"
  }
 }
