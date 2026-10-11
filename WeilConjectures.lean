@@ -348,6 +348,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToT
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.Sites.AffineRefinement
+public import WeilConjectures.AlgebraicGeometry.Sites.AgreementLocus
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
 public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension
