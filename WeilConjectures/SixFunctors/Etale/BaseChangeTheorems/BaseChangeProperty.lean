@@ -57,8 +57,9 @@ time, and reaches a general torsion coefficient ring by dévissage: `𝐅_r`-mod
 sheaves as a filtered colimit. The sheaf-level dévissage is
 `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage`, and the passage from the
 rings `Λ ⧸ pΛ` to `Λ` is in `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients`.
-The equivalence below is stated for a coefficient ring `Λ` which is torsion as an additive group — the case `Λ = ℤ/ℓⁿℤ` of the
-`ℓ`-adic formalism — where every sheaf of `Λ`-modules is torsion and no dévissage is needed.
+The equivalence below is stated for a coefficient ring `Λ` which is torsion as an additive
+group — the case `Λ = ℤ/ℓⁿℤ` of the `ℓ`-adic formalism — where every sheaf of
+`Λ`-modules is torsion and no dévissage is needed.
 
 ## Proof of the equivalence
 
