@@ -63,6 +63,30 @@ lemma exists_isFreeGenerator_of_isFreeGenerator_pullbackSection {A : Scheme.{u}}
     rw [map_smul]
     exact (hℓ.map hle).units_smul hunit.unit
 
+
+/-- A free generator of `L` over an open `O` trivialises the restriction of `L` to `O`. -/
+lemma nonempty_pullback_ι_iso_unit_of_isFreeGenerator (L : P.Modules) {O : P.Opens}
+    {m : Γ(L, O)} (hm : IsFreeGenerator m) :
+    Nonempty ((Modules.pullback O.ι).obj L ≅ 𝟙_ O.toScheme.Modules) := by
+  have hm' : IsFreeGenerator (M := L.restrict O.ι) (U := ⊤)
+      (L.presheaf.map (homOfLE (Scheme.Opens.ι_image_top O).le).op m) :=
+    (isFreeGenerator_restrict_iff O.ι L _).mpr (hm.map _)
+  have := isIso_homOfGlobalSection hm'
+  exact ⟨((restrictFunctorIsoPullback O.ι).app L).symm ≪≫
+    (asIso (homOfGlobalSection (L.restrict O.ι)
+      (L.presheaf.map (homOfLE (Scheme.Opens.ι_image_top O).le).op m))).symm⟩
+
+/-- If `g^* (M ⊗ Nᵛ)` is trivial for an invertible `N`, then `g^* M ≅ g^* N`. -/
+lemma nonempty_pullback_iso_of_pullback_tensorObj_dual_iso_unit {A : Scheme.{u}} (g : A ⟶ P)
+    (M N : P.Modules) [N.IsInvertible]
+    (e : (Modules.pullback g).obj (M ⊗ Nᵛ) ≅ 𝟙_ A.Modules) :
+    Nonempty ((Modules.pullback g).obj M ≅ (Modules.pullback g).obj N) := by
+  obtain ⟨μ₁⟩ := nonempty_pullback_tensorObj_iso g M Nᵛ
+  obtain ⟨μ₂⟩ := nonempty_pullback_tensorObj_iso g Nᵛ N
+  obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit N
+  exact nonempty_iso_of_tensorObj_iso_unit_of_tensorObj_iso_unit (μ₁.symm ≪≫ e)
+    (μ₂.symm ≪≫ (Modules.pullback g).mapIso (β_ _ _ ≪≫ d) ≪≫ pullbackObjUnitIso g)
+
 end Scheme.Modules
 
 namespace TheoremOfCube
