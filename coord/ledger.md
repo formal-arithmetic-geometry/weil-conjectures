@@ -5021,3 +5021,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:42 L: merged deliver/G1/lem-weil-pbc-thickening-lft-cartesian (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeThickening AlgebraicGeometry.locallyOfFiniteType_iff_of_finiteOrderThickening)
 - 14:42 L: merged deliver/Q1/lem-weil-pbc-stein-factorization-affine (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SteinFactorizationAffine AlgebraicGeometry.Scheme.Hom.steinFactorization_affine)
 - 14:42 L: merged deliver/U1/lem-weil-pbc-symmetric-algebra-finite-projective-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.SymmetricAlgebraSmooth SymmetricAlgebra.smooth_of_finite_projective)
+- 14:42 L: merged deliver/S1/lem-weil-pbc-strictly-standard-localization-smooth (stage 2; reviewer PASS; first push; Sheaf.RingTheory.StrictlyStandardLocalizationSmooth Algebra.smooth_localizationAway_of_isStrictlyStandardElement)
