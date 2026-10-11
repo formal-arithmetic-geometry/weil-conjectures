@@ -154,5 +154,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps follow Stacks 07FC: K, K', Q = K'/K; S^{-1}Q = 0; Q finite (new 00IK leaf, Noetherian/Basic.lean:381); s killing Q (new unsplit node, Exercise 076A); 'then s works' written out. New definition leaf for S^{-1}M (LocalizedModule, Basic.lean:89). Tags 07FC, 07JZ, 00CN, 00IK, 076A verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Ogoma",
+  "declaration": "ogoma_lemma",
+  "file": "lean/Sheaf/AlgebraicGeometry/Ogoma.lean",
+  "statement": "theorem ogoma_lemma {A : Type u} [CommRing A] [IsNoetherianRing A] {M : Type v} [AddCommGroup M] [Module A M] [Module.Finite A M] (S : Submonoid A) (π : A) (h : {x : LocalizedModule S M | π • x = 0} = {x : LocalizedModule S M | π • (π • x) = 0}) : ∃ s : S, ∀ n : ℕ, 0 < n → {m : M | ((s : A)^n * π) • m = 0} = {m : M | (((s : A)^n * π)^2) • m = 0}",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ogo1237",
+  "group": "M1",
+  "result": "pass",
+  "note": "A CommRing+IsNoetherianRing, M Module.Finite, S Submonoid, pi:A; h = Ker(pi)=Ker(pi^2) on Mathlib LocalizedModule S M (A-action inferInstance); concl exists s:S, forall n>0, Ker(s^n pi)=Ker((s^n pi)^2) on M as sets; matches Stacks 07FC verbatim; no let, no extra universes/hypotheses"
  }
 }

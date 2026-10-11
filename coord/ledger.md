@@ -4607,3 +4607,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:23 L: merged deliver/M1/lem-sc-smooth-omega-finite-locally-free (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfRankRelativeDifferentials AlgebraicGeometry.Scheme.Hom.isFiniteLocallyFreeOfRank_relativeDifferentials)
 - 12:23 L: merged deliver/F1/lem-weil-pbc-limit-fibre-products (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.LimitFibreProducts AlgebraicGeometry.limit_fibre_products_of_affine_transition)
 - 12:23 L: merged deliver/H1/lem-pc-derived-ambient-direct-sums (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums AlgebraicGeometry.derivedAmbientDirectSums)
+- 12:24 L: merged deliver/M1/lem-weil-pbc-ogoma (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Ogoma ogoma_lemma)
