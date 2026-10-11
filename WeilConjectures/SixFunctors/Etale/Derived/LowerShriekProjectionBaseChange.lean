@@ -139,6 +139,109 @@ lemma projectionMapOfCompactification_baseChange_aux
 
 end
 
+/-- The compactly supported base change map `Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*` for a compactification
+`c'` of the base change `f'` lying over `c` through `q`: the derived base change map of the square
+`q ≫ c.g = c'.g ≫ g`, whiskered by `Di_!`, followed by the inverse of the base change isomorphism
+of the extension by zero for the cartesian square `g' ≫ c.i = c'.i ≫ q`. For
+`c' = c.ofIsPullback sq` it is `rightDerivedLowerShriekOfCompactificationBaseChangeMap`. -/
+noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap' [HasSmallSiteSheafify A] :
+    Rf_!(c)[A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ Rf_!(c')[A] :=
+  (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft D((c.i)_!open[A]) (derivedBaseChangeMap A hp) ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight (derivedOpenImmersionLowerShriekBaseChangeIso A hi).inv R((c'.g)_*[A]) ≫
+    (Functor.associator _ _ _).hom
+
+lemma rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app [HasSmallSiteSheafify A]
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi hp).app K =
+      (derivedBaseChangeMap A hp).app (D((c.i)_!open[A]).obj K) ≫
+        R((c'.g)_*[A]).map ((derivedOpenImmersionLowerShriekBaseChangeIso A hi).inv.app K) := by
+  simp [rightDerivedLowerShriekOfCompactificationBaseChangeMap']
+
+lemma rightDerivedLowerShriekOfCompactificationBaseChangeMap_eq [HasSmallSiteSheafify A]
+    (sq : IsPullback g' f' f g) :
+    rightDerivedLowerShriekOfCompactificationBaseChangeMap A sq c =
+      rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c (c.ofIsPullback sq)
+        (pullback.fst c.g g) (c.isPullback_i_ofIsPullback sq)
+        (IsPullback.of_hasPullback c.g g).toCommSq :=
+  rfl
+
+section
+
+variable [Etale.UpperStarPreservesFlat A] [HasSmallSiteSheafify A]
+  {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+/-- **The projection map commutes with compactly supported base change**, for a compactification
+`c'` of the base change lying over `c`. -/
+theorem projectionMapOfCompactification_baseChange'
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    L((g)^*[A]).map (((projectionMapOfCompactification A c).app K).app L) ≫
+        (rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi hp).app
+          (((-⊗ᴸ-(X)[A]).obj K).obj (L((f)^*[A]).obj L)) ≫
+        (Rf_!(c')[A]).map (((leftDerivedUpperStarTensorComparison A g').app K).app
+          (L((f)^*[A]).obj L)) ≫
+        (Rf_!(c')[A]).map (((-⊗ᴸ-(X')[A]).obj (L((g')^*[A]).obj K)).map
+          ((derivedSquareUpperStarIso A sq).inv.app L)) =
+      ((leftDerivedUpperStarTensorComparison A g).app ((Rf_!(c)[A]).obj K)).app L ≫
+        ((-⊗ᴸ-(Y')[A]).map ((rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi
+          hp).app K)).app (L((g)^*[A]).obj L) ≫
+        ((projectionMapOfCompactification A c').app (L((g')^*[A]).obj K)).app
+          (L((g)^*[A]).obj L) := by
+  rw [rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app,
+    rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app,
+    projectionMapOfCompactification_app_app, projectionMapOfCompactification_app_app]
+  have n₁ := (derivedBaseChangeMap A hp).naturality (D((c.i)_!open[A]).map
+    (((-⊗ᴸ-(X)[A]).obj K).map ((leftDerivedUpperStarCompactificationIso A c).hom.app L)))
+  have n₂ := (derivedBaseChangeMap A hp).naturality
+    (((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app (L((c.g)^*[A]).obj L))
+  have n₃ : ((-⊗ᴸ-(Y')[A]).map (R((c'.g)_*[A]).map
+      ((derivedOpenImmersionLowerShriekBaseChangeIso A hi).inv.app K))).app (L((g)^*[A]).obj L) ≫
+      ((rightDerivedLowerStarProjectionMap A c'.g).app (D((c'.i)_!open[A]).obj
+        (L((g')^*[A]).obj K))).app (L((g)^*[A]).obj L) =
+      ((rightDerivedLowerStarProjectionMap A c'.g).app
+        (L((q)^*[A]).obj (D((c.i)_!open[A]).obj K))).app (L((g)^*[A]).obj L) ≫
+      R((c'.g)_*[A]).map (((-⊗ᴸ-(c'.Z)[A]).map
+        ((derivedOpenImmersionLowerShriekBaseChangeIso A hi).inv.app K)).app
+          (L((c'.g)^*[A]).obj (L((g)^*[A]).obj L))) :=
+    NatTrans.congr_app ((rightDerivedLowerStarProjectionMap A c'.g).naturality
+      ((derivedOpenImmersionLowerShriekBaseChangeIso A hi).inv.app K)) (L((g)^*[A]).obj L)
+  have E2 := rightDerivedLowerStarProjectionMap_derivedBaseChangeMap A hp
+    (D((c.i)_!open[A]).obj K) L
+  have E2' : L((g)^*[A]).map (((rightDerivedLowerStarProjectionMap A c.g).app
+      (D((c.i)_!open[A]).obj K)).app L) ≫ (derivedBaseChangeMap A hp).app
+        (((-⊗ᴸ-(c.Z)[A]).obj (D((c.i)_!open[A]).obj K)).obj (L((c.g)^*[A]).obj L)) =
+      ((leftDerivedUpperStarTensorComparison A g).app
+          (R((c.g)_*[A]).obj (D((c.i)_!open[A]).obj K))).app L ≫
+        ((-⊗ᴸ-(Y')[A]).map ((derivedBaseChangeMap A hp).app (D((c.i)_!open[A]).obj K))).app
+          (L((g)^*[A]).obj L) ≫
+        ((rightDerivedLowerStarProjectionMap A c'.g).app
+          (L((q)^*[A]).obj (D((c.i)_!open[A]).obj K))).app (L((g)^*[A]).obj L) ≫
+        R((c'.g)_*[A]).map (((-⊗ᴸ-(c'.Z)[A]).obj (L((q)^*[A]).obj (D((c.i)_!open[A]).obj K))).map
+          ((derivedSquareUpperStarIso A hp).hom.app L)) ≫
+        R((c'.g)_*[A]).map (leftDerivedUpperStarTensorIso A q (D((c.i)_!open[A]).obj K)
+          (L((c.g)^*[A]).obj L)).inv := by
+    rw [← cancel_mono (R((c'.g)_*[A]).map (leftDerivedUpperStarTensorIso A q
+      (D((c.i)_!open[A]).obj K) (L((c.g)^*[A]).obj L)).hom)]
+    simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id, Category.comp_id]
+    exact E2
+  have aux := projectionMapOfCompactification_baseChange_aux A sq c c' q hi hp K L
+  simp only [← Functor.map_comp] at aux
+  dsimp at n₁ n₂
+  simp only [Functor.map_comp, Category.assoc, Functor.comp_map, NatTrans.comp_app]
+  rw [reassoc_of% n₁, reassoc_of% n₂, reassoc_of% E2']
+  erw [reassoc_of% n₃]
+  simp only [← Functor.map_comp]
+  rw [aux]
+  rfl
+
+end
+
 end Etale
 
 end AlgebraicGeometry
