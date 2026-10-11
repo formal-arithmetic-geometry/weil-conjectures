@@ -53,6 +53,22 @@ end CategoryTheory.Abelian.Ext
 
 namespace DiscreteModule
 
+/-- If `r` kills a discrete `G`-module `M`, then `r` kills its cohomology `Hⁿ(G, M)`. In
+particular the cohomology of a module over `ℤ/r` is a `ℤ/r`-module.
+(blueprint: `def-exc-continuous-cohomology`) -/
+lemma zsmul_eq_zero_of_forall_zsmul_eq_zero {G : Type u} [Group G] [TopologicalSpace G]
+    [IsTopologicalGroup G] {M : DiscreteModule.{w} G} {r : ℤ} (hM : ∀ m : M.obj.V, r • m = 0)
+    {n : ℕ} (x : H G M n) : r • x = 0 := by
+  have hzero : r • 𝟙 M = 0 := by
+    apply (forget₂Ab.{w} G).map_injective
+    rw [CategoryTheory.Functor.map_zsmul, CategoryTheory.Functor.map_id,
+      CategoryTheory.Functor.map_zero]
+    ext m
+    simp only [AddCommGrpCat.hom_zsmul, AddCommGrpCat.hom_id, AddCommGrpCat.hom_zero,
+      AddMonoidHom.zero_apply, AddMonoidHom.coe_smul, Pi.smul_apply, AddMonoidHom.id_apply]
+    exact hM m
+  rw [← Abelian.Ext.comp_mk₀_zsmul_id, hzero, Abelian.Ext.mk₀_zero, Abelian.Ext.comp_zero]
+
 section res
 
 variable {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]

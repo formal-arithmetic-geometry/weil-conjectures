@@ -31,6 +31,16 @@ a full subcategory `DiscreteModule G` of `Action AddCommGrpCat G`, which is abel
   `DiscreteModule G` has enough injectives.
 - `DiscreteModule.H`: the continuous cohomology `Hⁿ(G, M) = Extⁿ(ℤ, M)`, the right derived
   functors of the invariants functor.
+
+## Implementation notes
+
+The blueprint (`def-exc-continuous-cohomology`) works with discrete modules over a finite
+coefficient ring `A`. We work with `ℤ`-coefficients throughout: a discrete `A`-module with an
+`A`-linear action is in particular a discrete `G`-module, and all statements we need (vanishing of
+cohomology of torsion modules) are about the underlying abelian groups. For a module killed by
+`n`, such as an `A`-module with `n = 0` in `A`, the cohomology groups are killed by `n`
+(`DiscreteModule.zsmul_eq_zero_of_forall_zsmul_eq_zero`). The equivalent description by
+continuous inhomogeneous cochains is not formalised.
 -/
 
 @[expose] public section
@@ -97,7 +107,8 @@ variable (G : Type u) [Group G] [TopologicalSpace G]
 /-- The category of discrete `G`-modules: abelian groups with an action of the topological group
 `G` such that every element has an open stabilizer. It is abelian, its invariants functor is
 `DiscreteModule.invariants`, and its cohomology `DiscreteModule.H` is the right derived functor
-of the invariants, computed as `Ext` from the trivial module `ℤ`.
+of the invariants, computed as `Ext` from the trivial module `ℤ`. We use `ℤ`-coefficients
+instead of the finite coefficient ring `A` of the blueprint; see the implementation notes.
 (blueprint: `def-exc-continuous-cohomology`) -/
 abbrev DiscreteModule :=
   (Action.IsDiscreteModule.{max u w} (G := G)).FullSubcategory
@@ -239,12 +250,13 @@ def smoothFunctions : AddSubgroup (G → A) where
     rw [this]
     exact h
 
-lemma isOpen_rightStab_comp_mul {A : Type*} {f : G → A} (hf : IsOpen (rightStab G f : Set G)) (g : G) :
+lemma isOpen_rightStab_comp_mul {A : Type*} {f : G → A} (hf : IsOpen (rightStab G f : Set G))
+    (g : G) :
     IsOpen (rightStab G (fun x ↦ f (x * g)) : Set G) := by
   refine Subgroup.isOpen_of_mem_nhds _ (g := 1) ?_
   have hc : Continuous fun v : G ↦ g⁻¹ * v * g := by fun_prop
-  refine Filter.mem_of_superset ((hf.preimage hc).mem_nhds (by simp only [Set.mem_preimage]; simpa using
-    (rightStab G f).one_mem)) ?_
+  refine Filter.mem_of_superset ((hf.preimage hc).mem_nhds (by
+    simp only [Set.mem_preimage]; simp)) ?_
   intro v hv x
   simp only [Set.mem_preimage, SetLike.mem_coe, mem_rightStab] at hv
   simpa [mul_assoc] using hv (x * g)
@@ -367,7 +379,8 @@ lemma surjective_smoothFunctionsMap {A B : Type*} [AddCommGroup A] [AddCommGroup
   let U : Subgroup G := rightStab G f.1
   let rep : G → G := fun x ↦ Quotient.out (QuotientGroup.mk x : G ⧸ U)
   have hrep (x : G) : x⁻¹ * rep x ∈ U :=
-    QuotientGroup.leftRel_apply.1 (Quotient.exact (Quotient.out_eq (QuotientGroup.mk x : G ⧸ U)).symm)
+    QuotientGroup.leftRel_apply.1
+      (Quotient.exact (Quotient.out_eq (QuotientGroup.mk x : G ⧸ U)).symm)
   have hrep' (x : G) (u : G) (hu : u ∈ U) : rep (x * u) = rep x := by
     simp only [rep]
     congr 1
