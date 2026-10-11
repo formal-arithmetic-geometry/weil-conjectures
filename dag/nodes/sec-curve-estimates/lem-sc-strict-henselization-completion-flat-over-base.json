@@ -23,8 +23,28 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "By [lem-sc-strict-henselization-mod-power-free], T is the n-adic completion of the free A-module F=\\bigoplus_{x\\in X}A, the identification being the inverse limit of the A/n^r-isomorphisms F/n^rF\\cong A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r sending basis vectors to the images of X; under it the module action of \\hat A=\\varprojlim_r A/n^r on \\hat F is the action through the ring map \\hat A\\to T obtained as the limit of A/n^r\\to A^{\\mathrm{sh}}/(nA^{\\mathrm{sh}})^r. Since F is free, hence flat, and A is Noetherian, the completion-of-a-flat-module theorem [lem-weil-pbc-flat-module-completion-flat] makes T flat over \\hat A, i.e. the ring map \\hat A\\to T is flat; the ring map A\\to\\hat A is flat by [lem-weil-pbc-noetherian-completion-flat]. Their composite is the canonical map A\\to T, so it is flat by [lem-weil-pbc-flat-ring-map-comp].",
+   "uses": [
+    "lem-sc-strict-henselization-mod-power-free",
+    "lem-weil-pbc-flat-module-completion-flat",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)'; composition with Tag 00HC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-strict-henselization-mod-power-free",
+  "lem-weil-pbc-flat-module-completion-flat",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-flat-ring-map-comp"
+ ],
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,12 +69,52 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-etale-triple-to-sh-completion-flat",
   "by": "worker",
   "date": "2026-10-10"
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-thm-br"
+ "unit": "sk-thm-br",
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 06LJ (lemma-henselization-noetherian), proof part (c), paragraph beginning 'To finish the proof of (c)'"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-strict-henselization-completion-flat-over-base",
+  "worker": "stage1",
+  "summary": "Prove flatness of A -> T by identifying T with the n-adic completion of a free A-module (new node lem-sc-strict-henselization-mod-power-free, Tag 07QM(4)), applying flatness of completed flat modules over the Noetherian completion, flatness of A -> A-hat, and composition; this avoids lem-sc-strict-henselization-completion-flat, which depends on this item's citer.",
+  "blueprint": "Realizes the paragraph 'To finish the proof of (c)' of Tag 06LJ: the completed strict henselization is the completion of a free module, hence flat over the base.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-ring-map-comp",
+    "why": "The conclusion is the generic composition theorem for flat ring maps, supplied as an existing Mathlib-backed node."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-completion-flat",
+    "why": "The independent completion argument requires the generic theorem that the adic completion of a flat module over a Noetherian ring is flat over the completed ring."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-completion-flat",
+    "why": "The independent completion argument requires flatness of the Noetherian base ring's adic completion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-flat-module-completion-flat",
+  "lem-weil-pbc-noetherian-completion-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-shc0055",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-shc0055 (reviewer sub-agent of L); spot-checked: Read packet; transitive dep closure of item has no lem-sc-etale-triple-to-sh-completion-flat / lem-sc-strict-henselization-completion-flat(-noetherian) (completion-flat cites the parent, so the direct route was a cycle, correctly avoided); citer da75371d4 uses exactly A Noetherian local, completion at qA^sh = max ideal; new node mod-power-free is Tag 07QM(4)+limit, true, not a duplicate of the 8 same-tag nodes, searches recorded 2026-10-11; noetherian-completion-flat and flat-ring-map-comp are mathlib leaves with no deps. FIX more, RETURN less: (1) C/D: Step 1 (A->A^sh flat via faithfully-flat) was unused by the argument; removed with its proof_dep; (2) C4: Step 2 now states the identification T = completion of free F as Ahat-modules compatible with the ring map Ahat->T, so flat-module-completion-flat yields flatness of the ring map; (3) split_report tool_uses dropped the cyclic lem-sc-strict-henselization-completion-flat and the unused faithfully-flat, summary/blueprint rewritten; 1 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-11 L (R-shc0055): group report and 'Review by E1' are stale (describe the cyclic completion-flat route); the merged proof is the completed-free-module route"
 }

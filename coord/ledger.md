@@ -3176,3 +3176,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:54 UTC L: returned: H1 derived-tensor-transitivity 2008d4965 (R-dtt0053: statement still ill-typed, third return across E1/H1; L restates the node); K1 valuation-closed-fibre-section-vanishing e70e5c724 (R-cfs0053: false for A a field). FINDING: the merge tool prunes a group's return entry once the delivery branch is gone (my commit 2488edf99 carried the pruning of E1's lem-pc-derived-tensor-transitivity entries); from now on L quotes the last return entry in the branch-deletion notice.
 - 00:54 L: merged deliver/K1/lem-pur-kinjective-functorial-homotopies (reviewer FIX; first push; new nodes: 1)
 - 00:54 UTC L: G1 perfect-finite-free-residue-model FIX 2edf1260d (R-pfr0052), K1 kinjective-functorial-homotopies FIX 1ce5e0fd0 (R-kfh0054).
+- 00:56 L: merged deliver/E1/lem-sc-strict-henselization-completion-flat-over-base (reviewer FIX; first push; new nodes: 1)
