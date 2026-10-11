@@ -110,5 +110,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lsf (reviewer sub-agent of L); spot-checked: Source: blueprint lem-sc-riemann-roch.md, proof of (*), determinant paragraph (lines 144-148: 'locally the sequence splits'); the item statement is unchanged and agrees with it (scheme, short exact sequence of finite locally free modules, open cover on which the sequence is the split one). New node lem-sc-local-section-quotient-finite-free (statement-only, unsplit, TeX, cites def-pc-scheme and def-amb-finite-locally-free-module, both read): local right inverse of q near each point when E3 is locally free of constant finite rank; true (trivialise E3 on V ~ O^d, lift the d basis sections locally through the surjective sheaf map q, shrink to the intersection), hypothesis on E1,E2 not needed. Step 1 takes exactly that statement. Step 2 is elementary: Phi=(u,s), Psi=(u^{-1}(e-sq e), q e), well-defined since ker q = im u as subsheaves and u injective; composites identity by substitution; checked ranks (0,0),(1,0),(0,1),(1,1). Step 3 is the cover. proof_deps = union of uses; no tool_uses; item's created untouched; from.place shortened (split-owned). blueprint_refs search 'local section quotient locally free' 0 hits, same_as [] fine; no slopmaster2 declaration states the new node (grep), Mathlib searches 3 kinds recorded, no match. Start Sat Oct 10 03:15:02 PM UTC 2026, end Sat Oct 10 03:15:26 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.LocalSplittingFiniteFree",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_openCover_split_shortExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/LocalSplittingFiniteFree.lean",
+  "statement": "theorem exists_openCover_split_shortExact {X : Scheme.{u}} (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₂.IsFiniteLocallyFreeOfRank r₂] [S.X₃.IsFiniteLocallyFreeOfRank r₃] : ∃ (ι : Type u) (U : ι → X.Opens), (⨆ a, U a) = ⊤ ∧ ∀ a, ∃ e : S.X₂.restrict (U a).ι ≅ S.X₁.restrict (U a).ι ⊞ S.X₃.restrict (U a).ι, (restrictFunctor (U a).ι).map S.f ≫ e.hom = biprod.inl ∧ e.hom ≫ biprod.snd = (restrictFunctor (U a).ι).map S.g",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lsf1219",
+  "group": "K1",
+  "result": "pass",
+  "note": "X : Scheme.{u} = def-pc-scheme; S : ShortComplex X.Modules + hS : S.ShortExact = 0->E1->E2->E3->0; r1 r2 r3 : N with three SheafOfModules.IsFiniteLocallyFreeOfRank instances (E1 recorded class, #print confirms full name) = constant finite ranks; cover = (iSup U = top), iota : Type u not vacuous (points); per member e : E2|U ~= E1|U biprod E3|U with f;e = inl and e;snd = g (identity outer maps, WLOG by outer automorphisms) = iso to split sequence; restrict = restrictFunctor.obj by rfl, same form as landed DeterminantShortExact; no let, no hollow hypotheses, only lean field added to node"
  }
 }
