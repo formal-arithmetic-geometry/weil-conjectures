@@ -220,5 +220,23 @@
   "item": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
   "worker": "stage1",
   "summary": "Split following Stacks 02KY and its proof: lfp is invariant under isomorphism and Zariski local on the base (01TQ; elementary from the pointwise definition), stable under base change (01TS, via the Mathlib leaf lem-weil-pbc-qcqs-morphism-permanence (3)), and for a flat surjective morphism of affine schemes Spec R' -> Spec R the affine-open argument reduces to Algebra 00QQ (new Mathlib leaf lem-weil-pbc-finite-presentation-descends-faithfully-flat, Algebra.FinitePresentation.of_finitePresentation_tensorProduct_of_faithfullyFlat); then the general criterion 02KP applies, cited as the sibling's node lem-weil-pbc-fpqc-local-on-base-criterion (created by the item lem-weil-pbc-fpqc-descend-flat; steps 3-4 follow that sibling's affine argument with the same nodes). Source slip: 02KY's proof says 'Being locally of finite type is Zariski local on the base' where it means locally of finite presentation (it cites 01TQ, the lfp lemma). The Mathlib candidate (DescendsAlong along one surjective flat quasi-compact morphism, LocalFlatDescent.lean:38-39) is kept as candidate, not a leaf (B8): the reduction from a covering family is the criterion. Checked the citer lem-weil-pbc-finite-locally-free-degree-etale-descent step 4: it uses exactly this statement."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent",
+  "declaration": "AlgebraicGeometry.locallyOfFinitePresentation_of_fpqc_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyOfFinitePresentationFpqcDescent.lean",
+  "statement": "theorem locallyOfFinitePresentation_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Type v} (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S) (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S) (h : ∀ i, LocallyOfFinitePresentation (pullback.snd f (g i))) : LocallyOfFinitePresentation f",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdp1038",
+  "group": "J1",
+  "result": "pass",
+  "note": "X S f; arbitrary I:Type v, S' g; hg ofArrows ∈ Scheme.fpqcPrecoverage S (recorded def); f_i = pullback.snd f (g i); h ∀ i LocallyOfFinitePresentation; concl LocallyOfFinitePresentation f; identical to H1 f7dc0d331 form with P:=LFP; covering family, not Mathlib single-morphism DescendsAlong"
  }
 }
