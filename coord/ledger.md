@@ -5638,3 +5638,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:27 L: merged deliver/C1/def-weil-pbc-finite-split-hypercover (stage 2; reviewer PASS; first push; Sheaf.Paper.FiniteSplitEtaleHypercover AlgebraicGeometry.FiniteSplitEtaleHypercover)
 - 19:28 L: returned deliver/C1/lem-pc-affine-morphism-hom-out-of-perfect (reviewer RETURN: (reviewer R-h61a43, head 61a43ae6c) H3+H12: the conclusion IsIso (affineGlobalHomBaseChangeMap f g M K hM hK) is not abo)
 - 19:28 L: returned deliver/C1/lem-pc-global-hom-pullback-adjunction (reviewer RETURN: (reviewer R-haf920, head af9209ce0) H12: the new node def-pc-scheme-derived-tensor-localization-comparison and its modul)
+- 19:28 L: returned deliver/C1/lem-sc-cech-comparison-map-naturality (reviewer RETURN: (reviewer R-he7243, head e7243ac97) H10: the reviewer passed the statement, but the landing failed: NOT MERGED lem-sc-ce)
