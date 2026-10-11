@@ -22,6 +22,9 @@ of the underived pullbacks, read through the counits of the derived pullbacks.
 
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarComp_id_left_hom_app`
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarComp_id_right_hom_app`
+- `AlgebraicGeometry.Etale.leftDerivedUpperStar_map_comp_compSectionIso`: restricting along a
+  section commutes with base change.
+- `AlgebraicGeometry.Etale.sectionRestrictionIso`: reading a local trivialization at a section.
 -/
 
 @[expose] public section
@@ -284,6 +287,18 @@ lemma sectionRestrictionIso_restrict (hv : v ≫ a = a' ≫ u) (h : i ≫ a = �
   rw [H', reassoc_of% n₁, Iso.hom_inv_id_app_assoc, reassoc_of% n₂, Iso.inv_hom_id_app_assoc]
   simp
 
+
+/-- Reading at a section determines the restriction along the section: two trivializations with
+the same reading at `i'` against the same `θ` agree after `Li'^*`. -/
+lemma leftDerivedUpperStar_map_eq_of_sectionRestrictionIso_eq (θ : L((i)^*[A]).obj F ≅ C)
+    (e e' : L((v)^*[A]).obj F ≅ L((a')^*[A]).obj C₀)
+    (H : sectionRestrictionIso A u v hi h' θ e = sectionRestrictionIso A u v hi h' θ e') :
+    L((i')^*[A]).map e.hom = L((i')^*[A]).map e'.hom := by
+  have := congrArg Iso.hom H
+  simp only [sectionRestrictionIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+    Iso.app_hom] at this
+  rw [cancel_epi, cancel_mono] at this
+  exact this
 end SectionRestriction
 end Etale
 
