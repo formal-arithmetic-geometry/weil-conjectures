@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.Stalk
+public import WeilConjectures.WeilSheaf.StalkFunctor
+public import WeilConjectures.WeilSheaf.StalkUpperStar
 
 /-!
 # Trace functions of Weil complexes under the operations
@@ -32,9 +34,23 @@ These are the properties of the trace function (blueprint `def-fd-trace-function
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory
+
+open scoped AlgebraicGeometry.ProEtale
+
+namespace FrobeniusModule
+
+variable {K : Type v} [Field K]
+
+/-- Isomorphic Frobenius modules have the same trace of the Frobenius. -/
+theorem Equiv.trace_frobeniusEnd {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) :
+    LinearMap.trace K _ N.frobeniusEnd = LinearMap.trace K _ M.frobeniusEnd := by
+  rw [LinearMap.trace_eq_neg_charpoly_nextCoeff, LinearMap.trace_eq_neg_charpoly_nextCoeff,
+    e.charpoly_frobeniusEnd]
+
+end FrobeniusModule
 
 namespace AlgebraicGeometry
 
@@ -58,22 +74,203 @@ lemma Scheme.Hom.mapFieldPoints_coe (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat
     (φ.mapFieldPoints K x).1 = x.1 ≫ φ :=
   rfl
 
+omit [Finite k₀] [Y.Over (Spec (CommRingCat.of k₀))] in
+/-- The image point of a rational point with values in a finite field has finite residue
+field: the residue field embeds into the coefficient field. -/
+theorem Scheme.Hom.mem_finitePoints_of_fieldPoints {K : Type u} [Field K] [Algebra k₀ K]
+    [Finite K] (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints K) :
+    x.1.base (IsLocalRing.closedPoint K) ∈ X.finitePoints := by
+  obtain ⟨ι, -⟩ := Scheme.exists_eq_spec_map_comp_fromSpecResidueField x.1 _ rfl
+  exact X.mem_finitePoints.2 (Finite.of_injective _ ι.hom.injective)
+
+omit [Finite k₀] in
+/-- The geometric point over the image `φ(x)` of a rational point is the image under the base
+change `φ̄` of the geometric point over `x`. -/
+theorem Scheme.Hom.geometricFiberPoint_comp_geometricFiberMap (φ : X ⟶ Y)
+    [φ.IsOver (Spec (CommRingCat.of k₀))] {K : Type u} [Field K] [Algebra k₀ K]
+    (ι : K →ₐ[k₀] AlgebraicClosure k₀) (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints K) :
+    (X ↘ Spec (CommRingCat.of k₀)).geometricFiberPoint ι x.1 x.2 ≫
+        Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))) =
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberPoint ι (φ.mapFieldPoints K x).1
+        (φ.mapFieldPoints K x).2 := by
+  ext1 <;> simp
+
+namespace WeilSheaf
+
+omit [Y.Over (Spec (CommRingCat.of k₀))] in
+/-- The trace of the Frobenius of the stalk at a geometric point only depends on the point. -/
+theorem trace_frobeniusEnd_stalkAt_congr (F : WeilSheaf k₀ l X)
+    {s s' : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
+    (h : s = s') (m : ℕ)
+    (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s)
+    (hs' : s' ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s') :
+    LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s m hs).frobeniusEnd =
+      LinearMap.trace (PadicAlgCl l) _ (F.stalkAt s' m hs').frobeniusEnd := by
+  subst h
+  rfl
+
+omit [Y.Over (Spec (CommRingCat.of k₀))] in
+theorem stalkAtMap_inv_hom {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (y : (G.stalkAt s m hs).carrier) :
+    stalkAtMap s m hs e.hom (stalkAtMap s m hs e.inv y) = y := by
+  rw [← stalkAtMap_comp, e.inv_hom_id, stalkAtMap_id]
+
+omit [Y.Over (Spec (CommRingCat.of k₀))] in
+theorem stalkAtMap_hom_inv {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (y : (F.stalkAt s m hs).carrier) :
+    stalkAtMap s m hs e.inv (stalkAtMap s m hs e.hom y) = y := by
+  rw [← stalkAtMap_comp, e.hom_inv_id, stalkAtMap_id]
+
+/-- The linear isomorphism of stalks induced by an isomorphism of Weil sheaves. -/
+noncomputable def stalkAtLinearEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (F.stalkAt s m hs).carrier ≃ₗ[PadicAlgCl l] (G.stalkAt s m hs).carrier :=
+  LinearEquiv.ofLinearMap (stalkAtMap s m hs e.hom) (stalkAtMap s m hs e.inv)
+    (LinearMap.ext (stalkAtMap_inv_hom e s m hs)) (LinearMap.ext (stalkAtMap_hom_inv e s m hs))
+
+omit [Y.Over (Spec (CommRingCat.of k₀))] in
+theorem stalkAtLinearEquivOfIso_apply {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (y : (F.stalkAt s m hs).carrier) :
+    stalkAtLinearEquivOfIso e s m hs y = stalkAtMap s m hs e.hom y :=
+  rfl
+
+omit [Y.Over (Spec (CommRingCat.of k₀))] in
+/-- The linear isomorphism of stalks induced by an isomorphism of Weil sheaves commutes with the
+Frobenius. -/
+theorem stalkAtLinearEquivOfIso_frobenius {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (x : (F.stalkAt s m hs).carrier) :
+    stalkAtLinearEquivOfIso e s m hs ((F.stalkAt s m hs).frobenius x) =
+      (G.stalkAt s m hs).frobenius (stalkAtLinearEquivOfIso e s m hs x) :=
+  (stalkAtLinearEquivOfIso_apply e s m hs _).trans ((stalkAtMap_frobenius s m hs e.hom x).trans
+    (congrArg (G.stalkAt s m hs).frobenius (stalkAtLinearEquivOfIso_apply e s m hs x).symm))
+
+/-- The isomorphism of stalks with their Frobenius induced by an isomorphism of Weil sheaves.
+-/
+noncomputable def stalkAtEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
+    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
+    (F.stalkAt s m hs).Equiv (G.stalkAt s m hs) :=
+  ⟨stalkAtLinearEquivOfIso e s m hs, stalkAtLinearEquivOfIso_frobenius e s m hs⟩
+
+omit [Y.Over (Spec (CommRingCat.of k₀))] in
+/-- Isomorphic Weil sheaves have the same trace function: an isomorphism induces isomorphisms
+of the stalks compatible with the Frobenius. -/
+theorem traceFunction_congr {F G : WeilSheaf k₀ l X} (e : F ≅ G) (n : ℕ)
+    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    F.traceFunction n x = G.traceFunction n x :=
+  (stalkAtEquivOfIso e _ n _).trace_frobeniusEnd.symm
+
+omit [Y.Over (Spec (CommRingCat.of k₀))] in
+/-- The trace function at a rational point only depends on the image point: at points with the
+same image the stalks are taken at geometric points over the same point of `X`
+(`AlgebraicGeometry.WeilSheaf.traceFunction_eq_trace_frobeniusEnd_stalk_pow`). -/
+theorem traceFunction_eq_of_base_eq (F : WeilSheaf k₀ l X) (n : ℕ)
+    {x y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)}
+    (h : x.1.base (IsLocalRing.closedPoint _) = y.1.base (IsLocalRing.closedPoint _)) :
+    F.traceFunction n x = F.traceFunction n y := by
+  have : Finite (FiniteField.galoisExtension k₀ n) := Module.finite_of_finite k₀
+  have hx := Scheme.Hom.mem_finitePoints_of_fieldPoints x
+  rw [F.traceFunction_eq_trace_frobeniusEnd_stalk_pow n x ⟨_, hx⟩ rfl,
+    F.traceFunction_eq_trace_frobeniusEnd_stalk_pow n y ⟨_, hx⟩ h.symm]
+
+/-- The stalk of `φ^* F` at a geometric point `t` is the stalk of `F` at `t ≫ φ̄`, compatibly
+with the Frobenius (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalkAt_of_upperStar`), so the
+traces of the Frobenius agree. -/
+theorem trace_frobeniusEnd_stalkAt_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+    (F : WeilSheaf k₀ l Y)
+    (t : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (m : ℕ) (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫ t)
+    (ht' : (t ≫ Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀)))) ≫
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
+      (specGeometricFrobenius k₀ ^ m).hom ≫
+        (t ≫ Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))) :
+    LinearMap.trace (PadicAlgCl l) _ (((upperStar φ).obj F).stalkAt t m ht).frobeniusEnd =
+      LinearMap.trace (PadicAlgCl l) _ (F.stalkAt _ m ht').frobeniusEnd := by
+  have : IsIso (𝟙 _ : (Scheme.Hom.geometricFiberMap φ
+      (comp_over φ (Spec (CommRingCat.of k₀))))^*[WeilCoefficients.{u} l].obj
+      F.obj.carrier.X ⟶ ((WeilSheaf.upperStar φ).obj F).obj.carrier.X) :=
+    inferInstanceAs (IsIso (𝟙 ((Scheme.Hom.geometricFiberMap φ
+      (comp_over φ (Spec (CommRingCat.of k₀))))^*[WeilCoefficients.{u} l].obj
+      F.obj.carrier.X)))
+  obtain ⟨e⟩ := nonempty_equiv_stalkAt_of_upperStar (G := (WeilSheaf.upperStar φ).obj F)
+    (θ := 𝟙 _) (upperStar_frobeniusStr_compatible (φ := φ) F) t m ht ht'
+  exact e.trace_frobeniusEnd
+
+/-- The trace function of a pullback is the composite with the morphism on rational points:
+the stalk of `φ^* F` at the geometric point over `x` is the stalk of `F` at the geometric point
+over `φ(x)` (`AlgebraicGeometry.WeilSheaf.trace_frobeniusEnd_stalkAt_upperStar`). -/
+theorem traceFunction_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+    (F : WeilSheaf k₀ l Y) (n : ℕ)
+    (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
+    ((upperStar φ).obj F).traceFunction n x = F.traceFunction n (φ.mapFieldPoints _ x) := by
+  have : Finite (FiniteField.galoisExtension k₀ n) := Module.finite_of_finite k₀
+  have ht := Scheme.Hom.geometricFiberPoint_fieldPoints_comp_geometricGaloisFrobenius_pow
+    (X ↘ Spec (CommRingCat.of k₀)) n IsAlgClosed.lift x
+  have ht' := Scheme.Hom.geometricFiberPoint_fieldPoints_comp_geometricGaloisFrobenius_pow
+    (Y ↘ Spec (CommRingCat.of k₀)) n IsAlgClosed.lift (φ.mapFieldPoints _ x)
+  have hc := Scheme.Hom.geometricFiberPoint_comp_geometricFiberMap φ IsAlgClosed.lift x
+  exact (trace_frobeniusEnd_stalkAt_upperStar φ F _ n ht (hc ▸ ht')).trans
+    (F.trace_frobeniusEnd_stalkAt_congr hc n _ ht')
+
+end WeilSheaf
+
 namespace WeilComplex
+
+/-- The cohomology sheaves of a shift are shifted: `𝓗ʲ(K[a]) ≅ 𝓗^{a + j}(K)`. -/
+noncomputable def homologySheafShiftIso (K : WeilComplex k₀ l X) (a j : ℤ) :
+    (homologySheaf j).obj ((shiftFunctor (WeilComplex k₀ l X) a).obj K) ≅
+      (homologySheaf (a + j)).obj K :=
+  ObjectProperty.isoMk _
+    (((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso a j (a + j) rfl).app K.obj)
+
+/-- Pullback commutes with the cohomology sheaves: `𝓗ʲ(φ^* K) ≅ φ^* 𝓗ʲ(K)`, the pullback of
+pro-étale Weil sheaves being exact. -/
+noncomputable def homologySheafUpperStarIso (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+    (j : ℤ) (K : WeilComplex k₀ l Y) :
+    (homologySheaf j).obj ((upperStar φ).obj K) ≅
+      (WeilSheaf.upperStar φ).obj ((homologySheaf j).obj K) :=
+  ObjectProperty.isoMk _ ((Functor.mapDerivedCategoryHomologyFunctorIso _ j).app K.obj).symm
 
 /-- A shift `[a]` multiplies the trace function by `(-1)ᵃ`. -/
 theorem traceFunction_shift (K : WeilComplex k₀ l X) (a : ℤ) (n : ℕ)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     ((shiftFunctor (WeilComplex k₀ l X) a).obj K).traceFunction n x =
-      (a.negOnePow : ℤ) • K.traceFunction n x :=
-  sorry
+      (a.negOnePow : ℤ) • K.traceFunction n x := by
+  obtain ⟨S, hS⟩ := K.exists_finset_isZero_homologySheaf
+  have hS' (j : ℤ) (hj : j ∉ S.map (Equiv.subRight a).toEmbedding) :
+      IsZero ((homologySheaf j).obj ((shiftFunctor (WeilComplex k₀ l X) a).obj K)) :=
+    (hS (a + j) fun h ↦ hj (Finset.mem_map.2 ⟨a + j, h, by simp⟩)).of_iso
+      (homologySheafShiftIso K a j)
+  rw [traceFunction_eq_sum _ _ hS', traceFunction_eq_sum _ _ hS, Finset.sum_map,
+    Finset.smul_sum]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [Equiv.coe_toEmbedding, Equiv.subRight_apply,
+    WeilSheaf.traceFunction_congr (homologySheafShiftIso K a (i - a)), add_sub_cancel,
+    Int.negOnePow_sub, Units.val_mul, mul_comm, mul_smul]
 
 /-- The trace function of a pullback is the composite with the morphism on rational points:
 `t_{φ^* K}(x) = t_K(φ(x))`. -/
 theorem traceFunction_upperStar (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
     (K : WeilComplex k₀ l Y) (n : ℕ)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
-    ((upperStar φ).obj K).traceFunction n x = K.traceFunction n (φ.mapFieldPoints _ x) :=
-  sorry
+    ((upperStar φ).obj K).traceFunction n x = K.traceFunction n (φ.mapFieldPoints _ x) := by
+  refine finsum_congr fun j ↦ congrArg _ ?_
+  rw [← WeilSheaf.traceFunction_upperStar]
+  exact WeilSheaf.traceFunction_congr (homologySheafUpperStarIso φ j K) n x
 
 /-- The trace function is invariant under `k₀`-automorphisms of the coefficient field of the
 rational points: `t_K(σ(x)) = t_K(x)`, the local Frobenius operators at the geometric points
@@ -83,7 +280,8 @@ theorem traceFunction_fieldPointsCongr (K : WeilComplex k₀ l X) (n : ℕ)
     (x : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     K.traceFunction n ((X ↘ Spec (CommRingCat.of k₀)).fieldPointsCongr σ x) =
       K.traceFunction n x :=
-  sorry
+  finsum_congr fun j ↦ congrArg _ (WeilSheaf.traceFunction_eq_of_base_eq _ n
+    ((Scheme.Hom.comp_apply _ _ _).trans (congrArg x.1.base (Subsingleton.elim _ _))))
 
 end WeilComplex
 
