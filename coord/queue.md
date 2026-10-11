@@ -41,10 +41,9 @@
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-qcoh` | 1 | state |
 | `lem-sc-top-dimensional-reduction-intersection` | 1 | state |
+| `lem-sc-valuation-limit-affine-pushforward-colimit` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-affine-module-finite-type` | 1 | state |
-| `lem-weil-pbc-affine-morphism-relative-spec` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
@@ -183,6 +182,7 @@
 | `lem-weil-pbc-relative-global-complete-intersection-partial-local-flat` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-principal-localization` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian` | 1 | state |
+| `lem-weil-pbc-relative-spec-base-change` | 1 | state |
 | `lem-weil-pbc-residue-field-pd-ge-embedding-dimension` | 1 | state |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1 | state |
 | `lem-weil-pbc-right-derived-universal-delta-functor` | 1 | state |
@@ -462,7 +462,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 577 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 575 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
