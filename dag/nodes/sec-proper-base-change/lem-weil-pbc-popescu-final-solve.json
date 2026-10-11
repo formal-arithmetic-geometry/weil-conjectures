@@ -163,5 +163,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Six steps along Stacks 07EU with the omitted smoothness check written out: f_i in H_{A/R} and lambda_i with sum f_i lambda_i = 1, B = A[x]/(sum f_i x_i - 1) and the factorization, A_{f_i} smooth over R (new unsplit node: with H_{A/R} = sqrt((G)) of the definition node this is a lemma, proved by covering D(f) and 00TC), B_{f_i} a polynomial ring over A_{f_i} (new unsplit node for the linear-equation localization; new Mathlib leaf of two instances for polynomial rings smooth, Smooth/Basic.lean:112 and FinitePresentation.lean:190, verified), composition, locality of smoothness 00TC (new Mathlib leaf RingHom.Smooth.ofLocalizationSpanTarget, RingHom/Smooth.lean:131 via smooth_algebraMap :82, verified); r = 0 handled. Brief errors: 00TA/00T9/00TB are not the locality lemma (00TC) or composition (00TD). Note: the finite presentation hypothesis on A is unused."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuFinalSolve",
+  "declaration": "Algebra.exists_smooth_factorization_of_singularIdeal_map_eq_top",
+  "file": "lean/Sheaf/RingTheory/PopescuFinalSolve.lean",
+  "statement": "theorem exists_smooth_factorization_of_singularIdeal_map_eq_top {R : Type u} {A : Type v} {Λ : Type w} [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ] [FinitePresentation R A] (α : A →ₐ[R] Λ) (h : Ideal.map α.toRingHom (singularIdeal R A) = ⊤) : ∃ (B : Type v) (_ : CommRing B) (_ : Algebra R B), Smooth R B ∧ ∃ (β : A →ₐ[R] B) (γ : B →ₐ[R] Λ), γ.comp β = α",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pfz1253",
+  "group": "C1",
+  "result": "pass",
+  "note": "R,A,Λ CommRing u/v/w; R→A→Λ as Algebra R A, Algebra R Λ, α : A →ₐ[R] Λ; FinitePresentation R A; H_{A/R}Λ=Λ as Ideal.map α.toRingHom (singularIdeal R A) = ⊤ (not automatic); ∃ B : Type v (MvPolynomial (Fin r) A quotient lives there) CommRing, Algebra R B, Algebra.Smooth R B, tied β γ with γ.comp β = α; #check resolves Algebra.Smooth/FinitePresentation/singularIdeal; Ideal.map …toRingHom and ∃ B CommRing Algebra form as PopescuDelocalizeWeak"
  }
 }
