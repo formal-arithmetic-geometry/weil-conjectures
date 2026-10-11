@@ -9,6 +9,7 @@ public import Mathlib.GroupTheory.Perm.Fin
 public import Mathlib.Tactic.LinearCombination
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.RepresentationTheory.Homological.GroupCohomology.Basic
+public import Mathlib.CategoryTheory.Abelian.Projective.Ext
 
 /-!
 # Nonvanishing of group cohomology of free abelian groups
@@ -240,6 +241,60 @@ theorem not_isZero_groupCohomology_finsupp [Nontrivial k] (ι : Type u) [Infinit
       (groupCohomology (Rep.trivial k (Multiplicative (ι →₀ ℤ)) k) (n + 1)) := by
   let f : ℕ ↪ ι := Infinite.natEmbedding ι
   refine not_isZero_of_dualFamily (fun j ↦ Multiplicative.ofAdd (Finsupp.single (f j) 1))
+    (fun i ↦ (Int.castAddHom k).comp ((Finsupp.applyAddHom (f i)).comp
+      (AddEquiv.additiveMultiplicative _).toAddMonoidHom)) fun i j ↦ ?_
+  simp only [AddMonoidHom.coe_comp, Function.comp_apply, Finsupp.applyAddHom_apply,
+    Int.coe_castAddHom]
+  change ((Finsupp.single (f j) (1 : ℤ) (f i) : ℤ) : k) = _
+  by_cases hij : i = j
+  · subst hij; simp
+  · classical
+    rw [Finsupp.single_apply, if_neg (fun h ↦ hij (Fin.ext (f.injective h).symm)), if_neg hij]
+    simp
+
+/-- The differential of inhomogeneous cochains is precomposition with the differential of the bar
+resolution, under `Rep.freeLiftLEquiv`. -/
+lemma freeLiftLEquiv_d_comp {n : ℕ} (A : Rep.{u} k G)
+    (g : (Rep.barComplex k G).X n ⟶ A) :
+    Rep.freeLiftLEquiv k G (Fin (n + 1) → G) A ((Rep.barComplex k G).d (n + 1) n ≫ g) =
+      (inhomogeneousCochains.d A n).hom (Rep.freeLiftLEquiv k G (Fin n → G) A g) := by
+  rw [inhomogeneousCochains.d_eq]
+  simp
+  rfl
+
+/-- The `Ext`-form of `groupCohomology.not_isZero_of_dualFamily`: for a dual family as there,
+`Extⁿ(k, k) ≠ 0` in `Rep k G`. The class of the cup product, computed on the bar resolution
+(`CategoryTheory.ProjectiveResolution.extMk`), is nonzero: by
+`CategoryTheory.ProjectiveResolution.extMk_eq_zero_iff` it would otherwise be a coboundary. -/
+theorem exists_ext_ne_zero_of_dualFamily.{w} [Nontrivial k] [HasExt.{w} (Rep.{u} k G)] {n : ℕ}
+    (e : Fin (n + 1) → G) (a : Fin (n + 1) → Additive G →+ k)
+    (h : ∀ i j, a i (Additive.ofMul (e j)) = if i = j then 1 else 0) :
+    ∃ x : Abelian.Ext (Rep.trivial k G k) (Rep.trivial k G k) (n + 1), x ≠ 0 := by
+  let R := Rep.barResolution k G
+  let E := Rep.freeLiftLEquiv k G (Fin (n + 1) → G) (Rep.trivial k G k)
+  let f : (Rep.barComplex k G).X (n + 1) ⟶ Rep.trivial k G k := E.symm (cupHom a)
+  have hf : R.complex.d (n + 2) (n + 1) ≫ f = 0 := by
+    apply (Rep.freeLiftLEquiv k G (Fin (n + 1 + 1) → G) (Rep.trivial k G k)).injective
+    change Rep.freeLiftLEquiv k G (Fin (n + 1 + 1) → G) (Rep.trivial k G k)
+      ((Rep.barComplex k G).d (n + 1 + 1) (n + 1) ≫ f) = _
+    rw [freeLiftLEquiv_d_comp (n := n + 1), LinearEquiv.apply_symm_apply, d_cupHom, map_zero]
+  refine ⟨R.extMk f (n + 2) rfl hf, fun h0 ↦ ?_⟩
+  obtain ⟨g, hg⟩ := (R.extMk_eq_zero_iff f (n + 2) rfl hf n rfl).1 h0
+  have := altPairing_d e (Rep.freeLiftLEquiv k G (Fin n → G) (Rep.trivial k G k) g)
+  rw [← freeLiftLEquiv_d_comp] at this
+  change altPairing e (E ((Rep.barComplex k G).d (n + 1) n ≫ g)) = 0 at this
+  change (Rep.barComplex k G).d (n + 1) n ≫ g = f at hg
+  rw [hg, LinearEquiv.apply_symm_apply, altPairing_cupHom e a h] at this
+  exact one_ne_zero this
+
+/-- The `Ext`-form of `groupCohomology.not_isZero_groupCohomology_finsupp`:
+`Extⁿ(k, k) ≠ 0` in `Rep k (⊕_ι ℤ)` for `n ≥ 1` and an infinite index type `ι`. -/
+theorem exists_ext_ne_zero_finsupp.{w} [Nontrivial k] (ι : Type u) [Infinite ι]
+    [HasExt.{w} (Rep.{u} k (Multiplicative (ι →₀ ℤ)))] (n : ℕ) :
+    ∃ x : Abelian.Ext (Rep.trivial k (Multiplicative (ι →₀ ℤ)) k)
+      (Rep.trivial k (Multiplicative (ι →₀ ℤ)) k) (n + 1), x ≠ 0 := by
+  let f : ℕ ↪ ι := Infinite.natEmbedding ι
+  refine exists_ext_ne_zero_of_dualFamily (fun j ↦ Multiplicative.ofAdd (Finsupp.single (f j) 1))
     (fun i ↦ (Int.castAddHom k).comp ((Finsupp.applyAddHom (f i)).comp
       (AddEquiv.additiveMultiplicative _).toAddMonoidHom)) fun i j ↦ ?_
   simp only [AddMonoidHom.coe_comp, Function.comp_apply, Finsupp.applyAddHom_apply,
