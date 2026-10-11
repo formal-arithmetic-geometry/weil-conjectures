@@ -119,5 +119,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-scf1706 (reviewer sub-agent of L); spot-checked: Source Stacks 00NX (lemma-finite-projective) (7)=>(4),(5): item statement (N with N_{f_i} finite free over R_{f_i}, f_1..f_r generating the unit ideal => N finitely presented and flat) is unchanged and true; the item is not itself a Mathlib leaf since its hypothesis is finite freeness of the localizations, not finite presentation/flatness, so the three-step split stands. Step 1: finite free => FP and flat for each N_{f_i} via the bridge node; finite list spans the unit ideal = Ideal.span s = top (elementary). Step 2 carries FP by lem-sc-affine-standard-cover-finite-presentation-localization-span = Module.FinitePresentation.of_localizationSpan, verified by sed at Mathlib/RingTheory/LocalProperties/FinitePresentation.lean:48-51 (hs : Ideal.span s = top, FinitePresentation (Localization.Away g) (LocalizedModule.Away g M) for all g in s => FinitePresentation R M), exact. Step 3 carries flatness by lem-sc-affine-standard-cover-flat-localization-span = Module.flat_of_localized_span, verified at Mathlib/RingTheory/Flat/Localization.lean:100-103 (variables line 80: s : Set S, spn : Ideal.span s = top; specialize S = R), exact. Cited defs def-sc-finitely-presented-module, def-weil-pbc-flat-ring-map, def-weil-pbc-module-localization-away read and say what is used. Small cases: r=1, f_1=1 (N finite free); R=k x k with idempotents. FIX more, RETURN less: dag/nodes/sec-curve-estimates/lem-sc-affine-standard-cover-finite-free-local-fp-flat.json: status unsplit -> mathlib, mathlib_match = one declaration per clause: Module.finitePresentation_of_projective (Mathlib/Algebra/Module/FinitePresentation.lean:161) with instance Module.Projective.of_free (Mathlib/Algebra/Module/Projective.lean:161), and Module.Flat.of_free (Mathlib/RingTheory/Flat/Basic.lean:231), lines verified by sed; my Loogle query 'Module.Free, Module.Finite, Module.FinitePresentation' recorded in mathlib_searches; statement and stmt_deps: 'finite free' now cites def-weil-pbc-free-module (B3), same mathematics. Start 2026-10-10 17:06:14 UTC (date -u: Sat Oct 10 05:06:14 PM UTC 2026), end Sat Oct 10 05:07:05 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FinitePresentationAndFlatOfFiniteFreeStandardCover",
+  "declaration": "Module.finitePresentation_and_flat_of_finite_free_standard_cover",
+  "file": "lean/Sheaf/RingTheory/FinitePresentationAndFlatOfFiniteFreeStandardCover.lean",
+  "statement": "theorem finitePresentation_and_flat_of_finite_free_standard_cover {R : Type u} [CommRing R] {N : Type v} [AddCommGroup N] [Module R N] {r : ℕ} (f : Fin r → R) (hspan : Ideal.span (Set.range f) = ⊤) (hfree : ∀ i : Fin r, Module.Finite (Localization.Away (f i)) (LocalizedModule.Away (f i) N) ∧ Module.Free (Localization.Away (f i)) (LocalizedModule.Away (f i) N)) : Module.FinitePresentation R N ∧ Module.Flat R N",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-scf0945",
+  "group": "G1",
+  "result": "pass",
+  "note": "Node is one-way (finite free N_{f_i} on cover => FP and flat), not iff: R CommRing u, N module v independent universes, f : Fin r -> R with Ideal.span (Set.range f) = top (as C1 a72ea61f9), hfree Module.Finite & Module.Free over Localization.Away (f i) of LocalizedModule.Away (f i) N, conclusion Module.FinitePresentation R N and Module.Flat R N; r=0 forces zero ring; docstring carries the 3 proof steps; H4: no exact Mathlib match (of_localizationSpan / flat_of_localized_span are the step leaves, PicardGroup.exists_finset_free_localization and Free.away_of_finite_of_flat_of_rankAtStalk_constant are converse directions), existing false right"
  }
 }
