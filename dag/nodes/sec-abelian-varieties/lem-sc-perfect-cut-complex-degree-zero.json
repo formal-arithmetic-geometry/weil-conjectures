@@ -21,7 +21,9 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-pc-derived-category",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "def-sc-degree-zero-fibre-surjective",
+  "def-pc-derived-tensor-cohomology-vanishes"
  ],
  "proof": [
   {
@@ -118,5 +120,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcc0039 (reviewer sub-agent of L); spot-checked: Read Tag 0A1U and 0BCD in full. Step 1: 0BCD node gives finite free model on affine U; Tor-amplitude [0,inf) kills negative fibre ranks (C4 ok). Step 2: new affine node is exactly 0A1U at i=0 for bounded-above finite free complexes (true, self-contained, not a duplicate: only same-tag node is the item; no Mathlib truncation/Tor-amplitude theory, class b/c/d none); passage D(R_f) to D(O_U) and stalk fibre map to module fibre map is bookkeeping. Step 3: no negative cohomology so tau_{<=0}=H^0[0] (E ok). Citer 39b45cf6e step 2 uses only the stated clauses (U, K|_U = H^0(K)|_U + P, P perfect Tor-amp [1,inf)) and supplies the Tor-amplitude hypothesis from its step 1. No fault beyond the second reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectCutComplexDegreeZero",
+  "declaration": "AlgebraicGeometry.exists_perfect_split_degree_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectCutComplexDegreeZero.lean",
+  "statement": "theorem exists_perfect_split_degree_zero (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ (U : X.Opens) (V : U.toScheme.Opens), HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings U.toScheme.toRingedSpace).over V))] (K : schemeDerivedCategory X) (hKq : schemeDerivedQCohProperty X K) (hKp : Scheme.IsPerfect X K) (hKa : ∀ F : SheafOfModules.{u} (moduleRings X.toRingedSpace), ∀ i : ℤ, i < 0 → schemeDerivedTensorCohomologyVanishes X K F i) (s : X) (hs : degreeZeroFibreSurjective X K s) : ∃ U : X.Opens, s ∈ U ∧ ∃ P : schemeDerivedCategory U.toScheme, Scheme.IsPerfect U.toScheme P ∧ (∀ F : SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace), ∀ i : ℤ, i < 1 → schemeDerivedTensorCohomologyVanishes U.toScheme P F i) ∧ Nonempty (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).mapDerivedCategory.obj K ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) 0).obj (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U) ⋙ Equivalence.functor (C := SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) (D := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (Scheme.Modules.overEquiv U)).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj K)) ⊞ P)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcz1520",
+  "group": "M1",
+  "result": "fix",
+  "note": "Read 0A1U, node, J1 sibling: X scheme; K in D_QCoh; Scheme.IsPerfect; Tor-amp [0,inf) = tensor vanishing for all F, i<0; s with fibre surjectivity; U nbhd, P perfect Tor-amp [1,inf), K|_U = H^0(K)|_U[0] + P via overFunctor+overEquiv (as landed AffinePerfectPlusShift). FIX: degreeZeroFibreSurjective rebuilt on ModuleCat.cohomologyBaseChange (J1 de3865f66), IsLocalRing.ResidueField of the stalk, no lets."
  }
 }

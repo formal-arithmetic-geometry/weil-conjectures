@@ -1,0 +1,103 @@
+{
+ "id": "def-sc-degree-zero-fibre-surjective",
+ "kind": "definition",
+ "title": "Surjective degree-zero derived residue-fibre map",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $K\\in D(\\mathcal O_X)$ [def-pc-derived-category], and $s\\in X$ with residue field $\\kappa(s)$ [def-weil-residue-field]. The degree-zero fibre map is surjective if the canonical map $H^0(K)_s\\otimes_{\\mathcal O_{X,s}}\\kappa(s)\\to H^0(K\\otimes^{\\mathbf L}\\kappa(s))$ is surjective. Precisely: there is a K-flat complex $P$ [def-pc-kflat-complex] of $\\mathcal O_X$-modules whose image in $D(\\mathcal O_X)$ is isomorphic to $K$ such that, for its stalk complex $C=P_s$ of $\\mathcal O_{X,s}$-modules [def-pc-module-stalk-functor], the cohomology base-change map $c^0_C:\\kappa(s)\\otimes_{\\mathcal O_{X,s}}H^0(C)\\to H^0(\\kappa(s)\\otimes_{\\mathcal O_{X,s}}C)$ (the map $c^i_K$ of def-pc-module-cohomology-base-change, for $\\mathcal O_{X,s}\\to\\kappa(s)$) is surjective. Exactness of stalks identifies $H^0(C)$ with $H^0(K)_s$, and since $C$ is K-flat, $\\kappa(s)\\otimes C$ computes $K\\otimes^{\\mathbf L}\\kappa(s)$ at $s$; the condition does not depend on the choice of $P$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-weil-residue-field",
+  "def-pc-kflat-complex",
+  "def-pc-module-stalk-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A1U, Lemma better-cut-complex-in-two, hypothesis at i=0; sheaf form via stalks, Tag 06YB"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "surjective cohomology base change map residue field perfect complex",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "surjectivity cohomology residue field base change map cycles",
+   "results": "8 hits: CochainComplex.HomComplex.CohomologyClass.mk_surjective, KaehlerDifferential.mapBaseChange_surjective, KaehlerDifferential.map_surjective_of_surjective, Algebra.SubmersivePresentation.cotangentComplexAux_surjective, Algebra.Extension.toKaehler_surjective, AlgebraicGeometry.Scheme.residue_surjective, Algebra.Generators.CotangentSpace.map_ofComp_surjective, Algebra.Generators.Cotangent.surjective_map_ofComp. None is the degree-zero derived residue cohomology map.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*homology|homology.*residue|fibre.*surject (msearch Mathlib); rg residue.*homology|homology.*residue|degreeZero.*[Ff]iber in WeilConjectures and lean/Sheaf; rg canonical.*(fibre|fiber).*map|cohomology.*residue.*map in dag/nodes; blueprint_refs.py search degree-zero fibre",
+   "results": "Mathlib: 3 unrelated Condensed/Light/Sequence hits. Project source: strict-henselian etale cohomology comparison; Sheaf: minimal-free model and semicontinuity statements, not this predicate. DAG: this item is the scheme splitting use; no definition of the predicate. Blueprint search: no matching nodes.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sc-perfect-cut-complex-degree-zero",
+  "date": "2026-10-11",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: cut a perfect complex after the degree-zero fibre map is surjective",
+   "via": [
+    "lem-sc-perfect-cut-complex-degree-zero",
+    "lem-sc-perfect-degree-zero-fibre-criterion",
+    "lem-sc-proper-flat-global-sections-criterion",
+    "lem-sc-proper-flat-global-sections",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DegreeZeroFibreSurjective",
+  "declaration": "AlgebraicGeometry.degreeZeroFibreSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/DegreeZeroFibreSurjective.lean",
+  "statement": "def degreeZeroFibreSurjective (X : Scheme.{uF}) [HasDerivedCategory.{wF} (SheafOfModules.{uF} (moduleRings X.toRingedSpace))] (K : schemeDerivedCategory X) (s : X) : Prop",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pcz1520"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcz1520",
+  "group": "M1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcz1520",
+  "group": "M1",
+  "result": "fix",
+  "note": "Read 0A1U, node, J1 sibling: X scheme; K in D_QCoh; Scheme.IsPerfect; Tor-amp [0,inf) = tensor vanishing for all F, i<0; s with fibre surjectivity; U nbhd, P perfect Tor-amp [1,inf), K|_U = H^0(K)|_U[0] + P via overFunctor+overEquiv (as landed AffinePerfectPlusShift). FIX: degreeZeroFibreSurjective rebuilt on ModuleCat.cohomologyBaseChange (J1 de3865f66), IsLocalRing.ResidueField of the stalk, no lets."
+ }
+}
