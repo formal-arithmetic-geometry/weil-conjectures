@@ -1,16 +1,16 @@
 # Work queue
 
-795 items; claim with `tools/claim.py next <group> [--stage N]`.
+790 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (795)
+## Stage 2: nodes to state (790)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
-| `def-sc-constant-sheaves` | 1 | state |
+| `def-sc-rational-section-divisor` | 1 | state |
 | `def-sp-truncation-couple` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
@@ -21,7 +21,6 @@
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
-| `lem-sc-rational-section-order` | 1 | state |
 | `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
 | `lem-sc-separated-affine-function-field-surjective` | 1 | state |
 | `lem-sc-vector-bundle-line-subbundle` | 1 | state |
@@ -30,14 +29,10 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-charpoly-locally-free-direct-sum` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
-| `lem-weil-pbc-constant-sheaf-set-sections-connected-natural` | 1 | state |
 | `lem-weil-pbc-cotangent-complex-symmetric-algebra` | 1 | state |
-| `lem-weil-pbc-cover-module-exact` | 1 | state |
 | `lem-weil-pbc-criterion-flatness-fibre-noetherian` | 1 | state |
 | `lem-weil-pbc-curve-assertions-finite-pushforward` | 1 | state |
-| `lem-weil-pbc-cyclic-extension-cocycle` | 1 | state |
 | `lem-weil-pbc-depth-in-ses` | 1 | state |
-| `lem-weil-pbc-depth-over-quotient-ring` | 1 | state |
 | `lem-weil-pbc-derivation-extends-finite-type-extension` | 1 | state |
 | `lem-weil-pbc-derived-adjunction-commshift` | 1 | state |
 | `lem-weil-pbc-derived-exchange-termwise` | 1 | state |
@@ -805,7 +800,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 835 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 834 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
