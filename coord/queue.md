@@ -1,13 +1,14 @@
 # Work queue
 
-17 items; claim with `tools/claim.py next <group> [--stage N]`.
+19 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (2)
+## Stage 1: nodes to split (3)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
-| `lemma-weil-pbc-stein-connectedness` | 2005 | rests_on_sorry |
-| `thm-weil-pbc-stein-inputs` | 2006 | sorry_here |
+| `prop-weil-pbc-strict-local-exchange` | 1003 | sorry_here |
+| `lemma-weil-pbc-stein-connectedness` | 2006 | rests_on_sorry |
+| `thm-weil-pbc-stein-inputs` | 2007 | sorry_here |
 
 ## Stage 2: nodes to state (5)
 
@@ -21,16 +22,17 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (10)
+## Stage 3: modules to prove (11)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `WeilConjectures.AlgebraicGeometry.Curve.FieldExtension` | 0 | 2 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
-| `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.GeometricStalk` | 0 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction` | 1 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 2 | proof |
+| `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 5 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
