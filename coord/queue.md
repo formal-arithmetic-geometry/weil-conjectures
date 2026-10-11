@@ -1,11 +1,11 @@
 # Work queue
 
-134 items; claim with `tools/claim.py next <group> [--stage N]`.
+130 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (134)
+## Stage 2: nodes to state (130)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -38,7 +38,6 @@
 | `lem-sc-derived-internal-hom-restrict-open` | 1 | state | 1 |
 | `lem-weil-pbc-etale-mayer-vietoris` | 1 | state | 1 |
 | `lem-weil-pbc-formal-systems-pullback` | 1 | state | 1 |
-| `lem-sc-group-addition-tangent-differential` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-derived-functor-termwise-split-ses-triangle` | 1 | state | 0 |
@@ -95,7 +94,6 @@
 | `lem-weil-pbc-symmetric-product-finite` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-over-base` | 1 | state | 0 |
 | `lem-weil-pbc-symmetric-product-surjective` | 1 | state | 0 |
-| `lem-weil-pbc-thickening-systems-dictionary` | 1 | state | 0 |
 | `lem-weil-pbc-torsion-submodule-flat-base-change-iso` | 1 | state | 0 |
 | `lem-weil-pbc-trivial-kan-homotopy-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-truncated-coskeleton-finite-limits` | 1 | state | 0 |
@@ -111,8 +109,8 @@
 | `lem-pc-ring-pseudo-coherent-summand` | 2 | state | 0 |
 | `lem-sc-finite-locally-free-derived-hom` | 2 | state | 0 |
 | `lem-sc-hom-etale-locus-translation` | 2 | state | 0 |
+| `lem-sc-mult-n-tangent-differential` | 2 | state | 0 |
 | `lem-sc-p1-boundary-extension-composition` | 2 | state | 0 |
-| `lem-sc-p1-boundary-one-extension-class` | 2 | state | 0 |
 | `lem-sc-p1-finite-homogeneous-generators` | 2 | state | 0 |
 | `lem-sc-p1-graded-kernel-finite` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
@@ -130,13 +128,11 @@
 | `lem-sp-filtered-homotopy-spectral-sequence` | 2 | state | 0 |
 | `lem-sp-half-plane-graded-canonical` | 2 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 2 | state | 0 |
-| `lem-weil-pbc-finite-type-lift-nilpotent` | 2 | state | 0 |
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state | 0 |
 | `lem-weil-pbc-integral-closure-finite-fibre-part-localization` | 2 | state | 0 |
 | `lem-weil-pbc-quotient-henselian-pair` | 2 | state | 0 |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
 | `pqf-lem-pushforward-qcoh` | 2 | state | 0 |
-| `pqf-lem-qf-locqf-qc` | 2 | state | 0 |
 | `sbc-lem-higher-direct-image-limit` | 2 | state | 0 |
 | `thm-sc-proper-cohomology` | 2 | state | 0 |
 | `lem-pc-essentially-constant-ind-hom-colimit` | 3 | state | 0 |
@@ -144,7 +140,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state | 0 |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 342 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 341 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
