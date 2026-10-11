@@ -1,11 +1,11 @@
 # Work queue
 
-254 items; claim with `tools/claim.py next <group> [--stage N]`.
+248 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (254)
+## Stage 2: nodes to state (248)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -47,7 +47,6 @@
 | `lem-sc-pic-restriction-boundary` | 2 | state | 1 |
 | `lem-sp-edge-collapse` | 2 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
-| `lem-galois-inverse-image-representable` | 1 | state | 0 |
 | `lem-pc-chow-relative-ample` | 1 | state | 0 |
 | `lem-pc-coherent-property-devissage` | 1 | state | 0 |
 | `lem-pc-noetherian-approximation-data` | 1 | state | 0 |
@@ -72,13 +71,9 @@
 | `lem-weil-pbc-sets-etale-section-continuity` | 1 | state | 0 |
 | `lem-weil-pbc-sets-finite-surjective-descent` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension` | 1 | state | 0 |
-| `lem-weil-pbc-smooth-fibre-regular-local` | 1 | state | 0 |
-| `lem-weil-pbc-smooth-free-differentials-strictly-standard-power` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-over-field-regular-local` | 1 | state | 0 |
-| `lem-weil-pbc-smooth-over-normal-ring-normal` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-over-product-ring` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-retract-relative-global-complete-intersection` | 1 | state | 0 |
-| `lem-weil-pbc-smooth-retract-standard-smooth` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-ring-map-iff-smooth-affine` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-section-etale-lift` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-zero-differentials-affine-open-etale` | 1 | state | 0 |
@@ -88,7 +83,6 @@
 | `lem-weil-pbc-spec-map-residue-field-naturality` | 1 | state | 0 |
 | `lem-weil-pbc-spec-surjective-base-change` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-closed-clopen-decomposition-lift` | 1 | state | 0 |
-| `lem-weil-pbc-spectral-closed-subspace` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-constructible-clopen-constructible-topology` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-constructible-finite-intersection` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-constructible-topology-hausdorff` | 1 | state | 0 |
