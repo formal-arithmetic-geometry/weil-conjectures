@@ -270,4 +270,33 @@ end Adjunction
 
 end Triple
 
+
+section IteratedMate
+
+variable {F₁ : A ⥤ C} {U₁ : C ⥤ A} {F₂ : B ⥤ D} {U₂ : D ⥤ B}
+variable {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
+variable (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₃ : F₁ ⊣ U₁) (adj₄ : F₂ ⊣ U₂)
+
+/-- In a square of four left adjoints, the mate `R₁ ⋙ F₁ ⟶ F₂ ⋙ R₂` of an isomorphism
+`F₁ ⋙ L₂ ≅ L₁ ⋙ F₂` becomes an isomorphism after applying the right adjoint `U₁` of `F₁`,
+provided the units of `F₁ ⊣ U₁` and `F₂ ⊣ U₂` are isomorphisms (i.e. `F₁` and `F₂` are fully
+faithful). Indeed, `U₁` of the mate is, up to these units, the iterated mate, which is the
+conjugate of the isomorphism (`CategoryTheory.iterated_mateEquiv_conjugateEquiv`). -/
+lemma isIso_map_mateEquiv_app_of_isIso (α : TwoSquare F₁ L₁ L₂ F₂) [IsIso α.natTrans]
+    [IsIso adj₃.unit] [IsIso adj₄.unit] (b : B) :
+    IsIso (U₁.map ((mateEquiv adj₁ adj₂ α).natTrans.app b)) := by
+  have hβ : IsIso (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)).natTrans := by
+    rw [iterated_mateEquiv_conjugateEquiv]
+    infer_instance
+  have h := unit_mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α) b
+  have h' : U₁.map ((mateEquiv adj₁ adj₂ α).natTrans.app b) =
+      inv (adj₃.unit.app _) ≫ R₁.map (adj₄.unit.app b) ≫
+        (mateEquiv adj₄ adj₃ (mateEquiv adj₁ adj₂ α)).natTrans.app _ := by
+    rw [IsIso.eq_inv_comp]
+    exact h.symm
+  rw [h']
+  infer_instance
+
+end IteratedMate
+
 end CategoryTheory

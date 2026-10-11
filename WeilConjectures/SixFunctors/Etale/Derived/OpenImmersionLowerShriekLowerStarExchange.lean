@@ -5,7 +5,11 @@ Authors: Christian Merten
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
+public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!
 # Exchanging an extension by zero with a derived pushforward
@@ -160,8 +164,41 @@ and after `D(i^*)`.
 (blueprint: unbounded analogue of `thm:open-proper-interchange`) -/
 theorem isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring
     (hΛ : IsAddTorsion Λ) [IsProper g''] (hsq : IsPullback g' j' j g'') :
-    IsIso (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq) :=
-  sorry
+    IsIso (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq) := by
+  have hdisj : Disjoint (Set.range j.closedComplement.base) (Set.range j.base) := by
+    rw [j.range_closedComplement]
+    exact disjoint_compl_left
+  let sq := IsPullback.of_hasPullback g'' j.closedComplement
+  have := isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring Λ hΛ sq
+  have hdisj' : Disjoint (Set.range (pullback.fst g'' j.closedComplement).base)
+      (Set.range j'.base) := by
+    rw [Set.disjoint_left]
+    rintro _ ⟨p, rfl⟩ ⟨u, hu⟩
+    refine Set.disjoint_left.1 hdisj
+      ⟨(pullback.snd g'' j.closedComplement).base p, rfl⟩ ⟨g'.base u, ?_⟩
+    rw [← Scheme.Hom.comp_apply, hsq.w, Scheme.Hom.comp_apply, hu, ← Scheme.Hom.comp_apply,
+      pullback.condition, Scheme.Hom.comp_apply]
+  have (K : DerivedCategory (Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+      IsIso ((openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq).app K) := by
+    apply isIso_of_isIso_mapDerivedCategoryUpperStar_map _ j j.closedComplement
+      j.range_closedComplement
+    · exact isIso_map_mateEquiv_app_of_isIso (mapDerivedUpperStarLowerStarAdjunction _ g')
+        (mapDerivedUpperStarLowerStarAdjunction _ g'')
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction _ j)
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction _ j')
+        (TwoSquare.mk _ _ _ _ (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso _ hsq).inv) K
+    · refine isIso_of_source_target_iso_zero _
+        (isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range _ j
+          j.closedComplement hdisj _).isoZero (IsZero.isoZero ?_)
+      have hN : IsZero (L((pullback.fst g'' j.closedComplement)^*[ModuleCat.{u + 1} Λ]).obj
+          (D((j')_!open[ModuleCat.{u + 1} Λ]).obj K)) :=
+        (isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoint_range _ j'
+          _ hdisj' K).of_iso ((leftDerivedUpperStarIsoMapDerivedCategory _ _).app _)
+      exact IsZero.of_iso
+        ((R((pullback.snd g'' j.closedComplement)_*[ModuleCat.{u + 1} Λ])).map_isZero hN)
+        ((leftDerivedUpperStarIsoMapDerivedCategory _ _).symm.app _ ≪≫
+          asIso ((derivedBaseChangeMap _ sq.toCommSq).app _))
+  exact NatIso.isIso_of_isIso_app _
 
 end Etale
 
