@@ -180,5 +180,23 @@
   "item": "lem-weil-pbc-h0-spectral-closed-restriction",
   "worker": "stage1",
   "summary": "Proof written from Stacks 09ZG in five steps, in logical order (Stacks' order reversed: injectivity; constant case = 0CAM; finite products of pushed-forward constant sheaves; subsheaves; filtered colimit reduction). New nodes: sets-inverse-image-stalk (Stacks 008H, Mathlib leaf: stalkPullbackIso + stalkFunctor_map_unit_toSheafify_isIso), sets-inverse-image-colimits-finite-products (008K/0038, Mathlib leaf: TopCat.Sheaf.pullbackPushforwardAdjunction + PreservesFiniteLimits of sheafPullback for the flat Opens.map), spectral-closed-subspace (0902, closed case; unsplit: Mathlib lacks quasi-separatedness of closed subspaces), spectral-closed-clopen-decomposition-lift (0CAM, unsplit), spectral-sheaf-colimit-constant-embeddings (0CAI+0CAL combined, unsplit), closed-pushforward-constant-restriction (the 'Observe that' identification of 09ZG, stated without proof in Stacks, unsplit). Existing nodes used: 009F (sheaves-directed-colimit-sections), germs determine sections, filtered colimits of sets elementwise. Statement unchanged. Source corrected: example-quinard is Tag 0CAF (Tag 09ZH is lemma-h0-henselian-pair). lemma-weil-pbc-spectral-restriction (abelian, locally constant) is not used. Mathlib searches of the item kept (no match)."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SpectralClosedRestriction",
+  "declaration": "TopCat.spectral_closed_restriction",
+  "file": "lean/Sheaf/Topology/SpectralClosedRestriction.lean",
+  "statement": "theorem spectral_closed_restriction (X : TopCat.{u}) [SpectralSpace X] (Z : Set X) (hZ : IsClosed Z) (hconn : ∀ x : X, ConnectedSpace (↥(Z ∩ closure ({x} : Set X)))) (F : X.Sheaf (Type u)) : let i : TopCat.of Z ⟶ X := TopCat.ofHom ⟨Subtype.val, continuous_subtype_val⟩ let R := (Sheaf.pullbackPushforwardAdjunction (Type u) i).unit.app F Function.Bijective (fun s : F.1.obj (op ⊤) => (R.1.app (op ⊤)) s)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hsc1059",
+  "group": "M1",
+  "result": "pass",
+  "note": "SpectralSpace X instance; Z : Set X with IsClosed (used, not hollow); hconn ConnectedSpace of subtype Z ∩ closure {x} for all x (includes nonempty); F : X.Sheaf (Type u) sheaf of sets; i subtype inclusion as in landed ClosedPushforwardConstantRestriction; inverse image = Mathlib Sheaf.pullback (≅ presheafToSheaf ∘ Presheaf.pullback, the node's (2),(3)); conclusion bijectivity of unit component at op ⊤; no extra universe, no private copy"
  }
 }
