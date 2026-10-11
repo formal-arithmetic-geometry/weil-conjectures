@@ -222,6 +222,70 @@ lemma isLocalizedModule_basicOpen (M : X.Modules)
       ((map_sub _ x₁ x₂).trans (sub_eq_zero.mpr h))
     exact ⟨⟨g ^ n, n, rfl⟩, sub_eq_zero.mp ((smul_sub _ _ _).symm.trans hn)⟩
 
+set_option backward.isDefEq.respectTransparency false in
+/-- Conversely to `exists_map_eq_pow_smul_of_isAffineOpen` and
+`exists_pow_smul_eq_zero_of_isAffineOpen`, let `W` be an affine open such that for every
+`f ∈ Γ(X, W)` every section of `M` over `D(f)` becomes the restriction of a section over `W` after
+multiplication by a power of `f`, and every section over `W` vanishing on `D(f)` is killed by a
+power of `f`. Then the restriction of `M` along `fromSpec` is localizing. -/
+lemma isLocalizing_restrict_fromSpec_of_forall (M : X.Modules) {W : X.Opens}
+    (hW : IsAffineOpen W)
+    (h₁ : ∀ (f : Γ(X, W)) (s : Γ(M, X.basicOpen f)), ∃ (n : ℕ) (t : Γ(M, W)),
+      M.presheaf.map (homOfLE (X.basicOpen_le f)).op t =
+        X.presheaf.map (homOfLE (X.basicOpen_le f)).op f ^ n • s)
+    (h₂ : ∀ (f : Γ(X, W)) (t : Γ(M, W)), M.presheaf.map (homOfLE (X.basicOpen_le f)).op t = 0 →
+      ∃ n : ℕ, f ^ n • t = 0) :
+    IsLocalizing (modulesSpecToSheaf.obj (M.restrict hW.fromSpec)) := by
+  intro f
+  have hW' : W ≤ hW.fromSpec ''ᵁ ⊤ := by
+    rw [Hom.image_top_eq_opensRange, hW.opensRange_fromSpec]
+  have hD : hW.fromSpec ''ᵁ PrimeSpectrum.basicOpen f ≤ X.basicOpen f :=
+    (hW.fromSpec_image_basicOpen f).le
+  have hD' : X.basicOpen f ≤ hW.fromSpec ''ᵁ PrimeSpectrum.basicOpen f :=
+    (hW.fromSpec_image_basicOpen f).ge
+  have hinj : Function.Injective (M.presheaf.map (homOfLE hD').op) := fun a b hab ↦ by
+    have := congr(M.presheaf.map (homOfLE hD).op $hab)
+    rwa [← Functor.map_comp_apply, ← Functor.map_comp_apply,
+      show (homOfLE hD').op ≫ (homOfLE hD).op = 𝟙 _ from Subsingleton.elim _ _,
+      CategoryTheory.Functor.map_id, ConcreteCategory.id_apply,
+      ConcreteCategory.id_apply] at this
+  have hhom (U : (Spec Γ(X, W)).Opens) :
+      Function.Injective (M.restrictAppIso hW.fromSpec U).hom :=
+    (ConcreteCategory.bijective_of_isIso _).1
+  refine IsLocalizedModule.Away.mk_of_addCommGroup
+    (isUnit_algebraMap_end_of_le_basicOpen f le_rfl) (fun x ↦ ?_) (fun t ht ↦ ?_)
+  · obtain ⟨n, t, ht⟩ := h₁ f
+      (M.presheaf.map (homOfLE hD').op ((M.restrictAppIso hW.fromSpec _).hom x))
+    let y := (M.restrictAppIso hW.fromSpec ⊤).inv
+      (M.presheaf.map (homOfLE (hW.fromSpec_image_le ⊤)).op t)
+    have key : M.presheaf.map (homOfLE hD').op ((M.restrictAppIso hW.fromSpec _).hom (f ^ n • x)) =
+        M.presheaf.map (homOfLE hD').op ((M.restrictAppIso hW.fromSpec _).hom
+          ((M.restrict hW.fromSpec).presheaf.map (homOfLE (le_top :
+            (PrimeSpectrum.basicOpen f : (Spec Γ(X, W)).Opens) ≤ ⊤)).op y)) := by
+      rw [restrictAppIso_fromSpec_smul, map_smul, map_restrictAppIso_hom_apply]
+      dsimp only [y]
+      rw [Iso.inv_hom_id_apply, ← Functor.map_comp_apply, ← Functor.map_comp_apply,
+        ← Functor.map_comp_apply, Subsingleton.elim (_ ≫ _ ≫ _) (homOfLE (X.basicOpen_le f)).op,
+        ht, Subsingleton.elim (_ ≫ _) (homOfLE (X.basicOpen_le f)).op, map_pow]
+    exact ⟨n, y, hhom _ (hinj key)⟩
+  · replace ht : (M.restrict hW.fromSpec).presheaf.map (homOfLE (le_top :
+        (PrimeSpectrum.basicOpen f : (Spec Γ(X, W)).Opens) ≤ ⊤)).op t = 0 := ht
+    let t' := M.presheaf.map (homOfLE hW').op ((M.restrictAppIso hW.fromSpec ⊤).hom t)
+    have ht' : M.presheaf.map (homOfLE (X.basicOpen_le f)).op t' = 0 := by
+      have := congr(M.presheaf.map (homOfLE hD').op ((M.restrictAppIso hW.fromSpec _).hom $ht))
+      rw [map_restrictAppIso_hom_apply, map_zero, map_zero, ← Functor.map_comp_apply] at this
+      dsimp only [t']
+      rw [← Functor.map_comp_apply]
+      exact (congrArg (fun φ ↦ M.presheaf.map φ _) (Subsingleton.elim _ _)).trans this
+    obtain ⟨n, hn⟩ := h₂ f t' ht'
+    refine ⟨n, hhom _ ?_⟩
+    have ht : (M.restrictAppIso hW.fromSpec ⊤).hom t =
+        M.presheaf.map (homOfLE (hW.fromSpec_image_le ⊤)).op t' := by
+      dsimp only [t']
+      rw [← Functor.map_comp_apply, Subsingleton.elim (_ ≫ _) (𝟙 _),
+        CategoryTheory.Functor.map_id, ConcreteCategory.id_apply]
+    rw [restrictAppIso_fromSpec_smul, map_zero, ht, ← map_smul, hn, map_zero]
+
 /-- The sections of an invertible `𝒪_X`-module over an affine open `U` form a flat
 `Γ(X, U)`-module. -/
 lemma flat_sections_of_isInvertible (M : X.Modules) [M.IsInvertible] {U : X.Opens}

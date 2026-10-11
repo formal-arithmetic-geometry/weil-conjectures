@@ -89,20 +89,29 @@ theorem isZero_higherDirectImage_of_isAffineHom (f : X ⟶ T) [IsAffineHom f]
   exact h q
 
 /-- **The pushforward along an affine morphism is quasi-coherent.** For `f : X ⟶ T` affine and
-`ℱ` quasi-coherent, `f_* ℱ = R⁰ f_* ℱ` is quasi-coherent
-(`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`).
+`ℱ` quasi-coherent, `f_* ℱ` is quasi-coherent: for an affine open `V` of `T` and `g ∈ Γ(T, V)`,
+the preimage `f ⁻¹ᵁ V` is affine with `f ⁻¹ᵁ D(g) = D(f^♯ g)`, so `Γ(D(g), f_* ℱ)` is the
+localization of `Γ(V, f_* ℱ) = Γ(f ⁻¹ᵁ V, ℱ)` at `g`
+(`AlgebraicGeometry.Scheme.Modules.isQuasicoherent_of_forall_isAffineOpen`).
 
 (blueprint: `lem-pc-affine-morphism-hi`) -/
 theorem isQuasicoherent_pushforward_of_isAffineHom (f : X ⟶ T) [IsAffineHom f] (ℱ : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] :
     ((pushforward f).obj ℱ).IsQuasicoherent := by
-  have := isGrothendieckAbelian X
-  have : PreservesFiniteLimits (pushforward f) :=
-    have := (pullbackPushforwardAdjunction f).rightAdjoint_preservesLimits.{0, 0}
-    inferInstance
-  exact (SheafOfModules.isQuasicoherent T.ringCatSheaf).prop_of_iso
-    ((Functor.rightDerivedZeroIsoSelf (pushforward f)).app ℱ)
-    (isQuasicoherent_higherDirectImage f ℱ 0)
+  refine isQuasicoherent_of_forall_isAffineOpen _ (fun W hW g s ↦ ?_) (fun W hW g t ht ↦ ?_)
+  · obtain ⟨n, t, ht⟩ := exists_map_eq_pow_smul_of_basicOpen_eq ℱ (hW.preimage f) (f.app W g)
+      (f.preimage_basicOpen g).symm (f.preimage_mono (T.basicOpen_le g)) s
+    refine ⟨n, t, ht.trans ?_⟩
+    have h : f.app (T.basicOpen g) (T.presheaf.map (homOfLE (T.basicOpen_le g)).op g) =
+        X.presheaf.map (homOfLE (f.preimage_mono (T.basicOpen_le g))).op (f.app W g) := by
+      rw [← ConcreteCategory.comp_apply, f.naturality]
+      rfl
+    rw [← h, ← map_pow]
+    rfl
+  · obtain ⟨n, hn⟩ := exists_pow_smul_eq_zero_of_basicOpen_eq ℱ (hW.preimage f) (f.app W g)
+      (f.preimage_basicOpen g).symm (f.preimage_mono (T.basicOpen_le g)) t ht
+    rw [← map_pow] at hn
+    exact ⟨n, hn⟩
 
 end AffineMorphism
 
