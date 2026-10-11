@@ -142,5 +142,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gss2900 (reviewer sub-agent of L); spot-checked: Read packet whole. Math checked: step1 nilpotent ideal N tensor K' stays nilpotent, reduction commutes with finite products; step2 cited node hypotheses (finite list of finite extensions) and conclusion (finite separable L, residue fields of L(x)K_i finite purely inseparable over L) match; step3 finite-spectrum node with base field K' + CRT on distinct maximal ideals gives reduction = product of residue fields; step4 reassembly; statement matches parent's finite-algebra calculation. Separable-split node accepted as generic field tool (C7/C8). FIX more, RETURN less: new node lem-weil-pbc-finite-algebra-reduction-product-fields is class (d), elementary from existing lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum (base K) + lem-pc-crt-ideal-quotient-product, exactly the step-3 argument (Mathlib also has IsArtinianRing.equivPi, RingTheory/Artinian/Module.lean:633); folded into step 1 (elementary, citing both nodes, tags 00KH/00E0/00DT), node dropped, uses/proof_deps updated. Second reading by M1 missed this (d).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.GenericSeparableAlgebraSplitting",
+  "declaration": "Algebra.exists_separable_extension_reduction_tensorProduct_equiv_pi",
+  "file": "lean/Sheaf/FieldTheory/GenericSeparableAlgebraSplitting.lean",
+  "statement": "theorem exists_separable_extension_reduction_tensorProduct_equiv_pi (K : Type u) [Field K] (C : Type v) [CommRing C] [Algebra K C] [FiniteDimensional K C] : ∃ (K' : Type (max u v)) (hK' : Field K') (aK' : Algebra K K'), letI := hK' letI := aK' FiniteDimensional K K' ∧ Algebra.IsSeparable K K' ∧ ∃ (n : ℕ) (L : Fin n → Type (max u v)) (hL : ∀ j, Field (L j)) (aL : ∀ j, Algebra K' (L j)), letI := hL letI := aL letI := Algebra.TensorProduct.rightAlgebra (R := K) (A := C) (B := K') (∀ j, FiniteDimensional K' (L j) ∧ IsPurelyInseparable K' (L j)) ∧ Nonempty (((C ⊗[K] K') ⧸ nilradical (C ⊗[K] K')) ≃ₐ[K'] (∀ j, L j))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gss1100",
+  "group": "M1",
+  "result": "pass",
+  "note": "K field, C CommRing+Algebra K C+FiniteDimensional (no extra binders); exists K' field in Type(max u v) with FiniteDimensional+Algebra.IsSeparable; Fin n family of fields L_j, FiniteDimensional K' L_j and IsPurelyInseparable (char 0 => L_j=K', matches node); (C tensor_K K')/nilradical ≃ₐ[K'] Pi L via rightAlgebra; n=0 covers C=0; existential universe not vacuous (ULift); no hollow hypotheses; stmt_deps status mathlib; docstring carries 4-step node proof"
  }
 }

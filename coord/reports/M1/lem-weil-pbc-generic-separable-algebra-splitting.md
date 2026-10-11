@@ -1,40 +1,119 @@
-1. Files written:
-   - `dag/nodes/sec-smooth-purity/lem-weil-pbc-generic-separable-algebra-splitting.json` (item, split)
-   - `dag/nodes/sec-smooth-purity/lem-weil-pbc-finite-algebra-reduction-product-fields.json` (statement-only, Mathlib no match)
-   - `citations.json`
-2. Attachments: none.
-3. WANTED: none.
-4. No source or statement error was found. The source declaration search in `~/weil-conjectures-slopmaster2/WeilConjectures` found no declaration tagged `(blueprint: lem-weil-pbc-generic-separable-algebra-splitting)` and no sorry-free declaration with the item's statement. Whole-DAG searches found no duplicate of the new Artinian reduction statement; the existing residue-field splitting node and finite-spectrum node were reused.
-5. Nothing remains unfinished.
+## Worker report
 
-## Not duplicates
+The module `Sheaf.FieldTheory.GenericSeparableAlgebraSplitting` states
+`Algebra.exists_separable_extension_reduction_tensorProduct_equiv_pi`. Its hypotheses are a
+field `K`, a commutative `K`-algebra `C`, and finite-dimensionality `FiniteDimensional K C`.
+The conclusion introduces a field `K'` with an algebra structure over `K`, asserts that `K'/K`
+is finite-dimensional and separable, and introduces a finite index `Fin n` and fields `L j`
+with `K'`-algebra structures. For every `j`, `L j/K'` is finite-dimensional and
+`IsPurelyInseparable K' (L j)`. The final clause is a nonempty `K'`-algebra equivalence from
+the reduction `(C ⊗[K] K') ⧸ nilradical (C ⊗[K] K')` to the finite product `(∀ j, L j)`.
+The quotient by `nilradical` is the reduction, and `Fin n` permits the empty product (including
+`C = 0`). `Algebra.TensorProduct.rightAlgebra` supplies the scalar structure induced by
+`K'` on the tensor product.
 
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-separable-split-purely-inseparable-residue-fields`: the former decomposes one finite algebra's reduction over its original field; the latter chooses a finite separable base extension for a finite list of field extensions and controls all residue fields after tensoring.
+The statement dependency `def-pc-field-extension` is rendered by Mathlib's field and algebra
+classes (`[Field]`, `[Algebra]`). The dependency `def-weil-pbc-finite-purely-inseparable-extension`
+is rendered by `FiniteDimensional` together with `IsPurelyInseparable`. The proof docstring
+records the use of `lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum`,
+`lem-pc-crt-ideal-quotient-product`, and
+`lem-weil-pbc-separable-split-purely-inseparable-residue-fields`.
 
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-product-ideal-closed-subscheme-union`: the new statement decomposes the reduction of a finite-dimensional algebra into finite fields; the existing node identifies a closed subscheme defined by a product ideal.
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-reduced-induced-closed-subscheme`: the new statement is an Artinian algebra decomposition; the existing node concerns reducedness of an induced closed subscheme.
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-zero-locus-eq-iff-radical-eq`: the new statement gives a product-of-fields structure; the existing node is an equality criterion for zero loci and radicals.
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-zero-locus-ideal-intersection`: the new statement gives field factors of a reduction; the existing node identifies an intersection of ideals from a zero locus.
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact`: the new statement is an algebra decomposition; the existing node is a quasi-compactness/unit-ideal result for basic opens.
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-span-pow-eq-top`: the new statement concerns Artinian reductions; the existing node concerns powers of an ideal whose span is top.
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-proper-ideal-contained-in-maximal`: the new statement gives finite field factors; the existing node only places a proper ideal inside a maximal ideal.
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-etale-localize-upstairs`: the new statement is a product decomposition of a finite algebra; the existing node localizes an etale morphism upstairs.
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-separate-image-closed-from-closed`: the new statement is ring-theoretic; the existing node separates a closed image from a closed subset topologically.
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-spec-localization-away-basic-open`: the new statement decomposes a reduction; the existing node identifies a basic open with a localization spectrum.
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-prime-contains-minimal-prime`: the new statement gives all field factors of an Artinian reduction; the existing node only asserts existence of a minimal prime inside a prime.
-`lem-weil-pbc-finite-algebra-reduction-product-fields` vs `lem-weil-pbc-minimal-prime-over-proper-ideal`: the new statement is a finite product decomposition; the existing node asserts existence of a minimal prime over a proper ideal.
+Edge cases checked: `Fin n` allows `n = 0`, representing the zero algebra's empty product;
+characteristic zero is covered by Mathlib's `IsPurelyInseparable` convention; and universes use
+`Type (max u v)` for the extension and factors.
 
-## Review by M1
-
-I read the item's blueprint source at the finite-algebra calculation in `lem-weil-pbc-finite-pushforward-generic-constructible.md`, and read the full statements of every cited DAG node. The new node records the standard Artinian fact from Algebra Lemmas 00KH and 00E0. Step 1 uses exactly that decomposition and the elementary facts that a nilpotent ideal stays nilpotent after tensoring and that reduction commutes with finite products. Step 2 uses the existing node's precise hypothesis (a finite list of finite field extensions) and its conclusion (finite separable base field, finite purely inseparable residue fields). Step 3 checks the cited finite-spectrum node supplies finiteness, maximality, and nilradical intersection; the Chinese remainder identification is then the stated elementary ring argument. Step 4 only reassembles the finite products and retains the separability and purely-inseparability hypotheses. I checked the zero-algebra case and the one-factor case while reviewing the indexing. The four Mathlib searches for the item and the four searches for the new node were run with the launcher search tool and recorded verbatim, including LeanSearch unavailability.
+Searches made: `msearch.py leanfinder` for finite-dimensional algebra splitting (found only
+field-degree ingredients, no exact theorem); `msearch.py loogle` for
+`IsPurelyInseparable`, `Algebra.IsSeparable`, and tensor products (no exact hit);
+`msearch.py grep` for tensor-product/purely-inseparable and Artinian product declarations
+(found only component lemmas such as `IsArtinianRing.quotNilradicalEquivPi`); and `rg` over
+`WeilConjectures/` and project `lean/Sheaf/` (no existing declaration of this statement).
+The Stacks source was checked at Tag 02LM, especially the finite-algebra calculation in its
+proof.
 
 ## Second reading by M1
 
-- Step 1: checked against Algebra Tags 00KH and 00E0 and the reduction definition; verdict correct after writing out nilpotence under tensor and componentwise nilpotence for products.
-- Step 2: checked against More Morphisms Tag 02LM, proof lines 12060-12079; verdict correct.
-- Step 3: checked against Algebra Tags 00E0 and 00DT and the existing finite-spectrum node; verdict correct after explicit citation of the existing CRT node.
-- Step 4: checked against steps 1-3 and the item statement; verdict correct and elementary reassembly.
-- New node `lem-weil-pbc-finite-algebra-reduction-product-fields`: checked on the zero algebra and one-factor field cases and against Tags 00KH and 00E0; verdict self-contained statement-only node, no duplicate found.
-- Item statement: checked against the blueprint generic-fibre calculation and Tag 02LM; verdict hypotheses and conclusion agree.
+I read the sandbox node and module, both statement dependency nodes and their
+Mathlib declaration signatures, the parent blueprint's finite-algebra calculation,
+and Stacks more-morphisms.tex, Tag 02LM (label
+lemma-etale-makes-quasi-finite-finite-multiple-points-var), including its hypotheses
+and proof. Literature is absent from this machine's clone, so I read the source
+files on the server over read-only ssh. The blueprint introduces a finite generic
+algebra, decomposes its reduction, chooses a finite Galois extension containing the
+separable parts, and obtains purely inseparable factors. The node abstracts exactly
+the finite-algebra calculation; the ambient integral Noetherian scheme is not an
+additional hypothesis on this field-theoretic lemma. Stacks makes the same choice
+for finitely many finite residue extensions. Galois is a sufficient construction,
+not an additional conclusion required by this node.
 
-Changes made: corrected `created.item`; expanded Step 1's tensor/reduction justification; cited `lem-pc-crt-ideal-quotient-product` in Step 3 and added its verbatim quote.
+Object/hypothesis/conclusion checklist (all verdicts: exact):
+
+- Base field K: `(K : Type u) [Field K]`.
+- Commutative K-algebra C: `(C : Type v) [CommRing C] [Algebra K C]`.
+  No domain, reducedness, nontriviality, perfectness or Noetherian binder is added.
+- Finite dimension of C: `[FiniteDimensional K C]`. Mathlib's
+  LinearAlgebra/FiniteDimensional/Defs.lean:75 defines this as `Module.Finite K C`.
+- One extension K'/K chosen before the factors: existential `K'`, `Field K'`,
+  `Algebra K K'`, followed by `FiniteDimensional K K'` and
+  `Algebra.IsSeparable K K'`. Algebra carries exactly the field homomorphism of
+  def-pc-field-extension (Algebra/Algebra/Defs.lean:95); maps between fields
+  are injective. Neither a special field extension nor an extra tower is assumed.
+- Finite family of fields over that same K': `∃ (n : ℕ) (L : Fin n → Type
+  (max u v)) (hL : ∀ j, Field (L j)) (aL : ∀ j, Algebra K' (L j))`.
+  This expresses any finite product up to reindexing; it prescribes no size.
+- Every factor is finite and purely inseparable: `∀ j, FiniteDimensional K'
+  (L j) ∧ IsPurelyInseparable K' (L j)`. I read the recorded dependency
+  def-weil-pbc-finite-purely-inseparable-extension: its match is
+  `IsPurelyInseparable` with `Module.Finite`, the same finiteness abbreviation
+  used here. PurelyInseparable/Basic.lean:107 defines integral extensions with
+  separable elements in the scalar image; its :211 equivalence, tagged 09HE,
+  identifies this with the power criterion. No private definition is introduced.
+- Reduction after scalar extension: `(C ⊗[K] K') ⧸ nilradical (C ⊗[K] K')`.
+  Nilpotent/Lemmas.lean:48 defines the ideal of nilpotent elements. The quotient
+  is after tensoring, so possible nilpotents introduced by base change are removed.
+- Isomorphism to the product as K'-algebras: `Nonempty (... ≃ₐ[K'] (∀ j, L j))`.
+  TensorProduct/Basic.lean:492 supplies `rightAlgebra`, induced by includeRight;
+  the quotient inherits this scalar action. Thus the statement respects the
+  K' structure, beyond a bare ring equivalence. `Nonempty` asserts existence.
+
+Edge cases: C can be the zero ring; n = 0 makes the product the zero ring and
+its factor conditions vacuous. K' remains a nontrivial field, as required; the
+identity extension is available even for the empty family. In characteristic
+zero the 09HE equivalence with exponential characteristic 1 says all factor
+elements lie in K'; in positive characteristic it is the p-power condition.
+There is no characteristic restriction. K and C have independent universes u,v;
+finite extensions and factors can be represented in Type (max u v), which is
+large enough for the base, tensor product and its quotients. This is an
+existence statement, not a universal assertion restricted to small test fields.
+Schemes and empty schemes are not objects of this statement. All variables and
+universes are explicitly bound, and autoImplicit is disabled.
+
+Independent searches (recorded in searches.jsonl): LeanFinder query
+"Artinian algebra becomes a product of radicial field extensions after separable
+scalar extension" returned étale/separable-product and geometrically-reduced
+results, none the requested inseparable splitting. Loogle `IsPurelyInseparable,
+AlgEquiv` returned only transport across equivalences. Grep
+`quotNilradicalEquivPi|radicial|separable.*equiv.*[Pp]i` returned Artinian reduction
+components. I opened `IsArtinianRing.quotNilradicalEquivPi` at
+Artinian/Module.lean:613: it decomposes an already Artinian ring into its maximal
+ideal quotients; it neither supplies the finite separable scalar extension nor
+asserts that its factors are purely inseparable. LeanSearch's independently
+attempted radicial splitting query returned Internal Server Error; no verdict
+is claimed for that service. Additional rg searches of project lean/Sheaf,
+WeilConjectures and dag/lean_names_upstream.json for radicial, quotNilradical,
+separable_extension_reduction and the node id found no exact existing statement.
+The nearby separable_tensor_algebraicallyClosed_equiv_pi was opened: it assumes
+an algebraically closed scalar field and a separable input field, so is another
+statement. No new notion or dependency module is needed.
+
+No mismatch found; I left the Lean module and node unchanged. There is no
+statement correction, no new node, and no dependency module to review. The
+module and theorem docstrings cite the source and blueprint id and carry all
+four proof steps with their dependencies. The only proof is the named theorem's
+`sorry`; there are no hollow definitions or proved auxiliary statements. The
+four imports provide the inseparability/separability predicates, tensor product,
+quotient and nilradical respectively. Names and line lengths follow conventions.
+The node's lean.statement is verbatim the theorem signature before `:= by`.
+The prescribed scompile.py single-file check succeeded cleanly (1.4 seconds,
+exit 0); no warnings were emitted.

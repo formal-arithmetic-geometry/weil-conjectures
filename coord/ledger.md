@@ -4317,3 +4317,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:49 L: merged deliver/J1/lem-weil-pbc-flat-mod-injective (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FlatModInjective flat_mod_injective)
 - 10:49 L: merged deliver/K1/lem-weil-pbc-fpqc-finer-than-etale (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FpqcFinerThanEtale AlgebraicGeometry.Scheme.fpqcCover_of_smallEtaleCover)
 - 10:50 L: merged deliver/J1/lem-weil-pbc-free-complex-maps-to-resolution (stage 2; reviewer FIX; first push; Sheaf.Paper.FreeComplexMapsToResolution free_complex_maps_to_resolution)
+- 10:50 L: merged deliver/M1/lem-weil-pbc-generic-separable-algebra-splitting (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.GenericSeparableAlgebraSplitting Algebra.exists_separable_extension_reduction_tensorProduct_equiv_pi)
