@@ -28,11 +28,12 @@ together with its identity and composition coherences; it is not restated here.
 
 ## Implementation notes
 
-The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` is only known to exist, so the mate
-statement `AlgebraicGeometry.Etale.exists_rightDerivedUpperShriekAdjunction_comp_eq` is
-existential in it; being formal, it holds for every such isomorphism. The unit and
-associativity coherences of `sk-thm-sf-comp-composition` need the isomorphism as a `def`, which
-in turn needs the comparison maps of the framework chapter.
+On the unbounded derived categories the composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` is
+only stated to exist, so the mate statement
+`AlgebraicGeometry.Etale.exists_rightDerivedUpperShriekAdjunction_comp_eq` is existential in it;
+being formal, it holds for every such isomorphism. The canonical composition isomorphism on the
+bounded below derived categories, with its unit and associativity laws, is
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso`.
 
 ## Main statements
 

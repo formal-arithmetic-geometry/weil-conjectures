@@ -123,7 +123,8 @@ lemma isIso_of_isIso_plus_of_isZero {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImme
     (φ : K ⟶ K') (hj : IsIso (D+((j)^*[ModuleCat.{u + 1} Λ]).map φ))
     (hK : IsZero (D+((j.closedComplement)^*[ModuleCat.{u + 1} Λ]).obj K))
     (hK' : IsZero (D+((j.closedComplement)^*[ModuleCat.{u + 1} Λ]).obj K')) : IsIso φ := by
-  suffices IsIso (DerivedCategory.Plus.ι.map φ) from isIso_of_fully_faithful DerivedCategory.Plus.ι _
+  suffices IsIso (DerivedCategory.Plus.ι.map φ) from
+    isIso_of_fully_faithful DerivedCategory.Plus.ι _
   refine isIso_of_isIso_mapDerivedCategoryUpperStar_map _ j j.closedComplement
     j.range_closedComplement _ ?_ ?_
   · exact (inferInstance : IsIso (DerivedCategory.Plus.ι.map
@@ -190,7 +191,8 @@ lemma isZero_plus_upperStar_lowerStar_openImmersionLowerShriek (hΛ : IsAddTorsi
       (R+((b)_*[ModuleCat.{u + 1} Λ]).obj (D+((l)_!open[ModuleCat.{u + 1} Λ]).obj M))) := by
   let sq := IsPullback.of_hasPullback b r.closedComplement
   have := Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ hΛ sq
-  have hdisj : Disjoint (Set.range (pullback.fst b r.closedComplement).base) (Set.range l.base) := by
+  have hdisj :
+      Disjoint (Set.range (pullback.fst b r.closedComplement).base) (Set.range l.base) := by
     rw [Set.disjoint_left]
     rintro _ ⟨p, rfl⟩ ⟨u, hu⟩
     have h₁ : b.base ((pullback.fst b r.closedComplement).base p) ∈ Set.range r.base := by
@@ -201,7 +203,8 @@ lemma isZero_plus_upperStar_lowerStar_openImmersionLowerShriek (hΛ : IsAddTorsi
         Scheme.Hom.comp_apply]
       exact ⟨_, rfl⟩
     exact h₂ h₁
-  exact IsZero.of_iso (((pullback.snd b r.closedComplement)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus
+  exact IsZero.of_iso
+    (((pullback.snd b r.closedComplement)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus
       |>.map_isZero (isZero_plus_upperStar_openImmersionLowerShriek Λ l _ hdisj M))
     (asIso ((Etale.derivedBaseChangeMapPlus _ sq.toCommSq).app _))
 
@@ -212,7 +215,8 @@ both sides vanish, by proper base change (`AlgebraicGeometry.Etale.isIso_baseCha
 blueprint `sk-thm-properbasechange`). -/
 instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasProperExchange where
   isIso_exchange {U' U Z' Z t l r b} _ _ _ h := by
-    have := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := derivedPlusFormalism (ModuleCat.{u + 1} Λ)) h
+    have := CompactSupportFormalism.HasBaseChange.isIso_baseChange
+      (F := derivedPlusFormalism (ModuleCat.{u + 1} Λ)) h
     have : IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shAdj r).unit :=
       isIso_derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus_unit Λ r
     have : IsIso ((derivedPlusFormalism (ModuleCat.{u + 1} Λ)).shAdj l).unit :=

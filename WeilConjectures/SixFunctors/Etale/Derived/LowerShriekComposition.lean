@@ -49,10 +49,26 @@ and `f ≫ g` is the independence of the compactification,
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationCompIso`: the isomorphism
   `Rf_!(e.restrict) ⋙ Rg_!(d) ≅ R(f ≫ g)_!(d.comp e)` on the models above.
 
+On the bounded below derived categories, the same construction, carried out in the compact
+support formalism `AlgebraicGeometry.Etale.derivedPlusFormalism`
+(`WeilConjectures.SixFunctors.LowerShriek.Formalism`), gives a canonical composition isomorphism
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso`, independent of all
+compactification choices, equal to the identity when `f` or `g` is an identity, and associative.
+
+## Main definitions
+
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso`: the canonical composition
+  isomorphism `R(f)_!+ ⋙ R(g)_!+ ≅ R(f ≫ g)_!+` on bounded below derived categories.
+
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`: the composition law
-  `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`.
+  `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on unbounded derived categories.
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso_hom_eq`: independence of the
+  compactifications.
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso_id_left`,
+  `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso_id_right`: the unit laws.
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompIso_assoc`: associativity.
 -/
 
 @[expose] public section

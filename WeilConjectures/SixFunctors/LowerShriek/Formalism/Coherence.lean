@@ -113,7 +113,8 @@ lemma shComp'_assoc (j₁ : A ⟶ B) (j₂ : B ⟶ C) (j₃ : C ⟶ D) (j₁₂ 
     (h₁₂ : j₁ ≫ j₂ = j₁₂) (h₂₃ : j₂ ≫ j₃ = j₂₃) (h : j₁₂ ≫ j₃ = j) (h' : j₁ ≫ j₂₃ = j) :
     (F.shComp' j₁₂ j₃ j h).hom ≫ Functor.whiskerRight (F.shComp' j₁ j₂ j₁₂ h₁₂).hom (F.sh j₃) ≫
         (Functor.associator _ _ _).hom =
-      (F.shComp' j₁ j₂₃ j h').hom ≫ Functor.whiskerLeft (F.sh j₁) (F.shComp' j₂ j₃ j₂₃ h₂₃).hom := by
+      (F.shComp' j₁ j₂₃ j h').hom ≫
+        Functor.whiskerLeft (F.sh j₁) (F.shComp' j₂ j₃ j₂₃ h₂₃).hom := by
   apply (conjugateEquiv ((F.shAdj j₁).comp ((F.shAdj j₂).comp (F.shAdj j₃))) (F.shAdj j)).injective
   rw [← conjugateEquiv_comp _ ((F.shAdj j₁).comp (F.shAdj j₂₃)),
     ← conjugateEquiv_comp _ ((F.shAdj j₁₂).comp (F.shAdj j₃)),
@@ -138,7 +139,7 @@ lemma shComp'_assoc_inv_app (j₁ : A ⟶ B) (j₂ : B ⟶ C) (j₃ : C ⟶ D) (
   rw [← cancel_epi ((F.sh j₃).map ((F.shComp' j₁ j₂ j₁₂ h₁₂).hom.app M)),
     ← cancel_epi ((F.shComp' j₁₂ j₃ j h).hom.app M)]
   simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp, Iso.hom_inv_id_app_assoc]
+    Category.id_comp]
   rw [reassoc_of% this]
   simp
 

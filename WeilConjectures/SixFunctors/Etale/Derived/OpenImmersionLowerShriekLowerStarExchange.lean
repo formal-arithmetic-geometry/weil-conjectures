@@ -30,8 +30,9 @@ mate, along the adjunctions `D(g'^*) ⊣ Rg'_*` and `D(g''^*) ⊣ Rg''_*`, of th
 derived base change isomorphism `D(g'^*) ⋙ Dj'_! ≅ Dj_! ⋙ D(g''^*)` for the extension by zero.
 Since the pullbacks are exact, this needs no monoidal structure on the coefficients.
 
-When `g''` is proper and the coefficients are torsion, this map is an isomorphism (stated, not
-yet proved); this is the key step in the proof of the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`.
+When `g''` is proper and the coefficients are torsion, this map is an isomorphism; this is the
+key step in the proof of the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`).
 
 ## Main definitions
 
@@ -41,26 +42,13 @@ yet proved); this is the key step in the proof of the composition law `R(f ≫ g
 ## Main results
 
 - `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring`:
-  with torsion coefficients `Λ` and `g''` proper, the exchange map is an isomorphism (not proved
-  yet; see its docstring).
+  with torsion coefficients `Λ` and `g''` proper, the exchange map is an isomorphism.
 
 ## TODO
 
-- Prove base change along an open immersion on unbounded derived categories,
-  `j^* Rg''_* ≅ Rg'_* j'^*`; it holds for any `g''`, since `j^*` has the exact left adjoint
-  `j_!` and so preserves K-injectives.
-- Prove that `D(j^*)` of the exchange map agrees with this base change isomorphism, once
-  `j^* j_! ≅ 𝟭` and `j'^* j'_! ≅ 𝟭` are used to identify the sources and targets.
-- Prove the isomorphism statement
-  `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring`
-  along the plan in its docstring, using the two items above and
-  `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`.
 - Redefine `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationComparison` as
   this exchange map for the square `(𝟙 X, c.i, d.i, r.hom)`, whiskered by `R(d.g)_*` and
-  composed with `R(𝟙 X)_* ≅ 𝟭` and `R(r.hom)_* ⋙ R(d.g)_* ≅ R(c.g)_*`. Its invertibility then
-  follows from that of the exchange map, which removes the `sorry` in
-  `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison` in favour
-  of the more general statement. This first needs
+  composed with `R(𝟙 X)_* ≅ 𝟭` and `R(r.hom)_* ⋙ R(d.g)_* ≅ R(c.g)_*`. This first needs
   `AlgebraicGeometry.Etale.refinementLowerShriekBaseChangeDerivedIso` to be restated as a special
   case of `AlgebraicGeometry.Etale.mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso`.
 
@@ -145,17 +133,13 @@ torsion as an additive group, then for a cartesian square `g' ≫ j = j' ≫ g''
 `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*` on the unbounded derived categories `D(-_ét, Λ)` is an
 isomorphism.
 
-The statement fails for general coefficients, which is why `Λ` is torsion here. With `Λ` torsion
-and `g''` proper it holds by the argument of
-`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`: the
-question is local on `Z`, and over a quasi-compact open of `Z` the proper map `g''` has bounded
-fibre dimension, so `Rg''_*` has finite cohomological dimension on torsion sheaves and the
-bounded below statement passes to unbounded complexes.
+The statement fails for general coefficients, which is why `Λ` is torsion here.
 
-Proof plan: with `i` the closed complement of `j`, it suffices to check the claim after `D(j^*)`
-and after `D(i^*)`.
-- After `D(j^*)` it follows from base change along the open immersion `j`,
-  `j^* Rg''_* ≅ Rg'_* j'^*`, once `j^* j_! ≅ 𝟭` and `j'^* j'_! ≅ 𝟭` identify both sides.
+Proof: with `i` the closed complement of `j`, it suffices to check the claim after `D(j^*)` and
+after `D(i^*)` (open–closed conservativity).
+- After `D(j^*)` it is formal: the mate of the exchange map under `j_! ⊣ j^*` and `j'_! ⊣ j'^*`
+  is the conjugate of the base change isomorphism, and the units of `j_! ⊣ j^*` and
+  `j'_! ⊣ j'^*` are isomorphisms (`CategoryTheory.isIso_map_mateEquiv_app_of_isIso`).
 - After `D(i^*)` both sides vanish: the source because `i^* j_! = 0`, and the target by proper
   base change for `g''` along `i`, which is
   `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`, since

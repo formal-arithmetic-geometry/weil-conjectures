@@ -593,6 +593,8 @@ public import WeilConjectures.Compactification.RefinementPullback
 public import WeilConjectures.Compactification.RefinementUniqueness
 public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.StrictTransformBlowup
+public import WeilConjectures.Compactification.Tower
+public import WeilConjectures.Compactification.Triangle
 public import WeilConjectures.Compactification.TwoOpen
 public import WeilConjectures.Compactification.TwoOpenComparison
 public import WeilConjectures.Compactification.TwoOpenSetup
@@ -1424,6 +1426,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.IdentityLaw
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalism
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
@@ -1467,6 +1471,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Derived
@@ -1539,6 +1544,14 @@ public import WeilConjectures.SixFunctors.Finite.Isotypic
 public import WeilConjectures.SixFunctors.Finite.Stalk
 public import WeilConjectures.SixFunctors.Integral.BaseChange
 public import WeilConjectures.SixFunctors.Integral.Exact
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Associativity
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Basic
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Canonical
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Coherence
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Identity
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Pasting
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.OpenClosed.AxiomCensus
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion

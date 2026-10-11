@@ -162,7 +162,8 @@ noncomputable abbrev towerE₁ : Compactification (f ≫ (towerE₂ g h).i) :=
     ((HasCompactification.compactification h).comp (towerE₂ g h))
 
 /-- The compactification of `(f ≫ g) ≫ ch.i` underlying `Tower.ofHasCompactification`. -/
-noncomputable abbrev towerE : Compactification ((f ≫ g) ≫ (HasCompactification.compactification h).i) :=
+noncomputable abbrev towerE :
+    Compactification ((f ≫ g) ≫ (HasCompactification.compactification h).i) :=
   ((towerE₂ g h).comp (towerE₁ f g h)).copy (Category.assoc _ _ _)
 
 /-- The open immersion `cf.Z ⟶ cfg.Z` underlying `Tower.ofHasCompactification`. -/
