@@ -14,6 +14,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructur
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.DeligneLaumon.AffineLine.Punctual
 public import WeilConjectures.WeilSheaf.HomologyShift
+public import WeilConjectures.WeilSheaf.HomologySequence
+public import WeilConjectures.WeilSheaf.SupportSubobject
+public import WeilConjectures.Mathlib.CategoryTheory.Simple
 
 /-!
 # The curve perverse t-structure and Fourier exactness
@@ -228,6 +231,296 @@ theorem isCurvePerverse_toComplex_obj (G : WeilSheaf k₀ l X) (hG : G.support.F
   exact hG
 
 end Curve
+
+section Heart
+
+variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- For `K` in degrees `≤ n` and `L` in degrees `≥ n`, a morphism `K ⟶ L` is determined by the
+map it induces on `𝓗ⁿ`, and every morphism `𝓗ⁿK ⟶ 𝓗ⁿL` arises in this way. -/
+theorem homologySheaf_map_bijective {K L : WeilComplex k₀ l X} (n : ℤ)
+    (hK : ∀ a, n < a → IsZero ((homologySheaf a).obj K))
+    (hL : ∀ a, a < n → IsZero ((homologySheaf a).obj L)) :
+    Function.Bijective (fun f : K ⟶ L ↦ (homologySheaf n).map f) := by
+  have : K.obj.IsLE n := (_root_.DerivedCategory.isLE_iff _ _).2 fun a ha ↦
+    (isZero_homologySheaf_obj_iff a K).1 (hK a ha)
+  have : L.obj.IsGE n := (_root_.DerivedCategory.isGE_iff _ _).2 fun a ha ↦
+    (isZero_homologySheaf_obj_iff a L).1 (hL a ha)
+  have h := _root_.DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE
+    (X := K.obj) (Y := L.obj) n
+  refine ⟨fun f g hfg ↦ ObjectProperty.hom_ext _ (h.1 (congrArg (fun φ ↦ φ.hom) hfg)),
+    fun g ↦ ?_⟩
+  obtain ⟨f, hf⟩ := h.2 g.hom
+  exact ⟨ObjectProperty.homMk f, ObjectProperty.hom_ext _ hf⟩
+
+/-- A Weil complex all of whose cohomology sheaves vanish is zero. -/
+theorem isZero_of_forall_isZero_homologySheaf {K : WeilComplex k₀ l X}
+    (h : ∀ a, IsZero ((homologySheaf a).obj K)) : IsZero K := by
+  have : K.obj.IsLE 0 := (_root_.DerivedCategory.isLE_iff _ _).2 fun a _ ↦
+    (isZero_homologySheaf_obj_iff a K).1 (h a)
+  have : K.obj.IsGE 1 := (_root_.DerivedCategory.isGE_iff _ _).2 fun a _ ↦
+    (isZero_homologySheaf_obj_iff a K).1 (h a)
+  exact IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) K
+    (_root_.DerivedCategory.TStructure.t.isZero K.obj 0 1)
+
+/-- Two Weil complexes concentrated in degree `n` with isomorphic cohomology sheaves `𝓗ⁿ` are
+isomorphic. -/
+theorem nonempty_iso_of_homologySheaf_iso {K L : WeilComplex k₀ l X} (n : ℤ)
+    (hK : ∀ a, a ≠ n → IsZero ((homologySheaf a).obj K))
+    (hL : ∀ a, a ≠ n → IsZero ((homologySheaf a).obj L))
+    (e : (homologySheaf n).obj K ≅ (homologySheaf n).obj L) : Nonempty (K ≅ L) := by
+  obtain ⟨f, hf⟩ := (homologySheaf_map_bijective n (fun a ha ↦ hK a ha.ne')
+    (fun a ha ↦ hL a ha.ne)).2 e.hom
+  have : IsIso ((ObjectProperty.ι _).map f) := by
+    rw [_root_.DerivedCategory.isIso_iff]
+    intro a
+    by_cases ha : a = n
+    · subst ha
+      have : IsIso ((homologySheaf a).map f) := by
+        simp only at hf
+        rw [hf]
+        infer_instance
+      exact (inferInstance : IsIso ((ObjectProperty.ι _).map ((homologySheaf a).map f)))
+    · exact ⟨⟨0, ((isZero_homologySheaf_obj_iff a K).1 (hK a ha)).eq_of_src _ _,
+        ((isZero_homologySheaf_obj_iff a L).1 (hL a ha)).eq_of_src _ _⟩⟩
+  have := isIso_of_fully_faithful (ObjectProperty.ι _) f
+  exact ⟨asIso f⟩
+
+/-- The shifted classes `ᵖD^{≤n}` are compatible with the shift: `K[m] ∈ ᵖD^{≤n'}` for
+`K ∈ ᵖD^{≤n}` and `m + n' = n`. -/
+theorem IsCurvePerverseLE.shift {n : ℤ} {K : WeilComplex k₀ l X} (hK : K.IsCurvePerverseLE n)
+    (m n' : ℤ) (h : m + n' = n) : (K⟦m⟧).IsCurvePerverseLE n' := by
+  refine ⟨fun a ha ↦ (hK.1 (m + a) (by omega)).of_iso (homologySheafShiftIso K m a (m + a) rfl),
+    ?_⟩
+  rw [WeilSheaf.support_congr (homologySheafShiftIso K m n' n h)]
+  exact hK.2
+
+/-- A Weil sheaf `G` placed in degree `-1` has `𝓗ᵃ = 0` for `a ≠ -1`. -/
+theorem isZero_homologySheaf_shift_one_toComplex (G : WeilSheaf k₀ l X) {a : ℤ} (ha : a ≠ -1) :
+    IsZero ((homologySheaf a).obj ((WeilSheaf.toComplex.obj G)⟦(1 : ℤ)⟧)) :=
+  isZero_homologySheaf_shift_toComplex G (by omega)
+
+/-- A Weil sheaf `G` of finite support placed in degree `-1` lies in `ᵖD^{≤-1}`. -/
+theorem isCurvePerverseLE_shift_one_toComplex (G : WeilSheaf k₀ l X) (hG : G.support.Finite) :
+    ((WeilSheaf.toComplex.obj G)⟦(1 : ℤ)⟧).IsCurvePerverseLE (-1) := by
+  refine ⟨fun a ha ↦ isZero_homologySheaf_shift_one_toComplex G (by omega), ?_⟩
+  rw [WeilSheaf.support_congr (homologySheafShiftToComplexIso G 1 (-1) (by norm_num))]
+  exact hG
+
+/-- A Weil sheaf `G` without nonzero subsheaf of finite support, placed in degree `-1`, is curve
+perverse. -/
+theorem isCurvePerverse_shift_one_toComplex (G : WeilSheaf k₀ l X)
+    (hG : ∀ (G' : WeilSheaf k₀ l X) (i : G' ⟶ G), Mono i → G'.support.Finite → IsZero G') :
+    ((WeilSheaf.toComplex.obj G)⟦(1 : ℤ)⟧).IsCurvePerverse := by
+  refine ⟨⟨fun a ha ↦ isZero_homologySheaf_shift_one_toComplex G (by omega), ?_⟩,
+    ⟨fun a ha ↦ isZero_homologySheaf_shift_one_toComplex G (by omega),
+      fun G' i _ hG' ↦ hG G' (i ≫ (homologySheafShiftToComplexIso G 1 (-1) (by norm_num)).hom)
+        inferInstance hG'⟩⟩
+  rw [WeilSheaf.support_eq_empty_of_isZero
+    (isZero_homologySheaf_shift_one_toComplex G (by norm_num))]
+  exact Set.finite_empty
+
+variable [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- Morphisms from the upper class `ᵖD^{≤0}` to the shift `R[-1]` of an object `R` of the lower
+class `ᵖD^{≥0}` vanish: `R[-1]` lies in `ᵖD^{≥1}`. -/
+theorem hom_shift_neg_one_eq_zero {M R : WeilComplex k₀ l X} (hM : M.IsCurvePerverseUpper)
+    (hR : R.IsCurvePerverseLower) (g : M ⟶ R⟦(-1 : ℤ)⟧) : g = 0 := by
+  apply (shiftFunctor (WeilComplex k₀ l X) (1 : ℤ)).map_injective
+  rw [Functor.map_zero, ← cancel_mono ((shiftFunctorCompIsoId (WeilComplex k₀ l X) (-1 : ℤ) 1
+    (by norm_num)).hom.app R), zero_comp]
+  exact (isCurvePerverseLower_iff_forall_hom_eq_zero R).1 hR _
+    (IsCurvePerverseLE.shift (n := 0) hM 1 (-1) (by norm_num)) _
+
+/-- In a distinguished triangle `T₁ ⟶ T₂ ⟶ T₃ ⟶ T₁[1]` with `T₃` in the lower class, a morphism
+`u : M ⟶ T₁` from the upper class with `u ≫ T.mor₁ = 0` vanishes. -/
+theorem eq_zero_of_comp_mor₁_eq_zero (T : Pretriangulated.Triangle (WeilComplex k₀ l X))
+    (hT : T ∈ distTriang _) (hR : T.obj₃.IsCurvePerverseLower) {M : WeilComplex k₀ l X}
+    (hM : M.IsCurvePerverseUpper) (u : M ⟶ T.obj₁) (hu : u ≫ T.mor₁ = 0) : u = 0 := by
+  obtain ⟨g, rfl⟩ := Pretriangulated.Triangle.coyoneda_exact₂ _
+    (Pretriangulated.inv_rot_of_distTriang _ hT) u hu
+  rw [hom_shift_neg_one_eq_zero hM hR g, zero_comp]
+
+/-- **Short exact sequences of the heart** (`thm-a1-curve-perverse-heart`, part (5)): if
+`Q ⟶ P ⟶ R ⟶ Q[1]` is a distinguished triangle with `Q` and `P` curve perverse and `R` in the
+lower class, then `Q ⟶ P` is a monomorphism of the curve perverse heart. -/
+theorem mono_homMk_of_distinguished
+    {Q P : ObjectProperty.FullSubcategory (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X))}
+    {R : WeilComplex k₀ l X} (f : Q.obj ⟶ P.obj) (g : P.obj ⟶ R) (h : R ⟶ Q.obj⟦(1 : ℤ)⟧)
+    (hT : Pretriangulated.Triangle.mk f g h ∈ distTriang _) (hR : R.IsCurvePerverseLower) :
+    Mono (ObjectProperty.homMk f : Q ⟶ P) :=
+  Preadditive.mono_of_cancel_zero _ fun {M} u hu ↦ ObjectProperty.hom_ext _
+    (eq_zero_of_comp_mor₁_eq_zero _ hT hR M.property.1 u.hom (congrArg (fun φ ↦ φ.hom) hu))
+
+/-- A monomorphism `f : Q ⟶ P` of the curve perverse heart is left cancellable against morphisms
+`u : M ⟶ Q` of Weil complexes from a curve perverse `M`. -/
+theorem eq_zero_of_comp_hom_eq_zero
+    {Q P : ObjectProperty.FullSubcategory (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X))}
+    (f : Q ⟶ P) [Mono f] {M : WeilComplex k₀ l X} (hM : M.IsCurvePerverse) (u : M ⟶ Q.obj)
+    (hu : u ≫ f.hom = 0) : u = 0 := by
+  have : (ObjectProperty.homMk u : (⟨M, hM⟩ : ObjectProperty.FullSubcategory
+      (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X))) ⟶ Q) = 0 :=
+    (cancel_mono f).1 (ObjectProperty.hom_ext _ (by simpa using hu))
+  exact congrArg (fun φ ↦ φ.hom) this
+
+
+/-- **Cokernels in the heart** (`thm-a1-curve-perverse-heart`, part (5)): the cone `C` of a
+monomorphism `f : Q ⟶ P` of the curve perverse heart is curve perverse, so that
+`0 ⟶ Q ⟶ P ⟶ C ⟶ 0` is a short exact sequence of the heart. The long exact sequence of
+cohomology sheaves shows that `C` lies in the upper class and in degrees `≥ -2`; a nonzero
+`𝓗⁻²C ⊆ ker(𝓗⁻¹Q ⟶ 𝓗⁻¹P)`, or a nonzero punctual subsheaf of `𝓗⁻¹C`, would give a nonzero
+morphism to `Q` from a curve perverse object killed by `f`. -/
+theorem isCurvePerverse_of_mono
+    {Q P : ObjectProperty.FullSubcategory (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X))}
+    (f : Q ⟶ P) [Mono f] {C : WeilComplex k₀ l X} (g : P.obj ⟶ C) (h : C ⟶ Q.obj⟦(1 : ℤ)⟧)
+    (hT : Pretriangulated.Triangle.mk f.hom g h ∈ distTriang _) : C.IsCurvePerverse := by
+  set T := Pretriangulated.Triangle.mk f.hom g h
+  have hQ := Q.property
+  have hP := P.property
+  have hC₀ (a : ℤ) (h₁ : IsZero ((homologySheaf a).obj P.obj))
+      (h₂ : IsZero ((homologySheaf (a + 1)).obj Q.obj)) : IsZero ((homologySheaf a).obj C) :=
+    (homologySheaf_exact₃ T a (a + 1) hT rfl).isZero_X₂ (h₁.eq_of_src _ _) (h₂.eq_of_tgt _ _)
+  have hup : C.IsCurvePerverseUpper := by
+    refine ⟨fun a ha ↦ hC₀ a (hP.1.1 a ha) (hQ.1.1 (a + 1) (by omega)), ?_⟩
+    have : Epi ((homologySheaf (0 : ℤ)).map g) :=
+      (homologySheaf_exact₃ T 0 1 hT rfl).epi_f ((hQ.1.1 1 one_pos).eq_of_tgt _ _)
+    exact hP.1.2.subset (WeilSheaf.support_subset_of_epi ((homologySheaf (0 : ℤ)).map g))
+  -- `𝓗⁻²C` embeds into the kernel of `𝓗⁻¹Q ⟶ 𝓗⁻¹P`, which vanishes as `f` is a monomorphism
+  have hm2 : IsZero ((homologySheaf (-2)).obj C) := by
+    set K := (homologySheaf (-2)).obj C
+    let δ := homologySheafδ T (-2) (-1) (by norm_num)
+    have : Mono δ := (homologySheaf_exact₃ T (-2) (-1) hT (by norm_num)).mono_g
+      ((hP.2.1 (-2) (by norm_num)).eq_of_src _ _)
+    have hδ0 : δ ≫ (homologySheaf (-1)).map f.hom = 0 :=
+      homologySheafδ_comp_map_mor₁ T (-2) (-1) hT (by norm_num)
+    let K' := (WeilSheaf.toComplex.obj K)⟦(1 : ℤ)⟧
+    let eK : (homologySheaf (-1)).obj K' ≅ K := homologySheafShiftToComplexIso K 1 (-1) (by norm_num)
+    have hK' : K'.IsCurvePerverse := isCurvePerverse_shift_one_toComplex K
+      fun G i _ hG ↦ hQ.2.2 G (i ≫ δ) inferInstance hG
+    obtain ⟨u, hu⟩ := (homologySheaf_map_bijective (-1) (K := K') (L := Q.obj)
+      (fun a ha ↦ isZero_homologySheaf_shift_one_toComplex K (by omega))
+      (fun a ha ↦ hQ.2.1 a ha)).2 (eK.hom ≫ δ)
+    simp only at hu
+    have hu' : u ≫ f.hom = 0 := (homologySheaf_map_bijective (-1) (K := K') (L := P.obj)
+      (fun a ha ↦ isZero_homologySheaf_shift_one_toComplex K (by omega))
+      (fun a ha ↦ hP.2.1 a ha)).1 (by simp [hu, hδ0])
+    have hu0 := eq_zero_of_comp_hom_eq_zero f hK' u hu'
+    rw [hu0, Functor.map_zero] at hu
+    exact IsZero.of_mono_eq_zero δ ((cancel_epi eK.hom).1 (by rw [← hu, comp_zero]))
+  have hge (a : ℤ) (ha : a < -1) : IsZero ((homologySheaf a).obj C) := by
+    obtain ha' | rfl := lt_or_eq_of_le (show a ≤ -2 by omega)
+    · exact hC₀ a (hP.2.1 a (by omega)) (hQ.2.1 (a + 1) (by omega))
+    · exact hm2
+  -- a punctual subsheaf of `𝓗⁻¹C` gives a morphism from a punctual sheaf to `Q` killed by `f`
+  refine ⟨hup, hge, fun G i _ hG ↦ ?_⟩
+  let G1 := (WeilSheaf.toComplex.obj G)⟦(1 : ℤ)⟧
+  let eG : (homologySheaf (-1)).obj G1 ≅ G := homologySheafShiftToComplexIso G 1 (-1) (by norm_num)
+  obtain ⟨v, hv⟩ := (homologySheaf_map_bijective (-1) (K := G1) (L := C)
+    (fun a ha ↦ isZero_homologySheaf_shift_one_toComplex G (by omega)) hge).2 (eG.hom ≫ i)
+  simp only at hv
+  obtain ⟨w, hw⟩ : ∃ w : WeilSheaf.toComplex.obj G ⟶ Q.obj,
+      (shiftFunctor (WeilComplex k₀ l X) (1 : ℤ)).map w = v ≫ h :=
+    ⟨_, Functor.map_preimage _ _⟩
+  have hwf : w ≫ f.hom = 0 := (shiftFunctor (WeilComplex k₀ l X) (1 : ℤ)).map_injective (by
+    rw [Functor.map_comp, Functor.map_zero, hw, Category.assoc]
+    erw [Pretriangulated.comp_distTriang_mor_zero₃₁ _ hT]
+    rw [comp_zero])
+  rw [eq_zero_of_comp_hom_eq_zero f (isCurvePerverse_toComplex_obj G hG) w hwf,
+    Functor.map_zero] at hw
+  obtain ⟨v', rfl⟩ := Pretriangulated.Triangle.coyoneda_exact₃ T hT v hw.symm
+  rw [(isCurvePerverseLower_iff_forall_hom_eq_zero P.obj).1 hP.2 G1
+    (isCurvePerverseLE_shift_one_toComplex G hG) v', zero_comp, Functor.map_zero] at hv
+  exact IsZero.of_mono_eq_zero i ((cancel_epi eG.hom).1 (by rw [← hv, comp_zero]))
+
+/-- A Weil sheaf `G` of finite support placed in degree zero, as an object of the curve perverse
+heart. -/
+noncomputable abbrev punctualObj (G : WeilSheaf k₀ l X) (hG : G.support.Finite) :
+    ObjectProperty.FullSubcategory (IsCurvePerverse : ObjectProperty (WeilComplex k₀ l X)) :=
+  ⟨WeilSheaf.toComplex.obj G, isCurvePerverse_toComplex_obj G hG⟩
+
+/-- **Punctual simple objects** (`prop-a1-curve-perverse-simples`): a Weil sheaf `G` of finite
+support placed in degree zero is simple in the curve perverse heart exactly when it is a simple
+Weil sheaf. A subsheaf `G' ⊆ G` gives a short exact sequence `0 ⟶ G' ⟶ G ⟶ G/G' ⟶ 0` of the
+heart; conversely, the long exact sequence of a subobject `Q ⊆ G[0]` of the heart shows that
+`Q = 𝓗⁰Q[0]` with `𝓗⁰Q ⊆ G`. -/
+theorem simple_punctualObj_iff (G : WeilSheaf k₀ l X) (hG : G.support.Finite) :
+    Simple (punctualObj G hG) ↔ Simple G := by
+  constructor
+  · intro hS
+    refine ⟨fun {G'} i _ ↦ ?_⟩
+    have hG' : G'.support.Finite := hG.subset (WeilSheaf.support_subset_of_mono i)
+    have hc : (cokernel i).support.Finite :=
+      hG.subset (WeilSheaf.support_subset_of_epi (cokernel.π i))
+    have hSe : (ShortComplex.mk i (cokernel.π i) (cokernel.condition i)).ShortExact :=
+      { exact := ShortComplex.exact_cokernel i }
+    have hm := mono_homMk_of_distinguished (Q := punctualObj G' hG') (P := punctualObj G hG) _ _ _
+      (WeilSheaf.singleTriangle_distinguished hSe) (isCurvePerverse_toComplex_obj _ hc).2
+    have h1 : IsIso (ObjectProperty.homMk (WeilSheaf.toComplex.map i) :
+        punctualObj G' hG' ⟶ punctualObj G hG) ↔ IsIso i := by
+      rw [← isIso_iff_of_reflects_iso _ (ObjectProperty.ι _),
+        ← isIso_iff_of_reflects_iso i WeilSheaf.toComplex]
+      exact Iff.rfl
+    have h2 : (ObjectProperty.homMk (WeilSheaf.toComplex.map i) :
+        punctualObj G' hG' ⟶ punctualObj G hG) ≠ 0 ↔ i ≠ 0 := by
+      rw [not_iff_not, ← Functor.map_eq_zero_iff WeilSheaf.toComplex]
+      exact ⟨fun h ↦ congrArg (fun φ ↦ φ.hom) h, fun h ↦ ObjectProperty.hom_ext _ h⟩
+    rw [← h1, ← h2]
+    exact Simple.mono_isIso_iff_nonzero _
+  · intro hS
+    have hG0 : ¬ IsZero G := Simple.not_isZero G
+    refine simple_of_forall_mono (fun hz ↦ hG0 ?_) fun {Q} f _ ↦ ?_
+    · exact ((homologySheaf (0 : ℤ)).map_isZero ((ObjectProperty.ι _).map_isZero hz)).of_iso
+        (WeilSheaf.toComplexCompHomologySheafIso.app G).symm
+    obtain ⟨C, g, h, hT⟩ := Pretriangulated.distinguished_cocone_triangle f.hom
+    have hC := isCurvePerverse_of_mono f g h hT
+    set T := Pretriangulated.Triangle.mk f.hom g h
+    have hQ := Q.property
+    have hPm1 : IsZero ((homologySheaf (-1)).obj (WeilSheaf.toComplex.obj G)) :=
+      isZero_homologySheaf_singleComplex (by norm_num) G
+    have hQm1 : IsZero ((homologySheaf (-1)).obj Q.obj) := by
+      have : Mono ((homologySheaf (-1)).map f.hom) :=
+        (homologySheaf_exact₁ T (-2) (-1) hT (by norm_num)).mono_g
+          ((hC.2.1 (-2) (by norm_num)).eq_of_src _ _)
+      exact IsZero.of_mono ((homologySheaf (-1)).map f.hom) hPm1
+    have : Mono (homologySheafδ T (-1) 0 (by norm_num)) :=
+      (homologySheaf_exact₃ T (-1) 0 hT (by norm_num)).mono_g (hPm1.eq_of_src _ _)
+    have hCm1 : IsZero ((homologySheaf (-1)).obj C) :=
+      hC.2.2 _ (𝟙 _) inferInstance (hQ.1.2.subset
+        (WeilSheaf.support_subset_of_mono (homologySheafδ T (-1) 0 _)))
+    have : Mono ((homologySheaf (0 : ℤ)).map f.hom) :=
+      (homologySheaf_exact₁ T (-1) 0 hT (by norm_num)).mono_g (hCm1.eq_of_src _ _)
+    let e0 := WeilSheaf.toComplexCompHomologySheafIso.app G
+    by_cases hφ : (homologySheaf (0 : ℤ)).map f.hom ≫ e0.hom = 0
+    · left
+      have h0 := IsZero.of_mono_eq_zero _ hφ
+      refine ObjectProperty.hom_ext _ (IsZero.eq_of_src ?_ _ _)
+      refine isZero_of_forall_isZero_homologySheaf fun a ↦ ?_
+      obtain ha | rfl | ha := lt_trichotomy a 0
+      · obtain ha' | rfl := lt_or_eq_of_le (show a ≤ -1 by omega)
+        · exact hQ.2.1 a (by omega)
+        · exact hQm1
+      · exact h0
+      · exact hQ.1.1 a ha
+    · right
+      have := (Simple.mono_isIso_iff_nonzero (X := G) _).2 hφ
+      have : IsIso ((homologySheaf (0 : ℤ)).map f.hom) := IsIso.of_isIso_comp_right _ e0.hom
+      have : Epi ((homologySheaf (0 : ℤ)).map g) :=
+        (homologySheaf_exact₃ T 0 1 hT rfl).epi_f ((hQ.1.1 1 one_pos).eq_of_tgt _ _)
+      have h0 : IsZero ((homologySheaf (0 : ℤ)).obj C) :=
+        IsZero.of_epi_eq_zero ((homologySheaf (0 : ℤ)).map g)
+        ((homologySheaf_exact₂ T 0 hT).epi_f_iff.1 (inferInstanceAs (Epi
+          ((homologySheaf (0 : ℤ)).map f.hom))))
+      have hCz : IsZero C := isZero_of_forall_isZero_homologySheaf fun a ↦ by
+        obtain ha | rfl | ha := lt_trichotomy a 0
+        · obtain ha' | rfl := lt_or_eq_of_le (show a ≤ -1 by omega)
+          · exact hC.2.1 a (by omega)
+          · exact hCm1
+        · exact h0
+        · exact hC.1.1 a ha
+      have : IsIso ((ObjectProperty.ι _).map f) :=
+        (Pretriangulated.Triangle.isZero₃_iff_isIso₁ T hT).1 hCz
+      exact isIso_of_fully_faithful (ObjectProperty.ι _) f
+end Heart
 
 end WeilComplex
 
