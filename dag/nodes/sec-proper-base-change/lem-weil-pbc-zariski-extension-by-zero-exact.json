@@ -205,5 +205,28 @@
   "worker": "stage1",
   "summary": "Checked the statement against Stacks 03DJ (sites-modules.tex line 2160) for (X_Zar, Z) and U; kept it unchanged. Not a Mathlib leaf (no extension by zero in Mathlib; Functor.sheafPullback along the inclusion of opens is not shown exact and not identified with (j_{p!})^#; searches of all three kinds recorded). Proof follows 03DJ: additivity and adjunction from the sibling lem-weil-pbc-zariski-extension-by-zero-adjunction (1),(2) (cited by statement only); monomorphisms are sectionwise injective (sectionwise kernels, lem-weil-pbc-sheafification-exact (1) on U_Zar), so j_{p!}alpha has zero kernel in PAb(X_Zar), and sheafification preserves finite limits (lem-weil-pbc-sheafification-exact (2)) so j_!alpha = (j_{p!}alpha)^# has zero kernel and is mono; right exactness of 03DJ (Categories 0039) is written out as: beta is a cokernel of alpha (lem-weil-pbc-abelian-exact-epi-cokernel (a)), a cokernel is a colimit of a parallel pair, and the left adjoint j_! preserves it (lem-weil-pbc-left-adjoint-preserves-colimits); then lem-weil-pbc-abelian-exact-epi-cokernel (c) gives the short exact sequence. No new nodes. The citer lem-weil-pbc-zariski-open-restriction-injectives Step 3 uses exactly the exactness (through preservation of monomorphisms in lem-sp-right-adjoint-preserves-injectives), which Steps 3 and 5 give."
  },
- "reviewed": "2026-10-10 L: 5 steps checked against 03DJ: j_! additive and j_! alpha = (j_{p!} alpha)^#, monomorphisms are sectionwise injective, j_{p!} alpha has zero kernel and sheafification preserves finite limits, cokernels preserved as colimits by the left adjoint (adjunction node (2)), short exactness by abelian-exact-epi-cokernel (c); citer zariski-open-restriction-injectives step 3 needs only preservation of monomorphisms"
+ "reviewed": "2026-10-10 L: 5 steps checked against 03DJ: j_! additive and j_! alpha = (j_{p!} alpha)^#, monomorphisms are sectionwise injective, j_{p!} alpha has zero kernel and sheafification preserves finite limits, cokernels preserved as colimits by the left adjoint (adjunction node (2)), short exactness by abelian-exact-epi-cokernel (c); citer zariski-open-restriction-injectives step 3 needs only preservation of monomorphisms",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact",
+  "declaration": "AlgebraicGeometry.zariski_extensionByZero_exact",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiExtensionByZeroExact.lean",
+  "statement": "theorem zariski_extensionByZero_exact (X : Scheme.{u}) (U : X.Opens) : (∀ S : ShortComplex (Sheaf ((Opens.grothendieckTopology X).over U) AddCommGrpCat.{u}), S.ShortExact → (S.map (Functor.sheafPullbackConstruction.sheafPullback (Over.forget U) AddCommGrpCat.{u} ((Opens.grothendieckTopology X).over U) (Opens.grothendieckTopology X))).ShortExact) ∧ (∀ {A B : Sheaf ((Opens.grothendieckTopology X).over U) AddCommGrpCat.{u}} (f : A ⟶ B), Mono f → Mono ((Functor.sheafPullbackConstruction.sheafPullback (Over.forget U) AddCommGrpCat.{u} ((Opens.grothendieckTopology X).over U) (Opens.grothendieckTopology X)).map f))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.zariski_extensionByZero_additive",
+   "AlgebraicGeometry.zariski_extensionByZero_exact"
+  ],
+  "fixed_by": "R-zez"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zez",
+  "group": "P1",
+  "result": "fix",
+  "note": "X_Zar = Opens.grothendieckTopology X, U_Zar = its over U; j_! tied to sheafPullbackConstruction.sheafPullback (Over.forget U) (= presheafToSheaf of lan = j_{p!}); additivity as @[instance] theorem; SES-preservation and mono-preservation conjuncts; removed tautological hshort/hmono, free j binder, inline [j.Additive], big-site/u+1 encoding"
+ }
 }

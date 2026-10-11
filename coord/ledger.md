@@ -5563,3 +5563,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:32 L: merged deliver/R1/lem-pc-rf-base-change-single-complex-criterion (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.SingleComplexBaseChangeCriterion AlgebraicGeometry.singleComplexBaseChangeCriterion; new nodes: def-pc-derived-pullback-tensor-comparison)
 - 18:32 L: merged deliver/J1/lem-weil-pbc-cech-nerve-free-homology (stage 2; reviewer FIX; first push; Sheaf.Paper.CechNerveFreeHomology CategoryTheory.freeModule_cechNerve_homology)
 - 18:32 L: merged deliver/G1/lem-weil-pbc-site-equivalence-is-morphism-of-sites (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.SiteEquivalenceMorphismOfSites CategoryTheory.site_equivalence_is_morphism_of_sites)
+- 18:33 L: merged deliver/P1/lem-weil-pbc-zariski-extension-by-zero-exact (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact AlgebraicGeometry.zariski_extensionByZero_exact)
