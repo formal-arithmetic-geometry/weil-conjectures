@@ -186,5 +186,24 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps follow Stacks 01PU with 01NG: the two twisting sheaves identified (glued vs S(1)-tilde), L invertible via the standard-charts node, X_{s_k} = i^{-1}(D_+(T_k)), these are affine (closed immersion, affine form), ample by the definition with exponent 1. Statement now asserts absolute ampleness (01PS) over the affine base; f-ample is a remark (01VH/01VK). Tags 01PU, 01NG, 01MW, 01PS, 01VH, 01VK verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible",
+  "declaration": "AlgebraicGeometry.projective_closedImmersion_ample_invertible",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveAmpleInvertible.lean",
+  "statement": "theorem projective_closedImmersion_ample_invertible (A : Type u) [CommRing A] (n : ℕ) (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of A)) (i : X ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of A))) [IsClosedImmersion i] (hi : i ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (CommRingCat.of A)) ↘ Spec (.of A)) = f) : ∃ hL : ((Scheme.Modules.tensorPullback i).obj ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt (ULift.{u} (Fin (n + 1))) (Spec (CommRingCat.of A)))).obj (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) (ULift.{u} ℤ)) 1))).IsInvertible, @Scheme.Modules.IsAmple X ((Scheme.Modules.tensorPullback i).obj ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt (ULift.{u} (Fin (n + 1))) (Spec (CommRingCat.of A)))).obj (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) (ULift.{u} ℤ)) 1))) hL ∧ CompactSpace X ∧ ∃ U : ULift.{u} (Fin (n + 1)) → X.Opens, (∀ k, (U k : Set X) = Scheme.Modules.nonvanishingLocus ((Scheme.Modules.tensorPullback i).obj ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt (ULift.{u} (Fin (n + 1))) (Spec (CommRingCat.of A)))).obj (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) (ULift.{u} ℤ)) 1))) (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt (ULift.{u} (Fin (n + 1))) (Spec (CommRingCat.of A)))).obj (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) (ULift.{u} ℤ)) 1))).val.app (Opposite.op ⊤) (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (ProjectiveSpace.toProjInt (ULift.{u} (Fin (n + 1))) (Spec (CommRingCat.of A))))).unit.app (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) (ULift.{u} ℤ)) 1)).val.app (Opposite.op ⊤) ((Proj.unitToTwist (𝒜 := MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) (ULift.{u} ℤ)) (MvPolynomial.isHomogeneous_X (ULift.{u} ℤ) k)).app ⊤ (1 : Γ(Proj (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) (ULift.{u} ℤ)), ⊤)))))) ∧ (∀ k, IsAffineOpen (U k)) ∧ (⨆ k, U k) = ⊤",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pai"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pai",
+  "group": "J1",
+  "result": "fix",
+  "note": "A ring, n:ℕ with ULift (Fin (n+1)) coords; P^n_A = recorded ℙ(·;Spec A), q = ↘ Spec A, ρ = toProjInt onto Proj(ULift ℤ[T]); O(1) = Proj.twist _ 1 pulled by tensorPullback ρ then i; i closed immersion with q∘i=f; L invertible (∃ hL) and IsAmple; CompactSpace X; s_k = unit-section pullbacks of unitToTwist X_k at 1; U k = nonvanishingLocus, affine, ⨆ = ⊤. Fix: expanded file-local notations in the statement."
  }
 }
