@@ -225,5 +225,23 @@
   "by": "L",
   "result": "pass",
   "note": "Nine steps along Stacks' proof of Limits 01YX (the relative spectrum of the colimit of the quasi-coherent algebras f_{i0*} O_{S_i}, not the gluing the brief guessed): reduction to I_{>= 0} (reviewed leaf lem-weil-pbc-colimit-initial-full-subcategory), the algebras and the relative Spec (new node lem-weil-pbc-affine-morphism-relative-spec, Morphisms 01S8/01SA and Constructions 01LW/01LX), the colimit algebra (new node lem-weil-pbc-quasi-coherent-algebra-colimit, Schemes 01ID), the scheme S and its projections, the limit over an affine open by 01YW (reviewed leaf lem-weil-pbc-spec-colimit-limit), uniqueness and existence of factorizations by gluing (lem-weil-pbc-scheme-morphism-gluing), the affine projections and the open-preimage clause (new Mathlib leaf lem-weil-pbc-limit-cone-affine-projections-opens: isAffineHom_π_app and isLimitOpensCone in AffineTransitionLimit.lean, verified), the affine case. Existence of the limit now rests on the two new unsplit nodes (Mathlib has neither the relative Spec nor existence of limits along affine transition maps)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LimitAffineTransition",
+  "declaration": "AlgebraicGeometry.exists_limit_affine_transition",
+  "file": "lean/Sheaf/AlgebraicGeometry/LimitAffineTransition.lean",
+  "statement": "theorem exists_limit_affine_transition {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] : ∃ c : Cone D, Nonempty (IsLimit c) ∧ (∀ i : Iᵒᵖ, IsAffineHom (c.π.app i)) ∧ (∀ (i : Iᵒᵖ) (U : (D.obj i).Opens), Nonempty (IsLimit (opensCone D c i U)) ∧ ∀ {j k : Over i} (f : j ⟶ k), IsAffineHom ((opensDiagram D i U).map f)) ∧ ((∀ i : Iᵒᵖ, IsAffine (D.obj i)) → ∃ e : c.pt ≅ Spec (colimit (D.op ⋙ Scheme.Γ)), ∀ i : Iᵒᵖ, e.hom ≫ Spec.map (colimit.ι (D.op ⋙ Scheme.Γ) (op i)) = c.π.app i ≫ (ΓSpec.adjunction.unit.app (D.obj i)))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lat1110",
+  "group": "M1",
+  "result": "pass",
+  "note": "directed set = Preorder+IsDirected+Nonempty (Stacks nonempty, no stage fixed); D : Iᵒᵖ ⥤ Scheme.{u}; affine transitions = instance IsAffineHom (D.map f); limit exists = ∃ c, Nonempty (IsLimit c); projections IsAffineHom; per stage i and arbitrary open U: Mathlib opensCone is limit (Over i = upper tail of I), restricted transitions IsAffineHom; affine case iso c.pt ≅ Spec(colimit Γ) compatible via Spec.map colimit.ι and ΓSpec unit; #check opensCone/opensDiagram are Mathlib AlgebraicGeometry, types of unit and Spec.map checked; I : Type u tied to Scheme.{u} as Mathlib/NoetherianApproximation"
  }
 }
