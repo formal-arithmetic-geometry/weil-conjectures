@@ -4502,3 +4502,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:48 L: merged deliver/C1/lem-weil-pbc-module-base-change-map-pasting (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting AlgebraicGeometry.Scheme.Modules.moduleBaseChangeMap_pasting)
 - 11:48 L: merged deliver/K1/lem-weil-pbc-descend-finite (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DescendFinite AlgebraicGeometry.exists_isFinite_baseChange_stage)
 - 11:48 L: merged deliver/K1/def-nagata-finite-type-closed-in-fp (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.NagataFinitePresentationEnvelope AlgebraicGeometry.nagataFinitePresentationEnvelope)
+- 11:48 L: merged deliver/C1/lem-weil-pbc-jacobi-zariski-connecting-map-naturality (stage 2; reviewer PASS; first push; Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality Algebra.jacobiZariski_connectingMap_naturality)

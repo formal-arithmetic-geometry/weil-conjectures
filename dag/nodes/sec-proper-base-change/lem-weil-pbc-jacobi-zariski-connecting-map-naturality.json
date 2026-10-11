@@ -194,5 +194,23 @@
   "worker": "stage1",
   "summary": "Statement changed in clause (c): lem-weil-pbc-jacobi-zariski-homology-sequence only asserts that some connecting map exists ('constructed in the proof'), so 'the connecting map' of that node is not determined by its statement and the identity could not be proved from it (C3); (c) now defines ∂_S explicitly by differentiating the coefficients of g (the value the snake-lemma construction of that node's proof gives, and Mathlib's δAux), and the statement adds that ∂_S, ∂_B, c, δ are well defined. Proof in 5 steps by direct computation (proof_origin agent; Stacks 00S2 omits the maps): models of H_1 and ι via the any-variables Kähler basis and the functoriality node; well-definedness through the derivation D on S[C]; θι(h) = Σ (s_α1_B)σ^α mod I^2 via a section σ; δ of it by the Leibniz rule, the extra terms being Σ_c γ(∂g/∂[c]) dσ(c) = 0 because h is a cycle; the case S = B by (2) of the functoriality node. No new node. Mathlib: S = B case is cotangentComplex_comp_h1CotangentEquivCotangent (ExtendScalars.lean:129) up to the identification of θ; formula is δ_eq_δAux; not a leaf. The citer lem-weil-pbc-geometrically-regular-h1-injective (steps 1, 6) uses exactness of the Jacobi-Zariski sequence for the node's ∂ together with this identity for the explicit ∂: it needs the statement of lem-weil-pbc-jacobi-zariski-homology-sequence to say that its ∂ is given by formula (c)."
  },
- "reviewed": "Reviewed by L 2026-10-10: a computation by agent (the source omits the definition of the maps): both sides evaluated on a cycle g mod I^2 using the explicit theta of lem-weil-pbc-jacobi-zariski-surjection-h1 and the Leibniz rule; the connecting map is the one of lem-weil-pbc-jacobi-zariski-homology-sequence, whose statement L amended to give the explicit formula (with a new step 10 deriving it from the snake construction), so (c) is that node's map and the identification is now part of the DAG. No new nodes; Mathlib candidates recorded (B8)."
+ "reviewed": "Reviewed by L 2026-10-10: a computation by agent (the source omits the definition of the maps): both sides evaluated on a cycle g mod I^2 using the explicit theta of lem-weil-pbc-jacobi-zariski-surjection-h1 and the Leibniz rule; the connecting map is the one of lem-weil-pbc-jacobi-zariski-homology-sequence, whose statement L amended to give the explicit formula (with a new step 10 deriving it from the snake construction), so (c) is that node's map and the identification is now part of the DAG. No new nodes; Mathlib candidates recorded (B8).",
+ "lean": {
+  "module": "Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality",
+  "declaration": "Algebra.jacobiZariski_connectingMap_naturality",
+  "file": "lean/Sheaf/RingTheory/JacobiZariskiConnectingMapNaturality.lean",
+  "statement": "theorem jacobiZariski_connectingMap_naturality (R : Type u) (S : Type v) (B : Type w) [CommRing R] [CommRing S] [CommRing B] [Algebra R S] [Algebra S B] [Algebra R B] [IsScalarTower R S B] (I : Ideal B) : let C := B ⧸ I let P := Extension.ofSurjective (IsScalarTower.toAlgHom R B C) (Ideal.Quotient.mk_surjective : Function.Surjective (Ideal.Quotient.mk I)) let ι := H1Cotangent.map S B C C let θ := P.h1CotangentEquivCotangent let partialS := H1Cotangent.δ R S C let partialB := H1Cotangent.δ R B C let δ := P.cotangentComplex ∃ c : C ⊗[S] Ω[S⁄R] →ₗ[C] C ⊗[B] Ω[B⁄R], (∀ (x : C) (s : S), c (x ⊗ₜ[S] D R S s) = x ⊗ₜ[B] D R B (algebraMap S B s)) ∧ (δ.comp (θ.toLinearMap.comp ι) = c.comp partialS) ∧ (δ.comp θ.toLinearMap = partialB)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-jzn1146",
+  "group": "C1",
+  "result": "pass",
+  "note": "R,S,B CommRing + Algebra R S/S B/R B + IsScalarTower (tower only); I : Ideal B, C = B/I; iota = H1Cotangent.map S B C C (#check: H1Cotangent S C -> H1Cotangent B C, defaultHom X c -> X c); theta = h1CotangentEquivCotangent of ofSurjective (P.ker reduces to mk x = 0 <-> x in I); partialS/B = H1Cotangent.delta (deltaAux coefficient formula); c existential pinned on generators x (x) Ds; delta = cotangentComplex; S=B clause closed by exact Mathlib cotangentComplex_comp_h1CotangentEquivCotangent; main identity is new (no Mathlib middle-ring naturality); lets intro as unfoldable lets"
+ }
 }
