@@ -140,22 +140,36 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (f : X ⟶ B) (g : 
       (R(f)_![A]).obj K ⊗ (R(g)_![A]).obj M) :=
   sorry
 
+omit [HasSmallSiteSheafify A] in
 /-- The external product is compatible with pullback: for morphisms `i : Z ⟶ X`, `j : W ⟶ Y`
 over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
 
 `L(i ×_B j)^* (K ⊠ L) ≅ Li^* K ⊠ Lj^* L`,
 
-the external product on the right being taken along `i ≫ f` and `j ≫ g`. -/
-theorem nonempty_iso_leftDerivedUpperStar_externalProduct (f : X ⟶ B) (g : Y ⟶ B)
-    {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y)
+the external product on the right being taken along `i ≫ f` and `j ≫ g`. The pullbacks are
+assumed to preserve flat sheaves (`AlgebraicGeometry.Etale.UpperStarPreservesFlat`, true for
+`ModuleCat Λ`), which is what makes the derived pullback monoidal
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso`). -/
+theorem nonempty_iso_leftDerivedUpperStar_externalProduct [UpperStarPreservesFlat A]
+    (f : X ⟶ B) (g : Y ⟶ B) {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     Nonempty ((L((pullback.mapOverBase i j f g)^*[A])).obj (externalProduct A f g K L) ≅
-      externalProduct A (i ≫ f) (j ≫ g) ((L((i)^*[A])).obj K) ((L((j)^*[A])).obj L)) :=
-  -- Proof sketch: `K ⊠ L = Lp^* K ⊗ᴸ Lq^* L`; the derived pullback is monoidal, and
+      externalProduct A (i ≫ f) (j ≫ g) ((L((i)^*[A])).obj K) ((L((j)^*[A])).obj L)) := by
+  -- `K ⊠ L = Lp^* K ⊗ᴸ Lq^* L`; the derived pullback is monoidal, and
   -- `p ∘ (i ×_B j) = i ∘ p'`, `q ∘ (i ×_B j) = j ∘ q'` for the projections `p'`, `q'` of
   -- `Z ×_B W`.
-  sorry
+  let e : pullback (i ≫ f) (j ≫ g) ⟶ pullback f g := pullback.mapOverBase i j f g
+  let pb₁ : (L((e)^*[A])).obj ((L((pullback.fst f g)^*[A])).obj K) ≅
+      (L((pullback.fst (i ≫ f) (j ≫ g))^*[A])).obj ((L((i)^*[A])).obj K) :=
+    ((leftDerivedUpperStarComp A e (pullback.fst _ _)).app K).symm ≪≫
+      (leftDerivedUpperStarComp A _ _ (e ≫ pullback.fst _ _) (by simp [e])).app K
+  let pb₂ : (L((e)^*[A])).obj ((L((pullback.snd f g)^*[A])).obj L) ≅
+      (L((pullback.snd (i ≫ f) (j ≫ g))^*[A])).obj ((L((j)^*[A])).obj L) :=
+    ((leftDerivedUpperStarComp A e (pullback.snd _ _)).app L).symm ≪≫
+      (leftDerivedUpperStarComp A _ _ (e ≫ pullback.snd _ _) (by simp [e])).app L
+  exact ⟨leftDerivedUpperStarTensorIso A e _ _ ≪≫ ((derivedTensor A _).mapIso pb₁).app _ ≪≫
+    ((derivedTensor A _).obj _).mapIso pb₂⟩
 
 /-- The external product is compatible with restriction to closed subschemes: for closed
 immersions `i : Z ⟶ X`, `j : W ⟶ Y` over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
