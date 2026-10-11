@@ -239,5 +239,23 @@
   "item": "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
   "worker": "stage1",
   "summary": "Not a Mathlib leaf (searches repeated with LeanSearch, LeanFinder, Loogle and grep: Mathlib has the canonical morphism fromSpecStalk and its description through an affine open, no limit statement). Split along the proof of Limits 0GWT (limits.tex line 1561-1564: O_{X,x} = colim O_W(W) over the affine neighbourhoods, hence Spec O_{X,x} = lim W) with the limit of affine schemes 01YW, all through existing nodes, no new node. Seven steps: (1) cofinality and directedness of N_x and the inverse system (affine-opens-basis); (2) qcqs and affine transitions (affine-scheme-qcqs, morphism-affine-schemes-affine); (3) unique factorizations g_{x,U} and the cone property (spec-local-ring-canonical-morphism (1), morphism-factors-through-open-subscheme); (4) O_{X,x} is the colimit of the rings O_X(W), W in N_x, written out from stalk-germs-on-basis; (5) Spec of the colimit is the limit (spec-colimit-limit, the node of 01YW); (6) transport along the isomorphisms Spec O_X(W) = W compatible with the transitions (affine-open-spec-points, affine-open-inclusion-spec-map, open-immersion-monomorphism); (7) the projections are the g_{x,W} (canonical-morphism description through an affine open, affine-open-stalk-localization (c)). Statement unchanged; every clause is what the citer lem-weil-pbc-etale-cohomology-local-ring-colimit uses in its steps 2-5 (clause (1) for the cofinality, (2) for the hypotheses of etale-cohomology-limit-of-schemes, (3) for g_{x,U} and the limit). Source typo: 0GWT's proof writes 'affine open neighbourhoods of s' for 'of x'."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods",
+  "declaration": "AlgebraicGeometry.Scheme.fromSpecStalk_limit_affine_neighbourhoods",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpecStalkLimitAffineNeighbourhoods.lean",
+  "statement": "theorem fromSpecStalk_limit_affine_neighbourhoods (X : Scheme.{u}) (x : X) : (∀ (U : X.Opens), x ∈ U → ∃ W : X.Opens, IsAffineOpen W ∧ x ∈ W ∧ W ≤ U) ∧ Nonempty {W : X.Opens // IsAffineOpen W ∧ x ∈ W} ∧ (∀ (W V : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}), ∃ Z : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}, Z.1 ≤ W.1 ⊓ V.1) ∧ (∀ W : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}, X.homOfLE (le_refl W.1) = 𝟙 W.1.toScheme) ∧ (∀ (W V Z : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}) (hZV : Z.1 ≤ V.1) (hVW : V.1 ≤ W.1), X.homOfLE hZV ≫ X.homOfLE hVW = X.homOfLE (hZV.trans hVW)) ∧ (∀ W : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}, CompactSpace W.1.toScheme ∧ QuasiSeparatedSpace W.1.toScheme) ∧ (∀ (W V : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}) (hVW : V.1 ≤ W.1), IsOpenImmersion (X.homOfLE hVW) ∧ IsAffineHom (X.homOfLE hVW)) ∧ (∀ (U : X.Opens) (hxU : x ∈ U), ∃! g : Spec (X.presheaf.stalk x) ⟶ U.toScheme, g ≫ U.ι = X.fromSpecStalk x) ∧ (∀ (W V : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}) (hVW : V.1 ≤ W.1), V.1.fromSpecStalkOfMem x V.2.2 ≫ X.homOfLE hVW = W.1.fromSpecStalkOfMem x W.2.2) ∧ (∀ (T : Scheme.{u}) (tW : ∀ W : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}, T ⟶ W.1.toScheme), (∀ (W V : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}) (hVW : V.1 ≤ W.1), tW V ≫ X.homOfLE hVW = tW W) → ∃! t : T ⟶ Spec (X.presheaf.stalk x), ∀ W : {W : X.Opens // IsAffineOpen W ∧ x ∈ W}, t ≫ W.1.fromSpecStalkOfMem x W.2.2 = tW W)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
