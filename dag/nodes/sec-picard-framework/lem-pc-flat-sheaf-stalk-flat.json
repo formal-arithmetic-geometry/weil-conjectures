@@ -11,7 +11,7 @@
  },
  "kind": "statement",
  "title": "Stalks of flat sheaves are flat modules",
- "statement": "Let (X,\\mathcal O_X) be a ringed space and let \\mathcal F be a flat \\mathcal O_X-module sheaf [def-pc-flat-sheaf-modules], meaning that tensoring with \\mathcal F preserves short exact sequences of \\mathcal O_X-modules. For every point x of X, the stalk \\mathcal F_x is a flat module over the local ring \\mathcal O_{X,x}, meaning that tensoring with \\mathcal F_x preserves exact sequences of \\mathcal O_{X,x}-modules.",
+ "statement": "Let (X,\\mathcal O_X) be a ringed space and let \\mathcal F be a flat \\mathcal O_X-module sheaf [def-pc-flat-sheaf-modules], meaning that tensoring with \\mathcal F preserves short exact sequences of \\mathcal O_X-modules. For every point x of X, the stalk \\mathcal F_x is a flat module over the stalk ring \\mathcal O_{X,x}, meaning that tensoring with \\mathcal F_x preserves exact sequences of \\mathcal O_{X,x}-modules.",
  "source": {
   "document": "literature/stacks-project/modules.tex",
   "place": "Tag 05NE, Modules Lemma 17.17.2 (modules-lemma-flat-stalks-flat), implication (1) => (2)"
@@ -138,5 +138,40 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fsf2318 (reviewer sub-agent of L); spot-checked: Reviewed 44bcbe368; 742886419 is a rebase onto sheaf-dag with identical item and report files. Item is only 05NE (1)=>(2) (sheaf flat => stalks flat); the converse (stalk flat => sheaf flat) is not in this item, so there is no sheaf-tensor handling of that direction to judge. Step1 skyscraper node gives acyclicity and stalk identification; Step2 uses def G|->G(x)F exactly, order matches; Step3 cites lem-weil-pbc-module-stalk-exact (5) and lem-pc-ringed-space-module-stalk-tensor (natural, so degreewise isos form a complex iso): C1/C4 ok, nothing restated, no new nodes (class b n/a). The stalk-tensor node was created from lem-pc-stalk-tensor-complex, not this item, so there is no cycle. lem-pc-kflat-stalk-criterion not needed. Report text still says one new node (stale vs 0): cosmetic. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatSheafStalk",
+  "declaration": "AlgebraicGeometry.RingedSpace.flat_stalk_of_isFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatSheafStalk.lean",
+  "statement": "theorem flat_stalk_of_isFlat (X : RingedSpace.{u}) (F : SheafOfModules.{u} (moduleRings X)) (hF : SheafOfModules.IsFlat F) (x : X) : Module.Flat (X.presheaf.stalk x) ((moduleStalkFunctor X x).obj F)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fss",
+  "group": "U1",
+  "result": "pass",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "U1 stage 2",
+  "old_statement": "Let (X,\\mathcal O_X) be a ringed space and let \\mathcal F be a flat \\mathcal O_X-module sheaf [def-pc-flat-sheaf-modules], meaning that tensoring with \\mathcal F preserves short exact sequences of \\mathcal O_X-modules. For every point x of X, the stalk \\mathcal F_x is a flat module over the local ring \\mathcal O_{X,x}, meaning that tensoring with \\mathcal F_x preserves exact sequences of \\mathcal O_{X,x}-modules.",
+  "what": "For a general ringed space the stalk ring need not be local: on a one-point space with structure ring Z, its unique stalk is Z, which has multiple maximal ideals. Replace only the erroneous adjective local by stalk; no locally ringed hypothesis is added.",
+  "source": {
+   "document": "literature/stacks-project/modules.tex",
+   "place": "Tag 05NE, Lemma 17.17.2 (lemma-flat-stalks-flat), flat sheaf implies flat stalks"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-bounded-above-flat-kflat",
+    "holds": true,
+    "note": "Its first proof step requires flatness over the stalk ring, without any local-ring hypothesis, so it still holds."
+   }
+  ]
  }
 }
