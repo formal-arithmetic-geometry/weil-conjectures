@@ -1,11 +1,11 @@
 # Work queue
 
-288 items; claim with `tools/claim.py next <group> [--stage N]`.
+280 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (288)
+## Stage 2: nodes to state (280)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -49,12 +49,8 @@
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
 | `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-support` | 1 | state |
-| `lem-weil-pbc-sections-annihilated-by-ideal` | 1 | state |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1 | state |
 | `lem-weil-pbc-sections-over-quasi-compact-open-in-affine` | 1 | state |
-| `lem-weil-pbc-separable-split-purely-inseparable-residue-fields` | 1 | state |
-| `lem-weil-pbc-serre-criterion-reduced` | 1 | state |
-| `lem-weil-pbc-set-cech-nerve-free-resolution` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-restriction` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-stalk-germ` | 1 | state |
@@ -62,11 +58,9 @@
 | `lem-weil-pbc-sets-finite-surjective-descent` | 1 | state |
 | `lem-weil-pbc-sheaf-algebras-directed-colimit` | 1 | state |
 | `lem-weil-pbc-sheaf-isomorphism-local-open-cover` | 1 | state |
-| `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
 | `lem-weil-pbc-sheaves-killed-by-n-zmod-modules` | 1 | state |
 | `lem-weil-pbc-simplicial-set-glue-simplex` | 1 | state |
-| `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound` | 1 | state |
 | `lem-weil-pbc-smooth-at-prime-artinian-lifting` | 1 | state |
 | `lem-weil-pbc-smooth-at-prime-field-extension-descent` | 1 | state |
@@ -76,9 +70,7 @@
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1 | state |
 | `lem-weil-pbc-smooth-free-differentials-strictly-standard-power` | 1 | state |
 | `lem-weil-pbc-smooth-localization-conormal-split` | 1 | state |
-| `lem-weil-pbc-smooth-locally-standard-smooth` | 1 | state |
 | `lem-weil-pbc-smooth-over-field-dimension-differentials` | 1 | state |
-| `lem-weil-pbc-smooth-over-field-local-complete-intersection` | 1 | state |
 | `lem-weil-pbc-smooth-over-field-regular-local` | 1 | state |
 | `lem-weil-pbc-smooth-over-normal-ring-normal` | 1 | state |
 | `lem-weil-pbc-smooth-over-product-ring` | 1 | state |
