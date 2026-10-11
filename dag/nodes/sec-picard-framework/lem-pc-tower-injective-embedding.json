@@ -135,5 +135,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tie2752 (reviewer sub-agent of L); spot-checked: Construction is Tag 07KV's (I_n = J_1+...+J_n with projections, i_n = (j_m o f-composites)_m); statement carries the split-surjective transition clause that F1 step 1/2 uses; enough injectives from lem-weil-pbc-ring-modules-enough-injectives (mathlib leaf, R=Z; accepted generic tool; no separate Ab node exists); no duplicate of tower nodes. FIX more, RETURN less: C4 in step 3 - lem-pc-tower-abelian does not state kernels are levelwise; replaced by the elementary argument that a levelwise injective morphism is monic since composition is componentwise [def-weil-inverse-system], uses updated.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-tie2752): F1 (lem-pc-tower-enough-injectives) step 2 also says 'kernels in the tower category [lem-pc-tower-abelian] are computed levelwise', which that statement does not say (needed direction: monic => levelwise injective; elementary via the tower Z..Z,0,0.. representing evaluation at level n)."
+ "lead_note": "2026-10-10 L (R-tie2752): F1 (lem-pc-tower-enough-injectives) step 2 also says 'kernels in the tower category [lem-pc-tower-abelian] are computed levelwise', which that statement does not say (needed direction: monic => levelwise injective; elementary via the tower Z..Z,0,0.. representing evaluation at level n).",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InjectiveTowerEmbedding",
+  "declaration": "CategoryTheory.tower_injective_embedding",
+  "file": "lean/Sheaf/CategoryTheory/InjectiveTowerEmbedding.lean",
+  "statement": "theorem tower_injective_embedding (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) : ∃ (I : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (i : A ⟶ I), Mono i ∧ (∀ n : ℕ, Injective (I.obj (Opposite.op n))) ∧ (∀ n : ℕ, IsSplitEpi (I.map (homOfLE (Nat.le_add_right n 1)).op))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-tie0917"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tie0917",
+  "group": "F1",
+  "result": "fix",
+  "note": "A : ℕᵒᵖ ⥤ AddCommGrpCat.{u} arbitrary tower; ∃ I, i : A ⟶ I with Mono i in the functor category; ∀ n Injective (I.obj (op n)); ∀ n IsSplitEpi (I.map (homOfLE (n ≤ n+1)).op), as ae7ee24c8; no Mathlib duplicate (Grothendieck EnoughInjectives lacks levelwise/split clauses); fix: dropped unused OfSequence import, docstring renumbered to node's 3 proof steps"
+ }
 }
