@@ -186,5 +186,23 @@
   "item": "lem-weil-pbc-inverse-image-free-etale-module",
   "worker": "stage1",
   "summary": "Statement checked against Stacks 03S6 (etale-cohomology.tex 11492-11514) and kept. Proof written in six steps following Stacks' right-adjoint comparison, specialised to the free module: (1) epsilon is a natural bijection (sheafification universal property + free Yoneda presheaf module); (2) (h_*G)(W)=G(W'), (h_*chi)_W=chi_{W'} via the base-change functor of the etale sites; (3) the composite Hom(j_{W'!},G) = G(W') = Hom(j_{W!},h_*G) = Hom(h^{-1}j_{W!},G) is a bijection natural in G; (4) co-Yoneda gives theta; (5) the compatibility clause from naturality of the unit and of epsilon; (6) uniqueness by taking s the generator. One new Mathlib leaf: lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection (Coyoneda.fullyFaithful). Not cited: sbc-prop-extension-by-zero-and-arbitrary-base-change (open immersions and abelian sheaves only), lem-weil-pbc-etale-inverse-image-restriction and lem-weil-pbc-module-sheaves-grothendieck-abelian (not needed)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InverseImageFreeEtaleModule",
+  "declaration": "AlgebraicGeometry.inverseImageFreeEtaleModule",
+  "file": "lean/Sheaf/Paper/InverseImageFreeEtaleModule.lean",
+  "statement": "theorem inverseImageFreeEtaleModule (T Y : Scheme.{u}) (h : Y ⟶ T) (Λ : Type (u + 1)) [CommRing Λ] [EssentiallySmall.{u + 1} T.Etale] [EssentiallySmall.{u + 1} Y.Etale] (W : T.Etale) : (fun (RY : Sheaf Y.smallEtaleTopology RingCat.{u + 1}) (etaY : ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ)) ⟶ RY.obj) => (fun (gamma : ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)) ⟶ ((MorphismProperty.Over.pullback @Etale ⊤ h).sheafPushforwardContinuous RingCat.{u + 1} (T.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)).obj RY) => ∀ (L : SheafOfModules.{u + 1} ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)) ⥤ SheafOfModules.{u + 1} RY) (adj : L ⊣ SheafOfModules.pushforward (J := T.smallGrothendieckTopology @Etale) (K := Y.smallGrothendieckTopology @Etale) (F := MorphismProperty.Over.pullback @Etale ⊤ h) gamma), ∃! θ : L.obj ((PresheafOfModules.sheafification.{u + 1} (𝟙 ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)).obj)).obj ((PresheafOfModules.free ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)).obj).obj (uliftYoneda.{u + 1}.obj W))) ≅ ((PresheafOfModules.sheafification.{u + 1} (𝟙 RY.obj)).obj ((PresheafOfModules.free RY.obj).obj (uliftYoneda.{u + 1}.obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W)))), ∀ (H : SheafOfModules.{u + 1} ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ))) (s : H.val.obj (op W)) (φ : ((PresheafOfModules.sheafification.{u + 1} (𝟙 ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)).obj)).obj ((PresheafOfModules.free ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)).obj).obj (uliftYoneda.{u + 1}.obj W))) ⟶ H), (PresheafOfModules.sheafificationHomEquiv.{u + 1} (𝟙 ((constantSheaf T.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)).obj) φ).app (op W) (ModuleCat.freeMk (ULift.up (𝟙 W))) = s → (PresheafOfModules.sheafificationHomEquiv.{u + 1} (𝟙 RY.obj) (θ.inv ≫ L.map φ)).app (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W)) (ModuleCat.freeMk (ULift.up (𝟙 ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W)))) = (adj.unit.app H).val.app (op W) s) (((sheafificationAdjunction T.smallEtaleTopology RingCat.{u + 1}).homEquiv ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of Λ)) (((MorphismProperty.Over.pullback @Etale ⊤ h).sheafPushforwardContinuous RingCat.{u + 1} (T.smallGrothendieckTopology @Etale) (Y.smallGrothendieckTopology @Etale)).obj RY)).symm (Functor.whiskerLeft (MorphismProperty.Over.pullback @Etale ⊤ h).op etaY))) ((constantSheaf Y.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of Λ)) (toSheafify Y.smallEtaleTopology ((Functor.const Y.Etaleᵒᵖ).obj (RingCat.of Λ)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
