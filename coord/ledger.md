@@ -5693,3 +5693,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 20:05 L: merged deliver/E1/lemma-nagata-morphism-eq-eventually (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataMorphismEqEventually AlgebraicGeometry.nagataMorphismEqEventually)
 - 20:10 L: returned deliver/C1/lem-pc-global-hom-pullback-adjunction (reviewer RETURN: (reviewer X-0e84e, head 0e84ed521) the reviewer passed it, but the landing failed: NOT MERGED lem-pc-global-hom-pullback)
 - 20:12 L: returned deliver/Q1/lem-weil-pbc-cohomology-colimit-of-sites (reviewer RETURN: (reviewer X-47889, head 4788917a2) H3: In cohomology_colimit_of_sites, replace the incomplete site-setting binders with )
+- 20:14 L: returned deliver/Q1/cor-galois-lisse-representations (reviewer RETURN: (reviewer R-sub-D, head f6404ca40) The four points of R-h1f302 are repaired (def-pod-lisse-l-adic-sheaves is untouched; )
