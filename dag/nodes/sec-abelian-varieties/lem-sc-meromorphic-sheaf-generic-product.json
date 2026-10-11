@@ -24,7 +24,8 @@
   "def-weil-irreducible-components",
   "def-sc-generic-point",
   "def-sc-invertible-module",
-  "def-weil-pbc-module-stalk"
+  "def-weil-pbc-module-stalk",
+  "def-sc-meromorphic-module"
  ],
  "proof": [
   {
@@ -112,5 +113,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-msg2728 (reviewer sub-agent of L); spot-checked: All three R-msg2530 points repaired: proof now follows the actual 0EMH proof (special case of 0EMF via 05AR), no-embedded-points hypothesis used in step 1 for 0EMF(a), 0EMF(b) from quasi-compact opens Noetherian + finite components (existing nodes); step 2 writes the dim-0 argument and j_eta^{-1}(U); step 3 derives (ft)_eta via stalk rule. New nodes 0EMF and 05AR: real lemmas, no duplicate in dag (grep 05AR/0EMF/weakly associated), not in Mathlib, statements match divisors.tex; class none. Statement unchanged, matches 0EMH and lem-sc-regular-meromorphic-section-exists use (C4). FIX more, RETURN less: (1) D1/preflight: step 2 cited 0EMH (the item's own tag) for the generic-stalk computation; replaced by the sheafification-stalk/localization argument written out, elementary, pointer to the 0EMF proof line K_Y=O_Y; (2) C1: step 3 used stalks commuting with tensor products, not in def-weil-pbc-module-stalk; folded as elementary with Modules Tag 01CE.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MeromorphicSheafGenericProduct",
+  "declaration": "AlgebraicGeometry.meromorphicSheaf_generic_product",
+  "file": "lean/Sheaf/AlgebraicGeometry/MeromorphicSheafGenericProduct.lean",
+  "statement": "theorem meromorphicSheaf_generic_product {X : Scheme.{u}} [IsLocallyNoetherian X] (h_no_embedded : ∀ x : X, (∃ a : X.presheaf.stalk x, IsLocalRing.maximalIdeal (X.presheaf.stalk x) = (⊥ : Submodule (X.presheaf.stalk x) (X.presheaf.stalk x)).colon {a}) → x ∈ genericPoints X) (L : X.Modules) [L.IsInvertible] : letI (x : X) : Module (X.presheaf.stalk x) (L.presheaf.stalk x) := inferInstanceAs (Module (X.presheaf.stalk x) (TopCat.Presheaf.stalk (C := Ab.{u}) L.val.presheaf x)) ∃ (eK : ∀ η : {x : X // x ∈ genericPoints X}, (meromorphicModule X (unit X)).presheaf.stalk η.val ≃+ X.presheaf.stalk η.val) (eL : ∀ η : {x : X // x ∈ genericPoints X}, (meromorphicModule X L).presheaf.stalk η.val ≃+ L.presheaf.stalk η.val) (mul : ∀ U : X.Opens, Γ(meromorphicModule X (unit X), U) → Γ(meromorphicModule X L, U) → Γ(meromorphicModule X L, U)), (∀ (η : {x : X // x ∈ genericPoints X}) (U : X.Opens) (hη : η.val ∈ U) (a : Γ(X, U)), eK η ((meromorphicModule X (unit X)).presheaf.germ U η.val hη ((toMeromorphicModule X (unit X)).val.app (op U) a)) = X.presheaf.germ U η.val hη a) ∧ (∀ (η : {x : X // x ∈ genericPoints X}) (U : X.Opens) (hη : η.val ∈ U) (m : Γ(L, U)), eL η ((meromorphicModule X L).presheaf.germ U η.val hη ((toMeromorphicModule X L).val.app (op U) m)) = L.presheaf.germ U η.val hη m) ∧ (∀ U : X.Opens, Function.Bijective (fun s : Γ(meromorphicModule X (unit X), U) ↦ fun η : {x : X // x ∈ genericPoints X ∧ x ∈ U} ↦ eK ⟨η.val, η.property.1⟩ ((meromorphicModule X (unit X)).presheaf.germ U η.val η.property.2 s))) ∧ (∀ U : X.Opens, Function.Bijective (fun t : Γ(meromorphicModule X L, U) ↦ fun η : {x : X // x ∈ genericPoints X ∧ x ∈ U} ↦ eL ⟨η.val, η.property.1⟩ ((meromorphicModule X L).presheaf.germ U η.val η.property.2 t))) ∧ (∀ (U V : X.Opens) (i : V ⟶ U) (η : {x : X // x ∈ genericPoints X}) (hV : η.val ∈ V) (hU : η.val ∈ U) (s : Γ(meromorphicModule X (unit X), U)) (t : Γ(meromorphicModule X L, U)), eK η ((meromorphicModule X (unit X)).presheaf.germ V η.val hV ((meromorphicModule X (unit X)).presheaf.map i.op s)) = eK η ((meromorphicModule X (unit X)).presheaf.germ U η.val hU s) ∧ eL η ((meromorphicModule X L).presheaf.germ V η.val hV ((meromorphicModule X L).presheaf.map i.op t)) = eL η ((meromorphicModule X L).presheaf.germ U η.val hU t)) ∧ (∀ (U : X.Opens) (a : Γ(X, U)) (m : Γ(L, U)) (b c : meromorphicDenominators X U), mul U (meromorphicFraction X (unit X) U (LocalizedModule.mk a b)) (meromorphicFraction X L U (LocalizedModule.mk m c)) = meromorphicFraction X L U (LocalizedModule.mk (a • m) (b * c))) ∧ (∀ (U V : X.Opens) (i : V ⟶ U) (s : Γ(meromorphicModule X (unit X), U)) (t : Γ(meromorphicModule X L, U)), (meromorphicModule X L).presheaf.map i.op (mul U s t) = mul V ((meromorphicModule X (unit X)).presheaf.map i.op s) ((meromorphicModule X L).presheaf.map i.op t)) ∧ (∀ (U : X.Opens) (η : {x : X // x ∈ genericPoints X}) (hη : η.val ∈ U) (s : Γ(meromorphicModule X (unit X), U)) (t : Γ(meromorphicModule X L, U)), eL η ((meromorphicModule X L).presheaf.germ U η.val hη (mul U s t)) = eK η ((meromorphicModule X (unit X)).presheaf.germ U η.val hη s) • eL η ((meromorphicModule X L).presheaf.germ U η.val hη t))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-msg1146"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-msg1146",
+  "group": "M1",
+  "result": "fix",
+  "note": "X Scheme.{u} [IsLocallyNoetherian X] (no CompactSpace: Stacks 0EMH has none); no embedded points = Ass→genericPoints in K1 associatedPoints_eq_weaklyAssociatedPoints spelling (m_x = ⊥.colon {a}); K = meromorphicModule X (unit X), K(L) = meromorphicModule X L (landed def-sc-meromorphic-module, tensor_iso); eK/eL pinned to canonical map on germs; Bijective germ maps on Π over genericPoints ∩ U for every U; restriction; mul pinned by fraction rule + restriction, (ft)_η = f_η t_η; L invertible via IsInvertible; single universe; lets inlined"
  }
 }
