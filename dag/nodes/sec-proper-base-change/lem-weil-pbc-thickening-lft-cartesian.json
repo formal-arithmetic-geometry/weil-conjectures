@@ -147,5 +147,22 @@
   "item": "lem-weil-pbc-thickening-lft-cartesian",
   "worker": "stage1",
   "summary": "Read Stacks 09ZW (more-morphisms.tex:334ff) part (2) and its proof, Morphisms 01T2/01T4 and Algebra 00DV. Statement kept. Proof in three steps: (1) easy direction by base change (new Mathlib leaf lem-weil-pbc-lft-base-change = locallyOfFiniteType_isStableUnderBaseChange); (2) affine reduction: for affine U'=Spec A' ⊆ S', V'=Spec B' ⊆ X' over it, p^{-1}(V') = U ×_{U'} V' = Spec(B'/IB') over U = Spec(A'/I) (existing leaves lem-weil-pbc-open-fibre-product, lem-weil-pbc-fibre-product-affine-spectra; ideal-sheaf definitions); (3) converse by 01T2 (new Mathlib leaf lem-weil-pbc-lft-affine-pairs = locallyOfFiniteType_iff, Mathlib's definition) and the new unsplit ring lemma lem-weil-pbc-finite-type-lift-nilpotent (A'/I → B'/IB' finite type, I nilpotent ⇒ A' → B' finite type; Nakayama 00DV (11), absent from Mathlib). The source's induction on the order of the thickening is bypassed since 00DV (11) and hence the ring lemma hold for any nilpotent ideal; the affine-open correspondence 06AD and the thickening X ⊆ X' are not needed (the affine open W is a fibre product of affines). Mathlib: only the base change direction is there."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeThickening",
+  "declaration": "AlgebraicGeometry.locallyOfFiniteType_iff_of_finiteOrderThickening",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyOfFiniteTypeThickening.lean",
+  "statement": "theorem locallyOfFiniteType_iff_of_finiteOrderThickening {S S' X' : Scheme.{u}} (i : S ⟶ S') (f' : X' ⟶ S') (hi : IsFiniteOrderThickening i) : LocallyOfFiniteType (pullback.fst i f') ↔ LocallyOfFiniteType f'",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tlc",
+  "group": "G1",
+  "result": "pass"
  }
 }
