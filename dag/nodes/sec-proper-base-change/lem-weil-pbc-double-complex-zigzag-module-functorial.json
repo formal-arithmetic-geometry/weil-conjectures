@@ -150,5 +150,23 @@
   "summary": "Rule 0: no slopmaster2 declaration (grep of WeilConjectures and Comparator for the id, 'zigzag', 'zig-zag', '00M1', 'no-spectral' finds only the categorical zigzag identities / zigzag_isConnected; dag/lean_names_upstream.json has no zig-zag entry); lean_audit none. Source read: algebra.tex lines 18385-18450 (00M1, tag verified in tags/tags; 00LY section). Statement kept: it agrees with the source's convention (d: A_{i,j}->A_{i-1,j}, δ: A_{i,j}->A_{i,j-1}, commuting squares, the displayed + set of trivial zig-zags). Split into four steps: (a) B_n ⊆ Z_n, proved for an arbitrary D_{n+1}(b) (dd=0, δδ=0, one commuting square), with the generator check of the creator's sketch noted; (b) Φ preserves Z_n and commutes with D, componentwise; both elementary from the two definitions as they stand; (c) and (d) through one new Mathlib leaf lem-weil-pbc-quotient-module-induced-map (Submodule.mapQ, mapQ_mkQ, linearMap_qext, mapQ_comp, mapQ_id), stated on the existing def-weil-pbc-quotient-module. Searches before creating it: grep of dag/nodes for mapQ/liftQ and quotient-induced-map statements (only def-weil-pbc-quotient-module, which defines the quotient but not induced maps), blueprint_refs search 'induced map on quotient modules', 'quotient module universal property', 'linear map quotient submodule', 'mapQ': no blueprint node states it. The source's signed generator (−δ(a), d(a)) is not used (already recorded as a sign slip by the creators); the item uses D_{n+1} with +. Blueprint search for the item ('zig-zag', 'trivial zig-zag', '00M1', 'zigzag'): 0 blueprint nodes, so same_as stays [].",
   "blueprint": "Realizes, inside the place of lem-weil-pbc-normal-constant-generic named in from.place (step 4 -> ... -> Tor symmetry 00M3 -> 00M1), the 'clear' induced maps of morphisms of double complexes (lines 18391-18395) on the zig-zag modules and 'Naturally, we divide out by trivial zig-zags' (that the trivial zig-zags are zig-zags): steps 1-2 the latter and the preservation of Z_n, B_n; steps 3-4 the induced map H_n(Φ) and its functoriality, which 00M1's 'The isomorphisms are functorial' presupposes."
  },
- "reviewed": "2026-10-10 L: four steps (B_n in Z_n via dd=0, delta delta=0 and the commuting square; Phi preserves Z_n and commutes with D; induced map on H_n and functoriality from the quotient-module leaf) checked; new Mathlib leaf lem-weil-pbc-quotient-module-induced-map (Submodule.mapQ, mapQ_mkQ, linearMap_qext, mapQ_comp, mapQ_id, lines verified) accepted."
+ "reviewed": "2026-10-10 L: four steps (B_n in Z_n via dd=0, delta delta=0 and the commuting square; Phi preserves Z_n and commutes with D; induced map on H_n and functoriality from the quotient-module leaf) checked; new Mathlib leaf lem-weil-pbc-quotient-module-induced-map (Submodule.mapQ, mapQ_mkQ, linearMap_qext, mapQ_comp, mapQ_id, lines verified) accepted.",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ZigzagModuleFunctorial",
+  "declaration": "HomologicalComplex₂.zigzagModule_functorial",
+  "file": "lean/Sheaf/Algebra/Homology/ZigzagModuleFunctorial.lean",
+  "statement": "theorem zigzagModule_functorial {R : Type u} [CommRing R] (A B C : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ) (ComplexShape.down ℕ)) (Φ : A ⟶ B) (Ψ : B ⟶ C) (n : ℕ) : zigzagBoundaries A n ≤ zigzagCycles A n ∧ zigzagCycles A n ⊓ zigzagBoundaries A n = zigzagBoundaries A n ∧ (zigzagCycles A n).map (zigzagTotalMap Φ n) ≤ zigzagCycles B n ∧ (zigzagTotalMap Φ n).comp (zigzagBoundary A n) = (zigzagBoundary B n).comp (zigzagTotalMap Φ (n + 1)) ∧ (zigzagBoundaries A n).map (zigzagTotalMap Φ n) ≤ zigzagBoundaries B n ∧ (∀ (a : zigzagCycles A n) (b : zigzagCycles B n), b.val = zigzagTotalMap Φ n a.val → zigzagMap Φ n (Submodule.Quotient.mk a) = Submodule.Quotient.mk b) ∧ (∀ f : zigzagModule A n →ₗ[R] zigzagModule B n, (∀ (a : zigzagCycles A n) (b : zigzagCycles B n), b.val = zigzagTotalMap Φ n a.val → f (Submodule.Quotient.mk a) = Submodule.Quotient.mk b) → f = zigzagMap Φ n) ∧ zigzagMap (Φ ≫ Ψ) n = (zigzagMap Ψ n).comp (zigzagMap Φ n) ∧ zigzagMap (𝟙 A) n = LinearMap.id",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dzf0951",
+  "group": "F1",
+  "result": "pass",
+  "note": "R CommRing, A B C : HomologicalComplex₂ (ModuleCat R) (down ℕ) (down ℕ) per def-weil-pbc-module-double-complex mathlib_match, Φ Ψ bicomplex morphisms, n : ℕ; (a) B≤Z and Z⊓B=B; (b) map Z≤Z, Φ∘D=D∘Φ on T_{n+1}(A)→T_n(B), map B≤B; (c) representative formula + uniqueness of every linear f against recorded zigzagMap; (d) comp in categorical order and id; all names #check'd to HomologicalComplex₂.zigzag* of the recorded ZigzagModule"
+ }
 }

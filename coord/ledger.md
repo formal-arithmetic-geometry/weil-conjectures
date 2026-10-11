@@ -4096,3 +4096,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:51 L: merged deliver/H1/lem-weil-pbc-derived-inverse-image-composition (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedInverseImageComposition AlgebraicGeometry.Etale.derivedInverseImageComposition)
 - 09:51 L: merged deliver/F1/lem-weil-pbc-elementary-etale-finite-piece-persistence (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FinitePiecePersistence AlgebraicGeometry.finitePiece_persistence_of_isIso_residueFieldMap)
 - 09:52 L: merged deliver/F1/lem-weil-pbc-essentially-smooth-composition (stage 2; reviewer PASS; first push; Sheaf.RingTheory.EssentiallySmoothComp RingHom.essentiallySmooth_comp)
+- 09:52 L: merged deliver/F1/lem-weil-pbc-double-complex-zigzag-module-functorial (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.ZigzagModuleFunctorial HomologicalComplex₂.zigzagModule_functorial)
