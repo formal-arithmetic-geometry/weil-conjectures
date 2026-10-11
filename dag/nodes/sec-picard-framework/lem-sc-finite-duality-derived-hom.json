@@ -134,5 +134,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom",
+  "declaration": "AlgebraicGeometry.finite_duality_derived_hom",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDualityDerivedHom.lean",
+  "statement": "theorem finite_duality_derived_hom {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] [IsNoetherian X] [IsNoetherian Y] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [HasDerivedCategory.{wA} (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))] (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y) (comparison : R ⋙ (schemeDerivedQCohProperty Y).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : R ⊣ a) (ρR : DerivedCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ⥤ DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))) (adjA : (SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor ⊣ ρR) (K : schemeDerivedQCohCategory Y) (hK : ∃ n : ℤ, K.obj.IsGE n) : ∃ ι : (Functor.curry.obj (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)).obj (op ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj (SheafOfModules.unit Y.ringCatSheaf))) ≅ 𝟭 _, ∃ c : RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f) ⋙ (SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor ≅ schemeDerivedDirectImage f, ∃ φ : (RingedSpace.derivedModuleDirectImage (toDirectImageAlgebraSpace f)).obj (a.obj K).obj ≅ ρR.obj K.obj, ∃ d : (SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor.obj (ρR.obj K.obj) ≅ (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).obj (op ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))), K.obj), d.hom ≫ (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).map (((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom)).op, 𝟙 K.obj) ≫ ι.hom.app K.obj = adjA.counit.app K.obj ∧ (c.app (a.obj K).obj).inv ≫ (SheafOfModules.restrictScalars (R := moduleRings Y.toRingedSpace) (R' := moduleRings (directImageAlgebraSpace f)) ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor.map φ.hom ≫ adjA.counit.app K.obj = comparison.inv.app (a.obj K) ≫ (adj.counit.app K).hom",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-fdh"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdh",
+  "group": "T1",
+  "result": "fix",
+  "note": "reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }

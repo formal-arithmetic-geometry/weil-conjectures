@@ -5521,3 +5521,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 18:17 L: returned deliver/Q1/cor-galois-lisse-representations (reviewer RETURN: Stage-2 review R-glr of aa136832c. (H7) The statement correction puts 'Noetherian, separated, ell invertible' in the PRE)
 - 18:18 L: merged deliver/C1/lem-pc-global-hom-adjunction (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.GlobalHomAdjunction AlgebraicGeometry.schemeGlobalDerivedHom_adjunction)
 - 18:18 L: merged deliver/M1/lem-weil-pbc-simplicial-hom-object-pushout (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SimplicialHomObjectPushout AlgebraicGeometry.Scheme.simplicialHomObject_pushout_isPullback)
+- 18:19 L: merged deliver/T1/lem-sc-finite-duality-derived-hom (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom AlgebraicGeometry.finite_duality_derived_hom; statement correction reverted (statement, statement_change))
