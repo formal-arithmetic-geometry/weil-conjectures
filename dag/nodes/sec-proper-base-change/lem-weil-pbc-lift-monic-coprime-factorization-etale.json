@@ -173,5 +173,23 @@
   "item": "lem-weil-pbc-lift-monic-coprime-factorization-etale",
   "worker": "stage1",
   "summary": "Read Stacks 0ALH and its proof (more-algebra.tex:1843-1890), Algebra Example 00UA (the resultant; R -> S[1/Res] etale) and Mathlib's RingTheory/Polynomial/UniversalFactorizationRing.lean:380-715. Statement kept (it is 0ALH; the A/I = 0 case is covered by the choice of degrees in step 1, since 'monic of degree exactly n' is empty over the zero ring). Proof in six steps following Stacks: universal coprime factorization ring B (new Mathlib leaf lem-weil-pbc-universal-coprime-factorization-ring: UniversalCoprimeFactorizationRing, its Etale instance and homEquiv), the point phi: B -> A/I, B/IB etale over A/I (new Mathlib leaf lem-weil-pbc-etale-quotient-base-change: Algebra.Etale.baseChange + quotIdealMapEquivQuotTensor) and the idempotent from the reviewed lem-weil-pbc-etale-section-idempotent-splitting (which carries Stacks' 00U7/00U8 steps), A' = B_b for a lift b of the idempotent (etale by the reviewed leaves principal-localization-open-immersion and etale-composition-cancellation), A'/IA' = (B/IB)_e = A/I (new Mathlib leaf lem-weil-pbc-localization-quotient-commute: Stacks 00CT, Localization/Ideal.lean:391 instance), and the factors as images of the universal ones. Stacks' Lemma 07M0 is not needed: Mathlib's B is already localized at the resultant, globally etale (noted in step 1). Mathlib searched three ways for the item: no statement of 0ALH (no @[stacks 0ALH]). Source repository: no declaration mentions UniversalCoprimeFactorization, 0ALH or 07M0."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LiftMonicCoprimeFactorizationEtale",
+  "declaration": "Polynomial.exists_etale_lift_monic_coprime_factorization",
+  "file": "lean/Sheaf/RingTheory/LiftMonicCoprimeFactorizationEtale.lean",
+  "statement": "theorem exists_etale_lift_monic_coprime_factorization {A : Type u} [CommRing A] (I : Ideal A) (f : A[X]) (hf : f.Monic) (g₀ h₀ : (A ⧸ I)[X]) (hg₀ : g₀.Monic) (hh₀ : h₀.Monic) (hfactor : f.map (Ideal.Quotient.mk I) = g₀ * h₀) (hcoprime : IsCoprime g₀ h₀) : ∃ (A' : Type u) (_ : CommRing A') (φ : A →+* A'), let J : Ideal A' := I.map φ let α : A ⧸ I →+* A' ⧸ J := Ideal.quotientMap J φ Ideal.le_comap_map AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (CommRingCat.ofHom φ)) ∧ Function.Bijective α ∧ ∃ g' h' : A'[X], g'.Monic ∧ h'.Monic ∧ f.map φ = g' * h' ∧ g'.map (Ideal.Quotient.mk J) = g₀.map α ∧ h'.map (Ideal.Quotient.mk J) = h₀.map α",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lmc1108",
+  "group": "H1",
+  "result": "pass",
+  "note": "A comm ring Type u, arbitrary I, f monic, g0 h0 monic in (A/I)[X], f.map mk I = g0*h0, IsCoprime g0 h0; exists A' (Type u, existential) phi with Etale (Spec.map (ofHom phi)) (Spec A'->Spec A), alpha = quotientMap (I.map phi) phi bijective, g' h' monic, f.map phi = g'*h', reductions = g0.map alpha, h0.map alpha; #check confirmed; same spelling as G1/E1 landed siblings; no E1 sibling dependency"
  }
 }

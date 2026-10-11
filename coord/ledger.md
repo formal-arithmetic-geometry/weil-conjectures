@@ -4388,3 +4388,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:07 L: merged deliver/E1/lem-weil-pbc-lci-conormal-free-rank-codimension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.LciConormalFreeRankCodimension Ideal.exists_basis_cotangent_localization_of_completeIntersection)
 - 11:07 L: merged deliver/J1/lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal (stage 2; reviewer FIX; first push; Sheaf.RingTheory.KernelCokernelAnnihilatedModIdeal LinearMap.ker_coker_annihilated_mod_ideal)
 - 11:08 L: merged deliver/G1/lem-weil-pbc-irreducible-lisse-strata (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.IrreducibleLisseStrata AlgebraicGeometry.Scheme.exists_irreducible_lisse_stratification)
+- 11:08 L: merged deliver/H1/lem-weil-pbc-lift-monic-coprime-factorization-etale (stage 2; reviewer PASS; first push; Sheaf.RingTheory.LiftMonicCoprimeFactorizationEtale Polynomial.exists_etale_lift_monic_coprime_factorization)
