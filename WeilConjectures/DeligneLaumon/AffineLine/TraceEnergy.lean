@@ -73,12 +73,11 @@ passing to the normalized real envelope `N⁰ ⊕ (N⁰)^∨` of the constant tw
 The analytic part (the `L²`-weight, its radius characterisation and the energy bound) is proved
 in general.
 
-## TODO
-
-Prove the inputs about Weil sheaves, stated with `sorry`: the traces of twists, envelopes and
-tensor products, the trace energy bound from an upper
-weight bound, the decomposition of the trace energy of `j_*M` and the bound on its boundary
-part, and the `L²`-rigidity for real sheaves.
+The `L²`-rigidity for real sheaves uses the Euler product of the `L`-series of `G ⊗ G` on the
+curve (`AlgebraicGeometry.WeilSheaf.lSeries_mul_localPolynomial_compactlySupportedCohomology_two`,
+the Grothendieck–Lefschetz trace formula) and the purity of `H_c²`
+(`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_directImage_two` for the
+identity of the curve).
 -/
 
 @[expose] public section
