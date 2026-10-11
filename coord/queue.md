@@ -1,11 +1,11 @@
 # Work queue
 
-983 items; claim with `tools/claim.py next <group> [--stage N]`.
+979 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (983)
+## Stage 2: nodes to state (979)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -45,10 +45,7 @@
 | `lem-pc-derived-lower-truncation-step-triangle` | 1 | state |
 | `lem-pc-derived-splitting-unique` | 1 | state |
 | `lem-pc-derived-tensor-flat-second-localization` | 1 | state |
-| `lem-pc-dim-zero-finite-over-field` | 1 | state |
-| `lem-pc-finite-affine-fibre-sections` | 1 | state |
 | `lem-pc-finite-flat-restriction-projective` | 1 | state |
-| `lem-pc-finite-free-map-residue-localization` | 1 | state |
 | `lem-pc-finite-projective-tor-acyclic` | 1 | state |
 | `lem-pc-flat-tensor-complex-cohom` | 1 | state |
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
@@ -60,7 +57,6 @@
 | `lem-pc-kflat-tensor-cone-two-out-of-three` | 1 | state |
 | `lem-pc-kflat-tensor-product` | 1 | state |
 | `lem-pc-kflat-tensor-quasi-iso` | 1 | state |
-| `lem-pc-left-localization-hom-colimit` | 1 | state |
 | `lem-pc-module-bounded-flat-kflat` | 1 | state |
 | `lem-pc-module-flat-opcycles-tor-criterion` | 1 | state |
 | `lem-pc-module-opcycles-tor-surjection` | 1 | state |
