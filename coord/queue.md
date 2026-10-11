@@ -1,11 +1,11 @@
 # Work queue
 
-455 items; claim with `tools/claim.py next <group> [--stage N]`.
+452 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (455)
+## Stage 2: nodes to state (452)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -34,7 +34,6 @@
 | `lem-sc-derived-open-gluing` | 1 | state |
 | `lem-sc-derived-open-mayer-vietoris-ses` | 1 | state |
 | `lem-sc-derived-open-shriek-derived-adjunction` | 1 | state |
-| `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-intersection-effective-cartier` | 1 | state |
@@ -56,8 +55,6 @@
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-n2` | 1 | state |
-| `lem-weil-pbc-popescu-artinian-flat-subalgebras` | 1 | state |
-| `lem-weil-pbc-popescu-delocalize-base` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-height-zero` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-weak` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1 | state |
