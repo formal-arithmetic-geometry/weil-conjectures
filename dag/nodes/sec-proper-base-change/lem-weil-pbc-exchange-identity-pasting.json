@@ -170,5 +170,24 @@
   "by": "L",
   "result": "pass",
   "note": "statement made explicit with the associativity isomorphisms; proof through the Mathlib mate calculus; 6 new nodes (2 Mathlib leaves, 1 closed by Lean); the Lean pasting laws derivedBaseChangeMapPlus_id/_paste_horiz/_paste_vert (sorry-free, attached to lemma-weil-pbc-derived-exchange-coherence) define Ex through rightDerivedDesc, so they are not attached here; the sheaf-level laws squareUpperStarIso_id/_paste_horiz_hom/_paste_vert_hom (sorry-free) cover the sheaf-level part of lem-weil-pbc-derived-square-iso-pasting only, to be attached when that node is split with the derived part identified; lemma-weil-pbc-derived-exchange-coherence is a merge candidate for stage 3"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExchangeIdentityPasting",
+  "declaration": "AlgebraicGeometry.Etale.derivedExchange_identity_pasting",
+  "file": "lean/Sheaf/Paper/ExchangeIdentityPasting.lean",
+  "statement": "theorem derivedExchange_identity_pasting : let A := AddCommGrpCat.{u + 1} (∀ {X Y : Scheme.{u}} (f : X ⟶ Y), derivedBaseChangeMapPlus A (IsPullback.id_horiz f).toCommSq = Functor.whiskerLeft (f)_*[A].rightDerivedFunctorPlus (upperStarIdDerivedPlus A Y).hom ≫ (Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv ≫ Functor.whiskerRight (upperStarIdDerivedPlus A X).inv (f)_*[A].rightDerivedFunctorPlus) ∧ (∀ {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq₁ : IsPullback g' f' f g) {Y'' X'' : Scheme.{u}} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'} {f'' : X'' ⟶ Y''} (sq₂ : IsPullback h' f'' f' h), derivedBaseChangeMapPlus A (sq₂.paste_horiz sq₁).toCommSq = Functor.whiskerLeft (f)_*[A].rightDerivedFunctorPlus (upperStarCompDerivedPlus A h g).hom ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (derivedBaseChangeMapPlus A sq₁.toCommSq) (h)^*[A].mapDerivedCategoryPlus ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft (g')^*[A].mapDerivedCategoryPlus (derivedBaseChangeMapPlus A sq₂.toCommSq) ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (upperStarCompDerivedPlus A h' g').inv (f'')_*[A].rightDerivedFunctorPlus) ∧ (∀ {X' X Y' Y Z' Z : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} {e' : Y' ⟶ Z'} {e : Y ⟶ Z} {k : Z' ⟶ Z} (sq₁ : IsPullback g' f' f g) (sq₂ : IsPullback g e' e k), derivedBaseChangeMapPlus A (sq₁.paste_vert sq₂).toCommSq = Functor.whiskerRight (derivedDirectImageComposition e f).hom (k)^*[A].mapDerivedCategoryPlus ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft (f)_*[A].rightDerivedFunctorPlus (derivedBaseChangeMapPlus A sq₂.toCommSq) ≫ (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (derivedBaseChangeMapPlus A sq₁.toCommSq) (e')_*[A].rightDerivedFunctorPlus ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft (g')^*[A].mapDerivedCategoryPlus (derivedDirectImageComposition e' f').inv)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Abelian coefficients and cartesian squares exactly as in the node. Uses the recorded exchange map, identified with the derived mate by upstream baseChange_eq_derivedBaseChangeMapPlus; vertical comparison is the recorded conjugate-defined derivedDirectImageComposition, not rightDerivedFunctorPlusCompIso'."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eip1102",
+  "group": "E1",
+  "result": "pass",
+  "note": "identity square IsPullback.id_horiz f = (f,f,id_Y,id_X), Ex = eD_Y Rf_* then Rf_*(eD_X)^-1 (equiv. to node eq.); horizontal sq2.paste_horiz sq1 = (f,f'',g∘h,g'∘h'), four arrows (cD_g,h)^-1Rf_*, h^-1Ex1, Ex2 g'^-1, Rf''_* cD_g',h' with upperStarCompDerivedPlus orientation D(h≫g)≅Dg⋙Dh; vertical relabeled sq1=node sq3, sq2=node sq1, paste_vert gives (f∘e,f'∘e',g,g''), dD = landed conjugate derivedDirectImageComposition (hom first, inv last); Ex = recorded derivedBaseChangeMapPlus (= mate by baseChange_eq_derivedBaseChangeMapPlus); A = AddCommGrpCat.{u+1}; #check'd names and paste/id_horiz signatures; recompiled in L"
  }
 }
