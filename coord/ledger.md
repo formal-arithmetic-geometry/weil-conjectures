@@ -4506,3 +4506,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:48 L: merged deliver/M1/lem-sc-meromorphic-sheaf-generic-product (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.MeromorphicSheafGenericProduct AlgebraicGeometry.meromorphicSheaf_generic_product)
 - 11:49 L: merged deliver/F1/lem-pc-base-change-closure-components (stage 2; reviewer FIX; first push; Sheaf.Paper.BaseChangeClosureComponents AlgebraicGeometry.baseChange_closure_components)
 - 11:49 L: merged deliver/E1/lem-weil-pbc-lqf-qc-source-bounded-fibres (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite AlgebraicGeometry.Scheme.Hom.hasUniversallyBoundedFibers_of_isLocallyQuasiFinite)
+- 11:49 L: merged deliver/F1/lem-weil-pbc-descend-closed-immersion (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DescendClosedImmersion AlgebraicGeometry.exists_isClosedImmersion_stage_of_locallyOfFiniteType)

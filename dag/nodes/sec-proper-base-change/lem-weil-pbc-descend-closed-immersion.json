@@ -216,5 +216,24 @@
   "item": "lem-weil-pbc-descend-closed-immersion",
   "worker": "stage1",
   "summary": "Split in eight steps along the proof of Stacks Limits 01ZP (tags 01ZP, 081D, 01ZN, 01SE, 07RH, 01QO verified in stacks-project/tags/tags). Statement kept (agrees with 01ZP in Situation 081D). Step 1: a closed immersion is affine (leaf lem-weil-pbc-closed-immersion-integral-separated-uc(b), 01SE), so f_k is affine for some k>=0 by lem-weil-pbc-descend-affine (01ZN). Steps 2-5 (re-basing at k, finitely many affine pieces U_k -> V_k -> W_k with phi_k of finite type, the base over W_k as Spec of a colimit, the pieces of f_T as Spec of id_{A_T} (x) phi_k) are taken verbatim from the reviewed sibling lem-weil-pbc-descend-finite (01ZO), whose reduction is the same. Step 6: f closed immersion gives phi surjective over S (leaf lem-weil-pbc-closed-immersion-affine-cover-criterion(1), 01QO). Step 7: new unsplit node lem-weil-pbc-colimit-surjective-ring-map (Algebra 07RH) gives a stage i_b, surjectivity persisting for larger i (written out). Step 8: a common index and the affine-cover criterion (2) make f_i a closed immersion. stmt_deps unchanged. lem-weil-pbc-eventually-closed-immersion (a limit of schemes with closed-immersion transition maps over a fixed T) is a different statement and is not used. Mathlib: the item and the new node have no match (searches recorded)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DescendClosedImmersion",
+  "declaration": "AlgebraicGeometry.exists_isClosedImmersion_stage_of_locallyOfFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/DescendClosedImmersion.lean",
+  "statement": "theorem exists_isClosedImmersion_stage_of_locallyOfFiniteType {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (t : i ⟶ j), IsAffineHom (D.map t)] (c : Cone D) (hc : IsLimit c) (i₀ : I) [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))] (X₀ Y₀ : Over (D.obj (op i₀))) [CompactSpace X₀.left] [QuasiSeparatedSpace X₀.left] [CompactSpace Y₀.left] [QuasiSeparatedSpace Y₀.left] (f₀ : X₀ ⟶ Y₀) [LocallyOfFiniteType f₀.left] (hf : IsClosedImmersion ((Over.pullback (c.π.app (op i₀))).map f₀).left) : ∃ (i : I) (h : i₀ ≤ i), IsClosedImmersion ((Over.pullback (D.map (homOfLE h).op)).map f₀).left",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-dci1134"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dci1134",
+  "group": "F1",
+  "result": "fix",
+  "note": "I directed preorder now Type u (was independent Type v); D affine transitions IsAffineHom; c+IsLimit; S0,X0,Y0 CompactSpace+QuasiSeparatedSpace; f0 Over-morphism LocallyOfFiniteType; hf IsClosedImmersion of Over.pullback along c.π; concl ∃ i≥i0 IsClosedImmersion of Over.pullback along D.map; #check names"
  }
 }
