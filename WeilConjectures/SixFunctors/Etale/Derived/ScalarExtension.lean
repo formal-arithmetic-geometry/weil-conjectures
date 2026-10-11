@@ -579,9 +579,10 @@ noncomputable abbrev derivedCompleteRationalScalarExtension :
     derivedCompleteIntegralScalarExtension_map_smul
 
 /-- Given that the derived base change `K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_L` exists on `D(Y_ét, 𝒪_E)` (`h`) and
-carries derived complete objects to derived complete objects (`hc`), the scalar extension `- ⊗_E L : D_comp(Y_ét, E) ⥤
-D_comp(Y_ét, L)`, induced on the rationalizations by the derived base change, is a triangulated
-functor: it commutes with shifts and carries distinguished triangles to distinguished triangles.
+carries derived complete objects to derived complete objects (`hc`), the scalar extension
+`- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)`, induced on the rationalizations by the derived
+base change, is a triangulated functor: it commutes with shifts and carries distinguished
+triangles to distinguished triangles.
 
 As in the blueprint, it is the composite of the derived base change, which is triangulated as the
 left adjoint of the triangulated restriction of scalars, and of the rationalization; the induced
@@ -635,10 +636,11 @@ triangulated functor.
 
 Let `E ⊆ L` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`. The scalar extension
 `- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)`
-(`AlgebraicGeometry.Etale.rationalScalarExtension`) is a triangulated functor: it commutes with shifts and carries distinguished triangles to
-distinguished triangles. As in the blueprint, it is the composite of the derived base change,
-triangulated as the left adjoint of the triangulated restriction of scalars, and of the
-rationalization (`CategoryTheory.Rationalization.isTriangulated_mapOfRingHom`); by
+(`AlgebraicGeometry.Etale.rationalScalarExtension`) is a triangulated functor: it commutes with
+shifts and carries distinguished triangles to distinguished triangles. As in the blueprint, it
+is the composite of the derived base change, triangulated as the left adjoint of the
+triangulated restriction of scalars, and of the rationalization
+(`CategoryTheory.Rationalization.isTriangulated_mapOfRingHom`); by
 `AlgebraicGeometry.Etale.nonempty_iso_fromIntegral_of_isDerivedBaseChange` it does not depend on
 the integral representatives. -/
 instance isTriangulated_rationalScalarExtension :

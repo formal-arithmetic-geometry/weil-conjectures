@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 
 /-!
 # Perfect complexes on the coefficient site
@@ -37,7 +39,7 @@ dualizability for the derived tensor product
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory Opposite
 
 open scoped CategoryTheory.Functor
 
@@ -73,6 +75,55 @@ lemma DerivedCategory.IsSitePerfect.of_iso
   refine ⟨𝒰, fun i ↦ ?_⟩
   obtain ⟨P, a, b, ha, hb, hP, ⟨e'⟩⟩ := h i
   exact ⟨P, a, b, ha, hb, hP, ⟨(L((𝒰.f i)^*[ModuleCat.{u + 1} Λ])).mapIso e.symm ≪≫ e'⟩⟩
+
+section General
+
+variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] {Y : Scheme.{u}}
+
+/-- For a dualizable `K`, the internal hom out of `K` commutes with tensoring by any `T`:
+`RHom(K, M ⊗ᴸ T) ≅ RHom(K, M) ⊗ᴸ T`, both sides being `K^∨ ⊗ᴸ M ⊗ᴸ T`
+(`AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_tensor`). -/
+theorem DerivedCategory.nonempty_iso_derivedHom_derivedTensor_of_isDualizable
+    {K : DerivedCategory (Sheaf Y.smallEtaleTopology A)} (hK : IsDualizable K)
+    (M T : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    Nonempty ((RHom(Y)[A].obj (op K)).obj (((derivedTensor A Y).obj M).obj T) ≅
+      ((derivedTensor A Y).obj ((RHom(Y)[A].obj (op K)).obj M)).obj T) := by
+  obtain ⟨e₁⟩ := DerivedCategory.nonempty_iso_coefficientDual_tensor hK (M ⊗ T)
+  obtain ⟨e₂⟩ := DerivedCategory.nonempty_iso_coefficientDual_tensor hK M
+  exact ⟨e₁.symm ≪≫ (α_ _ _ _).symm ≪≫ whiskerRightIso e₂ T⟩
+
+end General
+
+/-- A complex which is perfect on the coefficient site is dualizable for the derived tensor
+product: dualizability is local on the étale site, and a bounded complex of finite projective
+`Λ_U`-modules is dualizable. -/
+theorem DerivedCategory.IsSitePerfect.isDualizable
+    {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.IsSitePerfect K) : IsDualizable K :=
+  sorry
+
+/-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction; the
+internal hom between finite levels.
+
+If the first variable `K` is perfect on the coefficient site, the internal hom commutes with
+the reduction of the coefficients along `Λ ⟶ Λ/J`, for any ideal `J`:
+`RHom(K, L) ⊗ᴸ (Λ/J)_X ≅ RHom(K, L ⊗ᴸ (Λ/J)_X)`. As in the blueprint, `K` being site-perfect,
+its internal hom is a tensor product with its coefficient dual, which commutes with coefficient
+change. -/
+theorem nonempty_iso_reductionModIdeal_derivedHom_of_isSitePerfect (J : Ideal Λ)
+    {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.IsSitePerfect K)
+    (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((reductionModIdeal Λ X J).obj
+        ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj L) ≅
+      (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj ((reductionModIdeal Λ X J).obj L)) := by
+  obtain ⟨e⟩ := DerivedCategory.nonempty_iso_derivedHom_derivedTensor_of_isDualizable
+    hK.isDualizable L ((DerivedCategory.singleFunctor _ 0).obj
+      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (ModuleCat.of Λ (Λ ⧸ J))))
+  exact ⟨e.symm⟩
 
 end Etale
 
