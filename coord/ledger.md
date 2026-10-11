@@ -5257,3 +5257,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:32 L: merged deliver/E1/def-weil-pbc-sheaf-ext (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.SheafExt AlgebraicGeometry.sheafExt)
 - 15:32 L: merged deliver/H1/lem-pur-essential-constant-pro-criterion-05py (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProCriterion CategoryTheory.homColimit_essentiallyConstantProDiagram)
 - 15:32 L: merged deliver/T1/lem-weil-pbc-truncated-coskeleton-finite-limits (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.TruncatedCoskeletonFiniteLimits CategoryTheory.truncatedCoskeletonFiniteLimits)
+- 15:32 L: merged deliver/H1/lem-sc-hom-etale-locus-translation (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.HomEtaleLocusTranslation AlgebraicGeometry.hom_etaleLocus_translation)
