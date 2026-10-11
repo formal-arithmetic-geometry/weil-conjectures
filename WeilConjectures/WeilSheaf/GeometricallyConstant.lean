@@ -162,6 +162,54 @@ theorem exists_iso_constantTwist_of_isGeometricallyConstant
   · exact absurd (h.eq_of_src i 0) hi
   · exact ⟨b, ⟨(asIso i).symm⟩⟩
 
+/-- **Weil sheaves with constant rank-one underlying sheaf are constant twists.** A Weil sheaf `F`
+on `U` with connected geometric fiber `Ū` whose underlying sheaf is isomorphic to `ℚ̄_ℓ` is
+isomorphic to a constant Weil twist `ℚ̄_ℓ(b)`: a Frobenius eigenvector `a` of the global sections
+gives a morphism `ℚ̄_ℓ(b) ⟶ F` whose underlying morphism `ℚ̄_ℓ ⟶ F̄ ≅ ℚ̄_ℓ` is nonzero, hence an
+isomorphism on the connected `Ū`. -/
+theorem exists_iso_constantTwist_of_iso_unit
+    [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
+    [ConnectedSpace (U ↘ Spec (CommRingCat.of k₀)).geometricFiber] {F : WeilSheaf k₀ l U}
+    (e : F.obj.carrier ≅ AdicSheaf.unit l (U ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
+    ∃ b : (PadicAlgCl l)ˣ, Nonempty (F ≅ (adicConstant k₀ l U).constantTwist b) := by
+  set Ū := (U ↘ Spec (CommRingCat.of k₀)).geometricFiber
+  have hunit : ¬ IsZero (AdicSheaf.unit l Ū) := fun h ↦
+    not_isZero_adicConstantSheaf l _ ((AdicSheaf.forget _).map_isZero h)
+  have hv₀ : e.inv ≠ 0 := fun h ↦ hunit ((IsZero.iff_id_eq_zero _).2 (by
+    rw [← e.inv_hom_id, h, zero_comp]))
+  have : Nontrivial F.globalSections.carrier := by
+    refine ⟨⟨globalSectionOfModHom e.inv, 0, fun h ↦ hv₀ ?_⟩⟩
+    refine (bijective_globalSectionOfModHom F.obj.carrier).1 (h.trans ?_)
+    rw [globalSectionOfModHom_eq]
+    erw [Mod.zero_hom, Functor.map_zero]
+    rfl
+  -- a Frobenius eigenvector `a` with eigenvalue `β`
+  obtain ⟨β, hβ⟩ := Module.End.exists_eigenvalue F.globalSections.frobeniusEnd
+  obtain ⟨a, ha⟩ := hβ.exists_hasEigenvector
+  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at ha
+  obtain ⟨ha, ha₀⟩ := ha
+  have hβ₀ : β ≠ 0 := by
+    rintro rfl
+    rw [zero_smul] at ha
+    exact ha₀ (F.globalSections.frobenius.injective (ha.trans (map_zero _).symm))
+  let b := Units.mk0 β hβ₀
+  let i := homOfGlobalSection F b a ha
+  have hv : modHomOfGlobalSection F a ≠ 0 := fun h ↦ ha₀ (by
+    rw [← globalSectionOfModHom_modHomOfGlobalSection F a, h, globalSectionOfModHom_eq]
+    erw [Mod.zero_hom, Functor.map_zero]
+    rfl)
+  -- its underlying morphism `ℚ̄_ℓ ⟶ F̄ ≅ ℚ̄_ℓ` is a nonzero constant, hence invertible
+  have : IsIso (modHomOfGlobalSection F a ≫ e.hom) := AdicSheaf.isIso_of_ne_zero fun h ↦ hv (by
+    rw [← Category.comp_id (modHomOfGlobalSection F a), ← e.hom_inv_id, ← Category.assoc, h,
+      zero_comp])
+  have : IsIso (modHomOfGlobalSection F a) := IsIso.of_isIso_comp_right _ e.hom
+  have : IsIso (((WeilSheaf.objectProperty k₀ l U).ι ⋙
+      Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l U)).map i) := this
+  have : IsIso i := isIso_of_reflects_iso i ((WeilSheaf.objectProperty k₀ l U).ι ⋙
+      Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l U))
+  exact ⟨b, ⟨(asIso i).symm⟩⟩
+
 end WeilSheaf
 
 end AlgebraicGeometry
