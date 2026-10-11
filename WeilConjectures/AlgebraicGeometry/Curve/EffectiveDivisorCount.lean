@@ -7,6 +7,8 @@ module
 
 public import Mathlib.FieldTheory.Finite.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
+public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+public import WeilConjectures.ZetaSeries
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Endomorphism
@@ -273,5 +275,60 @@ theorem Divisor.sub_one_mul_card_idealSheaf_iso [Finite k] [IsProper (C ↘ Spec
   rw [mul_comm, ← hcard, ← hVq, ← hV, Nat.add_sub_cancel]
 
 end Curve
+
+section Degree
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
+
+/-- **The degree of a closed point.** The reduced closed subscheme on a closed point `P` of a
+`k`-scheme is `Spec κ(P)`, so `dim_k Γ(P, 𝒪_P) = [κ(P) : k]`. -/
+theorem finrankΓ_subschemeι_vanishingIdeal_singleton {P : X} (hP : IsClosed {P}) :
+    ((IdealSheafData.vanishingIdeal ⟨{P}, hP⟩).subschemeι ≫ X ↘ Spec (.of k)).finrankΓ =
+      (X ↘ Spec (.of k)).degreeOver P := by
+  have := isClosed_singleton_iff_isClosedImmersion.1 hP
+  set g := X.fromSpecResidueField P with hg
+  have hker : g.ker = IdealSheafData.vanishingIdeal ⟨{P}, hP⟩ := by
+    rw [← IdealSheafData.map_bot, ← nilradical_eq_bot, ← IdealSheafData.vanishingIdeal_top,
+      IdealSheafData.map_vanishingIdeal]
+    congr 1
+    ext1
+    rw [TopologicalSpace.Closeds.coe_closure, TopologicalSpace.Closeds.coe_top, Set.image_univ,
+      hg, Scheme.range_fromSpecResidueField]
+    exact hP.closure_eq
+  rw [← hker, Scheme.Hom.finrankΓ_eq_of_iso (g.ker.subschemeι ≫ X ↘ Spec (.of k))
+    (g ≫ X ↘ Spec (.of k)) (asIso g.toImage).symm (Iso.refl _) ?_]
+  · rw [hg, ← Hom.specMap_residueFieldAlgebraMap]
+    let := ((X ↘ Spec (.of k)).residueFieldAlgebraMap P).toAlgebra
+    exact Scheme.Hom.finrankΓ_SpecMap k (X.residueField P)
+  · rw [Iso.refl_hom, Spec.map_id, Category.comp_id, Iso.symm_hom, asIso_inv, IsIso.inv_comp_eq,
+      Hom.toImage_imageι_assoc]
+
+variable [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+
+/-- **The degree of an effective divisor.** For an effective divisor `E = ∑_P n_P [P]` on a
+smooth proper curve over `k`, `dim_k Γ(E, 𝒪_E) = ∑_P n_P [κ(P) : k]`. -/
+theorem Divisor.finrankΓ_subschemeι_idealSheaf (E : closedPoints X →₀ ℕ) :
+    ((Divisor.idealSheaf E).subschemeι ≫ X ↘ Spec (.of k)).finrankΓ =
+      E.sum fun P n ↦ n * (X ↘ Spec (.of k)).degreeOver P.1 := by
+  induction E using Finsupp.induction_linear with
+  | zero =>
+    rw [Divisor.idealSheaf_zero, Finsupp.sum_zero_index]
+    let := ((⊤ : X.IdealSheafData).subschemeι ≫ X ↘ Spec (.of k)).ΓAlgebra
+    exact Module.finrank_zero_of_subsingleton
+  | add E E' hE hE' =>
+    have h₁ := Divisor.isInvertible_idealSheaf (X ↘ Spec (.of k)) E
+    have h₂ := Divisor.isInvertible_idealSheaf (X ↘ Spec (.of k)) E'
+    have := h₁.isFinite_subschemeι_comp (k := k)
+    have := h₂.isFinite_subschemeι_comp (k := k)
+    have := (h₁.mul h₂).isFinite_subschemeι_comp (k := k)
+    rw [Divisor.idealSheaf_add, IdealSheafData.finrankΓ_subschemeι_mul_comp _ h₁ h₂, hE, hE',
+      Finsupp.sum_add_index' (fun _ ↦ zero_mul _) fun _ _ _ ↦ add_mul _ _ _]
+  | single P n =>
+    have hP := isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one
+      (X ↘ Spec (.of k)) P.2
+    rw [Divisor.idealSheaf_single, hP.finrankΓ_subschemeι_pow_comp,
+      finrankΓ_subschemeι_vanishingIdeal_singleton, Finsupp.sum_single_index (zero_mul _)]
+
+end Degree
 
 end AlgebraicGeometry.Scheme
