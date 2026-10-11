@@ -257,6 +257,16 @@ theorem IsConnectedCurve.exists_smooth_properCompactification [IsAlgClosed K]
       krullDim_eq_one := (smoothOfRelativeDimension_iff_topologicalKrullDim_eq c.g 1).mp hsm }
   exact ⟨c, hconn, inferInstance, hfin, hclosed⟩
 
+/-- A smooth connected curve is smooth of relative dimension one. -/
+lemma IsConnectedCurve.smoothOfRelativeDimension_one {C : Scheme.{u}} (f : C ⟶ Spec (.of K))
+    [IsConnectedCurve f] [Smooth f] : SmoothOfRelativeDimension 1 f := by
+  have := IsConnectedCurve.connectedSpace' f
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsRegular C := IsRegular.of_smooth f
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  exact (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mpr
+    (IsConnectedCurve.krullDim_eq_one (f := f))
+
 /-- **Open subschemes of a proper curve are affine.** Let `C` be a smooth proper connected curve
 over an algebraically closed field `K`. Every open subscheme `V ≠ C` is affine: its complement
 `S` is a finite nonempty set of closed points, the effective divisor `D = ∑_{P ∈ S} [P]` has
