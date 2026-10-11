@@ -57,7 +57,7 @@ Combined with the change of scalars of
 `WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars`, this gives the exceptional
 operations on module objects over a coefficient ring sheaf, `f_! = P_B ∘ Res_{α_f}` and
 `f^! = Coext_{α_f} ∘ G_B`, see
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteExtension.LowerShriek.Defs`.
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs`.
 
 -/
 
