@@ -158,5 +158,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gtc2752 (reviewer sub-agent of L); spot-checked: Return point of R-gtc2638 repaired: over-base node gone, statement unchanged, proof follows Stacks 0BF4 (more-morphisms.tex 9682-9716) step by step with tags; new nodes 0E0L/0BDP/0BF0/0BF3 checked against the Stacks texts, no duplicates in dag/nodes (grep of tags, seesaw/rigidity/cube/pushforward nodes; lem-pc-h0-* are over a field only). FIX more, RETURN less: (1) C4/B: lem-sc-picard-product-open restated exactly as Tag 0BF3 (0BDP hypotheses instead of integral fibres; the two slices named as (1 x tau)^*L, (sigma x 1)^*L); step 6 now checks those hypotheses via Tag 0E0L (Step 2 extended, uses + lem-sc-proper-flat-global-sections) and names the slices; (2) B: lem-sc-picard-locus-closed made self-contained (universal pushforward hypothesis written out, not referenced to another node's conclusion, geometric fibre and closed immersion cited); (3) B3: stmt_deps of the four new nodes filled from their cited definitions; also Step 1 names Varieties 038K/038F/035Z and Step 7 makes Z'=Z scheme-theoretic (monomorphism gluing).; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeneralTheoremOfCube",
+  "declaration": "AlgebraicGeometry.nonempty_iso_unit_of_tensorPullback_slices_and_fiber",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeneralTheoremOfCube.lean",
+  "statement": "theorem nonempty_iso_unit_of_tensorPullback_slices_and_fiber {k : Type u} [Field k] (X Y Z : Over (Spec (.of k))) [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom] [GeometricallyIntegral Y.hom] [ConnectedSpace Z.left] (x : 𝟙_ (Over (Spec (.of k))) ⟶ X) (y : 𝟙_ (Over (Spec (.of k))) ⟶ Y) (L : ((X ⊗ Y) ⊗ Z).left.Modules) [L.IsInvertible] (hx : Nonempty ((Scheme.Modules.tensorPullback (lift (lift (toUnit (Y ⊗ Z) ≫ x) (fst Y Z)) (snd Y Z)).left).obj L ≅ SheafOfModules.unit _)) (hy : Nonempty ((Scheme.Modules.tensorPullback (lift (lift (fst X Z) (toUnit (X ⊗ Z) ≫ y)) (snd X Z)).left).obj L ≅ SheafOfModules.unit _)) (hz : ∃ z : Z.left, Nonempty ((Scheme.Modules.tensorPullback ((snd (X ⊗ Y) Z).left.fiberι z)).obj L ≅ SheafOfModules.unit _)) : Nonempty (L ≅ SheafOfModules.unit _)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gtc1225",
+  "group": "K1",
+  "result": "pass",
+  "note": "k field; X,Y,Z : Over (Spec k) (source cube's form); IsProper+GeometricallyIntegral on X.hom,Y.hom; x,y sections from the unit of Over; ConnectedSpace Z.left; L invertible on ((X⊗Y)⊗Z).left (rfl = Limits.pullback); hx/hy slices x×id×id, id×y×id via tensorPullback ≅ unit; hz ∃ z, fiberι z (fiber rfl = pullback along Spec κ(z)); conclusion L ≅ O"
  }
 }
