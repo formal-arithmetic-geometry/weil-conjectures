@@ -226,5 +226,31 @@
   "by": "L",
   "result": "accepted",
   "note": "8 steps (agent proof on affine opens; Stacks 01JU argues via locally ringed spaces): the tilde ideal via the tilde-sections leaf (r=1), K O_X = KB on affine opens by module-pullback-ideal-quotient (1), j_K a closed immersion by base change of Spec(A/K) -> Spec A, the affine description by pasting and the affine fibre-product leaf, (2) by (KB)(K'B) = (KK')B and induction, (3) by the universal property, pasting and (1) over A/J, (4) by closed-immersion-pushforward-ideal-powers (1). No new nodes. Tags 01JU, 01I4, 01JQ, 01JR, 01QO, 088F verified."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal",
+  "declaration": "AlgebraicGeometry.quotientBaseChange_closedImmersion_ideal",
+  "declarations": [
+   "AlgebraicGeometry.quotientBaseChange_closedImmersion_ideal",
+   "AlgebraicGeometry.quotientBaseChange_extendedIdeal_mul_pow",
+   "AlgebraicGeometry.quotientBaseChange_nestedIdeals",
+   "AlgebraicGeometry.quotientBaseChange_extendedIdeal_comap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/QuotientBaseChangeIdeal.lean",
+  "statement": "theorem quotientBaseChange_closedImmersion_ideal {A : Type u} [CommRing A] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) (K : Ideal A) : IsClosedImmersion (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K)))) ∧ (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K)))).ker = (Scheme.IdealSheafData.ofIdealTop (K.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f ∧ ∀ U : X.affineOpens, IsAffineOpen (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K))) ⁻¹ᵁ U.1) ∧ ((Scheme.IdealSheafData.ofIdealTop (K.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f).ideal U = K.map ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U.1 le_top).hom ∧ ∃ e : (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K))) ⁻¹ᵁ U.1).toScheme ≅ Spec (CommRingCat.of (Γ(X, U.1) ⧸ K.map ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U.1 le_top).hom)), e.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (K.map ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U.1 le_top).hom))) ≫ U.2.isoSpec.inv = pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K))) ∣_ U.1",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Four declarations state clauses (1), (2), (3), (4), respectively. Written without local notation (reviewer R-qbc expanded F1's file-local notations): K~ on Spec A is Scheme.IdealSheafData.ofIdealTop (K.map (ΓSpecIso (CommRingCat.of A)).inv.hom); K O_X is its recorded IdealSheafData.comap f; X_K is pullback f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk K))) with projection pullback.fst; B = Γ(X, U) is an A-algebra through (ΓSpecIso).inv ≫ f.appLE ⊤ U le_top.",
+  "fixed_by": "R-qbc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-qbc",
+  "group": "F1",
+  "result": "fix",
+  "note": "A comm ring, f : X -> Spec A arbitrary, X_K = pullback f (Spec.map (Quotient.mk K)); (1) closed immersion, ker = ofIdealTop.comap f, affine preimage, sections KB, iso to Spec(B/KB) tied over U.isoSpec; (2) product and powers m>=1; (3) unique transition by both projection identities, closed, ker J'O_{X_J} via j_J>>f, local quotient B/JB->B/J'B; (4) comap along j_K equals ext along j_K>>f, both sections L.(B/KB). Fix: file-local notations expanded so the recorded statement is readable"
  }
 }
