@@ -5302,3 +5302,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:51 L: merged deliver/Q1/lem-sc-finite-locally-free-derived-hom (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteLocallyFreeDerivedHom AlgebraicGeometry.finiteLocallyFree_derivedInternalHom_single)
 - 15:51 L: merged deliver/Q1/lemma-weil-pbc-etale-cohomology-continuity (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity AlgebraicGeometry.Etale.cohomology_continuity_of_isLimit)
 - 15:52 L: merged deliver/R1/lem-sc-pic-affine-quotient (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Curve.PicAffineQuotient AlgebraicGeometry.IsConnectedCurve.pic_affine_quotient)
+- 15:52 L: merged deliver/R1/lem-weil-pbc-coherent-formal-modules-abelian (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian AlgebraicGeometry.coherentFormalModule_abelian)

@@ -240,5 +240,23 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Ten steps along the proof of 087X with Stacks' 'details omitted' (termwise cokernels) and the omitted uniqueness of the kernel factorization written out (a second Artin-Rees argument); five new nodes: three unsplit (01Y0/01Y1 kernels, cokernels, sums, sub/quotients of coherent modules on locally Noetherian schemes; J F and F/J F quasi-coherent with affine sections, assembled from 01I8/01IC/01CE; 087W the affine description of Coh(Spec A, I) by finite modules over the completion) and two Mathlib leaves verified by line (00IN Artin-Rees: Ideal.exists_pow_inf_eq_pow_smul, RingTheory/Filtration.lean:389; the abelian criterion via Coim = Im: Abelian.ofCoimageImageComparisonIsIso, Abelian/Basic.lean:260). Kernels built with one Artin-Rees constant over a finite affine cover; restriction to the affine pieces and the equivalence 087W reduce Coim = Im to modules. Stage-3 note: the Stacks typo a^{-1}(I^l N) for f^{-1}(I^l N) in the proof of 087X; and lem-weil-pbc-ideal-times-quasi-coherent-affine-sections overlaps def-weil-pbc-coherent-formal-module (0) and lem-weil-pbc-closed-immersion-pushforward-ideal-powers (1): merge candidates."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_abelian",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesAbelian.lean",
+  "statement": "theorem coherentFormalModule_abelian (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) : Nonempty (Abelian (CoherentFormalModule X I)) ∧ ∀ (F G : CoherentFormalModule X I) (α : F ⟶ G), ∃ c : CokernelCofork α, Nonempty (IsColimit c) ∧ ∀ n : ℕ, Nonempty (IsColimit (((IsCoherentFormalModule I).ι ⋙ (evaluation ℕᵒᵖ X.Modules).obj (op n)).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
