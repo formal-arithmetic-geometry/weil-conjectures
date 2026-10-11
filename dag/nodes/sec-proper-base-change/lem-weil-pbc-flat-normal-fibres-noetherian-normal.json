@@ -170,5 +170,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps following Stacks 0C22: fibre rings Noetherian (existing node); Serre's criterion 031S both ways (new unsplit node); (S_2) goes up (new unsplit 0339 node); (R_1) goes up (existing 033A node from F1's regular-ring-smooth-ascent). New unsplit definitions def-weil-pbc-depth (00LI) and def-weil-pbc-serre-conditions-rk-sk (031P); Mathlib has neither depth nor the Serre conditions. Stage 3: lem-weil-pbc-regularity-rk-goes-up should cite def-weil-pbc-serre-conditions-rk-sk instead of its inline (R_k), and its source line is 46460, not 49612."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalOfFlatNormalFibers",
+  "declaration": "RingHom.normal_of_flat_normal_fibers",
+  "file": "lean/Sheaf/RingTheory/NormalOfFlatNormalFibers.lean",
+  "statement": "theorem normal_of_flat_normal_fibers {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S] (φ : R →+* S) (hflat : φ.Flat) (hfibres : letI : Algebra R S := φ.toAlgebra ∀ (p : Ideal R) [p.IsPrime], ∀ (q : Ideal (p.Fiber S)) [q.IsPrime], IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q)) (hR : ∀ (p : Ideal R) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) : ∀ (q : Ideal S) [q.IsPrime], IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fnf1029",
+  "group": "J1",
+  "result": "pass",
+  "note": "R,S CommRing u/v; (1)(2) IsNoetherianRing R,S; (3) phi.Flat; (4) letI phi.toAlgebra, forall prime p, p.Fiber S normal inline (all primes q, IsDomain & IsIntegrallyClosed of AtPrime q); (5) R normal inline; concl S normal inline; zero rings vacuous; docstring 5 node steps"
  }
 }
