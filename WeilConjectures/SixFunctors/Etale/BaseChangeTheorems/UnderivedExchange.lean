@@ -5,7 +5,11 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.SeparablyClosed
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 
 /-!
 # The underived proper base change

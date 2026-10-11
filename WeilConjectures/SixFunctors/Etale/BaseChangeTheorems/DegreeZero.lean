@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 
 /-!
 # Sections of étale sheaves on proper schemes over a henselian base
