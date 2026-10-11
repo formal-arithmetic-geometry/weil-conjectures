@@ -147,5 +147,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cgb1913 (reviewer sub-agent of L); spot-checked: Checked statement vs Tag 09SN; steps 1-3 against cited statements (hom-out (i) for lifts f_{n+1} and telescope map, hom-into (ii) on rotated triangle, compact-hom-hocolim used as statement only: unsplit node on sheaf-dag, hypotheses met since C has set-indexed coproducts; no cycle: K1 node has no proof deps, defs do not cite item); generator def gives C=0 via components of maps from the coproduct. FIX more, RETURN less: (1) B4 plain-text arrows in all three steps rewritten in TeX (preflight warning); (2) B3/E7 statement: 'sequential homotopy colimit' made self-contained by naming the telescope triangle with 1-shift (same meaning as Stacks hocolim, no mathematical change); (3) step 3 lift through X_1 restated correctly (gamma[1] factors through X_1 -> X -> Y, so gamma through f[-1], and X[-1]->Y[-1]->C is zero), plus explicit f_n o beta = 0 and final iso/TR1 step. Tool uses accepted: both Hom-exactness nodes are generic triangulated tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompactGeneratorsBuildObjects",
+  "declaration": "CategoryTheory.compactGenerators_buildObjects",
+  "file": "lean/Sheaf/CategoryTheory/CompactGeneratorsBuildObjects.lean",
+  "statement": "theorem compactGenerators_buildObjects {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [HasCoproducts.{max w v} C] {I : Type (max w v)} (E : I → C) (hcompact : ∀ i : I, IsCompactObject (E i)) (hgenerate : IsTriangulatedGeneratingFamily E) (Y : C) : ∃ (X : ℕ → C) (t : ∀ n : ℕ, X n ⟶ X (n + 1)), (∃ (J : Type (max w v)) (i : J → I) (m : J → ℤ), Nonempty (X 0 ≅ ∐ fun j : J => (E (i j))⟦m j⟧)) ∧ (∃ (Z : ℕ → C) (a : ∀ n : ℕ, Z n ⟶ X n) (b : ∀ n : ℕ, X (n + 1) ⟶ (Z n)⟦(1 : ℤ)⟧), (∀ n : ℕ, ∃ (J : Type (max w v)) (i : J → I) (m : J → ℤ), Nonempty (Z n ≅ ∐ fun j : J => (E (i j))⟦m j⟧)) ∧ ∀ n : ℕ, Triangle.mk (a n) (t n) (b n) ∈ distTriang C) ∧ ∃ (q : (∐ fun n : ULift.{max w v} ℕ => X n.down) ⟶ Y) (r : Y ⟶ (∐ fun n : ULift.{max w v} ℕ => X n.down)⟦(1 : ℤ)⟧), Triangle.mk (𝟙 (∐ fun n : ULift.{max w v} ℕ => X n.down) - Sigma.desc (fun n : ULift.{max w v} ℕ => t n.down ≫ Sigma.ι (fun k : ULift.{max w v} ℕ => X k.down) ⟨n.down + 1⟩)) q r ∈ distTriang C",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cgb0732",
+  "group": "H1",
+  "result": "fix",
+  "note": "Tag 09SN vs Lean: triangulated C (Mathlib Pretriangulated+IsTriangulated), HasCoproducts.{max w v}, family E : I -> C with IsCompactObject at max w v (checked by pp.universes) and IsTriangulatedGeneratingFamily, X_1=X 0 coproduct of shifts, Z_n coproducts of shifts with dist. triangles Z_n->X_n->X_{n+1}->Z_n[1], telescope triangle (1 - shift) with third vertex Y; empty I/J, zero objects ok; no hocolim def node exists (inline per node); report fix only: stale Type w lines in worker section"
  }
 }

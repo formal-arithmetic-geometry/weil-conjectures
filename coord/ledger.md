@@ -3503,3 +3503,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:26 L: merged deliver/C1/lem-pc-field-extension-fpqc-cover (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FieldExtensionFpqcCover AlgebraicGeometry.fpqcCover_specMap_algebraMap_of_field)
 - 06:27 L: merged: K1 lem-exc-finite-galois-tensor-decomposition (R-fgt0730 PASS a9d632a3b). Launched R-dac0734 J1 dimension-affine-open-cover.
 - 06:27 L: merged deliver/E1/lem-pc-brown-cohomological-representability (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.BrownCohomologicalRepresentability CategoryTheory.brownCohomologicalRepresentability)
+- 06:27 L: merged deliver/H1/lem-pc-compact-generators-build-objects (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.CompactGeneratorsBuildObjects CategoryTheory.compactGenerators_buildObjects)
