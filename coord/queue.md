@@ -1,8 +1,8 @@
 # Work queue
 
-865 items; claim with `tools/claim.py next <group> [--stage N]`.
+864 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (47)
+## Stage 1: nodes to split (45)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -33,7 +33,6 @@
 | `lem-sc-perfect-finite-free-residue-model` | 6014 | none |
 | `lem-sc-picard-kunneth-qcoh` | 6014 | none |
 | `lem-sc-valuation-closed-fibre-section-vanishing` | 6014 | none |
-| `lem-sc-valuation-fp-torsionfree-free` | 6014 | none |
 | `lem-pc-recd-fibre-cartier-local` | 6015 | none |
 | `lem-sc-finite-free-complex-homology-upper-semicontinuous` | 6015 | none |
 | `lem-sc-finite-locally-free-residue-isomorphism` | 6015 | none |
@@ -45,16 +44,15 @@
 | `lem-sc-dvr-field-extension-order` | - | none |
 | `lem-sc-etale-torsor-inverse-image-extension` | - | none |
 | `lem-sc-etale-torsor-pushout-extension` | - | none |
-| `lem-pur-kinjective-acyclic-quotient-complexes-bounded-size` | - | none |
 | `lem-pur-kinjective-characterize-K-injective` | - | none |
 | `lem-pur-kinjective-characterize-injective` | - | none |
 | `lem-pur-kinjective-functorial-homotopies` | - | none |
-| `lem-pur-kinjective-functorial-injective` | - | none |
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | - | none |
+| `lem-pur-kinjective-surjection-bounded-size` | - | none |
 | `lem-pur-left-derived-from-kflat-class` | - | none |
 | `lem-pc-finite-flat-pushforward-locally-free` | - | none |
 
-## Stage 2: nodes to state (818)
+## Stage 2: nodes to state (819)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -227,6 +225,7 @@
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pqf-finite-spectrum-maximal-primes` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
+| `lem-pur-kinjective-functorial-injective` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
@@ -877,7 +876,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1725 nodes that wait for a statement dependency, 88 nodes that wait for stage 1.
+Not open yet: 1726 nodes that wait for a statement dependency, 86 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
