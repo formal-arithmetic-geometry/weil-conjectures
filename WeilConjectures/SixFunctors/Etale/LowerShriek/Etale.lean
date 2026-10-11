@@ -35,7 +35,7 @@ so `f_!` is exact, and it induces a left adjoint of `D(f^*)` on derived categori
 
 universe u' u
 
-open CategoryTheory Limits
+open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
 
@@ -118,6 +118,40 @@ theorem Etale.isIso_lanProjectionMap_overMap (F : V.Etaleᵒᵖ ⥤ A) (G : U.Et
   refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun W ↦ ?_
   obtain ⟨ι, s, hs, hiso⟩ := SmallSite.exists_final_discrete_costructuredArrow_overMap h W.unop
   exact Functor.isIso_lanProjectionMap_app _ F G W s hiso
+
+variable [HasSmallSiteSheafify A]
+
+/-- Extension by zero commutes with sheafification: `j_!(a P) ≅ a(Lan P)` for presheaves `P` on
+`V_ét`, both functors being left adjoint to the restriction of presheaves. -/
+noncomputable def Etale.presheafToSheafCompEtaleLowerShriekIso :
+    presheafToSheaf V.smallEtaleTopology A ⋙ Etale.etaleLowerShriek A f h ≅
+      (MorphismProperty.Over.map ⊤ h).op.lan ⋙ presheafToSheaf U.smallEtaleTopology A :=
+  ((sheafificationAdjunction V.smallEtaleTopology A).comp
+      (Etale.etaleLowerShriekAdjunction A f h)).leftAdjointUniq
+    ((((MorphismProperty.Over.map ⊤ h).op.lanAdjunction A).comp
+      (sheafificationAdjunction U.smallEtaleTopology A)).ofNatIsoRight (Iso.refl _))
+
+/-- **The projection formula for extension by zero along an étale morphism**, for sheaves:
+`j_!(F ⊗ f^*G) ≅ j_!F ⊗ G`. It is the sheafification of the presheaf-level projection formula
+(`AlgebraicGeometry.Etale.isIso_lanProjectionMap_overMap`), sheafification being monoidal and
+commuting with extension by zero (`AlgebraicGeometry.Etale.presheafToSheafCompEtaleLowerShriekIso`).
+-/
+noncomputable def Etale.etaleLowerShriekTensorIso (F : Sheaf V.smallEtaleTopology A)
+    (G : Sheaf U.smallEtaleTopology A) :
+    (Etale.etaleLowerShriek A f h).obj (F ⊗ ((f)^*[A]).obj G) ≅
+      (Etale.etaleLowerShriek A f h).obj F ⊗ G :=
+  have := Etale.isIso_lanProjectionMap_overMap A h F.val G.val
+  (Etale.etaleLowerShriek A f h).mapIso
+      (tensorIso (asIso ((sheafificationAdjunction _ A).counit.app F)).symm
+          (asIso ((sheafificationAdjunction _ A).counit.app (((f)^*[A]).obj G))).symm ≪≫
+        Functor.Monoidal.μIso (presheafToSheaf V.smallEtaleTopology A) _ _ ≪≫
+        (presheafToSheaf V.smallEtaleTopology A).mapIso (whiskerLeftIso F.val
+          ((sheafToPresheaf _ A).mapIso ((Etale.upperStarIsoLocalizationRestriction A f h).app G)))) ≪≫
+    (Etale.presheafToSheafCompEtaleLowerShriekIso A h).app _ ≪≫
+    (presheafToSheaf U.smallEtaleTopology A).mapIso
+      (asIso ((MorphismProperty.Over.map ⊤ h).op.lanProjectionMap F.val G.val)) ≪≫
+    (Functor.Monoidal.μIso (presheafToSheaf U.smallEtaleTopology A) _ _).symm ≪≫
+    whiskerLeftIso _ (asIso ((sheafificationAdjunction _ A).counit.app G))
 
 end Projection
 
