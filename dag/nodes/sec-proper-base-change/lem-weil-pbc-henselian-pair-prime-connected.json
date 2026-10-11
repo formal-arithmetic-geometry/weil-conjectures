@@ -132,5 +132,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: Repaired as asked (one commit on the tip). Three steps, no new nodes, following 09Y6: reduction to the domain A/p with the henselian pair (A/p,(I+p)/p) by lem-weil-pbc-integral-over-henselian-pair and the closed-immersion identification of Spec of the quotient with V(p+I); A/I nonzero because the zero quotient would have the two idempotent lifts 0 and 1 in the domain A; a disconnection of Spec(A/I) would give a nontrivial idempotent of A/I (lem-weil-pbc-spec-clopen-idempotent), which lifts to an idempotent of the domain A, hence to 0 or 1, contradiction. The review by C1 is a real review."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianPairPrimeConnected",
+  "declaration": "PrimeSpectrum.connectedSpace_zeroLocus_sup_of_henselian",
+  "file": "lean/Sheaf/RingTheory/HenselianPairPrimeConnected.lean",
+  "statement": "theorem connectedSpace_zeroLocus_sup_of_henselian {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I] (p : Ideal A) [p.IsPrime] : ConnectedSpace (zeroLocus ((p ⊔ I : Ideal A) : Set A))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hpc1115",
+  "group": "K1",
+  "result": "pass",
+  "note": "A:Type u CommRing; (A,I) henselian = recorded HenselianRing A I (#print: jac + simple-root lifting, 09XE); p prime = [p.IsPrime]; p+I = p ⊔ I; V(p+I) = PrimeSpectrum.zeroLocus ((p ⊔ I):Set A) (#check resolves to PrimeSpectrum.zeroLocus); connected incl. nonempty = ConnectedSpace on the subtype (toNonempty field); statement true per 09Y6 (I ⊆ Jac so p+I proper)"
  }
 }
