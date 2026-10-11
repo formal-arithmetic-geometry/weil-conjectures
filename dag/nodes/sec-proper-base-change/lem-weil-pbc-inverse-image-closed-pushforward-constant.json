@@ -163,5 +163,24 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps on stalks: alpha-flat exists by the sets adjunction; its stalk map on germs via the 008H sets node; at x in Z both stalks evaluate bijectively to R (new unsplit node, 00AE/007B for sets); outside Z both stalks are points; isomorphism by the new 007T leaf (line added by L). Tags 0CAL, 008H, 00AE, 007T, 006W, 007B verified."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.InverseImageClosedPushforwardConstant",
+  "declaration": "TopCat.inverse_image_closed_pushforward_constant",
+  "file": "lean/Sheaf/Topology/InverseImageClosedPushforwardConstant.lean",
+  "statement": "theorem inverse_image_closed_pushforward_constant (X Y : TopCat.{u}) (f : X ⟶ Y) (W : Set Y) (hW : IsClosed W) (R : Type u) : let Z : Set X := f ⁻¹' W let P : Y.Presheaf (Type u) := { obj := fun V ↦ LocallyConstant {y : Y // y ∈ unop V ∧ y ∈ W} R map := fun {U V} i ↦ TypeCat.ofHom (LocallyConstant.comap ⟨fun y : {y : Y // y ∈ unop V ∧ y ∈ W} ↦ ⟨y.1, i.unop.le y.2.1, y.2.2⟩, continuous_subtype_val.subtype_mk _⟩) map_id := by intros; rfl map_comp := by intros; rfl } let Q : X.Presheaf (Type u) := { obj := fun U ↦ LocallyConstant {x : X // x ∈ unop U ∧ x ∈ Z} R map := fun {U V} i ↦ TypeCat.ofHom (LocallyConstant.comap ⟨fun x : {x : X // x ∈ unop V ∧ x ∈ Z} ↦ ⟨x.1, i.unop.le x.2.1, x.2.2⟩, continuous_subtype_val.subtype_mk _⟩) map_id := by intros; rfl map_comp := by intros; rfl } ∃ (hP : P.IsSheaf) (hQ : Q.IsSheaf), let A : Y.Sheaf (Type u) := ⟨P, hP⟩ let B : X.Sheaf (Type u) := ⟨Q, hQ⟩ let L := Sheaf.pullback (Type u) f let adj : L ⊣ Sheaf.pushforward (Type u) f := Sheaf.pullbackPushforwardAdjunction (Type u) f ∃ alpha : A ⟶ (Sheaf.pushforward (Type u) f).obj B, (∀ (V : Opens Y) (g : P.obj (op V)), alpha.hom.app (op V) g = LocallyConstant.comap ⟨fun x : {x : X // x ∈ (Opens.map f).obj V ∧ x ∈ Z} ↦ ⟨f x.1, x.2.1, x.2.2⟩, (f.hom.continuous.comp continuous_subtype_val).subtype_mk _⟩ g) ∧ let beta := (adj.homEquiv A B).symm alpha IsIso beta ∧ (∀ U : Opens X, Function.Bijective (beta.hom.app (op U))) ∧ (∀ (V : Opens Y) (g : P.obj (op V)), beta.hom.app (op ((Opens.map f).obj V)) ((adj.unit.app A).hom.app (op V) g) = alpha.hom.app (op V) g) ∧ (∀ beta' : L.obj A ⟶ B, (∀ (V : Opens Y) (g : P.obj (op V)), beta'.hom.app (op ((Opens.map f).obj V)) ((adj.unit.app A).hom.app (op V) g) = alpha.hom.app (op V) g) → beta' = beta)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-icp1102"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-icp1102",
+  "group": "C1",
+  "result": "fix",
+  "note": "X Y TopCat f continuous; W closed hW; R : Type u; Z = f⁻¹W; A,B = inline LC(V∩W,R)/LC(U∩Z,R) presheaves as in landed sibling, IsSheaf asserted; f_* = TopCat.Sheaf.pushforward; alpha components = comap along f; beta = homEquiv.symm alpha with unit compat + uniqueness; IsIso + sectionwise Bijective; FIX: L/adj -> TopCat.Sheaf.pullback/pullbackPushforwardAdjunction (M1 spelling)"
  }
 }
