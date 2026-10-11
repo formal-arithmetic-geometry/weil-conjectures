@@ -125,5 +125,26 @@
   "result": "pass"
  },
  "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange"
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.DerivedLimit",
+  "declaration": "CategoryTheory.IsDerivedLimit",
+  "declarations": [
+   "CategoryTheory.IsDerivedLimitTriangle"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimit.lean",
+  "statement": "def IsDerivedLimit {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] {K : ℕ → C} [HasProduct K] (f : ∀ n, K (n + 1) ⟶ K n) (L : C) : Prop",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dlm0724",
+  "group": "J1",
+  "result": "pass",
+  "note": "Read packet; Pretriangulated C (Mathlib instance chain) = node's triangulated category, only pre-triangulated axioms needed; K : ℕ → C, f n : K (n+1) ⟶ K n = tower n>=1 reindexed as recorded by def-weil-tower-transition-endomorphism; [HasProduct K] + ∏ᶜ K = product hypothesis; middle arrow is the recorded towerTransitionEndomorphism f (1 - s); Triangle.mk p (1-s) δ ∈ distTriang C with p : L ⟶ ∏, δ : ∏ ⟶ L⟦1⟧ = Roos triangle; IsDerivedLimitTriangle = triple predicate, IsDerivedLimit = ∃ p δ (no choice, no existence/uniqueness clause); universes polymorphic; Mathlib has no derived/homotopy limit; source CategoryTheory.Pretriangulated.IsHomotopyLimit is a cone predicate over an arbitrary limit fan with its own towerShift, not the node's triple on ∏ᶜ with the recorded 1-s, so existing:false is right (equivalent object predicate; bridge lemma will be needed downstream); header, tag, no Sheaf. prefix, lines <=100, both imports used"
+ }
 }
