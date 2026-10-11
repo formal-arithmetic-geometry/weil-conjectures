@@ -52,6 +52,20 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA] {s : Scheme.{u}}
 
+/-- The transport `ctfLowerShriekCongr` of the exceptional direct image on `Dᵇctf` along an
+equality of morphisms is the transport `rightDerivedLowerShriekCongr` on `D(X, A)`. -/
+lemma ctfLowerShriekCongr_hom_app_hom {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g)
+    [HasCompactification f] [HasCompactification g]
+    (h₁ : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
+      DerivedCategory.constructibleFiniteTor A Y ((rightDerivedLowerShriek A f).obj K))
+    (h₂ : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
+      DerivedCategory.constructibleFiniteTor A Y ((rightDerivedLowerShriek A g).obj K))
+    (M : Ctf A X) :
+    ((ctfLowerShriekCongr e h₁ h₂).hom.app M).hom =
+      (rightDerivedLowerShriekCongr A e).hom.app M.obj := by
+  subst e
+  rfl
+
 namespace GeometricOperations
 
 variable [DerivedBraiding A] (G : GeometricOperations A s)
@@ -64,29 +78,23 @@ variable {X Y Z : Scheme.{u}}
 morphisms of `D(Y, A)` indexed by `Dᵇctf(X)`. -/
 @[reassoc]
 lemma properComparison_inv_app_naturality (f : X ⟶ Y) (hf : IsGeometricHom s f)
-    [HasCompactification f] [IsProper f]
-    {M M' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hM : G.ctf X M)
-    (hM' : G.ctf X M') (φ : M ⟶ M') :
-    ((lowerStar A f).rightDerivedFunctor).map φ ≫
-        ((G.properComparison f hf).inv.app ⟨M', hM'⟩).hom =
-      ((G.properComparison f hf).inv.app ⟨M, hM⟩).hom ≫ (rightDerivedLowerShriek A f).map φ :=
-  congrArg (·.hom) ((G.properComparison f hf).inv.naturality (X := ⟨M, hM⟩) (Y := ⟨M', hM'⟩)
-    (ObjectProperty.homMk φ))
+    [HasCompactification f] [IsProper f] {M M' : Ctf A X} (φ : M.obj ⟶ M'.obj) :
+    ((lowerStar A f).rightDerivedFunctor).map φ ≫ ((G.properComparison f hf).inv.app M').hom =
+      ((G.properComparison f hf).inv.app M).hom ≫ (rightDerivedLowerShriek A f).map φ :=
+  congrArg (·.hom) ((G.properComparison f hf).inv.naturality (ObjectProperty.homMk φ))
 
 /-- The composition isomorphism `Rg_! Rf_! ≃ R(f ≫ g)_!` of `lowerShriekComp` is natural, as a
 family of morphisms of `D(Z, A)` indexed by `Dᵇctf(X)`. -/
 @[reassoc]
 lemma lowerShriekComp_hom_app_naturality (f : X ⟶ Y) (g : Y ⟶ Z) (hf : IsGeometricHom s f)
     (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g)) [HasCompactification f]
-    [HasCompactification g] [HasCompactification (f ≫ g)]
-    {M M' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hM : G.ctf X M)
-    (hM' : G.ctf X M') (φ : M ⟶ M') :
+    [HasCompactification g] [HasCompactification (f ≫ g)] {M M' : Ctf A X}
+    (φ : M.obj ⟶ M'.obj) :
     (rightDerivedLowerShriek A g).map ((rightDerivedLowerShriek A f).map φ) ≫
-        ((G.lowerShriekComp f g hf hg hfg).hom.app ⟨M', hM'⟩).hom =
-      ((G.lowerShriekComp f g hf hg hfg).hom.app ⟨M, hM⟩).hom ≫
+        ((G.lowerShriekComp f g hf hg hfg).hom.app M').hom =
+      ((G.lowerShriekComp f g hf hg hfg).hom.app M).hom ≫
         (rightDerivedLowerShriek A (f ≫ g)).map φ :=
-  congrArg (·.hom) ((G.lowerShriekComp f g hf hg hfg).hom.naturality (X := ⟨M, hM⟩)
-    (Y := ⟨M', hM'⟩) (ObjectProperty.homMk φ))
+  congrArg (·.hom) ((G.lowerShriekComp f g hf hg hfg).hom.naturality (ObjectProperty.homMk φ))
 
 /-- The counit `Rf_! Rf^! L ⟶ L` of the exceptional adjunction is natural in `L ∈ Dᵇctf(Y)`. -/
 @[reassoc]
@@ -99,7 +107,68 @@ lemma exceptionalCounit_naturality (f : X ⟶ Y) (hf : IsGeometricHom s f)
   congrArg (·.hom) ((G.exceptionalAdjunction f hf).counit.naturality (X := ⟨L, hL⟩)
     (Y := ⟨L', hL'⟩) (ObjectProperty.homMk φ))
 
+/-- The inverse form of the field `properComparison_comp`: for proper `f` and `g`, the
+identification `R(f ≫ g)_* ≃ R(f ≫ g)_!` at `K ∈ Dᵇctf(X)` is the composite
+
+```
+  R(f ≫ g)_* K ≃ Rg_* Rf_* K ≃ Rg_! Rf_* K ≃ Rg_! Rf_! K ≃ R(f ≫ g)_! K.
+``` -/
+lemma properComparison_comp_inv_app_hom (f : X ⟶ Y) (g : Y ⟶ Z) (hf : IsGeometricHom s f)
+    (hg : IsGeometricHom s g) (hfg : IsGeometricHom s (f ≫ g)) [HasCompactification f]
+    [HasCompactification g] [HasCompactification (f ≫ g)] [IsProper f] [IsProper g]
+    (K : Ctf A X) :
+    ((G.properComparison (f ≫ g) hfg).inv.app K).hom =
+      (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
+          ((derivedUpperStarLowerStarAdjunction A g).comp
+            (derivedUpperStarLowerStarAdjunction A f))
+          (leftDerivedUpperStarComp A f g).symm).hom.app K.obj ≫
+        ((G.properComparison g hg).inv.app ((G.lowerStarCtf f hf).obj K)).hom ≫
+        (rightDerivedLowerShriek A g).map ((G.properComparison f hf).inv.app K).hom ≫
+        ((G.lowerShriekComp f g hf hg hfg).hom.app K).hom := by
+  rw [← cancel_epi ((G.properComparison (f ≫ g) hfg).hom.app K).hom,
+    ← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id_app,
+    G.properComparison_comp f g hf hg hfg]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  have e₁ : ((G.properComparison g hg).hom.app ((G.lowerStarCtf f hf).obj K)).hom ≫
+      ((G.properComparison g hg).inv.app ((G.lowerStarCtf f hf).obj K)).hom = 𝟙 _ := by
+    rw [← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id_app]
+    rfl
+  have e₂ : (rightDerivedLowerShriek A g).map ((G.properComparison f hf).hom.app K).hom ≫
+      (rightDerivedLowerShriek A g).map ((G.properComparison f hf).inv.app K).hom = 𝟙 _ := by
+    rw [← Functor.map_comp, ← ObjectProperty.FullSubcategory.comp_hom, Iso.hom_inv_id_app]
+    exact CategoryTheory.Functor.map_id _ _
+  have e₃ : ((G.lowerShriekComp f g hf hg hfg).inv.app K).hom ≫
+      ((G.lowerShriekComp f g hf hg hfg).hom.app K).hom = 𝟙 _ := by
+    rw [← ObjectProperty.FullSubcategory.comp_hom, Iso.inv_hom_id_app]
+    rfl
+  rw [reassoc_of% e₁, reassoc_of% e₂, e₃]
+  rfl
+
 end Naturality
+
+/-- The unit of `L(f ≫ g)^* ⊣ R(f ≫ g)_*` is the composite of the units of `Lg^* ⊣ Rg_*` and
+`Lf^* ⊣ Rf_*`, read through `L(f ≫ g)^* ≃ Lg^* ⋙ Lf^*` and its conjugate
+`R(f ≫ g)_* ≃ Rf_* ⋙ Rg_*`. -/
+lemma derivedUpperStarLowerStarAdjunction_comp_unit_app {X Y Z : Scheme.{u}} (f : X ⟶ Y)
+    (g : Y ⟶ Z) (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) A)) :
+    (derivedUpperStarLowerStarAdjunction A (f ≫ g)).unit.app K =
+      (derivedUpperStarLowerStarAdjunction A g).unit.app K ≫
+        ((lowerStar A g).rightDerivedFunctor).map
+          ((derivedUpperStarLowerStarAdjunction A f).unit.app
+            (((upperStar A g).leftDerivedFunctor).obj K)) ≫
+        ((lowerStar A g).rightDerivedFunctor).map (((lowerStar A f).rightDerivedFunctor).map
+          ((leftDerivedUpperStarComp A f g).inv.app K)) ≫
+        (conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
+          ((derivedUpperStarLowerStarAdjunction A g).comp
+            (derivedUpperStarLowerStarAdjunction A f))
+          (leftDerivedUpperStarComp A f g).symm).inv.app
+            (((upperStar A (f ≫ g)).leftDerivedFunctor).obj K) := by
+  rw [← cancel_mono ((conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction A (f ≫ g))
+    ((derivedUpperStarLowerStarAdjunction A g).comp (derivedUpperStarLowerStarAdjunction A f))
+    (leftDerivedUpperStarComp A f g).symm).hom.app _)]
+  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  rw [conjugateIsoEquiv_apply_hom, unit_conjugateEquiv, Adjunction.comp_unit_app]
+  simp
 
 section ProperPullback
 
@@ -142,9 +211,10 @@ lemma properPullback_naturality (h : X' ⟶ X) [IsProper h] (hh : h ≫ aX = aX'
   simp only [properPullback, rightDerivedLowerShriekCongr_rfl, Iso.refl_hom, NatTrans.id_app,
     Category.assoc]
   erw [Category.id_comp, Category.comp_id]
-  rw [← G.lowerShriekComp_hom_app_naturality h aX _ _ _ _ (G.ctf_upperStar h (.mk (aY := aX) rfl) hK'),
+  rw [← G.lowerShriekComp_hom_app_naturality h aX _ _ _
+      (M' := ⟨_, G.ctf_upperStar h (.mk (aY := aX) rfl) hK'⟩),
     ← Functor.map_comp_assoc, ← Functor.map_comp_assoc, Category.assoc,
-    ← G.properComparison_inv_app_naturality h _ _ (G.ctf_upperStar h (.mk (aY := aX) rfl) hK'),
+    ← G.properComparison_inv_app_naturality h _ (M' := ⟨_, G.ctf_upperStar h (.mk (aY := aX) rfl) hK'⟩),
     ← Category.assoc, (derivedUpperStarLowerStarAdjunction A h).unit_naturality]
   simp only [Functor.id_obj, Functor.id_map, Functor.comp_obj, Functor.map_comp, Category.assoc]
 
@@ -158,7 +228,60 @@ theorem properPullback_comp (h : X' ⟶ X) (h' : X'' ⟶ X') [IsProper h] [IsPro
       G.properPullback h hh hK ≫ G.properPullback h' hh' (G.ctf_upperStar h (.mk hh) hK) ≫
         (rightDerivedLowerShriek A aX'').map (leftDerivedUpperStarCompIso h' rfl K).hom := by
   subst hh hh'
-  sorry
+  simp only [properPullback, rightDerivedLowerShriekCongr_rfl, Iso.refl_hom, NatTrans.id_app,
+    leftDerivedUpperStarCompIso, leftDerivedUpperStarCongr_rfl, Iso.trans_hom, Iso.app_hom,
+    Iso.symm_hom, Category.assoc, Category.comp_id]
+  erw [Category.comp_id, Category.id_comp, Category.id_comp]
+  rw [← Functor.map_comp_assoc, derivedUpperStarLowerStarAdjunction_comp_unit_app,
+    G.properComparison_comp_inv_app_hom h' h (.mk (aY := h ≫ aX) rfl) (.mk (aY := aX) rfl)]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  have hN : G.ctf X'' (((upperStar A h').leftDerivedFunctor).obj
+      (((upperStar A h).leftDerivedFunctor).obj K)) :=
+    G.ctf_upperStar h' (.mk (aY := h ≫ aX) rfl) (G.ctf_upperStar h (.mk (aY := aX) rfl) hK)
+  have hM : G.ctf X'' (((upperStar A (h' ≫ h)).leftDerivedFunctor).obj K) :=
+    G.ctf_upperStar (h' ≫ h) (.mk (aY := aX) rfl) hK
+  rw [G.properComparison_inv_app_naturality_assoc h (.mk (aY := aX) rfl)
+      (M := (G.lowerStarCtf h' (.mk (aY := h ≫ aX) rfl)).obj ⟨_, hN⟩)
+      (M' := (G.lowerStarCtf h' (.mk (aY := h ≫ aX) rfl)).obj ⟨_, hM⟩),
+    ← Functor.map_comp_assoc (rightDerivedLowerShriek A h),
+    G.properComparison_inv_app_naturality h' (.mk (aY := h ≫ aX) rfl) (M := ⟨_, hN⟩)
+      (M' := ⟨_, hM⟩),
+    Functor.map_comp_assoc (rightDerivedLowerShriek A h),
+    G.lowerShriekComp_hom_app_naturality h' h _ _ _ (M := ⟨_, hN⟩) (M' := ⟨_, hM⟩)]
+  simp only [Functor.map_comp, Category.assoc]
+  haveI : HasCompactification ((h' ≫ h) ≫ aX) := .of_eq (Category.assoc _ _ _).symm
+  rw [G.lowerShriekComp_hom_app_naturality (h' ≫ h) aX _ _ _ (M := ⟨_, hN⟩) (M' := ⟨_, hM⟩)]
+  rw [reassoc_of% (G.lowerShriekComp_assoc h' h aX (.mk (aY := h ≫ aX) rfl) (.mk (aY := aX) rfl)
+    (.of_isGeometric aX) (.mk (aY := aX) rfl) (.of_isGeometric (h ≫ aX))
+    (.of_isGeometric (h' ≫ h ≫ aX)) (.mk (aX := h' ≫ h ≫ aX) (aY := 𝟙 s) (by simp))
+    ⟨_, hN⟩)]
+  rw [← G.lowerShriekComp_hom_app_naturality_assoc h aX _ _ _
+      (M := ⟨_, G.ctf_upperStar h (.mk (aY := aX) rfl) hK⟩)
+      (M' := (G.lowerStarCtf h' (.mk (aY := h ≫ aX) rfl)).obj ⟨_, hN⟩)
+      ((derivedUpperStarLowerStarAdjunction A h').unit.app
+        (((upperStar A h).leftDerivedFunctor).obj K))]
+  rw [← G.lowerShriekComp_hom_app_naturality_assoc h aX _ _ _
+      (M := (G.lowerStarCtf h' (.mk (aY := h ≫ aX) rfl)).obj ⟨_, hN⟩)
+      (M' := (G.lowerShriekCtf h' (.mk (aY := h ≫ aX) rfl)).obj ⟨_, hN⟩)
+      ((G.properComparison h' (.mk (aY := h ≫ aX) rfl)).inv.app ⟨_, hN⟩).hom]
+  have e : (rightDerivedLowerShriek A aX).map (((lowerStar A h).rightDerivedFunctor).map
+        ((derivedUpperStarLowerStarAdjunction A h').unit.app
+          (((upperStar A h).leftDerivedFunctor).obj K))) ≫
+      (rightDerivedLowerShriek A aX).map ((G.properComparison h (.mk (aY := aX) rfl)).inv.app
+        ((G.lowerStarCtf h' (.mk (aY := h ≫ aX) rfl)).obj ⟨_, hN⟩)).hom =
+      (rightDerivedLowerShriek A aX).map ((G.properComparison h (.mk (aY := aX) rfl)).inv.app
+        ⟨_, G.ctf_upperStar h (.mk (aY := aX) rfl) hK⟩).hom ≫
+      (rightDerivedLowerShriek A aX).map ((rightDerivedLowerShriek A h).map
+        ((derivedUpperStarLowerStarAdjunction A h').unit.app
+          (((upperStar A h).leftDerivedFunctor).obj K))) := by
+    rw [← Functor.map_comp, ← Functor.map_comp, G.properComparison_inv_app_naturality h
+      (.mk (aY := aX) rfl) (M := ⟨_, G.ctf_upperStar h (.mk (aY := aX) rfl) hK⟩)
+      (M' := (G.lowerStarCtf h' (.mk (aY := h ≫ aX) rfl)).obj ⟨_, hN⟩)]
+  rw [← reassoc_of% e]
+  rw [ctfLowerShriekCongr_hom_app_hom]
+  simp only [rightDerivedLowerShriekCongr_rfl, Iso.refl_hom, NatTrans.id_app]
+  erw [Category.id_comp]
+  rfl
 
 end ProperPullback
 
