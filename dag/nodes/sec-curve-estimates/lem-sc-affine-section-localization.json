@@ -116,5 +116,25 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-asl (reviewer sub-agent of L); spot-checked: Source: Stacks 01PW (properties-lemma-invert-s-sections, part (2), equation module-invert-s), read at properties.tex:2227-2247; the item is its specialization to affine Y, with 09MR (coherent-lemma-invert-s-cohomology) affine case. Item statement agrees hypothesis by hypothesis (affine Y, invertible L, s in Gamma(Y,L), quasi-coherent F, Z-graded H^0_*, degree-zero localization at s, map xi/s^n -> s^{-n} xi). Step 1 carried by mathlib leaf lem-weil-pbc-affine-scheme-qcqs (affine => quasi-compact and quasi-separated; its 'two qc opens meet in a qc open' implies the general node's 'two affine opens' form since affine opens are qc). Step 2 carried by the statement of lem-sc-p1-invertible-section-localization with X=Y: same hypotheses, same N, same N_(s), same map t/s^n -> t|_{X_s} (x) s^{-n}. No new nodes; the delivery cites the existing 01PW node rather than re-proving it (the duplicate flagged at F1's review). Declared tool use lem-sc-p1-invertible-section-localization (unit sk-thm-picard-duality) accepted as a generic black-box statement. Small cases: L=O_Y gives ordinary localization Gamma(Y,F)_s = Gamma(D(s),F); s=0 gives 0=0. Start Sat Oct 10 04:43:29 PM UTC 2026, end Sat Oct 10 04:43:51 PM UTC 2026."
  },
- "lead_note": "2026-10-10 L (R-asl): This item is a special case of lem-sc-p1-invertible-section-localization (01PW, unit sk-thm-picard-duality) and is now proved by citing it with X=Y affine (qcqs from lem-weil-pbc-affine-scheme-qcqs); it could alternatively be merged into that node (merged_into) if the lead prefers to remove the duplicate."
+ "lead_note": "2026-10-10 L (R-asl): This item is a special case of lem-sc-p1-invertible-section-localization (01PW, unit sk-thm-picard-duality) and is now proved by citing it with X=Y affine (qcqs from lem-weil-pbc-affine-scheme-qcqs); it could alternatively be merged into that node (merged_into) if the lead prefers to remove the duplicate.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSectionLocalization",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_section_localization",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSectionLocalization.lean",
+  "statement": "theorem affine_section_localization (Y : Scheme.{u}) [IsAffine Y] (L : Y.Modules) [L.IsInvertible] (s : Γ(L, ⊤)) (F : Y.Modules) [F.IsQuasicoherent] : ∃ U : Y.Opens, (U : Set Y) = nonvanishingLocus L s ∧ ∃ e : SectionFractionPresentation L F s ≃+ Γ(F, U), (∀ (r : Γ(Y, ⊤)) (z : SectionFractionPresentation L F s), e (r • z) = (Y.presheaf.map (homOfLE (show U ≤ ⊤ from le_top)).op r) • e z) ∧ (∀ (n : ℕ) (t : Γ(F ⊗ L.tensorPow n, ⊤)), tmulSection (e (sectionFraction L F s n t)) (tensorPowSectionOne (homOfGlobalSection L s) n U) = (F ⊗ L.tensorPow n).presheaf.map (homOfLE (show U ≤ ⊤ from le_top)).op t)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Stated on the landed fraction presentation SectionFractionPresentation (def-sc-section-fraction-presentation, E1 fd20d27a0), in the form of lem-sc-p1-invertible-section-localization with [IsAffine Y]; the delivered duplicate def-sc-section-fraction-localization was dropped by the reviewer.",
+  "fixed_by": "R-asl1222"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-asl1222",
+  "group": "G1",
+  "result": "fix",
+  "note": "affine Y = [IsAffine Y]; invertible L; s : Γ(L, ⊤); F quasi-coherent; Y_s = nonvanishingLocus L s; H^0_*(..)_(s) = landed SectionFractionPresentation (degree-zero fractions have n ≥ 0); map t/s^n ↦ s^-n t as e(t/s^n) ⊗ s^n = t|_U with scalar compatibility; dropped duplicate def-sc-section-fraction-localization (same names as E1 fd20d27a0); dropped duplicate new node(s) def-sc-section-fraction-localization (--drop-nodes; not merged, the item points at the landed declaration)"
+ }
 }
