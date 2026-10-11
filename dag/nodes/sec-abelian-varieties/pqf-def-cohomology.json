@@ -141,5 +141,25 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pdh2108 (reviewer sub-agent of L); spot-checked: Read packet; checked each cited statement. Step1 cites def-sc-ringed-space-module-cohomology (cites enough injectives, no restatement). Step2 matches def-pc-ringed-spaces-derived-direct-image. FIX more, RETURN less: (1) C1/E step 3: hypotheses of lem-weil-pbc-right-derived-universal-delta-functor uncited; added lem-sc-ringed-space-module-sheaves-enough-injectives and lem-sc-global-sections-left-exact. (2) C1 step 2: identifying H^p(Rf_*F) with R^p f_* via injective resolutions needs injective resolutions to be K-injective; added lem-weil-pbc-bounded-below-injectives-kinjective and enough injectives. (3) source.external Tags 01EO/01EY (Cech, Leray) wrong; replaced by 01DZ, 079W (second reading claimed this change but did not make it).; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-pdh2108): Second reading claimed source tags were corrected to 01DZ/015B/079W but the branch still had 01EO/01EY; source.external fixed by reviewer. The statement text itself (blueprint wording) still names 01EO/01EY, left unchanged."
+ "lead_note": "2026-10-10 L (R-pdh2108): Second reading claimed source tags were corrected to 01DZ/015B/079W but the branch still had 01EO/01EY; source.external fixed by reviewer. The statement text itself (blueprint wording) still names 01EO/01EY, left unchanged.",
+ "lean": {
+  "module": "Sheaf.Paper.PQFCohomology",
+  "declaration": "AlgebraicGeometry.sheafCohomologyAndHigherDirectImages",
+  "file": "lean/Sheaf/Paper/PQFCohomology.lean",
+  "statement": "theorem sheafCohomologyAndHigherDirectImages (X : Scheme.{u}) : (∃ G : CohomologicalDeltaFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))), G.F = RingedSpace.moduleCohomology X.toRingedSpace) ∧ ∀ (S : Scheme.{u}) (f : X ⟶ S) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] (p : ℕ), Nonempty ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0 ⋙ RingedSpace.derivedModuleDirectImage f.toLRSHom.toShHom ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (p : ℤ)) ≅ (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "No new definition: H^p(X,-) is the recorded RingedSpace.moduleCohomology (right derived functors of RingedSpace.globalSectionsFunctor by definition, so no separate conjunct); the theorem asserts the long exact sequence (a cohomological delta-functor with degree functors moduleCohomology) and, for f : X ⟶ S, H^p(Rf_*(F[0])) ≅ the p-th right derived functor of the recorded RingedSpace.moduleDirectImage. Injective resolutions come from the shared instance RingedSpace.moduleGrothendieckAbelian (no inline instances).",
+  "fixed_by": "R-pdc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdc",
+  "group": "T1",
+  "result": "fix",
+  "note": "node: H^p(X,-)=R^pΓ on O_X-modules, LES for SES, R^p f_* = R^p of f_*; H^p = recorded moduleCohomology (dropped tautological rfl conjunct moduleCohomology = rightDerived Γ); LES = ∃ CohomologicalDeltaFunctor with G.F = moduleCohomology; R^p f_*: H^p(Rf_*(F[0])) ≅ (moduleDirectImage f).rightDerived p, f scheme morphism, p:ℕ; removed inline @InjectiveResolution.instHasInjectiveResolutions (shared moduleGrothendieckAbelian instance + Mathlib EnoughInjectives import); no new definition"
+ }
 }
