@@ -111,5 +111,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lpf0056 (reviewer sub-agent of L); spot-checked: Mathlib: Flat/Localization.lean:45 Localization.flat covers only M=A (S submonoid of A); Flat/Stability.lean:116-130 localizedModule/of_isLocalizedModule localize at a submonoid of the base R; no declaration states S^{-1}M flat over R for S in A, so R-flc0039's claim holds and the node stays split. Step 1: M R-flat gives injective M(x)N1->M(x)N2, A-linear; localization exact over A [lem-weil-pbc-localization-module-exact]; identification with S^{-1}M(x)_R N_i incl. naturality [lem-weil-pbc-localization-tensor-over-base, T subset A, matches]; Step 2 is the definition. Citer c693c7457 (lem-pc-affine-flat-module-local-criterion step 1) uses exactly this with S=A\\q and R-structure via A->S^{-1}A. No duplicate: lem-weil-pbc-flat-over-localization (M over A'=W^{-1}A, flat over A' iff over A) and lem-weil-pbc-localization-flat (M=R') are different statements. No faults; Second reading missed nothing."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.Flat.LocalizationPreservesFlatness",
+  "declaration": "Module.Flat.localizedModule_of_algebra",
+  "file": "lean/Sheaf/RingTheory/Flat/LocalizationPreservesFlatness.lean",
+  "statement": "theorem localizedModule_of_algebra {R A M : Type*} [CommRing R] [CommRing A] [Algebra R A] [AddCommGroup M] [Module R M] [Module A M] [IsScalarTower R A M] (S : Submonoid A) (hM : Module.Flat R M) : Module.Flat R (LocalizedModule S M)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lpf0648",
+  "group": "E1",
+  "result": "pass",
+  "note": "R->A CommRing+Algebra; M A-module, R-action via IsScalarTower R A M; hM Flat R M; S : Submonoid A arbitrary; R-action on LocalizedModule S M checked in Lean: r•mk m s = mk (r•m) s (smul'_mk) and IsScalarTower R A, i.e. via A->S^-1A; conclusion Flat R (LocalizedModule S M). Mathlib: Localization.flat (M=A only), Flat.localizedModule/of_isLocalizedModule (S in base R) - no exact statement, existing:false correct. Docstring carries both proof steps."
  }
 }
