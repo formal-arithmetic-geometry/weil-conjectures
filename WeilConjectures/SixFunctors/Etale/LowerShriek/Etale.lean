@@ -154,6 +154,71 @@ noncomputable def Etale.etaleLowerShriekTensorIso (F : Sheaf V.smallEtaleTopolog
     (Functor.Monoidal.μIso (presheafToSheaf U.smallEtaleTopology A) _ _).symm ≪≫
     whiskerLeftIso _ (asIso ((sheafificationAdjunction _ A).counit.app G))
 
+lemma Etale.etaleLowerShriekTensorIso_hom_naturality {F F' : Sheaf V.smallEtaleTopology A}
+    {G G' : Sheaf U.smallEtaleTopology A} (φ : F ⟶ F') (ψ : G ⟶ G') :
+    (Etale.etaleLowerShriek A f h).map (φ ⊗ₘ ((f)^*[A]).map ψ) ≫
+        (Etale.etaleLowerShriekTensorIso A h F' G').hom =
+      (Etale.etaleLowerShriekTensorIso A h F G).hom ≫
+        ((Etale.etaleLowerShriek A f h).map φ ⊗ₘ ψ) := by
+  have hP := (MorphismProperty.Over.map ⊤ h).op.lanProjectionMap_naturality φ.hom ψ.hom
+  have c1 : ∀ {P Q : Sheaf V.smallEtaleTopology A} (g : P ⟶ Q),
+      g ≫ inv ((sheafificationAdjunction _ A).counit.app Q) =
+        inv ((sheafificationAdjunction _ A).counit.app P) ≫
+          (presheafToSheaf _ A).map ((sheafToPresheaf _ A).map g) := fun g ↦ by
+    rw [IsIso.comp_inv_eq, Category.assoc]
+    erw [(sheafificationAdjunction _ A).counit.naturality g]
+    rw [IsIso.inv_hom_id_assoc]
+    rfl
+  have c2 : ∀ {P Q : Sheaf U.smallEtaleTopology A} (g : P ⟶ Q),
+      (presheafToSheaf _ A).map ((sheafToPresheaf _ A).map g) ≫
+        (sheafificationAdjunction _ A).counit.app Q =
+          (sheafificationAdjunction _ A).counit.app P ≫ g :=
+    fun g ↦ (sheafificationAdjunction _ A).counit.naturality g
+  have e2 := (Etale.upperStarIsoLocalizationRestriction A f h).hom.naturality ψ
+  have e3 : ((sheafToPresheaf _ A).map φ ⊗ₘ (sheafToPresheaf _ A).map (((f)^*[A]).map ψ)) ≫
+      (F'.obj ◁ (sheafToPresheaf _ A).map
+        ((Etale.upperStarIsoLocalizationRestriction A f h).app G').hom) =
+      (F.obj ◁ (sheafToPresheaf _ A).map
+        ((Etale.upperStarIsoLocalizationRestriction A f h).app G).hom) ≫
+        ((sheafToPresheaf _ A).map φ ⊗ₘ (sheafToPresheaf _ A).map
+          ((Etale.localizationRestriction A f h).map ψ)) := by
+    rw [← id_tensorHom, ← id_tensorHom, tensorHom_comp_tensorHom, tensorHom_comp_tensorHom]
+    simp only [Category.id_comp]
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    congr 2
+    exact Category.comp_id _
+  simp only [Etale.etaleLowerShriekTensorIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+    asIso_hom, asIso_inv, tensorIso_hom, whiskerLeftIso_hom, Category.assoc]
+  rw [← Functor.map_comp_assoc, ← Category.assoc (φ ⊗ₘ _), tensorHom_comp_tensorHom, c1, c1,
+    ← tensorHom_comp_tensorHom, Category.assoc, Functor.Monoidal.μIso_hom,
+    Functor.Monoidal.μIso_hom, Functor.LaxMonoidal.μ_natural_assoc, ← Functor.map_comp, e3]
+  have e1 := (Etale.presheafToSheafCompEtaleLowerShriekIso A h).hom.naturality
+    ((sheafToPresheaf _ A).map φ ⊗ₘ (sheafToPresheaf _ A).map
+      ((Etale.localizationRestriction A f h).map ψ))
+  simp only [Functor.comp_map] at e1
+  simp only [Functor.map_comp, Category.assoc]
+  erw [reassoc_of% e1]
+  rw [← Functor.map_comp_assoc (presheafToSheaf U.smallEtaleTopology A)]
+  erw [hP]
+  rw [Functor.map_comp_assoc, Functor.Monoidal.μIso_inv, Functor.Monoidal.μIso_inv,
+    ← Functor.OplaxMonoidal.δ_natural_assoc]
+  have fin : ((presheafToSheaf U.smallEtaleTopology A).map
+        ((MorphismProperty.Over.map ⊤ h).op.lan.map φ.hom) ⊗ₘ
+        (presheafToSheaf U.smallEtaleTopology A).map ψ.hom) ≫
+      (presheafToSheaf U.smallEtaleTopology A).obj
+        ((MorphismProperty.Over.map ⊤ h).op.lan.obj F'.obj) ◁
+          (sheafificationAdjunction U.smallEtaleTopology A).counit.app G' =
+      (presheafToSheaf U.smallEtaleTopology A).obj
+        ((MorphismProperty.Over.map ⊤ h).op.lan.obj F.obj) ◁
+          (sheafificationAdjunction U.smallEtaleTopology A).counit.app G ≫
+        ((Etale.etaleLowerShriek A f h).map φ ⊗ₘ ψ) := by
+    rw [← id_tensorHom, ← id_tensorHom, tensorHom_comp_tensorHom, tensorHom_comp_tensorHom]
+    erw [c2]
+    simp only [Category.comp_id, Category.id_comp]
+    rfl
+  erw [fin]
+  rfl
+
 end Projection
 
 end AlgebraicGeometry
