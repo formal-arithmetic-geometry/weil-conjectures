@@ -1,21 +1,19 @@
 # Work queue
 
-316 items; claim with `tools/claim.py next <group> [--stage N]`.
+315 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (316)
+## Stage 2: nodes to state (315)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-weil-pbc-closed-subset-proper-over-base` | 1 | state |
-| `def-weil-pbc-morphism-to-projective-space-by-sections` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-complete-linear-system-closed` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
-| `lem-pc-supported-perfect-generator` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-coherent-affine-free-resolution` | 1 | state |
@@ -26,16 +24,16 @@
 | `lem-sc-p1-koszul-resolution` | 1 | state |
 | `lem-sc-p1-serre-section-module-comparison` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
+| `lem-sc-point-tangent-separation-closed-immersion` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-geometrically-regular-descent` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-ample-invertible` | 1 | state |
+| `lem-weil-pbc-projective-morphism-chart-preimage` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
 | `lem-weil-pbc-regular-local-quotient-kernel-parameters` | 1 | state |
-| `lem-weil-pbc-regularity-rk-goes-up` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-base-change` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-noetherian-approximation` | 1 | state |
-| `lem-weil-pbc-relative-global-complete-intersection-partial-local-flat` | 1 | state |
 | `lem-weil-pbc-relative-global-complete-intersection-principal-localization` | 1 | state |
 | `lem-weil-pbc-relative-spec-base-change` | 1 | state |
 | `lem-weil-pbc-residue-field-pd-le-krull-dimension` | 1 | state |
@@ -169,6 +167,7 @@
 | `lem-weil-pbc-symmetric-algebra-finite-projective-smooth` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-graded` | 1 | state |
 | `lem-weil-pbc-symmetric-algebra-quotient-module` | 1 | state |
+| `lem-weil-pbc-symmetric-product-properties` | 1 | state |
 | `lem-weil-pbc-symmetric-projective-presentation-conormal` | 1 | state |
 | `lem-weil-pbc-syntomic-at-prime-relative-global-complete-intersection` | 1 | state |
 | `lem-weil-pbc-tate-n2-complete-principal` | 1 | state |
@@ -326,7 +325,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 502 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 499 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
