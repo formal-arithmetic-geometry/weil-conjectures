@@ -197,5 +197,24 @@
   "worker": "stage1",
   "summary": "Split following the proof of Stacks 032N (algebra.tex 45389-45407), read with every lemma it cites (Fields 030M, Algebra 032L, 00GL, 0308; tags verified in tags/tags). Steps: (1) finite normal M containing L (Fields 09DT, new Mathlib leaf) and reduction from L to M by the Noetherian submodule lemma 00IK, the injection of the integral closure in L into that in M written out; (2) M_insep from 030M (2) (new unsplit node; Mathlib lacks the purely inseparable half), finiteness of M_insep/K and M/M_insep written out, hypothesis gives R' finite; (3) R' Noetherian (00FN node) and a normal domain with fraction field M_insep (034L node) -- hypotheses of 032L the source leaves implicit; (4) 032L node gives R'' finite over R', 00GL (new Mathlib leaf Module.Finite.trans) gives finite over R; (5) R'' equals the integral closure of R in M (the case of 0308 needed, argued from the 00GN node and the definition, both inclusions); (6) conclusion by the definition of N-2. Statement unchanged ('if' direction only, as reviewed).",
   "blueprint": "The item serves step 4 of the split of lem-weil-pbc-normal-constant-generic (Tag 09Z5, proof of (1)) through the N-2 property; all six steps realize the use of the criterion 032N there (that N-2 is tested on finite purely inseparable extensions); no blueprint node states 032N (blueprint_refs search 'Japanese', 'N-2', '032N', 'purely inseparable', 'integral closure finite': none), so same_as = []."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.N2CharPPurelyInseparableCriterion",
+  "declaration": "isN2_of_finite_purelyInseparable_integralClosure",
+  "file": "lean/Sheaf/RingTheory/N2CharPPurelyInseparableCriterion.lean",
+  "statement": "theorem isN2_of_finite_purelyInseparable_integralClosure (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsNoetherianRing R] [Field K] [Algebra R K] [IsFractionRing R K] (p : ℕ) [Fact p.Prime] [CharP K p] (h : ∀ (L : Type v) [Field L] [Algebra K L] [Algebra R L] [IsScalarTower R K L] [FiniteDimensional K L] [IsPurelyInseparable K L], Module.Finite R (integralClosure R L)) : IsN2 R K",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-npi1153"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-npi1153",
+  "group": "E1",
+  "result": "fix",
+  "note": "Noetherian domain R/IsNoetherianRing, K=Frac via IsFractionRing, char p>0 -> [Fact p.Prime][CharP K p] (fixed from hp:0<p), h = IsN2 quantifier (Type v, scalar tower, FiniteDimensional) + IsPurelyInseparable K L giving Module.Finite R (integralClosure R L), conclusion IsN2 R K"
  }
 }
