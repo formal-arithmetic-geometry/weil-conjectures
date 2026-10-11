@@ -1,11 +1,11 @@
 # Work queue
 
-52 items; claim with `tools/claim.py next <group> [--stage N]`.
+49 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (52)
+## Stage 2: nodes to state (49)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -31,8 +31,6 @@
 | `lem-sc-flat-precompose-pus` | 1 | state | 0 |
 | `lem-sc-hilb-dominating-power` | 1 | state | 0 |
 | `lem-sc-irreducible-noetherian-constant-acyclic` | 1 | state | 0 |
-| `lem-sc-leray-closed-pushforward-cohomology` | 1 | state | 0 |
-| `lem-sc-noetherian-topological-cohomology-vanishing` | 1 | state | 0 |
 | `lem-sc-picard-cech-cup-pullback-compat` | 1 | state | 0 |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
 | `lem-sc-support-dimension-cohomology-vanishing` | 1 | state | 0 |
@@ -57,7 +55,6 @@
 | `lem-weil-pbc-site-leray-degenerate` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-finite-coequalizer-embeds-constant` | 1 | state | 0 |
 | `lem-weil-pbc-spectral-finite-coequalizer-from-finite-space` | 1 | state | 0 |
-| `lem-weil-pbc-zariski-cohomology-locally-zero` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 | `lem-sc-topological-flasque-acyclic` | 2 | state | 0 |
 | `lem-weil-pbc-site-plus-of-separated-is-sheaf` | 2 | state | 0 |
