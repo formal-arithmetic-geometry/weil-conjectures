@@ -216,5 +216,23 @@
  "tool_uses": [
   "lemma-nagata-diagonal-base-change"
  ],
- "reviewed": "2026-10-10 L: 5 steps along 02KU checked (diagonal of f' a closed immersion hence universally closed; the diagonal of f' is the base change of the diagonal of f along h = (X x_S X) x_S S' -> X x_S X, by the Nagata diagonal node and pasting; h flat surjective quasi-compact, an fpqc covering; universal closedness descends by lem-weil-pbc-fpqc-descend-universally-closed, 02KS; an immersion with closed image is a closed immersion, 01IQ). tool_uses lemma-nagata-diagonal-base-change (closed in Lean; the two Mathlib leaves of other units are tools by themselves). Direct route without the 02KP reduction accepted: g is quasi-compact by hypothesis."
+ "reviewed": "2026-10-10 L: 5 steps along 02KU checked (diagonal of f' a closed immersion hence universally closed; the diagonal of f' is the base change of the diagonal of f along h = (X x_S X) x_S S' -> X x_S X, by the Nagata diagonal node and pasting; h flat surjective quasi-compact, an fpqc covering; universal closedness descends by lem-weil-pbc-fpqc-descend-universally-closed, 02KS; an immersion with closed image is a closed immersion, 01IQ). tool_uses lemma-nagata-diagonal-base-change (closed in Lean; the two Mathlib leaves of other units are tools by themselves). Direct route without the 02KP reduction accepted: g is quasi-compact by hypothesis.",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange",
+  "declaration": "AlgebraicGeometry.isSeparated_of_flat_surjective_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsSeparatedOfFlatSurjectiveBaseChange.lean",
+  "statement": "theorem isSeparated_of_flat_surjective_baseChange {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) [Flat g] [Surjective g] [QuasiCompact g] [IsSeparated (pullback.snd f g)] : IsSeparated f",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fds1038",
+  "group": "E1",
+  "result": "pass",
+  "note": "single-morphism node matched binder by binder: g:S'->S [Flat g][Surjective g][QuasiCompact g] (AlgebraicGeometry.*, #check full names), f:X->S, f' = pullback.snd f g : X x_S S' -> S', [IsSeparated f'] -> IsSeparated f; one universe, no hollow clause (id cover specializes); no Mathlib DescendsAlong @IsSeparated instance, so not existing:true"
+ }
 }
