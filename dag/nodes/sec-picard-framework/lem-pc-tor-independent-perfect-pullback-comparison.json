@@ -24,7 +24,8 @@
   "def-pc-perfect-complex",
   "def-pc-derived-category",
   "def-pc-derived-pullback",
-  "def-weil-derived-tensor"
+  "def-weil-derived-tensor",
+  "def-pc-pullback-stalk-tensor-comparison"
  ],
  "proof": [
   {
@@ -158,5 +159,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-tip3146 (reviewer sub-agent of L); spot-checked: Statement vs Tag 08IB: stalkwise Tor-independence inline, no base-change map used (aligned). Child lem-pc-tor-independent-projective-complex-tensor true (Q^n summand of A^m so Tor-acyclic over R; D flat over E), real lemma, not dup of lem-pc-base-change-map-cech or lem-pc-derived-pullback-tor-independent-flat-complex (that one needs R-flat terms). FIX more, RETURN less: C1 Step 3 claimed (Lg_X^*P)_{x'}=Q⊗_A C 'because Q termwise projective' uncited and marked elementary; now restricts via lem-pc-affine-derived-pullback-tensor-tilde(1), uses lem-pc-flat-complex-derived-pullback for termwise pullback of the flat model, elementary:false; localization A⊗_R B->C phrased as in merged sibling lem-pc-derived-pullback-tor-independent-flat-complex. Second reading by F1 missed this C1.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorIndependentPerfectPullbackComparison",
+  "declaration": "AlgebraicGeometry.torIndependent_perfect_pullback_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorIndependentPerfectPullbackComparison.lean",
+  "statement": "theorem torIndependent_perfect_pullback_comparison {X S T : Scheme.{u₁}} (f : X ⟶ S) (g : T ⟶ S) [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w₁} (SheafOfModules.{u₁} ((moduleRings X.toRingedSpace).over U))] [HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings (Limits.pullback f g).toRingedSpace))] (hTor : PullbackStalkTensor.IsTorIndependent f g) (P : schemeDerivedCategory X) (hP : Scheme.IsPerfect X P) : ∀ z : ↥(Limits.pullback f g), PullbackStalkTensor.IsComparisonIso f g P z",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tpc1537",
+  "group": "F1",
+  "result": "pass",
+  "note": "f,g arbitrary; X'=pullback f g, g_X=fst; IsTorIndependent over all x,t with f x=g t, Tor'_i i>0 over O_{S,f x}, B's algebra via stalkCongr (= E1 hRB); P : schemeDerivedCategory X, Scheme.IsPerfect; all z, all i:ℤ; R,A,B,C actual stalks; E->C tensorToStalk tied to fst/snd stalkMaps; c_i = baseDerivedTensorCohomologyModel.localizedComparison (E1 form); target via derivedPullback fst, ∀ e iso ⇒ equivalent to IsIso c_i; combined compile + #check ok, hTor not inferInstance"
  }
 }

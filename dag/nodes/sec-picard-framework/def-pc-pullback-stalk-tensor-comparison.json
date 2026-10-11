@@ -1,0 +1,127 @@
+{
+ "id": "def-pc-pullback-stalk-tensor-comparison",
+ "kind": "definition",
+ "title": "Stalk tensor coordinates and invertibility of the pullback comparison",
+ "status": "split",
+ "statement": "Let f:X\\to S and g:T\\to S be scheme morphisms [def-pc-scheme], Z=X\\times_S T with projections p:Z\\to X, q:Z\\to T [def-pc-base-change], and z\\in Z. Put R=\\mathcal O_{S,f(p(z))}, A=\\mathcal O_{X,p(z)}, B=\\mathcal O_{T,q(z)}, C=\\mathcal O_{Z,z}. The R-algebra structures on A and B are the stalk maps of f and g, transporting the latter along f(p(z))=g(q(z)); the ring map A\\otimes_R B\\to C is the unique map restricting to the stalk maps of p and q. Say f and g are stalkwise Tor independent if, for every x\\in X, t\\in T and equality f(x)=g(t), all \\operatorname{Tor}_j^{\\mathcal O_{S,f(x)}}(\\mathcal O_{X,x},\\mathcal O_{T,t}) vanish for j>0 [def-weil-pbc-tor-modules]. For P\\in D(\\mathcal O_X) [def-pc-derived-category], define the stalk-comparison invertibility condition at z as follows. For every K-flat complex K of sheaves of \\mathcal O_X-modules [def-pc-kflat-complex] with Q(K)\\cong P, put Q_z=K_{p(z)} using the module stalk functor [def-pc-module-stalk-functor]. Apply the base-derived tensor cohomology model [def-pc-base-derived-tensor-cohomology-model] to (R,A,B,Q_z,C), giving its specified canonical map c_i:C\\otimes_{A\\otimes_R B}H^i(Q_z\\otimes_R^L B)\\to H^i(Q_z\\otimes_A C). For every i\\in\\mathbf Z require (a) an isomorphism e:H^i(Q_z\\otimes_A C)\\cong H^i(Lp^*P)_z [def-pc-derived-pullback], and (b) that c_i followed by e is an isomorphism for every such e. This expresses invertibility of the canonical comparison independently of target coordinates: the canonical K-flat pullback-stalk identification is one such e, and postcomposition by any isomorphism preserves and reflects invertibility.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-weil-pbc-tor-modules",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-module-stalk-functor",
+  "def-pc-base-derived-tensor-cohomology-model",
+  "def-pc-derived-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08IB, lemma-compare-base-change, affine derived-tensor comparison; module pullback stalks Tag 0098; K-flat pullback computation Tag 06YJ"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived tensor comparison at a scheme pullback stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scheme pullback stalk canonical tensor comparison cohomology K flat representative",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField",
+   "date": "2026-10-11",
+   "verdict": "no matching scheme stalk tensor comparison definition"
+  },
+  {
+   "tool": "grep",
+   "query": "PullbackStalkTensor|stalkTorIndependent|pullbackStalkTensorComparison",
+   "results": "0 hits: ",
+   "date": "2026-10-11",
+   "verdict": "no matching scheme stalk tensor comparison definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-tor-independent-perfect-pullback-comparison",
+  "date": "2026-10-11",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tor independence identifies base-derived tensor with pullback tensor at each stalk, using K-flat coordinates",
+   "via": [
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison",
+  "declaration": "AlgebraicGeometry.PullbackStalkTensor.IsComparisonIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackStalkTensorComparison.lean",
+  "statement": "def IsComparisonIso [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Limits.pullback f g).toRingedSpace))] (P : schemeDerivedCategory X) (z : ↥(Limits.pullback f g)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.PullbackStalkTensor.point_eq",
+   "AlgebraicGeometry.PullbackStalkTensor.R",
+   "AlgebraicGeometry.PullbackStalkTensor.A",
+   "AlgebraicGeometry.PullbackStalkTensor.B",
+   "AlgebraicGeometry.PullbackStalkTensor.C",
+   "AlgebraicGeometry.PullbackStalkTensor.leftAlgebra",
+   "AlgebraicGeometry.PullbackStalkTensor.rightAlgebra",
+   "AlgebraicGeometry.PullbackStalkTensor.exists_tensorToStalk",
+   "AlgebraicGeometry.PullbackStalkTensor.tensorToStalk",
+   "AlgebraicGeometry.PullbackStalkTensor.tensorAlgebra",
+   "AlgebraicGeometry.PullbackStalkTensor.IsTorIndependent",
+   "AlgebraicGeometry.PullbackStalkTensor.stalkComplex",
+   "AlgebraicGeometry.PullbackStalkTensor.cohomologyModel",
+   "AlgebraicGeometry.PullbackStalkTensor.stalkTensorComplex",
+   "AlgebraicGeometry.PullbackStalkTensor.IsComparisonIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tpc1537",
+  "group": "F1",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-tpc1537",
+  "group": "F1",
+  "result": "pass",
+  "note": "f,g arbitrary; X'=pullback f g, g_X=fst; IsTorIndependent over all x,t with f x=g t, Tor'_i i>0 over O_{S,f x}, B's algebra via stalkCongr (= E1 hRB); P : schemeDerivedCategory X, Scheme.IsPerfect; all z, all i:ℤ; R,A,B,C actual stalks; E->C tensorToStalk tied to fst/snd stalkMaps; c_i = baseDerivedTensorCohomologyModel.localizedComparison (E1 form); target via derivedPullback fst, ∀ e iso ⇒ equivalent to IsIso c_i; combined compile + #check ok, hTor not inferInstance"
+ }
+}
