@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Assoc
+public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
@@ -93,6 +94,85 @@ theorem nonempty_iso_kernelTransform_comp [Finite Λ]
     (fun K ↦ nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek _ _ K
       (fun L ↦ hasProjectionFormula_of_finite Λ _ K L)) 𝒦 𝒦' a c
 
+/-- `F ⋙ T ⋙ G ⋙ H ≅ M` from `T ≅ P ⋙ M ⋙ Q`, `F ⋙ P ≅ 𝟭`, `Q ⋙ G ≅ 𝟭` and `H ≅ 𝟭`, stated
+for abstract functors so that the kernel never unfolds the concrete functors. -/
+private lemma _root_.CategoryTheory.Functor.nonempty_iso_comp_comp_comp_of_iso {C D : Type*}
+    [Category C] [Category D] (F : C ⥤ D) (T : D ⥤ D) (G : D ⥤ C) (H : C ⥤ C) (P : D ⥤ C)
+    (M : C ⥤ C) (Q : C ⥤ D) (t : T ≅ P ⋙ M ⋙ Q) (u : F ⋙ P ≅ 𝟭 C) (c : Q ⋙ G ≅ 𝟭 C)
+    (h : H ≅ 𝟭 C) : Nonempty (F ⋙ T ⋙ G ⋙ H ≅ M) :=
+  ⟨Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
+      (Functor.isoWhiskerLeft _ h ≪≫ Functor.rightUnitor _)) ≪≫
+    Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight t _) ≪≫
+    Functor.isoWhiskerLeft _ (Functor.associator _ _ _) ≪≫ (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight u _ ≪≫ Functor.leftUnitor _ ≪≫ Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ c ≪≫ Functor.rightUnitor _⟩
+
+/-- `Δ^* p₁^* ≅ 𝟭`, since `Δ ≫ p₁ = 𝟙`. -/
+private lemma kt_diagonal_upperStar :
+    Nonempty (D((pullback.fst π π)^*[ModuleCat.{u + 1} Λ]) ⋙
+      L((pullback.diagonal π)^*[ModuleCat.{u + 1} Λ]) ≅ 𝟭 _) := by
+  let A := ModuleCat.{u + 1} Λ
+  exact ⟨Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory A _).symm _ ≪≫
+      (leftDerivedUpperStarComp A (pullback.diagonal π) (pullback.fst π π) (𝟙 V)
+        (pullback.diagonal_fst π).symm).symm ≪≫
+      Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId A _) ≪≫
+      (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _⟩
+
+/-- `Rp₂,! RΔ_! ≅ 𝟭`, by the composition law and `Δ ≫ p₂ = 𝟙`. -/
+private lemma kt_diagonal_lowerShriek [Finite Λ] [IsSeparated π]
+    [HasCompactification (pullback.snd π π)] :
+    Nonempty (R(pullback.diagonal π)_![ModuleCat.{u + 1} Λ] ⋙
+      R(pullback.snd π π)_![ModuleCat.{u + 1} Λ] ≅ 𝟭 _) := by
+  let A := ModuleCat.{u + 1} Λ
+  have h₂ : pullback.diagonal π ≫ pullback.snd π π = 𝟙 V := pullback.diagonal_snd π
+  have : HasCompactification (pullback.diagonal π ≫ pullback.snd π π) := .of_eq h₂.symm
+  have : QuasiCompact (pullback.diagonal π ≫ pullback.snd π π) := by
+    rw [h₂]
+    infer_instance
+  have hcongr {X Y : Scheme.{u}} {f f' : X ⟶ Y} [HasCompactification f]
+      [HasCompactification f'] (h : f = f') : Nonempty (R(f)_![A] ≅ R(f')_![A]) := by
+    subst h
+    exact ⟨Iso.refl _⟩
+  obtain ⟨pid⟩ := nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar A (𝟙 V)
+  obtain ⟨c⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ (pullback.diagonal π)
+    (pullback.snd π π)
+  obtain ⟨cc⟩ := hcongr h₂
+  exact ⟨c.symm ≪≫ cc ≪≫ pid ≪≫
+    (Etale.lowerStar A (𝟙 V)).rightDerivedFunctorIsoMapDerivedCategory ≪≫
+      Functor.mapDerivedCategoryNatIso (Etale.lowerStarId A V) ≪≫
+      Functor.mapDerivedCategoryIdIso _⟩
+
+/-- The projection formula `RΔ_! N ⊗ᴸ - ≅ RΔ_!(N ⊗ᴸ Δ^* -)` for the diagonal, natural in the
+second factor. -/
+private lemma kt_diagonal_projectionFormula [Finite Λ] [IsSeparated π]
+    (N : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty ((derivedTensor (ModuleCat.{u + 1} Λ) _).obj
+        ((R(pullback.diagonal π)_![ModuleCat.{u + 1} Λ]).obj N) ≅
+      L((pullback.diagonal π)^*[ModuleCat.{u + 1} Λ]) ⋙
+        (derivedTensor (ModuleCat.{u + 1} Λ) V).obj N ⋙
+        R(pullback.diagonal π)_![ModuleCat.{u + 1} Λ]) :=
+  nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek _ (pullback.diagonal π) N
+    (fun L ↦ hasProjectionFormula_of_finite Λ _ N L)
+
+/-- `- ⊗ᴸ RΔ_* N ≅ - ⊗ᴸ RΔ_! N`, the diagonal being proper. -/
+private lemma kt_diagonal_lowerStar [IsSeparated π]
+    (N : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty (derivedTensorRight (ModuleCat.{u + 1} Λ) _
+        ((R((pullback.diagonal π)_*[ModuleCat.{u + 1} Λ])).obj N) ≅
+      derivedTensorRight (ModuleCat.{u + 1} Λ) _
+        ((R(pullback.diagonal π)_![ModuleCat.{u + 1} Λ]).obj N)) := by
+  obtain ⟨pz⟩ := nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar
+    (ModuleCat.{u + 1} Λ) (pullback.diagonal π)
+  exact ⟨(derivedTensor (ModuleCat.{u + 1} Λ) _).flip.mapIso (pz.app N).symm⟩
+
+/-- `- ⊗ᴸ N ≅ N ⊗ᴸ -`. -/
+private lemma kt_derivedTensorRight_flip (X : Scheme.{u})
+    (N : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty (derivedTensorRight (ModuleCat.{u + 1} Λ) X N ≅
+      (derivedTensor (ModuleCat.{u + 1} Λ) X).obj N) := by
+  obtain ⟨β⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) X
+  exact ⟨(β.app N).symm⟩
+
 /-- The kernel transform of a kernel `Δ_* N` supported on the diagonal of `V ×_S V`, with
 shift `0`, is tensoring with `N`:
 
@@ -125,7 +205,16 @@ theorem nonempty_iso_kernelTransform_diagonal [Finite Λ] [IsSeparated π] [Quas
     (N : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty (kernelTransform (ModuleCat.{u + 1} Λ) π π
           ((R((pullback.diagonal π)_*[ModuleCat.{u + 1} Λ])).obj N) 0 ≅
-        derivedTensorRight (ModuleCat.{u + 1} Λ) V N) :=
-  sorry
+        derivedTensorRight (ModuleCat.{u + 1} Λ) V N) := by
+  obtain ⟨t₁⟩ := kt_diagonal_projectionFormula Λ π N
+  obtain ⟨t₂⟩ := kt_diagonal_lowerStar Λ π N
+  obtain ⟨t₃⟩ := kt_derivedTensorRight_flip Λ _
+    ((R(pullback.diagonal π)_![ModuleCat.{u + 1} Λ]).obj N)
+  obtain ⟨t₄⟩ := kt_derivedTensorRight_flip Λ _ N
+  obtain ⟨u⟩ := kt_diagonal_upperStar Λ π
+  obtain ⟨c⟩ := kt_diagonal_lowerShriek Λ π
+  exact Functor.nonempty_iso_comp_comp_comp_of_iso _ _ _ _ _ _ _
+    (t₂ ≪≫ t₃ ≪≫ t₁ ≪≫ Functor.isoWhiskerLeft _ (Functor.isoWhiskerRight t₄.symm _))
+    u c (shiftFunctorZero _ ℤ)
 
 end AlgebraicGeometry.Etale

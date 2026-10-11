@@ -59,6 +59,13 @@ lemma fourierTransform_eq_sum_compTrace (ψ : AddChar K R) (f : L → R) (y : L)
     fourierTransform ψ f y = ∑ x, f x * ψ.compTrace L (x * y) :=
   rfl
 
+/-- The classical Fourier transform is additive in the function; in particular it commutes with
+negation. -/
+lemma fourierTransform_neg (ψ : AddChar K R) (f : L → R) :
+    fourierTransform ψ (fun x ↦ -f x) = fun y ↦ -fourierTransform ψ f y := by
+  ext y
+  simp [fourierTransform, Finset.sum_neg_distrib]
+
 variable [FiniteDimensional K L] [Algebra.IsSeparable K L] [IsDomain R]
 
 /-- **Classical Fourier inversion.** For a nontrivial additive character `ψ` of `K`, the
