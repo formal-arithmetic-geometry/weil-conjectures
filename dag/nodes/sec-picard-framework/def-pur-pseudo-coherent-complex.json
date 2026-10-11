@@ -72,5 +72,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcc2006 (reviewer sub-agent of L); spot-checked: Statement (local bounded-above finite-free) matches Stacks 08CB on schemes via 08E5+08E7; no duplicate definition in dag/nodes (grep pseudo-coherent: only this def); consistent with lem-sc-pseudo-coherent-rhom-qcoherent (uses it for a qcoh algebra as O_Y-module); no affine-case node added. FIX more, RETURN less: (1) C4 wrong citation: 08FT is the ringed-site def and 08G5 is the definition of PERFECT, not pseudo-coherent; replaced by 08CB (cohomology.tex, ringed space) with the scheme equivalence Tags 08E5, 08E7, source document corrected from perfect.tex to cohomology.tex; (2) restored blueprint.from.place to the parent's place (it records where lem-sc-finite-duality uses the node, not the Stacks source).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PseudoCoherentComplex",
+  "declaration": "AlgebraicGeometry.Scheme.IsPseudoCoherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/PseudoCoherentComplex.lean",
+  "statement": "def IsPseudoCoherent (Y : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (E : schemeDerivedCategory Y) : Prop",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dpc1251",
+  "group": "M1",
+  "result": "pass",
+  "note": "Y : Scheme.{u}; E : schemeDerivedCategory Y on SheafOfModules.{u} (moduleRings Y.toRingedSpace); locally = ∀ y, ∃ U : Y.Opens, y ∈ U; restriction = (SheafOfModules.overFunctor _ U).mapDerivedCategory with shared moduleOverFunctor_* (#synth); bounded above ∃ N, ∀ i > N, IsZero (P.X i) and finite free SheafOfModules.free (ULift.{u} (Fin r)) as landed BoundedAboveFiniteFreeHomAcyclic; quasi-iso = Nonempty (_ ≅ Q.obj P); no ring-free/scheme duplicate (only ring DerivedCategory.IsPseudoCoherent); #check ok"
  }
 }
