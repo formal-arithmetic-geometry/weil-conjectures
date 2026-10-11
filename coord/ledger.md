@@ -5432,3 +5432,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:37 L: merged deliver/E1/lem-sc-invert-s-cohomology-affine-case (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AffineCohomologyLocalization AlgebraicGeometry.Scheme.Modules.affine_cohomology_localization)
 - 16:37 L: merged deliver/R1/lem-sc-smooth-proper-diagonal-koszul-dual (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizing AlgebraicGeometry.koszulRegularImmersion_dualizing; new nodes: def-sc-locally-ranked-exterior-complex)
 - 16:38 L: merged deliver/R1/def-pc-upper-shriek-right-adjoint (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.UpperShriekRightAdjoint AlgebraicGeometry.IsProperUpperShriek)
+- 16:38 L: merged deliver/U1/lem-sc-boundary-derivation-square-zero (stage 2; reviewer FIX; first push; Sheaf.Paper.BoundaryDerivationSquareZero AlgebraicGeometry.boundary_derivation_square_zero)
