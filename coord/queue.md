@@ -1,20 +1,20 @@
 # Work queue
 
-938 items; claim with `tools/claim.py next <group> [--stage N]`.
+937 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (938)
+## Stage 2: nodes to state (937)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
-| `def-galois-categories` | 1 | state |
 | `def-kun-support` | 1 | state |
 | `def-pur-hom-complex` | 1 | state |
 | `def-weil-derived-tensor` | 1 | state |
 | `def-weil-pbc-kinjective-resolutions` | 1 | state |
 | `lem-exc-field-discrete-modules` | 1 | state |
+| `lem-galois-pi1-finite-etale-image-stabilizer` | 1 | state |
 | `lem-pc-base-change-product` | 1 | state |
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-second-factor-functor` | 1 | state |
@@ -23,7 +23,6 @@
 | `lem-pc-flat-module-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
-| `lem-pc-projective-base-change` | 1 | state |
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
@@ -33,7 +32,6 @@
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
 | `lem-sc-p1-ext-yoneda-associativity` | 1 | state |
-| `lem-sc-p1-tor-dimension-shifting` | 1 | state |
 | `lem-sc-picard-h1-multiple-locus` | 1 | state |
 | `lem-sc-picard-h1-product-injective` | 1 | state |
 | `lem-sc-picard-locus-closed` | 1 | state |
@@ -903,6 +901,7 @@
 | `prop-weil-pbc-formal-glueing-equivalence` | 1 | state |
 | `prop-weil-pbc-inverse-image-exact` | 1 | state |
 | `thm-galois-abstract-equivalence` | 1 | state |
+| `thm-galois-fundamental` | 1 | state |
 | `thm-pqf-zmt-factorization` | 1 | state |
 | `thm-sp-grothendieck` | 1 | state |
 | `def-nagata-glued-limit-comparison` | 2 | state |
@@ -948,7 +947,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 917 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 915 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
