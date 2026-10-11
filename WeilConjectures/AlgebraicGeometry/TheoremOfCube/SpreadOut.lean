@@ -45,6 +45,8 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory CartesianMonoidalCategory
 
+open scoped TensorProduct
+
 namespace AlgebraicGeometry
 
 namespace Scheme.Modules
@@ -78,6 +80,32 @@ theorem isFlatOver_pullback_fst_tensorObj {K : Type u} [Field K] {W Z : Scheme.{
       map_smul' r a := smul_tmulSection _ a _ }
   exact Module.Flat.of_linearEquiv
     (LinearEquiv.ofBijective φ (hℓ.bijective_tmulSection_right hUN')).symm
+
+
+section PullbackSection
+
+variable {A B : Scheme.{u}} (g : A ⟶ B)
+
+/-- Pullbacks of sections are natural in the module. -/
+lemma pullback_map_app_pullbackSection {M N : B.Modules} (ψ : M ⟶ N) {U : B.Opens}
+    (m : Γ(M, U)) :
+    ((Modules.pullback g).map ψ).app (g ⁻¹ᵁ U) (pullbackSection g m) =
+      pullbackSection g (ψ.app U m) := by
+  have h := (pullbackPushforwardAdjunction g).unit.naturality ψ
+  exact (congrArg (fun φ ↦ φ.app U m) h).symm
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The pullback of a function `r` on `U`, under `g^* 𝒪_B ≅ 𝒪_A`, is `g^♯ r`. -/
+lemma pullbackObjUnitIso_hom_app_pullbackSection {U : B.Opens} (r : Γ(B, U)) :
+    (pullbackObjUnitIso g).hom.app (g ⁻¹ᵁ U) (pullbackSection g (M := Modules.unit B) r) =
+      g.app U r := by
+  have h2 : (pullbackPushforwardAdjunction g).homEquiv _ _ (pullbackObjUnitIso g).hom =
+      SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom :=
+    SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit _
+  rw [Adjunction.homEquiv_unit] at h2
+  exact congrArg (fun φ : Modules.unit B ⟶ (pushforward g).obj (Modules.unit A) ↦ φ.app U r) h2
+
+end PullbackSection
 
 end Scheme.Modules
 
@@ -186,6 +214,84 @@ lemma hFiber_twist_eq_zero (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y)
     Scheme.Modules.hFiber_eq_finrankH]
   have := subsingleton_H_one_crossIdeal X Y x y
   exact Module.finrank_zero_of_subsingleton
+
+
+omit [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
+  [GeometricallyIntegral Y.hom] in
+/-- The map `pr^* J ⟶ 𝒪` induced by the inclusion `J ⊆ 𝒪_{X × Y}`. -/
+noncomputable abbrev crossι (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) :
+    (Scheme.Modules.pullback (fst (X ⊗ Y) Z).left).obj (crossIdeal X Y x y).toModules ⟶
+      𝟙_ ((X ⊗ Y) ⊗ Z).left.Modules :=
+  (Scheme.Modules.pullback (fst (X ⊗ Y) Z).left).map (crossIdeal X Y x y).toModulesι ≫
+    (Scheme.Modules.pullbackObjUnitIso _).hom
+
+/-- The map `𝒢 = pr^* J ⊗ L ⟶ L` induced by the inclusion `J ⊆ 𝒪_{X × Y}`. -/
+noncomputable abbrev twistι (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ Y) ⊗ Z).left.Modules) :
+    twist X Y Z x y L ⟶ L :=
+  (crossι X Y Z x y ▷ L) ≫ (λ_ L).hom
+
+omit [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
+  [GeometricallyIntegral Y.hom] in
+lemma twistι_app_tmulSection (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ Y) ⊗ Z).left.Modules)
+    {O : ((X ⊗ Y) ⊗ Z).left.Opens} (a : Γ((Scheme.Modules.pullback (fst (X ⊗ Y) Z).left).obj
+      (crossIdeal X Y x y).toModules, O)) (ℓ : Γ(L, O)) :
+    (twistι X Y Z x y L).app O (Scheme.Modules.tmulSection a ℓ) =
+      (Scheme.Modules.unitSectionsEquiv O).symm ((crossι X Y Z x y).app O a) • ℓ := by
+  simp only [Scheme.Modules.Hom.comp_app, ConcreteCategory.comp_apply,
+    Scheme.Modules.whiskerRight_app_tmulSection, Scheme.Modules.leftUnitor_hom_app_tmulSection']
+
+
+omit [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
+  [GeometricallyIntegral Y.hom] in
+set_option backward.isDefEq.respectTransparency false in
+/-- Over an affine open lying over an affine open `U` of `X × Y`, the map `pr^* J ⟶ 𝒪` is
+injective, by flatness of `X × Y × Z ⟶ X × Y`. -/
+lemma injective_crossι_app (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) {O : ((X ⊗ Y) ⊗ Z).left.Opens}
+    (hO : IsAffineOpen O) {U : (X ⊗ Y).left.Opens} (hU : IsAffineOpen U)
+    (hle : O ≤ (fst (X ⊗ Y) Z).left ⁻¹ᵁ U) :
+    Function.Injective ((crossι X Y Z x y).app O) := by
+  let π := (fst (X ⊗ Y) Z).left
+  let J := crossIdeal X Y x y
+  have := Scheme.Modules.isQuasicoherent_toModules J
+  have : Flat π := inferInstanceAs (Flat (Limits.pullback.fst (X ⊗ Y).hom Z.hom))
+  letI := (π.appLE U O hle).hom.toAlgebra
+  obtain ⟨e, he⟩ := Scheme.Modules.exists_linearEquiv_pullback_sections π J.toModules hU hO hle
+  let ιL : Γ(J.toModules, U) →ₗ[Γ((X ⊗ Y).left, U)] Γ((X ⊗ Y).left, U) :=
+    { toFun := J.toModulesι.app U
+      map_add' := map_add _
+      map_smul' := Scheme.Modules.Hom.app_smul _ }
+  have hflat : Module.Flat Γ((X ⊗ Y).left, U) Γ(((X ⊗ Y) ⊗ Z).left, O) :=
+    π.flat_appLE hU hO hle
+  let μ : Γ(((X ⊗ Y) ⊗ Z).left, O) ⊗[Γ((X ⊗ Y).left, U)] Γ(J.toModules, U) →ₗ[Γ(((X ⊗ Y) ⊗ Z).left, O)]
+      Γ(((X ⊗ Y) ⊗ Z).left, O) :=
+    (TensorProduct.AlgebraTensorModule.rid _ _ _).toLinearMap ∘ₗ
+      TensorProduct.AlgebraTensorModule.lTensor _ _ ιL
+  have hμ : Function.Injective μ :=
+    (TensorProduct.AlgebraTensorModule.rid _ _ _).injective.comp
+      (Module.Flat.lTensor_preserves_injective_linearMap ιL (J.injective_toModulesι_app U))
+  have hcomp (w) : (Scheme.Modules.unitSectionsEquiv O).symm ((crossι X Y Z x y).app O (e w)) =
+      μ w := by
+    induction w using TensorProduct.induction_on with
+    | zero => simp only [map_zero]
+    | add a b ha hb => simp only [map_add, ha, hb]
+    | tmul r m =>
+      have h1 : (r ⊗ₜ m : Γ(((X ⊗ Y) ⊗ Z).left, O) ⊗[Γ((X ⊗ Y).left, U)] Γ(J.toModules, U)) =
+          r • (1 ⊗ₜ m) := by
+        rw [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+      rw [h1, LinearEquiv.map_smul, Scheme.Modules.Hom.app_smul, LinearEquiv.map_smul,
+        LinearMap.map_smul, he]
+      congr 1
+      simp only [μ, LinearMap.comp_apply, TensorProduct.AlgebraTensorModule.lTensor_tmul,
+        LinearEquiv.coe_coe, TensorProduct.AlgebraTensorModule.rid_tmul]
+      rw [Scheme.Modules.Hom.app_presheaf_map, Scheme.Modules.Hom.comp_app,
+        ConcreteCategory.comp_apply, Scheme.Modules.pullback_map_app_pullbackSection,
+        Algebra.smul_def, mul_one]
+      erw [Scheme.Modules.pullbackObjUnitIso_hom_app_pullbackSection]
+      rfl
+  intro a b hab
+  obtain ⟨wa, rfl⟩ := e.surjective a
+  obtain ⟨wb, rfl⟩ := e.surjective b
+  exact congrArg e (hμ ((hcomp wa).symm.trans ((congrArg _ hab).trans (hcomp wb))))
 
 end TheoremOfCube
 
