@@ -1,11 +1,11 @@
 # Work queue
 
-799 items; claim with `tools/claim.py next <group> [--stage N]`.
+795 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (799)
+## Stage 2: nodes to state (795)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -16,19 +16,15 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
-| `lem-pc-ringed-space-product-kinjective` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-divisor-module-local` | 1 | state |
-| `lem-sc-finite-flat-unramified-tangent-criterion` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-p1-rhom-hom-derived-connecting` | 1 | state |
 | `lem-sc-product-tangent-space-direct-sum` | 1 | state |
 | `lem-sc-rational-section-order` | 1 | state |
-| `lem-sc-rational-tangent-cotangent-duality` | 1 | state |
 | `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
 | `lem-sc-separated-affine-function-field-surjective` | 1 | state |
 | `lem-sc-vector-bundle-line-subbundle` | 1 | state |
-| `lem-sp-kinjective-comparison-principle` | 1 | state |
 | `lem-sp-kinjective-computes` | 1 | state |
 | `lem-sp-shift-identification` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
