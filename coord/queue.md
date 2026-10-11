@@ -1,11 +1,11 @@
 # Work queue
 
-65 items; claim with `tools/claim.py next <group> [--stage N]`.
+61 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (65)
+## Stage 2: nodes to state (61)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -41,7 +41,6 @@
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 1 | state | 0 |
 | `lem-sc-affine-projective-complex-derived-hom` | 1 | state | 0 |
-| `lem-sc-affine-truncation-kernel-flat` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
 | `lem-sc-finite-affine-derived-equivalence` | 1 | state | 0 |
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
@@ -64,10 +63,7 @@
 | `lem-weil-pbc-flat-base-change-map-sections` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-stalk` | 1 | state | 0 |
-| `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
-| `lem-weil-pbc-module-cohomology-fmap-basic-properties` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
-| `lem-weil-pbc-pullback-cohomology-long-exact-ladder` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
