@@ -586,7 +586,8 @@ variable {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] {j : U ⟶ C}
   [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ι : PadicAlgCl l →+* ℂ)
 
-/-- Blueprint `sk-p-real-semi`: Semi-continuity of weights.
+/-- Semi-continuity of weights, the first assertion of `sk-p-real-semi`, on the representation
+side and conditional on the Euler-product hypothesis `hD`; this is not a proof of that assertion.
 
 For a boundary datum `D` on a smooth geometrically connected curve `C₀`, if the lisse Weil sheaf
 `ℱ` on `U₀` has weights at most `w`, then `j_* ℱ` has weights at most `w` on `C₀`. Concretely:
@@ -621,7 +622,7 @@ theorem frobeniusWeight_le_of_hasWeightsAtMost [SmoothOfRelativeDimension 1 p]
     simp [boundaryFrobenius, hα]
   · exact fun h ↦ hv0 (congrArg Subtype.val h)
 
-/-- Blueprint `sk-p-real-semi`: Semi-continuity of weights.
+/-- Blueprint `sk-p-real-semi`: Semi-continuity of weights, the second assertion.
 
 The consequence of the weight bound for `j_* ℱ`: a lisse Weil sheaf `𝒢` on a smooth
 geometrically connected curve `C₀` whose restriction to the open `U₀` is punctually `ι`-pure of
