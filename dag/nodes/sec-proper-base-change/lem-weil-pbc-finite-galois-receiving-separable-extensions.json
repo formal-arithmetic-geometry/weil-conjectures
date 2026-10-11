@@ -153,5 +153,23 @@
   "by": "L",
   "result": "pass",
   "note": "Four steps (agent proof): a separable closure Omega Galois over k (existing leaf), each L_i embeds into Omega (new leaf IsSepClosed.lift IsSepClosed.lean:294 verified), a finite Galois subextension containing the images of bases (new leaf FiniteGaloisIntermediateField.adjoin GaloisClosure.lean:108/125 verified), the tau_i by restriction of codomain. Correct."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteGaloisReceivingSeparableExtensions",
+  "declaration": "finite_galois_receiving_separable_extensions",
+  "file": "lean/Sheaf/FieldTheory/FiniteGaloisReceivingSeparableExtensions.lean",
+  "statement": "theorem finite_galois_receiving_separable_extensions (k : Type u) [Field k] (n : ℕ) (L : Fin n → Type v) [hfield : ∀ i, Field (L i)] [halgebra : ∀ i, Algebra k (L i)] (hfinite : ∀ i, letI := hfield i; letI := halgebra i; FiniteDimensional k (L i)) (hseparable : ∀ i, letI := hfield i; letI := halgebra i; Algebra.IsSeparable k (L i)) : ∃ (K : Type (max u v)) (hK : Field K) (aK : Algebra k K), letI := hK letI := aK FiniteDimensional k K ∧ Algebra.IsSeparable k K ∧ (∀ β : K, ((minpoly k β).map (algebraMap k K)).Splits) ∧ (∀ i : Fin n, letI := hfield i; letI := halgebra i; Nonempty ((L i) →ₐ[k] K))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgr1026",
+  "group": "M1",
+  "result": "pass",
+  "note": "k Field u; n:ℕ with Fin n incl. n=0; L i Field+Algebra via letI; hfinite FiniteDimensional; hseparable Algebra.IsSeparable (entails algebraic); ∃ K : Type (max u v) Field+Algebra; FiniteDimensional; IsSeparable; normality literal ∀β minpoly.map Splits (Splits unbundled in pinned Mathlib, monic so exactly linear factors); Nonempty AlgHom per i; no hollow hyp; no Galois def node so inline normality is the node's own clause"
  }
 }

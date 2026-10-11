@@ -4227,3 +4227,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:25 L: merged deliver/H1/lem-weil-pbc-filtered-colimit-flat-modules (stage 2; reviewer FIX; first push; Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat ModuleCat.filteredColimit_flat)
 - 10:25 L: merged deliver/C1/lem-weil-pbc-derived-square-iso-pasting (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DerivedSquareIsoPasting AlgebraicGeometry.Etale.derivedSquareIsoPasting)
 - 10:26 L: merged deliver/E1/lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise CommAlgCat.filteredColimit_tensorProduct_elementwise)
+- 10:26 L: merged deliver/M1/lem-weil-pbc-finite-galois-receiving-separable-extensions (stage 2; reviewer PASS; first push; Sheaf.FieldTheory.FiniteGaloisReceivingSeparableExtensions finite_galois_receiving_separable_extensions)
