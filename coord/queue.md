@@ -1,11 +1,11 @@
 # Work queue
 
-950 items; claim with `tools/claim.py next <group> [--stage N]`.
+944 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (950)
+## Stage 2: nodes to state (944)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -20,24 +20,18 @@
 | `lem-pc-derived-adjoint-functors` | 1 | state |
 | `lem-pc-derived-tensor-second-factor-functor` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
-| `lem-pc-dim-base-change` | 1 | state |
 | `lem-pc-flat-bounded-complex-descent` | 1 | state |
 | `lem-pc-flat-module-descent` | 1 | state |
 | `lem-pc-hilb-containment-locus` | 1 | state |
-| `lem-pc-homeo-pure-insep` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-pre-derived-adjoint-functors-general` | 1 | state |
 | `lem-pc-projective-base-change` | 1 | state |
-| `lem-pc-sheaf-modules-tensor-closed` | 1 | state |
 | `lem-pc-very-ample-disjoint-union` | 1 | state |
 | `lem-pur-derived-change-of-rings` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-etale-base-change-geometric` | 1 | state |
 | `lem-sc-etale-faithfully-flat-local` | 1 | state |
 | `lem-sc-finite-free-internal-hom-exact` | 1 | state |
-| `lem-sc-general-theorem-of-cube` | 1 | state |
-| `lem-sc-geometrically-irreducible-product` | 1 | state |
-| `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
 | `lem-sc-hilbert-embedded-points-affine-localization` | 1 | state |
 | `lem-sc-lfp-field-extension-pointwise-descent` | 1 | state |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
