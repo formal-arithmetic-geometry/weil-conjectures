@@ -33,7 +33,9 @@ morphism.
 
 universe u
 
-open CategoryTheory Polynomial
+open CategoryTheory Polynomial LaurentPolynomial
+
+open scoped AlgebraMonoidAlgebra
 
 namespace AlgebraicGeometry
 
@@ -216,5 +218,35 @@ theorem exists_smoothOfRelativeDimension_extendedReesAlgebra_of_section {d : ℕ
       (RingHom.Etale.propertyIsLocal.HoldsForLocalizationAway RingHom.Etale.containsIdentities
         A' (1 - e))
   · rw [RingHom.comp_assoc, hψf]
+
+/-- Away from the closed subscheme the deformation space is `𝔾_m` times the base: if `f : C ⟶ A`
+is smooth of relative dimension `d`, so is `C[t] ⟶ A[t, A t⁻¹] = A[t, t⁻¹]`. -/
+theorem smoothOfRelativeDimension_extendedReesAlgebra_top {d : ℕ} (f : C →+* A)
+    (hf : SmoothOfRelativeDimension d (Spec.map (CommRingCat.ofHom f))) :
+    SmoothOfRelativeDimension d (Spec.map (CommRingCat.ofHom
+      ((⊤ : Ideal A).toExtendedReesAlgebra.comp (mapRingHom f)))) := by
+  let e : (⊤ : Ideal A).extendedReesAlgebra ≃+* A[T;T⁻¹] :=
+    ((Subalgebra.equivOfEq _ _ Ideal.extendedReesAlgebra_top).trans
+      Subalgebra.topEquiv).toRingEquiv
+  have he : (e.toRingHom.comp ((⊤ : Ideal A).toExtendedReesAlgebra.comp (mapRingHom f))) =
+      (Ideal.laurentMap f).comp toLaurent := by
+    refine RingHom.ext fun p ↦ ?_
+    change toLaurent (p.map f) = Ideal.laurentMap f (toLaurent p)
+    rw [Ideal.laurentMap_toLaurent]
+  have : IsIso (CommRingCat.ofHom e.toRingHom) := inferInstanceAs (IsIso e.toCommRingCatIso.hom)
+  rw [← MorphismProperty.cancel_left_of_respectsIso (P := @SmoothOfRelativeDimension d)
+    (Spec.map (CommRingCat.ofHom e.toRingHom)), ← Spec.map_comp, ← CommRingCat.ofHom_comp, he,
+    CommRingCat.ofHom_comp, Spec.map_comp]
+  let := f.toAlgebra
+  have hpush := CommRingCat.isPushout_of_isPushout C A C[T;T⁻¹] A[T;T⁻¹]
+  have h₁ : SmoothOfRelativeDimension d (Spec.map (CommRingCat.ofHom (Ideal.laurentMap f))) :=
+    have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+    MorphismProperty.of_isPullback (isPullback_SpecMap_of_isPushout _ _ _ _ hpush) hf
+  have h₂ : IsOpenImmersion (Spec.map (CommRingCat.ofHom (toLaurent : C[X] →+* C[T;T⁻¹]))) :=
+    IsOpenImmersion.of_isLocalization (S := C[T;T⁻¹]) (X : C[X])
+  have := smoothOfRelativeDimension_comp (n := d) (m := 0)
+    (Spec.map (CommRingCat.ofHom (Ideal.laurentMap f))) (Spec.map (CommRingCat.ofHom
+    (toLaurent : C[X] →+* C[T;T⁻¹])))
+  rwa [add_zero] at this
 
 end AlgebraicGeometry
