@@ -241,5 +241,23 @@
   "by": "L",
   "result": "accepted",
   "note": "Seven steps along Algebra 00JP and Constructions 01M4 (labels corrected by the worker): basis via the homogeneous components and r_0 h; (1) forward via the preimage formula of lem-weil-pbc-proj-basic-open-intersection and the unit criterion, with the homogeneous witness g^e = af extracted by comparing homogeneous components (checked: component of b of degree nk-d); converse and units written out including S_g = 0; (2) quasi-compactness transported; (3) unit-ideal criterion. New Mathlib leaves lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact (iSup_basicOpen_eq_top_iff :620, compactSpace :292, Ideal.span_singleton_eq_top Span.lean:205) and lem-weil-pbc-projective-spectrum-basic-opens-basis (isTopologicalBasis_basic_opens :391, basicOpen_mul :361, basicOpen_eq_union_of_projection :376), checked."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjStandardOpenProperties",
+  "declaration": "AlgebraicGeometry.Proj.standardOpenProperties",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjStandardOpenProperties.lean",
+  "statement": "theorem standardOpenProperties {S : Type u} [CommRing S] {σ : Type v} [SetLike σ S] [AddSubgroupClass σ S] (𝒜 : ℕ → σ) [GradedRing 𝒜] : TopologicalSpace.Opens.IsBasis {U | ∃ (f : S) (d : ℕ), 0 < d ∧ f ∈ 𝒜 d ∧ U = basicOpen 𝒜 f} ∧ (∀ (f g : S) (d k : ℕ), 0 < d → 0 < k → f ∈ 𝒜 d → g ∈ 𝒜 k → basicOpen 𝒜 f ⊓ basicOpen 𝒜 g = basicOpen 𝒜 (f * g)) ∧ (∀ (f g : S) (d k : ℕ) (_hd : 0 < d) (_hk : 0 < k) (hf : f ∈ 𝒜 d) (hg : g ∈ 𝒜 k), (basicOpen 𝒜 g ≤ basicOpen 𝒜 f ↔ ∃ (e l : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 l ∧ g ^ e = a * f) ∧ (∀ (e l : ℕ) (a : S), 0 < e → a ∈ 𝒜 l → g ^ e = a * f → a * f ≠ 0 → l = e * k - d) ∧ (basicOpen 𝒜 g ≤ basicOpen 𝒜 f → IsUnit (algebraMap S (Localization.Away g) f) ∧ IsUnit (HomogeneousLocalization.Away.mk 𝒜 hg d (f ^ k) (by simpa [smul_eq_mul, mul_comm] using SetLike.pow_mem_graded k hf)))) ∧ (∀ (f : S) (d : ℕ), 0 < d → f ∈ 𝒜 d → ∀ (I : Type w) (U : I → (Proj 𝒜).Opens), (⨆ i, U i) = basicOpen 𝒜 f → ∃ (n : ℕ) (g : Fin n → S) (k : Fin n → ℕ), (∀ i, 0 < k i ∧ g i ∈ 𝒜 (k i)) ∧ basicOpen 𝒜 f = ⨆ i, basicOpen 𝒜 (g i) ∧ ∀ i, ∃ j, basicOpen 𝒜 (g i) ≤ U j) ∧ (∀ (f : S) (d : ℕ) (_hd : 0 < d) (hf : f ∈ 𝒜 d) (n : ℕ) (g : Fin n → S) (k : Fin n → ℕ) (_hk : ∀ i, 0 < k i) (hg : ∀ i, g i ∈ 𝒜 (k i)), basicOpen 𝒜 f ≤ ⨆ i, basicOpen 𝒜 (g i) ↔ Ideal.span (Set.range (fun i : Fin n ↦ HomogeneousLocalization.Away.mk 𝒜 hf (k i) (g i ^ d) (by simpa [smul_eq_mul, mul_comm] using SetLike.pow_mem_graded d (hg i)))) = ⊤)",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pso1335",
+  "group": "J1",
+  "result": "pass",
+  "note": "S/σ/𝒜 GradedRing = N-graded ring; Proj 𝒜 and basicOpen resolve (#check) to AlgebraicGeometry.Proj.basicOpen : (Proj 𝒜).Opens; (0) positive-degree basis set identical to landed C1 isBasis_positiveDegree_basicOpen_and_isAffineOpen, ⊓ = D+(fg); (1) iff with e>0, homogeneous a any degree, degree l = ek-d under af≠0, Away.mk 𝒜 hg d (f^k) = f^k/g^d (Away.mk signature checked), unit in Localization.Away g; (2) arbitrary I:Type w cover (not a limit index, no vacuity), Fin n positive-degree refinement; (3) Away.mk 𝒜 hf (k i) (g i^d) = g_i^d/f^k_i span = ⊤; no let/show, no new defs, no node changes besides lean record"
  }
 }
