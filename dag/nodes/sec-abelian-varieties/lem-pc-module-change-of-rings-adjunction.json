@@ -141,5 +141,24 @@
   "summary": "Split following Stacks 008A exactly: its proof is 'Lemma 006R plus Hom(O_2 (x) G, F) = Hom(O_2 (x)_p G, F) because F is a sheaf'. Step 1 is the presheaf adjunction 006R, made a new unsplit node lem-pc-presheaf-change-of-rings-adjunction (its own proof, 'for a ring map A -> B restriction and change of rings are adjoint', is Algebra 05DQ, the existing Mathlib leaf lem-weil-pbc-scalar-extension-hom, applied sectionwise plus compatibility with restrictions). Step 2 is the universal property of sheafification of presheaves of modules (Stacks 0089 and the formula after it), which is the existing Mathlib-leaf definition def-weil-presheaf-modules-sheafification (PresheafOfModules.sheafificationAdjunction), applied to the B-module presheaf B (x)_{p,A} M, with def-pur-sheaf-tensor-product for the definition of B (x)_A M. Step 3 composes and checks the formula u -> (m -> u(1 (x) m)). Mathlib: SheafOfModules.pullbackPushforwardAdjunction with F = identity gives an abstract left adjoint of restriction of scalars; its identification with the tensor formula is not in Mathlib, recorded as mathlib_candidate. No slopmaster2 declaration (grep by id, 008A, restrictScalars, extendScalars).",
   "blueprint": "Realizes the change-of-rings step of def-pc-base-change's module base-change clause (via lem-pc-module-pullback-adjunction step 1 and def-pc-module-pullback): steps 1-2 are the presheaf adjunction and the sheafification passage of 008A, step 3 the composite with the explicit formula used by lem-pc-module-pullback-adjunction step 1."
  },
- "reviewed": "2026-10-10 L: 3 steps (the presheaf adjunction 006R as a new node, the sheafification of the presheaf tensor product and its universal property 0089, the composite with the explicit formula); Mathlib's pullbackPushforwardAdjunction recorded as a candidate (abstract left adjoint); 1 new node"
+ "reviewed": "2026-10-10 L: 3 steps (the presheaf adjunction 006R as a new node, the sheafification of the presheaf tensor product and its universal property 0089, the composite with the explicit formula); Mathlib's pullbackPushforwardAdjunction recorded as a candidate (abstract left adjoint); 1 new node",
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction",
+  "declaration": "SheafOfModules.exists_changeOfRingsAdjunction",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/ChangeOfRingsAdjunction.lean",
+  "statement": "theorem exists_changeOfRingsAdjunction : ∃ (E : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B)) (h : ∀ M : SheafOfModules.{u} (𝓡 A), E.obj M = 𝓣 M) (adj : E ⊣ restrictScalars 𝓪), ∀ (M : SheafOfModules.{u} (𝓡 A)) (N : SheafOfModules.{u} (𝓡 B)) (f : (𝓣 M) ⟶ N) (U : (Opens X)ᵒᵖ) (m : M.val.obj U), ((adj.homEquiv M N) (eqToHom (h M) ≫ f)).val.app U m = f.val.app U ((η M).app U ((1 : B.presheaf.obj U) ⊗ₜ[A.presheaf.obj U, (α.hom.app U).hom] m))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mca0955"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mca0955",
+  "group": "G1",
+  "result": "fix",
+  "note": "X arbitrary space (TopCat.{u}), A B ring sheaves + α arbitrary, M N arbitrary; restrictScalars 𝓪; 𝓣 = landed changeOfRings (no copy); homEquiv formula u(η(1⊗m)) with η the toSheafify unit of changeOfRings; naturality via adj and E.map pinned by formula; common universe forced by Mathlib sheafify instances"
+ }
 }
