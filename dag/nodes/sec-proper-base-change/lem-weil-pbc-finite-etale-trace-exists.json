@@ -296,5 +296,24 @@
   "by": "L",
   "result": "accepted",
   "note": "Split reviewed: 10 steps (reduction to presheaf maps F(W_Y) -> F(W) via the restriction isomorphism; splittings and local sums; pullback of splittings; independence of the local sum from the splitting via the clopen pieces T_{jk} and the covering by the T_pi; splitting coverings from 04HN; construction by descent with the characterization (*); naturality; properties (2), (1); uniqueness from (1)+(2)). Statement made precise ((1) componentwise through rho and kappa; (2) for any splitting of Y), meaning unchanged. Correct; the independence argument Stacks/SGA leave to \"descent\" is written out. No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists",
+  "declaration": "AlgebraicGeometry.Etale.existsUnique_finiteEtaleTrace",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceExists.lean",
+  "statement": "theorem existsUnique_finiteEtaleTrace : let A := AddCommGrpCat.{u + 1} let B := fun {X Y : Scheme.{u}} (f : Y ⟶ X) (hf : Etale f) (W : X.Etale) ↦ (MorphismProperty.Over.map ⊤ hf).obj ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W) let T := ∀ (X Y : Scheme.{u}) (f : Y ⟶ X) (_ : IsFinite f) (_ : Etale f) (F : Sheaf X.smallEtaleTopology A), (lowerStar A f).obj ((upperStar A f).obj F) ⟶ F ∃! tr : T, let bar := fun {X Y : Scheme.{u}} (f : Y ⟶ X) (hfin : IsFinite f) (hf : Etale f) (F : Sheaf X.smallEtaleTopology A) (W : X.Etale) ↦ (((upperStarIsoLocalizationRestriction A f hf).app F).inv.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj W))) ≫ (tr X Y f hfin hf F).hom.app (op W) (∀ (X Y : Scheme.{u}) (f : Y ⟶ X) (hfin : IsFinite f) (hf : Etale f) (F G : Sheaf X.smallEtaleTopology A) (φ : F ⟶ G), tr X Y f hfin hf F ≫ φ = (lowerStar A f).map ((upperStar A f).map φ) ≫ tr X Y f hfin hf G) ∧ (∀ (X Y X' : Scheme.{u}) (f : Y ⟶ X) (hfin : IsFinite f) (hf : Etale f) (g : X' ⟶ X) (hg : Etale g) (F : Sheaf X.smallEtaleTopology A), letI := hfin letI := hf let f' := pullback.snd f g let hf' : Etale f' := inferInstance let F' := (upperStar A g).obj F ∀ (W : X'.Etale) (κ : (MorphismProperty.Over.map ⊤ hg).obj (B f' hf' W) ≅ B f hf ((MorphismProperty.Over.map ⊤ hg).obj W)), κ.hom.left ≫ pullback.fst (W.hom ≫ g) f = pullback.fst W.hom f' → κ.hom.left ≫ pullback.snd (W.hom ≫ g) f = pullback.snd W.hom f' ≫ pullback.fst f g → bar f' inferInstance hf' F' W ≫ ((upperStarIsoLocalizationRestriction A g hg).app F).hom.hom.app (op W) = ((upperStarIsoLocalizationRestriction A g hg).app F).hom.hom.app (op (B f' hf' W)) ≫ F.obj.map κ.inv.op ≫ bar f hfin hf F ((MorphismProperty.Over.map ⊤ hg).obj W)) ∧ (∀ (X Y : Scheme.{u}) (f : Y ⟶ X) (hfin : IsFinite f) (hf : Etale f) (F : Sheaf X.smallEtaleTopology A) (J : Type u) [Fintype J] (V : J → Scheme.{u}) (i : ∀ j, V j ⟶ Y) (t : ∀ j, X ⟶ V j) (_ : IsColimit (Cofan.mk Y i)) (hinv₁ : ∀ j, t j ≫ i j ≫ f = 𝟙 X) (_ : ∀ j, i j ≫ f ≫ t j = 𝟙 (V j)) (_ : ∀ j, IsOpenImmersion (i j)) (_ : ∀ j, IsClosedImmersion (i j)) (W : X.Etale), bar f hfin hf F W = ∑ j, F.obj.map (MorphismProperty.Over.homMk (A := W) (B := B f hf W) (pullback.lift (𝟙 W.left) (W.hom ≫ t j ≫ i j) (by simp [Category.assoc, hinv₁])) (by simp [B, Category.assoc, hinv₁])).op)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fte1017"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fte1017",
+  "group": "H1",
+  "result": "fix",
+  "note": "family over all finite etale f (IsFinite+Etale) and F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u+1}, tr : lowerStar(upperStar F) ⟶ F, bar = rho^{-1} at W_Y then tr; (0) naturality; (1) etale g, f' = pullback.snd f g, kappa characterized by its two projections, rho_g directions; (2) split cover rewritten to E1 5d9bb8370 form (IsColimit (Cofan.mk Y i), t inverse, open+closed immersions) with sigma_j = pullback.lift (𝟙 W.left) (W.hom ≫ t j ≫ i j); empty J; no existing finite-etale trace in source"
  }
 }
