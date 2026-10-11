@@ -113,11 +113,11 @@ lemma isBaseChange_sectionsRes_basicOpen [M.IsQuasicoherent] (hV : IsAffineOpen 
     letI := resModule M h
     haveI := resIsScalarTower M h
     IsBaseChange Γ(X, X.basicOpen g) (M.sectionsRes h) := by
-  letI := resModule M h
-  haveI := resIsScalarTower M h
+  let := resModule M h
+  have := resIsScalarTower M h
   have : IsLocalizedModule (Submonoid.powers g) (M.sectionsRes h) :=
     isLocalizedModule_basicOpen M hV g
-  haveI := hV.isLocalization_basicOpen g
+  have := hV.isLocalization_basicOpen g
   exact IsLocalizedModule.isBaseChange (Submonoid.powers g) Γ(X, X.basicOpen g) _
 
 /-- For a quasi-coherent module `M`, an affine open `V` and a basic open `U = D(g)` of `V`, the
@@ -184,9 +184,9 @@ noncomputable def symAlgebraMap : M.symAlgebra V ⟶ M.symAlgebra U :=
 @[reassoc]
 lemma toSymAlgebra_symAlgebraMap :
     M.toSymAlgebra V ≫ M.symAlgebraMap h = X.presheaf.map (homOfLE h).op ≫ M.toSymAlgebra U := by
-  letI := resAlgebra h
-  letI := resModule M h
-  haveI := resIsScalarTower M h
+  let := resAlgebra h
+  let := resModule M h
+  have := resIsScalarTower M h
   ext r
   exact (SymmetricAlgebra.mapOfIsScalarTower Γ(X, U) (M.sectionsRes h)).commutes r
 
@@ -213,8 +213,8 @@ lemma symAlgebraMap_symAlgebraAugmentation :
 
 lemma symAlgebraMap_id : M.symAlgebraMap (le_refl U) = 𝟙 _ := by
   refine M.symAlgebra_hom_ext ?_ fun x ↦ ?_
-  · rw [toSymAlgebra_symAlgebraMap, Category.comp_id, Subsingleton.elim (homOfLE (le_refl U)) (𝟙 U), op_id,
-      X.presheaf.map_id, Category.id_comp]
+  · rw [toSymAlgebra_symAlgebraMap, Category.comp_id,
+      Subsingleton.elim (homOfLE (le_refl U)) (𝟙 U), op_id, X.presheaf.map_id, Category.id_comp]
   · rw [symAlgebraMap_ι, CommRingCat.hom_id, RingHom.id_apply,
       Subsingleton.elim (homOfLE (le_refl U)) (𝟙 U), op_id,
       CategoryTheory.Functor.map_id]
@@ -238,11 +238,11 @@ lemma isPushout_symAlgebraMap [M.IsQuasicoherent] (hV : IsAffineOpen V) (g : Γ(
     (hg : X.basicOpen g = U) :
     IsPushout (M.toSymAlgebra V) (X.presheaf.map (homOfLE h).op)
       (M.symAlgebraMap h) (M.toSymAlgebra U) := by
-  letI := resAlgebra h
-  letI := resModule M h
-  haveI := resIsScalarTower M h
+  let := resAlgebra h
+  let := resModule M h
+  have := resIsScalarTower M h
   have := SymmetricAlgebra.isPushout_of_isBaseChange (M.isBaseChange_sectionsRes h hV g hg)
-  letI := (SymmetricAlgebra.mapOfIsScalarTower Γ(X, U) (M.sectionsRes h)).toAlgebra
+  let := (SymmetricAlgebra.mapOfIsScalarTower Γ(X, U) (M.sectionsRes h)).toAlgebra
   have : IsScalarTower Γ(X, V) (SymmetricAlgebra Γ(X, V) Γ(M, V))
       (SymmetricAlgebra Γ(X, U) Γ(M, U)) :=
     .of_algebraMap_eq fun r ↦
@@ -287,6 +287,7 @@ noncomputable def symSpecNatTrans :
     dsimp only [symSpecFunctor]
     rw [← Spec.map_comp_assoc, ← Spec.map_comp_assoc, toSymAlgebra_symAlgebraMap]
 
+omit [M.IsQuasicoherent] in
 lemma symSpecNatTrans_app (U : X.BasicAffineOpens) :
     M.symSpecNatTrans.app U = Spec.map (M.toSymAlgebra U.opens) ≫ U.isAffineOpen.isoSpec.inv :=
   rfl
@@ -372,6 +373,7 @@ noncomputable def localZeroSection (U : X.BasicAffineOpens) :
     (U.opens : Scheme.{u}) ⟶ Spec (M.symAlgebra U.opens) :=
   U.isAffineOpen.isoSpec.hom ≫ Spec.map (M.symAlgebraAugmentation U.opens)
 
+omit [M.IsQuasicoherent] in
 @[reassoc (attr := simp)]
 lemma localZeroSection_comp (U : X.BasicAffineOpens) :
     M.localZeroSection U ≫ Spec.map (M.toSymAlgebra U.opens) ≫ U.isAffineOpen.isoSpec.inv =
@@ -399,7 +401,8 @@ noncomputable def vectorBundleZeroSection : X ⟶ M.vectorBundle :=
           Iso.hom_inv_id_assoc]
       rw [directedBasicAffineCover_trans, localZeroSection, localZeroSection, Category.assoc,
         reassoc_of% h, ← Spec.map_comp_assoc, ← M.symAlgebraMap_symAlgebraAugmentation,
-        Spec.map_comp_assoc, specMap_symAlgebraMap_vectorBundleι]
+        Spec.map_comp_assoc, M.specMap_symAlgebraMap_vectorBundleι (leOfHom f),
+        Category.assoc]
 
 @[reassoc (attr := simp)]
 lemma ι_vectorBundleZeroSection (U : X.BasicAffineOpens) :

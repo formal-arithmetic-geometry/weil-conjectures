@@ -396,6 +396,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.UnitsTorsor
 public import WeilConjectures.AlgebraicGeometry.SpecAlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.TangentSpace
 public import WeilConjectures.AlgebraicGeometry.TheoremOfCube
+public import WeilConjectures.AlgebraicGeometry.VectorBundle
 public import WeilConjectures.AnalyticAux
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import WeilConjectures.Blowup.Affine.BaseChange
@@ -933,6 +934,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Birational.RationalMap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ColimitsOver
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Directed
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.Open
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
@@ -1204,6 +1206,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.De
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
+public import WeilConjectures.Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basis
