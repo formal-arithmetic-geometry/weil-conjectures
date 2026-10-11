@@ -361,7 +361,7 @@ theorem le_of_forall_exists_comap_le {A B : Y.IdealSheafData}
 
 /-- Containment in a kernel is local on the source: `I ≤ a.ker` as soon as every point of the
 source has an open neighbourhood `U` with `I ≤ (U.ι ≫ a).ker`. -/
-theorem le_ker_of_forall_exists {W : Scheme.{u}} (I : Y.IdealSheafData) (a : W ⟶ Y)
+theorem le_ker_of_forall_exists_le_ker_comp_ι {W : Scheme.{u}} (I : Y.IdealSheafData) (a : W ⟶ Y)
     (H : ∀ w : W, ∃ U : W.Opens, w ∈ U ∧ I ≤ (U.ι ≫ a).ker) : I ≤ a.ker := by
   rw [le_ker_iff_comap_eq_bot, ← le_bot_iff]
   refine le_of_forall_exists_comap_le fun w ↦ ?_
@@ -422,7 +422,7 @@ theorem exists_forall_le_ker_iff (P : ∀ ⦃W : Scheme.{u}⦄, (W ⟶ X) → Pr
   · refine fun h ↦ hloc a fun w ↦ ?_
     obtain ⟨V, hwV, hV⟩ := key w
     exact ⟨V, hwV, hV.mp (h.trans (Scheme.Hom.le_ker_comp V.ι a))⟩
-  · refine fun h ↦ le_ker_of_forall_exists J a fun w ↦ ?_
+  · refine fun h ↦ le_ker_of_forall_exists_le_ker_comp_ι J a fun w ↦ ?_
     obtain ⟨V, hwV, hV⟩ := key w
     exact ⟨V, hwV, hV.mpr (hP _ _ h)⟩
 

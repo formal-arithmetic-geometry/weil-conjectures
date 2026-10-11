@@ -235,10 +235,10 @@ private lemma projective_appTop {X' Y' : Scheme.{u}} [IsAffine X'] [IsAffine Y']
   exact Module.Flat.projective_of_finitePresentation
 
 /-- **The containment locus over an affine base** (blueprint `lem-pc-hilb-representable`,
-Step 1). Let `T` be an affine `S`-scheme, `Z ∈ Hilb^d_{Y/S}(T)` with ideal sheaf `I` and `W ⊆ Y_T`
-any closed subscheme with ideal sheaf `J`. There is a closed subscheme of `T`, given by its ideal
-sheaf `K`, such that for every affine `S`-scheme `W'` over `T` the pullback `Z_{W'}` lies in
-`W_{W'}` if and only if `W' ⟶ T` factors through it.
+Step 1). Let `T` be an affine `S`-scheme, `Z ∈ Hilb^d_{Y/S}(T)` with ideal sheaf `I` and `V(J)`
+any closed subscheme of `Y_T` with ideal sheaf `J`. There is a closed subscheme of `T`, given by
+its ideal sheaf `K`, such that for every affine `S`-scheme `W` over `T` the pullback `Z_W` lies in
+`V(J)_W` if and only if `W ⟶ T` factors through it.
 
 With `T = Spec A`, `Z = Spec B` for a finite projective `A`-algebra `B`, the ideal of `K` is the
 dual content of the image of `J` in `B`. -/
