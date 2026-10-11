@@ -1,11 +1,11 @@
 # Work queue
 
-651 items; claim with `tools/claim.py next <group> [--stage N]`.
+646 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (651)
+## Stage 2: nodes to state (646)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -20,23 +20,18 @@
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-derived-square-iso-pasting` | 1 | state |
 | `lem-weil-pbc-etale-finite-pushforward-locally-constant` | 1 | state |
 | `lem-weil-pbc-exchange-identity-pasting` | 1 | state |
 | `lem-weil-pbc-ext-one-direct-sum` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise` | 1 | state |
-| `lem-weil-pbc-filtered-colimit-flat-modules` | 1 | state |
 | `lem-weil-pbc-filtered-colimit-localization-at-prime` | 1 | state |
 | `lem-weil-pbc-finite-etale-lifting-limit-descent` | 1 | state |
 | `lem-weil-pbc-finite-galois-receiving-separable-extensions` | 1 | state |
 | `lem-weil-pbc-finite-locally-free-degree-locally-constant` | 1 | state |
 | `lem-weil-pbc-finite-module-complete-over-complete-noetherian` | 1 | state |
-| `lem-weil-pbc-finite-over-complete-local-product` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-generic-constructible` | 1 | state |
-| `lem-weil-pbc-finite-separable-multiplication-etale` | 1 | state |
 | `lem-weil-pbc-finite-subalgebra-fraction-field` | 1 | state |
 | `lem-weil-pbc-finite-surjective-affine-target` | 1 | state |
-| `lem-weil-pbc-finite-t0-space-sober` | 1 | state |
 | `lem-weil-pbc-finite-type-domain-dimension-local-ring` | 1 | state |
 | `lem-weil-pbc-finite-type-domain-dimension-trdeg` | 1 | state |
 | `lem-weil-pbc-finite-type-etale-finite-factor-decomposition` | 1 | state |
