@@ -148,5 +148,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SiteRestrictionInjectives",
+  "declaration": "CategoryTheory.siteRestriction_injectives",
+  "file": "lean/Sheaf/Paper/SiteRestrictionInjectives.lean",
+  "statement": "theorem siteRestriction_injectives {C : Type w} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (W : C) : Nonempty (Functor.sheafPullbackConstruction.sheafPullback (Over.forget W) AddCommGrpCat.{w} (J.toGrothendieck.over W) J.toGrothendieck ⊣ J.toGrothendieck.overPullback AddCommGrpCat.{w} W) ∧ (∃ (hL : (Functor.sheafPullbackConstruction.sheafPullback (Over.forget W) AddCommGrpCat.{w} (J.toGrothendieck.over W) J.toGrothendieck).PreservesZeroMorphisms), ∀ (S : ShortComplex (Sheaf (J.toGrothendieck.over W) AddCommGrpCat.{w})), S.ShortExact → (@ShortComplex.map _ _ _ _ _ _ S (Functor.sheafPullbackConstruction.sheafPullback (Over.forget W) AddCommGrpCat.{w} (J.toGrothendieck.over W) J.toGrothendieck) hL).ShortExact) ∧ (∀ (S : ShortComplex (Sheaf J.toGrothendieck AddCommGrpCat.{w})), S.ShortExact → (S.map (J.toGrothendieck.overPullback AddCommGrpCat.{w} W)).ShortExact)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-sri",
+  "group": "N1",
+  "result": "pass",
+  "note": "Read packet whole: small C + Precoverage J with HasIsos/IsStableUnderComposition/IsStableUnderBaseChange/HasPullbacks (site dep encoding), W unrestricted, slice topology J.toGrothendieck.over W; conjunct 1 Nonempty (sheafPullbackConstruction.sheafPullback (Over.forget W) ⊣ overPullback) is the node's adjunction clause, compiled as ⟨sheafAdjunctionContinuous⟩ so j_! is tied to the canonical construction and restriction is overPullback; conjunct 2 is site_extensionByZero_exact verbatim (hL a Prop witness, no data); conjunct 3 is siteRestriction_exact verbatim; all three are node clauses, none tautological; no let/local instance/notation; node JSON adds only the lean record; recompiled clean in 1.9 s"
  }
 }
