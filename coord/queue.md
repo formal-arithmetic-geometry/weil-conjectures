@@ -1,11 +1,11 @@
 # Work queue
 
-150 items; claim with `tools/claim.py next <group> [--stage N]`.
+148 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (150)
+## Stage 2: nodes to state (148)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -74,11 +74,9 @@
 | `lem-sc-affine-perfect-derived-tensor-hom` | 1 | state | 0 |
 | `lem-sc-affine-projective-complex-derived-hom` | 1 | state | 0 |
 | `lem-sc-affine-rhom-qcoherent` | 1 | state | 0 |
-| `lem-sc-artin-schreier-dimension` | 1 | state | 0 |
 | `lem-sc-derived-hom-finite-free-model` | 1 | state | 0 |
 | `lem-sc-derived-hom-projective-resolution` | 1 | state | 0 |
 | `lem-sc-derived-internal-hom-stalk-localization` | 1 | state | 0 |
-| `lem-sc-etale-torsor-inverse-image-extension` | 1 | state | 0 |
 | `lem-sc-ext-stalk-localization` | 1 | state | 0 |
 | `lem-sc-finite-affine-derived-equivalence` | 1 | state | 0 |
 | `lem-sc-finite-duality-derived-hom` | 1 | state | 0 |
