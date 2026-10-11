@@ -161,5 +161,23 @@
   "blueprint": "The item is not a blueprint node; its ancestor is thm-weil-pbc-finite-etale-lifting (via the conormal/Jacobi-Zariski/Popescu chain). The steps realize the place recorded in blueprint.from.place: the regular-sequence conormal argument made precise by Stacks 0665 (steps 2-4 are 0665's proof, step 1 the specialization to regular sequences by 062F and 0CEM). Blueprint search for 0665, 062F, 0CEM, 062E, 0623, 'Koszul', 'H_1-regular', 'Koszul-regular', 'regular sequence intersection' found no node stating the item."
  },
  "reviewed": "2026-10-10 L: 4 steps following 0665 (Koszul H_1 over A/I vanishes by 062F/0CEM, the low-degree exact sequence of Koszul complexes, the diagram chase written out); 3 new nodes (Koszul complex 0622, Koszul-regular 062E, regular implies Koszul-regular 062F). Accepted on the source route; see lead_note for the shorter route.",
- "lead_note": "2026-10-10 L: a route without Koszul complexes exists (worker): induction on m with Mathlib smul_top_inf_eq_smul_of_isSMulRegular_on_quot (RingTheory/Regular/IsSMulRegular.lean 164-169) as the case m = 1; the step: x = sum a_i g_i in I cap K gives a_m in I + (g_1..g_{m-1}) by regularity of g_m modulo it, so x - i g_m lies in I cap (g_1..g_{m-1}) = I (g_1..g_{m-1}). If the Koszul nodes (062F needs the cone lemma 0629) grow heavy, replace the proof by this induction and drop them."
+ "lead_note": "2026-10-10 L: a route without Koszul complexes exists (worker): induction on m with Mathlib smul_top_inf_eq_smul_of_isSMulRegular_on_quot (RingTheory/Regular/IsSMulRegular.lean 164-169) as the case m = 1; the step: x = sum a_i g_i in I cap K gives a_m in I + (g_1..g_{m-1}) by regularity of g_m modulo it, so x - i g_m lies in I cap (g_1..g_{m-1}) = I (g_1..g_{m-1}). If the Koszul nodes (062F needs the cone lemma 0629) grow heavy, replace the proof by this induction and drop them.",
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularQuotientIdealIntersection",
+  "declaration": "Ideal.inf_ofList_eq_mul_of_regular_quotient",
+  "file": "lean/Sheaf/RingTheory/RegularQuotientIdealIntersection.lean",
+  "statement": "theorem inf_ofList_eq_mul_of_regular_quotient {R : Type u} [CommRing R] (I : Ideal R) (gs : List R) (hgs : RingTheory.Sequence.IsRegular (R ⧸ I) (gs.map (Ideal.Quotient.mk I))) : I ⊓ Ideal.ofList gs = I * Ideal.ofList gs",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rqi",
+  "group": "H1",
+  "result": "pass",
+  "note": "CommRing R universe u; I : Ideal R; gs : List R (m=0 allowed, both sides ⊥); IsRegular (R⧸I) over R⧸I of gs.map mk = images regular in R/I (recorded dep decl); K = Ideal.ofList gs; I ⊓ K = I * K; form agrees with landed inf_sq_eq_mul_of_regular_quotient"
+ }
 }
