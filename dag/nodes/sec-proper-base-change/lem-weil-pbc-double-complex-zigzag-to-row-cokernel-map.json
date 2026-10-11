@@ -177,5 +177,24 @@
   "summary": "Read Stacks 00M1 (algebra.tex lines 18396-18522; tag verified in tags/tags as algebra-lemma-no-spectral-sequence). The source only names the map $\\mathbf H_i(A)\\to H_i(R(A)_\\bullet)$, zig-zag $\\mapsto$ class of image of $a_{0,i}$, and calls the functoriality diagram clear; the split writes out (1) the row-cokernel complex and $\\Phi^{\\mathrm{rt}}$ (facts recorded in the statement), (a) the cycle property from the zig-zag condition at $(1,n-1)$, (b) vanishing on $Z_n\\cap B_n$ from $a=D_{n+1}(b)$, the linear factorization through the quotient, and (c) naturality. All steps are direct verifications from the two definitions cited (zig-zag module as it stands, chain-complex homology, a Mathlib leaf); no new node. No sorry-free slopmaster2 declaration states it (grep by id, zigzag, 00M1, no-spectral-sequence: none). Statement unchanged. Mathlib searched again for the map itself (LeanSearch, LeanFinder, grep): no match.",
   "blueprint": "Realizes, in the chain recorded in blueprint.from (ancestor lem-weil-pbc-normal-constant-generic, step 4 of its split, via the Tor-symmetry branch), the place 'canonical homomorphisms $\\mathbf H_i(A)\\to H_i(R(A)_\\bullet)$' of Stacks 00M1's proof (steps 2-4) and the right-hand square of its functoriality diagram (step 5); step 1 makes precise 'it is clear that this induces morphisms of complexes $R(\\Phi)$'. The blueprint search (blueprint_refs.py search zig-zag, zigzag, 00M1, lemma-no-spectral-sequence, double complex, cokernel complex, bicomplex) found no blueprint node stating it: same_as [] (def-sp-double-complex-total and thm-sp-double-complex-spectral-sequences concern total complexes and spectral sequences, not this map)."
  },
- "reviewed": "2026-10-10 L: 5 elementary steps (the row-cokernel complex, the cycle property, vanishing on trivial zig-zags, the factorization, naturality); 0 new nodes"
+ "reviewed": "2026-10-10 L: 5 elementary steps (the row-cokernel complex, the cycle property, vanishing on trivial zig-zags, the factorization, naturality); 0 new nodes",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ZigzagToRowCokernel",
+  "declaration": "HomologicalComplex₂.exists_zigzagToRowCokernel",
+  "file": "lean/Sheaf/Algebra/Homology/ZigzagToRowCokernel.lean",
+  "statement": "theorem exists_zigzagToRowCokernel {R : Type u} [CommRing R] (n : ℕ) : let C := fun A : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ) (ComplexShape.down ℕ) => A.opcycles 0 let π := fun A : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ) (ComplexShape.down ℕ) => A.pOpcycles 0 let e := fun A : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ) (ComplexShape.down ℕ) => DirectSum.component R (ZigzagIndex n) (fun i : ZigzagIndex n => (A.X i.1.1).X i.1.2) ⟨(0, n), by simp⟩ ∃ ρ : ∀ A : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ) (ComplexShape.down ℕ), zigzagModule A n →ₗ[R] (C A).homology n, (∀ A q, Function.Surjective ((π A).f q) ∧ LinearMap.ker ((π A).f q).hom = LinearMap.range ((A.d 1 0).f q).hom) ∧ (∀ A q, (A.X 0).d (q + 1) q ≫ (π A).f q = (π A).f (q + 1) ≫ (C A).d (q + 1) q) ∧ (∀ A B (Φ : A ⟶ B) q, (π A).f q ≫ (HomologicalComplex.opcyclesMap Φ 0).f q = (Φ.f 0).f q ≫ (π B).f q) ∧ (∀ A (a : zigzagCycles A n), (C A).d n (n - 1) ((π A).f n (e A a.val)) = 0 ∧ ∃ c : (C A).cycles n, (C A).iCycles n c = (π A).f n (e A a.val)) ∧ (∀ A (a : zigzagCycles A n), a.val ∈ zigzagBoundaries A n → ∀ c : (C A).cycles n, (C A).iCycles n c = (π A).f n (e A a.val) → (C A).homologyπ n c = 0) ∧ (∀ A (a : zigzagCycles A n) (c : (C A).cycles n), (C A).iCycles n c = (π A).f n (e A a.val) → ρ A (((zigzagBoundaries A n).comap (zigzagCycles A n).subtype).mkQ a) = (C A).homologyπ n c) ∧ (∀ A B (Φ : A ⟶ B), (ModuleCat.Hom.hom (HomologicalComplex.homologyMap (HomologicalComplex.opcyclesMap Φ 0) n)).comp (ρ A) = (ρ B).comp (zigzagMap Φ n))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The row-cokernel chain complex is the existing Mathlib HomologicalComplex.opcycles of the outer complex in degree zero. The existential natural family is uniquely specified on zig-zag representatives; no duplicate cokernel or homology notion is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zrc0955",
+  "group": "G1",
+  "result": "pass",
+  "note": "R CommRing u/v; A,B HomologicalComplex2 (ModuleCat R) down N down N, Phi : A ⟶ B; A^rt = A.opcycles 0 (degree q = coker (A.d 1 0).f q, kernel=range+surjective), delta^rt pi = pi delta, Phi^rt = opcyclesMap Phi 0 with pi-formula; (a) d n (n-1) of pi(a_{0,n}) = 0 (n=0 by shape) + iCycles lift; (b) Z∩B => homologyPi c = 0; rho on mkQ reps of zigzagModule; (c) homologyMap(opcyclesMap Phi 0) ∘ rho A = rho B ∘ zigzagMap; same opcycles/iCycles form as landed E1 RowCycleLiftsToZigzag; #check of zigzag* resolves to HomologicalComplex2.*"
+ }
 }
