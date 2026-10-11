@@ -1340,6 +1340,7 @@ public import WeilConjectures.Mathlib.Topology.Spectral.Basic
 public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
 public import WeilConjectures.NumberTheory.Padics.Extension
+public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
 public import WeilConjectures.NumberTheory.Padics.Logarithm
 public import WeilConjectures.NumberTheory.TateModule
 public import WeilConjectures.PointCount

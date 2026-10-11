@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekProjection
@@ -41,11 +41,18 @@ of `AlgebraicGeometry.ProEtale.projectionMapOfCompactification` is an isomorphis
 
 ## Main statements
 
-- `AlgebraicGeometry.ProEtale.hasProjectionFormula_of_constructibleFiniteTor`
-  (`sk-thm-sf-pf-proetale`) : the projection formula for objects of `Dctf` at a finite
-  coefficient ring `Λ`, and its version
+`sk-thm-sf-pf-proetale`, at every coefficient stage:
+- `AlgebraicGeometry.ProEtale.hasProjectionFormula_of_constructibleFiniteTor`: the finite stages
+  `Λ` (a finite ring), for objects of `Dctf(X_proét, Λ)`; also
   `AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_constructibleFiniteTor`
   for an arbitrary compactification.
+- `AlgebraicGeometry.ProEtale.hasProjectionFormula_of_derivedCompleteIntegral`: the integral
+  stage `𝒪_E`, for the pro-étale realizations of bounded constructible, derived complete
+  `𝒪_E`-complexes of finite Tor amplitude.
+- `AlgebraicGeometry.ProEtale.isIso_rationalization_map_projectionMap`: the rational stage `E`
+  (hence `ℚ̄_ℓ`, through the finite stages `E` at which its objects are represented).
+- `AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_comparison`: the common
+  reduction to the étale projection formula along `ν^*`.
 
 ## Implementation notes
 
@@ -54,20 +61,24 @@ the compactification and of the inverse of the projection isomorphism for the op
 `i` (`AlgebraicGeometry.ProEtale.isIso_derivedOpenImmersionLowerShriekProjectionMap`); the
 projection formula asserts that the former is an isomorphism on the relevant objects.
 
-The blueprint's "étale-origin witnesses" for `K` and `L` are built into
-`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`, since pro-étale bounded
-constructibility is defined as étale origin. For the same reason this notion agrees with the
-blueprint's `Dctf(X_proét, A)` only at the finite coefficient stages `A = ModuleCat Λ`, `Λ` a
-finite ring; the `𝒪_E`, `E` and `ℚ̄_ℓ` stages of `sk-thm-sf-pf-proetale` are not covered by
-this statement.
-
-As in the blueprint, the proof reduces to the étale projection formula along `ν^*`: the
+As in the blueprint, every stage is reduced to the étale projection formula along `ν^*`: the
 comparison carries the étale projection map of `Rg_*` to the pro-étale one
-(`WeilConjectures.SixFunctors.ProEtale.Derived.LowerStarProjectionComparison`), `ν^*` commutes
-with extension by zero, and the étale projection formula for the proper `g` at finite
-coefficients is `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`.
-The finite Tor amplitude of `L` keeps `i_! K ⊗ᴸ Lg^* L` bounded below, where `ν^*` is known to
-commute with `Rg_*`.
+(`WeilConjectures.SixFunctors.ProEtale.Derived.LowerStarProjectionComparison`) and `ν^*`
+commutes with extension by zero. The étale inputs are
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite` at the finite
+stages (`sk-thm-sf-pf-finite`) and
+`AlgebraicGeometry.Etale.hasProjectionFormula_of_derivedCompleteIntegral` at the integral stage
+(`sk-thm-sf-pf-adic`); the rational stage is the image of the integral one under the
+rationalization (`sk-thm-sf-pf-field`). The finite Tor amplitude of `L` keeps
+`i_! K ⊗ᴸ Lg^* L` bounded below, where `ν^*` is known to commute with `Rg_*`.
+
+The blueprint's "étale-origin witnesses" are explicit: at the finite stages they are built into
+`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor` (pro-étale bounded
+constructibility is étale origin); at the `ℓ`-adic stages they are isomorphisms `ν^* K₀ ≅ K` with
+`K₀` a bounded constructible, derived complete étale complex of finite Tor amplitude. As in the
+étale model (`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational`), the stage
+`ℚ̄_ℓ` is covered through the finite stages `E` at which its objects are represented: the
+`2`-colimit over `E` and the scalar extensions `E ⟶ E'` are not constructed in the repository.
 
 -/
 
@@ -344,6 +355,34 @@ theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompac
       ((Etale.openImmersionLowerShriek 𝐌
         (HasCompactification.compactification f).i).bounded_mapDerivedCategory_obj hKc.1)
       hLt') hPF'
+
+/-- Blueprint `sk-thm-sf-pf-proetale`, the rational stage `E` (and, through the finite stages
+`E'` at which its objects are represented, the stage `ℚ̄_ℓ`).
+
+The rational stage is the rationalization `D(Y_proét, 𝒪_E)[1/ℓ]` of the integral one, the
+Verdier quotient by the objects killed by a nonzero element of `𝒪_E`, and the projection map
+over `E` for objects obtained by rationalization from the integral stage is the image of the
+integral projection map under the localization functor. It is an isomorphism, as in the blueprint
+(`thm-sf-pf-field`): the integral projection map is
+(`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_derivedCompleteIntegral`). -/
+theorem isIso_rationalization_map_projectionMap (f : X ⟶ Y) [HasCompactification f]
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) 𝐌)}
+    {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌)}
+    {K₀ : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌)}
+    {L₀ : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌)}
+    (eK : D(ν^*(X)[𝐌]).obj K₀ ≅ K) (eL : D(ν^*(Y)[𝐌]).obj L₀ ≅ L)
+    (hKc : Etale.DerivedCategory.boundedConstructible 𝐌 X K₀)
+    (hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K₀)
+    (hKt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 X K₀)
+    (hLc : Etale.DerivedCategory.boundedConstructible 𝐌 Y L₀)
+    (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L₀)
+    (hLt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 Y L₀) :
+    IsIso ((Rationalization.Q (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
+      (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌))).map
+        (((projectionMap 𝐌 f).app K).app L)) :=
+  have : IsIso (((projectionMap 𝐌 f).app K).app L) :=
+    hasProjectionFormula_of_derivedCompleteIntegral l E f eK eL hKc hK hKt hLc hL hLt
+  inferInstance
 
 end Integral
 
