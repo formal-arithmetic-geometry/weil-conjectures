@@ -85,6 +85,40 @@ lemma H.surjective_δ_zero (hS : S.ShortExact) [Subsingleton (S.X₂.H 1)] :
   rw [H.ker_map_f_eq_range_δ] at this
   exact this
 
+/-- **Left exactness of global sections.** For a short exact sequence
+`0 ⟶ M₁ ⟶ M₂ ⟶ M₃ ⟶ 0`, the sections of `M₂` killed by `g` are those coming from `M₁`. -/
+lemma range_app_f_eq_ker_app_g (hS : S.ShortExact) :
+    (S.f.app ⊤).hom.range = (S.g.app ⊤).hom.ker := by
+  ext s
+  have h := fun x : S.X₂.H 0 ↦ SetLike.ext_iff.mp (H.ker_map_g_eq_range_map_f hS 0) x
+  constructor
+  · rintro ⟨t, rfl⟩
+    rw [AddMonoidHom.mem_ker, ← ConcreteCategory.comp_apply, ← Hom.comp_app, S.zero]
+    rfl
+  · intro hs
+    obtain ⟨t, ht⟩ := (h ((H.zeroLinearEquiv _).symm s)).1 (by
+      rw [AddMonoidHom.mem_ker]
+      refine (H.zeroLinearEquiv _).injective ?_
+      rw [H.zeroLinearEquiv_map, LinearEquiv.apply_symm_apply, map_zero]
+      exact hs)
+    refine ⟨H.zeroLinearEquiv _ t, ?_⟩
+    have := H.zeroLinearEquiv_map S.f t
+    rw [ht, LinearEquiv.apply_symm_apply] at this
+    exact this.symm
+
+/-- For a short exact sequence `0 ⟶ M₁ ⟶ M₂ ⟶ M₃ ⟶ 0` with `H¹(M₁) = 0`, every global section
+of `M₃` lifts to `M₂`. -/
+lemma surjective_app_g_of_subsingleton (hS : S.ShortExact) [Subsingleton (S.X₁.H 1)] :
+    Function.Surjective (S.g.app ⊤).hom := fun s ↦ by
+  have hs : (H.zeroLinearEquiv _).symm s ∈ (H.δ hS 0).ker := by
+    rw [AddMonoidHom.mem_ker]; exact Subsingleton.elim _ _
+  rw [H.ker_δ_eq_range_map_g] at hs
+  obtain ⟨t, ht⟩ := hs
+  refine ⟨H.zeroLinearEquiv _ t, ?_⟩
+  have := H.zeroLinearEquiv_map S.g t
+  rw [ht, LinearEquiv.apply_symm_apply] at this
+  exact this.symm
+
 end Delta
 
 /-- An isomorphism of `𝒪_X`-modules induces an additive isomorphism on cohomology. -/
@@ -157,5 +191,139 @@ noncomputable def H.cyclesOneAddEquiv (n : ℕ) :
     (QuotientAddGroup.quotientKerEquivOfSurjective _
       (H.surjective_cyclesδZero K hK hacyc n))).symm
 
+/-- **Cohomology computed by an acyclic resolution.** For a complex `K` exact in positive
+degrees with acyclic terms, `H^{n+1}(X, Z⁰) ≅ Γ(X, Zⁿ⁺¹) / Γ(X, Kⁿ)`: the cohomology of `Z⁰`,
+the module resolved by `K`, is the cohomology of the complex of global sections of `K`. -/
+noncomputable def H.cyclesZeroSuccAddEquiv (n : ℕ) :
+    (K.cycles 0).H (n + 1) ≃+ Γ(K.cycles (n + 1), ⊤) ⧸
+      ((K.toCycles n (n + 1)).app ⊤).hom.range :=
+  ((H.cyclesShiftAddEquiv K hK hacyc n 0).trans
+    (H.mapAddEquiv (eqToIso (by rw [Nat.zero_add])) 1)).trans
+    (H.cyclesOneAddEquiv K hK hacyc n)
+
 end Shift
+/-- In a short exact sequence `0 ⟶ M₁ ⟶ M₂ ⟶ M₃ ⟶ 0` with `Hⁿ(M₁) = Hⁿ(M₃) = 0`, also
+`Hⁿ(M₂) = 0`. -/
+lemma subsingleton_H_X₂_of_shortExact {S : ShortComplex X.Modules} (hS : S.ShortExact) (n : ℕ)
+    [Subsingleton (S.X₁.H n)] [Subsingleton (S.X₃.H n)] : Subsingleton (S.X₂.H n) := by
+  refine ⟨fun x y ↦ ?_⟩
+  suffices h : ∀ z : S.X₂.H n, z = 0 by rw [h x, h y]
+  intro z
+  have hz : z ∈ (H.map S.g n).ker := by rw [AddMonoidHom.mem_ker]; exact Subsingleton.elim _ _
+  rw [H.ker_map_g_eq_range_map_f hS] at hz
+  obtain ⟨w, rfl⟩ := hz
+  rw [Subsingleton.elim w 0, map_zero]
+
+section CohomologySheaves
+
+variable (L : CochainComplex X.Modules ℕ)
+
+/-- The short complex `Zᵠ ⟶ Lᵠ ⟶ Bᵠ⁺¹` of cycles, terms and boundaries of a complex `L`. -/
+noncomputable def cyclesBoundariesShortComplex (q : ℕ) : ShortComplex X.Modules :=
+  ShortComplex.mk (L.iCycles q) (factorThruImage (L.toCycles q (q + 1))) (by
+    rw [← cancel_mono (Limits.image.ι (L.toCycles q (q + 1))), Category.assoc, Limits.image.fac,
+      ← cancel_mono (L.iCycles (q + 1)), Category.assoc, HomologicalComplex.toCycles_i,
+      HomologicalComplex.iCycles_d, zero_comp, zero_comp])
+
+/-- The sequence `0 ⟶ Zᵠ ⟶ Lᵠ ⟶ Bᵠ⁺¹ ⟶ 0` is short exact. -/
+lemma shortExact_cyclesBoundariesShortComplex (q : ℕ) :
+    (cyclesBoundariesShortComplex L q).ShortExact := by
+  refine ShortComplex.ShortExact.mk' ?_ (inferInstanceAs (Mono (L.iCycles q)))
+    (inferInstanceAs (Epi (factorThruImage _)))
+  let φ : cyclesBoundariesShortComplex L q ⟶ ShortComplex.mk _ _ (L.iCycles_d q (q + 1)) :=
+    { τ₁ := 𝟙 _
+      τ₂ := 𝟙 _
+      τ₃ := Limits.image.ι (L.toCycles q (q + 1)) ≫ L.iCycles (q + 1)
+      comm₂₃ := by simp [cyclesBoundariesShortComplex] }
+  have : Mono φ.τ₃ := mono_comp _ _
+  rw [ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ]
+  exact ShortComplex.exact_of_f_is_kernel _ (L.cyclesIsKernel q (q + 1) (by simp))
+
+/-- The short complex `Bᵠ⁺¹ ⟶ Zᵠ⁺¹ ⟶ Hᵠ⁺¹` of boundaries, cycles and cohomology of `L`. -/
+noncomputable def boundariesHomologyShortComplex (q : ℕ) : ShortComplex X.Modules :=
+  ShortComplex.mk (Limits.image.ι (L.toCycles q (q + 1))) (L.homologyπ (q + 1)) (by
+    rw [← cancel_epi (factorThruImage (L.toCycles q (q + 1))), comp_zero, ← Category.assoc,
+      Limits.image.fac, HomologicalComplex.toCycles_comp_homologyπ])
+
+/-- The sequence `0 ⟶ Bᵠ⁺¹ ⟶ Zᵠ⁺¹ ⟶ Hᵠ⁺¹ ⟶ 0` is short exact. -/
+lemma shortExact_boundariesHomologyShortComplex (q : ℕ) :
+    (boundariesHomologyShortComplex L q).ShortExact := by
+  refine ShortComplex.ShortExact.mk' ?_ (inferInstanceAs (Mono (Limits.image.ι _)))
+    (inferInstanceAs (Epi (L.homologyπ (q + 1))))
+  let φ : ShortComplex.mk _ _ (L.toCycles_comp_homologyπ q (q + 1)) ⟶
+      boundariesHomologyShortComplex L q :=
+    { τ₁ := factorThruImage (L.toCycles q (q + 1))
+      τ₂ := 𝟙 _
+      τ₃ := 𝟙 _
+      comm₁₂ := by simp [boundariesHomologyShortComplex] }
+  have : Epi φ.τ₁ := inferInstanceAs (Epi (factorThruImage _))
+  rw [← ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ]
+  exact ShortComplex.exact_of_g_is_cokernel _ (L.homologyIsCokernel q (q + 1) (by simp))
+
+variable (hL : ∀ j m, Subsingleton ((L.X j).H (m + 1)))
+  (hH : ∀ q m, Subsingleton ((L.homology q).H (m + 1)))
+
+include hL in
+/-- If the terms `Lʲ` and the cycles `Zʲ` of `L` are acyclic, then so is the image `Bʲ⁺¹` of the
+differential `Lʲ ⟶ Zʲ⁺¹`, by the sequence `0 ⟶ Zʲ ⟶ Lʲ ⟶ Bʲ⁺¹ ⟶ 0`. -/
+lemma subsingleton_H_image (j : ℕ) (hZ : ∀ m, Subsingleton ((L.cycles j).H (m + 1))) (m : ℕ) :
+    Subsingleton ((Limits.image (L.toCycles j (j + 1))).H (m + 1)) := by
+  have hS := shortExact_cyclesBoundariesShortComplex L j
+  refine ⟨fun x y ↦ ?_⟩
+  suffices h : ∀ z : (cyclesBoundariesShortComplex L j).X₃.H (m + 1), z = 0 by rw [h x, h y]
+  intro z
+  have hz : z ∈ (H.δ hS (m + 1)).ker := by
+    have : Subsingleton ((cyclesBoundariesShortComplex L j).X₁.H (m + 1 + 1)) := hZ (m + 1)
+    rw [AddMonoidHom.mem_ker]; exact Subsingleton.elim _ _
+  rw [H.ker_δ_eq_range_map_g] at hz
+  obtain ⟨w, rfl⟩ := hz
+  have : Subsingleton ((cyclesBoundariesShortComplex L j).X₂.H (m + 1)) := hL j m
+  rw [Subsingleton.elim w 0, map_zero]
+
+include hL hH in
+/-- If the terms and the cohomology sheaves of `L` are acyclic, so are its cycles `Zʲ`: by
+induction on `j`, using `0 ⟶ Bʲ⁺¹ ⟶ Zʲ⁺¹ ⟶ Hʲ⁺¹ ⟶ 0`. -/
+lemma subsingleton_H_cycles : ∀ j m, Subsingleton ((L.cycles j).H (m + 1))
+  | 0, m => by
+    have := L.isIso_homologyπ 0 0 (by simp) (by simp)
+    have := hH 0 m
+    exact subsingleton_H_of_iso (asIso (L.homologyπ 0)).symm (m + 1)
+  | j + 1, m => by
+    have : Subsingleton ((boundariesHomologyShortComplex L j).X₁.H (m + 1)) :=
+      subsingleton_H_image L hL j (subsingleton_H_cycles j) m
+    have : Subsingleton ((boundariesHomologyShortComplex L j).X₃.H (m + 1)) := hH (j + 1) m
+    exact subsingleton_H_X₂_of_shortExact (shortExact_boundariesHomologyShortComplex L j) (m + 1)
+
+include hL hH in
+/-- **Sections of the cohomology sheaves of a complex.** If the terms and the cohomology sheaves
+of a complex `L` of `𝒪_X`-modules are acyclic, then `Γ(X, Hᵠ⁺¹(L)) ≅ Γ(X, Zᵠ⁺¹) / Γ(X, Lᵠ)`:
+global sections commute with the cohomology of `L`. -/
+lemma surjective_app_homologyπ (q : ℕ) : Function.Surjective ((L.homologyπ (q + 1)).app ⊤).hom :=
+  have : Subsingleton ((boundariesHomologyShortComplex L q).X₁.H 1) :=
+    subsingleton_H_image L hL q (subsingleton_H_cycles L hL hH q) 0
+  surjective_app_g_of_subsingleton (shortExact_boundariesHomologyShortComplex L q)
+
+include hL hH in
+lemma ker_app_homologyπ (q : ℕ) :
+    ((L.homologyπ (q + 1)).app ⊤).hom.ker = ((L.toCycles q (q + 1)).app ⊤).hom.range := by
+  refine (range_app_f_eq_ker_app_g (shortExact_boundariesHomologyShortComplex L q)).symm.trans ?_
+  have : Subsingleton ((cyclesBoundariesShortComplex L q).X₁.H 1) :=
+    subsingleton_H_cycles L hL hH q 0
+  have hsurj := surjective_app_g_of_subsingleton (shortExact_cyclesBoundariesShortComplex L q)
+  change ((Limits.image.ι (L.toCycles q (q + 1))).app ⊤).hom.range = _
+  conv_rhs => rw [← Limits.image.fac (L.toCycles q (q + 1))]
+  have hsurj' : Function.Surjective ((factorThruImage (L.toCycles q (q + 1))).app ⊤).hom := hsurj
+  rw [Hom.comp_app, AddCommGrpCat.hom_comp, AddMonoidHom.range_comp,
+    AddMonoidHom.range_eq_top.mpr hsurj', ← AddMonoidHom.range_eq_map]
+
+/-- `Γ(X, Hᵠ⁺¹(L)) ≅ Γ(X, Zᵠ⁺¹) / Γ(X, Lᵠ)` when the terms and the cohomology sheaves of `L` are
+acyclic. -/
+noncomputable def homologySectionsAddEquiv (q : ℕ) :
+    Γ(L.homology (q + 1), ⊤) ≃+ Γ(L.cycles (q + 1), ⊤) ⧸
+      ((L.toCycles q (q + 1)).app ⊤).hom.range :=
+  ((QuotientAddGroup.quotientAddEquivOfEq (ker_app_homologyπ L hL hH q)).symm.trans
+    (QuotientAddGroup.quotientKerEquivOfSurjective _
+      (surjective_app_homologyπ L hL hH q))).symm
+end CohomologySheaves
+
 end AlgebraicGeometry.Scheme.Modules
