@@ -169,5 +169,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-aqd1909 (reviewer sub-agent of L); spot-checked: Item is the C1 'affine-equivalence node' (created from lem-pc-projection-formula, Tag 06Z0); no duplicate, no cycle (cited nodes are imported/unsplit/mathlib with no path to the item). FIX more, RETURN less: (1) C1 old Step 2 identified Gamma(Spec Z,H^i(Rf_*E)) with H^i(RGamma(Y,E)) for unbounded E, which is the unproved statement itself; replaced by Stacks' own route: Tag 08D4 bound [lem-pc-unbounded-derived-functor-cohomological-bound] with F=Gamma(Y,-), N=1 via [lem-pc-affine-vanishing], truncation triangle and left exactness; dropped lem-pc-affine-morphism-hi and lem-sc-qcoh-acyclic-derived-pushforward-cohomology. (2) C1/C4 exactness of tilde into Mod(O_Y) is not a clause of the adjunction node (equivalence only onto QCoh); proved from clauses (2)-(4) plus [lem-weil-pbc-quasi-coherent-module-kernel], and O_Y = A~ by Yoneda from clause (1). (3) Step 1 made explicit: derived functors, landing in D_QCoh, maps a and b via K-injective resolutions. Essential surjectivity carried by the counit quasi-isomorphism for all E in D_QCoh.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence",
+  "declaration": "AlgebraicGeometry.exists_affineQCohDerivedEquivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineQCohDerivedEquivalence.lean",
+  "statement": "theorem exists_affineQCohDerivedEquivalence (A : Type u) [CommRing A] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))] : ∃ e : DerivedCategory (ModuleCat.{u} A) ≌ schemeDerivedQCohCategory (Spec (.of A)), Nonempty (DerivedCategory.Q ⋙ e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι ≅ @Functor.mapHomologicalComplex _ _ _ _ _ _ _ (@id (ModuleCat.{u} A ⥤ SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) ∧ Nonempty (e.inverse ≅ (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙ (RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙ ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom).rightDerivedFunctor) ∧ (∃ (_h : (e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).CommShift ℤ), (e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).IsTriangulated) ∧ ∀ k : ℤ, Nonempty ((e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).obj (((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A))⟦k⟧) ≅ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) 0).obj (SheafOfModules.unit (moduleRings (Spec (.of A)).toRingedSpace)))⟦k⟧)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }

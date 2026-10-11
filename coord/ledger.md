@@ -5321,3 +5321,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:56 L: merged deliver/G1/lem-weil-pbc-derived-etale-cohomology-limit (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit AlgebraicGeometry.derivedEtaleCohomology_limit)
 - 15:56 L: merged deliver/N1/lem-weil-pbc-zero-dimensional-cohomology (stage 2; reviewer PASS; first push; Sheaf.Paper.ZeroDimensionalCohomology AlgebraicGeometry.zero_dimensional_etale_cohomology)
 - 15:56 L: merged deliver/P1/lemma-nagata-affine-fp-descends (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataAffineFpDescends AlgebraicGeometry.nagata_affine_fp_descends)
+- 15:56 L: merged deliver/S1/lem-pc-affine-qcoh-derived-equivalence (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence AlgebraicGeometry.exists_affineQCohDerivedEquivalence)
