@@ -5628,3 +5628,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:01 L: merged deliver/M1/lem-sc-zariski-module-abelian-cohomology-agree (stage 2; reviewer PASS; first push; Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree AlgebraicGeometry.zariskiModuleAbelianCohomologyAgree)
 - 19:01 L: merged deliver/G1/lem-weil-pbc-sets-inverse-image-extension-by-empty-constant (stage 2; reviewer PASS; first push; Sheaf.Paper.InverseImageExtensionByEmptyConstant TopCat.inverseImageExtensionByEmptyConstant)
 - 19:03 L: merged deliver/V1/lem-sc-topological-leray-spectral-sequence (stage 2; reviewer PASS; first push; Sheaf.Topology.TopologicalLeraySpectralSequence CategoryTheory.exists_topological_leray_spectralSequence)
+- 19:03 L: merged deliver/T1/lem-weil-pbc-sheafification-plus-separated (stage 2; reviewer PASS; first push; Sheaf.Paper.SitePlusSeparated CategoryTheory.GrothendieckTopology.plus_separated_and_injective)

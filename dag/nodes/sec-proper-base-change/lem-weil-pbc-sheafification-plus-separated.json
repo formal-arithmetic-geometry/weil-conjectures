@@ -158,5 +158,24 @@
   "by": "L",
   "result": "pass",
   "note": "Three steps along Stacks 00WB (1),(2): separatedness of F^+ by a common refinement of the three coverings and the equality criterion in the colimit; a separated presheaf injects into its plus construction; applied to F^+. Correct and careful. Statement corrected by the worker to the Stacks plus construction (colimit over J_U of the Cech H^0 with strict agreement on U_i x_U U_j; the C1 inline description with agreement only after a further covering was not F^+), separated made explicit (00WA). Three new unsplit nodes: the plus-construction definition (00W1, with a forward pointer only), common refinement (00W6), and the presheaf/colimit description lemma (00W4, 00W7, 00W9). Mathlib Plus.sep / Plus.inj_of_sep (ConcreteSheafification.lean:246/292) recorded but not taken as a leaf since they are for Grothendieck topologies (sieves), the same convention as for smooth morphisms. Follow-up by L: the plus-theorem node (being split) must cite def-weil-pbc-site-plus-construction instead of the old inline description."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SitePlusSeparated",
+  "declaration": "CategoryTheory.GrothendieckTopology.plus_separated_and_injective",
+  "statement": "theorem plus_separated_and_injective {C : Type u} [SmallCategory C] (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] (P : Cᵒᵖ ⥤ Type (max u w)) : (∀ (U : C) (E : Precoverage.ZeroHypercover.{max u w} J U) (s s' : (J.toGrothendieck.plusObj P).obj (op U)), (∀ i : E.toPreZeroHypercover.I₀, (J.toGrothendieck.plusObj P).map (E.toPreZeroHypercover.f i).op s = (J.toGrothendieck.plusObj P).map (E.toPreZeroHypercover.f i).op s') → s = s') ∧ (∀ (U : C), Function.Injective ((J.toGrothendieck.toPlus (J.toGrothendieck.plusObj P)).app (op U)))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "file": "lean/Sheaf/Paper/SitePlusSeparated.lean",
+  "existing": false,
+  "note": "Uses the recorded small Precoverage site and generated-topology plus construction. The first conjunct tests separatedness on indexed covering families; the second is objectwise injectivity of toPlus applied to plusObj P, from P-plus to P-double-plus. SmallCategory provides the required Type-valued limits and colimits without additional hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "T1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
