@@ -186,5 +186,22 @@
   "by": "L",
   "result": "pass",
   "note": "Statement made precise by the worker (E1 delivered A|_{S'} for the pullback algebra g^*A; now the algebra structure via the pullback-tensor isomorphism and the canonical morphism via the anti-equivalence of the relative-Spec node). Four steps: pi' affine, g^* pi_* O_X = pi'_* O_{X'} as algebras from the reviewed 02KG node, transport along alpha, full faithfulness of the anti-equivalence over S'. Correct; 0 new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeSpecBaseChange",
+  "declaration": "AlgebraicGeometry.relative_spec_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeSpecBaseChange.lean",
+  "statement": "theorem relative_spec_base_change (S S' : Scheme.{u}) (g : S' ⟶ S) (A : S.CommAlgebraSheaf) [(A.toModule : S.Modules).IsQuasicoherent] (μ : (SheafOfModules.monoidalCategory S.sheaf).tensorObj A.toModule A.toModule ⟶ A.toModule) (e : (SheafOfModules.unit S.ringCatSheaf : S.Modules) ⟶ (A.toModule : S.Modules)) (hμ : ∀ (V : S.Opens) (a b : A.right.obj.obj (op V)), μ.val.app (op V) (tmulSection (M := A.toModule) (N := A.toModule) (U := V) a b) = a * b) (he : ∀ (V : S.Opens) (r : Γ(S, V)), e.val.app (op V) r = A.hom.hom.app (op V) r) (X : Scheme.{u}) (π : X ⟶ S) [IsAffineHom π] (α : A ≅ Under.mk (⟨π.c⟩ : Scheme.sheaf _ ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} π.base).obj (Scheme.sheaf _))) (X' : Scheme.{u}) (π' : X' ⟶ S') (g' : X' ⟶ X) (sq : IsPullback g' π' π g) : IsAffineHom π' ∧ ∃ (A' : S'.CommAlgebraSheaf) (hA' : (A'.toModule : S'.Modules) ≅ (tensorPullback g).obj (A.toModule : S.Modules)) (μ' : (SheafOfModules.monoidalCategory S'.sheaf).tensorObj A'.toModule A'.toModule ⟶ A'.toModule) (e' : (SheafOfModules.unit S'.ringCatSheaf : S'.Modules) ⟶ (A'.toModule : S'.Modules)) (γ : A' ≅ Under.mk (⟨π'.c⟩ : Scheme.sheaf _ ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} π'.base).obj (Scheme.sheaf _))), (A'.toModule : S'.Modules).IsQuasicoherent ∧ (∀ (W : S'.Opens) (a b : A'.right.obj.obj (op W)), μ'.val.app (op W) (tmulSection (M := A'.toModule) (N := A'.toModule) (U := W) a b) = a * b) ∧ (∀ (W : S'.Opens) (r : Γ(S', W)), e'.val.app (op W) r = A'.hom.hom.app (op W) r) ∧ (tensorPullback g).map μ = (Classical.choose (module_pullback_tensor g) (A.toModule : S.Modules) (A.toModule : S.Modules)).hom ≫ (SheafOfModules.monoidalCategory S'.sheaf).tensorHom hA'.inv hA'.inv ≫ μ' ≫ hA'.hom ∧ (tensorPullback g).map e ≫ hA'.inv = tensorPullbackObjUnitToUnit g ≫ e' ∧ (∀ (V : S.Opens) (a : A.right.obj.obj (op V)), γ.hom.right.hom.app (op (g ⁻¹ᵁ V)) (hA'.inv.val.app (op (g ⁻¹ᵁ V)) (((Classical.choose (exists_tensorPullbackAdjunction g)).unit.app (A.toModule : S.Modules)).val.app (op V) a)) = g'.appLE (π ⁻¹ᵁ V) (π' ⁻¹ᵁ (g ⁻¹ᵁ V)) (by rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage, sq.w]) (α.hom.right.hom.app (op V) a)) ∧ (∀ (Y : Scheme.{u}) (ρ : Y ⟶ S'), IsAffineHom ρ → ∀ (α' : A' ≅ Under.mk (⟨ρ.c⟩ : Scheme.sheaf _ ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} ρ.base).obj (Scheme.sheaf _))), ∃ (Φ : Y ⟶ X') (hΦ : Φ ≫ π' = ρ), (∀ (W : S'.Opens), Φ.appLE (π' ⁻¹ᵁ W) (ρ ⁻¹ᵁ W) (by rw [← Scheme.Hom.comp_preimage, hΦ]) = γ.inv.right.hom.app (op W) ≫ α'.hom.right.hom.app (op W)) ∧ IsIso Φ ∧ ∀ (Ψ : Y ⟶ X') (hΨ : Ψ ≫ π' = ρ), (∀ (W : S'.Opens), Ψ.appLE (π' ⁻¹ᵁ W) (ρ ⁻¹ᵁ W) (by rw [← Scheme.Hom.comp_preimage, hΨ]) = γ.inv.right.hom.app (op W) ≫ α'.hom.right.hom.app (op W)) → Ψ = Φ)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rsb",
+  "group": "C1",
+  "result": "pass"
  }
 }
