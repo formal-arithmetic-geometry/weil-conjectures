@@ -26,7 +26,9 @@ If moreover `adj'' : F'' ⊣ G''`, the *mixed cup product*
 ```
 cup K L : G (J K) ⊗ G'' L ⟶ G (J (K ⊗ F'' (G'' L))) ⟶ G (J (K ⊗ L))
 ```
-(`CategoryTheory.Adjunction.compCupProduct`) is `pm` followed by the counit of `F'' ⊣ G''`.
+is `pm` followed by the counit of `F'' ⊣ G''`, that is,
+`CategoryTheory.Adjunction.cupProductOfProjection` applied to
+`CategoryTheory.Adjunction.compProjectionMap`.
 
 We show that `pm` and the cup product are natural, associative and unital, and compatible with a
 map `J ⟶ G'` to a right adjoint of `F'` (the forget-supports map `j_! ⟶ Rj_*`), provided the
@@ -38,16 +40,18 @@ results apply to the six operations on derived categories of étale sheaves.
 - `CategoryTheory.Adjunction.compProjectionMap`: the projection map `Π` of `G ∘ J`.
 - `CategoryTheory.Adjunction.rightAdjointCupProduct`: the cup product
   `G'' M ⊗ G'' L ⟶ G'' (M ⊗ L)` of a right adjoint, `π` followed by the counit.
-- `CategoryTheory.Adjunction.compCupProduct`: the mixed cup product.
+- `CategoryTheory.Adjunction.cupProductOfProjection`: the cup product `P K ⊗ G M ⟶ P (K ⊗ M)`
+  attached to a projection map of `P`; applied to `compProjectionMap` it is the mixed cup product.
 
 ## Main statements
 
 - `CategoryTheory.Adjunction.compProjectionMap_associativity`,
   `CategoryTheory.Adjunction.compProjectionMap_rightUnitality`,
-  `CategoryTheory.Adjunction.compProjectionMap_forget`: coherence of `pm`.
-- `CategoryTheory.Adjunction.compCupProduct_associativity`,
-  `CategoryTheory.Adjunction.compCupProduct_rightUnitality`,
-  `CategoryTheory.Adjunction.compCupProduct_forget`: coherence of the mixed cup product.
+  `CategoryTheory.Adjunction.compProjectionMap_comp`: coherence of `pm`.
+- `CategoryTheory.Adjunction.cupProductOfProjection_associativity`,
+  `CategoryTheory.Adjunction.cupProductOfProjection_rightUnitality`,
+  `CategoryTheory.Adjunction.cupProductOfProjection_comp`: coherence of the cup product attached
+  to a projection map, in particular of the mixed cup product.
 - `CategoryTheory.Adjunction.rightAdjointCupProduct_associativity`: associativity of the cup
   product of a right adjoint.
 -/
@@ -78,8 +82,7 @@ lemma map_rightAdjointCupProduct_comp_counit (M L : C) :
         M ◁ adj.counit.app L := by
   rw [rightAdjointCupProduct, F.map_comp, Category.assoc]
   erw [adj.counit_naturality]
-  rw [
-    map_rightAdjointProjectionMap_comp_counit_assoc]
+  rw [map_rightAdjointProjectionMap_app_app_comp_counit_assoc, curriedTensor_map_app]
 
 /-- The right adjoint projection map is natural in its first variable. -/
 @[reassoc]
@@ -141,7 +144,15 @@ lemma cupProductOfProjection_naturality_right
     ← MonoidalCategory.whiskerLeft_comp, adj.counit_naturality]
 
 /-- **Associativity of the cup product attached to a projection map**, given the naturality and
-associativity of the projection map. -/
+associativity of the projection map. Writing `⌣` for `cupProductOfProjection` and `∪` for
+`rightAdjointCupProduct`:
+```
+(P K ⊗ G L) ⊗ G M --⌣ ▷ G M--> P (K ⊗ L) ⊗ G M --⌣--> P ((K ⊗ L) ⊗ M)
+        | α                                               | P α
+        v                                                 v
+P K ⊗ (G L ⊗ G M) --P K ◁ ∪--> P K ⊗ G (L ⊗ M) --⌣--> P (K ⊗ (L ⊗ M))
+```
+-/
 lemma cupProductOfProjection_associativity
     (hpml : ∀ {K K' : C} (x : K ⟶ K') (L : D),
       P.map x ▷ L ≫ pm K' L = pm K L ≫ P.map (x ▷ F.obj L))
@@ -185,7 +196,15 @@ lemma cupProductOfProjection_rightUnitality (η : F.obj (𝟙_ D) ⟶ 𝟙_ C)
     Equiv.symm_apply_apply, hpm]
 
 /-- **Compatibility of the cup product with a map to `G`**: if `s : P ⟶ G` intertwines `pm` with
-the projection map of `G`, it intertwines the cup products. -/
+the projection map of `G`, it intertwines the cup products `⌣` (`cupProductOfProjection`) and
+`∪` (`rightAdjointCupProduct`):
+```
+P K ⊗ G M --⌣--> P (K ⊗ M)
+   | s ▷ G M         | s
+   v                 v
+G K ⊗ G M --∪--> G (K ⊗ M)
+```
+-/
 lemma cupProductOfProjection_comp (s : P ⟶ G)
     (hs : ∀ (K : C) (L : D), pm K L ≫ s.app (K ⊗ F.obj L) =
       s.app K ▷ L ≫ ((adj.rightAdjointProjectionMap φ).app K).app L)
@@ -247,7 +266,15 @@ lemma compProjectionMap_naturality_right
   rw [reassoc_of% (hψ K (F.map y)), ← J.map_comp, ← MonoidalCategory.whiskerLeft_comp, he]
 
 /-- **Associativity of the projection map of `G ∘ J`**, given the associativity of `φ` and `ψ`
-and the compatibility of `e` with the comparisons `φ`, `φ'` and `φ''`. -/
+and the compatibility of `e` with the comparisons `φ`, `φ'` and `φ''`. Writing `pm` for
+`compProjectionMap` and `GJ` for `J ⋙ G`:
+```
+(GJ K ⊗ L) ⊗ L' --pm ▷ L'--> GJ (K ⊗ F'' L) ⊗ L' --pm--> GJ ((K ⊗ F'' L) ⊗ F'' L')
+      | α                                                     | GJ α
+      v                                                       v
+GJ K ⊗ (L ⊗ L') --pm--> GJ (K ⊗ F'' (L ⊗ L')) --GJ (K ◁ φ'')--> GJ (K ⊗ (F'' L ⊗ F'' L'))
+```
+-/
 lemma compProjectionMap_associativity
     (φ' : ∀ N N' : E, F'.obj (N ⊗ N') ⟶ F'.obj N ⊗ F'.obj N')
     (φ'' : ∀ L L' : D, F''.obj (L ⊗ L') ⟶ F''.obj L ⊗ F''.obj L')
@@ -312,8 +339,15 @@ lemma compProjectionMap_rightUnitality (η : F.obj (𝟙_ D) ⟶ 𝟙_ E) (η' :
 /-- **Compatibility of the projection map of `G ∘ J` with a map to a right adjoint.** Let
 `s : J ⟶ G'` for a right adjoint `G'` of `F'`, compatible with the projection maps
 (hypothesis `hs`), and let `κ : G' ⋙ G ⟶ G''` for a right adjoint `G''` of `F''`, compatible with
-the projection maps (hypothesis `hκ`, the projection map of a composite). Then
-`Π ≫ (s ≫ κ) = ((s ≫ κ) ▷ L) ≫ π''`. -/
+the projection maps (hypothesis `hκ`, the projection map of a composite). Then, writing `pm` for
+`compProjectionMap`, `π''` for the projection map of `G''` and `t` for `G s ≫ κ : J ⋙ G ⟶ G''`:
+```
+G (J K) ⊗ L --pm--> G (J (K ⊗ F'' L))
+    | t ▷ L              | t
+    v                    v
+ G'' K ⊗ L  --π''--> G'' (K ⊗ F'' L)
+```
+-/
 lemma compProjectionMap_comp {G' : C ⥤ E} {G'' : C ⥤ D} (adj' : F' ⊣ G') (adj'' : F'' ⊣ G'')
     (φ' : (postcompose₂.obj F').obj (curriedTensor E) ⟶
       (((whiskeringLeft₂ C).obj F').obj F').obj (curriedTensor C))

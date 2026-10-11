@@ -242,6 +242,8 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
   [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
+/-- The inverse `j_!K ⊗ᴸ N ⟶ j_!(K ⊗ᴸ Lj^*N)` of the projection formula for an open immersion `j`
+is natural in `K`. -/
 @[reassoc]
 lemma derivedOpenImmersionLowerShriekProjectionIso_inv_naturality_left
     {K K' : DerivedCategory (Sheaf U.smallEtaleTopology A)} (x : K ⟶ K')
@@ -252,6 +254,8 @@ lemma derivedOpenImmersionLowerShriekProjectionIso_inv_naturality_left
         D((j)_!open[A]).map (x ▷ L((j)^*[A]).obj N) :=
   NatTrans.congr_app ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.naturality x) N
 
+/-- The inverse `j_!K ⊗ᴸ N ⟶ j_!(K ⊗ᴸ Lj^*N)` of the projection formula for an open immersion `j`
+is natural in `N`. -/
 @[reassoc]
 lemma derivedOpenImmersionLowerShriekProjectionIso_inv_naturality_right
     (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
@@ -262,6 +266,15 @@ lemma derivedOpenImmersionLowerShriekProjectionIso_inv_naturality_right
         D((j)_!open[A]).map (K ◁ L((j)^*[A]).map y) :=
   ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).naturality y
 
+/-- **Associativity of the inverse projection formula** `pf : j_!K ⊗ᴸ N ⟶ j_!(K ⊗ᴸ Lj^*N)` for
+an open immersion `j`, with `μ : Lj^*(N ⊗ᴸ N') ⟶ Lj^*N ⊗ᴸ Lj^*N'` the tensor comparison:
+```
+(j_!K ⊗ᴸ N) ⊗ᴸ N' --pf ▷ N'--> j_!(K ⊗ᴸ Lj^*N) ⊗ᴸ N' --pf--> j_!((K ⊗ᴸ Lj^*N) ⊗ᴸ Lj^*N')
+        | α                                                          ^ j_!(α⁻¹)
+        v                                                          |
+j_!K ⊗ᴸ (N ⊗ᴸ N') --pf--> j_!(K ⊗ᴸ Lj^*(N ⊗ᴸ N')) --j_!(K ◁ μ)--> j_!(K ⊗ᴸ (Lj^*N ⊗ᴸ Lj^*N'))
+```
+-/
 @[reassoc]
 lemma derivedOpenImmersionLowerShriekProjectionIso_inv_associativity
     (K : DerivedCategory (Sheaf U.smallEtaleTopology A))
@@ -302,6 +315,9 @@ lemma derivedOpenImmersionLowerShriekProjectionIso_inv_associativity
     whiskerLeft_id]
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app_app, Category.comp_id]
 
+/-- **Unitality of the inverse projection formula** for an open immersion `j`: the composite
+`j_!K ⊗ᴸ Λ ⟶ j_!(K ⊗ᴸ Lj^*Λ) ≅ j_!(K ⊗ᴸ Λ) ≅ j_!K` of the inverse projection formula, the unit
+isomorphism `Lj^*Λ ≅ Λ` and the right unitor is the right unitor of `j_!K`. -/
 lemma derivedOpenImmersionLowerShriekProjectionIso_inv_rightUnitality
     (K : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
     ((derivedOpenImmersionLowerShriekProjectionIso A j).inv.app K).app (𝟙_ _) ≫
@@ -354,14 +370,18 @@ lemma derivedOpenImmersionLowerShriekProjectionIso_inv_comp_toLowerStar
     erw [← (leftDerivedUpperStarIsoMapDerivedCategory A j).inv.naturality_assoc]
     rw [← cancel_epi ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).unit.app _),
       IsIso.hom_inv_id]
-    erw [Adjunction.unit_app_comp_map_projectionMap_assoc]
+    erw [Adjunction.unit_app_comp_map_projectionMap_app_app_assoc _ _ (curriedTensor _)
+      (curriedTensor _)]
+    simp only [Adjunction.projectionMapTranspose, NatTrans.comp_app,
+      Functor.whiskeringLeft₂_map_app_app_app_app, Functor.whiskeringLeft₂_obj_obj_map_app_app,
+      curriedTensor_map_app, Category.assoc]
     rw [mapDerivedCategoryUpperStarDerivedTensorIso_hom_app_app]
     simp only [Category.assoc]
     erw [Iso.hom_inv_id_app_assoc]
-    rw [IsIso.inv_hom_id_assoc]
+    erw [IsIso.inv_hom_id_assoc]
+    dsimp only [Functor.id_obj]
     simp only [← comp_whiskerRight]
     rw [Iso.inv_hom_id_app_assoc, IsIso.hom_inv_id, id_whiskerRight]
-    rfl
   apply ((derivedUpperStarLowerStarAdjunction A j).homEquiv _ _).symm.injective
   erw [Adjunction.homEquiv_naturality_left_symm,
     derivedUpperStarLowerStarAdjunction_homEquiv_symm_lowerShriekToLowerStar,
