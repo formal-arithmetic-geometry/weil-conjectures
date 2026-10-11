@@ -3977,3 +3977,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:16 L: merged deliver/H1/lem-weil-pbc-colimit-eventually-flat (stage 2; reviewer FIX; first push; Sheaf.RingTheory.ColimitEventuallyFlat RingTheory.exists_flat_stage)
 - 09:17 L: merged deliver/K1/lem-weil-pbc-completion-regular-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CompletionRegularLocal AdicCompletion.isRegularLocalRing_iff)
 - 09:17 L: merged deliver/E1/lem-weil-pbc-closed-pushforward-stalks (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ClosedPushforwardStalks AlgebraicGeometry.closedImmersion_pushforward_stalks; statement correction reverted (statement, statement_change))
+- 09:17 L: merged deliver/F1/lem-weil-pbc-completion-finite-quotient (stage 2; reviewer PASS; first push; Sheaf.RingTheory.CompletionFiniteQuotient AdicCompletion.completion_finite_quotient)
