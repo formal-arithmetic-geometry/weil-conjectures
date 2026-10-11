@@ -10,7 +10,22 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverFiel
 /-!
 # Survival of a cokernel element under cofiltered limits
 
-TODO
+The ingredients of step (2) of the blueprint lemma `sbc-lem-bc-failure-field`
+(`AlgebraicGeometry.Etale.survivesBaseChange_of_isLimit`): for a cofiltered system of schemes
+`T_i` over `T` with affine transition morphisms, the transition maps of the sources and of the
+targets of the base-change maps over the stages `T_i` form directed systems
+(`AlgebraicGeometry.Etale.overLowerStarTransition`,
+`AlgebraicGeometry.Etale.overTargetTransition`), compatible with the base-change maps, and on
+geometric stalks the targets over the limit are the colimits of the targets over the stages, by
+the limit theorem for higher direct images (`AlgebraicGeometry.Etale.higherDirectImage_limit`).
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.not_mem_range_of_forall_not_mem_range`: an element of a colimit of
+  modules that is not in the image of compatible maps at every stage is not in the image of the
+  limit map.
+- `AlgebraicGeometry.Etale.mem_range_baseChangeHomologyMap_iff`: the survival condition written
+  with the derived transition maps.
 -/
 
 @[expose] public section
@@ -527,7 +542,8 @@ limit, when the sources of the comparison maps form a filtered colimit up to sur
 targets are a filtered colimit up to injectivity. -/
 lemma Etale.not_mem_range_of_forall_not_mem_range {R : Type*} [Ring R] {I : Type*} [Category I]
     [IsCofiltered I] (A B : I → ModuleCat R) (Al Bl B₀ : ModuleCat R) (φ : ∀ i, A i ⟶ B i)
-    (φl : Al ⟶ Bl) (tA : ∀ {i j : I}, (j ⟶ i) → (A i ⟶ A j)) (tB : ∀ {i j : I}, (j ⟶ i) → (B i ⟶ B j))
+    (φl : Al ⟶ Bl) (tA : ∀ {i j : I}, (j ⟶ i) → (A i ⟶ A j))
+    (tB : ∀ {i j : I}, (j ⟶ i) → (B i ⟶ B j))
     (sA : ∀ i, A i ⟶ Al) (sB : ∀ i, B i ⟶ Bl) (τ : ∀ i, B₀ ⟶ B i) (τl : B₀ ⟶ Bl)
     (hτ : ∀ {i j : I} (f : j ⟶ i), τ i ≫ tB f = τ j) (hτl : ∀ i, τ i ≫ sB i = τl)
     (hφ : ∀ {i j : I} (f : j ⟶ i), φ i ≫ tB f = tA f ≫ φ j)
@@ -590,7 +606,8 @@ lemma Etale.mem_iSup_range_sheafFiber_map_upperStar {S X : Scheme.{u}} (p : X �
         rw [← cancel_epi ((S.uliftPointSmallEtale s).sheafFiber.map σ), ← Functor.map_comp,
           cokernel.condition, Functor.map_zero, comp_zero]
       exact ⟨0, hz.eq_of_src _ _, hz.eq_of_src _ _⟩
-    exact (IsZero.iff_id_eq_zero _).2 (by rw [← IsIso.hom_inv_id (0 : cokernel σ ⟶ cokernel σ), zero_comp])
+    exact (IsZero.iff_id_eq_zero _).2
+      (by rw [← IsIso.hom_inv_id (0 : cokernel σ ⟶ cokernel σ), zero_comp])
   have : Epi σ := Preadditive.epi_of_isZero_cokernel σ hQ
   have : Epi ((X.uliftPointSmallEtale x).sheafFiber.map (((p)^*[ModuleCat.{u + 1} Λ]).map σ)) :=
     inferInstance
@@ -606,8 +623,7 @@ lemma Etale.mem_iSup_range_sheafFiber_map_upperStar {S X : Scheme.{u}} (p : X �
       ext w
       simp only [Functor.mapCocone_ι_app, Cofan.mk_ι_app, ModuleCat.hom_comp,
         ModuleCat.hom_ofHom, LinearMap.coe_comp, Function.comp_apply, Limits.comp_zero,
-        ModuleCat.hom_zero, LinearMap.zero_apply, Submodule.mkQ_apply,
-        Submodule.Quotient.mk_eq_zero]
+        ModuleCat.hom_zero, LinearMap.zero_apply]
       exact (Submodule.Quotient.mk_eq_zero P).2
         (Submodule.mem_iSup_of_mem i (LinearMap.mem_range_self _ w))
     have := congrArg (fun f ↦ f.hom z) hq
@@ -727,7 +743,8 @@ lemma Etale.sourceStageIso_naturality (p : X ⟶ S) (g : T ⟶ S)
         ((((V.hom)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app G))
   simp only [Etale.sourceStageIso, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Iso.symm_hom]
   rw [← Category.assoc, ← Functor.map_comp, ← Functor.map_comp, n₁,
-    Functor.map_comp (DerivedCategory.Plus.homologyFunctor _ q), E, Functor.map_comp, ← Category.assoc, ← n₂]
+    Functor.map_comp (DerivedCategory.Plus.homologyFunctor _ q), E, Functor.map_comp,
+    ← Category.assoc, ← n₂]
 
 end SourceIso
 

@@ -15,7 +15,34 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 /-!
 # The closed–open step of the detection of a failure of base change
 
-TODO
+Step (3) of the blueprint lemma `sbc-lem-bc-failure-field`: if a cokernel element survives over
+`T'` and `Z ⊆ T'` is closed with quasi-compact open complement `V`, then it survives over `V` or
+over `Z` (`AlgebraicGeometry.Etale.survivesBaseChange_or_of_isClosedImmersion`). This file
+provides the ingredients.
+
+For `k : T₁ ⟶ T` and a square `e' ≫ k = a ≫ e`, the transition map of the targets of the
+base-change maps along `k` is computed through the comparison `k_* N[0] ⟶ Rk_*(N[0])`
+(`AlgebraicGeometry.Etale.singleLowerStarComparison`) and the derived base-change map of the
+square: it factors as `R^q h_* e⁻¹ β`, for a map `β : π^* F ⟶ k_* N` whose adjoint is an
+isomorphism, followed by the comparison of targets for the pushed forward sheaf
+(`AlgebraicGeometry.Etale.exists_baseChangeTargetTransition_comp_eq`). The comparison commutes
+with the base-change maps (`AlgebraicGeometry.Etale.baseChangeHomologyMap_comp_pushforward`), is
+an isomorphism for a finite `k` and a monomorphism for an open immersion `k` along which the
+base-change property holds in lower degrees and the sheaf is injective. The image of the
+cokernel element in `j_* J ⊕ i_* i⁻¹ π⁻¹ F` survives in one of the summands
+(`CategoryTheory.mem_range_of_mono_cokernelMap`, `CategoryTheory.mem_range_of_decomp`), and the
+two summands are handled by `AlgebraicGeometry.Etale.not_mem_range_of_baseChangeProperty` and
+`AlgebraicGeometry.Etale.not_mem_range_of_isFinite`.
+
+## Main statements
+
+- `CategoryTheory.Functor.mono_homologyFunctor_map_rightDerivedFunctorPlus_map`: a morphism of
+  the bounded below derived category which is an isomorphism on `H^i` for `i < n` and a
+  monomorphism on `H^n` stays a monomorphism on `H^n` after a right derived functor.
+- `AlgebraicGeometry.Etale.exists_baseChangeTargetTransition_comp_eq`: the decomposition of the
+  transition maps along a morphism.
+- `AlgebraicGeometry.Etale.not_mem_range_of_isFinite`,
+  `AlgebraicGeometry.Etale.not_mem_range_of_baseChangeProperty`: the closed and the open summand.
 -/
 
 @[expose] public section
@@ -61,7 +88,8 @@ lemma unit_app_comp_map_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' 
     (adj'.unit.app (S.obj (R.obj N)) ≫ R'.map (s.app (R.obj N) ≫ S'.map (adj.counit.app N))) ≫
         R'.map (S'.map f) =
       S.map (R.map f) ≫
-        adj'.unit.app (S.obj (R.obj N')) ≫ R'.map (s.app (R.obj N') ≫ S'.map (adj.counit.app N')) := by
+        adj'.unit.app (S.obj (R.obj N')) ≫
+          R'.map (s.app (R.obj N') ≫ S'.map (adj.counit.app N')) := by
   have h₁ := adj'.unit.naturality (S.map (R.map f))
   have h₂ := s.naturality (R.map f)
   have h₃ := adj.counit.naturality f
@@ -373,7 +401,8 @@ lemma Etale.bijective_comp_singleLowerStarComparison {T' T₁ : Scheme.{u}} (k :
   have hiso : Function.Bijective (fun b : (DerivedCategory.Plus.singleFunctor _ 0).obj
         (((k)^*[ModuleCat.{u + 1} Λ]).obj A) ⟶ (DerivedCategory.Plus.singleFunctor _ 0).obj N ↦
       (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app A ≫ b) :=
-    ⟨fun _ _ h ↦ (cancel_epi _).1 h, fun c ↦ ⟨(((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).inv.app A ≫ c,
+    ⟨fun _ _ h ↦ (cancel_epi _).1 h, fun c ↦
+      ⟨(((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).inv.app A ≫ c,
       by simp⟩⟩
   have hs' : Function.Bijective (fun a : ((k)^*[ModuleCat.{u + 1} Λ]).obj A ⟶ N ↦
       (DerivedCategory.Plus.singleFunctor (Sheaf T₁.smallEtaleTopology
@@ -412,10 +441,12 @@ lemma Etale.isIso_homologyFunctor_zero_map_singleLowerStarComparison {T' T₁ : 
       (hY : (DerivedCategory.Plus.ι.obj Y).IsGE 0)
       (A : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
       Function.Bijective (fun φ : (DerivedCategory.Plus.singleFunctor _ 0).obj A ⟶ Y ↦
-        ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso (C := Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).app A).inv ≫
+        ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso
+          (C := Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).app A).inv ≫
           (DerivedCategory.Plus.homologyFunctor _ 0).map φ) := by
     exact Function.Bijective.comp (g := fun ψ ↦
-      ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso (C := Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).app A).inv ≫ ψ)
+      ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso
+        (C := Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).app A).inv ≫ ψ)
       ⟨fun _ _ h ↦ (cancel_epi _).1 h, fun ψ ↦ ⟨_, Iso.inv_hom_id_assoc _ ψ⟩⟩
       ((DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE 0).comp
         ((Functor.FullyFaithful.ofFullyFaithful DerivedCategory.Plus.ι).map_bijective _ _))
@@ -556,7 +587,8 @@ lemma Etale.targetTransitionPlus_comp_map {X T Y T' Y' : Scheme.{u}} (e : Y ⟶ 
               ((Etale.derivedUpperStarLowerStarAdjunctionPlus _ k).unit.app K) ≫
             D+((e)^*[ModuleCat.{u + 1} Λ]).map (R+((k)_*[ModuleCat.{u + 1} Λ]).map ψ) ≫
             (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app L) ≫
-        (Etale.lowerStarPlusCompIso Λ a h h' wh).hom.app (D+((e')^*[ModuleCat.{u + 1} Λ]).obj L) := by
+        (Etale.lowerStarPlusCompIso Λ a h h' wh).hom.app
+          (D+((e')^*[ModuleCat.{u + 1} Λ]).obj L) := by
   have hpsc := Etale.pullbackSquareComparison_hom_app_eq Λ e k a e' wa K sqk
   have hu := Etale.upperStar_map_unit_comp_baseChange_app Λ sqk K
   rw [Etale.targetTransitionPlus, Category.assoc, ← Functor.map_comp, ← hpsc,
@@ -717,7 +749,8 @@ lemma Etale.targetPushforward_naturality (e : Y ⟶ T) (h : Y ⟶ X) (k : T' ⟶
               (D+((e')^*[ModuleCat.{u + 1} Λ]).obj
                 ((DerivedCategory.Plus.singleFunctor _ 0).obj N))) ≫
       (DerivedCategory.Plus.homologyFunctor _ q).map (R+((h')_*[ModuleCat.{u + 1} Λ]).map
-        (D+((e')^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.singleFunctor _ 0).map φ))) := by
+        (D+((e')^*[ModuleCat.{u + 1} Λ]).map
+          ((DerivedCategory.Plus.singleFunctor _ 0).map φ))) := by
   have h₁ := map_comp_map_eq_map_comp_map D+((e)^*[ModuleCat.{u + 1} Λ])
     (Etale.singleLowerStarComparison_naturality Λ k φ).symm
   rw [← Functor.map_comp, ← Functor.map_comp]
@@ -831,7 +864,8 @@ omit [CommRing Λ] in
 /-- Two equal composites stay equal under a functor, followed by a common morphism. -/
 lemma map_comp_map_comp_map_comp_eq {ℬ 𝒞 𝒟 : Type*} [Category* ℬ] [Category* 𝒞] [Category* 𝒟]
     (R : ℬ ⥤ 𝒞) (G : 𝒞 ⥤ 𝒟) {A B C B' : 𝒞} {L : ℬ} {E : 𝒟} {a : A ⟶ B} {b : B ⟶ C}
-    {c : C ⟶ R.obj L} {x : A ⟶ B'} {y : B' ⟶ R.obj L} (d : (R ⋙ G).obj L ⟶ E) (w : x ≫ y = a ≫ b ≫ c) :
+    {c : C ⟶ R.obj L} {x : A ⟶ B'} {y : B' ⟶ R.obj L} (d : (R ⋙ G).obj L ⟶ E)
+    (w : x ≫ y = a ≫ b ≫ c) :
     G.map a ≫ G.map b ≫ G.map c ≫ d = G.map x ≫ G.map y ≫ d := by
   simpa using congrArg (fun f ↦ G.map f ≫ d) w.symm
 
@@ -871,7 +905,8 @@ theorem Etale.exists_baseChangeTargetTransition_comp_eq {X T Y T₂ Y₂ T₁ Y�
         ((Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) i f₂ (i ≫ f₂) rfl).inv.app
             ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ≫
           ((((i ≫ f₂))^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F ≫
-            𝟙 ((DerivedCategory.Plus.singleFunctor _ 0).obj (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F)) :
+            𝟙 ((DerivedCategory.Plus.singleFunctor _ 0).obj
+              (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F)) :
           D+((i)^*[ModuleCat.{u + 1} Λ]).obj (D+((f₂)^*[ModuleCat.{u + 1} Λ]).obj
             ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ⟶ _) :
         _ ⟶ _))
@@ -1032,22 +1067,23 @@ image of the base-change map for `j_* J`, then the image of `y` under the compar
 targets is not in the image of the base-change map over `T₁` for `N`. -/
 theorem Etale.not_mem_range_of_baseChangeProperty {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T}
     {h : Y ⟶ X} (sq : IsPullback e h g p) (j : T₁ ⟶ T) [QuasiCompact j] [QuasiSeparated j]
-    {e₁ : Y₁ ⟶ T₁} {h₁ : Y₁ ⟶ X} (g₁ : T₁ ⟶ S) (hg : j ≫ g = g₁) (sq₁ : IsPullback e₁ h₁ g₁ p)
+    {e₁ : Y₁ ⟶ T₁} {h₁ : Y₁ ⟶ X} (g₁ : T₁ ⟶ S) (sq₁ : IsPullback e₁ h₁ g₁ p)
     (a : Y₁ ⟶ Y) (wh : a ≫ h = h₁) (sqk : IsPullback e₁ a j e) (q : ℤ) (hq : 1 ≤ q)
     (hbc : ∀ i < q, Etale.BaseChangeProperty Λ e i)
     {A : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     {N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (β : A ⟶ ((j)_*[ModuleCat.{u + 1} Λ]).obj N) (x : X)
+    (β : A ⟶ ((j)_*[ModuleCat.{u + 1} Λ]).obj N)
+    {J : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)} [Injective J] (ι : N ⟶ J) (x : X)
     (y : ((X.uliftPointSmallEtale x).sheafFiber.obj
       ((Etale.baseChangeTargetFunctor Λ e h q).obj A) : ModuleCat.{u + 1} Λ))
     (hy : ((X.uliftPointSmallEtale x).sheafFiber.map
         ((Etale.baseChangeTargetFunctor Λ e h q).map
-          (((j)_*[ModuleCat.{u + 1} Λ]).map (Injective.ι N)))).hom
+          (((j)_*[ModuleCat.{u + 1} Λ]).map ι))).hom
         (((X.uliftPointSmallEtale x).sheafFiber.map
           ((Etale.baseChangeTargetFunctor Λ e h q).map β)).hom y) ∉
       Set.range ((X.uliftPointSmallEtale x).sheafFiber.map
         (Etale.baseChangeHomologyMap Λ sq q
-          (((j)_*[ModuleCat.{u + 1} Λ]).obj (Injective.under N)))).hom) :
+          (((j)_*[ModuleCat.{u + 1} Λ]).obj J))).hom) :
     ((X.uliftPointSmallEtale x).sheafFiber.map
         ((DerivedCategory.Plus.homologyFunctor _ q).map
           (R+((h)_*[ModuleCat.{u + 1} Λ]).map
@@ -1062,22 +1098,21 @@ theorem Etale.not_mem_range_of_baseChangeProperty {p : X ⟶ S} {g : T ⟶ S} {e
       Set.range ((X.uliftPointSmallEtale x).sheafFiber.map
         (Etale.baseChangeHomologyMap Λ sq₁ q N)).hom := by
   have : LocallySmall.{u + 1} X.Etale := locallySmall_max.{u + 1, u}
-  have := Etale.isIso_singleLowerStarComparison_of_injective Λ j (Injective.under N)
-  have hm := Etale.mono_targetPushforward Λ e h j a e₁ h₁ wh sqk.toCommSq q (Injective.under N)
+  have := Etale.isIso_singleLowerStarComparison_of_injective Λ j J
+  have hm := Etale.mono_targetPushforward Λ e h j a e₁ h₁ wh sqk.toCommSq q J
     (fun i hi ↦ by
-      have := hbc i hi j e₁ a sqk (Injective.under N)
+      have := hbc i hi j e₁ a sqk J
       rwa [Etale.baseChangeHomologyMap_eq_homologyFunctor_map] at this)
     (by
-      have := Etale.mono_baseChangeHomologyMap Λ q hq (hbc (q - 1) (by lia)) sqk
-        (Injective.under N)
+      have := Etale.mono_baseChangeHomologyMap Λ q hq (hbc (q - 1) (by lia)) sqk J
       rwa [Etale.baseChangeHomologyMap_eq_homologyFunctor_map] at this)
   have wn := congrArg (fun φ ↦ (X.uliftPointSmallEtale x).sheafFiber.map φ)
-    (Etale.targetPushforward_naturality Λ e h j a e₁ h₁ wh sqk.toCommSq q (Injective.ι N))
+    (Etale.targetPushforward_naturality Λ e h j a e₁ h₁ wh sqk.toCommSq q ι)
   rw [(X.uliftPointSmallEtale x).sheafFiber.map_comp,
     (X.uliftPointSmallEtale x).sheafFiber.map_comp] at wn
   have hz := congrArg (fun φ ↦ (X.uliftPointSmallEtale x).sheafFiber.map φ)
     (Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective Λ sq₁ (q := q) (by lia)
-      (Injective.ι N))
+      ι)
   rw [(X.uliftPointSmallEtale x).sheafFiber.map_comp, Functor.map_zero] at hz
   exact not_mem_range_of_mono_comm _ _ _ _ _ _ _ wn hz y hy
 
