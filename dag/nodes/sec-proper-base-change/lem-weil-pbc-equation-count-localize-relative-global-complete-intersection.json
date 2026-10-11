@@ -235,5 +235,24 @@
   "worker": "stage1",
   "summary": "Checked against Stacks 00ST (3) and its proof (lines 36715-36720). The source cites 'Lemma 00RJ' in the brief/node place, but tag 00RJ is algebra-lemma-extend-field-CM-locus; the lemma used, lemma-dimension-fibres-bounded-open-upstairs, is tag 00QH (corrected in source.place). Seven steps: (1) 00QH gives an open V around q where the fibre dimension at points is <= n-c (new unsplit node lem-weil-pbc-fibre-dimension-bounded-open-upstairs); (2) a basic open D(g) inside V, h a preimage of g (new Mathlib leaf lem-weil-pbc-spec-localization-away-basic-open, basic opens basis and Spec A_f = D(f)); (3) T = R[x_1..x_{n+1}]/(f, hx_{n+1}-1) is isomorphic to S_g, from the polynomial/tensor/localization leaves (the existing 00SS (2) node lem-weil-pbc-relative-global-complete-intersection-principal-localization cannot be used: it assumes S itself is a relative global complete intersection); (4) the lower bound n-c at every point of every fibre of S, written out (implicit in the source) from the height-difference node and Krull's height bound; (5) the fibre of T is the localization of the fibre of S at g; (6) so every point of a fibre of T has local dimension exactly n-c (open subspace, fibre-prime bijection); (7) dimension = sup of local dimensions (0B7I) gives dimension (n+1)-(c+1) for every nonempty fibre. Statement unchanged; checked against the citer's step 10."
  },
- "reviewed": "pass (L, 2026-10-10): 7 steps follow 00ST (3): 00QH (new unsplit node, the fibre dimension is bounded above on an open neighbourhood; the brief's tag 00RJ was wrong, corrected in source.place) gives D(g); T = S_g by the extra variable; the lower bound n - c on all fibre local dimensions (Krull, written out); fibres of T are localizations of fibres of S, so their local dimensions are exactly n - c; dimension = sup of local dimensions (0B7I). New leaf for basic opens and Spec of a localization."
+ "reviewed": "pass (L, 2026-10-10): 7 steps follow 00ST (3): 00QH (new unsplit node, the fibre dimension is bounded above on an open neighbourhood; the brief's tag 00RJ was wrong, corrected in source.place) gives D(g); T = S_g by the extra variable; the lower bound n - c on all fibre local dimensions (Krull, written out); fibres of T are localizations of fibres of S, so their local dimensions are exactly n - c; dimension = sup of local dimensions (0B7I). New leaf for basic opens and Spec of a localization.",
+ "lean": {
+  "module": "Sheaf.RingTheory.EquationCountLocalizeRelativeGlobalCompleteIntersection",
+  "declaration": "Algebra.exists_localization_relativeGlobalCompleteIntersection",
+  "file": "lean/Sheaf/RingTheory/EquationCountLocalizeRelativeGlobalCompleteIntersection.lean",
+  "statement": "theorem exists_localization_relativeGlobalCompleteIntersection (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) (q : PrimeSpectrum (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) (hdim : let S := MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f) let p := PrimeSpectrum.comap (algebraMap R S) q c ≤ n ∧ topologicalKrullDimAt (PrimeSpectrum.preimageEquivFiber R S p ⟨q, rfl⟩) = (n - c : ℕ)) : ∃ h : MvPolynomial (Fin n) R, let S := MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f) let g : S := Ideal.Quotient.mk _ h g ∉ q.asIdeal ∧ let relations : Option (Fin c) → MvPolynomial (Option (Fin n)) R := Option.elim' (MvPolynomial.rename some h * MvPolynomial.X none - 1) (fun i ↦ MvPolynomial.rename some (f i)) let T := MvPolynomial (Option (Fin n)) R ⧸ Ideal.span (Set.range relations) IsRelativeGlobalCompleteIntersection (algebraMap R T) ∧ (∀ (p : Ideal R) (_hp : p.IsPrime), letI : p.IsPrime := _hp Nontrivial (p.Fiber T) → c + 1 ≤ n + 1 ∧ topologicalKrullDim (PrimeSpectrum (p.Fiber T)) = (n + 1 - (c + 1) : ℕ)) ∧ ∃ e : T ≃ₐ[R] Localization.Away g, (∀ i : Fin n, e (Ideal.Quotient.mk _ (MvPolynomial.X (some i))) = algebraMap S (Localization.Away g) (Ideal.Quotient.mk _ (MvPolynomial.X i))) ∧ e (Ideal.Quotient.mk _ (MvPolynomial.X none)) = IsLocalization.Away.invSelf g",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ecl0955"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ecl0955",
+  "group": "K1",
+  "result": "fix",
+  "note": "R comm ring, n c : Nat, f : Fin c -> R[x], S quotient, q prime, p comap, Q = preimageEquivFiber (kernel of kappa(p) (x) S -> kappa(q), read), dim_Q = n-c with c<=n untruncated; h, g=mk h not in q, T with Option indices (n+1 vars, c+1 eqs incl rename h * X none - 1), RGCI of THIS presentation restored as explicit fibre clause beside the recorded ring-map predicate, e : T ≃ₐ[R] Localization.Away g on generators"
+ }
 }
