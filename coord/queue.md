@@ -1,11 +1,11 @@
 # Work queue
 
-614 items; claim with `tools/claim.py next <group> [--stage N]`.
+611 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (614)
+## Stage 2: nodes to state (611)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -26,7 +26,6 @@
 | `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-flat-mod-injective` | 1 | state |
 | `lem-weil-pbc-flat-module-completion-flat` | 1 | state |
-| `lem-weil-pbc-flat-over-regular-with-regular-fibre` | 1 | state |
 | `lem-weil-pbc-flat-permanence` | 1 | state |
 | `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1 | state |
 | `lem-weil-pbc-flat-tor-ideal-criterion` | 1 | state |
@@ -35,9 +34,7 @@
 | `lem-weil-pbc-formal-glueing-H0-localization` | 1 | state |
 | `lem-weil-pbc-formal-glueing-canonical-maps` | 1 | state |
 | `lem-weil-pbc-formal-glueing-complex-exact` | 1 | state |
-| `lem-weil-pbc-formal-glueing-finite-modules` | 1 | state |
 | `lem-weil-pbc-formal-glueing-isogeny` | 1 | state |
-| `lem-weil-pbc-formally-smooth-complete-local-regular` | 1 | state |
 | `lem-weil-pbc-fpqc-affine-standard-refinement` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-affine` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-finite` | 1 | state |
