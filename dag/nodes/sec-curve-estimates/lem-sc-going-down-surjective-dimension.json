@@ -117,5 +117,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-gds2354 (reviewer sub-agent of L); spot-checked: C1: Step 1 uses the statement's Spec-surjectivity hypothesis, Step 2 the going-down property exactly as defined inline (p1⊆p2, q2 over p2 gives q1⊆q2 over p1), strictness from distinct contractions; Step 3 the supremum clause of def-weil-pbc-krull-dimension-ring. C4: consumer lem-sc-faithfully-flat-local-dimension supplies going down (lem-sc-flat-going-down, same wording) and surjectivity, and uses dim A<=dim B; same direction, item is for arbitrary ring maps so the local case is covered. D: matches Stacks 00OH chain argument, no cycle. Class b: no new nodes, nothing restates the consumer. Mathlib grep for going-down Krull-dim theorem: none. Note: second reading says created.item was corrected, but created.item stays lem-sc-faithfully-flat-local-dimension (correct, maintainer field)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KrullDimension.GoingDown",
+  "declaration": "ringKrullDim_le_of_goingDown_of_surjective",
+  "file": "lean/Sheaf/RingTheory/KrullDimension/GoingDown.lean",
+  "statement": "theorem ringKrullDim_le_of_goingDown_of_surjective {R : Type u} {S : Type v} [CommRing R] [CommRing S] (φ : R →+* S) (hgoing : letI := φ.toAlgebra; Algebra.HasGoingDown R S) (hsurjective : Function.Surjective (PrimeSpectrum.comap φ)) : ringKrullDim R ≤ ringKrullDim S",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-gds1148"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gds1148",
+  "group": "F1",
+  "result": "fix",
+  "note": "R,S CommRing + φ:R→+*S; going down (node's inline p1⊆p2, q2 over p2 ⇒ q1⊆q2 over p1) re-expressed as Algebra.HasGoingDown under φ.toAlgebra (equivalence checked in Lean); surjectivity = Function.Surjective (PrimeSpectrum.comap φ); conclusion ringKrullDim R ≤ ringKrullDim S; zero ring/unbounded edge cases, independent universes"
  }
 }
