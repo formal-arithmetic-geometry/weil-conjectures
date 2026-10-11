@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import Mathlib.RingTheory.PolynomialAlgebra
+public import Mathlib.RingTheory.Polynomial.Quotient
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
@@ -482,6 +485,54 @@ theorem isPullback_normalConeToDeformationSpace :
     I.coequifibered_toNormalConePresheaf I.polynomialToRees _ _ I.polynomialZeroToNormalCone
     rfl rfl fun U ↦ I.isPushout_polynomialToRees_toQuotientPresheaf (.op U)
 
+/-- `V(I) = Spec_X (𝒪_X / I) ⟶ X` is a closed immersion. -/
+instance : IsClosedImmersion (relativeGluingData I.coequifibered_toQuotientAlgebra).toBase :=
+  toBase_of_forall _ @IsClosedImmersion fun _ ↦
+    IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+
+/-- The kernel of `V(I) ⟶ X` is `I`. -/
+lemma ker_quotientSpec_toBase :
+    (relativeGluingData I.coequifibered_toQuotientAlgebra).toBase.ker = I := by
+  ext U x
+  rw [Scheme.Hom.ker_apply, RingHom.mem_ker, Scheme.Hom.app_eq_appLE]
+  have h := toBase_appLE_sectionsIso_hom I.coequifibered_toQuotientAlgebra ⟨U.1, U.2⟩
+  have hx : ((relativeGluingData I.coequifibered_toQuotientAlgebra).toBase.appLE U.1 _ le_rfl ≫
+      (sectionsIso I.coequifibered_toQuotientAlgebra ⟨U.1, U.2⟩).hom).hom x =
+      Ideal.Quotient.mk (I.ideal U) x := congr($h x)
+  rw [CommRingCat.comp_apply] at hx
+  rw [← (sectionsIso I.coequifibered_toQuotientAlgebra ⟨U.1, U.2⟩).commRingCatIsoToRingEquiv
+    |>.map_eq_zero_iff]
+  change _ = _ ↔ _
+  erw [hx]
+  exact Ideal.Quotient.eq_zero_iff_mem
+
 end IdealSheafData
+
+/-! ### The relative affine line is the affine line -/
+
+/-- `Spec R[t] ≅ 𝔸¹_{Spec R}`: the morphism `Spec R[t] ⟶ 𝔸¹_{Spec R}` given by the coordinate `t`
+is an isomorphism. -/
+lemma isIso_homOfVector_specPolynomial (R : Type u) [CommRing R] :
+    IsIso (AffineSpace.homOfVector (Spec.map (CommRingCat.ofHom (C : R →+* R[X])))
+      fun _ : ULift.{u} (Fin 1) ↦ (ΓSpecIso (.of R[X])).inv Polynomial.X) := by
+  let e := (MvPolynomial.uniqueAlgEquiv R (ULift.{u} (Fin 1))).toRingEquiv.toCommRingCatIso
+  have : AffineSpace.homOfVector (Spec.map (CommRingCat.ofHom (C : R →+* R[X])))
+      (fun _ : ULift.{u} (Fin 1) ↦ (ΓSpecIso (.of R[X])).inv Polynomial.X) =
+      Spec.map e.hom ≫ (AffineSpace.SpecIso (ULift.{u} (Fin 1)) (.of R)).inv := by
+    refine AffineSpace.hom_ext ?_ fun i ↦ ?_
+    · simp only [AffineSpace.homOfVector_over, Category.assoc, AffineSpace.SpecIso_inv_over]
+      rw [← Spec.map_comp]
+      congr 1
+      ext x
+      simp [e]
+    · rw [AffineSpace.homOfVector_appTop_coord, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+        AffineSpace.SpecIso_inv_appTop_coord]
+      have := congr($(Scheme.ΓSpecIso_inv_naturality e.hom) (MvPolynomial.X i))
+      refine Eq.trans ?_ (this.trans rfl)
+      change _ = (ΓSpecIso (.of R[X])).inv (e.hom (MvPolynomial.X i))
+      congr 1
+      simp [e]
+  rw [this]
+  infer_instance
 
 end AlgebraicGeometry.Scheme

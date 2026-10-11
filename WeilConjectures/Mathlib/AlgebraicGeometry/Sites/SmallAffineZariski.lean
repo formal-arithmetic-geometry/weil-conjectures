@@ -299,6 +299,32 @@ lemma toBase_of_forall (P : MorphismProperty Scheme.{u}) [IsZariskiLocalAtTarget
   rw [P.cancel_right_of_respectsIso]
   exact h U
 
+
+set_option backward.isDefEq.respectTransparency false in
+/-- A property of morphisms which is local on the target holds for the morphism of relative
+spectra induced by `φ : F ⟶ G` as soon as it holds for the maps `Spec G(U) ⟶ Spec F(U)`. -/
+lemma relativeGluingMap_of_forall (P : MorphismProperty Scheme.{u}) [IsZariskiLocalAtTarget P]
+    {β : (toOpensFunctor X).op ⋙ X.presheaf ⟶ G} (H' : β.Coequifibered) (φ : F ⟶ G)
+    (hφ : α ≫ φ = β) (h : ∀ U : X.AffineZariskiSite, P (Spec.map (φ.app (.op U)))) :
+    P (relativeGluingMap H H' φ) := by
+  refine IsZariskiLocalAtTarget.of_openCover (relativeGluingData H).cover fun U ↦ ?_
+  have hU := isPullback_ι_relativeGluingMap H H' φ hφ U
+  have e : Arrow.mk ((relativeGluingData H).cover.pullbackHom (relativeGluingMap H H' φ) U) ≅
+      Arrow.mk (Spec.map (φ.app (.op U))) :=
+    Arrow.isoMk hU.isoPullback.symm (Iso.refl _) (by
+      simp only [Arrow.mk_hom, Iso.symm_hom, Iso.refl_hom, Category.comp_id, Cover.pullbackHom]
+      exact hU.isoPullback_inv_snd)
+  rw [P.arrow_mk_iso_iff e]
+  exact h U
+
+/-- Two opens of a relative spectrum agree if they agree on every chart `Spec F(U)`. -/
+lemma opens_ext {W W' : (relativeGluingData H).glued.Opens}
+    (h : ∀ U, colimit.ι (relativeGluingData H).functor U ⁻¹ᵁ W =
+      colimit.ι (relativeGluingData H).functor U ⁻¹ᵁ W') : W = W' := by
+  ext x
+  obtain ⟨U, y, rfl⟩ := (relativeGluingData H).cover.exists_eq x
+  exact congr(y ∈ $(h U))
+
 end Local
 
 end AlgebraicGeometry.Scheme.AffineZariskiSite
