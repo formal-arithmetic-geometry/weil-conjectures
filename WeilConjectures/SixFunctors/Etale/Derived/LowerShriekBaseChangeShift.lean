@@ -186,7 +186,7 @@ instance commShift_derivedUpperStarLowerStarAdjunction {Z Y : Scheme.{u}} (g : Z
 instance commShift_derivedBaseChangeMap {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X}
     {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq g' f' f g) [HasSmallSiteSheafify A] :
     NatTrans.CommShift (derivedBaseChangeMap A sq) ℤ :=
-  NatTrans.CommShift.mateEquiv_natTrans (derivedUpperStarLowerStarAdjunction A f)
+  NatTrans.CommShift.mateEquiv (derivedUpperStarLowerStarAdjunction A f)
     (derivedUpperStarLowerStarAdjunction A f')
     (TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso A sq).hom)
 

@@ -176,6 +176,42 @@ theorem isFinite [LocallyOfFiniteType f₀] : IsFinite F := by
   rw [IsFinite.iff_isIntegralHom_and_locallyOfFiniteType]
   exact ⟨inferInstance, inferInstance⟩
 
+/-- The `#k`-power Frobenius is natural: if `X` is a scheme over `Spec k` and `F_X`, `F_Y` are
+the `#k`-power Frobenii of `X` and of a scheme `Y`, then every morphism `f : X ⟶ Y` satisfies
+`f ≫ F_Y = F_X ≫ f`. On an affine chart `Spec R` of `X` both sides are `r ↦ r ^ #k` followed
+by the chart (blueprint `d-relative-frob`). -/
+lemma comp_eq_comp {Y : Scheme.{u}} {F' : Y ⟶ Y} (hF' : F'.IsFrobenius (Nat.card k))
+    (f : X ⟶ Y) : f ≫ F' = F ≫ f := by
+  refine X.affineOpenCover.openCover.hom_ext _ _ fun j ↦ ?_
+  obtain ⟨φ, hφ, -⟩ := exists_specMap_pow_comp (X.affineOpenCover.f j ≫ f₀)
+  change X.affineOpenCover.f j ≫ f ≫ F' = X.affineOpenCover.f j ≫ F ≫ f
+  rw [← Category.assoc, hF' _ φ hφ, reassoc_of% (hF _ φ hφ)]
+
+/-- The `m`-th iterate of the `#k`-power Frobenius of a scheme over `Spec k` is its
+`#k ^ m`-power Frobenius (blueprint `d-relative-frob`). -/
+lemma pow (m : ℕ) : (End.asHom (End.of F ^ m)).IsFrobenius (Nat.card k ^ m) := by
+  induction m with
+  | zero =>
+    intro R t φ hφ
+    obtain rfl : φ = 𝟙 R := by ext r; simp [hφ]
+    simp [End.one_def]
+  | succ m ih =>
+    intro R t φ hφ
+    obtain ⟨ψ, hψ, -⟩ := exists_specMap_pow_comp (t ≫ f₀)
+    let χ : R ⟶ R := CommRingCat.ofHom (ψ.hom ^ m)
+    have key (n : ℕ) (r : R) : (ψ.hom ^ n) r = r ^ Nat.card k ^ n := by
+      rw [RingHom.coe_pow]
+      induction n with
+      | zero => simp
+      | succ n ihn => rw [Function.iterate_succ_apply', ihn, hψ, ← pow_mul, ← pow_succ]
+    have hχ (r : R) : χ.hom r = r ^ Nat.card k ^ m := key m r
+    obtain rfl : φ = ψ ≫ χ := by
+      ext r
+      simp [hφ, hχ, hψ, ← pow_mul, pow_succ']
+    change t ≫ End.asHom (End.of F ^ m * End.of F) = _
+    rw [End.mul_def, Spec.map_comp, Category.assoc, ← Category.assoc t, hF t ψ hψ,
+      Category.assoc, ← ih _ _ hχ, Category.assoc]
+
 end Scheme.Hom.IsFrobenius
 
 namespace Scheme.Hom.IsFrobenius

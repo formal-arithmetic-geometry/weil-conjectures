@@ -453,6 +453,7 @@ public import WeilConjectures.CategoryTheory.Abelian.PrimeFactorDevissage
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapAssoc
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
@@ -477,6 +478,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModelOfClass
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
@@ -1430,6 +1432,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLin
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
@@ -1481,6 +1484,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionRefinement
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
@@ -1506,6 +1510,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekProjection
