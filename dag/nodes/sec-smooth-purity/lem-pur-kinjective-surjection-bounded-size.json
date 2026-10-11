@@ -122,5 +122,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-sbs0052 (reviewer sub-agent of L); spot-checked: Re-push after R-sbs0044: (1) Step 1 now takes proper pi^{-1}(N') and applies the generator clause of def-sp-grothendieck-abelian, pi o phi not factoring through N' via pullback - matches Stacks proof, no lift; (2) Step 2 bounds |M'| via injection of subobjects of the quotient M' into subobjects of P by preimage, P a summand of the |N|-indexed coproduct, size as defined in lem-pur-kinjective-set-iso-classes-bounded-size; Step 3 surjectivity by the N'-summand. Statement agrees with Stacks; citer lem-pur-kinjective-acyclic-quotient-complexes-bounded-size uses exactly this (C4); no duplicate (only set-iso-classes nearby, different content). Second reading found no fault I missed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundedSubobjectSurjection",
+  "declaration": "CategoryTheory.exists_subobject_surjecting_bounded_size",
+  "file": "lean/Sheaf/CategoryTheory/BoundedSubobjectSurjection.lean",
+  "statement": "theorem exists_subobject_surjecting_bounded_size {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C] (U : C) (_hU : IsSeparator U) (M N : C) (π : M ⟶ N) [Epi π] : ∃ (M' : C) (ι : M' ⟶ M), Mono ι ∧ Epi (ι ≫ π) ∧ Cardinal.mk (Shrink.{v} (Subobject M')) ≤ Cardinal.mk (Shrink.{v} (Subobject (∐ fun _ : (Cardinal.mk (Shrink.{v} (Subobject N))).out => U)))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ksb1046"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ksb1046",
+  "group": "K1",
+  "result": "fix",
+  "note": "Grothendieck abelian C (IsGrothendieckAbelian.{v}), generator IsSeparator U, arbitrary epi π:M⟶N; conclusion mono ι:M'⟶M, Epi (ι≫π), |M'| ≤ |∐_{|N|.out} U| with size = #Shrink.{v}(Subobject -) as in E1; FIX: let-bound size/c inlined to the sibling form"
  }
 }
