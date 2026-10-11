@@ -181,5 +181,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps follow Stacks 0912: finite free resolution (new 00LP node), Tor_1(Q, M_n) = Tor_1(Q, A/I^n) tensor M_n by flatness, essentially-zero Tor systems (new 0911 node), Mittag-Leffler (new 070E node, stated with ML and essentially constant written out), finitely-generated-ideal criterion leaf, Tor long exact sequence in the first variable (new node, 00M0 + 00M3). Tor via the Tor definition leaf. Tags 0912, 0911, 070E, 00HD, 00LP, 00M0, 00M3, 02N0, 05PU verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LimitFlatModules",
+  "declaration": "ModuleCat.limit_flat_of_flat_quotients",
+  "file": "lean/Sheaf/RingTheory/LimitFlatModules.lean",
+  "statement": "theorem limit_flat_of_flat_quotients (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (F : ℕᵒᵖ ⥤ ModuleCat.{v} A) [∀ n : ℕ, Module (A ⧸ I ^ (n + 1)) (F.obj (op n))] [∀ n : ℕ, IsScalarTower A (A ⧸ I ^ (n + 1)) (F.obj (op n))] (hflat : ∀ n : ℕ, Module.Flat (A ⧸ I ^ (n + 1)) (F.obj (op n))) (hsurj : ∀ n : ℕ, Function.Surjective (F.map (homOfLE (Nat.le_succ n)).op).hom) : Module.Flat A (limit F : ModuleCat.{v} A) ∧ ∀ (Q : Type w) [AddCommGroup Q] [Module A Q] [Module.Finite A Q], Function.Injective (LinearMap.pi fun n : ℕ ↦ (limit.π F (op n)).hom.lTensor Q) ∧ ∀ x : ∀ n : ℕ, TensorProduct A Q (F.obj (op n)), (∀ n : ℕ, (F.map (homOfLE (Nat.le_succ n)).op).hom.lTensor Q (x (n + 1)) = x n) → ∃ y : TensorProduct A Q (limit F : ModuleCat.{v} A), ∀ n : ℕ, (limit.π F (op n)).hom.lTensor Q y = x n",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lfm1114",
+  "group": "F1",
+  "result": "pass",
+  "note": "Noetherian A, I, F: ℕᵒᵖ⥤ModuleCat with op n = M_{n+1}; Module(A⧸I^(n+1))+IsScalarTower = I^(n+1)-annihilation with induced action (checked: forces a•m=0 for a∈I); Module.Flat over quotient; adjacent surjections; Module.Flat A (limit F); tensor comparison injective into ∏ and onto compatible sequences for every Module.Finite Q; names #check'd fully qualified; universes u,v,w independent, ℕ index nonempty"
  }
 }
