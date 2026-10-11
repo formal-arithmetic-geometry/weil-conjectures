@@ -523,7 +523,6 @@ lemma natTrans_app_comp_map_map {𝒜 ℬ ℬ' 𝒞 : Type*} [Category* 𝒜] [C
     β.app A ≫ G₂.map (G₁.map f) = F₂.map (F₁.map f) ≫ β.app A' :=
   (β.naturality f).symm
 
-set_option maxHeartbeats 60000 in
 /-- The derived base-change maps over `T` and over `T'` commute with the comparison maps of a
 complex `K` on `T` and a complex `L` on `T'` attached to a morphism `ψ : k^* K ⟶ L`. -/
 theorem Etale.baseChange_app_comp_pushforward {p : X ⟶ S} {g : T ⟶ S}
@@ -576,7 +575,6 @@ lemma Etale.upperStar_map_singleLowerStarComparison (e : Y ⟶ T) (k : T' ⟶ T)
               ((Etale.upperStarLowerStarAdjunction _ k).counit.app N))) :=
   CategoryTheory.Functor.map_comp _ _ _
 
-set_option maxHeartbeats 60000 in
 /-- The base-change maps commute with the comparisons of the sources and of the targets for a
 sheaf pushed forward along `k : T' ⟶ T`. -/
 theorem Etale.baseChangeHomologyMap_comp_pushforward {p : X ⟶ S} {g : T ⟶ S}
@@ -734,6 +732,128 @@ lemma Etale.mono_targetPushforward (e : Y ⟶ T) (h : Y ⟶ X) (k : T' ⟶ T) (a
     · rw [Functor.map_comp]
       infer_instance
   infer_instance
+
+/-- **The transition maps of the targets compose**, on the degree-`q` homology at a sheaf placed
+in degree `0`: the transition from `T` to `T₂`, followed by the transition from `T₂` to `T₁`
+(conjugated by the identifications of pulled back sheaves placed in degree `0`), is the
+transition from `T` to `T₁`. -/
+lemma Etale.baseChangeTargetTransition_comp_eq {X T Y T₂ Y₂ T₁ Y₁ : Scheme.{u}} {e : Y ⟶ T}
+    {h : Y ⟶ X} (q : ℤ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (f₂ : T₂ ⟶ T)
+    {e₂ : Y₂ ⟶ T₂} {h₂ : Y₂ ⟶ X} (a₂ : Y₂ ⟶ Y) (wa₂ : a₂ ≫ e = e₂ ≫ f₂) (wh₂ : a₂ ≫ h = h₂)
+    (i : T₁ ⟶ T₂) {e₁ : Y₁ ⟶ T₁} {h₁ : Y₁ ⟶ X} (a₁ : Y₁ ⟶ Y) (wa₁ : a₁ ≫ e = e₁ ≫ i ≫ f₂)
+    (wh₁ : a₁ ≫ h = h₁) (a' : Y₁ ⟶ Y₂) (wa' : a' ≫ e₂ = e₁ ≫ i) (wh' : a' ≫ h₂ = h₁)
+    (ha : a' ≫ a₂ = a₁) :
+    Etale.baseChangeTargetTransition Λ e h q f₂ a₂ e₂ h₂ wa₂ wh₂ F ≫
+        (DerivedCategory.Plus.homologyFunctor _ q).map
+          (R+((h₂)_*[ModuleCat.{u + 1} Λ]).map (D+((e₂)^*[ModuleCat.{u + 1} Λ]).map
+            ((((f₂)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).inv.app F)) ≫
+          Etale.targetTransitionPlus Λ e₂ h₂ i a' e₁ h₁ wa' wh'
+            (D+((f₂)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≫
+          R+((h₁)_*[ModuleCat.{u + 1} Λ]).map (D+((e₁)^*[ModuleCat.{u + 1} Λ]).map
+            ((Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) i f₂ (i ≫ f₂) rfl).inv.app
+                ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ≫
+              ((((i ≫ f₂))^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app
+                F ≫ 𝟙 ((DerivedCategory.Plus.singleFunctor _ 0).obj
+                  (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F))))) =
+      Etale.baseChangeTargetTransition Λ e h q (i ≫ f₂) a₁ e₁ h₁ wa₁ wh₁ F := by
+  rw [Etale.baseChangeTargetTransition_eq, Etale.baseChangeTargetTransition_eq,
+    ← Functor.map_comp]
+  congr 1
+  have hT := Etale.targetTransitionPlus_comp Λ e h f₂ a₂ e₂ h₂ wa₂ wh₂ i a' e₁ h₁ wa' wh'
+    (i ≫ f₂) a₁ ha rfl wa₁ wh₁ ((DerivedCategory.Plus.singleFunctor _ 0).obj F)
+  simp only [Category.assoc, Functor.map_comp] at hT ⊢
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.comp_id]
+  rw [← Functor.map_comp_assoc (R+((h₂)_*[ModuleCat.{u + 1} Λ])),
+    ← Functor.map_comp (D+((e₂)^*[ModuleCat.{u + 1} Λ])), Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [reassoc_of% hT]
+
+omit [CommRing Λ] in
+/-- Two equal composites stay equal under a functor, followed by a common morphism. -/
+lemma map_comp_map_comp_map_comp_eq {ℬ 𝒞 𝒟 : Type*} [Category* ℬ] [Category* 𝒞] [Category* 𝒟]
+    (R : ℬ ⥤ 𝒞) (G : 𝒞 ⥤ 𝒟) {A B C B' : 𝒞} {L : ℬ} {E : 𝒟} {a : A ⟶ B} {b : B ⟶ C}
+    {c : C ⟶ R.obj L} {x : A ⟶ B'} {y : B' ⟶ R.obj L} (d : (R ⋙ G).obj L ⟶ E) (w : x ≫ y = a ≫ b ≫ c) :
+    G.map a ≫ G.map b ≫ G.map c ≫ d = G.map x ≫ G.map y ≫ d := by
+  simpa using congrArg (fun f ↦ G.map f ≫ d) w.symm
+
+/-- **Decomposition of the transition maps along a morphism `i : T₁ ⟶ T₂`.** The transition map
+from `T` to `T₁` is the transition map from `T` to `T₂`, followed by `R^q h₂_* e₂⁻¹` of a map
+`β : f₂^* F ⟶ i_*((i ≫ f₂)^* F)` whose adjoint is an isomorphism, followed by the comparison of
+the targets for the pushed forward sheaf `i_*((i ≫ f₂)^* F)`. -/
+theorem Etale.exists_baseChangeTargetTransition_comp_eq {X T Y T₂ Y₂ T₁ Y₁ : Scheme.{u}}
+    {e : Y ⟶ T} {h : Y ⟶ X} (q : ℤ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (f₂ : T₂ ⟶ T) {e₂ : Y₂ ⟶ T₂} {h₂ : Y₂ ⟶ X} (a₂ : Y₂ ⟶ Y) (wa₂ : a₂ ≫ e = e₂ ≫ f₂)
+    (wh₂ : a₂ ≫ h = h₂) (i : T₁ ⟶ T₂) {e₁ : Y₁ ⟶ T₁} {h₁ : Y₁ ⟶ X} (a₁ : Y₁ ⟶ Y)
+    (wa₁ : a₁ ≫ e = e₁ ≫ i ≫ f₂) (wh₁ : a₁ ≫ h = h₁) (a' : Y₁ ⟶ Y₂) (wa' : a' ≫ e₂ = e₁ ≫ i)
+    (wh' : a' ≫ h₂ = h₁) (ha : a' ≫ a₂ = a₁) (sqk : CommSq e₁ a' i e₂) :
+    ∃ β : ((f₂)^*[ModuleCat.{u + 1} Λ]).obj F ⟶
+        ((i)_*[ModuleCat.{u + 1} Λ]).obj (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F),
+      IsIso (((i)^*[ModuleCat.{u + 1} Λ]).map β ≫
+        (Etale.upperStarLowerStarAdjunction _ i).counit.app _) ∧
+      Etale.baseChangeTargetTransition Λ e h q f₂ a₂ e₂ h₂ wa₂ wh₂ F ≫
+          (DerivedCategory.Plus.homologyFunctor _ q).map
+            (R+((h₂)_*[ModuleCat.{u + 1} Λ]).map
+                (D+((e₂)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.singleFunctor _ 0).map β) ≫
+                  D+((e₂)^*[ModuleCat.{u + 1} Λ]).map (Etale.singleLowerStarComparison Λ i
+                    (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F)) ≫
+                  (Etale.baseChange (ModuleCat.{u + 1} Λ) sqk).app
+                    ((DerivedCategory.Plus.singleFunctor _ 0).obj
+                      (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F))) ≫
+              (Etale.lowerStarPlusCompIso Λ a' h₂ h₁ wh').hom.app
+                (D+((e₁)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj
+                  (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F)))) =
+        Etale.baseChangeTargetTransition Λ e h q (i ≫ f₂) a₁ e₁ h₁ wa₁ wh₁ F := by
+  obtain ⟨φ, hφ⟩ := (Etale.bijective_comp_singleLowerStarComparison Λ i
+    (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F) (((f₂)^*[ModuleCat.{u + 1} Λ]).obj F)).2
+    ((((f₂)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).inv.app F ≫
+      (Etale.derivedUpperStarLowerStarAdjunctionPlus _ i).unit.app
+        (D+((f₂)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≫
+      (R+((i)_*[ModuleCat.{u + 1} Λ]).map
+        ((Etale.upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) i f₂ (i ≫ f₂) rfl).inv.app
+            ((DerivedCategory.Plus.singleFunctor _ 0).obj F) ≫
+          ((((i ≫ f₂))^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F ≫
+            𝟙 ((DerivedCategory.Plus.singleFunctor _ 0).obj (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F)) :
+          D+((i)^*[ModuleCat.{u + 1} Λ]).obj (D+((f₂)^*[ModuleCat.{u + 1} Λ]).obj
+            ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ⟶ _) :
+        _ ⟶ _))
+  obtain ⟨β, rfl⟩ := (DerivedCategory.Plus.singleFunctor _ 0).map_surjective φ
+  simp only at hφ
+  refine ⟨β, ?_, ?_⟩
+  · have h₁ := Etale.singleFunctor_map_comp_singleLowerStarComparison Λ i
+      (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F) β
+    have hn := (Etale.derivedUpperStarLowerStarAdjunctionPlus _ i).unit.naturality
+      ((((f₂)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).inv.app F)
+    simp only [Functor.id_map, Functor.comp_map] at hn
+    rw [h₁, reassoc_of% hn, ← Functor.map_comp] at hφ
+    erw [← Adjunction.homEquiv_unit, ← Adjunction.homEquiv_unit] at hφ
+    have hφ' := ((Etale.derivedUpperStarLowerStarAdjunctionPlus _ i).homEquiv _ _).injective hφ
+    rw [← Iso.app_hom, ← Iso.eq_inv_comp] at hφ'
+    have : IsIso ((DerivedCategory.Plus.singleFunctor _ 0).map
+        (((i)^*[ModuleCat.{u + 1} Λ]).map β ≫
+          (Etale.upperStarLowerStarAdjunction _ i).counit.app _)) := by
+      rw [hφ']
+      erw [Category.comp_id]
+      infer_instance
+    exact isIso_of_fully_faithful (DerivedCategory.Plus.singleFunctor _ 0) _
+  · rw [← Etale.baseChangeTargetTransition_comp_eq Λ q F f₂ a₂ wa₂ wh₂ i a₁ wa₁ wh₁ a' wa' wh' ha]
+    congr 1
+    congr 1
+    rw [Etale.targetTransitionPlus_comp_map Λ e₂ h₂ i a' e₁ h₁ wa' wh' sqk,
+      ← Functor.map_comp_assoc (R+((h₂)_*[ModuleCat.{u + 1} Λ]))]
+    refine Eq.trans ?lhs (Eq.trans (congrArg (fun x ↦ R+((h₂)_*[ModuleCat.{u + 1} Λ]).map x ≫
+      (Etale.lowerStarPlusCompIso Λ a' h₂ h₁ wh').hom.app
+        (D+((e₁)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj
+          (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F))))
+      (map_comp_map_comp_map_comp_eq R+((i)_*[ModuleCat.{u + 1} Λ]) D+((e₂)^*[ModuleCat.{u + 1} Λ])
+        (A := (DerivedCategory.Plus.singleFunctor _ 0).obj (((f₂)^*[ModuleCat.{u + 1} Λ]).obj F))
+        (B := ?oB) (C := ?oC) (B' := ?oB') (L := ?oL)
+        (E := R+((a')_*[ModuleCat.{u + 1} Λ]).obj (D+((e₁)^*[ModuleCat.{u + 1} Λ]).obj
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj (((i ≫ f₂)^*[ModuleCat.{u + 1} Λ]).obj F))))
+        (a := ?ca) (b := ?cb) (c := ?cc) (x := ?cx) (y := ?cy) ?dd ?hwφ).symm) ?rhs)
+    case lhs => rfl
+    case rhs => rfl
+    case hwφ => exact hφ
+
 
 end Pushforward
 
