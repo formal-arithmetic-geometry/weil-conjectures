@@ -27,7 +27,7 @@
 | `lem-pc-dq-coherator-adjunction` | 1 | state |
 | `lem-pc-finite-flat-pushforward-locally-free` | 1 | state |
 | `lem-pc-flf-properties` | 1 | state |
-| `lem-pc-fp-module-map-descent` | 1 | state |
+| `lem-pc-fp-relation-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
 | `lem-pc-module-tor-amplitude-flat-model` | 1 | state |
 | `lem-pc-qcoh-truncation-derived-limit` | 1 | state |
@@ -58,11 +58,11 @@
 | `lem-sc-torsion-sections-generic` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-affine-conormal-sections` | 1 | state |
 | `lem-weil-pbc-affine-module-correspondence` | 1 | state |
 | `lem-weil-pbc-affine-morphism-relative-spec` | 1 | state |
 | `lem-weil-pbc-affine-pushforward-base-change` | 1 | state |
 | `lem-weil-pbc-algebra-directed-colimit-finite-type` | 1 | state |
+| `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
 | `lem-weil-pbc-closed-immersion-pushforward-annihilated` | 1 | state |
 | `lem-weil-pbc-coherent-generic-point-ideal-inclusion` | 1 | state |
 | `lem-weil-pbc-coherent-local-isomorphism` | 1 | state |
@@ -514,7 +514,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 601 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 599 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
