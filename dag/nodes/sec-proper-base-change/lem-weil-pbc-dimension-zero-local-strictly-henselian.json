@@ -167,5 +167,25 @@
   "by": "L",
   "result": "pass",
   "note": "Five steps along Stacks 06RS and 04GG (10)=>(1): primes of a finite algebra over a zero-dimensional local ring (new Mathlib leaf lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum: unique_of_ringKrullDimLE_zero Zero.lean:178, discreteTopology_iff_finite_and_krullDimLE_zero Topology.lean:301, QuasiFinite instance Basic.lean:107, discreteTopology_primeSpectrum :247, eq_maximalIdeal_of_isPrime Zero.lean:123, nilradical_eq_sInf; verified), product of localizations (new Mathlib leaf lem-weil-pbc-product-of-localizations-at-maximal: MaximalSpectrum.toPiLocalizationEquiv Topology.lean:772 @[stacks 00JA] with discreteTopology_iff_finite_isMaximal_and_sInf_le_nilradical :309; verified), reduction factorwise, idempotents of a product of local rings, the residue field hypothesis. Alternative noted by the worker: existsUnique_isIdempotentElem_eq_of_ker_isNilpotent (Idempotents.lean:373, Stacks 00J9) with m nil would make the item nearly a leaf; the 06RS route was kept."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictlyHenselianOfDimensionZero",
+  "declaration": "isStrictlyHenselianLocalRing_of_ringKrullDim_eq_zero",
+  "file": "lean/Sheaf/RingTheory/StrictlyHenselianOfDimensionZero.lean",
+  "statement": "theorem isStrictlyHenselianLocalRing_of_ringKrullDim_eq_zero (R : Type u) [CommRing R] [IsLocalRing R] (hdim : ringKrullDim R = 0) [IsSepClosed (IsLocalRing.ResidueField R)] : IsStrictlyHenselianLocalRing R ∧ ∀ (B : Type v) [CommRing B] [Algebra R B] [Module.Finite R B], ∀ e : B ⧸ (IsLocalRing.maximalIdeal R).map (algebraMap R B), IsIdempotentElem e → ∃! b : B, IsIdempotentElem b ∧ Ideal.Quotient.mk ((IsLocalRing.maximalIdeal R).map (algebraMap R B)) b = e",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Reviewer fix: the dimension-zero hypothesis is stated with the recorded ringKrullDim (def-weil-pbc-krull-dimension-ring) as (hdim : ringKrullDim R = 0), replacing the Mathlib class Ring.KrullDimLE 0 R (one dimension notion per project); for a local ring both say m is the only prime. Declaration renamed accordingly.",
+  "fixed_by": "R-dzh0945"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dzh0945",
+  "group": "J1",
+  "result": "fix",
+  "note": "R comm local (IsLocalRing), only prime m as ringKrullDim R = 0 (fixed from Ring.KrullDimLE 0), IsSepClosed residue field, conclusion IsStrictlyHenselianLocalRing (recorded dep) plus node's inline idempotent clause: all finite B : Type v, mB = Ideal.map, ∃! idempotent lift; B=0 allowed"
  }
 }
