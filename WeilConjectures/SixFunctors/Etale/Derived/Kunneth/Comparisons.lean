@@ -19,6 +19,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
@@ -173,6 +174,59 @@ theorem nonempty_iso_externalProduct_derivedHom_of_isDualizable [UpperStarPreser
   let _ := leftDerivedUpperStarMonoidal A (pullback.snd c₁ c₂)
   exact nonempty_iso_tensorObj_map_ihom_obj (L((pullback.fst c₁ c₂)^*[A]))
     (L((pullback.snd c₁ c₂)^*[A])) h₁ h₂
+
+/-- The product `f₁ ×_S f₂` of two open immersions over `S` is an open immersion: it is the
+composite of the base changes `X₁ ×_S f₂` and `f₁ ×_S Y₂`. -/
+lemma isOpenImmersion_mapOverBase {S X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S)
+    (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [IsOpenImmersion f₁] [IsOpenImmersion f₂] :
+    IsOpenImmersion (pullback.mapOverBase f₁ f₂ b₁ b₂) := by
+  have h : pullbackMapRight (f₁ ≫ b₁) b₂ f₂ ≫ pullbackMapLeft b₁ b₂ f₁ =
+      pullback.mapOverBase f₁ f₂ b₁ b₂ := by
+    apply pullback.hom_ext <;> simp
+  have : IsOpenImmersion (pullbackMapLeft b₁ b₂ f₁) :=
+    MorphismProperty.of_isPullback (P := @IsOpenImmersion)
+      (isPullback_pullbackMapLeft b₁ b₂ f₁) inferInstance
+  have : IsOpenImmersion (pullbackMapRight (f₁ ≫ b₁) b₂ f₂) :=
+    MorphismProperty.of_isPullback (P := @IsOpenImmersion)
+      (isPullback_pullbackMapRight (f₁ ≫ b₁) b₂ f₂) inferInstance
+  rw [← h]
+  infer_instance
+
+/-- The exceptional Künneth map `α` of `AlgebraicGeometry.Etale.HasKunnethComparisons` is an
+isomorphism for **open immersions** `f₁`, `f₂` (quasi-compact, finite coefficients):
+`Rf₁^! N₁ ⊠ Rf₂^! N₂ ≅ R(f₁ × f₂)^! (N₁ ⊠ N₂)`. For a quasi-compact open immersion the exceptional
+inverse image is the restriction
+(`AlgebraicGeometry.Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion`), and `f₁ × f₂` is again
+an open immersion, so this is the compatibility of the external product with pullbacks
+(`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp`).
+This is the étale-local case through which the blueprint proof (`prop-trf-exceptional-kunneth`)
+reduces lisse coefficients to constant ones. -/
+theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {S X₁ X₂ Y₁ Y₂ : Scheme.{u}}
+    (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S) (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)
+    [IsOpenImmersion f₁] [IsOpenImmersion f₂] [QuasiCompact f₁] [QuasiCompact f₂]
+    [HasCompactification f₁] [HasCompactification f₂]
+    [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
+    [QuasiCompact (pullback.mapOverBase f₁ f₂ b₁ b₂)]
+    (N₁ : _root_.DerivedCategory (Sheaf Y₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (N₂ : _root_.DerivedCategory (Sheaf Y₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Nonempty (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂)
+        ((R(f₁)^![ModuleCat.{u + 1} Λ]).obj N₁) ((R(f₂)^![ModuleCat.{u + 1} Λ]).obj N₂) ≅
+      (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![ModuleCat.{u + 1} Λ]).obj
+        (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ N₁ N₂)) := by
+  have := isOpenImmersion_mapOverBase b₁ b₂ f₁ f₂
+  let ψ := pullback.mapOverBase f₁ f₂ b₁ b₂
+  let e (Z W : Scheme.{u}) (j : Z ⟶ W) [IsOpenImmersion j] [QuasiCompact j]
+      [HasCompactification j] :
+      R(j)^![ModuleCat.{u + 1} Λ] ≅ L((j)^*[ModuleCat.{u + 1} Λ]) :=
+    rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j ≪≫
+      (leftDerivedUpperStarIsoMapDerivedCategory _ j).symm
+  obtain ⟨p⟩ := nonempty_iso_leftDerivedUpperStar_externalProduct_of_comp
+    (ModuleCat.{u + 1} Λ) b₁ b₂ (f₁ ≫ b₁) (f₂ ≫ b₂) f₁ f₂ ψ (by simp [ψ]) (by simp [ψ]) N₁ N₂
+  exact ⟨((derivedTensor _ _).mapIso ((L((pullback.fst (f₁ ≫ b₁) (f₂ ≫ b₂))^*[_])).mapIso
+      ((e _ _ f₁).app N₁))).app _ ≪≫
+    ((derivedTensor _ _).obj _).mapIso ((L((pullback.snd (f₁ ≫ b₁) (f₂ ≫ b₂))^*[_])).mapIso
+      ((e _ _ f₂).app N₂)) ≪≫ p.symm ≪≫ ((e _ _ ψ).app _).symm⟩
 
 /-- Blueprint `sk-thm-sf-kunneth-verdier`: Künneth–Verdier isomorphism.
 
