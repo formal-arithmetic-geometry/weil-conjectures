@@ -107,5 +107,25 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zpl1851 (reviewer sub-agent of L); spot-checked: New node lem-pc-zero-scheme-pullback-full-local-coefficient matches IsFreeGenerator.exists_pullback (ZeroLocus.lean 391-396, sorryfree OK) exactly, attached; no existing DAG node states exists_pullback (grep); item is the inline specialization used in comap_zeroLocus (line 521-525), not a separate declaration, so split is right; Step 1 = new node at W=U plus elementary restriction of generators and appLE functoriality; no cycle: new node is the full-preimage version, not a restatement; consumer lem-pc-zero-scheme-pullback cites the item, not vice versa. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.PullbackLocalCoefficient",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.IsFreeGenerator.exists_tensorPullback_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/PullbackLocalCoefficient.lean",
+  "statement": "theorem IsFreeGenerator.exists_tensorPullback_affine {X Y : Scheme.{u}} (g : Y ⟶ X) {M N : X.Modules} [M.IsInvertible] [N.IsInvertible] (φ : M ⟶ N) (U : X.affineOpens) {eM : Γ(M, U.1)} {eN : Γ(N, U.1)} (hM : IsFreeGenerator eM) (hN : IsFreeGenerator eN) {b : Γ(X, U.1)} (hb : φ.app U.1 eM = b • eN) (V : Y.affineOpens) (hVU : V.1 ≤ g ⁻¹ᵁ U.1) : ∃ (eM' : Γ((tensorPullback g).obj M, V.1)) (eN' : Γ((tensorPullback g).obj N, V.1)), IsFreeGenerator eM' ∧ IsFreeGenerator eN' ∧ ((tensorPullback g).map φ).app V.1 eM' = g.appLE U.1 V.1 hVU b • eN'",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Pullback of modules is the recorded Sheaf AlgebraicGeometry.Scheme.Modules.tensorPullback of def-pc-module-pullback (H1, 9014b8a76), not Mathlib's abstract Scheme.Modules.pullback: the node's literal 'Modules.pullback' names the cited node. Agreement with the source's Mathlib pullback (uniqueness of left adjoints) is part of the proof. Reviewer R-zlc1118 reverted the second reading's switch to Mathlib's pullback.",
+  "fixed_by": "R-zlc1118"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zlc1118",
+  "group": "E1",
+  "result": "fix",
+  "note": "g:Y->X Scheme.{u}; M N X.Modules [IsInvertible] (def-sc-invertible-module); phi; U affine, eM eN IsFreeGenerator, hb phi eM = b eN; V affine, V <= g^-1 U; exists eM' eN' free generators of (tensorPullback g).obj M/N on V with image coefficient g.appLE U V b; pullback reverted from Mathlib pullback to recorded tensorPullback"
  }
 }
