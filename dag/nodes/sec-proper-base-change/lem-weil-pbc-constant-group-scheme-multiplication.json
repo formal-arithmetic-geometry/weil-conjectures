@@ -25,7 +25,8 @@
   "def-pc-scheme",
   "lem-weil-pbc-scheme-coproduct-family",
   "def-pc-fibre-product",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "def-weil-pbc-constant-group-scheme"
  ],
  "proof": [
   {
@@ -182,5 +183,24 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps (agent proof of the facts Stacks 03YW states without proof): the W_{e,e'} clopen, disjoint and covering P from the coproduct leaf; the componentwise morphisms glue uniquely since the overlaps are empty (gluing leaf, sk-thm-reduction, a tool); pi m = rho by uniqueness; m(W_{e,e'}) in V_{e+e'}; preimages of V_d. No new nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstantGroupSchemeMultiplication",
+  "declaration": "AlgebraicGeometry.constantGroupSchemeMultiplication_properties",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantGroupSchemeMultiplication.lean",
+  "statement": "theorem constantGroupSchemeMultiplication_properties : (∀ ij : E × E, IsOpen (constantGroupSchemePairComponent T E ij.1 ij.2) ∧ IsClosed (constantGroupSchemePairComponent T E ij.1 ij.2)) ∧ (∀ ij ij' : E × E, ij ≠ ij' → Disjoint (constantGroupSchemePairComponent T E ij.1 ij.2) (constantGroupSchemePairComponent T E ij'.1 ij'.2)) ∧ (⋃ ij : E × E, constantGroupSchemePairComponent T E ij.1 ij.2 = Set.univ) ∧ ∃ m : constantGroupSchemeSquare T E ⟶ constantGroupScheme T E, (∀ ij : E × E, let j := (Scheme.Pullback.openCoverOfLeftRight (sigmaOpenCover (fun _ : E => T)) (sigmaOpenCover (fun _ : E => T)) (constantGroupSchemeProjection T E) (constantGroupSchemeProjection T E)).f ij j ≫ m = j ≫ constantGroupSchemeSquareProjection T E ≫ constantGroupSchemeIncl T E (ij.1 + ij.2)) ∧ (∀ m' : constantGroupSchemeSquare T E ⟶ constantGroupScheme T E, (∀ ij : E × E, let j := (Scheme.Pullback.openCoverOfLeftRight (sigmaOpenCover (fun _ : E => T)) (sigmaOpenCover (fun _ : E => T)) (constantGroupSchemeProjection T E) (constantGroupSchemeProjection T E)).f ij j ≫ m' = j ≫ constantGroupSchemeSquareProjection T E ≫ constantGroupSchemeIncl T E (ij.1 + ij.2)) → m' = m) ∧ m ≫ constantGroupSchemeProjection T E = constantGroupSchemeSquareProjection T E ∧ (∀ ij : E × E, Set.MapsTo (m : constantGroupSchemeSquare T E → constantGroupScheme T E) (constantGroupSchemePairComponent T E ij.1 ij.2) (constantGroupSchemeComponent T E (ij.1 + ij.2))) ∧ (∀ d : E, m ⁻¹' (constantGroupSchemeComponent T E d) = ⋃ ij : {ij : E × E // ij.1 + ij.2 = d}, constantGroupSchemePairComponent T E ij.1.1 ij.1.2)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cgm1527"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cgm1527",
+  "group": "H1",
+  "result": "fix",
+  "note": "T scheme, E AddCommGroup with K1 Small.{u}; T_E/iota/pi/V_e/P/rho/W from landed ConstantGroupScheme (pullback); (a) clopen, disjoint for ij≠ij', union=univ; (b) restriction via openCoverOfLeftRight cover map (image W_{e,e'}) and uniqueness now among all m with the restrictions (was ∃! over the conjunction with (c)); (c) m≫π=ρ, MapsTo W→V_{e+e'}, preimage over pairs summing to d"
  }
 }
