@@ -216,5 +216,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps following the proof of Algebra 00OT specialized to the maximal ideal (as 00OU says): finitely many minimal primes; opens containing m contain the primes below m (new leaf for 00ES: closure_singleton 173, le_iff_mem_closure 825, pointsEquivIrreducibleCloseds 971 in Spectrum/Prime/Topology.lean, verified by L); the lower bound through chains below m (new leaf for the height as dim R_p: ringKrullDim_eq_height, Height.lean:418 verified); the open U avoiding the components not through m; the upper bound through a minimal prime q below m (new leaf exists_minimalPrimes_le, MinimalPrime/Basic.lean:75 verified; distinct from the existing node on existence of minimal primes) and a new unsplit node for 00OS (finite type domain: dim S_m = dim S); conclusion. Statement unchanged; the source field's 00OS/00OT mix-up corrected."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ClosedPointDimensionLocalRing",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_eq_ringKrullDim_localizationAtMaximal",
+  "file": "lean/Sheaf/RingTheory/ClosedPointDimensionLocalRing.lean",
+  "statement": "theorem topologicalKrullDimAt_eq_ringKrullDim_localizationAtMaximal {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S] (hfg : ∃ (n : ℕ) (f : MvPolynomial (Fin n) k →ₐ[k] S), Function.Surjective f) (m : Ideal S) [m.IsMaximal] : topologicalKrullDimAt (⟨m, inferInstance⟩ : Spec (CommRingCat.of S)) = ringKrullDim (Localization.AtPrime m)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cpd1408",
+  "group": "M1",
+  "result": "pass",
+  "note": "field k; S CommRing k-algebra; finite generation as surjective MvPolynomial (Fin n) k →ₐ S (= Algebra.FiniteType, stmt_dep MvPolynomial); m maximal; closed point ⟨m,_⟩ of Spec S; topologicalKrullDimAt (def-kun-topological-dimension-at-point, inf over open nbhds) = ringKrullDim (Localization.AtPrime m), WithBot ℕ∞ equality"
  }
 }
