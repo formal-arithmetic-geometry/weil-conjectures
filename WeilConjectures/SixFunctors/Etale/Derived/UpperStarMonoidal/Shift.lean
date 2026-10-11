@@ -231,8 +231,10 @@ lemma leftDerivedUpperStarTensorIso_shift_right_comm (h : Y ⟶ Y) [(h)^*[A].Pre
       (leftDerivedUpperStarTensorIso A h A₁ (B⟦n⟧)).hom ≫
         ((-⊗ᴸ-(Y)[A]).obj (L((h)^*[A]).obj A₁)).map ((L((h)^*[A]).commShiftIso n).hom.app B) ≫
         (((-⊗ᴸ-(Y)[A]).obj (L((h)^*[A]).obj A₁)).commShiftIso n).hom.app _ := by
-    simpa [Functor.commShiftIso_comp_hom_app] using
-      NatTrans.shift_app_comm (leftDerivedUpperStarTensorComparisonApp A h A₁) n B
+    have := NatTrans.shift_app_comm (leftDerivedUpperStarTensorComparisonApp A h A₁) n B
+    rw [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_comp_hom_app] at this
+    simp only [Category.assoc] at this
+    exact this
   simp only [Category.assoc] at hQ
   have : NatTrans.CommShift ((-⊗ᴸ-(Y)[A]).map ψA) ℤ :=
     inferInstanceAs (NatTrans.CommShift ((curriedTensor _).map ψA) ℤ)

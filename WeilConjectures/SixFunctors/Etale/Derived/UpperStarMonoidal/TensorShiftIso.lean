@@ -93,8 +93,10 @@ lemma leftDerivedUpperStarTensorComparison_shift_left
         ((-⊗ᴸ-(Z)[A]).map ((L((g)^*[A]).commShiftIso n).hom.app K)).app (L((g)^*[A]).obj M) ≫
         (((-⊗ᴸ-(Z)[A]).flip.obj (L((g)^*[A]).obj M)).commShiftIso n).hom.app
           (L((g)^*[A]).obj K) := by
-  simpa [Functor.commShiftIso_comp_hom_app] using
-    NatTrans.shift_app_comm (leftDerivedUpperStarTensorComparisonFlipApp A g M) n K
+  have := NatTrans.shift_app_comm (leftDerivedUpperStarTensorComparisonFlipApp A g M) n K
+  rw [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_comp_hom_app] at this
+  simp only [Category.assoc] at this
+  exact this
 
 /-- The tensor comparison of `Lg^*` commutes with a shift of the second factor. -/
 @[reassoc]
@@ -107,8 +109,10 @@ lemma leftDerivedUpperStarTensorComparison_shift_right
         ((-⊗ᴸ-(Z)[A]).obj (L((g)^*[A]).obj K)).map ((L((g)^*[A]).commShiftIso n).hom.app M) ≫
         (((-⊗ᴸ-(Z)[A]).obj (L((g)^*[A]).obj K)).commShiftIso n).hom.app
           (L((g)^*[A]).obj M) := by
-  simpa [Functor.commShiftIso_comp_hom_app] using
-    NatTrans.shift_app_comm (leftDerivedUpperStarTensorComparisonApp A g K) n M
+  have := NatTrans.shift_app_comm (leftDerivedUpperStarTensorComparisonApp A g K) n M
+  rw [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_comp_hom_app] at this
+  simp only [Category.assoc] at this
+  exact this
 
 /-- The tensor comparison of `Lg^*` is compatible with the isomorphisms
 `K⟦a⟧ ⊗ᴸ M⟦b⟧ ≅ (K ⊗ᴸ M)⟦a + b⟧` (`AlgebraicGeometry.Etale.derivedTensorShiftIso`) and the
