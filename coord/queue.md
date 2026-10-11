@@ -1,11 +1,11 @@
 # Work queue
 
-595 items; claim with `tools/claim.py next <group> [--stage N]`.
+590 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (595)
+## Stage 2: nodes to state (590)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -15,16 +15,12 @@
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
-| `lem-weil-pbc-etale-finite-pushforward-locally-constant` | 1 | state |
 | `lem-weil-pbc-exchange-identity-pasting` | 1 | state |
 | `lem-weil-pbc-finite-etale-trace-degree` | 1 | state |
 | `lem-weil-pbc-flat-completion` | 1 | state |
 | `lem-weil-pbc-flat-local-completion-iso` | 1 | state |
-| `lem-weil-pbc-flat-local-criterion-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-flat-mod-injective` | 1 | state |
 | `lem-weil-pbc-flat-smooth-fibre-smooth-at-prime` | 1 | state |
-| `lem-weil-pbc-flat-tor-ideal-criterion` | 1 | state |
-| `lem-weil-pbc-flat-unramified-formally-etale` | 1 | state |
 | `lem-weil-pbc-formal-glueing-H0-localization` | 1 | state |
 | `lem-weil-pbc-formal-glueing-canonical-maps` | 1 | state |
 | `lem-weil-pbc-fpqc-descend-finite` | 1 | state |
@@ -39,7 +35,6 @@
 | `lem-weil-pbc-free-sheaf-flat` | 1 | state |
 | `lem-weil-pbc-fs-adic-base-change` | 1 | state |
 | `lem-weil-pbc-fs-adic-complete-source-target` | 1 | state |
-| `lem-weil-pbc-fs-adic-completion` | 1 | state |
 | `lem-weil-pbc-fs-adic-field-differentials-injective` | 1 | state |
 | `lem-weil-pbc-fs-adic-field-geometrically-regular` | 1 | state |
 | `lem-weil-pbc-fs-adic-field-regular-local` | 1 | state |
