@@ -199,6 +199,29 @@ theorem map_charpolyRev_conj_eq_self_of_trace (ι : K →+* ℂ) {V₂ : Type*} 
 
 end IsAlgClosed
 
+/-- Conversely, if the images under `ι : K →+* ℂ` of the traces of the powers of `A` are real,
+then so are those of the coefficients of `det (1 - T A)`: compare `A` with the endomorphism of
+the zero space in `LinearMap.map_charpolyRev_mul_conj_eq_of_trace`. -/
+theorem conj_charpolyRev_coeff_of_trace (ι : K →+* ℂ) (A : Module.End K V)
+    (h : ∀ m, (starRingEnd ℂ) (ι (LinearMap.trace K V (A ^ m))) =
+      ι (LinearMap.trace K V (A ^ m))) (n : ℕ) :
+    (starRingEnd ℂ) (ι (A.charpolyRev.coeff n)) = ι (A.charpolyRev.coeff n) := by
+  have key := map_charpolyRev_mul_conj_eq_of_trace ι A (0 : Module.End K (Fin 0 → K))
+    fun m _ ↦ by
+      have h0 : LinearMap.trace K (Fin 0 → K) ((0 : Module.End K (Fin 0 → K)) ^ m) = 0 :=
+        (congrArg _ (Subsingleton.elim _ 0)).trans (map_zero _)
+      rw [h0, zero_sub, map_neg, map_neg, h m]
+  have h1 : (0 : Module.End K (Fin 0 → K)).charpolyRev = 1 := by
+    have hc : (0 : Module.End K (Fin 0 → K)).charpoly = 1 :=
+      Polynomial.eq_one_of_monic_natDegree_zero (LinearMap.charpoly_monic _)
+        (by rw [LinearMap.charpoly_natDegree, Module.finrank_fin_fun])
+    rw [charpolyRev_def, hc]
+    exact Polynomial.reverse_C 1
+  rw [h1, Polynomial.map_one, Polynomial.map_one, mul_one, mul_one] at key
+  revert n
+  rw [Polynomial.forall_coeff_fixed_iff_map_map]
+  exact key.symm
+
 end LinearMap
 
 /-- A finsum of elements of `K` whose images under `ι : K →+* ℂ` are real has real image. -/
