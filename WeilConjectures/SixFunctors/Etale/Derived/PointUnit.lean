@@ -105,7 +105,8 @@ theorem isGE_one_of_bijective_comp_of_isSepClosed
   · let ι : T.obj₁ ≅ T.obj₁⟦-(0 : ℤ)⟧ := ((shiftFunctorZero' _ (-(0 : ℤ)) (by simp)).app _).symm
     obtain ⟨ψ, hψ⟩ := h.2 (ι.hom ≫ g'')
     have : g'' = ι.inv ≫ ψ ≫ T.mor₁ := by
-      rw [hψ, Iso.inv_hom_id_assoc]
+      have hψ' : ψ ≫ T.mor₁ = ι.hom ≫ g'' := hψ
+      rw [hψ', Iso.inv_hom_id_assoc]
     rw [this, Category.assoc, Category.assoc, comp_distTriang_mor_zero₁₂ _ hT, comp_zero,
       comp_zero]
   · rw [DerivedCategory.TStructure.t.zero g'' n 0 hn', zero_comp]

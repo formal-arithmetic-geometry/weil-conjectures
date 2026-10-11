@@ -117,6 +117,7 @@ section InternalHom
 
 variable {P Y : HomotopyCategory C (.up ℤ)}
 
+omit [HasDerivedCategory C] [Abelian.HasFunctorialFlatResolution C] in
 /-- For `P` K-flat and `Y` K-injective, the internal hom complex `iHom(P, Y)` is K-injective:
 maps into it are maps out of `P ⊗ -` into `Y`, and `P ⊗ -` preserves quasi-isomorphisms. -/
 lemma isLocal_internalHom_obj (hP : (quasiIso C (.up ℤ)).kFlat P)
@@ -219,17 +220,19 @@ theorem isDualizable_Qh_obj_iff {P I₁ I : HomotopyCategory C (.up ℤ)}
       Category.id_comp, comp_whiskerRight_assoc, μ_natural_left_assoc, ← Functor.map_comp_assoc,
       hj, Functor.map_comp_assoc, IsIso.hom_inv_id, Category.comp_id, left_unitality]
   have key : Qh.obj P ◁ m ≫ f = (α_ _ _ _).inv ≫ e₁ ▷ Qh.obj P ≫ (λ_ _).hom := by
-    simp only [m, f, e₁, MonoidalCategory.whiskerLeft_comp_assoc, μ_natural_right_assoc,
-      ← Functor.map_comp_assoc, hχ]
-    rw [Functor.map_comp, Functor.map_comp, associativity_inv_assoc, Category.assoc,
-      μ_natural_left_assoc, Category.assoc, hunit]
+    simp only [m, f, e₁, MonoidalCategory.whiskerLeft_comp_assoc, μ_natural_right_assoc]
+    rw [← Functor.map_comp_assoc Qh (P ◁ χ) evI, hχ, Functor.map_comp, Functor.map_comp,
+      Category.assoc, Category.assoc, associativity_inv_assoc, ← μ_natural_left_assoc]
+    erw [hunit]
     simp only [comp_whiskerRight, Category.assoc]
+    rfl
   have sq : curry e₁ ▷ Qh.obj P ≫ ihomUnitTensorToIhom (Qh.obj P) (Qh.obj P) = m ≫ curry f := by
     apply uncurry_injective
-    rw [uncurry_natural_left, uncurry_natural_left, uncurry_curry, ← key, uncurry_eq,
-      MonoidalCategory.whiskerLeft_comp_assoc, whiskerLeft_ihomUnitTensorToIhom_ev,
+    rw [uncurry_natural_left, uncurry_natural_left, uncurry_curry, key, uncurry_eq,
+      whiskerLeft_ihomUnitTensorToIhom_ev,
       associator_inv_naturality_middle_assoc, ← comp_whiskerRight_assoc, ← uncurry_eq,
       uncurry_curry]
+  obtain ⟨_⟩ := nonempty_braidedCategory C
   rw [isDualizable_iff_isIso_ihomUnitTensorToIhom]
   have hθ : ihomUnitTensorToIhom (Qh.obj P) (Qh.obj P) =
       inv (curry e₁ ▷ Qh.obj P) ≫ m ≫ curry f := by
@@ -239,8 +242,8 @@ theorem isDualizable_Qh_obj_iff {P I₁ I : HomotopyCategory C (.up ℤ)}
   · intro h
     have : IsIso m := by
       have : IsIso (m ≫ curry f) := by
-        have := IsIso.comp_isIso (f := curry e₁ ▷ Qh.obj P) (h := h)
-        simpa using this
+        rw [← IsIso.hom_inv_id_assoc (curry e₁ ▷ Qh.obj P) (m ≫ curry f)]
+        infer_instance
       exact IsIso.of_isIso_comp_right m (curry f)
     exact IsIso.of_isIso_comp_left (μ Qh ((internalHom P).obj I₁) P) (Qh.map χ)
   · intro _

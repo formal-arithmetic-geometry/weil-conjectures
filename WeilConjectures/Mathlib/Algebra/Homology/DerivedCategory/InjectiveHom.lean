@@ -52,7 +52,7 @@ lemma eq_zero_of_isGE_one_of_injective {X : DerivedCategory C} [X.IsGE 1] {I : C
       ((quotientCompQhIso C).hom.app K ≫ e.inv ≫ f ≫ e'.hom)
   obtain ⟨g', rfl⟩ := (HomotopyCategory.quotient C (ComplexShape.up ℤ)).map_surjective g
   have hg' : g' = 0 := by
-    ext n : 1
+    refine HomologicalComplex.hom_ext _ _ fun n ↦ ?_
     by_cases hn : n = 0
     · subst hn
       exact (K.isZero_of_isStrictlyGE 1 0 (by omega)).eq_of_src _ _
@@ -110,6 +110,7 @@ lemma bijective_comp_singleFunctor_of_injective {E P : DerivedCategory C} [E.IsG
       · rw [hi']
         exact inferInstanceAs (Mono ((homologyFunctor C 0).map u))
       · exact mono_of_source_iso_zero _ (E.isZero_of_isLE 0 (i + 1) hi').isoZero
+  have : (Triangle.mk u v w).obj₃.IsGE 1 := hZ
   exact bijective_comp_singleFunctor_of_injective_of_isGE _ hT I
 
 end DerivedCategory

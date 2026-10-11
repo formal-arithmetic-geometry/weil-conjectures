@@ -167,7 +167,7 @@ lemma transport_map_hom_f {K K' : ProEtaleWeilSheaf k₀ l Y} (φ : K ⟶ K') :
 lemma transport_obj_str (K : ProEtaleWeilSheaf k₀ l Y) :
     ((transport θ r hθ).obj K).str =
       (transportCommIso θ r hθ).app K.carrier ≪≫ (θ.hom)_*ᵃ[l].mapIso (K.frobeniusPowIso r) := by
-  rw [transport, Functor.comp_obj, IsoAlgebra.mapOfNatIso_obj_str, powFunctor_obj_str]
+  ext
   rfl
 
 instance : (transport (l := l) θ r hθ).Additive := by
