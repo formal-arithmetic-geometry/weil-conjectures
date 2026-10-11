@@ -1,11 +1,11 @@
 # Work queue
 
-467 items; claim with `tools/claim.py next <group> [--stage N]`.
+464 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (467)
+## Stage 2: nodes to state (464)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -42,7 +42,6 @@
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
 | `lem-sc-pseudo-coherent-qcoh` | 1 | state |
 | `lem-sc-qc-open-derived-lift` | 1 | state |
-| `lem-sc-regular-curve-torsionfree-free` | 1 | state |
 | `lem-sc-top-dimensional-reduction-intersection` | 1 | state |
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
@@ -54,8 +53,6 @@
 | `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
-| `lem-weil-pbc-normalization-in-residue-field-extension` | 1 | state |
-| `lem-weil-pbc-p-basis-exists` | 1 | state |
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1 | state |
 | `lem-weil-pbc-p1-power-affine-charts` | 1 | state |
