@@ -40,7 +40,10 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
                         unless the record file renames it), <item>.lean-record.json (keys merged over the item's `lean`,
                         theirs winning; `by`, `date` stay), <new node id>.json (replaces that new node file whole),
                         <item>.report.md (replaces the report), <item>.statement-change.json (replaces the item's
-                        statement_change). A changed record gets `fixed_by: <ID>`; the whole delivery is checked
+                        statement_change), lean/Sheaf/<Topic>/<Name>.lean (a NEW module, at its library path, on neither
+                        the branch nor sheaf-dag: a record turned from `existing: true` into a new statement; the record
+                        file or new node file gives existing: false, module, file = that path, declaration; it is landed
+                        like a delivered module). A changed record gets `fixed_by: <ID>`; the whole delivery is checked
                         again on the fixed versions. A CORRECTED item (coord/STATE.md, STAGE 2 STATEMENT CORRECTION;
                         node_fields.check_statement_change) gets statement, stmt_deps, proof, proof_deps and
                         statement_change from the branch (refused if they moved on sheaf-dag since the base), and
@@ -660,8 +663,10 @@ def cmd_merge2(o):
         nfix, fixnotes = 0, []
         if o.apply_fixes:
             # DIR: <basename>.lean for any module of the delivery, <item>.lean-record.json (the item's record),
-            # <new node id>.json (a new node file, replaced whole), <item>.report.md. The delivery is then read and
-            # checked again on the fixed versions.
+            # <new node id>.json (a new node file, replaced whole), <item>.report.md, and (2026-10-11) a NEW module
+            # lean/Sheaf/<Topic>/<Name>.lean at its library path, for a record the fix turns from `existing: true` into
+            # a new statement (the item's lean-record.json or a new node's json gives existing:false and lean.file =
+            # that path). The delivery is then read and checked again on the fixed versions.
             fixdir = pathlib.Path(o.apply_fixes).resolve()
             if not fixdir.is_dir():
                 raise Fail(f"--apply-fixes {fixdir}: no such directory")
@@ -671,9 +676,20 @@ def cmd_merge2(o):
             rec_name, rep_name = f"{item}.lean-record.json", f"{item}.report.md"
             sc_name = f"{item}.statement-change.json"
             texts, override, nodefix, overrides, scfix = {}, None, {}, {}, None
+            delivered = {m["file"] for m in D["modules"]}
+            added_mods = set()
             for p in sorted(x for x in fixdir.rglob("*") if x.is_file()):
                 r = p.relative_to(fixdir).as_posix()
-                if r in bybase:
+                if r in delivered:
+                    texts[r] = p.read_text()
+                elif r.startswith("lean/Sheaf/") and r.endswith(".lean"):
+                    # a new module added by the fix (existing: true -> a new statement)
+                    if G.show(br, r) is not None or exists_at("HEAD", r):
+                        raise Fail(f"--apply-fixes: {r}: a new module of a fix must not exist on {br} or {MAIN} "
+                                   "(fix a delivered module by DIR/<basename>.lean)")
+                    texts[r] = p.read_text()
+                    added_mods.add(r)
+                elif r in bybase:
                     if len(bybase[r]) > 1:
                         raise Fail(f"--apply-fixes: {r}: several modules of the delivery have this basename")
                     texts[bybase[r][0]["file"]] = p.read_text()
@@ -700,7 +716,8 @@ def cmd_merge2(o):
                 else:
                     raise Fail(f"--apply-fixes: {r}: a stage-2 fix is only DIR/<basename of a module>.lean "
                                f"({', '.join(sorted(bybase)) or 'no module'}), DIR/{rec_name}, DIR/{sc_name}, DIR/<new node id>.json "
-                               f"({', '.join(D['new']) or 'no new node'}) or DIR/{rep_name}")
+                               f"({', '.join(D['new']) or 'no new node'}), DIR/{rep_name} or a new module "
+                               "DIR/lean/Sheaf/<Topic>/<Name>.lean")
                 nfix += 1
             # the node files with their refitted records
             nodes = {item: (D["node_path"], json.loads(json.dumps(D["node"])))}
@@ -718,9 +735,9 @@ def cmd_merge2(o):
                 rec = nd.get("lean")
                 if not isinstance(rec, dict):
                     continue
-                f = rec.get("file")
-                fixed = f in texts
                 ov = override if nid == item else None
+                f = (ov or {}).get("file", rec.get("file"))
+                fixed = f in texts
                 if not fixed and ov is None:
                     continue
                 text = texts.get(f) if fixed else (G.show(br, f) if f else None)
@@ -733,6 +750,13 @@ def cmd_merge2(o):
                     overrides[path] = dump(nd)
             for fpath, text in texts.items():
                 overrides[fpath] = text
+            owned = {(nd.get("lean") or {}).get("file") for _, nd in nodes.items() if isinstance(nd.get("lean"), dict)}
+            orphan = sorted(added_mods - owned)
+            if orphan:
+                raise Fail(f"--apply-fixes: new module(s) {', '.join(orphan)}: no fixed record has it as lean.file "
+                           f"(give existing: false, module, file, declaration in DIR/{rec_name} or DIR/<new node id>.json)")
+            for r in sorted(added_mods):
+                fixnotes.append(f"new module {r} added by the fix")
             D = s2.read_delivery(G, br, base, group, item, overrides=overrides, drop=drop)
         fails = list(D["fails"])
         if fails:
