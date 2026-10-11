@@ -22,6 +22,10 @@ change in `B`. For the standard pair this is
 - `AlgebraicGeometry.Scheme.Hom.isPullback_baseChangeSection`
 - `AlgebraicGeometry.Scheme.Hom.ker_baseChangeSection`
 - `AlgebraicGeometry.Scheme.IdealSheafData.comap_eq_ofIdealTop`
+- `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_deformationSpaceComap`: along an open
+  immersion `h : X' ⟶ X`, `D_{h^* I} X' = D_I X ×_X X'`
+- `AlgebraicGeometry.Scheme.Hom.exists_isPullback_deformationSpace_baseChange_of_isOpenImmersion`:
+  blueprint `sk-lem-geometry` (5) for an open immersion `b : B' ⟶ B`
 - `AlgebraicGeometry.Scheme.Hom.exists_isPullback_deformationSpace_baseChange` (unfinished)
 -/
 
@@ -233,4 +237,124 @@ lemma isPullback_deformationSpaceComap :
     from (Scheme.Hom.isoImage_hom_ι h U.1).symm]
   exact this
 
+variable {B B' : Scheme.{u}}
+
+omit [IsOpenImmersion h] in
+lemma deformationSpaceProj_over' (g : X ⟶ B) :
+    (I.deformationSpaceToPolynomialSpec ≫ X.polynomialSpecToAffineSpace ≫
+      AffineSpace.map (ULift.{u} (Fin 1)) g) ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B =
+      (relativeGluingData I.coequifibered_toReesPresheaf).toBase ≫ g := by
+  rw [Category.assoc, Category.assoc, AffineSpace.map_over, polynomialSpecToAffineSpace_over_assoc,
+    deformationSpaceToPolynomialSpec,
+    relativeGluingMap_toBase_assoc _ _ _ I.toPolynomialPresheaf_comp_polynomialToRees]
+
+set_option backward.isDefEq.respectTransparency false in
+omit [IsOpenImmersion h] in
+lemma ι_deformationSpaceProj_appTop_coord (g : X ⟶ B) (U : X.AffineZariskiSite) (i) :
+    (colimit.ι (relativeGluingData I.coequifibered_toReesPresheaf).functor U ≫
+      I.deformationSpaceToPolynomialSpec ≫ X.polynomialSpecToAffineSpace ≫
+        AffineSpace.map (ULift.{u} (Fin 1)) g).appTop (AffineSpace.coord _ i) =
+      (ΓSpecIso _).inv ((I.siteIdeal U).toExtendedReesAlgebra Polynomial.X) := by
+  rw [deformationSpaceToPolynomialSpec, ι_relativeGluingMap_assoc,
+    ι_polynomialSpecToAffineSpace_assoc, polynomialSpecChart, AffineSpace.homOfVector_map,
+    AffineSpace.comp_homOfVector,
+    AffineSpace.homOfVector_appTop_coord, Function.comp_apply, ← CommRingCat.comp_apply,
+    ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
+  rfl
+
+lemma deformationSpaceComap_proj_over (g : X ⟶ B) (g' : X' ⟶ B') (b : B' ⟶ B)
+    (w : h ≫ g = g' ≫ b) :
+    (deformationSpaceComap h I ≫ I.deformationSpaceToPolynomialSpec ≫
+      X.polynomialSpecToAffineSpace ≫ AffineSpace.map (ULift.{u} (Fin 1)) g) ≫
+        𝔸(ULift.{u} (Fin 1); B) ↘ B =
+      (((I.comap h).deformationSpaceToPolynomialSpec ≫ X'.polynomialSpecToAffineSpace ≫
+        AffineSpace.map (ULift.{u} (Fin 1)) g') ≫ AffineSpace.map _ b) ≫
+          𝔸(ULift.{u} (Fin 1); B) ↘ B := by
+  have e₁ := deformationSpaceProj_over' I g
+  have e₂ := deformationSpaceProj_over' (I.comap h) g'
+  simp only [Category.assoc, AffineSpace.map_over, AffineSpace.map_over_assoc] at e₁ e₂ ⊢
+  rw [e₁, deformationSpaceComap_toBase_assoc, w, reassoc_of% e₂]
+
+set_option backward.isDefEq.respectTransparency false in
+lemma deformationSpaceComap_proj (g : X ⟶ B) (g' : X' ⟶ B') (b : B' ⟶ B)
+    (w : h ≫ g = g' ≫ b) :
+    deformationSpaceComap h I ≫ I.deformationSpaceToPolynomialSpec ≫
+      X.polynomialSpecToAffineSpace ≫ AffineSpace.map (ULift.{u} (Fin 1)) g =
+      ((I.comap h).deformationSpaceToPolynomialSpec ≫ X'.polynomialSpecToAffineSpace ≫
+        AffineSpace.map (ULift.{u} (Fin 1)) g') ≫ AffineSpace.map _ b := by
+  refine colimit.hom_ext fun U ↦ AffineSpace.hom_ext ?_ fun i ↦ ?_
+  · simp only [Category.assoc] at *
+    have := congrArg (colimit.ι (relativeGluingData
+      (I.comap h).coequifibered_toReesPresheaf).functor U ≫ ·)
+      (deformationSpaceComap_proj_over h I g g' b w)
+    simpa only [Category.assoc] using this
+  · have e₁ := ι_deformationSpaceProj_appTop_coord I g (imageSite h U) i
+    have e₂ := ι_deformationSpaceProj_appTop_coord (I.comap h) g' U i
+    have e₃ : (colimit.ι (relativeGluingData (I.comap h).coequifibered_toReesPresheaf).functor U ≫
+        ((I.comap h).deformationSpaceToPolynomialSpec ≫ X'.polynomialSpecToAffineSpace ≫
+          AffineSpace.map (ULift.{u} (Fin 1)) g') ≫ AffineSpace.map _ b).appTop
+          (AffineSpace.coord B i) =
+        (ΓSpecIso _).inv (((I.comap h).siteIdeal U).toExtendedReesAlgebra Polynomial.X) := by
+      change Scheme.Hom.appTop (colimit.ι (relativeGluingData
+        (I.comap h).coequifibered_toReesPresheaf).functor U ≫
+          (I.comap h).deformationSpaceToPolynomialSpec ≫ X'.polynomialSpecToAffineSpace ≫
+            AffineSpace.map (ULift.{u} (Fin 1)) g')
+        ((AffineSpace.map _ b).appTop (AffineSpace.coord B i)) = _
+      rw [AffineSpace.map_appTop_coord]
+      exact e₂
+    rw [e₃, ι_deformationSpaceComap_assoc, deformationSpaceComapChart, Category.assoc]
+    change (Spec.map (reesComapMap h I U)).appTop (Scheme.Hom.appTop
+      (colimit.ι (relativeGluingData I.coequifibered_toReesPresheaf).functor (imageSite h U) ≫
+        I.deformationSpaceToPolynomialSpec ≫ X.polynomialSpecToAffineSpace ≫
+          AffineSpace.map (ULift.{u} (Fin 1)) g) (AffineSpace.coord B i)) = _
+    rw [e₁]
+    refine (congr($(Scheme.ΓSpecIso_inv_naturality (reesComapMap h I U))
+      ((I.siteIdeal (imageSite h U)).toExtendedReesAlgebra Polynomial.X))).symm.trans ?_
+    refine congrArg (ΓSpecIso ((I.comap h).reesPresheaf.obj (.op U))).inv.hom ?_
+    change (reesComapMap h I U).hom
+      ((I.siteIdeal (imageSite h U)).toExtendedReesAlgebra Polynomial.X) = _
+    rw [Ideal.toExtendedReesAlgebra_X, Ideal.toExtendedReesAlgebra_X]
+    exact Ideal.extendedReesAlgebraMap_T _ _ (map_siteIdeal_imageSite h I U).le
+
+/-- Along an open immersion `h : X' ⟶ X` lying over `b : B' ⟶ B` (with `X' = X ×_B B'`), the
+deformation space is a base change over the affine line:
+`D_{h^* I} X' = D_I X ×_{𝔸¹_B} 𝔸¹_{B'}`. -/
+lemma isPullback_deformationSpaceComap_proj (g : X ⟶ B) (g' : X' ⟶ B') (b : B' ⟶ B)
+    (sq : IsPullback h g' g b) :
+    IsPullback (deformationSpaceComap h I)
+      ((I.comap h).deformationSpaceToPolynomialSpec ≫ X'.polynomialSpecToAffineSpace ≫
+        AffineSpace.map (ULift.{u} (Fin 1)) g')
+      (I.deformationSpaceToPolynomialSpec ≫ X.polynomialSpecToAffineSpace ≫
+        AffineSpace.map (ULift.{u} (Fin 1)) g)
+      (AffineSpace.map _ b) := by
+  refine IsPullback.of_bot ?_ (deformationSpaceComap_proj h I g g' b sq.w)
+    (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) b)
+  rw [deformationSpaceProj_over', deformationSpaceProj_over']
+  exact (isPullback_deformationSpaceComap h I).paste_vert sq
+
 end AlgebraicGeometry.Scheme.IdealSheafData
+
+namespace AlgebraicGeometry.Scheme.Hom
+
+variable {V B B' : Scheme.{u}} (g : V ⟶ B) (s : B ⟶ V) (hs : s ≫ g = 𝟙 B) (b : B' ⟶ B)
+
+/-- Blueprint `sk-lem-geometry` (5) for a Zariski localization of the base: if `b : B' ⟶ B` is
+an open immersion, the deformation space of the base-changed section is the base change of the
+deformation space, `D_{s'} V' = D_s V ×_{𝔸¹_B} 𝔸¹_{B'}`. -/
+theorem exists_isPullback_deformationSpace_baseChange_of_isOpenImmersion [IsOpenImmersion b]
+    [IsClosedImmersion s] :
+    ∃ φ : (baseChangeSection g s hs b).ker.deformationSpace ⟶ s.ker.deformationSpace,
+      IsPullback φ (deformationSpaceProj (pullback.snd g b) (baseChangeSection g s hs b))
+        (deformationSpaceProj g s) (AffineSpace.map _ b) := by
+  have key : ∀ J : (pullback g b).IdealSheafData, J = s.ker.comap (pullback.fst g b) →
+      ∃ φ : J.deformationSpace ⟶ s.ker.deformationSpace,
+        IsPullback φ (J.deformationSpaceToPolynomialSpec ≫
+          (pullback g b).polynomialSpecToAffineSpace ≫
+            AffineSpace.map (ULift.{u} (Fin 1)) (pullback.snd g b))
+          (deformationSpaceProj g s) (AffineSpace.map _ b) := by
+    rintro J rfl
+    exact ⟨_, IdealSheafData.isPullback_deformationSpaceComap_proj _ _ g _ b
+      (IsPullback.of_hasPullback g b)⟩
+  exact key _ (ker_baseChangeSection g s hs b)
+
+end AlgebraicGeometry.Scheme.Hom
