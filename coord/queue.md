@@ -1,11 +1,11 @@
 # Work queue
 
-440 items; claim with `tools/claim.py next <group> [--stage N]`.
+434 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (440)
+## Stage 2: nodes to state (434)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -44,27 +44,21 @@
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
-| `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
-| `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
-| `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1 | state |
-| `lem-weil-pbc-popescu-final-solve` | 1 | state |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1 | state |
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
 | `lem-weil-pbc-popescu-lift-solution` | 1 | state |
 | `lem-weil-pbc-popescu-lifting` | 1 | state |
 | `lem-weil-pbc-popescu-product` | 1 | state |
 | `lem-weil-pbc-popescu-reduce-to-field` | 1 | state |
-| `lem-weil-pbc-popescu-resolve-separable` | 1 | state |
 | `lem-weil-pbc-popescu-smoothing` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-in-base-after-localization` | 1 | state |
-| `lem-weil-pbc-power-series-adic-evaluation` | 1 | state |
 | `lem-weil-pbc-power-series-cohen-formally-smooth-adic` | 1 | state |
 | `lem-weil-pbc-power-series-complete-over-complete-base` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-fs-adic` | 1 | state |
