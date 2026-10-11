@@ -135,5 +135,22 @@
   "by": "L",
   "result": "accepted",
   "note": "3 steps: fibre product of sheaves of sets sectionwise (existing node), an epimorphism of sheaves of sets on a site is the coequalizer of its kernel pair (new Mathlib leaf: Sites 086K; IsKernelPair.toCoequalizer' + IsRegularEpiCategory for Sheaf J (Type u); lines verified by L), cancelling the epimorphism e. Tags verified."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.SurjectionKernelPairCoequalizer",
+  "declaration": "TopCat.surjection_kernel_pair_coequalizer",
+  "file": "lean/Sheaf/Topology/SurjectionKernelPairCoequalizer.lean",
+  "statement": "theorem surjection_kernel_pair_coequalizer (X : TopCat.{u}) (P F : X.Sheaf (Type (max u v))) (p : P ⟶ F) [Epi p] (R : X.Sheaf (Type (max u v))) (e : R ⟶ pullback p p) [Epi e] : Nonempty (IsColimit (Cofork.ofπ (f := e ≫ pullback.fst p p) (g := e ≫ pullback.snd p p) p (by rw [Category.assoc, Category.assoc] exact congrArg (fun q ↦ e ≫ q) (pullback.condition : pullback.fst p p ≫ p = pullback.snd p p ≫ p))))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-skc",
+  "group": "M1",
+  "result": "pass"
  }
 }
