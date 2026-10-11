@@ -1,11 +1,11 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+854 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (859)
+## Stage 2: nodes to state (854)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -38,22 +38,17 @@
 | `lem-weil-pbc-associated-prime-localize-at-prime` | 1 | state |
 | `lem-weil-pbc-basis-sheaf-sections-germs` | 1 | state |
 | `lem-weil-pbc-cartesian-eilenberg-functorial` | 1 | state |
-| `lem-weil-pbc-cech-vanishing-criterion` | 1 | state |
 | `lem-weil-pbc-change-ideal-completion` | 1 | state |
-| `lem-weil-pbc-closed-immersion-unit-quotient` | 1 | state |
 | `lem-weil-pbc-closed-pushforward-stalks` | 1 | state |
 | `lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor` | 1 | state |
 | `lem-weil-pbc-codimension-one-analytically-unramified` | 1 | state |
 | `lem-weil-pbc-cohen-coefficient-ring-exists` | 1 | state |
 | `lem-weil-pbc-cohen-power-series-presentation` | 1 | state |
-| `lem-weil-pbc-cohen-ring-mod-pn-formally-smooth` | 1 | state |
-| `lem-weil-pbc-cohen-structure-power-series-surjection` | 1 | state |
 | `lem-weil-pbc-colimit-category-fp-algebras` | 1 | state |
 | `lem-weil-pbc-colimit-etale-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-eventually-flat` | 1 | state |
 | `lem-weil-pbc-colimit-finite-ring-map` | 1 | state |
 | `lem-weil-pbc-colimit-flat-ring-map` | 1 | state |
-| `lem-weil-pbc-colimit-rings-flat` | 1 | state |
 | `lem-weil-pbc-colimit-standard-smooth-algebras` | 1 | state |
 | `lem-weil-pbc-colimit-surjective-ring-map` | 1 | state |
 | `lem-weil-pbc-complete-local-domain-finite-over-regular` | 1 | state |
