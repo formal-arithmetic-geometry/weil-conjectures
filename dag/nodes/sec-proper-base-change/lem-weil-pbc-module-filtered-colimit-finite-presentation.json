@@ -207,5 +207,23 @@
   "item": "lem-weil-pbc-module-filtered-colimit-finite-presentation",
   "worker": "stage1",
   "summary": "Split Stacks 01PJ into seven steps: choose a small representative category, prove its two filteredness conditions using finite direct sums and cokernels, identify the colimit stalkwise, prove injectivity using the existing quasi-coherent image theorem and 01PF, prove surjectivity using 01PI, and conclude by stalkwise detection of isomorphisms. Created six public child nodes for the reusable non-elementary inputs; reused the existing stalkwise-isomorphism and quasi-coherent-image nodes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleFilteredColimitFinitePresentation",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_filteredColimit_of_isQuasicoherent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleFilteredColimitFinitePresentation.lean",
+  "statement": "theorem exists_filteredColimit_of_isQuasicoherent (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (F : X.Modules) [SheafOfModules.IsQuasicoherent.{u} (R := X.ringCatSheaf) F] : ∃ (I : Type u) (_ : SmallCategory I) (_ : IsFiltered I) (M : I ⥤ X.Modules), (∀ i : I, SheafOfModules.IsFinitePresentation.{u} (R := X.ringCatSheaf) (M.obj i)) ∧ ∃ φ : M ⟶ (Functor.const I).obj F, Nonempty (IsColimit (Cocone.mk F φ))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mfc1216",
+  "group": "C1",
+  "result": "pass",
+  "note": "X:Scheme.{u} qc (CompactSpace) qs (QuasiSeparatedSpace); F:X.Modules with Mathlib IsQuasicoherent (pqf-def-coherent's clause, not hollow: infer_instance fails); ∃ I:Type u SmallCategory IsFiltered (index in objects' universe, #check pp.universes all u); M:I⥤X.Modules each IsFinitePresentation (01BN via presentationOfIsCokernelFree); φ:M⟶const F (compatibility = naturality); Nonempty IsColimit (Cocone.mk F φ) as sibling ModuleStalkFilteredColimit"
  }
 }
