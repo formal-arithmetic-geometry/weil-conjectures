@@ -220,5 +220,24 @@
   "date": "2026-10-09",
   "by": "L",
   "result": "pass"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TruncationTriangle",
+  "declaration": "DerivedCategory.truncation_triangle",
+  "file": "lean/Sheaf/CategoryTheory/TruncationTriangle.lean",
+  "statement": "theorem truncation_triangle (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A] (q : ℤ) : (∀ K : CochainComplex A ℤ, ∃ (i : K.truncLE (q - 1) ⟶ K.truncLE q) (j : K.truncLE q ⟶ (CochainComplex.singleFunctor A q).obj (K.homology q)), i ≫ K.ιTruncLE q = K.ιTruncLE (q - 1) ∧ j.f q ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q (K.homology q)).hom = (K.truncLEXIsoCycles q).hom ≫ K.homologyπ q ∧ ∃! k : Q.obj ((CochainComplex.singleFunctor A q).obj (K.homology q)) ⟶ (Q.obj (K.truncLE (q - 1)))⟦(1 : ℤ)⟧, Triangle.mk (Q.map i) (Q.map j) k ∈ distTriang (DerivedCategory A)) ∧ (∃ (h₀ : (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).IsInvertedBy ((ComplexShape.embeddingUpIntLE (q - 1)).truncLEFunctor A ⋙ Q)) (h₁ : (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).IsInvertedBy ((ComplexShape.embeddingUpIntLE q).truncLEFunctor A ⋙ Q)) (hH : (HomologicalComplex.quasiIso A (ComplexShape.up ℤ)).IsInvertedBy ((HomologicalComplex.homologyFunctor A (ComplexShape.up ℤ) q ⋙ CochainComplex.singleFunctor A q) ⋙ Q)), ∀ (K L : CochainComplex A ℤ) (iK : K.truncLE (q - 1) ⟶ K.truncLE q) (jK : K.truncLE q ⟶ (CochainComplex.singleFunctor A q).obj (K.homology q)) (iL : L.truncLE (q - 1) ⟶ L.truncLE q) (jL : L.truncLE q ⟶ (CochainComplex.singleFunctor A q).obj (L.homology q)), iK ≫ K.ιTruncLE q = K.ιTruncLE (q - 1) → jK.f q ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q (K.homology q)).hom = (K.truncLEXIsoCycles q).hom ≫ K.homologyπ q → iL ≫ L.ιTruncLE q = L.ιTruncLE (q - 1) → jL.f q ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) q (L.homology q)).hom = (L.truncLEXIsoCycles q).hom ≫ L.homologyπ q → ∀ (kK : Q.obj ((CochainComplex.singleFunctor A q).obj (K.homology q)) ⟶ (Q.obj (K.truncLE (q - 1)))⟦(1 : ℤ)⟧) (kL : Q.obj ((CochainComplex.singleFunctor A q).obj (L.homology q)) ⟶ (Q.obj (L.truncLE (q - 1)))⟦(1 : ℤ)⟧), Triangle.mk (Q.map iK) (Q.map jK) kK ∈ distTriang (DerivedCategory A) → Triangle.mk (Q.map iL) (Q.map jL) kL ∈ distTriang (DerivedCategory A) → ∀ f : Q.obj K ⟶ Q.obj L, Q.map iK ≫ ((Localization.fac _ h₁ Q).inv.app K ≫ (Localization.lift _ h₁ Q).map f ≫ (Localization.fac _ h₁ Q).hom.app L) = ((Localization.fac _ h₀ Q).inv.app K ≫ (Localization.lift _ h₀ Q).map f ≫ (Localization.fac _ h₀ Q).hom.app L) ≫ Q.map iL ∧ Q.map jK ≫ ((Localization.fac _ hH Q).inv.app K ≫ (Localization.lift _ hH Q).map f ≫ (Localization.fac _ hH Q).hom.app L) = ((Localization.fac _ h₁ Q).inv.app K ≫ (Localization.lift _ h₁ Q).map f ≫ (Localization.fac _ h₁ Q).hom.app L) ≫ Q.map jL ∧ kK ≫ ((Localization.fac _ h₀ Q).inv.app K ≫ (Localization.lift _ h₀ Q).map f ≫ (Localization.fac _ h₀ Q).hom.app L)⟦(1 : ℤ)⟧' = ((Localization.fac _ hH Q).inv.app K ≫ (Localization.lift _ hH Q).map f ≫ (Localization.fac _ hH Q).hom.app L) ≫ kL) ∧ (∀ (K : CochainComplex A ℤ) (n : ℤ), (K.IsStrictlyGE n → (K.truncLE (q - 1)).IsStrictlyGE n ∧ (K.truncLE q).IsStrictlyGE n ∧ ((CochainComplex.singleFunctor A q).obj (K.homology q)).IsStrictlyGE (min n q)) ∧ (K.IsGE n → (K.truncLE (q - 1)).IsGE n ∧ (K.truncLE q).IsGE n ∧ ((CochainComplex.singleFunctor A q).obj (K.homology q)).IsGE (min n q)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ttr"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ttr",
+  "group": "V1",
+  "result": "fix",
+  "note": "canonical i_q/j_q tied by equations, unique k_q distTriang, functoriality via Localization.lift of the three truncation functors (three squares), bounded-below strict and cohomological; reverted the delivery's statement correction of the item (statement, stmt_deps, proof, proof_deps, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
