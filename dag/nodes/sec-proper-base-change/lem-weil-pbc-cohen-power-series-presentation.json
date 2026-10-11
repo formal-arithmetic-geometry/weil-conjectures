@@ -201,5 +201,24 @@
   "summary": "Statement kept. Following the lead_note, 032A (2) is not reproved: step 1 takes the surjection q: Lambda[[X]] -> A from lem-weil-pbc-cohen-structure-power-series-surjection (which itself uses the coefficient ring of lem-weil-pbc-cohen-coefficient-ring-exists). The extra clauses are derived from the statement of that node alone, for any such surjection, with no appeal to its construction: step 2 cites lem-weil-pbc-power-series-field-cohen-regular-complete (Remark 032C, already split and reviewed) for R local Noetherian complete regular of dim n / n+1 with maximal ideal (X) / (p,X) and Lambda/m_Lambda = R/m_R; step 3 q^{-1}(m) is maximal hence m_R, so q is local and q(m_R)=m; step 4 the residue isomorphisms; step 5 the generators of m as images of the generators of m_R; step 6 regularity with the regular system of parameters. No new nodes. No slopmaster2 declaration (grep of WeilConjectures and Comparator for Cohen/coefficient ring/power series presentation found none).",
   "blueprint": "The blueprint ancestor thm-weil-pbc-finite-etale-lifting, step 7 (essential surjectivity via complete-local algebraization), uses the Cohen presentation inside the proof of Stacks 07NN through lem-weil-pbc-complete-local-map-regular-presentation; steps 1-6 realize that presentation: the surjection (step 1), the regular complete source ring (steps 2, 6), and the local/residue/generator clauses (steps 3-5) that 07NN's proof uses."
  },
- "reviewed": "2026-10-10 L: 6 steps on the split nodes 032A (surjection) and 032C (R regular complete local with its parameters); q local since q^{-1}(m) is maximal, residue isomorphisms, generators of m as images; 0 new nodes. The coefficient-ring node is not cited (the surjection node carries it), as the worker argued: right."
+ "reviewed": "2026-10-10 L: 6 steps on the split nodes 032A (surjection) and 032C (R regular complete local with its parameters); q local since q^{-1}(m) is maximal, residue isomorphisms, generators of m as images; 0 new nodes. The coefficient-ring node is not cited (the surjection node carries it), as the worker argued: right.",
+ "lean": {
+  "module": "Sheaf.RingTheory.CohenPowerSeriesPresentation",
+  "declaration": "IsLocalRing.cohen_power_series_presentation",
+  "file": "lean/Sheaf/RingTheory/CohenPowerSeriesPresentation.lean",
+  "statement": "theorem cohen_power_series_presentation (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (maximalIdeal A) A] : ∃ (n : ℕ) (Λ : Type u) (_ : CommRing Λ) (_ : IsLocalRing Λ) (_ : IsRegularLocalRing (MvPowerSeries (Fin n) Λ)), IsAdicComplete (maximalIdeal (MvPowerSeries (Fin n) Λ)) (MvPowerSeries (Fin n) Λ) ∧ ∃ q : MvPowerSeries (Fin n) Λ →+* A, Function.Surjective q ∧ IsLocalHom q ∧ (∃ e : ResidueField (MvPowerSeries (Fin n) Λ) ≃+* ResidueField A, ∀ f, e (residue (MvPowerSeries (Fin n) Λ) f) = residue A (q f)) ∧ ((IsField Λ ∧ CharZero (ResidueField A) ∧ (∃ e : Λ ≃+* ResidueField A, ∀ a, e a = residue A (q (MvPowerSeries.C a))) ∧ Ideal.span (Set.range (fun i : Fin n ↦ q (MvPowerSeries.X i))) = maximalIdeal A ∧ IsRegularSystemOfParameters (List.ofFn (fun i : Fin n ↦ (MvPowerSeries.X i : MvPowerSeries (Fin n) Λ)))) ∨ (∃ p : ℕ, CharP (ResidueField A) p ∧ IsCohenRing p Λ ∧ (∃ e : (Λ ⧸ Ideal.span {(p : Λ)}) ≃+* ResidueField A, ∀ a, e (Ideal.Quotient.mk _ a) = residue A (q (MvPowerSeries.C a))) ∧ Ideal.span (insert (q (MvPowerSeries.C (p : Λ))) (Set.range (fun i : Fin n ↦ q (MvPowerSeries.X i)))) = maximalIdeal A ∧ IsRegularSystemOfParameters (MvPowerSeries.C (p : Λ) :: List.ofFn (fun i : Fin n ↦ (MvPowerSeries.X i : MvPowerSeries (Fin n) Λ)))))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cps0933"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cps0933",
+  "group": "G1",
+  "result": "fix",
+  "note": "A Type u Noetherian local m-adically complete; n, Λ : Type u; field case IsField Λ + CharZero k + Λ≃k via q∘C; Cohen case IsCohenRing p Λ (prime p, mΛ=pΛ) + CharP k p + Λ/pΛ≃k; q surjective IsLocalHom with R/m_R≃k compatible with q; images of X (p,X) span m_A; R IsRegularLocalRing + IsAdicComplete; parameters now via recorded IsLocalRing.IsRegularSystemOfParameters (List.ofFn X, C p :: List.ofFn X) instead of inline span+ringKrullDim (H12)"
+ }
 }

@@ -4034,3 +4034,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:33 L: merged deliver/F1/lem-sc-curve-base-change-relative-dimension-one (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.CurveBaseChangeRelativeDimensionOne AlgebraicGeometry.curve_baseChange_smoothOfRelativeDimension_one)
 - 09:33 L: merged deliver/C1/lem-pod-lattice-stabilizer-open (stage 2; reviewer PASS; first push; Sheaf.NumberTheory.Padics.LatticeStabilizerOpen Padic.lattice_stabilizer_isOpen)
 - 09:33 L: merged deliver/J1/lem-weil-pbc-depth-drops-by-one (stage 2; reviewer PASS; first push; Sheaf.RingTheory.DepthQuotSMulTop IsLocalRing.depth_quotSMulTop_of_isSMulRegular)
+- 09:33 L: merged deliver/G1/lem-weil-pbc-cohen-power-series-presentation (stage 2; reviewer FIX; first push; Sheaf.RingTheory.CohenPowerSeriesPresentation IsLocalRing.cohen_power_series_presentation)
