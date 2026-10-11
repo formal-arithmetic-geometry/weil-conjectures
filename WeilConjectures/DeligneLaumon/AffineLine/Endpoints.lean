@@ -66,17 +66,44 @@ local instance : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) :=
   have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   inferInstance
 
+namespace WeilSheaf
+
+/-- The case of `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two`
+of a smooth affine curve which is not geometrically connected: then `H_c^2(C, G)` still has
+weights at most `w + 2`.
+
+The blueprint proof splits `C₀` into its connected components, and a connected component with
+field of constants `k₁ = 𝔽_{q^d}` into the `d` geometrically connected curves over `k₁` which make
+up its geometric fibre, permuted cyclically by the Frobenius; on each of them `F^d` is the
+Frobenius of a geometrically connected curve over `k₁`, to which the geometrically connected case
+applies. Weil sheaves over a finite extension `k₁` of `k₀`, with the comparison of the geometric
+fibres over `k₀` and `k₁` and of their compactly supported cohomology, are not available yet, so
+this case is stated separately, with `sorry`. -/
+theorem hasWeightsAtMostOver_compactlySupportedCohomology_two_of_not_geometricallyConnected
+    (hC : ¬ GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀)))
+    (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l C) (hG : G.IsLisse) {w : ℝ}
+    (hw : G.IsPunctuallyPureOfWeight ι w) :
+    (G.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (w + 2) := by
+  sorry
+
+end WeilSheaf
+
 /-- *Top compact-support bound on a curve.* If `C₀` is a smooth affine curve and `G` is a lisse
 Weil sheaf on `C₀`, punctually `ι`-pure of weight `w`, then `H_c^2(C, G)` has weights at most
-`w + 2`: it is a Frobenius-equivariant quotient of the generic fibre, pure of weight `w`, twisted
-by `(-1)`.
+`w + 2`. For `C₀` geometrically connected, `H_c^2(C, G)` is the Tate twist `(-1)` of the geometric
+coinvariants of `G`, which are pure of weight `w`, so it is pure of weight `w + 2`
+(`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two`); the general
+case reduces to this one over the fields of constants of the connected components.
 (blueprint: `lem-a1-curve-hc2-bound`) -/
 theorem WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two
     (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l C) (hG : G.IsLisse) {w : ℝ}
     (hw : G.IsPunctuallyPureOfWeight ι w) :
     (G.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (w + 2) := by
-  -- TODO(adic): prove once Weil sheaves carry genuine `ℓ`-adic coefficients
-  sorry
+  by_cases hC : GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))
+  · exact (WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two ι G hG
+      hw).hasWeightsAtMostOver
+  · exact hasWeightsAtMostOver_compactlySupportedCohomology_two_of_not_geometricallyConnected hC
+      ι G hG hw
 
 section Complement
 
