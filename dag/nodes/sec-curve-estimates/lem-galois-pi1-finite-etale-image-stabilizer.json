@@ -154,5 +154,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of F1; spot-checked by L: L: SGA 1 V 6.13 via the slice FEt(Y') = FEt(Y)/Y': the image of pi_1(Y') is the stabilizer of the point, open and of finite index by transitivity; new node: a connected finite etale scheme is a connected object"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizer",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_range_eq_stabilizer",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/ImageStabilizer.lean",
+  "statement": "theorem fundamentalGroupMap_range_eq_stabilizer {X Y : Scheme.{u}} [ConnectedSpace X] [ConnectedSpace Y] (f : X ⟶ Y) [IsFinite f] [Etale f] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X) (GX GY : Type u) [Group GX] [TopologicalSpace GX] [IsTopologicalGroup GX] [CompactSpace GX] [∀ Q, MulAction GX ((fiber s).obj Q)] [IsFundamentalGroup (fiber s) GX] [Group GY] [TopologicalSpace GY] [IsTopologicalGroup GY] [CompactSpace GY] [∀ P, MulAction GY ((fiber (s ≫ f)).obj P)] [IsFundamentalGroup (fiber (s ≫ f)) GY] : let P : Y.FiniteEtale := ⟨Etale.mk f, inferInstanceAs (IsFinite f)⟩ let a : (fiber (s ≫ f)).obj P := fiberMk (s ≫ f) P s rfl let U := MulAction.stabilizer GY a (fundamentalGroupMap (pullbackFiberIso f s) GX GY).range = U ∧ IsOpen (U : Set GY) ∧ U.index = Nat.card ((fiber (s ≫ f)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Uses the recorded finite-etale fibre functor and functorial fundamentalGroupMap. GX and GY are arbitrary compact fundamental-group models as in the source library; toAutContinuousMulEquiv identifies them with the automorphism groups. The finite-etale and FLC fibre descriptions correspond under thm-galois-lc-etale, already referenced in the node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pfs1325",
+  "group": "E1",
+  "result": "pass",
+  "note": "connected X,Y (ConnectedSpace); f IsFinite+Etale; s : Spec Ω ⟶ X, Ω IsAlgClosed, ybar = s≫f; P = ⟨Etale.mk f,_⟩ has obj.left = X, obj.hom = f (rfl); a = fiberMk s; f_* = recorded fundamentalGroupMap (pullbackFiberIso f s = pr1∘z); π1 as IsFundamentalGroup models in u (forced by fundamentalGroupMap, ≅ Aut F via toAutContinuousMulEquiv); U = MulAction.stabilizer; range = U ∧ IsOpen U ∧ U.index = Nat.card fibre"
  }
 }
