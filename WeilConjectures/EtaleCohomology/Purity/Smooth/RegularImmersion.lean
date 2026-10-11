@@ -13,6 +13,8 @@ public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
+public import WeilConjectures.SixFunctors.Etale.Derived.SupportsOpenImmersion
+public import WeilConjectures.SixFunctors.Integral.Exact
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekOpenRestriction
 
 /-!
@@ -109,6 +111,53 @@ structure EtaleFrame (c : ℕ) (i : Z ⟶ X) where
   isPullback : IsPullback toZ (U.zeroLocusSubschemeι (Set.range f)) i e
 
 attribute [instance] EtaleFrame.etale
+
+/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+
+*Frames exist Zariski-locally.* Every point of `Z` lies in the zero locus of a frame of a regular
+closed immersion `i : Z ⟶ X` of codimension `c` whose étale map is the inclusion of an affine
+open `U ⊆ X`: the ideal of `Z` is generated on `U` by a regular sequence `f₁, …, f_c`. -/
+theorem exists_etaleFrame_isOpenImmersion (c : ℕ) (i : Z ⟶ X)
+    [IsRegularImmersion c i] (z : Z) :
+    ∃ F : i.EtaleFrame c, IsOpenImmersion F.e ∧ z ∈ Set.range F.toZ := by
+  obtain ⟨U, hzU, r, hr, -, hI⟩ :=
+    IsRegularImmersion.exists_isWeaklyRegular_generators (c := c) (i := i) (i z)
+  have : IsAffine U.1.toScheme := U.2
+  let f : Fin c → Γ(U.1.toScheme, ⊤) := fun a ↦ U.1.topIso.inv (r.get (a.cast hr.symm))
+  -- the sections `f` cut out `Z ∩ U`
+  have hker : (i ∣_ U.1).ker = (U.1.toScheme.zeroLocusSubschemeι (Set.range f)).ker := by
+    rw [IdealSheafData.ker_subschemeι]
+    refine IdealSheafData.ext_of_isAffine ?_
+    rw [IdealSheafData.ideal_top_ofIdealTop, ker_morphismRestrict_ideal,
+      ← IdealSheafData.map_ideal' i.ker (U := ⟨_, _⟩) (V := U)
+        (eqToHom U.1.ι_image_top).op, ← hI, Ideal.ofList, Ideal.map_span]
+    congr 1
+    ext x
+    simp only [Set.mem_image, Set.mem_ofPred_eq, Set.mem_range, f]
+    constructor
+    · rintro ⟨y, hy, rfl⟩
+      obtain ⟨a, rfl⟩ := List.mem_iff_get.mp hy
+      exact ⟨a.cast hr, by simp [Scheme.Opens.topIso]; rfl⟩
+    · rintro ⟨a, rfl⟩
+      exact ⟨r.get (a.cast hr.symm), List.get_mem _ _, by simp [Scheme.Opens.topIso]; rfl⟩
+  let φ := IsClosedImmersion.lift (U.1.toScheme.zeroLocusSubschemeι (Set.range f)) (i ∣_ U.1)
+    hker.ge
+  have hφ : φ ≫ U.1.toScheme.zeroLocusSubschemeι (Set.range f) = i ∣_ U.1 :=
+    IsClosedImmersion.lift_fac _ _ _
+  have : IsIso φ := IsClosedImmersion.isIso_of_ker_eq _ _ φ hφ hker
+  let F : i.EtaleFrame c :=
+    { U := U.1.toScheme
+      e := U.1.ι
+      etale := inferInstance
+      f := f
+      toZ := inv φ ≫ (i ⁻¹ᵁ U.1).ι
+      isPullback := by
+        refine IsPullback.of_iso (isPullback_morphismRestrict i U.1).flip (asIso φ) (Iso.refl _)
+          (Iso.refl _) (Iso.refl _) ?_ ?_ ?_ ?_ <;> simp [hφ] }
+  refine ⟨F, inferInstanceAs (IsOpenImmersion U.1.ι), φ ⟨z, hzU⟩, ?_⟩
+  change (inv φ ≫ (i ⁻¹ᵁ U.1).ι) (φ ⟨z, hzU⟩) = z
+  rw [← Scheme.Hom.comp_apply, ← Category.assoc, IsIso.hom_inv_id, Category.id_comp]
+  rfl
 
 end Scheme.Hom
 
@@ -299,51 +348,6 @@ variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExpo
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
-**(b) The fundamental class.** Let `i : Z ⟶ X` be a regular closed immersion of pure
-codimension `c`, with `X` smooth over the perfect field `k` and `Z` regular. The frame classes
-depend only on `Z_U ⊂ U`, not on the frame, and they glue: there is a unique class
-`[Z ⊂ X] ∈ H^{2c}_Z(X, Λ(c))` whose restriction to every frame is the frame class.
-
-Two frames on the same `U` differ Zariski-locally by a matrix in `GL_c(𝒪)`, a product of
-diagonal, permutation and elementary matrices, under which the cup product of Kummer
-boundaries is invariant (`∂κ(u) = 0` for a unit, even degrees, and `𝔸¹`-invariance for the
-shears); by (a) the classes are sections of the sheaf `𝓗⁰(Ri^! Λ_X(c)[2c])`, so they glue. -/
-theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
-    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
-    ∃! γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-        ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)),
-      ∀ F : i.EtaleFrame c, frameRestriction Λ F γ = frameClass Λ F :=
-  sorry
-
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
-
-The *fundamental class* `[Z ⊂ X] = cl_{Z/X} ∈ H^{2c}_Z(X, Λ(c))` of a regular closed immersion
-`i : Z ⟶ X` of pure codimension `c`, with `X` smooth over a perfect field and `Z` regular: the
-unique class restricting to the frame class `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` on every frame.
-
-It is *defined* as `Classical.choose` of
-`AlgebraicGeometry.Etale.existsUnique_fundamentalClass`, which is not yet proved; uniqueness
-is what makes the choice canonical. -/
-noncomputable def fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
-    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
-    constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
-      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) :=
-  (existsUnique_fundamentalClass Λ c i aX hZ).exists.choose
-
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
-
-The morphism `cl_i : Λ_Z ⟶ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`: the adjoint
-(`AlgebraicGeometry.Etale.supportedClassMap`) of the fundamental class
-`Λ_X ⟶ Ri_! Ri^! (Λ_X(c)[2c])`, through the forget-supports map `Ri_! ⟶ Ri_*`, which is an
-isomorphism as `i` is a closed immersion. -/
-noncomputable def fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
-    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
-    constantComplex Λ Z ⟶
-      (R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧) :=
-  supportedClassMap Λ i (fundamentalClass Λ c i aX hZ)
-
-/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
-
 **(a) Concentration in degree zero.** `Ri^! (Λ_X(c)[2c])` has no cohomology sheaves outside
 degree `0`. The hypotheses are stable under étale base change `X' ⟶ X`, so this holds after
 any étale base change too. -/
@@ -407,6 +411,129 @@ theorem isLocallyConstantSheaf_homology_zero_rightDerivedUpperShriek_of_isRegula
   refine ⟨⟨⟨𝒰, fun a ↦ ?_⟩⟩⟩
   rw [isConstant_over_iff_upperStar]
   exact Sheaf.isConstant_of_iso _ (h𝒰 a).some
+
+/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+
+Classes with supports `H^{2c}_Z(X, Λ(c))` are sections of a sheaf: `Ri_! Ri^! (Λ_X(c)[2c])` is a
+sheaf placed in degree zero, since `Ri^! (Λ_X(c)[2c])` is (clause (a)) and `Ri_! = i_*` is exact.
+-/
+theorem exists_iso_singleFunctor_rightDerivedLowerShriek_of_isRegularImmersion
+    (aX : X ⟶ Spec (.of k)) [Smooth aX] (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
+    ∃ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
+      Nonempty ((R(i)_![ModuleCat.{u + 1} Λ]).obj
+          ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) ≅
+        (_root_.DerivedCategory.singleFunctor _ 0).obj G) := by
+  set K := (R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)
+  have hK := isZero_homology_rightDerivedUpperShriek_of_isRegularImmersion Λ c i aX hZ
+  have : K.IsGE 0 := (_root_.DerivedCategory.isGE_iff K 0).2 fun n hn ↦ hK n hn.ne
+  have : K.IsLE 0 := (_root_.DerivedCategory.isLE_iff K 0).2 fun n hn ↦ hK n hn.ne'
+  have := Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom Λ i
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar
+    (ModuleCat.{u + 1} Λ) i
+  have : (((i)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj K).IsGE 0 :=
+    ((i)_*[ModuleCat.{u + 1} Λ]).isGE_mapDerivedCategory_obj K 0
+  have : (((i)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj K).IsLE 0 :=
+    ((i)_*[ModuleCat.{u + 1} Λ]).isLE_mapDerivedCategory_obj K 0
+  obtain ⟨G, ⟨e'⟩⟩ := _root_.DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE
+    (((i)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.obj K) 0
+  exact ⟨G, ⟨e.app K ≪≫
+    ((i)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorIsoMapDerivedCategory.app K ≪≫ e'⟩⟩
+
+/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+
+*Uniqueness of the fundamental class.* Two classes in `H^{2c}_Z(X, Λ(c))` whose restrictions to
+every Zariski frame agree are equal. The classes are sections of a sheaf
+(`AlgebraicGeometry.Etale.exists_iso_singleFunctor_rightDerivedLowerShriek_of_isRegularImmersion`),
+so they are determined by their pullbacks to the geometric points of `X`. A geometric point
+outside `Z` sees nothing; a geometric point of `Z` factors through a Zariski frame, and the
+restriction of supports along an open immersion is invertible
+(`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_isOpenImmersion`). -/
+theorem eq_of_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
+    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z))
+    {γ γ' : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))}
+    (h : ∀ F : i.EtaleFrame c, IsOpenImmersion F.e →
+      frameRestriction Λ F γ = frameRestriction Λ F γ') :
+    γ = γ' := by
+  obtain ⟨G, ⟨eM⟩⟩ :=
+    exists_iso_singleFunctor_rightDerivedLowerShriek_of_isRegularImmersion Λ c i aX hZ
+  refine hom_ext_of_leftDerivedUpperStar_map_eq (constantComplexIsoSingleFunctor Λ X) eM
+    fun Ω _ _ x ↦ ?_
+  have : Subsingleton (Spec (.of Ω)) := inferInstanceAs (Subsingleton (PrimeSpectrum Ω))
+  by_cases hx : Set.range x.base ⊆ Set.range i.openComplement.ι.base
+  · -- `x` misses `Z`, where the classes live
+    refine (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint
+      (ModuleCat.{u + 1} Λ) i i.openComplement.ι ?_ x hx _).eq_of_tgt _ _
+    rw [i.range_eq_compl_range_openComplement_ι]
+    exact disjoint_compl_left
+  · -- `x` is a point of `Z`, which lies in a Zariski frame
+    obtain ⟨_, ⟨y, rfl⟩, hy⟩ := Set.not_subset.mp hx
+    rw [← Set.mem_compl_iff, ← i.range_eq_compl_range_openComplement_ι] at hy
+    obtain ⟨z, hz⟩ := hy
+    obtain ⟨F, hF, w, rfl⟩ := i.exists_etaleFrame_isOpenImmersion c z
+    have hxe : Set.range x.base ⊆ Set.range F.e.base := by
+      rintro _ ⟨y', rfl⟩
+      refine ⟨(F.U.zeroLocusSubschemeι (Set.range F.f)) w, ?_⟩
+      rw [← Scheme.Hom.comp_apply, ← F.isPullback.w, Scheme.Hom.comp_apply, hz,
+        Subsingleton.elim y' y]
+    have he : (L((F.e)^*[ModuleCat.{u + 1} Λ])).map γ =
+        (L((F.e)^*[ModuleCat.{u + 1} Λ])).map γ' := by
+      have hψ := isIso_supportedRestriction_of_isOpenImmersion (ModuleCat.{u + 1} Λ) F.e i _ F.toZ
+        F.isPullback _ _ (leftDerivedUpperStarTateShiftIso Λ F.e c)
+      have := h F hF
+      simp only [frameRestriction, restrictSupportedClass] at this
+      rwa [cancel_epi, cancel_mono] at this
+    have hx' := IsOpenImmersion.lift_fac F.e x hxe
+    let comp := leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) (IsOpenImmersion.lift F.e x hxe)
+      F.e x hx'.symm
+    rw [← NatIso.naturality_2 comp γ, ← NatIso.naturality_2 comp γ', Functor.comp_map,
+      Functor.comp_map, he]
+
+
+/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+
+**(b) The fundamental class.** Let `i : Z ⟶ X` be a regular closed immersion of pure
+codimension `c`, with `X` smooth over the perfect field `k` and `Z` regular. The frame classes
+depend only on `Z_U ⊂ U`, not on the frame, and they glue: there is a unique class
+`[Z ⊂ X] ∈ H^{2c}_Z(X, Λ(c))` whose restriction to every frame is the frame class.
+
+Two frames on the same `U` differ Zariski-locally by a matrix in `GL_c(𝒪)`, a product of
+diagonal, permutation and elementary matrices, under which the cup product of Kummer
+boundaries is invariant (`∂κ(u) = 0` for a unit, even degrees, and `𝔸¹`-invariance for the
+shears); by (a) the classes are sections of the sheaf `𝓗⁰(Ri^! Λ_X(c)[2c])`, so they glue. -/
+theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
+    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
+    ∃! γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
+        ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)),
+      ∀ F : i.EtaleFrame c, frameRestriction Λ F γ = frameClass Λ F :=
+  sorry
+
+/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+
+The *fundamental class* `[Z ⊂ X] = cl_{Z/X} ∈ H^{2c}_Z(X, Λ(c))` of a regular closed immersion
+`i : Z ⟶ X` of pure codimension `c`, with `X` smooth over a perfect field and `Z` regular: the
+unique class restricting to the frame class `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` on every frame.
+
+It is *defined* as `Classical.choose` of
+`AlgebraicGeometry.Etale.existsUnique_fundamentalClass`, which is not yet proved; uniqueness
+is what makes the choice canonical. -/
+noncomputable def fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
+    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
+    constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) :=
+  (existsUnique_fundamentalClass Λ c i aX hZ).exists.choose
+
+/-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
+
+The morphism `cl_i : Λ_Z ⟶ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`: the adjoint
+(`AlgebraicGeometry.Etale.supportedClassMap`) of the fundamental class
+`Λ_X ⟶ Ri_! Ri^! (Λ_X(c)[2c])`, through the forget-supports map `Ri_! ⟶ Ri_*`, which is an
+isomorphism as `i` is a closed immersion. -/
+noncomputable def fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
+    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
+    constantComplex Λ Z ⟶
+      (R(i)^![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧) :=
+  supportedClassMap Λ i (fundamentalClass Λ c i aX hZ)
 
 /-- Blueprint `sk-thm-regular`: Purity for regular closed immersions
 
