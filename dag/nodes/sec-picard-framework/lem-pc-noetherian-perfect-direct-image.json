@@ -157,5 +157,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianPerfectDirectImage",
+  "declaration": "AlgebraicGeometry.noetherian_perfect_directImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianPerfectDirectImage.lean",
+  "statement": "theorem noetherian_perfect_directImage {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [∀ U : X.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))] [∀ U : S.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))] (E : schemeDerivedCategory X) (hE : Scheme.IsPerfect X E) (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) (hGb : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n)) [∀ n : ℤ, (G.X n).IsFinitePresentation] (hGflat : ∀ n : ℤ, Scheme.Modules.IsFlatOver (G.X n) f) (hGproper : ∀ n : ℤ, Scheme.Modules.HasSupportProperOver f (G.X n)) : Scheme.IsPerfect S ((schemeDerivedDirectImage f).obj (E ⊗ DerivedCategory.Q.obj G))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-npd",
+  "group": "Q1",
+  "result": "pass",
+  "note": "[IsNoetherian S]; finite presentation = LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated (convention); E perfect = Scheme.IsPerfect; G bounded (hGb on terms), termwise SheafOfModules.IsFinitePresentation, IsFlatOver f, HasSupportProperOver f; conclusion IsPerfect S (schemeDerivedDirectImage f).obj (E ⊗ Q.obj G) with global schemeDerivedTensorMonoidal; same form as landed parent properSupport_perfect_directImage; no let/local instance/notation/tautology"
  }
 }
