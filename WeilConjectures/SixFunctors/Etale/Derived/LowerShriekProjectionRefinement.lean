@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.CompositionLaw
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
+public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 
 /-!
@@ -121,7 +123,39 @@ lemma refinement_projection_key (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
         (L((c.g)^*[A]).obj L) ≫
       D((c.i)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj K).map
         ((leftDerivedUpperStarCompactificationIso A c).hom.app L)) := by
-  sorry
+  have hbcL : ∀ Z, (leftDerivedUpperStarIsoMapDerivedCategory A r.hom).hom.app
+      (D((d.i)_!open[A]).obj Z) ≫ (refinementLowerShriekBaseChangeDerivedIso A r hcart).inv.app Z =
+      (refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).inv.app Z := fun Z ↦ rfl
+  have hnat := (refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).inv.naturality
+    (((-⊗ᴸ-(X)[A]).obj K).map ((leftDerivedUpperStarCompactificationIso A d).hom.app L))
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hnat
+  have h₁₂ : ((-⊗ᴸ-(c.Z)[A]).map ((leftDerivedUpperStarIsoMapDerivedCategory A r.hom).hom.app
+        (D((d.i)_!open[A]).obj K))).app (L((r.hom)^*[A]).obj (L((d.g)^*[A]).obj L)) ≫
+      ((-⊗ᴸ-(c.Z)[A]).map ((refinementLowerShriekBaseChangeDerivedIso A r hcart).inv.app K)).app
+        (L((r.hom)^*[A]).obj (L((d.g)^*[A]).obj L)) =
+      ((-⊗ᴸ-(c.Z)[A]).map ((refinementLowerShriekBaseChangeLeftDerivedIso A r hcart).inv.app
+        K)).app (L((r.hom)^*[A]).obj (L((d.g)^*[A]).obj L)) := by
+    rw [← NatTrans.comp_app, ← Functor.map_comp, hbcL]
+  have hρ : ((-⊗ᴸ-(c.Z)[A]).obj (D((c.i)_!open[A]).obj K)).map
+        ((leftDerivedUpperStarComp A r.hom d.g c.g r.hom_g.symm).inv.app L) ≫
+      ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app
+        (L((c.g)^*[A]).obj L) =
+      ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).app
+        (L((r.hom)^*[A]).obj (L((d.g)^*[A]).obj L)) ≫
+      D((c.i)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj K).map (L((c.i)^*[A]).map
+        ((leftDerivedUpperStarComp A r.hom d.g c.g r.hom_g.symm).inv.app L))) :=
+    ((derivedOpenImmersionLowerShriekProjectionIso A c.i).inv.app K).naturality _
+  have hcoh : (leftDerivedUpperStarComp A c.i r.hom d.i r.i_hom.symm).inv.app
+        (L((d.g)^*[A]).obj L) ≫ (leftDerivedUpperStarCompactificationIso A d).hom.app L =
+      L((c.i)^*[A]).map ((leftDerivedUpperStarComp A r.hom d.g c.g r.hom_g.symm).inv.app L) ≫
+        (leftDerivedUpperStarCompactificationIso A c).hom.app L := by
+    rw [leftDerivedUpperStarCompactificationIso_eq, leftDerivedUpperStarCompactificationIso_eq]
+    exact (map_leftDerivedUpperStarComp_inv_app_leftDerivedUpperStarComp_inv_app A c.i r.hom d.g
+      d.i c.g f r.i_hom.symm r.hom_g.symm d.comm L).symm
+  simp only [hbcL, reassoc_of% h₁₂, reassoc_of% hρ]
+  simp only [hnat, reassoc_of% (refinementLowerShriekProjectionIso_inv_baseChange A r hcart K
+    (L((d.g)^*[A]).obj L))]
+  simp only [← Functor.map_comp, hcoh]
 
 /-- The comparison `Rf_!(d) ⟶ Rf_!(c)` along a refinement intertwines the projection maps. -/
 lemma projectionMapOfCompactification_comparison (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
