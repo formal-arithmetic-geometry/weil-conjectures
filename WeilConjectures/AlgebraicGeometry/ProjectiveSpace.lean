@@ -389,6 +389,26 @@ instance isClosedImmersion_liftBaseChange [IsSeparated g] [IsClosedImmersion b] 
     infer_instance
   .of_comp _ (map n g)
 
+/-- The lift of `q ≫ e` along a cartesian square is the base change of `e`: if
+
+```
+       q
+   T -----> T₀
+   |        |
+ a |        | e ≫ ℙ(n; S) ↘ S
+   ↓        ↓
+   X -----> S
+       g
+```
+
+is cartesian and `e : T₀ ⟶ ℙ(n; S)`, then `liftBaseChange a (q ≫ e) w : T ⟶ ℙ(n; X)` is the
+base change of `e` along `map n g`. In particular it is an immersion (resp. a closed immersion)
+if `e` is, with no hypothesis on `g`. -/
+lemma isPullback_liftBaseChange {T₀ : Scheme.{u}} {q : T ⟶ T₀} {e : T₀ ⟶ ℙ(n; S)}
+    (h : IsPullback q a (e ≫ ℙ(n; S) ↘ S) g) (w : a ≫ g = (q ≫ e) ≫ ℙ(n; S) ↘ S) :
+    IsPullback q (liftBaseChange a (q ≫ e) w) e (map n g) :=
+  h.of_bot' (isPullback_map n g)
+
 end LiftBaseChange
 
 end ProjectiveSpace

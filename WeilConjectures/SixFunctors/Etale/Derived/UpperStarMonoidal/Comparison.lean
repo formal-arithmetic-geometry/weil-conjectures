@@ -16,6 +16,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Derived
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
+public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 
 /-!
 # The tensor comparison of the derived pullback
@@ -24,6 +27,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Derive
   `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M`, and
   `AlgebraicGeometry.Etale.leftDerivedUpperStarTensorNatIso g`: it is a natural isomorphism.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso g`: the canonical `Lg^* Λ_Y ≅ Λ_Z`.
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal g`: `Lg^*` is a monoidal functor, with
+  comonoidal structure `leftDerivedUpperStarTensorComparison`. The coherence axioms are
+  checked on complexes whose pullback is K-flat
+  (`CategoryTheory.Functor.OplaxMonoidal.ofLaxSquare`).
 
 See `WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal` for an overview.
 -/
@@ -150,16 +157,110 @@ theorem nonempty_iso_leftDerivedUpperStar_unit :
     Nonempty ((L((g)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _) :=
   ⟨leftDerivedUpperStarUnitIso A g⟩
 
+section Monoidal
+
+open DerivedCategory Functor.LaxMonoidal Functor.OplaxMonoidal
+
+variable [(g)^*[A].PreservesFlat]
+
+attribute [local instance] isLeftDerivedFunctor₂_derivedTensor_leftDerivedUpperStar
+  isLeftDerivedFunctor₂_leftDerivedUpperStar_derivedTensor
+
+/-- The tensor comparison `Lg^*(Qh K ⊗ᴸ Qh M) ⟶ Lg^*(Qh K) ⊗ᴸ Lg^*(Qh M)` is induced by the
+comonoidal structure of `g^*` on homotopy categories, through the counits of `Lg^*`. -/
+lemma leftDerivedUpperStarTensorComparison_app_app_comp
+    (K M : HomotopyCategory (Sheaf Y.smallEtaleTopology A) (.up ℤ)) :
+    ((leftDerivedUpperStarTensorComparison A g).app (Qh.obj K)).app (Qh.obj M) ≫
+        ((g)^*[A].leftDerivedFunctorCounit.app K ⊗ₘ (g)^*[A].leftDerivedFunctorCounit.app M) ≫
+          μ Qh (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj K)
+            (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj M) =
+      L((g)^*[A]).map (μ Qh K M) ≫ (g)^*[A].leftDerivedFunctorCounit.app (K ⊗ M) ≫
+        Qh.map (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M) := by
+  have h := Functor.leftDerived₂NatTrans_app_app _ (derivedTensorLeftDerivedUpperStarCounit A g)
+    (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ)) _
+    (leftDerivedUpperStarDerivedTensorCounit A g)
+    (Functor.postcompose₂MapWhiskeringLeft₂ (mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]) Qh)
+    K M
+  have e₁ : ((derivedTensorLeftDerivedUpperStarCounit A g).app K).app M =
+      ((g)^*[A].leftDerivedFunctorCounit.app K ⊗ₘ (g)^*[A].leftDerivedFunctorCounit.app M) ≫
+        μ Qh (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj K)
+          (((g)^*[A].mapHomotopyCategory (.up ℤ)).obj M) := by
+    rw [tensorHom_def]
+    dsimp [derivedTensorLeftDerivedUpperStarCounit, derivedTensor]
+    rw [Category.assoc]
+    rfl
+  have e₂ : ((leftDerivedUpperStarDerivedTensorCounit A g).app K).app M =
+      L((g)^*[A]).map (μ Qh K M) ≫ (g)^*[A].leftDerivedFunctorCounit.app (K ⊗ M) := rfl
+  have e₃ : ((Functor.postcompose₂MapWhiskeringLeft₂
+      (mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]) Qh).app K).app M =
+      Qh.map (δ ((g)^*[A].mapHomotopyCategory (.up ℤ)) K M) := rfl
+  rw [e₁, e₂, e₃] at h
+  simp only [Category.assoc] at h
+  exact h
+
+/-- Every complex in `D(Y_ét)` is isomorphic to `Qh P` for a complex `P` whose pullback by `g`
+is K-flat. -/
+lemma exists_kFlatUpperStar_iso (X : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    ∃ P, kFlatUpperStar A g P ∧ Nonempty (Qh.obj P ≅ X) := by
+  have := Localization.essSurj (Qh (C := Sheaf Y.smallEtaleTopology A))
+    (HomotopyCategory.quasiIso _ (.up ℤ))
+  obtain ⟨R⟩ := LocalizerMorphism.IsLeftDerivabilityStructure.hasLeftResolutions
+    (Φ := HomotopyCategory.quasiIsoLocalizerMorphism (kFlatUpperStar A g)) (Qh.objPreimage X)
+  have : IsIso (Qh.map R.w) := Localization.inverts Qh (HomotopyCategory.quasiIso _ _) _ R.hw
+  exact ⟨R.X₁.obj, R.X₁.property, ⟨asIso (Qh.map R.w) ≪≫ Qh.objObjPreimageIso X⟩⟩
+
+/-- The oplax monoidal structure on the derived pullback `Lg^* : D(Y_ét) ⥤ D(Z_ét)`, whose
+comonoidal structure is the tensor comparison `leftDerivedUpperStarTensorComparison`. It is
+induced by the oplax monoidal structure of `g^*` on homotopy categories
+(`Functor.mapHomotopyCategoryOplaxMonoidal`), computing on complexes whose pullback is K-flat. -/
+@[instance_reducible]
+noncomputable def leftDerivedUpperStarOplaxMonoidal : L((g)^*[A]).OplaxMonoidal :=
+  haveI := DerivedCategory.isIso_ε_Qh (Sheaf Z.smallEtaleTopology A)
+  Functor.OplaxMonoidal.ofLaxSquare (Q₁ := Qh) (Q₂ := Qh)
+    (F := (g)^*[A].mapHomotopyCategory (.up ℤ)) (leftDerivedUpperStarTensorComparison A g)
+    (fun a ↦ (g)^*[A].leftDerivedFunctorCounit.app a)
+    (fun _ _ f ↦ (g)^*[A].leftDerivedFunctorCounit.naturality f)
+    (leftDerivedUpperStarTensorComparison_app_app_comp A g) (kFlatUpperStar A g)
+    (exists_kFlatUpperStar_iso A g) (fun x _ hb ↦ isIso_μNatTrans_Qh_app_app_of_kFlat x _ hb)
+
+lemma isIso_leftDerivedUpperStarOplaxMonoidal_δ
+    (X X' : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    letI := leftDerivedUpperStarOplaxMonoidal A g
+    IsIso (δ L((g)^*[A]) X X') :=
+  inferInstanceAs (IsIso (((leftDerivedUpperStarTensorComparison A g).app X).app X'))
+
+lemma isIso_leftDerivedUpperStarOplaxMonoidal_η :
+    letI := leftDerivedUpperStarOplaxMonoidal A g
+    IsIso (η L((g)^*[A])) := by
+  have := DerivedCategory.isIso_ε_Qh (Sheaf Z.smallEtaleTopology A)
+  have := DerivedCategory.isIso_ε_Qh (Sheaf Y.smallEtaleTopology A)
+  have : IsIso (η ((g)^*[A].mapHomotopyCategory (.up ℤ))) := by
+    rw [Functor.mapHomotopyCategory_η]
+    infer_instance
+  exact inferInstanceAs (IsIso (L((g)^*[A]).map (ε Qh) ≫
+    (g)^*[A].leftDerivedFunctorCounit.app (𝟙_ _) ≫
+      Qh.map (η ((g)^*[A].mapHomotopyCategory (.up ℤ))) ≫ CategoryTheory.inv (ε Qh)))
+
+/-- The derived pullback `Lg^* : D(Y_ét) ⥤ D(Z_ét)` as a monoidal functor: the oplax monoidal
+structure `leftDerivedUpperStarOplaxMonoidal`, whose structure maps are isomorphisms. -/
+@[instance_reducible]
+noncomputable def leftDerivedUpperStarMonoidal : L((g)^*[A]).Monoidal :=
+  letI := leftDerivedUpperStarOplaxMonoidal A g
+  haveI := isIso_leftDerivedUpperStarOplaxMonoidal_δ A g
+  haveI := isIso_leftDerivedUpperStarOplaxMonoidal_η A g
+  (Functor.CoreMonoidal.ofOplaxMonoidal _).toMonoidal
+
+end Monoidal
+
 /-- The derived pullback `Lg^* : D(Y_ét) ⥤ D(Z_ét)` is a monoidal functor for the derived tensor
 products. This is the monoidality of derived pullback in blueprint
 `def-weil-derived-pullback-tensor-hom` (within `sk-def-sf-operations`).
 
-The structure isomorphisms are `leftDerivedUpperStarTensorIso` and the unit comparison of
-`nonempty_iso_leftDerivedUpperStar_unit`; what is missing is their compatibility with the
-associators and unitors of the derived tensor products, see the TODO in the module docstring. -/
+The monoidal structure is `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`, whose
+tensor comparison is `leftDerivedUpperStarTensorIso`. -/
 theorem nonempty_monoidal_leftDerivedUpperStar [Etale.UpperStarPreservesFlat A] :
     Nonempty (L((g)^*[A])).Monoidal :=
-  sorry
+  ⟨leftDerivedUpperStarMonoidal A g⟩
 
 end Etale
 

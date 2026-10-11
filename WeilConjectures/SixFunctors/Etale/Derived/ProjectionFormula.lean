@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
@@ -38,11 +39,9 @@ of `AlgebraicGeometry.Etale.projectionMapOfCompactification` is an isomorphism, 
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.hasProjectionFormula_of_derivedCompleteIntegral`
-  (`sk-thm-sf-pf-adic`) : the projection formula at the integral stage `𝒪_E`, for derived
-  complete objects of finite Tor amplitude.
-- `AlgebraicGeometry.Etale.hasProjectionFormula_field` (`sk-thm-sf-pf-field`) : the
-  projection formula over a field of coefficients, at a dualizable object.
+- `AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`,
+  `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_of_isDualizable` :
+  the projection formula holds, for any coefficients, at every `K` and every dualizable `L`.
 - `AlgebraicGeometry.Etale.isIso_projectionMap_of_finite` : the projection formula at a finite
   coefficient ring, on the whole unbounded derived categories, as an isomorphism of bifunctors.
 - `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite` : its objectwise form, a
@@ -75,26 +74,24 @@ pentagon, agreement with the direct-image projection formula for proper `f` thro
 realization. These need comparison isomorphisms for `Rf_!` (composition, change of
 compactification) that are not constructed yet, and are not stated.
 
-The integral stage is modelled exactly as in
-`WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient`: the
-coefficient category is `ModuleCat 𝒪_E` for `𝒪_E = PadicAlgCl.integers l E` the ring of
-integers of an extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` (transported to the universe `u + 1` by
-`Shrink`), and derived completeness is `DerivedCategory.derivedCompleteIntegral`, that is,
-derived completeness for the maximal ideal `𝔪_E`.
-
-`AlgebraicGeometry.Etale.hasProjectionFormula_field` is stated for an arbitrary field of
-coefficients and a dualizable second argument. The blueprint proves the two instances it needs,
-`F = E` and `F = ℚ̄_ℓ`, for constructible objects, by rationalizing the integral statement and
-passing to the `2`-colimit over the finite stages; on the étale site with discrete coefficients
-the projection formula fails for constructible objects over a field of characteristic zero, the
-skyscraper sheaves reducing it to proper base change (see the docstring of
-`AlgebraicGeometry.Etale.hasProjectionFormula_field`).
+The projection formula at the integral stage `𝒪_E` (`sk-thm-sf-pf-adic`) is in
+`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`.
+The projection formula at the rational stage `E` and at the finite stages `E'` of `ℚ̄_ℓ`, for
+rationalizations of integral objects (`AlgebraicGeometry.Etale.hasProjectionFormula_field`,
+`sk-thm-sf-pf-field`), is in `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational`.
+On the étale site with the discrete field `F` as coefficients the projection formula does not
+hold for every bounded constructible `L`: for `L = y_* F` the skyscraper at the closed point `y`
+of the spectrum `Y` of a strictly henselian discrete valuation ring, `f : X ⟶ Y` a regular proper
+curve with nodal special fibre `X_y` and `K = F_X`, the projection map is the restriction
+`RΓ(X, F) ⟶ RΓ(X_y, F)`; for `F` of characteristic zero, `H¹(X, F) = 0` since `X` is normal, while
+`H¹(X_y, F) = F`. For a dualizable `L`, however, the projection formula is formal and holds for
+any coefficients (`AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`).
 
 -/
 
 @[expose] public section
 
-universe w u' u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory Opposite
 
@@ -176,83 +173,74 @@ theorem nonempty_iso_derivedTensor_obj_rightDerivedLowerShriek (f : X ⟶ Y)
 
 end Defs
 
-section Integral
+section Dualizable
 
-variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra ℚ_[l] E]
-  [Algebra E (PadicAlgCl l)] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
-  [FiniteDimensional ℚ_[l] E] [Small.{u + 1} E]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A]
 
-variable {X Y : Scheme.{u}}
-
-/-- Blueprint `sk-thm-sf-pf-adic`: Projection formula: the derived-complete stage.
-
-At the integral stage of the `ℓ`-adic formalism, where the coefficients are the ring of
-integers `𝒪_E` of an extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`: if `K` and `L` are bounded
-constructible, derived complete for the maximal ideal `𝔪_E` and of finite Tor amplitude, then
-the projection formula holds for `f` at `K` and `L`. Constructibility is needed: the proof
-checks the projection map modulo `𝔪_E`, where it is the finite-stage projection formula, and
-concludes by conservativity of the reduction on derived complete objects, which needs both
-sides derived complete; `Rf_! K ⊗ᴸ L` is derived complete for constructible `K` and `L`, but not
-in general. -/
-theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompactification f]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology
-      (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology
-      (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)))))
-    (hKc : DerivedCategory.boundedConstructible
-      (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) X K)
-    (hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K)
-    (hKt : DerivedCategory.finiteTorAmplitude
-      (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) X K)
-    (hLc : DerivedCategory.boundedConstructible
-      (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) Y L)
-    (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
-    (hLt : DerivedCategory.finiteTorAmplitude
-      (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) Y L) :
-    HasProjectionFormula
-      (ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))) f K L :=
-  sorry
-
-end Integral
-
-section Field
-
-variable (F : Type (u + 1)) [Field F]
+variable [Etale.UpperStarPreservesFlat A]
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-thm-sf-pf-field`: Projection formula: rational and algebraically closed
-stages.
+omit [HasSmallSiteSheafify A] in
+/-- **The projection formula for `Rg_*` at a dualizable object.** For any morphism
+`g : Z ⟶ Y`, the projection map `Rg_* M ⊗ᴸ L ⟶ Rg_*(M ⊗ᴸ Lg^* L)` of
+`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap` is an isomorphism when `L` is
+dualizable: it is the projection map of the adjunction `Lg^* ⊣ Rg_*` built from the comonoidal
+structure of the monoidal functor `Lg^*`
+(`CategoryTheory.Adjunction.isIso_rightAdjointProjectionMap_app_app_of_isDualizable`). -/
+theorem isIso_rightDerivedLowerStarProjectionMap_app_app_of_isDualizable {Z : Scheme.{u}}
+    (g : Z ⟶ Y) (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
+    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (hL : IsDualizable L) :
+    IsIso (((rightDerivedLowerStarProjectionMap A g).app M).app L) := by
+  let := leftDerivedUpperStarMonoidal A g
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory (Sheaf Y.smallEtaleTopology A)
+  exact (derivedUpperStarLowerStarAdjunction A g)
+    |>.isIso_rightAdjointProjectionMap_app_app_of_isDualizable _ (fun _ _ ↦ rfl) M hL
 
-Over a field `F` of coefficients — the blueprint names the two instances `F = E`, the
-rational stage, and `F = ℚ̄_ℓ`, the algebraically closed stage — the projection formula
-holds for `f` at any `K` and any dualizable `L`, that is, a lisse `L` (for instance a
-bounded complex with locally constant cohomology sheaves of finite rank).
+variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
+  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
-On the étale site with the discrete field `F` as coefficients, the projection formula does not
-hold for every bounded constructible `L`. For `L = y_* F` the skyscraper at the closed point
-`y` of the spectrum `Y` of a strictly henselian discrete valuation ring, `f : X ⟶ Y` a regular
-proper curve with nodal special fibre `X_y` and `K = F_X`, the projection map is the restriction
-`RΓ(X, F) ⟶ RΓ(X_y, F)`; for `F` of characteristic zero, `H¹(X, F) = 0` since `X` is normal,
-while `H¹(X_y, F) = F`. The blueprint reaches the constructible objects at the stages `E` and
-`ℚ̄_ℓ` through the `ℓ`-adic formalism instead. For dualizable `L` the projection formula is formal:
-it holds for the open immersion of a compactification, and for its proper part `g` the
-projection map of `Rg_*` is the mate of the monoidal structure of `Lg^*`, invertible at a
-dualizable object. -/
-theorem hasProjectionFormula_field (f : X ⟶ Y) [HasCompactification f]
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} F)))
-    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} F)))
-    (hL : IsDualizable L) :
-    HasProjectionFormula (ModuleCat.{u + 1} F) f K L :=
-  sorry
+omit [HasSmallSiteSheafify A] in
+/-- **The projection formula at a dualizable object**, for any compactification `c` of `f`:
+the projection map `PF_c : Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism for every `K`
+when `L` is dualizable. For `c = (X ⟶[i] Z ⟶[g] Y)` the projection map is the projection map of
+`Rg_*` at `(i_! K, L)` followed by isomorphisms
+(`AlgebraicGeometry.Etale.projectionMapOfCompactification_app_app`), and the former is
+invertible at a dualizable `L`
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_of_isDualizable`). -/
+theorem hasProjectionFormulaOfCompactification_of_isDualizable {f : X ⟶ Y}
+    (c : Compactification f) (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (hL : IsDualizable L) :
+    HasProjectionFormulaOfCompactification A c K L := by
+  have := isIso_rightDerivedLowerStarProjectionMap_app_app_of_isDualizable A c.g
+    (D((c.i)_!open[A]).obj K) hL
+  rw [HasProjectionFormulaOfCompactification, projectionMapOfCompactification_app_app]
+  infer_instance
 
-end Field
+omit [HasSmallSiteSheafify A] in
+/-- **The projection formula at a dualizable object**: for `f` admitting a compactification,
+the projection formula holds at every `K` and every dualizable `L`. -/
+theorem hasProjectionFormula_of_isDualizable (f : X ⟶ Y) [HasCompactification f]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    {L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (hL : IsDualizable L) :
+    HasProjectionFormula A f K L :=
+  hasProjectionFormulaOfCompactification_of_isDualizable A _ K hL
+
+end Dualizable
 
 section Finite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 
-/-- **The projection formula for a proper direct image at finite coefficients, unbounded.**
+/-- Blueprint `lem-amb-proper-coproducts-projection`: The proper projection formula on the
+ambient category.
+
+**The projection formula for a proper direct image at finite coefficients, unbounded.**
 For a finite coefficient ring `Λ` and a proper morphism `g : Z ⟶ Y`, the projection map
 
 `Rg_* M ⊗ᴸ L ⟶ Rg_*(M ⊗ᴸ Lg^* L)`
@@ -266,7 +254,10 @@ compactification being formal. It holds by SGA 4 XVII 5.2.9: the question is loc
 over a quasi-compact open the fibres of `g` have bounded dimension, so `Rg_*` has finite
 cohomological dimension on torsion sheaves and commutes with direct sums; on geometric stalks,
 by unbounded proper base change, it becomes `RΓ(Z_ȳ, M) ⊗ᴸ N ≅ RΓ(Z_ȳ, M ⊗ᴸ N)` for a complex
-`N` of `Λ`-modules, which holds for `N = Λ` and passes to all `N` through these colimits. -/
+`N` of `Λ`-modules, which holds for `N = Λ` and passes to all `N` through these colimits.
+
+The blueprint node is stated for `g` of finite type between Noetherian schemes, with the tensor
+factors in the other order; neither hypothesis is used by the argument above. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_of_finite [Finite Λ] {Z : Scheme.{u}}
     (g : Z ⟶ Y) [IsProper g] :
     IsIso (rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) g) :=

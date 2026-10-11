@@ -40,8 +40,10 @@ open CategoryTheory Abelian Limits
 
 namespace AlgebraicGeometry
 
-/-- **Cohomology of a geometric point.** Over a separably closed field `k` every abelian étale
-sheaf on `Spec k` has no cohomology in positive degrees, the constant sheaf `ℤ` being projective
+/-- Blueprint `lem-kun-cd-sep-closed-point`: **Cohomology of a geometric point.**
+
+Over a separably closed field `k` every abelian étale sheaf on `Spec k` has no cohomology in
+positive degrees, the constant sheaf `ℤ` being projective
 (`AlgebraicGeometry.Scheme.projective_constantSheaf_of_isSepClosed`). -/
 theorem Scheme.subsingleton_H_of_isSepClosed (k : Type u) [Field k] [IsSepClosed k]
     (H : Sheaf (Spec (.of k)).smallEtaleTopology AddCommGrpCat.{u + 1}) (n : ℕ) :

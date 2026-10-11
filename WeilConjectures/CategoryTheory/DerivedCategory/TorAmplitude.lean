@@ -73,12 +73,25 @@ instance (a b : ℤ) : (torAmplitudeIn C a b).IsClosedUnderIsomorphisms where
     exact ⟨TStructure.t.isGE_of_iso (whiskerRightIso e _) a,
       TStructure.t.isLE_of_iso (whiskerRightIso e _) b⟩
 
+/-- Tor amplitude passes to retracts. -/
+instance (a b : ℤ) : (torAmplitudeIn C a b).IsStableUnderRetracts where
+  of_retract e h F := (homologyConcentratedIn a b).prop_of_retract
+    (e.map (tensorRight ((singleFunctor C 0).obj F))) (h F)
+
 variable (C)
 
 /-- An object of `D(C)` has *finite Tor amplitude* if it has Tor amplitude in some interval
 `[a, b]`. -/
 def finiteTorAmplitude : ObjectProperty (DerivedCategory C) :=
   fun M ↦ ∃ a b : ℤ, torAmplitudeIn C a b M
+
+/-- Finite Tor amplitude is invariant under isomorphism. -/
+instance : (finiteTorAmplitude C).IsClosedUnderIsomorphisms where
+  of_iso e := fun ⟨a, b, h⟩ ↦ ⟨a, b, (torAmplitudeIn C a b).prop_of_iso e h⟩
+
+/-- Finite Tor amplitude passes to retracts. -/
+instance : (finiteTorAmplitude C).IsStableUnderRetracts where
+  of_retract e := fun ⟨a, b, h⟩ ↦ ⟨a, b, (torAmplitudeIn C a b).prop_of_retract e h⟩
 
 variable {C}
 
