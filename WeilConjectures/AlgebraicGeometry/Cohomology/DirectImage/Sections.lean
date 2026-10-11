@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.ProjectionFormula
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Restrict
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.AcyclicResolution
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
@@ -490,13 +492,16 @@ T' --g---> T
 Then `R^q f'_* (g'^* ℱ) ≅ (R^q f_* ℱ)|_{T'}` for every `q`.
 
 This is flat base change along an open immersion, and holds for any `f` and any `ℱ`: restriction
-to an open subscheme preserves injective `𝒪_X`-modules and commutes with the pushforward. -/
+to an open subscheme sends injective `𝒪_X`-modules to flasque, hence pushforward-acyclic, ones and
+commutes with the pushforward
+(`AlgebraicGeometry.Scheme.Modules.higherDirectImagePullbackIsoRestrict`). -/
 theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶ T)
     [IsOpenImmersion g] (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules]
     (sq : IsPullback g' f' f g) (q : ℕ) :
     Nonempty ((higherDirectImage f' q).obj ((Modules.pullback g').obj ℱ) ≅
       ((higherDirectImage f q).obj ℱ).restrict g) :=
-  sorry
+  have := isOpenImmersion_of_isPullback sq
+  ⟨higherDirectImagePullbackIsoRestrict sq ℱ q⟩
 
 open MonoidalCategory in
 /-- **The projection formula** for an invertible module. For `f : X ⟶ T`, an `𝒪_X`-module `ℱ`
@@ -506,15 +511,16 @@ by an invertible module pulled back from the base commutes with the higher direc
 The blueprint states the projection formula `Rf_* E ⊗^𝕃 K ≅ Rf_* (E ⊗^𝕃 Lf^* K)` in the derived
 category `D_QCoh` for `f` quasi-compact and quasi-separated, and deduces this case `K = 𝒩[0]`.
 There is no derived category of `X.Modules` here, so only this case is stated, through the
-higher direct images; it holds for every `f` and `ℱ`, as both sides are computed locally on
-`T`, where `𝒩 ≅ 𝒪_T`.
+higher direct images; it holds for every `f` and `ℱ`: twisting by an invertible module is an
+autoequivalence, and the projection formula `f_* (ℱ ⊗ f^* 𝒩) ≅ f_* ℱ ⊗ 𝒩` is natural in `ℱ`
+(`AlgebraicGeometry.Scheme.Modules.higherDirectImageTensorObjPullbackIso`).
 
 (blueprint: `lem-pc-projection-formula`) -/
 theorem nonempty_higherDirectImage_tensorObj_pullback_iso (𝒩 : T.Modules) [𝒩.IsInvertible]
     (q : ℕ) :
     Nonempty ((higherDirectImage f q).obj (ℱ ⊗ (Modules.pullback f).obj 𝒩) ≅
       (higherDirectImage f q).obj ℱ ⊗ 𝒩) :=
-  sorry
+  ⟨higherDirectImageTensorObjPullbackIso f ℱ 𝒩 q⟩
 
 end BaseChange
 

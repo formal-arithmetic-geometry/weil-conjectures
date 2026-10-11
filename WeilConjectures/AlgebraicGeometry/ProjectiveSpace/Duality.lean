@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 public import WeilConjectures.AlgebraicGeometry.Modules.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Koszul
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Resolution
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
@@ -173,8 +174,20 @@ theorem exists_exact_sigma_twist (𝒢 : (ProjectiveLine (Spec (.of k))).Modules
       (f₂ : ∐ (fun j ↦ 𝒪 (d₂ j)) ⟶ ∐ (fun j ↦ 𝒪 (d₁ j)))
       (f₁ : ∐ (fun j ↦ 𝒪 (d₁ j)) ⟶ ∐ (fun j ↦ 𝒪 (d₀ j)))
       (f₀ : ∐ (fun j ↦ 𝒪 (d₀ j)) ⟶ 𝒢),
-      Mono f₂ ∧ Epi f₀ ∧ (ComposableArrows.mk₃ f₂ f₁ f₀).Exact :=
-  sorry
+      Mono f₂ ∧ Epi f₀ ∧ (ComposableArrows.mk₃ f₂ f₁ f₀).Exact := by
+  intro 𝒪
+  obtain ⟨J₁, J₀, _, _, d₁, d₀, f, g, w, hS⟩ := exists_shortExact_sigma_twist 𝒢
+  let ε₁ := (Finite.equivFin J₁).symm
+  let ε₀ := (Finite.equivFin J₀).symm
+  have hS' := shortExact_of_isos hS (Sigma.reindex ε₁ fun _ ↦ 𝒪 d₁).symm
+    (Sigma.reindex ε₀ fun _ ↦ 𝒪 d₀).symm (Iso.refl 𝒢)
+  have hz : IsZero (∐ fun j : Fin 0 ↦ 𝒪 (Fin.elim0 j)) :=
+    (IsZero.iff_id_eq_zero _).2 (Sigma.hom_ext _ _ fun j ↦ j.elim0)
+  refine ⟨_, _, 0, fun _ ↦ d₀, fun _ ↦ d₁, Fin.elim0, 0, _, _, ⟨fun g h _ ↦ hz.eq_of_tgt g h⟩,
+    hS'.epi_g, ComposableArrows.exact_of_δ₀ (ComposableArrows.exact₂_mk _ (zero_comp) ?_)
+      (ComposableArrows.exact₂_mk _ _ hS'.exact)⟩
+  have := hS'.mono_f
+  exact (ShortComplex.exact_iff_mono _ rfl).2 this
 
 /-- `Hom(𝒪(a), Ω¹_{ℙ¹_k/k}) ≅ 𝒪(-a - 2)`, since `Ω¹_{ℙ¹_k/k} ≅ 𝒪(-2)` is invertible and
 `𝒪(a)ᵛ ≅ 𝒪(-a)`. -/

@@ -13,7 +13,8 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 public import Mathlib.CategoryTheory.Sites.Over
-public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+public import WeilConjectures.AlgebraicGeometry.EffectiveDescent.Group
+public import WeilConjectures.AlgebraicGeometry.FieldExtensionDescent
 
 /-!
 # Effective descent for schemes
@@ -84,8 +85,18 @@ theorem existsUnique_hom_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] 
     (ψ : V ⟶ W)
     (hψ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
       E.transport f₁ f₂ h (a ≫ ψ) = D.transport f₁ f₂ h a ≫ ψ) :
-    ∃! ψ₀ : V₀ ⟶ W₀, ψ.left ≫ qW = qV ≫ ψ₀.left :=
-  sorry
+    ∃! ψ₀ : V₀ ⟶ W₀, ψ.left ≫ qW = qV ≫ ψ₀.left := by
+  obtain ⟨g₀, hg₀, hu⟩ := D.existsUnique_desc_of_isPullback hqV hDV (ψ.left ≫ qW)
+    fun f₁ f₂ h a ↦ by simpa [hψ] using hEW f₁ f₂ h (a ≫ ψ)
+  obtain ⟨_, _, hY⟩ := D.existsUnique_desc_of_isPullback hqV hDV (V.hom ≫ p)
+    fun f₁ f₂ h a ↦ by simp [h]
+  have hg₀Y : g₀ ≫ W₀.hom = V₀.hom := by
+    refine (hY _ ?_).trans (hY V₀.hom hqV.w).symm
+    dsimp only
+    rw [reassoc_of% hg₀, hqW.w, Over.w_assoc]
+  refine ⟨Over.homMk g₀ hg₀Y, hg₀.symm, fun ψ₀ hψ₀ ↦ ?_⟩
+  ext
+  exact hu _ hψ₀.symm
 
 /-- The point `qV ∘ a` of `V₀` over `Y` induced by a point `a` of `V` over `f`, for a projection
 `qV : V ⟶ V₀` exhibiting `V` as the base change of `V₀` along `p`. -/
@@ -117,8 +128,16 @@ theorem exists_commGrpObj_of_isPullback [Flat p] [Surjective p] [QuasiCompact p]
       D.transport f₁ f₂ h (toUnit _ ≫ η[V]) = toUnit _ ≫ η[V]) :
     ∃ _ : CommGrpObj V₀, ∀ {T : Scheme.{u}} (f : T ⟶ X) (a b : Over.mk f ⟶ V),
       descendPoint hqV (lift a b ≫ μ[V]) =
-        lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] :=
-  sorry
+        lift (descendPoint hqV a) (descendPoint hqV b) ≫ μ[V₀] := by
+  let := CommGrpObj.ofRepresentableBy V₀ (D.descendedPresheaf hqV hDV hμ hη)
+    (D.descendedRepresentableBy hqV hDV hμ hη)
+  refine ⟨this, fun f a b ↦ ?_⟩
+  have hmul (x y : Over.mk (f ≫ p) ⟶ V₀) :
+      lift x y ≫ μ[V₀] = (D.homCommGroup hqV hDV hμ hη _).mul x y :=
+    (((D.descendedPresheaf hqV hDV hμ hη).map (lift x y).op).hom.map_mul
+      (fst V₀ V₀) (snd V₀ V₀)).trans
+      (congrArg₂ (D.homCommGroup hqV hDV hμ hη _).mul (lift_fst x y) (lift_snd x y))
+  exact (D.descendPoint'_mul hqV hDV hμ hη a b).trans (hmul _ _).symm
 
 end CategoryTheory.Over.DescentDatum
 
@@ -145,6 +164,6 @@ theorem isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback {
     (h : IsPullback q z' z (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (n : ℕ)
     [IsProper z'] [SmoothOfRelativeDimension n z'] [GeometricallyIntegral z'] :
     IsProper z ∧ SmoothOfRelativeDimension n z ∧ GeometricallyIntegral z :=
-  sorry
+  isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback_aux z z' q h n
 
 end AlgebraicGeometry
