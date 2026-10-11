@@ -111,5 +111,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kir1839 (reviewer sub-agent of L); spot-checked: Item = Stacks 08BS (cohomology.tex, ringed space); step 1 cites new child j_! -| j^{-1}, both exact (00A7+01AK), step 2 instantiates lem-weil-pbc-right-adjoint-preserves-kinjective (08BJ) with u=j^{-1}, v=j_! - orientation and exactness hypothesis match. No cycle: child has only def stmt_deps, 08BJ node does not reach the item; G1 lem-pc-derived-direct-image-preserves-qcoh only consumes the item. Child not a duplicate: K1 lem-weil-pbc-site-restriction-injectives / H1 lem-weil-pbc-site-extension-by-zero-exact and lem-sc-topological-extension-by-zero-stalks are for abelian sheaves (Ab), lem-weil-pbc-module-extension-by-zero-adjunction/open-restriction-injectives are scheme special cases of the child, lem-weil-pbc-ringed-space-open-restriction-adjunction is restriction -| j_*; child is a real ringed-space module lemma, not re-proving them. FIX more, RETURN less: B3/source repair - the second reading changed the source of both proof steps and of the child to sites-cohomology.tex 'cohomology-lemma-restrict-K-injective-to-open', which is the ringed-SITE lemma with a different tag; restored cohomology.tex lemma-restrict-K-injective-to-open (Tag 08BS) in both steps and in the child's source, and named 00A7 for the adjunction and 01AK for exactness.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KInjectiveRestrictOpen",
+  "declaration": "AlgebraicGeometry.kInjective_of_restrict_open",
+  "file": "lean/Sheaf/Algebra/Homology/KInjectiveRestrictOpen.lean",
+  "statement": "theorem kInjective_of_restrict_open (X : RingedSpace.{u}) (U : Opens X) (I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) [I.IsKInjective] : @CochainComplex.IsKInjective (SheafOfModules.{u} ((moduleRings X).over U)) _ _ (((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapHomologicalComplex (ComplexShape.up ℤ)).obj I)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kir1357",
+  "group": "F1",
+  "result": "pass",
+  "note": "X : RingedSpace.{u} = ringed space; U : Opens X = open inclusion j; I : CochainComplex (SheafOfModules (moduleRings X)) ℤ unbounded, [I.IsKInjective] Mathlib = def-pur-kinjective-complex; conclusion IsKInjective of overFunctor.mapHomologicalComplex I over (moduleRings X).over U with SheafOfModules.instAbelian on both sides (pp.explicit), PreservesZeroMorphisms via the shared additive instance; no let/existential/extra universe/hollow hypothesis; same j^{-1} as K1 e7a86c4b6"
  }
 }
