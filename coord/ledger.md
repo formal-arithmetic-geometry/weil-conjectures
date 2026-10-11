@@ -3435,3 +3435,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:02 L: merged deliver/G1/def-weil-pbc-double-complex-zigzag-module (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.ZigzagModule HomologicalComplex₂.zigzagModule)
 - 06:02 L: merged deliver/H1/def-weil-pbc-finite-global-dimension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.GlobalDimension Ring.HasFiniteGlobalDimension)
 - 06:02 L: merged deliver/M1/lem-galois-fpqc-refinement-fully-faithful (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FpqcRefinementFullyFaithful AlgebraicGeometry.fpqcRefinementFullyFaithful)
+- 06:02 L: merged deliver/C1/def-sc-perfect-closed-immersion (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.PerfectClosedImmersion AlgebraicGeometry.IsPerfectClosedImmersion)
