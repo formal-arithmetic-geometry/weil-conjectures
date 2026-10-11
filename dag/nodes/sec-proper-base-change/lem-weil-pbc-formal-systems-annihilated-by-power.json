@@ -213,5 +213,29 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps follow Stacks Remark 0888 with the 087W identification alpha_n(U) = alpha_U mod I^n written out: annihilation local on affines; (3)=>(1) with 2t via the new commutative-algebra node (c); (1)=>(2) by the limit of the 'fg' maps (naturality (b) and completeness from 087W(1)) and the converse criterion (d); (2)=>(3) by quasi-compactness; (4)<=>(2) via kernels/cokernels in Coh(X,I) on affines (exact restriction, equivalence, Noetherian A^). Tags 0888, 087W, 087X verified. The new node's parts (b),(d) go beyond the remark but are correct and needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_annihilated_iff",
+  "declarations": [
+   "AlgebraicGeometry.coherentFormalModule_annihilated_iff",
+   "AlgebraicGeometry.coherentFormalModule_annihilated_double",
+   "LinearMap.ker_coker_reduction_annihilated_double"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleAnnihilated.lean",
+  "statement": "theorem coherentFormalModule_annihilated_iff (X : Scheme.{u}) [IsNoetherian X] (I K : X.IdealSheafData) (F G : CoherentFormalModule X I) (α : F ⟶ G) : List.TFAE [(∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (kernel (α.hom.app (op n)))) ∧ IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (cokernel (α.hom.app (op n))))), (∀ U : X.affineOpens, ∃ t : ℕ, 1 ≤ t ∧ K.ideal U ^ t ≤ Module.annihilator Γ(X, U.1) (LinearMap.ker (lim.map (Functor.whiskerRight α.hom (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom) ∧ K.ideal U ^ t ≤ Module.annihilator Γ(X, U.1) (↥(limit (G.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op U.1)) : ModuleCat Γ(X, U.1)) ⧸ LinearMap.range (lim.map (Functor.whiskerRight α.hom (SheafOfModules.evaluation X.ringCatSheaf (op U.1)))).hom)), (∃ (r : ℕ) (U : Fin r → X.affineOpens) (t : ℕ), (⨆ i, (U i).1) = ⊤ ∧ 1 ≤ t ∧ ∀ i : Fin r, K.ideal (U i) ^ t ≤ Module.annihilator Γ(X, (U i).1) (LinearMap.ker (lim.map (Functor.whiskerRight α.hom (SheafOfModules.evaluation X.ringCatSheaf (op (U i).1)))).hom) ∧ K.ideal (U i) ^ t ≤ Module.annihilator Γ(X, (U i).1) (↥(limit (G.obj ⋙ SheafOfModules.evaluation X.ringCatSheaf (op (U i).1)) : ModuleCat Γ(X, (U i).1)) ⧸ LinearMap.range (lim.map (Functor.whiskerRight α.hom (SheafOfModules.evaluation X.ringCatSheaf (op (U i).1)))).hom)), (∃ (k : KernelFork α) (c : CokernelCofork α), Nonempty (IsLimit k) ∧ Nonempty (IsColimit c) ∧ ∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (k.pt.obj.obj (op n))) ∧ IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (c.pt.obj.obj (op n))))]",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The affine map is the actual inverse limit of section maps, regarded over the ring of sections; the recorded affine equivalence identifies it with the restricted completed-module map. Universal kernel/cokernel forks realize condition (4) without an additional Abelian-instance hypothesis. The two companion declarations state the 2t bound and the commutative algebra clause."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
