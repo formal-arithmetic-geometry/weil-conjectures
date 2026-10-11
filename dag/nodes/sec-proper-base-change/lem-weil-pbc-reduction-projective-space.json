@@ -15,7 +15,8 @@
  "stmt_deps": [
   "def-weil-pbc-property",
   "def-nagata-projective-space-base-change",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-weil-pbc-projective-line-power"
  ],
  "proof": [
   {
@@ -203,5 +204,22 @@
   "by": "L",
   "result": "pass",
   "note": "statement made precise (iterated fibre product, n = 0 covered), composition through IA made explicit; lem-weil-pbc-finite-proper (sk-prop-av-pqf-finite) and lem-weil-pbc-proper-composition (sk-thm-br) accepted as tool uses; 3 new nodes, one closed by Lean"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpaceBaseChangeReduction",
+  "declaration": "AlgebraicGeometry.Etale.hasTorsionAbelianBaseChange_projectiveSpace_of_projectiveLine",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpaceBaseChangeReduction.lean",
+  "statement": "theorem hasTorsionAbelianBaseChange_projectiveSpace_of_projectiveLine (_h : ∀ S : Scheme.{u_reduction}, HasTorsionAbelianBaseChange (ProjectiveLine S ↘ S)) (T : Scheme.{u_reduction}) (n : ℕ) : IsProper (ProjectiveSpace.projectiveLinePower T n).hom ∧ HasTorsionAbelianBaseChange (ProjectiveSpace.projectiveLinePower T n).hom ∧ IsProper (ℙ(ULift.{u_reduction} (Fin (n + 1)); T) ↘ T) ∧ HasTorsionAbelianBaseChange (ℙ(ULift.{u_reduction} (Fin (n + 1)); T) ↘ T)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-rps",
+  "group": "K1",
+  "result": "pass"
  }
 }
