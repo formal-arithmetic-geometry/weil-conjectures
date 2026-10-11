@@ -413,4 +413,140 @@ lemma extendedReesAlgebraToPolynomial_C_mul_T_neg_one (φ : R →+* S) (h : I �
 
 end ToPolynomial
 
+section MvPolynomial
+
+variable (C : Type*) [CommRing C] (σ : Type*)
+
+/-- The ideal `(X_i)_{i ∈ σ}` of the origin in `C[X_i : i ∈ σ]`. -/
+noncomputable abbrev mvPolynomialOrigin : Ideal (MvPolynomial σ C) :=
+  Ideal.span (Set.range MvPolynomial.X)
+
+/-- The map `C[t][U_i : i ∈ σ] ⟶ C[X_i][t, t⁻¹]`, `t ↦ t`, `U_i ↦ X_i t⁻¹`; it is an isomorphism
+onto the extended Rees algebra of the origin (`Ideal.mvPolynomialExtendedReesAlgebraEquiv`). -/
+noncomputable def mvPolynomialToLaurent :
+    MvPolynomial σ C[X] →+* (MvPolynomial σ C)[T;T⁻¹] :=
+  MvPolynomial.eval₂Hom (Polynomial.eval₂RingHom (LaurentPolynomial.C.comp MvPolynomial.C) (T 1))
+    fun i ↦ LaurentPolynomial.C (MvPolynomial.X i) * T (-1)
+
+/-- The left inverse `C[X_i][t, t⁻¹] ⟶ C[t, t⁻¹][U_i]`, `X_i ↦ t U_i`, of
+`Ideal.mvPolynomialToLaurent` up to `C[t] ⊆ C[t, t⁻¹]`. -/
+noncomputable def laurentToMvPolynomial :
+    (MvPolynomial σ C)[T;T⁻¹] →+* MvPolynomial σ C[T;T⁻¹] :=
+  LaurentPolynomial.eval₂
+    (MvPolynomial.eval₂Hom (MvPolynomial.C.comp LaurentPolynomial.C)
+      fun i ↦ MvPolynomial.C (T 1) * MvPolynomial.X i)
+    ((isUnit_T 1).map (MvPolynomial.C (σ := σ))).unit
+
+lemma laurentToMvPolynomial_comp_mvPolynomialToLaurent :
+    (laurentToMvPolynomial C σ).comp (mvPolynomialToLaurent C σ) =
+      MvPolynomial.map toLaurent := by
+  refine MvPolynomial.ringHom_ext (fun p ↦ ?_) fun i ↦ ?_
+  · simp only [RingHom.comp_apply, mvPolynomialToLaurent, MvPolynomial.eval₂Hom_C,
+      MvPolynomial.map_C]
+    induction p using Polynomial.induction_on' with
+    | add p q hp hq => simp only [map_add, hp, hq]
+    | monomial n a =>
+      simp [laurentToMvPolynomial, ← C_mul_X_pow_eq_monomial, IsUnit.unit_spec, ← map_pow, T_pow]
+  · simp only [RingHom.comp_apply, mvPolynomialToLaurent, MvPolynomial.eval₂Hom_X',
+      MvPolynomial.map_X, laurentToMvPolynomial, map_mul, LaurentPolynomial.eval₂_C,
+      MvPolynomial.eval₂Hom_X']
+    rw [show (-1 : ℤ) = -(1 : ℕ) by simp, LaurentPolynomial.eval₂_T_neg_n, pow_one,
+      mul_comm, ← mul_assoc]
+    convert one_mul _
+    simp
+
+lemma mvPolynomialToLaurent_injective : Function.Injective (mvPolynomialToLaurent C σ) := by
+  intro x y h
+  have := congrArg (laurentToMvPolynomial C σ) h
+  simp only [← RingHom.comp_apply, laurentToMvPolynomial_comp_mvPolynomialToLaurent] at this
+  exact MvPolynomial.map_injective _ toLaurent_injective this
+
+
+lemma mvPolynomialToLaurent_C (p : C[X]) :
+    mvPolynomialToLaurent C σ (MvPolynomial.C p) = toLaurent (p.map MvPolynomial.C) := by
+  simp only [mvPolynomialToLaurent, MvPolynomial.eval₂Hom_C]
+  induction p using Polynomial.induction_on' with
+  | add p q hp hq => simp only [map_add, Polynomial.map_add, hp, hq]
+  | monomial n a =>
+    simp [← C_mul_X_pow_eq_monomial, T_pow]
+
+lemma mvPolynomialToLaurent_X (i : σ) :
+    mvPolynomialToLaurent C σ (MvPolynomial.X i) =
+      LaurentPolynomial.C (MvPolynomial.X i) * T (-1) := by
+  simp [mvPolynomialToLaurent]
+
+lemma mem_range_mvPolynomialToLaurent_C (p : MvPolynomial σ C) :
+    LaurentPolynomial.C p ∈ (mvPolynomialToLaurent C σ).range := by
+  induction p using MvPolynomial.induction_on with
+  | C c => exact ⟨MvPolynomial.C (Polynomial.C c), by simp [mvPolynomialToLaurent_C]⟩
+  | add p q hp hq => rw [map_add]; exact Subring.add_mem _ hp hq
+  | mul_X p i hp =>
+    rw [map_mul]
+    refine Subring.mul_mem _ hp ⟨MvPolynomial.C Polynomial.X * MvPolynomial.X i, ?_⟩
+    rw [map_mul, mvPolynomialToLaurent_C, mvPolynomialToLaurent_X, Polynomial.map_X,
+      toLaurent_X, mul_comm, mul_assoc, ← T_add]
+    simp
+
+/-- The range of `Ideal.mvPolynomialToLaurent` is the extended Rees algebra of the origin. -/
+lemma range_mvPolynomialToLaurent :
+    (mvPolynomialToLaurent C σ).range = (mvPolynomialOrigin C σ).extendedReesAlgebra.toSubring := by
+  apply le_antisymm
+  · rintro _ ⟨x, rfl⟩
+    induction x using MvPolynomial.induction_on with
+    | C p =>
+      rw [mvPolynomialToLaurent_C]
+      exact toLaurent_mem_extendedReesAlgebra _
+    | add p q hp hq => rw [map_add]; exact Subring.add_mem _ hp hq
+    | mul_X p i hp =>
+      rw [map_mul, mvPolynomialToLaurent_X]
+      exact Subring.mul_mem _ hp (C_mul_T_neg_one_mem_extendedReesAlgebra
+        (Ideal.subset_span ⟨i, rfl⟩))
+  · let K : Subalgebra (MvPolynomial σ C) (MvPolynomial σ C)[T;T⁻¹] :=
+      { (mvPolynomialToLaurent C σ).range with
+        algebraMap_mem' p := by
+          rw [← LaurentPolynomial.C_eq_algebraMap]
+          exact mem_range_mvPolynomialToLaurent_C C σ p }
+    have : (mvPolynomialOrigin C σ).extendedReesAlgebra ≤ K := by
+      refine Algebra.adjoin_le ?_
+      rintro _ (rfl | ⟨y, hy, rfl⟩)
+      · exact ⟨MvPolynomial.C Polynomial.X, by simp [mvPolynomialToLaurent_C]⟩
+      · induction hy using Submodule.span_induction with
+        | mem y hy =>
+          obtain ⟨i, rfl⟩ := hy
+          exact ⟨MvPolynomial.X i, mvPolynomialToLaurent_X C σ i⟩
+        | zero => simp
+        | add y z _ _ hy hz =>
+          show LaurentPolynomial.C (y + z) * T (-1) ∈ K
+          rw [map_add, add_mul]; exact K.add_mem hy hz
+        | smul a y _ hy =>
+          show LaurentPolynomial.C (a • y) * T (-1) ∈ K
+          rw [smul_eq_mul, map_mul, mul_assoc]
+          exact K.mul_mem (mem_range_mvPolynomialToLaurent_C C σ a) hy
+    exact fun x hx ↦ this hx
+
+/-- **The extended Rees algebra of the origin.** `C[X_i][t, (X_i) t⁻¹] ≅ C[t][U_i]`, with
+`X_i = t U_i`: the deformation to the normal cone of the origin in affine space is affine space
+over the affine line. -/
+noncomputable def mvPolynomialExtendedReesAlgebraEquiv :
+    MvPolynomial σ C[X] ≃+* (mvPolynomialOrigin C σ).extendedReesAlgebra :=
+  RingEquiv.ofBijective
+    ((mvPolynomialToLaurent C σ).codRestrict _ fun x ↦
+      (range_mvPolynomialToLaurent C σ).le ⟨x, rfl⟩)
+    ⟨fun x y h ↦ mvPolynomialToLaurent_injective C σ (congrArg Subtype.val h), fun z ↦ by
+      obtain ⟨x, hx⟩ := (range_mvPolynomialToLaurent C σ).ge z.2
+      exact ⟨x, Subtype.ext hx⟩⟩
+
+@[simp]
+lemma coe_mvPolynomialExtendedReesAlgebraEquiv (x : MvPolynomial σ C[X]) :
+    (mvPolynomialExtendedReesAlgebraEquiv C σ x : (MvPolynomial σ C)[T;T⁻¹]) =
+      mvPolynomialToLaurent C σ x :=
+  rfl
+
+lemma mvPolynomialExtendedReesAlgebraEquiv_comp_C :
+    (mvPolynomialExtendedReesAlgebraEquiv C σ).toRingHom.comp MvPolynomial.C =
+      (mvPolynomialOrigin C σ).toExtendedReesAlgebra.comp (Polynomial.mapRingHom MvPolynomial.C) :=
+  RingHom.ext fun p ↦ Subtype.ext (mvPolynomialToLaurent_C C σ p)
+
+end MvPolynomial
+
 end Ideal
