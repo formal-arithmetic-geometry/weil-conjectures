@@ -1,11 +1,11 @@
 # Work queue
 
-859 items; claim with `tools/claim.py next <group> [--stage N]`.
+862 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (859)
+## Stage 2: nodes to state (862)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -13,7 +13,6 @@
 | `def-pod-lisse-l-adic-sheaves` | 1 | state |
 | `def-sc-divisor` | 1 | state |
 | `def-sc-kahler-differentials` | 1 | state |
-| `def-sc-scheme-tangent-space` | 1 | state |
 | `def-sp-kinjective-bridge` | 1 | state |
 | `def-weil-pbc-charpoly-locally-free` | 1 | state |
 | `lem-kun-cp-approximation` | 1 | state |
@@ -30,9 +29,15 @@
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-curve-base-change-relative-dimension-one` | 1 | state |
 | `lem-sc-fibre-dimension-after-base-change` | 1 | state |
+| `lem-sc-finite-flat-unramified-tangent-criterion` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-invertible-module-generic-stalk` | 1 | state |
 | `lem-sc-mayer-vietoris-ringed-space` | 1 | state |
+| `lem-sc-point-tangent-cotangent-surjective` | 1 | state |
+| `lem-sc-product-tangent-space-direct-sum` | 1 | state |
+| `lem-sc-rational-point-tangent-derivation-identification` | 1 | state |
+| `lem-sc-rational-tangent-cotangent-duality` | 1 | state |
+| `lem-sc-rational-unramified-cotangent-criterion` | 1 | state |
 | `lem-sc-separated-affine-function-field-surjective` | 1 | state |
 | `lem-sc-smooth-connected-curve-local-rings` | 1 | state |
 | `lem-sc-smooth-diagonal-regular-immersion` | 1 | state |
@@ -59,13 +64,11 @@
 | `lem-weil-pbc-completion-finite-extension` | 1 | state |
 | `lem-weil-pbc-completion-finite-quotient` | 1 | state |
 | `lem-weil-pbc-completion-noetherian-quotient-noetherian` | 1 | state |
-| `lem-weil-pbc-completion-of-dvr-is-dvr` | 1 | state |
 | `lem-weil-pbc-completion-regular-local` | 1 | state |
 | `lem-weil-pbc-complex-injective-resolution-mono` | 1 | state |
 | `lem-weil-pbc-complex-mapping-cylinder-split-factorization` | 1 | state |
 | `lem-weil-pbc-complex-spectral-sequence-comparison` | 1 | state |
 | `lem-weil-pbc-composition-fibre-degree-bound` | 1 | state |
-| `lem-weil-pbc-conormal-intersection-regular-quotient` | 1 | state |
 | `lem-weil-pbc-conormal-module-principal-localization` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-morphism-clopen` | 1 | state |
 | `lem-weil-pbc-constant-group-scheme-multiplication` | 1 | state |
@@ -869,7 +872,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 854 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 848 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
