@@ -146,5 +146,24 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fp3 (reviewer sub-agent of L); spot-checked: Repaired re-push after the returns of 13:14 and 14:33 (R-fpl). Latest return: point 1 (C4/C2, unsupported directed-cofinality in step 2) repaired by the direct universal-property proof the return proposed: the directed reindexing and lem-weil-pbc-scheme-over-limit tool use are gone; point 2 (E2/B4, S_0 used twice, J_sbar smallness, proof_deps) is moot because step 1 with stage 0 is removed, and proof_deps is now the union of the steps' uses including def-pc-fibre-product. Statement unchanged (blueprint node lemma-weil-pbc-fibre-product-limit, order 945); stmt_deps adds def-weil-pbc-strict-henselization-limit and def-pc-fibre-product, which the statement uses. Step 1: def-weil-pbc-strict-henselization-limit gives S_(sbar)=Spec colim over J_sbar^op with J_sbar small; lem-weil-pbc-spec-small-colimit-limit makes the projections a limit cone over J_sbar in Schemes; transport along the essentially surjective full inclusion J_sbar into affine neighbourhoods plus clause (2) of lem-weil-pbc-colimit-initial-full-subcategory gives the limit over all affine neighbourhoods; lemma-weil-pbc-affine-neighbourhood-cofinal (affine subcategory initial) and lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered (N_sbar cofiltered, (S,sbar) an object) are exactly the hypotheses of clause (1), applied in Sch^op, giving the limit over N_sbar; p_S is the structure map and p_V lie over S by cone compatibility. Step 2: checked by hand: V-components of a compatible cone form a cone (q(id x h)=hq), X-components are constant along morphisms (p(id x h)=p) hence equal for all V by common refinement, f a = v_S = p_S b from g_S, def-pc-fibre-product gives existence and uniqueness of T -> X x_S S_(sbar); uniqueness of the induced map checked via the step-1 limit and the component at S. Tool uses (both sk-thm-p1, generic black boxes, C8) accepted: lem-weil-pbc-colimit-initial-full-subcategory, lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered. Small case: diagram reduced to (S,sbar) gives X x_S S = X. qcqs hypothesis unused, statement unchanged, no E7. Only the item's node and report changed, one commit, review section present; node unchanged on sheaf-dag since merge base 331bc5e29. No new nodes, no Mathlib leaves. 14:40-14:42 UTC."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit",
+  "declaration": "AlgebraicGeometry.fibre_product_neighbourhood_limit",
+  "statement": "theorem fibre_product_neighbourhood_limit {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) {X : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] : ∃ c : Cone ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙ CategoryOfElements.π _ ⋙ Scheme.AffineEtale.Spec S ⋙ Scheme.Etale.forget S), c.pt.left = Scheme.strictHenselizationScheme s ∧ (∀ k : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), HEq (c.π.app k).left ((Scheme.strictHenselizationCone s).π.app (op (op k)) ≫ Spec.map (Scheme.ΓSpecIso ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj k).1.left.unop).inv)) ∧ Nonempty (IsLimit ((Over.pullback f ⋙ Over.forget X).mapCone c))",
+  "by": "R1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreProductNeighbourhoodLimit.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "fixed_by": "R-fpl"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fpl",
+  "group": "R1",
+  "result": "fix",
+  "note": "STATEMENT-DISPUTED rejected (node right; delivery was a verbatim copy of landed Scheme.isIso_limit_pullback_comparison); fixed to the node: geometric point s, qcqs f, tied Over-S cone with c.pt.left = strictHenselizationScheme s and legs HEq to strictHenselizationCone legs ≫ Spec.map (ΓSpecIso R).inv, base change along f via Over.pullback is IsLimit"
  }
 }
