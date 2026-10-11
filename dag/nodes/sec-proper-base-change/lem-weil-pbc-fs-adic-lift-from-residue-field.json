@@ -199,5 +199,24 @@
   "item": "lem-weil-pbc-fs-adic-lift-from-residue-field",
   "worker": "F1 worker",
   "summary": "Kept the reviewed statement. Followed Stacks 07NR in six steps: regular presentation, regular fibre kernel, explicit lifting of independent parameter classes, quotient and flatness, 07NQ, base change and completeness. Three new unsplit smaller tools for 07NN (regular consequences), 00NR and 07NQ (2)=>(3), each searched by LeanSearch, LeanFinder and source grep. Reused 00NQ and 07DY instead of the source power-series reidentification, retaining the same regular-presentation route. All new nodes carry statements only; no Lean build or edits."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormallySmoothAdicLift",
+  "declaration": "Algebra.exists_formallySmoothAdic_lift_residue_field",
+  "file": "lean/Sheaf/RingTheory/FormallySmoothAdicLift.lean",
+  "statement": "theorem exists_formallySmoothAdic_lift_residue_field (A₀ : Type u) [CommRing A₀] [IsNoetherianRing A₀] [IsLocalRing A₀] [IsAdicComplete (IsLocalRing.maximalIdeal A₀) A₀] (E : Type v) [CommRing E] [IsNoetherianRing E] [IsLocalRing E] [IsAdicComplete (IsLocalRing.maximalIdeal E) E] [Algebra (IsLocalRing.ResidueField A₀) E] [Algebra A₀ E] [IsScalarTower A₀ (IsLocalRing.ResidueField A₀) E] (hE : FormallySmoothAdic (IsLocalRing.ResidueField A₀) E (IsLocalRing.maximalIdeal E)) : ∃ (C : Type (max u v)) (_ : CommRing C) (_ : IsNoetherianRing C) (_ : IsLocalRing C) (_ : IsAdicComplete (IsLocalRing.maximalIdeal C) C) (_ : Algebra A₀ C) (γ : A₀ →+* C), algebraMap A₀ C = γ ∧ IsLocalHom γ ∧ FormallySmoothAdic A₀ C (IsLocalRing.maximalIdeal C) ∧ ∃ σ : (C ⧸ (IsLocalRing.maximalIdeal A₀).map γ) ≃ₐ[A₀] E, ∀ a : A₀, σ (Ideal.Quotient.mkₐ A₀ ((IsLocalRing.maximalIdeal A₀).map γ) (algebraMap A₀ C a)) = algebraMap A₀ E a",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-flr1051"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-flr1051",
+  "group": "M1",
+  "result": "fix",
+  "note": "A0/E Noetherian complete local binders; k0 -> E as Algebra (ResidueField A0) E + Algebra A0 E + IsScalarTower (not inferInstance, non-hollow); hE Algebra.FormallySmoothAdic over k0 (#check), D universe max u v; C : Type (max u v) Noetherian complete local, gamma = algebraMap, IsLocalHom, FormallySmoothAdic A0 C m_C; sigma : C/(m0.map gamma) ≃ₐ[A0] E with compatibility; FIX k0 spelled A0 ⧸ maximalIdeal -> IsLocalRing.ResidueField A0 (one notion)"
  }
 }

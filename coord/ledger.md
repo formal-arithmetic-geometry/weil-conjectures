@@ -4311,3 +4311,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:48 L: merged deliver/M1/lem-weil-pbc-geometrically-reduced-extension-separable (stage 2; reviewer FIX; first push; Sheaf.FieldTheory.GeometricallyReducedExtensionSeparable Algebra.isSeparableExtension_of_forall_isReduced_tensorProduct)
 - 10:48 L: merged deliver/F1/lem-weil-pbc-formal-glueing-canonical-maps (stage 2; reviewer PASS; first push; Sheaf.Paper.FormalGlueingCanonicalMaps FormalGlueing.compare_properties)
 - 10:48 L: merged deliver/H1/lem-weil-pbc-geometrically-regular-smooth-ascent (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GeometricallyRegularSmoothAscent Algebra.isGeometricallyRegular_of_smooth)
+- 10:49 L: merged deliver/M1/lem-weil-pbc-fs-adic-lift-from-residue-field (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FormallySmoothAdicLift Algebra.exists_formallySmoothAdic_lift_residue_field)
