@@ -1,11 +1,11 @@
 # Work queue
 
-995 items; claim with `tools/claim.py next <group> [--stage N]`.
+992 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (995)
+## Stage 2: nodes to state (992)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -21,7 +21,6 @@
 | `def-weil-pbc-popescu-resolution` | 1 | state |
 | `def-weil-pbc-proetale-site` | 1 | state |
 | `lem-exc-discrete-modules-abelian` | 1 | state |
-| `lem-exc-discrete-modules-abelian-injective-embeddings` | 1 | state |
 | `lem-exc-discrete-modules-abelian-structure` | 1 | state |
 | `lem-exc-etale-sheaves-gsets-point` | 1 | state |
 | `lem-exc-field-sections-stalk-invariants` | 1 | state |
@@ -61,9 +60,7 @@
 | `lem-pc-fppf-affine-sheafification-restriction` | 1 | state |
 | `lem-pc-fppf-affine-site-topos-equivalence` | 1 | state |
 | `lem-pc-fpqc-descend-closed-immersion` | 1 | state |
-| `lem-pc-h0-geom-connected` | 1 | state |
 | `lem-pc-h0-proper-variety` | 1 | state |
-| `lem-pc-hilb-separated` | 1 | state |
 | `lem-pc-injective-split-tower-injective` | 1 | state |
 | `lem-pc-inseparable-tensor-nilpotent` | 1 | state |
 | `lem-pc-kflat-cone-direct-sum` | 1 | state |
