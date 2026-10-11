@@ -3578,3 +3578,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:56 L: returned deliver/K1/lem-exc-rg-discrete-modules-functorial-injective-embeddings (reviewer RETURN: (reviewer R-dfi0858, head 7dc59c357) The branch still holds the ORIGINAL delivery (7dc59c357, 05:59 UTC), the one alread)
 - 06:56 L: merged deliver/K1/def-weil-pbc-proetale-site (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory AlgebraicGeometry.Scheme.proEtaleDerivedCategory)
 - 06:57 L: merged deliver/C1/lem-exc-finite-galois-sheaf-sections-coproduct (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.Sites.FiniteEtaleCoproductSections AlgebraicGeometry.Scheme.finiteEtaleCoproductSections)
+- 06:57 L: merged deliver/J1/lem-galois-descent-datum-diagonal-identity (stage 2; reviewer PASS; first push; WeilConjectures.CategoryTheory.Comma.Over.DescentDatum CategoryTheory.Over.DescentDatum.transport_self; existing declaration)

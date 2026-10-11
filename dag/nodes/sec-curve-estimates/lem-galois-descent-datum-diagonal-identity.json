@@ -98,5 +98,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ddi (reviewer sub-agent of L); spot-checked: Source: Stacks descent.tex Definition 35.34.1 (label definition-descent-datum, Tag 023V, line 8101) and the paragraph at line 8143 ('In fact, Delta^*varphi is equal to the identity'); the item statement agrees with it (X->Y morphism, V over X, varphi descent datum, Delta^*varphi = id_V under the canonical identifications). Step 1 is carried by def-pc-fibre-product (universal property and uniqueness give Delta with pr_0 Delta = pr_1 Delta = id_X and the identifications Delta^* pr_k^* V = V). Step 2 is carried by def-pd-descent-datum (varphi an isomorphism, cocycle pr_02^*varphi = pr_12^*varphi o pr_01^*varphi over X_3): pullback along the triple diagonal gives e = e o e with e invertible, hence e = id; checked hypothesis by hypothesis. Only the item's file and the report changed, one commit, review section present; blueprint.from.place extended (split-owned), no new nodes, no Mathlib leaf. Small cases: X = Y (Delta = id, cocycle gives varphi = varphi o varphi, so varphi = id); Spec L -> Spec K Galois (cocycle phi_{st} = phi_s o s^*phi_t forces phi_1 = id). FIX: dag/nodes/sec-curve-estimates/lem-galois-descent-datum-diagonal-identity.json: proof[1].text and proof[1].uses: named the triple diagonal delta and stated pr_ij o delta = Delta by the universal property of the fibre product, and added def-pc-fibre-product to the step's uses (already in proof_deps). Start Sat Oct 10 03:55:21 PM UTC 2026, end Sat Oct 10 03:56:02 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.Comma.Over.DescentDatum",
+  "declaration": "CategoryTheory.Over.DescentDatum.transport_self",
+  "statement": "transport_self {T : C} (f : T ⟶ X) (a : Over.mk f ⟶ V) : transport f f rfl a = a",
+  "branch": "slopmaster2",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Existing structure projection, line 86. Specialize C to AlgebraicGeometry.Scheme. In the dependency's recorded transport encoding, restriction along the diagonal is precisely transport along an equal pair f,f. The pointwise identity for all test schemes is equivalent by Yoneda to the identity of V over X; see the worker report for the canonical identifications and both directions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ddi0900",
+  "group": "J1",
+  "result": "pass",
+  "note": "transport_self (DescentDatum.lean:86, slopmaster2) matched clause by clause: X->Y = p in C:=Scheme, V : Over X, phi = D : DescentDatum p V (the recorded def-pd-descent-datum declaration), Delta*phi = transport along the pair (f,f) = f>>Delta on T-points over f, both identifications = Over.mk f -> V, conclusion transport f f rfl a = a for all T,f,a = id_V by Yoneda; no hypotheses added or dropped; record existing:true, branch slopmaster2, module/declaration/statement verbatim"
  }
 }
