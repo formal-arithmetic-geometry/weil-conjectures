@@ -1,11 +1,11 @@
 # Work queue
 
-153 items; claim with `tools/claim.py next <group> [--stage N]`.
+151 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (153)
+## Stage 2: nodes to state (151)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -20,8 +20,6 @@
 | `def-weil-pbc-etale-shriek-base-change-map` | 1 | state | 1 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 10 |
 | `lem-weil-pbc-cohomology-pullback-functorial` | 1 | state | 8 |
-| `lemma-nagata-affine-fp-descends` | 3 | state | 8 |
-| `lem-pc-affine-qcoh-derived-equivalence` | 1 | state | 6 |
 | `lem-pc-ringed-spaces-derived-adjoint` | 1 | state | 6 |
 | `lem-pc-qcqs-derived-direct-image-right-adjoint` | 1 | state | 5 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
@@ -30,18 +28,20 @@
 | `lem-pc-derived-direct-image-preserves-qcoh` | 1 | state | 3 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `lem-weil-pbc-truncation-couple-morphism` | 1 | state | 3 |
+| `lem-pc-affine-tor-amplitude-criterion` | 1 | state | 2 |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 1 | state | 2 |
 | `lem-weil-pbc-formal-systems-annihilated-by-power` | 1 | state | 2 |
+| `lem-pc-affine-derived-pullback-tensor-tilde` | 1 | state | 1 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
-| `lem-pc-grothendieck-ss-double-complex-model` | 1 | state | 1 |
 | `lem-pc-restrict-derived-direct-image-open` | 1 | state | 1 |
 | `lem-sc-affine-pseudo-coherent-rhom-qcoherent` | 1 | state | 1 |
 | `lem-sc-cech-comparison-natural` | 1 | state | 1 |
 | `lem-sc-derived-internal-hom-restrict-open` | 1 | state | 1 |
 | `pqf-lem-leray` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
+| `lem-pc-affine-pseudo-coherent-criterion` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
 | `lem-pc-coherent-support-proper-higher-direct-image` | 1 | state | 0 |
@@ -53,6 +53,7 @@
 | `lem-pc-euler-characteristic-well-defined` | 1 | state | 0 |
 | `lem-pc-finite-scheme-cohomology-tensor` | 1 | state | 0 |
 | `lem-pc-genus-well-defined` | 1 | state | 0 |
+| `lem-pc-grothendieck-edge-cocycle` | 1 | state | 0 |
 | `lem-pc-leray-degenerate-sections` | 1 | state | 0 |
 | `lem-pc-noetherian-perfect-direct-image` | 1 | state | 0 |
 | `lem-pc-projection-locality` | 1 | state | 0 |
@@ -72,7 +73,6 @@
 | `lem-pqf-quasicompact-h1-zero` | 1 | state | 0 |
 | `lem-sc-affine-derived-cohomology` | 1 | state | 0 |
 | `lem-sc-affine-derived-concentration` | 1 | state | 0 |
-| `lem-sc-affine-derived-pushforward-conservative` | 1 | state | 0 |
 | `lem-sc-affine-derived-pushforward-t-exact` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
 | `lem-sc-affine-perfect-derived-tensor-hom` | 1 | state | 0 |
@@ -122,7 +122,6 @@
 | `lem-weil-pbc-coherent-serre-vanishing` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-powers-ideal-application` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1 | state | 0 |
-| `lem-weil-pbc-derived-etale-cohomology-limit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-limit-of-schemes` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
 | `lem-weil-pbc-formal-completion-exact` | 1 | state | 0 |
@@ -148,7 +147,6 @@
 | `lem-weil-pbc-theorem-formal-functions` | 1 | state | 0 |
 | `lem-weil-pbc-unrestricted-strict-henselization-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-vanishing-projective` | 1 | state | 0 |
-| `lem-weil-pbc-zero-dimensional-cohomology` | 1 | state | 0 |
 | `lemma-weil-pbc-fibre-product-limit` | 1 | state | 0 |
 | `pqf-lem-fff-vanishing` | 1 | state | 0 |
 | `pqf-lem-serre-criterion` | 1 | state | 0 |
@@ -163,7 +161,7 @@
 | `lem-sc-right-adjoint-open-support-criterion` | 2 | state | 0 |
 | `pqf-lem-affine-vanishing` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 219 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 215 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
