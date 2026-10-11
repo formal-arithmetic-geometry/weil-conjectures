@@ -146,5 +146,24 @@
   "worker": "F1",
   "summary": "Three steps following Stacks Modules 01B8: take the finite generating epimorphism near x; lift its finitely many generator germs and shrink once; for an arbitrary section, use the existing local-lifting characterization of an epimorphism of module sheaves to obtain local coefficients, then substitute the lifted generators. The empty-generator case is included. No new nodes.",
   "blueprint": "The item is an indirect tool for thm-weil-pbc-finite-etale-lifting, proof step 7 (essential surjectivity in Stacks 0GS2), through the 01Y3 coherent-local-isomorphism citation. These three steps realize the Modules 01B8 input to that citation: finite generation, stalk lifts, and local surjectivity. The exact ancestor place is recorded in blueprint.from.place; whole-blueprint searches for 01B8 and surjective-on-stalk found no matching blueprint node."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.FiniteTypeSurjectiveNearStalk",
+  "declaration": "AlgebraicGeometry.RingedSpace.exists_surjective_neighbourhood_of_surjective_stalk",
+  "file": "lean/Sheaf/Topology/FiniteTypeSurjectiveNearStalk.lean",
+  "statement": "theorem exists_surjective_neighbourhood_of_surjective_stalk (X : RingedSpace.{u}) {G F : SheafOfModules.{u} (moduleRings X)} (φ : G ⟶ F) (x : X) [F.IsFiniteType] (hφ : Function.Surjective ((moduleStalkFunctor X x).map φ)) : ∃ U : Opens X, x ∈ U ∧ ∀ (W : Opens X), W ≤ U → ∀ t : F.val.obj (op W), ∃ (I : Type u) (V : I → Opens X) (hV : ∀ i, V i ≤ W) (g : ∀ i, G.val.obj (op (V i))), (⨆ i, V i) = W ∧ ∀ i, φ.val.app (op (V i)) (g i) = F.val.map (homOfLE (hV i)).op t",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mfs1153"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mfs1153",
+  "group": "H1",
+  "result": "fix",
+  "note": "ringed space X:RingedSpace, G F over moduleRings X, phi, x, [F.IsFiniteType] (clause 1), stalk surjectivity via moduleStalkFunctor, U∋x, all W≤U, t, cover I:Type u with ⨆=W, lifts g_i with phi(g_i)=t|V_i; fixed general R/Ab stalk to project form"
  }
 }
