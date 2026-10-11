@@ -403,6 +403,112 @@ theorem exists_iso_openImmersionLowerShriek_lowerStar_of_simple
         (((g)_*[ModuleCat.{u + 1} Λ]).map ι)
       exact .inr (isIso_of_fully_faithful ((g)_*[ModuleCat.{u + 1} Λ]) ι)
 
+omit [IsNoetherianRing Λ] [TopologicalSpace.NoetherianSpace X] in
+/-- The extension by zero `j_! g_* M` along `Spec κ(x) ⟶[g] W ⟶[j] X` is supported at `x`. -/
+lemma compl_stalkZeroLocus_openImmersionLowerShriek_lowerStar_subset {x : X} (W : X.Opens)
+    (g : Spec (X.residueField x) ⟶ W) [IsClosedImmersion g]
+    (hg : g ≫ W.ι = X.fromSpecResidueField x)
+    (M : Sheaf (Spec (X.residueField x)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    (stalkZeroLocus ((W.ι)_!open[ModuleCat.{u + 1} Λ].obj
+      ((g)_*[ModuleCat.{u + 1} Λ].obj M)))ᶜ ⊆ {x} := by
+  intro y hy
+  by_contra hyx
+  apply hy
+  set K := (W.ι)_!open[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj M)
+  by_cases hyW : y ∈ W
+  · let W' := openComplementOfIsClosedImmersion g
+    have hji' : Disjoint (Set.range W'.ι.base) (Set.range g.base) := by
+      rw [Scheme.Opens.range_ι]; exact disjoint_compl_left
+    have hz : IsZero (((W'.ι)^*[ModuleCat.{u + 1} Λ]).obj (((W.ι)^*[ModuleCat.{u + 1} Λ]).obj K)) :=
+      (Etale.isZero_upperStar_lowerStar_of_disjoint_range _ W'.ι g hji' M).of_iso
+        (((W'.ι)^*[ModuleCat.{u + 1} Λ]).mapIso (asIso
+          ((Etale.openImmersionLowerShriekUpperStarAdjunction _ W.ι).unit.app
+            ((g)_*[ModuleCat.{u + 1} Λ].obj M))).symm)
+    have hw : (⟨y, hyW⟩ : W) ∈ (W' : Set W) := fun h ↦
+      hyx (by
+        obtain ⟨p, hp⟩ := h
+        have : W.ι.base (g.base p) = y := by rw [hp]; rfl
+        rw [← this, ← Scheme.Hom.comp_apply, hg, ← Scheme.range_fromSpecResidueField]
+        exact ⟨p, rfl⟩)
+    obtain ⟨w', hw'⟩ : (⟨y, hyW⟩ : W) ∈ Set.range W'.ι.base := by
+      rw [Scheme.Opens.range_ι]; exact hw
+    have h₁ := mem_stalkZeroLocus_of_upperStar W'.ι _
+      ((isZero_iff_stalkZeroLocus_eq_univ _).1 hz ▸ Set.mem_univ w')
+    rw [hw'] at h₁
+    exact mem_stalkZeroLocus_of_upperStar W.ι K h₁
+  · have hij := range_closedComplement_eq_compl_range_ι W
+    obtain ⟨z, rfl⟩ : y ∈ Set.range W.closedComplement.base := by
+      rw [hij, Scheme.Opens.range_ι]; exact hyW
+    exact mem_stalkZeroLocus_of_upperStar W.closedComplement K ((isZero_iff_stalkZeroLocus_eq_univ _).1
+      (Etale.isZero_upperStar_openImmersionLowerShriek_of_disjoint_range (ModuleCat.{u + 1} Λ) W.ι
+        W.closedComplement (disjoint_range_of_range_eq_compl _ _ hij) _) ▸ Set.mem_univ z)
+
+omit [IsNoetherianRing Λ] [TopologicalSpace.NoetherianSpace X] in
+/-- The stalks of a subsheaf vanish where those of the ambient sheaf do. -/
+lemma stalkZeroLocus_subset_of_mono {G K : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (ι : G ⟶ K) [Mono ι] : stalkZeroLocus K ⊆ stalkZeroLocus G := fun y hy Ω _ _ s hs ↦
+  have : Mono ((pointSmallEtale s).sheafFiber.map ι) := inferInstance
+  IsZero.of_mono ((pointSmallEtale s).sheafFiber.map ι) (hy Ω s hs)
+
+/-- Blueprint `lem-trf-simple-constructible`, converse: for a point `x`, closed in an open `W`,
+and a simple constructible sheaf `M` on `Spec κ(x)`, the extension by zero `i_{x!} M = j_! g_* M`
+along `Spec κ(x) ⟶[g] W ⟶[j] X` is a simple object of the abelian category of constructible
+sheaves on `X_ét`: its constructible subsheaves are `i_{x!} N` for the subsheaves `N` of `M`. -/
+theorem simple_openImmersionLowerShriek_lowerStar {x : X} (W : X.Opens) (hxW : x ∈ W)
+    (g : Spec (X.residueField x) ⟶ W) [IsClosedImmersion g]
+    (hg : g ≫ W.ι = X.fromSpecResidueField x)
+    (M : Sheaf (Spec (X.residueField x)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hM : IsConstructibleSheaf M)
+    [Simple (⟨M, hM⟩ : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) _).FullSubcategory)] :
+    Simple (⟨(W.ι)_!open[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj M),
+      isConstructibleSheaf_openImmersionLowerShriek_lowerStar W g M⟩ :
+        (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).FullSubcategory) := by
+  obtain ⟨hM₀, hMsub⟩ := (simple_iff M hM).1 ‹_›
+  set K := (W.ι)_!open[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj M)
+  have hK := compl_stalkZeroLocus_openImmersionLowerShriek_lowerStar_subset W g hg M
+  refine (simple_iff K _).2 ⟨fun h ↦ hM₀ (((g)_*[ModuleCat.{u + 1} Λ]).isZero_of_isZero_obj
+    (((W.ι)_!open[ModuleCat.{u + 1} Λ]).isZero_of_isZero_obj h)), fun G ι hι hG ↦ ?_⟩
+  have hGx : (stalkZeroLocus G)ᶜ ⊆ {x} :=
+    (Set.compl_subset_compl.2 (stalkZeroLocus_subset_of_mono ι)).trans hK
+  obtain ⟨hεG, hηG⟩ := isIso_of_compl_stalkZeroLocus_subset G hGx W hxW g hg
+  obtain ⟨hεK, hηK⟩ := isIso_of_compl_stalkZeroLocus_subset K hK W hxW g hg
+  -- the restriction of `ι` to `x`
+  set ιW := ((W.ι)^*[ModuleCat.{u + 1} Λ]).map ι
+  set N := ((g)^*[ModuleCat.{u + 1} Λ]).obj (((W.ι)^*[ModuleCat.{u + 1} Λ]).obj G)
+  let c : ((g)^*[ModuleCat.{u + 1} Λ]).obj (((W.ι)^*[ModuleCat.{u + 1} Λ]).obj K) ≅ M :=
+    ((g)^*[ModuleCat.{u + 1} Λ]).mapIso (asIso
+      ((Etale.openImmersionLowerShriekUpperStarAdjunction _ W.ι).unit.app
+        ((g)_*[ModuleCat.{u + 1} Λ].obj M))).symm ≪≫
+      asIso ((Etale.upperStarLowerStarAdjunction _ g).counit.app M)
+  have : IsConstructibleSheaf (((W.ι)^*[ModuleCat.{u + 1} Λ]).obj G) :=
+    IsConstructibleSheaf.upperStar _ _
+  have hN : IsConstructibleSheaf N := IsConstructibleSheaf.upperStar _ _
+  rcases hMsub N (((g)^*[ModuleCat.{u + 1} Λ]).map ιW ≫ c.hom) inferInstance hN with h | h
+  · left
+    obtain ⟨e⟩ := nonempty_iso_of_compl_stalkZeroLocus_subset G hGx W hxW g hg
+    exact (((W.ι)_!open[ModuleCat.{u + 1} Λ]).map_isZero
+      (((g)_*[ModuleCat.{u + 1} Λ]).map_isZero h)).of_iso e
+  · right
+    have : IsIso (((g)^*[ModuleCat.{u + 1} Λ]).map ιW) := IsIso.of_isIso_comp_right _ c.hom
+    have hW : IsIso ιW := by
+      have hnat := (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.naturality ιW
+      have : ιW = (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app _ ≫
+          ((g)_*[ModuleCat.{u + 1} Λ]).map (((g)^*[ModuleCat.{u + 1} Λ]).map ιW) ≫
+          inv ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g).unit.app _) := by
+        rw [← Category.assoc, IsIso.eq_comp_inv]
+        exact hnat
+      rw [this]
+      infer_instance
+    have hnat := (Etale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)
+      W.ι).counit.naturality ι
+    have : ι = inv ((Etale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)
+        W.ι).counit.app G) ≫ ((W.ι)_!open[ModuleCat.{u + 1} Λ]).map ιW ≫
+        (Etale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) W.ι).counit.app K := by
+      rw [IsIso.eq_inv_comp]
+      exact hnat.symm
+    rw [this]
+    infer_instance
+
 end Etale
 
 end AlgebraicGeometry
