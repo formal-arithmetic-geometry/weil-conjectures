@@ -98,5 +98,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-mvo1740 (reviewer sub-agent of L); spot-checked: Item step is a direct specialization (ringed space W, cover U,V, module F) of new node lem-sc-mayer-vietoris-ringed-space; new node's statement carries exact sequence, restriction/difference maps, naturality in F, and restriction-to-open naturality incl. connecting maps, matching Stacks 01EB plus its proof (restriction of injective resolution to an open is injective); hypotheses check (QC not needed by the cited node); no cycle (new node is strictly more general, not a restatement); not class b (other 01EB nodes are invert-s special cases), not c (Mathlib only site-level MayerVietorisSquare.sequence_exact, Ext on sites, not O_X-module cohomology with restriction naturality), not d; TeX self-contained, searches recorded. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiCoherentMayerVietorisOpenCover",
+  "declaration": "AlgebraicGeometry.Scheme.quasiCoherent_mayerVietoris_openCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCoherentMayerVietorisOpenCover.lean",
+  "statement": "theorem quasiCoherent_mayerVietoris_openCover (X : Scheme.{u}) (W : X.Opens) : ∃ δ : ∀ (F : SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) [F.IsQuasicoherent] (U V : Opens W.toScheme) (p : ℕ), (openModuleCohomology W.toScheme.toRingedSpace p (U ⊓ V)).obj F ⟶ (openModuleCohomology W.toScheme.toRingedSpace (p + 1) (U ⊔ V)).obj F, (∀ (F : SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) [F.IsQuasicoherent] (U V : Opens W.toScheme), Function.Injective (fun x : (openModuleCohomology W.toScheme.toRingedSpace 0 (U ⊔ V)).obj F => ((openModuleCohomologyRestriction W.toScheme.toRingedSpace 0 (homOfLE le_sup_left)).app F x, (openModuleCohomologyRestriction W.toScheme.toRingedSpace 0 (homOfLE le_sup_right)).app F x))) ∧ (∀ (F : SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) [F.IsQuasicoherent] (U V : Opens W.toScheme) (p : ℕ), Function.Exact (fun x : (openModuleCohomology W.toScheme.toRingedSpace p (U ⊔ V)).obj F => ((openModuleCohomologyRestriction W.toScheme.toRingedSpace p (homOfLE le_sup_left)).app F x, (openModuleCohomologyRestriction W.toScheme.toRingedSpace p (homOfLE le_sup_right)).app F x)) (fun x : (openModuleCohomology W.toScheme.toRingedSpace p U).obj F × (openModuleCohomology W.toScheme.toRingedSpace p V).obj F => (openModuleCohomologyRestriction W.toScheme.toRingedSpace p (homOfLE inf_le_left)).app F x.1 - (openModuleCohomologyRestriction W.toScheme.toRingedSpace p (homOfLE inf_le_right)).app F x.2) ∧ Function.Exact (fun x : (openModuleCohomology W.toScheme.toRingedSpace p U).obj F × (openModuleCohomology W.toScheme.toRingedSpace p V).obj F => (openModuleCohomologyRestriction W.toScheme.toRingedSpace p (homOfLE inf_le_left)).app F x.1 - (openModuleCohomologyRestriction W.toScheme.toRingedSpace p (homOfLE inf_le_right)).app F x.2) (δ F U V p) ∧ Function.Exact (δ F U V p) (fun x : (openModuleCohomology W.toScheme.toRingedSpace (p + 1) (U ⊔ V)).obj F => ((openModuleCohomologyRestriction W.toScheme.toRingedSpace (p + 1) (homOfLE le_sup_left)).app F x, (openModuleCohomologyRestriction W.toScheme.toRingedSpace (p + 1) (homOfLE le_sup_right)).app F x))) ∧ (∀ (F : SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) [F.IsQuasicoherent] (G : SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) [G.IsQuasicoherent] (f : F ⟶ G) (U V : Opens W.toScheme) (p : ℕ), δ F U V p ≫ (openModuleCohomology W.toScheme.toRingedSpace (p + 1) (U ⊔ V)).map f = (openModuleCohomology W.toScheme.toRingedSpace p (U ⊓ V)).map f ≫ δ G U V p) ∧ (∀ (F : SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)) [F.IsQuasicoherent] (U V : Opens W.toScheme) (T : Opens W.toScheme) (p : ℕ), δ F U V p ≫ (openModuleCohomologyRestriction W.toScheme.toRingedSpace (p + 1) (homOfLE (sup_le_sup inf_le_left inf_le_left))).app F = (openModuleCohomologyRestriction W.toScheme.toRingedSpace p (homOfLE (inf_le_inf inf_le_left inf_le_left))).app F ≫ δ F (U ⊓ T) (V ⊓ T) p)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-mvo"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mvo",
+  "group": "G1",
+  "result": "fix",
+  "note": "reverted the delivery's statement correction of the item (statement, stmt_deps, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
