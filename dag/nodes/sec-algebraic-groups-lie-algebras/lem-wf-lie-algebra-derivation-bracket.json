@@ -138,5 +138,23 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lab0010 (reviewer sub-agent of L); spot-checked: Checked by hand (1+eX)(1+dY)(1-eX)(1-dY)=1+ed(XY-YX) in A=k[e,d]/(e^2,d^2); G(A)-membership via functoriality of the defining equations and injectivity of k[eta]->A (new node lem-wf-mixed-commutator-tangent true, self-contained, kept as a real lemma, no lie-named duplicate: lem-wf-same-lie-closed-subgroup/lem-ag-lie-* differ). stmt_deps have no def-wf-lie-algebra-derivation (no cycle); citer 6a49c0173 uses subspace+bracket closure and dr Lie representation, in alg. closed char 0 so the narrowing (named, E7) is harmless. FIX more, RETURN less: (1) E/C step 1 claimed linearity 'inherited from End(V)' without proof: replaced by (1+eX)(1+eY)=1+e(X+Y) and the e->ae endomorphism, elementary; (2) C1 step 4 used naturality of r without citing def-wf-algebraic-representations: added to uses/proof_deps and wrote out the naturality argument (linearity, r_A on the commutator, lemma applied to GL(M), eta->ed). Second reading by C1 missed both.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MatrixSubgroupLieBracket",
+  "declaration": "AlgebraicGeometry.GeneralLinearGroup.exists_tangentMatrixSubmodule_differential",
+  "file": "lean/Sheaf/AlgebraicGeometry/MatrixSubgroupLieBracket.lean",
+  "statement": "theorem exists_tangentMatrixSubmodule_differential {k : Type u} [Field k] [IsAlgClosed k] [CharZero k] {n m : Type u} [Fintype n] [DecidableEq n] [Fintype m] [DecidableEq m] (I : Ideal (Matrix.GeneralLinearGroup.CoordinateRing n k)) [I.IsHopfIdeal k] : ∃ S : Submodule k (Matrix n n k), (∀ X : Matrix n n k, X ∈ S ↔ dualUnit X ∈ Matrix.GeneralLinearGroup.zeroLocus I (DualNumber k)) ∧ (∀ X ∈ S, ∀ Y ∈ S, X * Y - Y * X ∈ S) ∧ (∀ (r : RationalHom (subgroupScheme I) m) [IsMonHom r], ∃ d : S →ₗ[k] Matrix m m k, (∀ (X : S) (g : AlgebraicGeometry.points (subgroupScheme I) (DualNumber k)), homMulEquiv n k (DualNumber k) (g ≫ subgroupSchemeι I) = dualUnit X.val → r.points (DualNumber k) g = dualUnit (d X)) ∧ (∀ X Y Z : S, Z.val = X.val * Y.val - Y.val * X.val → d Z = d X * d Y - d Y * d X))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
