@@ -16,6 +16,8 @@ public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
@@ -154,8 +156,126 @@ lemma _root_.TensorProduct.piScalarRight_sum_tmul_single {M : Type*} [AddCommGro
   ext i
   simp [Pi.single_apply]
 
-variable [IsNoetherianRing R] [J.HasSheafCompose (forget (ModuleCat.{u + 1} R))]
+variable (J) in
+/-- A presheaf of `R`-modules *has locally trivial relations* if every finite family of sections
+`y : Fin s → P(V)` satisfying `R`-linear relations `∑ⱼ eₗⱼ yⱼ = 0` is, locally on `V`, an
+`R`-linear combination `yⱼ = ∑ₘ bⱼₘ zₘ` of sections with `e * b = 0`. This is the local form of
+the equational criterion for flatness. -/
+def Presheaf.HasLocallyTrivialRelations (P : Cᵒᵖ ⥤ ModuleCat.{u + 1} R) : Prop :=
+  ∀ ⦃V : C⦄ {s q : ℕ} (y : Fin s → P.obj (op V)) (e : Matrix (Fin q) (Fin s) R),
+    (∀ l, ∑ j, e l j • y j = 0) → ∃ T ∈ J V, ∀ ⦃W : C⦄ (f : W ⟶ V), T f →
+      ∃ (t : ℕ) (b : Matrix (Fin s) (Fin t) R) (z : Fin t → P.obj (op W)),
+        e * b = 0 ∧ ∀ j, P.map f.op (y j) = ∑ m, b j m • z m
+
+omit [EssentiallySmall.{u + 1} C] in
+/-- **Tensoring with a presheaf with locally trivial relations is locally injective.** If `P`
+has locally trivial relations and `M ⟶ N` is an injection of presheaves of modules, a section
+of `P ⊗ M` killed in `P ⊗ N` vanishes locally. -/
+theorem Presheaf.equalizerSieve_whiskerLeft_mem {P : Cᵒᵖ ⥤ ModuleCat.{u + 1} R}
+    (hP : Presheaf.HasLocallyTrivialRelations J P)
+    {M N : Cᵒᵖ ⥤ ModuleCat.{u + 1} R} (g : M ⟶ N) (hg : ∀ U, Function.Injective (g.app U))
+    {U : C} (t : (P ⊗ M).obj (op U)) (ht : (P ◁ g).app (op U) t = 0) :
+    Presheaf.equalizerSieve t 0 ∈ J U := by
+  classical
+  -- `t = ∑ₖ mₖ ⊗ g'ₖ`, and its image `∑ₖ mₖ ⊗ g(g'ₖ)` vanishes through finitely many relations
+  obtain ⟨n, m, g', htm⟩ :=
+    TensorProduct.exists_sum_tmul_eq (t : P.obj (op U) ⊗[R] M.obj (op U))
+  have ht₀ : ∑ k, m k ⊗ₜ[R] g.app (op U) (g' k) = 0 := by
+    have : (LinearMap.lTensor _ (g.app (op U)).hom) (t : P.obj (op U) ⊗[R] M.obj (op U)) = 0 :=
+      ht
+    rw [htm] at this
+    simpa [map_sum] using this
+  obtain ⟨s, q, y, a, e, hma, hey, hab⟩ :=
+    TensorProduct.exists_relations_of_sum_tmul_eq_zero m (fun k ↦ g.app (op U) (g' k)) ht₀
+  -- rewrite `t = ∑ⱼ yⱼ ⊗ g''ⱼ`; every solution of the relations `e` kills `g''`
+  let g'' : Fin s → M.obj (op U) := fun j ↦ ∑ k, a k j • g' k
+  have ht' : (t : P.obj (op U) ⊗[R] M.obj (op U)) = ∑ j, y j ⊗ₜ[R] g'' j := by
+    rw [htm]
+    simp only [g'', hma, TensorProduct.sum_tmul, TensorProduct.tmul_sum, TensorProduct.smul_tmul]
+    exact Finset.sum_comm
+  have hg'' (c : Fin s → R) (hc : ∀ l, ∑ j, e l j * c j = 0) : ∑ j, c j • g'' j = 0 := by
+    refine hg (op U) ?_
+    rw [map_zero, ← hab c hc]
+    simp only [g'', map_sum, map_smul, Finset.smul_sum, smul_smul, Finset.sum_smul]
+    rw [Finset.sum_comm]
+    simp only [mul_comm]
+  -- locally the relations `e` between the `yⱼ` are trivial, and then `t` vanishes
+  obtain ⟨T, hT, hfac⟩ := hP y e hey
+  refine J.superset_covering ?_ hT
+  intro U' h hh
+  obtain ⟨t', b, z, heb, hyz⟩ := hfac h hh
+  change (P ⊗ M).map h.op t = (P ⊗ M).map h.op 0
+  rw [map_zero]
+  change (TensorProduct.map (P.map h.op).hom (M.map h.op).hom)
+    (t : P.obj (op U) ⊗[R] M.obj (op U)) = 0
+  rw [ht']
+  simp only [map_sum, TensorProduct.map_tmul]
+  simp_rw [hyz, TensorProduct.sum_tmul, TensorProduct.smul_tmul]
+  rw [Finset.sum_comm]
+  simp_rw [← TensorProduct.tmul_sum, ← map_smul, ← map_sum]
+  refine Finset.sum_eq_zero fun m _ ↦ ?_
+  rw [hg'' (fun j ↦ b j m) (fun l ↦ by simpa [Matrix.mul_apply] using congrFun (congrFun heb l) m),
+    map_zero, TensorProduct.tmul_zero]
+
+omit [EssentiallySmall.{u + 1} C] in
+/-- **Tensoring with a presheaf with locally trivial relations is locally injective.** -/
+theorem Presheaf.isLocallyInjective_whiskerLeft {P : Cᵒᵖ ⥤ ModuleCat.{u + 1} R}
+    (hP : Presheaf.HasLocallyTrivialRelations J P)
+    {M N : Cᵒᵖ ⥤ ModuleCat.{u + 1} R} (g : M ⟶ N) (hg : ∀ U, Function.Injective (g.app U)) :
+    Presheaf.IsLocallyInjective J (P ◁ g) where
+  equalizerSieve_mem {U} x y hxy := by
+    have h := Presheaf.equalizerSieve_whiskerLeft_mem hP g hg (U := U.unop) (x - y)
+      (by rw [map_sub, hxy, sub_self])
+    refine J.superset_covering ?_ h
+    intro U' f hf
+    change _ = _ at hf
+    rw [map_sub, map_zero, sub_eq_zero] at hf
+    exact hf
+
+variable [J.HasSheafCompose (forget (ModuleCat.{u + 1} R))]
   [J.WEqualsLocallyBijective (ModuleCat.{u + 1} R)]
+
+/-- **Relation criterion for flatness.** The sheafification of a presheaf of modules with locally
+trivial relations is flat: tensoring with it is the sheafification of tensoring with the
+presheaf, which turns injections into locally injective maps
+(`CategoryTheory.Presheaf.isLocallyInjective_whiskerLeft`), and sheafification turns these into
+monomorphisms. -/
+theorem Presheaf.flat_presheafToSheaf_obj_of_hasLocallyTrivialRelations
+    {P : Cᵒᵖ ⥤ ModuleCat.{u + 1} R} (hP : Presheaf.HasLocallyTrivialRelations J P) :
+    ObjectProperty.flat ((presheafToSheaf J _).obj P) := by
+  rw [ObjectProperty.flat_iff_preservesFiniteLimits,
+    Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono]
+  intro S hS
+  refine ⟨hS.exact.map_of_epi_of_preservesCokernel _ hS.epi_g inferInstance, ?_⟩
+  have := hS.mono_f
+  let g := S.f
+  -- `g` is injective on sections
+  have hg : ∀ U, Function.Injective (g.hom.app U) := fun U ↦ by
+    have : Mono g.hom := (sheafToPresheaf J _).map_mono g
+    rw [← ModuleCat.mono_iff_injective]
+    infer_instance
+  -- `P^# ◁ g` is, up to isomorphism, the sheafification of `P ◁ g`
+  have : Presheaf.IsLocallyInjective J (P ◁ g.hom) :=
+    Presheaf.isLocallyInjective_whiskerLeft hP g.hom hg
+  have : Sheaf.IsLocallyInjective ((presheafToSheaf J _).map (P ◁ g.hom)) :=
+    (Presheaf.isLocallyInjective_presheafToSheaf_map_iff J (P ◁ g.hom)).2 this
+  have : Mono ((presheafToSheaf J _).map (P ◁ g.hom)) := Sheaf.mono_of_isLocallyInjective _
+  let μ := Sheaf.presheafToSheafCompTensorLeftIso (J := J) (A := ModuleCat.{u + 1} R) P
+  have h₁ : (presheafToSheaf J _).obj P ◁ (presheafToSheaf J _).map g.hom =
+      μ.hom.app _ ≫ (presheafToSheaf J _).map (P ◁ g.hom) ≫ μ.inv.app _ := by
+    have hn := μ.hom.naturality g.hom
+    change _ ◁ _ ≫ _ = _ ≫ (presheafToSheaf J _).map (P ◁ g.hom) at hn
+    rw [← Category.assoc, ← hn, Category.assoc, Iso.hom_inv_id_app]
+    exact (Category.comp_id _).symm
+  let ε := (sheafificationAdjunction J (ModuleCat.{u + 1} R)).counit
+  have h₂ : g = inv (ε.app S.X₁) ≫ (presheafToSheaf J _).map g.hom ≫ ε.app S.X₂ := by
+    rw [IsIso.eq_inv_comp]
+    exact (ε.naturality g).symm
+  change Mono ((presheafToSheaf J _).obj P ◁ g)
+  rw [h₂, MonoidalCategory.whiskerLeft_comp, MonoidalCategory.whiskerLeft_comp, h₁]
+  infer_instance
+
+variable [IsNoetherianRing R]
 
 /-- **Linear relations between sections of a flat sheaf are locally trivial.** Let `F` be a
 flat sheaf of modules over a Noetherian commutative ring `R`, and let `y : Fin s → F(V)` satisfy
@@ -164,11 +284,9 @@ sections `z` with `yⱼ = ∑ₘ bⱼₘ zₘ`.
 
 This is the sheaf version of the equational criterion for flatness
 (`Module.Flat.iff_forall_exists_factorization`). -/
-theorem Sheaf.exists_factorization_of_flat {F : Sheaf J (ModuleCat.{u + 1} R)}
-    (hF : ObjectProperty.flat F) {V : C} {s q : ℕ} (y : Fin s → F.obj.obj (op V))
-    (e : Matrix (Fin q) (Fin s) R) (he : ∀ l, ∑ j, e l j • y j = 0) :
-    ∃ T ∈ J V, ∀ ⦃W : C⦄ (f : W ⟶ V), T f → ∃ (t : ℕ) (b : Matrix (Fin s) (Fin t) R)
-      (z : Fin t → F.obj.obj (op W)), e * b = 0 ∧ ∀ j, F.obj.map f.op (y j) = ∑ m, b j m • z m := by
+theorem Sheaf.hasLocallyTrivialRelations_of_flat {F : Sheaf J (ModuleCat.{u + 1} R)}
+    (hF : ObjectProperty.flat F) : Presheaf.HasLocallyTrivialRelations J F.obj := by
+  intro V s q y e he
   classical
   -- the exact sequence `R^t ⟶ R^s ⟶ R^q`, with `R^t ⟶ R^s` generating the kernel of `e`
   let φ := e.mulVecLin
@@ -222,6 +340,15 @@ theorem Sheaf.exists_factorization_of_flat {F : Sheaf J (ModuleCat.{u + 1} R)}
   rw [TensorProduct.piScalarRight_lTensor_mulVecLin] at hz
   rw [hz]
   simp [x, map_sum, Pi.single_apply]
+
+/-- **Relation criterion for flatness of sheaves of modules.** A sheaf of modules over a
+Noetherian commutative ring is flat if and only if linear relations between its sections are
+locally trivial. -/
+theorem Sheaf.flat_iff_hasLocallyTrivialRelations (F : Sheaf J (ModuleCat.{u + 1} R)) :
+    ObjectProperty.flat F ↔ Presheaf.HasLocallyTrivialRelations J F.obj :=
+  ⟨Sheaf.hasLocallyTrivialRelations_of_flat, fun h ↦ ObjectProperty.prop_of_iso _
+    (asIso ((sheafificationAdjunction J _).counit.app F))
+    (Presheaf.flat_presheafToSheaf_obj_of_hasLocallyTrivialRelations h)⟩
 
 end Flat
 
