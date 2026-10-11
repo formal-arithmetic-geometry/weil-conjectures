@@ -159,5 +159,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zd2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:56 return; every point checked: (1) lem-weil-pbc-geometric-point-cohomology deleted, not in the diff; (2) step 2 cites lem-weil-pbc-inverse-image-stalk-germ (f=i, ybar over c on C_red, G=F gives (i^{-1}F)_cbar=F_{i o cbar}) in text, uses, proof_deps, and split_report.tool_uses with why; (3a) closed-point-residue-field-base applied to C_red (closed subscheme, finite type over k, all points closed since |C| discrete and i homeomorphism); (3b) explicit coproduct-isomorphism line from scheme-coproduct-family (open immersions, disjoint, covering); (3c) 054M and 0A5B named with their labels; (4) report and summary describe the delivered steps, step 2 place gives 03SI Proposition, 03QT Theorem, 03QQ Section with labels. Statement agrees with Stacks 0A5B first paragraph and 03QU; the new node is true (03QT/03QU componentwise on finitely many Spec k, k separably closed; cohomology of a finite disjoint union is the product); tested on I empty and |I|=1. Cited statements read: finite-type-dim-zero-artinian, reduction-universal-homeomorphism, finite-discrete-scheme-affine, scheme-coproduct-family, closed-point-residue-field-base, thm-weil-pbc-universal-homeomorphism-invariance (compatible with cohomology), inverse-image-stalk-germ. Tool uses accepted (C8, generic): lem-weil-pbc-reduction-universal-homeomorphism, lem-weil-pbc-inverse-image-stalk-germ. Fixes: dag/nodes/sec-curve-estimates/lem-weil-pbc-finite-geometric-point-coproduct-cohomology.json: statement/stmt_deps: cite def-weil-pbc-geometric-stalks and def-weil-pbc-etale-cohomology for the notions stalk and H^q (B3, FIX more, RETURN less); source.place: 03QT is a Theorem, labels of 03QT, 03QU, 03QQ, 0A5B added. dag/nodes/sec-curve-estimates/lem-weil-pbc-zero-dimensional-cohomology.json: proof step 1 source.place: labels of 00KH and 00FV added. Start Sat Oct 10 03:08:03 PM UTC 2026, end Sat Oct 10 03:08:55 PM UTC 2026.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ZeroDimensionalCohomology",
+  "declaration": "AlgebraicGeometry.zero_dimensional_etale_cohomology",
+  "statement": "theorem zero_dimensional_etale_cohomology (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (hdim : topologicalKrullDim C ≤ 0) (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (Ω : C → Type u) [∀ x, Field (Ω x)] [∀ x, IsAlgClosed (Ω x)] (s : ∀ x : C, Spec (.of (Ω x)) ⟶ C) (hs : ∀ x : C, (s x).base.hom default = x) : Finite C ∧ (∀ q : ℕ, 0 < q → Subsingleton ((Etale.cohomology AddCommGrpCat.{u + 1} C q).obj ((DerivedCategory.singleFunctor (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))) ∧ IsIso ((Functor.homologyRightDerivedFunctorObjSingleFunctorIso (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}) F 0).hom ≫ (Functor.rightDerivedZeroIsoSelf (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1})).hom.app F ≫ F.ΓRes (op (Scheme.Etale.mk (𝟙 C))) ≫ Pi.lift (fun x : C => (Scheme.pointSmallEtale (s x)).toPresheafFiber (Scheme.Etale.mk (𝟙 C)) (Over.homMk (s x) (Category.comp_id (s x))) F.obj))",
+  "by": "N1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/ZeroDimensionalCohomology.lean",
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "N1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
