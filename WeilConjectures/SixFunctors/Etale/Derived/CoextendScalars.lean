@@ -213,6 +213,22 @@ theorem isIso_smul_id_of_isZero_rightDerivedFunctor_coextendScalars
 
 end Detect
 
+section Pullback
+
+variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+
+/-- The base change comparison `coext ∘ g^* ⟶ g^* ∘ coext` between coextension of scalars and
+étale pullback: the mate, along `g^* ⊣ g_*`, of the identification `g_* ∘ coext = coext ∘ g_*`
+(`AlgebraicGeometry.Etale.lowerStarCompCoextendScalarsIso`). -/
+noncomputable def coextendScalarsUpperStarMap :
+    coextendScalars φ Y ⋙ (g)^*[ModuleCat.{u + 1} Λ'] ⟶
+      (g)^*[ModuleCat.{u + 1} Λ] ⋙ coextendScalars φ Z :=
+  ((mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g)
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g)).symm
+      (TwoSquare.mk _ _ _ _ (lowerStarCompCoextendScalarsIso φ g).hom)).natTrans
+
+end Pullback
+
 end Etale
 
 end AlgebraicGeometry
