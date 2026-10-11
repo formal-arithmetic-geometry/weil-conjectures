@@ -204,5 +204,23 @@
   "worker": "stage1",
   "summary": "Split following Stacks 01YD's proof (coherent.tex 2956-2979; tags 01YD, 01J3, 01Y9 verified). Steps: (1) ideal I of the reduced induced structure on Z, with V(I)=Z via the zero-set lemma; (2) G'_n=I^nF and G_n=F/I^nF coherent; (3) exactness on stalks; (4) Supp G_n in Z by stalks of F/I^nF (the source restricts to x in Z' minus Z; written for all x outside Z); (5) X minus Z' Noetherian (new Mathlib leaf) and 01Y9 there; (6) restriction of I^nF to the open, so Supp G'_n in Z'; (7) conclusion. The case n=0 of 01Y9 (F vanishing on X minus Z') is handled with I^0F=F, G=0. Statement unchanged. No Lean on either branch (no '(blueprint: <id>)' tag, no name in lean_names_upstream, no matching keyword in WeilConjectures).",
   "blueprint": "No blueprint node states 01YD (blueprint_refs search '01YD' and key words: none); the steps realize, below the blueprint ancestor thm-weil-pbc-finite-etale-lifting, the same place as the item's from.place (step 7 of its split, Lemma 0GS2 essential-surjectivity paragraphs), through the devissage chain in via: they prepare the filtration of coherent sheaves by integral closed subschemes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentSupportUnionExactSequence",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_coherent_submodule_of_support_union",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentSupportUnionExactSequence.lean",
+  "statement": "theorem exists_coherent_submodule_of_support_union (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) (Z Z' : Set X) (hZ : IsClosed Z) (hZ' : IsClosed Z') (hSupp : {x : X | ¬ Subsingleton (F.presheaf.stalk x)} = Z ∪ Z') : ∃ (G' : X.Modules) (i : G' ⟶ F), RingedSpace.IsCoherent X.toRingedSpace G' ∧ RingedSpace.IsCoherent X.toRingedSpace (cokernel i) ∧ (ShortComplex.mk i (cokernel.π i) (cokernel.condition i)).ShortExact ∧ {x : X | ¬ Subsingleton (G'.presheaf.stalk x)} ⊆ Z' ∧ {x : X | ¬ Subsingleton ((cokernel i).presheaf.stalk x)} ⊆ Z",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
