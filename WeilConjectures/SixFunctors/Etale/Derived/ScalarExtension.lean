@@ -284,7 +284,13 @@ change to the rationalizations: an isomorphism of rationalizations is a morphism
 with a morphism `g : K₂ ⟶ K₁` such that `g ∘ f` and `f ∘ g` are nonzero scalars up to torsion
 (`CategoryTheory.Rationalization.exists_smul_eq_map`,
 `CategoryTheory.Rationalization.map_eq_map_iff`), and the base change of morphisms is
-functorial and linear along `𝒪_E ⟶ 𝒪_L` (`AlgebraicGeometry.Etale.IsDerivedBaseChange.map`). -/
+functorial and linear along `𝒪_E ⟶ 𝒪_L` (`AlgebraicGeometry.Etale.IsDerivedBaseChange.map`).
+
+The statement only asserts that an isomorphism exists. For the derived base changes given by the
+functor `AlgebraicGeometry.Etale.derivedCompleteIntegralScalarExtension`, the isomorphism is
+canonical: it is the image of `e` under the scalar extension
+`AlgebraicGeometry.Etale.derivedCompleteRationalScalarExtension`, read through the isomorphisms
+`AlgebraicGeometry.Etale.derivedCompleteRationalScalarExtensionFromIntegralIso`. -/
 theorem nonempty_iso_fromIntegral_of_isDerivedBaseChange
     {K₁ K₂ : DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E}
     {K₁' K₂' : DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l L}

@@ -150,8 +150,19 @@ variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [Monoida
   {δ' : (((Functor.whiskeringLeft₂ C).obj G).obj G').obj (curriedTensor C) ⟶
     (Functor.postcompose₂.obj G).obj (curriedTensor D)}
 
-/-- The comparison `G X ⊗ G' Y ⟶ G (X ⊗ Y)` built from an isomorphism `ι : G' ≅ G` and the
-inverse of the comonoidal structure of `G'` is compatible with `δ G'`. -/
+/-- The comparison `δ' : G X ⊗ G' Y ⟶ G (X ⊗ Y)` built from an isomorphism `ι : G' ≅ G` and
+the inverse of the comonoidal structure of `G'`,
+```
+G X ⊗ G' Y --ι⁻¹ ▷ G' Y--> G' X ⊗ G' Y --(δ G')⁻¹--> G' (X ⊗ Y) --ι--> G (X ⊗ Y),
+```
+is compatible with `δ G'` (`CategoryTheory.Adjunction.ProjectionComparisonAssoc`): the square
+```
+G X ⊗ G' (Y ⊗ Z) --G X ◁ δ G'--> G X ⊗ (G' Y ⊗ G' Z) --α⁻¹--> (G X ⊗ G' Y) ⊗ G' Z
+        | δ'                                                       | δ' ▷ G' Z
+        v                                                          v
+G (X ⊗ (Y ⊗ Z)) <------G α------ G ((X ⊗ Y) ⊗ Z) <------δ'------ G (X ⊗ Y) ⊗ G' Z
+```
+commutes. -/
 lemma projectionComparisonAssoc_of_iso
     (hδ' : ∀ X Y, (δ'.app X).app Y =
       ι.inv.app X ▷ G'.obj Y ≫ inv (δ G' X Y) ≫ ι.hom.app (X ⊗ Y)) :
@@ -199,7 +210,15 @@ variable {e πg q}
 `q : I K ⊗ M ⟶ I (K ⊗ P_i M)` be natural projection maps satisfying the associativity laws for
 comparisons `δg : P_g (L ⊗ L') ⟶ P_g L ⊗ P_g L'` and `δi`, and let `e : P_g ⋙ P_i ≅ P_f` carry
 `δg` and `δi` to a comparison `δf` for `P_f`. Then the composite projection map
-`R (I K) ⊗ L ⟶ R (I (K ⊗ P_f L))` satisfies the associativity law for `δf`. -/
+`R (I K) ⊗ L ⟶ R (I (K ⊗ P_f L))` satisfies the associativity law for `δf`: writing `RI = I ⋙ R`
+and `Π` for the composite projection map, the square
+```
+(RI K ⊗ L) ⊗ L' --Π ▷ L'--> RI (K ⊗ P_f L) ⊗ L' --Π--> RI ((K ⊗ P_f L) ⊗ P_f L')
+        | α                                                     | RI α
+        v                                                       v
+RI K ⊗ (L ⊗ L') ----Π----> RI (K ⊗ P_f (L ⊗ L')) --RI (K ◁ δf)--> RI (K ⊗ (P_f L ⊗ P_f L'))
+```
+commutes. -/
 lemma compProjectionMap_assoc
     (he : ∀ L L', e.hom.app (L ⊗ L') ≫ δf L L' =
       Pi.map (δg L L') ≫ δi (Pg.obj L) (Pg.obj L') ≫ (e.hom.app L ⊗ₘ e.hom.app L'))
