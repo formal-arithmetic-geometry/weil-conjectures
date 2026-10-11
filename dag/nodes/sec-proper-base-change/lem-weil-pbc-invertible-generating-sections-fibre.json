@@ -22,7 +22,8 @@
  "stmt_deps": [
   "def-sc-invertible-module",
   "def-weil-pbc-generating-sections",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-weil-pbc-ample-invertible-module"
  ],
  "proof": [
   {
@@ -159,5 +160,23 @@
   "by": "L",
   "result": "pass",
   "note": "six steps (reduction to Zariski stalks by the new locally-surjective leaf; the image of the stalk map; L_y free of rank one; Nakayama by the new leaf; a one-dimensional space; conclusion); 2 new Mathlib leaves verified by the lead (LocallySurjective.lean:65/80, LocalRing/Module.lean:72/76); the Zariski/etale distinction of stalk nodes recorded in the new node"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.invertible_generating_sections_fibre_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleGeneratingSectionsFibre.lean",
+  "statement": "theorem invertible_generating_sections_fibre_criterion (Y : Scheme.{u}) (L : Y.Modules) [L.IsInvertible] (n : ℕ) (s : ULift.{u} (Fin (n + 1)) → L.sections) : (Epi (L.freeHomEquiv.symm s) ↔ ∀ y : Y, ∃ i, y ∈ nonvanishingLocus L ((s i).val (Opposite.op ⊤))) ∧ (Epi (L.freeHomEquiv.symm s) ↔ (⋃ i, nonvanishingLocus L ((s i).val (Opposite.op ⊤))) = Set.univ)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-igs1059",
+  "group": "H1",
+  "result": "pass",
+  "note": "Y:Scheme.{u} arbitrary; L:Y.Modules [L.IsInvertible] (recorded upstream); s_0..s_n as ULift (Fin (n+1)) -> L.sections evaluated at op ⊤ (same form as landed TensorGeneratingSections); generate = Epi (freeHomEquiv.symm s) = GeneratingSections.epi; Y_s = shared nonvanishingLocus (germ ∉ m•⊤); both iffs (pointwise ∃ i, union = univ) for the same family; n=0/empty scheme fine; no hollow hyps"
  }
 }
