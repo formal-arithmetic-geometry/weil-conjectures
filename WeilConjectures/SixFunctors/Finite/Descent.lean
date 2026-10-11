@@ -84,6 +84,25 @@ lemma left_eq_hom_of_etaleMkId {V : X.Etale} (a : V ⟶ Scheme.Etale.mk (𝟙 X)
     a.left = V.hom := by
   rw [eq_toEtaleMkId a, toEtaleMkId_left]
 
+
+/-- Restricting a restriction of a section over the terminal étale `X`-scheme gives the
+restriction. -/
+lemma map_map_toEtaleMkId (F : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1}) {V V' : X.Etale}
+    (a : V' ⟶ V) (σ : F.obj (op (Scheme.Etale.mk (𝟙 X)))) :
+    F.map a.op (F.map (toEtaleMkId V).op σ) = F.map (toEtaleMkId V').op σ := by
+  rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, eq_toEtaleMkId (_ ≫ _)]
+
+/-- The germ of a section over the terminal étale `X`-scheme does not depend on the point of
+the fibre. -/
+lemma toPresheafFiber_etaleMkId {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+    {s : Spec (.of Ω) ⟶ X} (F : X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1})
+    (z z' : (pointSmallEtale s).fiber.obj (Scheme.Etale.mk (𝟙 X))) :
+    (pointSmallEtale s).toPresheafFiber _ z F = (pointSmallEtale s).toPresheafFiber _ z' F := by
+  congr 1
+  have hz : z.left ≫ 𝟙 X = s := CategoryTheory.Over.w z
+  have hz' : z'.left ≫ 𝟙 X = s := CategoryTheory.Over.w z'
+  exact CategoryTheory.Over.OverMorphism.ext (hz.trans hz'.symm)
+
 end Helpers
 
 section Germ
@@ -256,6 +275,117 @@ lemma toPresheafFiber_eq_of_restrictAlong_eq
     (by simp [w, m₂]) _ _ _ _ G.obj g₁ g₂ H
 
 end Compare
+
+section Local
+
+variable {Y Y' : Scheme.{u}} (r : Y' ⟶ Y) (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
+
+/-- `(U' ×_Y Y' ⟶ U')^* (b^* g)` is the restriction of `(U ×_Y Y' ⟶ U)^* g` along the base
+change of `b : U' ⟶ U`. -/
+lemma pullSection_fst_map {U U' : Y.Etale} (b : U' ⟶ U) (g : G.obj.obj (op U)) :
+    pullSection r G (V := (MorphismProperty.Over.pullback @Etale ⊤ r).obj U')
+        (pullback.fst U'.hom r) pullback.condition (G.obj.map b.op g) =
+      ((r)^*[AddCommGrpCat.{u + 1}].obj G).obj.map
+        ((MorphismProperty.Over.pullback @Etale ⊤ r).map b).op
+        (pullSection r G (V := (MorphismProperty.Over.pullback @Etale ⊤ r).obj U)
+          (pullback.fst U.hom r) pullback.condition g) := by
+  rw [map_pullSection, ← pullSection_comp]
+  exact pullSection_congr _ _ _ (by simp) _
+
+variable [IsFinite r]
+
+/-- **Local descent.** If the two restrictions of `σ'` to `Y' ×_Y Y'` agree, then every point
+`y` of `Y` has an étale neighbourhood `U` with a section `g` of `G` over `U` whose pullback to
+`U ×_Y Y'` is the restriction of `σ'`. -/
+lemma exists_pullSection_eq_map_toEtaleMkId [Surjective r]
+    (σ' : ((r)^*[AddCommGrpCat.{u + 1}].obj G).obj.obj (op (Scheme.Etale.mk (𝟙 Y'))))
+    (h : restrictAlong r G (pullback.fst r r) (pullback.fst r r ≫ r) rfl
+        (V := Scheme.Etale.mk (𝟙 Y'))
+        (V' := Scheme.Etale.mk (𝟙 (pullback r r))) (pullback.fst r r)
+        ((Category.comp_id _).trans (Category.id_comp _).symm) σ' =
+      restrictAlong r G (pullback.snd r r) (pullback.fst r r ≫ r) pullback.condition
+        (V := Scheme.Etale.mk (𝟙 Y'))
+        (V' := Scheme.Etale.mk (𝟙 (pullback r r))) (pullback.snd r r)
+        ((Category.comp_id _).trans (Category.id_comp _).symm) σ')
+    (y : Y) :
+    ∃ (U : Y.Etale) (g : G.obj.obj (op U)), y ∈ Set.range U.hom ∧
+      pullSection r G (V := (MorphismProperty.Over.pullback @Etale ⊤ r).obj U)
+        (pullback.fst U.hom r) pullback.condition g =
+      ((r)^*[AddCommGrpCat.{u + 1}].obj G).obj.map
+        (toEtaleMkId ((MorphismProperty.Over.pullback @Etale ⊤ r).obj U)).op σ' := by
+  let ybar := Y.algClosurePoint y
+  obtain ⟨x, hx⟩ := r.surjective y
+  obtain ⟨t₀, -⟩ := Scheme.Hom.GeometricFiber.exists_apply_default_eq r ybar x
+    (by simp [ybar, hx])
+  obtain ⟨V₀, a₀, U, φ₀, hφ₀, g, ⟨x₀, hx₀⟩, hrep₀⟩ := exists_pullSection_eq r G σ' (t₀.1 default)
+  have ha₀ := left_eq_hom_of_etaleMkId a₀
+  obtain ⟨v₀, hv₀, -⟩ := exists_fac_of_etale_of_isSepClosed V₀.hom t₀.1 x₀ (by
+    exact (congrArg (fun f : V₀.left ⟶ Y' ↦ f x₀) ha₀).symm.trans hx₀)
+  have hu : (v₀ ≫ φ₀) ≫ U.hom = ybar := by
+    rw [Category.assoc, hφ₀, reassoc_of% hv₀, t₀.2]
+  set δ := ((r)^*[AddCommGrpCat.{u + 1}].obj G).obj.map
+      (toEtaleMkId ((MorphismProperty.Over.pullback @Etale ⊤ r).obj U)).op σ' -
+    pullSection r G (V := (MorphismProperty.Over.pullback @Etale ⊤ r).obj U)
+      (pullback.fst U.hom r) pullback.condition g with hδ
+  have key : ∀ t : Scheme.Hom.GeometricFiber r ybar,
+      Etale.stalkRestrict AddCommGrpCat.{u + 1} r ybar t ((r)^*[AddCommGrpCat.{u + 1}].obj G)
+        ((pointSmallEtale ybar).toPresheafFiber U (fiberPt (v₀ ≫ φ₀) hu)
+          ((r)_*[AddCommGrpCat.{u + 1}].obj ((r)^*[AddCommGrpCat.{u + 1}].obj G)).obj δ) = 0 := by
+    intro t
+    have e := ConcreteCategory.congr_hom (Etale.toPresheafFiber_stalkRestrict
+      AddCommGrpCat.{u + 1} r ybar t ((r)^*[AddCommGrpCat.{u + 1}].obj G)
+      ⟨U, fiberPt (v₀ ≫ φ₀) hu⟩) δ
+    rw [ConcreteCategory.comp_apply] at e
+    erw [e]
+    obtain ⟨V₁, a₁, U₁, φ₁, hφ₁, g₁, ⟨x₁, hx₁⟩, hrep₁⟩ :=
+      exists_pullSection_eq r G σ' (t.1 default)
+    have ha₁ := left_eq_hom_of_etaleMkId a₁
+    obtain ⟨v₁, hv₁, -⟩ :=
+      exists_fac_of_etale_of_isSepClosed V₁.hom t.1 x₁ (by
+        exact (congrArg (fun f : V₁.left ⟶ Y' ↦ f x₁) ha₁).symm.trans hx₁)
+    have hu₁ : (v₁ ≫ φ₁) ≫ U₁.hom = t.1 ≫ r := by
+      rw [Category.assoc, hφ₁, reassoc_of% hv₁]
+    have hu' : (v₀ ≫ φ₀) ≫ U.hom = t.1 ≫ r := hu.trans t.2.symm
+    have C := toPresheafFiber_eq_of_restrictAlong_eq r G σ' h a₁ a₀ φ₁ hφ₁ φ₀ hφ₀ g₁ g hrep₁
+      hrep₀ v₁ v₀ hu₁ hu'
+    rw [hδ, map_sub, sub_eq_zero]
+    apply (ConcreteCategory.bijective_of_isIso
+      ((upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} r t.1).hom.app G)).1
+    erw [GrothendieckTopology.Point.toPresheafFiber_w_apply]
+    rw [toPresheafFiber_etaleMkId _ _ ((pointSmallEtale t.1).fiber.map a₁ (fiberPt v₁ hv₁)),
+      ← GrothendieckTopology.Point.toPresheafFiber_w_apply, hrep₁,
+      upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection]
+    erw [upperStarCompSheafFiberIso_hom_toPresheafFiber_pullSection]
+    exact toPresheafFiber_fiberPt_eq_of_eq rfl rfl
+      (Scheme.Hom.basePt_fst r ⟨U, fiberPt (v₀ ≫ φ₀) hu⟩ t).symm _ _ _ _ G.obj g₁ g C
+  have hz : (pointSmallEtale ybar).toPresheafFiber U (fiberPt (v₀ ≫ φ₀) hu)
+      ((r)_*[AddCommGrpCat.{u + 1}].obj ((r)^*[AddCommGrpCat.{u + 1}].obj G)).obj δ = 0 := by
+    apply (ConcreteCategory.bijective_of_isIso (Pi.lift fun t ↦
+      Etale.stalkRestrict AddCommGrpCat.{u + 1} r ybar t
+        ((r)^*[AddCommGrpCat.{u + 1}].obj G))).1
+    rw [map_zero]
+    apply Concrete.limit_ext
+    rintro ⟨t⟩
+    rw [map_zero, ← ConcreteCategory.comp_apply]
+    erw [Pi.lift_π]
+    exact key t
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨U₁, b, u₁, -, hb⟩ := ((pointSmallEtale ybar).toPresheafFiber_eq_iff'
+    (P := ((r)_*[AddCommGrpCat.{u + 1}].obj ((r)^*[AddCommGrpCat.{u + 1}].obj G)).obj) U
+    (fiberPt (v₀ ≫ φ₀) hu) δ 0).1 (by rw [hz, map_zero])
+  let w : Spec (.of (AlgebraicClosure (Y.residueField y))) ⟶ U₁.left := u₁.left
+  have hw : w ≫ U₁.hom = ybar := CategoryTheory.Over.w u₁
+  refine ⟨U₁, G.obj.map b.op g, ⟨w default, ?_⟩, ?_⟩
+  · simpa [ybar] using
+      congrArg (fun f : Spec (.of (AlgebraicClosure (Y.residueField y))) ⟶ Y ↦ f default) hw
+  · rw [map_zero] at hb
+    change ((r)^*[AddCommGrpCat.{u + 1}].obj G).obj.map
+      ((MorphismProperty.Over.pullback @Etale ⊤ r).map b).op δ = 0 at hb
+    rw [hδ, map_sub, sub_eq_zero] at hb
+    rw [pullSection_fst_map, ← hb, map_map_toEtaleMkId]
+
+end Local
 
 /-- **Descent along a finite surjective morphism.** Let `r : Y' ⟶ Y` be finite and surjective,
 `G` an abelian étale sheaf on `Y` and `σ'` a global section of `r^* G` (a section over the
