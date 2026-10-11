@@ -103,5 +103,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcs (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 0E8S (varieties.tex, lemma-separate-points-tangent-vectors, proof after condition (1)) with Tag 0478; the item statement (k algebraically closed, X locally of finite type over k, f:X->Y, injective on closed points, p closed in Y => fibre empty or a single closed point) is unchanged from sheaf-dag and true. Step 1: F=f^{-1}(p) closed by continuity; a nonclosed z in F would by lem-sc-finite-type-nonclosed-closure-closed-points (statement read: k alg. closed, X loc. finite type, z nonclosed => closure has infinitely many closed points; hypotheses match the item's) give infinitely many closed points in closure(z) inside F, all mapping to p, contradicting injectivity; elementary topology otherwise. Step 2: so every point of F is closed and injectivity gives at most one; with step 1, empty or singleton. Only the item file changed besides the report; no maintainer field changed (created.item untouched despite the report's item 4, and the citations.json mentioned in the report is not in the delivery - harmless report inaccuracy). No new nodes, no Mathlib leaf, tool_uses empty. Small cases: empty fibre; X=Spec k[t] -> Spec k identity-like closed immersion, fibres singletons; A^1 -> point violates the hypothesis as expected. Start Sat Oct 10 04:21:36 PM UTC 2026, end Sat Oct 10 04:21:53 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedFibreSingleton",
+  "declaration": "AlgebraicGeometry.preimage_singleton_eq_empty_or_singleton_of_injOn_closedPoints",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedFibreSingleton.lean",
+  "statement": "theorem preimage_singleton_eq_empty_or_singleton_of_injOn_closedPoints (k : Type u) [Field k] [IsAlgClosed k] (X Y : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] [Y.Over (Spec (CommRingCat.of k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k))] (f : X ⟶ Y) (hf : Set.InjOn f (closedPoints X)) (p : Y) (hp : p ∈ closedPoints Y) : f ⁻¹' {p} = ∅ ∨ ∃ x : X, x ∈ closedPoints X ∧ f ⁻¹' {p} = {x}",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcf1212",
+  "group": "K1",
+  "result": "pass",
+  "note": "k alg. closed = [Field k][IsAlgClosed k]; X loc. finite type over k = [X.Over (Spec (.of k))] + LocallyOfFiniteType (X ↘ Spec) as landed siblings (DimZeroFiniteOverField, InfiniteClosedPointsInterClosureSingleton); Y over k = [Y.Over]; f : X ⟶ Y with no IsOver (node asks none); distinct closed points distinct images = Set.InjOn f (closedPoints X) (#check: coe is f.base, closedPoints is Mathlib's {x | IsClosed {x}}); p closed in Y; fibre as set f ⁻¹' {p} (node says singleton set; landed precedent IntegralClosureDedekindSurjectiveFibres) = ∅ ∨ ∃ closed x, = {x}; edge cases empty X/Y, p off image"
  }
 }
