@@ -4124,3 +4124,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:58 L: merged deliver/H1/def-sc-rational-section-divisor (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.RationalSectionDivisor AlgebraicGeometry.Scheme.Modules.rationalSectionDivisor)
 - 09:58 L: merged deliver/J1/lem-weil-pbc-etale-local-finite-multiple-points (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePoints AlgebraicGeometry.exists_etale_local_finite_multiple_points; statement corrected (1 citers))
 - 09:58 L: merged deliver/K1/lem-weil-pbc-etale-ring-map-quasi-finite (stage 2; reviewer PASS; first push; Sheaf.RingTheory.Etale.QuasiFiniteAtPrime Algebra.finiteType_and_isQuasiFiniteAtPrime_of_etale)
+- 09:59 L: merged deliver/M1/lem-sc-p1-rhom-hom-derived-connecting (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.Abelian.RHomDerivedConnecting CategoryTheory.Functor.exists_rhom_hom_derived_connecting)
