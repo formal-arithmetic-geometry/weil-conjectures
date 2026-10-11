@@ -182,5 +182,24 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps following Stacks 07CL with the implicit parts written out: the principal case via the equational criterion of flatness (new exact leaf, EquationalCriterion.lean:169/75 verified by L); C finitely presented (needed for 07CK); the map C -> Lambda; lift once (today's 07CK node); lift through the square-zero J' (smooth square-zero lifting); alpha(h) = 0; induction on the number of generators from n = 0."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuLiftTwice",
+  "declaration": "Algebra.exists_smooth_factorization_killing_ideal",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftTwice.lean",
+  "statement": "theorem exists_smooth_factorization_killing_ideal (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ] (I : Ideal R) (hI : I ^ 2 = ⊥) (hΛ : ObjectProperty.ind.{max u v} (fun C : CommAlgCat.{max u v} (R ⧸ I) ↦ Smooth (R ⧸ I) C) (CommAlgCat.of (R ⧸ I) (Λ ⧸ I.map (algebraMap R Λ)))) (hflat : RingHom.Flat (algebraMap R Λ)) (B : Type w) [CommRing B] [Algebra R B] [Smooth R B] (φ : B →ₐ[R] Λ) (J : Ideal B) (hJfg : J.FG) (hJI : J ≤ I.map (algebraMap R B)) (hφJ : J ≤ RingHom.ker φ) : ∃ (B' : Type (max u v w)) (_ : CommRing B') (_ : Algebra R B'), Smooth R B' ∧ ∃ (α : B →ₐ[R] B') (β : B' →ₐ[R] Λ), J ≤ RingHom.ker α ∧ β.comp α = φ",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-plt1253"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-plt1253",
+  "group": "F1",
+  "result": "fix",
+  "note": "R comm ring, Λ R-alg, I^2=0, Λ/IΛ ind-smooth over R/I (hΛ binder, Mathlib algebraQuotientMapQuotient instance, ind.{max u v} as lift-once), R→Λ flat, B smooth, φ, J fg ⊆ IB, φ(J)=0; ∃ B' smooth tied, α β, α(J)=0, β∘α=φ; universes u/max u v/w as lift-once"
  }
 }
