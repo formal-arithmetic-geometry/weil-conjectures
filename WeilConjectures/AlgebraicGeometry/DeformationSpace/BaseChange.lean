@@ -105,3 +105,52 @@ theorem exists_isPullback_deformationSpace_baseChange (d : ℕ) [SmoothOfRelativ
   sorry
 
 end AlgebraicGeometry.Scheme.Hom
+
+namespace AlgebraicGeometry.Scheme.IdealSheafData
+
+open AffineZariskiSite
+
+variable {X X' : Scheme.{u}} (h : X' ⟶ X) [IsOpenImmersion h] (I : X.IdealSheafData)
+
+/-- The image `h(U)` of an affine open `U` under an open immersion. -/
+def imageSite (U : X'.AffineZariskiSite) : X.AffineZariskiSite :=
+  ⟨h ''ᵁ U.1, U.2.image_of_isOpenImmersion h⟩
+
+lemma imageSite_mono {U V : X'.AffineZariskiSite} (i : U ≤ V) : imageSite h U ≤ imageSite h V := by
+  obtain ⟨r, hr⟩ := i
+  refine ⟨(h.appIso V.1).inv r, ?_⟩
+  change _ = h ''ᵁ U.1
+  rw [← Scheme.image_basicOpen]
+  exact congrArg (h ''ᵁ ·) hr
+
+lemma map_siteIdeal_imageSite (U : X'.AffineZariskiSite) :
+    (I.siteIdeal (imageSite h U)).map (h.appIso U.1).hom.hom = (I.comap h).siteIdeal U := by
+  rw [siteIdeal, siteIdeal, ideal_comap_of_isOpenImmersion I h ⟨U.1, U.2⟩]
+  exact Ideal.map_comap_of_equiv (h.appIso U.1).commRingCatIsoToRingEquiv
+
+/-- The isomorphism `Γ(h(U))[t, I t⁻¹] ≅ Γ(U)[t, (h^* I) t⁻¹]` of extended Rees algebras along
+an open immersion `h`. -/
+noncomputable def reesComapMap (U : X'.AffineZariskiSite) :
+    I.reesPresheaf.obj (.op (imageSite h U)) ⟶ (I.comap h).reesPresheaf.obj (.op U) :=
+  CommRingCat.ofHom <| (I.siteIdeal (imageSite h U)).extendedReesAlgebraMap
+    (h.appIso U.1).hom.hom _ (map_siteIdeal_imageSite h I U).le
+
+lemma bijective_reesComapMap (U : X'.AffineZariskiSite) :
+    Function.Bijective (reesComapMap h I U) :=
+  Ideal.bijective_extendedReesAlgebraMap (h.appIso U.1).commRingCatIsoToRingEquiv _
+    (map_siteIdeal_imageSite h I U)
+
+set_option backward.isDefEq.respectTransparency false in
+lemma reesComapMap_naturality {U V : X'.AffineZariskiSite} (i : U ⟶ V) :
+    I.reesPresheaf.map (homOfLE (imageSite_mono h i.le)).op ≫ reesComapMap h I U =
+      reesComapMap h I V ≫ (I.comap h).reesPresheaf.map i.op := by
+  ext x : 2
+  refine Subtype.ext ?_
+  change LaurentPolynomial.mapRingHom _ (LaurentPolynomial.mapRingHom _ x.1) =
+    LaurentPolynomial.mapRingHom _ (LaurentPolynomial.mapRingHom _ x.1)
+  rw [LaurentPolynomial.mapRingHom_mapRingHom, LaurentPolynomial.mapRingHom_mapRingHom,
+    ← CommRingCat.hom_comp, ← CommRingCat.hom_comp]
+  congr 3
+  exact Scheme.Hom.appIso_hom_naturality h (homOfLE (toOpens_mono i.le)).op
+
+end AlgebraicGeometry.Scheme.IdealSheafData
