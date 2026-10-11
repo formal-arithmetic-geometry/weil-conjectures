@@ -1,11 +1,11 @@
 # Work queue
 
-257 items; claim with `tools/claim.py next <group> [--stage N]`.
+254 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (257)
+## Stage 2: nodes to state (254)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -62,8 +62,6 @@
 | `lem-weil-pbc-closed-subset-proper-over-base-union-preimage` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1 | state | 0 |
 | `lem-weil-pbc-etale-sections-equal-open` | 1 | state | 0 |
-| `lem-weil-pbc-etale-sections-flat-qc-connected-fibres` | 1 | state | 0 |
-| `lem-weil-pbc-etale-sections-fpqc-descent` | 1 | state | 0 |
 | `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1 | state | 0 |
 | `lem-weil-pbc-finite-type-module-support-closed` | 1 | state | 0 |
 | `lem-weil-pbc-matching-object-proper-faces` | 1 | state | 0 |
@@ -71,7 +69,6 @@
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
 | `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state | 0 |
 | `lem-weil-pbc-scheme-theoretic-support` | 1 | state | 0 |
-| `lem-weil-pbc-sets-etale-inverse-image-restriction` | 1 | state | 0 |
 | `lem-weil-pbc-sets-etale-section-continuity` | 1 | state | 0 |
 | `lem-weil-pbc-sets-finite-surjective-descent` | 1 | state | 0 |
 | `lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension` | 1 | state | 0 |
