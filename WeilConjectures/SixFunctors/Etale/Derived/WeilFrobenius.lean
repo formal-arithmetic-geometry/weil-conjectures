@@ -6,11 +6,14 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.CupProductWeil
 public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Pairing
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
@@ -239,13 +242,7 @@ lemma IsWeilPairing.shift_right {A B : DerivedCategoryModule Λ Y}
     {Q : ((derivedTensor _ Y).obj A).obj B ⟶ M} (hQ : IsWeilPairing h ψA ψB ψM Q) (n : ℤ) :
     IsWeilPairing h ψA (shiftWeilDatum h ψB n) (shiftWeilDatum h ψM n)
       ((((derivedTensor _ Y).obj A).commShiftIso n).hom.app B ≫ Q⟦n⟧') :=
-  -- The tensor comparison `Lh^*(A ⊗ᴸ B) ≅ Lh^* A ⊗ᴸ Lh^* B`
-  -- (`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso`) is compatible with the shift
-  -- isomorphisms of `Lh^*` and of `A ⊗ᴸ -`; with it, the statement is `hQ` shifted by `n`
-  -- (`AlgebraicGeometry.Etale.IsWeilMorphism.shift`). The compatibility is the derived
-  -- version of the compatibility of `h^*` with the shifts of complexes and the tensor product
-  -- of complexes, which is not formalised yet.
-  sorry
+  leftDerivedUpperStarTensorIso_shift_right_comm _ h ψA ψB ψM Q hQ n
 
 /-- The *degreewise pairing* of a pairing `Q : A ⊗ᴸ B ⟶ C`,
 `Hom(Λ_Y, A[i]) × Hom(Λ_Y, B[j]) ⟶ Hom(Λ_Y, C[i + j])`,
@@ -297,14 +294,9 @@ lemma IsWeilPairing.degreewisePairing_frobeniusOperator {A B C : DerivedCategory
     (x : 𝟙_ (DerivedCategoryModule Λ Y) ⟶ A⟦i⟧) (y : 𝟙_ (DerivedCategoryModule Λ Y) ⟶ B⟦j⟧) :
     degreewisePairing Q i j (frobeniusOperator h (shiftWeilDatum h ψA i) x)
         (frobeniusOperator h (shiftWeilDatum h ψB j) y) =
-      frobeniusOperator h (shiftWeilDatum h ψC (i + j)) (degreewisePairing Q i j x y) :=
-  -- Apply `Lh^*` to the defining composite of `⟨x, y⟩`: the tensor comparison of `Lh^*` turns
-  -- `Lh^*(x ⊗ y)` into `Lh^* x ⊗ Lh^* y`, it is compatible with the unitor `λ` and the unit
-  -- comparison `ε`, and with the shift isomorphisms, and `hQ` (shifted by `i + j`) moves the
-  -- datum `ψ_C` across `Q`. These compatibilities of the derived pullback with the monoidal
-  -- and shift structures (`AlgebraicGeometry.Etale.nonempty_monoidal_leftDerivedUpperStar`)
-  -- are not formalised yet.
-  sorry
+      frobeniusOperator h (shiftWeilDatum h ψC (i + j)) (degreewisePairing Q i j x y) := by
+  simpa only [degreewisePairing_apply, frobeniusOperator_apply, shiftWeilDatum] using
+    leftDerivedUpperStar_pairing_comm _ h ψA ψB ψC Q hQ i j x y
 
 end Morphism
 
@@ -373,11 +365,19 @@ lemma isWeilMorphism_rightDerivedLowerShriek_commShiftIso_inv [QuasiCompact a]
     (sq : IsPullback g a a h) (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) (n : ℤ) :
     IsWeilMorphism h (shiftWeilDatum h (lowerShriekWeilDatum sq φ) n)
       (lowerShriekWeilDatum sq (shiftWeilDatum g φ n))
-      (((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso n).inv.app K) :=
-  -- `Ex_!` is built from the derived base change map of a proper morphism and the base change
-  -- isomorphism of an extension by zero, both of which commute with the shifts, being mates or
-  -- derived functors of maps of complexes; the commutation is not formalised yet.
-  sorry
+      (((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso n).inv.app K) := by
+  have hEx := NatTrans.shift_app_comm (rightDerivedLowerShriekBaseChangeMap (X' := X) (Y' := Y)
+    (g' := g) (f' := a) (f := a) (g := h) Λ sq) n K
+  simp only [Functor.comp_obj, Functor.commShiftIso_comp_hom_app, Category.assoc] at hEx
+  have h' := ((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso n).inv.naturality φ
+  dsimp at h'
+  unfold IsWeilMorphism shiftWeilDatum lowerShriekWeilDatum
+  rw [← cancel_epi ((L((h)^*[ModuleCat.{u + 1} Λ])).map
+    (((R(a)_![ModuleCat.{u + 1} Λ]).commShiftIso n).hom.app K))]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hEx, h', Iso.hom_inv_id_app_assoc]
 
 /-- Blueprint `lem-fix-weil-operations` (the cup product part).
 
@@ -390,11 +390,9 @@ lemma isWeilPairing_mixedSupportCupProduct [QuasiCompact a] (sq : IsPullback g a
     IsWeilPairing h (lowerShriekWeilDatum sq φ) (lowerStarWeilDatum sq.toCommSq ψ)
       (lowerShriekWeilDatum sq (tensorWeilDatum g φ ψ))
       (mixedSupportCupProduct (ModuleCat.{u + 1} Λ) a K L) :=
-  -- `⌣_c` is the projection map of `Ra_!` followed by `Ra_!` of the counit of `La^* ⊣ Ra_*`.
-  -- The projection map is compatible with `Ex_!`, `Ex_*` and the tensor comparison of the
-  -- derived pullbacks (SGA 4 XVII 5.2), and the counit is compatible with `Ex_*` by the
-  -- definition of `Ex_*` as a mate; neither compatibility is formalised yet.
-  sorry
+  mixedSupportCupProduct_exchange (ModuleCat.{u + 1} Λ) sq.toCommSq
+    (rightDerivedLowerShriekBaseChangeMap Λ sq)
+    (fun K M ↦ projectionMap_rightDerivedLowerShriekBaseChangeMap Λ sq K M) K L φ ψ
 
 end Exchange
 
