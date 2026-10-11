@@ -192,5 +192,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GlobalHomPullbackAdjunction",
+  "declaration": "AlgebraicGeometry.schemeGlobalDerivedHom_pullback_adjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalHomPullbackAdjunction.lean",
+  "statement": "theorem schemeGlobalDerivedHom_pullback_adjunction {T S : Scheme.{u}} [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)] (g : T ⟶ S) : ∃ (adj : derivedPullback g ⊣ schemeDerivedDirectImage g) (hS : ∀ M N : schemeDerivedCategory S, ((DerivedCategory.homologyFunctor (ModuleCat.{u} ((moduleRings S.toRingedSpace).obj.obj (op ⊤))) 0).obj ((schemeGlobalDerivedHom S).obj (op M, N))) ≃+ (M ⟶ N)) (hT : ∀ M N : schemeDerivedCategory T, ((DerivedCategory.homologyFunctor (ModuleCat.{u} ((moduleRings S.toRingedSpace).obj.obj (op ⊤))) 0).obj (((ModuleCat.restrictScalars.{u} (R := (moduleRings S.toRingedSpace).obj.obj (op ⊤)) (S := (moduleRings T.toRingedSpace).obj.obj (op ⊤)) g.appTop.hom).mapDerivedCategory).obj ((schemeGlobalDerivedHom T).obj (op M, N)))) ≃+ (M ⟶ N)) (i : (𝟭 (schemeDerivedCategory S)).op.prod (schemeDerivedDirectImage g) ⋙ schemeGlobalDerivedHom S ≅ (derivedPullback g).op.prod (𝟭 (schemeDerivedCategory T)) ⋙ schemeGlobalDerivedHom T ⋙ (ModuleCat.restrictScalars.{u} (R := (moduleRings S.toRingedSpace).obj.obj (op ⊤)) (S := (moduleRings T.toRingedSpace).obj.obj (op ⊤)) g.appTop.hom).mapDerivedCategory), (∀ (M : schemeDerivedCategory S) (E : schemeDerivedCategory T), i.hom.app (op M, E) = schemeGlobalDerivedHom_pullback_comparison g M ((schemeDerivedDirectImage g).obj E) ≫ ((ModuleCat.restrictScalars.{u} (R := (moduleRings S.toRingedSpace).obj.obj (op ⊤)) (S := (moduleRings T.toRingedSpace).obj.obj (op ⊤)) g.appTop.hom).mapDerivedCategory).map ((schemeGlobalDerivedHom T).map (((𝟙 ((derivedPullback g).obj M)).op, adj.counit.app E) : (op ((derivedPullback g).obj M), (derivedPullback g).obj ((schemeDerivedDirectImage g).obj E)) ⟶ (op ((derivedPullback g).obj M), E)))) ∧ (∀ (M : schemeDerivedCategory S) (E : schemeDerivedCategory T) (φ : M ⟶ (schemeDerivedDirectImage g).obj E), hT ((derivedPullback g).obj M) E ((DerivedCategory.homologyFunctor (ModuleCat.{u} ((moduleRings S.toRingedSpace).obj.obj (op ⊤))) 0).map (i.hom.app (op M, E)) ((hS M ((schemeDerivedDirectImage g).obj E)).symm φ)) = (derivedPullback g).map φ ≫ adj.counit.app E)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "X-c1077",
+  "group": "C1",
+  "result": "pass",
+  "note": "independent Codex review: Matched arbitrary schemes and morphism, derived pullback/direct image, scalar-restricted global RHom isomorphism, canonical pullback-counit factorization, and H⁰ adjunction formula; packet compile is clean."
  }
 }
