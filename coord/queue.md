@@ -1,11 +1,11 @@
 # Work queue
 
-436 items; claim with `tools/claim.py next <group> [--stage N]`.
+433 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (436)
+## Stage 2: nodes to state (433)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -83,10 +83,7 @@
 | `lem-weil-pbc-projective-dimension-well-defined` | 1 | state |
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
 | `lem-weil-pbc-projective-space-standard-charts` | 1 | state |
-| `lem-weil-pbc-proper-coproduct` | 1 | state |
 | `lem-weil-pbc-proper-limit-noetherian` | 1 | state |
-| `lem-weil-pbc-property-implies-acyclicity` | 1 | state |
-| `lem-weil-pbc-pth-root-presentation-differentials` | 1 | state |
 | `lem-weil-pbc-pth-roots-extension-degree` | 1 | state |
 | `lem-weil-pbc-pullback-ample-invertible` | 1 | state |
 | `lem-weil-pbc-pullback-finite-locally-constant` | 1 | state |
