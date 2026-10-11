@@ -1,11 +1,11 @@
 # Work queue
 
-523 items; claim with `tools/claim.py next <group> [--stage N]`.
+519 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (523)
+## Stage 2: nodes to state (519)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -25,7 +25,6 @@
 | `lem-sc-ample-square-zero-thickening` | 1 | state |
 | `lem-sc-ass-weakass-locally-noetherian` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
-| `lem-sc-component-intersections-finite` | 1 | state |
 | `lem-sc-find-globally-generated` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilb-to-pic-morphism` | 1 | state |
@@ -61,7 +60,6 @@
 | `lem-weil-pbc-eventually-affine` | 1 | state |
 | `lem-weil-pbc-eventually-closed-immersion` | 1 | state |
 | `lem-weil-pbc-eventually-proper` | 1 | state |
-| `lem-weil-pbc-finite-etale-trace-degree` | 1 | state |
 | `lem-weil-pbc-finite-pushforward-constructible-descent` | 1 | state |
 | `lem-weil-pbc-finite-surjective-affine-target-noetherian` | 1 | state |
 | `lem-weil-pbc-flat-fp-lqf-bounded-stratification` | 1 | state |
@@ -71,13 +69,11 @@
 | `lem-weil-pbc-ideal-module-product-stalk` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-choose-g` | 1 | state |
 | `lem-weil-pbc-integral-closure-finite-fibre-quasi-finite` | 1 | state |
-| `lem-weil-pbc-inverse-image-stalk-germ` | 1 | state |
 | `lem-weil-pbc-jacobi-zariski-connecting-map-naturality` | 1 | state |
 | `lem-weil-pbc-kahler-differentials-mod-power-ideal` | 1 | state |
 | `lem-weil-pbc-koszul-differential-square-zero` | 1 | state |
 | `lem-weil-pbc-lift-idempotent-upstairs` | 1 | state |
 | `lem-weil-pbc-lift-projective-module-etale` | 1 | state |
-| `lem-weil-pbc-limit-finite-presentation` | 1 | state |
 | `lem-weil-pbc-limit-module-finite-presentation` | 1 | state |
 | `lem-weil-pbc-limit-residue-field` | 1 | state |
 | `lem-weil-pbc-limit-tower-essentially-finite-presentation` | 1 | state |
