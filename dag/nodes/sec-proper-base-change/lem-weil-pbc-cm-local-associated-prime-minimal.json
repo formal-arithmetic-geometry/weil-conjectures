@@ -134,5 +134,24 @@
   "worker": "stage1",
   "summary": "Read Algebra 0BUS (lemma-CM-ass-minimal-support, line 25108) and its proof, and Lemma 0BK4 (lemma-depth-dim-associated-primes, line 17985) that it cites; tags 0BUS, 0BK4, 00LA, 00N8 verified in tags/tags. Not a Mathlib leaf (pinned Mathlib has no Cohen-Macaulay rings and no depth of modules; searches of all three kinds recorded, one grep added). Statement unchanged; it matches the only citer lem-weil-pbc-cm-local-maximal-chain-length step 7 (it applies the node to T = S/yS with an associated prime given as Ann_T(w), w in T, hypotheses Noetherian local and depth(T) >= dim T, and uses the conclusion that the prime is a minimal prime of T). Proof in 2 steps following 0BUS for M = T: dim(T/p) >= depth(T) >= e by 0BK4 (new unsplit node lem-weil-pbc-depth-le-dim-associated-prime; no existing node states it: the existing lem-weil-pbc-depth-le-support-dimension is 00LK, dim Supp(M) >= depth(M), which does not give the bound for R/p), then a prime strictly inside p would lengthen a chain of length e in T/p to one of length e+1 in T, contradicting dim T = e (elementary from the chain definition of Krull dimension). The source's inequality dim(R/p) <= dim Supp(M) and the final 'no embedded primes' sentence are not needed."
  },
- "reviewed": "2026-10-10 L: 2 steps checked against 0BUS for M = T: dim(T/p) >= depth(T) >= e by the new 0BK4 node, and a prime strictly inside p would give a chain of length e+1 (written out); citer cm-local-maximal-chain-length step 7 matches"
+ "reviewed": "2026-10-10 L: 2 steps checked against 0BUS for M = T: dim(T/p) >= depth(T) >= e by the new 0BK4 node, and a prime strictly inside p would give a chain of length e+1 (written out); citer cm-local-maximal-chain-length step 7 matches",
+ "lean": {
+  "module": "Sheaf.RingTheory.AssociatedPrimeMinimalOfDepth",
+  "declaration": "Ideal.mem_minimalPrimes_of_depth_ge",
+  "file": "lean/Sheaf/RingTheory/AssociatedPrimeMinimalOfDepth.lean",
+  "statement": "theorem mem_minimalPrimes_of_depth_ge {T : Type u} [CommRing T] [IsNoetherianRing T] [IsLocalRing T] (e : ℕ) (hdim : ringKrullDim T = (e : WithBot ℕ∞)) (hdepth : (e : ℕ∞) ≤ IsLocalRing.depth (R := T) T) (p : Ideal T) (hp : p ∈ associatedPrimes T T) : p ∈ minimalPrimes T",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cma1413"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cma1413",
+  "group": "H1",
+  "result": "fix",
+  "note": "CommRing T+IsNoetherianRing+IsLocalRing (unique max ideal); e:ℕ with ringKrullDim T = e; CM as node's depth(T)>=e via recorded IsLocalRing.depth (no Mathlib/recorded CM decl exists); associated prime switched from elementwise Ann(z)=p + IsPrime to Mathlib p ∈ associatedPrimes T T (radical form = plain under Noetherian); conclusion p ∈ minimalPrimes T"
+ }
 }
