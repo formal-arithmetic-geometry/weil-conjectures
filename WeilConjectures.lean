@@ -45,6 +45,7 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.EmbeddingOver
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Glue
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
+public import WeilConjectures.AlgebraicGeometry.ChowLemma.ProjectiveDomination
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
