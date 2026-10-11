@@ -21,9 +21,81 @@
  "stmt_deps": [
   "def-pc-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By (5) choose a bounded-above complex $K^\\bullet$ with terms in $\\mathcal P$ representing $K$. Its terms are projective by (1), hence flat, so $K^\\bullet$ is K-flat by [lem-pc-module-bounded-flat-kflat]; therefore $K\\otimes_R^{\\mathbf L}R/I$ is represented in $D(R/I)$ by the termwise quotient $K^\\bullet/IK^\\bullet=K^\\bullet\\otimes_R R/I$ by [lem-pur-derived-change-of-rings] (one-point site, $\\mathcal O=R$, $\\mathcal O'=R/I$). Each $E^i\\cong P/IP$ with $P$ projective is a projective $R/I$-module, so $E^\\bullet$ is a bounded-above complex of projective $R/I$-modules; the isomorphism $E^\\bullet\\cong K^\\bullet/IK^\\bullet$ in $D(R/I)$ is therefore represented by a chain map $\\delta:E^\\bullet\\to K^\\bullet/IK^\\bullet$ by [lem-pc-ring-derived-map-representative], and $\\delta$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.75.2 proof, first paragraph"
+   }
+  },
+  {
+   "text": "Let $C^\\bullet$ be the cone of $\\delta$. Then $C^i=(K^i/IK^i)\\oplus E^{i+1}$, which is of the form $P/IP$ with $P\\in\\mathcal P$ since $\\mathcal P$ is closed under direct sums by (2); $C^\\bullet$ is bounded above, and it is acyclic because $\\delta$ is a quasi-isomorphism. The map $q:K^\\bullet\\to K^\\bullet/IK^\\bullet\\to C^\\bullet$ (reduction followed by the cone inclusion) is a chain map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.75.2 proof, cone paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-complex-lift-acyclic-projective] (its hypotheses are (1), the 'only if' half of (2), and (3)) to obtain a bounded-above acyclic complex $A^\\bullet$ with terms in $\\mathcal P$ and an isomorphism $A^\\bullet/IA^\\bullet\\cong C^\\bullet$; let $\\pi:A^\\bullet\\to C^\\bullet$ be the resulting termwise surjective chain map. As $A^\\bullet$ and $C^\\bullet$ are both acyclic, $\\pi$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-complex-lift-acyclic-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.75.2 proof, application of Lemma 15.75.1"
+   }
+  },
+  {
+   "text": "We find a chain map $h:K^\\bullet\\to A^\\bullet$ with $\\pi\\circ h=q$ exactly (the dotted arrow). Since $Q(\\pi)$ is invertible in $D(R)$, the morphism $Q(\\pi)^{-1}Q(q):K^\\bullet\\to A^\\bullet$ is represented by a chain map $h_0$ by [lem-pc-ring-derived-map-representative] ($K^\\bullet$ is a bounded-above complex of projectives). Then $Q(\\pi h_0)=Q(q)$, so by the injectivity in the same statement (target $C^\\bullet$) $\\pi h_0-q=ds+sd$ for maps $s^i:K^i\\to C^{i-1}$. As $K^i$ is projective and $\\pi$ is termwise surjective, lift $s^i$ to $\\tilde s^i:K^i\\to A^{i-1}$, and put $h=h_0-(d\\tilde s+\\tilde sd)$; this is a chain map with $\\pi h=q$. Thus the reduction of $h^i$ modulo $I$ is the cone inclusion $K^i/IK^i\\to C^i=K^i/IK^i\\oplus E^{i+1}$, a split injection whose cokernel $E^{i+1}$ is of the form $P/IP$ with $P\\in\\mathcal P$ by (4).",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.75.2 proof, dotted arrow (Derived Categories, Tag 0649)"
+   }
+  },
+  {
+   "text": "Claim: if $f:P_1\\to P_2$ with $P_1,P_2\\in\\mathcal P$ reduces modulo $I$ to a split injection with cokernel $P_3/IP_3$, $P_3\\in\\mathcal P$, then $f$ is split injective with cokernel isomorphic to $P_3$. Indeed, since $P_2$ is projective (1), lift the projection $P_2/IP_2\\to P_3/IP_3$ to $g:P_2\\to P_3$. By (3) $g$ is surjective, hence split by (1), so $P_2=P'_1\\oplus P_3$ with $P'_1=\\ker g\\in\\mathcal P$ by (2). The composite $P_1\\to P_2\\to P'_1$ is an isomorphism modulo $I$, hence surjective by (3) and split by (1): $P_1=T\\oplus P'_1$ with $T\\in\\mathcal P$ by (2). Then $T/IT=0$; since $0\\in\\mathcal P$ (a summand of any member, by (2)), the map $0\\to T$ is surjective modulo $I$, so $T=0$ by (3). Hence $P_1\\to P'_1$ is an isomorphism, $f$ is split injective, and $\\operatorname{coker} f\\cong P_3$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.75.2 proof, split-injectivity argument"
+   }
+  },
+  {
+   "text": "By the previous two steps each $h^i:K^i\\to A^i$ is split injective with cokernel $Q^i\\cong$ a member of $\\mathcal P$, so $0\\to K^\\bullet\\to A^\\bullet\\to Q^\\bullet\\to0$ is a termwise split short exact sequence of complexes with $Q^\\bullet$ bounded above. Put $P^\\bullet=Q^\\bullet[-1]$, a bounded-above complex with terms in $\\mathcal P$. Since $A^\\bullet$ is acyclic, the associated distinguished triangle gives $K^\\bullet\\cong Q^\\bullet[-1]=P^\\bullet$ in $D(R)$, so $P^\\bullet$ represents $K$. Reducing the termwise split sequence modulo $I$ stays exact, and by the previous step the reduction of $h$ is the cone inclusion $K^\\bullet/IK^\\bullet\\to C^\\bullet$, whose cokernel complex is $E^\\bullet[1]$; hence $Q^\\bullet/IQ^\\bullet\\cong E^\\bullet[1]$ and $P^\\bullet/IP^\\bullet\\cong E^\\bullet$ as complexes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 15.75.2 proof, cokernel conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-ring-derived-map-representative",
+  "lem-sc-complex-lift-acyclic-projective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma 15.75.2, Tag 0BCA"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,19 +113,46 @@
   },
   {
    "tool": "grep",
-   "query": "lift.*complex|CochainComplex",
+   "query": "lift.*complex|CochainComplex in Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lift.*(acyclic|complex).*(Ideal|quotient)|liftComplex in Mathlib/ (reviewer R-clp0250)",
    "results": "0 hits",
    "date": "2026-10-11",
    "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-sc-pseudo-coherent-lift-stably-free-complex",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-cube"
+ "unit": "sk-prop-av-cube",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-complex-lift-class-projective",
+  "worker": "stage1",
+  "summary": "Read Stacks Lemma 15.75.2 (Tag 0BCA) and split its proof into the acyclic-complex lifting lemma, derived-category lifting fact, cone construction, split-injectivity argument, and cokernel conclusion. Cited the existing projective-complex derived map representative node. No exact Lean declaration exists.",
+  "blueprint": "Realizes the ancestor theorem-of-the-cube proof clause applying the general projective-class complex lifting argument.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-clp0250",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-clp0250 (reviewer sub-agent of L); spot-checked: Read Tag 0BCA statement+whole proof and Tag 0BC9; child statement matches 0BC9 (hyp (2) one-directional), no duplicate (grep 0BC*/lift-complex), Mathlib grep 0 hits. FIX more, RETURN less: (1) C1 step 1: K^./IK^. representing K(x)^L R/I was uncited -> cite lem-pc-module-bounded-flat-kflat + lem-pur-derived-change-of-rings (generic tools: K-flatness of bounded-above flat complexes, derived change of rings computed by K-flat complexes); (2) C4 step 4: lem-pc-ring-derived-map-representative gives pi.h = q only up to homotopy, step claimed strict reduction -> added homotopy correction (lift s through surjective pi using K^i projective); (3) step 6 shift slip: cokernel complex Q reduces to E[1], not E -> P^.=Q[-1]; also restored the unchanged pre-delivery statement text (delivery reworded it without E7 note), spelled out 0 in P and uses of (1)-(3) in step 5, deduplicated proof_deps.; 1 file(s) fixed by the reviewer"
+ }
 }

@@ -3320,3 +3320,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:46 L: lem-pur-essential-constant-cofinal-0a1s merged by R-ecc0244 (FIX 93e948ace: statement restored, cone-map clauses proved, initial-functor citation corrected, source Tag 0A1T); J1's second reading had itself deleted the clause as 'unsupported': a pattern to watch (a second reader weakening a statement the lead's reviewer wrote for a citer)
 - 02:49 L: reviewer R-clp0250 launched (H1 lem-sc-complex-lift-class-projective, head 2936dae4f)
 - 02:50 L: reviewer R-tmc0250 launched (J1 lem-pur-triangle-morphism-category-05r9, head c7bcfef52); two reviewers in flight
+- 02:51 L: merged deliver/H1/lem-sc-complex-lift-class-projective (reviewer FIX; first push; new nodes: 1)
