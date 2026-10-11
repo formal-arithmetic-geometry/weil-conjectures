@@ -187,5 +187,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ftef (reviewer sub-agent of L); spot-checked: Source Stacks Algebra 00UK (lemma-etale-makes-quasi-finite-finite): item statement unchanged, agrees with 00UK with the finite factors A_1..A_n combined into A' (finite type R->S, prime p; etale R->R', p' over p with kappa iso, R'(x)S = A' x B', A' finite, B' not quasi-finite over p'). Steps: (1) finiteness of isolated points of the finite-type fibre F from the new node lem-weil-pbc-finite-type-field-finite-isolated-points (true: an isolated point of a Jacobson noetherian spectrum is closed and the generic point of a component, finitely many components), primes over p via lem-weil-pbc-fibre-ring-primes-bijection, quasi-finite = isolated by def-weil-pbc-ring-map-quasi-finite-at-prime; (2) base case R'=R, A'=0, B'=S elementary; (3) lem-weil-pbc-etale-quasi-finite-finite-one-prime (00UJ node; its hypothesis is stated by the node itself as quasi-finiteness at q) gives R1, p1, e, r, C_e finite, D=C_{1-e} finite type; (4) fibre of C over p1 is F via the residue-field iso; D's fibre ring is the (1-e)-factor of it, a clopen part; by 00UJ clause (3) the e-part of the fibre is the single point r, hence isolated, so D has at most N-1 isolated fibre points (the step says the bijection lemma 'transports the topology', which that lemma states only as an order bijection; the argument goes through with the ring isomorphism of fibre rings, so not a return); (5) induction hypothesis, R2(x)_{R1}C = (R2(x)C_e) x A2 x B2 by the new leaf, finiteness under base change and products, etale composite by lem-weil-pbc-etale-composition-cancellation (2), residue isos compose; (6) B'=B2 retains the IH clause. Mathlib leaf Algebra.TensorProduct.prodRight verified at Mathlib/RingTheory/TensorProduct/Pi.lean:82 (AlgEquiv A(x)[R](B x C) = A(x)B x A(x)C, prodRight_tmul at 86 gives the formula), more general than the node (semirings). No 00UK declaration in slopmaster2 (grep 00UK empty; FiniteSplitting.lean has only 00UJ-type point splitting for finite algebras), so no B10 attachment. Own blueprint_refs search 'isolated points finite' and 'tensor product distributes': 0 matches, same_as [] confirmed. Changed fields of the item are split-owned only (status, proof, proof_deps, proof_origin, split_report, same_as). Small case: R=k field, S=k[x]x k[x]/(x): one isolated point, A'=k, B'=k[x]. 14:08-14:20 UTC"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleFiniteFactorDecomposition",
+  "declaration": "Algebra.exists_etale_finiteFactor_decomposition",
+  "file": "lean/Sheaf/RingTheory/EtaleFiniteFactorDecomposition.lean",
+  "statement": "theorem exists_etale_finiteFactor_decomposition {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [Algebra.FiniteType R S] (p : Ideal R) [p.IsPrime] : ∃ (R' : Type u) (_ : CommRing R') (_ : Algebra R R') (_ : Algebra.Etale R R') (P : Ideal R') (_ : P.IsPrime) (_ : P.LiesOver p) (A : Type (max u v)) (_ : CommRing A) (_ : Algebra R' A) (B : Type (max u v)) (_ : CommRing B) (_ : Algebra R' B) (_ : Algebra.FiniteType R' B), Function.Bijective (Ideal.ResidueField.mapₐ p P (Algebra.ofId R R') (P.over_def p)) ∧ Nonempty ((R' ⊗[R] S) ≃ₐ[R'] (A × B)) ∧ Module.Finite R' A ∧ ∀ q : PrimeSpectrum B, q.asIdeal.LiesOver P → ¬ IsQuasiFiniteAtPrime R' B q",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fef1026",
+  "group": "G1",
+  "result": "pass",
+  "note": "finite type R->S [Algebra.FiniteType R S], prime p; etale R' : Type u (R's universe; ULift feeds E1 49bcfd276's Type (max u v) hR) Algebra.Etale; P prime LiesOver p; kappa iso = ResidueField.mapₐ p P ofId bijective (E1 form); R'⊗[R]S ≃ₐ[R'] A×B, A B : Type (max u v); Module.Finite R' A; ∀ q of B LiesOver P, ¬IsQuasiFiniteAtPrime R' B q; FiniteType R' B witness only types the predicate (B quotient of R'⊗S); zero A/B and empty fibre allowed"
  }
 }
