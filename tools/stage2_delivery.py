@@ -6,7 +6,8 @@ A delivery branch deliver/<G>/<item> is ONE commit on top of sheaf-dag with only
   (1) the module lean/Sheaf/<Topic>/<Name>.lean (module Sheaf.<Topic>.<Name>; the declarations inside carry no
       `Sheaf.` prefix), or no Lean file when the node is an existing declaration of Mathlib or of the source;
   (2) the node file dag/nodes/<chapter>/<item>.json, changed only in `lean`:
-      {module, declaration, declarations?, file?, statement, branch, by, date, existing};
+      {module, declaration, declarations?, file?, statement, branch, by, date, existing} (`fixed_by`, the reviewer's
+      id, is added by merge_delivery.py when a reviewer's fix changed the record);
   (3) coord/reports/<G>/<item>.md with `## Worker report` and `## Second reading by <G>`.
 
 Failures are (letter, text) pairs; the letters are the ones of the stage-2 preflight:
@@ -24,7 +25,7 @@ from node_fields import changed_fields_except, STAGE2_OWNS  # noqa: E402
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SOURCE = pathlib.Path(os.environ.get("SHEAF_SOURCE_REPO", str(pathlib.Path.home() / "weil-conjectures-slopmaster2")))
 KEYS = ("module", "declaration", "statement", "branch", "by", "date", "existing")
-OPTIONAL = ("declarations", "file")
+OPTIONAL = ("declarations", "file", "fixed_by")
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 MODULE = re.compile(r"^Sheaf(\.[A-Za-z_][A-Za-z0-9_']*){2,}$")
 IMPORT_OK = ("Mathlib.", "WeilConjectures.", "Sheaf.")
@@ -465,15 +466,58 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
     # (e) the report
     rt = git.show(ref, report)
     D["report"] = rt
-    if rt is None:
-        f("e", f"no report {report}")
-    else:
-        w, s = report_sections(rt, group)
-        if not w:
-            f("e", "the report has no non-empty section '## Worker report'")
-        if not s:
-            f("e", f"the report has no non-empty section '## Second reading by {group}'")
+    fails.extend(check_report(rt, group, report))
     return D
+
+
+def check_report(rt: str | None, group: str, where: str) -> list[tuple[str, str]]:
+    """Check (e) on the text of the report."""
+    if rt is None:
+        return [("e", f"no report {where}")]
+    out = []
+    w, s = report_sections(rt, group)
+    if not w:
+        out.append(("e", "the report has no non-empty section '## Worker report'"))
+    if not s:
+        out.append(("e", f"the report has no non-empty section '## Second reading by {group}'"))
+    return out
+
+
+def refit_record(text: str | None, rec: dict, override: dict | None = None, reviewer: str | None = None,
+                 text_fixed: bool = False) -> tuple[dict, list[str], list[str]]:
+    """The delivered `lean` record after a reviewer's fix (merge_delivery.py --stage 2 --apply-fixes).
+    `override` (DIR/<item>.lean-record.json) is merged over `rec`, its keys winning except `by`, `date`, `fixed_by`.
+    With a fixed Lean file (`text_fixed`, a new module): `statement` is re-read from the file (unless the override
+    gives it) and `declarations` filtered to the names the file declares (unless the override gives it).
+    `fixed_by` = reviewer when the record changed. Returns (record, notes, refusals)."""
+    new, notes, refuse = dict(rec), [], []
+    for k, v in (override or {}).items():
+        if k in ("by", "date", "fixed_by"):
+            if v != rec.get(k):
+                notes.append(f"lean-record.json: key {k!r} ignored (stays {rec.get(k)!r})")
+            continue
+        new[k] = v
+    if text_fixed and text is not None and new.get("existing") is not True:
+        byname = {d["name"]: d for d in declarations(text) if d["name"]}
+        decl = new.get("declaration")
+        if decl not in byname:
+            refuse.append(f"lean.declaration {decl!r} is not declared in the fixed file (declared: "
+                          f"{', '.join(list(byname)[:12]) or 'nothing'}); give the new name in DIR/<item>.lean-record.json")
+        elif "statement" not in (override or {}):
+            new["statement"] = byname[decl]["statement"]
+        ds = new.get("declarations")
+        if isinstance(ds, list) and "declarations" not in (override or {}):
+            keep = [x for x in ds if x in byname]
+            dropped = [x for x in ds if x not in byname]
+            if dropped:
+                notes.append(f"lean.declarations: dropped {', '.join(map(str, dropped))} (not declared in the fixed file)")
+            if keep:
+                new["declarations"] = keep
+            else:
+                del new["declarations"]
+    if new != rec:
+        new["fixed_by"] = reviewer
+    return new, notes, refuse
 
 
 # ---------------------------------------------------------------- compiling

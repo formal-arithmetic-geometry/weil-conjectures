@@ -27,7 +27,13 @@ Usage (from the project root; by the lead, or by a reviewer sub-agent of the lea
                         lean/.sandbox/L/<item>.lean and landed with `SHEAF_GROUP=L tools/land.sh` (a failure aborts,
                         nothing changed); the node's `lean` set to the delivered record (statement re-read from the
                         landed file) and `reviewed_lean`; the report; the same bookkeeping as stage 1; one commit
-                        "State <item> (<group>, reviewed by <ID>)". --dry-run prints what it would do, changes nothing.
+                        "State <item> (<group>, reviewed by <ID>)". --dry-run prints what it would do (with the
+                        resulting record), changes nothing. A stage-2 DIR holds any of: <basename>.lean (the fixed module;
+                        lean.statement re-read from it, lean.declarations filtered to the names it declares, the dropped
+                        ones printed; refused if lean.declaration is not in it, unless the record file renames it),
+                        <item>.lean-record.json (keys merged over the delivered `lean`, theirs winning; `by`, `date`
+                        stay), <item>.report.md (replaces the report). A changed record gets `fixed_by: <ID>`; the
+                        record, the module and the report are checked again on the fixed versions.
   tools/merge_delivery.py return <group> <item> REASONS write the reasons into coord/returns/<group>.md, the ledger
                                                         line, and commit; the claim and the branch stay with the group
 
@@ -627,29 +633,58 @@ def cmd_merge2(o):
             raise Fail(f"base {base[:7]} is {age/3600:.0f} h behind {MAIN}: pull {MAIN}, rebase, push again")
         D = s2.read_delivery(s2.Git(ROOT), br, base, group, item)
         rec = D["rec"] if isinstance(D["rec"], dict) else None
-        text = D["lean_text"]
-        nfix = 0
+        text, report = D["lean_text"], D["report"]
+        nfix, override, text_fixed, fixnotes = 0, None, False, []
         if o.apply_fixes:
             fixdir = pathlib.Path(o.apply_fixes).resolve()
             if not fixdir.is_dir():
                 raise Fail(f"--apply-fixes {fixdir}: no such directory")
             want = pathlib.PurePosixPath(D["lean_path"]).name if D["lean_path"] else None
+            rec_name, rep_name = f"{item}.lean-record.json", f"{item}.report.md"
             for p in sorted(x for x in fixdir.rglob("*") if x.is_file()):
-                if want is None or p.relative_to(fixdir).as_posix() != want:
-                    raise Fail(f"--apply-fixes: {p.relative_to(fixdir)}: a stage-2 fix is only DIR/{want or '<the module>.lean'}")
-                text = p.read_text(); nfix = 1
-        # the static checks; with a fix the Lean file is checked again on the fixed text, the statement read from it
-        fails = [x for x in D["fails"] if not (nfix and x[0] == "c")]
+                r = p.relative_to(fixdir).as_posix()
+                if r == want:
+                    text, text_fixed = p.read_text(), True
+                elif r == rec_name:
+                    try:
+                        override = json.loads(p.read_text())
+                    except ValueError as e:
+                        raise Fail(f"--apply-fixes: {r}: not valid JSON ({e})")
+                    if not isinstance(override, dict):
+                        raise Fail(f"--apply-fixes: {r}: not a JSON object (the keys of `lean` to replace)")
+                elif r == rep_name:
+                    report = p.read_text()
+                else:
+                    raise Fail(f"--apply-fixes: {r}: a stage-2 fix is only DIR/{want or '<the module>.lean'}, "
+                               f"DIR/{rec_name} or DIR/{rep_name}")
+                nfix += 1
+        # the static checks; with a fix the record is refitted to the fixed file (and DIR/<item>.lean-record.json)
+        # and the record, the Lean file and the report are checked again on the fixed versions
+        fails = list(D["fails"])
         decl = D["decl"]
-        if nfix and rec:
-            cf, decl = s2.check_lean_text(text, rec, item, check_statement=False)
-            fails += cf
+        record = dict(rec) if rec is not None else None
+        if nfix and rec is not None and (text_fixed or override is not None):
+            record, fixnotes, refuse = s2.refit_record(text, rec, override, o.reviewer, text_fixed)
+            if refuse:
+                raise Fail("stage-2 fix: " + " | ".join(refuse))
+            old = set(s2.check_record(rec, group))
+            if D["lean_text"] is not None:
+                old |= set(s2.check_lean_text(D["lean_text"], rec, item)[0])
+            if rec.get("existing") is True:
+                old |= set(s2.check_existing(rec)[0])
+            fails = [x for x in fails if x not in old] + s2.check_record(record, group)
+            if record.get("existing") is True:
+                fails += s2.check_existing(record)[0]
+            elif text is not None:
+                cf, decl = s2.check_lean_text(text, record, item)
+                fails += cf
+        if report is not D["report"]:
+            fails = [x for x in fails if x[0] != "e"] + s2.check_report(report, group, f"{o.apply_fixes}/{item}.report.md")
         if fails:
             raise Fail("stage-2 checks: " + " | ".join(f"({L}) {x}" for L, x in fails))
-        if rec is None:
+        if record is None:
             raise Fail("the node has no `lean` record")
-        record = dict(rec)
-        if text is not None:
+        if text is not None and decl is not None:
             record["statement"] = decl["statement"]
         node_rel = node_path(item)
         if node_rel is None or node_rel != D["node_path"]:
@@ -658,8 +693,8 @@ def cmd_merge2(o):
         report_rel = f"coord/reports/{group}/{item}.md"
         if dry:
             print(f"DRY RUN {item} (stage 2): branch {br} at {git('rev-parse', '--short', br)}, base {base[:9]}; checks (a)-(e) pass"
-                  + (f"; {nfix} file fixed by the reviewer" if nfix else ""))
-            for n in D["notes"]:
+                  + (f"; {nfix} file(s) fixed by the reviewer" if nfix else ""))
+            for n in D["notes"] + fixnotes:
                 print(f"  note: {n}")
         rid = o.reviewer
         verdict = (o.verdict or ("FIX" if nfix else "PASS")).upper()
@@ -679,9 +714,10 @@ def cmd_merge2(o):
             if not dry:
                 tree.write(node_rel, dump(cur))
             # (4) the report
-            say(f"write {report_rel} ({len(D['report'] or '')} characters) from the branch")
+            say(f"write {report_rel} ({len(report or '')} characters) "
+                + ("from the reviewer's fix" if report is not D["report"] else "from the branch"))
             if not dry:
-                tree.write(report_rel, D["report"])
+                tree.write(report_rel, report)
             # (2) the landing, last before the bookkeeping: a failure aborts with nothing changed
             if text is not None:
                 sand = ROOT / "lean" / ".sandbox" / "L" / f"{item}.lean"
