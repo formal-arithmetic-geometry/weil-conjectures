@@ -196,5 +196,24 @@
   "by": "L",
   "result": "pass",
   "note": "Six steps along Stacks 02H4 (immediate from the definitions): the Spec/ring-map dictionary from def-weil-affine-spectrum, square-zero quotients give first order thickenings of affine schemes (closed immersion by the affine-cover criterion leaf, ideal sheaf N~ with square (N^2)~ = 0), every first order thickening of affine schemes has this form, transport along isomorphisms, and the two directions. Correct; 0 new nodes. Worker notes Mathlib has no scheme-level FormallySmooth (only stalk-level in Morphisms/Smooth.lean)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFormallySmooth",
+  "declaration": "AlgebraicGeometry.formallySmooth_spec_iff_ringHom_formallySmooth",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFormallySmooth.lean",
+  "statement": "theorem formallySmooth_spec_iff_ringHom_formallySmooth {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) : FormallySmooth (Scheme.Spec.map (CommRingCat.ofHom φ).op) ↔ RingHom.FormallySmooth φ",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fsl1401"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fsl1401",
+  "group": "F1",
+  "result": "fix",
+  "note": "R S : Type u CommRing = commutative rings; φ : R →+* S; Scheme.Spec.map (ofHom φ).op = Spec φ : Spec S ⟶ Spec R; LHS = recorded AlgebraicGeometry.FormallySmooth (affine first order thickenings over base, both triangles); RHS RingHom.FormallySmooth φ = Algebra.FormallySmooth (Mathlib), ↔ square-zero lifting by iff_comp_surjective/comp_surjective (all universes); iff, no extra hypotheses; fix: docstring gains node proof in words"
  }
 }
