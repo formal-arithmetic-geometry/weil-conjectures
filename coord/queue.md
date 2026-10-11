@@ -1,17 +1,16 @@
 # Work queue
 
-265 items; claim with `tools/claim.py next <group> [--stage N]`.
+260 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (265)
+## Stage 2: nodes to state (260)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-weil-pbc-coherent-formal-module` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
-| `def-sc-sheaf-cohomology-functor` | 1 | state |
 | `lem-galois-inverse-image-representable` | 1 | state |
 | `lem-pc-chow-relative-ample` | 1 | state |
 | `lem-pc-coherent-property-devissage` | 1 | state |
@@ -21,14 +20,15 @@
 | `lem-pc-noetherian-approximation-data` | 1 | state |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
+| `lem-sc-ext-locally-free-second-naturality` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
+| `lem-sc-p1-ext-yoneda-functoriality` | 1 | state |
 | `lem-sc-p1-right-derived-triangle-connecting` | 1 | state |
 | `lem-sc-point-tangent-separation-closed-immersion` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-subset-proper-over-base-properties` | 1 | state |
 | `lem-weil-pbc-closed-subset-proper-over-base-union-preimage` | 1 | state |
-| `lem-weil-pbc-closed-subset-proper-over-base-universally-closed-image` | 1 | state |
 | `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1 | state |
 | `lem-weil-pbc-coherent-support-union-exact-sequence` | 1 | state |
 | `lem-weil-pbc-etale-geometric-fibre-inverse-image-constant` | 1 | state |
@@ -41,22 +41,17 @@
 | `lem-weil-pbc-matching-object-proper-faces` | 1 | state |
 | `lem-weil-pbc-module-support-proper-over-base` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
-| `lem-weil-pbc-projective-morphism-chart-preimage` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
 | `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-support` | 1 | state |
-| `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1 | state |
-| `lem-weil-pbc-sections-over-quasi-compact-open-in-affine` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-constant-sheaf` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-restriction` | 1 | state |
 | `lem-weil-pbc-sets-etale-inverse-image-stalk-germ` | 1 | state |
 | `lem-weil-pbc-sets-etale-section-continuity` | 1 | state |
 | `lem-weil-pbc-sets-finite-surjective-descent` | 1 | state |
-| `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
 | `lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension` | 1 | state |
 | `lem-weil-pbc-smooth-fibre-regular-local` | 1 | state |
 | `lem-weil-pbc-smooth-free-differentials-strictly-standard-power` | 1 | state |
-| `lem-weil-pbc-smooth-localization-conormal-split` | 1 | state |
 | `lem-weil-pbc-smooth-over-field-regular-local` | 1 | state |
 | `lem-weil-pbc-smooth-over-normal-ring-normal` | 1 | state |
 | `lem-weil-pbc-smooth-over-product-ring` | 1 | state |
@@ -275,7 +270,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 462 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 460 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
