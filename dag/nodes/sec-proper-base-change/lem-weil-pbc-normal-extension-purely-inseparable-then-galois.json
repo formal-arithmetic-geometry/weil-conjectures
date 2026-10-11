@@ -192,5 +192,24 @@
   "worker": "stage1",
   "summary": "Read Stacks 030M (fields.tex 3666; proof 'We set E_insep = E^{Aut(E/F)}. Details omitted') and the lemmas the details need: 0BME (lift-maps, 1946), 09HQ (1879), 09HN (normal-goes-up, 1838), 09H3 (recognize-separable, 1207), 09I3 (galois-over-fixed-field, 2727), 09HE, 09I0; tags verified in tags/tags. Wrote the omitted details in six steps for arbitrary (possibly infinite) Aut(E/F): fixed set is a subfield (elementary); Aut acts transitively on the finite root set of each minimal polynomial (new leaf lem-weil-pbc-normal-extension-conjugate-by-automorphism = minpoly.exists_algEquiv_of_root'); a fixed element has minimal polynomial (T-alpha)^d, so alpha (char 0) or alpha^{p^e} (char p) lies in F by reading one coefficient (elementary); E/E_insep normal by new leaf lem-weil-pbc-normal-extension-normal-over-intermediate (= Normal.tower_top_of_normal, 09HN); E/E_insep separable via the G-invariant orbit polynomial prod(T - sigma alpha) and new leaf lem-weil-pbc-distinct-linear-factors-separable (09H3; separable_prod_X_sub_C_iff', separable_map, Separable.of_dvd). The statement is unchanged; all its clauses are proved. The only citer (lem-weil-pbc-n2-char-p-purely-inseparable-criterion, step 2) uses only, for a finite normal M/K, that M_insep contains K, M_insep/K is purely inseparable and M/M_insep is separable algebraic. Mathlib: no composed leaf for the whole item (IsGalois.of_fixed_field covers only finite groups and not the purely inseparable half). No slopmaster2 declaration states the item or the new nodes.",
   "blueprint": "The blueprint ancestor lem-weil-pbc-normal-constant-generic reaches this item only through the N-2 criterion 032N ('By Fields, Lemma 030M there exists a subextension M/M_insep/K such that M_insep/K is purely inseparable, and M/M_insep is separable'); steps 1-3 realize 'M_insep/K is purely inseparable', steps 4-6 realize 'M/M_insep is separable' (and normal), the subextension being M^{Aut(M/K)}."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.NormalExtensionFixedField",
+  "declaration": "Normal.fixedField_purelyInseparable_and_galois",
+  "file": "lean/Sheaf/FieldTheory/NormalExtensionFixedField.lean",
+  "statement": "theorem fixedField_purelyInseparable_and_galois (F : Type u) (E : Type v) [Field F] [Field E] [Algebra F E] [Normal F E] : IsPurelyInseparable F (IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E))) ∧ Algebra.IsSeparable (IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E))) E ∧ Normal (IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E))) E",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-npg1157"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-npg1157",
+  "group": "H1",
+  "result": "fix",
+  "note": "F field, E/F Algebra; algebraic+normal = [Normal F E] (extends Algebra.IsAlgebraic, splits'); E_insep = IntermediateField.fixedField (⊤ : Subgroup (E ≃ₐ[F] E)) (mem_fixedField_iff: fixed by every F-aut; subfield containing F by type); IsPurelyInseparable F S; Algebra.IsSeparable S E ∧ Normal S E = IsGalois via isGalois_iff, no finiteness; let S inlined (FIX)"
  }
 }
