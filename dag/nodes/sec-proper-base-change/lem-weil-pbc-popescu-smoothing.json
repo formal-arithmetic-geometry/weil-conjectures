@@ -204,5 +204,24 @@
   "item": "lem-weil-pbc-popescu-smoothing",
   "worker": "stage1",
   "summary": "Wrote the proof of Stacks Theorem 07GC as it stands in smoothing.tex (lines 3112-3134) in six steps: reduction to a field base (Lemma 07F5, new node), the factorization criterion (Algebra Lemma 07C3 (2)=>(1), new node; the existing node covers only (1)=>(2)), resolution at a prime minimal over h_B in characteristic 0 (Lemma 07FE, new node, with regularity of Lambda_q from geometric regularity with k'=k and separability of kappa(q) from a new Mathlib-leaf node 'char 0 extensions are separable') and characteristic p (Lemma 07FJ, new node), Noetherian induction on h_B written out with two new Mathlib-leaf nodes (maximal element of a set of ideals; minimal prime over a proper ideal), final solve (Lemma 07EU, new node), and the translation smooth ring map -> smooth Spec morphism (existing lem-weil-pbc-smooth-ring-map-iff-smooth-affine) and colimit in R-algebras -> in rings (existing lem-weil-pbc-filtered-colimit-algebras-elementwise). New definitions: PT (filtered colimit of smooth algebras, 07F1), singular ideal H_{A/R} with smoothness at a prime (07C5/00TB), h_A and resolutions (07F7), separable field extension (030O). Statement and stmt_deps unchanged. All tags checked against tags/tags."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuSmoothing",
+  "declaration": "RingHom.popescu_smoothing",
+  "file": "lean/Sheaf/RingTheory/PopescuSmoothing.lean",
+  "statement": "theorem popescu_smoothing {R Λ : Type u} [CommRing R] [CommRing Λ] [Algebra R Λ] [IsNoetherianRing R] [IsNoetherianRing Λ] (hφ : (algebraMap R Λ).IsRegular) : ∃ (J : Type u) (_ : SmallCategory J) (_ : IsFiltered J) (B : J ⥤ CommAlgCat.{u} R), (∀ j : J, AlgebraicGeometry.Smooth (Spec.map (CommRingCat.ofHom (algebraMap R (B.obj j))))) ∧ ∃ ι : B ⟶ (Functor.const J).obj (CommAlgCat.of R Λ), Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} R) CommRingCat.{u}).mapCocone { pt := CommAlgCat.of R Λ, ι := ι }))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-psm1257"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-psm1257",
+  "group": "G1",
+  "result": "fix",
+  "note": "Noetherian R,Λ instances; regular φ as [Algebra R Λ] + (algebraMap R Λ).IsRegular (letI removed); J : Type u small filtered; B : J ⥤ CommAlgCat.{u} R; Spec.map smooth per stage (def-sbc-smooth-morphisms); ι natural transformation to const Λ; IsColimit of forget₂-to-CommRingCat cocone with point Λ"
  }
 }
