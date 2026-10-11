@@ -3373,3 +3373,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:20 L: stated def-pc-dimension (own item, W-dimx0530, R-dimx0533 FIX): lean/Sheaf/AlgebraicGeometry/Dimension.lean (Scheme.dim, Scheme.Hom.relativeDimAt, Scheme.Hom.IsOfRelativeDimension); lem-pc-scheme-dimension-local-rings recorded as existing (Scheme.dim_eq_topologicalKrullDim, sorry); landed
 - 05:20 L: claimed def-pc-curve for L, worker W-cur0537 launched (no delivery waits); global build started for the Dimension landing
 - 05:22 L: stated def-pc-curve (own item, W-cur0537, R-cur0541 PASS): lean/Sheaf/AlgebraicGeometry/Variety.lean (Scheme.Hom.IsVariety, IsCurveOverField); landed
+- 05:23 L: claimed def-pc-divisor-line-bundle for L, worker W-dlb0545 launched (no delivery waits); global build started for the Variety landing
