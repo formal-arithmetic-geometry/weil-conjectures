@@ -196,5 +196,24 @@
   "by": "L",
   "result": "accepted",
   "note": "Six steps: qcqs (03GI/01KV node), the normalization of X in Spec K (new Mathlib leaf lem-weil-pbc-relative-normalization: Scheme.Hom.normalization, toNormalization_fromNormalization :190, IsIntegralHom fromNormalization :200, normalizationObjIso :220, IsDominant toNormalization :341, checked), the ring over an affine open written out (reduction to A/p and the integral closure in the finite extension K: leaf lem-weil-pbc-integral-closure-finite-extension-normal, isFractionRing_of_finite_extension Localization/Integral.lean:401, isIntegrallyClosedOfFiniteExtension IntegrallyClosed.lean:367, checked), normality via lem-weil-pbc-normalization-normal-stalks (035L; Lean isIntegrallyClosed_stalk_normalization attached by L, sorry-free), generic point by dominance and sobriety, function field by the residue-field node. Working over X instead of Stacks Z (09Z6) is justified by 035I. Tool use: lem-weil-pbc-morphism-into-affine-scheme (Mathlib leaf of another unit)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilPbcNormalizationInResidueFieldExtension",
+  "declaration": "normalization_in_finite_residue_field_extension",
+  "file": "lean/Sheaf/Paper/WeilPbcNormalizationInResidueFieldExtension.lean",
+  "statement": "theorem normalization_in_finite_residue_field_extension (X : Scheme.{u}) [QuasiSeparatedSpace X] (x : X) (K : Type u) [Field K] [Algebra (X.residueField x) K] [Module.Finite (X.residueField x) K] : QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) K)) ≫ X.fromSpecResidueField x) ∧ QuasiSeparated (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) K)) ≫ X.fromSpecResidueField x) ∧ ∃ (Y : Scheme.{u}) (ν : Y ⟶ X) (g : Spec (.of K) ⟶ Y), IsIntegralHom ν ∧ Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) K)) ≫ X.fromSpecResidueField x = g ≫ ν ∧ IsIntegral Y ∧ (∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) ∧ ∃ η : Y, IsGenericPoint η Set.univ ∧ g (IsLocalRing.closedPoint K) = η ∧ IsIso (g.residueFieldMap (IsLocalRing.closedPoint K))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-nrf1254"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nrf1254",
+  "group": "E1",
+  "result": "fix",
+  "note": "QuasiSeparatedSpace X (qs scheme); h = Spec.map(algebraMap κ(x)→K) ≫ fromSpecResidueField with Module.Finite; QC∧QS h; ∃Y ν g, IsIntegralHom ν, h = g≫ν; AlgebraicGeometry.IsIntegral Y (#check); stalks IsDomain∧IsIntegrallyClosed (NORMAL RING domain form); IsGenericPoint η univ, g pt = η; IsIso residueFieldMap at closedPoint = κ(η)≅K; FIX: let h inlined, docstring garble"
  }
 }
