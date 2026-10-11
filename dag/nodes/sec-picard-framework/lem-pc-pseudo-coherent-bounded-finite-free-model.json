@@ -13,13 +13,14 @@
  },
  "kind": "statement",
  "title": "Bounded-above finite-free model at a cohomological upper bound",
- "statement": "Let $R$ be a ring, let $b$ be an integer and let $C$ be an object of the derived category $D(R)$ [def-pc-derived-category]. If $C$ is pseudo-coherent, meaning that it admits a quasi-isomorphism from a bounded-above complex of finitely generated projective $R$-modules, and $H^i(C)=0$ for every $i>b$, then there is a quasi-isomorphism $P^\\bullet\\to C$ from a complex $P^\\bullet$ of finitely generated free $R$-modules with $P^i=0$ for every $i>b$.",
+ "statement": "Let $R$ be a commutative ring, let $b$ be an integer and let $C$ be an object of the derived category $D(R)$ [def-weil-abstract-derived-category]. If $C$ is pseudo-coherent [def-pc-ring-pseudo-coherent-complex], equivalently it admits a quasi-isomorphism from a bounded-above complex of finitely generated projective $R$-modules, and $H^i(C)=0$ for every $i>b$, then there is a quasi-isomorphism $P^\\bullet\\to C$ from a complex $P^\\bullet$ of finitely generated free $R$-modules with $P^i=0$ for every $i>b$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma 15.66.5 (used in Lemma 15.76.2, Tag 0658)"
  },
  "stmt_deps": [
-  "def-pc-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
  ],
  "proof": [
   {
@@ -117,5 +118,43 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pbf2826 (reviewer sub-agent of L); spot-checked: Read packet and Tag 064U (more-algebra.tex 16047-16080) and Tag 0658 text; statement matches the 064U final clause and exactly what J1 node lem-pc-ring-pseudo-coherent-finite-tor-perfect step 1 uses, with the same inline pseudo-coherent definition (finitely generated projective, bounded above); steps 1-3 elementary and correct (contractible-kernel replacement, cohomology transfer, top-degree split-surjection cancellation, finite descent). Preflight note resolved: the construction is not in 0658's text but in 064U, the item's own source lemma, written out in full, so no node needed. FIX more, RETURN less: (1) C1 citation: step 1 attributed the finite-free replacement to Tag 0658; corrected to Tag 064U (proof of (3)=>(1)) and added Tag 064U to all source places; (2) step 1 wording defined C^{n-1} circularly and reused the letter C of the object; rewritten with complements D^n defined explicitly and n_0 introduced; (3) step 3: added the trivial case and that the finite-free replacement is applied to the truncated complex with top degree at most n-1.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel",
+  "declaration": "DerivedCategory.exists_finiteFree_model_isStrictlyLE",
+  "file": "lean/Sheaf/RingTheory/PseudoCoherentBoundedFiniteFreeModel.lean",
+  "statement": "theorem exists_finiteFree_model_isStrictlyLE {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)] (C : DerivedCategory (ModuleCat.{v} R)) (b : ℤ) (hC : IsPseudoCoherent C) (hvan : ∀ i : ℤ, b < i → IsZero ((homologyFunctor (ModuleCat.{v} R) i).obj C)) : ∃ P : CochainComplex (ModuleCat.{v} R) ℤ, P.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i)) ∧ Nonempty (Q.obj P ≅ C)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pbf2",
+  "group": "C1",
+  "result": "pass",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "C1 stage 2",
+  "old_statement": "Let $R$ be a ring, let $b$ be an integer and let $C$ be an object of the derived category $D(R)$ [def-pc-derived-category]. If $C$ is pseudo-coherent, meaning that it admits a quasi-isomorphism from a bounded-above complex of finitely generated projective $R$-modules, and $H^i(C)=0$ for every $i>b$, then there is a quasi-isomorphism $P^\\bullet\\to C$ from a complex $P^\\bullet$ of finitely generated free $R$-modules with $P^i=0$ for every $i>b$.",
+  "what": "The cited def-pc-derived-category defines D(O_X) for a scheme, not D(R), so it cannot type the stated ring-derived object. Replace it by the abstract derived category specialized to ModuleCat R and cite the landed ring pseudo-coherence definition. Explicit commutativity is the source convention (Tag 00AQ), including the zero ring; the finite projective characterization is equivalent by Tag 064U, not an extra hypothesis.",
+  "source": {
+   "document": "literature/stacks-project/more-algebra.tex",
+   "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), final assertion; ring convention Tag 00AQ"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-ring-pseudo-coherent-finite-tor-perfect",
+    "holds": true,
+    "note": "Step 1 still obtains a finite free model vanishing above b from pseudo-coherence and cohomological vanishing; Tag 064U equates the finite projective and finite free definitions."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-derived-category"
+  ]
  }
 }

@@ -5129,3 +5129,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:05 L: merged deliver/N1/lem-sc-base-change-curve (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.BaseChangeCurve AlgebraicGeometry.baseChange_curve)
 - 15:05 L: merged deliver/N1/lem-weil-derived-limit-roos-complex (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.RoosComplex CategoryTheory.roosComplex_quasiIso)
 - 15:05 L: merged deliver/N1/lem-weil-pbc-zariski-pair-rank-one-propagation (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ZariskiPairRankOnePropagation RingHom.zariskiPair_rank_one_propagation)
+- 15:05 L: merged deliver/C1/lem-pc-pseudo-coherent-bounded-finite-free-model (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel DerivedCategory.exists_finiteFree_model_isStrictlyLE; statement corrected (1 citers))
