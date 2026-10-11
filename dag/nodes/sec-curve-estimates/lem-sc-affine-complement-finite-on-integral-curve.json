@@ -122,5 +122,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-acf (reviewer sub-agent of L); spot-checked: Source Stacks 09ND (varieties lemma-dim-1-noetherian-integral-separated-has-ample), proof second sentence 'Since X is Noetherian, each of the sets X minus U_i is finite'; the item (integral Noetherian scheme of topological dimension 1, every nonempty affine open has finite complement) is the general form of that sentence and needs no separatedness; statement true. Step 1 elementary (complement of open is closed). Step 2 carried by lem-sc-dim-one-point-outside-open-closed (irreducible, Kolmogorov, dim <= 1, point outside a nonempty open is closed; checked; off-unit sk-prop-cd generic topological tool, Lean-closed in slopmaster2, added via --tool-uses as in the precedent of lem-sc-component-intersections-finite); irreducibility from def-pc-integral-scheme. Step 3 carried by lem-sc-noetherian-closed-points-finite (Noetherian scheme, closed subset all of whose points are closed is finite), hypotheses met. No new nodes, no Mathlib leaf. Small cases: U = X (empty complement), affine line in P^1 (one point), Spec of a DVR (U = generic point, complement the closed point). FIX more, RETURN less: (1) C1 step 2 used that a scheme is Kolmogorov with no node: cite lem-sc-scheme-sober (uniqueness of generic points gives T0) and spell out the argument. dag/nodes/sec-curve-estimates/lem-sc-affine-complement-finite-on-integral-curve.json: proof[1].text, proof[1].uses, proof_deps: lem-sc-scheme-sober added and the hypothesis check of step 2 written out. Start Sat Oct 10 03:48:08 PM UTC 2026, end Sat Oct 10 03:48:49 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineComplementFiniteOnIntegralCurve",
+  "declaration": "AlgebraicGeometry.IsAffineOpen.finite_compl_of_integral_dim_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineComplementFiniteOnIntegralCurve.lean",
+  "statement": "theorem IsAffineOpen.finite_compl_of_integral_dim_one {X : Scheme.{u}} [IsIntegral X] [IsLocallyNoetherian X] [CompactSpace X] (hdim : topologicalKrullDim X = 1) {U : X.Opens} (hU : IsAffineOpen U) (hne : (U : Set X).Nonempty) : ((U : Set X)ᶜ).Finite",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-acf1122",
+  "group": "F1",
+  "result": "pass",
+  "note": "#check: IsIntegral resolves to AlgebraicGeometry.IsIntegral (def-pc-integral-scheme), not root IsIntegral; Noetherian = [IsLocallyNoetherian X] [CompactSpace X] per stmt_deps pqf-def-locnoeth + def-weil-pbc-quasi-compact-scheme, CompactSpace not hollow (inferInstance from IsIntegral+IsLocallyNoetherian fails); topologicalKrullDim X = 1 (def-kun-topological-krull-dimension); U : X.Opens, IsAffineOpen U, (U:Set X).Nonempty; conclusion ((U:Set X)ᶜ).Finite; universe u explicit, no added field/separated/finite-type hypotheses; docstring has blueprint tag and the 3 proof steps; statement true"
  }
 }
