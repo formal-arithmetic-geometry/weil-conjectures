@@ -1704,6 +1704,7 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Inj
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mono
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Projection
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Adic
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Curve
