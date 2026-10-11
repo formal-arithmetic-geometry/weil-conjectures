@@ -1,8 +1,8 @@
 # Work queue
 
-866 items; claim with `tools/claim.py next <group> [--stage N]`.
+864 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (41)
+## Stage 1: nodes to split (38)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -12,7 +12,6 @@
 | `lem-pc-ring-m-pseudo-coherent-vanishing-base` | 3017 | none |
 | `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3017 | none |
 | `lem-pc-ring-pseudo-coherent-iff-all-m` | 3017 | none |
-| `lem-sc-module-extension-by-zero-stalk-maps` | 3018 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
 | `lem-pc-termwise-tor-acyclic-derived-tensor` | 3023 | none |
@@ -24,8 +23,8 @@
 | `lem-sc-etale-triple-strict-henselization-identification` | 4013 | none |
 | `lem-sc-strict-henselization-completion-flat-over-base` | 4013 | none |
 | `lem-pc-derived-tensor-transitivity` | 5015 | none |
-| `lem-pc-affine-derived-base-change-comparison-map` | 5016 | none |
 | `lem-pc-derived-mayer-vietoris-functorial` | 5017 | none |
+| `lem-pc-derived-tensor-localization-cohomology` | 5017 | none |
 | `lem-pc-affine-flat-module-localization-preserves-flatness` | 5018 | none |
 | `lem-sp-ce-vertical-nullhomotopy` | 6008 | none |
 | `pqf-lem-serre-criterion` | 6013 | none |
@@ -38,9 +37,7 @@
 | `lem-pc-affine-perfect-cut-degree-zero` | 6016 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-sc-etale-torsor-inverse-image-extension` | - | none |
 | `lem-pur-kinjective-characterize-K-injective` | - | none |
-| `lem-pur-kinjective-characterize-injective` | - | none |
 | `lem-pur-kinjective-functorial-homotopies` | - | none |
 | `lem-pur-kinjective-surjection-bounded-size` | - | none |
 | `lem-pc-finite-flat-pushforward-locally-free` | - | none |
@@ -48,7 +45,7 @@
 | `lem-pur-left-derived-exact-when-defined` | - | none |
 | `lem-pur-quasi-isos-saturated-triangulated` | - | none |
 
-## Stage 2: nodes to state (825)
+## Stage 2: nodes to state (826)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -223,6 +220,7 @@
 | `lem-pod-equivalence-induces-module-objects` | 1 | state |
 | `lem-pod-lisse-tensor-and-scalar-extension` | 1 | state |
 | `lem-pqf-finite-spectrum-maximal-primes` | 1 | state |
+| `lem-pur-kinjective-characterize-injective` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
 | `lem-pur-kinjective-functorial-injective` | 1 | state |
 | `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
@@ -878,7 +876,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1731 nodes that wait for a statement dependency, 82 nodes that wait for stage 1.
+Not open yet: 1734 nodes that wait for a statement dependency, 79 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
