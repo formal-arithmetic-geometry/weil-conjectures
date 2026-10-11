@@ -5,31 +5,32 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.EpiMono
-public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveUnit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.GlobalSections
 
 /-!
-# Pro-étale sheaves of modules on the spectrum of an algebraically closed field
+# Pro-étale sheaves on the spectrum of an algebraically closed field
 
-Let `X` be a scheme isomorphic to `Spec K` for an algebraically closed field `K`, and let `Λ`
-be a commutative ring. Every pro-étale cover of `X` has a section, so every covering sieve of
-the terminal object of `X_proét` is the maximal sieve. Hence taking sections over `X` is exact
-on pro-étale sheaves of `Λ`-modules, and the constant sheaf `Λ_X`, the monoidal unit, is a
-projective object: it corepresents sections over `X`. As a consequence there are no nonzero
-morphisms `Λ_X ⟶ Λ_X[1]` in the derived category, that is, `H¹(X_proét, Λ) = 0`.
+Let `X` be a scheme isomorphic to `Spec K` for an algebraically closed field `K`. Every
+pro-étale cover of `X` has a section (`AlgebraicGeometry.exists_comp_eq_id_of_weaklyEtale`), so
+every covering sieve of the terminal object of `X_proét` is the maximal sieve. Hence taking
+sections over `X` is exact on pro-étale sheaves with values in a concrete category, such as
+`Λ`-modules or `ℓ`-adic coefficients. For a commutative ring `Λ`, the constant sheaf `Λ_X`, the
+monoidal unit, is then a projective object: it corepresents sections over `X`. As a consequence
+there are no nonzero morphisms `Λ_X ⟶ Λ_X[1]` in the derived category, that is,
+`H¹(X_proét, Λ) = 0`.
 
 ## Main results
 
 - `AlgebraicGeometry.Scheme.ProEt.id_mem_of_mem_topology_of_iso`: a covering sieve of the
   terminal object of `X_proét` contains the identity.
 - `AlgebraicGeometry.ProEtale.surjective_app_of_epi_of_iso`: an epimorphism of pro-étale sheaves
-  of `Λ`-modules on `X` is surjective on sections over `X`.
+  on `X` with values in a concrete category is surjective on sections over `X`.
 - `AlgebraicGeometry.ProEtale.projective_unit_of_iso`: the unit `Λ_X` is projective.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.unit_hom_shift_one_eq_zero_of_iso`: every
   morphism `Λ_X ⟶ Λ_X[1]` in `D(X_proét, Λ)` is zero.
@@ -69,27 +70,44 @@ lemma Scheme.ProEt.id_mem_of_mem_topology_of_iso (e : X ≅ Spec (.of K))
 
 namespace ProEtale
 
-variable (Λ : Type (u + 1)) [CommRing Λ]
+section Concrete
 
-variable {Λ} in
-/-- An epimorphism of pro-étale sheaves of `Λ`-modules on a scheme `X` isomorphic to the
-spectrum of an algebraically closed field is surjective on sections over `X`: it is locally
-surjective, and every covering sieve of `X` is the maximal sieve. -/
+variable {A : Type*} [Category A] {FA : A → A → Type*} {CA : A → Type*}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]
+  [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A]
+
+/-- An epimorphism of pro-étale sheaves with values in a concrete category `A` on a scheme `X`
+isomorphic to the spectrum of an algebraically closed field is surjective on sections over `X`:
+it is locally surjective, and every covering sieve of `X` is the maximal sieve. -/
 lemma surjective_app_of_epi_of_iso (e : X ≅ Spec (.of K))
-    {F G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} (φ : F ⟶ G) [Epi φ] :
+    [(Scheme.ProEt.topology X).WEqualsLocallyBijective A]
+    [HasSheafify (Scheme.ProEt.topology X) A]
+    [(Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget A)]
+    [Balanced (Sheaf (Scheme.ProEt.topology X) A)]
+    {F G : Sheaf (Scheme.ProEt.topology X) A} (φ : F ⟶ G) [Epi φ] :
     Function.Surjective (φ.hom.app (op (Scheme.ProEt.mk (𝟙 X)))) := by
-  have := (Sheaf.isLocallySurjective_iff_epi' (φ := φ)).2 inferInstance
+  have := (Sheaf.isLocallySurjective_iff_epi' A φ).2 inferInstance
   intro s
   obtain ⟨t, ht⟩ := Scheme.ProEt.id_mem_of_mem_topology_of_iso e
     (Presheaf.imageSieve_mem (Scheme.ProEt.topology _) φ.hom s)
   exact ⟨t, by simpa using ht⟩
 
-/-- Taking sections over `X` preserves epimorphisms of pro-étale sheaves of `Λ`-modules on a
-scheme `X` isomorphic to the spectrum of an algebraically closed field. -/
-lemma preservesEpimorphisms_sheafSections_of_iso (e : X ≅ Spec (.of K)) :
-    ((sheafSections (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
+/-- Taking sections over `X` preserves epimorphisms of pro-étale sheaves with values in a
+concrete category on a scheme `X` isomorphic to the spectrum of an algebraically closed
+field. -/
+lemma preservesEpimorphisms_sheafSections_of_iso (e : X ≅ Spec (.of K))
+    [(Scheme.ProEt.topology X).WEqualsLocallyBijective A]
+    [HasSheafify (Scheme.ProEt.topology X) A]
+    [(Scheme.ProEt.topology X).HasSheafCompose (CategoryTheory.forget A)]
+    [Balanced (Sheaf (Scheme.ProEt.topology X) A)] :
+    ((sheafSections (Scheme.ProEt.topology X) A).obj
       (op (Scheme.ProEt.mk (𝟙 X)))).PreservesEpimorphisms where
-  preserves φ _ := (ModuleCat.epi_iff_surjective _).2 (surjective_app_of_epi_of_iso e φ)
+  preserves φ _ := (CategoryTheory.forget A).epi_of_epi_map
+    ((epi_iff_surjective _).2 (surjective_app_of_epi_of_iso e φ))
+
+end Concrete
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The monoidal unit `Λ_X` of pro-étale sheaves of `Λ`-modules on a scheme `X` isomorphic to
 the spectrum of an algebraically closed field is projective: it is the constant sheaf on the
@@ -97,7 +115,7 @@ projective module `Λ`, and the constant sheaf functor is left adjoint to taking
 the terminal object `X`, which preserves epimorphisms. -/
 lemma projective_unit_of_iso (e : X ≅ Spec (.of K)) :
     Projective (𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) := by
-  have := preservesEpimorphisms_sheafSections_of_iso Λ e
+  have := preservesEpimorphisms_sheafSections_of_iso (A := ModuleCat.{u + 1} Λ) e
   have hP : Projective ((constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
       (𝟙_ (ModuleCat.{u + 1} Λ))) :=
     (constantSheafAdj _ _ (Scheme.ProEt.isTerminalMkId X)).map_projective _
@@ -111,22 +129,9 @@ lemma projective_unit_of_iso (e : X ≅ Spec (.of K)) :
 vanishing of `H¹(X_proét, Λ)`. -/
 lemma DerivedCategory.unit_hom_shift_one_eq_zero_of_iso (e : X ≅ Spec (.of K))
     (φ : 𝟙_ (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) ⟶
-      (𝟙_ _)⟦(1 : ℤ)⟧) : φ = 0 := by
-  let C := Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)
+      (𝟙_ _)⟦(1 : ℤ)⟧) : φ = 0 :=
   have := projective_unit_of_iso Λ e
-  let e₁ : 𝟙_ (_root_.DerivedCategory C) ≅
-      _root_.DerivedCategory.Q.obj ((CochainComplex.singleFunctor C 0).obj (𝟙_ C)) :=
-    (_root_.DerivedCategory.singleFunctorObjUnitIso C).symm ≪≫
-      (_root_.DerivedCategory.singleFunctorIsoCompQ C 0).app _
-  let e₂ : (𝟙_ (_root_.DerivedCategory C))⟦(1 : ℤ)⟧ ≅
-      _root_.DerivedCategory.Q.obj ((CochainComplex.singleFunctor C (-1)).obj (𝟙_ C)) :=
-    (shiftFunctor _ (1 : ℤ)).mapIso (_root_.DerivedCategory.singleFunctorObjUnitIso C).symm ≪≫
-      ((_root_.DerivedCategory.singleFunctors C).shiftIso 1 (-1) 0 (by norm_num)).app _ ≪≫
-      (_root_.DerivedCategory.singleFunctorIsoCompQ C (-1)).app _
-  have h : e₁.inv ≫ φ ≫ e₂.hom = 0 :=
-    _root_.DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective _ (-1) (by norm_num)
-  rw [← cancel_epi e₁.inv, ← cancel_mono e₂.hom, Limits.comp_zero, Limits.zero_comp,
-    Category.assoc, h]
+  _root_.DerivedCategory.unit_hom_shift_eq_zero_of_projective 1 one_pos φ
 
 end ProEtale
 
