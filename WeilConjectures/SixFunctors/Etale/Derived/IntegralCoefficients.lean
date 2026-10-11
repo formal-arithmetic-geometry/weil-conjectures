@@ -145,7 +145,7 @@ theorem nonempty_iso_reductionModIdeal_derivedHom_obj {X : Scheme.{u}} {ϖ : Λ}
       ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj
         ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj L)) := by
   let adj := derivedTensorHomAdjunction (ModuleCat.{u + 1} Λ) K
-  letI := adj.rightAdjointCommShift ℤ
+  let := adj.rightAdjointCommShift ℤ
   have := adj.commShift_of_leftAdjoint ℤ
   have := adj.isTriangulated_rightAdjoint
   have := adj.right_adjoint_linear (R := Λ)
