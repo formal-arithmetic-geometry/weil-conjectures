@@ -261,11 +261,45 @@ theorem isIso_tensorBaseChangeMap [Finite Λ] {K : Type u} [Field K]
       ((L((p)^*[ModuleCat.{u + 1} Λ])).obj E) F) :=
   sorry
 
+/-- The terminal object `𝟙 X` of the small étale site of `X`. -/
+noncomputable def etaleTerminal (X : Scheme.{u}) : X.Etale :=
+  MorphismProperty.Over.mk ⊤ (𝟙 X) (MorphismProperty.id_mem @AlgebraicGeometry.Etale X)
+
+/-- `𝟙 X` is terminal in the small étale site of `X`. -/
+noncomputable def isTerminalEtaleTerminal (X : Scheme.{u}) : IsTerminal (etaleTerminal X) :=
+  MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale X
+
+/-- The base change of the terminal object of `Y.Etale` along `f : X ⟶ Y` is terminal in
+`X.Etale`. -/
+noncomputable def isTerminalPullbackEtaleTerminal {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    IsTerminal ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj
+      (etaleTerminal Y)) :=
+  have : IsIso ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj
+      (etaleTerminal Y)).hom := by
+    rw [MorphismProperty.Over.pullback_obj_hom]
+    exact inferInstanceAs (IsIso (pullback.snd (𝟙 Y) f))
+  (isTerminalEtaleTerminal X).ofIso (MorphismProperty.Over.isoMk
+    (asIso ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f).obj
+      (etaleTerminal Y)).hom) (Category.comp_id _)).symm
+
+/-- Blueprint `lem-kun-pullback-constant` (underived): the inverse image of a constant sheaf is
+the constant sheaf, `f^*(M_Y) ≅ M_X`. Both functors are left adjoint to the global sections
+functor on `X_ét`, since `Γ(Y, f_* G) = Γ(X, G)`. -/
+noncomputable def constantSheafCompUpperStarIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙ (f)^*[ModuleCat.{u + 1} Λ] ≅
+      constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+  (((constantSheafAdj _ _ (isTerminalEtaleTerminal Y)).comp
+      (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)).ofNatIsoRight
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _) fun _ ↦ rfl)).leftAdjointUniq
+    (constantSheafAdj _ _ (isTerminalPullbackEtaleTerminal f))
+
 /-- Blueprint `lem-kun-pullback-constant`: the inverse image of a constant complex is the
 constant complex, `Lf^*(C_Y) ≅ C_X`. -/
 noncomputable def constantFunctorCompLeftDerivedUpperStarIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     constantFunctor Λ Y ⋙ L((f)^*[ModuleCat.{u + 1} Λ]) ≅ constantFunctor Λ X :=
-  sorry
+  Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory _ f) ≪≫
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (constantSheafCompUpperStarIso Λ f)
 
 /-- Over a separably closed field `k`, every object `C` of `D((Spec k)_ét, Λ)` is the constant
 complex on its derived global sections: `C ≅ RΓ(Spec k, C)_{Spec k}`. -/
