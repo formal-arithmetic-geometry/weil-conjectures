@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!
 # The derived comparison from extension by zero to pushforward
@@ -88,11 +90,22 @@ noncomputable def derivedOpenImmersionLowerShriekToLowerStar {U X : Scheme.{u}} 
 `D(j_!) ⟶ Rj_*` is an isomorphism. -/
 instance isIso_derivedOpenImmersionLowerShriekToLowerStar {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] [IsClosedImmersion j] :
-    IsIso (derivedOpenImmersionLowerShriekToLowerStar A j) :=
-  -- Proof sketch: since the range of `j` is clopen, the sheaf-level comparison `j_! ⟶ j_*` is
-  -- an isomorphism (both are extension by zero across the complementary open), and `j_*` is
-  -- exact. So `Rj_* ≅ D(j_*) ≅ D(j_!)`, compatibly with the comparison.
-  sorry
+    IsIso (derivedOpenImmersionLowerShriekToLowerStar A j) := by
+  -- Since the range of `j` is clopen, the sheaf-level comparison `j_! ⟶ j_*` is an
+  -- isomorphism, so `j_!` is also right adjoint to `j^*`, with invertible counit. Hence
+  -- `D(j^*) ⊣ D(j_!)` with invertible counit, which forces the comparison to be invertible.
+  have := isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range A j
+    j.isClosedEmbedding.isClosed_range
+  let adj := (upperStarLowerStarAdjunction A j).ofNatIsoRight
+    (asIso (openImmersionLowerShriekToLowerStar A j)).symm
+  have : IsIso adj.counit := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro F
+    simpa [adj, Adjunction.ofNatIsoRight] using
+      isIso_upperStarLowerStarAdjunction_counit_app_of_isOpenImmersion A j F
+  exact Adjunction.isIso_whiskerLeft_unit_comp_whiskerRight_inv_unit
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction A j)
+    (mapDerivedUpperStarLowerStarAdjunction A j) adj.mapDerivedCategoryAdjunction
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 

@@ -83,4 +83,33 @@ lemma mateEquiv_leftAdjointUniq (adj₁ : L₁ ⊣ R₁) (adj₁' : L₁' ⊣ R�
 
 end Mates
 
+namespace Adjunction
+
+variable {C D : Type*} [Category* C] [Category* D] {L R : C ⥤ D} {F : D ⥤ C}
+
+/-- Let `L ⊣ F ⊣ R` with the unit of `L ⊣ F` an isomorphism. If `L` is moreover right adjoint
+to `F` with invertible counit, then the canonical comparison `L ⟶ R`, the transpose under
+`F ⊣ R` of the inverse of the unit of `L ⊣ F`, is an isomorphism. No compatibility between the
+two adjunctions `L ⊣ F` and `F ⊣ L` is needed. -/
+lemma isIso_whiskerLeft_unit_comp_whiskerRight_inv_unit (adj₁ : L ⊣ F) [IsIso adj₁.unit]
+    (adj₂ : F ⊣ R) (adj₃ : F ⊣ L) [IsIso adj₃.counit] :
+    IsIso (Functor.whiskerLeft L adj₂.unit ≫ (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (inv adj₁.unit) R) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  have key : (Functor.whiskerLeft L adj₂.unit ≫ (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (inv adj₁.unit) R).app K =
+        adj₂.homEquiv _ _ (adj₃.counit.app K) ≫
+          R.map (inv (adj₃.counit.app K) ≫ inv (adj₁.unit.app K)) := by
+    rw [← adj₂.homEquiv_naturality_right, IsIso.hom_inv_id_assoc, adj₂.homEquiv_unit]
+    simp
+  have h : adj₂.homEquiv _ _ (adj₃.counit.app K) = (adj₃.rightAdjointUniq adj₂).hom.app K := by
+    apply (adj₂.homEquiv _ _).symm.injective
+    rw [Equiv.symm_apply_apply]
+    exact (homEquiv_symm_rightAdjointUniq_hom_app adj₃ adj₂ K).symm
+  rw [key, h]
+  infer_instance
+
+end Adjunction
+
 end CategoryTheory

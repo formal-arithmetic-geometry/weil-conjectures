@@ -1322,6 +1322,7 @@ public import WeilConjectures.Mathlib.RingTheory.TotallySplit
 public import WeilConjectures.Mathlib.RingTheory.Trace.Basic
 public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Ideal
 public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Kaplansky
+public import WeilConjectures.Mathlib.RingTheory.Unramified.Basic
 public import WeilConjectures.Mathlib.RingTheory.Unramified.Finite
 public import WeilConjectures.Mathlib.RingTheory.Unramified.LocalStructure
 public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
@@ -1384,6 +1385,7 @@ public import WeilConjectures.RingTheory.ProEtale.Bijective
 public import WeilConjectures.RingTheory.ProEtale.ClosedLift
 public import WeilConjectures.RingTheory.ProEtale.Contraction.Covers
 public import WeilConjectures.RingTheory.ProEtale.Etale
+public import WeilConjectures.RingTheory.ProEtale.EtaleLift
 public import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
 public import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 public import WeilConjectures.RingTheory.ProEtale.IdentifiesLocalRings
@@ -1681,7 +1683,9 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Conservative
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.EssImage
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
@@ -1755,6 +1759,7 @@ public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Iso
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.KFlat
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.MonoidalIso
+public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Restriction
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs

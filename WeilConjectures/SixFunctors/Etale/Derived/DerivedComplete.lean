@@ -56,6 +56,112 @@ open CategoryTheory Opposite
 
 open scoped CategoryTheory.Functor
 
+namespace CategoryTheory.Pretriangulated.IsHomotopyLimit
+
+open Limits
+
+variable {C : Type*} [Category C] [Limits.HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+  [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+
+set_option backward.defeqAttrib.useBackward true in
+/-- A cone over a tower whose legs are isomorphisms from level `1` on is a homotopy limit
+cone: the term at level `0` does not matter. Its Milnor triangle is split, `1 - t` having the
+section with components `y ↦ y₀` at `0` and `y ↦ -∑_{1 ≤ k < n} y_k` at `n ≥ 1` (transported
+along the transition isomorphisms). -/
+lemma of_isIso_π_succ {F : ℕᵒᵖ ⥤ C} (c : Cone F) [∀ n : ℕ, IsIso (c.π.app (op (n + 1)))]
+    [HasProduct fun n : ℕ ↦ F.obj (op n)] : IsHomotopyLimit c := by
+  let P : Fan fun n : ℕ ↦ F.obj (op n) := Fan.mk _ (Pi.π _)
+  let hP : IsLimit P := productIsProduct _
+  let ρ (n : ℕ) : F.obj (op (n + 1)) ⟶ c.pt := inv (c.π.app (op (n + 1)))
+  let g (n : ℕ) : P.pt ⟶ c.pt := P.proj (n + 1) ≫ ρ n
+  have hτ (k : ℕ) : F.map (homOfLE (k + 1).le_succ).op ≫ ρ k = ρ (k + 1) := by
+    refine IsIso.eq_inv_of_hom_inv_id ?_
+    rw [← Category.assoc, c.w, IsIso.hom_inv_id]
+  have hg (k : ℕ) : (𝟙 P.pt - towerShift hP) ≫ g k = g k - g (k + 1) := by
+    simp only [g, Preadditive.sub_comp, Category.id_comp, towerShift, Fan.IsLimit.fac_assoc,
+      Category.assoc, hτ]
+  have hgπ (n : ℕ) : g n ≫ c.π.app (op (n + 1)) = P.proj (n + 1) := by simp [g, ρ]
+  have hgπ₀ : g 0 ≫ c.π.app (op 0) = P.proj 1 ≫ F.map (homOfLE (Nat.zero_le 1)).op := by
+    simp only [g, ρ, Category.assoc]
+    rw [← c.w (homOfLE (Nat.zero_le 1)).op, IsIso.inv_hom_id_assoc]
+  let ℓ : c.pt ⟶ P.pt := Fan.IsLimit.lift hP fun n ↦ c.π.app (op n)
+  let s : ∀ n : ℕ, P.pt ⟶ F.obj (op n)
+    | 0 => P.proj 0
+    | n + 1 => -(∑ k ∈ Finset.range n, g k) ≫ c.π.app (op (n + 1))
+  let σ : P.pt ⟶ P.pt := Fan.IsLimit.lift hP s
+  have hℓg : ℓ ≫ g 0 = 𝟙 _ := by simp [ℓ, g, ρ]
+  have hℓt : ℓ ≫ (𝟙 P.pt - towerShift hP) = 0 := Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+    simp [ℓ, Preadditive.sub_comp, towerShift, c.w]
+  have hσg : σ ≫ g 0 = 0 := by simp [σ, g, s]
+  have hσt : σ ≫ (𝟙 P.pt - towerShift hP) = 𝟙 _ := Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+    cases n with
+    | zero =>
+      simp [σ, s, Preadditive.sub_comp, towerShift]
+    | succ n =>
+      simp only [Preadditive.comp_sub, Category.comp_id, Preadditive.sub_comp, Category.assoc,
+        towerShift, Fan.IsLimit.fac, Category.id_comp, σ, Fan.IsLimit.fac_assoc, s, c.w,
+        Finset.sum_range_succ, Preadditive.neg_comp, Preadditive.add_comp, hgπ, neg_add_rev]
+      abel
+  have hsplit : g 0 ≫ ℓ + (𝟙 P.pt - towerShift hP) ≫ σ = 𝟙 _ :=
+    Fan.IsLimit.hom_ext hP _ _ fun n ↦ by
+      cases n with
+      | zero =>
+        simp only [Preadditive.add_comp, Category.assoc, Fan.IsLimit.fac, ℓ, σ, s, hgπ₀,
+          Preadditive.sub_comp, Category.id_comp, towerShift, Category.id_comp]
+        simp [P]
+      | succ n =>
+        have h₁ : (g 0 ≫ ℓ) ≫ P.proj (n + 1) = g 0 ≫ c.π.app (op (n + 1)) := by
+          simp [ℓ]
+        have h₂ : ((𝟙 P.pt - towerShift hP) ≫ σ) ≫ P.proj (n + 1) =
+            -(g 0 - g n) ≫ c.π.app (op (n + 1)) := by
+          rw [Category.assoc, Fan.IsLimit.fac, Preadditive.comp_neg, ← Category.assoc,
+            Preadditive.comp_sum]
+          simp only [hg, Finset.sum_range_sub']
+        rw [Preadditive.add_comp, h₁, h₂, Preadditive.sub_comp, hgπ, Category.id_comp]
+        abel
+  let e : P.pt ≅ c.pt ⊞ P.pt :=
+    { hom := biprod.lift (g 0) (𝟙 P.pt - towerShift hP)
+      inv := biprod.desc ℓ σ
+      hom_inv_id := by rw [biprod.lift_desc, hsplit]
+      inv_hom_id := by
+        apply biprod.hom_ext' <;> apply biprod.hom_ext <;>
+          simp [hℓg, hℓt, hσg, hσt] }
+  refine ⟨P, hP, 0, isomorphic_distinguished _ (binaryBiproductTriangle_distinguished c.pt P.pt)
+    _ (Triangle.isoMk _ _ (Iso.refl _) e (Iso.refl _) ?_ ?_ ?_)⟩
+  · apply biprod.hom_ext <;> simp [e, hℓg, hℓt, ℓ]
+  · simp [e]
+  · simp
+
+end CategoryTheory.Pretriangulated.IsHomotopyLimit
+
+namespace DerivedCategory
+
+open Limits
+
+variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+  (J : GrothendieckTopology C) {R : Type (u + 1)} [CommRing R]
+
+/-- Every object of `D(J, R)` is derived complete for the zero ideal: the reductions
+`K ⟶ K ⊗ᴸ R/0ⁿ` are isomorphisms for `n ≥ 1`, so the tower is constant from level `1` on. -/
+lemma derivedComplete_bot (K : _root_.DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
+    derivedComplete J ⊥ K := by
+  have := (sheafTensorStructure J R).isIso_ε
+  have (n : ℕ) : IsIso ((derivedCompletionCone J ⊥ K).π.app (op (n + 1))) := by
+    have hp : (⊥ : Ideal R) ^ (n + 1) = ⊥ := Ideal.bot_pow n.succ_ne_zero
+    have : IsIso (ModuleCat.ofHom (Submodule.mkQ ((⊥ : Ideal R) ^ (n + 1)))) := by
+      rw [← Submodule.coe_quotEquivOfEqBot_symm _ hp]
+      exact (Submodule.quotEquivOfEqBot _ hp).symm.toModuleIso.isIso_hom
+    have h₁ : IsIso ((quotPowCone J (⊥ : Ideal R)).π.app (op (n + 1))) := by
+      simp only [quotPowCone, Cone.extend_π, NatTrans.comp_app, Functor.const_map_app,
+        Functor.mapCone_π_app, Sheaf.quotPowCone, Ideal.quotPowCone]
+      infer_instance
+    simp only [derivedCompletionCone, Cone.extend_π, NatTrans.comp_app, Functor.const_map_app,
+      Functor.mapCone_π_app]
+    infer_instance
+  exact CategoryTheory.Pretriangulated.IsHomotopyLimit.of_isIso_π_succ _
+
+end DerivedCategory
+
 namespace AlgebraicGeometry
 
 open Scheme
@@ -90,18 +196,25 @@ that are derived complete for `I` to derived complete objects of `D(Y_ét, Λ)`.
 theorem derivedComplete_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) (K : 𝐃(X, Λ))
     (hK : DerivedCategory.derivedComplete X.smallEtaleTopology I K) :
     DerivedCategory.derivedComplete Y.smallEtaleTopology I
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) :=
-  -- Proof sketch: by `derivedComplete_iff`, `hK` says that the cone `K ⟶ K ⊗ᴸ Λ/Iⁿ` is a
-  -- homotopy limit (its Milnor triangle is distinguished). `Rf_*` is triangulated and, being
-  -- right adjoint to `Lf^*`, preserves products, so by `IsHomotopyLimit.map` the image cone
-  -- `Rf_* K ⟶ Rf_*(K ⊗ᴸ Λ/Iⁿ)` is a homotopy limit. Each `Iⁿ` is principal, so
-  -- `nonempty_iso_reductionModIdeal_rightDerivedLowerStar` gives
-  -- `Rf_*(K ⊗ᴸ Λ/Iⁿ) ≅ Rf_* K ⊗ᴸ Λ/Iⁿ`, naturally in `n` (the isomorphisms are built from
-  -- the cones of multiplication by `πⁿ`, which are compatible along the projections
-  -- `Λ/Iⁿ⁺¹ → Λ/Iⁿ`). Transporting the homotopy limit along these isomorphisms gives the cone
-  -- `Rf_* K ⟶ Rf_* K ⊗ᴸ Λ/Iⁿ` (`IsHomotopyLimit.of_iso`), which is therefore a homotopy
-  -- limit.
-  sorry
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj K) := by
+  -- For `I = (ϖ)` with `ϖ ≠ 0`, derived completeness is right orthogonality to the objects on
+  -- which `ϖ` acts invertibly. Such objects are preserved by the `Λ`-linear left adjoint `Lf^*`
+  -- of `Rf_*`, so maps from them to `Rf_* K` vanish by adjunction. For `I = 0` every object is
+  -- derived complete.
+  obtain ⟨ϖ, hIϖ⟩ := hI.principal
+  by_cases h0 : ϖ = 0
+  · rw [hIϖ, h0, Submodule.span_singleton_eq_bot.mpr rfl]
+    exact DerivedCategory.derivedComplete_bot _ _
+  have hϖ : ϖ ∈ nonZeroDivisors Λ := mem_nonZeroDivisors_of_ne_zero h0
+  rw [DerivedCategory.derivedComplete_iff_rightOrthogonal hϖ hIϖ] at hK ⊢
+  intro M φ hM
+  let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f
+  have hM' : IsIso (ϖ • 𝟙 ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M)) := by
+    have : IsIso (ϖ • 𝟙 M) := hM
+    rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul]
+    infer_instance
+  rw [← (adj.homEquiv _ _).apply_symm_apply φ, hK ((adj.homEquiv _ _).symm φ) hM',
+    Adjunction.homEquiv_unit, Functor.map_zero, Limits.comp_zero]
 
 /-- **`Rf_!` preserves derived completeness.** For a principal ideal `I` of a domain `Λ` and
 `f : X ⟶ Y` admitting a compactification, `Rf_!` carries objects of `D(X_ét, Λ)` that are
