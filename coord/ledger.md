@@ -4362,3 +4362,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:00 L: merged deliver/G1/lem-weil-pbc-generic-finite-algebra-splitting (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.GenericFiniteAlgebraSplitting exists_generic_finite_algebra_splitting)
 - 11:01 L: merged deliver/F1/lem-weil-pbc-integral-extension-dimension (stage 2; reviewer PASS; first push; Sheaf.RingTheory.IntegralExtensionDimension RingHom.integralExtensionDimension)
 - 11:01 L: merged deliver/K1/lem-weil-pbc-immersion-affine-constructible-pieces (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ImmersionAffineConstructiblePieces AlgebraicGeometry.exists_finite_affine_immersion_constructible_pieces)
+- 11:01 L: merged deliver/C1/lem-weil-pbc-h1-injective-differentials-injective-char-p (stage 2; reviewer FIX; first push; Sheaf.RingTheory.DifferentialsInjectiveOfH1CotangentInjectiveCharP Algebra.differentials_injective_of_h1Cotangent_injective_charP)

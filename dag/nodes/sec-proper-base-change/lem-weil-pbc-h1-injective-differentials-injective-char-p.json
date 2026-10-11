@@ -160,5 +160,24 @@
   "summary": "Read Stacks 07E5 (more-algebra.tex lines 8697-8795), paragraph 'Equivalence of (3) and (4)', and the lemmas it cites (Algebra 00S2 Jacobi-Zariski, 07BP H_1 of a surjection, 0322 H_1(L_{K/F_p})=0); tags verified in tags/tags. The source proves only that the two kernels have the same dimension by the two Jacobi-Zariski rows; the direction needed here is written as an explicit diagram chase with no dimension count: step 1 the lower row exact at Omega_k (x) K (00S2 for F_p -> k -> K), step 2 the upper row injective on the left (00S2 for F_p -> A -> K, H_1(L_{K/F_p})=0, delta o theta = partial_A), step 3 the left square delta o gamma = lambda o partial_k (connecting-map naturality), step 4 the middle square (elementary on generators), step 5 the chase. All facts are cited existing reviewed nodes of unit sk-thm-p1; no new node was needed. Statement kept; the Noetherian hypothesis is kept as in the source though unused. No slopmaster2 Lean found (grep for the id, 07E5, geometrically regular, H1Cotangent in WeilConjectures).",
   "blueprint": "The steps realize, in the blueprint ancestor thm-weil-pbc-finite-etale-lifting, the place of from.place: step 7 of its split (Lemma 0GS2 essential surjectivity), the residue-field differential injection in the 07NQ formal-smoothness input, characteristic-p case: passage from injectivity of H_1(L_{K/k}) -> m/m^2 to injectivity of Omega_{k/F_p} (x) K -> Omega_{C/F_p} (x) K (07E5 'Equivalence of (3) and (4)', used by 07EL (2) => (5)); steps 1-2 are the two rows, steps 3-4 the commuting squares, step 5 the chase."
  },
- "reviewed": "2026-10-10 L: 5 steps, the 07E5 (3) => (4) chase written out with the Jacobi–Zariski sequences for F_p -> k -> K and F_p -> A -> K, H_1(L_{K/F_p}) = 0, the naturality of the connecting maps; 0 new nodes"
+ "reviewed": "2026-10-10 L: 5 steps, the 07E5 (3) => (4) chase written out with the Jacobi–Zariski sequences for F_p -> k -> K and F_p -> A -> K, H_1(L_{K/F_p}) = 0, the naturality of the connecting maps; 0 new nodes",
+ "lean": {
+  "module": "Sheaf.RingTheory.DifferentialsInjectiveOfH1CotangentInjectiveCharP",
+  "declaration": "Algebra.differentials_injective_of_h1Cotangent_injective_charP",
+  "file": "lean/Sheaf/RingTheory/DifferentialsInjectiveOfH1CotangentInjectiveCharP.lean",
+  "statement": "theorem differentials_injective_of_h1Cotangent_injective_charP (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A] [IsLocalRing A] [IsNoetherianRing A] (p : ℕ) [Fact p.Prime] [CharP k p] : letI := ZMod.algebra k p letI := ((algebraMap k A).comp (algebraMap (ZMod p) k)).toAlgebra let K := IsLocalRing.ResidueField A let P := Extension.ofSurjective (Algebra.ofId A K) IsLocalRing.residue_surjective let γ := P.h1CotangentEquivCotangent.toLinearMap.comp (H1Cotangent.map k A K K) let lambdaMap := (TensorProduct.isBaseChange k Ω[k⁄ZMod p] K).lift (((TensorProduct.mk A K Ω[A⁄ZMod p] 1).restrictScalars k).comp (KaehlerDifferential.map (ZMod p) (ZMod p) k A)) Function.Injective γ → Function.Injective lambdaMap",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-hdi1100"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hdi1100",
+  "group": "C1",
+  "result": "fix",
+  "note": "k field, char p as [Fact p.Prime][CharP k p] (fixed from 0<p); A Noetherian local k-algebra; K = ResidueField A; gamma = h1CotangentEquivCotangent ∘ H1Cotangent.map k A K K verbatim J1 f19521d3d; lambda base-change lift checked on 1⊗da ↦ 1⊗d(a·1_A); injective gamma → injective lambda"
+ }
 }
