@@ -1,11 +1,11 @@
 # Work queue
 
-1008 items; claim with `tools/claim.py next <group> [--stage N]`.
+1006 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (1008)
+## Stage 2: nodes to state (1006)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -44,14 +44,12 @@
 | `lem-galois-object-exists` | 1 | state |
 | `lem-galois-transitive` | 1 | state |
 | `lem-kun-closed-point-field` | 1 | state |
-| `lem-kun-fg-separable-smooth` | 1 | state |
 | `lem-kun-fibre-product-limits` | 1 | state |
+| `lem-kun-separable-smooth-colimit` | 1 | state |
 | `lem-kun-stalks-commute-colimits` | 1 | state |
 | `lem-kun-support-geometric-point-independent` | 1 | state |
-| `lem-pc-affine-containment-ideal` | 1 | state |
 | `lem-pc-affine-flat-module-descent` | 1 | state |
 | `lem-pc-affine-tilde-kflat` | 1 | state |
-| `lem-pc-ample-affine-loci-criterion` | 1 | state |
 | `lem-pc-balanced-derived-tensor-model` | 1 | state |
 | `lem-pc-brown-cohomological-representability` | 1 | state |
 | `lem-pc-cartier-divisor-finite-over-field` | 1 | state |
@@ -1018,7 +1016,7 @@
 | `lem-sc-normalization-properties` | 3 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1143 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
+Not open yet: 1142 nodes that wait for a statement dependency, 40 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
