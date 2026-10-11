@@ -121,5 +121,22 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-edc2030 (reviewer sub-agent of L); spot-checked: Step 1 against def-sp-exact-couple (d_r bidegree (r,1-r), r>=2, so all differentials leave column 0; subquotient pages keep off-column zeros), def-sp-convergence (Z_r,B_r constant from r0 so E_inf=E_r0 elementary from the recursive definition; weak convergence gives E_inf^{0,n}=gr^0A^n; edge map built from the F^p of def-sp-convergence), def-sp-filtration (finite + vanishing gr^p, p!=0 gives F^0=A^n, F^1=0). Page stabilisation is not lem-sp-page-induction (that lemma is about morphisms of spectral sequences) and is not a restated node; it is elementary from the definition. Statement change only adds the def-sp-filtration citation. No new nodes. Second reading: no missed fault found."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.EdgeCollapse",
+  "declaration": "CategoryTheory.BigradedExactCouple.edge_collapse",
+  "file": "lean/Sheaf/CategoryTheory/EdgeCollapse.lean",
+  "statement": "theorem edge_collapse {C : Type u} [Category.{v} C] [Abelian C] (X : BigradedExactCouple C 0) (L : X.LimitSubobjects) (A : ∀ n : ℤ, X.AlphaColimit n) (hconv : X.ConvergesTo L A) (hfinite : ∀ n : ℤ, (X.imageFiltration n (A n)).IsFinite) (r₀ : ℕ) (hr₀ : 2 ≤ r₀) (hvanish : ∀ (p q : ℤ), p ≠ 0 → IsZero (X.page r₀ p q)) : (∀ (r : ℕ), r₀ ≤ r → ∀ (p q : ℤ), X.pageDifferential r p q = 0) ∧ (∀ (r : ℕ), r₀ ≤ r → ∀ (p q : ℤ), ∃ (e : X.page r₀ p q ≅ X.page r p q) (i : (X.cycleBoundaryTower.Z (r₀ - 2) p q : C) ⟶ (X.cycleBoundaryTower.Z (r - 2) p q : C)), i ≫ (X.cycleBoundaryTower.Z (r - 2) p q).arrow = (X.cycleBoundaryTower.Z (r₀ - 2) p q).arrow ∧ X.cycleBoundaryTower.projection (r₀ - 2) p q ≫ e.hom = i ≫ X.cycleBoundaryTower.projection (r - 2) p q) ∧ (∃ t : ∀ (p q : ℤ), X.pageInfinity L p q ≅ X.page r₀ p q, (∀ (p q : ℤ), ∃ i : (L.Z p q : C) ⟶ (X.cycleBoundaryTower.Z (r₀ - 2) p q : C), i ≫ (X.cycleBoundaryTower.Z (r₀ - 2) p q).arrow = (L.Z p q).arrow ∧ cokernel.π (Subobject.ofLE (L.B p q) (L.Z p q) (X.limitBoundary_le_cycle L p q)) ≫ (t p q).hom = i ≫ X.cycleBoundaryTower.projection (r₀ - 2) p q) ∧ (∀ n : ℤ, ∃ e : (A n).obj ≅ X.page r₀ 0 n, eqToHom (by simp) ≫ (A n).ι 0 ≫ e.hom = X.toPageInfinity L 0 n ≫ (t 0 n).hom))",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false,
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-edc",
+  "group": "S1",
+  "result": "pass"
  }
 }

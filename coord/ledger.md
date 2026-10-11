@@ -5090,3 +5090,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 14:56 L: merged deliver/P1/lem-weil-pbc-stalk-change-of-rings-tensor (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings SheafOfModules.stalkChangeOfRingsIso)
 - 14:56 L: merged deliver/V1/pqf-lem-associated-sections-localize (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.AssociatedSectionsLocalize AlgebraicGeometry.associated_sections_localize)
 - 14:56 L: merged deliver/Q1/lem-weil-pbc-transitivity-gamma (stage 2; reviewer PASS; first push; Sheaf.RingTheory.TransitivityGamma Algebra.transitivityGamma)
+- 14:56 L: merged deliver/S1/lem-sp-edge-collapse (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.EdgeCollapse CategoryTheory.BigradedExactCouple.edge_collapse)
