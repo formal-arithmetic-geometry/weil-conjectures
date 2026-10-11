@@ -3420,3 +3420,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:56 L: merged deliver/C1/def-pc-field-tower (stage 2; reviewer FIX; after a return; Sheaf.FieldTheory.FieldTower FieldExtension.degree)
 - 05:57 L: merged deliver/K1/def-weil-pbc-strictly-standard-element (stage 2; reviewer PASS; first push; Sheaf.RingTheory.StrictlyStandardElement Algebra.IsStrictlyStandardElement)
 - 05:58 L: merged deliver/C1/def-sbc-first-order-thickening (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.Thickening AlgebraicGeometry.IsFirstOrderThickening)
+- 05:58 L: merged deliver/M1/def-weil-tower-transition-endomorphism (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism CategoryTheory.towerTransitionEndomorphism)
