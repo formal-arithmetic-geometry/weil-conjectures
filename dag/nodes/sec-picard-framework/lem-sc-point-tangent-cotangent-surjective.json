@@ -101,5 +101,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcs2 (reviewer sub-agent of L); spot-checked: Source: Stacks varieties.tex (present in the repository, contrary to the report's WANTED) Def 0B29, Lemma 0B2B, Def 0B2C, Lemma 0B2E (lemma-tangent-space-rational-point: with S=Spec k and kappa(x)=k, m_s=0 so T_{X/k,x}=Hom_k(m_x/m_x^2,k)) and Lemma 0B2F (varieties-lemma-map-tangent-spaces: df dual to the map on Omega tensor kappa, which with 0B2E is the map on m/m^2); the item statement holds with all hypotheses (locally finite type and closedness unneeded but harmless). Step 1 is carried by lem-sc-rational-tangent-cotangent-duality (true: 0B2E + 0B2F with S=Spec k), hypotheses kappa(x)=kappa(y)=k met. Step 2 by the leaf lem-sc-dual-map-injective-iff-surjective: verified LinearMap.dualMap_injective_iff at Mathlib/LinearAlgebra/Dual/Lemmas.lean:930 under [Field K] (line 830), statement Injective f.dualMap iff Surjective f, no finiteness, exactly the node. Small cases: identity of A^1 (both maps iso), t->t^2 at 0 (both zero, neither inj nor surj), Spec k (zero spaces). FIX more, RETURN less: B3, the notion T_{X/k,x} and the tangent map induced by f had no definition node (the duality node's identification is meaningless without the dual-number definition); added statement-only definition node dag/nodes/sec-picard-framework/def-sc-scheme-tangent-space.json (Stacks 0B29/0B2B/0B2C/0B2F with S=Spec k) and cited it: dag/nodes/sec-picard-framework/lem-sc-rational-tangent-cotangent-duality.json: statement, stmt_deps: cite [def-sc-scheme-tangent-space]; source.place: add Lemma 0B2F; dag/nodes/sec-picard-framework/lem-sc-point-tangent-cotangent-surjective.json: statement, stmt_deps: cite [def-sc-scheme-tangent-space] after the tangent map (citation only, mathematics unchanged). Start Sat Oct 10 04:23:29 PM UTC 2026, end Sat Oct 10 04:25:20 PM UTC 2026.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CotangentSurjectiveOfTangentInjective",
+  "declaration": "AlgebraicGeometry.cotangent_surjective_of_tangent_injective",
+  "file": "lean/Sheaf/AlgebraicGeometry/CotangentSurjectiveOfTangentInjective.lean",
+  "statement": "theorem cotangent_surjective_of_tangent_injective (k : Type u) [Field k] (X Y : Scheme.{u}) (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k)) (f : X ⟶ Y) [LocallyOfFiniteType f] (hf : f ≫ pY = pX) (x : X) (hx : IsClosed ({x} : Set X)) (hy : IsClosed ({f x} : Set Y)) (hκx : Function.Bijective (pX.residueFieldMap x).hom) (hκy : Function.Bijective (pY.residueFieldMap (f x)).hom) (hdf : ∃ he : Function.Bijective (f.residueFieldMap x).hom, Function.Injective (schemeTangentMap k X Y pX pY f hf x he)) : Function.Surjective (Ideal.mapCotangent (IsLocalRing.maximalIdeal (Y.presheaf.stalk (f x))) (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (f.stalkMap x).hom.toIntAlgHom (Ideal.map_le_iff_le_comap.mp (IsLocalRing.map_maximalIdeal_le (f.stalkMap x).hom)) : IsLocalRing.CotangentSpace (Y.presheaf.stalk (f x)) →ₗ[ℤ] IsLocalRing.CotangentSpace (X.presheaf.stalk x))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ptc0929"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ptc0929",
+  "group": "M1",
+  "result": "fix",
+  "note": "k field, X Y with explicit pX pY (tangent API takes them), f over k (hf), LocallyOfFiniteType f, x and f x closed (IsClosed singleton), residue fields = k as bijective canonical residue maps, injective recorded schemeTangentMap (he derivable from hκx hκy hf), conclusion surjective mapCotangent on IsLocalRing.CotangentSpace stalks via f.stalkMap x (equivalence with delivered representative form proved)"
  }
 }
