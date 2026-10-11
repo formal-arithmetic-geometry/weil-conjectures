@@ -1,11 +1,11 @@
 # Work queue
 
-146 items; claim with `tools/claim.py next <group> [--stage N]`.
+142 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (146)
+## Stage 2: nodes to state (142)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -36,15 +36,12 @@
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
 | `lem-pc-restrict-derived-direct-image-open` | 1 | state | 1 |
 | `lem-sc-cech-comparison-natural` | 1 | state | 1 |
-| `lem-sc-derived-internal-hom-restrict-open` | 1 | state | 1 |
 | `pqf-lem-leray` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-affine-pseudo-coherent-criterion` | 1 | state | 0 |
 | `lem-pc-base-change-rhom-perfect` | 1 | state | 0 |
 | `lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect` | 1 | state | 0 |
 | `lem-pc-derived-direct-image-direct-sums` | 1 | state | 0 |
-| `lem-pc-derived-direct-image-uniform-truncation-bound` | 1 | state | 0 |
-| `lem-pc-direct-image-bounded-coherent` | 1 | state | 0 |
 | `lem-pc-direct-image-qc-support-reduction` | 1 | state | 0 |
 | `lem-pc-euler-characteristic-well-defined` | 1 | state | 0 |
 | `lem-pc-finite-scheme-cohomology-tensor` | 1 | state | 0 |
@@ -64,7 +61,6 @@
 | `lem-pc-rf-single-complex-relative-mayer-vietoris` | 1 | state | 0 |
 | `lem-pc-ringed-space-derived-limit-stalk-injective` | 1 | state | 0 |
 | `lem-pc-ringed-space-pointwise-truncation-limit` | 1 | state | 0 |
-| `lem-pc-ringed-space-truncation-derived-limit` | 1 | state | 0 |
 | `lem-pc-sheaf-rhom-projection-formula` | 1 | state | 0 |
 | `lem-pc-tor-independent-perfect-tensor-base-change` | 1 | state | 0 |
 | `lem-pqf-quasicompact-h1-zero` | 1 | state | 0 |
