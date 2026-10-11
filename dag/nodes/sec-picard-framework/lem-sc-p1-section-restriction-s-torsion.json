@@ -134,5 +134,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-srt1811 (reviewer sub-agent of L); spot-checked: Statement vs 01PW(1) (qs hypothesis extra but harmless; already in old statement); no cycle: parent invertible-section-localization cites this item, item cites only defs and affine tilde nodes; quasi-compactness used for the finite trivializing cover in step 1; step 2 hypotheses (qc of F|U_i, counit iso, localization kernel criterion) checked against cited statements. FIX more, RETURN less: (1) B3/preflight: steps rewritten in TeX, plain-text arrow removed; (2) C1: step 1's identification X_s cap U_i = D(f_i) uses the residue field, def-weil-residue-field added to step 1 uses and proof_deps. Second reading missed fault (2) and its claim of having set created.item to the item is not reflected (created.item is the parent, which is correct).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SectionRestrictionSTorsion",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.section_restriction_s_torsion",
+  "statement": "theorem section_restriction_s_torsion {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] (L F : X.Modules) [L.IsInvertible] [F.IsQuasicoherent] (s : Γ(L, ⊤)) (t : Γ(F, ⊤)) (X_s : X.Opens) (hXs : (X_s : Set X) = nonvanishingLocus L s) (hzero : F.presheaf.map (homOfLE (show X_s ≤ ⊤ from le_top)).op t = 0) : ∃ m : ℕ, tmulSection t (tensorPowSectionOne (homOfGlobalSection L s) m ⊤) = 0",
+  "by": "F1",
+  "date": "2026-10-11",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionRestrictionSTorsion.lean",
+  "branch": "sheaf-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-srt1210",
+  "group": "F1",
+  "result": "pass",
+  "note": "#check-resolved: X qcqs (CompactSpace, QuasiSeparatedSpace), L : X.Modules [Scheme.Modules.IsInvertible L], [F.IsQuasicoherent], s t global sections, X_s tied by (X_s : Set X) = nonvanishingLocus L s (STATE NON-VANISHING LOCUS; germ outside m_x L_x = nonzero in L_x⊗κ(x)), hzero = presheaf restriction ⊤→X_s, conclusion ∃ m, tmulSection t (tensorPowSectionOne (homOfGlobalSection L s) m ⊤) = 0 in Γ(F ⊗ L.tensorPow m, ⊤) (= ρ⁻¹ ≫ F ◁ s^m by ClearDenominators lemma); no hollow hyp, no let, no untied existential, single universe"
  }
 }
