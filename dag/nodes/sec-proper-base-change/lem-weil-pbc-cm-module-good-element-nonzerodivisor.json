@@ -245,5 +245,24 @@
   "item": "lem-weil-pbc-cm-module-good-element-nonzerodivisor",
   "worker": "stage1",
   "summary": "Split following the proof of Stacks Algebra 00N5 (lemma-CM-one-g) exactly: induction on d = dim Supp M, the case of a good element and d = 1 by 00N4 (lemma-good-element, new unsplit node), the choice of h by prime avoidance 00DS over the finitely many minimal primes of Supp M, Supp M ∩ V(f_1..f_i) (i ≤ d-1) and Supp M ∩ V(g), the induction hypothesis for (M/hM, g), and the swap 00LJ (new Mathlib leaf IsLocalRing.isRegular_of_perm). Steps the source leaves implicit are written out: d is finite (new leaf: Noetherian local rings have finite dimension, 00KQ) and d ≥ 1; existence of a regular sequence of length depth M; dim Supp(M/(f_1..f_i)M) = d - i and the dimension drop for h (new leaf 0B52 equality case, Module.supportDim_quotSMulTop_*); Supp(M/IM) = Supp M ∩ V(I) (new leaf 00L3(1), Module.support_quotient); m is not among the q_j because the closed sets have dimension ≥ 1; (b) from depth(M/(g,h)M) = d-2, the regular element h and 00LK. Statement unchanged; it matches the uses in lem-weil-pbc-regular-local-mcm-free step 5 and lem-weil-pbc-cm-local-dimension-drop-regular-sequence step 4. The source proof is not the associated-primes argument the brief expected; the source's route was kept."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CmModuleGoodElementNonzerodivisor",
+  "declaration": "Module.cm_module_good_element_nonzerodivisor",
+  "file": "lean/Sheaf/RingTheory/CmModuleGoodElementNonzerodivisor.lean",
+  "statement": "theorem cm_module_good_element_nonzerodivisor {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M] (hCM : (IsLocalRing.depth (R := R) M : WithBot ℕ∞) = supportDim R M) (g : R) (hg : g ∈ IsLocalRing.maximalIdeal R) (hdim : Order.krullDim (support R M ∩ PrimeSpectrum.zeroLocus ({g} : Set R) : Set (PrimeSpectrum R)) + 1 = supportDim R M) : IsSMulRegular M g ∧ (IsLocalRing.depth (R := R) (QuotSMulTop g M) : WithBot ℕ∞) = supportDim R (QuotSMulTop g M) ∧ IsLocalRing.depth (R := R) (QuotSMulTop g M) + 1 = IsLocalRing.depth (R := R) M",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cmg1431"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cmg1431",
+  "group": "J1",
+  "result": "fix",
+  "note": "Noetherian local R; finite nonzero M (Module.Finite, Nontrivial); CM as coerced depth = supportDim (node's equality, Tag 00N3); g in maximalIdeal; dim(Supp M ∩ V(g))+1 = supportDim (equivalent to -1 drop, d=0 and bottom excluded); (a) IsSMulRegular M g (fix: was Function.Injective, defeq); (b) QuotSMulTop g M CM and depth+1 = depth M; #check confirmed Module.support/supportDim/QuotSMulTop"
  }
 }
