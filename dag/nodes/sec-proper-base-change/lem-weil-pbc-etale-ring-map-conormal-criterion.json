@@ -172,5 +172,24 @@
   "item": "lem-weil-pbc-etale-ring-map-conormal-criterion",
   "worker": "stage1",
   "summary": "Checked Stacks 00U1, the NL(alpha) text before 00S1, 00S1, 00RU, 00S2, 08Q1, 00RX, 00U9 (algebra.tex) and 02GI/02GJ (morphisms.tex); all tags verified in stacks-project/tags/tags. Statement kept. Proof in 4 steps: well-definedness and S-linearity of d (elementary, Leibniz rule); the polynomial ring P has Omega free on dx_k with dg = sum dg/dx_k dx_k and H_1(L_{P/R}) = 0 (two new Mathlib leaves, KaehlerDifferential.mvPolynomialBasis and Algebra.instFormallySmoothMvPolynomial); the existing Jacobi-Zariski node lem-weil-pbc-jacobi-zariski-quotient-smooth for R -> P -> S gives ker d = H_1(L_{S/R}) and coker d = Omega_{S/R}, which avoids 00S1 since H_1 is defined with the canonical presentation; finally S is finitely presented (J finitely generated) and the identification lem-weil-pbc-etale-ring-map-iff-etale-affine (Mathlib leaf HasRingHomProperty.Spec_iff, created by the worker of lem-weil-pbc-etale-near-prime-naive-cotangent-vanishing) converts to etaleness of Spec S -> Spec R. stmt_deps unchanged. The item itself is not a one-line Mathlib statement (pieces recorded in mathlib_searches). No Lean in the source repository."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtaleRingMapConormalCriterion",
+  "declaration": "Algebra.etale_ring_map_conormal_criterion",
+  "file": "lean/Sheaf/RingTheory/EtaleRingMapConormalCriterion.lean",
+  "statement": "theorem etale_ring_map_conormal_criterion {R : Type u} {S : Type u} [CommRing R] [CommRing S] [Algebra R S] (n : ℕ) (α : MvPolynomial (Fin n) R →ₐ[R] S) (hα : Function.Surjective α) (hfg : (RingHom.ker α.toRingHom).FG) : let J := RingHom.ker α.toRingHom let e := RingHom.quotientKerEquivOfSurjective hα letI : Module S J.Cotangent := Module.compHom J.Cotangent e.symm.toRingHom ∃ d : J.Cotangent →ₗ[S] (Fin n → S), (∀ (g : J) (i : Fin n), d (Ideal.toCotangent J g) i = α (MvPolynomial.pderiv i g.1)) ∧ (AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R S))) ↔ Function.Bijective d)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ecc1003"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ecc1003",
+  "group": "G1",
+  "result": "fix",
+  "note": "R,S comm rings + R-algebra; n, P=MvPolynomial (Fin n) R; alpha surjective R-alg hom, ker FG; J/J^2 = Ideal.Cotangent with S-action transported along quotientKerEquivOfSurjective; free module Fin n -> S; d exists, S-linear, pderiv coordinate formula (unique by toCotangent surjectivity); FIX: etaleness of Spec S -> Spec R stated as AlgebraicGeometry.Etale (Spec.map (CommRingCat.ofHom (algebraMap R S))) per def-weil-etale-morphism / STATE ETALE RING MAPS (node speaks of the scheme morphism), R S in one universe"
  }
 }
