@@ -151,5 +151,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nmd2940 (reviewer sub-agent of L); spot-checked: Checked against merged def-nagata-morphism-descent (cc5753175, statement identical on branch and sheaf-dag) and the citer def-nagata-relative-gluing-datum-descent (uses only 'base change of the glued morphism is phi', which the statement gives). 22:25/22:35 points addressed in Step 1 (intersection with T_j inverse image). FIX more, RETURN less: (1) C4 Step 2, missed by the second reading: still cited lemma-nagata-affine-fp-descends/def-nagata-affine-fp-descent for an 'algebra comparison isomorphism' that the merged construction never forms (B_jk is used as is); dropped them and wrote the morphism-level argument: composite B_jk->Gamma(U_lambda)->Gamma(U^infty) agrees with phi^# on generators by lemma-nagata-filtered-colimit-finite-data, hence equal as R_j-algebra maps, hence the base change of the chart map is phi|U^infty; transport to lambda_phi preserves this by transitivity of base change. (2) C1 Step 1: added why the T_j-intersection keeps inverse image W^infty (phi is an S-morphism, V_jk over T_j) and that the U^infty_jkl cover W^infty_jk. (3) C1/C5 Step 3: removed unused lem-pc-filtered-colimit-commrings-elementwise and def-nagata-directed-finite-upper-bound; the conclusion is restriction of the glued morphism to charts + agreement on the cover U^infty_jkl of X; proof_deps recomputed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataMorphismDescends",
+  "declaration": "AlgebraicGeometry.nagataMorphismDescends",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataMorphismDescends.lean",
+  "statement": "theorem nagataMorphismDescends {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] {D : Iᵒᵖ ⥤ Scheme.{u}} {c : Cone D} {hc : IsLimit c} [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] {i₀ : I} [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))] {X₀ Y₀ : Scheme.{u}} [CompactSpace X₀] [QuasiSeparatedSpace X₀] {p : X₀ ⟶ D.obj (op i₀)} {q : Y₀ ⟶ D.obj (op i₀)} [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p] [LocallyOfFinitePresentation q] [QuasiCompact q] [QuasiSeparated q] {phi : (baseChangeCone D c p).pt ⟶ (baseChangeCone D c q).pt} {d : I → I → I} {hd : ∀ i j, i ≤ d i j ∧ j ≤ d i j} {r : LinearOrder I} (data : NagataMorphismDescentData D c hc i₀ p q phi d hd r) : (baseChangeCone D c p).π.app (Over.mk (homOfLE (nagataMorphismDescent D c hc i₀ p q phi d hd r data).2.1).op) ≫ (nagataMorphismDescent D c hc i₀ p q phi d hd r data).2.2.left = phi ≫ (baseChangeCone D c q).π.app (Over.mk (homOfLE (nagataMorphismDescent D c hc i₀ p q phi d hd r data).2.1).op)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
