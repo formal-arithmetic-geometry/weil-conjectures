@@ -20,7 +20,8 @@
  },
  "stmt_deps": [
   "def-pc-derived-pullback",
-  "def-pc-scheme"
+  "def-pc-scheme",
+  "def-pc-flat-sheaf-modules"
  ],
  "proof": [
   {
@@ -103,5 +104,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fdp1859 (reviewer sub-agent of L); spot-checked: Step 1 vs new node (hypotheses match, Stacks 06YD verbatim); new node not a duplicate (lem-kun-kflat-criteria(1) is on T_et with Lambda_T, not a ringed space), K-flat Mathlib search: none, sorryfree OK for slopmaster2 abstract lemma but not an exact match; no cycle (def-pc-derived-pullback deps and proof_deps do not reach the item or new node). FIX more, RETURN less: C4 in Step 2 - lem-pc-kflat-pullback-preservation states f^*K is K-flat over O_X, not that g^{-1}E is K-flat over g^{-1}O_S; repaired by applying def-pc-derived-pullback to the identity K-flat resolution P=E (Lg^*E = g^*E canonically), citation and tool_use of lem-pc-kflat-pullback-preservation dropped, proof_deps corrected.; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-fdp1859): Second reading claims CochainComplex.kFlat_of_isStrictlyLE_of_flat was attached to lem-pc-bounded-above-flat-kflat; the delivered file has no attachment (status unsplit, mathlib_match null). Left unsplit: the Lean lemma is for an abstract monoidal abelian category with categorical flatness, not an exact statement for O_X-module sheaves (B10 not met without instantiation work)."
+ "lead_note": "2026-10-10 L (R-fdp1859): Second reading claims CochainComplex.kFlat_of_isStrictlyLE_of_flat was attached to lem-pc-bounded-above-flat-kflat; the delivered file has no attachment (status unsplit, mathlib_match null). Left unsplit: the Lean lemma is for an abstract monoidal abelian category with categorical flatness, not an exact statement for O_X-module sheaves (B10 not met without instantiation work).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback",
+  "declaration": "AlgebraicGeometry.flatComplexDerivedPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatComplexDerivedPullback.lean",
+  "statement": "theorem flatComplexDerivedPullback {T S : Scheme.{u}} (g : T ⟶ S) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))] (K : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ) (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (K.X i)) (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (K.X i)) : ∃ (F : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤ SheafOfModules.{u} (moduleRings T.toRingedSpace)) (hF : ∀ M, F.obj M = Scheme.Modules.tensorPullbackObj g M) (_ : ∀ {M N} (a : M ⟶ N), F.map a = eqToHom (hF M) ≫ Scheme.Modules.tensorPullbackMap g a ≫ eqToHom (hF N).symm) (_ : F.Additive) (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶ F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh), (derivedPullback g).IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (ComplexShape.up ℤ)) ∧ ∃ e : DerivedCategory.Qh.obj ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K)) ≅ (derivedPullback g).obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K)), e.inv = ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Termwise tensor pullback on the shared module-sheaf carrier is pinned on objects and maps. The ordinary-to-derived comparison is the isomorphism e whose inverse is the canonical left-derived counit epsilon at K; the universal property is stated, so the comparison is not an arbitrary isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fcp1338",
+  "group": "G1",
+  "result": "pass",
+  "note": "g:T->S arbitrary scheme morphism; K a Z-graded complex on the shared moduleRings carrier of derivedPullback; bounded-above and termwise SheafOfModules.IsFlat verbatim as isKFlat_of_boundedAbove_flat; F pinned to tensorPullbackObj/Map exactly as exists_derivedPullback; eps is a left-derived counit of the recorded derivedPullback g (unique up to automorphism, so the exists e with e.inv = eps.app K amounts to IsIso of the canonical comparison at K, direction g*E -> Lg*E); no second derived pullback, no let, HasDerivedCategory.{w} binders as siblings; stmt_dep def-pc-flat-sheaf-modules landed"
+ }
 }
