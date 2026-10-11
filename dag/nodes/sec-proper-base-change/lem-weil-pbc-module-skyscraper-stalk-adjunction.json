@@ -27,7 +27,9 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-module-stalk"
+  "def-weil-pbc-module-stalk",
+  "def-pc-module-stalk-functor",
+  "def-pc-ringed-module-skyscraper"
  ],
  "proof": [
   {
@@ -163,5 +165,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: 009A(4)/009C with the proof written out: sheaf condition incl. the empty open, well-definedness and linearity of Phi on germs, inverse Psi with all restriction cases, naturality in both variables"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.ModuleSkyscraperStalkAdjunction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_moduleSkyscraperStalkAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ModuleSkyscraperStalkAdjunction.lean",
+  "statement": "theorem exists_moduleSkyscraperStalkAdjunction (X : Scheme.{u}) (x : X) : (SheafOfModules.ringedModuleSkyscraperFunctor X.toRingedSpace x).Additive ∧ ∃ adj : RingedSpace.moduleStalkFunctor X.toRingedSpace x ⊣ SheafOfModules.ringedModuleSkyscraperFunctor X.toRingedSpace x, (∀ (G : X.Modules) (A : ModuleCat.{u} (X.presheaf.stalk x)) (φ : G ⟶ (SheafOfModules.ringedModuleSkyscraperFunctor X.toRingedSpace x).obj A) (U : X.Opens) (hx : x ∈ U) (s : G.val.obj (op U)), ((adj.homEquiv G A).symm φ) (TopCat.Presheaf.germ G.val.presheaf U x hx s) = (φ.val.app (op U) s) ⟨hx⟩) ∧ (∀ (G : X.Modules) (A : ModuleCat.{u} (X.presheaf.stalk x)) (ψ : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj G ⟶ A) (U : X.Opens) (hx : x ∈ U) (s : G.val.obj (op U)), ((adj.homEquiv G A ψ).val.app (op U) s) ⟨hx⟩ = ψ (TopCat.Presheaf.germ G.val.presheaf U x hx s))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-mss1150",
+  "group": "G1",
+  "result": "pass",
+  "note": "Scheme X, point x; G : X.Modules = rfl the source of landed moduleStalkFunctor; A : ModuleCat over X.presheaf.stalk x; landed ringedModuleSkyscraperFunctor (PLift sections, germ action, identity/zero restrictions, pointwise maps); (1) sheaf by type + Additive; (2) Phi = (adj.homEquiv).symm on germs, inverse on opens containing x (zero forced elsewhere); (3) naturality via Adjunction; no hypotheses, single universe u; no duplicate adjunction in lean/Sheaf"
  }
 }
