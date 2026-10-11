@@ -5193,3 +5193,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 15:18 L: merged deliver/M1/lem-sc-p1-graded-nakayama-generation (stage 2; reviewer PASS; first push; Sheaf.RingTheory.GradedNakayamaGeneration MvPolynomial.graded_nakayama_generation)
 - 15:18 L: merged deliver/R1/lem-sc-strict-henselization-completion-noetherian (stage 2; reviewer FIX; first push; Sheaf.RingTheory.StrictHenselizationCompletionNoetherian Algebra.strictHenselization_completion_noetherian_faithfullyFlat)
 - 15:18 L: merged deliver/K1/lem-sc-p1-coherent-proj-representation (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.CoherentProjRepresentation AlgebraicGeometry.Proj.coherent_exists_graded_representation)
+- 15:18 L: returned deliver/M1/lem-sc-p1-proj-shifted-free-twist (reviewer RETURN: R-sft (stage 2, head 9272c913d). H4/H13: the two dependency modules re-record LANDED declarations. def-sc-p1-standard is)
