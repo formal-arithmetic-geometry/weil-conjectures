@@ -155,5 +155,23 @@
   "item": "lem-weil-pbc-strictly-henselian-quotient",
   "worker": "stage1",
   "summary": "Split Stacks 05WS into local quotient structure, the third-isomorphism identification of the residue field, and descent of henselian idempotent lifting through I <= m; combined these with the inherited separably closed residue field to conclude strict henselianity. Added one unsplit proof node and two Mathlib/search nodes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictlyHenselianQuotient",
+  "declaration": "isStrictlyHenselianLocalRing_quotient",
+  "file": "lean/Sheaf/RingTheory/StrictlyHenselianQuotient.lean",
+  "statement": "theorem isStrictlyHenselianLocalRing_quotient (A : Type u) [CommRing A] [IsLocalRing A] (hA : IsStrictlyHenselianLocalRing A) (I : Ideal A) (hI : I ≤ IsLocalRing.maximalIdeal A) : ∃ (_ : IsLocalRing (A ⧸ I)), IsLocalRing.maximalIdeal (A ⧸ I) = (IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk I) ∧ (∃ e : IsLocalRing.ResidueField (A ⧸ I) ≃+* IsLocalRing.ResidueField A, ∀ a : A, e (IsLocalRing.residue (A ⧸ I) (Ideal.Quotient.mk I a)) = IsLocalRing.residue A a) ∧ IsStrictlyHenselianLocalRing (A ⧸ I) ∧ IsSepClosed (IsLocalRing.ResidueField A) ∧ ∀ (B : Type (max u v)) [CommRing B] [Algebra (A ⧸ I) B] [Module.Finite (A ⧸ I) B], ∀ e : B ⧸ (IsLocalRing.maximalIdeal (A ⧸ I)).map (algebraMap (A ⧸ I) B), IsIdempotentElem e → ∃! b : B, IsIdempotentElem b ∧ Ideal.Quotient.mk ((IsLocalRing.maximalIdeal (A ⧸ I)).map (algebraMap (A ⧸ I) B)) b = e",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
