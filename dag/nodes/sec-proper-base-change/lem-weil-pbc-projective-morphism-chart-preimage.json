@@ -20,7 +20,8 @@
   "def-nagata-projective-space-base-change",
   "def-sc-invertible-module",
   "def-weil-residue-field",
-  "def-weil-pbc-morphism-to-projective-space-by-sections"
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-weil-pbc-ample-invertible-module"
  ],
  "proof": [
   {
@@ -167,5 +168,23 @@
   "by": "L",
   "result": "pass",
   "note": "four steps along the uniqueness part of Stacks 01N8 (reduction to ψ, the datum α, the preimage of the non-vanishing locus via the value formula, the quotient via the unit of the pullback and Modules 01CY); 2 new nodes; the source repository covers only L = O_Y (OfSections.lean), no attachment; the brief had wrong tags 01N9/01NB for the standard opens (01M4/01MA/01MV)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.homOfGeneratingSections_chart_preimage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveMorphismChartPreimage.lean",
+  "statement": "theorem homOfGeneratingSections_chart_preimage (n : ℕ) {Y S : Scheme.{u}} (g : Y ⟶ S) (L : Y.Modules) [L.IsInvertible] (s : ULift.{u} (Fin (n + 1)) → L.sections) (hs : Epi (L.freeHomEquiv.symm s)) : ∀ j : ULift.{u} (Fin (n + 1)), (homOfGeneratingSections _ g L s hs ⁻¹ᵁ standardOpen _ S j : Set Y) = nonvanishingLocus L ((s j).val (op ⊤)) ∧ ∀ (l : ULift.{u} (Fin (n + 1))), (L.presheaf.map (homOfLE (le_top : homOfGeneratingSections _ g L s hs ⁻¹ᵁ standardOpen _ S j ≤ ⊤)).op ((s l).val (op ⊤)) = (homOfGeneratingSections _ g L s hs).app (standardOpen _ S j) (coordRatio _ S j l) • L.presheaf.map (homOfLE (le_top : homOfGeneratingSections _ g L s hs ⁻¹ᵁ standardOpen _ S j ≤ ⊤)).op ((s j).val (op ⊤))) ∧ ∀ (a : Γ(Y, homOfGeneratingSections _ g L s hs ⁻¹ᵁ standardOpen _ S j)), L.presheaf.map (homOfLE (le_top : homOfGeneratingSections _ g L s hs ⁻¹ᵁ standardOpen _ S j ≤ ⊤)).op ((s l).val (op ⊤)) = a • L.presheaf.map (homOfLE (le_top : homOfGeneratingSections _ g L s hs ⁻¹ᵁ standardOpen _ S j ≤ ⊤)).op ((s j).val (op ⊤)) → a = (homOfGeneratingSections _ g L s hs).app (standardOpen _ S j) (coordRatio _ S j l)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pcp",
+  "group": "M1",
+  "result": "pass",
+  "note": "g:Y->S, invertible L, s over ULift (Fin (n+1)), generation as Epi freeHomEquiv; (i) preimage of standardOpen j = nonvanishingLocus L s_j; (ii) s_l| = phi^*(coordRatio j l = T_l/T_j) . s_j| with uniqueness; added stmt_dep def-weil-pbc-ample-invertible-module records nonvanishingLocus, used"
  }
 }
