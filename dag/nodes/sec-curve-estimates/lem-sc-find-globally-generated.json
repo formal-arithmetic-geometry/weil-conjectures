@@ -162,5 +162,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fg2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 16:09 return (e0f130f76): points 1-4 repaired (separated node now assumes B=O_{X,x} Noetherian of dimension 1, which with x not in U makes U x_X Spec(B)=Spec(K) and 09NB's separatedness sentence gives the surjection, true; step 1 now proves dim B_i=1 via lem-sc-scheme-stalk-dimension-generalization-chains before the pullback claim; source places now 09NB/09N5 with correct labels; denominator node defines fraction field inline, cites def-weil-pbc-krull-dimension-ring, puts B_i in K, and agrees with varieties.tex line 7537 (09N5) hypothesis by hypothesis); point 5 created.by/date is filled by the merge tool, citations.json explained. Item statement unchanged; read against varieties.tex 09NB (line 7857ff), stronger hypotheses (X Noetherian dim 1) imply 09NB's local hypotheses. Steps: 1 by the stalk-dimension, stalks-in-function-field and separated nodes; 2 by stalks-in-function-field, affine-fraction and the 09N5 node (local => semilocal, Jacobson radical = m_i); 3-5 cocycle f / 1 checked on triple overlaps against lem-sc-glue-component-transition-cocycle, s=1|f^{-1}, t=f|1 compatible, X_s=U, X_s and X_t cover. Small cases: A^2 with U=D(x) excluded by dim-1 hypothesis; P^1, U=A^1: k[t] and k[1/t]_{(1/t)} generate k(t), f=t works. FIX more, RETURN less (C1): lem-sc-find-globally-generated: proof[0].text/uses + proof_deps: 'B_i Noetherian' used with no node (pqf-def-locnoeth only defines the notion), now cites lem-weil-pbc-spec-domain-stalks-function-field (stalk is a localization) and lem-weil-pbc-localization-noetherian (both Mathlib leaves); proof[2].text/uses: f and f^{-1} inverse on U cap U_i now cites lem-sc-integral-scheme-stalks-in-function-field (injectivity into K), elementary set false. Start Sat Oct 10 04:19:16 PM UTC 2026, end Sat Oct 10 04:22:31 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FindGloballyGenerated",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_globallyGenerated_invertible_nonvanishing_eq",
+  "file": "lean/Sheaf/AlgebraicGeometry/FindGloballyGenerated.lean",
+  "statement": "theorem exists_globallyGenerated_invertible_nonvanishing_eq (X : Scheme.{u}) [IsIntegral X] [X.IsSeparated] [IsLocallyNoetherian X] [CompactSpace X] (hdim : topologicalKrullDim X = 1) (U : X.Opens) (hU : IsAffineOpen U) (hne : (U : Set X).Nonempty) (hfin : (Set.compl (U : Set X)).Finite) : ∃ L : X.Modules, L.IsInvertible ∧ Nonempty (SheafOfModules.GeneratingSections L) ∧ ∃ s : L.val.presheaf.obj (Opposite.op ⊤), nonvanishingLocus L s = (U : Set X)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fgg1125",
+  "group": "E1",
+  "result": "pass",
+  "note": "X : Scheme [IsIntegral X] (#check: AlgebraicGeometry.IsIntegral, not ring IsIntegral) [X.IsSeparated] (absolute, = IsSeparated (terminal.from X)) [IsLocallyNoetherian X][CompactSpace X] = Noetherian, topologicalKrullDim X = 1, U : X.Opens affine nonempty with finite complement; conclusion exists L : X.Modules, L.IsInvertible, Nonempty GeneratingSections L (index universe fixed by L, sibling ExistsAmpleOfEnoughGloballyGenerated form), global s with nonvanishingLocus L s = U (n=1 X_s); true by 09NB (stalks at complement points dim 1 Noetherian); no hollow hypotheses, no free universes"
  }
 }

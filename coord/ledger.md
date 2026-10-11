@@ -4442,3 +4442,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:25 L: merged deliver/H1/lem-weil-pbc-finite-etale-trace-degree (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree AlgebraicGeometry.Etale.exists_finiteEtaleTrace_degree)
 - 11:26 L: merged deliver/F1/lem-weil-pbc-higher-direct-image-sheafified-presheaf (stage 2; reviewer FIX; first push; Sheaf.Paper.HigherDirectImageSheafifiedPresheaf AlgebraicGeometry.higherDirectImageSheafifiedPresheaf)
 - 11:26 L: merged deliver/J1/lem-weil-pbc-integral-closure-finite-fibre-choose-g (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreChooseG AlgebraicGeometry.integralClosure_finite_fibre_choose_g)
+- 11:26 L: merged deliver/E1/lem-sc-find-globally-generated (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.FindGloballyGenerated AlgebraicGeometry.Scheme.Modules.exists_globallyGenerated_invertible_nonvanishing_eq)
