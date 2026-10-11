@@ -14,6 +14,7 @@ public import Mathlib.RingTheory.MvPolynomial.Localization
 public import Mathlib.RingTheory.NoetherNormalization
 public import Mathlib.RingTheory.RingHom.Finite
 public import Mathlib.RingTheory.RingHom.FiniteType
+public import Mathlib.RingTheory.TensorProduct.MvPolynomial
 public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
@@ -37,6 +38,8 @@ extension preserves the Krull dimension, `s` is the dimension of the algebra.
   fibre to a principal open of the base.
 - `ringKrullDim_tensorProduct_eq_of_finite_inj_algHom_mvPolynomial`: the generic fibre of a
   Noether normalization over a domain has the expected dimension.
+- `ringKrullDim_tensorProduct_le_of_finiteType`: base change of a finitely generated algebra over
+  a field to a field extension does not increase the Krull dimension.
 - `ringKrullDim_eq_of_isLocalization_away`: localizing a finitely generated domain over a field
   away from a nonzero element preserves the Krull dimension.
 
@@ -402,3 +405,39 @@ theorem ringKrullDim_eq_of_isLocalization_away {K : Type*} {A B : Type u} [Field
   have h := trdeg_add_eq (R := K) (S := A) (A := B)
   rw [trdeg_eq_zero (R := A) (A := B), add_zero, hA, hB] at h
   rw [hn, hm, Nat.cast_inj.1 h.symm]
+
+/-- Base change of a finitely generated algebra `A` over a field `k` to a field `K` over `k`
+does not increase the Krull dimension: a Noether normalization `k[T₁, …, Tₙ] → A` base changes
+to an integral map `K[T₁, …, Tₙ] → A ⊗[k] K`. -/
+theorem ringKrullDim_tensorProduct_le_of_finiteType (k A K : Type*) [Field k] [CommRing A]
+    [Algebra k A] [Algebra.FiniteType k A] [Field K] [Algebra k K] :
+    ringKrullDim (A ⊗[k] K) ≤ ringKrullDim A := by
+  cases subsingleton_or_nontrivial A with
+  | inl hA =>
+    have : Subsingleton (A ⊗[k] K) := by
+      refine subsingleton_of_zero_eq_one ?_
+      rw [Algebra.TensorProduct.one_def, Subsingleton.elim (1 : A) 0, zero_tmul]
+    simp [ringKrullDim_eq_bot_of_subsingleton]
+  | inr hA =>
+    obtain ⟨n, g, hg, hfin⟩ := exists_finite_inj_algHom_of_fg k A
+    rw [ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial g hg hfin]
+    let φ := Algebra.TensorProduct.map g (AlgHom.id k K)
+    algebraize [g.toRingHom, φ.toRingHom]
+    have : Module.Finite (MvPolynomial (Fin n) k) A := hfin
+    have : Algebra.IsIntegral (MvPolynomial (Fin n) k ⊗[k] K) (A ⊗[k] K) := by
+      refine ⟨fun z ↦ z.induction_on isIntegral_zero (fun a x ↦ ?_) fun _ _ ↦ .add⟩
+      have ha : IsIntegral (MvPolynomial (Fin n) k ⊗[k] K) (a ⊗ₜ[k] (1 : K)) :=
+        (Algebra.IsIntegral.isIntegral (R := MvPolynomial (Fin n) k) a).map_of_comp_eq
+          Algebra.TensorProduct.includeLeftRingHom Algebra.TensorProduct.includeLeftRingHom
+          (RingHom.ext fun p ↦ by simp [φ, RingHom.algebraMap_toAlgebra])
+      have hx : a ⊗ₜ[k] x = a ⊗ₜ[k] 1 * algebraMap _ (A ⊗[k] K)
+          (1 ⊗ₜ[k] x : MvPolynomial (Fin n) k ⊗[k] K) := by
+        simp [φ, RingHom.algebraMap_toAlgebra]
+      rw [hx]
+      exact ha.mul isIntegral_algebraMap
+    refine (ringKrullDim_le_of_isIntegral (MvPolynomial (Fin n) k ⊗[k] K) _).trans_eq ?_
+    rw [ringKrullDim_eq_of_ringEquiv ((Algebra.TensorProduct.comm k _ K).toRingEquiv.trans
+      (MvPolynomial.algebraTensorAlgEquiv k K).toRingEquiv),
+      MvPolynomial.ringKrullDim_of_isNoetherianRing,
+      ringKrullDim_eq_zero_of_isField (Field.toIsField K)]
+    simp
