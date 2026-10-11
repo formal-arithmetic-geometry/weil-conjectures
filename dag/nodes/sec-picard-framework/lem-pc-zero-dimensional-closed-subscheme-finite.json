@@ -134,5 +134,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zcs (reviewer sub-agent of L); spot-checked: Source: Stacks Tag 06LH (varieties.tex label lemma-algebraic-scheme-dim-0), algebraic case: algebraic k-scheme of dimension 0 is affine and finite over k; item statement agrees (finite type over k, Z closed subscheme hence algebraic, dim<=0), with the finite-dimensional Gamma clause from the Tag 03J3 paragraph. Step 1: lem-weil-pbc-closed-immersion-proper (a) states closed immersions are proper incl. finite type; composite Z->X->Spec k finite type checked from def-weil-finite-type-morphism in a few lines (finite affine cover of X by f.g. k-algebras, each preimage finitely covered by algebras f.g. over them). Step 2: lem-pc-algebraic-dim-zero-affine-finite (same unit) has hypothesis dim Y<=0 in the sense of def-pc-dimension (sup of local ring dimensions, nonempty X), whereas the item has topological Krull dimension (def-kun-topological-krull-dimension). FIX more, RETURN less (C4): dag/nodes/sec-picard-framework/lem-pc-zero-dimensional-closed-subscheme-finite.json: proof[1].text/uses, proof_deps, split_report.tool_uses: the step now treats empty Z directly (Spec 0, finite) and for nonempty Z cites the existing node lem-pc-scheme-dimension-local-rings (topological dim = sup dim O_{Z,z}) and def-pc-dimension to transfer the hypothesis; lem-pc-scheme-dimension-local-rings declared as a generic off-unit tool use. Step 3: lem-weil-pbc-finite-over-field-affine-finite-dim (mathlib leaf) states T affine, T=Spec Gamma, Gamma finite-dimensional, for T->Spec k finite: exactly the clause used. No new nodes; maintainer fields unchanged. Small cases: Z empty, Z=Spec k, Z=Spec k[e]/(e^2) inside A^1_k: conclusions hold. Report mentions a citations.json not in the delivery (harmless). Start Sat Oct 10 03:23:08 PM UTC 2026, end Sat Oct 10 03:23:57 PM UTC 2026.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite",
+  "declaration": "AlgebraicGeometry.closed_subscheme_finite_of_topologicalKrullDim_le_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalClosedSubschemeFinite.lean",
+  "statement": "theorem closed_subscheme_finite_of_topologicalKrullDim_le_zero {k : Type u} [Field k] {X Z : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] (i : Z ⟶ X) [IsClosedImmersion i] (hZ : topologicalKrullDim Z ≤ 0) : IsFinite (i ≫ f) ∧ IsAffine Z ∧ (letI := (i ≫ f).ΓAlgebra; FiniteDimensional k Γ(Z, ⊤))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zdf0915",
+  "group": "K1",
+  "result": "pass",
+  "note": "field k Type u; X Scheme.{u} with f : X ⟶ Spec k, LocallyOfFiniteType+QuasiCompact = finite type; Z closed subscheme as i with IsClosedImmersion; dim of underlying space <= 0 as topologicalKrullDim Z <= 0 (node cites def-kun-topological-krull-dimension, not def-pc-dimension); conclusions IsFinite (i ≫ f), IsAffine Z, FiniteDimensional k Γ(Z,⊤) via (i ≫ f).ΓAlgebra; empty Z, Spec k[e]/e^2 checked; not verbatim any merged dim-zero node nor in Mathlib Artinian.lean/WeilConjectures; docstring carries the 3 proof steps"
  }
 }
