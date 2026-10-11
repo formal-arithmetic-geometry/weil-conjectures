@@ -1,151 +1,153 @@
 {
- "id": "lem-sc-function-field-cd-one",
- "blueprint": {
-  "is": "lem-sc-function-field-cd-one",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Cohomology of an algebraic extension of a curve function field",
- "statement": "Let $k$ be algebraically closed, $C/k$ an integral\nconnected curve, and $L$ an algebraic extension\nof its function field.\nFor every torsion etale sheaf\n$M$ on $\\operatorname{Spec}L$, its\ncohomology vanishes\nin degrees $q\\geq2$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
-  "place": "node lem-sc-function-field-cd-one, order 981"
- },
- "stmt_deps": [
-  "def-sc-curves",
-  "def-sc-function-field",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-etale-sheaves"
- ],
- "proof": [
-  {
-   "text": "By [lemma-weil-pbc-torsion-filtered-union], [lem-weil-pbc-cohomology-filtered-colimit]\nwe may work with bounded-exponent torsion, and then with one\nprimary component. Use the exact field dictionary of\n[lem-exc-field-discrete-modules]. The open subgroups of\n$G_L$ correspond to finite separable extensions $E/L$.\nWe verify the hypothesis of [lem-sc-group-cd-one] for each one.",
-   "uses": [
+  "id": "lem-sc-function-field-cd-one",
+  "blueprint": {
+    "is": "lem-sc-function-field-cd-one",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Cohomology of an algebraic extension of a curve function field",
+  "statement": "Let $k$ be algebraically closed, $C/k$ an integral\nconnected curve, and $L$ an algebraic extension\nof its function field.\nFor every torsion etale sheaf\n$M$ on $\\operatorname{Spec}L$, its\ncohomology vanishes\nin degrees $q\\geq2$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
+    "place": "node lem-sc-function-field-cd-one, order 981"
+  },
+  "stmt_deps": [
+    "def-sc-curves",
+    "def-sc-function-field",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-etale-sheaves"
+  ],
+  "proof": [
+    {
+      "text": "By [lemma-weil-pbc-torsion-filtered-union], [lem-weil-pbc-cohomology-filtered-colimit]\nwe may work with bounded-exponent torsion, and then with one\nprimary component. Use the exact field dictionary of\n[lem-exc-field-discrete-modules]. The open subgroups of\n$G_L$ correspond to finite separable extensions $E/L$.\nWe verify the hypothesis of [lem-sc-group-cd-one] for each one.",
+      "uses": [
+        "lemma-weil-pbc-torsion-filtered-union",
+        "lem-weil-pbc-cohomology-filtered-colimit",
+        "lem-exc-field-discrete-modules",
+        "lem-sc-group-cd-one"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "If $\\ell\\ne\\operatorname{char}k$, the field $E$ contains all\n$\\ell$-th roots of unity, so $\\mu_\\ell$ is a trivial\n$\\mathbf F_\\ell$-module. The field Kummer calculation and\n$H^1(E,\\mathbf G_m)=\\operatorname{Pic}(\\operatorname{Spec}E)=0$\ngive the injection $H^2(E,\\mu_\\ell)\\hookrightarrow\\operatorname{Br}(E)$\nby [lem-sc-field-kummer-h2-brauer-injection]. The target vanishes\nby [lem-sc-brauer-algebraic-function-field-zero].",
+      "uses": [
+        "lem-sc-field-kummer-h2-brauer-injection",
+        "lem-sc-brauer-algebraic-function-field-zero"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "If $\\ell=\\operatorname{char}k=p$, the polynomial argument for\n$T^p-T-u$ gives the field Artin–Schreier exact sequence\n[lem-sc-field-artin-schreier-sequence]. The two adjacent positive\ncohomology groups of $\\mathbf G_a$ on the affine scheme $\\operatorname{Spec}E$\nvanish by [lem-sc-etale-affine-qcoherent], so $H^2(E,\\mathbf F_p)=0$.\nIn both cases [lem-sc-group-cd-one] gives the assertion.",
+      "uses": [
+        "lem-sc-field-artin-schreier-sequence",
+        "lem-sc-etale-affine-qcoherent",
+        "lem-sc-group-cd-one"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "lemma-weil-pbc-torsion-filtered-union",
     "lem-weil-pbc-cohomology-filtered-colimit",
     "lem-exc-field-discrete-modules",
-    "lem-sc-group-cd-one"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "If $\\ell\\ne\\operatorname{char}k$, the field $E$ contains all\n$\\ell$-th roots of unity, so $\\mu_\\ell$ is a trivial\n$\\mathbf F_\\ell$-module. The field Kummer calculation and\n$H^1(E,\\mathbf G_m)=\\operatorname{Pic}(\\operatorname{Spec}E)=0$\ngive the injection $H^2(E,\\mu_\\ell)\\hookrightarrow\\operatorname{Br}(E)$\nby [lem-sc-field-kummer-h2-brauer-injection]. The target vanishes\nby [lem-sc-brauer-algebraic-function-field-zero].",
-   "uses": [
+    "lem-sc-group-cd-one",
     "lem-sc-field-kummer-h2-brauer-injection",
-    "lem-sc-brauer-algebraic-function-field-zero"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "If $\\ell=\\operatorname{char}k=p$, the polynomial argument for\n$T^p-T-u$ gives the field Artin–Schreier exact sequence\n[lem-sc-field-artin-schreier-sequence]. The two adjacent positive\ncohomology groups of $\\mathbf G_a$ on the affine scheme $\\operatorname{Spec}E$\nvanish by [lem-sc-etale-affine-qcoherent], so $H^2(E,\\mathbf F_p)=0$.\nIn both cases [lem-sc-group-cd-one] gives the assertion.",
-   "uses": [
+    "lem-sc-brauer-algebraic-function-field-zero",
     "lem-sc-field-artin-schreier-sequence",
+    "lem-sc-etale-affine-qcoherent"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
+    "place": "## Proof"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "cohomological dimension at most one for the absolute Galois group of an algebraic extension of a function field; etale cohomology of Spec L vanishes in degrees at least 2",
+      "results": "HTTP 500 from LeanSearch; no result available",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "absolute Galois group of an algebraic extension of a function field has cohomological dimension one",
+      "results": "No relevant result; only unrelated curve cohomological-dimension declarations",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "H^q (Spec L) M = 0 for q >= 2",
+      "results": "No matching Mathlib declaration for etale cohomology of algebraic function fields",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg -n -i 'function field.*cohomological dimension|absolute Galois.*cd.?one|Spec L.*H\\^2|cohomology.*degree.*2' /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
+      "results": "Only curve-level and affine-line cohomological-dimension declarations; no theorem for algebraic extensions of function fields",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 981,
+  "blueprint_uses": [
+    "def-sc-curves",
+    "def-sc-function-field",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-etale-sheaves",
+    "lem-exc-field-discrete-modules",
+    "lem-sc-as-sequence",
     "lem-sc-etale-affine-qcoherent",
-    "lem-sc-group-cd-one"
-   ],
-   "elementary": false
+    "lem-sc-group-cd-one",
+    "lem-sc-tsen",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lemma-weil-pbc-torsion-filtered-union"
+  ],
+  "uses_not_cited": [
+    "def-sc-curves",
+    "def-sc-function-field",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-etale-sheaves"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-sc-function-field-cd-one",
+    "worker": "stage1",
+    "summary": "Reworked the imported proof into an explicit three-step route. Existing nodes cover torsion colimits, the field/Galois dictionary, group cohomological dimension, and affine quasi-coherent vanishing. Added statement-only helper nodes for the field Kummer injection, Brauer vanishing after finite separable extension, and the Artin-Schreier sequence on Spec E, since these field-level bridges are not already present in the DAG. Added Mathlib searches and completed blueprint metadata.",
+    "blueprint": "Step 1 realizes the first blueprint proof paragraph; step 2 realizes the second and third paragraphs (Kummer injection together with finite descent and Tsen splitting); step 3 realizes the fourth paragraph (characteristic-p Artin-Schreier vanishing).",
+    "tool_uses": []
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-ff2",
+    "group": "J1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ff2 (reviewer sub-agent of L); spot-checked: Repaired re-push after return 14:52 (head 971d14539); all six numbered points checked repaired: (1) def-sc-field-extension removed from the three helpers, def-pc-field-extension / def-weil-pbc-separable-algebraic-extension cited, stmt_deps match the citations (one surplus fixed below); (2) Kummer helper defines mu_ell inline as kernel of ell-th power on G_m of def-sc-gm-torsor (stated for any scheme), roots-of-unity hypothesis dropped; (3) Artin-Schreier helper defines F_p via def-weil-pbc-constant-sheaf and G_a via def-sc-etale-qcoherent-module on (Spec E)_Et, iota and wp named; (4) vacuous step 3 deleted, split_report.blueprint assigns paragraphs 2 and 3 to step 2; (5) item mathlib_searches has leansearch/leanfinder/loogle/grep; (6) unit file line removed from report. Source: blueprint sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md ## Proof, four paragraphs; item statement unchanged. Steps: 1 torsion filtered union + filtered colimit + lem-exc-field-discrete-modules reduce to H^2(E,F_ell)=0 for finite separable E/L as hypothesis of lem-sc-group-cd-one; 2 (ell != p) mu_ell = F_ell since k alg. closed in E, lem-sc-field-kummer-h2-brauer-injection (true: Hilbert 90) and lem-sc-brauer-algebraic-function-field-zero (true: E algebraic over k(C), C1 by Tsen); 3 (ell = p) lem-sc-field-artin-schreier-sequence (true) with lem-sc-etale-affine-qcoherent on affine Spec E gives H^2(E,F_p)=0, then lem-sc-group-cd-one. All cited statements read and match. Small case: E=k(t) for both branches. Fixes: lem-sc-field-artin-schreier-sequence.json: stmt_deps: dropped def-weil-pbc-etale-cohomology (not cited in statement); lem-sc-field-artin-schreier-sequence.json: blueprint.from.place: stale 'step 4' -> step 3 / fourth blueprint paragraph; lem-sc-brauer-algebraic-function-field-zero.json: blueprint.from.place: stale 'step 3' -> step 2 / third blueprint paragraph; lem-sc-function-field-cd-one.json: split_report.summary: 'four-step' -> three-step and names the Artin-Schreier helper. Start Sat Oct 10 03:04:39 PM UTC 2026, end Sat Oct 10 03:05:20 PM UTC 2026.; 3 file(s) fixed by the reviewer"
   }
- ],
- "proof_deps": [
-  "lemma-weil-pbc-torsion-filtered-union",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lem-exc-field-discrete-modules",
-  "lem-sc-group-cd-one",
-  "lem-sc-field-kummer-h2-brauer-injection",
-  "lem-sc-brauer-algebraic-function-field-zero",
-  "lem-sc-field-artin-schreier-sequence",
-  "lem-sc-etale-affine-qcoherent"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md",
-  "place": "## Proof"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "cohomological dimension at most one for the absolute Galois group of an algebraic extension of a function field; etale cohomology of Spec L vanishes in degrees at least 2",
-   "results": "HTTP 500 from LeanSearch; no result available",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "absolute Galois group of an algebraic extension of a function field has cohomological dimension one",
-   "results": "No relevant result; only unrelated curve cohomological-dimension declarations",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "loogle",
-   "query": "H^q (Spec L) M = 0 for q >= 2",
-   "results": "No matching Mathlib declaration for etale cohomology of algebraic function fields",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n -i 'function field.*cohomological dimension|absolute Galois.*cd.?one|Spec L.*H\\^2|cohomology.*degree.*2' /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-src-slopmaster2/.lake/packages/mathlib/Mathlib",
-   "results": "Only curve-level and affine-line cohomological-dimension declarations; no theorem for algebraic extensions of function fields",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 981,
- "blueprint_uses": [
-  "def-sc-curves",
-  "def-sc-function-field",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-etale-sheaves",
-  "lem-exc-field-discrete-modules",
-  "lem-sc-as-sequence",
-  "lem-sc-etale-affine-qcoherent",
-  "lem-sc-group-cd-one",
-  "lem-sc-tsen",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lemma-weil-pbc-torsion-filtered-union"
- ],
- "uses_not_cited": [
-  "def-sc-curves",
-  "def-sc-function-field",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-etale-sheaves"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-sc-function-field-cd-one",
-  "worker": "stage1",
-  "summary": "Reworked the imported proof into an explicit three-step route. Existing nodes cover torsion colimits, the field/Galois dictionary, group cohomological dimension, and affine quasi-coherent vanishing. Added statement-only helper nodes for the field Kummer injection, Brauer vanishing after finite separable extension, and the Artin-Schreier sequence on Spec E, since these field-level bridges are not already present in the DAG. Added Mathlib searches and completed blueprint metadata.",
-  "blueprint": "Step 1 realizes the first blueprint proof paragraph; step 2 realizes the second and third paragraphs (Kummer injection together with finite descent and Tsen splitting); step 3 realizes the fourth paragraph (characteristic-p Artin-Schreier vanishing).",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-ff2",
-  "group": "J1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ff2 (reviewer sub-agent of L); spot-checked: Repaired re-push after return 14:52 (head 971d14539); all six numbered points checked repaired: (1) def-sc-field-extension removed from the three helpers, def-pc-field-extension / def-weil-pbc-separable-algebraic-extension cited, stmt_deps match the citations (one surplus fixed below); (2) Kummer helper defines mu_ell inline as kernel of ell-th power on G_m of def-sc-gm-torsor (stated for any scheme), roots-of-unity hypothesis dropped; (3) Artin-Schreier helper defines F_p via def-weil-pbc-constant-sheaf and G_a via def-sc-etale-qcoherent-module on (Spec E)_Et, iota and wp named; (4) vacuous step 3 deleted, split_report.blueprint assigns paragraphs 2 and 3 to step 2; (5) item mathlib_searches has leansearch/leanfinder/loogle/grep; (6) unit file line removed from report. Source: blueprint sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md ## Proof, four paragraphs; item statement unchanged. Steps: 1 torsion filtered union + filtered colimit + lem-exc-field-discrete-modules reduce to H^2(E,F_ell)=0 for finite separable E/L as hypothesis of lem-sc-group-cd-one; 2 (ell != p) mu_ell = F_ell since k alg. closed in E, lem-sc-field-kummer-h2-brauer-injection (true: Hilbert 90) and lem-sc-brauer-algebraic-function-field-zero (true: E algebraic over k(C), C1 by Tsen); 3 (ell = p) lem-sc-field-artin-schreier-sequence (true) with lem-sc-etale-affine-qcoherent on affine Spec E gives H^2(E,F_p)=0, then lem-sc-group-cd-one. All cited statements read and match. Small case: E=k(t) for both branches. Fixes: lem-sc-field-artin-schreier-sequence.json: stmt_deps: dropped def-weil-pbc-etale-cohomology (not cited in statement); lem-sc-field-artin-schreier-sequence.json: blueprint.from.place: stale 'step 4' -> step 3 / fourth blueprint paragraph; lem-sc-brauer-algebraic-function-field-zero.json: blueprint.from.place: stale 'step 3' -> step 2 / third blueprint paragraph; lem-sc-function-field-cd-one.json: split_report.summary: 'four-step' -> three-step and names the Artin-Schreier helper. Start Sat Oct 10 03:04:39 PM UTC 2026, end Sat Oct 10 03:05:20 PM UTC 2026.; 3 file(s) fixed by the reviewer"
- }
 }

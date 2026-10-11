@@ -1,113 +1,114 @@
 {
- "id": "lem-sc-fg-order-prime-etale",
- "blueprint": {
-  "is": "lem-sc-fg-order-prime-etale",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Group schemes of order prime to $p$ are etale",
- "statement": "Let $G$ be a finite flat group\nscheme over an algebraically closed field $k$ of characteristic\n$p\\geq0$, of order $m$ with $p\\nmid m$ (for $p=0$, any\n$m$). Then $G$ is etale over $k$.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-prime-p-etale/lem-sc-fg-order-prime-etale.md",
-  "place": "node lem-sc-fg-order-prime-etale, order 578",
-  "external": [
-   {
-    "document": "Stacks Project",
-    "place": "Tag 047N"
-   },
-   {
-    "document": "Waterhouse",
-    "place": "For $p=0$, every finite group scheme over $k$ is etale: this is the theorem of Cartier, and it is the recorded classical interface of this proof (*Stacks Project, Groupoid Schemes, Lemma 39.8.2, [Tag 047N](https://stacks.math.columbia.edu/tag/047N) – every locally algebraic group scheme over a field of characteristic zero is smooth, and a finite smooth group scheme over $k$ is etale; classical sou"
-   },
-   {
-    "document": "Milne",
-    "place": "Milne, Algebraic Groups, Ch. 3*)."
-   }
-  ]
- },
- "stmt_deps": [
-  "def-sc-group-scheme"
- ],
- "proof": [],
- "proof_deps": [
-  "lem-sc-finite-etale-algebra-criterion",
-  "lem-sc-connected-finite-order"
- ],
- "proof_origin": null,
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "unsplit",
- "merged_into": null,
- "import_flags": [
-  "undischarged_input",
-  "partial_undischarged_input",
-  "proof_cites_literature"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 578,
- "blueprint_uses": [
-  "def-sc-group-scheme",
-  "lem-sc-connected-finite-order",
-  "lem-sc-finite-etale-algebra-criterion"
- ],
- "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Finite",
-  "declaration": "AlgebraicGeometry.etale_of_not_dvd_finrankΓ",
-  "branch": "slopmaster2",
-  "line": 107,
-  "sorry_free": true,
-  "body_lines": 7
- },
- "blueprint_lean": [
-  "AlgebraicGeometry.etale_of_not_dvd_finrankΓ"
- ],
- "uses_not_cited": [
-  "def-sc-group-scheme"
- ],
- "blueprint_proof_text": "Write the coordinate ring of $G$ as $B=\\prod_iB_i$ with the $B_i$\nfinite local $k$-algebras, one for each point of the finite discrete\nspace $G$. By [lem-sc-finite-etale-algebra-criterion], $G$ is etale\nif and only if $B$ is a finite product of finite separable field\nextensions of $k$. Since the decomposition of the Artinian ring $B$\ninto local factors is unique, this holds if and only if each $B_i$ is\na finite separable field extension of $k$; as $k$ is algebraically\nclosed, this means $B_i=k$ for every $i$.\n\nWrite $G=G^0\\sqcup G^{\\mathrm{et}}$, where $G^0$ is the connected\ncomponent of the identity and $G^{\\mathrm{et}}$ the disjoint union\nof the remaining components. The component $G^0$ is a closed\nsubgroup scheme: it is open and closed (a component of a finite\nscheme), the multiplication $G\\times_kG\\to G$ maps the connected\nscheme $G^0\\times_kG^0$ into $G^0$ (its image contains\n$e\\cdot e=e$ and is connected), so the multiplication restricts to\n$G^0$, and the same argument for the inverse shows $G^0$ is a\nsubgroup scheme. By the first paragraph, $G$ is not etale exactly\nwhen some connected component of $G$ is not $\\operatorname{Spec}k$.\nEvery component contains a $k$-point $g$ (its residue field is finite\nover the algebraically closed field $k$), and translation by $g$ is an\nautomorphism of the $k$-scheme $G$ carrying $G^0$ onto that\ncomponent. Hence $G$ is not etale exactly when\n$G^0\\neq\\operatorname{Spec}k$. If $p>0$ and $G^0\\neq\\operatorname{Spec}k$, then by\n[lem-sc-connected-finite-order] the order of $G^0$ is a\npositive power of $p$, contradicting $p\\nmid m$ (the order of\nthe subgroup scheme $G^0$ divides the order of $G$: the\ncoordinate ring of $G$ is the product of the coordinate rings of\nits connected components). For $p=0$, every finite group scheme\nover $k$ is etale: this is the theorem of Cartier, and it is the\nrecorded classical interface of this proof\n(*Stacks Project, Groupoid Schemes, Lemma 39.8.2,\n[Tag 047N](https://stacks.math.columbia.edu/tag/047N) – every\nlocally algebraic group scheme over a field of characteristic zero is\nsmooth, and a finite smooth group scheme over $k$ is etale;\nclassical sources: Waterhouse, Introduction to Affine Group Schemes,\n§11.4; Milne, Algebraic Groups, Ch. 3*). The Cartier argument\nsketched in loc. cit. is not reproduced as a proof here: let $A$ be\nthe Hopf algebra of a finite group scheme over a field of\ncharacteristic zero, and let $x\\in\\mathfrak m$ be a nonzero nilpotent\nof maximal order with $x^2=0$ (replace $x$ by a power); then\n$\\Delta(x)=x\\otimes1+1\\otimes x+\\sum_iy_i\\otimes z_i$ with\n$y_i,z_i\\in\\mathfrak m$; applying the antipode-twisted\nmultiplication iteratively, the standard Cartier argument produces\nfrom $x$ a nonzero primitive element, whose $n$-th divided\npower is nonzero for every $n$, contradicting the finite\ndimension of $A$; hence $\\mathfrak m=0$ and $G$ is etale. The\ninterface is used exactly once in this chapter, namely for the\ncharacteristic-zero half of this lemma; the characteristic-$p$ half\nis proved above from [lem-sc-connected-finite-order].",
- "blueprint_proof_steps": [
-  {
-   "text": "Write the coordinate ring of $G$ as $B=\\prod_iB_i$ with the $B_i$\nfinite local $k$-algebras, one for each point of the finite discrete\nspace $G$. By [lem-sc-finite-etale-algebra-criterion], $G$ is etale\nif and only if $B$ is a finite product of finite separable field\nextensions of $k$. Since the decomposition of the Artinian ring $B$\ninto local factors is unique, this holds if and only if each $B_i$ is\na finite separable field extension of $k$; as $k$ is algebraically\nclosed, this means $B_i=k$ for every $i$.",
-   "uses": [
-    "lem-sc-finite-etale-algebra-criterion"
-   ],
-   "elementary": false
+  "id": "lem-sc-fg-order-prime-etale",
+  "blueprint": {
+    "is": "lem-sc-fg-order-prime-etale",
+    "from": null,
+    "same_as": null
   },
-  {
-   "text": "Write $G=G^0\\sqcup G^{\\mathrm{et}}$, where $G^0$ is the connected\ncomponent of the identity and $G^{\\mathrm{et}}$ the disjoint union\nof the remaining components. The component $G^0$ is a closed\nsubgroup scheme: it is open and closed (a component of a finite\nscheme), the multiplication $G\\times_kG\\to G$ maps the connected\nscheme $G^0\\times_kG^0$ into $G^0$ (its image contains\n$e\\cdot e=e$ and is connected), so the multiplication restricts to\n$G^0$, and the same argument for the inverse shows $G^0$ is a\nsubgroup scheme. By the first paragraph, $G$ is not etale exactly\nwhen some connected component of $G$ is not $\\operatorname{Spec}k$.\nEvery component contains a $k$-point $g$ (its residue field is finite\nover the algebraically closed field $k$), and translation by $g$ is an\nautomorphism of the $k$-scheme $G$ carrying $G^0$ onto that\ncomponent. Hence $G$ is not etale exactly when\n$G^0\\neq\\operatorname{Spec}k$. If $p>0$ and $G^0\\neq\\operatorname{Spec}k$, then by\n[lem-sc-connected-finite-order] the order of $G^0$ is a\npositive power of $p$, contradicting $p\\nmid m$ (the order of\nthe subgroup scheme $G^0$ divides the order of $G$: the\ncoordinate ring of $G$ is the product of the coordinate rings of\nits connected components). For $p=0$, every finite group scheme\nover $k$ is etale: this is the theorem of Cartier, and it is the\nrecorded classical interface of this proof\n(*Stacks Project, Groupoid Schemes, Lemma 39.8.2,\n[Tag 047N](https://stacks.math.columbia.edu/tag/047N) – every\nlocally algebraic group scheme over a field of characteristic zero is\nsmooth, and a finite smooth group scheme over $k$ is etale;\nclassical sources: Waterhouse, Introduction to Affine Group Schemes,\n§11.4; Milne, Algebraic Groups, Ch. 3*). The Cartier argument\nsketched in loc. cit. is not reproduced as a proof here: let $A$ be\nthe Hopf algebra of a finite group scheme over a field of\ncharacteristic zero, and let $x\\in\\mathfrak m$ be a nonzero nilpotent\nof maximal order with $x^2=0$ (replace $x$ by a power); then\n$\\Delta(x)=x\\otimes1+1\\otimes x+\\sum_iy_i\\otimes z_i$ with\n$y_i,z_i\\in\\mathfrak m$; applying the antipode-twisted\nmultiplication iteratively, the standard Cartier argument produces\nfrom $x$ a nonzero primitive element, whose $n$-th divided\npower is nonzero for every $n$, contradicting the finite\ndimension of $A$; hence $\\mathfrak m=0$ and $G$ is etale. The\ninterface is used exactly once in this chapter, namely for the\ncharacteristic-zero half of this lemma; the characteristic-$p$ half\nis proved above from [lem-sc-connected-finite-order].",
-   "uses": [
+  "kind": "statement",
+  "title": "Group schemes of order prime to $p$ are etale",
+  "statement": "Let $G$ be a finite flat group\nscheme over an algebraically closed field $k$ of characteristic\n$p\\geq0$, of order $m$ with $p\\nmid m$ (for $p=0$, any\n$m$). Then $G$ is etale over $k$.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-prime-p-etale/lem-sc-fg-order-prime-etale.md",
+    "place": "node lem-sc-fg-order-prime-etale, order 578",
+    "external": [
+      {
+        "document": "Stacks Project",
+        "place": "Tag 047N"
+      },
+      {
+        "document": "Waterhouse",
+        "place": "For $p=0$, every finite group scheme over $k$ is etale: this is the theorem of Cartier, and it is the recorded classical interface of this proof (*Stacks Project, Groupoid Schemes, Lemma 39.8.2, [Tag 047N](https://stacks.math.columbia.edu/tag/047N) – every locally algebraic group scheme over a field of characteristic zero is smooth, and a finite smooth group scheme over $k$ is etale; classical sou"
+      },
+      {
+        "document": "Milne",
+        "place": "Milne, Algebraic Groups, Ch. 3*)."
+      }
+    ]
+  },
+  "stmt_deps": [
+    "def-sc-group-scheme"
+  ],
+  "proof": [],
+  "proof_deps": [
+    "lem-sc-finite-etale-algebra-criterion",
     "lem-sc-connected-finite-order"
-   ],
-   "elementary": false
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.etale_of_not_dvd_finrankΓ"
-   ]
+  ],
+  "proof_origin": null,
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "unsplit",
+  "merged_into": null,
+  "import_flags": [
+    "undischarged_input",
+    "partial_undischarged_input",
+    "proof_cites_literature",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 578,
+  "blueprint_uses": [
+    "def-sc-group-scheme",
+    "lem-sc-connected-finite-order",
+    "lem-sc-finite-etale-algebra-criterion"
+  ],
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Finite",
+    "declaration": "AlgebraicGeometry.etale_of_not_dvd_finrankΓ",
+    "branch": "slopmaster2",
+    "line": 107,
+    "sorry_free": true,
+    "body_lines": 7
   },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
+  "blueprint_lean": [
+    "AlgebraicGeometry.etale_of_not_dvd_finrankΓ"
+  ],
+  "uses_not_cited": [
+    "def-sc-group-scheme"
+  ],
+  "blueprint_proof_text": "Write the coordinate ring of $G$ as $B=\\prod_iB_i$ with the $B_i$\nfinite local $k$-algebras, one for each point of the finite discrete\nspace $G$. By [lem-sc-finite-etale-algebra-criterion], $G$ is etale\nif and only if $B$ is a finite product of finite separable field\nextensions of $k$. Since the decomposition of the Artinian ring $B$\ninto local factors is unique, this holds if and only if each $B_i$ is\na finite separable field extension of $k$; as $k$ is algebraically\nclosed, this means $B_i=k$ for every $i$.\n\nWrite $G=G^0\\sqcup G^{\\mathrm{et}}$, where $G^0$ is the connected\ncomponent of the identity and $G^{\\mathrm{et}}$ the disjoint union\nof the remaining components. The component $G^0$ is a closed\nsubgroup scheme: it is open and closed (a component of a finite\nscheme), the multiplication $G\\times_kG\\to G$ maps the connected\nscheme $G^0\\times_kG^0$ into $G^0$ (its image contains\n$e\\cdot e=e$ and is connected), so the multiplication restricts to\n$G^0$, and the same argument for the inverse shows $G^0$ is a\nsubgroup scheme. By the first paragraph, $G$ is not etale exactly\nwhen some connected component of $G$ is not $\\operatorname{Spec}k$.\nEvery component contains a $k$-point $g$ (its residue field is finite\nover the algebraically closed field $k$), and translation by $g$ is an\nautomorphism of the $k$-scheme $G$ carrying $G^0$ onto that\ncomponent. Hence $G$ is not etale exactly when\n$G^0\\neq\\operatorname{Spec}k$. If $p>0$ and $G^0\\neq\\operatorname{Spec}k$, then by\n[lem-sc-connected-finite-order] the order of $G^0$ is a\npositive power of $p$, contradicting $p\\nmid m$ (the order of\nthe subgroup scheme $G^0$ divides the order of $G$: the\ncoordinate ring of $G$ is the product of the coordinate rings of\nits connected components). For $p=0$, every finite group scheme\nover $k$ is etale: this is the theorem of Cartier, and it is the\nrecorded classical interface of this proof\n(*Stacks Project, Groupoid Schemes, Lemma 39.8.2,\n[Tag 047N](https://stacks.math.columbia.edu/tag/047N) – every\nlocally algebraic group scheme over a field of characteristic zero is\nsmooth, and a finite smooth group scheme over $k$ is etale;\nclassical sources: Waterhouse, Introduction to Affine Group Schemes,\n§11.4; Milne, Algebraic Groups, Ch. 3*). The Cartier argument\nsketched in loc. cit. is not reproduced as a proof here: let $A$ be\nthe Hopf algebra of a finite group scheme over a field of\ncharacteristic zero, and let $x\\in\\mathfrak m$ be a nonzero nilpotent\nof maximal order with $x^2=0$ (replace $x$ by a power); then\n$\\Delta(x)=x\\otimes1+1\\otimes x+\\sum_iy_i\\otimes z_i$ with\n$y_i,z_i\\in\\mathfrak m$; applying the antipode-twisted\nmultiplication iteratively, the standard Cartier argument produces\nfrom $x$ a nonzero primitive element, whose $n$-th divided\npower is nonzero for every $n$, contradicting the finite\ndimension of $A$; hence $\\mathfrak m=0$ and $G$ is etale. The\ninterface is used exactly once in this chapter, namely for the\ncharacteristic-zero half of this lemma; the characteristic-$p$ half\nis proved above from [lem-sc-connected-finite-order].",
+  "blueprint_proof_steps": [
     {
-     "name": "AlgebraicGeometry.etale_of_not_dvd_finrankΓ",
-     "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Finite",
-     "lines": [
-      99,
-      116
-     ],
-     "kind": "theorem",
-     "sorry": false
+      "text": "Write the coordinate ring of $G$ as $B=\\prod_iB_i$ with the $B_i$\nfinite local $k$-algebras, one for each point of the finite discrete\nspace $G$. By [lem-sc-finite-etale-algebra-criterion], $G$ is etale\nif and only if $B$ is a finite product of finite separable field\nextensions of $k$. Since the decomposition of the Artinian ring $B$\ninto local factors is unique, this holds if and only if each $B_i$ is\na finite separable field extension of $k$; as $k$ is algebraically\nclosed, this means $B_i=k$ for every $i$.",
+      "uses": [
+        "lem-sc-finite-etale-algebra-criterion"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Write $G=G^0\\sqcup G^{\\mathrm{et}}$, where $G^0$ is the connected\ncomponent of the identity and $G^{\\mathrm{et}}$ the disjoint union\nof the remaining components. The component $G^0$ is a closed\nsubgroup scheme: it is open and closed (a component of a finite\nscheme), the multiplication $G\\times_kG\\to G$ maps the connected\nscheme $G^0\\times_kG^0$ into $G^0$ (its image contains\n$e\\cdot e=e$ and is connected), so the multiplication restricts to\n$G^0$, and the same argument for the inverse shows $G^0$ is a\nsubgroup scheme. By the first paragraph, $G$ is not etale exactly\nwhen some connected component of $G$ is not $\\operatorname{Spec}k$.\nEvery component contains a $k$-point $g$ (its residue field is finite\nover the algebraically closed field $k$), and translation by $g$ is an\nautomorphism of the $k$-scheme $G$ carrying $G^0$ onto that\ncomponent. Hence $G$ is not etale exactly when\n$G^0\\neq\\operatorname{Spec}k$. If $p>0$ and $G^0\\neq\\operatorname{Spec}k$, then by\n[lem-sc-connected-finite-order] the order of $G^0$ is a\npositive power of $p$, contradicting $p\\nmid m$ (the order of\nthe subgroup scheme $G^0$ divides the order of $G$: the\ncoordinate ring of $G$ is the product of the coordinate rings of\nits connected components). For $p=0$, every finite group scheme\nover $k$ is etale: this is the theorem of Cartier, and it is the\nrecorded classical interface of this proof\n(*Stacks Project, Groupoid Schemes, Lemma 39.8.2,\n[Tag 047N](https://stacks.math.columbia.edu/tag/047N) – every\nlocally algebraic group scheme over a field of characteristic zero is\nsmooth, and a finite smooth group scheme over $k$ is etale;\nclassical sources: Waterhouse, Introduction to Affine Group Schemes,\n§11.4; Milne, Algebraic Groups, Ch. 3*). The Cartier argument\nsketched in loc. cit. is not reproduced as a proof here: let $A$ be\nthe Hopf algebra of a finite group scheme over a field of\ncharacteristic zero, and let $x\\in\\mathfrak m$ be a nonzero nilpotent\nof maximal order with $x^2=0$ (replace $x$ by a power); then\n$\\Delta(x)=x\\otimes1+1\\otimes x+\\sum_iy_i\\otimes z_i$ with\n$y_i,z_i\\in\\mathfrak m$; applying the antipode-twisted\nmultiplication iteratively, the standard Cartier argument produces\nfrom $x$ a nonzero primitive element, whose $n$-th divided\npower is nonzero for every $n$, contradicting the finite\ndimension of $A$; hence $\\mathfrak m=0$ and $G$ is etale. The\ninterface is used exactly once in this chapter, namely for the\ncharacteristic-zero half of this lemma; the characteristic-$p$ half\nis proved above from [lem-sc-connected-finite-order].",
+      "uses": [
+        "lem-sc-connected-finite-order"
+      ],
+      "elementary": false
     }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
- "chapter": "sec-abelian-varieties",
- "unit": "sk-prop-av-prime-p-etale"
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.etale_of_not_dvd_finrankΓ"
+      ]
+    },
+    "slopmaster2": {
+      "state": "closed",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.etale_of_not_dvd_finrankΓ",
+          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Finite",
+          "lines": [
+            99,
+            116
+          ],
+          "kind": "theorem",
+          "sorry": false
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-abelian-varieties",
+  "unit": "sk-prop-av-prime-p-etale"
 }
