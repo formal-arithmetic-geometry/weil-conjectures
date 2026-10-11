@@ -100,5 +100,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: second delivery: helpers define Artinian and length inline (02LY/00IV), route 00JB + 00J3; L removed the stray def-weil-pbc-kahler-differentials citation from both helpers post-merge"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ArtinianIdealLengthOneFiltration",
+  "declaration": "RingTheory.exists_ideal_filtration_length_one",
+  "file": "lean/Sheaf/Paper/ArtinianIdealLengthOneFiltration.lean",
+  "statement": "theorem exists_ideal_filtration_length_one (B : Type u) [CommRing B] [IsArtinianRing B] (J : Ideal B) : ∃ (r : ℕ) (F : Fin (r + 1) → Ideal B), F 0 = ⊥ ∧ F (Fin.last r) = J ∧ (∀ i : Fin r, F (Fin.castSucc i) ≤ F i.succ) ∧ (∀ i : Fin r, Module.length B (↥(F i.succ) ⧸ Submodule.comap (F i.succ).subtype (F (Fin.castSucc i))) = 1)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-alf1426",
+  "group": "F1",
+  "result": "pass",
+  "note": "B CommRing+IsArtinianRing (Stacks ring=commutative, no local/Noetherian added); J : Ideal B; ∃ r:ℕ, F : Fin (r+1) → Ideal B, F 0 = ⊥, F last = J, adjacent ≤; J_i/J_{i-1} as ↥F_i ⧸ comap subtype F_{i-1} (= J_i/J_{i-1} given ≤) with Module.length = 1 (⇔ IsSimpleModule, the node's 'nonzero, only 0 and itself'); r=0 vacuous for J=0; no exact Mathlib statement (CompositionSeries is lattice-level, not ideal Fin-chain), name #check-unique"
  }
 }
