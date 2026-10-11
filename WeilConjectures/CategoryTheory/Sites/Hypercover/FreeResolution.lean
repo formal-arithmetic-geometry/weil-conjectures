@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.ShortComplex.Ab
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.CategoryTheory.Sites.Sheafification
@@ -464,8 +465,225 @@ theorem IsHypercover.coneSieve_mem (hU : (U.augmentOfIsTerminal hT).IsHypercover
     rw [dif_pos hσ]
     exact hy σ hσ j
 
+/-- **The free resolution of a hypercover, positive degrees.** Let `U` be a hypercover of a
+terminal object. Every cycle of degree `n + 1` of the complex `ℤ[U_•]` of free abelian presheaves
+is locally a boundary. Equivalently, the sheafified complex is exact in degree `n + 1`.
+(blueprint: `lem-weil-pbc-hypercover-free-resolution`) -/
+theorem IsHypercover.freeComplex_locallyExact (hU : (U.augmentOfIsTerminal hT).IsHypercover J)
+    (n : ℕ) {W : C} (z : ((freeComplex U).X (n + 1)).obj (op W))
+    (hz : ((freeComplex U).d (n + 1) n).app (op W) z = 0) :
+    ∃ R ∈ J W, ∀ ⦃W' : C⦄ (g : W' ⟶ W), R g →
+      ∃ b : ((freeComplex U).X (n + 2)).obj (op W'),
+        ((freeComplex U).d (n + 2) (n + 1)).app (op W') b =
+          ((freeComplex U).X (n + 1)).map g.op z := by
+  classical
+  let z' : ULift.{w} (W ⟶ U _⦋n + 1⦌) →₀ ℤ := z
+  let A : Set (W ⟶ U _⦋n + 1⦌) :=
+    (fun σ : ULift.{w} (W ⟶ U _⦋n + 1⦌) ↦ σ.down) '' (↑z'.support : Set _)
+  refine ⟨coneSieve (U.faceClosure A) (n + 2),
+    hU.coneSieve_mem _ (U.faceClosure_δ A)
+      (fun m ↦ U.faceClosure_finite (z'.support.finite_toSet.image _) m) _,
+    fun W' g ⟨v, h, hc⟩ ↦ ⟨Finsupp.mapDomain (fun σ ↦ ULift.up (h (n + 1) σ.down)) z', ?_⟩⟩
+  have key := U.chainBoundary_cone_succ g n (h (n + 1)) (h n) z'
+    (fun σ hσ ↦ hc.δ_zero (by omega) (U.subset_faceClosure A ⟨σ, hσ, rfl⟩))
+    (fun σ hσ i ↦ hc.δ_succ (by omega) (U.subset_faceClosure A ⟨σ, hσ, rfl⟩) i)
+  rw [freeComplex_d_app] at hz
+  change U.chainBoundary W n z' = 0 at hz
+  rw [hz, Finsupp.mapDomain_zero, add_zero] at key
+  exact (U.freeComplex_d_app (n + 1) W' _).trans key
+
+/-- **The free resolution of a hypercover, degree `0`.** Let `U` be a hypercover of a terminal
+object `T`. Every chain of `ℤ[U_0]` in the kernel of the augmentation `ℤ[U_0] → ℤ[T]` is locally
+a boundary. (blueprint: `lem-weil-pbc-hypercover-free-resolution`) -/
+theorem IsHypercover.freeComplex_locallyExact_zero
+    (hU : (U.augmentOfIsTerminal hT).IsHypercover J) {W : C}
+    (z : ((freeComplex U).X 0).obj (op W))
+    (hz : (freeFunctor.map (hT.from (U _⦋0⦌))).app (op W) z = 0) :
+    ∃ R ∈ J W, ∀ ⦃W' : C⦄ (g : W' ⟶ W), R g →
+      ∃ b : ((freeComplex U).X 1).obj (op W'),
+        ((freeComplex U).d 1 0).app (op W') b = ((freeComplex U).X 0).map g.op z := by
+  classical
+  let z' : ULift.{w} (W ⟶ U _⦋0⦌) →₀ ℤ := z
+  have haug : aug (U _⦋0⦌) W z' = 0 := by
+    rw [← aug_mapDomain_comp (hT.from (U _⦋0⦌))]
+    exact (congrArg (aug T W) hz).trans (map_zero _)
+  let A : Set (W ⟶ U _⦋0⦌) :=
+    (fun σ : ULift.{w} (W ⟶ U _⦋0⦌) ↦ σ.down) '' (↑z'.support : Set _)
+  refine ⟨coneSieve (U.faceClosure A) 1,
+    hU.coneSieve_mem _ (U.faceClosure_δ A)
+      (fun m ↦ U.faceClosure_finite (z'.support.finite_toSet.image _) m) _,
+    fun W' g ⟨v, h, hc⟩ ↦ ⟨Finsupp.mapDomain (fun σ ↦ ULift.up (h 0 σ.down)) z', ?_⟩⟩
+  have key := U.chainBoundary_cone_zero g v (h 0) z'
+    (fun σ hσ ↦ hc.δ_zero (by omega) (U.subset_faceClosure A ⟨σ, hσ, rfl⟩))
+    (fun σ hσ ↦ hc.δ_one (by omega) (U.subset_faceClosure A ⟨σ, hσ, rfl⟩))
+  rw [haug, Finsupp.single_zero, sub_zero] at key
+  exact (U.freeComplex_d_app 0 W' _).trans key
+
+/-- The augmentation `ℤ[U_0] → ℤ[T]` of a hypercover of a terminal object `T` is locally
+surjective. (blueprint: `lem-weil-pbc-hypercover-free-resolution`) -/
+theorem IsHypercover.freeAugmentation_locallySurjective
+    (hU : (U.augmentOfIsTerminal hT).IsHypercover J) {W : C}
+    (z : (freeFunctor.obj T).obj (op W)) :
+    ∃ R ∈ J W, ∀ ⦃W' : C⦄ (g : W' ⟶ W), R g →
+      ∃ b : ((freeComplex U).X 0).obj (op W'),
+        (freeFunctor.map (hT.from (U _⦋0⦌))).app (op W') b = (freeFunctor.obj T).map g.op z := by
+  refine ⟨_, hU.liftSieveZero_mem (hT.from W), fun W' g ⟨y, _⟩ ↦
+    ⟨Finsupp.single (ULift.up y) (aug T W z), ?_⟩⟩
+  have key (x : ULift.{w} (W' ⟶ T) →₀ ℤ) (p : ULift.{w} (W' ⟶ T)) : x p = aug T W' x := by
+    rw [aug, Finsupp.liftAddHom_apply, Finsupp.sum_eq_single p
+      (fun b _ hb ↦ absurd (ULift.ext _ _ (hT.hom_ext _ _)) hb) (fun _ ↦ rfl)]
+    rfl
+  change (Finsupp.mapDomain (fun σ ↦ ULift.up (σ.down ≫ hT.from (U _⦋0⦌)))
+      (Finsupp.single (ULift.up y) (aug T W z)) : ULift.{w} (W' ⟶ T) →₀ ℤ) =
+    Finsupp.mapDomain (fun σ ↦ ULift.up (g ≫ σ.down)) z
+  refine Finsupp.ext fun p ↦ ?_
+  rw [key, key _ p, Finsupp.mapDomain_single, InjectiveCocycle.aug_mapDomain]
+  simp [aug]
+
 end Augmented
 
 end SimplicialObject
+
+namespace Presheaf
+
+/-- In an abelian category, a morphism `φ : P ⟶ I` to an injective object extends along
+`f : P ⟶ Q` as soon as it vanishes on the kernel of `f`. -/
+lemma _root_.CategoryTheory.Injective.exists_comp_eq_of_kernel_ι_comp {𝒜 : Type*}
+    [Category* 𝒜] [Abelian 𝒜] {P Q I : 𝒜} [Injective I] (f : P ⟶ Q) (φ : P ⟶ I)
+    (h : kernel.ι f ≫ φ = 0) : ∃ b : Q ⟶ I, f ≫ b = φ := by
+  have hf : kernel.ι (Abelian.factorThruImage f) ≫ f = 0 := by
+    calc kernel.ι (Abelian.factorThruImage f) ≫ f =
+        kernel.ι (Abelian.factorThruImage f) ≫ Abelian.factorThruImage f ≫ Abelian.image.ι f := by
+          rw [Abelian.image.fac]
+      _ = 0 := by rw [← Category.assoc, kernel.condition, zero_comp]
+  have hk : kernel.ι (Abelian.factorThruImage f) ≫ φ = 0 := by
+    rw [← kernel.lift_ι f _ hf, Category.assoc, h, comp_zero]
+  refine ⟨Injective.factorThru (Abelian.epiDesc _ φ hk) (Abelian.image.ι f), ?_⟩
+  calc f ≫ Injective.factorThru (Abelian.epiDesc _ φ hk) (Abelian.image.ι f) =
+      (Abelian.factorThruImage f ≫ Abelian.image.ι f) ≫
+        Injective.factorThru (Abelian.epiDesc _ φ hk) (Abelian.image.ι f) := by
+          rw [Abelian.image.fac]
+    _ = φ := by rw [Category.assoc, Injective.comp_factorThru, Abelian.comp_epiDesc]
+
+/-- A morphism `φ : P ⟶ I` to an injective presheaf extends along `f : P ⟶ Q` as soon as it
+vanishes on the kernel of `f`. -/
+lemma exists_comp_eq_of_injective {P Q I : Cᵒᵖ ⥤ AddCommGrpCat.{max w v}} [Injective I]
+    (f : P ⟶ Q) (φ : P ⟶ I) (h : ∀ W (y : P.obj W), f.app W y = 0 → φ.app W y = 0) :
+    ∃ b : Q ⟶ I, f ≫ b = φ := by
+  refine Injective.exists_comp_eq_of_kernel_ι_comp f φ ?_
+  ext W x
+  have h1 := ConcreteCategory.congr_hom (NatTrans.congr_app (kernel.condition f) W) x
+  simp only [NatTrans.comp_app, ConcreteCategory.comp_apply, NatTrans.app_zero] at h1 ⊢
+  exact (h W _ h1).trans (by simp)
+
+end Presheaf
+
+namespace Sheaf
+
+variable {J : GrothendieckTopology C}
+
+/-- A section of an abelian sheaf which vanishes locally is zero. -/
+lemma eq_zero_of_locally_eq_zero (F : Sheaf J AddCommGrpCat.{s}) {W : C}
+    (x : F.obj.obj (op W)) (R : Sieve W) (hR : R ∈ J W)
+    (h : ∀ ⦃W' : C⦄ (g : W' ⟶ W), R g → F.obj.map g.op x = 0) : x = 0 := by
+  have := (isSheaf_iff_isSheaf_of_type _ _).mp
+    (Presheaf.isSheaf_comp_of_isSheaf _ F.obj (CategoryTheory.forget AddCommGrpCat) F.property)
+  refine (this R hR).isSeparatedFor.ext fun W' g hg ↦ ?_
+  change F.obj.map g.op x = F.obj.map g.op 0
+  rw [h g hg, map_zero]
+
+end Sheaf
+
+namespace SimplicialObject.Augmented
+
+open Presheaf
+
+variable {J : GrothendieckTopology C} {U : SimplicialObject C} {T : C} {hT : IsTerminal T}
+  [HasSheafify J AddCommGrpCat.{max w v}]
+
+/-- For a hypercover `U` of a terminal object and an injective abelian sheaf `I`, the complex
+`C^•(U, I)` is exact in positive degrees: every cocycle of degree `n + 1` is a coboundary.
+(blueprint: `lem-weil-pbc-hypercover-free-resolution`) -/
+theorem IsHypercover.exists_cechComplex_d_eq_of_injective
+    (hU : (U.augmentOfIsTerminal hT).IsHypercover J) (I : Sheaf J AddCommGrpCat.{max w v})
+    [Injective I] (n : ℕ) (c : I.obj.obj (op (U _⦋n + 1⦌)))
+    (hc : (cechComplex U I.obj).d (n + 1) (n + 2) c = 0) :
+    ∃ b : I.obj.obj (op (U _⦋n⦌)), (cechComplex U I.obj).d n (n + 1) b = c := by
+  have : Injective I.obj := (sheafificationAdjunction J _).map_injective I inferInstance
+  obtain ⟨b, hb⟩ := Presheaf.exists_comp_eq_of_injective ((freeComplex U).d (n + 1) n)
+    (freeLift c) fun W y hy ↦ by
+      obtain ⟨R, hR, hRb⟩ := hU.freeComplex_locallyExact n (W := W.unop) y hy
+      refine Sheaf.eq_zero_of_locally_eq_zero I _ R hR fun W' g hg ↦ ?_
+      obtain ⟨b, hb⟩ := hRb g hg
+      have h1 := ConcreteCategory.congr_hom ((freeLift c).naturality g.op) y
+      have h2 := ConcreteCategory.congr_hom
+        (NatTrans.congr_app (U.freeComplex_d_comp_freeLift (n + 1) c) (op W')) b
+      simp only [ConcreteCategory.comp_apply] at h1 h2
+      change I.obj.map g.op ((freeLift c).app W y) = 0
+      rw [← h1]
+      change (freeLift c).app (op W') (((freeComplex U).X _).map g.op y) = 0
+      rw [← hb]
+      refine h2.trans ?_
+      change (freeLift ((cechComplex U I.obj).d (n + 1) (n + 2) c)).app _ b = 0
+      rw [hc, freeLift_eq_symm, map_zero]
+      rfl
+  refine ⟨freeHomAddEquiv _ b, (freeHomAddEquiv _).symm.injective ?_⟩
+  rw [← freeLift_eq_symm, ← freeLift_eq_symm, ← U.freeComplex_d_comp_freeLift,
+    freeLift_eq_symm, AddEquiv.symm_apply_apply, hb]
+
+/-- For a hypercover `U` of a terminal object and an injective abelian sheaf `I`, the complex
+`C^•(U, I)` is exact in positive degrees. (blueprint: `lem-weil-pbc-hypercover-free-resolution`)
+-/
+theorem IsHypercover.cechComplex_exactAt_of_injective
+    (hU : (U.augmentOfIsTerminal hT).IsHypercover J) (I : Sheaf J AddCommGrpCat.{max w v})
+    [Injective I] (n : ℕ) : (cechComplex U I.obj).ExactAt (n + 1) := by
+  rw [HomologicalComplex.exactAt_iff' _ n (n + 1) (n + 2) (by simp) (by simp),
+    ShortComplex.ab_exact_iff]
+  exact fun c hc ↦ hU.exists_cechComplex_d_eq_of_injective I n c hc
+
+/-- For a hypercover `U` of a terminal object `T` and an injective abelian sheaf `I`, the
+`0`-cocycles of `C^•(U, I)` are the restrictions of the sections over `T`.
+(blueprint: `lem-weil-pbc-hypercover-free-resolution`) -/
+theorem IsHypercover.exists_eq_of_cechComplex_d_zero_of_injective
+    (hU : (U.augmentOfIsTerminal hT).IsHypercover J) (I : Sheaf J AddCommGrpCat.{max w v})
+    [Injective I] (c : I.obj.obj (op (U _⦋0⦌))) (hc : (cechComplex U I.obj).d 0 1 c = 0) :
+    ∃ t : I.obj.obj (op T), I.obj.map (hT.from (U _⦋0⦌)).op t = c := by
+  have : Injective I.obj := (sheafificationAdjunction J _).map_injective I inferInstance
+  obtain ⟨b, hb⟩ := Presheaf.exists_comp_eq_of_injective (freeFunctor.map (hT.from (U _⦋0⦌)))
+    (freeLift c) fun W y hy ↦ by
+      obtain ⟨R, hR, hRb⟩ := hU.freeComplex_locallyExact_zero (W := W.unop) y hy
+      refine Sheaf.eq_zero_of_locally_eq_zero I _ R hR fun W' g hg ↦ ?_
+      obtain ⟨b, hb⟩ := hRb g hg
+      have h1 := ConcreteCategory.congr_hom ((freeLift c).naturality g.op) y
+      have h2 := ConcreteCategory.congr_hom
+        (NatTrans.congr_app (U.freeComplex_d_comp_freeLift 0 c) (op W')) b
+      simp only [ConcreteCategory.comp_apply] at h1 h2
+      change I.obj.map g.op ((freeLift c).app W y) = 0
+      rw [← h1]
+      change (freeLift c).app (op W') (((freeComplex U).X _).map g.op y) = 0
+      rw [← hb]
+      refine h2.trans ?_
+      rw [hc, freeLift_eq_symm, map_zero]
+      rfl
+  refine ⟨freeHomAddEquiv _ b, (freeHomAddEquiv _).symm.injective ?_⟩
+  rw [← freeLift_eq_symm, ← freeLift_eq_symm, ← freeFunctor_map_comp_freeLift,
+    freeLift_eq_symm, AddEquiv.symm_apply_apply, hb]
+
+/-- For a hypercover `U` of a terminal object `T` and an abelian sheaf `F`, restriction of
+sections along `U_0 → T` is injective. -/
+theorem IsHypercover.map_injective (hU : (U.augmentOfIsTerminal hT).IsHypercover J)
+    (F : Sheaf J AddCommGrpCat.{s}) :
+    Function.Injective (F.obj.map (hT.from (U _⦋0⦌)).op) := by
+  rw [injective_iff_map_eq_zero]
+  intro t ht
+  refine Sheaf.eq_zero_of_locally_eq_zero F t _ (hU.liftSieveZero_mem (hT.from T))
+    fun W' g hg ↦ ?_
+  obtain ⟨y, -⟩ := hg
+  have hy : g = y ≫ hT.from (U _⦋0⦌) := hT.hom_ext _ _
+  rw [hy, op_comp, Functor.map_comp, ConcreteCategory.comp_apply]
+  erw [ht]
+  exact map_zero _
+
+end SimplicialObject.Augmented
 
 end CategoryTheory
