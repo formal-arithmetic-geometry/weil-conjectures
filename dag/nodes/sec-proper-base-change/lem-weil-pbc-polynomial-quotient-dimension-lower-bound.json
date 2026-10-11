@@ -139,5 +139,23 @@
   "group": "E1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of E1; spot-checked by L: L read the three steps (paragraph after 00S9): a maximal ideal of T, ht(M) = m in the polynomial ring and the height bound ht(M/J) >= m - t, dimension at the closed point and supremum of local dimensions."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialQuotientDimensionLowerBound",
+  "declaration": "AlgebraicGeometry.sub_le_topologicalKrullDim_spec_mvPolynomial_quotient",
+  "file": "lean/Sheaf/RingTheory/PolynomialQuotientDimensionLowerBound.lean",
+  "statement": "theorem sub_le_topologicalKrullDim_spec_mvPolynomial_quotient (k : Type u) [Field k] (m t : ℕ) (htm : t ≤ m) (f : Fin t → MvPolynomial (Fin m) k) [Nontrivial (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f))] : ((m - t : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDim (Spec (CommRingCat.of (MvPolynomial (Fin m) k ⧸ Ideal.span (Set.range f))))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pqd1317",
+  "group": "F1",
+  "result": "pass",
+  "note": "k field (Type u, Field); m,t : ℕ with htm : t ≤ m (genuine); f : Fin t → MvPolynomial (Fin m) k; T = quotient by Ideal.span (Set.range f) written literally; T nonzero as Nontrivial (needed: empty Spec has dim ⊥); conclusion ((m - t : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDim (Spec (CommRingCat.of T)), same Spec/topologicalKrullDim form as landed sibling DimensionQuasiFiniteOverPolynomialAlgebra; edge cases t=0, m=t, m=t=0; no let, no existentials, no new nodes, only the item's lean record changed"
  }
 }
