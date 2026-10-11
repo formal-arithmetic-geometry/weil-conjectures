@@ -109,5 +109,24 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ktp3139 (reviewer sub-agent of L); spot-checked: Read packet whole. Statement matches Stacks 079R exactly. C4: def-pc-kflat-complex defines K-flat as Tot(F (x) K) acyclic for every acyclic F (acyclic factor on the left, as both steps use it); site-level definition specializes to the ringed space. Step 2 associativity: checked by hand with the convention of def-pc-tensor-complex-sheaves, d=d_F(x)1+(-1)^p 1(x)d_G: on M^a(x)K^b(x)L^c both iterated totals have differential d_M+(-1)^a d_K+(-1)^(a+b) d_L, so the identification is the termwise tensor associativity with no extra signs (tensor commutes with direct sums), elementary from the cited definition; C1 OK. D: Tot(M(x)K) acyclic by K, then L's K-flatness, then associativity, quantified over all M; no cycle. Class (b)/(d): no new nodes; read statements of lem-pc-kflat-closure, lem-pc-kflat-tensor-cone-two-out-of-three, lem-kun-kflat-criteria and listed all *kflat* nodes: none states the tensor product of K-flat complexes. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatTensorProduct",
+  "declaration": "CochainComplex.IsKFlat.mapBifunctor",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatTensorProduct.lean",
+  "statement": "theorem IsKFlat.mapBifunctor (K L : CochainComplex (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology (X : Type u)) (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)) ℤ) (hK : K.IsKFlat) (hL : L.IsKFlat) : (mapBifunctor K L (curriedTensor _)).IsKFlat",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ktp0804"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ktp0804",
+  "group": "G1",
+  "result": "fix",
+  "note": "ringed space (X,O_X) -> X : SheafedSpace, R = X.sheaf (fixed from arbitrary site); K, L arbitrary complexes; hK hL = landed CochainComplex.IsKFlat; conclusion IsKFlat of mapBifunctor K L (curriedTensor _) with SheafOfModules.monoidalCategory as in KFlat.lean / def-pc-tensor-complex-sheaves; universes u; docstring both proof steps"
  }
 }
