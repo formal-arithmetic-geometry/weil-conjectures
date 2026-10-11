@@ -187,5 +187,24 @@
   "worker": "stage1",
   "summary": "Split following Stacks 00OB and its proof, read in algebra.tex lines 27072-27093 with the cited 0CXF (26702), 00MT (24608), 00N1 (24834), 00LK (17814). Five steps: (1) a finite free resolution of length pd with all matrix coefficients in m, from lem-weil-pbc-minimal-finite-free-resolution-local (0CXF + 00MT, created by the parallel item 00OA and cited, not duplicated); (2) pd <= n, the last nonzero index; (3) Buchsbaum-Eisenbud for the last map (new node lem-weil-pbc-exact-free-complex-last-minors-regular-sequence, 00N1 (1)=>(2)(b), i = e only); (4) the minors lie in m, so depth R >= n; (5) 00LK with M = R and Supp R = Spec R. Statement corrected: the clause 'in particular dim R is finite' does not follow (finiteness of dim R is Krull's theorem, which both citers take from lem-weil-pbc-noetherian-local-system-of-parameters); replaced by 'if dim R is finite, kappa has a projective resolution of length <= dim R'; stmt_deps gains def-weil-pbc-krull-dimension-ring. Stacks' 'so that the projective dimension of kappa is n' is used only as pd <= n."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00OB: minimal finite free resolution (today's node), the ideal of maximal minors of the last map lies in m and contains a regular sequence of length n by Buchsbaum-Eisenbud 00N1 (1)=>(2)(b) (new unsplit node), depth ≤ dim by 00LK. The clause 'in particular dim R is finite' was removed by the worker (it does not follow; the citers take finiteness from the system-of-parameters node). No Mathlib match (no depth or Buchsbaum-Eisenbud in Mathlib)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Algebra 00OB: minimal finite free resolution (today's node), the ideal of maximal minors of the last map lies in m and contains a regular sequence of length n by Buchsbaum-Eisenbud 00N1 (1)=>(2)(b) (new unsplit node), depth ≤ dim by 00LK. The clause 'in particular dim R is finite' was removed by the worker (it does not follow; the citers take finiteness from the system-of-parameters node). No Mathlib match (no depth or Buchsbaum-Eisenbud in Mathlib).",
+ "lean": {
+  "module": "Sheaf.RingTheory.ResidueFieldProjectiveDimension",
+  "declaration": "Ring.residueField_projectiveDimension_le_ringKrullDim",
+  "statement": "lemma residueField_projectiveDimension_le_ringKrullDim (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] (h : ModuleCat.HasFiniteProjectiveDimension (ModuleCat.of R (IsLocalRing.ResidueField R))) : (ModuleCat.projectiveDimension (ModuleCat.of R (IsLocalRing.ResidueField R)) h : WithBot ℕ∞) ≤ ringKrullDim R ∧ ∀ D : ℕ, ringKrullDim R = (D : WithBot ℕ∞) → ModuleCat.HasProjectiveResolutionLE (ModuleCat.of R (IsLocalRing.ResidueField R)) D",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/RingTheory/ResidueFieldProjectiveDimension.lean",
+  "fixed_by": "R-pdk"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pdk",
+  "group": "K1",
+  "result": "fix",
+  "note": "R CommRing Type u, IsLocalRing (nontrivial, unique m), IsNoetherianRing, kappa = IsLocalRing.ResidueField R (was hand-written R/m, STATE RESIDUE FIELD), h finite pd, pd <= ringKrullDim, finite-dim clause HasProjectiveResolutionLE D"
+ }
 }
