@@ -577,11 +577,10 @@ theorem exists_prepared_keyDisjoint_isIso_near_twoOpenSide [IsNoetherian S] (u :
     keyDisjoint_of_comparisonBoundary_subset h₂ hB, N, hN, hiso⟩
 
 /--
-info: 'AlgebraicGeometry.exists_prepared_keyDisjoint_isIso_near_twoOpenSide' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
+info: 'AlgebraicGeometry.exists_prepared_keyDisjoint_isIso_near_twoOpenSide' depends on
+  axioms: [propext, Classical.choice, Quot.sound]
 -/
-#guard_msgs in
+#guard_msgs (whitespace := lax) in
 #print axioms exists_prepared_keyDisjoint_isIso_near_twoOpenSide
 
 end AlgebraicGeometry
