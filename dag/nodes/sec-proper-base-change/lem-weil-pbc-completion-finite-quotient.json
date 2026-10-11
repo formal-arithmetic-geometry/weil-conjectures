@@ -213,5 +213,23 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps (proof_origin agent; the source 07PR only asserts the identity): C free of rank p over R (monic-quotient leaf), integral; n the only prime over m (two integral leaves); localizing a local ring at its maximal ideal changes nothing; 07N9 node with one prime gives R^ (x)_R C = C^; base change of the presentation (leaf) gives R^[z]/(z^p - iota(f)); compatibility with the maps from R[z] by the universal property. Statement: local ring defined inline, iota(f) on the completed side, the tensor-product form added (used by the citer). Stage-3 note: citer helper-g-ring-char-p step 3 leaves the cancellation (B_r)^ (x)_{B_r} (B_r (x)_B C) = (B_r)^ (x)_B C implicit."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletionFiniteQuotient",
+  "declaration": "AdicCompletion.completion_finite_quotient",
+  "file": "lean/Sheaf/RingTheory/CompletionFiniteQuotient.lean",
+  "statement": "theorem completion_finite_quotient (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (p : ℕ) (hp : 1 ≤ p) (f : R) [IsLocalRing (AdjoinRoot (X ^ p - C f))] : let S := AdjoinRoot (X ^ p - C f) let m := IsLocalRing.maximalIdeal R let n := IsLocalRing.maximalIdeal S let Rhat := AdicCompletion m R let Shat := AdicCompletion n S let ι := algebraMap R Rhat let ιS := algebraMap S Shat let φ := algebraMap R S ∃ g : Rhat →+* Shat, (∀ (a : Rhat) (k : ℕ) (r : R), evalₐ m k a = Ideal.Quotient.mk (m ^ k) r → evalₐ n k (g a) = Ideal.Quotient.mk (n ^ k) (φ r)) ∧ (∃ θ : AdjoinRoot (X ^ p - C (ι f)) ≃+* Shat, ∀ q : R[X], θ (AdjoinRoot.mk _ (Polynomial.map ι q)) = ιS (AdjoinRoot.mk _ q)) ∧ (∃ γ : (Rhat ⊗[R] S) ≃+* Shat, ∀ (a : Rhat) (c : S), γ (a ⊗ₜ[R] c) = g a * ιS c)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfq1505",
+  "group": "F1",
+  "result": "pass",
+  "note": "Noetherian local (R,m) as IsNoetherianRing+IsLocalRing/maximalIdeal; p>=1 as ℕ with 1≤p; C=AdjoinRoot(X^p-C f) (literally R[X]/span) with C local as instance, n its maximalIdeal; completions AdicCompletion m R / n S with algebraMap; R^-action g pinned levelwise via evalₐ (unique, = induced R/m^k→C/n^k); θ ring iso compatible with all of R[z]; γ ring iso with a⊗c↦g a*ιS c (both algebra compatibilities); ofTensorProductEquivOfFiniteNoetherian is m-adic linear only → existing:false right"
  }
 }
