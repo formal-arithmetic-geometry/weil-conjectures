@@ -22,7 +22,8 @@
   "def-pc-scheme",
   "def-pc-derived-category",
   "def-pur-pseudo-coherent-complex",
-  "def-pc-perfect-complex"
+  "def-pc-perfect-complex",
+  "def-pc-finite-tor-dimension"
  ],
  "proof": [
   {
@@ -137,5 +138,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pft2512 (reviewer sub-agent of L); spot-checked: Item vs Tag 08CQ and citer lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect Step 3/4 (global Tor amplitude [a,b] over all O_S-modules: hypotheses match, C4 ok); ring node vs Tag 0658 (real lemma, more general than lem-weil-bounded-finite-tor-perfect, not class b/c/d). FIX more, RETURN less: C1 in Step 2 (missed by the second reading): lem-pc-affine-qcoh-derived-equivalence only gives D(A) ~ D_QCoh and states neither that pseudo-coherent K|U corresponds to a pseudo-coherent R-complex (Tag 08E7) nor that sheaf Tor amplitude equals R-module Tor amplitude (Tag 08EA); repaired by taking K|V = tilde(P) for a bounded-above finite free R-complex P directly from def-pur-pseudo-coherent-complex and lem-weil-pbc-spec-module-tilde-sections, transferring Tor amplitude via lem-pc-affine-derived-pullback-tensor-tilde parts (1) and (3) (generic affine tensor tool, C7, declared as tool use) and exactness of tilde, Step 3 made explicit; dropped the now unused tool use lem-pc-affine-qcoh-derived-equivalence; proof_deps corrected.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension",
+  "declaration": "AlgebraicGeometry.Scheme.isPerfect_of_isPseudoCoherent_of_hasFiniteTorDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectOfPseudoCoherentFiniteTorDimension.lean",
+  "statement": "theorem isPerfect_of_isPseudoCoherent_of_hasFiniteTorDimension (S : Scheme.{uP}) [HasDerivedCategory.{wP} (SheafOfModules.{uP} (moduleRings S.toRingedSpace))] [∀ U : S.Opens, HasDerivedCategory.{wP} (SheafOfModules.{uP} ((moduleRings S.toRingedSpace).over U))] (K : schemeDerivedCategory S) (hK : IsPseudoCoherent S K) (hTor : HasFiniteTorDimension S K) : IsPerfect S K",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pft1540"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pft1540",
+  "group": "H1",
+  "result": "fix",
+  "note": "Item vs Tag 08CQ (global finite Tor specialization of the locally finite clause, valid one-way): S Scheme.{uP}; K : schemeDerivedCategory S with shared HasDerivedCategory.{wP} binders (per-open binder required by IsPseudoCoherent/IsPerfect, not hollow); hK = Scheme.IsPseudoCoherent (M1); hTor = new HasFiniteTorDimension; conclusion Scheme.IsPerfect (M1). New def-pc-finite-tor-dimension vs 08CG(1)(2): ∃ a ≤ b, ∀ F : SheafOfModules.{u} (same universe as X, checked with pp.universes), ∀ i ∉ [a,b], schemeDerivedTensorCohomologyVanishes (E1, no derived monoidal); bounds uniform before F; same inline form as landed torAmplitude_of_quasiCoherent_tests / perfect_hypercohomology_gap and the body of J1's HasLocallyFiniteTorDimension (distinct global notion, not H12). FIX: renamed IsFiniteTorDimension -> HasFiniteTorDimension and theorem to ..._of_hasFiniteTorDimension to match sibling HasLocallyFiniteTorDimension word for word; combined file compiled in L sandbox."
  }
 }

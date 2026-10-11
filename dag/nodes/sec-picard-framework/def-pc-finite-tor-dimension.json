@@ -1,0 +1,111 @@
+{
+ "id": "def-pc-finite-tor-dimension",
+ "kind": "definition",
+ "title": "Finite Tor dimension on a scheme",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $E$ an object of $D(\\mathcal O_X)$ [def-pc-derived-category]. Then $E$ has finite Tor dimension if there exist integers $a\\le b$ such that for every sheaf $F$ of $\\mathcal O_X$-modules and every integer $i<a$ or $i>b$, $H^i(E\\otimes^{\\mathbf L}_{\\mathcal O_X}F)=0$ [def-pc-derived-tensor-cohomology-vanishes].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-tensor-cohomology-vanishes"
+ ],
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Definition 20.48.1 (Tag 08CG), parts (1) and (2)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite Tor dimension of a complex of sheaves of modules on a scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Tor dimension of a complex of sheaves of modules on a scheme",
+   "results": "8 hits: CategoryTheory.HasInjectiveDimensionLT.mk, SheafOfModules.IsFiniteType, HasInjectiveDimensionLE, hasInjectiveDimensionLT_iff, HasInjectiveDimensionLT.mk', HasProjectiveDimensionLT.mk, HasInjectiveDimensionLT, hasProjectiveDimensionLT_iff; none defines finite Tor dimension on schemes.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTor|FiniteTor|torAmplitude|TorDimension",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg finiteTorAmplitude|IsFiniteTorDimension lean/Sheaf and WeilConjectures/AlgebraicGeometry; rg finite Tor dimension dag/nodes; blueprint_refs.py search finite Tor",
+   "results": "No scheme O_X finite Tor dimension predicate. Generic DerivedCategory.finiteTorAmplitude requires derived monoidal instances unavailable on scheme modules; coefficient-site notions concern different categories. DAG/blueprint definitions concern etale/proetale coefficients, not O_X modules. Existing derived tensor vanishing predicate reused.",
+   "date": "2026-10-11",
+   "verdict": "no exact scheme notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pc-pseudo-coherent-finite-tor-perfect",
+  "date": "2026-10-11",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08EV proof: finite Tor dimension together with pseudo-coherence implies perfectness",
+   "via": [
+    "lem-pc-pseudo-coherent-finite-tor-perfect",
+    "lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect",
+    "lem-pc-proper-perfect-direct-image-perfect",
+    "lem-sc-smooth-proper-tensor-direct-sums",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTorDimension",
+  "declaration": "AlgebraicGeometry.Scheme.HasFiniteTorDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTorDimension.lean",
+  "statement": "def HasFiniteTorDimension (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (E : schemeDerivedCategory X) : Prop",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-pft1540"
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pft1540",
+  "group": "H1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pft1540",
+  "group": "H1",
+  "result": "fix",
+  "note": "Item vs Tag 08CQ (global finite Tor specialization of the locally finite clause, valid one-way): S Scheme.{uP}; K : schemeDerivedCategory S with shared HasDerivedCategory.{wP} binders (per-open binder required by IsPseudoCoherent/IsPerfect, not hollow); hK = Scheme.IsPseudoCoherent (M1); hTor = new HasFiniteTorDimension; conclusion Scheme.IsPerfect (M1). New def-pc-finite-tor-dimension vs 08CG(1)(2): ∃ a ≤ b, ∀ F : SheafOfModules.{u} (same universe as X, checked with pp.universes), ∀ i ∉ [a,b], schemeDerivedTensorCohomologyVanishes (E1, no derived monoidal); bounds uniform before F; same inline form as landed torAmplitude_of_quasiCoherent_tests / perfect_hypercohomology_gap and the body of J1's HasLocallyFiniteTorDimension (distinct global notion, not H12). FIX: renamed IsFiniteTorDimension -> HasFiniteTorDimension and theorem to ..._of_hasFiniteTorDimension to match sibling HasLocallyFiniteTorDimension word for word; combined file compiled in L sandbox."
+ }
+}
