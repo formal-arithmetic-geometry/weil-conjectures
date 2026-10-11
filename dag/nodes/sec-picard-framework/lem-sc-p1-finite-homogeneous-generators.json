@@ -105,5 +105,23 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-phg (reviewer sub-agent of L); spot-checked: Source: blueprint master sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md (the file is present in this checkout, contrary to the report's Wanted note); its proof takes F_0 -> M from the graded syzygy theorem without spelling out the generators, so proof_origin by agent is right. Statement unchanged (only proof, proof_deps, proof_origin, status, split_report changed; one commit, only the item's node and report). Step 1: finite generation plus finite homogeneous expansion of each generator gives a finite homogeneous generating set (elementary, M=0 covered). Step 2: def-weil-pbc-proj-twisting-sheaf (2) states M(d)_n=M_{d+n}; with d=-d_j, S(-d_j)_n=S_{n-d_j}, so 1 sits in degree d_j and s m_j in M_n: the map is graded S-linear, checked also for negative d_j (S_{n-d_j}=0 for n<d_j). Step 3: image is the span, = M by step 1. No new nodes, no leaves, no tool uses. Small cases M=0, M=S, M=S(-1), M=k=S/(x_0,x_1) (generator 1 in degree 0, F_0=S) checked. Start 2026-10-10 15:39:32 UTC, end Sat Oct 10 03:39:44 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteHomogeneousGenerators",
+  "declaration": "MvPolynomial.exists_finite_homogeneous_generators",
+  "file": "lean/Sheaf/RingTheory/FiniteHomogeneousGenerators.lean",
+  "statement": "theorem exists_finite_homogeneous_generators {k : Type u} [Field k] {M : Type v} [AddCommGroup M] [Module (MvPolynomial (Fin 2) k) M] [Module.Finite (MvPolynomial (Fin 2) k) M] (ℳ : ℤ → AddSubgroup M) (hℳ : DirectSum.IsInternal ℳ) (hsmul : ∀ (n : ℕ) (j : ℤ) (s : MvPolynomial (Fin 2) k) (x : M), s ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℳ j → s • x ∈ ℳ ((n : ℤ) + j)) : ∃ (r : ℕ) (d : Fin r → ℤ) (m : Fin r → M) (hm : ∀ i, m i ∈ ℳ (d i)) (f : (Fin r →₀ MvPolynomial (Fin 2) k) →ₗ[MvPolynomial (Fin 2) k] M), Function.Surjective f ∧ (∀ i, f (Finsupp.single i 1) = m i) ∧ (∀ (i : Fin r) (n : ℕ) (s : MvPolynomial (Fin 2) k), s ∈ homogeneousSubmodule (Fin 2) k n → f (s • Finsupp.single i 1) ∈ ℳ ((n : ℤ) + d i))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "J1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
