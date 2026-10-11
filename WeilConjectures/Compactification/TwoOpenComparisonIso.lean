@@ -175,7 +175,7 @@ def pullbackIsoComparisonFstPreimage :
     pullback σ₁.ψ σ₂.ψ ≅ (comparisonFst σ₁ σ₂ ⁻¹ᵁ σ₁.V).toScheme :=
   IsOpenImmersion.isoOfRangeEq (comparisonMap σ₁ σ₂).toImage
     (comparisonFst σ₁ σ₂ ⁻¹ᵁ σ₁.V).ι
-    (by rw [Scheme.Opens.range_ι, range_toImage_comparisonMap] <;> rfl)
+    (by rw [Scheme.Opens.range_ι, range_toImage_comparisonMap]; rfl)
 
 /-- The canonical isomorphism `V₁ ×_U V₂ ≅ p₂⁻¹(V₂)` (blueprint:
 `lemma-nagata-key-boundary-disjointness`, part (2)). -/
@@ -183,7 +183,7 @@ def pullbackIsoComparisonSndPreimage :
     pullback σ₁.ψ σ₂.ψ ≅ (comparisonSnd σ₁ σ₂ ⁻¹ᵁ σ₂.V).toScheme :=
   IsOpenImmersion.isoOfRangeEq (comparisonMap σ₁ σ₂).toImage
     (comparisonSnd σ₁ σ₂ ⁻¹ᵁ σ₂.V).ι
-    (by rw [Scheme.Opens.range_ι, range_toImage_comparisonMap_snd] <;> rfl)
+    (by rw [Scheme.Opens.range_ι, range_toImage_comparisonMap_snd]; rfl)
 
 @[reassoc (attr := simp)]
 lemma pullbackIsoComparisonFstPreimage_hom_ι :
@@ -281,7 +281,6 @@ comparison space along the blow-up is quasi-compact. -/
 lemma quasiCompact_strictTransformOpen_comparisonFst_ι :
     QuasiCompact (strictTransformOpen (comparisonFst σ₁ σ₂) B.I.blowupMap B.preservedOpen).ι := by
   have := σ₁.isNoetherian_X
-  have := (σ₁.admissibleBlowup B).isNoetherian_X
   have := isProper_comparisonFst σ₁ σ₂
   have := B.isProper_blowupMap
   have hX' : IsNoetherian B.I.blowup := (σ₁.admissibleBlowup B).isNoetherian_X
@@ -576,5 +575,13 @@ theorem exists_prepared_keyDisjoint_isIso_near_twoOpenSide [IsNoetherian S] (u :
     exists_admissibleBlowup_isIso_comparisonFst_near_forbiddenBoundary σ₁ σ₂ hcov
   exact ⟨σ₁, σ₂, B, h₁, h₂, TwoOpenSide.Prepared.admissibleBlowup σ₁ B h₁,
     keyDisjoint_of_comparisonBoundary_subset h₂ hB, N, hN, hiso⟩
+
+/--
+info: 'AlgebraicGeometry.exists_prepared_keyDisjoint_isIso_near_twoOpenSide' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+-/
+#guard_msgs in
+#print axioms exists_prepared_keyDisjoint_isIso_near_twoOpenSide
 
 end AlgebraicGeometry
