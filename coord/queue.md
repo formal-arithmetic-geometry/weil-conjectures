@@ -1,11 +1,11 @@
 # Work queue
 
-966 items; claim with `tools/claim.py next <group> [--stage N]`.
+959 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (966)
+## Stage 2: nodes to state (959)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -43,29 +43,22 @@
 | `lem-sc-hilbert-denominator-ideal-nowhere-dense` | 1 | state |
 | `lem-sc-hilbert-embedded-points-affine-localization` | 1 | state |
 | `lem-sc-invert-s-cohomology-separated-induction` | 1 | state |
-| `lem-sc-krull-akizuki-noetherian` | 1 | state |
 | `lem-sc-lfp-field-extension-pointwise-descent` | 1 | state |
 | `lem-sc-local-domain-dim-one-principal-localization-fraction-field` | 1 | state |
 | `lem-sc-p1-ext-locally-free-naturality` | 1 | state |
-| `lem-sc-p1-ext-resolution-derived-connecting` | 1 | state |
 | `lem-sc-p1-ext-yoneda-associativity` | 1 | state |
 | `lem-sc-p1-minimal-presentation-tor` | 1 | state |
 | `lem-sc-p1-proj-degreezero-localization-exact` | 1 | state |
 | `lem-sc-p1-tor-dimension-shift-natural` | 1 | state |
 | `lem-sc-p1-tor-dimension-shifting` | 1 | state |
 | `lem-sc-pic-lift-closed-immersion-dim-le-one` | 1 | state |
-| `lem-sc-pic-proper-ntorsion` | 1 | state |
 | `lem-sc-picard-diagonal-locally-closed` | 1 | state |
 | `lem-sc-picard-h1-product-injective` | 1 | state |
 | `lem-sc-picard-locus-closed-valuation-criterion` | 1 | state |
 | `lem-sc-picard-locus-closed-valuation-triviality` | 1 | state |
 | `lem-sc-picard-product-open` | 1 | state |
-| `lem-sc-point-tangent-closed-fibre-singleton` | 1 | state |
-| `lem-sc-point-tangent-finite-local-cotangent-surjective` | 1 | state |
-| `lem-sc-positive-ample-hilbert-degree` | 1 | state |
 | `lem-sc-positive-dimensional-locally-algebraic-closed-points` | 1 | state |
 | `lem-sc-product-irreducible-components-bijection` | 1 | state |
-| `lem-sc-proj-standard-open-basis` | 1 | state |
 | `lem-sc-proper-dim-one-projective` | 1 | state |
 | `lem-sc-proper-flat-global-sections` | 1 | state |
 | `lem-sc-proper-flat-global-sections-criterion` | 1 | state |
