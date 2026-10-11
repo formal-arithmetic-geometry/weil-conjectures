@@ -190,5 +190,24 @@
   "by": "L",
   "result": "accepted",
   "note": "7 steps following Stacks 00MP: I = mS, M/IM flat over S/I; m (x)_R M -> I (x)_S M surjective; I (x)_S M -> M injective by flatness over R; M flat over S by the variant local criterion (00ML node, stated with the injectivity hypothesis so no Tor node is needed); M/m_S M nonzero by Nakayama; M faithfully flat over S (new exact Mathlib leaf, FaithfullyFlat/Basic.lean:63 verified by L); S flat over R by 039V (in place of Stacks' Tor computation, recorded in the step)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian",
+  "declaration": "Module.flat_and_flat_of_flat_fibre_noetherian",
+  "file": "lean/Sheaf/RingTheory/FlatAndFlatOfFlatFibreNoetherian.lean",
+  "statement": "theorem flat_and_flat_of_flat_fibre_noetherian (R : Type u) (S : Type v) (S' : Type w) (M : Type z) [CommRing R] [CommRing S] [CommRing S'] [IsNoetherianRing R] [IsNoetherianRing S] [IsNoetherianRing S'] [IsLocalRing R] [IsLocalRing S] [IsLocalRing S'] [Algebra R S] [Algebra S S'] [Algebra R S'] [IsScalarTower R S S'] [IsLocalHom (algebraMap R S)] [IsLocalHom (algebraMap S S')] [AddCommGroup M] [Module S' M] [Module S M] [Module R M] [IsScalarTower S S' M] [IsScalarTower R S M] [Module.Finite S' M] [Nontrivial M] (h_fibre : Module.Flat (S ⧸ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)) ((S ⧸ Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R)) ⊗[S] M)) [Module.Flat R M] : Module.Flat R S ∧ Module.Flat S M",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-cfn0951"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-cfn0951",
+  "group": "C1",
+  "result": "fix",
+  "note": "3x CommRing+IsNoetherianRing+IsLocalRing; IsLocalHom on both algebraMaps; towers R-S-S', S-S'-M, R-S-M; (1) Module.Finite S' M; (2) Nontrivial M; (3) fibre (S/mS)⊗_S M flat over S/mS; (4) Module.Flat R M; concl Flat R S ∧ Flat S M; spellings aligned to E1 fd047eff9"
  }
 }
