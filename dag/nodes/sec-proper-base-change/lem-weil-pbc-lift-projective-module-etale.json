@@ -177,5 +177,24 @@
   "by": "L",
   "result": "pass",
   "note": "Reviewed by the lead (opus-relaunch6). Seven steps along Stacks 07M5: projector lifted to M_n(A), B = A[x]/(charpoly) with Cayley-Hamilton (sec-zeta-weil Mathlib leaf as a tool), x(1-x) nilpotent modulo IB via primes of B and the characteristic polynomial of an idempotent over a field (new unsplit node), the idempotent e-bar = x^N/(x^N+(1-x)^N) with the inverse written out, 07M4 (existing node) lifts it over an etale A -> A', the lifted matrix reduces to p-bar, P' = Im(p) finite projective and compatible with base change (new unsplit node). Stacks typo noted (R/I for A/I). Tags verified by the worker (07M5, 07M4, 00DX)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LiftProjectiveModuleEtale",
+  "declaration": "AlgebraicGeometry.lift_finite_projective_module_etale",
+  "statement": "theorem lift_finite_projective_module_etale (A : Type u) [CommRing A] (I : Ideal A) (Pbar : Type v) [AddCommGroup Pbar] [Module (A ⧸ I) Pbar] [Module.Finite (A ⧸ I) Pbar] [Module.Projective (A ⧸ I) Pbar] : ∃ (A' : CommRingCat.{u}) (g : CommRingCat.of A ⟶ A'), letI : Algebra A A' := g.hom.toAlgebra; Etale (Spec.map g) ∧ ∃ α : A ⧸ I ≃+* A' ⧸ I.map (algebraMap A A'), (∀ a : A, α (Ideal.Quotient.mk I a) = Ideal.Quotient.mk _ (algebraMap A A' a)) ∧ ∃ (P' : Type u) (_ : AddCommGroup P') (_ : Module A' P'), Module.Finite A' P' ∧ Module.Projective A' P' ∧ letI : Algebra (A ⧸ I) (A' ⧸ I.map (algebraMap A A')) := α.toRingHom.toAlgebra; Nonempty ((P' ⧸ (I.map (algebraMap A A') • (⊤ : Submodule A' P'))) ≃ₗ[ A' ⧸ I.map (algebraMap A A')] ((A' ⧸ I.map (algebraMap A A')) ⊗[A ⧸ I] Pbar))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/LiftProjectiveModuleEtale.lean",
+  "fixed_by": "R-lpm1152"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lpm1152",
+  "group": "K1",
+  "result": "fix",
+  "note": "A comm ring, I ideal, Pbar Module.Finite+Module.Projective over A⧸I; A' CommRingCat.{u}, Algebra A A' tied to g, Etale (Spec.map g); alpha A⧸I ≃+* A'⧸IA' tied to induced map (fixed, was arbitrary bijection); P' finite projective A'-module; P'/IP' ≃ₗ[A'/IA'] (A'/IA') ⊗[A⧸I] Pbar via alpha (fixed, was ≃+ on P'⊗A'/IA')"
  }
 }

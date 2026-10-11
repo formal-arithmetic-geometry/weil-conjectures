@@ -4518,3 +4518,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:52 L: merged deliver/K1/lem-weil-pbc-module-stalk-filtered-colimit (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit AlgebraicGeometry.Scheme.Modules.module_stalk_filtered_colimit)
 - 11:52 L: merged deliver/J1/lem-weil-pbc-module-sheaves-colimits-forgetful (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful CategoryTheory.moduleSheaves_colimits_forgetful)
 - 11:53 L: merged deliver/J1/lem-weil-pbc-module-sheaf-colimit-constructible (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit AlgebraicGeometry.Scheme.exists_filtered_colimit_constructible)
+- 11:53 L: merged deliver/K1/lem-weil-pbc-lift-projective-module-etale (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.LiftProjectiveModuleEtale AlgebraicGeometry.lift_finite_projective_module_etale)
