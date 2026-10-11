@@ -23,9 +23,51 @@
   "def-weil-abstract-derived-category",
   "def-sp-injective-resolutions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each integer $n$, form the degree-$n$ Hom-cochain groups $\\operatorname{Hom}^n(X^\\bullet,I^\\bullet)=\\prod_p\\operatorname{Hom}_{\\mathcal A}(X^p,I^{p+n})$ for $X=A,B,C$, with differential $df=d_I\\circ f-(-1)^nf\\circ d_X$. Precomposition with $A^p\\to B^p\\to C^p$ gives, for each $p$ and $n$, a sequence $0\\to\\operatorname{Hom}(C^p,I^{p+n})\\to\\operatorname{Hom}(B^p,I^{p+n})\\to\\operatorname{Hom}(A^p,I^{p+n})\\to0$ which is exact: injectivity on the left because $B^p\\to C^p$ is an epimorphism; exactness in the middle because a map $B^p\\to I^{p+n}$ vanishing on $A^p$ factors through the cokernel $C^p$; surjectivity on the right because $A^p\\to B^p$ is a monomorphism and $I^{p+n}$ is injective [def-sp-injective-resolutions]. A product of short exact sequences of abelian groups is short exact, and precomposition with chain maps commutes with the Hom-complex differentials, so $0\\to\\operatorname{Hom}^\\bullet(C^\\bullet,I^\\bullet)\\to\\operatorname{Hom}^\\bullet(B^\\bullet,I^\\bullet)\\to\\operatorname{Hom}^\\bullet(A^\\bullet,I^\\bullet)\\to0$ is a short exact sequence of cochain complexes of abelian groups.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-characterize-K-injective, successor step: exactness of the Hom complexes"
+   }
+  },
+  {
+   "text": "Apply the long exact cohomology sequence for this short exact sequence of cochain complexes [lem-weil-pbc-complex-ses-homology-long-exact]. Its exactness at degree-zero cohomology gives an exact sequence from $H^0\\operatorname{Hom}^\\bullet(C^\\bullet,I^\\bullet)$ to $H^0\\operatorname{Hom}^\\bullet(B^\\bullet,I^\\bullet)$ to $H^0\\operatorname{Hom}^\\bullet(A^\\bullet,I^\\bullet)$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-characterize-K-injective, successor step: the displayed exact Hom sequence"
+   }
+  },
+  {
+   "text": "Two morphisms of complexes $f,g:X^\\bullet\\to I^\\bullet$ are homotopic if $f^p-g^p=d_I^{p-1}h^p+h^{p+1}d_X^p$ for some $h^p:X^p\\to I^{p-1}$, and $\\operatorname{Hom}_{K(\\mathcal A)}$ is the group of morphisms of complexes modulo homotopy [def-weil-abstract-derived-category]. By the formula for the Hom-complex differential, degree-zero cocycles are exactly the morphisms of complexes and degree-zero coboundaries $d h$ are exactly the null-homotopic maps. Therefore $H^0\\operatorname{Hom}^\\bullet(X^\\bullet,I^\\bullet)=\\operatorname{Hom}_{K(\\mathcal A)}(X^\\bullet,I^\\bullet)$ for $X=A,B,C$, compatibly with precomposition, and the exact sequence of Step 2 is the claimed exact sequence in the homotopy category.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Lemma lemma-characterize-K-injective, successor step: identification of H^0 Hom with homotopy classes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Lemma lemma-characterize-K-injective, successor step"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,15 +96,39 @@
    "results": "service unavailable",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "files mentioning HomotopyCategory and Injective, theorem/lemma lines with exact|shortExact (Mathlib)",
+   "results": "only InjectiveResolution.exact₀/exact_f_d, InjectivePresentation.shortExact_shortComplex, CochainComplex exactAt lemmas; no Hom_K exactness into a termwise injective complex",
+   "date": "2026-10-11",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-kinjective-characterize-K-injective",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-kinjective-homotopy-exact-injective-target",
+  "worker": "stage1",
+  "summary": "Successor-step exactness: degreewise exactness of Hom cochains into a termwise injective complex (elementary, from the definition of injective object), the long exact homology sequence at degree zero, and the elementary identification of H^0 of the Hom complex with homotopy classes. No project declaration or Mathlib theorem states the full target.",
+  "blueprint": "Realizes the successor-step clause of the ancestor proof in def-weil-derived-pullback-tensor-hom.",
+  "tool_uses": [],
+  "blueprint_check": "The child has no duplicate blueprint statement; blueprint_refs search for the Hom-complex exactness phrase returned no matches."
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hei0125",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hei0125 (reviewer sub-agent of L); spot-checked: Read packet; checked item vs Stacks successor step, Step 2 long-exact citation (Ab abelian, degree 0), Step 3 H^0 Hom = Hom_K (sign convention), citer 7e61b05ae uses it with shifts (C4 ok), no duplicate (grep injective-target/hom-exact), Mathlib grep HomotopyCategory+Injective: no match. FIX more, RETURN less: (1) B class (d): child lem-pur-kinjective-hom-complex-short-exact is elementary (definition of injective object + cokernel property + products), folded into Step 1 with elementary true citing def-sp-injective-resolutions, child dropped; (2) C4: Step 3 cited def-pur-kinjective-complex (sheaves of O-modules on a site) for a general abelian category; replaced by def-weil-abstract-derived-category with the homotopy formula stated in the step; proof_deps updated.; 1 file(s) fixed by the reviewer"
+ }
 }
