@@ -1,0 +1,199 @@
+/-
+Copyright (c) 2026 Weil conjectures project. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Weil conjectures project
+-/
+module
+
+public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Coherence
+
+/-!
+# Identity squares in a compact support formalism
+
+In a `AlgebraicGeometry.CompactSupportFormalism`, the base change and exchange maps of the
+squares with two identity sides are the identity isomorphisms `(𝟙 X)^* ≅ 𝟭`, `(𝟙 X)_* ≅ 𝟭` and
+`(𝟙 X)_! ≅ 𝟭`, and the composition isomorphisms with an identity are the unitors.
+-/
+
+@[expose] public section
+
+universe w v u
+
+open CategoryTheory Limits TwoSquare
+
+namespace CategoryTheory
+
+variable {A B : Type*} [Category* A] [Category* B] {L : A ⥤ B} {R : B ⥤ A}
+
+/-- The mate of the unitor square `𝟭 ⋙ L ⟶ L ⋙ 𝟭` is the unitor square `R ⋙ 𝟭 ⟶ 𝟭 ⋙ R`. -/
+lemma mateEquiv_unitors (adj : L ⊣ R) :
+    mateEquiv adj adj (TwoSquare.mk (𝟭 A) L L (𝟭 B)
+      ((Functor.leftUnitor L).hom ≫ (Functor.rightUnitor L).inv)) =
+      TwoSquare.mk R (𝟭 B) (𝟭 A) R ((Functor.rightUnitor R).hom ≫ (Functor.leftUnitor R).inv) := by
+  ext X
+  simp
+
+/-- The mate of the unitor square `L ⋙ 𝟭 ⟶ 𝟭 ⋙ L` with respect to the identity adjunctions is
+the unitor square `𝟭 ⋙ L ⟶ L ⋙ 𝟭`. -/
+lemma mateEquiv_id_id_unitors (L : A ⥤ B) :
+    mateEquiv Adjunction.id Adjunction.id (TwoSquare.mk L (𝟭 A) (𝟭 B) L
+      ((Functor.rightUnitor L).hom ≫ (Functor.leftUnitor L).inv)) =
+      TwoSquare.mk (𝟭 A) L L (𝟭 B) ((Functor.leftUnitor L).hom ≫ (Functor.rightUnitor L).inv) := by
+  ext X
+  simp [Adjunction.id]
+
+end CategoryTheory
+
+namespace AlgebraicGeometry.CompactSupportFormalism
+
+variable (F : CompactSupportFormalism.{w, v, u})
+
+section Unit
+
+variable {X Y : Scheme.{u}}
+
+lemma pbComp'_id_left_hom (f : X ⟶ Y) :
+    (F.pbComp' (𝟙 X) f f (Category.id_comp f)).hom ≫
+        Functor.whiskerLeft (F.pb f) (F.pbId X).hom ≫ (Functor.rightUnitor (F.pb f)).hom =
+      𝟙 _ := by
+  ext M
+  simpa using F.pbComp'_id_left f f (Category.id_comp f) M
+
+lemma pbComp'_id_right_hom (f : X ⟶ Y) :
+    (F.pbComp' f (𝟙 Y) f (Category.comp_id f)).hom ≫
+        Functor.whiskerRight (F.pbId Y).hom (F.pb f) ≫ (Functor.leftUnitor (F.pb f)).hom =
+      𝟙 _ := by
+  ext M
+  simpa using F.pbComp'_id_right f f (Category.comp_id f) M
+
+lemma sqIso_eq {U' U Z' Z : Scheme.{u}} (t : U' ⟶ U) (l : U' ⟶ Z') (r : U ⟶ Z) (b : Z' ⟶ Z)
+    (w : t ≫ r = l ≫ b) (d : U' ⟶ Z) (hd₁ : t ≫ r = d) (hd₂ : l ≫ b = d) :
+    F.sqIso t l r b w = (F.pbComp' t r d hd₁).symm ≪≫ F.pbComp' l b d hd₂ := by
+  subst hd₁
+  rfl
+
+lemma pbComp'_id_left_inv_app (f : X ⟶ Y) (M : F.obj Y) :
+    (F.pbComp' (𝟙 X) f f (Category.id_comp f)).inv.app M = (F.pbId X).hom.app _ := by
+  rw [← cancel_epi ((F.pbComp' (𝟙 X) f f (Category.id_comp f)).hom.app M), Iso.hom_inv_id_app]
+  simpa using (congr_app (F.pbComp'_id_left_hom f) M).symm
+
+lemma pbComp'_id_right_hom_app (f : X ⟶ Y) (M : F.obj Y) :
+    (F.pbComp' f (𝟙 Y) f (Category.comp_id f)).hom.app M =
+      (F.pb f).map ((F.pbId Y).inv.app M) := by
+  rw [← cancel_mono ((F.pb f).map ((F.pbId Y).hom.app M)), ← Functor.map_comp,
+    Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+  simpa using congr_app (F.pbComp'_id_right_hom f) M
+
+lemma pbComp'_id_left_hom_app (f : X ⟶ Y) (M : F.obj Y) :
+    (F.pbComp' (𝟙 X) f f (Category.id_comp f)).hom.app M = (F.pbId X).inv.app _ := by
+  rw [← cancel_mono ((F.pbId X).hom.app _), Iso.inv_hom_id_app]
+  simpa using congr_app (F.pbComp'_id_left_hom f) M
+
+lemma pbComp'_id_right_inv_app (f : X ⟶ Y) (M : F.obj Y) :
+    (F.pbComp' f (𝟙 Y) f (Category.comp_id f)).inv.app M =
+      (F.pb f).map ((F.pbId Y).hom.app M) := by
+  rw [← cancel_epi ((F.pbComp' f (𝟙 Y) f (Category.comp_id f)).hom.app M), Iso.hom_inv_id_app,
+    pbComp'_id_right_hom_app, ← Functor.map_comp, Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id]
+  rfl
+
+/-- The square isomorphism of the square `𝟙 ≫ j = j ≫ 𝟙`. -/
+lemma sqIso_id_horiz_hom (j : X ⟶ Y) (w : 𝟙 X ≫ j = j ≫ 𝟙 Y) :
+    (F.sqIso (𝟙 X) j j (𝟙 Y) w).hom =
+      Functor.whiskerLeft (F.pb j) (F.pbId X).hom ≫ (Functor.rightUnitor _).hom ≫
+        (Functor.leftUnitor _).inv ≫ Functor.whiskerRight (F.pbId Y).inv (F.pb j) := by
+  rw [F.sqIso_eq _ _ _ _ w j (Category.id_comp j) (Category.comp_id j)]
+  ext M
+  simp [pbComp'_id_left_inv_app, pbComp'_id_right_hom_app]
+
+/-- The square isomorphism of the square `g ≫ 𝟙 = 𝟙 ≫ g`. -/
+lemma sqIso_id_vert_hom (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g) :
+    (F.sqIso g (𝟙 X) (𝟙 Y) g w).hom =
+      Functor.whiskerRight (F.pbId Y).hom (F.pb g) ≫ (Functor.leftUnitor _).hom ≫
+        (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft (F.pb g) (F.pbId X).inv := by
+  rw [F.sqIso_eq _ _ _ _ w g (Category.comp_id g) (Category.id_comp g)]
+  ext M
+  simp [pbComp'_id_left_hom_app, pbComp'_id_right_inv_app]
+
+end Unit
+
+
+section IdentitySquares
+
+variable {X Y : Scheme.{u}}
+
+/-- The base change map of the square `𝟙 ≫ j = j ≫ 𝟙` is the identity, up to `(𝟙)^* ≅ 𝟭`. -/
+lemma baseChange_id_horiz (j : X ⟶ Y) [IsOpenImmersion j] (w : 𝟙 X ≫ j = j ≫ 𝟙 Y) :
+    F.baseChange (𝟙 X) j j (𝟙 Y) w =
+      ((TwoSquare.mk (𝟭 _) (F.sh j) (F.sh j) (𝟭 _)
+        ((Functor.leftUnitor _).hom ≫ (Functor.rightUnitor _).inv)).whiskerTop
+          (F.pbId X).hom).whiskerBottom (F.pbId Y).inv := by
+  apply (mateEquiv (F.shAdj j) (F.shAdj j)).injective
+  rw [mateEquiv_whiskerTop_whiskerBottom, mateEquiv_unitors]
+  simp only [baseChange, Equiv.apply_symm_apply, F.sqIso_id_horiz_hom]
+  ext M
+  simp
+
+/-- The base change map of the square `g ≫ 𝟙 = 𝟙 ≫ g` is the identity, up to `(𝟙)_! ≅ 𝟭`. -/
+lemma baseChange_id_vert (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g) :
+    F.baseChange g (𝟙 X) (𝟙 Y) g w =
+      ((TwoSquare.mk (F.pb g) (𝟭 _) (𝟭 _) (F.pb g)
+        ((Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv)).whiskerLeft
+          (F.shId Y).inv).whiskerRight (F.shId X).hom := by
+  apply (mateEquiv (F.shAdj (𝟙 Y)) (F.shAdj (𝟙 X))).injective
+  rw [mateEquiv_conjugateEquiv_vcomp _ Adjunction.id, conjugateEquiv_mateEquiv_vcomp _
+    Adjunction.id, mateEquiv_id_id_unitors]
+  have h₁ : conjugateEquiv (F.shAdj (𝟙 Y)) Adjunction.id (F.shId Y).inv = (F.pbId Y).hom := by
+    simp [shId, conjugateIsoEquiv]
+  have h₂ : conjugateEquiv Adjunction.id (F.shAdj (𝟙 X)) (F.shId X).hom = (F.pbId X).inv := by
+    simp [shId, conjugateIsoEquiv]
+  rw [h₁, h₂]
+  simp only [baseChange, Equiv.apply_symm_apply, F.sqIso_id_vert_hom]
+  ext M
+  simp
+
+/-- The exchange map of the square `𝟙 ≫ j = j ≫ 𝟙` is the identity, up to `(𝟙)_* ≅ 𝟭`. -/
+lemma exchange_id_horiz (j : X ⟶ Y) [IsOpenImmersion j] (w : 𝟙 X ≫ j = j ≫ 𝟙 Y)
+    [IsIso (F.baseChange (𝟙 X) j j (𝟙 Y) w).natTrans] :
+    F.exchange (𝟙 X) j j (𝟙 Y) w =
+      ((TwoSquare.mk (𝟭 _) (F.sh j) (F.sh j) (𝟭 _)
+        ((Functor.leftUnitor _).hom ≫ (Functor.rightUnitor _).inv)).whiskerTop
+          (F.pfId X).hom).whiskerBottom (F.pfId Y).inv := by
+  have key : inv (F.baseChange (𝟙 X) j j (𝟙 Y) w).natTrans =
+      ((TwoSquare.mk (F.sh j) (𝟭 _) (𝟭 _) (F.sh j)
+        ((Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv)).whiskerLeft
+          (F.pbId X).inv).whiskerRight (F.pbId Y).hom := by
+    apply IsIso.inv_eq_of_hom_inv_id
+    rw [F.baseChange_id_horiz j w]
+    ext M
+    simp [← Functor.map_comp]
+  rw [exchange, key, mateEquiv_conjugateEquiv_vcomp _ Adjunction.id,
+    conjugateEquiv_mateEquiv_vcomp _ Adjunction.id, mateEquiv_id_id_unitors]
+  rfl
+
+/-- The exchange map of the square `g ≫ 𝟙 = 𝟙 ≫ g` is the identity, up to `(𝟙)_! ≅ 𝟭`. -/
+lemma exchange_id_vert (g : X ⟶ Y) (w : g ≫ 𝟙 Y = 𝟙 X ≫ g)
+    [IsIso (F.baseChange g (𝟙 X) (𝟙 Y) g w).natTrans] :
+    F.exchange g (𝟙 X) (𝟙 Y) g w =
+      ((TwoSquare.mk (F.pf g) (𝟭 _) (𝟭 _) (F.pf g)
+        ((Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv)).whiskerRight
+          (F.shId Y).hom).whiskerLeft (F.shId X).inv := by
+  have key : inv (F.baseChange g (𝟙 X) (𝟙 Y) g w).natTrans =
+      ((TwoSquare.mk (𝟭 _) (F.pb g) (F.pb g) (𝟭 _)
+        ((Functor.leftUnitor _).hom ≫ (Functor.rightUnitor _).inv)).whiskerTop
+          (F.shId Y).hom).whiskerBottom (F.shId X).inv := by
+    apply IsIso.inv_eq_of_hom_inv_id
+    rw [F.baseChange_id_vert g w]
+    ext M
+    simp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.whiskerTop,
+      TwoSquare.whiskerBottom, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app,
+      Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app, Category.id_comp,
+      Category.assoc, NatTrans.id_app, Functor.comp_obj, Functor.id_obj]
+    rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
+  rw [exchange, key, mateEquiv_whiskerTop_whiskerBottom, mateEquiv_unitors]
+
+end IdentitySquares
+
+end AlgebraicGeometry.CompactSupportFormalism
