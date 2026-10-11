@@ -125,5 +125,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-itn1758 (reviewer sub-agent of L); spot-checked: Steps 1-4 checked: repeated root from inseparability, g=(T-beta)Q with g^2=PQ (F1's correction is right) and deg g<deg P so class nonzero, quotient iso cited exactly from lem-weil-pbc-minimal-polynomial-quotient-field-iso, flatness over a field for Step 3. Mathlib grep (Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean: isGeometricallyReduced_field_iff, IsGeometricallyReduced.of_injective): no separability converse, no exact match, no leaf. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.InseparableTensorNilpotent",
+  "declaration": "FieldTheory.inseparable_tensorProduct_algebraicClosure_not_isReduced",
+  "file": "lean/Sheaf/FieldTheory/InseparableTensorNilpotent.lean",
+  "statement": "theorem inseparable_tensorProduct_algebraicClosure_not_isReduced (k K kbar : Type*) [Field k] [Field K] [Field kbar] [Algebra k K] [Algebra k kbar] [FiniteDimensional k K] [IsAlgClosure k kbar] (α : K) (hαinseparable : ¬ IsSeparable k α) : (∃ x : K ⊗[k] kbar, x ≠ 0 ∧ IsNilpotent x) ∧ ¬ IsReduced (K ⊗[k] kbar)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-itn0753"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-itn0753",
+  "group": "C1",
+  "result": "fix",
+  "note": "k,K fields, Algebra k K, FiniteDimensional (finite ext), kbar any IsAlgClosure (fixed from AlgebraicClosure k), alpha:K with ¬IsSeparable k alpha (minpoly inseparable, = M1 form), conclusion ∃x≠0 nilpotent ∧ ¬IsReduced (K⊗[k]kbar); dropped redundant IsAlgebraic; Mathlib grep GeometricallyReduced/Unramified.Field: no exact match"
  }
 }
