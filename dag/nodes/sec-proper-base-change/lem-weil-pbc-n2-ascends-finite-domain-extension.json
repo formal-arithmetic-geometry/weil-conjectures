@@ -178,5 +178,24 @@
   "worker": "stage1",
   "summary": "Read Algebra Lemma 032I (lemma-quasi-finite-over-Noetherian-japanese, algebra.tex 45202-45232) and the lemmas its finite case cites, 0308 (lemma-integral-closure-transitive, 7723, proof omitted) and 02JM (lemma-integral-permanence, 7710, proof omitted), and 00GK (lemma-finite-is-integral, 7470); tags verified in tags/tags. Six steps: embedding of fraction fields; L/K finite, written out for the finite case (the source cites 00PK (2) for the quasi-finite case) via the finite-dimensional domain lemma; M/K finite by the tower law; T_A finite over A by N-2; T_A = T_B (the case of 0308 needed, both inclusions, via finite-is-integral and integral transitivity); generators of T_A over A generate T_B over B (02JM (2), written out). Statement kept (the Noetherian hypothesis is unused in the finite case but is the source's). No new node. No slopmaster2 declaration (no Japanese/N-2 notion in WeilConjectures). Blueprint search ('N-2', 'N-2 finite extension', '032I', 'Japanese', 'integral closure finite extension'): no blueprint node states it, same_as [].",
   "blueprint": "All six steps serve the place of the blueprint node lem-weil-pbc-normal-constant-generic recorded in from.place (step 4 of its split, Tag 09Z5 proof of (1)), reached through the via chain at lem-weil-pbc-complete-local-nagata's use of 032I in the reduction of the proof of Algebra 032W to R = k[[X_1,...,X_d]] or Lambda[[X_1,...,X_d]]: the N-2 property passes from these power series rings to the complete local domain finite over them."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.N2AscendsFiniteDomainExtension",
+  "declaration": "isN2_of_finite_domain_extension",
+  "file": "lean/Sheaf/RingTheory/N2AscendsFiniteDomainExtension.lean",
+  "statement": "theorem isN2_of_finite_domain_extension (A : Type uA) (B : Type uB) (K : Type uK) (E : Type uE) [CommRing A] [IsDomain A] [CommRing B] [IsDomain B] [Algebra A B] [IsNoetherianRing A] [Module.Finite A B] [Field K] [Algebra A K] [IsFractionRing A K] [Field E] [Algebra B E] [IsFractionRing B E] (hAB : Function.Injective (algebraMap A B)) (hA : IsN2 A K) : IsN2 B E",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-n2a1203"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-n2a1203",
+  "group": "M1",
+  "result": "fix",
+  "note": "A,B domains (IsDomain); A⊆B = Algebra A B + injective algebraMap; B f.g. = Module.Finite A B; A Noetherian = IsNoetherianRing A; A N-2 = J1 IsN2 A K; conclusion IsN2 B E for every finite M/E; fraction fields K,E via IsFractionRing with separate universes as G1 99917e710 (test-field universes non-vacuous by cardinality transport); #check resolves root IsN2"
  }
 }

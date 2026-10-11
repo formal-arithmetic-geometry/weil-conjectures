@@ -4553,3 +4553,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:03 L: merged deliver/H1/lem-weil-pbc-module-stalk-exact (stage 2; reviewer FIX; first push; Sheaf.Algebra.Homology.ModuleStalkExact AlgebraicGeometry.RingedSpace.module_stalk_exact)
 - 12:03 L: merged deliver/F1/lem-weil-pbc-module-stalk-tensor (stage 2; reviewer PASS; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor SheafOfModules.stalkTensorIso; existing declaration)
 - 12:03 L: merged deliver/C1/lem-weil-pbc-nonvanishing-section-trivializes (stage 2; reviewer FIX; first push; Sheaf.Paper.NonvanishingSectionTrivializes AlgebraicGeometry.Scheme.Modules.nonvanishing_section_trivializes)
+- 12:04 L: merged deliver/M1/lem-weil-pbc-n2-ascends-finite-domain-extension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.N2AscendsFiniteDomainExtension isN2_of_finite_domain_extension)
