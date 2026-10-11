@@ -201,5 +201,23 @@
   "by": "L",
   "result": "accepted",
   "note": "4 steps following Algebra 00U5: S finitely presented hence of finite type (affine-etale leaf); the fibre ring etale over kappa(p) by the base-change leaf; a finite product of finite separable extensions (00U3 leaf), so Spec of the fibre is discrete (product-of-fields node); the prime over q is isolated, which is the DAG's definition of quasi-finite at q (00PM not needed). Statement unchanged. Mathlib candidate through the anonymous QuasiFinite instance recorded (B8)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.Etale.QuasiFiniteAtPrime",
+  "declaration": "Algebra.finiteType_and_isQuasiFiniteAtPrime_of_etale",
+  "file": "lean/Sheaf/RingTheory/Etale/QuasiFiniteAtPrime.lean",
+  "statement": "theorem finiteType_and_isQuasiFiniteAtPrime_of_etale (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] (h : AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R S)))) : ∃ hft : Algebra.FiniteType R S, letI := hft ∀ q : PrimeSpectrum S, Algebra.IsQuasiFiniteAtPrime R S q",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-eqf0958",
+  "group": "K1",
+  "result": "pass",
+  "note": "R S : Type u commutative rings, arbitrary ring map via algebraMap; Etale (Spec.map (ofHom algebraMap)) = def-weil-etale-morphism on Spec of the map; conclusion ∃ FiniteType (algebra generation) then ∀ q : PrimeSpectrum S, recorded Algebra.IsQuasiFiniteAtPrime (isolated fibre prime); no extra hypotheses; zero rings OK; common universe forced by Spec.map"
  }
 }
