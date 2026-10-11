@@ -222,8 +222,8 @@ finite-determinant hypotheses.
 
 A lisse Weil sheaf `ρ` has finite geometric determinant in the sense of `sk-d-weights` (the
 determinant character takes finitely many values on `π₁(C)`, by the finite geometric image
-theorem for its determinant line), and its determinant weight `dw_ι(ρ)` is the determinant
-weight `dw_{λ_ι}(ρ)` of `sk-d-weights` for the real weight character
+result applied to its determinant line), and its determinant weight `dw_ι(ρ)` is the
+determinant weight `dw_{λ_ι}(ρ)` of `sk-d-weights` for the real weight character
 `λ_ι(a) = 2 log |ι a| / log q` (`AlgebraicGeometry.WeilGroup.weightCharacter`) and the degree
 one element `γ`. -/
 theorem hasFiniteGeometricDet_and_detWeight_eq (hρ : W.IsLisse l ρ) :
@@ -233,6 +233,203 @@ theorem hasFiniteGeometricDet_and_detWeight_eq (hρ : W.IsLisse l ρ) :
     (detWeight_weightCharacter ι ρ _ _).symm⟩
 
 end RankOne
+
+section Multiset
+
+variable [FiniteDimensional (PadicAlgCl l) V]
+
+variable (W l ρ) in
+/-- Blueprint `def-mg-determinantal-weight-multiset`: Determinantal-weight multiset.
+
+The multiset of the determinant weights `dw_ι(S)` of the composition factors `S` of a
+finite-dimensional Weil representation `ρ`, with one entry for every factor. These factors are
+the simple summands of the semisimplification `ρ^{ss}`, counted with multiplicity; the multiset is
+computed from a chosen composition series, and it does not depend on that choice
+(`AlgebraicGeometry.WeilGroup.detWeightMultiset_eq`). These are the *constituent determinant
+weights* of item 1 of `def-rp-weight-blocks`. -/
+noncomputable def detWeightMultiset : Multiset ℝ :=
+  Subrepresentation.factorMultiset ρ fun N M ↦ W.detWeight l (M.subquotient N) ι
+
+/-- The determinantal-weight multiset can be computed from any composition series
+`0 = F 0 ⋖ ⋯ ⋖ F n = ρ` (Jordan–Hölder). -/
+theorem detWeightMultiset_eq {n : ℕ} {F : ℕ → Subrepresentation ρ} (hF0 : F 0 = ⊥)
+    (hFn : F n = ⊤) (hF : ∀ i < n, F i ⋖ F (i + 1)) :
+    W.detWeightMultiset l ρ ι = (Finset.univ : Finset (Fin n)).val.map
+      fun i : Fin n ↦ W.detWeight l ((F ((i : ℕ) + 1)).subquotient (F i)) ι :=
+  Subrepresentation.factorMultiset_eq _ (fun _ _ _ _ ⟨e⟩ ↦ (detWeight_of_equiv ι e).symm) hF0
+    hFn hF
+
+/-- The entries of the determinantal-weight multiset are exactly the determinant weights of the
+irreducible subquotients of `ρ` (Jordan–Hölder). -/
+theorem mem_detWeightMultiset_iff {a : ℝ} :
+    a ∈ W.detWeightMultiset l ρ ι ↔ ∃ U S : Subrepresentation ρ,
+      (S.subquotient U).IsIrreducible ∧ W.detWeight l (S.subquotient U) ι = a := by
+  obtain ⟨n, F, hF0, hFn, hF⟩ := Subrepresentation.exists_compositionSeries (ρ := ρ)
+  rw [detWeightMultiset_eq ι hF0 hFn hF, Multiset.mem_map]
+  constructor
+  · rintro ⟨i, -, rfl⟩
+    exact ⟨F i, F (i + 1),
+      (Subrepresentation.isIrreducible_subquotient_iff (hF i i.2).le).2 (hF i i.2), rfl⟩
+  · rintro ⟨U, S, hirr, rfl⟩
+    obtain ⟨i, ⟨e⟩⟩ :=
+      Subrepresentation.exists_equiv_of_isIrreducible_subquotient hF0 hFn hF hirr
+    exact ⟨i, Finset.mem_univ_val i, detWeight_of_equiv ι e⟩
+
+variable (W l ρ) in
+/-- Blueprint `def-rp-weight-blocks`: Rank-counted determinant weights and weight blocks.
+
+The *rank-counted list* of determinant weights of `ρ` (item 2): the multiset in which the
+determinant weight `dw_ι(S)` of every composition factor `S` of `ρ` is repeated `rank S` times.
+It does not depend on the composition series
+(`AlgebraicGeometry.WeilGroup.rankDetWeightMultiset_eq`) and has `rank ρ` entries
+(`AlgebraicGeometry.WeilGroup.card_rankDetWeightMultiset`). -/
+noncomputable def rankDetWeightMultiset : Multiset ℝ :=
+  (Subrepresentation.factorMultiset ρ fun N M ↦ Multiset.replicate
+    (Module.finrank (PadicAlgCl l) (M.toSubmodule ⧸ N.toSubmodule.comap M.toSubmodule.subtype))
+    (W.detWeight l (M.subquotient N) ι)).join
+
+/-- The rank-counted list of determinant weights can be computed from any composition series
+`0 = F 0 ⋖ ⋯ ⋖ F n = ρ` (Jordan–Hölder). -/
+theorem rankDetWeightMultiset_eq {n : ℕ} {F : ℕ → Subrepresentation ρ} (hF0 : F 0 = ⊥)
+    (hFn : F n = ⊤) (hF : ∀ i < n, F i ⋖ F (i + 1)) :
+    W.rankDetWeightMultiset l ρ ι = ∑ i : Fin n, Multiset.replicate
+      (Module.finrank (PadicAlgCl l) ((F ((i : ℕ) + 1)).toSubmodule ⧸
+        (F i).toSubmodule.comap (F ((i : ℕ) + 1)).toSubmodule.subtype))
+      (W.detWeight l ((F ((i : ℕ) + 1)).subquotient (F i)) ι) := by
+  rw [rankDetWeightMultiset, Subrepresentation.factorMultiset_eq _
+    (fun _ _ _ _ ⟨e⟩ ↦ by rw [e.finrank_eq, detWeight_of_equiv ι e]) hF0 hFn hF,
+    Multiset.join]
+  rfl
+
+/-- The rank-counted list of determinant weights has `rank ρ` entries. -/
+theorem card_rankDetWeightMultiset :
+    Multiset.card (W.rankDetWeightMultiset l ρ ι) = Module.finrank (PadicAlgCl l) V := by
+  obtain ⟨n, F, hF0, hFn, hF⟩ := Subrepresentation.exists_compositionSeries (ρ := ρ)
+  rw [rankDetWeightMultiset_eq ι hF0 hFn hF, Multiset.card_sum]
+  simp only [Multiset.card_replicate]
+  rw [Fin.sum_univ_eq_sum_range (fun i ↦ Module.finrank (PadicAlgCl l)
+      ((F (i + 1)).toSubmodule ⧸ (F i).toSubmodule.comap (F (i + 1)).toSubmodule.subtype)),
+    Subrepresentation.sum_finrank_subquotient hF0 fun i hi ↦ (hF i hi).le, hFn,
+    Subrepresentation.toSubmodule_top, finrank_top]
+
+variable (W l ρ) in
+/-- Blueprint `def-rp-weight-blocks`: Rank-counted determinant weights and weight blocks.
+
+The rank `N_γ` above the weight `γ` (item 3): the number of entries `> γ` of the rank-counted
+list of determinant weights. For a semisimple `ρ = ⨁ V_a` it is `∑_{dw_ι(V_a) > γ} rank V_a`
+(`AlgebraicGeometry.WeilGroup.rankAbove_eq_sum`). -/
+noncomputable def rankAbove (γ : ℝ) : ℕ :=
+  Multiset.card ((W.rankDetWeightMultiset l ρ ι).filter (γ < ·))
+
+variable (W l ρ) in
+/-- Blueprint `def-rp-weight-blocks`: Rank-counted determinant weights and weight blocks.
+
+The weight sum `B_γ` above the weight `γ` (item 3): the sum of the entries `> γ` of the
+rank-counted list of determinant weights. For a semisimple `ρ = ⨁ V_a` it is
+`∑_{dw_ι(V_a) > γ} rank V_a · dw_ι(V_a)` (`AlgebraicGeometry.WeilGroup.weightSumAbove_eq_sum`). -/
+noncomputable def weightSumAbove (γ : ℝ) : ℝ :=
+  ((W.rankDetWeightMultiset l ρ ι).filter (γ < ·)).sum
+
+variable (W l ρ) in
+/-- Blueprint `def-rp-weight-blocks`: Rank-counted determinant weights and weight blocks.
+
+The *weight block* `ρ(γ)` of weight `γ` (item 3): the sum of all irreducible subrepresentations
+of determinant weight `γ`. For a semisimple `ρ = ⨁ V_a` with `V_a` irreducible it is
+`⨁_{dw_ι(V_a) = γ} V_a` (`AlgebraicGeometry.WeilGroup.weightBlock_eq_iSup`); defining it
+intrinsically shows that it does not depend on the decomposition. -/
+noncomputable def weightBlock (γ : ℝ) : Subrepresentation ρ :=
+  ⨆ (S : Subrepresentation ρ) (_ : S.toRepresentation.IsIrreducible ∧
+    W.detWeight l S.toRepresentation ι = γ), S
+
+section Decomposition
+
+variable {I : Type*} [Fintype I] [DecidableEq I] {Vs : I → Subrepresentation ρ}
+  (hint : DirectSum.IsInternal fun a ↦ (Vs a).toSubmodule)
+  (hVs : ∀ a, (Vs a).toRepresentation.IsIrreducible)
+include hint hVs
+
+/-- For a semisimple `ρ = ⨁ V_a` with `V_a` irreducible, the rank-counted list of determinant
+weights repeats `dw_ι(V_a)` exactly `rank V_a` times: the partial sums `V_1 ⊕ ⋯ ⊕ V_b` form a
+composition series. -/
+theorem rankDetWeightMultiset_eq_sum :
+    W.rankDetWeightMultiset l ρ ι = ∑ a, Multiset.replicate
+      (Module.finrank (PadicAlgCl l) (Vs a).toSubmodule)
+        (W.detWeight l (Vs a).toRepresentation ι) := by
+  let e := Fintype.equivFin I
+  have hind : iSupIndep (Vs ∘ e.symm) := by
+    rw [← Subrepresentation.iSupIndep_toSubmodule_iff]
+    exact (hint.submodule_iSupIndep).comp e.symm.injective
+  have htop : ⨆ i, (Vs ∘ e.symm) i = ⊤ := by
+    apply Subrepresentation.toSubmodule_injective
+    rw [Subrepresentation.toSubmodule_iSup, Subrepresentation.toSubmodule_top,
+      ← hint.submodule_iSup_eq_top]
+    exact e.symm.iSup_comp (g := fun a ↦ (Vs a).toSubmodule)
+  obtain ⟨F, hF0, hFn, hF, hequiv⟩ :=
+    Subrepresentation.exists_compositionSeries_of_iSupIndep hind htop fun i ↦ hVs _
+  rw [rankDetWeightMultiset_eq ι hF0 hFn hF, ← e.symm.sum_comp]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  obtain ⟨f⟩ := hequiv i
+  rw [← f.finrank_eq, ← detWeight_of_equiv ι f]
+  rfl
+
+/-- For a semisimple `ρ = ⨁ V_a` with `V_a` irreducible, the entries of the rank-counted list
+satisfying a predicate `P` are the `dw_ι(V_a)` with `P (dw_ι(V_a))`, each repeated `rank V_a`
+times. -/
+theorem filter_rankDetWeightMultiset_eq_sum (P : ℝ → Prop) [DecidablePred P] :
+    (W.rankDetWeightMultiset l ρ ι).filter P =
+      ∑ a ∈ Finset.univ.filter (fun a ↦ P (W.detWeight l (Vs a).toRepresentation ι)),
+        Multiset.replicate (Module.finrank (PadicAlgCl l) (Vs a).toSubmodule)
+          (W.detWeight l (Vs a).toRepresentation ι) := by
+  rw [rankDetWeightMultiset_eq_sum ι hint hVs, Finset.sum_filter]
+  generalize (Finset.univ : Finset I) = s
+  induction s using Finset.induction_on with
+  | empty => simp
+  | insert a s ha ih =>
+    rw [Finset.sum_insert ha, Finset.sum_insert ha, Multiset.filter_add, ih]
+    congr 1
+    split_ifs with h
+    · exact Multiset.filter_eq_self.2 fun x hx ↦ (Multiset.eq_of_mem_replicate hx) ▸ h
+    · exact Multiset.filter_eq_nil.2 fun x hx ↦ (Multiset.eq_of_mem_replicate hx) ▸ h
+
+/-- For a semisimple `ρ = ⨁ V_a` with `V_a` irreducible, `N_γ = ∑_{dw_ι(V_a) > γ} rank V_a`. -/
+theorem rankAbove_eq_sum (γ : ℝ) :
+    W.rankAbove l ρ ι γ =
+      ∑ a ∈ Finset.univ.filter (fun a ↦ γ < W.detWeight l (Vs a).toRepresentation ι),
+        Module.finrank (PadicAlgCl l) (Vs a).toSubmodule := by
+  rw [rankAbove, filter_rankDetWeightMultiset_eq_sum ι hint hVs, Multiset.card_sum]
+  simp only [Multiset.card_replicate]
+
+/-- For a semisimple `ρ = ⨁ V_a` with `V_a` irreducible,
+`B_γ = ∑_{dw_ι(V_a) > γ} rank V_a · dw_ι(V_a)`. -/
+theorem weightSumAbove_eq_sum (γ : ℝ) :
+    W.weightSumAbove l ρ ι γ =
+      ∑ a ∈ Finset.univ.filter (fun a ↦ γ < W.detWeight l (Vs a).toRepresentation ι),
+        Module.finrank (PadicAlgCl l) (Vs a).toSubmodule *
+          W.detWeight l (Vs a).toRepresentation ι := by
+  rw [weightSumAbove, filter_rankDetWeightMultiset_eq_sum ι hint hVs,
+    ← Multiset.coe_sumAddMonoidHom, map_sum]
+  simp only [Multiset.coe_sumAddMonoidHom, Multiset.sum_replicate, nsmul_eq_mul]
+
+end Decomposition
+
+omit [FiniteDimensional (PadicAlgCl l) V] in
+/-- For a semisimple `ρ = ⨁ V_a` with `V_a` irreducible, the weight block of weight `γ` is
+`⨁_{dw_ι(V_a) = γ} V_a`: an irreducible subrepresentation `S` lies in the sum of the `V_a`
+equivalent to it (Schur's lemma), all of which have determinant weight `dw_ι(S)`. -/
+theorem weightBlock_eq_iSup {I : Type*} [Finite I] [DecidableEq I]
+    {Vs : I → Subrepresentation ρ}
+    (hint : DirectSum.IsInternal fun a ↦ (Vs a).toSubmodule)
+    (hVs : ∀ a, (Vs a).toRepresentation.IsIrreducible) (γ : ℝ) :
+    W.weightBlock l ρ ι γ = ⨆ (a) (_ : W.detWeight l (Vs a).toRepresentation ι = γ), Vs a := by
+  refine le_antisymm (iSup₂_le fun S ⟨hS, hγ⟩ ↦ ?_) (iSup₂_le fun a ha ↦ ?_)
+  · refine (Subrepresentation.le_iSup_of_isInternal hint hVs hS).trans
+      (iSup₂_le fun a ⟨f⟩ ↦ ?_)
+    exact le_iSup₂ (f := fun a (_ : W.detWeight l (Vs a).toRepresentation ι = γ) ↦ Vs a) a
+      ((detWeight_of_equiv ι f).trans hγ)
+  · exact le_iSup₂ (f := fun (S : Subrepresentation ρ) (_ : S.toRepresentation.IsIrreducible ∧
+      W.detWeight l S.toRepresentation ι = γ) ↦ S) (Vs a) ⟨hVs a, ha⟩
+
+end Multiset
 
 end WeilGroup
 
