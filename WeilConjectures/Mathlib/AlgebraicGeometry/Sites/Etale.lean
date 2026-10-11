@@ -13,6 +13,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Over
 /-!
 # Complements on the small étale site
 
+- `AlgebraicGeometry.Scheme.Etale.essentiallySmall`: the small étale site of `X : Scheme.{u}` is
+  essentially small in the universe `u + 1`.
 - `AlgebraicGeometry.Scheme.Hom.Etale`: the base change functor `Y.Etale ⥤ X.Etale`
   along a morphism `f : X ⟶ Y`; it preserves finite limits, is representably flat
   (`AlgebraicGeometry.Scheme.Hom.representablyFlat_etale`), is continuous for the small
@@ -51,6 +53,15 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme
 
 variable {A : Type u'} [Category.{v} A] {X Y : Scheme.{u}}
+
+variable (X) in
+/-- The small étale site of a scheme `X : Scheme.{u}` is essentially small in the universe
+`u + 1` of its objects. Instance search does not always find this, so it is used as a local
+instance where needed. -/
+theorem Etale.essentiallySmall : EssentiallySmall.{u + 1} X.Etale :=
+  have : LocallySmall.{u + 1} X.Etale :=
+    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
+  essentiallySmall_of_small_of_locallySmall _
 
 section Functoriality
 
