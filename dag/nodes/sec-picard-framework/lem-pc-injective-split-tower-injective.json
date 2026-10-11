@@ -116,5 +116,24 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ist2922 (reviewer sub-agent of L); spot-checked: Checked both steps' algebra (p_n d=0, kernel K a direct summand hence injective, psi_{n+1} extends phi_{n+1} and commutes with p_n); C4: lem-pc-tower-surjective-lim-acyclic step 2 applies it to the tower from lem-pc-tower-injective-embedding, whose hypotheses match exactly. FIX more, RETURN less: (1) C1 Step 1's levelwise-monicity claim rested on 'kernels componentwise by the tower definitions', which no cited statement says (the second reading missed this); replaced by an elementary argument with the tower T (Z at levels <= n, 0 above) whose morphisms to A are elements of A_n; (2) Step 1 now names the transitions f_n, g_n used in Step 2; (3) the statement's 'injective object of the tower category' now cites [def-sp-injective-resolutions] and [lem-pc-tower-abelian] (citation only, mathematics unchanged).; 1 file(s) fixed by the reviewer"
  },
- "lead_note": "2026-10-10 L (R-ist2922): lem-pc-tower-enough-injectives (F1) step 2 duplicates this node's whole lifting argument (class d) and rests on the unsupported 'kernels in the tower category are computed levelwise': it should cite [lem-pc-injective-split-tower-injective] instead."
+ "lead_note": "2026-10-10 L (R-ist2922): lem-pc-tower-enough-injectives (F1) step 2 duplicates this node's whole lifting argument (class d) and rests on the unsupported 'kernels in the tower category are computed levelwise': it should cite [lem-pc-injective-split-tower-injective] instead.",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InjectiveSplitTower",
+  "declaration": "CategoryTheory.injective_of_injective_split_tower",
+  "file": "lean/Sheaf/CategoryTheory/InjectiveSplitTower.lean",
+  "statement": "theorem injective_of_injective_split_tower (I : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (hI : ∀ n : ℕ, Injective (I.obj (Opposite.op n))) (hp : ∀ n : ℕ, IsSplitEpi (I.map (homOfLE (Nat.le_add_right n 1)).op)) : Injective I",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ist0747"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ist0747",
+  "group": "F1",
+  "result": "fix",
+  "note": "I : ℕᵒᵖ ⥤ AddCommGrpCat.{u} is the tower (n>=1 as n:ℕ, all levels, any u); I.map (homOfLE (n ≤ n+1)).op : I_{n+1} → I_n is p_n, direction right; IsSplitEpi = split surjection; hI levelwise Injective; conclusion Injective I in the functor (tower) category; docstring carries both proof steps; no Mathlib/source match (Preadditive/Injective, EpiWithInjectiveKernel, WeilConjectures); H9 fixed: 2 unused imports removed"
+ }
 }
