@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 
 /-!
@@ -167,6 +168,68 @@ theorem affineLineOrientation_hom_ext [HasKummerClass.IsNormalized Λ]
   rw [← sub_eq_zero]
   exact eq_zero_of_leftDerivedUpperStar_map_eq_zero_affineLineZeroLocus Λ Y _ fun Ω _ _ x ↦ by
     rw [Functor.map_sub, h Ω x, sub_self]
+
+variable {Y} {Y' : Scheme.{u}}
+
+/-- The closed subschemes `V(t) ⊂ 𝔸¹` of the zero sections over `Y'` and `Y` form a pullback
+square along `𝔸¹_v : 𝔸¹_{Y'} ⟶ 𝔸¹_Y` for every `v : Y' ⟶ Y`; the map `V(t') ⟶ V(t)` is `v`
+through the identifications `Y ≅ V(t)`
+(`AlgebraicGeometry.AffineSpace.zeroSectionIsoZeroLocusSubscheme`). -/
+lemma isPullback_zeroLocusSubschemeι_coord (v : Y' ⟶ Y) :
+    IsPullback
+      ((AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) Y'
+          (s := {AffineSpace.coord Y' (ULift.up 0)}) Set.range_unique).inv ≫ v ≫
+        (AffineSpace.zeroSectionIsoZeroLocusSubscheme (ULift.{u} (Fin 1)) Y
+          (s := {AffineSpace.coord Y (ULift.up 0)}) Set.range_unique).hom)
+      (𝔸(ULift.{u} (Fin 1); Y').zeroLocusSubschemeι {AffineSpace.coord Y' (ULift.up 0)})
+      (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubschemeι {AffineSpace.coord Y (ULift.up 0)})
+      (AffineSpace.map (ULift.{u} (Fin 1)) v) := by
+  have he := (Iso.inv_comp_eq _).2
+    (AffineSpace.zeroSectionIsoZeroLocusSubscheme_hom_zeroLocusSubschemeι (ULift.{u} (Fin 1)) Y
+      (s := {AffineSpace.coord Y (ULift.up 0)}) Set.range_unique).symm
+  have he' := (Iso.inv_comp_eq _).2
+    (AffineSpace.zeroSectionIsoZeroLocusSubscheme_hom_zeroLocusSubschemeι (ULift.{u} (Fin 1)) Y'
+      (s := {AffineSpace.coord Y' (ULift.up 0)}) Set.range_unique).symm
+  have hpaste : IsPullback v
+      (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y' ≫ 𝔸(ULift.{u} (Fin 1); Y') ↘ Y')
+      (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y) v := by
+    rw [AffineSpace.zeroSection_comp_over, AffineSpace.zeroSection_comp_over]
+    exact IsPullback.of_vert_isIso ⟨by simp⟩
+  have hs := IsPullback.of_bot hpaste (AffineSpace.zeroSection_comp_map v).symm
+    (AffineSpace.isPullback_map v)
+  rw [← he, ← he']
+  exact (IsPullback.of_vert_isIso ⟨by simp⟩).paste_vert hs
+
+/-- Blueprint `prop-pur-affine-line-orientation-base-change`: Base change of the global
+orientation
+
+For every morphism `v : Y' ⟶ Y` the exceptional base change comparison carries the pullback of
+the orientation `pur_s` of the zero section of `𝔸¹_Y` to the orientation `pur_{s'}` of the
+zero section of `𝔸¹_{Y'}`. Here `pur_s` is read as its global section
+`∂κ(t) ∈ H²_{s(Y)}(𝔸¹_Y, Λ(1))` (`AlgebraicGeometry.Etale.supportedClassMap_bijective`), the
+comparison of exceptional inverse images is the restriction of supports
+`L𝔸¹_v^* Rs_! Rs^! ⟶ Rs'_! Rs'^! L𝔸¹_v^*` (`AlgebraicGeometry.Etale.restrictSupportedClass`),
+and the statement is that the adjoint of the restricted class is `pur_{s'}`.
+
+The blueprint deduces this from the uniqueness of the orientation and the computation of both
+sides at the geometric points; here it is proved directly: the Kummer class is compatible with
+pullback, and so is the boundary of the supported localization triangle
+(`AlgebraicGeometry.Etale.kummerBoundary_baseChange`). -/
+theorem supportedClassMap_restrictSupportedClass_affineLineOrientation (v : Y' ⟶ Y) :
+    supportedClassMap Λ _
+        (restrictSupportedClass (ModuleCat.{u + 1} Λ) (AffineSpace.map (ULift.{u} (Fin 1)) v) _ _
+          _ (isPullback_zeroLocusSubschemeι_coord v)
+          (leftDerivedUpperStarConstantComplexIso Λ (AffineSpace.map (ULift.{u} (Fin 1)) v)).inv
+          (((L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).commShiftIso
+              (2 : ℤ)).app _ ≪≫
+            (shiftFunctor _ (2 : ℤ)).mapIso
+              (leftDerivedUpperStarTateObjectIso (AffineSpace.map (ULift.{u} (Fin 1)) v) 1))
+          (shiftSupportedClass (ModuleCat.{u + 1} Λ) _ 2
+            (kummerBoundary Λ (AffineSpace.coord Y (ULift.up 0))))) =
+      affineLineOrientation Λ Y' := by
+  rw [restrictSupportedClass_shiftSupportedClass,
+    kummerBoundary_baseChange_of_eq Λ _ _ _ (AffineSpace.map_appTop_coord v _)]
+  rfl
 
 end Etale
 

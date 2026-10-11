@@ -248,6 +248,20 @@ theorem kummerBoundary_baseChange (e : U' ⟶ U) (f : Γ(U, ⊤))
     Category.assoc, reassoc_of% hA, hK]
   simp only [Category.assoc]
 
+/-- `AlgebraicGeometry.Etale.kummerBoundary_baseChange` for a function `f'` on `U'` equal to the
+pullback of `f`. -/
+theorem kummerBoundary_baseChange_of_eq (e : U' ⟶ U) (f : Γ(U, ⊤)) (f' : Γ(U', ⊤))
+    (hf : e.appTop f = f') (g : U'.zeroLocusSubscheme {f'} ⟶ U.zeroLocusSubscheme {f})
+    (hg : IsPullback g (U'.zeroLocusSubschemeι {f'}) (U.zeroLocusSubschemeι {f}) e) :
+    (leftDerivedUpperStarConstantComplexIso Λ e).inv ≫
+        (L((e)^*[ModuleCat.{u + 1} Λ])).map (kummerBoundary Λ f) ≫
+        ((L((e)^*[ModuleCat.{u + 1} Λ])).commShiftIso (2 : ℤ)).hom.app _ ≫
+        (supportedRestriction (ModuleCat.{u + 1} Λ) e _ _ g hg _ _
+          (leftDerivedUpperStarTateObjectIso e 1))⟦(2 : ℤ)⟧' =
+      kummerBoundary Λ f' := by
+  subst hf
+  exact kummerBoundary_baseChange Λ e f g hg
+
 end Kummer
 
 end Etale
