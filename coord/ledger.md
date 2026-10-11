@@ -3611,3 +3611,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:16 L: merged deliver/J1/lem-pur-kinjective-ML-ordinals (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.AcyclicLimitOrdinal CochainComplex.acyclic_limit_of_surjective_initialSegments)
 - 07:17 L: merged deliver/F1/lem-pc-tower-injective-embedding (stage 2; reviewer FIX; first push; Sheaf.CategoryTheory.InjectiveTowerEmbedding CategoryTheory.tower_injective_embedding)
 - 07:17 L: merged deliver/K1/lem-pur-kinjective-homotopy-exact-injective-target (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.HomotopyHomExactOfInjective CochainComplex.homotopy_hom_exact_of_injective)
+- 07:17 L: merged deliver/E1/lem-pc-kflat-tensor-cone-two-out-of-three (stage 2; reviewer PASS; first push; Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree SheafOfModules.tensor_mappingCone_two_out_of_three)

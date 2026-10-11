@@ -128,5 +128,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ktc2544 (reviewer sub-agent of L); spot-checked: No cycle: item and new nodes cite only defs and the two new nodes (kflat-cone-direct-sum appears only in blueprint.via/created.item). 2-of-3 leaf HomotopyCategory subcategoryAcyclic IsTriangulated (Acyclic.lean 40-43) is a one-line specialization to Mod(O); Step 2 cites it (C1 ok). FIX more, RETURN less: (1) B8/C4: lem-pc-tensor-mapping-cone-iso was matched to mappingCone.mapHomologicalComplexIso, which is for a degreewise functor H : C ⥤ D, not the total complex of the tensor bifunctor; leaf removed, node set unsplit, attached (B10) to sorry-free slopmaster2 CochainComplex.mapBifunctorMappingCone₂Iso (FromJoel/Algebra/Homology/BifunctorMappingCone.lean 493-497; Mathlib total-complex sign (-1)^p on the second differential and cone differential match def-pc-tensor-complex-sheaves and def-weil-abstract-derived-category), grep recorded. (2) B3: its stmt_deps lacked def-pc-tensor-complex-sheaves; added; the unneeded acyclicity hypothesis on A and its uncited dep dropped; title corrected. (3) Item Step 1 text no longer describes the comparison as an additive functor applied termwise.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree",
+  "declaration": "SheafOfModules.tensor_mappingCone_two_out_of_three",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatTensorConeTwoOutOfThree.lean",
+  "statement": "theorem tensor_mappingCone_two_out_of_three : ∀ (A K₁ K₂ : CochainComplex (moduleCategory R) ℤ) (f : K₁ ⟶ K₂), A.Acyclic → (∃ e : CochainComplex.mapBifunctor A (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R)) ≅ CochainComplex.mappingCone (HomologicalComplex.mapBifunctorMap (𝟙 A) f (curriedTensor (moduleCategory R)) (.up ℤ)), HomologicalComplex.mapBifunctorMap (𝟙 A) (CochainComplex.mappingCone.inr f) (curriedTensor (moduleCategory R)) (.up ℤ) ≫ e.hom = CochainComplex.mappingCone.inr (HomologicalComplex.mapBifunctorMap (𝟙 A) f (curriedTensor (moduleCategory R)) (.up ℤ))) ∧ ((A.mapBifunctor K₁ (curriedTensor (moduleCategory R))).Acyclic ∧ (A.mapBifunctor K₂ (curriedTensor (moduleCategory R))).Acyclic → (A.mapBifunctor (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R))).Acyclic) ∧ ((A.mapBifunctor K₁ (curriedTensor (moduleCategory R))).Acyclic ∧ (A.mapBifunctor (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R))).Acyclic → (A.mapBifunctor K₂ (curriedTensor (moduleCategory R))).Acyclic) ∧ ((A.mapBifunctor K₂ (curriedTensor (moduleCategory R))).Acyclic ∧ (A.mapBifunctor (CochainComplex.mappingCone f) (curriedTensor (moduleCategory R))).Acyclic → (A.mapBifunctor K₁ (curriedTensor (moduleCategory R))).Acyclic)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kct0917",
+  "group": "E1",
+  "result": "pass",
+  "note": "site C:Type u/Category.{u}, R:Sheaf J CommRingCat (comm rings), A acyclic, f:K1->K2, K3=Mathlib mappingCone f; clause 1 = iso Tot(A⊗cone f) ≅ cone(Tot map) with inr compatibility, exactly the sorry-free slopmaster2 mapBifunctorMappingCone₂Iso + mapBifunctorMap_inr_..._hom (BifunctorMappingCone.lean 493-504), so true; three 2-of-3 implications cover all pairs; not the F1 node (cone closure of K-flat, isKFlat_mappingCone) so no H4; uses landed KFlat instances, docstring has both proof steps, lines <=100"
  }
 }
