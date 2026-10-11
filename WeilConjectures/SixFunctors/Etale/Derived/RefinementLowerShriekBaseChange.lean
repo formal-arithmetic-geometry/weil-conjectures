@@ -89,6 +89,15 @@ lemma unit_map_refinementLowerShriekBaseChangeDerivedIso (hcart : IsPullback c.i
     (upperStarCompIso A c.i r.hom d.i r.i_hom) (asIso (r.openImmersionLowerShriekBaseChange A))
     (unit_map_openImmersionLowerShriekBaseChange_app A c.i r.hom d.i r.i_hom) K
 
+
+omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [HasSmallSiteSheafify A] in
+lemma upperStarCompIso_eq {X C D : Scheme.{u}} (j : X ⟶ C) (q : C ⟶ D) (k : X ⟶ D)
+    (hk : j ≫ q = k) :
+    upperStarCompIso A j q k hk = upperStarComp A j q k hk.symm := by
+  subst hk
+  simp
+
 /-- The square map `D(d.i^*) ⟶ Lq^* ⋙ D(c.i^*)` of a refinement, induced by the composition
 isomorphism `d.i^* ≅ q^* ⋙ c.i^*` and read through `Lq^* ≅ Dq^*`. -/
 noncomputable def refinementSquareMap :
@@ -104,7 +113,7 @@ lemma refinementSquareMap_app (Y : DerivedCategory (Sheaf d.Z.smallEtaleTopology
       (leftDerivedUpperStarIsoMapDerivedCategory A d.i).inv.app Y ≫
         (leftDerivedUpperStarComp A c.i r.hom d.i r.i_hom.symm).hom.app Y ≫
         (leftDerivedUpperStarIsoMapDerivedCategory A c.i).hom.app (L((r.hom)^*[A]).obj Y) := by
-  simp only [refinementSquareMap, upperStarCompIso_eq_upperStarComp, leftDerivedUpperStarComp,
+  simp only [refinementSquareMap, upperStarCompIso_eq, leftDerivedUpperStarComp,
     Functor.leftDerivedFunctorNatIso, Functor.leftDerivedFunctorCompIso,
     leftDerivedUpperStarIsoMapDerivedCategory, Iso.trans_hom, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,

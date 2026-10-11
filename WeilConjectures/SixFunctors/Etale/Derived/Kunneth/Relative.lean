@@ -233,7 +233,8 @@ coefficients `ModuleCat Λ`, by the four steps of the blueprint proof: the compo
 cartesian square of `f` and `g`, and the projection formula for `g`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_of_finite (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f]
-    [HasCompactification g] [QuasiCompact f] [HasCompactification (pullback.toBase f g)]
+    [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
+    [HasCompactification (pullback.toBase f g)]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).obj

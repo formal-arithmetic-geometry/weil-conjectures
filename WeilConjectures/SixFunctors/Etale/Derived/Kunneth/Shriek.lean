@@ -285,6 +285,9 @@ theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct
   have : QuasiCompact (pullback.snd f₁ (pullback.fst b₁ b₂)) :=
     MorphismProperty.of_isPullback (P := @QuasiCompact)
       (IsPullback.of_hasPullback f₁ (pullback.fst b₁ b₂)) inferInstance
+  have : QuasiCompact (pullback.snd f₂ (pullback.snd b₁ b₂)) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact)
+      (IsPullback.of_hasPullback f₂ (pullback.snd b₁ b₂)) inferInstance
   exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_kunneth _
     b₁ b₂ f₁ f₂ M₁ M₂ ⟨c₀.symm ≪≫ c₁⟩
     ⟨asIso ((rightDerivedLowerShriekBaseChangeMap _
