@@ -243,8 +243,6 @@ instance isEquivalence_rightDerivedGlobalSections_of_isSepClosed :
     (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).IsEquivalence :=
   isEquivalence_rightDerivedGlobalSections_of_isEquivalence _ _
 
-variable {Λ : Type (u + 1)} [CommRing Λ]
-
 /-- Blueprint `lem-sf-point`: The point, evaluated (the duality part).
 
 Let `k` be a separably closed field, `s = Spec k` and `Λ` a finite coefficient ring. For every

@@ -112,7 +112,10 @@ noncomputable def rightDerivedLowerShriekIdIso : R(𝟙 S)_![A] ≅ 𝟭 _ :=
     Functor.rightDerivedFunctorNatIso (lowerStarId A S) ≪≫
     (𝟭 _).rightDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
 
-variable [(R(𝟙 S)_![A]).IsLeftAdjoint]
+/-- The derived lower shriek along the identity of `S` is a left adjoint, being isomorphic to
+the identity (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIdIso`). -/
+instance isLeftAdjoint_rightDerivedLowerShriek_id : (R(𝟙 S)_![A]).IsLeftAdjoint :=
+  ⟨_, ⟨Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso A S).symm⟩⟩
 
 /-- Blueprint `lem-sf-point` (the dualizing complex of the base): the exceptional inverse image
 along the identity of `S` is the identity, `R(𝟙_S)^! ≅ 𝟭`, being right adjoint to

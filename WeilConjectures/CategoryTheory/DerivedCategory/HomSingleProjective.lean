@@ -39,12 +39,17 @@ noncomputable def homSingleToHomology (P : C) (n : ℤ) (X : DerivedCategory C)
     (φ : (singleFunctor C n).obj P ⟶ X) : P ⟶ (homologyFunctor C n).obj X :=
   ((singleFunctorCompHomologyFunctorIso C n).app P).inv ≫ (homologyFunctor C n).map φ
 
+/-- `homSingleToHomology` is natural in the target: for `φ : P[-n] ⟶ X` and `ψ : X ⟶ Y`, the
+morphism `P ⟶ Hⁿ(Y)` attached to `φ ≫ ψ` is the one attached to `φ` followed by `Hⁿ(ψ)`. -/
 lemma homSingleToHomology_comp (P : C) (n : ℤ) {X Y : DerivedCategory C}
     (φ : (singleFunctor C n).obj P ⟶ X) (ψ : X ⟶ Y) :
     homSingleToHomology P n Y (φ ≫ ψ) =
       homSingleToHomology P n X φ ≫ (homologyFunctor C n).map ψ := by
   simp [homSingleToHomology]
 
+/-- The isomorphism `Hⁿ(Q(P[-n])) ≅ P` of `singleFunctorCompHomologyFunctorIso`, computed on the
+complex `P[-n]`: it is the comparison `Hⁿ(Q(P[-n])) ≅ Hⁿ(P[-n])` of `homologyFunctorFactors`
+followed by `HomologicalComplex.singleObjHomologySelfIso`. -/
 lemma singleFunctorCompHomologyFunctorIso_hom_app (P : C) (n : ℤ) :
     (singleFunctorCompHomologyFunctorIso C n).hom.app P =
       (homologyFunctorFactors C n).hom.app ((HomologicalComplex.single C _ n).obj P) ≫
@@ -57,6 +62,16 @@ lemma singleFunctorCompHomologyFunctorIso_hom_app (P : C) (n : ℤ) :
   erw [(homologyFunctor C n).map_id, Category.id_comp, Category.id_comp]
   rfl
 
+/-- Let `a : P ⟶ Lⁿ` be a morphism landing in the cycles of `L`, and `P[-n] ⟶ L` the morphism of
+complexes it defines. The following square commutes, where the left map is
+`homSingleToHomology` of `Q(P[-n] ⟶ L)` and the bottom map is `homologyFunctorFactors`:
+```
+P ─────────── a ──────────→ Zⁿ(L)
+│                             │
+↓                             ↓
+Hⁿ(Q L) ────────────────→ Hⁿ(L)
+```
+-/
 lemma homSingleToHomology_Q_map_mkHomFromSingle (P : C) (n : ℤ) (L : CochainComplex C ℤ)
     (a : P ⟶ L.X n) (ha : ∀ j, (ComplexShape.up ℤ).Rel n j → a ≫ L.d n j = 0) :
     homSingleToHomology P n (Q.obj L) (Q.map (HomologicalComplex.mkHomFromSingle a ha)) ≫

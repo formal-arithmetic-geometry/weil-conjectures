@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftComparison
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Monoidal equivalences of abelian categories and derived internal homs
@@ -24,8 +25,6 @@ products, and its quasi-inverse `D(F⁻¹)` commutes with the derived internal h
 
 ## Main results
 
-- `CategoryTheory.Functor.preservesFlat_of_isEquivalence`: a monoidal equivalence preserves
-  flat objects.
 - `DerivedCategory.tensorLeftCompMapDerivedCategoryIso`: `D(F)(N ⊗ᴸ M) ≅ D(F) N ⊗ᴸ D(F) M`,
   naturally in `M`.
 - `DerivedCategory.ihomCompMapDerivedCategoryInvIso`:
@@ -47,38 +46,6 @@ of the comparison of the tensor products.
 universe w v
 
 open CategoryTheory Limits MonoidalCategory
-
-namespace CategoryTheory.Functor
-
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
-
-variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
-
-/-- A monoidal functor which is an equivalence of categories preserves flat objects: tensoring
-with `F(X)` is, up to isomorphism, the composite of `F⁻¹`, tensoring with `X` and `F`. -/
-lemma preservesFlat_of_isEquivalence (F : C ⥤ D) [F.Monoidal] [F.IsEquivalence] :
-    F.PreservesFlat where
-  flat_obj {X} hX := by
-    have := hX.tensorLeft.preservesFiniteLimits
-    have := hX.tensorLeft.preservesFiniteColimits
-    have := hX.tensorRight.preservesFiniteLimits
-    have := hX.tensorRight.preservesFiniteColimits
-    refine ⟨(exactFunctor _ _).prop_of_iso
-      ((Functor.leftUnitor _).symm ≪≫ isoWhiskerRight F.asEquivalence.counitIso.symm _ ≪≫
-        Functor.associator _ _ _ ≪≫ isoWhiskerLeft F.inv (Monoidal.commTensorLeft F X)).symm
-      ((exactFunctor_iff _).2 ⟨inferInstance, inferInstance⟩),
-      (exactFunctor _ _).prop_of_iso
-      ((Functor.leftUnitor _).symm ≪≫ isoWhiskerRight F.asEquivalence.counitIso.symm _ ≪≫
-        Functor.associator _ _ _ ≪≫ isoWhiskerLeft F.inv (Monoidal.commTensorRight F X)).symm
-      ((exactFunctor_iff _).2 ⟨inferInstance, inferInstance⟩)⟩
-
-/-- The quasi-inverse of an additive equivalence of preadditive categories is additive. -/
-instance additive_inv {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
-    (F : C ⥤ D) [F.IsEquivalence] [F.Additive] : F.inv.Additive :=
-  have : F.asEquivalence.functor.Additive := ‹F.Additive›
-  F.asEquivalence.inverse_additive
-
-end CategoryTheory.Functor
 
 namespace DerivedCategory
 

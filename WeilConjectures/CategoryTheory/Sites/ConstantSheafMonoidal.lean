@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.FunctorCategory
 
 /-!
 # The constant sheaf functor is monoidal
@@ -23,19 +24,6 @@ composite with sheafification, is monoidal for the monoidal structure
 namespace CategoryTheory
 
 open MonoidalCategory
-
-section
-
-variable (C : Type*) [Category* C] (A : Type*) [Category* A] [MonoidalCategory A]
-
-/-- The constant functor `A ⥤ (C ⥤ A)` is monoidal, the tensor product of functors being
-computed pointwise. -/
-instance Functor.Monoidal.const : (Functor.const C : A ⥤ C ⥤ A).Monoidal :=
-  Functor.CoreMonoidal.toMonoidal
-    { εIso := NatIso.ofComponents fun _ ↦ Iso.refl _
-      μIso _ _ := NatIso.ofComponents fun _ ↦ Iso.refl _ }
-
-end
 
 variable {C : Type*} [Category* C] (J : GrothendieckTopology C) (A : Type*) [Category* A]
   [MonoidalCategory A] [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
