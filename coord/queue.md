@@ -1,11 +1,11 @@
 # Work queue
 
-431 items; claim with `tools/claim.py next <group> [--stage N]`.
+428 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (431)
+## Stage 2: nodes to state (428)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -46,7 +46,6 @@
 | `lem-sc-base-change-curve` | 1 | state |
 | `lem-sc-coherent-ring-perfect-complex-cohomology` | 1 | state |
 | `lem-sc-derived-mayer-vietoris-triangle` | 1 | state |
-| `lem-sc-derived-open-gluing` | 1 | state |
 | `lem-sc-hilb-dominating-power` | 1 | state |
 | `lem-sc-hilbert-embedded-points-gluing` | 1 | state |
 | `lem-sc-koszul-regular-closed-immersion-perfect` | 1 | state |
@@ -70,7 +69,6 @@
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-flat-base-change` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
-| `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1 | state |
 | `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-series-parameter-quotient` | 1 | state |
@@ -81,7 +79,6 @@
 | `lem-weil-pbc-projective-space-functor-of-points` | 1 | state |
 | `lem-weil-pbc-projective-space-standard-charts` | 1 | state |
 | `lem-weil-pbc-proper-limit-noetherian` | 1 | state |
-| `lem-weil-pbc-pth-roots-extension-degree` | 1 | state |
 | `lem-weil-pbc-pullback-ample-invertible` | 1 | state |
 | `lem-weil-pbc-pullback-finite-locally-constant` | 1 | state |
 | `lem-weil-pbc-purely-inseparable-base-change-local-ring` | 1 | state |
