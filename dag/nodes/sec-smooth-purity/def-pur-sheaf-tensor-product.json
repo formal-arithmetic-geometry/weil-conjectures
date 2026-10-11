@@ -110,5 +110,36 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-stp2420 (reviewer sub-agent of L); spot-checked: Item statement unchanged (diff: only blueprint place, stmt_deps, status, split_report), so citers unaffected (E7/C4); matches Stacks 03EK; no proof steps. New leaf def-pur-presheaf-tensor-product read at Monoidal.lean:63 (tensorObj, R : Cop => CommRingCat): one-line specialization to R = O. FIX more, RETURN less: (1) B3 the grep search record '0 hits' for tensorObj was false (17 hits locally); replaced with reviewer grep, verdict match; (2) mathlib_match.file carried a line range and 'how' said exact; file made a path, how restated as one-line specialization with lines 63/45. Second reading by J1 missed (1).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct",
+  "declaration": "SheafOfModules.positiveTensorPower",
+  "declarations": [
+   "SheafOfModules.exists_changeOfRingsMap",
+   "SheafOfModules.changeOfRingsMap",
+   "SheafOfModules.changeOfRingsMap_id",
+   "SheafOfModules.changeOfRingsMap_comp",
+   "SheafOfModules.changeOfRingsPresheaf",
+   "SheafOfModules.changeOfRings",
+   "SheafOfModules.positiveTensorPower",
+   "SheafOfModules.monoidalCategory",
+   "SheafOfModules.tensorObjIsoSheafification"
+  ],
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/TensorProduct.lean",
+  "statement": "def positiveTensorPower (R : Sheaf J CommRingCat.{u}) (M : SheafOfModules.{u} (𝓡 R)) : (n : ℕ) → 0 < n → SheafOfModules.{u} (𝓡 R)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "The tensor-product clause is the source's SheafOfModules.monoidalCategory R (M ⊗ N, identified with the sheafification of PresheafOfModules.Monoidal.tensorObj M.val N.val by the source's SheafOfModules.tensorObjIsoSheafification), available for a site C : Type u, Category.{u} C. New declarations: sectionwise change of rings (extendScalars sections, restriction from the named theorem exists_changeOfRingsMap, functor laws as named sorry theorems) and its sheafification, for a site in arbitrary universes; positive tensor powers built on the source tensor.",
+  "fixed_by": "R-stp0826"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-stp0826",
+  "group": "C1",
+  "result": "fix",
+  "note": "site (C, J + 3 sheafification instances; C : Type u for powers, general for change of rings), O = R : Sheaf J CommRingCat, F,G : SheafOfModules (𝓡 R); F ⊗ G = source monoidalCategory R (tensorObjIsoSheafification to sheafified tensorObj); change of rings = sheafification of X ↦ extendScalars α_X (M X), restriction s⊗m ↦ s|⊗m| via named theorem, map_id/map_comp named sorry theorems; powers: 0<n domain, 1 ↦ M, n+2 ↦ P(n+1) ⊗ M"
  }
 }
