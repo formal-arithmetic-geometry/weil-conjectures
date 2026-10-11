@@ -191,5 +191,23 @@
   "group": "K1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-bcm2009 (reviewer sub-agent of L); spot-checked: Return 19:02 points: 1 (Step 4 split) repaired: Cech unit representative, p_*-acyclicity via lem-pc-affine-morphism-hi, composition node, Lg^*-|Rg_* adjunction, underived comparison, c_J via affine pullback-sections; 2 repaired: stmt_deps now carry lem-pc-ringed-spaces-derived-adjoint and new lem-pc-derived-direct-image-composition (Stacks 0D5T, statement-only, not a duplicate of the proper-Noetherian or Weil-coefficient composition nodes); 3 repaired: Step 1 cites separated/qc base change and affine pushforward. Statement unchanged from d32b73d17, so H1 lem-pc-flat-base-change-cohom Step 1 still gets the cochain map and canonical-map identification. FIX more, RETURN less: C1 Step 4 completed (point 1(b) residue): stated Rg_*~K_T=g_*~K_T (g affine, lem-pc-affine-morphism-hi), spelled out Rf_*Rp_*=R(fp)_*=R(g f_T)_*=Rg_*Rf_{T,*}, and justified p_*-acyclicity of j_{J,T,*} terms via affineness of j_{J,T}, p o j_{J,T} plus composition. Second reading by K1 missed this residue.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeMapCech",
+  "declaration": "AlgebraicGeometry.baseChangeMap_cech",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeMapCech.lean",
+  "statement": "theorem baseChangeMap_cech {A B : CommRingCat.{u}} {X : Scheme.{u}} (f : X ⟶ Spec A) (g : Spec B ⟶ Spec A) [IsSeparated f] [QuasiCompact f] {ι : Type u} [Finite ι] (U : ι → X.Opens) (hU : iSup U = ⊤) (haffine : ∀ i : ι, IsAffineOpen (U i)) (G : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) G] [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [hAdd : (Scheme.Modules.tensorPullback (pullback.fst f g)).Additive] : ∃ (K : CochainComplex X.Modules ℕ) (ε : (CochainComplex.single₀ X.Modules).obj G ⟶ K), ∃ (KT : CochainComplex (pullback f g).Modules ℕ) (εT : (CochainComplex.single₀ (pullback f g).Modules).obj ((Scheme.Modules.tensorPullback (pullback.fst f g)).obj G) ⟶ KT), ∃ (γ : ((Scheme.Modules.tensorPullback (pullback.fst f g)).mapHomologicalComplex (ComplexShape.up ℕ)).obj K ⟶ KT), ∃ (θ : (derivedPullback g).obj ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G)) ⟶ (schemeDerivedDirectImage (pullback.snd f g)).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings (pullback f g).toRingedSpace)) 0).obj ((Scheme.Modules.tensorPullback (pullback.fst f g)).obj G))), QuasiIso ε ∧ QuasiIso εT ∧ IsDerivedModuleBaseChangeMap f g G θ",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Q1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
