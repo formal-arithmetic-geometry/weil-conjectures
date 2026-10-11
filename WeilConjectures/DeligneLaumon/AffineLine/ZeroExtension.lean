@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
-public import WeilConjectures.WeilSheaf.Triangle
+public import WeilConjectures.WeilSheaf.ShiftedSheaf
 
 /-!
 # Comparing the transform of the zero extension with the transform of the middle extension
@@ -147,35 +147,248 @@ structure FourierCorrection (D D' : LisseOnDenseOpen k₀ l) where
         isoMiddleExtension.hom =
       isoExtensionByZero.hom ≫ (WeilSheaf.toComplex.map seq.g)⟦(1 : ℤ)⟧'
 
-/-- For an irreducible nonexceptional `M` and a Fourier partner `D'` of `D`, the zero-extension
-comparison datum exists. (blueprint: `sk-p-dl-a1-correction`) -/
-theorem nonempty_fourierCorrection (hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k₀ l)
-    (hD : D.sheaf.IsIrreducibleLisse)
-    (hne : D.sheaf.IsNonexceptional ψ D.j) (hFT : D.IsFourierPartner ψ D') :
-    Nonempty (FourierCorrection ψ D D') := by
-  -- TODO: Step 5 of `sk-p-dl-a1-correction`: `G = 𝓗⁻¹ FT_ψ(j_!M[1])` and
-  -- `B' = 𝓗⁻¹ FT_ψ(B)`. The maps of the sequence come from the transform of the rotated
-  -- triangle `B'[1] → FT_ψ(j_!M[1]) → (j'_*M')[1] →`; it needs the transforms of the boundary
-  -- skyscrapers (Step 2, `lem-fd-first-formula`), which are not available for Weil complexes.
+/-- **Steps 1–4 of `prop-fd-zero-extension-comparison`.** The transform of the boundary sheaf
+`B = j_*M / j_!M` is `B'[1]` for a Weil sheaf `B'` on the dual line which is lisse, and has
+weights at most `w` as soon as `M` has. (blueprint: `prop-fd-zero-extension-comparison`) -/
+theorem exists_iso_fourierTransform_boundarySheaf (D : LisseOnDenseOpen k₀ l) :
+    ∃ B' : WeilSheaf k₀ l (affineLine k₀), B'.IsLisse ∧
+      (∀ (ι : PadicAlgCl l →+* ℂ) (w : ℝ), D.sheaf.HasWeightsAtMost ι w →
+        B'.HasWeightsAtMost ι w) ∧
+      Nonempty ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj D.boundarySheaf) ≅
+        WeilSheaf.toShiftedComplex.obj B') := by
   sorry
 
+section Construction
+
+variable {ψ} {D D' : LisseOnDenseOpen k₀ l} {B' : WeilSheaf k₀ l (affineLine k₀)}
+  (eB : (fourierTransform ψ).obj (WeilSheaf.toComplex.obj D.boundarySheaf) ≅
+    WeilSheaf.toShiftedComplex.obj B')
+  (eM : (fourierTransform ψ).obj D.middleExtension ≅ D'.middleExtension)
+
+/-- The transform of the rotated boundary triangle `B → j_!M[1] → j_*M[1] → B[1]`. -/
+noncomputable abbrev fourierTriangle (D : LisseOnDenseOpen k₀ l) :
+    Triangle (WeilComplex k₀ l (affineLine k₀)) :=
+  (fourierTransform ψ).mapTriangle.obj D.boundaryTriangle
+
+lemma boundaryTriangle_obj₂ (D : LisseOnDenseOpen k₀ l) :
+    D.boundaryTriangle.obj₂ = D.shiftedExtensionByZero :=
+  rfl
+
+lemma fourierTriangle_obj₂ (D : LisseOnDenseOpen k₀ l) :
+    (fourierTriangle (ψ := ψ) D).obj₂ = (fourierTransform ψ).obj D.shiftedExtensionByZero :=
+  rfl
+
+lemma fourierTriangle_distinguished (D : LisseOnDenseOpen k₀ l) :
+    fourierTriangle (ψ := ψ) D ∈ distTriang _ :=
+  D.fourierTransform_mapTriangle_boundaryTriangle_distinguished ψ
+
+lemma fourierTriangle_mor₂ (D : LisseOnDenseOpen k₀ l) :
+    (fourierTriangle (ψ := ψ) D).mor₂ =
+      -(fourierTransform ψ).map D.shiftedExtensionByZeroToMiddleExtension := by
+  change (fourierTransform ψ).map D.boundaryTriangle.mor₂ = _
+  rw [boundaryTriangle_mor₂, Functor.map_neg]
+
+lemma fourierTriangle_mor₁_comp (D : LisseOnDenseOpen k₀ l) :
+    (fourierTriangle (ψ := ψ) D).mor₁ ≫
+      (fourierTransform ψ).map D.shiftedExtensionByZeroToMiddleExtension = 0 := by
+  have h := comp_distTriang_mor_zero₁₂ _ (fourierTriangle_distinguished (ψ := ψ) D)
+  rwa [fourierTriangle_mor₂, Preadditive.comp_neg, neg_eq_zero] at h
+
+include eB eM in
+/-- Step 5 of `prop-fd-zero-extension-comparison`: the transform `K` of `j_!M[1]` has its
+cohomology concentrated in degree `-1`, since the two outer terms of the triangle
+`B'[1] → K → (j'_*M')[1] →` have. -/
+lemma isZero_homologySheaf_fourierTransform_shiftedExtensionByZero {a : ℤ}
+    (ha : a ≠ -1) :
+    IsZero ((WeilComplex.homologySheaf a).obj
+      ((fourierTransform ψ).obj D.shiftedExtensionByZero)) := by
+  have h₁ : IsZero ((WeilComplex.homologySheaf a).obj (fourierTriangle (ψ := ψ) D).obj₁) :=
+    (WeilSheaf.isZero_homologySheaf_toShiftedComplex ha B').of_iso
+      ((WeilComplex.homologySheaf a).mapIso eB)
+  have h₃ : IsZero ((WeilComplex.homologySheaf a).obj (fourierTriangle (ψ := ψ) D).obj₃) :=
+    (WeilSheaf.isZero_homologySheaf_toShiftedComplex ha D'.directImage).of_iso
+      ((WeilComplex.homologySheaf a).mapIso eM)
+  have hex := WeilComplex.homologySheaf_exact₂ _ a (fourierTriangle_distinguished (ψ := ψ) D)
+  have : Mono ((WeilComplex.homologySheaf a).map (fourierTriangle (ψ := ψ) D).mor₂) :=
+    hex.mono_g (h₁.eq_of_src _ _)
+  rw [h₃.eq_of_tgt ((WeilComplex.homologySheaf a).map (fourierTriangle (ψ := ψ) D).mor₂) 0]
+    at this
+  exact IsZero.of_mono_zero ((WeilComplex.homologySheaf a).obj (fourierTriangle (ψ := ψ) D).obj₂)
+    ((WeilComplex.homologySheaf a).obj (fourierTriangle (ψ := ψ) D).obj₃)
+
+/-- The isomorphism `FT_ψ(j_!M[1]) ≅ G[1]`, `G = 𝓗⁻¹ FT_ψ(j_!M[1])`, of Step 5 of
+`prop-fd-zero-extension-comparison`. -/
+noncomputable def isoExtensionByZeroOfIso :
+    (fourierTransform ψ).obj D.shiftedExtensionByZero ≅
+      WeilSheaf.toShiftedComplex.obj ((WeilComplex.homologySheaf (-1)).obj
+        ((fourierTransform ψ).obj D.shiftedExtensionByZero)) :=
+  (WeilComplex.nonempty_iso_toShiftedComplex _ fun _ ha ↦
+    isZero_homologySheaf_fourierTransform_shiftedExtensionByZero eB eM ha).some
+
+/-- The first map `B' → G` of the sequence of Step 5. -/
+noncomputable def correctionSeqF :
+    B' ⟶ (WeilComplex.homologySheaf (-1)).obj
+      ((fourierTransform ψ).obj D.shiftedExtensionByZero) :=
+  WeilSheaf.toShiftedComplex.preimage
+    (eB.inv ≫ (fourierTriangle (ψ := ψ) D).mor₁ ≫ (isoExtensionByZeroOfIso eB eM).hom)
+
+/-- The second map `G → j'_*M'` of the sequence of Step 5. -/
+noncomputable def correctionSeqG :
+    (WeilComplex.homologySheaf (-1)).obj ((fourierTransform ψ).obj D.shiftedExtensionByZero) ⟶
+      D'.directImage :=
+  WeilSheaf.toShiftedComplex.preimage ((isoExtensionByZeroOfIso eB eM).inv ≫
+    (fourierTransform ψ).map D.shiftedExtensionByZeroToMiddleExtension ≫ eM.hom)
+
+lemma toShiftedComplex_map_correctionSeqF :
+    WeilSheaf.toShiftedComplex.map (correctionSeqF eB eM) =
+      eB.inv ≫ (fourierTriangle (ψ := ψ) D).mor₁ ≫ (isoExtensionByZeroOfIso eB eM).hom :=
+  WeilSheaf.toShiftedComplex.map_preimage _
+
+lemma toShiftedComplex_map_correctionSeqG :
+    WeilSheaf.toShiftedComplex.map (correctionSeqG eB eM) =
+      (isoExtensionByZeroOfIso eB eM).inv ≫
+        (fourierTransform ψ).map D.shiftedExtensionByZeroToMiddleExtension ≫ eM.hom :=
+  WeilSheaf.toShiftedComplex.map_preimage _
+
+/-- The short complex `0 → B' → G → j'_*M' → 0` of Step 5 of
+`prop-fd-zero-extension-comparison`, read off from the transform of the rotated boundary
+triangle through the isomorphisms with the shifted sheaves. -/
+noncomputable def correctionSeq : ShortComplex (WeilSheaf k₀ l (affineLine k₀)) :=
+  ShortComplex.mk (correctionSeqF eB eM) (correctionSeqG eB eM)
+    (WeilSheaf.toShiftedComplex.map_injective (by
+      rw [Functor.map_comp, toShiftedComplex_map_correctionSeqF,
+        toShiftedComplex_map_correctionSeqG, Functor.map_zero]
+      simp only [Category.assoc, Iso.hom_inv_id_assoc]
+      rw [reassoc_of% (fourierTriangle_mor₁_comp (ψ := ψ) D), zero_comp, comp_zero]))
+
+/-- The sequence `𝓗⁻¹` of the transformed boundary triangle. -/
+noncomputable def homologySeq (D : LisseOnDenseOpen k₀ l) :
+    ShortComplex (WeilSheaf k₀ l (affineLine k₀)) :=
+  ShortComplex.mk ((WeilComplex.homologySheaf (-1)).map (fourierTriangle (ψ := ψ) D).mor₁)
+    ((WeilComplex.homologySheaf (-1)).map (fourierTriangle (ψ := ψ) D).mor₂)
+    (by rw [← Functor.map_comp, comp_distTriang_mor_zero₁₂ _
+      (fourierTriangle_distinguished (ψ := ψ) D), Functor.map_zero])
+
+/-- `𝓗⁻¹` of a morphism of shifted Weil sheaves. -/
+lemma homologySheaf_map_toShiftedComplex_map {F G : WeilSheaf k₀ l (affineLine k₀)}
+    (φ : F ⟶ G) :
+    (WeilComplex.homologySheaf (-1)).map (WeilSheaf.toShiftedComplex.map φ) ≫
+        WeilSheaf.toShiftedComplexCompHomologySheafIso.hom.app G =
+      WeilSheaf.toShiftedComplexCompHomologySheafIso.hom.app F ≫ φ :=
+  WeilSheaf.toShiftedComplexCompHomologySheafIso.hom.naturality φ
+
+/-- The first component `𝓗⁻¹ FT_ψ(B) ≅ B'` of the comparison of Step 5. -/
+noncomputable def correctionIso₁ :
+    (WeilComplex.homologySheaf (-1)).obj (fourierTriangle (ψ := ψ) D).obj₁ ≅ B' :=
+  (WeilComplex.homologySheaf (-1)).mapIso eB ≪≫
+    WeilSheaf.toShiftedComplexCompHomologySheafIso.app B'
+
+/-- The second component `𝓗⁻¹ FT_ψ(j_!M[1]) ≅ G` of the comparison of Step 5. -/
+noncomputable def correctionIso₂ :
+    (WeilComplex.homologySheaf (-1)).obj (fourierTriangle (ψ := ψ) D).obj₂ ≅
+      (WeilComplex.homologySheaf (-1)).obj ((fourierTransform ψ).obj D.shiftedExtensionByZero) :=
+  (WeilComplex.homologySheaf (-1)).mapIso
+      (eqToIso (fourierTriangle_obj₂ (ψ := ψ) D) ≪≫ isoExtensionByZeroOfIso eB eM) ≪≫
+    WeilSheaf.toShiftedComplexCompHomologySheafIso.app
+      ((WeilComplex.homologySheaf (-1)).obj ((fourierTransform ψ).obj D.shiftedExtensionByZero))
+
+/-- The third component `𝓗⁻¹ FT_ψ(j_*M[1]) ≅ j'_*M'` of the comparison of Step 5. -/
+noncomputable def correctionIso₃ :
+    (WeilComplex.homologySheaf (-1)).obj (fourierTriangle (ψ := ψ) D).obj₃ ≅ D'.directImage :=
+  (WeilComplex.homologySheaf (-1)).mapIso eM ≪≫
+    WeilSheaf.toShiftedComplexCompHomologySheafIso.app D'.directImage
+
+/-- The short complex of Step 5 is the sequence `𝓗⁻¹` of the transformed triangle, up to the sign
+of the last map. -/
+noncomputable def correctionSeqIso : homologySeq (ψ := ψ) D ≅ correctionSeq eB eM :=
+  ShortComplex.isoMk (correctionIso₁ eB) (correctionIso₂ eB eM) (-correctionIso₃ eM)
+    (by
+      change _ ≫ correctionSeqF eB eM = (WeilComplex.homologySheaf (-1)).map
+        (fourierTriangle (ψ := ψ) D).mor₁ ≫ _
+      simp only [correctionIso₁, correctionIso₂, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
+        Category.assoc, eqToIso_refl, Iso.refl_hom, Category.id_comp]
+      rw [← homologySheaf_map_toShiftedComplex_map, toShiftedComplex_map_correctionSeqF]
+      simp only [Functor.map_comp, Category.assoc, Iso.map_hom_inv_id_assoc])
+    (by
+      change _ ≫ correctionSeqG eB eM = (WeilComplex.homologySheaf (-1)).map
+        (fourierTriangle (ψ := ψ) D).mor₂ ≫ _
+      simp only [correctionIso₂, correctionIso₃, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
+        Category.assoc, Preadditive.neg_iso_hom, Preadditive.comp_neg, eqToIso_refl,
+        Iso.refl_hom, Category.id_comp]
+      rw [← homologySheaf_map_toShiftedComplex_map, toShiftedComplex_map_correctionSeqG,
+        fourierTriangle_mor₂, Functor.map_neg, Preadditive.neg_comp, neg_neg]
+      simp only [Functor.map_comp, Category.assoc, Iso.map_hom_inv_id_assoc])
+
+/-- The sequence `0 → B' → G → j'_*M' → 0` of Step 5 is short exact: in the long exact sequence
+of cohomology sheaves of the transformed triangle, `𝓗⁻²` of `(j'_*M')[1]` and `𝓗⁰` of `B'[1]`
+vanish. -/
+lemma shortExact_correctionSeq : (correctionSeq eB eM).ShortExact := by
+  have hT := fourierTriangle_distinguished (ψ := ψ) D
+  refine ShortComplex.shortExact_of_iso (correctionSeqIso eB eM) ?_
+  have h₃ : IsZero ((WeilComplex.homologySheaf (-2)).obj (fourierTriangle (ψ := ψ) D).obj₃) :=
+    (WeilSheaf.isZero_homologySheaf_toShiftedComplex (by norm_num) D'.directImage).of_iso
+      ((WeilComplex.homologySheaf (-2)).mapIso eM)
+  have h₁ : IsZero ((WeilComplex.homologySheaf 0).obj (fourierTriangle (ψ := ψ) D).obj₁) :=
+    (WeilSheaf.isZero_homologySheaf_toShiftedComplex (by norm_num) B').of_iso
+      ((WeilComplex.homologySheaf 0).mapIso eB)
+  have hm := (WeilComplex.homologySheaf_exact₁ _ (-2) (-1) hT (by norm_num)).mono_g
+    (h₃.eq_of_src _ _)
+  have he := (WeilComplex.homologySheaf_exact₃ _ (-1) 0 hT (by norm_num)).epi_f
+    (h₁.eq_of_tgt _ _)
+  exact { exact := WeilComplex.homologySheaf_exact₂ _ (-1) hT, mono_f := hm, epi_g := he }
+
+/-- The zero-extension comparison datum built from the isomorphisms `FT_ψ(B) ≅ B'[1]` and
+`FT_ψ((j_*M)[1]) ≅ (j'_*M')[1]` by Step 5 of `prop-fd-zero-extension-comparison`. -/
+noncomputable def fourierCorrectionOfIso : FourierCorrection ψ D D' where
+  seq := correctionSeq eB eM
+  shortExact := shortExact_correctionSeq eB eM
+  isoDirectImage := Iso.refl _
+  isoExtensionByZero := isoExtensionByZeroOfIso eB eM
+  isoBoundary := eB
+  isoMiddleExtension := eM
+  fourierTransform_map_comp_isoMiddleExtension_hom := by
+    change _ = _ ≫ WeilSheaf.toShiftedComplex.map (correctionSeqG eB eM)
+    rw [toShiftedComplex_map_correctionSeqG, Iso.hom_inv_id_assoc]
+
+end Construction
+
+/-- For an irreducible nonexceptional `M` and a Fourier partner `D'` of `D`, the zero-extension
+comparison datum exists. Only the hypothesis on the Fourier partner `D'` enters the argument:
+irreducibility and nonexceptionality serve to guarantee that a Fourier partner exists.
+(blueprint: `sk-p-dl-a1-correction`, `prop-fd-zero-extension-comparison`) -/
+theorem nonempty_fourierCorrection (_hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k₀ l)
+    (_hD : D.sheaf.IsIrreducibleLisse)
+    (_hne : D.sheaf.IsNonexceptional ψ D.j) (hFT : D.IsFourierPartner ψ D') :
+    Nonempty (FourierCorrection ψ D D') := by
+  obtain ⟨B', -, -, ⟨eB⟩⟩ := D.exists_iso_fourierTransform_boundarySheaf ψ
+  exact ⟨fourierCorrectionOfIso eB hFT.some⟩
+
+/-- The correction sheaf `B'` of a comparison datum is the one of
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_iso_fourierTransform_boundarySheaf`: both
+are `𝓗⁻¹ FT_ψ(B)`. -/
+lemma FourierCorrection.nonempty_iso {D D' : LisseOnDenseOpen k₀ l}
+    (c : FourierCorrection ψ D D') {B' : WeilSheaf k₀ l (affineLine k₀)}
+    (eB : (fourierTransform ψ).obj (WeilSheaf.toComplex.obj D.boundarySheaf) ≅
+      WeilSheaf.toShiftedComplex.obj B') : Nonempty (c.seq.X₁ ≅ B') :=
+  ⟨WeilSheaf.toShiftedComplex.preimageIso (c.isoBoundary.symm ≪≫ eB)⟩
+
 /-- The correction sheaf `B'` is lisse on the entire dual line: it is a sum of Artin–Schreier
-kernels. (blueprint: `sk-p-dl-a1-correction`) -/
+kernels. (blueprint: `sk-p-dl-a1-correction`, `prop-fd-zero-extension-comparison`) -/
 theorem FourierCorrection.isLisse {D D' : LisseOnDenseOpen k₀ l}
-    (c : FourierCorrection ψ D D') : c.seq.X₁.IsLisse :=
-  -- TODO: Step 3 of `sk-p-dl-a1-correction`: `B'` is a sum of finite direct images of
-  -- Artin–Schreier twists along the finite étale maps `A'_s → A'`.
-  sorry
+    (c : FourierCorrection ψ D D') : c.seq.X₁.IsLisse := by
+  obtain ⟨B', hB', -, ⟨eB⟩⟩ := D.exists_iso_fourierTransform_boundarySheaf ψ
+  exact hB'.of_iso (c.nonempty_iso ψ eB).some.symm
 
 /-- The correction sheaf `B'` has weights at most `w` when `M` is punctually `ι`-pure of weight
 `w`: semicontinuity of weights at the boundary points, together with the weight zero of the
-Artin–Schreier kernel. (blueprint: `sk-p-dl-a1-correction`) -/
+Artin–Schreier kernel. (blueprint: `sk-p-dl-a1-correction`, `prop-fd-zero-extension-comparison`)
+-/
 theorem FourierCorrection.hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ)
     {D D' : LisseOnDenseOpen k₀ l} (c : FourierCorrection ψ D D') {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) : c.seq.X₁.HasWeightsAtMost ι w := by
-  -- TODO: Step 4 of `sk-p-dl-a1-correction` bounds the eigenvalues of `F_y` on `B'_ȳ` through
-  -- the boundary semicontinuity and the weight zero of the Artin–Schreier sheaves.
-  sorry
+  obtain ⟨B', -, hB', ⟨eB⟩⟩ := D.exists_iso_fourierTransform_boundarySheaf ψ
+  exact WeilSheaf.HasWeightsAtMost.of_iso (c.nonempty_iso ψ eB).some.symm
+    (hB' ι w hw.hasWeightsAtMost)
 
 end WeilSheaf.LisseOnDenseOpen
 
