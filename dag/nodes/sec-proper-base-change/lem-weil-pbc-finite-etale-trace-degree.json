@@ -249,5 +249,23 @@
   "by": "L",
   "result": "pass",
   "note": "eight steps (finite locally free; constant degree on the connected X via the new locally-constant-degree node; the geometric fibre by an affine computation and lem-galois-geometric-fibre; the etale local splitting 04HN with exactly d pieces; res and tr commute with etale localization; the split case; the sheaf condition on the covering); 2 new nodes; property (2) of the trace existence lemma read up to isomorphism over the base (recorded); Lean attached to lem-galois-geometric-fibre"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree",
+  "declaration": "AlgebraicGeometry.Etale.exists_finiteEtaleTrace_degree",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceDegree.lean",
+  "statement": "theorem exists_finiteEtaleTrace_degree {X Y : Scheme.{u}} [ConnectedSpace X] (f : Y ⟶ X) [IsFinite f] [Etale f] : ∃ d : ℕ, ∃ (_ : f.IsFiniteLocallyFreeOfDegree d), (∀ {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), Finite ↥(pullback f x : Scheme.{u}) ∧ Nat.card ↥(pullback f x : Scheme.{u}) = d ∧ Nonempty (Over.mk (pullback.snd f x) ≅ Over.mk (Sigma.desc fun _ : Fin d ↦ 𝟙 (Spec (.of Ω))))) ∧ ∀ (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}), finiteEtaleRestriction f F ≫ finiteEtaleTrace f F = d • 𝟙 F",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fet1125",
+  "group": "H1",
+  "result": "pass",
+  "note": "ConnectedSpace X (connected incl. nonempty); f finite etale = IsFinite+Etale; (a) f.IsFiniteLocallyFreeOfDegree d = recorded def-pc-finite-locally-free (fiberDegree = finrank Γ(X_s)); (b) every Ω alg closed in Type u, x : Spec Ω ⟶ X, pullback f x (GEOMETRIC FIBRE line) Finite ∧ Nat.card = d ∧ Over-iso to Fin d-coproduct of Spec Ω; (c) all F : Sheaf X_et Ab, finiteEtaleRestriction ≫ finiteEtaleTrace = d • 𝟙 F with recorded res (unit) and tr; names #check-resolved; d=0 admitted"
  }
 }
