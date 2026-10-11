@@ -28,9 +28,16 @@ the determinant. Hence:
   of `(det - 1)` are the special linear group.
 - `Matrix.GeneralLinearGroup.detBialgHom`: the bialgebra homomorphism `t ↦ det`.
 
+## Main results
+
+- `Matrix.GeneralLinearGroup.isGroupLikeElem_detCoord`: the determinant is group-like.
+- `Matrix.GeneralLinearGroup.antipode_coord`: the antipode in terms of cofactors,
+  `S(x_ij) = det⁻¹ · adj(x)_ij`.
+
 ## Blueprint
 
-- `def-sc-general-linear-group`: the special linear group `SL_{c,k} = Spec k[x_ij] ⧸ (det - 1)`
+- `def-sc-general-linear-group`: the antipode `i^*(x_ij) = (-1)^(i+j) M_ji / det`, the special
+  linear group `SL_{c,k} = Spec k[x_ij] ⧸ (det - 1)`
   and the determinant `GL_{c,k} → 𝐆_m`, dual to `t ↦ det`.
 -/
 
@@ -83,6 +90,19 @@ theorem evalAlgHom_detCoord {R : Type*} [CommRing R] [Algebra k R] (g : GL n R) 
   congr 1
   ext i j
   simp
+
+variable (n k) in
+/-- The antipode of `k[x_ij, det⁻¹]` in terms of cofactors: `S(x_ij) = det⁻¹ · adj(x)_ij`, where
+the adjugate `adj(x)_ij = (-1)^(i+j) M_ji` is the signed minor obtained by deleting row `j` and
+column `i` of the generic matrix (`Matrix.adjugate_fin_succ_eq_det_submatrix`).
+(blueprint: `def-sc-general-linear-group`) -/
+theorem antipode_coord (i j : n) :
+    HopfAlgebra.antipode k (coord n k i j) =
+      Ring.inverse (detCoord n k) *
+        (genericUnit n k : Matrix n n (CoordinateRing n k)).adjugate i j := by
+  change antipodeAlgHom n k (coord n k i j) = _
+  rw [antipodeAlgHom_coord, Matrix.coe_units_inv, Matrix.inv_def, Matrix.smul_apply, smul_eq_mul,
+    detCoord]
 
 variable (n k)
 
