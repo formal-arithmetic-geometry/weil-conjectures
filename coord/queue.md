@@ -9,7 +9,7 @@
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `def-nagata-morphism-equality-stage` | 1 | state | 11 |
+| `lemma-nagata-morphism-eq-eventually` | 2 | state | 10 |
 | `lem-sc-boundary-cech-injective-middle` | 1 | state | 1 |
 | `cor-galois-lisse-representations` | 1 | state | 0 |
 | `lem-pc-affine-morphism-hom-out-of-perfect` | 1 | state | 0 |
@@ -27,7 +27,7 @@
 | `lem-weil-pbc-matching-object-fibre-product` | 1 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 10 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 9 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
