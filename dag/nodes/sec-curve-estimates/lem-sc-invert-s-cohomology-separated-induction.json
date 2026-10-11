@@ -106,5 +106,24 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-isd (reviewer sub-agent of L); spot-checked: Source: Stacks 08DR (coherent.tex lemma-induction-principle, l.555-586), proof first paragraph; the item statement (unchanged) agrees with the lemma hypothesis by hypothesis (X qcqs, P on qc opens, affine case, gluing for U qc / V affine) with the conclusion restricted to separated qc opens W, exactly what that paragraph proves. Step 1: finite affine cover of W from lem-weil-pbc-qcqs-finite-affine-open-cover (T quasi-compact); U_i cap V affine from lem-weil-pbc-separated-affine-open-intersection with Y=W, A=Z (W separated over Spec Z), so U cap V is covered by n-1 affines and is qc; U and U cap V separated by lem-weil-pbc-separated-cancellation (a) (open immersion separated) and lem-weil-pbc-proper-fp-permanence (e) (composite of separated). Step 2: the induction on n (over all separated qc W with an n-affine cover) using the IH on U and U cap V (each covered by n-1 affines), the affine premise on V and the gluing premise; elementary and checkable. Only proof fields, status and split_report changed; no new nodes, no leaves, no tool_uses. Small cases n=1 (affine W) and n=2 (two affines, affine overlap) checked. Minor: the report mentions a citations.json that is not in the commit (harmless). Start Sat Oct 10 04:33:02 PM UTC 2026, end Sat Oct 10 04:33:29 PM UTC 2026."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedOpenInduction",
+  "declaration": "AlgebraicGeometry.separated_quasiCompact_open_induction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedOpenInduction.lean",
+  "statement": "theorem separated_quasiCompact_open_induction (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (P : X.Opens → Prop) (h_affine : ∀ U : X.Opens, IsAffineOpen U → P U) (h_union : ∀ (U V : X.Opens), IsCompact (U : Set X) → IsAffineOpen V → P U → P V → P (U ⊓ V) → P (U ⊔ V)) (W : X.Opens) (hW_qc : IsCompact (W : Set X)) (hW_sep : W.toScheme.IsSeparated) : P W",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-iss1215"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-iss1215",
+  "group": "E1",
+  "result": "fix",
+  "note": "X qcqs = Scheme+[CompactSpace]+[QuasiSeparatedSpace]; P : X.Opens → Prop; affine clause IsAffineOpen; gluing clause U compact, V affine, P U,P V,P(U⊓V) → P(U⊔V); conclusion W compact + W.toScheme.IsSeparated → P W; forms aligned with M1 quasiCompactOpen_induction (IsAffineOpen/IsCompact, h_union)"
  }
 }
