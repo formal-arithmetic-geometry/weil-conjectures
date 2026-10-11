@@ -296,12 +296,14 @@ noncomputable def leftDerivedUpperStarTateObjectIso [HasInvertibleExponent Λ X]
 
 omit [HasTateTwist Λ] in
 variable (Λ) in
-/-- The identification `Lf^* Λ_Y ≅ Λ_X` of the constant complexes: the canonical identification
-`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso` of the derived pullback of the monoidal
-unit. It does not depend on a Tate twist datum. -/
+/-- The identification `Lf^* Λ_Y ≅ Λ_X` of the constant complexes: the counit `η` of the oplax
+monoidal structure of the derived pullback (`AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`),
+which is an isomorphism. It does not depend on a Tate twist datum. -/
 noncomputable def leftDerivedUpperStarConstantComplexIso (f : X ⟶ Y) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ Y) ≅ constantComplex Λ X :=
-  leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) f
+  letI := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) f
+  haveI := isIso_leftDerivedUpperStarOplaxMonoidal_η (ModuleCat.{u + 1} Λ) f
+  asIso (Functor.OplaxMonoidal.η (L((f)^*[ModuleCat.{u + 1} Λ])))
 
 variable (Λ) in
 /-- The identification `Le^* (Λ_X(m)[2m]) ≅ Λ_U(m)[2m]`, through the shift compatibility of
