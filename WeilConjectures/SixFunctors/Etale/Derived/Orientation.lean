@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
@@ -68,6 +69,9 @@ perfect complex into its coefficient dual, twisted and shifted.
   change of coefficients is `CategoryTheory.MonoidalClosed.map_ihomIsoIhomUnitTensor_hom`, and
   the pro-étale coefficient stages are
   `WeilConjectures.SixFunctors.ProEtale.Derived.DualPerfect`.
+- `AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor_hom_app_shift`
+  (`thm-sf-dual-perfect`): `θ` commutes with shifts, `θ_{K⟦n⟧} = θ_K⟦-n⟧` under
+  `AlgebraicGeometry.Etale.derivedHomShiftIso` (`RHom(K⟦n⟧, M) ≅ RHom(K, M)⟦-n⟧`).
 
 ## Implementation notes
 
@@ -208,6 +212,92 @@ lemma verdierDualEquivalenceOfIso_functor_obj_obj
     ((verdierDualEquivalenceOfIso γ hT).functor.obj K).obj =
       (verdierDual A a).obj (op K.unop.obj) :=
   rfl
+
+section Shift
+
+variable (X) in
+/-- Tensoring on the left with the shifted unit is the shift: `Λ_X⟦n⟧ ⊗ᴸ M ≅ M⟦n⟧`, naturally in
+`M`, through the symmetry, the commutation of `M ⊗ᴸ -` with the shift
+(`AlgebraicGeometry.Etale.derivedTensorRightShiftIso`) and the right unitor. -/
+noncomputable def tensorLeftUnitShiftIso (n : ℤ) :
+    tensorLeft ((𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))⟦n⟧) ≅
+      shiftFunctor (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) n :=
+  BraidedCategory.tensorLeftIsoTensorRight _ ≪≫ derivedTensorRightShiftIso A (𝟙_ _) n ≪≫
+    Functor.isoWhiskerRight (NatIso.ofComponents (fun M ↦ ρ_ M) (fun f ↦ rightUnitor_naturality f) :
+      derivedTensorRight A X (𝟙_ _) ≅ 𝟭 _) _
+
+variable (X) in
+/-- The derived hom out of the shifted unit is the opposite shift, `RHom(Λ_X⟦n⟧, M) ≅ M⟦-n⟧`,
+naturally in `M`: both are right adjoint to `M ↦ M⟦n⟧ ≅ Λ_X⟦n⟧ ⊗ᴸ M`. -/
+noncomputable def ihomUnitShiftIso (n : ℤ) :
+    ihom ((𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))⟦n⟧) ≅
+      shiftFunctor (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (-n) :=
+  (ihom.adjunction _).rightAdjointUniq
+    ((shiftEquiv (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) n).toAdjunction
+      |>.ofNatIsoLeft
+      (tensorLeftUnitShiftIso X n).symm)
+
+/-- The shift as a twist: `K ⊗ᴸ Λ_X⟦n⟧ ≅ (K ⊗ᴸ Λ_X)⟦n⟧ ≅ K⟦n⟧`. -/
+noncomputable def tensorUnitShiftIso (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (n : ℤ) : K ⊗ (𝟙_ _)⟦n⟧ ≅ K⟦n⟧ :=
+  (derivedTensorRightShiftIso A (𝟙_ _) n).app K ≪≫ (shiftFunctor _ n).mapIso (ρ_ K)
+
+/-- The derived hom turns shifts in the first variable into opposite shifts:
+```
+  RHom(K⟦n⟧, M) ≅ RHom(K ⊗ᴸ Λ_X⟦n⟧, M) ≅ RHom(Λ_X⟦n⟧, RHom(K, M)) ≅ RHom(K, M)⟦-n⟧,
+```
+the composite of `RHom(K ⊗ᴸ Λ_X⟦n⟧ ≅ K⟦n⟧, M)`, of internal currying and of
+`AlgebraicGeometry.Etale.ihomUnitShiftIso`. -/
+noncomputable def derivedHomShiftIso (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (n : ℤ) (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (ihom (K⟦n⟧)).obj M ≅ ((ihom K).obj M)⟦-n⟧ :=
+  (MonoidalClosed.internalHom.flip.obj M).mapIso (tensorUnitShiftIso K n).op ≪≫
+    MonoidalClosed.ihomCurryIso K _ M ≪≫ (ihomUnitShiftIso X n).app _
+
+/-- Moving the shift out of the left factor of a tensor product with an invertible complex:
+```
+  M⟦-n⟧ ⊗ᴸ T ≅ RHom(Λ_X⟦n⟧, M) ⊗ᴸ T ≅ RHom(Λ_X⟦n⟧, M ⊗ᴸ T) ≅ (M ⊗ᴸ T)⟦-n⟧,
+```
+by `AlgebraicGeometry.Etale.ihomUnitShiftIso` and the twist interchange. -/
+noncomputable def shiftTensorIsoOfIsInvertible (n : ℤ)
+    (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    M⟦-n⟧ ⊗ T ≅ (M ⊗ T)⟦-n⟧ :=
+  haveI := MonoidalClosed.isIso_ihomTensorToIhom ((𝟙_ _)⟦n⟧) M hT
+  whiskerRightIso ((ihomUnitShiftIso X n).app M).symm T ≪≫
+    asIso (MonoidalClosed.ihomTensorToIhom _ M T) ≪≫ (ihomUnitShiftIso X n).app _
+
+/-- Blueprint `thm-sf-dual-perfect`: The dual of a perfect complex (compatibility with shifts).
+
+The isomorphism `θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` commutes with shifts: under the identifications
+`𝔻_X (K⟦n⟧) ≅ (𝔻_X K)⟦-n⟧` and `(K⟦n⟧)^∨ ⊗ᴸ T ≅ K^∨⟦-n⟧ ⊗ᴸ T ≅ (K^∨ ⊗ᴸ T)⟦-n⟧`
+(`AlgebraicGeometry.Etale.derivedHomShiftIso`,
+`AlgebraicGeometry.Etale.shiftTensorIsoOfIsInvertible`), `θ_{K⟦n⟧}` is `θ_K⟦-n⟧`. -/
+theorem verdierDualIsoCoefficientDualTensor_hom_app_shift
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (n : ℤ) :
+    (verdierDualIsoCoefficientDualTensor γ hT).hom.app (op (K⟦n⟧)) ≫
+        (derivedHomShiftIso K n (𝟙_ _)).hom ▷ T ≫ (shiftTensorIsoOfIsInvertible hT n _).hom =
+      (derivedHomShiftIso K n (dualizingComplex A a)).hom ≫
+        ((verdierDualIsoCoefficientDualTensor γ hT).hom.app (op K))⟦-n⟧' := by
+  have h₁ := MonoidalClosed.pre_app_comp_ihomIsoIhomUnitTensor_hom γ hT
+    (tensorUnitShiftIso K n).hom
+  have h₂ := MonoidalClosed.ihomCurry_comp_map_ihomIsoIhomUnitTensor_hom γ hT K
+    ((𝟙_ (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))⟦n⟧)
+  have h₃ := (ihomUnitShiftIso X n).hom.naturality
+    (MonoidalClosed.ihomIsoIhomUnitTensor γ hT K).hom
+  have h₄ : (ihomUnitShiftIso X n).hom.app ((ihom K).obj (𝟙_ _)) ▷ T ≫
+      (ihomUnitShiftIso X n).inv.app ((ihom K).obj (𝟙_ _)) ▷ T = 𝟙 _ := by
+    rw [← comp_whiskerRight, Iso.hom_inv_id_app, id_whiskerRight]
+  simp only [derivedHomShiftIso, shiftTensorIsoOfIsInvertible, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.op_hom, whiskerRightIso_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, asIso_hom,
+    MonoidalClosed.ihomCurryIso_hom, comp_whiskerRight, Category.assoc, Functor.flip_obj_map,
+    MonoidalClosed.internalHom_map, Quiver.Hom.unop_op]
+  rw [show (verdierDualIsoCoefficientDualTensor γ hT).hom.app (op K) =
+      (MonoidalClosed.ihomIsoIhomUnitTensor γ hT K).hom from rfl,
+    show (verdierDualIsoCoefficientDualTensor γ hT).hom.app (op (K⟦n⟧)) =
+      (MonoidalClosed.ihomIsoIhomUnitTensor γ hT (K⟦n⟧)).hom from rfl,
+    reassoc_of% h₄, ← reassoc_of% h₁, ← reassoc_of% h₂, h₃]
+
+end Shift
 
 end InvertibleDualizingComplex
 

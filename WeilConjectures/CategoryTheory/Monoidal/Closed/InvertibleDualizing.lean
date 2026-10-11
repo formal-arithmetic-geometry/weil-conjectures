@@ -45,6 +45,8 @@ dualizable `X`, and `[-, W]` restricts to an anti-equivalence of the dualizable 
 
 - `CategoryTheory.MonoidalClosed.whiskerLeft_ihomIsoIhomUnitTensor_hom_comp`: `θ` is compatible
   with the evaluations `X ⊗ [X, W] ⟶ W` and `X ⊗ [X, 𝟙_ C] ⟶ 𝟙_ C`.
+- `CategoryTheory.MonoidalClosed.ihomCurry_comp_map_ihomIsoIhomUnitTensor_hom`: `θ` is compatible
+  with internal currying, `[K ⊗ A, W] ≅ [A, [K, W]]`; this gives the compatibility with shifts.
 - `CategoryTheory.MonoidalClosed.map_ihomIsoIhomUnitTensor_hom`: `θ` is compatible with monoidal
   functors, such as a change of coefficients (blueprint `thm-sf-dual-perfect`).
 - `CategoryTheory.MonoidalClosed.toIhomIhom_comp_ihomIhomIsoIhomIhomUnit_hom`: under `θ` the
@@ -137,6 +139,72 @@ lemma whiskerLeft_ihomIsoIhomUnitTensor_hom_comp (X : C) :
     simp [ihomIsoIhomUnitTensor]
   rw [this, MonoidalCategory.whiskerLeft_comp_assoc, ihom.ev_naturality_assoc,
     ihom.ev_naturality_assoc, Iso.inv_hom_id, Category.comp_id]
+
+/-- The internal currying `[K ⊗ A, Z] ⟶ [A, [K, Z]]` is natural in `Z`. -/
+@[reassoc]
+lemma map_comp_ihomCurry (K A : C) {Z Z' : C} (g : Z ⟶ Z') :
+    (ihom (K ⊗ A)).map g ≫ ihomCurry K A Z' = ihomCurry K A Z ≫ (ihom A).map ((ihom K).map g) := by
+  apply uncurry_injective
+  apply uncurry_injective
+  rw [uncurry_natural_left, uncurry_natural_right, uncurry_natural_left, uncurry_natural_right,
+    uncurry_uncurry_ihomCurry, uncurry_uncurry_ihomCurry, associator_inv_naturality_right_assoc,
+    Category.assoc]
+  simp only [ihom.ev_naturality]
+
+/-- The canonical map `[X, Z] ⊗ N ⟶ [X, Z ⊗ N]` is compatible with internal currying: the
+square
+```
+  [K ⊗ A, Z] ⊗ N ─────────── ihomTensorToIhom ───────────→ [K ⊗ A, Z ⊗ N]
+        │                                                          │
+  ihomCurry ▷ N                                                ihomCurry
+        ↓                                                          ↓
+  [A, [K, Z]] ⊗ N ─ ihomTensorToIhom ─→ [A, [K, Z] ⊗ N] ─ [A, ihomTensorToIhom] ─→ [A, [K, Z ⊗ N]]
+```
+commutes. -/
+@[reassoc]
+lemma ihomTensorToIhom_comp_ihomCurry (K A Z N : C) :
+    ihomTensorToIhom (K ⊗ A) Z N ≫ ihomCurry K A (Z ⊗ N) =
+      ihomCurry K A Z ▷ N ≫ ihomTensorToIhom A ((ihom K).obj Z) N ≫
+        (ihom A).map (ihomTensorToIhom K Z N) := by
+  apply uncurry_injective
+  apply uncurry_injective
+  simp only [uncurry_eq, MonoidalCategory.whiskerLeft_comp, Category.assoc, ihomTensorToIhom,
+    ihomCurry, ihom.ev_naturality, whiskerLeft_curry_ihom_ev_app]
+  rw [associator_inv_naturality_right_assoc, whiskerLeft_curry_ihom_ev_app,
+    ← MonoidalCategory.whiskerLeft_comp_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc,
+    Category.assoc, whiskerLeft_curry_ihom_ev_app,
+    associator_inv_naturality_middle_assoc, ← comp_whiskerRight,
+    whiskerLeft_curry_ihom_ev_app, MonoidalCategory.whiskerLeft_comp_assoc]
+  have key {Y : C} (c : Y ⟶ (ihom K).obj Z) :
+      K ◁ c ▷ N ≫ (α_ _ _ _).inv ≫ (ihom.ev K).app Z ▷ N =
+        (α_ _ _ _).inv ≫ (K ◁ c ≫ (ihom.ev K).app Z) ▷ N := by
+    rw [associator_inv_naturality_middle_assoc, comp_whiskerRight]
+  rw [key, whiskerLeft_curry_ihom_ev_app]
+  monoidal
+
+/-- Blueprint `thm-sf-dual-perfect`: The dual of a perfect complex (compatibility with
+twisting the source).
+
+The isomorphism `θ` is compatible with internal currying: for all `K` and `A`, the square
+```
+  [K ⊗ A, W] ────────────────── θ_{K ⊗ A} ──────────────────→ [K ⊗ A, 𝟙_ C] ⊗ T
+       │                                                              │
+   ihomCurry                                                 ihomCurry ▷ T
+       ↓                                                              ↓
+  [A, [K, W]] ── [A, θ_K] ──→ [A, [K, 𝟙_ C] ⊗ T] ←── ihomTensorToIhom ── [A, [K, 𝟙_ C]] ⊗ T
+```
+commutes. For `A = Λ_X⟦n⟧` this is the compatibility of `θ` with shifts. -/
+lemma ihomCurry_comp_map_ihomIsoIhomUnitTensor_hom (K A : C) :
+    ihomCurry K A W ≫ (ihom A).map (ihomIsoIhomUnitTensor γ hT K).hom =
+      (ihomIsoIhomUnitTensor γ hT (K ⊗ A)).hom ≫ ihomCurry K A (𝟙_ C) ▷ T ≫
+        ihomTensorToIhom A ((ihom K).obj (𝟙_ C)) T := by
+  rw [← cancel_epi (ihomIsoIhomUnitTensor γ hT (K ⊗ A)).inv, Iso.inv_hom_id_assoc,
+    ← cancel_mono ((ihom A).map (ihomIsoIhomUnitTensor γ hT K).inv), Category.assoc,
+    Category.assoc, ← Functor.map_comp, Iso.hom_inv_id, Functor.map_id, Category.comp_id,
+    Category.assoc,
+    ihomIsoIhomUnitTensor_inv, ihomIsoIhomUnitTensor_inv, Category.assoc, Category.assoc,
+    map_comp_ihomCurry, map_comp_ihomCurry_assoc, ihomTensorToIhom_comp_ihomCurry_assoc]
+  simp only [Functor.map_comp]
 
 /-- The compatibility of `θ_X` with the evaluations, read along `θ_X⁻¹`. -/
 @[reassoc]
