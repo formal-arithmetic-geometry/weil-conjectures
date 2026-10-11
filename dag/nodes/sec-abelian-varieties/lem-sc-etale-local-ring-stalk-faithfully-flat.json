@@ -123,5 +123,23 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-esf2924 (reviewer sub-agent of L); spot-checked: Statement vs Tag 0C4Y(1) and vs K1 consumer lem-sc-etale-local-ring-faithfully-flat-descent (B over A, q_K over q; reviewer's application to A is B=A, trivially f.p.): matches (C4). Step1 cites lem-weil-pbc-field-extension-base-change-faithfully-flat (D=B as k-algebra, flatness of B->B_K cited, C1 ok). Step2 cites lem-weil-pbc-flat-local-ring-maps (contraction hypothesis = q_K over q; gives flat and local). Step3 cites lem-pc-local-flat-faithful-flat-reflects-surjective first clause = Tag 00HR. Finite presentation hypothesis unused in the proof; harmless extra hypothesis kept for the consumer's setting, not a changed statement (E ok). No new nodes. No faults found beyond those the M1 second reading corrected."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalRingHomTensorProductFieldExtensionFaithfullyFlat",
+  "declaration": "Localization.localRingHom_tensorProduct_fieldExtension_faithfullyFlat",
+  "file": "lean/Sheaf/RingTheory/LocalRingHomTensorProductFieldExtensionFaithfullyFlat.lean",
+  "statement": "theorem localRingHom_tensorProduct_fieldExtension_faithfullyFlat {k : Type u} {K : Type v} {A : Type w} {B : Type x} [Field k] [Field K] [Algebra k K] [CommRing A] [Algebra k A] [CommRing B] [Algebra A B] [Algebra k B] [IsScalarTower k A B] [Algebra.FinitePresentation A B] (q : Ideal B) [q.IsPrime] (qK : Ideal (B ⊗[k] K)) [qK.IsPrime] (h : q = qK.comap (Algebra.TensorProduct.includeLeftRingHom : B →+* B ⊗[k] K)) : (Localization.localRingHom q qK Algebra.TensorProduct.includeLeftRingHom h).FaithfullyFlat",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lsf1017",
+  "group": "M1",
+  "result": "pass",
+  "note": "k field, K/k Algebra, A k-alg, B FP A-alg with k->A->B tower (as sibling IsEtaleAt.of_fieldExtension), q, qK primes, h comap includeLeftRingHom, conclusion RingHom.FaithfullyFlat of localRingHom; no Mathlib combined statement"
  }
 }
