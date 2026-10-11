@@ -136,5 +136,28 @@
   "by": "L",
   "result": "pass",
   "note": "recipe aligned with Stacks 01F8/01F9; claims inside cited or elementary; the lead added the two pointers (functoriality lemma, derived-unit description) to pointers"
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance",
+  "declaration": "AlgebraicGeometry.Etale.cohomologyMap",
+  "statement": "def cohomologyMap : Sheaf.H F n →+ Sheaf.H (((f)^*[AddCommGrpCat.{u + 1}]).obj F) n",
+  "branch": "slopmaster2",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": true,
+  "declarations": [
+   "AlgebraicGeometry.Etale.cohomologyMap",
+   "CategoryTheory.Sheaf.H.mapFunctor"
+  ],
+  "note": "Existing upstream notion (R-dcp): the pullback map on étale cohomology is AlgebraicGeometry.Etale.cohomologyMap f F n : Sheaf.H F n →+ Sheaf.H ((f)^*[AddCommGrpCat.{u+1}].obj F) n, for f : X ⟶ Y in Scheme.{u}, F an abelian sheaf on Y's small étale site (variables of the section), defined as Sheaf.H.mapFunctor of the exact functor f^* with the constant-sheaf comparison upperStarConstantSheafIso. It is the map every recorded PBC citer states with (bijective_cohomologyMap_*, prop-weil-pbc-gabber-pair-comparison, lemma-weil-pbc-h1-torsor-comparison, prop-weil-pbc-p1-strict-henselian-comparison, ...). The delivered resolution-parametrized module (cohomologyPullbackComplex, cohomologyPullback, derivedCohomologyPullback) was a second spelling of this notion and is left out. As for def-weil-pbc-etale-cohomology (ff2087b8c), the agreement of this Ext-map with the node's K-injective-resolution recipe (Γ of the unit, then Γ of the comparison to J) is a stage-3 bridge, together with Sheaf.H F q ≅ (Etale.cohomology _ T q).obj (single 0 F). The node's derived clause u^*: RΓ(X,K) → RΓ(Y,u^{-1}K) on D^+ has no upstream declaration (Derived/GlobalSections.lean leaves the general derived pullback as TODO; only rightDerivedLowerStarCompRightDerivedGlobalSectionsIso and the iso case upperStarCompRightDerivedGlobalSectionsIso exist); no citer's recorded Lean uses it.",
+  "fixed_by": "R-dcp"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dcp",
+  "group": "C1",
+  "result": "fix",
+  "note": "left out new module(s) lean/Sheaf/AlgebraicGeometry/CohomologyPullback.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
