@@ -5458,3 +5458,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 16:52 L: merged deliver/R1/lemma-weil-pbc-exact-couple-abutment (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.TruncationExchangeAbutment AlgebraicGeometry.Etale.truncation_exchange_exact_couple_abutment)
 - 16:53 L: merged deliver/C1/def-sc-duality-equation-base-change-map (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap AlgebraicGeometry.dualityEquationBaseChangeMap)
 - 16:54 L: merged deliver/R1/lem-weil-pbc-exact-couple-differential (stage 2; reviewer PASS; first push; Sheaf.Paper.ExactCoupleDifferential AlgebraicGeometry.Etale.exact_couple_differential)
+- 16:54 L: merged deliver/R1/lem-sc-affine-unit-divisor-base-change (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AffineUnitDivisorBaseChange AlgebraicGeometry.affine_unit_divisor_base_change; statement correction reverted (statement, statement_change))

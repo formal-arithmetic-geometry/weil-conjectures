@@ -149,5 +149,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineUnitDivisorBaseChange",
+  "declaration": "AlgebraicGeometry.affine_unit_divisor_base_change",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineUnitDivisorBaseChange.lean",
+  "statement": "theorem affine_unit_divisor_base_change (k k' : Type u) [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k'] (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C] (c : Compactification f) [IsConnectedCurve c.g] [Smooth c.g] : ∃ (_ : IsIntegral c.Z) (_ : IsNoetherian c.Z) (_ : IsIntegral (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z) (_ : IsNoetherian (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z), ∃ (φ : Γ(C, ⊤) →+* c.Z.functionField) (φ' : Γ(CategoryTheory.Limits.pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k'))), ⊤) →+* (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z.functionField), (∀ (x : C) (s : Γ(C, ⊤)) (y : c.Z.presheaf.stalk (c.i.base x)), c.i.stalkMap x y = C.presheaf.germ ⊤ x trivial s → φ s = algebraMap (c.Z.presheaf.stalk (c.i.base x)) c.Z.functionField y) ∧ (∀ (x : (CategoryTheory.Limits.pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k'))) : Scheme.{u})) (s : Γ(CategoryTheory.Limits.pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k'))), ⊤)) (y : (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z.presheaf.stalk ((c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).i.base x)), (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).i.stalkMap x y = (CategoryTheory.Limits.pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).presheaf.germ ⊤ x trivial s → φ' s = algebraMap ((c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z.presheaf.stalk ((c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).i.base x)) (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z.functionField y) ∧ ∃ e : {P : closedPoints c.Z // P.val ∉ Set.range c.i.base} ≃ {P : closedPoints (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z // P.val ∉ Set.range (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).i.base}, (∀ P : {P : closedPoints c.Z // P.val ∉ Set.range c.i.base}, (CategoryTheory.Limits.pullback.fst c.g (Spec.map (CommRingCat.ofHom (algebraMap k k')))).base (e P).val.val = P.val.val ∧ ∀ Q : (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z, (CategoryTheory.Limits.pullback.fst c.g (Spec.map (CommRingCat.ofHom (algebraMap k k')))).base Q = P.val.val → Q = (e P).val.val) ∧ (∀ u : Γ(C, ⊤)ˣ, Finsupp.subtypeDomain (fun P : closedPoints (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z ↦ P.val ∉ Set.range (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).i.base) ((c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z.div (Additive.ofMul (Units.map φ'.toMonoidHom (Units.map (CategoryTheory.Limits.pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).appTop.hom.toMonoidHom u)))) = Finsupp.domCongr e (Finsupp.subtypeDomain (fun P : closedPoints c.Z ↦ P.val ∉ Set.range c.i.base) (c.Z.div (Additive.ofMul (Units.map φ.toMonoidHom u))))) ∧ Finsupp.domCongr e '' Set.range (fun u : Γ(C, ⊤)ˣ ↦ Finsupp.subtypeDomain (fun P : closedPoints c.Z ↦ P.val ∉ Set.range c.i.base) (c.Z.div (Additive.ofMul (Units.map φ.toMonoidHom u)))) = Set.range (fun u' : Γ(CategoryTheory.Limits.pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k'))), ⊤)ˣ ↦ Finsupp.subtypeDomain (fun P : closedPoints (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z ↦ P.val ∉ Set.range (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).i.base) ((c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z.div (Additive.ofMul (Units.map φ'.toMonoidHom u'))))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false,
+  "fixed_by": "R-udb"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-udb",
+  "group": "R1",
+  "result": "fix",
+  "note": "Correction reverted (H7: named a Lean error, weakened node to arbitrary X', iota, rho, L, L'). Restated: k,k' alg closed; C smooth affine connected; c smooth proper connected compactification; X'=c.baseChange t, C'=pullback f t; S,S' boundaries with tied bijection e (unique point over P); iota=Finsupp.domCongr e; unit clause via div of u and appTop-pullback u' (phi, phi' tied to germs); iota maps unit-boundary set onto the C' one.; reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
  }
 }
