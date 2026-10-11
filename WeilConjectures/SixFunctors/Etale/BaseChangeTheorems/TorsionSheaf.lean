@@ -9,6 +9,7 @@ public import Mathlib
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 
 /-!
 
@@ -25,6 +26,9 @@ torsion conditions entering the statement of the proper base change theorem:
   this point. Since the geometric points form a conservative family, this stalkwise
   condition agrees with the classical definition [Stacks 03SA] that `F` is the filtered
   union of its `n`-torsion subsheaves.
+  The bridge `AlgebraicGeometry.Scheme.isTorsionSheaf_iff_isTorsion` identifies it with the
+  local condition `CategoryTheory.Sheaf.IsTorsion` (every section is locally torsion) on the
+  underlying sheaf of abelian groups.
 - `AlgebraicGeometry.Etale.DerivedCategory.Plus.torsionHomology`: the property of an
   object of the bounded below derived category of étale sheaves of `Λ`-modules that all
   its cohomology sheaves are torsion.
@@ -84,6 +88,34 @@ class Scheme.IsTorsionSheaf {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop where
   isTorsion_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :
     IsAddTorsion (↥((pointSmallEtale s).sheafFiber.obj F))
+
+/-- A sheaf of `Λ`-modules on the small étale site is torsion in the stalkwise sense
+`AlgebraicGeometry.Scheme.IsTorsionSheaf` if and only if its underlying sheaf of abelian
+groups is torsion in the local sense `CategoryTheory.Sheaf.IsTorsion`: every section is locally
+torsion. -/
+lemma Scheme.isTorsionSheaf_iff_isTorsion {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsTorsionSheaf F ↔
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F).IsTorsion := by
+  have : PreservesFilteredColimitsOfSize.{u, u}
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  rw [isTorsion_iff_isAddTorsion_sheafFiber]
+  refine ⟨fun h Ω _ _ s ↦ ?_, fun h ↦ ⟨fun Ω _ _ s ↦ ?_⟩⟩
+  · let e := ((pointSmallEtale s).sheafFiberCompIso
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).app F
+    have : IsAddTorsion ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj
+        ((pointSmallEtale s).sheafFiber.obj F)) :=
+      IsTorsionSheaf.isTorsion_sheafFiber (F := F) Ω s
+    exact IsAddTorsion.of_surjective (f := e.inv.hom)
+      (ConcreteCategory.bijective_of_isIso e.inv).2 this
+  · let e := ((pointSmallEtale s).sheafFiberCompIso
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).app F
+    have : IsAddTorsion ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj
+        ((pointSmallEtale s).sheafFiber.obj F)) :=
+      IsAddTorsion.of_surjective (f := e.hom.hom) (ConcreteCategory.bijective_of_isIso e.hom).2
+        (h Ω s)
+    exact this
 
 /-- If the coefficient ring `Λ` is torsion as an additive group — in particular if `Λ`
 is finite, e.g. `Λ = ℤ/ℓⁿℤ` — then every sheaf of `Λ`-modules on the small étale site is
@@ -189,8 +221,72 @@ theorem Scheme.IsTorsionSheaf.exists_isColimit (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] :
     ∃ (J : Type) (_ : SmallCategory J) (_ : IsFiltered J)
       (D : J ⥤ Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (c : Cocone D)
-      (_ : IsColimit c), c.pt = F ∧ ∀ j, ∃ n : ℕ, 0 < n ∧ n • 𝟙 (D.obj j) = 0 :=
-  sorry
+      (_ : IsColimit c), c.pt = F ∧ ∀ j, ∃ n : ℕ, 0 < n ∧ n • 𝟙 (D.obj j) = 0 := by
+  have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    IsGrothendieckAbelian.hasColimits _
+  have : HasColimitsOfSize.{0, 0} (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    hasColimitsOfSizeShrink.{0, 0, u + 1, u + 1} _
+  have : HasColimitsOfShape ℕ (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    inferInstance
+  have : AB5OfSize.{0, 0} (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    AB5OfSize_of_univLE.{0, 0, u + 1, u + 1} _
+  have : IsConnected ℕ := IsFiltered.isConnected ℕ
+  -- the chain of subsheaves `F[k!]` of `F`
+  have hN : Monotone fun k : ℕ ↦ kernelSubobject (k.factorial • 𝟙 F) := fun k k' hk ↦ by
+    obtain ⟨r, hr⟩ := Nat.factorial_dvd_factorial hk
+    have : k'.factorial • 𝟙 F = (k.factorial • 𝟙 F) ≫ (r • 𝟙 F) := by
+      simp only [hr, Preadditive.comp_nsmul, Category.comp_id, mul_comm, mul_nsmul]
+      exact smul_comm _ _ _
+    change kernelSubobject _ ≤ kernelSubobject _
+    rw [this]
+    exact kernelSubobject_comp_le _ _
+  let K : ℕ ⥤ Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
+    hN.functor ⋙ Subobject.underlying
+  let α : K ⟶ (Functor.const ℕ).obj F :=
+    { app k := (kernelSubobject (k.factorial • 𝟙 F)).arrow
+      naturality k k' f := by simp [K] }
+  have : Mono α := NatTrans.mono_of_mono_app α
+  let cK : Cocone K := { pt := F, ι := α }
+  let t := colimit.desc K cK
+  have ht : Mono t := colim.map_mono' α (colimit.isColimit K) (isColimitConstCocone ℕ F) t
+    (fun k ↦ by simp [t, cK])
+  -- `t` is an epimorphism, as can be checked on geometric stalks, which are torsion
+  have : Epi t := by
+    refine ⟨fun {G} g h hgh ↦ ?_⟩
+    have hk (k : ℕ) : α.app k ≫ g = α.app k ≫ h := by
+      simpa [t, cK] using colimit.ι K k ≫= hgh
+    have : AB5OfSize.{u + 1, u + 1} (ModuleCat.{u + 1} Λ) := inferInstance
+    have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+      hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+    have : AB5OfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+      AB5OfSize_of_univLE.{u, u, u + 1, u + 1} _
+    refine sheafHom_ext_of_sheafFiber_map_algClosurePoint fun p ↦ ?_
+    have := (pointSmallEtale (T.algClosurePoint p)).sheafFiber_additive (A := ModuleCat.{u + 1} Λ)
+    ext x
+    obtain ⟨m, hm, hx⟩ := isOfFinAddOrder_iff_nsmul_eq_zero.1
+      (IsTorsionSheaf.isTorsion_sheafFiber (F := F) _ _ x)
+    have hS :=
+      (ShortComplex.kernelSequence_exact (m.factorial • 𝟙 F)).map_of_mono_of_preservesKernel
+        (pointSmallEtale (T.algClosurePoint p)).sheafFiber inferInstance inferInstance
+    have hx' : (pointSmallEtale (T.algClosurePoint p)).sheafFiber.map (m.factorial • 𝟙 F) x =
+        0 := by
+      obtain ⟨r, hr⟩ := Nat.dvd_factorial hm le_rfl
+      simp [hr, mul_nsmul, hx]
+    obtain ⟨y, hy⟩ := (ShortComplex.moduleCat_exact_iff _).1 hS x hx'
+    have e : kernel.ι (m.factorial • 𝟙 F) ≫ g = kernel.ι (m.factorial • 𝟙 F) ≫ h := by
+      rw [← kernelSubobject_arrow', Category.assoc, Category.assoc]
+      exact (kernelSubobjectIso _).inv ≫= hk m
+    have := congr((pointSmallEtale (T.algClosurePoint p)).sheafFiber.map $e y)
+    simp only [Functor.map_comp, ConcreteCategory.comp_apply] at this
+    rw [← hy]
+    exact this
+  have : IsIso ((colimit.isColimit K).desc cK) := isIso_of_mono_of_epi t
+  refine ⟨ℕ, inferInstance, inferInstance, K, cK, IsColimit.ofPointIso (colimit.isColimit K),
+    rfl, fun k ↦ ⟨k.factorial, k.factorial_pos, ?_⟩⟩
+  have := kernelSubobject_arrow_comp (k.factorial • 𝟙 F)
+  rw [Preadditive.comp_nsmul, Category.comp_id] at this
+  rw [← cancel_mono (α.app k), Preadditive.nsmul_comp, Category.id_comp, zero_comp]
+  exact this
 
 section InvertibleOrder
 

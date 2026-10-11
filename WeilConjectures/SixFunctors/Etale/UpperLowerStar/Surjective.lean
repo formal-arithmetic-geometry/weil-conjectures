@@ -5,6 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
@@ -23,6 +24,8 @@ surjective the geometric points of `T` of this form already make up a conservati
   surjective morphism is faithful.
 - `AlgebraicGeometry.Etale.mono_unit_app_of_surjective`: the unit `F ⟶ π_* π^* F` is a
   monomorphism for surjective `π`.
+- `AlgebraicGeometry.Etale.reflectsIsomorphisms_upperStar_of_surjective`: the pullback along a
+  surjective morphism reflects isomorphisms.
 -/
 
 @[expose] public section
@@ -70,5 +73,13 @@ theorem Etale.mono_unit_app_of_surjective (hπ : Function.Surjective π.base)
     Mono ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) π).unit.app F) :=
   have := Etale.faithful_upperStar_of_surjective Λ π hπ
   (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) π).unit_mono_of_L_faithful F
+
+/-- The pullback of étale sheaves of `Λ`-modules along a surjective morphism `π` reflects
+isomorphisms: it is faithful by `AlgebraicGeometry.Etale.faithful_upperStar_of_surjective`, so
+it reflects monomorphisms and epimorphisms, and the category of sheaves is balanced. -/
+theorem Etale.reflectsIsomorphisms_upperStar_of_surjective (hπ : Function.Surjective π.base) :
+    (π)^*[ModuleCat.{u + 1} Λ].ReflectsIsomorphisms :=
+  have := Etale.faithful_upperStar_of_surjective Λ π hπ
+  reflectsIsomorphisms_of_reflectsMonomorphisms_of_reflectsEpimorphisms _
 
 end AlgebraicGeometry

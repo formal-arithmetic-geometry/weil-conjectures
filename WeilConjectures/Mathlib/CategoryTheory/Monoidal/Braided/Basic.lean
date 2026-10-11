@@ -27,6 +27,9 @@ through the adjunction.
 
 ## Main results
 
+- `CategoryTheory.Adjunction.μ_comp_map_braiding`: conversely, the strong monoidal left adjoint
+  of a lax braided functor, for a monoidal adjunction, is braided.
+
 - `CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ_comp_map_braiding`: the lax monoidal
   structure `Adjunction.rightAdjointLaxMonoidal` on the right adjoint of a braided functor is
   compatible with the braidings.
@@ -87,6 +90,34 @@ lemma rightAdjointLaxMonoidal_μ_comp_map_braiding (X Y : D) :
   simp
 
 end
+
+section LeftAdjoint
+
+open MonoidalCategory
+
+variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] [BraidedCategory C]
+  {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D] [BraidedCategory D]
+  {F : C ⥤ D} {G : D ⥤ C} [F.Monoidal] [G.LaxBraided]
+
+/-- **The left adjoint of a lax braided functor is braided**, for a monoidal adjunction:
+the braided axiom for `F` follows from the one for `G` by transposition. -/
+lemma map_braiding_comp_δ (adj : F ⊣ G) [adj.IsMonoidal] (X Y : C) :
+    F.map (β_ X Y).hom ≫ δ F Y X = δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom := by
+  apply (adj.homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  erw [adj.unit_naturality_assoc]
+  rw [adj.unit_app_tensor_comp_map_δ,
+    adj.unit_app_tensor_comp_map_δ_assoc, Functor.LaxBraided.braided,
+    BraidedCategory.braiding_naturality_assoc]
+
+/-- **The left adjoint of a lax braided functor is braided**, stated with the multiplication
+`μ` of the strong monoidal left adjoint. -/
+lemma μ_comp_map_braiding (adj : F ⊣ G) [adj.IsMonoidal] (X Y : C) :
+    μ F X Y ≫ F.map (β_ X Y).hom = (β_ (F.obj X) (F.obj Y)).hom ≫ μ F Y X := by
+  rw [← cancel_mono (δ F Y X), Category.assoc, map_braiding_comp_δ adj, Functor.Monoidal.μ_δ_assoc,
+    Category.assoc, Functor.Monoidal.μ_δ, Category.comp_id]
+
+end LeftAdjoint
 
 end CategoryTheory.Adjunction
 

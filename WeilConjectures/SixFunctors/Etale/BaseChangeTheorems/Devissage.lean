@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Abelian.PrimeFactorDevissage
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.LongExactSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 
 /-!
@@ -70,10 +70,9 @@ sequences), `Rg_*`, `p^*` with the homological functor `Hᵠ`. -/
 theorem Etale.exact_baseChangeSourceFunctor_map_of_shortExact (p : X ⟶ S) (g : T ⟶ S) (q : ℤ)
     {E : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hE : E.ShortExact) :
     (E.map (Etale.baseChangeSourceFunctor Λ p g q)).Exact :=
-  ((((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus ⋙
+  hE.map_exact_of_isHomological ((((g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus ⋙
       ((p)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus) ⋙
-    DerivedCategory.Plus.homologyFunctor _ q).map_distinguished_exact _
-      hE.singleTrianglePlus_distinguished
+    DerivedCategory.Plus.homologyFunctor _ q) _ rfl
 
 /-- The target `F ↦ Rᵠh_* e⁻¹ F` of the exchange map is exact in the middle on short exact
 sequences: it is the composite of the triangulated functors `F ↦ F[0]` (on short exact
@@ -81,10 +80,9 @@ sequences), `e^*`, `Rh_*` with the homological functor `Hᵠ`. -/
 theorem Etale.exact_baseChangeTargetFunctor_map_of_shortExact (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)
     {E : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hE : E.ShortExact) :
     (E.map (Etale.baseChangeTargetFunctor Λ e h q)).Exact :=
-  ((((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙
+  hE.map_exact_of_isHomological ((((e)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus ⋙
       ((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus) ⋙
-    DerivedCategory.Plus.homologyFunctor _ q).map_distinguished_exact _
-      hE.singleTrianglePlus_distinguished
+    DerivedCategory.Plus.homologyFunctor _ q) _ rfl
 
 /-- **Five-lemma transfer for the exchange morphism**: for a short exact sequence
 `0 ⟶ F₁ ⟶ F ⟶ F₂ ⟶ 0` of sheaves of `Λ`-modules, if the exchange maps are isomorphisms at `F₁`

@@ -13,18 +13,34 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.LinearAlgebra.Dual.Lemmas
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.DensePoints
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+public import WeilConjectures.AlgebraicGeometry.EffectiveCartierSum
+public import WeilConjectures.AlgebraicGeometry.FiniteOverField
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
+public import WeilConjectures.AlgebraicGeometry.Modules.GeneratingLocus
+public import WeilConjectures.AlgebraicGeometry.Modules.HomObjSections
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
+public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import WeilConjectures.Mathlib.RingTheory.Trace.Basic
 
 /-!
 # Riemann–Roch, Serre duality and the twist lemma for curves
@@ -139,6 +155,20 @@ theorem Modules.exists_ne_zero_of_nontrivial_H_zero {X : Scheme.{u}} (M : X.Modu
     M.val.map_id] at h1
   exact h1
 
+/-- **A morphism `𝒪_X ⟶ N` which vanishes on `H⁰` is zero.** Under `H⁰(X, -) = Γ(X, -)` the
+map `H⁰(σ)` sends `1` to the image of `1` under `σ`. -/
+theorem Modules.eq_zero_of_forall_H_map_zero {X : Scheme.{u}} {N : X.Modules}
+    (σ : 𝟙_ X.Modules ⟶ N) (h : ∀ z, H.map σ 0 z = 0) : σ = 0 := by
+  refine eq_zero_of_app_top_one σ ?_
+  have := Sheaf.H.equiv₀_naturality (hT := isTerminalTop)
+    ((SheafOfModules.toSheaf X.ringCatSheaf).map σ)
+    ((Sheaf.H.equiv₀ ((SheafOfModules.toSheaf X.ringCatSheaf).obj (𝟙_ X.Modules))
+      isTerminalTop).symm (1 : Γ(X, ⊤)))
+  rw [AddEquiv.apply_symm_apply] at this
+  refine this.trans ?_
+  erw [h]
+  exact map_zero _
+
 /-- **A rational point has degree one.** The closed subscheme of a `k`-rational point
 `x : Spec k ⟶ X`, cut out by the ideal sheaf `ker x`, has `dim_k Γ(x, 𝒪) = 1`. -/
 theorem Hom.finrankΓ_subschemeι_ker_fieldPoints {k : Type u} [Field k] {X : Scheme.{u}}
@@ -152,6 +182,49 @@ theorem Hom.finrankΓ_subschemeι_ker_fieldPoints {k : Type u} [Field k] {X : Sc
   rw [← Category.assoc, Hom.toImage_imageι, hx]
 
 end Sections
+
+
+section FiniteScheme
+
+variable {k : Type u} [Field k] {D : Scheme.{u}} [D.Over (Spec (.of k))]
+
+/-- **`h⁰(D, 𝒪_D) = dim_k Γ(D, 𝒪_D)`**, using `H⁰(D, 𝒪_D) = Γ(D, 𝒪_D)`. -/
+theorem Modules.finrankH_unit_zero_eq_finrankΓ :
+    (𝟙_ D.Modules).finrankH k 0 = (D ↘ Spec (.of k)).finrankΓ := by
+  let _ := (D ↘ Spec (.of k)).ΓAlgebra
+  let e : (𝟙_ D.Modules).H 0 ≃ₗ[k] Γ(D, ⊤) :=
+    { (H.zeroLinearEquiv (𝟙_ D.Modules)).toAddEquiv with
+      map_smul' c x := (H.zeroLinearEquiv (𝟙_ D.Modules)).map_smul (globalSectionsRingHom k c) x }
+  exact e.finrank_eq
+
+/-- **Invertible modules on a finite `k`-scheme.** Let `D` be finite over a field `k` and `N` an
+invertible `𝒪_D`-module. Then `h⁰(D, N) = dim_k Γ(D, 𝒪_D)`: the ring `Γ(D, 𝒪_D)` is artinian,
+hence `D` is a finite discrete space (`AlgebraicGeometry.finite_and_discreteTopology_of_isFinite`).
+Cohomology splits over its points
+(`AlgebraicGeometry.Scheme.Modules.finrankH_eq_sum_of_pairwise_disjoint`), and on each of these
+one-point schemes `N` is trivial
+(`AlgebraicGeometry.Scheme.Modules.IsInvertible.nonempty_iso_unit`). -/
+theorem Modules.finrankH_zero_eq_finrankΓ_of_isFinite [IsFinite (D ↘ Spec (.of k))]
+    (N : D.Modules) [N.IsInvertible] : N.finrankH k 0 = (D ↘ Spec (.of k)).finrankΓ := by
+  obtain ⟨_, _⟩ := finite_and_discreteTopology_of_isFinite (D ↘ Spec (.of k))
+  have : Fintype D := Fintype.ofFinite D
+  -- `D` is the disjoint union of its finitely many points, on which `N` is trivial
+  let U (p : D) : D.Opens := ⟨{p}, isOpen_discrete _⟩
+  have hU : _root_.Pairwise (Function.onFun Disjoint U) := fun p q hpq ↦ by
+    change Disjoint (U p) (U q)
+    rw [← TopologicalSpace.Opens.coe_disjoint]
+    exact Set.disjoint_singleton.mpr hpq
+  have hcover : ⨆ p, U p = ⊤ :=
+    eq_top_iff.mpr fun p _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨p, rfl⟩
+  rw [finrankH_eq_sum_of_pairwise_disjoint k U hU hcover N 0,
+    ← finrankH_unit_zero_eq_finrankΓ, finrankH_eq_sum_of_pairwise_disjoint k U hU hcover _ 0]
+  refine Finset.sum_congr rfl fun p _ ↦ ?_
+  let : (U p).toScheme.Over (Spec (.of k)) := ⟨(U p).ι ≫ D ↘ Spec (.of k)⟩
+  have : Subsingleton (U p) := ⟨fun a b ↦ Subtype.ext (a.2.trans b.2.symm)⟩
+  obtain ⟨e⟩ := IsInvertible.nonempty_iso_unit (⟨p, rfl⟩ : U p) ((pullback (U p).ι).obj N)
+  exact finrankH_congr k (e ≪≫ (pullbackObjUnitIso (U p).ι).symm) 0
+
+end FiniteScheme
 
 section Curve
 
@@ -169,23 +242,124 @@ theorem Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (M : X.Modules) :
   simp [Finset.sum_range_succ]
   ring
 
+variable (k) in
+include k in
+/-- **Vanishing above the dimension of a curve.** On a smooth proper curve `X` over `k`,
+`H^q(X, ℱ) = 0` for every sheaf of modules `ℱ` and every `q ≥ 2`: `X` is noetherian of
+dimension at most one, so this is Grothendieck vanishing
+`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`.
+
+(blueprint: `lem-pc-vanishing-above-dim`) -/
+theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules) {q : ℕ} (hq : 2 ≤ q) :
+    Subsingleton (ℱ.H q) := by
+  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
+  refine subsingleton_H_of_topologicalKrullDim_lt ℱ
+    ((topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1).trans_lt ?_)
+  exact_mod_cast hq
+
+/-- **Effective divisors on curves are finite.** Let `D` be an effective Cartier divisor on a
+smooth proper curve `X` over `k`, with invertible ideal sheaf `J`. Then `D` is finite over `k`:
+it is proper over `k`, being closed in `X`, and quasi-finite, since a local equation of `D` is a
+non-zerodivisor
+(`IdealSheafData.IsInvertible.locallyQuasiFinite_subschemeι_comp_of_field`).
+
+(blueprint: `def-sc-effective-cartier-divisor`) -/
+theorem IdealSheafData.IsInvertible.isFinite_subschemeι_comp {J : X.IdealSheafData}
+    (hJ : J.IsInvertible) : IsFinite (J.subschemeι ≫ X ↘ Spec (.of k)) :=
+  have := hJ.locallyQuasiFinite_subschemeι_comp_of_field (X ↘ Spec (.of k))
+  IsFinite.of_isProper_of_locallyQuasiFinite _
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
+/-- **A line bundle restricted to an effective divisor, finiteness.** Let `D` be an effective
+Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 𝒪_X(-D)`,
+and `M` an invertible `𝒪_X`-module. The cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` has
+finite-dimensional cohomology: it is the cohomology of the invertible module `ι^* M` on the
+proper `k`-scheme `D`. -/
+theorem IdealSheafData.IsInvertible.finiteDimensional_H_cokernel_whiskerRight
+    {J : X.IdealSheafData} (_hJ : J.IsInvertible) (M : X.Modules) [M.IsInvertible] (q : ℕ) :
+    FiniteDimensional k ((cokernel (J.toModulesι ▷ M)).H q) := by
+  let : J.subscheme.Over (Spec (.of k)) := ⟨J.subschemeι ≫ X ↘ Spec (.of k)⟩
+  have : IsProper (J.subscheme ↘ Spec (.of k)) :=
+    inferInstanceAs (IsProper (J.subschemeι ≫ X ↘ Spec (.of k)))
+  obtain ⟨e⟩ := J.nonempty_H_cokernel_whiskerRight_linearEquiv k M q
+  exact e.symm.finiteDimensional
+
+variable (k) in
+include k in
+/-- **A line bundle restricted to an effective divisor, vanishing of `H¹`.** Let `D` be an
+effective Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf
+`J = 𝒪_X(-D)`, and `M` an invertible `𝒪_X`-module. The cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` has
+`H¹(X, M|_D) = 0`: its cohomology is that of `ι^* M` on the finite, hence affine, `k`-scheme `D`
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isFinite_subschemeι_comp`). -/
+theorem IdealSheafData.IsInvertible.subsingleton_H_one_cokernel_whiskerRight
+    {J : X.IdealSheafData} (hJ : J.IsInvertible) (M : X.Modules) [M.IsInvertible] :
+    Subsingleton ((cokernel (J.toModulesι ▷ M)).H 1) := by
+  have := hJ.isFinite_subschemeι_comp (k := k)
+  have : IsAffine J.subscheme := isAffine_of_isAffineHom (J.subschemeι ≫ X ↘ Spec (.of k))
+  have := Modules.subsingleton_H_succ_of_isAffine ((Modules.pullback J.subschemeι).obj M) 0
+  obtain ⟨e⟩ := J.nonempty_H_cokernel_whiskerRight_linearEquiv k M 1
+  exact e.toEquiv.subsingleton
+
+/-- **A line bundle restricted to an effective divisor, Euler characteristic.** Let `D` be an
+effective Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf
+`J = 𝒪_X(-D)`, and `M` an invertible `𝒪_X`-module. The cokernel `M|_D` of `J ⊗ M ⟶ 𝒪_X ⊗ M` has
+`χ(M|_D) = deg D = dim_k Γ(D, 𝒪_D)`.
+
+Its cohomology is that of `ι^* M` on the finite `k`-scheme `D`, which vanishes in positive
+degrees, and `h⁰(D, ι^* M) = dim_k Γ(D, 𝒪_D)`
+(`AlgebraicGeometry.Scheme.Modules.finrankH_zero_eq_finrankΓ_of_isFinite`).
+
+(blueprint: `lem-pc-degree-base-change`, part (2)) -/
+theorem IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight {J : X.IdealSheafData}
+    (hJ : J.IsInvertible) (M : X.Modules) [M.IsInvertible] :
+    (cokernel (J.toModulesι ▷ M)).eulerChar k = (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
+  let : J.subscheme.Over (Spec (.of k)) := ⟨J.subschemeι ≫ X ↘ Spec (.of k)⟩
+  have : IsFinite (J.subscheme ↘ Spec (.of k)) := hJ.isFinite_subschemeι_comp (k := k)
+  have := hJ.subsingleton_H_one_cokernel_whiskerRight k M
+  obtain ⟨e⟩ := J.nonempty_H_cokernel_whiskerRight_linearEquiv k M 0
+  have h₀ : Modules.finrankH k (cokernel (J.toModulesι ▷ M)) 0 =
+      (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
+    rw [Modules.finrankH, e.finrank_eq]
+    exact Modules.finrankH_zero_eq_finrankΓ_of_isFinite _
+  have h₁ : Modules.finrankH k (cokernel (J.toModulesι ▷ M)) 1 = 0 :=
+    Module.finrank_zero_of_subsingleton
+  rw [Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h₀, h₁]
+  simp
+
 /-- **The degree of a line bundle twisted by an effective divisor.** Let `D` be an effective
 Cartier divisor on a smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 𝒪_X(-D)`,
 and `ℒ` an invertible `𝒪_X`-module. Then `χ(ℒ ⊗ 𝒪_X(D)) = χ(ℒ) + deg D`, where
 `deg D = dim_k Γ(D, 𝒪_D)`.
 
-Twisting `0 → 𝒪_X → 𝒪_X(D) → 𝒪_X(D)|_D → 0` by `ℒ` gives
-`0 → ℒ → ℒ ⊗ 𝒪_X(D) → ℒ|_D → 0`. The restriction `ℒ|_D` of a line bundle to the finite
-scheme `D` is trivial, and `𝒪_D` is a finite sum of skyscraper sheaves, which have no higher
-cohomology, so `χ(ℒ|_D) = h⁰(𝒪_D) = deg D`; conclude by additivity of `χ` in short exact
-sequences.
+Write `M = ℒ ⊗ 𝒪_X(D)`. Tensoring `0 → J → 𝒪_X → 𝒪_D → 0` with `M` gives the short exact
+sequence `0 → J ⊗ M → M → M|_D → 0`, where `J ⊗ M ≅ ℒ` since `J ⊗ 𝒪_X(D) ≅ 𝒪_X`. The Euler
+characteristic is additive in short exact sequences
+(`AlgebraicGeometry.Scheme.Modules.eulerChar_eq_add_of_shortExact`), and `χ(M|_D) = deg D`
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_cokernel_whiskerRight`).
 
 (blueprint: `lem-pc-degree-base-change`, part (2)) -/
 theorem IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules {J : X.IdealSheafData}
     (hJ : J.IsInvertible) (ℒ : X.Modules) [ℒ.IsInvertible] :
     (ℒ ⊗ J.toModulesᵛ).eulerChar k =
-      ℒ.eulerChar k + (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ :=
-  sorry
+      ℒ.eulerChar k + (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
+  have := hJ.isInvertible_toModules
+  have := hJ.isInvertible_dual_toModules
+  let M := ℒ ⊗ J.toModulesᵛ
+  let S := ShortComplex.mk (J.toModulesι ▷ M) (cokernel.π _) (cokernel.condition _)
+  have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  have e₂ : S.X₂ ≅ M := λ_ M
+  have : S.X₂.IsInvertible := Modules.IsInvertible.of_iso e₂.symm
+  have := hJ.finiteDimensional_H_cokernel_whiskerRight (k := k) M
+  have h := Modules.eulerChar_eq_add_of_shortExact k hS 1
+    (fun q hq ↦ Modules.subsingleton_H_of_two_le k _ (by omega))
+    (fun q hq ↦ Modules.subsingleton_H_of_two_le k _ (by omega))
+    (fun q hq ↦ Modules.subsingleton_H_of_two_le k _ (by omega))
+  obtain ⟨d⟩ := Modules.nonempty_tensorObj_dual_iso_unit J.toModules
+  have e₁ : S.X₁ ≅ ℒ := (α_ _ _ _).symm ≪≫ whiskerRightIso (β_ _ _) _ ≪≫ α_ _ _ _ ≪≫
+    whiskerLeftIso ℒ d ≪≫ ρ_ ℒ
+  rw [Modules.eulerChar_congr k e₁, Modules.eulerChar_congr k e₂,
+    hJ.eulerChar_cokernel_whiskerRight] at h
+  exact h
 
 /-- **Riemann–Roch for curves, divisor degree.** Let `D` be an effective Cartier divisor on a
 smooth proper curve `X` over `k`, with invertible ideal sheaf `J = 𝒪_X(-D)`. Then the χ-degree
@@ -217,12 +391,185 @@ theorem IdealSheafData.IsInvertible.degree_dual_toModules_eq_one {J : X.IdealShe
   rw [hJ.degree_dual_toModules, h, Nat.cast_one]
 
 include k in
+/-- **The degree of a multiple of a divisor.** For an effective Cartier divisor `D` on a smooth
+proper curve, `deg (n D) = n deg D`, by additivity of the degree of divisors
+(`AlgebraicGeometry.Scheme.IdealSheafData.finrankΓ_subschemeι_mul_comp`). -/
+theorem IdealSheafData.IsInvertible.finrankΓ_subschemeι_pow_comp {J : X.IdealSheafData}
+    (hJ : J.IsInvertible) (n : ℕ) :
+    ((J ^ n).subschemeι ≫ X ↘ Spec (.of k)).finrankΓ =
+      n * (J.subschemeι ≫ X ↘ Spec (.of k)).finrankΓ := by
+  induction n with
+  | zero =>
+    rw [zero_mul, pow_zero, IdealSheafData.one_eq_top]
+    let := ((⊤ : X.IdealSheafData).subschemeι ≫ X ↘ Spec (.of k)).ΓAlgebra
+    exact Module.finrank_zero_of_subsingleton
+  | succ n ih =>
+    have := hJ.isFinite_subschemeι_comp (k := k)
+    have := (hJ.pow n).isFinite_subschemeι_comp (k := k)
+    have : IsFinite ((J ^ n * J).subschemeι ≫ X ↘ Spec (.of k)) :=
+      ((hJ.pow n).mul hJ).isFinite_subschemeι_comp
+    rw [pow_succ, IdealSheafData.finrankΓ_subschemeι_mul_comp _ (hJ.pow n) hJ, ih, Nat.succ_mul]
+
+/-- **Twisting by a large multiple of a divisor produces sections.** Let `D` be a non-empty
+effective Cartier divisor on a smooth proper curve, with invertible ideal sheaf `J = 𝒪_X(-D)`,
+and `ℒ` an invertible sheaf. Then `H⁰(X, ℒ ⊗ 𝒪_X(n D)) ≠ 0` for all `n ≫ 0`: by
+`AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.eulerChar_tensorObj_dual_toModules`,
+`h⁰ ≥ χ(ℒ ⊗ 𝒪_X(n D)) = χ(ℒ) + deg (n D) ≥ χ(ℒ) + n`. -/
+theorem Modules.exists_finrankH_zero_pos_tensorObj_dual_pow (ℒ : X.Modules) [ℒ.IsInvertible]
+    {J : X.IdealSheafData} (hJ : J.IsInvertible) (hne : (J.support : Set X).Nonempty) :
+    ∃ n₀ : ℕ, ∀ n, n₀ ≤ n → 0 < (ℒ ⊗ (J ^ n).toModulesᵛ).finrankH k 0 := by
+  have : Nonempty J.subscheme := by
+    obtain ⟨x, hx⟩ := hne
+    rw [← IdealSheafData.range_subschemeι] at hx
+    obtain ⟨y, -⟩ := hx
+    exact ⟨y⟩
+  have := hJ.isFinite_subschemeι_comp (k := k)
+  have hd := Hom.finrankΓ_pos_of_isFinite (J.subschemeι ≫ X ↘ Spec (.of k))
+  refine ⟨(1 - ℒ.eulerChar k).toNat, fun n hn ↦ ?_⟩
+  have h₁ := (hJ.pow n).eulerChar_tensorObj_dual_toModules (k := k) ℒ
+  have h₂ := Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one (k := k)
+    (ℒ ⊗ (J ^ n).toModulesᵛ)
+  have h₃ := (hJ.finrankΓ_subschemeι_pow_comp (k := k) n).ge.trans'
+    (Nat.le_mul_of_pos_right n hd)
+  have h₄ := Int.self_le_toNat (1 - ℒ.eulerChar k)
+  omega
+
+include k in
+attribute [local instance] Abelian.hasFiniteBiproducts in
+/-- **Every line bundle has a section with divisorial zeros after a twist.** For every invertible
+sheaf `ℒ` on a smooth proper curve there is an effective Cartier divisor `D₂`, with invertible
+ideal sheaf `J₂ = 𝒪_X(-D₂)`, and a global section `s` of `ℒ ⊗ 𝒪_X(D₂)` whose zero scheme is an
+effective Cartier divisor, i.e. `s` does not vanish identically on any connected component.
+
+Choose a closed point `x i` on each of the finitely many connected components `V i` of `X`, and
+let `D = ∑ᵢ x i`, an effective Cartier divisor meeting every component. Each `V i` is a smooth
+proper curve, so `ℒ ⊗ 𝒪_X(n D)` has a non-zero section on `V i` for `n ≫ 0`
+(`AlgebraicGeometry.Scheme.Modules.exists_finrankH_zero_pos_tensorObj_dual_pow`). These glue to
+a global section `s`, since `X` is the disjoint union of the `V i`. Its zero scheme is locally
+principal, and non-zero on each `V i`, which is integral; hence it is invertible
+(`AlgebraicGeometry.Scheme.IdealSheafData.IsLocallyPrincipal.isInvertible`).
+
+(blueprint: part of the proof of `lem-sc-line-bundle-rational-section`) -/
+theorem Modules.exists_isInvertible_zeroLocus_tensorObj_dual (ℒ : X.Modules) [ℒ.IsInvertible] :
+    ∃ J₂ : X.IdealSheafData, J₂.IsInvertible ∧
+      ∃ s : 𝟙_ X.Modules ⟶ ℒ ⊗ J₂.toModulesᵛ, (Modules.Hom.zeroLocus s).IsInvertible := by
+  classical
+  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
+  have : Smooth (X ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  have : IsRegular X := IsRegular.of_smooth (X ↘ Spec (.of k))
+  -- the finitely many connected components `V i` of `X`, open and closed
+  let m := Nat.card (ConnectedComponents X)
+  have : Finite (ConnectedComponents X) := inferInstance
+  let e : ConnectedComponents X ≃ Fin m := Finite.equivFin _
+  let V (i : Fin m) : X.Opens :=
+    ⟨ConnectedComponents.mk ⁻¹' {e.symm i}, (isOpen_discrete {e.symm i}).preimage
+      ConnectedComponents.continuous_coe⟩
+  have hV : _root_.Pairwise (Function.onFun Disjoint V) := fun i j hij ↦
+    TopologicalSpace.Opens.coe_disjoint.mp ((Set.disjoint_singleton.mpr
+      (e.symm.injective.ne hij)).preimage ConnectedComponents.mk)
+  have hcover : ⨆ i, V i = ⊤ := eq_top_iff.mpr fun x _ ↦
+    TopologicalSpace.Opens.mem_iSup.mpr ⟨e (ConnectedComponents.mk x), by simp [V]⟩
+  have hclosed (i : Fin m) : IsClosed (V i : Set X) :=
+    (isClosed_discrete {e.symm i}).preimage ConnectedComponents.continuous_coe
+  have hne (i : Fin m) : (V i : Set X).Nonempty := by
+    obtain ⟨x, hx⟩ := ConnectedComponents.surjective_coe (e.symm i)
+    exact ⟨x, hx⟩
+  have hconn (i : Fin m) : ConnectedSpace (V i) := by
+    obtain ⟨x, hx⟩ := ConnectedComponents.surjective_coe (e.symm i)
+    have : (V i : Set X) = connectedComponent x := by
+      change ConnectedComponents.mk ⁻¹' {e.symm i} = _
+      rw [← hx]
+      exact connectedComponents_preimage_singleton
+    exact isConnected_iff_connectedSpace.mp (this ▸ isConnected_connectedComponent)
+  -- each `V i` is a smooth proper curve
+  let (i : Fin m) : (V i).toScheme.Over (Spec (.of k)) := ⟨(V i).ι ≫ X ↘ Spec (.of k)⟩
+  have (i : Fin m) : IsClosedImmersion (V i).ι := .of_isPreimmersion _ (by simpa using hclosed i)
+  have (i : Fin m) : SmoothOfRelativeDimension 1 ((V i).toScheme ↘ Spec (.of k)) := by
+    have := smoothOfRelativeDimension_comp (n := 0) (m := 1) (V i).ι (X ↘ Spec (.of k))
+    rwa [zero_add] at this
+  have (i : Fin m) : IsProper ((V i).toScheme ↘ Spec (.of k)) :=
+    inferInstanceAs (IsProper ((V i).ι ≫ X ↘ Spec (.of k)))
+  -- a closed point `x i` on each component, and the divisor `D = ∑ x i`
+  have : CompactSpace X := inferInstance
+  choose x hxV hxcl using fun i ↦ (hclosed i).exists_closed_singleton (hne i)
+  let J : X.IdealSheafData := ∏ i, IdealSheafData.vanishingIdeal ⟨{x i}, hxcl i⟩
+  have hJ : J.IsInvertible := Finset.prod_induction _
+    (fun I : X.IdealSheafData ↦ I.IsInvertible)
+    (fun _ _ ha hb ↦ ha.mul hb) IdealSheafData.isInvertible_top fun i _ ↦
+      isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one (X ↘ Spec (.of k)) (hxcl i)
+  have hJx (i : Fin m) : x i ∈ J.support := by
+    have hle : J ≤ IdealSheafData.vanishingIdeal ⟨{x i}, hxcl i⟩ := by
+      change ∏ j, _ ≤ _
+      rw [← Finset.mul_prod_erase _ _ (Finset.mem_univ i)]
+      exact mul_le_of_le_one_right bot_le le_top
+    exact IdealSheafData.le_support_iff_le_vanishingIdeal.mpr hle rfl
+  -- on each component, twisting by `n D` for `n ≫ 0` produces non-zero sections
+  have hI (i : Fin m) : (J.comap (V i).ι).IsInvertible := hJ.comap_of_isOpenImmersion _
+  have hIne (i : Fin m) : ((J.comap (V i).ι).support : Set (V i)).Nonempty :=
+    ⟨⟨x i, hxV i⟩, by rw [IdealSheafData.coe_support_comap]; exact hJx i⟩
+  choose n₀ hn₀ using fun i ↦ exists_finrankH_zero_pos_tensorObj_dual_pow (k := k)
+    ((pullback (V i).ι).obj ℒ) (hI i) (hIne i)
+  let n := Finset.univ.sup n₀
+  have := (hJ.pow n).isInvertible_dual_toModules
+  let M := ℒ ⊗ (J ^ n).toModulesᵛ
+  let N (i : Fin m) : X.Modules := (pushforward (V i).ι).obj ((restrictFunctor (V i).ι).obj M)
+  have hpos (i : Fin m) : 0 < (N i).finrankH k 0 := by
+    have h := hn₀ i n (Finset.le_sup (Finset.mem_univ i))
+    rw [← IdealSheafData.comap_pow] at h
+    obtain ⟨e₁⟩ := nonempty_pullback_tensorObj_iso (V i).ι ℒ (J ^ n).toModulesᵛ
+    obtain ⟨e₂⟩ := (hJ.pow n).nonempty_pullback_dual_toModules_iso (V i).ι
+      ((hJ.pow n).comap_of_isOpenImmersion _)
+    rw [finrankH_pushforward_ι (V i) (hclosed i) k,
+      finrankH_congr k ((restrictFunctorIsoPullback (V i).ι).app M ≪≫ e₁ ≪≫
+        whiskerLeftIso _ e₂)]
+    exact h
+  have hτ (i : Fin m) : ∃ τ : 𝟙_ X.Modules ⟶ N i, τ ≠ 0 := by
+    have : Nontrivial ((N i).H 0) := Module.nontrivial_of_finrank_pos (R := k) (hpos i)
+    exact exists_ne_zero_of_nontrivial_H_zero _
+  choose τ hτ using hτ
+  -- glue them to a global section `s`, using `M ≅ ⨁ᵢ (V i).ι_* (M|_{V i})`
+  let φ : M ⟶ ⨁ N := biproduct.lift fun i ↦ (restrictAdjunction (V i).ι).unit.app M
+  have : IsIso φ := isIso_biproduct_lift_restrictAdjunction_unit V hV hcover M
+  let s : 𝟙_ X.Modules ⟶ M := biproduct.lift τ ≫ inv φ
+  have hs (i : Fin m) : s ≫ (restrictAdjunction (V i).ι).unit.app M = τ i := by
+    have h : s ≫ φ = biproduct.lift τ := by simp [s]
+    simpa [φ] using congrArg (· ≫ biproduct.π N i) h
+  refine ⟨J ^ n, hJ.pow n, s, ?_⟩
+  -- the zero scheme of `s` is invertible on each (integral) component
+  refine IdealSheafData.IsInvertible.of_iSup_opensRange_eq_top (fun i ↦ (V i).ι)
+    (by simpa using hcover) fun i ↦ ?_
+  have : Smooth ((V i).toScheme ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  have : IsRegular (V i) := IsRegular.of_smooth ((V i).toScheme ↘ Spec (.of k))
+  have := LocallyOfFiniteType.isLocallyNoetherian ((V i).toScheme ↘ Spec (.of k))
+  have : IsIntegral (V i) := IsRegular.isIntegral _
+  have := IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
+  have := IsInvertible.sheafOfModules_isInvertible M
+  have : SheafOfModules.IsInvertible.{u, u, u} ((pullback (V i).ι).obj (𝟙_ X.Modules)) :=
+    IsInvertible.sheafOfModules_isInvertible _
+  have : SheafOfModules.IsInvertible.{u, u, u} ((pullback (V i).ι).obj M) :=
+    IsInvertible.sheafOfModules_isInvertible _
+  rw [Hom.comap_zeroLocus]
+  refine (Hom.isLocallyPrincipal_zeroLocus _).isInvertible fun h ↦ hτ i ?_
+  rw [Hom.zeroLocus_eq_bot_iff] at h
+  have h' : (restrictFunctor (V i).ι).map s = 0 := by
+    have := (restrictFunctorIsoPullback (V i).ι).hom.naturality s
+    rw [h, comp_zero] at this
+    exact (cancel_mono _).mp (this.trans zero_comp.symm)
+  have := (restrictAdjunction (V i).ι).unit.naturality s
+  simp only [Functor.id_map, Functor.comp_map, h', Functor.map_zero, comp_zero] at this
+  rw [← hs i, this]
+
+
+include k in
 /-- **Every line bundle comes from a divisor.** Every invertible sheaf `ℒ` on a smooth proper
 curve is `𝒪_X(D₁) ⊗ 𝒪_X(D₂)⁻¹` for effective Cartier divisors `D₁` and `D₂`, given by
 invertible ideal sheaves `J₁ = 𝒪_X(-D₁)` and `J₂ = 𝒪_X(-D₂)`: `ℒ ⊗ 𝒪_X(D₂) ≅ 𝒪_X(D₁)`.
 
-On a connected component, a nonzero rational section `s` of `ℒ` gives `ℒ ≅ 𝒪_X(div s)`, and
-`div s = D₁ - D₂` is the difference of its divisors of zeros and of poles.
+Twisting by a suitable `D₂`, the invertible sheaf `ℒ ⊗ 𝒪_X(D₂)` has a global section `s` whose
+zero scheme `D₁` is an effective Cartier divisor
+(`AlgebraicGeometry.Scheme.Modules.exists_isInvertible_zeroLocus_tensorObj_dual`), and then
+`ℒ ⊗ 𝒪_X(D₂) ≅ 𝒪_X(D₁)`
+(`AlgebraicGeometry.Scheme.Modules.Hom.nonempty_iso_dual_toModules_tensorObj`).
 
 With `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules` and
 `AlgebraicGeometry.Scheme.Modules.degree_tensorObj` this gives `deg ℒ = deg D₁ - deg D₂`: the
@@ -231,8 +578,13 @@ With `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.degree_dual_toModules
 (blueprint: `sk-thm-picard-rr`, `lem-sc-line-bundle-rational-section`) -/
 theorem Modules.exists_tensorObj_dual_toModules_iso (ℒ : X.Modules) [ℒ.IsInvertible] :
     ∃ J₁ J₂ : X.IdealSheafData, J₁.IsInvertible ∧ J₂.IsInvertible ∧
-      Nonempty (ℒ ⊗ₘ J₂.toModulesᵛ ≅ J₁.toModulesᵛ) :=
-  sorry
+      Nonempty (ℒ ⊗ₘ J₂.toModulesᵛ ≅ J₁.toModulesᵛ) := by
+  obtain ⟨J₂, h₂, s, hs⟩ := Modules.exists_isInvertible_zeroLocus_tensorObj_dual (k := k) ℒ
+  have := h₂.isInvertible_dual_toModules
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (ℒ ⊗ J₂.toModulesᵛ)
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
+  obtain ⟨e⟩ := Modules.Hom.nonempty_iso_dual_toModules_tensorObj s hs
+  exact ⟨_, J₂, hs, h₂, ⟨e ≪≫ ρ_ _⟩⟩
 
 /-- **The degree is additive.** `deg (ℒ ⊗ ℳ) = deg ℒ + deg ℳ` for invertible sheaves on a smooth
 proper curve.
@@ -276,21 +628,7 @@ theorem Modules.degree_tensorPow (ℒ : X.Modules) [ℒ.IsInvertible] (n : ℕ) 
     push_cast
     ring
 
-variable (k) in
-include k in
-/-- **Vanishing above the dimension of a curve.** On a smooth proper curve `X` over `k`,
-`H^q(X, ℱ) = 0` for every sheaf of modules `ℱ` and every `q ≥ 2`: `X` is noetherian of
-dimension at most one, so this is Grothendieck vanishing
-`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt`.
-
-(blueprint: `lem-pc-vanishing-above-dim`) -/
-theorem Modules.subsingleton_H_of_two_le (ℱ : X.Modules) {q : ℕ} (hq : 2 ≤ q) :
-    Subsingleton (ℱ.H q) := by
-  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
-  refine subsingleton_H_of_topologicalKrullDim_lt ℱ
-    ((topologicalKrullDim_le_of_smoothOfRelativeDimension (X ↘ Spec (.of k)) 1).trans_lt ?_)
-  exact_mod_cast hq
-
+omit [IsProper (X ↘ Spec (.of k))] in
 /-- **Rational points are Cartier divisors on smooth curves.** The ideal sheaf `ker x` of a
 `k`-rational point `x : Spec k ⟶ X` of a smooth curve `X` over `k` is invertible: the local ring
 `𝒪_{X,x}` is regular of dimension one, hence a discrete valuation ring, and its maximal ideal,
@@ -299,7 +637,8 @@ the stalk of `ker x`, is generated by a uniformizer.
 (blueprint: `lem-sc-point-cartier`) -/
 theorem Hom.isInvertible_ker_fieldPoints (x : (X ↘ Spec (.of k)).fieldPoints k) :
     x.1.ker.IsInvertible :=
-  sorry
+  Hom.isInvertible_ker_of_smoothOfRelativeDimension_one (X ↘ Spec (.of k)) x.1 (by
+    rw [x.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id])
 
 /-- **The ideal sheaf of a rational point has degree `-1`.** For a `k`-rational point `x` of a
 smooth proper curve, `𝒪_X(-x) = ker x` has degree `-1`: its dual `𝒪_X(x)` has degree
@@ -414,6 +753,85 @@ theorem serreDuality [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
   · exact nonempty_dual_H_one_iso
   · exact nonempty_dual_H_zero_iso
 
+/-- **Trace duality on a finite étale scheme over `k`.** Let `X` be affine with `Γ(X, ⊤)` étale
+over `k`, and let `ℱ` be quasi-coherent. Then `x ↦ (m ↦ Tr(x(m)))`, pairing a global section `x`
+of `ℱᵛ` (a morphism `ℱ ⟶ 𝒪_X`) with a global section `m` of `ℱ` and taking the trace of
+`Γ(X, ⊤)` over `k`, is a `k`-linear isomorphism `H⁰(X, ℱᵛ) ≃ H⁰(X, ℱ)^∨`. -/
+theorem exists_linearEquiv_dual_H_zero_of_etale [IsAffine X]
+    (hX : (globalSectionsRingHom k (X := X)).Etale) (ℱ : X.Modules) [ℱ.IsQuasicoherent] :
+    letI := (globalSectionsRingHom k (X := X)).toAlgebra
+    ∃ e : (ℱᵛ).H 0 ≃ₗ[k] Module.Dual k (ℱ.H 0), ∀ x m, e x m =
+      Algebra.trace k Γ(X, ⊤) ((Modules.homObjHZeroAddEquiv ℱ (SheafOfModules.unit _) x).app ⊤
+        (Modules.H.zeroLinearEquiv ℱ m)) := by
+  let := (globalSectionsRingHom k (X := X)).toAlgebra
+  have : Algebra.Etale k Γ(X, ⊤) := hX
+  set Φ := Modules.homObjHZeroAddEquiv ℱ (SheafOfModules.unit X.ringCatSheaf)
+  set z := Modules.H.zeroLinearEquiv ℱ
+  -- `Γ(ℱ, ⊤)` as a `k`-module, by restricting scalars along `k → Γ(X, ⊤)`
+  let : Module k Γ(ℱ, ⊤) := Module.compHom _ (algebraMap k Γ(X, ⊤))
+  have : IsScalarTower k Γ(X, ⊤) Γ(ℱ, ⊤) := ⟨fun c a m ↦ by
+    change (c • a) • m = algebraMap k Γ(X, ⊤) c • (a • m)
+    rw [Algebra.smul_def, mul_smul]⟩
+  let D := Algebra.Etale.linearMapEquivDual k Γ(X, ⊤) Γ(ℱ, ⊤)
+  -- the `Γ(X, ⊤)`-linear map on global sections of a morphism `ℱ ⟶ 𝒪_X`
+  let appₗ (φ : ℱ ⟶ SheafOfModules.unit X.ringCatSheaf) : Γ(ℱ, ⊤) →ₗ[Γ(X, ⊤)] Γ(X, ⊤) :=
+    { toFun := φ.app ⊤
+      map_add' := map_add _
+      map_smul' a m := Modules.Hom.app_smul φ a m }
+  have hz (c : k) (m : ℱ.H 0) : z (c • m) = c • z m := by
+    rw [Modules.smul_H_eq_globalSectionsRingHom_smul, LinearEquiv.map_smul]
+    rfl
+  let L : (ℱᵛ).H 0 →ₗ[k] Module.Dual k (ℱ.H 0) :=
+    { toFun x :=
+        { toFun m := Algebra.trace k Γ(X, ⊤) ((Φ x).app ⊤ (z m))
+          map_add' m m' := by simp only [map_add]
+          map_smul' c m := by
+            change Algebra.trace k Γ(X, ⊤) (appₗ (Φ x) (z (c • m))) = c * _
+            rw [hz, LinearMap.map_smul_of_tower, map_smul, smul_eq_mul]
+            rfl }
+      map_add' x y := by
+        ext m
+        simp only [map_add, LinearMap.coe_mk, AddHom.coe_mk, LinearMap.add_apply]
+        rw [show ((Φ x + Φ y).app ⊤) (z m) = (Φ x).app ⊤ (z m) + (Φ y).app ⊤ (z m) from rfl,
+          map_add]
+      map_smul' c x := by
+        ext m
+        simp only [LinearMap.coe_mk, AddHom.coe_mk, RingHom.id_apply, LinearMap.smul_apply,
+          smul_eq_mul]
+        rw [Modules.smul_H_eq_globalSectionsRingHom_smul, Modules.homObjHZeroAddEquiv_smul]
+        change Algebra.trace k Γ(X, ⊤) ((Modules.smulHom _ _).app ⊤ ((Φ x).app ⊤ (z m))) = _
+        rw [Modules.smulHom_app_top_apply, smul_eq_mul]
+        change Algebra.trace k Γ(X, ⊤) (algebraMap k Γ(X, ⊤) c * _) = _
+        rw [← Algebra.smul_def, map_smul, smul_eq_mul] }
+  refine ⟨LinearEquiv.ofBijective L ⟨fun x y h ↦ ?_, fun l ↦ ?_⟩, fun x m ↦ rfl⟩
+  · have h0 (m : ℱ.H 0) : Algebra.trace k Γ(X, ⊤) ((Φ (x - y)).app ⊤ (z m)) = 0 := by
+      have := congr($h m)
+      rw [← sub_eq_zero, ← LinearMap.sub_apply, ← map_sub] at this
+      exact this
+    have hD : D (appₗ (Φ (x - y))) = 0 := LinearMap.ext fun p ↦ by
+      obtain ⟨m, rfl⟩ := z.surjective p
+      exact h0 m
+    have happ : appₗ (Φ (x - y)) = 0 := D.injective (hD.trans D.map_zero.symm)
+    have hΦ : Φ (x - y) = 0 := Modules.hom_ext_of_isAffine fun m ↦ congr($happ m)
+    rw [← sub_eq_zero]
+    exact Φ.injective (hΦ.trans Φ.map_zero.symm)
+  · let l' : Module.Dual k Γ(ℱ, ⊤) :=
+      { toFun p := l (z.symm p)
+        map_add' p q := by rw [map_add, map_add]
+        map_smul' c p := by
+          have : z.symm (c • p) = c • z.symm p := by
+            apply z.injective
+            rw [hz, LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
+          rw [this, map_smul, RingHom.id_apply, smul_eq_mul] }
+    have : (SheafOfModules.unit X.ringCatSheaf).IsQuasicoherent :=
+      SheafOfModules.isQuasicoherent_unit.{u, u, u} (R := X.ringCatSheaf)
+    obtain ⟨φ, hφ⟩ := Modules.exists_hom_app_top_eq_of_isAffine (M := ℱ)
+      (N := SheafOfModules.unit X.ringCatSheaf) (D.symm l')
+    refine ⟨Φ.symm φ, LinearMap.ext fun m ↦ ?_⟩
+    change Algebra.trace k Γ(X, ⊤) ((Φ (Φ.symm φ)).app ⊤ (z m)) = l m
+    rw [AddEquiv.apply_symm_apply, hφ]
+    exact congr($(D.apply_symm_apply l') (z m)).trans (congrArg l (z.symm_apply_apply m))
+
 /-- **Serre duality in dimension `0`.** Let `X` be smooth and proper of relative dimension `0`
 over `k`, i.e. `X = Spec A` with `A` finite étale over `k`, so that the canonical module is
 `ω_X = 𝒪_X`. Then `ℱ ↦ H^0(X, ℱ)^∨` and `ℱ ↦ H^0(X, ℱᵛ)` are naturally isomorphic as
@@ -437,8 +855,33 @@ theorem serreDuality_zero [SmoothOfRelativeDimension 0 (X ↘ Spec (.of k))]
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙
         (Modules.cohomologyFunctor k 0).op ⋙ ModuleCat.dualFunctor k ≅
       (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ Modules.dualFunctor X ⋙
-        Modules.cohomologyFunctor k 0) :=
-  sorry
+        Modules.cohomologyFunctor k 0) := by
+  have : Etale (X ↘ Spec (.of k)) := (Etale.iff_smoothOfRelativeDimension_zero _).2 ‹_›
+  have : IsFinite (X ↘ Spec (.of k)) := IsFinite.of_isProper_of_locallyQuasiFinite _
+  have : IsAffine X := isAffine_of_isAffineHom (X ↘ Spec (.of k))
+  have hX : (globalSectionsRingHom k (X := X)).Etale := by
+    have h := (HasRingHomProperty.iff_of_isAffine (P := @Etale)
+      (f := X ↘ Spec (.of k))).mp inferInstance
+    rw [globalSectionsRingHom, CommRingCat.hom_comp]
+    exact RingHom.Etale.stableUnderComposition _ _
+      (.of_bijective (ConcreteCategory.bijective_of_isIso _)) h
+  have he (ℱ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory) :=
+    have : ℱ.obj.IsFiniteLocallyFree := ℱ.property
+    have : ℱ.obj.IsQuasicoherent := inferInstance
+    exists_linearEquiv_dual_H_zero_of_etale hX ℱ.obj
+  choose e he using he
+  refine ⟨(NatIso.ofComponents (fun ℱ ↦ (e ℱ.unop).toModuleIso) fun {ℱ 𝒢} f ↦ ?_).symm⟩
+  ext x
+  refine LinearMap.ext fun m ↦ ?_
+  change e 𝒢.unop (Modules.H.map (Modules.dualMap f.unop.hom) 0 x) m =
+    e ℱ.unop x (Modules.H.map f.unop.hom 0 m)
+  let := (globalSectionsRingHom k (X := X)).toAlgebra
+  refine (he 𝒢.unop _ m).trans (Eq.trans (congrArg (Algebra.trace k Γ(X, ⊤)) ?_)
+    (he ℱ.unop x _).symm)
+  have h := Modules.homObjHZeroAddEquiv_map (N := SheafOfModules.unit X.ringCatSheaf)
+    f.unop.hom x
+  rw [Modules.H.zeroLinearEquiv_map]
+  exact congr(Modules.Hom.app $h ⊤ (Modules.H.zeroLinearEquiv 𝒢.unop.obj m))
 
 /-- **`h⁰(Ω¹) = h¹(𝒪_X)`.** On a smooth proper curve over `k`,
 `dim_k H⁰(X, Ω¹_{X/k}) = dim_k H¹(X, 𝒪_X)`. -/
@@ -468,6 +911,332 @@ theorem genus_eq_arithmeticGenus [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k
   rw [Hom.genus_eq_finrankH_zero, finrankH_relativeDifferentials_zero_eq_arithmeticGenus]
 
 end Duality
+
+section PointIdeal
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} (x : Spec (.of k) ⟶ X)
+
+/-- Away from the image of a rational point `x`, the ideal sheaf `ker x` is everything. -/
+lemma Hom.ideal_ker_eq_top_of_notMem (W : X.affineOpens) (h : x.base default ∉ W.1) :
+    x.ker.ideal W = ⊤ := by
+  have hW : x ⁻¹ᵁ W.1 = ⊥ := by
+    refine eq_bot_iff.mpr fun y hy ↦ (h ?_).elim
+    rw [Subsingleton.elim y default] at hy
+    exact hy
+  have : Subsingleton Γ(Spec (.of k), x ⁻¹ᵁ W.1) := by
+    rw [hW]
+    infer_instance
+  rw [Hom.ker_apply, Ideal.eq_top_iff_one, RingHom.mem_ker]
+  exact Subsingleton.elim _ _
+
+/-- Near the image `P` of a rational point `x`, a function lies in the ideal sheaf `ker x` if
+and only if it vanishes at `P`. -/
+lemma Hom.mem_ideal_ker_iff (W : X.affineOpens) (h : x.base default ∈ W.1) (c : Γ(X, W.1)) :
+    c ∈ x.ker.ideal W ↔ x.base default ∉ X.basicOpen c := by
+  have e : (⊤ : (Spec (.of k)).Opens) ≤ x ⁻¹ᵁ W.1 := fun y _ ↦ by
+    rw [Subsingleton.elim y default]
+    exact h
+  rw [Hom.ker_apply, RingHom.mem_ker]
+  have h1 : x.app W.1 c = 0 ↔ x.appLE W.1 ⊤ e c = 0 := by
+    rw [Scheme.Hom.appLE, CommRingCat.comp_apply]
+    have hinj : Function.Injective ((Spec (.of k)).presheaf.map (homOfLE e).op) := by
+      have : IsIso (homOfLE e).op := by
+        have : x ⁻¹ᵁ W.1 = ⊤ := top_le_iff.mp e
+        rw [show (homOfLE e).op = (eqToHom (by rw [this])) from Subsingleton.elim _ _]
+        infer_instance
+      exact (ConcreteCategory.bijective_of_isIso _).1
+    exact ⟨fun h ↦ by rw [h, map_zero], fun h ↦ hinj (h.trans (map_zero _).symm)⟩
+  have h2 : x.base default ∈ X.basicOpen c ↔
+      default ∈ (Spec (.of k)).basicOpen (x.appLE W.1 ⊤ e c) := by
+    rw [Scheme.basicOpen_appLE]
+    exact ⟨fun h ↦ ⟨trivial, h⟩, fun h ↦ h.2⟩
+  rw [h1, h2, basicOpen_eq_of_affine', PrimeSpectrum.mem_basicOpen, not_not]
+  have hbot (p : PrimeSpectrum k) : p.asIdeal = ⊥ := Ideal.eq_bot_of_prime _
+  rw [hbot, Ideal.mem_bot]
+  exact (map_eq_zero_iff _ (ConcreteCategory.bijective_of_isIso
+    (Scheme.ΓSpecIso (.of k)).hom).1).symm
+
+/-- The ideal sheaf of a rational point `x` generates the maximal ideal of the local ring at its
+image. -/
+lemma Hom.map_germ_ideal_ker (W : X.affineOpens) (h : x.base default ∈ W.1) :
+    (x.ker.ideal W).map (X.presheaf.germ W.1 (x.base default) h).hom =
+      IsLocalRing.maximalIdeal (X.presheaf.stalk (x.base default)) := by
+  let : Algebra Γ(X, W.1) (X.presheaf.stalk (x.base default)) :=
+    TopCat.Presheaf.algebra_section_stalk X.presheaf ⟨x.base default, h⟩
+  have := W.2.isLocalization_stalk ⟨x.base default, h⟩
+  have e : x.ker.ideal W = (W.2.primeIdealOf ⟨x.base default, h⟩).asIdeal := by
+    ext c
+    rw [x.mem_ideal_ker_iff W h c, Scheme.mem_basicOpen _ _ _ h, ← mem_nonunits_iff,
+      ← IsLocalRing.mem_maximalIdeal]
+    exact IsLocalization.AtPrime.to_map_mem_maximal_iff (X.presheaf.stalk (x.base default))
+      (W.2.primeIdealOf ⟨x.base default, h⟩).asIdeal c
+  rw [e]
+  exact IsLocalization.AtPrime.map_eq_maximalIdeal _ _
+
+end PointIdeal
+
+section ClosedPoint
+
+variable {k : Type u} [Field k] {X : Scheme.{u}}
+
+/-- Over an algebraically closed field, every closed point of a scheme locally of finite type is
+the image of a rational point. -/
+lemma Hom.exists_fieldPoints_base_eq_of_isClosed [IsAlgClosed k] (f : X ⟶ Spec (.of k))
+    [LocallyOfFiniteType f] {P : X} (hP : IsClosed {P}) :
+    ∃ x : f.fieldPoints k, x.1.base default = P := by
+  rw [Hom.exists_fieldPoints_base_eq_iff]
+  let := (f.residueFieldAlgebraMap P).toAlgebra
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  have : Module.Finite k (X.residueField P) := by
+    have := isClosed_singleton_iff_isClosedImmersion.mp hP
+    have := (isFinite_iff_locallyOfFiniteType_of_jacobsonSpace
+      (f := X.fromSpecResidueField P ≫ f)).mpr inferInstance
+    rw [← f.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff] at this
+    exact this
+  have hb := IsAlgClosed.ringHom_bijective_of_isIntegral (f.residueFieldAlgebraMap P)
+    (RingHom.IsIntegral.of_finite (RingHom.finite_algebraMap.mpr inferInstance))
+  let e := RingEquiv.ofBijective _ hb
+  refine ⟨CommRingCat.ofHom e.symm.toRingHom, ?_⟩
+  ext c
+  exact e.symm_apply_apply c
+
+/-- The image of a rational point of a scheme locally of finite type over a field is closed. -/
+lemma Hom.isClosed_singleton_fieldPoints (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f]
+    (x : f.fieldPoints k) : IsClosed {x.1.base default} := by
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  have hx : x.1 ≫ f = 𝟙 _ := by
+    rw [x.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+  have : LocallyOfFiniteType x.1 := by
+    have : LocallyOfFiniteType (x.1 ≫ f) := by rw [hx]; infer_instance
+    exact locallyOfFiniteType_of_comp x.1 f
+  exact x.1.closePoints_subset_preimage_closedPoints
+    (show IsClosed {default} from isClosed_discrete _)
+
+end ClosedPoint
+
+section VeryAmpleCurve
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
+  [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] in
+/-- **A section vanishing at a rational point vanishes on it.** A global section `σ` of an
+invertible `N` which does not generate `N` at the image of a rational point `x` maps to zero in
+`N ⧸ 𝒪_X(-x) N`. -/
+lemma Modules.app_cokernel_π_eq_zero_of_not_generatesAt (N : X.Modules) [N.IsInvertible]
+    (x : (X ↘ Spec (.of k)).fieldPoints k) (σ : Γ(N, ⊤))
+    (hσ : ¬ Modules.GeneratesAt σ (x.1.base default)) :
+    ((λ_ N).inv ≫ cokernel.π (x.1.ker.toModulesι ▷ N)).app ⊤ σ = 0 := by
+  have := Modules.IsInvertible.sheafOfModules_isInvertible N
+  have hP := (X ↘ Spec (.of k)).isClosed_singleton_fieldPoints x
+  refine Modules.app_cokernel_π_eq_zero _ _ σ fun y ↦ ?_
+  by_cases hy : y = x.1.base default
+  · subst hy
+    obtain ⟨W, hxW, -, e, he⟩ := Modules.exists_isFreeGenerator N
+      (TopologicalSpace.Opens.mem_top (x.1.base default))
+    obtain ⟨c, hc⟩ := he.exists_smul_eq (N.presheaf.map (homOfLE le_top).op σ)
+    refine ⟨W, hxW, e, c, (x.1.mem_ideal_ker_iff W hxW c).mpr fun h ↦ hσ ?_, hc.symm⟩
+    exact Modules.generatesAt_of_mem_basicOpen he hc.symm h
+  · obtain ⟨W, hyW, hWP, e, he⟩ := Modules.exists_isFreeGenerator N
+      (W := ⟨_, hP.isOpen_compl⟩) (x := y) hy
+    obtain ⟨c, hc⟩ := he.exists_smul_eq (N.presheaf.map (homOfLE le_top).op σ)
+    refine ⟨W, hyW, e, c, ?_, hc.symm⟩
+    rw [x.1.ideal_ker_eq_top_of_notMem W fun h ↦ hWP h rfl]
+    trivial
+
+/-- **Twisting by a rational point at which `h⁰` drops.** If `h⁰(N ⊗ 𝒪_X(-x)) + 1 = h⁰(N)`
+for an invertible `N` and a rational point `x`, some global section of `N` has non-zero image in
+`N ⧸ 𝒪_X(-x) N`. -/
+lemma Modules.exists_app_cokernel_π_ne_zero (N : X.Modules) [N.IsInvertible]
+    (x : (X ↘ Spec (.of k)).fieldPoints k)
+    (h : Modules.finrankH k (N ⊗ x.1.ker.toModules) 0 + 1 = Modules.finrankH k N 0) :
+    ∃ σ : Γ(N, ⊤), ((λ_ N).inv ≫ cokernel.π (x.1.ker.toModulesι ▷ N)).app ⊤ σ ≠ 0 := by
+  have hJ := Hom.isInvertible_ker_fieldPoints x
+  have := hJ.isInvertible_toModules
+  let S := ShortComplex.mk (x.1.ker.toModulesι ▷ N) (cokernel.π _) (cokernel.condition _)
+  have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  have : S.X₂.IsInvertible := Modules.IsInvertible.of_iso (λ_ N).symm
+  have := hJ.finiteDimensional_H_cokernel_whiskerRight (k := k) N 0
+  have : FiniteDimensional k (S.X₂.H 0) := Modules.finiteDimensional_H (M := S.X₂) k 0
+  have h3 : Modules.finrankH k S.X₃ 0 = 1 := by
+    have := hJ.subsingleton_H_one_cokernel_whiskerRight k N
+    have h := hJ.eulerChar_cokernel_whiskerRight (k := k) N
+    have h1 : Modules.finrankH k (cokernel (x.1.ker.toModulesι ▷ N)) 1 = 0 :=
+      Module.finrank_zero_of_subsingleton
+    rw [Hom.finrankΓ_subschemeι_ker_fieldPoints,
+      Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h1] at h
+    simp only [Nat.cast_zero, sub_zero, Nat.cast_one, Nat.cast_eq_one] at h
+    exact h
+  let f := Modules.H.mapLinearMap k S.f 0
+  let g := Modules.H.mapLinearMap k S.g 0
+  have hf : LinearMap.ker f = ⊥ :=
+    LinearMap.ker_eq_bot.mpr (Modules.H.injective_map_zero_of_shortExact hS)
+  have hg : LinearMap.ker g = LinearMap.range f := by
+    ext y
+    exact SetLike.ext_iff.mp (Modules.H.ker_map_g_eq_range_map_f hS 0) y
+  have hrf : Module.finrank k (LinearMap.range f) = Modules.finrankH k S.X₁ 0 := by
+    have := LinearMap.finrank_range_add_finrank_ker f
+    rw [hf, finrank_bot] at this
+    exact this.trans rfl
+  have h2 := LinearMap.finrank_range_add_finrank_ker g
+  rw [hg, hrf] at h2
+  have e₁ : S.X₁ ≅ N ⊗ x.1.ker.toModules := β_ _ _
+  have e₂ : S.X₂ ≅ N := λ_ N
+  rw [Modules.finrankH_congr k e₁] at h2
+  change _ + _ = Modules.finrankH k S.X₂ 0 at h2
+  rw [Modules.finrankH_congr k e₂] at h2
+  have hpos : LinearMap.range g ≠ ⊥ := by
+    intro h0
+    rw [h0, finrank_bot] at h2
+    omega
+  obtain ⟨_, ⟨z, rfl⟩, hz⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hpos
+  refine ⟨(λ_ N).hom.app ⊤ (Modules.H.zeroLinearEquiv S.X₂ z), fun h0 ↦ hz ?_⟩
+  rw [Hom.comp_app, ConcreteCategory.comp_apply, Modules.inv_app_hom_app_apply_of_iso] at h0
+  apply (Modules.H.zeroLinearEquiv S.X₃).injective
+  rw [map_zero, Modules.H.mapLinearMap_apply, Modules.H.zeroLinearEquiv_map]
+  exact h0
+
+/-- **Base point freeness.** If `h⁰(ℳ ⊗ 𝒪_X(-x)) + 1 = h⁰(ℳ)` and the global sections `s j`
+span `Γ(X, ℳ)`, then some `s j` generates `ℳ` at `x`. -/
+lemma Modules.exists_generatesAt_of_finrankH {n : Type*} (ℳ : X.Modules) [ℳ.IsInvertible]
+    (s : n → Γ(ℳ, ⊤)) (hspan : ∀ σ : Γ(ℳ, ⊤), σ ∈ Submodule.span Γ(X, ⊤) (Set.range s))
+    (x : (X ↘ Spec (.of k)).fieldPoints k)
+    (h₁ : Modules.finrankH k (ℳ ⊗ x.1.ker.toModules) 0 + 1 = Modules.finrankH k ℳ 0) :
+    ∃ j, Modules.GeneratesAt (s j) (x.1.base default) := by
+  obtain ⟨σ, hσ⟩ := Modules.exists_app_cokernel_π_ne_zero ℳ x h₁
+  by_contra! hs
+  have key (τ : Γ(ℳ, ⊤)) (hτ : τ ∈ Submodule.span Γ(X, ⊤) (Set.range s)) :
+      ((λ_ ℳ).inv ≫ cokernel.π (x.1.ker.toModulesι ▷ ℳ)).app ⊤ τ = 0 := by
+    induction hτ using Submodule.span_induction with
+    | mem y hy =>
+      obtain ⟨j, rfl⟩ := hy
+      exact Modules.app_cokernel_π_eq_zero_of_not_generatesAt ℳ x _ (hs j)
+    | zero => exact map_zero _
+    | add a b _ _ ha hb => rw [map_add, ha, hb, add_zero]
+    | smul r a _ ha => rw [Hom.app_smul, ha, smul_zero]
+  exact hσ (key σ (hspan σ))
+
+/-- The setting of the two-point conditions: a global section of `𝒪_X(-x) ⊗ ℳ` which
+generates at `y`. -/
+lemma Modules.exists_generatesAt_tensorObj_toModules_ker (ℳ : X.Modules) [ℳ.IsInvertible]
+    (x y : (X ↘ Spec (.of k)).fieldPoints k)
+    (h₁ : Modules.finrankH k (ℳ ⊗ x.1.ker.toModules) 0 + 1 = Modules.finrankH k ℳ 0)
+    (h₂ : Modules.finrankH k ((ℳ ⊗ x.1.ker.toModules) ⊗ y.1.ker.toModules) 0 + 2 =
+      Modules.finrankH k ℳ 0) :
+    ∃ σ : Γ(x.1.ker.toModules ⊗ ℳ, ⊤), Modules.GeneratesAt σ (y.1.base default) := by
+  have := (Hom.isInvertible_ker_fieldPoints x).isInvertible_toModules
+  have hdim : Modules.finrankH k ((x.1.ker.toModules ⊗ ℳ) ⊗ y.1.ker.toModules) 0 + 1 =
+      Modules.finrankH k (x.1.ker.toModules ⊗ ℳ) 0 := by
+    rw [Modules.finrankH_congr k (β_ x.1.ker.toModules ℳ),
+      Modules.finrankH_congr k (whiskerRightIso (β_ x.1.ker.toModules ℳ) _)]
+    omega
+  obtain ⟨σ, hσ⟩ := Modules.exists_app_cokernel_π_ne_zero _ y hdim
+  refine ⟨σ, ?_⟩
+  by_contra h
+  exact hσ (Modules.app_cokernel_π_eq_zero_of_not_generatesAt _ y σ h)
+
+/-- **Separating points.** Under the two-point conditions at `x ≠ y`, some global section of `ℳ`
+vanishes at `x` but generates `ℳ` at `y`. -/
+lemma Modules.exists_not_generatesAt_generatesAt (ℳ : X.Modules) [ℳ.IsInvertible]
+    (x y : (X ↘ Spec (.of k)).fieldPoints k) (hxy : x.1.base default ≠ y.1.base default)
+    (h₁ : Modules.finrankH k (ℳ ⊗ x.1.ker.toModules) 0 + 1 = Modules.finrankH k ℳ 0)
+    (h₂ : Modules.finrankH k ((ℳ ⊗ x.1.ker.toModules) ⊗ y.1.ker.toModules) 0 + 2 =
+      Modules.finrankH k ℳ 0) :
+    ∃ t : Γ(ℳ, ⊤), ¬ Modules.GeneratesAt t (x.1.base default) ∧
+      Modules.GeneratesAt t (y.1.base default) := by
+  have hI := Hom.isInvertible_ker_fieldPoints x
+  have hP := (X ↘ Spec (.of k)).isClosed_singleton_fieldPoints x
+  obtain ⟨σ, hσ⟩ := Modules.exists_generatesAt_tensorObj_toModules_ker ℳ x y h₁ h₂
+  refine ⟨(x.1.ker.toModulesι ▷ ℳ ≫ (λ_ ℳ).hom).app ⊤ σ, fun hgen ↦ ?_, ?_⟩
+  · obtain ⟨W, hPW, -, e, v, π, he, hspan, ht, -⟩ :=
+      Modules.exists_app_leftUnitor_whiskerRight_toModulesι x.1.ker ℳ hI σ
+        (TopologicalSpace.Opens.mem_top (x.1.base default))
+    have h1 := Modules.mem_basicOpen_of_generatesAt he ht hPW hgen
+    rw [Scheme.basicOpen_mul] at h1
+    have hπ : π ∈ x.1.ker.ideal W := hspan ▸ Ideal.mem_span_singleton_self π
+    exact (x.1.mem_ideal_ker_iff W hPW π).mp hπ h1.2
+  · obtain ⟨W, hQW, hWO, e, v, π, he, hspan, ht, hv⟩ :=
+      Modules.exists_app_leftUnitor_whiskerRight_toModulesι x.1.ker ℳ hI σ
+        (O := ⟨_, hP.isOpen_compl⟩) (x := y.1.base default) (Ne.symm hxy)
+    rw [x.1.ideal_ker_eq_top_of_notMem W fun h ↦ hWO h rfl, Ideal.span_singleton_eq_top] at hspan
+    refine Modules.generatesAt_of_mem_basicOpen he ht ?_
+    rw [Scheme.basicOpen_mul, X.basicOpen_of_isUnit hspan]
+    exact ⟨hv hσ, hQW⟩
+
+/-- **Separating tangent vectors.** Under the two-point condition at `x = y`, some global
+section of `ℳ` is, near `x`, a multiple `c • e` of a free generator `e` by a function `c`
+generating the ideal of `x`. -/
+lemma Modules.exists_span_eq_ideal_ker (ℳ : X.Modules) [ℳ.IsInvertible]
+    (x : (X ↘ Spec (.of k)).fieldPoints k)
+    (h₁ : Modules.finrankH k (ℳ ⊗ x.1.ker.toModules) 0 + 1 = Modules.finrankH k ℳ 0)
+    (h₂ : Modules.finrankH k ((ℳ ⊗ x.1.ker.toModules) ⊗ x.1.ker.toModules) 0 + 2 =
+      Modules.finrankH k ℳ 0) :
+    ∃ t : Γ(ℳ, ⊤), ∃ W : X.affineOpens, x.1.base default ∈ W.1 ∧
+      ∃ (e : Γ(ℳ, W.1)) (c : Γ(X, W.1)), Modules.IsFreeGenerator e ∧
+        ℳ.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op t = c • e ∧
+        Ideal.span {c} = x.1.ker.ideal W := by
+  have hI := Hom.isInvertible_ker_fieldPoints x
+  obtain ⟨σ, hσ⟩ := Modules.exists_generatesAt_tensorObj_toModules_ker ℳ x x h₁ h₂
+  obtain ⟨W, hPW, -, e, v, π, he, hspan, ht, hv⟩ :=
+    Modules.exists_app_leftUnitor_whiskerRight_toModulesι x.1.ker ℳ hI σ
+      (TopologicalSpace.Opens.mem_top (x.1.base default))
+  have hle : X.basicOpen v ≤ W.1 := X.basicOpen_le v
+  let W' : X.affineOpens := ⟨X.basicOpen v, W.2.basicOpen v⟩
+  have hu : IsUnit (X.presheaf.map (homOfLE hle).op v) := X.toRingedSpace.isUnit_res_basicOpen v
+  refine ⟨(x.1.ker.toModulesι ▷ ℳ ≫ (λ_ ℳ).hom).app ⊤ σ, W', hv hσ,
+    ℳ.presheaf.map (homOfLE hle).op e,
+    X.presheaf.map (homOfLE hle).op (v * π), he.map hle, ?_, ?_⟩
+  · rw [← Modules.presheaf_map_homOfLE_map_homOfLE (le_top : W.1 ≤ ⊤) hle, ht, Modules.map_smul]
+  · rw [map_mul, Ideal.span_singleton_mul_left_unit hu, ← x.1.ker.map_ideal (U := W') (V := W)
+      hle, ← hspan, Ideal.map_span, Set.image_singleton]
+    rfl
+
+end VeryAmpleCurve
+
+section VeryAmpleSpan
+
+variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
+
+private lemma appLE_eq_of_eq' {Y Z : Scheme.{u}} {f g : Y ⟶ Z} (h : f = g) (U V e) :
+    f.appLE U V e = g.appLE U V (h ▸ e) := by
+  subst h
+  rfl
+
+/-- For a morphism `φ : X ⟶ ℙ(n; k)` with `φ^* 𝒪(1) ≅ ℳ` sending `φ^* Tⱼ` to `s j`, every
+global section in the span of the `s j` is, on the preimage of `D₊(Tᵢ)`, the pullback of a
+function on `D₊(Tᵢ)` times `s i`. -/
+lemma exists_eq_app_smul_of_mem_span [GlobalSectionsBijective k X] {n : Type u} {ℳ : X.Modules}
+    {s : n → Γ(ℳ, ⊤)} {φ : X ⟶ ℙ(n; Spec (.of k))}
+    (hφ : φ ≫ ℙ(n; Spec (.of k)) ↘ Spec (.of k) = X ↘ Spec (.of k))
+    (ε : ProjectiveSpace.twistRestrict φ 1 ⟶ ℳ) [IsIso ε]
+    (hε : ∀ j, ε.app _ (Modules.pullbackSection φ (ProjectiveSpace.twistOneSection n _ j)) =
+      ℳ.presheaf.map (homOfLE (le_top : φ ⁻¹ᵁ ⊤ ≤ ⊤)).op (s j))
+    (i : n) {σ : Γ(ℳ, ⊤)} (hσ : σ ∈ Submodule.span Γ(X, ⊤) (Set.range s)) :
+    ∃ a : Γ(ℙ(n; Spec (.of k)), ProjectiveSpace.standardOpen n _ i),
+      ℳ.presheaf.map (homOfLE (le_top : φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i ≤ ⊤)).op σ =
+        φ.app _ a • ℳ.presheaf.map
+          (homOfLE (le_top : φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i ≤ ⊤)).op (s i) := by
+  induction hσ using Submodule.span_induction with
+  | mem y hy =>
+    obtain ⟨j, rfl⟩ := hy
+    exact ⟨_, ProjectiveSpace.map_eq_coordRatio_smul_of_twistRestrict_iso ε hε i j⟩
+  | zero => exact ⟨0, by rw [map_zero, map_zero, zero_smul]⟩
+  | add a b _ _ ha hb =>
+    obtain ⟨a', ha'⟩ := ha
+    obtain ⟨b', hb'⟩ := hb
+    exact ⟨a' + b', by rw [map_add, ha', hb', map_add, add_smul]⟩
+  | smul r a _ ha =>
+    obtain ⟨a', ha'⟩ := ha
+    obtain ⟨c, rfl⟩ := (GlobalSectionsBijective.bijective_globalSectionsRingHom (k := k)).2 r
+    refine ⟨(ℙ(n; Spec (.of k)) ↘ Spec (.of k)).appLE ⊤ _ le_top
+      ((Scheme.ΓSpecIso (.of k)).inv c) * a', ?_⟩
+    rw [Modules.map_smul, ha', map_mul, mul_smul]
+    congr 1
+    rw [Scheme.Hom.app_eq_appLE, ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE,
+      appLE_eq_of_eq' hφ]
+    rfl
+
+end VeryAmpleSpan
 
 section LargeDegree
 
@@ -508,8 +1277,27 @@ The hypothesis `H⁰(X, 𝒪_X) = k`, which makes `X` connected, cannot be dropp
 
 (blueprint: `lem-sc-negative-degree-no-sections`) -/
 theorem Modules.finrankH_zero_eq_zero_of_degree_neg [GlobalSectionsBijective k X]
-    (ℳ : X.Modules) [ℳ.IsInvertible] (hd : ℳ.degree k < 0) : ℳ.finrankH k 0 = 0 :=
-  sorry
+    (ℳ : X.Modules) [ℳ.IsInvertible] (hd : ℳ.degree k < 0) : ℳ.finrankH k 0 = 0 := by
+  by_contra h0
+  have : Nontrivial (ℳ.H 0) :=
+    Module.nontrivial_of_finrank_pos (R := k) (show 0 < ℳ.finrankH k 0 by omega)
+  obtain ⟨s, hs⟩ := Modules.exists_ne_zero_of_nontrivial_H_zero ℳ
+  -- `X` is integral, so the zero scheme of the non-zero section `s` is an effective divisor `D`
+  have := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
+  have : Smooth (X ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  have := IsRegular.of_smooth (X ↘ Spec (.of k))
+  have := GlobalSectionsBijective.connectedSpace (k := k) (X := X)
+  have := IsRegular.isIntegral X
+  have := Modules.IsInvertible.sheafOfModules_isInvertible ℳ
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ X.Modules)
+  have hJ : s.zeroLocus.IsInvertible :=
+    (Modules.Hom.isLocallyPrincipal_zeroLocus s).isInvertible
+      fun h ↦ hs ((Modules.Hom.zeroLocus_eq_bot_iff s).mp h)
+  -- `ℳ ≅ 𝒪_X(D)`, of degree `deg D ≥ 0`
+  obtain ⟨e⟩ := Modules.Hom.nonempty_iso_dual_toModules_tensorObj s hJ
+  have hD := hJ.degree_dual_toModules (k := k)
+  rw [Modules.degree_congr k (e ≪≫ ρ_ _)] at hd
+  omega
 
 /-- **`h¹` of a line bundle of large degree vanishes.** A line bundle `ℒ` of degree
 `d ≥ 2g - 1` on a smooth proper curve with `H⁰(X, 𝒪_X) = k` of genus `g` has `H¹(X, ℒ) = 0`:
@@ -545,18 +1333,144 @@ theorem finrankH_zero_eq [GlobalSectionsBijective k X] (ℒ : X.Modules) [ℒ.Is
     Modules.finrankH_one_eq_zero_of_degree ℒ hd]
   ring
 
+/-- **The criterion for very ampleness on a curve.** Let `k` be algebraically closed and `ℳ` a
+line bundle on a smooth proper curve with `H⁰(X, 𝒪_X) = k`. Suppose that twisting by the ideal
+sheaf of a rational point lowers `h⁰` by one, and twisting by the ideal sheaves of two rational
+points `P` and `Q`, possibly equal, lowers `h⁰` by two. Then `ℳ` is very ample.
+
+Since `k` is algebraically closed, every closed point is rational. The first condition says that
+the complete linear system `|ℳ|` is base point free, so it defines a morphism `φ : X ⟶ ℙ^N`. The
+second condition with `P ≠ Q` gives a section vanishing at `P` but not at `Q`, so `φ` is
+injective, and with `P = Q` a section vanishing to order exactly one at `P`, so `φ` is unramified.
+Being proper with finite fibres, `φ` is finite, and a finite morphism which is injective and
+unramified, with trivial residue field extensions, is a closed immersion (Nakayama).
+
+(blueprint: `lem-sc-degree-2g1-very-ample`, second part of the proof) -/
+theorem isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker [IsAlgClosed k]
+    [GlobalSectionsBijective k X] (ℳ : X.Modules) [ℳ.IsInvertible]
+    (h₁ : ∀ x : (X ↘ Spec (.of k)).fieldPoints k,
+      Modules.finrankH k (ℳ ⊗ x.1.ker.toModules) 0 + 1 = ℳ.finrankH k 0)
+    (h₂ : ∀ x y : (X ↘ Spec (.of k)).fieldPoints k,
+      Modules.finrankH k ((ℳ ⊗ x.1.ker.toModules) ⊗ y.1.ker.toModules) 0 + 2 =
+        ℳ.finrankH k 0) :
+    IsVeryAmple (X ↘ Spec (.of k)) ℳ := by
+  have : FiniteDimensional k (ℳ.H 0) := Modules.finiteDimensional_H (M := ℳ) k 0
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  -- a basis `s` of the global sections
+  let b := Module.finBasis k (ℳ.H 0)
+  let n := ULift.{u} (Fin (Module.finrank k (ℳ.H 0)))
+  let s : n → Γ(ℳ, ⊤) := fun j ↦ Modules.H.zeroLinearEquiv ℳ (b j.down)
+  have hspan (σ : Γ(ℳ, ⊤)) : σ ∈ Submodule.span Γ(X, ⊤) (Set.range s) := by
+    obtain ⟨z, rfl⟩ := (Modules.H.zeroLinearEquiv ℳ).surjective σ
+    rw [← b.sum_repr z, map_sum]
+    refine Submodule.sum_mem _ fun j _ ↦ ?_
+    rw [Modules.smul_H_eq_globalSectionsRingHom_smul, LinearEquiv.map_smul]
+    exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨⟨j⟩, rfl⟩)
+  have hpt (P : X) (hP : IsClosed {P}) :
+      ∃ x : (X ↘ Spec (.of k)).fieldPoints k, x.1.base default = P :=
+    (X ↘ Spec (.of k)).exists_fieldPoints_base_eq_of_isClosed hP
+  -- the loci where the `s j` generate `ℳ` cover `X`
+  have hU : ⨆ j, Modules.generatingLocus (s j) = ⊤ := by
+    by_contra hne
+    obtain ⟨P, hPZ, hPcl⟩ := (⨆ j, Modules.generatingLocus (s j)).isOpen.isClosed_compl
+      |>.exists_closed_singleton (by
+        rw [Set.nonempty_compl]
+        exact fun h ↦ hne (SetLike.coe_injective h))
+    obtain ⟨x, rfl⟩ := hpt P hPcl
+    obtain ⟨j, hj⟩ := Modules.exists_generatesAt_of_finrankH ℳ s hspan x (h₁ x)
+    exact hPZ (TopologicalSpace.Opens.mem_iSup.mpr ⟨j, hj⟩)
+  obtain ⟨φ, hφ, ε, hεi, hε⟩ := ProjectiveSpace.exists_hom_twistRestrict
+    (g := X ↘ Spec (.of k)) (s := s) (U := fun j ↦ Modules.generatingLocus (s j))
+    (hs := fun j ↦ Modules.isFreeGenerator_generatingLocus (s j)) hU
+  refine ⟨n, φ, inferInstance, ?_, hφ, ⟨asIso ε⟩⟩
+  have : IsProper φ := by
+    have : IsProper (φ ≫ ℙ(n; Spec (.of k)) ↘ Spec (.of k)) := by rw [hφ]; infer_instance
+    exact IsProper.of_comp φ (ℙ(n; Spec (.of k)) ↘ Spec (.of k))
+  have hcov (P : X) : ∃ i, P ∈ φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i := by
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp
+      ((ProjectiveSpace.iSup_standardOpen n _).ge (Set.mem_univ (φ P)))
+    exact ⟨i, hi⟩
+  refine isClosedImmersion_of_injective_of_le_map_maximalIdeal φ (X ↘ Spec (.of k))
+    (ℙ(n; Spec (.of k)) ↘ Spec (.of k)) hφ ?_ ?_
+  · intro P Q hPcl hQcl hPQ
+    by_contra hne
+    obtain ⟨x, rfl⟩ := hpt P hPcl
+    obtain ⟨y, rfl⟩ := hpt Q hQcl
+    obtain ⟨t, htP, htQ⟩ :=
+      Modules.exists_not_generatesAt_generatesAt ℳ x y hne (h₁ x) (h₂ x y)
+    obtain ⟨i, hi⟩ := hcov (y.1.base default)
+    obtain ⟨a, ha⟩ := exists_eq_app_smul_of_mem_span hφ ε hε i (hspan t)
+    have he := ProjectiveSpace.isFreeGenerator_of_twistRestrict_iso ε hε i
+    have h1 := Modules.mem_basicOpen_of_generatesAt he ha hi htQ
+    have h2 : x.1.base default ∉ X.basicOpen (φ.app _ a) := fun h ↦
+      htP (Modules.generatesAt_of_mem_basicOpen he ha h)
+    rw [← Scheme.preimage_basicOpen] at h1 h2
+    rw [Scheme.Hom.mem_preimage, ← hPQ, ← Scheme.Hom.mem_preimage] at h1
+    exact h2 h1
+  · intro P hPcl
+    obtain ⟨x, rfl⟩ := hpt P hPcl
+    obtain ⟨t, W, hPW, e, c, he, ht, hc⟩ := Modules.exists_span_eq_ideal_ker ℳ x (h₁ x) (h₂ x x)
+    obtain ⟨i, hi⟩ := hcov (x.1.base default)
+    obtain ⟨a, ha⟩ := exists_eq_app_smul_of_mem_span hφ ε hε i (hspan t)
+    have hsi := ProjectiveSpace.isFreeGenerator_of_twistRestrict_iso ε hε i
+    have hVW : W.1 ⊓ (φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i) ≤ W.1 := inf_le_left
+    have hVi : W.1 ⊓ (φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i) ≤
+        (φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i) := inf_le_right
+    have hPV : x.1.base default ∈ W.1 ⊓ (φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i) := ⟨hPW, hi⟩
+    obtain ⟨w, hw⟩ := (he.map hVW).exists_unit_smul_eq (hsi.map hVi)
+    rw [Modules.presheaf_map_homOfLE_map_homOfLE] at hw
+    have ht' := congrArg (ℳ.presheaf.map (homOfLE hVW).op) ht
+    have ha' := congrArg (ℳ.presheaf.map (homOfLE hVi).op) ha
+    simp only [Modules.presheaf_map_homOfLE_map_homOfLE, Modules.map_smul] at ht' ha'
+    rw [hw, smul_smul, ht'] at ha'
+    have hcV := (he.map hVW).smul_left_injective ha'
+    -- germs at `P`
+    have hg : X.presheaf.germ W.1 _ hPW c =
+        X.presheaf.germ (φ ⁻¹ᵁ ProjectiveSpace.standardOpen n _ i) _ hi (φ.app _ a) *
+          X.presheaf.germ _ _ hPV w.1 := by
+      rw [← X.presheaf.germ_res_apply (homOfLE hVW) _ hPV, hcV, map_mul,
+        X.presheaf.germ_res_apply (homOfLE hVi)]
+    have hcmem : c ∈ x.1.ker.ideal W := hc ▸ Ideal.mem_span_singleton_self c
+    have hnu : ¬ IsUnit (X.presheaf.germ W.1 _ hPW c) := fun h ↦
+      (x.1.mem_ideal_ker_iff W hPW c).mp hcmem ((Scheme.mem_basicOpen _ _ _ hPW).mpr h)
+    rw [← x.1.map_germ_ideal_ker W hPW, ← hc, Ideal.map_span, Set.image_singleton,
+      Ideal.span_le, Set.singleton_subset_iff, SetLike.mem_coe, hg]
+    refine Ideal.mul_mem_right _ _ ?_
+    rw [← Scheme.Hom.germ_stalkMap_apply]
+    refine Ideal.mem_map_of_mem _ ((IsLocalRing.mem_maximalIdeal _).mpr fun hu ↦ hnu ?_)
+    rw [hg, ← Scheme.Hom.germ_stalkMap_apply]
+    exact ((hu.map (φ.stalkMap _).hom).mul (w.isUnit.map _))
+
 /-- **A line bundle of degree `≥ 2g + 1` is very ample.** Let `k` be algebraically closed and
 `ℳ` a line bundle of degree `d ≥ 2g + 1` on a smooth proper curve with `H⁰(X, 𝒪_X) = k` of
 genus `g`. For closed points `P, Q`, Riemann–Roch in degree `≥ 2g - 1`
 (`AlgebraicGeometry.Scheme.finrankH_zero_eq`) gives `h⁰(ℳ(-P)) = h⁰(ℳ) - 1` and
 `h⁰(ℳ(-P-Q)) = h⁰(ℳ) - 2`: the complete linear system `|ℳ|` is base point free and separates
-points and tangent vectors, so it defines a closed immersion into projective space.
+points and tangent vectors, so it defines a closed immersion into projective space
+(`AlgebraicGeometry.Scheme.isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker`).
 
 (blueprint: `lem-sc-degree-2g1-very-ample`) -/
 theorem isVeryAmple_of_degree [IsAlgClosed k] [GlobalSectionsBijective k X] (ℳ : X.Modules)
     [ℳ.IsInvertible] (hd : 2 * (arithmeticGenus k X : ℤ) + 1 ≤ ℳ.degree k) :
-    IsVeryAmple (X ↘ Spec (.of k)) ℳ :=
-  sorry
+    IsVeryAmple (X ↘ Spec (.of k)) ℳ := by
+  have h₀ := finrankH_zero_eq (k := k) ℳ (by omega)
+  refine isVeryAmple_of_finrankH_zero_tensorObj_toModules_ker ℳ (fun x ↦ ?_) fun x y ↦ ?_
+  · have := (Hom.isInvertible_ker_fieldPoints x).isInvertible_toModules
+    have hdx : (ℳ ⊗ x.1.ker.toModules).degree k = ℳ.degree k - 1 := by
+      rw [Modules.degree_tensorObj (k := k), degree_toModules_ker_fieldPoints]
+      ring
+    have h := finrankH_zero_eq (k := k) (ℳ ⊗ x.1.ker.toModules) (by omega)
+    omega
+  · have := (Hom.isInvertible_ker_fieldPoints x).isInvertible_toModules
+    have := (Hom.isInvertible_ker_fieldPoints y).isInvertible_toModules
+    have hdx : ((ℳ ⊗ x.1.ker.toModules) ⊗ y.1.ker.toModules).degree k = ℳ.degree k - 2 := by
+      rw [Modules.degree_tensorObj (k := k), Modules.degree_tensorObj (k := k),
+        degree_toModules_ker_fieldPoints,
+        degree_toModules_ker_fieldPoints]
+      ring
+    have h := finrankH_zero_eq (k := k) ((ℳ ⊗ x.1.ker.toModules) ⊗ y.1.ker.toModules)
+      (by omega)
+    omega
 
 /-- **Positive degree implies ample, over an algebraically closed field.** If `deg ℒ > 0` then
 `deg ℒ^{⊗ m} = m deg ℒ ≥ 2g + 1` for `m = 2g + 1`, so `ℒ^{⊗ m}` is very ample
@@ -566,7 +1480,8 @@ theorem isVeryAmple_of_degree [IsAlgClosed k] [GlobalSectionsBijective k X] (ℳ
 theorem isAmple_of_degree_pos_of_isAlgClosed [IsAlgClosed k] [GlobalSectionsBijective k X]
     (ℒ : X.Modules) [ℒ.IsInvertible] (hd : 0 < ℒ.degree k) :
     IsAmple (X ↘ Spec (.of k)) ℒ := by
-  refine ⟨2 * arithmeticGenus k X + 1, Nat.succ_pos _, isVeryAmple_of_degree _ ?_⟩
+  refine ⟨inferInstance, 2 * arithmeticGenus k X + 1, Nat.succ_pos _,
+    isVeryAmple_of_degree _ ?_⟩
   rw [Modules.degree_tensorPow]
   push_cast
   nlinarith
@@ -589,10 +1504,10 @@ theorem isAmple_of_degree_pos [GlobalSectionsBijective k X] (ℒ : X.Modules) [�
       (IsPullback.of_hasPullback _ _) ‹_›
   have : IsProper (Limits.pullback (X ↘ Spec (.of k)) g ↘ Spec (.of K)) :=
     IsProper.isStableUnderBaseChange.of_isPullback (IsPullback.of_hasPullback _ _) ‹_›
-  obtain ⟨m, hm, hv⟩ := isAmple_of_degree_pos_of_isAlgClosed
+  obtain ⟨-, m, hm, hv⟩ := isAmple_of_degree_pos_of_isAlgClosed
     ((Modules.pullback (pullback.fst (X ↘ Spec (.of k)) g)).obj ℒ)
     ((Modules.degree_pullback k K ℒ).symm ▸ hd)
-  exact ⟨m, hm, IsVeryAmple.of_pullback _ K _
+  exact ⟨inferInstance, m, hm, IsVeryAmple.of_pullback _ K _
     (hv.of_iso (Modules.nonempty_pullback_tensorPow_iso _ ℒ m).some.symm)⟩
 
 /-- **Ample if and only if positive degree.** An invertible sheaf on a smooth proper curve over
@@ -735,6 +1650,78 @@ theorem degree_tensorObj_pullback_fst
 local notation "𝔭" => Limits.pullback.fst (X ↘ Spec (CommRingCat.of k))
   (Spec.map (CommRingCat.ofHom (algebraMap k K)))
 
+omit [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] in
+/-- **The base change of a rational point has degree one.** For a `k`-rational point `x` of `X`,
+the closed subscheme of `X_K` cut out by the pullback `(ker x) · 𝒪_{X_K}` of the ideal sheaf of
+`x` is `Spec k ×_X X_K = Spec k ×_k Spec K = Spec K`, so it has `dim_K Γ = 1`. -/
+theorem finrankΓ_subschemeι_comap_ker_fieldPoints (x : (X ↘ Spec (.of k)).fieldPoints k) :
+    ((x.1.ker.comap 𝔭).subschemeι ≫ Limits.pullback (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K))) ↘ Spec (.of K)).finrankΓ = 1 := by
+  have hsq := (x.1.ker.isPullback_comap 𝔭).flip.paste_vert
+    (IsPullback.of_hasPullback (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+  -- the closed subscheme of `x` maps isomorphically to `Spec k`
+  have hx : x.1 ≫ X ↘ Spec (.of k) = 𝟙 _ := by
+    rw [x.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+  have he : x.1.ker.subschemeι ≫ X ↘ Spec (.of k) = inv x.1.toImage := by
+    rw [← cancel_epi x.1.toImage, ← Category.assoc, Hom.toImage_imageι, hx, IsIso.hom_inv_id]
+  have : IsIso (x.1.ker.subschemeι ≫ X ↘ Spec (.of k)) := by
+    rw [he]
+    infer_instance
+  have := hsq.isIso_snd_of_isIso
+  rw [← Hom.finrankΓ_id (k := K)]
+  exact Hom.finrankΓ_eq_of_iso _ _ (asIso ((x.1.ker.comap 𝔭).subschemeι ≫ pullback.snd _ _))
+    (Iso.refl _) (by simp)
+
+omit [IsProper (X ↘ Spec (.of k))] in
+/-- **A section not vanishing at a point survives restriction to it.** Let `ℒ` be an invertible
+sheaf on `X_K`, let `s : 𝒪_{X_K} ⟶ ℒ` be a global section and let `x` be a `k`-rational point
+of `X` such that `s` does not vanish at `x_K`. Then some global section `z` of `ℒ` has non-zero
+image in `H⁰(X_K, ℒ|_{x_K})`, where `ℒ|_{x_K}` is the cokernel of `𝓘 ⊗ ℒ ⟶ 𝒪_{X_K} ⊗ ℒ` for the
+ideal sheaf `𝓘 = (ker x) · 𝒪_{X_K}` of `x_K`.
+
+One can take `z` to be the class of `s`. Otherwise `s` factors through `𝓘 ⊗ ℒ ⟶ ℒ`, by left
+exactness, so the zero scheme of `s` contains that of `𝓘 ⊗ ℒ ⟶ 𝒪 ⊗ ℒ`, which is `x_K`. -/
+theorem exists_map_cokernel_π_ne_zero
+    (L : (Limits.pullback (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules) [L.IsInvertible]
+    (s : 𝟙_ _ ⟶ L) (x : (X ↘ Spec (.of k)).fieldPoints k)
+    (hx : ((X ↘ Spec (.of k)).baseChangeFieldPoint K x).1.base default ∉ s.zeroLocus.support) :
+    ∃ z : L.H 0, Modules.H.map
+      ((λ_ L).inv ≫ cokernel.π ((x.1.ker.comap 𝔭).toModulesι ▷ L)) 0 z ≠ 0 := by
+  by_contra! h
+  have : Flat (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+    Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
+  have hJ := (Hom.isInvertible_ker_fieldPoints x).comap_of_flat 𝔭
+  have := hJ.isInvertible_toModules
+  set I := x.1.ker.comap 𝔭
+  -- the class of `s` in `H⁰(ℒ|_{x_K})` vanishes, so `s` factors through `𝓘 ⊗ ℒ`
+  have h0 : s ≫ (λ_ L).inv ≫ cokernel.π (I.toModulesι ▷ L) = 0 :=
+    Modules.eq_zero_of_forall_H_map_zero _ fun z ↦ by
+      rw [Modules.H.map_comp_apply]
+      exact h _
+  let S := ShortComplex.mk (I.toModulesι ▷ L) (cokernel.π _) (cokernel.condition _)
+  have hS : S.Exact := ShortComplex.exact_cokernel _
+  let t := hS.lift (s ≫ (λ_ L).inv) (by simpa using h0)
+  have ht : t ≫ I.toModulesι ▷ L = s ≫ (λ_ L).inv := hS.lift_f _ _
+  -- hence `Z(s) ⊇ Z(𝓘 ⊗ ℒ ⟶ 𝒪 ⊗ ℒ) = Z(𝓘 ⟶ 𝒪) = x_K`
+  have := Modules.IsInvertible.sheafOfModules_isInvertible L
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ (Limits.pullback
+    (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules)
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (I.toModules ⊗ L)
+  have := Modules.IsInvertible.sheafOfModules_isInvertible (𝟙_ (Limits.pullback
+    (X ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules ⊗ L)
+  have := Modules.IsInvertible.sheafOfModules_isInvertible I.toModules
+  have hle : Modules.Hom.zeroLocus s ≤ I := by
+    rw [Modules.Hom.zeroLocus_eq_of_arrowIso s (s ≫ (λ_ L).inv)
+      (Arrow.isoMk (Iso.refl _) (λ_ L).symm), ← ht]
+    refine (Modules.Hom.zeroLocus_comp_le _ _).trans ?_
+    rw [Modules.Hom.zeroLocus_whiskerRight, hJ.zeroLocus_toModulesι]
+  refine hx (IdealSheafData.support_antitone hle ?_)
+  rw [← SetLike.mem_coe, IdealSheafData.coe_support_comap, Set.mem_preimage,
+    Scheme.Hom.support_ker]
+  rw [Hom.baseChangeFieldPoint, ← Scheme.Hom.comp_apply, pullback.lift_fst, Scheme.Hom.comp_apply]
+  exact subset_closure ⟨_, rfl⟩
+
 /-- **Removing a rational point.** Let `ℒ` be an invertible sheaf on `X_K`, let `s : 𝒪_{X_K} ⟶ ℒ`
 be a global section and let `x` be a `k`-rational point of `X` such that `s` does not vanish at
 `x_K`. Then twisting by the ideal sheaf `𝒪_X(-x) = ker x` lowers `h⁰` by exactly one:
@@ -753,8 +1740,60 @@ theorem finrankH_zero_tensorObj_pullback_toModules_ker_add_one
     (hx : ((X ↘ Spec (.of k)).baseChangeFieldPoint K x).1.base default ∉ s.zeroLocus.support) :
     Modules.finrankH K (L ⊗ (Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
       (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj x.1.ker.toModules) 0 + 1 =
-      Modules.finrankH K L 0 :=
-  sorry
+      Modules.finrankH K L 0 := by
+  have := smoothOfRelativeDimension_baseChange (k := k) (X := X) K 1
+  have := isProper_baseChange (k := k) (X := X) K
+  have : Flat (Spec.map (CommRingCat.ofHom (algebraMap k K))) :=
+    Flat.SpecMap_iff.mpr (RingHom.flat_algebraMap_iff.mpr inferInstance)
+  have hI := Hom.isInvertible_ker_fieldPoints x
+  have hJ := hI.comap_of_flat 𝔭
+  have := hJ.isInvertible_toModules
+  obtain ⟨e₀⟩ := hI.nonempty_pullback_toModules_iso 𝔭 hJ
+  -- the short exact sequence `0 ⟶ 𝓘 ⊗ ℒ ⟶ 𝒪 ⊗ ℒ ⟶ ℒ|_{x_K} ⟶ 0`
+  let S := ShortComplex.mk ((x.1.ker.comap 𝔭).toModulesι ▷ L) (cokernel.π _)
+    (cokernel.condition _)
+  have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _) inferInstance inferInstance
+  have e₁ : L ⊗ (Modules.pullback 𝔭).obj x.1.ker.toModules ≅ S.X₁ :=
+    whiskerLeftIso L e₀ ≪≫ β_ _ _
+  have e₂ : S.X₂ ≅ L := λ_ L
+  have : S.X₂.IsInvertible := Modules.IsInvertible.of_iso e₂.symm
+  have := hJ.finiteDimensional_H_cokernel_whiskerRight (k := K) L 0
+  -- `h⁰(ℒ|_{x_K}) = 1`
+  have h3 : Modules.finrankH K S.X₃ 0 = 1 := by
+    have := hJ.subsingleton_H_one_cokernel_whiskerRight K L
+    have h := hJ.eulerChar_cokernel_whiskerRight (k := K) L
+    have h1 : Modules.finrankH K (cokernel ((x.1.ker.comap 𝔭).toModulesι ▷ L)) 1 = 0 :=
+      Module.finrank_zero_of_subsingleton
+    rw [finrankΓ_subschemeι_comap_ker_fieldPoints,
+      Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one, h1] at h
+    simp only [Nat.cast_zero, sub_zero, Nat.cast_one, Nat.cast_eq_one] at h
+    exact h
+  -- the image of `H⁰(ℒ) ⟶ H⁰(ℒ|_{x_K})` is non-zero, hence everything
+  let f := Modules.H.mapLinearMap K S.f 0
+  let g := Modules.H.mapLinearMap K S.g 0
+  have hf : LinearMap.ker f = ⊥ :=
+    LinearMap.ker_eq_bot.mpr (Modules.H.injective_map_zero_of_shortExact hS)
+  have hg : LinearMap.ker g = LinearMap.range f := by
+    ext y
+    exact SetLike.ext_iff.mp (Modules.H.ker_map_g_eq_range_map_f hS 0) y
+  have hrg : Module.finrank K (LinearMap.range g) = 1 := by
+    refine le_antisymm ((Submodule.finrank_le _).trans h3.le) ?_
+    obtain ⟨z, hz⟩ := exists_map_cokernel_π_ne_zero K L s x hx
+    refine Nat.one_le_iff_ne_zero.mpr fun h0 ↦ hz ?_
+    rw [Submodule.finrank_eq_zero] at h0
+    have : g (Modules.H.map (λ_ L).inv 0 z) ∈ LinearMap.range g := ⟨_, rfl⟩
+    rw [h0] at this
+    rw [Modules.H.map_comp_apply]
+    exact (Submodule.mem_bot K).mp this
+  have hrf : Module.finrank K (LinearMap.range f) = Modules.finrankH K S.X₁ 0 := by
+    have := LinearMap.finrank_range_add_finrank_ker f
+    rw [hf, finrank_bot] at this
+    exact this.trans rfl
+  have h2 := LinearMap.finrank_range_add_finrank_ker g
+  rw [hg, hrg, hrf] at h2
+  rw [Modules.finrankH_congr K e₁, ← Modules.finrankH_congr K e₂]
+  change Modules.finrankH K S.X₁ 0 + 1 = Module.finrank K (S.X₂.H 0)
+  omega
 
 /-- **Descending induction on `h⁰`.** Let `ℒ` be an invertible sheaf on `X_K` and `ℳ` an
 invertible sheaf on `X` with `h⁰(X_K, ℒ ⊗ ℳ_K) = t + 1` and `h¹(X_K, ℒ ⊗ ℳ_K) = 0`. Then there is

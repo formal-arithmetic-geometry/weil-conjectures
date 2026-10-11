@@ -24,6 +24,8 @@ restriction `L.op ⋙ F` along a left adjoint `L ⊣ R` by `R.obj Y`.
 
 - `CategoryTheory.Adjunction.comp_homEquiv_map_counit_app_comp`.
 - `CategoryTheory.Functor.RepresentableBy.ofAdjunction`.
+- `CategoryTheory.Adjunction.comp_map_counit_eq_comp_homEquiv_symm`: composing with a counit
+  read through an identification of a right adjoint with a left adjoint factors through a unit.
 
 -/
 
@@ -87,3 +89,30 @@ def ofAdjunction (r : F.RepresentableBy Y) (adj : L ⊣ R) :
     simp [Adjunction.homEquiv_naturality_left_symm, r.homEquiv_comp]
 
 end CategoryTheory.Functor.RepresentableBy
+
+namespace CategoryTheory.Adjunction
+
+variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
+
+/-- Let `adj₁ : L ⊣ R` and `adj₂ : S ⊣ T` be adjunctions between `C` and `D` whose right adjoint
+`R` and left adjoint `S` are identified by `θ : S ≅ R`. For `e : L A ≅ B`, `σ : N ≅ S M` and
+`γ : M ≅ T A`, composing a morphism `f : A ⟶ N` with the counit of `adj₂` read through `σ`
+and `γ` factors through the morphism `A ⟶ R (L A) ≅ R B ≅ S B` given by the unit of `adj₁`:
+the second factor `S B ⟶ A` is the transpose of `f` along `adj₁`, `e`, `γ` and `adj₂`. -/
+theorem comp_map_counit_eq_comp_homEquiv_symm {L : D ⥤ C} {R : C ⥤ D} {S : C ⥤ D} {T : D ⥤ C}
+    (adj₁ : L ⊣ R) (adj₂ : S ⊣ T) (θ : S ≅ R) {A N : D} {B M : C} (e : L.obj A ≅ B)
+    (σ : N ≅ S.obj M) (γ : M ≅ T.obj A) (f : A ⟶ N) :
+    f ≫ σ.hom ≫ S.map γ.hom ≫ adj₂.counit.app A =
+      (adj₁.unit.app A ≫ R.map e.hom ≫ θ.inv.app B) ≫
+        (adj₂.homEquiv B A).symm
+          (e.inv ≫ (adj₁.homEquiv A M).symm (f ≫ (σ ≪≫ θ.app M).hom) ≫ γ.hom) := by
+  have h₁ : adj₁.unit.app A ≫ R.map ((adj₁.homEquiv A M).symm (f ≫ (σ ≪≫ θ.app M).hom)) =
+      f ≫ (σ ≪≫ θ.app M).hom :=
+    (adj₁.homEquiv_unit _ _ _).symm.trans (Equiv.apply_symm_apply _ _)
+  rw [homEquiv_counit, Category.assoc, Category.assoc, ← Category.assoc (θ.inv.app B),
+    ← θ.inv.naturality, Category.assoc, ← Functor.map_comp_assoc, ← Category.assoc e.hom,
+    Iso.hom_inv_id, Category.id_comp, Functor.map_comp_assoc, ← Category.assoc (adj₁.unit.app A),
+    h₁]
+  simp
+
+end CategoryTheory.Adjunction

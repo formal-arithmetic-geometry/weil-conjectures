@@ -94,4 +94,29 @@ theorem exists_homologySequenceδ_whiskerRight {C₀ : Type*} [Category* C₀]
     H.homologySequence_exact₃ _ h₂ n₀ n₁ hn, H.homologySequence_exact₁ _ h₂ n₀ n₁ hn,
     H.homologySequenceδ_mapTriangle_naturality τ T n₀ n₁ hn⟩
 
+/-- The form of `CategoryTheory.Functor.exists_homologySequenceδ_whiskerRight` for an arbitrary
+instance of zero morphisms on `A`, in which the exactness of the two long sequences is stated.
+Use it when that instance is not the one of the abelian structure, for instance for sheaves,
+whose zero morphisms come from the full subcategory of sheaves: there the kernel would have to
+compare the two instances, which is expensive. -/
+theorem exists_homologySequenceδ_whiskerRight' [ZA : HasZeroMorphisms A] {C₀ : Type*}
+    [Category* C₀] [HasZeroMorphisms C₀] (L : C₀ ⥤ C) {F₁ F₂ : C ⥤ D} [F₁.CommShift ℤ]
+    [F₂.CommShift ℤ] [F₁.IsTriangulated] [F₂.IsTriangulated] (τ : F₁ ⟶ F₂)
+    [NatTrans.CommShift τ ℤ] (Hn : ℤ → D ⥤ A) (hH : ∀ n, H.shift n = Hn n)
+    (G₁ G₂ : ℤ → C₀ ⥤ A) (φ : ∀ n, G₁ n ⟶ G₂ n)
+    (hφ : (⟨G₁, G₂, φ⟩ : Σ (G₁ G₂ : ℤ → C₀ ⥤ A), ∀ n, G₁ n ⟶ G₂ n) =
+      ⟨fun n ↦ L ⋙ F₁ ⋙ Hn n, fun n ↦ L ⋙ F₂ ⋙ Hn n,
+        fun n ↦ whiskerLeft L (whiskerRight τ (Hn n))⟩)
+    (E : ShortComplex C₀) (δ : L.obj E.X₃ ⟶ (L.obj E.X₁)⟦(1 : ℤ)⟧)
+    (hT : Triangle.mk (L.map E.f) (L.map E.g) δ ∈ distTriang C) (n₀ n₁ : ℤ)
+    (hn : n₀ + 1 = n₁) :
+    ∃ (δ₁ : (G₁ n₀).obj E.X₃ ⟶ (G₁ n₁).obj E.X₁) (δ₂ : (G₂ n₀).obj E.X₃ ⟶ (G₂ n₁).obj E.X₁)
+      (w₁ : (G₁ n₀).map E.g ≫ δ₁ = 0) (w₂ : δ₁ ≫ (G₁ n₁).map E.f = 0)
+      (w₃ : (G₂ n₀).map E.g ≫ δ₂ = 0) (w₄ : δ₂ ≫ (G₂ n₁).map E.f = 0),
+      (ShortComplex.mk _ _ w₁).Exact ∧ (ShortComplex.mk _ _ w₂).Exact ∧
+      (ShortComplex.mk _ _ w₃).Exact ∧ (ShortComplex.mk _ _ w₄).Exact ∧
+      δ₁ ≫ (φ n₁).app E.X₁ = (φ n₀).app E.X₃ ≫ δ₂ := by
+  obtain rfl : ZA = Preadditive.preadditiveHasZeroMorphisms := Subsingleton.elim _ _
+  exact H.exists_homologySequenceδ_whiskerRight L τ Hn hH G₁ G₂ φ hφ E δ hT n₀ n₁ hn
+
 end CategoryTheory.Functor

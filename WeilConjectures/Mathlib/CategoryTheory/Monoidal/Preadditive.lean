@@ -17,6 +17,9 @@ variable, then the pointwise monoidal structure on a functor category `C ⥤ D`
 (`CategoryTheory.Monoidal.functorCategoryMonoidal`) is again preadditive: whiskering,
 tensoring and addition of natural transformations are all computed objectwise, so each
 `MonoidalPreadditive` axiom follows componentwise from the corresponding axiom in `D`.
+
+We also record that whiskering commutes with `ℤ`-scalar multiplication
+(`zsmul_whiskerRight`, `whiskerLeft_zsmul`).
 -/
 
 @[expose] public section
@@ -37,3 +40,19 @@ instance functorCategoryMonoidalPreadditive : MonoidalPreadditive (C ⥤ D) wher
   add_whiskerRight := by intros; ext; simp
 
 end CategoryTheory.Monoidal
+
+namespace CategoryTheory
+
+open MonoidalCategory
+
+variable {C : Type*} [Category* C] [Preadditive C] [MonoidalCategory C] [MonoidalPreadditive C]
+
+theorem zsmul_whiskerRight {X Y : C} (n : ℤ) (f : X ⟶ Y) (Z : C) :
+    (n • f) ▷ Z = n • (f ▷ Z) :=
+  Functor.map_zsmul (tensorRight Z)
+
+theorem whiskerLeft_zsmul (X : C) {Y Z : C} (n : ℤ) (f : Y ⟶ Z) :
+    X ◁ (n • f) = n • (X ◁ f) :=
+  Functor.map_zsmul (tensorLeft X)
+
+end CategoryTheory

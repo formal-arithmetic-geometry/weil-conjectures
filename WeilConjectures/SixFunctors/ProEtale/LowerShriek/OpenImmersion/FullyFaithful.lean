@@ -53,6 +53,8 @@ is fully faithful", and none is needed here.
   comparison `j_! ⟶ j_*` consumes; see
   `AlgebraicGeometry.ProEtale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar` in
   `WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison`.
+- `AlgebraicGeometry.ProEtale.presheafToSheafObjIsoOpenImmersionLowerShriek`: a presheaf on `X`
+  vanishing away from `U` sheafifies to an extension by zero.
 
 -/
 
@@ -106,5 +108,35 @@ instance ProEtale.isIso_openImmersionRestriction_map_lowerShriekAdjunction_couni
   have h := (ProEtale.openImmersionLowerShriekAdjunction A j).right_triangle_components (Y := G)
   rw [← IsIso.inv_eq_of_hom_inv_id h]
   infer_instance
+
+/-- Sheafifying the presheaf-level extension by zero is the extension by zero of the
+sheafification: both are left adjoint to the restriction of sheaves on `X`, viewed as
+presheaves on `U`. -/
+noncomputable def ProEtale.lanPresheafToSheafIsoOpenImmersionLowerShriek :
+    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).op.lan ⋙
+        presheafToSheaf (Scheme.ProEt.topology X) A ≅
+      presheafToSheaf (Scheme.ProEt.topology U) A ⋙ (j)_!open[A] :=
+  Adjunction.leftAdjointUniq
+    (((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).op.lanAdjunction A).comp
+      (sheafificationAdjunction (Scheme.ProEt.topology X) A))
+    ((sheafificationAdjunction (Scheme.ProEt.topology U) A).comp
+      (ProEtale.openImmersionLowerShriekAdjunction A j))
+
+/-- A presheaf on `X` vanishing over every weakly étale `X`-scheme not factoring through `U`
+sheafifies to the extension by zero of a sheaf on `U`: before sheafification it is the
+presheaf-level extension by zero of its restriction to `U`. -/
+noncomputable def ProEtale.presheafToSheafObjIsoOpenImmersionLowerShriek
+    (R : (Scheme.ProEt X)ᵒᵖ ⥤ A)
+    (hR : ∀ W, IsEmpty (CostructuredArrow
+      (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).op W) → IsZero (R.obj W)) :
+    (presheafToSheaf (Scheme.ProEt.topology X) A).obj R ≅
+      (j)_!open[A].obj ((presheafToSheaf (Scheme.ProEt.topology U) A).obj
+        ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).op ⋙ R)) :=
+  have := Functor.isIso_lanAdjunction_counit_app_of_isZero _
+    (SmallSite.mem_essImage_or_isEmpty_costructuredArrow_op_overMap
+      (inferInstance : WeaklyEtale j)) R hR
+  (presheafToSheaf (Scheme.ProEt.topology X) A).mapIso (asIso
+    (((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).op.lanAdjunction A).counit.app
+      R)).symm ≪≫ (ProEtale.lanPresheafToSheafIsoOpenImmersionLowerShriek A j).app _
 
 end AlgebraicGeometry

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
+public import Mathlib.RingTheory.Flat.LocallyFree
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
 
 /-!
@@ -21,6 +22,8 @@ A fibre of a finite flat morphism `f : X ⟶ Y` over a point `y` has at most
   morphism over `y` has at most `f.finrank y` points.
 - `AlgebraicGeometry.Scheme.Hom.finrank_eq_zero_of_isEmpty`: a morphism out of an empty scheme
   has rank `0` everywhere.
+- `AlgebraicGeometry.Scheme.Hom.isIso_of_isClosedImmersion_of_finrank_eq`: a closed immersion
+  between schemes finite flat over `T` which preserves the rank is an isomorphism.
 -/
 
 @[expose] public section
@@ -200,5 +203,73 @@ theorem Scheme.Hom.finrank_comp_of_forall_finrank_eq {X Y Z : Scheme.{u}} (f : X
     Scheme.Hom.finrank_comp_left_of_isIso]
   exact Scheme.Hom.finrank_comp_of_forall_finrank_eq_of_field (K := Z.residueField z) _ _
     (fun y ↦ by rw [Scheme.Hom.finrank_pullback_snd, hf]) t
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **A closed immersion which preserves the rank is an isomorphism.** Let `g : Z ⟶ T` be finite
+and flat and let `i : Z' ⟶ Z` be a closed immersion such that `i ≫ g` is flat of the same rank
+as `g` at every point of `T`. Then `i` is an isomorphism: locally on `T`, `i` is a surjection
+of finite flat modules of the same rank at every stalk, hence bijective. -/
+theorem Scheme.Hom.isIso_of_isClosedImmersion_of_finrank_eq {Z' Z T : Scheme.{u}} (i : Z' ⟶ Z)
+    (g : Z ⟶ T) [IsClosedImmersion i] [IsFinite g] [Flat g] [Flat (i ≫ g)]
+    (h : ∀ t, (i ≫ g).finrank t = g.finrank t) : IsIso i := by
+  wlog hT : ∃ R, T = Spec R with H
+  · rw [← MorphismProperty.isomorphisms.iff,
+      IsZariskiLocalAtTarget.iff_of_openCover (P := .isomorphisms Scheme)
+        (T.affineCover.pullback₁ g)]
+    intro j
+    let a := T.affineCover.f j
+    change IsIso (pullback.snd i (pullback.fst g a))
+    have hsq : IsPullback (pullback.fst i (pullback.fst g a))
+        (pullback.snd i (pullback.fst g a) ≫ pullback.snd g a) (i ≫ g) a :=
+      (IsPullback.of_hasPullback i (pullback.fst g a)).paste_vert (IsPullback.of_hasPullback g a)
+    have : Flat (pullback.snd i (pullback.fst g a) ≫ pullback.snd g a) :=
+      MorphismProperty.of_isPullback hsq ‹_›
+    refine H _ (pullback.snd g a) (fun y ↦ ?_) ⟨_, rfl⟩
+    rw [Scheme.Hom.finrank_of_isPullback _ _ _ _ hsq, h, Scheme.Hom.finrank_pullback_snd]
+  obtain ⟨R, rfl⟩ := hT
+  wlog hZ : ∃ A, Z = Spec A with H
+  · have : IsAffine Z := isAffine_of_isAffineHom g
+    have e : (i ≫ Z.isoSpec.hom) ≫ Z.isoSpec.inv ≫ g = i ≫ g := by simp
+    have : Flat ((i ≫ Z.isoSpec.hom) ≫ Z.isoSpec.inv ≫ g) := by rw [e]; infer_instance
+    have : IsIso (i ≫ Z.isoSpec.hom) :=
+      H (R := R) (i := i ≫ Z.isoSpec.hom) (g := Z.isoSpec.inv ≫ g)
+        (by rw [e, finrank_comp_left_of_isIso Z.isoSpec.inv]; exact h) ⟨_, rfl⟩
+    exact IsIso.of_isIso_comp_right i Z.isoSpec.hom
+  obtain ⟨A, rfl⟩ := hZ
+  wlog hZ' : ∃ B, Z' = Spec B with H
+  · have : IsAffine Z' := isAffine_of_isAffineHom (i ≫ g)
+    have e : (Z'.isoSpec.inv ≫ i) ≫ g = Z'.isoSpec.inv ≫ i ≫ g := by simp
+    have : Flat ((Z'.isoSpec.inv ≫ i) ≫ g) := by rw [e]; infer_instance
+    have : IsIso (Z'.isoSpec.inv ≫ i) :=
+      H (R := R) (A := A) (i := Z'.isoSpec.inv ≫ i) (g := g)
+        (by rw [e, finrank_comp_left_of_isIso Z'.isoSpec.inv]; exact h) ⟨_, rfl⟩
+    exact IsIso.of_isIso_comp_left Z'.isoSpec.inv i
+  obtain ⟨B, rfl⟩ := hZ'
+  obtain ⟨φ, rfl⟩ := Spec.map_surjective g
+  obtain ⟨ψ, rfl⟩ := Spec.map_surjective i
+  rw [← Spec.map_comp] at h
+  have hψ : Function.Surjective ψ := by
+    obtain ⟨-, hsurj⟩ := IsClosedImmersion.isAffine_surjective_of_isAffine (Spec.map ψ)
+    intro x
+    obtain ⟨y, hy⟩ := hsurj ((Scheme.ΓSpecIso B).inv x)
+    refine ⟨(Scheme.ΓSpecIso A).hom y, ?_⟩
+    have := DFunLike.congr_fun (congrArg CommRingCat.Hom.hom (Scheme.ΓSpecIso_naturality ψ)) y
+    exact this.symm.trans (by rw [CommRingCat.comp_apply, hy]; simp)
+  have : Flat (Spec.map (φ ≫ ψ)) := by rwa [Spec.map_comp]
+  simp only [IsFinite.SpecMap_iff, Flat.SpecMap_iff] at *
+  have hfin : (φ ≫ ψ).hom.Finite := by
+    rw [CommRingCat.hom_comp]
+    exact RingHom.Finite.comp (.of_surjective _ hψ) ‹_›
+  rw [finrank_SpecMap_eq_finrank hfin ‹_›, finrank_SpecMap_eq_finrank ‹_› ‹_›] at h
+  algebraize [φ.hom, ψ.hom, (φ ≫ ψ).hom]
+  have : IsScalarTower R A B := .of_algebraMap_eq' rfl
+  have hb := Module.bijective_of_surjective_of_rankAtStalk_eq (R := R)
+    (φ := (IsScalarTower.toAlgHom R A B).toLinearMap) hψ fun m _ ↦ ?_
+  · have : IsIso ψ := (ConcreteCategory.isIso_iff_bijective ψ).mpr hb
+    infer_instance
+  · have := h ⟨m, inferInstance⟩
+    rw [← RingHom.algebraMap_toAlgebra φ.hom, ← RingHom.algebraMap_toAlgebra (φ ≫ ψ).hom,
+      RingHom.finrank_algebraMap, RingHom.finrank_algebraMap] at this
+    exact this.symm
 
 end AlgebraicGeometry

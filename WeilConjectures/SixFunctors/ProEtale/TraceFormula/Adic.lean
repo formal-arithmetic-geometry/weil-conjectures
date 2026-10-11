@@ -6,7 +6,11 @@ Authors: Christian Merten
 module
 
 public import Mathlib.LinearAlgebra.Trace
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
@@ -25,11 +29,11 @@ the shape of an Euler product.
 
 - `AlgebraicGeometry.ProEtale.nonempty_rightDerivedLowerShriek_comp_iso`: compact
   cohomology commutes with a change of finite coefficients.
-- `AlgebraicGeometry.ProEtale.derivedComplete_limit`,
-  `AlgebraicGeometry.ProEtale.nonempty_derivedCompletionDiagram_obj_limit_iso`,
-  `AlgebraicGeometry.ProEtale.nonempty_rightDerivedLowerShriek_obj_limit_iso`,
-  `AlgebraicGeometry.ProEtale.nonempty_leftDerivedUpperStar_obj_limit_iso`: the adic
-  realization of a normalized system and its compatibilities.
+- `AlgebraicGeometry.ProEtale.isHomotopyLimit_derivedCompletionCone`,
+  `AlgebraicGeometry.ProEtale.exists_derivedCompletionDiagram_obj_iso`,
+  `AlgebraicGeometry.ProEtale.isHomotopyLimit_mapCone_rightDerivedLowerShriek`,
+  `AlgebraicGeometry.ProEtale.isHomotopyLimit_mapCone_leftDerivedUpperStar`: the adic
+  realization `R lim_n K_n` of a normalized system and its compatibilities.
 - `AlgebraicGeometry.ProEtale.hasProd_inv_alternatingCharpolyRevProd`: the Euler-product
   form of the trace formula.
 
@@ -55,8 +59,18 @@ tower inside the single derived category `D(X, 𝒪_E)` of sheaves of `𝒪_E`-m
 than in a sequence of categories `D(X, A_n)`: `A_n` is `R ⧸ Iⁿ` for a ring `R` with an
 ideal `I` (the intended case being `R = 𝒪_E`, `I = 𝔪_E`, so that `R` is `I`-adically
 complete), the reduction `K ⊗ᴸ A_n` is `DerivedCategory.derivedCompletionDiagram` evaluated
-at `n`, derived completeness is `DerivedCategory.derivedComplete`, and `R lim` is
-`CategoryTheory.Limits.limit`. This forces the coefficient category to be
+at `n`. The derived limit `R lim_n K_n` is not a categorical limit in the derived category: it
+is the point of a homotopy limit cone `CategoryTheory.Pretriangulated.IsHomotopyLimit`, whose
+legs fit into the distinguished Milnor triangle
+`R lim K → ∏ K_n ──1 - t──▶ ∏ K_n → (R lim K)[1]`. A tower is *normalized*
+(`AlgebraicGeometry.ProEtale.IsNormalizedTower`) when it comes from levels
+`L_n ∈ D(X, R/Iⁿ)` whose base changes `L_n ⊗ᴸ_{R/Iⁿ} R/Iʲ` are `L_j`, each transition
+`K_n ⟶ K_j` being the restriction to `R` of the reduction followed by this isomorphism.
+Derived completeness of `R lim K` is stated as the homotopy-limit property of its own
+reductions, `R lim K ≃ R lim_n (R lim K ⊗ᴸ R/Iⁿ)`. The statements about compact cohomology
+and geometric stalks are for normalized towers of geometric schemes over a field whose levels
+are bounded constructible of finite Tor
+amplitude, which is the setting of the blueprint. This forces the coefficient category to be
 `ModuleCat 𝒪_E`, which does satisfy the standard coefficient instance block, so that the
 pro-étale operations `Rf_!` and `Lx̄^*` apply to it unchanged.
 
@@ -103,14 +117,15 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
+  [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShrieks A]
   {B : Type u''} [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
   [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
   [Abelian.HasFunctorialFlatResolution B] {s X : Scheme.{u}}
 
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [MonoidalCategory B] [MonoidalPreadditive B]
-  [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B] in
+  [Abelian.HasFunctorialFlatResolution A] [Etale.HasBoundedBelowUpperShrieks A]
+  [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+  [Abelian.HasFunctorialFlatResolution B] in
 /-- Finite-level coefficient change for compactly supported cohomology: derived scalar
 extension `- ⊗ᴸ_A B` commutes with `Ra_{X!}`, that is, `(Ra_{X!} K) ⊗ᴸ B ≅ Ra_{X!}(K ⊗ᴸ B)`
 (blueprint: `sk-p-trace-coeff`).
@@ -137,59 +152,143 @@ theorem nonempty_rightDerivedLowerShriek_comp_iso
     (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight e₁ _ ≪≫
     Functor.associator _ _ _⟩
 
+section AdicRealization
+
+open Pretriangulated
+
+variable {R : Type (u + 1)} [CommRing R] (I : Ideal R)
+
+variable (X) in
+/-- Restriction of scalars along `R → R/Iⁿ`, from `D(X_proét, R/Iⁿ)` to `D(X_proét, R)`. -/
+noncomputable abbrev levelRestrictScalars (n : ℕ) :
+    DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n))) ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)) :=
+  (Sheaf.restrictScalars (Scheme.ProEt.topology X) (Ideal.Quotient.mk (I ^ n))).mapDerivedCategory
+
+variable (X) in
+/-- Restriction of scalars along `R/Iⁿ → R/Iʲ` for `j ≤ n`, from `D(X_proét, R/Iʲ)` to
+`D(X_proét, R/Iⁿ)`. -/
+noncomputable abbrev levelTransitionRestrictScalars {j n : ℕ} (h : j ≤ n) :
+    DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ j))) ⥤
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n))) :=
+  (Sheaf.restrictScalars (Scheme.ProEt.topology X)
+    (Ideal.Quotient.factor (Ideal.pow_le_pow_right h))).mapDerivedCategory
+
+variable (X) in
+/-- Restricting scalars from `R/Iʲ` to `R/Iⁿ` and then to `R` is restricting scalars from
+`R/Iʲ` to `R`. -/
+noncomputable def levelRestrictScalarsCompIso {j n : ℕ} (h : j ≤ n) :
+    levelTransitionRestrictScalars X I h ⋙ levelRestrictScalars X I n ≅
+      levelRestrictScalars X I j :=
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (Sheaf.restrictScalarsCompIso _ _ _ _
+      (Ideal.Quotient.factor_comp_mk (Ideal.pow_le_pow_right h)).symm)
+
+/-- A tower `K : ℕᵒᵖ ⥤ D(X, R)` is *normalized* with respect to an ideal `I` and levels
+`L_n ∈ D(X, A_n)` over the rings `A_n = R/Iⁿ` if, as in blueprint `sk-prop-trace-adic`:
+- `K_n` is `L_n` with scalars restricted to `R`;
+- for `j ≤ n`, the base change `L_n ⊗ᴸ_{A_n} A_n/I^j A_n` of `L_n` along `A_n → A_j` is
+  isomorphic to `L_j` with scalars restricted to `A_n`;
+- the transition `K_n ⟶ K_j` is the restriction to `R` of the reduction
+  `L_n ⟶ L_n ⊗ᴸ_{A_n} A_n/I^j A_n` followed by this isomorphism.
+
+The base change is taken over `A_n`, not over `R`: for `I = (ϖ)` with `ϖ` a nonzerodivisor,
+`L_n ⊗ᴸ_R R/Iʲ` has an extra `Tor₁` term, and requiring it to be `L_j` would force the tower
+to vanish. -/
+def IsNormalizedTower
+    (K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))
+    (L : ∀ n : ℕ,
+      DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n)))) :
+    Prop :=
+  ∃ (eK : ∀ n : ℕ, K.obj (Opposite.op n) ≅ (levelRestrictScalars X I n).obj (L n))
+    (e : ∀ n j : ℕ, ∀ h : j ≤ n,
+      (DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X)
+          (I.map (Ideal.Quotient.mk (I ^ n))) (L n)).obj (Opposite.op j) ≅
+        (levelTransitionRestrictScalars X I h).obj (L j)),
+    ∀ n j : ℕ, ∀ h : j ≤ n, K.map (homOfLE h).op =
+      (eK n).hom ≫ (levelRestrictScalars X I n).map
+        ((DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X)
+          (I.map (Ideal.Quotient.mk (I ^ n))) (L n)).π.app (Opposite.op j) ≫ (e n j h).hom) ≫
+        (levelRestrictScalarsCompIso X I h).hom.app (L j) ≫ (eK j).inv
+
+variable [IsAdicComplete I R] [IsDomain R] (hI : I.IsPrincipal)
+  {K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))}
+  {L : ∀ n : ℕ,
+    DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n)))}
+  (hK : IsNormalizedTower I K L) (c : Cone K) (hc : IsHomotopyLimit c)
+
+include hI hK hc in
+/-- Adic realization, levelwise reduction: the realization `K_{𝒪_E} = R lim_n K_n` of a
+normalized system reduces to the given levels, `K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n`, compatibly with the
+transitions, and the legs `K_{𝒪_E} ⟶ K_n` are the reduction maps followed by these
+isomorphisms (blueprint: `sk-prop-trace-adic`). -/
+theorem exists_derivedCompletionDiagram_iso :
+    ∃ e : DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I c.pt ≅ K,
+      ∀ n : ℕ, c.π.app (Opposite.op n) =
+        (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt).π.app
+          (Opposite.op n) ≫ e.hom.app (Opposite.op n) :=
+  sorry
+
+include hI hK hc in
+/-- Adic realization, levelwise reduction at a single level: `K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n`, the leg
+`K_{𝒪_E} ⟶ K_n` being the reduction map followed by this isomorphism. -/
+theorem exists_derivedCompletionDiagram_obj_iso (n : ℕ) :
+    ∃ e : (DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I c.pt).obj
+        (Opposite.op n) ≅ K.obj (Opposite.op n),
+      c.π.app (Opposite.op n) =
+        (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt).π.app
+          (Opposite.op n) ≫ e.hom := by
+  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hI hK c hc
+  exact ⟨e.app _, he n⟩
+
+include hI hK hc in
 /-- Adic realization, derived completeness: the realization `K_{𝒪_E} = R lim_n K_n` of a
-normalized system `K_• = (K_n, t_{n+1,n})` of finite-level complexes is derived complete
+normalized system `K_•` of finite-level complexes is derived complete, that is, it is the
+derived limit of its own reductions `K_{𝒪_E} ⊗ᴸ R/Iⁿ`: transport the Milnor triangle of `K_•`
+along `exists_derivedCompletionDiagram_iso`. -/
+theorem isHomotopyLimit_derivedCompletionCone :
+    IsHomotopyLimit (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt) := by
+  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hI hK c hc
+  refine hc.of_iso e.symm _ (Iso.refl _) fun n ↦ ?_
+  rw [he n, Category.assoc, Iso.symm_hom, Iso.hom_inv_id_app, Category.comp_id, Iso.refl_hom,
+    Category.id_comp]
+
+include hI hK hc in
+/-- Adic realization, compact cohomology: `RΓ_c(X, -)` commutes with realization for a
+normalized system of bounded constructible complexes of finite Tor amplitude on a geometric
+scheme over a field, `RΓ_c(X, R lim_n K_n) ≅ R lim_n RΓ_c(X, K_n)`
 (blueprint: `sk-prop-trace-adic`). -/
-theorem derivedComplete_limit {R : Type (u + 1)} [CommRing R] (I : Ideal R)
-    [IsAdicComplete I R]
-    (K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))
-    (hnorm : ∀ n j : ℕ, j ≤ n →
-      Nonempty ((DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I
-        (K.obj (Opposite.op n))).obj (Opposite.op j) ≅ K.obj (Opposite.op j)))
-    [HasLimit K] :
-    DerivedCategory.derivedComplete (Scheme.ProEt.topology X) I (limit K) :=
+theorem isHomotopyLimit_mapCone_rightDerivedLowerShriek [s.IsSpecOfField] (aX : X ⟶ s)
+    [IsGeometric aX] [HasCompactification aX]
+    (hctf : ∀ n : ℕ,
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (R ⧸ I ^ n)) X (L n)) :
+    IsHomotopyLimit ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX).mapCone c) := by
+  -- `Rf_! = Di_! ⋙ Rg_*` for the chosen compactification `aX = i ≫ g`. The right adjoint `Rg_*`
+  -- is triangulated and preserves products, so it preserves homotopy limits.
+  let cX := HasCompactification.compactification aX
+  -- The remaining step: the extension by zero `Di_!` commutes with `R lim` on towers of `Dctf`
+  -- objects. Countable products in `D(X_proét)` exist
+  -- (`DerivedCategory.hasLimitsOfShape_discrete`), but `Di_!` is a left adjoint and its
+  -- commutation with them needs repleteness of the pro-étale topos, which is not available.
+  have hi : IsHomotopyLimit ((cX.i)_!open[ModuleCat.{u + 1} R].mapDerivedCategory.mapCone c) :=
+    sorry
+  have :=
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) cX.g).rightAdjoint_preservesLimits
+  exact hi.map ((cX.g)_*[ModuleCat.{u + 1} R].rightDerivedFunctor)
+
+include hI hK hc in
+/-- Adic realization, geometric stalks: the stalk at a geometric point `x̄ : s ⟶ X` commutes
+with realization for a normalized system of bounded constructible complexes of finite Tor
+amplitude on a geometric scheme over a field, `(R lim_n K_n)_x̄ ≅ R lim_n (K_n)_x̄`
+(blueprint: `sk-prop-trace-adic`). -/
+theorem isHomotopyLimit_mapCone_leftDerivedUpperStar [s.IsSpecOfField] (aX : X ⟶ s)
+    [IsGeometric aX] (x : s ⟶ X) (hx : x ≫ aX = 𝟙 s)
+    (hctf : ∀ n : ℕ,
+      DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (R ⧸ I ^ n)) X (L n)) :
+    IsHomotopyLimit (((upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor).mapCone c) :=
   sorry
 
-/-- Adic realization, levelwise reduction: the realization of a normalized system reduces
-to the given levels, `K_{𝒪_E} ⊗ᴸ_{𝒪_E} A_n ≅ K_n`
-(blueprint: `sk-prop-trace-adic`). -/
-theorem nonempty_derivedCompletionDiagram_obj_limit_iso {R : Type (u + 1)} [CommRing R]
-    (I : Ideal R) [IsAdicComplete I R]
-    (K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))
-    (hnorm : ∀ n j : ℕ, j ≤ n →
-      Nonempty ((DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I
-        (K.obj (Opposite.op n))).obj (Opposite.op j) ≅ K.obj (Opposite.op j)))
-    [HasLimit K] (n : ℕ) :
-    Nonempty ((DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I
-      (limit K)).obj (Opposite.op n) ≅ K.obj (Opposite.op n)) :=
-  sorry
-
-/-- Adic realization, compact cohomology: `RΓ_c(X, -)` commutes with realization
-(blueprint: `sk-prop-trace-adic`). -/
-theorem nonempty_rightDerivedLowerShriek_obj_limit_iso {R : Type (u + 1)} [CommRing R]
-    (I : Ideal R) [IsAdicComplete I R] (aX : X ⟶ s) [HasCompactification aX]
-    (K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))
-    (hnorm : ∀ n j : ℕ, j ≤ n →
-      Nonempty ((DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I
-        (K.obj (Opposite.op n))).obj (Opposite.op j) ≅ K.obj (Opposite.op j)))
-    [HasLimit K] [HasLimit (K ⋙ rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX)] :
-    Nonempty ((rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX).obj (limit K) ≅
-      limit (K ⋙ rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX)) :=
-  sorry
-
-/-- Adic realization, geometric stalks: the stalk at a geometric point `x̄ : s ⟶ X`
-commutes with realization (blueprint: `sk-prop-trace-adic`). -/
-theorem nonempty_leftDerivedUpperStar_obj_limit_iso {R : Type (u + 1)} [CommRing R]
-    (I : Ideal R) [IsAdicComplete I R] (x : s ⟶ X)
-    (K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))
-    (hnorm : ∀ n j : ℕ, j ≤ n →
-      Nonempty ((DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I
-        (K.obj (Opposite.op n))).obj (Opposite.op j) ≅ K.obj (Opposite.op j)))
-    [HasLimit K]
-    [HasLimit (K ⋙ (upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor)] :
-    Nonempty (((upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor).obj (limit K) ≅
-      limit (K ⋙ (upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor)) :=
-  sorry
+end AdicRealization
 
 open scoped PowerSeries.WithPiTopology in
 /-- **The Euler product form of the trace formula.** For a realization of the stalks and of
@@ -202,16 +301,18 @@ in `1 + T Λ[[T]]`, the product over the closed points `y` of `X₀` being coeff
 locally finite. This is the Euler-product form of
 `trace_globalOperator_eq_sum_trace_stalkFrobenius`
 (blueprint: `sk-thm-trace-transport`). -/
-theorem hasProd_inv_alternatingCharpolyRevProd [DerivedBraiding A] {Ω : Type u} [Field Ω]
+theorem hasProd_inv_alternatingCharpolyRevProd [DerivedBraiding A]
+    {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+    [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA] {Ω : Type u} [Field Ω]
     [IsAlgClosed Ω] (G : GeometricOperations A (Spec (.of Ω))) {aX : X ⟶ Spec (.of Ω)}
     [HasCompactification aX] (W : WeilComplex (A := A) aX) (hW : IsIso W.coeff)
     (hctf : G.ctf X W.obj)
-    [∀ m : ℕ, IsProper (W.graph G m).snd]
     [HasRightDual ((rightDerivedLowerShriek A aX).obj W.obj)]
     [∀ x : Spec (.of Ω) ⟶ X, HasRightDual (((upperStar A x).leftDerivedFunctor).obj W.obj)]
     {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k))
     [IsSeparated f₀] [QuasiCompact f₀] [LocallyOfFiniteType f₀] (σ : Spec (.of Ω) ⟶ Spec (.of k))
     (p : X ⟶ X₀) (hΦ : W.IsModelFrobenius f₀ σ p)
+    [∀ m : ℕ, IsProper (haveI := hΦ.isGeometric; W.graph G hctf m).snd]
     {Λ : Type w} [Field Λ] [CharZero Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (degs : Finset ℤ)
     {Hc : ℤ → Type w} [∀ i, AddCommGroup (Hc i)] [∀ i, Module Λ (Hc i)]
@@ -220,7 +321,8 @@ theorem hasProd_inv_alternatingCharpolyRevProd [DerivedBraiding A] {Ω : Type u}
     [∀ y i, FiniteDimensional Λ (St y i)] (Fst : ∀ y i, Module.End Λ (St y i))
     (θ : End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) A))) →+* Λ)
     (hHc : ∀ m : ℕ, 1 ≤ m →
-      θ (MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G m))) =
+      haveI := hΦ.isGeometric
+      θ (MonoidalCategory.trace (Correspondence.globalOperator G (W.graph G hctf m) hctf)) =
         ∑ i ∈ degs, (i.negOnePow : ℤ) • LinearMap.trace Λ (Hc i) (Fc i ^ m))
     (hSt : ∀ m : ℕ, 1 ≤ m →
       ∀ x : {x : Spec (.of Ω) ⟶ X // x ≫ aX = 𝟙 _ ∧ x ≫ W.frobeniusIterate m = x},

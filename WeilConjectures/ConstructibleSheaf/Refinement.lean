@@ -147,6 +147,8 @@ def Stratification.inter : Stratification X where
   stratum k := S.stratum (finProdFinEquiv.symm k).1 ∩ T.stratum (finProdFinEquiv.symm k).2
   isLocallyClosed_stratum k :=
     (S.isLocallyClosed_stratum _).inter (T.isLocallyClosed_stratum _)
+  isConstructible_stratum k :=
+    (S.isConstructible_stratum _).inter (T.isConstructible_stratum _)
   iUnion_stratum_eq_univ := by
     apply Set.eq_univ_of_forall
     intro x

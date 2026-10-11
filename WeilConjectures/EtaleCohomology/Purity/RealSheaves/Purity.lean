@@ -48,16 +48,17 @@ here; only the map `AlgebraicGeometry.WeilGroup.toLinearAut` whose images they a
 is recorded, and the positive central Frobenius representative of `sk-d-central` is left to
 that block.
 
-The data of an `AlgebraicGeometry.WeilGroup p` does not record that `ker deg` is the geometric
-fundamental group of `C`. The rank-one theorems, and everything downstream of them, therefore
-assume that it is, in the form `AlgebraicGeometry.WeilGroup.IsEtaleQuotient` (the geometric part
-of `W` is a Frobenius-equivariant quotient of the étale fundamental group of `C`), together with
-`ℓ ≠ char 𝔽_q`; without these hypotheses they are false (for `W = ℤ_ℓ × ℤ` the character
-`(a, n) ↦ (1 + ℓ) ^ a` has infinite geometric image, and for `ℓ = p` so does the character of a
-Frobenius-invariant Artin–Schreier–Witt tower). The Rankin–Selberg statements moreover use the
-Grothendieck–Lefschetz trace formula relating `AlgebraicGeometry.WeilGroup.eulerSeries` to
-compactly supported cohomology, which is recorded without proof in
-`WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin`.
+An `AlgebraicGeometry.WeilGroup p` is presented through the étale fundamental group of the
+curve `C₀` over `𝔽_q`; the identification of its geometric part `ker deg` with the étale
+fundamental group of the geometric curve `C = C₀ ×_{𝔽_q} 𝔽̄_q` (the homotopy exact sequence) is
+not available. The rank-one theorems, and everything downstream of them, therefore assume it, in
+the form `AlgebraicGeometry.WeilGroup.IsEtaleQuotient` (the geometric part of `W` is,
+Frobenius-equivariantly, the étale fundamental group of `C`), together with `ℓ ≠ char 𝔽_q`,
+without which they are false (for `ℓ = p` the character of a Frobenius-invariant
+Artin–Schreier–Witt tower has infinite geometric image). The Rankin–Selberg statements
+moreover use the Grothendieck–Lefschetz trace formula relating
+`AlgebraicGeometry.WeilGroup.eulerSeries` to compactly supported cohomology, which is
+recorded without proof in `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin`.
 
 ## Main definitions
 
@@ -351,7 +352,8 @@ The eigenvalues `λ` of the geometric Frobenius on `H_c² (U, ℋ)` satisfy
 (`lem-rp-positive-product-radius`), so its denominator `ι P_x (ℋ, T ^ e)` has no zero in that
 disc; a local eigenvalue `β` produces the zero `T` with `T ^ e = (ι β)⁻¹`, whence
 `|ι β| ^ (-1 / e) ≥ R`. -/
-theorem frobeniusWeight_le_add_two_of_hasNonnegCoeffs [IsAffine C] (hρ : W.IsLisse l ρ)
+theorem frobeniusWeight_le_add_two_of_hasNonnegCoeffs [IsAffine C] [Fact (ringChar K ≠ l)]
+    (hρ : W.IsLisse l ρ)
     (hpos : ∀ x, (W.eulerFactor l ρ ι x).HasNonnegCoeffs) {D : ℝ}
     (hD : ∀ {V'' : Type u} [AddCommGroup V''] [Module (PadicAlgCl l) V'']
       [FiniteDimensional (PadicAlgCl l) V''] (τ : Representation (PadicAlgCl l) W.carrier V'')
@@ -597,8 +599,8 @@ to `|ι α| ≤ q_s ^ (w / 2 + 1 / n)` for every `n`, and `n → ∞` finishes
 The curve `C₀` is smooth and geometrically connected and `ℓ ≠ char 𝔽_q`, as in the setting
 `sk-d-real-setup` of the block, and `ℱ` is lisse. The trace formula used in the proof, in its
 Euler-product form for middle extensions (`lem-wf-euler-product-middle-extension`), is the
-hypothesis `hD`: it does not follow from the fields of a `BoundaryDatum`, and without it the
-statement is false (see `AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct`). -/
+hypothesis `hD`: it does not follow from the fields of a `BoundaryDatum` (see
+`AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct`). -/
 theorem frobeniusWeight_le_of_hasWeightsAtMost [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hD : D.HasMiddleExtensionEulerProduct l ι)
     (ρ : Representation (PadicAlgCl l) WU.carrier V) (hρ : WU.IsLisse l ρ) {w : ℝ}
@@ -625,8 +627,7 @@ residue Frobenius lift; the bound for `j_* ℱ`, applied to `𝒢` and to its du
 eigenvalues are the inverses of those of `𝒢`, gives an upper bound `w` and a lower bound `w`
 (`cor-wf-unramified-boundary-purity`,
 `AlgebraicGeometry.BoundaryDatum.frobeniusWeight_eq_of_isPunctuallyPure`). As there, the
-Euler-product form of the trace formula is the hypothesis `hD`, without which the statement is
-false. -/
+Euler-product form of the trace formula is the hypothesis `hD`. -/
 theorem isPunctuallyPure_of_isPunctuallyPure_restrict [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hD : D.HasMiddleExtensionEulerProduct l ι)
     (ρ : Representation (PadicAlgCl l) WC.carrier V) {w : ℝ} (hρ : WC.IsLisse l ρ)
@@ -883,9 +884,11 @@ theorem isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine [IsAffine C]
 
 /-- Blueprint `sk-p-real-purity`: Purity of real lisse sheaves on curves.
 
-The main theorem of the block. Let `C₀ / 𝔽_q` be a smooth geometrically connected curve and
-`ℱ` an `ι`-real lisse Weil sheaf on it. Then every irreducible constituent `V` of `ℱ` is
-punctually `ι`-pure of weight `dw_ι (V)`, its own determinant weight.
+The main theorem of the block. Let `C₀ / 𝔽_q` be a smooth geometrically connected curve,
+`ℓ ≠ char 𝔽_q`, and `ℱ` an `ι`-real lisse Weil sheaf on it. Then every irreducible constituent
+`V` of `ℱ` is punctually `ι`-pure of weight `dw_ι (V)`, its own determinant weight. As for the
+rank-one theorems it uses, the geometric part of the Weil group is assumed identified with the
+étale fundamental group of the geometric curve (`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`).
 
 Replacing `ℱ` by its semisimplification, which has the same local polynomials and is again
 real, and restricting to a nonempty affine open `U₀`, fix a nonzero weight block `𝒮 (γ)` and
@@ -899,7 +902,8 @@ product of the `r` ratios `|ι α_i| / q ^ (e γ / 2)` is `1` while each is at m
 is `1`. That is purity on `U₀`, and semi-continuity of weights extends it over the finitely
 many missing points of `C₀`. -/
 theorem isPunctuallyPure_of_isConstituent_of_isReal [SmoothOfRelativeDimension 1 p]
-    [GeometricallyConnected p] (hρ : W.IsLisse l ρ) (hreal : W.IsReal l ρ ι)
+    [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient]
+    (hρ : W.IsLisse l ρ) (hreal : W.IsReal l ρ ι)
     {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
     [FiniteDimensional (PadicAlgCl l) V']
     (σ : Representation (PadicAlgCl l) W.carrier V') (hσ : σ.IsConstituent ρ)

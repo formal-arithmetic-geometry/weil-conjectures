@@ -134,12 +134,13 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   [∀ U : C, HasWeakSheafify (J.over U) (ModuleCat.{v'} Λ)]
 
 /-- **A morphism between constant sheaves of modules is locally induced by a linear map**:
-for `φ : M_C ⟶ N_C` with `M` finite and any object `T`, there is a covering sieve `S` of `T`
-such that over every member `U` of `S` not covered by the empty sieve, the restriction of `φ` to
+for `φ : M_C ⟶ N_C` with `M` finitely generated and any object `T`, there is a covering sieve
+`S` of `T` such that over every member `U` of `S` not covered by the empty sieve, the restriction
+of `φ` to
 `J.over U` is, through the canonical identifications `constantSheafOverHom`, the morphism of
 constant sheaves induced by a `Λ`-linear map `f : M ⟶ N`. -/
 theorem exists_mem_forall_exists_constantSheafOverHom_comp_map_eq (M N : ModuleCat.{v'} Λ)
-    [Finite M]
+    [Module.Finite Λ M]
     (φ : (constantSheaf J (ModuleCat.{v'} Λ)).obj M ⟶ (constantSheaf J (ModuleCat.{v'} Λ)).obj N) :
     ∃ S ∈ J T, ∀ ⦃U : C⦄ (g : U ⟶ T), S g → (⊥ : Sieve U) ∉ J U → ∃ f : M ⟶ N,
       constantSheafOverHom J _ U M ≫ (J.overPullback _ U).map φ =
@@ -226,6 +227,14 @@ instance preservesFiniteLimits_constantSheaf [HasFiniteLimits A] [HasSheafify J 
   have : PreservesFiniteLimits (Functor.const Cᵒᵖ : A ⥤ _) :=
     PreservesLimitsOfSize.preservesFiniteLimits.{0, 0} _
   comp_preservesFiniteLimits _ _
+
+/-- The constant sheaf functor is right exact, as the composite of the constant presheaf
+functor and sheafification, which is a left adjoint. -/
+instance preservesFiniteColimits_constantSheaf [HasFiniteColimits A] [HasSheafify J A] :
+    PreservesFiniteColimits (constantSheaf J A) :=
+  have : PreservesFiniteColimits (Functor.const Cᵒᵖ : A ⥤ _) :=
+    PreservesColimitsOfSize.preservesFiniteColimits.{0, 0} _
+  comp_preservesFiniteColimits _ _
 
 /-- The restriction of sheaves to a localized site preserves colimits: it is left adjoint to
 the pushforward along the cocontinuous functor `Over.forget U`. -/

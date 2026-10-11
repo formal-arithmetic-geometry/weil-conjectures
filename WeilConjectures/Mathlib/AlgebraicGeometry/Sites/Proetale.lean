@@ -6,6 +6,8 @@ Authors: Nailin Guan
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
@@ -55,7 +57,7 @@ This file provides the site-theoretic inputs for the pro-étale six functors of 
 - `AlgebraicGeometry.Scheme.ProEt.mem_topology_of_openImmersion`: a sieve on `U : X.ProEt`
   containing a jointly surjective family of open immersions `Y i ⟶ U`
   (`AlgebraicGeometry.Scheme.ProEt.ofOpenImmersionHom`) is covering.
-- `AlgebraicGeometry.Scheme.toProEt`: the inclusion `ν : X.Etale ⥤ X.ProEt` of the small
+- `AlgebraicGeometry.toProEt`: the inclusion `ν : X.Etale ⥤ X.ProEt` of the small
   étale site into the small pro-étale site, which is fully faithful, representably flat and
   continuous (`AlgebraicGeometry.Scheme.isContinuous_toProEt`).
 
@@ -77,6 +79,95 @@ lemma zariskiPrecoverage_le_proetalePrecoverage :
     zariskiPrecoverage ≤ proetalePrecoverage.{u} :=
   zariskiPrecoverage_le_propQCPrecoverage
 
+section Quotient
+
+/-- A subset of the target of a pro-étale covering family whose preimages are all open is open:
+the members are flat and the family is quasi-compact. -/
+lemma isOpen_of_isOpen_preimage_of_mem_proetalePrecoverage {Y : Scheme.{u}} {ι : Type*}
+    {X : ι → Scheme.{u}} (f : ∀ i, X i ⟶ Y)
+    (hf : Presieve.ofArrows X f ∈ proetalePrecoverage Y) (S : Set Y)
+    (hS : ∀ i, IsOpen ((f i).base ⁻¹' S)) : IsOpen S := by
+  rw [isOpen_iff_forall_mem_open]
+  intro y hy
+  obtain ⟨_, ⟨U, hU, rfl⟩, hyU, -⟩ := Y.isBasis_affineOpens.exists_subset_of_mem_open
+    (Set.mem_univ y) isOpen_univ
+  refine ⟨S ∩ U, Set.inter_subset_left, ?_, hy, hyU⟩
+  let E : PreZeroHypercover Y := ⟨ι, X, f⟩
+  have : QuasiCompactCover E := by
+    have := hf.1
+    rwa [show Presieve.ofArrows X f = E.presieve₀ from rfl, presieve₀_mem_qcPrecoverage_iff] at this
+  obtain ⟨n, a, V, hV, hU'⟩ := QuasiCompactCover.exists_isAffineOpen_of_isCompact E
+    (U := U) hU.isCompact
+  have hflat (i : ι) : Flat (f i) := by
+    have := proetalePrecoverage_le_precoverage_weaklyEtale _ hf ⟨i⟩
+    infer_instance
+  have (i : Fin n) : IsAffine (V i).toScheme := hV i
+  let Z := ∐ fun i : Fin n ↦ (V i).toScheme
+  have : IsAffine Z := inferInstance
+  let h : Z ⟶ Y := Sigma.desc fun i ↦ (V i).ι ≫ f (a i)
+  have hjs (z : Z) : ∃ i x, Sigma.ι (fun i : Fin n ↦ (V i).toScheme) i x = z := by
+    exact (sigmaOpenCover fun i : Fin n ↦ (V i).toScheme).exists_eq z
+  have hrange : Set.range h = U := by
+    rw [← hU']
+    ext y
+    simp only [Set.mem_range, Set.mem_iUnion, Set.mem_image]
+    constructor
+    · rintro ⟨z, rfl⟩
+      obtain ⟨i, x, rfl⟩ := hjs z
+      refine ⟨i, (V i).ι x, by simp, ?_⟩
+      change _ = (Sigma.ι (fun i : Fin n ↦ (V i).toScheme) i ≫ h) x
+      rw [Sigma.ι_desc]
+      rfl
+    · rintro ⟨i, x, hx, rfl⟩
+      obtain ⟨x, rfl⟩ : x ∈ Set.range (V i).ι := by rwa [Scheme.Opens.range_ι]
+      exact ⟨Sigma.ι (fun i : Fin n ↦ (V i).toScheme) i x, by
+        rw [← Scheme.Hom.comp_apply, Sigma.ι_desc, Scheme.Hom.comp_apply]⟩
+  have : Flat h := IsZariskiLocalAtSource.sigmaDesc fun i ↦ inferInstance
+  let p := pullback.snd h (Scheme.Opens.ι U)
+  have hfst : IsIso (pullback.fst h (Scheme.Opens.ι U)) := by
+    rw [isIso_iff_isOpenImmersion_and_surjective]
+    refine ⟨inferInstance, ⟨fun z ↦ ?_⟩⟩
+    have hz : h z ∈ (U : Set Y) := hrange ▸ Set.mem_range_self z
+    obtain ⟨u, hu⟩ : h z ∈ Set.range (Scheme.Opens.ι U) := by rwa [Scheme.Opens.range_ι]
+    obtain ⟨w, hw, -⟩ := Scheme.Pullback.exists_preimage_pullback z u hu.symm
+    exact ⟨w, hw⟩
+  have : CompactSpace ↥(pullback h (Scheme.Opens.ι U)) :=
+    (Scheme.Hom.homeomorph (pullback.fst h (Scheme.Opens.ι U))).symm.compactSpace
+  have : IsAffine (U : Y.Opens) := hU
+  have : QuasiCompact p := (HasAffineProperty.iff_of_isAffine (P := @QuasiCompact)).2 ‹_›
+  have : Surjective p := ⟨fun u ↦ by
+    obtain ⟨z, hz⟩ : (Scheme.Opens.ι U) u ∈ Set.range h := by simp [hrange]
+    obtain ⟨w, -, hw⟩ := Scheme.Pullback.exists_preimage_pullback z u hz
+    exact ⟨w, hw⟩⟩
+  have hhS : IsOpen (h.base ⁻¹' S) := by
+    have : h.base ⁻¹' S = ⋃ i, Sigma.ι (fun i : Fin n ↦ (V i).toScheme) i ''
+        ((V i).ι.base ⁻¹' ((f (a i)).base ⁻¹' S)) := by
+      ext z
+      obtain ⟨i, x, rfl⟩ := hjs z
+      simp only [Set.mem_preimage, Set.mem_iUnion, Set.mem_image]
+      rw [← Scheme.Hom.comp_apply, Sigma.ι_desc, Scheme.Hom.comp_apply]
+      constructor
+      · exact fun hx ↦ ⟨i, x, hx, rfl⟩
+      · rintro ⟨j, y, hy, hyx⟩
+        have := (sigmaι_eq_iff (fun i : Fin n ↦ (V i).toScheme) j i y x).1 hyx
+        rw [Sigma.mk.injEq] at this
+        obtain ⟨rfl, e⟩ := this
+        obtain rfl := eq_of_heq e
+        exact hy
+    rw [this]
+    exact isOpen_iUnion fun i ↦
+      (Sigma.ι (fun i : Fin n ↦ (V i).toScheme) i).isOpenEmbedding.isOpenMap _
+        ((hS _).preimage (V i).ι.continuous)
+  have hT : IsOpen ((Scheme.Opens.ι U).base ⁻¹' S) := by
+    rw [← (Flat.isQuotientMap_of_surjective p).isOpen_preimage, ← Set.preimage_comp,
+      ← TopCat.coe_comp, ← Scheme.Hom.comp_base, ← pullback.condition, Scheme.Hom.comp_base,
+      TopCat.coe_comp, Set.preimage_comp]
+    exact hhS.preimage (pullback.fst h (Scheme.Opens.ι U)).continuous
+  have := (Scheme.Opens.ι U).isOpenEmbedding.isOpenMap _ hT
+  rwa [Set.image_preimage_eq_inter_range, Scheme.Opens.range_ι] at this
+
+end Quotient
+
 namespace ProEt
 
 variable (X : Scheme.{u})
@@ -91,6 +182,12 @@ instance : (precoverage X).IsStableUnderComposition := by
 
 instance : (precoverage X).IsStableUnderBaseChange := by
   dsimp [precoverage]; infer_instance
+
+/-- `X.ProEt` is locally `u + 1`-small. Stated directly so that instance search does not go
+through the slow `HasCardinalFilteredGenerator` route before the low-priority
+`locallySmall_of_univLE`. -/
+instance locallySmall : LocallySmall.{u + 1} X.ProEt :=
+  ⟨fun _ _ ↦ ⟨ULift.{u + 1} _, ⟨Equiv.ulift.symm⟩⟩⟩
 
 variable {X}
 
@@ -343,6 +440,12 @@ instance isContinuous_toProEt :
   rw [ProEt.topology_eq_restrictedTopology]
   exact MorphismProperty.Over.coverPreserving_changeProp X etale_le_weaklyEtale
     etaleTopology_le_proetaleTopology
+
+/-- **The small étale site is subcanonical**: the representable presheaves `U ↦ Hom_X(U, V)` are
+sheaves, as the small étale site embeds fully faithfully and continuously into the small
+pro-étale site, which is subcanonical. -/
+instance subcanonical_smallEtaleTopology : (smallEtaleTopology X).Subcanonical :=
+  GrothendieckTopology.subcanonical_of_full_of_faithful (toProEt X) _ (ProEt.topology X)
 
 end ToProEt
 

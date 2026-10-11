@@ -79,7 +79,7 @@ noncomputable def shiftTensorIso
     (n : ℤ) : K⟦n⟧ ⊗ L ≅ (K ⊗ L)⟦n⟧ :=
   (((derivedTensor _ X).flip.obj L).commShiftIso n).app K
 
-variable (a : X ⟶ S) [HasCompactification a]
+variable (a : X ⟶ S) [HasCompactification a] [(R(a)_![A]).IsLeftAdjoint]
 
 /-- **Dual of a lisse tensor.** For a dualizable complex `L`, with coefficient dual `L^∨`,
 the Verdier dual of `K ⊗ᴸ L` is `L^∨ ⊗ᴸ 𝔻K`: the tensor–hom adjunction gives
@@ -106,11 +106,13 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [HasSmallSiteSheafify A]
 
 /-- A complex `L` on `X` is *lisse of finite rank* if it is a locally constant sheaf placed in
-degree zero which is dualizable — étale locally a finite projective coefficient module — and
-constructible of finite Tor amplitude. -/
+degree zero which is dualizable, bounded constructible and of Tor amplitude in `[0, 0]`: étale
+locally a finite projective coefficient module. The Tor amplitude `[0, 0]` makes the stalks flat;
+without it a dualizable sheaf in degree zero need not have its dual in degree zero (over `ℤ`,
+the constant sheaf `ℤ/ℓ` is dualizable with dual `ℤ/ℓ[-1]`). -/
 def IsLisse (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     Prop :=
-  IsDualizable L ∧ constructibleFiniteTor A X L ∧
+  IsDualizable L ∧ constructibleFiniteTor A X L ∧ torAmplitudeIn A X 0 0 L ∧
     ∃ L₀ : Sheaf X.smallEtaleTopology A, Scheme.IsLocallyConstantSheaf L₀ ∧
       Nonempty (L ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj L₀)
 

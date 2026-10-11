@@ -159,7 +159,9 @@ instance isIso_closedPieceCoeff [IsIso W.coeff] (m : ℕ) {Z : Scheme.{u}} (i : 
 
 section Pieces
 
-variable [DerivedBraiding A]
+variable [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 /-- The coefficient morphism `u^U : LΦ_m^* K^U ⟶ K^U` of the open piece `K^U = Rj_! Lj^* K`,
 for a Cartesian square exhibiting `Φ_U : U ⟶ U` as the restriction of `Φ_m`,
@@ -180,40 +182,56 @@ the composite
 
 whose first map is the exceptional base change of the package for that square
 (part of blueprint `sk-d-curve-pieces`). -/
-noncomputable def openPieceCoeff (G : GeometricOperations A s) (m : ℕ) {U : Scheme.{u}}
-    (j : U ⟶ X) [HasCompactification j] (frobU : U ⟶ U)
-    (hU : IsPullback frobU j j (W.frobeniusIterate m)) :
+noncomputable def openPieceCoeff (G : GeometricOperations A s) (hW : G.ctf X W.obj) (m : ℕ)
+    [IsGeometric aX] {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    [HasCompactification j]
+    (frobU : U ⟶ U) (hU : IsPullback frobU j j (W.frobeniusIterate m)) :
     ((upperStar A (W.frobeniusIterate m)).leftDerivedFunctor).obj (W.openPieceObj j) ⟶
       W.openPieceObj j :=
-  (G.baseChange hU).hom.app _ ≫
+  have hj : IsGeometricHom s j := .mk (aY := aX) rfl
+  have hΦ : IsGeometricHom s (W.frobeniusIterate m) := .mk (W.frobeniusIterate_comp m)
+  have hfrobU : IsGeometricHom s frobU := .mk (aX := j ≫ aX) (aY := j ≫ aX)
+    (by rw [← Category.assoc, hU.w, Category.assoc, W.frobeniusIterate_comp])
+  ((G.baseChange hU hj hΦ hj hfrobU).hom.app
+      ⟨_, G.ctf_upperStar j hj hW⟩).hom ≫
     (rightDerivedLowerShriek A j).map (W.upperStarPullCoeff m hU.toCommSq)
 
 /-- The closed piece `K^Z = Ri_* Li^* K` along `i : Z ⟶ X`, for a lift `Φ_Z` of `Φ_m`, as the
-graph endocorrespondence on `(1, Φ_m)` with coefficient map `u^Z`
-(part of blueprint `sk-d-curve-pieces`). -/
-noncomputable abbrev closedPiece (G : GeometricOperations A s) (m : ℕ) {Z : Scheme.{u}}
-    (i : Z ⟶ X) (frobZ : Z ⟶ Z) (hZ : CommSq frobZ i i (W.frobeniusIterate m)) :
+graph endocorrespondence on `(1, Φ_m)` with coefficient map `u^Z`, given that `K^Z` lies in
+`Dᵇctf(X)` (part of blueprint `sk-d-curve-pieces`). -/
+noncomputable abbrev closedPiece (G : GeometricOperations A s) [IsGeometric aX] (m : ℕ)
+    {Z : Scheme.{u}} (i : Z ⟶ X) (frobZ : Z ⟶ Z) (hZ : CommSq frobZ i i (W.frobeniusIterate m))
+    (hKZ : G.ctf X (W.closedPieceObj i)) :
     Correspondence aX aX (W.closedPieceObj i) (W.closedPieceObj i) :=
-  Correspondence.ofGraph G aX (W.frobeniusIterate m) (W.frobeniusIterate_comp m) _
+  Correspondence.ofGraph G aX _ hKZ (W.frobeniusIterate m) (W.frobeniusIterate_comp m)
     (W.closedPieceCoeff m i frobZ hZ)
 
 /-- The open piece `K^U = Rj_! Lj^* K` along `j : U ⟶ X`, for a Cartesian square exhibiting
 `Φ_U` as the restriction of `Φ_m`, as the graph endocorrespondence on `(1, Φ_m)` with
-coefficient map `u^U` (part of blueprint `sk-d-curve-pieces`). -/
-noncomputable abbrev openPiece (G : GeometricOperations A s) (m : ℕ) {U : Scheme.{u}}
-    (j : U ⟶ X) [HasCompactification j] (frobU : U ⟶ U)
-    (hU : IsPullback frobU j j (W.frobeniusIterate m)) :
+coefficient map `u^U`, given that `K^U` lies in `Dᵇctf(X)`
+(part of blueprint `sk-d-curve-pieces`). -/
+noncomputable abbrev openPiece (G : GeometricOperations A s) (hW : G.ctf X W.obj) (m : ℕ)
+    [IsGeometric aX] {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    [HasCompactification j]
+    (frobU : U ⟶ U) (hU : IsPullback frobU j j (W.frobeniusIterate m))
+    (hKU : G.ctf X (W.openPieceObj j)) :
     Correspondence aX aX (W.openPieceObj j) (W.openPieceObj j) :=
-  Correspondence.ofGraph G aX (W.frobeniusIterate m) (W.frobeniusIterate_comp m) _
-    (W.openPieceCoeff G m j frobU hU)
+  Correspondence.ofGraph G aX _ hKU (W.frobeniusIterate m) (W.frobeniusIterate_comp m)
+    (W.openPieceCoeff G hW m j frobU hU)
 
 /-- The coefficient morphism of the open piece of a Weil datum is invertible: the exceptional
 base change is an isomorphism. -/
-instance isIso_openPieceCoeff [IsIso W.coeff] (G : GeometricOperations A s) (m : ℕ)
-    {U : Scheme.{u}} (j : U ⟶ X) [HasCompactification j] (frobU : U ⟶ U)
+instance isIso_openPieceCoeff [IsIso W.coeff] (G : GeometricOperations A s) (hW : G.ctf X W.obj)
+    (m : ℕ) [IsGeometric aX] {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    [QuasiCompact j] [HasCompactification j] (frobU : U ⟶ U)
     (hU : IsPullback frobU j j (W.frobeniusIterate m)) :
-    IsIso (W.openPieceCoeff G m j frobU hU) := by
-  dsimp [openPieceCoeff]
+    IsIso (W.openPieceCoeff G hW m j frobU hU) := by
+  dsimp only [openPieceCoeff]
+  have : IsIso (((G.baseChange hU (.mk (aY := aX) rfl) (.mk (W.frobeniusIterate_comp m))
+      (.mk (aY := aX) rfl) (.mk (aX := j ≫ aX) (aY := j ≫ aX)
+        (by rw [← Category.assoc, hU.w, Category.assoc, W.frobeniusIterate_comp]))).hom.app
+      ⟨_, G.ctf_upperStar j (.mk (aY := aX) rfl) hW⟩).hom) :=
+    inferInstanceAs (IsIso ((DerivedCategory.constructibleFiniteTor A X).ι.map _))
   infer_instance
 
 end Pieces
@@ -222,7 +240,9 @@ end WeilComplex
 
 namespace GeometricOperations
 
-variable [DerivedBraiding A]
+variable [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 /-- Localization trace additivity: for a closed immersion `i : Z ⟶ X` and the complementary
 open immersion `j : U ⟶ X`, both stable under `Φ_m`, the three coefficient morphisms `φ_m`,
@@ -238,23 +258,18 @@ a closed or open subscheme (blueprint: `sk-i-additivity`). -/
 theorem traceClass_graph_eq_traceClass_add_traceClass (G : GeometricOperations A s)
     [s.IsSpecOfField] [HasCompactification aX] [QuasiCompact aX]
     (W : WeilComplex (A := A) aX) (hW : G.ctf X W.obj) (m : ℕ) {Z U : Scheme.{u}}
-    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [HasCompactification j]
-    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
+    [HasCompactification j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (frobZ : Z ⟶ Z) (hZ : CommSq frobZ i i (W.frobeniusIterate m)) (frobU : U ⟶ U)
     (hU : IsPullback frobU j j (W.frobeniusIterate m))
     (hKZ : G.ctf X (W.closedPieceObj i)) (hKU : G.ctf X (W.openPieceObj j))
-    [(R(aX)_![A]).IsLeftAdjoint] [(R(pullback.fst aX aX)_![A]).IsLeftAdjoint]
-    [(R(pullback.snd aX aX)_![A]).IsLeftAdjoint] [HasCompactification (pullback.diagonal aX)]
-    [(R(pullback.diagonal aX)_![A]).IsLeftAdjoint]
-    [(R((W.graph G m).toProd)_![A]).IsLeftAdjoint] [(R((W.graph G m).fixι)_![A]).IsLeftAdjoint]
-    [(R((W.closedPiece G m i frobZ hZ).toProd)_![A]).IsLeftAdjoint]
-    [(R((W.closedPiece G m i frobZ hZ).fixι)_![A]).IsLeftAdjoint]
-    [(R((W.openPiece G m j frobU hU).toProd)_![A]).IsLeftAdjoint]
-    [(R((W.openPiece G m j frobU hU).fixι)_![A]).IsLeftAdjoint] :
-    G.traceClass (W.graph G m) hW =
-      Add.add (α := G.borelMooreSections (W.graph G m).fixStr)
-        (G.traceClass (W.closedPiece G m i frobZ hZ) hKZ)
-        (G.traceClass (W.openPiece G m j frobU hU) hKU) :=
+    [HasCompactification (W.graph G hW m).toProd]
+    [HasCompactification (W.closedPiece G m i frobZ hZ hKZ).toProd]
+    [HasCompactification (W.openPiece G hW m j frobU hU hKU).toProd] :
+    G.traceClass (W.graph G hW m) hW =
+      Add.add (α := G.borelMooreSections (W.graph G hW m).fixStr)
+        (G.traceClass (W.closedPiece G m i frobZ hZ hKZ) hKZ)
+        (G.traceClass (W.openPiece G hW m j frobU hU hKU) hKU) :=
   sorry
 
 end GeometricOperations

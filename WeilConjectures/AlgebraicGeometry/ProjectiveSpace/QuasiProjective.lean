@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateCoverDescent
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateCoverImmersion
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Spreading
 
 /-!
 # Quasi-projectivity descends along field extensions
@@ -51,6 +54,16 @@ extension and let `X` be a scheme over `k`. If the base change `X_K` admits an i
 `X` admits an immersion over `Spec k` into a projective space `ℙ(β; Spec k)` with finitely many
 homogeneous coordinates.
 
+The proof follows Stacks 0BDE. The pullback of `𝒪(1)` along the immersion is ample: there is a
+morphism `X_K ⟶ ℙ(γ; K)` with affine preimages of the standard opens
+(`AlgebraicGeometry.exists_isAffineOpen_preimage_of_isImmersion`). Such a morphism is defined
+over a finite extension `k'` of `k`
+(`AlgebraicGeometry.exists_finite_isAffineOpen_preimage_standardOpen`); taking norms along
+`X_{k'} ⟶ X` gives an ample coordinate cover of `X`
+(`AlgebraicGeometry.exists_coordinateCover_of_isPullback`), and an ample coordinate cover of a
+scheme of finite type gives an immersion into projective space
+(`AlgebraicGeometry.Scheme.CoordinateCover.exists_isImmersion`).
+
 This is an input to the proof of Stacks 0BF7 (`AlgebraicGeometry.GrpObj.exists_isImmersion_
 projectiveSpace`), used for blueprint `lem-sc-abelian-variety-projective` and the subsection
 `sk-prop-av-projective`. -/
@@ -60,7 +73,41 @@ theorem exists_isImmersion_projectiveSpace_of_pullback {X : Scheme.{u}} (f : X �
     (j : pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ ℙ(α; Spec (.of K)))
     [IsImmersion j] (hj : j ≫ ℙ(α; Spec (.of K)) ↘ Spec (.of K) = pullback.snd _ _) :
     ∃ (β : Type u) (_ : Finite β) (i : X ⟶ ℙ(β; Spec (.of k))),
-      IsImmersion i ∧ i ≫ ℙ(β; Spec (.of k)) ↘ Spec (.of k) = f :=
-  sorry
+      IsImmersion i ∧ i ≫ ℙ(β; Spec (.of k)) ↘ Spec (.of k) = f := by
+  let φ := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  have hsurj : Surjective φ := surjective_specMap_algebraMap_of_field
+  have hflat : Flat φ := by
+    rw [Flat.SpecMap_iff]
+    exact RingHom.flat_algebraMap_iff.mpr inferInstance
+  have : Surjective (pullback.fst f φ) :=
+    MorphismProperty.pullback_fst (P := @Surjective) _ _ hsurj
+  have : IsAffineHom (pullback.fst f φ) :=
+    MorphismProperty.pullback_fst (P := @IsAffineHom) _ _ inferInstance
+  -- `X_K` is of finite type over `K`
+  have : IsLocallyNoetherian ℙ(α; Spec (.of K)) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ℙ(α; Spec (.of K)) ↘ Spec (.of K))
+  have : QuasiCompact j := by
+    rw [← j.liftCoborder_ι]
+    infer_instance
+  have : CompactSpace ℙ(α; Spec (.of K)) :=
+    QuasiCompact.compactSpace_of_compactSpace (ℙ(α; Spec (.of K)) ↘ Spec (.of K))
+  have : CompactSpace ↥(pullback f φ) := QuasiCompact.compactSpace_of_compactSpace j
+  have : QuasiSeparatedSpace ↥(pullback f φ) := quasiSeparatedSpace_of_quasiSeparated j
+  have : CompactSpace X := (pullback.fst f φ).surjective.compactSpace (pullback.fst f φ).continuous
+  have : QuasiSeparatedSpace X := quasiSeparatedSpace_of_surjective (pullback.fst f φ)
+  have : LocallyOfFiniteType (pullback.snd f φ) := by
+    rw [← hj]
+    infer_instance
+  have : LocallyOfFiniteType f :=
+    MorphismProperty.of_isPullback_of_descendsAlong (P := @LocallyOfFiniteType)
+      (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact) (IsPullback.of_hasPullback f φ).flip
+      ⟨⟨hsurj, hflat⟩, inferInstance⟩ inferInstance
+  -- the pullback of `𝒪(1)` is ample on `X_K`, and this descends to a finite extension of `k`
+  obtain ⟨γ, hγ, ψ, hψo, hψ⟩ := exists_isAffineOpen_preimage_of_isImmersion j
+  obtain ⟨k', _, _, _, Y, π, q, H, ψ', hψ'⟩ :=
+    exists_finite_isAffineOpen_preimage_standardOpen f ψ (hψo.trans hj) hψ
+  -- taking norms gives an ample coordinate cover of `X`
+  obtain ⟨ι, hι, 𝒟, h𝒟⟩ := exists_coordinateCover_of_isPullback H ψ' hψ'
+  exact 𝒟.exists_isImmersion f h𝒟
 
 end AlgebraicGeometry

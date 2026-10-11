@@ -21,6 +21,8 @@ public import WeilConjectures.Mathlib.RingTheory.Flat.FaithfullyFlat.Descent
   being affine (Stacks 02L5).
 - `AlgebraicGeometry.IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact`: so does
   being finite (Stacks 02LA).
+- `AlgebraicGeometry.IsClosedImmersion.descendsAlong_surjective_inf_flat_inf_quasicompact`: so
+  does being a closed immersion.
 -/
 
 @[expose] public section
@@ -106,5 +108,27 @@ theorem IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact :
   have := IsAffineHom.descendsAlong_surjective_inf_flat_inf_quasicompact
   rw [IsFinite.eq_inf, IsIntegralHom.eq_universallyClosed_inf_isAffineHom]
   infer_instance
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- **Monomorphisms satisfy fpqc descent**: a morphism is a monomorphism if and only if its
+diagonal is an isomorphism, and isomorphisms descend. -/
+theorem descendsAlong_monomorphisms_surjective_inf_flat_inf_quasicompact :
+    DescendsAlong (monomorphisms Scheme.{u}) (@Surjective ⊓ @Flat ⊓ @QuasiCompact) := by
+  rw [← diagonal_isomorphisms]
+  infer_instance
+
+/-- **Being a closed immersion satisfies fpqc descent**: a closed immersion is the same as a
+finite monomorphism (`AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono`), and both
+properties descend. -/
+theorem IsClosedImmersion.descendsAlong_surjective_inf_flat_inf_quasicompact :
+    DescendsAlong (@IsClosedImmersion : MorphismProperty Scheme.{u})
+      (@Surjective ⊓ @Flat ⊓ @QuasiCompact) := by
+  have := IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact
+  have := descendsAlong_monomorphisms_surjective_inf_flat_inf_quasicompact.{u}
+  refine ⟨fun {A X Y Z fst snd f g} h hf hfst ↦ ?_⟩
+  rw [IsClosedImmersion.iff_isFinite_and_mono] at hfst ⊢
+  have hmono : monomorphisms _ fst := hfst.2
+  exact ⟨of_isPullback_of_descendsAlong h hf hfst.1,
+    of_isPullback_of_descendsAlong (P := monomorphisms _) h hf hmono⟩
 
 end AlgebraicGeometry

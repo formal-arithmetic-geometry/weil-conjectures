@@ -5,10 +5,12 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Polynomial.Laurent
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineDifferentials
+public import WeilConjectures.Mathlib.Algebra.Polynomial.Laurent
 
 /-!
 # Coherent cohomology of the projective line and of smooth projective curves
@@ -69,6 +71,89 @@ lemma mem_twistSectionPairs (d : ℤ) (pq : k[X] × k[X]) :
     pq ∈ twistSectionPairs k d ↔ toLaurent pq.1 = T d * invert (toLaurent pq.2) := by
   simp [twistSectionPairs, sub_eq_zero]
 
+/-- A pair `(p, q)` lies in `twistSectionPairs k d` iff the coefficient of `tʲ` in `p` is that of
+`s^{d - j}` in `q`, for every `j : ℤ`. -/
+lemma mem_twistSectionPairs_iff_coeff (d : ℤ) (pq : k[X] × k[X]) :
+    pq ∈ twistSectionPairs k d ↔
+      ∀ j : ℤ, (toLaurent pq.1).coeff j = (toLaurent pq.2).coeff (d - j) := by
+  rw [mem_twistSectionPairs]
+  refine ⟨fun h j ↦ ?_, fun h ↦ LaurentPolynomial.ext fun j ↦ ?_⟩ <;>
+  · rw [h, coeff_T_mul, invert_apply, neg_sub]
+
+lemma twistSectionPairs_eq_bot {d : ℤ} (hd : d < 0) : twistSectionPairs k d = ⊥ := by
+  refine (Submodule.eq_bot_iff _).2 fun ⟨p, q⟩ h ↦ ?_
+  rw [mem_twistSectionPairs_iff_coeff] at h
+  refine Prod.ext (Polynomial.ext fun j ↦ ?_) (Polynomial.ext fun j ↦ ?_)
+  · rw [← coeff_toLaurent_natCast, h, coeff_toLaurent_of_neg _ (by omega)]
+    rfl
+  · have := h (d - j)
+    rw [sub_sub_cancel, coeff_toLaurent_of_neg _ (by omega)] at this
+    rw [← coeff_toLaurent_natCast, ← this]
+    rfl
+
+/-- For `D ≥ 0`, the coefficients of `p` in degrees `≤ D` of a pair `(p, q)` in
+`twistSectionPairs k D`; they determine the pair (`bijective_twistSectionPairsCoeff`). -/
+def twistSectionPairsCoeff (D : ℕ) : twistSectionPairs k D →ₗ[k] (Fin (D + 1) → k) where
+  toFun x j := x.1.1.coeff j
+  map_add' _ _ := by ext; simp
+  map_smul' _ _ := by ext; simp
+
+lemma bijective_twistSectionPairsCoeff (D : ℕ) :
+    Function.Bijective (twistSectionPairsCoeff k D) := by
+  refine ⟨fun ⟨⟨p, q⟩, h⟩ ⟨⟨p', q'⟩, h'⟩ hpq ↦ ?_, fun a ↦ ?_⟩
+  · rw [mem_twistSectionPairs_iff_coeff] at h h'
+    have hp : ∀ j : ℕ, p.coeff j = p'.coeff j := fun j ↦ by
+      rcases le_or_gt j D with hj | hj
+      · exact congrFun hpq ⟨j, by omega⟩
+      · rw [← coeff_toLaurent_natCast, ← coeff_toLaurent_natCast, h, h',
+          coeff_toLaurent_of_neg _ (by omega), coeff_toLaurent_of_neg _ (by omega)]
+    have hq : ∀ j : ℕ, q.coeff j = q'.coeff j := fun j ↦ by
+      have e := h (D - j)
+      have e' := h' (D - j)
+      rw [sub_sub_cancel] at e e'
+      rw [← coeff_toLaurent_natCast, ← coeff_toLaurent_natCast, ← e, ← e']
+      rcases le_or_gt j D with hj | hj
+      · have : ((D : ℤ) - j) = ((D - j : ℕ) : ℤ) := by omega
+        rw [this, coeff_toLaurent_natCast, coeff_toLaurent_natCast, hp]
+      · rw [coeff_toLaurent_of_neg _ (by omega), coeff_toLaurent_of_neg _ (by omega)]
+    exact Subtype.ext (Prod.ext (Polynomial.ext hp) (Polynomial.ext hq))
+  · refine ⟨⟨⟨∑ j : Fin (D + 1), Polynomial.C (a j) * X ^ (j : ℕ),
+      ∑ j : Fin (D + 1), Polynomial.C (a j) * X ^ (D - j : ℕ)⟩, ?_⟩, ?_⟩
+    · rw [mem_twistSectionPairs]
+      simp only [map_sum, Finset.mul_sum]
+      refine Finset.sum_congr rfl fun j _ ↦ ?_
+      have : ((D - j : ℕ) : ℤ) = D - j := by omega
+      simp [this]
+    · funext i
+      change (∑ j : Fin (D + 1), Polynomial.C (a j) * X ^ (j : ℕ)).coeff i = a i
+      rw [Polynomial.finsetSum_coeff, Finset.sum_eq_single i (fun j _ hj ↦ by
+        rw [coeff_C_mul_X_pow, if_neg (fun h ↦ hj (Fin.ext h.symm))]) (by simp)]
+      simp
+
+/-- The exponent vectors of the monomials of degree `D` in the two variables `x₀, x₁` are
+determined by the exponent of `x₁`, which is at most `D`. -/
+def degreeEqEquivFin (D : ℕ) :
+    {s : ULift.{u} (Fin 2) →₀ ℕ | s.degree = D} ≃ Fin (D + 1) where
+  toFun s := ⟨s.1 ⟨1⟩, by
+    have h : s.1.degree = D := s.2
+    rw [Finsupp.degree_eq_sum, ← Equiv.ulift.symm.sum_comp, Fin.sum_univ_two] at h
+    change s.1 ⟨0⟩ + s.1 ⟨1⟩ = D at h
+    omega⟩
+  invFun j := ⟨Finsupp.single (ULift.up 0) (D - j) + Finsupp.single (ULift.up 1) (j : ℕ), by
+    change Finsupp.degree _ = D
+    rw [map_add, Finsupp.degree_single, Finsupp.degree_single]
+    omega⟩
+  left_inv s := by
+    have h : s.1.degree = D := s.2
+    rw [Finsupp.degree_eq_sum, ← Equiv.ulift.symm.sum_comp, Fin.sum_univ_two] at h
+    change s.1 ⟨0⟩ + s.1 ⟨1⟩ = D at h
+    refine Subtype.ext (Finsupp.ext fun i ↦ ?_)
+    obtain ⟨i⟩ := i
+    fin_cases i <;> simp; omega
+  right_inv j := by
+    ext
+    simp
+
 /-- **Sections of the twists.** The global sections of `𝒪(d)` on `ℙ¹_k` are the pairs
 `(p, q) ∈ k[t] × k[s]` with `p(t) = tᵈ q(1/t)` in `k[t, t⁻¹]`.
 
@@ -79,8 +164,20 @@ Only the existence of a `k`-linear isomorphism is asserted: the twisting sheaf
 (blueprint: `lem-sc-p1-twist-sections`) -/
 theorem nonempty_H_zero_twist_equiv_twistSectionPairs (d : ℤ) :
     Nonempty ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 0 ≃ₗ[k]
-      twistSectionPairs k d) :=
-  sorry
+      twistSectionPairs k d) := by
+  rcases lt_or_ge d 0 with hd | hd
+  · obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology (ULift.{u} (Fin 2)) k d 0
+    have := ProjectiveSpace.subsingleton_monomialCechComplex_homology_zero (ULift.{u} (Fin 2)) k hd
+    have := e.toEquiv.subsingleton
+    have : Subsingleton (twistSectionPairs k d) := by
+      rw [twistSectionPairs_eq_bot k hd]
+      infer_instance
+    exact ⟨LinearEquiv.ofSubsingleton _ _⟩
+  · lift d to ℕ using hd
+    obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_zero_twist_equiv _ k 1 natCard_ulift_fin_two d
+    exact ⟨e ≪≫ₗ ((ProjectiveSpace.homogeneousSubmoduleBasis _ k d).reindex
+      (degreeEqEquivFin d)).equivFun ≪≫ₗ
+        (LinearEquiv.ofBijective _ (bijective_twistSectionPairsCoeff k d)).symm⟩
 
 /-- **Global sections of the twists on `ℙ¹_k`, `d ≥ 0`.** `H⁰(ℙ¹_k, 𝒪(d))` is the space of
 homogeneous polynomials of degree `d` in `k[x₀, x₁]`, of dimension `d + 1`.
@@ -102,8 +199,10 @@ This is the second half of part (i) of the blueprint lemma.
 
 (blueprint: `lem-sc-p1-monomial`) -/
 theorem subsingleton_H_zero_twist_of_neg (d : ℤ) (hd : d < 0) :
-    Subsingleton ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 0) :=
-  sorry
+    Subsingleton ((ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) d).H 0) := by
+  obtain ⟨e⟩ := ProjectiveSpace.nonempty_H_twist_linearEquiv_homology (ULift.{u} (Fin 2)) k d 0
+  have := ProjectiveSpace.subsingleton_monomialCechComplex_homology_zero (ULift.{u} (Fin 2)) k hd
+  exact e.toEquiv.subsingleton
 
 /-- **`H¹` of the twists on `ℙ¹_k`, `d ≥ -1`.** `H¹(ℙ¹_k, 𝒪(d)) = 0` for `d ≥ -1`.
 
@@ -141,7 +240,7 @@ This is part (iii) of the blueprint lemma.
 theorem nonempty_relativeDifferentials_iso_twist :
     Nonempty ((ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)).relativeDifferentials ≅
       ProjectiveSpace.twist (ULift.{u} (Fin 2)) (Spec (.of k)) (-2)) :=
-  sorry
+  ⟨relativeDifferentialsIsoTwist k⟩
 
 /-- **Vanishing above the dimension on `ℙ¹_k`.** For every quasi-coherent `𝒪_{ℙ¹_k}`-module `ℱ`,
 `H^q(ℙ¹_k, ℱ) = 0` for all `q ≥ 2`: the Čech complex of the standard cover by the two affine
@@ -152,7 +251,7 @@ theorem subsingleton_H_of_two_le (ℱ : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) ℱ]
     {q : ℕ} (hq : 2 ≤ q) :
     Subsingleton (ℱ.H q) :=
-  sorry
+  ProjectiveSpace.subsingleton_H_of_lt _ k natCard_ulift_fin_two ℱ hq
 
 /-- **Finite coherent cohomology on the projective line.** For every coherent
 `𝒪_{ℙ¹_k}`-module `ℱ`, `H⁰(ℙ¹_k, ℱ)` and `H¹(ℙ¹_k, ℱ)` are finite-dimensional over `k`: they
@@ -166,7 +265,8 @@ theorem finiteDimensional_H (ℱ : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) ℱ]
     {q : ℕ} (hq : q ≤ 1) : FiniteDimensional k (ℱ.H q) :=
-  sorry
+  -- the bound `q ≤ 1` is not needed: `ℙ¹_k` is proper over `k`
+  (fun _ ↦ Scheme.Modules.finiteDimensional_H_of_isProper ℱ q) hq
 
 end ProjectiveLine
 
@@ -190,7 +290,14 @@ theorem finiteDimensional_H_of_isCurve {k : Type u} [Field k] [IsAlgClosed k] {X
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] :
     FiniteDimensional k (ℱ.H 0) ∧ FiniteDimensional k (ℱ.H 1) ∧
-      ∀ q, 2 ≤ q → Subsingleton (ℱ.H q) :=
-  sorry
+      ∀ q, 2 ≤ q → Subsingleton (ℱ.H q) := by
+  have : IsProper (X ↘ Spec (.of k)) := hi ▸ inferInstance
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := { __ := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k)) }
+  refine ⟨Scheme.Modules.finiteDimensional_H_of_isProper ℱ 0,
+    Scheme.Modules.finiteDimensional_H_of_isProper ℱ 1, fun q hq ↦
+      Scheme.Modules.subsingleton_H_of_topologicalKrullDim_lt ℱ ?_⟩
+  rw [hX]
+  exact_mod_cast hq
 
 end AlgebraicGeometry

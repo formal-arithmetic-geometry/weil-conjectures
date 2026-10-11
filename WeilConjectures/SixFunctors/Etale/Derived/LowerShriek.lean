@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
@@ -42,6 +43,8 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
   `AlgebraicGeometry.Etale.rightDerivedLowerShriekPlusCompatibility` : the bounded below
   `Rf_!` is the restriction of the unbounded `Rf_!` along the inclusions
   `DerivedCategory.Plus.ι` of the bounded below derived categories.
+
+- `AlgebraicGeometry.Etale.cohomology` : the étale cohomology `H^i(X, -) = H^i(RΓ(X, -))`.
 
 - `AlgebraicGeometry.Etale.compactlySupportedCohomology` : `H_c`, with scoped notation
   `H_c(f)[A](i)`.
@@ -224,6 +227,13 @@ functor of the global sections functor on étale sheaves, which exists since the
 noncomputable def rightDerivedGlobalSections :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory A :=
   R(Sheaf.Γ X.smallEtaleTopology A)
+
+/-- The étale cohomology `H^i(X, K) := H^i(RΓ(X, K))`: the `i`-th homology object of the
+derived global sections, the companion of the compactly supported
+`AlgebraicGeometry.Etale.compactlySupportedCohomology`. For a sheaf `F` placed in degree `0`
+this is the étale sheaf cohomology `H^i(X, F)`. -/
+noncomputable def cohomology (i : ℤ) : DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ A :=
+  rightDerivedGlobalSections A X ⋙ DerivedCategory.homologyFunctor A i
 
 end Etale
 

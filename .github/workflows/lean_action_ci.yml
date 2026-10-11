@@ -7,7 +7,13 @@ on:
   push:
     branches:
       - master
+  # Only pull requests into `master`. Agent pull requests into the integration branch
+  # `slopmaster2` are built in full with `--wfail` by the maintainer's merge pipeline before
+  # they land, so building every push to them here only queued the shared runner for hours
+  # in front of `master` pull requests.
   pull_request:
+    branches:
+      - master
   workflow_dispatch:
 
 # This workflow only checks out and builds the project; it deploys nothing.

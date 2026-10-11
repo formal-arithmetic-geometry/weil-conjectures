@@ -12,10 +12,13 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+public import WeilConjectures.Mathlib.RingTheory.Smooth.Local
+public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
 
 /-!
 # Regular schemes
@@ -42,6 +45,10 @@ injection for the Brauer group.
   is irreducible.
 - `AlgebraicGeometry.GeometricallyIrreducible.of_smooth_of_geometricallyConnected`: a smooth
   morphism with geometrically connected fibres has geometrically irreducible fibres.
+- `AlgebraicGeometry.IsRegular.isRegularRing_stalk`: the local rings of a regular scheme are
+  regular rings, i.e. all their localizations at primes are regular local rings.
+- `AlgebraicGeometry.IsRegular.uniqueFactorizationMonoid_stalk`: the local rings of a regular
+  scheme are unique factorization domains.
 -/
 
 @[expose] public section
@@ -60,30 +67,54 @@ class IsRegular (X : Scheme.{u}) : Prop where
 
 attribute [instance] IsRegular.isRegularLocalRing_stalk
 
+/-- The spectrum of a field is regular: its local ring is the localization of the field at its
+zero ideal. -/
+instance IsRegular.spec_field (k : Type u) [Field k] : IsRegular (Spec (.of k)) :=
+  ⟨fun z ↦ IsRegularLocalRing.of_ringEquiv (Spec.stalkIso (.of k) z).commRingCatIsoToRingEquiv.symm⟩
+
+/-- If the local rings of `X` at the points of an affine open `U` are regular local rings, then
+so are the localizations of `Γ(X, U)` at primes: the localization at `p` is the local ring of `X`
+at the point of `U` corresponding to `p`. -/
+theorem IsAffineOpen.isRegularLocalRing_localization {X : Scheme.{u}} {U : X.Opens}
+    (hU : IsAffineOpen U) (hX : ∀ x ∈ U, IsRegularLocalRing (X.presheaf.stalk x))
+    (p : Ideal Γ(X, U)) [p.IsPrime] : IsRegularLocalRing (Localization.AtPrime p) := by
+  have hy : hU.fromSpec ⟨p, inferInstance⟩ ∈ U := by
+    rw [← SetLike.mem_coe, ← hU.range_fromSpec]
+    exact Set.mem_range_self _
+  let := X.presheaf.algebra_section_stalk ⟨_, hy⟩
+  have := hU.isLocalization_stalk' ⟨p, inferInstance⟩ hy
+  have := hX _ hy
+  exact .of_ringEquiv (IsLocalization.algEquiv p.primeCompl
+    (X.presheaf.stalk (hU.fromSpec ⟨p, inferInstance⟩)) (Localization.AtPrime p)).toRingEquiv
+
 /-- A scheme étale over a regular scheme is regular: an étale local homomorphism of local rings
 is flat with regular (indeed trivial) closed fibre, so it preserves regularity. -/
 theorem isRegularLocalRing_stalk_of_etale {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f]
     (hY : ∀ y : Y, IsRegularLocalRing (Y.presheaf.stalk y)) (x : X) :
-    IsRegularLocalRing (X.presheaf.stalk x) :=
-  sorry
-
-/-- The product of two regular schemes locally of finite type over a perfect field `k` is
-regular: over a perfect field such schemes are smooth, and smoothness is stable under base
-change and composition. -/
-theorem isRegularLocalRing_stalk_pullback {k : Type u} [Field k] [PerfectField k]
-    {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k)) [LocallyOfFiniteType f]
-    [LocallyOfFiniteType g] (hX : ∀ x : X, IsRegularLocalRing (X.presheaf.stalk x))
-    (hY : ∀ y : Y, IsRegularLocalRing (Y.presheaf.stalk y)) (z : ↥(pullback f g)) :
-    IsRegularLocalRing ((pullback f g).presheaf.stalk z) :=
-  sorry
+    IsRegularLocalRing (X.presheaf.stalk x) := by
+  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+    Y.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ (f x)) isOpen_univ
+  obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVU⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open (show x ∈ f ⁻¹ᵁ U from hxU)
+      (f ⁻¹ᵁ U).isOpen
+  have hφ := HasRingHomProperty.appLE @Etale f ‹_› ⟨U, hU⟩ ⟨V, hV⟩ hVU
+  algebraize [(f.appLE U V hVU).hom]
+  let := X.presheaf.algebra_section_stalk ⟨x, hxV⟩
+  have := hV.isLocalization_stalk ⟨x, hxV⟩
+  set P := (hV.primeIdealOf ⟨x, hxV⟩).asIdeal
+  have := IsRegularLocalRing.localization_of_etale_of_comap (R := Γ(Y, U)) P
+    (hU.isRegularLocalRing_localization (fun y _ ↦ hY y) _)
+  exact .of_ringEquiv
+    (IsLocalization.algEquiv P.primeCompl (Localization.AtPrime P) (X.presheaf.stalk x)).toRingEquiv
 
 /-- A scheme smooth over a field `k` is regular: the local rings of a smooth `k`-scheme are
-regular local rings, hence domains (`IsRegularLocalRing.isDomain`).
+regular local rings, hence domains (`IsRegularLocalRing.isDomain`). Near any point `X` is étale
+over an affine space `𝔸ⁿ_k`, whose local rings are regular, and étale maps preserve regularity.
 
 (blueprint: `lem-sc-smooth-regular`) -/
 theorem IsRegular.of_smooth {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
     [Smooth f] : IsRegular X :=
-  sorry
+  ⟨Smooth.isRegularLocalRing_stalk f⟩
 
 /-- A regular scheme locally of finite type over a perfect field `k` is smooth over `k`: at a
 point `x` the residue field is finitely generated over the perfect field `k`, hence separably
@@ -92,8 +123,41 @@ is smooth over `k` (Stacks `00TV`). This is the main input of
 `AlgebraicGeometry.Scheme.smooth_fromNormalization_comp` (blueprint:
 `lem-sc-normalized-curve-smooth`). -/
 theorem smooth_of_isRegular {k : Type u} [Field k] [PerfectField k] {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [IsRegular X] : Smooth f :=
-  sorry
+    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [IsRegular X] : Smooth f := by
+  refine HasRingHomProperty.of_iSup_eq_top (P := @Smooth) (fun V : X.affineOpens ↦ V)
+    (iSup_affineOpens_eq_top X) fun V ↦ ?_
+  set φ := (f.appLE ⊤ V le_top).hom
+  have hφ : φ.FiniteType :=
+    HasRingHomProperty.appLE @LocallyOfFiniteType f ‹_› ⟨⊤, isAffineOpen_top _⟩ V le_top
+  set e := (Scheme.ΓSpecIso (.of k)).inv.hom
+  set e' := (Scheme.ΓSpecIso (.of k)).hom.hom
+  have he : e.comp e' = RingHom.id _ := by
+    rw [← CommRingCat.hom_comp, Iso.hom_inv_id, CommRingCat.hom_id]
+  have he' : Function.Bijective e' :=
+    (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of k)).hom)
+  have hψ : (φ.comp e).Smooth := by
+    have hft : (φ.comp e).FiniteType := hφ.comp (.of_surjective _
+      (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of k)).inv).2)
+    let := (φ.comp e).toAlgebra
+    have : Algebra.FiniteType k Γ(X, V) := hft
+    exact Algebra.Smooth.of_isRegularLocalRing (k := k)
+      (V.2.isRegularLocalRing_localization fun x _ ↦ IsRegular.isRegularLocalRing_stalk x)
+  have := RingHom.Smooth.comp (RingHom.Smooth.of_bijective he') hψ
+  rwa [RingHom.comp_assoc, he, RingHom.comp_id] at this
+
+/-- The product of two regular schemes locally of finite type over a perfect field `k` is
+regular: over a perfect field such schemes are smooth, and smoothness is stable under base
+change and composition. -/
+theorem isRegularLocalRing_stalk_pullback {k : Type u} [Field k] [PerfectField k]
+    {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k)) [LocallyOfFiniteType f]
+    [LocallyOfFiniteType g] (hX : ∀ x : X, IsRegularLocalRing (X.presheaf.stalk x))
+    (hY : ∀ y : Y, IsRegularLocalRing (Y.presheaf.stalk y)) (z : ↥(pullback f g)) :
+    IsRegularLocalRing ((pullback f g).presheaf.stalk z) := by
+  have : IsRegular X := ⟨hX⟩
+  have : IsRegular Y := ⟨hY⟩
+  have := smooth_of_isRegular f
+  have := smooth_of_isRegular g
+  exact (IsRegular.of_smooth (pullback.fst f g ≫ f)).isRegularLocalRing_stalk z
 
 /-- A locally noetherian scheme of dimension at most one whose local rings are integrally closed
 domains is regular: each local ring is a field or a discrete valuation ring.
@@ -153,6 +217,15 @@ theorem IsRegular.irreducibleSpace (X : Scheme.{u}) [IsRegular X] [IsLocallyNoet
     [ConnectedSpace X] : IrreducibleSpace X :=
   irreducibleSpace_of_isDomain_stalk X fun _ ↦ inferInstance
 
+/-- A nonempty connected locally noetherian regular scheme is integral: it is irreducible
+(`AlgebraicGeometry.IsRegular.irreducibleSpace`), and reduced since its local rings are
+integral domains. -/
+theorem IsRegular.isIntegral (X : Scheme.{u}) [IsRegular X] [IsLocallyNoetherian X]
+    [ConnectedSpace X] : IsIntegral X :=
+  have := IsRegular.irreducibleSpace X
+  have := isReduced_of_isReduced_stalk X
+  isIntegral_of_irreducibleSpace_of_isReduced X
+
 /-- A smooth morphism with geometrically connected fibres has geometrically irreducible fibres:
 a base change of it to a field is smooth over that field, hence regular and locally noetherian,
 and connected, hence irreducible. -/
@@ -175,5 +248,38 @@ theorem GeometricallyReduced.of_smooth {X S : Scheme.{u}} (f : X ⟶ S) [Smooth 
     have := LocallyOfFiniteType.isLocallyNoetherian snd
     have := IsRegular.of_smooth snd
     exact isReduced_of_isReduced_stalk _
+
+
+/-- The local rings of a regular scheme are regular rings: the localization of `𝒪_{X,x}` at a
+prime is the local ring of `X` at a generization of `x`. Concretely, if `U ∋ x` is an affine open,
+then `𝒪_{X,x}` is a localization of `Γ(X, U)`, so its localization at a prime `q` is the
+localization of `Γ(X, U)` at the prime `P` below `q`, which is the stalk at the point of `U`
+corresponding to `P`. -/
+theorem IsRegular.isRegularRing_stalk {X : Scheme.{u}} [IsRegular X] (x : X) :
+    IsRegularRing (X.presheaf.stalk x) := by
+  obtain ⟨_, ⟨U, hU, rfl⟩, hxU, -⟩ :=
+    X.isBasis_affineOpens.exists_subset_of_mem_open (Set.mem_univ x) isOpen_univ
+  let := X.presheaf.algebra_section_stalk ⟨x, hxU⟩
+  have := hU.isLocalization_stalk ⟨x, hxU⟩
+  rw [isRegularRing_iff]
+  intro q _
+  have := IsLocalization.isLocalization_isLocalization_atPrime_isLocalization
+    (hU.primeIdealOf ⟨x, hxU⟩).asIdeal.primeCompl (Localization.AtPrime q) q
+  let y : PrimeSpectrum Γ(X, U) :=
+    ⟨q.comap (algebraMap Γ(X, U) (X.presheaf.stalk x)), inferInstance⟩
+  have hy : hU.fromSpec y ∈ U := by
+    rw [← SetLike.mem_coe, ← hU.range_fromSpec]
+    exact Set.mem_range_self y
+  let := X.presheaf.algebra_section_stalk ⟨hU.fromSpec y, hy⟩
+  have := hU.isLocalization_stalk' y hy
+  exact IsRegularLocalRing.of_ringEquiv (IsLocalization.algEquiv y.asIdeal.primeCompl
+    (X.presheaf.stalk (hU.fromSpec y)) (Localization.AtPrime q)).toRingEquiv
+
+/-- **Auslander–Buchsbaum theorem** for schemes: the local rings of a regular scheme are unique
+factorization domains. -/
+theorem IsRegular.uniqueFactorizationMonoid_stalk {X : Scheme.{u}} [IsRegular X] (x : X) :
+    UniqueFactorizationMonoid (X.presheaf.stalk x) :=
+  have := isRegularRing_stalk x
+  IsRegularLocalRing.uniqueFactorizationMonoid _
 
 end AlgebraicGeometry

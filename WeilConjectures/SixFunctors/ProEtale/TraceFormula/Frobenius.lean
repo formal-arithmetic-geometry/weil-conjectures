@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.AlgebraicGeometry.Frobenius
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
@@ -37,7 +38,8 @@ graph correspondences `c_m = (id, Φ_m)` and the global Frobenius operators.
 - `AlgebraicGeometry.ProEtale.relativeFrobenius`: the relative Frobenius `r_m` of a
   morphism compatible with the Frobenius morphisms of its source and target.
 - `AlgebraicGeometry.ProEtale.GeometricOperations.lowerShriekExchange`: the compact-support
-  exchange `Lg_Y^* Rf_! ⟶ Rf_! Lg_X^*` of a commutative square with proper gap map.
+  exchange `Lg_Y^* Rf_! ⟶ Rf_! Lg_X^*` on `Dᵇctf` of a commutative square of geometric
+  schemes with proper gap map.
 - `AlgebraicGeometry.ProEtale.WeilComplex.lowerShriekPush`: the `!`-pushforward of a Weil
   complex.
 
@@ -46,6 +48,9 @@ graph correspondences `c_m = (id, Φ_m)` and the global Frobenius operators.
 - `AlgebraicGeometry.ProEtale.isFinite_relativeFrobenius`,
   `AlgebraicGeometry.ProEtale.isUniversalHomeomorphism_relativeFrobenius`: the relative
   Frobenius is a finite universal homeomorphism.
+- `AlgebraicGeometry.ProEtale.isFinite_and_isUniversalHomeomorphism_relativeFrobenius`: the
+  relative Frobenius for the base changes of the `#k`-power Frobenius of models locally of
+  finite type over a finite field `k` is a finite universal homeomorphism.
 - `AlgebraicGeometry.ProEtale.isEquivalence_leftDerivedUpperStar`,
   `AlgebraicGeometry.ProEtale.ctf_leftDerivedUpperStar_obj_iff`: topological invariance of
   the derived pro-étale category along a finite universal homeomorphism.
@@ -66,19 +71,23 @@ coefficient morphism* that the coefficient continuation of the argument needs.
 `isFinite_relativeFrobenius` and `isUniversalHomeomorphism_relativeFrobenius` follow from
 `r_m ≫ p_m = Φ_X` by the cancellation lemmas `AlgebraicGeometry.IsFinite.of_comp` and
 `AlgebraicGeometry.IsUniversalHomeomorphism.of_comp`, since `p_m` is a base change of `Φ_Y`.
-That the Frobenius morphisms themselves are finite universal homeomorphisms (the absolute
-Frobenius step of the blueprint proof) enters as hypotheses, as explained above.
+These two theorems assume that `Φ_X` and `Φ_Y` are finite universal homeomorphisms. For the
+base changes of the `#k`-power Frobenius of models locally of finite type over `k`, these
+hypotheses hold by `AlgebraicGeometry.Scheme.Hom.IsFrobenius.isFinite_of_isPullback` and
+`AlgebraicGeometry.Scheme.Hom.IsFrobenius.isUniversalHomeomorphism_of_isPullback` (the absolute
+Frobenius step of the blueprint proof), which gives
+`isFinite_and_isUniversalHomeomorphism_relativeFrobenius`.
 
 `isEquivalence_leftDerivedUpperStar` is stated on the whole unbounded `D(Y, A) ⥤ D(X, A)`,
 whereas the blueprint states topological invariance on `Dᵇctf`; the generalisation is the
 expected one on the pro-étale site, and `ctf_leftDerivedUpperStar_obj_iff` restricts it
 back to the coefficient stage.
 
-`WeilComplex.graph` takes the package `G` only for the identification
-`GeometricOperations.upperShriekIdIso : 𝟭 ≅ (𝟙 X)^!`, which comes from the field
-`lowerShriekId : R(𝟙 X)_! ≅ 𝟭`. Constructing `R(𝟙 X)_! ≅ 𝟭` from the trivial
-compactification and the lower-star API would remove that field, and `graph` would no longer
-depend on `G`.
+`WeilComplex.graph` takes the package `G` and the hypothesis `K ∈ Dᵇctf(X)` only for the
+identification `GeometricOperations.upperShriekIdIso : K ≅ (𝟙 X)^! K` on `Dᵇctf`, which comes
+from the field `lowerShriekId : R(𝟙 X)_! ≅ 𝟭` through the exceptional adjunction on `Dᵇctf`.
+Constructing `R(𝟙 X)_! ≅ 𝟭` from the trivial compactification and the lower-star API would
+remove that field, and `graph` would no longer depend on `G`.
 
 `GeometricOperations.lowerShriekExchange`, and hence the coefficient map of
 `WeilComplex.lowerShriekPush`, uses the fields `baseChange`, `properComparison` and
@@ -172,6 +181,40 @@ structure IsModelFrobenius {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}}
   /-- `Φ₁` is the base change of the `q`-power Frobenius of `X₀`. -/
   exists_isFrobenius : ∃ F₀ : X₀ ⟶ X₀, F₀.IsFrobenius (Nat.card k) ∧ W.frobenius ≫ p = p ≫ F₀
 
+/-- The geometric base change `X = X₀ ×_{Spec k} s` of a separated scheme of finite type `X₀`
+over `k` is geometric over `s`. -/
+lemma IsModelFrobenius.isGeometric {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}}
+    {f₀ : X₀ ⟶ Spec (.of k)} {σ : s ⟶ Spec (.of k)} {p : X ⟶ X₀}
+    (hΦ : W.IsModelFrobenius f₀ σ p) [IsSeparated f₀] [LocallyOfFiniteType f₀]
+    [QuasiCompact f₀] : IsGeometric aX where
+  isSeparated := MorphismProperty.of_isPullback hΦ.isPullback ‹_›
+  locallyOfFiniteType := MorphismProperty.of_isPullback hΦ.isPullback ‹_›
+  quasiCompact := MorphismProperty.of_isPullback hΦ.isPullback ‹_›
+
+/-- The model Frobenius `Φ₁ = F₀ ×_{Spec k} 𝟙_s` and all its iterates `Φ_m` are universal
+homeomorphisms (blueprint `i-relative-frob`, Step 2). -/
+lemma IsModelFrobenius.isUniversalHomeomorphism_frobeniusIterate {k : Type u} [Field k]
+    [Finite k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k)} {σ : s ⟶ Spec (.of k)}
+    {p : X ⟶ X₀} (hΦ : W.IsModelFrobenius f₀ σ p) (m : ℕ) :
+    IsUniversalHomeomorphism (W.frobeniusIterate m) := by
+  obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
+  have := hF₀.isUniversalHomeomorphism_of_isPullback hΦ.isPullback W.frobenius_comp hp
+  induction m with
+  | zero => rw [frobeniusIterate_zero]; infer_instance
+  | succ n ih => rw [frobeniusIterate_succ]; infer_instance
+
+/-- The model Frobenius `Φ₁ = F₀ ×_{Spec k} 𝟙_s` of a scheme locally of finite type over `k`
+and all its iterates `Φ_m` are finite (blueprint `i-relative-frob`, Step 1). -/
+lemma IsModelFrobenius.isFinite_frobeniusIterate {k : Type u} [Field k] [Finite k]
+    {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k)} {σ : s ⟶ Spec (.of k)} {p : X ⟶ X₀}
+    (hΦ : W.IsModelFrobenius f₀ σ p) [LocallyOfFiniteType f₀] (m : ℕ) :
+    IsFinite (W.frobeniusIterate m) := by
+  obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
+  have := hF₀.isFinite_of_isPullback hΦ.isPullback W.frobenius_comp hp
+  induction m with
+  | zero => rw [frobeniusIterate_zero]; infer_instance
+  | succ n ih => rw [frobeniusIterate_succ]; infer_instance
+
 /-- The iterate `φ_m : Φ_m^* K ⟶ K` of the Frobenius coefficient morphism, obtained by
 composing the pulled back copies of `φ` along the composition isomorphisms for `Φ^*`:
 `φ_0` is the identification `L(𝟙 X)^* K ≃ K` and `φ_{m+1}` is the composite
@@ -219,15 +262,17 @@ instance isIso_coeffIterate [IsIso W.coeff] (m : ℕ) : IsIso (W.coeffIterate m)
 
 section Graph
 
-variable [DerivedBraiding A]
+variable [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
-/-- The graph correspondence `c_m = (id_X, Φ_m)` of a Weil complex, with coefficient map
-`φ_m` read through the comparison `K ≃ 𝟙^! K`: the graph correspondence
-`Correspondence.ofGraph` of `Φ_m`. Its ordinary-pullback leg is `Φ_m` and its exceptional
-leg is the identity (part of blueprint `sk-d-weil`). -/
-noncomputable abbrev graph (G : GeometricOperations A s) (m : ℕ) :
-    Correspondence aX aX W.obj W.obj :=
-  Correspondence.ofGraph G aX (W.frobeniusIterate m) (W.frobeniusIterate_comp m) W.obj
+/-- The graph correspondence `c_m = (id_X, Φ_m)` of a Weil complex with `K ∈ Dᵇctf(X)` on a
+geometric scheme, with coefficient map `φ_m` read through the comparison `K ≃ 𝟙^! K`: the graph
+correspondence `Correspondence.ofGraph` of `Φ_m`. Its ordinary-pullback leg is `Φ_m` and its
+exceptional leg is the identity (part of blueprint `sk-d-weil`). -/
+noncomputable abbrev graph (G : GeometricOperations A s) [IsGeometric aX] (hW : G.ctf X W.obj)
+    (m : ℕ) : Correspondence aX aX W.obj W.obj :=
+  Correspondence.ofGraph G aX W.obj hW (W.frobeniusIterate m) (W.frobeniusIterate_comp m)
     (W.coeffIterate m)
 
 end Graph
@@ -356,6 +401,40 @@ theorem isUniversalHomeomorphism_relativeFrobenius (f : X ⟶ Y) (frobX : X ⟶ 
     infer_instance
   exact .of_comp _ (pullback.snd frobY f)
 
+/-- **Relative Frobenius.** Let `X = X₀ ×_{Spec k} s` and `Y = Y₀ ×_{Spec k} s` be base changes
+of schemes `X₀`, `Y₀` locally of finite type over a finite field `k`, and let `Φ_X`, `Φ_Y` be
+the base changes `F ×_{Spec k} 𝟙_s` of their `#k`-power Frobenius morphisms. For a morphism
+`f : X ⟶ Y` with `f ≫ Φ_Y ^ m = Φ_X ^ m ≫ f`, the relative Frobenius
+`r_m = (f, Φ_X ^ m) : X ⟶ Y ×_{Φ_Y ^ m, Y, f} X` is finite and a universal homeomorphism
+(blueprint: `sk-i-relative-frob`, `i-relative-frob`). -/
+theorem isFinite_and_isUniversalHomeomorphism_relativeFrobenius {k : Type u} [Field k]
+    [Finite k] {X₀ Y₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k)} {g₀ : Y₀ ⟶ Spec (.of k)}
+    [LocallyOfFiniteType f₀] [LocallyOfFiniteType g₀] {σ : s ⟶ Spec (.of k)} {aX : X ⟶ s}
+    {aY : Y ⟶ s} {pX : X ⟶ X₀} {pY : Y ⟶ Y₀} (hX : IsPullback pX aX f₀ σ)
+    (hY : IsPullback pY aY g₀ σ) {FX : X₀ ⟶ X₀} {FY : Y₀ ⟶ Y₀}
+    (hFX : FX.IsFrobenius (Nat.card k)) (hFY : FY.IsFrobenius (Nat.card k)) {ΦX : X ⟶ X}
+    {ΦY : Y ⟶ Y} (hΦXa : ΦX ≫ aX = aX) (hΦYa : ΦY ≫ aY = aY) (hΦX : ΦX ≫ pX = pX ≫ FX)
+    (hΦY : ΦY ≫ pY = pY ≫ FY) (f : X ⟶ Y) (m : ℕ)
+    (h : f ≫ End.asHom (End.of ΦY ^ m) = End.asHom (End.of ΦX ^ m) ≫ f) :
+    IsFinite (relativeFrobenius f _ _ h) ∧
+      IsUniversalHomeomorphism (relativeFrobenius f _ _ h) := by
+  have hpow {Z : Scheme.{u}} (Φ : End Z) [IsFinite Φ] [IsUniversalHomeomorphism Φ] (n : ℕ) :
+      IsFinite (End.asHom (Φ ^ n)) ∧ IsUniversalHomeomorphism (End.asHom (Φ ^ n)) := by
+    induction n with
+    | zero =>
+      exact ⟨inferInstanceAs (IsFinite (𝟙 Z)), inferInstanceAs (IsUniversalHomeomorphism (𝟙 Z))⟩
+    | succ n ih =>
+      obtain ⟨_, _⟩ := ih
+      rw [pow_succ, End.mul_def]
+      exact ⟨inferInstance, inferInstance⟩
+  have := hFX.isFinite_of_isPullback hX hΦXa hΦX
+  have := hFY.isFinite_of_isPullback hY hΦYa hΦY
+  have := hFX.isUniversalHomeomorphism_of_isPullback hX hΦXa hΦX
+  have := hFY.isUniversalHomeomorphism_of_isPullback hY hΦYa hΦY
+  obtain ⟨_, _⟩ := hpow (End.of ΦX) m
+  obtain ⟨_, _⟩ := hpow (End.of ΦY) m
+  exact ⟨inferInstance, isUniversalHomeomorphism_relativeFrobenius ..⟩
+
 /-- Topological invariance: for a finite universal homeomorphism `r : X ⟶ Y`, pullback is
 an equivalence `Lr^* : D(Y, A) ≌ D(X, A)`, with inverse `Rr_* = Rr_!` and invertible unit
 and counit. Reduction of a scheme is a finite universal homeomorphism, so the statement
@@ -386,20 +465,22 @@ instance isIso_derivedUpperStarLowerStarAdjunction_counit (r : X ⟶ Y) [IsFinit
 
 section
 
-variable [DerivedBraiding A]
+variable [DerivedBraiding A] [Etale.HasBoundedBelowUpperShrieks A]
+  {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 /-- Topological invariance preserves the coefficient stage: `Lr^*` restricts to an
 equivalence `Dᵇctf(Y, A) ≃ Dᵇctf(X, A)` along a finite universal homeomorphism. The
 inverse `Rr_* = Rr_!` preserves `Dᵇctf` because `r` is finite, hence proper, and `Rr_!`
 preserves `Dᵇctf` (blueprint: `sk-i-topology`). -/
 theorem ctf_leftDerivedUpperStar_obj_iff (G : GeometricOperations A s) (r : X ⟶ Y)
-    [IsFinite r] [IsUniversalHomeomorphism r]
+    (hr : IsGeometricHom s r) [IsFinite r] [IsUniversalHomeomorphism r]
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
     G.ctf X (((upperStar A r).leftDerivedFunctor).obj K) ↔ G.ctf Y K :=
   ⟨fun hK ↦ (G.ctf Y).prop_of_iso
       (asIso ((derivedUpperStarLowerStarAdjunction A r).unit.app K)).symm
-      (G.ctf_lowerStar r hK),
-    G.ctf_upperStar r K⟩
+      (G.ctf_lowerStar r hr hK),
+    G.ctf_upperStar r hr⟩
 
 namespace GeometricOperations
 
@@ -428,11 +509,13 @@ with `f' = pullback.fst g_Y f` and `p = pullback.snd g_Y f`. It is the natural t
 For the Frobenius square of a Weil complex this is the Weil comparison `θ_{f,m}` with
 `g_X = Φ_{X,m}`, `g_Y = Φ_{Y,m}` and `r = r_m`, and it is invertible when `r` is a finite
 universal homeomorphism (`isIso_lowerShriekExchange`) (blueprint: `sk-d-weil-push`). -/
-noncomputable def lowerShriekExchange (G : GeometricOperations A s) (f : X ⟶ Y)
-    [HasCompactification f] (gX : X ⟶ X) (gY : Y ⟶ Y) (h : f ≫ gY = gX ≫ f)
+noncomputable def lowerShriekExchange (G : GeometricOperations A s) {aX : X ⟶ s} {aY : Y ⟶ s}
+    [IsGeometric aX] [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
+    (gX : X ⟶ X) (gY : Y ⟶ Y) (hgX : gX ≫ aX = aX) (hgY : gY ≫ aY = aY)
+    (h : f ≫ gY = gX ≫ f) [IsGeometric (pullback.snd gY f ≫ aX)]
     [IsProper (relativeFrobenius f gX gY h)] :
-    rightDerivedLowerShriek A f ⋙ (upperStar A gY).leftDerivedFunctor ⟶
-      (upperStar A gX).leftDerivedFunctor ⋙ rightDerivedLowerShriek A f :=
+    G.lowerShriekCtf f (.mk hf) ⋙ G.upperStarCtf gY (.mk hgY) ⟶
+      G.upperStarCtf gX (.mk hgX) ⋙ G.lowerShriekCtf f (.mk hf) :=
   let f' := pullback.fst gY f
   let p := pullback.snd gY f
   let sq : IsPullback p f' f gY := (IsPullback.of_hasPullback gY f).flip
@@ -441,26 +524,39 @@ noncomputable def lowerShriekExchange (G : GeometricOperations A s) (f : X ⟶ Y
   have : HasCompactification (r ≫ f') := by
     rw [relativeFrobenius_comp_fst]
     infer_instance
-  (G.baseChange sq).hom ≫
-    Functor.whiskerRight (Functor.whiskerLeft (upperStar A p).leftDerivedFunctor
-      ((derivedUpperStarLowerStarAdjunction A r).unit ≫
-        Functor.whiskerLeft (upperStar A r).leftDerivedFunctor (G.properComparison r).inv))
-      (rightDerivedLowerShriek A f') ≫
-    Functor.whiskerLeft ((upperStar A p).leftDerivedFunctor ⋙ (upperStar A r).leftDerivedFunctor)
-      (G.lowerShriekComp r f' ≪≫
-        rightDerivedLowerShriekCongr A (relativeFrobenius_comp_fst f gX gY h)).hom ≫
-    Functor.whiskerRight ((leftDerivedUpperStarComp A r p).symm ≪≫
-      leftDerivedUpperStarCongr A (relativeFrobenius_comp_snd f gX gY h)).hom
-      (rightDerivedLowerShriek A f)
+  have hf' : f' ≫ aY = p ≫ aX := by
+    rw [← hgY, ← Category.assoc, pullback.condition, Category.assoc, hf]
+  have hr : r ≫ p ≫ aX = aX := by
+    rw [← Category.assoc, relativeFrobenius_comp_snd, hgX]
+  (G.baseChange sq (.mk hf) (.mk hgY) (.mk hf') (.mk (aX := p ≫ aX) rfl)).hom ≫
+    Functor.whiskerRight (Functor.whiskerLeft (G.upperStarCtf p (.mk (aX := p ≫ aX) rfl))
+      (ctfHomMk (F := 𝟭 _) (G := G.upperStarCtf r (.mk hr) ⋙ G.lowerStarCtf r (.mk hr))
+          (Functor.whiskerLeft (DerivedCategory.constructibleFiniteTor A _).ι
+            (derivedUpperStarLowerStarAdjunction A r).unit) ≫
+        Functor.whiskerLeft (G.upperStarCtf r (.mk hr)) (G.properComparison r (.mk hr)).inv))
+      (G.lowerShriekCtf f' (.mk hf')) ≫
+    Functor.whiskerLeft (G.upperStarCtf p (.mk (aX := p ≫ aX) rfl) ⋙ G.upperStarCtf r (.mk hr))
+      (G.lowerShriekComp r f' (.mk hr) (.mk hf')
+          (.mk (aX := aX) (aY := aY) (by rw [Category.assoc, hf', hr])) ≪≫
+        ctfLowerShriekCongr (relativeFrobenius_comp_fst f gX gY h) _ _).hom ≫
+    Functor.whiskerRight (ctfHomMk
+      (F := G.upperStarCtf p (.mk (aX := p ≫ aX) rfl) ⋙ G.upperStarCtf r (.mk hr))
+      (G := G.upperStarCtf gX (.mk hgX))
+      (Functor.whiskerLeft (DerivedCategory.constructibleFiniteTor A _).ι
+        ((leftDerivedUpperStarComp A r p).symm ≪≫
+          leftDerivedUpperStarCongr A (relativeFrobenius_comp_snd f gX gY h)).hom))
+      (G.lowerShriekCtf f (.mk hf))
 
 /-- Topological invariance makes the compact-support exchange invertible when the gap map is
 a finite universal homeomorphism: then the unit of `Lr^* ⊣ Rr_*` is an isomorphism
 (blueprint: `sk-i-topology`). -/
-instance isIso_lowerShriekExchange (G : GeometricOperations A s) (f : X ⟶ Y)
-    [HasCompactification f] (gX : X ⟶ X) (gY : Y ⟶ Y) (h : f ≫ gY = gX ≫ f)
+instance isIso_lowerShriekExchange (G : GeometricOperations A s) {aX : X ⟶ s} {aY : Y ⟶ s}
+    [IsGeometric aX] [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
+    (gX : X ⟶ X) (gY : Y ⟶ Y) (hgX : gX ≫ aX = aX) (hgY : gY ≫ aY = aY)
+    (h : f ≫ gY = gX ≫ f) [IsGeometric (pullback.snd gY f ≫ aX)]
     [IsFinite (relativeFrobenius f gX gY h)]
     [IsUniversalHomeomorphism (relativeFrobenius f gX gY h)] :
-    IsIso (G.lowerShriekExchange f gX gY h) := by
+    IsIso (G.lowerShriekExchange f hf gX gY hgX hgY h) := by
   dsimp only [lowerShriekExchange]
   infer_instance
 
@@ -471,35 +567,48 @@ composite `ψ = Rf_! φ ∘ θ_{f,1}` of the compact-support exchange
 `θ_{f,1} : LΦ_Y^* Rf_! K ⟶ Rf_! LΦ_X^* K` (`GeometricOperations.lowerShriekExchange` for the
 square `f ≫ Φ_Y = Φ_X ≫ f`) with `Rf_! φ`. Only the case `m = 1` is constructed here. -/
 noncomputable def WeilComplex.lowerShriekPushCoeff {aX : X ⟶ s} (W : WeilComplex (A := A) aX)
-    (G : GeometricOperations A s) (f : X ⟶ Y) [HasCompactification f] (frobY : Y ⟶ Y)
-    (h : f ≫ frobY = W.frobenius ≫ f) [IsProper (relativeFrobenius f W.frobenius frobY h)] :
+    (G : GeometricOperations A s) (hW : G.ctf X W.obj) {aY : Y ⟶ s} [IsGeometric aX]
+    [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f] (frobY : Y ⟶ Y)
+    (hY : frobY ≫ aY = aY) (h : f ≫ frobY = W.frobenius ≫ f)
+    [IsGeometric (pullback.snd frobY f ≫ aX)]
+    [IsProper (relativeFrobenius f W.frobenius frobY h)] :
     ((upperStar A frobY).leftDerivedFunctor).obj ((rightDerivedLowerShriek A f).obj W.obj) ⟶
       (rightDerivedLowerShriek A f).obj W.obj :=
-  (G.lowerShriekExchange f W.frobenius frobY h).app W.obj ≫
+  ((G.lowerShriekExchange f hf W.frobenius frobY W.frobenius_comp hY h).app ⟨W.obj, hW⟩).hom ≫
     (rightDerivedLowerShriek A f).map W.coeff
 
-/-- The `!`-pushforward of a Weil complex `(K, φ)` along `f : X ⟶ Y` compatible with the
-Frobenius morphisms: the Weil complex `L = Rf_! K` on `Y` with coefficient map
-`ψ = Rf_! φ ∘ θ_{f,1}` (blueprint: `sk-d-weil-push`). -/
+/-- The `!`-pushforward of a Weil complex `(K, φ)` with `K ∈ Dᵇctf(X)` along a morphism
+`f : X ⟶ Y` of geometric schemes compatible with the Frobenius morphisms: the Weil complex
+`L = Rf_! K` on `Y` with coefficient map `ψ = Rf_! φ ∘ θ_{f,1}` (blueprint: `sk-d-weil-push`). -/
 noncomputable def WeilComplex.lowerShriekPush {aX : X ⟶ s} {aY : Y ⟶ s}
-    (W : WeilComplex (A := A) aX) (G : GeometricOperations A s) (f : X ⟶ Y)
-    [HasCompactification f] (frobY : Y ⟶ Y) (hY : frobY ≫ aY = aY)
-    (h : f ≫ frobY = W.frobenius ≫ f) [IsProper (relativeFrobenius f W.frobenius frobY h)] :
+    (W : WeilComplex (A := A) aX) (G : GeometricOperations A s) (hW : G.ctf X W.obj)
+    [IsGeometric aX] [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
+    (frobY : Y ⟶ Y) (hY : frobY ≫ aY = aY) (h : f ≫ frobY = W.frobenius ≫ f)
+    [IsGeometric (pullback.snd frobY f ≫ aX)]
+    [IsProper (relativeFrobenius f W.frobenius frobY h)] :
     WeilComplex (A := A) aY where
   frobenius := frobY
   frobenius_comp := hY
   obj := (rightDerivedLowerShriek A f).obj W.obj
-  coeff := W.lowerShriekPushCoeff G f frobY h
+  coeff := W.lowerShriekPushCoeff G hW f hf frobY hY h
 
 /-- The `!`-pushforward of a Weil datum is a Weil datum: when the relative Frobenius is a
 finite universal homeomorphism, `θ_{f,1}` is invertible, so `ψ = Rf_! φ ∘ θ_{f,1}` is
 invertible whenever `φ` is (blueprint: `sk-d-weil-push`). -/
 instance WeilComplex.isIso_lowerShriekPush_coeff {aX : X ⟶ s} {aY : Y ⟶ s}
-    (W : WeilComplex (A := A) aX) (G : GeometricOperations A s) (f : X ⟶ Y)
-    [HasCompactification f] (frobY : Y ⟶ Y) (hY : frobY ≫ aY = aY)
-    (h : f ≫ frobY = W.frobenius ≫ f) [IsFinite (relativeFrobenius f W.frobenius frobY h)]
+    (W : WeilComplex (A := A) aX) (G : GeometricOperations A s) (hW : G.ctf X W.obj)
+    [IsGeometric aX] [IsGeometric aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [HasCompactification f]
+    (frobY : Y ⟶ Y) (hY : frobY ≫ aY = aY) (h : f ≫ frobY = W.frobenius ≫ f)
+    [IsGeometric (pullback.snd frobY f ≫ aX)]
+    [IsFinite (relativeFrobenius f W.frobenius frobY h)]
     [IsUniversalHomeomorphism (relativeFrobenius f W.frobenius frobY h)] [IsIso W.coeff] :
-    IsIso (W.lowerShriekPush G f frobY hY h).coeff := by
+    IsIso (W.lowerShriekPush G hW f hf frobY hY h).coeff := by
+  have : IsIso ((G.lowerShriekExchange f hf W.frobenius frobY W.frobenius_comp hY h).app
+      ⟨W.obj, hW⟩) := inferInstance
+  have : IsIso ((G.lowerShriekExchange f hf W.frobenius frobY W.frobenius_comp hY h).app
+      ⟨W.obj, hW⟩).hom :=
+    inferInstanceAs (IsIso ((DerivedCategory.constructibleFiniteTor A Y).ι.map
+      ((G.lowerShriekExchange f hf W.frobenius frobY W.frobenius_comp hY h).app ⟨W.obj, hW⟩)))
   dsimp [lowerShriekPush, lowerShriekPushCoeff]
   infer_instance
 

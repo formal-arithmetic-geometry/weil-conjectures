@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftUnitor
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
@@ -130,22 +131,29 @@ lemma cupProduct_apply {i j : ℤ} (x : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ 𝐃(X, A)
     cupProduct A i j x y = cupProductAux A x y :=
   rfl
 
+/-- The cup product is the product of classes of the unit of the monoidal category `D(X_ét)`
+(`CategoryTheory.MonoidalCategory.shiftProduct`). -/
+lemma cupProduct_eq_shiftProduct {i j : ℤ} (x : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ 𝐃(X, A))⟦i⟧)
+    (y : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ 𝐃(X, A))⟦j⟧) :
+    cupProduct A i j x y = MonoidalCategory.shiftProduct x y := by
+  rw [cupProduct_apply, cupProductAux, MonoidalCategory.shiftProduct, derivedTensorShiftIso]
+  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc]
+  rfl
+
 /-- Blueprint `def-weil-poincare-trace-cup`: Poincare trace and cup-product pairing.
 
 **The cup product is graded commutative**: for `x ∈ H^i(X, Λ)` and `y ∈ H^j(X, Λ)`,
-`y ⌣ x = (-1)^{ij} x ⌣ y`, the two sides being compared along `Λ_X[j + i] = Λ_X[i + j]`. -/
+`y ⌣ x = (-1)^{ij} x ⌣ y`, the two sides being compared along `Λ_X[j + i] = Λ_X[i + j]`.
+
+This is the Eckmann–Hilton argument: `x ⊗ y = (x ⊗ 1) ≫ (1 ⊗ y) = (1 ⊗ y) ≫ (x ⊗ 1)`, and
+the two ways of moving the shifts out of `Λ_X[i] ⊗ᴸ Λ_X[j]` differ by `(-1)^{ij}`
+(`CategoryTheory.MonoidalCategory.shiftProduct_comm`). -/
 theorem cupProduct_comm {i j : ℤ} (x : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ 𝐃(X, A))⟦i⟧)
     (y : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ 𝐃(X, A))⟦j⟧) :
     cupProduct A j i y x =
-      (i * j).negOnePow • (cupProduct A i j x y ≫ eqToHom (by rw [add_comm])) :=
-  -- Proof sketch (Eckmann–Hilton): writing `x ⊗ y = (x ⊗ 1) ≫ (1 ⊗ y) = (1 ⊗ y) ≫ (x ⊗ 1)`
-  -- and moving the shifts out, both `x ⌣ y` and `y ⌣ x` become Yoneda composites
-  -- `x[j] ∘ y` of classes of the unit. The two ways of moving the shifts out of
-  -- `Λ_X[i] ⊗ᴸ Λ_X[j]` differ by `(-1)^{ij}`, and this sign is the whole difference. This
-  -- needs the compatibility of the left and right shift structures of `⊗ᴸ` with each other
-  -- and with the unitors, which is not yet formalised
-  -- (`WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift`).
-  sorry
+      (i * j).negOnePow • (cupProduct A i j x y ≫ eqToHom (by rw [add_comm])) := by
+  rw [cupProduct_eq_shiftProduct, cupProduct_eq_shiftProduct]
+  exact MonoidalCategory.shiftProduct_comm (DerivedCategory.unitorsCommShift _) x y
 
 variable {A}
 
@@ -182,7 +190,7 @@ noncomputable def cohomologyAddEquivCompactSupport (a : X ⟶ Y) [HasCompactific
 
 end General
 
-variable {Λ : Type (u + 1)} [CommRing Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
 
 namespace TateOrientation
 

@@ -6,6 +6,8 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.RingTheory.KrullDimension.Polynomial
+public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
@@ -43,6 +45,8 @@ The part of the additive group structure of relative affine space that is used e
 - `AlgebraicGeometry.AffineSpace.smul`: the scaling `x ↦ c x` by a global function `c`.
 - `AlgebraicGeometry.AffineSpace.translation`: the translation `x ↦ x + a`.
 - `AlgebraicGeometry.AffineSpace.stdPairing`: the standard pairing on `𝔸(n; S) ×_S 𝔸(n; S)`.
+- `AlgebraicGeometry.AffineSpace.reindexIso`: relabelling the coordinates along a bijection.
+- `AlgebraicGeometry.AffineSpace.sumIso`: `𝔸(n ⊕ m; S) ≅ 𝔸(m; 𝔸(n; S))`.
 
 -/
 
@@ -944,5 +948,128 @@ theorem appTop_pullbackMap_toΓPullback {T' : Scheme.{u}} (g : T ⟶ S) (g' : T'
       Category.comp_id]
 
 end AffineSpace
+
+/-! ### Splitting off coordinates
+
+Relabelling the coordinates along a bijection is an isomorphism of affine spaces
+(`AlgebraicGeometry.AffineSpace.reindexIso`), and affine space in the coordinates `n ⊕ m` over
+`S` is affine space in the coordinates `m` over `𝔸(n; S)`
+(`AlgebraicGeometry.AffineSpace.sumIso`). Both are compatible with the zero sections; together
+they write `𝔸^{c+1}_S` as the affine line over `𝔸^c_S`.
+-/
+
+namespace AffineSpace
+
+variable {n m : Type u} (S : Scheme.{u})
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Relabelling the coordinates along a bijection `e : m ≃ n` is an isomorphism
+`𝔸(n; S) ≅ 𝔸(m; S)` over `S`. -/
+@[simps]
+noncomputable def reindexIso (e : m ≃ n) : 𝔸(n; S) ≅ 𝔸(m; S) where
+  hom := reindex e S
+  inv := reindex e.symm S
+  hom_inv_id := by ext1 <;> simp
+  inv_hom_id := by ext1 <;> simp
+
+/-- Relabelling the coordinates preserves the zero section. -/
+@[reassoc (attr := simp)]
+lemma zeroSection_comp_reindex (i : m → n) :
+    zeroSection n S ≫ reindex i S = zeroSection m S := by
+  apply hom_ext
+  · rw [Category.assoc, reindex_over, zeroSection_comp_over, zeroSection_comp_over]
+  · intro j
+    rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, reindex_appTop_coord,
+      zeroSection_appTop_coord, zeroSection_appTop_coord]
+
+/-- The map `𝔸(n ⊕ m; S) ⟶ 𝔸(m; 𝔸(n; S))`: the `n`-coordinates define the map to `𝔸(n; S)`
+and the `m`-coordinates the remaining ones. -/
+noncomputable def sumHom : 𝔸(n ⊕ m; S) ⟶ 𝔸(m; 𝔸(n; S)) :=
+  homOfVector (homOfVector (𝔸(n ⊕ m; S) ↘ S) (coord S ∘ Sum.inl)) (coord S ∘ Sum.inr)
+
+/-- The map `𝔸(m; 𝔸(n; S)) ⟶ 𝔸(n ⊕ m; S)`, inverse to `sumHom`. -/
+noncomputable def sumInv : 𝔸(m; 𝔸(n; S)) ⟶ 𝔸(n ⊕ m; S) :=
+  homOfVector (𝔸(m; 𝔸(n; S)) ↘ 𝔸(n; S) ≫ 𝔸(n; S) ↘ S)
+    (Sum.elim ((𝔸(m; 𝔸(n; S)) ↘ 𝔸(n; S)).appTop ∘ coord S) (coord 𝔸(n; S)))
+
+/-- The `n`-coordinates of `sumHom` define its composite with the projection to `𝔸(n; S)`. -/
+lemma sumHom_over : sumHom S ≫ 𝔸(m; 𝔸(n; S)) ↘ 𝔸(n; S) =
+    homOfVector (𝔸(n ⊕ m; S) ↘ S) (coord S ∘ Sum.inl) :=
+  homOfVector_over _ _
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Affine space in the coordinates `n ⊕ m` over `S` is affine space in the coordinates `m`
+over affine space in the coordinates `n`: `𝔸(n ⊕ m; S) ≅ 𝔸(m; 𝔸(n; S))`. -/
+noncomputable def sumIso : 𝔸(n ⊕ m; S) ≅ 𝔸(m; 𝔸(n; S)) where
+  hom := sumHom S
+  inv := sumInv S
+  hom_inv_id := by
+    apply hom_ext
+    · rw [Category.assoc, sumInv, homOfVector_over, reassoc_of% sumHom_over, homOfVector_over,
+        Category.id_comp]
+    · rintro (i | i)
+      · simp only [sumInv, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+          homOfVector_appTop_coord, Sum.elim_inl, Function.comp_apply]
+        rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, sumHom_over,
+          homOfVector_appTop_coord]
+        simp
+      · simp [sumInv, sumHom]
+  inv_hom_id := by
+    apply hom_ext
+    · apply hom_ext
+      · simp only [Category.assoc, sumHom_over, homOfVector_over, sumInv, Category.id_comp]
+      · intro i
+        simp only [Category.assoc, sumHom_over, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+          homOfVector_appTop_coord, Function.comp_apply, sumInv, Sum.elim_inl, Category.id_comp]
+    · intro i
+      simp [sumHom, sumInv]
+
+/-- The forward map of `sumIso`. -/
+lemma sumIso_hom : (sumIso S).hom = sumHom (n := n) (m := m) S := rfl
+
+/-- `sumIso` is compatible with the projections to `S`. -/
+@[reassoc (attr := simp)]
+lemma sumIso_hom_over_over :
+    (sumIso S).hom ≫ 𝔸(m; 𝔸(n; S)) ↘ 𝔸(n; S) ≫ 𝔸(n; S) ↘ S = 𝔸(n ⊕ m; S) ↘ S := by
+  rw [sumIso_hom, reassoc_of% sumHom_over, homOfVector_over]
+
+set_option backward.isDefEq.respectTransparency.types false in
+/-- `sumIso` carries the zero section of `𝔸(n ⊕ m; S)` to the composite of the zero sections
+of `𝔸(n; S)` and of `𝔸(m; 𝔸(n; S))`. -/
+@[reassoc (attr := simp)]
+lemma zeroSection_comp_sumIso_hom :
+    zeroSection (n ⊕ m) S ≫ (sumIso S).hom = zeroSection n S ≫ zeroSection m 𝔸(n; S) := by
+  apply hom_ext
+  · rw [Category.assoc, Category.assoc, zeroSection_comp_over, Category.comp_id, sumIso_hom,
+      sumHom_over]
+    apply hom_ext
+    · rw [Category.assoc, homOfVector_over, zeroSection_comp_over, zeroSection_comp_over]
+    · intro i
+      rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, homOfVector_appTop_coord,
+        Function.comp_apply, zeroSection_appTop_coord, zeroSection_appTop_coord]
+  · intro i
+    rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, Scheme.Hom.comp_appTop,
+      CommRingCat.comp_apply, zeroSection_appTop_coord, map_zero, sumIso_hom, sumHom,
+      homOfVector_appTop_coord, Function.comp_apply, zeroSection_appTop_coord]
+
+end AffineSpace
+
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+/-- The affine space `𝔸(m; S)` over an affine scheme with noetherian ring of global sections
+has dimension `dim S + |m|`. -/
+lemma topologicalKrullDim_affineSpace_of_isAffine {S : Scheme.{u}} [IsAffine S]
+    [IsNoetherianRing Γ(S, ⊤)] (m : Type u) [Finite m] :
+    topologicalKrullDim 𝔸(m; S) = topologicalKrullDim S + Nat.card m := by
+  rw [IsHomeomorph.topologicalKrullDim_eq _
+      (Scheme.homeoOfIso (AffineSpace.isoOfIsAffine m S)).isHomeomorph,
+    IsHomeomorph.topologicalKrullDim_eq _ (Scheme.homeoOfIso S.isoSpec).isHomeomorph]
+  change topologicalKrullDim (PrimeSpectrum (MvPolynomial m Γ(S, ⊤))) =
+    topologicalKrullDim (PrimeSpectrum Γ(S, ⊤)) + _
+  rw [PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim,
+    PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim,
+    MvPolynomial.ringKrullDim_of_isNoetherianRing]
 
 end AlgebraicGeometry

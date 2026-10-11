@@ -19,6 +19,13 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 Mathlib has no `IsCoherent` class for sheaves of modules; as elsewhere in the project, coherence
 is spelled as quasi-coherence together with finite presentation.
+
+This agrees with coherence in the sense of Stacks `01BV` (finite type, and every finite type
+submodule over an open is of finite presentation) only on locally noetherian schemes
+(Stacks `01XZ`). On a general scheme it is weaker: `𝒪_X` is always quasi-coherent of finite
+presentation, but it is coherent only if `X` is locally coherent, which fails for instance for
+`Spec k[x₁, x₂, …]/(x₁x₂, x₁x₃, …)`. Results about `isCoherent` that need the Stacks notion
+must therefore assume `X` locally noetherian.
 -/
 
 @[expose] public section
@@ -31,7 +38,11 @@ namespace AlgebraicGeometry
 
 variable (X : Scheme.{u}) in
 /-- The coherent `𝒪_X`-modules, i.e. the quasi-coherent `𝒪_X`-modules of finite presentation, as
-a property of objects of `X.Modules`. -/
+a property of objects of `X.Modules`.
+
+This is coherence in the sense of Stacks `01BV` only when `X` is locally noetherian; on a general
+scheme it is the weaker notion "quasi-coherent of finite presentation" (see the implementation
+notes of this file). -/
 abbrev Scheme.Modules.isCoherent : ObjectProperty X.Modules :=
   fun ℱ ↦ SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ ∧
     SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ

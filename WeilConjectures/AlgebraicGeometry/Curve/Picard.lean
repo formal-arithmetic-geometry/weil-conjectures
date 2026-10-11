@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
+public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
@@ -134,22 +135,181 @@ lemma Divisor.toPic_single (P : closedPoints C) (n : ℤ) :
     Divisor.toPic k C (Finsupp.single P n) = n • .ofMul (Pic.ofClosedPoint k P) := by
   simp [Divisor.toPic]
 
+/-- The class of the ideal sheaf of a product of invertible ideal sheaves is the product of the
+classes. -/
+lemma Pic.ofIsInvertible_toModules_mul {I J : C.IdealSheafData} (hI : I.IsInvertible)
+    (hJ : J.IsInvertible) :
+    haveI := hI.isInvertible_toModules
+    haveI := hJ.isInvertible_toModules
+    haveI := (hI.mul hJ).isInvertible_toModules
+    Pic.ofIsInvertible (I * J).toModules =
+      Pic.ofIsInvertible I.toModules * Pic.ofIsInvertible J.toModules := by
+  have := hI.isInvertible_toModules
+  have := hJ.isInvertible_toModules
+  have := (hI.mul hJ).isInvertible_toModules
+  obtain ⟨e⟩ := hI.nonempty_toModules_iso_dual_tensorObj_mul hJ
+  have h := Pic.ofIsInvertible_eq_of_iso e
+  rw [Pic.ofIsInvertible_tensorObj, Pic.ofIsInvertible_dual] at h
+  rw [h, mul_right_comm, inv_mul_cancel, one_mul]
+
+omit [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] in
+/-- The unit ideal sheaf has trivial class. -/
+lemma Pic.ofIsInvertible_toModules_top :
+    haveI := (IdealSheafData.isInvertible_top (X := C)).isInvertible_toModules
+    Pic.ofIsInvertible (⊤ : C.IdealSheafData).toModules = 1 := by
+  have hT := IdealSheafData.isInvertible_top (X := C)
+  have := hT.isInvertible_toModules
+  obtain ⟨e⟩ := hT.nonempty_toModules_iso_dual_tensorObj_mul hT
+  have h := Pic.ofIsInvertible_eq_of_iso
+    (e ≪≫ whiskerLeftIso _ (eqToIso (by rw [IdealSheafData.top_mul])))
+  rw [Pic.ofIsInvertible_tensorObj, Pic.ofIsInvertible_dual, inv_mul_cancel] at h
+  exact h
+
+/-- The class of a power of an invertible ideal sheaf. -/
+lemma Pic.ofIsInvertible_toModules_pow {I : C.IdealSheafData} (hI : I.IsInvertible) (n : ℕ) :
+    haveI := hI.isInvertible_toModules
+    haveI := (hI.pow n).isInvertible_toModules
+    Pic.ofIsInvertible (I ^ n).toModules = Pic.ofIsInvertible I.toModules ^ n := by
+  have := hI.isInvertible_toModules
+  induction n with
+  | zero =>
+    have := (hI.pow 0).isInvertible_toModules
+    have := (IdealSheafData.isInvertible_top (X := C)).isInvertible_toModules
+    exact (Pic.ofIsInvertible_eq_of_iso (eqToIso (by rw [pow_zero]; rfl))).trans
+      (Pic.ofIsInvertible_toModules_top.trans (pow_zero _).symm)
+  | succ n ih =>
+    have := (hI.pow n).isInvertible_toModules
+    have := (hI.pow (n + 1)).isInvertible_toModules
+    have := ((hI.pow n).mul hI).isInvertible_toModules
+    exact (Pic.ofIsInvertible_eq_of_iso (eqToIso (by rw [pow_succ]))).trans
+      ((Pic.ofIsInvertible_toModules_mul (hI.pow n) hI).trans (by rw [ih, pow_succ]))
+
+/-- The class of the effective divisor `E` is the inverse of the class of its ideal sheaf
+`𝒪_C(-E)`. -/
+lemma Divisor.toMul_toPic_mapRange (E : closedPoints C →₀ ℕ) :
+    haveI := (Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E).isInvertible_toModules
+    (Divisor.toPic k C (E.mapRange Nat.cast Nat.cast_zero)).toMul =
+      (Pic.ofIsInvertible (Divisor.idealSheaf E).toModules)⁻¹ := by
+  induction E using Finsupp.induction_linear with
+  | zero =>
+    have := (IdealSheafData.isInvertible_top (X := C)).isInvertible_toModules
+    have := (Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k))
+      (0 : closedPoints C →₀ ℕ)).isInvertible_toModules
+    have h0 : Pic.ofIsInvertible (Divisor.idealSheaf (0 : closedPoints C →₀ ℕ)).toModules = 1 :=
+      (Pic.ofIsInvertible_eq_of_iso (eqToIso (by rw [Divisor.idealSheaf_zero]))).trans
+        Pic.ofIsInvertible_toModules_top
+    rw [h0, inv_one, Finsupp.mapRange_zero, map_zero, toMul_zero]
+  | add E E' hE₁ hE₂ =>
+    have h₁ := Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E
+    have h₂ := Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E'
+    have := h₁.isInvertible_toModules
+    have := h₂.isInvertible_toModules
+    have := (h₁.mul h₂).isInvertible_toModules
+    have := (Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) (E + E')).isInvertible_toModules
+    have hmul : Pic.ofIsInvertible (Divisor.idealSheaf (E + E')).toModules =
+        Pic.ofIsInvertible (Divisor.idealSheaf E).toModules *
+          Pic.ofIsInvertible (Divisor.idealSheaf E').toModules :=
+      (Pic.ofIsInvertible_eq_of_iso (eqToIso (by rw [Divisor.idealSheaf_add]))).trans
+        (Pic.ofIsInvertible_toModules_mul h₁ h₂)
+    rw [hmul, mul_inv, Finsupp.mapRange_add (fun _ _ ↦ Nat.cast_add _ _), map_add, toMul_add,
+      hE₁, hE₂]
+  | single P n =>
+    have hP := isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one
+      (C ↘ Spec (.of k)) P.2
+    have := hP.isInvertible_toModules
+    have := (hP.pow n).isInvertible_toModules
+    have := (Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k))
+      (Finsupp.single P n)).isInvertible_toModules
+    have hpow : Pic.ofIsInvertible (Divisor.idealSheaf (Finsupp.single P n)).toModules =
+        Pic.ofIsInvertible (IdealSheafData.vanishingIdeal ⟨{P.1}, P.2⟩).toModules ^ n :=
+      (Pic.ofIsInvertible_eq_of_iso (eqToIso (by rw [Divisor.idealSheaf_single]))).trans
+        (Pic.ofIsInvertible_toModules_pow hP n)
+    rw [hpow, Finsupp.mapRange_single, Divisor.toPic_single, toMul_zsmul, toMul_ofMul,
+      Pic.ofClosedPoint, Pic.ofIsInvertible_dual, inv_zpow, zpow_natCast]
+
+/-- The class of a divisor `D = E₁ - E₂` with `E₁, E₂` effective is `[𝒪_C(-E₁)]⁻¹ [𝒪_C(-E₂)]`. -/
+lemma Divisor.toMul_toPic_mapRange_sub (E₁ E₂ : closedPoints C →₀ ℕ) :
+    haveI := (Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E₁).isInvertible_toModules
+    haveI := (Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E₂).isInvertible_toModules
+    (Divisor.toPic k C (E₁.mapRange Nat.cast Nat.cast_zero -
+        E₂.mapRange Nat.cast Nat.cast_zero)).toMul =
+      (Pic.ofIsInvertible (Divisor.idealSheaf E₁).toModules)⁻¹ *
+        Pic.ofIsInvertible (Divisor.idealSheaf E₂).toModules := by
+  rw [map_sub, toMul_sub, Divisor.toMul_toPic_mapRange, Divisor.toMul_toPic_mapRange,
+    div_inv_eq_mul]
+
+/-- Every divisor is `E₁ - E₂` for effective divisors `E₁` and `E₂`, its positive and negative
+parts. -/
+lemma Divisor.mapRange_toNat_sub (D : C.Divisor) :
+    (D.mapRange Int.toNat Int.toNat_zero).mapRange Nat.cast Nat.cast_zero -
+      ((-D).mapRange Int.toNat Int.toNat_zero).mapRange Nat.cast Nat.cast_zero = D := by
+  ext P
+  simp only [Finsupp.coe_sub, Pi.sub_apply, Finsupp.mapRange_apply, Finsupp.coe_neg,
+    Pi.neg_apply]
+  exact Int.toNat_sub_toNat_neg (D P)
+
 /-- Blueprint `lem-sc-divisor-class-curve`: `Pic` is the divisor class group for smooth curves
 
 Let `C` be a smooth integral (equivalently, connected) curve over `k`, proper or not. Then the
 map `Cl(C) → Pic(C)`, `D ↦ [𝒪_C(D)]`, is a well-defined isomorphism of abelian groups.
 
-It is well defined since `𝒪_C(div f) = f⁻¹ 𝒪_C ≅ 𝒪_C`, and a homomorphism since
-`𝒪_C(D) ⊗ 𝒪_C(D') ≅ 𝒪_C(D + D')`. It is surjective because an invertible module with a
-nonzero rational section `s` is `𝒪_C(div s)` (blueprint
-`lem-sc-line-bundle-rational-section`), and injective because the image `f ∈ k(C)ˣ` of `1`
-under an isomorphism `𝒪_C ≅ 𝒪_C(D)` has `D = div f`. The proof is `sorry`: the modules
-`𝒪_C(D) ⊆ k(C)` and rational sections of line bundles are not available. -/
+Write `D = E₁ - E₂` with `E₁, E₂` effective, so that `[𝒪_C(D)] = [𝒪_C(-E₁)]⁻¹ [𝒪_C(-E₂)]`
+(`AlgebraicGeometry.Scheme.Divisor.toMul_toPic_mapRange_sub`). The map is well defined, since
+for `D = div g` multiplication by `g` is an isomorphism `𝒪_C(-E₂) ≅ 𝒪_C(-E₁)`
+(`AlgebraicGeometry.Scheme.Divisor.nonempty_toModules_idealSheaf_iso_of_ord_eq`), and injective,
+since conversely every isomorphism `𝒪_C(-E₂) ≅ 𝒪_C(-E₁)` is multiplication by some `g` with
+`div g = E₁ - E₂` (`AlgebraicGeometry.Scheme.Divisor.exists_ord_eq_of_nonempty_iso`). It is
+surjective since every invertible module is `𝒪_C(E₁) ⊗ 𝒪_C(-E₂)`, a nonzero rational section
+giving a nonzero morphism `𝒪_C(-E₂) ⟶ ℒ` whose zero scheme is a sum of points
+(`AlgebraicGeometry.Scheme.Modules.exists_nonempty_iso_dual_toModules_idealSheaf_tensorObj`;
+blueprint `lem-sc-line-bundle-rational-section`). -/
 theorem exists_divisorClassGroup_addEquiv_pic [IsCurve (C ↘ Spec (.of k))] [IsIntegral C]
     [IsNoetherian C] :
     ∃ e : C.DivisorClassGroup ≃+ Additive C.Pic,
-      ∀ D : C.Divisor, e (QuotientAddGroup.mk D) = Divisor.toPic k C D :=
-  sorry
+      ∀ D : C.Divisor, e (QuotientAddGroup.mk D) = Divisor.toPic k C D := by
+  have hker : (Divisor.toPic k C).ker = C.principalDivisors := by
+    ext D
+    set E₁ := D.mapRange Int.toNat Int.toNat_zero
+    set E₂ := (-D).mapRange Int.toNat Int.toNat_zero
+    have hJ₁ := Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E₁
+    have hJ₂ := Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E₂
+    have := hJ₁.isInvertible_toModules
+    have := hJ₂.isInvertible_toModules
+    have hD := Divisor.toMul_toPic_mapRange_sub (k := k) E₁ E₂
+    rw [Divisor.mapRange_toNat_sub] at hD
+    have hE (P : closedPoints C) : D P = E₁ P - E₂ P := by
+      simp only [E₁, E₂, Finsupp.mapRange_apply, Finsupp.coe_neg, Pi.neg_apply]
+      exact (Int.toNat_sub_toNat_neg (D P)).symm
+    rw [AddMonoidHom.mem_ker]
+    constructor
+    · intro h0
+      rw [h0, toMul_zero, eq_comm, inv_mul_eq_one] at hD
+      obtain ⟨e⟩ := Pic.nonempty_iso_of_ofIsInvertible_eq hD.symm
+      obtain ⟨g, hg, hgD⟩ := Divisor.exists_ord_eq_of_nonempty_iso (C ↘ Spec (.of k)) e
+      refine ⟨Additive.ofMul (Units.mk0 g hg), ?_⟩
+      ext P
+      rw [div_apply, hE, ← hgD]
+      rfl
+    · rintro ⟨g, rfl⟩
+      have hg : (g.toMul : C.functionField) ≠ 0 := g.toMul.ne_zero
+      obtain ⟨e⟩ := Divisor.nonempty_toModules_idealSheaf_iso_of_ord_eq (C ↘ Spec (.of k))
+        (E₁ := E₁) (E₂ := E₂) hg fun P ↦ by rw [← hE, div_apply]
+      rw [← toMul_eq_one, hD, Pic.ofIsInvertible_eq_of_iso e, inv_mul_cancel]
+  have hsurj : Function.Surjective (Divisor.toPic k C) := by
+    intro L
+    obtain ⟨E₁, E₂, ⟨e⟩⟩ :=
+      Modules.exists_nonempty_iso_dual_toModules_idealSheaf_tensorObj (C ↘ Spec (.of k))
+        ((fromSkeleton C.Modules).obj L.toMul.val)
+    have hJ₁ := Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E₁
+    have hJ₂ := Divisor.isInvertible_idealSheaf (C ↘ Spec (.of k)) E₂
+    have := hJ₁.isInvertible_toModules
+    have := hJ₂.isInvertible_toModules
+    refine ⟨E₁.mapRange Nat.cast Nat.cast_zero - E₂.mapRange Nat.cast Nat.cast_zero, ?_⟩
+    apply Additive.toMul.injective
+    rw [Divisor.toMul_toPic_mapRange_sub, ← Pic.ofIsInvertible_fromSkeleton L.toMul,
+      Pic.ofIsInvertible_eq_of_iso e, Pic.ofIsInvertible_tensorObj, Pic.ofIsInvertible_dual]
+  exact ⟨(QuotientAddGroup.quotientAddEquivOfEq hker.symm).trans
+    (QuotientAddGroup.quotientKerEquivOfSurjective _ hsurj), fun D ↦ rfl⟩
 
 end Divisor
 

@@ -95,10 +95,18 @@ field this is what makes `X₀` of finite type over `k₀`, so finite type is no
 instance smooth : Smooth S.modelStructureMorphism :=
   SmoothOfRelativeDimension.smooth d _
 
-variable (k : Type u) [Field k] [IsAlgClosed k] [Algebra k₀ k]
+variable (k : Type u) [Field k] [IsAlgClosed k] [Algebra k₀ k] [Algebra.IsAlgebraic k₀ k]
 
 /-- The geometric fibre `X = X₀ ×_{k₀} k` of the datum `S` over an algebraic closure `k`
-of `k₀`. -/
+of `k₀`.
+
+That `k` is an algebraic closure of `k₀`, and not just an algebraically closed extension, is the
+hypothesis `[Algebra.IsAlgebraic k₀ k]`: without it the `k`-points of `X` would not be the
+`𝔽̄_q`-points of `X₀`. With it `k ≅ AlgebraicClosure k₀` over `k₀` (`IsAlgClosure`), so this is
+the geometric fiber `AlgebraicGeometry.Scheme.Hom.geometricFiber` of `S.modelStructureMorphism`
+used by the geometric Galois Frobenius of
+`WeilConjectures.AlgebraicGeometry.GeometricFrobenius`, up to the choice of the algebraic
+closure. -/
 noncomputable def geometricFiber : Scheme.{u} :=
   pullback S.modelStructureMorphism (Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))
 
@@ -110,7 +118,7 @@ noncomputable def structureMorphism : S.geometricFiber k ⟶ Spec (CommRingCat.o
 noncomputable def toModel : S.geometricFiber k ⟶ S.model :=
   pullback.fst S.modelStructureMorphism (Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))
 
-omit [Finite k₀] [IsAlgClosed k] in
+omit [Finite k₀] [IsAlgClosed k] [Algebra.IsAlgebraic k₀ k] in
 /-- The geometric fibre is defined by the Cartesian square
 
 ```

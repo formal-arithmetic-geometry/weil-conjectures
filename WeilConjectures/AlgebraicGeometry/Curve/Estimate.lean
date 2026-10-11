@@ -38,8 +38,10 @@ vanishing for `q ≥ 3` is `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_thr
 ## TODO
 
 The genus is `AlgebraicGeometry.Scheme.Hom.genus`, the dimension of the global sections of the
-sheaf of relative differentials `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`. Proving
-the `H¹` statement needs the comparison of this genus with the étale cohomology of `C`.
+sheaf of relative differentials `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`; it is the
+arithmetic genus `h¹(C, 𝒪_C)` by `AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. Proving
+the `H¹` statement needs the Kummer sequence, the Jacobian of `C` with its group isomorphism
+`Pic⁰(C) ≃* J(k)` (`AlgebraicGeometry.exists_jacobian`), and the torsion of abelian varieties.
 -/
 
 @[expose] public section
@@ -68,9 +70,9 @@ theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_zero (f : C ⟶ Spec (.of 
 `H¹(C_ét, ℤ/n) ≅ (ℤ/n)^{2g}`.
 
 The genus is `f.genus = dim_k H⁰(C, Ω¹_{C/k})`, the definition of the blueprint
-(`sk-def-curve`). For a smooth proper connected curve it agrees, by Serre duality, with the
-arithmetic genus `AlgebraicGeometry.Scheme.arithmeticGenus = dim_k H¹(C, 𝒪_C)` of the
-Riemann–Roch block; the two definitions are not yet identified in Lean.
+(`sk-def-curve`). For a smooth proper curve it agrees, by Serre duality, with the arithmetic genus
+`AlgebraicGeometry.Scheme.arithmeticGenus = dim_k H¹(C, 𝒪_C)` of the Riemann–Roch block
+(`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`), which is the dimension of the Jacobian.
 (blueprint: `sk-thm-curveestimate`) -/
 theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] [IsProper f] (n : ℕ) (hn : (n : k) ≠ 0) :
@@ -79,8 +81,9 @@ theorem IsCurve.nonempty_addEquiv_sheafH_constantZMod_one (f : C ⟶ Spec (.of k
   -- `H¹(C, μₙ) ≅ Pic(C)[n]` by
   -- `AlgebraicGeometry.Scheme.exists_exact_sheafH_rootsOfUnitySheaf_one`, since
   -- `Γ(C, 𝒪)ˣ = kˣ` is `n`-divisible. The degree map gives `Pic(C)[n] = Pic⁰(C)[n]`, and
-  -- `Pic⁰(C)` is the group of `k`-points of the Jacobian, an abelian variety of dimension `g`,
-  -- whose `n`-torsion is `(ℤ/n)^{2g}`.
+  -- `Pic⁰(C) ≃* J(k)` for the Jacobian `J`, an abelian variety of dimension `g`
+  -- (`AlgebraicGeometry.exists_jacobian`, a group isomorphism), so `Pic⁰(C)[n] ≅ J(k)[n]`,
+  -- which is `(ℤ/n)^{2g}` (`AlgebraicGeometry.abelianVariety_estimate_of_isAlgClosed`).
   sorry
 
 /-- **The curve estimate in degree two.** Let `C` be a smooth proper connected curve over an

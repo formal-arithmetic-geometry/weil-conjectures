@@ -14,8 +14,11 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
-public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
+public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 
 /-!
 # Weil sheaves and Weil complexes
@@ -87,6 +90,9 @@ both notions pull back along morphisms of `k₀`-schemes (`WeilSheaf.upperStar`,
   the embedding of Weil sheaves as Weil complexes in degree zero, which is fully faithful, and
   the cohomology sheaves, with `𝓗⁰ ∘ toComplex ≅ 𝟭`
   (`AlgebraicGeometry.WeilSheaf.toComplexCompHomologySheafIso`).
+- `AlgebraicGeometry.WeilComplex.singleComplex`: a Weil sheaf placed in degree `a`, with
+  `𝓗ᵃ` the sheaf itself (`AlgebraicGeometry.WeilComplex.homologySheafSingleComplexIso`) and
+  `𝓗ᵇ = 0` for `b ≠ a`.
 - `AlgebraicGeometry.WeilComplex.forget`: the forgetful functor to the derived category of
   `ℓ`-adic pro-étale sheaves.
 - `AlgebraicGeometry.WeilSheaf.frobeniusPowIso`: the iterated Weil structure
@@ -123,15 +129,13 @@ along its geometric Galois Frobenius `Fr_X`. It is realized as the pushforward a
 which is isomorphic to the pullback along `Fr_X`
 (`AlgebraicGeometry.ProEtale.upperStarIsoLowerStarInv`). -/
 noncomputable abbrev WeilSheaf.frobeniusPullback :
-    Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-        (WeilCoefficients.{u} l) ⥤
-      Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-        (WeilCoefficients.{u} l) :=
-  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l]
+    AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⥤
+      AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+  ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*ᵃ[l]
 
 /-- The Frobenius pullback is an equivalence, `Fr_X` being an automorphism. -/
 instance : (WeilSheaf.frobeniusPullback k₀ l X).IsEquivalence :=
-  isEquivalence_lowerStar _ _
+  isEquivalence_adicLowerStar _ _
 
 /-- The category of all `ℓ`-adic pro-étale sheaves on the geometric fiber `X̄` with a Weil
 structure: pairs of a sheaf `F` of `ℚ̄_ℓ`-modules on `X̄_proét` and an isomorphism
@@ -182,13 +186,35 @@ noncomputable instance : Category (WeilSheaf k₀ l X) :=
 instance : (WeilSheaf.objectProperty k₀ l X).IsClosedUnderFiniteProducts :=
   inferInstance
 
-noncomputable instance : Abelian (WeilSheaf k₀ l X) :=
+/-- The geometric fiber of a `k₀`-scheme locally of finite type is locally Noetherian. -/
+instance isLocallyNoetherian_geometricFiber
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    IsLocallyNoetherian (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+  have : IsLocallyNoetherian (Scheme.specAlgebraicClosure k₀).left :=
+    inferInstanceAs (IsLocallyNoetherian (Spec (CommRingCat.of (AlgebraicClosure k₀))))
+  inferInstanceAs (IsLocallyNoetherian (pullback _ _))
+
+noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    Abelian (WeilSheaf k₀ l X) :=
   inferInstanceAs (Abelian (WeilSheaf.objectProperty k₀ l X).FullSubcategory)
 
 noncomputable instance : Preadditive (WeilSheaf k₀ l X) :=
+  inferInstanceAs (Preadditive (WeilSheaf.objectProperty k₀ l X).FullSubcategory)
+
+instance : HasFiniteProducts (WeilSheaf k₀ l X) :=
+  inferInstanceAs (HasFiniteProducts (WeilSheaf.objectProperty k₀ l X).FullSubcategory)
+
+instance : HasFiniteBiproducts (WeilSheaf k₀ l X) :=
+  HasFiniteBiproducts.of_hasFiniteProducts
+
+instance : HasBinaryBiproducts (WeilSheaf k₀ l X) :=
+  hasBinaryBiproducts_of_finite_biproducts _
+
+instance : (WeilSheaf.objectProperty k₀ l X).IsClosedUnderExtensions :=
   inferInstance
 
-instance : (WeilComplex.objectProperty k₀ l X).IsTriangulated :=
+instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    (WeilComplex.objectProperty k₀ l X).IsTriangulated :=
   inferInstance
 
 noncomputable instance : Category (WeilComplex k₀ l X) :=
@@ -208,19 +234,42 @@ instance (n : ℤ) : (shiftFunctor (WeilComplex k₀ l X) n).Additive :=
 
 /-- **Weil complexes form a pretriangulated category**, the triangulated structure being that
 of the derived category of pro-étale Weil sheaves. -/
-noncomputable instance : Pretriangulated (WeilComplex k₀ l X) :=
+noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    Pretriangulated (WeilComplex k₀ l X) :=
   inferInstanceAs (Pretriangulated (WeilComplex.objectProperty k₀ l X).FullSubcategory)
 
 /-- **Weil complexes form a triangulated category.** -/
-instance : IsTriangulated (WeilComplex k₀ l X) :=
+instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+    IsTriangulated (WeilComplex k₀ l X) :=
   inferInstanceAs (IsTriangulated (WeilComplex.objectProperty k₀ l X).FullSubcategory)
+
+namespace WeilComplex
+
+/-- A Weil sheaf placed in degree `a`, as a Weil complex. -/
+noncomputable def singleComplex (a : ℤ) (G : WeilSheaf k₀ l X) : WeilComplex k₀ l X :=
+  ⟨(_root_.DerivedCategory.singleFunctor _ a).obj G.obj, by
+    refine ⟨⟨⟨a, inferInstanceAs (_root_.DerivedCategory.IsGE
+      ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)⟩,
+      ⟨a, inferInstanceAs (_root_.DerivedCategory.IsLE
+        ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)⟩⟩, fun m ↦ ?_⟩
+    obtain hm | rfl | hm := lt_trichotomy m a
+    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
+        ((_root_.DerivedCategory.isGE_iff
+          ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a).1 inferInstance m hm)
+    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_iso
+        ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ m).app G.obj).symm
+          G.property
+    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
+        ((_root_.DerivedCategory.isLE_iff
+          ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a).1 inferInstance m hm)⟩
+
+end WeilComplex
 
 namespace WeilSheaf
 
 /-- The underlying pro-étale sheaf of a Weil sheaf. -/
 noncomputable abbrev carrier (F : WeilSheaf k₀ l X) :
-    Sheaf (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-      (WeilCoefficients.{u} l) :=
+    AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
   F.obj.carrier
 
 /-- The underlying sheaf of a Weil sheaf is constructible. -/
@@ -231,20 +280,8 @@ lemma isAdicConstructibleSheaf_carrier (F : WeilSheaf k₀ l X) :
 /-- A Weil sheaf, viewed as a Weil complex concentrated in degree zero. -/
 noncomputable def toComplex : WeilSheaf k₀ l X ⥤ WeilComplex k₀ l X :=
   (WeilSheaf.objectProperty k₀ l X).liftFullSubcategory (WeilComplex.objectProperty k₀ l X)
-    (_root_.DerivedCategory.singleFunctor _ 0) fun F hF ↦ by
-    refine ⟨⟨⟨0, inferInstanceAs (_root_.DerivedCategory.IsGE
-      ((_root_.DerivedCategory.singleFunctor _ 0).obj F) 0)⟩,
-      ⟨0, inferInstanceAs (_root_.DerivedCategory.IsLE
-        ((_root_.DerivedCategory.singleFunctor _ 0).obj F) 0)⟩⟩, fun m ↦ ?_⟩
-    obtain hm | rfl | hm := lt_trichotomy m 0
-    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
-        ((_root_.DerivedCategory.isGE_iff
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj F) 0).1 inferInstance m hm)
-    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_iso
-        ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app F).symm hF
-    · exact (WeilSheaf.objectProperty k₀ l X).prop_of_isZero
-        ((_root_.DerivedCategory.isLE_iff
-          ((_root_.DerivedCategory.singleFunctor _ 0).obj F) 0).1 inferInstance m hm)
+    (_root_.DerivedCategory.singleFunctor _ 0) fun F hF ↦
+      (WeilComplex.singleComplex 0 ⟨F, hF⟩).property
 
 instance : (toComplex (k₀ := k₀) (l := l) (X := X)).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
@@ -266,14 +303,14 @@ pullback along an automorphism `g` is the pushforward along `g⁻¹`. At a geome
 by `Fr_Xᵐ` up to reparametrisation it induces the Frobenius relative to `𝔽_{qᵐ}` on the
 stalk. -/
 noncomputable def frobeniusPowIso (F : WeilSheaf k₀ l X) (m : ℕ) :
-    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[
-        WeilCoefficients.{u} l].obj F.obj.carrier ≅
+    (((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*ᵃ[l].obj
+        F.obj.carrier ≅
       F.obj.carrier :=
   match m with
-  | 0 => (lowerStarCongr _ (by rw [pow_zero]; rfl)).app _ ≪≫ (lowerStarId _ _).app _
+  | 0 => (adicLowerStarCongr l (by rw [pow_zero]; rfl)).app _ ≪≫ (adicLowerStarId l _).app _
   | m + 1 =>
-    (lowerStarCongr _ (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv])).app _ ≪≫
-      (lowerStarComp _ _ _).symm.app _ ≪≫
+    (adicLowerStarCongr l (by rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv])).app _ ≪≫
+      (adicLowerStarComp l _ _).symm.app _ ≪≫
       (frobeniusPullback k₀ l X).mapIso (F.frobeniusPowIso m) ≪≫ F.obj.str
 
 /-- A Weil sheaf is *lisse* if its underlying `ℓ`-adic sheaf is lisse: pro-étale locally a
@@ -281,11 +318,14 @@ finite direct sum of copies of `ℚ̄_ℓ`. -/
 def IsLisse (F : WeilSheaf k₀ l X) : Prop :=
   IsAdicLisseSheaf F.obj.carrier
 
+attribute [local instance] Abelian.hasFiniteBiproducts in
 /-- A direct sum of lisse Weil sheaves is lisse: the underlying sheaf of `F ⊞ G` is the direct
 sum of those of `F` and `G`. -/
 theorem IsLisse.biprod {F G : WeilSheaf k₀ l X} (hF : F.IsLisse) (hG : G.IsLisse) :
     (F ⊞ G).IsLisse := by
   let Φ := ObjectProperty.ι (objectProperty k₀ l X) ⋙ IsoAlgebra.forget (frobeniusPullback k₀ l X)
+  have : HasBinaryBiproducts (objectProperty k₀ l X).FullSubcategory :=
+    inferInstanceAs (HasBinaryBiproducts (WeilSheaf k₀ l X))
   have : PreservesBinaryBiproducts Φ := preservesBinaryBiproducts_of_preservesBiproducts _
   exact IsAdicLisseSheaf.of_iso (Φ.mapBiprod F G).symm
     (IsAdicLisseSheaf.biprod (F := Φ.obj F) (G := Φ.obj G) hF hG)
@@ -353,12 +393,43 @@ noncomputable def _root_.AlgebraicGeometry.WeilSheaf.toComplexCompHomologySheafI
     fun f ↦ ObjectProperty.hom_ext _
       ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).hom.naturality f.hom)
 
+/-- A Weil sheaf viewed as a complex is the Weil sheaf placed in degree `0`. -/
+theorem _root_.AlgebraicGeometry.WeilSheaf.toComplex_obj (G : WeilSheaf k₀ l X) :
+    WeilSheaf.toComplex.obj G = singleComplex 0 G :=
+  rfl
+
+/-- A cohomology sheaf of a Weil complex vanishes if and only if the underlying cohomology
+object does. -/
+theorem isZero_homologySheaf_obj_iff (a : ℤ) (M : WeilComplex k₀ l X) :
+    IsZero ((homologySheaf a).obj M) ↔
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ a).obj M.obj) :=
+  ⟨fun h ↦ (ObjectProperty.ι _).map_isZero h,
+    fun h ↦ IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _ h⟩
+
+/-- A Weil sheaf placed in degree `a` has vanishing cohomology sheaves in degrees `b ≠ a`. -/
+theorem isZero_homologySheaf_singleComplex {a b : ℤ} (h : b ≠ a) (G : WeilSheaf k₀ l X) :
+    IsZero ((homologySheaf b).obj (singleComplex a G)) := by
+  rw [isZero_homologySheaf_obj_iff]
+  have : (singleComplex a G).obj.IsGE a := inferInstanceAs (_root_.DerivedCategory.IsGE
+    ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)
+  have : (singleComplex a G).obj.IsLE a := inferInstanceAs (_root_.DerivedCategory.IsLE
+    ((_root_.DerivedCategory.singleFunctor _ a).obj G.obj) a)
+  obtain h | h := h.lt_or_gt
+  · exact (_root_.DerivedCategory.isGE_iff _ a).1 inferInstance b h
+  · exact (_root_.DerivedCategory.isLE_iff _ a).1 inferInstance b h
+
+/-- The `a`-th cohomology sheaf of a Weil sheaf placed in degree `a` is the sheaf itself. -/
+noncomputable def homologySheafSingleComplexIso (a : ℤ) (G : WeilSheaf k₀ l X) :
+    (homologySheaf a).obj (singleComplex a G) ≅ G :=
+  ObjectProperty.isoMk _ ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ a).app
+    G.obj)
+
 /-- The forgetful functor `For` from Weil complexes to the derived category of `ℓ`-adic
 pro-étale sheaves on `X̄`, forgetting the Weil structure; the Weil structure of `K` induces the
 derived Frobenius isomorphism `θ_K : Fr_X^* For(K) ≅ For(K)`. -/
 noncomputable def forget :
-    WeilComplex k₀ l X ⥤ _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology
-      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) (WeilCoefficients.{u} l)) :=
+    WeilComplex k₀ l X ⥤ _root_.DerivedCategory
+      (AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
   ObjectProperty.ι _ ⋙ (IsoAlgebra.forget _).mapDerivedCategory
 
 end WeilComplex
@@ -374,7 +445,7 @@ the pullback along the base change `φ̄ : X̄ ⟶ Ȳ`, with the Weil structure 
 noncomputable def ProEtaleWeilSheaf.upperStar :
     ProEtaleWeilSheaf k₀ l Y ⥤ ProEtaleWeilSheaf k₀ l X :=
   IsoAlgebra.mapOfNatIso
-    (ProEtale.upperStarGeometricFiberMapCompFrobeniusIso _ φ (comp_over φ _))
+    (ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso l φ (comp_over φ _))
 
 instance : (ProEtaleWeilSheaf.upperStar k₀ l φ).Additive :=
   IsoAlgebra.additive_mapOfNatIso _
@@ -408,6 +479,18 @@ noncomputable def WeilComplex.upperStar : WeilComplex k₀ l Y ⥤ WeilComplex k
 
 instance : (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).Additive :=
   ObjectProperty.liftFullSubcategory_additive _ _ _ _
+
+noncomputable instance : (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).CommShift ℤ := by
+  have : (ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategory.CommShift ℤ := inferInstance
+  have : (WeilComplex.objectProperty k₀ l X).IsStableUnderShift ℤ := inferInstance
+  exact ObjectProperty.commShiftLiftFullSubcategory _ _ _ _
+
+/-- The pullback of Weil complexes is a triangulated functor. -/
+instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] :
+    (WeilComplex.upperStar (k₀ := k₀) (l := l) φ).IsTriangulated := by
+  have : (ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategory.IsTriangulated := inferInstance
+  exact ObjectProperty.isTriangulated_liftFullSubcategory _ _ _ _
 
 end UpperStar
 

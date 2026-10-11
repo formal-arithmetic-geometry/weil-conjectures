@@ -36,6 +36,8 @@ The rank-one case of `SheafOfModules.IsFiniteLocallyFreeOfRank` and
 - `SheafOfModules.IsInvertible.of_iso` and `SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso`:
   invertibility and finite local freeness of rank `r` only depend on the isomorphism class.
 - `SheafOfModules.instIsInvertibleUnit`: the unit sheaf `𝒪` is invertible.
+- `SheafOfModules.isFiniteLocallyFree_of_exists_over_iso_free`: a sheaf of modules which is
+  locally free of finite rank on a covering is finite locally free.
 - `SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one`: a sheaf of modules is
   invertible if and only if it is finite locally free of rank one.
 -/
@@ -263,6 +265,45 @@ theorem isInvertible_of_forall_over_unit {M : SheafOfModules.{u} R} {I : Type u�
     (X : I → C) (hX : J.CoversTop X)
     (h : ∀ i, Nonempty (M.over (X i) ≅ unit (R.over (X i)))) : M.IsInvertible :=
   (localGeneratorsDataOfUnitIso X hX h).isInvertible
+
+/-- A sheaf of modules is finite locally free of rank `r` if and only if it is isomorphic to the
+free module of rank `r` over each object of a family covering the terminal object. -/
+theorem isFiniteLocallyFreeOfRank_iff_exists_over_iso_free {M : SheafOfModules.{u} R} {r : ℕ} :
+    M.IsFiniteLocallyFreeOfRank r ↔ ∃ (I : Type u₁) (X : I → C), J.CoversTop X ∧
+      ∀ i, Nonempty (M.over (X i) ≅ free (ULift.{u} (Fin r))) := by
+  constructor
+  · rintro ⟨q, hq, hr⟩
+    refine ⟨q.I, q.X, q.coversTop, fun i ↦ ⟨?_⟩⟩
+    exact (asIso (q.generators i).π).symm ≪≫ freeFunctor.mapIso
+      ((hr i).some.trans Equiv.ulift.symm).toIso
+  · rintro ⟨I, X, hX, h⟩
+    let q : M.LocalGeneratorsData :=
+      { I := I
+        X := X
+        coversTop := hX
+        generators i := (free.generatingSections _).ofEpi (h i).some.inv }
+    have : q.IsLocallyFreeData := ⟨fun i ↦ by
+      dsimp [q]
+      rw [GeneratingSections.ofEpi_π]
+      infer_instance⟩
+    exact ⟨q, this, fun i ↦ ⟨Equiv.ulift⟩⟩
+
+set_option backward.isDefEq.respectTransparency false in
+/-- A sheaf of modules which is isomorphic to a free module on a finite type over each object of
+a family covering the terminal object is finite locally free. -/
+theorem isFiniteLocallyFree_of_exists_over_iso_free {M : SheafOfModules.{u} R} {I : Type u₁}
+    (X : I → C) (hX : J.CoversTop X) (κ : I → Type u) [∀ i, Finite (κ i)]
+    (h : ∀ i, Nonempty (M.over (X i) ≅ free (κ i))) : M.IsFiniteLocallyFree := by
+  let q : M.LocalGeneratorsData :=
+    { I := I
+      X := X
+      coversTop := hX
+      generators i := (free.generatingSections _).ofEpi (h i).some.inv }
+  have : q.IsLocallyFreeData := ⟨fun i ↦ by
+    dsimp [q]
+    rw [GeneratingSections.ofEpi_π]
+    infer_instance⟩
+  exact ⟨q, this, ⟨fun i ↦ ⟨inferInstanceAs (Finite (κ i))⟩⟩⟩
 
 end
 

@@ -5,9 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
-public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 
 /-!
 
@@ -16,14 +15,15 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 Let `A` be a monoidal Grothendieck abelian coefficient category and let `f : X ⟶ Y` be a
 morphism of schemes admitting a compactification, so that the compactly supported direct
 image `Rf_! : D(X_proét) ⥤ D(Y_proét)` is available. The *projection formula* is the assertion
-that the canonical comparison map
+that the canonical projection map
 
 ```
-  PF_{f, K, L} : Rf_!(K ⊗ᴸ Lf^* L) ⟶ (Rf_! K) ⊗ᴸ L
+  PF_{f, K, L} : (Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)
 ```
 
-is an isomorphism, for `K : D(X_proét)` and `L : D(Y_proét)`. This file is the pro-étale
-counterpart of `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula`.
+of `AlgebraicGeometry.ProEtale.projectionMapOfCompactification` is an isomorphism, for
+`K : D(X_proét)` and `L : D(Y_proét)`. This file is the pro-étale counterpart of
+`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula`.
 
 ## Main definitions
 
@@ -39,11 +39,10 @@ counterpart of `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula`.
 
 ## Implementation notes
 
-The canonical map `PF_{f, K, L}` is not available in this repository, so, as on the étale
-side, the projection formula is recorded as the `Prop`-valued property
-`AlgebraicGeometry.ProEtale.HasProjectionFormula` asserting that the two objects are
-*isomorphic*. This is a placeholder: it should become the statement that the canonical map is an
-isomorphism, which is also what is needed to compare the formula with the étale one along `ν^*`.
+The projection map is the composite of the projection map of `Rg_*` for the proper part `g` of
+the compactification and of the inverse of the projection isomorphism for the open immersion
+`i` (`AlgebraicGeometry.ProEtale.isIso_derivedOpenImmersionLowerShriekProjectionMap`); the
+projection formula asserts that the former is an isomorphism on the relevant objects.
 
 The blueprint's "étale-origin witnesses" for `K` and `L` are built into
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`, since pro-étale bounded
@@ -80,37 +79,35 @@ namespace ProEtale
 
 variable {X Y : Scheme.{u}}
 
+variable [ProEtale.UpperStarPreservesFlat A]
+
 /-- The projection formula for a morphism `f : X ⟶ Y`, at `K : D(X_proét)` and
-`L : D(Y_proét)`, with `Rf_!` computed from a chosen compactification `c` of `f`: the assertion
-that
+`L : D(Y_proét)`, with `Rf_!` computed from a chosen compactification `c` of `f`: the
+assertion that the projection map
 
 ```
-  Rf_!(K ⊗ᴸ Lf^* L)  ≅  (Rf_! K) ⊗ᴸ L .
+  PF_c : (Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)
 ```
 
-The canonical comparison map going from left to right is not constructed in this
-repository, so the property records the existence of *some* isomorphism between the two
-objects; see the module docstring. -/
+of `AlgebraicGeometry.ProEtale.projectionMapOfCompactification` is an isomorphism. -/
 def HasProjectionFormulaOfCompactification {f : X ⟶ Y} (c : Compactification f)
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
     (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) : Prop :=
-  Nonempty ((Rf_!(c)[A]).obj (((-⊗ᴸ-(X)[A]).obj K).obj ((L((f)^*[A])).obj L)) ≅
-    ((-⊗ᴸ-(Y)[A]).obj ((Rf_!(c)[A]).obj K)).obj L)
+  IsIso (((projectionMapOfCompactification A c).app K).app L)
 
 /-- The projection formula for a morphism `f : X ⟶ Y` admitting a compactification, at
-`K : D(X_proét)` and `L : D(Y_proét)`: the assertion that
+`K : D(X_proét)` and `L : D(Y_proét)`: the assertion that the projection map
 
 ```
-  Rf_!(K ⊗ᴸ Lf^* L)  ≅  (Rf_! K) ⊗ᴸ L ,
+  PF : (Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)
 ```
 
-with `Rf_!` the compactly supported direct image
-`AlgebraicGeometry.ProEtale.rightDerivedLowerShriek` attached to the chosen compactification
-of `f`. -/
+of `AlgebraicGeometry.ProEtale.projectionMap`, for the chosen compactification of `f`, is an
+isomorphism. -/
 def HasProjectionFormula (f : X ⟶ Y) [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
     (L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) : Prop :=
-  HasProjectionFormulaOfCompactification A (HasCompactification.compactification f) K L
+  IsIso (((projectionMap A f).app K).app L)
 
 variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
@@ -118,8 +115,8 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
 /-- Blueprint `sk-thm-sf-pf-proetale`: Projection formula: the pro-étale realization.
 
 Let `A` be killed by an integer `N ≠ 0`. For a morphism `f : X ⟶ Y` admitting a
-compactification, and `K` in `Dctf(X_proét, A)` and `L` in `Dctf(Y_proét, A)`, there is an
-isomorphism `Rf_!(K ⊗ᴸ Lf^* L) ≅ (Rf_! K) ⊗ᴸ L` in `D(Y_proét)`. -/
+compactification, and `K` in `Dctf(X_proét, A)` and `L` in `Dctf(Y_proét, A)`, the projection
+map `(Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism in `D(Y_proét)`. -/
 theorem hasProjectionFormula_of_constructibleFiniteTor (N : ℕ) (hN : N ≠ 0)
     (hA : ∀ M : A, N • 𝟙 M = 0) (f : X ⟶ Y) [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}

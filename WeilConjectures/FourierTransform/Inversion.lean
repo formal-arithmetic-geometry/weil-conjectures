@@ -58,7 +58,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-open AffineSpace
+open AlgebraicGeometry.AffineSpace
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)]
 
@@ -86,7 +86,8 @@ Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ
 `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-prop-convolution-kernel`) -/
 theorem nonempty_iso_fourierKernel_convolution [Finite Λ] [HasInvertibleExponent Λ S]
-    [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
+    [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (Ψ : AddChar (ZMod p) Λ)
+    (hΨ : IsUnit (Ψ 1 - 1)) :
     Nonempty (kernelConvolution (ModuleCat.{u + 1} Λ) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S)
           ((DerivedCategory.singleFunctor _ 0).obj
             (fourierKernel Λ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) Ψ (stdPairing n S)))
@@ -121,13 +122,21 @@ out of the kernel and recognises the kernel transform of `Δ_* Λ(-r)` as the Ta
 (`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal`). The hypotheses are those
 of the convolution computation: for `Ψ = 1` the transform is `Rp₂,! p₁^*(-)[r]`, which is not
 invertible.
+The composition law of kernel transforms also needs the projection
+`𝔸(n; S) ×ₛ 𝔸(n; S) ×ₛ 𝔸(n; S) ⟶ 𝔸(n; S)` onto the last factor to admit a compactification.
 
 Class: torsion; decided by the convolution computation
 `AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_convolution` (cohomology of `𝔸^r`), which
 needs `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-thm-inversion`) -/
+-- TODO: discharge the `HasCompactification` hypothesis: the composite is a morphism
+-- `𝔸^{3n}_S ⟶ 𝔸^n_S`, which is compactified through projective space by
+-- `AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace`, with no need for Nagata.
 theorem nonempty_iso_affineFourierTransform_comp_inv [Finite Λ] [HasInvertibleExponent Λ S]
-    [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
+    [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
+    [HasCompactification (pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ≫
+      pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))]
+    (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
     Nonempty (affineFourierTransform Λ n S Ψ ⋙ affineFourierTransform Λ n S Ψ⁻¹ ≅
         tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))) := by
   -- The kernel transform depends functorially on the kernel. Tensoring is first mapped over
@@ -186,7 +195,10 @@ Class: torsion; decided by inversion
 `[Finite Λ] [HasInvertibleExponent Λ S]`.
 (sketch blueprint: `sk-thm-inversion`) -/
 theorem nonempty_iso_affineFourierTransform_comp_self [Finite Λ] [HasInvertibleExponent Λ S]
-    [HasTateTwist Λ] (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
+    [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
+    [HasCompactification (pullback.tripleProj₁₃ (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S) ≫
+      pullback.snd (𝔸(n; S) ↘ S) (𝔸(n; S) ↘ S))]
+    (Ψ : AddChar (ZMod p) Λ) (hΨ : IsUnit (Ψ 1 - 1)) :
     Nonempty (affineFourierTransform Λ n S Ψ ⋙ affineFourierTransform Λ n S Ψ ≅
         D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙
           tateTwist Λ (𝔸(n; S)) (-(Fintype.card n : ℤ))) := by

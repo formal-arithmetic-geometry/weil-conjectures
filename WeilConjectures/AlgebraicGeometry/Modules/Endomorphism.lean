@@ -132,17 +132,6 @@ section Functoriality
 
 variable {Y : Scheme.{u}} (g : X ⟶ Y)
 
-/-- Pushing forward multiplication by the pullback `g^♯ c` of a global function is
-multiplication by `c`. -/
-lemma pushforward_map_smulHom (N : X.Modules) (c : Γ(Y, ⊤)) :
-    (pushforward g).map (N.smulHom (g.appTop c)) = ((pushforward g).obj N).smulHom c := by
-  ext U x
-  rw [pushforward_map_app, smulHom_app_apply]
-  refine (smulHom_app_apply N (g.appTop c) (g ⁻¹ᵁ U) x).trans ?_
-  have h := ConcreteCategory.congr_hom (g.naturality (homOfLE (le_top (a := U))).op) c
-  rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at h
-  exact congrArg (fun r : Γ(X, g ⁻¹ᵁ U) ↦ r • (show Γ(N, g ⁻¹ᵁ U) from x)) h.symm
-
 /-- **Pullback of multiplication by a global function.** The pullback along `g` of
 multiplication by `c` is multiplication by `g^♯ c`. -/
 lemma pullback_map_smulHom (M : Y.Modules) (c : Γ(Y, ⊤)) :

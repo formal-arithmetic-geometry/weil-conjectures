@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Restrict
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
@@ -168,13 +169,6 @@ def Pic : Type (u + 1) :=
 
 namespace Pic
 
-/-- **The Picard group is small.** Although `Y.Pic` lives in `Type (u + 1)`, it is `u`-small: an
-invertible module is determined up to isomorphism by an open cover of `Y` on which it is trivial
-together with the transition functions, units of `Γ(U_i ∩ U_j, 𝒪_Y)`, and these data range over
-a `u`-small set. -/
-theorem small (Y : Scheme.{u}) : Small.{u} Y.Pic :=
-  sorry
-
 /-- The isomorphism class in `Skeleton Y.Modules` underlying an element of `Y.Pic`. -/
 def val (L : Y.Pic) : Skeleton Y.Modules :=
   Subtype.val L
@@ -207,6 +201,44 @@ lemma eq_iff_nonempty_iso {L L' : Y.Pic} :
       Nonempty ((fromSkeleton Y.Modules).obj L.val ≅ (fromSkeleton Y.Modules).obj L'.val) := by
   rw [Pic.ext_iff, ← toSkeleton_eq_toSkeleton_iff, toSkeleton_fromSkeleton_obj,
     toSkeleton_fromSkeleton_obj]
+
+/-- **The Picard group is small.** Although `Y.Pic` lives in `Type (u + 1)`, it is `u`-small.
+
+Let `P` be the product, over all opens `U` of `Y`, of the pushforwards `U.ι_* 𝒪_U`. An invertible
+module `M` embeds into `P`: on each open `U` over which `M` is trivial, `M` maps to
+`U.ι_* (M|_U) ≅ U.ι_* 𝒪_U`, and since these opens cover `Y` the resulting map is a monomorphism
+(`Scheme.Modules.hom_ext_of_restrictAdjunction_unit`). So the isomorphism class of `M` is
+determined by a subobject of `P`, and `Y.Modules` is well-powered, being Grothendieck abelian. -/
+theorem small (Y : Scheme.{u}) : Small.{u} Y.Pic := by
+  classical
+  have : IsGrothendieckAbelian.{u} Y.Modules := SheafOfModules.isGrothendieckAbelian Y.ringCatSheaf
+  let P : Y.Modules := ∏ᶜ fun U : Y.Opens ↦
+    (Modules.pushforward U.ι).obj (SheafOfModules.unit U.toScheme.ringCatSheaf)
+  let φ (M : Y.Modules) : M ⟶ P := Pi.lift fun U ↦
+    if h : Nonempty (M.restrict U.ι ≅ SheafOfModules.unit U.toScheme.ringCatSheaf) then
+      (Modules.restrictAdjunction U.ι).unit.app M ≫ ((Modules.pushforward U.ι).mapIso h.some).hom
+    else 0
+  have hφ (M : Y.Modules) [M.IsInvertible] : Mono (φ M) := by
+    refine ⟨fun g₁ g₂ hg ↦ Modules.hom_ext_of_restrictAdjunction_unit
+      (fun U : {U : Y.Opens //
+        Nonempty (M.restrict U.ι ≅ SheafOfModules.unit U.toScheme.ringCatSheaf)} ↦ U.1)
+      (fun x ↦ ?_) fun U ↦ ?_⟩
+    · obtain ⟨V, hx, ⟨e⟩⟩ := Modules.exists_mem_over_iso_unit M x
+      exact ⟨⟨V, ⟨(Modules.restrictFunctorIsoPullback V.ι).app M ≪≫
+        Modules.pullbackIotaUnitIsoOfOverIso e⟩⟩, hx⟩
+    · have h := hg =≫ Pi.π _ U.1
+      simp only [Category.assoc, Pi.lift_π, φ, dif_pos U.2] at h
+      rw [← Category.assoc, ← Category.assoc] at h
+      exact (cancel_mono _).mp h
+  let f (L : Y.Pic) : Subobject P :=
+    @Subobject.mk _ _ _ _ (φ ((fromSkeleton Y.Modules).obj L.val)) (@hφ _ L.isInvertible)
+  refine small_of_injective (f := f) fun L L' h ↦ ?_
+  rw [eq_iff_nonempty_iso]
+  have := L.isInvertible
+  have := L'.isInvertible
+  have := hφ ((fromSkeleton Y.Modules).obj L.val)
+  have := hφ ((fromSkeleton Y.Modules).obj L'.val)
+  exact ⟨Subobject.isoOfMkEqMk _ _ h⟩
 
 /-- Pulling back invertible sheaves of modules along `g : X ⟶ Y` gives the map
 `Pic Y → Pic X` underlying the functoriality of the Picard presheaf. -/

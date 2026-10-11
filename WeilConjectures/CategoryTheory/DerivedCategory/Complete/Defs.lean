@@ -6,12 +6,14 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
@@ -31,8 +33,8 @@ This file defines what it means for an object `K` of the derived category
   D(J, R) := DerivedCategory (Sheaf J (ModuleCat R))
 ```
 
-of sheaves of `R`-modules on `(C, J)` to be *derived complete*: that `K` is the limit of
-its reductions `K ⊗ᴸ R/Iⁿ`.
+of sheaves of `R`-modules on `(C, J)` to be *derived complete*: that `K` is the homotopy
+limit `R lim` of its reductions `K ⊗ᴸ R/Iⁿ` (Stacks, Tags 091N and 091Z).
 
 The tower of reductions and the maps into it are built as a chain of cones, each the image
 of the previous one under a functor:
@@ -48,25 +50,27 @@ of the previous one under a functor:
 * `DerivedCategory.quotPowCone J I`, the image of the previous cone under
   `DerivedCategory.singleFunctor _ 0` — a cone over the tower
   `DerivedCategory.quotPowFunctor J I` — whose point is moved to the monoidal unit
-  `𝟙_ D(J, R)` along `DerivedCategory.εSingleFunctorZero : 𝟙_ D(J, R) ⟶ (R in degree 0)`;
+  `𝟙_ D(J, R)` along `DerivedCategory.εSingleFunctorZero : 𝟙_ D(J, R) ⟶ (R in degree 0)`
+  (the unit comparison of `DerivedCategory.sheafTensorStructure`);
 * `DerivedCategory.derivedCompletionCone J I K`, the image of the previous cone under
   `K ⊗ᴸ -` — a cone over the tower `DerivedCategory.derivedCompletionDiagram J I K` —
   whose point is moved to `K` itself along the inverse right unitor
   `K ≅ K ⊗ᴸ 𝟙_ D(J, R)`. Its legs are therefore the reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ`, and
   its point is `K`.
 
-The object `K` is *derived complete* when this last cone is a limit cone, i.e. when the
-canonical map
+The object `K` is *derived complete* when this last cone is a homotopy limit
+(`CategoryTheory.Pretriangulated.IsHomotopyLimit`), i.e. when its legs induce an isomorphism
 
 ```
-  K ⟶ R lim_n (K ⊗ᴸ R/Iⁿ)
+  K ≅ R lim_n (K ⊗ᴸ R/Iⁿ)
 ```
 
-is an isomorphism. Asking that the cone be a limit cone, rather than that a map into a
-chosen limit be invertible, means the definition does not have to assume that the limit
-exists; `DerivedCategory.derivedComplete_iff_isIso_lift` gives the isomorphism statement
-whenever it does. Derived completeness of `K` does not presuppose completeness of `R`, and
-the definition does not assume `IsAdicComplete I R`.
+onto the homotopy limit of the tower: the triangle
+`K ⟶ ∏ₙ K ⊗ᴸ R/Iⁿ ──1 - t──▶ ∏ₙ K ⊗ᴸ R/Iⁿ ⟶ K⟦1⟧` is distinguished (the Milnor triangle,
+Stacks, Tag 08TB). The homotopy limit is not the categorical limit of the tower, which need
+not exist in a triangulated category and, when it exists, is not the derived limit.
+Derived completeness of `K` does not presuppose completeness of `R`, and the definition does
+not assume `IsAdicComplete I R`.
 
 ## Main definitions
 
@@ -75,6 +79,9 @@ the definition does not assume `IsAdicComplete I R`.
 - `CategoryTheory.Sheaf.quotPowFunctor` and `CategoryTheory.Sheaf.quotPowCone` : the same
   tower and cone in the category of sheaves of `R`-modules, through the constant sheaf
   functor.
+- `DerivedCategory.TensorStructure` and `DerivedCategory.sheafTensorStructure` : the derived
+  tensor product of `D(J, R)` with its additivity, linearity, compatibility with shifts and
+  triangulatedness in each variable, bundled once (see the implementation notes).
 - `DerivedCategory.quotPowFunctor` and `DerivedCategory.quotPowCone` : the tower
   `n ↦ R/Iⁿ` in the derived category and the cone over it out of the monoidal unit.
 - `DerivedCategory.derivedCompletionDiagram` : the tower `n ↦ K ⊗ᴸ R/Iⁿ` of reductions
@@ -86,9 +93,9 @@ the definition does not assume `IsAdicComplete I R`.
 
 - `Ideal.isLimitQuotPowCone` : if `R` is `I`-adically complete then `R` is the limit of the
   tower `n ↦ R ⧸ Iⁿ`.
-- `DerivedCategory.derivedComplete_iff_isIso_lift` : when `R lim_n (K ⊗ᴸ R/Iⁿ)` exists,
-  derived completeness of `K` says exactly that the canonical map
-  `K ⟶ R lim_n (K ⊗ᴸ R/Iⁿ)` is an isomorphism.
+- `DerivedCategory.derivedComplete_iff_exists_iso` : given any homotopy limit
+  `R lim_n (K ⊗ᴸ R/Iⁿ)` of the tower, `K` is derived complete exactly when it is isomorphic
+  to it compatibly with the reduction maps.
 
 ## Implementation notes
 
@@ -127,8 +134,22 @@ its value, whereas the version below, whose type mentions only the constant
 `DerivedCategory.derivedCompletionDiagram` applied to `J`, `I` and `K`, compiles in a few
 seconds. Keeping the monoidal structure of the derived category inside definition *bodies*
 and out of the types stated here is what makes this file check; the `Aux` section above
-does the same for `DerivedCategory.εSingleFunctorZero`. The diagnosis is recorded in
-`report.md` in this directory.
+does the same for `DerivedCategory.εSingleFunctorZero`.
+
+The same mechanism also makes the *bodies* expensive to compare with freshly elaborated
+terms: elaborating a definition abstracts the proofs nested in the monoidal instance, so the
+instance in the body of `derivedCompletionDiagram` is no longer syntactically the one
+elaborated in a later file, and unfolding it there makes the kernel run the same descent.
+For this reason the monoidal structure used here is not the one found by instance search at
+each use, but the field `monoidalCategory` of the constant
+`DerivedCategory.sheafTensorStructure J R`, which bundles once the derived monoidal structure
+together with the instances the proofs about derived completeness need (additivity and
+`R`-linearity in each variable, compatibility with shifts, triangulatedness). Files proving
+results about derived completeness use the fields of this constant as their instances, so
+that every comparison is between applications of the same constant.
+The constant is the specialization of `DerivedCategory.tensorStructure`, which is built for an
+arbitrary category `A`: building the structure directly for sheaves would check its fields
+against types containing the concrete monoidal instance, with the same cost.
 
 -/
 
@@ -233,8 +254,74 @@ noncomputable def DerivedCategory.εSingleFunctorZero :
 
 end Aux
 
+/-- The structure of the derived category `D(A)` of a monoidal abelian category `A` used to
+state derived completeness: a monoidal structure on `D(A)` which is additive and `R`-linear
+in each variable, which commutes with the shifts in both variables
+(`Functor.CommShift₂Int`, with the usual sign) and is triangulated in each variable, together
+with an isomorphism `ε` from its unit to the unit of `A` placed in degree `0`.
+
+Bundling these instances is an implementation device; see the implementation notes. The
+structure for sheaves of modules is `DerivedCategory.sheafTensorStructure`, made of the
+derived tensor product and of `DerivedCategory.εSingleFunctorZero`. -/
+structure DerivedCategory.TensorStructure (A : Type u') [Category.{v'} A] [Abelian A]
+    [HasDerivedCategory.{w} A] [MonoidalCategory A] (R : Type*) [Ring R] [Linear R A] where
+  /-- The monoidal structure of `D(A)`. -/
+  [monoidalCategory : MonoidalCategory (DerivedCategory A)]
+  /-- The tensor product of `D(A)` is additive in each variable. -/
+  [monoidalPreadditive : MonoidalPreadditive (DerivedCategory A)]
+  /-- The tensor product of `D(A)` is `R`-linear in each variable. -/
+  [monoidalLinear : MonoidalLinear R (DerivedCategory A)]
+  /-- The tensor product of `D(A)` commutes with the shifts in both variables. -/
+  [commShift₂ : (curriedTensor (DerivedCategory A)).CommShift₂Int]
+  /-- The functors `K ⊗ -` are triangulated. -/
+  [isTriangulated_tensorLeft (K : DerivedCategory A) :
+    ((curriedTensor (DerivedCategory A)).obj K).IsTriangulated]
+  /-- The functors `- ⊗ K` are triangulated. -/
+  [isTriangulated_tensorRight (K : DerivedCategory A) :
+    ((curriedTensor (DerivedCategory A)).flip.obj K).IsTriangulated]
+  /-- The comparison from the unit of `D(A)` to the unit of `A` placed in degree `0`. -/
+  ε : 𝟙_ (DerivedCategory A) ⟶ (DerivedCategory.singleFunctor A 0).obj (𝟙_ A)
+  [isIso_ε : IsIso ε]
+
+section TensorStructure
+
+variable (A : Type u') [Category.{v'} A] [Abelian A] [IsGrothendieckAbelian.{v'} A]
+  [HasDerivedCategory.{v'} A] [MonoidalCategory A] [MonoidalClosed A] [MonoidalPreadditive A]
+  [BraidedCategory A] [Abelian.HasFunctorialFlatResolution A]
+  (R : Type*) [Ring R] [Linear R A] [MonoidalLinear R A]
+
+local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+
+/-- The derived tensor product of a monoidal closed braided Grothendieck abelian category `A`
+with functorial flat resolutions, as a `DerivedCategory.TensorStructure`: the monoidal
+structure of `DerivedCategory A`, its additivity and linearity
+(`DerivedCategory.monoidalPreadditive`, `DerivedCategory.monoidalLinear`), its commutation
+with shifts (`DerivedCategory.commShift₂CurriedTensor`) and triangulatedness
+(`DerivedCategory.isTriangulated_tensorLeft` and `…Right`), and the unit comparison
+`DerivedCategory.εSingleFunctorZero`. -/
+noncomputable def DerivedCategory.tensorStructure : DerivedCategory.TensorStructure.{v'} A R where
+  ε := DerivedCategory.εSingleFunctorZero.{v'} A
+  isIso_ε := by
+    have : IsIso (Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := A))) :=
+      inferInstanceAs (IsIso (Functor.LaxMonoidal.ε (toDerivedMonoidal DerivedCategory.Qh
+        (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)))))
+    change IsIso ((Functor.LaxMonoidal.ε DerivedCategory.Qh ≫ DerivedCategory.Qh.map
+      (Functor.LaxMonoidal.ε (HomotopyCategory.quotient A (ComplexShape.up ℤ)))) ≫
+        (DerivedCategory.quotientCompQhIso A).hom.app _)
+    infer_instance
+
+end TensorStructure
+
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (J : GrothendieckTopology C) {R : Type (u + 1)} [CommRing R] (I : Ideal R)
+
+variable (R) in
+/-- The derived tensor product of `D(J, R) = DerivedCategory (Sheaf J (ModuleCat R))`, as a
+`DerivedCategory.TensorStructure`: the instance of `DerivedCategory.tensorStructure` for the
+category of sheaves of `R`-modules. -/
+noncomputable def DerivedCategory.sheafTensorStructure :
+    DerivedCategory.TensorStructure (Sheaf J (ModuleCat.{u + 1} R)) R :=
+  DerivedCategory.tensorStructure _ R
 
 /-- The tower `n ↦ R/Iⁿ` of constant sheaves of `R`-modules on a site, the image of the
 tower `Ideal.quotPowFunctor` under the constant sheaf functor. -/
@@ -263,13 +350,15 @@ noncomputable def DerivedCategory.quotPowFunctor :
 /-- The tower `n ↦ R/Iⁿ` in the derived category together with the maps out of the monoidal
 unit `𝟙_ D(J, R)`: the cone `Sheaf.quotPowCone` pushed into the derived category by
 `DerivedCategory.singleFunctor _ 0`, its point moved from `R` in degree `0` to `𝟙_ D(J, R)`
-along `DerivedCategory.εSingleFunctorZero`. -/
+along the unit comparison `ε` of `DerivedCategory.sheafTensorStructure`, which is
+`DerivedCategory.εSingleFunctorZero`. -/
 noncomputable def DerivedCategory.quotPowCone : Cone (DerivedCategory.quotPowFunctor J I) :=
   ((DerivedCategory.singleFunctor _ 0).mapCone (Sheaf.quotPowCone J I)).extend
-    (DerivedCategory.εSingleFunctorZero _)
+    (DerivedCategory.sheafTensorStructure J R).ε
 
 @[simp]
 lemma DerivedCategory.quotPowCone_pt :
+    letI := (DerivedCategory.sheafTensorStructure J R).monoidalCategory
     (DerivedCategory.quotPowCone J I).pt = 𝟙_ (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   rfl
 
@@ -279,14 +368,11 @@ image of `DerivedCategory.quotPowFunctor` under `K ⊗ᴸ -`.
 This is a definition of its own, rather than `DerivedCategory.quotPowFunctor J I ⋙
 tensorLeft K` spelled out at each use site, so that the monoidal structure of the derived
 category stays out of the *types* of the declarations below; see the implementation notes.
-For the same reason there is deliberately no unfolding lemma
-`derivedCompletionDiagram J I K = quotPowFunctor J I ⋙ tensorLeft K`: its statement puts
-the monoidal structure back into a type, and proving it by `rfl` costs exactly what the
-definition is there to avoid. Downstream statements should be phrased in terms of the
-diagram. -/
+Downstream statements should be phrased in terms of the diagram. -/
 noncomputable def DerivedCategory.derivedCompletionDiagram
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     ℕᵒᵖ ⥤ DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
+  letI := (DerivedCategory.sheafTensorStructure J R).monoidalCategory
   DerivedCategory.quotPowFunctor J I ⋙ tensorLeft K
 
 /-- The reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ`, as a cone over the tower
@@ -296,6 +382,7 @@ noncomputable def DerivedCategory.derivedCompletionDiagram
 noncomputable def DerivedCategory.derivedCompletionCone
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     Cone (DerivedCategory.derivedCompletionDiagram J I K) :=
+  letI := (DerivedCategory.sheafTensorStructure J R).monoidalCategory
   ((tensorLeft K).mapCone (DerivedCategory.quotPowCone J I)).extend (ρ_ K).inv
 
 @[simp]
@@ -304,36 +391,51 @@ lemma DerivedCategory.derivedCompletionCone_pt
     (DerivedCategory.derivedCompletionCone J I K).pt = K := rfl
 
 /-- An object `K` of the derived category of sheaves of `R`-modules on `(C, J)` is *derived
-complete* with respect to the ideal `I` if the cone `K ⟶ K ⊗ᴸ R/Iⁿ` of
-`DerivedCategory.derivedCompletionCone`, whose point is `K`, is a limit cone: `K` is the
-limit of its reductions modulo the powers of `I`. Equivalently, when that limit exists,
+complete* with respect to the ideal `I` if the reduction maps `K ⟶ K ⊗ᴸ R/Iⁿ` of
+`DerivedCategory.derivedCompletionCone` exhibit `K` as the homotopy limit of the tower of
+reductions:
 
 ```
-  K ⟶ R lim_n (K ⊗ᴸ R/Iⁿ)
+  K ≅ R lim_n (K ⊗ᴸ R/Iⁿ)
 ```
 
-is an isomorphism (`DerivedCategory.derivedComplete_iff_isIso_lift`). The intended setting
-is that `R` is `I`-adically complete, which by `Ideal.isLimitQuotPowCone` says that `R` is
-itself the limit of the tower `n ↦ R/Iⁿ`; the definition does not need that hypothesis. -/
-noncomputable def DerivedCategory.derivedComplete :
+(Stacks, Tags 091N and 091Z). Here `R lim` is the homotopy limit of
+`CategoryTheory.Pretriangulated.IsHomotopyLimit`: the condition is that, for a product
+`∏ₙ K ⊗ᴸ R/Iⁿ` with transition endomorphism `t`, the triangle
+
+```
+  K ⟶ ∏ₙ K ⊗ᴸ R/Iⁿ ──1 - t──▶ ∏ₙ K ⊗ᴸ R/Iⁿ ⟶ K⟦1⟧
+```
+
+whose first map is induced by the reduction maps is distinguished (the Milnor triangle,
+Stacks, Tag 08TB). This is not the categorical limit of the tower in the derived category,
+which in general does not exist. The intended setting is that `R` is `I`-adically complete,
+which by `Ideal.isLimitQuotPowCone` says that `R` is itself the limit of the tower
+`n ↦ R/Iⁿ`; the definition does not need that hypothesis. For a principal ideal generated by
+a nonzerodivisor, derived completeness is characterised by the vanishing of maps from objects
+on which the generator acts invertibly, see
+`DerivedCategory.derivedComplete_iff_rightOrthogonal`. -/
+def DerivedCategory.derivedComplete :
     ObjectProperty (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
-  fun K ↦ Nonempty (IsLimit (DerivedCategory.derivedCompletionCone J I K))
+  fun K ↦ Pretriangulated.IsHomotopyLimit (DerivedCategory.derivedCompletionCone J I K)
 
 namespace DerivedCategory
 
 variable {J I}
 
 lemma derivedComplete_iff (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
-    derivedComplete J I K ↔ Nonempty (IsLimit (derivedCompletionCone J I K)) := Iff.rfl
+    derivedComplete J I K ↔ Pretriangulated.IsHomotopyLimit (derivedCompletionCone J I K) :=
+  Iff.rfl
 
-/-- If the limit `R lim_n (K ⊗ᴸ R/Iⁿ)` exists, then `K` is derived complete precisely when
-the canonical map `K ⟶ R lim_n (K ⊗ᴸ R/Iⁿ)` is an isomorphism. -/
-lemma derivedComplete_iff_isIso_lift (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))
-    [HasLimit (derivedCompletionDiagram J I K)] :
-    derivedComplete J I K ↔
-      IsIso (limit.lift (derivedCompletionDiagram J I K)
-        (derivedCompletionCone J I K)) :=
-  (limit.isLimit (derivedCompletionDiagram J I K)).nonempty_isLimit_iff_isIso_lift
+/-- Given a homotopy limit `c` of the tower of reductions `K ⊗ᴸ R/Iⁿ`, the object `K` is
+derived complete if and only if it is isomorphic to `c.pt = R lim_n (K ⊗ᴸ R/Iⁿ)` compatibly
+with the maps to the reductions. -/
+lemma derivedComplete_iff_exists_iso (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))
+    {c : Cone (derivedCompletionDiagram J I K)} (hc : Pretriangulated.IsHomotopyLimit c) :
+    derivedComplete J I K ↔ ∃ e : K ≅ c.pt,
+      ∀ n : ℕ, e.hom ≫ c.π.app (op n) = (derivedCompletionCone J I K).π.app (op n) :=
+  ⟨fun h ↦ h.exists_iso hc, fun ⟨e, he⟩ ↦ hc.of_iso (Iso.refl _) _ e.symm fun n ↦ by
+    simp [← he]⟩
 
 end DerivedCategory
 

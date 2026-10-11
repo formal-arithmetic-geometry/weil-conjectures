@@ -49,10 +49,11 @@ comparison. This does not give clause (1), which quantifies over all pro-étale 
 
 The data are `structure`s, not `class`es: they are meant to be named and passed explicitly.
 
-Clauses (2) and (3) are stated for *every* right adjoint `G` of `Rf_!`, rather than for
-`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`, which needs `Rf_!` to be a left adjoint as
-an instance. Both predicates are closed under isomorphism, so this is no stronger than stating
-them for one right adjoint.
+Clauses (2) and (3) are stated for *every* right adjoint `G` of `Rf_!`: the ambient right
+adjoint `Rf^×` is not defined in this repository, since it does not exist in general. It is not
+`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`, which is the constructible `Rf^!` of
+`sk-def-sf-operations` (vi). Both predicates are closed under isomorphism, so this is no
+stronger than stating them for one right adjoint.
 
 The blueprint's "compatibly with refinements" clause of `sk-def-sf-admissible` is not among
 the fields: the repository has no refinement relation between compactifications to state it
@@ -65,8 +66,8 @@ The constructible intervals and `Dctf` are those of
 The purity chapter itself is stated on the small *étale* site, with
 `AlgebraicGeometry.Etale.rightDerivedUpperShriek`, while the data here are about the pro-étale
 `Rf^!`. The bridge between the two is the comparison of
-`WeilConjectures.SixFunctors.ProEtale.Comparison`; that `ν^*` intertwines the two exceptional
-inverse images is not stated anywhere yet, and is a TODO of the block.
+`WeilConjectures.SixFunctors.ProEtale.Comparison`: the pro-étale constructible `Rf^!` is by
+definition `ν_X^* ∘ f^× ∘ Rν_{Y,*}` (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`).
 
 ## Main definitions
 

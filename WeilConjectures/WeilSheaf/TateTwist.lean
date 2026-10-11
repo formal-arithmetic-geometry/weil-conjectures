@@ -159,6 +159,7 @@ namespace WeilComplex
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 variable (k₀ l X) in
 /-- The Tate twist `K ↦ K(m) = K ⊗^L ℚ̄_ℓ(m)` of Weil complexes on a `k₀`-scheme `X`, the derived
@@ -168,6 +169,15 @@ noncomputable def tateTwist (m : ℤ) : WeilComplex k₀ l X ⥤ WeilComplex k�
   tensorLisse (WeilSheaf.tateTwistSheaf k₀ l X m) (WeilSheaf.isLisse_tateTwistSheaf k₀ l X m)
 
 instance (m : ℤ) : (tateTwist k₀ l X m).Additive := by
+  unfold tateTwist
+  infer_instance
+
+noncomputable instance (m : ℤ) : (tateTwist k₀ l X m).CommShift ℤ := by
+  unfold tateTwist
+  infer_instance
+
+/-- The Tate twist of Weil complexes is a triangulated functor. -/
+instance (m : ℤ) : (tateTwist k₀ l X m).IsTriangulated := by
   unfold tateTwist
   infer_instance
 

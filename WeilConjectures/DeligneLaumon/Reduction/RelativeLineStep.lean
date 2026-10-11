@@ -76,10 +76,12 @@ X --- v ---> 𝔸¹_V --- ↘ ---> V --- c ---> S
 (blueprint: `thm-zl-relative-line-stratification`, the finite stratifications of source and target
 refined to open–closed filtrations). -/
 inductive WeilSheaf.HasRelativeLineStratification :
-    ∀ {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] (h : X ⟶ S)
+    ∀ {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+      [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (h : X ⟶ S)
       [h.IsOver (Spec (CommRingCat.of k₀))], WeilSheaf k₀ l X → Prop
   /-- A separated quasi-finite piece. -/
-  | quasiFinite {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] (h : X ⟶ S)
+  | quasiFinite {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+      [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (h : X ⟶ S)
       [h.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated h] [LocallyQuasiFinite h]
       [LocallyOfFiniteType h] [QuasiCompact h] (F : WeilSheaf k₀ l X)
       (hF : F.IsMixedOfWeightsAtMost ι w) :
@@ -87,6 +89,7 @@ inductive WeilSheaf.HasRelativeLineStratification :
   /-- A piece open in a relative affine line, carrying a lisse sheaf punctually pure of
   weight `w`. -/
   | affineLine {X V : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+      [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
       [V.Over (Spec (CommRingCat.of k₀))] [IsSeparated (V ↘ Spec (CommRingCat.of k₀))]
       [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
       [QuasiCompact (V ↘ Spec (CommRingCat.of k₀))] (v : X ⟶ 𝔸(PUnit.{u + 1}; V))
@@ -97,8 +100,11 @@ inductive WeilSheaf.HasRelativeLineStratification :
       (F : WeilSheaf k₀ l X) (hF : F.IsLisse) (hpure : F.IsPunctuallyPureOfWeight ι w) :
       WeilSheaf.HasRelativeLineStratification h F
   /-- Gluing along an open immersion `j` and its closed complement `i`. -/
-  | openClosed {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-      [X.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ X)
+  | openClosed {U X Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType
+  (U ↘ Spec (CommRingCat.of k₀))]
+      [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+      [Z.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+      (j : U ⟶ X)
       [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] (i : Z ⟶ X)
       [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
       (hij : IsCompl (Set.range j.base) (Set.range i.base)) (h : X ⟶ S)
@@ -118,7 +124,8 @@ composed with the quasi-finite immersion `c`, and through the gluing by the exac
 the open–closed triangles (blueprint: `thm-zl-relative-line-step`, the reassembly of the
 strata). -/
 theorem WeilSheaf.HasRelativeLineStratification.isMixedOfWeightsAtMost
-    {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] {h : X ⟶ S}
+    {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {h : X ⟶ S}
     [h.IsOver (Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X}
     (H : F.HasRelativeLineStratification ι w h) :
     ∀ [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (r : ℕ),
@@ -144,6 +151,10 @@ variable {S : Scheme.{u}} [S.Over (Spec (CommRingCat.of k₀))]
   [IsSeparated (S ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (S ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (S ↘ Spec (CommRingCat.of k₀))]
+
+instance : LocallyOfFiniteType (𝔸(PUnit.{u + 1}; S) ↘ Spec (CommRingCat.of k₀)) := by
+  rw [← CategoryTheory.comp_over (𝔸(PUnit.{u + 1}; S) ↘ S) (Spec (CommRingCat.of k₀))]
+  infer_instance
 
 /-- Let `S` be a separated `k₀`-scheme of finite type and `F` a Weil sheaf on the relative affine
 line `𝔸¹_S`, punctually `ι`-pure of weight `w`. Then `F` has a relative-line stratification over
@@ -215,6 +226,9 @@ theorem hasDirectImageWeightBound_iteratedAffineLineProj :
   | 0, _, _ =>
     have : LocallyQuasiFinite (iteratedAffineLineProj S 0) :=
       inferInstanceAs (LocallyQuasiFinite (𝟙 S))
+    have : LocallyOfFiniteType (iteratedAffineLine S 0 ↘ Spec (CommRingCat.of k₀)) := by
+      rw [← CategoryTheory.comp_over (iteratedAffineLineProj S 0) (Spec (CommRingCat.of k₀))]
+      infer_instance
     .of_locallyQuasiFinite (iteratedAffineLineProj S 0)
   | r + 1, ⟨hom⟩, h => by
     -- `iteratedAffineLine S (r + 1)` is the affine line over `iteratedAffineLine S r`, with the

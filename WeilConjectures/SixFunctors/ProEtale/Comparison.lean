@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 
 /-!
@@ -25,7 +28,7 @@ are exactly those in the essential image of `ν^*`.
 
 ## Implementation notes
 
-The inclusion `AlgebraicGeometry.Scheme.toProEt` of small sites, the functors `ν^*` and `ν_*`,
+The inclusion `AlgebraicGeometry.toProEt` of small sites, the functors `ν^*` and `ν_*`,
 the adjunction `ν^* ⊣ ν_*` and the exactness of `ν^*` are
 `WeilConjectures.SixFunctors.ProEtale.Comparison.Defs`, sorry-free; this file states the
 remaining clauses of `sk-prop-sf-comparison` on top of them.
@@ -43,6 +46,8 @@ the repository has no constructibility notion on the pro-étale site to be an eq
   `AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`: `ν^*` is fully faithful, with
   invertible unit.
 - `AlgebraicGeometry.ProEtale.nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar`
+  (the comparison commutes with direct images) and
+  `AlgebraicGeometry.ProEtale.comparisonUpperStarUnitIso` (`ν^*` preserves the monoidal unit).
 -/
 
 @[expose] public section
@@ -71,31 +76,6 @@ instance preservesFiniteColimits_comparisonUpperStar (X : Scheme.{u}) :
 
 /-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
 
-*Fullness.* The comparison pullback is full. -/
-instance full_comparisonUpperStar (X : Scheme.{u}) : (comparisonUpperStar A X).Full :=
-  sorry
-
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
-
-*Faithfulness.* The comparison pullback is faithful. -/
-instance faithful_comparisonUpperStar (X : Scheme.{u}) : (comparisonUpperStar A X).Faithful :=
-  sorry
-
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
-
-*Full faithfulness, in the form the chapter uses.* The unit `id ⟶ ν_* ν^*` of the comparison
-adjunction is an isomorphism; this is the assertion `id ≅ Rν_{T*} ν_T^*` of the blueprint, and
-it is strictly stronger than the existence of some isomorphism between the two functors.
-
-Detection of isomorphisms is by covering families and on the affine ind-étale basis, not by
-geometric points: geometric-point stalks are *not* conservative on all pro-étale sheaves, and
-no argument of the purity chapter uses them off the étale-origin objects. -/
-theorem isIso_comparisonAdjunction_unit (X : Scheme.{u}) :
-    IsIso (comparisonAdjunction A X).unit :=
-  sorry
-
-/-- Blueprint `sk-prop-sf-comparison`: The pro-étale comparison
-
 **The comparison direct image.** For `u : U ⟶ V` quasi-compact and quasi-separated the
 comparison commutes with direct images:
 
@@ -115,7 +95,38 @@ theorem nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar {U V : Schem
     (u : U ⟶ V) [QuasiCompact u] [QuasiSeparated u] :
     Nonempty (R+(Etale.lowerStar A u) ⋙ D+(comparisonUpperStar A V) ≅
       D+(comparisonUpperStar A U) ⋙ R+(ProEtale.lowerStar A u)) :=
-  sorry
+  have := isIso_lowerStarComparisonUpperStarBaseChange u A
+  have : IsIso (Functor.rightDerivedFunctorPlusBaseChange
+      (lowerStarComparisonUpperStarBaseChange u A)) :=
+    Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
+      (asIso (lowerStarComparisonUpperStarBaseChange u A))
+      (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective A u I)
+  ⟨asIso (Functor.rightDerivedFunctorPlusBaseChange
+    (lowerStarComparisonUpperStarBaseChange u A))⟩
+
+section Unit
+
+open MonoidalCategory Functor.OplaxMonoidal
+
+variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
+
+/-- The comparison pullback `ν^*` sends the constant sheaf `Λ_X`, the monoidal unit of étale
+sheaves of `Λ`-modules, to the monoidal unit of pro-étale sheaves. This is the comparison map
+`η` of the oplax monoidal pullback of sheaves along the inclusion of sites, which is invertible
+since that inclusion is representably flat
+(`CategoryTheory.Functor.sheafPullbackConstruction.isIso_η_sheafPullback`). -/
+noncomputable def comparisonUpperStarUnitIso :
+    ν^*(X)[ModuleCat.{u + 1} Λ].obj (𝟙_ _) ≅ 𝟙_ _ :=
+  have (K : X.ProEtᵒᵖ) : IsConnected (CostructuredArrow (X.toProEt).op K) :=
+    have : IsFiltered (CostructuredArrow (X.toProEt).op K) :=
+      IsFiltered.of_equivalence (structuredArrowOpEquivalence _ (Opposite.unop K))
+    IsFiltered.isConnected _
+  have := Functor.sheafPullbackConstruction.isIso_η_sheafPullback (X.toProEt)
+    (ModuleCat.{u + 1} Λ) X.smallEtaleTopology (Scheme.ProEt.topology X)
+  asIso (η (Functor.sheafPullbackConstruction.sheafPullback (X.toProEt) (ModuleCat.{u + 1} Λ)
+    X.smallEtaleTopology (Scheme.ProEt.topology X)))
+
+end Unit
 
 end ProEtale
 

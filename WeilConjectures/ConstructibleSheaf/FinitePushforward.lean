@@ -15,10 +15,10 @@ public import WeilConjectures.SixFunctors.Finite.BaseChange
 # Constructible sheaves embed into finite pushforwards of constant sheaves
 
 Let `U` be a quasi-compact and quasi-separated scheme and `C` a constructible sheaf of
-`Λ`-modules on the small étale site of `U`. Then `C` embeds into a finite direct sum
-`⨁ᵢ (hᵢ)_* Mᵢ` of pushforwards of constant sheaves with finite values `Mᵢ` along finite and
-finitely presented morphisms `hᵢ : Vᵢ ⟶ U` [Stacks 09Z7]. This is the input to Gabber's
-effacement argument (`WeilConjectures.SixFunctors.Etale.Gabber`).
+`Λ`-modules on the small étale site of `U`, for a noetherian ring `Λ`. Then `C` embeds into a
+finite direct sum `⨁ᵢ (hᵢ)_* Mᵢ` of pushforwards of constant sheaves with finitely generated
+values `Mᵢ` along finite and finitely presented morphisms `hᵢ : Vᵢ ⟶ U` [Stacks 09Z7]. This is
+the input to Gabber's effacement argument (`WeilConjectures.SixFunctors.Etale.Gabber`).
 
 The proof goes through Noetherian approximation: the case of a Noetherian base [Stacks 09Z6]
 uses that constructible sheaves are finitely presented objects of the category of sheaves
@@ -99,14 +99,15 @@ theorem Etale.isFinitelyPresentable_of_isConstructibleSheaf [IsNoetherianRing Λ
 
 /-- **The finite-pushforward embedding over a Noetherian base.** A constructible sheaf of
 `Λ`-modules `C` on a Noetherian scheme `U` admits a monomorphism
-`C ⟶ ⨁ᵢ (hᵢ)_* Mᵢ` into a finite direct sum of pushforwards of constant sheaves with finite
-values `Mᵢ` along finite morphisms `hᵢ : Vᵢ ⟶ U`.
+`C ⟶ ⨁ᵢ (hᵢ)_* Mᵢ` into a finite direct sum of pushforwards of constant sheaves with finitely
+generated values `Mᵢ` along finite morphisms `hᵢ : Vᵢ ⟶ U`, for `Λ` noetherian.
 (blueprint: `lem-weil-pbc-constructible-finite-pushforward-noetherian`) -/
 @[stacks 09Z6]
-theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian {U : Scheme.{u}} [IsNoetherian U]
+theorem Etale.exists_mono_biproduct_lowerStar_of_isNoetherian [IsNoetherianRing Λ]
+    {U : Scheme.{u}} [IsNoetherian U]
     (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf C] :
     ∃ (r : ℕ) (V : Fin r → Scheme.{u}) (h : ∀ i, V i ⟶ U) (_ : ∀ i, IsFinite (h i))
-      (M : Fin r → ModuleCat.{u + 1} Λ) (_ : ∀ i, Finite (M i))
+      (M : Fin r → ModuleCat.{u + 1} Λ) (_ : ∀ i, Module.Finite Λ (M i))
       (φ : C ⟶ ⨁ fun i ↦ ((h i)_*[ModuleCat.{u + 1} Λ]).obj
         ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ :=
   sorry
@@ -116,12 +117,14 @@ section Auxiliary
 /-! ### Auxiliary lemmas -/
 
 /-- **Descent of a constructible sheaf to a Noetherian scheme.** A constructible sheaf of
-`Λ`-modules on a quasi-compact quasi-separated scheme `U` is the pullback of a constructible
-sheaf on a Noetherian scheme `U'` along some morphism `U ⟶ U'`: write `U` as a cofiltered
-limit of schemes of finite type over `ℤ` with affine transition maps [Stacks 01ZA] and
+`Λ`-modules on a quasi-compact quasi-separated scheme `U`, for `Λ` noetherian, is the pullback
+of a constructible sheaf on a Noetherian scheme `U'` along some morphism `U ⟶ U'`: its strata
+are constructible and its finitely generated stalks finitely presented, so write `U` as a
+cofiltered limit of schemes of finite type over `ℤ` with affine transition maps [Stacks 01ZA] and
 descend the finitely many étale objects, sections and relations presenting `C` to one stage.
 This is Step 2 of `lem-weil-pbc-constructible-finite-pushforward-approximation`. -/
-theorem Etale.exists_isNoetherian_upperStar_iso {U : Scheme.{u}} [CompactSpace U]
+theorem Etale.exists_isNoetherian_upperStar_iso [IsNoetherianRing Λ] {U : Scheme.{u}}
+    [CompactSpace U]
     [QuasiSeparatedSpace U] (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsConstructibleSheaf C] :
     ∃ (U' : Scheme.{u}) (ν : U ⟶ U') (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
@@ -159,21 +162,22 @@ end Auxiliary
 of `Λ`-modules `C` on a quasi-compact quasi-separated scheme `U` is the pullback
 `ν^* C' ≅ C` of a constructible sheaf `C'` on a Noetherian scheme `U'` along a morphism
 `ν : U ⟶ U'`, and `C'` admits a monomorphism into a finite direct sum of pushforwards of
-constant sheaves with finite values along finite, finitely presented morphisms.
+constant sheaves with finitely generated values along finite, finitely presented morphisms.
 
 The blueprint takes `U'` to be a stage `U_λ` of an inverse system `U = lim U_λ` of Noetherian
 schemes with affine transition maps; only the stage is used afterwards, so the inverse system
 is not recorded. That the pullback of the embedding is an embedding of `C` is
 `AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar`.
 (blueprint: `lem-weil-pbc-constructible-finite-pushforward-approximation`) -/
-theorem Etale.exists_isNoetherian_mono_biproduct_lowerStar {U : Scheme.{u}} [CompactSpace U]
+theorem Etale.exists_isNoetherian_mono_biproduct_lowerStar [IsNoetherianRing Λ] {U : Scheme.{u}}
+    [CompactSpace U]
     [QuasiSeparatedSpace U] (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsConstructibleSheaf C] :
     ∃ (U' : Scheme.{u}) (ν : U ⟶ U') (C' : Sheaf U'.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       IsNoetherian U' ∧ IsConstructibleSheaf C' ∧ Nonempty (((ν)^*[_]).obj C' ≅ C) ∧
       ∃ (r : ℕ) (V : Fin r → Scheme.{u}) (h : ∀ i, V i ⟶ U') (_ : ∀ i, IsFinite (h i))
         (_ : ∀ i, LocallyOfFinitePresentation (h i))
-        (M : Fin r → ModuleCat.{u + 1} Λ) (_ : ∀ i, Finite (M i))
+        (M : Fin r → ModuleCat.{u + 1} Λ) (_ : ∀ i, Module.Finite Λ (M i))
         (φ : C' ⟶ ⨁ fun i ↦ ((h i)_*[ModuleCat.{u + 1} Λ]).obj
           ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ := by
   obtain ⟨U', ν, C', hU', hC', e⟩ := Etale.exists_isNoetherian_upperStar_iso Λ C
@@ -182,17 +186,19 @@ theorem Etale.exists_isNoetherian_mono_biproduct_lowerStar {U : Scheme.{u}} [Com
 
 /-- **Constructible sheaves embed into finite pushforwards.** A constructible sheaf of
 `Λ`-modules `C` on a quasi-compact quasi-separated scheme `U` admits a monomorphism
-`C ⟶ ⨁ᵢ (hᵢ)_* Mᵢ` into a finite direct sum of pushforwards of constant sheaves with finite
-values `Mᵢ` along finite and finitely presented morphisms `hᵢ : Vᵢ ⟶ U`. The torsion
-hypothesis of the blueprint is automatic: constructible sheaves have finite stalks.
+`C ⟶ ⨁ᵢ (hᵢ)_* Mᵢ` into a finite direct sum of pushforwards of constant sheaves with finitely
+generated values `Mᵢ` along finite and finitely presented morphisms `hᵢ : Vᵢ ⟶ U`, for `Λ`
+noetherian. The blueprint states this for torsion sheaves, over a finite ring `Λ`, where the
+`Mᵢ` are finite.
 (blueprint: `lemma-weil-pbc-constructible-finite-pushforward`) -/
 @[stacks 09Z7]
-theorem Etale.exists_mono_biproduct_lowerStar {U : Scheme.{u}} [CompactSpace U]
+theorem Etale.exists_mono_biproduct_lowerStar [IsNoetherianRing Λ] {U : Scheme.{u}}
+    [CompactSpace U]
     [QuasiSeparatedSpace U] (C : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsConstructibleSheaf C] :
     ∃ (r : ℕ) (V : Fin r → Scheme.{u}) (h : ∀ i, V i ⟶ U) (_ : ∀ i, IsFinite (h i))
       (_ : ∀ i, LocallyOfFinitePresentation (h i))
-      (M : Fin r → ModuleCat.{u + 1} Λ) (_ : ∀ i, Finite (M i))
+      (M : Fin r → ModuleCat.{u + 1} Λ) (_ : ∀ i, Module.Finite Λ (M i))
       (φ : C ⟶ ⨁ fun i ↦ ((h i)_*[ModuleCat.{u + 1} Λ]).obj
         ((constantSheaf (V i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))), Mono φ := by
   obtain ⟨U', ν, C', -, -, ⟨e⟩, r, V, h, hh, hfp, M, hM, φ, hφ⟩ :=

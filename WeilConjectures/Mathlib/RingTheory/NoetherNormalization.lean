@@ -37,6 +37,8 @@ extension preserves the Krull dimension, `s` is the dimension of the algebra.
   fibre to a principal open of the base.
 - `ringKrullDim_tensorProduct_eq_of_finite_inj_algHom_mvPolynomial`: the generic fibre of a
   Noether normalization over a domain has the expected dimension.
+- `ringKrullDim_eq_of_isLocalization_away`: localizing a finitely generated domain over a field
+  away from a nonzero element preserves the Krull dimension.
 
 ## Blueprint
 
@@ -363,3 +365,40 @@ theorem Algebra.trdeg_eq_of_ringKrullDim_eq (K B : Type*) [Field K] [CommRing B]
   have h := lift_trdeg_add_eq K (MvPolynomial (Fin n) K) B
   rw [trdeg_eq_zero (R := MvPolynomial (Fin n) K), MvPolynomial.trdeg_of_isDomain] at h
   simpa using h.symm
+
+/-- Localizing a finitely generated domain over a field `K` away from a nonzero element does
+not change its Krull dimension: both dimensions are the transcendence degree over `K` of the
+common fraction field. -/
+theorem ringKrullDim_eq_of_isLocalization_away {K : Type*} {A B : Type u} [Field K] [CommRing A]
+    [IsDomain A] [Algebra K A] [Algebra.FiniteType K A] [CommRing B] [Algebra A B] {a : A}
+    (ha : a ≠ 0) [IsLocalization.Away a B] : ringKrullDim B = ringKrullDim A := by
+  have hM : Submonoid.powers a ≤ nonZeroDivisors A :=
+    powers_le_nonZeroDivisors_of_noZeroDivisors ha
+  have : IsDomain B :=
+    IsLocalization.isDomain_of_le_nonZeroDivisors (M := Submonoid.powers a) (S := B) hM
+  let : Algebra K B := ((algebraMap A B).comp (algebraMap K A)).toAlgebra
+  have : IsScalarTower K A B := .of_algebraMap_eq fun _ ↦ rfl
+  have : Algebra.FiniteType A B :=
+    IsLocalization.finiteType_of_monoid_fg (Submonoid.powers a) B
+  have : Algebra.FiniteType K B := .trans (S := A) inferInstance inferInstance
+  have : FaithfulSMul A B :=
+    (faithfulSMul_iff_algebraMap_injective A B).2 (IsLocalization.injective B hM)
+  have : Algebra.IsAlgebraic A B := IsLocalization.isAlgebraic B (Submonoid.powers a)
+  have key (R : Type u) [CommRing R] [Nontrivial R] [Algebra K R] [Algebra.FiniteType K R] :
+      ∃ n : ℕ, ringKrullDim R = n := by
+    have h1 := ringKrullDim_ne_top_of_finiteType K R
+    have h2 : ringKrullDim R ≠ ⊥ :=
+      ne_bot_of_le_ne_bot WithBot.coe_ne_bot ringKrullDim_nonneg_of_nontrivial
+    induction h : ringKrullDim R using WithBot.recBotCoe with
+    | bot => exact absurd h h2
+    | coe m =>
+      induction m using ENat.recTopCoe with
+      | top => exact absurd h h1
+      | coe m => exact ⟨m, rfl⟩
+  obtain ⟨n, hn⟩ := key A
+  obtain ⟨m, hm⟩ := key B
+  have hA := Algebra.trdeg_eq_of_ringKrullDim_eq K A hn
+  have hB := Algebra.trdeg_eq_of_ringKrullDim_eq K B hm
+  have h := trdeg_add_eq (R := K) (S := A) (A := B)
+  rw [trdeg_eq_zero (R := A) (A := B), add_zero, hA, hB] at h
+  rw [hn, hm, Nat.cast_inj.1 h.symm]

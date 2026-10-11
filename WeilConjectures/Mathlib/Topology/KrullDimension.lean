@@ -37,6 +37,16 @@ and noetherian, there are only finitely many such points.
 - `topologicalKrullDim_le_of_specializingMap`, `topologicalKrullDim_le_of_continuous`: comparison
   of the dimensions of two sober spaces along a specializing surjection, respectively along a
   continuous map that is injective on specializations.
+- `topologicalKrullDim_lt_of_forall_exists_specializes`: a closed subset all of whose points
+  generalize outside it inside a closed `Z` has dimension smaller than `Z`.
+- `IsClosed.finite_setOf_maximal_specializes`, `IsClosed.exists_maximal_specializes`: a closed
+  subset of a noetherian space has finitely many maximal points, which generalize all its points.
+- `exists_specializes_ne_le_topologicalKrullDim_closure`: in a space of dimension at least
+  `d + 1`, a proper specialization of the generic point whose closure has dimension at least `d`.
+- `exists_le_topologicalKrullDim_closure_singleton`: in a space of dimension at least `d`, a
+  point whose closure has dimension at least `d`.
+- `Topology.IsEmbedding.topologicalKrullDim_eq_range`: an embedding preserves dimension onto its
+  range.
 -/
 
 @[expose] public section
@@ -362,3 +372,129 @@ theorem IsOpen.topologicalKrullDimAt_eq {W : Set X} (hW : IsOpen W) {x : X} (hx 
     · exact IsInducing.subtypeVal
 
 end LocalDimension
+
+section Specialization
+
+variable {X : Type*} [TopologicalSpace X] [QuasiSober X] [T0Space X]
+
+/-- Let `W ⊆ Z` be closed subsets of a quasi-sober `T₀` space such that every point of `W` has a
+generalization in `Z \ W`. If `dim Z < d + 1`, then `dim W < d`: a chain of specializations in
+`W` extends in `Z` by such a generalization of its generic end. -/
+theorem topologicalKrullDim_lt_of_forall_exists_specializes {Z W : Set X} (hZ : IsClosed Z)
+    (hW : IsClosed W) (hWZ : W ⊆ Z) (h : ∀ w ∈ W, ∃ z ∈ Z, z ⤳ w ∧ z ∉ W) {d : ℕ}
+    (hd : topologicalKrullDim Z < d + 1) : topologicalKrullDim W < d := by
+  have := hZ.isClosedEmbedding_subtypeVal.quasiSober
+  have := hW.isClosedEmbedding_subtypeVal.quasiSober
+  let := specializationOrder Z
+  let := specializationOrder W
+  rw [topologicalKrullDim_eq_krullDim_specializationOrder] at hd ⊢
+  by_contra! hle
+  obtain ⟨l, hl⟩ := le_krullDim_iff.1 hle
+  obtain ⟨z, hzZ, hzw, hzW⟩ := h _ l.last.2
+  let i : W → Z := fun w ↦ ⟨w, hWZ w.2⟩
+  have hi : StrictMono i := strictMono_of_le_iff_le fun a b ↦
+    (IsInducing.subtypeVal.specializes_iff (x := b) (y := a)).symm.trans
+      (IsInducing.subtypeVal.specializes_iff (x := i b) (y := i a))
+  have hlast : (l.map i hi).last < ⟨z, hzZ⟩ := by
+    rw [LTSeries.last_map]
+    refine lt_of_le_of_ne (IsInducing.subtypeVal.specializes_iff.1 hzw) fun heq ↦ hzW ?_
+    obtain rfl : (l.last : X) = z := congrArg Subtype.val heq
+    exact l.last.2
+  have hlen := LTSeries.length_le_krullDim ((l.map i hi).snoc _ hlast)
+  rw [RelSeries.snoc_length, LTSeries.map_length, hl, Nat.cast_add_one] at hlen
+  exact (hlen.trans_lt hd).false
+
+/-- A closed subset `Z` of a noetherian quasi-sober `T₀` space contains a finite set of points
+of which every point of `Z` is a specialization: the generic points of the finitely many
+irreducible closed subsets covering `Z`. -/
+theorem IsClosed.exists_finite_forall_exists_specializes [NoetherianSpace X] {Z : Set X}
+    (hZ : IsClosed Z) : ∃ G : Set X, G.Finite ∧ G ⊆ Z ∧ ∀ z ∈ Z, ∃ ξ ∈ G, ξ ⤳ z := by
+  obtain ⟨S, hSf, hSc, hSi, rfl⟩ := NoetherianSpace.exists_finite_set_isClosed_irreducible hZ
+  refine ⟨⋃ t ∈ S, {x | IsGenericPoint x t},
+    hSf.biUnion fun t _ ↦ Set.Subsingleton.finite fun x hx y hy ↦ hx.eq hy, ?_, ?_⟩
+  · intro x hx
+    obtain ⟨t, ht, hxt⟩ := Set.mem_iUnion₂.1 hx
+    exact Set.mem_sUnion_of_mem hxt.mem ht
+  · intro z hz
+    obtain ⟨t, ht, hzt⟩ := hz
+    obtain ⟨ξ, hξ⟩ := QuasiSober.sober (hSi t ht) (hSc t ht)
+    exact ⟨ξ, Set.mem_iUnion₂.2 ⟨t, ht, hξ⟩, hξ.specializes hzt⟩
+
+/-- A closed subset `Z` of a noetherian quasi-sober `T₀` space has only finitely many maximal
+points, i.e. points of `Z` without proper generalization in `Z` (the generic points of the
+irreducible components of `Z`). -/
+theorem IsClosed.finite_setOf_maximal_specializes [NoetherianSpace X] {Z : Set X}
+    (hZ : IsClosed Z) : {η | η ∈ Z ∧ ∀ z ∈ Z, z ⤳ η → z = η}.Finite := by
+  obtain ⟨G, hGf, hGZ, hG⟩ := hZ.exists_finite_forall_exists_specializes
+  refine hGf.subset fun η ⟨hηZ, hη⟩ ↦ ?_
+  obtain ⟨ξ, hξG, hξη⟩ := hG η hηZ
+  rwa [← hη ξ (hGZ hξG) hξη]
+
+/-- Every point of a closed subset `Z` of a noetherian quasi-sober `T₀` space is a specialization
+of a maximal point of `Z`, i.e. a point of `Z` without proper generalization in `Z`. -/
+theorem IsClosed.exists_maximal_specializes [NoetherianSpace X] {Z : Set X} (hZ : IsClosed Z)
+    {z : X} (hz : z ∈ Z) : ∃ η ∈ Z, (∀ y ∈ Z, y ⤳ η → y = η) ∧ η ⤳ z := by
+  let := specializationOrder X
+  obtain ⟨G, hGf, hGZ, hG⟩ := hZ.exists_finite_forall_exists_specializes
+  obtain ⟨ξ, hξG, hξz⟩ := hG z hz
+  obtain ⟨η, -, ⟨hηG, hηz⟩, hη⟩ :=
+    (hGf.subset (Set.sep_subset G (· ⤳ z))).exists_le_maximal ⟨hξG, hξz⟩
+  refine ⟨η, hGZ hηG, fun y hy hyη ↦ ?_, hηz⟩
+  obtain ⟨ξ', hξ'G, hξ'y⟩ := hG y hy
+  have hηξ' : η ⤳ ξ' := hη ⟨hξ'G, hξ'y.trans (hyη.trans hηz)⟩ (hξ'y.trans hyη)
+  exact (hyη.antisymm (hηξ'.trans hξ'y)).eq
+
+attribute [local instance] specializationOrder in
+/-- In a quasi-sober `T₀` space with generic point `x` and of dimension at least `d + 1`, there is
+a proper specialization `w` of `x` whose closure has dimension at least `d`: the penultimate
+point of a chain of length `d + 1`. -/
+theorem exists_specializes_ne_le_topologicalKrullDim_closure {x : X}
+    (hx : closure {x} = Set.univ) {d : ℕ}
+    (hd : ((d + 1 : ℕ) : WithBot ℕ∞) ≤ topologicalKrullDim X) :
+    ∃ w : X, x ⤳ w ∧ w ≠ x ∧ (d : WithBot ℕ∞) ≤ topologicalKrullDim (closure {w} : Set X) := by
+  have hgen (y : X) : x ⤳ y := specializes_iff_mem_closure.2 (hx ▸ Set.mem_univ y)
+  rw [topologicalKrullDim_eq_krullDim_specializationOrder] at hd
+  obtain ⟨l, hl⟩ := le_krullDim_iff.1 hd
+  have hlt : l.eraseLast.last < l.last := l.eraseLast_last_rel_last (by omega)
+  refine ⟨l.eraseLast.last, hgen _, fun h ↦ (hlt.trans_le (hgen l.last)).ne h, ?_⟩
+  rw [topologicalKrullDim_closure_singleton]
+  exact_mod_cast le_trans (by simp [hl]) (length_le_height_last (p := l.eraseLast))
+
+attribute [local instance] specializationOrder in
+/-- A quasi-sober `T₀` space of dimension at least `d` contains a point whose closure has
+dimension at least `d`: the generic end of a chain of length `d`. -/
+theorem exists_le_topologicalKrullDim_closure_singleton {d : ℕ}
+    (hd : (d : WithBot ℕ∞) ≤ topologicalKrullDim X) :
+    ∃ x : X, (d : WithBot ℕ∞) ≤ topologicalKrullDim (closure {x} : Set X) := by
+  rw [topologicalKrullDim_eq_krullDim_specializationOrder] at hd
+  obtain ⟨l, hl⟩ := le_krullDim_iff.1 hd
+  refine ⟨l.last, ?_⟩
+  rw [topologicalKrullDim_closure_singleton, ← hl]
+  exact_mod_cast length_le_height_last (p := l)
+
+end Specialization
+
+/-- An embedding `f : Y → X` identifies the dimension of `Y` with that of its range. -/
+theorem Topology.IsEmbedding.topologicalKrullDim_eq_range {X Y : Type*} [TopologicalSpace X]
+    [TopologicalSpace Y] {f : Y → X} (hf : IsEmbedding f) :
+    topologicalKrullDim Y = topologicalKrullDim (Set.range f) :=
+  IsHomeomorph.topologicalKrullDim_eq _ hf.toHomeomorph.isHomeomorph
+
+/-- A quasi-sober space of positive topological Krull dimension has a point which is not
+closed: the generic point of the larger member of a chain of length one of irreducible closed
+subsets. -/
+theorem exists_not_isClosed_singleton_of_topologicalKrullDim_pos {X : Type*}
+    [TopologicalSpace X] [QuasiSober X] (hX : 0 < topologicalKrullDim X) :
+    ∃ x : X, ¬ IsClosed ({x} : Set X) := by
+  obtain ⟨Z₀, Z₁, hZ⟩ := Order.krullDim_pos_iff.1 hX
+  have hη := Z₁.isIrreducible.isGenericPoint_genericPoint Z₁.isClosed
+  set η := Z₁.isIrreducible.genericPoint
+  refine ⟨η, fun hc ↦ ?_⟩
+  have h₁ : (Z₁ : Set X) = {η} := by rw [← hη.def]; exact hc.closure_eq
+  obtain ⟨z, hz⟩ := Z₀.isIrreducible.nonempty
+  have h₀ : (Z₀ : Set X) ⊆ Z₁ := hZ.le
+  have hzη : z = η := by have := h₀ hz; rw [h₁] at this; exact this
+  have : (Z₁ : Set X) ⊆ Z₀ := by
+    rw [h₁, Set.singleton_subset_iff, ← hzη]
+    exact hz
+  exact hZ.ne (SetLike.coe_injective (h₀.antisymm this))

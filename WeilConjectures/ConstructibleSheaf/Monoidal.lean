@@ -6,10 +6,12 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.RingTheory.PicardGroup
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 
 /-!
 # Tensor products and duals of constructible sheaves
@@ -18,15 +20,17 @@ Let `Λ` be a commutative ring. For sheaves of `Λ`-modules on the small étale 
 `X`:
 
 - a finite locally constant sheaf is constructible, for the trivial stratification, and a
-  constructible sheaf has finite stalks; so a sheaf is finite locally constant if and only if it
-  is constructible and locally constant;
+  constructible sheaf has finitely generated stalks; so a sheaf is finite locally constant if and
+  only if it is constructible and locally constant;
 - the tensor product of two constructible sheaves is constructible: on the strata of a common
   refinement of stratifications the pullback of `F ⊗ G` is the tensor product of two finite
   locally constant sheaves, the pullback being monoidal;
+- a sheaf of modules with a tensor inverse is finite: its stalks are invertible modules, hence
+  finitely generated; in particular the constant sheaf `Λ_X` is finite locally constant, hence
+  constructible, and so is a finite direct sum of constructible sheaves;
 - for `Λ` noetherian, the internal hom `[F, Λ]` of a finite locally constant sheaf `F` into the
   unit is finite locally constant: on a trivialising cover it is the constant sheaf at
-  `Hom_Λ(M, Λ)` for the finite module `M`, a finitely generated module over a finite quotient of
-  `Λ`.
+  `Hom_Λ(M, Λ)` for the finitely generated module `M`, a finitely generated module.
 
 Unlike the tensor product, the internal hom of a constructible sheaf into the unit need not be
 constructible without finiteness hypotheses on `X`: for an open immersion `j` it sends `j_!Λ` to
@@ -37,6 +41,9 @@ constructible without finiteness hypotheses on `X`: for an open immersion `j` it
 - `AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.isConstructibleSheaf`
 - `AlgebraicGeometry.Scheme.IsConstructibleSheaf.isFiniteSheaf`
 - `AlgebraicGeometry.Scheme.IsConstructibleSheaf.tensorObj`
+- `AlgebraicGeometry.Scheme.IsFiniteSheaf.of_tensorIso`
+- `AlgebraicGeometry.Scheme.isConstructibleSheaf_unit`
+- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.biproduct`
 - `AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.ihom_unit`
 
 ## TODO
@@ -49,7 +56,7 @@ Prove `IsConstructibleSheaf.isFiniteSheaf`, `IsFiniteLocallyConstantSheaf.tensor
 
 universe u u'
 
-open CategoryTheory MonoidalCategory Limits
+open CategoryTheory MonoidalCategory Limits ZeroObject
 
 namespace AlgebraicGeometry.Scheme
 
@@ -89,7 +96,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {F G : Sheaf X.smallEtaleTopology (Mo
 
 /-- The tensor product of two finite locally constant sheaves of modules is finite locally
 constant: on a common trivialising cover it is the constant sheaf at the tensor product of two
-finite modules. -/
+finitely generated modules. -/
 theorem IsFiniteLocallyConstantSheaf.tensorObj (hF : IsFiniteLocallyConstantSheaf F)
     (hG : IsFiniteLocallyConstantSheaf G) :
     IsFiniteLocallyConstantSheaf (F ⊗ G) :=
@@ -112,12 +119,109 @@ theorem IsConstructibleSheaf.tensorObj (hF : IsConstructibleSheaf F) (hG : IsCon
 /-- **The dual of a finite locally constant sheaf is finite locally constant**: for `Λ`
 noetherian, the internal hom `[F, Λ]` of a finite locally constant sheaf `F` into the unit is
 finite locally constant. On a trivialising cover it is the constant sheaf at `Hom_Λ(M, Λ)`, `M`
-being finite and hence finitely presented; and `Hom_Λ(M, Λ)` is finite, being a finitely
-generated module over the finite ring `Λ / Ann(M)`. -/
+being finitely generated and hence finitely presented, `Λ` being noetherian; and
+`Hom_Λ(M, Λ)` is finitely generated, being a submodule of `Λⁿ` for a surjection `Λⁿ ⟶ M`. -/
 theorem IsFiniteLocallyConstantSheaf.ihom_unit [IsNoetherianRing Λ]
     (hF : IsFiniteLocallyConstantSheaf F) :
     IsFiniteLocallyConstantSheaf ((ihom F).obj (𝟙_ _)) :=
   sorry
+
+/-- A sheaf of `Λ`-modules with a tensor inverse, `F ⊗ G ≅ Λ`, is finite: the stalks are strong
+monoidal, so `F_s ⊗ G_s ≅ Λ` and `F_s` is an invertible, hence finitely generated, `Λ`-module. -/
+theorem IsFiniteSheaf.of_tensorIso (e : F ⊗ G ≅ 𝟙_ _) : IsFiniteSheaf F where
+  isFinitelyGenerated_sheafFiber Ω _ _ s := by
+    let Φ := (pointSmallEtale s).ulift.{u + 1}
+    let e' : Φ.sheafFiber.obj F ⊗ Φ.sheafFiber.obj G ≅ 𝟙_ (ModuleCat.{u + 1} Λ) :=
+      (Etale.sheafFiberTensorIso s F G).symm ≪≫ Φ.sheafFiber.mapIso e ≪≫
+        Etale.sheafFiberUnitIso _ s
+    have : Module.Invertible Λ ((Φ.sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :=
+      .left e'.toLinearEquiv
+    exact (((ModuleCat.isFinitelyGenerated_iff _).2 inferInstance).of_iso
+      (((pointSmallEtale s).uliftSheafFiberIso.{u + 1} (ModuleCat.{u + 1} Λ)).app F))
+
+variable (X Λ)
+
+/-- The constant sheaf `Λ_X`, the monoidal unit, is locally constant, trivialised by the
+identity cover. -/
+instance isLocallyConstantSheaf_unit :
+    IsLocallyConstantSheaf (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) := by
+  have : etalePrecoverage.{u}.HasIsos := inferInstanceAs (precoverage @Etale).HasIsos
+  refine ⟨⟨⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun _ ↦ ?_⟩⟩⟩
+  rw [isConstant_over_iff_upperStar]
+  exact Sheaf.isConstant_of_iso _ (X := 𝟙_ (ModuleCat.{u + 1} Λ))
+    ((Etale.upperStarId _ X).app _ ≪≫
+      Functor.Monoidal.εIso (presheafToSheaf _ (ModuleCat.{u + 1} Λ)))
+
+/-- The constant sheaf `Λ_X` is finite, being its own tensor inverse. -/
+instance isFiniteSheaf_unit :
+    IsFiniteSheaf (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+  .of_tensorIso (λ_ _)
+
+/-- The constant sheaf `Λ_X` is constructible, being finite locally constant. -/
+instance isConstructibleSheaf_unit :
+    IsConstructibleSheaf (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+  IsFiniteLocallyConstantSheaf.isConstructibleSheaf {}
+
+variable {X Λ}
+
+attribute [local instance] Abelian.hasFiniteBiproducts in
+/-- **A finite direct sum of constructible sheaves of modules is constructible**, by induction
+from the binary case `AlgebraicGeometry.Scheme.IsConstructibleSheaf.biprod`; for instance the
+finite free sheaf `Λ_Xʳ`. -/
+theorem IsConstructibleSheaf.biproduct {J : Type} [Finite J]
+    (F : J → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [∀ j, IsConstructibleSheaf (F j)] :
+    IsConstructibleSheaf (⨁ F) := by
+  let P : ObjectProperty (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    fun G ↦ IsConstructibleSheaf G
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ by
+    have : IsConstructibleSheaf _ := h
+    exact IsConstructibleSheaf.of_iso e⟩
+  have : P.ContainsZero := ⟨⟨0, isZero_zero _, IsConstructibleSheaf.of_isZero (isZero_zero _)⟩⟩
+  have : P.IsClosedUnderBinaryProducts := .mk' (by
+    rintro _ ⟨G, hG⟩
+    have : IsConstructibleSheaf (G.obj ⟨.left⟩) := hG _
+    have : IsConstructibleSheaf (G.obj ⟨.right⟩) := hG _
+    have := IsConstructibleSheaf.biprod (G.obj ⟨.left⟩) (G.obj ⟨.right⟩)
+    exact IsConstructibleSheaf.of_iso ((biprod.isoProd _ _) ≪≫
+      (HasLimit.isoOfNatIso (diagramIsoPair G)).symm))
+  have : P.IsClosedUnderFiniteProducts := .mk'
+  have : IsConstructibleSheaf (∏ᶜ F) :=
+    P.prop_product fun j ↦ (inferInstance : IsConstructibleSheaf (F j))
+  exact IsConstructibleSheaf.of_iso (biproduct.isoProduct F).symm
+
+variable (X Λ) in
+/-- The constant sheaf `Λ_X`, the monoidal unit, is finite locally constant. -/
+instance isFiniteLocallyConstantSheaf_unit :
+    IsFiniteLocallyConstantSheaf (𝟙_ (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) where
+
+attribute [local instance] Abelian.hasFiniteBiproducts in
+/-- **A finite direct sum of finite locally constant sheaves of modules is finite locally
+constant**, by induction from the binary case
+`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.biprod`; for instance the finite free
+sheaf `Λ_Xʳ`. -/
+theorem IsFiniteLocallyConstantSheaf.biproduct {J : Type} [Finite J]
+    (F : J → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [∀ j, IsFiniteLocallyConstantSheaf (F j)] :
+    IsFiniteLocallyConstantSheaf (⨁ F) := by
+  let P : ObjectProperty (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    fun G ↦ IsFiniteLocallyConstantSheaf G
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ by
+    have : IsFiniteLocallyConstantSheaf _ := h
+    exact IsFiniteLocallyConstantSheaf.of_iso e⟩
+  have : P.ContainsZero :=
+    ⟨⟨0, isZero_zero _, IsFiniteLocallyConstantSheaf.of_isZero (isZero_zero _)⟩⟩
+  have : P.IsClosedUnderBinaryProducts := .mk' (by
+    rintro _ ⟨G, hG⟩
+    have : IsFiniteLocallyConstantSheaf (G.obj ⟨.left⟩) := hG _
+    have : IsFiniteLocallyConstantSheaf (G.obj ⟨.right⟩) := hG _
+    have := IsFiniteLocallyConstantSheaf.biprod (G.obj ⟨.left⟩) (G.obj ⟨.right⟩)
+    exact IsFiniteLocallyConstantSheaf.of_iso ((biprod.isoProd _ _) ≪≫
+      (HasLimit.isoOfNatIso (diagramIsoPair G)).symm))
+  have : P.IsClosedUnderFiniteProducts := .mk'
+  have : IsFiniteLocallyConstantSheaf (∏ᶜ F) :=
+    P.prop_product fun j ↦ (inferInstance : IsFiniteLocallyConstantSheaf (F j))
+  exact IsFiniteLocallyConstantSheaf.of_iso (biproduct.isoProduct F).symm
 
 end Modules
 

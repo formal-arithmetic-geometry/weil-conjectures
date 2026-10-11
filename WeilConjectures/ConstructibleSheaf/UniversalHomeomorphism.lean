@@ -181,13 +181,11 @@ point of `Z` lifts to `W`, and the stalk of `p^* G` at the lift is the stalk of 
 (blueprint: `lemma:constructible-universal-homeomorphism-invariance`) -/
 theorem IsFiniteSheaf.of_upperStar (G : Sheaf Z.smallEtaleTopology A)
     [IsFiniteSheaf ((Etale.upperStar A p).obj G)] : IsFiniteSheaf G where
-  finite_sheafFiber Ω _ _ s := by
+  isFinitelyGenerated_sheafFiber Ω _ _ s := by
     obtain ⟨s', rfl⟩ := exists_comp_eq_of_surjective p s
-    have := IsFiniteSheaf.finite_sheafFiber (FA := FA) (CA := CA)
-      (F := (Etale.upperStar A p).obj G) Ω s'
-    exact Finite.of_equiv
-      (ToType ((pointSmallEtale s').sheafFiber.obj ((Etale.upperStar A p).obj G)))
-      ((CategoryTheory.forget A).mapIso ((Etale.upperStarCompSheafFiberIso A p s').app G)).toEquiv
+    exact (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (FA := FA) (CA := CA)
+      (F := (Etale.upperStar A p).obj G) Ω s').of_iso
+      ((Etale.upperStarCompSheafFiberIso A p s').app G)
 
 /-- **Finite local constancy descends along a surjective closed immersion.**
 (blueprint: `lemma:constructible-universal-homeomorphism-invariance`) -/

@@ -6,10 +6,15 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 
 /-!
@@ -79,6 +84,16 @@ variable (X) in
 /-- The dual `M ↦ Mᵛ` as a contravariant functor on sheaves of modules on a scheme. -/
 noncomputable abbrev dualFunctor : X.Modulesᵒᵖ ⥤ X.Modules :=
   (SheafOfModules.homFunctor X.sheaf).flip.obj (SheafOfModules.unit _)
+
+/-- `𝒪_X`-modules form a monoidal closed category, with internal hom `homObj`. -/
+noncomputable instance : MonoidalClosed X.Modules :=
+  SheafOfModules.monoidalClosed (R := X.sheaf)
+
+/-- The functoriality `MonoidalClosed.pre` of the internal hom in its first variable is
+`homObjMap`. -/
+lemma pre_app {A A' : X.Modules} (f : A' ⟶ A) (N : X.Modules) :
+    (MonoidalClosed.pre f).app N = SheafOfModules.homObjMap f (𝟙 N) :=
+  SheafOfModules.pre_app f N
 
 /-- The evaluation `M ⊗ Hom(M, 𝒪_X) ⟶ 𝒪_X`, `m ⊗ φ ↦ φ(m)`, of the underlying presheaves of
 modules of `M` and of its dual. -/
@@ -168,17 +183,57 @@ lemma nonempty_iso_unit_of_tensorObj_iso (M N : X.Modules) [M.IsInvertible] (e :
   exact ⟨(λ_ N).symm ≪≫ (((β_ _ _) ≪≫ d).symm ⊗ᵢ Iso.refl N) ≪≫ α_ _ _ _ ≪≫
     (Iso.refl _ ⊗ᵢ e) ≪≫ (β_ _ _) ≪≫ d⟩
 
+/-- Tensoring with an invertible module preserves monomorphisms. -/
+instance mono_whiskerRight {N P : X.Modules} (f : N ⟶ P) [Mono f] (M : X.Modules)
+    [M.IsInvertible] : Mono (f ▷ M) :=
+  (BraidedCategory.tensorRightEquivalence M Mᵛ
+    (nonempty_tensorObj_dual_iso_unit M).some).functor.map_mono f
+
 /-- The dual of a finite locally free `𝒪_X`-module is finite locally free: on an open where
 `M ≅ 𝒪^r`, the dual is `Hom(𝒪^r, 𝒪) ≅ 𝒪^r`. -/
 theorem IsFiniteLocallyFree.dual (M : X.Modules) [M.IsFiniteLocallyFree] :
     Mᵛ.IsFiniteLocallyFree :=
-  sorry
+  SheafOfModules.IsFiniteLocallyFree.homObj_unit M
+
+/-- If `M` and `N` are free of finite rank on an open `W`, then so is `M ⊗ N`. -/
+lemma nonempty_restrict_tensorObj_iso_free {M N : X.Modules} {W : X.Opens} {I I' : Type u}
+    [Finite I] [Finite I'] (eM : M.restrict W.ι ≅ SheafOfModules.free I)
+    (eN : N.restrict W.ι ≅ SheafOfModules.free I') :
+    Nonempty ((M ⊗ N).restrict W.ι ≅ SheafOfModules.free (Σ _ : I, I')) := by
+  have e₁ : (M ⊗ N).restrict W.ι ≅ (pullback W.ι).obj M ⊗ (pullback W.ι).obj N :=
+    (restrictFunctorIsoPullback _).app _ ≪≫ (Functor.Monoidal.μIso (pullback W.ι) M N).symm
+  have e₂ : (pullback W.ι).obj M ⊗ (pullback W.ι).obj N ≅
+      SheafOfModules.free I ⊗ SheafOfModules.free I' :=
+    (((restrictFunctorIsoPullback _).app M).symm ≪≫ eM) ⊗ᵢ
+      (((restrictFunctorIsoPullback _).app N).symm ≪≫ eN)
+  exact ⟨e₁ ≪≫ e₂ ≪≫ SheafOfModules.freeTensorFreeIso.{u} _ _⟩
+
+/-- A module which is free on an open `U` is free on every open `W ≤ U`. -/
+lemma nonempty_restrict_iso_free_of_le {P : X.Modules} {U W : X.Opens} (h : W ≤ U) {I : Type u}
+    (e : P.over U ≅ SheafOfModules.free I) : Nonempty (P.restrict W.ι ≅ SheafOfModules.free I) :=
+  ⟨restrictCompIso P U.ι (X.homOfLE h) W.ι (X.homOfLE_ι h) ≪≫
+    (restrictFunctor (X.homOfLE h)).mapIso (overIsoFreeEquiv P U I e) ≪≫ restrictFreeIso _ _⟩
 
 /-- The tensor product of two finite locally free `𝒪_X`-modules is finite locally free: on an
 open where `M ≅ 𝒪^r` and `N ≅ 𝒪^s`, it is `𝒪^{rs}`. -/
 theorem IsFiniteLocallyFree.tensorObj (M N : X.Modules) [M.IsFiniteLocallyFree]
-    [N.IsFiniteLocallyFree] : (M ⊗ N).IsFiniteLocallyFree :=
-  sorry
+    [N.IsFiniteLocallyFree] : (M ⊗ N).IsFiniteLocallyFree := by
+  obtain ⟨q, hq, hf⟩ := SheafOfModules.IsFiniteLocallyFree.exists_localGeneratorsData (M := M)
+  obtain ⟨q', hq', hf'⟩ := SheafOfModules.IsFiniteLocallyFree.exists_localGeneratorsData (M := N)
+  have (i : q.I) : Finite (q.generators i).I := (hf.isFiniteType i).finite
+  have (j : q'.I) : Finite (q'.generators j).I := (hf'.isFiniteType j).finite
+  have hcov : ⨆ p : q.I × q'.I, (Scheme.Opens.ι (q.X p.1 ⊓ q'.X p.2)).opensRange = ⊤ := by
+    simp only [Scheme.Opens.opensRange_ι]
+    rw [← iSup_inf_iSup, (Opens.coversTop_iff _ _).1 q.coversTop,
+      (Opens.coversTop_iff _ _).1 q'.coversTop, inf_top_eq]
+  refine isFiniteLocallyFree_of_restrict_iso_free (M ⊗ N) (ι := q.I × q'.I)
+    (fun p ↦ Scheme.Opens.ι (q.X p.1 ⊓ q'.X p.2)) hcov
+    (fun p ↦ Σ _ : (q.generators p.1).I, (q'.generators p.2).I) fun p ↦ ?_
+  have := hq.isIso p.1
+  have := hq'.isIso p.2
+  exact nonempty_restrict_tensorObj_iso_free
+    (nonempty_restrict_iso_free_of_le inf_le_left (asIso (q.generators p.1).π).symm).some
+    (nonempty_restrict_iso_free_of_le inf_le_right (asIso (q'.generators p.2).π).symm).some
 
 /-- The contravariant functor `ℱ ↦ ℱᵛ ⊗ ω` on finite locally free modules, for an invertible
 `ω`, with values in finite locally free modules. -/
@@ -194,17 +249,39 @@ noncomputable def dualTensorFunctor (ω : X.Modules)
       have : ω.IsFiniteLocallyFree := SheafOfModules.IsInvertible.isFiniteLocallyFree ω
       exact IsFiniteLocallyFree.tensorObj ℱ.unop.objᵛ ω
 
-/-- **Biduality twisted by an invertible module.** For an invertible `ω`, the canonical maps
-`ℱ ⟶ ℱᵛᵛ` and `ωᵛ ⊗ ω ⟶ 𝒪_X` are isomorphisms, and so is `(ℱᵛ ⊗ ω)ᵛ ⟶ ℱᵛᵛ ⊗ ωᵛ` for finite
-locally free `ℱ`: all of this is checked on opens where `ℱ` and `ω` are free. Hence
-`ℱ ≅ (ℱᵛ ⊗ ω)ᵛ ⊗ ω`, naturally in finite locally free `ℱ`. -/
+/-- **Biduality twisted by an invertible module.** For an invertible `ω`, `ℱ ≅ (ℱᵛ ⊗ ω)ᵛ ⊗ ω`,
+naturally in finite locally free `ℱ`: the biduality morphism `ℱ ⟶ ℱᵛᵛ` is an isomorphism
+(`SheafOfModules.isIso_bidual`), and twisting by `ω` cancels in internal homs,
+`(A ⊗ ω)ᵛ ⊗ ω ≅ Aᵛ` naturally in `A`, as `ω` has the tensor inverse `ωᵛ`
+(`MonoidalClosed.ihomTensorObjWhiskerRightIso`). -/
 theorem nonempty_iso_dual_tensorObj_dual_tensorObj (ω : X.Modules)
     [SheafOfModules.IsInvertible (R := X.ringCatSheaf) ω] :
     Nonempty ((SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι ≅
       opOp _ ⋙ (dualTensorFunctor ω).op ⋙
         (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).ι.op ⋙ dualFunctor X ⋙
-          tensorRight ω) :=
-  sorry
+          tensorRight ω) := by
+  have : ω.IsInvertible := IsInvertible.of_sheafOfModules ω
+  obtain ⟨d⟩ := nonempty_tensorObj_dual_iso_unit ω
+  let := exactPairingOfTensorIso (β_ ωᵛ ω ≪≫ d) d
+  let κ (A : X.Modules) : (A ⊗ ω)ᵛ ⊗ ω ≅ Aᵛ :=
+    MonoidalClosed.ihomTensorObjWhiskerRightIso ωᵛ ω (β_ ωᵛ ω ≪≫ d) A (𝟙_ X.Modules)
+  have hκ {A A' : X.Modules} (g : A' ⟶ A) :
+      dualMap (g ▷ ω) ▷ ω ≫ (κ A').hom = (κ A).hom ≫ dualMap g := by
+    have h := MonoidalClosed.pre_whiskerRight_app_whiskerRight_comp_ihomTensorObjWhiskerRightIso_hom
+      ωᵛ ω (β_ ωᵛ ω ≪≫ d) g (𝟙_ X.Modules)
+    rwa [pre_app, pre_app] at h
+  refine ⟨NatIso.ofComponents (fun ℱ ↦ ?_) fun {ℱ 𝒢} f ↦ ?_⟩
+  · have : ℱ.obj.IsFiniteLocallyFree := ℱ.property
+    have := SheafOfModules.isIso_bidual (R := X.sheaf) ℱ.obj
+    exact asIso (SheafOfModules.bidual (R := X.sheaf) ℱ.obj) ≪≫ (κ ℱ.objᵛ).symm
+  · have h₁ : f.hom ≫ SheafOfModules.bidual (R := X.sheaf) 𝒢.obj =
+        SheafOfModules.bidual (R := X.sheaf) ℱ.obj ≫ dualMap (dualMap f.hom) :=
+      SheafOfModules.bidual_naturality (R := X.sheaf) f.hom
+    have h₂ : dualMap (dualMap f.hom) ≫ (κ 𝒢.objᵛ).inv =
+        (κ ℱ.objᵛ).inv ≫ dualMap (dualMap f.hom ▷ ω) ▷ ω := by
+      rw [Iso.comp_inv_eq, Category.assoc, hκ, Iso.inv_hom_id_assoc]
+    exact (Category.assoc _ _ _).symm.trans ((congrArg (· ≫ (κ 𝒢.objᵛ).inv) h₁).trans
+      ((Category.assoc _ _ _).trans ((congrArg (_ ≫ ·) h₂).trans (Category.assoc _ _ _).symm)))
 
 /-- **A tensor inverse of an invertible module is invertible.** If `M` is invertible and
 `M ⊗ N ≅ 𝒪_X`, then `N` is invertible: on an open `U` where `M|_U ≅ 𝒪_U`,

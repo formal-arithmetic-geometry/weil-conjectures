@@ -25,7 +25,10 @@ computed, such as a sheaf of functions on points.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.nonempty_cokernel_iso_of_sheafFiber`: the criterion above.
+- `AlgebraicGeometry.Scheme.exists_cokernel_iso_hom_comp_eq_of_sheafFiber` and
+  `AlgebraicGeometry.Scheme.nonempty_cokernel_iso_of_sheafFiber`: the criterion above.
+- `AlgebraicGeometry.Scheme.mono_of_injective_sheafFiber`: a morphism injective on geometric
+  stalks is a monomorphism.
 -/
 
 @[expose] public section
@@ -38,12 +41,23 @@ namespace AlgebraicGeometry.Scheme
 
 variable {X : Scheme.{u}} {A B C P : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
 
+/-- A morphism of étale sheaves of abelian groups which is injective on all geometric stalks
+is a monomorphism. -/
+theorem mono_of_injective_sheafFiber (ψ : P ⟶ C)
+    (h : ∀ x : X, Function.Injective ((X.uliftPointSmallEtale x).sheafFiber.map ψ)) :
+    Mono ψ := by
+  have hmono := (isConservativeFamilyOfPoints_ulift_pointSmallEtale X).jointlyReflectMonomorphisms
+    AddCommGrpCat.{u + 1}
+  refine @JointlyReflectMonomorphisms.mono _ _ _ _ _ _ hmono _ _ ψ (fun Φ ↦ ?_)
+  obtain ⟨-, ⟨x⟩⟩ := Φ
+  exact (AddCommGrpCat.mono_iff_injective _).2 (h x)
+
 /-- **A cokernel identified on geometric stalks.** Let `f : A ⟶ B`, `d : B ⟶ C` and
 `ψ : P ⟶ C` be morphisms of étale sheaves of abelian groups with `f ≫ d = 0`. Suppose that at
 every geometric point `x̄` of `X` the stalk of `ψ` is injective, the stalks satisfy
-`ker d_x̄ = im f_x̄`, and `d_x̄` and `ψ_x̄` have the same image. Then
-`cokernel f ≅ P`. -/
-theorem nonempty_cokernel_iso_of_sheafFiber (f : A ⟶ B) (d : B ⟶ C) (ψ : P ⟶ C)
+`ker d_x̄ = im f_x̄`, and `d_x̄` and `ψ_x̄` have the same image. Then there is an isomorphism
+`e : cokernel f ≅ P` through which `ψ` induces the map `cokernel f ⟶ C` given by `d`. -/
+theorem exists_cokernel_iso_hom_comp_eq_of_sheafFiber (f : A ⟶ B) (d : B ⟶ C) (ψ : P ⟶ C)
     (w : f ≫ d = 0)
     (h₁ : ∀ (x : X)
       (b : ((X.uliftPointSmallEtale x).sheafFiber (A := AddCommGrpCat.{u + 1})).obj B),
@@ -58,7 +72,7 @@ theorem nonempty_cokernel_iso_of_sheafFiber (f : A ⟶ B) (d : B ⟶ C) (ψ : P 
       (p : ((X.uliftPointSmallEtale x).sheafFiber (A := AddCommGrpCat.{u + 1})).obj P),
       ∃ b, (X.uliftPointSmallEtale x).sheafFiber.map d b =
         (X.uliftPointSmallEtale x).sheafFiber.map ψ p) :
-    Nonempty (cokernel f ≅ P) := by
+    ∃ e : cokernel f ≅ P, e.hom ≫ ψ = cokernel.desc f d w := by
   have hP := isConservativeFamilyOfPoints_ulift_pointSmallEtale X
   have hmono := hP.jointlyReflectMonomorphisms AddCommGrpCat.{u + 1}
   have hfaith := hP.jointlyFaithful AddCommGrpCat.{u + 1}
@@ -80,10 +94,7 @@ theorem nonempty_cokernel_iso_of_sheafFiber (f : A ⟶ B) (d : B ⟶ C) (ψ : P 
     obtain ⟨a, rfl⟩ := h₁ x b hz
     rw [← ConcreteCategory.comp_apply, ← Functor.map_comp, cokernel.condition, Functor.map_zero]
     rfl
-  have : Mono ψ := by
-    refine @JointlyReflectMonomorphisms.mono _ _ _ _ _ _ hmono _ _ ψ (fun Φ ↦ ?_)
-    obtain ⟨-, ⟨x⟩⟩ := Φ
-    exact (AddCommGrpCat.mono_iff_injective _).2 (h₂ x)
+  have : Mono ψ := mono_of_injective_sheafFiber ψ h₂
   have hqψ : q ≫ cokernel.π ψ = 0 := hfaith.map_injective (by
     rintro ⟨-, ⟨x⟩⟩
     rw [Functor.map_zero]
@@ -106,10 +117,35 @@ theorem nonempty_cokernel_iso_of_sheafFiber (f : A ⟶ B) (d : B ⟶ C) (ψ : P 
     rw [← hb, ← hq, ← ConcreteCategory.comp_apply, ← Functor.map_comp, cokernel.condition,
       Functor.map_zero]
     rfl)
-  refine ⟨⟨Abelian.monoLift ψ q hqψ, Abelian.monoLift q ψ hψq, ?_, ?_⟩⟩
+  refine ⟨⟨Abelian.monoLift ψ q hqψ, Abelian.monoLift q ψ hψq, ?_, ?_⟩,
+    Abelian.monoLift_comp ψ q hqψ⟩
   · rw [← cancel_mono q, Category.assoc, Abelian.monoLift_comp, Abelian.monoLift_comp,
       Category.id_comp]
   · rw [← cancel_mono ψ, Category.assoc, Abelian.monoLift_comp, Abelian.monoLift_comp,
       Category.id_comp]
+
+/-- **A cokernel identified on geometric stalks.** Let `f : A ⟶ B`, `d : B ⟶ C` and
+`ψ : P ⟶ C` be morphisms of étale sheaves of abelian groups with `f ≫ d = 0`. Suppose that at
+every geometric point `x̄` of `X` the stalk of `ψ` is injective, the stalks satisfy
+`ker d_x̄ = im f_x̄`, and `d_x̄` and `ψ_x̄` have the same image. Then
+`cokernel f ≅ P`. -/
+theorem nonempty_cokernel_iso_of_sheafFiber (f : A ⟶ B) (d : B ⟶ C) (ψ : P ⟶ C)
+    (w : f ≫ d = 0)
+    (h₁ : ∀ (x : X)
+      (b : ((X.uliftPointSmallEtale x).sheafFiber (A := AddCommGrpCat.{u + 1})).obj B),
+      (X.uliftPointSmallEtale x).sheafFiber.map d b = 0 →
+        ∃ a, (X.uliftPointSmallEtale x).sheafFiber.map f a = b)
+    (h₂ : ∀ x : X, Function.Injective ((X.uliftPointSmallEtale x).sheafFiber.map ψ))
+    (h₃ : ∀ (x : X)
+      (b : ((X.uliftPointSmallEtale x).sheafFiber (A := AddCommGrpCat.{u + 1})).obj B),
+      ∃ p, (X.uliftPointSmallEtale x).sheafFiber.map ψ p =
+        (X.uliftPointSmallEtale x).sheafFiber.map d b)
+    (h₄ : ∀ (x : X)
+      (p : ((X.uliftPointSmallEtale x).sheafFiber (A := AddCommGrpCat.{u + 1})).obj P),
+      ∃ b, (X.uliftPointSmallEtale x).sheafFiber.map d b =
+        (X.uliftPointSmallEtale x).sheafFiber.map ψ p) :
+    Nonempty (cokernel f ≅ P) :=
+  let ⟨e, _⟩ := exists_cokernel_iso_hom_comp_eq_of_sheafFiber f d ψ w h₁ h₂ h₃ h₄
+  ⟨e⟩
 
 end AlgebraicGeometry.Scheme

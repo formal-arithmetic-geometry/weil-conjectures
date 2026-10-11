@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 
 # The comparison functors between the small étale and pro-étale sites
 
-For a scheme `X`, the inclusion `ν = AlgebraicGeometry.Scheme.toProEt X : X.Etale ⥤ X.ProEt`
+For a scheme `X`, the inclusion `ν = AlgebraicGeometry.toProEt X : X.Etale ⥤ X.ProEt`
 of the small étale site into the small pro-étale site is continuous, so composition with it
 defines the restriction `ν_*` from pro-étale to étale sheaves. Its left adjoint `ν^*` is the
 left Kan extension on presheaves followed by sheafification. Since `ν` is representably flat,
@@ -65,7 +65,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable (X : Scheme.{u})
 
 /-- The restriction functor `ν_* : Sh(X_proét, A) ⥤ Sh(X_ét, A)` along the inclusion
-`AlgebraicGeometry.Scheme.toProEt X` of the small étale site into the small pro-étale site,
+`AlgebraicGeometry.toProEt X` of the small étale site into the small pro-étale site,
 given objectwise by `(ν_* G)(U) = G(U)` for `U` étale over `X`. -/
 noncomputable def comparisonLowerStar :
     Sheaf (ProEt.topology X) A ⥤ Sheaf X.smallEtaleTopology A :=
@@ -75,7 +75,7 @@ noncomputable def comparisonLowerStar :
 scoped notation "ν_*(" X ")[" A "]" => comparisonLowerStar A X
 
 /-- The comparison functor `ν^* : Sh(X_ét, A) ⥤ Sh(X_proét, A)`: left Kan extension of
-presheaves along the inclusion `AlgebraicGeometry.Scheme.toProEt X` of the small étale site
+presheaves along the inclusion `AlgebraicGeometry.toProEt X` of the small étale site
 into the small pro-étale site, followed by sheafification. It is left adjoint to
 `ProEtale.comparisonLowerStar`. -/
 noncomputable def comparisonUpperStar :

@@ -1,0 +1,58 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+
+/-!
+# Additive functors and direct summands of finite sums
+
+An additive functor preserves the property that an object is a direct summand of a finite direct
+sum of copies of another object.
+-/
+
+@[expose] public section
+
+open CategoryTheory
+
+/-- An additive functor `F` preserves the property that `A` is a direct summand of a finite
+direct sum of copies of `B`, up to isomorphisms `F A ≅ A'` and `F B ≅ B'`. -/
+lemma CategoryTheory.Functor.exists_sum_comp_eq_id_of_iso {C D : Type*} [Category C] [Category D]
+    [Preadditive C] [Preadditive D] (F : C ⥤ D) [F.Additive] {A B : C} {A' B' : D}
+    (eA : F.obj A ≅ A') (eB : F.obj B ≅ B')
+    (h : ∃ (n : ℕ) (ξ : Fin n → (A ⟶ B)) (m : Fin n → (B ⟶ A)), ∑ j, ξ j ≫ m j = 𝟙 A) :
+    ∃ (n : ℕ) (ξ : Fin n → (A' ⟶ B')) (m : Fin n → (B' ⟶ A')), ∑ j, ξ j ≫ m j = 𝟙 A' := by
+  obtain ⟨n, ξ, m, h⟩ := h
+  refine ⟨n, fun j ↦ eA.inv ≫ F.map (ξ j) ≫ eB.hom, fun j ↦ eB.inv ≫ F.map (m j) ≫ eA.hom, ?_⟩
+  simp only [Category.assoc, Iso.hom_inv_id_assoc, ← Preadditive.comp_sum]
+  simp only [← Category.assoc, ← Preadditive.sum_comp]
+  simp only [Category.assoc, ← F.map_comp, ← F.map_sum, h, F.map_id, Category.id_comp,
+    Iso.inv_hom_id]
+
+
+namespace CategoryTheory.Functor
+
+open Limits
+
+universe w v₁ v₂ u₁ u₂
+
+variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] [Preadditive C]
+  [Preadditive D] (F : C ⥤ D)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- An additive functor preserves biproducts indexed by a finite type in any universe. Compare
+`CategoryTheory.Functor.preservesFiniteBiproductsOfAdditive`, which is about index types in
+`Type`. -/
+instance (priority := 100) preservesBiproductsOfShape_of_additive {J : Type w} [Finite J]
+    [Additive F] : PreservesBiproductsOfShape J F :=
+  let ⟨_⟩ := nonempty_fintype J
+  { preserves :=
+    { preserves := fun hb =>
+        ⟨isBilimitOfTotal _ (by
+          simp_rw [F.mapBicone_π, F.mapBicone_ι, ← F.map_comp]
+          erw [← F.map_sum, ← F.map_id, IsBilimit.total hb])⟩ } }
+
+end CategoryTheory.Functor

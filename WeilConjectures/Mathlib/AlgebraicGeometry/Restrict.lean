@@ -59,6 +59,11 @@ noncomputable def morphismRestrictArrowIso (f : X ⟶ Y) {e : Z ⟶ X} {j : Z' �
     IsOpenImmersion.isoOfRangeEq_hom_fac_assoc,
     IsOpenImmersion.isoOfRangeEq_hom_fac, morphismRestrict_ι]
 
+/-- An open immersion with image `U` has the same range as the inclusion of `U`. -/
+lemma Scheme.Hom.range_eq_range_ι_of_opensRange_eq (f : X ⟶ Y) [IsOpenImmersion f] {U : Y.Opens}
+    (h : f.opensRange = U) : Set.range f = Set.range U.ι :=
+  (coe_opensRange f).symm.trans ((congrArg SetLike.coe h).trans (Scheme.Opens.range_ι U).symm)
+
 /-- Membership in the range of the inclusion of a smaller open. -/
 lemma mem_opensRange_homOfLE {X : Scheme.{u}} {U V : X.Opens} (hUV : U ≤ V)
     (x : V.toScheme) : x ∈ (X.homOfLE hUV).opensRange ↔ x.1 ∈ U := by
@@ -160,5 +165,36 @@ lemma exists_opens_restrict_preimage {X Z : Scheme.{u}} (W₁ : X.Opens)
 lemma Scheme.Opens.isIso_ι_of_eq_top {U : X.Opens} (h : U = ⊤) : IsIso U.ι := by
   subst h
   exact ⟨⟨X.topIso.inv, X.ι_toIso_inv, X.toIso_inv_ι⟩⟩
+
+/-- Restricting the global section of `V` attached to `x` along `U ≤ V`. -/
+lemma Scheme.homOfLE_appTop_topIso_inv {X : Scheme.{u}} {U V : X.Opens} (e : U ≤ V)
+    (x : Γ(X, V)) : (X.homOfLE e).appTop (V.topIso.inv x) =
+      U.topIso.inv (X.presheaf.map (homOfLE e).op x) := by
+  simp only [Scheme.homOfLE_appTop, Scheme.Opens.topIso_inv]
+  change (X.presheaf.map _ ≫ X.presheaf.map _) x = (X.presheaf.map _ ≫ X.presheaf.map _) x
+  rw [← Functor.map_comp]
+  erw [← Functor.map_comp]
+  rfl
+
+/-- Composition of restriction maps. -/
+lemma Scheme.presheaf_map_map {X : Scheme.{u}} {U V W : X.Opens} (e₁ : V ≤ U) (e₂ : W ≤ V)
+    (x : Γ(X, U)) : X.presheaf.map (homOfLE e₂).op (X.presheaf.map (homOfLE e₁).op x) =
+      X.presheaf.map (homOfLE (e₂.trans e₁)).op x := by
+  rw [← CommRingCat.comp_apply, ← Functor.map_comp]
+  rfl
+
+/-- A section is a unit on any open contained in its basic open. -/
+lemma Scheme.isUnit_map_of_le_basicOpen {X : Scheme.{u}} {U V : X.Opens} (f : Γ(X, U))
+    (h : V ≤ X.basicOpen f) :
+    IsUnit (X.presheaf.map (homOfLE (h.trans (X.basicOpen_le f))).op f) := by
+  have := (RingedSpace.isUnit_res_basicOpen X.toRingedSpace f).map
+    (X.presheaf.map (homOfLE h).op).hom
+  exact (X.presheaf_map_map (X.basicOpen_le f) h f) ▸ this
+
+/-- Restriction along an equality of opens is injective. -/
+lemma Scheme.eq_of_map_eq_of_eq {X : Scheme.{u}} {U V : X.Opens} (e : V = U) {x y : Γ(X, U)}
+    (h : X.presheaf.map (homOfLE e.le).op x = X.presheaf.map (homOfLE e.le).op y) : x = y := by
+  subst e
+  simpa using h
 
 end AlgebraicGeometry

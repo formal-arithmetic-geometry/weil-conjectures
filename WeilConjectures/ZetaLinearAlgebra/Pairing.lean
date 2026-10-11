@@ -28,6 +28,10 @@ the pairing is Poincaré duality and `c = qᵈ`.
 * `LinearMap.dualMap_mul_conj_of_similitude`,
   `LinearMap.charpoly_eq_smul_inverse_dualMap_of_similitude`: transported along the isomorphism
   `W ≃ₗ[L] Dual L V` given by the pairing, `G` becomes `c • (F.dualMap)⁻¹`.
+* `LinearMap.conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude`: the explicit conjugacy
+  `G ∼ c • (F.dualMap)⁻¹`.
+* `LinearMap.roots_map_charpoly_of_similitude`: the eigenvalues of `G` are the `c / λ` for the
+  eigenvalues `λ` of `F`, computed in an algebraically closed extension field.
 * `LinearMap.charpoly_roots_of_similitude`: the eigenvalues (with multiplicity) of `G` are the
   images of the eigenvalues of `F` under `λ ↦ c / λ`.
 * `LinearMap.charpolyRev_roots_of_similitude`: the same statement in terms of the reverse
@@ -72,6 +76,26 @@ theorem roots_reverse_of_monic {L : Type*} [Field L] {f : L[X]} (hf : f.Monic) (
 end Polynomial
 
 namespace LinearMap
+
+/-- The constant coefficient of the characteristic polynomial of an endomorphism with invertible
+determinant stays nonzero after mapping the coefficients along a ring homomorphism of fields. -/
+theorem coeff_zero_map_charpoly_ne_zero {L N M : Type*} [Field L] [AddCommGroup N] [Module L N]
+    [FiniteDimensional L N] [Field M] (ι : L →+* M) {T : Module.End L N}
+    (hT : IsUnit (LinearMap.det T)) : (T.charpoly.map ι).coeff 0 ≠ 0 := by
+  rw [coeff_map, ne_eq, map_eq_zero_iff ι ι.injective]
+  intro h
+  rw [LinearMap.det_eq_sign_charpoly_coeff, h, mul_zero] at hT
+  exact not_isUnit_zero hT
+
+/-- For an endomorphism with invertible determinant, the roots of `det (1 - t • T)`, computed in
+an algebraically closed extension field, are the inverses of the eigenvalues of `T`. -/
+theorem roots_map_charpolyRev_eq_map_inv {L N M : Type*} [Field L] [AddCommGroup N]
+    [Module L N] [FiniteDimensional L N] [Field M] [IsAlgClosed M] (ι : L →+* M)
+    (T : Module.End L N) (hT : IsUnit (LinearMap.det T)) :
+    (T.charpolyRev.map ι).roots = (T.charpoly.map ι).roots.map (·⁻¹) := by
+  rw [charpolyRev_def, ← reverse_map ι.injective]
+  exact roots_reverse_of_monic ((charpoly_monic T).map ι) (IsAlgClosed.splits _)
+    (coeff_zero_map_charpoly_ne_zero ι hT)
 
 section Similitude
 
@@ -139,12 +163,13 @@ theorem dualMap_mul_conj_of_similitude :
     (dualMap_comp_toPerfPair_comp_of_similitude hFG)
   simpa [LinearEquiv.conj_apply_apply] using h
 
+omit [FiniteDimensional L W] in
 include hc in
 /-- `G` is conjugate, by the isomorphism `W ≃ₗ[L] Dual L V` given by the pairing, to the
-endomorphism `c • (F.dualMap)⁻¹` of the dual of `V`; in particular they have the same
-characteristic polynomial. -/
-theorem charpoly_eq_smul_inverse_dualMap_of_similitude :
-    G.charpoly = (c • Ring.inverse F.dualMap : Module.End L (Module.Dual L V)).charpoly := by
+endomorphism `c • (F.dualMap)⁻¹` of the dual of `V`: the transpose of `F` is invertible, and
+`G` corresponds to `c` times the transpose of its inverse. -/
+theorem conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude :
+    p.flip.toPerfPair.conj G = c • Ring.inverse F.dualMap := by
   set e := p.flip.toPerfPair with he
   have hab : F.dualMap * (c⁻¹ • e.conj G) = 1 := by
     rw [mul_smul_comm, dualMap_mul_conj_of_similitude hFG, smul_smul, inv_mul_cancel₀ hc,
@@ -152,7 +177,16 @@ theorem charpoly_eq_smul_inverse_dualMap_of_similitude :
   have hba : (c⁻¹ • e.conj G) * F.dualMap = 1 := mul_eq_one_comm.mp hab
   have hinv : Ring.inverse F.dualMap = c⁻¹ • e.conj G :=
     Ring.inverse_unit (⟨F.dualMap, c⁻¹ • e.conj G, hab, hba⟩ : (Module.End L (Dual L V))ˣ)
-  rw [hinv, smul_smul, mul_inv_cancel₀ hc, one_smul, LinearEquiv.charpoly_conj]
+  rw [hinv, smul_smul, mul_inv_cancel₀ hc, one_smul]
+
+include hc in
+/-- `G` is conjugate, by the isomorphism `W ≃ₗ[L] Dual L V` given by the pairing, to the
+endomorphism `c • (F.dualMap)⁻¹` of the dual of `V`; in particular they have the same
+characteristic polynomial. -/
+theorem charpoly_eq_smul_inverse_dualMap_of_similitude :
+    G.charpoly = (c • Ring.inverse F.dualMap : Module.End L (Module.Dual L V)).charpoly := by
+  rw [← conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude hc hFG,
+    LinearEquiv.charpoly_conj]
 
 omit [FiniteDimensional L W] in
 /-- **The determinant product rule.** If `F` and `G` multiply the perfect pairing `p` by the
@@ -211,6 +245,24 @@ theorem roots_map_charpolyRev_of_similitude {M : Type*} [Field M] [IsAlgClosed M
     Multiset.map_map]
   refine Multiset.map_congr rfl fun a _ ↦ ?_
   simp [Ring.inverse_eq_inv', mul_inv_rev, mul_comm]
+
+include hc in
+/-- **The reciprocal eigenvalues along a field embedding.** After mapping the characteristic
+polynomials into an algebraically closed extension field `M` along a ring homomorphism `ι`,
+the eigenvalues of `G`, with multiplicity, are the images of the eigenvalues of `F` under
+`α ↦ ι c / α`. Unlike `charpoly_roots_of_similitude`, the base field `L` is not assumed
+algebraically closed. -/
+theorem roots_map_charpoly_of_similitude {M : Type*} [Field M] [IsAlgClosed M] (ι : L →+* M) :
+    (G.charpoly.map ι).roots = (F.charpoly.map ι).roots.map fun z ↦ ι c / z := by
+  have h := roots_map_charpolyRev_of_similitude hc hFG ι
+  rw [roots_map_charpolyRev_eq_map_inv ι G (isUnit_det_right_of_similitude hc hFG),
+    roots_map_charpolyRev_eq_map_inv ι F (isUnit_det_of_similitude hc hFG),
+    Multiset.map_map] at h
+  have h' := congrArg (Multiset.map (·⁻¹ : M → M)) h
+  rw [Multiset.map_map, Multiset.map_map] at h'
+  simp only [Function.comp_def, inv_inv, Multiset.map_id'] at h'
+  rw [h']
+  exact Multiset.map_congr rfl fun z _ ↦ (div_eq_mul_inv _ _).symm
 
 include hc in
 /-- **The degrees along a field embedding.** Both members of a similitude pair are invertible,
@@ -300,5 +352,35 @@ theorem charpolyRev_roots_of_similitude :
   exact Multiset.map_congr rfl fun a _ ↦ by simp [div_eq_mul_inv, mul_comm]
 
 end Similitude
+
+section IsField
+
+/-! The statements above for a commutative ring `L` that is a field (`IsField L`) rather than
+for a `Field L`: they then apply to modules whose scalar action is built from the ring
+structure of `L` alone, without comparing two `Field`-derived instance paths. -/
+
+variable {L V W : Type*} [CommRing L] [AddCommGroup V] [Module L V] [AddCommGroup W]
+  [Module L W] {p : V →ₗ[L] W →ₗ[L] L} [p.IsPerfPair] {F : Module.End L V}
+  {G : Module.End L W} {c : L}
+
+/-- `LinearMap.conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude` over a commutative ring
+that is a field. -/
+theorem conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude_of_isField (hL : IsField L)
+    (hc : c ≠ 0) (hFG : ∀ v w, p (F v) (G w) = c * p v w) :
+    p.flip.toPerfPair.conj G = c • Ring.inverse F.dualMap := by
+  let := hL.toField
+  have := Module.IsReflexive.of_isPerfPair p
+  exact conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude hc hFG
+
+/-- `LinearMap.roots_map_charpoly_of_similitude` over a commutative ring that is a field. -/
+theorem roots_map_charpoly_of_similitude_of_isField (hL : IsField L) [Module.Free L V]
+    [Module.Finite L V] [Module.Free L W] [Module.Finite L W] (hc : c ≠ 0)
+    (hFG : ∀ v w, p (F v) (G w) = c * p v w) {M : Type*} [Field M] [IsAlgClosed M]
+    (ι : L →+* M) :
+    (G.charpoly.map ι).roots = (F.charpoly.map ι).roots.map fun z ↦ ι c / z := by
+  let := hL.toField
+  exact roots_map_charpoly_of_similitude hc hFG ι
+
+end IsField
 
 end LinearMap

@@ -31,6 +31,10 @@ definition, and it is the only place where the scheme and the matrix groups meet
   induced by an inclusion `I ≤ J` of Hopf ideals.
 - `AlgebraicGeometry.GeneralLinearGroup.zeroLocusMulEquiv`: the group of `R`-points
   `Spec R ⟶ V(I)` is the matrix group `zeroLocus I R`.
+- `AlgebraicGeometry.GeneralLinearGroup.conjHom`,
+  `AlgebraicGeometry.GeneralLinearGroup.subgroupSchemeConjIso`: conjugation by a `k`-point of
+  `GL_n`, as an endomorphism of the group scheme `𝔾𝕃(n; k)` and as an automorphism of a closed
+  subgroup scheme `V(I)` that it preserves.
 - `AlgebraicGeometry.GeneralLinearGroup.derivedIdeal`: the Hopf ideal of the derived subgroup
   `[V(I), V(I)]`, the smallest closed subgroup scheme of `V(I)` with commutative quotient.
 
@@ -43,6 +47,8 @@ definition, and it is the only place where the scheme and the matrix groups meet
 - `AlgebraicGeometry.GeneralLinearGroup.range_subgroupSchemeHom_le_identityComponent`: the closed
   subgroup scheme cut out by the ideal `identityComponent I` is the reduced identity component of
   `V(I)`.
+- `AlgebraicGeometry.GeneralLinearGroup.finiteIndex_subgroupOf_zeroLocus_identityComponent`: the
+  `k`-points of `G°` have finite index in the `k`-points of `G`.
 - `AlgebraicGeometry.GeneralLinearGroup.containsCommutators_subgroupSchemeHom`: if `V(J)(R)`
   contains the commutators of `V(I)(R)` for all `R`, then `V(J) ⟶ V(I)` contains the commutators
   scheme-theoretically.
@@ -257,6 +263,115 @@ theorem containsCommutators_subgroupSchemeHom
 
 end Inclusion
 
+section Conjugation
+
+variable (g : GL n k)
+
+/-- Conjugation `x ↦ g * x * g⁻¹` by a `k`-point `g` of `𝔾𝕃(n; k)`, as an endomorphism of the group
+scheme: the spectrum of the bialgebra endomorphism `conjBialgHom g` of the coordinate ring. -/
+noncomputable def conjHom : 𝔾𝕃(n; k) ⟶ 𝔾𝕃(n; k) :=
+  (Spec.map (CommRingCat.ofHom (translate g g⁻¹).toRingHom)).asOver (Spec (.of k))
+
+instance : IsMonHom (conjHom g) :=
+  inferInstanceAs (IsMonHom ((bialgSpec (.of k)).map
+    (CommBialgCat.ofHom (conjBialgHom g)).op).hom)
+
+/-- On `R`-points, `conjHom g` is conjugation by the image of `g` in `GL n R`. -/
+theorem homMulEquiv_comp_conjHom {R : Type u} [CommRing R] [Algebra k R]
+    (φ : (Spec (.of R)).asOver (Spec (.of k)) ⟶ 𝔾𝕃(n; k)) :
+    GeneralLinearGroup.homMulEquiv n k R (φ ≫ conjHom g) =
+      map (algebraMap k R) g * GeneralLinearGroup.homMulEquiv n k R φ *
+        map (algebraMap k R) g⁻¹ := by
+  unfold GeneralLinearGroup at φ
+  obtain ⟨χ, rfl⟩ := Spec.mapMulEquiv.surjective φ
+  have h : Spec.mapMulEquiv χ ≫ conjHom g =
+      Spec.mapMulEquiv (toConv (χ.ofConv.comp (translate g g⁻¹))) := by
+    apply Over.OverMorphism.ext
+    change Spec.map _ ≫ Spec.map _ = Spec.map _
+    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    rfl
+  rw [h, GeneralLinearGroup.homMulEquiv_mapMulEquiv, GeneralLinearGroup.homMulEquiv_mapMulEquiv]
+  apply (algHomMulEquiv n k R).symm.injective
+  have hχ : evalAlgHom (algHomMulEquiv n k R χ) = χ.ofConv :=
+    congrArg ofConv ((algHomMulEquiv n k R).symm_apply_apply χ)
+  rw [MulEquiv.symm_apply_apply, algHomMulEquiv_symm_apply, ← evalAlgHom_comp_translate, hχ]
+
+variable {I : Ideal (CoordinateRing n k)} [I.IsHopfIdeal k]
+  (hg : ∀ a ∈ I, translate g g⁻¹ a ∈ I) (hg' : ∀ a ∈ I, translate g⁻¹ g a ∈ I)
+
+include hg in
+/-- A matrix `x` over `R` satisfying the equations of `I` is conjugated by `g` to such a
+matrix, when conjugation by `g` preserves `I`. -/
+theorem mul_mul_inv_mem_zeroLocus {R : Type u} [CommRing R] [Algebra k R] {x : GL n R}
+    (hx : x ∈ zeroLocus I R) :
+    map (algebraMap k R) g * x * map (algebraMap k R) g⁻¹ ∈ zeroLocus I R := fun a ha ↦ by
+  rw [← evalAlgHom_comp_translate, AlgHom.comp_apply]
+  exact hx _ (hg a ha)
+
+/-- Conjugation by `g` as an automorphism of the closed subgroup scheme `V(I)`, when it preserves
+the Hopf ideal `I` together with conjugation by `g⁻¹`: the spectrum of the automorphism of
+`k[GL_n] ⧸ I` induced by `translate g g⁻¹`. -/
+noncomputable def subgroupSchemeConjIso : subgroupScheme I ≅ subgroupScheme I where
+  hom := (Spec.map (CommRingCat.ofHom
+    (Ideal.quotientMapₐ (I := I) I (translate g g⁻¹) hg).toRingHom)).asOver (Spec (.of k))
+  inv := (Spec.map (CommRingCat.ofHom
+    (Ideal.quotientMapₐ (I := I) I (translate g⁻¹ g) hg').toRingHom)).asOver (Spec (.of k))
+  hom_inv_id := by
+    apply Over.OverMorphism.ext
+    change Spec.map _ ≫ Spec.map _ = 𝟙 _
+    rw [← Spec.map_comp, ← Spec.map_id]
+    congr 1
+    refine CommRingCat.hom_ext (Ideal.Quotient.ringHom_ext (RingHom.ext fun a ↦ ?_))
+    change Ideal.Quotient.mk I (translate g g⁻¹ (translate g⁻¹ g a)) = Ideal.Quotient.mk I a
+    rw [← AlgHom.comp_apply, translate_comp_translate, inv_mul_cancel, translate_one_one,
+      AlgHom.id_apply]
+  inv_hom_id := by
+    apply Over.OverMorphism.ext
+    change Spec.map _ ≫ Spec.map _ = 𝟙 _
+    rw [← Spec.map_comp, ← Spec.map_id]
+    congr 1
+    refine CommRingCat.hom_ext (Ideal.Quotient.ringHom_ext (RingHom.ext fun a ↦ ?_))
+    change Ideal.Quotient.mk I (translate g⁻¹ g (translate g g⁻¹ a)) = Ideal.Quotient.mk I a
+    rw [← AlgHom.comp_apply, translate_comp_translate, mul_inv_cancel, translate_one_one,
+      AlgHom.id_apply]
+
+/-- The automorphism `subgroupSchemeConjIso` of `V(I)` is the restriction of the conjugation
+`conjHom g` of `𝔾𝕃(n; k)`. -/
+@[reassoc]
+theorem subgroupSchemeConjIso_hom_comp_subgroupSchemeι :
+    (subgroupSchemeConjIso g hg hg').hom ≫ subgroupSchemeι I =
+      subgroupSchemeι I ≫ conjHom g := by
+  apply Over.OverMorphism.ext
+  change Spec.map _ ≫ Spec.map _ = Spec.map _ ≫ Spec.map _
+  rw [← Spec.map_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp, ← CommRingCat.ofHom_comp]
+  rfl
+
+/-- Conjugation by `g` is an automorphism of the group scheme `V(I)`. -/
+instance : IsMonHom (subgroupSchemeConjIso g hg hg').hom where
+  one_hom := by
+    rw [← cancel_mono (subgroupSchemeι I), Category.assoc,
+      subgroupSchemeConjIso_hom_comp_subgroupSchemeι, IsMonHom.one_hom_assoc, IsMonHom.one_hom,
+      IsMonHom.one_hom]
+  mul_hom := by
+    rw [← cancel_mono (subgroupSchemeι I), Category.assoc,
+      subgroupSchemeConjIso_hom_comp_subgroupSchemeι, IsMonHom.mul_hom_assoc, IsMonHom.mul_hom,
+      Category.assoc, IsMonHom.mul_hom, tensorHom_comp_tensorHom_assoc,
+      tensorHom_comp_tensorHom_assoc, subgroupSchemeConjIso_hom_comp_subgroupSchemeι]
+
+/-- On `R`-points, the automorphism `subgroupSchemeConjIso` of `V(I)` is conjugation by the image
+of `g` in `GL n R`. -/
+theorem zeroLocusMulEquiv_comp_subgroupSchemeConjIso_hom {R : Type u} [CommRing R]
+    [Algebra k R] (x : zeroLocus I R) :
+    zeroLocusMulEquiv I R x ≫ (subgroupSchemeConjIso g hg hg').hom =
+      zeroLocusMulEquiv I R ⟨_, mul_mul_inv_mem_zeroLocus g hg x.2⟩ := by
+  apply injective_homMulEquiv_comp I R
+  dsimp only
+  rw [Category.assoc, subgroupSchemeConjIso_hom_comp_subgroupSchemeι, ← Category.assoc,
+    homMulEquiv_comp_conjHom, homMulEquiv_zeroLocusMulEquiv_comp,
+    homMulEquiv_zeroLocusMulEquiv_comp]
+
+end Conjugation
+
 section Derived
 
 /-! ### The derived subgroup
@@ -322,6 +437,62 @@ theorem range_subgroupSchemeHom_le_identityComponent :
     Set.range (subgroupSchemeHom (le_identityComponent I)).left.base =
       connectedComponent (GrpObj.onePoint (subgroupScheme I)) := by
   sorry
+
+/-- A `k`-point of `V(I)` whose image lies in the connected component of the identity is a
+`k`-point of the identity component: its matrix satisfies the equations `identityComponent I`. -/
+theorem mem_zeroLocus_identityComponent_of_range_subset {g : zeroLocus I k}
+    (hg : Set.range (zeroLocusMulEquiv I k g).left.base ⊆
+      connectedComponent (GrpObj.onePoint (subgroupScheme I))) :
+    (g : GL n k) ∈ zeroLocus (identityComponent I) k := by
+  obtain ⟨χ, hχ⟩ := Spec.mapMulEquiv.surjective (zeroLocusMulEquiv I k g)
+  have hev : evalAlgHom (g : GL n k) = χ.ofConv.comp (Ideal.Quotient.mkₐ k I) := by
+    have h := homMulEquiv_zeroLocusMulEquiv_comp g
+    rw [← hχ, mapMulEquiv_comp_subgroupSchemeι, GeneralLinearGroup.homMulEquiv_mapMulEquiv] at h
+    rw [← h]
+    exact congrArg ofConv ((algHomMulEquiv n k k).symm_apply_apply _)
+  let pt : Spec (.of k) := ⟨⊥, Ideal.isPrime_bot⟩
+  obtain ⟨y, hy⟩ := (range_subgroupSchemeHom_le_identityComponent I).symm ▸ hg ⟨pt, rfl⟩
+  intro a ha
+  rw [hev]
+  have hx := congrArg PrimeSpectrum.asIdeal hy
+  rw [← hχ] at hx
+  change Ideal.comap _ y.asIdeal = Ideal.comap _ (⊥ : Ideal k) at hx
+  have : Ideal.Quotient.mk I a ∈
+      Ideal.comap (CommRingCat.Hom.hom (CommRingCat.ofHom χ.ofConv.toRingHom)) ⊥ := by
+    rw [← hx, Ideal.mem_comap]
+    simp [Ideal.Quotient.eq_zero_iff_mem.2 ha]
+  simpa using this
+
+/-- The `k`-points of the identity component `G°` have finite index in the `k`-points of
+`G = V(I)`. This is `AlgebraicGeometry.GrpObj.finiteIndex_range_identityComponentι` for the group
+scheme `V(I)`, read on matrices through `zeroLocusMulEquiv`. (blueprint: `sk-p-geometry`) -/
+theorem finiteIndex_subgroupOf_zeroLocus_identityComponent :
+    ((zeroLocus (identityComponent I) k).subgroupOf (zeroLocus I k)).FiniteIndex := by
+  let X := (Spec (.of k)).asOver (Spec (.of k))
+  let e : X ≅ 𝟙_ (Over (Spec (.of k))) := Over.isoMk (Iso.refl (Spec (.of k))) (by
+    simp [X, specOverSpec_over, Algebra.algebraMap_self])
+  let α : (𝟙_ (Over (Spec (.of k))) ⟶ subgroupScheme I) →* zeroLocus I k :=
+    (zeroLocusMulEquiv I k).symm.toMonoidHom.comp
+      { toFun p := CartesianMonoidalCategory.toUnit X ≫ p
+        map_one' := MonObj.comp_one _
+        map_mul' p q := MonObj.comp_mul _ _ _ }
+  have hα : Function.Surjective α := fun g ↦ ⟨e.inv ≫ zeroLocusMulEquiv I k g, by
+    simp [α, CartesianMonoidalCategory.toUnit_unique (CartesianMonoidalCategory.toUnit X) e.hom]⟩
+  have := GrpObj.finiteIndex_range_identityComponentι (subgroupScheme I)
+  have hle : (IsMonHom.monoidHom (GrpObj.identityComponentι (subgroupScheme I))
+      (𝟙_ (Over (Spec (.of k))))).range ≤
+        ((zeroLocus (identityComponent I) k).subgroupOf (zeroLocus I k)).comap α := by
+    rintro _ ⟨q, rfl⟩
+    rw [Subgroup.mem_comap, Subgroup.mem_subgroupOf]
+    refine mem_zeroLocus_identityComponent_of_range_subset I ?_
+    rw [← GrpObj.range_identityComponentι]
+    rintro _ ⟨x, rfl⟩
+    simp only [α, MonoidHom.coe_comp, Function.comp_apply, MulEquiv.coe_toMonoidHom,
+      MulEquiv.apply_symm_apply]
+    exact ⟨_, rfl⟩
+  have := Subgroup.finiteIndex_of_le hle
+  rw [Subgroup.finiteIndex_iff, ← Subgroup.index_comap_of_surjective _ hα]
+  exact Subgroup.FiniteIndex.index_ne_zero
 
 end IdentityComponent
 

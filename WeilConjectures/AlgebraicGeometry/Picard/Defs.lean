@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Subfunctor.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent
+public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 
 /-!
@@ -153,6 +154,21 @@ lemma surjective_appTop_of_isIso_pushforwardUnitMap {Z B : Scheme.{u}} (g : Z �
   obtain ⟨b, hb⟩ : ∃ b : Γ(B, ⊤), Modules.Hom.app φ ⊤ b = c := hbij.2 _
   exact ⟨b * b₂, by rw [map_mul, ← hm, ← hφ, hb]⟩
 
+/-- If the canonical map `𝒪_B ⟶ g_* 𝒪_Z` is an isomorphism, then
+`g^♯ : Γ(B, 𝒪_B) ⟶ Γ(Z, 𝒪_Z)` is bijective: on global sections the map is `b ↦ g^♯ b * m` for
+the image `m` of `1`, and it is bijective. -/
+lemma bijective_appTop_of_isIso_pushforwardUnitMap {Z B : Scheme.{u}} (g : Z ⟶ B)
+    [IsIso (pushforwardUnitMap g)] : Function.Bijective g.appTop := by
+  refine ⟨fun b b' h ↦ ?_, surjective_appTop_of_isIso_pushforwardUnitMap g⟩
+  let φ : Modules.unit B ⟶ (Modules.pushforward g).obj (Modules.unit Z) :=
+    pushforwardUnitMap g
+  have : IsIso φ := inferInstanceAs (IsIso (pushforwardUnitMap g))
+  have hbij : Function.Bijective (Modules.Hom.app φ ⊤) := ConcreteCategory.bijective_of_isIso _
+  set m : Γ(Z, ⊤) := Modules.Hom.app φ ⊤ (1 : Γ(B, ⊤))
+  have hφ (b : Γ(B, ⊤)) : Modules.Hom.app φ ⊤ b = g.appTop b * m :=
+    (congrArg _ (mul_one b).symm).trans (Modules.Hom.app_smul φ b (1 : Γ(B, ⊤)))
+  exact hbij.1 (by rw [hφ, hφ b', h])
+
 /-- The relative Picard functor `Pic_{X/S}` of a morphism of schemes `f : X ⟶ S`: the fppf
 sheafification of the Picard presheaf `T ↦ Pic (X_T)`, so that on the level of sections
 `Pic_{X/S}(T)` is the fppf-sheafified version of `Pic (X_T) / pr_T^* Pic T`.
@@ -170,6 +186,71 @@ i.e. the unit of the fppf sheafification adjunction. -/
 noncomputable abbrev toPicardFunctor (f : X ⟶ S) : picardPresheaf f ⟶ (picardFunctor f).obj :=
   toSheafify (Scheme.fppfTopology.over S) (picardPresheaf f)
 
+section BaseChange
+
+variable {X' S' : Scheme.{u}} {f : X ⟶ S} {g : S' ⟶ S} {f' : X' ⟶ S'} {g' : X' ⟶ X}
+
+/-- For a cartesian square exhibiting `f' : X' ⟶ S'` as the base change of `f : X ⟶ S` along
+`g : S' ⟶ S` and a scheme `T` over `S'`, the fibre products `X' ×_{S'} T` and `X ×_S T` agree. -/
+noncomputable def pullbackIsoOfIsPullback (h : IsPullback g' f' f g) (T : Over S') :
+    Limits.pullback f' T.hom ≅ Limits.pullback f (T.hom ≫ g) :=
+  ((IsPullback.of_hasPullback f' T.hom).paste_horiz h).isoPullback
+
+@[reassoc (attr := simp)]
+lemma pullbackIsoOfIsPullback_hom_fst (h : IsPullback g' f' f g) (T : Over S') :
+    (pullbackIsoOfIsPullback h T).hom ≫ Limits.pullback.fst f (T.hom ≫ g) =
+      Limits.pullback.fst f' T.hom ≫ g' :=
+  IsPullback.isoPullback_hom_fst _
+
+@[reassoc (attr := simp)]
+lemma pullbackIsoOfIsPullback_hom_snd (h : IsPullback g' f' f g) (T : Over S') :
+    (pullbackIsoOfIsPullback h T).hom ≫ Limits.pullback.snd f (T.hom ≫ g) =
+      Limits.pullback.snd f' T.hom :=
+  IsPullback.isoPullback_hom_snd _
+
+@[reassoc]
+lemma pullbackIsoOfIsPullback_hom_comp_baseChangeMap (h : IsPullback g' f' f g)
+    {T T' : Over S'} (φ : T' ⟶ T) :
+    (pullbackIsoOfIsPullback h T').hom ≫ baseChangeMap f ((Over.map g).map φ) =
+      baseChangeMap f' φ ≫ (pullbackIsoOfIsPullback h T).hom := by
+  apply Limits.pullback.hom_ext <;>
+    simp [baseChangeMap]
+
+/-- **The Picard presheaf is compatible with base change.** For a cartesian square exhibiting
+`f' : X' ⟶ S'` as the base change of `f : X ⟶ S` along `g : S' ⟶ S`, the restriction of the
+Picard presheaf of `f` to schemes over `S'` is the Picard presheaf of `f'`, through the
+identifications `X' ×_{S'} T ≅ X ×_S T` (`AlgebraicGeometry.pullbackIsoOfIsPullback`). -/
+noncomputable def picardPresheafIsoOfIsPullback (h : IsPullback g' f' f g) :
+    (Over.map g).op ⋙ picardPresheaf f ≅ picardPresheaf f' :=
+  NatIso.ofComponents (fun T ↦ Equiv.toIso
+    { toFun := Pic.map (pullbackIsoOfIsPullback h T.unop).hom
+      invFun := Pic.map (pullbackIsoOfIsPullback h T.unop).inv
+      left_inv L := by rw [← Pic.map_comp, Iso.inv_hom_id, Pic.map_id]
+      right_inv L := by rw [← Pic.map_comp, Iso.hom_inv_id, Pic.map_id] })
+    fun {T T'} φ ↦ by
+      ext L
+      exact (Pic.map_comp _ _ L).symm.trans ((congrArg (fun m ↦ Pic.map m L)
+        (pullbackIsoOfIsPullback_hom_comp_baseChangeMap h φ.unop)).trans (Pic.map_comp _ _ L))
+
+@[simp]
+lemma picardPresheafIsoOfIsPullback_hom_app (h : IsPullback g' f' f g) (T : (Over S')ᵒᵖ)
+    (L : (picardPresheaf f).obj ((Over.map g).op.obj T)) :
+    (picardPresheafIsoOfIsPullback h).hom.app T L =
+      Pic.map (pullbackIsoOfIsPullback h T.unop).hom L :=
+  rfl
+
+/-- Restricting the fppf sheafification of a presheaf `P` on schemes over `S` to schemes over
+`S'`, along `g : S' ⟶ S`, gives the fppf sheafification of the restriction of `P`: the functor
+`Over.map g` is continuous and cocontinuous for the fppf topologies. -/
+noncomputable def overMapOpCompSheafifyIso (g : S' ⟶ S) (P : (Over S)ᵒᵖ ⥤ Type (u + 1)) :
+    (Over.map g).op ⋙ ((presheafToSheaf (Scheme.fppfTopology.over S) _).obj P).obj ≅
+      ((presheafToSheaf (Scheme.fppfTopology.over S') _).obj ((Over.map g).op ⋙ P)).obj :=
+  (sheafToPresheaf _ _).mapIso
+    (((Over.map g).pushforwardContinuousSheafificationCompatibility (Type (u + 1))
+      (Scheme.fppfTopology.over S') (Scheme.fppfTopology.over S)).app P).symm
+
+end BaseChange
+
 /-- **The Picard functor is compatible with base change.** Let `f : X ⟶ S` be a morphism of
 schemes, let `g : S' ⟶ S` be a morphism and let `f' : X' ⟶ S'` be the base change of `f` along
 `g`. Then the restriction of `Pic_{X/S}` to schemes over `S'` is `Pic_{X'/S'}`.
@@ -186,7 +267,8 @@ isomorphism exists, which is weaker; this suffices for the current applications.
 theorem nonempty_picardFunctor_iso_of_isPullback {X' S' : Scheme.{u}} {f : X ⟶ S} {g : S' ⟶ S}
     {f' : X' ⟶ S'} {g' : X' ⟶ X} (h : IsPullback g' f' f g) :
     Nonempty ((Over.map g).op ⋙ (picardFunctor f).obj ≅ (picardFunctor f').obj) :=
-  sorry
+  ⟨overMapOpCompSheafifyIso g (picardPresheaf f) ≪≫
+    (sheafToPresheaf _ _).mapIso ((presheafToSheaf _ _).mapIso (picardPresheafIsoOfIsPullback h))⟩
 
 /-- The `σ`-normalized relative Picard functor `Pic_{X/S,σ}` of a morphism of schemes
 `f : X ⟶ S` equipped with a section `σ`: the subfunctor of the Picard presheaf `T ↦ Pic (X_T)`
@@ -304,8 +386,95 @@ theorem exists_iso_tensorObj_of_toPicardFunctor_app_eq (f : X ⟶ S)
     (L L' : (Limits.pullback f T.hom).Pic)
     (h : (toPicardFunctor f).app (.op T) L = (toPicardFunctor f).app (.op T) L') :
     ∃ N : T.left.Pic, Nonempty ((fromSkeleton _).obj L.val ≅ (fromSkeleton _).obj L'.val ⊗
-      (Modules.pullback (Limits.pullback.snd f T.hom)).obj ((fromSkeleton _).obj N.val)) :=
-  sorry
+      (Modules.pullback (Limits.pullback.snd f T.hom)).obj ((fromSkeleton _).obj N.val)) := by
+  have hbij (Y : Over S) : Function.Bijective (pullback.snd f Y.hom).appTop :=
+    have := hf Y
+    bijective_appTop_of_isIso_pushforwardUnitMap _
+  -- The classes `ℒ` and `ℒ'` agree on the members of an fppf covering `{T i ⟶ T}`.
+  have hR := Presheaf.equalizerSieve_mem (fppfTopology.over S) (toPicardFunctor f) L L' h
+  have : fppfPrecoverage.HasIsos := ⟨fun {_ _} f _ ↦ by
+    rw [← Presieve.ofArrows_pUnit.{0}, fppfPrecoverage, ofArrows_mem_precoverage_iff]
+    exact ⟨fun x ↦ ⟨⟨⟩, (inv f) x, by rw [← Scheme.Hom.comp_apply, IsIso.inv_hom_id]; rfl⟩,
+      fun _ ↦ ⟨inferInstance, inferInstance⟩⟩⟩
+  rw [GrothendieckTopology.mem_over_iff,
+    Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition] at hR
+  obtain ⟨R, hR, hle⟩ := hR
+  obtain ⟨ι, Z, a, rfl⟩ := R.exists_eq_ofArrows
+  let T' (i : ι) : Over S := Over.mk (a i ≫ T.hom)
+  let g (i : ι) : T' i ⟶ T := Over.homMk (a i)
+  have heq (i : ι) : Pic.map (baseChangeMap f (g i)) L = Pic.map (baseChangeMap f (g i)) L' :=
+    (Sieve.overEquiv_iff _ _).1 (hle _ _ (Presieve.ofArrows.mk i))
+  -- The families `T i ⟶ T` and `X_{T i} ⟶ X_T` are fpqc coverings.
+  have hR' : Presieve.ofArrows (fun i ↦ (T' i).left) (fun i ↦ (g i).left) ∈
+      fppfPrecoverage T.left := hR
+  have hgT : Sieve.ofArrows (fun i ↦ (T' i).left) (fun i ↦ (g i).left) ∈
+      fpqcTopology T.left :=
+    Precoverage.generate_mem_toGrothendieck (fppfPrecoverage_le_fpqcPrecoverage _ hR')
+  have hgX : Sieve.ofArrows _ (fun i ↦ baseChangeMap f (g i)) ∈
+      fpqcTopology (pullback f T.hom) :=
+    Precoverage.generate_mem_toGrothendieck (fppfPrecoverage_le_fpqcPrecoverage _
+      (Precoverage.mem_coverings_of_isPullback (fun i ↦ (g i).left) hR' (pullback.snd f T.hom)
+        (fun i ↦ baseChangeMap f (g i)) (fun i ↦ pullback.snd f (T' i).hom)
+        (fun i ↦ isPullback_baseChangeMap f (g i))))
+  -- `𝒦 = ℒ ⊗ ℒ'^∨` is trivial on the `X_{T i}`.
+  let A := (fromSkeleton _).obj L.val
+  let B := (fromSkeleton _).obj L'.val
+  have := L.isInvertible
+  have := L'.isInvertible
+  have := Modules.IsInvertible.of_sheafOfModules A
+  have := Modules.IsInvertible.of_sheafOfModules B
+  obtain ⟨eB⟩ := Modules.nonempty_tensorObj_dual_iso_unit B
+  let K := A ⊗ Modules.dual B
+  let P : (pullback f T.hom).Modules :=
+    (Modules.pullback (pullback.snd f T.hom)).obj (𝟙_ T.left.Modules)
+  have eK (i : ι) : Nonempty ((Modules.pullback (baseChangeMap f (g i))).obj K ≅
+      (Modules.pullback (baseChangeMap f (g i))).obj P) := by
+    obtain ⟨eAB⟩ := Pic.eq_iff_nonempty_iso.1 (heq i)
+    exact ⟨(Modules.nonempty_pullback_tensorObj_iso _ _ _).some ≪≫
+      (((fromSkeletonToSkeletonIso _).symm ≪≫ eAB ≪≫ fromSkeletonToSkeletonIso _) ⊗ᵢ
+        Iso.refl _) ≪≫ (Modules.nonempty_pullback_tensorObj_iso _ _ _).some.symm ≪≫
+      (Modules.pullback _).mapIso eB ≪≫ Modules.pullbackObjUnitIso _ ≪≫
+      (Modules.pullbackObjUnitIso _).symm ≪≫
+      (Modules.pullback _).mapIso (Modules.pullbackObjUnitIso _).symm⟩
+  -- Hence the descent datum of `𝒦` is a twist of that of `f_T^* 𝒪_T` by a cocycle `c`.
+  have hD₂ (i : ι) : Modules.IsInvertible (X := pullback f (T' i).hom)
+      (((modulesPseudofunctor.toDescentData fun i ↦ baseChangeMap f (g i)).obj P).obj i) :=
+    inferInstanceAs ((Modules.pullback (baseChangeMap f (g i))).obj P).IsInvertible
+  obtain ⟨cX, ⟨eKD⟩⟩ := DescentCocycle.exists_iso_twist
+    (D₁ := (modulesPseudofunctor.toDescentData fun i ↦ baseChangeMap f (g i)).obj K)
+    (D₂ := (modulesPseudofunctor.toDescentData fun i ↦ baseChangeMap f (g i)).obj P) eK
+  -- The cocycle comes from `T`; the twisted descent datum of `𝒪_T` is effective.
+  let cT := cX.ofBaseChange hbij
+  let DT := cT.twist ((modulesPseudofunctor.toDescentData fun i ↦ (g i).left).obj
+    (𝟙_ T.left.Modules))
+  obtain ⟨N, -, ⟨eN⟩⟩ := exists_isQuasicoherent_toDescentData_iso _ hgT DT fun i ↦
+    inferInstanceAs ((Modules.pullback (g i).left).obj (𝟙_ T.left.Modules)).IsQuasicoherent
+  have : SheafOfModules.IsInvertible.{u, u, u} (N : T.left.Modules) :=
+    isInvertible_of_toDescentData_iso _ hgT DT N ⟨eN⟩ fun i ↦
+      Modules.IsInvertible.sheafOfModules_isInvertible
+        ((Modules.pullback (g i).left).obj (𝟙_ T.left.Modules))
+  let N' : T.left.Modules := N
+  have := Modules.IsInvertible.of_sheafOfModules N'
+  -- The descent data of `f_T^* 𝒩` and of `𝒦` agree, hence `f_T^* 𝒩 ≅ 𝒦`.
+  have w (i : ι) : pullback.snd f (T' i).hom ≫ (g (id i)).left =
+      baseChangeMap f (g i) ≫ pullback.snd f T.hom :=
+    (baseChangeMap_snd f (g i)).symm
+  let E :=
+    ((Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso modulesPseudofunctor w).app
+      N).symm ≪≫
+    (Pseudofunctor.DescentData.pullFunctor modulesPseudofunctor w).mapIso eN ≪≫
+    eqToIso (cT.pullFunctor_obj_twist w _) ≪≫
+    (cT.pull w).twistFunctor.mapIso
+      ((Pseudofunctor.DescentData.toDescentDataCompPullFunctorIso modulesPseudofunctor w).app _) ≪≫
+    eqToIso (congrArg (fun c ↦ DescentCocycle.twist c _) (cX.pull_ofBaseChange hbij)) ≪≫
+    eKD.symm
+  obtain ⟨eNK⟩ := nonempty_iso_of_toDescentData_iso _ hgX
+    (inferInstanceAs ((Modules.pullback (pullback.snd f T.hom)).obj N').IsQuasicoherent)
+    (inferInstanceAs K.IsQuasicoherent) E
+  refine ⟨Pic.mk N', ⟨?_⟩⟩
+  exact (ρ_ A).symm ≪≫ whiskerLeftIso A (eB.symm ≪≫ β_ B _) ≪≫ (α_ A _ B).symm ≪≫
+    β_ K B ≪≫ whiskerLeftIso B (eNK.symm ≪≫
+      (Modules.pullback _).mapIso (fromSkeletonToSkeletonIso N').symm)
 
 /-- **Exactness of the Picard sequence in the middle.** Assume that `𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an
 isomorphism for every `T` in `(Sch/S)_fppf`.  Two classes `ℒ, ℒ' ∈ Pic (X_T)` have the same image

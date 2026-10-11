@@ -17,6 +17,8 @@ public import Mathlib.RingTheory.PowerSeries.Derivative
 public import Mathlib.RingTheory.PowerSeries.Inverse
 public import Mathlib.RingTheory.PowerSeries.PiTopology
 public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
+public import WeilConjectures.WeilSheaf.StalkFunctor
+public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.Tensor
 
 /-!
@@ -61,7 +63,7 @@ in general.
 ## TODO
 
 Prove the inputs about Weil sheaves, stated with `sorry`: the traces of twists, envelopes and
-tensor products, the purity and reality of the envelope, the trace energy bound from an upper
+tensor products, the trace energy bound from an upper
 weight bound, the decomposition of the trace energy of `j_*M` and the bound on its boundary
 part, and the `L²`-rigidity for real sheaves.
 -/
@@ -352,7 +354,31 @@ theorem IsPunctuallyPureOfWeight.constantTwist {ι : PadicAlgCl l →+* ℂ} {F 
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ} {c : ℝ}
     (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :
     (F.constantTwist b).IsPunctuallyPureOfWeight ι (w + c) := by
-  sorry
+  intro x
+  obtain ⟨e⟩ := F.nonempty_equiv_stalk_constantTwist b x
+  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
+  have hb0 : (b : PadicAlgCl l) ≠ 0 := b.ne_zero
+  have hnorm : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (c / 2) := by
+    rw [← hb, mul_div_cancel_left₀ _ two_ne_zero, Real.rpow_logb (by positivity) hq.ne'
+      (norm_pos_iff.2 ((map_ne_zero ι).2 hb0))]
+  refine FrobeniusModule.IsPureOfWeight.of_equiv e ((h x).rescale (pow_pos Nat.card_pos _)
+    (pow_ne_zero _ hb0) ?_)
+  rw [map_pow, norm_pow, hnorm, Nat.cast_pow, ← Real.rpow_natCast,
+    ← Real.rpow_mul (by positivity), ← Real.rpow_natCast (Nat.card k₀ : ℝ),
+    ← Real.rpow_mul (by positivity)]
+  ring_nf
+
+/-- The constant twist `F ⊗ 𝓑_b` with `|ι b| = q^{-w/2}` of a sheaf punctually `ι`-pure of
+weight `w` is punctually `ι`-pure of weight `0`. -/
+theorem IsPunctuallyPureOfWeight.constantTwist_zero {ι : PadicAlgCl l →+* ℂ}
+    {F : WeilSheaf k₀ l X} {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
+    (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) :
+    (F.constantTwist b).IsPunctuallyPureOfWeight ι 0 := by
+  have hq : (1 : ℝ) < Nat.card k₀ := by exact_mod_cast Finite.one_lt_card
+  have h' := h.constantTwist (b := b) (c := -w) (by
+    rw [hb, Real.logb_rpow (by positivity) hq.ne']
+    ring)
+  rwa [add_neg_cancel] at h'
 
 /-- The envelope `Env_ι(F; b)` of a lisse sheaf `F` punctually `ι`-pure of weight `w`, with
 `|ι b| = q^{-w/2}`, is `ι`-real: at a closed point the eigenvalues `β_j` of `F⁰` have
@@ -363,7 +389,14 @@ theorem isReal_realEnvelope {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l 
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
     (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) :
     (F.realEnvelope hF b).IsReal ι := by
-  sorry
+  intro x
+  obtain ⟨e⟩ := nonempty_equiv_stalk_biprod (F.constantTwist b)
+    ((F.constantTwist b).dual (hF.constantTwist (b := b))) x
+  obtain ⟨e'⟩ := nonempty_equiv_stalk_dual (hF.constantTwist (b := b)) x
+  refine ((h.constantTwist_zero hb x).isReal_prod_dual
+    (pow_pos Nat.card_pos _)).of_localPolynomial_eq (e.localPolynomial_eq.trans ?_)
+  rw [FrobeniusModule.localPolynomial_prod, FrobeniusModule.localPolynomial_prod,
+    e'.localPolynomial_eq]
 
 /-- The envelope of a punctually `ι`-pure sheaf of weight `w`, with `|ι b| = q^{-w/2}`, is
 punctually `ι`-pure of weight `0`: `F⁰` is by
@@ -374,7 +407,14 @@ theorem IsPunctuallyPureOfWeight.realEnvelope {ι : PadicAlgCl l →+* ℂ} {F :
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) (hF : F.IsLisse) {b : (PadicAlgCl l)ˣ}
     (hb : ‖ι b‖ = (Nat.card k₀ : ℝ) ^ (-w / 2)) :
     (F.realEnvelope hF b).IsPunctuallyPureOfWeight ι 0 := by
-  sorry
+  intro x
+  obtain ⟨e⟩ := nonempty_equiv_stalk_biprod (F.constantTwist b)
+    ((F.constantTwist b).dual (hF.constantTwist (b := b))) x
+  obtain ⟨e'⟩ := nonempty_equiv_stalk_dual (hF.constantTwist (b := b)) x
+  have h0 := h.constantTwist_zero hb x
+  have h0' := h0.dual
+  rw [neg_zero] at h0'
+  exact (h0.prod (h0'.of_equiv e')).of_equiv e
 
 /-- The trace energies of the constant twist `F ⊗ 𝓑_b` with `|ι b| = q^{-w/2}` are those of `F`
 divided by `q^{mw}`: the twist has trace function `t_{F ⊗ 𝓑_b}(y) = bᵐ t_F(y)` at
