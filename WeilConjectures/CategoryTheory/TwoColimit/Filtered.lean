@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Functor.FullyFaithful
 public import Mathlib.CategoryTheory.ObjectProperty.Basic
 public import Mathlib.CategoryTheory.Whiskering
@@ -323,6 +324,55 @@ instance full_functor [∀ E, (Φ.F E).Full] : (Φ.functor hP).Full where
     exact Category.comp_id y.f
 
 end Morphism
+
+section Restrict
+
+variable (Q : ∀ E, ObjectProperty (D.C E))
+  (hT : ∀ {E L : S} (h : E ≤ L) (K : D.C E), Q E K → Q L ((D.T h).obj K))
+
+/-- The restriction of a directed system of categories to full subcategories stable under the
+transition functors. -/
+noncomputable def restrict : TwoColimitData.{w, v, u} S where
+  C E := (Q E).FullSubcategory
+  T h := (Q _).lift ((Q _).ι ⋙ D.T h) (fun K ↦ hT h K.1 K.2)
+  comp h h' := NatIso.ofComponents
+    (fun K ↦ (ObjectProperty.fullyFaithfulι _).preimageIso ((D.comp h h').app K.1))
+    (fun f ↦ (ObjectProperty.fullyFaithfulι _).map_injective ((D.comp h h').hom.naturality
+      ((Q _).ι.map f)))
+  cocycle h h' h'' := by
+    ext K
+    exact congr_app (D.cocycle h h' h'') K.1
+
+variable {D} {D' : TwoColimitData.{w, v, u} S} (Φ : D.Morphism D')
+  (Q' : ∀ E, ObjectProperty (D'.C E))
+  (hT' : ∀ {E L : S} (h : E ≤ L) (K : D'.C E), Q' E K → Q' L ((D'.T h).obj K))
+  (hF : ∀ E (K : D.C E), Q E K → Q' E ((Φ.F E).obj K))
+
+/-- The restriction of a morphism of directed systems to full subcategories. -/
+noncomputable def Morphism.restrict : (D.restrict Q hT).Morphism (D'.restrict Q' hT') where
+  F E := (Q' E).lift ((Q E).ι ⋙ Φ.F E) (fun K ↦ hF E K.1 K.2)
+  κ h := NatIso.ofComponents
+    (fun K ↦ (ObjectProperty.fullyFaithfulι _).preimageIso ((Φ.κ h).app K.1))
+    (fun f ↦ (ObjectProperty.fullyFaithfulι _).map_injective ((Φ.κ h).hom.naturality
+      ((Q _).ι.map f)))
+  hexagon h h' := by
+    ext K
+    exact (Q' _).ι.map_injective (congr_app (Φ.hexagon h h') K.1)
+
+instance Morphism.full_restrict_F [∀ E, (Φ.F E).Full] (E : S) :
+    ((Φ.restrict Q hT Q' hT' hF).F E).Full :=
+  have : ((Φ.restrict Q hT Q' hT' hF).F E ⋙ (Q' E).ι).Full :=
+    inferInstanceAs ((Q E).ι ⋙ Φ.F E).Full
+  have := (ObjectProperty.fullyFaithfulι (Q' E)).faithful
+  Functor.Full.of_comp_faithful _ (Q' E).ι
+
+instance Morphism.faithful_restrict_F [∀ E, (Φ.F E).Faithful] (E : S) :
+    ((Φ.restrict Q hT Q' hT' hF).F E).Faithful :=
+  have : ((Φ.restrict Q hT Q' hT' hF).F E ⋙ (Q' E).ι).Faithful :=
+    inferInstanceAs ((Q E).ι ⋙ Φ.F E).Faithful
+  Functor.Faithful.of_comp _ (Q' E).ι
+
+end Restrict
 
 end TwoColimitData
 

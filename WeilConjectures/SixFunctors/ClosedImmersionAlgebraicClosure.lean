@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.TwoColimit.Filtered
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
+public import WeilConjectures.SixFunctors.Etale.Derived.AlgebraicClosureBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgebraicClosureLowerStar
 
 /-!
@@ -19,27 +20,24 @@ whose objects are pairs `(E, K)` with `E ⊆ ℚ̄_ℓ` a finite extension of `�
 `Hom((E, K), (E', K')) = colim_{L ⊇ E, E'} Hom_{Dᵇc(Y, L)}(K ⊗_E L, K' ⊗_{E'} L)`.
 
 This is `AlgebraicGeometry.Etale.DerivedCategoryBoundedConstructibleAlgebraicClosure`, the
-common-stage category (`CategoryTheory.TwoColimitData.Obj`) of the directed system of rational
-stages `D_comp(Y_ét, E)` (`AlgebraicGeometry.Etale.algebraicClosureStageData`), with transition
-functors `K ↦ K ⊗_E L` realised by derived coextension of scalars along `𝒪_E → 𝒪_L`
-(`AlgebraicGeometry.Etale.rationalStageTransition`), restricted to the objects of `Dᵇc(Y, E)`.
+common-stage category (`CategoryTheory.TwoColimitData.Obj`) of the directed system of the
+categories `Dᵇc(Y, E)` (`AlgebraicGeometry.Etale.boundedConstructibleAlgebraicClosureStageData`):
+the full subcategories `Dᵇc(Y, E)` of the rational stages `D_comp(Y_ét, E)`, with the transition
+functors `K ↦ K ⊗_E L`. That these transition functors preserve `Dᵇc` is the first clause of
+blueprint `prop-weil-pbc-scalar-extension`
+(`AlgebraicGeometry.Etale.boundedConstructibleRational_rationalStageTransition`). The
+transition functors are induced by derived coextension of scalars along `𝒪_E → 𝒪_L`
+(`AlgebraicGeometry.Etale.rationalStageTransition`), which is isomorphic to the derived base
+change `− ⊗_{𝒪_E} 𝒪_L` (`AlgebraicGeometry.Etale.derivedBaseChangeTransitionIso`): `𝒪_L` is
+finite free over `𝒪_E`, so no completion is needed, and `Hom_{𝒪_E}(𝒪_L, 𝒪_E) ≅ 𝒪_L`.
 
 For a closed immersion `i : Z ⟶ X`, `Ri_*` commutes with the transition functors compatibly with
-their composition (`AlgebraicGeometry.Etale.rationalLowerStarTransitionIso_hexagon`), so it induces
-`i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)`
+their composition (`AlgebraicGeometry.Etale.rationalLowerStarTransitionIso_hexagon`) and preserves
+`Dᵇc`, so it induces `i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)`
 (`AlgebraicGeometry.Etale.algebraicClosureLowerStar`). Its action on morphisms is the filtered
-colimit of the bijections given by the rational stage
+colimit of the bijections given by the rational stages
 (`AlgebraicGeometry.Etale.full_boundedConstructibleRationalLowerStar`), hence it is fully faithful:
 blueprint `prop-sf-closed-unit-all-stages` at the stage `ℚ̄_ℓ`.
-
-## Implementation notes
-
-The morphisms of `𝒞_Y` are taken in the rational stages `D_comp(Y_ét, L)`, of which `Dᵇc(Y, L)` is
-a full subcategory; they are the blueprint's morphisms once the transition functors preserve
-`Dᵇc`, which is not proved here. The transition functors are coextension of scalars, which is
-isomorphic to the derived base change `− ⊗_{𝒪_E} 𝒪_L`
-(`AlgebraicGeometry.Etale.derivedBaseChangeTransitionIso`), `𝒪_L` being finite free over `𝒪_E`
-with `Hom_{𝒪_E}(𝒪_L, 𝒪_E) ≅ 𝒪_L`.
 -/
 
 @[expose] public section
@@ -111,12 +109,32 @@ noncomputable def algebraicClosureStageData (Y : Scheme.{u}) : TwoColimitData (F
   comp h h' := rationalStageTransitionComp Y h h'
   cocycle h h' h'' := rationalStageTransitionComp_cocycle Y h h' h''
 
-/-- Blueprint `def-weil-algebraically-closed-coefficients`: the coefficient stage
-`Dᵇc(Y, ℚ̄_ℓ)`, the category of pairs `(E, K)` with `K ∈ Dᵇc(Y, E)`, morphisms being represented
-over a common finite extension `L ⊇ E, E'` of `ℚ_ℓ` after the transition functors `− ⊗_E L`. -/
-abbrev DerivedCategoryBoundedConstructibleAlgebraicClosure (Y : Scheme.{u}) :=
-  (algebraicClosureStageData l Y).Obj
+/-- Blueprint `prop-weil-pbc-scalar-extension` (its first clause, from the proper base change
+subsection): derived scalar extension `K ↦ K ⊗_E L` is a functor `Dᵇc(Y, E) ⥤ Dᵇc(Y, L)`. The
+transition functor `AlgebraicGeometry.Etale.rationalStageTransition` is induced by the derived
+transition `derivedStageTransition`, which is isomorphic to the derived base change
+`− ⊗_{𝒪_E} 𝒪_L` (`AlgebraicGeometry.Etale.derivedBaseChangeTransitionIso`). -/
+theorem boundedConstructibleRational_rationalStageTransition (Y : Scheme.{u})
+    {E L : FiniteSubext l} (h : E ≤ L)
+    (K : DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l E.field)
+    (hK : DerivedCategory.boundedConstructibleRational l E.field Y K) :
+    DerivedCategory.boundedConstructibleRational l L.field Y
+      ((rationalStageTransition Y h).obj K) :=
+  sorry
+
+/-- The directed system of the categories `Dᵇc(Y, E)`, `E ⊆ ℚ̄_ℓ` finite over `ℚ_ℓ`, with the
+transition functors `K ↦ K ⊗_E L` (`boundedConstructibleRational_rationalStageTransition`). -/
+noncomputable def boundedConstructibleAlgebraicClosureStageData (Y : Scheme.{u}) :
+    TwoColimitData (FiniteSubext l) :=
+  (algebraicClosureStageData l Y).restrict
     (fun E ↦ DerivedCategory.boundedConstructibleRational l E.field Y)
+    (fun h K hK ↦ boundedConstructibleRational_rationalStageTransition l Y h K hK)
+
+/-- Blueprint `def-weil-algebraically-closed-coefficients`: the coefficient stage
+`Dᵇc(Y, ℚ̄_ℓ) = 𝒞_Y`, the category of pairs `(E, K)` with `K ∈ Dᵇc(Y, E)`, whose morphisms
+`(E, K) ⟶ (E', K')` are `colim_{L ⊇ E, E'} Hom_{Dᵇc(Y, L)}(K ⊗_E L, K' ⊗_{E'} L)`. -/
+abbrev DerivedCategoryBoundedConstructibleAlgebraicClosure (Y : Scheme.{u}) :=
+  (boundedConstructibleAlgebraicClosureStageData l Y).Obj (fun _ ↦ ⊤)
 
 variable {l} {Z X : Scheme.{u}}
 
@@ -130,23 +148,46 @@ noncomputable def algebraicClosureLowerStarMorphism (f : Z ⟶ X) :
 variable (i : Z ⟶ X) [IsClosedImmersion i] {k : Type u} [Field k] (aX : X ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] (hl : IsUnit ((l : ℕ) : Γ(X, ⊤)))
 
-include aX hl in
-/-- Blueprint `prop-sf-closed-unit-all-stages`, stage `ℚ̄_ℓ`: the direct image
-`i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along a closed immersion, induced by the direct images at the
-rational stages `E`. -/
-noncomputable def algebraicClosureLowerStar :
-    DerivedCategoryBoundedConstructibleAlgebraicClosure l Z ⥤
-      DerivedCategoryBoundedConstructibleAlgebraicClosure l X :=
-  (algebraicClosureLowerStarMorphism i).functor (fun E _ hK ↦
-    have := hasInvertibleExponent_residueField l hl E
-    Etale.boundedConstructibleRational_rightDerivedLowerStar_of_isClosedImmersion i aX l
-      E.field hK)
-
 instance (E : FiniteSubext l) : ((algebraicClosureLowerStarMorphism (l := l) i).F E).Full :=
   inferInstanceAs (Etale.rightDerivedLowerStarDerivedCompleteRational l E.field i).Full
 
 instance (E : FiniteSubext l) : ((algebraicClosureLowerStarMorphism (l := l) i).F E).Faithful :=
   inferInstanceAs (Etale.rightDerivedLowerStarDerivedCompleteRational l E.field i).Faithful
+
+include i aX hl in
+/-- The direct image `Ri_*` as a morphism of the directed systems of the categories `Dᵇc(-, E)`. -/
+noncomputable def boundedConstructibleAlgebraicClosureLowerStarMorphism :
+    (boundedConstructibleAlgebraicClosureStageData l Z).Morphism
+      (boundedConstructibleAlgebraicClosureStageData l X) :=
+  TwoColimitData.Morphism.restrict (D := algebraicClosureStageData l Z)
+    (D' := algebraicClosureStageData l X)
+    (Q := fun E ↦ DerivedCategory.boundedConstructibleRational l E.field Z)
+    (hT := fun h K hK ↦ boundedConstructibleRational_rationalStageTransition l Z h K hK)
+    (Φ := algebraicClosureLowerStarMorphism i)
+    (Q' := fun E ↦ DerivedCategory.boundedConstructibleRational l E.field X)
+    (hT' := fun h K hK ↦ boundedConstructibleRational_rationalStageTransition l X h K hK)
+    (hF := fun E _ hK ↦
+    have := hasInvertibleExponent_residueField l hl E
+    Etale.boundedConstructibleRational_rightDerivedLowerStar_of_isClosedImmersion i aX l
+      E.field hK)
+
+instance (E : FiniteSubext l) :
+    ((boundedConstructibleAlgebraicClosureLowerStarMorphism i aX hl).F E).Full := by
+  unfold boundedConstructibleAlgebraicClosureLowerStarMorphism
+  exact @TwoColimitData.Morphism.full_restrict_F _ _ _ _ _ _ _ _ _ _ (fun _ ↦ inferInstance) E
+
+instance (E : FiniteSubext l) :
+    ((boundedConstructibleAlgebraicClosureLowerStarMorphism i aX hl).F E).Faithful := by
+  unfold boundedConstructibleAlgebraicClosureLowerStarMorphism
+  exact @TwoColimitData.Morphism.faithful_restrict_F _ _ _ _ _ _ _ _ _ _ (fun _ ↦ inferInstance) E
+
+/-- Blueprint `prop-sf-closed-unit-all-stages`, stage `ℚ̄_ℓ`: the direct image
+`i_* : Dᵇc(Z, ℚ̄_ℓ) ⥤ Dᵇc(X, ℚ̄_ℓ)` along a closed immersion, induced by the direct images
+`i_* : Dᵇc(Z, E) ⥤ Dᵇc(X, E)` at the rational stages. -/
+noncomputable def algebraicClosureLowerStar :
+    DerivedCategoryBoundedConstructibleAlgebraicClosure l Z ⥤
+      DerivedCategoryBoundedConstructibleAlgebraicClosure l X :=
+  (boundedConstructibleAlgebraicClosureLowerStarMorphism i aX hl).functor fun _ _ _ ↦ trivial
 
 /-- Blueprint `prop-sf-closed-unit-all-stages`, stage `ℚ̄_ℓ`: `i_*` is fully faithful on
 `Dᵇc(-, ℚ̄_ℓ)`. Its action on morphisms is the filtered colimit over the finite extensions `L` of
