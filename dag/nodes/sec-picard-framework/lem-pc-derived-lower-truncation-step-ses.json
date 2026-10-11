@@ -122,5 +122,23 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-lts2539 (reviewer sub-agent of L); spot-checked: Statement keeps the corrected form (E): 0->C_m(K)->tau_{>=m}K->tau_{>=m+1}K->0 with C_m(K) the two-term complex K^m/im d^{m-1} -> im d^m and H^m(K)[-m]->C_m(K) a quasi-isomorphism. Checked exactness degree by degree (m, m+1 kernel = im d^m, >m+1, <m), chain-map conditions, cohomology of C_m(K) (degree m = H^m, degree m+1 = 0) and naturality; the truncation is defined in the item's own statement, so the elementary steps rest on it and def-weil-abstract-derived-category (C1 ok). Not a restatement (class b): lem-weil-pbc-truncation-step-ses is the dual upper-truncation tau_{<=q} statement. FIX more, RETURN less: B4 rewrote the three step texts in TeX (\\to, \\hookrightarrow, \\operatorname{im}) and made the degreewise exactness and the degree-m cohomology computation explicit. Second reading missed the B4 plain-text arrows; its claim to have changed created.item is not reflected in the file (created.item correctly remains the triangle item).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LowerTruncationStepSES",
+  "declaration": "CochainComplex.exists_lowerTruncationStepSES",
+  "file": "lean/Sheaf/Algebra/Homology/LowerTruncationStepSES.lean",
+  "statement": "theorem exists_lowerTruncationStepSES {C : Type u} [Category.{v} C] [Abelian C] : ∃ (q : ∀ (K : CochainComplex C ℤ) (m : ℤ), K.truncGE m ⟶ K.truncGE (m + 1)), ∃ (φ : ∀ (K : CochainComplex C ℤ) (m : ℤ), ((singleFunctor C m).obj (K.homology m)) ⟶ kernel (q K m)), (∀ (K : CochainComplex C ℤ) (m : ℤ), K.πTruncGE m ≫ q K m = K.πTruncGE (m + 1)) ∧ (∀ (K : CochainComplex C ℤ) (m : ℤ), (ShortComplex.mk (kernel.ι (q K m)) (q K m) (kernel.condition (q K m))).ShortExact) ∧ (∀ (K : CochainComplex C ℤ) (m : ℤ), ∃ (e₀ : (kernel (q K m)).X m ≅ K.opcycles m) (e₁ : (kernel (q K m)).X (m + 1) ≅ Abelian.image (K.d m (m + 1))), e₀.inv ≫ (kernel.ι (q K m)).f m = (K.truncGEXIsoOpcycles m).inv ∧ e₁.inv ≫ (kernel.ι (q K m)).f (m + 1) ≫ (K.truncGEXIso m (m + 1)).hom = Abelian.image.ι (K.d m (m + 1)) ∧ e₀.inv ≫ (kernel (q K m)).d m (m + 1) ≫ e₁.hom ≫ Abelian.image.ι (K.d m (m + 1)) = K.fromOpcycles m (m + 1) ∧ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) m (K.homology m)).inv ≫ (φ K m).f m ≫ e₀.hom = K.homologyι m) ∧ (∀ (K : CochainComplex C ℤ) (m r : ℤ), r ≠ m → r ≠ m + 1 → IsZero ((kernel (q K m)).X r)) ∧ (∀ (K : CochainComplex C ℤ) (m : ℤ), (q K m).f m = 0 ∧ (K.truncGEXIso m (m + 1)).inv ≫ (q K m).f (m + 1) = (K.πTruncGE (m + 1)).f (m + 1)) ∧ (∀ (K : CochainComplex C ℤ) (m r : ℤ) (hr : m + 1 < r), (K.truncGEXIso m r (by omega)).inv ≫ (q K m).f r ≫ (K.truncGEXIso (m + 1) r (by omega)).hom = 𝟙 (K.X r)) ∧ (∀ (K : CochainComplex C ℤ) (m : ℤ), QuasiIso (φ K m)) ∧ (∀ {K L : CochainComplex C ℤ} (f : K ⟶ L) (m : ℤ), truncGEMap f m ≫ q L m = q K m ≫ truncGEMap f (m + 1) ∧ ∃ (g : kernel (q K m) ⟶ kernel (q L m)), g ≫ kernel.ι (q L m) = kernel.ι (q K m) ≫ truncGEMap f m ∧ (singleFunctor C m).map (HomologicalComplex.homologyMap f m) ≫ φ L m = φ K m ≫ g)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-lts0747",
+  "group": "F1",
+  "result": "fix",
+  "note": "Abelian C, any K : CochainComplex C ℤ, any m: tau_{>=m} = Mathlib truncGE (opcycles at m), q pinned by πTruncGE m ≫ q = πTruncGE (m+1) and componentwise 0 / quotient / identity; C_m(K) = kernel q with e0 to opcycles m, e1 to image d^m, differential = fromOpcycles, zero elsewhere; inclusions id at m and image.ι at m+1; ShortExact in complexes (degreewise); φ from single m (H^m) with component homologyι, QuasiIso; naturality of q, kernel map g, φ. No Mathlib/source successive-truncGE SES (only shortComplexTruncLE_shortExact). H9 fix: imports TStructure + HomologicalComplexAbelian (latter redundant, former unneeded) replaced by Embedding.CochainComplex"
  }
 }
