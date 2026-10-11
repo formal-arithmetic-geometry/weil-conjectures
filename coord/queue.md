@@ -1,11 +1,11 @@
 # Work queue
 
-305 items; claim with `tools/claim.py next <group> [--stage N]`.
+300 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (305)
+## Stage 2: nodes to state (300)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -39,27 +39,24 @@
 | `lem-weil-pbc-etale-sections-fpqc-descent` | 1 | state |
 | `lem-weil-pbc-finite-surjective-coherent-generic-support` | 1 | state |
 | `lem-weil-pbc-finite-type-module-support-closed` | 1 | state |
-| `lem-weil-pbc-geometrically-regular-descent` | 1 | state |
 | `lem-weil-pbc-horseshoe-delta-functor` | 1 | state |
+| `lem-weil-pbc-matching-object-coskeleton` | 1 | state |
+| `lem-weil-pbc-matching-object-proper-faces` | 1 | state |
 | `lem-weil-pbc-module-support-proper-over-base` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-projective-morphism-chart-preimage` | 1 | state |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state |
 | `lem-weil-pbc-pushforward-coherent-on-open` | 1 | state |
-| `lem-weil-pbc-ring-quasi-finite-locus-open` | 1 | state |
-| `lem-weil-pbc-ringed-space-colimit-restriction` | 1 | state |
 | `lem-weil-pbc-ringed-space-module-exactness-local-lifting` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-support` | 1 | state |
 | `lem-weil-pbc-scheme-theoretic-union` | 1 | state |
 | `lem-weil-pbc-sections-annihilated-by-ideal` | 1 | state |
-| `lem-weil-pbc-sections-base-field-extension` | 1 | state |
 | `lem-weil-pbc-sections-morphism-to-proj-polynomial-ring` | 1 | state |
 | `lem-weil-pbc-sections-over-quasi-compact-open-in-affine` | 1 | state |
 | `lem-weil-pbc-separable-root-pth-power` | 1 | state |
 | `lem-weil-pbc-separable-split-purely-inseparable-residue-fields` | 1 | state |
 | `lem-weil-pbc-separable-tensor-purely-inseparable-field` | 1 | state |
 | `lem-weil-pbc-separably-generated-differentials-dimension` | 1 | state |
-| `lem-weil-pbc-separated-affine-cover-criterion` | 1 | state |
 | `lem-weil-pbc-separated-lqf-base-change` | 1 | state |
 | `lem-weil-pbc-separating-transcendence-basis-finite-subextension` | 1 | state |
 | `lem-weil-pbc-serre-criterion-reduced` | 1 | state |
@@ -76,11 +73,9 @@
 | `lem-weil-pbc-sheaf-of-modules-from-basis` | 1 | state |
 | `lem-weil-pbc-sheaves-directed-colimit-sections` | 1 | state |
 | `lem-weil-pbc-sheaves-killed-by-n-zmod-modules` | 1 | state |
-| `lem-weil-pbc-simplicial-matching-object` | 1 | state |
 | `lem-weil-pbc-simplicial-set-add-simplices` | 1 | state |
 | `lem-weil-pbc-simplicial-set-glue-simplex` | 1 | state |
 | `lem-weil-pbc-singular-ideal-localization-smooth` | 1 | state |
-| `lem-weil-pbc-skyscraper-constant-on-point-closure` | 1 | state |
 | `lem-weil-pbc-small-etale-representable-presheaf-sheaf` | 1 | state |
 | `lem-weil-pbc-smooth-algebra-filtered-colimit-descent` | 1 | state |
 | `lem-weil-pbc-smooth-artinian-lifting-at-point` | 1 | state |
@@ -315,7 +310,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 466 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 464 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
