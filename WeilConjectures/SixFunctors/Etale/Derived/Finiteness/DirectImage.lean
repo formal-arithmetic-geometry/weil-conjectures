@@ -19,6 +19,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 
@@ -180,12 +181,12 @@ lemma boundedConstructible_mapDerivedCategory_openImmersionLowerShriek (j : X �
   exact IsConstructibleSheaf.of_iso ((F.mapDerivedCategoryHomologyFunctorIso n).app K)
 
 omit [Finite Λ] in
+open _root_.DerivedCategory in
 /-- **Dévissage for the amplitude of `Rf_!`.** If `Rf_!` sends every constructible sheaf in
 degree `0` into degrees `≤ e`, then it sends a bounded complex with constructible homology
 concentrated in `[a, a + m - 1]` into degrees `≤ a + m - 1 + e`: by induction on `m`, along the
 truncation triangle `τ_{< b} K ⟶ K ⟶ τ_{≥ b} K ⟶` with `b = a + m - 1`, whose third term is
 `Hᵇ K` placed in degree `b`. -/
-open _root_.DerivedCategory in
 lemma isLE_rightDerivedLowerShriek_obj (f : X ⟶ Y) [HasCompactification f] (e : ℤ)
     (h : ∀ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf F →
       _root_.DerivedCategory.TStructure.t.IsLE
@@ -196,10 +197,6 @@ lemma isLE_rightDerivedLowerShriek_obj (f : X ⟶ Y) [HasCompactification f] (e 
       (∀ q, IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj K)) →
       _root_.DerivedCategory.TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ]).obj K)
         (a + m - 1 + e) := by
-
-  have : (R(f)_![ModuleCat.{u + 1} Λ]).IsTriangulated :=
-    inferInstanceAs ((D(((HasCompactification.compactification f).i)_!open[_]) ⋙
-      R(((HasCompactification.compactification f).g)_*[_])).IsTriangulated)
   induction m with
   | zero =>
     intro a K _ _ _
@@ -220,15 +217,16 @@ lemma isLE_rightDerivedLowerShriek_obj (f : X ⟶ Y) [HasCompactification f] (e 
     have := isIso_homologyMap_mor₂ _ hT b (b + 1) rfl (isZero_of_isLE _ (b - 1) _ (by lia))
       (isZero_of_isLE _ (b - 1) _ (by lia))
     have hG : IsConstructibleSheaf G := by
-      have := hK b
+      have : IsConstructibleSheaf ((homologyFunctor _ b).obj T.obj₂) := hK b
       exact IsConstructibleSheaf.of_iso (asIso ((homologyFunctor _ b).map T.mor₂) ≪≫
         (homologyFunctor _ b).mapIso eG ≪≫ (singleFunctorCompHomologyFunctorIso _ b).app G)
     have h₃ : TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ]).obj T.obj₃) (b + e) := by
       have := h G hG
-      have := TStructure.t.isLE_shift ((R(f)_![ModuleCat.{u + 1} Λ]).obj
-        ((singleFunctor _ 0).obj G)) e (-b) (b + e) (by lia)
+      have : TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ] ⋙ shiftFunctor _ (-b)).obj
+          (((singleFunctors _).functor 0).obj G)) (b + e) :=
+        TStructure.t.isLE_shift _ e (-b) (b + e) (by lia)
       exact TStructure.t.isLE_of_iso ((R(f)_![ModuleCat.{u + 1} Λ]).mapIso
-        (eG ≪≫ ((singleFunctors _).shiftIso (-b) b 0 (by lia)).app G).symm ≪≫
+        (eG ≪≫ (((singleFunctors _).shiftIso (-b) b 0 (by lia)).app G).symm) ≪≫
           ((R(f)_![ModuleCat.{u + 1} Λ]).commShiftIso (-b)).app _).symm _
     -- the first term is handled by induction
     have h₁ : TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ]).obj T.obj₁) (b + e) := by
@@ -240,12 +238,12 @@ lemma isLE_rightDerivedLowerShriek_obj (f : X ⟶ Y) [HasCompactification f] (e 
         · have : IsIso ((homologyFunctor _ q).map T.mor₁) :=
             isIso_homologyMap_mor₁ _ hT (q - 1) q (by lia)
               (isZero_of_isGE _ b _ (by lia)) (isZero_of_isGE _ b _ (by lia))
-          have := hK q
+          have : IsConstructibleSheaf ((homologyFunctor _ q).obj T.obj₂) := hK q
           exact IsConstructibleSheaf.of_iso (asIso ((homologyFunctor _ q).map T.mor₁)).symm
         · have : T.obj₁.IsLE (b - 1) := TStructure.t.isLE_truncLT_obj _ _ _ (by lia)
           exact IsConstructibleSheaf.of_isZero (isZero_of_isLE _ (b - 1) _ (by lia))
-    have := TStructure.t.isLE₂ _ ((R(f)_![ModuleCat.{u + 1} Λ]).map_distinguished _ hT) (b + e)
-      h₁ h₃
+    have : TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) (b + e) :=
+      TStructure.t.isLE₂ _ ((R(f)_![ModuleCat.{u + 1} Λ]).map_distinguished _ hT) (b + e) h₁ h₃
     exact TStructure.t.isLE_of_le _ (b + e) _ (by lia)
 
 omit [Finite Λ] in
@@ -361,18 +359,19 @@ theorem boundedConstructible_rightDerivedLowerShriek (f : X ⟶ Y) [HasCompactif
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
       ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) := by
+  subst hf
   cases isEmpty_or_nonempty X with
   | inl hX =>
     exact boundedConstructible_of_isZero Λ
       ((R(f)_![ModuleCat.{u + 1} Λ]).map_isZero (isZero_of_isEmpty Λ K))
   | inr hX =>
-    have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
+    have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) (f ≫ aY)
     let c := HasCompactification.compactification f
     have : HasInvertibleExponent Λ c.Z := HasInvertibleExponent.of_hom (c.g ≫ aY)
     have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace aY
     have : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
     have : IsNoetherian c.Z := { __ := LocallyOfFiniteType.isLocallyNoetherian (c.g ≫ aY) }
-    have := quasiCompact_of_isOpenImmersion_of_noetherianSpace Λ c.i
+    have := quasiCompact_of_isOpenImmersion_of_noetherianSpace c.i
     exact boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ c.g (c.g ≫ aY) aY
       rfl _ (boundedConstructible_mapDerivedCategory_openImmersionLowerShriek Λ c.i hK)
 
