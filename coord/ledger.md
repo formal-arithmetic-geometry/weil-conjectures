@@ -4539,3 +4539,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:58 L: merged deliver/G1/lem-weil-pbc-n2-descends-finite-domain-extension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.IsN2OfFiniteExtension isN2_of_finite_extension)
 - 11:59 L: merged deliver/H1/lem-weil-pbc-normal-extension-purely-inseparable-then-galois (stage 2; reviewer FIX; first push; Sheaf.FieldTheory.NormalExtensionFixedField Normal.fixedField_purelyInseparable_and_galois)
 - 11:59 L: merged deliver/C1/lem-weil-pbc-module-sheaves-grothendieck-abelian (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian AlgebraicGeometry.Scheme.etaleModuleSheaves_grothendieckAbelian)
+- 11:59 L: merged deliver/M1/lem-weil-pbc-formal-fibre-quasi-finite-ascent (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FormalFibreQuasiFiniteAscent RingHom.isRegular_formalFiber_of_isQuasiFiniteAtPrime; statement corrected (2 citers))

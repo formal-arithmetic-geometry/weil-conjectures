@@ -17,17 +17,17 @@
  },
  "kind": "statement",
  "title": "Geometric regularity of a formal fibre ascends along a map quasi-finite at the prime",
- "statement": "Let $\\varphi:R\\to R'$ be a ring map of Noetherian rings [def-weil-pbc-noetherian-ring] making $R'$ a finitely generated $R$-algebra. Let $\\mathfrak q'\\subseteq\\mathfrak p'$ be prime ideals of $R'$ and $\\mathfrak q=\\varphi^{-1}(\\mathfrak q')\\subseteq\\mathfrak p=\\varphi^{-1}(\\mathfrak p')$. Assume that $R\\to R'$ is quasi-finite at $\\mathfrak p'$ in the sense of [pqf-def-quasifinite] (affine case, Stacks Algebra Definition 00PL), i.e. the prime of the fibre ring $R'\\otimes_R\\kappa(\\mathfrak p)$ corresponding to $\\mathfrak p'$ is an isolated point of its spectrum. For a prime $\\mathfrak s$ of a Noetherian ring $T$ write $\\kappa(\\mathfrak s)=T_{\\mathfrak s}/\\mathfrak sT_{\\mathfrak s}$ [def-weil-pbc-localization-at-prime] and $(T_{\\mathfrak s})^\\wedge=\\varprojlim_nT_{\\mathfrak s}/\\mathfrak s^nT_{\\mathfrak s}$ [def-weil-pbc-adic-completion]. If the $\\kappa(\\mathfrak q)$-algebra $(R_{\\mathfrak p})^\\wedge\\otimes_R\\kappa(\\mathfrak q)$ is geometrically regular over $\\kappa(\\mathfrak q)$ [def-weil-pbc-g-ring], then the $\\kappa(\\mathfrak q')$-algebra $(R'_{\\mathfrak p'})^\\wedge\\otimes_{R'}\\kappa(\\mathfrak q')$ is geometrically regular over $\\kappa(\\mathfrak q')$.",
+ "statement": "Let $\\varphi:R\\to R'$ be a ring map of Noetherian rings [def-weil-pbc-noetherian-ring] making $R'$ a finitely generated $R$-algebra. Let $\\mathfrak q'\\subseteq\\mathfrak p'$ be prime ideals of $R'$ and $\\mathfrak q=\\varphi^{-1}(\\mathfrak q')\\subseteq\\mathfrak p=\\varphi^{-1}(\\mathfrak p')$. Assume that $R\\to R'$ is quasi-finite at $\\mathfrak p'$ in the sense of [def-weil-pbc-ring-map-quasi-finite-at-prime] (affine case, Stacks Algebra Definition 00PL), i.e. the prime of the fibre ring $R'\\otimes_R\\kappa(\\mathfrak p)$ corresponding to $\\mathfrak p'$ is an isolated point of its spectrum. For a prime $\\mathfrak s$ of a Noetherian ring $T$ write $\\kappa(\\mathfrak s)=T_{\\mathfrak s}/\\mathfrak sT_{\\mathfrak s}$ [def-weil-pbc-localization-at-prime] and $(T_{\\mathfrak s})^\\wedge=\\varprojlim_nT_{\\mathfrak s}/\\mathfrak s^nT_{\\mathfrak s}$ [def-weil-pbc-adic-completion]. If the $\\kappa(\\mathfrak q)$-algebra $(R_{\\mathfrak p})^\\wedge\\otimes_R\\kappa(\\mathfrak q)$ is geometrically regular over $\\kappa(\\mathfrak q)$ [def-weil-pbc-g-ring], then the $\\kappa(\\mathfrak q')$-algebra $(R'_{\\mathfrak p'})^\\wedge\\otimes_{R'}\\kappa(\\mathfrak q')$ is geometrically regular over $\\kappa(\\mathfrak q')$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "More on Algebra, Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite, line 12214), item (1), and its proof (Algebra Lemma 07NC lemma-completion-at-quasi-finite-prime; Algebra Lemma 0381 for the base field extension)"
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
-  "pqf-def-quasifinite",
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-g-ring"
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
  "proof": [
   {
@@ -173,5 +173,53 @@
   "by": "L",
   "result": "accepted",
   "note": "6 steps follow Stacks 07PP(1): 07NC splitting (new unsplit node; its statement adds that the first projection is the natural map, which Stacks proves in its closing remark), tensor with kappa(q'), cancel base change, kappa(q')/kappa(q) finitely generated, 0381 node for the field extension, factor of a regular ring regular via the localization node. Tags 07PP, 07NC, 0381, 00QB verified."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalFibreQuasiFiniteAscent",
+  "declaration": "RingHom.isRegular_formalFiber_of_isQuasiFiniteAtPrime",
+  "file": "lean/Sheaf/RingTheory/FormalFibreQuasiFiniteAscent.lean",
+  "statement": "theorem isRegular_formalFiber_of_isQuasiFiniteAtPrime {R : Type u} {R' : Type v} [CommRing R] [CommRing R'] [IsNoetherianRing R] [IsNoetherianRing R'] [Algebra R R'] [Algebra.FiniteType R R'] (q' p' : Ideal R') [q'.IsPrime] [p'.IsPrime] (hqp : q' ≤ p') (hq : Algebra.IsQuasiFiniteAtPrime R R' ⟨p', inferInstance⟩) : let q := q'.comap (algebraMap R R') let p := p'.comap (algebraMap R R') let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p) let C' := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p')) (Localization.AtPrime p') Algebra.IsGeometricallyRegular q.ResidueField (q.Fiber C) → Algebra.IsGeometricallyRegular q'.ResidueField (q'.Fiber C')",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffq1157",
+  "group": "M1",
+  "result": "pass",
+  "note": "finite-type Noetherian R->R', primes q'<=p' (hqp), contractions q,p, hq = Algebra.IsQuasiFiniteAtPrime at p' (ring-map 00PL, correction from pqf-def-quasifinite matches 07PP), antecedent/conclusion IsGeometricallyRegular of q.Fiber/q'.Fiber of AdicCompletion(maximalIdeal R_p) with R-algebra composite R->R_p->C checked by rfl; k' universe max u v; citers hold",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-11",
+  "by": "M1 stage 2",
+  "old_statement": "Let $\\varphi:R\\to R'$ be a ring map of Noetherian rings [def-weil-pbc-noetherian-ring] making $R'$ a finitely generated $R$-algebra. Let $\\mathfrak q'\\subseteq\\mathfrak p'$ be prime ideals of $R'$ and $\\mathfrak q=\\varphi^{-1}(\\mathfrak q')\\subseteq\\mathfrak p=\\varphi^{-1}(\\mathfrak p')$. Assume that $R\\to R'$ is quasi-finite at $\\mathfrak p'$ in the sense of [pqf-def-quasifinite] (affine case, Stacks Algebra Definition 00PL), i.e. the prime of the fibre ring $R'\\otimes_R\\kappa(\\mathfrak p)$ corresponding to $\\mathfrak p'$ is an isolated point of its spectrum. For a prime $\\mathfrak s$ of a Noetherian ring $T$ write $\\kappa(\\mathfrak s)=T_{\\mathfrak s}/\\mathfrak sT_{\\mathfrak s}$ [def-weil-pbc-localization-at-prime] and $(T_{\\mathfrak s})^\\wedge=\\varprojlim_nT_{\\mathfrak s}/\\mathfrak s^nT_{\\mathfrak s}$ [def-weil-pbc-adic-completion]. If the $\\kappa(\\mathfrak q)$-algebra $(R_{\\mathfrak p})^\\wedge\\otimes_R\\kappa(\\mathfrak q)$ is geometrically regular over $\\kappa(\\mathfrak q)$ [def-weil-pbc-g-ring], then the $\\kappa(\\mathfrak q')$-algebra $(R'_{\\mathfrak p'})^\\wedge\\otimes_{R'}\\kappa(\\mathfrak q')$ is geometrically regular over $\\kappa(\\mathfrak q')$.",
+  "what": "The old dependency cited the scheme morphism notion pqf-def-quasifinite, but this affine ring lemma requires the ring-map isolated-fibre notion used by Algebra.IsQuasiFiniteAtPrime; the mathematical hypotheses and conclusion are unchanged.",
+  "source": {
+   "document": "literature/stacks-project/more-algebra.tex",
+   "place": "Lemma Tag 07PP (lemma-G-ring-goes-up-quasi-finite), item (1)"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-complete-local-g-ring",
+    "holds": true,
+    "note": "Uses this lemma only as the formal-fibre ascent statement; corrected fibre-level conclusion still supplies the same implication."
+   },
+   {
+    "id": "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "holds": true,
+    "note": "Uses the ascent lemma to transfer geometric regularity of a formal fibre; corrected statement preserves that use."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-pbc-noetherian-ring",
+   "pqf-def-quasifinite",
+   "def-weil-pbc-localization-at-prime",
+   "def-weil-pbc-adic-completion",
+   "def-weil-pbc-g-ring"
+  ]
  }
 }
