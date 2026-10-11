@@ -4,7 +4,7 @@
   "is": null,
   "from": {
    "node": "def-weil-derived-complete-integral-detailed",
-   "place": "Lemma 05SC: LF sends distinguished triangles to distinguished triangles",
+   "place": "Lemma 05SC: the LF clause proving definedness at the third vertex and preservation of the distinguished triangle",
    "via": [
     "lem-pur-left-derived-exact-when-defined"
    ]
@@ -23,9 +23,81 @@
   "lem-pur-derived-functor-morphisms-05sa",
   "lem-pur-derived-functor-shift-05su"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume first that $LF$ is defined at $X$ and $Y$, with values $A$ and $B$ and cone maps $u^X_{s}:A\\to F(X')$ over $S/X$ and $u^Y_{s'}:B\\to F(Y')$ over $S/Y$, and let $LF(f):A\\to B$ be the map of [lem-pur-derived-functor-morphisms-05sa], so that $u^Y_{s'}\\circ LF(f)=F(f')\\circ u^X_{s}$ whenever $f\\circ s=s'\\circ f'$. By [def-pc-essentially-constant-pro-diagram] choose an index $s'_0:Y'\\to Y$ in $S/Y$ with a retraction $\\beta:F(Y')\\to B$ ($\\beta\\circ u^Y_{s'_0}=\\mathrm{id}_B$) and an index $s_0:X_0\\to X$ with a retraction $\\alpha_0:F(X_0)\\to A$. The second MS2 clause of [def-pur-saturated-triangulated-localization], applied to $s'_0$ and $f\\circ s_0$, gives $t_1:X_1\\to X_0$ in $S$ and $f_1:X_1\\to Y'$ with $f\\circ s_0\\circ t_1=s'_0\\circ f_1$. Put $s_1=s_0\\circ t_1$ and $\\alpha_1=\\alpha_0\\circ F(t_1)$; then $\\alpha_1\\circ u^X_{s_1}=\\alpha_0\\circ u^X_{s_0}=\\mathrm{id}_A$, and (using cofilteredness of $S/X$) $\\alpha_1$ again satisfies the factorization clause of the definition at the index $s_1$. Applying that clause to $j=s_1$ and equalizing the two resulting arrows to $s_1$ in the cofiltered $S/X$, choose $t_2:X'\\to X_1$ in $S$ with $F(t_2)=u^X_{s_1}\\circ\\alpha_1\\circ F(t_2)$. Put $s=s_1\\circ t_2:X'\\to X$, $f'=f_1\\circ t_2:X'\\to Y'$ and $\\alpha=\\alpha_1\\circ F(t_2):F(X')\\to A$. Then $f\\circ s=s'_0\\circ f'$, $\\alpha\\circ u^X_{s}=\\alpha_1\\circ u^X_{s_1}=\\mathrm{id}_A$, and $\\beta\\circ F(f')=\\beta\\circ F(f_1)\\circ u^X_{s_1}\\circ\\alpha_1\\circ F(t_2)=\\beta\\circ u^Y_{s'_0}\\circ LF(f)\\circ\\alpha=LF(f)\\circ\\alpha$ by the cone square of [lem-pur-derived-functor-morphisms-05sa] for $f\\circ s_1=s'_0\\circ f_1$. Complete $f'$ to a distinguished triangle $(X',Y',Z',f',g',h')$ (TR1); MS6 (in the form stated in [def-pur-saturated-triangulated-localization], with source triangle $(X',Y',Z')$ and target $(X,Y,Z)$) gives $t:Z'\\to Z$ in $S$ making $(s,s'_0,t)$ a morphism of triangles. Choose a distinguished triangle $(A,B,C,LF(f),b,c)$ (TR1). Since $F$ is exact, $(F(X'),F(Y'),F(Z'),F(f'),F(g'),F(h'))$ is distinguished, and TR3 extends $(\\alpha,\\beta)$ to a morphism of triangles $(\\alpha,\\beta,\\gamma)$ into $(A,B,C,LF(f),b,c)$, with $\\gamma:F(Z')\\to C$ (the last square read through $F(X'[1])\\cong F(X')[1]$).",
+   "uses": [
+    "lem-pur-derived-functor-morphisms-05sa",
+    "def-pur-saturated-triangulated-localization",
+    "def-pc-essentially-constant-pro-diagram",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC proof, paragraphs 1--3, dualized to pro-objects over S/X, S/Y"
+   }
+  },
+  {
+   "text": "Let $\\mathcal I$ be the category of [lem-pur-triangle-morphism-category-05r9] for $(X,Y,Z,f,g,h)$: triangle morphisms into $(X,Y,Z)$ with components in $S$. It is cofiltered, $j_0=((X',Y',Z'),(s,s'_0,t))$ is one of its objects, and its projections to $S/X$, $S/Y$, $S/Z$ are initial. By [lem-pur-essential-constant-cofinal-0a1s], $F(X'')$ and $F(Y'')$ over $\\mathcal I$ are essentially constant with values $A$, $B$ and the restricted cone maps $u^X$, $u^Y$; and it suffices to show that $F(Z'')$ over $\\mathcal I$ is essentially constant with value $C$, for then the pro-object over $S/Z$ is essentially constant with value $C$, i.e. $LF$ is defined at $Z$ with value $C$.",
+   "uses": [
+    "lem-pur-triangle-morphism-category-05r9",
+    "lem-pur-essential-constant-cofinal-0a1s"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC proof, paragraph beginning 'Consider the category I', dual form"
+   }
+  },
+  {
+   "text": "Fix an object $W$ of $\\mathcal D'$. For each object of $\\mathcal I$, $\\operatorname{Hom}(-,W)$ applied to the distinguished triangle $F(X'')\\to F(Y'')\\to F(Z'')\\to F(X'')[1]$ gives an exact sequence $\\operatorname{Hom}(F(Y'')[1],W)\\to\\operatorname{Hom}(F(X'')[1],W)\\to\\operatorname{Hom}(F(Z''),W)\\to\\operatorname{Hom}(F(Y''),W)\\to\\operatorname{Hom}(F(X''),W)$, functorial over $\\mathcal I^{\\mathrm{op}}$ (filtered, as $\\mathcal I$ is cofiltered); its colimit over $\\mathcal I^{\\mathrm{op}}$ is exact by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. Map the sequence $\\operatorname{Hom}(B[1],W)\\to\\operatorname{Hom}(A[1],W)\\to\\operatorname{Hom}(C,W)\\to\\operatorname{Hom}(B,W)\\to\\operatorname{Hom}(A,W)$ to it by $\\varphi\\mapsto$ the class at $j_0$ of $\\varphi$ composed with $\\beta[1],\\alpha[1],\\gamma,\\beta,\\alpha$; the squares commute because $(\\alpha,\\beta,\\gamma)$ is a morphism of triangles. The map $\\operatorname{Hom}(A,W)\\to\\varinjlim\\operatorname{Hom}(F(X''),W)$ is bijective: its composite with the bijection $\\varinjlim\\operatorname{Hom}(F(X''),W)\\to\\operatorname{Hom}(A,W)$ given by the cone $u^X$ ([lem-pc-essentially-constant-pro-hom-colimit]) is $\\varphi\\mapsto\\varphi\\circ\\alpha\\circ u^X_{s}=\\varphi$; likewise for $B$ with $\\beta$. The shifted positions are the same statements for $W[-1]$, since $[1]$ is an automorphism of $\\mathcal D'$ (no derived value of a shift is involved). The five lemma [lem-weil-pbc-five-lemma] shows that $\\operatorname{Hom}(C,W)\\to\\varinjlim_{\\mathcal I^{\\mathrm{op}}}\\operatorname{Hom}(F(Z''),W)$, $\\varphi\\mapsto[\\varphi\\circ\\gamma]_{j_0}$, is bijective.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-five-lemma",
+    "lem-pc-essentially-constant-pro-hom-colimit",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC proof, displayed five-term Hom diagram, with Hom(-,W) in place of Hom(W,-)"
+   }
+  },
+  {
+   "text": "By [lem-pur-essential-constant-pro-criterion-05py] (index $j_0$, $r=\\gamma$), $F(Z'')$ over $\\mathcal I$ is essentially constant with value $C$, so by Step 2 $LF$ is defined at $Z$ with value $C$, the cone maps $u^Z$ being those of [lem-pur-essential-constant-pro-criterion-05py] transported by [lem-pur-essential-constant-cofinal-0a1s]. Thus $A=LF(X)$, $B=LF(Y)$, $C=LF(Z)$ as values. To see $b=LF(g)$: for an object $(X'',Y'',Z'')$ of $\\mathcal I$ both $u^Z_{Z''}\\circ b$ and $F(g'')\\circ u^Y_{Y''}$ have, under the bijection $\\psi\\mapsto[\\psi\\circ\\beta]_{j_0}$ of Step 3 with $W=F(Z'')$, the class of $F(g'')$ at the index $(X'',Y'',Z'')$ (using $\\gamma\\circ F(g')=b\\circ\\beta$ and the characterization of the cone maps in [lem-pur-essential-constant-pro-criterion-05py]); hence they are equal, and $b=LF(g)$ by the uniqueness in [lem-pur-derived-functor-morphisms-05sa] (a map into $C$ is determined by its composite with $u^Z_{t}$, since $\\gamma\\circ u^Z_{t}=\\mathrm{id}_C$ by [lem-pur-essential-constant-pro-criterion-05py]). The same argument with $W=F(X''[1])\\cong F(X'')[1]$ shows that $c:C\\to A[1]$ is $LF(h)$ followed by the inverse of the canonical isomorphism $LF(X)[1]\\to LF(X[1])$ of [lem-pur-derived-functor-shift-05su], whose cone maps are $u^X[1]$ under $S/X\\simeq S/X[1]$. Hence $(LF(X),LF(Y),LF(Z),LF(f),LF(g),LF(h))$, with this identification, is the distinguished triangle $(A,B,C,LF(f),b,c)$. If instead $LF$ is defined at $Y$ and $Z$ (resp. $Z$ and $X$), apply the case just proved to the rotated triangle $(Y,Z,X[1],g,h,-f[1])$ (resp. $(Z,X[1],Y[1],h,-f[1],-g[1])$, using [lem-pur-derived-functor-shift-05su] for definedness at $X[1]$, $Y[1]$), then rotate back (TR2) and transport definedness and values along [lem-pur-derived-functor-shift-05su].",
+   "uses": [
+    "lem-pur-essential-constant-pro-criterion-05py",
+    "lem-pur-essential-constant-cofinal-0a1s",
+    "lem-pur-derived-functor-morphisms-05sa",
+    "lem-pur-derived-functor-shift-05su",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC proof, final paragraph (part (4) of Categories 05PY, dual) and rotation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-functor-morphisms-05sa",
+  "def-pur-saturated-triangulated-localization",
+  "def-pc-essentially-constant-pro-diagram",
+  "def-weil-triangulated-category",
+  "lem-pur-triangle-morphism-category-05r9",
+  "lem-pur-essential-constant-cofinal-0a1s",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-pc-essentially-constant-pro-hom-colimit",
+  "lem-pur-essential-constant-pro-criterion-05py",
+  "lem-pur-derived-functor-shift-05su"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma Tag 05SC in Situation Tag 05S8"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,12 +122,29 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-left-derived-exact-when-defined",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-derived-functor-triangles-05sc",
+  "worker": "stage1",
+  "summary": "Checked the Stacks 05SC proof against the target statement. The split records the triangle-morphism construction, the filtered/cofinal indexing category, the existing exact filtered Hom-colimit node, and the essential-constancy conclusion; existing 05SA, 05SB, 05SU, five-lemma, and Hom-colimit nodes are cited for their stated interfaces.",
+  "blueprint": "Realizes the Lemma 05SC LF clause: construct a cone triangle, pass to the cofinal filtered category of triangle morphisms, apply exact Hom colimits and the five lemma, and identify the third derived value.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dft0228",
+  "group": "F1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dft0228 (reviewer sub-agent of L); spot-checked: Statement unchanged; delivery = item + 3 new nodes + report (three-dot diff); no duplicates for 05R9/0A1S/05PY-pro; citer lem-pur-left-derived-exact-when-defined uses the all-defined clause as stated. Return points: 1 repaired, 2 repaired, 3 partly (05SU still cited for shift terms), 4 repaired. FIX more, RETURN less: (E/C4) Steps 1,3,4 rewritten with retraction-direction maps alpha,beta,gamma into (A,B,C) and the MS2+essential-constancy refinement made explicit at X; Step 3 outer bijections via lem-pc-essentially-constant-pro-hom-colimit (cited), shifted positions via W[-1], 05SU removed from Step 3; Step 4 uses the restated criterion, 0A1S with cone clauses, identifies b=LF(g) and c=LF(h) through 05SA uniqueness and the 05SU isomorphism, rotation with 05SU; 05SB dropped (unneeded). New nodes: 05py restated as the pro dual of Categories 05PY (4)=>(1) (index and retraction form, cone characterized); 0A1S given explicit cone clauses; 05r9 morphisms of I made explicit over the base triangle and stmt_deps gains def-pur-saturated-triangulated-localization. Second reading by F1 missed the alpha/beta/gamma direction fault.; 4 file(s) fixed by the reviewer"
+ },
+ "lead_note": "2026-10-11 L (R-dft0228): R-dft0228: re-push repaired return points 1 (S/X denominators, MS2 second clause, MS6 into (X,Y,Z)), 2 (05R9/0A1S in cofiltered/initial form), 4 (05PY pro node), and 3 partly; but alpha,beta,gamma were cone-direction maps (A->F(X')), so the Hom(-,W) comparison over I and the cone hypothesis of the criterion were undefined (only one gamma, no cone). Fixed in review by the LF dual of Stacks: retractions alpha:F(X')->A, beta:F(Y')->B, TR3 gamma:F(Z')->C, 05PY node restated as the dual of part (4) (index j0, r:G(j0)->X), Hom(C,W)->colim bijection; b=LF(g), c=LF(h) via 05SA uniqueness and 05SU."
 }
