@@ -275,6 +275,65 @@ lemma app_coeff_eq (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ Y) ⊗ Z
 
 
 
+set_option backward.isDefEq.respectTransparency false in
+/-- **Local lifts of the slice trivialisations.** Let `ex`, `ey` be global sections of `L` on the
+two slices which agree on `{x} × {y} × Z`. Over an affine open `O` on which `L` has a free
+generator, there is a section of `L` restricting to `ex` and `ey` on the two slices. -/
+lemma exists_lift (x : 𝟙_ _ ⟶ X) (y : 𝟙_ _ ⟶ Y) (L : ((X ⊗ Y) ⊗ Z).left.Modules)
+    {O : ((X ⊗ Y) ⊗ Z).left.Opens} (hO : IsAffineOpen O) {ℓ : Γ(L, O)}
+    (hℓ : Scheme.Modules.IsFreeGenerator ℓ)
+    (ex : Γ((Scheme.Modules.pullback (sliceX X Y Z x)).obj L, ⊤))
+    (ey : Γ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L, ⊤))
+    (hC : (sliceComparison X Y Z x y L).hom.app ⊤ (Scheme.Modules.pullbackSection _ ex) =
+      Scheme.Modules.pullbackSection _ ey) :
+    ∃ s : Γ(L, O), Scheme.Modules.pullbackSection (sliceX X Y Z x) s =
+        ((Scheme.Modules.pullback (sliceX X Y Z x)).obj L).presheaf.map (homOfLE le_top).op ex ∧
+      Scheme.Modules.pullbackSection (sliceY X Y Z y) s =
+        ((Scheme.Modules.pullback (sliceY X Y Z y)).obj L).presheaf.map (homOfLE le_top).op ey := by
+  have : IsClosedImmersion x.left := isClosedImmersion_of_comp_eq_id X.hom x.left (Over.w x)
+  have : IsClosedImmersion y.left := isClosedImmersion_of_comp_eq_id Y.hom y.left (Over.w y)
+  have hpx := isPullback_slice_left X Y Z x
+  have : IsClosedImmersion (sliceX X Y Z x) := MorphismProperty.of_isPullback hpx.flip ‹_›
+  have : IsClosedImmersion (sliceY X Y Z y) :=
+    MorphismProperty.of_isPullback (isPullback_slice_right X Y Z y).flip ‹_›
+  have hpt := isPullback_lift_toUnit_comp_left X Z x
+  have : IsClosedImmersion (slicePt Z x) := MorphismProperty.of_isPullback hpt.flip ‹_›
+  obtain ⟨g₁, hg₁⟩ := (hℓ.pullback_unit_app (sliceX X Y Z x)).exists_smul_eq
+    (((Scheme.Modules.pullback (sliceX X Y Z x)).obj L).presheaf.map (homOfLE le_top).op ex)
+  obtain ⟨g₂, hg₂⟩ := (hℓ.pullback_unit_app (sliceY X Y Z y)).exists_smul_eq
+    (((Scheme.Modules.pullback (sliceY X Y Z y)).obj L).presheaf.map (homOfLE le_top).op ey)
+  have hc := app_coeff_eq X Y Z x y L hℓ ex ey hC hg₁ hg₂
+  obtain ⟨r₁, hr₁⟩ := (sliceX X Y Z x).app_surjective O hO g₁
+  have hσyO : IsAffineOpen (sliceY X Y Z y ⁻¹ᵁ O) := hO.preimage _
+  have hδ : g₂ - (sliceY X Y Z y).app O r₁ ∈ (slicePt Z x).ker.ideal ⟨_, hσyO⟩ := by
+    rw [Scheme.Hom.ker_apply, RingHom.mem_ker, map_sub, sub_eq_zero]
+    have e1 : (slicePt Z x).app _ ((sliceY X Y Z y).app O r₁) =
+        (slicePt Z x ≫ sliceY X Y Z y).app O r₁ := by
+      rw [Scheme.Hom.comp_app]
+      rfl
+    rw [e1, Scheme.Hom.congr_app (slicePt_sliceX X Y Z x y).symm O, CommRingCat.comp_apply,
+      Scheme.Hom.comp_app, CommRingCat.comp_apply, hr₁]
+    erw [hc]
+    rw [← CommRingCat.comp_apply, ← Functor.map_comp]
+    rw [show _ ≫ _ = 𝟙 _ from Subsingleton.elim _ _, CategoryTheory.Functor.map_id]
+    rfl
+  rw [hpt.ker_fst_eq_comap] at hδ
+  have e : (fst X Z).left = sliceY X Y Z y ≫ (fst (X ⊗ Y) Z ≫ fst X Y).left := by
+    rw [← Over.comp_left]
+    congr 1
+    simp
+  rw [e, Scheme.IdealSheafData.comap_comp,
+    Scheme.IdealSheafData.ideal_comap_appLE _ _ ⟨O, hO⟩ ⟨_, hσyO⟩ le_rfl,
+    ← hpx.ker_fst_eq_comap, Scheme.Hom.ker_apply, Scheme.Hom.appLE_eq_app] at hδ
+  obtain ⟨a, ha, haδ⟩ := (Ideal.mem_map_iff_of_surjective _
+    ((sliceY X Y Z y).app_surjective O hO)).mp hδ
+  refine ⟨(r₁ + a) • ℓ, ?_, ?_⟩
+  · rw [Scheme.Modules.pullbackSection_smul, map_add, hr₁, RingHom.mem_ker.mp ha, add_zero]
+    exact hg₁
+  · rw [Scheme.Modules.pullbackSection_smul, map_add, haδ, add_sub_cancel]
+    exact hg₂
+
+
 variable [IsProper X.hom] [GeometricallyIntegral X.hom] [IsProper Y.hom]
   [GeometricallyIntegral Y.hom]
 
