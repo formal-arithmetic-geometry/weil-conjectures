@@ -236,6 +236,7 @@ section MixedSupport
 
 variable {X Y : Scheme.{u}} (a : X ⟶ Y) [HasCompactification a]
 
+/-- The projection map of `Ra_!` is the `compProjectionMap` of the chosen compactification. -/
 lemma projectionMap_app_app_eq (K : 𝐃(X, A)) (L : 𝐃(Y, A)) :
     ((projectionMap A a).app K).app L =
       (derivedUpperStarLowerStarAdjunction A
@@ -250,6 +251,7 @@ lemma projectionMap_app_app_eq (K : 𝐃(X, A)) (L : 𝐃(Y, A)) :
 
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A] in
+/-- `Ra_!` acts on morphisms as `j_! ⋙ Rg_*` for the chosen compactification `a = g ∘ j`. -/
 lemma rightDerivedLowerShriek_map_eq {K K' : 𝐃(X, A)} (x : K ⟶ K') :
     (R(a)_![A]).map x =
       (D(((HasCompactification.compactification a).i)_!open[A]) ⋙
