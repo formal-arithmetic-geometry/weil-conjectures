@@ -3679,3 +3679,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:45 L: merged deliver/E1/lem-sc-dvr-tensor-surjective-negative-valuation (stage 2; reviewer PASS; first push; Sheaf.RingTheory.ExistsNegativeValuationOfTensorSurjective IsDiscreteValuationRing.exists_negative_valuation_of_tensor_surjective)
 - 07:45 L: merged deliver/C1/lem-sc-affine-finite-module-free-locus (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AffineFiniteModuleFreeLocus Module.finite_free_at_primes_localized_cover; new nodes: def-sc-finite-locally-free-sheaf)
 - 07:45 L: merged deliver/M1/lem-pc-ringed-space-module-stalk-tensor (stage 2; reviewer FIX; first push; Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor SheafOfModules.stalkTensorIso)
+- 07:45 L: merged deliver/H1/lem-pc-right-localization-hom-colimit (stage 2; reviewer PASS; first push; Sheaf.CategoryTheory.RightLocalizationHomColimit CategoryTheory.rightLocalization_hom_colimit_bijective)
