@@ -200,5 +200,23 @@
   "by": "L",
   "result": "accepted",
   "note": "5 steps (the source, Modules 0CAK, only asserts the identification; proof_origin agent): beta is the composite of the extension-by-empty adjunction (2) and the constant-sheaf node, natural in K; the adjunction g^{-1} -| g_* for sets with the unit of the (now set-valued) definition, naturality of the unit checked on sections; the natural bijection Phi_K between the two corepresented functors; lambda by the coyoneda leaf; the compatibility identity by chasing Phi, (**) and (*). Statement unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InverseImageExtensionByEmptyConstant",
+  "declaration": "TopCat.inverseImageExtensionByEmptyConstant",
+  "statement": "theorem inverseImageExtensionByEmptyConstant {Z Z' : TopCat.{u}} (g : Z' ⟶ Z) (V : Opens Z) (T : Type u) : ∃ e : (TopCat.Sheaf.pullback (Type u) g).obj (extensionByEmptyConstant V T) ≅ extensionByEmptyConstant ((Opens.map g).obj V) T, ∀ (K : Z.Sheaf (Type u)) (ψ : extensionByEmptyConstant V T ⟶ K) (t : T), (e.inv ≫ (TopCat.Sheaf.pullback (Type u) g).map ψ).hom.app (op ((Opens.map g).obj V)) ((toSheafify (Opens.grothendieckTopology Z') (extensionByEmptyPresheafObj ((Opens.map g).obj V) (sheafToTop (X := (toTopCat Z').obj ((Opens.map g).obj V)) (TopCat.discrete.obj T)))).app (op ((Opens.map g).obj V)) ((cast (if_pos (le_refl ((Opens.map g).obj V))).symm) (TopCat.const (Y := TopCat.discrete.obj T) t))) = ((TopCat.Sheaf.pullbackPushforwardAdjunction (Type u) g).unit.app K).hom.app (op V) (ψ.hom.app (op V) ((toSheafify (Opens.grothendieckTopology Z) (extensionByEmptyPresheafObj V (sheafToTop (X := (toTopCat Z).obj V) (TopCat.discrete.obj T)))).app (op V) ((cast (if_pos (le_refl V)).symm) (TopCat.const (Y := TopCat.discrete.obj T) t))))",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/InverseImageExtensionByEmptyConstant.lean",
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  }
 }
