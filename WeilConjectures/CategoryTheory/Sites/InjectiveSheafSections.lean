@@ -62,6 +62,7 @@ noncomputable def idealFreeModuleYonedaι (𝔞 : Ideal Λ) (U : C) :
     refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
     exact (Finsupp.mapDomain_mapRange _ _ _ (map_zero _) (fun _ _ ↦ map_add _ _ _)).symm
 
+/-- The inclusion of `V ↦ 𝔞^{(Hom(V, U))}` into the free presheaf is a monomorphism. -/
 instance (𝔞 : Ideal Λ) (U : C) : Mono (idealFreeModuleYonedaι.{w} 𝔞 U) := by
   have (V : Cᵒᵖ) : Mono ((idealFreeModuleYonedaι.{w} 𝔞 U).app V) := by
     rw [ModuleCat.mono_iff_injective]

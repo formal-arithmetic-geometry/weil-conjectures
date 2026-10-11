@@ -582,6 +582,8 @@ public import WeilConjectures.CategoryTheory.Pro.PresheafColimit
 public import WeilConjectures.CategoryTheory.Sites.CechComplex
 public import WeilConjectures.CategoryTheory.Sites.CechCriterion
 public import WeilConjectures.CategoryTheory.Sites.FlatLocalRelations
+public import WeilConjectures.CategoryTheory.Sites.HomSheafAcyclic
+public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSections
 public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSmulEpi
 public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
@@ -1437,11 +1439,13 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.BaseChange.Etale
 public import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 public import WeilConjectures.SixFunctors.BaseChange.Pasting
+public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
@@ -1543,6 +1547,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability

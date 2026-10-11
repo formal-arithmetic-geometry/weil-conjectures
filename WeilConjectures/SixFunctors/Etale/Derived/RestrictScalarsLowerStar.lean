@@ -77,6 +77,7 @@ noncomputable def restrictScalarsCoextendScalarsObjIso {X : Scheme.{u}}
     ext U : 3
     exact congr_app (coextendScalarsCompRestrictScalarsIso φ).inv_hom_id _
 
+/-- Restriction of scalars of étale sheaves is faithful: it is computed sectionwise. -/
 instance (X : Scheme.{u}) : (Sheaf.restrictScalars X.smallEtaleTopology φ).Faithful where
   map_injective {A B} a b h := by
     ext U : 3

@@ -71,6 +71,8 @@ end Generic
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
 
+/-- Restriction of scalars of étale sheaves reflects isomorphisms: it is computed sectionwise,
+and restriction of scalars of modules reflects isomorphisms. -/
 instance (X : Scheme.{u}) :
     (Sheaf.restrictScalars X.smallEtaleTopology φ).ReflectsIsomorphisms where
   reflects {A B} a h := by
@@ -186,7 +188,8 @@ lemma isIso_comp_rightDerivedFunctorPlusUnit_restrictScalars_iff (sq : CommSq g'
     ← isIso_comp_right_iff _ ((rightDerivedLowerStarRestrictScalars φ f').app
       (DerivedCategory.Plus.Qh.obj (((g')^*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj K))),
     Functor.map_comp, Category.assoc, restrictScalars_map_rightDerivedFunctorPlusUnit_app]
-  have h₁ := (Sheaf.restrictScalars Y'.smallEtaleTopology φ).mapDerivedCategoryPlusFactorsh.hom.naturality
+  have h₁ :=
+    (Sheaf.restrictScalars Y'.smallEtaleTopology φ).mapDerivedCategoryPlusFactorsh.hom.naturality
     ((NatTrans.mapHomotopyCategoryPlus (baseChangeMap (ModuleCat.{u + 1} Λ') sq)).app K)
   simp only [Functor.comp_map] at h₁
   erw [reassoc_of% h₁]
@@ -195,8 +198,8 @@ lemma isIso_comp_rightDerivedFunctorPlusUnit_restrictScalars_iff (sq : CommSq g'
   have h₃ := ((f')_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.naturality
     ((NatTrans.mapHomotopyCategoryPlus (upperStarRestrictScalars φ g').natTrans).app K)
   simp only [Functor.comp_map] at h₃
-  conv_rhs => rw [← isIso_comp_left_iff (DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus
-      (upperStarRestrictScalars φ g).natTrans).app
+  conv_rhs => rw [← isIso_comp_left_iff (DerivedCategory.Plus.Qh.map
+      ((NatTrans.mapHomotopyCategoryPlus (upperStarRestrictScalars φ g).natTrans).app
         (((f)_*[ModuleCat.{u + 1} Λ']).mapHomotopyCategoryPlus.obj K))),
     ← Category.assoc, ← Functor.map_comp]
   conv_rhs => erw [← h₂]

@@ -51,6 +51,7 @@ variable (Λ) in
 abbrev homFunctor (M : ModuleCat.{t} Λ) : ModuleCat.{t} Λ ⥤ ModuleCat.{t} Λ :=
   (linearCoyoneda Λ (ModuleCat.{t} Λ)).obj (op M)
 
+/-- `Hom_Λ(M, -)` is right adjoint to `M ⊗ -`. -/
 instance (M : ModuleCat.{t} Λ) : (homFunctor Λ M).IsRightAdjoint :=
   (ihom.adjunction M).isRightAdjoint
 
