@@ -1,11 +1,11 @@
 # Work queue
 
-157 items; claim with `tools/claim.py next <group> [--stage N]`.
+160 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (157)
+## Stage 2: nodes to state (160)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -19,7 +19,6 @@
 | `def-weil-pbc-hypercohomology-filtrations` | 1 | state | 2 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 10 |
 | `lemma-nagata-qc-open-descends` | 1 | state | 10 |
-| `lem-weil-pbc-coherent-formal-modules-abelian` | 1 | state | 9 |
 | `lem-weil-pbc-cohomology-pullback-functorial` | 1 | state | 8 |
 | `lemma-nagata-affine-fp-descends` | 3 | state | 8 |
 | `lem-pc-affine-qcoh-derived-equivalence` | 1 | state | 6 |
@@ -33,6 +32,7 @@
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
 | `lem-weil-pbc-truncation-couple-morphism` | 1 | state | 3 |
 | `lem-pc-noetherian-derived-direct-image-right-adjoint` | 1 | state | 2 |
+| `lem-weil-pbc-formal-systems-annihilated-by-power` | 1 | state | 2 |
 | `lem-weil-pbc-underived-exchange-module-linear` | 1 | state | 2 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
@@ -120,13 +120,19 @@
 | `lem-sc-smooth-proper-tensor-perfect-case` | 1 | state | 0 |
 | `lem-sc-strict-henselization-cotangent-dimension` | 1 | state | 0 |
 | `lem-sc-strict-henselization-dvr` | 1 | state | 0 |
+| `lem-weil-pbc-coherent-formal-modules-local-exactness` | 1 | state | 0 |
+| `lem-weil-pbc-coherent-formal-short-exact-levels` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-serre-vanishing` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-powers-ideal-application` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-powers-ideal-rees-finite` | 1 | state | 0 |
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-limit-of-schemes` | 1 | state | 0 |
+| `lem-weil-pbc-formal-completion-exact` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
 | `lem-weil-pbc-formal-systems-graded-vanishing` | 1 | state | 0 |
+| `lem-weil-pbc-formal-systems-proper-support-serre` | 1 | state | 0 |
+| `lem-weil-pbc-formal-systems-push-pull` | 1 | state | 0 |
+| `lem-weil-pbc-formal-systems-surjective` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-criterion` | 1 | state | 0 |
 | `lem-weil-pbc-gm-pullback-strict-henselization` | 1 | state | 0 |
 | `lem-weil-pbc-gm-strict-henselization-stalk-formula` | 1 | state | 0 |
@@ -160,14 +166,11 @@
 | `lem-pc-supported-open-pushforward` | 2 | state | 0 |
 | `lem-sc-mult-n-tangent-differential` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
-| `lem-sc-picard-valuation-probe-closure` | 2 | state | 0 |
 | `lem-sc-right-adjoint-open-support-criterion` | 2 | state | 0 |
-| `lem-sc-supported-derived-generated-perfect` | 2 | state | 0 |
-| `lem-sc-valuation-closed-fibre-section-vanishing` | 2 | state | 0 |
 | `lem-sp-derived-couple-functoriality` | 2 | state | 0 |
 | `pqf-lem-affine-vanishing` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 229 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 222 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
