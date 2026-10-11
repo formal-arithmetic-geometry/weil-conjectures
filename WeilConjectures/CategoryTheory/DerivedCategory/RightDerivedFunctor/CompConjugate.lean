@@ -92,7 +92,37 @@ lemma rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv (e : F ⋙ G ≅ H) (eL 
   have hK : (HomotopyCategory.quotient E (.up ℤ)).map
       ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app X.as) =
         (adj.mapHomotopyCategory (.up ℤ)).unit.app Z ≫ (H.mapHomotopyCategory (.up ℤ)).map m := by
-    sorry
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    have hu := mapHomotopyCategory_unit_app_quotient (c := .up ℤ) adj
+      (((F ⋙ G).mapHomologicalComplex (.up ℤ)).obj K)
+    have hc₁ := mapHomotopyCategory_counit_app_quotient (c := .up ℤ) adj₁ K
+    have hc₂ := mapHomotopyCategory_counit_app_quotient (c := .up ℤ) adj₂
+      ((F.mapHomologicalComplex (.up ℤ)).obj K)
+    simp only [m, Functor.map_comp]
+    erw [hu, hc₁, hc₂, Functor.mapHomotopyCategoryCompIso_refl_hom_app]
+    refine Eq.trans (b := (HomotopyCategory.quotient E (.up ℤ)).map
+      ((adj.mapHomologicalComplex (.up ℤ)).unit.app
+          (((F ⋙ G).mapHomologicalComplex (.up ℤ)).obj K) ≫
+        (H.mapHomologicalComplex (.up ℤ)).map
+          ((NatTrans.mapHomologicalComplex eL.hom (.up ℤ)).app
+              (((F ⋙ G).mapHomologicalComplex (.up ℤ)).obj K) ≫
+            (L₁.mapHomologicalComplex (.up ℤ)).map ((adj₂.mapHomologicalComplex (.up ℤ)).counit.app
+              ((F.mapHomologicalComplex (.up ℤ)).obj K)) ≫
+            (adj₁.mapHomologicalComplex (.up ℤ)).counit.app K))) ?_ ?_
+    · congr 1
+      ext n
+      simp [he, conjugateEquiv_apply_app, Adjunction.comp_counit_app]
+      rfl
+    · have hi : (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app
+          ((HomotopyCategory.quotient C (.up ℤ)).obj K) = 𝟙 _ := by
+        rw [← cancel_epi ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app
+          ((HomotopyCategory.quotient C (.up ℤ)).obj K)), Iso.hom_inv_id_app,
+          Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id]
+      rw [hi]
+      simp only [Functor.map_comp]
+      repeat erw [CategoryTheory.Functor.map_id]
+      simp only [Category.id_comp]
+      rfl
   rw [hK, Functor.map_comp, Category.assoc]
   erw [H.rightDerivedFunctorUnit.naturality m]
   rw [Functor.comp_map, ← reassoc_of% hη, ← hB, ← Functor.map_comp, Iso.hom_inv_id_app_assoc]
