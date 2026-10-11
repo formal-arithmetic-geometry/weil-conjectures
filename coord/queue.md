@@ -1,11 +1,11 @@
 # Work queue
 
-452 items; claim with `tools/claim.py next <group> [--stage N]`.
+445 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (452)
+## Stage 2: nodes to state (445)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -45,23 +45,16 @@
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 1 | state |
 | `lem-weil-derived-limit-roos-complex` | 1 | state |
 | `lem-weil-pbc-closed-immersion-conormal-functorial` | 1 | state |
-| `lem-weil-pbc-integral-algebra-directed-colimit-finite` | 1 | state |
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
-| `lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1 | state |
-| `lem-weil-pbc-polynomial-ring-n2` | 1 | state |
-| `lem-weil-pbc-popescu-delocalize-height-zero` | 1 | state |
-| `lem-weil-pbc-popescu-delocalize-weak` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1 | state |
-| `lem-weil-pbc-popescu-desingularize-strictly-standard` | 1 | state |
 | `lem-weil-pbc-popescu-final-solve` | 1 | state |
-| `lem-weil-pbc-popescu-find-sequence` | 1 | state |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1 | state |
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
 | `lem-weil-pbc-popescu-lift-once` | 1 | state |
