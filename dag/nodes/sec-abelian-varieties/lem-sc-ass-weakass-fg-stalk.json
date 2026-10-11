@@ -120,5 +120,24 @@
   "group": "M1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-awf3022 (reviewer sub-agent of L); spot-checked: Item use in H1 step 2 matches the statement (C4 ok); step 2's 05AR is the item's own source, a cross-reference only (preflight note fine); step 3 cites new node lem-sc-ass-weakass-fg-prime = Tag 058A, a real lemma (localization + exponent-descent argument, not elementary), no DAG duplicate (grep 058A/lemma-ass-weakly-ass/weakly associated), Mathlib has no weakly-associated notion (recorded searches); new node's inline definitions match the item's. FIX more, RETURN less: E7 the delivery silently dropped '(Stacks Tag 02OJ)' and '(Stacks Tag 0546)' from the item statement with no reason named; restored the pre-delivery statement verbatim. Note: report section is stale (says no new node); new node's stmt_dep def-weil-pbc-module-stalk is only a loose cite for 'R-module'.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AssociatedWeaklyAssociated",
+  "declaration": "AlgebraicGeometry.associated_iff_weaklyAssociated_of_fg_stalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/AssociatedWeaklyAssociated.lean",
+  "statement": "theorem associated_iff_weaklyAssociated_of_fg_stalk (X : Scheme.{u}) (F : X.Modules) (x : X) (hF : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F) (hfg : (IsLocalRing.maximalIdeal (X.presheaf.stalk x)).FG) : (∃ s : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F, IsLocalRing.maximalIdeal (X.presheaf.stalk x) = (⊥ : Submodule (X.presheaf.stalk x) ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)).colon {s}) ↔ (∃ s : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F, IsLocalRing.maximalIdeal (X.presheaf.stalk x) ∈ ((⊥ : Submodule (X.presheaf.stalk x) ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)).colon {s}).minimalPrimes)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-awf1319"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-awf1319",
+  "group": "K1",
+  "result": "fix",
+  "note": "X scheme, F X.Modules, x point, quasi-coherence hF (not hollow), hfg = m_x FG; F_x now RingedSpace.moduleStalkFunctor (delivered had an untied arbitrary [Module] instance binder); associated = colon {s} = m_x (ASSOCIATED POINT form); weakly associated = m_x in (colon {s}).minimalPrimes (fg-prime/WeakAss landed form, replaced unrolled minimality with redundant IsPrime); no statement change, no other nodes touched"
  }
 }

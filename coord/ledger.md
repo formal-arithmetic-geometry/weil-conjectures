@@ -4648,3 +4648,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:38 L: merged deliver/F1/lem-weil-pbc-polynomial-ring-origin-regular-local (stage 2; reviewer PASS; first push; Sheaf.RingTheory.PolynomialOriginRegularLocal MvPolynomial.polynomial_origin_regularLocal)
 - 12:38 L: merged deliver/E1/lem-sc-ext-evaluation (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ExtEvaluation AlgebraicGeometry.Scheme.Modules.dual_tensor_hom_iso)
 - 12:39 L: merged deliver/E1/lem-weil-pbc-p1-power-affine-charts (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.ProjectiveLinePowerAffineCharts AlgebraicGeometry.ProjectiveSpace.projectiveLinePower_affineCharts)
+- 12:39 L: merged deliver/K1/lem-sc-ass-weakass-fg-stalk (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.AssociatedWeaklyAssociated AlgebraicGeometry.associated_iff_weaklyAssociated_of_fg_stalk)
