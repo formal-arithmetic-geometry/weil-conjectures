@@ -114,5 +114,23 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dar1930 (reviewer sub-agent of L); spot-checked: Step 2 against clause 2 of lemma-weil-pbc-leray-acyclicity (exact augmented resolution, v-acyclic terms, enough injectives, comparison map): hypotheses match the zero-padded resolution; step 1 elementary; cited node imported, its proof_deps do not reach the item (no cycle); no new nodes so no class (b) duplicate; tool use accepted as generic derived-functor criterion. FIX more, RETURN less: no repair needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteAcyclicResolution",
+  "declaration": "CategoryTheory.Functor.nonempty_homology_iso_rightDerived_of_finite_acyclic_resolution",
+  "file": "lean/Sheaf/CategoryTheory/FiniteAcyclicResolution.lean",
+  "statement": "theorem nonempty_homology_iso_rightDerived_of_finite_acyclic_resolution {C : Type u₁} [Category.{v₁} C] [Abelian C] [HasInjectiveResolutions C] {D : Type u₂} [Category.{v₂} D] [Abelian D] (F : C ⥤ D) [F.Additive] [Limits.PreservesFiniteLimits F] (M : C) (n : ℕ) (I : CochainComplex C ℕ) (ι : (CochainComplex.single₀ C).obj M ⟶ I) [QuasiIso ι] (hfinite : ∀ i : ℕ, n < i → Limits.IsZero (I.X i)) (hacyclic : ∀ i : ℕ, i ≤ n → F.rightAcyclic (I.X i)) (q : ℕ) : Nonempty (((F.mapHomologicalComplex _).obj I).homology q ≅ (F.rightDerived q).obj M)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dar0728",
+  "group": "E1",
+  "result": "pass",
+  "note": "C,D abelian with independent universes, HasInjectiveResolutions C (A only, as def-sp-left-exact-additive), F Additive+PreservesFiniteLimits, exact augmentation as QuasiIso single0 M -> I over N, finiteness as IsZero above n, v-acyclic = source rightAcyclic (R^{q+1}=0) for i<=n, conclusion Nonempty(H^q(F I) iso R^qF M) for all q (canonical iso is the def rightDerivedObjIsoOfResolution; Nonempty avoids hollow data); n=0,q>n,M=0 admitted; source general criterion nonempty_rightDerivedObjIso_homology_of_acyclic is the unpadded generalization, not the node, so existing:false; no Mathlib match; docstring carries both proof steps"
  }
 }
