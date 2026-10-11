@@ -180,7 +180,7 @@ variable (X)
 /-- The differential of the `N`-th derived couple has degree `(N + 1, 1)`. -/
 lemma degree_derivedIter (N : ℕ) :
     ((1, 1) : ℤ × ℤ) + degIter ((-1, 0) : ℤ × ℤ) (0 : ℤ × ℤ) N = ((N : ℤ) + 1, 1) := by
-  rw [degIter_eq']
+  rw [degIter_neg_one_zero]
   ext <;> simp [add_comm]
 
 /-- For `r ≥ 1`, the number `(r - 1).toNat` of derivations is `r - 1`. -/
@@ -284,7 +284,7 @@ lemma nonempty_derivedIter_E_iso_of_isFirstQuadrant (hX : X.IsFirstQuadrant) (p 
   induction N, hN using Nat.le_induction with
   | base => exact ⟨Iso.refl _⟩
   | succ N hN ih =>
-    obtain ⟨e⟩ := X.nonempty_derivedIter_E_iso N (p, n)
+    exact ⟨X.derivedIterSuccEIso N (p, n)
       ((hX.isZero N _ (by
         rw [degree_derivedIter]
         simp
@@ -292,8 +292,7 @@ lemma nonempty_derivedIter_E_iso_of_isFirstQuadrant (hX : X.IsFirstQuadrant) (p 
       ((hX.isZero N _ (by
         rw [degree_derivedIter]
         simp
-        omega)).eq_of_src _ _)
-    exact ⟨e ≪≫ ih.some⟩
+        omega)).eq_of_src _ _) ≪≫ ih.some⟩
 
 /-- The cokernels of the inclusions of two equal subobjects into a third one are isomorphic. -/
 lemma nonempty_cokernel_ofLE_congr {A : C} {P P' Q : Subobject A} (h : P = P') (hP : P ≤ Q)
@@ -307,7 +306,8 @@ couple `X` converges to the filtrations `F n` of objects `A n` (`n : ℤ`), and 
 `A n` satisfies `F⁰ = ⊤` and `Fⁿ⁺¹ = ⊥` for `n ≥ 0`, then the first quadrant spectral sequence
 of `X` abuts to `(A n)_{n ∈ ℕ}` with the filtrations `F n`. -/
 noncomputable def firstQuadrantAbutment (hX : X.IsFirstQuadrant) {A : ℤ → C}
-    {F : ∀ n, DecreasingFiltration (A n)} (hc : X.ConvergesTo A F)
+    {ι : ∀ p n : ℤ, X.D (p, n) ⟶ A n} {F : ∀ n, DecreasingFiltration (A n)}
+    (hc : X.ConvergesTo ι F)
     (h₀ : ∀ n : ℕ, (F n).F 0 = ⊤) (h₁ : ∀ n : ℕ, (F n).F (n + 1) = ⊥) :
     (X.firstQuadrantSpectralSequence hX).Abutment (fun n : ℕ ↦ A n) where
   filtration n p := (F n).F p
@@ -317,8 +317,9 @@ noncomputable def firstQuadrantAbutment (hX : X.IsFirstQuadrant) {A : ℤ → C}
   filtration_succ_self n := by simpa using h₁ n
   nonempty_gradedIso n p q hpq := by
     subst hpq
-    obtain ⟨N₀, hN₀⟩ := hc p ↑(p + q)
-    obtain ⟨-, -, ⟨e₁⟩⟩ := hN₀ (max N₀ (p + q + 1)) (le_max_left _ _)
+    obtain ⟨c⟩ := hc
+    let N₀ := c.stage p ↑(p + q)
+    have e₁ := c.iso p ↑(p + q) (max N₀ (p + q + 1)) (le_max_left _ _)
     obtain ⟨e₂⟩ := X.nonempty_derivedIter_E_iso_of_isFirstQuadrant hX p ↑(p + q)
       (p + q + 1) (by omega) (by omega) (max N₀ (p + q + 1)) (le_max_right _ _)
     obtain ⟨e₃⟩ := nonempty_cokernel_ofLE_congr (A := A ↑(p + q))
@@ -337,7 +338,8 @@ noncomputable def firstQuadrantAbutment (hX : X.IsFirstQuadrant) {A : ℤ → C}
 /-- The first quadrant spectral sequence of a convergent first quadrant couple abuts to the
 limit of the couple. -/
 lemma firstQuadrantSpectralSequence_abutsTo (hX : X.IsFirstQuadrant) {A : ℤ → C}
-    {F : ∀ n, DecreasingFiltration (A n)} (hc : X.ConvergesTo A F)
+    {ι : ∀ p n : ℤ, X.D (p, n) ⟶ A n} {F : ∀ n, DecreasingFiltration (A n)}
+    (hc : X.ConvergesTo ι F)
     (h₀ : ∀ n : ℕ, (F n).F 0 = ⊤) (h₁ : ∀ n : ℕ, (F n).F (n + 1) = ⊥) :
     (X.firstQuadrantSpectralSequence hX).AbutsTo (fun n : ℕ ↦ A n) :=
   ⟨X.firstQuadrantAbutment hX hc h₀ h₁⟩

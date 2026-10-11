@@ -78,8 +78,8 @@ finite, then the fibre `X_s` is a finite discrete space and `f` is quasi-finite 
 (blueprint: `pqf-lem-locqf-fibre-discrete`) -/
 theorem Scheme.Hom.discreteTopology_fiber_and_quasiFiniteAt [LocallyOfFiniteType f] (s : S)
     (hs : (f ⁻¹' {s}).Finite) :
-    Finite (f.fiber s) ∧ DiscreteTopology (f.fiber s) ∧ ∀ x : X, f x = s → f.QuasiFiniteAt x :=
-  by
+    Finite (f.fiber s) ∧ DiscreteTopology (f.fiber s) ∧
+      ∀ x : X, f x = s → f.QuasiFiniteAt x := by
   have hfin : Finite (f.fiber s) := (f.fiberHomeo s).finite_iff.mpr hs
   refine ⟨hfin, inferInstance, ?_⟩
   rintro x rfl
@@ -93,8 +93,7 @@ here through Zariski's main theorem
 
 (blueprint: `thm-pqf-finite-iff-proper-finite-fibres`) -/
 theorem IsFinite.iff_isProper_and_finite_preimage_singleton :
-    IsFinite f ↔ IsProper f ∧ ∀ s : S, (f ⁻¹' {s}).Finite :=
-  by
+    IsFinite f ↔ IsProper f ∧ ∀ s : S, (f ⁻¹' {s}).Finite := by
   rw [IsFinite.iff_isProper_and_locallyQuasiFinite]
   exact ⟨fun ⟨_, _⟩ ↦ ⟨inferInstance, f.finite_preimage_singleton⟩,
     fun ⟨_, h⟩ ↦ ⟨inferInstance, .of_finite_preimage_singleton f h⟩⟩

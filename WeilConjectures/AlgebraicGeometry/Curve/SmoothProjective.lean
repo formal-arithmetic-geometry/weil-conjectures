@@ -37,16 +37,19 @@ smooth projective curves. It compares them with the curves of
 
 ## Main statements
 
-- `AlgebraicGeometry.IsSmoothProjectiveCurve.isConnectedCurve`: a smooth projective curve is a
-  smooth connected curve in the sense of `AlgebraicGeometry.IsConnectedCurve`.
+- `AlgebraicGeometry.IsHProjective.isProper`: H-projective morphisms are proper.
+- `AlgebraicGeometry.IsSmoothProjectiveCurve.isConnectedCurve_and_smooth`: a smooth projective
+  curve is a smooth proper connected curve in the sense of `AlgebraicGeometry.IsConnectedCurve`.
 - `AlgebraicGeometry.IsSmoothProjectiveCurve.smoothOfRelativeDimension`: a smooth projective
   curve is smooth of relative dimension one.
 - `AlgebraicGeometry.IsSmoothProjectiveCurve.finiteDimensional_H_one`,
-  `AlgebraicGeometry.IsSmoothProjectiveCurve.arithmeticGenus_pullback`,
-  `AlgebraicGeometry.IsSmoothProjectiveCurve.isConnectedCurve_pullback`,
-  `AlgebraicGeometry.IsSmoothProjectiveCurve.genus_pullback`: the genus of a geometrically
-  integral smooth projective curve is finite and invariant under base change, and agrees with
-  the genus of the base change to any field extension.
+  `AlgebraicGeometry.IsSmoothProjectiveCurve.arithmeticGenus_baseChangeField`,
+  `AlgebraicGeometry.IsSmoothProjectiveCurve.genus_baseChangeField`: the genus of a smooth
+  projective curve is finite, invariant under base change to a field extension, and agrees with
+  the genus of the base change.
+- `AlgebraicGeometry.IsSmoothProjectiveCurve.isConnectedCurve_baseChangeField`: the base change
+  of a geometrically integral smooth projective curve to a field extension is a smooth proper
+  connected curve.
 -/
 
 @[expose] public section
@@ -114,9 +117,11 @@ instance (priority := 100) IsHProjective.isProper (f : X ⟶ S) [IsHProjective f
   obtain ⟨n, _, i, _, rfl⟩ := IsHProjective.exists_isClosedImmersion (f := f)
   infer_instance
 
-/-- An H-projective morphism is projective, being proper and hence quasi-compact. -/
-instance (priority := 100) IsHProjective.isProjective (f : X ⟶ S) [IsHProjective f] :
-    IsProjective f where
+/-- An H-projective morphism is projective, being proper and hence quasi-compact.
+
+This is not an instance, since together with the parent projection
+`AlgebraicGeometry.IsProjective.toIsHProjective` it would form an instance cycle. -/
+theorem IsHProjective.isProjective (f : X ⟶ S) [IsHProjective f] : IsProjective f where
 
 end Projective
 

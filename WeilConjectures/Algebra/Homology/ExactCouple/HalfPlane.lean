@@ -30,6 +30,9 @@ is the page `E_{N + 2}`).
 
 - `CategoryTheory.ExactCouple.IsHalfPlane`: half-plane couples.
 - `CategoryTheory.ExactCouple.halfPlaneFiltration`: the filtration of the abutment `D^{0, n}`.
+- `CategoryTheory.ExactCouple.halfPlaneConvergenceData`: the convergence of the spectral sequence
+  to this filtration.
+- `CategoryTheory.ExactCouple.halfPlaneDerivedIterEIsoGr`: the stable entries, for `b = (2, 1)`.
 
 ## Main statements
 
@@ -100,13 +103,6 @@ end αPow
 section HalfPlane
 
 variable {b : ℤ × ℤ} (X : ExactCouple C ((-1, 0) : ℤ × ℤ) b 0)
-
-/-- The degree of the map `g` of the `N`-th derived couple of a couple with `α` of degree
-`(-1, 0)` and `g` of degree `0` is `(N, 0)`. -/
-lemma degIter_neg_one_zero (N : ℕ) :
-    degIter ((-1, 0) : ℤ × ℤ) (0 : ℤ × ℤ) N = ((N : ℤ), 0) := by
-  rw [degIter_eq]
-  ext <;> simp
 
 /-- An exact couple indexed by `(p, n)` (filtration degree `p`, total degree `n`) is a
 *half-plane couple* with bound `a` if, writing `q = n - p`, `D^{p, n} = 0` for `q < a` and
@@ -237,16 +233,24 @@ lemma isFiniteSeparated_halfPlaneFiltration (n : ℤ) :
   rw [← le_bot_iff, ← halfPlaneFiltration_F_eq_bot h hb n (n - a + 1) (by omega)]
   exact hP _
 
+/-- **The convergence data of a half-plane couple.** The spectral sequence of a half-plane
+couple converges to `Aⁿ = D^{0, n}` with the filtration `Fᵖ Aⁿ = im (αᵖ : D^{p, n} ⟶ D^{0, n})`:
+`E_∞^{p, n} ≅ Fᵖ Aⁿ / Fᵖ⁺¹ Aⁿ`, compatibly with the maps `D^{p, n} ⟶ D^{0, n}`.
+
+(blueprint: `thm-sp-half-plane-convergence`) -/
+noncomputable def halfPlaneConvergenceData :
+    X.ConvergenceData (halfPlaneι h hb) (halfPlaneFiltration h hb) :=
+  X.abutmentConvergenceData (halfPlaneι h hb) (α_comp_halfPlaneι h hb)
+    (fun n ↦ ⟨0, fun p hp ↦ isIso_halfPlaneι h hb p n hp⟩)
+    (fun n ↦ ⟨n - a + 1, fun p hp ↦ h.isZero_D p n (by omega)⟩)
+
 /-- **Convergence of a half-plane couple.** The spectral sequence of a half-plane couple
-converges to `Aⁿ = D^{0, n}` with the filtration `Fᵖ Aⁿ = im (αᵖ : D^{p, n} ⟶ D^{0, n})`:
-`E_∞^{p, n} ≅ Fᵖ Aⁿ / Fᵖ⁺¹ Aⁿ`.
+converges to `Aⁿ = D^{0, n}` with the filtration `Fᵖ Aⁿ = im (αᵖ : D^{p, n} ⟶ D^{0, n})`.
 
 (blueprint: `thm-sp-half-plane-convergence`) -/
 theorem convergesTo_halfPlaneFiltration :
-    X.ConvergesTo (fun n ↦ X.D (0, n)) (halfPlaneFiltration h hb) :=
-  X.convergesTo_abutmentFiltration (halfPlaneι h hb) (α_comp_halfPlaneι h hb)
-    (fun n ↦ ⟨0, fun p hp ↦ isIso_halfPlaneι h hb p n hp⟩)
-    (fun n ↦ ⟨n - a + 1, fun p hp ↦ h.isZero_D p n (by omega)⟩)
+    X.ConvergesTo (halfPlaneι h hb) (halfPlaneFiltration h hb) :=
+  ⟨halfPlaneConvergenceData h hb⟩
 
 include h hb in
 /-- A half-plane couple is regular.
@@ -254,8 +258,8 @@ include h hb in
 (blueprint: `thm-sp-half-plane-convergence`) -/
 theorem isRegular_of_isHalfPlane : X.IsRegular := by
   intro i
-  obtain ⟨N₀, hN₀⟩ := convergesTo_halfPlaneFiltration h hb i.1 i.2
-  exact ⟨N₀, fun N hN j ↦ (hN₀ N hN).2.1 j⟩
+  exact ⟨(halfPlaneConvergenceData h hb).stage i.1 i.2,
+    fun N hN j ↦ (halfPlaneConvergenceData h hb).d_in i.1 i.2 N hN j⟩
 
 include h in
 /-- A half-plane couple is complete.
@@ -312,35 +316,20 @@ theorem derivedIter_d_eq_zero_of_isHalfPlane (N : ℕ) (p n : ℤ)
   have := X.derivedIter_d_eq_zero_of_isHalfPlane' h N p n
   exact ⟨this.1 (by simp at hN ⊢; omega), this.2 (by simp at hN ⊢; omega)⟩
 
-/-- The `E`-objects of the next derived couple at an index where the differentials leaving and
-arriving vanish are the `E`-objects of the couple. -/
-noncomputable def derivedIterSuccEIso (N : ℕ) (i : ℤ × ℤ)
-    (h₁ : ∀ j, (X.derivedIter N).d i j = 0) (h₂ : ∀ j, (X.derivedIter N).d j i = 0) :
-    (X.derivedIter (N + 1)).E i ≅ (X.derivedIter N).E i :=
-  ((X.derivedIter N).dComplex.isoHomologyπ _ i (dComplex_prev i) (h₂ _)).symm ≪≫
-    (X.derivedIter N).dComplex.iCyclesIso i _ (dComplex_next i) (h₁ _)
-
-include h in
 /-- **The entries of a half-plane couple of type `b = (2, 1)` stabilise.** Writing `q = n - p`,
 for `r = N + 2 > max (q - a + 1) p` the entry `E_r^{p, n}` of the page `E_r` (the `N`-th derived
 couple) is isomorphic to the graded piece `grᵖ Aⁿ` of the abutment `Aⁿ = D^{0, n}`.
 
 (blueprint: `thm-sp-half-plane-convergence`) -/
-theorem nonempty_derivedIter_E_iso_gr_of_isHalfPlane (N : ℕ) (p n : ℤ)
+noncomputable def halfPlaneDerivedIterEIsoGr (N : ℕ) (p n : ℤ)
     (hN : max (n - p - a + 1) p < N + 2) :
-    Nonempty ((X.derivedIter N).E (p, n) ≅
-      (halfPlaneFiltration h (by norm_num) n).gr p) := by
-  have hk (k : ℕ) : Nonempty ((X.derivedIter (N + k)).E (p, n) ≅ (X.derivedIter N).E (p, n)) := by
-    induction k with
-    | zero => exact ⟨Iso.refl _⟩
-    | succ k ih =>
-      obtain ⟨e⟩ := ih
-      have hs := derivedIter_d_eq_zero_of_isHalfPlane h (N + k) p n (by push_cast; omega)
-      exact ⟨X.derivedIterSuccEIso (N + k) (p, n) hs.1 hs.2 ≪≫ e⟩
-  obtain ⟨N₀, hN₀⟩ := convergesTo_halfPlaneFiltration h (by norm_num) p n
-  obtain ⟨e₁⟩ := hk N₀
-  obtain ⟨-, -, ⟨e₂⟩⟩ := hN₀ (N + N₀) (by omega)
-  exact ⟨e₁.symm ≪≫ e₂⟩
+    (X.derivedIter N).E (p, n) ≅ (halfPlaneFiltration h (by norm_num) n).gr p :=
+  let c := halfPlaneConvergenceData h (by norm_num)
+  have hs (N' : ℕ) (hN' : N ≤ N') :=
+    derivedIter_d_eq_zero_of_isHalfPlane h N' p n (by omega)
+  (X.derivedIterAddEIso N (p, n) (fun N' hN' ↦ (hs N' hN').1 _)
+      (fun N' hN' ↦ (hs N' hN').2 _) (c.stage p n)).symm ≪≫
+    c.iso p n (N + c.stage p n) (by omega)
 
 end HalfPlaneTwoOne
 

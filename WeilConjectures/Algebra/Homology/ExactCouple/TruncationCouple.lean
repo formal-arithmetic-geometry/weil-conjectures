@@ -208,7 +208,8 @@ spectral sequence of the truncation couple, with `E₂^{p, q} = Rᵖv(Hᵠ(M))`,
 
 (blueprint: `thm-sp-half-plane-convergence`) -/
 theorem convergesTo_truncationCouple (M : DerivedCategory.Plus A) (a : ℤ) [M.IsGE a] :
-    (v.truncationCouple M).ConvergesTo (fun n ↦ (v.truncationCouple M).D (0, n))
+    (v.truncationCouple M).ConvergesTo
+      (ExactCouple.halfPlaneι (v.truncationCouple_isHalfPlane M a) (by norm_num))
       (ExactCouple.halfPlaneFiltration (v.truncationCouple_isHalfPlane M a) (by norm_num)) :=
   ExactCouple.convergesTo_halfPlaneFiltration _ _
 

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.Compactification.FiniteTypeDirected
+public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 /-!
@@ -206,18 +207,11 @@ theorem isFiniteType_toModules (J : X.IdealSheafData) (hJ : J.ofFiniteType) :
 /-- The comparison morphism `𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)}` is an epimorphism: over an affine open the
 restriction map to the closed subscheme `V(J)` is surjective. -/
 instance epi_toPushforwardSubscheme (J : X.IdealSheafData) : Epi J.toPushforwardSubscheme := by
-  have h₁ : TopCat.Presheaf.IsLocallySurjective
-      ((Modules.toPresheaf X).map J.toPushforwardSubscheme) := by
-    rw [TopCat.Presheaf.isLocallySurjective_iff]
-    intro W t x hx
-    obtain ⟨_, ⟨V, hV, rfl⟩, hxV, hVW⟩ :=
-      X.isBasis_affineOpens.exists_subset_of_mem_open hx W.2
-    obtain ⟨e, he⟩ := J.subschemeι_app_surjective ⟨V, hV⟩ (t |_ V)
-    exact ⟨V, hVW, ⟨e, he⟩, hxV⟩
-  have : Sheaf.IsLocallySurjective
-      ((SheafOfModules.toSheaf X.ringCatSheaf).map J.toPushforwardSubscheme) := h₁
-  exact (SheafOfModules.toSheaf X.ringCatSheaf).epi_of_epi_map
-    (Sheaf.epi_of_isLocallySurjective _)
+  refine Modules.epi_of_forall_exists_app_eq _ fun W y x hx ↦ ?_
+  obtain ⟨V, hV, hxV, hVW⟩ := exists_isAffineOpen_mem_and_subset (U := W) hx
+  obtain ⟨z, hz⟩ := J.subschemeι.app_surjective V hV (J.subscheme.presheaf.map
+    ((TopologicalSpace.Opens.map J.subschemeι.base).map (homOfLE hVW)).op y)
+  exact ⟨V, hVW, hxV, z, hz⟩
 
 /-- The short complex `0 ⟶ ℐ ⟶ 𝒪_X ⟶ (ι_J)_* 𝒪_{V(J)} ⟶ 0` of `𝒪_X`-modules attached to an
 ideal sheaf `J`. -/

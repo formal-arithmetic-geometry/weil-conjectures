@@ -246,7 +246,7 @@ sequence of the filtered complex converges to `H(K)` with the image filtration
 theorem convergesTo_exactCouple
     (hiso : ∀ n : ℤ, ∃ m : ℤ, ∀ p ≤ m, IsIso ((F.F p).arrow.f n))
     (hzero : ∀ n : ℤ, ∃ M : ℤ, ∀ p ≥ M, IsZero ((F.piece p).X n)) :
-    F.exactCouple.ConvergesTo (fun n ↦ K.homology n) F.homologyFiltration := by
+    F.exactCouple.ConvergesTo F.toHomology F.homologyFiltration := by
   refine F.exactCouple.convergesTo_abutmentFiltration F.toHomology F.α_toHomology ?_ ?_
   · intro n
     obtain ⟨m₀, h₀⟩ := hiso (n - 1)

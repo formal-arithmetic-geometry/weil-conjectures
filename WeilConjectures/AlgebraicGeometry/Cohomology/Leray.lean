@@ -99,7 +99,7 @@ theorem exists_leraySpectralSequence [HasInjectiveResolutions X.Modules]
   -- injective modules are flasque, and so are their direct images
   obtain ⟨q, rfl⟩ : ∃ q', q = q' + 1 := ⟨q - 1, by lia⟩
   exact rightAcyclic_globalSectionsFunctor_of_isFlasque _
-    (isFlasque_pushforward f I (isFlasque_presheaf_of_injective I)) q
+    (isFlasque_pushforward f I (isFlasque_of_injective I)) q
 
 /-- **The exact sequence of low degree terms of the Leray spectral sequence.** For a morphism
 `f : X ⟶ Y` and an `𝒪_X`-module `ℱ` there is an exact sequence

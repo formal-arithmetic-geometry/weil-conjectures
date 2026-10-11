@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.TotalComplexSymmetry
 public import WeilConjectures.Algebra.Homology.ExactCouple.FirstQuadrant
 public import WeilConjectures.Algebra.Homology.ExactCouple.TotalComplexFiltration
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+public import WeilConjectures.Mathlib.Algebra.Ring.NegOnePow
 
 /-!
 # The spectral sequences of a first quadrant double complex
@@ -163,10 +164,6 @@ lemma ιTotal_totalExtendNatXIso_hom (i j m : ℕ) (h : i + j = m) :
       (K.extendNatXXIso i j).inv ≫ K.extendNat.ιTotal (up ℤ) i j m (by
         exact (by omega : (i : ℤ) + j = m)) := by
   simp [totalExtendNatXIso]
-
-/-- The sign `(-1) ^ i` of a natural number `i`, seen as an integer. -/
-lemma _root_.Int.negOnePow_natCast_eq_pow (i : ℕ) : (i : ℤ).negOnePow = (-1 : ℤˣ) ^ i := by
-  rw [Int.negOnePow_def, zpow_natCast]
 
 /-- The cohomology of the total complex of `K.extendNat` in degree `n ≥ 0` is the cohomology of
 the total complex of `K`. -/

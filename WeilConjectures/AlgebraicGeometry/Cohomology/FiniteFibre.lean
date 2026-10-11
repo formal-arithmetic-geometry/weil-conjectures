@@ -18,14 +18,14 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.Modules.IsCoherent`: coherent `𝒪_X`-modules in the sense of Stacks
-  `01BV`: of finite type, and every map from a finite free module over an open has a kernel of
-  finite type.
+- `AlgebraicGeometry.Scheme.Modules.IsFiniteTypeWithFiniteTypeKernels`: coherent `𝒪_X`-modules
+  in the sense of Stacks `01BV`: of finite type, and every map from a finite free module over an
+  open has a kernel of finite type.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Modules.isCoherent_iff`: on a locally noetherian scheme, coherent
-  means quasi-coherent of finite type.
+- `AlgebraicGeometry.Scheme.Modules.isFiniteTypeWithFiniteTypeKernels_iff`: on a locally
+  noetherian scheme, Stacks-coherent means quasi-coherent of finite type.
 - `AlgebraicGeometry.Scheme.Modules.isZero_of_isZero_stalk`: a module with vanishing stalks is
   zero.
 - `AlgebraicGeometry.Scheme.Modules.subsingleton_H_restrict_of_isAffineOpen`: quasi-coherent
@@ -50,12 +50,14 @@ variable {X : Scheme.{u}}
 `U ⊆ X`, every finite index type `ι` and every map `φ : 𝒪_U^{⊕ι} ⟶ ℱ|_U`, the kernel of `φ` is of
 finite type.
 
-This is the notion of Stacks `01BV`; `AlgebraicGeometry.Scheme.Modules.isCoherent` is the
-(in general different) notion "quasi-coherent of finite presentation", and the two agree on
-locally noetherian schemes (`AlgebraicGeometry.Scheme.Modules.isCoherent_iff`).
+This is the notion of Stacks `01BV`; it is named after its defining conditions to distinguish it
+from `AlgebraicGeometry.Scheme.Modules.isCoherent`, the (in general different) notion
+"quasi-coherent of finite presentation". On locally noetherian schemes both agree with
+"quasi-coherent of finite type"
+(`AlgebraicGeometry.Scheme.Modules.isFiniteTypeWithFiniteTypeKernels_iff`).
 
 (blueprint: `pqf-def-coherent`) -/
-class IsCoherent (ℱ : X.Modules) : Prop where
+class IsFiniteTypeWithFiniteTypeKernels (ℱ : X.Modules) : Prop where
   isFiniteType : SheafOfModules.IsFiniteType (R := X.ringCatSheaf) ℱ
   isFiniteType_kernel (U : X.Opens) (ι : Type u) [Finite ι]
     (φ : SheafOfModules.free (R := U.toScheme.ringCatSheaf) ι ⟶ ℱ.restrict U.ι) :
@@ -69,9 +71,10 @@ noetherian hypothesis. Conversely the kernel of `𝒪_U^n ⟶ ℱ|_U` is of fini
 `isFinitePresentation_kernel`.
 
 (blueprint: `pqf-lem-coherent-ft-locnoeth`) -/
-theorem isCoherent_iff [IsLocallyNoetherian X] (ℱ : X.Modules) :
-    ℱ.IsCoherent ↔ SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ ∧
-      SheafOfModules.IsFiniteType (R := X.ringCatSheaf) ℱ := by
+theorem isFiniteTypeWithFiniteTypeKernels_iff [IsLocallyNoetherian X] (ℱ : X.Modules) :
+    ℱ.IsFiniteTypeWithFiniteTypeKernels ↔
+      SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ ∧
+        SheafOfModules.IsFiniteType (R := X.ringCatSheaf) ℱ := by
   refine ⟨fun h ↦ ⟨?_, h.isFiniteType⟩, fun ⟨h₁, h₂⟩ ↦ ⟨h₂, fun U ι _ φ ↦ ?_⟩⟩
   · obtain ⟨σ, hσ⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData
       (R := X.ringCatSheaf) (self := h.isFiniteType) ℱ
@@ -154,11 +157,12 @@ Stacks 02UP), so `(R^p f_* ℱ)|_V = R^p (f|_V)_* (ℱ|_{f⁻¹V})` vanishes, `f
 (blueprint: `pqf-lem-fff-vanishing`) -/
 theorem isZero_stalk_higherDirectImage_of_finite_preimage {Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f] [IsLocallyNoetherian Y] [HasInjectiveResolutions X.Modules] (y : Y)
-    (hy : (f ⁻¹' {y}).Finite) (ℱ : X.Modules) [ℱ.IsCoherent] {p : ℕ} (hp : 0 < p) :
+    (hy : (f ⁻¹' {y}).Finite) (ℱ : X.Modules) [ℱ.IsFiniteTypeWithFiniteTypeKernels] {p : ℕ}
+    (hp : 0 < p) :
     IsZero (((higherDirectImage f p).obj ℱ).presheaf.stalk y) := by
   obtain ⟨p, rfl⟩ : ∃ p', p = p' + 1 := ⟨p - 1, by omega⟩
   have := LocallyOfFiniteType.isLocallyNoetherian f
-  have := ((isCoherent_iff ℱ).1 inferInstance).1
+  have := ((isFiniteTypeWithFiniteTypeKernels_iff ℱ).1 inferInstance).1
   obtain ⟨V, hyV, hV⟩ := exists_isFinite_morphismRestrict_of_finite_preimage_singleton f y hy
   have := isGrothendieckAbelian (f ⁻¹ᵁ V).toScheme
   obtain ⟨e⟩ := nonempty_higherDirectImage_iso_restrict f ℱ V.ι _ _

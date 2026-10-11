@@ -499,16 +499,6 @@ noncomputable def stupidFiltrationE₁Iso (K : CochainComplex A ℤ) (s n : ℤ)
   (v.homologyRightDerivedSingleIso (-(-s)) n r (by omega)).app (K.X (-(-s))) ≪≫
     (v.rightDerived r).mapIso (K.XIsoOfEq (neg_neg s))
 
-/-- The `E₁`-term `E₁^{s, n}` of the spectral sequence of the stupid filtration is
-`R^{n - s} v(K^s)` for `s ≤ n`.
-
-(blueprint: `thm-sp-if-e1`) -/
-theorem nonempty_stupidFiltrationExactCouple_E_iso (K : CochainComplex A ℤ) (s n : ℤ)
-    (h : s ≤ n) :
-    Nonempty ((v.stupidFiltrationExactCouple K).E (s, n) ≅
-      (v.rightDerived (n - s).toNat).obj (K.X s)) :=
-  ⟨v.stupidFiltrationE₁Iso K s n _ (by omega)⟩
-
 /-- The `E₁`-term `E₁^{s, n}` of the spectral sequence of the stupid filtration vanishes for
 `n < s`.
 
@@ -615,9 +605,7 @@ choices), filtered by the images of the maps `Hⁿ(R⁺v(σ_{≥ p} K)) ⟶ Hⁿ
 
 (blueprint: `thm-sp-if-e1`) -/
 theorem stupidFiltrationExactCouple_convergesTo (K : CochainComplex.Plus A) :
-    (v.stupidFiltrationExactCouple K.obj).ConvergesTo
-      (fun n ↦ (DerivedCategory.Plus.homologyFunctor B n).obj
-        (v.rightDerivedFunctorPlus.obj (DerivedCategory.Plus.Q.obj K)))
+    (v.stupidFiltrationExactCouple K.obj).ConvergesTo (v.stupidFiltrationAbutmentι K)
       (v.stupidFiltrationAbutmentFiltration K) := by
   obtain ⟨a, ha⟩ := K.2
   refine (v.stupidFiltrationExactCouple K.obj).convergesTo_abutmentFiltration _

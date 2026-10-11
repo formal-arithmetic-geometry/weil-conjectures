@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.HomologySequenceLemmas
 public import WeilConjectures.Algebra.Homology.ExactCouple.FilteredComplex
 public import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Basic
 
 /-!
 # The column filtration of the total complex of a double complex
@@ -371,15 +372,6 @@ noncomputable def columnFiltrationGrHomologyIso (p n : ℤ) :
 
 /-! ### The cohomology of the total complex of a column -/
 
-/-- An isomorphism multiplied by a sign `ε : ℤˣ`. -/
-@[simps]
-noncomputable def _root_.CategoryTheory.Iso.unitsSMul {X Y : C} (ε : ℤˣ) (e : X ≅ Y) :
-    X ≅ Y where
-  hom := ε • e.hom
-  inv := ε • e.inv
-  hom_inv_id := by simp [smul_smul, Int.units_mul_self]
-  inv_hom_id := by simp [smul_smul, Int.units_mul_self]
-
 omit [K.HasTotal (up ℤ)] in
 /-- The differential of the total complex of a double complex concentrated in the column `x`:
 it is `(-1)ˣ` times the differential of the column. -/
@@ -641,7 +633,7 @@ concentrated in the first quadrant converges to the cohomology of `Tot K`, with 
 
 (blueprint: `thm-sp-double-complex-spectral-sequences`) -/
 theorem columnFiltration_convergesTo :
-    K.columnFiltration.exactCouple.ConvergesTo (fun n ↦ (K.total (up ℤ)).homology n)
+    K.columnFiltration.exactCouple.ConvergesTo K.columnFiltration.toHomology
       K.columnFiltration.homologyFiltration :=
   K.columnFiltration.convergesTo_exactCouple
     (fun n ↦ ⟨0, fun p hp ↦ K.isIso_columnFiltration_arrow_f hK p n hp⟩)

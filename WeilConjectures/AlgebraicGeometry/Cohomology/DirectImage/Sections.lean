@@ -184,7 +184,7 @@ theorem nonempty_higherDirectImage_iso_restrict {T' X' : Scheme.{u}} (g : T' ⟶
   have : QuasiIso ι := inferInstance
   have hI (n : ℕ) : (pushforward f').rightAcyclic (K.X n) :=
     rightAcyclic_pushforward_of_isFlasque f' _
-      (isFlasque_restrict g' _ (isFlasque_presheaf_of_injective (J.cocomplex.X n)))
+      (isFlasque_restrict g' _ (isFlasque_of_injective (J.cocomplex.X n)))
   -- `f'_* (J|_{X'}) ≅ (f_* J)|_{T'}`
   let L := ((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex
   let e : ((pushforward f').mapHomologicalComplex _).obj K ≅

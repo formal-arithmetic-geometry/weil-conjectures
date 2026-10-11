@@ -40,11 +40,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X Y : Scheme.{u}}
 
-/-- The underlying abelian presheaf of an injective `𝒪_X`-module is flasque. -/
-theorem isFlasque_presheaf_of_injective (I : X.Modules) [Injective I] :
-    TopCat.Presheaf.IsFlasque I.presheaf :=
-  isFlasque_of_injective I
-
 /-- In a short exact sequence `0 ⟶ M₁ ⟶ M₂ ⟶ M₃ ⟶ 0` of `𝒪_X`-modules with `M₁` flasque, the
 sections of `M₂` over any open surject onto those of `M₃`. -/
 theorem epi_app_of_shortExact_of_isFlasque {S : ShortComplex X.Modules} (hS : S.ShortExact)
@@ -97,7 +92,7 @@ theorem rightAcyclic_of_isFlasque {D : Type*} [Category* D] [Abelian D] (F : X.M
       TopCat.Presheaf.IsFlasque S.X₁.presheaf → Epi (F.map S.g))
     (M : X.Modules) (hM : TopCat.Presheaf.IsFlasque M.presheaf) : F.rightAcyclic M :=
   F.rightAcyclic_of_epi_map_g (fun M ↦ TopCat.Presheaf.IsFlasque M.presheaf)
-    (fun I _ ↦ isFlasque_presheaf_of_injective I)
+    (fun I _ ↦ isFlasque_of_injective I)
     (fun _ hS h₁ h₂ ↦ isFlasque_X₃_of_shortExact hS h₁ h₂) hF hM
 
 /-- **Flasque modules are acyclic for direct images**: `R^q f_* M = 0` for `q > 0` if `M` is
