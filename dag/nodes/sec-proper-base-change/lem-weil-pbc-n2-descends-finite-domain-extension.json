@@ -187,5 +187,24 @@
   "worker": "stage1",
   "summary": "Read Algebra Lemma 032K (lemma-finite-extension-N-2, algebra.tex 45256-45266; tag verified in tags/tags): proof 'Omitted' with the hint that integral closures of R in extension fields lie in those of S. Wrote the N-2 clause out in six steps, mirroring the N-1 sibling: the embedding K=Frac(A) -> E=Frac(B); for a finite L/K, an embedding psi of L over K into an algebraic closure Omega of E (Mathlib leaf IsAlgClosed.lift via lem-weil-pbc-algebraic-extension-embeds-algebraically-closed); the compositum M of psi(L) and E in Omega is finite over E (Mathlib leaf lem-weil-pbc-compositum-degree-bound); psi maps the closure A_L of A in L into the closure B_M of B in M (same monic equation); B_M finite over B (B N-2) hence over A (lem-weil-pbc-finite-module-over-finite-algebra); A_L is isomorphic to an A-submodule of B_M, finite as A is Noetherian (lem-weil-pbc-noetherian-submodule-finite). Statement checked against the source and kept; stmt_deps unchanged. No new node: every fact used is an existing Mathlib leaf of unit sk-thm-p1 or a definition (def-weil-algebraic-closure of sec-nagata-compactification is a definition node, a notion). No sorry-free slopmaster2 declaration states the lemma (grep of WeilConjectures for the id, 032K, Japanese, Module.Finite ... integralClosure). No blueprint node states the lemma (blueprint_refs search 'N-2', '032K', 'Japanese', 'finite extension N-2', 'integral closure finite extension', 'Nagata ring', 'integral closure Noetherian domain finite'), same_as []. proof_origin agent because the source omits the proof.",
   "blueprint": "Realizes, through the via chain (lem-weil-pbc-power-series-n2, last sentence of the proof of Algebra 032Q: 'Then Lemma lemma-finite-extension-N-2 shows that $R[[x]]$ is N-2'), the place of the blueprint node lem-weil-pbc-normal-constant-generic recorded in from.place: step 4 of its split (Lemma 59.73.13, Tag 09Z5, proof of (1)), within it the reduction 'In the case k[[X_1,...,X_d]] we reduce to the statement that a field is N-2 by Lemma lemma-power-series-over-N-2'. All six steps serve that one place."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IsN2OfFiniteExtension",
+  "declaration": "isN2_of_finite_extension",
+  "file": "lean/Sheaf/RingTheory/IsN2OfFiniteExtension.lean",
+  "statement": "theorem isN2_of_finite_extension (A : Type uA) (B : Type uB) (K : Type uK) (E : Type uE) [CommRing A] [IsDomain A] [CommRing B] [IsDomain B] [Algebra A B] [IsNoetherianRing A] [Module.Finite A B] [Field K] [Algebra A K] [IsFractionRing A K] [Field E] [Algebra B E] [IsFractionRing B E] (hAB : Function.Injective (algebraMap A B)) (hB : IsN2 B E) : IsN2 A K",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-n2d1157"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-n2d1157",
+  "group": "G1",
+  "result": "fix",
+  "note": "domains A,B: CommRing+IsDomain; A⊆B: Algebra A B + injective algebraMap; A Noetherian: IsNoetherianRing; B finite A-module: Module.Finite A B; K,E fraction fields via IsFractionRing (now independent universes as N-1 sibling); B N-2: IsN2 B E; conclusion IsN2 A K (L/K finite, scalar tower, Module.Finite A (integralClosure A L) from J1's IsN2)"
  }
 }

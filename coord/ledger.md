@@ -4536,3 +4536,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:57 L: merged deliver/F1/lem-weil-pbc-normal-domain-fractional-principal-quotient-ass (stage 2; reviewer FIX; first push; Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes Ideal.associatedPrimes_fractionalPrincipalQuotient)
 - 11:57 L: merged deliver/H1/lem-weil-pbc-nagata-universally-japanese (stage 2; reviewer PASS; first push; Sheaf.RingTheory.NagataUniversallyJapanese isUniversallyJapanese_of_isNagataRing)
 - 11:58 L: merged deliver/E1/def-amb-finite-locally-free-module (stage 2; reviewer PASS; first push; WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree SheafOfModules.IsFiniteLocallyFreeOfRank; existing declaration)
+- 11:58 L: merged deliver/G1/lem-weil-pbc-n2-descends-finite-domain-extension (stage 2; reviewer FIX; first push; Sheaf.RingTheory.IsN2OfFiniteExtension isN2_of_finite_extension)
