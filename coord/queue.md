@@ -1,11 +1,11 @@
 # Work queue
 
-173 items; claim with `tools/claim.py next <group> [--stage N]`.
+169 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (173)
+## Stage 2: nodes to state (169)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -61,7 +61,6 @@
 | `lem-weil-pbc-coherent-formal-module-kernel` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-formal-modules-isomorphism-local` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-homs-over-open` | 1 | state | 0 |
-| `lem-weil-pbc-coherent-property-devissage-integral-subschemes` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-support-power-ideal-kills` | 1 | state | 0 |
 | `lem-weil-pbc-completion-internal-hom` | 1 | state | 0 |
 | `lem-weil-pbc-formal-completion-fully-faithful-proper` | 1 | state | 0 |
@@ -89,13 +88,11 @@
 | `lem-weil-pbc-trivial-kan-homotopy-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-truncated-coskeleton-finite-limits` | 1 | state | 0 |
 | `lem-weil-pbc-truncation-step-ses` | 1 | state | 0 |
-| `lem-weil-pbc-universal-thickening-open-pieces` | 1 | state | 0 |
 | `lem-weil-pbc-unramified-base-change-open` | 1 | state | 0 |
 | `lem-weil-pbc-valuation-ring-normal` | 1 | state | 0 |
 | `lem-weil-pbc-vanishing-descends-retract` | 1 | state | 0 |
 | `lem-weil-pbc-well-ordered-union-projective-dimension` | 1 | state | 0 |
 | `lem-weil-pbc-z-localizations-dvr` | 1 | state | 0 |
-| `lem-weil-pbc-zariski-h0-proper-henselian-pair` | 1 | state | 0 |
 | `lem-weil-pbc-zariski-pair-rank-one-propagation` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dim-integral-point` | 1 | state | 0 |
 | `lem-weil-pbc-zero-dimensional-base-change-points` | 1 | state | 0 |
@@ -107,7 +104,6 @@
 | `lemma-weil-pbc-target-locality` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-assembly` | 1 | state | 0 |
 | `lemma-weil-pbc-torsion-filtered-union` | 1 | state | 0 |
-| `pqf-lem-coherent-ft-locnoeth` | 1 | state | 0 |
 | `pqf-lem-finite-fp-locnoeth` | 1 | state | 0 |
 | `pqf-lem-finite-qf` | 1 | state | 0 |
 | `pqf-lem-finite-type-algebra-finite-spectrum` | 1 | state | 0 |
