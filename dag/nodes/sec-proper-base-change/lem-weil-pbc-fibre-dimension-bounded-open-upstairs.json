@@ -169,5 +169,24 @@
   "group": "G1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: 00QH via 00QE (new node) and 00QG (new node, stated without the injectivity of k[t] -> T; valid since 00QF bounds dim S_q by dim k[t]_p <= n for every prime); fibre of S_g identified with the principal localization of the fibre of S by tensor-cancel and localization-base-change, quasi-finiteness transported by quasi-finite-four-rings, local dimension by dimension-supremum-local-dimensions and dimension-at-point-open-subspace; same lemma as the F1 node lem-weil-pbc-fibre-dimension-neighborhood (lead note there)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs",
+  "declaration": "Algebra.fibre_dimension_bounded_open_upstairs",
+  "file": "lean/Sheaf/AlgebraicGeometry/FibreDimensionBoundedOpenUpstairs.lean",
+  "statement": "theorem fibre_dimension_bounded_open_upstairs {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [FiniteType R S] (q : PrimeSpectrum S) (d : ℕ) : topologicalKrullDimAt (PrimeSpectrum.preimageEquivFiber R S (PrimeSpectrum.comap (algebraMap R S) q) ⟨q, rfl⟩) = (d : WithBot ℕ∞) → ∃ V : Set (PrimeSpectrum S), IsOpen V ∧ q ∈ V ∧ ∀ q' ∈ V, topologicalKrullDimAt (PrimeSpectrum.preimageEquivFiber R S (PrimeSpectrum.comap (algebraMap R S) q') ⟨q', rfl⟩) ≤ (d : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-fdb1016"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fdb1016",
+  "group": "C1",
+  "result": "fix",
+  "note": "finite type R->S as [Algebra R S][FiniteType R S]; q : PrimeSpectrum S; fibre point via preimageEquivFiber on PrimeSpectrum (p.Fiber S) as F1 c84d7f11f; hyp dim_Q = d; conclusion IsOpen V, q in V, forall q' in V dim <= d; delivered Spec(.of) form checked rfl-equal to fixed form"
  }
 }

@@ -4192,3 +4192,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 10:16 L: merged deliver/K1/lem-weil-pbc-finite-over-henselian-local-product (stage 2; reviewer PASS; first push; Sheaf.RingTheory.FiniteOverHenselianLocalProduct HenselianLocalRing.finite_over_henselian_exists_algEquiv_pi)
 - 10:16 L: merged deliver/F1/lem-weil-pbc-filtered-colimit-tensor-varying-rings (stage 2; reviewer PASS; first push; Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings TensorProduct.exists_unique_colimit_tensor_varying_rings)
 - 10:16 L: merged deliver/J1/lem-weil-pbc-finite-etale-etale-local-split (stage 2; reviewer FIX; first push; Sheaf.Paper.FiniteEtaleEtaleLocalSplit AlgebraicGeometry.finite_etale_etale_local_split)
+- 10:17 L: merged deliver/C1/lem-weil-pbc-fibre-dimension-bounded-open-upstairs (stage 2; reviewer FIX; first push; Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs Algebra.fibre_dimension_bounded_open_upstairs)
