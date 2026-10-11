@@ -237,5 +237,23 @@
   "by": "L",
   "result": "pass",
   "note": "Eight steps along Stacks 088C: full faithfulness (0883 node), Noetherian induction on quasi-coherent ideals with the set Xi defined on closed subschemes directly (087T equivalence), the induction hypothesis on X_0 written out (ideal containment for factoring closed immersions, equal ideals give isomorphic subschemes), Chow (lem-weil-pbc-chow-noetherian, same unit; X' -> P^n_A closed immersion via proper-over-separated), pullback of the system and the projective case (0885 node), reduced induced ideal of X_0 \\ U and the push-pull node 088B, K'^e nonzero (gap in Stacks filled), conclusion by the new unsplit 088A node (statement matches Stacks with the kernel/cokernel condition made precise through lem-weil-pbc-formal-systems-annihilated-by-power). Correct. L fixed a step-number slip in step 8 (hypotheses (1),(2) come from steps 7 and 6). Statement: IO_X made explicit (def-nagata-extended-ideal added)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckExistenceProper",
+  "declaration": "AlgebraicGeometry.grothendieck_existence_proper",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckExistenceProper.lean",
+  "statement": "theorem grothendieck_existence_proper (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [IsAdicComplete I A] (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] : (@completion X (isNoetherian_of_locallyOfFiniteType f) ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f)).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-gep",
+  "group": "C1",
+  "result": "pass",
+  "note": "Noetherian A, IsAdicComplete I A, f : X ⟶ Spec A IsProper, I O_X = (Spec.map (Quotient.mk I)).ker.comap f (recorded IdealSheafData.comap), recorded completion Coh(O_X) ⥤ CoherentFormalModule X I, conclusion IsEquivalence = fully faithful + ess. surjective; IsNoetherian X supplied as Prop proof term"
  }
 }
