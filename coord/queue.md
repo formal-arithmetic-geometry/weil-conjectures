@@ -1,11 +1,11 @@
 # Work queue
 
-458 items; claim with `tools/claim.py next <group> [--stage N]`.
+456 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (458)
+## Stage 2: nodes to state (456)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -82,8 +82,6 @@
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize-lifting-apply` | 1 | state |
 | `lem-weil-pbc-popescu-enlarge-solution-modulo` | 1 | state |
-| `lem-weil-pbc-popescu-lifting` | 1 | state |
-| `lem-weil-pbc-popescu-reduce-to-field` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo-choose` | 1 | state |
 | `lem-weil-pbc-power-in-base-after-localization` | 1 | state |
 | `lem-weil-pbc-power-series-field-cohen-regular-complete` | 1 | state |
