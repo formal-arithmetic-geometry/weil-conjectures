@@ -1,16 +1,17 @@
 # Work queue
 
-863 items; claim with `tools/claim.py next <group> [--stage N]`.
+864 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Stage 1: nodes to split (44)
+## Stage 1: nodes to split (43)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-weil-derived-limit-roos-complex` | 15 | none |
 | `lemma-weil-pbc-prime-torsion-devissage` | 2004 | rests_on_sorry |
 | `lem-pc-ringed-space-module-stalk-tensor` | 3013 | none |
-| `lem-pc-ring-pseudo-coherent-localization-glue` | 3016 | none |
-| `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3018 | none |
+| `lem-pc-ring-m-pseudo-coherent-vanishing-base` | 3017 | none |
+| `lem-pc-ring-pseudo-coherent-distinguished-triangle` | 3017 | none |
+| `lem-pc-ring-pseudo-coherent-iff-all-m` | 3017 | none |
 | `lem-sc-module-extension-by-zero-stalk-maps` | 3018 | none |
 | `lem-sc-affine-koszul-hom-alternating-cech` | 3022 | none |
 | `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 3022 | none |
@@ -39,19 +40,17 @@
 | `lem-sc-valuation-proper-coherent-higher-direct-images` | 6015 | none |
 | `lem-sc-base-change-curve` | - | none |
 | `lem-sc-global-functions` | - | rests_on_sorry |
-| `lem-pc-coherent-property-irreducible` | - | none |
 | `lem-sc-dvr-field-extension-order` | - | none |
 | `lem-sc-etale-torsor-inverse-image-extension` | - | none |
 | `lem-sc-etale-torsor-pushout-extension` | - | none |
 | `lem-pur-kinjective-characterize-K-injective` | - | none |
 | `lem-pur-kinjective-characterize-injective` | - | none |
 | `lem-pur-kinjective-functorial-homotopies` | - | none |
-| `lem-pur-kinjective-set-iso-classes-bounded-size` | - | none |
 | `lem-pur-kinjective-surjection-bounded-size` | - | none |
 | `lem-pur-left-derived-from-kflat-class` | - | none |
 | `lem-pc-finite-flat-pushforward-locally-free` | - | none |
 
-## Stage 2: nodes to state (819)
+## Stage 2: nodes to state (821)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -201,6 +200,7 @@
 | `lem-pc-projective-curve-linear-pair` | 1 | state |
 | `lem-pc-right-derived-functor-triangulated` | 1 | state |
 | `lem-pc-right-localization-hom-colimit` | 1 | state |
+| `lem-pc-ring-pseudo-coherent-localization-glue` | 1 | state |
 | `lem-pc-scheme-connected-iff-idempotents` | 1 | state |
 | `lem-pc-scheme-dimension-local-rings` | 1 | state |
 | `lem-pc-scheme-modules-grothendieck-abelian` | 1 | state |
@@ -225,6 +225,7 @@
 | `lem-pqf-finite-spectrum-maximal-primes` | 1 | state |
 | `lem-pur-kinjective-degreewise-existence` | 1 | state |
 | `lem-pur-kinjective-functorial-injective` | 1 | state |
+| `lem-pur-kinjective-set-iso-classes-bounded-size` | 1 | state |
 | `lem-sc-affine-cap-section-open-algebra` | 1 | state |
 | `lem-sc-affine-finite-module-free-locus` | 1 | state |
 | `lem-sc-affine-finite-projective-prime-membership` | 1 | state |
@@ -875,7 +876,7 @@
 | `lem-weil-pbc-projective-space-zero-isomorphism` | 4 | state |
 | `def-nagata-fixed-base-separated-stage` | 6 | state |
 
-Not open yet: 1727 nodes that wait for a statement dependency, 85 nodes that wait for stage 1.
+Not open yet: 1728 nodes that wait for a statement dependency, 84 nodes that wait for stage 1.
 
 ## Stage 3: modules to prove (0)
 
