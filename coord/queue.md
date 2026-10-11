@@ -1,11 +1,11 @@
 # Work queue
 
-70 items; claim with `tools/claim.py next <group> [--stage N]`.
+68 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (70)
+## Stage 2: nodes to state (68)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -15,12 +15,10 @@
 | `def-weil-pbc-simplicial-hom-object` | 1 | state | 4 |
 | `def-pc-derived-rhom-algebra-module` | 1 | state | 2 |
 | `def-sc-duality-equation-base-change-map` | 1 | state | 2 |
-| `def-weil-pbc-truncation-exact-couples` | 1 | state | 2 |
 | `lem-pc-module-pullback-identity-composition` | 1 | state | 10 |
 | `lem-weil-pbc-pair-henselization` | 1 | state | 5 |
 | `lem-sc-derived-internal-hom-adjunction` | 1 | state | 4 |
 | `lem-weil-pbc-etale-graph-section-extension-map-linear` | 1 | state | 3 |
-| `lem-weil-pbc-higher-direct-image-presheaf` | 1 | state | 2 |
 | `lem-pc-cech-resolution` | 1 | state | 1 |
 | `lem-pc-derived-sections-pushforward-comparison` | 1 | state | 1 |
 | `lem-pc-derived-tensor-transitivity` | 1 | state | 1 |
@@ -63,14 +61,13 @@
 | `lem-sc-proper-flat-right-adjoint-restriction-open` | 1 | state | 0 |
 | `lem-sc-qcoh-acyclic-derived-pushforward-cohomology` | 1 | state | 0 |
 | `lem-sc-smooth-proper-diagonal-basechange-upper-shriek` | 1 | state | 0 |
-| `lem-sc-smooth-proper-diagonal-tensor-formula` | 1 | state | 0 |
 | `lem-sc-smooth-proper-relative-dualizing-general` | 1 | state | 0 |
 | `lem-weil-pbc-cohomology-pullback-derived-unit` | 1 | state | 0 |
 | `lem-weil-pbc-etale-mayer-vietoris-pullback` | 1 | state | 0 |
-| `lem-weil-pbc-etale-shriek-base-change-modules` | 1 | state | 0 |
-| `lem-weil-pbc-finite-pushforward-unit-edge-compatibility` | 1 | state | 0 |
+| `lem-weil-pbc-exact-couple-differential` | 1 | state | 0 |
+| `lem-weil-pbc-flat-base-change-map-sections` | 1 | state | 0 |
 | `lem-weil-pbc-formal-functions-complete-base` | 1 | state | 0 |
-| `lem-weil-pbc-grothendieck-existence-easy` | 1 | state | 0 |
+| `lem-weil-pbc-formal-functions-stalk` | 1 | state | 0 |
 | `lem-weil-pbc-hypercohomology-e1-pullback-functorial` | 1 | state | 0 |
 | `lem-weil-pbc-module-cohomology-fmap-basic-properties` | 1 | state | 0 |
 | `lem-weil-pbc-projective-space-twisting-sheaf-charts` | 1 | state | 0 |
@@ -79,8 +76,9 @@
 | `prop-weil-pbc-strict-henselization-stalk-formula` | 1 | state | 0 |
 | `lem-pc-rf-single-complex-inherited-tensor-condition` | 2 | state | 0 |
 | `lem-sc-p1-proj-shifted-free-twist` | 2 | state | 0 |
+| `lemma-weil-pbc-exact-couple-abutment` | 2 | state | 0 |
 
-Not open yet: 40 nodes that wait for stage 1, 183 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 179 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
