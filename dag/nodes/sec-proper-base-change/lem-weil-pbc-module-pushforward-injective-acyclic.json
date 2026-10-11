@@ -181,5 +181,23 @@
   "worker": "stage1",
   "summary": "Statement checked against Stacks Cohomology 01EX (2): kept; made self-contained (injective object, direct image h_* with its sections, the restriction (h_*I)|_V each cite their node; stmt_deps updated). The citer lem-weil-pbc-affine-morphism-cohomology-edge uses only V = S, but the proof gives every V at once (the Cech criterion needs all opens). Proof in four steps following the proof of 01EX: (1) Cech complex of h_*I for an open covering of V equals that of I for the pulled-back covering of h^{-1}V (elementary, from the definitions of h_* and of the Cech complex on the Zariski site, fibre products = intersections); (2) 01EP for injective O_X-modules (new unsplit node lem-weil-pbc-module-injective-open-cover-cech-acyclic); (3) the criterion 01EV for O_X-modules (new unsplit node lem-weil-pbc-module-cech-vanishing-criterion), stated with H^p(U,F|_U) as in pqf-def-cohomology; (4) the 'in other words' clause: R^p Gamma(V,-) on Mod(O_S) equals H^p(V,-|_V) by restricting an injective resolution (01E1 (2), via the statement of lem-weil-pbc-module-open-restriction-injectives and enough injectives). Existing Cech nodes are for abelian sheaves on a site (03AW, 03F9) or the small etale site; an injective O_X-module is not in general an injective abelian sheaf and module cohomology is not abelian cohomology without a comparison, so the module versions 01EP/01EV are new nodes (the site Cech complex def-weil-pbc-site-cech-complex on X_Zar is reused). Mathlib: no Cech vanishing, no Cech criterion, no cohomology of O_X-modules (three kinds of search recorded on each node)."
  },
- "reviewed": "Reviewed by L 2026-10-10: faithful to Cohomology 01EX (2): the Čech complex of h_*I is that of I (step 1, written out on the Zariski sites), Čech vanishing for injective modules (01EP, new unsplit node), the Čech vanishing criterion (01EV with 01E1 (2), new unsplit node), and the reformulation as Γ(V,−)-acyclicity via restricted injective resolutions. Statement gained citations only. No Mathlib match (no cohomology of O_X-modules)."
+ "reviewed": "Reviewed by L 2026-10-10: faithful to Cohomology 01EX (2): the Čech complex of h_*I is that of I (step 1, written out on the Zariski sites), Čech vanishing for injective modules (01EP, new unsplit node), the Čech vanishing criterion (01EV with 01E1 (2), new unsplit node), and the reformulation as Γ(V,−)-acyclicity via restricted injective resolutions. Statement gained citations only. No Mathlib match (no cohomology of O_X-modules).",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.module_pushforward_injective_acyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePushforwardInjectiveAcyclic.lean",
+  "statement": "theorem module_pushforward_injective_acyclic {X S : Scheme.{u}} (h : X ⟶ S) (I : X.Modules) [Injective I] : (∀ (V : S.Opens) (p : ℕ), 0 < p → IsZero ((RingedSpace.moduleCohomology V.toScheme.toRingedSpace p).obj ((restrictFunctor V.ι).obj ((pushforward h).obj I)))) ∧ (∀ V : S.Opens, (SheafOfModules.forget.{u} S.ringCatSheaf ⋙ PresheafOfModules.evaluation.{u} S.ringCatSheaf.obj (op V)).rightAcyclic ((pushforward h).obj I))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "S1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ }
 }
