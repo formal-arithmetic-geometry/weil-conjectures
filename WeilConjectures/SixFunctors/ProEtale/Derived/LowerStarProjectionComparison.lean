@@ -75,14 +75,16 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The tensor comparison `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M` of étale sheaves is the general
 `CategoryTheory.Functor.leftDerivedTensorComparison` of the exact monoidal functor `g^*`. -/
-lemma Etale.leftDerivedUpperStarTensorComparison_eq [Etale.UpperStarPreservesFlat A] :
+lemma Etale.leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison
+    [Etale.UpperStarPreservesFlat A] :
     Etale.leftDerivedUpperStarTensorComparison A g =
       (Etale.upperStar A g).leftDerivedTensorComparison :=
   rfl
 
 /-- The tensor comparison `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M` of pro-étale sheaves is the general
 `CategoryTheory.Functor.leftDerivedTensorComparison` of the exact monoidal functor `g^*`. -/
-lemma ProEtale.leftDerivedUpperStarTensorComparison_eq [ProEtale.UpperStarPreservesFlat A] :
+lemma ProEtale.leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison
+    [ProEtale.UpperStarPreservesFlat A] :
     ProEtale.leftDerivedUpperStarTensorComparison A g =
       (ProEtale.upperStar A g).leftDerivedTensorComparison :=
   rfl
@@ -190,8 +192,9 @@ lemma comparisonCompatible_leftDerivedComparisonUpperStarCompUpperStarIso :
       (asIso (ν^*(Z)[A]).leftDerivedTensorComparison)
       (asIso (ν^*(Y)[A]).leftDerivedTensorComparison) := by
   intro a b
-  rw [Etale.leftDerivedUpperStarTensorComparison_eq,
-    ProEtale.leftDerivedUpperStarTensorComparison_eq, asIso_hom, asIso_hom,
+  rw [Etale.leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison,
+    ProEtale.leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison,
+    asIso_hom, asIso_hom,
     Functor.map_leftDerivedTensorComparison_comp_eq_of_iso _ _ _ _
       (comparisonUpperStarCompUpperStarIso A g), tensorHom_def]
   rfl
