@@ -1,11 +1,11 @@
 # Work queue
 
-445 items; claim with `tools/claim.py next <group> [--stage N]`.
+440 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (445)
+## Stage 2: nodes to state (440)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
@@ -17,7 +17,6 @@
 | `lem-pc-derived-pullback-tensor-product` | 1 | state |
 | `lem-pc-derived-pullback-tensor-qcoh` | 1 | state |
 | `lem-pc-derived-pullback-tor-independent-flat-complex` | 1 | state |
-| `lem-pc-derived-tensor-localization-cohomology` | 1 | state |
 | `lem-pc-derived-tensor-transitivity` | 1 | state |
 | `lem-pc-flat-complex-derived-pullback` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
@@ -49,7 +48,6 @@
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-pair-henselization` | 1 | state |
 | `lem-weil-pbc-polynomial-ideal-coefficients-monomial` | 1 | state |
-| `lem-weil-pbc-polynomial-ring-maximal-chain-height-difference` | 1 | state |
 | `lem-weil-pbc-polynomial-ring-maximal-localization-dimension` | 1 | state |
 | `lem-weil-pbc-popescu-delocalize-weak-localization-smooth` | 1 | state |
 | `lem-weil-pbc-popescu-desingularize` | 1 | state |
@@ -57,13 +55,10 @@
 | `lem-weil-pbc-popescu-final-solve` | 1 | state |
 | `lem-weil-pbc-popescu-height-zero-auxiliary-algebra-localizations` | 1 | state |
 | `lem-weil-pbc-popescu-lift-nilpotent` | 1 | state |
-| `lem-weil-pbc-popescu-lift-once` | 1 | state |
 | `lem-weil-pbc-popescu-lift-solution` | 1 | state |
-| `lem-weil-pbc-popescu-lift-twice` | 1 | state |
 | `lem-weil-pbc-popescu-lifting` | 1 | state |
 | `lem-weil-pbc-popescu-product` | 1 | state |
 | `lem-weil-pbc-popescu-reduce-to-field` | 1 | state |
-| `lem-weil-pbc-popescu-resolve-char-p` | 1 | state |
 | `lem-weil-pbc-popescu-resolve-separable` | 1 | state |
 | `lem-weil-pbc-popescu-smoothing` | 1 | state |
 | `lem-weil-pbc-popescu-solution-modulo` | 1 | state |
