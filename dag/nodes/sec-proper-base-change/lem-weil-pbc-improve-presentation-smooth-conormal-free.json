@@ -153,5 +153,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of C1; spot-checked by L: 07CE smooth case (a = 1): M = I/I^2 finite projective via smooth-localization-conormal-split, C = Sym_A(M) smooth over A with the degree-0 retraction, presentation Q = R[x,y] -> C; the new node isolates the split exact conormal sequence 0 -> M (x) C -> J/J^2 -> K (x) C -> 0 under projectivity of M (left exactness is the 07EU-type step the source uses; the general 07EV claim is false as recorded on lem-weil-pbc-cotangent-complex-symmetric-algebra); J/J^2 = (M + K) (x) C = C^m"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ImprovePresentationSmoothConormalFree",
+  "declaration": "Algebra.improve_presentation_smooth_conormal_free",
+  "file": "lean/Sheaf/RingTheory/ImprovePresentationSmoothConormalFree.lean",
+  "statement": "theorem improve_presentation_smooth_conormal_free (R : Type u) [CommRing R] (A : Type v) [CommRing A] [Algebra R A] [Smooth R A] : ∃ (C : Type v) (_ : CommRing C) (_ : Algebra R C) (_ : Algebra A C) (_ : IsScalarTower R A C) (_ : Smooth A C), ∃ (ρ : C →ₐ[A] A), ρ.comp (Algebra.ofId A C) = AlgHom.id A A ∧ ∃ (m : ℕ) (f : MvPolynomial (Fin m) R →ₐ[R] C), Function.Surjective f ∧ ∃ (J : Ideal (MvPolynomial (Fin m) R)), J = RingHom.ker f.toRingHom ∧ Module.Free (MvPolynomial (Fin m) R ⧸ J) J.Cotangent",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ipc1101"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ipc1101",
+  "group": "J1",
+  "result": "fix",
+  "note": "R,A CommRing + [Smooth R A] (Mathlib Algebra.Smooth as H1 47f74a238); ∃ C : Type v (finite type over A, so no universe loss) with CommRing, Algebra R/A, IsScalarTower R A C (R-structure via A), Smooth A C; ρ : C →ₐ[A] A with ρ∘ofId = id; m : ℕ (m=0 allowed), f : MvPolynomial (Fin m) R →ₐ[R] C surjective, J = ker f, Module.Free (P ⧸ J) J.Cotangent (Ideal.Cotangent = J/J², C-module via P/J ≅ C); #check ok; FIX: H8 docstring lacked the node's proof steps, H9 moved from AlgebraicGeometry to RingTheory beside ImprovePresentation; left out new module(s) lean/Sheaf/AlgebraicGeometry/ImprovePresentationSmoothConormalFree.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
