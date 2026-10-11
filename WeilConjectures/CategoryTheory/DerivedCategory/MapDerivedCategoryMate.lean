@@ -112,6 +112,48 @@ lemma mapDerivedCategorySquareIso_hom_app_Qh_obj (e : F₁ ⋙ F₂ ≅ G₁ ⋙
   rw [reassoc_of% hF', hG', reassoc_of% he, Iso.inv_hom_id_app_assoc]
   simp only [Functor.map_comp]
 
+
+section Triangle
+
+variable {A B E : Type*} [Category A] [Category B] [Category E] [Abelian A] [Abelian B]
+  [Abelian E] [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory E]
+  {F₁ : A ⥤ B} {G₁ : B ⥤ E} {F₂ : A ⥤ E}
+  [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+  [G₁.Additive] [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
+  [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+
+/-- The isomorphism `D(F₂) ≅ D(F₁) ⋙ D(G₁)` induced by `e : F₂ ≅ F₁ ⋙ G₁`. -/
+noncomputable abbrev mapDerivedCategoryTriangleIso (e : F₂ ≅ F₁ ⋙ G₁) :
+    F₂.mapDerivedCategory ≅ F₁.mapDerivedCategory ⋙ G₁.mapDerivedCategory :=
+  mapDerivedCategoryNatIso e ≪≫ mapDerivedCategoryCompIso F₁ G₁
+
+/-- On the image `Qh X` of an object of the homotopy category, the isomorphism
+`D(F₂) ≅ D(F₁) ⋙ D(G₁)` induced by `e : F₂ ≅ F₁ ⋙ G₁` is the image of the isomorphism induced
+by `e` on homotopy categories. -/
+lemma mapDerivedCategoryTriangleIso_hom_app_Qh_obj (e : F₂ ≅ F₁ ⋙ G₁)
+    (X : HomotopyCategory A (.up ℤ)) :
+    F₂.mapDerivedCategoryFactorsh.inv.app X ≫
+        (mapDerivedCategoryTriangleIso e).hom.app (DerivedCategory.Qh.obj X) ≫
+        G₁.mapDerivedCategory.map (F₁.mapDerivedCategoryFactorsh.hom.app X) ≫
+        G₁.mapDerivedCategoryFactorsh.hom.app ((F₁.mapHomotopyCategory (.up ℤ)).obj X) =
+      DerivedCategory.Qh.map
+        ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app X ≫
+          (mapHomotopyCategoryCompIso (Iso.refl (F₁ ⋙ G₁)) (.up ℤ)).inv.app X) := by
+  have hG := mapDerivedCategoryCompIso_fach F₁ G₁ X
+  have he := mapDerivedCategoryNatIso_fach e X
+  have hG' : (mapDerivedCategoryCompIso F₁ G₁).hom.app (DerivedCategory.Qh.obj X) ≫
+      G₁.mapDerivedCategory.map (F₁.mapDerivedCategoryFactorsh.hom.app X) ≫
+      G₁.mapDerivedCategoryFactorsh.hom.app ((F₁.mapHomotopyCategory (.up ℤ)).obj X) =
+      (F₁ ⋙ G₁).mapDerivedCategoryFactorsh.hom.app X ≫ DerivedCategory.Qh.map
+        ((mapHomotopyCategoryCompIso (Iso.refl (F₁ ⋙ G₁)) (.up ℤ)).inv.app X) := by
+    rw [← hG]
+    simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  rw [hG', reassoc_of% he, Iso.inv_hom_id_app_assoc]
+  simp only [Functor.map_comp]
+
+end Triangle
 end Functor
 
 namespace Adjunction
@@ -332,6 +374,187 @@ lemma mapDerivedCategoryAdjunction_mate
     Functor.map_comp, Category.assoc, h₄,
     reassoc_of% (mapDerivedCategoryAdjunction_mate_Qh_obj adj₁ adj₂ τ β hβ _)]
 
+
+end Adjunction
+
+namespace Adjunction
+
+section Triangle
+
+variable {C D₁ D₂ : Type*} [Category C] [Category D₁] [Category D₂]
+  [Abelian C] [Abelian D₁] [Abelian D₂]
+  [MonoidalCategory C] [MonoidalPreadditive C] [HasCountableCoproducts C]
+  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
+  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
+  [HasColimitsOfShape ℤ C] [HasExactColimitsOfShape ℤ C]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
+  [∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
+  [Abelian.HasFunctorialFlatResolution C]
+  [HasDerivedCategory C] [HasDerivedCategory D₁] [HasDerivedCategory D₂]
+  [HasKInjectiveResolutions D₁] [HasKInjectiveResolutions D₂]
+  {f₁ : C ⥤ D₁} {g₁ : D₁ ⥤ C} (adj₁ : f₁ ⊣ g₁) {f₂ : C ⥤ D₂} {g₂ : D₂ ⥤ C}
+  (adj₂ : f₂ ⊣ g₂) {v : D₁ ⥤ D₂}
+  [f₁.Additive] [PreservesFiniteLimits f₁] [PreservesFiniteColimits f₁]
+  [g₁.Additive] [PreservesFiniteLimits g₁] [PreservesFiniteColimits g₁]
+  [f₂.Additive] [PreservesFiniteLimits f₂] [PreservesFiniteColimits f₂]
+  [g₂.Additive] [PreservesFiniteLimits g₂] [PreservesFiniteColimits g₂]
+  [v.Additive] [PreservesFiniteLimits v] [PreservesFiniteColimits v]
+  (τ : g₁ ≅ v ⋙ g₂) (β : f₂ ≅ f₁ ⋙ v)
+
+include adj₁ adj₂ in
+lemma mapDerivedCategoryAdjunction_mate_Qh_obj'
+    (hβ : ∀ K, adj₂.unit.app K ≫ g₂.map (β.hom.app K) =
+      adj₁.unit.app K ≫ τ.hom.app (f₁.obj K))
+    (X : HomotopyCategory C (.up ℤ)) :
+    adj₂.mapDerivedCategoryAdjunction.unit.app (DerivedCategory.Qh.obj X) ≫
+        g₂.mapDerivedCategory.map
+          ((Functor.mapDerivedCategoryTriangleIso β).hom.app (DerivedCategory.Qh.obj X)) =
+      adj₁.mapDerivedCategoryAdjunction.unit.app (DerivedCategory.Qh.obj X) ≫
+        (Functor.mapDerivedCategoryTriangleIso τ).hom.app
+          (f₁.mapDerivedCategory.obj (DerivedCategory.Qh.obj X)) := by
+  rw [← cancel_mono (g₂.mapDerivedCategory.map (v.mapDerivedCategory.map
+      (f₁.mapDerivedCategoryFactorsh.hom.app X)) ≫
+      g₂.mapDerivedCategory.map (v.mapDerivedCategoryFactorsh.hom.app
+        ((f₁.mapHomotopyCategory (.up ℤ)).obj X)) ≫
+      g₂.mapDerivedCategoryFactorsh.hom.app
+        ((v.mapHomotopyCategory (.up ℤ)).obj ((f₁.mapHomotopyCategory (.up ℤ)).obj X)))]
+  -- the left hand side
+  have h₂ := adj₂.mapDerivedCategoryAdjunction_unit_app_Qh_obj X
+  have h₃ := Functor.mapDerivedCategoryTriangleIso_hom_app_Qh_obj β X
+  have h₄ := g₂.mapDerivedCategoryFactorsh.hom.naturality
+    ((NatTrans.mapHomotopyCategory β.hom (.up ℤ)).app X ≫
+      (Functor.mapHomotopyCategoryCompIso (Iso.refl (f₁ ⋙ v)) (.up ℤ)).inv.app X)
+  dsimp at h₄
+  have h₂' : adj₂.mapDerivedCategoryAdjunction.unit.app (DerivedCategory.Qh.obj X) =
+      DerivedCategory.Qh.map ((adj₂.mapHomotopyCategory (.up ℤ)).unit.app X) ≫
+        g₂.mapDerivedCategoryFactorsh.inv.app _ ≫
+        g₂.mapDerivedCategory.map (f₂.mapDerivedCategoryFactorsh.inv.app _) := by
+    rw [← h₂]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+    rw [← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  have h₃' := congrArg g₂.mapDerivedCategory.map h₃
+  simp only [Functor.map_comp] at h₃'
+  have hL : adj₂.mapDerivedCategoryAdjunction.unit.app (DerivedCategory.Qh.obj X) ≫
+      g₂.mapDerivedCategory.map
+        ((Functor.mapDerivedCategoryTriangleIso β).hom.app (DerivedCategory.Qh.obj X)) ≫
+      g₂.mapDerivedCategory.map (v.mapDerivedCategory.map
+        (f₁.mapDerivedCategoryFactorsh.hom.app X)) ≫
+      g₂.mapDerivedCategory.map (v.mapDerivedCategoryFactorsh.hom.app
+        ((f₁.mapHomotopyCategory (.up ℤ)).obj X)) ≫
+      g₂.mapDerivedCategoryFactorsh.hom.app
+        ((v.mapHomotopyCategory (.up ℤ)).obj ((f₁.mapHomotopyCategory (.up ℤ)).obj X)) =
+      DerivedCategory.Qh.map ((adj₂.mapHomotopyCategory (.up ℤ)).unit.app X ≫
+        (g₂.mapHomotopyCategory (.up ℤ)).map
+          ((NatTrans.mapHomotopyCategory β.hom (.up ℤ)).app X ≫
+            (Functor.mapHomotopyCategoryCompIso (Iso.refl (f₁ ⋙ v)) (.up ℤ)).inv.app X)) := by
+    rw [h₂']
+    simp only [Category.assoc]
+    rw [reassoc_of% h₃']
+    simp only [Functor.map_comp, Category.assoc] at h₄ ⊢
+    rw [h₄, Iso.inv_hom_id_app_assoc]
+  -- the right hand side
+  have k₁ := adj₁.mapDerivedCategoryAdjunction_unit_app_Qh_obj X
+  have k₁' : adj₁.mapDerivedCategoryAdjunction.unit.app (DerivedCategory.Qh.obj X) =
+      DerivedCategory.Qh.map ((adj₁.mapHomotopyCategory (.up ℤ)).unit.app X) ≫
+        g₁.mapDerivedCategoryFactorsh.inv.app _ ≫
+        g₁.mapDerivedCategory.map (f₁.mapDerivedCategoryFactorsh.inv.app _) := by
+    rw [← k₁]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+    rw [← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  have k₃ : g₁.mapDerivedCategory.map (f₁.mapDerivedCategoryFactorsh.inv.app X) ≫
+      (Functor.mapDerivedCategoryTriangleIso τ).hom.app
+        (f₁.mapDerivedCategory.obj (DerivedCategory.Qh.obj X)) =
+      (Functor.mapDerivedCategoryTriangleIso τ).hom.app _ ≫
+        g₂.mapDerivedCategory.map (v.mapDerivedCategory.map
+          (f₁.mapDerivedCategoryFactorsh.inv.app X)) :=
+    (Functor.mapDerivedCategoryTriangleIso τ).hom.naturality _
+  have k₄ := Functor.mapDerivedCategoryTriangleIso_hom_app_Qh_obj τ
+    ((f₁.mapHomotopyCategory (.up ℤ)).obj X)
+  have hR : adj₁.mapDerivedCategoryAdjunction.unit.app (DerivedCategory.Qh.obj X) ≫
+      (Functor.mapDerivedCategoryTriangleIso τ).hom.app
+        (f₁.mapDerivedCategory.obj (DerivedCategory.Qh.obj X)) ≫
+      g₂.mapDerivedCategory.map (v.mapDerivedCategory.map
+        (f₁.mapDerivedCategoryFactorsh.hom.app X)) ≫
+      g₂.mapDerivedCategory.map (v.mapDerivedCategoryFactorsh.hom.app
+        ((f₁.mapHomotopyCategory (.up ℤ)).obj X)) ≫
+      g₂.mapDerivedCategoryFactorsh.hom.app
+        ((v.mapHomotopyCategory (.up ℤ)).obj ((f₁.mapHomotopyCategory (.up ℤ)).obj X)) =
+      DerivedCategory.Qh.map ((adj₁.mapHomotopyCategory (.up ℤ)).unit.app X ≫
+          (NatTrans.mapHomotopyCategory τ.hom (.up ℤ)).app _ ≫
+          (Functor.mapHomotopyCategoryCompIso (Iso.refl (v ⋙ g₂)) (.up ℤ)).inv.app _) := by
+    rw [k₁']
+    simp only [Functor.map_comp, Category.assoc]
+    have hc : g₂.mapDerivedCategory.map (v.mapDerivedCategory.map
+        (f₁.mapDerivedCategoryFactorsh.inv.app X)) ≫
+        g₂.mapDerivedCategory.map (v.mapDerivedCategory.map
+          (f₁.mapDerivedCategoryFactorsh.hom.app X)) = 𝟙 _ := by
+      rw [← Functor.map_comp, ← Functor.map_comp, Iso.inv_hom_id_app]
+      erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+    rw [reassoc_of% k₃, reassoc_of% hc]
+    simp only [Functor.map_comp] at k₄ ⊢
+    rw [k₄]
+  simp only [Category.assoc]
+  rw [hL, hR]
+  congr 1
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+  rw [mapHomotopyCategory_unit_app_quotient, mapHomotopyCategory_unit_app_quotient]
+  have hc : (adj₂.mapHomologicalComplex (.up ℤ)).unit.app K ≫
+      (g₂.mapHomologicalComplex (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex β.hom (.up ℤ)).app K ≫
+          (Functor.mapHomologicalComplexCompIso (Iso.refl (f₁ ⋙ v)) (.up ℤ)).inv.app K) =
+      (adj₁.mapHomologicalComplex (.up ℤ)).unit.app K ≫
+        (NatTrans.mapHomologicalComplex τ.hom (.up ℤ)).app _ ≫
+        (Functor.mapHomologicalComplexCompIso (Iso.refl (v ⋙ g₂)) (.up ℤ)).inv.app _ := by
+    ext n
+    simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+      mapHomologicalComplex_unit_app_f, Functor.mapHomologicalComplexCompIso_inv_app_f,
+      NatTrans.mapHomologicalComplex_app_f, Iso.refl_inv, NatTrans.id_app]
+    erw [Category.comp_id, Category.comp_id]
+    exact hβ (K.X n)
+  have := (HomotopyCategory.quotient C (.up ℤ)).congr_map hc
+  simp only [Functor.map_comp] at this ⊢
+  exact this
+
+include adj₁ adj₂ in
+/-- The form of `CategoryTheory.Adjunction.mapDerivedCategoryAdjunction_mate` for triangles: if
+`β : f₂ ≅ f₁ ⋙ v` is the mate of `τ : g₁ ≅ v ⋙ g₂`, then so are the induced isomorphisms on
+derived categories. -/
+lemma mapDerivedCategoryAdjunction_mate'
+    (hβ : ∀ K, adj₂.unit.app K ≫ g₂.map (β.hom.app K) =
+      adj₁.unit.app K ≫ τ.hom.app (f₁.obj K))
+    (K : DerivedCategory C) :
+    adj₂.mapDerivedCategoryAdjunction.unit.app K ≫
+        g₂.mapDerivedCategory.map ((Functor.mapDerivedCategoryTriangleIso β).hom.app K) =
+      adj₁.mapDerivedCategoryAdjunction.unit.app K ≫
+        (Functor.mapDerivedCategoryTriangleIso τ).hom.app (f₁.mapDerivedCategory.obj K) := by
+  have := Localization.essSurj (DerivedCategory.Qh (C := C)) (HomotopyCategory.quasiIso C (.up ℤ))
+  let e := DerivedCategory.Qh.objObjPreimageIso K
+  rw [← cancel_epi e.hom]
+  have h₁ : e.hom ≫ adj₂.mapDerivedCategoryAdjunction.unit.app K =
+      adj₂.mapDerivedCategoryAdjunction.unit.app _ ≫
+        g₂.mapDerivedCategory.map (f₂.mapDerivedCategory.map e.hom) :=
+    adj₂.mapDerivedCategoryAdjunction.unit.naturality _
+  have h₂ : f₂.mapDerivedCategory.map e.hom ≫
+      (Functor.mapDerivedCategoryTriangleIso β).hom.app K =
+      (Functor.mapDerivedCategoryTriangleIso β).hom.app _ ≫
+        v.mapDerivedCategory.map (f₁.mapDerivedCategory.map e.hom) :=
+    (Functor.mapDerivedCategoryTriangleIso β).hom.naturality _
+  have h₃ : e.hom ≫ adj₁.mapDerivedCategoryAdjunction.unit.app K =
+      adj₁.mapDerivedCategoryAdjunction.unit.app _ ≫
+        g₁.mapDerivedCategory.map (f₁.mapDerivedCategory.map e.hom) :=
+    adj₁.mapDerivedCategoryAdjunction.unit.naturality _
+  have h₄ : g₁.mapDerivedCategory.map (f₁.mapDerivedCategory.map e.hom) ≫
+      (Functor.mapDerivedCategoryTriangleIso τ).hom.app (f₁.mapDerivedCategory.obj K) =
+      (Functor.mapDerivedCategoryTriangleIso τ).hom.app _ ≫
+        g₂.mapDerivedCategory.map (v.mapDerivedCategory.map (f₁.mapDerivedCategory.map e.hom)) :=
+    (Functor.mapDerivedCategoryTriangleIso τ).hom.naturality _
+  rw [reassoc_of% h₁, ← Functor.map_comp, h₂, Functor.map_comp, reassoc_of% h₃, h₄,
+    reassoc_of% (mapDerivedCategoryAdjunction_mate_Qh_obj' adj₁ adj₂ τ β hβ _)]
+
+end Triangle
 end Adjunction
 
 end CategoryTheory
