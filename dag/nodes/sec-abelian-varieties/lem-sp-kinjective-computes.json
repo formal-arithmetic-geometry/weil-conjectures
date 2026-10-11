@@ -145,5 +145,24 @@
   "group": "C1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-kic1911 (reviewer sub-agent of L); spot-checked: Read packet; no cycle (def-sp-kinjective-bridge does not depend on the item; comparison principle created from item but is Stacks/Mathlib K-injective Hom bijection, not a restatement); step 2 homotopy-equivalence argument correct, v of homotopy-equivalent K-injectives handled via lem-weil-pbc-homotopic-maps-equal-cohomology; comparison node checked against Mathlib KInjective.lean l.41-58 (Qh_map_bijective + Q inverting quasi-isos: two declarations, so unsplit is right); grep KInjective in Mathlib/Algebra/Homology (DerivedCategory/KInjective.lean, HomotopyCategory/KInjective.lean, DerivabilityStructureInjectives.lean), no direct item match. FIX more, RETURN less: C4 step 3 cited lem-weil-pbc-dplus-injective-representative and def-sp-left-exact-additive without their enough-injectives hypothesis; added citation of existing lem-sp-grothendieck-enough-injectives to step 3 uses and proof_deps.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KInjectiveComputes",
+  "declaration": "CategoryTheory.Functor.kInjective_computes",
+  "file": "lean/Sheaf/CategoryTheory/KInjectiveComputes.lean",
+  "statement": "theorem kInjective_computes {C : Type u₁} [Category.{v₁} C] [Abelian C] [IsGrothendieckAbelian.{w₁} C] {D : Type u₂} [Category.{v₂} D] [Abelian D] [IsGrothendieckAbelian.{w₂} D] (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] : let M := F.mapHomologicalComplex (ComplexShape.up ℤ) let Q := HomotopyCategory.quotient D (ComplexShape.up ℤ) (∀ (K : CochainComplex.Plus C) (r s : CochainComplex.KInjectiveResolutionChoice K.obj), ∃ (u : r.complex ⟶ s.complex) (v : s.complex ⟶ r.complex), Nonempty (Homotopy (r.map ≫ u) s.map) ∧ Nonempty (Homotopy (s.map ≫ v) r.map) ∧ Nonempty (Homotopy (u ≫ v) (𝟙 r.complex)) ∧ Nonempty (Homotopy (v ≫ u) (𝟙 s.complex)) ∧ (∀ (u' : r.complex ⟶ s.complex), Nonempty (Homotopy (r.map ≫ u') s.map) → Nonempty (Homotopy u' u)) ∧ (∀ (v' : s.complex ⟶ r.complex), Nonempty (Homotopy (s.map ≫ v') r.map) → Nonempty (Homotopy v' v)) ∧ ∃ (e : Q.obj (F.rightDerivedComplexWithResolution K r) ≅ Q.obj (F.rightDerivedComplexWithResolution K s)), e.hom = Q.map (M.map u) ∧ e.inv = Q.map (M.map v)) ∧ (∀ (r : (K : CochainComplex.Plus C) → CochainComplex.KInjectiveResolutionChoice K.obj), ∃ (RF : CochainComplex.Plus C ⥤ HomotopyCategory D (ComplexShape.up ℤ)) (e : ∀ K : CochainComplex.Plus C, RF.obj K ≅ Q.obj (F.rightDerivedComplexWithResolution K (r K))), ∀ (K L : CochainComplex.Plus C) (f : K ⟶ L), ∃ (u : (r K).complex ⟶ (r L).complex), Nonempty (Homotopy ((r K).map ≫ u) (f.hom ≫ (r L).map)) ∧ (∀ (u' : (r K).complex ⟶ (r L).complex), Nonempty (Homotopy ((r K).map ≫ u') (f.hom ≫ (r L).map)) → Nonempty (Homotopy u' u)) ∧ RF.map f ≫ (e L).hom = (e K).hom ≫ Q.map (M.map u)) ∧ (∀ (I : CochainComplex.Plus C), (∀ n : ℤ, Injective (I.obj.X n)) → I.obj.IsKInjective) ∧ (∀ (X : C) (I : InjectiveResolution X), QuasiIso (HomologicalComplex.extendMap I.ι ComplexShape.embeddingUpNat) ∧ CochainComplex.IsKInjective (I.cocomplex.extend ComplexShape.embeddingUpNat)) ∧ (∀ (X : C), let K₀ : CochainComplex.Plus C := ⟨((CochainComplex.single₀ C).obj X).extend ComplexShape.embeddingUpNat, ⟨0, inferInstance⟩⟩ ∀ (r : CochainComplex.KInjectiveResolutionChoice K₀.obj) (p : ℕ), Nonempty (F.rightDerivedCohomologyWithResolution K₀ r (p : ℤ) ≅ (F.rightDerived p).obj X)) ∧ (∀ (K : CochainComplex.Plus C) (r : CochainComplex.KInjectiveResolutionChoice K.obj) (n : ℤ) (s : CochainComplex.KInjectiveResolutionChoice (K⟦n⟧).obj), Nonempty (Q.obj (F.rightDerivedComplexWithResolution (K⟦n⟧) s) ≅ (Q.obj (F.rightDerivedComplexWithResolution K r))⟦n⟧))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-kic0945"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kic0945",
+  "group": "K1",
+  "result": "fix",
+  "note": "C,D Grothendieck abelian (both, per node), F additive+PreservesFiniteLimits (left exact), K : Plus C; (1) comparison maps under K, homotopy inverse, unique up to homotopy, canonical iso Q.map(M.map u) of recorded rightDerivedComplexWithResolution, functoriality RF with naturality; (2) bounded-below injectives IsKInjective, InjectiveResolution extended is QuasiIso into K-injective, H^p ≅ F.rightDerived p for p:ℕ; (3) iso in K(D) for all n:ℤ; FIX: dropped proof-internal shifted-resolution existence/HEq sub-conjunct from (3)"
  }
 }
