@@ -339,6 +339,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.Sites.AffineRefinement
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
 public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
