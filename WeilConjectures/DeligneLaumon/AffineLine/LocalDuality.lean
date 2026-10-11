@@ -49,6 +49,11 @@ proof would need the triviality of lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
   none of which exists yet for `AlgebraicGeometry.WeilComplex`: the pro-étale Verdier dual
   `AlgebraicGeometry.ProEtale.verdierDual` is for sheaves with values in a fixed coefficient
   category, not for `ℚ̄_ℓ,X`-modules with a Weil structure.
+  The alternative local route, `(j_*F)_s̄ = V^{I_s}` and `(R¹j_*F)_s̄ = H¹(I_s, V)` for the
+  inertia representation `V` of `F` at `s`, followed by linear algebra over the tame quotient,
+  is not available either: it needs the stalk of `Rj̄_*` at `s̄` as the pro-étale cohomology of
+  the punctured strict henselization, and the comparison of pro-étale cohomology of a field
+  with `ℚ̄_ℓ,X`-coefficients with continuous Galois cohomology.
 - The maps `g` and `h` of `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`
   should be the maps induced by the canonical arrow `WeilSheaf.extensionByZeroToDirectImage j`
   from `j_!F` to `j_*F`. This needs the identification `H_c(U, F) ≅ H_c(C, j_!F)` and the
