@@ -133,5 +133,23 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-hle1914 (reviewer sub-agent of L); spot-checked: Checked all four steps by hand: target-row splitting + injective extension (Step 1), defect factorization D=alpha'Ep and augmentation e with E^0 s_C = d e (Step 2), null-homotopy of the augmented acyclic C-row into shifted injective A'-complex with signs (Step 3), correction phi_B = chi - alpha'kp (Step 4). Not a special case of lem-weil-pbc-lift-along-injective-quasi-iso (that gives an extension along a mono quasi-iso with no beta'-compatibility constraint); horseshoe-morphism-lift is the injective-source special case of this item. No cycle: cartesian-eilenberg-functorial cites this item, this item cites only ses-injective-kernel-splits, def-sp-injective-resolutions, def-sp-abelian, acyclic-map-to-injective-nullhomotopy. FIX more, RETURN less: (1) Step 2 sign error 'd D = D d' corrected to dD = -Dd (conclusion dE+Ed=0 was right); (2) Step 3 'signed maps' made explicit (u^{-1}=e, u^n=(-1)^nE^n, k^n=(-1)^nh^n) with the augmentation compatibility checked; (3) preflight B4: all four steps rewritten in TeX (no plain-text arrows).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLiftExactSource",
+  "declaration": "CategoryTheory.InjectiveResolution.exists_horseshoe_morphism_lift_exact_source",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/HorseshoeMorphismLiftExactSource.lean",
+  "statement": "theorem exists_horseshoe_morphism_lift_exact_source {C : Type u} [Category.{v} C] [Abelian C] (S T : ShortComplex C) (hS : S.ShortExact) (hT : T.ShortExact) (F : S ⟶ T) (XA XB XC : CochainComplex C ℕ) (sA : (CochainComplex.single₀ C).obj S.X₁ ⟶ XA) (sB : (CochainComplex.single₀ C).obj S.X₂ ⟶ XB) (sC : (CochainComplex.single₀ C).obj S.X₃ ⟶ XC) [QuasiIso sA] [QuasiIso sB] [QuasiIso sC] (i : XA ⟶ XB) (p : XB ⟶ XC) (hip : i ≫ p = 0) (hi : sA ≫ i = (CochainComplex.single₀ C).map S.f ≫ sB) (hp : sB ≫ p = (CochainComplex.single₀ C).map S.g ≫ sC) (hexact : ∀ n : ℕ, ((ShortComplex.mk i p hip).map (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact) (JA : InjectiveResolution T.X₁) (JB : InjectiveResolution T.X₂) (JC : InjectiveResolution T.X₃) (α' : JA.cocomplex ⟶ JB.cocomplex) (β' : JB.cocomplex ⟶ JC.cocomplex) (hαβ' : α' ≫ β' = 0) (hα' : JA.ι ≫ α' = (CochainComplex.single₀ C).map T.f ≫ JB.ι) (hβ' : JB.ι ≫ β' = (CochainComplex.single₀ C).map T.g ≫ JC.ι) (hexact' : ∀ n : ℕ, ((ShortComplex.mk α' β' hαβ').map (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact) (φA : XA ⟶ JA.cocomplex) (φC : XC ⟶ JC.cocomplex) (hφA : sA ≫ φA = (CochainComplex.single₀ C).map F.τ₁ ≫ JA.ι) (hφC : sC ≫ φC = (CochainComplex.single₀ C).map F.τ₃ ≫ JC.ι) : ∃ φB : XB ⟶ JB.cocomplex, sB ≫ φB = (CochainComplex.single₀ C).map F.τ₂ ≫ JB.ι ∧ i ≫ φB = φA ≫ α' ∧ φB ≫ β' = p ≫ φC",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-11",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-hme1109",
+  "group": "F1",
+  "result": "pass",
+  "note": "Matched all binders: abelian C; S,T ShortExact, F:(a,b,c); XA,XB,XC : CochainComplex C ℕ with single₀ augmentations sA,sB,sC and [QuasiIso] = exact augmented sequences incl. degree-0 monicity (not inferInstance-derivable); i,p,hip,hexact degreewise SES via eval; hi,hp single₀ compatibility; target horseshoe JA,JB,JC,α',β',hα',hβ',hexact' verbatim from G1 sibling; hφA,hφC single₀; conclusion aug + both squares. Same single₀+QuasiIso form as landed FiniteAcyclicResolution; #check QuasiIso is Mathlib root HomologicalComplex QuasiIso."
  }
 }
