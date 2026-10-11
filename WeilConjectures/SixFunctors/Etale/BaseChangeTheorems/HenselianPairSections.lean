@@ -415,4 +415,29 @@ lemma pullSection_sigmaEtale_eq {ι : Type u} (E : ι → Y.Etale) (gE : ∀ k, 
 
 end SigmaClosedFibre
 
+section Main
+
+variable {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I] {Y Y₀ : Scheme.{u}}
+  (p : Y ⟶ Spec (.of A)) [IsProper p] (i : Y₀ ⟶ Y) (p₀ : Y₀ ⟶ Spec (.of (A ⧸ I)))
+  (h : IsPullback i p₀ p (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))
+  (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
+
+set_option backward.isDefEq.respectTransparency false in
+include h in
+/-- **Injectivity of restriction to the closed fibre over a henselian pair.** -/
+lemma injective_pullSection_of_henselianRing :
+    Function.Injective (pullSection i G (V := Scheme.Etale.mk (𝟙 Y₀))
+      (U := Scheme.Etale.mk (𝟙 Y)) i ((Category.comp_id _).trans (Category.id_comp _).symm)) := by
+  intro g₁ g₂ heq
+  rw [← sub_eq_zero]
+  refine eq_zero_of_pullSection_eq_zero (V := Scheme.Etale.mk (𝟙 Y₀)) (U := Scheme.Etale.mk (𝟙 Y))
+    i G i ((Category.comp_id _).trans (Category.id_comp _).symm) (fun C hC hne ↦ ?_) (g₁ - g₂)
+    (by rw [pullSection_sub, heq, sub_self])
+  have hr := range_eq_preimage_zeroLocus_of_isPullback I p i p₀ h
+  have := p.nonempty_inter_preimage_zeroLocus I HenselianRing.jac (C := C) hC hne
+  rw [← hr] at this
+  exact this
+
+end Main
+
 end AlgebraicGeometry.Etale
