@@ -66,8 +66,46 @@ theorem unitComparison_app_isColimit_of_isLimit [∀ j, CompactSpace (D.obj j)]
         ((π.app j)^*[AddCommGrpCat.{u + 1}].obj G)).obj.obj (op W)),
       (unitComparison (c.π.app j) (π.app j) P (hP j) G).hom.app (op W) s = 0 →
         ∃ (j' : J) (f : j' ⟶ j), (unitComparison (D.map f) (π.app j) (π.app j')
-          (by simp) G).hom.app (op W) s = 0 :=
-  sorry
+          (by simp) G).hom.app (op W) s = 0 := by
+  have : QuasiCompact W.hom := @quasiCompact_of_compactSpace _ _ W.hom
+    (inferInstanceAs (CompactSpace W.left)) (inferInstanceAs (QuasiSeparatedSpace R))
+  -- the étale `Dⱼ`-schemes `W ×_R Dⱼ` are quasi-compact and quasi-separated
+  have hc₁ (j : J) : CompactSpace ((MorphismProperty.Over.pullback @Etale ⊤ (π.app j)).obj W).left :=
+    inferInstanceAs (CompactSpace (pullback W.hom (π.app j)))
+  have hq₁ (j : J) :
+      QuasiSeparatedSpace ((MorphismProperty.Over.pullback @Etale ⊤ (π.app j)).obj W).left := by
+    have : QuasiSeparated (π.app j) := (quasiSeparated_iff_quasiSeparatedSpace _).2
+      (inferInstanceAs (QuasiSeparatedSpace (D.obj j)))
+    exact @quasiSeparatedSpace_of_quasiSeparated _ _ (pullback.fst W.hom (π.app j))
+      (inferInstanceAs (QuasiSeparatedSpace W.left)) inferInstance
+  -- `W ×_R X` is the base change of `W ×_R Dⱼ` along `X ⟶ Dⱼ`
+  have hm (j : J) : IsPullback
+      (pullback.map W.hom P W.hom (π.app j) (𝟙 _) (c.π.app j) (𝟙 _) (by simp) (by simp [hP j]))
+      ((MorphismProperty.Over.pullback @Etale ⊤ P).obj W).hom
+      ((MorphismProperty.Over.pullback @Etale ⊤ (π.app j)).obj W).hom (c.π.app j) := by
+    refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _)
+      (IsPullback.of_hasPullback W.hom (π.app j))
+    convert IsPullback.of_hasPullback W.hom P using 2
+    · simp
+    · exact (hP j).symm
+  refine ⟨fun t ↦ ?_, fun j s hs ↦ ?_⟩
+  · obtain ⟨j₀⟩ := IsCofiltered.nonempty (C := J)
+    obtain ⟨K, h, H⟩ := exists_restrictAlong_eq_of_isLimit hc π P hP G
+      ((MorphismProperty.Over.pullback @Etale ⊤ (π.app j₀)).obj W) _ (hm j₀) t
+    obtain ⟨s, hs⟩ := H (𝟙 K) ((MorphismProperty.Over.pullback @Etale ⊤ (π.app K)).obj W)
+      (pullback.map W.hom (π.app K) W.hom (π.app j₀) (𝟙 _) (D.map h) (𝟙 _) (by simp)
+        (by simp [app_eq_map_comp_app π h]))
+      (by rw [Category.id_comp]; exact pullback.lift_snd _ _ _)
+      (pullback.map W.hom P W.hom (π.app K) (𝟙 _) (c.π.app K) (𝟙 _) (by simp) (by simp [hP K]))
+      (pullback.lift_snd _ _ _) (by apply pullback.hom_ext <;> simp)
+    exact ⟨K, s, by rw [unitComparison_hom_app_eq]; exact hs⟩
+  · rw [unitComparison_hom_app_eq] at hs
+    obtain ⟨k', f, H⟩ := exists_restrictAlong_eq_zero_of_isLimit hc π P hP G
+      ((MorphismProperty.Over.pullback @Etale ⊤ (π.app j)).obj W) _ (hm j) s hs
+    refine ⟨k', f, ?_⟩
+    rw [unitComparison_hom_app_eq]
+    exact H (𝟙 _) f (Category.id_comp f)
+      ((MorphismProperty.Over.pullback @Etale ⊤ (π.app k')).obj W) _ (pullback.lift_snd _ _ _)
 
 /-- **Continuity of sections at an inverse limit, surjectivity**: the first half of
 `AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`. -/

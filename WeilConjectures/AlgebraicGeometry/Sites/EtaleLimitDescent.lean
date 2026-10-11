@@ -291,6 +291,58 @@ theorem exists_forall_mem_range_of_isLimit {k : J} {V : Scheme.{u}} (p : V ⟶ D
 
 end Cover
 
+include hc in
+/-- **Finite-presentation data at an inverse limit.** Let `X = lim Dⱼ` be a cofiltered limit of
+quasi-compact quasi-separated schemes over `R` with affine transition maps. Then:
+1. *(étale objects)* every scheme `Z` étale over the base change `V ×_{Dₖ} X` of a scheme `V`
+   étale over a stage is, around each of its points, dominated over `V ×_{Dₖ} X` by the base
+   change `E ×_{Dₖ'} X` of an affine scheme `E` étale over a later stage `Dₖ'` and mapping to
+   `V` (`AlgebraicGeometry.exists_etale_refinement_of_isLimit`);
+2. *(morphisms)* for `E` quasi-compact and quasi-separated over a stage `Dₖ` and `U` locally of
+   finite presentation over `R`, every `R`-morphism `E ×_{Dₖ} X ⟶ U` descends to
+   `E ×_{Dₖ} Dₖ'` for some `k' ⟶ k` (`AlgebraicGeometry.exists_hom_descent_of_isLimit`);
+3. *(equalities)* two `R`-morphisms `E ⟶ U` from a quasi-compact scheme over a stage `Dₖ` to a
+   scheme locally of finite type over `R` which agree on `E ×_{Dₖ} X` agree on `E ×_{Dₖ} Dₖ'`
+   for some `k' ⟶ k` (`AlgebraicGeometry.exists_eq_descent_of_isLimit`);
+4. *(coverings)* étale morphisms `Eᵢ ⟶ V` to a quasi-compact scheme over a stage `Dₖ` which
+   are jointly surjective after base change to `X` are jointly surjective after base change to
+   every late enough stage (`AlgebraicGeometry.exists_forall_mem_range_of_isLimit`).
+
+The descent of étale objects is stated in the local form in which it is used: global étale
+schemes of finite presentation over `X` are glued from such local pieces.
+(blueprint: `lem-weil-pbc-etale-finite-data-descent`) -/
+theorem etale_finite_data_descent_of_isLimit [∀ j, CompactSpace (D.obj j)]
+    [∀ j, QuasiSeparatedSpace (D.obj j)] {R : Scheme.{u}} (π : D ⟶ (Functor.const J).obj R) :
+    (∀ {k : J} {V : Scheme.{u}} (p : V ⟶ D.obj k) [Etale p] {Z : Scheme.{u}}
+      (β : Z ⟶ pullback p (c.π.app k)) [Etale β] (z : Z),
+      ∃ (k' : J) (f : k' ⟶ k) (E : Scheme.{u}) (_ : IsAffine E) (q : E ⟶ D.obj k')
+        (_ : Etale q) (e : E ⟶ V) (he : e ≫ p = q ≫ D.map f) (E' : Scheme.{u}) (π₁ : E' ⟶ E)
+        (π₂ : E' ⟶ c.pt) (hπ : IsPullback π₁ π₂ q (c.π.app k')) (γ : E' ⟶ Z),
+        γ ≫ β = pullback.lift (π₁ ≫ e) π₂
+          (by rw [Category.assoc, he, reassoc_of% hπ.w, c.w f]) ∧ z ∈ Set.range γ) ∧
+    (∀ {k : J} {E : Scheme.{u}} (q : E ⟶ D.obj k) [CompactSpace E] [QuasiSeparatedSpace E]
+      {U : Scheme.{u}} (u : U ⟶ R) [LocallyOfFinitePresentation u]
+      (φ : pullback q (c.π.app k) ⟶ U),
+      φ ≫ u = pullback.snd q (c.π.app k) ≫ c.π.app k ≫ π.app k →
+      ∃ (k' : J) (f : k' ⟶ k) (ψ : pullback q (D.map f) ⟶ U),
+        ψ ≫ u = pullback.snd q (D.map f) ≫ π.app k' ∧
+          pullback.map q (c.π.app k) q (D.map f) (𝟙 _) (c.π.app k') (𝟙 _) (by simp)
+            (by simp) ≫ ψ = φ) ∧
+    (∀ {k : J} {E : Scheme.{u}} (q : E ⟶ D.obj k) [CompactSpace E] {U : Scheme.{u}}
+      (u : U ⟶ R) [LocallyOfFiniteType u] (ψ₁ ψ₂ : E ⟶ U),
+      ψ₁ ≫ u = q ≫ π.app k → ψ₂ ≫ u = q ≫ π.app k →
+      pullback.fst q (c.π.app k) ≫ ψ₁ = pullback.fst q (c.π.app k) ≫ ψ₂ →
+      ∃ (k' : J) (f : k' ⟶ k), pullback.fst q (D.map f) ≫ ψ₁ = pullback.fst q (D.map f) ≫ ψ₂) ∧
+    (∀ {k : J} {V : Scheme.{u}} (p : V ⟶ D.obj k) [CompactSpace V] {ι : Type u}
+      {E : ι → Scheme.{u}} (e : ∀ i, E i ⟶ V) [∀ i, Etale (e i)],
+      (∀ x : ↥(pullback p (c.π.app k)), ∃ i, pullback.fst p (c.π.app k) x ∈ Set.range (e i)) →
+      ∃ (k' : J) (f : k' ⟶ k), ∀ (k'' : J) (g : k'' ⟶ k') (x : ↥(pullback p (D.map (g ≫ f)))),
+        ∃ i, pullback.fst p (D.map (g ≫ f)) x ∈ Set.range (e i)) :=
+  ⟨fun p _ _ β _ z ↦ exists_etale_refinement_of_isLimit D c hc p β z,
+    fun q _ _ _ u _ φ hφ ↦ exists_hom_descent_of_isLimit D c hc π q u φ hφ,
+    fun q _ _ u _ ψ₁ ψ₂ h₁ h₂ h ↦ exists_eq_descent_of_isLimit D c hc π q u ψ₁ ψ₂ h₁ h₂ h,
+    fun p _ _ _ e _ h ↦ exists_forall_mem_range_of_isLimit D c hc p e h⟩
+
 end Stage
 
 end AlgebraicGeometry
