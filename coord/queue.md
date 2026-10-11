@@ -1,11 +1,11 @@
 # Work queue
 
-130 items; claim with `tools/claim.py next <group> [--stage N]`.
+125 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (130)
+## Stage 2: nodes to state (125)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -43,7 +43,6 @@
 | `lem-pc-derived-functor-termwise-split-ses-triangle` | 1 | state | 0 |
 | `lem-pc-flat-filtered-complex-comparison` | 1 | state | 0 |
 | `lem-pc-rhom-strict-perfect-hom` | 1 | state | 0 |
-| `lem-pc-ringed-space-rgamma-derived-limit` | 1 | state | 0 |
 | `lem-pc-ringed-space-sheafification-cohomology` | 1 | state | 0 |
 | `lem-pc-ringed-spaces-derived-direct-image-composition` | 1 | state | 0 |
 | `lem-sc-affine-koszul-cech-derived-comparison` | 1 | state | 0 |
@@ -68,7 +67,6 @@
 | `lem-sc-p1-ext-connecting-yoneda` | 1 | state | 0 |
 | `lem-sc-p1-proj-sheafification-exact` | 1 | state | 0 |
 | `lem-sc-p1-pullback-extension-class` | 1 | state | 0 |
-| `lem-sc-strict-henselization-faithfully-flat` | 1 | state | 0 |
 | `lem-weil-pbc-closed-immersion-coherent-equivalence` | 1 | state | 0 |
 | `lem-weil-pbc-closed-immersion-pushforward-ideal-powers` | 1 | state | 0 |
 | `lem-weil-pbc-coherent-homs-over-open` | 1 | state | 0 |
@@ -77,7 +75,6 @@
 | `lem-weil-pbc-derived-etale-cohomology-limit` | 1 | state | 0 |
 | `lem-weil-pbc-finite-coproduct-cohomology-assembly` | 1 | state | 0 |
 | `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` | 1 | state | 0 |
-| `lem-weil-pbc-formal-system-support-constant` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-absolutely-algebraically-closed` | 1 | state | 0 |
 | `lem-weil-pbc-gabber-h1-absolutely-algebraically-closed` | 1 | state | 0 |
 | `lem-weil-pbc-geometric-point-cohomology` | 1 | state | 0 |
@@ -125,7 +122,6 @@
 | `lem-sc-valuation-proper-coherent-sections` | 2 | state | 0 |
 | `lem-sc-very-ample-separation-criterion` | 2 | state | 0 |
 | `lem-sp-derived-couple-functoriality` | 2 | state | 0 |
-| `lem-sp-filtered-homotopy-spectral-sequence` | 2 | state | 0 |
 | `lem-sp-half-plane-graded-canonical` | 2 | state | 0 |
 | `lem-weil-pbc-etale-cohomology-limit-complex-systems` | 2 | state | 0 |
 | `lem-weil-pbc-henselian-finite-type-product-decomposition` | 2 | state | 0 |
@@ -133,7 +129,6 @@
 | `lem-weil-pbc-quotient-henselian-pair` | 2 | state | 0 |
 | `lemma-weil-pbc-etale-cohomology-continuity` | 2 | state | 0 |
 | `pqf-lem-pushforward-qcoh` | 2 | state | 0 |
-| `sbc-lem-higher-direct-image-limit` | 2 | state | 0 |
 | `thm-sc-proper-cohomology` | 2 | state | 0 |
 | `lem-pc-essentially-constant-ind-hom-colimit` | 3 | state | 0 |
 | `lem-sc-normalization-properties` | 3 | state | 0 |
