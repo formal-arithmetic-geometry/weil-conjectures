@@ -3062,3 +3062,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:11 L: returned deliver/M1/lem-pur-left-derived-from-kflat-class (reviewer RETURN: Reviewer R-ldk0010 on head ce9b6fa8c. Four faults (more than three, so RETURN). 1 (C1/C4, bridge between Step 1 and Step)
 - 00:12 UTC L: returned: E1 ring-pseudo-coherent-localization-glue 49367317e second return (R-pcg0010: def-pc-ring-m-pseudo-coherent is not Tag 064N (requires P^i=0 for i>m), the iff-all-m node is false under it).
 - 00:12 UTC L: C1 lie-algebra-derivation-bracket FIX 0645b5857 (R-lab0010); returned: M1 left-derived-from-kflat-class e6d2518e9 second return (R-ldk0010: Mathlib pointwise leaf not linked to the 05S9 condition; Tag 05RT has no node).
+- 00:12 L: returned deliver/K1/lem-sc-picard-kunneth-qcoh (reviewer RETURN: R-kun0012 (head ab95fe231). 1. D2: the whole Kunneth argument is moved into the new node lem-sc-qcoh-cech-total-tensor-i)
