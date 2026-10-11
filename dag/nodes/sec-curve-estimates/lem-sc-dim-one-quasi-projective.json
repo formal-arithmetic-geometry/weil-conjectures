@@ -138,5 +138,24 @@
   "group": "F1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dim1qp (reviewer sub-agent of L); spot-checked: Source read locally (present on this machine, contrary to the report's WANTED): Stacks 0A25 varieties.tex 9201-9216 (X separated finite type over k, dim<=1 => H-quasi-projective; proof: Prop 09NZ gives ample L, Morphisms 01VS gives an immersion into P^n_k, Def 29.41.1), 09NZ varieties.tex 8163-8167 (Noetherian separated of dimension 1 has an ample invertible sheaf), 01VS morphisms.tex 9412-9425 (L ample, X->S locally finite type => immersion i:X->P^n_S over S). Item statement unchanged and matches 0A25 hypothesis by hypothesis. New node lem-sc-dim-one-ample-invertible: hypotheses (finite type over a field, hence Noetherian; separated; dim<=1) specialise 09NZ and extend it to dim 0 and empty X, which is true (finite-type dim 0 is affine, O_X ample per def-weil-pbc-ample-invertible-module; empty X vacuous) and is exactly the use 0A25 makes of 09NZ; cited defs def-sc-invertible-module and def-weil-pbc-ample-invertible-module (absolute 01PS) read. Step 1 carried by lem-sc-dim-one-ample-invertible verbatim. Step 2 carried by lem-weil-pbc-ample-very-ample-immersion-affine-base (A=k; locally finite type from def-weil-finite-type-morphism; gives immersion i with q_n o i = f, which that statement already spells as closed immersion into open U followed by inclusion); accepted as C8 generic tool (01VS, unit sk-thm-p1, black box, it is the 0A25 route itself). Step 3: def-weil-closed-immersion's definition of immersion gives X->U closed, U->P^N_k open, over k since q_n o i = f. No slopmaster2 declaration states either node sorry-free (IsCurve.isQuasiProjective is sorry and assumes smoothness; no ample-existence theorem besides abelian varieties), so B10 does not apply; blueprint search 'ample invertible dimension'/'09NZ' found no same node. Fix: dag/nodes/sec-curve-estimates/lem-sc-dim-one-ample-invertible.json: source.place: wrong Stacks label varieties-proposition-one-dimensional-ample corrected to varieties-proposition-dim-1-noetherian-separated-has-ample (line 8164). 14:28-14:29 UTC; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DimOneQuasiProjective",
+  "declaration": "AlgebraicGeometry.exists_closed_open_immersion_projectiveSpace_of_dim_le_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/DimOneQuasiProjective.lean",
+  "statement": "theorem exists_closed_open_immersion_projectiveSpace_of_dim_le_one {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (hdim : X.dim ≤ 1) : ∃ (N : ℕ) (U : Scheme.{u}) (g : U ⟶ Spec (.of k)) (i : X ⟶ U) (j : U ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k))), IsClosedImmersion i ∧ IsOpenImmersion j ∧ i ≫ g = f ∧ j ≫ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k) = g",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-d1q1003"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-d1q1003",
+  "group": "G1",
+  "result": "fix",
+  "note": "field k; X with f : X ⟶ Spec k, IsSeparated f, LocallyOfFiniteType f + QuasiCompact f (finite type), X.dim ≤ 1 (Scheme.dim, empty allowed); ∃ N : ℕ, U over k via g, closed immersion i : X ⟶ U, open immersion j : U ⟶ ℙ(ULift (Fin (N+1)); Spec k), i ≫ g = f, j ≫ π = g. FIX: P^N_k rendered as the landed IsHProjective form ℙ(ULift (Fin (N+1)); Spec k) instead of Proj.projectiveSpaceOverAffine, so the citer lem-sc-proper-dim-one-projective lands in the same object"
  }
 }
