@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Descent
 public import Mathlib.CategoryTheory.Sites.Adjunction
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ProjectionFormula
 
@@ -102,5 +103,22 @@ noncomputable def etaleSheafExtendScalarsCompComparisonUpperStarIso :
     ((comparisonAdjunction _ X).comp (sheafExtendScalarsAdjunction φ X))
     ((etaleSheafExtendScalarsAdjunction φ X).comp (comparisonAdjunction _ X))).symm
     (comparisonLowerStarCompSheafComposeRestrictScalarsIso φ X).symm
+
+variable {φ} in
+/-- Extension of scalars along a flat ring morphism is exact on pro-étale sheaves: it is the
+sheafification of the levelwise extension of scalars, which is left exact for flat `φ`. -/
+lemma preservesFiniteLimits_sheafExtendScalars (hφ : φ.Flat) :
+    Limits.PreservesFiniteLimits (sheafExtendScalars φ X) := by
+  have := ModuleCat.preservesFiniteLimits_extendScalars_of_flat.{u + 1} hφ
+  have : Limits.PreservesFiniteLimits ((Functor.whiskeringRight X.ProEtᵒᵖ _ _).obj
+      (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ)) := by
+    constructor
+    intro J _ _
+    infer_instance
+  unfold sheafExtendScalars Sheaf.composeAndSheafify
+  have := Limits.comp_preservesFiniteLimits
+    ((Functor.whiskeringRight X.ProEtᵒᵖ _ _).obj (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ))
+    (presheafToSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} S))
+  exact Limits.comp_preservesFiniteLimits _ _
 
 end AlgebraicGeometry.ProEtale
