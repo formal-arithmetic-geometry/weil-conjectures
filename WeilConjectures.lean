@@ -826,11 +826,14 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.HomCompl
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Plus
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
@@ -1090,6 +1093,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.HomologicalFun
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.SpectralObject
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.ETrunc
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Yoneda
