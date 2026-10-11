@@ -172,9 +172,9 @@ lemma map_uCoord {U U' : (𝔸(n; B)).AffineZariskiSite} (i : U ⟶ U') (k : n) 
     ((AffineSpace.zeroSection n B).ker.reesPresheaf.map i.op).hom (uCoord n B U' k) =
       uCoord n B U k := by
   apply Subtype.ext
-  change Ideal.laurentMap _ (LaurentPolynomial.C (coordRes n B U' k) * T (-1)) =
+  change LaurentPolynomial.mapRingHom _ (LaurentPolynomial.C (coordRes n B U' k) * T (-1)) =
     LaurentPolynomial.C (coordRes n B U k) * T (-1)
-  rw [map_mul, Ideal.laurentMap_C, Ideal.laurentMap_T]
+  rw [map_mul, LaurentPolynomial.mapRingHom_C, LaurentPolynomial.mapRingHom_T]
   congr 2
   change ((𝔸(n; B)).presheaf.map _ ≫ (𝔸(n; B)).presheaf.map _).hom _ = _
   rw [← Functor.map_comp]
@@ -357,8 +357,9 @@ lemma bijective_reesEquiv : Function.Bijective (reesEquiv n hW) := by
 lemma reesEquiv_X (k : n) :
     reesEquiv n hW (MvPolynomial.X k) = uCoord n B (affineOpenOver hW) k := by
   apply Subtype.ext
-  change Ideal.laurentMap _ (Ideal.mvPolynomialToLaurent _ _ (MvPolynomial.X k)) = _
-  rw [Ideal.mvPolynomialToLaurent_X, map_mul, Ideal.laurentMap_C, Ideal.laurentMap_T]
+  change LaurentPolynomial.mapRingHom _ (Ideal.mvPolynomialToLaurent _ _ (MvPolynomial.X k)) = _
+  rw [Ideal.mvPolynomialToLaurent_X, map_mul, LaurentPolynomial.mapRingHom_C,
+    LaurentPolynomial.mapRingHom_T]
   change LaurentPolynomial.C (polyToSections (n := n) hW (MvPolynomial.X k)) * T (-1) = _
   rw [MvPolynomial.eval₂Hom_X']
   rfl
@@ -368,8 +369,8 @@ lemma reesEquiv_comp_C :
       ((AffineSpace.zeroSection n B).ker.siteIdeal (affineOpenOver hW)).toExtendedReesAlgebra.comp
         (Polynomial.mapRingHom ((𝔸(n; B) ↘ B).app W).hom) := by
   refine RingHom.ext fun p ↦ Subtype.ext ?_
-  change Ideal.laurentMap _ (Ideal.mvPolynomialToLaurent _ _ (MvPolynomial.C p)) = _
-  rw [Ideal.mvPolynomialToLaurent_C, Ideal.laurentMap_toLaurent, Polynomial.map_map]
+  change LaurentPolynomial.mapRingHom _ (Ideal.mvPolynomialToLaurent _ _ (MvPolynomial.C p)) = _
+  rw [Ideal.mvPolynomialToLaurent_C, LaurentPolynomial.mapRingHom_toLaurent, Polynomial.map_map]
   congr 2
   ext c
   change polyToSections (n := n) hW (MvPolynomial.C c) = _
