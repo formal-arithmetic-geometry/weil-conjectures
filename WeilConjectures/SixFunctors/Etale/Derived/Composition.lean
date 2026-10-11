@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
@@ -18,7 +19,7 @@ Two statements of the six-functor bookkeeping that the purity chapter uses: the
 identification `Rf_! ≅ Rf_*` for proper `f`, and the mate of the composition isomorphism,
 `R(g ∘ f)^! ≅ Rf^! Rg^!`. The composition isomorphism `R(g ∘ f)_! ≅ Rf_! ⋙ Rg_!` itself is
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`, in
-`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula`.
+`WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition`.
 
 The compactification-independence that makes `Rf_!` well defined is already in the
 repository, as
@@ -89,7 +90,8 @@ composition isomorphism is `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLow
 The constructible form, on the small pro-étale sites, is
 `AlgebraicGeometry.ProEtale.exists_rightDerivedUpperShriekAdjunction_comp_eq`. -/
 theorem exists_rightDerivedUpperShriekAdjunction_comp_eq (f : X ⟶ Y) (g : Y ⟶ S)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)] :
     ∃ e : R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
         R(f)_![ModuleCat.{u + 1} Λ] ⋙ R(g)_![ModuleCat.{u + 1} Λ],
       ((rightDerivedUpperShriekAdjunction _ (f ≫ g)).ofNatIsoLeft e).ofNatIsoRight
@@ -128,7 +130,8 @@ The hypothesis `HasCompactification (f ≫ g)` is redundant over a quasi-compact
 quasi-separated base, by Nagata's theorem; it is kept because no composition instance for
 `HasCompactification` is available in general. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp (f : X ⟶ Y) (g : Y ⟶ S)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact (f ≫ g)] :
     Nonempty (R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅
       R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
   obtain ⟨e⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ f g
