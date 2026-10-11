@@ -1,18 +1,17 @@
 # Work queue
 
-465 items; claim with `tools/claim.py next <group> [--stage N]`.
+467 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
 
-## Stage 2: nodes to state (465)
+## Stage 2: nodes to state (467)
 
 | node | distance to Mathlib | kind |
 |---|---|---|
 | `def-pc-derived-category-qcoh-algebra` | 1 | state |
 | `def-pc-derived-pullback` | 1 | state |
 | `def-pc-perfect-complex` | 1 | state |
-| `def-pur-pseudo-coherent-complex` | 1 | state |
 | `def-weil-pbc-koszul-complex` | 1 | state |
 | `cor-galois-lisse-representations` | 1 | state |
 | `lem-pc-affine-derived-base-change-comparison-map` | 1 | state |
@@ -22,11 +21,14 @@
 | `lem-pc-dq-coherator-adjunction` | 1 | state |
 | `lem-pc-fp-relation-descent` | 1 | state |
 | `lem-pc-module-pullback-identity-composition` | 1 | state |
-| `lem-pc-qcoh-truncation-derived-limit` | 1 | state |
+| `lem-pc-noetherian-bounded-coherent-pseudo-coherent` | 1 | state |
+| `lem-pc-pseudo-coherent-distinguished-triangle` | 1 | state |
+| `lem-pc-pseudo-coherent-summand` | 1 | state |
 | `lem-pc-tor-amplitude-qcoh-test` | 1 | state |
-| `lem-pc-unbounded-derived-functor-cohomological-bound` | 1 | state |
+| `lem-sc-affine-pseudo-coherent-lift` | 1 | state |
 | `lem-sc-ass-weakass-fg-stalk` | 1 | state |
 | `lem-sc-base-change-curve` | 1 | state |
+| `lem-sc-coherent-pseudo-coherent` | 1 | state |
 | `lem-sc-complex-lift-class-projective` | 1 | state |
 | `lem-sc-derived-open-gluing` | 1 | state |
 | `lem-sc-derived-open-restriction-adjunction-exact` | 1 | state |
@@ -38,6 +40,7 @@
 | `lem-sc-intersection-effective-cartier` | 1 | state |
 | `lem-sc-perfect-local-pseudocoherent-free-model` | 1 | state |
 | `lem-sc-picard-kunneth-qcoh` | 1 | state |
+| `lem-sc-pseudo-coherent-qcoh` | 1 | state |
 | `lem-sc-qc-open-derived-lift` | 1 | state |
 | `lem-sc-regular-curve-torsionfree-free` | 1 | state |
 | `lem-sc-top-dimensional-reduction-intersection` | 1 | state |
@@ -52,7 +55,6 @@
 | `lem-weil-pbc-module-pullback-affine-sections` | 1 | state |
 | `lem-weil-pbc-noetherian-acc-quasi-coherent` | 1 | state |
 | `lem-weil-pbc-normalization-in-residue-field-extension` | 1 | state |
-| `lem-weil-pbc-openness-of-flatness` | 1 | state |
 | `lem-weil-pbc-p-basis-exists` | 1 | state |
 | `lem-weil-pbc-p-independent-differentials-independent` | 1 | state |
 | `lem-weil-pbc-p-independent-extends-to-p-basis` | 1 | state |
@@ -475,7 +477,7 @@
 | `lem-pc-essentially-constant-pro-hom-colimit` | 4 | state |
 | `lem-pur-essential-constant-pro-criterion-05py` | 4 | state |
 
-Not open yet: 40 nodes that wait for stage 1, 595 nodes that wait for a statement dependency.
+Not open yet: 40 nodes that wait for stage 1, 589 nodes that wait for a statement dependency.
 
 ## Stage 3: modules to prove (0)
 
