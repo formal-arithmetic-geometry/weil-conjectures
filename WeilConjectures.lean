@@ -53,6 +53,7 @@ public import WeilConjectures.AlgebraicGeometry.ChowLemma.Glue
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.ProjectiveDomination
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.Reduction
+public import WeilConjectures.AlgebraicGeometry.ClosurePointDimension
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
@@ -1279,6 +1280,7 @@ public import WeilConjectures.Mathlib.RingTheory.Idempotents
 public import WeilConjectures.Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import WeilConjectures.Mathlib.RingTheory.Invariant.Profinite
 public import WeilConjectures.Mathlib.RingTheory.IsTensorProduct
+public import WeilConjectures.Mathlib.RingTheory.KrullDimension.FiniteType
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.NonZeroDivisors
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Polynomial
 public import WeilConjectures.Mathlib.RingTheory.KrullDimension.Zero
@@ -1353,6 +1355,7 @@ public import WeilConjectures.Mathlib.Topology.Constructions
 public import WeilConjectures.Mathlib.Topology.Inseparable
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.Topology.KrullDimension.Open
 public import WeilConjectures.Mathlib.Topology.KrullDimension.Specialization
 public import WeilConjectures.Mathlib.Topology.LocallyClosed
 public import WeilConjectures.Mathlib.Topology.Maps.Basic
