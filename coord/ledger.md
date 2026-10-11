@@ -3190,3 +3190,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:59 UTC L: returned: K1 picard-kunneth-qcoh 030710dd1 second return (R-kun0058: functoriality clause dropped again, new node's map goes the wrong way).
 - 01:01 L: returned deliver/F1/lem-pc-derived-tensor-localization-cohomology (reviewer RETURN: 1. E (wrong mathematics, Steps 2-3): E is a K-flat complex of R-modules with no A-action, so E_q, (E tensor_R R') tensor)
 - 01:01 UTC L: returned: F1 derived-tensor-localization-cohomology 485ba81aa (R-dtl0100: the R-complex E localized termwise at a prime of A; use the balanced P ⊗_R F model).
+- 01:01 L: merged deliver/C1/lem-pur-left-derived-defined-pointwise-kan-bridge (reviewer FIX; first push; new nodes: 0)

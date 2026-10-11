@@ -14,18 +14,58 @@
  },
  "kind": "statement",
  "title": "A Stacks-defined left derived value is a pointwise Kan-extension value",
- "statement": "Let $D$ and $D'$ be triangulated categories [def-weil-triangulated-category], let $S$ be a saturated multiplicative system in $D$ compatible with the triangulated structure, let $Q:D\\to S^{-1}D$ be its localization [def-weil-abstract-derived-category], and let $F:D\\to D'$ be exact. Let $X$ be an object of $D$ and $Y$ an object of $D'$. If the left derived functor of $F$ is defined at $X$ in the sense of Stacks Definition Tag 05S9 with value $Y$ (the pro-object $(S/X)\\to D'$, $(s:X'\\to X)\\mapsto F(X')$, is essentially constant with value $Y$), then $F$ has a pointwise right Kan extension along $Q$ at $QX$ with value $Y$: the limit of $F$ over the structured-arrow category of pairs $(X',\\ QX\\to QX')$ exists and is $Y$. Moreover the limit projection at $(X,\\mathrm{id}_{QX})$, the comparison map $Y\\to F(X)$, is the canonical map of Definition 05S9.",
+ "statement": "Let $\\mathcal D$ and $\\mathcal D'$ be categories, let $S$ be a right multiplicative system of arrows of $\\mathcal D$ (Stacks Categories Definition Tag 04VC: (RMS1) identities lie in $S$ and $S$ is closed under composition; (RMS2) for $s:Y\\to W$ in $S$ and any $f:Z\\to W$ there are $t:V\\to Z$ in $S$ and $g:V\\to Y$ with $f\\circ t=s\\circ g$; (RMS3) if $f,g:X_1\\to Y$ and $s\\in S$ with source $Y$ satisfy $s\\circ f=s\\circ g$, then there is $t\\in S$ with target $X_1$ and $f\\circ t=g\\circ t$), let $Q:\\mathcal D\\to S^{-1}\\mathcal D$ be the localization of $\\mathcal D$ at $S$ (the right localization, as in [def-weil-abstract-derived-category]), and let $F:\\mathcal D\\to\\mathcal D'$ be a functor. (This covers Stacks Situation Tag 05S8, with $\\mathcal D,\\mathcal D'$ triangulated [def-weil-triangulated-category] and $F$ exact, since the multiplicative system $S$ there is in particular a right multiplicative system.) Let $X$ be an object of $\\mathcal D$ and $Y$ an object of $\\mathcal D'$. Let $S/X$ be the cofiltered category of arrows $s:X'\\to X$ in $S$, with morphisms the commuting triangles (Stacks Remark Tag 05Q4). Suppose the left derived functor of $F$ is defined at $X$ with value $Y$ in the sense of Stacks Definition Tag 05S9, i.e. the pro-object $G:S/X\\to\\mathcal D'$, $(s:X'\\to X)\\mapsto F(X')$, is essentially constant with value $Y$ [def-pc-essentially-constant-pro-diagram], with cone $u_s:Y\\to F(X')$. Then $F$ has a pointwise right Kan extension along $Q$ at $QX$ with value $Y$: the functor $(X',\\varphi)\\mapsto F(X')$ on the structured-arrow category of pairs $(X',\\ \\varphi:QX\\to QX')$ (a morphism $(X',\\varphi)\\to(X'',\\psi)$ being an arrow $a:X'\\to X''$ of $\\mathcal D$ with $Q(a)\\circ\\varphi=\\psi$) has a limit, and it has a limit cone with vertex $Y$ whose projection at $(X',Q(s)^{-1})$ is $u_s$ for every object $s:X'\\to X$ of $S/X$. In particular the projection at $(X,\\mathrm{id}_{QX})$ is $u_{\\mathrm{id}_X}:Y\\to F(X)$, the canonical comparison map of Definition 05S9.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Definition Tag 05S9 (definition-derived-functor) together with Lemma Tag 05SA (lemma-derived-functor) and the pointwise reformulation in Situation Tag 05S8"
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-pc-essentially-constant-pro-diagram"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $J=S/X$ (cofiltered by Stacks Remark 05Q4) and $G:J\\to\\mathcal D'$, $s\\mapsto F(X')$. The hypothesis [def-pc-essentially-constant-pro-diagram] gives a cone $u_j:Y\\to G(j)$, an index $j_0$, and $r:G(j_0)\\to Y$ with $r\\circ u_{j_0}=\\mathrm{id}_Y$, such that for every $j$ there are $a:k\\to j_0$ and $b:k\\to j$ with $G(b)=u_j\\circ r\\circ G(a)$. This cone is a limit cone of $G$: given a cone $v_j:Z\\to G(j)$, put $w=r\\circ v_{j_0}$; for any $j$, with $a,b$ as above, $v_j=G(b)\\circ v_k=u_j\\circ r\\circ G(a)\\circ v_k=u_j\\circ r\\circ v_{j_0}=u_j\\circ w$; and if $w'$ also satisfies $u_j\\circ w'=v_j$ for all $j$, then $w'=r\\circ u_{j_0}\\circ w'=r\\circ v_{j_0}=w$ (Stacks Categories Lemma Tag 0G2V).",
+   "uses": [
+    "def-pc-essentially-constant-pro-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition Tag 05S9 and Categories Definition Tag 05PU(2)"
+   }
+  },
+  {
+   "text": "Let $K$ be the structured-arrow category of pairs $(X',\\varphi:QX\\to QX')$ and $\\iota:J\\to K$, $(s:X'\\to X)\\mapsto(X',Q(s)^{-1})$, sending a triangle $t\\circ a=s$ to $a$ (a morphism of $K$, since $Q(t)\\circ Q(a)=Q(s)$ gives $Q(a)\\circ Q(s)^{-1}=Q(t)^{-1}$); then $(F\\circ\\mathrm{proj})\\circ\\iota=G$. We show $\\iota$ is initial (Stacks Categories Definition Tag 09WP). Fix an object $(X',\\varphi)$ of $K$. A morphism $\\iota(s)\\to(X',\\varphi)$, for $s:P\\to X$, is an arrow $g:P\\to X'$ with $Q(g)\\circ Q(s)^{-1}=\\varphi$, and the morphisms of the comma category $\\iota/(X',\\varphi)$ are the arrows $a$ of $J$ with $g'\\circ a=g$. Apply [lem-pc-right-localization-hom-colimit] with $M=X$, $N=X'$: the map $\\varinjlim_{J^{\\mathrm{opp}}}\\operatorname{Hom}_{\\mathcal D}(P,X')\\to\\operatorname{Hom}(QX,QX')$, $g\\mapsto Q(g)\\circ Q(s)^{-1}$, is bijective. Surjectivity gives an object of $\\iota/(X',\\varphi)$. The colimit of sets is the disjoint union of the $\\operatorname{Hom}(P,X')$ modulo the equivalence relation generated by $g'\\sim g'\\circ a$ for $a$ an arrow of $J$; so by injectivity any two objects $(s,g)$, $(s',g')$ of $\\iota/(X',\\varphi)$ are joined by a zigzag of such identifications, each intermediate element mapping to $\\varphi$ by compatibility of the map, i.e. by a zigzag in $\\iota/(X',\\varphi)$. Hence $\\iota$ is initial, and by Stacks Categories Lemma Tag 002R (Mathlib `CategoryTheory.Functor.Initial.hasLimit_of_comp` and `Functor.Initial.isLimitExtendConeEquiv`) the limit cone of Step 1 extends to a limit cone of $F\\circ\\mathrm{proj}$ over $K$ with vertex $Y$, whose projection at $(X',\\varphi)$ is $F(g)\\circ u_s$ for any object $(s,g)$ of $\\iota/(X',\\varphi)$. So $F$ has a pointwise right Kan extension along $Q$ at $QX$ with value $Y$.",
+   "uses": [
+    "lem-pc-right-localization-hom-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Remark Tag 05Q4, Definition Tag 09WP, Lemma Tag 002R"
+   }
+  },
+  {
+   "text": "For an object $s:X'\\to X$ of $J$, the pair $(s,\\mathrm{id}_{X'})$ is an object of $\\iota/(X',Q(s)^{-1})$, so the projection of the extended cone at $(X',Q(s)^{-1})$ is $u_s$. Since $Q(\\mathrm{id}_X)^{-1}=\\mathrm{id}_{QX}$, the object $(X,\\mathrm{id}_{QX})$ is $\\iota(\\mathrm{id}_X)$, and its projection is $u_{\\mathrm{id}_X}:Y\\to F(X)$, the canonical map of Definition 05S9 (the cone leg of the essentially constant pro-object at the identity denominator).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition Tag 05S9, comparison map in the left-derived case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-essentially-constant-pro-diagram",
+  "lem-pc-right-localization-hom-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition Tag 05S9 and Lemma Tag 05SA, using Categories Tag 05Q4"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,15 +94,38 @@
    "results": "service unavailable: Internal Server Error",
    "date": "2026-10-11",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "HasPointwiseRightKanExtensionAt|HasPointwiseLeftDerivedFunctorAt in Mathlib/CategoryTheory/Functor",
+   "results": "HasPointwiseLeftDerivedFunctorAt (PointwiseLeftDerived.lean:45) := HasPointwiseRightKanExtensionAt W.Q F (W.Q.obj X) = HasLimit (StructuredArrow.proj (W.Q.obj X) W.Q ⋙ F) (KanExtension/Pointwise.lean:56); no Stacks pro-object version",
+   "date": "2026-10-11",
+   "verdict": "generalization: the conclusion is exactly this hypothesis; no Mathlib statement of the bridge"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-left-derived-from-kflat-class",
   "by": "worker",
   "date": "2026-10-11"
  },
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations"
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "worker": "stage1",
+  "summary": "Checked the Stacks Definition 05S9 left-derived pro-object against the pointwise right-Kan limit. The proof explicitly constructs the denominator cone from essential constancy, uses the existing right-localization fraction/Hom-colimit lemma to pass to the full costructured-arrow diagram, and identifies the identity leg with the canonical comparison map. No new nodes were needed.",
+  "blueprint": "Realizes the ancestor blueprint passage from the Stacks 05S9 essentially constant pro-object to the pointwise right Kan extension used in the everywhere-defined left derived functor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-pkb0100",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pkb0100 (reviewer sub-agent of L); spot-checked: Math (E) checked: iota: S/X -> StructuredArrow(QX,Q), s |-> (X',Q(s)^-1), is initial (nonempty by surjectivity, connected by injectivity of lem-pc-right-localization-hom-colimit, colimit of sets = zigzags); essentially constant pro-object is a limit; conclusion is literally HasPointwiseLeftDerivedFunctorAt = HasPointwiseRightKanExtensionAt W.Q F (W.Q.obj X) = HasLimit (StructuredArrow.proj _ _ ⋙ F) (PointwiseLeftDerived.lean:45, Pointwise.lean:56); citer lem-pur-left-derived-from-kflat-class uses this direction. FIX more, RETURN less: (1) C4/E7: 'saturated multiplicative system compatible with the triangulated structure' (Tag 05R2) defined nowhere, same gap as sibling R-lde0058 return; the proof uses only a right multiplicative system, so the statement is generalized to D, D' categories, S right multiplicative system defined inline (RMS1-3, Tag 04VC), F any functor, with 05S8 noted as a special case; citer unaffected. (2) C1: Step 1 only built a cone; added the 3-line proof that it is a limit cone (Tag 0G2V). (3) C1: Step 2 asserted finality without argument or citation and said costructured-arrow; now defines iota, proves initiality from the hom-colimit lemma, and cites Tag 09WP/002R (Mathlib Functor.Initial.hasLimit_of_comp) for the limit transfer; Step 3 derives the projection at (X,id) as u_{id_X}. Second reading by C1 missed all three.; 1 file(s) fixed by the reviewer"
+ }
 }
